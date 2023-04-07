@@ -15,7 +15,7 @@ declare global {
       'cds-accordion': any;
       'cds-accordion-item': any;
       'cds-accordion-skeleton': any;
-      'cds-btn': any;
+      'cds-button': any;
       'cds-breadcrumb': any;
       'cds-breadcrumb-item': any;
       'cds-breadcrumb-link': any;
@@ -42,6 +42,7 @@ declare global {
       'cds-dropdown': any;
       'cds-dropdown-item': any;
       'cds-form-item': any;
+      'cds-icon-button': any;
       'cds-input': any;
       'cds-inline-loading': any;
       'cds-link': any;

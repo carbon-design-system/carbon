@@ -114,14 +114,14 @@
 
 :host(#{$prefix}-modal-footer) {
   .#{$prefix}--modal-footer--three-button {
-    ::slotted(#{$prefix}-btn),
+    ::slotted(#{$prefix}-button),
     ::slotted(#{$prefix}-modal-footer-button) {
       flex: 0 1 25%;
     }
   }
 }
 
-:host(#{$prefix}-modal-footer) ::slotted(#{$prefix}-btn),
+:host(#{$prefix}-modal-footer) ::slotted(#{$prefix}-button),
 :host(#{$prefix}-modal-footer-button) {
   flex: 0 1 50%;
   max-width: none;

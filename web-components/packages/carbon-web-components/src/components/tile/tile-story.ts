@@ -302,7 +302,7 @@ export const ExpandableWithInteractive = (args) => {
         style="height: 200px">
         Above the fold content here
         <div style="padding-top:1rem;">
-          <cds-btn>Example</cds-btn>
+          <cds-button>Example</cds-button>
         </div>
       </cds-tile-above-the-fold-content>
       <cds-tile-below-the-fold-content style="height: 300px">

@@ -82,7 +82,7 @@ export const Default = (args) => {
   } = args?.[`${prefix}-btn`] ?? {};
 
   return html`
-    <cds-btn
+    <cds-button
       kind="${ifDefined(kind)}"
       type="${ifDefined(type)}"
       ?disabled="${disabled}"
@@ -94,7 +94,7 @@ export const Default = (args) => {
       tooltip-alignment="${tooltipAlignment}"
       tooltip-position="${tooltipPosition}">
       Button
-    </cds-btn>
+    </cds-button>
   `;
 };
 
@@ -111,7 +111,7 @@ export const Danger = (args) => {
     onClick,
   } = args?.[`${prefix}-btn`] ?? {};
   return html`
-    <cds-btn
+    <cds-button
       kind="danger"
       ?isExpressive="${isExpressive}"
       type="${type}"
@@ -123,8 +123,8 @@ export const Danger = (args) => {
       tooltip-alignment="${tooltipAlignment}"
       tooltip-position="${tooltipPosition}">
       Button
-    </cds-btn>
-    <cds-btn
+    </cds-button>
+    <cds-button
       kind="danger--tertiary"
       type="${type}"
       ?isExpressive="${isExpressive}"
@@ -136,8 +136,8 @@ export const Danger = (args) => {
       tooltip-alignment="${tooltipAlignment}"
       tooltip-position="${tooltipPosition}">
       Tertiary Danger Button
-    </cds-btn>
-    <cds-btn
+    </cds-button>
+    <cds-button
       kind="danger--ghost"
       ?isExpressive="${isExpressive}"
       type="${type}"
@@ -149,7 +149,7 @@ export const Danger = (args) => {
       tooltip-alignment="${tooltipAlignment}"
       tooltip-position="${tooltipPosition}">
       Ghost Danger Button
-    </cds-btn>
+    </cds-button>
   `;
 };
 
@@ -167,7 +167,7 @@ export const Ghost = (args) => {
     onClick,
   } = args?.[`${prefix}-btn`] ?? {};
   return html`
-    <cds-btn
+    <cds-button
       kind="ghost"
       ?isExpressive="${isExpressive}"
       ?isSelected="${isSelected}"
@@ -180,7 +180,7 @@ export const Ghost = (args) => {
       tooltip-alignment="${tooltipAlignment}"
       tooltip-position="${tooltipPosition}">
       Ghost
-    </cds-btn>
+    </cds-button>
   `;
 };
 
@@ -225,7 +225,7 @@ export const IconButton = (args) => {
     onClick,
   } = args?.[`${prefix}-btn`] ?? {};
   return html`
-    <cds-btn
+    <cds-button
       ?isExpressive="${isExpressive}"
       ?disabled="${disabled}"
       href="${ifDefined(href)}"
@@ -237,7 +237,7 @@ export const IconButton = (args) => {
       tooltip-alignment="${tooltipAlignment}"
       tooltip-position="${tooltipPosition}">
       ${Add16({ slot: 'icon' })}
-    </cds-btn>
+    </cds-button>
   `;
 };
 
@@ -279,7 +279,7 @@ export const Secondary = (args) => {
     onClick,
   } = args?.[`${prefix}-btn`] ?? {};
   return html`
-    <cds-btn
+    <cds-button
       kind="secondary"
       ?isExpressive="${isExpressive}"
       type="${ifDefined(type)}"
@@ -291,7 +291,7 @@ export const Secondary = (args) => {
       tooltip-alignment="${tooltipAlignment}"
       tooltip-position="${tooltipPosition}">
       Button
-    </cds-btn>
+    </cds-button>
   `;
 };
 
@@ -308,8 +308,8 @@ export const SetOfButtons = (args) => {
     onClick,
   } = args?.[`${prefix}-btn`] ?? {};
   return html`
-    <cds-btn-set>
-      <cds-btn
+    <cds-button-set>
+      <cds-button
         ?isExpressive="${isExpressive}"
         type="${ifDefined(type)}"
         ?disabled="${disabled}"
@@ -320,8 +320,8 @@ export const SetOfButtons = (args) => {
         tooltip-alignment="${tooltipAlignment}"
         tooltip-position="${tooltipPosition}">
         Secondary button
-      </cds-btn>
-      <cds-btn
+      </cds-button>
+      <cds-button
         ?isExpressive="${isExpressive}"
         type="${ifDefined(type)}"
         ?disabled="${disabled}"
@@ -332,15 +332,15 @@ export const SetOfButtons = (args) => {
         tooltip-alignment="${tooltipAlignment}"
         tooltip-position="${tooltipPosition}">
         Primary button
-      </cds-btn>
-    </cds-btn-set>
+      </cds-button>
+    </cds-button-set>
   `;
 };
 
 export const skeleton = () => {
   return html`
-    <cds-btn-skeleton> </cds-btn-skeleton>
-    <cds-btn-skeleton size="sm"></cds-btn-skeleton>
+    <cds-button-skeleton> </cds-button-skeleton>
+    <cds-button-skeleton size="sm"></cds-button-skeleton>
   `;
 };
 
@@ -357,7 +357,7 @@ export const Tertiary = (args) => {
     onClick,
   } = args?.[`${prefix}-btn`] ?? {};
   return html`
-    <cds-btn
+    <cds-button
       ?isExpressive="${isExpressive}"
       kind="tertiary"
       type="${ifDefined(type)}"
@@ -369,7 +369,7 @@ export const Tertiary = (args) => {
       tooltip-alignment="${tooltipAlignment}"
       tooltip-position="${tooltipPosition}">
       Button
-    </cds-btn>
+    </cds-button>
   `;
 };
 

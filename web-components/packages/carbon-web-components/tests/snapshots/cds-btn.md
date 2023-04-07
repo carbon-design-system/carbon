@@ -1,4 +1,4 @@
-# `cds-btn`
+# `cds-button`
 
 ## `Misc attributes`
 

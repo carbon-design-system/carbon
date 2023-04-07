@@ -1,0 +1,48 @@
+import { Props, Description } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+
+# Icon Button
+
+> 💡 Check our
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/icon-button)
+> example implementation.
+
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/icon-button)
+
+The `icon-button` component is useful when you have a button where the content is an icon. In this situation, it's important that the button itself is labeled in a way that can be understandable by mouse, keyboard, and screen readers. As a result, this component 
+makes it easy to create accessible icon buttons
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/icon-button/index.js';
+```
+
+<Description markdown={`${cdnJs({ components: ['icon-button'] })}`} />
+<Description markdown={`${cdnCss()}`} />
+
+```javascript
+import '@carbon/web-components/es/components/icon-button/index.js';
+import Edit16 from '@carbon/web-components/es/icons/edit/16';
+
+function App() {
+  return (
+    html`<cds-icon-button>
+      ${Edit16({ slot: 'icon' })}
+      <slot slot="tooltip-content">
+        Tooltip text
+      </slot>
+    </cds-icon-button>`
+  );
+}
+
+```
+
+## `<cds-icon-button>` attributes and properties
+
+<Props of="cds-icon-button" />
+````

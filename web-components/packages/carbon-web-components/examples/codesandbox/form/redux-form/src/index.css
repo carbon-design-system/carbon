@@ -12,7 +12,7 @@ body {
   padding: 2rem;
 }
 
-cds-btn + cds-btn {
+cds-button + cds-button {
   margin: 0 1rem;
 }
 

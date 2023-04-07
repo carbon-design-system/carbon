@@ -13,15 +13,15 @@ import { Default } from '../../src/components/button/button-story';
 
 const template = (props?) =>
   Default({
-    'cds-btn': props,
+    'cds-button': props,
   });
 
-describe('cds-btn', function () {
+describe('cds-button', function () {
   describe('Changing button type', function () {
     let elem: HTMLElement | null;
 
     beforeEach(async function () {
-      elem = document.body.appendChild(document.createElement('cds-btn'));
+      elem = document.body.appendChild(document.createElement('cds-button'));
       await Promise.resolve();
     });
 
@@ -49,7 +49,7 @@ describe('cds-btn', function () {
     let elem: HTMLElement | null;
 
     beforeAll(function () {
-      elem = document.body.appendChild(document.createElement('cds-btn'));
+      elem = document.body.appendChild(document.createElement('cds-button'));
     });
 
     it('should deactivate when disabled attribute is set', async function () {
@@ -88,7 +88,7 @@ describe('cds-btn', function () {
     it('should render with minimum attributes for <button>', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('cds-btn' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-button' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -105,7 +105,7 @@ describe('cds-btn', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('cds-btn' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-button' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -113,7 +113,7 @@ describe('cds-btn', function () {
     it('should render with minimum attributes for <a>', async function () {
       render(template({ href: 'about:blank' }), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('cds-btn' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-button' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -135,7 +135,7 @@ describe('cds-btn', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('cds-btn' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-button' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -158,7 +158,7 @@ describe('cds-btn', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('cds-btn' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-button' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });

@@ -39,6 +39,7 @@ export { default as CDSDropdown } from './components/dropdown/dropdown';
 export { default as CDSDropdownItem } from './components/dropdown/dropdown-item';
 export { default as CDSDropdownSkeleton } from './components/dropdown/dropdown-skeleton';
 export { default as CDSFormItem } from './components/form/form-item';
+export { default as CDSIconButton } from './components/icon-button/icon-button';
 export { default as CDSInput } from './components/input/input';
 export { default as CDSInlineLoading } from './components/inline-loading/inline-loading';
 export { default as CDSLink } from './components/link/link';

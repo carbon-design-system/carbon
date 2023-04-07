@@ -269,7 +269,7 @@ class BXModal extends HostListenerMixin(LitElement) {
         );
         await (this.constructor as typeof BXModal)._delay();
         if (primaryFocusNode) {
-          // For cases where a `carbon-web-components` component (e.g. `<cds-btn>`) being `primaryFocusNode`,
+          // For cases where a `carbon-web-components` component (e.g. `<cds-button>`) being `primaryFocusNode`,
           // where its first update/render cycle that makes it focusable happens after `<cds-modal>`'s first update/render cycle
           (primaryFocusNode as HTMLElement).focus();
         } else if (
@@ -320,7 +320,7 @@ class BXModal extends HostListenerMixin(LitElement) {
    * A selector selecting the nodes that should be focused when modal gets open.
    */
   static get selectorPrimaryFocus() {
-    return `[data-modal-primary-focus],${prefix}-modal-footer ${prefix}-btn[kind="primary"]`;
+    return `[data-modal-primary-focus],${prefix}-modal-footer ${prefix}-button[kind="primary"]`;
   }
 
   /**

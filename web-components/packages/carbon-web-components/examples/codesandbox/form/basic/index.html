@@ -21,7 +21,7 @@ LICENSE file in the root directory of this source tree.
         padding: 2rem;
       }
 
-      cds-btn + cds-btn {
+      cds-button + cds-button {
         margin: 0 1rem;
       }
 
@@ -34,14 +34,14 @@ LICENSE file in the root directory of this source tree.
         align-items: center;
       }
 
-      cds-btn,
+      cds-button,
       cds-input,
       cds-form-item,
       cds-inline-notification {
         visibility: hidden;
       }
 
-      cds-btn:defined,
+      cds-button:defined,
       cds-input:defined,
       cds-form-item:defined,
       cds-inline-notification:defined {
@@ -59,8 +59,8 @@ LICENSE file in the root directory of this source tree.
         <cds-input id="input-password" type="password" name="password" label-text="Password" placeholder="Password"></cds-input>
       </cds-form-item>
       <div className="cds-ce-demo-redux-form--btn-container">
-        <cds-btn id="btn-login">Log in</cds-btn>
-        <cds-btn id="btn-reset" kind="secondary">Clear Values</cds-btn>
+        <cds-button id="btn-login">Log in</cds-button>
+        <cds-button id="btn-reset" kind="secondary">Clear Values</cds-button>
       </div>
     </form>
     <script type="module" src="src/index.js"></script>

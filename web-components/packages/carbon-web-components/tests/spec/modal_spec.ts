@@ -65,9 +65,9 @@ describe('cds-modal', function () {
     it('Should support using primary button in footer as the primary focus element', async function () {
       spyOn(BXModal as any, '_delay').and.callFake(() => {});
       elem!.innerHTML =
-        '<input type="text"><cds-modal-footer><cds-btn kind="primary"></cds-btn></cds-modal-footer>';
+        '<input type="text"><cds-modal-footer><cds-button kind="primary"></cds-button></cds-modal-footer>';
       const input = elem!.querySelector('input');
-      const button = elem!.querySelector('cds-btn');
+      const button = elem!.querySelector('cds-button');
       spyOn(input!, 'focus');
       spyOn(button as HTMLButtonElement, 'focus');
       (elem as unknown as BXModal).open = true;

@@ -60,9 +60,15 @@ class CDSPopover extends LitElement {
   /**
    * Handles `slotchange` event.
    */
-  protected _handleSlotChange() {
+  protected _handleSlotChange({ target }: Event) {
     if (this.tabTip) {
-      this.querySelector('button')?.classList.add(
+      const component = (target as HTMLSlotElement)
+        .assignedNodes()
+        .filter(
+          (node) =>
+            node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
+        );
+      (component[0] as HTMLElement).classList.add(
         `${prefix}--popover--tab-tip__button`
       );
     }

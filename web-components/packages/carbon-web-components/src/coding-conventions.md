@@ -107,7 +107,7 @@ Carbon core CSS uses BEM modifier like `cds--btn--danger` to style different
 states/variants of a component.
 
 OTOH `carbon-web-components` uses attributes to represent different
-states/variants (e.g. `<cds-btn type="danger">`), in a similar manner as how
+states/variants (e.g. `<cds-button type="danger">`), in a similar manner as how
 attributes influence states/variants of native elements (e.g.
 `<input type="hidden">`).
 
@@ -281,12 +281,13 @@ importing the corresponding modules. It may not be desirable in two scenarios:
 
 ## Propagating misc attributes from shadow host to an element in shadow DOM
 
-Some components, e.g. `<cds-btn>`, simply represent the content in shadow DOM,
-e.g. `<button>` in it. It's sometimes desiable for applications to have control
-of attributes in `<button>`, for example, adding `data-` attributes there.
+Some components, e.g. `<cds-button>`, simply represent the content in shadow
+DOM, e.g. `<button>` in it. It's sometimes desiable for applications to have
+control of attributes in `<button>`, for example, adding `data-` attributes
+there.
 
 In such case, we let consumer create a derived class. For example, its
-`.attributeChangedCallback()` can propagate `<cds-btn>`'s attribute to
+`.attributeChangedCallback()` can propagate `<cds-button>`'s attribute to
 `<button>` in it.
 
 ## Private properties

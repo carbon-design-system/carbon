@@ -436,16 +436,16 @@ class BXCEDemoDataTable extends LitElement {
           ?active="${hasBatchActions}"
           selected-rows-count="${selectedRowsCountInFiltered}"
           @cds-table-batch-actions-cancel-clicked="${handleCancelSelection}">
-          <cds-btn icon-layout="condensed" @click="${handleDeleteRows}"
-            >Delete ${Delete16({ slot: 'icon' })}</cds-btn
+          <cds-button icon-layout="condensed" @click="${handleDeleteRows}"
+            >Delete ${Delete16({ slot: 'icon' })}</cds-button
           >
-          <cds-btn
+          <cds-button
             icon-layout="condensed"
             @click="${handleDownloadRows}"
             href="javascript:void 0"
             download="table-data.json">
             Download ${Download16({ slot: 'icon' })}
-          </cds-btn>
+          </cds-button>
         </cds-table-batch-actions>
         <cds-table-toolbar-content ?has-batch-actions="${hasBatchActions}">
           <cds-table-toolbar-search
@@ -459,7 +459,7 @@ class BXCEDemoDataTable extends LitElement {
               <cds-overflow-menu-item> Action 3 </cds-overflow-menu-item>
             </cds-overflow-menu-body>
           </cds-overflow-menu>
-          <cds-btn>Primary Button</cds-btn>
+          <cds-button>Primary Button</cds-button>
         </cds-table-toolbar-content>
       </cds-table-toolbar>
       <cds-table

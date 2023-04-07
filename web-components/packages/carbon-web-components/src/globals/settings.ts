@@ -19,7 +19,7 @@ const selectorTabbable = `
   textarea:not([disabled]):not([tabindex='-1']),
   iframe, object, embed, *[tabindex]:not([tabindex='-1']), *[contenteditable=true],
   ${prefix}-accordion-item,
-  ${prefix}-btn,
+  ${prefix}-button,
   ${prefix}-breadcrumb-link,
   ${prefix}-checkbox,
   ${prefix}-code-snippet,

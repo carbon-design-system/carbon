@@ -35,7 +35,7 @@ describe('Custom style example with inherited component class', () => {
     const backgroundColorValue = await page.evaluate((dropdown) => {
       const listBox = dropdown.shadowRoot.querySelector('.cds--btn');
       return listBox.ownerDocument.defaultView.getComputedStyle(listBox).getPropertyValue('background-color');
-    }, await expect(page).toMatchElement('footer cds-btn'));
+    }, await expect(page).toMatchElement('footer cds-button'));
     expect(backgroundColorValue).toEqual(expect.stringMatching(/rgb\(\s*111,\s*111,\s*111\s*\)/));
   });
 

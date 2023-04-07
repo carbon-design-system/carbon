@@ -13,7 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/popover/index';
 @use '@carbon/styles/scss/components/tooltip';
 
-:host(#{$prefix}-btn),
+:host(#{$prefix}-button),
 :host(#{$prefix}-modal-footer-button) {
   display: inline-flex;
 
@@ -23,15 +23,15 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-btn[kind='ghost']:hover) .#{$prefix}--btn--ghost,
-:host(#{$prefix}-btn[kind='ghost']) .#{$prefix}--btn--ghost:active {
+:host(#{$prefix}-button[kind='ghost']:hover) .#{$prefix}--btn--ghost,
+:host(#{$prefix}-button[kind='ghost']) .#{$prefix}--btn--ghost:active {
   outline: none;
 }
 
-:host(#{$prefix}-btn-set) {
+:host(#{$prefix}-button-set) {
   @extend .#{$prefix}--btn-set;
 
-  ::slotted(#{$prefix}-btn) {
+  ::slotted(#{$prefix}-button) {
     width: 100%;
     // 196px from design kit
     max-width: rem(196px);

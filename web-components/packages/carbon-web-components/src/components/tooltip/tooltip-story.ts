@@ -41,7 +41,9 @@ export const Default = () => {
       ${styles}
     </style>
     <cds-tooltip align="bottom">
-      <div class="sb-tooltip-trigger">${Information16()}</div>
+      <button class="sb-tooltip-trigger" role="button">
+        ${Information16()}
+      </button>
       <cds-tooltip-content>
         Occassionally, services are updated in a specified time window to ensure
         no down time for customers.
@@ -56,7 +58,9 @@ export const Alignment = () => {
       ${styles}
     </style>
     <cds-tooltip align="bottom-left">
-      <div class="sb-tooltip-trigger">${Information16()}</div>
+      <button class="sb-tooltip-trigger" role="button">
+        ${Information16()}
+      </button>
       <cds-tooltip-content> Tooltip alignment </cds-tooltip-content>
     </cds-tooltip>
   `;
@@ -67,8 +71,10 @@ export const Duration = () => {
     <style>
       ${styles}
     </style>
-    <cds-tooltip enter-delay-ms=${0} exit-delay-ms=${300}>
-      <div class="sb-tooltip-trigger">${Information16()}</div>
+    <cds-tooltip enter-delay-ms=${0} leave-delay-ms=${300}>
+      <button class="sb-tooltip-trigger" role="button">
+        ${Information16()}
+      </button>
       <cds-tooltip-content> Label one </cds-tooltip-content>
     </cds-tooltip>
   `;
@@ -80,7 +86,7 @@ export const Playground = (args) => {
     defaultOpen,
     label,
     enterDelay,
-    exitDelay,
+    leaveDelay,
     closeOnActivation,
   } = args?.['cds-tooltip'] ?? {};
   return html`
@@ -91,9 +97,11 @@ export const Playground = (args) => {
       ?defaultOpen=${defaultOpen}
       align=${alignment}
       enter-delay-ms=${enterDelay}
-      exit-delay-ms=${exitDelay}
+      leave-delay-ms=${leaveDelay}
       ?closeOnActivation=${closeOnActivation}>
-      <div class="sb-tooltip-trigger">${Information16()}</div>
+      <button class="sb-tooltip-trigger" role="button">
+        ${Information16()}
+      </button>
       <cds-tooltip-content> ${label} </cds-tooltip-content>
     </cds-tooltip>
   `;
@@ -110,7 +118,7 @@ Playground.parameters = {
       ),
       label: text('Label (label)', 'Custom label'),
       enterDelay: number('Enter delay (in ms)', 100),
-      exitDelay: number('Exit delay (in ms)', 300),
+      leaveDelay: number('Leave delay (in ms)', 300),
       closeOnActivation: boolean(
         'Close on activation (closeOnActivation)',
         false

@@ -33,7 +33,7 @@ import '@carbon/web-components/es/components/button/index.js';
 ### HTML
 
 ```html
-<cds-btn href="https://www.ibm.com"> Button </cds-btn>
+<cds-button href="https://www.ibm.com"> Button </cds-button>
 ```
 ## Danger Buttons
 
@@ -46,7 +46,7 @@ actions a user could choose from, then a lower emphasis style like the tertiary
 danger button or the ghost danger button may be more appropriate.
 
 ```html
-<cds-btn type="danger" href="https://www.ibm.com"> Button </cds-btn>
+<cds-button type="danger" href="https://www.ibm.com"> Button </cds-button>
 ```
 
 ## Icon-only Buttons
@@ -61,9 +61,9 @@ Our Storybook example also shows off the Tooltip feature, explained later.
 ```html
 import Add16 from '@carbon/web-components/es/icons/add/16';
 
-    <cds-btn>
+    <cds-button>
       ${Add16({ slot: 'icon' })}
-    </cds-btn>```
+    </cds-button>```
 
 ## Set of Buttons
 
@@ -75,18 +75,18 @@ on the right. When these two types buttons are paired in the correct order, they
 will automatically space themselves apart.
 
 ```html
-<cds-btn-set>
-  <cds-btn href="https://www.ibm.com"> Secondary 1</cds-btn>
-  <cds-btn href="https://www.ibm.com"> Primary 2</cds-btn>
-</cds-btn-set>
+<cds-button-set>
+  <cds-button href="https://www.ibm.com"> Secondary 1</cds-button>
+  <cds-button href="https://www.ibm.com"> Primary 2</cds-button>
+</cds-button-set>
 ```
 
 ## Skeleton
 
-For the skeleton variation, utilize `<cds-btn-skeleton>`.
+For the skeleton variation, utilize `<cds-button-skeleton>`.
 
 ```html
-<cds-btn-skeleton size="sm"> </cds-btn-skeleton>
+<cds-button-skeleton size="sm"> </cds-button-skeleton>
 ```
 
 ## Component API
@@ -112,14 +112,14 @@ a position and will render the tooltip accordingly. Accepted options are `top`,
 
 ### ButtonSet `stacked`
 
-By passing in `stacked` to the `cds-btn-set` component, you can arrange your two
+By passing in `stacked` to the `cds-button-set` component, you can arrange your two
 `Button` elements vertically
 
 
-## `<cds-btn>` attributes and properties
+## `<cds-button>` attributes and properties
 
 Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-btn autofocus>`) and `false` means not setting the attribute (e.g.
-`<cds-btn>` without `autofocus` attribute).
+`<cds-button autofocus>`) and `false` means not setting the attribute (e.g.
+`<cds-button>` without `autofocus` attribute).
 
-<Props of="cds-btn" />
+<Props of="cds-button" />

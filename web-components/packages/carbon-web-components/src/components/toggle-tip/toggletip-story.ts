@@ -44,7 +44,7 @@ export const Default = (args) => {
 
       <p slot="body-text">${bodyText}</p>
       <cds-link slot="actions">Test</cds-link>
-      <cds-btn slot="actions">Button</cds-btn>
+      <cds-button slot="actions">Button</cds-button>
     </cds-toggletip>
   `;
 };

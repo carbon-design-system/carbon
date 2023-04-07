@@ -37,7 +37,7 @@ theme:
 
 ```html
 <footer>
-  <cds-btn kind="secondary">Secondary button</cds-btn>
+  <cds-button kind="secondary">Secondary button</cds-button>
 </footer>
 ```
 
