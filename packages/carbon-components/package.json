@@ -12,7 +12,8 @@
   "homepage": "https://www.carbondesignsystem.com/",
   "files": [
     "scss/**/*",
-    "index.scss"
+    "index.scss",
+    "scripts/postinstall.js"
   ],
   "keywords": [
     "carbon",
