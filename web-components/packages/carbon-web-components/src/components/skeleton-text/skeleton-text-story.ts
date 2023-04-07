@@ -19,36 +19,33 @@ const types = {
   [`Heading (${SKELETON_TEXT_TYPE.HEADING})`]: SKELETON_TEXT_TYPE.HEADING,
 };
 
-export const Default = (args) => {
-  const { type } = args?.[`${prefix}-skeleton-text`] ?? {};
-  return html`
-    <cds-skeleton-text type="${ifDefined(type)}"></cds-skeleton-text>
-  `;
-};
+export const Default = () => html` <cds-skeleton-text></cds-skeleton-text>`;
+
+Default.storyName = 'Default';
 
 Default.parameters = {
-  knobs: {
-    [`${prefix}-skeleton-text`]: () => ({
-      type: select('Skeleton text type (type)', types, null),
-    }),
+  percy: {
+    skip: true,
   },
 };
 
-export const Lines = (args) => {
-  const { paragraph, lineCount, width } =
+export const Playground = (args) => {
+  const { type, paragraph, lineCount, width } =
     args?.[`${prefix}-skeleton-text`] ?? {};
   return html`
     <cds-skeleton-text
-      type="line"
+      type="${ifDefined(type)}"
       ?paragraph="${paragraph}"
       lineCount="${lineCount}"
-      width="${width}"></cds-skeleton-text>
+      width="${width}">
+    </cds-skeleton-text>
   `;
 };
 
-Lines.parameters = {
+Playground.parameters = {
   knobs: {
     [`${prefix}-skeleton-text`]: () => ({
+      type: select('Skeleton text type (type)', types, null),
       paragraph: boolean('Use multiple lines of text (paragraph)', true),
       lineCount: number('The number of lines in a paragraph (lineCount)', 3),
       width: text(
@@ -60,7 +57,7 @@ Lines.parameters = {
 };
 
 export default {
-  title: 'Components/Skeleton text',
+  title: 'Components/Skeleton/Skeleton text',
   parameters: {
     ...storyDocs.parameters,
     percy: {

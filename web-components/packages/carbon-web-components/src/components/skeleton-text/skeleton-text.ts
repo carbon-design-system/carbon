@@ -27,7 +27,7 @@ function getRandomInt(min: number, max: number, n: number) {
  * @element cds-skeleton-text
  */
 @customElement(`${prefix}-skeleton-text`)
-class BXSkeletonText extends LitElement {
+class CDSSkeletonText extends LitElement {
   /**
    * The type of skeleton text.
    */
@@ -43,7 +43,6 @@ class BXSkeletonText extends LitElement {
   /**
    * will generate multiple lines of text
    */
-
   @property({ type: Boolean, reflect: true })
   paragraph = false;
 
@@ -82,4 +81,4 @@ class BXSkeletonText extends LitElement {
   static styles = styles;
 }
 
-export default BXSkeletonText;
+export default CDSSkeletonText;
