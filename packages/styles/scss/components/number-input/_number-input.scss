@@ -40,7 +40,7 @@
     min-width: 9.375rem;
     height: rem(40px);
     box-sizing: border-box;
-    padding-right: rem(80px);
+    padding-right: rem(96px);
     padding-left: $spacing-05;
     border: 0;
     border-bottom: rem(1px) solid $border-strong;
@@ -84,7 +84,7 @@
   }
 
   .#{$prefix}--number--lg.#{$prefix}--number input[type='number'] {
-    padding-right: rem(96px);
+    padding-right: rem(112px);
 
     &[data-invalid] {
       padding-right: rem(144px);
@@ -92,7 +92,7 @@
   }
 
   .#{$prefix}--number--sm.#{$prefix}--number input[type='number'] {
-    padding-right: rem(64px);
+    padding-right: rem(80px);
 
     &[data-invalid] {
       padding-right: rem(112px);
