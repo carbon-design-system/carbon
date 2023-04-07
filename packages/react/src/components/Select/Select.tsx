@@ -12,6 +12,7 @@ import React, {
   ForwardedRef,
   ReactNode,
   useContext,
+  useRef,
   useState,
 } from 'react';
 import classNames from 'classnames';
@@ -24,6 +25,9 @@ import deprecate from '../../prop-types/deprecate';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
+
+const getInstanceId = setupGetInstanceId();
 
 type ExcludedAttributes = 'size';
 
@@ -153,6 +157,7 @@ const Select = React.forwardRef(function Select(
   const enabled = useFeatureFlag('enable-v11-release');
   const { isFluid } = useContext(FormContext);
   const [isFocused, setIsFocused] = useState(false);
+  const { current: selectInstanceId } = useRef(getInstanceId());
 
   const selectClasses = classNames(
     {
@@ -194,12 +199,21 @@ const Select = React.forwardRef(function Select(
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
   });
+
+  const helperId = !helperText
+    ? undefined
+    : `select-helper-text-${selectInstanceId}`;
+
   const helper = helperText ? (
-    <div className={helperTextClasses}>{helperText}</div>
+    <div id={helperId} className={helperTextClasses}>
+      {helperText}
+    </div>
   ) : null;
   const ariaProps = {};
   if (invalid) {
     ariaProps['aria-describedby'] = errorId;
+  } else if (!inline && !isFluid) {
+    ariaProps['aria-describedby'] = helper ? helperId : undefined;
   }
 
   const handleFocus = (evt) => {
