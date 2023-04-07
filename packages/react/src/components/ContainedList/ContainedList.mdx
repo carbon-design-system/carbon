@@ -23,6 +23,17 @@ import { Props, Story, Preview } from '@storybook/addon-docs';
   <Story id="components-containedlist--default" />
 </Preview>
 
+### Search
+
+We have added in the capability to pass down the `Search` component within the `ContainedList` action prop.
+The `Search` component itself is not a prop but does render with specific styling such that the `Search` bar appears below the Contained List title as opposed to rendering inline.
+The `Search` component will also remain sticky under the title, so that it remains visible on scroll, when there are many list items passed in. 
+## Render Custom Icon
+
+<Preview>
+  <Story id="components-containedlist--with-search" />
+</Preview>
+
 ## Component API
 
 <Props />
