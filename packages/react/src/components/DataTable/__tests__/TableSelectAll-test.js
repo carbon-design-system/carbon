@@ -76,7 +76,7 @@ describe('TableSelectAll', () => {
         </Table>
       );
 
-      expect(screen.getByRole('checkbox').checked).toEqual(true);
+      expect(screen.getByRole('checkbox')).toBeChecked();
     });
 
     it('should support a custom `className` prop on the outermost element', () => {
@@ -118,7 +118,7 @@ describe('TableSelectAll', () => {
         </Table>
       );
 
-      expect(screen.getByRole('checkbox').disabled).toEqual(true);
+      expect(screen.getByRole('checkbox')).toBeDisabled();
     });
 
     it('should respect id prop', () => {

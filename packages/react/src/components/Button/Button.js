@@ -92,7 +92,9 @@ const Button = React.forwardRef(function Button(
     'aria-describedby': dangerButtonVariants.includes(kind)
       ? assistiveId
       : null,
-    'aria-pressed': hasIconOnly && kind === 'ghost' ? isSelected : null,
+    'aria-pressed':
+      rest['aria-pressed'] ??
+      (hasIconOnly && kind === 'ghost' ? isSelected : null),
   };
   const anchorProps = {
     href,

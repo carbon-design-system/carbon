@@ -41,7 +41,6 @@ const {
   MenuBlur,
   MenuKeyDownArrowDown,
   MenuKeyDownArrowUp,
-  MenuKeyDownEnter,
   MenuKeyDownEscape,
   MenuKeyDownSpaceButton,
   ToggleButtonClick,
@@ -450,7 +449,6 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
     switch (type) {
       case ItemClick:
       case MenuKeyDownSpaceButton:
-      case MenuKeyDownEnter:
         if (changes.selectedItem === undefined) {
           break;
         }
@@ -567,6 +565,9 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
             className={`${prefix}--list-box__field`}
             disabled={disabled}
             aria-disabled={disabled || readOnly}
+            aria-describedby={
+              !inline && !invalid && !warn && helperText ? helperId : undefined
+            }
             {...toggleButtonProps}
             ref={mergedRef}
             onKeyDown={onKeyDown}

@@ -26,7 +26,7 @@ describe('FileUploader', () => {
 
   it('should support a custom class name on the root element', () => {
     const { container } = render(<FileUploader className="test" />);
-    expect(container.firstChild.classList.contains('test')).toBe(true);
+    expect(container.firstChild).toHaveClass('test');
   });
 
   it('should not update the label by default when selecting files', () => {
@@ -87,6 +87,6 @@ describe('FileUploader', () => {
     );
 
     const complete = getByLabel(container, description);
-    expect(edit.parentNode).not.toEqual(complete.parentNode);
+    expect(edit).not.toEqual(complete);
   });
 });

@@ -393,10 +393,9 @@
   .#{$prefix}--batch-actions:focus {
     @include focus-outline;
   }
-
+  // 200% to allow tooltips
   .#{$prefix}--batch-actions--active {
-    overflow: auto hidden;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 200% 0, 200% 200%, 0 200%);
     pointer-events: all;
     transform: translate3d(0, 0, 0);
   }

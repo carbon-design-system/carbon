@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { View, ViewOff, WarningFilled } from '@carbon/icons-react';
@@ -6,6 +6,9 @@ import { textInputProps } from './util';
 import { warning } from '../../internal/warning';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
+
+const getInstanceId = setupGetInstanceId();
 
 let didWarnAboutDeprecation = false;
 
@@ -37,6 +40,7 @@ const ControlledPasswordInput = React.forwardRef(
     ref
   ) {
     const prefix = usePrefix();
+    const { current: controlledPasswordInstanceId } = useRef(getInstanceId());
 
     if (__DEV__) {
       warning(
@@ -109,6 +113,11 @@ const ControlledPasswordInput = React.forwardRef(
         [`${prefix}--tooltip--align-${tooltipAlignment}`]: tooltipAlignment,
       }
     );
+
+    const helperId = !helperText
+      ? undefined
+      : `controlled-password-helper-text-${controlledPasswordInstanceId}`;
+
     const input = (
       <>
         <input
@@ -116,6 +125,8 @@ const ControlledPasswordInput = React.forwardRef(
             invalid,
             sharedTextInputProps,
             invalidId: errorId,
+            hasHelper: !error && helperText,
+            helperId,
           })}
           data-toggle-password-visibility={type === 'password'}
         />
@@ -130,8 +141,11 @@ const ControlledPasswordInput = React.forwardRef(
         </button>
       </>
     );
+
     const helper = helperText ? (
-      <div className={helperTextClasses}>{helperText}</div>
+      <div id={helperId} className={helperTextClasses}>
+        {helperText}
+      </div>
     ) : null;
 
     return (

@@ -17,7 +17,7 @@ const blocklist = new Set([
   'state',
   'tools',
   '.DS_Store',
-  'index.js',
+  'index.ts',
   'DataTable-story.js',
   '__tests__',
   '__mocks__',
@@ -25,7 +25,7 @@ const blocklist = new Set([
   'DataTable.mdx',
   'stories',
   'next',
-  'TableContext.js',
+  'TableContext.tsx',
 ]);
 const components = fs
   .readdirSync(COMPONENT_PATH)

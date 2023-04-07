@@ -14,6 +14,7 @@ export * from './components/Breadcrumb';
 export * from './components/Button';
 export * from './components/ButtonSet';
 export * from './components/Checkbox';
+export * from './components/CheckboxGroup';
 export * from './components/ClassPrefix';
 export * from './components/CodeSnippet';
 export * from './components/ComboBox';
@@ -149,6 +150,8 @@ export {
   MenuItemSelectable as unstable_MenuItemSelectable,
 } from './components/Menu';
 export { OverflowMenuV2 as unstable_OverflowMenuV2 } from './components/OverflowMenuV2';
+export { ComboButton as unstable_ComboButton } from './components/ComboButton';
+export { MenuButton as unstable_MenuButton } from './components/MenuButton';
 export {
   PageSelector as unstable_PageSelector,
   Pagination as unstable_Pagination,

@@ -133,7 +133,7 @@ following:
       to automatically generate the prerelease versions for packages
   - [ ] Specify `minor` as the release type
   - [ ] Provide the tag for the release. For example, if the previous release
-        was `v11.1.0-rc.0` this tag would be `v11.2.0`. To find the previous
+        was `v11.1.0-rc.0` this tag would be `v11.1.0`. To find the previous
         release, view the
         [tag list](https://github.com/carbon-design-system/carbon/tags).
 - [ ] Review and approve the Pull Request generated from this action

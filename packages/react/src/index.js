@@ -14,6 +14,7 @@ export { Breadcrumb, BreadcrumbItem } from './components/Breadcrumb';
 export Button from './components/Button';
 export ButtonSet from './components/ButtonSet';
 export Checkbox from './components/Checkbox';
+export CheckboxGroup from './components/CheckboxGroup';
 export { ClassPrefix } from './components/ClassPrefix';
 export CodeSnippet from './components/CodeSnippet';
 export ComboBox from './components/ComboBox';
@@ -271,6 +272,8 @@ export {
   MenuItemSelectable as unstable_MenuItemSelectable,
 } from './components/Menu';
 export { OverflowMenuV2 as unstable_OverflowMenuV2 } from './components/OverflowMenuV2';
+export { ComboButton as unstable_ComboButton } from './components/ComboButton';
+export { MenuButton as unstable_MenuButton } from './components/MenuButton';
 export {
   PageSelector as unstable_PageSelector,
   Pagination as unstable_Pagination,

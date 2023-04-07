@@ -59,7 +59,7 @@ describe('Slider', () => {
 
     it('should be able to apply a disabled state', () => {
       renderSlider({ disabled: true, ariaLabelInput: inputAriaValue });
-      expect(screen.getByLabelText(inputAriaValue)).toHaveAttribute('disabled');
+      expect(screen.getByLabelText(inputAriaValue)).toBeDisabled();
       expect(screen.getByRole('presentation')).toHaveClass(
         `${prefix}--slider--disabled`
       );
@@ -99,7 +99,7 @@ describe('Slider', () => {
 
     it('should accurately position slider on mount', () => {
       renderSlider({ value: 50, max: 100, min: 0 });
-      expect(screen.getByRole('slider').style.left).toEqual('50%');
+      expect(screen.getByRole('slider')).toHaveStyle({ left: '50%' });
     });
 
     it('marks input field as hidden if hidden via props', () => {
@@ -110,7 +110,7 @@ describe('Slider', () => {
       const inputElement = container.querySelector(
         `.${prefix}--text-input.${prefix}--slider-text-input`
       );
-      expect(inputElement.getAttribute('type')).toEqual('hidden');
+      expect(inputElement).toHaveAttribute('type', 'hidden');
     });
 
     it('allows user to set invalid value when typing in input field', async () => {
@@ -387,8 +387,8 @@ describe('Slider', () => {
         const rangeLabels = container.querySelectorAll(
           `.${prefix}--slider__range-label`
         );
-        expect(rangeLabels[0].textContent).toEqual('0min');
-        expect(rangeLabels[1].textContent).toEqual('100max');
+        expect(rangeLabels[0]).toHaveTextContent('0min');
+        expect(rangeLabels[1]).toHaveTextContent('100max');
       });
 
       it('supports custom formatting of the label', () => {
@@ -403,8 +403,8 @@ describe('Slider', () => {
         const rangeLabels = container.querySelectorAll(
           `.${prefix}--slider__range-label`
         );
-        expect(rangeLabels[0].textContent).toEqual('0-min');
-        expect(rangeLabels[1].textContent).toEqual('100-max');
+        expect(rangeLabels[0]).toHaveTextContent('0-min');
+        expect(rangeLabels[1]).toHaveTextContent('100-max');
       });
     });
 

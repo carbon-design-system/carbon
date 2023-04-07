@@ -75,13 +75,13 @@ describe('PaginationNav', () => {
     it('should disable "Previous" button when on first page and loop is false', () => {
       render(<PaginationNav totalItems={4} />);
 
-      expect(screen.getByLabelText('Previous')).toHaveProperty('disabled');
+      expect(screen.getByLabelText('Previous')).toBeDisabled();
     });
 
     it('should disable "Next" button when on last page and loop is false', () => {
       render(<PaginationNav totalItems={4} page={3} />);
 
-      expect(screen.getByLabelText('Next')).toHaveProperty('disabled');
+      expect(screen.getByLabelText('Next')).toBeDisabled();
     });
   });
 

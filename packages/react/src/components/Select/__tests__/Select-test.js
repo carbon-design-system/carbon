@@ -80,7 +80,7 @@ describe('Select', () => {
     it('should respect disabled prop', () => {
       render(<Select id="select" labelText="Select" disabled />);
 
-      expect(screen.getByRole('combobox')).toHaveAttribute('disabled');
+      expect(screen.getByRole('combobox')).toBeDisabled();
     });
 
     it('should respect helperText prop', () => {

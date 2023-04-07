@@ -41,7 +41,7 @@ describe('ModalFooter', () => {
       />
     );
 
-    expect(screen.getByText('Submit')).toHaveProperty('disabled', true);
+    expect(screen.getByText('Submit')).toBeDisabled();
   });
 
   it('should pass classes to primary button', () => {

@@ -318,7 +318,7 @@ describe('StructuredList', () => {
       renderSelectionVariant({ inputProps: { 'aria-label': testAriaLabel } });
       const allInputs = screen.getAllByLabelText(testAriaLabel);
       allInputs.forEach((input) => {
-        expect(input.getAttribute('aria-label')).toEqual(testAriaLabel);
+        expect(input).toHaveAttribute('aria-label', testAriaLabel);
       });
     });
   });

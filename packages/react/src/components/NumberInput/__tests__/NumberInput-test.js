@@ -55,7 +55,7 @@ describe('NumberInput', () => {
 
   it('should set `disabled` on the underyling <input>', () => {
     render(<NumberInput label="test-label" id="test" disabled />);
-    expect(screen.getByLabelText('test-label')).toHaveAttribute('disabled');
+    expect(screen.getByLabelText('test-label')).toBeDisabled();
   });
 
   it('should set the defaultValue of the <input> with `defaultValue`', () => {

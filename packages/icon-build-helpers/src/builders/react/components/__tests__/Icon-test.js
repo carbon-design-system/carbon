@@ -30,11 +30,11 @@ describe('Icon', () => {
     );
 
     const getContainer = () => container.querySelector('svg');
-    expect(getContainer().getAttribute('focusable')).toBe('false');
+    expect(getContainer()).toHaveAttribute('focusable', 'false');
 
     rerender(<Icon focusable />);
 
-    expect(getContainer().getAttribute('focusable')).toBe('true');
+    expect(getContainer()).toHaveAttribute('focusable', 'true');
   });
 
   it('should forward refs to the rendered SVG DOM element', () => {
@@ -56,7 +56,7 @@ describe('Icon', () => {
       </Icon>
     );
 
-    expect(getContainer().getAttribute('aria-label')).toBeDefined();
+    expect(getContainer()).toHaveAttribute('aria-label', 'Mock icon');
     getContainer().focus();
     expect(document.activeElement === getContainer()).toBe(false);
 
@@ -68,7 +68,7 @@ describe('Icon', () => {
       </Icon>
     );
 
-    expect(getContainer().getAttribute('aria-label')).toBeDefined();
+    expect(getContainer()).not.toHaveAttribute('aria-label');
     getContainer().focus();
     expect(document.activeElement === getContainer()).toBe(false);
 
@@ -84,7 +84,7 @@ describe('Icon', () => {
       </Icon>
     );
 
-    expect(getContainer().getAttribute('aria-label')).toBeDefined();
+    expect(getContainer()).toHaveAttribute('aria-label', 'Mock icon');
     getContainer().focus();
     expect(document.activeElement === getContainer()).toBe(true);
   });

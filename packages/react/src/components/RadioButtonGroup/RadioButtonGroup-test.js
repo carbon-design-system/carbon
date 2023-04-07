@@ -23,7 +23,7 @@ describe('RadioButtonGroup', () => {
     const legend = screen.getByText('test', {
       selector: 'legend',
     });
-    expect(legend).toBeDefined();
+    expect(legend).toBeInTheDocument();
   });
 
   it('should render `legendText` in a <fieldset>', () => {

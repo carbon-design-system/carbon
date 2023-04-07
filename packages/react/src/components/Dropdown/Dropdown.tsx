@@ -33,6 +33,9 @@ import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ReactAttr } from '../../types/common';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
+
+const getInstanceId = setupGetInstanceId();
 
 const defaultItemToString = <ItemType,>(item?: ItemType): string => {
   if (typeof item === 'string') {
@@ -61,7 +64,14 @@ export interface OnChangeData<ItemType> {
 export interface DropdownProps<ItemType>
   extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes> {
   /**
+   * Specify a label to be read by screen readers on the container node
    * 'aria-label' of the ListBox component.
+   */
+  ['aria-label']?: string;
+
+  /**
+   * @deprecated please use `aria-label` instead.
+   * Specify a label to be read by screen readers on the container note.
    */
   ariaLabel?: string;
 
@@ -206,7 +216,8 @@ const Dropdown = React.forwardRef(
       direction,
       items,
       label,
-      ariaLabel,
+      ['aria-label']: ariaLabel,
+      ariaLabel: deprecatedAriaLabel,
       itemToString = defaultItemToString,
       itemToElement,
       renderSelectedItem,
@@ -240,6 +251,7 @@ const Dropdown = React.forwardRef(
       initialSelectedItem,
       onSelectedItemChange,
     };
+    const { current: dropdownInstanceId } = useRef(getInstanceId());
 
     // only set selectedItem if the prop is defined. Setting if it is undefined
     // will overwrite default selected items from useSelect
@@ -303,12 +315,18 @@ const Dropdown = React.forwardRef(
       }
     );
 
+    const helperId = !helperText
+      ? undefined
+      : `dropdown-helper-text-${dropdownInstanceId}`;
+
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
     const toggleButtonProps = getToggleButtonProps();
     const helper =
       helperText && !isFluid ? (
-        <div className={helperClasses}>{helperText}</div>
+        <div id={helperId} className={helperClasses}>
+          {helperText}
+        </div>
       ) : null;
 
     function onSelectedItemChange({
@@ -358,7 +376,7 @@ const Dropdown = React.forwardRef(
         <ListBox
           onFocus={handleFocus}
           onBlur={handleFocus}
-          aria-label={ariaLabel}
+          aria-label={deprecatedAriaLabel || ariaLabel}
           size={size}
           className={className}
           invalid={invalid}
@@ -378,9 +396,15 @@ const Dropdown = React.forwardRef(
           )}
           <button
             type="button"
+            // aria-expanded is already being passed through {...toggleButtonProps}
+            role="combobox" // eslint-disable-line jsx-a11y/role-has-required-aria-props
+            aria-controls={getMenuProps().id}
             className={`${prefix}--list-box__field`}
             disabled={disabled}
             aria-disabled={readOnly ? true : undefined} // aria-disabled to remain focusable
+            aria-describedby={
+              !inline && !invalid && !warn && helper ? helperId : undefined
+            }
             title={
               selectedItem && itemToString !== undefined
                 ? itemToString(selectedItem)
@@ -466,8 +490,18 @@ Dropdown.displayName = 'Dropdown';
 Dropdown.propTypes = {
   /**
    * 'aria-label' of the ListBox component.
+   * Specify a label to be read by screen readers on the container node
    */
-  ariaLabel: PropTypes.string,
+  ['aria-label']: PropTypes.string,
+
+  /**
+   * Deprecated, please use `aria-label` instead.
+   * Specify a label to be read by screen readers on the container note.
+   */
+  ariaLabel: deprecate(
+    PropTypes.string,
+    'This prop syntax has been deprecated. Please use the new `aria-label`.'
+  ),
 
   /**
    * Provide a custom className to be applied on the bx--dropdown node
