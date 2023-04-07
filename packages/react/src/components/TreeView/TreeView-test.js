@@ -89,6 +89,7 @@ describe('TreeView', () => {
     });
 
     it('should respect multiselect prop', async () => {
+      const user = userEvent.setup();
       render(
         <TreeView multiselect label="Tree">
           <TreeNode data-testid="Node 1" label="Node 1" />
@@ -99,8 +100,9 @@ describe('TreeView', () => {
       const tree = screen.getByRole('tree');
       const lists = tree?.getElementsByTagName('li');
 
-      await userEvent.click(lists[0], { ctrlKey: true });
-      await userEvent.click(lists[1], { ctrlKey: true });
+      await user.keyboard('[ControlLeft>]');
+      await user.click(lists[0]);
+      await user.click(lists[1]);
 
       expect(lists[0]).toHaveAttribute('aria-selected', 'true');
       expect(lists[1]).toHaveAttribute('aria-selected', 'true');
