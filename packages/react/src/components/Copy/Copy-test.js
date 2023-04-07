@@ -76,9 +76,7 @@ describe('Button props', () => {
     );
 
     const button = screen.getByTestId('copy-button-4');
-    console.log('hi1');
     await user.click(button);
-    console.log('hi2');
     expect(onClick).toHaveBeenCalled();
   });
 });
