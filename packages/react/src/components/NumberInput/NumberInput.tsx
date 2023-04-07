@@ -292,6 +292,9 @@ const NumberInput = React.forwardRef(function NumberInput(
   if (normalizedProps.warn) {
     ariaDescribedBy = normalizedProps.warnId;
   }
+  if (!normalizedProps.validation) {
+    ariaDescribedBy = helperText ? normalizedProps.helperId : undefined;
+  }
 
   function handleOnChange(event) {
     if (disabled) {
@@ -441,7 +444,11 @@ const NumberInput = React.forwardRef(function NumberInput(
         {normalizedProps.validation ? (
           normalizedProps.validation
         ) : (
-          <HelperText disabled={disabled} description={helperText} />
+          <HelperText
+            id={normalizedProps.helperId}
+            disabled={disabled}
+            description={helperText}
+          />
         )}
       </div>
     </div>
@@ -619,17 +626,22 @@ Label.propTypes = {
 };
 
 interface HelperTextProps {
+  id?: string;
   description?: ReactNode;
   disabled?: boolean;
 }
-function HelperText({ disabled, description }: HelperTextProps) {
+function HelperText({ disabled, description, id }: HelperTextProps) {
   const prefix = usePrefix();
   const className = cx(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
   });
 
   if (description) {
-    return <div className={className}>{description}</div>;
+    return (
+      <div id={id} className={className}>
+        {description}
+      </div>
+    );
   }
   return null;
 }
@@ -637,6 +649,7 @@ function HelperText({ disabled, description }: HelperTextProps) {
 HelperText.propTypes = {
   description: PropTypes.node,
   disabled: PropTypes.bool,
+  id: PropTypes.string,
 };
 
 /**

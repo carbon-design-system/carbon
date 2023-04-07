@@ -51,7 +51,7 @@ export default (config) => (fp) => {
    * set the date again, triggering the calendar to update.
    */
   const handleBlur = (event) => {
-    const { inputFrom, inputTo } = config;
+    const { inputFrom, inputTo, lastStartValue } = config;
     const { target } = event;
 
     // Only fall into this logic if the event is on the `to` input and there is a
@@ -89,6 +89,22 @@ export default (config) => (fp) => {
           true,
           fp.config.dateFormat
         );
+      }
+    }
+
+    // overriding the flatpickr bug where the startDate gets deleted on blur
+    if (inputTo === target && !inputFrom.value && lastStartValue.current) {
+      let currentStartDate = new Date(lastStartValue.current);
+
+      if (currentStartDate.toString() !== 'Invalid Date') {
+        inputFrom.value = lastStartValue.current;
+        if (inputTo.value) {
+          fp.setDate(
+            [inputFrom.value, inputTo.value],
+            true,
+            fp.config.dateFormat
+          );
+        }
       }
     }
   };
