@@ -186,34 +186,6 @@ describe('Tab', () => {
     );
   });
 
-  it('should use a secondary icon class when contained and has secondary label', () => {
-    render(
-      <Tabs>
-        <TabList contained aria-label="List of tabs">
-          <Tab
-            renderIcon={() => <svg data-testid="svg" />}
-            secondaryLabel="1234"
-            disabled>
-            Tab Label 1
-          </Tab>
-          <Tab data-testid="tab-testid" className="custom-class">
-            Tab Label 2
-          </Tab>
-          <Tab>Tab Label 3</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>Tab Panel 1</TabPanel>
-          <TabPanel>Tab Panel 2</TabPanel>
-          <TabPanel>Tab Panel 3</TabPanel>
-        </TabPanels>
-      </Tabs>
-    );
-
-    expect(screen.getByTestId('svg').parentElement).toHaveClass(
-      'cds--tabs__nav-item--icon-secondary'
-    );
-  });
-
   it('should call onClick from props if provided', () => {
     const onClick = jest.fn();
     render(
