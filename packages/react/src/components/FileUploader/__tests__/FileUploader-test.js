@@ -6,7 +6,7 @@
  */
 
 import { getByLabel, getByText } from '@carbon/test-utils/dom';
-import { render } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import React from 'react';
 import FileUploader from '../';
 import { uploadFiles } from '../test-helpers';
@@ -35,7 +35,11 @@ describe('FileUploader', () => {
     const label = getByText(container, 'upload');
 
     expect(label).toBeInstanceOf(HTMLElement);
-    uploadFiles(input, [new File(['test'], 'test.png', { type: 'image/png' })]);
+    act(() => {
+      uploadFiles(input, [
+        new File(['test'], 'test.png', { type: 'image/png' }),
+      ]);
+    });
     expect(getByText(container, 'upload')).toBeInstanceOf(HTMLElement);
   });
 
@@ -45,10 +49,14 @@ describe('FileUploader', () => {
     const input = container.querySelector('input');
 
     const filename = 'test.png';
-    uploadFiles(input, [new File(['test'], filename, { type: 'image/png' })]);
+    act(() => {
+      uploadFiles(input, [new File(['test'], filename, { type: 'image/png' })]);
+    });
 
     expect(getByText(container, filename)).toBeInstanceOf(HTMLElement);
-    ref.current.clearFiles();
+    act(() => {
+      ref.current.clearFiles();
+    });
     expect(getByText(container, filename)).not.toBeInstanceOf(HTMLElement);
   });
 
@@ -63,7 +71,11 @@ describe('FileUploader', () => {
     );
 
     const input = container.querySelector('input');
-    uploadFiles(input, [new File(['test'], 'test.png', { type: 'image/png' })]);
+    act(() => {
+      uploadFiles(input, [
+        new File(['test'], 'test.png', { type: 'image/png' }),
+      ]);
+    });
 
     const edit = getByLabel(container, description);
 

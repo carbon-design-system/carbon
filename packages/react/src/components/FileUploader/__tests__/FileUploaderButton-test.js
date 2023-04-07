@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import { getByText } from '@carbon/test-utils/dom';
 import React from 'react';
 import { Simulate } from 'react-dom/test-utils';
@@ -98,7 +98,9 @@ describe('FileUploaderButton', () => {
 
       const filename = 'test.png';
       const file = new File(['test'], filename, { type: 'image/png' });
-      uploadFiles(input, [file]);
+      act(() => {
+        uploadFiles(input, [file]);
+      });
 
       expect(getByText(container, filename)).toBeInstanceOf(HTMLElement);
     });
@@ -117,7 +119,9 @@ describe('FileUploaderButton', () => {
         new File(['test-3'], 'test-1.png', { type: 'image/png' }),
       ];
 
-      uploadFiles(input, files);
+      act(() => {
+        uploadFiles(input, files);
+      });
       expect(getByText(container, `${files.length} files`)).toBeInstanceOf(
         HTMLElement
       );
