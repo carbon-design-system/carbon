@@ -13,10 +13,7 @@ import { property, customElement } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
-import { SLIDER_INPUT_COLOR_SCHEME } from './defs';
 import styles from './slider.scss';
-
-export { SLIDER_INPUT_COLOR_SCHEME };
 
 /**
  * The `<input>` box for slider.
@@ -25,7 +22,7 @@ export { SLIDER_INPUT_COLOR_SCHEME };
  * @fires cds-slider-input-changed - The custom event fired after the value is changed by user gesture.
  */
 @customElement(`${prefix}-slider-input`)
-class BXSliderInput extends FocusMixin(LitElement) {
+class CDSSliderInput extends FocusMixin(LitElement) {
   /**
    * The internal value of `max` property.
    */
@@ -46,7 +43,7 @@ class BXSliderInput extends FocusMixin(LitElement) {
    */
   private _handleChange({ target }: Event) {
     this.dispatchEvent(
-      new CustomEvent((this.constructor as typeof BXSliderInput).eventChange, {
+      new CustomEvent((this.constructor as typeof CDSSliderInput).eventChange, {
         bubbles: true,
         composed: true,
         detail: {
@@ -61,7 +58,7 @@ class BXSliderInput extends FocusMixin(LitElement) {
    */
   private _handleInput({ target }: Event) {
     this.dispatchEvent(
-      new CustomEvent((this.constructor as typeof BXSliderInput).eventChange, {
+      new CustomEvent((this.constructor as typeof CDSSliderInput).eventChange, {
         bubbles: true,
         composed: true,
         detail: {
@@ -73,16 +70,16 @@ class BXSliderInput extends FocusMixin(LitElement) {
   }
 
   /**
-   * The color scheme.
-   */
-  @property({ attribute: 'color-scheme', reflect: true })
-  colorScheme = SLIDER_INPUT_COLOR_SCHEME.REGULAR;
-
-  /**
-   * `true` if the check box should be disabled.
+   * `true` if the input should be disabled.
    */
   @property({ type: Boolean, reflect: true })
   disabled = false;
+
+  /**
+   * true to specify if the control is invalid.
+   */
+  @property({ type: Boolean })
+  invalid = false;
 
   /**
    * The maximum value.
@@ -138,15 +135,22 @@ class BXSliderInput extends FocusMixin(LitElement) {
   @property({ type: Number })
   value!: number;
 
+  /**
+   * true` if the input should be readonly.
+   */
+  @property({ type: Boolean, reflect: true })
+  readonly = false;
+
   render() {
     const {
-      colorScheme,
       disabled,
       max,
       min,
+      readonly,
       step,
       type,
       value,
+      invalid,
       _handleChange: handleChange,
       _handleInput: handleInput,
     } = this;
@@ -157,15 +161,17 @@ class BXSliderInput extends FocusMixin(LitElement) {
     const classes = classMap({
       [`${prefix}--text-input`]: true,
       [`${prefix}--slider-text-input`]: true,
-      [`${prefix}--text-input--${colorScheme}`]: colorScheme,
+      [`${prefix}--text-input--invalid`]: invalid,
     });
     return html`
       <input
         ?disabled="${disabled}"
+        ?data-invalid="${invalid}"
         type="${ifDefined(type)}"
         class="${classes}"
         max="${max}"
         min="${min}"
+        ?readonly="${ifDefined(readonly)}"
         step="${step}"
         .value="${value}"
         @change="${handleChange}"
@@ -194,4 +200,4 @@ class BXSliderInput extends FocusMixin(LitElement) {
   static styles = styles;
 }
 
-export default BXSliderInput;
+export default CDSSliderInput;

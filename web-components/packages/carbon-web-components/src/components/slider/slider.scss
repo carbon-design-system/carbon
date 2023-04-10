@@ -35,5 +35,13 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-slider-input) {
-  outline: none;
+  input {
+    box-sizing: border-box;
+  }
+
+  &[readonly] {
+    input {
+      background-color: transparent;
+    }
+  }
 }

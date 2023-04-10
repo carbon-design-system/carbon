@@ -16,7 +16,7 @@ import styles from './slider.scss';
  * Skeleton of slider.
  */
 @customElement(`${prefix}-slider-skeleton`)
-class BXSliderSkeleton extends LitElement {
+class CDSSliderSkeleton extends LitElement {
   render() {
     return html`
       <span class="${prefix}--label ${prefix}--skeleton"></span>
@@ -35,4 +35,4 @@ class BXSliderSkeleton extends LitElement {
   static styles = styles;
 }
 
-export default BXSliderSkeleton;
+export default CDSSliderSkeleton;
