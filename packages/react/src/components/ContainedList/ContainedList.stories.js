@@ -169,13 +169,14 @@ export const WithSearch = () => {
 
   return (
     <ContainedList
-      label="List title"
+      label="List title TEST"
       kind="on-page"
       action={
         <Search
           placeholder="Search"
           value={searchTerm}
           onChange={handleChange}
+          closeButtonLabelText="Clear search input"
           size="lg"
         />
       }>
