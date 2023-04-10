@@ -285,7 +285,9 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     </label>
   ) : null;
   const helper = helperText ? (
-    <div className={helperTextClasses}>{helperText}</div>
+    <div id={normalizedProps.helperId} className={helperTextClasses}>
+      {helperText}
+    </div>
   ) : null;
 
   const passwordIsVisible = inputType === 'text';
@@ -315,6 +317,12 @@ const PasswordInput = React.forwardRef(function PasswordInput(
           invalidId: normalizedProps.invalidId,
           warn: normalizedProps.warn,
           warnId: normalizedProps.warnId,
+          hasHelper: Boolean(
+            helperText &&
+              !isFluid &&
+              (inline || (!inline && !normalizedProps.validation))
+          ),
+          helperId: normalizedProps.helperId,
         })}
         disabled={disabled}
         data-toggle-password-visibility={inputType === 'password'}
