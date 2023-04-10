@@ -193,6 +193,10 @@ class HeaderMenu extends React.Component {
       ...rest
     } = this.props;
 
+    const hasActiveChildren =
+      React.Children.map(children, (child) => {
+        return child.props.isActive || child.props.isCurrentPage;
+      }).length > 0;
     const accessibilityLabel = {
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
@@ -208,6 +212,8 @@ class HeaderMenu extends React.Component {
       // We set the current class only if `isActive` is passed in and we do
       // not have an `aria-current="page"` set for the breadcrumb item
       [`${prefix}--header__menu-item--current`]: isActivePage,
+      [`${prefix}--header__menu-item--current`]:
+        isActivePage || (hasActiveChildren && !this.state.expanded),
     });
 
     // Notes on eslint comments and based on the examples in:
