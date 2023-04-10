@@ -97,7 +97,11 @@ Playground.argTypes = {
     control: { type: 'text' },
   },
   warnText: {
-    control: { type: 'text' },
+    control: {
+      type: 'text',
+    },
+    defaultValue:
+      'Warning message that is really long can wrap to more lines but should not be excessively long.',
   },
 };
 
