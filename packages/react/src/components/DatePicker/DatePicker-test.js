@@ -273,7 +273,7 @@ describe('Single date picker', () => {
 
   it('should support controlled value',  () => {
     const DatePickerExample = () => {
-      const [date, setDate] = useState('');
+      const [date, setDate] = useState();
       return (
         <>
           <DatePicker
