@@ -353,7 +353,8 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       color: $text-primary;
     }
 
-    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item:hover {
+    &.#{$prefix}--tabs--contained
+      .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--disabled):hover {
       background-color: $layer-accent-hover;
       color: $text-primary;
     }
