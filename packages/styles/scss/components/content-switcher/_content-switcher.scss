@@ -267,16 +267,11 @@
 
   .#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-popover__wrapper:last-child
-    .#{$prefix}--content-switcher-btn:focus {
-    border-right: 1px solid transparent;
-    background: none;
-  }
-
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected,
   .#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-popover__wrapper:first-child
-    .#{$prefix}--content-switcher-btn:focus {
-    border-left: 1px solid transparent;
-    background: none;
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
+    border-color: $background;
   }
 
   .#{$prefix}--content-switcher--lg .#{$prefix}--content-switcher-btn {
