@@ -187,7 +187,7 @@ export const WithExpandableSearch = () => {
   );
 };
 
-export const WithSearch = () => {
+export const WithPersistentSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const handleChange = (event) => {
