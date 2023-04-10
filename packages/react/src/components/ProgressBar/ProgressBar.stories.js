@@ -7,6 +7,8 @@
 
 import React, { useState, useEffect } from 'react';
 
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
+
 import ProgressBar from './';
 
 export default {
@@ -90,3 +92,13 @@ export const Example = () => {
     />
   );
 };
+
+export const _WithLayer = () => (
+  <WithLayer>
+    <ProgressBar
+      label="Progress bar label"
+      helperText="Optional helper text"
+      value={42}
+    />
+  </WithLayer>
+);

@@ -15,7 +15,8 @@
     "es",
     "lib",
     "scss",
-    "index.scss"
+    "index.scss",
+    "scripts/postinstall.js"
   ],
   "keywords": [
     "react",
