@@ -4004,6 +4004,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "wrapperClasses": Object {
+        "type": "string",
+      },
     },
     "render": [Function],
   },
@@ -4013,6 +4016,80 @@ Map {
         "type": "string",
       },
     },
+  },
+  "IconSwitch" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "right",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "enterDelayMs": Object {
+        "type": "number",
+      },
+      "index": Object {
+        "type": "number",
+      },
+      "leaveDelayMs": Object {
+        "type": "number",
+      },
+      "name": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+      "selected": Object {
+        "type": "bool",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "text": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
   },
   "IconTab" => Object {
     "$$typeof": Symbol(react.forward_ref),
