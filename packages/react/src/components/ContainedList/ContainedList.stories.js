@@ -144,10 +144,6 @@ export const WithExpandableSearch = () => {
       'List item 2',
       'List item 3',
       'List item 4',
-      'List item 5',
-      'List item 6',
-      'List item 7',
-      'List item 8',
     ];
 
     const results = listItems.filter((listItem) =>
@@ -155,15 +151,6 @@ export const WithExpandableSearch = () => {
     );
     setSearchResults(results);
   }, [searchTerm]);
-
-  const itemAction = (
-    <Button
-      kind="ghost"
-      iconDescription="Dismiss"
-      hasIconOnly
-      renderIcon={SubtractAlt}
-    />
-  );
 
   return (
     <ContainedList
@@ -179,9 +166,7 @@ export const WithExpandableSearch = () => {
         />
       }>
       {searchResults.map((listItem, key) => (
-        <ContainedListItem key={key} action={itemAction}>
-          {listItem}
-        </ContainedListItem>
+        <ContainedListItem key={key}>{listItem}</ContainedListItem>
       ))}
     </ContainedList>
   );
@@ -200,10 +185,6 @@ export const WithPersistentSearch = () => {
       'List item 2',
       'List item 3',
       'List item 4',
-      'List item 5',
-      'List item 6',
-      'List item 7',
-      'List item 8',
     ];
 
     const results = listItems.filter((listItem) =>
@@ -211,15 +192,6 @@ export const WithPersistentSearch = () => {
     );
     setSearchResults(results);
   }, [searchTerm]);
-
-  const itemAction = (
-    <Button
-      kind="ghost"
-      iconDescription="Dismiss"
-      hasIconOnly
-      renderIcon={SubtractAlt}
-    />
-  );
 
   return (
     <ContainedList label="List title" kind="on-page" action={''}>
@@ -231,9 +203,7 @@ export const WithPersistentSearch = () => {
         size="lg"
       />
       {searchResults.map((listItem, key) => (
-        <ContainedListItem key={key} action={itemAction}>
-          {listItem}
-        </ContainedListItem>
+        <ContainedListItem key={key}>{listItem}</ContainedListItem>
       ))}
     </ContainedList>
   );
