@@ -32,21 +32,48 @@ function ContainedList({
     `${prefix}--contained-list--${size}`,
     className
   );
+  const filterChildren = children?.filter(
+    (child) => !child?.type?.displayName?.includes('Search')
+  );
+  const isChildSearch =
+    children[0]?.props?.placeholder !== 'Search' ? true : false;
 
   return (
     <div className={classes}>
-      <div className={`${prefix}--contained-list__header`}>
-        <div id={labelId} className={`${prefix}--contained-list__label`}>
-          {label}
+      {action && action.props.placeholder === 'Search' ? (
+        <div>
+          <div className={`${prefix}--contained-list__header`}>
+            <div id={labelId} className={`${prefix}--contained-list__label`}>
+              {label}
+            </div>
+            <div className={`${prefix}--contained-list__action`}>{action}</div>
+          </div>
+          {children && <ul aria-labelledby={labelId}>{filterChildren}</ul>}
         </div>
-        {action && action.type.displayName !== 'Search' && (
-          <div className={`${prefix}--contained-list__action`}>{action}</div>
-        )}
-      </div>
-      {action && action.type.displayName === 'Search' && (
-        <div className={`${prefix}--contained-list__search`}>{action}</div>
+      ) : (
+        <>
+          <div className={`${prefix}--contained-list__header`}>
+            <div id={labelId} className={`${prefix}--contained-list__label`}>
+              {label}
+            </div>
+            {action && action.props.placeholder !== 'Search' && (
+              <div className={`${prefix}--contained-list__action`}>
+                {action}
+              </div>
+            )}
+          </div>
+          {children && isChildSearch ? (
+            <ul aria-labelledby={labelId}>{children}</ul>
+          ) : (
+            <>
+              <div className={`${prefix}--contained-list__search`}>
+                {children[0]}
+              </div>
+              <ul aria-labelledby={labelId}>{children[1]}</ul>
+            </>
+          )}
+        </>
       )}
-      <ul aria-labelledby={labelId}>{children}</ul>
     </div>
   );
 }

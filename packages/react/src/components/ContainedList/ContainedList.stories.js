@@ -30,6 +30,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import mdx from './ContainedList.mdx';
 
 import ContainedList, { ContainedListItem } from '.';
+import ExpandableSearch from '../ExpandableSearch';
 
 export default {
   title: 'Components/ContainedList',
@@ -119,16 +120,69 @@ export const WithActions = () => {
   );
 
   return (
-    <ContainedList
-      label="List title"
-      kind="on-page"
-      action={<Search placeholder="Search" size="lg" />}>
+    <ContainedList label="List title" kind="on-page" action={''}>
       <ContainedListItem action={itemAction}>List item</ContainedListItem>
       <ContainedListItem action={itemAction} disabled>
         List item
       </ContainedListItem>
       <ContainedListItem action={itemAction}>List item</ContainedListItem>
       <ContainedListItem action={itemAction}>List item</ContainedListItem>
+    </ContainedList>
+  );
+};
+
+export const WithExpandableSearch = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  useEffect(() => {
+    const listItems = [
+      'List item 1',
+      'List item 2',
+      'List item 3',
+      'List item 4',
+      'List item 5',
+      'List item 6',
+      'List item 7',
+      'List item 8',
+    ];
+
+    const results = listItems.filter((listItem) =>
+      listItem.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(results);
+  }, [searchTerm]);
+
+  const itemAction = (
+    <Button
+      kind="ghost"
+      iconDescription="Dismiss"
+      hasIconOnly
+      renderIcon={SubtractAlt}
+    />
+  );
+
+  return (
+    <ContainedList
+      label="List title"
+      kind="on-page"
+      action={
+        <ExpandableSearch
+          placeholder="Search"
+          value={searchTerm}
+          onChange={handleChange}
+          closeButtonLabelText="Clear search input"
+          size="lg"
+        />
+      }>
+      {searchResults.map((listItem, key) => (
+        <ContainedListItem key={key} action={itemAction}>
+          {listItem}
+        </ContainedListItem>
+      ))}
     </ContainedList>
   );
 };
@@ -168,18 +222,14 @@ export const WithSearch = () => {
   );
 
   return (
-    <ContainedList
-      label="List title TEST"
-      kind="on-page"
-      action={
-        <Search
-          placeholder="Search"
-          value={searchTerm}
-          onChange={handleChange}
-          closeButtonLabelText="Clear search input"
-          size="lg"
-        />
-      }>
+    <ContainedList label="List title" kind="on-page" action={''}>
+      <Search
+        placeholder="Search"
+        value={searchTerm}
+        onChange={handleChange}
+        closeButtonLabelText="Clear search input"
+        size="lg"
+      />
       {searchResults.map((listItem, key) => (
         <ContainedListItem key={key} action={itemAction}>
           {listItem}
@@ -201,10 +251,7 @@ export const WithInteractiveItemsAndActions = () => {
   );
 
   return (
-    <ContainedList
-      label="List title"
-      kind="on-page"
-      action={<Search placeholder="Search" size="lg" />}>
+    <ContainedList label="List title" kind="on-page" action={''}>
       <ContainedListItem action={itemAction} onClick={onClick}>
         List item
       </ContainedListItem>
