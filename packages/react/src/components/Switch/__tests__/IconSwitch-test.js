@@ -49,7 +49,7 @@ describe('IconSwitch', () => {
       expect(onClick).not.toHaveBeenCalled();
     });
 
-    it('should call onClick when expected', () => {
+    it('should call onClick when expected', async () => {
       const onClick = jest.fn();
       render(
         <IconSwitch text="Workspace" onClick={onClick}>
@@ -57,12 +57,12 @@ describe('IconSwitch', () => {
         </IconSwitch>
       );
 
-      userEvent.click(screen.getByRole('tab'));
+      await userEvent.click(screen.getByRole('tab'));
 
       expect(onClick).toHaveBeenCalled();
     });
 
-    it('should call onKeyDown when expected', () => {
+    it('should call onKeyDown when expected', async () => {
       const onKeyDown = jest.fn();
       render(
         <IconSwitch text="Workspace" onKeyDown={onKeyDown}>
@@ -70,7 +70,7 @@ describe('IconSwitch', () => {
         </IconSwitch>
       );
 
-      userEvent.type(screen.getByRole('tab'), 'enter');
+      await userEvent.type(screen.getByRole('tab'), 'enter');
 
       expect(onKeyDown).toHaveBeenCalled();
     });
