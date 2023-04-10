@@ -22,10 +22,18 @@ test.describe('ContentSwitcher', () => {
         });
       });
 
-      test('icon only @vrt', async ({ page }) => {
+      test('with layer @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'ContentSwitcher',
-          id: 'components-contentswitcher--icon-only',
+          id: 'components-contentswitcher--with-layer',
+          theme,
+        });
+      });
+
+      test('icon only with layer @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'ContentSwitcher',
+          id: 'components-contentswitcher--icon-only-with-layer',
           theme,
         });
       });
