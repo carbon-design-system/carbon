@@ -54,6 +54,12 @@
   }
 
   .#{$prefix}--contained-list__search
+    .#{$prefix}--search-input
+    ~ .#{$prefix}--search-close:hover {
+    border-bottom: 1px solid transparent;
+  }
+
+  .#{$prefix}--contained-list__search
     .#{$prefix}--search-input:focus
     ~ .#{$prefix}--search-close:hover {
     border: 2px solid $focus;
