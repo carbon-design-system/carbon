@@ -35,8 +35,8 @@
     "postinstall": "carbon-telemetry collect --install && node scripts/postinstall.js"
   },
   "peerDependencies": {
-    "react": "^16.8.6 || ^17.0.1",
-    "react-dom": "^16.8.6 || ^17.0.1",
+    "react": "^16.8.6 || ^17.0.1 || ^18.2.0",
+    "react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0",
     "sass": "^1.33.0"
   },
   "dependencies": {
@@ -61,8 +61,8 @@
     "babel-preset-carbon": "^0.4.0",
     "browserslist-config-carbon": "^11.1.0",
     "fs-extra": "^10.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "rimraf": "^4.0.0",
     "rollup": "^2.79.1",
     "rollup-plugin-strip-banner": "^2.0.0"

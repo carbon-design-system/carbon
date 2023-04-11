@@ -72,7 +72,7 @@ describe('RadioButton', () => {
     expect(screen.getByRole('radio')).toHaveAttribute('id', 'test-id');
   });
 
-  it('should invoke onChange with expected arguments', () => {
+  it('should invoke onChange with expected arguments', async () => {
     const onChange = jest.fn();
 
     render(
@@ -84,7 +84,7 @@ describe('RadioButton', () => {
       />
     );
 
-    userEvent.click(screen.getByRole('radio'));
+    await userEvent.click(screen.getByRole('radio'));
 
     expect(onChange).toHaveBeenCalled();
     expect(onChange).toHaveBeenCalledWith(

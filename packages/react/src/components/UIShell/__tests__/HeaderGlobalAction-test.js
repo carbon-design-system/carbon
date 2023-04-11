@@ -71,7 +71,7 @@ describe('HeaderGlobalAction', () => {
     );
   });
 
-  it('should call `onClick` when the <button> is clicked', () => {
+  it('should call `onClick` when the <button> is clicked', async () => {
     const onClick = jest.fn();
     render(
       <HeaderGlobalAction aria-label="test" onClick={onClick}>
@@ -79,7 +79,7 @@ describe('HeaderGlobalAction', () => {
       </HeaderGlobalAction>
     );
 
-    userEvent.click(screen.getByLabelText('test'));
+    await userEvent.click(screen.getByLabelText('test'));
 
     expect(onClick).toHaveBeenCalled();
   });

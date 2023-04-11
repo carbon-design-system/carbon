@@ -13,6 +13,8 @@ import { Copy as CopyIcon } from '@carbon/icons-react';
 
 jest.useFakeTimers();
 
+const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+
 describe('Copy', () => {
   it('should set tabIndex if one is passed via props', () => {
     render(
@@ -61,7 +63,7 @@ describe('Button props', () => {
     expect(screen.getByTestId('copy-button-3')).toBeDisabled();
   });
 
-  it('should call the click handler', () => {
+  it('should call the click handler', async () => {
     const onClick = jest.fn();
     render(
       <Copy
@@ -74,13 +76,13 @@ describe('Button props', () => {
     );
 
     const button = screen.getByTestId('copy-button-4');
-    userEvent.click(button);
+    await user.click(button);
     expect(onClick).toHaveBeenCalled();
   });
 });
 
 describe('Feedback', () => {
-  it('should make the feedback visible for a limited amount of time', () => {
+  it('should make the feedback visible for a limited amount of time', async () => {
     render(
       <Copy
         aria-label="Copy button"
@@ -91,7 +93,7 @@ describe('Feedback', () => {
     );
 
     const button = screen.getByTestId('copy-button-5');
-    userEvent.click(button);
+    await user.click(button);
 
     expect(button).toHaveClass('cds--copy-btn--animating');
     act(() => {
@@ -103,7 +105,7 @@ describe('Feedback', () => {
     expect(button).not.toHaveClass('cds--copy-btn--animating');
   });
 
-  it('should be able to specify the feedback message', () => {
+  it('should be able to specify the feedback message', async () => {
     render(
       <Copy
         title="Copy title"
@@ -114,11 +116,11 @@ describe('Feedback', () => {
     );
 
     const button = screen.getByTestId('copy-button-6');
-    userEvent.click(button);
+    await user.click(button);
     expect(screen.getAllByText('overriding-default-feedback').length).toBe(2);
   });
 
-  it('should allow users to override default feedback timeout via prop', () => {
+  it('should allow users to override default feedback timeout via prop', async () => {
     render(
       <Copy
         title="Copy title"
@@ -129,7 +131,7 @@ describe('Feedback', () => {
     );
 
     const button = screen.getByTestId('copy-button-7');
-    userEvent.click(button);
+    await user.click(button);
 
     expect(button).toHaveClass('cds--copy-btn--animating');
     act(() => {
