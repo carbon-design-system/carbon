@@ -26,6 +26,7 @@ function ProgressBar({
 }) {
   const labelId = useId('progress-bar');
   const helperId = useId('progress-bar-helper');
+  const helperTextId = useId('progress-bar-helper-text');
   const prefix = usePrefix();
 
   const isFinished = status === 'finished';
@@ -101,13 +102,16 @@ function ProgressBar({
         aria-busy={!isFinished}
         aria-invalid={isError}
         aria-labelledby={labelId}
+        aria-describedby={helperText ? helperTextId : undefined}
         aria-valuemin={!indeterminate ? 0 : null}
         aria-valuemax={!indeterminate ? max : null}
         aria-valuenow={!indeterminate ? cappedValue : null}>
         <div className={`${prefix}--progress-bar__bar`} ref={ref} />
       </div>
       {helperText && (
-        <div className={`${prefix}--progress-bar__helper-text`}>
+        <div
+          id={helperTextId}
+          className={`${prefix}--progress-bar__helper-text`}>
           {helperText}
           <div
             className={`${prefix}--visually-hidden`}

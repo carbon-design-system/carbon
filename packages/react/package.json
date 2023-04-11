@@ -37,8 +37,8 @@
     "storybook": "start-storybook -p 3000"
   },
   "peerDependencies": {
-    "react": "^16.8.6 || ^17.0.1",
-    "react-dom": "^16.8.6 || ^17.0.1",
+    "react": "^16.8.6 || ^17.0.1 || ^18.2.0",
+    "react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0",
     "sass": "^1.33.0"
   },
   "dependencies": {
@@ -59,7 +59,7 @@
     "lodash.omit": "^4.5.0",
     "lodash.throttle": "^4.1.1",
     "prop-types": "^15.7.2",
-    "react-is": "^17.0.2",
+    "react-is": "^18.2.0",
     "use-resize-observer": "^6.0.0",
     "wicg-inert": "^3.1.1",
     "window-or-global": "^1.0.1"
@@ -106,8 +106,8 @@
     "postcss-loader": "^7.0.0",
     "process": "^0.11.10",
     "prop-types": "^15.7.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "requestanimationframe": "^0.0.23",
     "rimraf": "^4.0.0",
     "rollup": "^2.79.1",

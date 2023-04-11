@@ -14,6 +14,7 @@
   - [Prerelease](#prerelease)
   - [Stable release](#stable-release)
   - [Post release](#post-release)
+  - [Manual patch release](#manual-patch-release)
 - [Previous releases](#previous-releases)
   - [How to determine if the previous major version needs to be released](#how-to-determine-if-the-previous-major-version-needs-to-be-released)
   - [Releasing the previous major version](#releasing-the-previous-major-version)
@@ -235,6 +236,92 @@ categories:
 - Revert to previous stable release: this strategy is helpful if the issue that
   has been identified is not able to be quickly remediated or the timeline is
   unknown
+
+### Manual Patch Release
+
+Occassionaly we need to do an off-cycle patch release to fix some broken
+functionality that was inadvertedly published in a previous release. In such
+cases, follow these steps below to ensure a proper patch release:
+
+- [ ] Go to your local version of the monorepo
+- [ ] Ensure your monorepo is up to date: `git fetch upstream`
+- [ ] Checkout to the tag of the release you want to publish a patch for (most
+      likely the latest release tag, to find the previous release, view the
+      [tag list](https://github.com/carbon-design-system/carbon/tags)).
+      `git checkout release/vX.Y.Z`
+- [ ] Create a new release branch with the intended version to be released.
+      Should be the same release that we previously checked out to incremented
+      by +0.0.1 to account for a new patch version.
+  - [ ] `git checkout -b release/vX.Y.Z`
+- [ ] Cherry pick the commit(s) that you want added onto the patch release
+      (these should be the hotfixes): `git cherry-pick ######`
+- [ ] Run `git log` to view the most recent commits
+- [ ] Validate the most recent commits are the release commit from the tag you
+      pulled in followed by the commit(s) you cherry-picked in.
+- [ ] Exit the log by pressing <kbd>q</kbd>
+- [ ] Run the following `lerna` command to version packages that have changed
+      since the last version
+
+  ```bash
+  yarn lerna version patch --no-git-tag-version --no-push --yes
+  ```
+
+- [ ] Verify in your changed files that all affected package versions have
+      changed by +0.0.1 (a patch version)
+- [ ] Run `yarn install`
+- [ ] Confirm that all file changes are either <kbd>package.json</kbd> files or
+      the <kbd>yarn.lock</kbd>, no other files should have changes at this
+      point.
+- [ ] Commit the changes by running:
+
+  ```bash
+  git add -A
+  git commit -m 'chore(release): vX.Y.Z'
+  git push --set-upstream origin release/vX.Y.Z
+  ```
+
+- [ ] Make a Pull Request with your branch
+  - [ ] Set the `base` branch of the PR to be `main`
+  - [ ] Title of PR: chore(release): vX.Y.Z
+  - [ ] Description: Release PR for vX.Y.Z, includes hotfixes from
+        commit(s) ######
+- [ ] Close the PR (we just opened it to have the release tracked in the github
+      history). When closing, add a comment stating that this was a manual
+      release and that the PR doesn’t need to be merged
+- [ ] Tag the release commit, and push it to `upstream`
+
+  - [ ] Make sure you're setting the correct tag version number.
+
+    ```bash
+    git tag -a vX.Y.Z -m 'vX.Y.Z'
+    git push upstream vX.Y.Z
+    ```
+
+- [ ] Verify that your push triggered a release action
+  - [https://github.com/carbon-design-system/carbon/actions?query=workflow%3ARelease](https://github.com/carbon-design-system/carbon/actions?query=workflow%3ARelease)
+- [ ] Verify that the action succeeded and the Release was published under the
+      `next` tag on [NPM](https://www.npmjs.com)
+
+- [ ] If the released package version looks correct, you'll need to manually
+      promote the necessary Carbon packages with new release versions to latest.
+
+  Note:
+
+  - Do NOT do this for the <kbd>carbon-components</kbd> package.
+  - You need to use the individual generatied version number for the package
+    here, not the released github tag version.
+
+- [ ] for each package (replace <kbd>carbon-components-react</kbd> with the
+      package name):
+  ```bash
+  npm dist tag add carbon-components-react@vX.Y.Z latest
+  ```
+- [ ] Verify the packages have been promoted to latest on
+      [NPM](https://www.npmjs.com)
+- [ ] Update the latest release notes with the generated output from Carbon Cli
+      by running from the root of the monorepo
+
+  `./packages/cli/bin/carbon-cli.js changelog vA.B.C..vX.Y.Z`
 
 ## Previous releases (v10)
 

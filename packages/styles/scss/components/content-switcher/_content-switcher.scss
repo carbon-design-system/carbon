@@ -113,21 +113,36 @@
     }
   }
 
-  .#{$prefix}--content-switcher-btn:first-child {
+  .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
+    .#{$prefix}--content-switcher-btn:first-child {
     border-left: rem(1px) solid $border-inverse;
     border-bottom-left-radius: rem(4px);
     border-top-left-radius: rem(4px);
+
+    &:disabled {
+      border-color: $border-disabled;
+      color: $text-disabled;
+    }
   }
 
-  .#{$prefix}--content-switcher-btn:last-child {
+  .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
+    .#{$prefix}--content-switcher-btn:last-child {
     border-right: rem(1px) solid $border-inverse;
     border-bottom-right-radius: rem(4px);
     border-top-right-radius: rem(4px);
+
+    &:disabled {
+      border-color: $border-disabled;
+      color: $text-disabled;
+    }
   }
 
-  .#{$prefix}--content-switcher--selected,
-  .#{$prefix}--content-switcher--selected:first-child,
-  .#{$prefix}--content-switcher--selected:last-child {
+  .#{$prefix}--content-switcher
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected,
+  .#{$prefix}--content-switcher
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:first-child,
+  .#{$prefix}--content-switcher
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:last-child {
     border: 0;
   }
 
@@ -142,7 +157,8 @@
     content: '';
   }
 
-  .#{$prefix}--content-switcher-btn:first-of-type::before {
+  .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
+    .#{$prefix}--content-switcher-btn:first-of-type::before {
     display: none;
   }
 
@@ -217,5 +233,120 @@
   // stylelint-disable-next-line no-duplicate-selectors
   .#{$prefix}--content-switcher-btn:focus {
     @include high-contrast-mode('focus');
+  }
+
+  // Icon Only overrides
+  .#{$prefix}--content-switcher--icon-only {
+    justify-content: flex-start;
+  }
+
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover__wrapper:first-child
+    .#{$prefix}--content-switcher-btn {
+    border-left: rem(1px) solid $border-inverse;
+    border-bottom-left-radius: rem(4px);
+    border-top-left-radius: rem(4px);
+  }
+
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover__wrapper:first-child
+    .#{$prefix}--content-switcher--selected[disabled],
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover__wrapper:last-child
+    .#{$prefix}--content-switcher--selected[disabled] {
+    border-color: $layer-selected-disabled;
+  }
+
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover__wrapper:last-child
+    .#{$prefix}--content-switcher-btn {
+    border-right: rem(1px) solid $border-inverse;
+    border-bottom-right-radius: rem(4px);
+    border-top-right-radius: rem(4px);
+  }
+
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover__wrapper:last-child
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected,
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover__wrapper:first-child
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
+    border-color: $background;
+  }
+
+  .#{$prefix}--content-switcher--lg .#{$prefix}--content-switcher-btn {
+    // accounts for the larger icon sizes to keep the switcher at 48px
+    padding-right: rem(14px);
+    padding-left: rem(14px);
+  }
+
+  .#{$prefix}--content-switcher--lg .#{$prefix}--content-switcher-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-btn
+    svg {
+    fill: $icon-primary;
+  }
+
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected
+    svg {
+    z-index: 1;
+    fill: $icon-inverse;
+  }
+
+  .#{$prefix}--content-switcher--icon-only.#{$prefix}--content-switcher--sm
+    .#{$prefix}--btn--sm {
+    height: 2rem;
+  }
+
+  // Subtle border overrides
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover__wrapper:first-of-type
+    .#{$prefix}--content-switcher-btn::before {
+    display: none;
+  }
+
+  .#{$prefix}--content-switcher-btn:focus::before,
+  .#{$prefix}--content-switcher-popover__wrapper:focus-within
+    + .#{$prefix}--content-switcher-popover__wrapper
+    .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher-btn:hover::before,
+  .#{$prefix}--content-switcher-popover__wrapper:not(.#{$prefix}--content-switcher-popover--disabled):hover
+    + .#{$prefix}--content-switcher-popover__wrapper
+    .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher--selected::before,
+  .#{$prefix}--content-switcher-popover--selected
+    + .#{$prefix}--content-switcher-popover__wrapper
+    .#{$prefix}--content-switcher-btn::before {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-btn[disabled] {
+    border-color: $border-inverse;
+  }
+
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-btn[disabled]
+    svg {
+    fill: $icon-disabled;
+  }
+
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-btn[disabled]:not(.#{$prefix}--content-switcher--selected):hover,
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover--selected
+    + .#{$prefix}--content-switcher-popover--disabled
+    .#{$prefix}--content-switcher-btn[disabled]:hover::before {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-btn[disabled]:hover::before {
+    background-color: $border-subtle;
   }
 }

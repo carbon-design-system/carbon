@@ -158,7 +158,7 @@ describe('Tab', () => {
     expect(screen.queryByText('test-secondary-label')).not.toBeInTheDocument();
   });
 
-  it('should call onClick from props if provided', () => {
+  it('should call onClick from props if provided', async () => {
     const onClick = jest.fn();
     render(
       <Tabs>
@@ -175,12 +175,12 @@ describe('Tab', () => {
       </Tabs>
     );
 
-    userEvent.click(screen.getByText('Tab Label 1'));
+    await userEvent.click(screen.getByText('Tab Label 1'));
 
     expect(onClick).toHaveBeenCalled();
   });
 
-  it('should call onKeyDown from props if provided', () => {
+  it('should call onKeyDown from props if provided', async () => {
     const onKeyDown = jest.fn();
     render(
       <Tabs>
@@ -197,7 +197,7 @@ describe('Tab', () => {
       </Tabs>
     );
 
-    userEvent.type(screen.getByText('Tab Label 1'), 'enter');
+    await userEvent.type(screen.getByText('Tab Label 1'), 'enter');
 
     expect(onKeyDown).toHaveBeenCalled();
   });

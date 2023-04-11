@@ -100,7 +100,7 @@ describe('DataTable.TableExpandRow', () => {
   });
 
   describe('behaves as expected', () => {
-    it('should expand when button is clicked and onExpand to be called', () => {
+    it('should expand when button is clicked and onExpand to be called', async () => {
       render(
         <Table>
           <TableBody>
@@ -111,7 +111,7 @@ describe('DataTable.TableExpandRow', () => {
       );
 
       expect(mockProps.onExpand).toHaveBeenCalledTimes(0);
-      userEvent.click(screen.getByRole('button'));
+      await userEvent.click(screen.getByRole('button'));
       expect(mockProps.onExpand).toHaveBeenCalledTimes(1);
     });
   });
