@@ -477,6 +477,7 @@
   // readonly
   .#{$prefix}--dropdown--readonly,
   .#{$prefix}--dropdown--readonly:hover {
+    border-bottom-color: $border-subtle;
     background-color: transparent;
   }
 

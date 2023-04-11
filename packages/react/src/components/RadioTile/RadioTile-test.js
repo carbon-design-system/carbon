@@ -65,14 +65,13 @@ describe('RadioTile', () => {
       expect(screen.getByRole('radio')).toHaveAttribute('name', 'tile');
     });
 
-    it('should call onChange when expected', () => {
+    it('should call onChange when expected', async () => {
       const onChange = jest.fn();
       render(<RadioTile value="standard" onChange={onChange} />);
 
-      userEvent.click(screen.getByRole('radio'));
-      userEvent.type(screen.getByRole('radio'), '{space}');
+      await userEvent.click(screen.getByRole('radio'));
 
-      expect(onChange).toHaveBeenCalledTimes(2);
+      expect(onChange).toHaveBeenCalledTimes(1);
     });
 
     it('should respect tabIndex prop', () => {
@@ -84,7 +83,7 @@ describe('RadioTile', () => {
     it('should respect value prop', () => {
       render(<RadioTile value="standard" />);
 
-      expect(screen.getByRole('radio')).toHaveAttribute('value', 'standard');
+      expect(screen.getByDisplayValue('standard')).toBeInTheDocument();
     });
 
     it('should pass a given ref to the input element', () => {

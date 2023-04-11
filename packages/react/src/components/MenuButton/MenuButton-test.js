@@ -108,7 +108,7 @@ describe('MenuButton', () => {
 
       await userEvent.click(screen.getByRole('button'));
 
-      expect(screen.getByRole('menu')).toBeTruthy();
+      expect(screen.getByRole('menu')).toBeInTheDocument();
       expect(screen.getByRole('menuitem')).toHaveTextContent(/^Action$/);
     });
   });

@@ -21,7 +21,7 @@ describe('Tabs', () => {
       </Tabs>
     );
 
-    expect(screen.getByText('Tab Label 2')).toHaveAttribute(
+    expect(screen.getByText('Tab Label 2').parentElement).toHaveAttribute(
       'aria-selected',
       'true'
     );
@@ -67,7 +67,9 @@ describe('Tab', () => {
       </Tabs>
     );
 
-    expect(screen.getByText('Tab Label 2')).toHaveClass('custom-class');
+    expect(screen.getByText('Tab Label 2').parentElement).toHaveClass(
+      'custom-class'
+    );
   });
 
   it('should not select a disabled tab and select next tab', () => {
@@ -86,13 +88,13 @@ describe('Tab', () => {
       </Tabs>
     );
 
-    expect(screen.getByText('Tab Label 1')).toHaveAttribute(
+    expect(screen.getByText('Tab Label 1').parentElement).toHaveAttribute(
       'aria-selected',
       'false'
     );
 
     // By default, if a Tab is disabled, the next Tab should be selected
-    expect(screen.getByText('Tab Label 2')).toHaveAttribute(
+    expect(screen.getByText('Tab Label 2').parentElement).toHaveAttribute(
       'aria-selected',
       'true'
     );
@@ -113,10 +115,50 @@ describe('Tab', () => {
         </TabPanels>
       </Tabs>
     );
-    expect(screen.getByText('Tab Label 1').tagName).toBe('DIV');
+    expect(screen.getByText('Tab Label 1').parentElement.tagName).toBe('DIV');
   });
 
-  it('should call onClick from props if provided', () => {
+  it('should render secondaryLabel in contained tabs if provided', () => {
+    render(
+      <Tabs>
+        <TabList aria-label="List of tabs" contained>
+          <Tab as="div" secondaryLabel="test-secondary-label">
+            Tab Label 1
+          </Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+    expect(screen.getByText('test-secondary-label')).toBeInTheDocument();
+  });
+
+  it('should not render secondaryLabel in non-contained tabs', () => {
+    render(
+      <Tabs>
+        <TabList aria-label="List of tabs">
+          <Tab as="div" secondaryLabel="test-secondary-label">
+            Tab Label 1
+          </Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+    expect(screen.queryByText('test-secondary-label')).not.toBeInTheDocument();
+  });
+
+  it('should call onClick from props if provided', async () => {
     const onClick = jest.fn();
     render(
       <Tabs>
@@ -133,12 +175,12 @@ describe('Tab', () => {
       </Tabs>
     );
 
-    userEvent.click(screen.getByText('Tab Label 1'));
+    await userEvent.click(screen.getByText('Tab Label 1'));
 
     expect(onClick).toHaveBeenCalled();
   });
 
-  it('should call onKeyDown from props if provided', () => {
+  it('should call onKeyDown from props if provided', async () => {
     const onKeyDown = jest.fn();
     render(
       <Tabs>
@@ -155,7 +197,7 @@ describe('Tab', () => {
       </Tabs>
     );
 
-    userEvent.type(screen.getByText('Tab Label 1'), 'enter');
+    await userEvent.type(screen.getByText('Tab Label 1'), 'enter');
 
     expect(onKeyDown).toHaveBeenCalled();
   });

@@ -36,7 +36,7 @@ interface TooltipBaseProps {
   className?: string;
 
   /**
-   * Determines wether the tooltip should close when inner content is activated (click, Enter or Space)
+   * Determines whether the tooltip should close when inner content is activated (click, Enter or Space)
    */
   closeOnActivation?: boolean;
 
