@@ -8,44 +8,32 @@
  */
 
 import React from 'react';
-import { render } from 'react-dom';
+import { render } from '@testing-library/react';
 import Icon from '../Icon';
 
 describe('Icon', () => {
-  let mountNode;
-
-  beforeEach(() => {
-    mountNode = document.createElement('div');
-    document.body.appendChild(mountNode);
-  });
-
-  afterEach(() => {
-    mountNode.parentNode.removeChild(mountNode);
-  });
-
   it('should render', () => {
     expect(() => {
       render(
         <Icon width={16} height={16} viewBox="0 0 16 16">
           <circle cx={8} cy={8} r={8} />
-        </Icon>,
-        mountNode
+        </Icon>
       );
     }).not.toThrow();
   });
 
   it('should treat focusable as a string', () => {
-    render(
+    const { container, rerender } = render(
       <Icon width={16} height={16} viewBox="0 0 16 16">
         <circle cx={8} cy={8} r={8} />
-      </Icon>,
-      mountNode
+      </Icon>
     );
 
-    const getContainer = () => mountNode.querySelector('svg');
+    const getContainer = () => container.querySelector('svg');
     expect(getContainer()).toHaveAttribute('focusable', 'false');
 
-    render(<Icon focusable />, mountNode);
+    rerender(<Icon focusable />);
+
     expect(getContainer()).toHaveAttribute('focusable', 'true');
   });
 
@@ -54,19 +42,18 @@ describe('Icon', () => {
     const ref = jest.fn((node) => {
       svg = node;
     });
-    render(<Icon ref={ref} />, mountNode);
-    expect(svg).toEqual(mountNode.querySelector('svg'));
+    const { container } = render(<Icon ref={ref} />);
+    expect(svg).toEqual(container.querySelector('svg'));
   });
 
   it('should be focusable if an aria label and tab index is used', () => {
-    const getContainer = () => mountNode.querySelector('svg');
+    const getContainer = () => container.querySelector('svg');
 
     // Test without a tabIndex, should not be focusable
-    render(
+    const { container, rerender } = render(
       <Icon width={16} height={16} viewBox="0 0 16 16" aria-label="Mock icon">
         <circle cx={8} cy={8} r={8} />
-      </Icon>,
-      mountNode
+      </Icon>
     );
 
     expect(getContainer()).toHaveAttribute('aria-label', 'Mock icon');
@@ -75,11 +62,10 @@ describe('Icon', () => {
 
     // Test without aria-label and with tabIndex, should not be focusable
     // because we require a label in that case
-    render(
+    rerender(
       <Icon width={16} height={16} viewBox="0 0 16 16" tabIndex="0">
         <circle cx={8} cy={8} r={8} />
-      </Icon>,
-      mountNode
+      </Icon>
     );
 
     expect(getContainer()).not.toHaveAttribute('aria-label');
@@ -87,7 +73,7 @@ describe('Icon', () => {
     expect(document.activeElement === getContainer()).toBe(false);
 
     // Test with aria-label and tabIndex, should be focusable
-    render(
+    rerender(
       <Icon
         width={16}
         height={16}
@@ -95,8 +81,7 @@ describe('Icon', () => {
         aria-label="Mock icon"
         tabIndex="0">
         <circle cx={8} cy={8} r={8} />
-      </Icon>,
-      mountNode
+      </Icon>
     );
 
     expect(getContainer()).toHaveAttribute('aria-label', 'Mock icon');
