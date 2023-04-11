@@ -29,7 +29,8 @@ import { Props, Story, Preview } from '@storybook/addon-docs';
 Within the Contained List title you can pass in an `ExpandableSearch` component within the `action` prop as seen below. 
 The `ExpandableSearch` will give you the capability to expand and collapse the search bar within the title. 
 However, we do not support passing in the `ExpandableSearch` within the title action prop while passing in the `Search` component 
-as a child at the same time. To prevent this, we have added funtionality to support both designs and both use cases. Please see [Persistent Search](#persistent-search) docs below. 
+as a child at the same time. If this happens, the `ExpandableSearch` in the title will override any other `Search` passed in as a child. 
+To prevent this potential conflict, we have added funtionality to support both designs and both use cases. Please see [Persistent Search](#persistent-search) docs below. 
 
 ```js
   export const WithExpandableSearch = () => {
