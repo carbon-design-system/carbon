@@ -160,7 +160,7 @@ describe('Tab', () => {
     expect(screen.queryByText('test-secondary-label')).not.toBeInTheDocument();
   });
 
-  it('should display an icon from renderIcon prop', () => {
+  it('should display an icon from renderIcon prop', async () => {
     render(
       <Tabs>
         <TabList aria-label="List of tabs">
