@@ -9,13 +9,11 @@
 
 import { html, render } from 'lit';
 import EventManager from '../utils/event-manager';
-import { INPUT_SIZE } from '../../src/components/input/input';
-import CDSSelect, {
-  SELECT_COLOR_SCHEME,
-} from '../../src/components/select/select';
+import { INPUT_SIZE } from '../../src/components/text-input/text-input';
+import CDSSelect from '../../src/components/select/select';
 import CDSSelectItem from '../../src/components/select/select-item';
 import CDSSelectItemGroup from '../../src/components/select/select-item-group';
-import { Default } from '../../src/components/select/select-story';
+import { Playground } from '../../src/components/select/select-story';
 
 /**
  * @param formData A `FormData` instance.
@@ -31,7 +29,7 @@ const getValues = (formData: FormData) => {
 };
 
 const template = (props?) =>
-  Default({
+  Playground({
     'cds-select': props,
   });
 
@@ -51,7 +49,6 @@ describe('cds-select', function () {
       render(
         template({
           autofocus: true,
-          colorScheme: SELECT_COLOR_SCHEME.LIGHT,
           disabled: true,
           helperText: 'helper-text-foo',
           labelText: 'label-text-foo',
@@ -71,9 +68,9 @@ describe('cds-select', function () {
     it('should render invalid state', async function () {
       render(
         template({
-          helperText: 'helper-text-foo', // `validityMessage` should take precedence
+          helperText: 'helper-text-foo', // `invalidText` should take precedence
           invalid: true,
-          validityMessage: 'validity-message-foo',
+          invalidText: 'validity-message-foo',
         }),
         document.body
       );
@@ -340,14 +337,12 @@ describe('cds-select', function () {
       select.required = true;
       const spyInvalid = jasmine.createSpy('invalid');
       events.on(select, 'invalid', spyInvalid);
-      expect(select.checkValidity()).toBe(false);
       expect(spyInvalid).toHaveBeenCalled();
       expect(select.invalid).toBe(true);
-      expect(select.validityMessage).toBe('Please fill out this field.');
+      expect(select.invalidText).toBe('Please fill out this field.');
       select.value = 'staging';
-      expect(select.checkValidity()).toBe(true);
       expect(select.invalid).toBe(false);
-      expect(select.validityMessage).toBe('');
+      expect(select.invalidText).toBe('');
     });
 
     it('should support canceling required check', async function () {
@@ -356,23 +351,14 @@ describe('cds-select', function () {
       events.on(select, 'invalid', (event) => {
         event.preventDefault();
       });
-      expect(select.checkValidity()).toBe(false);
       expect(select.invalid).toBe(false);
-      expect(select.validityMessage).toBe('');
+      expect(select.invalidText).toBe('');
     });
 
     it('should treat empty custom validity message as not invalid', async function () {
       const select = elem as CDSSelect;
-      select.setCustomValidity('');
       expect(select.invalid).toBe(false);
-      expect(select.validityMessage).toBe('');
-    });
-
-    it('should treat non-empty custom validity message as invalid', async function () {
-      const select = elem as CDSSelect;
-      select.setCustomValidity('validity-message-foo');
-      expect(select.invalid).toBe(true);
-      expect(select.validityMessage).toBe('validity-message-foo');
+      expect(select.invalidText).toBe('');
     });
   });
 

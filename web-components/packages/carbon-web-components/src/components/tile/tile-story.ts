@@ -307,7 +307,7 @@ export const ExpandableWithInteractive = (args) => {
       </cds-tile-above-the-fold-content>
       <cds-tile-below-the-fold-content style="height: 300px">
         Below the fold content here
-        <cds-input></cds-input>
+        <cds-text-input></cds-text-input>
       </cds-tile-below-the-fold-content>
     </cds-expandable-tile>
   `;
@@ -337,7 +337,7 @@ export const ExpandableWithLayer = (args) => {
         </cds-tile-above-the-fold-content>
         <cds-tile-below-the-fold-content style="height: 200px">
           Below the fold content here
-          <cds-input></cds-input>
+          <cds-text-input></cds-text-input>
         </cds-tile-below-the-fold-content>
       </cds-expandable-tile>
       <cds-layer>
@@ -354,7 +354,7 @@ export const ExpandableWithLayer = (args) => {
           </cds-tile-above-the-fold-content>
           <cds-tile-below-the-fold-content style="height: 200px">
             Below the fold content here
-            <cds-input></cds-input>
+            <cds-text-input></cds-text-input>
           </cds-tile-below-the-fold-content>
         </cds-expandable-tile>
         <cds-layer>
@@ -371,7 +371,7 @@ export const ExpandableWithLayer = (args) => {
             </cds-tile-above-the-fold-content>
             <cds-tile-below-the-fold-content style="height: 200px">
               Below the fold content here
-              <cds-input></cds-input>
+              <cds-text-input></cds-text-input>
             </cds-tile-below-the-fold-content>
           </cds-expandable-tile>
         </cds-layer>

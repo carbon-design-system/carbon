@@ -35,14 +35,14 @@ LICENSE file in the root directory of this source tree.
       }
 
       cds-button,
-      cds-input,
+      cds-text-input,
       cds-form-item,
       cds-inline-notification {
         visibility: hidden;
       }
 
       cds-button:defined,
-      cds-input:defined,
+      cds-text-input:defined,
       cds-form-item:defined,
       cds-inline-notification:defined {
         visibility: inherit;
@@ -53,10 +53,10 @@ LICENSE file in the root directory of this source tree.
     <form id="form-login">
       <cds-inline-notification id="notification" kind="error" hide-close-button title="Login failed" subtitle="Please correct below errors."></cds-inline-notification>
       <cds-form-item>
-        <cds-input id="input-username" type="text" name="username" label-text="Username" placeholder="Username"></cds-input>
+        <cds-text-input id="input-username" type="text" name="username" label-text="Username" placeholder="Username"></cds-text-input>
       </cds-form-item>
       <cds-form-item>
-        <cds-input id="input-password" type="password" name="password" label-text="Password" placeholder="Password"></cds-input>
+        <cds-text-input id="input-password" type="password" name="password" label-text="Password" placeholder="Password"></cds-text-input>
       </cds-form-item>
       <div className="cds-ce-demo-redux-form--btn-container">
         <cds-button id="btn-login">Log in</cds-button>

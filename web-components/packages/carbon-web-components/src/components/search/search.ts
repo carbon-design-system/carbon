@@ -17,7 +17,7 @@ import { prefix } from '../../globals/settings';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import FocusMixin from '../../globals/mixins/focus';
 import FormMixin from '../../globals/mixins/form';
-import { INPUT_SIZE } from '../input/input';
+import { INPUT_SIZE } from '../text-input/text-input';
 import { SEARCH_COLOR_SCHEME } from './defs';
 import styles from './search.scss';
 

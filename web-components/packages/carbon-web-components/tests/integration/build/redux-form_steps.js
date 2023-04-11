@@ -39,15 +39,15 @@ describe('Redux-form example', () => {
   }, Number(process.env.LAUNCH_TIMEOUT));
 
   it('should detect an invalid data', async () => {
-    await expect(page).toFill('cds-input[name="username"]', 'john');
-    await expect(page).toFill('cds-input[name="password"]', 'foo');
+    await expect(page).toFill('cds-text-input[name="username"]', 'john');
+    await expect(page).toFill('cds-text-input[name="password"]', 'foo');
     await expect(page).toClick('cds-button[kind="primary"]');
-    await expect(page).toMatchElement('cds-input[name="password"][invalid]', { timeout: 2000 });
+    await expect(page).toMatchElement('cds-text-input[name="password"][invalid]', { timeout: 2000 });
   });
 
   it('should submit the data once all data is valid', async () => {
-    await expect(page).toFill('cds-input[name="username"]', 'john');
-    await expect(page).toFill('cds-input[name="password"]', 'redux-form');
+    await expect(page).toFill('cds-text-input[name="username"]', 'john');
+    await expect(page).toFill('cds-text-input[name="password"]', 'redux-form');
     await expect(page).toClick('cds-button[kind="primary"]');
     await expect(page).toMatch('You submitted:', { timeout: 2000 });
   });

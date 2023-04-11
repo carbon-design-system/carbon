@@ -13,7 +13,7 @@ import { property, customElement, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
-import { INPUT_SIZE } from '../input/input';
+import { INPUT_SIZE } from '../text-input/text-input';
 import BXSearch from '../search/search';
 import styles from './data-table.scss';
 

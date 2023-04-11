@@ -10,11 +10,10 @@
 import { html, render } from 'lit';
 import EventManager from '../utils/event-manager';
 
-import CDSInput, {
-  INPUT_COLOR_SCHEME,
+import CDSTextInput, {
   INPUT_TYPE,
-} from '../../src/components/input/input';
-import { Default } from '../../src/components/input/input-story';
+} from '../../src/components/text-input/text-input';
+import { Playground } from '../../src/components/text-input/text-input-story';
 
 /**
  * @param formData A `FormData` instance.
@@ -30,11 +29,11 @@ const getValues = (formData: FormData) => {
 };
 
 const template = (props?) =>
-  Default({
-    'cds-input': props,
+  Playground({
+    'cds-text-input': props,
   });
 
-describe('cds-input', function () {
+describe('cds-text-input', function () {
   const events = new EventManager();
 
   describe('Rendering', function () {
@@ -43,7 +42,6 @@ describe('cds-input', function () {
         template({
           autocomplete: 'on',
           autofocus: true,
-          colorScheme: INPUT_COLOR_SCHEME.LIGHT,
           disabled: true,
           helperText: 'helper-text-foo',
           hidePasswordLabel: 'Hide password',
@@ -63,7 +61,9 @@ describe('cds-input', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('cds-input' as any)).toMatchSnapshot({
+      expect(
+        document.body.querySelector('cds-text-input' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -128,11 +128,11 @@ describe('cds-input', function () {
     beforeEach(async function () {
       render(template(), document.body);
       await Promise.resolve();
-      elem = document.body.querySelector('cds-input')!;
+      elem = document.body.querySelector('cds-text-input')!;
     });
 
     it('should support checking if required value exists', async function () {
-      const input = elem as CDSInput;
+      const input = elem as CDSTextInput;
       input.required = true;
       const spyInvalid = jasmine.createSpy('invalid');
       events.on(input, 'invalid', spyInvalid);
@@ -147,7 +147,7 @@ describe('cds-input', function () {
     });
 
     it('should support canceling required check', async function () {
-      const input = elem as CDSInput;
+      const input = elem as CDSTextInput;
       input.required = true;
       events.on(input, 'invalid', (event) => {
         event.preventDefault();
@@ -158,14 +158,14 @@ describe('cds-input', function () {
     });
 
     it('should treat empty custom validity message as not invalid', async function () {
-      const input = elem as CDSInput;
+      const input = elem as CDSTextInput;
       input.setCustomValidity('');
       expect(input.invalid).toBe(false);
       expect(input.validityMessage).toBe('');
     });
 
     it('should treat non-empty custom validity message as invalid', async function () {
-      const input = elem as CDSInput;
+      const input = elem as CDSTextInput;
       input.setCustomValidity('validity-message-foo');
       expect(input.invalid).toBe(true);
       expect(input.validityMessage).toBe('validity-message-foo');

@@ -10,7 +10,7 @@
 import { html, render } from 'lit';
 import EventManager from '../utils/event-manager';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { INPUT_SIZE } from '../../src/components/input/input';
+import { INPUT_SIZE } from '../../src/components/text-input/text-input';
 import { TABLE_COLOR_SCHEME } from '../../src/components/data-table/table';
 import BXTableHeaderCell, {
   TABLE_SORT_CYCLE,

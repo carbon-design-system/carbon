@@ -8,7 +8,7 @@
  */
 
 import { action } from '@storybook/addon-actions';
-import { INPUT_COLOR_SCHEME, INPUT_SIZE, INPUT_TYPE } from '../input';
+import { INPUT_COLOR_SCHEME, INPUT_SIZE, INPUT_TYPE } from '../text-input';
 
 const inputTypes = Object.entries(INPUT_TYPE).reduce(
   (acc, [key, val]) => ({

@@ -1,4 +1,4 @@
-# `cds-input`
+# `cds-text-input`
 
 ## `Rendering`
 

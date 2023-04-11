@@ -16,7 +16,7 @@ import textNullable from '../../../.storybook/knob-text-nullable';
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
 import { prefix } from '../../globals/settings';
-import { INPUT_SIZE } from '../input/input';
+import { INPUT_SIZE } from '../text-input/text-input';
 import './select';
 import './select-item-group';
 import './select-item';

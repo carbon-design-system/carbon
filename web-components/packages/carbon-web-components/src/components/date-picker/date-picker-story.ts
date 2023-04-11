@@ -11,7 +11,7 @@ import { boolean, select } from '@storybook/addon-knobs';
 import { prefix } from '../../globals/settings';
 import textNullable from '../../../.storybook/knob-text-nullable';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { INPUT_SIZE } from '../input/input';
+import { INPUT_SIZE } from '../text-input/text-input';
 import './date-picker';
 import {
   DATE_PICKER_INPUT_COLOR_SCHEME,

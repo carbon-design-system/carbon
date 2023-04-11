@@ -12,7 +12,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import { INPUT_SIZE } from '../input/input';
+import { INPUT_SIZE } from '../text-input/text-input';
 import { SEARCH_COLOR_SCHEME } from './search';
 import './search-skeleton';
 import storyDocs from './search-story.mdx';

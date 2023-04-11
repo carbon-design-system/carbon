@@ -18,7 +18,7 @@ import Subtract16 from '@carbon/icons/lib/subtract/16';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import { NUMBER_INPUT_VALIDATION_STATUS } from './defs';
 import styles from './number-input.scss';
-import CDSInput, { INPUT_SIZE } from '../input/input';
+import CDSTextInput, { INPUT_SIZE } from '../text-input/text-input';
 
 export { NUMBER_INPUT_VALIDATION_STATUS };
 
@@ -31,7 +31,7 @@ export { NUMBER_INPUT_VALIDATION_STATUS };
  * @slot validity-message - The validity message. If present and non-empty, this input shows the UI of its invalid state.
  */
 @customElement(`${prefix}-number-input`)
-class CDSNumberInput extends CDSInput {
+class CDSNumberInput extends CDSTextInput {
   /**
    * Handles `input` event on the `<input>` in the shadow DOM.
    */

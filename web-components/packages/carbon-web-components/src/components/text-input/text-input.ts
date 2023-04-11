@@ -14,6 +14,7 @@ import { prefix } from '../../globals/settings';
 import View16 from '@carbon/icons/lib/view/16';
 import ViewOff16 from '@carbon/icons/lib/view--off/16';
 import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
+import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16';
 import {
   FLOATING_MENU_ALIGNMENT,
   FLOATING_MENU_DIRECTION,
@@ -22,20 +23,20 @@ import ifNonEmpty from '../../globals/directives/if-non-empty';
 import FormMixin from '../../globals/mixins/form';
 import ValidityMixin from '../../globals/mixins/validity';
 import { INPUT_COLOR_SCHEME, INPUT_SIZE, INPUT_TYPE } from './defs';
-import styles from './input.scss';
+import styles from './text-input.scss';
 
 export { INPUT_COLOR_SCHEME, INPUT_SIZE, INPUT_TYPE };
 
 /**
- * Input element. Supports all the usual attributes for textual input types
+ * Text Input element. Supports all the usual attributes for textual input types
  *
- * @element cds-input
+ * @element cds-text-input
  * @slot helper-text - The helper text.
  * @slot label-text - The label text.
  * @slot validity-message - The validity message. If present and non-empty, this input shows the UI of its invalid state.
  */
-@customElement(`${prefix}-input`)
-class CDSInput extends ValidityMixin(FormMixin(LitElement)) {
+@customElement(`${prefix}-text-input`)
+class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
   /**
    * The underlying input element
    */
@@ -75,12 +76,6 @@ class CDSInput extends ValidityMixin(FormMixin(LitElement)) {
    */
   @property({ type: Boolean })
   autofocus = false;
-
-  /**
-   * The color scheme.
-   */
-  @property({ attribute: 'color-scheme', reflect: true })
-  colorScheme = INPUT_COLOR_SCHEME.REGULAR;
 
   /**
    * Controls the disabled state of the input
@@ -140,7 +135,7 @@ class CDSInput extends ValidityMixin(FormMixin(LitElement)) {
    * Generic label that will be used as the textual representation of what this field is for
    */
   @property({ attribute: 'label' })
-  label = 'label text';
+  label = '';
 
   /**
    * Name for the input in the `FormData`
@@ -207,6 +202,12 @@ class CDSInput extends ValidityMixin(FormMixin(LitElement)) {
   size = INPUT_SIZE.MEDIUM;
 
   /**
+   * true to use the inline version.
+   */
+  @property({ type: Boolean, reflect: true })
+  inline = false;
+
+  /**
    * Specify the alignment of the tooltip to the icon-only button.
    * Can be one of: start, center, or end.
    */
@@ -267,31 +268,98 @@ class CDSInput extends ValidityMixin(FormMixin(LitElement)) {
   }
 
   render() {
-    const { _handleInput: handleInput } = this;
+    const {
+      disabled,
+      enableCounter,
+      helperText,
+      hideLabel,
+      inline,
+      invalid,
+      invalidText,
+      label,
+      maxCount,
+      readonly,
+      required,
+      size,
+      type,
+      warn,
+      warnText,
+      value,
+      _handleInput: handleInput,
+    } = this;
 
     const invalidIcon = WarningFilled16({
       class: `${prefix}--text-input__invalid-icon`,
     });
 
+    const warnIcon = WarningAltFilled16({
+      class: `${prefix}--text-input__invalid-icon ${prefix}--text-input__invalid-icon--warning`,
+    });
+
+    let normalizedProps = {
+      disabled: !readonly && disabled,
+      invalid: !readonly && invalid,
+      warn: !readonly && !invalid && warn,
+      'slot-name': '',
+      'slot-text': '',
+      icon: null,
+    };
+
+    if (normalizedProps.invalid) {
+      normalizedProps.icon = invalidIcon;
+      normalizedProps['slot-name'] = 'invalid-text';
+      normalizedProps['slot-text'] = invalidText;
+    } else if (normalizedProps.warn) {
+      normalizedProps.icon = warnIcon;
+      normalizedProps['slot-name'] = 'warn-text';
+      normalizedProps['slot-text'] = warnText;
+    }
+
+    const counterClasses = classMap({
+      [`${prefix}--label`]: true,
+      [`${prefix}--text-input__label-counter`]: true,
+      [`${prefix}--label--disabled`]: disabled,
+    });
+
+    const inputWrapperClasses = classMap({
+      [`${prefix}--form-item`]: true,
+      [`${prefix}--text-input-wrapper`]: true,
+      [`${prefix}--text-input-wrapper--inline`]: inline,
+      [`${prefix}--text-input-wrapper--readonly`]: readonly,
+      [`${prefix}--text-input-wrapper--inline--invalid`]:
+        inline && normalizedProps.invalid,
+    });
+
     const inputClasses = classMap({
       [`${prefix}--text-input`]: true,
-      [`${prefix}--text-input--${this.colorScheme}`]: this.colorScheme,
-      [`${prefix}--text-input--invalid`]: this.invalid,
-      [`${prefix}--text-input--${this.size}`]: this.size,
-      [`${prefix}--password-input`]: this.type === INPUT_TYPE.PASSWORD,
+      [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
+      [`${prefix}--text-input--warning`]: normalizedProps.warn,
+      [`${prefix}--text-input--${size}`]: size,
+      [`${prefix}--password-input`]: type === INPUT_TYPE.PASSWORD,
+    });
+
+    const fieldOuterWrapperClasses = classMap({
+      [`${prefix}--text-input__field-outer-wrapper`]: true,
+      [`${prefix}--text-input__field-outer-wrapper--inline`]: inline,
+    });
+
+    const fieldWrapperClasses = classMap({
+      [`${prefix}--text-input__field-wrapper`]: true,
+      [`${prefix}--text-input__field-wrapper--warning`]: normalizedProps.warn,
     });
 
     const labelClasses = classMap({
       [`${prefix}--label`]: true,
-      [`${prefix}--label--disabled`]: this.disabled,
+      [`${prefix}--visually-hidden`]: hideLabel,
+      [`${prefix}--label--disabled`]: normalizedProps.disabled,
     });
 
     const helperTextClasses = classMap({
       [`${prefix}--form__helper-text`]: true,
-      [`${prefix}--form__helper-text--disabled`]: this.disabled,
+      [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     });
 
-    const passwordIsVisible = this.type !== INPUT_TYPE.PASSWORD;
+    const passwordIsVisible = type !== INPUT_TYPE.PASSWORD;
     const passwordVisibilityIcon = passwordIsVisible
       ? ViewOff16({ class: `${prefix}--icon-visibility-off` })
       : View16({ class: `${prefix}--icon-visibility-on` });
@@ -302,7 +370,7 @@ class CDSInput extends ValidityMixin(FormMixin(LitElement)) {
       [`${prefix}--btn--icon-only`]: true,
       [`${prefix}--tooltip__trigger`]: true,
       [`${prefix}--tooltip--a11y`]: true,
-      [`${prefix}--btn--disabled`]: this.disabled,
+      [`${prefix}--btn--disabled`]: normalizedProps.disabled,
       [`${prefix}--tooltip--${this.tooltipDirection}`]: this.tooltipDirection,
       [`${prefix}--tooltip--align-${this.tooltipAlignment}`]:
         this.tooltipAlignment,
@@ -318,46 +386,81 @@ class CDSInput extends ValidityMixin(FormMixin(LitElement)) {
       <button
         type="button"
         class="${passwordVisibilityToggleClasses}"
-        ?disabled="${this.disabled}"
+        ?disabled="${normalizedProps.disabled}"
         @click="${this.handleTogglePasswordVisibility}">
-        ${!this.disabled && passwordButtonLabel} ${passwordVisibilityIcon}
+        ${!normalizedProps.disabled ? passwordButtonLabel : null}
+        ${passwordVisibilityIcon}
       </button>
     `;
 
+    const textCount = value?.length;
+
+    const counter =
+      enableCounter && maxCount
+        ? html` <label class="${counterClasses}">
+            <slot name="label-text">${textCount}/${maxCount}</slot>
+          </label>`
+        : null;
+
+    const labelText =
+      label && !hideLabel
+        ? html`<label class="${labelClasses}"> ${label} </label>`
+        : null;
+
+    const labelWrapper = html`<div class="${prefix}--text-input__label-wrapper">
+      ${labelText} ${counter}
+    </div>`;
+
+    const helper = helperText
+      ? html`<div
+          class="${helperTextClasses}"
+          id="helper-text"
+          ?hidden="${normalizedProps.invalid || normalizedProps.warn}">
+          <slot name="helper-text"> ${helperText} </slot>
+        </div>`
+      : null;
+
     return html`
-      <label class="${labelClasses}" for="input">
-        <slot name="label-text"> ${this.label} </slot>
-      </label>
-      <div
-        class="${prefix}--text-input__field-wrapper"
-        ?data-invalid="${this.invalid}">
-        ${this.invalid ? invalidIcon : null}
-        <input
-          ?autocomplete="${this.autocomplete}"
-          ?autofocus="${this.autofocus}"
-          class="${inputClasses}"
-          ?data-invalid="${this.invalid}"
-          ?disabled="${this.disabled}"
-          aria-describedby="helper-text"
-          id="input"
-          name="${ifNonEmpty(this.name)}"
-          pattern="${ifNonEmpty(this.pattern)}"
-          placeholder="${ifNonEmpty(this.placeholder)}"
-          ?readonly="${this.readonly}"
-          ?required="${this.required}"
-          type="${ifNonEmpty(this.type)}"
-          .value="${this._value}"
-          @input="${handleInput}" />
-        ${this.showPasswordVisibilityToggle &&
-        (this.type === INPUT_TYPE.PASSWORD || this.type === INPUT_TYPE.TEXT)
-          ? passwordVisibilityButton()
-          : null}
-      </div>
-      <div class="${helperTextClasses}" id="helper-text">
-        <slot name="helper-text"> ${this.helperText} </slot>
-      </div>
-      <div class="${prefix}--form-requirement">
-        <slot name="validity-message"> ${this.validityMessage} </slot>
+      <div class="${inputWrapperClasses}">
+        ${!inline
+          ? labelWrapper
+          : html`<div class="${prefix}--text-input__label-helper-wrapper">
+              ${labelWrapper} ${helper}
+            </div>`}
+        <div class="${fieldOuterWrapperClasses}">
+          <div class="${fieldWrapperClasses}" ?data-invalid="${invalid}">
+            ${normalizedProps.icon}
+            <input
+              ?autocomplete="${this.autocomplete}"
+              ?autofocus="${this.autofocus}"
+              class="${inputClasses}"
+              ?data-invalid="${invalid}"
+              ?disabled="${disabled}"
+              aria-describedby="helper-text"
+              id="input"
+              name="${ifNonEmpty(this.name)}"
+              pattern="${ifNonEmpty(this.pattern)}"
+              placeholder="${ifNonEmpty(this.placeholder)}"
+              ?readonly="${readonly}"
+              ?required="${required}"
+              type="${ifNonEmpty(type)}"
+              .value="${this._value}"
+              maxlength="${ifNonEmpty(maxCount)}"
+              @input="${handleInput}" />
+            ${this.showPasswordVisibilityToggle &&
+            (type === INPUT_TYPE.PASSWORD || type === INPUT_TYPE.TEXT)
+              ? passwordVisibilityButton()
+              : null}
+          </div>
+          ${!inline ? helper : null}
+          <div
+            class="${prefix}--form-requirement"
+            ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
+            <slot name="${normalizedProps['slot-name']}">
+              ${normalizedProps['slot-text']}
+            </slot>
+          </div>
+        </div>
       </div>
     `;
   }
@@ -369,4 +472,4 @@ class CDSInput extends ValidityMixin(FormMixin(LitElement)) {
   static styles = styles; // `styles` here is a `CSSResult` generated by custom WebPack loader
 }
 
-export default CDSInput;
+export default CDSTextInput;

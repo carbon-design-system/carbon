@@ -12,7 +12,7 @@ import ResizeObserver from 'resize-observer-polyfill';
 import CDSTooltip from '../../src/components/tooltip/tooltip';
 import CDSTooltipContent from '../../src/components/tooltip/tooltip-content';
 import { POPOVER_ALIGNMENT } from '../../src/components/popover/defs';
-import { Default } from '../../src/components/tooltip/tooltip-story';
+import { Playground } from '../../src/components/tooltip/tooltip-story';
 
 const bodyTemplate = () => html` <cds-tooltip-content></cds-tooltip-content> `;
 const contentTemplate = ({
@@ -32,7 +32,7 @@ const template = ({
   !hasContent ? (undefined! as TemplateResult) : contentTemplate({ hasBody });
 
 const iconTemplate = (props?) =>
-  Default({
+  Playground({
     'cds-tooltip-icon': props,
   });
 

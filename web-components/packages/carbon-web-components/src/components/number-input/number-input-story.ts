@@ -10,7 +10,7 @@
 import { html } from 'lit';
 import * as knobs from '@storybook/addon-knobs';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { INPUT_SIZE } from '../input/input';
+import { INPUT_SIZE } from '../text-input/text-input';
 import './number-input';
 import './number-input-skeleton';
 import '../form/form-item';

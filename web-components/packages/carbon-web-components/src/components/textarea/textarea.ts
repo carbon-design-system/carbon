@@ -15,7 +15,7 @@ import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16';
 import { prefix } from '../../globals/settings';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import CDSInput from '../input/input';
+import CDSTextInput from '../text-input/text-input';
 import styles from './textarea.scss';
 
 /**
@@ -27,7 +27,7 @@ import styles from './textarea.scss';
  * @slot validity-message - The validity message. If present and non-empty, this input shows the UI of its invalid state.
  */
 @customElement(`${prefix}-textarea`)
-class CDSTextarea extends CDSInput {
+class CDSTextarea extends CDSTextInput {
   /**
    * Handles `oninput` event on the `<input>`.
    *

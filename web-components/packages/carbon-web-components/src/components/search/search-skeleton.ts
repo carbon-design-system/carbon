@@ -10,7 +10,7 @@
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import { INPUT_SIZE } from '../input/input';
+import { INPUT_SIZE } from '../text-input/text-input';
 import styles from './search.scss';
 
 /**

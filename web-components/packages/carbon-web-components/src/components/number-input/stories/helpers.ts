@@ -8,7 +8,7 @@
  */
 
 import { action } from '@storybook/addon-actions';
-import { INPUT_SIZE } from '../../input/input';
+import { INPUT_SIZE } from '../../text-input/text-input';
 
 const sizes = {
   [`Small size (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,

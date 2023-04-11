@@ -15,7 +15,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import ValidityMixin from '../../globals/mixins/validity';
-import { INPUT_SIZE } from '../input/input';
+import { INPUT_SIZE } from '../text-input/text-input';
 import {
   DATE_PICKER_INPUT_COLOR_SCHEME,
   DATE_PICKER_INPUT_KIND,

@@ -1,6 +1,6 @@
 # Having components participate in form
 
-Though form elements in `carbon-web-components` (e.g. `<cds-input>`) are not native form elements like `<input>`, form elements in `carbon-web-components` have some extra APIs that align well to web/framework standards that allow those form elements to participate in form.
+Though form elements in `@carbon/web-components` (e.g. `<cds-text-input>`) are not native form elements like `<input>`, they have some extra APIs that align well with web/framework standards.
 
 ## `formdata` event
 
@@ -20,7 +20,7 @@ button.addEventListener('click', () => {
   });
   event.formData = formData;
   form.dispatchEvent(event);
-  // Now `formData` is populated with the data in `<cds-input>`, etc. in the `<form>`.
+  // `formData` is populated with the data in components such as `<cds-text-input>` or `<cds-dropdown>`, etc. in the `<form>`.
   // You can use `formData` with `fetch()`/XHR instead of letting `<form>` submit the data
 });
 ```
@@ -34,7 +34,7 @@ You can use our form components with Redux Form by creating a React component th
 ```javascript
 import { Field } from 'redux-form';
 import BXFormItem from '@carbon/web-components/es/components-react/form/form-item';
-import CDSInput from '@carbon/web-components/es/components-react/input/input';
+import CDSTextInput from '@carbon/web-components/es/components-react/text-input/text-input';
 
 ...
 
@@ -43,7 +43,7 @@ const FieldImpl = ({ input, label, type, meta: { touched, error } }) => {
   const validityMessage = !touched ? undefined : error;
   return (
     <BXFormItem>
-      <CDSInput
+      <CDSTextInput
         {...input}
         invalid={Boolean(validityMessage)}
         label-text={label}
