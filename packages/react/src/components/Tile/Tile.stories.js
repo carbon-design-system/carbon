@@ -227,38 +227,3 @@ export const ExpandableWithLayer = () => (
     )}
   </WithLayer>
 );
-
-export const RadioGridDemo = () => {
-  return (
-    <>
-      <div>Delete this story before merging - testing only</div>
-      <TileGroup
-        defaultSelected="default-selected"
-        legend="Radio Tile Group"
-        name="radio tile group"
-        className="grid-demo">
-        <RadioTile id="radio-tile-1" value="standard" className="radiotile">
-          Option 1
-        </RadioTile>
-        <RadioTile
-          id="radio-tile-2"
-          value="default-selected"
-          className="radiotile">
-          Option 2
-        </RadioTile>
-        <RadioTile id="radio-tile-3" value="selected2" className="radiotile">
-          Option 3
-        </RadioTile>
-        <RadioTile id="radio-tile-4" value="selected3" className="radiotile">
-          Option 4
-        </RadioTile>
-        <RadioTile id="radio-tile-5" value="selected4" className="radiotile">
-          Option 5
-        </RadioTile>
-        <RadioTile id="radio-tile-6" value="selected5" className="radiotile">
-          Option 6
-        </RadioTile>
-      </TileGroup>
-    </>
-  );
-};

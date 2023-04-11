@@ -7,14 +7,3 @@
 div .bx--tile--selectable:not(:last-child) {
   margin-bottom: 1rem;
 }
-
-// delete this demo css before merging PR
-.grid-demo > div {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-}
-
-.grid-demo .radiotile {
-  height: 60vh;
-}
