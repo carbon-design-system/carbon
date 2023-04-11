@@ -2,7 +2,7 @@
   "name": "jest-config-carbon",
   "private": true,
   "description": "Jest configuration and preset for Carbon",
-  "version": "1.8.0",
+  "version": "1.9.0-rc.0",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": {
