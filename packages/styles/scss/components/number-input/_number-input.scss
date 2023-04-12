@@ -31,6 +31,12 @@
     flex-direction: column;
   }
 
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--warning
+    input[type='number'] {
+    padding-right: rem(128px);
+  }
+
   .#{$prefix}--number input[type='number'] {
     @include type-style('body-compact-01');
     @include focus-outline('reset');
@@ -83,18 +89,30 @@
     }
   }
 
-  .#{$prefix}--number--lg.#{$prefix}--number input[type='number'] {
-    padding-right: rem(112px);
+  .#{$prefix}--number--lg.#{$prefix}--number {
+    input[type='number'] {
+      padding-right: rem(112px);
 
-    &[data-invalid] {
+      &[data-invalid] {
+        padding-right: rem(144px);
+      }
+    }
+
+    .#{$prefix}--number__input-wrapper--warning input[type='number'] {
       padding-right: rem(144px);
     }
   }
 
-  .#{$prefix}--number--sm.#{$prefix}--number input[type='number'] {
-    padding-right: rem(80px);
+  .#{$prefix}--number--sm.#{$prefix}--number {
+    input[type='number'] {
+      padding-right: rem(80px);
 
-    &[data-invalid] {
+      &[data-invalid] {
+        padding-right: rem(112px);
+      }
+    }
+
+    .#{$prefix}--number__input-wrapper--warning input[type='number'] {
       padding-right: rem(112px);
     }
   }
