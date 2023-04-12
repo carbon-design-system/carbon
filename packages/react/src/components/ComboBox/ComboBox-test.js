@@ -18,8 +18,8 @@ import {
 import ComboBox from '../ComboBox';
 
 const findInputNode = () => screen.getByRole('combobox');
-const openMenu = () => {
-  userEvent.click(findInputNode());
+const openMenu = async () => {
+  await userEvent.click(findInputNode());
 };
 
 describe('ComboBox', () => {
@@ -35,22 +35,22 @@ describe('ComboBox', () => {
     };
   });
 
-  it('should display the menu of items when a user clicks on the input', () => {
+  it('should display the menu of items when a user clicks on the input', async () => {
     render(<ComboBox {...mockProps} />);
 
-    userEvent.click(findInputNode());
+    await userEvent.click(findInputNode());
 
     assertMenuOpen(mockProps);
   });
 
-  it('should call `onChange` each time an item is selected', () => {
+  it('should call `onChange` each time an item is selected', async () => {
     render(<ComboBox {...mockProps} />);
     expect(mockProps.onChange).not.toHaveBeenCalled();
 
     for (let i = 0; i < mockProps.items.length; i++) {
-      openMenu();
+      await openMenu();
 
-      userEvent.click(screen.getAllByRole('option')[i]);
+      await userEvent.click(screen.getAllByRole('option')[i]);
 
       expect(mockProps.onChange).toHaveBeenCalledTimes(i + 1);
       expect(mockProps.onChange).toHaveBeenCalledWith({
@@ -59,30 +59,30 @@ describe('ComboBox', () => {
     }
   });
 
-  it('capture filter text events', () => {
+  it('capture filter text events', async () => {
     const onInputChange = jest.fn();
     render(<ComboBox {...mockProps} onInputChange={onInputChange} />);
 
-    userEvent.type(findInputNode(), 'something');
+    await userEvent.type(findInputNode(), 'something');
 
     expect(onInputChange).toHaveBeenCalledWith('something');
   });
 
-  it('should render custom item components', () => {
+  it('should render custom item components', async () => {
     const itemToElement = jest.fn((item) => {
       return <div className="mock-item">{item.text}</div>;
     });
     render(<ComboBox {...mockProps} itemToElement={itemToElement} />);
-    openMenu();
+    await openMenu();
 
     expect(itemToElement).toHaveBeenCalled();
   });
 
-  it('should let the user select an option by clicking on the option node', () => {
+  it('should let the user select an option by clicking on the option node', async () => {
     render(<ComboBox {...mockProps} />);
-    openMenu();
+    await openMenu();
 
-    userEvent.click(screen.getAllByRole('option')[0]);
+    await userEvent.click(screen.getAllByRole('option')[0]);
 
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
@@ -92,9 +92,9 @@ describe('ComboBox', () => {
 
     mockProps.onChange.mockClear();
 
-    openMenu();
+    await openMenu();
 
-    userEvent.click(screen.getAllByRole('option')[1]);
+    await userEvent.click(screen.getAllByRole('option')[1]);
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[1],
@@ -145,41 +145,41 @@ describe('ComboBox', () => {
   });
 
   describe('when disabled', () => {
-    it('should not let the user edit the input node', () => {
+    it('should not let the user edit the input node', async () => {
       render(<ComboBox {...mockProps} disabled={true} />);
 
       expect(findInputNode()).toHaveAttribute('disabled');
 
       expect(findInputNode()).toHaveDisplayValue('');
 
-      userEvent.type(findInputNode(), 'a');
+      await userEvent.type(findInputNode(), 'a');
 
       expect(findInputNode()).toHaveDisplayValue('');
     });
 
-    it('should not let the user expand the menu', () => {
+    it('should not let the user expand the menu', async () => {
       render(<ComboBox {...mockProps} disabled={true} />);
-      openMenu();
+      await openMenu();
       expect(findListBoxNode()).not.toHaveClass('cds--list-box--expanded');
     });
   });
 
   describe('when readonly', () => {
-    it('should not let the user edit the input node', () => {
+    it('should not let the user edit the input node', async () => {
       render(<ComboBox {...mockProps} readOnly={true} />);
 
       expect(findInputNode()).toHaveAttribute('readonly');
 
       expect(findInputNode()).toHaveDisplayValue('');
 
-      userEvent.type(findInputNode(), 'o');
+      await userEvent.type(findInputNode(), 'o');
 
       expect(findInputNode()).toHaveDisplayValue('');
     });
 
-    it('should not let the user expand the menu', () => {
+    it('should not let the user expand the menu', async () => {
       render(<ComboBox {...mockProps} disabled={true} />);
-      openMenu();
+      await openMenu();
       expect(findListBoxNode()).not.toHaveClass('cds--list-box--expanded');
     });
   });
@@ -191,7 +191,7 @@ describe('ComboBox', () => {
       expect(findInputNode()).toHaveDisplayValue('');
     });
 
-    it('should only render one listbox at a time when multiple comboboxes are present', () => {
+    it('should only render one listbox at a time when multiple comboboxes are present', async () => {
       render(
         <>
           <div data-testid="combobox-1">
@@ -219,17 +219,17 @@ describe('ComboBox', () => {
       expect(firstListBox()).toBeEmptyDOMElement();
       expect(secondListBox()).toBeEmptyDOMElement();
 
-      userEvent.click(firstComboboxChevron);
+      await userEvent.click(firstComboboxChevron);
 
       expect(firstListBox()).not.toBeEmptyDOMElement();
       expect(secondListBox()).toBeEmptyDOMElement();
 
-      userEvent.click(secondComboboxChevron);
+      await userEvent.click(secondComboboxChevron);
 
       expect(firstListBox()).toBeEmptyDOMElement();
       expect(secondListBox()).not.toBeEmptyDOMElement();
 
-      userEvent.click(secondComboboxChevron);
+      await userEvent.click(secondComboboxChevron);
 
       expect(firstListBox()).toBeEmptyDOMElement();
       expect(secondListBox()).toBeEmptyDOMElement();

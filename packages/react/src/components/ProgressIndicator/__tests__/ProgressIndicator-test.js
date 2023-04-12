@@ -72,7 +72,7 @@ describe('ProgressIndicator', () => {
       );
     });
 
-    it('should call onChange when expected', () => {
+    it('should call onChange when expected', async () => {
       const onChange = jest.fn();
       render(
         <ProgressIndicator onChange={onChange} currentIndex={1}>
@@ -90,7 +90,7 @@ describe('ProgressIndicator', () => {
         </ProgressIndicator>
       );
 
-      userEvent.click(screen.getByTitle('First step'));
+      await userEvent.click(screen.getByTitle('First step'));
 
       expect(onChange).toHaveBeenCalled();
     });
@@ -214,11 +214,11 @@ describe('ProgressStep', () => {
       expect(screen.getByRole('button')).toHaveAttribute('title', 'First step');
     });
 
-    it('should call onClick when expected', () => {
+    it('should call onClick when expected', async () => {
       const onClick = jest.fn();
       render(<ProgressStep label="First step" onClick={onClick} />);
 
-      userEvent.click(screen.getByRole('button'));
+      await userEvent.click(screen.getByRole('button'));
       expect(onClick).toHaveBeenCalled();
     });
 
