@@ -18,6 +18,7 @@ import wrapFocus, {
 } from '../../internal/wrapFocus';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
+import { keys, match } from '../../internal/keyboard';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -73,11 +74,11 @@ const Modal = React.forwardRef(function Modal(
 
   function handleKeyDown(evt) {
     if (open) {
-      if (evt.which === 27) {
+      if (match(evt, keys.Escape)) {
         onRequestClose(evt);
       }
       if (
-        evt.which === 13 &&
+        match(evt, keys.Enter) &&
         shouldSubmitOnEnter &&
         !isCloseButton(evt.target)
       ) {

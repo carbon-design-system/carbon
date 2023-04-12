@@ -22,7 +22,7 @@ describe('SideNavFooter', () => {
     expect(screen.getByRole('button')).toHaveTextContent('test');
   });
 
-  it('should call `onToggle` when a user interacts with the toggle', () => {
+  it('should call `onToggle` when a user interacts with the toggle', async () => {
     const onToggle = jest.fn();
     render(
       <SideNavFooter
@@ -31,7 +31,7 @@ describe('SideNavFooter', () => {
         onToggle={onToggle}
       />
     );
-    userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByRole('button'));
     expect(onToggle).toHaveBeenCalled();
   });
 

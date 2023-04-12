@@ -52,7 +52,7 @@ describe('Accordion', () => {
       await expect(screen.getByText('Heading A')).toHaveNoAxeViolations();
 
       // click to open
-      userEvent.click(screen.getByText('Heading A'));
+      await userEvent.click(screen.getByText('Heading A'));
 
       // test when open
       await expect(screen.getByText('Heading A')).toHaveNoAxeViolations();
@@ -80,7 +80,7 @@ describe('Accordion', () => {
       );
 
       // click to open
-      userEvent.click(screen.getByText('Heading A'));
+      await userEvent.click(screen.getByText('Heading A'));
 
       // test when open
       await expect(screen.getByText('Heading A')).toHaveNoACViolations(
@@ -105,7 +105,7 @@ describe('Accordion', () => {
         </Accordion>
       );
 
-      userEvent.tab();
+      await userEvent.tab();
       await expect(document.getElementsByTagName('button')[0]).toHaveFocus();
     });
 
@@ -126,7 +126,7 @@ describe('Accordion', () => {
 
       // userEvent.type clicks the element passed before typing without skipClick option
       // see: https://github.com/testing-library/user-event#typeelement-text-options
-      userEvent.type(screen.getByText('Heading A'), '{enter}', {
+      await userEvent.type(screen.getByText('Heading A'), '{enter}', {
         skipClick: true,
       });
 
@@ -150,7 +150,7 @@ describe('Accordion', () => {
 
       // userEvent.type clicks the element passed before typing without skipClick option
       // see: https://github.com/testing-library/user-event#typeelement-text-options
-      userEvent.type(screen.getByText('Heading A'), '{space}', {
+      await userEvent.type(screen.getByText('Heading A'), '{Space}', {
         skipClick: true,
       });
 

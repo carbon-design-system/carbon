@@ -224,9 +224,39 @@ const DatePicker = React.forwardRef(function DatePicker(
     }
   }, []);
   const endInputField = useRef(null);
+
+  const lastStartValue = useRef('');
+
+  // fix datepicker deleting the selectedDate when the calendar closes
+  const onCalendarClose = (selectedDates, dateStr) => {
+    setTimeout(() => {
+      if (
+        lastStartValue.current &&
+        selectedDates[0] &&
+        !startInputField.current.value
+      ) {
+        startInputField.current.value = lastStartValue.current;
+        calendarRef.current.setDate(
+          [startInputField.current.value, endInputField.current.value],
+          true,
+          calendarRef.current.config.dateFormat
+        );
+      }
+      if (onClose) {
+        onClose(
+          calendarRef.current.selectedDates,
+          dateStr,
+          calendarRef.current
+        );
+      }
+    });
+  };
+
   const calendarRef = useRef(null);
   const savedOnChange = useSavedCallback(onChange);
-  const savedOnClose = useSavedCallback(onClose);
+  const savedOnClose = useSavedCallback(
+    datePickerType === 'range' ? onCalendarClose : onClose
+  );
   const savedOnOpen = useSavedCallback(onOpen);
 
   const datePickerClasses = cx(`${prefix}--date-picker`, {
@@ -350,6 +380,7 @@ const DatePicker = React.forwardRef(function DatePicker(
         carbonFlatpickrFixEventsPlugin({
           inputFrom: startInputField.current,
           inputTo: endInputField.current,
+          lastStartValue,
         }),
       ],
       clickOpens: !readOnly,
@@ -398,9 +429,14 @@ const DatePicker = React.forwardRef(function DatePicker(
       }
     }
 
-    function handleOnChange() {
+    function handleOnChange(event) {
       if (datePickerType == 'single') {
         calendar.calendarContainer.classList.remove('open');
+      }
+
+      const { target } = event;
+      if (target === start) {
+        lastStartValue.current = start.value;
       }
 
       if (start.value !== '') {
