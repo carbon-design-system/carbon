@@ -22,11 +22,9 @@ describe('RadioTile', () => {
     });
 
     it('should respect checked prop', () => {
-      const { container } = render(
-        <RadioTile value="standard" checked data-testid="test-id" />
-      );
+      render(<RadioTile value="standard" checked data-testid="test-id" />);
 
-      expect(container.firstChild).toHaveAttribute('checked');
+      expect(screen.getByRole('radio')).toBeChecked();
       expect(screen.getByTestId('test-id')).toHaveClass(
         'cds--tile--is-selected'
       );
@@ -45,11 +43,9 @@ describe('RadioTile', () => {
     });
 
     it('should respect disabled prop', () => {
-      const { container } = render(
-        <RadioTile value="standard" disabled data-testid="test-id" />
-      );
+      render(<RadioTile value="standard" disabled data-testid="test-id" />);
 
-      expect(container.firstChild).toHaveAttribute('disabled');
+      expect(screen.getByRole('radio')).toBeDisabled();
       expect(screen.getByTestId('test-id')).toHaveClass('cds--tile--disabled');
     });
 
