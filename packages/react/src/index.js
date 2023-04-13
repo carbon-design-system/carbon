@@ -110,7 +110,7 @@ export SecondaryButton from './components/SecondaryButton';
 export Select from './components/Select';
 export SelectItem from './components/SelectItem';
 export SelectItemGroup from './components/SelectItemGroup';
-export Switch from './components/Switch';
+export { Switch, IconSwitch } from './components/Switch';
 export Slider from './components/Slider';
 export {
   StructuredListWrapper,

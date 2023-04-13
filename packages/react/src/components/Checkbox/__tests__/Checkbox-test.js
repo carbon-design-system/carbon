@@ -149,11 +149,11 @@ describe('Checkbox', () => {
     expect(screen.getByText('Warn text')).toHaveClass(`cds--form-requirement`);
   });
 
-  it('should call the `onChange` prop when the <input> value changes', () => {
+  it('should call the `onChange` prop when the <input> value changes', async () => {
     const onChange = jest.fn();
     render(<Checkbox id="test" labelText="test-label" onChange={onChange} />);
 
-    userEvent.click(screen.getByLabelText('test-label'));
+    await userEvent.click(screen.getByLabelText('test-label'));
 
     expect(onChange).toHaveBeenCalled();
     expect(onChange).toHaveBeenCalledWith(
@@ -167,7 +167,7 @@ describe('Checkbox', () => {
     );
   });
 
-  it('should NOT call the `onChange` prop when readonly', () => {
+  it('should NOT call the `onChange` prop when readonly', async () => {
     const onChange = jest.fn();
     const onClick = jest.fn();
     render(
@@ -181,8 +181,8 @@ describe('Checkbox', () => {
       />
     );
 
-    userEvent.click(screen.getByLabelText('test-label'));
-    userEvent.click(screen.getByRole('checkbox'));
+    await userEvent.click(screen.getByLabelText('test-label'));
+    await userEvent.click(screen.getByRole('checkbox'));
     expect(onClick).toHaveBeenCalled();
     expect(onChange).not.toHaveBeenCalled();
   });

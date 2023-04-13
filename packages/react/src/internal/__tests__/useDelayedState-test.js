@@ -5,18 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { cleanup, render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { act } from 'react-dom/test-utils';
 import { useDelayedState } from '../useDelayedState';
 
 jest.useFakeTimers();
+const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
 
 describe('useDelayedState', () => {
-  afterEach(cleanup);
-
-  it('should update the state after the given delayMs', () => {
+  it('should update the state after the given delayMs', async () => {
     function TestComponent() {
       const [count, setCount] = useDelayedState(0);
       return (
@@ -36,15 +34,15 @@ describe('useDelayedState', () => {
     render(<TestComponent />);
     expect(screen.getByTestId('count')).toHaveTextContent('0');
 
-    act(() => {
-      userEvent.click(screen.getByText('increment'));
+    await act(async () => {
+      await user.click(screen.getByText('increment'));
       jest.runOnlyPendingTimers();
     });
 
     expect(screen.getByTestId('count')).toHaveTextContent('1');
   });
 
-  it('should cancel any pending state updates if called before delayMs has passed', () => {
+  it('should cancel any pending state updates if called before delayMs has passed', async () => {
     function TestComponent() {
       const [count, setCount] = useDelayedState(0);
       return (
@@ -63,17 +61,17 @@ describe('useDelayedState', () => {
 
     render(<TestComponent />);
 
-    act(() => {
-      userEvent.click(screen.getByText('increment'));
+    await act(async () => {
+      await user.click(screen.getByText('increment'));
       jest.advanceTimersByTime(500);
-      userEvent.click(screen.getByText('increment'));
+      await user.click(screen.getByText('increment'));
       jest.runOnlyPendingTimers();
     });
 
     expect(screen.getByTestId('count')).toHaveTextContent('1');
   });
 
-  it('should immediately call setState if no delay is given', () => {
+  it('should immediately call setState if no delay is given', async () => {
     function TestComponent() {
       const [count, setCount] = useDelayedState(0);
       return (
@@ -91,8 +89,13 @@ describe('useDelayedState', () => {
     }
 
     render(<TestComponent />);
+
     expect(screen.getByTestId('count')).toHaveTextContent('0');
-    userEvent.click(screen.getByText('increment'));
+
+    await act(async () => {
+      await user.click(screen.getByText('increment'));
+    });
+
     expect(screen.getByTestId('count')).toHaveTextContent('1');
   });
 });

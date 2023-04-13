@@ -94,33 +94,33 @@ describe('TableToolbarSearch', () => {
   });
 
   describe('behaves as expected', () => {
-    it('should call onBlur when expected', () => {
+    it('should call onBlur when expected', async () => {
       const onBlur = jest.fn();
       render(<TableToolbarSearch onBlur={onBlur} />);
-      userEvent.click(screen.getByRole('button'));
-      userEvent.tab();
+      await userEvent.click(screen.getByRole('button'));
+      await userEvent.tab();
 
       expect(onBlur).toHaveBeenCalled();
     });
 
-    it('should call onChange when expected', () => {
+    it('should call onChange when expected', async () => {
       const onChange = jest.fn();
       render(<TableToolbarSearch onChange={onChange} />);
-      userEvent.click(screen.getByRole('button'));
-      userEvent.tab();
+      await userEvent.click(screen.getByRole('button'));
+      await userEvent.tab();
       expect(onChange).toHaveBeenCalled();
     });
 
-    it('should expand/contract as normal when no onBlur/onFocus provided', () => {
+    it('should expand/contract as normal when no onBlur/onFocus provided', async () => {
       const { container } = render(<TableToolbarSearch onChange={jest.fn()} />);
 
-      userEvent.click(screen.getByRole('searchbox'));
+      await userEvent.click(screen.getByRole('searchbox'));
 
       expect(container.firstChild).toHaveClass(
         'cds--toolbar-search-container-active'
       );
 
-      userEvent.tab();
+      await userEvent.tab();
       expect(container.firstChild).not.toHaveClass(
         'cds--toolbar-search-container-active'
       );

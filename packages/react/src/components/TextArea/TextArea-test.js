@@ -230,7 +230,7 @@ describe('TextArea', () => {
 
   describe('events', () => {
     describe('disabled textarea', () => {
-      it('should not invoke onClick when textarea is clicked', () => {
+      it('should not invoke onClick when textarea is clicked', async () => {
         const onClick = jest.fn();
         render(
           <TextArea
@@ -240,11 +240,11 @@ describe('TextArea', () => {
             onClick={onClick}
           />
         );
-        userEvent.click(screen.getByLabelText('testLabel'));
+        await userEvent.click(screen.getByLabelText('testLabel'));
         expect(onClick).not.toHaveBeenCalled();
       });
 
-      it('should not invoke onChange', () => {
+      it('should not invoke onChange', async () => {
         const onChange = jest.fn();
         render(
           <TextArea
@@ -254,8 +254,8 @@ describe('TextArea', () => {
             onChange={onChange}
           />
         );
-        userEvent.click(screen.getByLabelText('testLabel'));
-        userEvent.keyboard('big blue');
+        await userEvent.click(screen.getByLabelText('testLabel'));
+        await userEvent.keyboard('big blue');
         expect(onChange).not.toHaveBeenCalled();
       });
     });
@@ -286,7 +286,7 @@ describe('TextArea', () => {
           />
         );
         await userEvent.click(screen.getByLabelText('testLabel'));
-        userEvent.keyboard('big blue');
+        await userEvent.keyboard('big blue');
         expect(onChange).toHaveBeenCalled();
       });
     });
