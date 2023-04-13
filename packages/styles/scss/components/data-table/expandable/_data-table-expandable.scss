@@ -216,8 +216,19 @@
     height: calc(100% + 1px);
     align-items: center;
     justify-content: center;
-    padding: 0 0.5rem;
+    padding: 0 $spacing-03;
     vertical-align: inherit;
+  }
+
+  .#{$prefix}--data-table--top-aligned .#{$prefix}--table-expand__button {
+    height: calc(rem(32px) + 1px);
+    align-items: start;
+    padding-top: $spacing-03;
+  }
+
+  .#{$prefix}--data-table--top-aligned.#{$prefix}--data-table--xs
+    .#{$prefix}--table-expand__button {
+    padding-top: $spacing-01;
   }
 
   .#{$prefix}--table-expand__button:focus {
@@ -233,7 +244,6 @@
 
   .#{$prefix}--data-table--xl .#{$prefix}--table-expand__button {
     width: rem(32px);
-    padding: 0;
   }
 
   // fix expanded parent separating border length
