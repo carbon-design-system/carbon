@@ -360,7 +360,7 @@ interface DatePickerProps
   /**
    * The `close` event handler.
    */
-  onClose?: ChangeEventHandler<HTMLSelectElement>;
+  onClose?: any;
 
   /**
    * The `open` event handler.
@@ -435,7 +435,7 @@ const DatePicker = React.forwardRef(function DatePicker(
       setHasInput(true);
     }
   }, []);
-  
+
   const lastStartValue = useRef('');
 
   // fix datepicker deleting the selectedDate when the calendar closes
@@ -448,7 +448,7 @@ const DatePicker = React.forwardRef(function DatePicker(
       ) {
         startInputField.current.value = lastStartValue.current;
         calendarRef.current.setDate(
-          [startInputField.current.value, endInputField.current.value],
+          [startInputField.current.value, endInputField?.current?.value],
           true,
           calendarRef.current.config.dateFormat
         );
@@ -463,13 +463,13 @@ const DatePicker = React.forwardRef(function DatePicker(
     });
   };
 
-  
-  const savedOnOpen = useSavedCallback(onOpen);
+
+  //const savedOnOpen = useSavedCallback(onOpen);
   const endInputField = useRef<HTMLTextAreaElement>(null);
   const calendarRef: any | undefined = useRef(null);
-  const savedOnChange = useSavedCallback(() => onChange);
+  const savedOnChange = useSavedCallback((...args) => onChange);
   const savedOnClose = useSavedCallback(datePickerType === 'range' ? onCalendarClose : onClose);
-  const savedOnOpen = useSavedCallback(() => onOpen);
+  const savedOnOpen = useSavedCallback((...args) => onOpen);
 
   const datePickerClasses = cx(`${prefix}--date-picker`, {
     [`${prefix}--date-picker--short`]: short,
