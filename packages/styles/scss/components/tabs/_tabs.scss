@@ -231,6 +231,13 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     }
 
     //-----------------------------
+    // Wrapper
+    //-----------------------------
+    .#{$prefix}--tabs__nav-item-label-wrapper {
+      display: flex;
+    }
+
+    //-----------------------------
     // Item
     //-----------------------------
     .#{$prefix}--tabs__nav-item {
@@ -264,6 +271,19 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       transition: color $duration-fast-01 motion(standard, productive),
         border-bottom-color $duration-fast-01 motion(standard, productive),
         outline $duration-fast-01 motion(standard, productive);
+    }
+
+    //-----------------------------
+    // Icon
+    //-----------------------------
+    .#{$prefix}--tabs__nav-item--icon {
+      display: flex;
+      align-items: center;
+      padding-left: $spacing-03;
+    }
+
+    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--icon {
+      padding-left: $spacing-05;
     }
 
     //-----------------------------
@@ -326,8 +346,8 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       overflow-x: visible;
     }
 
-    .#{$prefix}--tabs__nav-item--icon,
-    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--icon {
+    .#{$prefix}--tabs__nav-item--icon-only,
+    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--icon-only {
       display: flex;
       width: $icon-tab-size;
       height: $icon-tab-size;

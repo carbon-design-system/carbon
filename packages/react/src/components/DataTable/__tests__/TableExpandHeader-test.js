@@ -127,7 +127,7 @@ describe('TableExpandHeader', () => {
   });
 
   describe('behaves as expected', () => {
-    it('should call onExpand', () => {
+    it('should call onExpand', async () => {
       const onExpand = jest.fn();
       render(
         <DataTable rows={rows} headers={headers}>
@@ -163,12 +163,12 @@ describe('TableExpandHeader', () => {
         </DataTable>
       );
 
-      userEvent.click(screen.getByRole('button'));
+      await userEvent.click(screen.getByRole('button'));
 
       expect(onExpand).toHaveBeenCalled();
     });
 
-    it('should update toggle button', () => {
+    it('should update toggle button', async () => {
       const PaginationExample = () => {
         const [rows, setRows] = useState([]);
         const headers = [
@@ -288,14 +288,14 @@ describe('TableExpandHeader', () => {
 
       render(<PaginationExample />);
 
-      userEvent.click(screen.getByLabelText('Expand all rows'));
+      await userEvent.click(screen.getByLabelText('Expand all rows'));
 
       expect(screen.getAllByRole('button')[0]).toHaveAttribute(
         'aria-label',
         'Collapse all rows'
       );
 
-      userEvent.click(screen.getByLabelText('Next page'));
+      await userEvent.click(screen.getByLabelText('Next page'));
       expect(screen.getAllByRole('button')[0]).toHaveAttribute(
         'aria-label',
         'Expand all rows'

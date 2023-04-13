@@ -30,20 +30,20 @@ describe('Switch', () => {
       expect(screen.getByRole('tab')).toBeDisabled();
     });
 
-    it('should call onClick when expected', () => {
+    it('should call onClick when expected', async () => {
       const onClick = jest.fn();
       render(<Switch text="First section" onClick={onClick} />);
 
-      userEvent.click(screen.getByText('First section'));
+      await userEvent.click(screen.getByText('First section'));
 
       expect(onClick).toHaveBeenCalled();
     });
 
-    it('should call onKeyDown when expected', () => {
+    it('should call onKeyDown when expected', async () => {
       const onKeyDown = jest.fn();
       render(<Switch text="First section" onKeyDown={onKeyDown} />);
 
-      userEvent.type(screen.getByText('First section'), 'enter');
+      await userEvent.type(screen.getByText('First section'), 'enter');
 
       expect(onKeyDown).toHaveBeenCalled();
     });

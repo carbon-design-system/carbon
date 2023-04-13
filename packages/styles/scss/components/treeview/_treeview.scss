@@ -30,6 +30,10 @@
     &:focus {
       outline: none;
     }
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .#{$prefix}--tree-node:focus > .#{$prefix}--tree-node__label {

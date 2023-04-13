@@ -44,7 +44,7 @@ describe('ListBoxSelection', () => {
     expect(screen.getByLabelText('test-clear-all')).toBeInTheDocument();
   });
 
-  it('should call `clearSelection` when the clear button is clicked', () => {
+  it('should call `clearSelection` when the clear button is clicked', async () => {
     const clearSelection = jest.fn();
     render(
       <ListBox.Selection
@@ -52,11 +52,11 @@ describe('ListBoxSelection', () => {
         translateWithId={translateWithId}
       />
     );
-    userEvent.click(screen.getByLabelText('test-clear-selection'));
+    await userEvent.click(screen.getByLabelText('test-clear-selection'));
     expect(clearSelection).toHaveBeenCalled();
   });
 
-  it('should not call `clearSelection` when the clear button is disabled', () => {
+  it('should not call `clearSelection` when the clear button is disabled', async () => {
     const clearSelection = jest.fn();
     render(
       <ListBox.Selection
@@ -65,11 +65,11 @@ describe('ListBoxSelection', () => {
         translateWithId={translateWithId}
       />
     );
-    userEvent.click(screen.getByLabelText('test-clear-selection'));
+    await userEvent.click(screen.getByLabelText('test-clear-selection'));
     expect(clearSelection).not.toHaveBeenCalled();
   });
 
-  it('should call `onClearSelection` when the clear button is clicked', () => {
+  it('should call `onClearSelection` when the clear button is clicked', async () => {
     const onClearSelection = jest.fn();
     render(
       <ListBox.Selection
@@ -78,11 +78,11 @@ describe('ListBoxSelection', () => {
         translateWithId={translateWithId}
       />
     );
-    userEvent.click(screen.getByLabelText('test-clear-selection'));
+    await userEvent.click(screen.getByLabelText('test-clear-selection'));
     expect(onClearSelection).toHaveBeenCalled();
   });
 
-  it('should not call `onClearSelection` when the clear button is disabled', () => {
+  it('should not call `onClearSelection` when the clear button is disabled', async () => {
     const onClearSelection = jest.fn();
     render(
       <ListBox.Selection
@@ -92,11 +92,11 @@ describe('ListBoxSelection', () => {
         translateWithId={translateWithId}
       />
     );
-    userEvent.click(screen.getByLabelText('test-clear-selection'));
+    await userEvent.click(screen.getByLabelText('test-clear-selection'));
     expect(onClearSelection).not.toHaveBeenCalled();
   });
 
-  it('should call `clearSelection` when the clear all button is clicked', () => {
+  it('should call `clearSelection` when the clear all button is clicked', async () => {
     const clearSelection = jest.fn();
     render(
       <ListBox.Selection
@@ -105,11 +105,11 @@ describe('ListBoxSelection', () => {
         translateWithId={translateWithId}
       />
     );
-    userEvent.click(screen.getByLabelText('test-clear-all'));
+    await userEvent.click(screen.getByLabelText('test-clear-all'));
     expect(clearSelection).toHaveBeenCalled();
   });
 
-  it('should not call `clearSelection` when the clear all button is disabled', () => {
+  it('should not call `clearSelection` when the clear all button is disabled', async () => {
     const clearSelection = jest.fn();
     render(
       <ListBox.Selection
@@ -119,11 +119,11 @@ describe('ListBoxSelection', () => {
         translateWithId={translateWithId}
       />
     );
-    userEvent.click(screen.getByLabelText('test-clear-all'));
+    await userEvent.click(screen.getByLabelText('test-clear-all'));
     expect(clearSelection).not.toHaveBeenCalled();
   });
 
-  it('should call `onClearSelection` when the clear all button is clicked', () => {
+  it('should call `onClearSelection` when the clear all button is clicked', async () => {
     const onClearSelection = jest.fn();
     render(
       <ListBox.Selection
@@ -133,11 +133,11 @@ describe('ListBoxSelection', () => {
         translateWithId={translateWithId}
       />
     );
-    userEvent.click(screen.getByLabelText('test-clear-all'));
+    await userEvent.click(screen.getByLabelText('test-clear-all'));
     expect(onClearSelection).toHaveBeenCalled();
   });
 
-  it('should not call `onClearSelection` when the clear all button is disabled', () => {
+  it('should not call `onClearSelection` when the clear all button is disabled', async () => {
     const onClearSelection = jest.fn();
     render(
       <ListBox.Selection
@@ -148,7 +148,7 @@ describe('ListBoxSelection', () => {
         translateWithId={translateWithId}
       />
     );
-    userEvent.click(screen.getByLabelText('test-clear-all'));
+    await userEvent.click(screen.getByLabelText('test-clear-all'));
     expect(onClearSelection).not.toHaveBeenCalled();
   });
 });

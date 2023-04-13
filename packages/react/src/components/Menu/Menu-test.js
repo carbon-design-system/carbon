@@ -33,7 +33,7 @@ describe('Menu', () => {
       expect(screen.getByRole('menu')).toHaveAttribute('id', 'test-id');
     });
 
-    it('should call onClose on key down', () => {
+    it('should call onClose on key down', async () => {
       const onClose = jest.fn();
       render(
         <Menu open onClose={onClose}>
@@ -41,12 +41,12 @@ describe('Menu', () => {
         </Menu>
       );
 
-      userEvent.type(screen.getByRole('menuitem'), '{enter}');
+      await userEvent.type(screen.getByRole('menuitem'), '{enter}');
 
       expect(onClose).toHaveBeenCalled();
     });
 
-    it('should call onClose on click', () => {
+    it('should call onClose on click', async () => {
       const onClose = jest.fn();
       render(
         <Menu open onClose={onClose}>
@@ -54,7 +54,7 @@ describe('Menu', () => {
         </Menu>
       );
 
-      userEvent.click(screen.getByRole('menuitem'));
+      await userEvent.click(screen.getByRole('menuitem'));
 
       expect(onClose).toHaveBeenCalled();
     });

@@ -42,8 +42,8 @@ export const findPopupNode = () => {
 };
 
 // Actions
-export const openMenu = () => {
-  userEvent.click(findFieldNode());
+export const openMenu = async () => {
+  await userEvent.click(findFieldNode());
 };
 
 // Common assertions, useful for validating a11y props are set when needed
