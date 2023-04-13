@@ -210,7 +210,7 @@ interface DatePickerProps
   allowInput: boolean | undefined;
 
   /**
-   * The DOM element the Flatpicker should be inserted into. `<body>` by default.
+   * The DOM element the Flatpicker should be inserted into `<body>` by default.
    */
   appendTo: object | undefined;
 
