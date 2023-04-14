@@ -31,7 +31,7 @@ $justify-content: flex-start !default;
 /// @type Value
 /// @access public
 /// @group accordion
-$arrow-margin: 2px layout.density('padding-inline') 0 0 !default;
+$arrow-margin: 0 layout.density('padding-inline') 0 0 !default;
 
 /// @type Value
 /// @access public
