@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useContext, PropsWithChildren, useRef, useEffect, useCallback } from 'react';
+import React, {
+  useContext,
+  PropsWithChildren,
+  useRef,
+  useEffect,
+  useCallback,
+} from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
@@ -69,57 +75,59 @@ export const Table = ({
     [`${prefix}--data-table--visible-overflow-menu`]: !overflowMenuOnHover,
   });
 
-  const setTableAlignment = useCallback(() =>{
-    const fragment = document.createDocumentFragment()
-    const canvas = document.createElement('canvas')
-    fragment.appendChild(canvas)
-    const context = canvas.getContext('2d')
+  const setTableAlignment = useCallback(() => {
+    const fragment = document.createDocumentFragment();
+    const canvas = document.createElement('canvas');
+    fragment.appendChild(canvas);
+    const context = canvas.getContext('2d');
 
-    if(tableRef.current && context){
-      const isMultiline = Array.from(tableRef.current.querySelectorAll('td')).some(td => {
-        if(td.children.length > 0){
-          return
+    if (tableRef.current && context) {
+      const isMultiline = Array.from(
+        tableRef.current.querySelectorAll('td')
+      ).some((td) => {
+        if (td.children.length > 0) {
+          return;
         }
-        const computedStyles = window.getComputedStyle(td)
+        const computedStyles = window.getComputedStyle(td);
         context.font = computedStyles.font
           ? computedStyles.font
-          : `${computedStyles.fontSize}" "${computedStyles.fontFamily}`
+          : `${computedStyles.fontSize}" "${computedStyles.fontFamily}`;
 
-        let textWidth = (context?.measureText(td.textContent ?? '').width ?? 0)
+        let textWidth = context?.measureText(td.textContent ?? '').width ?? 0;
         // account for letter spacing
-        const letterSpacing = computedStyles.letterSpacing?.split('px')
-        if(letterSpacing && letterSpacing.length){
-          textWidth += (Number(letterSpacing[0])*(td.textContent?.length ?? 0))
+        const letterSpacing = computedStyles.letterSpacing?.split('px');
+        if (letterSpacing && letterSpacing.length) {
+          textWidth += Number(letterSpacing[0]) * (td.textContent?.length ?? 0);
         }
         // account for padding
-        const paddingLeft = computedStyles.paddingLeft?.split('px')
-        if(paddingLeft && paddingLeft.length){
-          textWidth += Number(paddingLeft[0])
+        const paddingLeft = computedStyles.paddingLeft?.split('px');
+        if (paddingLeft && paddingLeft.length) {
+          textWidth += Number(paddingLeft[0]);
         }
 
-        const paddingRight = computedStyles.paddingLeft?.split('px')
-        if(paddingRight && paddingRight.length){
-          textWidth += Number(paddingRight[0])
+        const paddingRight = computedStyles.paddingLeft?.split('px');
+        if (paddingRight && paddingRight.length) {
+          textWidth += Number(paddingRight[0]);
         }
         // if measured textWidth is larger than the cell's width, then the content is being wrapped
-          if(textWidth > td.getBoundingClientRect().width){
-            return true
-          }
-      })
+        if (textWidth > td.getBoundingClientRect().width) {
+          return true;
+        }
+      });
 
-      if(isMultiline){
-        tableRef.current.classList.add(`${prefix}--data-table--top-aligned`)
-      }else{
-        tableRef.current.classList.remove(`${prefix}--data-table--top-aligned`)
+      if (isMultiline) {
+        tableRef.current.classList.add(`${prefix}--data-table--top-aligned`);
+      } else {
+        tableRef.current.classList.remove(`${prefix}--data-table--top-aligned`);
       }
     }
-  }, [prefix])
+  }, [prefix]);
 
-  useEvent(window, 'resize', setTableAlignment)
+  useEvent(window, 'resize', setTableAlignment);
 
   useEffect(() => {
-    setTableAlignment()
-  }, [setTableAlignment, size])
+    setTableAlignment();
+  }, [setTableAlignment, size]);
 
   const table = (
     <div className={`${prefix}--data-table-content`}>
