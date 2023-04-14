@@ -21,6 +21,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { keys, match, matches } from '../../internal/keyboard';
 import { usePressable } from './usePressable';
 import deprecate from '../../prop-types/deprecate';
+import { Close } from '@carbon/icons-react';
 
 // Used to manage the overall state of the Tabs
 const TabsContext = React.createContext();
@@ -480,6 +481,50 @@ function createLongPressBehavior(ref, direction, setScrollLeft) {
   };
 }
 
+const DismissableTab = React.forwardRef(function DismissableTab(
+  { onCloseRequest, disabled, ...rest },
+  ref
+) {
+  const prefix = usePrefix();
+
+  const handleClose = () => {
+    if (!disabled) {
+      onCloseRequest?.();
+    }
+  };
+  return (
+    <Tab
+      ref={ref}
+      renderIcon={() => (
+        // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+        <div
+          role="button"
+          tabIndex={-1}
+          className={`${prefix}--tabs__nav-item--close-icon`}
+          onClick={handleClose}
+          aria-label="Close tab"
+          title="Close tab"
+          aria-disabled={disabled ? true : undefined}>
+          <Close />
+        </div>
+      )}
+      disabled={disabled}
+      {...rest}
+    />
+  );
+});
+
+DismissableTab.propTypes = {
+  /**
+   * Whether your Tab is disabled.
+   */
+  disabled: PropTypes.bool,
+  /**
+   * Callback function that gets triggered when close button is pressed,
+   */
+  onCloseRequest: PropTypes.func,
+};
+
 const Tab = React.forwardRef(function Tab(
   {
     as: BaseComponent = 'button',
@@ -772,4 +817,4 @@ TabPanels.propTypes = {
   children: PropTypes.node,
 };
 
-export { Tabs, Tab, IconTab, TabPanel, TabPanels, TabList };
+export { DismissableTab, Tabs, Tab, IconTab, TabPanel, TabPanels, TabList };

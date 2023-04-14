@@ -6,7 +6,15 @@
  */
 
 import React from 'react';
-import { Tabs, TabList, Tab, TabPanels, TabPanel, IconTab } from './Tabs';
+import {
+  DismissableTab,
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
+  IconTab,
+} from './Tabs';
 import TextInput from '../TextInput';
 import Checkbox from '../Checkbox';
 import Button from '../Button';
@@ -43,8 +51,10 @@ export const Default = () => (
     <TabList aria-label="List of tabs">
       <Tab>Tab label 1</Tab>
       <Tab>Tab label 2</Tab>
-      <Tab disabled>Tab label 3</Tab>
-      <Tab>Tab label 4</Tab>
+      <DismissableTab disabled>Tab label 3</DismissableTab>
+      <DismissableTab onCloseRequest={() => console.log('closee')}>
+        Tab label 4
+      </DismissableTab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>

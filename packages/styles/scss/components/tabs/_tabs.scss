@@ -280,6 +280,14 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       display: flex;
       align-items: center;
       padding-left: $spacing-03;
+
+      .#{$prefix}--tabs__nav-item--close-icon {
+        line-height: 0;
+
+        &:hover:not([aria-disabled]) {
+          background-color: $layer-hover;
+        }
+      }
     }
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--icon {
