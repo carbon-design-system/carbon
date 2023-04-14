@@ -148,15 +148,10 @@
     height: $-height;
     justify-content: center;
     padding: 0;
-    // -1px to compensate for border width
     padding-block-start: min(
-      calc(($-height - rem(16px)) / 2 - rem(1px)),
+      calc(($-height - rem(16px)) / 2),
       var(--temp-padding-block-max)
     );
-
-    > :first-child {
-      margin-block-start: rem(1px);
-    }
 
     .#{$prefix}--btn__icon {
       position: static;
