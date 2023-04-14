@@ -97,18 +97,18 @@ describe('Toggletip', () => {
       expect(container.firstChild).toHaveClass('custom-class');
     });
     it.each([
-      ['left', `${prefix}--popover--left`],
-      ['right', `${prefix}--popover--right`],
-      ['top', `${prefix}--popover--top`],
-      ['bottom', `${prefix}--popover--bottom`],
-      ['top-left', `${prefix}--popover--top-left`],
-      ['top-right', `${prefix}--popover--top-right`],
-      ['bottom-left', `${prefix}--popover--bottom-left`],
-      ['bottom-right', `${prefix}--popover--bottom-right`],
-      ['left-top', `${prefix}--popover--left-top`],
-      ['left-top', `${prefix}--popover--left-top`],
-      ['right-top', `${prefix}--popover--right-top`],
-      ['right-bottom', `${prefix}--popover--right-bottom`],
+      'left',
+      'right',
+      'top',
+      'bottom',
+      'top-left',
+      'top-right',
+      'bottom-left',
+      'bottom-right',
+      'left-top',
+      'left-top',
+      'right-top',
+      'right-bottom',
     ])('should support different alignments with the `align` prop', (align) => {
       const { container } = render(
         <Toggletip data-testid="toggletip" align={align}>
@@ -116,7 +116,7 @@ describe('Toggletip', () => {
         </Toggletip>
       );
 
-      expect(container.firstChild).toHaveClass(`cds--popover--${align}`);
+      expect(container.firstChild).toHaveClass(`${prefix}--popover--${align}`);
     });
     it('should initially be open if `defaultOpen` is set to true', () => {
       const { container } = render(
