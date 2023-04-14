@@ -173,7 +173,7 @@ const TableHeader = React.forwardRef(function TableHeader(
       sortStates,
     });
 
-  const headerClasses = cx(headerClassName, `${prefix}--table-sort__header`)
+  const headerClasses = cx(headerClassName, `${prefix}--table-sort__header`);
 
   return (
     <th
