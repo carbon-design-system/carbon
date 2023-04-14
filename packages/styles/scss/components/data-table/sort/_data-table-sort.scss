@@ -90,6 +90,17 @@
     justify-content: space-between;
   }
 
+  .#{$prefix}--data-table--top-aligned th .#{$prefix}--table-sort__flex {
+    align-items: start;
+  }
+
+  .#{$prefix}--data-table--top-aligned.#{$prefix}--data-table--lg
+    th
+    .#{$prefix}--table-sort__flex {
+    padding-top: $spacing-05;
+    padding-bottom: $spacing-05;
+  }
+
   .#{$prefix}--data-table--sort:not(.#{$prefix}--data-table--xs):not(.#{$prefix}--data-table--sm):not(.#{$prefix}--data-table--md):not(.#{$prefix}--data-table--xl)
     th
     .#{$prefix}--table-sort__flex {
