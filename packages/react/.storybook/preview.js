@@ -47,7 +47,7 @@ export const globalTypes = {
     },
   },
   layoutSize: {
-    name: '[β] Layout size',
+    name: 'unstable__Layout size',
     description: "Set the layout context's size",
     defaultValue: false,
     toolbar: {
@@ -67,7 +67,7 @@ export const globalTypes = {
     },
   },
   layoutDensity: {
-    name: '[β] Layout density',
+    name: 'unstable__Layout density',
     description: "Set the layout context's density",
     defaultValue: false,
     toolbar: {
