@@ -52,7 +52,7 @@ describe('TableBatchActions', () => {
     expect(screen.getByText('2 items selected')).toBeInTheDocument();
   });
 
-  it('should invoke the `onCancel` hook if the action is canceled', () => {
+  it('should invoke the `onCancel` hook if the action is canceled', async () => {
     const onCancel = jest.fn();
 
     render(
@@ -63,7 +63,7 @@ describe('TableBatchActions', () => {
       />
     );
 
-    userEvent.click(screen.getByText('Cancel'));
+    await userEvent.click(screen.getByText('Cancel'));
     expect(onCancel).toHaveBeenCalled();
   });
 });

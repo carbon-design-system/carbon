@@ -408,6 +408,7 @@
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper--readonly,
   .#{$prefix}--text-input-wrapper--readonly .#{$prefix}--text-input {
+    border-bottom-color: $border-subtle;
     background: transparent;
   }
 

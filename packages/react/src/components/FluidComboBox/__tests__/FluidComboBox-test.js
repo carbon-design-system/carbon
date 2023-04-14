@@ -21,8 +21,8 @@ import { FeatureFlags } from '../../FeatureFlags';
 const prefix = 'cds';
 
 const findInputNode = () => screen.getByRole('combobox');
-const openMenu = () => {
-  userEvent.click(findInputNode());
+const openMenu = async () => {
+  await userEvent.click(findInputNode());
 };
 
 describe('FluidComboBox', () => {
@@ -61,22 +61,22 @@ describe('FluidComboBox', () => {
     );
   });
 
-  it('should display the menu of items when a user clicks on the input', () => {
+  it('should display the menu of items when a user clicks on the input', async () => {
     render(<FluidComboBox {...mockProps} />);
 
-    userEvent.click(findInputNode());
+    await userEvent.click(findInputNode());
 
     assertMenuOpen(mockProps);
   });
 
-  it('should call `onChange` each time an item is selected', () => {
+  it('should call `onChange` each time an item is selected', async () => {
     render(<FluidComboBox {...mockProps} />);
     expect(mockProps.onChange).not.toHaveBeenCalled();
 
     for (let i = 0; i < mockProps.items.length; i++) {
-      openMenu();
+      await openMenu();
 
-      userEvent.click(screen.getAllByRole('option')[i]);
+      await userEvent.click(screen.getAllByRole('option')[i]);
 
       expect(mockProps.onChange).toHaveBeenCalledTimes(i + 1);
       expect(mockProps.onChange).toHaveBeenCalledWith({
@@ -85,30 +85,30 @@ describe('FluidComboBox', () => {
     }
   });
 
-  it('capture filter text events', () => {
+  it('capture filter text events', async () => {
     const onInputChange = jest.fn();
     render(<FluidComboBox {...mockProps} onInputChange={onInputChange} />);
 
-    userEvent.type(findInputNode(), 'something');
+    await userEvent.type(findInputNode(), 'something');
 
     expect(onInputChange).toHaveBeenCalledWith('something');
   });
 
-  it('should render custom item components', () => {
+  it('should render custom item components', async () => {
     const itemToElement = jest.fn((item) => {
       return <div className="mock-item">{item.text}</div>;
     });
     render(<FluidComboBox {...mockProps} itemToElement={itemToElement} />);
-    openMenu();
+    await openMenu();
 
     expect(itemToElement).toHaveBeenCalled();
   });
 
-  it('should let the user select an option by clicking on the option node', () => {
+  it('should let the user select an option by clicking on the option node', async () => {
     render(<FluidComboBox {...mockProps} />);
-    openMenu();
+    await openMenu();
 
-    userEvent.click(screen.getAllByRole('option')[0]);
+    await userEvent.click(screen.getAllByRole('option')[0]);
 
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
@@ -118,9 +118,9 @@ describe('FluidComboBox', () => {
 
     mockProps.onChange.mockClear();
 
-    openMenu();
+    await openMenu();
 
-    userEvent.click(screen.getAllByRole('option')[1]);
+    await userEvent.click(screen.getAllByRole('option')[1]);
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[1],
@@ -181,21 +181,21 @@ describe('FluidComboBox', () => {
   });
 
   describe('when disabled', () => {
-    it('should not let the user edit the input node', () => {
+    it('should not let the user edit the input node', async () => {
       render(<FluidComboBox {...mockProps} disabled={true} />);
 
       expect(findInputNode()).toHaveAttribute('disabled');
 
       expect(findInputNode()).toHaveDisplayValue('');
 
-      userEvent.type(findInputNode(), 'a');
+      await userEvent.type(findInputNode(), 'a');
 
       expect(findInputNode()).toHaveDisplayValue('');
     });
 
-    it('should not let the user expand the menu', () => {
+    it('should not let the user expand the menu', async () => {
       render(<FluidComboBox {...mockProps} disabled={true} />);
-      openMenu();
+      await openMenu();
       expect(findListBoxNode()).not.toHaveClass('cds--list-box--expanded');
     });
   });
@@ -207,7 +207,7 @@ describe('FluidComboBox', () => {
       expect(findInputNode()).toHaveDisplayValue('');
     });
 
-    it('should only render one listbox at a time when multiple fluidcomboboxes are present', () => {
+    it('should only render one listbox at a time when multiple fluidcomboboxes are present', async () => {
       render(
         <>
           <div data-testid="fluidcombobox-1">
@@ -237,17 +237,17 @@ describe('FluidComboBox', () => {
       expect(firstListBox()).toBeEmptyDOMElement();
       expect(secondListBox()).toBeEmptyDOMElement();
 
-      userEvent.click(firstFluidComboBoxChevron);
+      await userEvent.click(firstFluidComboBoxChevron);
 
       expect(firstListBox()).not.toBeEmptyDOMElement();
       expect(secondListBox()).toBeEmptyDOMElement();
 
-      userEvent.click(secondFluidComboBoxChevron);
+      await userEvent.click(secondFluidComboBoxChevron);
 
       expect(firstListBox()).toBeEmptyDOMElement();
       expect(secondListBox()).not.toBeEmptyDOMElement();
 
-      userEvent.click(secondFluidComboBoxChevron);
+      await userEvent.click(secondFluidComboBoxChevron);
 
       expect(firstListBox()).toBeEmptyDOMElement();
       expect(secondListBox()).toBeEmptyDOMElement();
