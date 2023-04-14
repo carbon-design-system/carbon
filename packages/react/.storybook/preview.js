@@ -16,36 +16,7 @@ import { Layout } from '../src/components/Layout';
 
 import theme from './theme';
 
-export const globalTypes = {
-  locale: {
-    name: 'Locale',
-    description: 'Set the localization for the storybook',
-    defaultValue: 'en',
-    toolbar: {
-      icon: 'globe',
-      items: [
-        {
-          right: '🇺🇸',
-          title: 'English',
-          value: 'en',
-        },
-        {
-          right: '🇵🇸',
-          title: 'Arabic',
-          value: 'ar',
-        },
-      ],
-    },
-  },
-  theme: {
-    name: 'Theme',
-    description: 'Set the global theme for displaying components',
-    defaultValue: 'white',
-    toolbar: {
-      icon: 'paintbrush',
-      items: ['white', 'g10', 'g90', 'g100'],
-    },
-  },
+const devTools = {
   layoutSize: {
     name: 'unstable__Layout size',
     description: "Set the layout context's size",
@@ -82,6 +53,39 @@ export const globalTypes = {
       ],
     },
   },
+};
+
+export const globalTypes = {
+  locale: {
+    name: 'Locale',
+    description: 'Set the localization for the storybook',
+    defaultValue: 'en',
+    toolbar: {
+      icon: 'globe',
+      items: [
+        {
+          right: '🇺🇸',
+          title: 'English',
+          value: 'en',
+        },
+        {
+          right: '🇵🇸',
+          title: 'Arabic',
+          value: 'ar',
+        },
+      ],
+    },
+  },
+  theme: {
+    name: 'Theme',
+    description: 'Set the global theme for displaying components',
+    defaultValue: 'white',
+    toolbar: {
+      icon: 'paintbrush',
+      items: ['white', 'g10', 'g90', 'g100'],
+    },
+  },
+  ...(process.env.NODE_ENV === 'development' ? devTools : {}),
 };
 
 export const parameters = {
