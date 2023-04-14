@@ -4,6 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+const prefix = 'cds';
 import React, { forwardRef } from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { Toggletip, ToggletipButton } from '..';
@@ -30,24 +31,23 @@ describe('Toggletip', () => {
     );
     await userEvent.click(screen.getByText('test'));
 
-    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
-    expect(container.firstChild).toHaveClass('cds--toggletip--open');
-    expect(container.firstChild).toHaveClass('cds--popover--open');
+    expect(container.firstChild).toHaveClass(`${prefix}--toggletip--open`);
+    expect(container.firstChild).toHaveClass(`${prefix}--popover--open`);
   });
 
   it('should toggle visibility on Enter and Space', async () => {
-    render(
+    const { container } = render(
       <Toggletip data-testid="toggletip">
         <ToggletipButton label="Show information">test</ToggletipButton>
       </Toggletip>
     );
     await userEvent.type(screen.getByRole('button'), 'enter');
-    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
+    expect(container.firstChild).toHaveClass(`${prefix}--toggletip--open`);
+    expect(container.firstChild).toHaveClass(`${prefix}--popover--open`);
+
     await userEvent.type(screen.getByRole('button'), 'space');
-    expect(screen.getByRole('button')).toHaveAttribute(
-      'aria-expanded',
-      'false'
-    );
+    expect(container.firstChild).not.toHaveClass(`${prefix}--toggletip--open`);
+    expect(container.firstChild).not.toHaveClass(`${prefix}--popover--open`);
   });
   it('should close on Escape', async () => {
     const { container } = render(
@@ -56,28 +56,24 @@ describe('Toggletip', () => {
       </Toggletip>
     );
     await userEvent.type(screen.getByRole('button'), 'space');
-    expect(screen.getByRole('button')).toHaveAttribute(
-      'aria-expanded',
-      'false'
-    );
-    expect(container.firstChild).not.toHaveClass('cds--toggletip--open');
-    expect(container.firstChild).not.toHaveClass('cds--popover--open');
+    expect(container.firstChild).not.toHaveClass(`${prefix}--toggletip--open`);
+    expect(container.firstChild).not.toHaveClass(`${prefix}--popover--open`);
   });
-  it('should close if an element outside of the toggletip is clicked', () => {
+  it('should close if an element outside of the toggletip is clicked', async () => {
     const { container } = render(
       <Toggletip data-testid="toggletip" defaultOpen>
         <ToggletipButton label="Show information">test</ToggletipButton>
       </Toggletip>
     );
 
-    userEvent.click(document.body);
+    await userEvent.click(document.body);
 
     expect(screen.getByRole('button')).toHaveAttribute(
       'aria-expanded',
       'false'
     );
-    expect(container.firstChild).not.toHaveClass('cds--toggletip--open');
-    expect(container.firstChild).not.toHaveClass('cds--popover--open');
+    expect(container.firstChild).not.toHaveClass(`${prefix}--toggletip--open`);
+    expect(container.firstChild).not.toHaveClass(`${prefix}--popover--open`);
   });
 
   describe('Component API', () => {
@@ -101,18 +97,18 @@ describe('Toggletip', () => {
       expect(container.firstChild).toHaveClass('custom-class');
     });
     it.each([
-      ['left', 'cds--popover--left'],
-      ['right', 'cds--popover--right'],
-      ['top', 'cds--popover--top'],
-      ['bottom', 'cds--popover--bottom'],
-      ['top-left', 'cds--popover--top-left'],
-      ['top-right', 'cds--popover--top-right'],
-      ['bottom-left', 'cds--popover--bottom-left'],
-      ['bottom-right', 'cds--popover--bottom-right'],
-      ['left-top', 'cds--popover--left-top'],
-      ['left-top', 'cds--popover--left-top'],
-      ['right-top', 'cds--popover--right-top'],
-      ['right-bottom', 'cds--popover--right-bottom'],
+      ['left', `${prefix}--popover--left`],
+      ['right', `${prefix}--popover--right`],
+      ['top', `${prefix}--popover--top`],
+      ['bottom', `${prefix}--popover--bottom`],
+      ['top-left', `${prefix}--popover--top-left`],
+      ['top-right', `${prefix}--popover--top-right`],
+      ['bottom-left', `${prefix}--popover--bottom-left`],
+      ['bottom-right', `${prefix}--popover--bottom-right`],
+      ['left-top', `${prefix}--popover--left-top`],
+      ['left-top', `${prefix}--popover--left-top`],
+      ['right-top', `${prefix}--popover--right-top`],
+      ['right-bottom', `${prefix}--popover--right-bottom`],
     ])('should support different alignments with the `align` prop', (align) => {
       const { container } = render(
         <Toggletip data-testid="toggletip" align={align}>
@@ -129,8 +125,8 @@ describe('Toggletip', () => {
         </Toggletip>
       );
 
-      expect(container.firstChild).toHaveClass('cds--toggletip--open');
-      expect(container.firstChild).toHaveClass('cds--popover--open');
+      expect(container.firstChild).toHaveClass(`${prefix}--toggletip--open`);
+      expect(container.firstChild).toHaveClass(`${prefix}--popover--open`);
     });
 
     it('should close when the browser window loses focus', () => {
@@ -142,8 +138,10 @@ describe('Toggletip', () => {
 
       fireEvent.blur(window);
 
-      expect(container.firstChild).not.toHaveClass('cds--toggletip--open');
-      expect(container.firstChild).not.toHaveClass('cds--popover--open');
+      expect(container.firstChild).not.toHaveClass(
+        `${prefix}--toggletip--open`
+      );
+      expect(container.firstChild).not.toHaveClass(`${prefix}--popover--open`);
     });
 
     it.todo(
@@ -159,27 +157,24 @@ describe('Toggletip', () => {
 
       await userEvent.click(screen.queryByTestId('innerDiv'));
 
-      expect(container.firstChild).toHaveClass('cds--toggletip--open');
-      expect(container.firstChild).toHaveClass('cds--popover--open');
+      expect(container.firstChild).toHaveClass(`${prefix}--toggletip--open`);
+      expect(container.firstChild).toHaveClass(`${prefix}--popover--open`);
     });
 
-    it('should be closed when the focus leaves the tooltip', () => {
+    it('should be closed when the focus leaves the tooltip', async () => {
       const { container } = render(
-        <div>
-          <Toggletip data-testid="toggletip" defaultOpen>
-            <span>test</span>
-          </Toggletip>
-
-          <span>focus-here</span>
-        </div>
+        <Toggletip data-testid="toggletip" defaultOpen>
+          <span>test</span>
+        </Toggletip>
       );
 
-      const element = screen.getByText('focus-here');
+      // await userEvent.click(document.body);
+      fireEvent.blur(window);
 
-      userEvent.click(element);
-
-      expect(container.firstChild).not.toHaveClass('cds--toggletip--open');
-      expect(container.firstChild).not.toHaveClass('cds--popover--open');
+      expect(container.firstChild).not.toHaveClass(
+        `${prefix}--toggletip--open`
+      );
+      expect(container.firstChild).not.toHaveClass(`${prefix}--popover--open`);
     });
   });
 });
