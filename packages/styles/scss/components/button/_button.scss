@@ -154,6 +154,10 @@
       var(--temp-padding-block-max)
     );
 
+    > :first-child {
+      margin-block-start: rem(1px);
+    }
+
     .#{$prefix}--btn__icon {
       position: static;
     }
