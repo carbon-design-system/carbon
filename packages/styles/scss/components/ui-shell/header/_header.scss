@@ -48,6 +48,10 @@
     }
   }
 
+  .#{$prefix}--header__action > :first-child {
+    margin-block-start: 0;
+  }
+
   .#{$prefix}--header__action
     > svg.#{$prefix}--navigation-menu-panel-collapse-icon,
   .#{$prefix}--header__action--active
