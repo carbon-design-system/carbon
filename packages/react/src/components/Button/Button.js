@@ -81,7 +81,9 @@ const Button = React.forwardRef(function Button(
     />
   );
 
-  const iconOnlyImage = !ButtonImageElement ? null : <ButtonImageElement />;
+  const iconOnlyImage = !ButtonImageElement ? null : (
+    <ButtonImageElement className={`${prefix}--btn__icon`} />
+  );
 
   const dangerButtonVariants = ['danger', 'danger--tertiary', 'danger--ghost'];
 
