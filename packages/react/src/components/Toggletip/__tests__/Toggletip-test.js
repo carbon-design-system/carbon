@@ -22,40 +22,40 @@ describe('Toggletip', () => {
   });
 
   // Usage
-  it('should toggle visibility on click', () => {
+  it('should toggle visibility on click', async () => {
     const { container } = render(
       <Toggletip data-testid="toggletip">
         <ToggletipButton label="Show information">test</ToggletipButton>
       </Toggletip>
     );
-    userEvent.click(screen.getByText('test'));
+    await userEvent.click(screen.getByText('test'));
 
     expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
     expect(container.firstChild).toHaveClass('cds--toggletip--open');
     expect(container.firstChild).toHaveClass('cds--popover--open');
   });
 
-  it('should toggle visibility on Enter and Space', () => {
+  it('should toggle visibility on Enter and Space', async () => {
     render(
       <Toggletip data-testid="toggletip">
         <ToggletipButton label="Show information">test</ToggletipButton>
       </Toggletip>
     );
-    userEvent.type(screen.getByRole('button'), 'enter');
+    await userEvent.type(screen.getByRole('button'), 'enter');
     expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
-    userEvent.type(screen.getByRole('button'), 'space');
+    await userEvent.type(screen.getByRole('button'), 'space');
     expect(screen.getByRole('button')).toHaveAttribute(
       'aria-expanded',
       'false'
     );
   });
-  it('should close on Escape', () => {
+  it('should close on Escape', async () => {
     const { container } = render(
       <Toggletip data-testid="toggletip" defaultOpen>
         <ToggletipButton label="Show information">test</ToggletipButton>
       </Toggletip>
     );
-    userEvent.type(screen.getByRole('button'), 'space');
+    await userEvent.type(screen.getByRole('button'), 'space');
     expect(screen.getByRole('button')).toHaveAttribute(
       'aria-expanded',
       'false'
@@ -69,7 +69,9 @@ describe('Toggletip', () => {
         <ToggletipButton label="Show information">test</ToggletipButton>
       </Toggletip>
     );
-    fireEvent.click(document);
+
+    userEvent.click(document.body);
+
     expect(screen.getByRole('button')).toHaveAttribute(
       'aria-expanded',
       'false'
@@ -111,18 +113,15 @@ describe('Toggletip', () => {
       ['left-top', 'cds--popover--left-top'],
       ['right-top', 'cds--popover--right-top'],
       ['right-bottom', 'cds--popover--right-bottom'],
-    ])(
-      'should support different alignments with the `align` prop',
-      (align, className) => {
-        const { container } = render(
-          <Toggletip data-testid="toggletip" align={align}>
-            <span>test</span>
-          </Toggletip>
-        );
+    ])('should support different alignments with the `align` prop', (align) => {
+      const { container } = render(
+        <Toggletip data-testid="toggletip" align={align}>
+          <span>test</span>
+        </Toggletip>
+      );
 
-        expect(container.firstChild).toHaveClass(className);
-      }
-    );
+      expect(container.firstChild).toHaveClass(`cds--popover--${align}`);
+    });
     it('should initially be open if `defaultOpen` is set to true', () => {
       const { container } = render(
         <Toggletip data-testid="toggletip" defaultOpen>
@@ -151,14 +150,14 @@ describe('Toggletip', () => {
       'should return to the trigger button if the menu is closed while focus is still inside the menu'
     );
 
-    it('should not close when the menu itself is clicked', () => {
+    it('should not close when the menu itself is clicked', async () => {
       const { container } = render(
         <Toggletip data-testid="toggletip" defaultOpen>
           <div data-testid="innerDiv">test</div>
         </Toggletip>
       );
 
-      userEvent.click(screen.queryByTestId('innerDiv'));
+      await userEvent.click(screen.queryByTestId('innerDiv'));
 
       expect(container.firstChild).toHaveClass('cds--toggletip--open');
       expect(container.firstChild).toHaveClass('cds--popover--open');
@@ -177,7 +176,7 @@ describe('Toggletip', () => {
 
       const element = screen.getByText('focus-here');
 
-      fireEvent.focus(element);
+      userEvent.click(element);
 
       expect(container.firstChild).not.toHaveClass('cds--toggletip--open');
       expect(container.firstChild).not.toHaveClass('cds--popover--open');
