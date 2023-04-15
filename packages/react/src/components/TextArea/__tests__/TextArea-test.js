@@ -178,7 +178,7 @@ describe('TextArea', () => {
       expect(screen.getByRole('textbox')).toHaveAttribute('rows', '25');
     });
 
-    it('should respect enableCounter and macCount prop', () => {
+    it('should respect enableCounter and maxCount prop', () => {
       render(
         <TextArea
           id="textarea-1"
