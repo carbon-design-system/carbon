@@ -5,13 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, cleanup } from '@carbon/test-utils/react';
 import React, { useState } from 'react';
 import { ErrorBoundary, ErrorBoundaryContext } from '../';
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
 
 describe('ErrorBoundary', () => {
-  afterEach(cleanup);
-
   it('should render children and not a fallback if no error is caught', () => {
     function MockComponent() {
       return <span data-test-id="mock">mock</span>;
@@ -66,22 +65,18 @@ describe('ErrorBoundary', () => {
     console.error.mockRestore();
   });
 
-  it('should reset from fallback if children have changed', () => {
+  it('should reset from fallback if children have changed', async () => {
     console.error = jest.spyOn(console, 'error').mockImplementation(() => {});
-
-    let content = null;
-    let fallback = null;
-    let button = null;
 
     function ThrowError({ shouldThrowError }) {
       if (shouldThrowError) {
         throw new Error('test error');
       }
-      return <span ref={(element) => (content = element)}>mock</span>;
+      return <span>no error span</span>;
     }
 
     function MockFallback() {
-      return <span ref={(element) => (fallback = element)}>mock</span>;
+      return <span>fallback</span>;
     }
 
     function MockTest() {
@@ -93,10 +88,7 @@ describe('ErrorBoundary', () => {
 
       return (
         <ErrorBoundaryContext.Provider value={{ log: jest.fn() }}>
-          <button
-            type="button"
-            ref={(element) => (button = element)}
-            onClick={onClick}>
+          <button type="button" onClick={onClick}>
             Toggle
           </button>
           <ErrorBoundary fallback={<MockFallback />}>
@@ -108,18 +100,18 @@ describe('ErrorBoundary', () => {
 
     render(<MockTest />);
 
-    expect(content).toBeDefined();
-    expect(fallback).toBe(null);
+    expect(screen.getByText('no error span')).toBeInTheDocument();
+    expect(screen.queryByText('fallback')).not.toBeInTheDocument();
 
-    button.click();
+    await userEvent.click(screen.getByRole('button'));
 
-    expect(content).toBe(null);
-    expect(fallback).toBeDefined();
+    expect(await screen.getByText('fallback')).toBeInTheDocument();
+    expect(await screen.queryByText('no error span')).not.toBeInTheDocument();
 
-    button.click();
+    await userEvent.click(screen.getByText('Toggle'));
 
-    expect(content).toBeDefined();
-    expect(fallback).toBe(null);
+    expect(await screen.getByText('no error span')).toBeInTheDocument();
+    expect(await screen.queryByText('fallback')).not.toBeInTheDocument();
 
     console.error.mockRestore();
   });

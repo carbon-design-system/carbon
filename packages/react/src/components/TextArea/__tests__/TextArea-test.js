@@ -195,7 +195,7 @@ describe('TextArea', () => {
     });
 
     describe('behaves as expected - Component API', () => {
-      it('should respect onChange prop', () => {
+      it('should respect onChange prop', async () => {
         const onChange = jest.fn();
         render(
           <TextArea
@@ -206,8 +206,10 @@ describe('TextArea', () => {
           />
         );
 
-        userEvent.type(screen.getByRole('textbox'), 'x');
-        expect(screen.getByRole('textbox')).toHaveValue('x');
+        const component = screen.getByRole('textbox');
+
+        await userEvent.type(component, 'x');
+        expect(component).toHaveValue('x');
         expect(onChange).toHaveBeenCalledTimes(1);
         expect(onChange).toHaveBeenCalledWith(
           expect.objectContaining({
@@ -216,7 +218,7 @@ describe('TextArea', () => {
         );
       });
 
-      it('should respect onClick prop', () => {
+      it('should respect onClick prop', async () => {
         const onClick = jest.fn();
         render(
           <TextArea
@@ -227,7 +229,7 @@ describe('TextArea', () => {
           />
         );
 
-        userEvent.click(screen.getByRole('textbox'));
+        await userEvent.click(screen.getByRole('textbox'));
         expect(onClick).toHaveBeenCalledTimes(1);
         expect(onClick).toHaveBeenCalledWith(
           expect.objectContaining({
@@ -251,7 +253,7 @@ describe('TextArea', () => {
         expect(onClick).not.toHaveBeenCalled();
       });
 
-      it('should respect readOnly prop', () => {
+      it('should respect readOnly prop', async () => {
         const onChange = jest.fn();
         const onClick = jest.fn();
         render(
@@ -264,7 +266,7 @@ describe('TextArea', () => {
           />
         );
 
-        userEvent.click(screen.getByRole('textbox'));
+        await userEvent.click(screen.getByRole('textbox'));
         expect(onClick).toHaveBeenCalledTimes(1);
 
         userEvent.type(screen.getByRole('textbox'), 'x');

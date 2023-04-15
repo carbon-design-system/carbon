@@ -21,7 +21,7 @@ describe('SideNavSwitcher', () => {
     expect(screen.getByRole('combobox')).toEqual(screen.getByLabelText('test'));
   });
 
-  it('should call `onChange` when the value of the <select> changes', () => {
+  it('should call `onChange` when the value of the <select> changes', async () => {
     const onChange = jest.fn();
     render(
       <SideNavSwitcher
@@ -31,7 +31,7 @@ describe('SideNavSwitcher', () => {
       />
     );
 
-    userEvent.selectOptions(
+    await userEvent.selectOptions(
       screen.getByLabelText('test'),
       screen.getByRole('option', { name: 'Option 1' })
     );

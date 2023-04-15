@@ -17,7 +17,7 @@ const blocklist = new Set([
   'state',
   'tools',
   '.DS_Store',
-  'index.js',
+  'index.ts',
   'DataTable-story.js',
   '__tests__',
   '__mocks__',

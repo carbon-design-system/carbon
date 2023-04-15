@@ -72,7 +72,7 @@ describe('ProgressIndicator', () => {
       );
     });
 
-    it('should call onChange when expected', () => {
+    it('should call onChange when expected', async () => {
       const onChange = jest.fn();
       render(
         <ProgressIndicator onChange={onChange} currentIndex={1}>
@@ -90,7 +90,7 @@ describe('ProgressIndicator', () => {
         </ProgressIndicator>
       );
 
-      userEvent.click(screen.getByTitle('First step'));
+      await userEvent.click(screen.getByTitle('First step'));
 
       expect(onChange).toHaveBeenCalled();
     });
@@ -190,7 +190,7 @@ describe('ProgressStep', () => {
       expect(screen.getByRole('listitem')).toHaveClass(
         'cds--progress-step--disabled'
       );
-      expect(screen.getByRole('button')).toHaveAttribute('disabled');
+      expect(screen.getByRole('button')).toBeDisabled();
       expect(screen.getByRole('button')).toHaveClass(
         'cds--progress-step-button--unclickable'
       );
@@ -205,7 +205,7 @@ describe('ProgressStep', () => {
     it('should respect invalid prop', () => {
       render(<ProgressStep label="First step" invalid />);
 
-      expect(screen.getByText('Invalid')).toBeDefined();
+      expect(screen.getByText('Invalid')).toBeInTheDocument();
     });
 
     it('should respect label prop', () => {
@@ -214,11 +214,11 @@ describe('ProgressStep', () => {
       expect(screen.getByRole('button')).toHaveAttribute('title', 'First step');
     });
 
-    it('should call onClick when expected', () => {
+    it('should call onClick when expected', async () => {
       const onClick = jest.fn();
       render(<ProgressStep label="First step" onClick={onClick} />);
 
-      userEvent.click(screen.getByRole('button'));
+      await userEvent.click(screen.getByRole('button'));
       expect(onClick).toHaveBeenCalled();
     });
 

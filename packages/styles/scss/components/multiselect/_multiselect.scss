@@ -119,6 +119,7 @@
 
   .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly,
   .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly:hover {
+    border-bottom-color: $border-subtle;
     background-color: transparent;
   }
 

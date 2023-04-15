@@ -58,6 +58,7 @@ export default function Copy({
   if (FeatureFlags.enabled('enable-v11-release')) {
     return (
       <IconButton
+        closeOnActivation={false}
         align="bottom"
         className={classNames}
         label={animation ? feedback : other['aria-label']}
@@ -67,7 +68,6 @@ export default function Copy({
           handleAnimationEnd,
         ])}
         {...other}
-        aria-live="polite"
         aria-label={
           (!children && (animation ? feedback : other['aria-label'])) || null
         }>
