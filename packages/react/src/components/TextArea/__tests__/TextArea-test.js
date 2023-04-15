@@ -73,7 +73,6 @@ describe('TextArea', () => {
 
     it('should respect id prop', () => {
       render(<TextArea id="textarea-1" labelText="TextArea label" />);
-
       expect(screen.getByRole('textbox')).toHaveAttribute('id', 'textarea-1');
     });
 
@@ -176,11 +175,10 @@ describe('TextArea', () => {
 
     it('should respect rows prop', () => {
       render(<TextArea id="textarea-1" labelText="TextArea label" rows={25} />);
-
       expect(screen.getByRole('textbox')).toHaveAttribute('rows', '25');
     });
 
-    it('should respect enableCounter and macCount prop', () => {
+    it('should respect enableCounter and maxCount prop', () => {
       render(
         <TextArea
           id="textarea-1"
@@ -189,7 +187,6 @@ describe('TextArea', () => {
           maxCount={500}
         />
       );
-
       expect(screen.getByRole('textbox')).toHaveAttribute('maxlength', '500');
       expect(screen.getByText('0/500')).toBeInTheDocument();
     });
