@@ -1119,12 +1119,20 @@
         "a11y"
       ]
     },
-
     {
       "login": "gerzonc",
       "name": "Gerzon",
       "avatar_url": "https://avatars.githubusercontent.com/u/36211892?v=4",
       "profile": "https://github.com/gerzonc",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "kubijo",
+      "name": "kubijo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11244314?v=4",
+      "profile": "https://github.com/kubijo",
       "contributions": [
         "code"
       ]
