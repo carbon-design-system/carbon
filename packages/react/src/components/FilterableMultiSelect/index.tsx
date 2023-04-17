@@ -1,1 +1,5 @@
-export { FilterableMultiSelect } from '../MultiSelect';
+export {
+  FilterableMultiSelect,
+  type MultiSelectProps,
+  type FilterableMultiSelectProps,
+} from '../MultiSelect';

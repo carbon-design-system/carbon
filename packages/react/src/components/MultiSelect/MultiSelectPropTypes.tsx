@@ -37,3 +37,34 @@ export const sortingPropTypes = {
    */
   sortItems: PropTypes.func.isRequired,
 };
+
+export interface ItemBase {
+  disabled?: boolean;
+}
+export interface SortingPropTypes<Item extends ItemBase> {
+  /**
+   * Provide a compare function that is used
+   * to determine the ordering of options.
+   */
+  compareItems(itemA: string, itemB: string, ctx: { locale: string }): number;
+
+  /**
+   * Provide a method that sorts all options in the control. Overriding this
+   * prop means that you also have to handle the sort logic for selected versus
+   * un-selected items. If you just want to control ordering, consider the
+   * `compareItems` prop instead.
+   */
+  sortItems(
+    items: Item[],
+    state: {
+      selectedItems: Item[];
+      itemToString(item: Item): string;
+      compareItems(
+        itemA: string,
+        itemB: string,
+        ctx: { locale: string }
+      ): number;
+      locale: string;
+    }
+  ): Item[];
+}
