@@ -23,6 +23,7 @@ import {
   TileBelowTheFoldContent,
 } from './';
 import TileGroup from '../TileGroup/TileGroup';
+import { Download } from '@carbon/icons-react';
 import mdx from './Tile.mdx';
 
 export default {
@@ -81,7 +82,29 @@ export const Clickable = (args) => {
       <ClickableTile
         id="clickable-tile-1"
         href="https://www.carbondesignsystem.com/"
-        iconDescription="Icon Description"
+        {...args}>
+        Clickable Tile
+      </ClickableTile>
+    </div>
+  );
+};
+
+Clickable.argTypes = {
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+};
+
+export const ClickableWithCustomIcon = (args) => {
+  return (
+    <div style={{ width: '400px' }}>
+      <ClickableTile
+        id="clickable-tile-1"
+        href="https://www.carbondesignsystem.com/"
+        renderIcon={Download}
         {...args}>
         Clickable Tile
       </ClickableTile>

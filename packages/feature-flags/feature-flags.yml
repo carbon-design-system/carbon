@@ -26,3 +26,7 @@ feature-flags:
     description: >
       Enable the experimental tile improved contrast styles
     enabled: false
+  - name: enable-v12-tile-default-icons
+    description: >
+      Enable rendering of default icons in the tile components
+    enabled: false

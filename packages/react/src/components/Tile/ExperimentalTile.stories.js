@@ -25,7 +25,7 @@ import mdx from './ExperimentalTile.mdx';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
 export default {
-  title: 'Experimental/Improved Contrast Tile',
+  title: 'Experimental/Feature Flags/enable-experimental-tile-contrast/Tile',
   component: Tile,
   subcomponents: {
     ClickableTile,
@@ -50,7 +50,7 @@ export default {
   },
 };
 
-const experimentalClassname = 'experimental-tile-contrast';
+const experimentalClassname = 'experimental-tile';
 
 export const Clickable = (args) => {
   return (

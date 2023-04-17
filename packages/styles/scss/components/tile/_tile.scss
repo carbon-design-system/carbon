@@ -20,7 +20,10 @@
 /// Tile styles
 /// @access public
 /// @group tile
-@mixin tile($local-enable-experimental-tile-contrast: false) {
+@mixin tile(
+  $enable-experimental-tile-contrast: false,
+  $enable-v12-tile-default-icons: false
+) {
   .#{$prefix}--tile-group {
     @include reset;
   }
@@ -65,7 +68,7 @@
 
     @if (
       enabled('enable-experimental-tile-contrast') or
-        $local-enable-experimental-tile-contrast
+        $enable-experimental-tile-contrast
     ) {
       border: 1px solid $border-tile;
     }
@@ -106,32 +109,36 @@
 
     @if (
       enabled('enable-experimental-tile-contrast') or
-        $local-enable-experimental-tile-contrast
+        $enable-experimental-tile-contrast
     ) {
       border: 1px solid $border-disabled;
     }
   }
 
-  .#{$prefix}--tile--clickable .#{$prefix}--tile--icon,
-  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled
-    .#{$prefix}--tile--disabled-icon {
-    position: absolute;
-    right: 1rem;
-    bottom: 1rem;
-  }
+  @if (
+    enabled('enable-v12-tile-default-icons') or $enable-v12-tile-default-icons
+  ) {
+    .#{$prefix}--tile--clickable .#{$prefix}--tile--icon,
+    .#{$prefix}--tile--clickable.#{$prefix}--link--disabled
+      .#{$prefix}--tile--disabled-icon {
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+    }
 
-  .#{$prefix}--tile--clickable .#{$prefix}--tile--icon {
-    fill: $icon-interactive;
-  }
+    .#{$prefix}--tile--clickable .#{$prefix}--tile--icon {
+      fill: $icon-interactive;
+    }
 
-  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled
-    .#{$prefix}--tile--disabled-icon {
-    fill: $icon-disabled;
-  }
+    .#{$prefix}--tile--clickable.#{$prefix}--link--disabled
+      .#{$prefix}--tile--disabled-icon {
+      fill: $icon-disabled;
+    }
 
-  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled
-    .#{$prefix}--tile--icon {
-    display: none;
+    .#{$prefix}--tile--clickable.#{$prefix}--link--disabled
+      .#{$prefix}--tile--icon {
+      display: none;
+    }
   }
 
   .#{$prefix}--tile--selectable {
@@ -140,7 +147,7 @@
 
     @if (
       enabled('enable-experimental-tile-contrast') or
-        $local-enable-experimental-tile-contrast
+        $enable-experimental-tile-contrast
     ) {
       border: 1px solid $border-tile;
     }
@@ -237,7 +244,7 @@
 
     @if (
       enabled('enable-experimental-tile-contrast') or
-        $local-enable-experimental-tile-contrast
+        $enable-experimental-tile-contrast
     ) {
       border: 1px solid $border-tile;
     }
@@ -340,7 +347,7 @@
 
     @if (
       enabled('enable-experimental-tile-contrast') or
-        $local-enable-experimental-tile-contrast
+        $enable-experimental-tile-contrast
     ) {
       border: 1px solid $border-disabled;
     }

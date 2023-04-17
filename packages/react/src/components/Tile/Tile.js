@@ -16,6 +16,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { getInteractiveContent } from '../../internal/useNoInteractiveChildren';
 import { useMergedRefs } from '../../internal/useMergedRefs';
+import { useFeatureFlag } from '../FeatureFlags';
 
 export const Tile = React.forwardRef(function Tile(
   { children, className, light = false, ...rest },
@@ -103,11 +104,22 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
     onKeyDown(evt);
   }
 
-  const iconImage = !Icon ? (
-    <ArrowRight className={`${prefix}--tile--icon`} aria-hidden="true" />
-  ) : (
-    <Icon className={`${prefix}--tile--icon`} aria-hidden="true" />
-  );
+  const v12DefaultIcons = useFeatureFlag('enable-v12-tile-default-icons');
+  if (v12DefaultIcons) {
+    if (!Icon) {
+      Icon = ArrowRight;
+    }
+
+    if (disabled) {
+      Icon = Error;
+    }
+  }
+
+  const iconClasses = cx({
+    [`${prefix}--tile--icon`]: !v12DefaultIcons,
+    [`${prefix}--tile--icon`]: v12DefaultIcons && !disabled,
+    [`${prefix}--tile--disabled-icon`]: v12DefaultIcons && disabled,
+  });
 
   return (
     <Link
@@ -119,13 +131,7 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
       disabled={disabled}
       {...rest}>
       {children}
-      {iconImage}
-      {disabled && (
-        <Error
-          className={`${prefix}--tile--disabled-icon`}
-          aria-hidden="true"
-        />
-      )}
+      {Icon && <Icon className={iconClasses} aria-hidden="true" />}
     </Link>
   );
 });

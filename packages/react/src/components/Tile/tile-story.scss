@@ -1,7 +1,10 @@
 @use '@carbon/react/scss/components/tile';
 
-.experimental-tile-contrast {
-  @include tile.tile(true);
+.experimental-tile {
+  @include tile.tile(
+    $enable-experimental-tile-contrast: true,
+    $enable-v12-tile-default-icons: true
+  );
 }
 
 div .bx--tile--selectable:not(:last-child) {
