@@ -217,6 +217,11 @@
       background-color $duration-fast-02 motion(standard, productive);
   }
 
+  .#{$prefix}--pagination__button > svg,
+  .#{$prefix}--btn--ghost.#{$prefix}--pagination__button > svg {
+    margin-block-start: 0;
+  }
+
   .#{$prefix}--pagination--sm .#{$prefix}--pagination__button,
   .#{$prefix}--pagination--sm
     .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
