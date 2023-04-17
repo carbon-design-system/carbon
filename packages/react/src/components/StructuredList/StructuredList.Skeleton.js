@@ -10,12 +10,11 @@ import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-const StructuredListSkeleton = ({ rowCount, border, className, ...rest }) => {
+const StructuredListSkeleton = ({ rowCount, className, ...rest }) => {
   const prefix = usePrefix();
   const StructuredListSkeletonClasses = cx(className, {
     [`${prefix}--skeleton`]: true,
     [`${prefix}--structured-list`]: true,
-    [`${prefix}--structured-list--border`]: border,
   });
 
   const rows = [];
@@ -52,11 +51,6 @@ const StructuredListSkeleton = ({ rowCount, border, className, ...rest }) => {
 
 StructuredListSkeleton.propTypes = {
   /**
-   * Specify whether a border should be added to your StructuredListSkeleton
-   */
-  border: PropTypes.bool,
-
-  /**
    * Specify an optional className to add.
    */
   className: PropTypes.string,
@@ -69,7 +63,6 @@ StructuredListSkeleton.propTypes = {
 
 StructuredListSkeleton.defaultProps = {
   rowCount: 5,
-  border: false,
 };
 
 export default StructuredListSkeleton;

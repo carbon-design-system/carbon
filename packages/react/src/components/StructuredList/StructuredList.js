@@ -30,7 +30,7 @@ export function StructuredListWrapper(props) {
   const classes = classNames(`${prefix}--structured-list`, className, {
     [`${prefix}--structured-list--selection`]: selection,
     [`${prefix}--structured-list--condensed`]: isCondensed,
-    [`${prefix}--structured-list--flush`]: isFlush,
+    [`${prefix}--structured-list--flush`]: isFlush && !selection,
   });
   const [selectedRow, setSelectedRow] = React.useState(null);
 
@@ -80,7 +80,7 @@ StructuredListWrapper.propTypes = {
   isCondensed: PropTypes.bool,
 
   /**
-   * Specify if structured list is flush, default is false
+   * Specify if structured list is flush, not valid for selection variant, default is false
    */
   isFlush: PropTypes.bool,
 

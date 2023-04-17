@@ -186,9 +186,55 @@ export const Selection = () => {
   );
 };
 
-export const Skeleton = () => (
+Selection.argTypes = {
+  isFlush: {
+    table: {
+      disable: true,
+    },
+  },
+};
+
+export const Skeleton = (args) => (
   <div style={{ width: '800px' }}>
-    <StructuredListSkeleton />
-    <StructuredListSkeleton />
+    <StructuredListSkeleton {...args} />
   </div>
 );
+
+Skeleton.argTypes = {
+  isFlush: {
+    table: {
+      disable: true,
+    },
+  },
+  isCondensed: {
+    table: {
+      disable: true,
+    },
+  },
+  ariaLabel: {
+    table: {
+      disable: true,
+    },
+  },
+  ['aria-label']: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  selection: {
+    table: {
+      disable: true,
+    },
+  },
+  rowCount: {
+    control: {
+      type: 'number',
+    },
+    defaultValue: 5,
+  },
+};
