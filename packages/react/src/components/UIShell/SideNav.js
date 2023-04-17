@@ -40,6 +40,16 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   const [expandedViaHoverState, setExpandedViaHoverState] =
     useState(defaultExpanded);
   const expanded = controlled ? expandedProp : expandedState;
+
+  // Closing the SideNav when the 'ESC' key is pressed
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      setExpandedState(false);
+      setExpandedViaHoverState(false);
+    }
+    return;
+  });
+
   const handleToggle = (event, value = !expanded) => {
     if (!controlled) {
       setExpandedState(value);

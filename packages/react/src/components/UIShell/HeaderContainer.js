@@ -14,6 +14,14 @@ const HeaderContainer = ({ isSideNavExpanded, render: Children }) => {
   const [isSideNavExpandedState, setIsSideNavExpandedState] =
     useState(isSideNavExpanded);
 
+  // Closing the SideNav when the 'ESC' key is pressed
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      setIsSideNavExpandedState(false);
+    }
+    return;
+  });
+
   const handleHeaderMenuButtonClick = useCallback(() => {
     setIsSideNavExpandedState(
       (prevIsSideNavExpanded) => !prevIsSideNavExpanded
