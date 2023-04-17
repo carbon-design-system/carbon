@@ -265,6 +265,10 @@ $copy-btn-feedback: $background-inverse !default;
     transition: all $duration-fast-01 motion(standard, productive);
   }
 
+  .#{$prefix}--btn > .#{$prefix}--snippet__icon {
+    margin-block-start: 0;
+  }
+
   .#{$prefix}--copy-btn {
     @include reset;
 
