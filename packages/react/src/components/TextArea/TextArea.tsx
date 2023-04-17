@@ -16,6 +16,9 @@ import { FormContext } from '../FluidForm';
 import { useAnnouncer } from '../../internal/useAnnouncer';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
+
+const getInstanceId = setupGetInstanceId();
 
 export interface TextAreaProps
   extends React.InputHTMLAttributes<HTMLTextAreaElement> {
@@ -157,6 +160,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const [textCount, setTextCount] = useState(
     defaultValue?.toString().length || value?.toString().length || 0
   );
+  const { current: textAreaInstanceId } = useRef(getInstanceId());
 
   const textareaProps: {
     id: TextAreaProps['id'];
@@ -207,8 +211,14 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     [`${prefix}--form__helper-text--disabled`]: other.disabled,
   });
 
+  const helperId = !helperText
+    ? undefined
+    : `text-area-helper-text-${textAreaInstanceId}`;
+
   const helper = helperText ? (
-    <div className={helperTextClasses}>{helperText}</div>
+    <div id={helperId} className={helperTextClasses}>
+      {helperText}
+    </div>
   ) : null;
 
   const errorId = id + '-error-msg';
@@ -257,6 +267,14 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     }
   }, [other.cols]);
 
+  let ariaDescribedBy;
+
+  if (invalid) {
+    ariaDescribedBy = errorId;
+  } else if (!invalid && !warn && !isFluid && helperText) {
+    ariaDescribedBy = helperId;
+  }
+
   const input = (
     <textarea
       {...other}
@@ -264,7 +282,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
       placeholder={placeholder}
       className={textareaClasses}
       aria-invalid={invalid}
-      aria-describedby={invalid ? errorId : undefined}
+      aria-describedby={ariaDescribedBy}
       disabled={other.disabled}
       readOnly={other.readOnly}
       ref={ref}

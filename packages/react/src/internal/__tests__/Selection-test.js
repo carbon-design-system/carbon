@@ -28,7 +28,7 @@ describe('Selection', () => {
   });
 
   describe('behaves as expected', () => {
-    it('should be able to add or remove an item from the callback props', () => {
+    it('should be able to add or remove an item from the callback props', async () => {
       let selectedItems = [];
       const onChange = (selectionState) =>
         (selectedItems = selectionState.selectedItems);
@@ -42,13 +42,13 @@ describe('Selection', () => {
         />
       );
       expect(selectedItems.length).toBe(0);
-      userEvent.click(screen.getByRole('button'));
+      await userEvent.click(screen.getByRole('button'));
       expect(selectedItems.length).toBe(1);
-      userEvent.click(screen.getByRole('button'));
+      await userEvent.click(screen.getByRole('button'));
       expect(selectedItems.length).toBe(0);
     });
 
-    it('should give a list of all selected items from the callback props', () => {
+    it('should give a list of all selected items from the callback props', async () => {
       const { container } = render(
         <Selection
           {...mockProps}
@@ -65,11 +65,11 @@ describe('Selection', () => {
         />
       );
       expect(container.querySelectorAll('li').length).toBe(0);
-      userEvent.click(screen.getByRole('button'));
+      await userEvent.click(screen.getByRole('button'));
       expect(container.querySelectorAll('li').length).toBe(1);
     });
 
-    it('should be able to clear the selection from the callback props', () => {
+    it('should be able to clear the selection from the callback props', async () => {
       let selectedItems = [];
       const onChange = (selectionState) =>
         (selectedItems = selectionState.selectedItems);
@@ -94,14 +94,14 @@ describe('Selection', () => {
         />
       );
       expect(selectedItems).toEqual([]);
-      userEvent.click(container.querySelector('#add-item'));
+      await userEvent.click(container.querySelector('#add-item'));
       expect(selectedItems).toEqual([1]);
-      userEvent.click(container.querySelector('#clear-selection'));
+      await userEvent.click(container.querySelector('#clear-selection'));
       expect(selectedItems).toEqual([]);
     });
   });
 
-  it('should disallow selection when disabled', () => {
+  it('should disallow selection when disabled', async () => {
     let selectedItems = [];
     const onChange = (selectionState) =>
       (selectedItems = selectionState.selectedItems);
@@ -116,7 +116,7 @@ describe('Selection', () => {
       />
     );
     expect(selectedItems.length).toBe(0);
-    userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByRole('button'));
     expect(selectedItems.length).toBe(0);
   });
 });

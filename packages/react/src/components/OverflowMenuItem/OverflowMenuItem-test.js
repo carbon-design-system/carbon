@@ -80,11 +80,11 @@ describe('OverflowMenuItem - RTL', () => {
       );
     });
 
-    it('should call closeMenu on click', () => {
+    it('should call closeMenu on click', async () => {
       const closeMenu = jest.fn();
       render(<OverflowMenuItem closeMenu={closeMenu} itemText="one" />);
 
-      userEvent.click(screen.getByRole('menuitem'));
+      await userEvent.click(screen.getByRole('menuitem'));
 
       expect(closeMenu).toHaveBeenCalled();
     });
@@ -125,7 +125,7 @@ describe('OverflowMenuItem - RTL', () => {
       expect(screen.getByText('one')).toBeInTheDocument();
     });
 
-    it('should call onClick', () => {
+    it('should call onClick', async () => {
       const onClick = jest.fn();
       render(
         <OverflowMenuItem
@@ -135,12 +135,12 @@ describe('OverflowMenuItem - RTL', () => {
         />
       );
 
-      userEvent.click(screen.getByRole('menuitem'));
+      await userEvent.click(screen.getByRole('menuitem'));
 
       expect(onClick).toHaveBeenCalled();
     });
 
-    it('should call onMouseDown', () => {
+    it('should call onMouseDown', async () => {
       const onMouseDown = jest.fn();
       render(
         <OverflowMenuItem
@@ -150,12 +150,12 @@ describe('OverflowMenuItem - RTL', () => {
         />
       );
 
-      userEvent.click(screen.getByRole('menuitem'));
+      await userEvent.click(screen.getByRole('menuitem'));
 
       expect(onMouseDown).toHaveBeenCalled();
     });
 
-    it('should call onMouseEnter', () => {
+    it('should call onMouseEnter', async () => {
       const onMouseEnter = jest.fn();
       render(
         <OverflowMenuItem
@@ -165,12 +165,12 @@ describe('OverflowMenuItem - RTL', () => {
         />
       );
 
-      userEvent.click(screen.getByRole('menuitem'));
+      await userEvent.click(screen.getByRole('menuitem'));
 
       expect(onMouseEnter).toHaveBeenCalled();
     });
 
-    it('should call onMouseUp', () => {
+    it('should call onMouseUp', async () => {
       const onMouseUp = jest.fn();
       render(
         <OverflowMenuItem
@@ -180,12 +180,12 @@ describe('OverflowMenuItem - RTL', () => {
         />
       );
 
-      userEvent.click(screen.getByRole('menuitem'));
+      await userEvent.click(screen.getByRole('menuitem'));
 
       expect(onMouseUp).toHaveBeenCalled();
     });
 
-    it('should call onFocus', () => {
+    it('should call onFocus', async () => {
       const onFocus = jest.fn();
       render(
         <OverflowMenuItem
@@ -195,12 +195,12 @@ describe('OverflowMenuItem - RTL', () => {
         />
       );
 
-      userEvent.click(screen.getByRole('menuitem'));
+      await userEvent.click(screen.getByRole('menuitem'));
 
       expect(onFocus).toHaveBeenCalled();
     });
 
-    it('should call onKeyDown', () => {
+    it('should call onKeyDown', async () => {
       const onKeyDown = jest.fn();
       render(
         <OverflowMenuItem
@@ -210,12 +210,12 @@ describe('OverflowMenuItem - RTL', () => {
         />
       );
 
-      userEvent.type(screen.getByRole('menuitem'), '{enter}');
+      await userEvent.type(screen.getByRole('menuitem'), '{enter}');
 
       expect(onKeyDown).toHaveBeenCalled();
     });
 
-    it('should call onKeyUp', () => {
+    it('should call onKeyUp', async () => {
       const onKeyUp = jest.fn();
       render(
         <OverflowMenuItem
@@ -225,7 +225,7 @@ describe('OverflowMenuItem - RTL', () => {
         />
       );
 
-      userEvent.type(screen.getByRole('menuitem'), '{enter}');
+      await userEvent.type(screen.getByRole('menuitem'), '{enter}');
 
       expect(onKeyUp).toHaveBeenCalled();
     });
