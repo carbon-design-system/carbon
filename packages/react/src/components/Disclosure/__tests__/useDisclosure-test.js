@@ -7,7 +7,7 @@
 
 import { cleanup, render, screen } from '@testing-library/react';
 import React from 'react';
-import userEvent, { specialChars } from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event';
 import { useDisclosure } from '../index.js';
 import '@testing-library/jest-dom';
 
@@ -15,7 +15,7 @@ describe('useDisclosure', () => {
   afterEach(cleanup);
 
   // https://www.w3.org/TR/wai-aria-practices-1.1/#keyboard-interaction-8
-  it('should toggle visibility when the button is clicked', () => {
+  it('should toggle visibility when the button is clicked', async () => {
     function TestComponent() {
       const { buttonProps, contentProps, open } = useDisclosure('testid');
       return (
@@ -37,19 +37,20 @@ describe('useDisclosure', () => {
 
     const trigger = screen.getByText('trigger');
 
-    userEvent.tab();
+    await userEvent.tab();
     expect(trigger).toHaveFocus();
 
-    userEvent.click(document.activeElement);
+    await userEvent.click(document.activeElement);
     expect(content).toBeVisible();
 
-    userEvent.click(document.activeElement);
+    await userEvent.click(document.activeElement);
     expect(content).not.toBeVisible();
   });
 
-  it('should toggle visibility when the button is focused and Enter or Space is pressed', () => {
+  it('should toggle visibility when the button is focused and Enter or Space is pressed', async () => {
     function TestComponent() {
       const { buttonProps, contentProps, open } = useDisclosure('testid');
+
       return (
         <>
           <button type="button" {...buttonProps}>
@@ -61,20 +62,26 @@ describe('useDisclosure', () => {
         </>
       );
     }
+    const user = userEvent.setup();
 
     render(<TestComponent />);
 
-    const trigger = screen.getByText('trigger');
+    screen.getByText('trigger').focus();
 
-    userEvent.type(trigger, `${specialChars.space}`);
-    expect(trigger).toHaveFocus();
+    const content = screen.getByText('content');
 
-    userEvent.type(trigger, `${specialChars.enter}`);
-    expect(trigger).toHaveFocus();
+    await user.keyboard('[Space]');
+    expect(content.hidden).toBe(false);
+
+    await user.keyboard('[Space]');
+    expect(content.hidden).toBe(true);
+
+    await user.keyboard('[Enter]');
+    expect(content.hidden).toBe(false);
   });
 
   // https://www.w3.org/TR/wai-aria-practices-1.1/#wai-aria-roles-states-and-properties-8
-  it('should set `aria-expanded` to match the visibility of the content', () => {
+  it('should set `aria-expanded` to match the visibility of the content', async () => {
     function TestComponent() {
       const { buttonProps, contentProps, open } = useDisclosure('testid');
       return (
@@ -94,7 +101,7 @@ describe('useDisclosure', () => {
     const trigger = screen.getByRole('button');
     expect(trigger).toHaveAttribute('aria-expanded', 'false');
 
-    userEvent.click(trigger);
+    await userEvent.click(trigger);
 
     expect(trigger).toHaveAttribute('aria-expanded', 'true');
   });

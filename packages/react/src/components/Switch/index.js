@@ -6,6 +6,7 @@
  */
 
 import Switch from './Switch';
+import IconSwitch from './IconSwitch';
 
 export default Switch;
-export { Switch };
+export { Switch, IconSwitch };

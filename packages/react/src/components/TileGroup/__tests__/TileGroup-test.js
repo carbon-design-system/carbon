@@ -150,7 +150,7 @@ describe('PasswordInput', () => {
   });
 
   describe('behaves as expected', () => {
-    it('should set `checked` on correct child when `onChange is called', () => {
+    it('should set `checked` on correct child when `onChange is called', async () => {
       const onChange = jest.fn();
       render(
         <TileGroup legend="TestGroup" name="test" onChange={onChange}>
@@ -159,7 +159,7 @@ describe('PasswordInput', () => {
         </TileGroup>
       );
 
-      userEvent.click(screen.getByDisplayValue('test-1'));
+      await userEvent.click(screen.getByDisplayValue('test-1'));
       expect(onChange).toHaveBeenCalled();
       expect(onChange).toHaveBeenCalledWith(
         'test-1',

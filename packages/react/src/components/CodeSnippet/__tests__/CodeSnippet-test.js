@@ -141,7 +141,7 @@ describe('CodeSnippet', () => {
 });
 
 describe('CodeSnippet events', () => {
-  it('should call the click handler when the copy button is clicked', () => {
+  it('should call the click handler when the copy button is clicked', async () => {
     const onClick = jest.fn();
     render(
       <CodeSnippet type="single" onClick={onClick}>
@@ -150,11 +150,11 @@ describe('CodeSnippet events', () => {
     );
 
     const button = document.querySelector('button');
-    userEvent.click(button);
+    await userEvent.click(button);
     expect(onClick).toHaveBeenCalled();
   });
 
-  it('should call the click handler with type inline', () => {
+  it('should call the click handler with type inline', async () => {
     const onClick = jest.fn();
     render(
       <CodeSnippet type="inline" data-testid="code-6" onClick={onClick}>
@@ -163,7 +163,7 @@ describe('CodeSnippet events', () => {
     );
 
     const button = screen.getByTestId('code-6');
-    userEvent.click(button);
+    await userEvent.click(button);
     expect(onClick).toHaveBeenCalled();
   });
 });
