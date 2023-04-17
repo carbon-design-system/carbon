@@ -214,6 +214,7 @@ const RadioButtonGroup = React.forwardRef(
           disabled={disabled}
           data-invalid={invalid ? true : undefined}
           aria-readonly={readOnly}
+          aria-describedby={showHelper && helperText ? helperId : undefined}
           {...rest}>
           {legendText && (
             <Legend className={`${prefix}--label`}>{legendText}</Legend>

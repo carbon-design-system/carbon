@@ -124,7 +124,7 @@ describe('Toggle', () => {
       expect(wrapper.getByRole('switch')).toBeChecked();
     });
 
-    it('does not change value when readonly', () => {
+    it('does not change value when readonly', async () => {
       const onClick = jest.fn();
       const onToggle = jest.fn();
       wrapper.rerender(
@@ -132,37 +132,37 @@ describe('Toggle', () => {
       );
 
       expect(onClick).not.toHaveBeenCalled();
-      userEvent.click(wrapper.getByRole('switch'));
+      await userEvent.click(wrapper.getByRole('switch'));
       expect(onClick).toHaveBeenCalledTimes(1);
       expect(onToggle).not.toHaveBeenCalled();
     });
   });
 
   describe('emits events as expected', () => {
-    it('passes along props.onClick to button', () => {
+    it('passes along props.onClick to button', async () => {
       const onClick = jest.fn();
       wrapper.rerender(<Toggle {...props} onClick={onClick} />);
 
       expect(onClick).not.toHaveBeenCalled();
-      userEvent.click(wrapper.getByRole('switch'));
+      await userEvent.click(wrapper.getByRole('switch'));
       expect(onClick).toHaveBeenCalledTimes(1);
     });
 
-    it('emits props.onToggle when toggled and passes current state', () => {
+    it('emits props.onToggle when toggled and passes current state', async () => {
       const onToggle = jest.fn();
 
       wrapper.rerender(
         <Toggle {...props} onToggle={onToggle} toggled={false} />
       );
       expect(onToggle).not.toHaveBeenCalled();
-      userEvent.click(wrapper.getByRole('switch'));
+      await userEvent.click(wrapper.getByRole('switch'));
       expect(onToggle).toHaveBeenCalledTimes(1);
       expect(onToggle.mock.calls[0][0]).toBe(true);
 
       wrapper.rerender(
         <Toggle {...props} onToggle={onToggle} toggled={true} />
       );
-      userEvent.click(wrapper.getByRole('switch'));
+      await userEvent.click(wrapper.getByRole('switch'));
       expect(onToggle).toHaveBeenCalledTimes(2);
       expect(onToggle.mock.calls[1][0]).toBe(false);
     });

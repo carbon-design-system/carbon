@@ -57,7 +57,33 @@ test.describe('Tabs', () => {
       test('contained with secondary labels @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Tabs',
-          id: 'components-tabs--contained-with-secondary-label',
+          id: 'components-tabs--contained-with-secondary-labels',
+          theme,
+        });
+      });
+
+      test('with icons @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Tabs',
+          id: 'components-tabs--with-icons',
+          theme,
+        });
+      });
+
+      test('contained with icons @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Tabs',
+          id: 'components-tabs--contained-with-icons',
+          theme,
+        });
+      });
+
+      test('contained with secondary labels and icons @vrt', async ({
+        page,
+      }) => {
+        await snapshotStory(page, {
+          component: 'Tabs',
+          id: 'components-tabs--contained-with-secondary-labels-and-icons',
           theme,
         });
       });

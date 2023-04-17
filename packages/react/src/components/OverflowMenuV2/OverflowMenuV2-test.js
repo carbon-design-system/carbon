@@ -33,7 +33,7 @@ describe('OverflowMenu', () => {
     expect(ul).toBe(null);
   });
 
-  it('should be in an open state after trigger is clicked', () => {
+  it('should be in an open state after trigger is clicked', async () => {
     render(
       <OverflowMenuV2>
         <MenuItem label="item" className="test-child">
@@ -45,7 +45,7 @@ describe('OverflowMenu', () => {
       </OverflowMenuV2>
     );
 
-    userEvent.type(screen.getByRole('button'), 'enter');
+    await userEvent.type(screen.getByRole('button'), 'enter');
     expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
 
     const ul = document.querySelector('ul');
@@ -115,7 +115,7 @@ describe('OverflowMenu', () => {
     expect(screen.getByRole('button')).toHaveAttribute('id', 'custom-id');
   });
 
-  it('should close menu on outside click', () => {
+  it('should close menu on outside click', async () => {
     render(
       <OverflowMenuV2>
         <MenuItem label="item" className="test-child">
@@ -126,9 +126,9 @@ describe('OverflowMenu', () => {
         </MenuItem>
       </OverflowMenuV2>
     );
-    userEvent.type(screen.getByRole('button'), 'enter');
+    await userEvent.type(screen.getByRole('button'), 'enter');
     expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
-    userEvent.click(document.body);
+    await userEvent.click(document.body);
     expect(screen.getByRole('button')).toHaveAttribute(
       'aria-expanded',
       'false'
