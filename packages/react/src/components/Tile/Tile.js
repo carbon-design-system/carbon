@@ -116,8 +116,8 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
   }
 
   const iconClasses = cx({
-    [`${prefix}--tile--icon`]: !v12DefaultIcons,
-    [`${prefix}--tile--icon`]: v12DefaultIcons && !disabled,
+    [`${prefix}--tile--icon`]:
+      !v12DefaultIcons || (v12DefaultIcons && !disabled),
     [`${prefix}--tile--disabled-icon`]: v12DefaultIcons && disabled,
   });
 

@@ -64,7 +64,7 @@ Clickable.argTypes = {
   },
 };
 
-export const ClickableWithCustomIcom = (args) => {
+export const ClickableWithCustomIcon = (args) => {
   return (
     <div className={experimentalClassname}>
       <ClickableTile
@@ -78,7 +78,7 @@ export const ClickableWithCustomIcom = (args) => {
   );
 };
 
-ClickableWithCustomIcom.argTypes = {
+ClickableWithCustomIcon.argTypes = {
   disabled: {
     control: {
       type: 'boolean',

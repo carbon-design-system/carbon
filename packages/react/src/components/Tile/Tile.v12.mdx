@@ -10,40 +10,24 @@ import { Story, Props, Source, Preview } from '@storybook/addon-docs';
 
 ## Default Icons
 
-To enable the default icons in Tiles, enable the feature flags in Sass and
-Javascript
-
-### Sass
+To enable the default icons in Tiles, enable the feature flag in Javascript
 
 ```scss
-@include feature-flags.enable('enable-v12-tile-default-icons');
-```
-
-or if you have multiple feature flags you can enable them this way.
-
-```scss
-@use '@carbon/react/scss/feature-flags' with (
-  $feature-flags: (
-    'enable-v12-tile-default-icons': true,
-  )
-);
+<FeatureFlags flags={{ 'enable-v12-tile-default-icons': true }}>
+  <ClickableTile
+    id="clickable-tile-1"
+    href="https://www.carbondesignsystem.com/">
+    Clickable Tile
+  </ClickableTile>
+</FeatureFlags>
 ```
 
 <Preview>
   <div style={{ width: '1018px', maxWidth: '100%' }}>
-    <Story id="experimental-improved-contrast-tile--clickable" />
+    <Story id="experimental-feature-flags-enable-v12-tile-default-icons-tile--clickable" />
   </div>
   <div style={{ width: '1018px', maxWidth: '100%' }}>
-    <Story id="experimental-improved-contrast-tile--expandable" />
-  </div>
-  <div style={{ width: '1018px', maxWidth: '100%' }}>
-    <Story id="experimental-improved-contrast-tile--multi-select" />
-  </div>
-  <div style={{ width: '1018px', maxWidth: '100%' }}>
-    <Story id="experimental-improved-contrast-tile--radio" />
-  </div>
-  <div style={{ width: '1018px', maxWidth: '100%' }}>
-    <Story id="experimental-improved-contrast-tile--selectable" />
+    <Story id="experimental-feature-flags-enable-v12-tile-default-icons-tile--clickable-with-custom-icon" />
   </div>
 </Preview>
 
