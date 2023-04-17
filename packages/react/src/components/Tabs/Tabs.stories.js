@@ -124,20 +124,29 @@ export const Dismissable = () => {
     setRenderedTabs(filteredTabs);
   };
 
+  const resetTabs = () => {
+    setRenderedTabs(tabs);
+  };
+
   return (
-    <Tabs>
-      <TabList aria-label="List of tabs">
-        {renderedTabs.map((tab, index) => (
-          <DismissableTab
-            key={index}
-            disabled={tab.disabled}
-            onCloseRequest={() => handleCloseTab(tab)}>
-            {tab.label}
-          </DismissableTab>
-        ))}
-      </TabList>
-      <TabPanels>{renderedTabs.map((tab) => tab.panel)}</TabPanels>
-    </Tabs>
+    <>
+      <Button style={{ marginBottom: '3rem' }} onClick={resetTabs}>
+        Reset
+      </Button>
+      <Tabs>
+        <TabList aria-label="List of tabs">
+          {renderedTabs.map((tab, index) => (
+            <DismissableTab
+              key={index}
+              disabled={tab.disabled}
+              onCloseRequest={() => handleCloseTab(tab)}>
+              {tab.label}
+            </DismissableTab>
+          ))}
+        </TabList>
+        <TabPanels>{renderedTabs.map((tab) => tab.panel)}</TabPanels>
+      </Tabs>
+    </>
   );
 };
 
