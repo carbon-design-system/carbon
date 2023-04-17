@@ -168,7 +168,6 @@ describe('Toggletip', () => {
         </Toggletip>
       );
 
-      // await userEvent.click(document.body);
       fireEvent.blur(window);
 
       expect(container.firstChild).not.toHaveClass(
