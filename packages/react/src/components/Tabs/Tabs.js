@@ -131,6 +131,16 @@ function TabList({
   const nextButton = useRef(null);
   const [isScrollable, setIsScrollable] = useState(false);
   const [scrollLeft, setScrollLeft] = useState(null);
+  // Next Button
+  // VISIBLE IF:
+  //   SCROLLABLE
+  //   AND SCROLL_LEFT + CLIENT_WIDTH < SCROLL_WIDTH
+  const [isNextButtonVisible, setIsNextButtonVisible] = useState(
+    ref.current
+      ? scrollLeft + buttonWidth + ref.current.clientWidth <
+          ref.current.scrollWidth
+      : false
+  );
   const hasSecondaryLabelTabs =
     contained &&
     !!React.Children.toArray(children).filter(
@@ -151,14 +161,6 @@ function TabList({
   const buttonWidth = 44;
   const isPreviousButtonVisible = ref.current
     ? isScrollable && scrollLeft > 0
-    : false;
-  // Next Button
-  // VISIBLE IF:
-  //   SCROLLABLE
-  //   AND SCROLL_LEFT + CLIENT_WIDTH < SCROLL_WIDTH
-  const isNextButtonVisible = ref.current
-    ? scrollLeft + buttonWidth + ref.current.clientWidth <
-      ref.current.scrollWidth
     : false;
   const previousButtonClasses = cx(
     `${prefix}--tab--overflow-nav-button`,
@@ -218,6 +220,15 @@ function TabList({
       });
     }
   });
+
+  useEffect(() => {
+    setIsNextButtonVisible(
+      ref.current
+        ? scrollLeft + buttonWidth + ref.current.clientWidth <
+            ref.current.scrollWidth
+        : false
+    );
+  }, [scrollLeft, children]);
 
   useEffectOnce(() => {
     if (tabs.current[selectedIndex].disabled) {
@@ -286,11 +297,11 @@ function TabList({
       }
 
       // The end of teh tab is clipped and not visible
-      if (end > visibleEnd) {
+      else if (end > visibleEnd) {
         setScrollLeft(end + buttonWidth - ref.current.clientWidth);
       }
     }
-  }, [activation, activeIndex, selectedIndex, isScrollable]);
+  }, [activation, activeIndex, selectedIndex, isScrollable, children]);
 
   usePressable(previousButton, {
     onPress({ longPress }) {
@@ -482,16 +493,24 @@ function createLongPressBehavior(ref, direction, setScrollLeft) {
 }
 
 const DismissableTab = React.forwardRef(function DismissableTab(
-  { onCloseRequest, disabled, ...rest },
+  { onCloseRequest, disabled, onKeyDown, ...rest },
   ref
 ) {
   const prefix = usePrefix();
 
-  const handleClose = () => {
+  const handleClose = (evt) => {
     if (!disabled) {
-      onCloseRequest?.();
+      onCloseRequest?.(evt);
     }
   };
+
+  const handleKeyDown = (event) => {
+    if (match(event, keys.Escape)) {
+      handleClose(event);
+    }
+    onKeyDown?.(event);
+  };
+
   return (
     <Tab
       ref={ref}
@@ -509,6 +528,7 @@ const DismissableTab = React.forwardRef(function DismissableTab(
         </div>
       )}
       disabled={disabled}
+      onKeyDown={handleKeyDown}
       {...rest}
     />
   );
@@ -519,10 +539,16 @@ DismissableTab.propTypes = {
    * Whether your Tab is disabled.
    */
   disabled: PropTypes.bool,
+
   /**
    * Callback function that gets triggered when close button is pressed,
    */
   onCloseRequest: PropTypes.func,
+
+  /**
+   * Provide a handler that is invoked on the key down event for the control
+   */
+  onKeyDown: PropTypes.func,
 };
 
 const Tab = React.forwardRef(function Tab(

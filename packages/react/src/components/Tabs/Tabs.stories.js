@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   DismissableTab,
   Tabs,
@@ -51,10 +51,8 @@ export const Default = () => (
     <TabList aria-label="List of tabs">
       <Tab>Tab label 1</Tab>
       <Tab>Tab label 2</Tab>
-      <DismissableTab disabled>Tab label 3</DismissableTab>
-      <DismissableTab onCloseRequest={() => console.log('closee')}>
-        Tab label 4
-      </DismissableTab>
+      <Tab disabled>Tab label 3</Tab>
+      <Tab>Tab label 4</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
@@ -80,6 +78,68 @@ export const Default = () => (
     </TabPanels>
   </Tabs>
 );
+
+export const Dismissable = () => {
+  const tabs = [
+    {
+      label: 'Tab label 1',
+      panel: <TabPanel>Tab Panel 1</TabPanel>,
+    },
+    {
+      label: 'Tab label 2',
+      panel: (
+        <TabPanel>
+          <form style={{ margin: '2em' }}>
+            <legend className={`cds--label`}>Validation example</legend>
+            <Checkbox id="cb" labelText="Accept privacy policy" />
+            <Button
+              style={{ marginTop: '1rem', marginBottom: '1rem' }}
+              type="submit">
+              Submit
+            </Button>
+            <TextInput
+              type="text"
+              labelText="Text input label"
+              helperText="Optional help text"
+              id="text-input-1"
+            />
+          </form>
+        </TabPanel>
+      ),
+    },
+    {
+      label: 'Tab label 3',
+      panel: <TabPanel>Tab Panel 3</TabPanel>,
+      disabled: true,
+    },
+    {
+      label: 'Tab label 4',
+      panel: <TabPanel>Tab Panel 4</TabPanel>,
+    },
+  ];
+  const [renderedTabs, setRenderedTabs] = useState(tabs);
+
+  const handleCloseTab = (tab) => {
+    const filteredTabs = renderedTabs.filter((currTab) => currTab !== tab);
+    setRenderedTabs(filteredTabs);
+  };
+
+  return (
+    <Tabs>
+      <TabList aria-label="List of tabs">
+        {renderedTabs.map((tab, index) => (
+          <DismissableTab
+            key={index}
+            disabled={tab.disabled}
+            onCloseRequest={() => handleCloseTab(tab)}>
+            {tab.label}
+          </DismissableTab>
+        ))}
+      </TabList>
+      <TabPanels>{renderedTabs.map((tab) => tab.panel)}</TabPanels>
+    </Tabs>
+  );
+};
 
 export const WithIcons = () => (
   <Tabs>
