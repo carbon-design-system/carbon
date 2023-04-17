@@ -7,14 +7,20 @@
 
 import React, { useState, useRef } from 'react';
 import classnames from 'classnames';
-import Search from '../Search';
+import Search, { type SearchProps } from '../Search';
 import { usePrefix } from '../../internal/usePrefix';
 import { composeEventHandlers } from '../../tools/events';
 
-function ExpandableSearch({ onBlur, onChange, onExpand, onFocus, ...props }) {
+function ExpandableSearch({
+  onBlur,
+  onChange,
+  onExpand,
+  onFocus,
+  ...props
+}: SearchProps) {
   const [expanded, setExpanded] = useState(false);
   const [hasContent, setHasContent] = useState(false);
-  const searchRef = useRef(null);
+  const searchRef = useRef<HTMLInputElement>(null);
   const prefix = usePrefix();
 
   function handleFocus() {
@@ -38,7 +44,7 @@ function ExpandableSearch({ onBlur, onChange, onExpand, onFocus, ...props }) {
   }
 
   function handleExpand() {
-    searchRef.current.focus?.();
+    searchRef.current?.focus?.();
   }
 
   const classes = classnames(

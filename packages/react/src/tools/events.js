@@ -1,3 +1,5 @@
+// @ts-check
+
 /**
  * Copyright IBM Corp. 2016, 2023
  *
@@ -11,8 +13,8 @@
  * iterate through the given functions until `preventDefault` is called on the
  * given event.
  *
- * @param {Array<Function>} fns array of functions to apply to the event
- * @returns {Function}
+ * @param {Array<Function|undefined>} fns array of functions to apply to the event
+ * @returns {any}
  */
 export const composeEventHandlers =
   (fns) =>
@@ -21,8 +23,9 @@ export const composeEventHandlers =
       if (event.defaultPrevented) {
         break;
       }
-      if (typeof fns[i] === 'function') {
-        fns[i](event, ...args);
+      const fn = fns[i];
+      if (typeof fn === 'function') {
+        fn(event, ...args);
       }
     }
   };
