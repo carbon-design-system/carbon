@@ -345,12 +345,12 @@ function TabList({
         onKeyDown={onKeyDown}>
         {React.Children.map(children, (child, index) => {
           return (
-            <TabContext.Provider value={index}>
+            <TabContext.Provider
+              value={{ index, hasSecondaryLabel: hasSecondaryLabelTabs }}>
               {React.cloneElement(child, {
                 ref: (node) => {
                   tabs.current[index] = node;
                 },
-                hasSecondaryLabel: hasSecondaryLabelTabs,
               })}
             </TabContext.Provider>
           );
@@ -489,7 +489,7 @@ const Tab = React.forwardRef(function Tab(
     onClick,
     onKeyDown,
     secondaryLabel,
-    hasSecondaryLabel,
+    renderIcon: Icon,
     ...rest
   },
   ref
@@ -497,7 +497,7 @@ const Tab = React.forwardRef(function Tab(
   const prefix = usePrefix();
   const { selectedIndex, setSelectedIndex, baseId } =
     React.useContext(TabsContext);
-  const index = React.useContext(TabContext);
+  const { index, hasSecondaryLabel } = React.useContext(TabContext);
   const id = `${baseId}-tab-${index}`;
   const panelId = `${baseId}-tabpanel-${index}`;
   const className = cx(
@@ -533,7 +533,14 @@ const Tab = React.forwardRef(function Tab(
       onKeyDown={onKeyDown}
       tabIndex={selectedIndex === index ? '0' : '-1'}
       type="button">
-      <span className={`${prefix}--tabs__nav-item-label`}>{children}</span>
+      <div className={`${prefix}--tabs__nav-item-label-wrapper`}>
+        <span className={`${prefix}--tabs__nav-item-label`}>{children}</span>
+        {Icon && (
+          <div className={`${prefix}--tabs__nav-item--icon`}>
+            <Icon size={16} />
+          </div>
+        )}
+      </div>
       {hasSecondaryLabel && (
         <div className={`${prefix}--tabs__nav-item-secondary-label`}>
           {secondaryLabel}
@@ -564,11 +571,6 @@ Tab.propTypes = {
    */
   disabled: PropTypes.bool,
 
-  /*
-   * Internal use only, determines wether a tab should render as a secondary label tab
-   **/
-  hasSecondaryLabel: PropTypes.bool,
-
   /**
    * Provide a handler that is invoked when a user clicks on the control
    */
@@ -585,6 +587,12 @@ Tab.propTypes = {
    * side router libraries.
    **/
   renderButton: PropTypes.func,
+
+  /**
+   * Optional prop to render an icon next to the label.
+   * Can be a React component class
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /*
    * An optional label to render under the primary tab label.
@@ -607,7 +615,10 @@ const IconTab = React.forwardRef(function IconTab(
 ) {
   const prefix = usePrefix();
 
-  const classNames = cx(`${prefix}--tabs__nav-item--icon`, customClassName);
+  const classNames = cx(
+    `${prefix}--tabs__nav-item--icon-only`,
+    customClassName
+  );
   return (
     <Tooltip
       align="bottom"

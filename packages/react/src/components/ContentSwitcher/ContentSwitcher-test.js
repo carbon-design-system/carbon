@@ -52,7 +52,7 @@ describe('ContentSwitcher - RTL', () => {
       );
     });
 
-    it('should call onChange when selected item changes through mouse click', () => {
+    it('should call onChange when selected item changes through mouse click', async () => {
       const onChange = jest.fn();
       render(
         <ContentSwitcher onChange={onChange} data-testid="test-id">
@@ -62,7 +62,7 @@ describe('ContentSwitcher - RTL', () => {
         </ContentSwitcher>
       );
 
-      userEvent.click(screen.getByText('Second section'));
+      await userEvent.click(screen.getByText('Second section'));
 
       expect(onChange).toHaveBeenCalled();
       expect(onChange).toHaveBeenLastCalledWith({
@@ -72,7 +72,7 @@ describe('ContentSwitcher - RTL', () => {
       });
     });
 
-    it('should call onChange when selected item changes through keydown', () => {
+    it('should call onChange when selected item changes through keydown', async () => {
       const onChange = jest.fn();
       render(
         <ContentSwitcher onChange={onChange} data-testid="test-id">
@@ -82,7 +82,7 @@ describe('ContentSwitcher - RTL', () => {
         </ContentSwitcher>
       );
 
-      userEvent.type(screen.getByText('First section'), '{arrowright}');
+      await userEvent.type(screen.getByText('First section'), '{ArrowRight}');
 
       expect(onChange).toHaveBeenCalled();
       expect(onChange).toHaveBeenLastCalledWith({
@@ -92,7 +92,7 @@ describe('ContentSwitcher - RTL', () => {
         text: 'Second section',
       });
 
-      userEvent.type(screen.getByText('Second section'), '{arrowleft}');
+      await userEvent.type(screen.getByText('Second section'), '{arrowleft}');
 
       expect(onChange).toHaveBeenCalled();
       expect(onChange).toHaveBeenLastCalledWith({

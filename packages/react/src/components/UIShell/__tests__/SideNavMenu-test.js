@@ -59,7 +59,7 @@ describe('SideNavMenu', () => {
     expect(screen.getByTestId('test-icon')).toBeInTheDocument();
   });
 
-  it('should toggle the menu on click', () => {
+  it('should toggle the menu on click', async () => {
     render(
       <SideNavMenu title="test-title">
         <SideNavMenuItem>a</SideNavMenuItem>
@@ -72,7 +72,7 @@ describe('SideNavMenu', () => {
       'false'
     );
 
-    userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByRole('button'));
     expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
   });
 

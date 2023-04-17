@@ -248,4 +248,10 @@ Playground.argTypes = {
       category: 'DatePickerInput',
     },
   },
+  helperText: {
+    control: { type: 'text' },
+    table: {
+      category: 'DatePickerInput',
+    },
+  },
 };

@@ -144,7 +144,7 @@ describe('FluidTextArea', () => {
   });
 
   describe('behaves as expected - Component API', () => {
-    it('should respect onChange prop', () => {
+    it('should respect onChange prop', async () => {
       const onChange = jest.fn();
       render(
         <FluidTextArea
@@ -155,7 +155,7 @@ describe('FluidTextArea', () => {
         />
       );
 
-      userEvent.type(screen.getByTestId('test-id-6'), 'x');
+      await userEvent.type(screen.getByTestId('test-id-6'), 'x');
       expect(screen.getByTestId('test-id-6')).toHaveValue('x');
       expect(onChange).toHaveBeenCalledTimes(1);
       expect(onChange).toHaveBeenCalledWith(
@@ -165,7 +165,7 @@ describe('FluidTextArea', () => {
       );
     });
 
-    it('should respect onClick prop', () => {
+    it('should respect onClick prop', async () => {
       const onClick = jest.fn();
       render(
         <FluidTextArea
@@ -176,11 +176,11 @@ describe('FluidTextArea', () => {
         />
       );
 
-      userEvent.click(screen.getByTestId('test-id-7'));
+      await userEvent.click(screen.getByTestId('test-id-7'));
       expect(onClick).toHaveBeenCalled();
     });
 
-    it('should not call `onClick` when the `<input>` is clicked but disabled', () => {
+    it('should not call `onClick` when the `<input>` is clicked but disabled', async () => {
       const onClick = jest.fn();
       render(
         <FluidTextArea
@@ -192,7 +192,7 @@ describe('FluidTextArea', () => {
         />
       );
 
-      userEvent.click(screen.getByTestId('test-id-8'));
+      await userEvent.click(screen.getByTestId('test-id-8'));
       expect(onClick).not.toHaveBeenCalled();
     });
   });

@@ -151,7 +151,7 @@ describe('DataTable', () => {
 
   describe('behaves as expected', () => {
     describe('sorting', () => {
-      it('should sort a row by a header when a header is clicked', () => {
+      it('should sort a row by a header when a header is clicked', async () => {
         render(<DataTable isSortable={true} {...mockProps} />);
         const header = within(screen.getAllByRole('columnheader')[0]).getByRole(
           'button'
@@ -172,7 +172,7 @@ describe('DataTable', () => {
         ]);
 
         // Click to sort rows by Field A in ascending order
-        userEvent.click(header);
+        await userEvent.click(header);
         expect(cells()).toEqual([
           'Field 1:A',
           'Field 1:B',
@@ -183,7 +183,7 @@ describe('DataTable', () => {
         ]);
 
         // Click to sort rows by Field A in descending order
-        userEvent.click(header);
+        await userEvent.click(header);
         expect(cells()).toEqual([
           'Field 3:A',
           'Field 3:B',
@@ -194,7 +194,7 @@ describe('DataTable', () => {
         ]);
 
         // Click to unsort rows by Field A in descending order
-        userEvent.click(header);
+        await userEvent.click(header);
         expect(cells()).toEqual([
           'Field 2:A',
           'Field 2:B',
@@ -205,7 +205,7 @@ describe('DataTable', () => {
         ]);
       });
 
-      it('should re-sort new row props by the current sort state', () => {
+      it('should re-sort new row props by the current sort state', async () => {
         const { rerender } = render(
           <DataTable isSortable={true} {...mockProps} />
         );
@@ -220,7 +220,7 @@ describe('DataTable', () => {
         };
 
         // Click to sort rows by Field A in ascending order
-        userEvent.click(header);
+        await userEvent.click(header);
         expect(cells()).toEqual([
           'Field 1:A',
           'Field 1:B',
@@ -241,7 +241,7 @@ describe('DataTable', () => {
         ]);
       });
 
-      it('should reset to ASC ordering when another header is clicked', () => {
+      it('should reset to ASC ordering when another header is clicked', async () => {
         render(<DataTable isSortable={true} {...mockProps} />);
 
         const firstHeader = () => screen.getAllByRole('columnheader')[0];
@@ -251,13 +251,13 @@ describe('DataTable', () => {
 
         expect(firstHeader()).toHaveTextContent('ascending');
 
-        userEvent.click(firstHeaderButton);
+        await userEvent.click(firstHeaderButton);
         expect(firstHeader()).toHaveTextContent('descending');
 
-        userEvent.click(firstHeaderButton);
+        await userEvent.click(firstHeaderButton);
         expect(firstHeader()).toHaveTextContent('unsort');
 
-        userEvent.click(secondHeaderButton);
+        await userEvent.click(secondHeaderButton);
         // After clicking the second header once, the table will now be
         // sorted ascending based on that header, which means the button
         // should now be in a state where clicking _again_ will sort it
@@ -267,7 +267,7 @@ describe('DataTable', () => {
     });
 
     describe('filtering', () => {
-      it('should filter rows by the given input', () => {
+      it('should filter rows by the given input', async () => {
         render(<DataTable isSortable={true} {...mockProps} />);
         const filterInput = screen.getByRole('searchbox');
 
@@ -276,7 +276,7 @@ describe('DataTable', () => {
           mockProps.rows.length + 1
         );
 
-        userEvent.type(filterInput, 'Field 1');
+        await userEvent.type(filterInput, 'Field 1');
 
         expect(mockProps.render).toHaveBeenCalledWith(
           expect.objectContaining({
@@ -405,12 +405,12 @@ describe('DataTable', () => {
         expect(screen.getAllByRole('checkbox')[0]).not.toBeChecked();
       });
 
-      it('should select all rows if a user interacts with select all', () => {
+      it('should select all rows if a user interacts with select all', async () => {
         render(<DataTable {...mockProps} />);
         const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
         expect(selectAllCheckbox).not.toBeChecked();
 
-        userEvent.click(selectAllCheckbox);
+        await userEvent.click(selectAllCheckbox);
 
         expect(selectAllCheckbox).toBeChecked();
 
@@ -418,7 +418,7 @@ describe('DataTable', () => {
         expect(selectedRows.length).toBe(mockProps.rows.length);
       });
 
-      it('should select a specific row when a user interacts with select row', () => {
+      it('should select a specific row when a user interacts with select row', async () => {
         render(<DataTable {...mockProps} />);
         const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
         const firstRowCheckbox = screen.getAllByRole('checkbox')[1];
@@ -426,7 +426,7 @@ describe('DataTable', () => {
         expect(selectAllCheckbox).not.toBeChecked();
         expect(firstRowCheckbox).not.toBeChecked();
 
-        userEvent.click(firstRowCheckbox);
+        await userEvent.click(firstRowCheckbox);
 
         expect(firstRowCheckbox).toBeChecked();
         expect(selectAllCheckbox).toBePartiallyChecked();
@@ -439,14 +439,14 @@ describe('DataTable', () => {
         render(<DataTable {...mockProps} />);
         const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
 
-        userEvent.click(selectAllCheckbox);
+        await userEvent.click(selectAllCheckbox);
         expect(selectAllCheckbox).toBeChecked();
 
         const { getBatchActionProps } = getLastCallFor(mockProps.render)[0];
         expect(getBatchActionProps().shouldShowBatchActions).toBe(true);
 
         const cancelButton = await screen.findByText('Cancel');
-        userEvent.click(cancelButton);
+        await userEvent.click(cancelButton);
 
         expect(selectAllCheckbox).not.toBeChecked();
         const { selectedRows } = getLastCallFor(mockProps.render)[0];
@@ -547,7 +547,7 @@ describe('DataTable', () => {
         };
       });
 
-      it('should only select all from filtered items', () => {
+      it('should only select all from filtered items', async () => {
         render(<DataTable {...mockProps} />);
 
         const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
@@ -556,22 +556,22 @@ describe('DataTable', () => {
 
         expect(selectAllCheckbox).not.toBeChecked();
 
-        userEvent.type(filterInput, 'Field 1');
-        userEvent.click(firstRowCheckbox());
-        userEvent.clear(filterInput);
+        await userEvent.type(filterInput, 'Field 1');
+        await userEvent.click(firstRowCheckbox());
+        await userEvent.clear(filterInput);
 
         expect(selectAllCheckbox).toBePartiallyChecked();
 
         let { selectedRows } = getLastCallFor(mockProps.render)[0];
         expect(selectedRows.length).toBe(1);
 
-        userEvent.click(selectAllCheckbox);
+        await userEvent.click(selectAllCheckbox);
 
         selectedRows = getLastCallFor(mockProps.render)[0].selectedRows;
         expect(selectedRows.length).toBe(0);
       });
 
-      it('should only select rows that are not disabled even when filtered', () => {
+      it('should only select rows that are not disabled even when filtered', async () => {
         const nextRows = [
           ...mockProps.rows.map((row) => ({ ...row })),
           {
@@ -586,8 +586,8 @@ describe('DataTable', () => {
         const filterInput = screen.getByRole('searchbox');
         const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
 
-        userEvent.type(filterInput, 'Field 3');
-        userEvent.click(selectAllCheckbox);
+        await userEvent.type(filterInput, 'Field 3');
+        await userEvent.click(selectAllCheckbox);
 
         const { selectedRows } = getLastCallFor(mockProps.render)[0];
         expect(selectedRows.length).toBe(1);
@@ -595,22 +595,22 @@ describe('DataTable', () => {
         expect(selectAllCheckbox).toBePartiallyChecked();
       });
 
-      it('does not select a row if they are all disabled', () => {
+      it('does not select a row if they are all disabled', async () => {
         const nextRows = [
           ...mockProps.rows.map((row) => ({ ...row, disabled: true })),
         ];
         render(<DataTable {...mockProps} rows={nextRows} />);
         const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
 
-        userEvent.click(selectAllCheckbox);
+        await userEvent.click(selectAllCheckbox);
 
         expect(selectAllCheckbox).not.toBePartiallyChecked();
         expect(selectAllCheckbox).not.toBeChecked();
 
         const filterInput = screen.getByRole('searchbox');
 
-        userEvent.type(filterInput, 'Field 3');
-        userEvent.click(selectAllCheckbox);
+        await userEvent.type(filterInput, 'Field 3');
+        await userEvent.click(selectAllCheckbox);
 
         const { selectedRows } = getLastCallFor(mockProps.render)[0];
         expect(selectedRows.length).toBe(0);
@@ -692,32 +692,32 @@ describe('DataTable', () => {
         expect(container).toMatchSnapshot();
       });
 
-      it('should select a specific row when a user interacts with select row', () => {
+      it('should select a specific row when a user interacts with select row', async () => {
         render(<DataTable {...mockProps} />);
         const radioButton = screen.getAllByRole('radio')[0];
 
         expect(radioButton).not.toBeChecked();
 
-        userEvent.click(radioButton);
+        await userEvent.click(radioButton);
         expect(radioButton).toBeChecked();
 
         const { selectedRows } = getLastCallFor(mockProps.render)[0];
         expect(selectedRows.length).toBe(1);
       });
 
-      it('should deselect all other rows when a row is selected', () => {
+      it('should deselect all other rows when a row is selected', async () => {
         render(<DataTable {...mockProps} />);
         const radioButtonOne = screen.getAllByRole('radio')[0];
         const radioButtonTwo = screen.getAllByRole('radio')[1];
 
         expect(radioButtonOne).not.toBeChecked();
 
-        userEvent.click(radioButtonOne);
+        await userEvent.click(radioButtonOne);
 
         expect(radioButtonOne).toBeChecked();
         expect(radioButtonTwo).not.toBeChecked();
 
-        userEvent.click(radioButtonTwo);
+        await userEvent.click(radioButtonTwo);
         expect(radioButtonOne).not.toBeChecked();
         expect(radioButtonTwo).toBeChecked();
 
@@ -869,10 +869,10 @@ describe('DataTable', () => {
         expect(nextArgs.headers).toEqual(nextProps.headers);
       });
 
-      it('should keep batch action after adding rows, as long as some existing rows are selected', () => {
+      it('should keep batch action after adding rows, as long as some existing rows are selected', async () => {
         const { rerender } = render(<DataTable {...mockProps} />);
         const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
-        userEvent.click(selectAllCheckbox);
+        await userEvent.click(selectAllCheckbox);
 
         const nextRows = [
           ...mockProps.rows.map((row) => ({ ...row, isSelected: true })),
@@ -894,10 +894,10 @@ describe('DataTable', () => {
         expect(selectedRows.length).toBe(3);
       });
 
-      it('should keep selected all state after adding rows, as long as all existing rows and new row are selected', () => {
+      it('should keep selected all state after adding rows, as long as all existing rows and new row are selected', async () => {
         const { rerender } = render(<DataTable {...mockProps} />);
         const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
-        userEvent.click(selectAllCheckbox);
+        await userEvent.click(selectAllCheckbox);
 
         const nextRows = [
           ...mockProps.rows,
