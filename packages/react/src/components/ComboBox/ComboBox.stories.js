@@ -73,7 +73,6 @@ export const Default = () => (
         },
       }}
       itemToString={(item) => (item ? item.text : '')}
-      placeholder="Filter..."
       titleText="ComboBox title"
       helperText="Combobox helper text"
     />
@@ -89,7 +88,6 @@ export const _WithLayer = () => (
           id={`carbon-combobox-${layer}`}
           items={items}
           itemToString={(item) => (item ? item.text : '')}
-          placeholder="Filter..."
           titleText="ComboBox title"
           helperText="Combobox helper text"
         />
@@ -109,7 +107,6 @@ export const Playground = (args) => (
         },
       }}
       itemToString={(item) => (item ? item.text : '')}
-      placeholder="Filter..."
       titleText="ComboBox title"
       helperText="Combobox helper text"
       {...args}

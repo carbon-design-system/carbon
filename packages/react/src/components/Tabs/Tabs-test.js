@@ -10,7 +10,7 @@ describe('Tabs', () => {
       <Tabs defaultSelectedIndex={1}>
         <TabList aria-label="List of tabs">
           <Tab>Tab Label 1</Tab>
-          <Tab>Tab Label 2</Tab>
+          <Tab data-testid="tab-testid">Tab Label 2</Tab>
           <Tab>Tab Label 3</Tab>
         </TabList>
         <TabPanels>
@@ -21,7 +21,7 @@ describe('Tabs', () => {
       </Tabs>
     );
 
-    expect(screen.getByText('Tab Label 2').parentElement).toHaveAttribute(
+    expect(screen.getByTestId('tab-testid')).toHaveAttribute(
       'aria-selected',
       'true'
     );
@@ -56,7 +56,9 @@ describe('Tab', () => {
       <Tabs>
         <TabList aria-label="List of tabs">
           <Tab disabled>Tab Label 1</Tab>
-          <Tab className="custom-class">Tab Label 2</Tab>
+          <Tab data-testid="tab-testid" className="custom-class">
+            Tab Label 2
+          </Tab>
           <Tab>Tab Label 3</Tab>
         </TabList>
         <TabPanels>
@@ -67,17 +69,17 @@ describe('Tab', () => {
       </Tabs>
     );
 
-    expect(screen.getByText('Tab Label 2').parentElement).toHaveClass(
-      'custom-class'
-    );
+    expect(screen.getByTestId('tab-testid')).toHaveClass('custom-class');
   });
 
   it('should not select a disabled tab and select next tab', () => {
     render(
       <Tabs>
         <TabList aria-label="List of tabs">
-          <Tab disabled>Tab Label 1</Tab>
-          <Tab>Tab Label 2</Tab>
+          <Tab data-testid="tab-testid-1" disabled>
+            Tab Label 1
+          </Tab>
+          <Tab data-testid="tab-testid-2">Tab Label 2</Tab>
           <Tab>Tab Label 3</Tab>
         </TabList>
         <TabPanels>
@@ -88,13 +90,13 @@ describe('Tab', () => {
       </Tabs>
     );
 
-    expect(screen.getByText('Tab Label 1').parentElement).toHaveAttribute(
+    expect(screen.getByTestId('tab-testid-1')).toHaveAttribute(
       'aria-selected',
       'false'
     );
 
     // By default, if a Tab is disabled, the next Tab should be selected
-    expect(screen.getByText('Tab Label 2').parentElement).toHaveAttribute(
+    expect(screen.getByTestId('tab-testid-2')).toHaveAttribute(
       'aria-selected',
       'true'
     );
@@ -158,7 +160,33 @@ describe('Tab', () => {
     expect(screen.queryByText('test-secondary-label')).not.toBeInTheDocument();
   });
 
-  it('should call onClick from props if provided', () => {
+  it('should display an icon from renderIcon prop', async () => {
+    render(
+      <Tabs>
+        <TabList aria-label="List of tabs">
+          <Tab renderIcon={() => <svg data-testid="svg" />} disabled>
+            Tab Label 1
+          </Tab>
+          <Tab data-testid="tab-testid" className="custom-class">
+            Tab Label 2
+          </Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    expect(screen.getByTestId('svg')).toBeInTheDocument();
+    expect(screen.getByTestId('svg').parentElement).toHaveClass(
+      'cds--tabs__nav-item--icon'
+    );
+  });
+
+  it('should call onClick from props if provided', async () => {
     const onClick = jest.fn();
     render(
       <Tabs>
@@ -175,12 +203,12 @@ describe('Tab', () => {
       </Tabs>
     );
 
-    userEvent.click(screen.getByText('Tab Label 1'));
+    await userEvent.click(screen.getByText('Tab Label 1'));
 
     expect(onClick).toHaveBeenCalled();
   });
 
-  it('should call onKeyDown from props if provided', () => {
+  it('should call onKeyDown from props if provided', async () => {
     const onKeyDown = jest.fn();
     render(
       <Tabs>
@@ -197,7 +225,7 @@ describe('Tab', () => {
       </Tabs>
     );
 
-    userEvent.type(screen.getByText('Tab Label 1'), 'enter');
+    await userEvent.type(screen.getByText('Tab Label 1'), 'enter');
 
     expect(onKeyDown).toHaveBeenCalled();
   });
