@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { CARBON_SIDENAV_ITEMS } from './_utils';
 import { usePrefix } from '../../internal/usePrefix';
+import { keys, match } from '../../internal/keyboard';
 // TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
 
@@ -40,15 +41,6 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   const [expandedViaHoverState, setExpandedViaHoverState] =
     useState(defaultExpanded);
   const expanded = controlled ? expandedProp : expandedState;
-
-  // Closing the SideNav when the 'ESC' key is pressed
-  document.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape') {
-      setExpandedState(false);
-      setExpandedViaHoverState(false);
-    }
-    return;
-  });
 
   const handleToggle = (event, value = !expanded) => {
     if (!controlled) {
@@ -119,6 +111,11 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     };
     eventHandlers.onBlur = (event) => {
       if (!event.currentTarget.contains(event.relatedTarget)) {
+        handleToggle(event, false);
+      }
+    };
+    eventHandlers.onKeyDown = (event) => {
+      if (match(event, keys.Escape)) {
         handleToggle(event, false);
       }
     };

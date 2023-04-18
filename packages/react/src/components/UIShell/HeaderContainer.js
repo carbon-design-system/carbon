@@ -7,6 +7,8 @@
 
 import PropTypes from 'prop-types';
 import React, { useState, useCallback } from 'react';
+import { keys, match } from '../../internal/keyboard';
+import { useEvent } from '../../internal/useEvent';
 
 // eslint-disable-next-line react/prop-types
 const HeaderContainer = ({ isSideNavExpanded, render: Children }) => {
@@ -14,12 +16,10 @@ const HeaderContainer = ({ isSideNavExpanded, render: Children }) => {
   const [isSideNavExpandedState, setIsSideNavExpandedState] =
     useState(isSideNavExpanded);
 
-  // Closing the SideNav when the 'ESC' key is pressed
-  document.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape') {
+  useEvent(window, 'keydown', (event) => {
+    if (match(event, keys.Escape)) {
       setIsSideNavExpandedState(false);
     }
-    return;
   });
 
   const handleHeaderMenuButtonClick = useCallback(() => {
