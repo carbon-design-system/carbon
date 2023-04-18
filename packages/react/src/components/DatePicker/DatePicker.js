@@ -362,7 +362,7 @@ const DatePicker = React.forwardRef(function DatePicker(
       maxDate: maxDate,
       plugins: [
         datePickerType === 'range'
-          ? new carbonFlatpickrRangePlugin({
+          ? carbonFlatpickrRangePlugin({
               input: endInputField.current,
             })
           : () => {},
