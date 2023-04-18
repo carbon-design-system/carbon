@@ -15,7 +15,7 @@ import { Field, SubmissionError, reduxForm, reducer as reduxFormReducer } from '
 import BXBtn from '@carbon/web-components/es/components-react/button/button.js';
 import BXFormItem from '@carbon/web-components/es/components-react/form/form-item.js';
 import CDSTextInput from '@carbon/web-components/es/components-react/text-input/text-input.js';
-import BXInlineNotification from '@carbon/web-components/es/components-react/notification/inline-notification.js';
+import CDSInlineNotification from '@carbon/web-components/es/components-react/notification/inline-notification.js';
 import './index.css';
 
 const reducer = combineReducers({
@@ -70,7 +70,7 @@ const SubmitValidationForm = reduxForm({
 })(({ error, handleSubmit, pristine, reset, submitting }) => (
   <form>
     {error && (
-      <BXInlineNotification kind="error" title="Login failed" subtitle="Please correct below errors." hideCloseButton={true} />
+      <CDSInlineNotification kind="error" title="Login failed" subtitle="Please correct below errors." hideCloseButton={true} />
     )}
     <Field name="username" type="text" component={FieldImpl} label="Username" />
     <Field name="password" type="password" component={FieldImpl} label="Password" />

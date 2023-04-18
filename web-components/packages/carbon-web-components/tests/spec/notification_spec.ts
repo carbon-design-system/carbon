@@ -8,13 +8,13 @@
  */
 
 import { render } from 'lit';
-import BXInlineNotification, {
+import CDSInlineNotification, {
   NOTIFICATION_KIND,
 } from '../../src/components/notification/inline-notification';
-import { inline } from '../../src/components/notification/notification-story';
+import { Playground } from '../../src/components/notification/inline-notification-story';
 
 const inlineTemplate = (props?) =>
-  inline({
+  Playground({
     'cds-inline-notification': props,
   });
 
@@ -49,7 +49,7 @@ describe('cds-inline-notification', function () {
   });
 
   describe('Closing', function () {
-    let notification: BXInlineNotification | null;
+    let notification: CDSInlineNotification | null;
 
     beforeEach(async function () {
       render(inlineTemplate(), document.body);
@@ -71,10 +71,10 @@ describe('cds-inline-notification', function () {
     let notification;
 
     beforeEach(async function () {
-      const initializeTimerCloseEvent = (BXInlineNotification.prototype as any)
+      const initializeTimerCloseEvent = (CDSInlineNotification.prototype as any)
         ._handleUserOrTimerInitiatedClose;
       spyOn(
-        BXInlineNotification.prototype as any,
+        CDSInlineNotification.prototype as any,
         '_initializeTimeout'
       ).and.callFake(function () {
         // TODO: See if we can get around TS2683

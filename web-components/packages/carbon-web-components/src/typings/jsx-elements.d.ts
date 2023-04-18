@@ -59,6 +59,8 @@ declare global {
       'cds-modal-label': any;
       'cds-multi-select': any;
       'cds-multi-select-item': any;
+      'cds-actionable-notification': any;
+      'cds-actionable-notification-button': any;
       'cds-inline-notification': any;
       'cds-toast-notification': any;
       'cds-number-input': any;

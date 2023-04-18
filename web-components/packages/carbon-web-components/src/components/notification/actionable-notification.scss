@@ -1,0 +1,170 @@
+//
+// Copyright IBM Corp. 2019, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/components/notification/index' as *;
+@use '@carbon/styles/scss/components/button';
+@use '@carbon/styles/scss/components/button/mixins' as button-mixins;
+@use '@carbon/styles/scss/components/button/vars' as button-vars;
+
+@include actionable-notification;
+
+:host(#{$prefix}-actionable-notification) {
+  @extend .#{$prefix}--actionable-notification;
+
+  display: none;
+  outline: none;
+}
+
+:host(#{$prefix}-actionable-notification-button):not(
+    [low-contrast]
+  )[kind='tertiary']
+  button {
+  @include button-mixins.button-theme(
+    transparent,
+    $notification-action-tertiary-inverse,
+    $notification-action-tertiary-inverse,
+    $notification-action-tertiary-inverse-hover,
+    currentColor,
+    $notification-action-tertiary-inverse-active
+  );
+
+  &:focus {
+    border-color: $focus-inverse;
+    background-color: $notification-action-tertiary-inverse;
+    box-shadow: inset 0 0 0 button-vars.$button-outline-width $focus-inverse,
+      inset 0 0 0 button-vars.$button-border-width $background-inverse;
+    color: $notification-action-tertiary-inverse-text;
+  }
+
+  &:hover {
+    color: $notification-action-tertiary-inverse-text;
+  }
+
+  &:active {
+    border-color: transparent;
+    background-color: $notification-action-tertiary-inverse-active;
+    color: $notification-action-tertiary-inverse-text;
+  }
+}
+
+:host(#{$prefix}-actionable-notification-button)[low-contrast][kind='ghost']
+  button {
+  &:hover,
+  &:active {
+    background-color: $notification-action-hover;
+  }
+
+  &:focus {
+    outline-color: $focus;
+  }
+}
+
+:host(#{$prefix}-actionable-notification-button):not(
+    [low-contrast]
+  )[kind='ghost']
+  button {
+  color: $link-inverse;
+}
+
+:host(
+    #{$prefix}-actionable-notification-button
+  )[hide-close-button][kind='ghost']
+  button {
+  margin-right: $spacing-03;
+}
+
+:host(#{$prefix}-actionable-notification):not([inline]) {
+  @extend .#{$prefix}--actionable-notification--toast;
+}
+
+:host(#{$prefix}-actionable-notification[open]) {
+  display: flex;
+}
+
+:host(#{$prefix}-actionable-notification[hide-close-button])
+  .#{$prefix}--actionable-notification__close-button {
+  display: none;
+}
+
+:host(#{$prefix}-actionable-notification[kind='success']) {
+  @extend .#{$prefix}--actionable-notification--success;
+
+  &[low-contrast] {
+    @extend .#{$prefix}--actionable-notification--low-contrast,
+      .#{$prefix}--actionable-notification--success;
+  }
+}
+
+:host(#{$prefix}-actionable-notification[kind='info']) {
+  @extend .#{$prefix}--actionable-notification--info;
+
+  &[low-contrast] {
+    @extend .#{$prefix}--actionable-notification--low-contrast,
+      .#{$prefix}--actionable-notification--info;
+  }
+}
+
+:host(#{$prefix}-actionable-notification[kind='info-square']) {
+  @extend .#{$prefix}--actionable-notification--info-square;
+
+  &[low-contrast] {
+    @extend .#{$prefix}--actionable-notification--low-contrast,
+      .#{$prefix}--actionable-notification--info;
+  }
+}
+
+:host(#{$prefix}-actionable-notification[kind='warning']) {
+  @extend .#{$prefix}--actionable-notification--warning;
+
+  &[low-contrast] {
+    @extend .#{$prefix}--actionable-notification--low-contrast,
+      .#{$prefix}--actionable-notification--warning;
+  }
+
+  /* TODO: Remove this once the following issue with icon fill is resolved:
+  ** https://github.com/carbon-design-system/carbon/issues/13616
+  */
+  .#{$prefix}--inline-notification__icon path[data-icon-path='inner-path'] {
+    fill: $black-100;
+    opacity: 1;
+  }
+}
+
+:host(#{$prefix}-actionable-notification[kind='warning-alt']) {
+  @extend .#{$prefix}--actionable-notification--warning-alt;
+
+  &[low-contrast] {
+    @extend .#{$prefix}--actionable-notification--low-contrast,
+      .#{$prefix}--actionable-notification--warning;
+  }
+
+  /* TODO: Remove this once the following issue with icon fill is resolved:
+  ** https://github.com/carbon-design-system/carbon/issues/13616
+  */
+  .#{$prefix}--inline-notification__icon,
+  .#{$prefix}--toast-notification__icon {
+    path[data-icon-path='inner-path'] {
+      fill: $black-100;
+      opacity: 1;
+    }
+  }
+}
+
+:host(#{$prefix}-actionable-notification[kind='error']) {
+  @extend .#{$prefix}--actionable-notification--error;
+
+  &[low-contrast] {
+    @extend .#{$prefix}--actionable-notification--low-contrast,
+      .#{$prefix}--actionable-notification--error;
+  }
+}

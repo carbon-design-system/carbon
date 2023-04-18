@@ -8,9 +8,12 @@
  */
 
 import CheckmarkFilled20 from '@carbon/icons/lib/checkmark--filled/20';
-import Close20 from '@carbon/icons/lib/close/20';
+import Close16 from '@carbon/icons/lib/close/16';
 import ErrorFilled20 from '@carbon/icons/lib/error--filled/20';
+import InformationFilled20 from '@carbon/icons/lib/information--filled/20';
+import InformationSquareFilled20 from '@carbon/icons/lib/information--square--filled/20';
 import WarningFilled20 from '@carbon/icons/lib/warning--filled/20';
+import WarningAltFilled20 from '@carbon/icons/lib/warning--alt--filled/20';
 import { LitElement, html, svg } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -26,8 +29,10 @@ export { NOTIFICATION_KIND, NOTIFICATION_TYPE };
  */
 const iconsForKinds = {
   [NOTIFICATION_KIND.SUCCESS]: CheckmarkFilled20,
-  [NOTIFICATION_KIND.INFO]: undefined,
+  [NOTIFICATION_KIND.INFO]: InformationFilled20,
+  [NOTIFICATION_KIND.INFO_SQUARE]: InformationSquareFilled20,
   [NOTIFICATION_KIND.WARNING]: WarningFilled20,
+  [NOTIFICATION_KIND.WARNING_ALT]: WarningAltFilled20,
   [NOTIFICATION_KIND.ERROR]: ErrorFilled20,
 };
 
@@ -43,7 +48,7 @@ const iconsForKinds = {
  * @fires cds-notification-closed - The custom event fired after this notification is closed upon a user gesture.
  */
 @customElement(`${prefix}-inline-notification`)
-class BXInlineNotification extends FocusMixin(LitElement) {
+class CDSInlineNotification extends FocusMixin(LitElement) {
   /**
    * Current timeout identifier
    */
@@ -106,7 +111,7 @@ class BXInlineNotification extends FocusMixin(LitElement) {
       if (
         this.dispatchEvent(
           new CustomEvent(
-            (this.constructor as typeof BXInlineNotification).eventBeforeClose,
+            (this.constructor as typeof CDSInlineNotification).eventBeforeClose,
             init
           )
         )
@@ -114,7 +119,7 @@ class BXInlineNotification extends FocusMixin(LitElement) {
         this.open = false;
         this.dispatchEvent(
           new CustomEvent(
-            (this.constructor as typeof BXInlineNotification).eventClose,
+            (this.constructor as typeof CDSInlineNotification).eventClose,
             init
           )
         );
@@ -127,7 +132,7 @@ class BXInlineNotification extends FocusMixin(LitElement) {
    */
   protected _renderButton() {
     const {
-      closeButtonLabel,
+      ariaLabel,
       _type: type,
       _handleClickCloseButton: handleClickCloseButton,
     } = this;
@@ -135,10 +140,10 @@ class BXInlineNotification extends FocusMixin(LitElement) {
       <button
         type="button"
         class="${prefix}--${type}-notification__close-button"
-        aria-label=${ifDefined(closeButtonLabel)}
-        title=${ifDefined(closeButtonLabel)}
+        aria-label=${ifDefined(ariaLabel)}
+        title=${ifDefined(ariaLabel)}
         @click="${handleClickCloseButton}">
-        ${Close20({
+        ${Close16({
           class: `${prefix}--${type}-notification__close-icon`,
         })}
       </button>
@@ -167,21 +172,23 @@ class BXInlineNotification extends FocusMixin(LitElement) {
    * @returns The template part for the icon.
    */
   protected _renderIcon() {
-    const { iconLabel, kind, _type: type } = this;
+    const { statusIconDescription, kind, _type: type } = this;
     const { [kind]: icon } = iconsForKinds;
     return !icon
       ? undefined
       : icon({
           class: `${prefix}--${type}-notification__icon`,
-          children: !iconLabel ? undefined : svg`<title>${iconLabel}</title>`,
+          children: !statusIconDescription
+            ? undefined
+            : svg`<title>${statusIconDescription}</title>`,
         });
   }
 
   /**
-   * The a11y text for the close button.
+   * Provide a description for "close" icon button that can be read by screen readers
    */
-  @property({ attribute: 'close-button-label' })
-  closeButtonLabel!: string;
+  @property({ attribute: 'aria-label' })
+  ariaLabel!: string;
 
   /**
    * `true` to hide the close button.
@@ -190,10 +197,10 @@ class BXInlineNotification extends FocusMixin(LitElement) {
   hideCloseButton = false;
 
   /**
-   * The a11y text for the icon.
+   * Provide a description for "status" icon that can be read by screen readers
    */
-  @property({ attribute: 'icon-label' })
-  iconLabel!: string;
+  @property({ attribute: 'status-icon-description' })
+  statusIconDescription!: string;
 
   /**
    * Notification kind.
@@ -214,7 +221,7 @@ class BXInlineNotification extends FocusMixin(LitElement) {
   open = true;
 
   /**
-   * Notification time in ms until gets closed.
+   * Specify an optional duration the notification should be closed in
    */
   @property({ type: Number, reflect: true })
   timeout: number | null = null;
@@ -279,4 +286,4 @@ class BXInlineNotification extends FocusMixin(LitElement) {
   static styles = styles; // `styles` here is a `CSSResult` generated by custom WebPack loader
 }
 
-export default BXInlineNotification;
+export default CDSInlineNotification;

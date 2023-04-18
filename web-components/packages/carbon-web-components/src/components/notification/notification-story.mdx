@@ -34,6 +34,27 @@ import '@carbon/web-components/es/components/notification/index.js';
 </cds-inline-notification>
 ```
 
+## Actionable notification
+
+Actionable notifications allow for interactive elements within a notification
+styled like an inline or toast notification. Actionable notifications, since
+they require user interaction, take focus when triggered and can be highly
+disruptive to screen readers and keyboard users. With actionable notifications,
+only one action is allowed per notification. This action frequently takes users
+to a flow or page related to the message, where they can resolve the
+notification.
+
+```html
+<cds-actionable-notification
+  kind="error"
+  title="Notification title"
+  subtitle="Subtitle text goes here">
+  <cds-actionable-notification-button slot="action"
+    >Action</cds-actionable-notification-button
+  >
+</cds-actionable-notification>
+```
+
 ## Inline notification
 
 Inline notifications show up in task flows, to notify users of the status of an
@@ -78,6 +99,14 @@ example:
   }
 }
 ```
+
+## `<cds-actionable-notification>` attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-actionable-notification open>`) and `false` means not setting the
+attribute (e.g. `<cds-actionable-notification>` without `open` attribute).
+
+<Props of="cds-actionable-notification" />
 
 ## `<cds-inline-notification>` attributes, properties and events
 

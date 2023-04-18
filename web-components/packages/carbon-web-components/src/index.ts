@@ -57,6 +57,8 @@ export { default as CDSModalHeading } from './components/modal/modal-heading';
 export { default as CDSModalLabel } from './components/modal/modal-label';
 export { default as CDSMultiSelect } from './components/multi-select/multi-select';
 export { default as CDSMultiSelectItem } from './components/multi-select/multi-select-item';
+export { default as CDSActionableNotification } from './components/notification/actionable-notification';
+export { default as CDSActionableNotificationButton } from './components/notification/actionable-notification-button';
 export { default as CDSInlineNotification } from './components/notification/inline-notification';
 export { default as CDSToastNotification } from './components/notification/toast-notification';
 export { default as CDSNumberInput } from './components/number-input/number-input';

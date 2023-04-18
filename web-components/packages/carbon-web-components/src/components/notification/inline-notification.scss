@@ -8,6 +8,7 @@
 $css--plex: true !default;
 
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/colors' as *;
 @use '@carbon/styles/scss/utilities/focus-outline' as *;
 @use '@carbon/styles/scss/components/notification/index' as *;
 @use '@carbon/styles/scss/components/button';
@@ -53,6 +54,15 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-inline-notification[kind='info-square']) {
+  @extend .#{$prefix}--inline-notification--info-square;
+
+  &[low-contrast] {
+    @extend .#{$prefix}--inline-notification--low-contrast,
+      .#{$prefix}--inline-notification--info-square;
+  }
+}
+
 :host(#{$prefix}-inline-notification[kind='warning']) {
   @extend .#{$prefix}--inline-notification--warning;
 
@@ -68,5 +78,21 @@ $css--plex: true !default;
   &[low-contrast] {
     @extend .#{$prefix}--inline-notification--low-contrast,
       .#{$prefix}--inline-notification--error;
+  }
+}
+
+:host(#{$prefix}-inline-notification[kind='warning-alt']) {
+  @extend .#{$prefix}--inline-notification--warning-alt;
+
+  &[low-contrast] {
+    @extend .#{$prefix}--inline-notification--low-contrast,
+      .#{$prefix}--inline-notification--warning-alt;
+  }
+
+  /* TODO: Remove this once the following issue with icon fill is resolved: 
+  ** https://github.com/carbon-design-system/carbon/issues/13616
+  */
+  .#{$prefix}--inline-notification__icon path[data-icon-path='inner-path'] {
+    fill: $black-100;
   }
 }

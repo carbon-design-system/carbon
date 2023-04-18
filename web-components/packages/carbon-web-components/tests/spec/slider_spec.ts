@@ -8,7 +8,7 @@
  */
 
 import { html, render } from 'lit';
-import { Default } from '../../src/components/slider/slider-story';
+import { Playground } from '../../src/components/slider/slider-story';
 
 /**
  * @param formData A `FormData` instance.
@@ -24,7 +24,7 @@ const getValues = (formData: FormData) => {
 };
 
 const template = (props?) =>
-  Default({
+  Playground({
     'cds-slider': props,
   });
 
