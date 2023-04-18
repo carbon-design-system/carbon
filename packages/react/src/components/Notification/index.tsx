@@ -7,8 +7,13 @@
 
 export {
   NotificationActionButton,
+  type NotificationActionButtonProps,
   NotificationButton,
+  type NotificationButtonProps,
   ToastNotification,
+  type ToastNotificationProps,
   InlineNotification,
+  type InlineNotificationProps,
   ActionableNotification,
+  type ActionableNotificationProps,
 } from './Notification';
