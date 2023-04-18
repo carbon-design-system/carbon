@@ -21,6 +21,9 @@
 
 @mixin button {
   .#{$prefix}--btn {
+    @include layout.use('size', $default: 'lg');
+    @include layout.use('density', $default: 'normal');
+
     @include button-base;
   }
 
@@ -142,15 +145,13 @@
   }
 
   .#{$prefix}--btn--icon-only {
-    $-height: layout.size('height', $default: 'lg', $max: 'lg');
-
-    width: $-height;
-    height: $-height;
+    width: layout.size('height');
+    height: layout.size('height');
     justify-content: center;
     padding: 0;
     // -1px to compensate for border width
     padding-block-start: min(
-      calc(($-height - rem(16px)) / 2 - rem(1px)),
+      calc((layout.size('height') - rem(16px)) / 2 - rem(1px)),
       var(--temp-padding-block-max)
     );
 

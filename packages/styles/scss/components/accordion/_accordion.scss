@@ -45,6 +45,9 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
 @mixin accordion {
   .#{$prefix}--accordion {
+    @include layout.use('size', $default: 'md', $min: 'sm', $max: 'lg');
+    @include layout.use('density', $default: 'normal');
+
     @include component-reset.reset;
 
     width: 100%;
@@ -68,7 +71,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
     position: relative;
     display: flex;
     width: 100%;
-    min-height: layout.size('height', $default: 'md', $min: 'sm', $max: 'lg');
+    min-height: layout.size('height');
     flex-direction: $flex-direction;
     align-items: center;
     justify-content: $justify-content;

@@ -23,23 +23,23 @@
 /// @access public
 /// @group tag
 @mixin tag {
-  @include layout.redefine-tokens(
-    '.#{$prefix}--tag',
-    (
-      size: (
-        sm: (
-          height: rem(18px),
-        ),
-        md: (
-          height: rem(24px),
-        ),
-      ),
-    )
-  );
-
-  $-height: layout.size('height', $default: 'md', $min: 'sm', $max: 'md');
+  // @include layout.redefine-tokens(
+  //   '.#{$prefix}--tag',
+  //   (
+  //     size: (
+  //       sm: (
+  //         height: rem(18px),
+  //       ),
+  //       md: (
+  //         height: rem(24px),
+  //       ),
+  //     ),
+  //   )
+  // );
 
   .#{$prefix}--tag {
+    @include layout.use('size', $default: 'md', $min: 'sm', $max: 'md');
+
     @include type-style('label-01');
     @include tag-theme($tag-background-gray, $tag-color-gray, $tag-hover-gray);
 
@@ -48,7 +48,7 @@
     min-width: rem(32px);
     // restricts size of contained elements
     max-width: 100%;
-    min-height: $-height;
+    min-height: layout.size('height');
     align-items: center;
     justify-content: center;
     margin: $spacing-02;
@@ -183,8 +183,8 @@
 
   .#{$prefix}--tag__close-icon {
     display: flex;
-    width: $-height;
-    height: $-height;
+    width: layout.size('height');
+    height: layout.size('height');
     flex-shrink: 0;
     align-items: center;
     justify-content: center;

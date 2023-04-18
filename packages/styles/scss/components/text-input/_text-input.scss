@@ -32,12 +32,15 @@
 /// @group text-input
 @mixin text-input {
   .#{$prefix}--text-input {
+    @include layout.use('size', $default: 'md', $min: 'sm', $max: 'lg');
+    @include layout.use('density', $default: 'normal');
+
     @include reset;
     @include type-style('body-compact-01');
     @include focus-outline('reset');
 
     width: 100%;
-    height: layout.size('height', $default: 'md', $min: 'sm', $max: 'lg');
+    height: layout.size('height');
     padding: 0 layout.density('padding-inline');
     border: none;
     border-bottom: 1px solid $border-strong;

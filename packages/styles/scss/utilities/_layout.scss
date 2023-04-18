@@ -6,8 +6,6 @@
 //
 
 @use 'sass:map';
-@use 'sass:list';
-@use 'sass:string';
 
 @use '../config';
 @use '../spacing' as *;
@@ -16,127 +14,92 @@
 
 $tokens: (
   size: (
-    xs: (
-      height: rem(24px),
-    ),
-    sm: (
-      height: rem(32px),
-    ),
-    md: (
-      height: rem(40px),
-    ),
-    lg: (
-      height: rem(48px),
-    ),
-    xl: (
-      height: rem(64px),
-    ),
-    2xl: (
-      height: rem(80px),
+    height: (
+      xs: rem(24px),
+      sm: rem(32px),
+      md: rem(40px),
+      lg: rem(48px),
+      xl: rem(64px),
+      2xl: rem(80px),
     ),
   ),
   density: (
-    condensed: (
-      padding-inline: $spacing-03,
-    ),
-    normal: (
-      padding-inline: $spacing-05,
+    padding-inline: (
+      condensed: $spacing-03,
+      normal: $spacing-05,
     ),
   ),
 );
 
-/// Internal base function for using a layout group. Not to be used on its own.
-/// @param {String} $group - The group name as defined in the $tokens
-/// @param {String} $property - The property name
-/// @param {String} $default - The default value if no layout was specified
-/// @param {String} $min - The minimum value (optional)
-/// @param {String} $max - The maximum value (optional)
-/// @example @include -group('size', $property, $default, $min, $max)
-/// @group utilities
-/// @access private
-@function -group($group, $property, $default, $min: null, $max: null) {
-  $min-token: custom-property.get-var('layout-#{$group}-#{$property}-#{$min}');
-  $max-token: custom-property.get-var('layout-#{$group}-#{$property}-#{$max}');
-  $fallback-token: custom-property.get-var(
-    'layout-#{$group}-#{$property}-#{$default}'
-  );
+@mixin use($group, $default, $min: null, $max: null) {
+  $properties: map.get($tokens, $group);
 
-  $token: custom-property.get-var(
-    'layout-#{$group}-#{$property}',
-    $fallback-token
-  );
-
-  @if $min and $max {
-    @return clamp($min-token, $token, $max-token);
-  } @else if $min {
-    @return max($min-token, $token);
-  } @else if $max {
-    @return min($token, $max-token);
-  } @else {
-    @return $token;
-  }
-}
-
-/// Allows to redefine any token values of the layout module in case a component is using
-/// non-standard values and should still participate in the layout context
-/// @param {String} $selector - The highest selector of the component
-/// @param {Map} $overrides - The map of overrides. Must follow ( group: ( step: ( property: value ) ) )
-/// @example @include redefine-tokens('.cds--tag', ( size: ( sm: ( height: 1.125rem ), md: ( height: 1.5rem ) ) ))
-/// @group utilities
-/// @access public
-@mixin redefine-tokens($selector, $overrides) {
-  .#{config.$prefix}--layout #{string.unquote($selector)} {
-    @each $group, $steps in $overrides {
-      @each $step, $values in $steps {
-        @each $property, $value in $values {
-          @include custom-property.declaration(
-            'layout-#{$group}-#{$property}-#{$step}',
-            $value
-          );
-        }
-      }
+  @each $property, $steps in $properties {
+    @if $min {
+      @include custom-property.declaration(
+        'layout-#{$group}-#{$property}-min',
+        max(
+          custom-property.get-var('layout-#{$group}-#{$property}-min-context'),
+          custom-property.get-var('layout-#{$group}-#{$property}-#{$min}')
+        )
+      );
     }
-  }
 
-  @each $group, $steps in $overrides {
-    @each $step, $values in $steps {
-      @each $property, $value in $values {
-        .#{config.$prefix}--layout--#{$group}-#{$step}
-          #{string.unquote($selector)}:not([class*='#{config.$prefix}--layout--#{$group}']) {
-          $token: custom-property.get-var(
-            'layout-#{$group}-#{$property}-#{$step}'
-          );
-          @include custom-property.declaration(
-            'layout-#{$group}-#{$property}',
-            $token
-          );
-        }
+    @if $max {
+      @include custom-property.declaration(
+        'layout-#{$group}-#{$property}-max',
+        min(
+          custom-property.get-var('layout-#{$group}-#{$property}-max-context'),
+          custom-property.get-var('layout-#{$group}-#{$property}-#{$max}')
+        )
+      );
+    }
+
+    $value: clamp(
+      custom-property.get-var('layout-#{$group}-#{$property}-min'),
+      custom-property.get-var(
+        'layout-#{$group}-#{$property}-context',
+        custom-property.get-var('layout-#{$group}-#{$property}-#{$default}')
+      ),
+      custom-property.get-var('layout-#{$group}-#{$property}-max')
+    );
+
+    @include custom-property.declaration(
+      'layout-#{$group}-#{$property}',
+      $value
+    );
+
+    > * {
+      @if $min {
+        @include custom-property.declaration(
+          'layout-#{$group}-#{$property}-min-context',
+          custom-property.get-var('layout-#{$group}-#{$property}-min')
+        );
       }
+
+      @if $max {
+        @include custom-property.declaration(
+          'layout-#{$group}-#{$property}-max-context',
+          custom-property.get-var('layout-#{$group}-#{$property}-max')
+        );
+      }
+
+      @include custom-property.declaration(
+        'layout-#{$group}-#{$property}-context',
+        custom-property.get-var('layout-#{$group}-#{$property}')
+      );
     }
   }
 }
 
-// -----
-// Groups
-// -----
-
-/// Retrieves the current value for a property token in the layout size.
-/// @param {String} $property - The property name
-/// @param {String} $default - The default value if no layout was specified
-/// @param {String} $min - The minimum value (optional)
-/// @param {String} $max - The maximum value (optional)
-/// @example height: size('height', $default: 'md', $min: 'sm', $max: 'lg');
-/// @group utilities
-/// @access public
-@function size($property, $default, $min: null, $max: null) {
-  @return -group('size', $property, $default, $min, $max);
+@function -group($group, $property) {
+  @return custom-property.get-var('layout-#{$group}-#{$property}');
 }
 
-/// Retrieves the current value for a property token in the layout density.
-/// @param {String} $property - The property name
-/// @example padding-inline: density('padding-inline');
-/// @group utilities
-/// @access public
+@function size($property) {
+  @return -group('size', $property);
+}
+
 @function density($property) {
-  @return -group('density', $property, 'normal');
+  @return -group('density', $property);
 }

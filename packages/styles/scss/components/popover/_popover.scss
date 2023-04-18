@@ -14,6 +14,7 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/' as *;
 @use '../../utilities/convert' as *;
+@use '../../utilities/layout';
 
 /// The Popover component is used for triggering a pop-up next to a trigger
 /// element, typically a button, in a given direction. It is made up of several

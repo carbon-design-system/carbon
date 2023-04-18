@@ -17,12 +17,15 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/layout';
 
-$-height: layout.size('height', $default: 'lg', $min: 'sm', $max: 'xl');
-
 /// Contained List styles
 /// @access public
 /// @group contained-list
 @mixin contained-list {
+  .#{$prefix}--contained-list {
+    @include layout.use('size', $default: 'lg', $min: 'sm', $max: 'xl');
+    @include layout.use('density', $default: 'normal');
+  }
+
   .#{$prefix}--contained-list__header {
     position: sticky;
     z-index: 1;
@@ -45,7 +48,7 @@ $-height: layout.size('height', $default: 'lg', $min: 'sm', $max: 'xl');
   .#{$prefix}--contained-list--on-page .#{$prefix}--contained-list__header {
     @include type-style('heading-compact-01');
 
-    height: $-height;
+    height: layout.size('height');
     border-bottom: 1px solid $border-subtle;
     background-color: $background;
     color: $text-primary;
@@ -96,13 +99,13 @@ $-height: layout.size('height', $default: 'lg', $min: 'sm', $max: 'xl');
   .#{$prefix}--contained-list-item--clickable
     .#{$prefix}--contained-list-item__content {
     // see https://github.com/carbon-design-system/carbon/blob/main/packages/styles/docs/sass.md#contextual-layout-tokens -> Troubleshooting
-    --temp-height: #{$-height};
+    --temp-height: #{layout.size('height')};
     // https://caniuse.com/mdn-css_types_length_lh
     --temp-1lh: (var(--#{$prefix}-body-01-line-height) * 1em);
 
     @include type-style('body-01');
 
-    min-height: $-height;
+    min-height: layout.size('height');
     padding: calc(calc((var(--temp-height) - var(--temp-1lh)) / 2))
       layout.density('padding-inline');
     color: $text-primary;

@@ -6,6 +6,7 @@
 //
 
 @use 'sass:map';
+@use 'sass:list';
 
 @use './config' as *;
 @use './utilities/custom-property';
@@ -13,37 +14,49 @@
 @use './utilities/layout' as *;
 
 :root {
-  @each $group, $steps in $tokens {
-    $step-names: map.keys($steps);
-
-    @each $step in $step-names {
-      $values: map.get($steps, $step);
-
-      @each $property, $value in $values {
+  @each $group, $properties in $tokens {
+    @each $property, $steps in $properties {
+      @each $step, $value in $steps {
         @include custom-property.declaration(
           'layout-#{$group}-#{$property}-#{$step}',
           $value
         );
       }
+
+      $min-key: list.nth(map.keys($steps), 1);
+      $max-key: list.nth(map.keys($steps), -1);
+
+      @include custom-property.declaration(
+        'layout-#{$group}-#{$property}-min',
+        custom-property.get-var('layout-#{$group}-#{$property}-#{$min-key}')
+      );
+      @include custom-property.declaration(
+        'layout-#{$group}-#{$property}-min-context',
+        custom-property.get-var('layout-#{$group}-#{$property}-min')
+      );
+
+      @include custom-property.declaration(
+        'layout-#{$group}-#{$property}-max',
+        custom-property.get-var('layout-#{$group}-#{$property}-#{$max-key}')
+      );
+      @include custom-property.declaration(
+        'layout-#{$group}-#{$property}-max-context',
+        custom-property.get-var('layout-#{$group}-#{$property}-max')
+      );
     }
   }
 }
 
-@each $group, $steps in $tokens {
-  $step-names: map.keys($steps);
-
-  @each $step in $step-names {
-    $values: map.get($steps, $step);
-
-    .#{$prefix}--layout--#{$group}-#{$step} {
-      @each $property, $value in $values {
-        $token: custom-property.get-var(
-          'layout-#{$group}-#{$property}-#{$step}',
-          $value
-        );
+@each $group, $properties in $tokens {
+  @each $property, $steps in $properties {
+    @each $step, $value in $steps {
+      .#{$prefix}--layout--#{$group}-#{$step} {
         @include custom-property.declaration(
-          'layout-#{$group}-#{$property}',
-          $token
+          'layout-#{$group}-#{$property}-context',
+          custom-property.get-var(
+            'layout-#{$group}-#{$property}-#{$step}',
+            $value
+          )
         );
       }
     }

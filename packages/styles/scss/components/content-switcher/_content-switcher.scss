@@ -17,9 +17,12 @@
 
 @mixin content-switcher {
   .#{$prefix}--content-switcher {
+    @include layout.use('size', $default: 'md', $min: 'sm', $max: 'lg');
+    @include layout.use('density', $default: 'normal');
+
     display: flex;
     width: 100%;
-    height: layout.size('height', $default: 'md', $min: 'sm', $max: 'lg');
+    height: layout.size('height');
     justify-content: space-evenly;
   }
 
