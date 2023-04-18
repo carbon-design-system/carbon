@@ -33,6 +33,9 @@ import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ReactAttr } from '../../types/common';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
+
+const getInstanceId = setupGetInstanceId();
 
 const defaultItemToString = <ItemType,>(item?: ItemType): string => {
   if (typeof item === 'string') {
@@ -248,6 +251,7 @@ const Dropdown = React.forwardRef(
       initialSelectedItem,
       onSelectedItemChange,
     };
+    const { current: dropdownInstanceId } = useRef(getInstanceId());
 
     // only set selectedItem if the prop is defined. Setting if it is undefined
     // will overwrite default selected items from useSelect
@@ -311,12 +315,18 @@ const Dropdown = React.forwardRef(
       }
     );
 
+    const helperId = !helperText
+      ? undefined
+      : `dropdown-helper-text-${dropdownInstanceId}`;
+
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
     const toggleButtonProps = getToggleButtonProps();
     const helper =
       helperText && !isFluid ? (
-        <div className={helperClasses}>{helperText}</div>
+        <div id={helperId} className={helperClasses}>
+          {helperText}
+        </div>
       ) : null;
 
     function onSelectedItemChange({
@@ -392,6 +402,9 @@ const Dropdown = React.forwardRef(
             className={`${prefix}--list-box__field`}
             disabled={disabled}
             aria-disabled={readOnly ? true : undefined} // aria-disabled to remain focusable
+            aria-describedby={
+              !inline && !invalid && !warn && helper ? helperId : undefined
+            }
             title={
               selectedItem && itemToString !== undefined
                 ? itemToString(selectedItem)

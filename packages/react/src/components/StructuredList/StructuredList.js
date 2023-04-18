@@ -162,12 +162,14 @@ export function StructuredListRow(props) {
   const { onKeyDown, children, className, head, ...other } = props;
   const [hasFocusWithin, setHasFocusWithin] = useState(false);
   const id = useId('grid-input');
+  const selectedRow = React.useContext(GridSelectedRowStateContext);
   const setSelectedRow = React.useContext(GridSelectedRowDispatchContext);
   const prefix = usePrefix();
   const value = { id };
   const classes = classNames(`${prefix}--structured-list-row`, className, {
     [`${prefix}--structured-list-row--header-row`]: head,
     [`${prefix}--structured-list-row--focused-within`]: hasFocusWithin,
+    [`${prefix}--structured-list-row--selected`]: selectedRow === id,
   });
 
   return head ? (
