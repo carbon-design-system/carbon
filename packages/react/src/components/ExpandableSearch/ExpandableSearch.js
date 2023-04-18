@@ -63,5 +63,6 @@ function ExpandableSearch({ onBlur, onChange, onExpand, onFocus, ...props }) {
 }
 
 ExpandableSearch.propTypes = Search.propTypes;
+ExpandableSearch.displayName = 'ExpandableSearch';
 
 export default ExpandableSearch;

@@ -33,17 +33,39 @@ function ContainedList({
     className
   );
 
+  const filteredChildren = children?.filter(
+    (child) =>
+      !['Search', 'ExpandableSearch'].includes(child?.type?.displayName)
+  );
+
+  const isActionSearch = ['Search', 'ExpandableSearch'].includes(
+    action?.type?.displayName
+  );
+
+  const renderedChildren = children.map((child, index, key) => {
+    if (index === 0 && child.type.displayName === 'Search') {
+      return (
+        <div key={key} className={`${prefix}--contained-list__search`}>
+          {child}
+        </div>
+      );
+    }
+    return child;
+  });
+
   return (
     <div className={classes}>
       <div className={`${prefix}--contained-list__header`}>
         <div id={labelId} className={`${prefix}--contained-list__label`}>
           {label}
         </div>
-        {action && (
-          <div className={`${prefix}--contained-list__action`}>{action}</div>
-        )}
+        <div className={`${prefix}--contained-list__action`}>{action}</div>
       </div>
-      <ul aria-labelledby={labelId}>{children}</ul>
+      {children && (
+        <ul aria-labelledby={labelId}>
+          {isActionSearch ? filteredChildren : renderedChildren}
+        </ul>
+      )}
     </div>
   );
 }
