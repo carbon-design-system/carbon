@@ -367,8 +367,16 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     //-----------------------------
     // Item Hover
     //-----------------------------
-    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item:hover {
-      background-color: $layer-selected-hover;
+    &:not(.#{$prefix}--tabs--contained)
+      .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):hover {
+      border-bottom: $tab-underline-color-hover;
+      color: $text-primary;
+    }
+
+    &.#{$prefix}--tabs--contained
+      .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--disabled):hover {
+      background-color: $layer-accent-hover;
+      color: $text-primary;
     }
 
     //-----------------------------
@@ -425,14 +433,6 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     &.#{$prefix}--tabs--light.#{$prefix}--tabs--contained
       .#{$prefix}--tabs__nav-item--selected:hover {
       background-color: $background;
-    }
-
-    //-----------------------------
-    //  Link Hover
-    //-----------------------------
-    .#{$prefix}--tabs__nav-item:hover .#{$prefix}--tabs__nav-link {
-      border-bottom: $tab-underline-color-hover;
-      color: $text-primary;
     }
 
     //-----------------------------
