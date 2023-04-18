@@ -56,7 +56,7 @@ const RadioTile = React.forwardRef(function RadioTile(
   }
 
   return (
-    <>
+    <div>
       <input
         checked={checked}
         className={`${prefix}--tile-input`}
@@ -76,7 +76,7 @@ const RadioTile = React.forwardRef(function RadioTile(
         </span>
         <span className={`${prefix}--tile-content`}>{children}</span>
       </label>
-    </>
+    </div>
   );
 });
 
