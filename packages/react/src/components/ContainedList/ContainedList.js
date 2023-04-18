@@ -33,7 +33,7 @@ function ContainedList({
     className
   );
 
-  const filteredChildren = children?.filter(
+  const filteredChildren = children.filter(
     (child) =>
       !['Search', 'ExpandableSearch'].includes(child?.type?.displayName)
   );
