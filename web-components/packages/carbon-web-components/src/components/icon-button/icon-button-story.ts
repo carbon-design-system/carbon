@@ -52,7 +52,7 @@ export const Playground = (args) => {
       leave-delay-ms=${leaveDelay}
       size=${size}>
       ${Edit16({ slot: 'icon' })}
-      <slot slot="tooltip-content"> ${tooltipContent} </slot>
+      <span slot="tooltip-content"> ${tooltipContent} </span>
     </cds-icon-button>
   `;
 };

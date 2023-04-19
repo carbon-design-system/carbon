@@ -31,6 +31,12 @@ class CDSIconButton extends CDSButton {
   align = 'top';
 
   /**
+   * Determines whether the tooltip should close when inner content is activated (click, Enter or Space)
+   */
+  @property({ attribute: 'close-on-activation', reflect: true, type: Boolean })
+  closeOnActivation = true;
+
+  /**
    * Specify whether the tooltip should be open when it first renders
    */
   @property({ reflect: true, type: Boolean })
@@ -61,19 +67,31 @@ class CDSIconButton extends CDSButton {
       ?.classList.add(`${prefix}--icon-tooltip`);
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  protected _renderTooltipContent() {
+    return html`
+      <cds-tooltip-content>
+        <slot name="tooltip-content"></slot>
+      </cds-tooltip-content>
+    `;
+  }
+
   render() {
-    const { align, defaultOpen, enterDelayMs, leaveDelayMs } = this;
+    const {
+      align,
+      closeOnActivation,
+      defaultOpen,
+      enterDelayMs,
+      leaveDelayMs,
+    } = this;
     return html`
       <cds-tooltip
         align=${align}
         ?defaultOpen=${defaultOpen}
-        closeOnActivation=${true}
+        close-on-activation="${closeOnActivation}"
         enter-delay-ms=${enterDelayMs}
         leave-delay-ms=${leaveDelayMs}>
-        ${super.render()}
-        <cds-tooltip-content>
-          <slot name="tooltip-content"></slot>
-        </cds-tooltip-content>
+        ${super.render()} ${this._renderTooltipContent()}
       </cds-tooltip>
     `;
   }

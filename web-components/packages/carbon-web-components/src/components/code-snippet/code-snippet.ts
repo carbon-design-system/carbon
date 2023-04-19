@@ -13,10 +13,6 @@ import { property, customElement, query } from 'lit/decorators.js';
 import ChevronDown16 from '@carbon/icons/lib/chevron--down/16';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
-import {
-  _createHandleFeedbackTooltip as createHandleCopyButtonFeedbackTooltip,
-  _renderButton as renderCopyButton,
-} from '../copy-button/copy-button';
 import { CODE_SNIPPET_COLOR_SCHEME, CODE_SNIPPET_TYPE } from './defs';
 import styles from './code-snippet.scss';
 
@@ -90,11 +86,6 @@ class BXCodeSnippet extends FocusMixin(LitElement) {
   private _expanded = false;
 
   /**
-   * `true` to show the feedback tooltip.
-   */
-  private _showCopyButtonFeedback = false;
-
-  /**
    * `true` to show the expando.
    */
   private _showExpando = false;
@@ -117,21 +108,9 @@ class BXCodeSnippet extends FocusMixin(LitElement) {
     range.selectNodeContents(code);
     selection!.addRange(range);
     doc!.execCommand('copy');
-    this._handleCopyButtonFeedbackTooltip(this.copyButtonFeedbackTimeout);
     doc!.body.removeChild(code);
     selection!.removeAllRanges();
   }
-
-  /**
-   * Handles showing/hiding the feedback tooltip.
-   */
-  private _handleCopyButtonFeedbackTooltip =
-    createHandleCopyButtonFeedbackTooltip(
-      ({ showFeedback = false }: { showFeedback?: boolean }) => {
-        this._showCopyButtonFeedback = showFeedback;
-        this.requestUpdate();
-      }
-    );
 
   /**
    * Handles `click` event on the expando.
@@ -217,7 +196,6 @@ class BXCodeSnippet extends FocusMixin(LitElement) {
       expandButtonText,
       type,
       _expanded: expanded,
-      _showCopyButtonFeedback: showCopyButtonFeedback,
       _showExpando: showExpando,
       _handleClickCopyButton: handleClickCopyButton,
       _handleClickExpando: handleClickExpando,
@@ -233,13 +211,11 @@ class BXCodeSnippet extends FocusMixin(LitElement) {
           expanded,
           children: html`<slot @slotchange="${handleSlotChange}"></slot>`,
         })}
-        ${renderCopyButton({
-          assistiveText: copyButtonAssistiveText,
-          feedbackText: copyButtonFeedbackText,
-          showFeedback: showCopyButtonFeedback,
-          handleClickButton: handleClickCopyButton,
-          className: `${prefix}--snippet-button`,
-        })}
+        <cds-copy-button
+          feedback="${copyButtonFeedbackText}"
+          @click="${handleClickCopyButton}">
+          ${copyButtonAssistiveText}
+        </cds-copy-button>
       `;
     }
 
@@ -252,13 +228,11 @@ class BXCodeSnippet extends FocusMixin(LitElement) {
           expanded,
           children: html`<slot @slotchange="${handleSlotChange}"></slot>`,
         })}
-        ${renderCopyButton({
-          assistiveText: copyButtonAssistiveText,
-          feedbackText: copyButtonFeedbackText,
-          showFeedback: showCopyButtonFeedback,
-          handleClickButton: handleClickCopyButton,
-          className: `${prefix}--snippet-button`,
-        })}
+        <cds-copy-button
+          feedback="${copyButtonFeedbackText}"
+          @click="${handleClickCopyButton}">
+          ${copyButtonAssistiveText}
+        </cds-copy-button>
         ${!showExpando
           ? undefined
           : renderExpando({
@@ -273,14 +247,11 @@ class BXCodeSnippet extends FocusMixin(LitElement) {
     // Ensures no extra whitespace text node
     // prettier-ignore
     return html`
-      ${renderCopyButton({
-        assistiveText: copyButtonAssistiveText,
-        feedbackText: copyButtonFeedbackText,
-        showFeedback: showCopyButtonFeedback,
-        handleClickButton: handleClickCopyButton,
-        className: `${prefix}--snippet ${prefix}--snippet--inline`,
-        children: html`<code aria-label="${codeAssistiveText}"><slot></slot></code>`,
-      })}
+    <cds-copy-button
+      feedback="${copyButtonFeedbackText}"
+      @click="${handleClickCopyButton}">
+      ${copyButtonAssistiveText}
+    </cds-copy-button>
     `;
   }
 

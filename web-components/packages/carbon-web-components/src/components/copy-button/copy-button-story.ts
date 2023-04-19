@@ -17,14 +17,15 @@ import storyDocs from './copy-button-story.mdx';
 import { prefix } from '../../globals/settings';
 
 export const Default = (args) => {
-  const { buttonAssistiveText, feedbackText, feedbackTimeout, onClick } =
+  const { iconDescription, feedbackText, feedbackTimeout, onClick } =
     args?.[`${prefix}-copy-button`] ?? {};
   return html`
     <cds-copy-button
-      button-assistive-text="${ifDefined(buttonAssistiveText)}"
-      feedback-text="${ifDefined(feedbackText)}"
+      feedback="${ifDefined(feedbackText)}"
       feedback-timeout="${ifDefined(feedbackTimeout)}"
-      @click="${onClick}"></cds-copy-button>
+      @click="${onClick}">
+      ${iconDescription}
+    </cds-copy-button>
   `;
 };
 
@@ -36,11 +37,11 @@ export default {
     ...storyDocs.parameters,
     knobs: {
       [`${prefix}-copy-button`]: () => ({
-        buttonAssistiveText: textNullable(
-          'Assistive text for the button (button-assistive-text)',
-          ''
+        iconDescription: textNullable(
+          'Icon description (slotted)',
+          'Copy to clipboard'
         ),
-        feedbackText: textNullable('Feedback text (feedback-text)', ''),
+        feedbackText: textNullable('Feedback text (feedback)', 'Copied!'),
         feedbackTimeout: number('Feedback timeout (feedback-timeout)', 2000),
         onClick: action('click'),
       }),

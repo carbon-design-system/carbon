@@ -140,9 +140,9 @@ export const Playground = (args) => {
         <cds-button>This is a button.</cds-button>
       </cds-accordion-item>
       <cds-accordion-item ?disabled="${disabled}">
-        <slot slot="title">
+        <span slot="title">
           <span> Section 4 title (<em>the title can be a node</em>) </span>
-        </slot>
+        </span>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad

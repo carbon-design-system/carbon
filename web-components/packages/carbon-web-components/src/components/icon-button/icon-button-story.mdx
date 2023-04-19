@@ -33,9 +33,9 @@ function App() {
   return (
     html`<cds-icon-button>
       ${Edit16({ slot: 'icon' })}
-      <slot slot="tooltip-content">
+      <span slot="tooltip-content">
         Tooltip text
-      </slot>
+      </span>
     </cds-icon-button>`
   );
 }

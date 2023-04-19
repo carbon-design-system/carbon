@@ -10,7 +10,6 @@
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import { _renderButton } from '../copy-button/copy-button';
 import styles from './breadcrumb.scss';
 
 const renderItem = () => {
