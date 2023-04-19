@@ -7,10 +7,7 @@
 
 import { Calendar, WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import cx from 'classnames';
-import PropTypes, {
-  ReactElementLike,
-  ReactNodeArray,
-} from 'prop-types';
+import PropTypes, { ReactElementLike, ReactNodeArray } from 'prop-types';
 import React, { ForwardedRef, useContext } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
