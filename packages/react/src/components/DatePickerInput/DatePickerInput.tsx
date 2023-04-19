@@ -8,16 +8,14 @@
 import { Calendar, WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes, {
-  number,
   ReactElementLike,
-  ReactNodeArray, Requireable,
-  string
+  ReactNodeArray,
 } from 'prop-types';
-import React, {ForwardedRef, useContext} from 'react';
+import React, { ForwardedRef, useContext } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
-import {ReactAttr} from "../../types/common";
+import { ReactAttr } from '../../types/common';
 
 const getInstanceId = setupGetInstanceId();
 type ExcludedAttributes = 'value' | 'onChange' | 'locale' | 'children';
@@ -30,7 +28,7 @@ export type ReactNodeLike =
   | null
   | undefined;
 
-export type func = (...args: any[]) => any
+export type func = (...args: any[]) => any;
 
 interface DatePickerInputProps
   extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes> {
@@ -41,95 +39,100 @@ interface DatePickerInputProps
    * * `single` - With calendar dropdown and single date.
    * * `range` - With calendar dropdown and a date range.
    */
-  datePickerType?: 'simple'|'single'|'range',
+  datePickerType?: 'simple' | 'single' | 'range';
 
   /**
    * Specify whether or not the input should be disabled
    */
-  disabled?: boolean,
+  disabled?: boolean;
 
   /**
    * Provide text that is used alongside the control label for additional help
    */
-  helperText?: ReactNodeLike,
+  helperText?: ReactNodeLike;
 
   /**
    * Specify if the label should be hidden
    */
-  hideLabel?: boolean,
+  hideLabel?: boolean;
 
   /**
    * Specify an id that uniquely identifies the `<input>`
    */
-  id: string,
+  id: string;
 
   /**
    * Specify whether or not the input should be invalid
    */
-  invalid?: boolean,
+  invalid?: boolean;
 
   /**
    * Specify the text to be rendered when the input is invalid
    */
-  invalidText: ReactNodeLike,
+  invalidText: ReactNodeLike;
 
   /**
    * Provide the text that will be read by a screen reader when visiting this
    * control
    */
-  labelText: ReactNodeLike,
+  labelText: ReactNodeLike;
 
   /**
    * Specify an `onChange` handler that is called whenever a change in the
    * input field has occurred
    */
-  onChange?: func,
+  onChange?: func;
 
   /**
    * Provide a function to be called when the input field is clicked
    */
-  onClick?: func,
+  onClick?: func;
 
   /**
    * Provide a regular expression that the input value must match
    * TODO:need to be rewritten
    */
-  pattern: (props:{[key: string]: any}, propName: string, componentName: string) =>  null | any | Error,
+  pattern: (
+    props: { [key: string]: any },
+    propName: string,
+    componentName: string
+  ) => null | any | Error;
 
   /**
    * Specify the placeholder text
    */
-  placeholder?: string,
+  placeholder?: string;
 
   /**
    * whether the DatePicker is to be readOnly
    */
-  readOnly?: boolean,
+  readOnly?: boolean;
 
   /**
    * Specify the size of the Date Picker Input. Currently supports either `sm`, `md`, or `lg` as an option.
    */
-  size?: 'sm'|'md'|'lg',
+  size?: 'sm' | 'md' | 'lg';
 
   /**
    * Specify the type of the `<input>`
    */
-  type?: string,
+  type?: string;
 
   /**
    * Specify whether the control is currently in warning state
    */
-  warn?: boolean,
+  warn?: boolean;
 
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText?: ReactNodeLike
-
+  warnText?: ReactNodeLike;
 }
 
-
-const DatePickerInput = React.forwardRef(function DatePickerInput(props:DatePickerInputProps, ref:ForwardedRef<HTMLDivElement>) {
+const DatePickerInput = React.forwardRef(function DatePickerInput(
+  props: DatePickerInputProps,
+  ref: ForwardedRef<HTMLDivElement>
+) {
   const {
     datePickerType,
     disabled = false,
@@ -148,7 +151,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props:DatePick
     warn,
     warnText,
     ...rest
-  } = props ;
+  } = props;
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
   const datePickerInputInstanceId = getInstanceId();
@@ -195,7 +198,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props:DatePick
     ? undefined
     : `detepicker-input-helper-text-${datePickerInputInstanceId}`;
 
-  const inputProps:any = {
+  const inputProps: any = {
     ...rest,
     ...datePickerInputProps,
     className: inputClasses,
@@ -305,7 +308,7 @@ DatePickerInput.propTypes = {
   /**
    * Provide a regular expression that the input value must match
    */
-  pattern: (props, propName, componentName):null | any | Error => {
+  pattern: (props, propName, componentName): null | any | Error => {
     if (props[propName] === undefined) {
       return;
     }
