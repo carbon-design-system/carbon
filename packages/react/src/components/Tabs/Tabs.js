@@ -36,6 +36,8 @@ function Tabs({
   defaultSelectedIndex = 0,
   onChange,
   selectedIndex: controlledSelectedIndex,
+  dismissable,
+  onTabCloseRequest,
 }) {
   const baseId = useId('ccs');
   // The active index is used to track the element which has focus in our tablist
@@ -55,6 +57,8 @@ function Tabs({
     baseId,
     activeIndex,
     defaultSelectedIndex,
+    dismissable,
+    onTabCloseRequest,
     setActiveIndex,
     selectedIndex,
     setSelectedIndex,
@@ -77,10 +81,28 @@ Tabs.propTypes = {
   defaultSelectedIndex: PropTypes.number,
 
   /**
+   * Whether the render Tab children should be dismissable.
+   */
+  dismissable: PropTypes.bool,
+
+  /**
    * Provide an optional function which is called whenever the state of the
    * `Tabs` changes
    */
   onChange: PropTypes.func,
+
+  /**
+   * If specifying the `onTabCloseRequest` prop, provide a callback function
+   * responsible for removing the tab when close button is pressed on one of the Tab elements
+   */
+  onTabCloseRequest: (props) => {
+    if (props.dismissable && !props.onTabCloseRequest) {
+      return new Error(
+        'dismissable property specified without also providing an onTabCloseRequest property.'
+      );
+    }
+    return undefined;
+  },
 
   /**
    * Control which content panel is currently selected. This puts the component
@@ -123,14 +145,25 @@ function TabList({
   scrollIntoView,
   ...rest
 }) {
-  const { activeIndex, selectedIndex, setSelectedIndex, setActiveIndex } =
-    React.useContext(TabsContext);
+  const {
+    activeIndex,
+    selectedIndex,
+    setSelectedIndex,
+    setActiveIndex,
+    dismissable,
+  } = React.useContext(TabsContext);
   const prefix = usePrefix();
   const ref = useRef(null);
   const previousButton = useRef(null);
   const nextButton = useRef(null);
   const [isScrollable, setIsScrollable] = useState(false);
   const [scrollLeft, setScrollLeft] = useState(null);
+
+  // Previous Button
+  // VISIBLE IF:
+  //   SCROLLABLE
+  //   AND SCROLL_LEFT > 0
+  const buttonWidth = 44;
   // Next Button
   // VISIBLE IF:
   //   SCROLLABLE
@@ -154,11 +187,6 @@ function TabList({
     [`${prefix}--tabs--tall`]: hasSecondaryLabelTabs,
   });
 
-  // Previous Button
-  // VISIBLE IF:
-  //   SCROLLABLE
-  //   AND SCROLL_LEFT > 0
-  const buttonWidth = 44;
   const isPreviousButtonVisible = ref.current
     ? isScrollable && scrollLeft > 0
     : false;
@@ -228,7 +256,13 @@ function TabList({
             ref.current.scrollWidth
         : false
     );
-  }, [scrollLeft, children]);
+
+    if (dismissable) {
+      if (ref.current) {
+        setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth);
+      }
+    }
+  }, [scrollLeft, children, dismissable]);
 
   useEffectOnce(() => {
     if (tabs.current[selectedIndex].disabled) {
@@ -296,7 +330,7 @@ function TabList({
         setScrollLeft(start - buttonWidth);
       }
 
-      // The end of teh tab is clipped and not visible
+      // The end of the tab is clipped and not visible
       else if (end > visibleEnd) {
         setScrollLeft(end + buttonWidth - ref.current.clientWidth);
       }
@@ -492,65 +526,6 @@ function createLongPressBehavior(ref, direction, setScrollLeft) {
   };
 }
 
-const DismissableTab = React.forwardRef(function DismissableTab(
-  { onCloseRequest, disabled, onKeyDown, ...rest },
-  ref
-) {
-  const prefix = usePrefix();
-
-  const handleClose = (evt) => {
-    if (!disabled) {
-      onCloseRequest?.(evt);
-    }
-  };
-
-  const handleKeyDown = (event) => {
-    if (match(event, keys.Escape)) {
-      handleClose(event);
-    }
-    onKeyDown?.(event);
-  };
-
-  return (
-    <Tab
-      ref={ref}
-      renderIcon={() => (
-        // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-        <div
-          role="button"
-          tabIndex={-1}
-          className={`${prefix}--tabs__nav-item--close-icon`}
-          onClick={handleClose}
-          aria-label="Close tab"
-          title="Close tab"
-          aria-disabled={disabled ? true : undefined}>
-          <Close />
-        </div>
-      )}
-      disabled={disabled}
-      onKeyDown={handleKeyDown}
-      {...rest}
-    />
-  );
-});
-
-DismissableTab.propTypes = {
-  /**
-   * Whether your Tab is disabled.
-   */
-  disabled: PropTypes.bool,
-
-  /**
-   * Callback function that gets triggered when close button is pressed,
-   */
-  onCloseRequest: PropTypes.func,
-
-  /**
-   * Provide a handler that is invoked on the key down event for the control
-   */
-  onKeyDown: PropTypes.func,
-};
-
 const Tab = React.forwardRef(function Tab(
   {
     as: BaseComponent = 'button',
@@ -566,8 +541,13 @@ const Tab = React.forwardRef(function Tab(
   ref
 ) {
   const prefix = usePrefix();
-  const { selectedIndex, setSelectedIndex, baseId } =
-    React.useContext(TabsContext);
+  const {
+    selectedIndex,
+    setSelectedIndex,
+    baseId,
+    dismissable,
+    onTabCloseRequest,
+  } = React.useContext(TabsContext);
   const { index, hasSecondaryLabel } = React.useContext(TabContext);
   const id = `${baseId}-tab-${index}`;
   const panelId = `${baseId}-tabpanel-${index}`;
@@ -580,6 +560,36 @@ const Tab = React.forwardRef(function Tab(
       [`${prefix}--tabs__nav-item--disabled`]: disabled,
     }
   );
+
+  const handleClose = (evt) => {
+    evt.stopPropagation();
+    if (!disabled) {
+      onTabCloseRequest?.(index);
+    }
+  };
+
+  const handleKeyDown = (event) => {
+    if (dismissable && match(event, keys.Delete)) {
+      handleClose(event);
+    }
+    onKeyDown?.(event);
+  };
+
+  const DismissIcon = (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+    <div
+      role="button"
+      tabIndex={-1}
+      className={`${prefix}--tabs__nav-item--close-icon`}
+      onClick={handleClose}
+      aria-label="Close tab"
+      title="Close tab"
+      aria-disabled={disabled ? true : undefined}>
+      <Close />
+    </div>
+  );
+
+  const hasIcon = Icon || dismissable;
 
   return (
     <BaseComponent
@@ -601,14 +611,14 @@ const Tab = React.forwardRef(function Tab(
           onClick(evt);
         }
       }}
-      onKeyDown={onKeyDown}
+      onKeyDown={handleKeyDown}
       tabIndex={selectedIndex === index ? '0' : '-1'}
       type="button">
       <div className={`${prefix}--tabs__nav-item-label-wrapper`}>
         <span className={`${prefix}--tabs__nav-item-label`}>{children}</span>
-        {Icon && (
+        {hasIcon && (
           <div className={`${prefix}--tabs__nav-item--icon`}>
-            <Icon size={16} />
+            {dismissable ? DismissIcon : <Icon size={16} />}
           </div>
         )}
       </div>
@@ -843,4 +853,4 @@ TabPanels.propTypes = {
   children: PropTypes.node,
 };
 
-export { DismissableTab, Tabs, Tab, IconTab, TabPanel, TabPanels, TabList };
+export { Tabs, Tab, IconTab, TabPanel, TabPanels, TabList };

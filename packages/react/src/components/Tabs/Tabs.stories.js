@@ -6,15 +6,7 @@
  */
 
 import React, { useState } from 'react';
-import {
-  DismissableTab,
-  Tabs,
-  TabList,
-  Tab,
-  TabPanels,
-  TabPanel,
-  IconTab,
-} from './Tabs';
+import { Tabs, TabList, Tab, TabPanels, TabPanel, IconTab } from './Tabs';
 import TextInput from '../TextInput';
 import Checkbox from '../Checkbox';
 import Button from '../Button';
@@ -87,25 +79,7 @@ export const Dismissable = () => {
     },
     {
       label: 'Tab label 2',
-      panel: (
-        <TabPanel>
-          <form style={{ margin: '2em' }}>
-            <legend className={`cds--label`}>Validation example</legend>
-            <Checkbox id="cb" labelText="Accept privacy policy" />
-            <Button
-              style={{ marginTop: '1rem', marginBottom: '1rem' }}
-              type="submit">
-              Submit
-            </Button>
-            <TextInput
-              type="text"
-              labelText="Text input label"
-              helperText="Optional help text"
-              id="text-input-1"
-            />
-          </form>
-        </TabPanel>
-      ),
+      panel: <TabPanel>Tab Panel 2</TabPanel>,
     },
     {
       label: 'Tab label 3',
@@ -119,8 +93,22 @@ export const Dismissable = () => {
   ];
   const [renderedTabs, setRenderedTabs] = useState(tabs);
 
-  const handleCloseTab = (tab) => {
-    const filteredTabs = renderedTabs.filter((currTab) => currTab !== tab);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const handleTabChange = (evt) => {
+    setSelectedIndex(evt.selectedIndex);
+  };
+
+  const handleCloseTabRequest = (tabIndex) => {
+    const selectedTab = renderedTabs[selectedIndex];
+
+    const filteredTabs = renderedTabs.filter((_, index) => index !== tabIndex);
+    if (tabIndex === selectedIndex) {
+      const defaultTabIndex = filteredTabs.findIndex((tab) => !tab.disabled);
+      setSelectedIndex(defaultTabIndex);
+    } else {
+      setSelectedIndex(filteredTabs.indexOf(selectedTab));
+    }
     setRenderedTabs(filteredTabs);
   };
 
@@ -133,15 +121,19 @@ export const Dismissable = () => {
       <Button style={{ marginBottom: '3rem' }} onClick={resetTabs}>
         Reset
       </Button>
-      <Tabs>
+      <Tabs
+        selectedIndex={selectedIndex}
+        onChange={handleTabChange}
+        dismissable
+        onTabCloseRequest={handleCloseTabRequest}>
         <TabList aria-label="List of tabs">
           {renderedTabs.map((tab, index) => (
-            <DismissableTab
+            <Tab
               key={index}
               disabled={tab.disabled}
-              onCloseRequest={() => handleCloseTab(tab)}>
+              onCloseRequest={() => handleCloseTabRequest(tab)}>
               {tab.label}
-            </DismissableTab>
+            </Tab>
           ))}
         </TabList>
         <TabPanels>{renderedTabs.map((tab) => tab.panel)}</TabPanels>
