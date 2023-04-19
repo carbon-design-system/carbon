@@ -250,14 +250,14 @@ function TabList({
   });
 
   useEffect(() => {
-    setIsNextButtonVisible(
-      ref.current
-        ? scrollLeft + buttonWidth + ref.current.clientWidth <
-            ref.current.scrollWidth
-        : false
-    );
-
     if (dismissable) {
+      setIsNextButtonVisible(
+        ref.current
+          ? scrollLeft + buttonWidth + ref.current.clientWidth <
+              ref.current.scrollWidth
+          : false
+      );
+
       if (ref.current) {
         setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth);
       }
