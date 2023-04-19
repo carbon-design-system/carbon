@@ -91,10 +91,12 @@
 
   // readonly
   .#{$prefix}--time-picker--readonly .#{$prefix}--time-picker__input-field {
+    border-bottom-color: $border-subtle;
     background-color: transparent;
   }
 
   .#{$prefix}--time-picker--readonly .#{$prefix}--select-input {
+    border-bottom-color: $border-subtle;
     background-color: transparent;
     cursor: default;
   }

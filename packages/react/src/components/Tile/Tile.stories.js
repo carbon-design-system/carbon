@@ -5,7 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import './tile-story.scss';
 import React from 'react';
+
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
+
 import Link from '../Link';
 import Button from '../Button';
 import { default as TextInput } from '../TextInput';
@@ -19,8 +23,6 @@ import {
   TileBelowTheFoldContent,
 } from './';
 import TileGroup from '../TileGroup/TileGroup';
-import { Layer } from '../Layer';
-import './tile-story.scss';
 import mdx from './Tile.mdx';
 
 export default {
@@ -60,34 +62,18 @@ export const Default = () => {
   );
 };
 
-export const DefaultWithLayer = () => {
-  return (
-    <>
-      <Tile id="tile-1">
-        First layer
+export const DefaultWithLayer = () => (
+  <WithLayer>
+    {(layer) => (
+      <Tile id={`tile-${layer}`}>
+        Default tile
         <br />
         <br />
         <Link href="https://www.carbondesignsystem.com">Link</Link>
       </Tile>
-      <Layer>
-        <Tile id="tile-2">
-          Second layer
-          <br />
-          <br />
-          <Link href="https://www.carbondesignsystem.com">Link</Link>
-        </Tile>
-        <Layer>
-          <Tile id="tile-3">
-            Third layer
-            <br />
-            <br />
-            <Link href="https://www.carbondesignsystem.com">Link</Link>
-          </Tile>
-        </Layer>
-      </Layer>
-    </>
-  );
-};
+    )}
+  </WithLayer>
+);
 
 export const Clickable = () => {
   return (
@@ -99,31 +85,17 @@ export const Clickable = () => {
   );
 };
 
-export const ClickableWithLayer = () => {
-  return (
-    <>
+export const ClickableWithLayer = () => (
+  <WithLayer>
+    {(layer) => (
       <ClickableTile
-        id="clickable-tile-1"
+        id={`clickable-tile-${layer}`}
         href="https://www.carbondesignsystem.com/">
-        First layer
+        Clickable tile
       </ClickableTile>
-      <Layer>
-        <ClickableTile
-          id="clickable-tile-2"
-          href="https://www.carbondesignsystem.com/">
-          Second layer
-        </ClickableTile>
-        <Layer>
-          <ClickableTile
-            id="clickable-tile-3"
-            href="https://www.carbondesignsystem.com/">
-            Third layer
-          </ClickableTile>
-        </Layer>
-      </Layer>
-    </>
-  );
-};
+    )}
+  </WithLayer>
+);
 
 export const Selectable = () => {
   return (
@@ -174,58 +146,26 @@ export const Radio = () => {
   );
 };
 
-export const RadioWithLayer = () => {
-  return (
-    <>
+export const RadioWithLayer = () => (
+  <WithLayer>
+    {(layer) => (
       <TileGroup
         defaultSelected="default-selected"
-        legend="First layer"
-        name="radio tile group">
+        legend="Radio Tile Group"
+        name={`radio tile group ${layer}`}>
         <RadioTile
-          id="radio-tile-1"
+          id={`radio-tile-${layer}-1`}
           value="standard"
           style={{ marginBottom: '.5rem' }}>
           Option 1
         </RadioTile>
-        <RadioTile id="radio-tile-2" value="default-selected">
+        <RadioTile id={`radio-tile-${layer}-2`} value="default-selected">
           Option 2
         </RadioTile>
       </TileGroup>
-      <Layer>
-        <TileGroup
-          defaultSelected="default-selected"
-          legend="Second Layer"
-          name="radio tile group">
-          <RadioTile
-            id="radio-tile-3"
-            value="standard"
-            style={{ marginBottom: '.5rem' }}>
-            Option 1
-          </RadioTile>
-          <RadioTile id="radio-tile-4" value="default-selected">
-            Option 2
-          </RadioTile>
-        </TileGroup>
-        <Layer>
-          <TileGroup
-            defaultSelected="default-selected"
-            legend="Third Layer"
-            name="radio tile group">
-            <RadioTile
-              id="radio-tile-5"
-              value="standard"
-              style={{ marginBottom: '.5rem' }}>
-              Option 1
-            </RadioTile>
-            <RadioTile id="radio-tile-6" value="default-selected">
-              Option 2
-            </RadioTile>
-          </TileGroup>
-        </Layer>
-      </Layer>
-    </>
-  );
-};
+    )}
+  </WithLayer>
+);
 
 export const Expandable = () => (
   <div style={{ width: '400px' }}>
@@ -268,64 +208,22 @@ export const ExpandableWithInteractive = () => (
   </div>
 );
 
-export const ExpandableWithLayer = () => {
-  return (
-    <div style={{ width: '400px' }}>
-      <ExpandableTile
-        id="expandable-tile-1"
-        tileCollapsedIconText="Interact to Expand tile"
-        tileExpandedIconText="Interact to Collapse tile">
-        <TileAboveTheFoldContent>
-          <div style={{ height: '100px', width: '200px' }}>First layer</div>
-        </TileAboveTheFoldContent>
-        <TileBelowTheFoldContent>
-          <div style={{ height: '200px', width: '200px' }}>
-            Below the fold content here
-            <Layer>
-              <TextInput id="test2" invalidText="A valid value is required" />
-            </Layer>
-          </div>
-        </TileBelowTheFoldContent>
-      </ExpandableTile>
-      <Layer>
+export const ExpandableWithLayer = () => (
+  <WithLayer>
+    {(layer) => (
+      <div style={{ width: '400px' }}>
         <ExpandableTile
-          id="expandable-tile-2"
+          id={`expandable-tile-${layer}`}
           tileCollapsedIconText="Interact to Expand tile"
           tileExpandedIconText="Interact to Collapse tile">
           <TileAboveTheFoldContent>
-            <div style={{ height: '100px' }}>Second layer</div>
+            <div style={{ height: '100px' }}>Above the fold content here</div>
           </TileAboveTheFoldContent>
           <TileBelowTheFoldContent>
-            <div style={{ height: '200px' }}>
-              Below the fold content here
-              <Layer>
-                <TextInput id="test2" invalidText="A valid value is required" />
-              </Layer>
-            </div>
+            <div style={{ height: '200px' }}>Below the fold content here</div>
           </TileBelowTheFoldContent>
         </ExpandableTile>
-        <Layer>
-          <ExpandableTile
-            id="expandable-tile-3"
-            tileCollapsedIconText="Interact to Expand tile"
-            tileExpandedIconText="Interact to Collapse tile">
-            <TileAboveTheFoldContent>
-              <div style={{ height: '100px' }}>Third layer</div>
-            </TileAboveTheFoldContent>
-            <TileBelowTheFoldContent>
-              <div style={{ height: '100px' }}>
-                Below the fold content here
-                <Layer>
-                  <TextInput
-                    id="test2"
-                    invalidText="A valid value is required"
-                  />
-                </Layer>
-              </div>
-            </TileBelowTheFoldContent>
-          </ExpandableTile>
-        </Layer>
-      </Layer>
-    </div>
-  );
-};
+      </div>
+    )}
+  </WithLayer>
+);

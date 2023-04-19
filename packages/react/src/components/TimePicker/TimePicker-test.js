@@ -41,7 +41,7 @@ describe('TimePicker', () => {
       expect(onClick).not.toHaveBeenCalled();
     });
 
-    it('should behave readonly as expected', () => {
+    it('should behave readonly as expected', async () => {
       const onClick = jest.fn();
       const onChange = jest.fn();
 
@@ -63,11 +63,11 @@ describe('TimePicker', () => {
       );
 
       const input = screen.getByRole('textbox');
-      userEvent.click(input);
+      await userEvent.click(input);
       expect(onClick).toHaveBeenCalled();
       expect(input).toHaveAttribute('readonly');
 
-      userEvent.type(input, '01:50');
+      await userEvent.type(input, '01:50');
       expect(onChange).not.toHaveBeenCalled();
 
       screen.getByDisplayValue('AM');
@@ -105,9 +105,9 @@ describe('TimePicker', () => {
   });
 
   describe('events', () => {
-    it('should write text inside the textbox', () => {
+    it('should write text inside the textbox', async () => {
       render(<TimePicker id="time-picker" />);
-      userEvent.type(screen.getByRole('textbox'), '🧛');
+      await userEvent.type(screen.getByRole('textbox'), '🧛');
       expect(screen.getByRole('textbox')).toHaveValue('🧛');
     });
   });

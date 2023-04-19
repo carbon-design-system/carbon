@@ -5,13 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, cleanup } from '@carbon/test-utils/react';
+import { render } from '@testing-library/react';
 import React from 'react';
 import { FileUploaderSkeleton } from '../';
 
 describe('FileUploaderSkeleton', () => {
-  afterEach(cleanup);
-
   describe('automated accessibility testing', () => {
     it('should have no axe violations', async () => {
       const { container } = render(<FileUploaderSkeleton />);

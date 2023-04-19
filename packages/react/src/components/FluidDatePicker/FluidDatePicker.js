@@ -13,13 +13,23 @@ import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
 
 const FluidDatePicker = React.forwardRef(function FluidDatePicker(
-  { className, children, invalid, invalidText, warn, warnText, ...other },
+  {
+    className,
+    children,
+    invalid,
+    invalidText,
+    readOnly,
+    warn,
+    warnText,
+    ...other
+  },
   ref
 ) {
   const prefix = usePrefix();
   const classNames = classnames(className, {
     [`${prefix}--date-picker--fluid`]: true,
     [`${prefix}--date-picker--fluid--invalid`]: invalid,
+    [`${prefix}--date-picker--fluid--readonly`]: readOnly,
     [`${prefix}--date-picker--fluid--warn`]: warn,
   });
 
@@ -28,6 +38,7 @@ const FluidDatePicker = React.forwardRef(function FluidDatePicker(
       <DatePicker
         invalid={invalid}
         invalidText={invalidText}
+        readOnly={readOnly}
         warn={warn}
         warnText={warnText}
         className={classNames}
@@ -59,6 +70,11 @@ FluidDatePicker.propTypes = {
    * Provide the text that is displayed when the control is in error state
    */
   invalidText: PropTypes.node,
+
+  /**
+   * Whether the input should be read-only
+   */
+  readOnly: PropTypes.bool,
 
   /**
    * Specify whether the control is currently in warning state

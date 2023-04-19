@@ -3967,6 +3967,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "closeOnActivation": Object {
+        "type": "bool",
+      },
       "defaultOpen": Object {
         "type": "bool",
       },
@@ -4001,6 +4004,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "wrapperClasses": Object {
+        "type": "string",
+      },
     },
     "render": [Function],
   },
@@ -4010,6 +4016,80 @@ Map {
         "type": "string",
       },
     },
+  },
+  "IconSwitch" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "right",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "enterDelayMs": Object {
+        "type": "number",
+      },
+      "index": Object {
+        "type": "number",
+      },
+      "leaveDelayMs": Object {
+        "type": "number",
+      },
+      "name": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+      "selected": Object {
+        "type": "bool",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "text": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
   },
   "IconTab" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -7113,9 +7193,6 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
-      "hasSecondaryLabel": Object {
-        "type": "bool",
-      },
       "onClick": Object {
         "type": "func",
       },
@@ -7124,6 +7201,19 @@ Map {
       },
       "renderButton": Object {
         "type": "func",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "secondaryLabel": Object {
         "type": "string",
@@ -9792,6 +9882,9 @@ Map {
       },
       "invalidText": Object {
         "type": "node",
+      },
+      "readOnly": Object {
+        "type": "bool",
       },
       "warn": Object {
         "type": "bool",

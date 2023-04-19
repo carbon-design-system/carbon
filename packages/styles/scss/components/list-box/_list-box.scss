@@ -516,10 +516,12 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box
     .#{$prefix}--list-box__field[aria-expanded='false']
     + .#{$prefix}--list-box__menu {
+    display: none;
     max-height: 0;
   }
 
   .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
+    display: block;
     // 40px item height * 5.5 items shown
     max-height: rem(220px);
   }
