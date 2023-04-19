@@ -239,6 +239,7 @@ export function StructuredListInput(props) {
     name = `structured-list-input-${defaultId}`,
     title,
     id,
+    onChange,
     ...other
   } = props;
   const prefix = usePrefix();
@@ -260,6 +261,7 @@ export function StructuredListInput(props) {
       value={row?.id ?? ''}
       onChange={(event) => {
         setSelectedRow(event.target.value);
+        onChange(event);
       }}
       id={id ?? defaultId}
       className={classes}
