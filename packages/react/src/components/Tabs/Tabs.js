@@ -250,14 +250,14 @@ function TabList({
   });
 
   useEffect(() => {
-    if (dismissable) {
-      setIsNextButtonVisible(
-        ref.current
-          ? scrollLeft + buttonWidth + ref.current.clientWidth <
-              ref.current.scrollWidth
-          : false
-      );
+    setIsNextButtonVisible(
+      ref.current
+        ? scrollLeft + buttonWidth + ref.current.clientWidth <
+            ref.current.scrollWidth
+        : false
+    );
 
+    if (dismissable) {
       if (ref.current) {
         setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth);
       }
@@ -331,7 +331,7 @@ function TabList({
       }
 
       // The end of the tab is clipped and not visible
-      else if (end > visibleEnd) {
+      if (end > visibleEnd) {
         setScrollLeft(end + buttonWidth - ref.current.clientWidth);
       }
     }
