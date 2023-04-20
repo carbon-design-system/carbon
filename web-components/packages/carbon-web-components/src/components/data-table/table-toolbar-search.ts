@@ -14,7 +14,7 @@ import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import { INPUT_SIZE } from '../text-input/text-input';
-import BXSearch from '../search/search';
+import CDSSearch from '../search/search';
 import styles from './data-table.scss';
 
 /**
@@ -24,7 +24,7 @@ import styles from './data-table.scss';
  * @fires cds-search-input - The custom event fired after the search content is changed upon a user gesture.
  */
 @customElement(`${prefix}-table-toolbar-search`)
-class BXTableToolbarSearch extends HostListenerMixin(BXSearch) {
+class BXTableToolbarSearch extends HostListenerMixin(CDSSearch) {
   @query('input')
   private _inputNode!: HTMLInputElement;
 

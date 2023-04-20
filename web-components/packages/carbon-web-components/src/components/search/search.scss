@@ -8,6 +8,8 @@
 $css--plex: true !default;
 
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/search' as *;
@@ -15,35 +17,51 @@ $css--plex: true !default;
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include search;
 
-:host(#{$prefix}-search),
-:host(#{$prefix}-search-skeleton) {
-  @extend .#{$prefix}--search--lg;
-}
-
 :host(#{$prefix}-search) {
   @extend .#{$prefix}--search;
 
   outline: none;
-}
 
-:host(#{$prefix}-search[size='sm']),
-:host(#{$prefix}-search-skeleton[size='sm']) {
-  @extend .#{$prefix}--search--sm;
-}
+  &[expandable] {
+    @extend .#{$prefix}--search--expandable;
 
-:host(#{$prefix}-search[size='lg']),
-:host(#{$prefix}-search-skeleton[size='lg']) {
-  @extend .#{$prefix}--search--lg;
-}
+    &[expanded] {
+      @extend .#{$prefix}--search--expanded;
 
-// TODO: deprecate
-// :host(#{$prefix}-search[size='xl']),
-// :host(#{$prefix}-search-skeleton[size='xl']) {
-//   @extend .#{$prefix}--search--xl;
-// }
+      &[size='sm'] {
+        .#{$prefix}--search-input {
+          padding: 0 $spacing-07;
+        }
+      }
 
-:host(#{$prefix}-search[color-scheme='light']) {
-  @extend .#{$prefix}--search--light;
+      &[size='md'] {
+        .#{$prefix}--search-input {
+          padding: 0 $spacing-08;
+        }
+      }
+
+      &[size='lg'] {
+        .#{$prefix}--search-input {
+          padding: 0 $spacing-09;
+        }
+      }
+    }
+  }
+
+  &[disabled] {
+    svg {
+      fill: $icon-on-color-disabled;
+    }
+
+    .#{$prefix}--search-close {
+      pointer-events: none;
+      outline: none;
+
+      &::before {
+        background: none;
+      }
+    }
+  }
 }
 
 :host(#{$prefix}-search-skeleton) {
@@ -57,5 +75,20 @@ $css--plex: true !default;
     &::placeholder {
       color: transparent;
     }
+  }
+}
+
+:host(#{$prefix}-search),
+:host(#{$prefix}-search-skeleton) {
+  &[size='sm'] {
+    @extend .#{$prefix}--search--sm;
+  }
+
+  &[size='md'] {
+    @extend .#{$prefix}--search--md;
+  }
+
+  &[size='lg'] {
+    @extend .#{$prefix}--search--lg;
   }
 }

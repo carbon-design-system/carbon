@@ -17,7 +17,7 @@ import styles from './search.scss';
  * Skeleton of search.
  */
 @customElement(`${prefix}-search-skeleton`)
-class BXSearchSkeleton extends LitElement {
+class CDSSearchSkeleton extends LitElement {
   /**
    * The search box size. Corresponds to the attribute with the same name.
    */
@@ -34,4 +34,4 @@ class BXSearchSkeleton extends LitElement {
   static styles = styles;
 }
 
-export default BXSearchSkeleton;
+export default CDSSearchSkeleton;

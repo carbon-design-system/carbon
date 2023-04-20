@@ -11,17 +11,15 @@ import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import Close16 from '@carbon/icons/lib/close/16';
-import Close20 from '@carbon/icons/lib/close/20';
 import Search16 from '@carbon/icons/lib/search/16';
 import { prefix } from '../../globals/settings';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import FocusMixin from '../../globals/mixins/focus';
 import FormMixin from '../../globals/mixins/form';
 import { INPUT_SIZE } from '../text-input/text-input';
-import { SEARCH_COLOR_SCHEME } from './defs';
+import HostListener from '../../globals/decorators/host-listener';
+import HostListenerMixin from '../../globals/mixins/host-listener';
 import styles from './search.scss';
-
-export { SEARCH_COLOR_SCHEME };
 
 /**
  * Search box.
@@ -35,7 +33,7 @@ export { SEARCH_COLOR_SCHEME };
  * @fires cds-search-input - The custom event fired after the search content is changed upon a user gesture.
  */
 @customElement(`${prefix}-search`)
-class BXSearch extends FocusMixin(FormMixin(LitElement)) {
+class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
   /**
    * Handles `input` event on the `<input>` in the shadow DOM.
    */
@@ -43,7 +41,7 @@ class BXSearch extends FocusMixin(FormMixin(LitElement)) {
     const { target } = event;
     const { value } = target as HTMLInputElement;
     this.dispatchEvent(
-      new CustomEvent((this.constructor as typeof BXSearch).eventInput, {
+      new CustomEvent((this.constructor as typeof CDSSearch).eventInput, {
         bubbles: true,
         composed: true,
         cancelable: false,
@@ -61,7 +59,7 @@ class BXSearch extends FocusMixin(FormMixin(LitElement)) {
   private _handleClearInputButtonClick() {
     if (this.value) {
       this.dispatchEvent(
-        new CustomEvent((this.constructor as typeof BXSearch).eventInput, {
+        new CustomEvent((this.constructor as typeof CDSSearch).eventInput, {
           bubbles: true,
           composed: true,
           cancelable: false,
@@ -78,6 +76,42 @@ class BXSearch extends FocusMixin(FormMixin(LitElement)) {
     }
   }
 
+  /**
+   * Handles `focus` event on the button when the button can be expanded
+   */
+  @HostListener('focus')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleExpand() {
+    if (this.expandable && !this.expanded) {
+      this.setAttribute('expanded', '');
+    }
+  }
+
+  /**
+   * Handles `focusout` event on the component to be closed after being expanded
+   * Will not close if there is a value typed within.
+   */
+  @HostListener('focusout')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleClose() {
+    if (this.expandable && this.expanded && !this.value) {
+      this.removeAttribute('expanded');
+    }
+  }
+
+  /**
+   * Handler for @slotchange, will only be ran if user sets an element under the "icon" slot.
+   *
+   * @private
+   */
+  private _handleSlotChange() {
+    const icon = this.querySelector('svg');
+    icon?.setAttribute('part', 'search-icon');
+    icon?.setAttribute('class', `${prefix}--search-magnifier-icon`);
+    icon?.setAttribute('role', `img`);
+    this.hasCustomIcon = true;
+  }
+
   _handleFormdata(event: Event) {
     const { formData } = event as any; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
     const { disabled, name, value } = this;
@@ -87,22 +121,38 @@ class BXSearch extends FocusMixin(FormMixin(LitElement)) {
   }
 
   /**
-   * The assistive text for the close button.
+   * Specify an optional value for the autocomplete property on the underlying <input>,
+   * defaults to "off"
    */
-  @property({ attribute: 'close-button-assistive-text' })
-  closeButtonAssistiveText = '';
+  @property({ attribute: 'autocomplete' })
+  autoComplete = 'off';
 
   /**
-   * The color scheme.
+   * Specify a label to be read by screen readers on the "close" button
    */
-  @property({ attribute: 'color-scheme', reflect: true })
-  colorScheme = SEARCH_COLOR_SCHEME.REGULAR;
+  @property({ attribute: 'close-button-label-text' })
+  closeButtonLabelText = '';
 
   /**
    * `true` if the search box should be disabled.
    */
   @property({ type: Boolean, reflect: true })
   disabled = false;
+
+  /**
+   * `true` if the search bar can be expandable
+   */
+  @property({ type: Boolean, reflect: true })
+  expandable = false;
+
+  /**
+   * `true` if the expandable search has been expanded
+   */
+  @property({ type: Boolean, reflect: true })
+  expanded = false;
+
+  @property({ type: Boolean })
+  hasCustomIcon = false;
 
   /**
    * The label text.
@@ -117,10 +167,16 @@ class BXSearch extends FocusMixin(FormMixin(LitElement)) {
   name = '';
 
   /**
+   * Specify the role for the underlying <input>, defaults to searchbox
+   */
+  @property()
+  role = '';
+
+  /**
    * The placeholder text.
    */
   @property()
-  placeholder = '';
+  placeholder = 'Search';
 
   /**
    * The search box size.
@@ -142,31 +198,41 @@ class BXSearch extends FocusMixin(FormMixin(LitElement)) {
 
   render() {
     const {
-      closeButtonAssistiveText,
+      autoComplete,
+      closeButtonLabelText,
       disabled,
+      hasCustomIcon,
       labelText,
       name,
       placeholder,
-      size,
+      role,
       type,
       value = '',
       _handleInput: handleInput,
       _handleClearInputButtonClick: handleClearInputButtonClick,
+      _handleSlotChange: handleSlotChange,
     } = this;
     const clearClasses = classMap({
       [`${prefix}--search-close`]: true,
       [`${prefix}--search-close--hidden`]: !this.value,
     });
     return html`
-      ${Search16({
-        part: 'search-icon',
-        class: `${prefix}--search-magnifier-icon`,
-        role: 'img',
-      })}
+      <div class="${prefix}--search-magnifier">
+        <slot name="icon" @slotchange=${handleSlotChange}>
+          ${hasCustomIcon
+            ? html``
+            : html`${Search16({
+                part: 'search-icon',
+                class: `${prefix}--search-magnifier-icon`,
+                role: 'img',
+              })}`}
+        </slot>
+      </div>
       <label for="input" part="label-text" class="${prefix}--label">
         <slot>${labelText}</slot>
       </label>
       <input
+        autocomplete="${autoComplete}"
         id="input"
         part="input"
         type="${ifNonEmpty(type)}"
@@ -174,7 +240,7 @@ class BXSearch extends FocusMixin(FormMixin(LitElement)) {
         ?disabled="${disabled}"
         name="${ifNonEmpty(name)}"
         placeholder="${ifNonEmpty(placeholder)}"
-        role="searchbox"
+        role="${role}"
         .value="${value}"
         @input="${handleInput}" />
       <button
@@ -182,10 +248,10 @@ class BXSearch extends FocusMixin(FormMixin(LitElement)) {
         class="${clearClasses}"
         @click="${handleClearInputButtonClick}"
         type="button"
-        aria-label="${closeButtonAssistiveText}">
-        ${(size === INPUT_SIZE.SMALL ? Close16 : Close20)({
+        aria-label="${closeButtonLabelText}">
+        ${Close16({
           part: 'close-icon',
-          'aria-label': closeButtonAssistiveText,
+          'aria-label': closeButtonLabelText,
           role: 'img',
         })}
       </button>
@@ -206,4 +272,4 @@ class BXSearch extends FocusMixin(FormMixin(LitElement)) {
   static styles = styles; // `styles` here is a `CSSResult` generated by custom WebPack loader
 }
 
-export default BXSearch;
+export default CDSSearch;

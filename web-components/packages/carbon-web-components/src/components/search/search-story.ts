@@ -9,82 +9,151 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { action } from '@storybook/addon-actions';
-import { boolean, select } from '@storybook/addon-knobs';
+import { boolean, number, select } from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
 import { INPUT_SIZE } from '../text-input/text-input';
-import { SEARCH_COLOR_SCHEME } from './search';
 import './search-skeleton';
 import storyDocs from './search-story.mdx';
 import { prefix } from '../../globals/settings';
 
-const colorSchemes = {
-  [`Regular`]: null,
-  [`Light (${SEARCH_COLOR_SCHEME.LIGHT})`]: SEARCH_COLOR_SCHEME.LIGHT,
-};
-
 const sizes = {
-  'Regular size': null,
   [`Small size (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,
+  [`Medium size (${INPUT_SIZE.MEDIUM})`]: INPUT_SIZE.MEDIUM,
   [`Large size (${INPUT_SIZE.LARGE})`]: INPUT_SIZE.LARGE,
 };
 
-export const Default = (args) => {
+const widthSliderOptions = {
+  range: true,
+  min: 300,
+  max: 800,
+  step: 50,
+};
+
+export const Default = () => {
+  return html`
+    <cds-search
+      size="lg"
+      close-button-label-text="Clear search input"
+      label-text="Search"
+      placeholder="Find your items"
+      type="text"></cds-search>
+  `;
+};
+
+export const Disabled = () => {
+  return html`
+    <cds-search
+      size="lg"
+      disabled
+      close-button-label-text="Clear search input"
+      label-text="Search"
+      placeholder="Find your items"
+      type="text"></cds-search>
+  `;
+};
+
+export const Expandable = () => {
+  return html`
+    <cds-search
+      size="lg"
+      expandable
+      close-button-assistive-text="Clear search input"
+      label-text="Search"
+      placeholder="Find your items"
+      type="text"></cds-search>
+  `;
+};
+
+export const ExpandableWithLayer = () => {
+  return html`
+    <cds-layer>
+      <cds-search size="lg" expandable placeholder="Layer one"></cds-search>
+      <cds-layer>
+        <cds-search size="lg" expandable placeholder="Layer two"></cds-search>
+        <cds-layer>
+          <cds-search
+            size="lg"
+            expandable
+            placeholder="Layer three"></cds-search>
+        </cds-layer>
+      </cds-layer>
+    </cds-layer>
+  `;
+};
+
+export const WithLayer = () => {
+  return html`
+    <cds-layer>
+      <cds-search size="lg" placeholder="Layer one"></cds-search>
+      <cds-layer>
+        <cds-search size="lg" placeholder="Layer two"></cds-search>
+        <cds-layer>
+          <cds-search size="lg" placeholder="Layer three"></cds-search>
+        </cds-layer>
+      </cds-layer>
+    </cds-layer>
+  `;
+};
+
+export const Playground = (args) => {
   const {
-    closeButtonAssistiveText,
+    autoComplete,
+    closeButtonLabelText,
     colorScheme,
     disabled,
     labelText,
-    name,
     placeholder,
+    playgroundWidth,
     size,
+    role,
     type,
     value,
     onInput,
   } = args?.[`${prefix}-search`] ?? {};
+
+  const mainDiv = document.querySelector('#main-content');
+
+  if (mainDiv) {
+    (mainDiv as HTMLElement).style.width = `${playgroundWidth}px`;
+  }
+
   return html`
     <cds-search
-      close-button-assistive-text="${ifDefined(closeButtonAssistiveText)}"
+      autocomplete="${autoComplete}"
+      close-button-assistive-text="${ifDefined(closeButtonLabelText)}"
       color-scheme="${ifDefined(colorScheme)}"
       ?disabled="${disabled}"
       label-text="${ifDefined(labelText)}"
-      name="${ifDefined(name)}"
       placeholder="${ifDefined(placeholder)}"
       size="${ifDefined(size)}"
       type="${ifDefined(type)}"
+      role=${role}
       value="${ifDefined(value)}"
-      @cds-search-input="${onInput}"></cds-search>
+      @cds-search-input="${onInput}">
+    </cds-search>
   `;
 };
 
-Default.storyName = 'Default';
-
-Default.parameters = {
+Playground.parameters = {
   knobs: {
     [`${prefix}-search`]: () => ({
-      closeButtonAssistiveText: textNullable(
-        'The label text for the close button (close-button-assistive-text)',
+      autoComplete: textNullable('Autocomplete (autocomplete)', 'off'),
+      closeButtonLabelText: textNullable(
+        'The label text for the close button (close-button-label-text)',
         'Clear search input'
       ),
-      colorScheme: select('Color scheme (color-scheme)', colorSchemes, null),
       disabled: boolean('Disabled (disabled)', false),
       labelText: textNullable('Label text (label-text)', 'Search'),
-      name: textNullable('Name (name)', ''),
-      placeholder: textNullable('Placeholder text (placeholder)', ''),
+      placeholder: textNullable(
+        'Placeholder text (placeholder)',
+        'Placeholder text'
+      ),
+      playgroundWidth: number('Playground width', 300, widthSliderOptions),
+      role: textNullable('The role of the <input> (role)', 'searchbox'),
       size: select('Search size (size)', sizes, null),
-      type: textNullable('The type of the <input> (type)', ''),
+      type: textNullable('The type of the <input> (type)', 'text'),
       value: textNullable('Value (value)', ''),
-      onInput: action(`${prefix}-search-input`),
     }),
-  },
-};
-
-export const skeleton = () =>
-  html` <cds-search-skeleton></cds-search-skeleton> `;
-
-skeleton.parameters = {
-  percy: {
-    skip: true,
   },
 };
 

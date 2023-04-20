@@ -10,13 +10,11 @@
 import { render } from 'lit';
 import EventManager from '../utils/event-manager';
 import { INPUT_SIZE } from '../../src/components/text-input/text-input';
-import BXSearch, {
-  SEARCH_COLOR_SCHEME,
-} from '../../src/components/search/search';
-import { Default } from '../../src/components/search/search-story';
+import CDSSearch from '../../src/components/search/search';
+import { Playground } from '../../src/components/search/search-story';
 
 const template = (props?) =>
-  Default({
+  Playground({
     'cds-search': props,
   });
 
@@ -36,7 +34,6 @@ describe('cds-search', function () {
       render(
         template({
           closeButtonAssistiveText: 'close-button-assistive-text-foo',
-          colorScheme: SEARCH_COLOR_SCHEME.LIGHT,
           disabled: true,
           labelText: 'label-text-foo',
           name: 'name-foo',
@@ -62,7 +59,7 @@ describe('cds-search', function () {
       const inputNode = search!.shadowRoot!.querySelector('input');
       inputNode!.value = 'value-bar';
       inputNode!.dispatchEvent(new CustomEvent('input', { bubbles: true }));
-      expect((search as BXSearch).value).toBe('value-bar');
+      expect((search as CDSSearch).value).toBe('value-bar');
     });
 
     it('Should fire cds-search-input event upon typing', async function () {
@@ -86,7 +83,7 @@ describe('cds-search', function () {
       await Promise.resolve();
       const search = document.body.querySelector('cds-search');
       search!.shadowRoot!.querySelector('button')!.click();
-      expect((search as BXSearch).value).toBe('');
+      expect((search as CDSSearch).value).toBe('');
     });
 
     it('Should fire cds-search-input event upon clearing', async function () {
