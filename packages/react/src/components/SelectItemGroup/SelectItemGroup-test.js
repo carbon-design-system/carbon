@@ -43,7 +43,7 @@ describe('SelectItemGroup', () => {
 
     it('Should not be disabled by default', () => {
       const { container } = render(<SelectItemGroup />);
-      expect(container.firstChild).not.toHaveAttribute('disabled');
+      expect(container.firstChild).toBeEnabled();
     });
 
     it('should set disabled as expected', () => {

@@ -13,7 +13,7 @@ import Button from '../Button';
 import mdx from './Tabs.mdx';
 
 import TabsSkeleton from './Tabs.Skeleton';
-import { Monster, Corn, Bat } from '@carbon/icons-react';
+import { Monster, Corn, Bat, Bee, Home } from '@carbon/icons-react';
 
 export default {
   title: 'Components/Tabs',
@@ -41,10 +41,10 @@ export default {
 export const Default = () => (
   <Tabs>
     <TabList aria-label="List of tabs">
-      <Tab>Tab Label 1</Tab>
-      <Tab>Tab Label 2</Tab>
-      <Tab disabled>Tab Label 3</Tab>
-      <Tab>Tab Label 4</Tab>
+      <Tab>Tab label 1</Tab>
+      <Tab>Tab label 2</Tab>
+      <Tab disabled>Tab label 3</Tab>
+      <Tab>Tab label 4</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
@@ -71,14 +71,53 @@ export const Default = () => (
   </Tabs>
 );
 
+export const WithIcons = () => (
+  <Tabs>
+    <TabList activation="manual" aria-label="List of tabs">
+      <Tab renderIcon={Bee}>Tab label 1</Tab>
+      <Tab renderIcon={Monster}>Tab label 2</Tab>
+      <Tab disabled renderIcon={Corn}>
+        Tab label 3
+      </Tab>
+      <Tab title="Tab label 4" renderIcon={Bat}>
+        Tab label 4
+      </Tab>
+      <Tab renderIcon={Home}>Tab label 5</Tab>
+    </TabList>
+    <TabPanels>
+      <TabPanel>Tab Panel 1</TabPanel>
+      <TabPanel>
+        <form style={{ margin: '2em' }}>
+          <legend className={`cds--label`}>Validation example</legend>
+          <Checkbox id="cb" labelText="Accept privacy policy" />
+          <Button
+            style={{ marginTop: '1rem', marginBottom: '1rem' }}
+            type="submit">
+            Submit
+          </Button>
+          <TextInput
+            type="text"
+            labelText="Text input label"
+            helperText="Optional help text"
+            id="text-input-1"
+          />
+        </form>
+      </TabPanel>
+      <TabPanel>Tab Panel 3</TabPanel>
+      <TabPanel>Tab Panel 4</TabPanel>
+      <TabPanel>Tab Panel 5</TabPanel>
+    </TabPanels>
+  </Tabs>
+);
+
 export const Manual = () => (
   <Tabs>
     <TabList activation="manual" aria-label="List of tabs">
-      <Tab>Tab Label 1</Tab>
-      <Tab>Tab Label 2</Tab>
-      <Tab disabled>Tab Label 3</Tab>
-      <Tab title="Tab Label 4">Tab Label 4</Tab>
-      <Tab>Tab Label 5</Tab>
+      <Tab>Tab label 1</Tab>
+      <Tab>Tab label 2</Tab>
+      <Tab disabled>Tab label 3</Tab>
+      <Tab title="Tab label 4">Tab label 4</Tab>
+      <Tab>Tab label 5</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
@@ -151,11 +190,11 @@ export const IconOnly = () => (
 export const Contained = () => (
   <Tabs>
     <TabList aria-label="List of tabs" contained>
-      <Tab>Tab Label 1</Tab>
-      <Tab>Tab Label 2</Tab>
-      <Tab disabled>Tab Label 3</Tab>
-      <Tab title="Tab Label 4">Tab Label 4</Tab>
-      <Tab>Tab Label 5</Tab>
+      <Tab>Tab label 1</Tab>
+      <Tab>Tab label 2</Tab>
+      <Tab disabled>Tab label 3</Tab>
+      <Tab title="Tab label 4">Tab label 4</Tab>
+      <Tab>Tab label 5</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
@@ -182,18 +221,100 @@ export const Contained = () => (
   </Tabs>
 );
 
-export const ContainedWithSecondaryLabel = () => (
+export const ContainedWithIcons = () => (
   <Tabs>
     <TabList aria-label="List of tabs" contained>
-      <Tab secondaryLabel="367">Tab Label 1</Tab>
-      <Tab secondaryLabel="367">Tab Label 2</Tab>
+      <Tab renderIcon={Bee}>Tab label 1</Tab>
+      <Tab renderIcon={Monster}>Tab label 2</Tab>
+      <Tab disabled renderIcon={Bat}>
+        Tab label 3
+      </Tab>
+      <Tab title="Tab label 4" renderIcon={Corn}>
+        Tab label 4
+      </Tab>
+      <Tab renderIcon={Home}>Tab label 5</Tab>
+    </TabList>
+    <TabPanels>
+      <TabPanel>Tab Panel 1</TabPanel>
+      <TabPanel>
+        <form style={{ margin: '2em' }}>
+          <legend className={`cds--label`}>Validation example</legend>
+          <Checkbox id="cb" labelText="Accept privacy policy" />
+          <Button
+            style={{ marginTop: '1rem', marginBottom: '1rem' }}
+            type="submit">
+            Submit
+          </Button>
+          <TextInput
+            type="text"
+            labelText="Text input label"
+            helperText="Optional help text"
+          />
+        </form>
+      </TabPanel>
+      <TabPanel>Tab Panel 3</TabPanel>
+      <TabPanel>Tab Panel 4</TabPanel>
+      <TabPanel>Tab Panel 5</TabPanel>
+    </TabPanels>
+  </Tabs>
+);
+
+export const ContainedWithSecondaryLabels = () => (
+  <Tabs>
+    <TabList aria-label="List of tabs" contained>
+      <Tab secondaryLabel="367">Tab label 1</Tab>
+      <Tab secondaryLabel="367">Tab label 2</Tab>
       <Tab disabled secondaryLabel="367">
-        Tab Label 3
+        Tab label 3
       </Tab>
-      <Tab title="Tab Label 4" secondaryLabel="367">
-        Tab Label 4
+      <Tab title="Tab label 4" secondaryLabel="367">
+        Tab label 4
       </Tab>
-      <Tab secondaryLabel="367">Tab Label 5</Tab>
+      <Tab secondaryLabel="367">Tab label 5</Tab>
+    </TabList>
+    <TabPanels>
+      <TabPanel>Tab Panel 1</TabPanel>
+      <TabPanel>
+        <form style={{ margin: '2em' }}>
+          <legend className={`cds--label`}>Validation example</legend>
+          <Checkbox id="cb" labelText="Accept privacy policy" />
+          <Button
+            style={{ marginTop: '1rem', marginBottom: '1rem' }}
+            type="submit">
+            Submit
+          </Button>
+          <TextInput
+            type="text"
+            labelText="Text input label"
+            helperText="Optional help text"
+          />
+        </form>
+      </TabPanel>
+      <TabPanel>Tab Panel 3</TabPanel>
+      <TabPanel>Tab Panel 4</TabPanel>
+      <TabPanel>Tab Panel 5</TabPanel>
+    </TabPanels>
+  </Tabs>
+);
+
+export const ContainedWithSecondaryLabelsAndIcons = () => (
+  <Tabs>
+    <TabList aria-label="List of tabs" contained>
+      <Tab renderIcon={Bee} secondaryLabel="367">
+        Tab label 1
+      </Tab>
+      <Tab renderIcon={Monster} secondaryLabel="367">
+        Tab label 2
+      </Tab>
+      <Tab renderIcon={Bat} disabled secondaryLabel="367">
+        Tab label 3
+      </Tab>
+      <Tab renderIcon={Corn} title="Tab label 4" secondaryLabel="367">
+        Tab label 4
+      </Tab>
+      <Tab renderIcon={Home} secondaryLabel="367">
+        Tab label 5
+      </Tab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
@@ -231,10 +352,10 @@ export const Skeleton = () => {
 export const Playground = (args) => (
   <Tabs>
     <TabList aria-label="List of tabs" {...args}>
-      <Tab>Tab Label 1</Tab>
-      <Tab>Tab Label 2</Tab>
-      <Tab>Tab Label 3</Tab>
-      <Tab>Tab Label 4</Tab>
+      <Tab>Tab label 1</Tab>
+      <Tab>Tab label 2</Tab>
+      <Tab>Tab label 3</Tab>
+      <Tab>Tab label 4</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>

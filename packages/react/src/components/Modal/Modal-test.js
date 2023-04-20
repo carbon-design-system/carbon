@@ -190,9 +190,7 @@ describe('Modal', () => {
       </Modal>
     );
 
-    expect(screen.getByText('Primary button text')).not.toHaveAttribute(
-      'disabled'
-    );
+    expect(screen.getByText('Primary button text')).toBeEnabled();
   });
 
   it('disables primary button is disablePrimaryButton prop is passed', () => {
@@ -211,7 +209,7 @@ describe('Modal', () => {
       </Modal>
     );
 
-    expect(screen.getByText('Primary button text')).toHaveAttribute('disabled');
+    expect(screen.getByText('Primary button text')).toBeDisabled();
   });
 
   it('should set button text when passed via props', () => {
@@ -359,7 +357,7 @@ describe('events', () => {
     expect(screen.getByTestId('modal-6')).toHaveClass('is-visible');
   });
 
-  it('should handle close when outside of modal is clicked', () => {
+  it('should handle close when outside of modal is clicked', async () => {
     const onRequestClose = jest.fn();
     render(
       <Modal
@@ -382,11 +380,11 @@ describe('events', () => {
     );
 
     const outerModal = screen.getByTestId('modal-7');
-    userEvent.click(outerModal);
+    await userEvent.click(outerModal);
     expect(onRequestClose).toHaveBeenCalled();
   });
 
-  it('should not handle close when inner content is clicked', () => {
+  it('should not handle close when inner content is clicked', async () => {
     const onRequestClose = jest.fn();
     render(
       <Modal
@@ -408,11 +406,11 @@ describe('events', () => {
     );
 
     const innerModal = screen.getByRole('dialog');
-    userEvent.click(innerModal);
+    await userEvent.click(innerModal);
     expect(onRequestClose).not.toHaveBeenCalled();
   });
 
-  it('should not handle close when outside of modal is clicked and preventCloseOnClickOutside is passed', () => {
+  it('should not handle close when outside of modal is clicked and preventCloseOnClickOutside is passed', async () => {
     const onRequestClose = jest.fn();
     render(
       <Modal
@@ -436,11 +434,11 @@ describe('events', () => {
     );
 
     const outerModal = screen.getByTestId('modal-8');
-    userEvent.click(outerModal);
+    await userEvent.click(outerModal);
     expect(onRequestClose).not.toHaveBeenCalled();
   });
 
-  it('should handle close keyDown events', () => {
+  it('should handle close keyDown events', async () => {
     const onRequestClose = jest.fn();
     render(
       <Modal
@@ -461,11 +459,11 @@ describe('events', () => {
       </Modal>
     );
 
-    userEvent.keyboard('{esc}');
+    await userEvent.keyboard('{Escape}');
     expect(onRequestClose).toHaveBeenCalled();
   });
 
-  it('should handle submit keyDown events with shouldSubmitOnEnter enabled', () => {
+  it('should handle submit keyDown events with shouldSubmitOnEnter enabled', async () => {
     const onRequestSubmit = jest.fn();
     render(
       <Modal
@@ -487,11 +485,11 @@ describe('events', () => {
       </Modal>
     );
 
-    userEvent.keyboard('{Enter}');
+    await userEvent.keyboard('{Enter}');
     expect(onRequestSubmit).toHaveBeenCalled();
   });
 
-  it('should not handle submit keyDown events if shouldSubmitOnEnter is not enabled', () => {
+  it('should not handle submit keyDown events if shouldSubmitOnEnter is not enabled', async () => {
     const onRequestSubmit = jest.fn();
     render(
       <Modal
@@ -512,11 +510,11 @@ describe('events', () => {
       </Modal>
     );
 
-    userEvent.keyboard('{Enter}');
+    await userEvent.keyboard('{Enter}');
     expect(onRequestSubmit).not.toHaveBeenCalled();
   });
 
-  it('should close by default on secondary button click', () => {
+  it('should close by default on secondary button click', async () => {
     const onRequestClose = jest.fn();
     render(
       <Modal
@@ -538,11 +536,11 @@ describe('events', () => {
     );
 
     const secondaryBtn = screen.getByText('Secondary button');
-    userEvent.click(secondaryBtn);
+    await userEvent.click(secondaryBtn);
     expect(onRequestClose).toHaveBeenCalled();
   });
 
-  it('should handle custom secondary button events', () => {
+  it('should handle custom secondary button events', async () => {
     const onSecondarySubmit = jest.fn();
     render(
       <Modal
@@ -564,7 +562,7 @@ describe('events', () => {
     );
 
     const secondaryBtn = screen.getByText('Secondary button');
-    userEvent.click(secondaryBtn);
+    await userEvent.click(secondaryBtn);
     expect(onSecondarySubmit).toHaveBeenCalled();
   });
 });

@@ -254,6 +254,7 @@
 
   // readonly
   .#{$prefix}--select--readonly .#{$prefix}--select-input {
+    border-bottom-color: $border-subtle;
     background-color: transparent;
     cursor: default;
   }

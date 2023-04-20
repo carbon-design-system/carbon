@@ -39,10 +39,10 @@ describe('Button', () => {
 
   it('should use the disabled prop to set disabled on the <button>', () => {
     const { rerender } = render(<Button>test</Button>);
-    expect(screen.getByRole('button')).not.toHaveAttribute('disabled');
+    expect(screen.getByRole('button')).toBeEnabled();
 
     rerender(<Button disabled>test</Button>);
-    expect(screen.getByRole('button')).toHaveAttribute('disabled');
+    expect(screen.getByRole('button')).toBeDisabled();
   });
 
   it('should render with a default button type of button', () => {

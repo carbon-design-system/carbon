@@ -10,6 +10,10 @@ import React from 'react';
 import classNames from 'classnames';
 import { Text } from '../Text';
 import { usePrefix } from '../../internal/usePrefix';
+import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
+
+const getInstanceId = setupGetInstanceId();
 
 type ExcludedAttributes = 'id' | 'onChange' | 'onClick' | 'type';
 
@@ -40,6 +44,11 @@ export interface CheckboxProps
   disabled?: boolean;
 
   /**
+   * Provide text for the form group for additional help
+   */
+  helperText?: React.ReactNode;
+
+  /**
    * Specify whether the label should be hidden, or not
    */
   hideLabel?: boolean;
@@ -48,6 +57,26 @@ export interface CheckboxProps
    * Specify whether the Checkbox is in an indeterminate state
    */
   indeterminate?: boolean;
+
+  /**
+   * Specify whether the Checkbox is currently invalid
+   */
+  invalid?: boolean;
+
+  /**
+   * Provide the text that is displayed when the Checkbox is in an invalid state
+   */
+  invalidText: React.ReactNode;
+
+  /**
+   * Specify whether the Checkbox is currently invalid
+   */
+  warn?: boolean;
+
+  /**
+   * Provide the text that is displayed when the Checkbox is in an invalid state
+   */
+  warnText: React.ReactNode;
 
   /**
    * Provide an optional handler that is called when the internal state of
@@ -69,25 +98,48 @@ const Checkbox = React.forwardRef(
   (
     {
       className,
+      helperText,
       id,
       labelText,
       onChange,
       onClick,
       indeterminate,
+      invalid,
+      invalidText,
       hideLabel,
       readOnly,
       title = '',
+      warn,
+      warnText,
       ...other
     }: CheckboxProps,
     ref
   ) => {
     const prefix = usePrefix();
+
+    const showWarning = !readOnly && !invalid && warn;
+    const showHelper = !invalid && !warn;
+
+    const checkboxGroupInstanceId = getInstanceId();
+
+    const helperId = !helperText
+      ? undefined
+      : `checkbox-helper-text-${checkboxGroupInstanceId}`;
+
+    const helper = helperText ? (
+      <div id={helperId} className={`${prefix}--form__helper-text`}>
+        {helperText}
+      </div>
+    ) : null;
+
     const wrapperClasses = classNames(
       `${prefix}--form-item`,
       `${prefix}--checkbox-wrapper`,
       className,
       {
         [`${prefix}--checkbox-wrapper--readonly`]: readOnly,
+        [`${prefix}--checkbox-wrapper--invalid`]: !readOnly && invalid,
+        [`${prefix}--checkbox-wrapper--warning`]: showWarning,
       }
     );
     const innerLabelClasses = classNames(`${prefix}--checkbox-label-text`, {
@@ -99,6 +151,7 @@ const Checkbox = React.forwardRef(
         <input
           {...other}
           type="checkbox"
+          data-invalid={invalid ? true : undefined}
           onChange={(evt) => {
             if (!readOnly && onChange) {
               onChange(evt, { checked: evt.target.checked, id });
@@ -136,6 +189,23 @@ const Checkbox = React.forwardRef(
           title={title}>
           <Text className={innerLabelClasses}>{labelText}</Text>
         </label>
+        <div className={`${prefix}--checkbox__validation-msg`}>
+          {!readOnly && invalid && (
+            <>
+              <WarningFilled className={`${prefix}--checkbox__invalid-icon`} />
+              <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+            </>
+          )}
+          {showWarning && (
+            <>
+              <WarningAltFilled
+                className={`${prefix}--checkbox__invalid-icon ${prefix}--checkbox__invalid-icon--warning`}
+              />
+              <div className={`${prefix}--form-requirement`}>{warnText}</div>
+            </>
+          )}
+        </div>
+        {showHelper && helper}
       </div>
     );
   }
@@ -163,6 +233,11 @@ Checkbox.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * Provide text for the form group for additional help
+   */
+  helperText: PropTypes.node,
+
+  /**
    * Specify whether the label should be hidden, or not
    */
   hideLabel: PropTypes.bool,
@@ -176,6 +251,16 @@ Checkbox.propTypes = {
    * Specify whether the Checkbox is in an indeterminate state
    */
   indeterminate: PropTypes.bool,
+
+  /**
+   * Specify whether the Checkbox is currently invalid
+   */
+  invalid: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the Checkbox is in an invalid state
+   */
+  invalidText: PropTypes.node,
 
   /**
    * Provide a label to provide a description of the Checkbox input that you are
@@ -199,6 +284,16 @@ Checkbox.propTypes = {
    * Specify a title for the <label> node for the Checkbox
    */
   title: PropTypes.string,
+
+  /**
+   * Specify whether the Checkbox is currently in warning state
+   */
+  warn: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the Checkbox is in warning state
+   */
+  warnText: PropTypes.node,
 };
 
 Checkbox.defaultProps = {

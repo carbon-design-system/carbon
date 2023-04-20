@@ -213,6 +213,7 @@
 
   // readonly
   .#{$prefix}--date-picker__input[readonly] {
+    border-bottom-color: $border-subtle;
     background: transparent;
     cursor: text;
   }

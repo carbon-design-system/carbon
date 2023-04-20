@@ -6,8 +6,10 @@
  */
 
 import React from 'react';
+
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
+
 import { default as TextArea, TextAreaSkeleton } from './';
-import { Layer } from '../Layer';
 
 export default {
   title: 'Components/TextArea',
@@ -33,34 +35,18 @@ export const Default = () => (
   />
 );
 
-export const WithLayer = () => {
-  return (
-    <>
+export const _WithLayer = () => (
+  <WithLayer>
+    {(layer) => (
       <TextArea
-        labelText="First layer"
+        labelText="Text Area label"
         helperText="Optional helper text"
         rows={4}
-        id="text-area-1"
+        id={`text-area-${layer}`}
       />
-      <Layer>
-        <TextArea
-          labelText="Second layer"
-          helperText="Optional helper text"
-          rows={4}
-          id="text-area-1"
-        />
-        <Layer>
-          <TextArea
-            labelText="Third layer"
-            helperText="Optional helper text"
-            rows={4}
-            id="text-area-1"
-          />
-        </Layer>
-      </Layer>
-    </>
-  );
-};
+    )}
+  </WithLayer>
+);
 
 export const Skeleton = () => <TextAreaSkeleton />;
 

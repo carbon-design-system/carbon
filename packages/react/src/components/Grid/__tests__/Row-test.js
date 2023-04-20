@@ -5,13 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, cleanup } from '@carbon/test-utils/react';
+import { render } from '@testing-library/react';
 import React from 'react';
 import { Row } from '../';
 
 describe('Row', () => {
-  afterEach(cleanup);
-
   it('should support a custom element as the root node', () => {
     const { container } = render(<Row as="section" />);
     expect(container.firstChild.tagName).toBe('SECTION');
@@ -19,12 +17,12 @@ describe('Row', () => {
 
   it('should include a custom className', () => {
     const { container } = render(<Row className="test" />);
-    expect(container.firstChild.classList.contains('test')).toBe(true);
+    expect(container.firstChild).toHaveClass('test');
   });
 
   it('should pass un-used props to the top-level node that is rendered', () => {
     const { container } = render(<Row id="test" />);
-    expect(container.firstChild.getAttribute('id')).toBe('test');
+    expect(container.firstChild).toHaveAttribute('id', 'test');
   });
 
   it('should render `children` that are given', () => {

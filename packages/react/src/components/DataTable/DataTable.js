@@ -16,6 +16,26 @@ import { composeEventHandlers } from '../../tools/events';
 import { defaultFilterRows } from './tools/filter';
 import { defaultSortRow } from './tools/sorting';
 import setupGetInstanceId from './tools/instanceId';
+import Table from './Table';
+import TableActionList from './TableActionList';
+import TableBatchAction from './TableBatchAction';
+import TableBatchActions from './TableBatchActions';
+import TableBody from './TableBody';
+import TableCell from './TableCell';
+import TableContainer from './TableContainer';
+import TableExpandHeader from './TableExpandHeader';
+import TableExpandRow from './TableExpandRow';
+import TableExpandedRow from './TableExpandedRow';
+import TableHead from './TableHead';
+import TableHeader from './TableHeader';
+import TableRow from './TableRow';
+import TableSelectAll from './TableSelectAll';
+import TableSelectRow from './TableSelectRow';
+import TableToolbar from './TableToolbar';
+import TableToolbarAction from './TableToolbarAction';
+import TableToolbarContent from './TableToolbarContent';
+import TableToolbarSearch from './TableToolbarSearch';
+import TableToolbarMenu from './TableToolbarMenu';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -53,7 +73,7 @@ const translateWithId = (id) => defaultTranslations[id];
  * and updating the state of the single entity will cascade updates to the
  * consumer.
  */
-export default class DataTable extends React.Component {
+class DataTable extends React.Component {
   static propTypes = {
     /**
      * Optional hook to manually control filtering of the rows from the
@@ -691,3 +711,26 @@ export default class DataTable extends React.Component {
     return null;
   }
 }
+
+DataTable.Table = Table;
+DataTable.TableActionList = TableActionList;
+DataTable.TableBatchAction = TableBatchAction;
+DataTable.TableBatchActions = TableBatchActions;
+DataTable.TableBody = TableBody;
+DataTable.TableCell = TableCell;
+DataTable.TableContainer = TableContainer;
+DataTable.TableExpandHeader = TableExpandHeader;
+DataTable.TableExpandRow = TableExpandRow;
+DataTable.TableExpandedRow = TableExpandedRow;
+DataTable.TableHead = TableHead;
+DataTable.TableHeader = TableHeader;
+DataTable.TableRow = TableRow;
+DataTable.TableSelectAll = TableSelectAll;
+DataTable.TableSelectRow = TableSelectRow;
+DataTable.TableToolbar = TableToolbar;
+DataTable.TableToolbarAction = TableToolbarAction;
+DataTable.TableToolbarContent = TableToolbarContent;
+DataTable.TableToolbarSearch = TableToolbarSearch;
+DataTable.TableToolbarMenu = TableToolbarMenu;
+
+export default DataTable;

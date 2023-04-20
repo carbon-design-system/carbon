@@ -14,6 +14,7 @@ export { Breadcrumb, BreadcrumbItem } from './components/Breadcrumb';
 export Button from './components/Button';
 export ButtonSet from './components/ButtonSet';
 export Checkbox from './components/Checkbox';
+export CheckboxGroup from './components/CheckboxGroup';
 export { ClassPrefix } from './components/ClassPrefix';
 export CodeSnippet from './components/CodeSnippet';
 export ComboBox from './components/ComboBox';
@@ -109,7 +110,7 @@ export SecondaryButton from './components/SecondaryButton';
 export Select from './components/Select';
 export SelectItem from './components/SelectItem';
 export SelectItemGroup from './components/SelectItemGroup';
-export Switch from './components/Switch';
+export { Switch, IconSwitch } from './components/Switch';
 export Slider from './components/Slider';
 export {
   StructuredListWrapper,

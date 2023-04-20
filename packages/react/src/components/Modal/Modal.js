@@ -18,6 +18,7 @@ import wrapFocus, {
 } from '../../internal/wrapFocus';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
+import { keys, match } from '../../internal/keyboard';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -73,11 +74,11 @@ const Modal = React.forwardRef(function Modal(
 
   function handleKeyDown(evt) {
     if (open) {
-      if (evt.which === 27) {
+      if (match(evt, keys.Escape)) {
         onRequestClose(evt);
       }
       if (
-        evt.which === 13 &&
+        match(evt, keys.Enter) &&
         shouldSubmitOnEnter &&
         !isCloseButton(evt.target)
       ) {
@@ -141,23 +142,6 @@ const Modal = React.forwardRef(function Modal(
       Array.isArray(secondaryButtons) && secondaryButtons.length === 2,
   });
 
-  const modalButton = (
-    <button
-      className={modalCloseButtonClass}
-      type="button"
-      onClick={onRequestClose}
-      title={ariaLabel}
-      aria-label={closeButtonLabel ? closeButtonLabel : 'close'}
-      ref={button}>
-      <Close
-        size={20}
-        aria-hidden="true"
-        tabIndex="-1"
-        className={`${modalCloseButtonClass}__icon`}
-      />
-    </button>
-  );
-
   const ariaLabel =
     modalLabel || ariaLabelProp || modalAriaLabel || modalHeading;
   const getAriaLabelledBy = modalLabel ? modalLabelId : modalHeadingId;
@@ -217,6 +201,23 @@ const Modal = React.forwardRef(function Modal(
       focusButton(innerModal.current);
     }
   }, [open, selectorPrimaryFocus, danger, prefix]);
+
+  const modalButton = (
+    <button
+      className={modalCloseButtonClass}
+      type="button"
+      onClick={onRequestClose}
+      title={ariaLabel}
+      aria-label={closeButtonLabel ? closeButtonLabel : 'close'}
+      ref={button}>
+      <Close
+        size={20}
+        aria-hidden="true"
+        tabIndex="-1"
+        className={`${modalCloseButtonClass}__icon`}
+      />
+    </button>
+  );
 
   const modalBody = (
     <div

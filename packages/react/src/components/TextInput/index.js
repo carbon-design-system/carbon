@@ -10,9 +10,6 @@ import ControlledPasswordInput from './ControlledPasswordInput';
 import PasswordInput from './PasswordInput';
 import TextInput from './TextInput';
 
-TextInput.ControlledPasswordInput = ControlledPasswordInput;
-TextInput.PasswordInput = PasswordInput;
-
 if (__DEV__) {
   deprecateFieldOnObject(
     TextInput,

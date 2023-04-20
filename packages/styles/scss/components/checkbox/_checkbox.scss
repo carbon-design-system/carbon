@@ -15,6 +15,10 @@
 @use '../../utilities/visually-hidden' as *;
 
 @mixin checkbox {
+  .#{$prefix}--checkbox-group {
+    @include reset;
+  }
+
   // Spacing between checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
     position: relative;
@@ -181,23 +185,124 @@
   }
 
   //----------------------------------------------
+  // Invalid + warn
+  // ---------------------------------------------
+  .#{$prefix}--checkbox-group[data-invalid] .cds--checkbox-label::before,
+  .#{$prefix}--checkbox-wrapper--invalid .cds--checkbox-label::before,
+  .#{$prefix}--checkbox-wrapper--invalid
+    .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label::before {
+    border: 1px solid $support-error;
+  }
+
+  // checkbox group overrides for individual validation checkbox
+  .#{$prefix}--checkbox-group
+    .#{$prefix}--checkbox-wrapper--invalid
+    > .#{$prefix}--checkbox__validation-msg,
+  .#{$prefix}--checkbox-group
+    .#{$prefix}--checkbox-wrapper--warning
+    > .#{$prefix}--checkbox__validation-msg,
+  .#{$prefix}--checkbox-group
+    .#{$prefix}--checkbox-wrapper
+    > .#{$prefix}--form__helper-text {
+    display: none;
+  }
+
+  .#{$prefix}--checkbox-group:not(.#{$prefix}--checkbox-group[data-invalid])
+    .#{$prefix}--checkbox-wrapper--invalid
+    .cds--checkbox-label::before,
+  .#{$prefix}--checkbox-group:not(.#{$prefix}--checkbox-group[data-invalid])
+    .#{$prefix}--checkbox-wrapper--invalid
+    .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label::before {
+    border: 1px solid $icon-primary;
+  }
+
+  .#{$prefix}--checkbox-group__validation-msg,
+  .#{$prefix}--checkbox__validation-msg {
+    display: none;
+    align-items: flex-end;
+    margin-top: $spacing-02;
+  }
+
+  .#{$prefix}--checkbox__invalid-icon {
+    margin: 0 rem(1px) 0 rem(3px);
+    fill: $support-error;
+  }
+
+  .#{$prefix}--checkbox__invalid-icon--warning {
+    fill: $support-warning;
+  }
+
+  .#{$prefix}--checkbox__invalid-icon--warning path:first-of-type {
+    fill: #000000;
+  }
+
+  .#{$prefix}--checkbox-group--invalid
+    .#{$prefix}--checkbox-group__validation-msg,
+  .#{$prefix}--checkbox-group--warning
+    .#{$prefix}--checkbox-group__validation-msg,
+  .#{$prefix}--checkbox-wrapper--invalid
+    > .#{$prefix}--checkbox__validation-msg,
+  .#{$prefix}--checkbox-wrapper--warning
+    > .#{$prefix}--checkbox__validation-msg {
+    display: flex;
+  }
+
+  .#{$prefix}--checkbox-group--invalid
+    .#{$prefix}--checkbox-group__validation-msg
+    .#{$prefix}--form-requirement,
+  .#{$prefix}--checkbox-group--warning
+    .#{$prefix}--checkbox-group__validation-msg
+    .#{$prefix}--form-requirement,
+  .#{$prefix}--checkbox-wrapper--invalid
+    .#{$prefix}--checkbox__validation-msg
+    .#{$prefix}--form-requirement,
+  .#{$prefix}--checkbox-wrapper--warning
+    .#{$prefix}--checkbox__validation-msg
+    .#{$prefix}--form-requirement {
+    display: block;
+    overflow: visible;
+    max-height: 100%;
+    margin-top: 0;
+    margin-left: $spacing-03;
+  }
+
+  .#{$prefix}--checkbox-group--invalid
+    .#{$prefix}--checkbox-group__validation-msg
+    .#{$prefix}--form-requirement,
+  .#{$prefix}--checkbox-wrapper--invalid
+    .#{$prefix}--checkbox__validation-msg
+    .#{$prefix}--form-requirement {
+    color: $text-error;
+  }
+
+  //----------------------------------------------
   // Read-only
   // ---------------------------------------------
+  .#{$prefix}--checkbox-group--readonly .#{$prefix}--checkbox-label,
   .#{$prefix}--checkbox-wrapper--readonly .#{$prefix}--checkbox-label {
     cursor: default;
   }
 
+  .#{$prefix}--checkbox-group--readonly .#{$prefix}--checkbox-label-text,
   .#{$prefix}--checkbox-wrapper--readonly .#{$prefix}--checkbox-label-text {
     cursor: text;
     user-select: text;
   }
 
+  .#{$prefix}--checkbox-group--readonly
+    .#{$prefix}--checkbox
+    + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-wrapper--readonly
     .#{$prefix}--checkbox
     + .#{$prefix}--checkbox-label::before {
     border-color: $icon-disabled;
   }
 
+  .#{$prefix}--checkbox-group--readonly
+    .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-wrapper--readonly
     .#{$prefix}--checkbox:checked
     + .#{$prefix}--checkbox-label::before {
@@ -205,6 +310,9 @@
     background: transparent;
   }
 
+  .#{$prefix}--checkbox-group--readonly
+    .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label::after,
   .#{$prefix}--checkbox-wrapper--readonly
     .#{$prefix}--checkbox:checked
     + .#{$prefix}--checkbox-label::after {

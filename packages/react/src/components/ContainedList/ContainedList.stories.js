@@ -17,8 +17,8 @@ import {
   Wheat,
 } from '@carbon/icons-react';
 
-import { Layer } from '../Layer';
-import { VStack } from '../Stack';
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
+
 import Button from '../Button';
 import ExpandableSearch from '../ExpandableSearch';
 import OverflowMenu from '../OverflowMenu';
@@ -195,27 +195,13 @@ export const WithIcons = () => (
   </ContainedList>
 );
 
-export const WithLayer = () => (
-  <VStack gap={5}>
+export const _WithLayer = () => (
+  <WithLayer>
     <ContainedList label="List title" kind="on-page">
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
     </ContainedList>
-    <Layer>
-      <VStack gap={5}>
-        <ContainedList label="List title" kind="on-page">
-          <ContainedListItem>List item</ContainedListItem>
-          <ContainedListItem>List item</ContainedListItem>
-        </ContainedList>
-        <Layer>
-          <ContainedList label="List title" kind="on-page">
-            <ContainedListItem>List item</ContainedListItem>
-            <ContainedListItem>List item</ContainedListItem>
-          </ContainedList>
-        </Layer>
-      </VStack>
-    </Layer>
-  </VStack>
+  </WithLayer>
 );
 
 export const UsageExamples = () => {

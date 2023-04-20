@@ -19,12 +19,12 @@ describe('Column', () => {
 
   it('should include a custom className', () => {
     const { container } = render(<Column className="test" />);
-    expect(container.firstChild.classList.contains('test')).toBe(true);
+    expect(container.firstChild).toHaveClass('test');
   });
 
   it('should pass un-used props to the top-level node that is rendered', () => {
     const { container } = render(<Column id="test" />);
-    expect(container.firstChild.getAttribute('id')).toBe('test');
+    expect(container.firstChild).toHaveAttribute('id', 'test');
   });
 
   it('should render `children` that are given', () => {
@@ -39,9 +39,7 @@ describe('Column', () => {
 
   it('should default to rendering a column that auto-spans', () => {
     const { container } = render(<Column />);
-    expect(container.firstChild.classList.contains(`${prefix}--col`)).toBe(
-      true
-    );
+    expect(container.firstChild).toHaveClass(`${prefix}--col`);
   });
 
   it('should set the column span per breakpoint with a number', () => {

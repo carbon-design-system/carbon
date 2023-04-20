@@ -57,7 +57,10 @@ export const Skeleton = () => {
 
 export const Playground = (args) => {
   return (
-    <RadioButtonGroup legendText="Radio Button group" {...args}>
+    <RadioButtonGroup
+      legendText="Radio Button group"
+      name="radio-button-group"
+      {...args}>
       <RadioButton
         labelText="Radio button label"
         value="radio-1"
