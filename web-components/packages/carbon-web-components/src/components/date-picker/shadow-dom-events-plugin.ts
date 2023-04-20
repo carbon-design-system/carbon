@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,7 +21,7 @@ export interface ExtendedFlatpickrInstanceShadowDOMEventsPlugin
   /**
    * The handle for `keydown` event handler in calendar dropdown.
    */
-  _hBXCEDatePickerShadowDOMEventsPluginKeydown?: Handle | null;
+  _hCDSCEDatePickerShadowDOMEventsPluginKeydown?: Handle | null;
 }
 
 /**
@@ -152,9 +152,9 @@ export default (): Plugin =>
      * Releases event listeners used in this Flatpickr plugin.
      */
     const release = () => {
-      if (fp._hBXCEDatePickerShadowDOMEventsPluginKeydown) {
-        fp._hBXCEDatePickerShadowDOMEventsPluginKeydown =
-          fp._hBXCEDatePickerShadowDOMEventsPluginKeydown.release();
+      if (fp._hCDSCEDatePickerShadowDOMEventsPluginKeydown) {
+        fp._hCDSCEDatePickerShadowDOMEventsPluginKeydown =
+          fp._hCDSCEDatePickerShadowDOMEventsPluginKeydown.release();
       }
     };
 
@@ -163,7 +163,7 @@ export default (): Plugin =>
      */
     const init = () => {
       release();
-      fp._hBXCEDatePickerShadowDOMEventsPluginKeydown = on(
+      fp._hCDSCEDatePickerShadowDOMEventsPluginKeydown = on(
         fp.calendarContainer,
         'keydown',
         handleKeydown

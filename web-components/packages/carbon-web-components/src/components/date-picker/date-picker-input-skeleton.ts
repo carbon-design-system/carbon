@@ -17,7 +17,7 @@ import styles from './date-picker.scss';
  * Skeleton version of the input box for date picker.
  */
 @customElement(`${prefix}-date-picker-input-skeleton`)
-class BXDatePickerInputSkeleton extends LitElement {
+class CDSDatePickerInputSkeleton extends LitElement {
   /**
    * Date picker input kind. Corresponds to the attribute with the same name.
    */
@@ -34,4 +34,4 @@ class BXDatePickerInputSkeleton extends LitElement {
   static styles = styles;
 }
 
-export default BXDatePickerInputSkeleton;
+export default CDSDatePickerInputSkeleton;

@@ -12,127 +12,43 @@ import pick from 'lodash-es/pick';
 import flatpickr from 'flatpickr';
 import EventManager from '../utils/event-manager';
 
-import BXDatePicker from '../../src/components/date-picker/date-picker';
-import BXDatePickerInput from '../../src/components/date-picker/date-picker-input';
+import CDSDatePicker from '../../src/components/date-picker/date-picker';
+import CDSDatePickerInput from '../../src/components/date-picker/date-picker-input';
 import {
-  Default,
+  Playground,
   singleWithCalendar,
   rangeWithCalendar,
 } from '../../src/components/date-picker/date-picker-story';
 
 const defaultTemplate = (props?) => {
   const {
-    colorScheme,
     disabled,
-    hideLabel,
     invalid,
-    labelText,
     name,
     value,
     placeholder,
     size,
-    sizeHorizontal,
-    validityMessage,
+    short,
+    invalidText,
   } = props ?? {};
-  return Default({
+  return Playground({
     'cds-date-picker': { disabled, name, value },
     'cds-date-picker-input': {
-      colorScheme,
-      hideLabel,
       invalid,
-      labelText,
       placeholder,
       size,
-      sizeHorizontal,
-      validityMessage,
+      short,
+      invalidText,
     },
   });
 };
 
-const singleWithCalendarTemplate = (props?) => {
-  const {
-    colorScheme,
-    dateFormat,
-    disabled,
-    enabledRange,
-    hideLabel,
-    invalid,
-    labelText,
-    name,
-    open,
-    placeholder,
-    size,
-    validityMessage,
-    value,
-    onChanged,
-    onFlatpickrError,
-    onInput,
-  } = props ?? {};
-  return singleWithCalendar({
-    'cds-date-picker': {
-      dateFormat,
-      disabled,
-      enabledRange,
-      name,
-      open,
-      value,
-      onChanged,
-      onFlatpickrError,
-    },
-    'cds-date-picker-input': {
-      colorScheme,
-      hideLabel,
-      invalid,
-      labelText,
-      placeholder,
-      size,
-      validityMessage,
-      onInput,
-    },
-  });
+const singleWithCalendarTemplate = () => {
+  return singleWithCalendar();
 };
 
-const rangeWithCalendarTemplate = (props?) => {
-  const {
-    colorScheme,
-    dateFormat,
-    disabled,
-    enabledRange,
-    hideLabel,
-    invalid,
-    labelText,
-    name,
-    open,
-    placeholder,
-    size,
-    validityMessage,
-    value,
-    onChanged,
-    onFlatpickrError,
-    onInput,
-  } = props ?? {};
-  return rangeWithCalendar({
-    'cds-date-picker': {
-      dateFormat,
-      disabled,
-      enabledRange,
-      name,
-      open,
-      value,
-      onChanged,
-      onFlatpickrError,
-    },
-    'cds-date-picker-input': {
-      colorScheme,
-      hideLabel,
-      invalid,
-      labelText,
-      placeholder,
-      size,
-      validityMessage,
-      onInput,
-    },
-  });
+const rangeWithCalendarTemplate = () => {
+  return rangeWithCalendar();
 };
 
 /**
@@ -152,7 +68,7 @@ describe('cds-date-picker', function () {
   const events = new EventManager();
 
   describe('Simple mode', function () {
-    let datePicker: BXDatePicker | null;
+    let datePicker: CDSDatePicker | null;
 
     beforeEach(async function () {
       render(defaultTemplate(), document.body);
@@ -167,8 +83,8 @@ describe('cds-date-picker', function () {
   });
 
   describe('Single mode', function () {
-    let datePicker: BXDatePicker | null;
-    let datePickerInput: BXDatePickerInput | null;
+    let datePicker: CDSDatePicker | null;
+    let datePickerInput: CDSDatePickerInput | null;
 
     beforeEach(async function () {
       render(singleWithCalendarTemplate(), document.body);
@@ -224,9 +140,9 @@ describe('cds-date-picker', function () {
   });
 
   describe('Range mode', function () {
-    let datePicker: BXDatePicker | null;
-    let datePickerInputStart: BXDatePickerInput | null;
-    let datePickerInputEnd: BXDatePickerInput | null;
+    let datePicker: CDSDatePicker | null;
+    let datePickerInputStart: CDSDatePickerInput | null;
+    let datePickerInputEnd: CDSDatePickerInput | null;
 
     beforeEach(async function () {
       render(rangeWithCalendarTemplate(), document.body);
@@ -318,57 +234,50 @@ describe('cds-date-picker', function () {
     });
 
     it('should support checking if required value exists', async function () {
-      const input = elem as BXDatePickerInput;
+      const input = elem as CDSDatePickerInput;
       input.required = true;
       const spyInvalid = jasmine.createSpy('invalid');
       events.on(input, 'invalid', spyInvalid);
-      expect(input.checkValidity()).toBe(false);
+      expect(input.invalid).toBe(false);
       expect(spyInvalid).toHaveBeenCalled();
       expect(input.invalid).toBe(true);
-      expect(input.validityMessage).toBe('Please fill out this field.');
+      expect(input.invalidText).toBe('Please fill out this field.');
       input.value = 'value-foo';
-      expect(input.checkValidity()).toBe(true);
+      expect(input.invalid).toBe(true);
       expect(input.invalid).toBe(false);
-      expect(input.validityMessage).toBe('');
+      expect(input.invalidText).toBe('');
     });
 
     it('should support canceling required check', async function () {
-      const input = elem as BXDatePickerInput;
+      const input = elem as CDSDatePickerInput;
       input.required = true;
       events.on(input, 'invalid', (event) => {
         event.preventDefault();
       });
-      expect(input.checkValidity()).toBe(false);
       expect(input.invalid).toBe(false);
-      expect(input.validityMessage).toBe('');
+      expect(input.invalid).toBe(false);
+      expect(input.invalidText).toBe('');
     });
 
     it('should treat empty custom validity message as not invalid', async function () {
-      const input = elem as BXDatePickerInput;
-      input.setCustomValidity('');
+      const input = elem as CDSDatePickerInput;
+      input.invalidText = '';
       expect(input.invalid).toBe(false);
-      expect(input.validityMessage).toBe('');
+      expect(input.invalidText).toBe('');
     });
 
     it('should treat non-empty custom validity message as invalid', async function () {
-      const input = elem as BXDatePickerInput;
-      input.setCustomValidity('validity-message-foo');
+      const input = elem as CDSDatePickerInput;
+      input.invalidText = 'validity-message-foo';
       expect(input.invalid).toBe(true);
-      expect(input.validityMessage).toBe('validity-message-foo');
+      expect(input.invalidText).toBe('validity-message-foo');
     });
   });
 
   describe('Event-based form participation', function () {
     it('Should respond to `formdata` event', async function () {
       render(
-        html`
-          <form>
-            ${singleWithCalendarTemplate({
-              name: 'name-foo',
-              value: '2000-01-01',
-            })}
-          </form>
-        `,
+        html` <form>${singleWithCalendarTemplate()}</form> `,
         document.body
       );
       await Promise.resolve();
@@ -386,15 +295,7 @@ describe('cds-date-picker', function () {
 
     it('Should not respond to `formdata` event if disabled', async function () {
       render(
-        html`
-          <form>
-            ${singleWithCalendarTemplate({
-              disabled: true,
-              name: 'name-foo',
-              value: '2000-01-01',
-            })}
-          </form>
-        `,
+        html` <form>${singleWithCalendarTemplate()}</form> `,
         document.body
       );
       await Promise.resolve();
@@ -412,14 +313,7 @@ describe('cds-date-picker', function () {
 
     it('Should respond to `formdata` event in range mode', async function () {
       render(
-        html`
-          <form>
-            ${rangeWithCalendarTemplate({
-              name: 'name-foo',
-              value: '2000-01-01/2000-01-31',
-            })}
-          </form>
-        `,
+        html` <form>${rangeWithCalendarTemplate()}</form> `,
         document.body
       );
       await Promise.resolve();

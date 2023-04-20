@@ -21,7 +21,7 @@ import FormMixin from '../../globals/mixins/form';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import { getISODateString, parseISODateString } from './iso-date';
-import BXDatePickerInput from './date-picker-input';
+import CDSDatePickerInput from './date-picker-input';
 import appendToPlugin from './append-to-plugin';
 import cssClassPlugin from './css-class-plugin';
 import fixEventsPlugin from './fix-events-plugin';
@@ -53,6 +53,16 @@ enum DATE_PICKER_MODE {
   RANGE = 'range',
 }
 
+// Weekdays shorthand for english locale
+flatpickr!.l10ns!.en!.weekdays.shorthand.forEach((_day, index) => {
+  const currentDay = flatpickr!.l10ns!.en!.weekdays.shorthand;
+  if (currentDay[index] === 'Thu' || currentDay[index] === 'Th') {
+    currentDay[index] = 'Th';
+  } else {
+    currentDay[index] = currentDay[index].charAt(0);
+  }
+});
+
 /**
  * Date picker.
  *
@@ -60,11 +70,11 @@ enum DATE_PICKER_MODE {
  * @fires cds-date-picker-changed - The custom event fired on this element when Flatpickr updates its value.
  */
 @customElement(`${prefix}-date-picker`)
-class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
+class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   /**
    * The slotted `<cds-date-input kind="from">`.
    */
-  private _dateInteractNode: BXDatePickerInput | null = null;
+  private _dateInteractNode: CDSDatePickerInput | null = null;
 
   /**
    * The element to put calendar dropdown in.
@@ -82,7 +92,7 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
    */
   private get _mode() {
     const { selectorInputFrom, selectorInputTo } = this
-      .constructor as typeof BXDatePicker;
+      .constructor as typeof CDSDatePicker;
     if (this.querySelector(selectorInputTo)) {
       return DATE_PICKER_MODE.RANGE;
     }
@@ -116,7 +126,7 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
       _selectorFlatpickrDay: selectorFlatpickrDay,
       _classFlatpickrCurrentMonth: classFlatpickrCurrentMonth,
       _classFlatpickrToday: classFlatpickrToday,
-    } = this.constructor as typeof BXDatePicker;
+    } = this.constructor as typeof CDSDatePicker;
     const {
       _floatingMenuContainerNode: floatingMenuContainerNode,
       _mode: mode,
@@ -141,12 +151,12 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
         classFlatpickrToday,
       }),
       fixEventsPlugin({
-        inputFrom: inputFrom as BXDatePickerInput,
-        inputTo: inputTo as BXDatePickerInput,
+        inputFrom: inputFrom as CDSDatePickerInput,
+        inputTo: inputTo as CDSDatePickerInput,
       }),
       focusPlugin({
-        inputFrom: inputFrom as BXDatePickerInput,
-        inputTo: inputTo as BXDatePickerInput,
+        inputFrom: inputFrom as CDSDatePickerInput,
+        inputTo: inputTo as CDSDatePickerInput,
       }),
       iconPlugin(),
       monthSelectPlugin({
@@ -175,7 +185,7 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
    */
   private get _datePickerOptions(): FlatpickrOptions {
     const {
-      locale = (this.constructor as typeof BXDatePicker).defaultLocale,
+      locale = (this.constructor as typeof CDSDatePicker).defaultLocale,
       enabledRange,
       _dateInteractNode: dateInteractNode,
       _datePickerPlugins: plugins,
@@ -188,10 +198,11 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
       ? []
       : enabledRange.split('/');
     return {
-      allowInput: true,
+      allowInput: this.allowInput,
+      closeOnSelect: this.closeOnSelect,
       dateFormat:
         this.dateFormat ??
-        (this.constructor as typeof BXDatePicker).defaultDateFormat,
+        (this.constructor as typeof CDSDatePicker).defaultDateFormat,
       disableMobile: true,
       errorHandler: handleFlatpickrError,
       locale,
@@ -232,11 +243,11 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
         (node) =>
           node.nodeType === Node.ELEMENT_NODE &&
           (node as HTMLElement).matches(
-            (this.constructor as typeof BXDatePicker).selectorInputFrom
+            (this.constructor as typeof CDSDatePicker).selectorInputFrom
           )
       );
     if (oldDateInteractNode !== dateInteractNode) {
-      this._dateInteractNode = dateInteractNode as BXDatePickerInput;
+      this._dateInteractNode = dateInteractNode as CDSDatePickerInput;
       this._instantiateDatePicker();
     }
   }
@@ -247,7 +258,7 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   private _handleFlatpickrError = (error: Error) => {
     this.dispatchEvent(
       new CustomEvent(
-        (this.constructor as typeof BXDatePicker).eventFlatpickrError,
+        (this.constructor as typeof CDSDatePicker).eventFlatpickrError,
         {
           bubbles: true,
           cancelable: false,
@@ -296,6 +307,18 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   calendar: FlatpickrInstance | null = null;
 
   /**
+   * flatpickr prop passthrough. Allows the user to enter a date directly into the input field
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'allow-input' })
+  allowInput = true;
+
+  /**
+   * flatpickr prop passthrough. Controls whether the calendar dropdown closes upon selection.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'close-on-select' })
+  closeOnSelect = true;
+
+  /**
    * The date format to let Flatpickr use.
    */
   @property({ attribute: 'date-format' })
@@ -320,6 +343,18 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   enabledRange!: string;
 
   /**
+   * The minimum date that a user can start picking from.
+   */
+  @property({ attribute: 'min-date' })
+  minDate!: string;
+
+  /**
+   * The maximum date that a user can start picking from.
+   */
+  @property({ attribute: 'max-date' })
+  maxDate!: string;
+
+  /**
    * Name for the input in the `FormData`
    */
   @property()
@@ -330,6 +365,12 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
    */
   @property({ type: Boolean, reflect: true })
   open = false;
+
+  /**
+   * Specify if the component should be read-only
+   */
+  @property({ type: Boolean, reflect: true })
+  readonly = false;
 
   /**
    * The date(s) in ISO8601 format (date portion only), for range mode, '/' is used for separate start/end dates.
@@ -356,49 +397,56 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   }
 
   updated(changedProperties) {
-    const { calendar, disabled, open } = this;
+    const { calendar, disabled, open, readonly } = this;
     const { selectorInputFrom, selectorInputTo } = this
-      .constructor as typeof BXDatePicker;
+      .constructor as typeof CDSDatePicker;
     const inputFrom = this.querySelector(
       selectorInputFrom
-    ) as BXDatePickerInput;
-    const inputTo = this.querySelector(selectorInputTo) as BXDatePickerInput;
+    ) as CDSDatePickerInput;
+    const inputTo = this.querySelector(selectorInputTo) as CDSDatePickerInput;
     if (calendar && changedProperties.has('dateFormat')) {
       const { dateFormat } = this;
       calendar.set({ dateFormat });
     }
-    if (changedProperties.has('enabledRange')) {
-      const { enabledRange } = this;
-      const dates = enabledRange
-        .split('/')
-        .map((item) => (!item ? undefined : parseISODateString(item))); // Allows empty start/end
-      if (dates.some((item) => Boolean(item && isNaN(Number(item))))) {
+    if (changedProperties.has('minDate') || changedProperties.has('maxDate')) {
+      const { minDate, maxDate } = this;
+      if (!parseISODateString(minDate)) {
         // Allows empty start/end
         throw new Error(
-          `Wrong date format found in \`enabledRange\` property: ${enabledRange}`
+          `Wrong date format found in \`minDate\` property: ${minDate}`
         );
       }
-      const [minDate, maxDate] = dates;
+      if (!parseISODateString(maxDate)) {
+        // Allows empty start/end
+        throw new Error(
+          `Wrong date format found in \`maxDate\` property: ${maxDate}`
+        );
+      }
       if (minDate && maxDate && minDate > maxDate) {
         throw new Error(
-          `In \`enabledRange\` property, the end date shouldn't be smaller than the start date. You have: ${enabledRange}`
+          `\`maxDate\` property, shouldn't be smaller than the \`minDate\` property. You have: minDate: ${minDate}, maxDate: ${maxDate}`
         );
       }
       if (calendar) {
         calendar.set({ minDate, maxDate });
       }
     }
+
     if (changedProperties.has('open') && calendar) {
-      if (open) {
+      if (open && !readonly) {
         calendar.open();
       } else {
         calendar.close();
       }
     }
-    if (changedProperties.has('disabled')) {
+    if (
+      changedProperties.has('disabled') ||
+      changedProperties.has('readonly')
+    ) {
       [inputFrom, inputTo].forEach((input) => {
         if (input) {
           input.disabled = disabled;
+          input.readonly = readonly;
         }
       });
     }
@@ -563,7 +611,7 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
    * A selector that will return the `<input>` to enter starting date.
    */
   static get selectorInputFrom() {
-    return `${prefix}-date-picker-input[kind="single"],${prefix}-date-picker-input[kind="from"]`;
+    return `${prefix}-date-picker-input,${prefix}-date-picker-input[kind="from"]`;
   }
 
   /**
@@ -590,4 +638,4 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   static styles = styles;
 }
 
-export default BXDatePicker;
+export default CDSDatePicker;

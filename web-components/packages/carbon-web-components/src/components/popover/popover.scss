@@ -37,7 +37,6 @@ $css--plex: true !default;
 
 :host(#{$prefix}-tooltip-content[open]),
 :host(#{$prefix}-popover-content[open]) {
-  color: purple;
   .#{$prefix}--popover-content {
     display: block;
   }

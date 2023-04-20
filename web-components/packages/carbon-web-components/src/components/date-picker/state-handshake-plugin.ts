@@ -9,13 +9,13 @@
 
 import { Instance as FlatpickrInstance } from 'flatpickr/dist/types/instance';
 import { Plugin } from 'flatpickr/dist/types/options';
-import BXDatePicker from './date-picker';
+import CDSDatePicker from './date-picker';
 
 /**
  * @param config Plugin configuration.
  * @returns A Flatpickr plugin to handshake states with `<cds-date-picker>`.
  */
-export default (datePicker: BXDatePicker): Plugin =>
+export default (datePicker: CDSDatePicker): Plugin =>
   (fp: FlatpickrInstance) => {
     /**
      * Sets open state.
@@ -37,7 +37,7 @@ export default (datePicker: BXDatePicker): Plugin =>
      * @param selectedDates The latest selected dates.
      */
     const handleChange = (selectedDates: Date[]) => {
-      const { eventChange } = datePicker.constructor as typeof BXDatePicker;
+      const { eventChange } = datePicker.constructor as typeof CDSDatePicker;
       datePicker.dispatchEvent(
         new CustomEvent(eventChange, {
           bubbles: true,
