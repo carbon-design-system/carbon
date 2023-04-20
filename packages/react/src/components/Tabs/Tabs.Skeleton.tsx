@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type HTMLAttributes } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -21,7 +21,19 @@ function Tab() {
   );
 }
 
-function TabsSkeleton({ className, contained, ...rest }) {
+export interface TabsSkeletonProps extends HTMLAttributes<HTMLDivElement> {
+  /**
+   * Specify an optional className to add.
+   */
+  className?: string;
+
+  /**
+   * Provide the type of Tab
+   */
+  contained?: boolean;
+}
+
+function TabsSkeleton({ className, contained, ...rest }: TabsSkeletonProps) {
   const prefix = usePrefix();
   const tabClasses = cx(className, `${prefix}--tabs`, `${prefix}--skeleton`, {
     [`${prefix}--tabs--contained`]: contained,
@@ -29,11 +41,11 @@ function TabsSkeleton({ className, contained, ...rest }) {
   return (
     <div className={tabClasses} {...rest}>
       <ul className={`${prefix}--tabs__nav`}>
-        {Tab()}
-        {Tab()}
-        {Tab()}
-        {Tab()}
-        {Tab()}
+        <Tab />
+        <Tab />
+        <Tab />
+        <Tab />
+        <Tab />
       </ul>
     </div>
   );

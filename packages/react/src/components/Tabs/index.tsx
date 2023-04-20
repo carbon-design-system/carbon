@@ -5,9 +5,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Tabs, TabPanel, TabPanels, TabList, IconTab } from './Tabs';
-import { default as TabsSkeleton } from './Tabs.Skeleton';
-
-export { TabsSkeleton, TabPanels, TabPanel, TabList, IconTab, Tabs };
+import { Tabs } from './Tabs';
 
 export default Tabs;
+
+export { default as TabsSkeleton } from './Tabs.Skeleton';
+
+export {
+  TabPanels,
+  type TabPanelsProps,
+  TabPanel,
+  type TabPanelProps,
+  TabList,
+  type TabListProps,
+  IconTab,
+  type IconTabProps,
+  Tabs,
+  type TabsProps,
+} from './Tabs';
