@@ -7,8 +7,7 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-// TODO - remove extra icons
-import { Add, ArrowRight, Search } from '@carbon/icons-react';
+import { Add } from '@carbon/icons-react';
 import { default as Button, ButtonSkeleton } from '../Button';
 import ButtonSet from '../ButtonSet';
 import mdx from './Button.mdx';
@@ -60,53 +59,7 @@ export default {
 };
 
 export const Default = (args) => {
-  // TODO - delete test zone + restore this line
-  // return <Button {...args}>Button</Button>;
-
-  // TEST ZONE
-  return (
-    <>
-      {/* SMALL */}
-      <Button renderIcon={Search} size="sm" {...args}>
-        SMALL with long text that will wrap at
-      </Button>
-      <div style={{ height: '5px' }}></div>
-      <Button renderIcon={Search} size="sm" kind="secondary" {...args}>
-        SMALL with long text that will wrap at some point soon
-      </Button>
-
-      <div>-</div>
-      {/* MEDIUM */}
-      <Button renderIcon={Search} size="md" {...args}>
-        MEDIUM with long text that will wrap
-      </Button>
-      <div style={{ height: '5px' }}></div>
-      <Button renderIcon={Search} size="md" kind="secondary" {...args}>
-        MEDIUM with long text that will wrap at some point soon
-      </Button>
-
-      <div>-</div>
-      {/* LARGE */}
-      <Button renderIcon={Search} size="lg" {...args}>
-        LARGE with long text that will wrap
-      </Button>
-      <div style={{ height: '5px' }}></div>
-      <Button renderIcon={Search} size="lg" kind="secondary" {...args}>
-        LARGE with long text that will wrap at some point soon
-      </Button>
-
-      <div>-</div>
-      {/* XL and 2XL */}
-      <Button renderIcon={ArrowRight} size="xl" kind="tertiary" {...args}>
-        X-LARGE has align-items: baseline, so it wraps nicely
-      </Button>
-      <div style={{ height: '5px' }}></div>
-      <Button renderIcon={ArrowRight} size="2xl" kind="tertiary" {...args}>
-        2X-LARGE has align-items: baseline, so it wraps nicely
-      </Button>
-    </>
-  );
-  // END TEST ZONE
+  return <Button {...args}>Button</Button>;
 };
 
 export const Secondary = (args) => {

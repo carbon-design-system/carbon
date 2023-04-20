@@ -420,21 +420,17 @@
     @include high-contrast-mode('icon-fill');
   }
 
-  // TEST for #9478
-  // align icons manually to account for line wrap (see: #9478)
+  // align icons top (to account for line wrap - see: #9478)
   .#{$prefix}--btn.#{$prefix}--btn--sm .#{$prefix}--btn__icon {
-    top: 7px;
-    background: rgb(32, 182, 174);
+    top: rem(7px);
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--md .#{$prefix}--btn__icon {
-    top: 10px;
-    background: rgb(32, 182, 174);
+    top: rem(10px);
   }
 
   .#{$prefix}--btn .#{$prefix}--btn__icon {
-    top: 14px;
-    background: rgb(32, 182, 174);
+    top: rem(14px);
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--xl .#{$prefix}--btn__icon,
