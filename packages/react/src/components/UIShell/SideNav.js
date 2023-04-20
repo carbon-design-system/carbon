@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
@@ -119,6 +119,12 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     eventHandlers.onMouseLeave = () => handleToggle(false, false);
   }
 
+  useEffect(() => {
+    if (expanded && !isPersistent) {
+      document.getElementById(`${prefix}--side-nav__navigation`).focus();
+    }
+  }, [expanded, isPersistent, prefix]);
+
   return (
     <>
       {isFixedNav ? null : (
@@ -126,6 +132,8 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         <div className={overlayClassName} onClick={onOverlayClick} />
       )}
       <nav
+        id={`${prefix}--side-nav__navigation`}
+        tabIndex="-1"
         ref={ref}
         className={`${prefix}--side-nav__navigation ${className}`}
         {...accessibilityLabel}
