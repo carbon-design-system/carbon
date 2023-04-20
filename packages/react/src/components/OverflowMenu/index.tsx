@@ -12,3 +12,5 @@ const OverflowMenu = createClassWrapper(OverflowMenuComponent);
 
 export default OverflowMenu;
 export { OverflowMenu };
+
+export type { OverflowMenuProps } from './OverflowMenu';

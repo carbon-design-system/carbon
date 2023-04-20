@@ -13,6 +13,13 @@ import { usePrefix } from '../../internal/usePrefix';
 import { warning } from '../../internal/warning';
 import { ForwardRefReturn } from '../../types/common';
 
+export interface FocusHandlerOptions {
+  // The index of the currently focused overflow menu item in the list
+  currentIndex?: number;
+  // Number denoting the direction to move the focus
+  // (1 for forwards, -1 for backwards)
+  direction: -1 | 1;
+}
 export interface OverflowMenuItemProps
   extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -30,10 +37,7 @@ export interface OverflowMenuItemProps
    */
   disabled?: boolean;
 
-  handleOverflowMenuItemFocus?: (options: {
-    currentIndex?: number;
-    direction: number;
-  }) => void;
+  handleOverflowMenuItemFocus?: (options: FocusHandlerOptions) => void;
 
   /**
    * `true` to make this menu item a divider.
