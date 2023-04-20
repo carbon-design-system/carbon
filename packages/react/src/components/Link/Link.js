@@ -20,7 +20,7 @@ const Link = React.forwardRef(function Link(
     visited = false,
     renderIcon: Icon,
     size,
-    external = false,
+    openInNewWindow = false,
     ...rest
   },
   ref
@@ -36,7 +36,7 @@ const Link = React.forwardRef(function Link(
   let rel = null;
   let target = null;
 
-  if (external) {
+  if (openInNewWindow) {
     rel = 'noopener';
     target = '_blank';
   } else {
@@ -89,11 +89,6 @@ Link.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Specify if the link should open in a new tab
-   */
-  external: PropTypes.bool,
-
-  /**
    * Provide the `href` attribute for the `<a>` node
    */
   href: PropTypes.string,
@@ -102,6 +97,11 @@ Link.propTypes = {
    * Specify whether you want the inline version of this control
    */
   inline: PropTypes.bool,
+
+  /**
+   * Specify if the link should open in a new tab
+   */
+  openInNewWindow: PropTypes.bool,
 
   /**
    * Optional prop to render an icon next to the link.
