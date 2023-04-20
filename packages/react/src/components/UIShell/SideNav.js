@@ -10,6 +10,8 @@ import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { CARBON_SIDENAV_ITEMS } from './_utils';
 import { usePrefix } from '../../internal/usePrefix';
+import { keys, match } from '../../internal/keyboard';
+import { useEvent } from '../../internal/useEvent';
 // TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
 
@@ -112,7 +114,18 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         handleToggle(event, false);
       }
     };
+    eventHandlers.onKeyDown = (event) => {
+      if (match(event, keys.Escape)) {
+        handleToggle(event, false);
+      }
+    };
   }
+
+  useEvent(window, 'keydown', (event) => {
+    if (match(event, keys.Tab) && !expanded) {
+      handleToggle(event, true);
+    }
+  });
 
   if (addMouseListeners && isRail) {
     eventHandlers.onMouseEnter = () => handleToggle(true, true);
