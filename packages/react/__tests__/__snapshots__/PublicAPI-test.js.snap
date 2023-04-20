@@ -6942,9 +6942,6 @@ Map {
     "render": [Function],
   },
   "StructuredListBody" => Object {
-    "defaultProps": Object {
-      "onKeyDown": [Function],
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -6961,10 +6958,6 @@ Map {
     },
   },
   "StructuredListCell" => Object {
-    "defaultProps": Object {
-      "head": false,
-      "noWrap": false,
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -6991,9 +6984,6 @@ Map {
     },
   },
   "StructuredListInput" => Object {
-    "defaultProps": Object {
-      "title": "title",
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -7015,10 +7005,6 @@ Map {
     },
   },
   "StructuredListRow" => Object {
-    "defaultProps": Object {
-      "head": false,
-      "onKeyDown": [Function],
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -7049,12 +7035,6 @@ Map {
     },
   },
   "StructuredListWrapper" => Object {
-    "defaultProps": Object {
-      "aria-label": "Structured list section",
-      "isCondensed": false,
-      "isFlush": false,
-      "selection": false,
-    },
     "propTypes": Object {
       "aria-label": Object {
         "type": "string",
