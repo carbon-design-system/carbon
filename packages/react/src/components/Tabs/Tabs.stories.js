@@ -420,8 +420,8 @@ export const Skeleton = () => {
   );
 };
 
-export const Playground = (args) => (
-  <Tabs>
+export const Playground = ({ dismissable, ...args }) => (
+  <Tabs dismissable={dismissable} onTabCloseRequest={() => {}}>
     <TabList aria-label="List of tabs" {...args}>
       <Tab>Tab label 1</Tab>
       <Tab>Tab label 2</Tab>
@@ -443,6 +443,12 @@ Playground.argTypes = {
     options: ['automatic', 'manual'],
   },
   contained: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  dismissable: {
     control: {
       type: 'boolean',
     },
