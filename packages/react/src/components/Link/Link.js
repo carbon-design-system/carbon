@@ -20,6 +20,7 @@ const Link = React.forwardRef(function Link(
     visited = false,
     renderIcon: Icon,
     size,
+    external = false,
     ...rest
   },
   ref
@@ -31,9 +32,20 @@ const Link = React.forwardRef(function Link(
     [`${prefix}--link--visited`]: visited,
     [`${prefix}--link--${size}`]: size,
   });
-  const rel = rest.target === '_blank' ? 'noopener' : null;
+
+  let rel = null;
+  let target = null;
+
+  if (external) {
+    rel = 'noopener';
+    target = '_blank';
+  } else {
+    rel = rest.target === '_blank' && 'noopener';
+  }
+
   const linkProps = {
     className,
+    target,
     rel,
   };
 
@@ -75,6 +87,11 @@ Link.propTypes = {
    * Specify if the control should be disabled, or not
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Specify if the link should open in a new tab
+   */
+  external: PropTypes.bool,
 
   /**
    * Provide the `href` attribute for the `<a>` node
