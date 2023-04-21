@@ -36,7 +36,7 @@ export function useControllableState({
   value,
 }) {
   const [state, internalSetState] = useState(value ?? defaultValue);
-  const controlled = useRef(null);
+  const controlled = useRef<boolean|null>(null);
 
   if (controlled.current === null) {
     controlled.current = value !== undefined;
