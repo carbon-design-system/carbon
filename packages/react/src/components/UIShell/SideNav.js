@@ -136,7 +136,6 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         <div className={overlayClassName} onClick={onOverlayClick} />
       )}
       <nav
-        id={`${prefix}--side-nav__navigation`}
         ref={ref}
         className={`${prefix}--side-nav__navigation ${className}`}
         {...accessibilityLabel}
