@@ -8,6 +8,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Button from '../Button';
+import classNames from 'classnames';
 import { Tooltip } from '../Tooltip';
 import { usePrefix } from '../../internal/usePrefix';
 import cx from 'classnames';
@@ -23,16 +24,19 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
     kind,
     label,
     leaveDelayMs,
+    wrapperClasses,
     size = 'md',
     ...rest
   } = props;
   const prefix = usePrefix();
 
+  const tooltipClasses = classNames(wrapperClasses, `${prefix}--icon-tooltip`);
+
   return (
     <Tooltip
       align={align}
-      className={`${prefix}--icon-tooltip`}
       closeOnActivation={closeOnActivation}
+      className={tooltipClasses}
       defaultOpen={defaultOpen}
       enterDelayMs={enterDelayMs}
       label={label}
@@ -111,6 +115,11 @@ IconButton.propTypes = {
    * Specify the size of the Button. Defaults to `md`.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * Specify an optional className to be added to your Tooltip wrapper
+   */
+  wrapperClasses: PropTypes.string,
 };
 
 export { IconButton };

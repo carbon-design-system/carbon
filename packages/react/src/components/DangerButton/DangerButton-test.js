@@ -62,7 +62,7 @@ describe('DangerButton', () => {
     expect(icon).toBeInTheDocument();
   });
 
-  it('should call onClick when button is clicked', () => {
+  it('should call onClick when button is clicked', async () => {
     const onClick = jest.fn();
 
     render(
@@ -73,7 +73,7 @@ describe('DangerButton', () => {
     );
 
     const button = screen.getByTestId('danger-btn-3');
-    userEvent.click(button);
+    await userEvent.click(button);
     expect(onClick).toHaveBeenCalled();
   });
 });

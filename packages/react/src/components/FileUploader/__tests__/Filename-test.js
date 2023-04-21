@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { getByText } from '@carbon/test-utils/dom';
-import { render, cleanup } from '@carbon/test-utils/react';
+import { getByText, render, cleanup } from '@testing-library/react';
 import React from 'react';
 import { Simulate } from 'react-dom/test-utils';
 import { Filename } from '../';

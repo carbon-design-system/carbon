@@ -28,6 +28,9 @@ const customCellClass = 'structured-list-cell-custom-class';
 const inputNameValue = 'list-radio-input';
 const onKeyDownHandlerFn = jest.fn();
 const onKeyDownBodyHandlerFn = jest.fn();
+const onChangeHandlerFn = jest.fn();
+
+const user = userEvent.setup();
 
 const renderComponent = ({ ...rest } = {}) => {
   const { bodyProps, bodyCellProps, headProps, wrapperProps } = rest;
@@ -85,6 +88,7 @@ const structuredListBodyRowGenerator = (numRows, rest) => {
         title={`row-${i}`}
         name={inputNameValue}
         className={customInputClass}
+        onChange={onChangeHandlerFn}
       />
       <StructuredListCell>
         <CheckmarkFilled
@@ -224,15 +228,14 @@ describe('StructuredList', () => {
         `${prefix}--structured-list-row--header-row`
       );
     });
-    it('should add an onKeyDown handler', () => {
-      const { tab, keyboard } = userEvent;
+    it('should add an onKeyDown handler', async () => {
       renderSelectionVariant();
-      tab();
-      keyboard('[ArrowDown]');
+      await user.tab();
+      await user.keyboard('[ArrowDown]');
       expect(onKeyDownHandlerFn).toHaveBeenCalledTimes(1);
-      keyboard('[ArrowDown]');
+      await user.keyboard('[ArrowDown]');
       expect(onKeyDownHandlerFn).toHaveBeenCalledTimes(2);
-      keyboard('[ArrowDown]');
+      await user.keyboard('[ArrowDown]');
       expect(onKeyDownHandlerFn).toHaveBeenCalledTimes(3);
     });
   });
@@ -258,15 +261,14 @@ describe('StructuredList', () => {
       )[0];
       expect(bodyRowGroup).toHaveClass(`${prefix}--structured-list-tbody`);
     });
-    it('should add an onKeyDown handler', () => {
-      const { tab, keyboard } = userEvent;
+    it('should add an onKeyDown handler', async () => {
       renderSelectionVariant();
-      tab();
-      keyboard('[ArrowDown]');
+      await user.tab();
+      await user.keyboard('[ArrowDown]');
       expect(onKeyDownBodyHandlerFn).toHaveBeenCalledTimes(1);
-      keyboard('[ArrowDown]');
+      await user.keyboard('[ArrowDown]');
       expect(onKeyDownBodyHandlerFn).toHaveBeenCalledTimes(2);
-      keyboard('[ArrowDown]');
+      await user.keyboard('[ArrowDown]');
       expect(onKeyDownBodyHandlerFn).toHaveBeenCalledTimes(3);
     });
     it('should accept rest props', () => {
@@ -320,6 +322,12 @@ describe('StructuredList', () => {
       allInputs.forEach((input) => {
         expect(input).toHaveAttribute('aria-label', testAriaLabel);
       });
+    });
+    it('should call onChange on change', async () => {
+      renderSelectionVariant();
+      const inputElement = screen.getByTitle('row-0');
+      await userEvent.click(inputElement);
+      expect(onChangeHandlerFn).toHaveBeenCalled();
     });
   });
 
