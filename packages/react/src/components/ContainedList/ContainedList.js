@@ -34,7 +34,7 @@ function filterChildren(children) {
 function renderChildren(children, prefix) {
   if (Array.isArray(children)) {
     children.map((child, index, key) => {
-      if (index === 0 && child.type.displayName === 'Search') {
+      if (index === 0 && child.type?.displayName === 'Search') {
         return (
           <div key={key} className={`${prefix}--contained-list__search`}>
             {child}
@@ -45,7 +45,7 @@ function renderChildren(children, prefix) {
     });
   }
 
-  if (children && children.type.displayName === 'Search') {
+  if (children && children.type?.displayName === 'Search') {
     return (
       <div className={`${prefix}--contained-list__search`}>{children}</div>
     );
