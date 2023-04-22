@@ -391,17 +391,15 @@ export const SelectableTile = React.forwardRef<
   }
 
   return (
+    // eslint-disable-next-line jsx-a11y/interactive-supports-focus
     <div
       className={classes}
       onClick={!disabled ? handleOnClick : undefined}
       role="checkbox"
       aria-checked={isSelected}
-      disabled={disabled}
       onKeyDown={!disabled ? handleOnKeyDown : undefined}
       // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
       tabIndex={!disabled ? tabIndex : undefined}
-      value={value}
-      name={name}
       ref={ref}
       id={id}
       onChange={!disabled ? handleChange : undefined}
