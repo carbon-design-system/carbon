@@ -1136,6 +1136,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "S-Mann",
+      "name": "Sukhinder Mann",
+      "avatar_url": "https://avatars.githubusercontent.com/u/29407727?v=4",
+      "profile": "https://github.com/S-Mann",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "commitConvention": "none"

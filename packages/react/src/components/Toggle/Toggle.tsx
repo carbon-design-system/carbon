@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
+import React, { MouseEventHandler, useRef } from 'react';
 import classNames from 'classnames';
 import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
+
 
 export function Toggle({
   'aria-labelledby': ariaLabelledby,
@@ -27,16 +27,16 @@ export function Toggle({
   size = 'md',
   toggled,
   ...other
-}) {
+}: ToggleProps) {
   const prefix = usePrefix();
-  const buttonElement = useRef(null);
+  const buttonElement = useRef<HTMLButtonElement | null>(null);
   const [checked, setChecked] = useControllableState({
     value: toggled,
     onChange: onToggle,
     defaultValue: defaultToggled,
   });
 
-  function handleClick(e) {
+  const handleClick: MouseEventHandler = (e) => {
     if (!readOnly) {
       setChecked(!checked);
     }
@@ -78,17 +78,17 @@ export function Toggle({
       onClick={
         !labelText
           ? (e) => {
-              // the underlying <button> can only be activated by keyboard as it is visually hidden;
-              // therefore, if this event's target is the <button>, it had to be triggered by
-              // the keyboard event which already calls handleClick. if we wouldn't catch this, the
-              // onClick and onToggle functions would be called twice whenever the user activates the
-              // toggle by keyboard and props['aria-labelledby'] is passed.
-              if (buttonElement.current && e.target !== buttonElement.current) {
-                handleClick(e);
-                buttonElement.current.focus();
-              }
+            // the underlying <button> can only be activated by keyboard as it is visually hidden;
+            // therefore, if this event's target is the <button>, it had to be triggered by
+            // the keyboard event which already calls handleClick. if we wouldn't catch this, the
+            // onClick and onToggle functions would be called twice whenever the user activates the
+            // toggle by keyboard and props['aria-labelledby'] is passed.
+            if (buttonElement.current && e.target !== buttonElement.current) {
+              handleClick(e);
+              buttonElement.current.focus();
             }
-          : null
+          }
+          : undefined
       }>
       <button
         {...other}
@@ -103,7 +103,7 @@ export function Toggle({
         onClick={handleClick}
       />
       <LabelComponent
-        htmlFor={ariaLabelledby ? null : id}
+        htmlFor={ariaLabelledby ? undefined : id}
         className={`${prefix}--toggle__label`}>
         {labelText && <span className={labelTextClasses}>{labelText}</span>}
         <div className={appearanceClasses}>
@@ -129,47 +129,47 @@ export function Toggle({
   );
 }
 
-Toggle.propTypes = {
+type ToggleProps = {
   /**
    * Specify another element's id to be used as the label for this toggle
    */
-  'aria-labelledby': PropTypes.string,
+  'aria-labelledby'?: string,
 
   /**
    * Specify a custom className to apply to the form-item node
    */
-  className: PropTypes.string,
+  className?: string,
 
   /**
    * Specify whether the toggle should be on by default
    */
-  defaultToggled: PropTypes.bool,
+  defaultToggled?: boolean,
 
   /**
    * Whether this control should be disabled
    */
-  disabled: PropTypes.bool,
+  disabled?: boolean,
 
   /**
    * If true, the side labels (props.labelA and props.labelB) will be replaced by
    * props.labelText (if passed), so that the toggle doesn't render a top label.
    */
-  hideLabel: PropTypes.bool,
+  hideLabel?: boolean,
 
   /**
    * Provide an id that unique represents the underlying `<button>`
    */
-  id: PropTypes.string.isRequired,
+  id: string,
 
   /**
    * Specify the label for the "off" position
    */
-  labelA: PropTypes.node,
+  labelA?: string,
 
   /**
    * Specify the label for the "on" position
    */
-  labelB: PropTypes.node,
+  labelB?: string,
 
   /**
    * Provide the text that will be read by a screen reader when visiting this
@@ -177,32 +177,32 @@ Toggle.propTypes = {
    * or you use an external <label> element with its "for" attribute set to the
    * toggle's id.
    */
-  labelText: PropTypes.string,
+  labelText?: string,
 
   /**
    * Provide an event listener that is called when the control is clicked
    */
-  onClick: PropTypes.func,
+  onClick?: MouseEventHandler,
 
   /**
    * Provide an event listener that is called when the control is toggled
    */
-  onToggle: PropTypes.func,
+  onToggle?: MouseEventHandler,
 
   /**
    * Whether the toggle should be read-only
    */
-  readOnly: PropTypes.bool,
+  readOnly?: boolean,
 
   /**
    * Specify the size of the Toggle. Currently only supports 'sm' or 'md' (default)
    */
-  size: PropTypes.oneOf(['sm', 'md']),
+  size?: 'sm' | 'md',
 
   /**
    * Specify whether the control is toggled
    */
-  toggled: PropTypes.bool,
+  toggled?: boolean,
 };
 
 export default Toggle;
