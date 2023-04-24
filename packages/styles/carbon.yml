@@ -290,6 +290,17 @@ assets:
     noIndex: false
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/filtering/index.mdx
+  fluid-styles:
+    name: Fluid styles
+    description: Fluid versions of certain familiar components offer alternative stylistic expressions that differentiate them from their default counterparts.
+    externalDocsUrl: https://carbondesignsystem.com/patterns/fluid-styles
+    status: stable
+    type: pattern
+    platform: web
+    thumbnailPath: ./thumbnails/fluid-styles.svg
+    noIndex: false
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/patterns/fluid-styles/index.mdx
   form:
     name: Form
     description: A form is a group of related input controls that allows users to provide data or configure options.

@@ -230,7 +230,7 @@ describe('TextInput', () => {
   });
 
   describe('behaves as expected - Component API', () => {
-    it('should respect onChange prop', () => {
+    it('should respect onChange prop', async () => {
       const onChange = jest.fn();
       render(
         <TextInput
@@ -241,7 +241,7 @@ describe('TextInput', () => {
         />
       );
 
-      userEvent.type(screen.getByRole('textbox'), 'x');
+      await userEvent.type(screen.getByRole('textbox'), 'x');
       expect(screen.getByRole('textbox')).toHaveValue('x');
       expect(onChange).toHaveBeenCalledTimes(1);
       expect(onChange).toHaveBeenCalledWith(
@@ -251,7 +251,7 @@ describe('TextInput', () => {
       );
     });
 
-    it('should respect onClick prop', () => {
+    it('should respect onClick prop', async () => {
       const onClick = jest.fn();
       render(
         <TextInput
@@ -262,7 +262,7 @@ describe('TextInput', () => {
         />
       );
 
-      userEvent.click(screen.getByRole('textbox'));
+      await userEvent.click(screen.getByRole('textbox'));
       expect(onClick).toHaveBeenCalledTimes(1);
       expect(onClick).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -271,7 +271,7 @@ describe('TextInput', () => {
       );
     });
 
-    it('should not call `onClick` when the `<input>` is clicked but disabled', () => {
+    it('should not call `onClick` when the `<input>` is clicked but disabled', async () => {
       const onClick = jest.fn();
       render(
         <TextInput
@@ -282,11 +282,11 @@ describe('TextInput', () => {
         />
       );
 
-      userEvent.click(screen.getByRole('textbox'));
+      await userEvent.click(screen.getByRole('textbox'));
       expect(onClick).not.toHaveBeenCalled();
     });
 
-    it('should respect readOnly prop', () => {
+    it('should respect readOnly prop', async () => {
       const onChange = jest.fn();
       const onClick = jest.fn();
       render(
@@ -300,11 +300,11 @@ describe('TextInput', () => {
       );
 
       // Click events should fire
-      userEvent.click(screen.getByRole('textbox'));
+      await userEvent.click(screen.getByRole('textbox'));
       expect(onClick).toHaveBeenCalledTimes(1);
 
       // Change events should *not* fire
-      userEvent.type(screen.getByRole('textbox'), 'x');
+      await userEvent.type(screen.getByRole('textbox'), 'x');
       expect(screen.getByRole('textbox')).not.toHaveValue('x');
       expect(onChange).toHaveBeenCalledTimes(0);
     });

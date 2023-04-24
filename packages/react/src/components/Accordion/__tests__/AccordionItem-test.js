@@ -40,22 +40,22 @@ describe('AccordionItem', () => {
       expect(screen.getByRole('button')).toBeDisabled();
     });
 
-    it('should call onClick when expected', () => {
+    it('should call onClick when expected', async () => {
       const onClick = jest.fn();
       render(<AccordionItem title="Test title" onClick={onClick} />);
 
-      userEvent.click(screen.getByText('Test title'));
+      await userEvent.click(screen.getByText('Test title'));
 
       expect(onClick).toHaveBeenCalled();
     });
 
-    it('should call onHeadingClick prop when expected', () => {
+    it('should call onHeadingClick prop when expected', async () => {
       const onHeadingClick = jest.fn();
       render(
         <AccordionItem title="Test title" onHeadingClick={onHeadingClick} />
       );
 
-      userEvent.click(screen.getByText('Test title'));
+      await userEvent.click(screen.getByText('Test title'));
 
       expect(onHeadingClick).toHaveBeenCalled();
     });
@@ -88,13 +88,13 @@ describe('AccordionItem', () => {
   });
 
   describe('behaves as expected', () => {
-    it('should close an open AccordionItem panel when the Esc key is pressed', () => {
+    it('should close an open AccordionItem panel when the Esc key is pressed', async () => {
       render(
         <AccordionItem title="A heading" open>
           Lorem ipsum.
         </AccordionItem>
       );
-      userEvent.type(screen.getByRole('button'), '{esc}');
+      await userEvent.type(screen.getByRole('button'), '{Escape}');
 
       expect(screen.getByRole('button')).toHaveAttribute(
         'aria-expanded',
@@ -108,7 +108,7 @@ describe('AccordionItem', () => {
           <input type="text" />
         </AccordionItem>
       );
-      userEvent.type(screen.getByRole('textbox'), '{esc}');
+      userEvent.type(screen.getByRole('textbox'), '{Escape}');
       expect(screen.getByRole('button')).toHaveAttribute(
         'aria-expanded',
         'true'

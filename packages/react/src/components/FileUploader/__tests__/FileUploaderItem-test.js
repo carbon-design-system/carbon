@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, cleanup } from '@carbon/test-utils/react';
+import { render } from '@testing-library/react';
 import { getByLabel, getByText } from '@carbon/test-utils/dom';
 import React from 'react';
 import { Simulate } from 'react-dom/test-utils';
@@ -15,8 +15,6 @@ import { keys } from '../../../internal/keyboard';
 const statuses = ['uploading', 'edit', 'complete'];
 
 describe('FileUploaderItem', () => {
-  afterEach(cleanup);
-
   describe('automated accessibility tests', () => {
     it.each(statuses)(
       'should have no axe violations with status %s',
