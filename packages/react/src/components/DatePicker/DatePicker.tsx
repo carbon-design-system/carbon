@@ -30,7 +30,6 @@ import { useSavedCallback } from '../../internal/useSavedCallback';
 import { FormContext } from '../FluidForm';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { ReactAttr } from '../../types/common';
-//import {FlatpickrFn} from "flatpickr/dist/types/instance";
 
 // Weekdays shorthand for english locale
 l10n.en.weekdays.shorthand.forEach((_day, index) => {
