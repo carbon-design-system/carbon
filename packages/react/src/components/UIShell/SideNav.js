@@ -116,10 +116,9 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     };
 
     eventHandlers.onKeyDown = (event) => {
-      if (match(event, keys.Tab) && !expanded && isRail) {
-        handleToggle(event, true);
-      } else if (match(event, keys.Escape)) {
+      if (match(event, keys.Escape)) {
         handleToggle(event, false);
+        window.location.href = '#main-content';
       }
     };
   }
