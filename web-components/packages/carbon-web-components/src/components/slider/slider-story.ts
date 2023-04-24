@@ -18,6 +18,7 @@ import '../form/form-item';
 import '../layer';
 import storyDocs from './slider-story.mdx';
 import { prefix } from '../../globals/settings';
+import '../../../.storybook/templates/with-layer';
 
 export const Default = () => {
   return html`
@@ -79,17 +80,8 @@ export const ControlledSliderWithLayer = () => {
   }
 
   return html`
-    <cds-layer>
-      <button type="button" @click="${onClick}">randomize value</button>
-      <cds-form-item>
-        <cds-slider max="100" min="0" step="1" value="${ifDefined(value)}">
-          <cds-slider-input
-            aria-label="Slider value"
-            type="number"></cds-slider-input>
-        </cds-slider>
-      </cds-form-item>
-      <h1 class="slider-headers">${value}</h1>
-      <cds-layer>
+    <sb-template-layers>
+      <div>
         <button type="button" @click="${onClick}">randomize value</button>
         <cds-form-item>
           <cds-slider max="100" min="0" step="1" value="${ifDefined(value)}">
@@ -99,28 +91,17 @@ export const ControlledSliderWithLayer = () => {
           </cds-slider>
         </cds-form-item>
         <h1 class="slider-headers">${value}</h1>
-        <cds-layer>
-          <button type="button" @click="${onClick}">randomize value</button>
-          <cds-form-item>
-            <cds-slider max="100" min="0" step="1" value="${ifDefined(value)}">
-              <cds-slider-input
-                aria-label="Slider value"
-                type="number"></cds-slider-input>
-            </cds-slider>
-          </cds-form-item>
-          <h1 class="slider-headers">${value}</h1>
-        </cds-layer>
-      </cds-layer>
-    </cds-layer>
+      </div>
+    </sb-template-layers>
   `;
 };
 
 export const WithLayer = () => {
   return html`
-    <cds-layer>
+    <sb-template-layers>
       <cds-form-item>
         <cds-slider
-          label-text="First Layer"
+          label-text="Slider label"
           max="100"
           min="0"
           step="1"
@@ -130,35 +111,7 @@ export const WithLayer = () => {
             type="number"></cds-slider-input>
         </cds-slider>
       </cds-form-item>
-      <cds-layer>
-        <cds-form-item>
-          <cds-slider
-            label-text="Second Layer"
-            max="100"
-            min="0"
-            step="1"
-            value="50">
-            <cds-slider-input
-              aria-label="Slider value"
-              type="number"></cds-slider-input>
-          </cds-slider>
-        </cds-form-item>
-        <cds-layer>
-          <cds-form-item>
-            <cds-slider
-              label-text="Third Layer"
-              max="100"
-              min="0"
-              step="1"
-              value="50">
-              <cds-slider-input
-                aria-label="Slider value"
-                type="number"></cds-slider-input>
-            </cds-slider>
-          </cds-form-item>
-        </cds-layer>
-      </cds-layer>
-    </cds-layer>
+    </sb-template-layers>
   `;
 };
 

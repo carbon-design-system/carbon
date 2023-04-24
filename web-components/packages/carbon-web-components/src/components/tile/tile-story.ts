@@ -16,6 +16,7 @@ import textNullable from '../../../.storybook/knob-text-nullable';
 import { TILE_COLOR_SCHEME } from './tile';
 import './index';
 import storyDocs from './tile-story.mdx';
+import '../../../.storybook/templates/with-layer';
 
 const colorSchemes = {
   [`Regular`]: null,
@@ -37,24 +38,12 @@ Default.storyName = 'Default';
 export const DefaultWithLayer = (args) => {
   const { colorScheme } = args?.[`${prefix}-tile`] ?? {};
   return html`
-    <cds-layer>
+    <sb-template-layers>
       <cds-tile color-scheme="${ifDefined(colorScheme)}">
-        First layer
+        Default layer
         <a href="https://example.com">Link</a>
       </cds-tile>
-      <cds-layer>
-        <cds-tile color-scheme="${ifDefined(colorScheme)}">
-          Second layer
-          <a href="https://example.com">Link</a>
-        </cds-tile>
-        <cds-layer>
-          <cds-tile color-scheme="${ifDefined(colorScheme)}">
-            Third layer
-            <a href="https://example.com">Link</a>
-          </cds-tile>
-        </cds-layer>
-      </cds-layer>
-    </cds-layer>
+    </sb-template-layers>
   `;
 };
 
@@ -87,7 +76,7 @@ export const ClickableWithLayer = (args) => {
   const { download, href, hreflang, ping, rel, target, type } =
     args?.[`${prefix}-clickable-tile`] ?? {};
   return html`
-    <cds-layer>
+    <sb-template-layers>
       <cds-clickable-tile
         download="${ifDefined(download)}"
         href="${ifDefined(href)}"
@@ -98,35 +87,9 @@ export const ClickableWithLayer = (args) => {
         type="${ifDefined(type)}">
         Clickable tile
       </cds-clickable-tile>
-      <cds-layer>
-        <cds-clickable-tile
-          download="${ifDefined(download)}"
-          href="${ifDefined(href)}"
-          hreflang="${ifDefined(hreflang)}"
-          ping="${ifDefined(ping)}"
-          rel="${ifDefined(rel)}"
-          target="${ifDefined(target)}"
-          type="${ifDefined(type)}">
-          Clickable tile
-        </cds-clickable-tile>
-        <cds-layer>
-          <cds-clickable-tile
-            download="${ifDefined(download)}"
-            href="${ifDefined(href)}"
-            hreflang="${ifDefined(hreflang)}"
-            ping="${ifDefined(ping)}"
-            rel="${ifDefined(rel)}"
-            target="${ifDefined(target)}"
-            type="${ifDefined(type)}">
-            Clickable tile
-          </cds-clickable-tile>
-        </cds-layer>
-      </cds-layer>
-    </cds-layer>
+    </sb-template-layers>
   `;
 };
-
-ClickableWithLayer.storyName = 'Clickable with layer';
 
 export const Radio = (args) => {
   const { checkmarkLabel, colorScheme, name, value, onInput } =
@@ -181,31 +144,15 @@ Radio.parameters = {
 
 export const RadioWithLayer = () => {
   return html`
-    <cds-layer>
+    <sb-template-layers>
       <cds-tile-group>
-        <legend slot="legend">First layer</legend>
+        <legend slot="legend">Radio tile group</legend>
         <cds-radio-tile name="option-1a"> Option 1 </cds-radio-tile>
         <cds-radio-tile name="option-2a"> Option 2 </cds-radio-tile>
       </cds-tile-group>
-      <cds-layer>
-        <cds-tile-group>
-          <legend slot="legend">Second layer</legend>
-          <cds-radio-tile name="option-1b"> Option 1 </cds-radio-tile>
-          <cds-radio-tile name="option-2b"> Option 2 </cds-radio-tile>
-        </cds-tile-group>
-        <cds-layer>
-          <cds-tile-group>
-            <legend slot="legend">Third layer</legend>
-            <cds-radio-tile name="option-1c"> Option 1 </cds-radio-tile>
-            <cds-radio-tile name="option-2c"> Option 2 </cds-radio-tile>
-          </cds-tile-group>
-        </cds-layer>
-      </cds-layer>
-    </cds-layer>
+    </sb-template-layers>
   `;
 };
-
-RadioWithLayer.storyName = 'Radio with layer';
 
 export const multiSelectable = (args) => {
   const { checkmarkLabel, colorScheme, name, selected, value, onInput } =
@@ -323,60 +270,23 @@ export const ExpandableWithLayer = (args) => {
     }
   };
   return html`
-    <cds-layer>
+    <sb-template-layers>
       <cds-expandable-tile
-        with-interactive
+        style="width:400px"
         color-scheme="${ifDefined(colorScheme)}"
         ?expanded="${expanded}"
         @cds-expandable-tile-beingchanged=${handleBeforeChanged}
         @cds-expandable-tile-changed=${onChange}>
         <cds-tile-above-the-fold-content
           slot="above-the-fold-content"
-          style="height: 132px">
-          Layer 1
+          style="height: 200px">
+          Above the fold content here
         </cds-tile-above-the-fold-content>
-        <cds-tile-below-the-fold-content style="height: 200px">
+        <cds-tile-below-the-fold-content style="height: 300px">
           Below the fold content here
-          <cds-text-input></cds-text-input>
         </cds-tile-below-the-fold-content>
       </cds-expandable-tile>
-      <cds-layer>
-        <cds-expandable-tile
-          with-interactive
-          color-scheme="${ifDefined(colorScheme)}"
-          ?expanded="${expanded}"
-          @cds-expandable-tile-beingchanged=${handleBeforeChanged}
-          @cds-expandable-tile-changed=${onChange}>
-          <cds-tile-above-the-fold-content
-            slot="above-the-fold-content"
-            style="height: 132px">
-            Layer 2
-          </cds-tile-above-the-fold-content>
-          <cds-tile-below-the-fold-content style="height: 200px">
-            Below the fold content here
-            <cds-text-input></cds-text-input>
-          </cds-tile-below-the-fold-content>
-        </cds-expandable-tile>
-        <cds-layer>
-          <cds-expandable-tile
-            with-interactive
-            color-scheme="${ifDefined(colorScheme)}"
-            ?expanded="${expanded}"
-            @cds-expandable-tile-beingchanged=${handleBeforeChanged}
-            @cds-expandable-tile-changed=${onChange}>
-            <cds-tile-above-the-fold-content
-              slot="above-the-fold-content"
-              style="height: 132px">
-              Layer 3
-            </cds-tile-above-the-fold-content>
-            <cds-tile-below-the-fold-content style="height: 200px">
-              Below the fold content here
-              <cds-text-input></cds-text-input>
-            </cds-tile-below-the-fold-content>
-          </cds-expandable-tile>
-        </cds-layer>
-      </cds-layer>
-    </cds-layer>
+    </sb-template-layers>
   `;
 };
 

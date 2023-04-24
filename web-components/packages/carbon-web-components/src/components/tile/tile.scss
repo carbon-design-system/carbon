@@ -28,6 +28,10 @@ $css--plex: true !default;
   @extend .#{$prefix}--tile-group;
 
   background: transparent;
+
+  fieldset {
+    border: none;
+  }
 }
 
 :host(#{$prefix}-clickable-tile) {

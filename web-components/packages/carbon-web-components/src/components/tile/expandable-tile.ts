@@ -47,6 +47,13 @@ class BXExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
         (acc, item) => acc + ((item as HTMLElement).offsetHeight ?? 0),
         0
       );
+
+    if (!this._belowTheContentHeight) {
+      const element = getComputedStyle(
+        this.querySelector('cds-tile-below-the-fold-content') as any
+      );
+      this._belowTheContentHeight = parseInt(element.height, 10);
+    }
     this.requestUpdate();
   }
 

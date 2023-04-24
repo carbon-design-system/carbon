@@ -16,6 +16,7 @@ import { prefix } from '../../globals/settings';
 import './index';
 import '../layer';
 import '../form/form-item';
+import '../../../.storybook/templates/with-layer';
 
 import { action } from '@storybook/addon-actions';
 import { INPUT_SIZE } from './text-input';
@@ -63,18 +64,10 @@ export const TogglePasswordVisibility = () => {
 
 export const WithLayer = () => {
   return html`
-    <cds-layer>
-      <cds-text-input label="First layer" helper-text="Optional help text">
+    <sb-template-layers>
+      <cds-text-input label="Text input label" helper-text="Optional help text">
       </cds-text-input>
-      <cds-layer>
-        <cds-text-input label="Second layer" helper-text="Optional help text">
-        </cds-text-input>
-        <cds-layer>
-          <cds-text-input label="Third layer" helper-text="Optional help text">
-          </cds-text-input>
-        </cds-layer>
-      </cds-layer>
-    </cds-layer>
+    </sb-template-layers>
   `;
 };
 
