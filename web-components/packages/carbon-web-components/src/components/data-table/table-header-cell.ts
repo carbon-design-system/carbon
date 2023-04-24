@@ -9,7 +9,7 @@
 
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
-import Arrows16 from '@carbon/icons/lib/arrows/16';
+import ArrowsVeritcal16 from '@carbon/icons/lib/arrows--vertical/16';
 import ArrowDown16 from '@carbon/icons/lib/arrow--down/16';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
@@ -124,7 +124,7 @@ class BXTableHeaderCell extends FocusMixin(LitElement) {
     if (sortDirection) {
       const sortIcon =
         sortDirection === TABLE_SORT_DIRECTION.NONE
-          ? Arrows16({
+          ? ArrowsVeritcal16({
               part: 'sort-icon',
               class: `${prefix}--table-sort__icon-unsorted`,
             })

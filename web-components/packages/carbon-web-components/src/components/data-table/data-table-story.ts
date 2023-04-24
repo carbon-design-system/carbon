@@ -17,7 +17,7 @@ import { boolean, select } from '@storybook/addon-knobs';
 // Below path will be there when an application installs `@carbon/web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
-import Delete16 from '@carbon/web-components/es/icons/delete/16';
+import TrashCan from '@carbon/web-components/es/icons/trash-can/16';
 // @ts-ignore
 import Download16 from '@carbon/web-components/es/icons/download/16';
 // @ts-ignore
@@ -437,7 +437,7 @@ class BXCEDemoDataTable extends LitElement {
           selected-rows-count="${selectedRowsCountInFiltered}"
           @cds-table-batch-actions-cancel-clicked="${handleCancelSelection}">
           <cds-button icon-layout="condensed" @click="${handleDeleteRows}"
-            >Delete ${Delete16({ slot: 'icon' })}</cds-button
+            >Delete ${TrashCan({ slot: 'icon' })}</cds-button
           >
           <cds-button
             icon-layout="condensed"

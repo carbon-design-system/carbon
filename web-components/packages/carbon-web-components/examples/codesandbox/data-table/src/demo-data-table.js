@@ -11,7 +11,7 @@ import debounce from 'lodash-es/debounce';
 import { repeat } from 'lit-html/directives/repeat';
 import { html, property, customElement, LitElement } from 'lit-element';
 import ifNonNull from '@carbon/web-components/es/globals/directives/if-non-null';
-import Delete16 from '@carbon/web-components/es/icons/delete/16';
+import TrashCan from '@carbon/web-components/es/icons/trash-can/16';
 import Download16 from '@carbon/web-components/es/icons/download/16';
 import Settings16 from '@carbon/web-components/es/icons/settings/16';
 import '@carbon/web-components/es/components/button/button';
@@ -369,7 +369,7 @@ class BXCEDemoDataTable extends LitElement {
           selected-rows-count="${selectedRowsCountInFiltered}"
           @cds-table-batch-actions-cancel-clicked="${handleCancelSelection}"
         >
-          <cds-button @click="${handleDeleteRows}">Delete ${Delete16({ slot: 'icon' })}</cds-button>
+          <cds-button @click="${handleDeleteRows}">Delete ${TrashCan({ slot: 'icon' })}</cds-button>
           <cds-button @click="${handleDownloadRows}" href="javascript:void 0" download="table-data.json">
             Download ${Download16({ slot: 'icon' })}
           </cds-button>
