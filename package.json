@@ -126,9 +126,6 @@
     ],
     "!(*sass).md": [
       "prettier --write"
-    ],
-    "**/*.ts": [
-      "eslint"
     ]
   },
   "eslintConfig": {
