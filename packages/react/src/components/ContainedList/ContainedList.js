@@ -51,9 +51,6 @@ function renderChildren(children, prefix) {
   }
 
   if (children && children.type?.displayName === 'Search') {
-    {
-      console.log('boo');
-    }
     return (
       <div className={`${prefix}--contained-list__search`}>{children}</div>
     );
