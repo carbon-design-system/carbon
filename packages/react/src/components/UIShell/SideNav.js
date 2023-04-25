@@ -23,6 +23,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     'aria-labelledby': ariaLabelledBy,
     children,
     onToggle,
+    href,
     className: customClassName,
     // TO-DO: comment back in when footer is added for rails
     // translateById: t,
@@ -118,7 +119,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     eventHandlers.onKeyDown = (event) => {
       if (match(event, keys.Escape)) {
         handleToggle(event, false);
-        window.location.href = '#main-content';
+        window.location.href = href;
       }
     };
   }
@@ -195,6 +196,12 @@ SideNav.propTypes = {
    * Using this prop causes SideNav to become a controled component.
    */
   expanded: PropTypes.bool,
+
+  /**
+   * Provide the `href` to the id of the element on your package that is the
+   * main content.
+   */
+  href: PropTypes.string,
 
   /**
    * Optionally provide a custom class to apply to the underlying `<li>` node

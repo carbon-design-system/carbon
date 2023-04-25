@@ -798,7 +798,7 @@ FixedSideNavWDivider.storyName = 'Fixed SideNav w/ Divider';
 
 export const SideNavRail = () => (
   <>
-    <SideNav aria-label="Side navigation" isRail>
+    <SideNav aria-label="Side navigation" href="#main-content" isRail>
       <SideNavItems>
         <SideNavMenu renderIcon={Fade} title="Category title">
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
@@ -900,7 +900,8 @@ export const SideNavRailWHeader = () => (
             aria-label="Side navigation"
             isRail
             expanded={isSideNavExpanded}
-            onOverlayClick={onClickSideNavExpand}>
+            onOverlayClick={onClickSideNavExpand}
+            href="#main-content">
             <SideNavItems>
               <SideNavMenu renderIcon={Fade} title="Category title">
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
