@@ -21,7 +21,7 @@ import styles from './dropdown.scss';
  * @csspart selected-icon The selected icon.
  */
 @customElement(`${prefix}-dropdown-item`)
-class BXDropdownItem extends LitElement {
+class CDSDropdownItem extends LitElement {
   /**
    * `true` if this dropdown item should be disabled.
    */
@@ -75,4 +75,4 @@ class BXDropdownItem extends LitElement {
   static styles = styles;
 }
 
-export default BXDropdownItem;
+export default CDSDropdownItem;

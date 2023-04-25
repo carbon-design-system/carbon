@@ -9,7 +9,7 @@
 
 import { customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import BXDropdownItem from '../dropdown/dropdown-item';
+import CDSDropdownItem from '../dropdown/dropdown-item';
 import styles from './combo-box.scss';
 
 /**
@@ -18,8 +18,8 @@ import styles from './combo-box.scss';
  * @element cds-combo-box-item
  */
 @customElement(`${prefix}-combo-box-item`)
-class BXComboBoxItem extends BXDropdownItem {
+class CDSComboBoxItem extends CDSDropdownItem {
   static styles = styles;
 }
 
-export default BXComboBoxItem;
+export default CDSComboBoxItem;

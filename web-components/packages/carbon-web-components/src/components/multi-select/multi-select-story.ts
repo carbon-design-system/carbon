@@ -13,24 +13,14 @@ import { boolean, select } from '@storybook/addon-knobs';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import textNullable from '../../../.storybook/knob-text-nullable';
 import { prefix } from '../../globals/settings';
-import {
-  DROPDOWN_COLOR_SCHEME,
-  DROPDOWN_SIZE,
-  DROPDOWN_TYPE,
-} from './multi-select';
+import { DROPDOWN_SIZE, DROPDOWN_TYPE } from './multi-select';
 import './multi-select-item';
 import storyDocs from './multi-select-story.mdx';
-
-const colorSchemes = {
-  [`Regular`]: null,
-  [`Light (${DROPDOWN_COLOR_SCHEME.LIGHT})`]: DROPDOWN_COLOR_SCHEME.LIGHT,
-};
 
 const sizes = {
   'Regular size': null,
   [`Small size (${DROPDOWN_SIZE.SMALL})`]: DROPDOWN_SIZE.SMALL,
-  [`Extra large size (${DROPDOWN_SIZE.EXTRA_LARGE})`]:
-    DROPDOWN_SIZE.EXTRA_LARGE,
+  [`Extra large size (${DROPDOWN_SIZE.LARGE})`]: DROPDOWN_SIZE.LARGE,
 };
 
 const types = {
@@ -209,7 +199,6 @@ export default {
           'a11y label for the icon to clear selection (clear-selection-label)',
           ''
         ),
-        colorScheme: select('Color scheme (color-scheme)', colorSchemes, null),
         disabled: boolean('Disabled (disabled)', false),
         helperText: textNullable(
           'Helper text (helper-text)',

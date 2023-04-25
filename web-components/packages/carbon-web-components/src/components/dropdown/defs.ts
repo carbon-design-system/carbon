@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -59,9 +59,9 @@ export enum DROPDOWN_SIZE {
   SMALL = 'sm',
 
   /**
-   * Extra large size.
+   * Large size.
    */
-  EXTRA_LARGE = 'xl',
+  LARGE = 'lg',
 }
 
 /**
@@ -77,4 +77,19 @@ export enum DROPDOWN_TYPE {
    * Inline type.
    */
   INLINE = 'inline',
+}
+
+/**
+ * Dropdown direction.
+ */
+export enum DROPDOWN_DIRECTION {
+  /**
+   * Top.
+   */
+  TOP = 'top',
+
+  /**
+   * Bottom.
+   */
+  BOTTOM = 'bottom',
 }

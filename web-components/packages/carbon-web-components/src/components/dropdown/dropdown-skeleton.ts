@@ -16,7 +16,7 @@ import styles from './dropdown.scss';
  * Skeleton version of dropdown.
  */
 @customElement(`${prefix}-dropdown-skeleton`)
-class BXDropdownSkeleton extends LitElement {
+class CDSDropdownSkeleton extends LitElement {
   render() {
     return html`
       <div
@@ -31,4 +31,4 @@ class BXDropdownSkeleton extends LitElement {
   static styles = styles;
 }
 
-export default BXDropdownSkeleton;
+export default CDSDropdownSkeleton;

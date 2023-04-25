@@ -11,12 +11,12 @@ import { delay } from 'bluebird';
 import { render } from 'lit';
 import EventManager from '../utils/event-manager';
 
-import BXComboBox from '../../src/components/combo-box/combo-box';
-import BXComboBoxItem from '../../src/components/combo-box/combo-box-item';
-import { Default } from '../../src/components/combo-box/combo-box-story';
+import CDSComboBox from '../../src/components/combo-box/combo-box';
+import CDSComboBoxItem from '../../src/components/combo-box/combo-box-item';
+import { Playground } from '../../src/components/combo-box/combo-box-story';
 
 const template = (props?) =>
-  Default({
+  Playground({
     'cds-combo-box': props,
   });
 
@@ -77,7 +77,7 @@ describe('cds-combo-box', function () {
     });
 
     it('should remove "open" stateful modifier class (closed default state)', async function () {
-      (elem as BXComboBox).open = true;
+      (elem as CDSComboBox).open = true;
       await Promise.resolve();
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (inner as HTMLElement).click();
@@ -86,7 +86,7 @@ describe('cds-combo-box', function () {
     });
 
     it('should always close dropdown when clicking document', async function () {
-      (elem as BXComboBox).open = true;
+      (elem as CDSComboBox).open = true;
       await Promise.resolve();
       elem.dispatchEvent(new CustomEvent('focusout'));
       await Promise.resolve();
@@ -95,7 +95,7 @@ describe('cds-combo-box', function () {
     });
 
     it('should close dropdown when clicking on an item', async function () {
-      (elem as BXComboBox).open = true;
+      (elem as CDSComboBox).open = true;
       await Promise.resolve();
       (itemNode as HTMLElement).click();
       await Promise.resolve();
@@ -126,7 +126,7 @@ describe('cds-combo-box', function () {
     });
 
     it('should provide a way to cancel closing', async function () {
-      (elem as BXComboBox).open = true;
+      (elem as CDSComboBox).open = true;
       await Promise.resolve();
       events.on(elem, 'cds-combo-box-beingtoggled', (event: CustomEvent) => {
         event.preventDefault();
@@ -183,11 +183,11 @@ describe('cds-combo-box', function () {
         ) as HTMLElement
       ).click();
       await Promise.resolve();
-      expect((elem as BXComboBox).value).toBe('staging');
+      expect((elem as CDSComboBox).value).toBe('staging');
     });
 
     it('should provide a way to switch item with a value', async function () {
-      (elem as BXComboBox).value = 'staging';
+      (elem as CDSComboBox).value = 'staging';
       await Promise.resolve(); // Update cycle for `<cds-combo-box>`
       await Promise.resolve(); // Update cycle for `<cds-combo-box-item>`
       expect(itemNodes[0].hasAttribute('selected')).toBe(false);
@@ -233,7 +233,7 @@ describe('cds-combo-box', function () {
         ) as HTMLElement
       ).click();
       await Promise.resolve();
-      expect((elem as BXComboBox).value).toBe('all');
+      expect((elem as CDSComboBox).value).toBe('all');
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
       expect(itemNodes[0].hasAttribute('selected')).toBe(true);
       expect(itemNodes[1].hasAttribute('selected')).toBe(false);
@@ -249,9 +249,9 @@ describe('cds-combo-box', function () {
     it('should reflect the added child to the selection', async function () {
       const itemNode = document.createElement('cds-combo-box-item');
       itemNode.textContent = 'text-added';
-      (itemNode as unknown as BXComboBoxItem).value = 'value-added';
+      (itemNode as unknown as CDSComboBoxItem).value = 'value-added';
       elem.appendChild(itemNode);
-      (elem as BXComboBox).value = 'value-added';
+      (elem as CDSComboBox).value = 'value-added';
       await delay(0); // Workaround for IE MutationObserver scheduling bug for moving elements to slot
       try {
         expect(
@@ -349,7 +349,7 @@ describe('cds-combo-box', function () {
         ) as HTMLElement
       ).click();
       await Promise.resolve();
-      expect((elem as BXComboBox).value).toBe('');
+      expect((elem as CDSComboBox).value).toBe('');
       expect(inputNode.value).toBe('');
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
       expect(itemNodes[0].hasAttribute('highlighted')).toBe(false);
@@ -373,7 +373,7 @@ describe('cds-combo-box', function () {
       (event as any).key = ' ';
       selectionButton!.dispatchEvent(event);
       await Promise.resolve();
-      expect((elem as BXComboBox).value).toBe('');
+      expect((elem as CDSComboBox).value).toBe('');
       expect(inputNode.value).toBe('');
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
       expect(itemNodes[0].hasAttribute('highlighted')).toBe(false);
@@ -397,7 +397,7 @@ describe('cds-combo-box', function () {
       (event as any).key = 'Enter';
       selectionButton!.dispatchEvent(event);
       await Promise.resolve();
-      expect((elem as BXComboBox).value).toBe('');
+      expect((elem as CDSComboBox).value).toBe('');
       expect(inputNode.value).toBe('');
       expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
       expect(itemNodes[0].hasAttribute('highlighted')).toBe(false);
@@ -409,7 +409,7 @@ describe('cds-combo-box', function () {
     });
 
     it('Should support selecting an item after typing', async function () {
-      (elem as BXComboBox).open = true;
+      (elem as CDSComboBox).open = true;
       await Promise.resolve();
       (
         document.body.querySelector(

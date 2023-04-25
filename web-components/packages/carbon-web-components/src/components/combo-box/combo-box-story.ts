@@ -9,138 +9,177 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { action } from '@storybook/addon-actions';
-import { boolean, select, text } from '@storybook/addon-knobs';
-import {
-  DROPDOWN_COLOR_SCHEME,
-  DROPDOWN_SIZE,
-  DROPDOWN_TYPE,
-} from './combo-box';
+import { boolean, select } from '@storybook/addon-knobs';
+import { DROPDOWN_DIRECTION, DROPDOWN_SIZE } from './combo-box';
 import './combo-box-item';
 import storyDocs from './combo-box-story.mdx';
 import { prefix } from '../../globals/settings';
+import textNullable from '../../../.storybook/knob-text-nullable';
 
-const colorSchemes = {
-  [`Regular`]: null,
-  [`Light (${DROPDOWN_COLOR_SCHEME.LIGHT})`]: DROPDOWN_COLOR_SCHEME.LIGHT,
-};
+const items = [
+  {
+    value: 'option-0',
+    text: 'An example option that is really long to show what should be done to handle long text',
+  },
+  {
+    value: 'option-1',
+    text: 'Option 1',
+  },
+  {
+    value: 'option-2',
+    text: 'Option 2',
+  },
+  {
+    value: 'option-3',
+    text: 'Option 3 - a disabled item',
+    disabled: true,
+  },
+  {
+    value: 'option-4',
+    text: 'Option 4',
+  },
+  {
+    value: 'option-5',
+    text: 'Option 5',
+  },
+];
 
-const types = {
-  Regular: null,
-  [`Inline (${DROPDOWN_TYPE.INLINE})`]: DROPDOWN_TYPE.INLINE,
+const directionOptions = {
+  [`Top`]: DROPDOWN_DIRECTION.TOP,
+  [`Bottom`]: DROPDOWN_DIRECTION.BOTTOM,
 };
 
 const sizes = {
-  'Regular size': null,
   [`Small size (${DROPDOWN_SIZE.SMALL})`]: DROPDOWN_SIZE.SMALL,
-  [`Extra large size (${DROPDOWN_SIZE.EXTRA_LARGE})`]:
-    DROPDOWN_SIZE.EXTRA_LARGE,
+  'Regular size': null,
+  [`Large size (${DROPDOWN_SIZE.LARGE})`]: DROPDOWN_SIZE.LARGE,
 };
 
-export const Default = (args) => {
-  const {
-    open,
-    colorScheme,
-    disabled,
-    helperText,
-    invalid,
-    labelText,
-    size,
-    triggerContent,
-    type,
-    validityMessage,
-    value,
-    disableSelection,
-    disableToggle,
-    onBeforeSelect,
-    onBeforeToggle,
-    onSelect,
-    onToggle,
-  } = args?.[`${prefix}-combo-box`] ?? {};
-  const handleBeforeSelect = (event: CustomEvent) => {
-    if (onBeforeSelect) {
-      onBeforeSelect(event);
-    }
-    if (disableSelection) {
-      event.preventDefault();
-    }
-  };
-  const handleBeforeToggle = (event: CustomEvent) => {
-    if (onBeforeToggle) {
-      onBeforeToggle(event);
-    }
-    if (disableToggle) {
-      event.preventDefault();
-    }
-  };
+export const Default = () => {
   return html`
     <cds-combo-box
-      ?open=${open}
-      color-scheme="${ifDefined(colorScheme)}"
-      ?disabled=${disabled}
-      ?invalid=${invalid}
-      helper-text=${helperText}
-      label-text=${labelText}
-      size="${ifDefined(size)}"
-      validity-message=${validityMessage}
-      value=${value}
-      trigger-content=${triggerContent}
-      type=${ifDefined(type)}
-      @cds-combo-box-beingselected=${handleBeforeSelect}
-      @cds-combo-box-beingtoggled=${handleBeforeToggle}
-      @cds-combo-box-selected=${onSelect}
-      @cds-combo-box-toggled=${onToggle}>
-      <cds-combo-box-item value="all">Option 1</cds-combo-box-item>
-      <cds-combo-box-item value="cloudFoundry">Option 2</cds-combo-box-item>
-      <cds-combo-box-item value="staging">Option 3</cds-combo-box-item>
-      <cds-combo-box-item value="dea">Option 4</cds-combo-box-item>
-      <cds-combo-box-item value="router">Option 5</cds-combo-box-item>
-      <cds-combo-box-item value="support">Option 6</cds-combo-box-item>
-      <cds-combo-box-item value="services">Option 7</cds-combo-box-item>
-      <cds-combo-box-item value="products">Option 8</cds-combo-box-item>
+      helper-text="Combobox helper text"
+      title-text="ComboBox title">
+      ${items.map(
+        (elem) => html`
+          <cds-combo-box-item ?disabled=${elem.disabled} value="${elem.value}"
+            >${elem.text}</cds-combo-box-item
+          >
+        `
+      )}
     </cds-combo-box>
   `;
 };
 
-Default.decorators = [
-  (story) => html` <div style="width:300px">${story()}</div> `,
-];
+export const WithLayer = () => {
+  return html`
+    <sb-template-layers>
+      <div style="width:400px">
+        <cds-combo-box
+          title-text="ComboBox label"
+          helper-text="Combobox helper text"
+          label="Dropdown menu options">
+          ${items.map(
+            (elem) => html`
+              <cds-combo-box-item
+                ?disabled=${elem.disabled}
+                value="${elem.value}"
+                >${elem.text}</cds-combo-box-item
+              >
+            `
+          )}
+        </cds-combo-box>
+      </div>
+    </sb-template-layers>
+  `;
+};
 
-Default.storyName = 'Default';
+export const Playground = (args) => {
+  const {
+    disabled,
+    helperText,
+    invalid,
+    titleText,
+    hideLabel,
+    direction,
+    readOnly,
+    warn,
+    warnText,
+    size,
+    label,
+    type,
+    invalidText,
+    value,
+  } = args?.[`${prefix}-combo-box`] ?? {};
+  return html`
+    <cds-combo-box
+      ?disabled="${disabled}"
+      ?hide-label=${hideLabel}
+      helper-text=${ifDefined(helperText)}
+      ?invalid=${invalid}
+      invalid-text=${invalidText}
+      direction="${direction}"
+      ?read-only=${readOnly}
+      title-text=${ifDefined(titleText)}
+      size="${ifDefined(size)}"
+      type="${ifDefined(type)}"
+      value=${ifDefined(value)}
+      label=${ifDefined(label)}
+      ?warn=${warn}
+      warn-text=${warnText}>
+      ${items.map(
+        (elem) => html`
+          <cds-combo-box-item ?disabled=${elem.disabled} value="${elem.value}"
+            >${elem.text}</cds-combo-box-item
+          >
+        `
+      )}
+    </cds-combo-box>
+  `;
+};
+
+Playground.parameters = {
+  knobs: {
+    [`${prefix}-combo-box`]: () => ({
+      direction: select(
+        'Direction',
+        directionOptions,
+        DROPDOWN_DIRECTION.BOTTOM
+      ),
+      disabled: boolean('Disabled (disabled)', false),
+      helperText: textNullable(
+        'Helper text (helper-text)',
+        'Optional helper text'
+      ),
+      hideLabel: boolean('Hide label (hide-label)', false),
+      invalid: boolean('Invalid (invalid)', false),
+      invalidText: textNullable(
+        'Invalid text (invalid-text)',
+        'invalid selection'
+      ),
+      readOnly: boolean('Read only (read-only)', false),
+      titleText: textNullable('Title text (title-text)', 'ComboBox title'),
+      size: select('Size (size)', sizes, null),
+      value: textNullable('Selected value (value)', ''),
+      label: textNullable('Placeholder (label)', ''),
+      warn: boolean('Warn (warn)', false),
+      warnText: textNullable(
+        'Warn text (warn-text)',
+        'please notice the warning'
+      ),
+    }),
+  },
+};
 
 export default {
   title: 'Components/Combo box',
   parameters: {
     ...storyDocs.parameters,
-    knobs: {
-      [`${prefix}-combo-box`]: () => ({
-        open: boolean('Open (open)', false),
-        colorScheme: select('Color scheme (color-scheme)', colorSchemes, null),
-        disabled: boolean('Disabled (disabled)', false),
-        helperText: text('Helper text (helper-text)', 'Optional helper text'),
-        invalid: boolean('Show invalid state  (invalid)', false),
-        labelText: text('Label text (label-text)', 'Combo box title'),
-        size: select('Dropdown size (size)', sizes, null),
-        triggerContent: text(
-          'The placeholder content (trigger-content)',
-          'Filter...'
-        ),
-        type: select('UI type (type)', types, null),
-        validityMessage: text('The validity message (validity-message)', ''),
-        value: text('The value of the selected item (value)', ''),
-        disableSelection: boolean(
-          `Disable user-initiated selection change (Call event.preventDefault() in ${prefix}-combo-box-beingselected event)`,
-          false
-        ),
-        disableToggle: boolean(
-          `Disable user-initiated toggle of open state (Call event.preventDefault() in ${prefix}-combo-box-beingtoggled event)`,
-          false
-        ),
-        onBeforeSelect: action(`${prefix}-combo-box-beingselected`),
-        onBeforeToggle: action(`${prefix}-combo-box-beingtoggled`),
-        onSelect: action(`${prefix}-combo-box-selected`),
-        onToggle: action(`${prefix}-combo-box-toggled`),
-      }),
-    },
   },
+  decorators: [
+    (story, { name }) => {
+      const width = !name.toLowerCase().includes('layer') ? `width:400px` : ``;
+      return html` <div style="${width}">${story()}</div> `;
+    },
+  ],
 };

@@ -183,7 +183,7 @@ const attachEventListeners = (
  * import { render } from 'react-dom';
  * import createCustomElementType, { booleanSerializer } from '/path/to/createCustomElementType';
  *
- * const BXDropdown = createCustomElementType(`${prefix}-dropdown`, {
+ * const CDSDropdown = createCustomElementType(`${prefix}-dropdown`, {
  *   disabled: {
  *     // Sets `disabled` attribute when the React prop value is truthy, unsets otherwise
  *     serialize: booleanSerializer,
@@ -200,14 +200,14 @@ const attachEventListeners = (
  *
  * render(
  *   (
- *     <BXDropdown
+ *     <CDSDropdown
  *       disabled={true}
  *       helperText="some-helper-text"
  *       onBeforeSelect={event => { console.log(`${prefix}-dropdown-beingselected is fired!`, event); }}>
  *       <cds-dropdown-item value="all">Option 1</cds-dropdown-item>
  *       <cds-dropdown-item value="cloudFoundry">Option 2</cds-dropdown-item>
  *       <cds-dropdown-item value="staging">Option 3</cds-dropdown-item>
- *     </BXDropdown>
+ *     </CDSDropdown>
  *   )
  *   document.body
  * );

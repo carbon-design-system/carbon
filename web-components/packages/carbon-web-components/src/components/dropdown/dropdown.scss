@@ -8,9 +8,11 @@
 $css--plex: true !default;
 
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/components/list-box/list-box' as *;
+@use '@carbon/styles/scss/components/dropdown' as *;
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/checkbox';
 @use '@carbon/styles/scss/components/tag';
@@ -34,11 +36,61 @@ $css--plex: true !default;
   .#{$prefix}--list-box__menu {
     top: 100%;
     margin-top: 1px;
+    outline: 1px solid $focus;
   }
-}
 
-:host(#{$prefix}-dropdown[type='inline']) {
-  @extend .#{$prefix}--list-box__wrapper--inline;
+  &[open] {
+    .#{$prefix}--list-box__field {
+      outline: none;
+    }
+  }
+
+  &[invalid] {
+    .#{$prefix}--list-box__field {
+      outline: none;
+    }
+
+    .#{$prefix}--form__helper-text {
+      color: $text-error;
+    }
+  }
+
+  &[read-only] {
+    @extend .#{$prefix}--dropdown--readonly;
+
+    .#{$prefix}--list-box {
+      background-color: transparent;
+      border-bottom-color: $border-subtle;
+    }
+  }
+
+  &[direction='top'] {
+    @extend .#{$prefix}--list-box--up;
+
+    .#{$prefix}--list-box__menu {
+      top: auto;
+    }
+  }
+
+  &[type='inline'] {
+    @extend .#{$prefix}--list-box__wrapper--inline;
+
+    grid-gap: 0 $spacing-06;
+
+    &[warn] {
+      .#{$prefix}--list-box__field {
+        padding-left: $spacing-05;
+        padding-right: calc(#{$spacing-08} + #{$spacing-05});
+      }
+    }
+
+    &[warn],
+    &[invalid] {
+      .#{$prefix}--form__helper-text {
+        grid-column: 2;
+      }
+    }
+  }
 }
 
 :host(#{$prefix}-dropdown-item) {
@@ -47,48 +99,49 @@ $css--plex: true !default;
   display: block;
 
   .#{$prefix}--list-box__menu-item__option {
-    height: 100%;
-  }
-}
-
-:host(#{$prefix}-dropdown-item[size='sm']) {
-  height: rem(32px);
-
-  .#{$prefix}--list-box__menu-item__option {
-    padding-top: rem(7px);
-    padding-bottom: rem(7px);
-  }
-}
-
-:host(#{$prefix}-dropdown-item[size='xl']) {
-  height: rem(48px);
-
-  .#{$prefix}--list-box__menu-item__option {
-    padding-top: rem(15px);
-    padding-bottom: rem(15px);
-  }
-}
-
-:host(#{$prefix}-dropdown-item[disabled])
-  .#{$prefix}--list-box__menu-item__option {
-  color: $text-disabled;
-  text-decoration: none;
-}
-
-:host(#{$prefix}-dropdown-item[highlighted]) {
-  @extend .#{$prefix}--list-box__menu-item--highlighted;
-}
-
-:host(#{$prefix}-dropdown-item[selected]) {
-  @extend .#{$prefix}--list-box__menu-item--active;
-  @extend .#{$prefix}--list-box__menu-item--highlighted;
-
-  .#{$prefix}--list-box__menu-item__option {
-    color: $text-primary;
+    height: auto;
   }
 
-  .#{$prefix}--list-box__menu-item__selected-icon {
-    display: block;
+  &[highlighted] {
+    @extend .#{$prefix}--list-box__menu-item--highlighted;
+  }
+
+  &[disabled] {
+    .#{$prefix}--list-box__menu-item__option {
+      color: $text-disabled;
+      text-decoration: none;
+    }
+  }
+
+  &[selected] {
+    @extend .#{$prefix}--list-box__menu-item--active;
+    @extend .#{$prefix}--list-box__menu-item--highlighted;
+
+    .#{$prefix}--list-box__menu-item__option {
+      color: $text-primary;
+    }
+
+    .#{$prefix}--list-box__menu-item__selected-icon {
+      display: block;
+    }
+  }
+
+  &[size='sm'] {
+    height: $spacing-07;
+
+    .#{$prefix}--list-box__menu-item__option {
+      padding-top: rem(7px);
+      padding-bottom: rem(7px);
+    }
+  }
+
+  &[size='lg'] {
+    height: $spacing-09;
+
+    .#{$prefix}--list-box__menu-item__option {
+      padding-top: rem(15px);
+      padding-bottom: rem(15px);
+    }
   }
 }
 

@@ -11,7 +11,7 @@ import { html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined';
 import { prefix } from '../../globals/settings';
-import BXDropdownItem from '../dropdown/dropdown-item';
+import CDSDropdownItem from '../dropdown/dropdown-item';
 import styles from './multi-select.scss';
 
 /**
@@ -20,7 +20,7 @@ import styles from './multi-select.scss';
  * @element cds-multi-select-item
  */
 @customElement(`${prefix}-multi-select-item`)
-class BXMultiSelectItem extends BXDropdownItem {
+class CDSMultiSelectItem extends CDSDropdownItem {
   /**
    * The property to hide when item is filtered from input
    */
@@ -66,4 +66,4 @@ class BXMultiSelectItem extends BXDropdownItem {
   static styles = styles;
 }
 
-export default BXMultiSelectItem;
+export default CDSMultiSelectItem;

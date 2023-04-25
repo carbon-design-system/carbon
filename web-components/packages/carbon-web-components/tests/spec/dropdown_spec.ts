@@ -11,12 +11,12 @@ import { delay } from 'bluebird';
 import { render } from 'lit';
 import EventManager from '../utils/event-manager';
 
-import BXDropdown from '../../src/components/dropdown/dropdown';
-import BXDropdownItem from '../../src/components/dropdown/dropdown-item';
-import { Default } from '../../src/components/dropdown/dropdown-story';
+import CDSDropdown from '../../src/components/dropdown/dropdown';
+import CDSDropdownItem from '../../src/components/dropdown/dropdown-item';
+import { Playground } from '../../src/components/dropdown/dropdown-story';
 
 const template = (props?) =>
-  Default({
+  Playground({
     'cds-dropdown': props,
   });
 
@@ -75,7 +75,7 @@ describe('cds-dropdown', function () {
     });
 
     it('should remove "open" stateful modifier class (closed default state)', async function () {
-      (elem as BXDropdown).open = true;
+      (elem as CDSDropdown).open = true;
       await Promise.resolve();
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (inner as HTMLElement).click();
@@ -84,7 +84,7 @@ describe('cds-dropdown', function () {
     });
 
     it('should always close dropdown when clicking document', async function () {
-      (elem as BXDropdown).open = true;
+      (elem as CDSDropdown).open = true;
       await Promise.resolve();
       elem.dispatchEvent(new CustomEvent('focusout'));
       await Promise.resolve();
@@ -93,7 +93,7 @@ describe('cds-dropdown', function () {
     });
 
     it('should close dropdown when clicking on an item', async function () {
-      (elem as BXDropdown).open = true;
+      (elem as CDSDropdown).open = true;
       await Promise.resolve();
       (itemNode as HTMLElement).click();
       await Promise.resolve();
@@ -112,7 +112,7 @@ describe('cds-dropdown', function () {
     });
 
     it('should provide a way to cancel closing', async function () {
-      (elem as BXDropdown).open = true;
+      (elem as CDSDropdown).open = true;
       await Promise.resolve();
       events.on(elem, 'cds-dropdown-beingtoggled', (event: CustomEvent) => {
         event.preventDefault();
@@ -168,11 +168,11 @@ describe('cds-dropdown', function () {
         ) as HTMLElement
       ).click();
       await Promise.resolve();
-      expect((elem as BXDropdown).value).toBe('staging');
+      expect((elem as CDSDropdown).value).toBe('staging');
     });
 
     it('should provide a way to switch item with a value', async function () {
-      (elem as BXDropdown).value = 'staging';
+      (elem as CDSDropdown).value = 'staging';
       await Promise.resolve(); // Update cycle for `<cds-dropdown>`
       await Promise.resolve(); // Update cycle for `<cds-dropdown-item>`
       expect(itemNodes[0].hasAttribute('selected')).toBe(false);
@@ -208,9 +208,9 @@ describe('cds-dropdown', function () {
     it('should reflect the added child to the selection', async function () {
       const itemNode = document.createElement('cds-dropdown-item');
       itemNode.textContent = 'text-added';
-      (itemNode as unknown as BXDropdownItem).value = 'value-added';
+      (itemNode as unknown as CDSDropdownItem).value = 'value-added';
       elem.appendChild(itemNode);
-      (elem as BXDropdown).value = 'value-added';
+      (elem as CDSDropdown).value = 'value-added';
       await delay(0); // Workaround for IE MutationObserver scheduling bug for moving elements to slot
       try {
         expect(
@@ -232,7 +232,7 @@ describe('cds-dropdown', function () {
     });
 
     it('should support checking if required value exists', async function () {
-      const dropdown = elem as BXDropdown;
+      const dropdown = elem as CDSDropdown;
       dropdown.required = true;
       const spyInvalid = jasmine.createSpy('invalid');
       events.on(dropdown, 'invalid', spyInvalid);
@@ -247,7 +247,7 @@ describe('cds-dropdown', function () {
     });
 
     it('should support canceling required check', async function () {
-      const dropdown = elem as BXDropdown;
+      const dropdown = elem as CDSDropdown;
       dropdown.required = true;
       events.on(dropdown, 'invalid', (event) => {
         event.preventDefault();
@@ -258,14 +258,14 @@ describe('cds-dropdown', function () {
     });
 
     it('should treat empty custom validity message as not invalid', async function () {
-      const dropdown = elem as BXDropdown;
+      const dropdown = elem as CDSDropdown;
       dropdown.setCustomValidity('');
       expect(dropdown.invalid).toBe(false);
       expect(dropdown.validityMessage).toBe('');
     });
 
     it('should treat non-empty custom validity message as invalid', async function () {
-      const dropdown = elem as BXDropdown;
+      const dropdown = elem as CDSDropdown;
       dropdown.setCustomValidity('validity-message-foo');
       expect(dropdown.invalid).toBe(true);
       expect(dropdown.validityMessage).toBe('validity-message-foo');

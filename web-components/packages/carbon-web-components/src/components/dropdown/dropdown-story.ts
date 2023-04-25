@@ -8,30 +8,24 @@
  */
 
 import { html } from 'lit';
-import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
 import { prefix } from '../../globals/settings';
 import textNullable from '../../../.storybook/knob-text-nullable';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import {
-  DROPDOWN_COLOR_SCHEME,
-  DROPDOWN_SIZE,
-  DROPDOWN_TYPE,
-} from './dropdown';
+import { DROPDOWN_DIRECTION, DROPDOWN_SIZE, DROPDOWN_TYPE } from './dropdown';
 import './dropdown-item';
 import './dropdown-skeleton';
 import storyDocs from './dropdown-story.mdx';
 
-const colorSchemes = {
-  [`Regular`]: null,
-  [`Light (${DROPDOWN_COLOR_SCHEME.LIGHT})`]: DROPDOWN_COLOR_SCHEME.LIGHT,
+const directionOptions = {
+  [`Top`]: DROPDOWN_DIRECTION.TOP,
+  [`Bottom`]: DROPDOWN_DIRECTION.BOTTOM,
 };
 
 const sizes = {
-  'Regular size': null,
   [`Small size (${DROPDOWN_SIZE.SMALL})`]: DROPDOWN_SIZE.SMALL,
-  [`Extra large size (${DROPDOWN_SIZE.EXTRA_LARGE})`]:
-    DROPDOWN_SIZE.EXTRA_LARGE,
+  'Regular size': null,
+  [`Large size (${DROPDOWN_SIZE.LARGE})`]: DROPDOWN_SIZE.LARGE,
 };
 
 const types = {
@@ -39,100 +33,194 @@ const types = {
   [`Inline (${DROPDOWN_TYPE.INLINE})`]: DROPDOWN_TYPE.INLINE,
 };
 
-export const Default = (args) => {
-  const {
-    open,
-    colorScheme,
-    disabled,
-    helperText,
-    labelText,
-    size,
-    type,
-    value,
-    triggerContent,
-    disableSelection,
-    disableToggle,
-    onBeforeSelect,
-    onBeforeToggle,
-    onSelect,
-    onToggle,
-  } = args?.[`${prefix}-dropdown`] ?? {};
-  const handleBeforeSelect = (event: CustomEvent) => {
-    if (onBeforeSelect) {
-      onBeforeSelect(event);
-    }
-    if (disableSelection) {
-      event.preventDefault();
-    }
-  };
-  const handleBeforeToggle = (event: CustomEvent) => {
-    if (onBeforeToggle) {
-      onBeforeToggle(event);
-    }
-    if (disableToggle) {
-      event.preventDefault();
-    }
-  };
+const items = [
+  {
+    value: 'option-0',
+    text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+  },
+  {
+    value: 'option-1',
+    text: 'Option 1',
+  },
+  {
+    value: 'option-2',
+    text: 'Option 2',
+  },
+  {
+    value: 'option-3',
+    text: 'Option 3 - a disabled item',
+    disabled: true,
+  },
+  {
+    value: 'option-4',
+    text: 'Option 4',
+  },
+  {
+    value: 'option-5',
+    text: 'Option 5',
+  },
+];
+
+export const Default = () => {
   return html`
     <cds-dropdown
-      ?open=${open}
-      color-scheme="${ifDefined(colorScheme)}"
-      ?disabled=${disabled}
-      helper-text=${ifDefined(helperText)}
-      label-text=${ifDefined(labelText)}
-      size="${ifDefined(size)}"
-      type="${ifDefined(type)}"
-      value=${ifDefined(value)}
-      trigger-content=${ifDefined(triggerContent)}
-      @cds-dropdown-beingselected=${handleBeforeSelect}
-      @cds-dropdown-beingtoggled=${handleBeforeToggle}
-      @cds-dropdown-selected=${onSelect}
-      @cds-dropdown-toggled=${onToggle}>
-      <cds-dropdown-item value="all">Option 1</cds-dropdown-item>
-      <cds-dropdown-item value="cloudFoundry">Option 2</cds-dropdown-item>
-      <cds-dropdown-item value="staging">Option 3</cds-dropdown-item>
-      <cds-dropdown-item value="dea">Option 4</cds-dropdown-item>
-      <cds-dropdown-item value="router">Option 5</cds-dropdown-item>
+      helper-text="This is some helper text"
+      title-text="Dropdown label"
+      label="Dropdown menu options">
+      ${items.map(
+        (elem) => html`
+          <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
+            >${elem.text}</cds-dropdown-item
+          >
+        `
+      )}
     </cds-dropdown>
   `;
 };
 
-Default.decorators = [
-  (story) => html` <div style="width:300px">${story()}</div> `,
-];
+export const Inline = () => {
+  return html`
+    <cds-dropdown
+      type="inline"
+      title-text="Inline dropdown label"
+      label="Dropdown menu options">
+      ${items.map(
+        (elem) => html`
+          <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
+            >${elem.text}</cds-dropdown-item
+          >
+        `
+      )}
+    </cds-dropdown>
+  `;
+};
 
-Default.storyName = 'Default';
+export const InlineWithLayer = () => {
+  return html`
+    <sb-template-layers>
+      <div style="width:400px">
+        <cds-dropdown
+          type="inline"
+          title-text="Inline dropdown label"
+          label="Dropdown menu options">
+          ${items.map(
+            (elem) => html`
+              <cds-dropdown-item
+                ?disabled=${elem.disabled}
+                value="${elem.value}"
+                >${elem.text}</cds-dropdown-item
+              >
+            `
+          )}
+        </cds-dropdown>
+      </div>
+    </sb-template-layers>
+  `;
+};
 
-Default.parameters = {
+export const WithLayer = () => {
+  return html`
+    <sb-template-layers>
+      <div style="width:400px">
+        <cds-dropdown
+          title-text="Dropdown label"
+          helper-text="This is some helper text"
+          label="Dropdown menu options">
+          ${items.map(
+            (elem) => html`
+              <cds-dropdown-item
+                ?disabled=${elem.disabled}
+                value="${elem.value}"
+                >${elem.text}</cds-dropdown-item
+              >
+            `
+          )}
+        </cds-dropdown>
+      </div>
+    </sb-template-layers>
+  `;
+};
+
+export const Playground = (args) => {
+  const {
+    open,
+    direction,
+    disabled,
+    helperText,
+    hideLabel,
+    invalid,
+    invalidText,
+    titleText,
+    readOnly,
+    size,
+    type,
+    value,
+    label,
+    warn,
+    warnText,
+  } = args?.[`${prefix}-dropdown`] ?? {};
+
+  return html`
+    <cds-dropdown
+      ?open=${open}
+      ?disabled="${disabled}"
+      ?hide-label=${hideLabel}
+      helper-text=${ifDefined(helperText)}
+      ?invalid=${invalid}
+      ?read-only=${readOnly}
+      invalid-text=${invalidText}
+      direction="${direction}"
+      title-text=${ifDefined(titleText)}
+      size="${ifDefined(size)}"
+      type="${ifDefined(type)}"
+      value=${ifDefined(value)}
+      label=${ifDefined(label)}
+      ?warn=${warn}
+      warn-text=${warnText}>
+      ${items.map(
+        (elem) => html`
+          <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
+            >${elem.text}</cds-dropdown-item
+          >
+        `
+      )}
+    </cds-dropdown>
+  `;
+};
+
+Playground.parameters = {
   knobs: {
     [`${prefix}-dropdown`]: () => ({
       open: boolean('Open (open)', false),
-      colorScheme: select('Color scheme (color-scheme)', colorSchemes, null),
+      direction: select('Direction', directionOptions, null),
       disabled: boolean('Disabled (disabled)', false),
       helperText: textNullable(
         'Helper text (helper-text)',
-        'Optional helper text'
+        'This is some helper text'
       ),
-      labelText: textNullable('Label text (label-text)', 'Dropdown title'),
+      hideLabel: boolean('Hide label (hide-label)', false),
+      invalid: boolean('Invalid (invalid)', false),
+      invalidText: textNullable(
+        'Invalid text (invalid-text)',
+        'invalid selection'
+      ),
+      readOnly: boolean('Read only (read-only)', false),
+      label: textNullable(
+        'The default content of the trigger button (label)',
+        'This is an example label'
+      ),
+      titleText: textNullable(
+        'Title text (title-text)',
+        'This is an example title'
+      ),
       size: select('Dropdown size (size)', sizes, null),
       type: select('Dropdown type (type)', types, null),
-      value: textNullable('The value of the selected item (value)', ''),
-      triggerContent: textNullable(
-        'The default content of the trigger button (trigger-content)',
-        'Select an item'
+      value: textNullable('Selected value (value)', ''),
+      warn: boolean('Warn (warn)', false),
+      warnText: textNullable(
+        'Warn text (warn-text)',
+        'please notice the warning'
       ),
-      disableSelection: boolean(
-        `Disable user-initiated selection change (Call event.preventDefault() in ${prefix}-dropdown-beingselected event)`,
-        false
-      ),
-      disableToggle: boolean(
-        `Disable user-initiated toggle of open state (Call event.preventDefault() in ${prefix}-dropdown-beingtoggled event)`,
-        false
-      ),
-      onBeforeSelect: action(`${prefix}-dropdown-beingselected`),
-      onBeforeToggle: action(`${prefix}-dropdown-beingtoggled`),
-      onSelect: action(`${prefix}-dropdown-selected`),
-      onToggle: action(`${prefix}-dropdown-toggled`),
     }),
   },
 };
@@ -151,4 +239,10 @@ export default {
   parameters: {
     ...storyDocs.parameters,
   },
+  decorators: [
+    (story, { name }) => {
+      const width = !name.toLowerCase().includes('layer') ? `width:400px` : ``;
+      return html` <div style="${width}">${story()}</div> `;
+    },
+  ],
 };
