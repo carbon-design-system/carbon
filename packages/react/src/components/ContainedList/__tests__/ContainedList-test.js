@@ -110,9 +110,6 @@ describe('ContainedList', () => {
     );
 
     expect(screen.getByTestId('test-id')).toBeInTheDocument();
-    expect(screen.getByRole('search').parentElement).toHaveClass(
-      `${prefix}--contained-list__search`
-    );
   });
 
   it('should not render a child "Search" component when an "ExpandableSearch" component is passed in as an action', () => {
