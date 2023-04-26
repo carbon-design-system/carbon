@@ -36,6 +36,10 @@
     }
   }
 
+  .#{$prefix}--tree-node--with-icon .#{$prefix}--tree-node {
+    margin-left: $spacing-03;
+  }
+
   .#{$prefix}--tree-node:focus > .#{$prefix}--tree-node__label {
     @include focus-outline('outline');
   }
@@ -109,6 +113,11 @@
     padding-left: $spacing-07;
   }
 
+  .#{$prefix}--tree-leaf-node.#{$prefix}--tree-node--with-icon
+    .#{$prefix}--tree-leaf-node {
+    padding-left: $spacing-06;
+  }
+
   .#{$prefix}--tree-node__label__details {
     display: flex;
     align-items: center;
@@ -128,6 +137,7 @@
     border: 0;
     margin-top: $spacing-02;
     margin-right: $spacing-02;
+    margin-left: -$spacing-02;
 
     &:hover {
       cursor: pointer;
@@ -154,7 +164,14 @@
     align-self: flex-start;
     margin-top: rem(1px);
     margin-right: $spacing-03;
+    margin-left: $spacing-03;
     fill: $icon-secondary;
+  }
+
+  .#{$prefix}--tree-parent-node__toggle
+    + .#{$prefix}--tree-node__label__details
+    .#{$prefix}--tree-node__icon {
+    margin-left: $spacing-02;
   }
 
   .#{$prefix}--tree-node--selected > .#{$prefix}--tree-node__label {
