@@ -8,7 +8,7 @@
  */
 
 import React, { Component, createElement, forwardRef } from 'react';
-import on from 'carbon-components/es/globals/js/misc/on';
+import on from '../mixins/on';
 import Handle from '../internal/handle';
 
 /**

@@ -9,7 +9,7 @@
 
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
-import on from 'carbon-components/es/globals/js/misc/on';
+import on from '../../globals/mixins/on';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
