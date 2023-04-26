@@ -120,10 +120,11 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   }
 
   useEffect(() => {
-    if (expanded && !isPersistent) {
+    console.log(isFixedNav);
+    if (expanded && !isFixedNav) {
       document.getElementById(`${prefix}--side-nav__navigation`).focus();
     }
-  }, [expanded, isPersistent, prefix]);
+  }, [expanded, isFixedNav, prefix]);
 
   return (
     <>
