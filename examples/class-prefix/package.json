@@ -1,14 +1,14 @@
 {
   "name": "class-prefix",
   "private": true,
-  "version": "0.24.0",
+  "version": "0.25.0-rc.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/react": "^1.27.0",
+    "@carbon/react": "^1.28.0-rc.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
