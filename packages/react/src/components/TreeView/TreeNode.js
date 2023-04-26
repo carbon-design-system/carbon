@@ -136,20 +136,25 @@ export default function TreeNode({
      * Negative margin shifts node to align with the left side boundary of the
      * tree
      * Dynamically calculate padding to recreate tree node indentation
+     * - parent nodes with icon have (depth + 1rem + depth * 0.5) left padding
      * - parent nodes have (depth + 1rem) left padding
      * - leaf nodes have (depth + 2.5rem) left padding without icons (because
      *   of expand icon + spacing)
-     * - leaf nodes have (depth + 2rem) left padding with icons (because of
+     * - leaf nodes have (depth + 2rem + depth * 0.5) left padding with icons (because of
      *   reduced spacing between the expand icon and the node icon + label)
      */
     const calcOffset = () => {
-      // parent node
+      // parent node with icon
+      if (children && Icon) {
+        return depth + 1 + depth * 0.5;
+      }
+      // parent node without icon
       if (children) {
         return depth + 1;
       }
       // leaf node with icon
       if (Icon) {
-        return depth + 2;
+        return depth + 2 + depth * 0.5;
       }
       // leaf node without icon
       return depth + 2.5;

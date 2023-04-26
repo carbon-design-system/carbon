@@ -1119,7 +1119,6 @@
         "a11y"
       ]
     },
-
     {
       "login": "gerzonc",
       "name": "Gerzon",
@@ -1127,6 +1126,25 @@
       "profile": "https://github.com/gerzonc",
       "contributions": [
         "code"
+      ]
+    },
+    {
+      "login": "kubijo",
+      "name": "kubijo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11244314?v=4",
+      "profile": "https://github.com/kubijo",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "sjbeatle",
+      "name": "Steven Black",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7853451?v=4",
+      "profile": "http://www.steveblackonline.com/",
+      "contributions": [
+        "code",
+        "a11y"
       ]
     }
   ],
