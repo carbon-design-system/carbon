@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
+import PropTypes, { ReactNodeLike } from 'prop-types';
 import React, {
   useContext,
   useEffect,
@@ -13,6 +13,8 @@ import React, {
   useImperativeHandle,
   useCallback,
   useState,
+  ChangeEventHandler,
+  ForwardedRef,
 } from 'react';
 import cx from 'classnames';
 import flatpickr from 'flatpickr';
@@ -27,6 +29,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { useSavedCallback } from '../../internal/useSavedCallback';
 import { FormContext } from '../FluidForm';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
+import { ReactAttr } from '../../types/common';
 
 // Weekdays shorthand for english locale
 l10n.en.weekdays.shorthand.forEach((_day, index) => {
@@ -183,6 +186,214 @@ function updateClassNames(calendar, prefix) {
     });
   }
 }
+type ExcludedAttributes = 'value' | 'onChange' | 'locale';
+export type DatePickerTypes = 'simple' | 'single' | 'range';
+export type CalRef = {
+  inline: boolean;
+  disableMobile: boolean;
+  defaultDate: Date;
+  closeOnSelect: (evt: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  mode: 'simple' | 'single' | 'range';
+  allowInput: boolean;
+  dateFormat: string;
+  locale: string;
+  plugins: [];
+  clickOpens: any;
+};
+interface DatePickerProps
+  extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes> {
+  /**
+   * flatpickr prop passthrough. Allows the user to enter a date directly
+   * into the input field
+   */
+  allowInput: boolean | undefined;
+
+  /**
+   * The DOM element the flatpickr should be inserted into `<body>` by default.
+   */
+  appendTo: object | undefined;
+
+  /**
+   * The child nodes.
+   */
+  children: React.ReactNode | object;
+
+  /**
+   * The CSS class names.
+   */
+  className: string | undefined;
+
+  /**
+   * flatpickr prop passthrough. Controls whether the calendar dropdown closes upon selection.
+   */
+  closeOnSelect: boolean | undefined;
+
+  /**
+   * The date format.
+   */
+  dateFormat?: string;
+
+  /**
+   * The type of the date picker:
+   *
+   * * `simple` - Without calendar dropdown.
+   * * `single` - With calendar dropdown and single date.
+   * * `range` - With calendar dropdown and a date range.
+   */
+  datePickerType?: DatePickerTypes;
+
+  /**
+   * The flatpickr `disable` option that allows a user to disable certain dates.
+   */
+  disable?: string[];
+
+  /**
+   * The flatpickr `enable` option that allows a user to enable certain dates.
+   */
+  enable?: string[];
+
+  /**
+   * The flatpickr `inline` option.
+   */
+  inline: boolean | undefined;
+
+  /**
+   * Specify whether or not the control is invalid (Fluid only)
+   */
+  invalid: boolean | undefined;
+
+  /**
+   * Provide the text that is displayed when the control is in error state (Fluid Only)
+   */
+  invalidText: ReactNodeLike;
+
+  /**
+   * `true` to use the light version.
+   */
+  light: boolean;
+
+  /**
+   *  The language locale used to format the days of the week, months, and numbers. The full list of supported locales can be found here https://github.com/flatpickr/flatpickr/tree/master/src/l10n
+   */
+  locale?:
+    | string
+    | any
+    | 'ar' // Arabic
+    | 'at' // Austria
+    | 'az' // Azerbaijan
+    | 'be' // Belarusian
+    | 'bg' // Bulgarian
+    | 'bn' // Bangla
+    | 'bs' // Bosnia
+    | 'cat' // Catalan
+    | 'cs' // Czech
+    | 'cy' // Welsh
+    | 'da' // Danish
+    | 'de' // German
+    | 'en' // English
+    | 'eo' // Esperanto
+    | 'es' // Spanish
+    | 'et' // Estonian
+    | 'fa' // Persian
+    | 'fi' // Finnish
+    | 'fo' // Faroese
+    | 'fr' // French
+    | 'ga' // Gaelic
+    | 'gr' // Greek
+    | 'he' // Hebrew
+    | 'hi' // Hindi
+    | 'hr' // Croatian
+    | 'hu' // Hungarian
+    | 'id' // Indonesian
+    | 'is' // Icelandic
+    | 'it' // Italian
+    | 'ja' // Japanese
+    | 'ka' // Georgian
+    | 'km' // Khmer
+    | 'ko' // Korean
+    | 'kz' // Kazakh
+    | 'lt' // Lithuanian
+    | 'lv' // Latvian
+    | 'mk' // Macedonian
+    | 'mn' // Mongolian
+    | 'ms' // Malaysian
+    | 'my' // Burmese
+    | 'nl' // Dutch
+    | 'no' // Norwegian
+    | 'pa' // Punjabi
+    | 'pl' // Polish
+    | 'pt' // Portuguese
+    | 'ro' // Romanian
+    | 'ru' // Russian
+    | 'si' // Sinhala
+    | 'sk' // Slovak
+    | 'sl' // Slovenian
+    | 'sq' // Albanian
+    | 'sr' // Serbian
+    | 'sv' // Swedish
+    | 'th' // Thai
+    | 'tr' // Turkish
+    | 'uk' // Ukrainian
+    | 'uz' // Uzbek
+    | 'uz_latn' // Uzbek Latin
+    | 'vn' // Vietnamese
+    | 'zh_tw' // Mandarin Traditional
+    | 'zh'
+    | undefined; // Mandarin;
+
+  /**
+   * The maximum date that a user can pick to.
+   */
+  maxDate?: string;
+
+  /**
+   * The minimum date that a user can start picking from.
+   */
+  minDate?: string;
+
+  /**
+   * The `change` event handler.
+   */
+  onChange?: ChangeEventHandler<HTMLSelectElement>;
+
+  /**
+   * The `close` event handler.
+   */
+  onClose?: any;
+
+  /**
+   * The `open` event handler.
+   */
+  onOpen?: ChangeEventHandler<HTMLSelectElement>;
+
+  /**
+   * whether the DatePicker is to be readOnly
+   * if boolean applies to all inputs
+   * if array applies to each input in order
+   */
+  readOnly?: boolean | [] | any | undefined;
+
+  /**
+   * `true` to use the short version.
+   */
+  short?: boolean;
+
+  /**
+   * The value of the date value provided to flatpickr, could
+   * be a date, a date number, a date string, an array of dates.
+   */
+  value?: string | number | (string | number | object)[] | object | undefined;
+
+  /**
+   * Specify whether the control is currently in warning state (Fluid only)
+   */
+  warn?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state (Fluid only)
+   */
+  warnText: ReactNodeLike;
+}
 
 const DatePicker = React.forwardRef(function DatePicker(
   {
@@ -211,19 +422,18 @@ const DatePicker = React.forwardRef(function DatePicker(
     short = false,
     value,
     ...rest
-  },
-  ref
+  }: DatePickerProps,
+  ref: ForwardedRef<HTMLDivElement>
 ) {
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
   const [hasInput, setHasInput] = useState(false);
-  const startInputField = useCallback((node) => {
+  const startInputField: any = useCallback((node) => {
     if (node !== null) {
       startInputField.current = node;
       setHasInput(true);
     }
   }, []);
-  const endInputField = useRef(null);
 
   const lastStartValue = useRef('');
 
@@ -237,7 +447,7 @@ const DatePicker = React.forwardRef(function DatePicker(
       ) {
         startInputField.current.value = lastStartValue.current;
         calendarRef.current.setDate(
-          [startInputField.current.value, endInputField.current.value],
+          [startInputField.current.value, endInputField?.current?.value],
           true,
           calendarRef.current.config.dateFormat
         );
@@ -252,12 +462,14 @@ const DatePicker = React.forwardRef(function DatePicker(
     });
   };
 
-  const calendarRef = useRef(null);
-  const savedOnChange = useSavedCallback(onChange);
+  //const savedOnOpen = useSavedCallback(onOpen);
+  const endInputField = useRef<HTMLTextAreaElement>(null);
+  const calendarRef: any | undefined = useRef(null);
+  const savedOnChange = useSavedCallback(() => onChange);
   const savedOnClose = useSavedCallback(
     datePickerType === 'range' ? onCalendarClose : onClose
   );
-  const savedOnOpen = useSavedCallback(onOpen);
+  const savedOnOpen = useSavedCallback(() => onOpen);
 
   const datePickerClasses = cx(`${prefix}--date-picker`, {
     [`${prefix}--date-picker--short`]: short,
@@ -268,10 +480,12 @@ const DatePicker = React.forwardRef(function DatePicker(
     [`${prefix}--date-picker--nolabel`]:
       datePickerType === 'range' && isLabelTextEmpty(children),
   });
-  const wrapperClasses = cx(`${prefix}--form-item`, { [className]: className });
+  const wrapperClasses = cx(`${prefix}--form-item`, {
+    [String(className)]: className,
+  });
 
   const childrenWithProps = React.Children.toArray(children).map(
-    (child, index) => {
+    (child: any, index) => {
       if (
         index === 0 &&
         child.type === React.createElement(DatePickerInput, child.props).type
@@ -328,7 +542,7 @@ const DatePicker = React.forwardRef(function DatePicker(
 
     // Logic to determine if `enable` or `disable` will be passed down. If neither
     // is provided, we return the default empty disabled array, allowing all dates.
-    let enableOrDisable = enable ? 'enable' : 'disable';
+    const enableOrDisable = enable ? 'enable' : 'disable';
     let enableOrDisableArr;
     if (!enable && !disable) {
       enableOrDisableArr = [];
@@ -340,7 +554,7 @@ const DatePicker = React.forwardRef(function DatePicker(
 
     let localeData;
     if (typeof locale === 'object') {
-      let location = locale.locale ? locale.locale : 'en';
+      const location = locale.locale ? locale.locale : 'en';
       localeData = { ...l10n[location], ...locale };
     } else {
       localeData = l10n[locale];
@@ -348,7 +562,7 @@ const DatePicker = React.forwardRef(function DatePicker(
 
     const { current: start } = startInputField;
     const { current: end } = endInputField;
-    const calendar = new flatpickr(start, {
+    const flatpickerconfig: any = {
       inline: inline ?? false,
       disableMobile: true,
       defaultDate: value,
@@ -396,12 +610,13 @@ const DatePicker = React.forwardRef(function DatePicker(
       onReady: onHook,
       onMonthChange: onHook,
       onYearChange: onHook,
-      onOpen: (...args) => {
+      onOpen: (...args: [any, string, string, string]) => {
         onHook(...args);
         savedOnOpen(...args);
       },
       onValueUpdate: onHook,
-    });
+    };
+    const calendar = flatpickr(start, flatpickerconfig);
 
     calendarRef.current = calendar;
 
@@ -421,10 +636,10 @@ const DatePicker = React.forwardRef(function DatePicker(
         const todayDateElem =
           calendarContainer.querySelector('.today') && fptodayDateElem;
         (
-          selectedDateElem ||
-          todayDateElem ||
-          calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
-          calendarContainer
+          (selectedDateElem ||
+            todayDateElem ||
+            calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
+            calendarContainer) as HTMLElement
         ).focus();
       }
     }
@@ -511,7 +726,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   // this hook allows consumers to access the flatpickr calendar
   // instance for cases where functions like open() or close()
   // need to be imperatively called on the calendar
-  useImperativeHandle(ref, () => ({
+  useImperativeHandle(ref, (): any => ({
     get calendar() {
       return calendarRef.current;
     },
