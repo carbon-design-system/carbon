@@ -33,6 +33,7 @@ const SideNavItems = ({
   return <ul className={className}>{childrenWithExpandedState}</ul>;
 };
 
+SideNavItems.displayName = 'SideNavItems';
 SideNavItems.propTypes = {
   /**
    * Provide a single icon as the child to `SideNavIcon` to render in the
