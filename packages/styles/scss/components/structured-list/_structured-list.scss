@@ -81,24 +81,52 @@
 
   .#{$prefix}--structured-list-row {
     display: table-row;
-    border-bottom: 1px solid $border-subtle;
+    border-top: 1px solid $border-subtle;
     transition: background-color motion.$duration-fast-02
       motion.motion(standard, productive);
   }
 
+  .#{$prefix}--structured-list-tbody
+    .#{$prefix}--structured-list-row:last-child {
+    border-bottom: 1px solid $border-subtle;
+  }
+
+  .#{$prefix}--structured-list-row--header-row {
+    border: none;
+  }
+
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row):not(.#{$prefix}--structured-list-row--selected) {
-    border-bottom: 1px solid $background-hover;
-    background-color: $background-hover;
+    border-color: $layer-hover;
+    background-color: $layer-hover;
     cursor: pointer;
   }
 
-  .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected {
-    background-color: $background-selected;
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row):not(.#{$prefix}--structured-list-row--selected)
+    + .#{$prefix}--structured-list-row {
+    border-color: $layer-hover;
+  }
+
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected {
+    border-color: $layer-selected;
+    background-color: $layer-selected;
+  }
+
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row--selected
+    + .#{$prefix}--structured-list-row {
+    border-color: $layer-selected;
+  }
+
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected
+    .#{$prefix}--structured-list-td {
+    color: $text-primary;
   }
 
   .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--header-row {
-    border-bottom: 1px solid $background-selected;
     cursor: inherit;
   }
 
@@ -110,19 +138,10 @@
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row)
     > .#{$prefix}--structured-list-td,
-  .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected
     > .#{$prefix}--structured-list-td {
     color: $text-primary;
-  }
-
-  .#{$prefix}--structured-list--selection
-    .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row)
-    > .#{$prefix}--structured-list-td {
-    @if enabled('enable-v11-release') {
-      border-top: 1px solid $border-subtle;
-    } @else {
-      border-top: 1px solid $layer;
-    }
   }
 
   .#{$prefix}--structured-list-thead {
@@ -158,9 +177,6 @@
     display: table-cell;
     max-width: 36rem;
     color: $text-secondary;
-    @if enabled('enable-v11-release') {
-      border-top: 1px solid $border-subtle;
-    }
 
     transition: color motion.$duration-fast-02
       motion.motion(standard, productive);
