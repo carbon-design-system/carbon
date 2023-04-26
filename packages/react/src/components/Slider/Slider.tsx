@@ -798,9 +798,10 @@ export default class Slider extends PureComponent<SliderProps> {
             `${prefix}--slider-text-input`,
             {
               [`${prefix}--text-input--light`]: light,
-              [`${prefix}--text-input--invalid`]: isValid === false,
+              [`${prefix}--text-input--invalid`]:
+                !readOnly && isValid === false,
               [`${prefix}--slider-text-input--hidden`]: hideTextInput,
-              [`${prefix}--slider-text-input--warn`]: warn,
+              [`${prefix}--slider-text-input--warn`]: !readOnly && warn,
             }
           );
 
@@ -876,19 +877,19 @@ export default class Slider extends PureComponent<SliderProps> {
                   aria-invalid={isValid ? undefined : true}
                   readOnly={readOnly}
                 />
-                {isValid === false && (
+                {!readOnly && isValid === false && (
                   <WarningFilled
                     className={`${prefix}--slider__invalid-icon`}
                   />
                 )}
 
-                {warn && isValid && (
+                {!readOnly && warn && isValid && (
                   <WarningAltFilled
                     className={`${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`}
                   />
                 )}
               </div>
-              {isValid === false && (
+              {!readOnly && isValid === false && (
                 <div
                   className={classNames(
                     `${prefix}--slider__validation-msg`,
@@ -898,7 +899,7 @@ export default class Slider extends PureComponent<SliderProps> {
                   {invalidText}
                 </div>
               )}
-              {warn && isValid && (
+              {!readOnly && warn && isValid && (
                 <div
                   className={classNames(
                     `${prefix}--slider__validation-msg`,
