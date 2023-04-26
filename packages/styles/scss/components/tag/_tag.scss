@@ -23,21 +23,19 @@
 /// @access public
 /// @group tag
 @mixin tag {
-  // @include layout.redefine-tokens(
-  //   '.#{$prefix}--tag',
-  //   (
-  //     size: (
-  //       sm: (
-  //         height: rem(18px),
-  //       ),
-  //       md: (
-  //         height: rem(24px),
-  //       ),
-  //     ),
-  //   )
-  // );
-
   .#{$prefix}--tag {
+    @include layout.redefine-tokens(
+      (
+        size: (
+          height: (
+            xs: rem(18px),
+            sm: rem(18px),
+            md: rem(24px),
+          ),
+        ),
+      )
+    );
+
     @include layout.use('size', $default: 'md', $min: 'sm', $max: 'md');
 
     @include type-style('label-01');

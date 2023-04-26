@@ -23,16 +23,17 @@
         );
       }
 
-      $min-key: list.nth(map.keys($steps), 1);
+      // CSS max() doesn't accept '0' as a value without a unit
+      // stylelint-disable length-zero-no-unit
       @include custom-property.declaration(
         'layout-#{$group}-#{$property}-min',
-        custom-property.get-var('layout-#{$group}-#{$property}-#{$min-key}')
+        0px
       );
+      // stylelint-enable length-zero-no-unit
 
-      $max-key: list.nth(map.keys($steps), -1);
       @include custom-property.declaration(
         'layout-#{$group}-#{$property}-max',
-        custom-property.get-var('layout-#{$group}-#{$property}-#{$max-key}')
+        999999999px
       );
     }
   }

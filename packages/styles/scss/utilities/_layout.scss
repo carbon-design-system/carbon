@@ -67,6 +67,35 @@ $tokens: (
   }
 }
 
+/// Allows to redefine any token values of the layout module in case a component is using
+/// non-standard values and should still participate in the layout context
+/// @param {Map} $overrides - The map of overrides. Must follow ( group: ( property: ( step: value ) ) )
+/// @example @include redefine-tokens(( size: ( height: ( sm: 1.125rem, md: 1.5rem ) ) ))
+/// @group utilities
+/// @access public
+@mixin redefine-tokens($overrides) {
+  @each $group, $properties in $overrides {
+    @each $property, $steps in $properties {
+      @each $step, $value in $steps {
+        @include custom-property.declaration(
+          'layout-#{$group}-#{$property}-#{$step}',
+          $value
+        );
+
+        .#{config.$prefix}--layout--#{$group}-#{$step} & {
+          $token: custom-property.get-var(
+            'layout-#{$group}-#{$property}-#{$step}'
+          );
+          @include custom-property.declaration(
+            'layout-#{$group}-#{$property}',
+            $token
+          );
+        }
+      }
+    }
+  }
+}
+
 @function -group($group, $property) {
   @return custom-property.get-var('layout-#{$group}-#{$property}-local');
 }
