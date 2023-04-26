@@ -17,6 +17,7 @@ import { matches } from '../../internal/keyboard/match';
 import { PrefixContext } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { FeatureFlagContext } from '../FeatureFlags';
+import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 
 const defaultFormatLabel = (value, label) => {
   return typeof label === 'function' ? label(value) : `${value}${label}`;
@@ -84,9 +85,14 @@ export interface SliderProps
   inputType?: string;
 
   /**
-   * `true` to specify if the control is invalid.
+   * `Specify whether the Slider is currently invalid
    */
   invalid?: boolean;
+
+  /**
+   * Provide the text that is displayed when the Slider is in an invalid state
+   */
+  invalidText: React.ReactNode;
 
   /**
    * The label for the slider.
@@ -172,6 +178,16 @@ export interface SliderProps
    * The value.
    */
   value: number;
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText?: React.ReactNode;
 }
 
 interface CalcValueProps {
@@ -223,9 +239,14 @@ export default class Slider extends PureComponent<SliderProps> {
     inputType: PropTypes.string,
 
     /**
-     * `true` to specify if the control is invalid.
+     * `Specify whether the Slider is currently invalid
      */
     invalid: PropTypes.bool,
+
+    /**
+     * Provide the text that is displayed when the Slider is in an invalid state
+     */
+    invalidText: PropTypes.node,
 
     /**
      * The label for the slider.
@@ -312,6 +333,16 @@ export default class Slider extends PureComponent<SliderProps> {
      * The value.
      */
     value: PropTypes.number.isRequired,
+
+    /**
+     * `Specify whether the Slider is in a warn state
+     */
+    warn: PropTypes.bool,
+
+    /**
+     * Provide the text that is displayed when the Slider is in an warn state
+     */
+    warnText: PropTypes.node,
   };
 
   static defaultProps = {
@@ -723,11 +754,15 @@ export default class Slider extends PureComponent<SliderProps> {
       step,
       stepMultiplier: _stepMultiplier,
       inputType,
+      invalid,
+      invalidText,
       required,
       disabled,
       name,
       light,
       readOnly,
+      warn,
+      warnText,
       ...other
     } = this.props;
 
@@ -765,6 +800,7 @@ export default class Slider extends PureComponent<SliderProps> {
               [`${prefix}--text-input--light`]: light,
               [`${prefix}--text-input--invalid`]: isValid === false,
               [`${prefix}--slider-text-input--hidden`]: hideTextInput,
+              [`${prefix}--slider-text-input--warn`]: warn,
             }
           );
 
@@ -840,7 +876,37 @@ export default class Slider extends PureComponent<SliderProps> {
                   aria-invalid={isValid ? undefined : true}
                   readOnly={readOnly}
                 />
+                {isValid === false && (
+                  <WarningFilled
+                    className={`${prefix}--slider__invalid-icon`}
+                  />
+                )}
+
+                {warn && isValid && (
+                  <WarningAltFilled
+                    className={`${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`}
+                  />
+                )}
               </div>
+              {isValid === false && (
+                <div
+                  className={classNames(
+                    `${prefix}--slider__validation-msg`,
+                    `${prefix}--slider__validation-msg--invalid`,
+                    `${prefix}--form-requirement`
+                  )}>
+                  {invalidText}
+                </div>
+              )}
+              {warn && isValid && (
+                <div
+                  className={classNames(
+                    `${prefix}--slider__validation-msg`,
+                    `${prefix}--form-requirement`
+                  )}>
+                  {warnText}
+                </div>
+              )}
             </div>
           );
         }}

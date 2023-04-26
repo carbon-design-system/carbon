@@ -97,6 +97,8 @@ export const Skeleton = () => <SliderSkeleton />;
 export const Playground = (args) => (
   <Slider
     {...args}
+    invalidText="Error message goes here"
+    warnText="Warning message goes here"
     labelText={`Slider (must be an increment of ${args.step})`}
   />
 );
