@@ -13,6 +13,42 @@ import { usePrefix } from '../../internal/usePrefix';
 
 const variants = ['on-page', 'disclosed'];
 
+function filterChildren(children) {
+  if (Array.isArray(children)) {
+    return children?.filter(
+      (child) =>
+        !['Search', 'ExpandableSearch'].includes(child?.type?.displayName)
+    );
+  }
+
+  if (
+    children &&
+    !['Search', 'ExpandableSearch'].includes(children?.type?.displayName)
+  ) {
+    return children;
+  }
+
+  return null;
+}
+
+function renderChildren(children) {
+  if (Array.isArray(children)) {
+    children.map((child, index) => {
+      if (index === 0 && child.type?.displayName === 'Search') {
+        return child;
+      }
+
+      return child;
+    });
+  }
+
+  if (children && children.type?.displayName === 'Search') {
+    return children;
+  }
+
+  return children;
+}
+
 function ContainedList({
   action,
   children,
@@ -33,17 +69,27 @@ function ContainedList({
     className
   );
 
+  const filteredChildren = filterChildren(children);
+
+  const isActionSearch = ['Search', 'ExpandableSearch'].includes(
+    action?.type?.displayName
+  );
+
+  const renderedChildren = renderChildren(children);
+
   return (
     <div className={classes}>
       <div className={`${prefix}--contained-list__header`}>
         <div id={labelId} className={`${prefix}--contained-list__label`}>
           {label}
         </div>
-        {action && (
-          <div className={`${prefix}--contained-list__action`}>{action}</div>
-        )}
+        <div className={`${prefix}--contained-list__action`}>{action}</div>
       </div>
-      <ul aria-labelledby={labelId}>{children}</ul>
+      {children && (
+        <ul aria-labelledby={labelId}>
+          {isActionSearch ? filteredChildren : renderedChildren}
+        </ul>
+      )}
     </div>
   );
 }
