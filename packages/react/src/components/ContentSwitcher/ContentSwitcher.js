@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import deprecate from '../../prop-types/deprecate';
+import { LayoutConstraint } from '../Layout';
 import { composeEventHandlers } from '../../tools/events';
 import { getNextIndex, matches, keys } from '../../internal/keyboard';
 import { PrefixContext } from '../../internal/usePrefix';
@@ -152,7 +153,11 @@ export default class ContentSwitcher extends React.Component {
     });
 
     return (
-      <div {...other} className={classes} role="tablist">
+      <LayoutConstraint
+        size={{ default: 'md', min: 'sm', max: 'lg' }}
+        {...other}
+        className={classes}
+        role="tablist">
         {React.Children.map(children, (child, index) =>
           React.cloneElement(child, {
             index,
@@ -166,7 +171,7 @@ export default class ContentSwitcher extends React.Component {
             size,
           })
         )}
-      </div>
+      </LayoutConstraint>
     );
   }
 }

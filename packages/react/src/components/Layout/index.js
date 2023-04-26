@@ -66,4 +66,73 @@ Layout.propTypes = {
   size: PropTypes.oneOf(sizes),
 };
 
-export { Layout };
+const LayoutConstraint = React.forwardRef(function Layout(
+  { as: BaseComponent = 'div', children, className, density, size, ...rest },
+  forwardRef
+) {
+  const prefix = usePrefix();
+
+  const classes = cx(
+    className,
+    Object.entries({
+      size,
+      density,
+    }).map(([group, constraints]) => ({
+      [`${prefix}--layout-constraint--${group}:default-${constraints?.default}`]:
+        constraints?.default,
+      [`${prefix}--layout-constraint--${group}:min-${constraints?.min}`]:
+        constraints?.min,
+      [`${prefix}--layout-constraint--${group}:max-${constraints?.max}`]:
+        constraints?.max,
+    }))
+  );
+
+  return (
+    <BaseComponent {...rest} ref={forwardRef} className={classes}>
+      {children}
+    </BaseComponent>
+  );
+});
+
+LayoutConstraint.propTypes = {
+  /**
+   * Specify a custom component or element to be rendered as the top-level
+   * element in the component
+   */
+  as: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.string,
+    PropTypes.elementType,
+  ]),
+
+  /**
+   * Provide child elements to be rendered inside of `LayoutConstraint`
+   */
+  children: PropTypes.node,
+
+  /**
+   * Provide a custom class name to be used on the outermost element rendered by
+   * the component
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify the desired layout density constraints of this element's children
+   */
+  density: PropTypes.shape({
+    min: PropTypes.oneOf(densities),
+    default: PropTypes.oneOf(densities),
+    max: PropTypes.oneOf(densities),
+  }),
+
+  /**
+   * Specify the desired layout size constraints of this element's children
+   */
+  size: PropTypes.shape({
+    min: PropTypes.oneOf(sizes),
+    default: PropTypes.oneOf(sizes),
+    max: PropTypes.oneOf(sizes),
+  }),
+};
+
+export { Layout, LayoutConstraint };

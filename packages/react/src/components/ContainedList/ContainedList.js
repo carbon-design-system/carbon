@@ -8,6 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { LayoutConstraint } from '../Layout';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -43,7 +44,11 @@ function ContainedList({
           {label}
         </div>
         {action && (
-          <div className={`${prefix}--contained-list__action`}>{action}</div>
+          <LayoutConstraint
+            size={{ min: 'sm', max: 'xl' }}
+            className={`${prefix}--contained-list__action`}>
+            {action}
+          </LayoutConstraint>
         )}
       </div>
       <ul aria-labelledby={labelId}>{children}</ul>

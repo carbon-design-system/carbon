@@ -35,65 +35,40 @@ $tokens: (
   $properties: map.get($tokens, $group);
 
   @each $property, $steps in $properties {
+    $minValue: custom-property.get-var('layout-#{$group}-#{$property}-min');
     @if $min {
-      @include custom-property.declaration(
-        'layout-#{$group}-#{$property}-min',
-        max(
-          custom-property.get-var('layout-#{$group}-#{$property}-min-context'),
-          custom-property.get-var('layout-#{$group}-#{$property}-#{$min}')
-        )
+      $minValue: max(
+        $minValue,
+        custom-property.get-var('layout-#{$group}-#{$property}-#{$min}')
       );
     }
 
+    $maxValue: custom-property.get-var('layout-#{$group}-#{$property}-max');
     @if $max {
-      @include custom-property.declaration(
-        'layout-#{$group}-#{$property}-max',
-        min(
-          custom-property.get-var('layout-#{$group}-#{$property}-max-context'),
-          custom-property.get-var('layout-#{$group}-#{$property}-#{$max}')
-        )
+      $maxValue: min(
+        $maxValue,
+        custom-property.get-var('layout-#{$group}-#{$property}-#{$max}')
       );
     }
 
     $value: clamp(
-      custom-property.get-var('layout-#{$group}-#{$property}-min'),
+      $minValue,
       custom-property.get-var(
-        'layout-#{$group}-#{$property}-context',
+        'layout-#{$group}-#{$property}',
         custom-property.get-var('layout-#{$group}-#{$property}-#{$default}')
       ),
-      custom-property.get-var('layout-#{$group}-#{$property}-max')
+      $maxValue
     );
 
     @include custom-property.declaration(
-      'layout-#{$group}-#{$property}',
+      'layout-#{$group}-#{$property}-local',
       $value
     );
-
-    > * {
-      @if $min {
-        @include custom-property.declaration(
-          'layout-#{$group}-#{$property}-min-context',
-          custom-property.get-var('layout-#{$group}-#{$property}-min')
-        );
-      }
-
-      @if $max {
-        @include custom-property.declaration(
-          'layout-#{$group}-#{$property}-max-context',
-          custom-property.get-var('layout-#{$group}-#{$property}-max')
-        );
-      }
-
-      @include custom-property.declaration(
-        'layout-#{$group}-#{$property}-context',
-        custom-property.get-var('layout-#{$group}-#{$property}')
-      );
-    }
   }
 }
 
 @function -group($group, $property) {
-  @return custom-property.get-var('layout-#{$group}-#{$property}');
+  @return custom-property.get-var('layout-#{$group}-#{$property}-local');
 }
 
 @function size($property) {
