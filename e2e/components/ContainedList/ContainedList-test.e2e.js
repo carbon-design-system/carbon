@@ -85,6 +85,22 @@ test.describe('ContainedList', () => {
           theme,
         });
       });
+
+      test('with-expandable-search @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'ContainedList',
+          id: 'components-containedlist--with-expandable-search',
+          theme,
+        });
+      });
+
+      test('with-persistent-search @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'ContainedList',
+          id: 'components-containedlist--with-persistent-search',
+          theme,
+        });
+      });
     });
   });
 
