@@ -1,0 +1,61 @@
+import { Props, Description } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+
+# Progress bar
+
+> 💡 Check our
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/progress-bar)
+> example implementation.
+
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/progress-bar)
+
+A progress bar indicates that the user’s request has been received and the
+application is making progress toward completing the requested action. Progress
+bars inform users about the status of ongoing processes, the estimated time of
+how long a process will take, or if a request is being executed.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/progress-bar/index.js';
+```
+
+<Description markdown={`${cdnJs({ components: ['progress-bar'] })}`} />
+<Description markdown={`${cdnCss()}`} />
+
+### HTML
+
+```html
+<cds-progress-bar
+  label="Progress bar label"
+  helper-text="Optional helper text"
+  value="75">
+</cds-progress-bar>
+```
+
+## Indeterminate
+
+Indeterminate progress bars are used when the loading progress is unknown or the
+amount of wait time can’t be calculated. To use the indeterminate variation,
+make sure the `status` property is set to `active` and there is no `value`
+attribute passed in.
+
+```html
+<cds-progress-bar
+  label="Progress bar label"
+  helper-text="Optional helper text"
+  status="active">
+</cds-progress-bar>
+```
+
+## `<cds-progress-bar>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-progress-bar hide-label>`) and `false` means not setting the attribute
+(e.g. `<cds-progress-bar>` without `hide-label` attribute).
+
+<Props of="cds-progress-bar" />

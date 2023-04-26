@@ -71,6 +71,7 @@ declare global {
       'cds-pagination': any;
       'cds-page-sizes-select': any;
       'cds-pages-select': any;
+      'cds-progress-bar': any;
       'cds-progress-indicator': any;
       'cds-progress-step': any;
       'cds-popover': any;
