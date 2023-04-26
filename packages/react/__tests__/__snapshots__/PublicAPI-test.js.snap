@@ -2910,6 +2910,7 @@ Map {
     "Provider": "React.Provider",
   },
   "ExpandableSearch" => Object {
+    "displayName": "ExpandableSearch",
     "propTypes": Object {
       "autoComplete": Object {
         "type": "string",
