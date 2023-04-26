@@ -22,6 +22,11 @@ export { default as CDSComboBoxItem } from './components/combo-box/combo-box-ite
 export { default as CDSContentSwitcher } from './components/content-switcher/content-switcher';
 export { default as CDSContentSwitcherItem } from './components/content-switcher/content-switcher-item';
 export { default as CDSCopyButton } from './components/copy-button/copy-button';
+export { default as CDSFileUploader } from './components/file-uploader/file-uploader';
+export { default as CDSFileUploaderButton } from './components/file-uploader/file-uploader-button';
+export { default as CDSFileUploaderDropContainer } from './components/file-uploader/file-uploader-drop-container';
+export { default as CDSFileUploaderItem } from './components/file-uploader/file-uploader-item';
+export { default as CDSFileUploaderSkeleton } from './components/file-uploader/file-uploader-skeleton';
 export { default as CDSTable } from './components/data-table/table';
 export { default as CDSTableBatchActions } from './components/data-table/table-batch-actions';
 export { default as CDSTableBody } from './components/data-table/table-body';

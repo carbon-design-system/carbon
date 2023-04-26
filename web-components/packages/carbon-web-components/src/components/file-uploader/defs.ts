@@ -19,12 +19,12 @@ export enum FILE_UPLOADER_ITEM_STATE {
   /**
    * Upload complete.
    */
-  UPLOADED = 'uploaded',
+  COMPLETE = 'complete',
 
   /**
    * Editing.
    */
-  EDITING = 'editing',
+  EDIT = 'edit',
 }
 
 /**
@@ -32,23 +32,17 @@ export enum FILE_UPLOADER_ITEM_STATE {
  */
 export enum FILE_UPLOADER_ITEM_SIZE {
   /**
-   * Regular size.
-   */
-  REGULAR = '',
-
-  /**
    * Small size.
    */
   SMALL = 'sm',
 
   /**
+   * Medium size.
+   */
+  MEDIUM = 'md',
+
+  /**
    * Large size.
    */
   LARGE = 'lg',
-
-  // TODO: deprecate
-  /**
-   * Size for form field.
-   */
-  FIELD = 'field',
 }

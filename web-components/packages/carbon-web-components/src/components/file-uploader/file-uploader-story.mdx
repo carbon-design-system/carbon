@@ -29,10 +29,10 @@ import '@carbon/web-components/es/components/file-uploader/index.js';
 
 ```html
 <cds-file-uploader
-  helper-text="Only .jpg and .png files. 500kb max file size"
-  label-text="Account photo"
+  label-description="Only .jpg and .png files. 500kb max file size"
+  label-title="Account photo"
 >
-  <cds-file-drop-container accept="image/jpeg image/png" multiple="true">
+  <cds-file-uploader-button accept="image/jpeg image/png" multiple>
     Drag and drop files here or click to upload
   </cds-file-drop-container>
 </cds-file-uploader>
@@ -41,6 +41,14 @@ import '@carbon/web-components/es/components/file-uploader/index.js';
 ## `<cds-file-uploader>` attributes, properties and events
 
 <Props of="cds-file-uploader" />
+
+## `<cds-file-uploader-drop-container>` attributes, properties and events
+
+<Props of="cds-file-uploader-drop-container" />
+
+## `<cds-file-uploader-button>` attributes, properties and events
+
+<Props of="cds-file-uploader-button" />
 
 ## `<cds-file-uploader-item>` attributes, properties and events
 

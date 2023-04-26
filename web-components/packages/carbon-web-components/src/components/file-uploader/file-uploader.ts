@@ -7,6 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
@@ -16,31 +17,59 @@ import styles from './file-uploader.scss';
  * The shell UI for file uploader.
  *
  * @element cds-file-uploader
- * @slot helper-text The helper text.
- * @slot label-text The label text.
+ * @slot label-title.
+ * @slot lebel-description.
  */
 @customElement(`${prefix}-file-uploader`)
-class BXFileUploader extends LitElement {
+class CDSFileUploader extends LitElement {
   /**
-   * The helper text.
+   * `true` if the file uploader should disabled.
    */
-  @property({ attribute: 'helper-text' })
-  helperText = '';
+  @property({ type: Boolean, reflect: true })
+  disabled = false;
 
   /**
-   * The label text.
+   * The description text.
    */
-  @property({ attribute: 'label-text' })
-  labelText = '';
+  @property({ attribute: 'label-description' })
+  labelDescription = '';
+
+  /**
+   * The label title.
+   */
+  @property({ attribute: 'label-title' })
+  labelTitle = '';
+
+  updated(changedProperties) {
+    if (changedProperties.has('disabled')) {
+      const { selectorUploaderItem } = this
+        .constructor as typeof CDSFileUploader;
+      const uploaderItem = this.querySelector(
+        selectorUploaderItem
+      ) as CDSFileUploader;
+      uploaderItem.disabled = this.disabled;
+    }
+  }
 
   render() {
-    const { helperText, labelText } = this;
+    const { disabled, labelDescription, labelTitle } = this;
+
+    const labelClasses = classMap({
+      [`${prefix}--file--label`]: true,
+      [`${prefix}--label-description--disabled`]: disabled,
+    });
+
+    const descriptionClasses = classMap({
+      [`${prefix}--label-description`]: true,
+      [`${prefix}--label-description--disabled`]: disabled,
+    });
+
     return html`
-      <strong class="${prefix}--file--label"
-        ><slot name="label-text">${labelText}</slot></strong
-      >
-      <p class="${prefix}--label-description">
-        <slot name="helperText-text">${helperText}</slot>
+      <p class="${labelClasses}">
+        <slot name="label-title">${labelTitle}</slot>
+      </p>
+      <p class="${descriptionClasses}">
+        <slot name="label-description">${labelDescription}</slot>
       </p>
       <slot name="drop-container"></slot>
       <div class="${prefix}--file-container">
@@ -49,7 +78,14 @@ class BXFileUploader extends LitElement {
     `;
   }
 
+  /**
+   * A selector that will return the `<input>` to enter starting date.
+   */
+  static get selectorUploaderItem() {
+    return `${prefix}-file-uploader-button,${prefix}-file-uploader-drop-container`;
+  }
+
   static styles = styles;
 }
 
-export default BXFileUploader;
+export default CDSFileUploader;

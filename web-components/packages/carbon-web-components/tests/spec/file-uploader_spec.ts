@@ -9,8 +9,7 @@
 
 import { html, render } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import '../../src/components/file-uploader/file-uploader';
-import '../../src/components/file-uploader/drop-container';
+import '../../src/components/file-uploader/index';
 import { FILE_UPLOADER_ITEM_STATE } from '../../src/components/file-uploader/file-uploader-item';
 import EventManager from '../utils/event-manager';
 
@@ -26,11 +25,11 @@ const fileUploaderShellTemplate = (props?) => {
 const dropContainerTemplate = (props?) => {
   const { accept, disabled, multiple } = props ?? {};
   return html`
-    <cds-file-drop-container
+    <cds-file-uploader-drop-container
       accept="${ifDefined(accept)}"
       ?disabled="${disabled}"
       ?multiple="${multiple}">
-    </cds-file-drop-container>
+    </cds-file-uploader-drop-container>
   `;
 };
 
@@ -240,7 +239,7 @@ describe('file-uploader', function () {
 
       it('should render uploaded state', async function () {
         render(
-          fileUploderItemTemplate({ state: FILE_UPLOADER_ITEM_STATE.UPLOADED }),
+          fileUploderItemTemplate({ state: FILE_UPLOADER_ITEM_STATE.COMPLETE }),
           document.body
         );
         await Promise.resolve();
@@ -253,7 +252,7 @@ describe('file-uploader', function () {
         render(
           fileUploderItemTemplate({
             invalid: true,
-            state: FILE_UPLOADER_ITEM_STATE.UPLOADED,
+            state: FILE_UPLOADER_ITEM_STATE.COMPLETE,
             uploadedAssistiveText: 'uploaded-assistive-text-foo',
             validityMessage: 'validity-message-foo',
           }),
@@ -270,7 +269,7 @@ describe('file-uploader', function () {
 
       it('should render editing state', async function () {
         render(
-          fileUploderItemTemplate({ state: FILE_UPLOADER_ITEM_STATE.EDITING }),
+          fileUploderItemTemplate({ state: FILE_UPLOADER_ITEM_STATE.EDIT }),
           document.body
         );
         await Promise.resolve();
@@ -284,7 +283,7 @@ describe('file-uploader', function () {
           fileUploderItemTemplate({
             deleteAssistiveText: 'delete-assistive-text-foo',
             invalid: true,
-            state: FILE_UPLOADER_ITEM_STATE.EDITING,
+            state: FILE_UPLOADER_ITEM_STATE.EDIT,
             validityMessage: 'validity-message-foo',
           }),
           document.body
@@ -299,7 +298,7 @@ describe('file-uploader', function () {
     describe('Handling delete button', function () {
       it('Should fire cds-file-uploader-item-beingdeleted/cds-file-uploader-item-deleted events upon hiding', async function () {
         render(
-          fileUploderItemTemplate({ state: FILE_UPLOADER_ITEM_STATE.EDITING }),
+          fileUploderItemTemplate({ state: FILE_UPLOADER_ITEM_STATE.EDIT }),
           document.body
         );
         await Promise.resolve();
@@ -320,7 +319,7 @@ describe('file-uploader', function () {
 
       it('Should support preventing modal from being deleted upon user gesture', async function () {
         render(
-          fileUploderItemTemplate({ state: FILE_UPLOADER_ITEM_STATE.EDITING }),
+          fileUploderItemTemplate({ state: FILE_UPLOADER_ITEM_STATE.EDIT }),
           document.body
         );
         await Promise.resolve();

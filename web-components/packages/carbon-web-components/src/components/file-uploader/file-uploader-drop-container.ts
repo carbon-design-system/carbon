@@ -27,13 +27,13 @@ const dropEffects = {
 };
 
 /**
- * File drop container.
+ * File uploader drop container.
  *
- * @element cds-file-drop-container
- * @fires cds-file-drop-container-changed The custom event fired when there is a user gesture to select files to upload.
+ * @element cds-file-uploader-drop-container
+ * @fires cds-file-uploader-drop-container-changed The custom event fired when there is a user gesture to select files to upload.
  */
-@customElement(`${prefix}-file-drop-container`)
-class BXFileDropContainer extends HostListenerMixin(LitElement) {
+@customElement(`${prefix}-file-uploader-drop-container`)
+class CDSFileUploaderDropContainer extends HostListenerMixin(LitElement) {
   /**
    * `true` to show the active state of this UI.
    */
@@ -45,9 +45,13 @@ class BXFileDropContainer extends HostListenerMixin(LitElement) {
    * @param event The event.
    */
   private _handleChange(event: Event | DragEvent) {
-    const addedFiles = this._getFiles(event);
     const { eventChange, selectorInput } = this
-      .constructor as typeof BXFileDropContainer;
+      .constructor as typeof CDSFileUploaderDropContainer;
+    const addedFiles = this._getFiles(
+      event,
+      (this.shadowRoot?.querySelector(selectorInput) as HTMLInputElement).files
+    );
+
     this.dispatchEvent(
       new CustomEvent(eventChange, {
         bubbles: true,
@@ -94,11 +98,7 @@ class BXFileDropContainer extends HostListenerMixin(LitElement) {
    * @param event The event.
    * @returns The list of files user chose to upload.
    */
-  private _getFiles(event: Event | DragEvent) {
-    const { files } =
-      (event.type === 'drop'
-        ? (event as DragEvent).dataTransfer
-        : (event.target as HTMLInputElement)) ?? {};
+  private _getFiles(event, files) {
     const { accept } = this;
     if (!accept || !/^(change|drop)$/.test(event.type)) {
       return Array.from(files ?? []);
@@ -112,6 +112,7 @@ class BXFileDropContainer extends HostListenerMixin(LitElement) {
         const [fileExtension] = !hasFileExtension
           ? [undefined]
           : fileExtensionRegExp.exec(name) ?? [];
+
         return (
           acceptedTypes.has(mimeType) ||
           (fileExtension && acceptedTypes.has(fileExtension))
@@ -140,6 +141,12 @@ class BXFileDropContainer extends HostListenerMixin(LitElement) {
   multiple = false;
 
   /**
+   * The name of the input.
+   */
+  @property({ reflect: true })
+  name = '';
+
+  /**
    * The shadow DOM slot to put this drop container in.
    */
   @property({ reflect: true })
@@ -150,6 +157,7 @@ class BXFileDropContainer extends HostListenerMixin(LitElement) {
       accept,
       disabled,
       multiple,
+      name,
       _active: active,
       _handleChange: handleChange,
     } = this;
@@ -168,6 +176,7 @@ class BXFileDropContainer extends HostListenerMixin(LitElement) {
           <input
             id="file"
             type="file"
+            name="${ifNonEmpty(name)}"
             class="${prefix}--file-input"
             tabindex="-1"
             accept="${ifNonEmpty(accept)}"
@@ -183,7 +192,7 @@ class BXFileDropContainer extends HostListenerMixin(LitElement) {
    * The name of the custom event fired when there is a user gesture to select files to upload.
    */
   static get eventChange() {
-    return `${prefix}-file-drop-container-changed`;
+    return `${prefix}-file-uploader-drop-container-changed`;
   }
 
   /**
@@ -196,4 +205,4 @@ class BXFileDropContainer extends HostListenerMixin(LitElement) {
   static styles = styles;
 }
 
-export default BXFileDropContainer;
+export default CDSFileUploaderDropContainer;

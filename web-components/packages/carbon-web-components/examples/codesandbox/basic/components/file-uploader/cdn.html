@@ -22,13 +22,13 @@ LICENSE file in the root directory of this source tree.
   <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/file-uploader.min.js"></script>
 </head>
 <body>
-  <cds-file-uploader helper-text="Only .jpg and .png files. 500kb max file size" label-text="Account photo">
-    <cds-file-drop-container
-      accept="image/jpeg image/png"
-      multiple="true"
-    >
-      Drag and drop files here or click to upload
-    </cds-file-drop-container>
-  </cds-file-uploader>
+  <cds-file-uploader
+  label-description="Only .jpg and .png files. 500kb max file size"
+  label-title="Account photo"
+>
+  <cds-file-uploader-button accept="image/jpeg image/png" multiple>
+    Drag and drop files here or click to upload
+  </cds-file-drop-container>
+</cds-file-uploader>
 </body>
 </html>

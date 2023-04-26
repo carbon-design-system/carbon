@@ -12,12 +12,9 @@ import { html, property, LitElement, customElement } from 'lit-element';
 import { delay } from 'bluebird';
 import { prefix } from '../../globals/settings';
 import { ifDefined } from 'lit/directives/if-defined';
-import './file-uploader';
-import './drop-container';
-import {
-  FILE_UPLOADER_ITEM_SIZE,
-  FILE_UPLOADER_ITEM_STATE,
-} from './file-uploader-item';
+import './index';
+import { FILE_UPLOADER_ITEM_STATE } from './file-uploader-item';
+import { BUTTON_SIZE } from '../button/button';
 import { FileData } from './stories/types';
 
 /**
@@ -28,7 +25,7 @@ import { FileData } from './stories/types';
  * vs. letting users copy code here and implement features that fit their needs.
  */
 @customElement(`${prefix}-ce-demo-file-uploader`)
-export default class BXCEDemoFileUploader extends LitElement {
+export default class CDSCEDemoFileUploader extends LitElement {
   /**
    * The files being uploaded.
    */
@@ -85,10 +82,10 @@ export default class BXCEDemoFileUploader extends LitElement {
           ? item
           : {
               ...item,
-              state: FILE_UPLOADER_ITEM_STATE.EDITING,
+              state: FILE_UPLOADER_ITEM_STATE.EDIT,
               invalid: true,
-              validityMessage: 'File size exceeds limit',
-              supplementalValidityMessage:
+              errorSubject: 'File size exceeds limit',
+              errorBody:
                 '500kb max file size. Select a new file and try again.',
             }
       );
@@ -102,7 +99,7 @@ export default class BXCEDemoFileUploader extends LitElement {
           ? item
           : {
               ...item,
-              state: FILE_UPLOADER_ITEM_STATE.UPLOADED,
+              state: FILE_UPLOADER_ITEM_STATE.COMPLETE,
             }
       );
       this.requestUpdate();
@@ -113,7 +110,7 @@ export default class BXCEDemoFileUploader extends LitElement {
           ? item
           : {
               ...item,
-              state: FILE_UPLOADER_ITEM_STATE.EDITING,
+              state: FILE_UPLOADER_ITEM_STATE.EDIT,
             }
       );
       this.requestUpdate();
@@ -130,19 +127,49 @@ export default class BXCEDemoFileUploader extends LitElement {
    * `true` if the drop container should be disabled.
    */
   @property({ type: Boolean, reflect: true })
+  button = false;
+
+  /**
+   * Button kind.
+   */
+  @property({ attribute: 'button-kind' })
+  buttonKind = 'primary';
+
+  /**
+   * Button label.
+   */
+  @property({ attribute: 'button-label' })
+  buttonLabel = 'Add file';
+
+  /**
+   * `true` if the drop container should be disabled.
+   */
+  @property({ type: Boolean, reflect: true })
   disabled = false;
 
   /**
-   * The helper text.
+   * Icon description.
    */
-  @property({ attribute: 'helper-text' })
-  helperText = '';
+  @property({ attribute: 'icon-description' })
+  iconDescription = '';
 
   /**
-   * The label text.
+   * The input name.
    */
-  @property({ attribute: 'label-text' })
-  labelText = '';
+  @property({ attribute: 'input-name' })
+  inputName = '';
+
+  /**
+   * The label description text.
+   */
+  @property({ attribute: 'label-description' })
+  labelDescription = '';
+
+  /**
+   * The label title.
+   */
+  @property({ attribute: 'label-title' })
+  labelTitle = '';
 
   /**
    * `true` if the drop container should accept more than one files at once.
@@ -152,54 +179,67 @@ export default class BXCEDemoFileUploader extends LitElement {
   multiple = false;
 
   /**
-   * The size of the file uploader items.
+   * The size of the button item.
    */
   @property({ reflect: true })
-  size = FILE_UPLOADER_ITEM_SIZE.REGULAR;
+  size = BUTTON_SIZE.MEDIUM;
+
+  /**
+   * The state of this file uploader item.
+   */
+  @property({ reflect: true, attribute: 'input-state' })
+  inputState = '';
 
   render() {
     const {
       accept,
+      button,
+      buttonKind,
+      buttonLabel,
       disabled,
-      helperText,
-      labelText,
+      labelDescription,
+      labelTitle,
       multiple,
       size,
+      inputState,
+      iconDescription,
       _files: files,
       _handleChange: handleChange,
       _handleDelete: handleDelete,
     } = this;
     return html`
       <cds-file-uploader
-        helper-text="${ifDefined(helperText)}"
-        label-text="${ifDefined(labelText)}">
-        <cds-file-drop-container
-          accept="${ifDefined(accept)}"
-          ?disabled="${disabled}"
-          ?multiple="${multiple}"
-          @cds-file-drop-container-changed="${handleChange}">
-          Drag and drop files here or click to upload
-        </cds-file-drop-container>
+        label-description="${ifDefined(labelDescription)}"
+        label-title="${ifDefined(labelTitle)}"
+        ?disabled="${disabled}">
+        ${!button
+          ? html` <cds-file-uploader-drop-container
+              accept="${ifDefined(accept)}"
+              ?multiple="${multiple}"
+              name="${ifDefined(this.inputName)}"
+              @cds-file-uploader-drop-container-changed="${handleChange}">
+              Drag and drop files here or click to upload
+            </cds-file-uploader-drop-container>`
+          : html` <cds-file-uploader-button
+              size="${ifDefined(size)}"
+              button-kind="${buttonKind}"
+              accept="${ifDefined(accept)}"
+              name="${ifDefined(this.inputName)}"
+              ?multiple="${multiple}"
+              @cds-file-uploader-button-changed="${handleChange}">
+              ${buttonLabel}
+            </cds-file-uploader-button>`}
         ${files.map(
-          ({
-            id,
-            invalid,
-            file,
-            state,
-            supplementalValidityMessage,
-            validityMessage,
-          }) => html`
+          ({ id, invalid, file, state, errorSubject, errorBody }) => html`
             <cds-file-uploader-item
               data-file-id="${id}"
               ?invalid="${invalid}"
-              size="${ifDefined(size)}"
-              state="${ifDefined(state)}"
-              validity-message="${ifDefined(validityMessage)}"
+              state="${inputState || ifDefined(state)}"
+              icon-description="${ifDefined(iconDescription)}"
+              error-subject="${ifDefined(errorSubject)}"
+              error-body="${ifDefined(errorBody)}"
               @cds-file-uploader-item-deleted="${handleDelete}">
               ${file.name}
-              <span slot="validity-message-supplement"
-                >${supplementalValidityMessage}</span
-              >
             </cds-file-uploader-item>
           `
         )}

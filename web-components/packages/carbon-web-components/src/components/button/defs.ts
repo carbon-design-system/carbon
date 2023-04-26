@@ -37,6 +37,11 @@ export enum BUTTON_KIND {
   DANGER = 'danger',
 
   /**
+   * Danger primary button.
+   */
+  DANGER_PRIMARY = 'danger-primary',
+
+  /**
    * Danger tertiary button.
    */
   DANGER_TERTIARY = 'danger-tertiary',

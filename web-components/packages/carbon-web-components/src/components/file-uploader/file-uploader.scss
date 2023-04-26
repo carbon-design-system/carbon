@@ -27,40 +27,39 @@
 :host(#{$prefix}-file-uploader-item) {
   @extend .#{$prefix}--file__selected-file;
 
+  .#{$prefix}--file-filename {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .#{$prefix}--form-requirement[hidden] {
+    display: none;
+  }
+
   &[invalid] {
     @extend .#{$prefix}--file__selected-file--invalid;
 
-    .#{$prefix}--form-requirement__title,
     .#{$prefix}--form-requirement__supplement {
-      @include type-style('label-01');
-
-      padding: 0 $spacing-05;
-    }
-
-    .#{$prefix}--form-requirement {
-      color: $text-error;
-      display: block;
-    }
-
-    .#{$prefix}--form-requirement__supplement {
-      color: $text-primary;
+      margin: 0;
     }
   }
 
-  &[size='lg'] {
-    min-height: $spacing-09;
+  &[size='md'] {
+    @extend .#{$prefix}--file__selected-file--md;
   }
 
   &[size='sm'] {
-    min-height: $spacing-07;
+    @extend .#{$prefix}--file__selected-file--sm;
+  }
+}
+
+:host(#{$prefix}-file-uploader) {
+  .#{$prefix}--label-description,
+  .#{$prefix}--file--label {
+    margin-top: 0;
   }
 
-  // TODO: deprecate 'field' sizing
-  // &[size='field'] {
-  //   min-height: $container-03;
-  // }
-
-  // &[size='sm'] {
-  //   min-height: $container-02;
-  // }
+  .#{$prefix}--file-container {
+    margin-top: $spacing-03;
+  }
 }
