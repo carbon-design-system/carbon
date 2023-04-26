@@ -7,7 +7,9 @@
 
 import React from 'react';
 import ContainedList, { ContainedListItem } from '../';
-import { render } from '@testing-library/react';
+import ExpandableSearch from '../../ExpandableSearch';
+import Search from '../../Search';
+import { render, screen } from '@testing-library/react';
 
 const prefix = 'cds';
 
@@ -80,6 +82,53 @@ describe('ContainedList', () => {
   });
 
   a11y('ContainedList');
+
+  it('should render ExpandableSearch as an action', () => {
+    render(
+      <ContainedList
+        label="label"
+        action={
+          <ExpandableSearch
+            labelText="Expandable Search"
+            data-testid="test-id"
+          />
+        }
+      />
+    );
+
+    expect(screen.getByTestId('test-id')).toBeInTheDocument();
+    expect(screen.getByRole('search').parentElement).toHaveClass(
+      `${prefix}--contained-list__action`
+    );
+  });
+
+  it('should render search as a child', () => {
+    render(
+      <ContainedList label="label">
+        <Search labelText="Search" data-testid="test-id" />
+      </ContainedList>
+    );
+
+    expect(screen.getByTestId('test-id')).toBeInTheDocument();
+  });
+
+  it('should not render a child "Search" component when an "ExpandableSearch" component is passed in as an action', () => {
+    render(
+      <ContainedList
+        label="label"
+        action={
+          <ExpandableSearch
+            labelText="Expandable Search"
+            data-testid="test-expandable-search-id"
+          />
+        }>
+        <Search labelText="Search" data-testid="test-search-id" />
+      </ContainedList>
+    );
+
+    expect(screen.getByTestId('test-expandable-search-id')).toBeInTheDocument();
+    expect(screen.queryByTestId('test-search-id')).not.toBeInTheDocument();
+  });
 });
 
 describe('ContainedListItem', () => {
