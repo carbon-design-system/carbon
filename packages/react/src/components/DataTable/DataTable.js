@@ -183,31 +183,31 @@ class DataTable extends React.Component {
     this.instanceId = getInstanceId();
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps === this.props) {
-      return;
+  // if state needs to be updated then wait for only update after state is finished
+  shouldComponentUpdate(nextProps) {
+    if (this.props !== nextProps) {
+      const nextRowIds = nextProps.rows.map((row) => row.id);
+      const rowIds = this.props.rows.map((row) => row.id);
+
+      if (!isEqual(nextRowIds, rowIds)) {
+        this.setState((state) => getDerivedStateFromProps(this.props, state));
+        return false;
+      }
+
+      const nextHeaders = nextProps.headers.map((header) => header.key);
+      const headers = this.props.headers.map((header) => header.key);
+
+      if (!isEqual(nextHeaders, headers)) {
+        this.setState((state) => getDerivedStateFromProps(this.props, state));
+        return false;
+      }
+
+      if (!isEqual(nextProps.rows, this.props.rows)) {
+        this.setState((state) => getDerivedStateFromProps(this.props, state));
+        return false;
+      }
     }
-
-    const prevRowIds = prevProps.rows.map((row) => row.id);
-    const rowIds = this.props.rows.map((row) => row.id);
-
-    if (!isEqual(prevRowIds, rowIds)) {
-      this.setState((state) => getDerivedStateFromProps(this.props, state));
-      return;
-    }
-
-    const prevHeaders = prevProps.headers.map((header) => header.key);
-    const headers = this.props.headers.map((header) => header.key);
-
-    if (!isEqual(prevHeaders, headers)) {
-      this.setState((state) => getDerivedStateFromProps(this.props, state));
-      return;
-    }
-
-    if (!isEqual(prevProps.rows, this.props.rows)) {
-      this.setState((state) => getDerivedStateFromProps(this.props, state));
-      return;
-    }
+    return true;
   }
 
   /**
