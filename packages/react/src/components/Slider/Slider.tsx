@@ -754,7 +754,6 @@ export default class Slider extends PureComponent<SliderProps> {
       step,
       stepMultiplier: _stepMultiplier,
       inputType,
-      invalid,
       invalidText,
       required,
       disabled,
