@@ -8,7 +8,16 @@
 import { Search as SearchIcon, Close } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useContext, useRef, useState } from 'react';
+import React, {
+  useContext,
+  useRef,
+  useState,
+  type HTMLAttributes,
+  type ReactNode,
+  type KeyboardEvent,
+  type ComponentType,
+  type FunctionComponent,
+} from 'react';
 import { focus } from '../../internal/focus';
 import { keys, match } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
@@ -18,7 +27,94 @@ import { useMergedRefs } from '../../internal/useMergedRefs';
 import deprecate from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
 
-const Search = React.forwardRef(function Search(
+type InputPropsBase = Omit<HTMLAttributes<HTMLInputElement>, 'onChange'>;
+export interface SearchProps extends InputPropsBase {
+  /**
+   * Specify an optional value for the `autocomplete` property on the underlying
+   * `<input>`, defaults to "off"
+   */
+  autoComplete?: string;
+
+  /**
+   * Specify an optional className to be applied to the container node
+   */
+  className?: string;
+
+  /**
+   * Specify a label to be read by screen readers on the "close" button
+   */
+  closeButtonLabelText?: string;
+
+  /**
+   * Optionally provide the default value of the `<input>`
+   */
+  defaultValue?: string | number;
+
+  /**
+   * Specify whether the `<input>` should be disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Specify a custom `id` for the input
+   */
+  id?: string;
+
+  /**
+   * Provide the label text for the Search icon
+   */
+  labelText: ReactNode;
+
+  /**
+   * Optional callback called when the search value changes.
+   */
+  onChange?(e: { target: HTMLInputElement; type: 'change' }): void;
+
+  /**
+   * Optional callback called when the search value is cleared.
+   */
+  onClear?(): void;
+
+  /**
+   * Optional callback called when the magnifier icon is clicked in ExpandableSearch.
+   */
+  onExpand?(): void;
+
+  /**
+   * Provide an optional placeholder text for the Search.
+   * Note: if the label and placeholder differ,
+   * VoiceOver on Mac will read both
+   */
+  placeholder?: string;
+
+  /**
+   * Rendered icon for the Search.
+   * Can be a React component class
+   */
+  renderIcon?: ComponentType | FunctionComponent;
+
+  /**
+   * Specify the role for the underlying `<input>`, defaults to `searchbox`
+   */
+  role?: string;
+
+  /**
+   * Specify the size of the Search
+   */
+  size?: 'sm' | 'md' | 'lg';
+
+  /**
+   * Optional prop to specify the type of the `<input>`
+   */
+  type?: string;
+
+  /**
+   * Specify the value of the `<input>`
+   */
+  value?: string | number;
+}
+
+const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
   {
     autoComplete = 'off',
     className,
@@ -27,6 +123,7 @@ const Search = React.forwardRef(function Search(
     disabled,
     id,
     labelText,
+    // @ts-expect-error: deprecated prop
     light,
     onChange = () => {},
     onClear = () => {},
@@ -44,23 +141,25 @@ const Search = React.forwardRef(function Search(
 ) {
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
-  const inputRef = useRef(null);
-  const ref = useMergedRefs([forwardRef, inputRef]);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const ref = useMergedRefs<HTMLInputElement>([forwardRef, inputRef]);
   const inputId = useId('search-input');
   const uniqueId = id || inputId;
   const searchId = `${uniqueId}-search`;
   const [hasContent, setHasContent] = useState(value || defaultValue || false);
   const [prevValue, setPrevValue] = useState(value);
-  const searchClasses = cx({
-    [`${prefix}--search`]: true,
-    [`${prefix}--search--sm`]: size === 'sm',
-    [`${prefix}--search--md`]: size === 'md',
-    [`${prefix}--search--lg`]: size === 'lg',
-    [`${prefix}--search--light`]: light,
-    [`${prefix}--search--disabled`]: disabled,
-    [`${prefix}--search--fluid`]: isFluid,
-    [className]: className,
-  });
+  const searchClasses = cx(
+    {
+      [`${prefix}--search`]: true,
+      [`${prefix}--search--sm`]: size === 'sm',
+      [`${prefix}--search--md`]: size === 'md',
+      [`${prefix}--search--lg`]: size === 'lg',
+      [`${prefix}--search--light`]: light,
+      [`${prefix}--search--disabled`]: disabled,
+      [`${prefix}--search--fluid`]: isFluid,
+    },
+    className
+  );
   const clearClasses = cx({
     [`${prefix}--search-close`]: true,
     [`${prefix}--search-close--hidden`]: !hasContent,
@@ -72,12 +171,12 @@ const Search = React.forwardRef(function Search(
   }
 
   function clearInput() {
-    if (!value) {
+    if (!value && inputRef.current) {
       inputRef.current.value = '';
     }
 
     const inputTarget = Object.assign({}, inputRef.current, { value: '' });
-    const clearedEvt = { target: inputTarget, type: 'change' };
+    const clearedEvt = { target: inputTarget, type: 'change' } as const;
 
     onChange(clearedEvt);
     onClear();
@@ -89,10 +188,10 @@ const Search = React.forwardRef(function Search(
     setHasContent(event.target.value !== '');
   }
 
-  function handleKeyDown(event) {
+  function handleKeyDown(event: KeyboardEvent) {
     if (match(event, keys.Escape)) {
       event.stopPropagation();
-      clearInput(event);
+      clearInput();
     }
   }
 
@@ -103,7 +202,7 @@ const Search = React.forwardRef(function Search(
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
       <div
         aria-labelledby={uniqueId}
-        role={onExpand ? 'button' : null}
+        role={onExpand ? 'button' : undefined}
         className={`${prefix}--search-magnifier`}
         onClick={onExpand}>
         <CustomSearchIcon icon={renderIcon} />
@@ -217,6 +316,7 @@ Search.propTypes = {
    * Rendered icon for the Search.
    * Can be a React component class
    */
+  // @ts-expect-error: PropTypes are not expressive enough to cover this case
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
