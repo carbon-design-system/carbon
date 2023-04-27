@@ -4,15 +4,16 @@ on:
     branches:
       - main
 jobs:
-  create-snapshot-diff:
+  snapshot-diff:
     runs-on: ubuntu-latest
-      run: |
-        if git diff --quiet HEAD@{1} packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap
-        then
-            echo "no changes"
-            git diff --quiet HEAD@{1} packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap --color > foo.txt
-        else
-            echo "got changes"
-            git diff --quiet HEAD@{1} packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap --color > foo.txt
-        fi
-
+    steps:
+      - name: Get Diff
+        run: |
+          if git diff --quiet HEAD@{1} packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap
+          then
+              echo "no changes"
+              git diff --quiet HEAD@{1} packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap --color > foo.txt
+          else
+              echo "got changes"
+              git diff --quiet HEAD@{1} packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap --color > foo.txt
+          fi
