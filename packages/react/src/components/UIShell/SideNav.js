@@ -163,6 +163,7 @@ SideNav.defaultProps = {
   isPersistent: true,
   addFocusListeners: true,
   addMouseListeners: true,
+  href: '#main-content',
 };
 
 SideNav.propTypes = {
@@ -201,7 +202,7 @@ SideNav.propTypes = {
    * Provide the `href` to the id of the element on your package that is the
    * main content.
    */
-  href: PropTypes.string,
+  href: PropTypes.string.isRequired,
 
   /**
    * Optionally provide a custom class to apply to the underlying `<li>` node
