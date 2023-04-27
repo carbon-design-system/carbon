@@ -42,7 +42,7 @@
   .#{$prefix}--contained-list .#{$prefix}--search {
     position: sticky;
     z-index: 1;
-    top: 48px;
+    top: layout.size('height');
   }
 
   .#{$prefix}--search {
