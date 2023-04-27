@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { OverflowMenuVertical } from '@carbon/icons-react';
 
+import { IconButton } from '../IconButton';
 import { Menu } from '../Menu';
 
 import { useId } from '../../internal/useId';
@@ -21,8 +22,10 @@ const defaultSize = 'md';
 function OverflowMenuV2({
   children,
   className,
+  label = 'Options',
   renderIcon: IconElement = OverflowMenuVertical,
   size = defaultSize,
+  tooltipAlignment,
   ...rest
 }) {
   const id = useId('overflowmenu');
@@ -45,18 +48,26 @@ function OverflowMenuV2({
 
   return (
     <div className={containerClasses} aria-owns={id}>
-      <button
+      <IconButton
         {...rest}
-        type="button"
         aria-haspopup
         aria-expanded={open}
         className={triggerClasses}
         onClick={handleClick}
         onMouseDown={handleMousedown}
-        ref={triggerRef}>
+        ref={triggerRef}
+        label={label}
+        align={tooltipAlignment}>
         <IconElement className={`${prefix}--overflow-menu__icon`} />
-      </button>
-      <Menu id={id} size={size} open={open} onClose={handleClose} x={x} y={y}>
+      </IconButton>
+      <Menu
+        id={id}
+        size={size}
+        open={open}
+        onClose={handleClose}
+        x={x}
+        y={y}
+        label={label}>
         {children}
       </Menu>
     </div>
@@ -75,6 +86,11 @@ OverflowMenuV2.propTypes = {
   className: PropTypes.string,
 
   /**
+   * A label describing the options available. Is used in the trigger tooltip and as the menu's accessible label.
+   */
+  label: PropTypes.string,
+
+  /**
    * Otionally provide a custom icon to be rendered on the trigger button.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
@@ -83,6 +99,20 @@ OverflowMenuV2.propTypes = {
    * Specify the size of the menu, from a list of available sizes.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * Specify how the trigger tooltip should be aligned.
+   */
+  tooltipAlignment: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+    'left',
+    'right',
+  ]),
 };
 
 export { OverflowMenuV2 };

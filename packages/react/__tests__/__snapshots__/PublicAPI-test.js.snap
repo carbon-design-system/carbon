@@ -5780,6 +5780,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "label": Object {
+        "type": "string",
+      },
       "renderIcon": Object {
         "args": Array [
           Array [
@@ -5799,6 +5802,21 @@ Map {
             "sm",
             "md",
             "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "tooltipAlignment": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "right",
           ],
         ],
         "type": "oneOf",

@@ -85,3 +85,37 @@ export const CustomIcon = () => {
     </OverflowMenuV2>
   );
 };
+
+export const Playground = (args) => {
+  return (
+    <OverflowMenuV2 {...args}>
+      <MenuItem label="Stop app" />
+      <MenuItem label="Restart app" />
+      <MenuItem label="Rename app" />
+      <MenuItem label="Edit routes and access" />
+      <MenuItemDivider />
+      <MenuItem label="Delete app" kind="danger" />
+    </OverflowMenuV2>
+  );
+};
+
+Playground.argTypes = {
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  renderIcon: {
+    table: {
+      disable: true,
+    },
+  },
+  label: {
+    defaultValue: 'Options',
+  },
+};
