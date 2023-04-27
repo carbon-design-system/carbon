@@ -92,7 +92,7 @@ export interface SliderProps
   /**
    * Provide the text that is displayed when the Slider is in an invalid state
    */
-  invalidText: React.ReactNode;
+  invalidText?: React.ReactNode;
 
   /**
    * The label for the slider.
