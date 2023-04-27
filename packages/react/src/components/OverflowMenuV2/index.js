@@ -47,7 +47,7 @@ function OverflowMenuV2({
   );
 
   return (
-    <div className={containerClasses} aria-owns={id}>
+    <div className={containerClasses} aria-owns={open ? id : null}>
       <IconButton
         {...rest}
         aria-haspopup
