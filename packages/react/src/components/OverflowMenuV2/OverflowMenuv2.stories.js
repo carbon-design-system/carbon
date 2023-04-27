@@ -19,6 +19,7 @@ import {
 } from '../Menu';
 
 import { OverflowMenuV2 } from './';
+import mdx from './OverflowMenuV2.mdx';
 
 export default {
   title: 'Components/OverflowMenuV2',
@@ -29,6 +30,11 @@ export default {
     MenuItemGroup,
     MenuItemRadioGroup,
     MenuItemDivider,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
   },
 };
 
