@@ -112,7 +112,7 @@ like:
 [![Edit carbon-web-components with custom style](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/styling/custom-style)
 
 ```javascript
-import { css, customElement } from 'lit-element';
+import { css, customElement } from 'lit';
 import BXDropdown from '@carbon/web-components/es/components/dropdown/dropdown';
 
 @customElement('my-dropdown')

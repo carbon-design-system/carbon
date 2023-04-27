@@ -7,7 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import './unordered-list';
 import './list-item';
 import { boolean } from '@storybook/addon-knobs';

@@ -7,7 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { radios } from '@storybook/addon-knobs';
 import { prefix } from '../../globals/settings';
 import storyDocs from './layer-story.mdx';

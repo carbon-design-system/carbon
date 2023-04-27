@@ -11,8 +11,7 @@
   },
   "dependencies": {
     "@carbon/web-components": "latest",
-    "lit-element": "^2.5.1",
-    "lit-html": "^1.4.1",
+    "lit": "^2.6.0",
     "lodash-es": "^4.17.0"
   },
   "devDependencies": {

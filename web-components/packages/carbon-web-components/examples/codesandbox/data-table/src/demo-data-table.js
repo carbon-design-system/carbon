@@ -8,8 +8,8 @@
  */
 
 import debounce from 'lodash-es/debounce';
-import { repeat } from 'lit-html/directives/repeat';
-import { html, property, customElement, LitElement } from 'lit-element';
+import { repeat } from 'lit/directives/repeat.js';
+import { html, property, customElement, LitElement } from 'lit';
 import ifNonNull from '@carbon/web-components/es/globals/directives/if-non-null';
 import TrashCan from '@carbon/web-components/es/icons/trash-can/16';
 import Download16 from '@carbon/web-components/es/icons/download/16';

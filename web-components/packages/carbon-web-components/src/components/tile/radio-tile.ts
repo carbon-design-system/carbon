@@ -8,8 +8,8 @@
  */
 
 import { html, svg } from 'lit';
-import { classMap } from 'lit-html/directives/class-map';
-import { ifDefined } from 'lit/directives/if-defined';
+import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import SelectableTile from './selectable-tile';

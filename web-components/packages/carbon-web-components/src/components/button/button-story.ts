@@ -25,7 +25,7 @@ import {
 import './button-skeleton';
 import textNullable from '../../../.storybook/knob-text-nullable';
 import storyDocs from './button-story.mdx';
-import { ifDefined } from 'lit/directives/if-defined';
+import { ifDefined } from 'lit/directives/if-defined.js';
 
 const kind = {
   [`Primary button (${BUTTON_KIND.PRIMARY})`]: BUTTON_KIND.PRIMARY,
