@@ -42,7 +42,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     useState(defaultExpanded);
   const expanded = controlled ? expandedProp : expandedState;
   const sideNavRef = useRef(null);
-  const refNav = useMergedRefs([sideNavRef, ref]);
+  const navRef = useMergedRefs([sideNavRef, ref]);
 
   const handleToggle = (event, value = !expanded) => {
     if (!controlled) {
@@ -137,7 +137,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         <div className={overlayClassName} onClick={onOverlayClick} />
       )}
       <nav
-        ref={refNav}
+        ref={navRef}
         className={`${prefix}--side-nav__navigation ${className}`}
         {...accessibilityLabel}
         {...eventHandlers}
