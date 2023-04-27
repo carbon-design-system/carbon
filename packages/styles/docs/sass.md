@@ -152,8 +152,8 @@ specific style sheet must be imported:
 ```
 
 By default, the emitted grid will be a CSS Grid based implementation. If you
-prefer to use flexbox version, you can configure the package by writing the
-following:
+prefer to also use the flexbox version, you can configure the package by writing
+the following:
 
 ```scss
 @use '@carbon/styles' with (

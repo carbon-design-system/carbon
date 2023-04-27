@@ -7,6 +7,9 @@
 
 import DatePicker from './DatePicker';
 
-export { default as DatePickerSkeleton } from './DatePicker.Skeleton';
+export {
+  default as DatePickerSkeleton,
+  type DatePickerSkeletonProps,
+} from './DatePicker.Skeleton';
 export default DatePicker;
 export { DatePicker };

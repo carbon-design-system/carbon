@@ -12,6 +12,6 @@
 
 @if config.$use-flexbox-grid == true {
   @include grid.flex-grid();
-} @else {
-  @include grid.css-grid();
 }
+
+@include grid.css-grid();
