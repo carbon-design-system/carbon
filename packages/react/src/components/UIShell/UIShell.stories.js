@@ -50,6 +50,7 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
     'cds--col-lg-13': true,
     'cds--offset-lg-3': useResponsiveOffset,
   });
+
   const content = (
     <div className="cds--grid">
       <div className="cds--row">

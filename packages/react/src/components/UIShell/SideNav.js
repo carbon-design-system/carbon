@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { CARBON_SIDENAV_ITEMS } from './_utils';
 import { usePrefix } from '../../internal/usePrefix';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 // TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
 
@@ -40,6 +41,9 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   const [expandedViaHoverState, setExpandedViaHoverState] =
     useState(defaultExpanded);
   const expanded = controlled ? expandedProp : expandedState;
+  const sideNavRef = useRef(null);
+  const refNav = useMergedRefs([sideNavRef, ref]);
+
   const handleToggle = (event, value = !expanded) => {
     if (!controlled) {
       setExpandedState(value);
@@ -120,11 +124,10 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   }
 
   useEffect(() => {
-    console.log(isFixedNav);
     if (expanded && !isFixedNav) {
-      document.getElementById(`${prefix}--side-nav__navigation`).focus();
+      sideNavRef.current.focus();
     }
-  }, [expanded, isFixedNav, prefix]);
+  }, [expanded, isFixedNav, sideNavRef]);
 
   return (
     <>
@@ -133,9 +136,8 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         <div className={overlayClassName} onClick={onOverlayClick} />
       )}
       <nav
-        id={`${prefix}--side-nav__navigation`}
         tabIndex="-1"
-        ref={ref}
+        ref={refNav}
         className={`${prefix}--side-nav__navigation ${className}`}
         {...accessibilityLabel}
         {...eventHandlers}
