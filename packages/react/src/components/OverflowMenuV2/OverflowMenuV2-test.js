@@ -11,7 +11,7 @@ import { MenuItem } from '../Menu';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-describe('OverflowMenu', () => {
+describe('OverflowMenuV2', () => {
   it('should render closed by default', () => {
     render(
       <OverflowMenuV2>
