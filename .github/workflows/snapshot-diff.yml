@@ -13,11 +13,10 @@ jobs:
           fetch-depth: 2
       - name: diff
         run: |
-          if git diff HEAD^ HEAD
+          if git diff HEAD^ HEAD packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap
           then
-             echo "no changes"
-             echo git diff HEAD^ HEAD
+             echo "New changes"
+             echo git diff HEAD^ HEAD packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap
           else
-            echo "got changes"
-            echo git diff HEAD^ HEAD --color > foo.txt
+            echo "Nothing new"
           fi
