@@ -19,7 +19,7 @@ import { useContextMenu } from './';
 import mdx from './useContextMenu.mdx';
 
 export default {
-  title: 'Experimental/unstable__useContextMenu',
+  title: 'Hooks/useContextMenu',
   component: useContextMenu,
   parameters: {
     docs: {
