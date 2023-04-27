@@ -170,7 +170,7 @@ describe('TableHeader', () => {
   });
 
   describe('behaves as expected', () => {
-    it('should call onClick when expected', () => {
+    it('should call onClick when expected', async () => {
       const onClick = jest.fn();
       render(
         <Table>
@@ -182,7 +182,7 @@ describe('TableHeader', () => {
         </Table>
       );
 
-      userEvent.click(screen.getByRole('button'), 'test');
+      await userEvent.click(screen.getByRole('button'), 'test');
       expect(onClick).toHaveBeenCalled();
     });
   });

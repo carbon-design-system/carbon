@@ -29,6 +29,7 @@ import DatePickerInput from '../DatePickerInput';
   - [DatePicker `maxDate`](#datepicker-maxdate)
   - [DatePicker `minDate`](#datepicker-mindate)
   - [DatePicker `disable` and `enable`](#datepicker-disable-and-enable)
+  - [DatePicker `value`](#datepicker-value)
 - [References](#references)
 - [Feedback](#feedback)
 
@@ -219,13 +220,29 @@ is setting it as January 9th.
 
 Works similarly to the `maxDate` prop. [See above](#datepicker-maxdate).
 
-<DatePicker maxDate="09/01/2020" datePickerType="single" value="07/15/1988">
+<DatePicker
+  minDate={new Date().setDate(new Date().getDate() - 5)}
+  datePickerType="single"
+  value={new Date()}>
   <DatePickerInput
     placeholder="dd/mm/yyyy"
     id="date-picker-5"
     labelText="minDate example"
   />
 </DatePicker>
+
+```jsx
+<DatePicker
+  minDate={new Date().setDate(new Date().getDate() - 5)}
+  datePickerType="single"
+  value={new Date()}>
+  <DatePickerInput
+    placeholder="dd/mm/yyyy"
+    id="date-picker-5"
+    labelText="minDate example"
+  />
+</DatePicker>
+```
 
 ### DatePicker `disable` and `enable`
 
@@ -234,10 +251,20 @@ dates. The disable takes in a array of date strings, or you can pass in a date
 function to the array that will disable dates that returns true.
 [See the Flatpickr documentation for more info](https://flatpickr.js.org/examples/#disabling-dates).
 
-```
 <DatePicker
   datePickerType="single"
-  disable={[ (date) => (date.getDay() === 0 || date.getDay() === 6)]}>
+  disable={[(date) => date.getDay() === 0 || date.getDay() === 6]}>
+  <DatePickerInput
+    placeholder="dd/mm/yyyy"
+    id="date-picker-8"
+    labelText="minDate example"
+  />
+</DatePicker>
+
+```jsx
+<DatePicker
+  datePickerType="single"
+  disable={[(date) => date.getDay() === 0 || date.getDay() === 6]}>
   <DatePickerInput
     placeholder="dd/mm/yyyy"
     id="date-picker-8"
@@ -250,10 +277,32 @@ The `enable` option works the same, but will disable all dates that are not
 explicitly added to the array.
 [See the flatpickr documentation for more info](https://flatpickr.js.org/examples/#disabling-all-dates-except-select-few).
 
-```
 <DatePicker
   datePickerType="single"
-  enable={["2021-04-01", "2021-05-01"]}>
+  value="04/20/2023"
+  enable={[
+    {
+      from: '04/10/2023',
+      to: '04/25/2023',
+    },
+  ]}>
+  <DatePickerInput
+    placeholder="dd/mm/yyyy"
+    id="date-picker-8"
+    labelText="minDate example"
+  />
+</DatePicker>
+
+```jsx
+<DatePicker
+  datePickerType="single"
+  value="04/20/2023"
+  enable={[
+    {
+      from: '04/10/2023',
+      to: '04/25/2023',
+    },
+  ]}>
   <DatePickerInput
     placeholder="dd/mm/yyyy"
     id="date-picker-8"
@@ -267,7 +316,7 @@ explicitly added to the array.
 By default `DatePicker` will set the current date as its value. If you'd like to
 start this at a different date, you can pass in a date string or date object.
 
-<DatePicker maxDate="09/01/2020" datePickerType="single" value="07/15/1988">
+<DatePicker datePickerType="single" value="07/15/1988">
   <DatePickerInput
     placeholder="dd/mm/yyyy"
     id="date-picker-6"
@@ -275,10 +324,7 @@ start this at a different date, you can pass in a date string or date object.
   />
 </DatePicker>
 <br />
-<DatePicker
-  maxDate="09/01/2020"
-  datePickerType="single"
-  value={new Date().setDate(-10)}>
+<DatePicker datePickerType="single" value={new Date()}>
   <DatePickerInput
     placeholder="dd/mm/yyyy"
     id="date-picker-7"
@@ -287,15 +333,20 @@ start this at a different date, you can pass in a date string or date object.
 </DatePicker>
 
 ```jsx
-<DatePicker maxDate="09/01/2020" datePickerType="single" value="07/15/1988">
-  <DatePickerInput placeholder="dd/mm/yyyy" />
+<DatePicker datePickerType="single" value="07/15/1988">
+  <DatePickerInput
+    placeholder="dd/mm/yyyy"
+    id="date-picker-6"
+    labelText="Value as string example"
+  />
 </DatePicker>
-
-<DatePicker
-  maxDate="09/01/2020"
-  datePickerType="single"
-  value={new Date().setDate(-10)}>
-  <DatePickerInput placeholder="dd/mm/yyyy" />
+<br />
+<DatePicker datePickerType="single" value={new Date()}>
+  <DatePickerInput
+    placeholder="dd/mm/yyyy"
+    id="date-picker-7"
+    labelText="Value as object example"
+  />
 </DatePicker>
 ```
 

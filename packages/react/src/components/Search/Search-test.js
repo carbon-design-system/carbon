@@ -72,16 +72,16 @@ describe('Search', () => {
       );
     });
 
-    it('should call onChange when expected', () => {
+    it('should call onChange when expected', async () => {
       const onChange = jest.fn();
       render(<Search labelText="test-search" onChange={onChange} />);
 
-      userEvent.type(screen.getByRole('searchbox'), 'test');
+      await userEvent.type(screen.getByRole('searchbox'), 'test');
 
       expect(onChange).toHaveBeenCalled();
     });
 
-    it('should respect onClear prop', () => {
+    it('should respect onClear prop', async () => {
       const onClear = jest.fn();
       render(
         <Search
@@ -91,25 +91,25 @@ describe('Search', () => {
         />
       );
 
-      userEvent.click(screen.getByLabelText('clear'));
+      await userEvent.click(screen.getByLabelText('clear'));
 
       expect(onClear).toHaveBeenCalled();
     });
 
-    it('should respect onExpand prop', () => {
+    it('should respect onExpand prop', async () => {
       const onExpand = jest.fn();
       render(<Search labelText="test-search" onExpand={onExpand} />);
 
-      userEvent.click(screen.getAllByRole('button')[0]);
+      await userEvent.click(screen.getAllByRole('button')[0]);
 
       expect(onExpand).toHaveBeenCalled();
     });
 
-    it('should call onKeyDown when expected', () => {
+    it('should call onKeyDown when expected', async () => {
       const onKeyDown = jest.fn();
       render(<Search labelText="test-search" onKeyDown={onKeyDown} />);
 
-      userEvent.type(screen.getByRole('searchbox'), 'test');
+      await userEvent.type(screen.getByRole('searchbox'), 'test');
 
       expect(onKeyDown).toHaveBeenCalled();
     });
