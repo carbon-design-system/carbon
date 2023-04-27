@@ -16,8 +16,8 @@ jobs:
           if git diff HEAD^ HEAD
           then
              echo "no changes"
-             git diff HEAD^ HEAD --color > foo.txt
+             echo git diff HEAD^ HEAD
           else
             echo "got changes"
-            git diff HEAD^ HEAD --color > foo.txt
+            echo git diff HEAD^ HEAD --color > foo.txt
           fi
