@@ -125,7 +125,8 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 
   useEffect(() => {
     if (expanded && !isFixedNav) {
-      sideNavRef.current.focus();
+      const firstLink = sideNavRef.current.querySelector('[tabindex="0"]');
+      firstLink.focus();
     }
   }, [expanded, isFixedNav, sideNavRef]);
 
@@ -136,7 +137,6 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         <div className={overlayClassName} onClick={onOverlayClick} />
       )}
       <nav
-        tabIndex="-1"
         ref={refNav}
         className={`${prefix}--side-nav__navigation ${className}`}
         {...accessibilityLabel}
