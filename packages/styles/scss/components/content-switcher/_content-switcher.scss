@@ -35,9 +35,6 @@
     position: relative;
     display: inline-flex;
     overflow: hidden;
-    width: 100%;
-    align-items: center;
-    padding: $spacing-03 layout.density('padding-inline');
     border: none;
     border-top: rem(1px) solid $border-inverse;
     border-bottom: rem(1px) solid $border-inverse;
@@ -107,6 +104,13 @@
     &:disabled:last-child {
       border-color: $border-disabled;
     }
+  }
+
+  .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
+    .#{$prefix}--content-switcher-btn {
+    width: 100%;
+    align-items: center;
+    padding: $spacing-03 layout.density('padding-inline');
   }
 
   .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
