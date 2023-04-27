@@ -11,6 +11,7 @@ import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { CARBON_SIDENAV_ITEMS } from './_utils';
 import { usePrefix } from '../../internal/usePrefix';
 import { useMergedRefs } from '../../internal/useMergedRefs';
+
 // TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
 
@@ -124,7 +125,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   }
 
   useEffect(() => {
-    if (expanded && !isFixedNav) {
+    if (expanded && !isFixedNav && sideNavRef.current) {
       const firstLink = sideNavRef.current.querySelector('[tabindex="0"]');
       firstLink.focus();
     }
