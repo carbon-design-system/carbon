@@ -7,13 +7,17 @@ jobs:
   snapshot-diff:
     runs-on: ubuntu-latest
     steps:
-      - name: Get Diff
+      - name: Checkout
+        uses: actions/checkout@3
+        with:
+          fetch-depth: 2
+      - name: diff
         run: |
-          if git diff HEAD^ -- packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap
+          if git diff HEAD^ HEAD
           then
-              echo "no changes"
-              git diff HEAD^ -- packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap --color > foo.txt
+             echo "no changes"
+             git diff HEAD^ HEAD --color > foo.txt
           else
-              echo "got changes"
-              git diff HEAD^ -- packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap --color > foo.txt
+            echo "got changes"
+            git diff HEAD^ HEAD --color > foo.txt
           fi
