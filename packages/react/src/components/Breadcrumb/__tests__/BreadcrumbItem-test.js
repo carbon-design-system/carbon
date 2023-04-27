@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { cleanup, render } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import React from 'react';
 import { BreadcrumbItem } from '../../Breadcrumb';
 
@@ -15,13 +15,13 @@ describe('BreadcrumbItem', () => {
   describe('Component API', () => {
     it('should accept a `ref` for the outermost node', () => {
       const ref = jest.fn(() => React.createRef());
-      const { container } = render(
+      render(
         <BreadcrumbItem href="/test" ref={ref}>
           Test
         </BreadcrumbItem>
       );
       expect(ref).toHaveBeenCalled();
-      expect(ref).toHaveBeenCalledWith(container.firstChild);
+      expect(ref).toHaveBeenCalledWith(screen.getByRole('listitem'));
     });
   });
 });

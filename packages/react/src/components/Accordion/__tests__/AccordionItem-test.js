@@ -13,9 +13,11 @@ import { render, screen } from '@testing-library/react';
 describe('AccordionItem', () => {
   describe('renders as expected - Component API', () => {
     it('should spread extra props onto outermost element', () => {
-      const { container } = render(<AccordionItem data-testid="test-id" />);
-
-      expect(container.firstChild).toHaveAttribute('data-testid', 'test-id');
+      render(<AccordionItem data-testid="test-id" />);
+      expect(screen.getByTestId('test-id')).toHaveAttribute(
+        'data-testid',
+        'test-id'
+      );
     });
 
     it('should render and match snapshot', () => {
@@ -29,9 +31,8 @@ describe('AccordionItem', () => {
     });
 
     it('should support a custom `className` prop on the outermost element', () => {
-      const { container } = render(<AccordionItem className="custom-class" />);
-
-      expect(container.firstChild).toHaveClass('custom-class');
+      render(<AccordionItem className="custom-class" />);
+      expect(screen.getByRole('listitem')).toHaveClass('custom-class');
     });
 
     it('should respect disabled prop', () => {

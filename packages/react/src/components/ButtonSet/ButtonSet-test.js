@@ -22,19 +22,19 @@ describe('ButtonSet', () => {
   });
 
   it('should support a custom className on the outermost element', () => {
-    const { container } = render(<ButtonSet className="test" />);
-    expect(container.firstChild).toHaveClass('test');
+    render(<ButtonSet data-testid="class" className="test" />);
+    expect(screen.getByTestId('class')).toHaveClass('test');
   });
 
   it('should spread props onto the outermost element', () => {
-    const { container } = render(<ButtonSet data-testid="test" />);
-    expect(container.firstChild).toHaveAttribute('data-testid', 'test');
+    render(<ButtonSet data-testid="props" />);
+    expect(screen.getByTestId('props')).toHaveAttribute('data-testid', 'props');
   });
 
   it('should support a `ref` that is placed on the outermost element', () => {
     const ref = jest.fn();
-    const { container } = render(<ButtonSet ref={ref} />);
-    expect(ref).toHaveBeenCalledWith(container.firstChild);
+    render(<ButtonSet data-testid="ref" ref={ref} />);
+    expect(ref).toHaveBeenCalledWith(screen.getByTestId('ref'));
   });
 
   describe('stacked', () => {

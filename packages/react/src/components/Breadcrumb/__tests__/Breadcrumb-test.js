@@ -57,22 +57,25 @@ describe('Breadcrumb', () => {
   });
 
   it('should accept a `className` for outermost DOM node', () => {
-    const { container } = render(<Breadcrumb className="test" />);
+    render(<Breadcrumb className="test" />);
 
-    expect(container.firstChild).toHaveClass('test');
+    expect(screen.getByRole('navigation')).toHaveClass('test');
   });
 
   it('should apply additional props to the outermost element', () => {
-    const { container } = render(<Breadcrumb data-testid="test" />);
+    render(<Breadcrumb data-testid="test" />);
 
-    expect(container.firstChild).toHaveAttribute('data-testid', 'test');
+    expect(screen.getByRole('navigation')).toHaveAttribute(
+      'data-testid',
+      'test'
+    );
   });
 
   it('should accept a `ref` for the outermost element', () => {
     const ref = jest.fn();
-    const { container } = render(<Breadcrumb ref={ref} />);
+    render(<Breadcrumb ref={ref} />);
 
-    expect(ref).toHaveBeenCalledWith(container.firstChild);
+    expect(ref).toHaveBeenCalledWith(screen.getByRole('navigation'));
   });
 
   describe('automated verification testing', () => {

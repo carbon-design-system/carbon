@@ -26,10 +26,8 @@ describe('Button', () => {
   });
 
   it('should support a custom className on the outermost element', () => {
-    const { container } = render(
-      <Button className="custom-class">test</Button>
-    );
-    expect(container.firstChild).toHaveClass('custom-class');
+    render(<Button className="custom-class">test</Button>);
+    expect(screen.getByRole('button')).toHaveClass('custom-class');
   });
 
   it('should render an element with the button role', () => {

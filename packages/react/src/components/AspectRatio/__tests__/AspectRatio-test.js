@@ -12,9 +12,12 @@ import { render, screen } from '@testing-library/react';
 describe('AspectRatio', () => {
   describe('renders as expected - Component API', () => {
     it('should spread extra props onto outermost element', () => {
-      const { container } = render(<AspectRatio data-testid="test-id" />);
+      render(<AspectRatio data-testid="test-id" />);
 
-      expect(container.firstChild).toHaveAttribute('data-testid', 'test-id');
+      expect(screen.getByTestId('test-id')).toHaveAttribute(
+        'data-testid',
+        'test-id'
+      );
     });
 
     it('should respect as prop', () => {
@@ -40,18 +43,22 @@ describe('AspectRatio', () => {
     });
 
     it('should support a custom `className` prop on the outermost element', () => {
-      const { container } = render(<AspectRatio className="custom-class" />);
+      render(<AspectRatio data-testid="class" className="custom-class" />);
 
-      expect(container.firstChild).toHaveClass('custom-class');
+      expect(screen.getByTestId('class')).toHaveClass('custom-class');
     });
 
     it('should respect ratio prop', () => {
       const ratios = ['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1'];
 
       ratios.forEach((ratio) => {
-        const { container } = render(<AspectRatio ratio={ratio} />);
+        render(
+          <AspectRatio ratio={ratio} data-testid={`aspect-ratio ${ratio}`} />
+        );
 
-        expect(container.firstChild).toHaveClass(`cds--aspect-ratio--${ratio}`);
+        expect(screen.getByTestId(`aspect-ratio ${ratio}`)).toHaveClass(
+          `cds--aspect-ratio--${ratio}`
+        );
       });
     });
   });

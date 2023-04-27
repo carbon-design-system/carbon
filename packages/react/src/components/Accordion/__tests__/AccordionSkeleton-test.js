@@ -12,9 +12,11 @@ import { render, screen } from '@testing-library/react';
 describe('AccordionSkeleton', () => {
   describe('renders as expected - Component API', () => {
     it('should spread extra props onto outermost element', () => {
-      const { container } = render(<AccordionSkeleton data-testid="test-id" />);
-
-      expect(container.firstChild).toHaveAttribute('data-testid', 'test-id');
+      render(<AccordionSkeleton data-testid="test-id" />);
+      expect(screen.getByTestId('test-id')).toHaveAttribute(
+        'data-testid',
+        'test-id'
+      );
     });
 
     it('should render and match snapshot', () => {
@@ -24,21 +26,18 @@ describe('AccordionSkeleton', () => {
     });
 
     it('should respect align prop', () => {
-      const { container, rerender } = render(
-        <AccordionSkeleton align="start" />
-      );
-      expect(container.firstChild).toHaveClass('cds--accordion--start');
+      render(<AccordionSkeleton data-testid="start" align="start" />);
+      expect(screen.getByTestId('start')).toHaveClass('cds--accordion--start');
 
-      rerender(<AccordionSkeleton align="end" />);
-      expect(container.firstChild).toHaveClass('cds--accordion--end');
+      render(<AccordionSkeleton data-testid="end" align="end" />);
+      expect(screen.getByTestId('end')).toHaveClass('cds--accordion--end');
     });
 
     it('should support a custom `className` prop on the outermost element', () => {
-      const { container } = render(
-        <AccordionSkeleton className="custom-class" />
+      render(
+        <AccordionSkeleton data-testid="class" className="custom-class" />
       );
-
-      expect(container.firstChild).toHaveClass('custom-class');
+      expect(screen.getByTestId('class')).toHaveClass('custom-class');
     });
 
     it('should respect count prop', () => {
@@ -48,9 +47,8 @@ describe('AccordionSkeleton', () => {
     });
 
     it('should respect isFlush prop', () => {
-      const { container } = render(<AccordionSkeleton isFlush />);
-
-      expect(container.firstChild).toHaveClass('cds--accordion--flush');
+      render(<AccordionSkeleton data-testid="flush" isFlush />);
+      expect(screen.getByTestId('flush')).toHaveClass('cds--accordion--flush');
     });
 
     it('should respect open prop', () => {
