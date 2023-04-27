@@ -189,10 +189,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
   }
 
   .#{$prefix}--accordion--start .#{$prefix}--accordion__content {
-    // see https://github.com/carbon-design-system/carbon/blob/main/packages/styles/docs/sass.md#contextual-layout-tokens -> Troubleshooting
-    --temp-padding-inline: #{layout.density('padding-inline')};
-
-    margin-left: calc(var(--temp-padding-inline) + #{$spacing-05});
+    margin-left: calc(#{layout.density('padding-inline')} + #{$spacing-05});
   }
 
   .#{$prefix}--accordion__item--collapsing .#{$prefix}--accordion__content,

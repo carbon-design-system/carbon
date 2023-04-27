@@ -98,15 +98,13 @@
   .#{$prefix}--contained-list-item__content,
   .#{$prefix}--contained-list-item--clickable
     .#{$prefix}--contained-list-item__content {
-    // see https://github.com/carbon-design-system/carbon/blob/main/packages/styles/docs/sass.md#contextual-layout-tokens -> Troubleshooting
-    --temp-height: #{layout.size('height')};
     // https://caniuse.com/mdn-css_types_length_lh
     --temp-1lh: (var(--#{$prefix}-body-01-line-height) * 1em);
 
     @include type-style('body-01');
 
     min-height: layout.size('height');
-    padding: calc(calc((var(--temp-height) - var(--temp-1lh)) / 2))
+    padding: calc(calc((#{layout.size('height')} - var(--temp-1lh)) / 2))
       layout.density('padding-inline');
     color: $text-primary;
   }

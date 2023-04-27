@@ -892,23 +892,6 @@ will render in `1.5rem` size. It would therefore be appropriate to include
 `xs: 1.125rem` in this token definition even though the component doesn't
 support an explicit `xs` mode._**
 
-#### Troubleshooting
-
-Some versions of `postcss-calc` may error out when using contextual layout
-tokens inside the css `calc` function as it may break if three or more css
-custom properties are used. Reference:
-https://github.com/postcss/postcss-calc/issues/104
-
-If you run into this issue and cannot resolve it by upgrading your dependencies,
-you can use a local css custom property as a workaround. Example:
-
-```scss
-.my-component {
-  --temp-padding-inline: layout.density('padding-inline');
-  left: calc(var(--temp-padding-inline) + var(--cds-spacing-05));
-}
-```
-
 ## Compatibility
 
 | Import                                      | Filepath                   |
