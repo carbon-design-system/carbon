@@ -1318,7 +1318,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "tooltipAlign": Object {
+      "tooltipAlignment": Object {
         "args": Array [
           Array [
             "top",
