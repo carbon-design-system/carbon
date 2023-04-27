@@ -829,7 +829,7 @@ export default class Slider extends PureComponent<SliderProps> {
                   onKeyDown={this.onKeyDown}
                   role="presentation"
                   tabIndex={-1}
-                  data-invalid={isValid ? null : true}
+                  data-invalid={!isValid && !readOnly ? true : null}
                   {...other}>
                   <div
                     className={`${prefix}--slider__thumb`}
@@ -872,8 +872,8 @@ export default class Slider extends PureComponent<SliderProps> {
                   onChange={this.onChange}
                   onBlur={this.onBlur}
                   onKeyUp={this.props.onInputKeyUp}
-                  data-invalid={isValid ? null : true}
-                  aria-invalid={isValid ? undefined : true}
+                  data-invalid={!isValid && !readOnly ? true : null}
+                  aria-invalid={!isValid && !readOnly ? true : undefined}
                   readOnly={readOnly}
                 />
                 {!readOnly && isValid === false && (
