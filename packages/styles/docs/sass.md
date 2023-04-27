@@ -573,7 +573,7 @@ rendering-related setting across multiple components. A new layout context can
 be set by wrapping the affected content in a container with the appropriate
 layout classes set. The container must always have the base css class
 (`.#{$prefix}--layout`) applied. Any other class is optional and targeted
-towards a layout token group. Right now, two groups exist: `size` and `density`.
+towards a layout token group. Currently, two groups exist: `size` and `density`.
 To define a group's setting, follow the structure of
 `.#{$prefix}--layout--group-step` with the details below (e.g.
 `.#{$prefix}--layout--size-lg`):
@@ -593,7 +593,7 @@ css custom properties are not set if a component is not within a layout context,
 so you'll need to provide a fallback. This should be the component's default
 styling and can still rely on the layout tokens by explicitely defining the
 step. For example, a component that, by default, should have a height of `md`
-but participate in layout contexts would be built in the following way:
+but participate in layout contexts could be built in the following way:
 
 ```scss
 .my-component {
@@ -618,33 +618,122 @@ Example:
 </div>
 ```
 
+#### Layout constraints
+
+Naturally, with component-based development there will be scenarios where you
+want to re-use an exising component within a new one. These two components might
+not always share the same constraints (default, min, max) though. In order to
+control the child component's constraints but still participate in layout
+contexts, you can use some utility classes.
+
+Let's assume `my-component` supports sizes from `sm` to `lg` with a default of
+`md` and `button` supports sizes from `xs` to `2xl` with a default of `lg`.
+
+```html
+<div class="my-component">
+  ...
+  <div
+    class="cds--layout-constraint--size:default-md cds--layout-constraint--size:min-sm cds--layout-constraint--size:max-lg">
+    <!-- The button component will now be constrainted to the minimum size of 'sm', the maximum of 'lg' and default to 'md' -->
+    <div class="button">...</div>
+  </div>
+</div>
+```
+
+All layout groups offer the following utility classes:
+
+<table>
+<thead><tr><th>Class</th><th>CSS</th></tr></thead>
+<tbody>
+<tr><td>
+
+```
+cds--layout-constraint--group:default-step
+```
+
+</td><td>
+
+```scss
+.cds--layout-constraint--group\:default-step {
+  // for each property in this group:
+  --cds-layout-group-property: var(
+    --cds-layout-group-property-context,
+    var(--cds-layout-group-property-step, step-value)
+  );
+}
+```
+
+</td></tr><tr><td>
+
+```
+cds--layout-constraint--group:min-step
+```
+
+</td><td>
+
+```scss
+.cds--layout-constraint--group\:min-step {
+  // for each property in this group:
+  --cds-layout-group-property-min: var(
+    --cds-layout-group-property-step,
+    step-value
+  );
+}
+```
+
+</td></tr><tr><td>
+
+```
+cds--layout-constraint--group:max-step
+```
+
+</td><td>
+
+```scss
+.cds--layout-constraint--group\:max-step {
+  // for each property in this group:
+  --cds-layout-group-property-max: var(
+    --cds-layout-group-property-step,
+    step-value
+  );
+}
+```
+
+</td></tr>
+</tbody>
+</table>
+
 #### sass helpers
 
 In order to simplify contextual layout tokens, Carbon provides the following
 sass functions:
 
-##### `layout.size`
+##### `layout.use`
 
-`layout.size` returns the css custom properties structure outlined above with
-support for min and max values. Providing a default is required:
+`layout.use` is a mixin that should be included on the outermost selector of
+your component. It will emit local css custom properties for all properties in
+the passed layout group. Providing the group name and a default is required:
 
 ```scss
 @use '@carbon/styles/scss/utilities/layout';
 
 .my-component {
   // minimal required setup, provide the requested property and a default
-  height: layout.size('height', $default: 'md');
+  @include layout.use('size', $default: 'md');
 
   // optionally provide a minimum size for the component
-  height: layout.size('height', $default: 'md', $min: 'sm');
+  @include layout.use('size', $default: 'md', $min: 'sm');
 
   // optionally provide a maximum size for the component
-  height: layout.size('height', $default: 'md', $max: 'lg');
+  @include layout.use('size', $default: 'md', $max: 'lg');
 
   // optionally provide both a minimum and maximum size for the component
-  height: layout.size('height', $default: 'md', $min: 'sm', $max: 'lg');
+  @include layout.use('size', $default: 'md', $min: 'sm', $max: 'lg');
 }
 ```
+
+For reference, this table demonstrates the generated local css custom properties
+for each scenario.
 
 <table>
 <thead><tr><th>Usage</th><th>Return</th></tr></thead>
@@ -653,7 +742,7 @@ support for min and max values. Providing a default is required:
 
 ```scss
 .my-component {
-  height: layout.size('height', $default: 'md');
+  @include layout.use('size', $default: 'md');
 }
 ```
 
@@ -661,25 +750,10 @@ support for min and max values. Providing a default is required:
 
 ```scss
 .my-component {
-  height: var(--cds-layout-size-height, var(--cds-layout-size-height-md));
-}
-```
-
-</td></tr><tr><td>
-
-```scss
-.my-component {
-  height: layout.size('height', $default: 'md', $min: 'sm');
-}
-```
-
-</td><td>
-
-```scss
-.my-component {
-  height: max(
-    var(--cds-layout-size-height-sm),
-    var(--cds-layout-size-height, var(--cds-layout-size-height-md))
+  --cds-layout-size-height-local: clamp(
+    var(--cds-layout-size-height-min),
+    var(--cds-layout-size-height, var(--cds-layout-size-height-md)),
+    var(--cds-layout-size-height-max)
   );
 }
 ```
@@ -688,7 +762,7 @@ support for min and max values. Providing a default is required:
 
 ```scss
 .my-component {
-  height: layout.size('height', $default: 'md', $max: 'lg');
+  @include layout.use('size', $default: 'md', $min: 'sm');
 }
 ```
 
@@ -696,9 +770,10 @@ support for min and max values. Providing a default is required:
 
 ```scss
 .my-component {
-  height: min(
+  --cds-layout-size-height-local: clamp(
+    max(var(--cds-layout-size-height-min), var(--cds-layout-size-height-sm)),
     var(--cds-layout-size-height, var(--cds-layout-size-height-md)),
-    var(--cds-layout-size-height-lg)
+    var(--cds-layout-size-height-max)
   );
 }
 ```
@@ -707,7 +782,7 @@ support for min and max values. Providing a default is required:
 
 ```scss
 .my-component {
-  height: layout.size('height', $default: 'md', $min: 'sm', $max: 'lg');
+  @include layout.use('size', $default: 'md', $max: 'lg');
 }
 ```
 
@@ -715,10 +790,30 @@ support for min and max values. Providing a default is required:
 
 ```scss
 .my-component {
-  height: clamp(
-    var(--cds-layout-size-height-sm),
+  --cds-layout-size-height-local: clamp(
+    max(var(--cds-layout-size-height-min), var(--cds-layout-size-height-sm)),
     var(--cds-layout-size-height, var(--cds-layout-size-height-md)),
-    var(--cds-layout-size-height-lg)
+    min(var(--cds-layout-size-height-max), var(--cds-layout-size-height-lg))
+  );
+}
+```
+
+</td></tr><tr><td>
+
+```scss
+.my-component {
+  @include layout.use('size', $default: 'md', $min: 'sm', $max: 'lg');
+}
+```
+
+</td><td>
+
+```scss
+.my-component {
+  --cds-layout-size-height-local: clamp(
+    var(--cds-layout-size-height-min),
+    var(--cds-layout-size-height, var(--cds-layout-size-height-md)),
+    min(var(--cds-layout-size-height-max), var(--cds-layout-size-height-lg))
   );
 }
 ```
@@ -727,78 +822,75 @@ support for min and max values. Providing a default is required:
 </tbody>
 </table>
 
-##### `layout.density`
+##### `layout.size`
 
-`layout.density` returns the css custom properties structure outlined above. It
-falls back to `normal` by default.
+`layout.size` returns the local css custom property for properties in the "size"
+layout group.
 
 ```scss
 @use '@carbon/styles/scss/utilities/layout';
 
 .my-component {
-  padding-inline: layout.density('padding-inline');
+  @include layout.use('size', $default: 'md');
+
+  height: layout.size('height');
+  // => height: var(--cds-layout-size-height-local);
 }
 ```
 
-<table>
-<thead><tr><th>Usage</th><th>Return</th></tr></thead>
-<tbody>
-<tr><td>
+##### `layout.density`
+
+`layout.density` returns the local css custom property for properties in the
+"density" layout group.
 
 ```scss
+@use '@carbon/styles/scss/utilities/layout';
+
 .my-component {
-  padding-inline: layout.density('padding-inline');
+  @include layout.use('density', $default: 'normal');
+
+  height: layout.density('padding-inline');
+  // => height: var(--cds-layout-density-padding-inline-local);
 }
 ```
-
-</td><td>
-
-```scss
-.my-component {
-  padding-inline: var(
-    --cds-layout-density-padding-inline,
-    var(--cds-layout-density-padding-inline-normal)
-  );
-}
-```
-
-</td></tr>
-</tbody>
-</table>
 
 ##### `layout.redefine-tokens`
 
 If a component should participate in layout contexts but uses non-standard
 values for the group steps, you can locally redefine the layout tokens by using
-this mixin. The mixin must be emitted at the top level as it generates new css
-classes.
+this mixin. The mixin must be emitted at the outermost selector of the
+component.
 
 ```scss
 @use '@carbon/styles/scss/utilities/layout';
 
-@include layout.redefine-tokens(
-  // for which selector these tokens should be defined
-  $selector: '.my-component',
-
-  // all applicable overrides, must follow ( group: ( step: ( property: value ) ) )
-  $overrides:
-    (
-      size: (
-        sm: (
-          height: 1.125rem,
-        )
-        md:
-        (
-          height: 1.5rem,
-        ),
-      )
-    )
-);
-
 .my-component {
-  height: layout.size('height', $default: 'md', $min: 'sm', $max: 'md');
+  @include layout.redefine-tokens(
+    // all applicable overrides, must follow ( group: ( property: ( step: value ) ) )
+    $overrides:
+      (
+        size: (
+          height: (
+            sm: 1.125rem,
+            md: 1.5rem,
+          ),
+        )
+      )
+  );
+
+  @include layout.use('size', $default: 'md', $min: 'sm', $max: 'md');
+
+  height: layout.size('height');
 }
 ```
+
+**_Note: Since this system uses CSS `clamp()` in order to enforce minimum and
+maximum values, you might need to override tokens you don't intend to use as
+well. In the example above, the new `sm (1.125rem)` value is smaller than the
+default `xs (1.5rem)` value. If a layout context is set to `xs`, the component
+will render in `1.5rem` size. It would therefore be appropriate to include
+`xs: 1.125rem` in this token definition even though the component doesn't
+support an explicit `xs` mode._**
 
 #### Troubleshooting
 
@@ -812,7 +904,7 @@ you can use a local css custom property as a workaround. Example:
 
 ```scss
 .my-component {
-  --temp-padding-inline: layout.size('padding-inline');
+  --temp-padding-inline: layout.density('padding-inline');
   left: calc(var(--temp-padding-inline) + var(--cds-spacing-05));
 }
 ```

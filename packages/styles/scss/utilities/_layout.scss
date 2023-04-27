@@ -31,6 +31,15 @@ $tokens: (
   ),
 );
 
+/// Enables the use of contextual layout tokens within a component. This mixin should be
+/// included on the outermost selector of the component.
+/// @param {String} $group - The layout group to use for this component
+/// @param {String} $default - The default step if the component is not within a layout
+/// @param {String} $min - The minimum step supported by this component (optional)
+/// @param {String} $max - The maximum step supported by this component (optional)
+/// @example @include use('size', $default: 'md', $min: 'sm', $max: 'lg')
+/// @group utilities
+/// @access public
 @mixin use($group, $default, $min: null, $max: null) {
   $properties: map.get($tokens, $group);
 
@@ -96,14 +105,30 @@ $tokens: (
   }
 }
 
+/// Internal base function for retrieving a property from a layout group.
+/// @param {String} $group - The group name as defined in the $tokens
+/// @param {String} $property - The property name
+/// @example @include -group('size', $property)
+/// @group utilities
+/// @access private
 @function -group($group, $property) {
   @return custom-property.get-var('layout-#{$group}-#{$property}-local');
 }
 
+/// Retrieves the current value for a property token in the layout size.
+/// @param {String} $property - The property name
+/// @example height: size('height');
+/// @group utilities
+/// @access public
 @function size($property) {
   @return -group('size', $property);
 }
 
+/// Retrieves the current value for a property token in the layout density.
+/// @param {String} $property - The property name
+/// @example padding-inline: density('padding-inline');
+/// @group utilities
+/// @access public
 @function density($property) {
   @return -group('density', $property);
 }
