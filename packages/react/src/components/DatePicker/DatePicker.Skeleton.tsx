@@ -6,11 +6,22 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type HTMLAttributes } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-const DatePickerSkeleton = ({ range, id, className, ...rest }) => {
+export interface DatePickerSkeletonProps
+  extends HTMLAttributes<HTMLDivElement> {
+  // Specify whether the skeleton should be of range date picker.
+  range?: boolean;
+}
+
+const DatePickerSkeleton = ({
+  range,
+  id,
+  className,
+  ...rest
+}: DatePickerSkeletonProps) => {
   const prefix = usePrefix();
   const dateInput = (
     <div className={`${prefix}--date-picker-container`}>

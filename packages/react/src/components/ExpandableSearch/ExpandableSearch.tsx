@@ -69,5 +69,6 @@ function ExpandableSearch({
 }
 
 ExpandableSearch.propTypes = Search.propTypes;
+ExpandableSearch.displayName = 'ExpandableSearch';
 
 export default ExpandableSearch;
