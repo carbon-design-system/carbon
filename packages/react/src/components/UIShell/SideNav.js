@@ -202,7 +202,7 @@ SideNav.propTypes = {
    * Provide the `href` to the id of the element on your package that is the
    * main content.
    */
-  href: PropTypes.string.isRequired,
+  href: PropTypes.string,
 
   /**
    * Optionally provide a custom class to apply to the underlying `<li>` node
