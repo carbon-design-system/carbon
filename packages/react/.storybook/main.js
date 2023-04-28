@@ -98,6 +98,7 @@ module.exports = {
   reactOptions: {
     legacyRootApi: false,
   },
+  staticDirs: [{ from: '../../styles/css/', to: '/' }],
   webpack(config) {
     const babelLoader = config.module.rules.find((rule) => {
       return rule.use.some(({ loader }) => {
