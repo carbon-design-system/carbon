@@ -6545,7 +6545,6 @@ Map {
         "type": "bool",
       },
       "href": Object {
-        "isRequired": true,
         "type": "string",
       },
       "isChildOfHeader": Object {
