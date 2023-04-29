@@ -6589,6 +6589,7 @@ Map {
     "defaultProps": Object {
       "assistiveText": "Toggle opening or closing the side navigation",
     },
+    "displayName": "SideNavFooter",
     "propTypes": Object {
       "assistiveText": Object {
         "isRequired": true,
@@ -6608,6 +6609,7 @@ Map {
     },
   },
   "SideNavHeader" => Object {
+    "displayName": "SideNavHeader",
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -6667,6 +6669,7 @@ Map {
     },
   },
   "SideNavItems" => Object {
+    "displayName": "SideNavItems",
     "propTypes": Object {
       "children": Object {
         "isRequired": true,
