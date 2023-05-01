@@ -41,7 +41,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   const [expandedViaHoverState, setExpandedViaHoverState] =
     useState(defaultExpanded);
   const expanded = controlled ? expandedProp : expandedState;
-
+  const [sideNavFocus, setSideNavFocus] = useState(true || expandedProp);
   const handleToggle = (event, value = !expanded) => {
     if (!controlled) {
       setExpandedState(value);
@@ -66,8 +66,9 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 
   const className = cx({
     [`${prefix}--side-nav`]: true,
-    [`${prefix}--side-nav--expanded`]: expanded || expandedViaHoverState,
-    [`${prefix}--side-nav--collapsed`]: !expanded && isFixedNav,
+    [`${prefix}--side-nav--expanded`]:
+      (expanded || expandedViaHoverState) && sideNavFocus,
+    [`${prefix}--side-nav--collapsed`]: !expanded && isFixedNav && sideNavFocus,
     [`${prefix}--side-nav--rail`]: isRail,
     [customClassName]: !!customClassName,
     [`${prefix}--side-nav--ux`]: isChildOfHeader,
@@ -76,7 +77,8 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 
   const overlayClassName = cx({
     [`${prefix}--side-nav__overlay`]: true,
-    [`${prefix}--side-nav__overlay-active`]: expanded || expandedViaHoverState,
+    [`${prefix}--side-nav__overlay-active`]:
+      (expanded || expandedViaHoverState) && sideNavFocus,
   });
 
   let childrenToRender = children;
@@ -106,11 +108,13 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   if (addFocusListeners) {
     eventHandlers.onFocus = (event) => {
       if (!event.currentTarget.contains(event.relatedTarget)) {
+        setSideNavFocus(true);
         handleToggle(event, true);
       }
     };
     eventHandlers.onBlur = (event) => {
       if (!event.currentTarget.contains(event.relatedTarget)) {
+        setSideNavFocus(false);
         handleToggle(event, false);
       }
     };

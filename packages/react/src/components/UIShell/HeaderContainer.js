@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { keys, match } from '../../internal/keyboard';
 import { useEvent } from '../../internal/useEvent';
 
@@ -15,6 +15,10 @@ const HeaderContainer = ({ isSideNavExpanded, render: Children }) => {
   //state for expandable sidenav
   const [isSideNavExpandedState, setIsSideNavExpandedState] =
     useState(isSideNavExpanded);
+
+  useEffect(() => {
+    console.log('isSideNavExpandedState', isSideNavExpandedState);
+  }, [isSideNavExpandedState]);
 
   useEvent(window, 'keydown', (event) => {
     if (match(event, keys.Escape)) {
