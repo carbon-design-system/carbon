@@ -22,12 +22,8 @@ jobs:
             echo "Nothing new"
             echo "diff=false" >> "$GITHUB_ENV"
           fi
-  on-success:
-    runs-on: ubuntu-latest
-    # We only want notifications for successful runs for certain workflows
-    if: ${{ env.diff }} == "true"
-    steps:
-      - name: Send custom JSON data to Slack
+      - name: on-success
+        if: env.diff == 'true'
         id: slack-success
         uses: slackapi/slack-github-action@v1.23.0
         with:
@@ -38,11 +34,8 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-  on-failure:
-    runs-on: ubuntu-latest
-    if: ${{ env.diff }} == "false"
-    steps:
-      - name: Send custom JSON data to Slack
+      - name: on-failure
+        if: env.diff == 'false'
         id: slack-failure
         uses: slackapi/slack-github-action@v1.23.0
         with:
@@ -53,5 +46,3 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-
-
