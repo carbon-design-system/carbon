@@ -14,11 +14,14 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { debounce } from 'debounce';
 import { usePrefix } from '../../internal/usePrefix';
 import { TableContext } from './TableContext';
 import { useEvent } from '../../internal/useEvent';
 
 interface TableProps {
+  autoAlign?: boolean;
+
   className?: string;
 
   /**
@@ -61,6 +64,7 @@ export const Table = ({
   useStaticWidth,
   stickyHeader,
   overflowMenuOnHover = true,
+  autoAlign = false,
   ...other
 }: PropsWithChildren<TableProps>) => {
   const { titleId, descriptionId } = useContext(TableContext);
@@ -76,58 +80,71 @@ export const Table = ({
   });
 
   const setTableAlignment = useCallback(() => {
-    const fragment = document.createDocumentFragment();
-    const canvas = document.createElement('canvas');
-    fragment.appendChild(canvas);
-    const context = canvas.getContext('2d');
+    if(autoAlign){
+      console.log("setTableAlignment call")
+      const start = Date.now();
+      const fragment = document.createDocumentFragment();
+      const canvas = document.createElement('canvas');
+      fragment.appendChild(canvas);
+      const context = canvas.getContext('2d');
 
-    if (tableRef.current && context) {
-      const isMultiline = Array.from(
-        tableRef.current.querySelectorAll('td')
-      ).some((td) => {
-        if (td.children.length > 0) {
-          return;
-        }
-        const computedStyles = window.getComputedStyle(td);
-        context.font = computedStyles.font
-          ? computedStyles.font
-          : `${computedStyles.fontSize}" "${computedStyles.fontFamily}`;
+      if (tableRef.current && context) {
+        const isMultiline = Array.from(
+          tableRef.current.querySelectorAll('td')
+        ).some((td) => {
+          if (td.children.length > 0) {
+            return;
+          }
+          const computedStyles = window.getComputedStyle(td);
+          context.font = computedStyles.font
+            ? computedStyles.font
+            : `${computedStyles.fontSize}" "${computedStyles.fontFamily}`;
 
-        let textWidth = context?.measureText(td.textContent ?? '').width ?? 0;
-        // account for letter spacing
-        const letterSpacing = computedStyles.letterSpacing?.split('px');
-        if (letterSpacing && letterSpacing.length) {
-          textWidth += Number(letterSpacing[0]) * (td.textContent?.length ?? 0);
-        }
-        // account for padding
-        const paddingLeft = computedStyles.paddingLeft?.split('px');
-        if (paddingLeft && paddingLeft.length) {
-          textWidth += Number(paddingLeft[0]);
-        }
+          const measuredText = context?.measureText(td.textContent ?? '')
 
-        const paddingRight = computedStyles.paddingLeft?.split('px');
-        if (paddingRight && paddingRight.length) {
-          textWidth += Number(paddingRight[0]);
-        }
-        // if measured textWidth is larger than the cell's width, then the content is being wrapped
-        if (textWidth > td.getBoundingClientRect().width) {
-          return true;
-        }
-      });
+          let textWidth = measuredText.width ?? 0;
+          // account for letter spacing
+          const letterSpacing = computedStyles.letterSpacing?.split('px');
+          if (letterSpacing && letterSpacing.length) {
+            textWidth += Number(letterSpacing[0]) * (td.textContent?.length ?? 0);
+          }
+          // account for padding
+          const paddingLeft = computedStyles.paddingLeft?.split('px');
+          if (paddingLeft && paddingLeft.length) {
+            textWidth += Number(paddingLeft[0]);
+          }
 
-      if (isMultiline) {
-        tableRef.current.classList.add(`${prefix}--data-table--top-aligned`);
-      } else {
-        tableRef.current.classList.remove(`${prefix}--data-table--top-aligned`);
+          const paddingRight = computedStyles.paddingLeft?.split('px');
+          if (paddingRight && paddingRight.length) {
+            textWidth += Number(paddingRight[0]);
+          }
+          // if measured textWidth is larger than the cell's width, then the content is being wrapped
+          if (textWidth > td.getBoundingClientRect().width) {
+            return true;
+          }
+        });
+
+        if (isMultiline) {
+          tableRef.current.classList.add(`${prefix}--data-table--top-aligned`);
+        } else {
+          tableRef.current.classList.remove(`${prefix}--data-table--top-aligned`);
+        }
       }
+      const end = Date.now();
+      console.log(`Execution time: ${end - start} ms`);
     }
-  }, [prefix]);
+  }, [prefix, autoAlign]);
 
-  useEvent(window, 'resize', setTableAlignment);
+  const debouncedSetTableAlignment = debounce(setTableAlignment, 100);
+
+  useEvent(window, 'resize', debouncedSetTableAlignment);
 
   useEffect(() => {
     setTableAlignment();
-  }, [setTableAlignment, size]);
+    return () => {
+      debouncedSetTableAlignment.clear()
+    }
+  }, [setTableAlignment, size, debouncedSetTableAlignment]);
 
   const table = (
     <div className={`${prefix}--data-table-content`}>
@@ -151,6 +168,7 @@ export const Table = ({
 };
 
 Table.propTypes = {
+  autoAlign: PropTypes.bool,
   /**
    * Pass in the children that will be rendered within the Table
    */
