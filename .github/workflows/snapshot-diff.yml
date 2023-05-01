@@ -17,8 +17,7 @@ jobs:
           then
              echo "New changes"
              echo "diff=true" >> "$GITHUB_ENV"
-             echo "output_diff=${{ git diff HEAD^ HEAD packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap }}" >> "$GITHUB_ENV"
-             echo git diff HEAD^ HEAD packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap
+             git diff HEAD^ HEAD packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap > diff.txt
           else
             echo "Nothing new"
             echo "diff=false" >> "$GITHUB_ENV"
@@ -31,7 +30,7 @@ jobs:
           payload: |
             {
               "diff": "The ${{ github.event.workflow.name }} workflow succeeded: ${{ github.event.workflow_run.url }}"
-              "output_diff": ${{ env.output_diff }}
+              "output_diff": "Git diff for PR #${{ github.event.pull_request.number }}:\n```$(cat diff.txt)```"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
