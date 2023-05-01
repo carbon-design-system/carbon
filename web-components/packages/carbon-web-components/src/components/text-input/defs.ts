@@ -36,6 +36,51 @@ export enum INPUT_SIZE {
 }
 
 /**
+ * Input tooltop alignment
+ */
+export enum INPUT_TOOLTIP_ALIGNMENT {
+  /**
+   * Small size.
+   */
+  START = 'start',
+
+  /**
+   * Regular size, same as medium size.
+   */
+  CENTER = 'center',
+
+  /**
+   * Large size.
+   */
+  END = 'end',
+}
+
+/**
+ * Input tooltop direction
+ */
+export enum INPUT_TOOLTIP_DIRECTION {
+  /**
+   * Small size.
+   */
+  TOP = 'top',
+
+  /**
+   * Regular size, same as medium size.
+   */
+  RIGHT = 'right',
+
+  /**
+   * Large size.
+   */
+  BOTTOM = 'bottom',
+
+  /**
+   * Regular size, same as medium size.
+   */
+  LEFT = 'left',
+}
+
+/**
  * Supported input types.
  *
  * For this component we only support textual types

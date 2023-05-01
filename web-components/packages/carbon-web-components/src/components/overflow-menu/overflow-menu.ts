@@ -7,20 +7,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement, html } from 'lit';
+import { html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
-import OverflowMenuVertical16 from '@carbon/icons/lib/overflow-menu--vertical/16';
 import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { find } from '../../globals/internal/collection-helpers';
-import BXFloatingMenuTrigger from '../floating-menu/floating-menu-trigger';
-import { OVERFLOW_MENU_COLOR_SCHEME, OVERFLOW_MENU_SIZE } from './defs';
-import BXOverflowMenuBody from './overflow-menu-body';
+import CDSFloatingMenuTrigger from '../floating-menu/floating-menu-trigger';
+import { OVERFLOW_MENU_SIZE } from './defs';
+import CDSOverflowMenuBody from './overflow-menu-body';
 import styles from './overflow-menu.scss';
+import CDSIconButton from '../icon-button/icon-button';
 
-export { OVERFLOW_MENU_COLOR_SCHEME, OVERFLOW_MENU_SIZE };
+export { OVERFLOW_MENU_SIZE };
 
 /**
  * Overflow menu.
@@ -29,25 +29,28 @@ export { OVERFLOW_MENU_COLOR_SCHEME, OVERFLOW_MENU_SIZE };
  * @slot icon - The icon for the trigger button.
  */
 @customElement(`${prefix}-overflow-menu`)
-class BXOverflowMenu
-  extends HostListenerMixin(FocusMixin(LitElement))
-  implements BXFloatingMenuTrigger
+class CDSOverflowMenu
+  extends HostListenerMixin(FocusMixin(CDSIconButton))
+  implements CDSFloatingMenuTrigger
 {
   /**
    * The menu body.
    */
-  private _menuBody: BXOverflowMenuBody | null = null;
+  private _menuBody: CDSOverflowMenuBody | null = null;
 
   /**
    * Handles user-initiated toggling of the menu.
    */
   private async _handleUserInitiatedToggle() {
     this.open = !this.open;
-    const { open, updateComplete } = this;
+    const { index, open, updateComplete } = this;
     if (open) {
       await updateComplete;
       const { _menuBody: menuBody } = this;
-      menuBody?.focus();
+      const menuItem = menuBody?.querySelector(
+        `${prefix}-overflow-menu-item:nth-of-type(${index})`
+      ) as HTMLElement;
+      menuItem?.focus();
     }
   }
 
@@ -65,17 +68,12 @@ class BXOverflowMenu
    */
   @HostListener('keydown')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleKeydownTrigger = async ({ key }) => {
-    if (key === ' ' || key === 'Enter') {
+  private _handleKeydownTrigger = async (event) => {
+    if (event.key === ' ' || event.key === 'Enter') {
       this._handleUserInitiatedToggle();
+      event.preventDefault();
     }
   };
-
-  /**
-   * The color scheme.
-   */
-  @property({ attribute: 'color-scheme', reflect: true })
-  colorScheme = OVERFLOW_MENU_COLOR_SCHEME.REGULAR;
 
   /**
    * `true` if this overflow menu should be disabled.
@@ -90,10 +88,16 @@ class BXOverflowMenu
   open = false;
 
   /**
+   * Index (starting at 1) of overflow menu item to focus on open.
+   */
+  @property()
+  index = 1;
+
+  /**
    * Overflow menu size.
    */
   @property({ reflect: true })
-  size = OVERFLOW_MENU_SIZE.REGULAR;
+  size = OVERFLOW_MENU_SIZE.MEDIUM;
 
   /**
    * @returns The position of the trigger button in the viewport.
@@ -103,13 +107,6 @@ class BXOverflowMenu
   }
 
   connectedCallback() {
-    if (!this.hasAttribute('role')) {
-      this.setAttribute('role', 'button');
-    }
-    if (!this.hasAttribute('tabindex')) {
-      // TODO: Should we use a property?
-      this.setAttribute('tabindex', '0');
-    }
     if (!this.hasAttribute('aria-haspopup')) {
       this.setAttribute('aria-haspopup', 'true');
     }
@@ -123,42 +120,52 @@ class BXOverflowMenu
   }
 
   updated(changedProperties) {
+    const button = this.shadowRoot
+      ?.querySelector(`${prefix}-tooltip`)
+      ?.querySelector('button');
+    button?.classList.add(
+      `${prefix}--btn--icon-only`,
+      `${prefix}--overflow-menu`
+    );
+
     if (changedProperties.has('open')) {
-      const { colorScheme, open } = this;
+      const { open } = this;
       if (open && !this._menuBody) {
         this._menuBody = find(
           this.childNodes,
           (elem) =>
-            (elem.constructor as typeof BXOverflowMenuBody).FLOATING_MENU
+            (elem.constructor as typeof CDSOverflowMenuBody).FLOATING_MENU
         );
       }
       const { _menuBody: menuBody } = this;
       if (menuBody) {
-        menuBody.colorScheme = colorScheme;
         menuBody.open = open;
         this.setAttribute('aria-expanded', String(Boolean(open)));
       }
     }
-    if (changedProperties.has('colorScheme')) {
-      const { colorScheme } = this;
+    if (changedProperties.has('size')) {
+      const { size } = this;
       const { _menuBody: menuBody } = this;
       if (menuBody) {
-        menuBody.colorScheme = colorScheme;
+        menuBody.size = size;
       }
+
+      button?.classList.forEach((item) => {
+        if (item.startsWith(`${prefix}--overflow-menu--`)) {
+          button?.classList.remove(item);
+        }
+      });
+      button?.classList.add(`${prefix}--overflow-menu--${this.size}`);
     }
+
+    super.updated(changedProperties);
   }
 
   render() {
-    return html`
-      <slot name="icon">
-        ${OverflowMenuVertical16({
-          class: `${prefix}--overflow-menu__icon`,
-        })}
-      </slot>
-    `;
+    return html` ${super.render()} `;
   }
 
   static styles = styles; // `styles` here is a `CSSResult` generated by custom WebPack loader
 }
 
-export default BXOverflowMenu;
+export default CDSOverflowMenu;

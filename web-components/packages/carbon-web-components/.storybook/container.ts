@@ -8,7 +8,6 @@
  */
 
 import { html, TemplateResult } from 'lit';
-import { prefix } from '../src/globals/settings';
 import containerStyles from './_container.scss'; // eslint-disable-line import/first
 
 /**
@@ -32,8 +31,7 @@ const container = ({
     id="main-content"
     name="main-content"
     data-floating-menu-container
-    role="${hasMainTag ? 'none' : 'main'}"
-    class="${prefix}-ce-demo-devenv--container">
+    role="${hasMainTag ? 'none' : 'main'}">
     ${children}
   </div>
 `;

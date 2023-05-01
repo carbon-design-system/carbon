@@ -38,7 +38,12 @@ body {
 }
 
 .sb-show-main.sb-main-padded {
+  padding: 0;
+}
+
+#main-content {
   padding: 42px;
+  position: relative;
 }
 
 .#{$prefix}--content.#{$prefix}-ce-demo-devenv--ui-shell-content {

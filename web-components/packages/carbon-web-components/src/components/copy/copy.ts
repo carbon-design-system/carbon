@@ -104,7 +104,7 @@ class CDSCopy extends CDSIconButton {
       ?.classList.add(`${prefix}--copy-btn`);
   }
 
-  updated() {
+  updated(changedProperties) {
     this.shadowRoot
       ?.querySelector('button')
       ?.addEventListener('animationend', () => {
@@ -117,7 +117,7 @@ class CDSCopy extends CDSIconButton {
         }
       });
 
-    super.updated();
+    super.updated(changedProperties);
   }
 
   static styles = styles;

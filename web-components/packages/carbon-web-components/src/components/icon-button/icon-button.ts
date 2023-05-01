@@ -60,11 +60,13 @@ class CDSIconButton extends CDSButton {
   @property({ reflect: true })
   size = 'md';
 
-  updated() {
-    this.shadowRoot
-      ?.querySelector(`${prefix}-tooltip`)
-      ?.shadowRoot?.querySelector(`.${prefix}--tooltip`)
-      ?.classList.add(`${prefix}--icon-tooltip`);
+  updated(changedProperties) {
+    if (changedProperties) {
+      this.shadowRoot
+        ?.querySelector(`${prefix}-tooltip`)
+        ?.shadowRoot?.querySelector(`.${prefix}--tooltip`)
+        ?.classList.add(`${prefix}--icon-tooltip`);
+    }
   }
 
   // eslint-disable-next-line class-methods-use-this

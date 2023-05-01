@@ -9,11 +9,11 @@
 
 import { render } from 'lit';
 
-import BXOverflowMenu from '../../src/components/overflow-menu/overflow-menu';
-import { Default } from '../../src/components/overflow-menu/overflow-menu-story';
+import CDSOverflowMenu from '../../src/components/overflow-menu/overflow-menu';
+import { Playground } from '../../src/components/overflow-menu/overflow-menu-story';
 
 const template = (props?) =>
-  Default({
+  Playground({
     'cds-overflow-menu': props,
   });
 
@@ -31,11 +31,11 @@ describe('cds-overflow-menu', function () {
     it('Should be tolerant of missing menu body', async function () {
       (elem as HTMLElement).click();
       await Promise.resolve();
-      expect((elem as BXOverflowMenu).open).toBe(true);
+      expect((elem as CDSOverflowMenu).open).toBe(true);
 
       (elem as HTMLElement).click();
       await Promise.resolve();
-      expect((elem as BXOverflowMenu).open).toBe(false);
+      expect((elem as CDSOverflowMenu).open).toBe(false);
     });
 
     afterEach(function () {
@@ -57,15 +57,15 @@ describe('cds-overflow-menu', function () {
     it('should add "open" stateful property by clicking', async function () {
       (elem as HTMLElement).click();
       await Promise.resolve();
-      expect((elem as BXOverflowMenu).open).toBe(true);
+      expect((elem as CDSOverflowMenu).open).toBe(true);
     });
 
     it('should remove "open" stateful property (closed default state) by clicking', async function () {
-      (elem as BXOverflowMenu).open = true;
+      (elem as CDSOverflowMenu).open = true;
       await Promise.resolve();
       (elem as HTMLElement).click();
       await Promise.resolve();
-      expect((elem as BXOverflowMenu).open).toBe(false);
+      expect((elem as CDSOverflowMenu).open).toBe(false);
     });
 
     it('should focus on the menu body when the menu is opened by clicking on the trigger button', async function () {
@@ -83,11 +83,11 @@ describe('cds-overflow-menu', function () {
         })
       );
       await Promise.resolve();
-      expect((elem as BXOverflowMenu).open).toBe(true);
+      expect((elem as CDSOverflowMenu).open).toBe(true);
     });
 
     it('should remove "open" stateful property (closed default state) by space key', async function () {
-      (elem as BXOverflowMenu).open = true;
+      (elem as CDSOverflowMenu).open = true;
       await Promise.resolve();
       elem.dispatchEvent(
         Object.assign(new CustomEvent('keydown', { bubbles: true }), {
@@ -95,7 +95,7 @@ describe('cds-overflow-menu', function () {
         })
       );
       await Promise.resolve();
-      expect((elem as BXOverflowMenu).open).toBe(false);
+      expect((elem as CDSOverflowMenu).open).toBe(false);
     });
 
     it('should focus on the menu body when the menu is opened by space key on the trigger button', async function () {
@@ -117,11 +117,11 @@ describe('cds-overflow-menu', function () {
         })
       );
       await Promise.resolve();
-      expect((elem as BXOverflowMenu).open).toBe(true);
+      expect((elem as CDSOverflowMenu).open).toBe(true);
     });
 
     it('should remove "open" stateful property (closed default state) by enter key', async function () {
-      (elem as BXOverflowMenu).open = true;
+      (elem as CDSOverflowMenu).open = true;
       await Promise.resolve();
       elem.dispatchEvent(
         Object.assign(new CustomEvent('keydown', { bubbles: true }), {
@@ -129,7 +129,7 @@ describe('cds-overflow-menu', function () {
         })
       );
       await Promise.resolve();
-      expect((elem as BXOverflowMenu).open).toBe(false);
+      expect((elem as CDSOverflowMenu).open).toBe(false);
     });
 
     it('should focus on the menu body when the menu is opened by enter key on the trigger button', async function () {

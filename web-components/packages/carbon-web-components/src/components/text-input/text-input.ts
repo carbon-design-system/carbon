@@ -15,17 +15,25 @@ import View16 from '@carbon/icons/lib/view/16';
 import ViewOff16 from '@carbon/icons/lib/view--off/16';
 import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
 import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16';
-import {
-  FLOATING_MENU_ALIGNMENT,
-  FLOATING_MENU_DIRECTION,
-} from '../floating-menu/floating-menu';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import FormMixin from '../../globals/mixins/form';
 import ValidityMixin from '../../globals/mixins/validity';
-import { INPUT_COLOR_SCHEME, INPUT_SIZE, INPUT_TYPE } from './defs';
+import {
+  INPUT_COLOR_SCHEME,
+  INPUT_SIZE,
+  INPUT_TOOLTIP_ALIGNMENT,
+  INPUT_TOOLTIP_DIRECTION,
+  INPUT_TYPE,
+} from './defs';
 import styles from './text-input.scss';
 
-export { INPUT_COLOR_SCHEME, INPUT_SIZE, INPUT_TYPE };
+export {
+  INPUT_COLOR_SCHEME,
+  INPUT_SIZE,
+  INPUT_TOOLTIP_ALIGNMENT,
+  INPUT_TOOLTIP_DIRECTION,
+  INPUT_TYPE,
+};
 
 /**
  * Text Input element. Supports all the usual attributes for textual input types
@@ -212,14 +220,14 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
    * Can be one of: start, center, or end.
    */
   @property()
-  tooltipAlignment = FLOATING_MENU_ALIGNMENT.CENTER;
+  tooltipAlignment = INPUT_TOOLTIP_ALIGNMENT.CENTER;
 
   /**
    * Specify the direction of the tooltip for icon-only buttons.
    * Can be either top, right, bottom, or left.
    */
   @property()
-  tooltipDirection = FLOATING_MENU_DIRECTION.BOTTOM;
+  tooltipDirection = INPUT_TOOLTIP_DIRECTION.BOTTOM;
 
   /**
    * The type of the input. Can be one of the types listed in the INPUT_TYPE enum

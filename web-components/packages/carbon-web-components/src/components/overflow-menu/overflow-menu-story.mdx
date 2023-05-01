@@ -21,6 +21,7 @@ Here's a quick example to get you started.
 
 ```javascript
 import '@carbon/web-components/es/components/overflow-menu/index.js';
+import OverflowMenuVertical16 from '@carbon/icons/lib/overflow-menu--vertical/16';
 ```
 
 <Description markdown={`${cdnJs({ components: ['overflow-menu'] })}`} />
@@ -30,6 +31,11 @@ import '@carbon/web-components/es/components/overflow-menu/index.js';
 
 ```html
 <cds-overflow-menu>
+  ${OverflowMenuVertical16({
+    class: `${prefix}--overflow-menu__icon`,
+    slot: 'icon',
+  })}
+  <span slot="tooltip-content"> Options </span>
   <cds-overflow-menu-body>
     <cds-overflow-menu-item>Option 1</cds-overflow-menu-item>
     <cds-overflow-menu-item>Option 2</cds-overflow-menu-item>
