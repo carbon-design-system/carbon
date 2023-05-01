@@ -16,16 +16,16 @@ jobs:
           if git diff HEAD^ HEAD packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap
           then
              echo "New changes"
-             echo "::set-env name=changes_exist::true"
+             echo "diff=true" >> "$GITHUB_ENV"
              echo git diff HEAD^ HEAD packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap >> test.txt
           else
             echo "Nothing new"
-            echo "::set-env name=changes_exist::false" 
+            echo "diff=false" >> "$GITHUB_ENV"
           fi
   on-success:
     runs-on: ubuntu-latest
     # We only want notifications for successful runs for certain workflows
-    if: env.changes_exist == 'true'
+    if: ${{ env.diff }} == "true"
     steps:
       - name: Send custom JSON data to Slack
         id: slack-success
@@ -40,7 +40,7 @@ jobs:
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
   on-failure:
     runs-on: ubuntu-latest
-    if: env.changes_exist == 'false'
+    if: ${{ env.diff }} == "false"
     steps:
       - name: Send custom JSON data to Slack
         id: slack-failure
