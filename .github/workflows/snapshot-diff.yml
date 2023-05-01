@@ -17,7 +17,7 @@ jobs:
           then
              echo "New changes"
              echo "diff=true" >> "$GITHUB_ENV"
-             echo git diff HEAD^ HEAD packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap >> test.txt
+             echo git diff HEAD^ HEAD packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap
           else
             echo "Nothing new"
             echo "diff=false" >> "$GITHUB_ENV"
