@@ -8,8 +8,20 @@
 import PropTypes from 'prop-types';
 import React, { useState, useCallback } from 'react';
 
-// eslint-disable-next-line react/prop-types
-const HeaderContainer = ({ isSideNavExpanded, render: Children }) => {
+interface HeaderContainerRenderProps {
+  isSideNavExpanded?: boolean,
+  onClickSideNavExpand?: () => void,
+}
+
+interface HeaderContainerProps {
+  isSideNavExpanded?: boolean,
+  render: (props: HeaderContainerRenderProps) => JSX.Element
+}
+
+export default function HeaderContainer({
+  render: Children,
+  isSideNavExpanded = false,
+}: HeaderContainerProps) {
   //state for expandable sidenav
   const [isSideNavExpandedState, setIsSideNavExpandedState] =
     useState(isSideNavExpanded);
@@ -26,17 +38,13 @@ const HeaderContainer = ({ isSideNavExpanded, render: Children }) => {
       onClickSideNavExpand={handleHeaderMenuButtonClick}
     />
   );
-};
+}
 
 HeaderContainer.propTypes = {
   /**
    * Optionally provide a custom class name that is applied to the underlying <header>
    */
   isSideNavExpanded: PropTypes.bool,
-};
 
-HeaderContainer.defaultProps = {
-  isSideNavExpanded: false,
+  render: PropTypes.func,
 };
-
-export default HeaderContainer;
