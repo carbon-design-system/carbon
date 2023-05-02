@@ -97,8 +97,7 @@ describe('TreeView', () => {
         </TreeView>
       );
 
-      const tree = screen.getByRole('tree');
-      const lists = tree?.getElementsByTagName('li');
+      const lists = screen.getAllByRole('treeitem');
 
       await user.keyboard('[ControlLeft>]');
       await user.click(lists[0]);

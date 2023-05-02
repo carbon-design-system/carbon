@@ -35,10 +35,9 @@ describe('DataTableSkeleton', () => {
     });
 
     it('should respect the columnCount prop', () => {
-      const { container } = render(<DataTableSkeleton columnCount={3} />);
+      render(<DataTableSkeleton columnCount={3} />);
 
-      const columns = container.querySelectorAll('thead th');
-      expect(columns.length).toEqual(3);
+      expect(screen.getAllByRole('columnheader').length).toEqual(3);
     });
 
     it('should respect the compact prop', () => {
