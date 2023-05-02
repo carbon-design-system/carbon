@@ -29,11 +29,12 @@ jobs:
         with:
           payload: |
             {
-              "text": "The ${{ github.event.workflow.name }} workflow succeeded:"
+              "text": "Diff output: ${{ env.DIFF_CONTENT}}"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+          DIFF_CONTENT: ${{ env.diffContent }}
       - name: on-failure
         if: env.diff == 'false'
         id: slack-failure
