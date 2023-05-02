@@ -5,8 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import DatePicker from './DatePicker';
+import Search from './Search';
 
-export { default as DatePickerSkeleton } from './DatePicker.Skeleton';
-export default DatePicker;
-export { DatePicker };
+export * from './Search';
+export default Search;
+export { Search };
+
+export { default as SearchSkeleton } from './Search.Skeleton';
