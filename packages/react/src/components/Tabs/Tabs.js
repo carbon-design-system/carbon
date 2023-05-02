@@ -22,6 +22,7 @@ import { keys, match, matches } from '../../internal/keyboard';
 import { usePressable } from './usePressable';
 import deprecate from '../../prop-types/deprecate';
 import { Close } from '@carbon/icons-react';
+import { useEvent } from '../../internal/useEvent';
 
 // Used to manage the overall state of the Tabs
 const TabsContext = React.createContext();
@@ -549,6 +550,8 @@ const Tab = React.forwardRef(function Tab(
     onTabCloseRequest,
   } = React.useContext(TabsContext);
   const { index, hasSecondaryLabel } = React.useContext(TabContext);
+  const dismissIconRef = useRef(null);
+  const [ignoreHover, setIgnoreHover] = useState(false);
   const id = `${baseId}-tab-${index}`;
   const panelId = `${baseId}-tabpanel-${index}`;
   const className = cx(
@@ -558,14 +561,24 @@ const Tab = React.forwardRef(function Tab(
     {
       [`${prefix}--tabs__nav-item--selected`]: selectedIndex === index,
       [`${prefix}--tabs__nav-item--disabled`]: disabled,
+      [`${prefix}--tabs__nav-item--hover-off`]: ignoreHover,
     }
   );
 
+  const onDismissIconMouseEnter = () => {
+    setIgnoreHover(true);
+  };
+
+  const onDismissIconMouseLeave = () => {
+    setIgnoreHover(false);
+  };
+
+  useEvent(dismissIconRef, 'mouseover', onDismissIconMouseEnter);
+  useEvent(dismissIconRef, 'mouseleave', onDismissIconMouseLeave);
+
   const handleClose = (evt) => {
     evt.stopPropagation();
-    if (!disabled) {
-      onTabCloseRequest?.(index);
-    }
+    onTabCloseRequest?.(index);
   };
 
   const handleKeyDown = (event) => {
@@ -580,11 +593,12 @@ const Tab = React.forwardRef(function Tab(
     <div
       role="button"
       tabIndex={-1}
+      aria-hidden={true}
       className={`${prefix}--tabs__nav-item--close-icon`}
       onClick={handleClose}
       aria-label="Close tab"
       title="Close tab"
-      aria-disabled={disabled ? true : undefined}>
+      ref={dismissIconRef}>
       <Close />
     </div>
   );

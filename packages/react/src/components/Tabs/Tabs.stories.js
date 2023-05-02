@@ -128,10 +128,7 @@ export const Dismissable = () => {
         onTabCloseRequest={handleCloseTabRequest}>
         <TabList aria-label="List of tabs">
           {renderedTabs.map((tab, index) => (
-            <Tab
-              key={index}
-              disabled={tab.disabled}
-              onCloseRequest={() => handleCloseTabRequest(tab)}>
+            <Tab key={index} disabled={tab.disabled}>
               {tab.label}
             </Tab>
           ))}

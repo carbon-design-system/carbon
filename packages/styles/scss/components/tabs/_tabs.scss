@@ -282,7 +282,11 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       padding-left: $spacing-03;
 
       .#{$prefix}--tabs__nav-item--close-icon {
+        padding: $spacing-02;
+        margin: -$spacing-02;
+        cursor: pointer;
         line-height: 0;
+        pointer-events: auto;
 
         &:hover:not([aria-disabled]) {
           background-color: $layer-hover;
@@ -376,13 +380,13 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     // Item Hover
     //-----------------------------
     &:not(.#{$prefix}--tabs--contained)
-      .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):hover {
+      .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):not(.#{$prefix}--tabs__nav-item--hover-off):hover {
       border-bottom: $tab-underline-color-hover;
       color: $text-primary;
     }
 
     &.#{$prefix}--tabs--contained
-      .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--disabled):hover {
+      .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--disabled):not(.#{$prefix}--tabs__nav-item--hover-off):hover {
       background-color: $layer-accent-hover;
       color: $text-primary;
     }
