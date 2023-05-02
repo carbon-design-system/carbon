@@ -12,11 +12,9 @@ import { render, screen } from '@testing-library/react';
 describe('AccordionSkeleton', () => {
   describe('renders as expected - Component API', () => {
     it('should spread extra props onto outermost element', () => {
-      render(<AccordionSkeleton data-testid="test-id" />);
-      expect(screen.getByTestId('test-id')).toHaveAttribute(
-        'data-testid',
-        'test-id'
-      );
+      const { container } = render(<AccordionSkeleton data-testid="test-id" />);
+
+      expect(container.firstChild).toHaveAttribute('data-testid', 'test-id');
     });
 
     it('should render and match snapshot', () => {
@@ -34,10 +32,11 @@ describe('AccordionSkeleton', () => {
     });
 
     it('should support a custom `className` prop on the outermost element', () => {
-      render(
-        <AccordionSkeleton data-testid="class" className="custom-class" />
+      const { container } = render(
+        <AccordionSkeleton className="custom-class" />
       );
-      expect(screen.getByTestId('class')).toHaveClass('custom-class');
+
+      expect(container.firstChild).toHaveClass('custom-class');
     });
 
     it('should respect count prop', () => {
