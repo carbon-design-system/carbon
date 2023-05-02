@@ -6521,7 +6521,6 @@ Map {
       "addFocusListeners": true,
       "addMouseListeners": true,
       "defaultExpanded": false,
-      "href": "#main-content",
       "isChildOfHeader": true,
       "isFixedNav": false,
       "isPersistent": true,
