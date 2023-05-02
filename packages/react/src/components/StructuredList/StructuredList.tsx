@@ -240,7 +240,7 @@ export interface StructuredListRowProps extends DivAttrs {
   head?: boolean;
 
   /**
-   * Provide a handler that is invoked on the key down event for the control,
+   * Provide a handler that is invoked on the key down event for the control
    */
   onKeyDown?(event: KeyboardEvent): void;
 }
