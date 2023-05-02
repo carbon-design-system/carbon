@@ -13,6 +13,12 @@ module.exports = {
     {
       extends: ['plugin:testing-library/react'],
       files: ['packages/react/**/*-test.js'],
+      rules: {
+        'testing-library/no-node-access': [
+          'error',
+          { allowContainerFirstChild: true },
+        ],
+      },
     },
   ],
 };
