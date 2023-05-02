@@ -29,7 +29,7 @@ jobs:
         with:
           payload: |
             {
-              "diff": "The ${{ github.event.workflow.name }} workflow succeeded: ${{ github.event.workflow_run.url }}"
+              "diff": "The ${{ github.event.workflow.name }} workflow succeeded: ${{ github.event.workflow_run.url }}",
               "output_diff": $diffContent
             }
         env:
