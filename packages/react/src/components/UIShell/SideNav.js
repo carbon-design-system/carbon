@@ -163,7 +163,6 @@ SideNav.defaultProps = {
   isPersistent: true,
   addFocusListeners: true,
   addMouseListeners: true,
-  href: '#main-content',
 };
 
 SideNav.propTypes = {
