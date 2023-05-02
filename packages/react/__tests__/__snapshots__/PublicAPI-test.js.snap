@@ -22,7 +22,7 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
-      "isFlushed": Object {
+      "isFlush": Object {
         "type": "bool",
       },
       "size": Object {
