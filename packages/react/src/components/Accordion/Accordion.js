@@ -16,7 +16,7 @@ function Accordion({
   children,
   className: customClassName,
   disabled = false,
-  isFlush = false,
+  isFlushed = false,
   size = 'md',
   ...rest
 }) {
@@ -24,7 +24,7 @@ function Accordion({
   const className = cx(`${prefix}--accordion`, customClassName, {
     [`${prefix}--accordion--${align}`]: align,
     [`${prefix}--accordion--${size}`]: size,
-    [`${prefix}--accordion--flush`]: isFlush && align !== 'start',
+    [`${prefix}--accordion--flush`]: isFlushed && align !== 'start',
   });
   return (
     <ul className={className} {...rest}>
@@ -61,7 +61,7 @@ Accordion.propTypes = {
   /**
    * Specify whether Accordion text should be flush, default is false, does not work with align="start"
    */
-  isFlush: PropTypes.bool,
+  isFlushed: PropTypes.bool,
 
   /**
    * Specify the size of the Accordion. Currently supports the following:
