@@ -30,7 +30,7 @@ jobs:
           payload: |
             {
               "diff": "send diff",
-              "output_diff": "${{ env.diffContent }}"
+              "output_diff": "$(diffContent)"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
