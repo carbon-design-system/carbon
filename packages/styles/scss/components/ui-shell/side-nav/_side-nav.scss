@@ -87,6 +87,7 @@
 
   .#{$prefix}--side-nav__overlay-active {
     @include breakpoint-down('lg') {
+      z-index: z('overlay');
       width: 100vw;
       height: 100vh;
       background-color: $overlay;

@@ -1,2 +1,6 @@
 [build.environment]
   YARN_FLAGS = "--immutable"
+[[headers]]
+   for = "/*"
+   [headers.values]
+      Access-Control-Allow-Origin = "*"
