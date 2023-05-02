@@ -29,8 +29,8 @@ jobs:
         with:
           payload: |
             {
-              "diff": "The ${{ github.event.workflow.name }} workflow succeeded: ${{ github.event.workflow_run.url }}",
-              "output_diff": $diffContent
+              "diff": "send diff",
+              "output_diff": "$diffContent"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
