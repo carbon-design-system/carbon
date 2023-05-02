@@ -7,6 +7,7 @@
 ```
 <input
   aria-checked="false"
+  aria-readonly="false"
   class="cds--checkbox"
   id="checkbox"
   part="input"
@@ -16,9 +17,11 @@
   class="cds--checkbox-label"
   for="checkbox"
   part="label"
+  title=""
 >
   <span class="cds--checkbox-label-text">
     <slot>
+      Checkbox label
     </slot>
   </span>
 </label>
@@ -30,20 +33,20 @@
 ```
 <input
   aria-checked="mixed"
+  aria-readonly="false"
   class="cds--checkbox"
   disabled=""
   id="checkbox"
-  name="name-foo"
   part="input"
   type="checkbox"
-  value="value-foo"
 >
 <label
-  class="cds--checkbox-label cds--visually-hidden"
+  class="cds--checkbox-label"
   for="checkbox"
   part="label"
+  title=""
 >
-  <span class="cds--checkbox-label-text">
+  <span class="cds--checkbox-label-text cds--visually-hidden">
     <slot>
       label-text-foo
     </slot>

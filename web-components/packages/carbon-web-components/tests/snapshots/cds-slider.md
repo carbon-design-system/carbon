@@ -18,15 +18,16 @@
   <div
     class="cds--slider"
     role="presentation"
+    tabindex="-1"
   >
     <div
       aria-valuemax="100"
       aria-valuemin="0"
-      aria-valuenow="50"
+      aria-valuenow=""
       class="cds--slider__thumb"
       id="thumb"
       role="slider"
-      style="left: 50%"
+      style="left: NaN%"
       tabindex="0"
     >
     </div>
@@ -38,17 +39,10 @@
     <div class="cds-ce--slider__filled-track-container">
       <div
         class="cds--slider__filled-track"
-        style="transform: translate(0%, -50%) scaleX(0.5)"
+        style="transform: translate(0%, -50%) scaleX(NaN)"
       >
       </div>
     </div>
-    <input
-      class="cds--slider__input"
-      max="100"
-      min="0"
-      type="hidden"
-      value="50"
-    >
   </div>
   <span class="cds--slider__range-label">
     <slot name="max-text">
@@ -78,6 +72,7 @@
   <div
     class="cds--slider cds--slider--disabled"
     role="presentation"
+    tabindex="-1"
   >
     <div
       aria-valuemax="100"
@@ -102,14 +97,6 @@
       >
       </div>
     </div>
-    <input
-      class="cds--slider__input"
-      max="100"
-      min="0"
-      name="name-foo"
-      type="hidden"
-      value="50"
-    >
   </div>
   <span class="cds--slider__range-label">
     <slot name="max-text">

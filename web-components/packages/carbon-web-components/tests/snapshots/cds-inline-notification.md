@@ -47,9 +47,7 @@
   </div>
 </div>
 <button
-  aria-label="close-button-label-foo"
   class="cds--inline-notification__close-button"
-  title="close-button-label-foo"
   type="button"
 >
 </button>

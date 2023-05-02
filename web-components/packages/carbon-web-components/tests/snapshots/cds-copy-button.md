@@ -5,38 +5,30 @@
 ####   `Should render with minimum attributes`
 
 ```
-<button
-  class="cds--copy-btn"
-  title="Copy to clipboard"
-  type="button"
+<cds-copy
+  feedback="Copied!"
+  feedback-timeout="2000"
 >
-  <slot>
-  </slot>
-  <div
-    class="cds--assistive-text cds--btn--copy__feedback"
-    data-feedback="Copied!"
-  >
-  </div>
-</button>
+  <span slot="tooltip-content">
+    <slot>
+    </slot>
+  </span>
+</cds-copy>
 
 ```
 
 ####   `Should render with various attributes`
 
 ```
-<button
-  class="cds--copy-btn"
-  title="button-assistive-text-foo"
-  type="button"
+<cds-copy
+  feedback="feedback-text-foo"
+  feedback-timeout="16"
 >
-  <slot>
-  </slot>
-  <div
-    class="cds--assistive-text cds--btn--copy__feedback"
-    data-feedback="feedback-text-foo"
-  >
-  </div>
-</button>
+  <span slot="tooltip-content">
+    <slot>
+    </slot>
+  </span>
+</cds-copy>
 
 ```
 

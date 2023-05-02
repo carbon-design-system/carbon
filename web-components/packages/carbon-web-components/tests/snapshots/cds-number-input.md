@@ -5,9 +5,9 @@
 ####   `Should render with various attributes`
 
 ```
-<div class="cds--number cds--number--md">
+<div class="cds--number cds--number--md cds--number--readonly">
   <label
-    class="cds--label cds--label--disabled"
+    class="cds--label"
     for="input"
   >
     <slot name="label-text">
@@ -16,12 +16,10 @@
   <div class="cds--number__input-wrapper">
     <input
       aria-atomic="true"
-      disabled=""
       id="input"
       max="200"
       min="-100"
-      name="name-foo"
-      placeholder="placeholder-foo"
+      readonly=""
       role="alert"
       step="1"
       type="number"
@@ -29,47 +27,36 @@
     <div class="cds--number__controls">
       <button
         aria-atomic="true"
-        aria-label="increase number input"
-        aria-live="polite"
-        class="cds--number__control-btn up-icon"
-        disabled=""
-        type="button"
-      >
-      </button>
-      <button
-        aria-atomic="true"
         aria-label="decrease number input"
         aria-live="polite"
         class="cds--number__control-btn down-icon"
-        disabled=""
         type="button"
       >
       </button>
+      <div class="cds--number__rule-divider">
+      </div>
+      <button
+        aria-atomic="true"
+        aria-label="increase number input"
+        aria-live="polite"
+        class="cds--number__control-btn up-icon"
+        type="button"
+      >
+      </button>
+      <div class="cds--number__rule-divider">
+      </div>
     </div>
   </div>
-  <div class="cds--form__helper-text cds--form__helper-text--disabled">
+  <div class="cds--form__helper-text">
     <slot name="helper-text">
+      helper-text-foo
     </slot>
   </div>
   <div
     class="cds--form-requirement"
     hidden=""
   >
-    <slot name="validity-message">
-    </slot>
-  </div>
-  <div
-    class="cds--form-requirement"
-    hidden=""
-  >
-    <slot name="validity-message-max">
-    </slot>
-  </div>
-  <div
-    class="cds--form-requirement"
-    hidden=""
-  >
-    <slot name="validity-message-min">
+    <slot name="">
     </slot>
   </div>
 </div>

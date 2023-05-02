@@ -5,6 +5,10 @@
 ####   `should render with minimum attributes`
 
 ```
+<div class="cds--search-magnifier">
+  <slot name="icon">
+  </slot>
+</div>
 <label
   class="cds--label"
   for="input"
@@ -14,10 +18,12 @@
   </slot>
 </label>
 <input
+  autocomplete=""
   class="cds--search-input"
   id="input"
   part="input"
-  role="searchbox"
+  placeholder="Search"
+  role=""
 >
 <button
   aria-label=""
@@ -32,6 +38,10 @@
 ####   `should render with various attributes`
 
 ```
+<div class="cds--search-magnifier">
+  <slot name="icon">
+  </slot>
+</div>
 <label
   class="cds--label"
   for="input"
@@ -42,18 +52,18 @@
   </slot>
 </label>
 <input
+  autocomplete=""
   class="cds--search-input"
   disabled=""
   id="input"
-  name="name-foo"
   part="input"
   placeholder="placeholder-foo"
-  role="searchbox"
+  role=""
   type="submit"
   value="value-foo"
 >
 <button
-  aria-label="close-button-assistive-text-foo"
+  aria-label=""
   class="cds--search-close"
   part="close-button"
   type="button"

@@ -5,27 +5,22 @@
 ####   `Should render with various attributes`
 
 ```
-<label
-  class="cds--label cds--label--disabled"
-  for="input"
->
-  <slot name="label-text">
-    label-text-foo
-  </slot>
-</label>
-<div class="cds--text-area__wrapper">
+<div class="cds--text-area__label-wrapper">
+  <label
+    class="cds--label cds--label--disabled"
+    for="input"
+  >
+    <slot name="label-text">
+    </slot>
+  </label>
+</div>
+<div class="cds--text-area__wrapper cds--text-area__wrapper--readonly">
   <textarea
-    autocomplete=""
-    autofocus=""
-    class="cds--text-area cds--text-area--light cds--text-area--v2"
-    cols="50"
+    class="cds--text-area"
     disabled=""
     id="input"
-    name="name-foo"
-    pattern="pattern-foo"
     placeholder="placeholder-foo"
     readonly=""
-    required=""
     rows="4"
   >
   </textarea>
@@ -35,9 +30,11 @@
     helper-text-foo
   </slot>
 </div>
-<div class="cds--form-requirement">
-  <slot name="validity-message">
-    validity-message-foo
+<div
+  class="cds--form-requirement"
+  hidden=""
+>
+  <slot name="warn-text">
   </slot>
 </div>
 

@@ -196,6 +196,10 @@
   class="cds--search cds--search--sm"
   tabindex="0"
 >
+  <div class="cds--search-magnifier">
+    <slot name="icon">
+    </slot>
+  </div>
   <label
     class="cds--label"
     for="input"
@@ -205,10 +209,12 @@
     </slot>
   </label>
   <input
+    autocomplete="off"
     class="cds--search-input"
     id="input"
     part="input"
-    role="searchbox"
+    placeholder="Search"
+    role="search"
   >
   <button
     aria-label=""
@@ -228,6 +234,10 @@
   class="cds--search cds--search--xl"
   tabindex="-1"
 >
+  <div class="cds--search-magnifier">
+    <slot name="icon">
+    </slot>
+  </div>
   <label
     class="cds--label"
     for="input"
@@ -237,10 +247,12 @@
     </slot>
   </label>
   <input
+    autocomplete="off"
     class="cds--search-input"
     id="input"
     part="input"
-    role="searchbox"
+    placeholder="Search"
+    role="search"
   >
   <button
     aria-label=""

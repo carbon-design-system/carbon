@@ -18,19 +18,9 @@
     </pre>
   </code>
 </div>
-<button
-  class="cds--snippet-button"
-  title="Copy to clipboard"
-  type="button"
->
-  <slot>
-  </slot>
-  <div
-    class="cds--assistive-text cds--btn--copy__feedback"
-    data-feedback="Copied!"
-  >
-  </div>
-</button>
+<cds-copy-button feedback="Copied!">
+  Copy to clipboard
+</cds-copy-button>
 
 ```
 
@@ -50,40 +40,18 @@
     </pre>
   </code>
 </div>
-<button
-  class="cds--snippet-button"
-  title="Copy to clipboard"
-  type="button"
->
-  <slot>
-  </slot>
-  <div
-    class="cds--assistive-text cds--btn--copy__feedback"
-    data-feedback="Copied!"
-  >
-  </div>
-</button>
+<cds-copy-button feedback="Copied!">
+  Copy to clipboard
+</cds-copy-button>
 
 ```
 
 ####   `Should render with minimum attributes for inline mode`
 
 ```
-<button
-  class="cds--snippet cds--snippet--inline"
-  title="Copy to clipboard"
-  type="button"
->
-  <code aria-label="code-snippet">
-    <slot>
-    </slot>
-  </code>
-  <div
-    class="cds--assistive-text cds--btn--copy__feedback"
-    data-feedback="Copied!"
-  >
-  </div>
-</button>
+<cds-copy-button feedback="Copied!">
+  Copy to clipboard
+</cds-copy-button>
 
 ```
 
@@ -103,19 +71,9 @@
     </pre>
   </code>
 </div>
-<button
-  class="cds--snippet-button"
-  title="copy-button-assistive-text-foo"
-  type="button"
->
-  <slot>
-  </slot>
-  <div
-    class="cds--assistive-text cds--btn--copy__feedback"
-    data-feedback="copy-button-feedback-text-foo"
-  >
-  </div>
-</button>
+<cds-copy-button feedback="copy-button-feedback-text-foo">
+  copy-button-assistive-text-foo
+</cds-copy-button>
 
 ```
 
@@ -135,40 +93,18 @@
     </pre>
   </code>
 </div>
-<button
-  class="cds--snippet-button"
-  title="copy-button-assistive-text-foo"
-  type="button"
->
-  <slot>
-  </slot>
-  <div
-    class="cds--assistive-text cds--btn--copy__feedback"
-    data-feedback="copy-button-feedback-text-foo"
-  >
-  </div>
-</button>
+<cds-copy-button feedback="copy-button-feedback-text-foo">
+  copy-button-assistive-text-foo
+</cds-copy-button>
 
 ```
 
 ####   `Should render with various attributes for inline mode`
 
 ```
-<button
-  class="cds--snippet cds--snippet--inline"
-  title="copy-button-assistive-text-foo"
-  type="button"
->
-  <code aria-label="code-assistive-text-foo">
-    <slot>
-    </slot>
-  </code>
-  <div
-    class="cds--assistive-text cds--btn--copy__feedback"
-    data-feedback="copy-button-feedback-text-foo"
-  >
-  </div>
-</button>
+<cds-copy-button feedback="copy-button-feedback-text-foo">
+  copy-button-assistive-text-foo
+</cds-copy-button>
 
 ```
 
