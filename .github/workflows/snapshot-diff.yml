@@ -17,8 +17,7 @@ jobs:
           then
              echo "New changes"
              echo "diff=true" >> "$GITHUB_ENV"
-             diffContent=$(git diff HEAD^ HEAD packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap)
-             echo $diffContent
+             echo diffContent=$(git diff HEAD^ HEAD packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap) >> "$GITHUB_ENV"
           else
             echo "Nothing new"
             echo "diff=false" >> "$GITHUB_ENV"
@@ -31,7 +30,7 @@ jobs:
           payload: |
             {
               "diff": "send diff",
-              "output_diff": "${{ diffContent }}"
+              "output_diff": "${{ env.diffContent }}"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
