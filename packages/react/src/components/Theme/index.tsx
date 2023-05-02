@@ -47,7 +47,10 @@ GlobalTheme.propTypes = {
 };
 
 interface ThemeProps extends GlobalThemeProps {
-  as?: keyof JSX.IntrinsicElements;
+  as?:
+    | keyof JSX.IntrinsicElements
+    | React.FunctionComponent
+    | React.ComponentClass;
   className?: string;
 }
 
