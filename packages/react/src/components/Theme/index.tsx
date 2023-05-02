@@ -7,15 +7,22 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useMemo } from 'react';
+import React, { useMemo, type PropsWithChildren } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { LayerContext } from '../Layer/LayerContext';
 
-export const ThemeContext = React.createContext({
+interface GlobalThemeProps {
+  theme?: 'white' | 'g10' | 'g90' | 'g100';
+}
+
+export const ThemeContext = React.createContext<GlobalThemeProps>({
   theme: 'white',
 });
 
-export function GlobalTheme({ children, theme }) {
+export function GlobalTheme({
+  children,
+  theme,
+}: PropsWithChildren<GlobalThemeProps>) {
   const value = useMemo(() => {
     return {
       theme,
@@ -39,6 +46,11 @@ GlobalTheme.propTypes = {
   theme: PropTypes.oneOf(['white', 'g10', 'g90', 'g100']),
 };
 
+interface ThemeProps extends GlobalThemeProps {
+  as?: keyof JSX.IntrinsicElements;
+  className?: string;
+}
+
 /**
  * Specify the theme to be applied to a page, or a region in a page
  */
@@ -48,7 +60,7 @@ export function Theme({
   className: customClassName,
   theme,
   ...rest
-}) {
+}: PropsWithChildren<ThemeProps>) {
   const prefix = usePrefix();
   const className = cx(customClassName, {
     [`${prefix}--white`]: theme === 'white',
