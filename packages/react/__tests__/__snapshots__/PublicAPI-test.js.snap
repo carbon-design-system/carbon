@@ -6557,6 +6557,9 @@ Map {
       "onOverlayClick": Object {
         "type": "func",
       },
+      "onSideNavBlur": Object {
+        "type": "func",
+      },
       "onToggle": Object {
         "type": "func",
       },
