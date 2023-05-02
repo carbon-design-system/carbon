@@ -55,6 +55,7 @@ export { default as CDSUnorderedList } from './components/list/unordered-list';
 export { default as CDSLoading } from './components/loading/loading';
 export { default as CDSModal } from './components/modal/modal';
 export { default as CDSModalBody } from './components/modal/modal-body';
+export { default as CDSModalBodyContent } from './components/modal/modal-body-content';
 export { default as CDSModalCloseButton } from './components/modal/modal-close-button';
 export { default as CDSModalFooter } from './components/modal/modal-footer';
 export { default as CDSModalHeader } from './components/modal/modal-header';

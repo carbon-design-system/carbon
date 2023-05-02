@@ -10,81 +10,25 @@
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/layer' as *;
+@use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
-@use '@carbon/styles/scss/components/modal';
+@use '@carbon/styles/scss/components/modal' as *;
 @use '@carbon/styles/scss/components/button' as *;
 
 :host(#{$prefix}-modal) {
-  // `@extend .#{$prefix}--modal` seems to cause `&.is-visible` style to be brought into `:host(#{$prefix}-modal)` with ShadyCSS
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: z('modal');
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  content: '';
-  background-color: $overlay;
-  opacity: 0;
-  visibility: hidden;
-  transition: background-color $duration-slow-02 motion(exit, expressive),
-    opacity $duration-moderate-02 motion(exit, expressive),
-    z-index $duration-slow-02 motion(exit, expressive),
-    visibility $duration-moderate-02 motion(exit, expressive);
+  @extend .#{$prefix}--modal;
 
-  .#{$prefix}--text-input,
-  .#{$prefix}--select-input {
-    background-color: $field-02;
-  }
-
-  .#{$prefix}--modal-container {
-    @include breakpoint(md) {
-      ::slotted(#{$prefix}-modal-header),
-      ::slotted(#{$prefix}-modal-body) {
-        padding-right: 20%;
-      }
-    }
-  }
-
-  .#{$prefix}--modal-container--xs,
-  .#{$prefix}--modal-container--sm,
-  .#{$prefix}--modal-container--xl {
-    ::slotted(#{$prefix}-modal-header) {
-      padding-right: $spacing-09;
-    }
-
+  &[full-width] {
     ::slotted(#{$prefix}-modal-body) {
-      padding-right: $spacing-05;
+      margin: 0;
+      padding: 0;
     }
   }
 
-  .#{$prefix}--modal-container--sm {
-    @include breakpoint(xlg) {
-      ::slotted(#{$prefix}-modal-header),
-      ::slotted(#{$prefix}-modal-body) {
-        padding-right: 20%;
-      }
-    }
+  &[open] {
+    @extend .#{$prefix}--modal, .is-visible;
   }
-
-  .#{$prefix}--modal-container--lg {
-    @include breakpoint(md) {
-      ::slotted(#{$prefix}-modal-header),
-      ::slotted(#{$prefix}-modal-body) {
-        padding-right: 20%;
-      }
-    }
-  }
-}
-
-:host(#{$prefix}-modal[open]) {
-  @extend .#{$prefix}--modal, .is-visible;
-
-  // TODO: look into if following two lines are necessary after v11 upgrade
-  opacity: 1;
-  visibility: inherit;
 }
 
 :host(#{$prefix}-modal-header) {
@@ -110,14 +54,64 @@
 
 :host(#{$prefix}-modal-body) {
   @extend .#{$prefix}--modal-content;
+  @extend .#{$prefix}--layer-two;
+
+  ::slotted(#{$prefix}-form-item) {
+    margin-bottom: $spacing-05;
+  }
+
+  ::slotted(#{$prefix}-select:last-of-type) {
+    padding-bottom: 0;
+  }
+
+  ::slotted(*:last-child) {
+    padding-bottom: $spacing-07;
+  }
+}
+
+:host(#{$prefix}-modal-body-content) {
+  @include type-style('body-01');
+
+  display: block;
+  padding-right: calc(20% - #{$spacing-07});
+
+  &[description] {
+    margin-bottom: $spacing-05;
+  }
 }
 
 :host(#{$prefix}-modal-footer) {
-  .#{$prefix}--modal-footer--three-button {
-    ::slotted(#{$prefix}-button),
+  @extend .#{$prefix}--modal-footer;
+
+  &[has-three-buttons] {
+    @extend .#{$prefix}--modal-footer--three-button;
+
     ::slotted(#{$prefix}-modal-footer-button) {
       flex: 0 1 25%;
     }
+  }
+}
+
+:host(#{$prefix}-modal-footer-button) {
+  &,
+  &:first-of-type {
+    .#{$prefix}--btn {
+      box-shadow: inherit;
+
+      &:focus {
+        box-shadow: inset 0 0 0 $button-outline-width $focus,
+          inset 0 0 0 $button-border-width $background;
+      }
+    }
+  }
+
+  .#{$prefix}--btn {
+    width: 100%;
+    max-width: none;
+
+    padding-top: rem(16px);
+    padding-bottom: rem(32px);
+    box-shadow: rem(-1px) 0 0 0 $button-separator;
   }
 }
 
@@ -129,24 +123,4 @@
   height: rem(64px);
   margin: 0;
   padding-bottom: $spacing-07;
-}
-
-:host(#{$prefix}-modal-footer-button) .#{$prefix}--btn {
-  padding-top: rem(16px);
-  padding-bottom: rem(32px);
-  box-shadow: rem(-1px) 0 0 0 $button-separator;
-}
-
-:host(#{$prefix}-modal-footer-button:first-of-type) .#{$prefix}--btn {
-  box-shadow: inherit;
-}
-
-:host(#{$prefix}-modal-footer-button) {
-  &,
-  &:first-of-type {
-    .#{$prefix}--btn:focus {
-      box-shadow: inset 0 0 0 $button-outline-width $focus,
-        inset 0 0 0 $button-border-width $background;
-    }
-  }
 }
