@@ -45,8 +45,8 @@ export default {
   },
 };
 
-export const Default = () => (
-  <StructuredListWrapper>
+export const Default = (args) => (
+  <StructuredListWrapper {...args}>
     <StructuredListHead>
       <StructuredListRow head>
         <StructuredListCell head>ColumnA</StructuredListCell>
@@ -79,53 +79,11 @@ export const Default = () => (
   </StructuredListWrapper>
 );
 
-export const Playground = (props) => {
-  const { className, selection, isCondensed, isFlush } = props;
-  return (
-    <StructuredListWrapper
-      className={className}
-      selection={selection}
-      isCondensed={isCondensed}
-      isFlush={isFlush}>
-      <StructuredListHead>
-        <StructuredListRow head>
-          <StructuredListCell head>ColumnA</StructuredListCell>
-          <StructuredListCell head>ColumnB</StructuredListCell>
-          <StructuredListCell head>ColumnC</StructuredListCell>
-        </StructuredListRow>
-      </StructuredListHead>
-      <StructuredListBody>
-        <StructuredListRow>
-          <StructuredListCell noWrap>Row 1</StructuredListCell>
-          <StructuredListCell>Row 1</StructuredListCell>
-          <StructuredListCell>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-            magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
-            sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
-            vulputate nisl a porttitor interdum.
-          </StructuredListCell>
-        </StructuredListRow>
-        <StructuredListRow>
-          <StructuredListCell noWrap>Row 2</StructuredListCell>
-          <StructuredListCell>Row 2</StructuredListCell>
-          <StructuredListCell>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-            magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
-            sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
-            vulputate nisl a porttitor interdum.
-          </StructuredListCell>
-        </StructuredListRow>
-      </StructuredListBody>
-    </StructuredListWrapper>
-  );
-};
-
-Playground.argTypes = {
+Default.argTypes = {
   selection: {
     control: {
-      type: 'boolean',
+      disable: true,
     },
-    defaultValue: false,
   },
   isCondensed: {
     control: {
@@ -141,7 +99,7 @@ Playground.argTypes = {
   },
 };
 
-export const Selection = () => {
+export const Selection = (args) => {
   const structuredListBodyRowGenerator = (numRows) => {
     return Array.apply(null, Array(numRows)).map((n, i) => (
       <StructuredListRow key={`row-${i}`}>
@@ -170,7 +128,7 @@ export const Selection = () => {
     ));
   };
   return (
-    <StructuredListWrapper selection>
+    <StructuredListWrapper selection {...args}>
       <StructuredListHead>
         <StructuredListRow head>
           <StructuredListCell head>ColumnA</StructuredListCell>
@@ -186,9 +144,60 @@ export const Selection = () => {
   );
 };
 
-export const Skeleton = () => (
+Selection.argTypes = {
+  isFlush: {
+    table: {
+      disable: true,
+    },
+  },
+  selection: {
+    control: {
+      disable: true,
+    },
+  },
+};
+
+export const Skeleton = (args) => (
   <div style={{ width: '800px' }}>
-    <StructuredListSkeleton />
-    <StructuredListSkeleton />
+    <StructuredListSkeleton {...args} />
   </div>
 );
+
+Skeleton.argTypes = {
+  isFlush: {
+    table: {
+      disable: true,
+    },
+  },
+  isCondensed: {
+    table: {
+      disable: true,
+    },
+  },
+  ariaLabel: {
+    table: {
+      disable: true,
+    },
+  },
+  ['aria-label']: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  selection: {
+    table: {
+      disable: true,
+    },
+  },
+  rowCount: {
+    control: {
+      type: 'number',
+    },
+    defaultValue: 5,
+  },
+};
