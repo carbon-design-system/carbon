@@ -42,6 +42,7 @@ function HeaderMenuButton({
 
   return (
     <button
+      id={`${prefix}--toggle_menu`}
       {...rest}
       {...accessibilityLabel}
       className={className}

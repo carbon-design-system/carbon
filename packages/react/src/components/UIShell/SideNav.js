@@ -4,13 +4,15 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { CARBON_SIDENAV_ITEMS } from './_utils';
 import { usePrefix } from '../../internal/usePrefix';
 import { useMergedRefs } from '../../internal/useMergedRefs';
+import { useEvent } from '../../internal/useEvent';
+import { keys, match } from '../../internal/keyboard';
 
 // TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
@@ -124,11 +126,20 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     eventHandlers.onMouseLeave = () => handleToggle(false, false);
   }
 
-  useEffect(() => {
-    if (expanded && !isFixedNav && sideNavRef.current) {
+  useEvent(window, 'keydown', (event) => {
+    const focusedElement = document.activeElement;
+
+    if (
+      match(event, keys.Tab) &&
+      expanded &&
+      !isFixedNav &&
+      sideNavRef.current &&
+      focusedElement.id === `${prefix}--toggle_menu` &&
+      !focusedElement.closest('nav')
+    ) {
       sideNavRef.current.focus();
     }
-  }, [expanded, isFixedNav, sideNavRef]);
+  });
 
   return (
     <>
