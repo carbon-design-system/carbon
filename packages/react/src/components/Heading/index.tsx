@@ -6,22 +6,31 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type PropsWithChildren } from 'react';
 
-const HeadingContext = React.createContext(1);
+type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
-function Section({
+const HeadingContext = React.createContext<HeadingLevel>(1);
+
+interface SectionProps {
+  as?:
+    | keyof JSX.IntrinsicElements
+    | React.FunctionComponent
+    | React.ComponentClass;
+  level: HeadingLevel;
+}
+
+export function Section({
   as: BaseComponent = 'section',
   level: levelOverride,
   children,
   ...rest
-}) {
+}: PropsWithChildren<SectionProps>) {
   const parentLevel = React.useContext(HeadingContext);
-  const level =
-    typeof levelOverride !== 'undefined' ? levelOverride : parentLevel + 1;
+  const level = levelOverride === undefined ? parentLevel + 1 : levelOverride;
 
   return (
-    <HeadingContext.Provider value={Math.min(level, 6)}>
+    <HeadingContext.Provider value={Math.min(level, 6) as HeadingLevel}>
       <BaseComponent {...rest}>{children}</BaseComponent>
     </HeadingContext.Provider>
   );
@@ -50,9 +59,13 @@ Section.propTypes = {
   level: PropTypes.number,
 };
 
-function Heading(props) {
-  const level = React.useContext(HeadingContext);
-  return React.createElement(`h${level}`, props);
+interface HeadingProps {
+  className?: string;
+}
+
+export function Heading(props: PropsWithChildren<HeadingProps>) {
+  const HeadingIntrinsic = `h${React.useContext(HeadingContext)}` as const;
+  return <HeadingIntrinsic {...props} />;
 }
 
 Heading.propTypes = {
@@ -66,5 +79,3 @@ Heading.propTypes = {
    */
   className: PropTypes.string,
 };
-
-export { Section, Heading };
