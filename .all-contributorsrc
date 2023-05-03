@@ -1119,7 +1119,6 @@
         "a11y"
       ]
     },
-
     {
       "login": "gerzonc",
       "name": "Gerzon",
@@ -1127,6 +1126,16 @@
       "profile": "https://github.com/gerzonc",
       "contributions": [
         "code"
+      ]
+    },
+    {
+      "login": "guidari",
+      "name": "Guilherme Datilio Ribeiro",
+      "avatar_url": "https://avatars.githubusercontent.com/u/52183462?v=4",
+      "profile": "https://github.com/guidari",
+      "contributions": [
+        "code",
+        "doc"
       ]
     }
   ],
