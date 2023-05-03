@@ -15,7 +15,7 @@ interface HeaderContainerRenderProps {
 
 interface HeaderContainerProps {
   isSideNavExpanded?: boolean;
-  render: (props: HeaderContainerRenderProps) => JSX.Element;
+  render: React.ComponentType<HeaderContainerRenderProps>;
 }
 
 export default function HeaderContainer({
@@ -46,5 +46,5 @@ HeaderContainer.propTypes = {
    */
   isSideNavExpanded: PropTypes.bool,
 
-  render: PropTypes.func,
+  render: PropTypes.elementType,
 };
