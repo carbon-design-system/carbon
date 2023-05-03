@@ -49,7 +49,7 @@ GlobalTheme.propTypes = {
 
 type ThemeBaseProps = GlobalThemeProps & {
   className?: string;
-}
+};
 
 type ThemeProps<E extends ElementType> = PolymorphicProps<E, ThemeBaseProps>;
 
