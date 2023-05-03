@@ -9,13 +9,13 @@ import PropTypes from 'prop-types';
 import React, { useState, useCallback } from 'react';
 
 interface HeaderContainerRenderProps {
-  isSideNavExpanded?: boolean,
-  onClickSideNavExpand?: () => void,
+  isSideNavExpanded?: boolean;
+  onClickSideNavExpand?: () => void;
 }
 
 interface HeaderContainerProps {
-  isSideNavExpanded?: boolean,
-  render: (props: HeaderContainerRenderProps) => JSX.Element
+  isSideNavExpanded?: boolean;
+  render: (props: HeaderContainerRenderProps) => JSX.Element;
 }
 
 export default function HeaderContainer({
