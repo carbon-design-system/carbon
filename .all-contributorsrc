@@ -1135,7 +1135,9 @@
       "profile": "https://github.com/guidari",
       "contributions": [
         "code",
-        "doc"
+        "doc",
+        "a11y",
+        "review"
       ]
     }
   ],
