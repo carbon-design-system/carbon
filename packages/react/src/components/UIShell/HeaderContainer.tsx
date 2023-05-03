@@ -9,8 +9,8 @@ import PropTypes from 'prop-types';
 import React, { useState, useCallback } from 'react';
 
 interface HeaderContainerRenderProps {
-  isSideNavExpanded?: boolean;
-  onClickSideNavExpand?: () => void;
+  isSideNavExpanded: boolean;
+  onClickSideNavExpand: () => void;
 }
 
 interface HeaderContainerProps {
@@ -46,5 +46,43 @@ HeaderContainer.propTypes = {
    */
   isSideNavExpanded: PropTypes.bool,
 
-  render: PropTypes.elementType,
+  /**
+   * A function that is passed two parameters, `isSideNavExpanded`, and
+   * `onClickSideNavExpand`, which can then be used the returned components. For
+   * example:
+   * ```TSX
+   * <HeaderContainer render={
+   *  ({ isSideNavExpanded, onClickSideNavExpand }) =>
+   *    <Theme theme="g100">
+   *      <Header aria-label="Navigation">
+   *        <SkipToContent />
+   *        <HeaderMenuButton
+   *          aria-label="Open menu"
+   *          onClick={onClickSideNavExpand}
+   *          isActive={isSideNavExpanded}
+   *        />
+   *        <HeaderName href="/" prefix="IBM">Some App Name</HeaderName>
+   *        <HeaderNavigation aria-label="Some label">
+   *          <HeaderMenuItem href="/some-path">Some Label</HeaderMenuItem>
+   *        </HeaderNavigation>
+   *      </Header>
+   *      <SideNav
+   *        aria-label="Side navigation"
+   *        expanded={isSideNavExpanded}
+   *        isPersistent={false}>
+   *        <HeaderSideNavItems>
+   *          <HeaderMenuItem href="/some-path">Some label</HeaderMenuItem>
+   *        </HeaderSideNavItems>
+   *      </SideNav>
+   *    </Theme>
+   *}/>
+   * ```
+   */
+  render: PropTypes.shape({
+    type: PropTypes.func,
+    props: PropTypes.shape({
+      isSideNavExpanded: PropTypes.bool,
+      onClickSideNavExpand: PropTypes.func,
+    }),
+  }).isRequired,
 };
