@@ -7,8 +7,9 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useMemo, type PropsWithChildren } from 'react';
+import React, { ElementType, useMemo, type PropsWithChildren } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
+import { PolymorphicProps } from '../../types/common';
 import { LayerContext } from '../Layer/LayerContext';
 
 interface GlobalThemeProps {
@@ -46,24 +47,21 @@ GlobalTheme.propTypes = {
   theme: PropTypes.oneOf(['white', 'g10', 'g90', 'g100']),
 };
 
-interface ThemeProps extends GlobalThemeProps {
-  as?:
-    | keyof JSX.IntrinsicElements
-    | React.FunctionComponent
-    | React.ComponentClass;
+type ThemeBaseProps = GlobalThemeProps & {
   className?: string;
 }
+
+type ThemeProps<E extends ElementType> = PolymorphicProps<E, ThemeBaseProps>;
 
 /**
  * Specify the theme to be applied to a page, or a region in a page
  */
-export function Theme({
-  as: BaseComponent = 'div',
-  children,
+export function Theme<E extends ElementType = 'div'>({
+  as: BaseComponent = 'div' as E,
   className: customClassName,
   theme,
   ...rest
-}: PropsWithChildren<ThemeProps>) {
+}: ThemeProps<E>) {
   const prefix = usePrefix();
   const className = cx(customClassName, {
     [`${prefix}--white`]: theme === 'white',
@@ -77,13 +75,12 @@ export function Theme({
       theme,
     };
   }, [theme]);
+  const BaseComponentAsAny = BaseComponent as any;
 
   return (
     <ThemeContext.Provider value={value}>
       <LayerContext.Provider value={1}>
-        <BaseComponent {...rest} className={className}>
-          {children}
-        </BaseComponent>
+        <BaseComponentAsAny {...rest} className={className} />
       </LayerContext.Provider>
     </ThemeContext.Provider>
   );
