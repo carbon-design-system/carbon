@@ -45,11 +45,11 @@ describe('HeaderMenuButton', () => {
     );
   });
 
-  it('should call `onClick` when the <button> is clicked', () => {
+  it('should call `onClick` when the <button> is clicked', async () => {
     const onClick = jest.fn();
     render(<HeaderMenuButton aria-label="test" onClick={onClick} />);
 
-    userEvent.click(screen.getByLabelText('test'));
+    await userEvent.click(screen.getByLabelText('test'));
     expect(onClick).toHaveBeenCalled();
   });
 

@@ -30,7 +30,7 @@ export function StructuredListWrapper(props) {
   const classes = classNames(`${prefix}--structured-list`, className, {
     [`${prefix}--structured-list--selection`]: selection,
     [`${prefix}--structured-list--condensed`]: isCondensed,
-    [`${prefix}--structured-list--flush`]: isFlush,
+    [`${prefix}--structured-list--flush`]: isFlush && !selection,
   });
   const [selectedRow, setSelectedRow] = React.useState(null);
 
@@ -80,7 +80,7 @@ StructuredListWrapper.propTypes = {
   isCondensed: PropTypes.bool,
 
   /**
-   * Specify if structured list is flush, default is false
+   * Specify if structured list is flush, not valid for selection variant, default is false
    */
   isFlush: PropTypes.bool,
 
@@ -162,12 +162,14 @@ export function StructuredListRow(props) {
   const { onKeyDown, children, className, head, ...other } = props;
   const [hasFocusWithin, setHasFocusWithin] = useState(false);
   const id = useId('grid-input');
+  const selectedRow = React.useContext(GridSelectedRowStateContext);
   const setSelectedRow = React.useContext(GridSelectedRowDispatchContext);
   const prefix = usePrefix();
   const value = { id };
   const classes = classNames(`${prefix}--structured-list-row`, className, {
     [`${prefix}--structured-list-row--header-row`]: head,
     [`${prefix}--structured-list-row--focused-within`]: hasFocusWithin,
+    [`${prefix}--structured-list-row--selected`]: selectedRow === id,
   });
 
   return head ? (
@@ -237,6 +239,7 @@ export function StructuredListInput(props) {
     name = `structured-list-input-${defaultId}`,
     title,
     id,
+    onChange,
     ...other
   } = props;
   const prefix = usePrefix();
@@ -258,6 +261,7 @@ export function StructuredListInput(props) {
       value={row?.id ?? ''}
       onChange={(event) => {
         setSelectedRow(event.target.value);
+        onChange(event);
       }}
       id={id ?? defaultId}
       className={classes}

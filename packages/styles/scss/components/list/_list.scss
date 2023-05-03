@@ -30,6 +30,10 @@
     list-style: none;
   }
 
+  .#{$prefix}--list--unordered:not(.#{$prefix}--list--nested) {
+    margin-left: $spacing-05;
+  }
+
   .#{$prefix}--list--expressive,
   .#{$prefix}--list--expressive .#{$prefix}--list--nested {
     @include type.type-style('body-02');

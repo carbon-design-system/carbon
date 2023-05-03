@@ -88,11 +88,15 @@ module.exports = {
   },
   features: {
     previewCsfV3: true,
+    buildStoriesJson: true,
   },
   framework: '@storybook/react',
   stories,
   typescript: {
     reactDocgen: 'react-docgen', // Favor docgen from prop-types instead of TS interfaces
+  },
+  reactOptions: {
+    legacyRootApi: false,
   },
   webpack(config) {
     const babelLoader = config.module.rules.find((rule) => {

@@ -186,7 +186,7 @@ describe('TableSelectAll', () => {
   });
 
   describe('behaves as expected', () => {
-    it('should respect onSelect prop', () => {
+    it('should respect onSelect prop', async () => {
       const onSelect = jest.fn();
       render(
         <Table>
@@ -206,7 +206,7 @@ describe('TableSelectAll', () => {
       );
 
       expect(onSelect).toHaveBeenCalledTimes(0);
-      userEvent.click(screen.getByRole('checkbox'));
+      await userEvent.click(screen.getByRole('checkbox'));
       expect(onSelect).toHaveBeenCalledTimes(1);
     });
   });

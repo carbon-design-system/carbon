@@ -138,7 +138,7 @@ function createIconComponent(moduleName, { attrs, content }) {
 
 const attrs = ${JSON.stringify(attrs)};
 const content = ${JSON.stringify(content)};
-const ${moduleName} = createSVGComponent(${moduleName}, ${JSON.stringify(
+const ${moduleName} = createSVGComponent('${moduleName}', ${JSON.stringify(
     attrs
   )}, ${JSON.stringify(content)});
 
