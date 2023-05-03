@@ -28,6 +28,7 @@ const customCellClass = 'structured-list-cell-custom-class';
 const inputNameValue = 'list-radio-input';
 const onKeyDownHandlerFn = jest.fn();
 const onKeyDownBodyHandlerFn = jest.fn();
+const onChangeHandlerFn = jest.fn();
 
 const user = userEvent.setup();
 
@@ -87,6 +88,7 @@ const structuredListBodyRowGenerator = (numRows, rest) => {
         title={`row-${i}`}
         name={inputNameValue}
         className={customInputClass}
+        onChange={onChangeHandlerFn}
       />
       <StructuredListCell>
         <CheckmarkFilled
@@ -320,6 +322,12 @@ describe('StructuredList', () => {
       allInputs.forEach((input) => {
         expect(input).toHaveAttribute('aria-label', testAriaLabel);
       });
+    });
+    it('should call onChange on change', async () => {
+      renderSelectionVariant();
+      const inputElement = screen.getByTitle('row-0');
+      await userEvent.click(inputElement);
+      expect(onChangeHandlerFn).toHaveBeenCalled();
     });
   });
 
