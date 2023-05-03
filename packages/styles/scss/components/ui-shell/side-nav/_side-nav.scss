@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -87,6 +87,7 @@
 
   .#{$prefix}--side-nav__overlay-active {
     @include breakpoint-down('lg') {
+      z-index: z('overlay');
       width: 100vw;
       height: 100vh;
       background-color: $overlay;

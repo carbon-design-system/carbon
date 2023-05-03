@@ -61,6 +61,7 @@ Array [
   "icon-on-color",
   "icon-on-color-disabled",
   "icon-disabled",
+  "icon-interactive",
 ]
 `;
 
@@ -225,6 +226,7 @@ Array [
   "icon-on-color",
   "icon-on-color-disabled",
   "icon-disabled",
+  "icon-interactive",
   "support-error",
   "support-success",
   "support-warning",

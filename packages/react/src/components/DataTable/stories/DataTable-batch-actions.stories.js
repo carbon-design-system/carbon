@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { TrashCan, Save, Download } from '@carbon/icons-react';
+import { TrashCan, Save, Download, Add } from '@carbon/icons-react';
 
 import Button from '../../Button';
 import DataTable, {
@@ -89,6 +89,18 @@ export const Default = () => (
                 Delete
               </TableBatchAction>
               <TableBatchAction
+                hasIconOnly
+                iconDescription="Add"
+                tooltipPosition="bottom"
+                tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
+                renderIcon={Add}
+                onClick={batchActionClick(selectedRows)}>
+                Delete
+              </TableBatchAction>
+              <TableBatchAction
+                hasIconOnly
+                iconDescription="Save"
+                tooltipPosition="bottom"
                 tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
                 renderIcon={Save}
                 onClick={batchActionClick(selectedRows)}>
@@ -203,7 +215,10 @@ export const Playground = (args) => (
               aria-hidden={batchActionProps.shouldShowBatchActions}>
               <TableToolbarSearch
                 tabIndex={batchActionProps.shouldShowBatchActions ? -1 : 0}
-                onChange={onInputChange}
+                onChange={(evt) => {
+                  action('TableToolbarSearch - onChange')(evt);
+                  onInputChange(evt);
+                }}
               />
               <TableToolbarMenu
                 tabIndex={batchActionProps.shouldShowBatchActions ? -1 : 0}>
@@ -240,7 +255,10 @@ export const Playground = (args) => (
             <TableBody>
               {rows.map((row, i) => (
                 <TableRow key={i} {...getRowProps({ row })}>
-                  <TableSelectRow {...getSelectionProps({ row })} />
+                  <TableSelectRow
+                    {...getSelectionProps({ row })}
+                    onChange={action('TableSelectRow - onChange')}
+                  />
                   {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}

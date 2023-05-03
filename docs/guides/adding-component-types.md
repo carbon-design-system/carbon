@@ -37,7 +37,7 @@ By adding TypeScript types to components we anticipate a number of benefits:
 - Developer productivity will increase due to Component API's being
   self-documenting and providing tight integration with code editor
   intellisense.
-- The qualtiy of products developed will increase due to more stable, correct,
+- The quality of products developed will increase due to more stable, correct,
   and thorough component API typings provided first-party through
   `@carbon/react` itself.
 - Maintenance of the types themselves will be simplified by not having to go
@@ -159,5 +159,5 @@ the repository. There is an issue tracking curring status of this effort,
 ### Where should I put the ts interface in the file?
 
 - Above the component definition (likely the top of the file)
-  - The component implementation should be sandwiched inbetween the ts interface
-    and the proptypes definition
+  - The component implementation should be sandwiched in-between the ts
+    interface and the proptypes definition

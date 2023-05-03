@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018, 2022
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -43,7 +43,7 @@ describe('SelectItemGroup', () => {
 
     it('Should not be disabled by default', () => {
       const { container } = render(<SelectItemGroup />);
-      expect(container.firstChild).not.toHaveAttribute('disabled');
+      expect(container.firstChild).toBeEnabled();
     });
 
     it('should set disabled as expected', () => {

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,9 +10,9 @@ import React from 'react';
 import { HeaderMenuItem } from '../';
 
 describe('HeaderMenuItem', () => {
-  it('should set the current class based on isCurrentPage', () => {
+  it('should set the current class based on isActive', () => {
     render(
-      <HeaderMenuItem data-testid="test" isCurrentPage>
+      <HeaderMenuItem data-testid="test" isActive>
         test
       </HeaderMenuItem>
     );

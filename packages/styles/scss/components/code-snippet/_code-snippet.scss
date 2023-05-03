@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -201,6 +201,12 @@ $copy-btn-feedback: $background-inverse !default;
     order: 1;
     overflow-y: auto;
     transition: max-height $duration-moderate-01 motion(standard, productive);
+
+    &:focus {
+      @include focus-outline('outline');
+
+      outline-offset: 0;
+    }
   }
 
   // expanded snippet container

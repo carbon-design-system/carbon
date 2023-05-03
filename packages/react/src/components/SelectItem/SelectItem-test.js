@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018, 2022
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -35,12 +35,12 @@ describe('SelectItem', () => {
 
     it('should respect disabled prop', () => {
       render(<SelectItem disabled text={'testText'} />);
-      expect(screen.getByText('testText')).toHaveAttribute('disabled');
+      expect(screen.getByText('testText')).toBeDisabled();
     });
 
     it('Should not be disabled by default', () => {
       render(<SelectItem text={'testText'} />);
-      expect(screen.getByText('testText')).not.toHaveAttribute('disabled');
+      expect(screen.getByText('testText')).toBeEnabled();
     });
 
     it('should respect hidden prop', () => {
@@ -50,10 +50,7 @@ describe('SelectItem', () => {
 
     it('should respect value prop', () => {
       render(<SelectItem text={'testText'} value={'testValue'} />);
-      expect(screen.getByText('testText')).toHaveAttribute(
-        'value',
-        'testValue'
-      );
+      expect(screen.getByText('testText')).toHaveValue('testValue');
     });
   });
 });

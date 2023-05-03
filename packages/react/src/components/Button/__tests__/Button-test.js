@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -39,10 +39,10 @@ describe('Button', () => {
 
   it('should use the disabled prop to set disabled on the <button>', () => {
     const { rerender } = render(<Button>test</Button>);
-    expect(screen.getByRole('button')).not.toHaveAttribute('disabled');
+    expect(screen.getByRole('button')).toBeEnabled();
 
     rerender(<Button disabled>test</Button>);
-    expect(screen.getByRole('button')).toHaveAttribute('disabled');
+    expect(screen.getByRole('button')).toBeDisabled();
   });
 
   it('should render with a default button type of button', () => {

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,7 +23,7 @@ export default {
     kind: 'error',
     lowContrast: false,
     hideCloseButton: false,
-    ariaLabel: 'closes notification',
+    ['aria-label']: 'closes notification',
     statusIconDescription: 'notification',
     onClose: action('onClose'),
     onCloseButtonClick: action('onCloseButtonClick'),
@@ -45,6 +45,11 @@ Playground.argTypes = {
       disable: true,
     },
   },
+  ['aria-label']: {
+    table: {
+      disable: true,
+    },
+  },
   ariaLabel: {
     table: {
       disable: true,
@@ -56,10 +61,10 @@ Playground.argTypes = {
     },
   },
   onClose: {
-    action: 'clicked',
+    action: 'onClose',
   },
   onCloseButtonClick: {
-    action: 'clicked',
+    action: 'onCloseButtonClick',
   },
   children: {
     table: {

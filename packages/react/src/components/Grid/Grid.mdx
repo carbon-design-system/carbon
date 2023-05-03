@@ -91,10 +91,10 @@ we will use the `sm`, `md`, and `lg` prop to specify how many columns the
 ### Debugging
 
 It is incredibly helpful when debugging CSS Grid to use the browser developer
-tools' css grid mode to view the grid definition. Depending on the browser, these
-typically provide a toggle for overlaying a schematic showing the column and
-grid gap definition. With this overlay, it's much easier to visually understand
-if grid modes are configured and set properly on the grid.
+tools' css grid mode to view the grid definition. Depending on the browser,
+these typically provide a toggle for overlaying a schematic showing the column
+and grid gap definition. With this overlay, it's much easier to visually
+understand if grid modes are configured and set properly on the grid.
 
 Documentation on these features is available for
 [Chrome](https://developer.chrome.com/docs/devtools/css/grid/),
@@ -109,7 +109,8 @@ There are several
 [grid modes](https://www.carbondesignsystem.com/guidelines/2x-grid/implementation/#grid-modes)
 that you can use depending on the layout effect you're looking to achieve. By
 default, `Grid` uses the wide grid mode with a 32px gutter. However, you can use
-the `condensed` prop to enable the condensed grid mode.
+the `condensed` prop to enable the condensed grid mode with a 1px gutter or the
+`narrow` prop to enable the narrow grid with a 16px gutter.
 
 ### Full width grid
 
@@ -121,6 +122,12 @@ the `condensed` prop to enable the condensed grid mode.
 
 <Preview>
   <Story id="elements-grid--condensed" />
+</Preview>
+
+### Narrow grid
+
+<Preview>
+  <Story id="elements-grid--narrow" />
 </Preview>
 
 ## Subgrid
@@ -163,7 +170,7 @@ The values of these custom properties can be changed to modify the default
 behavior of columns.
 
 <Preview>
-  <Story id="elements-grid--responsives" />
+  <Story id="elements-grid--responsive" />
 </Preview>
 
 ## Offset columns

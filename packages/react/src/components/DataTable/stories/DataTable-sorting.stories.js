@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -67,7 +67,7 @@ export const Default = () => (
 );
 
 export const Playground = (args) => (
-  <DataTable rows={rows} headers={headers} {...args}>
+  <DataTable isSortable rows={rows} headers={headers} {...args}>
     {({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
       <TableContainer title="DataTable" description="With sorting">
         <Table {...getTableProps()}>

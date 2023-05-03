@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018, 2022
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -55,14 +55,12 @@ describe('TextArea', () => {
 
     it('should not be disabled by default', () => {
       render(<TextArea id="testing" labelText="testLabel" />);
-      expect(screen.getByLabelText('testLabel')).not.toHaveAttribute(
-        'disabled'
-      );
+      expect(screen.getByLabelText('testLabel')).toBeEnabled();
     });
 
     it('should be disabled as expected', () => {
       render(<TextArea disabled id="testing" labelText="testLabel" />);
-      expect(screen.getByLabelText('testLabel')).toHaveAttribute('disabled');
+      expect(screen.getByLabelText('testLabel')).toBeDisabled();
     });
 
     it('should respect hideLabel prop', () => {
@@ -276,34 +274,67 @@ describe('events', () => {
     });
   });
 
-  describe('enabled textarea', () => {
-    it('should invoke onClick when textarea is clicked', async () => {
-      const onClick = jest.fn();
-      render(
-        <TextArea
-          disabled={false}
-          id="testing"
-          labelText="testLabel"
-          onClick={onClick}
-        />
-      );
-      await userEvent.click(screen.getByLabelText('testLabel'));
-      expect(onClick).toHaveBeenCalled();
+  describe('events', () => {
+    describe('disabled textarea', () => {
+      it('should not invoke onClick when textarea is clicked', async () => {
+        const onClick = jest.fn();
+        render(
+          <TextArea
+            disabled
+            id="testing"
+            labelText="testLabel"
+            onClick={onClick}
+          />
+        );
+        await userEvent.click(screen.getByLabelText('testLabel'));
+        expect(onClick).not.toHaveBeenCalled();
+      });
+
+      it('should not invoke onChange', async () => {
+        const onChange = jest.fn();
+        render(
+          <TextArea
+            disabled
+            id="testing"
+            labelText="testLabel"
+            onChange={onChange}
+          />
+        );
+        await userEvent.click(screen.getByLabelText('testLabel'));
+        await userEvent.keyboard('big blue');
+        expect(onChange).not.toHaveBeenCalled();
+      });
     });
 
-    it('should invoke onChange when textarea value is changed', async () => {
-      const onChange = jest.fn();
-      render(
-        <TextArea
-          disabled={false}
-          id="testing"
-          labelText="testLabel"
-          onChange={onChange}
-        />
-      );
-      await userEvent.click(screen.getByLabelText('testLabel'));
-      userEvent.keyboard('big blue');
-      expect(onChange).toHaveBeenCalled();
+    describe('enabled textarea', () => {
+      it('should invoke onClick when textarea is clicked', async () => {
+        const onClick = jest.fn();
+        render(
+          <TextArea
+            disabled={false}
+            id="testing"
+            labelText="testLabel"
+            onClick={onClick}
+          />
+        );
+        await userEvent.click(screen.getByLabelText('testLabel'));
+        expect(onClick).toHaveBeenCalled();
+      });
+
+      it('should invoke onChange when textarea value is changed', async () => {
+        const onChange = jest.fn();
+        render(
+          <TextArea
+            disabled={false}
+            id="testing"
+            labelText="testLabel"
+            onChange={onChange}
+          />
+        );
+        await userEvent.click(screen.getByLabelText('testLabel'));
+        await userEvent.keyboard('big blue');
+        expect(onChange).toHaveBeenCalled();
+      });
     });
   });
 });

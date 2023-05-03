@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,6 +20,7 @@ import { getInteractiveContent } from '../../internal/useNoInteractiveChildren';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match, matches } from '../../internal/keyboard';
 import { usePressable } from './usePressable';
+import deprecate from '../../prop-types/deprecate';
 
 // Used to manage the overall state of the Tabs
 const TabsContext = React.createContext();
@@ -129,11 +130,17 @@ function TabList({
   const nextButton = useRef(null);
   const [isScrollable, setIsScrollable] = useState(false);
   const [scrollLeft, setScrollLeft] = useState(null);
+  const hasSecondaryLabelTabs =
+    contained &&
+    !!React.Children.toArray(children).filter(
+      (child) => child.props.secondaryLabel
+    ).length;
   const className = cx(`${prefix}--tabs`, customClassName, {
     [`${prefix}--tabs--contained`]: contained,
     [`${prefix}--tabs--light`]: light,
     [`${prefix}--tabs__icon--default`]: iconSize === 'default',
     [`${prefix}--tabs__icon--lg`]: iconSize === 'lg',
+    [`${prefix}--tabs--tall`]: hasSecondaryLabelTabs,
   });
 
   // Previous Button
@@ -338,7 +345,8 @@ function TabList({
         onKeyDown={onKeyDown}>
         {React.Children.map(children, (child, index) => {
           return (
-            <TabContext.Provider value={index}>
+            <TabContext.Provider
+              value={{ index, hasSecondaryLabel: hasSecondaryLabelTabs }}>
               {React.cloneElement(child, {
                 ref: (node) => {
                   tabs.current[index] = node;
@@ -403,7 +411,11 @@ TabList.propTypes = {
   /**
    * Specify whether or not to use the light component variant
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `TabList` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
 
   /**
    * Provide the props that describe the right overflow button
@@ -476,6 +488,8 @@ const Tab = React.forwardRef(function Tab(
     disabled,
     onClick,
     onKeyDown,
+    secondaryLabel,
+    renderIcon: Icon,
     ...rest
   },
   ref
@@ -483,7 +497,7 @@ const Tab = React.forwardRef(function Tab(
   const prefix = usePrefix();
   const { selectedIndex, setSelectedIndex, baseId } =
     React.useContext(TabsContext);
-  const index = React.useContext(TabContext);
+  const { index, hasSecondaryLabel } = React.useContext(TabContext);
   const id = `${baseId}-tab-${index}`;
   const panelId = `${baseId}-tabpanel-${index}`;
   const className = cx(
@@ -519,7 +533,19 @@ const Tab = React.forwardRef(function Tab(
       onKeyDown={onKeyDown}
       tabIndex={selectedIndex === index ? '0' : '-1'}
       type="button">
-      {children}
+      <div className={`${prefix}--tabs__nav-item-label-wrapper`}>
+        <span className={`${prefix}--tabs__nav-item-label`}>{children}</span>
+        {Icon && (
+          <div className={`${prefix}--tabs__nav-item--icon`}>
+            <Icon size={16} />
+          </div>
+        )}
+      </div>
+      {hasSecondaryLabel && (
+        <div className={`${prefix}--tabs__nav-item-secondary-label`}>
+          {secondaryLabel}
+        </div>
+      )}
     </BaseComponent>
   );
 });
@@ -561,6 +587,18 @@ Tab.propTypes = {
    * side router libraries.
    **/
   renderButton: PropTypes.func,
+
+  /**
+   * Optional prop to render an icon next to the label.
+   * Can be a React component class
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /*
+   * An optional label to render under the primary tab label.
+  /* This prop is only useful for conained tabs
+   **/
+  secondaryLabel: PropTypes.string,
 };
 
 const IconTab = React.forwardRef(function IconTab(
@@ -577,7 +615,10 @@ const IconTab = React.forwardRef(function IconTab(
 ) {
   const prefix = usePrefix();
 
-  const classNames = cx(`${prefix}--tabs__nav-item--icon`, customClassName);
+  const classNames = cx(
+    `${prefix}--tabs__nav-item--icon-only`,
+    customClassName
+  );
   return (
     <Tooltip
       align="bottom"

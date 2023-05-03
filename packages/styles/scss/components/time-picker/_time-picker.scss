@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -91,10 +91,12 @@
 
   // readonly
   .#{$prefix}--time-picker--readonly .#{$prefix}--time-picker__input-field {
+    border-bottom-color: $border-subtle;
     background-color: transparent;
   }
 
   .#{$prefix}--time-picker--readonly .#{$prefix}--select-input {
+    border-bottom-color: $border-subtle;
     background-color: transparent;
     cursor: default;
   }

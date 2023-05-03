@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,7 +23,7 @@ describe('RadioButtonGroup', () => {
     const legend = screen.getByText('test', {
       selector: 'legend',
     });
-    expect(legend).toBeDefined();
+    expect(legend).toBeInTheDocument();
   });
 
   it('should render `legendText` in a <fieldset>', () => {
@@ -94,7 +94,7 @@ describe('RadioButtonGroup', () => {
       expect(fieldset).toBeDisabled();
     });
 
-    it('should support readonly to prevent changes', () => {
+    it('should support readonly to prevent changes', async () => {
       render(
         <RadioButtonGroup
           defaultSelected="test-1"
@@ -112,7 +112,7 @@ describe('RadioButtonGroup', () => {
       expect(radio1).toBeChecked();
       expect(radio2).not.toBeChecked();
 
-      userEvent.click(radio2);
+      await userEvent.click(radio2);
 
       // no change
       expect(radio1).toBeChecked();
@@ -208,7 +208,7 @@ describe('RadioButtonGroup', () => {
       );
     });
 
-    it('should call `onChange` when the value of the group changes', () => {
+    it('should call `onChange` when the value of the group changes', async () => {
       const onChange = jest.fn();
 
       render(
@@ -218,7 +218,7 @@ describe('RadioButtonGroup', () => {
         </RadioButtonGroup>
       );
 
-      userEvent.click(screen.getByLabelText('Option one'));
+      await userEvent.click(screen.getByLabelText('Option one'));
       expect(onChange).toHaveBeenCalled();
       expect(onChange).toHaveBeenCalledWith(
         'option-one',

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -58,6 +58,7 @@ export default function Copy({
   if (FeatureFlags.enabled('enable-v11-release')) {
     return (
       <IconButton
+        closeOnActivation={false}
         align="bottom"
         className={classNames}
         label={animation ? feedback : other['aria-label']}
@@ -67,7 +68,6 @@ export default function Copy({
           handleAnimationEnd,
         ])}
         {...other}
-        aria-live="polite"
         aria-label={
           (!children && (animation ? feedback : other['aria-label'])) || null
         }>

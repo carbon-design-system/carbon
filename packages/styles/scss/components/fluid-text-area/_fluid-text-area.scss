@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2018, 2018
+// Copyright IBM Corp. 2018, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -91,9 +91,23 @@
     display: none;
   }
 
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area--invalid,
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area--warn {
+    resize: none;
+  }
+
+  // accounts for 2px of border when invalid
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area--invalid {
+    padding: 0 rem(14px) rem(13px);
+    margin-top: rem(30px);
+  }
+
   .#{$prefix}--text-area--fluid
-    .#{$prefix}--text-area--invalid
-    + .#{$prefix}--text-area__divider {
+    .#{$prefix}--text-area__wrapper[data-invalid]
+    .#{$prefix}--text-area__divider,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--warn
+    .#{$prefix}--text-area__divider {
     display: block;
     border-style: solid;
     border-color: $border-subtle;
@@ -101,11 +115,13 @@
     margin: 0 1rem;
   }
 
-  // invalid error message container
+  // invalid & warning error message container
   .#{$prefix}--text-area--fluid
-    .#{$prefix}--text-area--invalid
-    + .#{$prefix}--text-area__divider
-    + .#{$prefix}--form-requirement {
+    .#{$prefix}--text-area__wrapper[data-invalid]
+    .#{$prefix}--form-requirement.#{$prefix}--form-requirement,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--warn
+    .#{$prefix}--form-requirement.#{$prefix}--form-requirement {
     position: relative;
     display: block;
     overflow: visible;
@@ -113,13 +129,30 @@
     padding: 0.5rem 2.5rem 0.5rem 1rem;
     margin: 0;
     background: $field;
+  }
+
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--warn
+    .#{$prefix}--form-requirement.#{$prefix}--form-requirement {
+    border-bottom: 1px solid $border-strong;
+    color: $text-primary;
+  }
+
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper[data-invalid]
+    .#{$prefix}--form-requirement.#{$prefix}--form-requirement {
+    border-bottom: none;
     color: $text-error;
+  }
+
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area--warn {
+    border-bottom: none;
   }
 
   .#{$prefix}--modal
     .#{$prefix}--text-area--fluid
-    .#{$prefix}--text-area--invalid
-    + .#{$prefix}--text-area__divider
+    .#{$prefix}--text-area__wrapper[data-invalid]
+    .#{$prefix}--text-area__divider
     + .#{$prefix}--form-requirement {
     background: $field-02;
   }
@@ -129,11 +162,10 @@
   }
 
   //invalid outline
+  // needs to be a border for some weirdness when in a modal
   .#{$prefix}--text-area--fluid
     .#{$prefix}--text-area__wrapper[data-invalid]:not(:focus) {
-    @include focus-outline('invalid');
-
-    outline-offset: 0;
+    border: 2px solid $support-error;
   }
 
   // focus
@@ -141,9 +173,9 @@
     .#{$prefix}--text-area__wrapper[data-invalid]:focus-within,
   .#{$prefix}--text-area--fluid .#{$prefix}--text-area__wrapper:focus-within {
     @include focus-outline('outline');
-
-    outline-offset: 0;
   }
+
+  // end weirdness
 
   .#{$prefix}--text-area--fluid
     .#{$prefix}--text-area__wrapper[data-invalid]

@@ -53,6 +53,10 @@
     white-space: nowrap;
   }
 
+  .#{$prefix}--number-input--fluid .#{$prefix}--number__input-wrapper {
+    position: initial;
+  }
+
   .#{$prefix}--number-input--fluid input[type='number'] {
     min-height: rem(64px);
     padding: rem(32px) rem(80px) rem(13px) $spacing-05;
@@ -74,7 +78,6 @@
     border-bottom: 1px solid transparent;
   }
 
-  // Focus Overrides
   .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--focus
     .#{$prefix}--number {
     @include focus-outline('outline');

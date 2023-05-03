@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -51,7 +51,7 @@ export default (config) => (fp) => {
    * set the date again, triggering the calendar to update.
    */
   const handleBlur = (event) => {
-    const { inputFrom, inputTo } = config;
+    const { inputFrom, inputTo, lastStartValue } = config;
     const { target } = event;
 
     // Only fall into this logic if the event is on the `to` input and there is a
@@ -59,8 +59,8 @@ export default (config) => (fp) => {
     if (inputTo === target && fp.selectedDates[1]) {
       // Using getTime() enables the ability to more readily compare the date currently
       // selected in the calendar and the date currently in the value of the input
-      const selectedToDate = new Date(fp.selectedDates[1]).getTime();
-      const currentValueToDate = new Date(inputTo.value).getTime();
+      const selectedToDate = new Date(fp.selectedDates[1]).setHours(0, 0, 0, 0);
+      const currentValueToDate = new Date(inputTo.value).setHours(0, 0, 0, 0);
 
       // The date should only be set if both dates are valid dates, and they don't match.
       // When they don't match, this indiciates that the date selected in the calendar is stale,
@@ -89,6 +89,22 @@ export default (config) => (fp) => {
           true,
           fp.config.dateFormat
         );
+      }
+    }
+
+    // overriding the flatpickr bug where the startDate gets deleted on blur
+    if (inputTo === target && !inputFrom.value && lastStartValue.current) {
+      let currentStartDate = new Date(lastStartValue.current);
+
+      if (currentStartDate.toString() !== 'Invalid Date') {
+        inputFrom.value = lastStartValue.current;
+        if (inputTo.value) {
+          fp.setDate(
+            [inputFrom.value, inputTo.value],
+            true,
+            fp.config.dateFormat
+          );
+        }
       }
     }
   };

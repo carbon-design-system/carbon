@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -27,6 +27,7 @@ describe('Carbon Components React', () => {
         "ButtonSet",
         "ButtonSkeleton",
         "Checkbox",
+        "CheckboxGroup",
         "CheckboxSkeleton",
         "ClassPrefix",
         "ClickableTile",
@@ -87,6 +88,7 @@ describe('Carbon Components React', () => {
         "Heading",
         "IconButton",
         "IconSkeleton",
+        "IconSwitch",
         "IconTab",
         "IdPrefix",
         "InlineLoading",
@@ -221,14 +223,16 @@ describe('Carbon Components React', () => {
         "UnorderedList",
         "VStack",
         "types",
+        "unstable_ComboButton",
         "unstable_FeatureFlags",
         "unstable_LayoutDirection",
         "unstable_Menu",
-        "unstable_MenuDivider",
-        "unstable_MenuGroup",
+        "unstable_MenuButton",
         "unstable_MenuItem",
-        "unstable_MenuRadioGroup",
-        "unstable_MenuSelectableItem",
+        "unstable_MenuItemDivider",
+        "unstable_MenuItemGroup",
+        "unstable_MenuItemRadioGroup",
+        "unstable_MenuItemSelectable",
         "unstable_OverflowMenuV2",
         "unstable_PageSelector",
         "unstable_Pagination",

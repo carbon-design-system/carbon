@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -231,6 +231,13 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     }
 
     //-----------------------------
+    // Wrapper
+    //-----------------------------
+    .#{$prefix}--tabs__nav-item-label-wrapper {
+      display: flex;
+    }
+
+    //-----------------------------
     // Item
     //-----------------------------
     .#{$prefix}--tabs__nav-item {
@@ -267,6 +274,19 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     }
 
     //-----------------------------
+    // Icon
+    //-----------------------------
+    .#{$prefix}--tabs__nav-item--icon {
+      display: flex;
+      align-items: center;
+      padding-left: $spacing-03;
+    }
+
+    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--icon {
+      padding-left: $spacing-05;
+    }
+
+    //-----------------------------
     // Link
     //-----------------------------
     .#{$prefix}--tabs__nav-link {
@@ -279,7 +299,6 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       }
 
       overflow: hidden;
-      max-width: 10rem;
       padding: $spacing-04 $spacing-05 $spacing-03;
       border-bottom: $tab-underline-color;
       color: $text-secondary;
@@ -300,8 +319,23 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       height: rem(48px);
       padding: $spacing-03 $spacing-05;
       border-bottom: 0;
+    }
+
+    &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--tall)
+      .#{$prefix}--tabs__nav-item-label {
       // height - vertical padding
       line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+    }
+
+    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item-secondary-label {
+      @include type-style('label-01');
+
+      min-height: rem(16px);
+    }
+
+    &.#{$prefix}--tabs--contained.#{$prefix}--tabs--tall
+      .#{$prefix}--tabs__nav-link {
+      height: rem(64px);
     }
 
     //-----------------------------
@@ -312,14 +346,18 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       overflow-x: visible;
     }
 
-    .#{$prefix}--tabs__nav-item--icon,
-    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--icon {
+    .#{$prefix}--tabs__nav-item--icon-only,
+    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--icon-only {
       display: flex;
       width: $icon-tab-size;
       height: $icon-tab-size;
       align-items: center;
       justify-content: center;
       padding: 0;
+
+      .#{$prefix}--tabs__nav-item-label {
+        line-height: 0;
+      }
     }
 
     &.#{$prefix}--tabs__icon--lg {
@@ -329,8 +367,16 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     //-----------------------------
     // Item Hover
     //-----------------------------
-    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item:hover {
-      background-color: $layer-selected-hover;
+    &:not(.#{$prefix}--tabs--contained)
+      .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):hover {
+      border-bottom: $tab-underline-color-hover;
+      color: $text-primary;
+    }
+
+    &.#{$prefix}--tabs--contained
+      .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--disabled):hover {
+      background-color: $layer-accent-hover;
+      color: $text-primary;
     }
 
     //-----------------------------
@@ -364,11 +410,17 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       color: $text-primary;
     }
 
+    &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--tall)
+      .#{$prefix}--tabs__nav-item--selected,
+    &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--tall)
+      .#{$prefix}--tabs__nav-item--selected:hover {
+      // height - vertical padding
+      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+    }
+
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--selected,
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--selected:hover {
       background-color: $layer;
-      // height - vertical padding
-      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
 
       .#{$prefix}--tabs__nav-link:focus,
       .#{$prefix}--tabs__nav-link:active {
@@ -381,14 +433,6 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     &.#{$prefix}--tabs--light.#{$prefix}--tabs--contained
       .#{$prefix}--tabs__nav-item--selected:hover {
       background-color: $background;
-    }
-
-    //-----------------------------
-    //  Link Hover
-    //-----------------------------
-    .#{$prefix}--tabs__nav-item:hover .#{$prefix}--tabs__nav-link {
-      border-bottom: $tab-underline-color-hover;
-      color: $text-primary;
     }
 
     //-----------------------------

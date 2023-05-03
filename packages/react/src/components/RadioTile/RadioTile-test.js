@@ -22,11 +22,9 @@ describe('RadioTile', () => {
     });
 
     it('should respect checked prop', () => {
-      const { container } = render(
-        <RadioTile value="standard" checked data-testid="test-id" />
-      );
+      render(<RadioTile value="standard" checked data-testid="test-id" />);
 
-      expect(container.firstChild).toHaveAttribute('checked');
+      expect(screen.getByRole('radio')).toBeChecked();
       expect(screen.getByTestId('test-id')).toHaveClass(
         'cds--tile--is-selected'
       );
@@ -45,11 +43,9 @@ describe('RadioTile', () => {
     });
 
     it('should respect disabled prop', () => {
-      const { container } = render(
-        <RadioTile value="standard" disabled data-testid="test-id" />
-      );
+      render(<RadioTile value="standard" disabled data-testid="test-id" />);
 
-      expect(container.firstChild).toHaveAttribute('disabled');
+      expect(screen.getByRole('radio')).toBeDisabled();
       expect(screen.getByTestId('test-id')).toHaveClass('cds--tile--disabled');
     });
 
@@ -65,14 +61,13 @@ describe('RadioTile', () => {
       expect(screen.getByRole('radio')).toHaveAttribute('name', 'tile');
     });
 
-    it('should call onChange when expected', () => {
+    it('should call onChange when expected', async () => {
       const onChange = jest.fn();
       render(<RadioTile value="standard" onChange={onChange} />);
 
-      userEvent.click(screen.getByRole('radio'));
-      userEvent.type(screen.getByRole('radio'), '{space}');
+      await userEvent.click(screen.getByRole('radio'));
 
-      expect(onChange).toHaveBeenCalledTimes(2);
+      expect(onChange).toHaveBeenCalledTimes(1);
     });
 
     it('should respect tabIndex prop', () => {
@@ -84,7 +79,15 @@ describe('RadioTile', () => {
     it('should respect value prop', () => {
       render(<RadioTile value="standard" />);
 
-      expect(screen.getByRole('radio')).toHaveAttribute('value', 'standard');
+      expect(screen.getByDisplayValue('standard')).toBeInTheDocument();
+    });
+
+    it('should pass a given ref to the input element', () => {
+      const ref = React.createRef();
+      render(<RadioTile ref={ref} value="some test value" />);
+
+      expect(ref.current.type).toEqual('radio');
+      expect(ref.current.value).toEqual('some test value');
     });
   });
 });

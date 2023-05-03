@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2018
+ * Copyright IBM Corp. 2018, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,7 +20,6 @@ module.exports = {
   reporters: ['default'],
   setupFiles: [require.resolve('./setup/setup.js')],
   setupFilesAfterEnv: [require.resolve('./setup/setupAfterEnv.js')],
-  snapshotSerializers: ['enzyme-to-json/serializer'],
   testMatch: [
     '<rootDir>/**/__tests__/**/*.js?(x)',
     '<rootDir>/**/*.(spec|test).js?(x)',

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
 import {
@@ -17,10 +17,10 @@ import {
   Wheat,
 } from '@carbon/icons-react';
 
-import { Layer } from '../Layer';
-import { VStack } from '../Stack';
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
+
 import Button from '../Button';
-import ExpandableSearch from '../ExpandableSearch';
+import Search from '../Search';
 import OverflowMenu from '../OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 import Tag from '../Tag';
@@ -30,6 +30,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import mdx from './ContainedList.mdx';
 
 import ContainedList, { ContainedListItem } from '.';
+import ExpandableSearch from '../ExpandableSearch';
 
 export default {
   title: 'Components/ContainedList',
@@ -119,16 +120,91 @@ export const WithActions = () => {
   );
 
   return (
-    <ContainedList
-      label="List title"
-      kind="on-page"
-      action={<ExpandableSearch placeholder="Find item" size="lg" />}>
+    <ContainedList label="List title" kind="on-page" action={''}>
       <ContainedListItem action={itemAction}>List item</ContainedListItem>
       <ContainedListItem action={itemAction} disabled>
         List item
       </ContainedListItem>
       <ContainedListItem action={itemAction}>List item</ContainedListItem>
       <ContainedListItem action={itemAction}>List item</ContainedListItem>
+    </ContainedList>
+  );
+};
+
+export const WithExpandableSearch = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  useEffect(() => {
+    const listItems = [
+      'List item 1',
+      'List item 2',
+      'List item 3',
+      'List item 4',
+    ];
+
+    const results = listItems.filter((listItem) =>
+      listItem.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(results);
+  }, [searchTerm]);
+
+  return (
+    <ContainedList
+      label="List title"
+      kind="on-page"
+      action={
+        <ExpandableSearch
+          placeholder="Search"
+          value={searchTerm}
+          onChange={handleChange}
+          closeButtonLabelText="Clear search input"
+          size="lg"
+        />
+      }>
+      {searchResults.map((listItem, key) => (
+        <ContainedListItem key={key}>{listItem}</ContainedListItem>
+      ))}
+    </ContainedList>
+  );
+};
+
+export const WithPersistentSearch = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  useEffect(() => {
+    const listItems = [
+      'List item 1',
+      'List item 2',
+      'List item 3',
+      'List item 4',
+    ];
+
+    const results = listItems.filter((listItem) =>
+      listItem.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(results);
+  }, [searchTerm]);
+
+  return (
+    <ContainedList label="List title" kind="on-page" action={''}>
+      <Search
+        placeholder="Search"
+        value={searchTerm}
+        onChange={handleChange}
+        closeButtonLabelText="Clear search input"
+        size="lg"
+      />
+      {searchResults.map((listItem, key) => (
+        <ContainedListItem key={key}>{listItem}</ContainedListItem>
+      ))}
     </ContainedList>
   );
 };
@@ -145,10 +221,7 @@ export const WithInteractiveItemsAndActions = () => {
   );
 
   return (
-    <ContainedList
-      label="List title"
-      kind="on-page"
-      action={<ExpandableSearch placeholder="Find item" size="lg" />}>
+    <ContainedList label="List title" kind="on-page" action={''}>
       <ContainedListItem action={itemAction} onClick={onClick}>
         List item
       </ContainedListItem>
@@ -195,27 +268,13 @@ export const WithIcons = () => (
   </ContainedList>
 );
 
-export const WithLayer = () => (
-  <VStack gap={5}>
+export const _WithLayer = () => (
+  <WithLayer>
     <ContainedList label="List title" kind="on-page">
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
     </ContainedList>
-    <Layer>
-      <VStack gap={5}>
-        <ContainedList label="List title" kind="on-page">
-          <ContainedListItem>List item</ContainedListItem>
-          <ContainedListItem>List item</ContainedListItem>
-        </ContainedList>
-        <Layer>
-          <ContainedList label="List title" kind="on-page">
-            <ContainedListItem>List item</ContainedListItem>
-            <ContainedListItem>List item</ContainedListItem>
-          </ContainedList>
-        </Layer>
-      </VStack>
-    </Layer>
-  </VStack>
+  </WithLayer>
 );
 
 export const UsageExamples = () => {

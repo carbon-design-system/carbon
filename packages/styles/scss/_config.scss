@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2018, 2018
+// Copyright IBM Corp. 2018, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -62,7 +62,7 @@ $prefix: 'cds' !default;
 /// @group @carbon/grid
 $flex-grid-columns: 16 !default;
 
-/// Specify if the default grid type should be the flexbox grid
+/// Specify if the flexbox grid styles should be emitted
 /// @type Boolean
 /// @group config
 $use-flexbox-grid: false !default;

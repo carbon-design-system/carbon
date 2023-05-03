@@ -1,14 +1,16 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import React from 'react';
+
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
+
 import ExpandableSearch from '../ExpandableSearch';
 import Search from '.';
-import React from 'react';
-import { Layer } from '../Layer';
 
 export default {
   title: 'Components/Search',
@@ -28,7 +30,7 @@ export default {
 export const Default = () => (
   <Search
     size="lg"
-    defaultValue="A default value"
+    placeholder="Find your items"
     labelText="Search"
     closeButtonLabelText="Clear search input"
     id="search-1"
@@ -41,7 +43,7 @@ export const Disabled = () => (
   <Search
     disabled
     size="lg"
-    defaultValue="A default value"
+    placeholder="Find your items"
     labelText="Search"
     closeButtonLabelText="Clear search input"
     id="search-1"
@@ -61,78 +63,37 @@ export const Expandable = () => (
   />
 );
 
-export const WithLayer = () => {
-  return (
-    <>
+export const _WithLayer = () => (
+  <WithLayer>
+    {(layer) => (
       <Search
         size="lg"
-        defaultValue="First Layer"
+        placeholder="Find your items"
         labelText="Search"
         closeButtonLabelText="Clear search input"
-        id="search-1"
+        id={`search-${layer}`}
         onChange={() => {}}
         onKeyDown={() => {}}
       />
-      <Layer>
-        <Search
-          size="lg"
-          defaultValue="Second Layer"
-          labelText="Search"
-          closeButtonLabelText="Clear search input"
-          id="search-1"
-          onChange={() => {}}
-          onKeyDown={() => {}}
-        />
-        <Layer>
-          <Search
-            size="lg"
-            defaultValue="Third Layer"
-            labelText="Search"
-            closeButtonLabelText="Clear search input"
-            id="search-1"
-            onChange={() => {}}
-            onKeyDown={() => {}}
-          />
-        </Layer>
-      </Layer>
-    </>
-  );
-};
+    )}
+  </WithLayer>
+);
 
-export const ExpandableWithLayer = () => {
-  return (
-    <>
+export const ExpandableWithLayer = () => (
+  <WithLayer>
+    {(layer) => (
       <ExpandableSearch
         size="lg"
+        placeholder="Search"
         labelText="First Layer"
         closeButtonLabelText="Clear search input"
-        id="search-expandable-1"
+        id={`search-expandable-${layer}`}
         onChange={() => {}}
         onKeyDown={() => {}}
       />
-      <Layer>
-        <ExpandableSearch
-          size="lg"
-          labelText="Second Layer"
-          closeButtonLabelText="Clear search input"
-          id="search-expandable-1"
-          onChange={() => {}}
-          onKeyDown={() => {}}
-        />
-        <Layer>
-          <ExpandableSearch
-            size="lg"
-            labelText="Third Layer"
-            closeButtonLabelText="Clear search input"
-            id="search-expandable-1"
-            onChange={() => {}}
-            onKeyDown={() => {}}
-          />
-        </Layer>
-      </Layer>
-    </>
-  );
-};
+    )}
+  </WithLayer>
+);
 
 export const Playground = (args) => (
   <div style={{ width: args.playgroundWidth }}>

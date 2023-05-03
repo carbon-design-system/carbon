@@ -39,6 +39,14 @@ build a variety of layouts. You can import these components from
 import { FlexGrid, Row, Column } from '@carbon/react';
 ```
 
+```scss
+/* FlexGrid styles are not emitted by default, the feature flag must be turned on */
+
+@use '@carbon/react' with (
+  $use-flexbox-grid: true
+);
+```
+
 <Preview>
   <Story id="elements-flexgrid--responsive-grid" />
 </Preview>
@@ -244,6 +252,32 @@ at the small breakpoint.
 
 `FlexGrid` does not support nested grids. For nested grids, use the `Grid`
 (`CSSGrid`) component.
+
+### Why are the FlexGrid styles not working?
+
+FlexGrid styles are not emitted by default. You must opt in to emitting the
+styling via one of the following options:
+
+```scss
+/* Option 1: Turn on the feature flag */
+
+@use '@carbon/react' with (
+  $use-flexbox-grid: true
+);
+```
+
+```scss
+/* Option 2: Use the flexgrid module */
+
+@use '@carbon/react/scss/grid/flexbox';
+```
+
+```scss
+/* Option 3: Use the grid module and call the flex-grid mixin */
+
+@use '@carbon/react/scss/grid';
+@include grid.flex-grid();
+```
 
 ## Feedback
 

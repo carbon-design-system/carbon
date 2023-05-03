@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,10 +11,10 @@ import React from 'react';
 import { DefinitionTooltip } from '../DefinitionTooltip';
 
 describe('DefintiionTooltip', () => {
-  it('should display onClick a defintion provided via prop', () => {
+  it('should display onClick a defintion provided via prop', async () => {
     const definition = 'Uniform Resource Locator';
     render(<DefinitionTooltip definition={definition}>URL</DefinitionTooltip>);
-    userEvent.click(screen.getByText('URL'));
+    await userEvent.click(screen.getByText('URL'));
     expect(screen.getByText(definition)).toBeVisible();
   });
 

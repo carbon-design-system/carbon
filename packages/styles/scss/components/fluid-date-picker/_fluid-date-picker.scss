@@ -360,4 +360,21 @@
     .#{$prefix}--date-picker__icon {
     bottom: $spacing-03;
   }
+
+  // Readonly
+  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--readonly:not(.#{$prefix}--date-picker--fluid--invalid):not(.#{$prefix}--date-picker--fluid--warn)
+    .#{$prefix}--date-picker
+    > .#{$prefix}--date-picker-container,
+  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--readonly:not(.#{$prefix}--date-picker--fluid--invalid):not(.#{$prefix}--date-picker--fluid--warn)
+    .#{$prefix}--date-picker
+    .#{$prefix}--date-picker__input {
+    border-bottom-color: $border-subtle;
+  }
+
+  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--readonly:not(.#{$prefix}--date-picker--fluid--invalid):not(.#{$prefix}--date-picker--fluid--warn)
+    .#{$prefix}--date-picker--range
+    > .#{$prefix}--date-picker-container:last-child
+    .#{$prefix}--date-picker__input {
+    border-left-color: $border-subtle;
+  }
 }

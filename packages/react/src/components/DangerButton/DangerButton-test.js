@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -62,7 +62,7 @@ describe('DangerButton', () => {
     expect(icon).toBeInTheDocument();
   });
 
-  it('should call onClick when button is clicked', () => {
+  it('should call onClick when button is clicked', async () => {
     const onClick = jest.fn();
 
     render(
@@ -73,7 +73,7 @@ describe('DangerButton', () => {
     );
 
     const button = screen.getByTestId('danger-btn-3');
-    userEvent.click(button);
+    await userEvent.click(button);
     expect(onClick).toHaveBeenCalled();
   });
 });

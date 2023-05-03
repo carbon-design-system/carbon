@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -33,7 +33,7 @@ const on = (element, ...args) => {
 
 /**
  * The CSS property names of the arrow keyed by the floating menu direction.
- * @type {object<string, string>}
+ * @type {Object<string, string>}
  */
 const triggerButtonPositionProps = {
   [DIRECTION_TOP]: 'bottom',
@@ -42,7 +42,7 @@ const triggerButtonPositionProps = {
 
 /**
  * Determines how the position of arrow should affect the floating menu position.
- * @type {object<string, number>}
+ * @type {Object<string, number>}
  */
 const triggerButtonPositionFactors = {
   [DIRECTION_TOP]: -2,
@@ -97,9 +97,18 @@ class OverflowMenu extends Component {
 
   static propTypes = {
     /**
-     * The ARIA label.
+     * Specify a label to be read by screen readers on the container node
      */
-    ariaLabel: PropTypes.string.isRequired,
+    ['aria-label']: PropTypes.string,
+
+    /**
+     * Deprecated, please use `aria-label` instead.
+     * Specify a label to be read by screen readers on the container note.
+     */
+    ariaLabel: deprecate(
+      PropTypes.string,
+      'This prop syntax has been deprecated. Please use the new `aria-label`.'
+    ),
 
     /**
      * The child nodes.
@@ -227,7 +236,7 @@ class OverflowMenu extends Component {
   static contextType = PrefixContext;
 
   static defaultProps = {
-    ariaLabel: null,
+    ['aria-label']: null,
     iconDescription: 'Options',
     open: false,
     direction: DIRECTION_BOTTOM,
@@ -458,7 +467,8 @@ class OverflowMenu extends Component {
     const prefix = this.context;
     const {
       id,
-      ariaLabel,
+      ['aria-label']: ariaLabel,
+      ariaLabel: deprecatedAriaLabel,
       children,
       iconDescription,
       direction,
@@ -524,7 +534,7 @@ class OverflowMenu extends Component {
         className={overflowMenuOptionsClasses}
         tabIndex="-1"
         role="menu"
-        aria-label={ariaLabel}
+        aria-label={ariaLabel || deprecatedAriaLabel}
         onKeyDown={this.handleKeyPress}>
         {childrenWithProps}
       </ul>
@@ -564,6 +574,7 @@ class OverflowMenu extends Component {
             onClick={this.handleClick}
             id={id}
             ref={mergeRefs(this._triggerRef, ref)}
+            size={size}
             label={iconDescription}>
             <IconElement {...iconProps} />
           </IconButton>

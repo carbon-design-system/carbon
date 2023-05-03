@@ -603,6 +603,7 @@ categories:
           - ibm--mq
           - ibm--open-enterprise-languages
           - ibm--power-vs
+          - ibm--process-mining
           - ibm--telehealth
           - ibm--tenet
           - ibm--toolchain
@@ -1224,6 +1225,8 @@ categories:
           - document--epdf
           - document--export
           - document--import
+          - document--multiple-01
+          - document--multiple-02
           - document--pdf
           - document--preliminary
           - document--protected
@@ -1307,6 +1310,7 @@ categories:
           - PPT
           - product
           - RAW
+          - reference-architecture
           - repo--artifact
           - repo--source-code
           - roadmap
@@ -1349,6 +1353,7 @@ categories:
           - upload
           - version
           - websheet
+          - white-paper
           - WMV
           - workspace
           - XLS
@@ -1657,6 +1662,7 @@ categories:
           - user--settings
           - user--simulation
           - user--speaker
+          - user--sponsor
           - user--x-ray
           - user-profile--alt
           - voice-activate

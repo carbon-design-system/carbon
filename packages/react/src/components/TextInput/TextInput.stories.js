@@ -1,14 +1,16 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
+
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
+
 import FluidForm from '../FluidForm';
 import { default as TextInput, TextInputSkeleton } from '../TextInput';
-import { Layer } from '../Layer';
 
 export default {
   title: 'Components/TextInput',
@@ -64,34 +66,18 @@ export const ReadOnly = () => {
   );
 };
 
-export const WithLayer = () => {
-  return (
-    <>
+export const _WithLayer = () => (
+  <WithLayer>
+    {(layer) => (
       <TextInput
         type="text"
-        labelText="First layer"
+        labelText="Text input label"
         helperText="Optional help text"
-        id="text-input-1"
+        id={`text-input-${layer}`}
       />
-      <Layer>
-        <TextInput
-          type="text"
-          labelText="Second layer"
-          helperText="Optional help text"
-          id="text-input-2"
-        />
-        <Layer>
-          <TextInput
-            type="text"
-            labelText="Third layer"
-            helperText="Optional help text"
-            id="text-input-3"
-          />
-        </Layer>
-      </Layer>
-    </>
-  );
-};
+    )}
+  </WithLayer>
+);
 
 export const Skeleton = () => <TextInputSkeleton />;
 
@@ -172,10 +158,10 @@ Playground.argTypes = {
     },
   },
   onChange: {
-    action: 'clicked',
+    action: 'onChange',
   },
   onClick: {
-    action: 'clicked',
+    action: 'onClick',
   },
   size: {
     defaultValue: 'md',

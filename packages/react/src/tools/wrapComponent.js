@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,7 +10,16 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { usePrefix } from '../internal/usePrefix';
 
+/**
+ * @param {{ name: string, type: string, className?: string | (prefix: string) => string }} props
+ * @returns
+ */
 const wrapComponent = ({ name, className: getClassName, type }) => {
+  /**
+   *
+   * @param {{ className?: string, [x: string]: any}} param0
+   * @returns
+   */
   function Component({ className: baseClassName, ...other }) {
     const prefix = usePrefix();
     const componentClass = cx(

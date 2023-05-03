@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,7 +13,7 @@ import { render, screen } from '@testing-library/react';
 
 describe('TextArea', () => {
   describe('behaves as expected - Component API', () => {
-    it('should respect readOnly prop', () => {
+    it('should respect readOnly prop', async () => {
       const onChange = jest.fn();
       const onClick = jest.fn();
       render(
@@ -28,11 +28,11 @@ describe('TextArea', () => {
       );
 
       // Click events should fire
-      userEvent.click(screen.getByRole('textbox'));
+      await userEvent.click(screen.getByRole('textbox'));
       expect(onClick).toHaveBeenCalledTimes(1);
 
       // Change events should *not* fire
-      userEvent.type(screen.getByRole('textbox'), 'x');
+      await userEvent.type(screen.getByRole('textbox'), 'x');
       expect(screen.getByRole('textbox')).not.toHaveValue('x');
       expect(onChange).toHaveBeenCalledTimes(0);
     });

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -86,6 +86,13 @@ export interface ComboBoxProps
     ExcludedAttributes
   > {
   /**
+   * Specify a label to be read by screen readers on the container node
+   * 'aria-label' of the ListBox component.
+   */
+  ['aria-label']?: string;
+
+  /**
+   * @deprecated please use `aria-label` instead.
    * 'aria-label' of the ListBox component.
    */
   ariaLabel?: string;
@@ -250,7 +257,8 @@ export interface ComboBoxProps
 
 const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
   const {
-    ariaLabel,
+    ['aria-label']: ariaLabel,
+    ariaLabel: deprecatedAriaLabel,
     className: containerClassName,
     direction,
     disabled,
@@ -480,6 +488,25 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
             if (match(event, keys.Enter) && !inputValue) {
               toggleMenu();
             }
+
+            if (match(event, keys.Escape) && inputValue) {
+              if (event.target === textInput.current && isOpen) {
+                toggleMenu();
+                event.preventDownshiftDefault = true;
+                event.persist();
+              }
+            }
+
+            if (match(event, keys.Home)) {
+              event.target.setSelectionRange(0, 0);
+            }
+
+            if (match(event, keys.End)) {
+              event.target.setSelectionRange(
+                event.target.value.length,
+                event.target.value.length
+              );
+            }
           },
         });
 
@@ -534,6 +561,11 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
                   {...readOnlyEventHandlers}
                   readOnly={readOnly}
                   ref={mergeRefs(textInput, ref)}
+                  aria-describedby={
+                    helperText && !invalid && !warn && !isFluid
+                      ? comboBoxHelperId
+                      : undefined
+                  }
                 />
                 {invalid && (
                   <WarningFilled
@@ -560,7 +592,10 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
                   translateWithId={translateWithId}
                 />
               </div>
-              <ListBox.Menu {...getMenuProps({ 'aria-label': ariaLabel })}>
+              <ListBox.Menu
+                {...getMenuProps({
+                  'aria-label': deprecatedAriaLabel || ariaLabel,
+                })}>
                 {isOpen
                   ? filterItems(items, itemToString, inputValue).map(
                       (item, index) => {
@@ -627,8 +662,19 @@ ComboBox.displayName = 'ComboBox';
 ComboBox.propTypes = {
   /**
    * 'aria-label' of the ListBox component.
+   * Specify a label to be read by screen readers on the container node
    */
-  ariaLabel: PropTypes.string,
+  ['aria-label']: PropTypes.string,
+
+  /**
+   * Deprecated, please use `aria-label` instead.
+   * Specify a label to be read by screen readers on the container note.
+   * 'aria-label' of the ListBox component.
+   */
+  ariaLabel: deprecate(
+    PropTypes.string,
+    'This prop syntax has been deprecated. Please use the new `aria-label`.'
+  ),
 
   /**
    * An optional className to add to the container node
@@ -805,7 +851,7 @@ ComboBox.defaultProps = {
   itemToElement: null,
   shouldFilterItem: defaultShouldFilterItem,
   type: 'default',
-  ariaLabel: 'Choose an item',
+  ['aria-label']: 'Choose an item',
   direction: 'bottom',
 };
 

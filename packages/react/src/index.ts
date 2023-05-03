@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,6 +14,7 @@ export * from './components/Breadcrumb';
 export * from './components/Button';
 export * from './components/ButtonSet';
 export * from './components/Checkbox';
+export * from './components/CheckboxGroup';
 export * from './components/ClassPrefix';
 export * from './components/CodeSnippet';
 export * from './components/ComboBox';
@@ -142,13 +143,15 @@ export {
 } from './components/Layout';
 export {
   Menu as unstable_Menu,
-  MenuDivider as unstable_MenuDivider,
-  MenuGroup as unstable_MenuGroup,
   MenuItem as unstable_MenuItem,
-  MenuRadioGroup as unstable_MenuRadioGroup,
-  MenuSelectableItem as unstable_MenuSelectableItem,
+  MenuItemDivider as unstable_MenuItemDivider,
+  MenuItemGroup as unstable_MenuItemGroup,
+  MenuItemRadioGroup as unstable_MenuItemRadioGroup,
+  MenuItemSelectable as unstable_MenuItemSelectable,
 } from './components/Menu';
 export { OverflowMenuV2 as unstable_OverflowMenuV2 } from './components/OverflowMenuV2';
+export { ComboButton as unstable_ComboButton } from './components/ComboButton';
+export { MenuButton as unstable_MenuButton } from './components/MenuButton';
 export {
   PageSelector as unstable_PageSelector,
   Pagination as unstable_Pagination,

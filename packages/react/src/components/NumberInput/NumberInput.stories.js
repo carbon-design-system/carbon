@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -80,13 +80,13 @@ Playground.argTypes = {
     },
   },
   onChange: {
-    action: 'clicked',
+    action: 'onChange',
   },
   onClick: {
-    action: 'clicked',
+    action: 'onClick',
   },
   onKeyUp: {
-    action: 'clicked',
+    action: 'onKeyUp',
   },
   translateWithId: {
     table: {
@@ -97,7 +97,11 @@ Playground.argTypes = {
     control: { type: 'text' },
   },
   warnText: {
-    control: { type: 'text' },
+    control: {
+      type: 'text',
+    },
+    defaultValue:
+      'Warning message that is really long can wrap to more lines but should not be excessively long.',
   },
 };
 

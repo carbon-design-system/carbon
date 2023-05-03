@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -184,7 +184,7 @@ export const HeaderBaseWNavigation = () => (
       <Header aria-label="IBM Platform Name">
         <SkipToContent />
         <HeaderMenuButton
-          aria-label="Open menu"
+          aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
           onClick={onClickSideNavExpand}
           isActive={isSideNavExpanded}
         />
@@ -291,7 +291,7 @@ export const HeaderBaseWNavigationAndActions = () => (
       <Header aria-label="IBM Platform Name">
         <SkipToContent />
         <HeaderMenuButton
-          aria-label="Open menu"
+          aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
           onClick={onClickSideNavExpand}
           isActive={isSideNavExpanded}
         />
@@ -358,7 +358,7 @@ export const HeaderBaseWNavigationActionsAndSideNav = () => (
         <Header aria-label="IBM Platform Name">
           <SkipToContent />
           <HeaderMenuButton
-            aria-label="Open menu"
+            aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
             onClick={onClickSideNavExpand}
             isActive={isSideNavExpanded}
           />
@@ -472,7 +472,7 @@ export const HeaderBaseWSideNav = () => (
         <Header aria-label="IBM Platform Name">
           <SkipToContent />
           <HeaderMenuButton
-            aria-label="Open menu"
+            aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
             onClick={onClickSideNavExpand}
             isActive={isSideNavExpanded}
           />
@@ -860,7 +860,7 @@ export const SideNavRailWHeader = () => (
         <Header aria-label="IBM Platform Name">
           <SkipToContent />
           <HeaderMenuButton
-            aria-label="Open menu"
+            aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
             isCollapsible
             onClick={onClickSideNavExpand}
             isActive={isSideNavExpanded}
