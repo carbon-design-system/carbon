@@ -22,7 +22,7 @@ type SectionProps<E extends ElementType> = PolymorphicProps<
   SectionBaseProps
 >;
 
-export function Section<E extends ElementType>({
+export function Section<E extends ElementType = 'section'>({
   as: BaseComponent = 'section' as E,
   level: levelOverride,
   ...rest
