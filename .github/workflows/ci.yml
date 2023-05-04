@@ -152,6 +152,7 @@ jobs:
       - name: Run VRT
         if: github.repository == 'carbon-design-system/carbon'
         env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
           PERCY_PARALLEL_TOTAL: 4
         run: |
           yarn percy exec --parallel -- yarn playwright test --project chromium --grep @vrt --shard="${{ matrix.shard }}/4"
