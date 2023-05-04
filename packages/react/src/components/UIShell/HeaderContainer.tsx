@@ -47,36 +47,10 @@ HeaderContainer.propTypes = {
   isSideNavExpanded: PropTypes.bool,
 
   /**
-   * A function that is passed two parameters, `isSideNavExpanded`, and
-   * `onClickSideNavExpand`, which can then be used the returned components. For
-   * example:
-   * ```TSX
-   * <HeaderContainer render={
-   *  ({ isSideNavExpanded, onClickSideNavExpand }) =>
-   *    <Theme theme="g100">
-   *      <Header aria-label="Navigation">
-   *        <SkipToContent />
-   *        <HeaderMenuButton
-   *          aria-label="Open menu"
-   *          onClick={onClickSideNavExpand}
-   *          isActive={isSideNavExpanded}
-   *        />
-   *        <HeaderName href="/" prefix="IBM">Some App Name</HeaderName>
-   *        <HeaderNavigation aria-label="Some label">
-   *          <HeaderMenuItem href="/some-path">Some Label</HeaderMenuItem>
-   *        </HeaderNavigation>
-   *      </Header>
-   *      <SideNav
-   *        aria-label="Side navigation"
-   *        expanded={isSideNavExpanded}
-   *        isPersistent={false}>
-   *        <HeaderSideNavItems>
-   *          <HeaderMenuItem href="/some-path">Some label</HeaderMenuItem>
-   *        </HeaderSideNavItems>
-   *      </SideNav>
-   *    </Theme>
-   *}/>
-   * ```
+   * A function or component that is passed an object parameter with two
+   * properties: `isSideNavExpanded` and `onClickSideNavExpand`. The function or
+   * component can then use those properties to within the components it
+   * returns, such as with the HeaderMenuButton and SideNav components.
    */
   render: PropTypes.elementType.isRequired,
 };
