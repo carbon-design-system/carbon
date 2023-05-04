@@ -9,21 +9,33 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import { ButtonSize } from './Button';
 
-const ButtonSkeleton = ({
+export interface ButtonSkeletonProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Optionally specify an href for your Button to become an `<a>` element
+   */
+  href?: string;
+
+  /**
+   * Specify the size of the button, from a list of available sizes.
+   */
+  size?: ButtonSize;
+}
+
+const ButtonSkeleton: React.FC<ButtonSkeletonProps> = ({
   className,
-  small = false,
   href,
   size = 'lg',
   ...rest
-}) => {
+}: ButtonSkeletonProps) => {
   const prefix = usePrefix();
 
   const buttonClasses = cx(className, {
     [`${prefix}--skeleton`]: true,
     [`${prefix}--btn`]: true,
-    [`${prefix}--btn--sm`]: small || size === 'sm',
-    [`${prefix}--btn--md`]: size === 'field' || size === 'md',
+    [`${prefix}--btn--sm`]: size === 'sm',
+    [`${prefix}--btn--md`]: size === 'md',
     [`${prefix}--btn--lg`]: size === 'lg',
     [`${prefix}--btn--xl`]: size === 'xl',
     [`${prefix}--btn--2xl`]: size === '2xl',
@@ -58,11 +70,6 @@ ButtonSkeleton.propTypes = {
    * In the next major release of Carbon, `default`, `field`, and `small` will be removed
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl', '2xl']),
-
-  /**
-   * Specify whether the Button should be a small variant
-   */
-  small: PropTypes.bool,
 };
 
 export default ButtonSkeleton;

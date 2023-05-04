@@ -36,11 +36,4 @@ describe('ButtonSkeleton', () => {
       expect(screen.getByRole('button')).toBeInTheDocument();
     });
   });
-
-  describe('deprecated', () => {
-    it('should set the small class name when the small prop is set', () => {
-      render(<ButtonSkeleton data-testid="test" small />);
-      expect(screen.getByTestId('test')).toHaveClass('cds--btn--sm');
-    });
-  });
 });
