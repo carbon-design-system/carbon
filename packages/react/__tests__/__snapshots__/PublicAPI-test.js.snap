@@ -3775,7 +3775,8 @@ Map {
         "type": "bool",
       },
       "render": Object {
-        "type": "func",
+        "isRequired": true,
+        "type": "elementType",
       },
     },
   },

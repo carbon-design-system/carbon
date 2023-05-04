@@ -78,11 +78,5 @@ HeaderContainer.propTypes = {
    *}/>
    * ```
    */
-  render: PropTypes.shape({
-    type: PropTypes.func,
-    props: PropTypes.shape({
-      isSideNavExpanded: PropTypes.bool,
-      onClickSideNavExpand: PropTypes.func,
-    }),
-  }).isRequired,
+  render: PropTypes.elementType.isRequired,
 };
