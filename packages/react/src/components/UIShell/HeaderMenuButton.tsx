@@ -8,46 +8,58 @@
 import { Close, Menu } from '@carbon/icons-react';
 
 import cx from 'classnames';
-import React from 'react';
+import React, { type ComponentProps } from 'react';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { usePrefix } from '../../internal/usePrefix';
 
-function HeaderMenuButton({
+type HeaderMenuButtonBaseProps = Omit<
+  ComponentProps<'button'>,
+  'title' | 'type'
+>;
+
+interface HeaderMenuButtonProps extends HeaderMenuButtonBaseProps {
+  'aria-label'?: string;
+  'aria-labelledby'?: string;
+  className?: string;
+  renderMenuIcon?: JSX.Element;
+  renderCloseIcon?: JSX.Element;
+  isActive?: boolean;
+  isCollapsible?: boolean;
+}
+
+export default function HeaderMenuButton({
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   className: customClassName,
   renderMenuIcon,
   renderCloseIcon,
-  onClick,
   isActive,
   isCollapsible,
   ...rest
-}) {
+}: HeaderMenuButtonProps) {
   const prefix = usePrefix();
   const className = cx({
-    [customClassName]: !!customClassName,
+    ...(typeof customClassName === 'string' && {
+      [customClassName]: !!customClassName,
+    }),
     [`${prefix}--header__action`]: true,
     [`${prefix}--header__menu-trigger`]: true,
     [`${prefix}--header__action--active`]: isActive,
     [`${prefix}--header__menu-toggle`]: true,
     [`${prefix}--header__menu-toggle__hidden`]: !isCollapsible,
   });
-  const accessibilityLabel = {
-    'aria-label': ariaLabel,
-    'aria-labelledby': ariaLabelledBy,
-  };
   const menuIcon = renderMenuIcon ? renderMenuIcon : <Menu size={20} />;
   const closeIcon = renderCloseIcon ? renderCloseIcon : <Close size={20} />;
 
   return (
     <button
       {...rest}
-      {...accessibilityLabel}
+      aria-label={ariaLabel}
+      aria-labelledby={ariaLabelledBy}
       className={className}
       title={ariaLabel}
-      type="button"
-      onClick={onClick}>
+      type="button">
       {isActive ? closeIcon : menuIcon}
     </button>
   );
@@ -76,5 +88,3 @@ HeaderMenuButton.propTypes = {
    */
   onClick: PropTypes.func,
 };
-
-export default HeaderMenuButton;
