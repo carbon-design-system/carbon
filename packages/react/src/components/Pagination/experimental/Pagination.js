@@ -9,11 +9,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { CaretRight, CaretLeft } from '@carbon/icons-react';
-import Button from '../../Button';
 import Select from '../../Select';
 import SelectItem from '../../SelectItem';
 import { IconButton } from '../../IconButton';
-import * as FeatureFlags from '@carbon/feature-flags';
 import { usePrefix } from '../../../internal/usePrefix';
 
 function Pagination({
@@ -143,7 +141,7 @@ function Pagination({
               : pageRangeText(currentPage, totalPages)}
           </span>
         )}
-        {FeatureFlags.enabled('enable-v11-release') ? (
+        {
           <>
             <IconButton
               align="top"
@@ -176,42 +174,7 @@ function Pagination({
               <CaretRight />
             </IconButton>
           </>
-        ) : (
-          <>
-            <Button
-              className={classnames(
-                `${namespace}__button`,
-                `${namespace}__button--backward`,
-                {
-                  [`${namespace}__button--no-index`]: backButtonDisabled,
-                }
-              )}
-              onClick={() => decrementPage()}
-              disabled={backButtonDisabled}
-              hasIconOnly
-              renderIcon={CaretLeft}
-              tooltipAlignment="center"
-              tooltipPosition="top"
-              iconDescription={backwardText}
-            />
-            <Button
-              className={classnames(
-                `${namespace}__button`,
-                `${namespace}__button--forward`,
-                {
-                  [`${namespace}__button--no-index`]: forwardButtonDisabled,
-                }
-              )}
-              onClick={() => incrementPage()}
-              disabled={forwardButtonDisabled}
-              hasIconOnly
-              renderIcon={CaretRight}
-              tooltipAlignment="center"
-              tooltipPosition="top"
-              iconDescription={forwardText}
-            />
-          </>
-        )}
+        }
       </div>
     </section>
   );

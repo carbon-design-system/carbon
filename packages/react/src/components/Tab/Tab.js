@@ -8,7 +8,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import * as FeatureFlags from '@carbon/feature-flags';
 import deprecate from '../../prop-types/deprecate';
 import { PrefixContext } from '../../internal/usePrefix';
 
@@ -99,9 +98,6 @@ export default class Tab extends React.Component {
   };
 
   static defaultProps = {
-    label: FeatureFlags.enabled('enable-v11-release')
-      ? undefined
-      : 'provide a label',
     selected: false,
     onClick: () => {},
     onKeyDown: () => {},
