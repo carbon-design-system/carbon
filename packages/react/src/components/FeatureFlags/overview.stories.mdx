@@ -1,0 +1,96 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+
+<Meta title="Experimental/Feature Flags/Overview" />
+
+# Feature Flags
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/FeatureFlags)
+
+<!-- prettier-ignore-start -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+## Table of Contents
+
+- [Feature Flags](#feature-flags)
+  - [Turning on feature flags in Javascript/react](#turning-on-feature-flags-in-javascriptreact)
+  - [Turning on feature flags in Sass](#turning-on-feature-flags-in-sass)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<!-- prettier-ignore-end -->
+
+The `@carbon/react` codebase ships with a number of feature flags. These feature
+flags enable new behavior and styling, allowing you to opt-in to new (and
+sometimes breaking) changes while using the current version. A feature flag may
+be configured in javascript, sass, or both.
+
+This section in the storybook documents each feature flag that is available and
+how to configure it. Folders and stories within this section in storybook show
+components with all feature flags turned on.
+
+## Current feature flags
+
+| Flag                                | Description                                                         | Default | Javascript flag | Sass flag |
+| ----------------------------------- | ------------------------------------------------------------------- | ------- | --------------- | --------- |
+| `enable-v11-release`                | Flag enabling the v11 features                                      | `true`  | ✅              | ✅        |
+| `enable-experimental-tile-contrast` | Enable the improved styling for tiles that provides better contrast | `false` |                 | ✅        |
+| `enable-v12-tile-default-icons`     | Enable default icons for Tile components                            | `false` | ✅              |
+
+## Turning on feature flags in Javascript/react
+
+Use the FeatureFlag component to turn on a feature flag for a portion of your
+application's react tree. Multiple feature flags can be configured at the same
+time.
+
+```jsx
+<FeatureFlags
+  flags={{
+    'enable-v12-tile-default-icons': true,
+    'enable-a-second-feature-flag': true,
+  }}>
+  <Tile />
+</FeatureFlags>
+```
+
+The `FeatureFlag` component can be placed at any point in your react tree and
+will impact all children components. You can turn on feature flags for your
+entire app, or only certain pages/routes/sections of your application.
+
+```jsx
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { FeatureFlags } from '@carbon/react';
+import App from './App';
+
+const root = createRoot(document.getElementById('root'));
+root.render(
+  <StrictMode>
+    <FeatureFlags flags={{ 'enable-v12-tile-default-icons': true }}>
+      <App />
+    </FeatureFlags>
+  </StrictMode>
+);
+```
+
+## Turning on feature flags in Sass
+
+In Sass, you can enable feature flags in any of your stylesheets. Most often
+this is done at the root/entrypoint stylesheet.
+
+```sass
+@use '@carbon/react/scss/feature-flags' with (
+  $feature-flags: (
+    'enable-experimental-tile-contrast': true,
+  )
+);
+@use '@carbon/react';
+```
+
+Feature flags can also be enabled via the provided `enable()` mixin
+
+```sass
+@use '@carbon/react/scss/feature-flags';
+@use '@carbon/react';
+
+@include feature-flags.enable('enable-experimental-tile-contrast');
+```

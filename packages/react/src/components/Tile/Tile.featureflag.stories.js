@@ -20,12 +20,12 @@ import {
 import TileGroup from '../TileGroup/TileGroup';
 import { Layer } from '../Layer';
 import './tile-story.scss';
-import mdx from './ExperimentalTile.mdx';
+import { FeatureFlags } from '../FeatureFlags';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
 export default {
-  title: 'Experimental/Feature Flags/enable-experimental-tile-contrast/Tile',
+  title: 'Experimental/Feature Flags/Tile',
   component: Tile,
   subcomponents: {
     ClickableTile,
@@ -36,11 +36,6 @@ export default {
     TileAboveTheFoldContent,
     TileBelowTheFoldContent,
   },
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
   argTypes: {
     light: {
       table: {
@@ -48,6 +43,16 @@ export default {
       },
     },
   },
+  decorators: [
+    (Story) => (
+      <FeatureFlags
+        flags={{
+          'enable-v12-tile-default-icons': true,
+        }}>
+        <Story />
+      </FeatureFlags>
+    ),
+  ],
 };
 
 const experimentalClassname = 'experimental-tile';
