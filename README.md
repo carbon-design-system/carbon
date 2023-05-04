@@ -239,6 +239,11 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/kubijo"><img src="https://avatars.githubusercontent.com/u/11244314?v=4?s=100" width="100px;" alt=""/><br /><sub><b>kubijo</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=kubijo" title="Code">💻</a></td>
     <td align="center"><a href="http://www.steveblackonline.com/"><img src="https://avatars.githubusercontent.com/u/7853451?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Steven Black</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=sjbeatle" title="Code">💻</a> <a href="#a11y-sjbeatle" title="Accessibility">️️️️♿️</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/matejoslav"><img src="https://avatars.githubusercontent.com/u/8973672?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Matej Ocovsky</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=matejoslav" title="Code">💻</a></td>
+    <td align="center"><a href="https://samuelechinellato.com/#/"><img src="https://avatars.githubusercontent.com/u/49278203?v=4?s=100" width="100px;" alt=""/><br /><sub><b>SamChinellato</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=SamChinellato" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/stevenpatrick009"><img src="https://avatars.githubusercontent.com/u/106097350?v=4?s=100" width="100px;" alt=""/><br /><sub><b>stevenpatrick009</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=stevenpatrick009" title="Code">💻</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-restore -->
