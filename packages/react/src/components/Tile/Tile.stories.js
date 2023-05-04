@@ -78,14 +78,12 @@ export const DefaultWithLayer = () => (
 
 export const Clickable = (args) => {
   return (
-    <div style={{ width: '400px' }}>
-      <ClickableTile
-        id="clickable-tile-1"
-        href="https://www.carbondesignsystem.com/"
-        {...args}>
-        Clickable Tile
-      </ClickableTile>
-    </div>
+    <ClickableTile
+      id="clickable-tile-1"
+      href="https://www.carbondesignsystem.com/"
+      {...args}>
+      Clickable Tile
+    </ClickableTile>
   );
 };
 
@@ -100,15 +98,13 @@ Clickable.argTypes = {
 
 export const ClickableWithCustomIcon = (args) => {
   return (
-    <div style={{ width: '400px' }}>
-      <ClickableTile
-        id="clickable-tile-1"
-        href="https://www.carbondesignsystem.com/"
-        renderIcon={Download}
-        {...args}>
-        Clickable Tile
-      </ClickableTile>
-    </div>
+    <ClickableTile
+      id="clickable-tile-1"
+      href="https://www.carbondesignsystem.com/"
+      renderIcon={Download}
+      {...args}>
+      Clickable Tile
+    </ClickableTile>
   );
 };
 
