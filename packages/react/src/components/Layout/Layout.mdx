@@ -9,6 +9,7 @@ import { ArgsTable, Canvas, Story } from '@storybook/addon-docs';
 ## Table of Contents
 
 - [Overview](#overview)
+  - [LayoutConstraint](#layoutconstraint)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -41,6 +42,29 @@ Components that are explicitely passed a `size` to are unaffected by the layout 
   </Layout>
 </div>
 ```
+
+### LayoutConstraint
+
+In order to apply specific constraints to children components that might differ from their own preference, the `<LayoutConstraint>` utility component can be used.
+
+An example of this use case is the icon-only content switcher. It uses `IconButton` under the hood which supports all sizes and defaults to `lg`. The `ContentSwitcher` though only supports `sm`->`lg` and defaults to `md`.
+
+```jsx
+<div>
+  <LayoutConstraint size={{ default: 'md', min: 'sm', max: 'lg' }}>
+    {/* IconButton is now locked to the sizes sm->lg and defaults to md */}
+    <IconButton … />
+  </LayoutConstraint>
+</div>
+```
+
+The constraints for a group (`size` and `density`) must be passed as an object with any of these keys:
+- `min`
+- `default`
+- `max`
+
+Example: `size={{ min: 'sm', max: 'lg }}`<br />
+Example: `density={{ default: 'condensed' }}`
 
 ## Component API
 

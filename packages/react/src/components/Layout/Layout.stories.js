@@ -12,12 +12,15 @@ import { Button } from '../Button';
 import { HStack, VStack } from '../Stack';
 import { TextInput } from '../TextInput';
 
-import { Layout } from './';
+import { Layout, LayoutConstraint } from './';
 import mdx from './Layout.mdx';
 
 export default {
   title: 'Experimental/unstable__Layout',
   component: Layout,
+  subcomponents: {
+    LayoutConstraint,
+  },
   parameters: {
     docs: {
       page: mdx,
