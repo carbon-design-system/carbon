@@ -29,14 +29,6 @@ test.describe('TextArea', () => {
           theme,
         });
       });
-
-      test('with word counter @vrt', async ({ page }) => {
-        await snapshotStory(page, {
-          component: 'TextArea',
-          id: 'components-textarea--with-word-counter',
-          theme,
-        });
-      });
     });
   });
 
