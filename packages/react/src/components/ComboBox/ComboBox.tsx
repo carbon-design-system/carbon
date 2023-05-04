@@ -259,6 +259,7 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
     ['aria-label']: ariaLabel,
     ariaLabel: deprecatedAriaLabel,
     className: containerClassName,
+    direction,
     disabled,
     downshiftProps,
     helperText,
@@ -381,7 +382,12 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
   };
 
   const showWarning = !invalid && warn;
-  const className = cx(`${prefix}--combo-box`);
+  const className = cx(`${prefix}--combo-box`, {
+    [`${prefix}--list-box--up`]: direction === 'top',
+    [`${prefix}--combo-box--warning`]: showWarning,
+    [`${prefix}--combo-box--readonly`]: readOnly,
+  });
+
   const titleClasses = cx(`${prefix}--label`, {
     [`${prefix}--label--disabled`]: disabled,
   });
