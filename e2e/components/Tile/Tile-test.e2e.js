@@ -102,76 +102,76 @@ test.describe('Tile', () => {
         });
       });
 
-      test('improved contrast clickable @vrt', async ({ page }) => {
+      test('feature flags clickable @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Tile',
-          id: 'components-tile-experimental-improved-contrast--clickable',
+          id: 'experimental-feature-flags-tile--clickable',
           theme,
         });
       });
 
-      test('improved contrast clickable with layer @vrt', async ({ page }) => {
+      test('feature flags clickable with layer @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Tile',
-          id: 'components-tile-experimental-improved-contrast--clickable-with-layer',
+          id: 'experimental-feature-flags-tile--clickable-with-layer',
           theme,
         });
       });
 
-      test('improved contrast selectable @vrt', async ({ page }) => {
+      test('feature flags selectable @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Tile',
-          id: 'components-tile-experimental-improved-contrast--selectable',
+          id: 'experimental-feature-flags-tile--selectable',
           theme,
         });
       });
 
-      test('improved contrast multi select @vrt', async ({ page }) => {
+      test('feature flags multi select @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Tile',
-          id: 'components-tile-experimental-improved-contrast--multi-select',
+          id: 'experimental-feature-flags-tile--multi-select',
           theme,
         });
       });
 
-      test('improved contrast radio @vrt', async ({ page }) => {
+      test('feature flags radio @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Tile',
-          id: 'components-tile-experimental-improved-contrast--radio',
+          id: 'experimental-feature-flags-tile--radio',
           theme,
         });
       });
 
-      test('improved contrast radio with layer @vrt', async ({ page }) => {
+      test('feature flags radio with layer @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Tile',
-          id: 'components-tile-experimental-improved-contrast--radio-with-layer',
+          id: 'experimental-feature-flags-tile--radio-with-layer',
           theme,
         });
       });
 
-      test('improved contrast expandable @vrt', async ({ page }) => {
+      test('feature flags expandable @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Tile',
-          id: 'components-tile-experimental-improved-contrast--expandable',
+          id: 'experimental-feature-flags-tile--expandable',
           theme,
         });
       });
 
-      test('improved contrast expandable with interactive @vrt', async ({
+      test('feature flags expandable with interactive @vrt', async ({
         page,
       }) => {
         await snapshotStory(page, {
           component: 'Tile',
-          id: 'components-tile-experimental-improved-contrast--expandable-with-interactive',
+          id: 'experimental-feature-flags-tile--expandable-with-interactive',
           theme,
         });
       });
 
-      test('improved contrast expandable with layer @vrt', async ({ page }) => {
+      test('feature flags expandable with layer @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Tile',
-          id: 'components-tile-experimental-improved-contrast--expandable-with-layer',
+          id: 'experimental-feature-flags-tile--expandable-with-layer',
           theme,
         });
       });
