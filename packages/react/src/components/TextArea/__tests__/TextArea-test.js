@@ -46,7 +46,7 @@ describe('TextArea', () => {
           labelText="TextArea label"
           enableCounter
           maxCount={10}
-          counterMode="words"
+          counterMode="word"
         />
       );
 
@@ -72,7 +72,7 @@ describe('TextArea', () => {
           labelText="TextArea label"
           enableCounter
           maxCount={10}
-          counterMode="words"
+          counterMode="word"
           defaultValue="one two three four"
         />
       );

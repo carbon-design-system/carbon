@@ -7997,7 +7997,7 @@ Map {
   "TextArea" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "counterMode": "default",
+      "counterMode": "character",
       "disabled": false,
       "enableCounter": false,
       "helperText": "",
@@ -8021,8 +8021,8 @@ Map {
       "counterMode": Object {
         "args": Array [
           Array [
-            "default",
-            "words",
+            "character",
+            "word",
           ],
         ],
         "type": "oneOf",

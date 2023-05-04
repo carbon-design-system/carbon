@@ -35,18 +35,6 @@ export const Default = () => (
   />
 );
 
-export const WithWordCounter = () => (
-  <TextArea
-    labelText="Text Area label"
-    helperText="Optional helper text"
-    rows={4}
-    enableCounter={true}
-    maxCount={10}
-    counterMode="words"
-    id="text-area-wordcounter-1"
-  />
-);
-
 export const _WithLayer = () => (
   <WithLayer>
     {(layer) => (

@@ -44,7 +44,7 @@ export interface TextAreaProps
   disabled?: boolean;
 
   /**
-   * Specify whether to display the character counter
+   * Specify whether to display the counter
    */
   enableCounter?: boolean;
 
@@ -87,7 +87,7 @@ export interface TextAreaProps
   light?: boolean;
 
   /**
-   * Max character count allowed for the textarea. This is needed in order for enableCounter to display
+   * Max entity count allowed for the textarea. This is needed in order for enableCounter to display
    */
   maxCount?: number;
 
@@ -166,11 +166,11 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
 
   const [textCount, setTextCount] = useState(
     defaultValue
-      ? counterMode === 'default'
+      ? counterMode === 'character'
         ? defaultValue.toString().length
         : defaultValue.toString().match(/\w+/g)?.length || 0
       : value
-      ? counterMode === 'default'
+      ? counterMode === 'character'
         ? value.toString().length
         : value.toString().match(/\w+/g)?.length || 0
       : 0
@@ -186,7 +186,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   } = {
     id,
     onKeyDown: (evt) => {
-      if (!other.disabled && counterMode === 'words') {
+      if (!other.disabled && counterMode === 'word') {
         const key = evt.which;
         if (textCount == maxCount && key == 32) {
           evt.preventDefault();
@@ -195,9 +195,9 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     },
     onChange: (evt) => {
       if (!other.disabled) {
-        if (counterMode == 'default') {
+        if (counterMode == 'character') {
           setTextCount(evt.target.value.length);
-        } else if (counterMode == 'words') {
+        } else if (counterMode == 'word') {
           if (!evt.target.value) {
             console.log('reset');
             setTextCount(0);
@@ -235,14 +235,14 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
 
   if (enableCounter) {
     // handle different counter mode
-    if (counterMode == 'default') {
+    if (counterMode == 'character') {
       textareaProps.maxLength = maxCount;
     }
   }
   const ariaAnnouncement = useAnnouncer(
     textCount,
     maxCount,
-    counterMode === 'words' ? 'words' : undefined
+    counterMode === 'word' ? 'words' : undefined
   );
 
   const labelClasses = classNames(`${prefix}--label`, {
@@ -263,7 +263,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const counter =
     enableCounter &&
     maxCount &&
-    (counterMode === 'default' || counterMode === 'words') ? (
+    (counterMode === 'character' || counterMode === 'word') ? (
       <div className={counterClasses}>{`${textCount}/${maxCount}`}</div>
     ) : null;
 
@@ -405,7 +405,7 @@ TextArea.propTypes = {
   /**
    * Specify the method used for calculating the counter number
    */
-  counterMode: PropTypes.oneOf(['default', 'words']),
+  counterMode: PropTypes.oneOf(['character', 'word']),
 
   /**
    * Optionally provide the default value of the `<textarea>`
@@ -418,7 +418,7 @@ TextArea.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Specify whether to display the character counter
+   * Specify whether to display the counter
    */
   enableCounter: PropTypes.bool,
 
@@ -464,7 +464,7 @@ TextArea.propTypes = {
   ),
 
   /**
-   * Max character count allowed for the textarea. This is needed in order for enableCounter to display
+   * Max entity count allowed for the textarea. This is needed in order for enableCounter to display
    */
   maxCount: PropTypes.number,
 
@@ -522,7 +522,7 @@ TextArea.defaultProps = {
   helperText: '',
   enableCounter: false,
   maxCount: undefined,
-  counterMode: 'default',
+  counterMode: 'character',
   warn: false,
   warnText: '',
 };

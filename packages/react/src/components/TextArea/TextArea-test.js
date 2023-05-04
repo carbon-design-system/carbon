@@ -202,7 +202,7 @@ describe('TextArea', () => {
           <TextArea
             id="wordCounterTestWrapper1"
             labelText="testLabel"
-            counterMode={'words'}
+            counterMode={'word'}
           />
         );
         expect(
