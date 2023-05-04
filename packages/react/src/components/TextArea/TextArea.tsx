@@ -187,7 +187,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     id,
     onKeyDown: (evt) => {
       if (!other.disabled && counterMode === 'words') {
-        var key = evt.which;
+        const key = evt.which;
         if (textCount == maxCount && key == 32) {
           evt.preventDefault();
         }
@@ -239,7 +239,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
       textareaProps.maxLength = maxCount;
     }
   }
-  let ariaAnnouncement = useAnnouncer(
+  const ariaAnnouncement = useAnnouncer(
     textCount,
     maxCount,
     counterMode === 'words' ? 'words' : undefined
