@@ -31,24 +31,19 @@ function filterChildren(children) {
   return null;
 }
 
-function renderChildren(children, prefix) {
+function renderChildren(children) {
   if (Array.isArray(children)) {
-    children.map((child, index, key) => {
-      if (index === 0 && child.type.displayName === 'Search') {
-        return (
-          <div key={key} className={`${prefix}--contained-list__search`}>
-            {child}
-          </div>
-        );
+    children.map((child, index) => {
+      if (index === 0 && child.type?.displayName === 'Search') {
+        return child;
       }
+
       return child;
     });
   }
 
-  if (children && children.type.displayName === 'Search') {
-    return (
-      <div className={`${prefix}--contained-list__search`}>{children}</div>
-    );
+  if (children && children.type?.displayName === 'Search') {
+    return children;
   }
 
   return children;
@@ -80,7 +75,7 @@ function ContainedList({
     action?.type?.displayName
   );
 
-  const renderedChildren = renderChildren(children, prefix);
+  const renderedChildren = renderChildren(children);
 
   return (
     <div className={classes}>
