@@ -15,6 +15,8 @@ import { default as Checkbox } from '../Checkbox';
 import mdx from './Popover.mdx';
 import { Settings } from '@carbon/icons-react';
 import { keys, match } from '../../internal/keyboard';
+import Button from '../Button';
+import { ThumbsUp } from '@carbon/icons-react';
 
 const prefix = 'cds';
 
@@ -292,6 +294,34 @@ export const AutoAlign = () => {
           </PopoverContent>
         </Popover>
       </div>
+    </div>
+  );
+};
+
+export const TestIssue = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div style={{ marginTop: '100px' }}>
+      <Popover open={isOpen} align="top">
+        <button
+          type="button"
+          className="popover-trigger"
+          onClick={() => {
+            setIsOpen(!isOpen);
+          }}>
+          test button
+        </button>
+        <PopoverContent>
+          <div style={{ background: '#eee', padding: '16px' }}>
+            <Button
+              kind="ghost"
+              renderIcon={ThumbsUp}
+              hasIconOnly
+              iconDescription="Icon Description"
+            />
+          </div>
+        </PopoverContent>
+      </Popover>
     </div>
   );
 };
