@@ -20,27 +20,29 @@ function getRandomInt(min: number, max: number, n: number) {
 
 interface SkeletonTextProps {
   /**
-   * Specify an optional className to be applied to the container node
+   * @description Specify an optional className to be applied to the
+   *  container node.
    */
   className?: string;
 
   /**
-   * generates skeleton text at a larger size
+   * @description generates skeleton text at a larger size.
    */
   heading?: boolean;
 
   /**
-   * the number of lines shown if paragraph is true
+   * @description the number of lines shown if paragraph is true.
    */
   lineCount?: number;
 
   /**
-   * will generate multiple lines of text
+   * @description set this to true to generate multiple lines of text.
    */
   paragraph?: boolean;
 
   /**
-   * width (in px or %) of single line of text or max-width of paragraph lines
+   * @description width (in px or %) of single line of text or max-width
+   *  of paragraph lines.
    */
   width?: string;
 }
