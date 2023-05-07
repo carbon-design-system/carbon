@@ -7,56 +7,114 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {
+  AnchorHTMLAttributes,
+  AriaAttributes,
+  ComponentType,
+  HTMLAttributeAnchorTarget,
+  isValidElement,
+  PropsWithChildren,
+} from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 
-const Link = React.forwardRef(function Link(
-  {
-    children,
-    className: customClassName,
-    href,
-    disabled = false,
-    inline = false,
-    visited = false,
-    renderIcon: Icon,
-    size,
-    ...rest
-  },
-  ref
-) {
-  const prefix = usePrefix();
-  const className = cx(`${prefix}--link`, customClassName, {
-    [`${prefix}--link--disabled`]: disabled,
-    [`${prefix}--link--inline`]: inline,
-    [`${prefix}--link--visited`]: visited,
-    [`${prefix}--link--${size}`]: size,
-  });
-  const rel = rest.target === '_blank' ? 'noopener' : null;
-  const linkProps = {
-    className,
-    rel,
-  };
+interface LinkProps {
+  /**
+   * @description Indicates the element that represents the
+   *   current item within a container or set of related
+   *   elements.
+   */
+  'aria-current'?: AriaAttributes['aria-current'];
 
-  // Reference for disabled links:
-  // https://www.scottohara.me/blog/2021/05/28/disabled-links.html
-  if (!disabled) {
-    linkProps.href = href;
-  } else {
-    linkProps.role = 'link';
-    linkProps['aria-disabled'] = true;
+  /**
+   * @description Provide a custom className to be applied to
+   *   the containing `<a>` node.
+   */
+  className?: string;
+
+  /**
+   * @description Specify if the control should be disabled, or not.
+   */
+  disabled?: boolean;
+
+  /**
+   * @description Provide the `href` attribute for the `<a>` node.
+   */
+  href?: string;
+
+  /**
+   * @description Specify whether you want the inline version of this control.
+   */
+  inline?: boolean;
+
+  /**
+   * @description Optional prop to render an icon next to the link.
+   *   Can be a React component class
+   */
+  renderIcon?: ComponentType;
+
+  /**
+   * Specify the size of the Link. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   */
+  size?: 'sm' | 'md' | 'lg';
+
+  /**
+   * @description Specify the target attribute for the `<a>` node.
+   */
+  target?: HTMLAttributeAnchorTarget;
+
+  /**
+   * Specify whether you want the link to receive visited styles after the link has been clicked
+   */
+  visited?: boolean;
+}
+
+const Link = React.forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
+  function Link(
+    {
+      children,
+      className: customClassName,
+      href,
+      disabled = false,
+      inline = false,
+      visited = false,
+      renderIcon: Icon,
+      size,
+      target,
+      ...rest
+    },
+    ref
+  ) {
+    const prefix = usePrefix();
+    const className = cx(`${prefix}--link`, customClassName, {
+      [`${prefix}--link--disabled`]: disabled,
+      [`${prefix}--link--inline`]: inline,
+      [`${prefix}--link--visited`]: visited,
+      [`${prefix}--link--${size}`]: size,
+    });
+    const rel = target === '_blank' ? 'noopener' : undefined;
+    let linkProps: AnchorHTMLAttributes<HTMLAnchorElement> = { className, rel };
+
+    // Reference for disabled links:
+    // https://www.scottohara.me/blog/2021/05/28/disabled-links.html
+    if (!disabled) {
+      linkProps.href = href;
+    } else {
+      linkProps.role = 'link';
+      linkProps['aria-disabled'] = true;
+    }
+
+    return (
+      <a ref={ref} {...linkProps} {...rest}>
+        {children}
+        {!inline && isValidElement(Icon) && (
+          <div className={`${prefix}--link__icon`}>
+            <Icon />
+          </div>
+        )}
+      </a>
+    );
   }
-
-  return (
-    <a ref={ref} {...linkProps} {...rest}>
-      {children}
-      {!inline && Icon && (
-        <div className={`${prefix}--link__icon`}>
-          <Icon />
-        </div>
-      )}
-    </a>
-  );
-});
+);
 
 Link.displayName = 'Link';
 
@@ -90,12 +148,18 @@ Link.propTypes = {
    * Optional prop to render an icon next to the link.
    * Can be a React component class
    */
+  // @ts-expect-error - PropTypes are unable to cover this case.
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
    * Specify the size of the Link. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * Specify the target attribute for the `<a>` node
+   */
+  target: PropTypes.oneOf(['_blank', '_self', '_parent', '_top']),
 
   /**
    * Specify whether you want the link to receive visited styles after the link has been clicked
