@@ -1129,6 +1129,18 @@
       ]
     },
     {
+      "login": "guidari",
+      "name": "Guilherme Datilio Ribeiro",
+      "avatar_url": "https://avatars.githubusercontent.com/u/52183462?v=4",
+      "profile": "https://github.com/guidari",
+      "contributions": [
+        "code",
+        "doc",
+        "a11y",
+        "review"
+      ]
+    },
+    {
       "login": "kubijo",
       "name": "kubijo",
       "avatar_url": "https://avatars.githubusercontent.com/u/11244314?v=4",
@@ -1145,6 +1157,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "sjbeatle",
+      "name": "Steven Black",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7853451?v=4",
+      "profile": "http://www.steveblackonline.com/",
+      "contributions": [
+        "code",
+        "a11y"
+       ]
     }
   ],
   "commitConvention": "none"

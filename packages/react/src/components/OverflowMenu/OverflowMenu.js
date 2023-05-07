@@ -574,6 +574,7 @@ class OverflowMenu extends Component {
             onClick={this.handleClick}
             id={id}
             ref={mergeRefs(this._triggerRef, ref)}
+            size={size}
             label={iconDescription}>
             <IconElement {...iconProps} />
           </IconButton>
