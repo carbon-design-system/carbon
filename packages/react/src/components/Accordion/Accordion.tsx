@@ -8,11 +8,51 @@
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import * as FeatureFlags from '@carbon/feature-flags';
 import { AccordionProvider } from './AccordionProvider';
 
-function Accordion({
+interface AccordionProps {
+  /**
+   * @description Specify the alignment of the accordion heading
+   *   title and chevron. Defaults to `end`.
+   */
+  align?: 'start' | 'end';
+
+  /**
+   * @description Specify an optional className to be applied to
+   *   the container node.
+   */
+  className?: string;
+
+  /**
+   * @description Specify whether an individual AccordionItem
+   *   should be disabled.
+   */
+  disabled?: boolean;
+
+  /**
+   * @description Specify whether Accordion text should be flush,
+   *   default is `false`, does not work with `align="start"`.
+   */
+  isFlush?: boolean;
+
+  /**
+   * @description Specify the size of the Accordion. Currently
+   *   supports the following: `sm`, `md`, `lg`
+   */
+  size?: 'sm' | 'md' | 'lg';
+}
+
+interface AccordionV10Props extends Omit<AccordionProps, 'size'> {
+  /**
+   * @description Specify the size of the Accordion. Currently
+   *   supports the following: `sm`, `md`, `lg`, `xl`.
+   */
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+}
+
+const Accordion = ({
   align = 'end',
   children,
   className: customClassName,
@@ -20,7 +60,7 @@ function Accordion({
   isFlush = false,
   size = 'md',
   ...rest
-}) {
+}: PropsWithChildren<AccordionProps | AccordionV10Props>) => {
   const prefix = usePrefix();
   const className = cx(`${prefix}--accordion`, customClassName, {
     [`${prefix}--accordion--${align}`]: align,
@@ -34,7 +74,7 @@ function Accordion({
       </ul>
     </AccordionProvider>
   );
-}
+};
 
 Accordion.propTypes = {
   /**

@@ -35,8 +35,8 @@ interface AccordionItemProps {
 
   /**
    * @description Specify whether an individual `AccordionItem` should
-   *  be disabled (overrides the parent accordion state). If undefined,
-   *  this value will be managed by the parent Accordion.
+   *   be disabled (overrides the parent accordion state). If undefined,
+   *   this value will be managed by the parent Accordion.
    */
   disabled?: boolean;
 
@@ -73,7 +73,7 @@ interface AccordionItemProps {
 
   /**
    * @description The callback function to render the expand button.
-   *  Can be a React component class.
+   *   Can be a React component class.
    */
   renderToggle?: (
     props: PropsWithChildren<AccordionToggleProps>
