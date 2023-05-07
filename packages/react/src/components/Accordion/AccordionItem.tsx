@@ -8,12 +8,13 @@
 import { ChevronRight } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Text } from '../Text';
 import { match, keys } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
+import { AccordionContext } from './AccordionProvider';
 
 const defaultRenderToggle = (props) => <button type="button" {...props} />;
 
@@ -26,12 +27,19 @@ function AccordionItem({
   renderExpando = defaultRenderToggle, // remove renderExpando in next major release
   renderToggle,
   title = 'title',
-  disabled,
+  disabled: controlledDisabled,
   ...rest
 }) {
   const [isOpen, setIsOpen] = useState(open);
   const [prevIsOpen, setPrevIsOpen] = useState(open);
   const [animation, setAnimation] = useState('');
+  const accordionState = useContext(AccordionContext);
+
+  const disabledIsControlled = typeof controlledDisabled === 'boolean';
+  const disabled = disabledIsControlled
+    ? controlledDisabled
+    : accordionState.disabled;
+
   const id = useId('accordion-item');
   const prefix = usePrefix();
   const className = cx({

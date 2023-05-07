@@ -10,6 +10,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import PropTypes from 'prop-types';
 import React from 'react';
 import * as FeatureFlags from '@carbon/feature-flags';
+import { AccordionProvider } from './AccordionProvider';
 
 function Accordion({
   align = 'end',
@@ -27,13 +28,11 @@ function Accordion({
     [`${prefix}--accordion--flush`]: isFlush && align !== 'start',
   });
   return (
-    <ul className={className} {...rest}>
-      {disabled
-        ? React.Children.toArray(children).map((child) => {
-            return React.cloneElement(child, { disabled });
-          })
-        : children}
-    </ul>
+    <AccordionProvider disabled={disabled}>
+      <ul className={className} {...rest}>
+        {children}
+      </ul>
+    </AccordionProvider>
   );
 }
 
