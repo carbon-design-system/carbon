@@ -12,7 +12,6 @@ import React, {
   AriaAttributes,
   ComponentType,
   HTMLAttributeAnchorTarget,
-  isValidElement,
   PropsWithChildren,
 } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
