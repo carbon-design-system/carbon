@@ -6,13 +6,28 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {
+  type ComponentProps,
+  type ForwardedRef,
+  forwardRef,
+  type ReactNode,
+} from 'react';
 import cx from 'classnames';
 import Link, { LinkPropTypes } from './Link';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 
-const HeaderMenuItem = React.forwardRef(function HeaderMenuItem(
+interface HeaderMenuItemProps {
+  className?: string | undefined;
+  isActive?: boolean | undefined;
+  isCurrentPage?: boolean | undefined;
+  'aria-current'?: string | undefined;
+  children: ReactNode;
+  role?: ComponentProps<'li'>['role'];
+  tabIndex?: number | undefined;
+}
+
+function HeaderMenuItemRenderFunction(
   {
     className,
     isActive,
@@ -22,8 +37,8 @@ const HeaderMenuItem = React.forwardRef(function HeaderMenuItem(
     role,
     tabIndex = 0,
     ...rest
-  },
-  ref
+  }: HeaderMenuItemProps,
+  ref: ForwardedRef<HTMLAnchorElement>
 ) {
   const prefix = usePrefix();
   if (isCurrentPage) {
@@ -36,7 +51,6 @@ const HeaderMenuItem = React.forwardRef(function HeaderMenuItem(
     [`${prefix}--header__menu-item--current`]:
       isActive && ariaCurrent !== 'page',
   });
-
   return (
     <li className={className} role={role}>
       <Link
@@ -49,7 +63,9 @@ const HeaderMenuItem = React.forwardRef(function HeaderMenuItem(
       </Link>
     </li>
   );
-});
+}
+
+const HeaderMenuItem = forwardRef(HeaderMenuItemRenderFunction);
 
 HeaderMenuItem.displayName = 'HeaderMenuItem';
 HeaderMenuItem.propTypes = {
