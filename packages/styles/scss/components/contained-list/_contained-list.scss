@@ -57,6 +57,10 @@
   .#{$prefix}--contained-list .#{$prefix}--search .#{$prefix}--search-close {
     border-right: 2px solid transparent;
     outline: none;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
   }
 
   .#{$prefix}--contained-list
