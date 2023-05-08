@@ -147,7 +147,7 @@
   // Invalid & warn state
   .#{$prefix}--slider-text-input.#{$prefix}--text-input--invalid,
   .#{$prefix}--slider-text-input--warn {
-    width: 6rem;
+    width: rem(88px);
     padding-right: $spacing-09;
   }
 
