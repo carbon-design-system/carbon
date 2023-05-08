@@ -41,7 +41,7 @@ interface SideNavProps extends ComponentProps<'nav'> {
     value: boolean
   ) => void | undefined;
   // TO-DO: comment back in when footer is added for rails
-  // translateById?: ((id: TranslationId) => Translation) | undefined; 
+  // translateById?: ((id: TranslationId) => Translation) | undefined;
   isFixedNav?: boolean | undefined;
   isRail?: boolean | undefined;
   isPersistent?: boolean | undefined;
@@ -61,9 +61,7 @@ function SideNavRenderFunction(
     onToggle,
     className: customClassName,
     // TO-DO: comment back in when footer is added for rails
-    // translateById: t = (id) => {
-    //   return translations[id];
-    // },
+    // translateById: t = (id) => translations[id],
     isFixedNav = false,
     isRail,
     isPersistent = true,
