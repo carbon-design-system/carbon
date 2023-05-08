@@ -6,7 +6,36 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {
+  type ElementType,
+  type ForwardedRef,
+  forwardRef,
+  type WeakValidationMap,
+  type ComponentProps,
+  Ref,
+} from 'react';
+
+// Note: Maybe we should use `as` instead of `element`? `as` appears to be
+// standard and is used in other places in this project.
+
+type LinkProps<E extends ElementType> = ComponentProps<E> & {
+  element?: E | undefined;
+  ref?: Ref<E>;
+};
+
+function LinkRenderFunction<E extends ElementType>(
+  {
+    element: Element = 'a' as E,
+    // Captured here to prevent it from being passed into the created element.
+    // See https://github.com/carbon-design-system/carbon/issues/3970
+    isSideNavExpanded: _isSideNavExpanded,
+    ...rest
+  }: LinkProps<E>,
+  ref: ForwardedRef<E>
+) {
+  const ElementAsAny = Element as any;
+  return <ElementAsAny ref={ref} {...rest} />;
+}
 
 /**
  * Link is a custom component that allows us to supporting rendering elements
@@ -14,14 +43,12 @@ import React from 'react';
  * in their own components to support use-cases like `react-router` or
  * `@reach/router`
  */
-const Link = React.forwardRef(function Link(props, ref) {
-  const {
-    element,
-    isSideNavExpanded, // eslint-disable-line no-unused-vars
-    ...rest
-  } = props;
-  return React.createElement(element, { ...rest, ref });
-});
+const Link = forwardRef(LinkRenderFunction) as (<E extends ElementType = 'a'>(
+  props: LinkProps<E>
+) => JSX.Element) & {
+  displayName?: string;
+  propTypes?: WeakValidationMap<LinkProps<any>>;
+};
 
 const LinkPropTypes = {
   /**
@@ -39,9 +66,6 @@ const LinkPropTypes = {
 
 Link.displayName = 'Link';
 Link.propTypes = LinkPropTypes;
-Link.defaultProps = {
-  element: 'a',
-};
 
 export { LinkPropTypes };
 export default Link;
