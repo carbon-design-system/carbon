@@ -1,7 +1,7 @@
 {
   "name": "@carbon/styles",
   "description": "Styles for the Carbon Design System",
-  "version": "1.28.0-rc.0",
+  "version": "1.28.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -44,7 +44,7 @@
   "devDependencies": {
     "@carbon/test-utils": "^10.28.0",
     "autoprefixer": "^10.4.7",
-    "browserslist-config-carbon": "^11.2.0-rc.0",
+    "browserslist-config-carbon": "^11.2.0",
     "css": "^3.0.0",
     "cssnano": "^6.0.0",
     "lodash.isequal": "^4.5.0",
