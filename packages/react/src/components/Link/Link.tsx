@@ -92,7 +92,10 @@ const Link = React.forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
       [`${prefix}--link--${size}`]: size,
     });
     const rel = target === '_blank' ? 'noopener' : undefined;
-    let linkProps: AnchorHTMLAttributes<HTMLAnchorElement> = { className, rel };
+    const linkProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
+      className,
+      rel,
+    };
 
     // Reference for disabled links:
     // https://www.scottohara.me/blog/2021/05/28/disabled-links.html
@@ -155,11 +158,6 @@ Link.propTypes = {
    * Specify the size of the Link. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
-
-  /**
-   * Specify the target attribute for the `<a>` node
-   */
-  target: PropTypes.oneOf(['_blank', '_self', '_parent', '_top']),
 
   /**
    * Specify whether you want the link to receive visited styles after the link has been clicked
