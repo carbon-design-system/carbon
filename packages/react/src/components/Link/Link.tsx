@@ -109,7 +109,7 @@ const Link = React.forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
     return (
       <a ref={ref} {...linkProps} {...rest}>
         {children}
-        {!inline && isValidElement(Icon) && (
+        {!inline && Icon && (
           <div className={`${prefix}--link__icon`}>
             <Icon />
           </div>
