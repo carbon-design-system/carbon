@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.28.0-rc.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.27.0-rc.0...@carbon/web-components@1.28.0-rc.0) (2023-05-08)
+
+
+### Bug Fixes
+
+* **checkbox:** set relative `position` ([#10333](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10333)) ([8f10b78](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/8f10b78cc1543ca6f2e69339be96a0974bc79631))
+
+
+
+
+
 # [1.27.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.27.0-rc.1...@carbon/web-components@1.27.0) (2023-04-25)
 
 **Note:** Version bump only for package @carbon/web-components
