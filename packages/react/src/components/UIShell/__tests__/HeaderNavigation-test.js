@@ -7,7 +7,7 @@
 
 import { cleanup, render, screen } from '@testing-library/react';
 import React from 'react';
-import { HeaderNavigation } from '../HeaderNavigation';
+import HeaderNavigation from '../HeaderNavigation';
 
 describe('HeaderNavigation', () => {
   it('should render children that are passed to the component', () => {
