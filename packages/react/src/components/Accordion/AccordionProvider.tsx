@@ -8,9 +8,9 @@ import React, { PropsWithChildren, createContext } from 'react';
 
 type AccordionProviderProp = {
   /**
-   * @description Global setting to disable all AccordionItems
-   *  within the Accordion. Individual AccordionItems can be
-   *  disabled by passing the `disabled` prop to the AccordionItem.
+   * Global setting to disable all AccordionItems
+   * within the Accordion. Individual AccordionItems can be
+   * disabled by passing the `disabled` prop to the AccordionItem.
    */
   disabled: boolean;
 };

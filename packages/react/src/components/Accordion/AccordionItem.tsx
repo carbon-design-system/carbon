@@ -28,26 +28,26 @@ import { AccordionContext } from './AccordionProvider';
 
 interface AccordionItemProps {
   /**
-   * @description Specify an optional className to be
-   *   applied to the container node.
+   * Specify an optional className to be
+   * applied to the container node.
    */
   className?: string;
 
   /**
-   * @description Specify whether an individual `AccordionItem` should
-   *   be disabled (overrides the parent accordion state). If undefined,
-   *   this value will be managed by the parent Accordion.
+   * Specify whether an individual `AccordionItem` should
+   * be disabled (overrides the parent accordion state). If undefined,
+   * this value will be managed by the parent Accordion.
    */
   disabled?: boolean;
 
   /**
-   * @description The handler of the massaged `click` event.
+   * The handler of the massaged `click` event.
    */
   onClick?: MouseEventHandler<HTMLLIElement>;
 
   /**
-   * @description he handler of the massaged `click` event on
-   *   the heading.
+   * he handler of the massaged `click` event on
+   * the heading.
    */
   onHeadingClick?: ({
     isOpen,
@@ -58,35 +58,35 @@ interface AccordionItemProps {
   }) => void;
 
   /**
-   * @description `true` to open the expand.
+   * `true` to open the expand.
    */
   open?: boolean;
 
   /**
    * @deprecated This prop has been deprecated and will be
-   *   removed in the next major release of Carbon. Use the
-   *   `renderToggle` prop instead.
+   * removed in the next major release of Carbon. Use the
+   * `renderToggle` prop instead.
    */
   renderExpando?: (
     props: PropsWithChildren<AccordionToggleProps>
   ) => ReactElement;
 
   /**
-   * @description The callback function to render the expand button.
-   *   Can be a React component class.
+   * The callback function to render the expand button.
+   * Can be a React component class.
    */
   renderToggle?: (
     props: PropsWithChildren<AccordionToggleProps>
   ) => ReactElement;
 
   /**
-   * @description The accordion title.
+   * The accordion title.
    */
   title?: ReactNode;
 
   /**
-   * @description The callback function to run on the `onAnimationEnd`
-   *   event for the list item.
+   * The callback function to run on the `onAnimationEnd`
+   * event for the list item.
    */
   handleAnimationEnd?: AnimationEventHandler<HTMLLIElement>;
 }

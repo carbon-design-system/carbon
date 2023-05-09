@@ -20,29 +20,29 @@ function getRandomInt(min: number, max: number, n: number) {
 
 interface SkeletonTextProps {
   /**
-   * @description Specify an optional className to be applied to the
+   * Specify an optional className to be applied to the
    *  container node.
    */
   className?: string;
 
   /**
-   * @description generates skeleton text at a larger size.
+   * generates skeleton text at a larger size.
    */
   heading?: boolean;
 
   /**
-   * @description the number of lines shown if paragraph is true.
+   * the number of lines shown if paragraph is true.
    */
   lineCount?: number;
 
   /**
-   * @description set this to true to generate multiple lines of text.
+   * set this to true to generate multiple lines of text.
    */
   paragraph?: boolean;
 
   /**
-   * @description width (in px or %) of single line of text or max-width
-   *  of paragraph lines.
+   * width (in px or %) of single line of text or max-width
+   * of paragraph lines.
    */
   width?: string;
 }
@@ -102,8 +102,8 @@ const SkeletonText = ({
     widthPx,
   ]);
 
-  let lines: ReactNode[] = [];
-  for (var i = 0; i < lineCountNumber; i++) {
+  const lines: ReactNode[] = [];
+  for (let i = 0; i < lineCountNumber; i++) {
     lines.push(
       <p
         className={skeletonTextClasses}
@@ -116,9 +116,10 @@ const SkeletonText = ({
 
   if (lineCountNumber !== 1) {
     return <div>{lines}</div>;
-  } else {
-    return <>{lines}</>;
   }
+
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  return <>{lines}</>;
 };
 
 SkeletonText.propTypes = {

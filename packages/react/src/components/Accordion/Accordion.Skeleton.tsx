@@ -14,29 +14,29 @@ import { usePrefix } from '../../internal/usePrefix';
 
 interface AccordionSkeletonProps {
   /**
-   * @description Specify the alignment of the accordion heading
-   *   title and chevron.
+   * Specify the alignment of the accordion heading
+   * title and chevron.
    */
   align?: 'start' | 'end';
 
   /**
-   * @description Specify an optional className to add.
+   * Specify an optional className to add.
    */
   className?: string;
 
   /**
-   * @description Set number of items to render.
+   * Set number of items to render.
    */
   count?: number;
 
   /**
-   * @description Specify whether an individual AccordionItem should
-   *   be flush, default is false.
+   * Specify whether an individual AccordionItem should
+   * be flush, default is false.
    */
   isFlush?: boolean;
 
   /**
-   * @description `false` to not display the first item opened.
+   * `false` to not display the first item opened.
    */
   open?: boolean;
 }
@@ -103,12 +103,6 @@ AccordionSkeleton.propTypes = {
    * `false` to not display the first item opened
    */
   open: PropTypes.bool,
-};
-
-AccordionSkeleton.defaultProps = {
-  open: true,
-  count: 4,
-  align: 'end',
 };
 
 function AccordionSkeletonItem() {

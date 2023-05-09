@@ -14,40 +14,40 @@ import { AccordionProvider } from './AccordionProvider';
 
 interface AccordionProps {
   /**
-   * @description Specify the alignment of the accordion heading
-   *   title and chevron. Defaults to `end`.
+   * Specify the alignment of the accordion heading
+   * title and chevron. Defaults to `end`.
    */
   align?: 'start' | 'end';
 
   /**
-   * @description Specify an optional className to be applied to
-   *   the container node.
+   * Specify an optional className to be applied to
+   * the container node.
    */
   className?: string;
 
   /**
-   * @description Specify whether an individual AccordionItem
-   *   should be disabled.
+   * Specify whether an individual AccordionItem
+   * should be disabled.
    */
   disabled?: boolean;
 
   /**
-   * @description Specify whether Accordion text should be flush,
-   *   default is `false`, does not work with `align="start"`.
+   * Specify whether Accordion text should be flush,
+   * default is `false`, does not work with `align="start"`.
    */
   isFlush?: boolean;
 
   /**
-   * @description Specify the size of the Accordion. Currently
-   *   supports the following: `sm`, `md`, `lg`
+   * Specify the size of the Accordion. Currently
+   * supports the following: `sm`, `md`, `lg`
    */
   size?: 'sm' | 'md' | 'lg';
 }
 
 interface AccordionV10Props extends Omit<AccordionProps, 'size'> {
   /**
-   * @description Specify the size of the Accordion. Currently
-   *   supports the following: `sm`, `md`, `lg`, `xl`.
+   * Specify the size of the Accordion. Currently
+   * supports the following: `sm`, `md`, `lg`, `xl`.
    */
   size?: 'sm' | 'md' | 'lg' | 'xl';
 }
