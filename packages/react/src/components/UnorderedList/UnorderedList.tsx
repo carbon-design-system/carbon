@@ -26,9 +26,7 @@ export default function UnorderedList({
     [`${prefix}--list--nested`]: nested,
     [`${prefix}--list--expressive`]: isExpressive,
   });
-  return (
-    <ul className={classNames} {...other} />
-  );
+  return <ul className={classNames} {...other} />;
 }
 
 UnorderedList.propTypes = {
