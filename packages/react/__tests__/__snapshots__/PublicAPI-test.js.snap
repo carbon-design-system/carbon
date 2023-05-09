@@ -4303,6 +4303,16 @@ Map {
     },
     "render": [Function],
   },
+  "ListItem" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
   "Loading" => Object {
     "propTypes": Object {
       "active": Object {
@@ -5374,6 +5384,25 @@ Map {
         "type": "string",
       },
       "hideLabel": Object {
+        "type": "bool",
+      },
+    },
+  },
+  "OrderedList" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "isExpressive": Object {
+        "type": "bool",
+      },
+      "native": Object {
+        "type": "bool",
+      },
+      "nested": Object {
         "type": "bool",
       },
     },
@@ -9132,6 +9161,22 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+    },
+  },
+  "UnorderedList" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "isExpressive": Object {
+        "type": "bool",
+      },
+      "nested": Object {
+        "type": "bool",
       },
     },
   },
