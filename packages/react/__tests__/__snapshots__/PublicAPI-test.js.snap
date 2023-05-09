@@ -7040,13 +7040,9 @@ Map {
   },
   "StructuredListSkeleton" => Object {
     "defaultProps": Object {
-      "border": false,
       "rowCount": 5,
     },
     "propTypes": Object {
-      "border": Object {
-        "type": "bool",
-      },
       "className": Object {
         "type": "string",
       },
