@@ -23,15 +23,6 @@ import { keys, match } from '../../internal/keyboard';
 // TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
 
-// const translations = {
-//   'carbon.sidenav.state.open': 'Close',
-//   'carbon.sidenav.state.closed': 'Open',
-// } as const;
-
-// type TranslationId = keyof typeof translations;
-
-// type Translation = typeof translations[TranslationId];
-
 interface SideNavProps extends ComponentProps<'nav'> {
   expanded?: boolean | undefined;
   defaultExpanded?: boolean | undefined;
