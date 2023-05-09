@@ -6,18 +6,23 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type ComponentProps } from 'react';
 import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-const OrderedList = ({
-  children,
+interface OrderedListProps extends ComponentProps<'ol'> {
+  nested?: boolean | undefined;
+  native?: boolean | undefined;
+  isExpressive?: boolean | undefined;
+}
+
+export default function OrderedList({
   className,
-  nested,
-  native,
-  isExpressive,
+  nested = false,
+  native = false,
+  isExpressive = false,
   ...other
-}) => {
+}: OrderedListProps) {
   const prefix = usePrefix();
   const classNames = classnames(
     {
@@ -29,11 +34,9 @@ const OrderedList = ({
     className
   );
   return (
-    <ol className={classNames} {...other}>
-      {children}
-    </ol>
+    <ol className={classNames} {...other} />
   );
-};
+}
 
 OrderedList.propTypes = {
   /**
@@ -61,11 +64,3 @@ OrderedList.propTypes = {
    */
   nested: PropTypes.bool,
 };
-
-OrderedList.defaultProps = {
-  nested: false,
-  native: false,
-  isExpressive: false,
-};
-
-export default OrderedList;

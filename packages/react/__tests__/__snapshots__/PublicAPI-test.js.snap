@@ -5388,30 +5388,6 @@ Map {
       },
     },
   },
-  "OrderedList" => Object {
-    "defaultProps": Object {
-      "isExpressive": false,
-      "native": false,
-      "nested": false,
-    },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "isExpressive": Object {
-        "type": "bool",
-      },
-      "native": Object {
-        "type": "bool",
-      },
-      "nested": Object {
-        "type": "bool",
-      },
-    },
-  },
   "OverflowMenu" => Object {
     "displayName": "ClassWrapper(OverflowMenu)",
   },
