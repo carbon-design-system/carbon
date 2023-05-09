@@ -12,10 +12,10 @@ import { usePrefix } from '../../internal/usePrefix';
 
 interface AspectRatioProps {
   /**
-   * @description Provide a custom component or string to be rendered as
-   *   the outermost node of the component. This is useful if you want
-   *   to deviate from the default `div` tag, where you could specify
-   *   `section` or `article` instead.
+   * Provide a custom component or string to be rendered as
+   * the outermost node of the component. This is useful if you want
+   * to deviate from the default `div` tag, where you could specify
+   * `section` or `article` instead.
    *
    * ```jsx
    * <AspectRatio as="article">My content</AspectRatio>
@@ -24,15 +24,15 @@ interface AspectRatioProps {
   as?: keyof ReactHTML;
 
   /**
-   * @description Specify a class name for the outermost node
-   *   of the component.
+   * Specify a class name for the outermost node
+   * of the component.
    */
   className?: string;
 
   /**
-   * @description Specify the ratio to be used by the aspect ratio
-   *   container. This will  determine what aspect ratio your content
-   *   will be displayed in.
+   * Specify the ratio to be used by the aspect ratio
+   * container. This will  determine what aspect ratio your content
+   * will be displayed in.
    */
   ratio?:
     | '1x1'
