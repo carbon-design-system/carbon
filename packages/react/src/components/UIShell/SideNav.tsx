@@ -101,8 +101,7 @@ function SideNavRenderFunction(
   //   ? t('carbon.sidenav.state.open')
   //   : t('carbon.sidenav.state.closed');
 
-  const className = cx({
-    ...(customClassName !== undefined && { [customClassName]: true }),
+  const className = cx(customClassName, {
     [`${prefix}--side-nav`]: true,
     [`${prefix}--side-nav--expanded`]: expanded || expandedViaHoverState,
     [`${prefix}--side-nav--collapsed`]: !expanded && isFixedNav,
