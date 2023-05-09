@@ -6,11 +6,13 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type ComponentProps } from 'react';
 import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-const Form = ({ className, children, ...other }) => {
+type FormProps = ComponentProps<'form'>;
+
+export default function Form({ className, children, ...other }: FormProps) {
   const prefix = usePrefix();
   const classNames = classnames(`${prefix}--form`, className);
   return (
@@ -18,7 +20,7 @@ const Form = ({ className, children, ...other }) => {
       {children}
     </form>
   );
-};
+}
 
 Form.propTypes = {
   /**
@@ -31,5 +33,3 @@ Form.propTypes = {
    */
   className: PropTypes.string,
 };
-
-export default Form;
