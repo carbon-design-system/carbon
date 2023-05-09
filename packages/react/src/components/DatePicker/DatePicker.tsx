@@ -355,7 +355,7 @@ interface DatePickerProps
    * The `change` event handler.
    */
   onChange?: ChangeEventHandler<HTMLSelectElement>;
-
+  
   /**
    * The `close` event handler.
    */
@@ -462,10 +462,10 @@ const DatePicker = React.forwardRef(function DatePicker(
     });
   };
 
-  //const savedOnOpen = useSavedCallback(onOpen);
+
   const endInputField = useRef<HTMLTextAreaElement>(null);
   const calendarRef: any | undefined = useRef(null);
-  const savedOnChange = useSavedCallback(() => onChange);
+  const savedOnChange = useSavedCallback(onChange);
   const savedOnClose = useSavedCallback(
     datePickerType === 'range' ? onCalendarClose : onClose
   );
