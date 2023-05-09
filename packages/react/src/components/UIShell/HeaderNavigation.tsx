@@ -6,30 +6,28 @@
  */
 
 import cx from 'classnames';
-import React from 'react';
+import React, { type ComponentProps } from 'react';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { usePrefix } from '../../internal/usePrefix';
 
-function HeaderNavigation(props) {
-  const {
-    'aria-label': ariaLabel,
-    'aria-labelledby': ariaLabelledBy,
-    children,
-    className: customClassName,
-    ...rest
-  } = props;
+type HeaderNavigationProps = ComponentProps<'nav'>;
+
+export default function HeaderNavigation({
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
+  children,
+  className: customClassName,
+  ...rest
+}: HeaderNavigationProps) {
   const prefix = usePrefix();
   const className = cx(`${prefix}--header__nav`, customClassName);
-  // Assign both label strategies in this option, only one should be defined
-  // so when we spread that should be the one that is applied to the node
-  const accessibilityLabel = {
-    'aria-label': ariaLabel,
-    'aria-labelledby': ariaLabelledBy,
-  };
-
   return (
-    <nav {...rest} {...accessibilityLabel} className={className}>
+    <nav
+      {...rest}
+      aria-label={ariaLabel}
+      aria-labelledby={ariaLabelledBy}
+      className={className}>
       <ul className={`${prefix}--header__menu-bar`}>{children}</ul>
     </nav>
   );
@@ -52,6 +50,3 @@ HeaderNavigation.propTypes = {
    */
   className: PropTypes.string,
 };
-
-export default HeaderNavigation;
-export { HeaderNavigation };
