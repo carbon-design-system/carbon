@@ -33,9 +33,7 @@ export default function OrderedList({
     },
     className
   );
-  return (
-    <ol className={classNames} {...other} />
-  );
+  return <ol className={classNames} {...other} />;
 }
 
 OrderedList.propTypes = {
