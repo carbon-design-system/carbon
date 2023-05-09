@@ -95,7 +95,6 @@ describe('Carbon Components React', () => {
         "InlineNotification",
         "Layer",
         "Link",
-        "ListItem",
         "Loading",
         "Modal",
         "ModalBody",

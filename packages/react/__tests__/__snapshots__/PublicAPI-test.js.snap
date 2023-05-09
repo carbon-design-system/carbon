@@ -4303,16 +4303,6 @@ Map {
     },
     "render": [Function],
   },
-  "ListItem" => Object {
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
   "Loading" => Object {
     "propTypes": Object {
       "active": Object {
