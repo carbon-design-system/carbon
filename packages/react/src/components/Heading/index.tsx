@@ -6,23 +6,34 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type ElementType } from 'react';
+import type { PolymorphicProps } from '../../types/common';
 
-const HeadingContext = React.createContext(1);
+type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
-function Section({
-  as: BaseComponent = 'section',
+const HeadingContext = React.createContext<HeadingLevel>(1);
+
+type SectionBaseProps = {
+  level?: HeadingLevel;
+};
+
+type SectionProps<E extends ElementType> = PolymorphicProps<
+  E,
+  SectionBaseProps
+>;
+
+export function Section<E extends ElementType = 'section'>({
+  as: BaseComponent = 'section' as E,
   level: levelOverride,
-  children,
   ...rest
-}) {
+}: SectionProps<E>) {
   const parentLevel = React.useContext(HeadingContext);
-  const level =
-    typeof levelOverride !== 'undefined' ? levelOverride : parentLevel + 1;
+  const level = levelOverride ?? parentLevel + 1;
+  const BaseComponentAsAny = BaseComponent as any;
 
   return (
-    <HeadingContext.Provider value={Math.min(level, 6)}>
-      <BaseComponent {...rest}>{children}</BaseComponent>
+    <HeadingContext.Provider value={Math.min(level, 6) as HeadingLevel}>
+      <BaseComponentAsAny {...rest} />
     </HeadingContext.Provider>
   );
 }
@@ -50,9 +61,11 @@ Section.propTypes = {
   level: PropTypes.number,
 };
 
-function Heading(props) {
-  const level = React.useContext(HeadingContext);
-  return React.createElement(`h${level}`, props);
+type HeadingProps = JSX.IntrinsicElements[`h${HeadingLevel}`];
+
+export function Heading(props: HeadingProps) {
+  const HeadingIntrinsic = `h${React.useContext(HeadingContext)}` as const;
+  return <HeadingIntrinsic {...props} />;
 }
 
 Heading.propTypes = {
@@ -66,5 +79,3 @@ Heading.propTypes = {
    */
   className: PropTypes.string,
 };
-
-export { Section, Heading };
