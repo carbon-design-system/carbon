@@ -9145,26 +9145,6 @@ Map {
       },
     },
   },
-  "UnorderedList" => Object {
-    "defaultProps": Object {
-      "isExpressive": false,
-      "nested": false,
-    },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "isExpressive": Object {
-        "type": "bool",
-      },
-      "nested": Object {
-        "type": "bool",
-      },
-    },
-  },
   "VStack" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],

@@ -219,7 +219,6 @@ describe('Carbon Components React', () => {
         "Tooltip",
         "TreeNode",
         "TreeView",
-        "UnorderedList",
         "VStack",
         "types",
         "unstable_ComboButton",
