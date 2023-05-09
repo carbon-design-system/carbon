@@ -6,15 +6,21 @@
  */
 
 import cx from 'classnames';
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
 
-const HeaderSideNavItems = ({
+interface HeaderSideNavItemsProps {
+  className?: string | undefined;
+  children?: ReactNode;
+  hasDivider?: boolean | undefined;
+}
+
+export default function HeaderSideNavItems({
   className: customClassName,
   children,
-  hasDivider,
-}) => {
+  hasDivider = false,
+}: HeaderSideNavItemsProps) {
   const prefix = usePrefix();
   const className = cx(
     {
@@ -24,7 +30,7 @@ const HeaderSideNavItems = ({
     customClassName
   );
   return <ul className={className}>{children}</ul>;
-};
+}
 
 HeaderSideNavItems.propTypes = {
   /**
@@ -44,9 +50,3 @@ HeaderSideNavItems.propTypes = {
    */
   hasDivider: PropTypes.bool,
 };
-
-HeaderSideNavItems.defaultProps = {
-  hasDivider: false,
-};
-
-export default HeaderSideNavItems;
