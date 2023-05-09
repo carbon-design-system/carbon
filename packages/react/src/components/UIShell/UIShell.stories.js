@@ -484,7 +484,10 @@ export const HeaderBaseWSideNav = () => (
           <HeaderName href="#" prefix="IBM">
             [Platform]
           </HeaderName>
-          <SideNav aria-label="Side navigation" expanded={isSideNavExpanded}>
+          <SideNav
+            aria-label="Side navigation"
+            expanded={isSideNavExpanded}
+            onSideNavBlur={onClickSideNavExpand}>
             <SideNavItems>
               <SideNavMenu renderIcon={Fade} title="Category title">
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
