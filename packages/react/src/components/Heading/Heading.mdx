@@ -1,4 +1,4 @@
-import { Preview, Props, Story } from '@storybook/addon-docs';
+import { Canvas, ArgsTable, Story } from '@storybook/addon-docs';
 
 # Heading
 
@@ -31,13 +31,13 @@ appropriate heading level without you having to manually specify it. To do this,
 you use the `Section` component for each section of your page. Every `Heading`
 component in that `Section` will use the correct heading level.
 
-<Preview>
-  <Story id="components-heading--heading-story" />
-</Preview>
+<Canvas>
+  <Story id="components-heading--default" />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ### Section as
 
@@ -54,7 +54,9 @@ For example, to render an `article` you could use `as="article"`:
 ```
 
 ### Custom level
+
 You can use the `level` prop to override the level of a section:
+
 ```jsx
 <Section level={5}>
   <Heading>rendered as h5</Heading>
