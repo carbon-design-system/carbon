@@ -4,7 +4,16 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { useState, useRef } from 'react';
+import React, {
+  useState,
+  useRef,
+  type ForwardedRef,
+  type ComponentProps,
+  type FocusEvent,
+  type KeyboardEvent,
+  type MouseEventHandler,
+  isValidElement,
+} from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
@@ -14,27 +23,46 @@ import { keys, match } from '../../internal/keyboard';
 // TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
 
-const SideNav = React.forwardRef(function SideNav(props, ref) {
-  const {
+interface SideNavProps extends ComponentProps<'nav'> {
+  expanded?: boolean | undefined;
+  defaultExpanded?: boolean | undefined;
+  isChildOfHeader?: boolean | undefined;
+  onToggle?: (
+    event: FocusEvent<HTMLElement> | KeyboardEvent<HTMLElement> | boolean,
+    value: boolean
+  ) => void | undefined;
+  // TO-DO: comment back in when footer is added for rails
+  // translateById?: ((id: TranslationId) => Translation) | undefined;
+  isFixedNav?: boolean | undefined;
+  isRail?: boolean | undefined;
+  isPersistent?: boolean | undefined;
+  addFocusListeners?: boolean | undefined;
+  addMouseListeners?: boolean | undefined;
+  onOverlayClick?: MouseEventHandler<HTMLDivElement> | undefined;
+}
+
+function SideNavRenderFunction(
+  {
     expanded: expandedProp,
-    defaultExpanded,
-    isChildOfHeader,
+    defaultExpanded = false,
+    isChildOfHeader = true,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
     children,
     onToggle,
     className: customClassName,
     // TO-DO: comment back in when footer is added for rails
-    // translateById: t,
-    isFixedNav,
+    // translateById: t = (id) => translations[id],
+    isFixedNav = false,
     isRail,
-    isPersistent,
-    addFocusListeners,
-    addMouseListeners,
+    isPersistent = true,
+    addFocusListeners = true,
+    addMouseListeners = true,
     onOverlayClick,
     ...other
-  } = props;
-
+  }: SideNavProps,
+  ref: ForwardedRef<HTMLElement>
+) {
   const prefix = usePrefix();
   const { current: controlled } = useRef(expandedProp !== undefined);
   const [expandedState, setExpandedState] = useState(defaultExpanded);
@@ -42,7 +70,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     useState(defaultExpanded);
   const expanded = controlled ? expandedProp : expandedState;
 
-  const handleToggle = (event, value = !expanded) => {
+  const handleToggle: typeof onToggle = (event, value = !expanded) => {
     if (!controlled) {
       setExpandedState(value);
     }
@@ -64,12 +92,11 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   //   ? t('carbon.sidenav.state.open')
   //   : t('carbon.sidenav.state.closed');
 
-  const className = cx({
+  const className = cx(customClassName, {
     [`${prefix}--side-nav`]: true,
     [`${prefix}--side-nav--expanded`]: expanded || expandedViaHoverState,
     [`${prefix}--side-nav--collapsed`]: !expanded && isFixedNav,
     [`${prefix}--side-nav--rail`]: isRail,
-    [customClassName]: !!customClassName,
     [`${prefix}--side-nav--ux`]: isChildOfHeader,
     [`${prefix}--side-nav--hidden`]: !isPersistent,
   });
@@ -85,23 +112,32 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   if (isRail) {
     childrenToRender = React.Children.map(children, (child) => {
       // if we are controlled, check for if we have hovered over or the expanded state, else just use the expanded state (uncontrolled)
-      let currentExpansionState = controlled
+      const currentExpansionState = controlled
         ? expandedViaHoverState || expanded
         : expanded;
-      // avoid spreading `isSideNavExpanded` to non-Carbon UI Shell children
-      return React.cloneElement(child, {
-        ...(CARBON_SIDENAV_ITEMS.includes(
-          child.type?.displayName ?? child.type?.name
-        )
-          ? {
-              isSideNavExpanded: currentExpansionState,
-            }
-          : {}),
-      });
+      if (isValidElement(child)) {
+        const childJsxElement = child as JSX.Element;
+        // avoid spreading `isSideNavExpanded` to non-Carbon UI Shell children
+        return React.cloneElement(childJsxElement, {
+          ...(CARBON_SIDENAV_ITEMS.includes(
+            childJsxElement.type?.displayName ?? childJsxElement.type?.name
+          )
+            ? {
+                isSideNavExpanded: currentExpansionState,
+              }
+            : {}),
+        });
+      }
+      return child;
     });
   }
 
-  let eventHandlers = {};
+  const eventHandlers: Partial<
+    Pick<
+      ComponentProps<'nav'>,
+      'onFocus' | 'onBlur' | 'onKeyDown' | 'onMouseEnter' | 'onMouseLeave'
+    >
+  > = {};
 
   if (addFocusListeners) {
     eventHandlers.onFocus = (event) => {
@@ -142,25 +178,11 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
       </nav>
     </>
   );
-});
+}
+
+const SideNav = React.forwardRef(SideNavRenderFunction);
 
 SideNav.displayName = 'SideNav';
-SideNav.defaultProps = {
-  // TO-DO: comment back in when footer is added for rails
-  // translateById: (id) => {
-  //   const translations = {
-  //     'carbon.sidenav.state.open': 'Close',
-  //     'carbon.sidenav.state.closed': 'Open',
-  //   };
-  //   return translations[id];
-  // },
-  defaultExpanded: false,
-  isChildOfHeader: true,
-  isFixedNav: false,
-  isPersistent: true,
-  addFocusListeners: true,
-  addMouseListeners: true,
-};
 
 SideNav.propTypes = {
   /**
