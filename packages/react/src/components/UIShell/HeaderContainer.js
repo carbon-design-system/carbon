@@ -7,12 +7,20 @@
 
 import PropTypes from 'prop-types';
 import React, { useState, useCallback } from 'react';
+import { keys, match } from '../../internal/keyboard';
+import { useEvent } from '../../internal/useEvent';
 
 // eslint-disable-next-line react/prop-types
 const HeaderContainer = ({ isSideNavExpanded, render: Children }) => {
   //state for expandable sidenav
   const [isSideNavExpandedState, setIsSideNavExpandedState] =
     useState(isSideNavExpanded);
+
+  useEvent(window, 'keydown', (event) => {
+    if (match(event, keys.Escape)) {
+      setIsSideNavExpandedState(false);
+    }
+  });
 
   const handleHeaderMenuButtonClick = useCallback(() => {
     setIsSideNavExpandedState(
