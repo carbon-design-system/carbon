@@ -204,7 +204,7 @@ The **header** is mandatory and the **scope** of the header is optional. There
 are a few validation rules that we also enforce, namely that:
 
 - The header must always be fewer than **72** characters
-- Any line in the commit body must be fewer than **90** characters
+- Any line in the commit body must be fewer than **80** characters
 
 Most of these rules are to help with integration of `git` with common tools.
 
