@@ -3919,9 +3919,6 @@ Map {
     "render": [Function],
   },
   "HeaderSideNavItems" => Object {
-    "defaultProps": Object {
-      "hasDivider": false,
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
