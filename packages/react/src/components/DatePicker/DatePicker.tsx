@@ -355,7 +355,7 @@ interface DatePickerProps
    * The `change` event handler.
    */
   onChange?: ChangeEventHandler<HTMLSelectElement>;
-  
+
   /**
    * The `close` event handler.
    */
@@ -461,7 +461,6 @@ const DatePicker = React.forwardRef(function DatePicker(
       }
     });
   };
-
 
   const endInputField = useRef<HTMLTextAreaElement>(null);
   const calendarRef: any | undefined = useRef(null);
