@@ -3637,6 +3637,16 @@ Map {
       },
     },
   },
+  "Form" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
   "FormContext" => Object {
     "$$typeof": Symbol(react.context),
     "Consumer": "React.Consumer",
