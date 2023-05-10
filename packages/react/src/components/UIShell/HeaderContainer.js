@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { useState, useCallback } from 'react';
 import { keys, match } from '../../internal/keyboard';
-import { useEvent } from '../../internal/useEvent';
+import { useWindowEvent } from '../../internal/useEvent';
 
 // eslint-disable-next-line react/prop-types
 const HeaderContainer = ({ isSideNavExpanded, render: Children }) => {
@@ -16,7 +16,7 @@ const HeaderContainer = ({ isSideNavExpanded, render: Children }) => {
   const [isSideNavExpandedState, setIsSideNavExpandedState] =
     useState(isSideNavExpanded);
 
-  useEvent(window, 'keydown', (event) => {
+  useWindowEvent('keydown', (event) => {
     if (match(event, keys.Escape)) {
       setIsSideNavExpandedState(false);
     }
