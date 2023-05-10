@@ -128,7 +128,6 @@
     width: rem(64px);
     height: rem(40px);
     -moz-appearance: textfield;
-    text-align: center;
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -147,7 +146,7 @@
   // Invalid & warn state
   .#{$prefix}--slider-text-input.#{$prefix}--text-input--invalid,
   .#{$prefix}--slider-text-input--warn {
-    width: rem(88px);
+    width: 6rem;
     padding-right: $spacing-09;
   }
 
