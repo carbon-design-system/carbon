@@ -1158,6 +1158,15 @@
         "code",
         "a11y"
       ]
+    },
+    {
+      "login": "mrkjdy",
+      "name": "Mark Judy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32761859?v=4",
+      "profile": "https://github.com/mrkjdy",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
