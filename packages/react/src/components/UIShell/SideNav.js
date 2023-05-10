@@ -119,7 +119,9 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     eventHandlers.onKeyDown = (event) => {
       if (match(event, keys.Escape)) {
         handleToggle(event, false);
-        window.location.href = href;
+        if (href) {
+          window.location.href = href;
+        }
       }
     };
   }
