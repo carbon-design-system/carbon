@@ -65,6 +65,24 @@ describe('Slider', () => {
       );
     });
 
+    it('should be able to apply a warning state', () => {
+      renderSlider({
+        warn: true,
+        ariaLabelInput: inputAriaValue,
+        warnText: 'Warning message',
+      });
+      expect(screen.getByText('Warning message')).toBeInTheDocument();
+    });
+
+    it('should be able to apply a invalid state', () => {
+      renderSlider({
+        invalid: true,
+        ariaLabelInput: inputAriaValue,
+        invalidText: 'Error message',
+      });
+      expect(screen.getByText('Error message')).toBeInTheDocument();
+    });
+
     it('should be able to set value via props', () => {
       renderSlider({
         ariaLabelInput: inputAriaValue,
