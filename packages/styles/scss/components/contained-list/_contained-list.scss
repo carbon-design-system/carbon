@@ -37,35 +37,41 @@
     position: sticky;
     z-index: 1;
     top: 48px;
-  }
 
-  .#{$prefix}--search {
     &.#{$prefix}--search--expandable .#{$prefix}--search-input {
       background-color: $field;
     }
   }
 
-  .#{$prefix}--search .#{$prefix}--search-input {
+  .#{$prefix}--contained-list .#{$prefix}--search .#{$prefix}--search-input {
     border-bottom: 1px solid $border-subtle;
     background-color: $background;
   }
 
-  .#{$prefix}--search .#{$prefix}--search-close::before {
+  .#{$prefix}--contained-list
+    .#{$prefix}--search
+    .#{$prefix}--search-close::before {
     display: none;
   }
 
-  .#{$prefix}--search .#{$prefix}--search-close {
+  .#{$prefix}--contained-list .#{$prefix}--search .#{$prefix}--search-close {
     border-right: 2px solid transparent;
     outline: none;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
   }
 
-  .#{$prefix}--search
+  .#{$prefix}--contained-list
+    .#{$prefix}--search
     .#{$prefix}--search-input
     ~ .#{$prefix}--search-close:hover {
     border-bottom: 1px solid transparent;
   }
 
-  .#{$prefix}--search
+  .#{$prefix}--contained-list
+    .#{$prefix}--search
     .#{$prefix}--search-input:focus
     ~ .#{$prefix}--search-close:hover {
     border: 2px solid $focus;
