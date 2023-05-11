@@ -1792,7 +1792,7 @@ __metadata:
     klaw-sync: ^6.0.0
     lodash.template: ^4.5.0
     markdown-toc: ^1.2.0
-    prettier: ^2.7.1
+    prettier: ^2.8.8
     prettier-config-carbon: ^0.9.0
     progress-estimator: ^0.3.0
     remark: ^10.0.1
@@ -1905,7 +1905,7 @@ __metadata:
     js-yaml: ^3.12.1
     klaw-sync: ^6.0.0
     memfs: ^3.4.0
-    prettier: ^2.7.1
+    prettier: ^2.8.8
     prop-types: ^15.6.2
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -1963,7 +1963,7 @@ __metadata:
     "@carbon/icon-helpers": ^10.39.0
     "@carbon/icons": ^11.19.0
     fs-extra: ^10.0.0
-    prettier: ^2.7.1
+    prettier: ^2.8.8
     rimraf: ^5.0.0
     rollup: ^2.79.1
     vue: ^2.6.8
@@ -2032,7 +2032,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/react@^1.29.0-rc.0, @carbon/react@workspace:packages/react":
+"@carbon/react@^1.29.0, @carbon/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@carbon/react@workspace:packages/react"
   dependencies:
@@ -2047,7 +2047,7 @@ __metadata:
     "@carbon/feature-flags": ^0.13.0
     "@carbon/icons-react": ^11.19.0
     "@carbon/layout": ^11.13.0
-    "@carbon/styles": ^1.29.0-rc.0
+    "@carbon/styles": ^1.29.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.28.0
     "@carbon/themes": ^11.18.0
@@ -2123,7 +2123,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/scss-generator@workspace:packages/scss-generator"
   dependencies:
-    prettier: ^2.7.1
+    prettier: ^2.8.8
   languageName: unknown
   linkType: soft
 
@@ -2146,7 +2146,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@^1.29.0-rc.0, @carbon/styles@workspace:packages/styles":
+"@carbon/styles@^1.29.0, @carbon/styles@workspace:packages/styles":
   version: 0.0.0-use.local
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
@@ -2186,7 +2186,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/test-utils@workspace:packages/test-utils"
   dependencies:
-    prettier: ^2.7.1
+    prettier: ^2.8.8
     react: ^18.2.0
     react-dom: ^18.2.0
     resolve: ^1.12.0
@@ -11272,8 +11272,8 @@ __metadata:
     "@babel/plugin-transform-react-constant-elements": ^7.17.12
     "@babel/preset-env": ^7.18.2
     "@babel/preset-react": ^7.17.12
-    "@carbon/react": ^1.29.0-rc.0
-    "@carbon/styles": ^1.29.0-rc.0
+    "@carbon/react": ^1.29.0
+    "@carbon/styles": ^1.29.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.28.0
     "@rollup/plugin-babel": ^6.0.0
@@ -11312,7 +11312,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/carbon-components"
   dependencies:
-    "@carbon/styles": ^1.29.0-rc.0
+    "@carbon/styles": ^1.29.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.28.0
     chalk: 1.1.3
@@ -11366,7 +11366,7 @@ __metadata:
     lerna: ^6.0.0
     lint-staged: ^13.0.0
     node-gyp: ^7.1.2
-    prettier: ^2.7.1
+    prettier: ^2.8.8
     react: ^18.2.0
     react-dom: ^18.2.0
     rimraf: ^5.0.0
@@ -11685,7 +11685,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "class-prefix@workspace:examples/class-prefix"
   dependencies:
-    "@carbon/react": ^1.29.0-rc.0
+    "@carbon/react": ^1.29.0
     "@types/react": ^18.0.0
     "@types/react-dom": ^18.0.0
     "@vitejs/plugin-react": 1.1.3
@@ -12039,7 +12039,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox-styles@workspace:examples/codesandbox-styles"
   dependencies:
-    "@carbon/styles": ^1.29.0-rc.0
+    "@carbon/styles": ^1.29.0
     sass: ^1.51.0
     vite: ^2.8.0
   languageName: unknown
@@ -12049,7 +12049,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox-with-sass-compilation@workspace:examples/codesandbox-with-sass-compilation"
   dependencies:
-    "@carbon/react": ^1.29.0-rc.0
+    "@carbon/react": ^1.29.0
     react: ^18.2.0
     react-dom: ^18.2.0
     react-scripts: 5.0.0
@@ -12061,7 +12061,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox@workspace:examples/codesandbox"
   dependencies:
-    "@carbon/react": ^1.29.0-rc.0
+    "@carbon/react": ^1.29.0
     react: ^18.2.0
     react-dom: ^18.2.0
     react-scripts: 5.0.0
@@ -13456,7 +13456,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "custom-theme@workspace:examples/custom-theme"
   dependencies:
-    "@carbon/react": ^1.29.0-rc.0
+    "@carbon/react": ^1.29.0
     "@types/react": ^18.0.0
     "@types/react-dom": ^18.0.0
     "@vitejs/plugin-react": 1.1.3
@@ -15295,7 +15295,7 @@ __metadata:
     eslint-plugin-react-hooks: ^4.6.0
     eslint-plugin-storybook: ^0.6.10
     eslint-restricted-globals: ^0.2.0
-    prettier: ^2.7.1
+    prettier: ^2.8.8
   peerDependencies:
     eslint: ^8.0.0
   languageName: unknown
@@ -16007,7 +16007,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples-light-dark@workspace:examples/light-dark-mode"
   dependencies:
-    "@carbon/react": ^1.29.0-rc.0
+    "@carbon/react": ^1.29.0
     eslint: 8.12.0
     next: 12.1.4
     react: 18.2.0
@@ -16020,7 +16020,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples-nextjs@workspace:examples/nextjs"
   dependencies:
-    "@carbon/react": ^1.29.0-rc.0
+    "@carbon/react": ^1.29.0
     eslint: 8.12.0
     eslint-config-next: 12.1.4
     next: 12.1.4
@@ -18573,7 +18573,7 @@ fsevents@^1.2.7:
   version: 0.0.0-use.local
   resolution: "id-prefix@workspace:examples/id-prefix"
   dependencies:
-    "@carbon/react": ^1.29.0-rc.0
+    "@carbon/react": ^1.29.0
     "@types/react": ^18.0.0
     "@types/react-dom": ^18.0.0
     "@vitejs/plugin-react": 1.1.3
@@ -18733,7 +18733,7 @@ fsevents@^1.2.7:
   resolution: "incremental-migration@workspace:examples/incremental-migration"
   dependencies:
     "@carbon/icons-react": ^10.49.0
-    "@carbon/react": ^1.29.0-rc.0
+    "@carbon/react": ^1.29.0
     carbon-components: ^10.57.0
     carbon-components-react: ^7.57.0
     carbon-icons: ^7.0.7
@@ -26732,10 +26732,8 @@ fsevents@^1.2.7:
 "prettier-config-carbon@^0.9.0, prettier-config-carbon@workspace:config/prettier-config-carbon":
   version: 0.0.0-use.local
   resolution: "prettier-config-carbon@workspace:config/prettier-config-carbon"
-  dependencies:
-    prettier: ^2.7.1
   peerDependencies:
-    prettier: ^2.1.0
+    prettier: 2.x
   languageName: unknown
   linkType: soft
 
@@ -26757,12 +26755,12 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.7.1":
-  version: 2.7.1
-  resolution: "prettier@npm:2.7.1"
+"prettier@npm:^2.8.8":
+  version: 2.8.8
+  resolution: "prettier@npm:2.8.8"
   bin:
     prettier: bin-prettier.js
-  checksum: 55a4409182260866ab31284d929b3cb961e5fdb91fe0d2e099dac92eaecec890f36e524b4c19e6ceae839c99c6d7195817579cdffc8e2c80da0cb794463a748b
+  checksum: b49e409431bf129dd89238d64299ba80717b57ff5a6d1c1a8b1a28b590d998a34e083fa13573bc732bb8d2305becb4c9a4407f8486c81fa7d55100eb08263cf8
   languageName: node
   linkType: hard
 
@@ -30740,7 +30738,7 @@ fsevents@^1.2.7:
   version: 0.0.0-use.local
   resolution: "stylelint-config-carbon@workspace:config/stylelint-config-carbon"
   dependencies:
-    prettier: ^2.7.1
+    prettier: ^2.8.8
     stylelint: ^14.3.0
     stylelint-a11y: ^1.2.3
     stylelint-config-idiomatic-order: ^8.1.0
@@ -33074,7 +33072,7 @@ fsevents@^1.2.7:
   version: 0.0.0-use.local
   resolution: "vite@workspace:examples/vite"
   dependencies:
-    "@carbon/react": ^1.29.0-rc.0
+    "@carbon/react": ^1.29.0
     "@types/react": ^18.0.0
     "@types/react-dom": ^18.0.0
     "@vitejs/plugin-react": 1.1.3
@@ -34146,7 +34144,7 @@ fsevents@^1.2.7:
   version: 0.0.0-use.local
   resolution: "www@workspace:www"
   dependencies:
-    "@carbon/react": ^1.29.0-rc.0
+    "@carbon/react": ^1.29.0
     "@octokit/core": ^4.0.0
     "@octokit/plugin-retry": ^3.0.9
     "@octokit/plugin-throttling": ^4.0.0
