@@ -156,8 +156,7 @@ return (
         {renderedTabs.map((tab, index) => (
           <Tab
             key={index}
-            disabled={tab.disabled}
-            onCloseRequest={() => handleCloseTabRequest(tab)}>
+            disabled={tab.disabled}>
             {tab.label}
           </Tab>
         ))}
