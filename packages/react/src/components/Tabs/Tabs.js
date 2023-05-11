@@ -543,7 +543,7 @@ const Tab = React.forwardRef(function Tab(
     renderIcon: Icon,
     ...rest
   },
-  ref
+  forwardRef
 ) {
   const prefix = usePrefix();
   const {
@@ -555,6 +555,8 @@ const Tab = React.forwardRef(function Tab(
   } = React.useContext(TabsContext);
   const { index, hasSecondaryLabel, contained } = React.useContext(TabContext);
   const dismissIconRef = useRef(null);
+  const tabRef = useRef(null);
+  const ref = useMergedRefs([forwardRef, tabRef]);
   const [ignoreHover, setIgnoreHover] = useState(false);
   const id = `${baseId}-tab-${index}`;
   const panelId = `${baseId}-tabpanel-${index}`;
@@ -569,14 +571,17 @@ const Tab = React.forwardRef(function Tab(
     }
   );
 
-  const onDismissIconMouseEnter = () => {
+  const onDismissIconMouseEnter = (evt) => {
     if (contained) {
+      evt.stopPropagation();
       setIgnoreHover(true);
+      tabRef.current.classList.add(`${prefix}--tabs__nav-item--hover-off`);
     }
   };
 
   const onDismissIconMouseLeave = () => {
     if (contained) {
+      tabRef.current.classList.remove(`${prefix}--tabs__nav-item--hover-off`);
       setIgnoreHover(false);
     }
   };
