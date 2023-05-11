@@ -6533,6 +6533,9 @@ Map {
       "expanded": Object {
         "type": "bool",
       },
+      "href": Object {
+        "type": "string",
+      },
       "isChildOfHeader": Object {
         "type": "bool",
       },
