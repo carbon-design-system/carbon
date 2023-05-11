@@ -170,6 +170,12 @@ $popover-caret-height: custom-property.get-var(
     display: block;
   }
 
+  .#{$prefix}--popover--tab-tip
+    .#{$prefix}--popover
+    .#{$prefix}--popover-caret {
+    display: none;
+  }
+
   //-----------------------------------------------------------------------------
   // Bottom
   //-----------------------------------------------------------------------------
