@@ -78,17 +78,17 @@ Clickable.argTypes = {
 
 export const ClickableWithLayer = () => {
   return (
-    <WithLayer>
-      {(layer) => (
-        <div className={experimentalClassname}>
+    <div className={experimentalClassname}>
+      <WithLayer>
+        {(layer) => (
           <ClickableTile
             id={`clickable-tile-${layer}`}
             href="https://www.carbondesignsystem.com/">
             Clickable Tile
           </ClickableTile>
-        </div>
-      )}
-    </WithLayer>
+        )}
+      </WithLayer>
+    </div>
   );
 };
 
