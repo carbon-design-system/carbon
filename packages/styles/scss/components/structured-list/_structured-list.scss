@@ -96,14 +96,18 @@
   }
 
   .#{$prefix}--structured-list--selection
-    .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row):not(.#{$prefix}--structured-list-row--selected) {
+    .#{$prefix}--structured-list-row:hover:not(
+      .#{$prefix}--structured-list-row--header-row
+    ):not(.#{$prefix}--structured-list-row--selected) {
     border-color: $layer-hover;
     background-color: $layer-hover;
     cursor: pointer;
   }
 
   .#{$prefix}--structured-list--selection
-    .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row):not(.#{$prefix}--structured-list-row--selected)
+    .#{$prefix}--structured-list-row:hover:not(
+      .#{$prefix}--structured-list-row--header-row
+    ):not(.#{$prefix}--structured-list-row--selected)
     + .#{$prefix}--structured-list-row {
     border-color: $layer-hover;
   }
@@ -131,12 +135,16 @@
   }
 
   @if not enabled('enable-v11-release') {
-    .#{$prefix}--structured-list-row:focus:not(.#{$prefix}--structured-list-row--header-row) {
+    .#{$prefix}--structured-list-row:focus:not(
+        .#{$prefix}--structured-list-row--header-row
+      ) {
       @include focus-outline('outline');
     }
   }
   .#{$prefix}--structured-list--selection
-    .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row)
+    .#{$prefix}--structured-list-row:hover:not(
+      .#{$prefix}--structured-list-row--header-row
+    )
     > .#{$prefix}--structured-list-td,
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected
