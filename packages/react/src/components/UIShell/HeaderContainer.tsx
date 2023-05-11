@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { useState, useCallback } from 'react';
 import { keys, match } from '../../internal/keyboard';
-import { useEvent } from '../../internal/useEvent';
+import { useWindowEvent } from '../../internal/useEvent';
 
 interface HeaderContainerRenderProps {
   isSideNavExpanded: boolean;
@@ -28,7 +28,7 @@ export default function HeaderContainer({
   const [isSideNavExpandedState, setIsSideNavExpandedState] =
     useState(isSideNavExpanded);
 
-  useEvent(window, 'keydown', (event) => {
+  useWindowEvent('keydown', (event) => {
     if (match(event, keys.Escape)) {
       setIsSideNavExpandedState(false);
     }
