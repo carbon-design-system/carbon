@@ -10,6 +10,7 @@
 //-----------------------------
 
 @use '../../config' as *;
+@use '../../colors' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -28,6 +29,7 @@
 /// @group slider
 @mixin slider {
   .#{$prefix}--slider-container {
+    position: relative;
     display: flex;
     align-items: center;
     user-select: none;
@@ -126,7 +128,6 @@
     width: rem(64px);
     height: rem(40px);
     -moz-appearance: textfield;
-    text-align: center;
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -138,12 +139,44 @@
     display: none;
   }
 
-  .#{$prefix}--slider-text-input.#{$prefix}--text-input--invalid {
-    padding-right: 1rem;
-  }
-
   .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {
     background-color: $interactive;
+  }
+
+  // Invalid & warn state
+  .#{$prefix}--slider-text-input.#{$prefix}--text-input--invalid,
+  .#{$prefix}--slider-text-input--warn {
+    width: 6rem;
+    padding-right: $spacing-09;
+  }
+
+  .#{$prefix}--slider__invalid-icon {
+    position: absolute;
+    // top/transform used to center invalid icon in IE11
+    top: 50%;
+    right: $spacing-05;
+    fill: $support-error;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--slider__validation-msg.#{$prefix}--form-requirement {
+    display: block;
+    overflow: visible;
+    max-height: 100%;
+    margin-top: 0;
+  }
+
+  .#{$prefix}--slider__validation-msg--invalid {
+    color: $text-error;
+  }
+
+  .#{$prefix}--slider__invalid-icon.#{$prefix}--slider__invalid-icon--warning {
+    fill: $support-warning;
+  }
+
+  .#{$prefix}--slider__invalid-icon--warning path:first-of-type {
+    fill: $black-100;
+    opacity: 1;
   }
 
   // Disabled state
