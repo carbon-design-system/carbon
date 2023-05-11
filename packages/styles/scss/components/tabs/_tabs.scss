@@ -368,13 +368,17 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     // Item Hover
     //-----------------------------
     &:not(.#{$prefix}--tabs--contained)
-      .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):hover {
+      .#{$prefix}--tabs__nav-item:not(
+        .#{$prefix}--tabs__nav-item--selected
+      ):not(.#{$prefix}--tabs__nav-item--disabled):hover {
       border-bottom: $tab-underline-color-hover;
       color: $text-primary;
     }
 
     &.#{$prefix}--tabs--contained
-      .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--disabled):hover {
+      .#{$prefix}--tabs__nav-item:not(
+        .#{$prefix}--tabs__nav-item--disabled
+      ):hover {
       background-color: $layer-accent-hover;
       color: $text-primary;
     }
