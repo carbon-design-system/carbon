@@ -186,11 +186,15 @@
     white-space: nowrap;
   }
 
+  .#{$prefix}--structured-list-input + .#{$prefix}--structured-list-td {
+    text-align: right;
+  }
+
   .#{$prefix}--structured-list-svg {
     display: inline-block;
     fill: transparent;
     transition: all motion.$duration-fast-02 motion.motion(standard, productive);
-    vertical-align: middle;
+    vertical-align: top;
   }
 
   .#{$prefix}--structured-list-input:checked
