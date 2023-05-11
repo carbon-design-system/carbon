@@ -276,6 +276,31 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     //-----------------------------
     // Icon
     //-----------------------------
+
+    &.#{$prefix}--tabs--contained
+      .#{$prefix}--tabs__nav-item--icon
+      .#{$prefix}--tabs__nav-item--close-icon {
+      padding: $spacing-05;
+      margin-top: -$spacing-03;
+      margin-right: -$spacing-05;
+      margin-left: -$spacing-05;
+
+      &:hover {
+        background-color: inherit;
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
+        padding: $spacing-02;
+        margin: -$spacing-02;
+      }
+
+      svg:hover {
+        background-color: $layer-hover;
+      }
+    }
+
     .#{$prefix}--tabs__nav-item--icon {
       display: flex;
       align-items: center;
@@ -288,8 +313,8 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
         line-height: 0;
         pointer-events: auto;
 
-        &:hover:not([aria-disabled]) {
-          background-color: $layer-hover;
+        &:hover {
+          background-color: $background-hover;
         }
       }
     }
@@ -386,7 +411,7 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     }
 
     &.#{$prefix}--tabs--contained
-      .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--disabled):not(.#{$prefix}--tabs__nav-item--hover-off):hover {
+      .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):not(.#{$prefix}--tabs__nav-item--hover-off):hover {
       background-color: $layer-accent-hover;
       color: $text-primary;
     }

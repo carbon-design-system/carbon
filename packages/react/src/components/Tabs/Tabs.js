@@ -393,7 +393,11 @@ function TabList({
         {React.Children.map(children, (child, index) => {
           return (
             <TabContext.Provider
-              value={{ index, hasSecondaryLabel: hasSecondaryLabelTabs }}>
+              value={{
+                index,
+                hasSecondaryLabel: hasSecondaryLabelTabs,
+                contained,
+              }}>
               {React.cloneElement(child, {
                 ref: (node) => {
                   tabs.current[index] = node;
@@ -549,7 +553,7 @@ const Tab = React.forwardRef(function Tab(
     dismissable,
     onTabCloseRequest,
   } = React.useContext(TabsContext);
-  const { index, hasSecondaryLabel } = React.useContext(TabContext);
+  const { index, hasSecondaryLabel, contained } = React.useContext(TabContext);
   const dismissIconRef = useRef(null);
   const [ignoreHover, setIgnoreHover] = useState(false);
   const id = `${baseId}-tab-${index}`;
@@ -566,11 +570,15 @@ const Tab = React.forwardRef(function Tab(
   );
 
   const onDismissIconMouseEnter = () => {
-    setIgnoreHover(true);
+    if (contained) {
+      setIgnoreHover(true);
+    }
   };
 
   const onDismissIconMouseLeave = () => {
-    setIgnoreHover(false);
+    if (contained) {
+      setIgnoreHover(false);
+    }
   };
 
   useEvent(dismissIconRef, 'mouseover', onDismissIconMouseEnter);
