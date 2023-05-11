@@ -20,9 +20,9 @@ import {
 import TileGroup from '../TileGroup/TileGroup';
 import { Layer } from '../Layer';
 import './tile-story.scss';
-import { FeatureFlags } from '../FeatureFlags';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
 
 export default {
   title: 'Experimental/Feature Flags/Tile',
@@ -45,12 +45,9 @@ export default {
   },
   decorators: [
     (Story) => (
-      <FeatureFlags
-        flags={{
-          'enable-v12-tile-default-icons': true,
-        }}>
+      <WithFeatureFlags>
         <Story />
-      </FeatureFlags>
+      </WithFeatureFlags>
     ),
   ],
 };
@@ -81,17 +78,17 @@ Clickable.argTypes = {
 
 export const ClickableWithLayer = () => {
   return (
-    <div className={experimentalClassname}>
-      <WithLayer>
-        {(layer) => (
+    <WithLayer>
+      {(layer) => (
+        <div className={experimentalClassname}>
           <ClickableTile
             id={`clickable-tile-${layer}`}
             href="https://www.carbondesignsystem.com/">
             Clickable Tile
           </ClickableTile>
-        )}
-      </WithLayer>
-    </div>
+        </div>
+      )}
+    </WithLayer>
   );
 };
 
