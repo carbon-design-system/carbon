@@ -21,9 +21,6 @@
     "access": "public"
   },
   "peerDependencies": {
-    "prettier": "^2.1.0"
-  },
-  "devDependencies": {
-    "prettier": "^2.7.1"
+    "prettier": "2.x"
   }
 }
