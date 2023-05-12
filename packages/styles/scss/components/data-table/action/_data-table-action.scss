@@ -94,7 +94,9 @@
     opacity: 0;
   }
 
-  .#{$prefix}--toolbar-search-container-expandable:not(.#{$prefix}--toolbar-search-container-active)
+  .#{$prefix}--toolbar-search-container-expandable:not(
+      .#{$prefix}--toolbar-search-container-active
+    )
     .#{$prefix}--search-input {
     padding: 0;
   }
@@ -144,7 +146,9 @@
 
   // sm expandable icon spacing
   .#{$prefix}--table-toolbar.#{$prefix}--table-toolbar--sm
-    .#{$prefix}--search--sm:not(.#{$prefix}--toolbar-search-container-active):not(.#{$prefix}--toolbar-search-container-persistent)
+    .#{$prefix}--search--sm:not(
+      .#{$prefix}--toolbar-search-container-active
+    ):not(.#{$prefix}--toolbar-search-container-persistent)
     .#{$prefix}--search-magnifier-icon {
     left: 0;
   }

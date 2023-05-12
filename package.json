@@ -20,7 +20,7 @@
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
     "doctoc": "doctoc --title '## Table of Contents'",
     "format": "prettier --cache --write '**/*.{js,md,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**'",
-    "format:diff": "prettier --cache --list-different '**/*.{js,md,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
+    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
     "lint": "eslint actions config packages www",
     "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
     "sync": "carbon-cli sync",
@@ -70,7 +70,7 @@
     "lerna": "^6.0.0",
     "lint-staged": "^13.0.0",
     "node-gyp": "^7.1.2",
-    "prettier": "^2.7.1",
+    "prettier": "^2.8.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.0",
@@ -117,15 +117,15 @@
   },
   "lint-staged": {
     "**/*.js": [
-      "prettier --write",
+      "prettier --cache --write",
       "eslint"
     ],
     "**/*.scss": [
-      "prettier --write",
+      "prettier --cache --write",
       "stylelint --report-needless-disables --report-invalid-scope-disables --allow-empty-input"
     ],
     "!(*sass).md": [
-      "prettier --write"
+      "prettier --cache --write"
     ]
   },
   "eslintConfig": {

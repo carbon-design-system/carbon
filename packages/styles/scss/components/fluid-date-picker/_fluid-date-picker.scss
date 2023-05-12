@@ -79,7 +79,9 @@
 
   .#{$prefix}--date-picker--fluid
     .#{$prefix}--date-picker--simple
-    .#{$prefix}--date-picker__input:not(.#{$prefix}--date-picker__input--invalid):not(.#{$prefix}--date-picker__input--warn),
+    .#{$prefix}--date-picker__input:not(
+      .#{$prefix}--date-picker__input--invalid
+    ):not(.#{$prefix}--date-picker__input--warn),
   .#{$prefix}--date-picker--fluid
     .#{$prefix}--date-picker--simple
     .#{$prefix}--date-picker--fluid--warn {
@@ -103,15 +105,21 @@
 
   .#{$prefix}--date-picker--fluid
     .#{$prefix}--date-picker--single
-    .#{$prefix}--date-picker__input:not(.#{$prefix}--date-picker__input--invalid),
+    .#{$prefix}--date-picker__input:not(
+      .#{$prefix}--date-picker__input--invalid
+    ),
   .#{$prefix}--date-picker--single .#{$prefix}--date-picker--fluid--warn {
     border-bottom: 1px solid $border-strong;
   }
 
   // Range
-  .#{$prefix}--date-picker--fluid:not(.#{$prefix}--date-picker--fluid--invalid):not(.#{$prefix}--date-picker--fluid--warn)
+  .#{$prefix}--date-picker--fluid:not(
+      .#{$prefix}--date-picker--fluid--invalid
+    ):not(.#{$prefix}--date-picker--fluid--warn)
     .#{$prefix}--date-picker--range
-    .#{$prefix}--date-picker-container:not(.#{$prefix}--date-picker--fluid--invalid) {
+    .#{$prefix}--date-picker-container:not(
+      .#{$prefix}--date-picker--fluid--invalid
+    ) {
     border-bottom: 1px solid $border-strong;
   }
 
@@ -362,16 +370,22 @@
   }
 
   // Readonly
-  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--readonly:not(.#{$prefix}--date-picker--fluid--invalid):not(.#{$prefix}--date-picker--fluid--warn)
+  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--readonly:not(
+      .#{$prefix}--date-picker--fluid--invalid
+    ):not(.#{$prefix}--date-picker--fluid--warn)
     .#{$prefix}--date-picker
     > .#{$prefix}--date-picker-container,
-  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--readonly:not(.#{$prefix}--date-picker--fluid--invalid):not(.#{$prefix}--date-picker--fluid--warn)
+  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--readonly:not(
+      .#{$prefix}--date-picker--fluid--invalid
+    ):not(.#{$prefix}--date-picker--fluid--warn)
     .#{$prefix}--date-picker
     .#{$prefix}--date-picker__input {
     border-bottom-color: $border-subtle;
   }
 
-  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--readonly:not(.#{$prefix}--date-picker--fluid--invalid):not(.#{$prefix}--date-picker--fluid--warn)
+  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--readonly:not(
+      .#{$prefix}--date-picker--fluid--invalid
+    ):not(.#{$prefix}--date-picker--fluid--warn)
     .#{$prefix}--date-picker--range
     > .#{$prefix}--date-picker-container:last-child
     .#{$prefix}--date-picker__input {
