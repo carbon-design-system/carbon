@@ -552,6 +552,7 @@ categories:
           - logo--instagram
           - logo--linkedin
           - logo--livestream
+          - logo--mastodon
           - logo--medium
           - logo--pinterest
           - logo--quora
@@ -602,11 +603,17 @@ categories:
           - ibm--match-360
           - ibm--mq
           - ibm--open-enterprise-languages
+          - ibm--openshift-container-platform-on-vpc-for-regulated-industries
           - ibm--power-vs
+          - ibm--power-with-vpc
+          - ibm--private-path-services
           - ibm--process-mining
+          - ibm--sap-on-power
+          - ibm--secure-infrastructure-on-vpc-for-regulated-industries
           - ibm--telehealth
           - ibm--tenet
           - ibm--toolchain
+          - ibm--vsi-on-vpc-for-regulated-industries
           - ibm-cloud--app-id
           - ibm-cloud--citrix-daas
           - ibm-cloud--continuous-delivery
@@ -633,8 +640,11 @@ categories:
           - ibm-cloud--mass-data-migration
           - ibm-cloud--pal
           - ibm-cloud--privileged-access-gateway
+          - ibm-cloud--projects
+          - ibm-cloud--resiliency
           - ibm-cloud--secrets-manager
           - ibm-cloud--security-compliance-center
+          - ibm-cloud--security-compliance-center-workload-protection
           - ibm-cloud--subnets
           - ibm-cloud--sysdig-secure
           - ibm-cloud--transit-gateway
@@ -667,7 +677,10 @@ categories:
           - ibm-watson--text-to-speech
           - ibm-watson--tone-analyzer
           - ibm-z--cloud-mod-stack
+          - ibm-z--environments-dev-sec-ops
           - ibm-z-cloud--provisioning
+          - ibm-z-os--ai-control-interface
+          - ibm-z-os--containers
           - ibm-z-os--package-manager
           - infrastructure--classic
           - load-balancer--vpc
@@ -1004,6 +1017,7 @@ categories:
           - chart--line
           - chart--line--data
           - chart--line-smooth
+          - chart--logistic-regression
           - chart--marimekko
           - chart--maximum
           - chart--minimum
@@ -1047,11 +1061,13 @@ categories:
           - data--2
           - data--base
           - data--base--alt
+          - data--categorical
           - data--check
           - data--connected
           - data--error
           - data--format
           - data--reference
+          - data--regular
           - data--set
           - data--structured
           - data--unstructured
@@ -1124,6 +1140,11 @@ categories:
           - ordinal
           - parent-child
           - parameter
+          - partition--auto
+          - partition--collection
+          - partition--repartition
+          - partition--same
+          - partition--specific
           - phrase-sentiment
           - presentation-file
           - progress-bar
@@ -1154,6 +1175,7 @@ categories:
           - subflow--local
           - summary--KPI
           - summary--KPI--mirror
+          - support-vector-machine
           - sys-provision
           - table
           - table--alias
@@ -1298,6 +1320,7 @@ categories:
           - notebook
           - notebook--reference
           - order-details
+          - package--text-analysis
           - panel-expansion
           - paste
           - PDF
@@ -1313,12 +1336,15 @@ categories:
           - reference-architecture
           - repo--artifact
           - repo--source-code
+          - result--draft
           - roadmap
           - rule
           - rule--cancelled
           - rule--data-quality
           - rule--draft
           - rule--filled
+          - rule--locked
+          - rule--partial
           - rule--test
           - result
           - result--new
@@ -1352,6 +1378,9 @@ categories:
           - TXT--reference
           - upload
           - version
+          - version--major
+          - version--minor
+          - version--patch
           - websheet
           - white-paper
           - WMV
@@ -1605,6 +1634,7 @@ categories:
           - collaborate
           - cough
           - credentials
+          - customer-service
           - dog-walker
           - education
           - events
