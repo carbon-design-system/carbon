@@ -27,7 +27,7 @@ const SideNavHeader = ({
     </header>
   );
 };
-
+SideNavHeader.displayName = 'SideNavHeader';
 SideNavHeader.propTypes = {
   /**
    * The child nodes to be rendered

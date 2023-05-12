@@ -334,7 +334,9 @@
   }
 
   // Parent collapsed hover
-  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:not(.#{$prefix}--expandable-row):hover
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:not(
+      .#{$prefix}--expandable-row
+    ):hover
     td {
     border-top: 1px solid $layer-selected-hover;
     border-bottom: 1px solid $border-subtle;

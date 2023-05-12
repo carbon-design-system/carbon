@@ -88,6 +88,7 @@ module.exports = {
   },
   features: {
     previewCsfV3: true,
+    buildStoriesJson: true,
   },
   framework: '@storybook/react',
   stories,

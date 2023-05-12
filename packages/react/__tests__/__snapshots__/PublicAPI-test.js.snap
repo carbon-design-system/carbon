@@ -2923,6 +2923,7 @@ Map {
     "Provider": "React.Provider",
   },
   "ExpandableSearch" => Object {
+    "displayName": "ExpandableSearch",
     "propTypes": Object {
       "autoComplete": Object {
         "type": "string",
@@ -3782,12 +3783,13 @@ Map {
     },
   },
   "HeaderContainer" => Object {
-    "defaultProps": Object {
-      "isSideNavExpanded": false,
-    },
     "propTypes": Object {
       "isSideNavExpanded": Object {
         "type": "bool",
+      },
+      "render": Object {
+        "isRequired": true,
+        "type": "elementType",
       },
     },
   },
@@ -3931,9 +3933,6 @@ Map {
     "render": [Function],
   },
   "HeaderSideNavItems" => Object {
-    "defaultProps": Object {
-      "hasDivider": false,
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -6529,14 +6528,6 @@ Map {
   },
   "SideNav" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "addFocusListeners": true,
-      "addMouseListeners": true,
-      "defaultExpanded": false,
-      "isChildOfHeader": true,
-      "isFixedNav": false,
-      "isPersistent": true,
-    },
     "propTypes": Object {
       "addFocusListeners": Object {
         "type": "bool",
@@ -6554,6 +6545,9 @@ Map {
       },
       "expanded": Object {
         "type": "bool",
+      },
+      "href": Object {
+        "type": "string",
       },
       "isChildOfHeader": Object {
         "type": "bool",
@@ -6601,6 +6595,7 @@ Map {
     "defaultProps": Object {
       "assistiveText": "Toggle opening or closing the side navigation",
     },
+    "displayName": "SideNavFooter",
     "propTypes": Object {
       "assistiveText": Object {
         "isRequired": true,
@@ -6620,6 +6615,7 @@ Map {
     },
   },
   "SideNavHeader" => Object {
+    "displayName": "SideNavHeader",
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -6679,6 +6675,7 @@ Map {
     },
   },
   "SideNavItems" => Object {
+    "displayName": "SideNavItems",
     "propTypes": Object {
       "children": Object {
         "isRequired": true,
@@ -7049,13 +7046,9 @@ Map {
   },
   "StructuredListSkeleton" => Object {
     "defaultProps": Object {
-      "border": false,
       "rowCount": 5,
     },
     "propTypes": Object {
-      "border": Object {
-        "type": "bool",
-      },
       "className": Object {
         "type": "string",
       },
