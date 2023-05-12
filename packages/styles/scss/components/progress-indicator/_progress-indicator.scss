@@ -111,7 +111,9 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     margin-right: 0.75rem;
   }
 
-  .#{$prefix}--progress-step-button:not(.#{$prefix}--progress-step-button--unclickable) {
+  .#{$prefix}--progress-step-button:not(
+      .#{$prefix}--progress-step-button--unclickable
+    ) {
     &:focus {
       outline: none;
     }
