@@ -40,6 +40,7 @@ interface SideNavProps extends ComponentProps<'nav'> {
   addFocusListeners?: boolean | undefined;
   addMouseListeners?: boolean | undefined;
   onOverlayClick?: MouseEventHandler<HTMLDivElement> | undefined;
+  onSideNavBlur?: () => void | undefined;
 }
 
 function SideNavRenderFunction(
@@ -61,6 +62,7 @@ function SideNavRenderFunction(
     addFocusListeners = true,
     addMouseListeners = true,
     onOverlayClick,
+    onSideNavBlur,
     ...other
   }: SideNavProps,
   ref: ForwardedRef<HTMLElement>
@@ -150,6 +152,11 @@ function SideNavRenderFunction(
     eventHandlers.onBlur = (event) => {
       if (!event.currentTarget.contains(event.relatedTarget)) {
         handleToggle(event, false);
+      }
+      if (!event.currentTarget.contains(event.relatedTarget) && expanded) {
+        if (onSideNavBlur) {
+          onSideNavBlur();
+        }
       }
     };
     eventHandlers.onKeyDown = (event) => {
@@ -253,6 +260,12 @@ SideNav.propTypes = {
    * @param {object} event
    */
   onOverlayClick: PropTypes.func,
+
+  /**
+   * An optional listener that is called a callback to collapse the SideNav
+   */
+
+  onSideNavBlur: PropTypes.func,
 
   /**
    * An optional listener that is called when an event that would cause
