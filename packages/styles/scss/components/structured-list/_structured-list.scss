@@ -21,14 +21,8 @@
   .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-th {
     @include padding--data-structured-list;
   }
-  @if enabled('enable-v11-release') {
-    .#{$prefix}--structured-list-row--focused-within {
-      @include focus-outline('outline');
-    }
-  } @else {
-    .#{$prefix}--structured-list-input {
-      display: none;
-    }
+  .#{$prefix}--structured-list-row--focused-within {
+    @include focus-outline('outline');
   }
 
   .#{$prefix}--structured-list {
@@ -36,9 +30,6 @@
 
     display: table;
     width: 100%;
-    @if not enabled('enable-v11-release') {
-      margin-bottom: 5rem;
-    }
 
     background-color: transparent;
     border-collapse: collapse;
@@ -134,13 +125,6 @@
     cursor: inherit;
   }
 
-  @if not enabled('enable-v11-release') {
-    .#{$prefix}--structured-list-row:focus:not(
-        .#{$prefix}--structured-list-row--header-row
-      ) {
-      @include focus-outline('outline');
-    }
-  }
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row:hover:not(
       .#{$prefix}--structured-list-row--header-row

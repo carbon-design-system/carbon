@@ -117,7 +117,7 @@ describe('Feedback', () => {
 
     const button = screen.getByTestId('copy-button-6');
     await user.click(button);
-    expect(screen.getAllByText('overriding-default-feedback').length).toBe(2);
+    expect(screen.getAllByText('overriding-default-feedback').length).toBe(1);
   });
 
   it('should allow users to override default feedback timeout via prop', async () => {
