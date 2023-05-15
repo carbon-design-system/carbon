@@ -315,7 +315,9 @@
     + .#{$prefix}--content-switcher-popover__wrapper
     .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher-btn:hover::before,
-  .#{$prefix}--content-switcher-popover__wrapper:not(.#{$prefix}--content-switcher-popover--disabled):hover
+  .#{$prefix}--content-switcher-popover__wrapper:not(
+      .#{$prefix}--content-switcher-popover--disabled
+    ):hover
     + .#{$prefix}--content-switcher-popover__wrapper
     .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher--selected::before,
@@ -337,7 +339,9 @@
   }
 
   .#{$prefix}--content-switcher--icon-only
-    .#{$prefix}--content-switcher-btn[disabled]:not(.#{$prefix}--content-switcher--selected):hover,
+    .#{$prefix}--content-switcher-btn[disabled]:not(
+      .#{$prefix}--content-switcher--selected
+    ):hover,
   .#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-popover--selected
     + .#{$prefix}--content-switcher-popover--disabled

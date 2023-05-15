@@ -64,7 +64,9 @@
     box-shadow: 0 2px 6px 0 rgb(0 0 0 / 20%);
   }
 
-  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+  .#{$prefix}--actionable-notification:not(
+      .#{$prefix}--actionable-notification--low-contrast
+    )
     a {
     color: $link-inverse;
   }
@@ -90,7 +92,9 @@
     color: $text-primary;
   }
 
-  .#{$prefix}--actionable-notification--low-contrast:not(.#{$prefix}--actionable-notification--toast)::before {
+  .#{$prefix}--actionable-notification--low-contrast:not(
+      .#{$prefix}--actionable-notification--toast
+    )::before {
     position: absolute;
     top: 0;
     left: 0;
@@ -193,7 +197,9 @@
     margin: 0 $spacing-09 0 rem(13px);
   }
 
-  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--toast)
+  .#{$prefix}--actionable-notification:not(
+      .#{$prefix}--actionable-notification--toast
+    )
     .#{$prefix}--actionable-notification__details {
     @include breakpoint(md) {
       margin: 0 rem(13px);
@@ -272,7 +278,9 @@
     }
   }
 
-  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+  .#{$prefix}--actionable-notification:not(
+      .#{$prefix}--actionable-notification--low-contrast
+    )
     .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--ghost {
     color: $link-inverse;
   }
@@ -324,7 +332,9 @@
   // btn-tertiary g10 theme button styles should become g90 button styles
   // btn-tertiary g90 theme button styles should become g10 button styles
   // btn-tertiary g100 theme button styles should become white button styles
-  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+  .#{$prefix}--actionable-notification:not(
+      .#{$prefix}--actionable-notification--low-contrast
+    )
     .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary {
     @include button-mixins.button-theme(
       transparent,
@@ -336,12 +346,16 @@
     );
   }
 
-  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+  .#{$prefix}--actionable-notification:not(
+      .#{$prefix}--actionable-notification--low-contrast
+    )
     .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary:hover {
     color: $notification-action-tertiary-inverse-text;
   }
 
-  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+  .#{$prefix}--actionable-notification:not(
+      .#{$prefix}--actionable-notification--low-contrast
+    )
     .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary:focus {
     border-color: $focus-inverse;
     background-color: $notification-action-tertiary-inverse;
@@ -350,24 +364,38 @@
     color: $notification-action-tertiary-inverse-text;
   }
 
-  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+  .#{$prefix}--actionable-notification:not(
+      .#{$prefix}--actionable-notification--low-contrast
+    )
     .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary:active {
     border-color: transparent;
     background-color: $notification-action-tertiary-inverse-active;
     color: $notification-action-tertiary-inverse-text;
   }
 
-  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+  .#{$prefix}--actionable-notification:not(
+      .#{$prefix}--actionable-notification--low-contrast
+    )
     .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary:disabled,
-  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+  .#{$prefix}--actionable-notification:not(
+      .#{$prefix}--actionable-notification--low-contrast
+    )
     .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary:hover:disabled,
-  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+  .#{$prefix}--actionable-notification:not(
+      .#{$prefix}--actionable-notification--low-contrast
+    )
     .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary:focus:disabled,
-  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+  .#{$prefix}--actionable-notification:not(
+      .#{$prefix}--actionable-notification--low-contrast
+    )
     .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary.#{$prefix}--btn--disabled,
-  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+  .#{$prefix}--actionable-notification:not(
+      .#{$prefix}--actionable-notification--low-contrast
+    )
     .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary.#{$prefix}--btn--disabled:hover,
-  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+  .#{$prefix}--actionable-notification:not(
+      .#{$prefix}--actionable-notification--low-contrast
+    )
     .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary.#{$prefix}--btn--disabled:focus {
     background: transparent;
     color: $notification-action-tertiary-inverse-text-on-color-disabled;
