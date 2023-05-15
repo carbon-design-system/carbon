@@ -10,7 +10,9 @@ import React, { ComponentProps } from 'react';
 import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
 
-type SkipToContentProps = ComponentProps<'a'>;
+type SkipToContentProps = Omit<ComponentProps<'a'>, 'children'> & {
+  children?: string | undefined;
+};
 
 export default function SkipToContent({
   children = 'Skip to main content',
@@ -33,7 +35,7 @@ SkipToContent.propTypes = {
    * A ReactNode to display in the SkipToContent `a` tag.
    * `'Skip to main content'` by default.
    */
-  children: PropTypes.node,
+  children: PropTypes.string,
 
   className: PropTypes.string,
 

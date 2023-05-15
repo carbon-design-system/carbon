@@ -6847,7 +6847,7 @@ Map {
   "SkipToContent" => Object {
     "propTypes": Object {
       "children": Object {
-        "type": "node",
+        "type": "string",
       },
       "className": Object {
         "type": "string",
