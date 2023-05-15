@@ -1797,7 +1797,7 @@ __metadata:
     progress-estimator: ^0.3.0
     remark: ^10.0.1
     replace-in-file: ^6.1.0
-    rollup: ^2.79.1
+    rollup: ^3.0.0
     sass: ^1.51.0
     sassdoc: ^2.7.3
     yargs: ^17.0.1
@@ -1861,7 +1861,7 @@ __metadata:
     fs-extra: ^10.0.0
     js-yaml: ^3.14.0
     rimraf: ^5.0.0
-    rollup: ^2.79.1
+    rollup: ^3.0.0
     rollup-plugin-strip-banner: ^2.0.0
   languageName: unknown
   linkType: soft
@@ -1910,7 +1910,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     rimraf: ^5.0.0
-    rollup: ^2.79.1
+    rollup: ^3.0.0
     rollup-plugin-strip-banner: ^2.0.0
     svg-parser: ^2.0.4
     svgo: ^1.1.1
@@ -1965,7 +1965,7 @@ __metadata:
     fs-extra: ^10.0.0
     prettier: ^2.8.8
     rimraf: ^5.0.0
-    rollup: ^2.79.1
+    rollup: ^3.0.0
     vue: ^2.6.8
   languageName: unknown
   linkType: soft
@@ -2098,7 +2098,7 @@ __metadata:
     react-is: ^18.2.0
     requestanimationframe: ^0.0.23
     rimraf: ^5.0.0
-    rollup: ^2.79.1
+    rollup: ^3.0.0
     rollup-plugin-strip-banner: ^2.0.0
     rtlcss: ^4.0.0
     sass: ^1.51.0
@@ -11287,7 +11287,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     rimraf: ^5.0.0
-    rollup: ^2.79.1
+    rollup: ^3.0.0
     rollup-plugin-strip-banner: ^2.0.0
   peerDependencies:
     react: ^16.8.6 || ^17.0.1 || ^18.2.0
@@ -28842,7 +28842,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"rollup@npm:^2.43.1, rollup@npm:^2.59.0, rollup@npm:^2.79.1":
+"rollup@npm:^2.43.1, rollup@npm:^2.59.0":
   version: 2.79.1
   resolution: "rollup@npm:2.79.1"
   dependencies:
@@ -28853,6 +28853,20 @@ fsevents@^1.2.7:
   bin:
     rollup: dist/bin/rollup
   checksum: 6a2bf167b3587d4df709b37d149ad0300692cc5deb510f89ac7bdc77c8738c9546ae3de9322b0968e1ed2b0e984571f5f55aae28fa7de4cfcb1bc5402a4e2be6
+  languageName: node
+  linkType: hard
+
+"rollup@npm:^3.0.0":
+  version: 3.21.7
+  resolution: "rollup@npm:3.21.7"
+  dependencies:
+    fsevents: ~2.3.2
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  bin:
+    rollup: dist/bin/rollup
+  checksum: 44372a1e6fbd1941d6cb230b2a3de6d86861ca7523792757c9fe1d254ae4cd645f5dae27d93c7b1e02c60945d2eadd8c74a99033bd8328eda84949086330d804
   languageName: node
   linkType: hard
 
