@@ -259,10 +259,8 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     | undefined;
 
   useEffect(() => {
-    setTextCount(
-      textareaRef.current?.value?.length || 0
-    );
-  }, [textareaRef.current?.value])
+    setTextCount(textareaRef.current?.value?.length || 0);
+  }, [textareaRef.current?.value]);
 
   useIsomorphicEffect(() => {
     if (other.cols && textareaRef.current) {
