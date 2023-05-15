@@ -160,6 +160,12 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   );
   const { current: textAreaInstanceId } = useRef(getInstanceId());
 
+  useEffect(() => {
+    setTextCount(
+      defaultValue?.toString()?.length || value?.toString()?.length || 0
+    );
+  }, [value, defaultValue]);
+
   const textareaProps: {
     id: TextAreaProps['id'];
     onChange: TextAreaProps['onChange'];
@@ -169,7 +175,10 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     id,
     onChange: (evt) => {
       if (!other.disabled && onChange) {
-        setTextCount(evt.target.value?.length);
+        // delay textCount assignation to give the textarea element value time to catch up if is a controlled input
+        setTimeout(() => {
+          setTextCount(evt.target.value?.length);
+        },0);
         onChange(evt);
       }
     },
@@ -252,11 +261,6 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     | React.LegacyRef<HTMLTextAreaElement>
     | undefined;
 
-  useEffect(() => {
-    setTextCount(textareaRef.current?.value?.length || 0);
-  }, [textareaRef.current?.value, value]);
-
-
   useIsomorphicEffect(() => {
     if (other.cols && textareaRef.current) {
       textareaRef.current.style.width = '';
@@ -278,7 +282,6 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     <textarea
       {...other}
       {...textareaProps}
-      value={value}
       placeholder={placeholder}
       className={textareaClasses}
       aria-invalid={invalid}
