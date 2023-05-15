@@ -10,7 +10,6 @@ import PropTypes, { ReactNodeLike } from 'prop-types';
 
 import classNames from 'classnames';
 import throttle from 'lodash.throttle';
-import * as FeatureFlags from '@carbon/feature-flags';
 
 import * as keys from '../../internal/keyboard/keys';
 import { matches } from '../../internal/keyboard/match';
@@ -353,9 +352,6 @@ export default class Slider extends PureComponent<SliderProps> {
     minLabel: '',
     maxLabel: '',
     inputType: 'number',
-    ariaLabelInput: FeatureFlags.enabled('enable-v11-release')
-      ? undefined
-      : 'Slider number input',
     readOnly: false,
   };
 
@@ -770,13 +766,6 @@ export default class Slider extends PureComponent<SliderProps> {
 
     const { value, isValid } = this.state;
 
-    const scope = this.context;
-    let enabled;
-
-    if (scope.enabled) {
-      enabled = scope.enabled('enable-v11-release');
-    }
-
     return (
       <PrefixContext.Consumer>
         {(prefix) => {
@@ -788,8 +777,7 @@ export default class Slider extends PureComponent<SliderProps> {
           const sliderClasses = classNames(
             `${prefix}--slider`,
             { [`${prefix}--slider--disabled`]: disabled },
-            { [`${prefix}--slider--readonly`]: readOnly },
-            [enabled ? null : className]
+            { [`${prefix}--slider--readonly`]: readOnly }
           );
 
           const inputClasses = classNames(
@@ -805,12 +793,7 @@ export default class Slider extends PureComponent<SliderProps> {
           );
 
           return (
-            <div
-              className={
-                enabled
-                  ? classNames(`${prefix}--form-item`, className)
-                  : `${prefix}--form-item`
-              }>
+            <div className={classNames(`${prefix}--form-item`, className)}>
               <label htmlFor={id} className={labelClasses} id={labelId}>
                 {labelText}
               </label>

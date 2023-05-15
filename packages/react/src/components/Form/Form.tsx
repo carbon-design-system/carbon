@@ -6,30 +6,30 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type ComponentProps } from 'react';
 import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-const ListItem = ({ children, className, ...other }) => {
-  const prefix = usePrefix();
-  const classNames = classnames(`${prefix}--list__item`, className);
-  return (
-    <li className={classNames} {...other}>
-      {children}
-    </li>
-  );
-};
+type FormProps = ComponentProps<'form'>;
 
-ListItem.propTypes = {
+export default function Form({ className, children, ...other }: FormProps) {
+  const prefix = usePrefix();
+  const classNames = classnames(`${prefix}--form`, className);
+  return (
+    <form className={classNames} {...other}>
+      {children}
+    </form>
+  );
+}
+
+Form.propTypes = {
   /**
-   * Specify the content for the ListItem
+   * Provide children to be rendered inside of the <form> element
    */
   children: PropTypes.node,
 
   /**
-   * Specify an optional className to apply to the underlying `<li>` node
+   * Provide a custom className to be applied on the containing <form> node
    */
   className: PropTypes.string,
 };
-
-export default ListItem;
