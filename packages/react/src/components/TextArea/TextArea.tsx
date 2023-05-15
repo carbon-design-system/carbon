@@ -162,12 +162,6 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   );
   const { current: textAreaInstanceId } = useRef(getInstanceId());
 
-  useEffect(() => {
-    setTextCount(
-      defaultValue?.toString()?.length || value?.toString()?.length || 0
-    );
-  }, [value, defaultValue]);
-
   const textareaProps: {
     id: TextAreaProps['id'];
     onChange: TextAreaProps['onChange'];
@@ -263,6 +257,12 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const ref = useMergedRefs([forwardRef, textareaRef]) as
     | React.LegacyRef<HTMLTextAreaElement>
     | undefined;
+
+  useEffect(() => {
+    setTextCount(
+      textareaRef.current?.value?.length || 0
+    );
+  }, [textareaRef.current?.value])
 
   useIsomorphicEffect(() => {
     if (other.cols && textareaRef.current) {
