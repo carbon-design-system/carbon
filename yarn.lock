@@ -2246,7 +2246,7 @@ __metadata:
     inquirer: ^8.1.0
     is-git-clean: ^1.1.0
     jest-diff: ^28.1.0
-    jscodeshift: ^0.13.1
+    jscodeshift: ^0.15.0
     lodash.clonedeep: ^4.5.0
     lodash.merge: ^4.6.2
     memfs: ^3.4.0
@@ -9796,6 +9796,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"assert@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "assert@npm:2.0.0"
+  dependencies:
+    es6-object-assign: ^1.1.0
+    is-nan: ^1.2.1
+    object-is: ^1.0.1
+    util: ^0.12.0
+  checksum: bb91f181a86d10588ee16c5e09c280f9811373974c29974cbe401987ea34e966699d7989a812b0e19377b511ea0bc627f5905647ce569311824848ede382cae8
+  languageName: node
+  linkType: hard
+
 "assign-symbols@npm:^1.0.0":
   version: 1.0.0
   resolution: "assign-symbols@npm:1.0.0"
@@ -14861,6 +14873,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"es6-object-assign@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "es6-object-assign@npm:1.1.0"
+  checksum: 8d4fdf63484d78b5c64cacc2c2e1165bc7b6a64b739d2a9db6a4dc8641d99cc9efb433cdd4dc3d3d6b00bfa6ce959694e4665e3255190339945c5f33b692b5d8
+  languageName: node
+  linkType: hard
+
 "es6-promise@npm:^3.0.2":
   version: 3.3.1
   resolution: "es6-promise@npm:3.3.1"
@@ -19294,6 +19313,15 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"is-generator-function@npm:^1.0.7":
+  version: 1.0.10
+  resolution: "is-generator-function@npm:1.0.10"
+  dependencies:
+    has-tostringtag: ^1.0.0
+  checksum: d54644e7dbaccef15ceb1e5d91d680eb5068c9ee9f9eb0a9e04173eb5542c9b51b5ab52c5537f5703e48d5fddfd376817c1ca07a84a407b7115b769d4bdde72b
+  languageName: node
+  linkType: hard
+
 "is-git-clean@npm:^1.1.0":
   version: 1.1.0
   resolution: "is-git-clean@npm:1.1.0"
@@ -19375,6 +19403,16 @@ fsevents@^1.2.7:
   version: 1.0.0
   resolution: "is-module@npm:1.0.0"
   checksum: 8cd5390730c7976fb4e8546dd0b38865ee6f7bacfa08dfbb2cc07219606755f0b01709d9361e01f13009bbbd8099fa2927a8ed665118a6105d66e40f1b838c3f
+  languageName: node
+  linkType: hard
+
+"is-nan@npm:^1.2.1":
+  version: 1.3.2
+  resolution: "is-nan@npm:1.3.2"
+  dependencies:
+    call-bind: ^1.0.0
+    define-properties: ^1.1.3
+  checksum: 5dfadcef6ad12d3029d43643d9800adbba21cf3ce2ec849f734b0e14ee8da4070d82b15fdb35138716d02587c6578225b9a22779cab34888a139cc43e4e3610a
   languageName: node
   linkType: hard
 
@@ -19669,7 +19707,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"is-typed-array@npm:^1.1.10, is-typed-array@npm:^1.1.9":
+"is-typed-array@npm:^1.1.10, is-typed-array@npm:^1.1.3, is-typed-array@npm:^1.1.9":
   version: 1.1.10
   resolution: "is-typed-array@npm:1.1.10"
   dependencies:
@@ -21120,9 +21158,9 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"jscodeshift@npm:^0.13.1":
-  version: 0.13.1
-  resolution: "jscodeshift@npm:0.13.1"
+"jscodeshift@npm:^0.15.0":
+  version: 0.15.0
+  resolution: "jscodeshift@npm:0.15.0"
   dependencies:
     "@babel/core": ^7.13.16
     "@babel/parser": ^7.13.16
@@ -21137,17 +21175,20 @@ fsevents@^1.2.7:
     chalk: ^4.1.2
     flow-parser: 0.*
     graceful-fs: ^4.2.4
-    micromatch: ^3.1.10
+    micromatch: ^4.0.4
     neo-async: ^2.5.0
     node-dir: ^0.1.17
-    recast: ^0.20.4
+    recast: ^0.23.1
     temp: ^0.8.4
     write-file-atomic: ^2.3.0
   peerDependencies:
     "@babel/preset-env": ^7.1.6
+  peerDependenciesMeta:
+    "@babel/preset-env":
+      optional: true
   bin:
     jscodeshift: bin/jscodeshift.js
-  checksum: 1c35938de5fc29cafec80e2c37d5c3411f85cd5d40e0243b52f2da0c1ab4b659daddfd62de558eca5d562303616f7838097727b651f4ad8e32b1e96f169cdd76
+  checksum: 2ab7e7fe0fdaaeeeb6a26a570b19f60ccd42a779ad918372c3f7bf3ea534727cdd80d02161ebef952a9869fcb5adfb4accb66b386633fa5279e8018a47e7500f
   languageName: node
   linkType: hard
 
@@ -27926,15 +27967,16 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"recast@npm:^0.20.4":
-  version: 0.20.5
-  resolution: "recast@npm:0.20.5"
+"recast@npm:^0.23.1":
+  version: 0.23.2
+  resolution: "recast@npm:0.23.2"
   dependencies:
-    ast-types: 0.14.2
+    assert: ^2.0.0
+    ast-types: ^0.16.1
     esprima: ~4.0.0
     source-map: ~0.6.1
     tslib: ^2.0.1
-  checksum: 14c35115cd9965950724cb2968f069a247fa79ce890643ab6dc3795c705b363f7b92a45238e9f765387c306763be9955f72047bb9d15b5d60b0a55f9e7912d5a
+  checksum: 04c2617cb04c4d02a5c9e1bb75b8e7afc21d1ba7babce25303732f035c3d4b2f945d727f34c3976223d800592ea31e6641cfd33700a8699c02025040174af0b6
   languageName: node
   linkType: hard
 
@@ -32738,6 +32780,19 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"util@npm:^0.12.0":
+  version: 0.12.5
+  resolution: "util@npm:0.12.5"
+  dependencies:
+    inherits: ^2.0.3
+    is-arguments: ^1.0.4
+    is-generator-function: ^1.0.7
+    is-typed-array: ^1.1.3
+    which-typed-array: ^1.1.2
+  checksum: 705e51f0de5b446f4edec10739752ac25856541e0254ea1e7e45e5b9f9b0cb105bc4bd415736a6210edc68245a7f903bf085ffb08dd7deb8a0e847f60538a38a
+  languageName: node
+  linkType: hard
+
 "utila@npm:~0.4":
   version: 0.4.0
   resolution: "utila@npm:0.4.0"
@@ -33665,7 +33720,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"which-typed-array@npm:^1.1.9":
+"which-typed-array@npm:^1.1.2, which-typed-array@npm:^1.1.9":
   version: 1.1.9
   resolution: "which-typed-array@npm:1.1.9"
   dependencies:
