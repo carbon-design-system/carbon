@@ -14,8 +14,6 @@ import ControlledPasswordInput from './ControlledPasswordInput';
 import deprecate from '../../prop-types/deprecate';
 import { textInputProps } from './util';
 import { FormContext } from '../FluidForm';
-import { useFeatureFlag } from '../FeatureFlags';
-import * as FeatureFlags from '@carbon/feature-flags';
 import { usePrefix } from '../../internal/usePrefix';
 import { useAnnouncer } from '../../internal/useAnnouncer';
 
@@ -171,8 +169,6 @@ const TextInput = React.forwardRef(function TextInput(
 ) {
   const prefix = usePrefix();
 
-  const enabled = useFeatureFlag('enable-v11-release');
-
   const { defaultValue, value } = rest;
   const [textCount, setTextCount] = useState(
     defaultValue?.toString().length || value?.toString().length || 0
@@ -188,16 +184,12 @@ const TextInput = React.forwardRef(function TextInput(
     warnText,
   });
 
-  const textInputClasses = classNames(
-    `${prefix}--text-input`,
-    [enabled ? null : className],
-    {
-      [`${prefix}--text-input--light`]: light,
-      [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
-      [`${prefix}--text-input--warning`]: normalizedProps.warn,
-      [`${prefix}--text-input--${size}`]: size,
-    }
-  );
+  const textInputClasses = classNames(`${prefix}--text-input`, {
+    [`${prefix}--text-input--light`]: light,
+    [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
+    [`${prefix}--text-input--warning`]: normalizedProps.warn,
+    [`${prefix}--text-input--${size}`]: size,
+  });
   const sharedTextInputProps = {
     id,
     onChange: (evt) => {
@@ -227,11 +219,7 @@ const TextInput = React.forwardRef(function TextInput(
   }
 
   const inputWrapperClasses = classNames(
-    [
-      enabled
-        ? classNames(`${prefix}--form-item`, className)
-        : `${prefix}--form-item`,
-    ],
+    [classNames(`${prefix}--form-item`, className)],
     `${prefix}--text-input-wrapper`,
     {
       [`${prefix}--text-input-wrapper--readonly`]: readOnly,
@@ -442,9 +430,7 @@ TextInput.propTypes = {
   /**
    * Specify the size of the Text Input. Currently supports the following:
    */
-  size: FeatureFlags.enabled('enable-v11-release')
-    ? PropTypes.oneOf(['sm', 'md', 'lg'])
-    : PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * Specify the type of the `<input>`

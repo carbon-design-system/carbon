@@ -3063,7 +3063,6 @@ Map {
       "buttonLabel": "",
       "disabled": false,
       "filenameStatus": "uploading",
-      "iconDescription": undefined,
       "multiple": false,
       "onClick": [Function],
     },
@@ -6426,7 +6425,6 @@ Map {
   "SelectItemGroup" => Object {
     "defaultProps": Object {
       "disabled": false,
-      "label": undefined,
     },
     "propTypes": Object {
       "children": Object {
