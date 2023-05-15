@@ -178,7 +178,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
         // delay textCount assignation to give the textarea element value time to catch up if is a controlled input
         setTimeout(() => {
           setTextCount(evt.target.value?.length);
-        },0);
+        }, 0);
         onChange(evt);
       }
     },
