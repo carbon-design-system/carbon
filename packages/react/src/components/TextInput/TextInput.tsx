@@ -99,9 +99,7 @@ export interface TextInputProps
    * Optionally provide an `onChange` handler that is called whenever `<input>`
    * is updated
    */
-  onChange?: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 
   /**
    * Optionally provide an `onClick` handler that is called whenever the
