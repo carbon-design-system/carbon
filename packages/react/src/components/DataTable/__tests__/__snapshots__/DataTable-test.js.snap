@@ -483,7 +483,6 @@ exports[`DataTable behaves as expected selection should render and match snapsho
           role="search"
         >
           <div
-            aria-labelledby="custom-id"
             class="cds--search-magnifier"
           >
             <svg
@@ -886,7 +885,6 @@ exports[`DataTable renders as expected - Component API should render and match s
           role="search"
         >
           <div
-            aria-labelledby="custom-id"
             class="cds--search-magnifier"
           >
             <svg
