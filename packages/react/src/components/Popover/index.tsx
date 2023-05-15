@@ -12,6 +12,7 @@ import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
+import { useWindowEvent } from '../../internal/useEvent';
 
 interface PopoverContext {
   floating: React.Ref<HTMLSpanElement>;
@@ -80,6 +81,12 @@ interface PopoverBaseProps {
   isTabTip?: boolean;
 
   /**
+   * Specify a handler for closing popover.
+   * The handler should care of closing the popover, e.g. changing the `open` prop.
+   */
+  onRequestClose?: Function;
+
+  /**
    * Specify whether the component is currently open or closed
    */
   open: boolean;
@@ -102,6 +109,7 @@ const Popover = React.forwardRef(
       children,
       dropShadow = true,
       highContrast = false,
+      onRequestClose,
       open,
       ...rest
     }: PopoverProps<T>,
@@ -110,6 +118,19 @@ const Popover = React.forwardRef(
     const prefix = usePrefix();
     const floating = useRef<HTMLSpanElement>(null);
     const popover = useRef<Element>(null);
+
+    // If the `Popover` is the last focusable item in the tab order, it shoudl also close when the browser window loses focus  (#12922)
+    useWindowEvent('blur', () => {
+      if (open) {
+        onRequestClose?.();
+      }
+    });
+
+    useWindowEvent('click', (event) => {
+      if (open && !popover?.current?.contains(event.target)) {
+        onRequestClose?.();
+      }
+    });
 
     const value = useMemo(() => {
       return {
@@ -369,6 +390,12 @@ Popover.propTypes = {
    * Render the component using the tab tip variant
    */
   isTabTip: PropTypes.bool,
+
+  /**
+   * Specify a handler for closing popover.
+   * The handler should care of closing the popover, e.g. changing the `open` prop.
+   */
+  onRequestClose: PropTypes.func,
 
   /**
    * Specify whether the component is currently open or closed
