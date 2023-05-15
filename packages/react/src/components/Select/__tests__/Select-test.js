@@ -11,7 +11,6 @@ import SelectItem from '../../SelectItem';
 import SelectSkeleton from '../../Select/Select.Skeleton';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
-import { FeatureFlags } from '../../FeatureFlags';
 
 const prefix = 'cds';
 
@@ -58,9 +57,7 @@ describe('Select', () => {
 
     it('should support a custom `className` prop on the outermost element', () => {
       const { container } = render(
-        <FeatureFlags flags={{ 'enable-v11-release': true }}>
-          <Select id="select" labelText="Select" className="custom-class" />
-        </FeatureFlags>
+        <Select id="select" labelText="Select" className="custom-class" />
       );
 
       expect(container.firstChild).toHaveClass('custom-class');
