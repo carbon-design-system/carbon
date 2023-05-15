@@ -97,8 +97,7 @@ describe('Feedback', () => {
 
     const button = screen.getByTestId('copy-btn-6');
     await user.click(button);
-    // returns array of 2 for visible tooltip text and assistive text
-    expect(screen.getAllByText('custom-feedback').length).toBe(2);
+    expect(screen.getAllByText('custom-feedback').length).toBe(1);
   });
 
   it('should allow users to override default feedback timeout via prop', async () => {

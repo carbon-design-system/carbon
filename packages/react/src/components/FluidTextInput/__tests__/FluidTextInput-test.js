@@ -9,7 +9,6 @@ import React from 'react';
 import FluidTextInput from '../FluidTextInput';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
-import { FeatureFlags } from '../../FeatureFlags';
 
 const prefix = 'cds';
 
@@ -17,9 +16,7 @@ describe('FluidTextInput', () => {
   describe('renders as expected - Component API', () => {
     it('should render as expected', () => {
       const { container } = render(
-        <FeatureFlags flags={{ 'enable-v11-release': true }}>
-          <FluidTextInput id="input-1" labelText="FluidTextInput label" />
-        </FeatureFlags>
+        <FluidTextInput id="input-1" labelText="FluidTextInput label" />
       );
 
       expect(container.firstChild).toHaveClass(`${prefix}--text-input--fluid`);
@@ -42,20 +39,6 @@ describe('FluidTextInput', () => {
 
     it('should support a custom `className` prop on the outermost element', () => {
       const { container } = render(
-        <FeatureFlags flags={{ 'enable-v11-release': true }}>
-          <FluidTextInput
-            id="input-1"
-            labelText="FluidTextInput label"
-            className="custom-class"
-          />
-        </FeatureFlags>
-      );
-
-      expect(container.firstChild).toHaveClass('custom-class');
-    });
-
-    it('should support a custom `className` prop on the input element (V10)', () => {
-      render(
         <FluidTextInput
           id="input-1"
           labelText="FluidTextInput label"
@@ -63,7 +46,7 @@ describe('FluidTextInput', () => {
         />
       );
 
-      expect(screen.getByRole('textbox')).toHaveClass('custom-class');
+      expect(container.firstChild).toHaveClass('custom-class');
     });
 
     it('should respect defaultValue prop', () => {
