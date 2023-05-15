@@ -78,17 +78,17 @@ Clickable.argTypes = {
 
 export const ClickableWithLayer = () => {
   return (
-    <div className={experimentalClassname}>
-      <WithLayer>
-        {(layer) => (
+    <WithLayer>
+      {(layer) => (
+        <div className={experimentalClassname}>
           <ClickableTile
             id={`clickable-tile-${layer}`}
             href="https://www.carbondesignsystem.com/">
             Clickable Tile
           </ClickableTile>
-        )}
-      </WithLayer>
-    </div>
+        </div>
+      )}
+    </WithLayer>
   );
 };
 
@@ -183,9 +183,9 @@ Radio.argTypes = {
 
 export const RadioWithLayer = () => {
   return (
-    <div className={experimentalClassname}>
-      <WithLayer>
-        {(layer) => (
+    <WithLayer>
+      {(layer) => (
+        <div className={experimentalClassname}>
           <TileGroup
             defaultSelected="default-selected"
             legend="Radio Tile Group"
@@ -200,9 +200,9 @@ export const RadioWithLayer = () => {
               Option 2
             </RadioTile>
           </TileGroup>
-        )}
-      </WithLayer>
-    </div>
+        </div>
+      )}
+    </WithLayer>
   );
 };
 
