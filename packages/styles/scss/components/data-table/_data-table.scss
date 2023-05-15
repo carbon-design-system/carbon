@@ -673,8 +673,12 @@
       min-height: 3rem;
     }
 
-    &:not(.#{$prefix}--data-table--xs):not(.#{$prefix}--data-table--xl):not(.#{$prefix}--data-table--sm)
-      td:not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-checkbox) {
+    &:not(.#{$prefix}--data-table--xs):not(.#{$prefix}--data-table--xl):not(
+        .#{$prefix}--data-table--sm
+      )
+      td:not(.#{$prefix}--table-column-menu):not(
+        .#{$prefix}--table-column-checkbox
+      ) {
       padding-top: rem(14px);
     }
 
@@ -741,8 +745,12 @@
       border-bottom: 0;
     }
 
-    th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand):not(.#{$prefix}--table-column-icon),
-    td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand):not(.#{$prefix}--table-column-icon) {
+    th:not(.#{$prefix}--table-column-checkbox):not(
+        .#{$prefix}--table-column-menu
+      ):not(.#{$prefix}--table-expand):not(.#{$prefix}--table-column-icon),
+    td:not(.#{$prefix}--table-column-checkbox):not(
+        .#{$prefix}--table-column-menu
+      ):not(.#{$prefix}--table-expand):not(.#{$prefix}--table-column-icon) {
       width: 100%;
       min-width: 0;
     }

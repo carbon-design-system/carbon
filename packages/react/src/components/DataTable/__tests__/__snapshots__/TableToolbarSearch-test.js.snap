@@ -8,7 +8,6 @@ exports[`TableToolbarSearch renders as expected - Component API should render 1`
     role="search"
   >
     <div
-      aria-labelledby="custom-id"
       class="cds--search-magnifier"
     >
       <svg

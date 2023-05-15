@@ -95,7 +95,9 @@
     padding-left: 0;
   }
 
-  .#{$prefix}--multi-select--filterable.#{$prefix}--list-box--disabled:hover:not(.#{$prefix}--multi-select--filterable)
+  .#{$prefix}--multi-select--filterable.#{$prefix}--list-box--disabled:hover:not(
+      .#{$prefix}--multi-select--filterable
+    )
     .#{$prefix}--text-input {
     background-color: $field;
   }

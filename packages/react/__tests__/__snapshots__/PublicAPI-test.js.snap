@@ -3770,12 +3770,13 @@ Map {
     },
   },
   "HeaderContainer" => Object {
-    "defaultProps": Object {
-      "isSideNavExpanded": false,
-    },
     "propTypes": Object {
       "isSideNavExpanded": Object {
         "type": "bool",
+      },
+      "render": Object {
+        "isRequired": true,
+        "type": "elementType",
       },
     },
   },
@@ -6526,6 +6527,9 @@ Map {
       },
       "expanded": Object {
         "type": "bool",
+      },
+      "href": Object {
+        "type": "string",
       },
       "isChildOfHeader": Object {
         "type": "bool",
