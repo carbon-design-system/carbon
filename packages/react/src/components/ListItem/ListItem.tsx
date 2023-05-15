@@ -6,19 +6,17 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type ComponentProps } from 'react';
 import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-const ListItem = ({ children, className, ...other }) => {
+type ListItemProps = ComponentProps<'li'>;
+
+export default function ListItem({ className, ...other }: ListItemProps) {
   const prefix = usePrefix();
   const classNames = classnames(`${prefix}--list__item`, className);
-  return (
-    <li className={classNames} {...other}>
-      {children}
-    </li>
-  );
-};
+  return <li className={classNames} {...other} />;
+}
 
 ListItem.propTypes = {
   /**
@@ -31,5 +29,3 @@ ListItem.propTypes = {
    */
   className: PropTypes.string,
 };
-
-export default ListItem;
