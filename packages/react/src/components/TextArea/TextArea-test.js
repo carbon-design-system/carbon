@@ -25,10 +25,10 @@ describe('TextArea', () => {
     });
 
     it('should support a custom `className` prop on the outermost element', () => {
-      render(
+      const { container } = render(
         <TextArea className="custom-class" id="testing" labelText="testLabel" />
       );
-      expect(screen.getByLabelText('testLabel')).toHaveClass('custom-class');
+      expect(container.firstChild).toHaveClass('custom-class');
     });
 
     it('should have default cols settings as expected', () => {

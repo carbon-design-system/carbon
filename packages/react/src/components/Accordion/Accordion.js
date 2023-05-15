@@ -9,7 +9,6 @@ import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import PropTypes from 'prop-types';
 import React from 'react';
-import * as FeatureFlags from '@carbon/feature-flags';
 
 function Accordion({
   align = 'end',
@@ -66,9 +65,7 @@ Accordion.propTypes = {
   /**
    * Specify the size of the Accordion. Currently supports the following:
    */
-  size: FeatureFlags.enabled('enable-v11-release')
-    ? PropTypes.oneOf(['sm', 'md', 'lg'])
-    : PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };
 
 export default Accordion;

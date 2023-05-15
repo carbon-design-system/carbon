@@ -22,7 +22,6 @@ import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { useId } from '../../internal/useId';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
-import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 
@@ -78,7 +77,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
   const textInput = useRef();
   const filterableMultiSelectInstanceId = useId();
 
-  const enabled = useFeatureFlag('enable-v11-release');
   const prefix = usePrefix();
 
   if (prevOpen !== open) {
@@ -93,7 +91,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
     `${prefix}--multi-select__wrapper`,
     `${prefix}--multi-select--filterable__wrapper`,
     `${prefix}--list-box__wrapper`,
-    [enabled ? containerClassName : null],
+    containerClassName,
     {
       [`${prefix}--multi-select__wrapper--inline`]: inline,
       [`${prefix}--list-box__wrapper--inline`]: inline,
@@ -248,7 +246,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
               `${prefix}--multi-select`,
               `${prefix}--combo-box`,
               `${prefix}--multi-select--filterable`,
-              [enabled ? null : containerClassName],
               {
                 [`${prefix}--multi-select--invalid`]: invalid,
                 [`${prefix}--multi-select--invalid--focused`]:

@@ -13,7 +13,7 @@ import { useCallback, useEffect, useRef } from 'react';
  * callback prop but don't want it to be added to the dependency array of an
  * effect.
  *
- * @param {Function} callback
+ * @param {Function | undefined} callback
  * @returns {Function}
  */
 export function useSavedCallback(callback) {

@@ -10,7 +10,6 @@ import React, { useState, useContext, useRef } from 'react';
 import classNames from 'classnames';
 import deprecate from '../../prop-types/deprecate';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
-import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { useAnnouncer } from '../../internal/useAnnouncer';
@@ -161,7 +160,6 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   } = props;
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
-  const enabled = useFeatureFlag('enable-v11-release');
   const { defaultValue, value, disabled } = other;
 
   const [textCount, setTextCount] = useState(
@@ -303,15 +301,11 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     </div>
   ) : null;
 
-  const textareaClasses = classNames(
-    `${prefix}--text-area`,
-    [enabled ? null : className],
-    {
-      [`${prefix}--text-area--light`]: light,
-      [`${prefix}--text-area--invalid`]: invalid,
-      [`${prefix}--text-area--warn`]: warn,
-    }
-  );
+  const textareaClasses = classNames(`${prefix}--text-area`, {
+    [`${prefix}--text-area--light`]: light,
+    [`${prefix}--text-area--invalid`]: invalid,
+    [`${prefix}--text-area--warn`]: warn,
+  });
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const ref = useMergedRefs([forwardRef, textareaRef]) as
@@ -350,12 +344,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   );
 
   return (
-    <div
-      className={
-        enabled
-          ? classNames(`${prefix}--form-item`, className)
-          : `${prefix}--form-item`
-      }>
+    <div className={classNames(`${prefix}--form-item`, className)}>
       <div className={`${prefix}--text-area__label-wrapper`}>
         {label}
         {counter}
