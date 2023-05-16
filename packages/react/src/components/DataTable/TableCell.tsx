@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { TdHTMLAttributes, useCallback, useContext, useLayoutEffect, useRef } from 'react';
+import React, {
+  TdHTMLAttributes,
+  useCallback,
+  useContext,
+  useLayoutEffect,
+  useRef,
+} from 'react';
 import PropTypes from 'prop-types';
 import { SimpleTableContext } from './SimpleTableContext';
 import { useEvent } from '../../internal/useEvent';
@@ -14,11 +20,12 @@ import { debounce } from 'debounce';
 export type TableCellProps = TdHTMLAttributes<HTMLTableCellElement>;
 
 const TableCell: React.FC<TableCellProps> = ({ className, ...other }) => {
-  const { autoAlign, toggleTableAlignmentClass } = useContext(SimpleTableContext);
+  const { autoAlign, toggleTableAlignmentClass } =
+    useContext(SimpleTableContext);
   const cellRef = useRef<HTMLTableCellElement>(null);
 
   const setTableAlignment = useCallback(() => {
-    if(autoAlign === "cell"){
+    if (autoAlign === 'cell') {
       const fragment = document.createDocumentFragment();
       const canvas = document.createElement('canvas');
       fragment.appendChild(canvas);
@@ -35,7 +42,7 @@ const TableCell: React.FC<TableCellProps> = ({ className, ...other }) => {
           ? computedStyles.font
           : `${computedStyles.fontSize}" "${computedStyles.fontFamily}`;
 
-        const measuredText = context?.measureText(td.textContent ?? '')
+        const measuredText = context?.measureText(td.textContent ?? '');
 
         let textWidth = measuredText.width ?? 0;
         // account for letter spacing
@@ -56,7 +63,7 @@ const TableCell: React.FC<TableCellProps> = ({ className, ...other }) => {
         // if measured textWidth is larger than the cell's width, then the content is being wrapped
         if (textWidth > td.getBoundingClientRect().width) {
           setTimeout(() => {
-            toggleTableAlignmentClass(true)
+            toggleTableAlignmentClass(true);
           }, 0);
         }
       }
@@ -70,12 +77,12 @@ const TableCell: React.FC<TableCellProps> = ({ className, ...other }) => {
   useLayoutEffect(() => {
     setTableAlignment();
     return () => {
-      debouncedSetTableAlignment.clear()
-    }
+      debouncedSetTableAlignment.clear();
+    };
   }, [setTableAlignment, debouncedSetTableAlignment]);
 
-  return <td {...other} className={className} ref={cellRef} />
-}
+  return <td {...other} className={className} ref={cellRef} />;
+};
 
 TableCell.propTypes = {
   className: PropTypes.string,

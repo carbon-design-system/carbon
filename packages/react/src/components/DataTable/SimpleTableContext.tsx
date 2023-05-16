@@ -13,6 +13,6 @@ interface SimpleTableContextType {
 }
 
 export const SimpleTableContext = createContext({
-    autoAlign: 'none',
-    toggleTableAlignmentClass: () => null
+  autoAlign: 'none',
+  toggleTableAlignmentClass: () => null,
 } as SimpleTableContextType);

@@ -21,7 +21,7 @@ import { SimpleTableContext } from './SimpleTableContext';
 import { useEvent } from '../../internal/useEvent';
 
 interface TableProps {
-  autoAlign?: "table" | "row" | "cell" | "none";
+  autoAlign?: 'table' | 'row' | 'cell' | 'none';
 
   className?: string;
 
@@ -80,15 +80,20 @@ export const Table = ({
     [`${prefix}--data-table--visible-overflow-menu`]: !overflowMenuOnHover,
   });
 
-  const toggleTableAlignmentClass = useCallback((alignTop = false) => {
-    alignTop ?
-    tableRef.current?.classList.add(`${prefix}--data-table--top-aligned`) :
-    tableRef.current?.classList.remove(`${prefix}--data-table--top-aligned`);
-  }, [prefix])
+  const toggleTableAlignmentClass = useCallback(
+    (alignTop = false) => {
+      alignTop
+        ? tableRef.current?.classList.add(`${prefix}--data-table--top-aligned`)
+        : tableRef.current?.classList.remove(
+            `${prefix}--data-table--top-aligned`
+          );
+    },
+    [prefix]
+  );
 
   const setTableAlignment = useCallback(() => {
-    if(autoAlign === 'table'){
-      console.log("setTableAlignment call")
+    if (autoAlign === 'table') {
+      console.log('setTableAlignment call');
       const start = Date.now();
       const fragment = document.createDocumentFragment();
       const canvas = document.createElement('canvas');
@@ -107,13 +112,14 @@ export const Table = ({
             ? computedStyles.font
             : `${computedStyles.fontSize}" "${computedStyles.fontFamily}`;
 
-          const measuredText = context?.measureText(td.textContent ?? '')
+          const measuredText = context?.measureText(td.textContent ?? '');
 
           let textWidth = measuredText.width ?? 0;
           // account for letter spacing
           const letterSpacing = computedStyles.letterSpacing?.split('px');
           if (letterSpacing && letterSpacing.length) {
-            textWidth += Number(letterSpacing[0]) * (td.textContent?.length ?? 0);
+            textWidth +=
+              Number(letterSpacing[0]) * (td.textContent?.length ?? 0);
           }
           // account for padding
           const paddingLeft = computedStyles.paddingLeft?.split('px');
@@ -130,13 +136,12 @@ export const Table = ({
             return true;
           }
         });
-        toggleTableAlignmentClass(isMultiline)
+        toggleTableAlignmentClass(isMultiline);
       }
       const end = Date.now();
       console.log(`Execution time: ${end - start} ms`);
-    }
-    else {
-      toggleTableAlignmentClass(false)
+    } else {
+      toggleTableAlignmentClass(false);
     }
   }, [autoAlign, toggleTableAlignmentClass]);
 
@@ -147,22 +152,26 @@ export const Table = ({
   useEffect(() => {
     setTableAlignment();
     return () => {
-      debouncedSetTableAlignment.clear()
-    }
+      debouncedSetTableAlignment.clear();
+    };
   }, [setTableAlignment, size, debouncedSetTableAlignment]);
 
   const table = (
-    <SimpleTableContext.Provider value={{autoAlign: autoAlign, toggleTableAlignmentClass: toggleTableAlignmentClass}}>
-    <div className={`${prefix}--data-table-content`}>
-      <table
-        aria-labelledby={titleId}
-        aria-describedby={descriptionId}
-        {...other}
-        className={componentClass}
-        ref={tableRef}>
-        {children}
-      </table>
-    </div>
+    <SimpleTableContext.Provider
+      value={{
+        autoAlign: autoAlign,
+        toggleTableAlignmentClass: toggleTableAlignmentClass,
+      }}>
+      <div className={`${prefix}--data-table-content`}>
+        <table
+          aria-labelledby={titleId}
+          aria-describedby={descriptionId}
+          {...other}
+          className={componentClass}
+          ref={tableRef}>
+          {children}
+        </table>
+      </div>
     </SimpleTableContext.Provider>
   );
   return stickyHeader ? (

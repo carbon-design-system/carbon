@@ -27,7 +27,8 @@ export interface TableRowProps extends ReactAttr<HTMLTableRowElement> {
 }
 
 const TableRow = (props: TableRowProps) => {
-  const { autoAlign, toggleTableAlignmentClass } = useContext(SimpleTableContext);
+  const { autoAlign, toggleTableAlignmentClass } =
+    useContext(SimpleTableContext);
   const prefix = usePrefix();
   const rowRef = useRef<HTMLTableRowElement>(null);
   // Remove unnecessary props if provided to this component, these are
@@ -37,7 +38,7 @@ const TableRow = (props: TableRowProps) => {
   });
 
   const setTableAlignment = useCallback(() => {
-    if(autoAlign === "row"){
+    if (autoAlign === 'row') {
       const fragment = document.createDocumentFragment();
       const canvas = document.createElement('canvas');
       fragment.appendChild(canvas);
@@ -55,13 +56,14 @@ const TableRow = (props: TableRowProps) => {
             ? computedStyles.font
             : `${computedStyles.fontSize}" "${computedStyles.fontFamily}`;
 
-          const measuredText = context?.measureText(td.textContent ?? '')
+          const measuredText = context?.measureText(td.textContent ?? '');
 
           let textWidth = measuredText.width ?? 0;
           // account for letter spacing
           const letterSpacing = computedStyles.letterSpacing?.split('px');
           if (letterSpacing && letterSpacing.length) {
-            textWidth += Number(letterSpacing[0]) * (td.textContent?.length ?? 0);
+            textWidth +=
+              Number(letterSpacing[0]) * (td.textContent?.length ?? 0);
           }
           // account for padding
           const paddingLeft = computedStyles.paddingLeft?.split('px');
@@ -81,7 +83,7 @@ const TableRow = (props: TableRowProps) => {
 
         if (isMultiline) {
           setTimeout(() => {
-            toggleTableAlignmentClass(true)
+            toggleTableAlignmentClass(true);
           }, 0);
         }
       }
@@ -95,8 +97,8 @@ const TableRow = (props: TableRowProps) => {
   useLayoutEffect(() => {
     setTableAlignment();
     return () => {
-      debouncedSetTableAlignment.clear()
-    }
+      debouncedSetTableAlignment.clear();
+    };
   }, [setTableAlignment, debouncedSetTableAlignment]);
 
   const cleanProps = {
