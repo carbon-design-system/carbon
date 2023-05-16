@@ -68,7 +68,6 @@ describe('@carbon/styles/scss/compat', () => {
     await expect(
       render(`
           @use '../../type';
-
           div {
             @include type.type-style('caption-01');
             @include type.type-style('caption-02');
@@ -80,6 +79,18 @@ describe('@carbon/styles/scss/compat', () => {
             @include type.type-style('expressive-heading-01');
             @include type.type-style('expressive-heading-03', true);
             @include type.type-style('display-01', true);
+          }
+        `)
+    ).resolves.not.toThrow();
+  });
+
+  it('should export v10 layout tokens', async () => {
+    await expect(
+      render(`
+          @use '../../layout' as spacing;
+
+          div {
+            margin-right: spacing.$layout-01;
           }
         `)
     ).resolves.not.toThrow();
