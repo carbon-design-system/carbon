@@ -29,7 +29,6 @@ import ListBox, {
 } from '../ListBox';
 import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
-import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ReactAttr } from '../../types/common';
@@ -271,25 +270,19 @@ const Dropdown = React.forwardRef(
     const inline = type === 'inline';
     const showWarning = !invalid && warn;
 
-    const enabled = useFeatureFlag('enable-v11-release');
-
     const [isFocused, setIsFocused] = useState(false);
 
-    const className = cx(
-      `${prefix}--dropdown`,
-      [enabled ? null : containerClassName],
-      {
-        [`${prefix}--dropdown--invalid`]: invalid,
-        [`${prefix}--dropdown--warning`]: showWarning,
-        [`${prefix}--dropdown--open`]: isOpen,
-        [`${prefix}--dropdown--inline`]: inline,
-        [`${prefix}--dropdown--disabled`]: disabled,
-        [`${prefix}--dropdown--light`]: light,
-        [`${prefix}--dropdown--readonly`]: readOnly,
-        [`${prefix}--dropdown--${size}`]: size,
-        [`${prefix}--list-box--up`]: direction === 'top',
-      }
-    );
+    const className = cx(`${prefix}--dropdown`, {
+      [`${prefix}--dropdown--invalid`]: invalid,
+      [`${prefix}--dropdown--warning`]: showWarning,
+      [`${prefix}--dropdown--open`]: isOpen,
+      [`${prefix}--dropdown--inline`]: inline,
+      [`${prefix}--dropdown--disabled`]: disabled,
+      [`${prefix}--dropdown--light`]: light,
+      [`${prefix}--dropdown--readonly`]: readOnly,
+      [`${prefix}--dropdown--${size}`]: size,
+      [`${prefix}--list-box--up`]: direction === 'top',
+    });
 
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
@@ -303,7 +296,7 @@ const Dropdown = React.forwardRef(
     const wrapperClasses = cx(
       `${prefix}--dropdown__wrapper`,
       `${prefix}--list-box__wrapper`,
-      [enabled ? containerClassName : null],
+      containerClassName,
       {
         [`${prefix}--dropdown__wrapper--inline`]: inline,
         [`${prefix}--list-box__wrapper--inline`]: inline,

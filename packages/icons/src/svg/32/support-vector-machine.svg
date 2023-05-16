@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <circle cx="26" cy="18" r="4"/>
+  <circle cx="18" cy="26" r="4"/>
+  <rect x="-2.7991" y="15.0001" width="37.5982" height="1.9998" transform="translate(-6.6274 16) rotate(-45)"/>
+  <path d="m14,10c-2.2056,0-4-1.7944-4-4s1.7944-4,4-4,4,1.7944,4,4-1.7944,4-4,4Zm0-6c-1.1028,0-2,.8972-2,2s.8972,2,2,2,2-.8972,2-2-.8972-2-2-2Z"/>
+  <path d="m6,18c-2.2056,0-4-1.7944-4-4s1.7944-4,4-4,4,1.7944,4,4-1.7944,4-4,4Zm0-6c-1.1028,0-2,.8972-2,2s.8972,2,2,2,2-.8972,2-2-.8972-2-2-2Z"/>
+  <rect id="_Transparent_Rectangle_" data-name="&amp;lt;Transparent Rectangle&amp;gt;" class="cls-1" width="32" height="32"/>
+</svg>

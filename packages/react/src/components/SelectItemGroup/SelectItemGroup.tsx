@@ -8,7 +8,6 @@
 import PropTypes from 'prop-types';
 import React, { HTMLAttributes, ReactNode } from 'react';
 import classnames from 'classnames';
-import * as FeatureFlags from '@carbon/feature-flags';
 import { usePrefix } from '../../internal/usePrefix';
 
 export interface SelectItemGroupProps
@@ -33,6 +32,7 @@ export interface SelectItemGroupProps
    */
   label: string;
 }
+
 const SelectItemGroup = ({
   children,
   className,
@@ -77,9 +77,6 @@ SelectItemGroup.propTypes = {
 
 SelectItemGroup.defaultProps = {
   disabled: false,
-  label: FeatureFlags.enabled('enable-v11-release')
-    ? undefined
-    : 'Provide label',
 };
 
 export default SelectItemGroup;

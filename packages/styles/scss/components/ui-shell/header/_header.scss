@@ -254,12 +254,11 @@
   a.#{$prefix}--header__menu-item[aria-current='page']::after,
   .#{$prefix}--header__menu-item--current::after {
     position: absolute;
-    top: 0;
-    right: 0;
     bottom: -2px;
-    left: 0;
-    width: 100%;
-    border-bottom: 3px solid $border-interactive;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: 3px;
+    background-color: $border-interactive;
     content: '';
   }
 
@@ -271,16 +270,21 @@
   .#{$prefix}--header__submenu .#{$prefix}--header__menu {
     a.#{$prefix}--header__menu-item[aria-current='page']::after,
     .#{$prefix}--header__menu-item--current::after {
-      bottom: 0;
+      top: -2px;
       left: -2px;
-      border-bottom: none;
-      border-left: 3px solid $border-interactive;
+      width: 3px;
+      height: calc(100% + 4px);
+      background-color: $border-interactive;
     }
 
     a.#{$prefix}--header__menu-item[aria-current='page']:focus::after,
     .#{$prefix}--header__menu-item--current:focus::after {
-      left: 0;
-      border-left: 3px solid $border-interactive;
+      top: -2px;
+      left: -2px;
+      // extra, hidden width prevents flickering on focus change
+      width: 5px;
+      height: calc(100% + 4px);
+      background-color: $border-interactive;
     }
   }
 
@@ -349,6 +353,17 @@
     .#{$prefix}--header__menu-item:active {
     background-color: $layer-active;
     color: $text-primary;
+  }
+
+  .#{$prefix}--header__menu-title[aria-expanded='true']
+    + .#{$prefix}--header__menu
+    .#{$prefix}--header__menu-item.#{$prefix}--header__menu-item--current {
+    // used for both desktop and mobile
+    background-color: $layer-selected;
+
+    &:hover {
+      background-color: $layer-selected-hover;
+    }
   }
 
   .#{$prefix}--header__menu .#{$prefix}--header__menu-item {

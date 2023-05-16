@@ -24,7 +24,6 @@ import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import mergeRefs from '../../tools/mergeRefs';
-import { useFeatureFlag } from '../FeatureFlags';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
@@ -382,18 +381,13 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
     }
   };
 
-  const enabled = useFeatureFlag('enable-v11-release');
-
   const showWarning = !invalid && warn;
-  const className = cx(
-    `${prefix}--combo-box`,
-    [enabled ? null : containerClassName],
-    {
-      [`${prefix}--list-box--up`]: direction === 'top',
-      [`${prefix}--combo-box--warning`]: showWarning,
-      [`${prefix}--combo-box--readonly`]: readOnly,
-    }
-  );
+  const className = cx(`${prefix}--combo-box`, {
+    [`${prefix}--list-box--up`]: direction === 'top',
+    [`${prefix}--combo-box--warning`]: showWarning,
+    [`${prefix}--combo-box--readonly`]: readOnly,
+  });
+
   const titleClasses = cx(`${prefix}--label`, {
     [`${prefix}--label--disabled`]: disabled,
   });
@@ -404,7 +398,7 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
     [`${prefix}--form__helper-text--disabled`]: disabled,
   });
   const wrapperClasses = cx(`${prefix}--list-box__wrapper`, [
-    enabled ? containerClassName : null,
+    containerClassName,
     {
       [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
       [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
