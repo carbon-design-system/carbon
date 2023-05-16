@@ -339,6 +339,11 @@ const Dropdown = React.forwardRef(
 
     const mergedRef = mergeRefs(toggleButtonProps.ref, ref);
 
+    const [currTimer, setCurrTimer] = useState<NodeJS.Timeout>();
+
+    // eslint-disable-next-line prefer-const
+    let [isTyping, setIsTyping] = useState(false);
+
     const readOnlyEventHandlers = readOnly
       ? {
           onClick: (evt: MouseEvent<HTMLButtonElement>) => {
@@ -357,7 +362,40 @@ const Dropdown = React.forwardRef(
             }
           },
         }
-      : {};
+      : {
+          onKeyDown: (evt: React.KeyboardEvent<HTMLButtonElement>) => {
+            console.log('typing should be false', isTyping);
+            if (
+              evt.code !== 'Space' ||
+              !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
+            ) {
+              setIsTyping(true);
+            }
+
+            if (
+              (isTyping && evt.code === 'Space') ||
+              !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
+            ) {
+              console.log(evt.key);
+              if (evt.code === 'Space') {
+                evt.preventDefault();
+                return;
+              }
+
+              if (currTimer) {
+                clearTimeout(currTimer);
+              }
+              setCurrTimer(
+                setTimeout(() => {
+                  setIsTyping(false);
+                }, 3000)
+              );
+            }
+            toggleButtonProps.onKeyDown(evt);
+          },
+        };
+
+    const menuProps = getMenuProps();
 
     return (
       <div className={wrapperClasses} {...other}>
@@ -418,7 +456,7 @@ const Dropdown = React.forwardRef(
               translateWithId={translateWithId}
             />
           </button>
-          <ListBox.Menu {...getMenuProps()}>
+          <ListBox.Menu {...menuProps}>
             {isOpen &&
               items.map((item, index) => {
                 const isObject = item !== null && typeof item === 'object';
