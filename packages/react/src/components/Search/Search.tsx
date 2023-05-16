@@ -201,7 +201,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
       however, it does not need a keyboard event bc the input element gets focus on keyboard nav and expands that way*/}
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
       <div
-        aria-labelledby={uniqueId}
+        aria-labelledby={onExpand ? uniqueId : undefined}
         role={onExpand ? 'button' : undefined}
         className={`${prefix}--search-magnifier`}
         onClick={onExpand}>

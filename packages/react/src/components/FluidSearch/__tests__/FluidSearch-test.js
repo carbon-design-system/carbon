@@ -8,7 +8,6 @@
 import React from 'react';
 import FluidSearch from '../FluidSearch';
 import { render } from '@testing-library/react';
-import { FeatureFlags } from '../../FeatureFlags';
 
 const prefix = 'cds';
 
@@ -16,9 +15,7 @@ describe('FluidSearch', () => {
   describe('renders as expected - Component API', () => {
     it('should render as expected', () => {
       const { container } = render(
-        <FeatureFlags flags={{ 'enable-v11-release': true }}>
-          <FluidSearch id="input-1" labelText="FluidSearch label" />
-        </FeatureFlags>
+        <FluidSearch id="input-1" labelText="FluidSearch label" />
       );
 
       expect(container.firstChild).toHaveClass(`${prefix}--search--fluid`);
