@@ -134,7 +134,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
       expanded &&
       !isFixedNav &&
       sideNavRef.current &&
-      focusedElement.id === `${prefix}--toggle_menu` &&
+      focusedElement.classList.contains(`${prefix}--header__menu-toggle`) &&
       !focusedElement.closest('nav')
     ) {
       sideNavRef.current.focus();
