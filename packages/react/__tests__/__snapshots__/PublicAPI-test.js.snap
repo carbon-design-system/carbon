@@ -3063,7 +3063,6 @@ Map {
       "buttonLabel": "",
       "disabled": false,
       "filenameStatus": "uploading",
-      "iconDescription": undefined,
       "multiple": false,
       "onClick": [Function],
     },
@@ -5387,11 +5386,6 @@ Map {
     },
   },
   "OrderedList" => Object {
-    "defaultProps": Object {
-      "isExpressive": false,
-      "native": false,
-      "nested": false,
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -6431,7 +6425,6 @@ Map {
   "SelectItemGroup" => Object {
     "defaultProps": Object {
       "disabled": false,
-      "label": undefined,
     },
     "propTypes": Object {
       "children": Object {
@@ -6549,6 +6542,9 @@ Map {
         "type": "bool",
       },
       "onOverlayClick": Object {
+        "type": "func",
+      },
+      "onSideNavBlur": Object {
         "type": "func",
       },
       "onToggle": Object {
@@ -9163,10 +9159,6 @@ Map {
     },
   },
   "UnorderedList" => Object {
-    "defaultProps": Object {
-      "isExpressive": false,
-      "nested": false,
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",

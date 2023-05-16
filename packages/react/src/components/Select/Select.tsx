@@ -22,7 +22,6 @@ import {
   WarningAltFilled,
 } from '@carbon/icons-react';
 import deprecate from '../../prop-types/deprecate';
-import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
@@ -154,25 +153,21 @@ const Select = React.forwardRef(function Select(
   ref: ForwardedRef<HTMLSelectElement>
 ) {
   const prefix = usePrefix();
-  const enabled = useFeatureFlag('enable-v11-release');
   const { isFluid } = useContext(FormContext);
   const [isFocused, setIsFocused] = useState(false);
   const { current: selectInstanceId } = useRef(getInstanceId());
 
-  const selectClasses = classNames(
-    {
-      [`${prefix}--select`]: true,
-      [`${prefix}--select--inline`]: inline,
-      [`${prefix}--select--light`]: light,
-      [`${prefix}--select--invalid`]: invalid,
-      [`${prefix}--select--disabled`]: disabled,
-      [`${prefix}--select--readonly`]: readOnly,
-      [`${prefix}--select--warning`]: warn,
-      [`${prefix}--select--fluid--invalid`]: isFluid && invalid,
-      [`${prefix}--select--fluid--focus`]: isFluid && isFocused,
-    },
-    [enabled ? null : className]
-  );
+  const selectClasses = classNames({
+    [`${prefix}--select`]: true,
+    [`${prefix}--select--inline`]: inline,
+    [`${prefix}--select--light`]: light,
+    [`${prefix}--select--invalid`]: invalid,
+    [`${prefix}--select--disabled`]: disabled,
+    [`${prefix}--select--readonly`]: readOnly,
+    [`${prefix}--select--warning`]: warn,
+    [`${prefix}--select--fluid--invalid`]: isFluid && invalid,
+    [`${prefix}--select--fluid--focus`]: isFluid && isFocused,
+  });
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: disabled,
@@ -266,12 +261,7 @@ const Select = React.forwardRef(function Select(
     );
   })();
   return (
-    <div
-      className={
-        enabled
-          ? classNames(`${prefix}--form-item`, className)
-          : `${prefix}--form-item`
-      }>
+    <div className={classNames(`${prefix}--form-item`, className)}>
       <div className={selectClasses}>
         {!noLabel && (
           <label htmlFor={id} className={labelClasses}>

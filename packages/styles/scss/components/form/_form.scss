@@ -179,12 +179,6 @@ $input-label-weight: 400 !default;
     display: block;
   }
 
-  @if not enabled('enable-v11-release') {
-    .#{$prefix}--form--fluid .#{$prefix}--fieldset {
-      margin: 0;
-    }
-  }
-
   .#{$prefix}--form--fluid input[data-invalid] {
     outline: none;
   }
