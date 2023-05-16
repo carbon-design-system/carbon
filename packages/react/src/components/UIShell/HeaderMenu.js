@@ -193,9 +193,9 @@ class HeaderMenu extends React.Component {
       ...rest
     } = this.props;
 
-    const hasActiveChildren = React.Children.toArray(children).some((child) => {
-      return child.props.isActive || child.props.isCurrentPage;
-    });
+    const hasActiveChildren = React.Children.toArray(children).some(
+      (child) => child.props.isActive || child.props.isCurrentPage
+    );
 
     const accessibilityLabel = {
       'aria-label': ariaLabel,
