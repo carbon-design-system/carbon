@@ -609,7 +609,9 @@ const Tab = React.forwardRef(function Tab(
       role="button"
       tabIndex={-1}
       aria-hidden={true}
-      className={`${prefix}--tabs__nav-item--close-icon`}
+      className={cx(`${prefix}--tabs__nav-item--close-icon`, {
+        [`${prefix}--visually-hidden`]: !dismissable,
+      })}
       onClick={handleClose}
       aria-label="Close tab"
       title="Close tab"
