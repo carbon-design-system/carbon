@@ -6,7 +6,7 @@
  */
 
 import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { useState, useContext, useRef } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import classNames from 'classnames';
 import deprecate from '../../prop-types/deprecate';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
@@ -156,9 +156,15 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const { isFluid } = useContext(FormContext);
   const { defaultValue, value, disabled } = other;
   const [textCount, setTextCount] = useState(
-    defaultValue?.toString().length || value?.toString().length || 0
+    defaultValue?.toString()?.length || value?.toString()?.length || 0
   );
   const { current: textAreaInstanceId } = useRef(getInstanceId());
+
+  useEffect(() => {
+    setTextCount(
+      defaultValue?.toString()?.length || value?.toString()?.length || 0
+    );
+  }, [value, defaultValue]);
 
   const textareaProps: {
     id: TextAreaProps['id'];
@@ -169,7 +175,10 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     id,
     onChange: (evt) => {
       if (!other.disabled && onChange) {
-        setTextCount(evt.target.value?.length);
+        // delay textCount assignation to give the textarea element value time to catch up if is a controlled input
+        setTimeout(() => {
+          setTextCount(evt.target.value?.length);
+        }, 0);
         onChange(evt);
       }
     },
