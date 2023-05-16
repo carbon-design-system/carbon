@@ -369,28 +369,38 @@ const Dropdown = React.forwardRef(
             }
           },
         }
-      : {onKeyDown: (evt: React.KeyboardEvent<HTMLButtonElement>) => {
-        console.log('typing should be false', isTyping);
-        if (evt.code !== 'Space' || !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)){
-          setIsTyping(true);
-        }
+      : {
+          onKeyDown: (evt: React.KeyboardEvent<HTMLButtonElement>) => {
+            console.log('typing should be false', isTyping);
+            if (
+              evt.code !== 'Space' ||
+              !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
+            ) {
+              setIsTyping(true);
+            }
 
-        if( isTyping && evt.code === 'Space' || !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)){
-          console.log(evt.key)
-          if (evt.code === 'Space'){
-            evt.preventDefault();
-            return;
-          }
+            if (
+              (isTyping && evt.code === 'Space') ||
+              !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
+            ) {
+              console.log(evt.key);
+              if (evt.code === 'Space') {
+                evt.preventDefault();
+                return;
+              }
 
-          if(currTimer){
-            clearTimeout(currTimer);
-          }
-          setCurrTimer(setTimeout(() => {
-            setIsTyping(false);
-          }, 3000));
-        }
-      toggleButtonProps.onKeyDown(evt);
-    }};
+              if (currTimer) {
+                clearTimeout(currTimer);
+              }
+              setCurrTimer(
+                setTimeout(() => {
+                  setIsTyping(false);
+                }, 3000)
+              );
+            }
+            toggleButtonProps.onKeyDown(evt);
+          },
+        };
 
     const menuProps = getMenuProps();
 
