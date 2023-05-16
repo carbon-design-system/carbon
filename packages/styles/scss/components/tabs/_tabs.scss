@@ -278,6 +278,7 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     //-----------------------------
 
     &.#{$prefix}--tabs--contained
+      .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--disabled)
       .#{$prefix}--tabs__nav-item--icon
       .#{$prefix}--tabs__nav-item--close-icon {
       padding: $spacing-05;
@@ -302,11 +303,19 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     }
 
     &.#{$prefix}--tabs--contained
-      .#{$prefix}--tabs__nav-item--selected
+      .#{$prefix}--tabs__nav-item:not(
+        .#{$prefix}--tabs__nav-item--disabled
+      ).#{$prefix}--tabs__nav-item--selected
       .#{$prefix}--tabs__nav-item--icon
       .#{$prefix}--tabs__nav-item--close-icon
       svg:hover {
       background-color: $layer-hover;
+    }
+
+    .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--disabled)
+      .#{$prefix}--tabs__nav-item--icon
+      .#{$prefix}--tabs__nav-item--close-icon:hover {
+      background-color: $background-hover;
     }
 
     .#{$prefix}--tabs__nav-item--icon {
@@ -320,10 +329,6 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
         cursor: pointer;
         line-height: 0;
         pointer-events: auto;
-
-        &:hover {
-          background-color: $background-hover;
-        }
       }
     }
 

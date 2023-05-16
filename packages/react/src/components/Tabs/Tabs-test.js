@@ -4,6 +4,8 @@ import { act } from 'react-dom/test-utils';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+const prefix = 'cds';
+
 describe('Tabs', () => {
   it('should update selected index based on the default provided', () => {
     render(
@@ -246,7 +248,9 @@ describe('Tab', () => {
       </Tabs>
     );
 
-    expect(screen.getAllByLabelText('Close tab').length).toBe(3);
+    expect(
+      screen.getAllByLabelText('Close tab')[0].parentElement
+    ).not.toHaveClass(`${prefix}--visually-hidden`);
   });
 
   it('should not render close icon if not dismissable', () => {
@@ -265,7 +269,9 @@ describe('Tab', () => {
       </Tabs>
     );
 
-    expect(screen.queryAllByLabelText('Close tab').length).toBe(0);
+    expect(
+      screen.queryAllByLabelText('Close tab')[0].parentElement
+    ).toHaveClass(`${prefix}--visually-hidden`);
   });
 
   it('should call onCloseTabRequest when dismissable and close icon clicked', async () => {
@@ -394,7 +400,9 @@ describe('Tab', () => {
       </Tabs>
     );
 
-    expect(screen.getAllByLabelText('Close tab').length).toBe(3);
+    expect(
+      screen.getAllByLabelText('Close tab')[0].parentElement
+    ).not.toHaveClass(`${prefix}--visaully-hidden`);
     expect(screen.queryByTestId('svg')).not.toBeInTheDocument();
   });
 });
