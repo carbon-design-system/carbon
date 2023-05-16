@@ -645,11 +645,14 @@ const Tab = React.forwardRef(function Tab(
       type="button">
       <div className={`${prefix}--tabs__nav-item-label-wrapper`}>
         <span className={`${prefix}--tabs__nav-item-label`}>{children}</span>
-        {hasIcon && (
-          <div className={`${prefix}--tabs__nav-item--icon`}>
-            {dismissable ? DismissIcon : <Icon size={16} />}
-          </div>
-        )}
+        {/* always rendering dismissIcon so we don't lose reference to it, otherwise events do not work when switching from/to dismissable state */}
+        <div
+          className={cx(`${prefix}--tabs__nav-item--icon`, {
+            [`${prefix}--visually-hidden`]: !hasIcon,
+          })}>
+          {DismissIcon}
+          {!dismissable && hasIcon && <Icon size={16} />}
+        </div>
       </div>
       {hasSecondaryLabel && (
         <div className={`${prefix}--tabs__nav-item-secondary-label`}>

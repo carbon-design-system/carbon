@@ -297,8 +297,16 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       }
 
       svg:hover {
-        background-color: $layer-hover;
+        background-color: $layer-accent-hover;
       }
+    }
+
+    &.#{$prefix}--tabs--contained
+      .#{$prefix}--tabs__nav-item--selected
+      .#{$prefix}--tabs__nav-item--icon
+      .#{$prefix}--tabs__nav-item--close-icon
+      svg:hover {
+      background-color: $layer-hover;
     }
 
     .#{$prefix}--tabs__nav-item--icon {
