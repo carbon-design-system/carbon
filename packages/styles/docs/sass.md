@@ -792,7 +792,7 @@ for each scenario.
 ```scss
 .my-component {
   --cds-layout-size-height-local: clamp(
-    max(var(--cds-layout-size-height-min), var(--cds-layout-size-height-sm)),
+    var(--cds-layout-size-height-min),
     var(--cds-layout-size-height, var(--cds-layout-size-height-md)),
     min(var(--cds-layout-size-height-max), var(--cds-layout-size-height-lg))
   );
@@ -812,7 +812,7 @@ for each scenario.
 ```scss
 .my-component {
   --cds-layout-size-height-local: clamp(
-    var(--cds-layout-size-height-min),
+    max(var(--cds-layout-size-height-min), var(--cds-layout-size-height-sm)),
     var(--cds-layout-size-height, var(--cds-layout-size-height-md)),
     min(var(--cds-layout-size-height-max), var(--cds-layout-size-height-lg))
   );
