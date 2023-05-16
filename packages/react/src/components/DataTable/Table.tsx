@@ -17,10 +17,11 @@ import cx from 'classnames';
 import { debounce } from 'debounce';
 import { usePrefix } from '../../internal/usePrefix';
 import { TableContext } from './TableContext';
+import { SimpleTableContext } from './SimpleTableContext';
 import { useEvent } from '../../internal/useEvent';
 
 interface TableProps {
-  autoAlign?: boolean;
+  autoAlign?: "table" | "row" | "cell" | "none";
 
   className?: string;
 
@@ -64,7 +65,7 @@ export const Table = ({
   useStaticWidth,
   stickyHeader,
   overflowMenuOnHover = true,
-  autoAlign = false,
+  autoAlign = 'none',
   ...other
 }: PropsWithChildren<TableProps>) => {
   const { titleId, descriptionId } = useContext(TableContext);
@@ -79,8 +80,14 @@ export const Table = ({
     [`${prefix}--data-table--visible-overflow-menu`]: !overflowMenuOnHover,
   });
 
+  const toggleTableAlignmentClass = useCallback((alignTop = false) => {
+    alignTop ?
+    tableRef.current?.classList.add(`${prefix}--data-table--top-aligned`) :
+    tableRef.current?.classList.remove(`${prefix}--data-table--top-aligned`);
+  }, [prefix])
+
   const setTableAlignment = useCallback(() => {
-    if(autoAlign){
+    if(autoAlign === 'table'){
       console.log("setTableAlignment call")
       const start = Date.now();
       const fragment = document.createDocumentFragment();
@@ -123,17 +130,15 @@ export const Table = ({
             return true;
           }
         });
-
-        if (isMultiline) {
-          tableRef.current.classList.add(`${prefix}--data-table--top-aligned`);
-        } else {
-          tableRef.current.classList.remove(`${prefix}--data-table--top-aligned`);
-        }
+        toggleTableAlignmentClass(isMultiline)
       }
       const end = Date.now();
       console.log(`Execution time: ${end - start} ms`);
     }
-  }, [prefix, autoAlign]);
+    else {
+      toggleTableAlignmentClass(false)
+    }
+  }, [autoAlign, toggleTableAlignmentClass]);
 
   const debouncedSetTableAlignment = debounce(setTableAlignment, 100);
 
@@ -147,6 +152,7 @@ export const Table = ({
   }, [setTableAlignment, size, debouncedSetTableAlignment]);
 
   const table = (
+    <SimpleTableContext.Provider value={{autoAlign: autoAlign, toggleTableAlignmentClass: toggleTableAlignmentClass}}>
     <div className={`${prefix}--data-table-content`}>
       <table
         aria-labelledby={titleId}
@@ -157,6 +163,7 @@ export const Table = ({
         {children}
       </table>
     </div>
+    </SimpleTableContext.Provider>
   );
   return stickyHeader ? (
     <section className={`${prefix}--data-table_inner-container`}>

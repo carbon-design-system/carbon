@@ -22,7 +22,7 @@ import mdx from '../DataTable.mdx';
 import './datatable-story.scss';
 
 export default {
-  title: 'Components/DataTable/OptimizationTest/AutoAlign',
+  title: 'Components/DataTable/OptimizationTest/AutoAlign/Table',
   component: DataTable,
   subcomponents: {
     TableContainer,
@@ -102,7 +102,7 @@ export const Default = () => {
   const headers = ['Name', 'Rule', 'Status', 'Other', 'Example'];
 
   return (
-    <Table size="lg" useZebraStyles={false} autoAlign>
+    <Table size="lg" useZebraStyles={false} autoAlign="table">
       <TableHead>
         <TableRow>
           {headers.map((header) => (
@@ -142,7 +142,7 @@ for (let i = 0; i < 1000; i++) {
 
 export const PerformanceTest12000Cells = () => {
   return (
-    <Table size="lg" useZebraStyles={false} autoAlign>
+    <Table size="lg" useZebraStyles={false} autoAlign="table">
       <TableHead>
         <TableRow>
           {performanceHeaders12000Cells.map((header) => (
@@ -182,7 +182,7 @@ for (let i = 0; i < 625; i++) {
 
 export const PerformanceTest10000Cells = () => {
   return (
-    <Table size="lg" useZebraStyles={false} autoAlign>
+    <Table size="lg" useZebraStyles={false} autoAlign="table">
       <TableHead>
         <TableRow>
           {performanceHeaders10000Cells.map((header) => (
@@ -222,7 +222,7 @@ for (let i = 0; i < 125; i++) {
 
 export const PerformanceTest2000Cells = () => {
   return (
-    <Table size="lg" useZebraStyles={false} autoAlign>
+    <Table size="lg" useZebraStyles={false} autoAlign="table">
       <TableHead>
         <TableRow>
           {performanceHeaders2000Cells.map((header) => (
@@ -263,7 +263,7 @@ for (let i = 0; i < 125; i++) {
 
 export const PerformanceTest1250CellsEmojis = () => {
   return (
-    <Table size="lg" useZebraStyles={false} autoAlign>
+    <Table size="lg" useZebraStyles={false} autoAlign="table">
       <TableHead>
         <TableRow>
           {performanceHeaders1250CellsEmojis.map((header) => (
