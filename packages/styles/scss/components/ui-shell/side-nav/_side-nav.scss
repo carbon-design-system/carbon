@@ -495,6 +495,21 @@
       background-color: $background-hover;
       color: $text-primary;
     }
+
+    // non-hover, selected state inherited from `_header.scss`
+    a.#{$prefix}--header__menu-item--current:hover {
+      background-color: $layer-selected-hover;
+    }
+  }
+
+  .#{$prefix}--side-nav
+    .#{$prefix}--side-nav__header-navigation
+    a.#{$prefix}--header__menu-item[aria-current='page']::after,
+  .#{$prefix}--side-nav
+    .#{$prefix}--side-nav__header-navigation
+    .#{$prefix}--header__menu-item--current::after {
+    width: 3px;
+    height: calc(100% + 4px);
   }
 
   .#{$prefix}--side-nav
