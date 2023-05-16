@@ -131,6 +131,9 @@
 
   .#{$prefix}--toast-notification--warning
     .#{$prefix}--toast-notification__icon
+    path[opacity='0'],
+  .#{$prefix}--toast-notification--warning-alt
+    .#{$prefix}--toast-notification__icon
     path[opacity='0'] {
     fill: $black-100;
     opacity: 1;
