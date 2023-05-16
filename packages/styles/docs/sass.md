@@ -850,8 +850,8 @@ layout group.
 .my-component {
   @include layout.use('density', $default: 'normal');
 
-  height: layout.density('padding-inline');
-  // => height: var(--cds-layout-density-padding-inline-local);
+  padding-inline: layout.density('padding-inline');
+  // => padding-inline: var(--cds-layout-density-padding-inline-local);
 }
 ```
 
