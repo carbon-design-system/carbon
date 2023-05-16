@@ -12,6 +12,11 @@ These supported versions include the different discrete version numbers of
 individual packages as listed in the
 [release changelogs](https://github.com/carbon-design-system/carbon/releases).
 
+Please review the
+[release schedule](https://github.com/carbon-design-system/carbon/blob/main/docs/release-schedule.md)
+for full details on what release phase versions are in and the level of support
+provided for each.
+
 ## Reporting a Vulnerability
 
 _Please do not report security vulnerabilities through public GitHub issues._
