@@ -28,7 +28,7 @@ export default function HeaderContainer({
   const [isSideNavExpandedState, setIsSideNavExpandedState] =
     useState(isSideNavExpanded);
 
-  useWindowEvent('keydown', (event) => {
+  useWindowEvent('keydown', (event: KeyboardEvent) => {
     if (match(event, keys.Escape)) {
       setIsSideNavExpandedState(false);
     }

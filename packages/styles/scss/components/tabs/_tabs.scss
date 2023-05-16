@@ -294,10 +294,6 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       @include focus-outline('reset');
       @include type-style('body-compact-01');
 
-      @if not feature-flag-enabled('enable-v11-release') {
-        width: rem(160px);
-      }
-
       overflow: hidden;
       padding: $spacing-04 $spacing-05 $spacing-03;
       border-bottom: $tab-underline-color;

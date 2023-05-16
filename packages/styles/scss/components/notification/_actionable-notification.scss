@@ -36,10 +36,6 @@
     height: auto;
     min-height: rem(48px);
     flex-wrap: wrap;
-    @if not enabled('enable-v11-release') {
-      margin-top: $spacing-05;
-      margin-bottom: $spacing-05;
-    }
 
     color: $text-inverse;
 
