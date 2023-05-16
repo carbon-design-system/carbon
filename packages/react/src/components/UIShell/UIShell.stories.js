@@ -206,7 +206,8 @@ export const HeaderBaseWNavigation = () => (
         <SideNav
           aria-label="Side navigation"
           expanded={isSideNavExpanded}
-          isPersistent={false}>
+          isPersistent={false}
+          onSideNavBlur={onClickSideNavExpand}>
           <SideNavItems>
             <HeaderSideNavItems>
               <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
@@ -329,7 +330,8 @@ export const HeaderBaseWNavigationAndActions = () => (
         <SideNav
           aria-label="Side navigation"
           expanded={isSideNavExpanded}
-          isPersistent={false}>
+          isPersistent={false}
+          onSideNavBlur={onClickSideNavExpand}>
           <SideNavItems>
             <HeaderSideNavItems>
               <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
@@ -393,7 +395,10 @@ export const HeaderBaseWNavigationActionsAndSideNav = () => (
               <SwitcherIcon size={20} />
             </HeaderGlobalAction>
           </HeaderGlobalBar>
-          <SideNav aria-label="Side navigation" expanded={isSideNavExpanded}>
+          <SideNav
+            aria-label="Side navigation"
+            expanded={isSideNavExpanded}
+            onSideNavBlur={onClickSideNavExpand}>
             <SideNavItems>
               <HeaderSideNavItems hasDivider={true}>
                 <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
@@ -479,7 +484,10 @@ export const HeaderBaseWSideNav = () => (
           <HeaderName href="#" prefix="IBM">
             [Platform]
           </HeaderName>
-          <SideNav aria-label="Side navigation" expanded={isSideNavExpanded}>
+          <SideNav
+            aria-label="Side navigation"
+            expanded={isSideNavExpanded}
+            onSideNavBlur={onClickSideNavExpand}>
             <SideNavItems>
               <SideNavMenu renderIcon={Fade} title="Category title">
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
@@ -901,7 +909,8 @@ export const SideNavRailWHeader = () => (
             isRail
             expanded={isSideNavExpanded}
             onOverlayClick={onClickSideNavExpand}
-            href="#main-content">
+            href="#main-content"
+            onSideNavBlur={onClickSideNavExpand}>
             <SideNavItems>
               <SideNavMenu renderIcon={Fade} title="Category title">
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">

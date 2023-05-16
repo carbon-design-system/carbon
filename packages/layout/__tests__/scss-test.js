@@ -8,7 +8,7 @@
  */
 
 import { SassRenderer } from '@carbon/test-utils/scss';
-import { spacing, fluidSpacing, container, iconSize } from '../src';
+import { spacing, fluidSpacing, container, iconSize, layout } from '../src';
 
 const { render } = SassRenderer.create(__dirname);
 
@@ -34,6 +34,10 @@ const containerScale = container.map((value, index) => {
 
 const iconSizeScale = iconSize.map((value, index) => {
   return [index, formatStep('icon-size', index + 1), value];
+});
+
+const layoutScale = layout.map((value, index) => {
+  return [index, formatStep('layout', index + 1), value];
 });
 
 describe('scss/layout.scss', () => {
@@ -93,6 +97,24 @@ describe('scss/layout.scss', () => {
 
   it.each(iconSizeScale)(
     'should export icon-size step `%s`',
+    async (_index, id, value) => {
+      const { get } = await render(`
+        @use 'sass:map';
+        @use 'sass:meta';
+        @use '../index.scss' as layout;
+
+        $variables: meta.module-variables('layout');
+        $key: get('key', map.has-key($variables, '${id}'));
+        $value: get('value', map.get($variables, '${id}'));
+      `);
+
+      expect(get('key').value).toBe(true);
+      expect(get('value').value).toBe(value);
+    }
+  );
+
+  it.each(layoutScale)(
+    'should export layout step `%s`',
     async (_index, id, value) => {
       const { get } = await render(`
         @use 'sass:map';
