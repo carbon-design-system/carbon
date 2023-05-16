@@ -6,28 +6,28 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type ComponentProps } from 'react';
 import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-const UnorderedList = ({
-  children,
+interface UnorderedListProps extends ComponentProps<'ul'> {
+  nested?: boolean | undefined;
+  isExpressive?: boolean | undefined;
+}
+
+export default function UnorderedList({
   className,
-  nested,
-  isExpressive,
+  nested = false,
+  isExpressive = false,
   ...other
-}) => {
+}: UnorderedListProps) {
   const prefix = usePrefix();
   const classNames = classnames(`${prefix}--list--unordered`, className, {
     [`${prefix}--list--nested`]: nested,
     [`${prefix}--list--expressive`]: isExpressive,
   });
-  return (
-    <ul className={classNames} {...other}>
-      {children}
-    </ul>
-  );
-};
+  return <ul className={classNames} {...other} />;
+}
 
 UnorderedList.propTypes = {
   /**
@@ -50,10 +50,3 @@ UnorderedList.propTypes = {
    */
   nested: PropTypes.bool,
 };
-
-UnorderedList.defaultProps = {
-  nested: false,
-  isExpressive: false,
-};
-
-export default UnorderedList;

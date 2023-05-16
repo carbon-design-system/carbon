@@ -220,9 +220,8 @@ describe('Simple date picker', () => {
         </React.Suspense>
       );
 
-      expect(
-        await screen.findByLabelText('Date Picker label')
-      ).toBeInTheDocument();
+      const labeledElement = await screen.findByLabelText('Date Picker label');
+      expect(labeledElement).toBeInTheDocument();
 
       const input = document.querySelector('.cds--date-picker__input');
 
