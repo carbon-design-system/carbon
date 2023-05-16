@@ -39,7 +39,6 @@ function Loading({
     <div
       {...rest}
       aria-atomic="true"
-      aria-labelledby={loadingId}
       aria-live={active ? 'assertive' : 'off'}
       className={loadingClassName}>
       <label id={loadingId} className={`${prefix}--visually-hidden`}>

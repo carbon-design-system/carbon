@@ -234,10 +234,12 @@ describe('ContentSwitcher', () => {
 
     it('should have no AC violations', async () => {
       const { container } = render(
-        <ContentSwitcher>
-          <Switch kind="anchor" text="one" />
-          <Switch kind="anchor" text="two" />
-        </ContentSwitcher>
+        <main>
+          <ContentSwitcher>
+            <Switch kind="anchor" text="one" />
+            <Switch kind="anchor" text="two" />
+          </ContentSwitcher>
+        </main>
       );
       await expect(container).toHaveNoACViolations('ContentSwitcher');
     });
