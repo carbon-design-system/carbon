@@ -25,8 +25,12 @@
     max-height: $max-height;
 
     @if $min-width {
-      th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand):not(.#{$prefix}--table-column-icon),
-      td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand):not(.#{$prefix}--table-column-icon) {
+      th:not(.#{$prefix}--table-column-checkbox):not(
+          .#{$prefix}--table-column-menu
+        ):not(.#{$prefix}--table-expand):not(.#{$prefix}--table-column-icon),
+      td:not(.#{$prefix}--table-column-checkbox):not(
+          .#{$prefix}--table-column-menu
+        ):not(.#{$prefix}--table-expand):not(.#{$prefix}--table-column-icon) {
         min-width: $min-width;
       }
     }

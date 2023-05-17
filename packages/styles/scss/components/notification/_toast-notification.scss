@@ -41,7 +41,9 @@
     }
   }
 
-  .#{$prefix}--toast-notification:not(.#{$prefix}--toast-notification--low-contrast)
+  .#{$prefix}--toast-notification:not(
+      .#{$prefix}--toast-notification--low-contrast
+    )
     a {
     color: $link-inverse;
   }

@@ -10,8 +10,20 @@ import React, { useState, useCallback } from 'react';
 import { keys, match } from '../../internal/keyboard';
 import { useWindowEvent } from '../../internal/useEvent';
 
-// eslint-disable-next-line react/prop-types
-const HeaderContainer = ({ isSideNavExpanded, render: Children }) => {
+interface HeaderContainerRenderProps {
+  isSideNavExpanded: boolean;
+  onClickSideNavExpand: () => void;
+}
+
+interface HeaderContainerProps {
+  isSideNavExpanded?: boolean;
+  render: React.ComponentType<HeaderContainerRenderProps>;
+}
+
+export default function HeaderContainer({
+  render: Children,
+  isSideNavExpanded = false,
+}: HeaderContainerProps) {
   //state for expandable sidenav
   const [isSideNavExpandedState, setIsSideNavExpandedState] =
     useState(isSideNavExpanded);
@@ -34,17 +46,19 @@ const HeaderContainer = ({ isSideNavExpanded, render: Children }) => {
       onClickSideNavExpand={handleHeaderMenuButtonClick}
     />
   );
-};
+}
 
 HeaderContainer.propTypes = {
   /**
    * Optionally provide a custom class name that is applied to the underlying <header>
    */
   isSideNavExpanded: PropTypes.bool,
-};
 
-HeaderContainer.defaultProps = {
-  isSideNavExpanded: false,
+  /**
+   * A function or component that is passed an object parameter with two
+   * properties: `isSideNavExpanded` and `onClickSideNavExpand`. The function or
+   * component can then use those properties to within the components it
+   * returns, such as with the HeaderMenuButton and SideNav components.
+   */
+  render: PropTypes.elementType.isRequired,
 };
-
-export default HeaderContainer;

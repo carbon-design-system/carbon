@@ -23,6 +23,6 @@
     "access": "public"
   },
   "dependencies": {
-    "prettier": "^2.7.1"
+    "prettier": "^2.8.8"
   }
 }
