@@ -17,7 +17,7 @@ import cx from 'classnames';
 import { debounce } from 'debounce';
 import { usePrefix } from '../../internal/usePrefix';
 import { TableContext } from './TableContext';
-import { useEvent } from '../../internal/useEvent';
+import { useWindowEvent } from '../../internal/useEvent';
 
 interface TableProps {
   experimentalAutoAlign?: boolean;
@@ -142,7 +142,7 @@ export const Table = ({
 
   const debouncedSetTableAlignment = debounce(setTableAlignment, 100);
 
-  useEvent(window, 'resize', debouncedSetTableAlignment);
+  useWindowEvent('resize', debouncedSetTableAlignment);
 
   useEffect(() => {
     setTableAlignment();
