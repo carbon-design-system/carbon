@@ -45,7 +45,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            github.rest.repos.createRelease({
+            const response = await github.rest.repos.createRelease({
               tag_name: context.ref,
               name: context.ref,
               draft: false,
@@ -53,6 +53,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
             });
+            core.setOutput('upload_url', response.data.upload_url);
 
       - name: Upload Release Asset
         id: upload-release-asset
