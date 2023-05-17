@@ -372,7 +372,7 @@ ToastNotification.propTypes = {
   /**
    * Specify the sub-title
    */
-  subtitle: PropTypes.string,
+  subtitle: PropTypes.node,
 
   /**
    * Specify an optional duration the notification should be closed in
@@ -528,7 +528,7 @@ InlineNotification.propTypes = {
   /**
    * Specify the sub-title
    */
-  subtitle: PropTypes.string,
+  subtitle: PropTypes.node,
 
   /**
    * Specify the title
@@ -728,7 +728,7 @@ ActionableNotification.propTypes = {
   /**
    * Specify the sub-title
    */
-  subtitle: PropTypes.string,
+  subtitle: PropTypes.node,
 
   /**
    * Specify the title
