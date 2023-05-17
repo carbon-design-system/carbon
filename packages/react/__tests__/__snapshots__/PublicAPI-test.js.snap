@@ -162,7 +162,7 @@ Map {
         "type": "string",
       },
       "subtitle": Object {
-        "type": "string",
+        "type": "node",
       },
       "title": Object {
         "type": "string",
@@ -3817,7 +3817,7 @@ Map {
         "type": "string",
       },
       "subtitle": Object {
-        "type": "string",
+        "type": "node",
       },
       "title": Object {
         "type": "string",
@@ -8180,7 +8180,7 @@ Map {
         "type": "string",
       },
       "subtitle": Object {
-        "type": "string",
+        "type": "node",
       },
       "timeout": Object {
         "type": "number",
