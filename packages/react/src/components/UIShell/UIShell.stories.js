@@ -193,14 +193,14 @@ export const HeaderBaseWNavigation = () => (
           [Platform]
         </HeaderName>
         <HeaderNavigation aria-label="IBM [Platform]">
-          <HeaderMenuItem isActive href="#">
-            Link 1
-          </HeaderMenuItem>
+          <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
           <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
           <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
           <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
             <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
-            <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+            <HeaderMenuItem isActive href="#">
+              Sub-link 2
+            </HeaderMenuItem>
             <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
           </HeaderMenu>
         </HeaderNavigation>
@@ -216,7 +216,9 @@ export const HeaderBaseWNavigation = () => (
               <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
               <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
                 <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
-                <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+                <HeaderMenuItem isActive href="#">
+                  Sub-link 2
+                </HeaderMenuItem>
                 <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
               </HeaderMenu>
             </HeaderSideNavItems>

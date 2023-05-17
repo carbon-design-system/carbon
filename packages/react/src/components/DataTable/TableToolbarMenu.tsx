@@ -12,6 +12,8 @@ import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import OverflowMenu from '../OverflowMenu';
 
+const defaultIconDescription = 'Settings';
+
 export interface TableToolbarMenuProps
   extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -24,7 +26,7 @@ export interface TableToolbarMenuProps
   /**
    * The description of the menu icon.
    */
-  iconDescription: string;
+  iconDescription?: string;
 
   /**
    * Optional prop to allow overriding the default menu icon
@@ -35,7 +37,7 @@ export interface TableToolbarMenuProps
 const TableToolbarMenu: React.FC<TableToolbarMenuProps> = ({
   className,
   renderIcon,
-  iconDescription,
+  iconDescription = defaultIconDescription,
   children,
   ...rest
 }) => {
@@ -60,7 +62,7 @@ const TableToolbarMenu: React.FC<TableToolbarMenuProps> = ({
 
 TableToolbarMenu.defaultProps = {
   renderIcon: Settings,
-  iconDescription: 'Settings',
+  iconDescription: defaultIconDescription,
 };
 
 TableToolbarMenu.propTypes = {
