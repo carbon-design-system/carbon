@@ -16,7 +16,6 @@ import {
   generateGenericItem,
 } from '../../ListBox/test-helpers';
 import FluidComboBox from '../FluidComboBox';
-import { FeatureFlags } from '../../FeatureFlags';
 
 const prefix = 'cds';
 
@@ -40,22 +39,14 @@ describe('FluidComboBox', () => {
   });
 
   it('should render with fluid classes', () => {
-    const { container } = render(
-      <FeatureFlags flags={{ 'enable-v11-release': true }}>
-        <FluidComboBox {...mockProps} />
-      </FeatureFlags>
-    );
+    const { container } = render(<FluidComboBox {...mockProps} />);
     expect(container.firstChild).toHaveClass(
       `${prefix}--list-box__wrapper--fluid`
     );
   });
 
   it('should render with condensed styles if isCondensed is provided', () => {
-    const { container } = render(
-      <FeatureFlags flags={{ 'enable-v11-release': true }}>
-        <FluidComboBox isCondensed {...mockProps} />
-      </FeatureFlags>
-    );
+    const { container } = render(<FluidComboBox isCondensed {...mockProps} />);
     expect(container.firstChild).toHaveClass(
       `${prefix}--list-box__wrapper--fluid--condensed`
     );

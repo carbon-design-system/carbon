@@ -9,11 +9,23 @@ Array [
   "duration-moderate-02",
   "duration-slow-01",
   "duration-slow-02",
+  "fast-01",
+  "fast-02",
+  "moderate-01",
+  "moderate-02",
+  "slow-01",
+  "slow-02",
 ]
 `;
 
 exports[`@carbon/motion Public API 1`] = `
 Object {
+  "durationFast01": "70ms",
+  "durationFast02": "110ms",
+  "durationModerate01": "150ms",
+  "durationModerate02": "240ms",
+  "durationSlow01": "400ms",
+  "durationSlow02": "700ms",
   "easings": Object {
     "entrance": Object {
       "expressive": "cubic-bezier(0, 0, 0.3, 1)",
@@ -42,6 +54,12 @@ Object {
     "moderate02",
     "slow01",
     "slow02",
+    "durationFast01",
+    "durationFast02",
+    "durationModerate01",
+    "durationModerate02",
+    "durationSlow01",
+    "durationSlow02",
   ],
 }
 `;
