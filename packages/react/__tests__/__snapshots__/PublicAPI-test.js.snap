@@ -8807,17 +8807,7 @@ Map {
         "type": "oneOf",
       },
       "as": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "elementType",
-            },
-          ],
-        ],
-        "type": "oneOfType",
+        "type": "elementType",
       },
       "children": Object {
         "type": "node",
@@ -8866,17 +8856,7 @@ Map {
   "ToggletipLabel" => Object {
     "propTypes": Object {
       "as": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "elementType",
-            },
-          ],
-        ],
-        "type": "oneOfType",
+        "type": "elementType",
       },
       "children": Object {
         "type": "node",
