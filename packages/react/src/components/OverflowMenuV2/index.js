@@ -53,7 +53,8 @@ function OverflowMenuV2({
         className={triggerClasses}
         onClick={handleClick}
         onMouseDown={handleMousedown}
-        ref={triggerRef}>
+        ref={triggerRef}
+        aria-controls={id}>
         <IconElement className={`${prefix}--overflow-menu__icon`} />
       </button>
       <Menu id={id} size={size} open={open} onClose={handleClose} x={x} y={y}>

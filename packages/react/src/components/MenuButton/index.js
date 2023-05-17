@@ -84,6 +84,7 @@ const MenuButton = React.forwardRef(function MenuButton(
         disabled={disabled}
         aria-haspopup
         aria-expanded={open}
+        aria-controls={id}
         onClick={handleClick}
         onMouseDown={handleMousedown}
         aria-owns={open ? id : null}>
