@@ -11,7 +11,7 @@ import { PrefixContext } from '../../internal/usePrefix';
 
 interface ClassPrefixProps {
   /**
-   * @description The value used to prefix the CSS selectors
+   *   The value used to prefix the CSS selectors
    *   used by Carbon components.
    */
   prefix: string;
