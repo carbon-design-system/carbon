@@ -6,17 +6,21 @@
  */
 
 import cx from 'classnames';
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
 
-function SkipToContent({
-  children,
+type SkipToContentProps = Omit<ComponentProps<'a'>, 'children'> & {
+  children?: string | undefined;
+};
+
+export default function SkipToContent({
+  children = 'Skip to main content',
   className: customClassName,
-  href,
-  tabIndex,
+  href = '#main-content',
+  tabIndex = 0,
   ...rest
-}) {
+}: SkipToContentProps) {
   const prefix = usePrefix();
   const className = cx(`${prefix}--skip-to-content`, customClassName);
   return (
@@ -28,28 +32,21 @@ function SkipToContent({
 
 SkipToContent.propTypes = {
   /**
-   * Provide text to display in the SkipToContent `a` tag
+   * A ReactNode to display in the SkipToContent `a` tag.
+   * `'Skip to main content'` by default.
    */
-  children: PropTypes.string.isRequired,
+  children: PropTypes.string,
 
   className: PropTypes.string,
 
   /**
    * Provide the `href` to the id of the element on your package that is the
-   * main content.
+   * main content. `#main-content` by default.
    */
-  href: PropTypes.string.isRequired,
+  href: PropTypes.string,
 
   /**
    * Optionally override the default tabindex of 0
    */
   tabIndex: PropTypes.string,
 };
-
-SkipToContent.defaultProps = {
-  children: 'Skip to main content',
-  href: '#main-content',
-  tabIndex: '0',
-};
-
-export default SkipToContent;
