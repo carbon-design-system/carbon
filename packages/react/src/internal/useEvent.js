@@ -10,7 +10,8 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * @typedef {(event: Event) => void} EventCallback
+ * @template {keyof GlobalEventHandlersEventMap} E
+ * @typedef {(event: GlobalEventHandlersEventMap[E]) => void} GlobalEventCallback
  */
 
 /**
@@ -19,13 +20,14 @@ import { useEffect, useRef } from 'react';
  */
 
 /**
+ * @template {keyof GlobalEventHandlersEventMap} E
  * @param {HTMLElement | MutableRefObject<HTMLElement | null>} elementOrRef
- * @param {keyof GlobalEventHandlersEventMap} eventName
- * @param {EventCallback} callback
+ * @param {E} eventName
+ * @param {GlobalEventCallback<E>} callback
  */
 export function useEvent(elementOrRef, eventName, callback) {
   /**
-   * @type {MutableRefObject<EventCallback | null>}
+   * @type {MutableRefObject<GlobalEventCallback<E> | null>}
    */
   const savedCallback = useRef(null);
 
@@ -35,7 +37,7 @@ export function useEvent(elementOrRef, eventName, callback) {
 
   useEffect(() => {
     /**
-     * @type {EventCallback}
+     * @type {GlobalEventCallback<E>}
      */
     const handler = (event) => {
       if (savedCallback.current) {
@@ -54,12 +56,18 @@ export function useEvent(elementOrRef, eventName, callback) {
 }
 
 /**
- * @param {keyof WindowEventMap} eventName
- * @param {EventCallback} callback
+ * @template {keyof WindowEventMap} E
+ * @typedef {(event: WindowEventMap[E]) => void} WindowEventCallback
+ */
+
+/**
+ * @template {keyof WindowEventMap} E
+ * @param {E} eventName
+ * @param {WindowEventCallback<E>} callback
  */
 export function useWindowEvent(eventName, callback) {
   /**
-   * @type {MutableRefObject<EventCallback | null>}
+   * @type {MutableRefObject<WindowEventCallback<E> | null>}
    */
   const savedCallback = useRef(null);
 
@@ -69,7 +77,7 @@ export function useWindowEvent(eventName, callback) {
 
   useEffect(() => {
     /**
-     * @type {EventCallback}
+     * @type {WindowEventCallback<E>}
      */
     function handler(event) {
       if (savedCallback.current) {
