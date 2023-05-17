@@ -152,16 +152,16 @@ export const Table = ({
   }, [setTableAlignment, size, debouncedSetTableAlignment]);
 
   const table = (
-      <div className={`${prefix}--data-table-content`}>
-        <table
-          aria-labelledby={titleId}
-          aria-describedby={descriptionId}
-          {...other}
-          className={componentClass}
-          ref={tableRef}>
-          {children}
-        </table>
-      </div>
+    <div className={`${prefix}--data-table-content`}>
+      <table
+        aria-labelledby={titleId}
+        aria-describedby={descriptionId}
+        {...other}
+        className={componentClass}
+        ref={tableRef}>
+        {children}
+      </table>
+    </div>
   );
   return stickyHeader ? (
     <section className={`${prefix}--data-table_inner-container`}>
