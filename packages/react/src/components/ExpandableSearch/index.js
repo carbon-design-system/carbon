@@ -7,3 +7,4 @@
 
 import ExpandableSearch from './ExpandableSearch';
 export default ExpandableSearch;
+export { ExpandableSearch };

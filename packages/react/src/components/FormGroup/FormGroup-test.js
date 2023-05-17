@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -34,7 +34,7 @@ describe('FormGroup', () => {
       </FormGroup>
     );
 
-    expect(screen.queryByText('legendtest')).toBeDefined();
+    expect(screen.queryByText('legendtest')).toBeInTheDocument();
   });
 
   it('should set the id for legend based on legendId', () => {
@@ -61,7 +61,7 @@ describe('FormGroup', () => {
       </FormGroup>
     );
 
-    expect(screen.queryByText('Message text')).toBeDefined();
+    expect(screen.queryByText('Message text')).toBeInTheDocument();
   });
 
   it('should not display the messageText if message is false', () => {
@@ -75,6 +75,6 @@ describe('FormGroup', () => {
       </FormGroup>
     );
 
-    expect(screen.queryByText('Message text')).toBeNull();
+    expect(screen.queryByText('Message text')).not.toBeInTheDocument();
   });
 });

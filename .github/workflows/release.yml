@@ -16,10 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Use Node.js 16.x
+      - name: Use Node.js 18.x
         uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
@@ -32,17 +32,22 @@ jobs:
         run: yarn ci-check
 
       - name: Publish packages under the `next` dist tag
-        run: yarn lerna publish from-package --dist-tag next --yes
+        run:
+          yarn lerna publish from-package --dist-tag next --no-verify-access
+          --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create Release
         id: create_release
-        uses: actions/create-release@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/github-script@v6
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-          draft: false
-          prerelease: true
+          script: |
+            github.rest.repos.createRelease({
+              tag_name: context.ref,
+              name: context.ref,
+              draft: false,
+              prerelease: true,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });

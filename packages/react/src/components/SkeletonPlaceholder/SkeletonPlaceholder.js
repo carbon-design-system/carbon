@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -22,7 +22,8 @@ const SkeletonPlaceholder = ({ className, ...other }) => {
 
 SkeletonPlaceholder.propTypes = {
   /**
-   * the class to be applied to the component
+   * Add a custom class to the component
+   * to set the height and width
    */
   className: PropTypes.string,
 };

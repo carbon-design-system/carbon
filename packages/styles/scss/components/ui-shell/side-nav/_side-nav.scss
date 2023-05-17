@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -68,7 +68,9 @@
     width: 0;
   }
 
-  .#{$prefix}--side-nav.#{$prefix}--side-nav--rail:not(.#{$prefix}--side-nav--fixed):hover,
+  .#{$prefix}--side-nav.#{$prefix}--side-nav--rail:not(
+      .#{$prefix}--side-nav--fixed
+    ):hover,
   .#{$prefix}--side-nav--expanded {
     width: mini-units(32);
   }
@@ -87,6 +89,7 @@
 
   .#{$prefix}--side-nav__overlay-active {
     @include breakpoint-down('lg') {
+      z-index: z('overlay');
       width: 100vw;
       height: 100vh;
       background-color: $overlay;
@@ -117,7 +120,6 @@
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav__navigation {
     display: flex;
-    height: 100%;
     flex-direction: column;
   }
 
@@ -155,7 +157,9 @@
   .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
     > .#{$prefix}--side-nav__link:hover,
   .#{$prefix}--side-nav__menu
-    a.#{$prefix}--side-nav__link:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover,
+    a.#{$prefix}--side-nav__link:not(.#{$prefix}--side-nav__link--current):not(
+      [aria-current='page']
+    ):hover,
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:hover,
   .#{$prefix}--side-nav
     .#{$prefix}--header__menu-title[aria-expanded='true']:hover {
@@ -491,6 +495,21 @@
       background-color: $background-hover;
       color: $text-primary;
     }
+
+    // non-hover, selected state inherited from `_header.scss`
+    a.#{$prefix}--header__menu-item--current:hover {
+      background-color: $layer-selected-hover;
+    }
+  }
+
+  .#{$prefix}--side-nav
+    .#{$prefix}--side-nav__header-navigation
+    a.#{$prefix}--header__menu-item[aria-current='page']::after,
+  .#{$prefix}--side-nav
+    .#{$prefix}--side-nav__header-navigation
+    .#{$prefix}--header__menu-item--current::after {
+    width: 3px;
+    height: calc(100% + 4px);
   }
 
   .#{$prefix}--side-nav

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -44,6 +44,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  .#{$prefix}--date-picker-container .#{$prefix}--label {
+    display: flex;
   }
 
   .#{$prefix}--date-picker-input__wrapper {
@@ -205,5 +209,16 @@
   // stylelint-disable-next-line no-duplicate-selectors
   .#{$prefix}--date-picker__icon {
     @include high-contrast-mode('icon-fill');
+  }
+
+  // readonly
+  .#{$prefix}--date-picker__input[readonly] {
+    border-bottom-color: $border-subtle;
+    background: transparent;
+    cursor: text;
+  }
+
+  .#{$prefix}--date-picker__input[readonly] + .#{$prefix}--date-picker__icon {
+    fill: $icon-disabled;
   }
 }

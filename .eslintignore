@@ -9,6 +9,7 @@ umd
 
 node_modules
 packages/*/examples/*
+packages/cra-template
 
 # Components
 packages/components/demo/*.css

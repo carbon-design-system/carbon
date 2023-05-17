@@ -1,4 +1,4 @@
-name: promote
+name: Promote
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

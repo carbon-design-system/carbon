@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2021
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,6 +15,7 @@ import Button from '../Button';
 import CopyButton from '../CopyButton';
 import getUniqueId from '../../tools/uniqueId';
 import copy from 'copy-to-clipboard';
+import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 
 const rowHeightInPixels = 16;
@@ -31,7 +32,8 @@ function CodeSnippet({
   feedback,
   feedbackTimeout,
   onClick,
-  ariaLabel,
+  ['aria-label']: ariaLabel,
+  ariaLabel: deprecatedAriaLabel,
   copyText,
   copyButtonDescription,
   light,
@@ -163,6 +165,8 @@ function CodeSnippet({
     [`${prefix}--snippet--light`]: light,
     [`${prefix}--snippet--no-copy`]: hideCopyButton,
     [`${prefix}--snippet--wraptext`]: wrapText,
+    [`${prefix}--snippet--has-right-overflow`]:
+      type == 'multi' && hasRightOverflow,
   });
 
   const expandCodeBtnText = expandedCode ? showLessText : showMoreText;
@@ -182,7 +186,7 @@ function CodeSnippet({
       <Copy
         {...rest}
         onClick={handleCopyClick}
-        aria-label={ariaLabel}
+        aria-label={deprecatedAriaLabel || ariaLabel}
         aria-describedby={uid}
         className={codeSnippetClasses}
         feedback={feedback}
@@ -223,10 +227,14 @@ function CodeSnippet({
     <div {...rest} className={codeSnippetClasses}>
       <div
         ref={codeContainerRef}
-        role={type === 'single' ? 'textbox' : null}
-        tabIndex={type === 'single' && !disabled ? 0 : null}
+        role={type === 'single' || type === 'multi' ? 'textbox' : null}
+        tabIndex={
+          (type === 'single' || type === 'multi') && !disabled ? 0 : null
+        }
         className={`${prefix}--snippet-container`}
-        aria-label={ariaLabel || 'code-snippet'}
+        aria-label={deprecatedAriaLabel || ariaLabel || 'code-snippet'}
+        aria-readonly={type === 'single' || type === 'multi' ? true : null}
+        aria-multiline={type === 'multi' ? true : null}
         onScroll={(type === 'single' && handleScroll) || null}
         {...containerStyle}>
         <pre
@@ -242,7 +250,7 @@ function CodeSnippet({
       {hasLeftOverflow && (
         <div className={`${prefix}--snippet__overflow-indicator--left`} />
       )}
-      {hasRightOverflow && (
+      {hasRightOverflow && type !== 'multi' && (
         <div className={`${prefix}--snippet__overflow-indicator--right`} />
       )}
       {!hideCopyButton && (
@@ -265,7 +273,6 @@ function CodeSnippet({
             {expandCodeBtnText}
           </span>
           <ChevronDown
-            aria-label={expandCodeBtnText}
             className={`${prefix}--icon-chevron--down ${prefix}--snippet__icon`}
             name="chevron--down"
             role="img"
@@ -281,7 +288,17 @@ CodeSnippet.propTypes = {
    * Specify a label to be read by screen readers on the containing <textbox>
    * node
    */
-  ariaLabel: PropTypes.string,
+  ['aria-label']: PropTypes.string,
+
+  /**
+   * Deprecated, please use `aria-label` instead.
+   * Specify a label to be read by screen readers on the containing <textbox>
+   * node
+   */
+  ariaLabel: deprecate(
+    PropTypes.string,
+    'This prop syntax has been deprecated. Please use the new `aria-label`.'
+  ),
 
   /**
    * Provide the content of your CodeSnippet as a node or string
@@ -328,7 +345,12 @@ CodeSnippet.propTypes = {
    * Specify whether you are using the light variant of the Code Snippet,
    * typically used for inline snippet to display an alternate color
    */
-  light: PropTypes.bool,
+
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `CodeSnippet` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
 
   /**
    * Specify the maximum number of rows to be shown when in collapsed view
@@ -380,7 +402,7 @@ CodeSnippet.propTypes = {
 };
 
 CodeSnippet.defaultProps = {
-  ariaLabel: 'Copy to clipboard',
+  ['aria-label']: 'Copy to clipboard',
   type: 'single',
   showMoreText: 'Show more',
   showLessText: 'Show less',

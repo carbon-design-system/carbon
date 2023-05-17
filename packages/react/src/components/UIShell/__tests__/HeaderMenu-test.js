@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,15 +10,21 @@ import React from 'react';
 import { HeaderMenu, HeaderMenuItem } from '../';
 
 describe('HeaderMenu', () => {
-  it('should set the current class if `isCurrentPage` is true', () => {
-    const { container } = render(
-      <HeaderMenu aria-label="test" menuLinkName="test" isCurrentPage>
+  it('should set the current class if `isActive` is true', () => {
+    render(
+      <HeaderMenu
+        data-testid="test"
+        aria-label="test"
+        menuLinkName="test"
+        isActive>
         <HeaderMenuItem href="/a">a</HeaderMenuItem>
         <HeaderMenuItem href="/b">b</HeaderMenuItem>
         <HeaderMenuItem href="/c">c</HeaderMenuItem>
       </HeaderMenu>
     );
-    expect(container.firstChild).toHaveClass('cds--header__submenu--current');
+    expect(screen.getByTestId('test').firstChild).toHaveClass(
+      'cds--header__menu-item--current'
+    );
   });
 
   it('should support a custom `className` prop on the outermost element', () => {

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,7 +15,6 @@ import {
 } from './Notification';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { it } from 'window-or-global';
 
 const prefix = 'cds';
 
@@ -140,14 +139,14 @@ describe('ToastNotification', () => {
     const closeButton = screen.queryByRole('button', {
       hidden: true,
     });
-    userEvent.click(closeButton);
+    await userEvent.click(closeButton);
     expect(onClose).toHaveBeenCalledTimes(1);
     await waitFor(() => {
       expect(screen.queryByRole('status')).not.toBeInTheDocument();
     });
   });
 
-  it('keeps notification open if `onClose` returns false', () => {
+  it('keeps notification open if `onClose` returns false', async () => {
     render(
       <ToastNotification title="Notification title" onClose={() => false} />
     );
@@ -155,11 +154,11 @@ describe('ToastNotification', () => {
     const closeButton = screen.queryByRole('button', {
       hidden: true,
     });
-    userEvent.click(closeButton);
+    await userEvent.click(closeButton);
     expect(screen.queryByRole('status')).toBeInTheDocument();
   });
 
-  it('calls `onCloseButtonClick` when notification is closed', () => {
+  it('calls `onCloseButtonClick` when notification is closed', async () => {
     const onCloseButtonClick = jest.fn();
     render(
       <ToastNotification
@@ -171,7 +170,7 @@ describe('ToastNotification', () => {
     const closeButton = screen.queryByRole('button', {
       hidden: true,
     });
-    userEvent.click(closeButton);
+    await userEvent.click(closeButton);
     expect(onCloseButtonClick).toHaveBeenCalledTimes(1);
   });
 });
@@ -260,14 +259,14 @@ describe('InlineNotification', () => {
     const closeButton = screen.queryByRole('button', {
       hidden: true,
     });
-    userEvent.click(closeButton);
+    await userEvent.click(closeButton);
     expect(onClose).toHaveBeenCalledTimes(1);
     await waitFor(() => {
       expect(screen.queryByRole('status')).not.toBeInTheDocument();
     });
   });
 
-  it('keeps notification open if `onClose` returns false', () => {
+  it('keeps notification open if `onClose` returns false', async () => {
     render(
       <InlineNotification title="Notification title" onClose={() => false} />
     );
@@ -275,11 +274,11 @@ describe('InlineNotification', () => {
     const closeButton = screen.queryByRole('button', {
       hidden: true,
     });
-    userEvent.click(closeButton);
+    await userEvent.click(closeButton);
     expect(screen.queryByRole('status')).toBeInTheDocument();
   });
 
-  it('calls `onCloseButtonClick` when notification is closed', () => {
+  it('calls `onCloseButtonClick` when notification is closed', async () => {
     const onCloseButtonClick = jest.fn();
     render(
       <InlineNotification
@@ -291,7 +290,7 @@ describe('InlineNotification', () => {
     const closeButton = screen.queryByRole('button', {
       hidden: true,
     });
-    userEvent.click(closeButton);
+    await userEvent.click(closeButton);
     expect(onCloseButtonClick).toHaveBeenCalledTimes(1);
   });
 });
@@ -325,13 +324,13 @@ describe('ActionableNotification', () => {
     );
 
     // without focus being on/in the notification, it should not close via escape
-    userEvent.keyboard('{Escape}');
+    await userEvent.keyboard('{Escape}');
     expect(onCloseButtonClick).toHaveBeenCalledTimes(0);
     expect(onClose).toHaveBeenCalledTimes(0);
 
     // after focus is placed, the notification should close via escape
-    userEvent.tab();
-    userEvent.keyboard('{Escape}');
+    await userEvent.tab();
+    await userEvent.keyboard('{Escape}');
     expect(onCloseButtonClick).toHaveBeenCalledTimes(1);
     expect(onClose).toHaveBeenCalledTimes(1);
 

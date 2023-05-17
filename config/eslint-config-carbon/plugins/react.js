@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2018
+ * Copyright IBM Corp. 2018, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -33,6 +33,14 @@ module.exports = {
     'react/jsx-no-useless-fragment': 2,
     'react/no-typos': 2,
     'react/sort-prop-types': 2,
+    'react/forbid-component-props': [
+      2,
+      { forbid: [{ propName: 'style', message: 'Avoid using style prop' }] },
+    ],
+    'react/forbid-dom-props': [
+      2,
+      { forbid: [{ propName: 'style', message: 'Avoid using style prop' }] },
+    ],
 
     // react-hooks
     'react-hooks/rules-of-hooks': 2,
@@ -44,6 +52,26 @@ module.exports = {
     ],
   },
   overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      plugins: ['@typescript-eslint'],
+      extends: ['plugin:@typescript-eslint/recommended'],
+      parser: '@typescript-eslint/parser',
+      rules: {
+        'no-unused-vars': 'off', // Disabled in favor of @typescript-eslint/no-unused-vars
+        '@typescript-eslint/no-unused-vars': [
+          'error',
+          {
+            args: 'after-used',
+            argsIgnorePattern: '^_',
+            varsIgnorePattern: '^_',
+          },
+        ],
+        '@typescript-eslint/no-empty-function': 'off', // Disabled to support default empty functions used in PropTypes
+        '@typescript-eslint/no-explicit-any': 'off', // TODO: Enable once stricter typings of internal utilities are supported
+        '@typescript-eslint/ban-ts-comment': 'off', // Disabled to allow some instances where we won't be able to fix type errors
+      },
+    },
     // Sometimes we'll want to define a quick component in a story to use as a
     // wrapper for a component we're documenting. For example:
     //
@@ -58,6 +86,16 @@ module.exports = {
       rules: {
         'react/display-name': 0,
         'react/prop-types': 0,
+        'react/forbid-component-props': 0,
+        'react/forbid-dom-props': 0,
+      },
+    },
+    // style prop is fine to be used in internal unit testing
+    {
+      files: ['*.e2e.js'],
+      rules: {
+        'react/forbid-component-props': 0,
+        'react/forbid-dom-props': 0,
       },
     },
 

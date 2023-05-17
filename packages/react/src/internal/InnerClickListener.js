@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,8 +23,7 @@ export default class InnerClickListener extends React.Component {
   constructor(props) {
     super(props);
     // We manually bind handlers in this Component, versus using class
-    // properties, so that we can properly test the `handleRef` handler with
-    // enzyme.
+    // properties, so that we can properly test the `handleRef` handler.
     this.handleRef = this.handleRef.bind(this);
     this.handleDocumentClick = this.handleDocumentClick.bind(this);
   }

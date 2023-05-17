@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,10 +13,11 @@ const COMPONENT_PATH = path.resolve(__dirname, '../');
 const blocklist = new Set([
   'README.md',
   'migrate-to-7.x.md',
+  'docs',
   'state',
   'tools',
   '.DS_Store',
-  'index.js',
+  'index.ts',
   'DataTable-story.js',
   '__tests__',
   '__mocks__',
@@ -24,12 +25,12 @@ const blocklist = new Set([
   'DataTable.mdx',
   'stories',
   'next',
-  'TableContext.js',
+  'TableContext.tsx',
 ]);
 const components = fs
   .readdirSync(COMPONENT_PATH)
   .filter((name) => !blocklist.has(name))
-  .map((name) => path.basename(name, '.js'));
+  .map((name) => path.basename(name, path.extname(name)));
 
 describe('DataTable exports', () => {
   it('should export DataTable by default', () => {

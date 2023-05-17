@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -20,6 +20,17 @@
 $input-label-weight: 400 !default;
 
 @mixin form {
+  // Override Chrome autocomplete styles
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus {
+    box-shadow: 0 0 0 1000px $field inset;
+    -webkit-text-fill-color: $text-primary;
+  }
+
   .#{$prefix}--fieldset {
     @include reset;
   }
@@ -46,6 +57,10 @@ $input-label-weight: 400 !default;
     font-weight: $input-label-weight;
     line-height: 1rem;
     vertical-align: baseline;
+  }
+
+  .#{$prefix}--label .#{$prefix}--toggletip-label {
+    @include type-style('label-01');
   }
 
   .#{$prefix}--label--no-margin {
@@ -99,7 +114,7 @@ $input-label-weight: 400 !default;
   }
 
   input[type='number'] {
-    font-family: carbon--font-family('mono');
+    font-family: font-family('sans');
   }
 
   input[data-invalid]:not(:focus),
@@ -110,8 +125,11 @@ $input-label-weight: 400 !default;
     > .#{$prefix}--text-area--invalid:not(:focus),
   .#{$prefix}--select-input__wrapper[data-invalid]
     .#{$prefix}--select-input:not(:focus),
-  .#{$prefix}--list-box[data-invalid]:not(:focus),
-  .#{$prefix}--combo-box[data-invalid] .#{$prefix}--text-input:not(:focus) {
+  .#{$prefix}--list-box[data-invalid]:not(
+      .#{$prefix}--multi-select--invalid--focused
+    ),
+  .#{$prefix}--combo-box[data-invalid]:not(.#{$prefix}--multi-select--selected)
+    .#{$prefix}--text-input:not(:focus) {
     @include focus-outline('invalid');
   }
 
@@ -126,6 +144,7 @@ $input-label-weight: 400 !default;
   .#{$prefix}--text-input__field-wrapper--warning,
   .#{$prefix}--text-input__field-wrapper--warning > .#{$prefix}--text-input,
   .#{$prefix}--text-area__wrapper[data-invalid],
+  .#{$prefix}--text-area__wrapper--warn,
   .#{$prefix}--select-input__wrapper[data-invalid],
   .#{$prefix}--select--warning .#{$prefix}--select-input__wrapper,
   .#{$prefix}--time-picker[data-invalid],
@@ -158,12 +177,6 @@ $input-label-weight: 400 !default;
   .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper--warning {
     display: block;
-  }
-
-  @if not enabled('enable-v11-release') {
-    .#{$prefix}--form--fluid .#{$prefix}--fieldset {
-      margin: 0;
-    }
   }
 
   .#{$prefix}--form--fluid input[data-invalid] {

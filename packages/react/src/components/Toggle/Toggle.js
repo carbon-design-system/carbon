@@ -5,13 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
 
 export function Toggle({
+  'aria-labelledby': ariaLabelledby,
   className,
   defaultToggled = false,
   disabled = false,
@@ -22,11 +23,13 @@ export function Toggle({
   labelText,
   onClick,
   onToggle,
+  readOnly,
   size = 'md',
   toggled,
   ...other
 }) {
   const prefix = usePrefix();
+  const buttonElement = useRef(null);
   const [checked, setChecked] = useControllableState({
     value: toggled,
     onChange: onToggle,
@@ -34,8 +37,9 @@ export function Toggle({
   });
 
   function handleClick(e) {
-    setChecked(!checked);
-
+    if (!readOnly) {
+      setChecked(!checked);
+    }
     if (onClick) {
       onClick(e);
     }
@@ -43,11 +47,14 @@ export function Toggle({
 
   const isSm = size === 'sm';
   const sideLabel = hideLabel ? labelText : checked ? labelB : labelA;
+  const renderSideLabel = !(hideLabel && !labelText);
+  const LabelComponent = labelText ? 'label' : 'div';
 
   const wrapperClasses = classNames(
     `${prefix}--toggle`,
     {
       [`${prefix}--toggle--disabled`]: disabled,
+      [`${prefix}--toggle--readonly`]: readOnly,
     },
     className
   );
@@ -65,19 +72,40 @@ export function Toggle({
   });
 
   return (
-    <div className={wrapperClasses}>
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+    <div
+      className={wrapperClasses}
+      onClick={
+        !labelText
+          ? (e) => {
+              // the underlying <button> can only be activated by keyboard as it is visually hidden;
+              // therefore, if this event's target is the <button>, it had to be triggered by
+              // the keyboard event which already calls handleClick. if we wouldn't catch this, the
+              // onClick and onToggle functions would be called twice whenever the user activates the
+              // toggle by keyboard and props['aria-labelledby'] is passed.
+              if (buttonElement.current && e.target !== buttonElement.current) {
+                handleClick(e);
+                buttonElement.current.focus();
+              }
+            }
+          : null
+      }>
       <button
         {...other}
+        ref={buttonElement}
         id={id}
         className={`${prefix}--toggle__button`}
         role="switch"
         type="button"
         aria-checked={checked}
+        aria-labelledby={ariaLabelledby}
         disabled={disabled}
         onClick={handleClick}
       />
-      <label htmlFor={id} className={`${prefix}--toggle__label`}>
-        <span className={labelTextClasses}>{labelText}</span>
+      <LabelComponent
+        htmlFor={ariaLabelledby ? null : id}
+        className={`${prefix}--toggle__label`}>
+        {labelText && <span className={labelTextClasses}>{labelText}</span>}
         <div className={appearanceClasses}>
           <div className={switchClasses}>
             {isSm && (
@@ -90,16 +118,23 @@ export function Toggle({
               </svg>
             )}
           </div>
-          <span className={`${prefix}--toggle__text`} aria-hidden="true">
-            {sideLabel}
-          </span>
+          {renderSideLabel && (
+            <span className={`${prefix}--toggle__text`} aria-hidden="true">
+              {sideLabel}
+            </span>
+          )}
         </div>
-      </label>
+      </LabelComponent>
     </div>
   );
 }
 
 Toggle.propTypes = {
+  /**
+   * Specify another element's id to be used as the label for this toggle
+   */
+  'aria-labelledby': PropTypes.string,
+
   /**
    * Specify a custom className to apply to the form-item node
    */
@@ -116,7 +151,8 @@ Toggle.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Specify whether the label should be hidden, or not
+   * If true, the side labels (props.labelA and props.labelB) will be replaced by
+   * props.labelText (if passed), so that the toggle doesn't render a top label.
    */
   hideLabel: PropTypes.bool,
 
@@ -137,9 +173,11 @@ Toggle.propTypes = {
 
   /**
    * Provide the text that will be read by a screen reader when visiting this
-   * control
+   * control. This should be provided unless 'aria-labelledby' is set instead
+   * or you use an external <label> element with its "for" attribute set to the
+   * toggle's id.
    */
-  labelText: PropTypes.node.isRequired,
+  labelText: PropTypes.string,
 
   /**
    * Provide an event listener that is called when the control is clicked
@@ -150,6 +188,11 @@ Toggle.propTypes = {
    * Provide an event listener that is called when the control is toggled
    */
   onToggle: PropTypes.func,
+
+  /**
+   * Whether the toggle should be read-only
+   */
+  readOnly: PropTypes.bool,
 
   /**
    * Specify the size of the Toggle. Currently only supports 'sm' or 'md' (default)

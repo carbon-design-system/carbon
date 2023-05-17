@@ -6,19 +6,18 @@
  */
 
 import React from 'react';
-import { WarningFilled, WarningAltFilled, EditOff } from '@carbon/icons-react';
-
-const prefix = 'cds';
+import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
+import { usePrefix } from './usePrefix';
 
 /**
  * @typedef {object} InputProps
  * @property {string} id - The input's id
- * @property {boolean} readOnly - Whether the input should be readonly
+ * @property {boolean | undefined} readOnly - Whether the input should be readonly
  * @property {boolean} disabled - Whether the input should be disabled
  * @property {boolean} invalid - Whether the input should be marked as invalid
- * @property {string} invalidText - The validation message displayed in case the input is considered invalid
+ * @property {React.ReactNode | undefined} invalidText - The validation message displayed in case the input is considered invalid
  * @property {boolean} warn - Whether the input should be in warning state
- * @property {string} warnText - The validation message displayed in case the input is in warning state
+ * @property {React.ReactNode | undefined} warnText - The validation message displayed in case the input is in warning state
  */
 
 /**
@@ -26,6 +25,7 @@ const prefix = 'cds';
  * @property {boolean} disabled - Whether the input is disabled
  * @property {boolean} invalid - Whether the input is invalid (takes precedence over warn)
  * @property {string} invalidId - The invalid message's id
+ * @property {string} helperId - id used for helper text
  * @property {boolean} warn - Whether the input is in warning state
  * @property {string} warnId - The warning message's id
  * @property {React.ReactNode | null} validation – React node rendering the appropriate validation message (if any)
@@ -54,6 +54,7 @@ export function useNormalizedInputProps({
   warn,
   warnText,
 }) {
+  const prefix = usePrefix();
   const normalizedProps = {
     disabled: !readOnly && disabled,
     invalid: !readOnly && invalid,
@@ -65,28 +66,24 @@ export function useNormalizedInputProps({
     helperId: `${id}-helper-text`,
   };
 
-  if (readOnly) {
-    normalizedProps.icon = EditOff;
-  } else {
-    if (normalizedProps.invalid) {
-      normalizedProps.icon = WarningFilled;
-      normalizedProps.validation = (
-        <div
-          className={`${prefix}--form-requirement`}
-          id={normalizedProps.invalidId}>
-          {invalidText}
-        </div>
-      );
-    } else if (normalizedProps.warn) {
-      normalizedProps.icon = WarningAltFilled;
-      normalizedProps.validation = (
-        <div
-          className={`${prefix}--form-requirement`}
-          id={normalizedProps.warnId}>
-          {warnText}
-        </div>
-      );
-    }
+  if (normalizedProps.invalid) {
+    normalizedProps.icon = WarningFilled;
+    normalizedProps.validation = (
+      <div
+        className={`${prefix}--form-requirement`}
+        id={normalizedProps.invalidId}>
+        {invalidText}
+      </div>
+    );
+  } else if (normalizedProps.warn) {
+    normalizedProps.icon = WarningAltFilled;
+    normalizedProps.validation = (
+      <div
+        className={`${prefix}--form-requirement`}
+        id={normalizedProps.warnId}>
+        {warnText}
+      </div>
+    );
   }
 
   return normalizedProps;

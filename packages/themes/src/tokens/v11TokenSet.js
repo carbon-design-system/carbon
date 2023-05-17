@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2018
+ * Copyright IBM Corp. 2018, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -39,6 +39,8 @@ export const set = TokenSet.create({
         border.getToken('border-subtle-selected-01'),
 
         border.getToken('border-strong-01'),
+
+        border.getToken('border-tile-01'),
       ],
     }),
     TokenSet.create({
@@ -59,6 +61,8 @@ export const set = TokenSet.create({
         border.getToken('border-subtle-selected-02'),
 
         border.getToken('border-strong-02'),
+
+        border.getToken('border-tile-02'),
       ],
     }),
     TokenSet.create({
@@ -79,6 +83,8 @@ export const set = TokenSet.create({
         border.getToken('border-subtle-selected-03'),
 
         border.getToken('border-strong-03'),
+
+        border.getToken('border-tile-03'),
       ],
     }),
   ],

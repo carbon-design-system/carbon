@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -334,7 +334,9 @@
   }
 
   // Parent collapsed hover
-  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:not(.#{$prefix}--expandable-row):hover
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:not(
+      .#{$prefix}--expandable-row
+    ):hover
     td {
     border-top: 1px solid $layer-selected-hover;
     border-bottom: 1px solid $border-subtle;

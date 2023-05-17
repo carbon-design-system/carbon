@@ -1,11 +1,12 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
 @use '../form';
+@use '../../colors' as *;
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
@@ -25,7 +26,6 @@
     @include type-style('body-01');
     @include focus-outline('reset');
 
-    width: 100%;
     min-width: 10rem;
     height: 100%;
     min-height: rem(40px);
@@ -72,6 +72,26 @@
     fill: $support-error;
   }
 
+  .#{$prefix}--text-area__invalid-icon--warning {
+    fill: $support-warning;
+  }
+
+  .#{$prefix}--text-area__invalid-icon--warning path[fill] {
+    fill: $black-100;
+    opacity: 1;
+  }
+
+  .#{$prefix}--text-area__counter-alert {
+    position: absolute;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    border: 0;
+    margin: -1px;
+    clip: rect(0, 0, 0, 0);
+  }
+
   //-----------------------------
   // Disabled
   //-----------------------------
@@ -81,10 +101,19 @@
     color: $text-disabled;
     cursor: not-allowed;
     outline: none;
+    resize: none;
   }
 
   .#{$prefix}--text-area:disabled::placeholder {
     color: $text-disabled;
+  }
+
+  //-----------------------------
+  // Readonly
+  //-----------------------------
+  .#{$prefix}--text-area__wrapper--readonly .#{$prefix}--text-area {
+    border-bottom-color: $border-subtle;
+    background: transparent;
   }
 
   // V11: Possibly deprecate
@@ -96,6 +125,7 @@
   .#{$prefix}--text-area.#{$prefix}--skeleton {
     @include skeleton;
 
+    width: 100%;
     height: rem(100px);
 
     &::placeholder {

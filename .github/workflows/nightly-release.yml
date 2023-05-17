@@ -7,13 +7,13 @@ on:
 
 jobs:
   release:
-    runs-on: macOS-latest
+    runs-on: macos-11
     steps:
       - uses: actions/checkout@main
-      - name: Use Node.js 16.x
+      - name: Use Node.js 18.x
         uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: '18.x'
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache --check-cache
       - name: Build project

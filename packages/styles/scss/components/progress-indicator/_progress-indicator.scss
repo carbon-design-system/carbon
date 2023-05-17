@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -77,6 +77,10 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     fill: $interactive;
   }
 
+  .#{$prefix}--progress--space-equal .#{$prefix}--progress-text {
+    overflow: hidden;
+  }
+
   .#{$prefix}--progress-label {
     @include type-style('body-compact-01');
 
@@ -102,21 +106,25 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     cursor: pointer;
   }
 
-  .#{$prefix}--progress-label:focus {
-    box-shadow: 0 rem(3px) 0 0 $link-primary;
-    color: $link-primary;
-    outline: none;
-  }
-
   .#{$prefix}--progress--space-equal .#{$prefix}--progress-label {
     max-width: 100%;
     margin-right: 0.75rem;
   }
 
-  .#{$prefix}--progress-step-button:not(.#{$prefix}--progress-step-button--unclickable)
+  .#{$prefix}--progress-step-button:not(
+      .#{$prefix}--progress-step-button--unclickable
+    ) {
+    &:focus {
+      outline: none;
+    }
+    &:focus-visible .#{$prefix}--progress-label {
+      color: $focus;
+      outline: rem(1px) solid $focus;
+    }
     .#{$prefix}--progress-label:active {
-    box-shadow: 0 rem(3px) 0 0 $text-primary;
-    color: $text-primary;
+      box-shadow: 0 rem(1px) 0 0 $text-primary;
+      color: $text-primary;
+    }
   }
 
   //OVERFLOW STYLING
@@ -242,12 +250,6 @@ $progress-indicator-bar-width: 1px inset transparent !default;
       cursor: not-allowed;
     }
 
-    .#{$prefix}--progress-label:focus,
-    .#{$prefix}--progress-label:active {
-      box-shadow: none;
-      outline: none;
-    }
-
     .#{$prefix}--progress-line {
       cursor: not-allowed;
     }
@@ -271,6 +273,11 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     width: rem(40px);
     height: rem(14px);
     margin-top: 0.625rem;
+  }
+
+  .#{$prefix}--progress.#{$prefix}--progress--vertical.#{$prefix}--skeleton
+    .#{$prefix}--progress-label {
+    margin-top: 0.0625rem;
   }
 
   // Vertical Variant

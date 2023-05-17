@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -11,6 +11,7 @@
 @use '../../theme' as *;
 @use '../../type' as *;
 
+@use '../../utilities/button-reset';
 @use '../../utilities/convert' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
@@ -63,9 +64,6 @@
     display: inline-block;
     width: 100%;
     max-width: rem(320px);
-    @if not enabled('enable-v11-release') {
-      margin-bottom: $spacing-03;
-    }
 
     color: $link-primary;
     cursor: pointer;
@@ -117,6 +115,10 @@
 
   .#{$prefix}--label-description--disabled {
     color: $text-disabled;
+  }
+
+  .#{$prefix}--file-container--drop {
+    width: 100%;
   }
 
   // For backwards compatibility
@@ -271,7 +273,6 @@
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-complete {
-    cursor: pointer;
     fill: $interactive;
 
     &:focus {
@@ -317,6 +318,8 @@
   }
 
   .#{$prefix}--file__drop-container {
+    @include button-reset.reset;
+
     display: flex;
     overflow: hidden;
     height: rem(96px);

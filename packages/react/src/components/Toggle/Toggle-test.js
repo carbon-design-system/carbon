@@ -36,33 +36,29 @@ describe('Toggle', () => {
 
     it('renders labelA when unchecked', () => {
       wrapper.rerender(<Toggle {...props} toggled={false} />);
-      expect(wrapper.queryByText(props.labelA)).toBeTruthy();
-      expect(wrapper.queryByText(props.labelB)).toBeNull();
+      expect(wrapper.queryByText(props.labelA)).toBeInTheDocument();
+      expect(wrapper.queryByText(props.labelB)).not.toBeInTheDocument();
     });
 
     it('renders labelB when checked', () => {
       wrapper.rerender(<Toggle {...props} toggled={true} />);
-      expect(wrapper.queryByText(props.labelA)).toBeNull();
-      expect(wrapper.queryByText(props.labelB)).toBeTruthy();
+      expect(wrapper.queryByText(props.labelA)).not.toBeInTheDocument();
+      expect(wrapper.queryByText(props.labelB)).toBeInTheDocument();
     });
 
     it('supports additional css class names', () => {
       const className = 'some-additional-class';
       wrapper.rerender(<Toggle {...props} className={className} />);
 
-      expect(
-        wrapper.container
-          .querySelector(`.${prefix}--toggle`)
-          .classList.contains(className)
-      ).toBe(true);
+      expect(wrapper.container.querySelector(`.${prefix}--toggle`)).toHaveClass(
+        className
+      );
     });
 
     it('supports sm size', () => {
       expect(
-        wrapper.container
-          .querySelector(`.${prefix}--toggle__appearance`)
-          .classList.contains(`${prefix}--toggle__appearance--sm`)
-      ).toBe(false);
+        wrapper.container.querySelector(`.${prefix}--toggle__appearance`)
+      ).not.toHaveClass(`${prefix}--toggle__appearance--sm`);
       expect(
         wrapper.container.querySelector(`.${prefix}--toggle__check`)
       ).toBeNull();
@@ -70,10 +66,8 @@ describe('Toggle', () => {
       wrapper.rerender(<Toggle {...props} size="sm" />);
 
       expect(
-        wrapper.container
-          .querySelector(`.${prefix}--toggle__appearance`)
-          .classList.contains(`${prefix}--toggle__appearance--sm`)
-      ).toBe(true);
+        wrapper.container.querySelector(`.${prefix}--toggle__appearance`)
+      ).toHaveClass(`${prefix}--toggle__appearance--sm`);
       expect(
         wrapper.container.querySelector(`.${prefix}--toggle__check`)
       ).toBeTruthy();
@@ -83,61 +77,92 @@ describe('Toggle', () => {
       wrapper.rerender(<Toggle {...props} hideLabel />);
 
       expect(
-        wrapper.container
-          .querySelector(`.${prefix}--toggle__label-text`)
-          .classList.contains(`${prefix}--visually-hidden`)
-      ).toBe(true);
-      expect(
         wrapper.container.querySelector(`.${prefix}--toggle__label-text`)
-          .textContent
-      ).toBe(props.labelText);
+      ).toHaveClass(`${prefix}--visually-hidden`);
+      expect(
+        wrapper.container.querySelector(`.${prefix}--toggle__text`)
+      ).toHaveTextContent(props.labelText);
+    });
+
+    it("doesn't render sideLabel if props.hideLabel and no props.labelText is provided", () => {
+      const externalElementId = 'external-element-id';
+      wrapper.rerender(
+        <Toggle
+          {...props}
+          hideLabel
+          labelText={null}
+          aria-labelledby={externalElementId}
+        />
+      );
+
+      expect(
+        wrapper.container.querySelector(`.${prefix}--toggle__text`)
+      ).toBeNull();
+
+      expect(wrapper.getByRole('switch')).toHaveAttribute(
+        'aria-labelledby',
+        externalElementId
+      );
+
+      expect(
+        wrapper.container.querySelector(`.${prefix}--toggle__label`).tagName
+      ).toBe('DIV');
     });
   });
 
   describe('behaves as expected', () => {
     it('supports to be disabled', () => {
-      expect(wrapper.getByRole('switch').disabled).toBe(false);
+      expect(wrapper.getByRole('switch')).toBeEnabled();
       wrapper.rerender(<Toggle {...props} disabled />);
-      expect(wrapper.getByRole('switch').disabled).toBe(true);
+      expect(wrapper.getByRole('switch')).toBeDisabled();
     });
 
     it('can be controlled with props.toggled', () => {
       wrapper.rerender(<Toggle {...props} toggled={false} />);
-      expect(wrapper.getByRole('switch').getAttribute('aria-checked')).toBe(
-        'false'
-      );
+      expect(wrapper.getByRole('switch')).not.toBeChecked();
       wrapper.rerender(<Toggle {...props} toggled={true} />);
-      expect(wrapper.getByRole('switch').getAttribute('aria-checked')).toBe(
-        'true'
+      expect(wrapper.getByRole('switch')).toBeChecked();
+    });
+
+    it('does not change value when readonly', async () => {
+      const onClick = jest.fn();
+      const onToggle = jest.fn();
+      wrapper.rerender(
+        <Toggle {...props} onClick={onClick} onToggle={onToggle} readOnly />
       );
+
+      expect(onClick).not.toHaveBeenCalled();
+      await userEvent.click(wrapper.getByRole('switch'));
+      expect(onClick).toHaveBeenCalledTimes(1);
+      expect(onToggle).not.toHaveBeenCalled();
     });
   });
 
   describe('emits events as expected', () => {
-    it('passes along props.onClick to button', () => {
+    it('passes along props.onClick to button', async () => {
       const onClick = jest.fn();
       wrapper.rerender(<Toggle {...props} onClick={onClick} />);
 
       expect(onClick).not.toHaveBeenCalled();
-      userEvent.click(wrapper.getByRole('switch'));
+      await userEvent.click(wrapper.getByRole('switch'));
       expect(onClick).toHaveBeenCalledTimes(1);
     });
 
-    it('emits props.onToggle when toggled and passes current state', () => {
+    it('emits props.onToggle when toggled and passes current state', async () => {
       const onToggle = jest.fn();
 
       wrapper.rerender(
         <Toggle {...props} onToggle={onToggle} toggled={false} />
       );
       expect(onToggle).not.toHaveBeenCalled();
-      userEvent.click(wrapper.getByRole('switch'));
+      await userEvent.click(wrapper.getByRole('switch'));
       expect(onToggle).toHaveBeenCalledTimes(1);
       expect(onToggle.mock.calls[0][0]).toBe(true);
 
       wrapper.rerender(
         <Toggle {...props} onToggle={onToggle} toggled={true} />
       );
-      userEvent.click(wrapper.getByRole('switch'));
+      await userEvent.click(wrapper.getByRole('switch'));
       expect(onToggle).toHaveBeenCalledTimes(2);
       expect(onToggle.mock.calls[1][0]).toBe(false);
     });

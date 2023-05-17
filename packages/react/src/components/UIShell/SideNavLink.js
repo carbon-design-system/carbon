@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -59,6 +59,11 @@ SideNavLink.propTypes = {
    * Provide an optional class to be applied to the containing node
    */
   className: PropTypes.string,
+
+  /**
+   * Specify whether the link is the current page
+   */
+  isActive: PropTypes.bool,
 
   /**
    * Specify if this is a large variation of the SideNavLink

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -34,7 +34,6 @@ const stories = glob
     const filepath = path.resolve(__dirname, match);
     const basename = path.basename(match, '.js');
     const denylist = new Set([
-      'TooltipDefinition-story',
       'DataTable-basic-story',
       'DataTable-batch-actions-story',
       'DataTable-filtering-story',
@@ -89,9 +88,16 @@ module.exports = {
   },
   features: {
     previewCsfV3: true,
+    buildStoriesJson: true,
   },
   framework: '@storybook/react',
   stories,
+  typescript: {
+    reactDocgen: 'react-docgen', // Favor docgen from prop-types instead of TS interfaces
+  },
+  reactOptions: {
+    legacyRootApi: false,
+  },
   webpack(config) {
     const babelLoader = config.module.rules.find((rule) => {
       return rule.use.some(({ loader }) => {

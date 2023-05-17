@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -27,7 +27,7 @@ export default {
   },
 };
 
-export const BreadcrumbStory = () => (
+export const Default = () => (
   <Breadcrumb>
     <BreadcrumbItem>
       <a href="/#">Breadcrumb 1</a>
@@ -38,8 +38,6 @@ export const BreadcrumbStory = () => (
   </Breadcrumb>
 );
 
-BreadcrumbStory.storyName = 'Breadcrumb';
-
 export const BreadcrumbWithOverflowMenu = () => (
   <Breadcrumb>
     <BreadcrumbItem>
@@ -47,7 +45,7 @@ export const BreadcrumbWithOverflowMenu = () => (
     </BreadcrumbItem>
     <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
     <BreadcrumbItem data-floating-menu-container>
-      <OverflowMenu ariaLabel="Overflow menu in a breadcrumb">
+      <OverflowMenu aria-label="Overflow menu in a breadcrumb">
         <OverflowMenuItem itemText="Breadcrumb 3" />
         <OverflowMenuItem itemText="Breadcrumb 4" />
       </OverflowMenu>

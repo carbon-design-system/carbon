@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -94,7 +94,9 @@
     opacity: 0;
   }
 
-  .#{$prefix}--toolbar-search-container-expandable:not(.#{$prefix}--toolbar-search-container-active)
+  .#{$prefix}--toolbar-search-container-expandable:not(
+      .#{$prefix}--toolbar-search-container-active
+    )
     .#{$prefix}--search-input {
     padding: 0;
   }
@@ -144,7 +146,9 @@
 
   // sm expandable icon spacing
   .#{$prefix}--table-toolbar.#{$prefix}--table-toolbar--sm
-    .#{$prefix}--search--sm:not(.#{$prefix}--toolbar-search-container-active):not(.#{$prefix}--toolbar-search-container-persistent)
+    .#{$prefix}--search--sm:not(
+      .#{$prefix}--toolbar-search-container-active
+    ):not(.#{$prefix}--toolbar-search-container-persistent)
     .#{$prefix}--search-magnifier-icon {
     left: 0;
   }
@@ -393,10 +397,9 @@
   .#{$prefix}--batch-actions:focus {
     @include focus-outline;
   }
-
+  // 200% to allow tooltips
   .#{$prefix}--batch-actions--active {
-    overflow: auto hidden;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 200% 0, 200% 200%, 0 200%);
     pointer-events: all;
     transform: translate3d(0, 0, 0);
   }
@@ -414,7 +417,10 @@
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn:disabled {
-    color: $text-on-color-disabled;
+    border-color: transparent;
+    background-color: transparent;
+    color: $text-on-color;
+    opacity: 0.5;
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon {

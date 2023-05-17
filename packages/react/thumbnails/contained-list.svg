@@ -1,0 +1,47 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="contained-list">
+<g id="Group">
+<rect id="Rectangle 6 Copy 23" x="158" y="236" width="170" height="10" fill="#A8A8A8"/>
+<g id="color/gray/20 copy 87">
+<rect width="138" height="1" transform="matrix(2 0 0 -2 170 218)" fill="#DCDCDC"/>
+</g>
+<g id="color/gray/20 copy 88">
+<rect id="gray-30" width="176" height="1" transform="matrix(2 0 0 -2 144 266)" fill="#BEBEBE"/>
+</g>
+<rect id="Rectangle 6 Copy 24" x="158" y="140" width="170" height="10" fill="#A8A8A8"/>
+<rect id="Rectangle 6 Copy 25" x="158" y="188" width="120" height="10" fill="#A8A8A8"/>
+<g id="color/gray/20 copy 90">
+<rect id="gray-30_2" width="176" height="1" transform="matrix(2 0 0 -2 144 170)" fill="#BEBEBE"/>
+</g>
+<g id="color/gray/20 copy 91">
+<rect id="gray-30_3" width="176" height="1" transform="matrix(2 0 0 -2 144 218)" fill="#BEBEBE"/>
+</g>
+</g>
+<rect id="Rectangle 127" x="128" y="92" width="384" height="30" fill="#F3F3F3"/>
+<rect id="Rectangle 6 Copy 26" x="158" y="104" width="66" height="6" fill="#A2A9B0"/>
+<g id="icon/navigation/close/16 copy 3">
+<path id="icon color" fill-rule="evenodd" clip-rule="evenodd" d="M472.884 146L477 141.884L476.116 141L472 145.116L467.884 141L467 141.884L471.116 146L467 150.116L467.884 151L472 146.884L476.116 151L477 150.116L472.884 146Z" fill="black"/>
+<mask id="mask0_402_5452" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="467" y="141" width="10" height="10">
+<path id="icon color_2" fill-rule="evenodd" clip-rule="evenodd" d="M472.884 146L477 141.884L476.116 141L472 145.116L467.884 141L467 141.884L471.116 146L467 150.116L467.884 151L472 146.884L476.116 151L477 150.116L472.884 146Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_402_5452)">
+</g>
+</g>
+<g id="icon/navigation/close/16 copy 4">
+<path id="icon color_3" fill-rule="evenodd" clip-rule="evenodd" d="M472.884 192L477 187.884L476.116 187L472 191.116L467.884 187L467 187.884L471.116 192L467 196.116L467.884 197L472 192.884L476.116 197L477 196.116L472.884 192Z" fill="black"/>
+<mask id="mask1_402_5452" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="467" y="187" width="10" height="10">
+<path id="icon color_4" fill-rule="evenodd" clip-rule="evenodd" d="M472.884 192L477 187.884L476.116 187L472 191.116L467.884 187L467 187.884L471.116 192L467 196.116L467.884 197L472 192.884L476.116 197L477 196.116L472.884 192Z" fill="white"/>
+</mask>
+<g mask="url(#mask1_402_5452)">
+</g>
+</g>
+<g id="icon/navigation/close/16 copy 5">
+<path id="icon color_5" fill-rule="evenodd" clip-rule="evenodd" d="M472.884 242L477 237.884L476.116 237L472 241.116L467.884 237L467 237.884L471.116 242L467 246.116L467.884 247L472 242.884L476.116 247L477 246.116L472.884 242Z" fill="black"/>
+<mask id="mask2_402_5452" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="467" y="237" width="10" height="10">
+<path id="icon color_6" fill-rule="evenodd" clip-rule="evenodd" d="M472.884 242L477 237.884L476.116 237L472 241.116L467.884 237L467 237.884L471.116 242L467 246.116L467.884 247L472 242.884L476.116 247L477 246.116L472.884 242Z" fill="white"/>
+</mask>
+<g mask="url(#mask2_402_5452)">
+</g>
+</g>
+</g>
+</svg>

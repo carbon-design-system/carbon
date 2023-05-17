@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,7 +12,7 @@ import { matches, keys } from '../../internal/keyboard';
 import { ButtonKinds } from '../../prop-types/types';
 import uid from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
-import * as FeatureFlags from '@carbon/feature-flags';
+import deprecate from '../../prop-types/deprecate';
 
 function noop() {}
 
@@ -26,10 +26,8 @@ function FileUploaderButton({
   labelText: ownerLabelText = 'Add file',
   multiple = false,
   onChange = noop,
-  role = 'button',
   name,
   size = 'md',
-  tabIndex = 0,
   // eslint-disable-next-line react/prop-types
   innerRef,
   ...other
@@ -55,10 +53,13 @@ function FileUploaderButton({
 
   function onClick(event) {
     event.target.value = null;
+    inputNode.current.value = '';
+    inputNode.current.click();
   }
 
   function onKeyDown(event) {
     if (matches(event, [keys.Enter, keys.Space])) {
+      inputNode.current.value = '';
       inputNode.current.click();
     }
   }
@@ -78,17 +79,20 @@ function FileUploaderButton({
 
   return (
     <>
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-      <label
-        ref={innerRef}
-        tabIndex={disabled ? -1 : tabIndex || 0}
+      <button
+        type="button"
+        disabled={disabled}
         className={classes}
+        onClick={onClick}
         onKeyDown={onKeyDown}
-        htmlFor={inputId}
         {...other}>
-        <span role={role} aria-disabled={disabled}>
-          {labelText}
-        </span>
+        {labelText}
+      </button>
+      <label
+        className={`${prefix}--visually-hidden`}
+        ref={innerRef}
+        htmlFor={inputId}>
+        <span>{labelText}</span>
       </label>
       <input
         className={`${prefix}--visually-hidden`}
@@ -101,7 +105,6 @@ function FileUploaderButton({
         accept={accept}
         name={name}
         onChange={handleOnChange}
-        onClick={onClick}
       />
     </>
   );
@@ -176,14 +179,16 @@ FileUploaderButton.propTypes = {
    * Specify the size of the FileUploaderButton, from a list of available
    * sizes.
    */
-  size: FeatureFlags.enabled('enable-v11-release')
-    ? PropTypes.oneOf(['sm', 'md', 'lg'])
-    : PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * Provide a custom tabIndex value for the `<FileUploaderButton>`
    */
-  tabIndex: PropTypes.number,
+  tabIndex: deprecate(
+    PropTypes.number,
+    'The `tabIndex` prop for `FileUploaderButton` has ' +
+      'been deprecated since it now renders a button element by default.'
+  ),
 };
 
 export default FileUploaderButton;

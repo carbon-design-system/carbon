@@ -1,9 +1,11 @@
 /**
- * Copyright IBM Corp. 2016, 2020
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-export Pagination from './Pagination';
-export PageSelector from './PageSelector';
+import Pagination from './Pagination';
+import PageSelector from './PageSelector';
+
+export { PageSelector, Pagination };

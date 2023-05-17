@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2018
+ * Copyright IBM Corp. 2018, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -203,6 +203,11 @@ export const border = TokenGroup.create({
     'border-strong-02',
     'border-strong-03',
 
+    // Border tile
+    'border-tile-01',
+    'border-tile-02',
+    'border-tile-03',
+
     // Border inverse
     'border-inverse',
 
@@ -281,6 +286,7 @@ export const icon = TokenGroup.create({
       state: 'disabled',
       name: 'icon-disabled',
     },
+    'icon-interactive',
   ],
 });
 
@@ -331,6 +337,7 @@ export const contextual = TokenGroup.create({
     'border-subtle',
     'border-subtle-selected',
     'border-strong',
+    'border-tile',
   ],
 });
 

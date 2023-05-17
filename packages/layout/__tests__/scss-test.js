@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2018
+ * Copyright IBM Corp. 2018, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,7 +8,7 @@
  */
 
 import { SassRenderer } from '@carbon/test-utils/scss';
-import { spacing, fluidSpacing, container, iconSize } from '../src';
+import { spacing, fluidSpacing, container, iconSize, layout } from '../src';
 
 const { render } = SassRenderer.create(__dirname);
 
@@ -36,9 +36,13 @@ const iconSizeScale = iconSize.map((value, index) => {
   return [index, formatStep('icon-size', index + 1), value];
 });
 
+const layoutScale = layout.map((value, index) => {
+  return [index, formatStep('layout', index + 1), value];
+});
+
 describe('scss/layout.scss', () => {
   it.each(spacingScale)(
-    'it should export spacing step %s',
+    'should export spacing step `%s`',
     async (_index, id, value) => {
       const { get } = await render(`
         @use 'sass:map';
@@ -56,7 +60,7 @@ describe('scss/layout.scss', () => {
   );
 
   it.each(fluidSpacingScale)(
-    'it should export fluid spacing step %s',
+    'should export fluid spacing step `%s`',
     async (_index, id, value) => {
       const { get } = await render(`
         @use 'sass:map';
@@ -74,7 +78,7 @@ describe('scss/layout.scss', () => {
   );
 
   it.each(containerScale)(
-    'it should export container step %s',
+    'should export container step `%s`',
     async (_index, id, value) => {
       const { get } = await render(`
         @use 'sass:map';
@@ -92,7 +96,25 @@ describe('scss/layout.scss', () => {
   );
 
   it.each(iconSizeScale)(
-    'it should export icon-size step %s',
+    'should export icon-size step `%s`',
+    async (_index, id, value) => {
+      const { get } = await render(`
+        @use 'sass:map';
+        @use 'sass:meta';
+        @use '../index.scss' as layout;
+
+        $variables: meta.module-variables('layout');
+        $key: get('key', map.has-key($variables, '${id}'));
+        $value: get('value', map.get($variables, '${id}'));
+      `);
+
+      expect(get('key').value).toBe(true);
+      expect(get('value').value).toBe(value);
+    }
+  );
+
+  it.each(layoutScale)(
+    'should export layout step `%s`',
     async (_index, id, value) => {
       const { get } = await render(`
         @use 'sass:map';

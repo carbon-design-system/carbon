@@ -1,21 +1,31 @@
 @use '../../../../styles/scss/utilities/hide-at-breakpoint' as *;
 
 .hide-at-sm {
+  padding: 2rem 1rem;
+  background: #8a3ffc;
   @include hide-at-sm;
 }
 
 .hide-at-md {
+  padding: 2rem 1rem;
+  background: #4589ff;
   @include hide-at-md;
 }
 
 .hide-at-lg {
+  padding: 2rem 1rem;
+  background: #42be65;
   @include hide-at-lg;
 }
 
 .hide-at-xlg {
+  padding: 2rem 1rem;
+  background: #f1c21b;
   @include hide-at-xlg;
 }
 
 .hide-at-max {
+  padding: 2rem 1rem;
+  background: #da1e28;
   @include hide-at-max;
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -44,12 +44,79 @@ export default (config) => (fp) => {
   };
 
   /**
+   * Handles `blur` event.
+   *
+   * For whatever reason, manual changes within the `to` input do not update the
+   * calendar on blur. If a manual change is made within the input, this block will
+   * set the date again, triggering the calendar to update.
+   */
+  const handleBlur = (event) => {
+    const { inputFrom, inputTo, lastStartValue } = config;
+    const { target } = event;
+
+    // Only fall into this logic if the event is on the `to` input and there is a
+    // `to` date selected
+    if (inputTo === target && fp.selectedDates[1]) {
+      // Using getTime() enables the ability to more readily compare the date currently
+      // selected in the calendar and the date currently in the value of the input
+      const selectedToDate = new Date(fp.selectedDates[1]).setHours(0, 0, 0, 0);
+      const currentValueToDate = new Date(inputTo.value).setHours(0, 0, 0, 0);
+
+      // The date should only be set if both dates are valid dates, and they don't match.
+      // When they don't match, this indiciates that the date selected in the calendar is stale,
+      // and the current value in the input should be set for the calendar to update.
+      if (
+        selectedToDate &&
+        currentValueToDate &&
+        selectedToDate !== currentValueToDate
+      ) {
+        // Update the calendar with the value of the `to` date input
+        fp.setDate(
+          [inputFrom.value, inputTo && inputTo.value],
+          true,
+          fp.config.dateFormat
+        );
+      }
+    }
+
+    // save end date in calendar inmediately after it's been written down
+    if (inputTo === target && fp.selectedDates.length === 1 && inputTo.value) {
+      let currentEndDate = new Date(inputTo.value);
+
+      if (currentEndDate.toString() !== 'Invalid Date') {
+        fp.setDate(
+          [inputFrom.value, inputTo.value],
+          true,
+          fp.config.dateFormat
+        );
+      }
+    }
+
+    // overriding the flatpickr bug where the startDate gets deleted on blur
+    if (inputTo === target && !inputFrom.value && lastStartValue.current) {
+      let currentStartDate = new Date(lastStartValue.current);
+
+      if (currentStartDate.toString() !== 'Invalid Date') {
+        inputFrom.value = lastStartValue.current;
+        if (inputTo.value) {
+          fp.setDate(
+            [inputFrom.value, inputTo.value],
+            true,
+            fp.config.dateFormat
+          );
+        }
+      }
+    }
+  };
+
+  /**
    * Releases event listeners used in this Flatpickr plugin.
    */
   const release = () => {
     const { inputFrom, inputTo } = config;
     if (inputTo) {
       inputTo.removeEventListener('keydown', handleKeydown, true);
+      inputTo.removeEventListener('blur', handleBlur, true);
     }
     inputFrom.removeEventListener('keydown', handleKeydown, true);
   };
@@ -63,6 +130,7 @@ export default (config) => (fp) => {
     inputFrom.addEventListener('keydown', handleKeydown, true);
     if (inputTo) {
       inputTo.addEventListener('keydown', handleKeydown, true);
+      inputTo.addEventListener('blur', handleBlur, true);
     }
   };
 

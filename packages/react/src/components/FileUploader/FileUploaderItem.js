@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,7 +12,6 @@ import Filename from './Filename';
 import { keys, matches } from '../../internal/keyboard';
 import uid from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
-import * as FeatureFlags from '@carbon/feature-flags';
 
 function FileUploaderItem({
   uuid,
@@ -40,13 +39,14 @@ function FileUploaderItem({
       </p>
       <span className={`${prefix}--file__state-container`}>
         <Filename
+          name={name}
           iconDescription={iconDescription}
-          aria-describedby={name}
           status={status}
           invalid={invalid}
           onKeyDown={(evt) => {
             if (matches(evt, [keys.Enter, keys.Space])) {
               if (status === 'edit') {
+                evt.preventDefault();
                 onDelete(evt, { uuid: id });
               }
             }
@@ -110,9 +110,7 @@ FileUploaderItem.propTypes = {
    * Specify the size of the FileUploaderButton, from a list of available
    * sizes.
    */
-  size: FeatureFlags.enabled('enable-v11-release')
-    ? PropTypes.oneOf(['sm', 'md', 'lg'])
-    : PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * Status of the file upload

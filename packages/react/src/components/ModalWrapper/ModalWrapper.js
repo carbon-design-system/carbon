@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,8 +10,19 @@ import React from 'react';
 import Modal from '../Modal';
 import Button from '../Button';
 import { ButtonKinds } from '../../prop-types/types';
+import { warning } from '../../internal/warning';
+
+let didWarnAboutDeprecation = false;
 
 export default class ModalWrapper extends React.Component {
+  if(__DEV__) {
+    warning(
+      didWarnAboutDeprecation,
+      '`<ModalWrapper>` has been deprecated in favor of `<ComposedModal/>` and will be removed in the next major version, `@carbon/react@v2.x`'
+    );
+    didWarnAboutDeprecation = true;
+  }
+
   static propTypes = {
     buttonTriggerClassName: PropTypes.string,
     buttonTriggerText: PropTypes.node,
@@ -42,6 +53,7 @@ export default class ModalWrapper extends React.Component {
   };
 
   static defaultProps = {
+    shouldCloseAfterSubmit: true,
     primaryButtonText: 'Save',
     secondaryButtonText: 'Cancel',
     triggerButtonIconDescription: 'Provide icon description if icon is used',
@@ -66,9 +78,11 @@ export default class ModalWrapper extends React.Component {
   };
 
   handleClose = (evt) => {
+    const innerModal = this.modal.current.querySelector('div');
     if (
+      this.modal.current &&
       evt &&
-      !this.modal.current.innerModal.current.contains(evt.target) &&
+      !innerModal.contains(evt.target) &&
       this.props.preventCloseOnClickOutside
     ) {
       return;
@@ -82,11 +96,12 @@ export default class ModalWrapper extends React.Component {
   handleOnRequestSubmit = () => {
     const { handleSubmit, shouldCloseAfterSubmit } = this.props;
 
-    if (handleSubmit()) {
-      if (shouldCloseAfterSubmit) {
-        this.handleClose();
-      }
+    if (handleSubmit && shouldCloseAfterSubmit) {
+      handleSubmit();
+      this.handleClose();
     }
+
+    handleSubmit();
   };
 
   render() {

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2018
+ * Copyright IBM Corp. 2018, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,11 +16,6 @@ global.requestAnimationFrame = function requestAnimationFrame(callback) {
   // setTimeout(callback);
   callback();
 };
-
-const enzyme = jest.requireActual('enzyme');
-const Adapter = jest.requireActual('@wojtekmaj/enzyme-adapter-react-17');
-
-enzyme.configure({ adapter: new Adapter() });
 
 if (global.HTMLElement) {
   // This is a quirk that we need to bring in due to how our `tabbable` dependency

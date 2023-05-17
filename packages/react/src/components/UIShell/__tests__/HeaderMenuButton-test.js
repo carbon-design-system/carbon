@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -45,11 +45,11 @@ describe('HeaderMenuButton', () => {
     );
   });
 
-  it('should call `onClick` when the <button> is clicked', () => {
+  it('should call `onClick` when the <button> is clicked', async () => {
     const onClick = jest.fn();
     render(<HeaderMenuButton aria-label="test" onClick={onClick} />);
 
-    userEvent.click(screen.getByLabelText('test'));
+    await userEvent.click(screen.getByLabelText('test'));
     expect(onClick).toHaveBeenCalled();
   });
 

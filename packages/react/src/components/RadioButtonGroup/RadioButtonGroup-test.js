@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,7 +23,7 @@ describe('RadioButtonGroup', () => {
     const legend = screen.getByText('test', {
       selector: 'legend',
     });
-    expect(legend).toBeDefined();
+    expect(legend).toBeInTheDocument();
   });
 
   it('should render `legendText` in a <fieldset>', () => {
@@ -94,6 +94,31 @@ describe('RadioButtonGroup', () => {
       expect(fieldset).toBeDisabled();
     });
 
+    it('should support readonly to prevent changes', async () => {
+      render(
+        <RadioButtonGroup
+          defaultSelected="test-1"
+          readOnly={true}
+          name="test"
+          legendText="test">
+          <RadioButton labelText="test-1" value="test-1" />
+          <RadioButton labelText="test-2" value="test-2" />
+        </RadioButtonGroup>
+      );
+
+      const radio1 = screen.getByLabelText('test-1');
+      const radio2 = screen.getByLabelText('test-2');
+
+      expect(radio1).toBeChecked();
+      expect(radio2).not.toBeChecked();
+
+      await userEvent.click(radio2);
+
+      // no change
+      expect(radio1).toBeChecked();
+      expect(radio2).not.toBeChecked();
+    });
+
     it('should support `defaultSelected` as a way to select a radio button', () => {
       render(
         <RadioButtonGroup
@@ -140,6 +165,34 @@ describe('RadioButtonGroup', () => {
       );
     });
 
+    it('should support `checked` prop in RadioButton when there is no `defaultSelected` or `valueSelected`', () => {
+      const { rerender } = render(
+        <RadioButtonGroup name="test" legendText="test">
+          <RadioButton labelText="test-1" value="test-1" checked />
+          <RadioButton labelText="test-2" value="test-2" />
+        </RadioButtonGroup>
+      );
+
+      expect(screen.getByLabelText('test-1')).toEqual(
+        screen.getByRole('radio', {
+          checked: true,
+        })
+      );
+
+      rerender(
+        <RadioButtonGroup name="test" legendText="test">
+          <RadioButton labelText="test-1" value="test-1" />
+          <RadioButton labelText="test-2" value="test-2" checked />
+        </RadioButtonGroup>
+      );
+
+      expect(screen.getByLabelText('test-2')).toEqual(
+        screen.getByRole('radio', {
+          checked: true,
+        })
+      );
+    });
+
     it('should support a 0 value for `valueSelected` (#9041)', () => {
       render(
         <RadioButtonGroup valueSelected={0} name="test" legendText="test">
@@ -155,7 +208,7 @@ describe('RadioButtonGroup', () => {
       );
     });
 
-    it('should call `onChange` when the value of the group changes', () => {
+    it('should call `onChange` when the value of the group changes', async () => {
       const onChange = jest.fn();
 
       render(
@@ -165,7 +218,7 @@ describe('RadioButtonGroup', () => {
         </RadioButtonGroup>
       );
 
-      userEvent.click(screen.getByLabelText('Option one'));
+      await userEvent.click(screen.getByLabelText('Option one'));
       expect(onChange).toHaveBeenCalled();
       expect(onChange).toHaveBeenCalledWith(
         'option-one',

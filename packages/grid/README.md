@@ -18,6 +18,15 @@ instead:
 yarn add @carbon/grid
 ```
 
+You can then include the grid by doing the following in your Sass files:
+
+```
+@use '@carbon/grid';
+
+// Emit the flex-grid styles
+@include grid.flex-grid();
+```
+
 ## Usage
 
 _More examples and documentation can be found on this
@@ -26,22 +35,22 @@ _More examples and documentation can be found on this
 `@carbon/grid` has three primitive class types to use in order to structure your
 application. They include:
 
-- `bx--grid`, defines the overall grid context and sets some useful attributes
+- `cds--grid`, defines the overall grid context and sets some useful attributes
   like width and margin
-- `bx--row`, defines a row of items in a grid
-- `bx--col`, used to define individual columns
+- `cds--row`, defines a row of items in a grid
+- `cds--col`, used to define individual columns
 
 You can use a combination of these classes to build a layout. For example, if we
 wanted a 4 column layout for a small breakpoint we could use the following
 markup:
 
 ```html
-<div class="bx--grid">
-  <div class="bx--row">
-    <div class="bx--col">1/4</div>
-    <div class="bx--col">1/4</div>
-    <div class="bx--col">1/4</div>
-    <div class="bx--col">1/4</div>
+<div class="cds--grid">
+  <div class="cds--row">
+    <div class="cds--col">1/4</div>
+    <div class="cds--col">1/4</div>
+    <div class="cds--col">1/4</div>
+    <div class="cds--col">1/4</div>
   </div>
 </div>
 ```
@@ -56,17 +65,17 @@ one in combination with a column to specify the number of columns to span at a
 given breakpoint. For example, we could rewrite the above example to be:
 
 ```html
-<div class="bx--grid">
-  <div class="bx--row">
-    <div class="bx--col-sm-1">1/4</div>
-    <div class="bx--col-sm-1">1/4</div>
-    <div class="bx--col-sm-1">1/4</div>
-    <div class="bx--col-sm-1">1/4</div>
+<div class="cds--grid">
+  <div class="cds--row">
+    <div class="cds--col-sm-1">1/4</div>
+    <div class="cds--col-sm-1">1/4</div>
+    <div class="cds--col-sm-1">1/4</div>
+    <div class="cds--col-sm-1">1/4</div>
   </div>
 </div>
 ```
 
-The `.bx--col-sm-1` class names tells us that this `<div>` should only span one
+The `.cds--col-sm-1` class names tells us that this `<div>` should only span one
 column at our `sm` breakpoint. By default, as we scale beyond the breakpoint the
 layout will still take up a percentage of the overall width.
 

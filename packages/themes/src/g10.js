@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2018
+ * Copyright IBM Corp. 2018, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,7 +30,7 @@ import {
   // Support
   blue50,
   green40,
-  green60,
+  green50,
   yellow30,
   orange40,
   red50,
@@ -109,14 +109,14 @@ export const fieldHover03 = whiteHover;
 
 // Border
 // border-subtle-00
-export const borderSubtle00 = gray20;
+export const borderSubtle00 = gray30;
 
 // border-subtle-01
 export const borderSubtle01 = gray20;
 export const borderSubtleSelected01 = gray30;
 
 // border-subtle-02
-export const borderSubtle02 = gray20;
+export const borderSubtle02 = gray30;
 export const borderSubtleSelected02 = gray30;
 
 // border-subtle-03
@@ -127,6 +127,11 @@ export const borderSubtleSelected03 = gray30;
 export const borderStrong01 = gray50;
 export const borderStrong02 = gray50;
 export const borderStrong03 = gray50;
+
+// border-tile
+export const borderTile01 = gray40;
+export const borderTile02 = gray30;
+export const borderTile03 = gray40;
 
 // border-inverse
 export const borderInverse = gray100;
@@ -164,10 +169,11 @@ export const iconInverse = white;
 export const iconOnColor = white;
 export const iconOnColorDisabled = gray50;
 export const iconDisabled = adjustAlpha(iconPrimary, 0.25);
+export const iconInteractive = blue60;
 
 // Support
 export const supportError = red60;
-export const supportSuccess = green60;
+export const supportSuccess = green50;
 export const supportWarning = yellow30;
 export const supportInfo = blue70;
 export const supportErrorInverse = red50;
@@ -265,4 +271,13 @@ export {
   // Icon sizes
   iconSize01,
   iconSize02,
+  // Layout
+  // Deprecated ☠️
+  layout01,
+  layout02,
+  layout03,
+  layout04,
+  layout05,
+  layout06,
+  layout07,
 } from './white';

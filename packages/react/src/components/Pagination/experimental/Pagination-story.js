@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2020
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,7 +17,7 @@ import {
 import {
   unstable_PageSelector as PageSelector,
   unstable_Pagination as Pagination,
-} from '../../../';
+} from '../../..';
 
 const props = () => ({
   disabled: boolean('Disable backward/forward buttons (disabled)', false),
@@ -68,43 +68,6 @@ export const WithAPageSelector = () => (
 
 WithAPageSelector.storyName = 'with a page selector';
 
-WithAPageSelector.parameters = {
-  info: {
-    propTables: [Pagination, PageSelector],
-    text: `
-        🚨 This component is *experimental* and may change. 🚨
-        \`Pagination\` accepts a render prop \`children\`.
-        This example wraps the \`children\` (\`PageSelector\`) in a function, allowing it to pass information back to the parent component.
-        \`\`\`jsx
-        {/**
-          * Provide \`totalItems\` to \`Pagination\` when using the \`PageSelector\` child.
-          * \`Pagination\` uses \`totalItems\` to calculate \`totalPages\`.
-          * And then, \`PageSelector\` uses the calculated \`totalPages\` to accurately display page options.
-          */}
-        <Pagination
-          totalItems={350}
-          pageSizes={[10, 15, 20, 25]}
-        >
-          {/**
-            * Below, \`children\` is a render prop, wrapped in a function.
-            * - \`currentPage\` is used to display the current page.
-            * - \`onSetPage\` is used to update the current page state in the parent component.
-            * - \`totalPages\` is calculated using the \`totalItems\` value provided to the parent component, and then is displayed below.
-            */}
-          {({ currentPage, onSetPage, totalPages }) => (
-            <PageSelector
-              currentPage={currentPage}
-              id="select-1"
-              onChange={event => onSetPage(event.target.value)}
-              totalPages={totalPages}
-            />
-          )}
-        </Pagination>
-        \`\`\`
-      `,
-  },
-};
-
 export const WithNoSizerChildInputOrChildSelector = () => (
   <Pagination {...props()} totalItems={350} />
 );
@@ -112,11 +75,70 @@ export const WithNoSizerChildInputOrChildSelector = () => (
 WithNoSizerChildInputOrChildSelector.storyName =
   'with no sizer, child input, or child selector';
 
-WithNoSizerChildInputOrChildSelector.parameters = {
-  info: {
-    text: `
-      🚨 This component is *experimental* and may change. 🚨
-      Without \`children\`, \`Pagination\` renders without a page selector.
-    `,
+export const Playground = (args) => <Pagination {...args} />;
+
+Playground.argTypes = {
+  className: {
+    control: false,
+  },
+  children: {
+    control: false,
+  },
+  id: {
+    control: false,
+  },
+  itemText: {
+    control: false,
+  },
+  forwardText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Next page',
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: 'false',
+  },
+  itemRangeText: {
+    control: false,
+  },
+  itemsPerPageText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Items per page:',
+  },
+  initialPage: {
+    control: {
+      type: 'number',
+    },
+    defaultValue: 1,
+  },
+  pageSize: {
+    control: {
+      type: 'number',
+    },
+    defaultValue: 10,
+  },
+  pageSizes: {
+    control: {
+      type: 'array',
+    },
+    defaultValue: [10, 20, 30, 40, 50],
+  },
+  pagesUnknown: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: 'false',
+  },
+  totalItems: {
+    control: {
+      type: 'number',
+    },
+    defaultValue: 350,
   },
 };

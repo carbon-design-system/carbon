@@ -6,9 +6,10 @@
 ## Table of Contents
 
 - [Overview](#overview)
-- [`carbon-components-react`](#carbon-components-react)
+- [`carbon-components-react`, `@carbon/react`](#carbon-components-react-carbonreact)
   - [Changes](#changes)
   - [Examples](#examples)
+    - [A change is made to component typings/definitions](#a-change-is-made-to-component-typingsdefinitions)
     - [A new prop is added to a component](#a-new-prop-is-added-to-a-component)
     - [An existing prop is deprecated](#an-existing-prop-is-deprecated)
     - [An existing prop is removed](#an-existing-prop-is-removed)
@@ -17,6 +18,8 @@
     - [A `PropTypes.func` prop type is changed to have different arguments](#a-proptypesfunc-prop-type-is-changed-to-have-different-arguments)
     - [A `PropTypes.func` prop type is changed to have additional arguments](#a-proptypesfunc-prop-type-is-changed-to-have-additional-arguments)
     - [A `PropTypes.func` prop type is changed to have fewer arguments](#a-proptypesfunc-prop-type-is-changed-to-have-fewer-arguments)
+    - [The DOM node that an `id` corresponds to is changed](#the-dom-node-that-an-id-corresponds-to-is-changed)
+    - [The DOM node that an `aria-label` corresponds to is changed](#the-dom-node-that-an-aria-label-corresponds-to-is-changed)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->
@@ -51,12 +54,13 @@ types of changes you can expect to occur as a consumer of that package. We'll
 try to highlight common changes in code and the corresponding `semver` bump that
 you can expect for the package when it is updated.
 
-## `carbon-components-react`
+## `carbon-components-react`, `@carbon/react`
 
 ### Changes
 
 | Type of change                                                      | semver bump |
 | ------------------------------------------------------------------- | ----------- |
+| A change is made to component typings/definitions                   | `patch`     |
 | A new prop is added to a component                                  | `minor`     |
 | An existing prop is deprecated                                      | `minor`     |
 | An existing prop is removed                                         | `major`     |
@@ -67,6 +71,20 @@ you can expect for the package when it is updated.
 | A `PropTypes.func` prop type is changed to have fewer arguments     | `major`     |
 
 ### Examples
+
+#### A change is made to component typings/definitions
+
+semver bump: **minor**
+
+Typescript definitions for component APIs are provided on an as-is basis and are
+not bound to semver. This includes type additions, changes, or removals.
+Breaking changes may happen across patch or minor versions. The component API
+may shift and types could become outdated.
+
+If a typing is out of date or incorrect, please let us know by opening an issue
+or even better, propose a fix via PR! We appreciate the community's involvement
+in this effort to keep component types up to date and as correct as possible!
+:pray:
 
 #### A new prop is added to a component
 

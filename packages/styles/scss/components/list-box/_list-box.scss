@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -112,7 +112,7 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--expanded:hover.#{$prefix}--list-box--light:hover {
-    background-color: $field;
+    background-color: $field-02;
   }
 
   .#{$prefix}--list-box .#{$prefix}--text-input {
@@ -155,7 +155,7 @@ $list-box-menu-width: rem(300px);
   // V11: Possibly deprecate
   // Light variation for 'list-box'
   .#{$prefix}--list-box--light {
-    background-color: $field;
+    background-color: $field-02;
 
     &:hover {
       background-color: $field-hover;
@@ -183,7 +183,7 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light.#{$prefix}--list-box--disabled {
-    background-color: $field;
+    background-color: $field-02;
   }
 
   .#{$prefix}--list-box--disabled,
@@ -516,10 +516,12 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box
     .#{$prefix}--list-box__field[aria-expanded='false']
     + .#{$prefix}--list-box__menu {
+    display: none;
     max-height: 0;
   }
 
   .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
+    display: block;
     // 40px item height * 5.5 items shown
     max-height: rem(220px);
   }
@@ -812,6 +814,7 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box input[type='text'] {
     min-width: 0;
     background-color: inherit;
+    text-overflow: ellipsis;
   }
 
   // Windows HCM fix

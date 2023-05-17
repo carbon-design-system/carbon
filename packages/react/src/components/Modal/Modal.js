@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,11 +18,13 @@ import wrapFocus, {
 } from '../../internal/wrapFocus';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
+import { keys, match } from '../../internal/keyboard';
 
 const getInstanceId = setupGetInstanceId();
 
 const Modal = React.forwardRef(function Modal(
   {
+    'aria-label': ariaLabelProp,
     children,
     className,
     modalHeading,
@@ -46,6 +48,7 @@ const Modal = React.forwardRef(function Modal(
     hasScrollingContent,
     closeButtonLabel,
     preventCloseOnClickOutside, // eslint-disable-line
+    isFullWidth,
     ...rest
   },
   ref
@@ -71,11 +74,11 @@ const Modal = React.forwardRef(function Modal(
 
   function handleKeyDown(evt) {
     if (open) {
-      if (evt.which === 27) {
+      if (match(evt, keys.Escape)) {
         onRequestClose(evt);
       }
       if (
-        evt.which === 13 &&
+        match(evt, keys.Enter) &&
         shouldSubmitOnEnter &&
         !isCloseButton(evt.target)
       ) {
@@ -127,6 +130,7 @@ const Modal = React.forwardRef(function Modal(
 
   const containerClasses = classNames(`${prefix}--modal-container`, {
     [`${prefix}--modal-container--${size}`]: size,
+    [`${prefix}--modal-container--full-width`]: isFullWidth,
   });
 
   const contentClasses = classNames(`${prefix}--modal-content`, {
@@ -138,25 +142,8 @@ const Modal = React.forwardRef(function Modal(
       Array.isArray(secondaryButtons) && secondaryButtons.length === 2,
   });
 
-  const modalButton = (
-    <button
-      className={modalCloseButtonClass}
-      type="button"
-      onClick={onRequestClose}
-      title={ariaLabel}
-      aria-label={closeButtonLabel ? closeButtonLabel : 'close'}
-      ref={button}>
-      <Close
-        size={20}
-        aria-hidden="true"
-        tabIndex="-1"
-        className={`${modalCloseButtonClass}__icon`}
-      />
-    </button>
-  );
-
   const ariaLabel =
-    modalLabel || ['aria-label'] || modalAriaLabel || modalHeading;
+    modalLabel || ariaLabelProp || modalAriaLabel || modalHeading;
   const getAriaLabelledBy = modalLabel ? modalLabelId : modalHeadingId;
 
   const hasScrollingContentProps = hasScrollingContent
@@ -191,7 +178,9 @@ const Modal = React.forwardRef(function Modal(
     const initialFocus = (focusContainerElement) => {
       const containerElement = focusContainerElement || innerModal.current;
       const primaryFocusElement = containerElement
-        ? containerElement.querySelector(selectorPrimaryFocus)
+        ? containerElement.querySelector(
+            danger ? `.${prefix}--btn--secondary` : selectorPrimaryFocus
+          )
         : null;
 
       if (primaryFocusElement) {
@@ -211,7 +200,24 @@ const Modal = React.forwardRef(function Modal(
     if (open) {
       focusButton(innerModal.current);
     }
-  }, [open, selectorPrimaryFocus]);
+  }, [open, selectorPrimaryFocus, danger, prefix]);
+
+  const modalButton = (
+    <button
+      className={modalCloseButtonClass}
+      type="button"
+      onClick={onRequestClose}
+      title={ariaLabel}
+      aria-label={closeButtonLabel ? closeButtonLabel : 'close'}
+      ref={button}>
+      <Close
+        size={20}
+        aria-hidden="true"
+        tabIndex="-1"
+        className={`${modalCloseButtonClass}__icon`}
+      />
+    </button>
+  );
 
   const modalBody = (
     <div
@@ -351,6 +357,11 @@ Modal.propTypes = {
    * Specify the DOM element ID of the top-level node.
    */
   id: PropTypes.string,
+
+  /**
+   * Specify whether or not the Modal content should have any inner padding.
+   */
+  isFullWidth: PropTypes.bool,
 
   /**
    * Specify a label to be read by screen readers on the modal root node

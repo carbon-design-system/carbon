@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2018, 2018
+// Copyright IBM Corp. 2018, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -12,6 +12,8 @@
 @use 'checkbox';
 @use 'code-snippet';
 @use 'combo-box';
+@use 'combo-button';
+@use 'contained-list';
 @use 'content-switcher';
 @use 'copy-button';
 @use 'data-table';
@@ -22,12 +24,24 @@
 @use 'date-picker';
 @use 'dropdown';
 @use 'file-uploader';
+@use 'fluid-combo-box';
+@use 'fluid-date-picker';
+@use 'fluid-dropdown';
+@use 'fluid-list-box';
+@use 'fluid-multiselect';
+@use 'fluid-number-input';
+@use 'fluid-search';
+@use 'fluid-select';
+@use 'fluid-text-area';
+@use 'fluid-text-input';
+@use 'fluid-time-picker';
 @use 'form';
 @use 'inline-loading';
 @use 'link';
 @use 'list';
 @use 'list-box';
 @use 'loading';
+@use 'menu-button';
 @use 'menu';
 @use 'modal';
 @use 'multiselect';

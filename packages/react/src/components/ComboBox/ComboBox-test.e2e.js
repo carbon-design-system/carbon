@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -87,18 +87,6 @@ describe('ComboBox', () => {
             titleText="Disabled combobox"
             helperText="Combobox helper text"
             disabled
-          />
-        </div>
-        <div style={{ marginBottom: '2rem' }}>
-          <ComboBox
-            onChange={() => {}}
-            id="carbon-combobox"
-            items={items}
-            itemToString={(item) => (item ? item.text : '')}
-            placeholder="Filter..."
-            titleText="Light combobox"
-            helperText="Combobox helper text"
-            light
           />
         </div>
         <div style={{ marginBottom: '2rem' }}>

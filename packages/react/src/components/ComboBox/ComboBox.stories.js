@@ -1,13 +1,15 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
+
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
+
 import ComboBox from '../ComboBox';
-import { Layer } from '../Layer';
 import mdx from './ComboBox.mdx';
 
 const items = [
@@ -46,6 +48,11 @@ export default {
       options: ['sm', 'md', 'lg'],
       control: { type: 'select' },
     },
+    light: {
+      table: {
+        disable: true,
+      },
+    },
   },
   parameters: {
     docs: {
@@ -54,7 +61,7 @@ export default {
   },
 };
 
-export const Combobox = () => (
+export const Default = () => (
   <div style={{ width: 300 }}>
     <ComboBox
       onChange={() => {}}
@@ -66,53 +73,32 @@ export const Combobox = () => (
         },
       }}
       itemToString={(item) => (item ? item.text : '')}
-      placeholder="Filter..."
       titleText="ComboBox title"
       helperText="Combobox helper text"
     />
   </div>
 );
 
-export const WithLayer = () => (
-  <div style={{ width: 300 }}>
-    <ComboBox
-      onChange={() => {}}
-      id="carbon-combobox"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      placeholder="Filter..."
-      titleText="First Layer"
-      helperText="Combobox helper text"
-    />
-    <Layer>
-      <ComboBox
-        onChange={() => {}}
-        id="carbon-combobox"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        placeholder="Filter..."
-        titleText="Second Layer"
-        helperText="Combobox helper text"
-      />
-      <Layer>
+export const _WithLayer = () => (
+  <WithLayer>
+    {(layer) => (
+      <div style={{ width: 300 }}>
         <ComboBox
           onChange={() => {}}
-          id="carbon-combobox"
+          id={`carbon-combobox-${layer}`}
           items={items}
           itemToString={(item) => (item ? item.text : '')}
-          placeholder="Filter..."
-          titleText="Third Layer"
+          titleText="ComboBox title"
           helperText="Combobox helper text"
         />
-      </Layer>
-    </Layer>
-  </div>
+      </div>
+    )}
+  </WithLayer>
 );
 
 export const Playground = (args) => (
   <div style={{ width: 300 }}>
     <ComboBox
-      onChange={() => {}}
       id="carbon-combobox"
       items={items}
       downshiftProps={{
@@ -121,7 +107,6 @@ export const Playground = (args) => (
         },
       }}
       itemToString={(item) => (item ? item.text : '')}
-      placeholder="Filter..."
       titleText="ComboBox title"
       helperText="Combobox helper text"
       {...args}
@@ -130,6 +115,11 @@ export const Playground = (args) => (
 );
 
 Playground.argTypes = {
+  ['aria-label']: {
+    table: {
+      disable: true,
+    },
+  },
   ariaLabel: {
     table: {
       disable: true,
@@ -173,13 +163,8 @@ Playground.argTypes = {
       disable: true,
     },
   },
-  light: {
-    table: {
-      disable: true,
-    },
-  },
   onChange: {
-    action: 'clicked',
+    action: 'changed',
   },
   onClick: {
     action: 'clicked',

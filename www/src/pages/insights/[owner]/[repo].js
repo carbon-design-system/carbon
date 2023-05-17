@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -154,6 +154,7 @@ export default function InsightPage(props) {
                               {formatChange(sprint.issues.states.open.change)}
                             </span>
                           </TableCell>
+                          {/* eslint-disable-next-line react/forbid-component-props */}
                           <TableCell style={closedStyle}>
                             <Flex align-center justify-between gap-x-5>
                               <span>
@@ -165,6 +166,7 @@ export default function InsightPage(props) {
                               {closedLabel}
                             </Flex>
                           </TableCell>
+                          {/* eslint-disable-next-line react/forbid-component-props */}
                           <TableCell style={createdStyle}>
                             <Flex align-center justify-between gap-x-5>
                               <span>

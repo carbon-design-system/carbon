@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -30,6 +30,14 @@
     &:focus {
       outline: none;
     }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .#{$prefix}--tree-node--with-icon .#{$prefix}--tree-node {
+    margin-left: $spacing-03;
   }
 
   .#{$prefix}--tree-node:focus > .#{$prefix}--tree-node__label {
@@ -80,6 +88,12 @@
     }
   }
 
+  .cds--tree-node:not(.cds--tree-parent-node) .#{$prefix}--tree-node__label {
+    // (min-height 32px - single line text height 18px) / 2 = 7px
+    padding-top: rem(7px);
+    padding-bottom: rem(7px);
+  }
+
   .#{$prefix}--tree-node__label:hover .#{$prefix}--tree-node__label__details {
     color: $text-primary;
   }
@@ -99,6 +113,11 @@
     padding-left: $spacing-07;
   }
 
+  .#{$prefix}--tree-leaf-node.#{$prefix}--tree-node--with-icon
+    .#{$prefix}--tree-leaf-node {
+    padding-left: $spacing-06;
+  }
+
   .#{$prefix}--tree-node__label__details {
     display: flex;
     align-items: center;
@@ -109,9 +128,16 @@
   }
 
   .#{$prefix}--tree-parent-node__toggle {
-    padding: 0;
+    display: flex;
+    width: rem(24px);
+    height: rem(24px);
+    align-items: center;
+    align-self: flex-start;
+    padding-left: $spacing-02;
     border: 0;
-    margin-right: $spacing-03;
+    margin-top: $spacing-02;
+    margin-right: $spacing-02;
+    margin-left: -$spacing-02;
 
     &:hover {
       cursor: pointer;
@@ -135,8 +161,17 @@
   .#{$prefix}--tree-node__icon {
     min-width: 1rem;
     min-height: 1rem;
+    align-self: flex-start;
+    margin-top: rem(1px);
     margin-right: $spacing-03;
+    margin-left: $spacing-03;
     fill: $icon-secondary;
+  }
+
+  .#{$prefix}--tree-parent-node__toggle
+    + .#{$prefix}--tree-node__label__details
+    .#{$prefix}--tree-node__icon {
+    margin-left: $spacing-02;
   }
 
   .#{$prefix}--tree-node--selected > .#{$prefix}--tree-node__label {
@@ -173,5 +208,7 @@
 
   .#{$prefix}--tree--xs .#{$prefix}--tree-node__label {
     min-height: rem(24px);
+    padding-top: rem(4px);
+    padding-bottom: rem(4px);
   }
 }

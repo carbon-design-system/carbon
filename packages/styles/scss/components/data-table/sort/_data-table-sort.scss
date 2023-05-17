@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -27,6 +27,11 @@
     padding: 0;
     border-top: none;
     border-bottom: none;
+  }
+
+  // hidden sort description
+  .#{$prefix}--table-sort__description {
+    display: none;
   }
 
   // -------------------------------------
@@ -85,7 +90,9 @@
     justify-content: space-between;
   }
 
-  .#{$prefix}--data-table--sort:not(.#{$prefix}--data-table--xs):not(.#{$prefix}--data-table--sm):not(.#{$prefix}--data-table--md):not(.#{$prefix}--data-table--xl)
+  .#{$prefix}--data-table--sort:not(.#{$prefix}--data-table--xs):not(
+      .#{$prefix}--data-table--sm
+    ):not(.#{$prefix}--data-table--md):not(.#{$prefix}--data-table--xl)
     th
     .#{$prefix}--table-sort__flex {
     /* IE11 workaround for align-items: center and min-height
@@ -158,7 +165,7 @@
     opacity: 1;
   }
 
-  .#{$prefix}--table-sort--ascending .#{$prefix}--table-sort__icon {
+  .#{$prefix}--table-sort--descending .#{$prefix}--table-sort__icon {
     transform: rotate(180deg);
   }
 

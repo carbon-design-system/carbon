@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,8 +18,8 @@ import { OverflowMenuVertical } from '@carbon/icons-react';
 import { keys, matches as keyCodeMatches } from '../../internal/keyboard';
 import mergeRefs from '../../tools/mergeRefs';
 import { PrefixContext } from '../../internal/usePrefix';
-import * as FeatureFlags from '@carbon/feature-flags';
 import deprecate from '../../prop-types/deprecate';
+import { IconButton } from '../IconButton';
 
 const on = (element, ...args) => {
   element.addEventListener(...args);
@@ -33,7 +33,7 @@ const on = (element, ...args) => {
 
 /**
  * The CSS property names of the arrow keyed by the floating menu direction.
- * @type {object<string, string>}
+ * @type {Object<string, string>}
  */
 const triggerButtonPositionProps = {
   [DIRECTION_TOP]: 'bottom',
@@ -42,7 +42,7 @@ const triggerButtonPositionProps = {
 
 /**
  * Determines how the position of arrow should affect the floating menu position.
- * @type {object<string, number>}
+ * @type {Object<string, number>}
  */
 const triggerButtonPositionFactors = {
   [DIRECTION_TOP]: -2,
@@ -97,11 +97,18 @@ class OverflowMenu extends Component {
 
   static propTypes = {
     /**
-     * The ARIA label.
+     * Specify a label to be read by screen readers on the container node
      */
-    ariaLabel: FeatureFlags.enabled('enable-v11-release')
-      ? PropTypes.string.isRequired
-      : PropTypes.string,
+    ['aria-label']: PropTypes.string,
+
+    /**
+     * Deprecated, please use `aria-label` instead.
+     * Specify a label to be read by screen readers on the container note.
+     */
+    ariaLabel: deprecate(
+      PropTypes.string,
+      'This prop syntax has been deprecated. Please use the new `aria-label`.'
+    ),
 
     /**
      * The child nodes.
@@ -147,12 +154,10 @@ class OverflowMenu extends Component {
      * `true` to use the light version. For use on $ui-01 backgrounds only.
      * Don't use this to make OverflowMenu background color same as container background color.
      */
-    light: FeatureFlags.enabled('enable-v11-release')
-      ? deprecate(
-          PropTypes.bool,
-          'The `light` prop for `OverflowMenu` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
-        )
-      : PropTypes.bool,
+    light: deprecate(
+      PropTypes.bool,
+      'The `light` prop for `OverflowMenu` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
+    ),
 
     /**
      * The adjustment in position applied to the floating menu.
@@ -225,18 +230,14 @@ class OverflowMenu extends Component {
     /**
      * Specify the size of the OverflowMenu. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
      */
-    size: FeatureFlags.enabled('enable-v11-release')
-      ? PropTypes.oneOf(['sm', 'md', 'lg'])
-      : PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+    size: PropTypes.oneOf(['sm', 'md', 'lg']),
   };
 
   static contextType = PrefixContext;
 
   static defaultProps = {
-    ariaLabel: FeatureFlags.enabled('enable-v11-release')
-      ? null
-      : 'open and close list of options',
-    iconDescription: 'open and close list of options',
+    ['aria-label']: null,
+    iconDescription: 'Options',
     open: false,
     direction: DIRECTION_BOTTOM,
     flipped: false,
@@ -277,6 +278,14 @@ class OverflowMenu extends Component {
     }
   }
 
+  componentDidMount() {
+    // ensure that if open=true on first render, we wait
+    // to render the floating menu until the trigger ref is not null
+    if (this._triggerRef.current) {
+      this.setState({ hasMountedTrigger: true });
+    }
+  }
+
   static getDerivedStateFromProps({ open }, state) {
     const { prevOpen } = state;
     return prevOpen === open
@@ -302,11 +311,13 @@ class OverflowMenu extends Component {
     }
   };
 
-  handleKeyDown = (evt) => {
-    if (keyCodeMatches(evt, [keys.ArrowDown])) {
-      this.setState({ open: !this.state.open });
-      this.props.onClick(evt);
-    }
+  closeMenuAndFocus = () => {
+    let wasOpen = this.state.open;
+    this.closeMenu(() => {
+      if (wasOpen) {
+        this.focusMenuEl();
+      }
+    });
   };
 
   handleKeyPress = (evt) => {
@@ -324,12 +335,7 @@ class OverflowMenu extends Component {
 
     // Close the overflow menu on escape
     if (keyCodeMatches(evt, [keys.Escape])) {
-      let wasOpen = this.state.open;
-      this.closeMenu(() => {
-        if (wasOpen) {
-          this.focusMenuEl();
-        }
-      });
+      this.closeMenuAndFocus();
 
       // Stop the esc keypress from bubbling out and closing something it shouldn't
       evt.stopPropagation();
@@ -383,7 +389,7 @@ class OverflowMenu extends Component {
     );
     const nextValidIndex = (() => {
       const nextIndex = enabledIndices.indexOf(currentIndex) + direction;
-      switch (enabledIndices.indexOf(currentIndex) + direction) {
+      switch (nextIndex) {
         case -1:
           return enabledIndices.length - 1;
         case enabledIndices.length:
@@ -392,9 +398,9 @@ class OverflowMenu extends Component {
           return nextIndex;
       }
     })();
-    const { overflowMenuItem } =
+    const overflowMenuItem =
       this[`overflowMenuItem${enabledIndices[nextValidIndex]}`];
-    overflowMenuItem?.current?.focus();
+    overflowMenuItem?.focus();
   };
 
   /**
@@ -436,7 +442,7 @@ class OverflowMenu extends Component {
                 `.${this.context}--overflow-menu,.${this.context}--overflow-menu-options`
               )
             ) {
-              this.closeMenu();
+              this.closeMenuAndFocus();
             }
           }
         },
@@ -461,7 +467,8 @@ class OverflowMenu extends Component {
     const prefix = this.context;
     const {
       id,
-      ariaLabel,
+      ['aria-label']: ariaLabel,
+      ariaLabel: deprecatedAriaLabel,
       children,
       iconDescription,
       direction,
@@ -513,7 +520,7 @@ class OverflowMenu extends Component {
     const childrenWithProps = React.Children.toArray(children).map(
       (child, index) =>
         React.cloneElement(child, {
-          closeMenu: child?.props?.closeMenu || this.closeMenu,
+          closeMenu: child?.props?.closeMenu || this.closeMenuAndFocus,
           handleOverflowMenuItemFocus: this.handleOverflowMenuItemFocus,
           ref: (e) => {
             this[`overflowMenuItem${index}`] = e;
@@ -527,7 +534,8 @@ class OverflowMenu extends Component {
         className={overflowMenuOptionsClasses}
         tabIndex="-1"
         role="menu"
-        aria-label={ariaLabel}>
+        aria-label={ariaLabel || deprecatedAriaLabel}
+        onKeyDown={this.handleKeyPress}>
         {childrenWithProps}
       </ul>
     );
@@ -556,20 +564,22 @@ class OverflowMenu extends Component {
 
     return (
       <ClickListener onClickOutside={this.handleClickOutside}>
-        <button
-          {...other}
-          type="button"
-          aria-haspopup
-          aria-expanded={this.state.open}
-          className={overflowMenuClasses}
-          onKeyDown={this.handleKeyPress}
-          onClick={this.handleClick}
-          aria-label={ariaLabel}
-          id={id}
-          ref={mergeRefs(this._triggerRef, ref)}>
-          <IconElement {...iconProps} />
-          {open && wrappedMenuBody}
-        </button>
+        <span className={`${prefix}--overflow-menu__wrapper`}>
+          <IconButton
+            {...other}
+            type="button"
+            aria-haspopup
+            aria-expanded={this.state.open}
+            className={overflowMenuClasses}
+            onClick={this.handleClick}
+            id={id}
+            ref={mergeRefs(this._triggerRef, ref)}
+            size={size}
+            label={iconDescription}>
+            <IconElement {...iconProps} />
+          </IconButton>
+          {open && this.state.hasMountedTrigger && wrappedMenuBody}
+        </span>
       </ClickListener>
     );
   }

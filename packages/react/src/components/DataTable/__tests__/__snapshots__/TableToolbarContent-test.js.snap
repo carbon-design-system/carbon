@@ -1,11 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DataTable.TableToolbarContent should render 1`] = `
-<TableToolbarContent
-  className="custom-class"
->
+exports[`TableToolbarContent renders as expected - Component API should render 1`] = `
+<div>
   <div
-    className="cds--toolbar-content custom-class"
+    class="cds--toolbar-content"
   />
-</TableToolbarContent>
+</div>
 `;

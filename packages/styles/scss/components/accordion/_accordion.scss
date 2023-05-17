@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2018, 2018
+// Copyright IBM Corp. 2018, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -51,6 +51,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
   }
 
   .#{$prefix}--accordion__item {
+    display: list-item;
     overflow: visible;
     border-top: 1px solid $border-subtle;
     transition: all $duration-fast-02 motion(standard, productive);
@@ -102,6 +103,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
   // Size styles
   .#{$prefix}--accordion--lg .#{$prefix}--accordion__heading {
     min-height: convert.rem(48px);
+    align-items: center;
   }
 
   .#{$prefix}--accordion--sm .#{$prefix}--accordion__heading {
@@ -155,6 +157,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
     z-index: 1;
     width: 100%;
+    padding-right: $spacing-05;
     margin: $title-margin;
     text-align: left;
   }
@@ -308,4 +311,25 @@ $content-padding: 0 0 0 $spacing-05 !default;
   height: 0;
   opacity: 0;
   visibility: hidden;
+}
+
+// flush
+.#{$prefix}--accordion--flush .#{$prefix}--accordion__title {
+  margin-left: 0;
+}
+
+.#{$prefix}--accordion--flush .#{$prefix}--accordion__arrow {
+  margin-right: 0;
+}
+
+.#{$prefix}--accordion--flush .#{$prefix}--accordion__content {
+  padding-left: 0;
+}
+
+.#{$prefix}--accordion--flush:not(.#{$prefix}--skeleton)
+  .#{$prefix}--accordion__heading:hover::before,
+.#{$prefix}--accordion--flush:not(.#{$prefix}--skeleton)
+  .#{$prefix}--accordion__heading:focus::before {
+  left: -1rem;
+  width: calc(100% + 32px);
 }

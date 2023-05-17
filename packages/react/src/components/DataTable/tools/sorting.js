@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,6 +20,10 @@ import { sortStates } from '../state/sortStates';
  * @returns {number}
  */
 export const compare = (a, b, locale = 'en') => {
+  // prevent multiple null values in one column (sorting breaks)
+  a === null ? (a = '') : null;
+  b === null ? (b = '') : null;
+
   if (typeof a === 'number' && typeof b === 'number') {
     return a - b;
   }
@@ -96,6 +100,7 @@ export const sortRows = ({
       locale,
       sortStates,
       compare,
+      rowIds: [a, b],
     });
   });
 
