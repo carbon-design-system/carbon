@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2021
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -110,13 +110,13 @@ describe('CodeSnippet', () => {
   });
 
   it('should allow custom classes to be applied when passed in via className', () => {
-    const { container } = render(
+    render(
       <CodeSnippet type="inline" data-testid="code-5" className="custom-class">
         {inline}
       </CodeSnippet>
     );
-
-    expect(container.firstChild).toHaveClass('custom-class');
+    // note: outtermost component is a Tooltip
+    expect(screen.getByTestId('code-5')).toHaveClass('custom-class');
   });
 
   it('should allow hiding the copy button', () => {
@@ -136,12 +136,12 @@ describe('CodeSnippet', () => {
       </CodeSnippet>
     );
 
-    expect(screen.getByTitle('Copy to clipboard')).toHaveAttribute('disabled');
+    expect(document.querySelector('button')).toHaveAttribute('disabled');
   });
 });
 
 describe('CodeSnippet events', () => {
-  it('should call the click handler when the copy button is clicked', () => {
+  it('should call the click handler when the copy button is clicked', async () => {
     const onClick = jest.fn();
     render(
       <CodeSnippet type="single" onClick={onClick}>
@@ -149,12 +149,12 @@ describe('CodeSnippet events', () => {
       </CodeSnippet>
     );
 
-    const button = screen.getByTitle('Copy to clipboard');
-    userEvent.click(button);
+    const button = document.querySelector('button');
+    await userEvent.click(button);
     expect(onClick).toHaveBeenCalled();
   });
 
-  it('should call the click handler with type inline', () => {
+  it('should call the click handler with type inline', async () => {
     const onClick = jest.fn();
     render(
       <CodeSnippet type="inline" data-testid="code-6" onClick={onClick}>
@@ -163,7 +163,7 @@ describe('CodeSnippet events', () => {
     );
 
     const button = screen.getByTestId('code-6');
-    userEvent.click(button);
+    await userEvent.click(button);
     expect(onClick).toHaveBeenCalled();
   });
 });
@@ -172,12 +172,12 @@ describe('Show more button', () => {
   it('should not have show more button when less then 15 rows', () => {
     render(<CodeSnippet type="multi">{multiShort}</CodeSnippet>);
 
-    expect(screen.queryByText('Show more')).toBe(null);
+    expect(screen.queryByText('Show more')).not.toBeInTheDocument();
   });
 
   it('should not have show more button when exactly 15 rows', () => {
     render(<CodeSnippet type="multi">{multi15}</CodeSnippet>);
 
-    expect(screen.queryByText('Show more')).toBe(null);
+    expect(screen.queryByText('Show more')).not.toBeInTheDocument();
   });
 });

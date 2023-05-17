@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -32,6 +32,7 @@
   }
 
   .#{$prefix}--data-table-content {
+    display: block;
     overflow-x: auto;
   }
 
@@ -326,26 +327,6 @@
     width: rem(32px);
     background: $layer-accent;
     transition: background-color $duration-fast-01 motion(entrance, productive);
-  }
-
-  .#{$prefix}--data-table
-    .#{$prefix}--table-column-checkbox
-    .#{$prefix}--checkbox:focus
-    + .#{$prefix}--checkbox-label::before {
-    //make checkbox focus larger to match expansion btn focus
-    outline-offset: rem(6px);
-  }
-
-  .#{$prefix}--data-table--compact
-    .#{$prefix}--table-column-checkbox
-    .#{$prefix}--checkbox:focus
-    + .#{$prefix}--checkbox-label::before,
-  .#{$prefix}--data-table--xs
-    .#{$prefix}--table-column-checkbox
-    .#{$prefix}--checkbox:focus
-    + .#{$prefix}--checkbox-label::before {
-    //make checkbox match expansion button focus size
-    outline-offset: rem(2px);
   }
 
   .#{$prefix}--data-table thead th.#{$prefix}--table-column-checkbox,
@@ -692,8 +673,12 @@
       min-height: 3rem;
     }
 
-    &:not(.#{$prefix}--data-table--xs):not(.#{$prefix}--data-table--xl):not(.#{$prefix}--data-table--sm)
-      td:not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-checkbox) {
+    &:not(.#{$prefix}--data-table--xs):not(.#{$prefix}--data-table--xl):not(
+        .#{$prefix}--data-table--sm
+      )
+      td:not(.#{$prefix}--table-column-menu):not(
+        .#{$prefix}--table-column-checkbox
+      ) {
       padding-top: rem(14px);
     }
 
@@ -760,8 +745,12 @@
       border-bottom: 0;
     }
 
-    th:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand):not(.#{$prefix}--table-column-icon),
-    td:not(.#{$prefix}--table-column-checkbox):not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-expand):not(.#{$prefix}--table-column-icon) {
+    th:not(.#{$prefix}--table-column-checkbox):not(
+        .#{$prefix}--table-column-menu
+      ):not(.#{$prefix}--table-expand):not(.#{$prefix}--table-column-icon),
+    td:not(.#{$prefix}--table-column-checkbox):not(
+        .#{$prefix}--table-column-menu
+      ):not(.#{$prefix}--table-expand):not(.#{$prefix}--table-column-icon) {
       width: 100%;
       min-width: 0;
     }

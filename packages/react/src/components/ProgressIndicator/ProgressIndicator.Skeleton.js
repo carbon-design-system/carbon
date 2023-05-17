@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -26,11 +26,16 @@ function Step() {
   );
 }
 
-function ProgressIndicatorSkeleton({ className, ...rest }) {
+function ProgressIndicatorSkeleton({ className, vertical, ...rest }) {
   const prefix = usePrefix();
   return (
     <ul
-      className={cx(`${prefix}--progress`, `${prefix}--skeleton`, className)}
+      className={cx(
+        `${prefix}--progress`,
+        `${prefix}--skeleton`,
+        { [`${prefix}--progress--vertical`]: vertical },
+        className
+      )}
       {...rest}>
       <Step />
       <Step />
@@ -45,6 +50,11 @@ ProgressIndicatorSkeleton.propTypes = {
    * Specify an optional className to add.
    */
   className: PropTypes.string,
+  /**
+   * Determines whether or not the ProgressIndicator should be rendered vertically.
+   */
+  vertical: PropTypes.bool,
 };
 
 export default ProgressIndicatorSkeleton;
+export { ProgressIndicatorSkeleton };

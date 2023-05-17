@@ -49,6 +49,10 @@ categories:
           - settings--view
           - shrink-screen
           - shrink-screen--filled
+          - side-panel--close
+          - side-panel--close--filled
+          - side-panel--open
+          - side-panel--open--filled
           - skip--back
           - skip--back--filled
           - skip--back--outline
@@ -149,8 +153,10 @@ categories:
           - link
           - list--boxes
           - list--bulleted
-          - list--numbered
           - list--checked
+          - list--checked--mirror
+          - list--numbered
+          - list--numbered--mirror
           - magic-wand
           - magic-wand--filled
           - no-image
@@ -224,6 +230,7 @@ categories:
           - trash-can
           - ungroup-objects
           - unlink
+          - unsaved
           - vertical-view
       - name: Navigation
         members:
@@ -283,9 +290,11 @@ categories:
           - bookmark--add
           - bookmark--filled
           - branch
+          - build-tool
           - caret--sort
           - caret--sort--down
           - caret--sort--up
+          - catalog--publish
           - center--circle
           - center--square
           - change-catalog
@@ -306,8 +315,11 @@ categories:
           - compare
           - connect
           - connect--recursive
+          - connect--reference
           - connect--source
           - connect--target
+          - continuous-deployment
+          - continuous-integration
           - convert-to-cloud
           - deploy
           - deploy-rules
@@ -364,6 +376,7 @@ categories:
           - pause-past
           - pin
           - pin--filled
+          - promote
           - query
           - recently-viewed
           - recommend
@@ -382,6 +395,7 @@ categories:
           - review
           - rotate
           - run
+          - run--mirror
           - save--model
           - scan
           - scan--alt
@@ -389,6 +403,7 @@ categories:
           - search
           - search--advanced
           - search--locate
+          - search--locate--mirror
           - send
           - send--alt
           - send--alt--filled
@@ -405,6 +420,7 @@ categories:
           - tag--group
           - tag--import
           - tag--none
+          - test-tool
           - translate
           - transpose
           - undo
@@ -492,12 +508,33 @@ categories:
           - view--off--filled
   - name: Brand
     subcategories:
+      - name: Design and development
+        members:
+          - logo--angular
+          - logo--ansible-community
+          - logo--figma
+          - logo--invision
+          - logo--jupyter
+          - logo--keybase
+          - logo--kubernetes
+          - logo--npm
+          - logo--openshift
+          - logo--python
+          - logo--r-script
+          - logo--react
+          - logo--red-hat-ansible
+          - logo--sketch
+          - logo--svelte
+          - logo--vmware
+          - logo--vmware--alt
+          - logo--vue
       - name: IBM
         members:
           - bee
           - carbon
           - carbon-for-ibm-dotcom
           - carbon-for-ibm-product
+          - carbon--ui-builder
           - cloud-app
           - edt-loop
           - ibm-cloud
@@ -515,6 +552,7 @@ categories:
           - logo--instagram
           - logo--linkedin
           - logo--livestream
+          - logo--mastodon
           - logo--medium
           - logo--pinterest
           - logo--quora
@@ -534,6 +572,7 @@ categories:
           - autoscaling
           - block-storage
           - object-storage
+          - cics--transaction-server-zos
           - cloud--auditing
           - cloud--logging
           - cloud--monitoring
@@ -555,14 +594,59 @@ categories:
           - direct-link
           - dns-services
           - flow-logs-vpc
+          - ibm--bluepay
+          - ibm--content-services
           - ibm--data-replication
+          - ibm--datastage
+          - ibm--db2
+          - ibm--db2--alt
           - ibm--match-360
+          - ibm--mq
           - ibm--open-enterprise-languages
+          - ibm--openshift-container-platform-on-vpc-for-regulated-industries
+          - ibm--power-vs
+          - ibm--power-with-vpc
+          - ibm--private-path-services
+          - ibm--process-mining
+          - ibm--sap-on-power
+          - ibm--secure-infrastructure-on-vpc-for-regulated-industries
+          - ibm--telehealth
+          - ibm--tenet
+          - ibm--toolchain
+          - ibm--vsi-on-vpc-for-regulated-industries
+          - ibm-cloud--app-id
+          - ibm-cloud--citrix-daas
+          - ibm-cloud--continuous-delivery
           - ibm-cloud--dedicated-host
+          - ibm-cloud--direct-link-1--connect
+          - ibm-cloud--direct-link-1--dedicated
+          - ibm-cloud--direct-link-1--dedicated-hosting
+          - ibm-cloud--direct-link-1--exchange
+          - ibm-cloud--direct-link-2--connect
+          - ibm-cloud--direct-link-2--dedicated
+          - ibm-cloud--direct-link-2--dedicated-hosting
+          - ibm-cloud--event-notification
+          - ibm-cloud--event-streams
+          - ibm-cloud--for-education
+          - ibm-cloud--HSM
+          - ibm-cloud--hyper-protect-crypto-services
+          - ibm-cloud--hyper-protect-dbaas
+          - ibm-cloud--hyper-protect-vs
           - ibm-cloud--internet-services
+          - ibm-cloud--ipsec-vpn
+          - ibm-cloud--key-protect
           - ibm-cloud--kubernetes-service
+          - ibm-cloud--logging
+          - ibm-cloud--mass-data-migration
+          - ibm-cloud--pal
+          - ibm-cloud--privileged-access-gateway
+          - ibm-cloud--projects
+          - ibm-cloud--resiliency
+          - ibm-cloud--secrets-manager
           - ibm-cloud--security-compliance-center
+          - ibm-cloud--security-compliance-center-workload-protection
           - ibm-cloud--subnets
+          - ibm-cloud--sysdig-secure
           - ibm-cloud--transit-gateway
           - ibm-cloud--vpc-endpoints
           - ibm-cloud-pak--applications
@@ -571,14 +655,32 @@ categories:
           - ibm-cloud-pak--integration
           - ibm-cloud-pak--MANTA-automated-data-lineage
           - ibm-cloud-pak--multicloud-mgmt
+          - ibm-cloud-pak--netezza
           - ibm-cloud-pak--network-automation
           - ibm-cloud-pak--security
           - ibm-cloud-pak--system
           - ibm-cloud-pak--watson-aiops
           - ibm-security--services
+          - ibm-watson--assistant
+          - ibm-watson--discovery
+          - ibm-watson--knowledge-catalog
+          - ibm-watson--knowledge-studio
+          - ibm-watson--language-translator
+          - ibm-watson--machine-learning
+          - ibm-watson--natural-language-classifier
+          - ibm-watson--natural-language-understanding
+          - ibm-watson--openscale
           - ibm-watson--orders
+          - ibm-watson--query
+          - ibm-watson--speech-to-text
+          - ibm-watson--studio
+          - ibm-watson--text-to-speech
+          - ibm-watson--tone-analyzer
           - ibm-z--cloud-mod-stack
+          - ibm-z--environments-dev-sec-ops
           - ibm-z-cloud--provisioning
+          - ibm-z-os--ai-control-interface
+          - ibm-z-os--containers
           - ibm-z-os--package-manager
           - infrastructure--classic
           - load-balancer--vpc
@@ -589,10 +691,16 @@ categories:
       - name: Commerce
         members:
           - apple
+          - apple--dash
           - account
           - basketball
           - bat
           - bee-bat
+          - bottles--01
+          - bottles--01--dash
+          - bottles--02
+          - bottles--02--dash
+          - bottles--container
           - building
           - corn
           - currency
@@ -609,6 +717,8 @@ categories:
           - delivery
           - delivery--add
           - delivery--parcel
+          - drink--01
+          - drink--02
           - enterprise
           - finance
           - fish
@@ -626,6 +736,7 @@ categories:
           - piggy-bank--slot
           - purchase
           - receipt
+          - recycle
           - shopping--bag
           - shopping--cart
           - shopping--cart--arrow-down
@@ -710,6 +821,9 @@ categories:
           - hole-filling--cursor
           - iCA-2D
           - image--medical
+          - image-availability--local
+          - image-availability--retrieving
+          - image-availability--unavailable
           - interactive-segmentation-cursor
           - launch-study--1
           - launch-study--2
@@ -867,6 +981,8 @@ categories:
           - archive
           - blockchain
           - boolean
+          - boot-volume
+          - boot-volume--alt
           - box-plot
           - calculation
           - calculation--alt
@@ -901,6 +1017,7 @@ categories:
           - chart--line
           - chart--line--data
           - chart--line-smooth
+          - chart--logistic-regression
           - chart--marimekko
           - chart--maximum
           - chart--minimum
@@ -944,11 +1061,13 @@ categories:
           - data--2
           - data--base
           - data--base--alt
+          - data--categorical
           - data--check
           - data--connected
           - data--error
           - data--format
           - data--reference
+          - data--regular
           - data--set
           - data--structured
           - data--unstructured
@@ -971,6 +1090,8 @@ categories:
           - data-vis--2
           - data-vis--3
           - data-vis--4
+          - data-volume
+          - data-volume--alt
           - datastore
           - decision-tree
           - diagram
@@ -1019,6 +1140,11 @@ categories:
           - ordinal
           - parent-child
           - parameter
+          - partition--auto
+          - partition--collection
+          - partition--repartition
+          - partition--same
+          - partition--specific
           - phrase-sentiment
           - presentation-file
           - progress-bar
@@ -1048,6 +1174,8 @@ categories:
           - subflow
           - subflow--local
           - summary--KPI
+          - summary--KPI--mirror
+          - support-vector-machine
           - sys-provision
           - table
           - table--alias
@@ -1060,6 +1188,9 @@ categories:
           - text-mining
           - text-mining--applier
           - time-plot
+          - transform--binary
+          - transform--instructions
+          - transform--language
           - tree-view
           - tree-view--alt
           - type-pattern
@@ -1116,6 +1247,8 @@ categories:
           - document--epdf
           - document--export
           - document--import
+          - document--multiple-01
+          - document--multiple-02
           - document--pdf
           - document--preliminary
           - document--protected
@@ -1187,10 +1320,12 @@ categories:
           - notebook
           - notebook--reference
           - order-details
+          - package--text-analysis
           - panel-expansion
           - paste
           - PDF
           - PDF--reference
+          - plan
           - playlist
           - PNG
           - policy
@@ -1198,12 +1333,18 @@ categories:
           - PPT
           - product
           - RAW
+          - reference-architecture
+          - repo--artifact
+          - repo--source-code
+          - result--draft
           - roadmap
           - rule
           - rule--cancelled
           - rule--data-quality
           - rule--draft
           - rule--filled
+          - rule--locked
+          - rule--partial
           - rule--test
           - result
           - result--new
@@ -1213,6 +1354,7 @@ categories:
           - script--reference
           - SDK
           - security
+          - SLM
           - SQL
           - star--review
           - SVG
@@ -1236,7 +1378,11 @@ categories:
           - TXT--reference
           - upload
           - version
+          - version--major
+          - version--minor
+          - version--patch
           - websheet
+          - white-paper
           - WMV
           - workspace
           - XLS
@@ -1245,6 +1391,8 @@ categories:
           - ZIP--reference
       - name: Status
         members:
+          - caution
+          - caution-inverted
           - checkmark
           - checkmark--filled
           - checkmark--filled--error
@@ -1252,19 +1400,17 @@ categories:
           - checkmark--outline
           - checkmark--outline--error
           - checkmark--outline--warning
+          - circle-fill
+          - circle-stroke
           - condition--point
           - condition--wait-point
+          - critical
+          - critical-severity
+          - diamond-fill
           - error
           - error--filled
           - error--outline
-          - caution
-          - caution-inverted
-          - circle-fill
-          - circle-stroke
-          - critical-severity
           - low-severity
-          - critical
-          - square-fill
           - help
           - help--filled
           - in-progress
@@ -1284,6 +1430,7 @@ categories:
           - pending
           - pending--filled
           - queued
+          - square-fill
           - undefined
           - undefined--filled
           - unknown
@@ -1311,16 +1458,23 @@ categories:
           - bare-metal-server--01
           - bare-metal-server--02
           - bastion-host
+          - batch-job
+          - batch-job--step
           - block-storage--alt
           - box--extra-large
           - box--large
           - box--medium
           - box--small
           - cics--cmas
+          - cics--db2-connection
           - cics--explorer
+          - cics--program
+          - cics--sit
+          - cics--sit-overrides
           - cics--system-group
           - cics--wui-region
           - cics-region
+          - cics-region--alt
           - cics-region--routing
           - cics-region--target
           - cicsplex
@@ -1338,6 +1492,9 @@ categories:
           - data-backup
           - data-blob
           - data-diode
+          - db2--buffer-pool
+          - db2--data-sharing-group
+          - db2--database
           - deployment-unit--data
           - deployment-unit--execution
           - deployment-unit--installation
@@ -1349,6 +1506,7 @@ categories:
           - directory-domain
           - edge-node--alt
           - encryption
+          - executable-program
           - file-storage
           - firewall
           - firewall--classic
@@ -1411,6 +1569,8 @@ categories:
           - router
           - router--voice
           - router--wifi
+          - screen-map
+          - screen-map--set
           - security-services
           - server--dns
           - server--proxy
@@ -1423,7 +1583,9 @@ categories:
           - subnet-acl-rules
           - switch-layer-2
           - switch-layer-3
+          - tcp-ip-service
           - terminal--3270
+          - tsq
           - two-factor-authentication
           - vehicle--api
           - vehicle--connected
@@ -1441,6 +1603,10 @@ categories:
           - wifi--not-secure
           - wifi--secure
           - workflow-automation
+          - z--lpar
+          - z--systems
+          - zos
+          - zos--sysplex
   - name: Person
     subcategories:
       - name: Senses
@@ -1468,6 +1634,7 @@ categories:
           - collaborate
           - cough
           - credentials
+          - customer-service
           - dog-walker
           - education
           - events
@@ -1525,6 +1692,7 @@ categories:
           - user--settings
           - user--simulation
           - user--speaker
+          - user--sponsor
           - user--x-ray
           - user-profile--alt
           - voice-activate
@@ -1923,15 +2091,9 @@ categories:
           - iot--connect
           - iot--platform
           - keyboard
+          - keyboard--off
           - laptop
           - location--current
-          - logo--jupyter
-          - logo--keybase
-          - logo--kubernetes
-          - logo--openshift
-          - logo--python
-          - logo--r-script
-          - logo--vmware
           - machine-learning
           - machine-learning-model
           - mail--all
@@ -1948,6 +2110,8 @@ categories:
           - phone--ip
           - plug
           - plug--filled
+          - port--input
+          - port--output
           - printer
           - qr-code
           - radio

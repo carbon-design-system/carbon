@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -94,17 +94,13 @@
     width: 100%;
   }
 
-  .#{$prefix}--text-input__invalid-icon,
-  .#{$prefix}--text-input__readonly-icon {
+  .#{$prefix}--text-input__invalid-icon {
     position: absolute;
     // top/transform used to center invalid icon in IE11
     top: 50%;
     right: $spacing-05;
-    transform: translateY(-50%);
-  }
-
-  .#{$prefix}--text-input__invalid-icon {
     fill: $support-error;
+    transform: translateY(-50%);
   }
 
   .#{$prefix}--text-input__invalid-icon--warning {
@@ -175,8 +171,7 @@
   }
 
   .#{$prefix}--text-input--invalid,
-  .#{$prefix}--text-input--warning,
-  .#{$prefix}--text-input-wrapper--readonly .#{$prefix}--text-input {
+  .#{$prefix}--text-input--warning {
     padding-right: $spacing-08;
   }
 
@@ -194,14 +189,29 @@
   }
 
   .#{$prefix}--text-input:disabled
-    + .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
-    svg {
+    ~ .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
     cursor: not-allowed;
+  }
+
+  .#{$prefix}--text-input:disabled
+    ~ .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
+    svg {
     fill: $icon-disabled;
 
     &:hover {
       fill: $icon-disabled;
     }
+  }
+
+  .#{$prefix}--text-input__counter-alert {
+    position: absolute;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    border: 0;
+    margin: -1px;
+    clip: rect(0, 0, 0, 0);
   }
 
   //-----------------------------
@@ -248,6 +258,8 @@
     @include skeleton;
   }
 
+  // Deprecated -- Styles have been moved to `fluid-text-input.scss`
+  // V12 - Remove this block
   //-----------------------------
   // Fluid Text Input
   //-----------------------------
@@ -263,6 +275,9 @@
     z-index: 1;
     top: rem(13px);
     left: $spacing-05;
+    display: flex;
+    height: rem(16px);
+    align-items: center;
     margin: 0;
   }
 
@@ -281,7 +296,7 @@
   }
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input--invalid,
-  .#{$prefix}--form--fluid .#{$prefix}--text-input--warn {
+  .#{$prefix}--form--fluid .#{$prefix}--text-input--warning {
     border-bottom: none;
   }
 
@@ -289,7 +304,7 @@
     .#{$prefix}--text-input--invalid
     + .#{$prefix}--text-input__divider,
   .#{$prefix}--form--fluid
-    .#{$prefix}--text-input--warn
+    .#{$prefix}--text-input--warning
     + .#{$prefix}--text-input__divider {
     display: block;
     border-style: solid;
@@ -302,15 +317,17 @@
     top: rem(80px);
   }
 
-  // V11: Possibly deprecate
-  .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper--light {
-    background: $field-02;
-  }
-
   .#{$prefix}--form--fluid
     .#{$prefix}--text-input__field-wrapper[data-invalid]
-    > .#{$prefix}--text-input--invalid {
-    @include focus-outline('reset');
+    > .#{$prefix}--text-input--invalid,
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper--warning
+    > .#{$prefix}--text-input--warning {
+    outline: none;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper--warning {
+    border-bottom: 1px solid $border-strong;
   }
 
   .#{$prefix}--form--fluid
@@ -319,11 +336,20 @@
   }
 
   .#{$prefix}--form--fluid
-    .#{$prefix}--text-input__field-wrapper[data-invalid]
-    > .#{$prefix}--text-input--invalid:focus {
+    .#{$prefix}--text-input__field-wrapper[data-invalid]:focus-within,
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper--warning:focus-within {
     @include focus-outline('outline');
   }
 
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]
+    > .#{$prefix}--text-input--invalid:focus,
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper--warning
+    > .#{$prefix}--text-input--warning:focus {
+    outline: none;
+  }
   //-----------------------------
   // Inline Text Input
   //-----------------------------
@@ -372,12 +398,24 @@
     flex-direction: column;
   }
 
+  .#{$prefix}--text-input-wrapper--inline .cds--form-requirement {
+    display: block;
+    overflow: visible;
+    max-height: rem(200px);
+    font-weight: 400;
+  }
+
+  .#{$prefix}--text-input-wrapper--inline--invalid .cds--form-requirement {
+    color: $text-error;
+  }
+
   //-----------------------------
   // Readonly
   //-----------------------------
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper--readonly,
   .#{$prefix}--text-input-wrapper--readonly .#{$prefix}--text-input {
+    border-bottom-color: $border-subtle;
     background: transparent;
   }
 
@@ -387,5 +425,15 @@
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:hover
     svg {
     @include high-contrast-mode('icon-fill');
+  }
+
+  .#{$prefix}--text-input__label-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    .#{$prefix}--text-input__label-counter {
+      align-self: end;
+    }
   }
 }

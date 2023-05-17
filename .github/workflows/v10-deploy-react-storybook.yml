@@ -1,4 +1,4 @@
-name: v10 - Deploy React storybook to IBM Cloud
+name: v10 - Deploy React storybook to GitHub Pages
 
 on:
   workflow_dispatch:
@@ -13,39 +13,36 @@ on:
       - '!v[0-9]+.[0-9]+.[0-9]+-*'
 
 jobs:
-  build:
-    runs-on: macOS-latest
+  build-ibmcloud:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
-      - name: Use Node.js 16.x
+
+      - name: Use Node.js 18.x
         uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: '18.x'
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Build project
         run: yarn build
-      - name: Install ibmcloud CLI
-        run: curl -fsSL https://clis.cloud.ibm.com/install/osx | sh
-      - name: Login to IBM Cloud
-        env:
-          CLOUD_API_KEY: ${{ secrets.CLOUD_API_KEY}}
-        run: |
-          ibmcloud login \
-            -a 'https://cloud.ibm.com' \
-            --apikey "$CLOUD_API_KEY" \
-            -r 'us-south'
-          ibmcloud target -o 'carbon-design-system' -s 'production'
-      - name: Install IBM Cloud plugins
-        run: |
-          ibmcloud cf install
-          ibmcloud cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
-          ibmcloud cf install-plugin blue-green-deploy -f -r CF-Community
-      - name: Deploy React storybook
+      - name: Build static React storybook
         run: |
           cd packages/react
           yarn build-storybook
-          ibmcloud cf blue-green-deploy carbon-storybook \
-            -f manifest.yml \
-            --delete-old-apps
+      - name: Create CNAME
+        run: |
+          touch packages/react/storybook-static/CNAME
+          echo "v7-react.carbondesignsystem.com" > packages/react/storybook-static/CNAME
+      - name: Push to v7 repo
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        with:
+          source-directory: 'packages/react/storybook-static'
+          destination-github-username: 'carbon-design-system'
+          destination-repository-name: 'carbon-storybook-v7'
+          user-name: carbon-bot
+          user-email: carbon@us.ibm.com
+          target-branch: main
+          commit-message: 'chore(release):  ${{ github.ref }}'

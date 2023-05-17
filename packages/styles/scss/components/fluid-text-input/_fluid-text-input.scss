@@ -1,0 +1,188 @@
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Fluid Text Input
+//-----------------------------
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../utilities/convert' as *;
+@use '../../utilities/focus-outline' as *;
+@use '../text-input';
+
+@mixin fluid-text-input {
+  .#{$prefix}--text-input--fluid.#{$prefix}--text-input-wrapper {
+    position: relative;
+    height: 100%;
+    background: $field;
+    transition: background-color $duration-fast-01 motion(standard, productive),
+      outline $duration-fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--text-input--fluid .#{$prefix}--label {
+    position: absolute;
+    z-index: 1;
+    top: rem(13px);
+    left: $spacing-05;
+    display: flex;
+    width: calc(100% - 2rem);
+    height: rem(16px);
+    align-items: center;
+    margin: 0;
+  }
+
+  .#{$prefix}--text-input--fluid .#{$prefix}--label::-webkit-scrollbar,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--label
+    .#{$prefix}--toggletip-label::-webkit-scrollbar {
+    display: none;
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--label:not(:has(.#{$prefix}--toggletip-label)),
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--label
+    .#{$prefix}--toggletip-label {
+    -ms-overflow-style: none;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--text-input--fluid .#{$prefix}--form__helper-text {
+    display: none;
+  }
+
+  .#{$prefix}--text-input--fluid .#{$prefix}--text-input {
+    min-height: rem(64px);
+    padding: rem(32px) $spacing-05 rem(13px);
+  }
+
+  .#{$prefix}--text-input__divider,
+  .#{$prefix}--text-input--fluid .#{$prefix}--text-input__divider {
+    display: none;
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--warning {
+    display: block;
+  }
+
+  .#{$prefix}--text-input--fluid input[data-invalid] {
+    outline: none;
+  }
+
+  .#{$prefix}--text-input--fluid .#{$prefix}--form-requirement {
+    padding: $spacing-03 rem(40px) $spacing-03 $spacing-05;
+    margin: 0;
+  }
+
+  .#{$prefix}--text-input--fluid .#{$prefix}--text-input--invalid,
+  .#{$prefix}--text-input--fluid .#{$prefix}--text-input--warning {
+    border-bottom: none;
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input--invalid
+    + .#{$prefix}--text-input__divider,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input--warning
+    + .#{$prefix}--text-input__divider {
+    display: block;
+    border-style: solid;
+    border-color: $border-subtle;
+    border-bottom: none;
+    margin: 0 1rem;
+  }
+
+  .#{$prefix}--text-input--fluid .#{$prefix}--text-input__invalid-icon {
+    top: rem(80px);
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]
+    > .#{$prefix}--text-input--invalid,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--warning
+    > .#{$prefix}--text-input--warning {
+    outline: none;
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--warning {
+    border-bottom: 1px solid $border-strong;
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]:not(:focus) {
+    @include focus-outline('invalid');
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]:focus-within,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--warning:focus-within {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]
+    > .#{$prefix}--text-input--invalid:focus,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--warning
+    > .#{$prefix}--text-input--warning:focus {
+    outline: none;
+  }
+
+  // Password Input
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input.#{$prefix}--password-input {
+    padding-right: $spacing-08;
+  }
+
+  .#{$prefix}--text-input--fluid.#{$prefix}--password-input-wrapper
+    .#{$prefix}--text-input__invalid-icon {
+    right: $spacing-05;
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
+    top: rem(26px);
+    right: $spacing-03;
+    width: rem(32px);
+    height: rem(32px);
+  }
+
+  // Skeleton
+  .#{$prefix}--text-input--fluid__skeleton {
+    position: relative;
+    height: rem(64px);
+    border-bottom: 1px solid $skeleton-element;
+    background: $skeleton-background;
+  }
+
+  .#{$prefix}--text-input--fluid__skeleton .#{$prefix}--skeleton {
+    position: absolute;
+    top: $spacing-05;
+    left: $spacing-05;
+    width: 25%;
+    height: rem(8px);
+  }
+
+  .#{$prefix}--text-input--fluid__skeleton .#{$prefix}--label {
+    position: absolute;
+    top: rem(36px);
+    left: $spacing-05;
+    width: 50%;
+    height: rem(8px);
+    padding: 0;
+  }
+}

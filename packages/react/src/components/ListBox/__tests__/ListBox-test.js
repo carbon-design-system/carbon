@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,11 +18,6 @@ describe('ListBox', () => {
   it('should set the disabled class when `disabled` is true', () => {
     const { container } = render(<ListBox disabled />);
     expect(container.firstChild).toHaveClass('cds--list-box--disabled');
-  });
-
-  it('should set the light class when `light` is true', () => {
-    const { container } = render(<ListBox light />);
-    expect(container.firstChild).toHaveClass('cds--list-box--light');
   });
 
   it('should set the expanded class when `isOpen` is true', () => {

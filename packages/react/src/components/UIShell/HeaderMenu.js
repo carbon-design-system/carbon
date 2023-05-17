@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 import { keys, matches } from '../../internal/keyboard';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { PrefixContext } from '../../internal/usePrefix';
+import deprecate from '../../prop-types/deprecate';
 
 /**
  * `HeaderMenu` is used to render submenu's in the `Header`. Most often children
@@ -27,9 +28,29 @@ class HeaderMenu extends React.Component {
     ...AriaLabelPropType,
 
     /**
+     * Optionally provide a custom class to apply to the underlying `<li>` node
+     */
+    className: PropTypes.string,
+
+    /**
      * Provide a custom ref handler for the menu button
      */
     focusRef: PropTypes.func,
+
+    /**
+     * Applies selected styles to the item if a user sets this to true and `aria-current !== 'page'`.
+     */
+    isActive: PropTypes.bool,
+
+    /**
+     * Applies selected styles to the item if a user sets this to true and `aria-current !== 'page'`.
+     * @deprecated Please use `isActive` instead. This will be removed in the next major release.
+     */
+    isCurrentPage: deprecate(
+      PropTypes.bool,
+      'The `isCurrentPage` prop for `HeaderMenu` has ' +
+        'been deprecated. Please use `isActive` instead. This will be removed in the next major release.'
+    ),
 
     /**
      * Provide a label for the link text
@@ -160,6 +181,7 @@ class HeaderMenu extends React.Component {
   render() {
     const prefix = this.context;
     const {
+      isActive,
       isCurrentPage,
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
@@ -171,14 +193,26 @@ class HeaderMenu extends React.Component {
       ...rest
     } = this.props;
 
+    const hasActiveChildren = React.Children.toArray(children).some(
+      (child) => child.props.isActive || child.props.isCurrentPage
+    );
+
     const accessibilityLabel = {
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
     };
-    const className = cx({
+    const itemClassName = cx({
       [`${prefix}--header__submenu`]: true,
-      [`${prefix}--header__submenu--current`]: isCurrentPage,
       [customClassName]: !!customClassName,
+    });
+    let isActivePage = isActive ? isActive : isCurrentPage;
+    const linkClassName = cx({
+      [`${prefix}--header__menu-item`]: true,
+      [`${prefix}--header__menu-title`]: true,
+      // We set the current class only if `isActive` is passed in and we do
+      // not have an `aria-current="page"` set for the breadcrumb item
+      [`${prefix}--header__menu-item--current`]:
+        isActivePage || (hasActiveChildren && !this.state.expanded),
     });
 
     // Notes on eslint comments and based on the examples in:
@@ -191,14 +225,14 @@ class HeaderMenu extends React.Component {
     return (
       <li // eslint-disable-line jsx-a11y/mouse-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions
         {...rest}
-        className={className}
+        className={itemClassName}
         onKeyDown={this.handleMenuClose}
         onClick={this.handleOnClick}
         onBlur={this.handleOnBlur}>
         <a // eslint-disable-line jsx-a11y/role-supports-aria-props,jsx-a11y/anchor-is-valid
           aria-haspopup="menu" // eslint-disable-line jsx-a11y/aria-proptypes
           aria-expanded={this.state.expanded}
-          className={`${prefix}--header__menu-item ${prefix}--header__menu-title`}
+          className={linkClassName}
           href="#"
           onKeyDown={this.handleOnKeyDown}
           ref={this.handleMenuButtonRef}

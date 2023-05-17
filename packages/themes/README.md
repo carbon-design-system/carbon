@@ -103,7 +103,7 @@ If you're looking for `@carbon/themes` API documentation, check out:
 If you're looking for more examples on how to use `@carbon/themes`, we have some
 examples that you can check out:
 
-- [preview-v11](./examples/preview-v11)
+- [preview](./examples/preview)
 - [sass-modules](./examples/sass-modules)
 
 ## 🙌 Contributing

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -28,12 +28,25 @@ export default {
 export const Default = () => {
   return (
     <RadioButtonGroup
-      legendText="Radio button heading"
+      legendText="Group label"
       name="radio-button-group"
       defaultSelected="radio-1">
-      <RadioButton labelText="Option 1" value="radio-1" id="radio-1" />
-      <RadioButton labelText="Option 2" value="radio-2" id="radio-2" />
-      <RadioButton labelText="Option 3" value="radio-3" id="radio-3" disabled />
+      <RadioButton
+        labelText="Radio button label"
+        value="radio-1"
+        id="radio-1"
+      />
+      <RadioButton
+        labelText="Radio button label"
+        value="radio-2"
+        id="radio-2"
+      />
+      <RadioButton
+        labelText="Radio button label"
+        value="radio-3"
+        id="radio-3"
+        disabled
+      />
     </RadioButtonGroup>
   );
 };
@@ -44,10 +57,76 @@ export const Skeleton = () => {
 
 export const Playground = (args) => {
   return (
-    <RadioButtonGroup labelText="Radio Button group" {...args}>
-      <RadioButton value="radio-1" id="radio-1" />
-      <RadioButton labelText="Option 2" value="radio-2" id="radio-2" />
-      <RadioButton labelText="Option 3" value="radio-3" id="radio-3" />
+    <RadioButtonGroup
+      legendText="Radio Button group"
+      name="radio-button-group"
+      {...args}>
+      <RadioButton
+        labelText="Radio button label"
+        value="radio-1"
+        id="radio-1"
+      />
+      <RadioButton
+        labelText="Radio button label"
+        value="radio-2"
+        id="radio-2"
+      />
+      <RadioButton
+        labelText="Radio button label"
+        value="radio-3"
+        id="radio-3"
+      />
     </RadioButtonGroup>
   );
+};
+
+Playground.argTypes = {
+  readOnly: {
+    description: 'Specify whether the RadioButtonGroup is read-only',
+    control: {
+      type: 'boolean',
+    },
+  },
+  helperText: {
+    description:
+      'Provide text that is used alongside the control label for additional help',
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Helper text',
+  },
+  invalid: {
+    description: 'Specify whether the RadioButtonGroup is invalid',
+    control: {
+      type: 'boolean',
+    },
+  },
+  invalidText: {
+    description:
+      'Provide the text that is displayed when the control is in an invalid state',
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Invalid selection',
+  },
+  orientation: {
+    description: 'Provide how radio buttons should be displayed',
+    control: 'select',
+    options: ['horizontal', 'vertical'],
+  },
+  warn: {
+    description: 'Specify whether the control is currently in warning state',
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  warnText: {
+    description:
+      'Provide the text that is displayed when the control is in warning state',
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Please notice the warning',
+  },
 };

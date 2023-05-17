@@ -1,328 +1,207 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+/* eslint-disable jsx-a11y/label-has-associated-control */
+
 import React from 'react';
-import { shallow, mount } from 'enzyme';
-import Button from '../Button';
-import {
-  ComposedModal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from '../ComposedModal';
-import InlineLoading from '../InlineLoading';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import ComposedModal, { ModalBody } from './ComposedModal';
+import { ModalHeader } from './ModalHeader';
+import { ModalFooter } from './ModalFooter';
+import { TextInput } from '../../';
 
-const prefix = 'cds';
+describe('ComposedModal', () => {
+  describe('it renders as expected', () => {
+    it('supports a custom class on the outermost div', () => {
+      render(<ComposedModal className="custom-class" />);
 
-describe('<ModalHeader />', () => {
-  describe('Renders as expected', () => {
-    const titleWrapper = mount(<ModalHeader title="Something" />);
-    const labelWrapper = mount(<ModalHeader label="Something" />);
+      expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
+        'custom-class'
+      );
+    });
 
-    it('does not render title if no title', () => {
+    it('supports a custom class on the container div', () => {
+      render(<ComposedModal containerClassName="custom-class" />);
+
+      expect(screen.getByRole('dialog', { hidden: true })).toHaveClass(
+        'custom-class'
+      );
+    });
+
+    it('should spread props onto the outermost div', () => {
+      render(<ComposedModal data-testid="modal" />);
+
       expect(
-        labelWrapper.find(`.${prefix}--modal-header__heading`).exists()
-      ).toBe(false);
+        screen.getByRole('presentation', { hidden: true })
+      ).toHaveAttribute('data-testid', 'modal');
     });
 
-    it('does not render label if no label', () => {
-      expect(
-        titleWrapper.find(`.${prefix}--modal-header__label`).exists()
-      ).toBe(false);
+    it('should be labelled by a provided aria-label', () => {
+      render(<ComposedModal aria-label="modal" />);
+
+      expect(screen.getByRole('dialog', { hidden: true })).toHaveAttribute(
+        'aria-label',
+        'modal'
+      );
     });
 
-    it('renders title if title text', () => {
-      expect(
-        titleWrapper.find(`.${prefix}--modal-header__heading`).exists()
-      ).toBe(true);
-    });
-
-    it('renders label if label text', () => {
-      expect(
-        labelWrapper.find(`.${prefix}--modal-header__label`).exists()
-      ).toBe(true);
-    });
-
-    it('should render with ref', () => {
-      const ref = React.createRef();
-      mount(<ModalHeader title="Something" forwardedRef={ref} />);
-
-      expect(ref.current).toHaveClass(`${prefix}--modal-header`);
-    });
-  });
-});
-
-describe('<ModalBody />', () => {
-  describe('Renders as expected', () => {
-    const wrapper = shallow(
-      <ModalBody className="extra-class">
-        <p>Test</p>
-      </ModalBody>
-    );
-
-    it('renders children as expected', () => {
-      expect(wrapper.find('p').length).toBe(1);
-    });
-
-    it('renders wrapper as expected', () => {
-      expect(wrapper.find(`.${prefix}--modal-content`).length).toBe(1);
-    });
-
-    it('renders extra classes passed in via className', () => {
-      expect(
-        wrapper.find(`.${prefix}--modal-content`).hasClass('extra-class')
-      ).toEqual(true);
-    });
-    it('should render with ref', () => {
-      const ref = React.createRef();
-      mount(
-        <ModalBody className="extra-class" ref={ref}>
-          <p>Test</p>
-        </ModalBody>
+    it('should be labelled by a provided aria-labelledby', () => {
+      render(
+        <div>
+          <label id="label-modal-id">Label for modal</label>
+          <ComposedModal aria-labelledby="label-modal-id">
+            <ModalHeader>Modal header</ModalHeader>
+            <ModalBody>This is the modal body content</ModalBody>
+            <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+          </ComposedModal>
+        </div>
       );
 
-      expect(ref.current).toHaveClass(`${prefix}--modal-content`);
-    });
-  });
-});
-
-describe('<ModalFooter />', () => {
-  describe('Renders as expected', () => {
-    const wrapper = mount(
-      <ModalFooter className="extra-class">
-        <p>Test</p>
-      </ModalFooter>
-    );
-
-    it('renders children as expected', () => {
-      expect(wrapper.find('p').length).toBe(1);
+      expect(screen.getByRole('dialog', { hidden: true })).toHaveAttribute(
+        'aria-labelledby',
+        'label-modal-id'
+      );
     });
 
-    it('renders wrapper as expected', () => {
-      expect(wrapper.length).toBe(1);
+    it('should change submit to danger button', () => {
+      render(
+        <ComposedModal danger open>
+          <ModalHeader>Modal header</ModalHeader>
+          <ModalBody>This is the modal body content</ModalBody>
+          <ModalFooter
+            danger
+            primaryButtonText="Add"
+            secondaryButtonText="Cancel"
+          />
+        </ComposedModal>
+      );
+
+      expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
+        'cds--modal--danger'
+      );
     });
 
-    it('renders extra classes passed in via className', () => {
-      expect(wrapper.hasClass('extra-class')).toEqual(true);
-    });
-  });
+    it('calls onClose when close button is clicked', async () => {
+      const onClose = jest.fn();
+      render(
+        <ComposedModal open onClose={onClose}>
+          <ModalHeader>Modal header</ModalHeader>
+          <ModalBody>This is the modal body content</ModalBody>
+        </ComposedModal>
+      );
 
-  describe('Should render buttons only if appropriate prop passed in', () => {
-    const wrapper = shallow(
-      <ModalFooter className="extra-class">
-        <p>Test</p>
-      </ModalFooter>
-    );
+      await userEvent.click(screen.getByTitle('Close'));
 
-    const primaryWrapper = shallow(<ModalFooter primaryButtonText="test" />);
-    const secondaryWrapper = mount(<ModalFooter secondaryButtonText="test" />);
-    const multipleSecondaryWrapper = mount(
-      <ModalFooter
-        secondaryButtons={[
-          {
-            buttonText: <InlineLoading />,
-            onClick: jest.fn(),
-          },
-          {
-            buttonText: 'Cancel',
-            onClick: jest.fn(),
-          },
-        ]}
-      />
-    );
-
-    it('does not render primary button if no primary text', () => {
-      expect(wrapper.find(`.${prefix}--btn--primary`).exists()).toBe(false);
+      expect(onClose).toHaveBeenCalled();
     });
 
-    it('does not render secondary button if no secondary text', () => {
-      expect(wrapper.find(`.${prefix}--btn--secondary`).exists()).toBe(false);
+    it('should not close when onClose returns false', async () => {
+      const onClose = () => false;
+      render(
+        <ComposedModal open onClose={onClose}>
+          <ModalHeader>Modal header</ModalHeader>
+          <ModalBody>This is the modal body content</ModalBody>
+        </ComposedModal>
+      );
+
+      await userEvent.click(screen.getByTitle('Close'));
+
+      expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
+        'is-visible'
+      );
     });
 
-    it('renders primary button if primary text', () => {
-      const buttonComponent = primaryWrapper.find(Button);
-      expect(buttonComponent.exists()).toBe(true);
-      expect(buttonComponent.props().kind).toBe('primary');
+    it('should be open if specified', () => {
+      render(
+        <ComposedModal open>
+          <ModalHeader>Modal header</ModalHeader>
+          <ModalBody>This is the modal body content</ModalBody>
+        </ComposedModal>
+      );
+
+      expect(screen.getByText('Modal header')).toBeInTheDocument();
+      expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
+        'is-visible'
+      );
     });
 
-    it('renders primary button if secondary text', () => {
-      const buttonComponent = secondaryWrapper.find(Button);
-      expect(buttonComponent.exists()).toBe(true);
-      expect(buttonComponent.props().kind).toBe('secondary');
+    it('should prevent close on click outside', async () => {
+      render(
+        <>
+          <button type="button">Click me</button>
+          <ComposedModal open preventCloseOnClickOutside>
+            <ModalHeader>Modal header</ModalHeader>
+            <ModalBody>This is the modal body content</ModalBody>
+          </ComposedModal>
+        </>
+      );
+      expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
+        'is-visible'
+      );
+
+      await userEvent.click(screen.getByText('Click me'));
+
+      expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
+        'is-visible'
+      );
     });
 
-    it('correctly renders multiple secondary buttons', () => {
-      const buttonComponents = multipleSecondaryWrapper.find(Button);
-      expect(buttonComponents.length).toEqual(2);
-      expect(buttonComponents.at(0).props().kind).toBe('secondary');
-      expect(buttonComponents.at(1).props().kind).toBe('secondary');
-    });
-  });
+    it('should focus selector on open', async () => {
+      const ComposedModalExample = () => {
+        const [isOpen, setIsOpen] = React.useState(false);
+        return (
+          <>
+            <button
+              type="button"
+              onClick={() => {
+                setIsOpen(!isOpen);
+              }}>
+              Click me
+            </button>
+            <ComposedModal
+              open={isOpen}
+              preventCloseOnClickOutside
+              selectorPrimaryFocus="#text-input-1">
+              <ModalHeader>Modal header</ModalHeader>
+              <ModalBody>
+                This is the modal body content
+                <TextInput
+                  id="text-input-1"
+                  data-testid="test-id-1"
+                  labelText="text input"
+                />
+              </ModalBody>
+            </ComposedModal>
+          </>
+        );
+      };
 
-  describe('Should render the appropriate buttons when `danger` prop is true', () => {
-    const primaryWrapper = shallow(
-      <ModalFooter primaryButtonText="test" danger />
-    );
-    const secondaryWrapper = mount(
-      <ModalFooter secondaryButtonText="test" danger />
-    );
-    const multipleSecondaryWrapper = mount(
-      <ModalFooter
-        secondaryButtons={[
-          {
-            buttonText: <InlineLoading />,
-            onClick: jest.fn(),
-          },
-          {
-            buttonText: 'Cancel',
-            onClick: jest.fn(),
-          },
-        ]}
-      />
-    );
+      render(<ComposedModalExample />);
 
-    it('renders danger button if primary text && danger', () => {
-      const buttonComponent = primaryWrapper.find(Button);
-      expect(buttonComponent.exists()).toBe(true);
-      expect(buttonComponent.props().kind).toBe('danger');
-    });
+      await userEvent.click(screen.getByText('Click me'), { clickCount: 3 });
+      expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
+        'is-visible'
+      );
 
-    it('renders secondary button if secondary text && danger', () => {
-      const buttonComponent = secondaryWrapper.find(Button);
-      expect(buttonComponent.exists()).toBe(true);
-      expect(buttonComponent.prop('kind')).toBe('secondary');
+      expect(screen.getByTestId('test-id-1')).toHaveFocus();
     });
 
-    it('correctly renders multiple secondary buttons', () => {
-      const buttonComponents = multipleSecondaryWrapper.find(Button);
-      expect(buttonComponents.length).toEqual(2);
-      expect(buttonComponents.at(0).props().kind).toBe('secondary');
-      expect(buttonComponents.at(1).props().kind).toBe('secondary');
+    it('should change size based on size prop', () => {
+      render(
+        <ComposedModal open size="lg">
+          <ModalHeader>Modal header</ModalHeader>
+          <ModalBody>This is the modal body content</ModalBody>
+        </ComposedModal>
+      );
+
+      expect(screen.getByRole('dialog', { hidden: true })).toHaveClass(
+        'cds--modal-container--lg'
+      );
     });
-  });
-
-  it('should render with ref', () => {
-    const ref = React.createRef();
-    mount(<ModalFooter primaryButtonText="test" forwardedRef={ref} />);
-
-    expect(ref.current).toHaveClass(`${prefix}--modal-footer`);
-  });
-});
-
-describe('<ComposedModal />', () => {
-  let container;
-
-  afterEach(() => {
-    if (container && container.parentNode) {
-      container.parentNode.removeChild(container);
-    }
-    container = null;
-  });
-
-  it('renders', () => {
-    const wrapper = mount(<ComposedModal open />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('renders with a ref', () => {
-    const ref = React.createRef();
-    mount(<ComposedModal open forwardedRef={ref} />);
-    expect(ref.current).toHaveClass(`${prefix}--modal`);
-  });
-
-  it('renders with a callbackRef', () => {
-    const ref = jest.fn();
-    const wrapper = mount(<ComposedModal open forwardedRef={ref} />);
-    expect(ref).toHaveBeenCalledWith(wrapper.getDOMNode());
-  });
-
-  it('changes the open state upon change in props', () => {
-    const wrapper = mount(<ComposedModal open />);
-    expect(wrapper.state().open).toEqual(true);
-    wrapper.setProps({ open: false });
-    expect(wrapper.state().open).toEqual(false);
-  });
-
-  it('should change class of <body> upon open state', () => {
-    const wrapper = mount(<ComposedModal open />);
-    expect(
-      document.body.classList.contains('cds--body--with-modal-open')
-    ).toEqual(true);
-    wrapper.unmount();
-    expect(
-      document.body.classList.contains('cds--body--with-modal-open')
-    ).toEqual(false);
-    mount(<ComposedModal open={false} />);
-    expect(
-      document.body.classList.contains('cds--body--with-modal-open')
-    ).toEqual(false);
-  });
-
-  it('avoids change the open state upon setting props, unless there the value actually changes', () => {
-    const wrapper = mount(<ComposedModal />);
-    wrapper.setProps({ open: true });
-    wrapper.setState({ open: false });
-    wrapper.setProps({ open: true });
-    expect(wrapper.state().open).toEqual(false);
-  });
-
-  it('calls onClick upon user-initiated closing', () => {
-    const onClose = jest.fn();
-    const wrapper = mount(
-      <ComposedModal open onClose={onClose}>
-        <ModalHeader />
-      </ComposedModal>
-    );
-    const button = wrapper.find(`.${prefix}--modal-close`).first();
-    button.simulate('click');
-    expect(wrapper.state().open).toEqual(false);
-    expect(onClose.mock.calls.length).toBe(1);
-  });
-
-  it('provides a way to prevent upon user-initiated closing', () => {
-    const onClose = jest.fn(() => false);
-    const wrapper = mount(
-      <ComposedModal open onClose={onClose}>
-        <ModalHeader />
-      </ComposedModal>
-    );
-    const button = wrapper.find(`.${prefix}--modal-close`).first();
-    button.simulate('click');
-    expect(wrapper.state().open).toEqual(true);
-  });
-
-  it('should focus on the primary actionable button in ModalFooter by default', () => {
-    container = document.createElement('div');
-    container.id = 'container';
-    document.body.appendChild(container);
-    mount(
-      <ComposedModal open>
-        <ModalFooter primaryButtonText="Save" />
-      </ComposedModal>,
-      { attachTo: document.querySelector('#container') }
-    );
-    expect(
-      document.activeElement.classList.contains(`${prefix}--btn--primary`)
-    ).toEqual(true);
-  });
-
-  it('should focus on the element that matches selectorPrimaryFocus', () => {
-    container = document.createElement('div');
-    container.id = 'container';
-    document.body.appendChild(container);
-    mount(
-      <ComposedModal open selectorPrimaryFocus={`.${prefix}--modal-close`}>
-        <ModalHeader label="Optional Label" title="Example" />
-        <ModalFooter primaryButtonText="Save" />
-      </ComposedModal>,
-      { attachTo: document.querySelector('#container') }
-    );
-    expect(
-      document.activeElement.classList.contains(`${prefix}--modal-close`)
-    ).toEqual(true);
   });
 });

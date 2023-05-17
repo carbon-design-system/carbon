@@ -1,14 +1,16 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
+
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
+
 import MultiSelect from '.';
 import FilterableMultiSelect from './FilterableMultiSelect';
-import { Layer } from '../Layer';
 
 export default {
   title: 'Components/MultiSelect',
@@ -39,6 +41,11 @@ export default {
     items: {
       table: { disable: true },
     },
+    light: {
+      table: {
+        disable: true,
+      },
+    },
     local: {
       table: { disable: true },
     },
@@ -59,6 +66,9 @@ export default {
     },
     open: {
       table: { disable: true },
+    },
+    readOnly: {
+      control: { type: 'boolean' },
     },
     title: {
       table: { disable: true },
@@ -157,12 +167,6 @@ Playground.argTypes = {
     },
     defaultValue: false,
   },
-  light: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
   warn: {
     control: {
       type: 'boolean',
@@ -205,6 +209,9 @@ Playground.argTypes = {
     },
     defaultValue: 'To clear selection, press Delete or Backspace,',
   },
+  readOnly: {
+    control: { type: 'boolean' },
+  },
 };
 
 export const Default = () => {
@@ -227,6 +234,7 @@ export const WithInitialSelectedItems = () => {
   return (
     <div style={{ width: 300 }}>
       <MultiSelect
+        label="Multiselect Label"
         id="carbon-multiselect-example-2"
         titleText="Multiselect title"
         helperText="This is helper text"
@@ -254,75 +262,37 @@ export const _Filterable = () => {
   );
 };
 
-export const WithLayer = () => {
-  return (
-    <div style={{ width: 300 }}>
-      <MultiSelect
-        label="First Layer"
-        id="carbon-multiselect-example"
-        titleText="Multiselect title"
-        helperText="This is helper text"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        selectionFeedback="top-after-reopen"
-      />
-      <Layer>
+export const _WithLayer = () => (
+  <WithLayer>
+    {(layer) => (
+      <div style={{ width: 300 }}>
         <MultiSelect
-          label="Second Layer"
-          id="carbon-multiselect-example"
+          label="Multiselect Label"
+          id={`carbon-multiselect-example-${layer}`}
           titleText="Multiselect title"
           helperText="This is helper text"
           items={items}
           itemToString={(item) => (item ? item.text : '')}
           selectionFeedback="top-after-reopen"
         />
-        <Layer>
-          <MultiSelect
-            label="Third Layer"
-            id="carbon-multiselect-example"
-            titleText="Multiselect title"
-            helperText="This is helper text"
-            items={items}
-            itemToString={(item) => (item ? item.text : '')}
-            selectionFeedback="top-after-reopen"
-          />
-        </Layer>
-      </Layer>
-    </div>
-  );
-};
+      </div>
+    )}
+  </WithLayer>
+);
 
-export const _FilterableWithLayer = () => {
-  return (
-    <div style={{ width: 300 }}>
-      <FilterableMultiSelect
-        id="carbon-multiselect-example-3"
-        titleText="First Layer"
-        helperText="This is helper text"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        selectionFeedback="top-after-reopen"
-      />
-      <Layer>
+export const _FilterableWithLayer = () => (
+  <WithLayer>
+    {(layer) => (
+      <div style={{ width: 300 }}>
         <FilterableMultiSelect
-          id="carbon-multiselect-example-3"
-          titleText="Second Layer"
+          id={`carbon-multiselect-example-${layer}`}
+          titleText="Multiselect title"
           helperText="This is helper text"
           items={items}
           itemToString={(item) => (item ? item.text : '')}
           selectionFeedback="top-after-reopen"
         />
-        <Layer>
-          <FilterableMultiSelect
-            id="carbon-multiselect-example-3"
-            titleText="Third Layer"
-            helperText="This is helper text"
-            items={items}
-            itemToString={(item) => (item ? item.text : '')}
-            selectionFeedback="top-after-reopen"
-          />
-        </Layer>
-      </Layer>
-    </div>
-  );
-};
+      </div>
+    )}
+  </WithLayer>
+);

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,6 +16,8 @@ import {
 import Button from '../Button';
 import mdx from './Accordion.mdx';
 
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
+
 export default {
   title: 'Components/Accordion',
   component: Accordion,
@@ -30,7 +32,7 @@ export default {
   },
 };
 
-export const AccordionStory = () => (
+export const Default = () => (
   <Accordion>
     <AccordionItem title="Section 1 title">
       <p>
@@ -67,9 +69,48 @@ export const AccordionStory = () => (
   </Accordion>
 );
 
-AccordionStory.storyName = 'Accordion';
+export const _WithLayer = () => (
+  <WithLayer>
+    <Accordion>
+      <AccordionItem title="Section 1 title">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+      </AccordionItem>
+      <AccordionItem title="Section 2 title">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+      </AccordionItem>
+      <AccordionItem title="Section 3 title">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+      </AccordionItem>
+      <AccordionItem title="Section 4 title">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+      </AccordionItem>
+    </Accordion>
+  </WithLayer>
+);
 
-export const Skeleton = () => <AccordionSkeleton open count={4} />;
+export const Skeleton = (args) => (
+  <AccordionSkeleton open count={4} {...args} />
+);
 
 Skeleton.decorators = [
   (story) => <div style={{ width: '500px' }}>{story()}</div>,
@@ -129,8 +170,39 @@ Playground.argTypes = {
     },
     defaultValue: false,
   },
+  isFlush: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
   size: {
     options: ['sm', 'md', 'lg'],
     control: { type: 'select' },
+  },
+};
+
+Skeleton.argTypes = {
+  align: {
+    options: ['start', 'end'],
+    control: { type: 'select' },
+  },
+  children: {
+    control: false,
+  },
+  className: {
+    control: false,
+  },
+  disabled: {
+    control: false,
+  },
+  isFlush: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  size: {
+    control: false,
   },
 };

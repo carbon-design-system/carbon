@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,7 +17,7 @@ test.describe('InlineLoading', () => {
       test('inline loading @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'InlineLoading',
-          id: 'components-inlineloading--inline-loading',
+          id: 'components-inlineloading--default',
           theme,
         });
       });
@@ -35,7 +35,7 @@ test.describe('InlineLoading', () => {
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'InlineLoading',
-      id: 'components-inlineloading--inline-loading',
+      id: 'components-inlineloading--default',
       globals: {
         theme: 'white',
       },

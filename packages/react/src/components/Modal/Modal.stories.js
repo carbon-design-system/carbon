@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,70 +16,13 @@ import Dropdown from '../Dropdown';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
 import mdx from './Modal.mdx';
-
-const buttons = {
-  'None (0)': '0',
-  'One (1)': '1',
-  'Two (2)': '2',
-  'Three (3)': '3',
-};
-
-const props = {
-  modal: () => ({
-    numberOfButtons: ('Number of Buttons', buttons, '2'),
-    className: 'some-class',
-    open: true,
-    danger: false,
-    alert: false,
-    shouldSubmitOnEnter: false,
-    hasScrollingContent: false,
-    hasForm: false,
-    modalHeading: 'Modal heading',
-    modalLabel: 'Label',
-    modalAriaLabel:
-      'A label to be read by screen readers on the modal root node',
-    selectorPrimaryFocus: '[data-modal-primary-focus]',
-    size: 'md',
-    onBlur: action('onBlur'),
-    onClick: action('onClick'),
-    onFocus: action('onFocus'),
-    onRequestClose: action('onRequestClose'),
-    onRequestSubmit: action('onRequestSubmit'),
-    onSecondarySubmit: action('onSecondarySubmit'),
-    preventCloseOnClickOutside: true,
-    primaryButtonDisabled: false,
-    primaryButtonText: 'Primary button',
-  }),
-  modalFooter: (numberOfButtons) => {
-    const secondaryButtons = () => {
-      switch (numberOfButtons) {
-        case '2':
-          return {
-            secondaryButtonText: 'Secondary button',
-          };
-        case '3':
-          return {
-            secondaryButtons: [
-              {
-                buttonText: 'Keep both',
-                onClick: action('onClick'),
-              },
-              {
-                buttonText: 'Rename',
-                onClick: action('onClick'),
-              },
-            ],
-          };
-        default:
-          return null;
-      }
-    };
-    return {
-      passiveModal: false || numberOfButtons === '0',
-      ...secondaryButtons(),
-    };
-  },
-};
+import {
+  StructuredListWrapper,
+  StructuredListHead,
+  StructuredListBody,
+  StructuredListRow,
+  StructuredListCell,
+} from '../StructuredList';
 
 export default {
   title: 'Components/Modal',
@@ -144,18 +87,127 @@ export const Default = () => {
   );
 };
 
-export const Playground = () => {
-  const { size, numberOfButtons, hasScrollingContent, ...modalProps } =
-    props.modal();
-  const { passiveModal, ...footerProps } = props.modalFooter(numberOfButtons);
+export const FullWidth = () => {
   return (
     <Modal
-      passiveModal={numberOfButtons === '0' || passiveModal}
-      size={size || undefined}
-      hasScrollingContent={hasScrollingContent}
-      aria-label={hasScrollingContent ? 'Modal content' : undefined}
-      {...modalProps}
-      {...footerProps}>
+      open
+      isFullWidth
+      modalHeading="Full Width Modal"
+      modalLabel="An example of a modal with no padding"
+      primaryButtonText="Add"
+      secondaryButtonText="Cancel">
+      <StructuredListWrapper>
+        <StructuredListHead>
+          <StructuredListRow head>
+            <StructuredListCell head noWrap>
+              Column A
+            </StructuredListCell>
+            <StructuredListCell head noWrap>
+              Column B
+            </StructuredListCell>
+            <StructuredListCell head noWrap>
+              Column C
+            </StructuredListCell>
+          </StructuredListRow>
+        </StructuredListHead>
+        <StructuredListBody>
+          <StructuredListRow>
+            <StructuredListCell noWrap>Row 1</StructuredListCell>
+            <StructuredListCell>Row 1</StructuredListCell>
+            <StructuredListCell>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+              magna, finibus id tortor sed, aliquet bibendum augue. Aenean
+              posuere sem vel euismod dignissim. Nulla ut cursus dolor.
+              Pellentesque vulputate nisl a porttitor interdum.
+            </StructuredListCell>
+          </StructuredListRow>
+          <StructuredListRow>
+            <StructuredListCell noWrap>Row 2</StructuredListCell>
+            <StructuredListCell>Row 2</StructuredListCell>
+            <StructuredListCell>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+              magna, finibus id tortor sed, aliquet bibendum augue. Aenean
+              posuere sem vel euismod dignissim. Nulla ut cursus dolor.
+              Pellentesque vulputate nisl a porttitor interdum.
+            </StructuredListCell>
+          </StructuredListRow>
+          <StructuredListRow>
+            <StructuredListCell noWrap>Row 3</StructuredListCell>
+            <StructuredListCell>Row 3</StructuredListCell>
+            <StructuredListCell>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+              magna, finibus id tortor sed, aliquet bibendum augue. Aenean
+              posuere sem vel euismod dignissim. Nulla ut cursus dolor.
+              Pellentesque vulputate nisl a porttitor interdum.
+            </StructuredListCell>
+          </StructuredListRow>
+        </StructuredListBody>
+      </StructuredListWrapper>
+    </Modal>
+  );
+};
+
+export const DangerModal = () => {
+  return (
+    <Modal
+      open
+      danger
+      modalHeading="Are you sure you want to delete this custom domain?"
+      modalLabel="Account resources"
+      primaryButtonText="Delete"
+      secondaryButtonText="Cancel"
+    />
+  );
+};
+
+const buttons = {
+  'One (1)': '1',
+  'Two (2)': '2',
+  'Three (3)': '3',
+};
+const modalFooter = (numberOfButtons) => {
+  const secondaryButtons = () => {
+    switch (numberOfButtons) {
+      case '1':
+        return {
+          secondaryButtons: [],
+        };
+      case '2':
+        return {
+          secondaryButtonText: 'Cancel',
+        };
+      case '3':
+        return {
+          secondaryButtons: [
+            {
+              buttonText: 'Keep both',
+              onClick: action('onClick'),
+            },
+            {
+              buttonText: 'Rename',
+              onClick: action('onClick'),
+            },
+          ],
+        };
+      default:
+        return null;
+    }
+  };
+  return {
+    ...secondaryButtons(),
+  };
+};
+
+export const Playground = ({ numberOfButtons, ...args }) => {
+  return (
+    <Modal
+      open
+      modalHeading="Add a custom domain"
+      primaryButtonText="Add"
+      secondaryButtonText="Cancel"
+      aria-label="Modal content"
+      {...modalFooter(numberOfButtons)}
+      {...args}>
       <p style={{ marginBottom: '1rem' }}>
         Custom domains direct requests for your apps in this Cloud Foundry
         organization to a URL that you own. A custom domain can be a shared
@@ -172,8 +224,7 @@ export const Playground = () => {
         <SelectItem value="us-south" text="US South" />
         <SelectItem value="us-east" text="US East" />
       </Select>
-      <br />
-      {hasScrollingContent && (
+      {args.hasScrollingContent && (
         <>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id
@@ -229,6 +280,79 @@ export const Playground = () => {
       )}
     </Modal>
   );
+};
+
+Playground.argTypes = {
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  id: {
+    table: {
+      disable: true,
+    },
+  },
+  modalHeading: {
+    control: 'text',
+  },
+  modalLabel: {
+    control: 'text',
+  },
+  numberOfButtons: {
+    description: 'Count of Footer Buttons',
+    defaultValue: 'Two (2)',
+    options: Object.keys(buttons),
+    mapping: buttons,
+    control: {
+      type: 'inline-radio',
+      labels: Object.keys(buttons),
+    },
+  },
+  onKeyDown: {
+    action: 'onKeyDown',
+  },
+  onRequestClose: {
+    action: 'onRequestClose',
+  },
+  onRequestSubmit: {
+    action: 'onRequestSubmit',
+  },
+  onSecondarySubmit: {
+    action: 'onSecondarySubmit',
+    table: {
+      disable: true,
+    },
+  },
+  primaryButtonText: {
+    control: 'text',
+  },
+  secondaryButtons: {
+    table: {
+      disable: true,
+    },
+  },
+  secondaryButtonText: {
+    control: 'text',
+    table: {
+      disable: true,
+    },
+  },
+  selectorPrimaryFocus: {
+    table: {
+      disable: true,
+    },
+  },
+  selectorsFloatingMenus: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 export const WithStateManager = () => {

@@ -1,0 +1,54 @@
+@use '@carbon/layout' as *;
+
+body {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+//------------------------------------------------------------------------------
+// Conversion
+//------------------------------------------------------------------------------
+.convert-box {
+  width: rem(48px);
+  height: rem(48px);
+  background-color: black;
+}
+
+//------------------------------------------------------------------------------
+// Spacing scale
+//------------------------------------------------------------------------------
+.spacing-scale {
+  display: flex;
+  align-items: flex-end;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+$index: 1;
+
+@each $key, $value in $spacing {
+  .fixed-spacing-scale-#{$index} {
+    width: $value;
+    height: $value;
+    background-color: black;
+    margin-right: $spacing-06;
+    margin-bottom: $spacing-06;
+  }
+
+  $index: $index + 1;
+}
+
+$index: 1;
+
+@each $key, $value in $fluid-spacing {
+  .fluid-spacing-scale-#{$index} {
+    width: $value;
+    height: $value;
+    background-color: black;
+    margin-right: $spacing-06;
+    margin-bottom: $spacing-06;
+  }
+
+  $index: $index + 1;
+}
+

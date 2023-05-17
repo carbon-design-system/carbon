@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -38,27 +38,27 @@ describe('Dropdown', () => {
     assertMenuClosed();
   });
 
-  it('should let the user open the menu by clicking on the control', () => {
+  it('should let the user open the menu by clicking on the control', async () => {
     render(<Dropdown {...mockProps} />);
-    openMenu();
+    await openMenu();
     assertMenuOpen(mockProps);
   });
 
-  it('should render with strings as items', () => {
+  it('should render with strings as items', async () => {
     render(<Dropdown {...mockProps} items={['zar', 'doz']} />);
-    openMenu();
+    await openMenu();
 
     expect(screen.getByText('zar')).toBeInTheDocument();
     expect(screen.getByText('doz')).toBeInTheDocument();
   });
 
-  it('should render custom item components', () => {
+  it('should render custom item components', async () => {
     const itemToElement = jest.fn((item) => {
       return <div className="mock-item">{item.label}</div>;
     });
 
     render(<Dropdown itemToElement={itemToElement} {...mockProps} />);
-    openMenu();
+    await openMenu();
 
     expect(itemToElement).toHaveBeenCalled();
   });
@@ -122,19 +122,11 @@ describe('Dropdown', () => {
     });
   });
 
-  it('should specify light version as expected', () => {
-    render(<Dropdown light={true} {...mockProps} />);
-
-    expect(document.querySelector('.cds--list-box')).toHaveClass(
-      'cds--dropdown--light'
-    );
-  });
-
-  it('should let the user select an option by clicking on the option node', () => {
+  it('should let the user select an option by clicking on the option node', async () => {
     render(<Dropdown {...mockProps} />);
-    openMenu();
+    await openMenu();
 
-    userEvent.click(screen.getByText('Item 0'));
+    await userEvent.click(screen.getByText('Item 0'));
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[0],
@@ -143,13 +135,26 @@ describe('Dropdown', () => {
 
     mockProps.onChange.mockClear();
 
-    openMenu();
-    userEvent.click(screen.getByText('Item 1'));
+    await openMenu();
+    await userEvent.click(screen.getByText('Item 1'));
 
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[1],
     });
+  });
+
+  it('should respect readOnly prop', async () => {
+    render(<Dropdown {...mockProps} readOnly={true} />);
+    await openMenu(); // menu should not open
+    assertMenuClosed();
+
+    await openMenu(); // menu should not open
+    expect(screen.queryByText('Item 0')).not.toBeInTheDocument();
+    expect(mockProps.onChange).toHaveBeenCalledTimes(0);
+    assertMenuClosed();
+
+    mockProps.onChange.mockClear();
   });
 
   describe('should display initially selected item found in `initialSelectedItem`', () => {
@@ -182,7 +187,7 @@ describe('Dropdown', () => {
     it('should accept a `ref` for the underlying button element', () => {
       const ref = React.createRef();
       render(<Dropdown {...mockProps} ref={ref} />);
-      expect(ref.current.getAttribute('aria-haspopup')).toBe('listbox');
+      expect(ref.current).toHaveAttribute('aria-haspopup', 'listbox');
     });
   });
 });

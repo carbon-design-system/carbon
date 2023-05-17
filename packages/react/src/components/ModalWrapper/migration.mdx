@@ -1,0 +1,47 @@
+# ModalWrapper deprecation
+
+## Timeline
+
+The `<ModalWrapper/>` component has been deprecated in v11 and will be removed
+in v12.
+
+## Migration Strategy
+
+The `<ComposedModal/>` component will be used in favor of the `<ModalWrapper/>`
+going forward. The `<ComposedModal/>` is used along with any of these 3 children
+components: `<ModalHeader/>`, `<ModalBody/>` and `<ModalFooter/>`. This makes
+the `<ComposedModal/>` more customizable as you can choose what to include in
+it. A notable difference is that the modal trigger has to be custom implemented
+now.
+
+| ModalWrapper props            | ComposedModal component migration | ComposedModal prop equivalent |
+| ----------------------------- | --------------------------------- | ----------------------------- |
+| buttonTriggerClassName        | n/a                               | n/a                           |
+| buttonTriggerText             | n/a                               | n/a                           |
+| children                      | ComposedModal                     | children                      |
+| disabled                      | n/a                               | n/a                           |
+| handleOpen                    | n/a                               | n/a                           |
+| handleSubmit                  | ModalFooter                       | onRequestSubmit               |
+| id                            | n/a                               | n/a                           |
+| modalBeforeContent            | n/a                               | n/a                           |
+| modalHeading                  | ModalHeader                       | title                         |
+| modalLabel                    | ModalHeader                       | label                         |
+| modalText                     | ModalBody                         | children                      |
+| onKeyDown                     | ComposedModal                     | onKeyDown                     |
+| passiveModal                  | n/a                               | n/a                           |
+| preventCloseOnClickOutside    | ComposedModal                     | preventCloseOnClickOutside    |
+| primaryButtonText             | ModalFooter                       | primaryButtonText             |
+| renderTriggerButtonIcon       | n/a                               | n/a                           |
+| secondaryButtonText           | ModalFooter                       | secondaryButtonText           |
+| selectorPrimaryFocus          | ComposedModal                     | selectorPrimaryFocus          |
+| shouldCloseAfterSubmit (bool) | ModalFooter                       | onRequestSubmit (func)        |
+| status                        | n/a                               | n/a                           |
+| triggerButtonIconDescription  | n/a                               | n/a                           |
+| triggerButtonKind             | n/a                               | n/a                           |
+| withHeader                    | n/a                               | n/a                           |
+
+## Resources
+
+- [ComposedModal source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/ComposedModal)
+- [ComposedModal with state example](https://react.carbondesignsystem.com/?path=/story/components-composedmodal--with-state-manager)
+- [ComposedModal docs](https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/ComposedModal/ComposedModal.mdx)

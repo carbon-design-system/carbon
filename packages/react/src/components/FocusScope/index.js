@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -89,6 +89,7 @@ function FocusScopeBumper(props) {
   return (
     <span
       data-carbon-focus-scope=""
+      // eslint-disable-next-line react/forbid-dom-props
       style={bumperStyle}
       // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
       tabIndex="0"

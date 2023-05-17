@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,7 +10,7 @@ import cx from 'classnames';
 import Downshift from 'downshift';
 import isEqual from 'lodash.isequal';
 import PropTypes from 'prop-types';
-import React, { useState, useRef } from 'react';
+import React, { useContext, useState, useRef, useEffect } from 'react';
 import { defaultFilterItems } from '../ComboBox/tools/filter';
 import { sortingPropTypes } from './MultiSelectPropTypes';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
@@ -19,14 +19,16 @@ import { match, keys } from '../../internal/keyboard';
 import Selection from '../../internal/Selection';
 import { defaultItemToString } from './tools/itemToString';
 import mergeRefs from '../../tools/mergeRefs';
+import deprecate from '../../prop-types/deprecate';
 import { useId } from '../../internal/useId';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
-import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
+import { FormContext } from '../FluidForm';
 
 const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
   {
-    ariaLabel,
+    ['aria-label']: ariaLabel,
+    ariaLabel: deprecatedAriaLabel,
     className: containerClassName,
     compareItems,
     direction,
@@ -61,16 +63,20 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
   },
   ref
 ) {
+  const { isFluid } = useContext(FormContext);
+  const [isFocused, setIsFocused] = useState(false);
   const [isOpen, setIsOpen] = useState(open);
   const [prevOpen, setPrevOpen] = useState(open);
   const [inputValue, setInputValue] = useState('');
-  const [topItems, setTopItems] = useState([]);
+  const [topItems, setTopItems] = useState(initialSelectedItems ?? []);
   const [inputFocused, setInputFocused] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(null);
+  const [currentSelectedItems, setCurrentSelectedItems] = useState(
+    initialSelectedItems ?? []
+  );
   const textInput = useRef();
   const filterableMultiSelectInstanceId = useId();
 
-  const enabled = useFeatureFlag('enable-v11-release');
   const prefix = usePrefix();
 
   if (prevOpen !== open) {
@@ -83,14 +89,17 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
 
   const wrapperClasses = cx(
     `${prefix}--multi-select__wrapper`,
+    `${prefix}--multi-select--filterable__wrapper`,
     `${prefix}--list-box__wrapper`,
-    [enabled ? containerClassName : null],
+    containerClassName,
     {
       [`${prefix}--multi-select__wrapper--inline`]: inline,
       [`${prefix}--list-box__wrapper--inline`]: inline,
       [`${prefix}--multi-select__wrapper--inline--invalid`]: inline && invalid,
       [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
       [`${prefix}--list-box--up`]: direction === 'top',
+      [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
+      [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
     }
   );
   const helperId = !helperText
@@ -119,7 +128,14 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
   const menuId = `${id}__menu`;
   const inputId = `${id}-input`;
 
+  useEffect(() => {
+    if (!isOpen) {
+      setTopItems(currentSelectedItems);
+    }
+  }, [currentSelectedItems, isOpen, setTopItems]);
+
   function handleOnChange(changes) {
+    setCurrentSelectedItems(changes.selectedItems);
     if (onChange) {
       onChange(changes);
     }
@@ -137,11 +153,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
     handleOnMenuChange(false);
   }
 
-  function handleOnStateChange(changes, downshift) {
-    if (changes.isOpen && !isOpen) {
-      setTopItems(downshift.selectedItem);
-    }
-
+  function handleOnStateChange(changes) {
     const { type } = changes;
     const { stateChangeTypes } = Downshift;
 
@@ -234,9 +246,10 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
               `${prefix}--multi-select`,
               `${prefix}--combo-box`,
               `${prefix}--multi-select--filterable`,
-              [enabled ? null : containerClassName],
               {
                 [`${prefix}--multi-select--invalid`]: invalid,
+                [`${prefix}--multi-select--invalid--focused`]:
+                  invalid && inputFocused,
                 [`${prefix}--multi-select--open`]: isOpen,
                 [`${prefix}--multi-select--inline`]: inline,
                 [`${prefix}--multi-select--selected`]: selectedItem.length > 0,
@@ -292,12 +305,46 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                 if (match(event, keys.Space)) {
                   event.stopPropagation();
                 }
+
+                if (match(event, keys.Enter)) {
+                  handleOnMenuChange(true);
+                }
+
+                if (!disabled) {
+                  if (match(event, keys.Delete) || match(event, keys.Escape)) {
+                    if (isOpen) {
+                      handleOnMenuChange(true);
+                      clearInputValue();
+                      event.stopPropagation();
+                    } else if (!isOpen) {
+                      clearInputValue();
+                      clearSelection();
+                      event.stopPropagation();
+                    }
+                  }
+                }
+
+                if (match(event, keys.Tab)) {
+                  handleOnMenuChange(false);
+                }
+
+                if (match(event, keys.Home)) {
+                  event.target.setSelectionRange(0, 0);
+                }
+
+                if (match(event, keys.End)) {
+                  event.target.setSelectionRange(
+                    event.target.value.length,
+                    event.target.value.length
+                  );
+                }
               },
               onFocus: () => {
                 setInputFocused(true);
               },
               onBlur: () => {
                 setInputFocused(false);
+                setInputValue('');
               },
             });
 
@@ -310,6 +357,17 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
               }
             );
 
+            const handleFocus = (evt) => {
+              if (
+                evt.target.classList.contains(`${prefix}--tag__close-icon`) ||
+                evt.target.classList.contains(`${prefix}--list-box__selection`)
+              ) {
+                setIsFocused(false);
+              } else {
+                setIsFocused(evt.type === 'focus' ? true : false);
+              }
+            };
+
             return (
               <div className={wrapperClasses}>
                 {titleText ? (
@@ -318,6 +376,9 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                   </label>
                 ) : null}
                 <ListBox
+                  aria-label={deprecatedAriaLabel || ariaLabel}
+                  onFocus={isFluid ? handleFocus : null}
+                  onBlur={isFluid ? handleFocus : null}
                   className={className}
                   disabled={disabled}
                   light={light}
@@ -442,9 +503,18 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
 
 FilterableMultiSelect.propTypes = {
   /**
-   * 'aria-label' of the ListBox component.
+   * Specify a label to be read by screen readers on the container node
    */
-  ariaLabel: PropTypes.string,
+  ['aria-label']: PropTypes.string,
+
+  /**
+   * Deprecated, please use `aria-label` instead.
+   * Specify a label to be read by screen readers on the container note.
+   */
+  ariaLabel: deprecate(
+    PropTypes.string,
+    'This prop syntax has been deprecated. Please use the new `aria-label`.'
+  ),
 
   /**
    * Specify the direction of the multiselect dropdown. Can be either top or bottom.
@@ -509,7 +579,11 @@ FilterableMultiSelect.propTypes = {
   /**
    * `true` to use the light version.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `FilterableMultiSelect` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
 
   /**
    * Specify the locale of the control. Used for the default `compareItems`
@@ -583,7 +657,7 @@ FilterableMultiSelect.propTypes = {
 };
 
 FilterableMultiSelect.defaultProps = {
-  ariaLabel: 'Choose an item',
+  ['aria-label']: 'Choose an item',
   compareItems: defaultCompareItems,
   direction: 'bottom',
   disabled: false,
@@ -592,7 +666,6 @@ FilterableMultiSelect.defaultProps = {
   itemToString: defaultItemToString,
   locale: 'en',
   sortItems: defaultSortItems,
-  light: false,
   open: false,
   selectionFeedback: 'top-after-reopen',
 };

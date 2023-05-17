@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -43,7 +43,7 @@
     }
 
     &:hover {
-      background-color: $background-hover;
+      background-color: $layer-hover;
     }
   }
 
@@ -85,6 +85,10 @@
     width: rem(16px);
     height: rem(16px);
     fill: $icon-primary;
+  }
+
+  .#{$prefix}--overflow-menu__wrapper {
+    line-height: 0;
   }
 
   .#{$prefix}--overflow-menu-options {
@@ -132,7 +136,9 @@
     background-color: $layer;
   }
 
-  .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']:not(.#{$prefix}--breadcrumb-menu-options)::after {
+  .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']:not(
+      .#{$prefix}--breadcrumb-menu-options
+    )::after {
     top: rem(-3px);
     left: 0;
     width: rem(40px);
@@ -313,7 +319,7 @@
   .#{$prefix}--overflow-menu-options__option--disabled
     .#{$prefix}--overflow-menu-options__btn {
     color: $text-disabled;
-    pointer-events: none;
+    cursor: not-allowed;
 
     &:hover,
     &:active,

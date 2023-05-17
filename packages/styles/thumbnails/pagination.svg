@@ -1,52 +1,46 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>pagination</title>
-    <defs>
-        <polygon id="path-1" points="0 0 4 3.5 0 7"></polygon>
-        <polygon id="path-3" points="0 0 4 3.5 0 7"></polygon>
-    </defs>
-    <g id="pagination" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Group" transform="translate(64.000000, 74.000000)">
-            <rect id="Rectangle-2-Copy-482" fill="#BEBEBE" x="0" y="0" width="32" height="32"></rect>
-            <rect id="Rectangle-2-Copy-483" fill="#F4F4F4" x="32" y="0" width="32" height="32"></rect>
-            <rect id="Rectangle-2-Copy-484" fill="#F4F4F4" x="64" y="0" width="32" height="32"></rect>
-            <text id="1-copy-15" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" line-spacing="17.46" fill="#252525">
-                <tspan x="44" y="19">1</tspan>
-            </text>
-            <text id="2" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" line-spacing="17.46" fill="#252525">
-                <tspan x="76" y="19">2</tspan>
-            </text>
-            <rect id="Rectangle-2-Copy-485" fill="#F4F4F4" x="96" y="0" width="32" height="32"></rect>
-            <text id="3" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" line-spacing="17.46" fill="#252525">
-                <tspan x="108" y="19">3</tspan>
-            </text>
-            <rect id="Rectangle-2-Copy-486" fill="#F4F4F4" x="128" y="0" width="32" height="32"></rect>
-            <rect id="Rectangle-2-Copy-487" fill="#F4F4F4" x="160" y="0" width="32" height="32"></rect>
-            <rect id="Rectangle-2-Copy-336" fill="#0F6FFF" x="137" y="29" width="13.58" height="3"></rect>
-            <text id="4" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" line-spacing="17.46" fill="#252525">
-                <tspan x="140" y="19">4</tspan>
-            </text>
-            <g transform="translate(167.270000, 8.610000)" id="icon/navigation/caret/right/20-copy-24">
-                <g id="caret--right" transform="translate(6.500000, 4.500000)">
-                    <mask id="mask-2" fill="white">
-                        <use xlink:href="#path-1"></use>
-                    </mask>
-                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
-                    <g id="Group" mask="url(#mask-2)">
-                        <g transform="translate(-6.500000, -4.500000)" id="icon-color">
-                            <rect id="Rectangle" fill="#000000" x="0" y="0" width="32" height="32"></rect>
-                        </g>
-                    </g>
-                </g>
-                <polygon id="transparent-rectangle" transform="translate(8.000000, 8.000000) rotate(-90.000000) translate(-8.000000, -8.000000) " points="6.66133815e-16 9.79717439e-16 16 9.79717439e-16 16 16 6.66133815e-16 16"></polygon>
-            </g>
-            <g id="Group" transform="translate(13.110000, 13.110000)">
-                <mask id="mask-4" fill="white">
-                    <use xlink:href="#path-3"></use>
-                </mask>
-                <use id="Mask" fill="#000000" fill-rule="nonzero" transform="translate(2.000000, 3.500000) scale(-1, 1) translate(-2.000000, -3.500000) " xlink:href="#path-3"></use>
-            </g>
-            <rect id="Rectangle-8-Copy-2" fill="#C6C6C6" x="160" y="0" width="1" height="32"></rect>
-        </g>
-    </g>
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="pagination">
+<g id="Group" clip-path="url(#clip0_0_3530)">
+<rect id="Rectangle 2 Copy 482" x="128" y="148" width="64" height="64" fill="#BEBEBE"/>
+<rect id="Rectangle 2 Copy 483" x="192" y="148" width="64" height="64" fill="#F4F4F4"/>
+<rect id="Rectangle 2 Copy 484" x="256" y="148" width="64" height="64" fill="#F4F4F4"/>
+<path id="1 copy 15" d="M229.128 188V186.224H224.808V171.248H221.664L217.224 175.4L218.4 176.672L222.624 172.736H222.792V186.224H218.112V188H229.128Z" fill="#252525"/>
+<path id="2" d="M292.792 186.224H283.984L288.496 182.168C290.632 180.248 292.168 178.424 292.168 175.832C292.168 172.976 290.296 170.96 287.032 170.96C283.792 170.96 282.304 172.928 281.656 174.896L283.456 175.592C283.912 174.008 284.872 172.76 286.936 172.76C289 172.76 290.032 174.032 290.032 175.88V176.168C290.032 177.776 288.832 179.456 287.272 180.896L281.8 185.936V188H292.792V186.224Z" fill="#252525"/>
+<rect id="Rectangle 2 Copy 485" x="320" y="148" width="64" height="64" fill="#F4F4F4"/>
+<path id="3" d="M348.44 178.352V180.104H350.408C352.76 180.104 354.008 181.232 354.008 183.2V183.392C354.008 185.36 352.76 186.488 350.408 186.488C348.368 186.488 347.384 185.6 346.52 184.28L345.008 185.432C346.04 186.872 347.528 188.288 350.432 188.288C353.84 188.288 356.12 186.296 356.12 183.416C356.12 180.896 354.392 179.552 352.592 179.192V179.096C354.368 178.64 355.808 177.344 355.808 175.184C355.808 172.472 353.552 170.96 350.72 170.96C348.032 170.96 346.568 172.352 345.728 173.696L347.216 174.848C347.912 173.576 348.944 172.76 350.672 172.76C352.448 172.76 353.672 173.648 353.672 175.4V175.568C353.672 177.176 352.52 178.352 350.264 178.352H348.44Z" fill="#252525"/>
+<rect id="Rectangle 2 Copy 486" x="384" y="148" width="64" height="64" fill="#F4F4F4"/>
+<rect id="Rectangle 2 Copy 487" x="448" y="148" width="64" height="64" fill="#F4F4F4"/>
+<rect id="Rectangle 2 Copy 336" x="402" y="206" width="27.16" height="6" fill="#0F6FFF"/>
+<path id="4" d="M418.92 188V184.712H421.344V183.032H418.92V171.248H415.92L408.912 182.936V184.712H417V188H418.92ZM416.88 172.808H417V183.032H410.808L416.88 172.808Z" fill="#252525"/>
+<g id="icon/navigation/caret/right/20 copy 24">
+<g id="caret--right">
+<path id="Mask" d="M475.54 174.22L483.54 181.22L475.54 188.22V174.22Z" fill="black"/>
+<mask id="mask0_0_3530" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="475" y="174" width="9" height="15">
+<path id="Mask_2" d="M475.54 174.22L483.54 181.22L475.54 188.22V174.22Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_0_3530)">
+<g id="icon color">
+<rect width="32" height="32" transform="translate(462.54 165.22) scale(2)" fill="black"/>
+</g>
+</g>
+</g>
+</g>
+<g id="icon/navigation/caret/left/20 copy 24">
+<g id="Group_2">
+<path id="Mask_3" d="M162.22 174.22L154.22 181.22L162.22 188.22V174.22Z" fill="black"/>
+<mask id="mask1_0_3530" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="154" y="174" width="9" height="15">
+<path id="Mask_4" d="M162.22 174.22L154.22 181.22L162.22 188.22V174.22Z" fill="white"/>
+</mask>
+<g mask="url(#mask1_0_3530)">
+</g>
+</g>
+</g>
+<rect id="Rectangle 8 Copy 2" x="448" y="148" width="2" height="64" fill="#C6C6C6"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_0_3530">
+<rect width="192" height="32" fill="white" transform="translate(128 148) scale(2)"/>
+</clipPath>
+</defs>
 </svg>

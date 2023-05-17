@@ -1,0 +1,45 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/utilities/button-reset';
+
+// This is a utility class to make sure that tooltip stories have a minimum
+// height when used in MDX docs
+.sb-tooltip-story {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px;
+  margin: auto;
+}
+
+.sb-tooltip-trigger {
+  @include button-reset.reset();
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid theme.$border-subtle;
+}
+
+.sb-tooltip-trigger svg {
+  fill: theme.$background-inverse;
+}
+
+// DefinitionTooltip
+.sb-definition-tooltip {
+  max-width: 60ch;
+}
+
+.sb-definition-tooltip p {
+  @include type.type-style('body-short-02');
+}

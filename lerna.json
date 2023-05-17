@@ -1,5 +1,5 @@
 {
-  "lerna": "3.13.4",
+  "lerna": "6.4.0",
   "version": "independent",
   "npmClient": "yarn",
   "npmClientArgs": ["--frozen-lockfile"],

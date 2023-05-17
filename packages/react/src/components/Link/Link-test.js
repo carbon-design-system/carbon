@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -87,7 +87,7 @@ describe('Link', () => {
     expect(screen.getByRole('link')).toHaveAttribute('rel', 'noopener');
   });
 
-  it('should receive keyboard focus', () => {
+  it('should receive keyboard focus', async () => {
     render(
       <Link href="/" className="some-class">
         A simple link
@@ -95,18 +95,18 @@ describe('Link', () => {
     );
 
     expect(document.body).toHaveFocus();
-    userEvent.tab();
+    await userEvent.tab();
     expect(screen.getByText('A simple link')).toHaveFocus();
   });
 
-  it('should not receive keyboard focus when disabled', () => {
+  it('should not receive keyboard focus when disabled', async () => {
     render(
       <Link href="/" disabled className="some-class">
         A simple link
       </Link>
     );
     expect(document.body).toHaveFocus();
-    userEvent.tab();
+    await userEvent.tab();
     expect(document.body).toHaveFocus();
   });
 

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -61,9 +61,8 @@ export default class ContentSwitcher extends React.Component {
 
     /**
      * Specify the size of the Content Switcher. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
-     * TODO V11: remove `xl` (replaced with lg)
      */
-    size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+    size: PropTypes.oneOf(['sm', 'md', 'lg']),
   };
 
   static contextType = PrefixContext;
@@ -141,9 +140,14 @@ export default class ContentSwitcher extends React.Component {
       ...other
     } = this.props;
 
+    const isIconOnly = React.Children.map(children, (child) => {
+      return child.type.displayName === 'IconSwitch';
+    }).every((val) => val === true);
+
     const classes = classNames(`${prefix}--content-switcher`, className, {
       [`${prefix}--content-switcher--light`]: light,
       [`${prefix}--content-switcher--${size}`]: size,
+      [`${prefix}--content-switcher--icon-only`]: isIconOnly,
     });
 
     return (
@@ -158,6 +162,7 @@ export default class ContentSwitcher extends React.Component {
             onKeyDown: this.handleChildChange,
             selected: index === this.state.selectedIndex,
             ref: this.handleItemRef(index),
+            size,
           })
         )}
       </div>

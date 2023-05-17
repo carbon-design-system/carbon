@@ -1,0 +1,22 @@
+//
+// Copyright IBM Corp. 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Fluid Dropdown
+//-----------------------------
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../utilities/convert' as *;
+@use '../../utilities/focus-outline' as *;
+@use '../dropdown';
+@use '../fluid-list-box';
+
+@mixin fluid-dropdown {
+  // Style overrides can be added here as needed
+}

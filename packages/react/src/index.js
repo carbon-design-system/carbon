@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,6 +14,7 @@ export { Breadcrumb, BreadcrumbItem } from './components/Breadcrumb';
 export Button from './components/Button';
 export ButtonSet from './components/ButtonSet';
 export Checkbox from './components/Checkbox';
+export CheckboxGroup from './components/CheckboxGroup';
 export { ClassPrefix } from './components/ClassPrefix';
 export CodeSnippet from './components/CodeSnippet';
 export ComboBox from './components/ComboBox';
@@ -23,6 +24,7 @@ export {
   ModalBody,
   ModalFooter,
 } from './components/ComposedModal';
+export ContainedList, { ContainedListItem } from './components/ContainedList';
 export ContentSwitcher from './components/ContentSwitcher';
 export Copy from './components/Copy';
 export CopyButton from './components/CopyButton';
@@ -70,6 +72,7 @@ export FormGroup from './components/FormGroup';
 export FormItem from './components/FormItem';
 export FormLabel from './components/FormLabel';
 export { Grid, Row, Column, ColumnHang, FlexGrid } from './components/Grid';
+export { IdPrefix } from './components/IdPrefix';
 export InlineLoading from './components/InlineLoading';
 export Link from './components/Link';
 export ListItem from './components/ListItem';
@@ -102,14 +105,12 @@ export {
 export RadioButton from './components/RadioButton';
 export RadioButtonGroup from './components/RadioButtonGroup';
 export Search from './components/Search';
-export SearchFilterButton from './components/SearchFilterButton';
-export SearchLayoutButton from './components/SearchLayoutButton';
 export ExpandableSearch from './components/ExpandableSearch';
 export SecondaryButton from './components/SecondaryButton';
 export Select from './components/Select';
 export SelectItem from './components/SelectItem';
 export SelectItemGroup from './components/SelectItemGroup';
-export Switch from './components/Switch';
+export { Switch, IconSwitch } from './components/Switch';
 export Slider from './components/Slider';
 export {
   StructuredListWrapper,
@@ -123,6 +124,7 @@ export {
 export Tab from './components/Tab';
 export TabContent from './components/TabContent';
 export Tabs from './components/Tabs';
+export { TabPanel, TabPanels, TabList, IconTab } from './components/Tabs';
 export Tag from './components/Tag';
 export TextArea from './components/TextArea';
 export TextInput from './components/TextInput';
@@ -146,6 +148,7 @@ export {
   ToggletipContent,
   ToggletipActions,
 } from './components/Toggletip';
+export TreeView, { TreeNode } from './components/TreeView';
 export UnorderedList from './components/UnorderedList';
 export SkeletonText from './components/SkeletonText';
 export SkeletonPlaceholder from './components/SkeletonPlaceholder';
@@ -211,17 +214,66 @@ export {
   useFeatureFlag as unstable_useFeatureFlag,
   useFeatureFlags as unstable_useFeatureFlags,
 } from './components/FeatureFlags';
+export {
+  FluidComboBox as unstable__FluidComboBox,
+  FluidComboBoxSkeleton as unstable__FluidComboBoxSkeleton,
+} from './components/FluidComboBox';
+export {
+  FluidDatePicker as unstable__FluidDatePicker,
+  FluidDatePickerSkeleton as unstable__FluidDatePickerSkeleton,
+} from './components/FluidDatePicker';
+export { FluidDatePickerInput as unstable__FluidDatePickerInput } from './components/FluidDatePickerInput';
+export {
+  FluidDropdown as unstable__FluidDropdown,
+  FluidDropdownSkeleton as unstable__FluidDropdownSkeleton,
+} from './components/FluidDropdown';
+export {
+  FluidMultiSelect as unstable__FluidMultiSelect,
+  FluidMultiSelectSkeleton as unstable__FluidMultiSelectSkeleton,
+} from './components/FluidMultiSelect';
+export {
+  FluidNumberInput as unstable__FluidNumberInput,
+  FluidNumberInputSkeleton as unstable__FluidNumberInputSkeleton,
+} from './components/FluidNumberInput';
+export {
+  FluidSearch as unstable__FluidSearch,
+  FluidSearchSkeleton as unstable__FluidSearchSkeleton,
+} from './components/FluidSearch';
+export {
+  FluidSelect as unstable__FluidSelect,
+  FluidSelectSkeleton as unstable__FluidSelectSkeleton,
+} from './components/FluidSelect';
+export {
+  FluidTextArea as unstable__FluidTextArea,
+  FluidTextAreaSkeleton as unstable__FluidTextAreaSkeleton,
+} from './components/FluidTextArea';
+export {
+  FluidTextInput as unstable__FluidTextInput,
+  FluidTextInputSkeleton as unstable__FluidTextInputSkeleton,
+} from './components/FluidTextInput';
+export {
+  FluidTimePicker as unstable__FluidTimePicker,
+  FluidTimePickerSkeleton as unstable__FluidTimePickerSkeleton,
+} from './components/FluidTimePicker';
+export { FluidTimePickerSelect as unstable__FluidTimePickerSelect } from './components/FluidTimePickerSelect';
 export { Heading, Section } from './components/Heading';
 export { IconButton } from './components/IconButton';
 export { Layer, useLayer } from './components/Layer';
-export unstable_Menu, {
-  MenuDivider as unstable_MenuDivider,
-  MenuGroup as unstable_MenuGroup,
+export {
+  LayoutDirection as unstable_LayoutDirection,
+  useLayoutDirection as unstable_useLayoutDirection,
+} from './components/Layout';
+export {
+  Menu as unstable_Menu,
   MenuItem as unstable_MenuItem,
-  MenuRadioGroup as unstable_MenuRadioGroup,
-  MenuSelectableItem as unstable_MenuSelectableItem,
+  MenuItemDivider as unstable_MenuItemDivider,
+  MenuItemGroup as unstable_MenuItemGroup,
+  MenuItemRadioGroup as unstable_MenuItemRadioGroup,
+  MenuItemSelectable as unstable_MenuItemSelectable,
 } from './components/Menu';
 export { OverflowMenuV2 as unstable_OverflowMenuV2 } from './components/OverflowMenuV2';
+export { ComboButton as unstable_ComboButton } from './components/ComboButton';
+export { MenuButton as unstable_MenuButton } from './components/MenuButton';
 export {
   PageSelector as unstable_PageSelector,
   Pagination as unstable_Pagination,
@@ -229,11 +281,12 @@ export {
 export { Popover, PopoverContent } from './components/Popover';
 export { default as ProgressBar } from './components/ProgressBar';
 export { HStack, Stack, VStack } from './components/Stack';
-export { Tooltip } from './components/Tooltip/next';
-export { DefinitionTooltip } from './components/Tooltip/next/DefinitionTooltip';
-export unstable_TreeView, {
-  TreeNode as unstable_TreeNode,
-} from './components/TreeView';
-export { TabPanel, TabPanels, TabList, IconTab } from './components/Tabs';
+export { Tooltip } from './components/Tooltip';
+export {
+  Text as unstable_Text,
+  TextDirection as unstable_TextDirection,
+} from './components/Text';
+export { DefinitionTooltip } from './components/Tooltip/DefinitionTooltip';
 export { GlobalTheme, Theme, useTheme } from './components/Theme';
 export { usePrefix } from './internal/usePrefix';
+export { useIdPrefix } from './internal/useIdPrefix';

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,6 +16,26 @@ import { composeEventHandlers } from '../../tools/events';
 import { defaultFilterRows } from './tools/filter';
 import { defaultSortRow } from './tools/sorting';
 import setupGetInstanceId from './tools/instanceId';
+import Table from './Table';
+import TableActionList from './TableActionList';
+import TableBatchAction from './TableBatchAction';
+import TableBatchActions from './TableBatchActions';
+import TableBody from './TableBody';
+import TableCell from './TableCell';
+import TableContainer from './TableContainer';
+import TableExpandHeader from './TableExpandHeader';
+import TableExpandRow from './TableExpandRow';
+import TableExpandedRow from './TableExpandedRow';
+import TableHead from './TableHead';
+import TableHeader from './TableHeader';
+import TableRow from './TableRow';
+import TableSelectAll from './TableSelectAll';
+import TableSelectRow from './TableSelectRow';
+import TableToolbar from './TableToolbar';
+import TableToolbarAction from './TableToolbarAction';
+import TableToolbarContent from './TableToolbarContent';
+import TableToolbarSearch from './TableToolbarSearch';
+import TableToolbarMenu from './TableToolbarMenu';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -53,7 +73,7 @@ const translateWithId = (id) => defaultTranslations[id];
  * and updating the state of the single entity will cascade updates to the
  * consumer.
  */
-export default class DataTable extends React.Component {
+class DataTable extends React.Component {
   static propTypes = {
     /**
      * Optional hook to manually control filtering of the rows from the
@@ -163,31 +183,31 @@ export default class DataTable extends React.Component {
     this.instanceId = getInstanceId();
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps === this.props) {
-      return;
+  // if state needs to be updated then wait for only update after state is finished
+  shouldComponentUpdate(nextProps) {
+    if (this.props !== nextProps) {
+      const nextRowIds = nextProps.rows.map((row) => row.id);
+      const rowIds = this.props.rows.map((row) => row.id);
+
+      if (!isEqual(nextRowIds, rowIds)) {
+        this.setState((state) => getDerivedStateFromProps(this.props, state));
+        return false;
+      }
+
+      const nextHeaders = nextProps.headers.map((header) => header.key);
+      const headers = this.props.headers.map((header) => header.key);
+
+      if (!isEqual(nextHeaders, headers)) {
+        this.setState((state) => getDerivedStateFromProps(this.props, state));
+        return false;
+      }
+
+      if (!isEqual(nextProps.rows, this.props.rows)) {
+        this.setState((state) => getDerivedStateFromProps(this.props, state));
+        return false;
+      }
     }
-
-    const prevRowIds = prevProps.rows.map((row) => row.id);
-    const rowIds = this.props.rows.map((row) => row.id);
-
-    if (!isEqual(prevRowIds, rowIds)) {
-      this.setState((state) => getDerivedStateFromProps(this.props, state));
-      return;
-    }
-
-    const prevHeaders = prevProps.headers.map((header) => header.key);
-    const headers = this.props.headers.map((header) => header.key);
-
-    if (!isEqual(prevHeaders, headers)) {
-      this.setState((state) => getDerivedStateFromProps(this.props, state));
-      return;
-    }
-
-    if (!isEqual(prevProps.rows, this.props.rows)) {
-      this.setState((state) => getDerivedStateFromProps(this.props, state));
-      return;
-    }
+    return true;
   }
 
   /**
@@ -233,9 +253,10 @@ export default class DataTable extends React.Component {
    *
    * @param {object} config
    * @param {Function} config.onClick a custom click handler for the expand header
+   * @param {Function} config.onExpand a custom click handler called when header is expanded
    * @returns {object}
    */
-  getExpandHeaderProps = ({ onClick, ...rest } = {}) => {
+  getExpandHeaderProps = ({ onClick, onExpand, ...rest } = {}) => {
     const { translateWithId: t } = this.props;
     const { isExpandedAll, rowIds, rowsById } = this.state;
     const isExpanded =
@@ -251,6 +272,7 @@ export default class DataTable extends React.Component {
       // handler
       onExpand: composeEventHandlers([
         this.handleOnExpandAll,
+        onExpand,
         onClick
           ? this.handleOnExpandHeaderClick(onClick, {
               isExpanded,
@@ -689,3 +711,26 @@ export default class DataTable extends React.Component {
     return null;
   }
 }
+
+DataTable.Table = Table;
+DataTable.TableActionList = TableActionList;
+DataTable.TableBatchAction = TableBatchAction;
+DataTable.TableBatchActions = TableBatchActions;
+DataTable.TableBody = TableBody;
+DataTable.TableCell = TableCell;
+DataTable.TableContainer = TableContainer;
+DataTable.TableExpandHeader = TableExpandHeader;
+DataTable.TableExpandRow = TableExpandRow;
+DataTable.TableExpandedRow = TableExpandedRow;
+DataTable.TableHead = TableHead;
+DataTable.TableHeader = TableHeader;
+DataTable.TableRow = TableRow;
+DataTable.TableSelectAll = TableSelectAll;
+DataTable.TableSelectRow = TableSelectRow;
+DataTable.TableToolbar = TableToolbar;
+DataTable.TableToolbarAction = TableToolbarAction;
+DataTable.TableToolbarContent = TableToolbarContent;
+DataTable.TableToolbarSearch = TableToolbarSearch;
+DataTable.TableToolbarMenu = TableToolbarMenu;
+
+export default DataTable;

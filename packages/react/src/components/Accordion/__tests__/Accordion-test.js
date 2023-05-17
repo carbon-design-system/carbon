@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -52,7 +52,7 @@ describe('Accordion', () => {
       await expect(screen.getByText('Heading A')).toHaveNoAxeViolations();
 
       // click to open
-      userEvent.click(screen.getByText('Heading A'));
+      await userEvent.click(screen.getByText('Heading A'));
 
       // test when open
       await expect(screen.getByText('Heading A')).toHaveNoAxeViolations();
@@ -80,7 +80,7 @@ describe('Accordion', () => {
       );
 
       // click to open
-      userEvent.click(screen.getByText('Heading A'));
+      await userEvent.click(screen.getByText('Heading A'));
 
       // test when open
       await expect(screen.getByText('Heading A')).toHaveNoACViolations(
@@ -105,7 +105,7 @@ describe('Accordion', () => {
         </Accordion>
       );
 
-      userEvent.tab();
+      await userEvent.tab();
       await expect(document.getElementsByTagName('button')[0]).toHaveFocus();
     });
 
@@ -126,11 +126,11 @@ describe('Accordion', () => {
 
       // userEvent.type clicks the element passed before typing without skipClick option
       // see: https://github.com/testing-library/user-event#typeelement-text-options
-      userEvent.type(screen.getByText('Heading A'), '{enter}', {
+      await userEvent.type(screen.getByText('Heading A'), '{enter}', {
         skipClick: true,
       });
 
-      expect(screen.getByText('Panel A')).toBeDefined();
+      expect(screen.getByText('Panel A')).toBeInTheDocument();
     });
 
     it('should open with spacebar', async () => {
@@ -150,11 +150,53 @@ describe('Accordion', () => {
 
       // userEvent.type clicks the element passed before typing without skipClick option
       // see: https://github.com/testing-library/user-event#typeelement-text-options
-      userEvent.type(screen.getByText('Heading A'), '{space}', {
+      await userEvent.type(screen.getByText('Heading A'), '{Space}', {
         skipClick: true,
       });
 
-      expect(screen.getByText('Panel A')).toBeDefined();
+      expect(screen.getByText('Panel A')).toBeInTheDocument();
+    });
+  });
+
+  describe('Flush align', () => {
+    it('should align to the left if prop isFlush is passed', () => {
+      render(
+        <Accordion data-testid="accordion" isFlush>
+          <AccordionItem className="child" title="Heading A">
+            Panel A
+          </AccordionItem>
+          <AccordionItem className="child" title="Heading B">
+            Panel B
+          </AccordionItem>
+          <AccordionItem className="child" title="Heading C">
+            Panel C
+          </AccordionItem>
+        </Accordion>
+      );
+
+      expect(screen.getByTestId('accordion')).toHaveClass(
+        'cds--accordion--flush'
+      );
+    });
+
+    it('should not align to left if align="start"', () => {
+      render(
+        <Accordion data-testid="accordion-2" isFlush align="start">
+          <AccordionItem className="child" title="Heading A">
+            Panel A
+          </AccordionItem>
+          <AccordionItem className="child" title="Heading B">
+            Panel B
+          </AccordionItem>
+          <AccordionItem className="child" title="Heading C">
+            Panel C
+          </AccordionItem>
+        </Accordion>
+      );
+
+      expect(screen.getByTestId('accordion-2')).not.toHaveClass(
+        'cds--accordion--flush'
+      );
     });
   });
 });

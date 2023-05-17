@@ -156,7 +156,7 @@ If they are, remove the question label, label as a `type: enhancement 💡` or
 <details>
 <summary>Is there a duplicate question?</summary>
 
-We tend to recieve more questions through Slack than through Github so with any
+We tend to recieve more questions through Slack than through GitHub so with any
 incoming question issues, search in both places to see if it has already been
 answered. If you can find an answer, point the author to where they can find it
 and close the issue.
@@ -218,68 +218,161 @@ missing info.
 
 If they have filled out the template or they have responded with the missing
 info, label the issue as an open proposal, label any relevant metadata, and move
-the issue to the backlog pipeline! 🎉
+the issue to the icebox pipeline! 🎉
+
+The journey of a feature request can be a long and arduous process, depending on
+the ask. Checkout the flow chart to see the path a given feature might take.
+
+```mermaid
+flowchart TD
+    A[Received] --> B[Does it align with the maintainer team's <br />guiding principles for building a design system at IBM?]
+    B -->|No| C[Closed]
+    B -->|Yes| D[Is it supporting a PAL in the DSAG?]
+    D -->|No| E[Is it suporting a PAL not in the DSAG?]
+    E -->|No| F[Is it supporting an IBM product without a PAL?]
+    F -->|No| G[Is it supporting a non-IBM offering that uses Carbon?]
+    G -->|No| C[Closed]
+    D & E & F & G -->|Yes| H([Great! Your request has now been labeled as an `open` proposal. <br />Now we will determine who will be working on this and when.])
+    H --> I[Is this a concept/idea?]
+    H --> J[Is this a fully fleshed out design spec <br /> or code implementation?]
+    I -->|Yes| K[Are you able to dedicate design or <br /> engineering resources to bring this to production?]
+    I <--> |No|J
+    K -->|No| L[Does your request have a low level of effort or a high business impact?]
+    L -->|No| C[Closed]
+    J & K & L -->|Yes| M([Your request has been labeled as an `accepted` <br />proposal and has been added to our Icebox and is <br />being prioritized against competing workstreams])
+    M --> N([Labeled with `Community Contribution` <br /> on GH. Looking for contributions])
+    M --> O([Added to maintainer team's roadmap <br /> and backlog for refinement])
+    N & O --> storm((Design Crits, Code Reviews,<br /> CAG, DSAG meetings, <br /> Office hours when needed))
+    storm --> ide1
+    subgraph ide1 [Evaluate against a definition of done]
+    P[Storybook]
+    Q[Tests]
+    R[Code]
+    S[Final design spec]
+    T[Website docs]
+    U[Kit tooling]
+    end
+    ide1 -->|Yes| C[Closed]
+
+    style storm fill:#6929c4,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
+    style A fill:#198038,stroke:#fff,stroke-width:2px,color:#fff
+    style C fill:#da1e28,stroke:#000,stroke-width:2px,color:#fff
+    style H fill:#198038,stroke:#fff,stroke-width:2px,color:#fff
+    style M fill:#198038,stroke:#fff,stroke-width:2px,color:#fff
+```
+
+### Definitions
+
+Guiding principless -
+https://carbondesignsystem.com/all-about-carbon/what-is-carbon/#our-guiding-principles
+
+DSAG - The Design System Adoption Guild is an expansive group of designers and
+developers all aligned on the mission of delivering amazing experiences in the
+IBM Products organization. You can learn more about the guild
+[here](https://pages.github.ibm.com/cdai-design/pal/contributing/contribution-framework/intent).
+
+PAL - Pattern & Asset Library. These are the local systems around IBM that
+extend our core components to fit their desired business need.
+
+CAG - Carbon Accessibility Guild. A once a sprint meeting where the Carbon team
+gets together with the Accessiblity team. Our components and patterns are
+reviewed and made more accessible.
+
+Design crit - A once a sprint meeting led by Carbon designers to review patterns
+and artifacts with the intent of eliciting feedback.
+
+Office hours - A once a sprint meeting hosted by the Carbon team to answer
+questions, debug, problem-solve, and learn from the community.
+[Link to add to your calendar](https://ec.yourlearning.ibm.com/w3/series/10289694?layout=grid).
+
+Low level of effort - A small change to a component that might take a sprint or
+less. Little-to-no design or dev resources are needed to flesh out the proposal.
+
+High business impact - The request may not have all the pieces ready to begin
+working on it, but the maintainer team is able to see the high degree of
+business impact that the feature will bring with future research done.
 
 ### Severity
 
 There are 4 levels of severity for issues in the Carbon core repositories:
 
-- Severity 1- "_Affects major functionality, no workaround"_
-- Severity 2 - "_Affects major functionality, has a workaround"_
-- Severity 3 - "_Affects minor functionality, has a workaround"_
-- Severity 4 - "_Affects minor functionality, no workaround needed"_
+- https://github.com/carbon-design-system/carbon/labels/severity%3A%201 - _"Must
+  be fixed ASAP"_
+- https://github.com/carbon-design-system/carbon/labels/severity%3A%202 - _"User
+  cannot complete task, and/or no workaround"_
+- https://github.com/carbon-design-system/carbon/labels/severity%3A%203 - _"User
+  can complete task, and/or has a workaround"_
+- https://github.com/carbon-design-system/carbon/labels/severity%3A%204 -
+  _"Unrelated to a user task, has a workaround or does not need a workaround"_
 
-As you can see these severity levels describe two stages of broken
-functionality:
+Workarounds can be described as either of the following:
 
-- Major - major functionality is critical to the user completing the task.
-  Whatever has gone wrong has made it impossible for the user to successfully
-  complete their task or action.
+1. A workaround within the ux of a component. e.g. A MultiSelect item is not
+   selected when clicking on the _icon_, but is still selected when clicking on
+   the _text_.
 
-  _Examples of major functionality failing are menu's not opening, lack of
-  keyboard accessibility, poor contrast, or broken builds_
+2. A workaround within the implementation of a component. e.g. A `formatDate`
+   function is not working, but there is an `onKeyDown` prop that can be used
+   instead to format the date on every keystroke.
 
-- Minor - minor functionality isn't critical to the user completing the task,
-  but might make task completion frustrating or difficult.
-
-  _Examples of minor functionality failures are components lacking proper
-  styling, a SVG arrow pointing the wrong direction, or the wrong grid being
-  applied at a certain breakpoint_
+If either of these types of workarounds are available, the bug will be
+classified as
+https://github.com/carbon-design-system/carbon/labels/severity%3A%203 or
+https://github.com/carbon-design-system/carbon/labels/severity%3A%204
 
 These can be difficult (and vague!) concepts to wrap your head around. So here's
 a handy flow chart to guide you through assigning issue severity:
 
-```
-                        There is a bug!
-                              |
-                  Can the user complete the task?
-                  /                            \
-                "no"                           "yes"
-                 |                               |
-       Is there someway to                 Does the bug have
-       complete the task?                  a workaround?
-        /           \                      /           \
-     "no"          "yes"                "yes"      "none needed"
-       |             |                    |              |
- +-------------+  +-------------+    +-------------+  +-------------+
- | severity: 1 |  | severity: 2 |    | severity: 3 |  | severity: 4 |
- +-------------+  +-------------+    +-------------+  +-------------+
+```mermaid
+graph TD
+    A[There is a bug!] --> B[Can the user/designer/developer </br> still complete the task?]
+    B -->|No| C[Is there a workaround?]
+    B -->|Yes| D[Is there a workaround?]
+    C -->|No| E[Is this major enough to need an immediate fix?*]
+    C -->|Yes| Sev3([Severity: 3])
+    E -->|No| Sev2([Severity: 2])
+    E -->|Yes| Sev1([Severity: 1])
+    D -->|Yes| Sev3
+    D -->|Workaround not needed| Sev4([Severity: 4])
+    B -->|Unrelated to user task| Sev4
 ```
 
-### Impact
+> \* Is this major enough to need an immediate fix?
 
-An issue's impact talks about the _scope_ of the issue. How many people does the
-problem effect? There are three tiers:
+Clearly marking what qualifies as being "major enough" to warrant an immediate
+fix is difficult. In general, you'll know these when you see them.
 
-- Impact: high - _"Defect affects all users"_
-- Impact: medium - _"Defect affects many users"_
-- Impact: low - _"Defect affects one or a few users"_
+Here are some primary determining factors:
 
-These three issues help us prioritize _when_ we resolve these issues. High
-impact issues should happen as soon as possible, medium impact within the next
-few chunks of work, and low impact issues happening someday _(but still
-definitely happening)_. If the issue doesn't merit fixing in the foreseeable
-future no label is needed because the issue should be closed.
+- A large number of projects (10+) impacted by an issue
+- The degree to which something is broken (being unable to complete foundational
+  tasks like clicking a button or opening a dropdown, for instance)
+
+Also consider the response a
+https://github.com/carbon-design-system/carbon/labels/severity%3A%201 issue
+requires, and evaluate it against the bug:
+
+- The response must be swift. When a
+  https://github.com/carbon-design-system/carbon/labels/severity%3A%201 issue
+  comes in, someone from the team must drop all current work and be immediately
+  reassigned to address the issue.
+- In the worst circumstances, this person may immediately revert a change from a
+  previous release.
+- It's likely a patch must be published once the fix or revert is in - the item
+  can not wait to go out with the next scheduled release.
+- We may need to publish a
+  [postmortem](https://github.com/carbon-design-system/carbon/tree/main/docs/postmortems)
+  identifying what happened and why, with a plan of how we intend to prevent it
+  from happening again.
+
+Due to this high threshold and intensity of response,
+https://github.com/carbon-design-system/carbon/labels/severity%3A%201 issues
+should be infrequent and should not be open for a long period of time.
+
+For the vast majority of bugs that have invalid and blocking behavior with no
+workaround, a
+https://github.com/carbon-design-system/carbon/labels/severity%3A%202 or lower
+is more appropriate.
 
 ### Other labels
 
@@ -292,14 +385,11 @@ that can be particularly helpful:
 - good first issue 👋 - these issues don't require a deep knowledge or
   understanding of our code base and would be great for someone looking to help
   out for the first time with some code
-- status: needs first aid - if you have a general _feeling_ for the severity and
-  priority of an issue, but can tell it requires a skillful eye to better grasp
-  the true scope of the work this is a great label to add
 
 ### Alerting a team or subject matter expert
 
 Sometimes an issue comes in that is highly technical or about subject matter
-you're unfamiliar with. Nothing wrong with that! Using Github ping system you
+you're unfamiliar with. Nothing wrong with that! Using GitHub ping system you
 can alert specific sub-teams on Carbon:
 
 - @carbon-design-system/design

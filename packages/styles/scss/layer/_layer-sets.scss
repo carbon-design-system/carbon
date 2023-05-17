@@ -60,6 +60,7 @@ $-default-layer-sets: (
     theme.$field-hover-03,
   ),
   border-subtle: (
+    theme.$border-subtle-00,
     theme.$border-subtle-01,
     theme.$border-subtle-02,
     theme.$border-subtle-03,
@@ -73,6 +74,11 @@ $-default-layer-sets: (
     theme.$border-strong-01,
     theme.$border-strong-02,
     theme.$border-strong-03,
+  ),
+  border-tile: (
+    theme.$border-tile-01,
+    theme.$border-tile-02,
+    theme.$border-tile-03,
   ),
 );
 

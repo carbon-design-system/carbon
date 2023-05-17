@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,7 +12,6 @@ import classnames from 'classnames';
 import { composeEventHandlers } from '../../tools/events';
 import { usePrefix } from '../../internal/usePrefix';
 import { IconButton } from '../IconButton';
-import * as FeatureFlags from '@carbon/feature-flags';
 
 export default function Copy({
   children,
@@ -55,49 +54,25 @@ export default function Copy({
     [handleFadeOut]
   );
 
-  if (FeatureFlags.enabled('enable-v11-release')) {
-    return (
-      <IconButton
-        align="bottom"
-        className={classNames}
-        label={animation ? feedback : other['aria-label']}
-        onClick={composeEventHandlers([onClick, handleClick])}
-        onAnimationEnd={composeEventHandlers([
-          onAnimationEnd,
-          handleAnimationEnd,
-        ])}
-        {...other}
-        aria-live="polite"
-        aria-label={
-          (!children && (animation ? feedback : other['aria-label'])) || null
-        }>
-        {children}
-      </IconButton>
-    );
-  }
+  const initialLabel = other['aria-label'] ?? '';
 
   return (
-    <button
-      type="button"
+    <IconButton
+      closeOnActivation={false}
+      align="bottom"
       className={classNames}
+      label={animation ? feedback : initialLabel}
       onClick={composeEventHandlers([onClick, handleClick])}
       onAnimationEnd={composeEventHandlers([
         onAnimationEnd,
         handleAnimationEnd,
       ])}
       {...other}
-      aria-live="polite"
       aria-label={
         (!children && (animation ? feedback : other['aria-label'])) || null
       }>
       {children}
-      {animation ? feedback : other['aria-label']}
-      <span
-        aria-hidden="true"
-        className={`${prefix}--assistive-text ${prefix}--copy-btn__feedback`}>
-        {feedback}
-      </span>
-    </button>
+    </IconButton>
   );
 }
 

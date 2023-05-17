@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -131,7 +131,7 @@
   }
 
   .#{$prefix}--dropdown--light {
-    background-color: $field;
+    background-color: $field-02;
 
     &:hover {
       background-color: $field-hover;
@@ -353,7 +353,7 @@
 
     // V11: Possibly deprecate
     &.#{$prefix}--dropdown--light:hover {
-      background-color: $field;
+      background-color: $field-02;
     }
   }
 
@@ -472,5 +472,21 @@
 
   .#{$prefix}--list-box__menu-item__selected-icon {
     @include high-contrast-mode('icon-fill');
+  }
+
+  // readonly
+  .#{$prefix}--dropdown--readonly,
+  .#{$prefix}--dropdown--readonly:hover {
+    border-bottom-color: $border-subtle;
+    background-color: transparent;
+  }
+
+  .#{$prefix}--dropdown--readonly .#{$prefix}--list-box__field,
+  .#{$prefix}--dropdown--readonly .#{$prefix}--list-box__menu-icon {
+    cursor: default;
+  }
+
+  .#{$prefix}--dropdown--readonly .#{$prefix}--list-box__menu-icon svg {
+    fill: $icon-disabled;
   }
 }

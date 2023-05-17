@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -31,8 +31,14 @@
     flex-direction: column;
   }
 
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--warning
+    input[type='number'] {
+    padding-right: rem(128px);
+  }
+
   .#{$prefix}--number input[type='number'] {
-    @include type-style('code-01');
+    @include type-style('body-compact-01');
     @include focus-outline('reset');
 
     display: inline-flex;
@@ -40,7 +46,7 @@
     min-width: 9.375rem;
     height: rem(40px);
     box-sizing: border-box;
-    padding-right: rem(128px);
+    padding-right: rem(96px);
     padding-left: $spacing-05;
     border: 0;
     border-bottom: rem(1px) solid $border-strong;
@@ -50,8 +56,8 @@
     background-color: $field;
     border-radius: 0;
     color: $text-primary;
-    font-family: font-family('mono');
-    font-weight: 300;
+    font-family: font-family('sans');
+    font-weight: 400;
     transition: background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
 
@@ -77,14 +83,38 @@
     &::-webkit-inner-spin-button {
       appearance: none;
     }
+
+    &[data-invalid] {
+      padding-right: rem(128px);
+    }
   }
 
-  .#{$prefix}--number--lg.#{$prefix}--number input[type='number'] {
-    padding-right: rem(144px);
+  .#{$prefix}--number--lg.#{$prefix}--number {
+    input[type='number'] {
+      padding-right: rem(112px);
+
+      &[data-invalid] {
+        padding-right: rem(144px);
+      }
+    }
+
+    .#{$prefix}--number__input-wrapper--warning input[type='number'] {
+      padding-right: rem(144px);
+    }
   }
 
-  .#{$prefix}--number--sm.#{$prefix}--number input[type='number'] {
-    padding-right: rem(112px);
+  .#{$prefix}--number--sm.#{$prefix}--number {
+    input[type='number'] {
+      padding-right: rem(80px);
+
+      &[data-invalid] {
+        padding-right: rem(112px);
+      }
+    }
+
+    .#{$prefix}--number__input-wrapper--warning input[type='number'] {
+      padding-right: rem(112px);
+    }
   }
 
   .#{$prefix}--number input[type='number']:disabled {
@@ -198,12 +228,10 @@
     input[type='number']:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
-    border-bottom-width: 0;
+    border-bottom-color: transparent;
 
     &:hover {
       @include focus-outline('outline');
-
-      border: 0;
     }
   }
 
@@ -211,7 +239,7 @@
     input[type='number'][data-invalid]
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
-    border-bottom-width: 0;
+    border-bottom-color: transparent;
   }
 
   // add invalid outline to number controls only when invalid input is not focused
@@ -437,16 +465,41 @@
 
   // Readonly
   .#{$prefix}--number--readonly input[type='number'] {
+    border-bottom-color: $border-subtle;
     background: transparent;
   }
 
-  .#{$prefix}--number--readonly .#{$prefix}--number__controls {
-    display: none;
+  .#{$prefix}--number--readonly .#{$prefix}--number__control-btn {
+    color: $icon-disabled;
+    pointer-events: none;
+
+    &:hover {
+      background-color: transparent;
+      cursor: pointer;
+
+      &::before,
+      &::after {
+        background-color: transparent;
+      }
+    }
   }
 
-  .#{$prefix}--number__readonly-icon {
-    position: absolute;
-    right: rem(16px);
+  .#{$prefix}--number--readonly
+    input[type='number']:focus
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:hover {
+    outline: none;
+  }
+
+  .#{$prefix}--number--readonly .#{$prefix}--number__control-btn::before,
+  .#{$prefix}--number--readonly .#{$prefix}--number__control-btn::after {
+    background: transparent;
+  }
+
+  .#{$prefix}--number--readonly
+    .#{$prefix}--number__controls:hover
+    .#{$prefix}--number__rule-divider:not(:first-of-type) {
+    background-color: $border-subtle;
   }
 
   // Skeleton State

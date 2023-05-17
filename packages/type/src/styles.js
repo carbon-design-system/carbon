@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2018
+ * Copyright IBM Corp. 2018, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -175,7 +175,7 @@ export const expressiveHeading03 = {
   breakpoints: {
     xlg: {
       fontSize: rem(scale[4]),
-      lineHeight: 1.25,
+      lineHeight: 1.4,
     },
     max: {
       fontSize: rem(scale[5]),
@@ -191,11 +191,13 @@ export const expressiveHeading04 = {
   letterSpacing: 0,
   breakpoints: {
     xlg: {
-      fontSize: rem(scale[6]),
+      fontSize: rem(scale[7]),
+      fontWeight: fontWeights.regular,
       lineHeight: 1.25,
     },
     max: {
       fontSize: rem(scale[7]),
+      fontWeight: fontWeights.regular,
     },
   },
 };
@@ -214,19 +216,16 @@ export const expressiveHeading05 = {
     },
     lg: {
       fontSize: rem(scale[9]),
-      fontWeight: fontWeights.light,
       lineHeight: 1.19,
       letterSpacing: 0,
     },
     xlg: {
       fontSize: rem(scale[10]),
-      fontWeight: fontWeights.light,
       lineHeight: 1.17,
       letterSpacing: 0,
     },
     max: {
       fontSize: rem(scale[12]),
-      fontWeight: fontWeights.light,
       letterSpacing: 0,
     },
   },
@@ -392,21 +391,21 @@ export const display03 = {
   letterSpacing: 0,
   breakpoints: {
     md: {
-      fontSize: rem(scale[13]),
-      lineHeight: 1.15,
+      fontSize: rem(scale[11]),
+      lineHeight: 1.18,
     },
     lg: {
-      fontSize: rem(scale[16]),
-      lineHeight: 1.11,
+      fontSize: rem(scale[12]),
+      lineHeight: 1.16,
       letterSpacing: px(-0.64),
     },
     xlg: {
-      fontSize: rem(scale[19]),
-      lineHeight: 1.07,
+      fontSize: rem(scale[14]),
+      lineHeight: 1.13,
     },
     max: {
-      fontSize: rem(scale[22]),
-      lineHeight: 1.05,
+      fontSize: rem(scale[15]),
+      lineHeight: 1.11,
       letterSpacing: px(-0.96),
     },
   },
@@ -414,7 +413,7 @@ export const display03 = {
 
 export const display04 = {
   fontSize: rem(scale[9]),
-  fontWeight: fontWeights.semibold,
+  fontWeight: fontWeights.light,
   lineHeight: 1.19,
   letterSpacing: 0,
   breakpoints: {

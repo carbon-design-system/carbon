@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, cleanup } from '@carbon/test-utils/react';
+import { act, render } from '@testing-library/react';
 import { getByText } from '@carbon/test-utils/dom';
 import React from 'react';
 import { Simulate } from 'react-dom/test-utils';
@@ -13,8 +13,6 @@ import { FileUploaderButton } from '../';
 import { uploadFiles } from '../test-helpers';
 
 describe('FileUploaderButton', () => {
-  afterEach(cleanup);
-
   describe('automated accessibility tests', () => {
     it('should have no axe violations', async () => {
       const { container } = render(<FileUploaderButton name="test" />);
@@ -24,7 +22,7 @@ describe('FileUploaderButton', () => {
 
   it('should support a custom class name on the root element', () => {
     const { container } = render(<FileUploaderButton className="test" />);
-    expect(container.firstChild.classList.contains('test')).toBe(true);
+    expect(container.firstChild).toHaveClass('test');
   });
 
   it('should call `onClick` if the label is clicked', () => {
@@ -69,7 +67,7 @@ describe('FileUploaderButton', () => {
     const { container } = render(
       <FileUploaderButton accept={['.png']} labelText="test" />
     );
-    const input = container.querySelector('input');
+    const input = container.querySelector('button');
 
     const filename = 'test.png';
     const file = new File(['test'], filename, { type: 'image/png' });
@@ -100,7 +98,9 @@ describe('FileUploaderButton', () => {
 
       const filename = 'test.png';
       const file = new File(['test'], filename, { type: 'image/png' });
-      uploadFiles(input, [file]);
+      act(() => {
+        uploadFiles(input, [file]);
+      });
 
       expect(getByText(container, filename)).toBeInstanceOf(HTMLElement);
     });
@@ -119,7 +119,9 @@ describe('FileUploaderButton', () => {
         new File(['test-3'], 'test-1.png', { type: 'image/png' }),
       ];
 
-      uploadFiles(input, files);
+      act(() => {
+        uploadFiles(input, files);
+      });
       expect(getByText(container, `${files.length} files`)).toBeInstanceOf(
         HTMLElement
       );

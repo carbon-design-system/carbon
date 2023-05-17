@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -39,10 +39,10 @@ describe('Button', () => {
 
   it('should use the disabled prop to set disabled on the <button>', () => {
     const { rerender } = render(<Button>test</Button>);
-    expect(screen.getByRole('button')).not.toHaveAttribute('disabled');
+    expect(screen.getByRole('button')).toBeEnabled();
 
     rerender(<Button disabled>test</Button>);
-    expect(screen.getByRole('button')).toHaveAttribute('disabled');
+    expect(screen.getByRole('button')).toBeDisabled();
   });
 
   it('should render with a default button type of button', () => {
@@ -149,6 +149,23 @@ describe('Button', () => {
   describe('Icon Button variant', () => {
     it('should set the icon-only class', () => {
       render(<Button hasIconOnly iconDescription="test" renderIcon={Add} />);
+      expect(screen.getByLabelText('test')).toHaveClass('cds--btn--icon-only');
+    });
+
+    it('should support rendering as a custom element with the `as` prop', () => {
+      function CustomComponent(props) {
+        return <div data-testid="custom-component" {...props} />;
+      }
+
+      render(
+        <Button
+          hasIconOnly
+          iconDescription="test"
+          renderIcon={Add}
+          as={CustomComponent}
+        />
+      );
+      expect(screen.getByTestId('custom-component')).toBeInTheDocument();
       expect(screen.getByLabelText('test')).toHaveClass('cds--btn--icon-only');
     });
   });

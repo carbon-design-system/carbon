@@ -64,6 +64,7 @@ row before the </tbody></table> line.
 - [React](#react)
   - [Guidelines](#guidelines)
     - [Writing a component](#writing-a-component)
+      - [When to use `React.ForwardRef`](#when-to-use-reactforwardref)
     - [Translating a component](#translating-a-component)
       - [Working with messages that depend on state](#working-with-messages-that-depend-on-state)
     - [Using `useCallback` and `useMemo`](#using-usecallback-and-usememo)
@@ -72,6 +73,14 @@ row before the </tbody></table> line.
   - [Style](#style-1)
     - [Naming event handlers](#naming-event-handlers)
     - [Naming experimental code](#naming-experimental-code)
+  - [Testing](#testing)
+    - [Strategy](#strategy)
+    - [Organization](#organization)
+    - [Recipes](#recipes)
+      - [`ComponentName-test.js`](#componentname-testjs)
+      - [`ComponentName-test.a11y.js`](#componentname-testa11yjs)
+      - [`ComponentName-test.server.js`](#componentname-testserverjs)
+      - [Notes on manual testing](#notes-on-manual-testing)
 - [Sass](#sass)
   - [Guidelines](#guidelines-1)
     - [Author component styles using mixins](#author-component-styles-using-mixins)
@@ -82,6 +91,9 @@ row before the </tbody></table> line.
     - [Annotate relevant Sass values with SassDoc](#annotate-relevant-sass-values-with-sassdoc)
   - [Style](#style-2)
     - [Comments](#comments)
+  - [Testing](#testing-1)
+    - [Recipes](#recipes-1)
+      - [Public API](#public-api)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->
@@ -223,6 +235,60 @@ MyComponent.propTypes = {
 _Note: not every component will mirror the structure above. Some will need to
 incorporate `useEffect`, some will not. You can think of the outline above as
 slots that you can fill if you need this functionality in a component._
+
+##### When to use `React.ForwardRef`
+
+From the [react docs](https://reactjs.org/docs/forwarding-refs.html),
+
+> Ref forwarding is an opt-in feature that lets some components take a ref they
+> receive, and pass it further down (in other words, “forward” it) to a child.
+
+For the most part, components should utilize `React.ForwardRef` so that
+consumers can impact or control the managing of focus, selection, or animations.
+
+Cases where a component _may not_ need to forward a ref include components that
+render static content or do not render elements that are focusable, interactive,
+or animatable.
+
+Note that adding a forwarded ref to a component should be considered a breaking
+change. When creating a new component, even if you do not anticipate an explicit
+need to provide a forwarded ref, it's likely still worthwhile to include one to
+avoid unecessary breaking changes in the future.
+
+#### Authoring dynamic/inline styles
+
+It's increasingly common for applications to use a Content Security Policy (CSP)
+header with a
+[`style-src` directive](https://content-security-policy.com/style-src/). When
+this is configured, inline styles are blocked. Due to this, `style={{}}` can not
+be used on any element within the codebase. The `react/forbid-component-props`
+eslint rule is configured to flag invalid usages of the `style` attribute/prop.
+
+Components that need dynamic or inline styles can author these via the
+[CSS Object Model (CSSOM)](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model).
+Dynamic styles can be set via individual properties on the
+[`CSSStyleDeclaration`](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration)
+interface object provided to
+[`HTMLElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement).
+This will usually need to be wrapped in a `useIsomorphicEffect` hook to ensure
+compatibility between SSR and browser environments and also to ensure the value
+is unset if not provided.
+
+```jsx
+function MyComponent({ width }) {
+  const ref = useRef();
+
+  useIsomorphicEffect(() => {
+    if (width) {
+      ref.current.style.width = `${width}px`;
+    } else {
+      ref.current.style.width = null;
+    }
+  }, [width]);
+
+  return <div ref={ref} />;
+}
+```
 
 #### Translating a component
 

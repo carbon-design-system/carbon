@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2018
+ * Copyright IBM Corp. 2018, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,6 +11,13 @@ export const moderate01 = '150ms';
 export const moderate02 = '240ms';
 export const slow01 = '400ms';
 export const slow02 = '700ms';
+// V11 Tokens
+export const durationFast01 = fast01;
+export const durationFast02 = fast02;
+export const durationModerate01 = moderate01;
+export const durationModerate02 = moderate02;
+export const durationSlow01 = slow01;
+export const durationSlow02 = slow02;
 
 export const unstable_tokens = [
   'fast01',
@@ -19,6 +26,12 @@ export const unstable_tokens = [
   'moderate02',
   'slow01',
   'slow02',
+  'durationFast01',
+  'durationFast02',
+  'durationModerate01',
+  'durationModerate02',
+  'durationSlow01',
+  'durationSlow02',
 ];
 
 export const easings = {

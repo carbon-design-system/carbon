@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,7 +10,7 @@
 const path = require('path');
 
 module.exports = {
-  ruleArchive: '09June2022',
+  ruleArchive: '21September2022',
   policies: ['Custom_Ruleset'],
   failLevels: ['violation'],
   reportLevels: [

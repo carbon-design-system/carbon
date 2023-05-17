@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -34,7 +34,7 @@ const Button = React.forwardRef(function Button(
     onMouseLeave,
     renderIcon: ButtonImageElement,
     size = 'lg',
-    tabIndex = 0,
+    tabIndex,
     tooltipAlignment = 'center',
     tooltipPosition = 'top',
     type = 'button',
@@ -92,7 +92,9 @@ const Button = React.forwardRef(function Button(
     'aria-describedby': dangerButtonVariants.includes(kind)
       ? assistiveId
       : null,
-    'aria-pressed': hasIconOnly && kind === 'ghost' ? isSelected : null,
+    'aria-pressed':
+      rest['aria-pressed'] ??
+      (hasIconOnly && kind === 'ghost' ? isSelected : null),
   };
   const anchorProps = {
     href,
@@ -158,6 +160,7 @@ const Button = React.forwardRef(function Button(
 
     return (
       <IconButton
+        as={as}
         align={align}
         label={iconDescription}
         kind={kind}

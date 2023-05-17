@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,10 +12,18 @@ import { ChevronRight } from '@carbon/icons-react';
 import SkeletonText from '../SkeletonText';
 import { usePrefix } from '../../internal/usePrefix';
 
-function AccordionSkeleton({ align, open, count, className, ...rest }) {
+function AccordionSkeleton({
+  align,
+  className,
+  count,
+  isFlush,
+  open,
+  ...rest
+}) {
   const prefix = usePrefix();
   const classes = cx(`${prefix}--accordion`, `${prefix}--skeleton`, className, {
     [`${prefix}--accordion--${align}`]: align,
+    [`${prefix}--accordion--flush`]: isFlush && align !== 'start',
   });
   const numSkeletonItems = open ? count - 1 : count;
   return (
@@ -58,6 +66,11 @@ AccordionSkeleton.propTypes = {
   count: PropTypes.number,
 
   /**
+   * Specify whether an individual AccordionItem should be flush, default is false
+   */
+  isFlush: PropTypes.bool,
+
+  /**
    * `false` to not display the first item opened
    */
   open: PropTypes.bool,
@@ -82,3 +95,4 @@ function AccordionSkeletonItem() {
 }
 
 export default AccordionSkeleton;
+export { AccordionSkeleton };

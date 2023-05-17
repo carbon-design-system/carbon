@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,13 +9,13 @@ import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import PropTypes from 'prop-types';
 import React from 'react';
-import * as FeatureFlags from '@carbon/feature-flags';
 
 function Accordion({
   align = 'end',
   children,
   className: customClassName,
   disabled = false,
+  isFlush = false,
   size = 'md',
   ...rest
 }) {
@@ -23,6 +23,7 @@ function Accordion({
   const className = cx(`${prefix}--accordion`, customClassName, {
     [`${prefix}--accordion--${align}`]: align,
     [`${prefix}--accordion--${size}`]: size,
+    [`${prefix}--accordion--flush`]: isFlush && align !== 'start',
   });
   return (
     <ul className={className} {...rest}>
@@ -57,11 +58,14 @@ Accordion.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * Specify whether Accordion text should be flush, default is false, does not work with align="start"
+   */
+  isFlush: PropTypes.bool,
+
+  /**
    * Specify the size of the Accordion. Currently supports the following:
    */
-  size: FeatureFlags.enabled('enable-v11-release')
-    ? PropTypes.oneOf(['sm', 'md', 'lg'])
-    : PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };
 
 export default Accordion;

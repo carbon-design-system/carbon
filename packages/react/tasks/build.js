@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,6 +10,7 @@
 const { babel } = require('@rollup/plugin-babel');
 const commonjs = require('@rollup/plugin-commonjs');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
+const typescript = require('@rollup/plugin-typescript');
 const path = require('path');
 const { rollup } = require('rollup');
 const stripBanner = require('rollup-plugin-strip-banner');
@@ -17,7 +18,7 @@ const packageJson = require('../package.json');
 
 async function build() {
   const reactEntrypoint = {
-    filepath: path.resolve(__dirname, '..', 'src', 'index.js'),
+    filepath: path.resolve(__dirname, '..', 'src', 'index.ts'),
     outputDirectory: path.resolve(__dirname, '..'),
   };
   const iconsEntrypoint = {
@@ -35,12 +36,22 @@ async function build() {
     },
   ];
 
-  const reactInputConfig = getRollupConfig(reactEntrypoint.filepath);
-  const reactBundle = await rollup(reactInputConfig);
-
+  // Build @carbon/react formats
   for (const format of formats) {
+    const outputDirectory = path.join(
+      reactEntrypoint.outputDirectory,
+      format.directory
+    );
+
+    const reactInputConfig = getRollupConfig(
+      reactEntrypoint.filepath,
+      outputDirectory,
+      true
+    );
+    const reactBundle = await rollup(reactInputConfig);
+
     await reactBundle.write({
-      dir: path.join(reactEntrypoint.outputDirectory, format.directory),
+      dir: outputDirectory,
       format: format.type,
       preserveModules: true,
       preserveModulesRoot: path.dirname(reactEntrypoint.filepath),
@@ -51,6 +62,8 @@ async function build() {
 
   const iconsInputConfig = getRollupConfig(iconsEntrypoint.filepath);
   const iconsBundle = await rollup(iconsInputConfig);
+
+  // Build @carbon/react icons
   for (const format of formats) {
     await iconsBundle.write({
       file:
@@ -63,50 +76,64 @@ async function build() {
 }
 
 const banner = `/**
- * Copyright IBM Corp. 2016, 2022
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 `;
 
-function getRollupConfig(input) {
+// Base babel config for js and ts
+const babelConfig = {
+  babelrc: false,
+  exclude: ['node_modules/**'],
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        modules: false,
+        targets: {
+          browsers: ['extends browserslist-config-carbon'],
+        },
+      },
+    ],
+    '@babel/preset-react',
+  ],
+  plugins: [
+    'dev-expression',
+    '@babel/plugin-proposal-class-properties',
+    '@babel/plugin-proposal-export-namespace-from',
+    '@babel/plugin-proposal-export-default-from',
+    '@babel/plugin-transform-react-constant-elements',
+  ],
+  babelHelpers: 'bundled',
+};
+
+function getRollupConfig(input, outDir, useTS) {
   return {
     input,
+    // Mark dependencies listed in `package.json` as external so that they are
+    // not included in the output bundle.
     external: [
       ...Object.keys(packageJson.peerDependencies),
       ...Object.keys(packageJson.dependencies),
       ...Object.keys(packageJson.devDependencies),
-    ],
+    ].map((name) => {
+      // Transform the name of each dependency into a regex so that imports from
+      // nested paths are correctly marked as external.
+      //
+      // Example:
+      // import 'module-name';
+      // import 'module-name/path/to/nested/module';
+      return new RegExp(`^${name}(/.*)?`);
+    }),
     plugins: [
       nodeResolve(),
       commonjs({
         include: /node_modules/,
       }),
-      babel({
-        babelrc: false,
-        exclude: ['node_modules/**'],
-        presets: [
-          [
-            '@babel/preset-env',
-            {
-              modules: false,
-              targets: {
-                browsers: ['extends browserslist-config-carbon'],
-              },
-            },
-          ],
-          '@babel/preset-react',
-        ],
-        plugins: [
-          'dev-expression',
-          '@babel/plugin-proposal-class-properties',
-          '@babel/plugin-proposal-export-namespace-from',
-          '@babel/plugin-proposal-export-default-from',
-          '@babel/plugin-transform-react-constant-elements',
-        ],
-        babelHelpers: 'bundled',
-      }),
+      // Modify plugins for builds that require typescript
+      ...(useTS ? getTSPlugins(outDir) : getPlugins()),
       stripBanner(),
       {
         transform(_code, id) {
@@ -121,6 +148,39 @@ function getRollupConfig(input) {
       },
     ],
   };
+}
+
+/**
+ * Rollup plugins to support typescript compilation/transpilation
+ * @param {*} outDir
+ * @returns
+ */
+function getTSPlugins(outDir) {
+  return [
+    typescript({
+      noEmitOnError: true,
+      noForceEmit: true,
+      outputToFilesystem: false,
+      compilerOptions: {
+        rootDir: 'src',
+        emitDeclarationOnly: true,
+        outDir,
+      },
+    }),
+    babel({
+      ...babelConfig,
+      presets: [...babelConfig.presets, '@babel/preset-typescript'],
+      extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    }),
+  ];
+}
+
+/**
+ * Rollup plugins to support pure JS compilation
+ * @returns
+ */
+function getPlugins() {
+  return [babel(babelConfig)];
 }
 
 build().catch((error) => {

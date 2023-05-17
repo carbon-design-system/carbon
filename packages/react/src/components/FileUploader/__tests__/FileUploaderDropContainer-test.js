@@ -1,20 +1,18 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { getByText } from '@carbon/test-utils/dom';
-import { render, cleanup } from '@carbon/test-utils/react';
+import { render } from '@testing-library/react';
 import React from 'react';
 import { Simulate } from 'react-dom/test-utils';
 import { FileUploaderDropContainer } from '../';
 import { uploadFiles } from '../test-helpers';
 
 describe('FileUploaderDropContainer', () => {
-  afterEach(cleanup);
-
   it('should not have axe violations', async () => {
     const { container } = render(<FileUploaderDropContainer />);
     await expect(container).toHaveNoAxeViolations();
@@ -24,8 +22,8 @@ describe('FileUploaderDropContainer', () => {
     const { container } = render(
       <FileUploaderDropContainer className="test" />
     );
-    const dropArea = container.querySelector('[role="button"]');
-    expect(dropArea.classList.contains('test')).toBe(true);
+    const dropArea = container.querySelector('button');
+    expect(dropArea).toHaveClass('test');
   });
 
   it('should have a unique id each time it is used', () => {

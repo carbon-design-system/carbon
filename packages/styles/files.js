@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -71,6 +71,28 @@ const files = [
   'scss/components/file-uploader/_index.scss',
   'scss/components/form/_form.scss',
   'scss/components/form/_index.scss',
+  'scss/components/fluid-combo-box/_fluid-combo-box.scss',
+  'scss/components/fluid-combo-box/_index.scss',
+  'scss/components/fluid-date-picker/_fluid-date-picker.scss',
+  'scss/components/fluid-date-picker/_index.scss',
+  'scss/components/fluid-dropdown/_fluid-dropdown.scss',
+  'scss/components/fluid-dropdown/_index.scss',
+  'scss/components/fluid-list-box/_fluid-list-box.scss',
+  'scss/components/fluid-list-box/_index.scss',
+  'scss/components/fluid-multiselect/_fluid-multiselect.scss',
+  'scss/components/fluid-multiselect/_index.scss',
+  'scss/components/fluid-number-input/_fluid-number-input.scss',
+  'scss/components/fluid-number-input/_index.scss',
+  'scss/components/fluid-search/_fluid-search.scss',
+  'scss/components/fluid-search/_index.scss',
+  'scss/components/fluid-select/_fluid-select.scss',
+  'scss/components/fluid-select/_index.scss',
+  'scss/components/fluid-text-area/_fluid-text-area.scss',
+  'scss/components/fluid-text-area/_index.scss',
+  'scss/components/fluid-text-input/_fluid-text-input.scss',
+  'scss/components/fluid-text-input/_index.scss',
+  'scss/components/fluid-time-picker/_fluid-time-picker.scss',
+  'scss/components/fluid-time-picker/_index.scss',
   'scss/components/inline-loading/_index.scss',
   'scss/components/inline-loading/_inline-loading.scss',
   'scss/components/link/_index.scss',

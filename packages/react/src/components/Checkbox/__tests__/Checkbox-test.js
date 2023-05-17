@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,7 +23,7 @@ describe('Checkbox', () => {
 
   it('should use defaultChecked to set the default value of the <input> checkbox', () => {
     render(<Checkbox id="test" labelText="test-label" defaultChecked />);
-    expect(screen.getByRole('checkbox').checked).toBe(true);
+    expect(screen.getByRole('checkbox')).toBeChecked();
   });
 
   it('should support a custom `className` prop on the outermost element', () => {
@@ -41,18 +41,18 @@ describe('Checkbox', () => {
 
   it('should disable the <input> if disabled is provided as a prop', () => {
     const { rerender } = render(<Checkbox id="test" labelText="test-label" />);
-    expect(screen.getByRole('checkbox').disabled).toBe(false);
+    expect(screen.getByRole('checkbox')).toBeEnabled();
 
     rerender(<Checkbox id="test" labelText="test-label" disabled />);
-    expect(screen.getByRole('checkbox').disabled).toBe(true);
+    expect(screen.getByRole('checkbox')).toBeDisabled();
   });
 
   it('should set checked on the <input> if checked is provided as a prop', () => {
     render(<Checkbox id="test1" labelText="test-label-1" />);
-    expect(screen.getByLabelText('test-label-1').checked).toBe(false);
+    expect(screen.getByLabelText('test-label-1')).not.toBeChecked();
 
     render(<Checkbox id="test2" labelText="test-label-2" checked />);
-    expect(screen.getByLabelText('test-label-2').checked).toBe(true);
+    expect(screen.getByLabelText('test-label-2')).toBeChecked();
   });
 
   it('should hide the label if hideLabel is provided as a prop', () => {
@@ -60,11 +60,100 @@ describe('Checkbox', () => {
     expect(screen.getByText('test-label')).toHaveClass('cds--visually-hidden');
   });
 
-  it('should call the `onChange` prop when the <input> value changes', () => {
+  it('should render helperText', () => {
+    render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        helperText="Helper text"
+      />
+    );
+
+    expect(screen.getByText('Helper text')).toBeInTheDocument();
+  });
+
+  it('should set data-invalid when invalid prop is true', () => {
+    render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        invalid
+      />
+    );
+
+    expect(screen.getByRole('checkbox')).toHaveAttribute(
+      'data-invalid',
+      'true'
+    );
+  });
+
+  it('should display invalidText if invalid prop is true', () => {
+    render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        invalid
+        invalidText="Invalid text"
+      />
+    );
+
+    expect(screen.getByText('Invalid text')).toBeInTheDocument();
+  });
+
+  it('should respect readOnly prop', () => {
+    const { container } = render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        readOnly
+      />
+    );
+
+    expect(container.firstChild).toHaveClass(`cds--checkbox-wrapper--readonly`);
+  });
+
+  it('should respect warn prop', () => {
+    const { container } = render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        warn
+      />
+    );
+
+    const warnIcon = container.querySelector(
+      `svg.cds--checkbox__invalid-icon--warning`
+    );
+
+    expect(container.firstChild).toHaveClass(`cds--checkbox-wrapper--warning`);
+    expect(warnIcon).toBeInTheDocument();
+  });
+
+  it('should display warnText if warn prop is true', () => {
+    render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        warn
+        warnText="Warn text"
+      />
+    );
+
+    expect(screen.getByText('Warn text')).toBeInTheDocument();
+    expect(screen.getByText('Warn text')).toHaveClass(`cds--form-requirement`);
+  });
+
+  it('should call the `onChange` prop when the <input> value changes', async () => {
     const onChange = jest.fn();
     render(<Checkbox id="test" labelText="test-label" onChange={onChange} />);
 
-    userEvent.click(screen.getByLabelText('test-label'));
+    await userEvent.click(screen.getByLabelText('test-label'));
 
     expect(onChange).toHaveBeenCalled();
     expect(onChange).toHaveBeenCalledWith(
@@ -78,10 +167,23 @@ describe('Checkbox', () => {
     );
   });
 
-  describe('indeterminate', () => {
-    it('should set the indeterminate attribute of the <input> to true', () => {
-      render(<Checkbox id="test" indeterminate labelText="test-label" />);
-      expect(screen.getByRole('checkbox').indeterminate).toBe(true);
-    });
+  it('should NOT call the `onChange` prop when readonly', async () => {
+    const onChange = jest.fn();
+    const onClick = jest.fn();
+    render(
+      <Checkbox
+        id="test"
+        labelText="test-label"
+        onChange={onChange}
+        onClick={onClick}
+        checked={false}
+        readOnly={true}
+      />
+    );
+
+    await userEvent.click(screen.getByLabelText('test-label'));
+    await userEvent.click(screen.getByRole('checkbox'));
+    expect(onClick).toHaveBeenCalled();
+    expect(onChange).not.toHaveBeenCalled();
   });
 });

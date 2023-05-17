@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2018
+ * Copyright IBM Corp. 2018, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -62,7 +62,7 @@ describe('fluid', () => {
           "lineHeight": 1.05,
         },
         "fontSize": "calc(2.625rem + 1.625 * ((100vw - 20rem) / 22))",
-        "fontWeight": 600,
+        "fontWeight": 300,
         "letterSpacing": 0,
         "lineHeight": 1.19,
       }

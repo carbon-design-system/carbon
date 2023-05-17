@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,7 +8,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Button from '../Button';
-import { Tooltip } from '../Tooltip/next';
+import classNames from 'classnames';
+import { Tooltip } from '../Tooltip';
 import { usePrefix } from '../../internal/usePrefix';
 import cx from 'classnames';
 
@@ -17,20 +18,25 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
     align,
     children,
     className,
+    closeOnActivation = true,
     defaultOpen = false,
     enterDelayMs,
     kind,
     label,
     leaveDelayMs,
+    wrapperClasses,
     size = 'md',
     ...rest
   } = props;
   const prefix = usePrefix();
 
+  const tooltipClasses = classNames(wrapperClasses, `${prefix}--icon-tooltip`);
+
   return (
     <Tooltip
       align={align}
-      className={`${prefix}--icon-tooltip`}
+      closeOnActivation={closeOnActivation}
+      className={tooltipClasses}
       defaultOpen={defaultOpen}
       enterDelayMs={enterDelayMs}
       label={label}
@@ -73,6 +79,11 @@ IconButton.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Determines whether the tooltip should close when inner content is activated (click, Enter or Space)
+   */
+  closeOnActivation: PropTypes.bool,
+
+  /**
    * Specify whether the tooltip should be open when it first renders
    */
   defaultOpen: PropTypes.bool,
@@ -104,6 +115,11 @@ IconButton.propTypes = {
    * Specify the size of the Button. Defaults to `md`.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * Specify an optional className to be added to your Tooltip wrapper
+   */
+  wrapperClasses: PropTypes.string,
 };
 
 export { IconButton };

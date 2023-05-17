@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,27 +11,28 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { keys, matches } from '../../internal/keyboard';
 import { useFallbackId } from '../../internal/useId';
-import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 
-function RadioTile({
-  children,
-  className: customClassName,
-  disabled,
-  // eslint-disable-next-line no-unused-vars
-  light,
-  checked,
-  name,
-  value,
-  id,
-  onChange,
-  tabIndex,
-  ...rest
-}) {
+const RadioTile = React.forwardRef(function RadioTile(
+  {
+    children,
+    className: customClassName,
+    disabled,
+    // eslint-disable-next-line no-unused-vars
+    light,
+    checked,
+    name,
+    value,
+    id,
+    onChange,
+    tabIndex,
+    ...rest
+  },
+  ref
+) {
   const prefix = usePrefix();
   const inputId = useFallbackId(id);
-  const enabled = useFeatureFlag('enable-v11-release');
   const className = cx(
     customClassName,
     `${prefix}--tile`,
@@ -42,8 +43,6 @@ function RadioTile({
       [`${prefix}--tile--disabled`]: disabled,
     }
   );
-  const inputProps = enabled ? {} : rest;
-  const labelProps = enabled ? rest : {};
 
   function handleOnChange(evt) {
     onChange(value, name, evt);
@@ -57,9 +56,8 @@ function RadioTile({
   }
 
   return (
-    <>
+    <div>
       <input
-        {...inputProps}
         checked={checked}
         className={`${prefix}--tile-input`}
         disabled={disabled}
@@ -70,16 +68,17 @@ function RadioTile({
         tabIndex={!disabled ? tabIndex : null}
         type="radio"
         value={value}
+        ref={ref}
       />
-      <label {...labelProps} htmlFor={inputId} className={className}>
+      <label {...rest} htmlFor={inputId} className={className}>
         <span className={`${prefix}--tile__checkmark`}>
           <CheckmarkFilled />
         </span>
         <span className={`${prefix}--tile-content`}>{children}</span>
       </label>
-    </>
+    </div>
   );
-}
+});
 
 RadioTile.propTypes = {
   /**
@@ -96,11 +95,6 @@ RadioTile.propTypes = {
    * The CSS class names.
    */
   className: PropTypes.string,
-
-  /**
-   * `true` if the `<input>` should be checked at initialization.
-   */
-  defaultChecked: PropTypes.bool,
 
   /**
    * Specify whether the RadioTile should be disabled

@@ -263,6 +263,116 @@ Array [
     "relativePath": "scss/components/form",
   },
   Object {
+    "filepath": "scss/components/fluid-combo-box/_fluid-combo-box.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-combo-box/fluid-combo-box",
+    "relativePath": "scss/components/fluid-combo-box/fluid-combo-box",
+  },
+  Object {
+    "filepath": "scss/components/fluid-combo-box/_index.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-combo-box",
+    "relativePath": "scss/components/fluid-combo-box",
+  },
+  Object {
+    "filepath": "scss/components/fluid-date-picker/_fluid-date-picker.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-date-picker/fluid-date-picker",
+    "relativePath": "scss/components/fluid-date-picker/fluid-date-picker",
+  },
+  Object {
+    "filepath": "scss/components/fluid-date-picker/_index.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-date-picker",
+    "relativePath": "scss/components/fluid-date-picker",
+  },
+  Object {
+    "filepath": "scss/components/fluid-dropdown/_fluid-dropdown.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-dropdown/fluid-dropdown",
+    "relativePath": "scss/components/fluid-dropdown/fluid-dropdown",
+  },
+  Object {
+    "filepath": "scss/components/fluid-dropdown/_index.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-dropdown",
+    "relativePath": "scss/components/fluid-dropdown",
+  },
+  Object {
+    "filepath": "scss/components/fluid-list-box/_fluid-list-box.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-list-box/fluid-list-box",
+    "relativePath": "scss/components/fluid-list-box/fluid-list-box",
+  },
+  Object {
+    "filepath": "scss/components/fluid-list-box/_index.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-list-box",
+    "relativePath": "scss/components/fluid-list-box",
+  },
+  Object {
+    "filepath": "scss/components/fluid-multiselect/_fluid-multiselect.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-multiselect/fluid-multiselect",
+    "relativePath": "scss/components/fluid-multiselect/fluid-multiselect",
+  },
+  Object {
+    "filepath": "scss/components/fluid-multiselect/_index.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-multiselect",
+    "relativePath": "scss/components/fluid-multiselect",
+  },
+  Object {
+    "filepath": "scss/components/fluid-number-input/_fluid-number-input.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-number-input/fluid-number-input",
+    "relativePath": "scss/components/fluid-number-input/fluid-number-input",
+  },
+  Object {
+    "filepath": "scss/components/fluid-number-input/_index.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-number-input",
+    "relativePath": "scss/components/fluid-number-input",
+  },
+  Object {
+    "filepath": "scss/components/fluid-search/_fluid-search.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-search/fluid-search",
+    "relativePath": "scss/components/fluid-search/fluid-search",
+  },
+  Object {
+    "filepath": "scss/components/fluid-search/_index.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-search",
+    "relativePath": "scss/components/fluid-search",
+  },
+  Object {
+    "filepath": "scss/components/fluid-select/_fluid-select.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-select/fluid-select",
+    "relativePath": "scss/components/fluid-select/fluid-select",
+  },
+  Object {
+    "filepath": "scss/components/fluid-select/_index.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-select",
+    "relativePath": "scss/components/fluid-select",
+  },
+  Object {
+    "filepath": "scss/components/fluid-text-area/_fluid-text-area.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-text-area/fluid-text-area",
+    "relativePath": "scss/components/fluid-text-area/fluid-text-area",
+  },
+  Object {
+    "filepath": "scss/components/fluid-text-area/_index.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-text-area",
+    "relativePath": "scss/components/fluid-text-area",
+  },
+  Object {
+    "filepath": "scss/components/fluid-text-input/_fluid-text-input.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-text-input/fluid-text-input",
+    "relativePath": "scss/components/fluid-text-input/fluid-text-input",
+  },
+  Object {
+    "filepath": "scss/components/fluid-text-input/_index.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-text-input",
+    "relativePath": "scss/components/fluid-text-input",
+  },
+  Object {
+    "filepath": "scss/components/fluid-time-picker/_fluid-time-picker.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-time-picker/fluid-time-picker",
+    "relativePath": "scss/components/fluid-time-picker/fluid-time-picker",
+  },
+  Object {
+    "filepath": "scss/components/fluid-time-picker/_index.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-time-picker",
+    "relativePath": "scss/components/fluid-time-picker",
+  },
+  Object {
     "filepath": "scss/components/inline-loading/_index.scss",
     "importPath": "@carbon/styles/scss/components/inline-loading",
     "relativePath": "scss/components/inline-loading",

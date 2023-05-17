@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2018
+ * Copyright IBM Corp. 2018, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -766,6 +766,18 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "border-tile-01",
+          "type": "color",
+        },
+        Object {
+          "name": "border-tile-02",
+          "type": "color",
+        },
+        Object {
+          "name": "border-tile-03",
+          "type": "color",
+        },
+        Object {
           "name": "border-inverse",
           "type": "color",
         },
@@ -863,6 +875,10 @@ test('metadata', () => {
         },
         Object {
           "name": "icon-disabled",
+          "type": "color",
+        },
+        Object {
+          "name": "icon-interactive",
           "type": "color",
         },
         Object {
@@ -995,6 +1011,10 @@ test('metadata', () => {
         },
         Object {
           "name": "border-strong",
+          "type": "color",
+        },
+        Object {
+          "name": "border-tile",
           "type": "color",
         },
         Object {

@@ -1,7 +1,7 @@
 {
   "name": "@carbon/cli",
   "description": "Task automation for working with the Carbon Design System",
-  "version": "11.3.0",
+  "version": "11.9.0",
   "license": "Apache-2.0",
   "bin": {
     "carbon-cli": "./bin/carbon-cli.js"
@@ -24,13 +24,13 @@
   },
   "dependencies": {
     "@babel/core": "^7.18.2",
-    "@carbon/cli-reporter": "^10.5.0",
+    "@carbon/cli-reporter": "^10.6.0",
     "@octokit/plugin-retry": "^3.0.7",
     "@octokit/plugin-throttling": "^4.0.0",
-    "@octokit/rest": "^16.28.1",
-    "@rollup/plugin-babel": "^5.3.0",
-    "@rollup/plugin-commonjs": "^21.0.0",
-    "@rollup/plugin-node-resolve": "^13.0.0",
+    "@octokit/rest": "^19.0.0",
+    "@rollup/plugin-babel": "^6.0.0",
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
     "chalk": "^4.1.1",
     "change-case": "^4.1.2",
     "child-process-promise": "^2.2.1",
@@ -42,12 +42,12 @@
     "klaw-sync": "^6.0.0",
     "lodash.template": "^4.5.0",
     "markdown-toc": "^1.2.0",
-    "prettier": "^2.6.2",
-    "prettier-config-carbon": "^0.7.0",
+    "prettier": "^2.8.8",
+    "prettier-config-carbon": "^0.9.0",
     "progress-estimator": "^0.3.0",
     "remark": "^10.0.1",
     "replace-in-file": "^6.1.0",
-    "rollup": "^2.46.0",
+    "rollup": "^2.79.1",
     "sass": "^1.51.0",
     "sassdoc": "^2.7.3",
     "yargs": "^17.0.1"

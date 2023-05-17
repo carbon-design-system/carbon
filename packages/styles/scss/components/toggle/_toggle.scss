@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -21,6 +21,7 @@
 /// @group toggle
 @mixin toggle {
   .#{$prefix}--toggle {
+    display: inline-block;
     user-select: none;
   }
 
@@ -41,7 +42,7 @@
   }
 
   .#{$prefix}--toggle__appearance {
-    display: grid;
+    display: inline-grid;
     align-items: center;
     column-gap: $spacing-03;
     cursor: pointer;
@@ -76,9 +77,10 @@
   .#{$prefix}--toggle__button:focus
     + .#{$prefix}--toggle__label
     .#{$prefix}--toggle__switch,
-  .#{$prefix}--toggle__button:active
+  .#{$prefix}--toggle__button:not(:disabled):active
     + .#{$prefix}--toggle__label
-    .#{$prefix}--toggle__switch {
+    .#{$prefix}--toggle__switch,
+  .#{$prefix}--toggle:active .#{$prefix}--toggle__switch {
     box-shadow: 0 0 0 1px $focus-inset, 0 0 0 3px $focus;
   }
 
@@ -125,6 +127,10 @@
     visibility: visible;
   }
 
+  // ----------------------------------------
+  // disabled
+  // ----------------------------------------
+
   .#{$prefix}--toggle--disabled .#{$prefix}--toggle__appearance {
     cursor: not-allowed;
   }
@@ -146,6 +152,35 @@
     fill: button.$button-disabled;
   }
 
+  // ----------------------------------------
+  // readonly
+  // ----------------------------------------
+  .#{$prefix}--toggle--readonly .#{$prefix}--toggle__appearance {
+    cursor: default;
+  }
+
+  .#{$prefix}--toggle--readonly .#{$prefix}--toggle__switch {
+    border: 1px solid $icon-disabled;
+    background-color: transparent;
+
+    &::before {
+      top: rem(2px);
+      left: rem(2px);
+      background-color: $text-primary;
+    }
+  }
+
+  .#{$prefix}--toggle--readonly .#{$prefix}--toggle__check {
+    top: rem(5px);
+    right: rem(4px);
+    fill: $background;
+  }
+
+  .#{$prefix}--toggle--readonly .#{$prefix}--toggle__text {
+    cursor: text;
+    user-select: text;
+  }
+
   // HCM
 
   .#{$prefix}--toggle__switch,
@@ -157,9 +192,10 @@
   .#{$prefix}--toggle__button:focus
     + .#{$prefix}--toggle__label
     .#{$prefix}--toggle__switch,
-  .#{$prefix}--toggle__button:active
+  .#{$prefix}--toggle__button:not(:disabled):active
     + .#{$prefix}--toggle__label
-    .#{$prefix}--toggle__switch {
+    .#{$prefix}--toggle__switch,
+  .#{$prefix}--toggle:active .#{$prefix}--toggle__switch {
     @include high-contrast-mode('focus');
   }
 }
