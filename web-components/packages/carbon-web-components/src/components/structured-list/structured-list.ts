@@ -30,6 +30,18 @@ class BXStructuredList extends FocusMixin(LitElement) {
   @property({ attribute: 'selection-name' })
   selectionName = '';
 
+  /**
+   * Specify if structured list is condensed, default is false
+   */
+  @property({ type: Boolean, reflect: true })
+  condensed = false;
+
+  /**
+   * Specify if structured list is flush, default is false
+   */
+  @property({ type: Boolean, reflect: true })
+  flush = false;
+
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'table');
@@ -52,11 +64,32 @@ class BXStructuredList extends FocusMixin(LitElement) {
     return true;
   }
 
+  updated(changedProperties) {
+    const attributes = ['condensed', 'flush'];
+    attributes.forEach((attr) => {
+      if (changedProperties.has(attr)) {
+        // Propagate watched attribute to descendants until `:host-context()` gets supported in all major browsers
+        forEach(
+          this.querySelectorAll(
+            (this.constructor as typeof BXStructuredList).selectorRowsWithHeader
+          ),
+          (elem) => {
+            this[`${attr}`]
+              ? elem.setAttribute(attr, '')
+              : elem.removeAttribute(attr);
+          }
+        );
+      }
+    });
+  }
+
   render() {
-    const { selectionName } = this;
+    const { condensed, flush, selectionName } = this;
     const classes = classMap({
       [`${prefix}--structured-list`]: true,
       [`${prefix}--structured-list--selection`]: Boolean(selectionName),
+      [`${prefix}--structured-list--condensed`]: condensed,
+      [`${prefix}--structured-list--flush`]: flush,
     });
     return html`
       <section id="section" class=${classes}><slot></slot></section>

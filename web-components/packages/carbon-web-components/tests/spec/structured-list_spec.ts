@@ -9,10 +9,10 @@
 
 import { render } from 'lit';
 import BXStructuredListRow from '../../src/components/structured-list/structured-list-row';
-import { Default } from '../../src/components/structured-list/structured-list-story';
+import { Playground } from '../../src/components/structured-list/structured-list-story';
 
 const template = (props?) =>
-  Default({
+  Playground({
     'cds-structured-list': props,
   });
 

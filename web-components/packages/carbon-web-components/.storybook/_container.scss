@@ -10,6 +10,12 @@
 @use '@carbon/styles' as *;
 @include reset();
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 // The default theme is "white" (White)
 :root {
   @include theme($white);

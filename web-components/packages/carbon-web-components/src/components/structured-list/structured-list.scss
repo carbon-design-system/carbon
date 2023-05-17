@@ -9,6 +9,7 @@ $css--plex: true !default;
 
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/components/structured-list/structured-list' as *;
@@ -27,6 +28,10 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-structured-list-header-row) {
+  ::slotted(#{$prefix}-structured-list-header-cell:first-of-type) {
+    padding-left: $spacing-05;
+  }
+
   ::slotted(#{$prefix}-structured-list-header-cell),
   ::slotted(#{$prefix}-structured-list-header-cell-skeleton) {
     @extend .#{$prefix}--structured-list-th;
@@ -42,37 +47,102 @@ $css--plex: true !default;
   @extend .#{$prefix}--structured-list-tbody;
 }
 
-:host(#{$prefix}-structured-list-body)
+:host(#{$prefix}-structured-list-body) {
   ::slotted(#{$prefix}-structured-list-row) {
-  @extend .#{$prefix}--structured-list-row;
+    @extend .#{$prefix}--structured-list-row;
+  }
+
+  ::slotted(#{$prefix}-structured-list-row:last-child) {
+    border-bottom: 1px solid $border-subtle;
+  }
 }
 
-:host(#{$prefix}-structured-list-row:hover) .#{$prefix}--structured-list-svg {
-  // TODO: audit
-  fill: $gray-40;
-}
-
-:host(#{$prefix}-structured-list-row)
+:host(#{$prefix}-structured-list-row) {
   ::slotted(#{$prefix}-structured-list-cell) {
-  @extend .#{$prefix}--structured-list-td;
-}
+    @extend .#{$prefix}--structured-list-td;
+  }
 
-:host(#{$prefix}-structured-list-row)
+  ::slotted(#{$prefix}-structured-list-cell:first-of-type) {
+    padding-left: $spacing-05;
+  }
+
   ::slotted(#{$prefix}-structured-list-cell[nowrap]) {
-  @extend .#{$prefix}--structured-list-content--nowrap;
+    @extend .#{$prefix}--structured-list-content--nowrap;
+  }
 }
 
-// "Selected" style with `.#{$prefix}--structured-list-td` does not work somehow - Need investigation
-.#{$prefix}--structured-list-input:checked
-  + .#{$prefix}--structured-list-cell
-  .#{$prefix}--structured-list-svg {
-  fill: $text-primary;
+// selection
+:host(#{$prefix}-structured-list-row[selection-value]:hover) {
+  border-bottom: 1px solid $layer-hover;
+  background-color: $layer-hover;
+  cursor: pointer;
+
+  ::slotted(#{$prefix}-structured-list-cell) {
+    color: $text-primary;
+  }
 }
 
-:host(#{$prefix}-structured-list-header-cell-skeleton) span {
-  @include skeleton;
+:host(#{$prefix}-structured-list-row[selected]) {
+  background-color: $layer-selected;
 
-  width: 75%;
-  height: 1rem;
-  display: block;
+  .#{$prefix}--structured-list-input:checked
+    + .#{$prefix}--structured-list-cell
+    .#{$prefix}--structured-list-svg {
+    fill: $text-primary;
+  }
+
+  ::slotted(#{$prefix}-structured-list-cell) {
+    color: $text-primary;
+  }
+}
+
+// skeleton
+:host(#{$prefix}-structured-list-header-cell-skeleton) {
+  &:first-of-type {
+    width: 8%;
+  }
+
+  &:nth-of-type(3n + 2) {
+    width: 30%;
+  }
+
+  &:nth-of-type(3n + 3) {
+    width: 15%;
+  }
+
+  span {
+    @include skeleton;
+
+    width: 75%;
+    height: $spacing-05;
+    display: block;
+  }
+}
+
+// condensed
+:host(#{$prefix}-structured-list-row[condensed])
+  ::slotted(#{$prefix}-structured-list-cell),
+:host(#{$prefix}-structured-list-header-row[condensed])
+  ::slotted(#{$prefix}-structured-list-header-cell) {
+  padding: $spacing-03;
+}
+
+:host(#{$prefix}-structured-list-row[condensed])
+  ::slotted(#{$prefix}-structured-list-cell:first-of-type),
+:host(#{$prefix}-structured-list-header-row[condensed])
+  ::slotted(#{$prefix}-structured-list-header-cell:first-of-type) {
+  padding-left: $spacing-05;
+}
+
+// flush
+:host(#{$prefix}-structured-list-row[flush])
+  ::slotted(#{$prefix}-structured-list-cell),
+:host(#{$prefix}-structured-list-row[condensed][flush])
+  ::slotted(#{$prefix}-structured-list-cell),
+:host(#{$prefix}-structured-list-header-row[flush])
+  ::slotted(#{$prefix}-structured-list-header-cell),
+:host(#{$prefix}-structured-list-header-row[condensed][flush])
+  ::slotted(#{$prefix}-structured-list-header-cell) {
+  padding-right: $spacing-05;
+  padding-left: 0;
 }
