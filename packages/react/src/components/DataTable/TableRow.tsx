@@ -30,7 +30,6 @@ const TableRow = (props: TableRowProps) => {
   const className = cx(props.className, {
     [`${prefix}--data-table--selected`]: props.isSelected,
   });
-
   const cleanProps = {
     ...omit(props, ['ariaLabel', 'onExpand', 'isExpanded', 'isSelected']),
     className: className || undefined,
