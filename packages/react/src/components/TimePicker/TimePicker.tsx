@@ -7,10 +7,12 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { ForwardRefReturn, ReactAttr } from '../../types/common';
+// @ts-ignore
+import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 
 type ExcludedAttributes = 'id' | 'value';
 
@@ -50,6 +52,16 @@ export interface TimePickerProps
    * Provide the text that is displayed when the control is in an invalid state
    */
   invalidText?: React.ReactNode;
+
+  /**
+   * Specify a warning
+   */
+  warning?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in an warning state
+   */
+  warningText?: React.ReactNode;
 
   /**
    * Provide the text that will be read by a screen reader when visiting this
@@ -135,6 +147,8 @@ const TimePicker: TimePickerComponent = React.forwardRef<
     id,
     invalidText = 'Invalid time format.',
     invalid = false,
+    warningText = 'Warning time format.',
+    warning = false,
     labelText,
     light = false,
     maxLength = 5,
@@ -186,6 +200,17 @@ const TimePicker: TimePickerComponent = React.forwardRef<
     }
   }
 
+  useEffect(() => {
+    const inputField = document.querySelector(
+      `.${prefix}--time-picker__input-field`
+    );
+    if (invalid || warning) {
+      inputField?.classList.add(`${prefix}--time-picker__input-field-error`);
+    } else {
+      inputField?.classList.remove(`${prefix}--time-picker__input-field-error`);
+    }
+  }, [invalid, warning, prefix]);
+
   const timePickerInputClasses = cx(
     `${prefix}--time-picker__input-field`,
     `${prefix}--text-input`,
@@ -199,6 +224,7 @@ const TimePicker: TimePickerComponent = React.forwardRef<
     [`${prefix}--time-picker`]: true,
     [`${prefix}--time-picker--light`]: light,
     [`${prefix}--time-picker--invalid`]: invalid,
+    [`${prefix}--time-picker--warning`]: warning,
     [`${prefix}--time-picker--readonly`]: readOnly,
     [`${prefix}--time-picker--${size}`]: size,
     ...(className && { [className]: true }),
@@ -215,9 +241,11 @@ const TimePicker: TimePickerComponent = React.forwardRef<
     </label>
   ) : null;
 
-  const error = invalid ? (
-    <div className={`${prefix}--form-requirement`}>{invalidText}</div>
-  ) : null;
+  // const error = invalid ? (
+  //   <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+  // ) : null;
+
+  const error = invalid || warning;
 
   function getInternalPickerSelects() {
     const readOnlyEventHandlers = {
@@ -278,10 +306,27 @@ const TimePicker: TimePickerComponent = React.forwardRef<
             {...rest}
             {...readOnlyProps}
           />
+          {error && invalid ? (
+            // <i className={`${prefix}--time-picker__error__icon`}>X</i>
+            // <i className={`${prefix}--warning-notification__icon`}></i>
+            <div className={`${prefix}--time-picker__error__icon`}>
+              <WarningFilled className={`${prefix}--checkbox__invalid-icon`} />
+            </div>
+          ) : error && warning ? (
+            <div className={`${prefix}--time-picker__error__icon`}>
+              <WarningAltFilled
+                className={`${prefix}--text-input__invalid-icon--warning`}
+              />
+            </div>
+          ) : null}
         </div>
         {getInternalPickerSelects()}
       </div>
-      {error}
+      {error && invalid ? (
+        <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+      ) : (
+        <div className={`${prefix}--form-requirement`}>{warningText}</div>
+      )}
     </div>
   );
 });
@@ -388,6 +433,16 @@ TimePicker.propTypes = {
    * Specify the value of the `<input>`
    */
   value: PropTypes.string,
+
+  /**
+   * Specify a warning
+   */
+  warning: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in an warning state
+   */
+  warningText: PropTypes.node,
 };
 
 export default TimePicker;
