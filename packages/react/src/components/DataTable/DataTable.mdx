@@ -1,4 +1,5 @@
 import { Story, Props, Source, Preview } from '@storybook/addon-docs';
+import { Table, TableHead, TableHeader, TableRow, TableCell, TableBody } from '../DataTable'
 
 # DataTable
 
@@ -14,7 +15,6 @@ import { Story, Props, Source, Preview } from '@storybook/addon-docs';
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 ## Table of Contents
 
 - [Getting started](#getting-started)
@@ -24,9 +24,14 @@ import { Story, Props, Source, Preview } from '@storybook/addon-docs';
 - [Expansion](#expansion)
   - [Programmatic expansion](#programmatic-expansion)
 - [Selection](#selection)
-  - [Programmatic selection](#programmatic-selection)
+    - [Programmatic selection](#programmatic-selection)
 - [Filtering](#filtering)
 - [Batch actions](#batch-actions)
+- [Toolbar](#toolbar)
+  - [Overflow Menu](#overflow-menu)
+- [Text Wrapping Alignment](#text-wrapping-alignment)
+  - [Table with `experimentalAutoAlign = true`](#table-with-experimentalautoalign--true)
+  - [Table with `experimentalAutoAlign = false`](#table-with-experimentalautoalign--false)
 - [Props](#props)
   - [Render props](#render-props)
     - [Prop getters](#prop-getters)
@@ -312,6 +317,121 @@ cell.
     </TableRow>
   ))}
 </TableBody>
+```
+
+## Text Wrapping Alignment
+
+DataTable provides an experimental `experimentalAutoAlign` prop that you may
+opt into to have the table automatically align contents to the top when at least
+one table cell content is being wrapped on the table. Keep in mind this feature
+is experimental and might not be performant in tables with large datasets.
+
+### Table with `experimentalAutoAlign = true`
+
+<div style={{width: '300px'}}>
+  <Table experimentalAutoAlign>
+    <TableHead>
+      <TableRow>
+          <TableHeader>
+            Header1
+          </TableHeader>
+          <TableHeader>
+            Header2
+          </TableHeader>
+          <TableHeader>
+            Header3
+          </TableHeader>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+        <TableRow>
+          <TableCell>Wrapping content</TableCell>
+          <TableCell>content</TableCell>
+          <TableCell>content</TableCell>
+        </TableRow>
+    </TableBody>
+  </Table>
+</div>
+
+```jsx
+<div style={{width: '300px'}}>
+  <Table experimentalAutoAlign>
+    <TableHead>
+      <TableRow>
+          <TableHeader>
+            Header1
+          </TableHeader>
+          <TableHeader>
+            Header2
+          </TableHeader>
+          <TableHeader>
+            Header3
+          </TableHeader>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+        <TableRow>
+          <TableCell>Wrapping content</TableCell>
+          <TableCell>content</TableCell>
+          <TableCell>content</TableCell>
+        </TableRow>
+    </TableBody>
+  </Table>
+</div>
+```
+
+### Table with `experimentalAutoAlign = false`
+
+<div style={{width: '300px'}}>
+  <Table>
+    <TableHead>
+      <TableRow>
+          <TableHeader>
+            Header1
+          </TableHeader>
+          <TableHeader>
+            Header2
+          </TableHeader>
+          <TableHeader>
+            Header3
+          </TableHeader>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+        <TableRow>
+          <TableCell>Wrapping content</TableCell>
+          <TableCell>content</TableCell>
+          <TableCell>content</TableCell>
+        </TableRow>
+    </TableBody>
+  </Table>
+</div>
+
+```jsx
+<div style={{width: '300px'}}>
+  <Table>
+    <TableHead>
+      <TableRow>
+          <TableHeader>
+            Header1
+          </TableHeader>
+          <TableHeader>
+            Header2
+          </TableHeader>
+          <TableHeader>
+            Header3
+          </TableHeader>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+        <TableRow>
+          <TableCell>Wrapping content</TableCell>
+          <TableCell>content</TableCell>
+          <TableCell>content</TableCell>
+        </TableRow>
+    </TableBody>
+  </Table>
+</div>
 ```
 
 ## Props
