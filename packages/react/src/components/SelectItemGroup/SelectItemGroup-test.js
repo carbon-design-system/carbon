@@ -12,16 +12,22 @@ import SelectItem from '../SelectItem';
 
 const prefix = 'cds';
 
+const requiredProps = {
+  label: 'testLabel',
+};
+
 describe('SelectItemGroup', () => {
   describe('renders as expected - Component API', () => {
     it('should spread extra props onto outermost element', () => {
-      const { container } = render(<SelectItemGroup data-testid="test-id" />);
+      const { container } = render(
+        <SelectItemGroup {...requiredProps} data-testid="test-id" />
+      );
       expect(container.firstChild).toHaveAttribute('data-testid', 'test-id');
     });
 
     it('should render children as expected', () => {
       render(
-        <SelectItemGroup>
+        <SelectItemGroup {...requiredProps}>
           <SelectItem value="test" text="testText" />
         </SelectItemGroup>
       );
@@ -30,29 +36,31 @@ describe('SelectItemGroup', () => {
     });
 
     it('should have the expected classes', () => {
-      const { container } = render(<SelectItemGroup />);
+      const { container } = render(<SelectItemGroup {...requiredProps} />);
       expect(container.firstChild).toHaveClass(`${prefix}--select-optgroup`);
     });
 
     it('should support a custom `className` prop on the outermost element', () => {
       const { container } = render(
-        <SelectItemGroup className="custom-class" />
+        <SelectItemGroup {...requiredProps} className="custom-class" />
       );
       expect(container.firstChild).toHaveClass('custom-class');
     });
 
     it('Should not be disabled by default', () => {
-      const { container } = render(<SelectItemGroup />);
+      const { container } = render(<SelectItemGroup {...requiredProps} />);
       expect(container.firstChild).toBeEnabled();
     });
 
     it('should set disabled as expected', () => {
-      const { container } = render(<SelectItemGroup disabled />);
+      const { container } = render(
+        <SelectItemGroup {...requiredProps} disabled />
+      );
       expect(container.firstChild).toHaveAttribute('disabled');
     });
 
     it('should respect label prop', () => {
-      const { container } = render(<SelectItemGroup label="testLabel" />);
+      const { container } = render(<SelectItemGroup {...requiredProps} />);
       expect(container.firstChild).toHaveAttribute('label', 'testLabel');
     });
   });

@@ -28,7 +28,6 @@ import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { keys, match } from '../../internal/keyboard';
-import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ListBoxProps } from '../ListBox/ListBox';
@@ -380,12 +379,10 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
   const inline = type === 'inline';
   const showWarning = !invalid && warn;
 
-  const enabled = useFeatureFlag('enable-v11-release');
-
   const wrapperClasses = cx(
     `${prefix}--multi-select__wrapper`,
     `${prefix}--list-box__wrapper`,
-    [enabled ? containerClassName : null],
+    containerClassName,
     {
       [`${prefix}--multi-select__wrapper--inline`]: inline,
       [`${prefix}--list-box__wrapper--inline`]: inline,
@@ -408,20 +405,16 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
     [`${prefix}--form__helper-text--disabled`]: disabled,
   });
 
-  const className = cx(
-    `${prefix}--multi-select`,
-    [enabled ? null : containerClassName],
-    {
-      [`${prefix}--multi-select--invalid`]: invalid,
-      [`${prefix}--multi-select--invalid--focused`]: invalid && inputFocused,
-      [`${prefix}--multi-select--warning`]: showWarning,
-      [`${prefix}--multi-select--inline`]: inline,
-      [`${prefix}--multi-select--selected`]:
-        selectedItems && selectedItems.length > 0,
-      [`${prefix}--list-box--up`]: direction === 'top',
-      [`${prefix}--multi-select--readonly`]: readOnly,
-    }
-  );
+  const className = cx(`${prefix}--multi-select`, {
+    [`${prefix}--multi-select--invalid`]: invalid,
+    [`${prefix}--multi-select--invalid--focused`]: invalid && inputFocused,
+    [`${prefix}--multi-select--warning`]: showWarning,
+    [`${prefix}--multi-select--inline`]: inline,
+    [`${prefix}--multi-select--selected`]:
+      selectedItems && selectedItems.length > 0,
+    [`${prefix}--list-box--up`]: direction === 'top',
+    [`${prefix}--multi-select--readonly`]: readOnly,
+  });
 
   // needs to be capitalized for react to render it correctly
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

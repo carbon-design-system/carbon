@@ -29,7 +29,6 @@ import ListBox, {
 } from '../ListBox';
 import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
-import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ReactAttr } from '../../types/common';
@@ -271,25 +270,19 @@ const Dropdown = React.forwardRef(
     const inline = type === 'inline';
     const showWarning = !invalid && warn;
 
-    const enabled = useFeatureFlag('enable-v11-release');
-
     const [isFocused, setIsFocused] = useState(false);
 
-    const className = cx(
-      `${prefix}--dropdown`,
-      [enabled ? null : containerClassName],
-      {
-        [`${prefix}--dropdown--invalid`]: invalid,
-        [`${prefix}--dropdown--warning`]: showWarning,
-        [`${prefix}--dropdown--open`]: isOpen,
-        [`${prefix}--dropdown--inline`]: inline,
-        [`${prefix}--dropdown--disabled`]: disabled,
-        [`${prefix}--dropdown--light`]: light,
-        [`${prefix}--dropdown--readonly`]: readOnly,
-        [`${prefix}--dropdown--${size}`]: size,
-        [`${prefix}--list-box--up`]: direction === 'top',
-      }
-    );
+    const className = cx(`${prefix}--dropdown`, {
+      [`${prefix}--dropdown--invalid`]: invalid,
+      [`${prefix}--dropdown--warning`]: showWarning,
+      [`${prefix}--dropdown--open`]: isOpen,
+      [`${prefix}--dropdown--inline`]: inline,
+      [`${prefix}--dropdown--disabled`]: disabled,
+      [`${prefix}--dropdown--light`]: light,
+      [`${prefix}--dropdown--readonly`]: readOnly,
+      [`${prefix}--dropdown--${size}`]: size,
+      [`${prefix}--list-box--up`]: direction === 'top',
+    });
 
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
@@ -303,7 +296,7 @@ const Dropdown = React.forwardRef(
     const wrapperClasses = cx(
       `${prefix}--dropdown__wrapper`,
       `${prefix}--list-box__wrapper`,
-      [enabled ? containerClassName : null],
+      containerClassName,
       {
         [`${prefix}--dropdown__wrapper--inline`]: inline,
         [`${prefix}--list-box__wrapper--inline`]: inline,
@@ -346,6 +339,11 @@ const Dropdown = React.forwardRef(
 
     const mergedRef = mergeRefs(toggleButtonProps.ref, ref);
 
+    const [currTimer, setCurrTimer] = useState<NodeJS.Timeout>();
+
+    // eslint-disable-next-line prefer-const
+    let [isTyping, setIsTyping] = useState(false);
+
     const readOnlyEventHandlers = readOnly
       ? {
           onClick: (evt: MouseEvent<HTMLButtonElement>) => {
@@ -364,7 +362,40 @@ const Dropdown = React.forwardRef(
             }
           },
         }
-      : {};
+      : {
+          onKeyDown: (evt: React.KeyboardEvent<HTMLButtonElement>) => {
+            console.log('typing should be false', isTyping);
+            if (
+              evt.code !== 'Space' ||
+              !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
+            ) {
+              setIsTyping(true);
+            }
+
+            if (
+              (isTyping && evt.code === 'Space') ||
+              !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
+            ) {
+              console.log(evt.key);
+              if (evt.code === 'Space') {
+                evt.preventDefault();
+                return;
+              }
+
+              if (currTimer) {
+                clearTimeout(currTimer);
+              }
+              setCurrTimer(
+                setTimeout(() => {
+                  setIsTyping(false);
+                }, 3000)
+              );
+            }
+            toggleButtonProps.onKeyDown(evt);
+          },
+        };
+
+    const menuProps = getMenuProps();
 
     return (
       <div className={wrapperClasses} {...other}>
@@ -425,7 +456,7 @@ const Dropdown = React.forwardRef(
               translateWithId={translateWithId}
             />
           </button>
-          <ListBox.Menu {...getMenuProps()}>
+          <ListBox.Menu {...menuProps}>
             {isOpen &&
               items.map((item, index) => {
                 const isObject = item !== null && typeof item === 'object';

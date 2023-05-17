@@ -31,6 +31,7 @@ interface SideNavProps extends ComponentProps<'nav'> {
     event: FocusEvent<HTMLElement> | KeyboardEvent<HTMLElement> | boolean,
     value: boolean
   ) => void | undefined;
+  href?: string | undefined;
   // TO-DO: comment back in when footer is added for rails
   // translateById?: ((id: TranslationId) => Translation) | undefined;
   isFixedNav?: boolean | undefined;
@@ -39,6 +40,7 @@ interface SideNavProps extends ComponentProps<'nav'> {
   addFocusListeners?: boolean | undefined;
   addMouseListeners?: boolean | undefined;
   onOverlayClick?: MouseEventHandler<HTMLDivElement> | undefined;
+  onSideNavBlur?: () => void | undefined;
 }
 
 function SideNavRenderFunction(
@@ -53,12 +55,14 @@ function SideNavRenderFunction(
     className: customClassName,
     // TO-DO: comment back in when footer is added for rails
     // translateById: t = (id) => translations[id],
+    href,
     isFixedNav = false,
     isRail,
     isPersistent = true,
     addFocusListeners = true,
     addMouseListeners = true,
     onOverlayClick,
+    onSideNavBlur,
     ...other
   }: SideNavProps,
   ref: ForwardedRef<HTMLElement>
@@ -149,10 +153,18 @@ function SideNavRenderFunction(
       if (!event.currentTarget.contains(event.relatedTarget)) {
         handleToggle(event, false);
       }
+      if (!event.currentTarget.contains(event.relatedTarget) && expanded) {
+        if (onSideNavBlur) {
+          onSideNavBlur();
+        }
+      }
     };
     eventHandlers.onKeyDown = (event) => {
       if (match(event, keys.Escape)) {
         handleToggle(event, false);
+        if (href) {
+          window.location.href = href;
+        }
       }
     };
   }
@@ -217,6 +229,12 @@ SideNav.propTypes = {
   expanded: PropTypes.bool,
 
   /**
+   * Provide the `href` to the id of the element on your package that is the
+   * main content.
+   */
+  href: PropTypes.string,
+
+  /**
    * Optionally provide a custom class to apply to the underlying `<li>` node
    */
   isChildOfHeader: PropTypes.bool,
@@ -242,6 +260,12 @@ SideNav.propTypes = {
    * @param {object} event
    */
   onOverlayClick: PropTypes.func,
+
+  /**
+   * An optional listener that is called a callback to collapse the SideNav
+   */
+
+  onSideNavBlur: PropTypes.func,
 
   /**
    * An optional listener that is called when an event that would cause

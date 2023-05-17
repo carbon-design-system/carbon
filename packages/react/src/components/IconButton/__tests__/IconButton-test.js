@@ -9,27 +9,22 @@ import { Edit } from '@carbon/icons-react';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { IconButton } from '../';
-import { FeatureFlags } from '../../FeatureFlags';
 
 describe('IconButton', () => {
   it('should support labelling with label', () => {
     render(
-      <FeatureFlags flags={{ 'enable-v11-release': true }}>
-        <IconButton label="edit">
-          <Edit />
-        </IconButton>
-      </FeatureFlags>
+      <IconButton label="edit">
+        <Edit />
+      </IconButton>
     );
     expect(screen.getByLabelText('edit')).toBeInTheDocument();
   });
 
   it('should support data-testid on the <button> element', () => {
     render(
-      <FeatureFlags flags={{ 'enable-v11-release': true }}>
-        <IconButton label="edit" data-testid="icon-button">
-          <Edit />
-        </IconButton>
-      </FeatureFlags>
+      <IconButton label="edit" data-testid="icon-button">
+        <Edit />
+      </IconButton>
     );
     const button = screen.getByTestId('icon-button');
     expect(button).toBeInTheDocument();
@@ -38,11 +33,9 @@ describe('IconButton', () => {
 
   it('should forward extra props to the underlying <button> element', () => {
     render(
-      <FeatureFlags flags={{ 'enable-v11-release': true }}>
-        <IconButton label="edit" data-testid="icon-button" disabled>
-          <Edit />
-        </IconButton>
-      </FeatureFlags>
+      <IconButton label="edit" data-testid="icon-button" disabled>
+        <Edit />
+      </IconButton>
     );
     expect(screen.getByTestId('icon-button')).toBeDisabled();
   });
@@ -50,11 +43,9 @@ describe('IconButton', () => {
   it('should support a `ref` on the underlying <button> element', () => {
     const ref = jest.fn();
     render(
-      <FeatureFlags flags={{ 'enable-v11-release': true }}>
-        <IconButton label="edit" data-testid="icon-button" ref={ref}>
-          <Edit />
-        </IconButton>
-      </FeatureFlags>
+      <IconButton label="edit" data-testid="icon-button" ref={ref}>
+        <Edit />
+      </IconButton>
     );
     expect(ref).toHaveBeenCalledWith(screen.getByTestId('icon-button'));
   });
