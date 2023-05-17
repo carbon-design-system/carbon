@@ -76,6 +76,11 @@ const translateWithId = (id) => defaultTranslations[id];
 class DataTable extends React.Component {
   static propTypes = {
     /**
+     * Experimental property. Allows table to align cell contents to the top if there is text wrapping in the content. Might have performance issues, intended for smaller tables
+     */
+    experimentalAutoAlign: PropTypes.bool,
+
+    /**
      * Optional hook to manually control filtering of the rows from the
      * TableToolbarSearch component
      */
@@ -416,6 +421,7 @@ class DataTable extends React.Component {
       useStaticWidth,
       stickyHeader,
       overflowMenuOnHover,
+      experimentalAutoAlign,
     } = this.props;
     return {
       useZebraStyles,
@@ -424,6 +430,7 @@ class DataTable extends React.Component {
       useStaticWidth,
       stickyHeader,
       overflowMenuOnHover,
+      experimentalAutoAlign,
     };
   };
 

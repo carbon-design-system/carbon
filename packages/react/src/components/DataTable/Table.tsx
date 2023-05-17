@@ -17,11 +17,10 @@ import cx from 'classnames';
 import { debounce } from 'debounce';
 import { usePrefix } from '../../internal/usePrefix';
 import { TableContext } from './TableContext';
-import { SimpleTableContext } from './SimpleTableContext';
 import { useEvent } from '../../internal/useEvent';
 
 interface TableProps {
-  autoAlign?: 'table' | 'row' | 'cell' | 'none';
+  experimentalAutoAlign?: boolean;
 
   className?: string;
 
@@ -60,12 +59,12 @@ export const Table = ({
   className,
   children,
   useZebraStyles,
-  size,
+  size = 'lg',
   isSortable = false,
   useStaticWidth,
   stickyHeader,
   overflowMenuOnHover = true,
-  autoAlign = 'none',
+  experimentalAutoAlign = false,
   ...other
 }: PropsWithChildren<TableProps>) => {
   const { titleId, descriptionId } = useContext(TableContext);
@@ -92,9 +91,7 @@ export const Table = ({
   );
 
   const setTableAlignment = useCallback(() => {
-    if (autoAlign === 'table') {
-      console.log('setTableAlignment call');
-      const start = Date.now();
+    if (experimentalAutoAlign) {
       const fragment = document.createDocumentFragment();
       const canvas = document.createElement('canvas');
       fragment.appendChild(canvas);
@@ -138,12 +135,10 @@ export const Table = ({
         });
         toggleTableAlignmentClass(isMultiline);
       }
-      const end = Date.now();
-      console.log(`Execution time: ${end - start} ms`);
     } else {
       toggleTableAlignmentClass(false);
     }
-  }, [autoAlign, toggleTableAlignmentClass]);
+  }, [experimentalAutoAlign, toggleTableAlignmentClass]);
 
   const debouncedSetTableAlignment = debounce(setTableAlignment, 100);
 
@@ -157,11 +152,6 @@ export const Table = ({
   }, [setTableAlignment, size, debouncedSetTableAlignment]);
 
   const table = (
-    <SimpleTableContext.Provider
-      value={{
-        autoAlign: autoAlign,
-        toggleTableAlignmentClass: toggleTableAlignmentClass,
-      }}>
       <div className={`${prefix}--data-table-content`}>
         <table
           aria-labelledby={titleId}
@@ -172,7 +162,6 @@ export const Table = ({
           {children}
         </table>
       </div>
-    </SimpleTableContext.Provider>
   );
   return stickyHeader ? (
     <section className={`${prefix}--data-table_inner-container`}>
@@ -184,13 +173,16 @@ export const Table = ({
 };
 
 Table.propTypes = {
-  autoAlign: PropTypes.bool,
   /**
    * Pass in the children that will be rendered within the Table
    */
   children: PropTypes.node,
-
   className: PropTypes.string,
+
+  /**
+   * Experimental property. Allows table to align cell contents to the top if there is text wrapping in the content. Might have performance issues, intended for smaller tables
+   */
+  experimentalAutoAlign: PropTypes.bool,
 
   /**
    * `false` If true, will apply sorting styles
