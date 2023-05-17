@@ -131,6 +131,25 @@ export const fluidSpacing = [
   fluidSpacing04,
 ];
 
+// Layout
+// Deprecated
+export const layout01 = miniUnits(2);
+export const layout02 = miniUnits(3);
+export const layout03 = miniUnits(4);
+export const layout04 = miniUnits(6);
+export const layout05 = miniUnits(8);
+export const layout06 = miniUnits(12);
+export const layout07 = miniUnits(20);
+export const layout = [
+  layout01,
+  layout02,
+  layout03,
+  layout04,
+  layout05,
+  layout06,
+  layout07,
+];
+
 // Container
 export const container01 = miniUnits(3);
 export const container02 = miniUnits(4);

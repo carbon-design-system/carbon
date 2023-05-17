@@ -9,7 +9,6 @@ import React from 'react';
 import TextInput from '../TextInput';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
-import { FeatureFlags } from '../../FeatureFlags';
 
 const prefix = 'cds';
 
@@ -32,20 +31,6 @@ describe('TextInput', () => {
 
     it('should support a custom `className` prop on the outermost element', () => {
       const { container } = render(
-        <FeatureFlags flags={{ 'enable-v11-release': true }}>
-          <TextInput
-            id="input-1"
-            labelText="TextInput label"
-            className="custom-class"
-          />
-        </FeatureFlags>
-      );
-
-      expect(container.firstChild).toHaveClass('custom-class');
-    });
-
-    it('should support a custom `className` prop on the input element (V10)', () => {
-      render(
         <TextInput
           id="input-1"
           labelText="TextInput label"
@@ -53,7 +38,7 @@ describe('TextInput', () => {
         />
       );
 
-      expect(screen.getByRole('textbox')).toHaveClass('custom-class');
+      expect(container.firstChild).toHaveClass('custom-class');
     });
 
     it('should respect defaultValue prop', () => {
