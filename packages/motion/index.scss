@@ -84,3 +84,40 @@ $duration-slow-01: 400ms;
 /// @type Duration
 /// @group @carbon/motion
 $duration-slow-02: 700ms;
+
+/// V10 backwards compatibility tokens
+/// @access public
+/// @deprecated
+/// @type Duration
+/// @group @carbon/motion
+$fast-01: $duration-fast-01;
+
+/// @access public
+/// @deprecated
+/// @type Duration
+/// @group @carbon/motion
+$fast-02: $duration-fast-02;
+
+/// @access public
+/// @deprecated
+/// @type Duration
+/// @group @carbon/motion
+$moderate-01: $duration-moderate-01;
+
+/// @access public
+/// @deprecated
+/// @type Duration
+/// @group @carbon/motion
+$moderate-02: $duration-moderate-02;
+
+/// @access public
+/// @deprecated
+/// @type Duration
+/// @group @carbon/motion
+$slow-01: $duration-slow-01;
+
+/// @access public
+/// @deprecated
+/// @type Duration
+/// @group @carbon/motion
+$slow-02: $duration-slow-02;
