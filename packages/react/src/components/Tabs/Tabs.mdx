@@ -15,6 +15,7 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from './Tabs';
   - [Line Tabs](#line-tabs)
   - [Contained Tabs](#contained-tabs)
   - [Icon Tabs](#icon-tabs)
+  - [Dismissable Tabs](#dismissable-tabs)
 - [Component API](#component-api)
   - [Tab - render content on click](#tab---render-content-on-click)
 - [V11](#v11)
@@ -49,6 +50,127 @@ what is in rendered inside of `Tab` and `TabPanel`.
 
 <Preview>
   <Story id="components-tabs--icon-20-only" />
+</Preview>
+
+### Dismissable Tabs
+
+You can implement dismissable tabs in your project using Carbon's `Tabs`
+components. In order to put this in place, there are some events and props we'll
+need to forward through the component's API that have been outlined here.
+
+First, we'll want to import the components from the react package.
+
+```js
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@carbon/react';
+```
+
+In order to be able to "close" or "remove" tabs, we'll need to access and
+render your tabs programmatically. For such purposes we'll need to store your
+tabs in an array variable and put them in the state
+
+```js
+const tabs = [
+  {
+    label: 'Tab label 1',
+    panel: <TabPanel>Tab Panel 1</TabPanel>,
+  },
+  {
+    label: 'Tab label 2',
+    panel: <TabPanel>Tab Panel 2</TabPanel>,
+  },
+  {
+    label: 'Tab label 3',
+    panel: <TabPanel>Tab Panel 3</TabPanel>,
+    disabled: true,
+  },
+  {
+    label: 'Tab label 4',
+    panel: <TabPanel>Tab Panel 4</TabPanel>,
+  },
+];
+const [renderedTabs, setRenderedTabs] = useState(tabs);
+```
+
+The `Tabs` component accepts an `onTabCloseRequest` prop function that will forward
+us the index of the requested tab to be closed. You may use this function to
+open up a confirmation modal previous to deleting the tab; in our case, we'll
+just go ahead and remove that tab directly from the `renderedTab`s array and
+cover for some `selectedIndex` edge cases (i.e., when a tab is removed from the
+array, the selectedIndex might need to be updated to point to a new tab or
+index).
+
+In order to be able to modify the `selectedIndex` on our end we'll need to use
+the `Tabs` component in a controlled state, which means we'll also have to
+implement the `Tabs`' `onChange` function, which we are calling
+`handleTabChange`.
+
+```js
+const [selectedIndex, setSelectedIndex] = useState(0);
+
+const handleTabChange = (evt) => {
+  setSelectedIndex(evt.selectedIndex);
+};
+
+const handleCloseTabRequest = (tabIndex) => {
+  const selectedTab = renderedTabs[selectedIndex];
+
+  const filteredTabs = renderedTabs.filter((_, index) => index !== tabIndex);
+  // if the tab being deleted is the currently selected tab, we're re-setting the selectedIndex
+  // to the first tab available that isn't disabled
+  if (tabIndex === selectedIndex) {
+    const defaultTabIndex = filteredTabs.findIndex((tab) => !tab.disabled);
+    setSelectedIndex(defaultTabIndex);
+  } else {
+    // we're re-calculating the selectedIndex since the selected tab's index might have shifted
+    // due to a tab element being removed from the array
+    setSelectedIndex(filteredTabs.indexOf(selectedTab));
+  }
+  setRenderedTabs(filteredTabs);
+};
+```
+
+Finally, we'll use a `resetTabs` function to demonstrate how you can re-render
+tabs after they've been removed
+
+```js
+const resetTabs = () => {
+  setRenderedTabs(tabs);
+};
+```
+
+Now we're ready to render our `Tabs`, remember to pass the `dismissable` prop in
+as well as your `handleCloseTabRequest` function
+
+```jsx
+return (
+  <>
+    <Button style={{ marginBottom: '3rem' }} onClick={resetTabs}>
+      Reset
+    </Button>
+    <Tabs
+      selectedIndex={selectedIndex}
+      onChange={handleTabChange}
+      dismissable
+      onTabCloseRequest={handleCloseTabRequest}>
+      <TabList aria-label="List of tabs">
+        {renderedTabs.map((tab, index) => (
+          <Tab
+            key={index}
+            disabled={tab.disabled}>
+            {tab.label}
+          </Tab>
+        ))}
+      </TabList>
+      <TabPanels>{renderedTabs.map((tab) => tab.panel)}</TabPanels>
+    </Tabs>
+  </>
+);
+```
+
+And there you have it! Working dismissable tabs.
+
+<Preview>
+  <Story id="components-tabs--dismissable" />
 </Preview>
 
 ## Component API
