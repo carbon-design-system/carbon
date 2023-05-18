@@ -134,7 +134,7 @@
     path[opacity='0'],
   .#{$prefix}--toast-notification--warning-alt
     .#{$prefix}--toast-notification__icon
-    path[opacity='0'] {
+    path:first-of-type {
     fill: $black-100;
     opacity: 1;
   }
