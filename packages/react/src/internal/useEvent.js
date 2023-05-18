@@ -47,10 +47,10 @@ export function useEvent(elementOrRef, eventName, callback) {
 
     const element =
       'current' in elementOrRef ? elementOrRef.current : elementOrRef;
-    element?.addEventListener(eventName, handler);
+    element?.addEventListener?.(eventName, handler);
 
     return () => {
-      element?.removeEventListener(eventName, handler);
+      element?.removeEventListener?.(eventName, handler);
     };
   }, [elementOrRef, eventName]);
 }
