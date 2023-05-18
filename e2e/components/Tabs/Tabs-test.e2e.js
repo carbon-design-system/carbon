@@ -30,6 +30,14 @@ test.describe('Tabs', () => {
         });
       });
 
+      test('dismissable with icons @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Tabs',
+          id: 'components-tabs--dismissable-with-icons',
+          theme,
+        });
+      });
+
       test('manual @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Tabs',
