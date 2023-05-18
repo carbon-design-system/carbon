@@ -14,7 +14,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { debounce } from 'debounce';
+import debounce from 'lodash.debounce';
 import { usePrefix } from '../../internal/usePrefix';
 import { TableContext } from './TableContext';
 import { useWindowEvent } from '../../internal/useEvent';
@@ -146,10 +146,7 @@ export const Table = ({
 
   useEffect(() => {
     setTableAlignment();
-    return () => {
-      debouncedSetTableAlignment.clear();
-    };
-  }, [setTableAlignment, size, debouncedSetTableAlignment]);
+  }, [setTableAlignment, size]);
 
   const table = (
     <div className={`${prefix}--data-table-content`}>
