@@ -20,8 +20,8 @@ import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { CARBON_SIDENAV_ITEMS } from './_utils';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
-import { useWindowEvent } from '../../internal/useEvent';
 import { useMergedRefs } from '../../internal/useMergedRefs';
+import { useWindowEvent } from '../../internal/useEvent';
 // TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
 
@@ -178,7 +178,7 @@ function SideNavRenderFunction(
     eventHandlers.onMouseLeave = () => handleToggle(false, false);
   }
 
-  useWindowEvent('keydown', (event: KeyboardEvent) => {
+  useWindowEvent('keydown', (event: Event) => {
     const focusedElement = document.activeElement;
 
     if (
