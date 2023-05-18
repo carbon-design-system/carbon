@@ -1666,6 +1666,9 @@ Map {
         "className": Object {
           "type": "string",
         },
+        "experimentalAutoAlign": Object {
+          "type": "bool",
+        },
         "isSortable": Object {
           "type": "bool",
         },
@@ -2246,6 +2249,9 @@ Map {
       "translateWithId": [Function],
     },
     "propTypes": Object {
+      "experimentalAutoAlign": Object {
+        "type": "bool",
+      },
       "filterRows": Object {
         "type": "func",
       },
@@ -7297,6 +7303,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "experimentalAutoAlign": Object {
+        "type": "bool",
       },
       "isSortable": Object {
         "type": "bool",
