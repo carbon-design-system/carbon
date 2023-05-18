@@ -577,7 +577,7 @@ class OverflowMenu extends Component {
             type="button"
             aria-haspopup
             aria-expanded={this.state.open}
-            aria-controls={menuBodyId}
+            aria-controls={open ? menuBodyId : null}
             className={overflowMenuClasses}
             onClick={this.handleClick}
             id={id}
