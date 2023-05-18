@@ -214,7 +214,7 @@ DismissableWithIcons.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
+    defaultValue: true,
   },
 };
 
