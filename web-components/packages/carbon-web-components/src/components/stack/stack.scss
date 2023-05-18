@@ -1,0 +1,33 @@
+//
+// Copyright IBM Corp. 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/utilities/custom-property';
+@use '@carbon/styles/scss/components/stack/index';
+
+:host(#{$prefix}-stack) {
+  &[orientation='vertical'] {
+    @extend .#{$prefix}--stack-vertical;
+  }
+
+  &[orientation='horizontal'] {
+    @extend .#{$prefix}--stack-horizontal;
+  }
+
+  $index: 1;
+
+  @each $step, $value in spacing.$spacing {
+    .#{$prefix}--stack-scale-#{$index} {
+      @include custom-property.declaration('stack-gap', $value);
+    }
+
+    $index: $index + 1;
+  }
+}

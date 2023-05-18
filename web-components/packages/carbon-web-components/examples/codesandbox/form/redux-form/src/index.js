@@ -13,7 +13,7 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import { Field, SubmissionError, reduxForm, reducer as reduxFormReducer } from 'redux-form';
 import BXBtn from '@carbon/web-components/es/components-react/button/button.js';
-import BXFormItem from '@carbon/web-components/es/components-react/form/form-item.js';
+import CDSFormItem from '@carbon/web-components/es/components-react/form/form-item.js';
 import CDSTextInput from '@carbon/web-components/es/components-react/text-input/text-input.js';
 import CDSInlineNotification from '@carbon/web-components/es/components-react/notification/inline-notification.js';
 import './index.css';
@@ -52,7 +52,7 @@ const submit = async (values) => {
 const FieldImpl = ({ input, label, type, meta: { touched, error } }) => {
   const validityMessage = !touched ? undefined : error;
   return (
-    <BXFormItem>
+    <CDSFormItem>
       <CDSTextInput
         {...input}
         invalid={Boolean(validityMessage)}
@@ -61,7 +61,7 @@ const FieldImpl = ({ input, label, type, meta: { touched, error } }) => {
         placeholder={label}
         validityMessage={validityMessage}
       />
-    </BXFormItem>
+    </CDSFormItem>
   );
 };
 

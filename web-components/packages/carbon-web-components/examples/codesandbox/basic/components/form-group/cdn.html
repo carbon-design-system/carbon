@@ -1,0 +1,54 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>@carbon/ibmdotcom-web-components example</title>
+  <meta charset="UTF-8"/>
+  <link rel="stylesheet"
+        href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"/>
+  <style>
+    /* Suppress custom element until styles are loaded */
+    cds-icon-button:not(:defined) {
+      display: none;
+    }
+  </style>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/form-group.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/stack.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/text-input.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/radio-button.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/button.min.js"></script>
+</head>
+<body>
+  <cds-form-group legend-text="FormGroup Legend">
+    <cds-stack gap="7">
+      <cds-text-input label="First Name"> </cds-text-input>
+      <cds-text-input label="Last Name"> </cds-text-input>
+      <cds-radio-button-group
+        legend-text="Radio button heading"
+        name="radio-button-group"
+        value="radio-1">
+        <cds-radio-button
+          label-text="Option 1"
+          value="radio-1"
+          id="radio-1"></cds-radio-button>
+        <cds-radio-button
+          label-text="Option 2"
+          value="radio-2"
+          id="radio-2"></cds-radio-button>
+        <cds-radio-button
+          label-text="Option 3"
+          value="radio-3"
+          id="radio-3"></cds-radio-button>
+      </cds-radio-button-group>
+      <cds-button>Submit</cds-button>
+    </cds-stack>
+  </cds-form-group>
+</body>
+</html>

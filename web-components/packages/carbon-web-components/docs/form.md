@@ -33,7 +33,7 @@ You can use our form components with Redux Form by creating a React component th
 
 ```javascript
 import { Field } from 'redux-form';
-import BXFormItem from '@carbon/web-components/es/components-react/form/form-item';
+import CDSFormItem from '@carbon/web-components/es/components-react/form/form-item';
 import CDSTextInput from '@carbon/web-components/es/components-react/text-input/text-input';
 
 ...
@@ -42,7 +42,7 @@ import CDSTextInput from '@carbon/web-components/es/components-react/text-input/
 const FieldImpl = ({ input, label, type, meta: { touched, error } }) => {
   const validityMessage = !touched ? undefined : error;
   return (
-    <BXFormItem>
+    <CDSFormItem>
       <CDSTextInput
         {...input}
         invalid={Boolean(validityMessage)}
@@ -51,7 +51,7 @@ const FieldImpl = ({ input, label, type, meta: { touched, error } }) => {
         placeholder={label}
         validityMessage={validityMessage}
       />
-    </BXFormItem>
+    </CDSFormItem>
   );
 };
 
