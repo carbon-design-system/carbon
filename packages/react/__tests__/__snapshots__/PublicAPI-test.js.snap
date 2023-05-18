@@ -6845,21 +6845,14 @@ Map {
     },
   },
   "SkipToContent" => Object {
-    "defaultProps": Object {
-      "children": "Skip to main content",
-      "href": "#main-content",
-      "tabIndex": "0",
-    },
     "propTypes": Object {
       "children": Object {
-        "isRequired": true,
         "type": "string",
       },
       "className": Object {
         "type": "string",
       },
       "href": Object {
-        "isRequired": true,
         "type": "string",
       },
       "tabIndex": Object {
@@ -7884,9 +7877,13 @@ Map {
       "defaultSelectedIndex": Object {
         "type": "number",
       },
+      "dismissable": Object {
+        "type": "bool",
+      },
       "onChange": Object {
         "type": "func",
       },
+      "onTabCloseRequest": [Function],
       "selectedIndex": Object {
         "type": "number",
       },
@@ -8807,17 +8804,7 @@ Map {
         "type": "oneOf",
       },
       "as": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "elementType",
-            },
-          ],
-        ],
-        "type": "oneOfType",
+        "type": "elementType",
       },
       "children": Object {
         "type": "node",
@@ -8866,17 +8853,7 @@ Map {
   "ToggletipLabel" => Object {
     "propTypes": Object {
       "as": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "elementType",
-            },
-          ],
-        ],
-        "type": "oneOfType",
+        "type": "elementType",
       },
       "children": Object {
         "type": "node",
