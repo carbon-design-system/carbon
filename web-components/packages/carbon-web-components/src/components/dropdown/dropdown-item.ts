@@ -49,7 +49,7 @@ class CDSDropdownItem extends LitElement {
    * Dropdown size.
    */
   @property({ reflect: true })
-  size = DROPDOWN_SIZE.REGULAR;
+  size = DROPDOWN_SIZE.MEDIUM;
 
   /**
    * The `value` attribute that is set to the parent `<cds-dropdown>` when this dropdown item is selected.

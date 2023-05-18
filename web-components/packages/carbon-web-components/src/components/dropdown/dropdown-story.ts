@@ -24,12 +24,12 @@ const directionOptions = {
 
 const sizes = {
   [`Small size (${DROPDOWN_SIZE.SMALL})`]: DROPDOWN_SIZE.SMALL,
-  'Regular size': null,
+  [`Medium size (${DROPDOWN_SIZE.MEDIUM})`]: DROPDOWN_SIZE.MEDIUM,
   [`Large size (${DROPDOWN_SIZE.LARGE})`]: DROPDOWN_SIZE.LARGE,
 };
 
 const types = {
-  Regular: null,
+  Default: null,
   [`Inline (${DROPDOWN_TYPE.INLINE})`]: DROPDOWN_TYPE.INLINE,
 };
 

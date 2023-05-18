@@ -8,13 +8,13 @@
 <label
   class="cds--label"
   hidden=""
-  part="label-text"
+  part="title-text"
 >
-  <slot name="label-text">
+  <slot name="title-text">
   </slot>
 </label>
 <div
-  class="cds--dropdown cds--list-box"
+  class="cds--list-box cds--list-box--md cds--multi-select"
   role="listbox"
 >
   <div
@@ -33,7 +33,10 @@
       id="trigger-label"
     >
     </span>
-    <div class="cds--list-box__menu-icon">
+    <div
+      class="cds--list-box__menu-icon"
+      id="trigger-caret"
+    >
     </div>
   </div>
 </div>
@@ -60,20 +63,20 @@
 ```
 <label
   class="cds--label cds--label--disabled"
-  part="label-text"
+  hidden=""
+  part="title-text"
 >
-  <slot name="label-text">
-    label-text-foo
+  <slot name="title-text">
   </slot>
 </label>
 <div
-  class="cds--dropdown cds--dropdown--inline cds--dropdown--invalid cds--list-box cds--list-box--disabled cds--list-box--expanded cds--list-box--inline"
+  class="cds--list-box cds--list-box--disabled cds--list-box--inline cds--list-box--md cds--multi-select cds--multi-select--inline cds--multi-select--invalid"
   data-invalid=""
   role="listbox"
 >
   <div
     aria-controls="menu-body"
-    aria-expanded="true"
+    aria-expanded="false"
     aria-haspopup="listbox"
     aria-labelledby="trigger-label"
     aria-owns="menu-body"
@@ -82,41 +85,23 @@
     role="button"
     tabindex="0"
   >
-    <div
-      class="cds--list-box__selection cds--list-box__selection--multi cds--tag--filter"
-      id="selection-button"
-      role="button"
-      tabindex="0"
-      title="clear-selection-label-foo"
-    >
-      1
-    </div>
     <span
       class="cds--list-box__label"
       id="trigger-label"
     >
-      trigger-content-foo
     </span>
-    <div class="cds--list-box__menu-icon cds--list-box__menu-icon--open">
+    <div
+      class="cds--list-box__menu-icon"
+      id="trigger-caret"
+    >
     </div>
-  </div>
-  <div
-    class="cds--list-box__menu"
-    id="menu-body"
-    part="menu-body"
-    role="listbox"
-    tabindex="-1"
-  >
-    <slot>
-    </slot>
   </div>
 </div>
 <div
-  class="cds--form-requirement"
-  part="validity-message"
+  class="cds--form__helper-text cds--form__helper-text--disabled"
+  part="helper-text"
 >
-  <slot name="validity-message">
-    validity-message-foo
+  <slot name="helper-text">
   </slot>
 </div>
 <div

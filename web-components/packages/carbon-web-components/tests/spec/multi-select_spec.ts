@@ -13,10 +13,10 @@ import EventManager from '../utils/event-manager';
 
 import BXMultiSelect from '../../src/components/multi-select/multi-select';
 import BXMultiSelectItem from '../../src/components/multi-select/multi-select-item';
-import { Default } from '../../src/components/multi-select/multi-select-story';
+import { Playground } from '../../src/components/multi-select/multi-select-story';
 
 const template = (props?) =>
-  Default({
+  Playground({
     'cds-multi-select': props,
   });
 

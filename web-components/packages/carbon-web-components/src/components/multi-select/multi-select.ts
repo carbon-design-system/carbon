@@ -9,6 +9,7 @@
 
 import { html, TemplateResult } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import Close16 from '@carbon/icons/lib/close/16';
 import { prefix } from '../../globals/settings';
 import {
@@ -16,11 +17,21 @@ import {
   forEach,
   indexOf,
 } from '../../globals/internal/collection-helpers';
-import CDSDropdown, { DROPDOWN_KEYBOARD_ACTION } from '../dropdown/dropdown';
+import CDSDropdown, {
+  DROPDOWN_KEYBOARD_ACTION,
+  DROPDOWN_TYPE,
+} from '../dropdown/dropdown';
+import { SELECTION_FEEDBACK_OPTION } from './defs';
 import CDSMultiSelectItem from './multi-select-item';
 import styles from './multi-select.scss';
 
-export { DROPDOWN_SIZE, DROPDOWN_TYPE } from '../dropdown/dropdown';
+export {
+  DROPDOWN_SIZE,
+  DROPDOWN_TYPE,
+  DROPDOWN_DIRECTION,
+} from '../dropdown/dropdown';
+
+export { SELECTION_FEEDBACK_OPTION };
 
 /**
  * Multi select.
@@ -57,6 +68,12 @@ class CDSMultiSelect extends CDSDropdown {
    */
   @query('#selection-button')
   private _selectionButtonNode!: HTMLElement;
+
+  /**
+   * The menu body.
+   */
+  @query('#menu-body')
+  private _menuBodyNode!: HTMLElement;
 
   /**
    * The `<input>` for filtering.
@@ -105,7 +122,10 @@ class CDSMultiSelect extends CDSDropdown {
   }
 
   protected _handleClickInner(event: MouseEvent) {
-    if (this._selectionButtonNode?.contains(event.target as Node)) {
+    if (
+      this._selectionButtonNode?.contains(event.target as Node) &&
+      !this.readOnly
+    ) {
       this._handleUserInitiatedSelectItem();
       if (this.filterable) {
         this._filterInputNode.focus();
@@ -115,14 +135,7 @@ class CDSMultiSelect extends CDSDropdown {
     } else if (this._clearButtonNode?.contains(event.target as Node)) {
       this._handleUserInitiatedClearInput();
     } else {
-      const shouldIgnoreClickInner = (elem) =>
-        elem.closest &&
-        elem.closest(
-          (this.constructor as typeof CDSMultiSelect).selectorIgnoreClickInner
-        );
-      if (!event.composedPath().some(shouldIgnoreClickInner)) {
-        super._handleClickInner(event);
-      }
+      super._handleClickInner(event);
       if (this.filterable) this._filterInputNode.focus();
     }
   }
@@ -193,20 +206,79 @@ class CDSMultiSelect extends CDSDropdown {
     }
   }
 
-  protected _renderPrecedingTriggerContent() {
-    const { clearSelectionLabel, _selectedItemsCount: selectedItemsCount } =
-      this;
+  protected _renderTitleLabel() {
+    const {
+      clearSelectionDescription,
+      clearSelectionText,
+      disabled,
+      hideLabel,
+      titleText,
+      _selectedItemsCount: selectedItemsCount,
+      _slotTitleTextNode: slotTitleTextNode,
+      _handleSlotchangeLabelText: handleSlotchangeLabelText,
+    } = this;
+
+    const labelClasses = classMap({
+      [`${prefix}--label`]: true,
+      [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--visually-hidden`]: hideLabel,
+    });
+
+    const hasTitleText =
+      titleText ||
+      (slotTitleTextNode && slotTitleTextNode.assignedNodes().length > 0);
+
+    return html`
+      <label
+        part="title-text"
+        class="${labelClasses}"
+        ?hidden="${!hasTitleText}">
+        <slot name="title-text" @slotchange="${handleSlotchangeLabelText}"
+          >${titleText}</slot
+        >
+        ${selectedItemsCount > 0
+          ? html`
+              <span class="${prefix}--visually-hidden">
+                ${clearSelectionDescription} ${selectedItemsCount},
+                ${clearSelectionText}
+              </span>
+            `
+          : null}
+      </label>
+    `;
+  }
+
+  protected _renderPrecedingLabel() {
+    const {
+      disabled,
+      readOnly,
+      clearSelectionLabel,
+      _selectedItemsCount: selectedItemsCount,
+    } = this;
+
+    const selectionButtonClasses = classMap({
+      [`${prefix}--list-box__selection`]: true,
+      [`${prefix}--list-box__selection--multi`]: true,
+      [`${prefix}--tag`]: true,
+      [`${prefix}--tag--filter`]: true,
+      [`${prefix}--tag--high-contrast`]: true,
+      [`${prefix}--tag--disabled`]: disabled,
+    });
     return selectedItemsCount === 0
       ? undefined
       : html`
           <div
             id="selection-button"
             role="button"
-            class="${prefix}--list-box__selection ${prefix}--list-box__selection--multi ${prefix}--tag--filter"
-            tabindex="0"
+            class="${selectionButtonClasses}"
+            tabindex="-1"
+            aria-disabled=${readOnly}
             title="${clearSelectionLabel}">
             ${selectedItemsCount}
-            ${Close16({ 'aria-label': clearSelectionLabel })}
+            ${Close16({
+              'aria-label': clearSelectionLabel,
+              class: `${prefix}--tag__close-icon`,
+            })}
           </div>
         `;
   }
@@ -284,7 +356,6 @@ class CDSMultiSelect extends CDSDropdown {
    */
   protected _navigate(direction: number) {
     if (!this.filterable) {
-      this._triggerNode.focus();
       super._navigate(direction);
     } else {
       // only navigate through remaining item
@@ -329,6 +400,24 @@ class CDSMultiSelect extends CDSDropdown {
   clearSelectionLabel = '';
 
   /**
+   * Specify the text that should be read for screen readers that describes total items selected
+   */
+  @property({ attribute: 'clear-selection-description' })
+  clearSelectionDescription = 'Total items selected: ';
+
+  /**
+   * Specify the text that should be read for screen readers to clear selection.
+   */
+  @property({ attribute: 'clear-selection-text' })
+  clearSelectionText = 'To clear selection, press Delete or Backspace.';
+
+  /**
+   * Specify the locale of the control. Used for the default compareItems used for sorting the list of items in the control.
+   */
+  @property()
+  locale = 'en';
+
+  /**
    * An assistive text for screen reader to announce, telling that an item is unselected.
    */
   @property({ attribute: 'unselected-item-assistive-text' })
@@ -340,18 +429,96 @@ class CDSMultiSelect extends CDSDropdown {
   @property({ attribute: 'unselected-all-assistive-text' })
   unselectedAllAssistiveText = 'Unselected all items.';
 
+  /**
+   * Specify feedback (mode) of the selection.
+   * `top`: selected item jumps to top
+   * `fixed`: selected item stays at it's position
+   * `top-after-reopen`: selected item jump to top after reopen dropdown
+   */
+  @property({ attribute: 'selection-feedback' })
+  selectionFeedback = SELECTION_FEEDBACK_OPTION.TOP_AFTER_REOPEN;
+
+  /**
+   * The CSS class list for multi-select listbox
+   */
+  protected get _classes() {
+    const {
+      disabled,
+      size,
+      type,
+      invalid,
+      readOnly,
+      open,
+      warn,
+      _selectedItemsCount: selectedItemsCount,
+    } = this;
+    const inline = type === DROPDOWN_TYPE.INLINE;
+
+    return classMap({
+      [`${prefix}--multi-select`]: true,
+      [`${prefix}--list-box`]: true,
+      [`${prefix}--list-box--disabled`]: disabled,
+      [`${prefix}--list-box--inline`]: inline,
+      [`${prefix}--list-box--expanded`]: open,
+      [`${prefix}--list-box--${size}`]: size,
+      [`${prefix}--multi-select--invalid`]: invalid,
+      [`${prefix}--multi-select--warn`]: warn,
+      [`${prefix}--multi-select--inline`]: inline,
+      [`${prefix}--list-box--inline`]: inline,
+      [`${prefix}--multi-select--readonly`]: readOnly,
+      [`${prefix}--multi-select--selected`]: selectedItemsCount > 0,
+    });
+  }
+
+  protected compareItems = (itemA, itemB, { locale }) => {
+    itemA.localeCompare(itemB, locale, { numeric: true });
+  };
+
+  protected sortItems = (
+    menuItems: NodeList,
+    { values, compareItems, locale = 'en' }
+  ) => {
+    const menuItemsArray = Array.from(menuItems);
+
+    const sortedArray = menuItemsArray.sort((itemA, itemB) => {
+      const hasItemA = values.includes((itemA as HTMLInputElement).value);
+      const hasItemB = values.includes((itemB as HTMLInputElement).value);
+
+      // Prefer whichever item is in the `value` array first
+      if (hasItemA && !hasItemB) {
+        return -1;
+      }
+
+      if (hasItemB && !hasItemA) {
+        return 1;
+      }
+
+      return compareItems(
+        (itemA as HTMLInputElement).value,
+        (itemB as HTMLInputElement).value,
+        {
+          locale,
+        }
+      );
+    });
+
+    return sortedArray;
+  };
+
   shouldUpdate(changedProperties) {
     const { selectorItem } = this.constructor as typeof CDSMultiSelect;
+    const items = this.querySelectorAll(selectorItem);
+
+    const { value, locale } = this;
+    const values = !value ? [] : value.split(',');
+
     if (changedProperties.has('size')) {
       forEach(this.querySelectorAll(selectorItem), (elem) => {
         (elem as CDSMultiSelectItem).size = this.size;
       });
     }
     if (changedProperties.has('value')) {
-      const { value } = this;
-      const values = !value ? [] : value.split(',');
       // Updates selection beforehand because our rendering logic for `<cds-multi-select>` looks for selected items via `qSA()`
-      const items = this.querySelectorAll(selectorItem);
       forEach(items, (elem) => {
         (elem as CDSMultiSelectItem).selected =
           values.indexOf((elem as CDSMultiSelectItem).value) >= 0;
@@ -360,16 +527,60 @@ class CDSMultiSelect extends CDSDropdown {
         items,
         (elem) => values.indexOf((elem as CDSMultiSelectItem).value) >= 0
       ).length;
+
+      if (this.selectionFeedback === SELECTION_FEEDBACK_OPTION.TOP) {
+        const sortedMenuItems = this.sortItems(items, {
+          values,
+          compareItems: this.compareItems,
+          locale,
+        });
+
+        this.replaceChildren(...sortedMenuItems);
+      }
+    }
+    if (changedProperties.has('open')) {
+      if (
+        this.selectionFeedback === SELECTION_FEEDBACK_OPTION.TOP_AFTER_REOPEN
+      ) {
+        const sortedMenuItems = this.sortItems(items, {
+          values,
+          compareItems: this.compareItems,
+          locale,
+        });
+
+        this.replaceChildren(...sortedMenuItems);
+      }
     }
     return true;
   }
 
+  updated(changedProperties) {
+    if (changedProperties.has('open') && this.open && !this.filterable) {
+      // move focus to menu body when open for non-filterable mulit-select
+      this._menuBodyNode.focus();
+    }
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    /**
+     * Detect if multi-select already has initially selected items
+     */
+    this.value = filter(
+      this.querySelectorAll(
+        (this.constructor as typeof CDSMultiSelect).selectorItem
+      ),
+      (item) => (item as CDSMultiSelectItem).selected
+    )
+      .map((item) => (item as CDSMultiSelectItem).value)
+      .join(',');
+  }
+
   /**
-   * A selector to ignore the `click` events from.
-   * Primary for the checkbox label where the `click` event will happen from the associated check box.
+   * A selector that will return menu body.
    */
-  private static get selectorIgnoreClickInner() {
-    return `.${prefix}--checkbox-label`;
+  static get selectorMenuBody() {
+    return `div[part="menu-body"]`;
   }
 
   /**

@@ -38,19 +38,14 @@ class CDSMultiSelectItem extends CDSDropdownItem {
     return html`
       <div class="${prefix}--list-box__menu-item__option">
         <div class="${prefix}--form-item ${prefix}--checkbox-wrapper">
-          <input
-            id="input"
-            type="checkbox"
-            class="${prefix}--checkbox"
-            tabindex="-1"
-            readonly
-            ?disabled=${disabled}
-            .checked=${selected}
+          <span
+            value="${value}"
             name="${ifDefined(selectionName || undefined)}"
-            value="${value}" />
-          <label for="input" class="${prefix}--checkbox-label">
-            <span class="${prefix}--checkbox-label-text"><slot></slot></span>
-          </label>
+            class="${prefix}--checkbox-label"
+            ?disabled=${disabled}
+            data-contained-checkbox-state=${selected}
+            ><slot></slot
+          ></span>
         </div>
       </div>
     `;

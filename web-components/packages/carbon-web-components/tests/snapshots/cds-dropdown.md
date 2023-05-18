@@ -8,13 +8,13 @@
 <label
   class="cds--label"
   hidden=""
-  part="label-text"
+  part="title-text"
 >
-  <slot name="label-text">
+  <slot name="title-text">
   </slot>
 </label>
 <div
-  class="cds--dropdown cds--list-box"
+  class="cds--dropdown cds--list-box cds--list-box--md"
   role="listbox"
 >
   <div
@@ -33,7 +33,10 @@
       id="trigger-label"
     >
     </span>
-    <div class="cds--list-box__menu-icon">
+    <div
+      class="cds--list-box__menu-icon"
+      id="trigger-caret"
+    >
     </div>
   </div>
 </div>
@@ -60,14 +63,14 @@
 ```
 <label
   class="cds--label cds--label--disabled"
-  part="label-text"
+  hidden=""
+  part="title-text"
 >
-  <slot name="label-text">
-    label-text-foo
+  <slot name="title-text">
   </slot>
 </label>
 <div
-  class="cds--dropdown cds--list-box cds--list-box--disabled cds--list-box--expanded"
+  class="cds--dropdown cds--list-box cds--list-box--disabled cds--list-box--expanded cds--list-box--md"
   role="listbox"
 >
   <div
@@ -85,12 +88,15 @@
       class="cds--list-box__label"
       id="trigger-label"
     >
-      Option 3
     </span>
-    <div class="cds--list-box__menu-icon cds--list-box__menu-icon--open">
+    <div
+      class="cds--list-box__menu-icon cds--list-box__menu-icon--open"
+      id="trigger-caret"
+    >
     </div>
   </div>
   <div
+    aria-label=""
     class="cds--list-box__menu"
     id="menu-body"
     part="menu-body"

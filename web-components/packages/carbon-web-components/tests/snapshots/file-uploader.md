@@ -7,12 +7,12 @@
 ####     `should render with minimum attributes`
 
 ```
-<strong class="cds--file--label">
-  <slot name="label-text">
+<p class="cds--file--label">
+  <slot name="label-title">
   </slot>
-</strong>
+</p>
 <p class="cds--label-description">
-  <slot name="helperText-text">
+  <slot name="label-description">
   </slot>
 </p>
 <slot name="drop-container">
@@ -27,14 +27,12 @@
 ####     `should render with various attributes`
 
 ```
-<strong class="cds--file--label">
-  <slot name="label-text">
-    label-text-foo
+<p class="cds--file--label">
+  <slot name="label-title">
   </slot>
-</strong>
+</p>
 <p class="cds--label-description">
-  <slot name="helperText-text">
-    helper-text-foo
+  <slot name="label-description">
   </slot>
 </p>
 <slot name="drop-container">
@@ -42,6 +40,146 @@
 <div class="cds--file-container">
   <slot>
   </slot>
+</div>
+
+```
+
+## `cds-file-uploader-item`
+
+##   `Misc attributes`
+
+####     `should render with minimum attributes`
+
+```
+<p class="cds--file-filename">
+  <slot>
+  </slot>
+</p>
+<span class="cds--file__state-container">
+  <cds-loading
+    assistive-text="Delete this file"
+    type="small"
+  >
+  </cds-loading>
+</span>
+<div
+  class="cds--form-requirement"
+  hidden=""
+>
+  <div class="cds--form-requirement__title">
+  </div>
+  <p
+    class="cds--form-requirement__supplement"
+    hidden=""
+  >
+  </p>
+</div>
+
+```
+
+####     `should render with various attributes`
+
+```
+<p class="cds--file-filename">
+  <slot>
+  </slot>
+</p>
+<span class="cds--file__state-container">
+  <cds-loading
+    assistive-text="Delete this file"
+    type="small"
+  >
+  </cds-loading>
+</span>
+<div class="cds--form-requirement">
+  <div class="cds--form-requirement__title">
+  </div>
+  <p
+    class="cds--form-requirement__supplement"
+    hidden=""
+  >
+  </p>
+</div>
+
+```
+
+####     `should render uploaded state`
+
+```
+<p class="cds--file-filename">
+  <slot>
+  </slot>
+</p>
+<span class="cds--file__state-container">
+</span>
+<div
+  class="cds--form-requirement"
+  hidden=""
+>
+  <div class="cds--form-requirement__title">
+  </div>
+  <p
+    class="cds--form-requirement__supplement"
+    hidden=""
+  >
+  </p>
+</div>
+
+```
+
+####     `should render editing state`
+
+```
+<p class="cds--file-filename">
+  <slot>
+  </slot>
+</p>
+<span class="cds--file__state-container">
+  <button
+    aria-label="Delete this file"
+    class="cds--file-close"
+    type="button"
+  >
+  </button>
+</span>
+<div
+  class="cds--form-requirement"
+  hidden=""
+>
+  <div class="cds--form-requirement__title">
+  </div>
+  <p
+    class="cds--form-requirement__supplement"
+    hidden=""
+  >
+  </p>
+</div>
+
+```
+
+####     `should render editing state with various attributes`
+
+```
+<p class="cds--file-filename">
+  <slot>
+  </slot>
+</p>
+<span class="cds--file__state-container">
+  <button
+    aria-label="Delete this file"
+    class="cds--file-close"
+    type="button"
+  >
+  </button>
+</span>
+<div class="cds--form-requirement">
+  <div class="cds--form-requirement__title">
+  </div>
+  <p
+    class="cds--form-requirement__supplement"
+    hidden=""
+  >
+  </p>
 </div>
 
 ```
@@ -72,7 +210,6 @@
     >
   </div>
 </label>
-
 ```
 
 ####     `should render with various attributes`
@@ -100,7 +237,6 @@
     >
   </div>
 </label>
-
 ```
 
 ##   `Handling events`
@@ -128,145 +264,6 @@
     >
   </div>
 </label>
-
-```
-
-## `cds-file-uploader-item`
-
-##   `Misc attributes`
-
-####     `should render with minimum attributes`
-
-```
-<p class="cds--file-filename">
-  <slot>
-  </slot>
-</p>
-<span class="cds--file__state-container">
-  <cds-loading
-    assistive-text="Uploading"
-    type="small"
-  >
-  </cds-loading>
-</span>
-<div class="cds--form-requirement">
-  <div class="cds--form-requirement__title">
-    <slot name="validity-message">
-    </slot>
-  </div>
-  <p class="cds--form-requirement__supplement">
-    <slot name="validity-message-supplement">
-    </slot>
-  </p>
-</div>
-
-```
-
-####     `should render with various attributes`
-
-```
-<p class="cds--file-filename">
-  <slot>
-  </slot>
-</p>
-<span class="cds--file__state-container">
-  <cds-loading
-    assistive-text="uploading-assistive-text-foo"
-    type="small"
-  >
-  </cds-loading>
-</span>
-<div class="cds--form-requirement">
-  <div class="cds--form-requirement__title">
-    <slot name="validity-message">
-      validity-message-foo
-    </slot>
-  </div>
-  <p class="cds--form-requirement__supplement">
-    <slot name="validity-message-supplement">
-    </slot>
-  </p>
-</div>
-
-```
-
-####     `should render uploaded state`
-
-```
-<p class="cds--file-filename">
-  <slot>
-  </slot>
-</p>
-<span class="cds--file__state-container">
-</span>
-<div class="cds--form-requirement">
-  <div class="cds--form-requirement__title">
-    <slot name="validity-message">
-    </slot>
-  </div>
-  <p class="cds--form-requirement__supplement">
-    <slot name="validity-message-supplement">
-    </slot>
-  </p>
-</div>
-
-```
-
-####     `should render editing state`
-
-```
-<p class="cds--file-filename">
-  <slot>
-  </slot>
-</p>
-<span class="cds--file__state-container">
-  <button
-    aria-label="Delete this file"
-    class="cds--file-close"
-    type="button"
-  >
-  </button>
-</span>
-<div class="cds--form-requirement">
-  <div class="cds--form-requirement__title">
-    <slot name="validity-message">
-    </slot>
-  </div>
-  <p class="cds--form-requirement__supplement">
-    <slot name="validity-message-supplement">
-    </slot>
-  </p>
-</div>
-
-```
-
-####     `should render editing state with various attributes`
-
-```
-<p class="cds--file-filename">
-  <slot>
-  </slot>
-</p>
-<span class="cds--file__state-container">
-  <button
-    aria-label="delete-assistive-text-foo"
-    class="cds--file-close"
-    type="button"
-  >
-  </button>
-</span>
-<div class="cds--form-requirement">
-  <div class="cds--form-requirement__title">
-    <slot name="validity-message">
-      validity-message-foo
-    </slot>
-  </div>
-  <p class="cds--form-requirement__supplement">
-    <slot name="validity-message-supplement">
-    </slot>
-  </p>
-</div>
-
 ```
 
 ## `cds-file-uploader-shell`

@@ -404,6 +404,40 @@ class CDSDropdown extends ValidityMixin(
     `;
   }
 
+  /**
+   * @returns The title label.
+   */
+  protected _renderTitleLabel(): TemplateResult {
+    const {
+      disabled,
+      hideLabel,
+      titleText,
+      _slotTitleTextNode: slotTitleTextNode,
+      _handleSlotchangeLabelText: handleSlotchangeLabelText,
+    } = this;
+
+    const labelClasses = classMap({
+      [`${prefix}--label`]: true,
+      [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--visually-hidden`]: hideLabel,
+    });
+
+    const hasTitleText =
+      titleText ||
+      (slotTitleTextNode && slotTitleTextNode.assignedNodes().length > 0);
+
+    return html`
+      <label
+        part="title-text"
+        class="${labelClasses}"
+        ?hidden="${!hasTitleText}">
+        <slot name="title-text" @slotchange="${handleSlotchangeLabelText}"
+          >${titleText}</slot
+        >
+      </label>
+    `;
+  }
+
   /* eslint-disable class-methods-use-this */
   /**
    * @returns The content following the trigger button.
@@ -436,8 +470,8 @@ class CDSDropdown extends ValidityMixin(
   /**
    * Specify the direction of the dropdown. Can be either top or bottom.
    */
-  @property({ type: Boolean, reflect: true })
-  direction = false;
+  @property({ type: String, reflect: true })
+  direction = DROPDOWN_DIRECTION.BOTTOM;
 
   /**
    * `true` if this dropdown should be disabled.
@@ -522,7 +556,7 @@ class CDSDropdown extends ValidityMixin(
    * Dropdown size.
    */
   @property({ reflect: true })
-  size = DROPDOWN_SIZE.REGULAR;
+  size = DROPDOWN_SIZE.MEDIUM;
 
   /**
    * The `aria-label` attribute for the UI indicating the closed state.
@@ -546,7 +580,7 @@ class CDSDropdown extends ValidityMixin(
    * `true` if this dropdown should use the inline UI variant.
    */
   @property({ reflect: true })
-  type = DROPDOWN_TYPE.REGULAR;
+  type = DROPDOWN_TYPE.DEFAULT;
 
   /**
    * The validity message.
@@ -579,6 +613,17 @@ class CDSDropdown extends ValidityMixin(
         (elem as CDSDropdownItem).size = this.size;
       });
     }
+    if (changedProperties.has('disabled') && this.disabled) {
+      const { disabled } = this;
+      // Propagate `disabled` attribute to descendants until `:host-context()` gets supported in all major browsers
+      forEach(this.querySelectorAll(selectorItem), (elem) => {
+        if (disabled) {
+          (elem as CDSDropdownItem).disabled = disabled;
+        } else {
+          (elem as CDSDropdownItem).removeAttribute('disabled');
+        }
+      });
+    }
     if (changedProperties.has('value')) {
       // `<cds-multi-select>` updates selection beforehand
       // because our rendering logic for `<cds-multi-select>` looks for selected items via `qSA()`
@@ -601,61 +646,18 @@ class CDSDropdown extends ValidityMixin(
     return true;
   }
 
-  updated(changedProperties) {
-    const { helperText, type } = this;
+  /**
+   * The CSS class list for dropdown listbox
+   */
+  protected get _classes() {
+    const { disabled, size, type, invalid, open, warn } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
-    const { selectorItem } = this.constructor as typeof CDSDropdown;
-    if (changedProperties.has('disabled') && this.disabled) {
-      const { disabled } = this;
-      // Propagate `disabled` attribute to descendants until `:host-context()` gets supported in all major browsers
-      forEach(this.querySelectorAll(selectorItem), (elem) => {
-        (elem as CDSDropdownItem).disabled = disabled;
-      });
-    }
-    if (
-      (changedProperties.has('helperText') || changedProperties.has('type')) &&
-      helperText &&
-      inline
-    ) {
-      // eslint-disable-next-line no-console
-      console.warn(
-        'Found `helperText` property/attribute usage in inline mode, that is not supported, at:',
-        this
-      );
-    }
-  }
 
-  render() {
-    const {
-      ariaLabel,
-      disabled,
-      helperText,
-      hideLabel,
-      invalid,
-      invalidText,
-      open,
-      toggleLabelClosed,
-      toggleLabelOpen,
-      size,
-      titleText,
-      type,
-      warn,
-      warnText,
-      _assistiveStatusText: assistiveStatusText,
-      _shouldTriggerBeFocusable: shouldTriggerBeFocusable,
-      _handleClickInner: handleClickInner,
-      _handleKeydownInner: handleKeydownInner,
-      _handleKeypressInner: handleKeypressInner,
-      _handleSlotchangeHelperText: handleSlotchangeHelperText,
-      _handleSlotchangeLabelText: handleSlotchangeLabelText,
-      _slotHelperTextNode: slotHelperTextNode,
-      _slotTitleTextNode: slotTitleTextNode,
-    } = this;
-    const inline = type === DROPDOWN_TYPE.INLINE;
     const selectedItemsCount = this.querySelectorAll(
       (this.constructor as typeof CDSDropdown).selectorItemSelected
     ).length;
-    const classes = classMap({
+
+    return classMap({
       [`${prefix}--dropdown`]: true,
       [`${prefix}--list-box`]: true,
       [`${prefix}--list-box--disabled`]: disabled,
@@ -667,11 +669,32 @@ class CDSDropdown extends ValidityMixin(
       [`${prefix}--dropdown--inline`]: inline,
       [`${prefix}--dropdown--selected`]: selectedItemsCount > 0,
     });
-    const labelClasses = classMap({
-      [`${prefix}--label`]: true,
-      [`${prefix}--label--disabled`]: disabled,
-      [`${prefix}--visually-hidden`]: hideLabel,
-    });
+  }
+
+  render() {
+    const {
+      ariaLabel,
+      _classes: classes,
+      disabled,
+      helperText,
+      invalid,
+      invalidText,
+      open,
+      toggleLabelClosed,
+      toggleLabelOpen,
+      type,
+      warn,
+      warnText,
+      _assistiveStatusText: assistiveStatusText,
+      _shouldTriggerBeFocusable: shouldTriggerBeFocusable,
+      _handleClickInner: handleClickInner,
+      _handleKeydownInner: handleKeydownInner,
+      _handleKeypressInner: handleKeypressInner,
+      _handleSlotchangeHelperText: handleSlotchangeHelperText,
+      _slotHelperTextNode: slotHelperTextNode,
+    } = this;
+    const inline = type === DROPDOWN_TYPE.INLINE;
+
     const helperClasses = classMap({
       [`${prefix}--form__helper-text`]: true,
       [`${prefix}--form__helper-text--disabled`]: disabled,
@@ -685,9 +708,6 @@ class CDSDropdown extends ValidityMixin(
     const hasHelperText =
       helperText ||
       (slotHelperTextNode && slotHelperTextNode.assignedNodes().length > 0);
-    const hasTitleText =
-      titleText ||
-      (slotTitleTextNode && slotTitleTextNode.assignedNodes().length > 0);
     const validityIcon = !invalid
       ? undefined
       : WarningFilled16({
@@ -716,14 +736,7 @@ class CDSDropdown extends ValidityMixin(
           </div>
         `;
     return html`
-      <label
-        part="title-text"
-        class="${labelClasses}"
-        ?hidden="${!hasTitleText}">
-        <slot name="title-text" @slotchange="${handleSlotchangeLabelText}"
-          >${titleText}</slot
-        >
-      </label>
+      ${this._renderTitleLabel()}
       <div
         role="listbox"
         class="${classes}"

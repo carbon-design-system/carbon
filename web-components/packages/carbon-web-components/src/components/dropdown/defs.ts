@@ -49,14 +49,14 @@ export enum DROPDOWN_KEYBOARD_ACTION {
  */
 export enum DROPDOWN_SIZE {
   /**
-   * Regular size.
-   */
-  REGULAR = '',
-
-  /**
    * Small size.
    */
   SMALL = 'sm',
+
+  /**
+   * Medium size.
+   */
+  MEDIUM = 'md',
 
   /**
    * Large size.
@@ -69,9 +69,9 @@ export enum DROPDOWN_SIZE {
  */
 export enum DROPDOWN_TYPE {
   /**
-   * Regular type.
+   * Default type.
    */
-  REGULAR = '',
+  DEFAULT = '',
 
   /**
    * Inline type.
