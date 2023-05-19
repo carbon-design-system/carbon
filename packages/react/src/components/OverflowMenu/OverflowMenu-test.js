@@ -51,6 +51,7 @@ describe('OverflowMenu', () => {
       await userEvent.click(screen.getByRole('button'));
 
       expect(
+        // eslint-disable-next-line testing-library/no-node-access
         document.querySelector('.cds--overflow-menu--flip')
       ).toBeInTheDocument();
     });

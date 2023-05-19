@@ -61,6 +61,7 @@ describe('TreeView', () => {
         <TreeView className="custom-class" label="Tree" />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const ul = container?.getElementsByTagName('ul')[0];
 
       expect(ul).toHaveClass('custom-class');
@@ -158,6 +159,7 @@ describe('TreeView', () => {
       );
 
       const nodeParent = screen.getByTestId('Node 1');
+      // eslint-disable-next-line testing-library/no-node-access
       const nodeChild = nodeParent?.querySelector('div > span');
 
       expect(nodeChild).toHaveClass(`${prefix}--tree-parent-node__toggle`);

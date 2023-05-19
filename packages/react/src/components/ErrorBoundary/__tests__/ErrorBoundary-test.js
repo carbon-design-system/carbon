@@ -26,7 +26,9 @@ describe('ErrorBoundary', () => {
       </ErrorBoundary>
     );
 
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const component = container.querySelector('[data-test-id="mock"]');
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const fallback = container.querySelector('[data-test-id="fallback"]');
 
     expect(component).toBeDefined();
@@ -54,7 +56,9 @@ describe('ErrorBoundary', () => {
       </ErrorBoundaryContext.Provider>
     );
 
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const component = container.querySelector('[data-test-id="mock"]');
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const fallback = container.querySelector('[data-test-id="fallback"]');
 
     expect(component).toBe(null);

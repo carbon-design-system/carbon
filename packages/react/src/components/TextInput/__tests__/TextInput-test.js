@@ -104,6 +104,7 @@ describe('TextInput', () => {
         <TextInput id="input-1" labelText="TextInput" invalid />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const invalidIcon = container.querySelector(
         `svg.${prefix}--text-input__invalid-icon`
       );
@@ -187,6 +188,7 @@ describe('TextInput', () => {
         <TextInput id="input-1" labelText="TextInput label" warn />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const warnIcon = container.querySelector(
         `svg.${prefix}--text-input__invalid-icon--warning`
       );
