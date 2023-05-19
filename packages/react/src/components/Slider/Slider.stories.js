@@ -118,12 +118,35 @@ Playground.argTypes = {
     },
   },
   disabled: {
-    control: { type: 'boolean' },
+    control: {
+      control: {
+        type: 'boolean',
+      },
+      defaultValue: false,
+    },
   },
   formatLabel: {
     table: {
       disable: true,
     },
+  },
+  hideTextInput: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  invalid: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  invalidText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Invalid message goes here',
   },
   labelText: {
     table: {
@@ -138,8 +161,17 @@ Playground.argTypes = {
     control: { type: 'number' },
     defaultValue: 100,
   },
+  readOnly: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
   required: {
-    control: { type: 'boolean' },
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
   },
   step: {
     control: { type: 'number' },
@@ -172,5 +204,17 @@ Playground.argTypes = {
     table: {
       disable: true,
     },
+  },
+  warn: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  warnText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Warning message goes here',
   },
 };

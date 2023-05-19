@@ -90,7 +90,9 @@
     justify-content: space-between;
   }
 
-  .#{$prefix}--data-table--sort:not(.#{$prefix}--data-table--xs):not(.#{$prefix}--data-table--sm):not(.#{$prefix}--data-table--md):not(.#{$prefix}--data-table--xl)
+  .#{$prefix}--data-table--sort:not(.#{$prefix}--data-table--xs):not(
+      .#{$prefix}--data-table--sm
+    ):not(.#{$prefix}--data-table--md):not(.#{$prefix}--data-table--xl)
     th
     .#{$prefix}--table-sort__flex {
     /* IE11 workaround for align-items: center and min-height
