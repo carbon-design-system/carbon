@@ -102,7 +102,6 @@ export { NumberInput, NumberInputSkeleton } from './components/NumberInput';
 export OrderedList from './components/OrderedList';
 export OverflowMenu from './components/OverflowMenu';
 export OverflowMenuItem from './components/OverflowMenuItem';
-export { OverflowMenuV2 } from './components/OverflowMenuV2';
 export Pagination from './components/Pagination';
 export PaginationNav from './components/PaginationNav';
 export {
@@ -274,6 +273,7 @@ export {
   LayoutDirection as unstable_LayoutDirection,
   useLayoutDirection as unstable_useLayoutDirection,
 } from './components/Layout';
+export { OverflowMenuV2 as unstable_OverflowMenuV2 } from './components/OverflowMenuV2';
 export {
   PageSelector as unstable_PageSelector,
   Pagination as unstable_Pagination,

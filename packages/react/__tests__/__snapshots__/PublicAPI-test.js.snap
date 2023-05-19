@@ -5704,9 +5704,7 @@ Map {
       },
     },
   },
-  "OverflowMenu" => Object {
-    "displayName": "ClassWrapper(OverflowMenu)",
-  },
+  "OverflowMenu" => Object {},
   "OverflowMenuItem" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
@@ -5776,57 +5774,6 @@ Map {
       },
     },
     "render": [Function],
-  },
-  "OverflowMenuV2" => Object {
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "label": Object {
-        "type": "string",
-      },
-      "renderIcon": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "func",
-            },
-            Object {
-              "type": "object",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "size": Object {
-        "args": Array [
-          Array [
-            "sm",
-            "md",
-            "lg",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "tooltipAlignment": Object {
-        "args": Array [
-          Array [
-            "top",
-            "top-left",
-            "top-right",
-            "bottom",
-            "bottom-left",
-            "bottom-right",
-            "left",
-            "right",
-          ],
-        ],
-        "type": "oneOf",
-      },
-    },
   },
   "Pagination" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -9568,6 +9515,7 @@ Map {
       },
     },
   },
+  "unstable_OverflowMenuV2" => Object {},
   "unstable_PageSelector" => Object {
     "defaultProps": Object {
       "className": null,

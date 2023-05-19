@@ -57,7 +57,6 @@ export * from './components/NumberInput';
 export * from './components/OrderedList';
 export * from './components/OverflowMenu';
 export * from './components/OverflowMenuItem';
-export * from './components/OverflowMenuV2';
 export * from './components/Pagination';
 export * from './components/Pagination/Pagination.Skeleton';
 export * from './components/PaginationNav';
@@ -145,6 +144,7 @@ export {
   LayoutDirection as unstable_LayoutDirection,
   useLayoutDirection as unstable_useLayoutDirection,
 } from './components/Layout';
+export { OverflowMenuV2 as unstable_OverflowMenuV2 } from './components/OverflowMenuV2';
 export {
   PageSelector as unstable_PageSelector,
   Pagination as unstable_Pagination,
