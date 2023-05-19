@@ -128,6 +128,7 @@ class BXHeaderMenu extends HostListenerMixin(FocusMixin(LitElement)) {
     return html`
       <a
         part="trigger"
+        role="button"
         tabindex="0"
         class="${prefix}--header__menu-item ${prefix}--header__menu-title"
         href="javascript:void 0"
