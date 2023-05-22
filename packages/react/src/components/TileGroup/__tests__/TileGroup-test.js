@@ -39,6 +39,7 @@ describe('PasswordInput', () => {
         .getByText('TestGroup', {
           selector: 'legend',
         })
+        // eslint-disable-next-line testing-library/no-node-access
         .closest('fieldset');
       expect(fieldset).toContainElement(screen.getByDisplayValue('test-1'));
       expect(fieldset).toContainElement(screen.getByDisplayValue('test-2'));
@@ -75,6 +76,7 @@ describe('PasswordInput', () => {
         .getByText('TestGroup', {
           selector: 'legend',
         })
+        // eslint-disable-next-line testing-library/no-node-access
         .closest('fieldset');
       expect(fieldset).toBeDisabled();
     });

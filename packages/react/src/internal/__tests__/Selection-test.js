@@ -49,7 +49,7 @@ describe('Selection', () => {
     });
 
     it('should give a list of all selected items from the callback props', async () => {
-      const { container } = render(
+      render(
         <Selection
           {...mockProps}
           render={({ selectedItems, onItemChange }) => (
@@ -64,28 +64,28 @@ describe('Selection', () => {
           )}
         />
       );
-      expect(container.querySelectorAll('li').length).toBe(0);
+      expect(screen.queryAllByRole('listitem').length).toBe(0);
       await userEvent.click(screen.getByRole('button'));
-      expect(container.querySelectorAll('li').length).toBe(1);
+      expect(screen.queryAllByRole('listitem').length).toBe(1);
     });
 
     it('should be able to clear the selection from the callback props', async () => {
       let selectedItems = [];
       const onChange = (selectionState) =>
         (selectedItems = selectionState.selectedItems);
-      const { container } = render(
+      render(
         <Selection
           {...mockProps}
           render={({ onItemChange, clearSelection }) => (
             <div>
               <button
                 type="button"
-                id="add-item"
+                data-testid="add-item"
                 onClick={() => onItemChange(1)}
               />
               <button
                 type="button"
-                id="clear-selection"
+                data-testid="clear-selection"
                 onClick={clearSelection}
               />
             </div>
@@ -93,10 +93,11 @@ describe('Selection', () => {
           onChange={onChange}
         />
       );
+
       expect(selectedItems).toEqual([]);
-      await userEvent.click(container.querySelector('#add-item'));
+      await userEvent.click(screen.getByTestId('add-item'));
       expect(selectedItems).toEqual([1]);
-      await userEvent.click(container.querySelector('#clear-selection'));
+      await userEvent.click(screen.getByTestId('clear-selection'));
       expect(selectedItems).toEqual([]);
     });
   });
