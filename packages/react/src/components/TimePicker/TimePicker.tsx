@@ -322,7 +322,7 @@ const TimePicker: TimePickerComponent = React.forwardRef<
       </div>
       {error && (
         <div className={`${prefix}--form-requirement`}>
-          {invalidText ? invalidText : warningText}
+          {invalid ? invalidText : warningText}
         </div>
       )}
     </div>
