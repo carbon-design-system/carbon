@@ -187,6 +187,7 @@ export const HeaderBaseWNavigation = () => (
           aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
           onClick={onClickSideNavExpand}
           isActive={isSideNavExpanded}
+          aria-expanded={isSideNavExpanded}
         />
         <HeaderName href="#" prefix="IBM">
           [Platform]
@@ -297,6 +298,7 @@ export const HeaderBaseWNavigationAndActions = () => (
           aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
           onClick={onClickSideNavExpand}
           isActive={isSideNavExpanded}
+          aria-expanded={isSideNavExpanded}
         />
         <HeaderName href="#" prefix="IBM">
           [Platform]
@@ -365,6 +367,7 @@ export const HeaderBaseWNavigationActionsAndSideNav = () => (
             aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
             onClick={onClickSideNavExpand}
             isActive={isSideNavExpanded}
+            aria-expanded={isSideNavExpanded}
           />
           <HeaderName href="#" prefix="IBM">
             [Platform]
@@ -482,6 +485,7 @@ export const HeaderBaseWSideNav = () => (
             aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
             onClick={onClickSideNavExpand}
             isActive={isSideNavExpanded}
+            aria-expanded={isSideNavExpanded}
           />
           <HeaderName href="#" prefix="IBM">
             [Platform]
@@ -874,6 +878,7 @@ export const SideNavRailWHeader = () => (
             isCollapsible
             onClick={onClickSideNavExpand}
             isActive={isSideNavExpanded}
+            aria-expanded={isSideNavExpanded}
           />
           <HeaderName href="#" prefix="IBM">
             [Platform]
