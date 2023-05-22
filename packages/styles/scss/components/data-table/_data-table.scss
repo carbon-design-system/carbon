@@ -509,7 +509,9 @@
     height: calc(100% + 1px);
   }
 
-  .#{$prefix}--data-table.#{$prefix}--data-table--xs
+  .#{$prefix}--data-table.#{$prefix}--data-table--xs:not(
+      .#{$prefix}--data-table--top-aligned
+    )
     .#{$prefix}--table-column-checkbox {
     padding-top: 0;
     padding-bottom: 0;
@@ -608,6 +610,7 @@
     padding-bottom: $spacing-05;
   }
 
+  .#{$prefix}--data-table--xl th,
   .#{$prefix}--data-table--xl td {
     vertical-align: top;
   }
