@@ -1782,7 +1782,7 @@ __metadata:
     "@octokit/plugin-throttling": ^4.0.0
     "@octokit/rest": ^19.0.0
     "@rollup/plugin-babel": ^6.0.0
-    "@rollup/plugin-commonjs": ^24.0.0
+    "@rollup/plugin-commonjs": ^25.0.0
     "@rollup/plugin-node-resolve": ^15.0.0
     chalk: ^4.1.1
     change-case: ^4.1.2
@@ -2055,7 +2055,7 @@ __metadata:
     "@carbon/test-utils": ^10.28.0
     "@carbon/themes": ^11.18.0
     "@rollup/plugin-babel": ^6.0.0
-    "@rollup/plugin-commonjs": ^24.0.0
+    "@rollup/plugin-commonjs": ^25.0.0
     "@rollup/plugin-node-resolve": ^15.0.0
     "@rollup/plugin-typescript": ^11.0.0
     "@storybook/addon-a11y": ^6.5.6
@@ -5391,9 +5391,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-commonjs@npm:^24.0.0":
-  version: 24.0.0
-  resolution: "@rollup/plugin-commonjs@npm:24.0.0"
+"@rollup/plugin-commonjs@npm:^25.0.0":
+  version: 25.0.0
+  resolution: "@rollup/plugin-commonjs@npm:25.0.0"
   dependencies:
     "@rollup/pluginutils": ^5.0.1
     commondir: ^1.0.1
@@ -5406,7 +5406,7 @@ __metadata:
   peerDependenciesMeta:
     rollup:
       optional: true
-  checksum: e2a1bf295bbb45ab56747f7ce636d4b94046bfecc758a64c7276823b80271e0ba1196642c232aa61d1b1a98abeaddad45486c7227ec19a97d19d16f7661d49a6
+  checksum: f014f98f161ba4573e5101cf262c152bdcd8cfebf9cf4872f8bb657d20e20d8e2dc51af5339fe10772d19007e63044bd79881af0db4fe9babe9e96d0c0eeb328
   languageName: node
   linkType: hard
 
@@ -11268,7 +11268,7 @@ __metadata:
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.28.0
     "@rollup/plugin-babel": ^6.0.0
-    "@rollup/plugin-commonjs": ^24.0.0
+    "@rollup/plugin-commonjs": ^25.0.0
     "@rollup/plugin-node-resolve": ^15.0.0
     babel-plugin-dev-expression: ^0.2.3
     babel-preset-carbon: ^0.5.0
