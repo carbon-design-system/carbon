@@ -11,13 +11,15 @@ import React, {
   type ForwardedRef,
   forwardRef,
   type ReactNode,
+  ElementType,
+  WeakValidationMap,
 } from 'react';
 import cx from 'classnames';
-import Link, { LinkPropTypes } from './Link';
+import Link, { LinkProps, LinkPropTypes } from './Link';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 
-interface HeaderMenuItemProps {
+type HeaderMenuItemProps<E extends ElementType> = LinkProps<E> & {
   className?: string | undefined;
   isActive?: boolean | undefined;
   isCurrentPage?: boolean | undefined;
@@ -25,9 +27,9 @@ interface HeaderMenuItemProps {
   children: ReactNode;
   role?: ComponentProps<'li'>['role'];
   tabIndex?: number | undefined;
-}
+};
 
-function HeaderMenuItemRenderFunction(
+function HeaderMenuItemRenderFunction<E extends ElementType = 'a'>(
   {
     className,
     isActive,
@@ -37,8 +39,8 @@ function HeaderMenuItemRenderFunction(
     role,
     tabIndex = 0,
     ...rest
-  }: HeaderMenuItemProps,
-  ref: ForwardedRef<HTMLAnchorElement>
+  }: HeaderMenuItemProps<E>,
+  ref: ForwardedRef<ElementType>
 ) {
   const prefix = usePrefix();
   if (isCurrentPage) {
@@ -65,7 +67,14 @@ function HeaderMenuItemRenderFunction(
   );
 }
 
-const HeaderMenuItem = forwardRef(HeaderMenuItemRenderFunction);
+const HeaderMenuItem = forwardRef(HeaderMenuItemRenderFunction) as (<
+  E extends ElementType = 'a'
+>(
+  props: HeaderMenuItemProps<E>
+) => JSX.Element) & {
+  displayName?: string;
+  propTypes?: WeakValidationMap<HeaderMenuItemProps<any>>;
+};
 
 HeaderMenuItem.displayName = 'HeaderMenuItem';
 HeaderMenuItem.propTypes = {
