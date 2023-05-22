@@ -160,6 +160,9 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      hideNoControlsWarning: true,
+    },
   },
   argTypes: {
     className: {
@@ -1019,4 +1022,76 @@ export const SideNavWLargeSideNavItems = () => (
   </>
 );
 
+const UIShellPlayground = (props) => {
+  const { isRail, enterDelayMs } = props;
+  return (
+    <SideNav
+      aria-label="Side navigation"
+      href="#main-content"
+      isRail={isRail}
+      enterDelayMs={enterDelayMs}>
+      <SideNavItems>
+        <SideNavMenu renderIcon={Fade} title="Category title">
+          <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+            Link
+          </SideNavMenuItem>
+          <SideNavMenuItem
+            aria-current="page"
+            href="https://www.carbondesignsystem.com/">
+            Link
+          </SideNavMenuItem>
+          <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+            Link
+          </SideNavMenuItem>
+        </SideNavMenu>
+        <SideNavMenu renderIcon={Fade} title="Category title">
+          <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+            Link
+          </SideNavMenuItem>
+          <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+            Link
+          </SideNavMenuItem>
+          <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+            Link
+          </SideNavMenuItem>
+        </SideNavMenu>
+        <SideNavMenu renderIcon={Fade} title="Category title">
+          <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+            Link
+          </SideNavMenuItem>
+          <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+            Link
+          </SideNavMenuItem>
+          <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+            Link
+          </SideNavMenuItem>
+        </SideNavMenu>
+        <SideNavLink
+          renderIcon={Fade}
+          href="https://www.carbondesignsystem.com/">
+          Link
+        </SideNavLink>
+        <SideNavLink
+          renderIcon={Fade}
+          href="https://www.carbondesignsystem.com/">
+          Link
+        </SideNavLink>
+      </SideNavItems>
+    </SideNav>
+  );
+};
+export const Playground = UIShellPlayground.bind({});
+Playground.argTypes = {
+  isRail: {
+    defaultValue: 'true',
+    control: {
+      type: 'boolean',
+    },
+  },
+  enterDelayMs: {
+    control: {
+      type: 'number',
+    },
+  },
+};
 SideNavWLargeSideNavItems.storyName = 'SideNav w/ large side nav items';

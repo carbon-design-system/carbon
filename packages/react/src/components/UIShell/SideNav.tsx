@@ -22,6 +22,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useWindowEvent } from '../../internal/useEvent';
+import { useDelayedState } from '../../internal/useDelayedState';
 // TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
 
@@ -43,6 +44,7 @@ interface SideNavProps extends ComponentProps<'nav'> {
   addMouseListeners?: boolean | undefined;
   onOverlayClick?: MouseEventHandler<HTMLDivElement> | undefined;
   onSideNavBlur?: () => void | undefined;
+  enterDelayMs?: number;
 }
 
 function SideNavRenderFunction(
@@ -65,28 +67,29 @@ function SideNavRenderFunction(
     addMouseListeners = true,
     onOverlayClick,
     onSideNavBlur,
+    enterDelayMs = 100,
     ...other
   }: SideNavProps,
   ref: ForwardedRef<HTMLElement>
 ) {
   const prefix = usePrefix();
   const { current: controlled } = useRef(expandedProp !== undefined);
-  const [expandedState, setExpandedState] = useState(defaultExpanded);
+  const [expandedState, setExpandedState] = useDelayedState(defaultExpanded);
   const [expandedViaHoverState, setExpandedViaHoverState] =
-    useState(defaultExpanded);
+    useDelayedState(defaultExpanded);
   const expanded = controlled ? expandedProp : expandedState;
   const sideNavRef = useRef<HTMLDivElement>(null);
   const navRef = useMergedRefs([sideNavRef, ref]);
 
   const handleToggle: typeof onToggle = (event, value = !expanded) => {
     if (!controlled) {
-      setExpandedState(value);
+      setExpandedState(value, enterDelayMs);
     }
     if (onToggle) {
       onToggle(event, value);
     }
     if (controlled || isRail) {
-      setExpandedViaHoverState(value);
+      setExpandedViaHoverState(value, enterDelayMs);
     }
   };
 
@@ -101,7 +104,7 @@ function SideNavRenderFunction(
   //   : t('carbon.sidenav.state.closed');
 
   const className = cx(customClassName, {
-    [`${prefix}--side-nav`]: true,
+    [`${prefix}--side-nav`]: false,
     [`${prefix}--side-nav--expanded`]: expanded || expandedViaHoverState,
     [`${prefix}--side-nav--collapsed`]: !expanded && isFixedNav,
     [`${prefix}--side-nav--rail`]: isRail,
@@ -174,8 +177,14 @@ function SideNavRenderFunction(
   }
 
   if (addMouseListeners && isRail) {
-    eventHandlers.onMouseEnter = () => handleToggle(true, true);
-    eventHandlers.onMouseLeave = () => handleToggle(false, false);
+    eventHandlers.onMouseEnter = () => {
+      handleToggle(true, true);
+    };
+    eventHandlers.onMouseLeave = () => {
+      setExpandedState(false);
+      setExpandedViaHoverState(false);
+      handleToggle(false, false);
+    };
   }
 
   useWindowEvent('keydown', (event: Event) => {
@@ -303,6 +312,11 @@ SideNav.propTypes = {
    * the label you want displayed or read by screen readers.
    */
   // translateById: PropTypes.func,
+
+  /**
+   * Specify the duration in milliseconds to delay before displaying the sidenavigation
+   */
+  enterDelayMs: PropTypes.number,
 };
 
 export default SideNav;
