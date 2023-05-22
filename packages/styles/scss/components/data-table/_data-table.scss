@@ -133,7 +133,6 @@
       padding-bottom: $spacing-05;
     }
 
-    th,
     td {
       vertical-align: top;
     }
@@ -605,7 +604,6 @@
     padding-bottom: $spacing-05;
   }
 
-  .#{$prefix}--data-table--xl th,
   .#{$prefix}--data-table--xl td {
     vertical-align: top;
   }
