@@ -249,7 +249,7 @@ SideNav.propTypes = {
    * If `true`, the SideNav will be open on initial render.
    */
   defaultExpanded: PropTypes.bool,
-  
+
   /**
    * Specify the duration in milliseconds to delay before displaying the sidenavigation
    */
