@@ -94,6 +94,7 @@ describe('FluidDropdown', () => {
     );
     // custom element should be rendered for the selected item
     expect(
+      // eslint-disable-next-line testing-library/no-node-access
       document.querySelector('#a-custom-element-for-selected-item')
     ).toBeDefined();
     // the title should use the normal itemToString method

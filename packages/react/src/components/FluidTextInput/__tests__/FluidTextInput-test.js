@@ -84,6 +84,7 @@ describe('FluidTextInput', () => {
         <FluidTextInput id="input-1" labelText="FluidTextInput" invalid />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const invalidIcon = container.querySelector(
         `svg.${prefix}--text-input__invalid-icon`
       );
@@ -174,6 +175,7 @@ describe('FluidTextInput', () => {
         <FluidTextInput id="input-1" labelText="FluidTextInput label" warn />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const warnIcon = container.querySelector(
         `svg.${prefix}--text-input__invalid-icon--warning`
       );
