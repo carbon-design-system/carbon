@@ -50,6 +50,7 @@ describe('DatePicker', () => {
     );
 
     expect(
+      // eslint-disable-next-line testing-library/no-node-access
       document.querySelector('.cds--date-picker--simple')
     ).toBeInTheDocument();
   });
@@ -69,6 +70,7 @@ describe('DatePicker', () => {
     );
 
     expect(
+      // eslint-disable-next-line testing-library/no-node-access
       document.querySelector('.cds--date-picker--single')
     ).toBeInTheDocument();
   });
@@ -90,6 +92,7 @@ describe('DatePicker', () => {
     );
 
     expect(
+      // eslint-disable-next-line testing-library/no-node-access
       document.querySelector('.cds--date-picker--range')
     ).toBeInTheDocument();
   });
@@ -220,10 +223,10 @@ describe('Simple date picker', () => {
         </React.Suspense>
       );
 
-      expect(
-        await screen.findByLabelText('Date Picker label')
-      ).toBeInTheDocument();
+      const labeledElement = await screen.findByLabelText('Date Picker label');
+      expect(labeledElement).toBeInTheDocument();
 
+      // eslint-disable-next-line testing-library/no-node-access
       const input = document.querySelector('.cds--date-picker__input');
 
       expect(screen.getByRole('application')).not.toHaveClass('open');
@@ -264,6 +267,7 @@ describe('Single date picker', () => {
       </DatePicker>
     );
 
+    // eslint-disable-next-line testing-library/no-node-access
     const input = document.querySelector('.cds--date-picker__input');
 
     expect(screen.getByRole('application')).not.toHaveClass('open');
@@ -367,6 +371,7 @@ describe('Date picker with minDate and maxDate', () => {
         />
       </DatePicker>
     );
+    // eslint-disable-next-line testing-library/no-node-access
     const belowMinDate = document.querySelector(
       '[aria-label="December 31, 2017"]'
     );
@@ -394,6 +399,7 @@ describe('Date picker with minDate and maxDate', () => {
       </DatePicker>
     );
 
+    // eslint-disable-next-line testing-library/no-node-access
     const aboveMaxDate = document.querySelector(
       '[aria-label="January 4, 2018"]'
     );

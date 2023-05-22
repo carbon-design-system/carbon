@@ -13,9 +13,7 @@ import {
   CaretLeft,
   OverflowMenuHorizontal,
 } from '@carbon/icons-react';
-import Button from '../Button';
 import { IconButton } from '../IconButton';
-import * as FeatureFlags from '@carbon/feature-flags';
 import { usePrefix } from '../../internal/usePrefix';
 
 const translationIds = {
@@ -72,31 +70,17 @@ function getCuts(page, totalItems, itemsThatFit, splitPoint = null) {
 
 function DirectionButton({ direction, label, disabled, onClick }) {
   const prefix = usePrefix();
-  const icon = direction === 'forward' ? CaretRight : CaretLeft;
 
   return (
     <li className={`${prefix}--pagination-nav__list-item`}>
-      {FeatureFlags.enabled('enable-v11-release') ? (
-        <IconButton
-          align="bottom"
-          disabled={disabled}
-          kind="ghost"
-          label={label}
-          onClick={onClick}>
-          {direction === 'forward' ? <CaretRight /> : <CaretLeft />}
-        </IconButton>
-      ) : (
-        <Button
-          disabled={disabled}
-          renderIcon={icon}
-          kind="ghost"
-          hasIconOnly
-          iconDescription={label}
-          tooltipAlignment="center"
-          tooltipPosition="bottom"
-          onClick={onClick}
-        />
-      )}
+      <IconButton
+        align="bottom"
+        disabled={disabled}
+        kind="ghost"
+        label={label}
+        onClick={onClick}>
+        {direction === 'forward' ? <CaretRight /> : <CaretLeft />}
+      </IconButton>
     </li>
   );
 }

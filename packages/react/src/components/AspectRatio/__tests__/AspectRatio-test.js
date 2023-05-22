@@ -49,9 +49,13 @@ describe('AspectRatio', () => {
       const ratios = ['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1'];
 
       ratios.forEach((ratio) => {
-        const { container } = render(<AspectRatio ratio={ratio} />);
+        render(
+          <AspectRatio ratio={ratio} data-testid={`aspect-ratio ${ratio}`} />
+        );
 
-        expect(container.firstChild).toHaveClass(`cds--aspect-ratio--${ratio}`);
+        expect(screen.getByTestId(`aspect-ratio ${ratio}`)).toHaveClass(
+          `cds--aspect-ratio--${ratio}`
+        );
       });
     });
   });
