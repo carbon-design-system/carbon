@@ -25,5 +25,7 @@ function OverflowMenu(props) {
   );
 }
 
+OverflowMenu.displayName = 'OverflowMenu';
+
 export default OverflowMenu;
 export { OverflowMenu };
