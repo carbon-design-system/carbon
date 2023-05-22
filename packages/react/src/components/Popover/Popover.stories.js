@@ -15,8 +15,6 @@ import { default as Checkbox } from '../Checkbox';
 import mdx from './Popover.mdx';
 import { Settings } from '@carbon/icons-react';
 import { keys, match } from '../../internal/keyboard';
-import Button from '../Button';
-import { ThumbsUp } from '@carbon/icons-react';
 
 const prefix = 'cds';
 
