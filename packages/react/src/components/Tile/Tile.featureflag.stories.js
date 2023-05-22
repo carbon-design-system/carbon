@@ -20,12 +20,12 @@ import {
 import TileGroup from '../TileGroup/TileGroup';
 import { Layer } from '../Layer';
 import './tile-story.scss';
-import mdx from './ExperimentalTile.mdx';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
 
 export default {
-  title: 'Experimental/Improved Contrast Tile',
+  title: 'Experimental/Feature Flags/Tile',
   component: Tile,
   subcomponents: {
     ClickableTile,
@@ -36,11 +36,6 @@ export default {
     TileAboveTheFoldContent,
     TileBelowTheFoldContent,
   },
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
   argTypes: {
     light: {
       table: {
@@ -48,68 +43,107 @@ export default {
       },
     },
   },
+  decorators: [
+    (Story) => (
+      <WithFeatureFlags>
+        <Story />
+      </WithFeatureFlags>
+    ),
+  ],
 };
 
-const experimentalClassname = 'experimental-tile-contrast';
+const experimentalClassname = 'experimental-tile';
 
-export const Clickable = () => {
+export const Clickable = (args) => {
   return (
     <div className={experimentalClassname}>
       <ClickableTile
         id="clickable-tile-1"
-        href="https://www.carbondesignsystem.com/">
+        href="https://www.carbondesignsystem.com/"
+        {...args}>
         Clickable Tile
       </ClickableTile>
     </div>
   );
 };
 
+Clickable.argTypes = {
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+};
+
 export const ClickableWithLayer = () => {
   return (
-    <div className={experimentalClassname}>
-      <WithLayer>
-        {(layer) => (
+    <WithLayer>
+      {(layer) => (
+        <div className={experimentalClassname}>
           <ClickableTile
             id={`clickable-tile-${layer}`}
             href="https://www.carbondesignsystem.com/">
             Clickable Tile
           </ClickableTile>
-        )}
-      </WithLayer>
-    </div>
+        </div>
+      )}
+    </WithLayer>
   );
 };
 
-export const Selectable = () => {
+export const Selectable = (args) => {
   return (
     <div className={experimentalClassname}>
-      <SelectableTile id="selectable-tile-1" name="tiles" value="selectable">
+      <SelectableTile
+        id="selectable-tile-1"
+        name="tiles"
+        value="selectable"
+        {...args}>
         Selectable
       </SelectableTile>
     </div>
   );
 };
 
-export const MultiSelect = () => {
+Selectable.argTypes = {
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+};
+
+export const MultiSelect = (args) => {
   return (
     <div
       role="group"
       aria-label="selectable tiles"
       className={experimentalClassname}>
-      <SelectableTile id="selectable-tile-1" name="tiles">
+      <SelectableTile id="selectable-tile-1" name="tiles" {...args}>
         Option 1
       </SelectableTile>
-      <SelectableTile id="selectable-tile-2" name="tiles">
+      <SelectableTile id="selectable-tile-2" name="tiles" {...args}>
         Option 2
       </SelectableTile>
-      <SelectableTile id="selectable-tile-3" name="tiles">
+      <SelectableTile id="selectable-tile-3" name="tiles" {...args}>
         Option 3
       </SelectableTile>
     </div>
   );
 };
 
-export const Radio = () => {
+MultiSelect.argTypes = {
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+};
+
+export const Radio = (args) => {
   return (
     <div className={experimentalClassname}>
       <TileGroup
@@ -119,16 +153,18 @@ export const Radio = () => {
         <RadioTile
           id="radio-tile-1"
           value="standard"
-          style={{ marginBottom: '.5rem' }}>
+          style={{ marginBottom: '.5rem' }}
+          {...args}>
           Option 1
         </RadioTile>
         <RadioTile
           id="radio-tile-2"
           value="default-selected"
-          style={{ marginBottom: '.5rem' }}>
+          style={{ marginBottom: '.5rem' }}
+          {...args}>
           Option 2
         </RadioTile>
-        <RadioTile id="radio-tile-3" value="selected">
+        <RadioTile id="radio-tile-3" value="selected" {...args}>
           Option 3
         </RadioTile>
       </TileGroup>
@@ -136,11 +172,20 @@ export const Radio = () => {
   );
 };
 
+Radio.argTypes = {
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+};
+
 export const RadioWithLayer = () => {
   return (
-    <div className={experimentalClassname}>
-      <WithLayer>
-        {(layer) => (
+    <WithLayer>
+      {(layer) => (
+        <div className={experimentalClassname}>
           <TileGroup
             defaultSelected="default-selected"
             legend="Radio Tile Group"
@@ -155,9 +200,9 @@ export const RadioWithLayer = () => {
               Option 2
             </RadioTile>
           </TileGroup>
-        )}
-      </WithLayer>
-    </div>
+        </div>
+      )}
+    </WithLayer>
   );
 };
 
