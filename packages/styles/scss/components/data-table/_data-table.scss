@@ -135,6 +135,10 @@
       &.#{$prefix}--table-column-menu {
         padding-top: $spacing-03;
       }
+
+      &.#{$prefix}--table-column-checkbox {
+        padding-top: rem(13px);
+      }
     }
 
     td {
