@@ -1,7 +1,7 @@
 import { Button } from '@carbon/react';
 import React from 'react';
 
-function App() {
+export default function App() {
   return (
     <div>
       <Button>Button with custom theme</Button>
@@ -16,5 +16,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
