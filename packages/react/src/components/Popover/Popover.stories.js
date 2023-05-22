@@ -295,31 +295,3 @@ export const AutoAlign = () => {
     </div>
   );
 };
-
-export const TestIssue = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  return (
-    <div style={{ marginTop: '100px' }}>
-      <Popover open={isOpen} align="top">
-        <button
-          type="button"
-          className="popover-trigger"
-          onClick={() => {
-            setIsOpen(!isOpen);
-          }}>
-          test button
-        </button>
-        <PopoverContent>
-          <div style={{ background: '#eee', padding: '16px' }}>
-            <Button
-              kind="ghost"
-              renderIcon={ThumbsUp}
-              hasIconOnly
-              iconDescription="Icon Description"
-            />
-          </div>
-        </PopoverContent>
-      </Popover>
-    </div>
-  );
-};
