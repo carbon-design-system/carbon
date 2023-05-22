@@ -41,9 +41,9 @@
     position: absolute;
     top: 50%;
     right: 1rem;
-
-    width: 16px;
-    height: 16px;
+    display: flex;
+    height: 100%;
+    place-items: center;
     // top/transform used to center invalid icon in IE11
     transform: translateY(-50%);
   }

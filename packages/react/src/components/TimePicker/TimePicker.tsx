@@ -147,7 +147,7 @@ const TimePicker: TimePickerComponent = React.forwardRef<
     id,
     invalidText = 'Invalid time format.',
     invalid = false,
-    warningText = 'Warning time format.',
+    warningText = 'Warning message.',
     warning = false,
     labelText,
     light = false,
@@ -307,15 +307,17 @@ const TimePicker: TimePickerComponent = React.forwardRef<
             {...readOnlyProps}
           />
           {error && invalid ? (
-            // <i className={`${prefix}--time-picker__error__icon`}>X</i>
-            // <i className={`${prefix}--warning-notification__icon`}></i>
             <div className={`${prefix}--time-picker__error__icon`}>
-              <WarningFilled className={`${prefix}--checkbox__invalid-icon`} />
+              <WarningFilled
+                className={`${prefix}--checkbox__invalid-icon`}
+                size={16}
+              />
             </div>
           ) : error && warning ? (
             <div className={`${prefix}--time-picker__error__icon`}>
               <WarningAltFilled
                 className={`${prefix}--text-input__invalid-icon--warning`}
+                size={16}
               />
             </div>
           ) : null}
@@ -435,7 +437,7 @@ TimePicker.propTypes = {
   value: PropTypes.string,
 
   /**
-   * Specify a warning
+   * Specify a warning message
    */
   warning: PropTypes.bool,
 
