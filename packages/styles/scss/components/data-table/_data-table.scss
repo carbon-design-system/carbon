@@ -131,6 +131,10 @@
       th:not(.#{$prefix}--table-expand):not(.#{$prefix}--table-sort__header) {
       padding-top: $spacing-05;
       padding-bottom: $spacing-05;
+
+      &.#{$prefix}--table-column-menu {
+        padding-top: $spacing-03;
+      }
     }
 
     td {
