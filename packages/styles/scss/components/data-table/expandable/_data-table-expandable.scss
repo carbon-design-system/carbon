@@ -231,6 +231,11 @@
     padding-top: $spacing-01;
   }
 
+  .#{$prefix}--data-table--top-aligned.#{$prefix}--data-table--md
+    .#{$prefix}--table-expand__button {
+    padding-top: $spacing-02;
+  }
+
   .#{$prefix}--table-expand__button:focus {
     box-shadow: inset 0 0 0 2px $focus;
     outline: none;
