@@ -54,7 +54,7 @@ export interface TimePickerProps
   invalidText?: React.ReactNode;
 
   /**
-   * Specify a warning
+   * Specify a warning message
    */
   warning?: boolean;
 
@@ -241,10 +241,6 @@ const TimePicker: TimePickerComponent = React.forwardRef<
     </label>
   ) : null;
 
-  // const error = invalid ? (
-  //   <div className={`${prefix}--form-requirement`}>{invalidText}</div>
-  // ) : null;
-
   const error = invalid || warning;
 
   function getInternalPickerSelects() {
@@ -306,28 +302,28 @@ const TimePicker: TimePickerComponent = React.forwardRef<
             {...rest}
             {...readOnlyProps}
           />
-          {error && invalid ? (
+          {error ? (
             <div className={`${prefix}--time-picker__error__icon`}>
-              <WarningFilled
-                className={`${prefix}--checkbox__invalid-icon`}
-                size={16}
-              />
-            </div>
-          ) : error && warning ? (
-            <div className={`${prefix}--time-picker__error__icon`}>
-              <WarningAltFilled
-                className={`${prefix}--text-input__invalid-icon--warning`}
-                size={16}
-              />
+              {invalid ? (
+                <WarningFilled
+                  className={`${prefix}--checkbox__invalid-icon`}
+                  size={16}
+                />
+              ) : (
+                <WarningAltFilled
+                  className={`${prefix}--text-input__invalid-icon--warning`}
+                  size={16}
+                />
+              )}
             </div>
           ) : null}
         </div>
         {getInternalPickerSelects()}
       </div>
-      {error && invalid ? (
-        <div className={`${prefix}--form-requirement`}>{invalidText}</div>
-      ) : (
-        <div className={`${prefix}--form-requirement`}>{warningText}</div>
+      {error && (
+        <div className={`${prefix}--form-requirement`}>
+          {invalidText ? invalidText : warningText}
+        </div>
       )}
     </div>
   );
