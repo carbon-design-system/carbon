@@ -543,7 +543,9 @@
     padding-bottom: rem(6px);
   }
 
-  .#{$prefix}--data-table.#{$prefix}--data-table--sm
+  .#{$prefix}--data-table.#{$prefix}--data-table--sm:not(
+      .#{$prefix}--data-table--top-aligned
+    )
     .#{$prefix}--table-column-checkbox {
     padding-top: rem(3px);
     padding-bottom: rem(3px);
@@ -573,7 +575,9 @@
     padding-bottom: rem(6px);
   }
 
-  .#{$prefix}--data-table.#{$prefix}--data-table--md
+  .#{$prefix}--data-table.#{$prefix}--data-table--md:not(
+      .#{$prefix}--data-table--top-aligned
+    )
     .#{$prefix}--table-column-checkbox {
     padding-top: rem(3px);
     padding-bottom: rem(3px);
