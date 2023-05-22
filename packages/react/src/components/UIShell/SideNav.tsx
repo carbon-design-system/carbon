@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, {
-  useState,
   useRef,
   type ForwardedRef,
   type ComponentProps,
@@ -250,6 +249,11 @@ SideNav.propTypes = {
    * If `true`, the SideNav will be open on initial render.
    */
   defaultExpanded: PropTypes.bool,
+  
+  /**
+   * Specify the duration in milliseconds to delay before displaying the sidenavigation
+   */
+  enterDelayMs: PropTypes.number,
 
   /**
    * If `true`, the SideNav will be expanded, otherwise it will be collapsed.
@@ -312,11 +316,6 @@ SideNav.propTypes = {
    * the label you want displayed or read by screen readers.
    */
   // translateById: PropTypes.func,
-
-  /**
-   * Specify the duration in milliseconds to delay before displaying the sidenavigation
-   */
-  enterDelayMs: PropTypes.number,
 };
 
 export default SideNav;
