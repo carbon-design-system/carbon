@@ -529,7 +529,7 @@ const DatePicker = React.forwardRef(function DatePicker(
       return;
     }
 
-    const onHook = (_electedDates, _dateStr, instance, prefix) => {
+    const onHook = (_electedDates, _dateStr, instance) => {
       updateClassNames(instance, prefix);
       if (startInputField?.current) {
         startInputField.current.readOnly = readOnly;
@@ -609,7 +609,7 @@ const DatePicker = React.forwardRef(function DatePicker(
       onReady: onHook,
       onMonthChange: onHook,
       onYearChange: onHook,
-      onOpen: (...args: [any, string, string, string]) => {
+      onOpen: (...args: [any, string, string]) => {
         onHook(...args);
         savedOnOpen(...args);
       },
