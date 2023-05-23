@@ -315,6 +315,11 @@ function MyComponent({ className, ...rest }) {
 }
 ```
 
+**We highly encourage consuming applications to _avoid using `data-testid`
+unless absolutely necessary_ and instead use more stable
+[relative queries focused on accessible roles](https://testing-library.com/docs/queries/about#priority)
+or HTML5 and ARIA semantics for selecting elements for testing.**
+
 #### Authoring dynamic/inline styles
 
 It's increasingly common for applications to use a Content Security Policy (CSP)
