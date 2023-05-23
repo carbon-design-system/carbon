@@ -32,6 +32,7 @@ describe('PaginationNav', () => {
       render(<PaginationNav totalItems={10} itemsShown={4} />);
 
       expect(
+        // eslint-disable-next-line testing-library/no-node-access
         document.querySelectorAll('.cds--pagination-nav__page').length
       ).toBe(4);
     });
@@ -68,6 +69,7 @@ describe('PaginationNav', () => {
       render(<PaginationNav totalItems={5} />);
 
       expect(
+        // eslint-disable-next-line testing-library/no-node-access
         document.querySelectorAll('.cds--pagination-nav__page').length
       ).toBe(5);
     });

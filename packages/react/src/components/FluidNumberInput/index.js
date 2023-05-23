@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './FluidNumberInput';
-export FluidNumberInput from './FluidNumberInput';
+export { default, default as FluidNumberInput } from './FluidNumberInput';
 
 export { default as FluidNumberInputSkeleton } from './FluidNumberInput.Skeleton';
