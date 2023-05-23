@@ -3340,6 +3340,9 @@ Map {
       "tabIndex": "0",
     },
     "propTypes": Object {
+      "aria-describedby": Object {
+        "type": "string",
+      },
       "iconDescription": Object {
         "type": "string",
       },
