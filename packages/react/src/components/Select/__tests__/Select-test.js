@@ -11,7 +11,6 @@ import SelectItem from '../../SelectItem';
 import SelectSkeleton from '../../Select/Select.Skeleton';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
-import { FeatureFlags } from '../../FeatureFlags';
 
 const prefix = 'cds';
 
@@ -58,9 +57,7 @@ describe('Select', () => {
 
     it('should support a custom `className` prop on the outermost element', () => {
       const { container } = render(
-        <FeatureFlags flags={{ 'enable-v11-release': true }}>
-          <Select id="select" labelText="Select" className="custom-class" />
-        </FeatureFlags>
+        <Select id="select" labelText="Select" className="custom-class" />
       );
 
       expect(container.firstChild).toHaveClass('custom-class');
@@ -118,6 +115,7 @@ describe('Select', () => {
         <Select id="select" labelText="Select" inline />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const selectWrapper = container.querySelector(`.${prefix}--select`);
       expect(selectWrapper).toHaveClass(`${prefix}--select--inline`);
     });
@@ -127,7 +125,9 @@ describe('Select', () => {
         <Select id="select" labelText="Select" invalid />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const selectWrapper = container.querySelector(`.${prefix}--select`);
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const selectInput = container.querySelector(`.${prefix}--select-input`);
 
       expect(selectWrapper).toHaveClass(`${prefix}--select--invalid`);
@@ -162,6 +162,7 @@ describe('Select', () => {
         <Select id="select" labelText="Select" noLabel />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const selectWrapper = container.querySelector('label');
 
       expect(selectWrapper).not.toBeInTheDocument();
@@ -217,6 +218,7 @@ describe('Select', () => {
         <Select id="select" labelText="Select" warn />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const selectWrapper = container.querySelector(`.${prefix}--select`);
 
       expect(selectWrapper).toHaveClass(`${prefix}--select--warning`);
@@ -326,6 +328,7 @@ describe('Select', () => {
     it('should render a skeleton state', () => {
       const { container } = render(<SelectSkeleton />);
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const selectWrapper = container.querySelector(`.${prefix}--select`);
 
       expect(selectWrapper).toHaveClass(`${prefix}--skeleton`);

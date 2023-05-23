@@ -25,10 +25,10 @@ describe('TextArea', () => {
     });
 
     it('should support a custom `className` prop on the outermost element', () => {
-      render(
+      const { container } = render(
         <TextArea className="custom-class" id="testing" labelText="testLabel" />
       );
-      expect(screen.getByLabelText('testLabel')).toHaveClass('custom-class');
+      expect(container.firstChild).toHaveClass('custom-class');
     });
 
     it('should have default cols settings as expected', () => {
@@ -165,6 +165,7 @@ describe('TextArea', () => {
       );
       expect(screen.getByText('This is helper text.').tagName).toBe('SPAN');
       expect(
+        // eslint-disable-next-line testing-library/no-node-access
         screen.getByText('This is helper text.').parentElement
       ).toHaveClass(`${prefix}--form__helper-text`);
     });
@@ -191,7 +192,9 @@ describe('TextArea', () => {
       expect(
         screen
           .getByText('testLabel')
+          // eslint-disable-next-line testing-library/no-node-access
           .closest(`.${prefix}--text-area__label-wrapper`)
+          // eslint-disable-next-line testing-library/no-node-access
           .getElementsByClassName(`${prefix}--label`).length
       ).toEqual(1);
     });
@@ -204,7 +207,9 @@ describe('TextArea', () => {
       expect(
         screen
           .getByText('testLabel')
+          // eslint-disable-next-line testing-library/no-node-access
           .closest(`.${prefix}--text-area__label-wrapper`)
+          // eslint-disable-next-line testing-library/no-node-access
           .getElementsByClassName(`${prefix}--label`).length
       ).toEqual(1);
     });

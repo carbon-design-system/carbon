@@ -26,9 +26,11 @@ describe('NumberInputSkeleton', () => {
     const { container, rerender } = render(
       <NumberInputSkeleton className="custom-class" />
     );
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     expect(container.querySelector('.cds--label')).toBeDefined();
 
     rerender(<NumberInputSkeleton className="custom-class" hideLabel />);
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     expect(container.querySelector('.cds--label')).toBeNull();
   });
 });

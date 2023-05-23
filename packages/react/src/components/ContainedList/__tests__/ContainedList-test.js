@@ -43,6 +43,7 @@ function TestComponent({ list, item }) {
 }
 
 beforeEach(() => {
+  // eslint-disable-next-line testing-library/no-render-in-setup
   wrapper = render(<TestComponent />);
 });
 
@@ -58,7 +59,9 @@ async function a11y(label) {
 
 describe('ContainedList', () => {
   it('list and label ids match', () => {
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     const list = wrapper.getByRole('list');
+    // eslint-disable-next-line testing-library/no-node-access
     const label = wrapper.container.querySelector(
       `.${prefix}--contained-list__label`
     );
@@ -67,6 +70,7 @@ describe('ContainedList', () => {
   });
 
   it('renders props.label', () => {
+    // eslint-disable-next-line testing-library/no-node-access
     const label = wrapper.container.querySelector(
       `.${prefix}--contained-list__label`
     );
@@ -97,6 +101,7 @@ describe('ContainedList', () => {
     );
 
     expect(screen.getByTestId('test-id')).toBeInTheDocument();
+    // eslint-disable-next-line testing-library/no-node-access
     expect(screen.getByRole('search').parentElement).toHaveClass(
       `${prefix}--contained-list__action`
     );
@@ -133,8 +138,10 @@ describe('ContainedList', () => {
 
 describe('ContainedListItem', () => {
   it('renders props.children', () => {
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     const content = wrapper.getByRole('listitem');
 
+    // eslint-disable-next-line testing-library/no-node-access
     expect(content).toHaveTextContent(defaultProps.item.children);
   });
 
@@ -142,6 +149,7 @@ describe('ContainedListItem', () => {
     const className = 'some-class';
     wrapper.rerender(<TestComponent item={{ className }} />);
 
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     expect(wrapper.getByRole('listitem')).toHaveClass(className);
   });
 
@@ -149,10 +157,12 @@ describe('ContainedListItem', () => {
     wrapper.rerender(
       <TestComponent item={{ action: <div data-testid="action" /> }} />
     );
+    // eslint-disable-next-line testing-library/no-node-access
     const contentEl = wrapper.container.querySelector(
       `.${prefix}--contained-list-item__content`
     );
 
+    // eslint-disable-next-line testing-library/no-node-access
     expect(contentEl.nextSibling.firstChild.dataset['testid']).toBe('action');
   });
 
@@ -161,6 +171,7 @@ describe('ContainedListItem', () => {
       <TestComponent item={{ renderIcon: () => <svg data-testid="svg" /> }} />
     );
 
+    // eslint-disable-next-line testing-library/no-node-access
     expect(wrapper.container.querySelector('svg').dataset['testid']).toBe(
       'svg'
     );
@@ -168,10 +179,12 @@ describe('ContainedListItem', () => {
 
   describe('interactive', () => {
     beforeEach(() => {
+      // eslint-disable-next-line testing-library/no-render-in-setup
       wrapper.rerender(<TestComponent item={{ onClick: () => {} }} />);
     });
 
     it('renders content as button', () => {
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       const content = wrapper.getByRole('listitem').firstChild;
 
       expect(content.tagName).toBe('BUTTON');

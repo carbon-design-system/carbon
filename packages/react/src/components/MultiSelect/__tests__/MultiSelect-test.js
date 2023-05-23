@@ -43,10 +43,12 @@ describe('MultiSelect', () => {
       <MultiSelect id="test" label={label} items={items} />
     );
 
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     const labelNode = getByText(container, label);
     expect(isElementVisible(labelNode)).toBe(true);
 
     expect(
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeNull();
   });
@@ -58,6 +60,7 @@ describe('MultiSelect', () => {
       <MultiSelect id="test" label={label} items={items} />
     );
 
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     const labelNode = getByText(container, label);
     await userEvent.click(labelNode);
 
@@ -103,13 +106,16 @@ describe('MultiSelect', () => {
       <MultiSelect id="test" label={label} items={items} />
     );
 
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     const labelNode = getByText(container, label);
     await userEvent.click(labelNode);
 
     const [item] = items;
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     const itemNode = getByText(container, item.label);
 
     expect(
+      // eslint-disable-next-line testing-library/no-node-access
       document.querySelector('[aria-selected="true"][role="option"]')
     ).toBeNull();
 
@@ -132,12 +138,14 @@ describe('MultiSelect', () => {
     await userEvent.keyboard('[Space]');
 
     expect(
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeInstanceOf(HTMLElement);
 
     await userEvent.keyboard('[Escape]');
 
     expect(
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeNull();
   });
@@ -148,21 +156,25 @@ describe('MultiSelect', () => {
     const { container } = render(
       <MultiSelect id="test" label={label} items={items} />
     );
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     const labelNode = getByText(container, label);
 
     expect(
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeFalsy();
 
     await userEvent.click(labelNode);
 
     expect(
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeTruthy();
 
     await userEvent.click(document.body);
 
     expect(
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeFalsy();
   });
@@ -178,6 +190,7 @@ describe('MultiSelect', () => {
     await userEvent.keyboard('[Space]');
 
     const [item] = items;
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     const itemNode = getByText(container, item.label);
 
     expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'false');
@@ -194,22 +207,27 @@ describe('MultiSelect', () => {
     const { container } = render(
       <MultiSelect id="test" label={label} items={items} />
     );
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     const labelNode = getByText(container, label);
     await userEvent.click(labelNode);
 
     const [item] = items;
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     const itemNode = getByText(container, item.label);
     await userEvent.click(itemNode);
 
     expect(
+      // eslint-disable-next-line testing-library/no-node-access
       document.querySelector('[aria-label="Clear all selected items"]')
     ).toBeTruthy();
 
     await userEvent.click(
+      // eslint-disable-next-line testing-library/no-node-access
       document.querySelector('[aria-label="Clear all selected items"]')
     );
 
     expect(
+      // eslint-disable-next-line testing-library/no-node-access
       document.querySelector('[aria-label="Clear all selected items"]')
     ).toBeFalsy();
   });
@@ -220,10 +238,12 @@ describe('MultiSelect', () => {
     const { container } = render(
       <MultiSelect id="test" disabled label={label} items={items} />
     );
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     const labelNode = getByText(container, label);
     await userEvent.click(labelNode);
 
     expect(
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeFalsy();
   });
@@ -234,10 +254,12 @@ describe('MultiSelect', () => {
     const { container } = render(
       <MultiSelect id="test" readOnly={true} label={label} items={items} />
     );
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     const labelNode = getByText(container, label);
     await userEvent.click(labelNode);
 
     expect(
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeFalsy();
   });
@@ -256,14 +278,17 @@ describe('MultiSelect', () => {
       );
 
       expect(
+        // eslint-disable-next-line testing-library/no-node-access
         document.querySelector('[aria-label="Clear all selected items"]')
       ).toBeTruthy();
 
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       const labelNode = getByText(container, label);
 
       await userEvent.click(labelNode);
 
       expect(
+        // eslint-disable-next-line testing-library/no-node-access
         document.querySelector('[data-contained-checkbox-state="true"]')
       ).toBeInstanceOf(HTMLElement);
     });
@@ -281,6 +306,7 @@ describe('MultiSelect', () => {
         />
       );
 
+      // eslint-disable-next-line testing-library/no-node-access
       expect(document.getElementById('custom-id')).toBeTruthy();
     });
 
@@ -301,14 +327,20 @@ describe('MultiSelect', () => {
           itemToString={(item) => (item ? item.text : '')}
         />
       );
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       const labelNode = getByText(container, label);
 
       await userEvent.click(labelNode);
 
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       expect(getByText(container, 'joey')).toBeInTheDocument();
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       expect(getByText(container, 'johnny')).toBeInTheDocument();
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       expect(getByText(container, 'tommy')).toBeInTheDocument();
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       expect(getByText(container, 'dee dee')).toBeInTheDocument();
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       expect(getByText(container, 'marky')).toBeInTheDocument();
     });
 
@@ -337,10 +369,13 @@ describe('MultiSelect', () => {
         />
       );
 
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       const labelNode = getByText(container, label);
       await userEvent.click(labelNode);
 
+      // eslint-disable-next-line testing-library/no-node-access
       expect(document.querySelector('.test-element')).toBeTruthy();
+      // eslint-disable-next-line testing-library/no-node-access
       expect(document.querySelector('span[role="img"]')).toBeTruthy();
     });
 
@@ -375,10 +410,12 @@ describe('MultiSelect', () => {
         />
       );
 
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       const labelNode = getByText(container, label);
       await userEvent.click(labelNode);
 
       const [item] = items;
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       const itemNode = getByText(container, item.label);
 
       await userEvent.click(itemNode);
@@ -400,8 +437,10 @@ describe('MultiSelect', () => {
         />
       );
 
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       expect(getByText(container, 'Fool of a Took!')).toBeInTheDocument();
 
+      // eslint-disable-next-line testing-library/no-node-access
       expect(document.querySelector('[data-invalid="true"')).toBeInstanceOf(
         HTMLElement
       );
@@ -421,15 +460,18 @@ describe('MultiSelect', () => {
       );
 
       // click the label to open the multiselect options menu
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       const labelNode = getByText(container, label);
       await userEvent.click(labelNode);
 
       // click the third option down in the list
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       const itemNode = getByText(container, thirdItem.label);
       await userEvent.click(itemNode);
 
       // get an array of all the options
       const optionsArray = Array.from(
+        // eslint-disable-next-line testing-library/no-node-access
         document.querySelectorAll('[role="option"]')
       );
 

@@ -9,7 +9,6 @@ import React from 'react';
 import FluidTextArea from '../FluidTextArea';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
-import { FeatureFlags } from '../../FeatureFlags';
 
 const prefix = 'cds';
 
@@ -33,13 +32,11 @@ describe('FluidTextArea', () => {
 
     it('should support a custom `className` prop on the outermost element', () => {
       const { container } = render(
-        <FeatureFlags flags={{ 'enable-v11-release': true }}>
-          <FluidTextArea
-            id="input-1"
-            labelText="FluidTextArea label"
-            className="custom-class"
-          />
-        </FeatureFlags>
+        <FluidTextArea
+          id="input-1"
+          labelText="FluidTextArea label"
+          className="custom-class"
+        />
       );
 
       expect(container.firstChild).toHaveClass('custom-class');
@@ -92,6 +89,7 @@ describe('FluidTextArea', () => {
         />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const invalidIcon = container.querySelector(
         `svg.${prefix}--text-area__invalid-icon`
       );

@@ -26,8 +26,8 @@ describe('ButtonSkeleton', () => {
 
   describe('link variant', () => {
     it('should render an <a> when `href` is passed as a prop', () => {
-      const { container } = render(<ButtonSkeleton href="/" />);
-      expect(container.firstChild.tagName).toBe('A');
+      render(<ButtonSkeleton href="/" />);
+      expect(screen.getByRole('button').tagName).toBe('A');
     });
 
     it('should render with [role="button"]', () => {
