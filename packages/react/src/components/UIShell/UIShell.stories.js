@@ -1083,7 +1083,7 @@ const UIShellPlayground = (props) => {
 export const Playground = UIShellPlayground.bind({});
 Playground.argTypes = {
   isRail: {
-    defaultValue: 'true',
+    defaultValue: true,
     control: {
       type: 'boolean',
     },

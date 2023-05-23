@@ -103,12 +103,14 @@ function SideNavRenderFunction(
   //   : t('carbon.sidenav.state.closed');
 
   const className = cx(customClassName, {
-    [`${prefix}--side-nav`]: false,
+    [`${prefix}--side-nav`]: true,
     [`${prefix}--side-nav--expanded`]: expanded || expandedViaHoverState,
     [`${prefix}--side-nav--collapsed`]: !expanded && isFixedNav,
     [`${prefix}--side-nav--rail`]: isRail,
     [`${prefix}--side-nav--ux`]: isChildOfHeader,
     [`${prefix}--side-nav--hidden`]: !isPersistent,
+    [`${prefix}--cds--side-nav--expand-on-hover`]:
+      expanded || expandedViaHoverState,
   });
 
   const overlayClassName = cx({
@@ -145,7 +147,12 @@ function SideNavRenderFunction(
   const eventHandlers: Partial<
     Pick<
       ComponentProps<'nav'>,
-      'onFocus' | 'onBlur' | 'onKeyDown' | 'onMouseEnter' | 'onMouseLeave'
+      | 'onFocus'
+      | 'onBlur'
+      | 'onKeyDown'
+      | 'onMouseEnter'
+      | 'onMouseLeave'
+      | 'onClick'
     >
   > = {};
 
@@ -183,6 +190,12 @@ function SideNavRenderFunction(
       setExpandedState(false);
       setExpandedViaHoverState(false);
       handleToggle(false, false);
+    };
+    eventHandlers.onClick = () => {
+      //if delay is enabled, and user intentionally clicks it to see it expanded immediately
+      setExpandedState(true);
+      setExpandedViaHoverState(true);
+      handleToggle(true, true);
     };
   }
 

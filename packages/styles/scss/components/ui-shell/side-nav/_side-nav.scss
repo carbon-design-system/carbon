@@ -68,7 +68,7 @@
     width: 0;
   }
 
-  .#{$prefix}--side-nav.#{$prefix}--side-nav--rail:not(
+  .#{$prefix}--side-nav.#{$prefix}--side-nav--rail.#{prefix}--cds--side-nav--expand-on-hover:not(
       .#{$prefix}--side-nav--fixed
     ):hover,
   .#{$prefix}--side-nav--expanded {
