@@ -571,7 +571,9 @@ class OverflowMenu extends Component {
 
     return (
       <ClickListener onClickOutside={this.handleClickOutside}>
-        <span className={`${prefix}--overflow-menu__wrapper`}>
+        <span
+          className={`${prefix}--overflow-menu__wrapper`}
+          aria-owns={open ? menuBodyId : null}>
           <IconButton
             {...other}
             type="button"
