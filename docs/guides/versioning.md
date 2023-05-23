@@ -279,7 +279,7 @@ exhaused.
 
 We are aware that consumers relying on these in their tests will be impacted
 from any modifications to their placement. For this reason we'll always aim to
-contain any of these changes behind a feature flag or major version bump,but
+contain any of these changes behind a feature flag or major version bump, but
 under some circumstances the node that this is applied to may change across
 minor versions. In these cases we will make a strong effort to loudly
 communicate the change to notify teams as well as provide automated tooling
