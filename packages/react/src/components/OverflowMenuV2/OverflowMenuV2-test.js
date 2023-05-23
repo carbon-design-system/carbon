@@ -24,6 +24,7 @@ describe('OverflowMenu', () => {
       </OverflowMenuV2>
     );
 
+    // eslint-disable-next-line testing-library/no-node-access
     const ul = document.querySelector('ul');
     expect(screen.getByRole('button')).toHaveAttribute(
       'aria-expanded',
@@ -48,6 +49,7 @@ describe('OverflowMenu', () => {
     await userEvent.type(screen.getByRole('button'), 'enter');
     expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
 
+    // eslint-disable-next-line testing-library/no-node-access
     const ul = document.querySelector('ul');
     expect(ul).toBeInTheDocument();
   });

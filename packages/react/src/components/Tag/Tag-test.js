@@ -34,6 +34,7 @@ describe('Tag', () => {
         {children}
       </Tag>
     );
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const button = container.querySelector('[aria-labelledby]');
     const accessibilityLabel = button.getAttribute('aria-labelledby');
     // This check would mirror our "Accessibility label must contain at least all of visible label"

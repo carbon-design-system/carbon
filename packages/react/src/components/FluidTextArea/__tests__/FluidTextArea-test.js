@@ -89,6 +89,7 @@ describe('FluidTextArea', () => {
         />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const invalidIcon = container.querySelector(
         `svg.${prefix}--text-area__invalid-icon`
       );
