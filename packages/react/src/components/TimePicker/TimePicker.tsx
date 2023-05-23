@@ -289,7 +289,7 @@ const TimePicker: TimePickerComponent = React.forwardRef<
             {...rest}
             {...readOnlyProps}
           />
-          {invalid || warning ? (
+          {(invalid || warning) && (
             <div className={`${prefix}--time-picker__error__icon`}>
               {invalid ? (
                 <WarningFilled
@@ -303,7 +303,7 @@ const TimePicker: TimePickerComponent = React.forwardRef<
                 />
               )}
             </div>
-          ) : null}
+          )}
         </div>
         {getInternalPickerSelects()}
       </div>
