@@ -17,7 +17,7 @@ describe('useId SSR', () => {
       const id = useId('test');
       return <span id={id}>test</span>;
     }
-    const markup = renderToString(<Test />);
-    expect(markup.indexOf('id="')).toBe(-1);
+    const view = renderToString(<Test />);
+    expect(view.indexOf('id="')).toBe(-1);
   });
 });

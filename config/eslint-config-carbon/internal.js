@@ -13,5 +13,6 @@ module.exports = {
     require.resolve('./plugins/jest'),
     require.resolve('./plugins/react'),
     require.resolve('./plugins/storybook'),
+    require.resolve('./plugins/testing-library'),
   ],
 };

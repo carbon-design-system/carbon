@@ -38,6 +38,7 @@ describe('RadioButtonGroup', () => {
       .getByText('test', {
         selector: 'legend',
       })
+      // eslint-disable-next-line testing-library/no-node-access
       .closest('fieldset');
     expect(fieldset).toBeDefined();
   });
@@ -54,6 +55,7 @@ describe('RadioButtonGroup', () => {
       .getByText('test', {
         selector: 'legend',
       })
+      // eslint-disable-next-line testing-library/no-node-access
       .closest('fieldset');
     expect(fieldset).toContainElement(screen.getByLabelText('test-1'));
     expect(fieldset).toContainElement(screen.getByLabelText('test-2'));
@@ -90,6 +92,7 @@ describe('RadioButtonGroup', () => {
         .getByText('test', {
           selector: 'legend',
         })
+        // eslint-disable-next-line testing-library/no-node-access
         .closest('fieldset');
       expect(fieldset).toBeDisabled();
     });

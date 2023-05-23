@@ -119,6 +119,7 @@ describe('Tab', () => {
         </TabPanels>
       </Tabs>
     );
+    // eslint-disable-next-line testing-library/no-node-access
     expect(screen.getByText('Tab Label 1').parentElement.tagName).toBe('DIV');
   });
 
@@ -159,6 +160,7 @@ describe('Tab', () => {
         </TabPanels>
       </Tabs>
     );
+    // eslint-disable-next-line testing-library/no-node-access
     expect(screen.queryByText('test-secondary-label')).not.toBeInTheDocument();
   });
 
@@ -183,6 +185,7 @@ describe('Tab', () => {
     );
 
     expect(screen.getByTestId('svg')).toBeInTheDocument();
+    // eslint-disable-next-line testing-library/no-node-access
     expect(screen.getByTestId('svg').parentElement).toHaveClass(
       'cds--tabs__nav-item--icon'
     );
@@ -249,6 +252,7 @@ describe('Tab', () => {
     );
 
     expect(
+      // eslint-disable-next-line testing-library/no-node-access
       screen.getAllByLabelText('Close tab')[0].parentElement
     ).not.toHaveClass(`${prefix}--visually-hidden`);
   });
@@ -424,8 +428,9 @@ describe('Tab', () => {
     expect(screen.getAllByLabelText('Close tab')[0]).not.toHaveClass(
       `${prefix}--visaully-hidden`
     );
-    expect(screen.queryByTestId('svg')).toBeInTheDocument();
-    expect(screen.queryByTestId('svg').parentElement).toHaveClass(
+    expect(screen.getByTestId('svg')).toBeInTheDocument();
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(screen.getByTestId('svg').parentElement).toHaveClass(
       `${prefix}--tabs__nav-item--icon-left`
     );
   });
@@ -510,6 +515,7 @@ describe('TabPanel', () => {
 
     expect(screen.getByText('Tab Panel 1')).toHaveAttribute('tabIndex', '-1');
 
+    // eslint-disable-next-line testing-library/no-unnecessary-act
     await act(async () => {
       rerender(
         <Tabs>
