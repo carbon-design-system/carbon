@@ -7,11 +7,10 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { ForwardRefReturn, ReactAttr } from '../../types/common';
-// @ts-ignore
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 
 type ExcludedAttributes = 'id' | 'value';
@@ -200,23 +199,13 @@ const TimePicker: TimePickerComponent = React.forwardRef<
     }
   }
 
-  useEffect(() => {
-    const inputField = document.querySelector(
-      `.${prefix}--time-picker__input-field`
-    );
-    if (invalid || warning) {
-      inputField?.classList.add(`${prefix}--time-picker__input-field-error`);
-    } else {
-      inputField?.classList.remove(`${prefix}--time-picker__input-field-error`);
-    }
-  }, [invalid, warning, prefix]);
-
   const timePickerInputClasses = cx(
     `${prefix}--time-picker__input-field`,
     `${prefix}--text-input`,
     [className],
     {
       [`${prefix}--text-input--light`]: light,
+      [`${prefix}--time-picker__input-field-error`]: invalid || warning,
     }
   );
 
@@ -240,8 +229,6 @@ const TimePicker: TimePickerComponent = React.forwardRef<
       {labelText}
     </label>
   ) : null;
-
-  const error = invalid || warning;
 
   function getInternalPickerSelects() {
     const readOnlyEventHandlers = {
@@ -302,7 +289,7 @@ const TimePicker: TimePickerComponent = React.forwardRef<
             {...rest}
             {...readOnlyProps}
           />
-          {error ? (
+          {invalid || warning ? (
             <div className={`${prefix}--time-picker__error__icon`}>
               {invalid ? (
                 <WarningFilled
@@ -320,7 +307,7 @@ const TimePicker: TimePickerComponent = React.forwardRef<
         </div>
         {getInternalPickerSelects()}
       </div>
-      {error && (
+      {(invalid || warning) && (
         <div className={`${prefix}--form-requirement`}>
           {invalid ? invalidText : warningText}
         </div>
