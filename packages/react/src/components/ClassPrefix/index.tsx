@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { PrefixContext } from '../../internal/usePrefix';
 
 interface ClassPrefixProps {
@@ -17,7 +17,10 @@ interface ClassPrefixProps {
   prefix: string;
 }
 
-function ClassPrefix({ children, prefix }) {
+function ClassPrefix({
+  children,
+  prefix,
+}: PropsWithChildren<ClassPrefixProps>) {
   return (
     <PrefixContext.Provider value={prefix}>{children}</PrefixContext.Provider>
   );
