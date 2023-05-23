@@ -90,7 +90,8 @@ export const TabTip = () => {
             setOpen(false);
           }
         }}
-        isTabTip>
+        isTabTip
+        onRequestClose={() => setOpen(false)}>
         <button
           aria-label="Settings"
           type="button"
@@ -122,7 +123,11 @@ export const TabTip = () => {
         </PopoverContent>
       </Popover>
 
-      <Popover open={openTwo} isTabTip align="bottom-right">
+      <Popover
+        open={openTwo}
+        isTabTip
+        align="bottom-right"
+        onRequestClose={() => setOpenTwo(false)}>
         <button
           aria-label="Settings"
           type="button"
