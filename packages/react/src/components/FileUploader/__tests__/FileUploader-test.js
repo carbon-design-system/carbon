@@ -38,7 +38,9 @@ describe('FileUploader', () => {
     const { container } = render(
       <FileUploader {...requiredProps} buttonLabel="upload" />
     );
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const input = container.querySelector('input');
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     const label = getByText(container, 'upload');
 
     expect(label).toBeInstanceOf(HTMLElement);
@@ -47,12 +49,14 @@ describe('FileUploader', () => {
         new File(['test'], 'test.png', { type: 'image/png' }),
       ]);
     });
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     expect(getByText(container, 'upload')).toBeInstanceOf(HTMLElement);
   });
 
   it('should clear all uploaded files when `clearFiles` is called on a ref', () => {
     const ref = React.createRef();
     const { container } = render(<FileUploader {...requiredProps} ref={ref} />);
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const input = container.querySelector('input');
 
     const filename = 'test.png';
@@ -60,10 +64,12 @@ describe('FileUploader', () => {
       uploadFiles(input, [new File(['test'], filename, { type: 'image/png' })]);
     });
 
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     expect(getByText(container, filename)).toBeInstanceOf(HTMLElement);
     act(() => {
       ref.current.clearFiles();
     });
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     expect(getByText(container, filename)).not.toBeInstanceOf(HTMLElement);
   });
 
@@ -73,6 +79,7 @@ describe('FileUploader', () => {
       container,
     });
 
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const input = container.querySelector('input');
     act(() => {
       uploadFiles(input, [
