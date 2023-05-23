@@ -670,8 +670,6 @@ commands one after another. Refer to the documentation of your shell.
 | `yarn test:ssr`                   | Only server side tests                                               |
 | `yarn test:a11y && yarn test:e2e` | In `bash` via `&&`: Run the a11y tests, and if they succeed, run e2e |
 
-#### Stable selectors
-
 #### Recipes
 
 Below are some common recipes for component testing. Many of the pattern/syntax
