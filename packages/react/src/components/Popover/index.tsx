@@ -125,7 +125,7 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
   const floating = useRef<HTMLSpanElement>(null);
   const popover = useRef<Element>(null);
 
-  // If the `Popover` is the last focusable item in the tab order, it shoudl also close when the browser window loses focus  (#12922)
+  // If the `Popover` is the last focusable item in the tab order, it should also close when the browser window loses focus  (#12922)
   useWindowEvent('blur', () => {
     if (open) {
       onRequestClose?.();
