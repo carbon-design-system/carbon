@@ -5824,6 +5824,9 @@ Map {
       "isTabTip": Object {
         "type": "bool",
       },
+      "onRequestClose": Object {
+        "type": "func",
+      },
       "open": Object {
         "isRequired": true,
         "type": "bool",
