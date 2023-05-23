@@ -89,7 +89,7 @@ interface PopoverBaseProps {
 
   /**
    * Specify a handler for closing popover.
-   * The handler should care of closing the popover, e.g. changing the `open` prop.
+   * The handler should take care of closing the popover, e.g. changing the `open` prop.
    */
   onRequestClose?: () => void;
 
