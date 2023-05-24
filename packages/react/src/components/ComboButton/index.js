@@ -91,7 +91,11 @@ const ComboButton = React.forwardRef(function ComboButton(
   const triggerClasses = classNames(`${prefix}--combo-button__trigger`);
 
   return (
-    <div {...rest} className={containerClasses} ref={ref}>
+    <div
+      {...rest}
+      className={containerClasses}
+      ref={ref}
+      aria-owns={open ? id : null}>
       <div className={primaryActionClasses}>
         <Button
           size={size}
@@ -110,7 +114,7 @@ const ComboButton = React.forwardRef(function ComboButton(
         aria-expanded={open}
         onClick={handleTriggerClick}
         onMouseDown={handleTriggerMousedown}
-        aria-owns={open ? id : null}>
+        aria-controls={open ? id : null}>
         <ChevronDown />
       </IconButton>
       <Menu

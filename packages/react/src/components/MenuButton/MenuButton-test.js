@@ -70,13 +70,15 @@ describe('MenuButton', () => {
 
       sizes.forEach((size) => {
         it(`size="${size}"`, () => {
-          const { container } = render(
+          render(
             <MenuButton label="Actions" size={size}>
               <MenuItem label="Action" />
             </MenuButton>
           );
 
-          expect(container.firstChild).toHaveClass(`${prefix}--btn--${size}`);
+          expect(screen.getByRole('button')).toHaveClass(
+            `${prefix}--btn--${size}`
+          );
         });
       });
     });
@@ -86,13 +88,15 @@ describe('MenuButton', () => {
 
       kinds.forEach((kind) => {
         it(`kind="${kind}"`, () => {
-          const { container } = render(
+          render(
             <MenuButton label="Actions" kind={kind}>
               <MenuItem label="Action" />
             </MenuButton>
           );
 
-          expect(container.firstChild).toHaveClass(`${prefix}--btn--${kind}`);
+          expect(screen.getByRole('button')).toHaveClass(
+            `${prefix}--btn--${kind}`
+          );
         });
       });
     });

@@ -19,15 +19,18 @@ import { useAttachedMenu } from '../../../internal/useAttachedMenu';
 
 const defaultSize = 'md';
 
-function OverflowMenu({
-  children,
-  className,
-  label = 'Options',
-  renderIcon: IconElement = OverflowMenuVertical,
-  size = defaultSize,
-  tooltipAlignment,
-  ...rest
-}) {
+const OverflowMenu = React.forwardRef(function OverflowMenu(
+  {
+    children,
+    className,
+    label = 'Options',
+    renderIcon: IconElement = OverflowMenuVertical,
+    size = defaultSize,
+    tooltipAlignment,
+    ...rest
+  },
+  forwardRef
+) {
   const id = useId('overflowmenu');
   const prefix = usePrefix();
 
@@ -35,21 +38,27 @@ function OverflowMenu({
   const { open, x, y, handleClick, handleMousedown, handleClose } =
     useAttachedMenu(triggerRef);
 
-  const containerClasses = classNames(`${prefix}--overflow-menu__container`);
+  const containerClasses = classNames(
+    className,
+    `${prefix}--overflow-menu__container`
+  );
 
   const triggerClasses = classNames(
     `${prefix}--overflow-menu`,
     {
       [`${prefix}--overflow-menu--open`]: open,
-      [className]: className,
     },
     size !== defaultSize && `${prefix}--overflow-menu--${size}`
   );
 
   return (
-    <div className={containerClasses} aria-owns={open ? id : null}>
+    <div
+      {...rest}
+      className={containerClasses}
+      aria-owns={open ? id : null}
+      ref={forwardRef}>
       <IconButton
-        {...rest}
+        aria-controls={open ? id : null}
         aria-haspopup
         aria-expanded={open}
         className={triggerClasses}
@@ -72,7 +81,7 @@ function OverflowMenu({
       </Menu>
     </div>
   );
-}
+});
 
 OverflowMenu.propTypes = {
   /**

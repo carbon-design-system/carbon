@@ -53,7 +53,7 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
   });
 
   it('should add custom classNames', () => {
-    render(
+    const { container } = render(
       <OverflowMenu className="extra-class">
         <MenuItem label="item" className="test-child">
           one
@@ -64,44 +64,11 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
       </OverflowMenu>
     );
 
-    expect(screen.getByRole('button')).toHaveClass('extra-class');
-  });
-
-  it('should set a tab index if one is given', () => {
-    render(
-      <OverflowMenu tab-index="2">
-        <MenuItem label="item" className="test-child">
-          one
-        </MenuItem>
-        <MenuItem label="item" className="test-child">
-          two
-        </MenuItem>
-      </OverflowMenu>
-    );
-
-    expect(screen.getByRole('button')).toHaveAttribute('tab-index', '2');
-  });
-
-  it('should set an aria-label if one is given', () => {
-    render(
-      <OverflowMenu aria-label="aria-label">
-        <MenuItem label="item" className="test-child">
-          one
-        </MenuItem>
-        <MenuItem label="item" className="test-child">
-          two
-        </MenuItem>
-      </OverflowMenu>
-    );
-
-    expect(screen.getByRole('button')).toHaveAttribute(
-      'aria-label',
-      'aria-label'
-    );
+    expect(container.firstChild).toHaveClass('extra-class');
   });
 
   it('should set an id if one is given', () => {
-    render(
+    const { container } = render(
       <OverflowMenu id="custom-id">
         <MenuItem label="item" className="test-child">
           one
@@ -112,7 +79,7 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
       </OverflowMenu>
     );
 
-    expect(screen.getByRole('button')).toHaveAttribute('id', 'custom-id');
+    expect(container.firstChild).toHaveAttribute('id', 'custom-id');
   });
 
   it('should close menu on outside click', async () => {
