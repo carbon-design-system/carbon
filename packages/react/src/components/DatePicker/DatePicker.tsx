@@ -468,7 +468,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   const savedOnClose = useSavedCallback(
     datePickerType === 'range' ? onCalendarClose : onClose
   );
-  const savedOnOpen = useSavedCallback(() => onOpen);
+  const savedOnOpen = useSavedCallback(onOpen);
 
   const datePickerClasses = cx(`${prefix}--date-picker`, {
     [`${prefix}--date-picker--short`]: short,
