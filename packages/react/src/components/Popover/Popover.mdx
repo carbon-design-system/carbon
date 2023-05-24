@@ -59,6 +59,16 @@ often tracked in state and is toggled based on the trigger render inside of the
 `Popover`. A trigger must be an interactive element and in most cases it will be
 a `<button>`.
 
+The `onRequestClose` callback prop can be used to ensure that only a single
+popover is open on the screen at a time. It also can be used to ensure that any
+clicks outside of a popover will close the popover. This is achieved by using
+state in conjunction with the callback prop to set `open` to false when
+`onRequestClose` is called.
+
+<Canvas>
+  <Story id="components-popover--tab-tip" />
+</Canvas>
+
 ## Alignment
 
 The `align` prop allows you to specify where your content should be placed
