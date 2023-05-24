@@ -62,6 +62,17 @@ export const Default = (args) => {
   return <Button {...args}>Button</Button>;
 };
 
+export const Test = () => {
+  return (
+    <>
+      Test
+      <br />
+      <button type="submit">Font Check</button>
+      <div>Test</div>
+    </>
+  );
+};
+
 export const Secondary = (args) => {
   return (
     <Button kind="secondary" {...args}>
