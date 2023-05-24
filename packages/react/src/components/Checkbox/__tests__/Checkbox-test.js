@@ -126,6 +126,7 @@ describe('Checkbox', () => {
       />
     );
 
+    // eslint-disable-next-line testing-library/no-node-access, testing-library/no-container
     const warnIcon = container.querySelector(
       `svg.cds--checkbox__invalid-icon--warning`
     );

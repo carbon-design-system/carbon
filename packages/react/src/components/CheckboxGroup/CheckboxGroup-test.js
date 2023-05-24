@@ -116,6 +116,7 @@ describe('CheckboxGroup', () => {
       </CheckboxGroup>
     );
 
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const warnIcon = container.querySelector(
       `svg.${prefix}--checkbox__invalid-icon--warning`
     );

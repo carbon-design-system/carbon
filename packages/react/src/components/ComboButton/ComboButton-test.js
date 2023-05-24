@@ -106,6 +106,7 @@ describe('ComboButton', () => {
             </ComboButton>
           );
 
+          // eslint-disable-next-line testing-library/no-node-access
           expect(container.firstChild.lastChild).toHaveClass(
             `${prefix}--popover--${alignment}`
           );
@@ -124,6 +125,7 @@ describe('ComboButton', () => {
 
       const triggerButton = screen.getAllByRole('button')[1];
       const tooltipId = triggerButton.getAttribute('aria-labelledby');
+      // eslint-disable-next-line testing-library/no-node-access
       const tooltip = document.getElementById(tooltipId);
 
       expect(tooltip).toHaveTextContent(t());
