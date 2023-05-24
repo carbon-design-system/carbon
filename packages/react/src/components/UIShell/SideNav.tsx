@@ -109,8 +109,6 @@ function SideNavRenderFunction(
     [`${prefix}--side-nav--rail`]: isRail,
     [`${prefix}--side-nav--ux`]: isChildOfHeader,
     [`${prefix}--side-nav--hidden`]: !isPersistent,
-    [`${prefix}--cds--side-nav--expand-on-hover`]:
-      expanded || expandedViaHoverState,
   });
 
   const overlayClassName = cx({
