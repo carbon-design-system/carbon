@@ -30,6 +30,7 @@ describe('FileUploaderItem', () => {
   it('should support calling `onDelete` if the user interacts with the filename during editing', () => {
     const onDelete = jest.fn();
     const description = 'test-description';
+    // eslint-disable-next-line testing-library/render-result-naming-convention
     const edit = render(
       <FileUploaderItem
         uuid="edit"
@@ -52,6 +53,7 @@ describe('FileUploaderItem', () => {
 
     onDelete.mockReset();
 
+    // eslint-disable-next-line testing-library/render-result-naming-convention
     const uploading = render(
       <FileUploaderItem
         uuid="uploading"
@@ -61,6 +63,7 @@ describe('FileUploaderItem', () => {
         onDelete={onDelete}
       />
     );
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     removeFile = getByText(uploading.container, description);
 
     Simulate.click(removeFile);

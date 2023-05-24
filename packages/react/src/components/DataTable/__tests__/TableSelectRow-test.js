@@ -50,6 +50,7 @@ describe('DataTable.TableSelectRow', () => {
         </Table>
       );
 
+      // eslint-disable-next-line testing-library/no-node-access
       expect(screen.getByRole('checkbox').nextSibling).toHaveAttribute(
         'aria-label',
         mockProps.ariaLabel

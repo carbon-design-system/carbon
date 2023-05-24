@@ -35,10 +35,9 @@ describe('DataTableSkeleton', () => {
     });
 
     it('should respect the columnCount prop', () => {
-      const { container } = render(<DataTableSkeleton columnCount={3} />);
+      render(<DataTableSkeleton columnCount={3} />);
 
-      const columns = container.querySelectorAll('thead th');
-      expect(columns.length).toEqual(3);
+      expect(screen.getAllByRole('columnheader').length).toEqual(3);
     });
 
     it('should respect the compact prop', () => {
@@ -74,6 +73,7 @@ describe('DataTableSkeleton', () => {
     it('should respect the rowCount prop', () => {
       const { container } = render(<DataTableSkeleton rowCount={20} />);
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const rows = container.querySelectorAll('tbody tr');
       expect(rows.length).toEqual(20);
     });
@@ -81,6 +81,7 @@ describe('DataTableSkeleton', () => {
     it('should respect the showHeader prop', () => {
       const { container } = render(<DataTableSkeleton showHeader={false} />);
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const header = container.querySelector(`.${prefix}--data-table-header`);
       expect(header).not.toBeInTheDocument();
     });
@@ -88,6 +89,7 @@ describe('DataTableSkeleton', () => {
     it('should respect the showToolbar prop', () => {
       const { container } = render(<DataTableSkeleton showToolbar={false} />);
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const toolbar = container.querySelector(`.${prefix}--table-toolbar`);
       expect(toolbar).not.toBeInTheDocument();
     });
