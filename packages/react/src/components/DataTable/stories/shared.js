@@ -17,7 +17,6 @@ export const rows = [
     rule: 'Round robin',
     attached_groups: 'Kevin’s VM Groups',
     status: <Link disabled={true}>Disabled</Link>,
-    ibmcIsu: '3T',
   },
   {
     id: 'b',
@@ -27,7 +26,6 @@ export const rows = [
     rule: 'Round robin',
     attached_groups: 'Maureen’s VM Groups',
     status: <Link>Starting</Link>,
-    ibmcIsu: '5B',
   },
   {
     id: 'c',
@@ -37,7 +35,6 @@ export const rows = [
     rule: 'DNS delegation',
     attached_groups: 'Andrew’s VM Groups',
     status: <Link>Active</Link>,
-    ibmcIsu: '3T',
   },
   {
     id: 'd',
@@ -47,7 +44,6 @@ export const rows = [
     rule: 'Round robin',
     attached_groups: 'Marc’s VM Groups',
     status: <Link disabled={true}>Disabled</Link>,
-    ibmcIsu: '05',
   },
   {
     id: 'e',
@@ -57,7 +53,6 @@ export const rows = [
     rule: 'Round robin',
     attached_groups: 'Mel’s VM Groups',
     status: <Link>Starting</Link>,
-    ibmcIsu: '3T',
   },
   {
     id: 'f',
@@ -67,7 +62,6 @@ export const rows = [
     rule: 'DNS delegation',
     attached_groups: 'Ronja’s VM Groups',
     status: <Link>Active</Link>,
-    ibmcIsu: '05',
   },
 ];
 
@@ -96,7 +90,6 @@ export const headers = [
     key: 'status',
     header: 'Status',
   },
-  { header: 'IBMC_ISU Code', key: 'ibmcIsu' },
 ];
 
 export const batchActionClick = (selectedRows) => () =>
