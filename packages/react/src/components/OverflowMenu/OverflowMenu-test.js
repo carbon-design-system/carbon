@@ -15,19 +15,17 @@ import { render, screen } from '@testing-library/react';
 describe('OverflowMenu', () => {
   describe('Renders as expected', () => {
     it('should support a custom `className` prop on the button element', () => {
-      const { container } = render(
+      render(
         <OverflowMenu open aria-label="Overflow menu" className="extra-class">
           <OverflowMenuItem className="test-child" itemText="one" />
           <OverflowMenuItem className="test-child" itemText="two" />
         </OverflowMenu>
       );
-      expect(container.querySelector('button.cds--overflow-menu')).toHaveClass(
-        'extra-class'
-      );
+      expect(screen.getByRole('button')).toHaveClass('extra-class');
     });
 
     it('should spread extra props on the button element', () => {
-      const { container } = render(
+      render(
         <OverflowMenu
           data-testid="test"
           aria-label="Overflow menu"
@@ -36,9 +34,7 @@ describe('OverflowMenu', () => {
           <OverflowMenuItem className="test-child" itemText="two" />
         </OverflowMenu>
       );
-      expect(
-        container.querySelector('button.cds--overflow-menu')
-      ).toHaveAttribute('data-testid', 'test');
+      expect(screen.getByRole('button')).toHaveAttribute('data-testid', 'test');
     });
 
     it('should flip menu alignment', async () => {
@@ -55,6 +51,7 @@ describe('OverflowMenu', () => {
       await userEvent.click(screen.getByRole('button'));
 
       expect(
+        // eslint-disable-next-line testing-library/no-node-access
         document.querySelector('.cds--overflow-menu--flip')
       ).toBeInTheDocument();
     });
