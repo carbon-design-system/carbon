@@ -446,7 +446,7 @@ Avoid names with multiple `__element` names:
 All react components belong in `packages/react/src/components` in their own
 folder.
 
-All Component styles belong in `src/packages/styles/components` in their own
+All Component styles belong in `packages/styles/scss/components` in their own
 folder.
 
 ### Working on JavaScript-framework-specific styles
