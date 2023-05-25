@@ -23,7 +23,7 @@ jobs:
     steps:
       - name: Send custom JSON data to Slack
         id: slack-success
-        uses: slackapi/slack-github-action@v1.23.0
+        uses: slackapi/slack-github-action@v1.24.0
         with:
           payload: |
             {
@@ -41,7 +41,7 @@ jobs:
     steps:
       - name: Send custom JSON data to Slack
         id: slack-failure
-        uses: slackapi/slack-github-action@v1.23.0
+        uses: slackapi/slack-github-action@v1.24.0
         with:
           payload: |
             {
