@@ -443,7 +443,7 @@ Avoid names with multiple `__element` names:
 
 ### Files and folders
 
-All react components belong in `src/packages/react/components` in their own
+All react components belong in `packages/react/src/components` in their own
 folder.
 
 All Component styles belong in `src/packages/styles/components` in their own
