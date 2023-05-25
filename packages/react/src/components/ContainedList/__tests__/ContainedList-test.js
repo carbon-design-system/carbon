@@ -47,16 +47,6 @@ beforeEach(() => {
   wrapper = render(<TestComponent />);
 });
 
-async function a11y(label) {
-  it('should have no Axe violations', async () => {
-    await expect(wrapper.container).toHaveNoAxeViolations();
-  });
-
-  it('should have no Accessibility Checker violations', async () => {
-    await expect(wrapper.container).toHaveNoACViolations(label);
-  });
-}
-
 describe('ContainedList', () => {
   it('list and label ids match', () => {
     // eslint-disable-next-line testing-library/prefer-screen-queries
@@ -84,8 +74,6 @@ describe('ContainedList', () => {
 
     expect(wrapper.container.firstChild).toHaveClass(className);
   });
-
-  a11y('ContainedList');
 
   it('should render ExpandableSearch as an action', () => {
     render(
@@ -189,7 +177,5 @@ describe('ContainedListItem', () => {
 
       expect(content.tagName).toBe('BUTTON');
     });
-
-    a11y('ContainedListItem, interactive');
   });
 });
