@@ -10,7 +10,7 @@ function ExampleComponent() {
   )
 }
 
-function App() {
+export default function App() {
   return (
     <>
       <ExampleComponent />
@@ -20,5 +20,3 @@ function App() {
     </>
   );
 }
-
-export default App

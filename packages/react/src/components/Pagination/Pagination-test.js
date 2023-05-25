@@ -116,6 +116,7 @@ describe('Pagination', () => {
       render(<Pagination pageSizes={[10]} pageInputDisabled />);
 
       expect(
+        // eslint-disable-next-line testing-library/no-node-access
         document.querySelectorAll('.cds--select-input')[1]
       ).toHaveAttribute('disabled');
     });
@@ -160,6 +161,7 @@ describe('Pagination', () => {
       );
 
       expect(
+        // eslint-disable-next-line testing-library/no-node-access
         document.querySelectorAll('.cds--select-input')[0]
       ).toHaveAttribute('disabled');
     });

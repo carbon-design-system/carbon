@@ -8,6 +8,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Popover, PopoverContent } from '../../Popover';
+import userEvent from '@testing-library/user-event';
 
 const prefix = 'cds';
 
@@ -102,6 +103,18 @@ describe('Popover', () => {
       expect(container.firstChild).toHaveClass(
         `${prefix}--popover--bottom-left`
       );
+    });
+
+    it('should call onRequestClose when click happens outside the popover', async () => {
+      const onRequestClose = jest.fn();
+      const { container } = render(
+        <Popover open onRequestClose={() => onRequestClose()}>
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      await userEvent.click(container);
+      expect(onRequestClose).toHaveBeenCalled();
     });
   });
 });

@@ -60,7 +60,9 @@ describe('DefintiionTooltip', () => {
           term
         </DefinitionTooltip>
       );
+      // eslint-disable-next-line testing-library/no-node-access
       expect(document.getElementById(id)).toBeInTheDocument();
+      // eslint-disable-next-line testing-library/no-node-access
       expect(document.getElementById(id)).toHaveTextContent(definition);
     });
 

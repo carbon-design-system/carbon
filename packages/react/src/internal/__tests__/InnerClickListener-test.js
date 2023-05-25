@@ -107,6 +107,7 @@ describe('InnerClickListener', () => {
       );
 
       screen.getByText('1').addEventListener('click', function () {
+        // eslint-disable-next-line testing-library/no-node-access
         this.parentNode.removeChild(this);
       });
       await userEvent.click(screen.getByText('1'));

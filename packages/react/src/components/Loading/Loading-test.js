@@ -66,6 +66,7 @@ describe('Loading', () => {
     // https://www.w3.org/TR/WCAG21/#headings-and-labels
     it('should have a label on the live region', () => {
       const { container } = render(<Loading />);
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const liveRegion = container.querySelector('[aria-live]');
       expect(liveRegion).toBeInstanceOf(HTMLElement);
     });
@@ -73,6 +74,7 @@ describe('Loading', () => {
     // https://www.w3.org/TR/WCAG21/#status-messages
     it('should announce a loading status', () => {
       const { container } = render(<Loading />);
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const liveRegion = container.querySelector('[aria-live]');
       expect(liveRegion).toBeInstanceOf(HTMLElement);
 
