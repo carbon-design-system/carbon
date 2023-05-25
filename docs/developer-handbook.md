@@ -516,7 +516,7 @@ structure, etc. may make such steps no longer work. Here are the steps:
 ```sh
 > cd /path/to/carbon-components-angular/node_modules/@carbon/styles
 > mv scss scss.orig
-> ln -s /path/to/@carbon/styles/src scss
+> ln -s /path/to/@carbon/styles/scss scss
 ```
 
 Then edits of `.scss` files in `/path/to/@carbon/styles/src` will be reflected
