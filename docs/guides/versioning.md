@@ -275,7 +275,7 @@ semver bump: **minor**, but ideally **major**
 We support the placement of `data-testid` attributes on components as a "stable
 selector" for locating elements for testing when
 [all other options](https://testing-library.com/docs/queries/about#priority) are
-exhaused.
+exhausted.
 
 We are aware that consumers relying on these in their tests will be impacted
 from any modifications to their placement. For this reason we'll always aim to
