@@ -6,10 +6,21 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { PrefixContext } from '../../internal/usePrefix';
 
-function ClassPrefix({ children, prefix }) {
+interface ClassPrefixProps {
+  /**
+   *   The value used to prefix the CSS selectors
+   *   used by Carbon components.
+   */
+  prefix: string;
+}
+
+function ClassPrefix({
+  children,
+  prefix,
+}: PropsWithChildren<ClassPrefixProps>) {
   return (
     <PrefixContext.Provider value={prefix}>{children}</PrefixContext.Provider>
   );
