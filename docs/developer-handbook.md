@@ -506,7 +506,7 @@ make a change to the project styles it will automatically copy over into the
 ### Pointing NPM dependency of `@carbon/styles` right to the source code
 
 Though the above approach is the most straightforward, it involves the overhead of
-having to run build process at `@carbon/styles`, in addition to one at framework
+having to run the build process at `@carbon/styles`, in addition to one at the framework
 variant repo, upon every Sass code change.
 
 To avoid such overhead, you can point NPM dependency of `@carbon/styles` right
