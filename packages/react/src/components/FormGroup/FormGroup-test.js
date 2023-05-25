@@ -34,6 +34,7 @@ describe('FormGroup', () => {
       </FormGroup>
     );
 
+    // eslint-disable-next-line testing-library/prefer-presence-queries
     expect(screen.queryByText('legendtest')).toBeInTheDocument();
   });
 
@@ -61,6 +62,7 @@ describe('FormGroup', () => {
       </FormGroup>
     );
 
+    // eslint-disable-next-line testing-library/prefer-presence-queries
     expect(screen.queryByText('Message text')).toBeInTheDocument();
   });
 

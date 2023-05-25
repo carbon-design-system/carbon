@@ -301,6 +301,7 @@ describe('StructuredList', () => {
     });
     it('should render unique id with multiple inputs when no id prop is given', () => {
       const { container } = renderSelectionVariant();
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const inputElements = container.querySelectorAll(
         `[name=${inputNameValue}]`
       );
