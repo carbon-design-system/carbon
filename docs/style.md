@@ -293,7 +293,7 @@ functionality, and custom styling to break within consuming applications.
 We also support the placement of `data-testid` attributes on components as a
 "stable selector" for locating elements for testing when
 [all other options](https://testing-library.com/docs/queries/about#priority) are
-exhaused. The location and placement of these in the DOM should remain stable
+exhausted. The location and placement of these in the DOM should remain stable
 between versions. This can be accomplished by explicitly placing this prop on
 the outermost element, or it can be accomplished by having `...rest` spread on
 the outermost element.
