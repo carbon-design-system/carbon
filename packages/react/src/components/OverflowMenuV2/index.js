@@ -43,8 +43,14 @@ function OverflowMenuV2({
     size !== defaultSize && `${prefix}--overflow-menu--${size}`
   );
 
+  //   <form action="" method="post">
+  //       <label for="ln1">Last Name</label>
+  //       <input type="text" name="lastname" id="ln1" value="enter last name" title="enter last name" aria-describedby="ln2">
+  // </form>
+  // <div id="ln2" role="tooltip">Last Name must be alpha only characters</div>
   return (
     <div className={containerClasses} aria-owns={id}>
+      <label htmlFor="our-label">our-label</label>
       <button
         {...rest}
         type="button"
@@ -53,7 +59,9 @@ function OverflowMenuV2({
         className={triggerClasses}
         onClick={handleClick}
         onMouseDown={handleMousedown}
-        ref={triggerRef}>
+        ref={triggerRef}
+        id="our-label"
+        aria-label="our-label">
         <IconElement className={`${prefix}--overflow-menu__icon`} />
       </button>
       <Menu id={id} size={size} open={open} onClose={handleClose} x={x} y={y}>
@@ -64,6 +72,10 @@ function OverflowMenuV2({
 }
 
 OverflowMenuV2.propTypes = {
+  /**
+   * Specify element's id to be used as the label for this OverflowMenu
+   */
+  'aria-labelledby': PropTypes.string,
   /**
    * A collection of MenuItems to be rendered within this OverflowMenu.
    */
