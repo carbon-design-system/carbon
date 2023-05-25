@@ -220,18 +220,31 @@
     vertical-align: inherit;
   }
 
-  .#{$prefix}--data-table--top-aligned .#{$prefix}--table-expand__button {
+  .#{$prefix}--data-table--top-aligned-body
+    td
+    .#{$prefix}--table-expand__button,
+  .#{$prefix}--data-table--top-aligned-header
+    th
+    .#{$prefix}--table-expand__button {
     height: calc(rem(32px) + 1px);
     align-items: start;
     padding-top: $spacing-03;
   }
 
-  .#{$prefix}--data-table--top-aligned.#{$prefix}--data-table--xs
+  .#{$prefix}--data-table--top-aligned-body.#{$prefix}--data-table--xs
+    td
+    .#{$prefix}--table-expand__button,
+  .#{$prefix}--data-table--top-aligned-header.#{$prefix}--data-table--xs
+    th
     .#{$prefix}--table-expand__button {
     padding-top: $spacing-01;
   }
 
-  .#{$prefix}--data-table--top-aligned.#{$prefix}--data-table--md
+  .#{$prefix}--data-table--top-aligned-body.#{$prefix}--data-table--md
+    td
+    .#{$prefix}--table-expand__button,
+  .#{$prefix}--data-table--top-aligned-header.#{$prefix}--data-table--md
+    th
     .#{$prefix}--table-expand__button {
     padding-top: $spacing-02;
   }

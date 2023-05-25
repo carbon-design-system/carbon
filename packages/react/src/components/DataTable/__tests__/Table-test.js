@@ -116,7 +116,7 @@ describe('Table', () => {
         </Table>
       );
       expect(screen.getByRole('table')).toHaveClass(
-        `${prefix}--data-table--top-aligned`
+        `${prefix}--data-table--top-aligned-body`
       );
     });
 
@@ -146,7 +146,7 @@ describe('Table', () => {
         </Table>
       );
       expect(screen.getByRole('table')).not.toHaveClass(
-        `${prefix}--data-table--top-aligned`
+        `${prefix}--data-table--top-aligned-body`
       );
     });
 
@@ -176,7 +176,7 @@ describe('Table', () => {
         </Table>
       );
       expect(screen.getByRole('table')).not.toHaveClass(
-        `${prefix}--data-table--top-aligned`
+        `${prefix}--data-table--top-aligned-body`
       );
     });
   });
