@@ -20,6 +20,8 @@ import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { CARBON_SIDENAV_ITEMS } from './_utils';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
+import { useMergedRefs } from '../../internal/useMergedRefs';
+import { useWindowEvent } from '../../internal/useEvent';
 // TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
 
@@ -31,6 +33,7 @@ interface SideNavProps extends ComponentProps<'nav'> {
     event: FocusEvent<HTMLElement> | KeyboardEvent<HTMLElement> | boolean,
     value: boolean
   ) => void | undefined;
+  href?: string | undefined;
   // TO-DO: comment back in when footer is added for rails
   // translateById?: ((id: TranslationId) => Translation) | undefined;
   isFixedNav?: boolean | undefined;
@@ -39,6 +42,7 @@ interface SideNavProps extends ComponentProps<'nav'> {
   addFocusListeners?: boolean | undefined;
   addMouseListeners?: boolean | undefined;
   onOverlayClick?: MouseEventHandler<HTMLDivElement> | undefined;
+  onSideNavBlur?: () => void | undefined;
 }
 
 function SideNavRenderFunction(
@@ -53,12 +57,14 @@ function SideNavRenderFunction(
     className: customClassName,
     // TO-DO: comment back in when footer is added for rails
     // translateById: t = (id) => translations[id],
+    href,
     isFixedNav = false,
     isRail,
     isPersistent = true,
     addFocusListeners = true,
     addMouseListeners = true,
     onOverlayClick,
+    onSideNavBlur,
     ...other
   }: SideNavProps,
   ref: ForwardedRef<HTMLElement>
@@ -69,6 +75,8 @@ function SideNavRenderFunction(
   const [expandedViaHoverState, setExpandedViaHoverState] =
     useState(defaultExpanded);
   const expanded = controlled ? expandedProp : expandedState;
+  const sideNavRef = useRef<HTMLDivElement>(null);
+  const navRef = useMergedRefs([sideNavRef, ref]);
 
   const handleToggle: typeof onToggle = (event, value = !expanded) => {
     if (!controlled) {
@@ -149,10 +157,18 @@ function SideNavRenderFunction(
       if (!event.currentTarget.contains(event.relatedTarget)) {
         handleToggle(event, false);
       }
+      if (!event.currentTarget.contains(event.relatedTarget) && expanded) {
+        if (onSideNavBlur) {
+          onSideNavBlur();
+        }
+      }
     };
     eventHandlers.onKeyDown = (event) => {
       if (match(event, keys.Escape)) {
         handleToggle(event, false);
+        if (href) {
+          window.location.href = href;
+        }
       }
     };
   }
@@ -162,6 +178,21 @@ function SideNavRenderFunction(
     eventHandlers.onMouseLeave = () => handleToggle(false, false);
   }
 
+  useWindowEvent('keydown', (event: Event) => {
+    const focusedElement = document.activeElement;
+
+    if (
+      match(event, keys.Tab) &&
+      expanded &&
+      !isFixedNav &&
+      sideNavRef.current &&
+      focusedElement?.classList.contains(`${prefix}--header__menu-toggle`) &&
+      !focusedElement.closest('nav')
+    ) {
+      sideNavRef.current.focus();
+    }
+  });
+
   return (
     <>
       {isFixedNav ? null : (
@@ -169,7 +200,8 @@ function SideNavRenderFunction(
         <div className={overlayClassName} onClick={onOverlayClick} />
       )}
       <nav
-        ref={ref}
+        tabIndex={-1}
+        ref={navRef}
         className={`${prefix}--side-nav__navigation ${className}`}
         {...accessibilityLabel}
         {...eventHandlers}
@@ -217,6 +249,12 @@ SideNav.propTypes = {
   expanded: PropTypes.bool,
 
   /**
+   * Provide the `href` to the id of the element on your package that is the
+   * main content.
+   */
+  href: PropTypes.string,
+
+  /**
    * Optionally provide a custom class to apply to the underlying `<li>` node
    */
   isChildOfHeader: PropTypes.bool,
@@ -242,6 +280,12 @@ SideNav.propTypes = {
    * @param {object} event
    */
   onOverlayClick: PropTypes.func,
+
+  /**
+   * An optional listener that is called a callback to collapse the SideNav
+   */
+
+  onSideNavBlur: PropTypes.func,
 
   /**
    * An optional listener that is called when an event that would cause

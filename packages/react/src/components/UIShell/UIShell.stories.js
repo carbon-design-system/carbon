@@ -187,26 +187,28 @@ export const HeaderBaseWNavigation = () => (
           aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
           onClick={onClickSideNavExpand}
           isActive={isSideNavExpanded}
+          aria-expanded={isSideNavExpanded}
         />
         <HeaderName href="#" prefix="IBM">
           [Platform]
         </HeaderName>
         <HeaderNavigation aria-label="IBM [Platform]">
-          <HeaderMenuItem isCurrentPage href="#">
-            Link 1
-          </HeaderMenuItem>
+          <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
           <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
           <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
           <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
             <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
-            <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+            <HeaderMenuItem isActive href="#">
+              Sub-link 2
+            </HeaderMenuItem>
             <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
           </HeaderMenu>
         </HeaderNavigation>
         <SideNav
           aria-label="Side navigation"
           expanded={isSideNavExpanded}
-          isPersistent={false}>
+          isPersistent={false}
+          onSideNavBlur={onClickSideNavExpand}>
           <SideNavItems>
             <HeaderSideNavItems>
               <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
@@ -214,7 +216,9 @@ export const HeaderBaseWNavigation = () => (
               <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
               <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
                 <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
-                <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+                <HeaderMenuItem isActive href="#">
+                  Sub-link 2
+                </HeaderMenuItem>
                 <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
               </HeaderMenu>
             </HeaderSideNavItems>
@@ -294,6 +298,7 @@ export const HeaderBaseWNavigationAndActions = () => (
           aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
           onClick={onClickSideNavExpand}
           isActive={isSideNavExpanded}
+          aria-expanded={isSideNavExpanded}
         />
         <HeaderName href="#" prefix="IBM">
           [Platform]
@@ -302,7 +307,7 @@ export const HeaderBaseWNavigationAndActions = () => (
           <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
           <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
           <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-          <HeaderMenu isCurrentPage aria-label="Link 4" menuLinkName="Link 4">
+          <HeaderMenu isActive aria-label="Link 4" menuLinkName="Link 4">
             <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
             <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
             <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
@@ -329,7 +334,8 @@ export const HeaderBaseWNavigationAndActions = () => (
         <SideNav
           aria-label="Side navigation"
           expanded={isSideNavExpanded}
-          isPersistent={false}>
+          isPersistent={false}
+          onSideNavBlur={onClickSideNavExpand}>
           <SideNavItems>
             <HeaderSideNavItems>
               <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
@@ -361,6 +367,7 @@ export const HeaderBaseWNavigationActionsAndSideNav = () => (
             aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
             onClick={onClickSideNavExpand}
             isActive={isSideNavExpanded}
+            aria-expanded={isSideNavExpanded}
           />
           <HeaderName href="#" prefix="IBM">
             [Platform]
@@ -393,7 +400,10 @@ export const HeaderBaseWNavigationActionsAndSideNav = () => (
               <SwitcherIcon size={20} />
             </HeaderGlobalAction>
           </HeaderGlobalBar>
-          <SideNav aria-label="Side navigation" expanded={isSideNavExpanded}>
+          <SideNav
+            aria-label="Side navigation"
+            expanded={isSideNavExpanded}
+            onSideNavBlur={onClickSideNavExpand}>
             <SideNavItems>
               <HeaderSideNavItems hasDivider={true}>
                 <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
@@ -475,11 +485,15 @@ export const HeaderBaseWSideNav = () => (
             aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
             onClick={onClickSideNavExpand}
             isActive={isSideNavExpanded}
+            aria-expanded={isSideNavExpanded}
           />
           <HeaderName href="#" prefix="IBM">
             [Platform]
           </HeaderName>
-          <SideNav aria-label="Side navigation" expanded={isSideNavExpanded}>
+          <SideNav
+            aria-label="Side navigation"
+            expanded={isSideNavExpanded}
+            onSideNavBlur={onClickSideNavExpand}>
             <SideNavItems>
               <SideNavMenu renderIcon={Fade} title="Category title">
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
@@ -798,7 +812,7 @@ FixedSideNavWDivider.storyName = 'Fixed SideNav w/ Divider';
 
 export const SideNavRail = () => (
   <>
-    <SideNav aria-label="Side navigation" isRail>
+    <SideNav aria-label="Side navigation" href="#main-content" isRail>
       <SideNavItems>
         <SideNavMenu renderIcon={Fade} title="Category title">
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
@@ -864,6 +878,7 @@ export const SideNavRailWHeader = () => (
             isCollapsible
             onClick={onClickSideNavExpand}
             isActive={isSideNavExpanded}
+            aria-expanded={isSideNavExpanded}
           />
           <HeaderName href="#" prefix="IBM">
             [Platform]
@@ -900,7 +915,9 @@ export const SideNavRailWHeader = () => (
             aria-label="Side navigation"
             isRail
             expanded={isSideNavExpanded}
-            onOverlayClick={onClickSideNavExpand}>
+            onOverlayClick={onClickSideNavExpand}
+            href="#main-content"
+            onSideNavBlur={onClickSideNavExpand}>
             <SideNavItems>
               <SideNavMenu renderIcon={Fade} title="Category title">
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">

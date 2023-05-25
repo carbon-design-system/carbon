@@ -95,6 +95,7 @@ describe('ToastNotification', () => {
         <p>Sample text</p>
       </ToastNotification>
     );
+    // eslint-disable-next-line testing-library/prefer-presence-queries
     expect(screen.queryByText(/Sample text/i)).toBeInTheDocument();
   });
 
@@ -155,6 +156,7 @@ describe('ToastNotification', () => {
       hidden: true,
     });
     await userEvent.click(closeButton);
+    // eslint-disable-next-line testing-library/prefer-presence-queries
     expect(screen.queryByRole('status')).toBeInTheDocument();
   });
 
@@ -216,6 +218,7 @@ describe('InlineNotification', () => {
         <p>Sample text</p>
       </InlineNotification>
     );
+    // eslint-disable-next-line testing-library/prefer-presence-queries
     expect(screen.queryByText(/Sample text/i)).toBeInTheDocument();
   });
 
@@ -275,6 +278,7 @@ describe('InlineNotification', () => {
       hidden: true,
     });
     await userEvent.click(closeButton);
+    // eslint-disable-next-line testing-library/prefer-presence-queries
     expect(screen.queryByRole('status')).toBeInTheDocument();
   });
 

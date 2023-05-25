@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Tabs, TabList, Tab, TabPanels, TabPanel, IconTab } from './Tabs';
 import TextInput from '../TextInput';
 import Checkbox from '../Checkbox';
@@ -70,6 +70,74 @@ export const Default = () => (
     </TabPanels>
   </Tabs>
 );
+
+export const Dismissable = () => {
+  const tabs = [
+    {
+      label: 'Tab label 1',
+      panel: <TabPanel>Tab Panel 1</TabPanel>,
+    },
+    {
+      label: 'Tab label 2',
+      panel: <TabPanel>Tab Panel 2</TabPanel>,
+    },
+    {
+      label: 'Tab label 3',
+      panel: <TabPanel>Tab Panel 3</TabPanel>,
+      disabled: true,
+    },
+    {
+      label: 'Tab label 4',
+      panel: <TabPanel>Tab Panel 4</TabPanel>,
+    },
+  ];
+  const [renderedTabs, setRenderedTabs] = useState(tabs);
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const handleTabChange = (evt) => {
+    setSelectedIndex(evt.selectedIndex);
+  };
+
+  const handleCloseTabRequest = (tabIndex) => {
+    const selectedTab = renderedTabs[selectedIndex];
+
+    const filteredTabs = renderedTabs.filter((_, index) => index !== tabIndex);
+    if (tabIndex === selectedIndex) {
+      const defaultTabIndex = filteredTabs.findIndex((tab) => !tab.disabled);
+      setSelectedIndex(defaultTabIndex);
+    } else {
+      setSelectedIndex(filteredTabs.indexOf(selectedTab));
+    }
+    setRenderedTabs(filteredTabs);
+  };
+
+  const resetTabs = () => {
+    setRenderedTabs(tabs);
+  };
+
+  return (
+    <>
+      <Button style={{ marginBottom: '3rem' }} onClick={resetTabs}>
+        Reset
+      </Button>
+      <Tabs
+        selectedIndex={selectedIndex}
+        onChange={handleTabChange}
+        dismissable
+        onTabCloseRequest={handleCloseTabRequest}>
+        <TabList aria-label="List of tabs">
+          {renderedTabs.map((tab, index) => (
+            <Tab key={index} disabled={tab.disabled}>
+              {tab.label}
+            </Tab>
+          ))}
+        </TabList>
+        <TabPanels>{renderedTabs.map((tab) => tab.panel)}</TabPanels>
+      </Tabs>
+    </>
+  );
+};
 
 export const WithIcons = () => (
   <Tabs>
@@ -349,8 +417,8 @@ export const Skeleton = () => {
   );
 };
 
-export const Playground = (args) => (
-  <Tabs>
+export const Playground = ({ dismissable, ...args }) => (
+  <Tabs dismissable={dismissable} onTabCloseRequest={() => {}}>
     <TabList aria-label="List of tabs" {...args}>
       <Tab>Tab label 1</Tab>
       <Tab>Tab label 2</Tab>
@@ -372,6 +440,12 @@ Playground.argTypes = {
     options: ['automatic', 'manual'],
   },
   contained: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  dismissable: {
     control: {
       type: 'boolean',
     },

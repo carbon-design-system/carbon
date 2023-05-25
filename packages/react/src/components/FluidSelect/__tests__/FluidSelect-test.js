@@ -8,7 +8,6 @@
 import React from 'react';
 import FluidSelect from '../FluidSelect';
 import { render } from '@testing-library/react';
-import { FeatureFlags } from '../../FeatureFlags';
 
 const prefix = 'cds';
 
@@ -16,9 +15,7 @@ describe('FluidSelect', () => {
   describe('renders as expected - Component API', () => {
     it('should render as expected', () => {
       const { container } = render(
-        <FeatureFlags flags={{ 'enable-v11-release': true }}>
-          <FluidSelect id="input-1" labelText="FluidTextInput label" />
-        </FeatureFlags>
+        <FluidSelect id="input-1" labelText="FluidTextInput label" />
       );
 
       expect(container.firstChild).toHaveClass(`${prefix}--select--fluid`);

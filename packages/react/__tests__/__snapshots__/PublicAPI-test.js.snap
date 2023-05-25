@@ -578,6 +578,19 @@ Map {
       "rel": Object {
         "type": "string",
       },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
     },
     "render": [Function],
   },
@@ -3063,7 +3076,6 @@ Map {
       "buttonLabel": "",
       "disabled": false,
       "filenameStatus": "uploading",
-      "iconDescription": undefined,
       "multiple": false,
       "onClick": [Function],
     },
@@ -3770,12 +3782,13 @@ Map {
     },
   },
   "HeaderContainer" => Object {
-    "defaultProps": Object {
-      "isSideNavExpanded": false,
-    },
     "propTypes": Object {
       "isSideNavExpanded": Object {
         "type": "bool",
+      },
+      "render": Object {
+        "isRequired": true,
+        "type": "elementType",
       },
     },
   },
@@ -5386,11 +5399,6 @@ Map {
     },
   },
   "OrderedList" => Object {
-    "defaultProps": Object {
-      "isExpressive": false,
-      "native": false,
-      "nested": false,
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -5812,6 +5820,9 @@ Map {
       },
       "isTabTip": Object {
         "type": "bool",
+      },
+      "onRequestClose": Object {
+        "type": "func",
       },
       "open": Object {
         "isRequired": true,
@@ -6430,7 +6441,6 @@ Map {
   "SelectItemGroup" => Object {
     "defaultProps": Object {
       "disabled": false,
-      "label": undefined,
     },
     "propTypes": Object {
       "children": Object {
@@ -6532,6 +6542,9 @@ Map {
       "expanded": Object {
         "type": "bool",
       },
+      "href": Object {
+        "type": "string",
+      },
       "isChildOfHeader": Object {
         "type": "bool",
       },
@@ -6545,6 +6558,9 @@ Map {
         "type": "bool",
       },
       "onOverlayClick": Object {
+        "type": "func",
+      },
+      "onSideNavBlur": Object {
         "type": "func",
       },
       "onToggle": Object {
@@ -6845,21 +6861,14 @@ Map {
     },
   },
   "SkipToContent" => Object {
-    "defaultProps": Object {
-      "children": "Skip to main content",
-      "href": "#main-content",
-      "tabIndex": "0",
-    },
     "propTypes": Object {
       "children": Object {
-        "isRequired": true,
         "type": "string",
       },
       "className": Object {
         "type": "string",
       },
       "href": Object {
-        "isRequired": true,
         "type": "string",
       },
       "tabIndex": Object {
@@ -7884,9 +7893,13 @@ Map {
       "defaultSelectedIndex": Object {
         "type": "number",
       },
+      "dismissable": Object {
+        "type": "bool",
+      },
       "onChange": Object {
         "type": "func",
       },
+      "onTabCloseRequest": [Function],
       "selectedIndex": Object {
         "type": "number",
       },
@@ -8807,17 +8820,7 @@ Map {
         "type": "oneOf",
       },
       "as": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "elementType",
-            },
-          ],
-        ],
-        "type": "oneOfType",
+        "type": "elementType",
       },
       "children": Object {
         "type": "node",
@@ -8866,17 +8869,7 @@ Map {
   "ToggletipLabel" => Object {
     "propTypes": Object {
       "as": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "elementType",
-            },
-          ],
-        ],
-        "type": "oneOfType",
+        "type": "elementType",
       },
       "children": Object {
         "type": "node",
@@ -9159,10 +9152,6 @@ Map {
     },
   },
   "UnorderedList" => Object {
-    "defaultProps": Object {
-      "isExpressive": false,
-      "nested": false,
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",

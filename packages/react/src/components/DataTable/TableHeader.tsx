@@ -17,6 +17,8 @@ import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
 
+const defaultScope = 'col';
+
 const translationKeys: { [key: string]: string } = {
   buttonDescription: 'carbon.table.header.icon.description',
 };
@@ -101,7 +103,7 @@ interface TableHeaderProps
    * attribute at the following URL:
    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th#attr-scope
    */
-  scope: string;
+  scope?: string;
 
   /**
    * Specify which direction we are currently sorting by, should be one of DESC,
@@ -128,7 +130,7 @@ const TableHeader = React.forwardRef(function TableHeader(
     isSortable,
     isSortHeader,
     onClick,
-    scope,
+    scope = defaultScope,
     sortDirection,
     translateWithId: t,
     id,
@@ -264,7 +266,7 @@ TableHeader.propTypes = {
 
 TableHeader.defaultProps = {
   isSortable: false,
-  scope: 'col',
+  scope: defaultScope,
   translateWithId,
 };
 
