@@ -510,7 +510,7 @@ having to run the build process at `@carbon/styles`, in addition to one at the f
 variant repo, upon every Sass code change.
 
 To avoid such overhead, you can point NPM dependency of `@carbon/styles` right
-to the source code, though there is a caveat that our future change to directory
+to the source code, though there is a caveat that our future change to the directory
 structure, etc. may make such steps no longer work. Here are the steps:
 
 ```sh
