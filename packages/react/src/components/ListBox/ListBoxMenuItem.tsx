@@ -38,7 +38,6 @@ export interface ListBoxMenuItemProps extends ReactAttr<HTMLDivElement> {
 export type ListBoxMenuItemForwardedRef =
   | (ForwardedRef<HTMLDivElement> & {
       menuItemOptionRef?: React.Ref<HTMLDivElement>;
-      Layer: HTMLDivElement;
     })
   | null;
 

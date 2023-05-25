@@ -11,7 +11,7 @@ import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { LayerContext } from './LayerContext';
 
-const levels = ['one', 'two', 'three'];
+const levels = ['one', 'two', 'three', 'four'];
 const MAX_LEVEL = levels.length - 1;
 
 /**
