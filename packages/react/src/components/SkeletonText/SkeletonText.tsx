@@ -51,7 +51,7 @@ const SkeletonText = ({
   heading = false,
   className = '',
   ...rest
-}) => {
+}: SkeletonTextProps) => {
   const prefix = usePrefix();
   const skeletonTextClasses = classNames({
     [`${prefix}--skeleton__text`]: true,
@@ -113,7 +113,7 @@ const SkeletonText = ({
     return <div>{lines}</div>;
   }
 
-  return lines;
+  return <>{lines}</>;
 };
 
 SkeletonText.propTypes = {
