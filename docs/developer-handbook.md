@@ -519,7 +519,7 @@ structure, etc. may make such steps no longer work. Here are the steps:
 > ln -s /path/to/@carbon/styles/scss scss
 ```
 
-Then edits of `.scss` files in `/path/to/@carbon/styles/src` will be reflected
+Then edits of `.scss` files in `/path/to/@carbon/styles/scss` will be reflected
 to the development environment of your framework variant repository. You don't
 need to do anything in `@carbon/styles` side.
 
