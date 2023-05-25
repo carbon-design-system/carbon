@@ -113,6 +113,7 @@ const SkeletonText = ({
     return <div>{lines}</div>;
   }
 
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   return <>{lines}</>;
 };
 
