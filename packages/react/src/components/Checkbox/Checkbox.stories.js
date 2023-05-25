@@ -5,9 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { default as Checkbox, CheckboxSkeleton } from './';
-import { Button } from '../Button';
 import mdx from './Checkbox.mdx';
 import CheckboxGroup from '../CheckboxGroup';
 
@@ -69,27 +68,6 @@ export const Single = () => {
       <br /> <br />
       <Checkbox {...checkboxEvents} id="checkbox-6" readOnly />
     </>
-  );
-};
-
-export const ControlledIndeterminate = () => {
-  const [indeterminate, setIndeterminate] = useState(false);
-
-  const handleIndeterminate = (checkboxElement) => {
-    if (!checkboxElement) {
-      return;
-    } else {
-      checkboxElement.indeterminate = indeterminate;
-    }
-  };
-
-  return (
-    <div>
-      <h1>Hello</h1>
-      <Checkbox labelText={`Checkbox label`} indeterminate={indeterminate} />
-      <Button onClick={() => setIndeterminate(!indeterminate)}>Toggle</Button>
-      <Checkbox labelText={`Checkbox label`} ref={handleIndeterminate} />
-    </div>
   );
 };
 
