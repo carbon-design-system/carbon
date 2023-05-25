@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import Link from './Link';
 import { usePrefix } from '../../internal/usePrefix';
+import { keys, match } from '../../internal/keyboard';
 
 const SwitcherItem = React.forwardRef(function SwitcherItem(props, ref) {
   const prefix = usePrefix();
@@ -21,6 +22,9 @@ const SwitcherItem = React.forwardRef(function SwitcherItem(props, ref) {
     children,
     isSelected,
     tabIndex = 0,
+    index,
+    handleSwitcherItemFocus,
+    onKeyDown = () => {},
     ...rest
   } = props;
 
@@ -37,9 +41,32 @@ const SwitcherItem = React.forwardRef(function SwitcherItem(props, ref) {
     [`${prefix}--switcher__item-link--selected`]: isSelected,
   });
 
+  function setTabFocus(evt) {
+    if (match(evt, keys.ArrowDown)) {
+      console.log('down arrow');
+
+      handleSwitcherItemFocus?.({
+        currentIndex: index,
+        direction: 1,
+      });
+    }
+    if (match(evt, keys.ArrowUp)) {
+      console.log('up arrow');
+
+      handleSwitcherItemFocus?.({
+        currentIndex: index,
+        direction: -1,
+      });
+    }
+  }
+
   return (
     <li className={className}>
       <Link
+        onKeyDown={(evt) => {
+          setTabFocus(evt);
+          onKeyDown(evt);
+        }}
         {...rest}
         ref={ref}
         className={linkClassName}
@@ -67,6 +94,22 @@ SwitcherItem.propTypes = {
    * Optionally provide a custom class to apply to the underlying `<li>` node
    */
   className: PropTypes.string,
+
+  /**
+   * event handlers
+   */
+  handleSwitcherItemFocus: PropTypes.func,
+
+  /**
+   * If given, overflow item will render as a link with the given href
+   */
+  index: PropTypes.number,
+
+  /**
+   * event handlers
+   */
+  onKeyDown: PropTypes.func,
+  onKeyUp: PropTypes.func,
 
   /**
    * Specify the tab index of the Link
