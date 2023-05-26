@@ -28,61 +28,91 @@ export default {
   },
 };
 
+const CarbonBuilderLink = (child) => {
+  return (
+    <>
+      <a href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22Text%20input%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22text-input%22%2C%22label%22%3A%22Text%20input%20label%22%2C%22placeholder%22%3A%22Text%20input%20placeholder%22%2C%22helperText%22%3A%22Helper%20text%22%2C%22inputType%22%3A%22text%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22text-input-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D" target="_blank" rel="noreferrer">
+        Edit on Carbon UI Builder 
+      </a>
+      <br></br>
+      <br></br>
+      {child}
+    </>
+  );
+};
+
 export const Default = () => (
-  <TextInput
-    id="text-input-1"
-    type="text"
-    labelText="Text input label"
-    helperText="Optional help text"
-  />
+  <div>
+    <CarbonBuilderLink>
+      <TextInput
+        id="text-input-1"
+        type="text"
+        labelText="Text input label"
+        helperText="Optional help text"
+      />
+    </CarbonBuilderLink>
+  </div>
 );
 
 export const Fluid = () => (
-  <FluidForm>
-    <TextInput type="text" labelText="Text input label" id="text-input-1" />
-  </FluidForm>
+  <div>
+    <CarbonBuilderLink></CarbonBuilderLink>
+    <FluidForm>
+      <TextInput type="text" labelText="Text input label" id="text-input-1" />
+    </FluidForm>
+  </div>
 );
 
 export const TogglePasswordVisibility = () => {
   return (
-    <TextInput.PasswordInput
-      id="text-input-1"
-      labelText="Text input label"
-      helperText="Optional help text"
-      autoComplete="true"
-    />
+    <div>
+      <CarbonBuilderLink></CarbonBuilderLink>
+      <TextInput.PasswordInput
+        id="text-input-1"
+        labelText="Text input label"
+        helperText="Optional help text"
+        autoComplete="true"
+      />
+    </div>
   );
 };
 
 export const ReadOnly = () => {
   return (
-    <TextInput
-      labelText="Text input label"
-      helperText="Optional help text"
-      value="This is read only, you can't type more."
-      readOnly
-      id="text-input-1"
-    />
+    <div>
+      <CarbonBuilderLink></CarbonBuilderLink>
+      <TextInput
+        labelText="Text input label"
+        helperText="Optional help text"
+        value="This is read only, you can't type more."
+        readOnly
+        id="text-input-1"
+      />
+    </div>
   );
 };
 
 export const _WithLayer = () => (
-  <WithLayer>
-    {(layer) => (
-      <TextInput
-        type="text"
-        labelText="Text input label"
-        helperText="Optional help text"
-        id={`text-input-${layer}`}
-      />
-    )}
-  </WithLayer>
+  <div>
+    <CarbonBuilderLink></CarbonBuilderLink>
+    <WithLayer>
+      {(layer) => (
+        <TextInput
+          type="text"
+          labelText="Text input label"
+          helperText="Optional help text"
+          id={`text-input-${layer}`}
+        />
+      )}
+    </WithLayer>
+  </div>
 );
 
-export const Skeleton = () => <TextInputSkeleton />;
+export const Skeleton = () => <div><CarbonBuilderLink></CarbonBuilderLink><TextInputSkeleton /></div>;
 
 export const Playground = (args) => (
   <div style={{ width: args.playgroundWidth }}>
+    <CarbonBuilderLink></CarbonBuilderLink>
     <TextInput {...args} id="text-input-1" type="text" />
   </div>
 );
