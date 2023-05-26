@@ -10,7 +10,7 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 [![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/pagination)
 
 The pagination component is used to switch through multiple pages of items, when
-only a maxium number of items can be displayed per page. Can be used in
+only a maximum number of items can be displayed per page. Can be used in
 combination with other components like data table.
 
 ## Getting started
@@ -29,13 +29,14 @@ import '@carbon/web-components/es/components/pagination/index.js';
 ### HTML
 
 ```html
-<cds-pagination page-size="10" start="0" total="100">
-  <cds-page-sizes-select slot="page-sizes-select">
-    <option value="10">10</option>
-    <option value="20">20</option>
-    <option value="30">30</option>
+<cds-pagination page-size="10" total="100">
+  <cds-select>
+      <cds-select-item value="10">10</cds-select-item>
+      <cds-select-item value="20">20</cds-select-item>
+      <cds-select-item value="30">30</cds-select-item>
+      <cds-select-item value="40">40</cds-select-item>
+      <cds-select-item value="50">50</cds-select-item>
   </cds-page-sizes-select>
-  <cds-pages-select></cds-pages-select>
 </cds-pagination>
 ```
 

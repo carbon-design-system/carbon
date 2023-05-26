@@ -28,8 +28,6 @@ import '../overflow-menu/overflow-menu';
 import '../overflow-menu/overflow-menu-body';
 import '../overflow-menu/overflow-menu-item';
 import '../pagination/pagination';
-import '../pagination/page-sizes-select';
-import '../pagination/pages-select';
 import { TABLE_COLOR_SCHEME, TABLE_SIZE } from './table';
 import './table-head';
 import './table-header-row';

@@ -287,7 +287,7 @@ class CDSSelect extends FormMixin(LitElement) {
   /**
    * The value of the text area.
    */
-  @property()
+  @property({ reflect: true })
   value = '';
 
   connectedCallback() {

@@ -12,6 +12,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/button';
 @use '@carbon/styles/scss/components/popover/index';
 @use '@carbon/styles/scss/components/tooltip';
+@use '@carbon/styles/scss/theme' as *;
 
 :host(#{$prefix}-button),
 :host(#{$prefix}-modal-footer-button) {
@@ -20,6 +21,30 @@ $css--plex: true !default;
   &[isExpressive] ::slotted([slot='icon']) {
     width: rem(20px);
     height: rem(20px);
+  }
+
+  &[pagination] {
+    .#{$prefix}--btn {
+      border: none;
+      border-left: 1px solid $border-subtle;
+      transition: none;
+
+      &:focus {
+        outline: 2px solid $focus;
+        outline-offset: -2px;
+        box-shadow: none;
+        border-left: 1px solid transparent;
+      }
+    }
+
+    &:not([disabled]) {
+      .#{$prefix}--btn {
+        color: $icon-primary;
+        &:active {
+          background-color: $layer-hover;
+        }
+      }
+    }
   }
 }
 

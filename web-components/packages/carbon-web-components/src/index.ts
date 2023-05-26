@@ -76,8 +76,6 @@ export { default as CDSOverflowMenu } from './components/overflow-menu/overflow-
 export { default as CDSOverflowMenuBody } from './components/overflow-menu/overflow-menu-body';
 export { default as CDSOverflowMenuItem } from './components/overflow-menu/overflow-menu-item';
 export { default as CDSPagination } from './components/pagination/pagination';
-export { default as CDSPageSizesSelect } from './components/pagination/page-sizes-select';
-export { default as CDSPagesSelect } from './components/pagination/pages-select';
 export { default as CDSProgressBar } from './components/progress-bar/progress-bar';
 export { default as CDSProgressIndicator } from './components/progress-indicator/progress-indicator';
 export { default as CDSProgressIndicatorSkeleton } from './components/progress-indicator/progress-indicator-skeleton';

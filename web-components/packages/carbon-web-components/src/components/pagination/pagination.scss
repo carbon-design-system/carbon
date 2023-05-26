@@ -21,10 +21,6 @@ $css--plex: true !default;
   position: relative;
   outline: none;
 
-  .#{$prefix}--pagination__left {
-    flex: 1;
-  }
-
   .#{$prefix}-ce--pagination__divider {
     height: 100%;
     width: rem(1px);
@@ -38,66 +34,4 @@ $css--plex: true !default;
   .#{$prefix}--pagination__button svg {
     transform: rotate(0) #{'/*rtl:rotate(180deg)*/'};
   }
-}
-
-:host(#{$prefix}-pages-select) {
-  @extend .#{$prefix}--select__page-number;
-
-  outline: none;
-}
-
-:host(#{$prefix}-page-sizes-select) {
-  @extend .#{$prefix}--select__item-count;
-
-  outline: none;
-}
-
-:host(#{$prefix}-pages-select),
-:host(#{$prefix}-page-sizes-select) {
-  display: flex;
-  align-items: center;
-  height: 100%;
-
-  .#{$prefix}--select-input {
-    @include type-style('body-short-01');
-
-    width: auto;
-    min-width: auto;
-    height: 100%;
-    padding: 0 2.5rem 0 $spacing-05;
-    margin-right: 0;
-    border: none;
-
-    @include breakpoint('md') {
-      padding-right: rem(36px);
-    }
-
-    &:hover {
-      // TODO: check value because this is a split token
-      // (hover-ui became field-hover-01 and field-hover-02)
-      background: $field-hover-01;
-    }
-  }
-
-  .#{$prefix}--select__arrow {
-    top: auto;
-    bottom: auto;
-
-    @include breakpoint('md') {
-      right: $spacing-05;
-    }
-  }
-}
-
-:host(#{$prefix}-pages-select) .#{$prefix}--select__page-number,
-:host(#{$prefix}-page-sizes-select) .#{$prefix}--select__item-count {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  position: relative;
-}
-
-:host(#{$prefix}-pages-select) .#{$prefix}--pagination__text {
-  margin-right: 1rem;
-  margin-left: rem(1px);
 }
