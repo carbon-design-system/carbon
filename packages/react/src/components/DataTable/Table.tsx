@@ -178,6 +178,7 @@ export const Table = ({
     experimentalAutoAlign,
     toggleTableBodyAlignmentClass,
     toggleTableHeaderAlignmentClass,
+    prefix
   ]);
 
   const debouncedSetTableAlignment = debounce(setTableAlignment, 100);
