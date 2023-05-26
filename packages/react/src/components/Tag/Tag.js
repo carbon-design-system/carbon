@@ -59,15 +59,7 @@ const Tag = ({
 
   if (filter) {
     return (
-      <div
-        className={tagClasses}
-        aria-label={
-          title !== undefined
-            ? `${title} ${children}`
-            : `Clear filter ${children}`
-        }
-        id={tagId}
-        {...other}>
+      <div className={tagClasses} id={tagId} {...other}>
         <span
           className={`${prefix}--tag__label`}
           title={typeof children === 'string' ? children : null}>
