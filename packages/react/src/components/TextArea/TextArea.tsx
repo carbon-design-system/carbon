@@ -135,7 +135,7 @@ export interface TextAreaProps
   /**
    * Specify the method used for calculating the counter number
    */
-  counterMode?: string;
+  counterMode?: 'character' | 'word';
 }
 
 const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
@@ -162,16 +162,29 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const { isFluid } = useContext(FormContext);
   const { defaultValue, value, disabled } = other;
 
+  function getInitialTextCount(
+    value: string | number | undefined,
+    defaultValue: string | number | undefined,
+    counterMode: 'character' | 'word' | undefined
+  ): number {
+    if (defaultValue) {
+      if (counterMode === 'character') {
+        return defaultValue.toString().length;
+      } else {
+        return defaultValue.toString().match(/\w+/g)?.length || 0;
+      }
+    } else if (value) {
+      if (counterMode === 'character') {
+        return value.toString().length;
+      } else {
+        return value.toString().match(/\w+/g)?.length || 0;
+      }
+    }
+    return 0;
+  }
+
   const [textCount, setTextCount] = useState(
-    defaultValue
-      ? counterMode === 'character'
-        ? defaultValue.toString().length
-        : defaultValue.toString().match(/\w+/g)?.length || 0
-      : value
-      ? counterMode === 'character'
-        ? value.toString().length
-        : value.toString().match(/\w+/g)?.length || 0
-      : 0
+    getInitialTextCount(defaultValue, value, counterMode)
   );
   const { current: textAreaInstanceId } = useRef(getInstanceId());
 
@@ -240,7 +253,6 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
               }, 0);
               textareaRef.current.value = first_max;
             }
-            // todo: add handling if no matched words were found
           }
         }
         if (onChange) {
