@@ -6,7 +6,7 @@
  */
 
 import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { useState, useContext, useRef } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import classNames from 'classnames';
 import deprecate from '../../prop-types/deprecate';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
@@ -175,6 +175,20 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   );
   const { current: textAreaInstanceId } = useRef(getInstanceId());
 
+  useEffect(() => {
+    setTextCount(
+      defaultValue
+        ? counterMode === 'character'
+          ? defaultValue.toString().length
+          : defaultValue.toString().match(/\w+/g)?.length || 0
+        : value
+        ? counterMode === 'character'
+          ? value.toString().length
+          : value.toString().match(/\w+/g)?.length || 0
+        : 0
+    );
+  }, [value, defaultValue, counterMode]);
+
   const textareaProps: {
     id: TextAreaProps['id'];
     onKeyDown: (evt: React.KeyboardEvent) => void;
@@ -194,11 +208,16 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     onChange: (evt) => {
       if (!other.disabled) {
         if (counterMode == 'character') {
-          setTextCount(evt.target.value.length);
+          // delay textCount assignation to give the textarea element value time to catch up if is a controlled input
+          setTimeout(() => {
+            setTextCount(evt.target.value.length);
+          }, 0);
         } else if (counterMode == 'word') {
           if (!evt.target.value) {
-            console.log('reset');
-            setTextCount(0);
+            setTimeout(() => {
+              setTextCount(0);
+            }, 0);
+
             return;
           }
 
@@ -206,14 +225,19 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
             const matchedWords = evt.target.value.match(/\w+/g);
             if (matchedWords && matchedWords.length <= maxCount) {
               textareaRef.current.removeAttribute('maxLength');
-              setTextCount(matchedWords.length);
+
+              setTimeout(() => {
+                setTextCount(matchedWords.length);
+              }, 0);
             } else if (matchedWords && matchedWords.length > maxCount) {
               const first_max = evt.target.value
                 .split(/\s+/)
                 .slice(0, maxCount)
                 .join(' ');
 
-              setTextCount(maxCount);
+              setTimeout(() => {
+                setTextCount(maxCount);
+              }, 0);
               textareaRef.current.value = first_max;
             }
             // todo: add handling if no matched words were found
