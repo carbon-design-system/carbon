@@ -18,6 +18,7 @@ describe('TabContent', () => {
           <div className="child">content</div>
         </TabContent>
       );
+      // eslint-disable-next-line testing-library/no-node-access
       expect(screen.getByRole('tabpanel').children.length).toEqual(2);
     });
 

@@ -165,6 +165,7 @@ describe('TextArea', () => {
       );
       expect(screen.getByText('This is helper text.').tagName).toBe('SPAN');
       expect(
+        // eslint-disable-next-line testing-library/no-node-access
         screen.getByText('This is helper text.').parentElement
       ).toHaveClass(`${prefix}--form__helper-text`);
     });
@@ -191,7 +192,24 @@ describe('TextArea', () => {
       expect(
         screen
           .getByText('testLabel')
+          // eslint-disable-next-line testing-library/no-node-access
           .closest(`.${prefix}--text-area__label-wrapper`)
+          // eslint-disable-next-line testing-library/no-node-access
+          .getElementsByClassName(`${prefix}--label`).length
+      ).toEqual(1);
+    });
+
+    it('should not render counter with only maxCount prop passed in', () => {
+      render(<TextArea id="testing" labelText="testLabel" maxCount={500} />);
+      // The label and the counter both have the same label class.
+      // The label exists, but not the counter.
+      expect(screen.getByText('testLabel')).toHaveClass(`${prefix}--label`);
+      expect(
+        screen
+          .getByText('testLabel')
+          // eslint-disable-next-line testing-library/no-node-access
+          .closest(`.${prefix}--text-area__label-wrapper`)
+          // eslint-disable-next-line testing-library/no-node-access
           .getElementsByClassName(`${prefix}--label`).length
       ).toEqual(1);
     });
@@ -206,23 +224,11 @@ describe('TextArea', () => {
           />
         );
         expect(
+          // eslint-disable-next-line testing-library/no-node-access
           screen.getByText('testLabel').closest(`${prefix}--text-area__counter`)
         ).toEqual(null);
       });
     });
-  });
-
-  it('should not render counter with only maxCount prop passed in', () => {
-    render(<TextArea id="testing" labelText="testLabel" maxCount={500} />);
-    // The label and the counter both have the same label class.
-    // The label exists, but not the counter.
-    expect(screen.getByText('testLabel')).toHaveClass(`${prefix}--label`);
-    expect(
-      screen
-        .getByText('testLabel')
-        .closest(`.${prefix}--text-area__label-wrapper`)
-        .getElementsByClassName(`${prefix}--label`).length
-    ).toEqual(1);
   });
 
   it('should have label and counter disabled', () => {

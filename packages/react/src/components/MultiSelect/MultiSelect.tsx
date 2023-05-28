@@ -339,7 +339,15 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
     highlightedIndex,
     isOpen,
     itemToString: (items) => {
-      return (items as ItemType[]).map((item) => itemToString(item)).join(', ');
+      return (
+        (Array.isArray(items) &&
+          items
+            .map(function (item) {
+              return itemToString(item);
+            })
+            .join(', ')) ||
+        ''
+      );
     },
     onStateChange,
     selectedItem: controlledSelectedItems,

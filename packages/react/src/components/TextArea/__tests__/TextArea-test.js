@@ -82,6 +82,7 @@ describe('TextArea', () => {
         <TextArea id="textarea-1" labelText="TextArea" invalid />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const invalidIcon = container.querySelector(
         `svg.${prefix}--text-area__invalid-icon`
       );
@@ -148,6 +149,7 @@ describe('TextArea', () => {
         <TextArea id="textarea-1" labelText="TextArea label" warn />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const warnIcon = container.querySelector(
         `svg.${prefix}--text-area__invalid-icon--warning`
       );
@@ -310,7 +312,7 @@ describe('TextArea', () => {
   });
 
   describe('word counter behaves as expected', () => {
-    it('should correctly increase word count', () => {
+    it('should correctly increase word count', async () => {
       render(
         <TextArea
           id="input-1"
@@ -330,15 +332,18 @@ describe('TextArea', () => {
         },
       });
 
-      waitFor(() => {
+      await waitFor(() => {
         expect(screen.getByText('10/10')).toBeInTheDocument();
+      });
+
+      await waitFor(() => {
         expect(screen.getByRole('textbox')).toHaveValue(
           'one two three four five six seven eight nine ten'
         );
       });
     });
 
-    it('should correctly decrease word count', () => {
+    it('should correctly decrease word count', async () => {
       render(
         <TextArea
           id="input-1"
@@ -359,8 +364,11 @@ describe('TextArea', () => {
         },
       });
 
-      waitFor(() => {
+      await waitFor(() => {
         expect(screen.getByText('3/10')).toBeInTheDocument();
+      });
+
+      await waitFor(() => {
         expect(screen.getByRole('textbox')).toHaveValue('one two three');
       });
     });
