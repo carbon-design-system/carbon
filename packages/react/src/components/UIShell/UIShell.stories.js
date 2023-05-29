@@ -815,7 +815,11 @@ FixedSideNavWDivider.storyName = 'Fixed SideNav w/ Divider';
 
 export const SideNavRail = () => (
   <>
-    <SideNav aria-label="Side navigation" href="#main-content" isRail>
+    <SideNav
+      aria-label="Side navigation"
+      href="#main-content"
+      isRail
+      enterDelayMs={1000}>
       <SideNavItems>
         <SideNavMenu renderIcon={Fade} title="Category title">
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
@@ -917,6 +921,7 @@ export const SideNavRailWHeader = () => (
           <SideNav
             aria-label="Side navigation"
             isRail
+            enterDelayMs={3000}
             expanded={isSideNavExpanded}
             onOverlayClick={onClickSideNavExpand}
             href="#main-content"
@@ -1022,127 +1027,4 @@ export const SideNavWLargeSideNavItems = () => (
   </>
 );
 
-const UIShellPlayground = (props) => {
-  const { isRail, enterDelayMs } = props;
-  return (
-    <HeaderContainer
-      render={({ isSideNavExpanded, onClickSideNavExpand }) => (
-        <>
-          <Header aria-label="IBM Platform Name">
-            <SkipToContent />
-            <HeaderMenuButton
-              aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
-              isCollapsible
-              onClick={onClickSideNavExpand}
-              isActive={isSideNavExpanded}
-              aria-expanded={isSideNavExpanded}
-            />
-            <HeaderName href="#" prefix="IBM">
-              [Platform]
-            </HeaderName>
-            <HeaderNavigation aria-label="IBM [Platform]">
-              <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-              <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-              <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-              <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
-                <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
-                <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
-                <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
-              </HeaderMenu>
-            </HeaderNavigation>
-            <HeaderGlobalBar>
-              <HeaderGlobalAction
-                aria-label="Search"
-                onClick={action('search click')}>
-                <Search size={20} />
-              </HeaderGlobalAction>
-              <HeaderGlobalAction
-                aria-label="Notifications"
-                onClick={action('notification click')}>
-                <Notification size={20} />
-              </HeaderGlobalAction>
-              <HeaderGlobalAction
-                aria-label="App Switcher"
-                onClick={action('app-switcher click')}
-                tooltipAlignment="end">
-                <SwitcherIcon size={20} />
-              </HeaderGlobalAction>
-            </HeaderGlobalBar>
-            <SideNav
-              aria-label="Side navigation"
-              isRail={isRail}
-              expanded={isSideNavExpanded}
-              onOverlayClick={onClickSideNavExpand}
-              href="#main-content"
-              enterDelayMs={enterDelayMs}
-              onSideNavBlur={onClickSideNavExpand}>
-              <SideNavItems>
-                <SideNavMenu renderIcon={Fade} title="Category title">
-                  <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                    Link
-                  </SideNavMenuItem>
-                  <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                    Link
-                  </SideNavMenuItem>
-                  <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                    Link
-                  </SideNavMenuItem>
-                </SideNavMenu>
-                <SideNavMenu renderIcon={Fade} title="Category title">
-                  <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                    Link
-                  </SideNavMenuItem>
-                  <SideNavMenuItem
-                    aria-current="page"
-                    href="https://www.carbondesignsystem.com/">
-                    Link
-                  </SideNavMenuItem>
-                  <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                    Link
-                  </SideNavMenuItem>
-                </SideNavMenu>
-                <SideNavMenu renderIcon={Fade} title="Category title">
-                  <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                    Link
-                  </SideNavMenuItem>
-                  <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                    Link
-                  </SideNavMenuItem>
-                  <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                    Link
-                  </SideNavMenuItem>
-                </SideNavMenu>
-                <SideNavLink
-                  renderIcon={Fade}
-                  href="https://www.carbondesignsystem.com/">
-                  Link
-                </SideNavLink>
-                <SideNavLink
-                  renderIcon={Fade}
-                  href="https://www.carbondesignsystem.com/">
-                  Link
-                </SideNavLink>
-              </SideNavItems>
-            </SideNav>
-          </Header>
-          <StoryContent />
-        </>
-      )}
-    />
-  );
-};
-export const Playground = UIShellPlayground.bind({});
-Playground.argTypes = {
-  isRail: {
-    defaultValue: true,
-    control: {
-      type: 'boolean',
-    },
-  },
-  enterDelayMs: {
-    control: {
-      type: 'number',
-    },
-  },
-};
 SideNavWLargeSideNavItems.storyName = 'SideNav w/ large side nav items';
