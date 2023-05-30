@@ -13,9 +13,8 @@ import Link from './Link';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 
-const SwitcherItem = React.forwardRef(function SwitcherItem(props, ref) {
-  const prefix = usePrefix();
-  const {
+const SwitcherItem = React.forwardRef(function SwitcherItem(
+  {
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
     className: customClassName,
@@ -26,7 +25,11 @@ const SwitcherItem = React.forwardRef(function SwitcherItem(props, ref) {
     handleSwitcherItemFocus,
     onKeyDown = () => {},
     ...rest
-  } = props;
+  },
+  ref
+) {
+  console.log('ref', ref);
+  const prefix = usePrefix();
 
   const className = cx(`${prefix}--switcher__item`, {
     [customClassName]: !!customClassName,
@@ -43,16 +46,12 @@ const SwitcherItem = React.forwardRef(function SwitcherItem(props, ref) {
 
   function setTabFocus(evt) {
     if (match(evt, keys.ArrowDown)) {
-      console.log('down arrow');
-
       handleSwitcherItemFocus?.({
         currentIndex: index,
         direction: 1,
       });
     }
     if (match(evt, keys.ArrowUp)) {
-      console.log('up arrow');
-
       handleSwitcherItemFocus?.({
         currentIndex: index,
         direction: -1,
