@@ -267,3 +267,25 @@ values are passed along to a given element in the DOM. While the label should
 stay consistent over time, you should not rely on either prop pointing to the
 same element over time. In other words, the node that `aria-label` or
 `aria-labelledby` is supplied to may change over time.
+
+#### The DOM node that a `data-testid` corresponds to is changed
+
+semver bump: **minor**, but ideally **major**
+
+We support the placement of `data-testid` attributes on components as a "stable
+selector" for locating elements for testing when
+[all other options](https://testing-library.com/docs/queries/about#priority) are
+exhausted.
+
+We are aware that consumers relying on these in their tests will be impacted
+from any modifications to their placement. For this reason we'll always aim to
+contain any of these changes behind a feature flag or major version bump, but
+under some circumstances the node that this is applied to may change across
+minor versions. In these cases we will make a strong effort to loudly
+communicate the change to notify teams as well as provide automated tooling
+where possible to minimize the impact of the change.
+
+**We highly encourage consuming applications to _avoid using `data-testid`
+unless absolutely necessary_ and instead use more stable
+[relative queries focused on accessible roles](https://testing-library.com/docs/queries/about#priority)
+or HTML5 and ARIA semantics for selecting elements for testing.**
