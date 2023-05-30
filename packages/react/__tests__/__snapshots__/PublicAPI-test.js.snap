@@ -9519,6 +9519,9 @@ Map {
   },
   "unstable_OverflowMenuV2" => Object {
     "propTypes": Object {
+      "aria-labelledby": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },
