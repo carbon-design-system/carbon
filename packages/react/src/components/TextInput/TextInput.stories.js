@@ -28,7 +28,7 @@ export default {
   },
 };
 
-const CarbonBuilderLink = (child) => {
+const CarbonBuilderLink = () => {
   return (
     <>
       <a href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22Text%20input%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22text-input%22%2C%22label%22%3A%22Text%20input%20label%22%2C%22placeholder%22%3A%22Text%20input%20placeholder%22%2C%22helperText%22%3A%22Helper%20text%22%2C%22inputType%22%3A%22text%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22text-input-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D" target="_blank" rel="noreferrer">
@@ -36,21 +36,19 @@ const CarbonBuilderLink = (child) => {
       </a>
       <br></br>
       <br></br>
-      {child}
     </>
   );
 };
 
 export const Default = () => (
   <div>
-    <CarbonBuilderLink>
-      <TextInput
+    <CarbonBuilderLink></CarbonBuilderLink>
+    <TextInput
         id="text-input-1"
         type="text"
         labelText="Text input label"
         helperText="Optional help text"
-      />
-    </CarbonBuilderLink>
+    />
   </div>
 );
 
