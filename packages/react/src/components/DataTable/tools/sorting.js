@@ -57,7 +57,12 @@ export const compare = (a, b, locale = 'en') => {
 export const compareStrings = (a, b, locale = 'en') => {
   // Only set `numeric: true` if the string only contains numbers
   // https://stackoverflow.com/a/175787
-  if (!isNaN(a) && !isNaN(parseFloat(a))) {
+  if (
+    !isNaN(a) &&
+    !isNaN(parseFloat(a)) &&
+    !isNaN(b) &&
+    !isNaN(parseFloat(b))
+  ) {
     return a.localeCompare(b, locale, { numeric: true });
   }
 
