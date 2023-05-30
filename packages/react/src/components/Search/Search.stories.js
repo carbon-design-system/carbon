@@ -27,76 +27,104 @@ export default {
   },
 };
 
+const CarbonBuilderLink = () => {
+  return (
+    <>
+      <a href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22SearchFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22search%22%2C%22label%22%3A%22Search%22%2C%22placeholder%22%3A%22Search%22%2C%22autocomplete%22%3A%22off%22%2C%22inputSize%22%3A%22lg%22%2C%22defaultValue%22%3A%22%22%2C%22expandable%22%3Afalse%2C%22closeButtonLabelText%22%3A%22Clear%20search%20input%22%2C%22disabled%22%3Afalse%2C%22light%22%3Afalse%2C%22searchType%22%3A%22text%22%2C%22role%22%3A%22searchbox%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22search-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D" target="_blank" rel="noreferrer">
+        Edit on Carbon UI Builder 
+      </a>
+      <br></br>
+      <br></br>
+    </>
+  );
+};
+
 export const Default = () => (
-  <Search
-    size="lg"
-    placeholder="Find your items"
-    labelText="Search"
-    closeButtonLabelText="Clear search input"
-    id="search-1"
-    onChange={() => {}}
-    onKeyDown={() => {}}
-  />
+  <>
+    <CarbonBuilderLink></CarbonBuilderLink>
+    <Search
+      size="lg"
+      placeholder="Find your items"
+      labelText="Search"
+      closeButtonLabelText="Clear search input"
+      id="search-1"
+      onChange={() => {}}
+      onKeyDown={() => {}}
+    />
+  </>
 );
 
 export const Disabled = () => (
-  <Search
-    disabled
-    size="lg"
-    placeholder="Find your items"
-    labelText="Search"
-    closeButtonLabelText="Clear search input"
-    id="search-1"
-    onChange={() => {}}
-    onKeyDown={() => {}}
-  />
+  <>
+    <CarbonBuilderLink></CarbonBuilderLink>
+    <Search
+      disabled
+      size="lg"
+      placeholder="Find your items"
+      labelText="Search"
+      closeButtonLabelText="Clear search input"
+      id="search-1"
+      onChange={() => {}}
+      onKeyDown={() => {}}
+    />
+  </>
 );
 
 export const Expandable = () => (
-  <ExpandableSearch
-    size="lg"
-    labelText="Search"
-    closeButtonLabelText="Clear search input"
-    id="search-expandable-1"
-    onChange={() => {}}
-    onKeyDown={() => {}}
-  />
+  <>
+    <CarbonBuilderLink></CarbonBuilderLink>
+    <ExpandableSearch
+      size="lg"
+      labelText="Search"
+      closeButtonLabelText="Clear search input"
+      id="search-expandable-1"
+      onChange={() => {}}
+      onKeyDown={() => {}}
+    />
+  </>
 );
 
 export const _WithLayer = () => (
-  <WithLayer>
-    {(layer) => (
-      <Search
-        size="lg"
-        placeholder="Find your items"
-        labelText="Search"
-        closeButtonLabelText="Clear search input"
-        id={`search-${layer}`}
-        onChange={() => {}}
-        onKeyDown={() => {}}
-      />
-    )}
-  </WithLayer>
+  <>
+    <CarbonBuilderLink></CarbonBuilderLink>
+    <WithLayer>
+      {(layer) => (
+        <Search
+          size="lg"
+          placeholder="Find your items"
+          labelText="Search"
+          closeButtonLabelText="Clear search input"
+          id={`search-${layer}`}
+          onChange={() => {}}
+          onKeyDown={() => {}}
+        />
+      )}
+    </WithLayer>
+  </>
 );
 
 export const ExpandableWithLayer = () => (
-  <WithLayer>
-    {(layer) => (
-      <ExpandableSearch
-        size="lg"
-        placeholder="Search"
-        labelText="First Layer"
-        closeButtonLabelText="Clear search input"
-        id={`search-expandable-${layer}`}
-        onChange={() => {}}
-        onKeyDown={() => {}}
-      />
-    )}
-  </WithLayer>
+  <>
+    <CarbonBuilderLink></CarbonBuilderLink>
+    <WithLayer>
+      {(layer) => (
+        <ExpandableSearch
+          size="lg"
+          placeholder="Search"
+          labelText="First Layer"
+          closeButtonLabelText="Clear search input"
+          id={`search-expandable-${layer}`}
+          onChange={() => {}}
+          onKeyDown={() => {}}
+        />
+      )}
+    </WithLayer>
+  </>
 );
 
 export const Playground = (args) => (
   <div style={{ width: args.playgroundWidth }}>
+    <CarbonBuilderLink></CarbonBuilderLink>
     <Search id="search-playground-1" {...args} />
   </div>
 );

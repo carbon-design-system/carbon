@@ -19,12 +19,30 @@ export default {
   },
 };
 
+const CarbonBuilderLink = () => {
+  return (
+    <>
+      <a href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22LoadingFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22loading%22%2C%22label%22%3A%22Loading%22%2C%22overlay%22%3Afalse%2C%22size%22%3A%22normal%22%2C%22active%22%3Atrue%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22loading-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D" target="_blank" rel="noreferrer">
+        Edit on Carbon UI Builder 
+      </a>
+      <br></br>
+      <br></br>
+    </>
+  );
+};
+
 export const Default = () => {
-  return <Loading className={'some-class'} withOverlay={false} />;
+  return <>
+    <CarbonBuilderLink></CarbonBuilderLink>
+    <Loading className={'some-class'} withOverlay={false} />
+  </>;
 };
 
 export const Playground = (args) => {
-  return <Loading className={'some-class'} {...args} />;
+  return <>
+    <CarbonBuilderLink></CarbonBuilderLink>
+    <Loading className={'some-class'} {...args} />
+  </>;
 };
 
 Playground.argTypes = {
