@@ -32,8 +32,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        channel: ${{fromJson(needs.setup.outputs.matrix)}}
+        value: ${{fromJson(needs.setup.outputs.matrix)}}
     steps:
+        - run: |
+            echo "${{ matrix.value }}"
 #       - name: Send slack announcement
 #         id: slack
 #         uses: slackapi/slack-github-action@v1.24.0
@@ -50,5 +52,3 @@ jobs:
 #         env:
 #           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 #           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-        - run: |
-            echo "${{ matrix.channel }}"
