@@ -27,7 +27,6 @@ jobs:
             channels="${{ github.event.inputs.channel }}"
             IFS=','
             read -ra arr <<< "$channels"
-            echo "${toJSON(arr)}"
             echo "channel=${arr}" >> $GITHUB_OUTPUT
           #  echo "channel=[\"${channels//', '/\",\"}\"]" >> $GITHUB_OUTPUT
             
@@ -37,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        value: ${{fromJson(needs.setup.outputs.matrix)}}
+        value: ${{needs.setup.outputs.matrix}}
     steps:
       - run: |
           echo "${{ matrix.value }}"
