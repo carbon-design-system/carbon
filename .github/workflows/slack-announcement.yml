@@ -25,7 +25,7 @@ jobs:
         - id: matrix
           run: |
             channels="${{ github.event.inputs.channel }}"
-            echo "::set-output name=channel::[\"${channels//', '/\",\"}\"]"
+            echo "channel=[\"${channels//', '/\",\"}\"]" >> $GITHUB_OUTPUT
   slack-announcement:
     needs: [ setup ]
     name: Send slack announcement
