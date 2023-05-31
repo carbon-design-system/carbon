@@ -103,6 +103,15 @@
     vertical-align: baseline;
   }
 
+  // Chrome 62 fix
+  button,
+  select,
+  input,
+  textarea {
+    border-radius: 0;
+    font-family: inherit;
+  }
+
   /* HTML5 display-role reset for older browsers */
   article,
   aside,

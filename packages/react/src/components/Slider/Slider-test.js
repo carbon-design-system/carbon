@@ -127,6 +127,7 @@ describe('Slider', () => {
         ariaLabelInput: inputAriaValue,
         hideTextInput: true,
       });
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const inputElement = container.querySelector(
         `.${prefix}--text-input.${prefix}--slider-text-input`
       );
@@ -404,6 +405,7 @@ describe('Slider', () => {
           maxLabel: 'max',
           value: 50,
         });
+        // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
         const rangeLabels = container.querySelectorAll(
           `.${prefix}--slider__range-label`
         );
@@ -420,6 +422,7 @@ describe('Slider', () => {
           value: 50,
           formatLabel: (value, label) => `${value}-${label}`,
         });
+        // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
         const rangeLabels = container.querySelectorAll(
           `.${prefix}--slider__range-label`
         );

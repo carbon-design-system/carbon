@@ -486,19 +486,16 @@ class DataTable extends React.Component {
    */
   setAllSelectedState = (initialState, isSelected, filteredRowIds) => {
     const { rowIds } = initialState;
+    const isFiltered = rowIds.length != filteredRowIds.length;
     return {
-      rowsById: rowIds.reduce(
-        (acc, id) => ({
-          ...acc,
-          [id]: {
-            ...initialState.rowsById[id],
-            ...(!initialState.rowsById[id].disabled && {
-              isSelected: filteredRowIds.includes(id) && isSelected,
-            }),
-          },
-        }),
-        {}
-      ),
+      rowsById: rowIds.reduce((acc, id) => {
+        const row = { ...initialState.rowsById[id] };
+        if (!row.disabled && (!isFiltered || filteredRowIds.includes(id))) {
+          row.isSelected = isSelected;
+        }
+        acc[id] = row; // Local mutation for performance with large tables
+        return acc;
+      }, {}),
     };
   };
 

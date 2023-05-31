@@ -78,6 +78,7 @@ describe('Feedback', () => {
     await user.click(button);
 
     expect(button).toHaveClass('cds--copy-btn--animating');
+    // eslint-disable-next-line testing-library/no-unnecessary-act
     act(() => {
       jest.runAllTimers();
       fireEvent.animationEnd(screen.getByTestId('copy-btn-5'), {
@@ -113,6 +114,7 @@ describe('Feedback', () => {
     await user.click(button);
 
     expect(button).toHaveClass('cds--copy-btn--animating');
+    // eslint-disable-next-line testing-library/no-unnecessary-act
     act(() => {
       jest.runAllTimers();
       fireEvent.animationEnd(screen.getByTestId('copy-btn-7'), {

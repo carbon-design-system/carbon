@@ -57,6 +57,6 @@ test.describe('ContentSwitcher', () => {
         theme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('ContentSwitcher');
+    await expect(page).toHaveNoACViolations('ContentSwitcher-IconOnly');
   });
 });

@@ -20,6 +20,9 @@ import mergeRefs from '../../tools/mergeRefs';
 import { PrefixContext } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { IconButton } from '../IconButton';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
+
+const getInstanceId = setupGetInstanceId();
 
 const on = (element, ...args) => {
   element.addEventListener(...args);
@@ -94,6 +97,7 @@ export const getMenuOffset = (menuBody, direction, trigger, flip) => {
 
 class OverflowMenu extends Component {
   state = {};
+  instanceId = getInstanceId();
 
   static propTypes = {
     /**
@@ -529,13 +533,16 @@ class OverflowMenu extends Component {
         })
     );
 
+    const menuBodyId = `overflow-menu-${this.instanceId}__menu-body`;
+
     const menuBody = (
       <ul
         className={overflowMenuOptionsClasses}
         tabIndex="-1"
         role="menu"
         aria-label={ariaLabel || deprecatedAriaLabel}
-        onKeyDown={this.handleKeyPress}>
+        onKeyDown={this.handleKeyPress}
+        id={menuBodyId}>
         {childrenWithProps}
       </ul>
     );
@@ -564,12 +571,15 @@ class OverflowMenu extends Component {
 
     return (
       <ClickListener onClickOutside={this.handleClickOutside}>
-        <span className={`${prefix}--overflow-menu__wrapper`}>
+        <span
+          className={`${prefix}--overflow-menu__wrapper`}
+          aria-owns={open ? menuBodyId : null}>
           <IconButton
             {...other}
             type="button"
             aria-haspopup
             aria-expanded={this.state.open}
+            aria-controls={open ? menuBodyId : null}
             className={overflowMenuClasses}
             onClick={this.handleClick}
             id={id}

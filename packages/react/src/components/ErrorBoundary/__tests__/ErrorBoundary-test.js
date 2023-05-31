@@ -26,7 +26,9 @@ describe('ErrorBoundary', () => {
       </ErrorBoundary>
     );
 
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const component = container.querySelector('[data-test-id="mock"]');
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const fallback = container.querySelector('[data-test-id="fallback"]');
 
     expect(component).toBeDefined();
@@ -54,7 +56,9 @@ describe('ErrorBoundary', () => {
       </ErrorBoundaryContext.Provider>
     );
 
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const component = container.querySelector('[data-test-id="mock"]');
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const fallback = container.querySelector('[data-test-id="fallback"]');
 
     expect(component).toBe(null);
@@ -105,13 +109,13 @@ describe('ErrorBoundary', () => {
 
     await userEvent.click(screen.getByRole('button'));
 
-    expect(await screen.getByText('fallback')).toBeInTheDocument();
-    expect(await screen.queryByText('no error span')).not.toBeInTheDocument();
+    expect(screen.getByText('fallback')).toBeInTheDocument();
+    expect(screen.queryByText('no error span')).not.toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Toggle'));
 
-    expect(await screen.getByText('no error span')).toBeInTheDocument();
-    expect(await screen.queryByText('fallback')).not.toBeInTheDocument();
+    expect(screen.getByText('no error span')).toBeInTheDocument();
+    expect(screen.queryByText('fallback')).not.toBeInTheDocument();
 
     console.error.mockRestore();
   });
