@@ -8602,6 +8602,12 @@ Map {
       "value": Object {
         "type": "string",
       },
+      "warning": Object {
+        "type": "bool",
+      },
+      "warningText": Object {
+        "type": "node",
+      },
     },
     "render": [Function],
   },
