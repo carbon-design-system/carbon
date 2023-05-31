@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        value: ${{fromJson(needs.setup.outputs.matrix)}}
+        channel: ${{fromJson(needs.setup.outputs.matrix)}}
     steps:
 #       - name: Send slack announcement
 #         id: slack
