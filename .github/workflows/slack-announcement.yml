@@ -27,7 +27,9 @@ jobs:
             channels="${{ github.event.inputs.channel }}"
             IFS=','
             read -ra arr <<< "$channels"
-            echo "channel=${arr}" >> $GITHUB_OUTPUT
+            channelsJson = jq --compact-output --null-input '$ARGS.positional' --args -- "${arr[@]}"
+            echo "${channelsJson}"
+            echo "channel=${channelsJson}" >> $GITHUB_OUTPUT
           #  echo "channel=[\"${channels//', '/\",\"}\"]" >> $GITHUB_OUTPUT
             
   slack-announcement:
