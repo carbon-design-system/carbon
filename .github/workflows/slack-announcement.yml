@@ -20,7 +20,7 @@ jobs:
   setup:
       runs-on: ubuntu-latest
       outputs:
-        matrix: ${{ steps.matrix.outputs.channel }}
+        matrix: ${{fromJson(steps.matrix.outputs.channel)}}
       steps:
         - id: matrix
           run: |
