@@ -20,7 +20,7 @@ jobs:
   setup:
       runs-on: ubuntu-latest
       outputs:
-        matrix: ${{fromJson(steps.matrix.outputs.channel)}}
+        matrix: ${{steps.matrix.outputs.channel}}
       steps:
         - id: matrix
           run: |
@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        value: ${{needs.setup.outputs.matrix}}
+        value: ${{fromJSON(needs.setup.outputs.matrix)}}
     steps:
         - name: Send slack announcement
           id: slack
