@@ -1,9 +1,10 @@
-@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/react/scss/motion';
 @use '@carbon/react/scss/type';
 
 .motion {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .circle {
@@ -17,6 +18,7 @@
   background-color: #8a3ffc;
   border-radius: 50%;
   color: #ffffff;
+  margin: 0.5rem;
 }
 
 .circle:hover {
@@ -24,17 +26,26 @@
   transform: scale(1.2);
 }
 
-$motionTokens: (
-  fast-01: $fast-01,
-  fast-02: $fast-02,
-  moderate-01: $moderate-01,
-  moderate-02: $moderate-02,
-  slow-01: $slow-01,
-  slow-02: $slow-02,
-);
+.fast-01 {
+  transition: all motion.$fast-01;
+}
 
-@each $name, $value in $motionTokens {
-  .#{$name} {
-    transition: all $value;
-  }
+.fast-02 {
+  transition: all motion.$fast-02;
+}
+
+.moderate-01 {
+  transition: all motion.$moderate-01;
+}
+
+.moderate-02 {
+  transition: all motion.$moderate-02;
+}
+
+.slow-01 {
+  transition: all motion.$slow-01;
+}
+
+.slow-02 {
+  transition: all motion.$slow-02;
 }

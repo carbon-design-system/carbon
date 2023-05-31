@@ -12374,19 +12374,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"compat-custom-theme@workspace:examples/compat-custom-theme":
-  version: 0.0.0-use.local
-  resolution: "compat-custom-theme@workspace:examples/compat-custom-theme"
-  dependencies:
-    "@carbon/react": ^1.30.0
-    "@vitejs/plugin-react": 4.0.0
-    react: ^18.2.0
-    react-dom: ^18.2.0
-    sass: ^1.51.0
-    vite: ^4.3.8
-  languageName: unknown
-  linkType: soft
-
 "component-emitter@npm:^1.2.1":
   version: 1.3.0
   resolution: "component-emitter@npm:1.3.0"
@@ -32795,6 +32782,19 @@ fsevents@^1.2.7:
   checksum: 5575a8a75c13120e2f10e6ddc801b2c7ed7d8f3c8ac22c7ed0c7b2ba6383ec0abda88c905085d630e251719e0777045ae3236f04c812184b7c765f63a70e58df
   languageName: node
   linkType: hard
+
+"v10-token-compat-in-v11@workspace:examples/v10-token-compat-in-v11":
+  version: 0.0.0-use.local
+  resolution: "v10-token-compat-in-v11@workspace:examples/v10-token-compat-in-v11"
+  dependencies:
+    "@carbon/react": ^1.30.0
+    "@vitejs/plugin-react": 4.0.0
+    react: ^18.2.0
+    react-dom: ^18.2.0
+    sass: ^1.51.0
+    vite: ^4.3.8
+  languageName: unknown
+  linkType: soft
 
 "v8-compile-cache-lib@npm:^3.0.1":
   version: 3.0.1
