@@ -26,11 +26,11 @@ jobs:
         uses: slackapi/slack-github-action@v1.24.0
         with:
           # For posting a rich message using Block Kit
+          channel-id: "${{ github.event.inputs.channel }}"
           payload: |
             {
               "username": "Carbon Design System",
               "icon_url": "https://user-images.githubusercontent.com/3360588/192045905-5d9705af-92e2-4432-805e-15db98571e8b.png",
-              "channel": "${{ github.event.inputs.channel }}",
               "text": "${{ github.event.inputs.text }}",
               "blocks": ${{ toJSON(fromJSON(github.event.inputs.block-kit).blocks) }}
             }
