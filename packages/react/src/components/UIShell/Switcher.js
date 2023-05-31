@@ -44,7 +44,7 @@ const Switcher = React.forwardRef(function Switcher(props, ref) {
     );
 
     const nextValidIndex = (() => {
-      let nextIndex = enabledIndices.indexOf(currentIndex) + direction;
+      const nextIndex = enabledIndices.indexOf(currentIndex) + direction;
 
       switch (enabledIndices[nextIndex]) {
         case undefined:
