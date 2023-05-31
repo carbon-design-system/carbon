@@ -875,9 +875,9 @@ SideNavRail.argTypes = {
     },
     defaultValue: true,
     table: {
-      defaultValue: { summary: true }
+      defaultValue: { summary: true },
     },
-    description: 'Optional prop to display the side nav rail.'
+    description: 'Optional prop to display the side nav rail.',
   },
   enterDelayMs: {
     control: {
@@ -887,7 +887,8 @@ SideNavRail.argTypes = {
       defaultValue: { summary: 100 },
     },
     defaultValue: 100,
-    description:  'Specify the duration in milliseconds to delay before displaying the sidenav'
+    description:
+      'Specify the duration in milliseconds to delay before displaying the sidenav',
   },
 };
 
@@ -1006,9 +1007,9 @@ SideNavRailWHeader.argTypes = {
     },
     defaultValue: true,
     table: {
-      defaultValue: { summary: true }
+      defaultValue: { summary: true },
     },
-    description: 'Optional prop to display the side nav rail.'
+    description: 'Optional prop to display the side nav rail.',
   },
   enterDelayMs: {
     control: {
@@ -1018,7 +1019,8 @@ SideNavRailWHeader.argTypes = {
       defaultValue: { summary: 100 },
     },
     defaultValue: 100,
-    description:  'Specify the duration in milliseconds to delay before displaying the sidenav'
+    description:
+      'Specify the duration in milliseconds to delay before displaying the sidenav',
   },
 };
 
