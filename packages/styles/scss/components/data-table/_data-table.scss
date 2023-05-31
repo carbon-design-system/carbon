@@ -649,6 +649,7 @@
   .#{$prefix}--data-table--xl td,
   .#{$prefix}--data-table--xl tbody tr th {
     padding-top: $spacing-05;
+    padding-bottom: $spacing-05;
   }
 
   .#{$prefix}--data-table--xl th,

@@ -226,7 +226,7 @@
   .#{$prefix}--data-table--top-aligned-header
     th
     .#{$prefix}--table-expand__button {
-    height: calc(rem(32px) + 1px);
+    height: rem(32px);
     align-items: start;
     padding-top: $spacing-03;
   }
@@ -237,7 +237,8 @@
   .#{$prefix}--data-table--top-aligned-header.#{$prefix}--data-table--xs
     th
     .#{$prefix}--table-expand__button {
-    padding-top: $spacing-01;
+    height: rem(24px);
+    padding-top: $spacing-02;
   }
 
   .#{$prefix}--data-table--top-aligned-body.#{$prefix}--data-table--md
@@ -246,7 +247,8 @@
   .#{$prefix}--data-table--top-aligned-header.#{$prefix}--data-table--md
     th
     .#{$prefix}--table-expand__button {
-    padding-top: $spacing-02;
+    padding-top: $spacing-03;
+    margin-top: -$spacing-02;
   }
 
   .#{$prefix}--table-expand__button:focus {
