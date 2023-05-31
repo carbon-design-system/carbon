@@ -182,7 +182,10 @@
 
   .#{$prefix}--actionable-notification--warning
     .#{$prefix}--toast-notification__icon
-    path[opacity='0'] {
+    path[opacity='0'],
+  .#{$prefix}--actionable-notification--warning-alt
+    .#{$prefix}--toast-notification__icon
+    path:first-of-type {
     fill: $black-100;
     opacity: 1;
   }

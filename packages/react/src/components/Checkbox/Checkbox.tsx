@@ -160,8 +160,8 @@ const Checkbox = React.forwardRef(
           className={`${prefix}--checkbox`}
           id={id}
           ref={(el) => {
-            if (el && indeterminate) {
-              el.indeterminate = indeterminate;
+            if (el) {
+              el.indeterminate = indeterminate ?? false;
             }
             if (typeof ref === 'function') {
               ref(el);

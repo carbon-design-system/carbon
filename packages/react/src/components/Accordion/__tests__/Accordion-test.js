@@ -106,7 +106,7 @@ describe('Accordion', () => {
       );
 
       await userEvent.tab();
-      await expect(document.getElementsByTagName('button')[0]).toHaveFocus();
+      expect(screen.getAllByRole('button')[0]).toHaveFocus();
     });
 
     it('should open with enter', async () => {

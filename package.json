@@ -35,8 +35,7 @@
     "node-sass": "^8.0.0",
     "react": "~18.2.0",
     "react-dom": "~18.2.0",
-    "react-is": "~18.2.0",
-    "react-test-renderer": "~17.0.2"
+    "react-is": "~18.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.2",
@@ -56,12 +55,12 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
-    "accessibility-checker": "^3.1.32",
+    "accessibility-checker": "^3.1.48",
     "all-contributors-cli": "^6.19.0",
     "cross-env": "^7.0.0",
     "cross-spawn": "^7.0.0",
     "doctoc": "^2.0.0",
-    "eslint": "^8.0.0",
+    "eslint": "^8.40.0",
     "fs-extra": "^10.0.0",
     "glob": "^10.0.0",
     "husky": "^8.0.0",
