@@ -43,6 +43,7 @@ function FileUploaderItem({
           iconDescription={iconDescription}
           status={status}
           invalid={invalid}
+          aria-describedby={`${name}-id-error`}
           onKeyDown={(evt) => {
             if (matches(evt, [keys.Enter, keys.Space])) {
               if (status === 'edit') {
@@ -59,7 +60,10 @@ function FileUploaderItem({
         />
       </span>
       {invalid && errorSubject && (
-        <div className={`${prefix}--form-requirement`}>
+        <div
+          className={`${prefix}--form-requirement`}
+          role="alert"
+          id={`${name}-id-error`}>
           <div className={`${prefix}--form-requirement__title`}>
             {errorSubject}
           </div>

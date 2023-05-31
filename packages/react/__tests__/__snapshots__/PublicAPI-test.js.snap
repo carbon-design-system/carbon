@@ -3346,6 +3346,9 @@ Map {
       "tabIndex": "0",
     },
     "propTypes": Object {
+      "aria-describedby": Object {
+        "type": "string",
+      },
       "iconDescription": Object {
         "type": "string",
       },
@@ -8607,6 +8610,12 @@ Map {
       },
       "value": Object {
         "type": "string",
+      },
+      "warning": Object {
+        "type": "bool",
+      },
+      "warningText": Object {
+        "type": "node",
       },
     },
     "render": [Function],
