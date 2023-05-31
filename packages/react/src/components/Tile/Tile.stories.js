@@ -52,11 +52,12 @@ export default {
   },
 };
 
-const CarbonBuilderLink = () => {
+const CarbonBuilderLink = ({ tileType }) => {
+  const link = `https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22Tile%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22${tileType}%22%2C%22items%22%3A%5B%7B%22type%22%3A%22text%22%2C%22text%22%3A%22tile%20content%20goes%20here..%22%2C%22id%22%3A%223%22%2C%22codeContext%22%3A%7B%22name%22%3A%22text-3%22%7D%7D%5D%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22${tileType}-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D`;
   return (
     <>
-      <a href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22Tile%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22tile%22%2C%22items%22%3A%5B%7B%22type%22%3A%22text%22%2C%22text%22%3A%22tile%20content%20goes%20here..%22%2C%22id%22%3A%223%22%2C%22codeContext%22%3A%7B%22name%22%3A%22text-3%22%7D%7D%5D%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22tile-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D" target="_blank" rel="noreferrer">
-        Edit on Carbon UI Builder 
+      <a href={link} target="_blank" rel="noreferrer">
+        Edit on Carbon UI Builder
       </a>
       <br></br>
       <br></br>
@@ -67,7 +68,7 @@ const CarbonBuilderLink = () => {
 export const Default = () => {
   return (
     <>
-      <CarbonBuilderLink></CarbonBuilderLink>
+      <CarbonBuilderLink tileType="tile"></CarbonBuilderLink>
       <Tile id="tile-1">
         Default tile
         <br />
@@ -80,7 +81,7 @@ export const Default = () => {
 
 export const DefaultWithLayer = () => (
   <>
-    <CarbonBuilderLink></CarbonBuilderLink>
+    <CarbonBuilderLink tileType="tile"></CarbonBuilderLink>
     <WithLayer>
       {(layer) => (
         <Tile id={`tile-${layer}`}>
@@ -95,15 +96,17 @@ export const DefaultWithLayer = () => (
 );
 
 export const Clickable = (args) => {
-  return <>
-    <CarbonBuilderLink></CarbonBuilderLink>
-    <ClickableTile
-      id="clickable-tile-1"
-      href="https://www.carbondesignsystem.com/"
-      {...args}>
-      Clickable Tile
-    </ClickableTile>
-  </>;
+  return (
+    <>
+      <CarbonBuilderLink tileType="clickable-tile"></CarbonBuilderLink>
+      <ClickableTile
+        id="clickable-tile-1"
+        href="https://www.carbondesignsystem.com/"
+        {...args}>
+        Clickable Tile
+      </ClickableTile>
+    </>
+  );
 };
 
 Clickable.argTypes = {
@@ -116,16 +119,18 @@ Clickable.argTypes = {
 };
 
 export const ClickableWithCustomIcon = (args) => {
-  return <>
-    <CarbonBuilderLink></CarbonBuilderLink>
-    <ClickableTile
-      id="clickable-tile-1"
-      href="https://www.carbondesignsystem.com/"
-      renderIcon={Download}
-      {...args}>
-      Clickable Tile
-    </ClickableTile>
-  </>;
+  return (
+    <>
+      <CarbonBuilderLink tileType="clickable-tile"></CarbonBuilderLink>
+      <ClickableTile
+        id="clickable-tile-1"
+        href="https://www.carbondesignsystem.com/"
+        renderIcon={Download}
+        {...args}>
+        Clickable Tile
+      </ClickableTile>
+    </>
+  );
 };
 
 Clickable.argTypes = {
@@ -139,7 +144,7 @@ Clickable.argTypes = {
 
 export const ClickableWithLayer = () => (
   <>
-    <CarbonBuilderLink></CarbonBuilderLink>
+    <CarbonBuilderLink tileType="clickable-tile"></CarbonBuilderLink>
     <WithLayer>
       {(layer) => (
         <ClickableTile
@@ -153,16 +158,18 @@ export const ClickableWithLayer = () => (
 );
 
 export const Selectable = (args) => {
-  return <>
-    <CarbonBuilderLink></CarbonBuilderLink>
-    <SelectableTile
-      id="selectable-tile-1"
-      name="tiles"
-      value="selectable"
-      {...args}>
-      Selectable
-    </SelectableTile>
-  </>;
+  return (
+    <>
+      <CarbonBuilderLink tileType="selectable-tile"></CarbonBuilderLink>
+      <SelectableTile
+        id="selectable-tile-1"
+        name="tiles"
+        value="selectable"
+        {...args}>
+        Selectable
+      </SelectableTile>
+    </>
+  );
 };
 
 Selectable.argTypes = {
@@ -175,20 +182,22 @@ Selectable.argTypes = {
 };
 
 export const MultiSelect = (args) => {
-  return <>
-    <CarbonBuilderLink></CarbonBuilderLink>
-    <div role="group" aria-label="selectable tiles">
-      <SelectableTile id="selectable-tile-1" name="tiles" {...args}>
-        Option 1
-      </SelectableTile>
-      <SelectableTile id="selectable-tile-2" name="tiles" {...args}>
-        Option 2
-      </SelectableTile>
-      <SelectableTile id="selectable-tile-3" name="tiles" {...args}>
-        Option 3
-      </SelectableTile>
-    </div>
-  </>;
+  return (
+    <>
+      <CarbonBuilderLink tileType="selectable-tile"></CarbonBuilderLink>
+      <div role="group" aria-label="selectable tiles">
+        <SelectableTile id="selectable-tile-1" name="tiles" {...args}>
+          Option 1
+        </SelectableTile>
+        <SelectableTile id="selectable-tile-2" name="tiles" {...args}>
+          Option 2
+        </SelectableTile>
+        <SelectableTile id="selectable-tile-3" name="tiles" {...args}>
+          Option 3
+        </SelectableTile>
+      </div>
+    </>
+  );
 };
 
 MultiSelect.argTypes = {
@@ -201,32 +210,34 @@ MultiSelect.argTypes = {
 };
 
 export const Radio = (args) => {
-  return <>
-    <CarbonBuilderLink></CarbonBuilderLink>
-    <TileGroup
-      defaultSelected="default-selected"
-      legend="Radio Tile Group"
-      name="radio tile group"
-      {...args}>
-      <RadioTile
-        id="radio-tile-1"
-        value="standard"
-        style={{ marginBottom: '.5rem' }}
+  return (
+    <>
+      <CarbonBuilderLink tileType="selectable-tile"></CarbonBuilderLink>
+      <TileGroup
+        defaultSelected="default-selected"
+        legend="Radio Tile Group"
+        name="radio tile group"
         {...args}>
-        Option 1
-      </RadioTile>
-      <RadioTile
-        id="radio-tile-2"
-        value="default-selected"
-        style={{ marginBottom: '.5rem' }}
-        {...args}>
-        Option 2
-      </RadioTile>
-      <RadioTile id="radio-tile-3" value="selected" {...args}>
-        Option 3
-      </RadioTile>
-    </TileGroup>
-  </>;
+        <RadioTile
+          id="radio-tile-1"
+          value="standard"
+          style={{ marginBottom: '.5rem' }}
+          {...args}>
+          Option 1
+        </RadioTile>
+        <RadioTile
+          id="radio-tile-2"
+          value="default-selected"
+          style={{ marginBottom: '.5rem' }}
+          {...args}>
+          Option 2
+        </RadioTile>
+        <RadioTile id="radio-tile-3" value="selected" {...args}>
+          Option 3
+        </RadioTile>
+      </TileGroup>
+    </>
+  );
 };
 
 Radio.argTypes = {
@@ -240,7 +251,7 @@ Radio.argTypes = {
 
 export const RadioWithLayer = () => (
   <>
-    <CarbonBuilderLink></CarbonBuilderLink>
+    <CarbonBuilderLink tileType="selectable-tile"></CarbonBuilderLink>
     <WithLayer>
       {(layer) => (
         <TileGroup
@@ -264,7 +275,7 @@ export const RadioWithLayer = () => (
 
 export const Expandable = () => (
   <div style={{ width: '400px' }}>
-    <CarbonBuilderLink></CarbonBuilderLink>
+    <CarbonBuilderLink tileType="expandable-tile"></CarbonBuilderLink>
     <ExpandableTile
       id="expandable-tile-1"
       tileCollapsedIconText="Interact to Expand tile"
@@ -281,7 +292,7 @@ export const Expandable = () => (
 
 export const ExpandableWithInteractive = () => (
   <div style={{ width: '400px' }}>
-    <CarbonBuilderLink></CarbonBuilderLink>
+    <CarbonBuilderLink tileType="expandable-tile"></CarbonBuilderLink>
     <ExpandableTile
       onClick={() => console.log('click')}
       id="expandable-tile-1"
@@ -307,7 +318,7 @@ export const ExpandableWithInteractive = () => (
 
 export const ExpandableWithLayer = () => (
   <>
-    <CarbonBuilderLink></CarbonBuilderLink>
+    <CarbonBuilderLink tileType="expandable-tile"></CarbonBuilderLink>
     <WithLayer>
       {(layer) => (
         <div style={{ width: '400px' }}>

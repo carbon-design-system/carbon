@@ -29,29 +29,18 @@ export default {
   },
 };
 
-const CarbonBuilderLink = ({type}) => {
-  const singleLine = "https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22CodeSnippetFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22code-snippet%22%2C%22variant%22%3A%22single%22%2C%22code%22%3A%22%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22code-snippet-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D";
-  const multiLine = "https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22CodeSnippetFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22code-snippet%22%2C%22variant%22%3A%22multi%22%2C%22code%22%3A%22%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22code-snippet-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
-  const inline = "https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22CodeSnippetFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22code-snippet%22%2C%22variant%22%3A%22inline%22%2C%22code%22%3A%22%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22code-snippet-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
-
-  let results = singleLine;
-  if (type == 'inline') {
-    results = inline;
-  }else if(type  == 'multi') {
-    results = multiLine;
-  }
-
+const CarbonBuilderLink = ({ type }) => {
+  const snipetType = `https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22CodeSnippetFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22code-snippet%22%2C%22variant%22%3A%22${type}%22%2C%22code%22%3A%22%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22code-snippet-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D`;
   return (
     <>
-      <a href={results} target="_blank" rel="noreferrer">
-        Edit on Carbon UI Builder 
+      <a href={snipetType} target="_blank" rel="noreferrer">
+        Edit on Carbon UI Builder
       </a>
       <br></br>
       <br></br>
     </>
   );
 };
-
 
 export const Inline = () => (
   <div>
@@ -173,7 +162,7 @@ export const SinglelineWithLayer = () => (
 
 export const Skeleton = () => (
   <div>
-    <CarbonBuilderLink></CarbonBuilderLink>
+    <CarbonBuilderLink type="single"></CarbonBuilderLink>
     <CodeSnippetSkeleton type="single" style={{ marginBottom: 8 }} />
     <CodeSnippetSkeleton type="multi" />
   </div>
@@ -181,7 +170,7 @@ export const Skeleton = () => (
 
 export const Playground = (args) => (
   <div>
-    <CarbonBuilderLink type="single" ></CarbonBuilderLink>
+    <CarbonBuilderLink type="single"></CarbonBuilderLink>
     <CodeSnippet type="single" feedback="Copied to clipboard" {...args}>
       {'yarn add @carbon/react'}
     </CodeSnippet>

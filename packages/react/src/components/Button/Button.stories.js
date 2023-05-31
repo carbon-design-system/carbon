@@ -58,15 +58,11 @@ export default {
   },
 };
 
-const CarbonBuilderLink = () => {
+const CarbonBuilderLink = ({ kind }) => {
+  const btnKind = `https://builder.carbondesignsystem.com/from-json/%7B%22%20title%22%3A%22ButtonFragment%22%2C%22data%22%3A%7B%22items%22%3A%20%5B%7B%22type%22%3A%22button%22%2C%22kind%22%3A%22${kind}%22%2C%20%22text%22%3A%22Button%22%2C%22size%22%3A%22%22%2C%22id%22%3A%222%22%20%2C%22codeContext%22%3A%7B%22name%22%3A%22button-2%22%7D%7D%5D%2C%22%20id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D`;
   return (
     <>
-      <a href="https://builder.carbondesignsystem.com/from-json/%7B%22&#13;
-      title%22%3A%22ButtonFragment%22%2C%22data%22%3A%7B%22items%22%3A&#13;
-      %5B%7B%22type%22%3A%22button%22%2C%22kind%22%3A%22primary%22%2C&#13;
-      %22text%22%3A%22Button%22%2C%22size%22%3A%22%22%2C%22id%22%3A%222%22&#13;
-      %2C%22codeContext%22%3A%7B%22name%22%3A%22button-2%22%7D%7D%5D%2C%22&#13;
-      id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D" target="_blank" rel="noreferrer">
+      <a href={btnKind} target="_blank" rel="noreferrer">
         Edit on Carbon UI Builder
       </a>
       <br></br>
@@ -78,7 +74,7 @@ const CarbonBuilderLink = () => {
 export const Default = (args) => {
   return (
     <div>
-      <CarbonBuilderLink></CarbonBuilderLink>
+      <CarbonBuilderLink kind="primary"></CarbonBuilderLink>
       <Button {...args}>Button</Button>
     </div>
   );
@@ -87,7 +83,7 @@ export const Default = (args) => {
 export const Secondary = (args) => {
   return (
     <div>
-      <CarbonBuilderLink></CarbonBuilderLink>
+      <CarbonBuilderLink kind="secondary"></CarbonBuilderLink>
       <Button kind="secondary" {...args}>
         Button
       </Button>
@@ -98,7 +94,7 @@ export const Secondary = (args) => {
 export const Tertiary = (args) => {
   return (
     <div>
-      <CarbonBuilderLink></CarbonBuilderLink>
+      <CarbonBuilderLink kind="tertiary"></CarbonBuilderLink>
       <Button kind="tertiary" {...args}>
         Button
       </Button>
@@ -109,7 +105,7 @@ export const Tertiary = (args) => {
 export const Danger = (args) => {
   return (
     <div>
-      <CarbonBuilderLink></CarbonBuilderLink>
+      <CarbonBuilderLink kind="danger"></CarbonBuilderLink>
       <Button kind="danger" {...args}>
         Button
       </Button>
@@ -128,7 +124,7 @@ export const Danger = (args) => {
 export const Ghost = (args) => {
   return (
     <div>
-      <CarbonBuilderLink></CarbonBuilderLink>
+      <CarbonBuilderLink kind="ghost"></CarbonBuilderLink>
       <Button kind="ghost" {...args}>
         Button
       </Button>
@@ -138,7 +134,7 @@ export const Ghost = (args) => {
 
 export const IconButton = (args) => (
   <div>
-    <CarbonBuilderLink></CarbonBuilderLink>
+    <CarbonBuilderLink kind="primary"></CarbonBuilderLink>
     <Button
       renderIcon={Add}
       iconDescription="Icon Description"
@@ -152,7 +148,7 @@ export const IconButton = (args) => (
 export const SetOfButtons = (args) => {
   return (
     <div>
-      <CarbonBuilderLink></CarbonBuilderLink>
+      <CarbonBuilderLink kind="primary"></CarbonBuilderLink>
       <ButtonSet>
         <Button kind="secondary" {...args}>
           Secondary button
@@ -167,7 +163,7 @@ export const SetOfButtons = (args) => {
 
 export const Skeleton = () => (
   <div>
-    <CarbonBuilderLink></CarbonBuilderLink>
+    <CarbonBuilderLink kind="primary"></CarbonBuilderLink>
     <ButtonSkeleton />
     &nbsp;
     <ButtonSkeleton size="sm" />
