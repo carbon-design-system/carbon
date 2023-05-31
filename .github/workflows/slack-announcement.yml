@@ -27,6 +27,7 @@ jobs:
             channels="${{ github.event.inputs.channel }}"
             IFS=','
             read -ra arr <<< "$channels"
+            echo "${arr}"
             echo "channel=${arr}" >> $GITHUB_OUTPUT
           #  echo "channel=[\"${channels//', '/\",\"}\"]" >> $GITHUB_OUTPUT
             
