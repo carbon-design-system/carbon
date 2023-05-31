@@ -1,16 +1,12 @@
 import { Props } from '@storybook/addon-docs';
 
-import Select from './';
+import FluidSelect from './';
 
 import SelectItem from '../SelectItem';
 
-# Select
+# FluidSelect
 
-[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Select)
-&nbsp;|&nbsp;
-[Usage guidelines](https://www.carbondesignsystem.com/components/select/usage)
-&nbsp;|&nbsp;
-[Accessibility](https://www.carbondesignsystem.com/components/select/accessibility)
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/FluidSelect)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -36,26 +32,26 @@ used option that is on the list.
 ### Empty default option
 
 To get a default empty selection on your select, make the first child in your
-`Select` component a `SelectItem` with empty `text` and `value` props.
+`FluidSelect` component a `SelectItem` with empty `text` and `value` props.
 
-<Select
+<FluidSelect
   id={`select-1`}
   labelText="Select an option"
   helperText="Optional helper text">
   <SelectItem value="" text="" />
   <SelectItem value="option-1" text="Option 1" />
   <SelectItem value="option-2" text="Option 2" />
-</Select>
+</FluidSelect>
 
 ```jsx
-<Select
+<FluidSelect
   id={`select-1`}
   labelText="Select an option"
   helperText="Optional helper text">
   <SelectItem value="" text="" />
   <SelectItem value="option-1" text="Option 1" />
   <SelectItem value="option-2" text="Option 2" />
-</Select>
+</FluidSelect>
 ```
 
 ### First option default
@@ -66,24 +62,24 @@ Carbon's design guidance is to present select options in alphabetical order. If
 you need an option pre-selected that isn't displayed in first place, see
 [Custom option default](#custom-option-default)
 
-<Select
+<FluidSelect
   id={`select-2`}
   labelText="Select an option"
   helperText="Optional helper text">
   <SelectItem value="option-1" text="Option 1" />
   <SelectItem value="option-2" text="Option 2" />
   <SelectItem value="option-3" text="Option 3" />
-</Select>
+</FluidSelect>
 
 ```jsx
-<Select
+<FluidSelect
   id={`select-2`}
   labelText="Select an option"
   helperText="Optional helper text">
   <SelectItem value="option-1" text="Option 1" />
   <SelectItem value="option-2" text="Option 2" />
   <SelectItem value="option-3" text="Option 3" />
-</Select>
+</FluidSelect>
 ```
 
 ### Custom option default
@@ -92,7 +88,7 @@ To have a custom option from the select's option list be selected by default,
 simply set a `defaultValue` on the `Select` component equal to the value of the
 desired option.
 
-<Select
+<FluidSelect
   id={`select-3`}
   labelText="Select an option"
   helperText="Optional helper text"
@@ -100,10 +96,10 @@ desired option.
   <SelectItem value="option-1" text="Option 1" />
   <SelectItem value="option-2" text="Option 2" />
   <SelectItem value="option-3" text="Option 3" />
-</Select>
+</FluidSelect>
 
 ```jsx
-<Select
+<FluidSelect
   id={`select-3`}
   labelText="Select an option"
   helperText="Optional helper text"
@@ -111,7 +107,7 @@ desired option.
   <SelectItem value="option-1" text="Option 1" />
   <SelectItem value="option-2" text="Option 2" />
   <SelectItem value="option-3" text="Option 3" />
-</Select>
+</FluidSelect>
 ```
 
 ## Component API
@@ -122,4 +118,4 @@ desired option.
 
 Help us improve this component by providing feedback, asking questions on Slack,
 or updating this file on
-[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Select/Select.mdx).
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/FluidSelect/FluidSelect.mdx).

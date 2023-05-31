@@ -6542,6 +6542,9 @@ Map {
       "defaultExpanded": Object {
         "type": "bool",
       },
+      "enterDelayMs": Object {
+        "type": "number",
+      },
       "expanded": Object {
         "type": "bool",
       },
