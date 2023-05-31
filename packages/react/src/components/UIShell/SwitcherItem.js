@@ -28,7 +28,6 @@ const SwitcherItem = React.forwardRef(function SwitcherItem(
   },
   ref
 ) {
-  console.log('ref', ref);
   const prefix = usePrefix();
 
   const className = cx(`${prefix}--switcher__item`, {
