@@ -874,14 +874,20 @@ SideNavRail.argTypes = {
       type: 'boolean',
     },
     defaultValue: true,
+    table: {
+      defaultValue: { summary: true }
+    },
+    description: 'Optional prop to display the side nav rail.'
   },
   enterDelayMs: {
     control: {
       type: 'number',
     },
-    defaultValue: 1000,
-    description:
-      'Specify the duration in milliseconds to delay before displaying the sidenav',
+    table: {
+      defaultValue: { summary: 100 },
+    },
+    defaultValue: 100,
+    description:  'Specify the duration in milliseconds to delay before displaying the sidenav'
   },
 };
 
