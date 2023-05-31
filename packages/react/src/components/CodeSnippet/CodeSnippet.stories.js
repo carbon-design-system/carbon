@@ -29,10 +29,21 @@ export default {
   },
 };
 
-const CarbonBuilderLink = () => {
+const CarbonBuilderLink = ({type}) => {
+  const singleLine = "https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22CodeSnippetFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22code-snippet%22%2C%22variant%22%3A%22single%22%2C%22code%22%3A%22%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22code-snippet-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D";
+  const multiLine = "https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22CodeSnippetFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22code-snippet%22%2C%22variant%22%3A%22multi%22%2C%22code%22%3A%22%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22code-snippet-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+  const inline = "https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22CodeSnippetFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22code-snippet%22%2C%22variant%22%3A%22inline%22%2C%22code%22%3A%22%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22code-snippet-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+
+  let results = singleLine;
+  if (type == 'inline') {
+    results = inline;
+  }else if(type  == 'multi') {
+    results = multiLine;
+  }
+
   return (
     <>
-      <a href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22CodeSnippetFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22code-snippet%22%2C%22variant%22%3A%22single%22%2C%22code%22%3A%22%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22code-snippet-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D" target="_blank" rel="noreferrer">
+      <a href={results} target="_blank" rel="noreferrer">
         Edit on Carbon UI Builder 
       </a>
       <br></br>
@@ -44,7 +55,7 @@ const CarbonBuilderLink = () => {
 
 export const Inline = () => (
   <div>
-    <CarbonBuilderLink></CarbonBuilderLink>
+    <CarbonBuilderLink type="inline"></CarbonBuilderLink>
     <CodeSnippet type="inline" feedback="Copied to clipboard">
       {'node -v'}
     </CodeSnippet>
@@ -53,7 +64,7 @@ export const Inline = () => (
 
 export const Multiline = () => (
   <div>
-    <CarbonBuilderLink></CarbonBuilderLink>
+    <CarbonBuilderLink type="multi"></CarbonBuilderLink>
     <CodeSnippet type="multi" feedback="Copied to clipboard">
       {`  "scripts": {
       "build": "lerna run build --stream --prefix --npm-client yarn",
@@ -90,7 +101,7 @@ export const Multiline = () => (
 
 export const Singleline = () => (
   <div>
-    <CarbonBuilderLink></CarbonBuilderLink>
+    <CarbonBuilderLink type="single"></CarbonBuilderLink>
     <CodeSnippet type="single" feedback="Copied to clipboard">
       yarn add carbon-components@latest carbon-components-react@latest
       @carbon/icons-react@latest carbon-icons@latest
@@ -100,7 +111,7 @@ export const Singleline = () => (
 
 export const InlineWithLayer = () => (
   <div>
-    <CarbonBuilderLink></CarbonBuilderLink>
+    <CarbonBuilderLink type="inline"></CarbonBuilderLink>
     <WithLayer>
       <CodeSnippet type="inline" feedback="Copied to clipboard">
         {'node -v'}
@@ -111,7 +122,7 @@ export const InlineWithLayer = () => (
 
 export const MultilineWithLayer = () => (
   <div>
-    <CarbonBuilderLink></CarbonBuilderLink>
+    <CarbonBuilderLink type="multi"></CarbonBuilderLink>
     <WithLayer>
       <CodeSnippet type="multi" feedback="Copied to clipboard">
         {`  "scripts": {
@@ -150,7 +161,7 @@ export const MultilineWithLayer = () => (
 
 export const SinglelineWithLayer = () => (
   <div>
-    <CarbonBuilderLink></CarbonBuilderLink>
+    <CarbonBuilderLink type="single"></CarbonBuilderLink>
     <WithLayer>
       <CodeSnippet type="single" feedback="Copied to clipboard">
         yarn add carbon-components@latest carbon-components-react@latest
@@ -170,7 +181,7 @@ export const Skeleton = () => (
 
 export const Playground = (args) => (
   <div>
-    <CarbonBuilderLink></CarbonBuilderLink>
+    <CarbonBuilderLink type="single" ></CarbonBuilderLink>
     <CodeSnippet type="single" feedback="Copied to clipboard" {...args}>
       {'yarn add @carbon/react'}
     </CodeSnippet>
