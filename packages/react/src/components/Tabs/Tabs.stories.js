@@ -209,15 +209,6 @@ export const DismissableWithIcons = ({ contained }) => {
   );
 };
 
-DismissableWithIcons.argTypes = {
-  contained: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: true,
-  },
-};
-
 export const WithIcons = () => (
   <Tabs>
     <TabList activation="manual" aria-label="List of tabs">
