@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, {
-  useState,
   useRef,
   type ForwardedRef,
   type ComponentProps,
@@ -22,6 +21,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useWindowEvent } from '../../internal/useEvent';
+import { useDelayedState } from '../../internal/useDelayedState';
 // TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
 
@@ -43,6 +43,7 @@ interface SideNavProps extends ComponentProps<'nav'> {
   addMouseListeners?: boolean | undefined;
   onOverlayClick?: MouseEventHandler<HTMLDivElement> | undefined;
   onSideNavBlur?: () => void | undefined;
+  enterDelayMs?: number;
 }
 
 function SideNavRenderFunction(
@@ -65,28 +66,29 @@ function SideNavRenderFunction(
     addMouseListeners = true,
     onOverlayClick,
     onSideNavBlur,
+    enterDelayMs = 100,
     ...other
   }: SideNavProps,
   ref: ForwardedRef<HTMLElement>
 ) {
   const prefix = usePrefix();
   const { current: controlled } = useRef(expandedProp !== undefined);
-  const [expandedState, setExpandedState] = useState(defaultExpanded);
+  const [expandedState, setExpandedState] = useDelayedState(defaultExpanded);
   const [expandedViaHoverState, setExpandedViaHoverState] =
-    useState(defaultExpanded);
+    useDelayedState(defaultExpanded);
   const expanded = controlled ? expandedProp : expandedState;
   const sideNavRef = useRef<HTMLDivElement>(null);
   const navRef = useMergedRefs([sideNavRef, ref]);
 
   const handleToggle: typeof onToggle = (event, value = !expanded) => {
     if (!controlled) {
-      setExpandedState(value);
+      setExpandedState(value, enterDelayMs);
     }
     if (onToggle) {
       onToggle(event, value);
     }
     if (controlled || isRail) {
-      setExpandedViaHoverState(value);
+      setExpandedViaHoverState(value, enterDelayMs);
     }
   };
 
@@ -143,7 +145,12 @@ function SideNavRenderFunction(
   const eventHandlers: Partial<
     Pick<
       ComponentProps<'nav'>,
-      'onFocus' | 'onBlur' | 'onKeyDown' | 'onMouseEnter' | 'onMouseLeave'
+      | 'onFocus'
+      | 'onBlur'
+      | 'onKeyDown'
+      | 'onMouseEnter'
+      | 'onMouseLeave'
+      | 'onClick'
     >
   > = {};
 
@@ -174,8 +181,20 @@ function SideNavRenderFunction(
   }
 
   if (addMouseListeners && isRail) {
-    eventHandlers.onMouseEnter = () => handleToggle(true, true);
-    eventHandlers.onMouseLeave = () => handleToggle(false, false);
+    eventHandlers.onMouseEnter = () => {
+      handleToggle(true, true);
+    };
+    eventHandlers.onMouseLeave = () => {
+      setExpandedState(false);
+      setExpandedViaHoverState(false);
+      handleToggle(false, false);
+    };
+    eventHandlers.onClick = () => {
+      //if delay is enabled, and user intentionally clicks it to see it expanded immediately
+      setExpandedState(true);
+      setExpandedViaHoverState(true);
+      handleToggle(true, true);
+    };
   }
 
   useWindowEvent('keydown', (event: Event) => {
@@ -241,6 +260,11 @@ SideNav.propTypes = {
    * If `true`, the SideNav will be open on initial render.
    */
   defaultExpanded: PropTypes.bool,
+
+  /**
+   * Specify the duration in milliseconds to delay before displaying the sidenavigation
+   */
+  enterDelayMs: PropTypes.number,
 
   /**
    * If `true`, the SideNav will be expanded, otherwise it will be collapsed.

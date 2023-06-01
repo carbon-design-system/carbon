@@ -112,6 +112,15 @@ Playground.argTypes = {
   invalidText: {
     control: { type: 'text' },
   },
+  warning: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  warningText: {
+    control: { type: 'text' },
+  },
   labelText: {
     control: { type: 'text' },
   },
