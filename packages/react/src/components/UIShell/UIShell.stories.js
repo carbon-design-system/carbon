@@ -584,52 +584,61 @@ HeaderBaseWActionsAndRightPanel.storyName =
   'Header Base w/ Actions and Right Panel';
 
 export const HeaderBaseWActionsAndSwitcher = () => (
-  <Header aria-label="IBM Platform Name">
-    <HeaderName href="#" prefix="IBM">
-      [Platform]
-    </HeaderName>
-    <HeaderGlobalBar>
-      <HeaderGlobalAction aria-label="Search" onClick={action('search click')}>
-        <Search size={20} />
-      </HeaderGlobalAction>
-      <HeaderGlobalAction
-        aria-label="Notifications"
-        onClick={action('notification click')}>
-        <Notification size={20} />
-      </HeaderGlobalAction>
-      <HeaderGlobalAction
-        aria-label="App Switcher"
-        isActive
-        onClick={action('app-switcher click')}
-        tooltipAlignment="end">
-        <SwitcherIcon size={20} />
-      </HeaderGlobalAction>
-    </HeaderGlobalBar>
-    <HeaderPanel aria-label="Header Panel" expanded>
-      <Switcher aria-label="Switcher Container">
-        <SwitcherItem isSelected aria-label="Link 1" href="#">
-          Link 1
-        </SwitcherItem>
-        <SwitcherDivider />
-        <SwitcherItem href="#" aria-label="Link 2">
-          Link 2
-        </SwitcherItem>
-        <SwitcherItem href="#" aria-label="Link 3">
-          Link 3
-        </SwitcherItem>
-        <SwitcherItem href="#" aria-label="Link 4">
-          Link 4
-        </SwitcherItem>
-        <SwitcherItem href="#" aria-label="Link 5">
-          Link 5
-        </SwitcherItem>
-        <SwitcherDivider />
-        <SwitcherItem href="#" aria-label="Link 6">
-          Link 6
-        </SwitcherItem>
-      </Switcher>
-    </HeaderPanel>
-  </Header>
+  <HeaderContainer
+    render={({ isSideNavExpanded, onClickSideNavExpand }) => (
+      <Header aria-label="IBM Platform Name">
+        <HeaderName href="#" prefix="IBM">
+          [Platform]
+        </HeaderName>
+        <HeaderGlobalBar>
+          <HeaderGlobalAction
+            aria-label="Search"
+            onClick={action('search click')}>
+            <Search size={20} />
+          </HeaderGlobalAction>
+          <HeaderGlobalAction
+            aria-label="Notifications"
+            onClick={action('notification click')}>
+            <Notification size={20} />
+          </HeaderGlobalAction>
+          <HeaderGlobalAction
+            aria-label={isSideNavExpanded ? 'Close switcher' : 'Open switcher'}
+            isActive={isSideNavExpanded}
+            onClick={onClickSideNavExpand}
+            tooltipAlignment="end">
+            <SwitcherIcon size={20} />
+          </HeaderGlobalAction>
+        </HeaderGlobalBar>
+        <HeaderPanel
+          aria-label="Header Panel"
+          expanded={isSideNavExpanded}
+          onHeaderPanelFocus={onClickSideNavExpand}>
+          <Switcher aria-label="Switcher Container">
+            <SwitcherItem isSelected aria-label="Link 1" href="#">
+              Link 1
+            </SwitcherItem>
+            <SwitcherDivider />
+            <SwitcherItem href="#" aria-label="Link 2">
+              Link 2
+            </SwitcherItem>
+            <SwitcherItem href="#" aria-label="Link 3">
+              Link 3
+            </SwitcherItem>
+            <SwitcherItem href="#" aria-label="Link 4">
+              Link 4
+            </SwitcherItem>
+            <SwitcherItem href="#" aria-label="Link 5">
+              Link 5
+            </SwitcherItem>
+            <SwitcherDivider />
+            <SwitcherItem href="#" aria-label="Link 6">
+              Link 6
+            </SwitcherItem>
+          </Switcher>
+        </HeaderPanel>
+      </Header>
+    )}
+  />
 );
 
 HeaderBaseWActionsAndSwitcher.storyName = 'Header Base w/ Actions and Switcher';

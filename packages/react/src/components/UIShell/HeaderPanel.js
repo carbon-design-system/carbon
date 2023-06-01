@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
@@ -19,6 +19,7 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
     className: customClassName,
     expanded,
     addFocusListeners = true,
+    onHeaderPanelFocus,
     ...other
   },
   ref
@@ -28,10 +29,12 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
   };
+  const controlled = useRef(expanded !== undefined).current;
   const [expandedState, setExpandedState] = useState(expanded);
+  const expandedProp = controlled ? expanded : expandedState;
 
   const className = cx(`${prefix}--header-panel`, {
-    [`${prefix}--header-panel--expanded`]: expandedState,
+    [`${prefix}--header-panel--expanded`]: expandedProp,
     [customClassName]: !!customClassName,
   });
 
@@ -41,11 +44,13 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
     eventHandlers.onFocus = (event) => {
       if (!event.currentTarget.contains(event.relatedTarget)) {
         setExpandedState(true);
+        onHeaderPanelFocus();
       }
     };
     eventHandlers.onBlur = (event) => {
       if (!event.currentTarget.contains(event.relatedTarget)) {
         setExpandedState(false);
+        onHeaderPanelFocus();
       }
     };
   }
@@ -82,6 +87,12 @@ HeaderPanel.propTypes = {
    * Specify whether the panel is expanded
    */
   expanded: PropTypes.bool,
+
+  /**
+   * An optional listener that is called a callback to collapse the HeaderPanel
+   */
+
+  onHeaderPanelFocus: PropTypes.func,
 };
 
 HeaderPanel.displayName = 'HeaderPanel';
