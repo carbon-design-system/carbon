@@ -95,4 +95,21 @@ describe('@carbon/styles/scss/compat', () => {
         `)
     ).resolves.not.toThrow();
   });
+
+  it('should export v10 motion tokens', async () => {
+    await expect(
+      render(`
+          @use '../../motion' as motion;
+
+          div {
+            transition: all motion.$slow-01;
+            transition: all motion.$slow-02;
+            transition: all motion.$moderate-01;
+            transition: all motion.$moderate-02;
+            transition: all motion.$fast-01;
+            transition: all motion.$fast-02;
+          }
+        `)
+    ).resolves.not.toThrow();
+  });
 });

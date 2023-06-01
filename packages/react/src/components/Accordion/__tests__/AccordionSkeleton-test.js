@@ -24,13 +24,11 @@ describe('AccordionSkeleton', () => {
     });
 
     it('should respect align prop', () => {
-      const { container, rerender } = render(
-        <AccordionSkeleton align="start" />
-      );
-      expect(container.firstChild).toHaveClass('cds--accordion--start');
+      render(<AccordionSkeleton data-testid="start" align="start" />);
+      expect(screen.getByTestId('start')).toHaveClass('cds--accordion--start');
 
-      rerender(<AccordionSkeleton align="end" />);
-      expect(container.firstChild).toHaveClass('cds--accordion--end');
+      render(<AccordionSkeleton data-testid="end" align="end" />);
+      expect(screen.getByTestId('end')).toHaveClass('cds--accordion--end');
     });
 
     it('should support a custom `className` prop on the outermost element', () => {
@@ -48,9 +46,8 @@ describe('AccordionSkeleton', () => {
     });
 
     it('should respect isFlush prop', () => {
-      const { container } = render(<AccordionSkeleton isFlush />);
-
-      expect(container.firstChild).toHaveClass('cds--accordion--flush');
+      render(<AccordionSkeleton data-testid="flush" isFlush />);
+      expect(screen.getByTestId('flush')).toHaveClass('cds--accordion--flush');
     });
 
     it('should respect open prop', () => {
