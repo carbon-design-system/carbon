@@ -12,7 +12,7 @@ import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { usePrefix } from '../../internal/usePrefix';
 
 const Switcher = React.forwardRef(function Switcher(props, ref) {
-  const switcherRef = useRef(null);
+  const switcherRef = useRef(ref);
 
   const prefix = usePrefix();
   const {
@@ -66,7 +66,6 @@ const Switcher = React.forwardRef(function Switcher(props, ref) {
     (child, index) =>
       React.cloneElement(child, {
         handleSwitcherItemFocus,
-        ref,
         index,
         key: index,
       })
