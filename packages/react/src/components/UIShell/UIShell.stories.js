@@ -586,8 +586,9 @@ export const HeaderBaseWActionsAndRightPanel = () => (
 HeaderBaseWActionsAndRightPanel.storyName =
   'Header Base w/ Actions and Right Panel';
 
-export const HeaderBaseWActionsAndSwitcher = () => (
+export const HeaderBaseWActionsAndSwitcher = (args) => (
   <HeaderContainer
+    {...args}
     render={({ isSideNavExpanded, onClickSideNavExpand }) => (
       <Header aria-label="IBM Platform Name">
         <HeaderName href="#" prefix="IBM">
@@ -646,6 +647,12 @@ export const HeaderBaseWActionsAndSwitcher = () => (
 
 HeaderBaseWActionsAndSwitcher.storyName = 'Header Base w/ Actions and Switcher';
 
+HeaderBaseWActionsAndSwitcher.argTypes = {
+  isSideNavExpanded: {
+    defaultValue: true,
+    description: 'Optional prop to display the HeaderPanel.',
+  },
+};
 export const FixedSideNav = () => (
   <>
     <SideNav
