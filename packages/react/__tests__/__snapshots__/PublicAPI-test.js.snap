@@ -3931,6 +3931,9 @@ Map {
       "expanded": Object {
         "type": "bool",
       },
+      "onHeaderPanelFocus": Object {
+        "type": "func",
+      },
     },
     "render": [Function],
   },
