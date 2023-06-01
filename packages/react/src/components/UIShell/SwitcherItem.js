@@ -99,7 +99,7 @@ SwitcherItem.propTypes = {
   handleSwitcherItemFocus: PropTypes.func,
 
   /**
-   * If given, overflow item will render as a link with the given href
+   * If given, switcher item will render as a link with the given href
    */
   index: PropTypes.number,
 
