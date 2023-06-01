@@ -7,70 +7,38 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { classMap } from 'lit/directives/class-map.js';
-import { LitElement, html, TemplateResult } from 'lit';
-import { property, customElement, query } from 'lit/decorators.js';
+import { styleMap } from 'lit/directives/style-map.js';
+import { LitElement, html } from 'lit';
+import { property, customElement } from 'lit/decorators.js';
 import ChevronDown16 from '@carbon/icons/lib/chevron--down/16';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import { CODE_SNIPPET_COLOR_SCHEME, CODE_SNIPPET_TYPE } from './defs';
 import styles from './code-snippet.scss';
+import Handle from '../../globals/internal/handle';
+import '../copy-button/index';
+import '../copy/copy';
+import '../button/button';
 
 export { CODE_SNIPPET_COLOR_SCHEME, CODE_SNIPPET_TYPE };
 
 /**
- * @param values The values to render.
- * @param values.children The child nodes.
- * @param values.handleClick The handler for the `click` event on the button.
- * @returns The template result for the expando.
+ * Observes resize of the given element with the given resize observer.
+ *
+ * @param observer The resize observer.
+ * @param elem The element to observe the resize.
  */
-const renderExpando = ({
-  children,
-  handleClick,
-}: {
-  children: string | TemplateResult;
-  handleClick: EventListener;
-}) => html`
-  <button
-    type="button"
-    class="${prefix}--snippet-btn--expand"
-    @click="${handleClick}">
-    <span id="button-text" class="${prefix}--snippet-btn--text">
-      ${children}
-    </span>
-    ${ChevronDown16({
-      'aria-labeledby': 'button-text',
-      class: `${prefix}--icon-chevron--down ${prefix}--snippet__icon`,
-      role: 'img',
-    })}
-  </button>
-`;
-
-/**
- * @param values The values to render.
- * @param values.assistiveText The assistive text to announce that the node is for code snippet.
- * @param [values.expanded] `true` to show the expanded state (for multi-line variant).
- * @param values.children The child nodes.
- * @returns The template result for the code snippet.
- */
-const renderCode = ({
-  assistiveText,
-  expanded,
-  children,
-}: {
-  assistiveText: string;
-  expanded?: boolean;
-  children: string | TemplateResult;
-}) => {
-  const classes = classMap({
-    [`${prefix}--snippet-container`]: true,
-    [`${prefix}-ce--snippet-container--expanded`]: Boolean(expanded),
-  });
-  // Ensures no extra whitespace text node
-  // prettier-ignore
-  return html`
-    <div role="textbox" tabindex="0" class="${classes}" aria-label="${assistiveText}"><code><pre>${children}</pre></code></div>
-  `;
+const observeResize = (observer: ResizeObserver, elem: Element) => {
+  if (!elem) {
+    return null;
+  }
+  observer.observe(elem);
+  return {
+    release() {
+      observer.unobserve(elem);
+      return null;
+    },
+  } as Handle;
 };
 
 /**
@@ -79,28 +47,51 @@ const renderCode = ({
  * @element cds-code-snippet
  */
 @customElement(`${prefix}-code-snippet`)
-class BXCodeSnippet extends FocusMixin(LitElement) {
+class CDSCodeSnippet extends FocusMixin(LitElement) {
   /**
    * `true` to expand multi-line variant of code snippet.
    */
-  private _expanded = false;
+  private _expandedCode = false;
 
   /**
-   * `true` to show the expando.
+   * The handle for observing resize of the parent element of this element.
    */
-  private _showExpando = false;
+  private _hObserveResize: Handle | null = null;
+
+  /**
+   * Row height in pixels
+   */
+  private _rowHeightInPixels = 16;
+
+  /**
+   * `true` if code-snippet has right overflow
+   */
+  private _hasRightOverflow = true;
+
+  /**
+   * `true` if code-snippet has left overflow
+   */
+  private _hasLeftOverflow = false;
+
+  /**
+   * `true` if show more or show less btn is visible
+   */
+  private _shouldShowMoreLessBtn = false;
 
   /**
    * Handles `click` event on the copy button.
    */
-  private _handleClickCopyButton() {
+  private _handleCopyClick() {
     const { ownerDocument: doc } = this;
     const selection = doc!.defaultView!.getSelection();
     selection!.removeAllRanges();
     const code = doc!.createElement('code');
     code.className = `${prefix}--visually-hidden`;
     const pre = doc!.createElement('pre');
-    pre.textContent = this.textContent;
+    const text = Array.from(this.childNodes).filter(
+      (node) => node.nodeType === Node.TEXT_NODE
+    );
+    pre.textContent = this.copyText || text[0].textContent;
     code.appendChild(pre);
     // Using `<code>` in shadow DOM seems to lose the LFs in some browsers
     doc!.body.appendChild(code);
@@ -112,74 +103,185 @@ class BXCodeSnippet extends FocusMixin(LitElement) {
     selection!.removeAllRanges();
   }
 
-  /**
-   * Handles `click` event on the expando.
-   */
-  private _handleClickExpando() {
-    this._expanded = !this._expanded;
-    this.requestUpdate();
-  }
+  // eslint-disable-next-line class-methods-use-this
+  private _getCodeRefDimensions(ref) {
+    const {
+      clientWidth: codeClientWidth,
+      scrollLeft: codeScrollLeft,
+      scrollWidth: codeScrollWidth,
+    } = ref;
 
+    return {
+      horizontalOverflow: codeScrollWidth > codeClientWidth,
+      codeClientWidth,
+      codeScrollWidth,
+      codeScrollLeft,
+    };
+  }
   /**
-   * Handles change in slot content to determine if the content
+   * Handles `scroll` event.
    */
-  private _handleSlotChange() {
-    const { type, _preNode: preNode } = this;
-    if (type === CODE_SNIPPET_TYPE.MULTI) {
-      if (preNode.getBoundingClientRect().height > 255) {
-        this._showExpando = true;
-        this.requestUpdate();
+  private _handleScroll() {
+    if (this) {
+      const codeContainerRef = this?.shadowRoot?.querySelector(
+        `.${prefix}--snippet-container`
+      );
+      const codeContentRef = codeContainerRef?.querySelector('pre');
+      if (
+        this.type === CODE_SNIPPET_TYPE.INLINE ||
+        (this.type === CODE_SNIPPET_TYPE.SINGLE && !codeContainerRef) ||
+        (this.type === CODE_SNIPPET_TYPE.MULTI && !codeContentRef)
+      ) {
+        return;
       }
+
+      const {
+        horizontalOverflow,
+        codeClientWidth,
+        codeScrollWidth,
+        codeScrollLeft,
+      } =
+        this.type === CODE_SNIPPET_TYPE.SINGLE
+          ? this._getCodeRefDimensions(codeContainerRef)
+          : this._getCodeRefDimensions(codeContentRef);
+
+      this._hasLeftOverflow = horizontalOverflow && !!codeScrollLeft;
+      this._hasRightOverflow =
+        horizontalOverflow &&
+        codeScrollLeft + codeClientWidth !== codeScrollWidth;
+      this.requestUpdate();
     }
   }
 
   /**
-   * The `<pre>` element in the shadow DOM.
+   * Handles `click` event on the show more or show less button.
    */
-  @query('pre')
-  private _preNode!: HTMLPreElement;
+  private _handleClickExpanded() {
+    this._expandedCode = !this._expandedCode;
+    this.requestUpdate();
+  }
 
   /**
-   * An assistive text for screen reader to advice a DOM node is for code snippet.
+   * The `ResizeObserver` instance for observing element resizes for re-positioning floating menu position.
    */
-  @property({ attribute: 'code-assistive-text' })
-  codeAssistiveText = 'code-snippet';
+  // TODO: Wait for `.d.ts` update to support `ResizeObserver`
+  // @ts-ignore
+  private _resizeObserver = new ResizeObserver(() => {
+    const codeContainerRef = this.shadowRoot?.querySelector(
+      `.${prefix}--snippet-container`
+    );
+    const codeContentRef = codeContainerRef?.querySelector('code'); // PRE?
+    const {
+      type,
+      maxCollapsedNumberOfRows,
+      maxExpandedNumberOfRows,
+      minExpandedNumberOfRows,
+      _rowHeightInPixels: rowHeightInPixels,
+      _handleScroll: handleScroll,
+    } = this;
+    if (codeContentRef && type === CODE_SNIPPET_TYPE.MULTI) {
+      const { height } = codeContentRef.getBoundingClientRect();
+      if (
+        maxCollapsedNumberOfRows > 0 &&
+        (maxExpandedNumberOfRows <= 0 ||
+          maxExpandedNumberOfRows > maxCollapsedNumberOfRows) &&
+        height > maxCollapsedNumberOfRows * rowHeightInPixels
+      ) {
+        this._shouldShowMoreLessBtn = true;
+      } else {
+        this._shouldShowMoreLessBtn = false;
+      }
+      if (
+        this._expandedCode &&
+        minExpandedNumberOfRows > 0 &&
+        height <= minExpandedNumberOfRows * rowHeightInPixels
+      ) {
+        this._expandedCode = false;
+      }
+    }
+    if (
+      (codeContentRef && type === CODE_SNIPPET_TYPE.MULTI) ||
+      (codeContainerRef && type === CODE_SNIPPET_TYPE.SINGLE)
+    ) {
+      handleScroll();
+    }
+    this.requestUpdate();
+  });
 
   /**
-   * The context content for the collapse button.
+   * Optional text to copy. If not specified, the `children` node's `innerText`
+   * will be used as the copy value.
    */
-  @property({ attribute: 'collapse-button-text' })
-  collapseButtonText = 'Show less';
+  @property({ attribute: 'copy-text' })
+  copyText = '';
 
   /**
-   * The color scheme.
+   * `true` if the button should be disabled.
    */
-  @property({ attribute: 'color-scheme', reflect: true })
-  colorScheme = CODE_SNIPPET_COLOR_SCHEME.REGULAR;
+  @property({ type: Boolean, reflect: true })
+  disabled = false;
 
   /**
-   * An assistive text for screen reader to announce, telling that the button copies the content to the clipboard.
+   * Specify the string displayed when the snippet is copied
    */
-  @property({ attribute: 'copy-button-assistive-text' })
-  copyButtonAssistiveText = 'Copy to clipboard';
+  @property()
+  feedback = 'Copied!';
 
   /**
-   * The feedback text for the copy button.
+   * Specify the time it takes for the feedback message to timeout
    */
-  @property({ attribute: 'copy-button-feedback-text' })
-  copyButtonFeedbackText = 'Copied!';
+  @property({ type: Number, attribute: 'feedback-timeout' })
+  feedbackTimeout = 2000;
 
   /**
-   * The number in milliseconds to determine how long the tooltip for the copy button should remain.
+   * Specify whether or not a copy button should be used/rendered.
    */
-  @property({ type: Number, attribute: 'copy-button-feedback-timeout' })
-  copyButtonFeedbackTimeout = 2000;
+  @property({ type: Boolean, reflect: true, attribute: 'hide-copy-button' })
+  hideCopyButton = false;
 
   /**
-   * The context content for the expand button.
+   * Specify the maximum number of rows to be shown when in collapsed view
    */
-  @property({ attribute: 'expand-button-text' })
-  expandButtonText = 'Show more';
+  @property()
+  maxCollapsedNumberOfRows = 15;
+
+  /**
+   * Specify the maximum number of rows to be shown when in expanded view
+   */
+  @property()
+  maxExpandedNumberOfRows = 0;
+
+  /**
+   * Specify the minimum number of rows to be shown when in collapsed view
+   */
+  @property()
+  minCollapsedNumberOfRows = 3;
+
+  /**
+   * Specify the minimum number of rows to be shown when in expanded view
+   */
+  @property()
+  minExpandedNumberOfRows = 16;
+
+  /**
+   * Specify a string that is displayed when the Code Snippet has been
+   * interacted with to show less lines
+   */
+  @property({ attribute: 'show-less-text' })
+  showLessText = 'Show less';
+
+  /**
+   * Specify a string that is displayed when the Code Snippet text is more
+   * than 15 lines
+   */
+  @property({ attribute: 'show-more-text' })
+  showMoreText = 'Show more';
+
+  /**
+   * `true` if the button should be disabled.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'wrap-text' })
+  wrapText = false;
 
   /**
    * The type of code snippet.
@@ -187,71 +289,174 @@ class BXCodeSnippet extends FocusMixin(LitElement) {
   @property({ reflect: true })
   type = CODE_SNIPPET_TYPE.SINGLE;
 
+  connectedCallback() {
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'listitem');
+    }
+    super.connectedCallback();
+    if (this._hObserveResize) {
+      this._hObserveResize = this._hObserveResize.release();
+    }
+    this._hObserveResize = observeResize(this._resizeObserver, this);
+  }
+
+  disconnectedCallback() {
+    if (this._hObserveResize) {
+      this._hObserveResize = this._hObserveResize.release();
+    }
+  }
+
+  updated() {
+    if (this._expandedCode) {
+      this.setAttribute('expanded-code', '');
+    } else {
+      this.removeAttribute('expanded-code');
+    }
+  }
+
   render() {
     const {
-      codeAssistiveText,
-      collapseButtonText,
-      copyButtonAssistiveText,
-      copyButtonFeedbackText,
-      expandButtonText,
+      disabled,
+      feedback,
+      feedbackTimeout,
+      hideCopyButton,
+      maxExpandedNumberOfRows,
+      minExpandedNumberOfRows,
+      maxCollapsedNumberOfRows,
+      minCollapsedNumberOfRows,
       type,
-      _expanded: expanded,
-      _showExpando: showExpando,
-      _handleClickCopyButton: handleClickCopyButton,
-      _handleClickExpando: handleClickExpando,
-      _handleSlotChange: handleSlotChange,
+      wrapText,
+      showMoreText,
+      showLessText,
+      _expandedCode: expandedCode,
+      _handleCopyClick: handleCopyClick,
+      _handleScroll: handleScroll,
+      _hasRightOverflow: hasRightOverflow,
+      _hasLeftOverflow: hasLeftOverflow,
+      _rowHeightInPixels: rowHeightInPixels,
+      _shouldShowMoreLessBtn: shouldShowMoreLessBtn,
     } = this;
 
-    if (type === CODE_SNIPPET_TYPE.SINGLE) {
+    let classes = `${prefix}--snippet`;
+    type ? (classes += ` ${prefix}--snippet--${type}`) : '';
+    type !== 'inline' && disabled
+      ? (classes += ` ${prefix}--snippet--disabled`)
+      : '';
+    hideCopyButton ? (classes += ` ${prefix}--snippet--no-copy`) : '';
+    wrapText ? (classes += ` ${prefix}--snippet--wraptext`) : '';
+    type == 'multi' && hasRightOverflow
+      ? (classes += ` ${prefix}--snippet--has-right-overflow`)
+      : '';
+
+    const expandButtonClass = `${prefix}--snippet-btn--expand`;
+
+    const disabledCopyButtonClasses = disabled
+      ? `${prefix}--snippet--disabled`
+      : '';
+
+    const expandCodeBtnText = expandedCode ? showLessText : showMoreText;
+
+    if (type === CODE_SNIPPET_TYPE.INLINE) {
       // Ensures no extra whitespace text node
       // prettier-ignore
       return html`
-        ${renderCode({
-          assistiveText: codeAssistiveText,
-          expanded,
-          children: html`<slot @slotchange="${handleSlotChange}"></slot>`,
-        })}
-        <cds-copy-button
-          feedback="${copyButtonFeedbackText}"
-          @click="${handleClickCopyButton}">
-          ${copyButtonAssistiveText}
-        </cds-copy-button>
+        <cds-copy class-name="${classes}" @click="${handleCopyClick}">
+          <code slot="icon"><slot></slot></code>
+          <span slot="tooltip-content"><slot name="button-description"></slot> </span>
+        </cds-copy>
       `;
     }
 
-    if (type === CODE_SNIPPET_TYPE.MULTI) {
-      // Ensures no extra whitespace text node
-      // prettier-ignore
-      return html`
-        ${renderCode({
-          assistiveText: codeAssistiveText,
-          expanded,
-          children: html`<slot @slotchange="${handleSlotChange}"></slot>`,
-        })}
-        <cds-copy-button
-          feedback="${copyButtonFeedbackText}"
-          @click="${handleClickCopyButton}">
-          ${copyButtonAssistiveText}
-        </cds-copy-button>
-        ${!showExpando
-          ? undefined
-          : renderExpando({
-              children: expanded
-                ? html`<slot name="collapse-button-text">${collapseButtonText}</slot>`
-                : html`<slot name="expand-button-text">${expandButtonText}</slot>`,
-              handleClick: handleClickExpando,
-            })}
-      `;
+    const styles = {};
+    if (type === 'multi') {
+      if (expandedCode) {
+        if (maxExpandedNumberOfRows > 0) {
+          styles['max-height'] =
+            maxExpandedNumberOfRows * rowHeightInPixels + 'px';
+        }
+        if (minExpandedNumberOfRows > 0) {
+          styles['min-height'] =
+            minExpandedNumberOfRows * rowHeightInPixels + 'px';
+        }
+      } else {
+        if (maxCollapsedNumberOfRows > 0) {
+          styles['max-height'] =
+            maxCollapsedNumberOfRows * rowHeightInPixels + 'px';
+        }
+        if (minCollapsedNumberOfRows > 0) {
+          styles['min-height'] =
+            minCollapsedNumberOfRows * rowHeightInPixels + 'px';
+        }
+      }
     }
 
-    // Ensures no extra whitespace text node
-    // prettier-ignore
     return html`
-    <cds-copy-button
-      feedback="${copyButtonFeedbackText}"
-      @click="${handleClickCopyButton}">
-      ${copyButtonAssistiveText}
-    </cds-copy-button>
+      <div
+        role="${type === CODE_SNIPPET_TYPE.SINGLE ||
+        type === CODE_SNIPPET_TYPE.MULTI
+          ? 'textbox'
+          : null}"
+        tabindex="${(type === CODE_SNIPPET_TYPE.SINGLE ||
+          type === CODE_SNIPPET_TYPE.MULTI) &&
+        !disabled
+          ? 0
+          : null}"
+        class="${prefix}--snippet-container"
+        aria-label="${'code-snippet'}"
+        aria-readonly="${type === CODE_SNIPPET_TYPE.SINGLE ||
+        type === CODE_SNIPPET_TYPE.MULTI
+          ? true
+          : null}"
+        aria-multiline="${type === CODE_SNIPPET_TYPE.MULTI ? true : null}"
+        @scroll="${(type === CODE_SNIPPET_TYPE.SINGLE && handleScroll) || null}"
+        style=${styleMap(styles)}>
+        <pre
+          @scroll="${(type === CODE_SNIPPET_TYPE.MULTI && handleScroll) ||
+          null}"><code><slot></slot></code></pre>
+      </div>
+
+      ${hasLeftOverflow
+        ? html`
+            <div class="${prefix}--snippet__overflow-indicator--left"></div>
+          `
+        : ``}
+      ${hasRightOverflow && type !== CODE_SNIPPET_TYPE.MULTI
+        ? html`
+            <div class="${prefix}--snippet__overflow-indicator--right"></div>
+          `
+        : ``}
+      ${hideCopyButton
+        ? ``
+        : html`
+            <cds-copy-button
+              ?disabled=${disabled}
+              class-name=${disabledCopyButtonClasses}
+              feedback=${feedback}
+              feedback-timeout=${feedbackTimeout}
+              @click="${handleCopyClick}">
+              <slot name="button-description"></slot>
+            </cds-copy-button>
+          `}
+      ${shouldShowMoreLessBtn
+        ? html`
+            <cds-button
+              kind="ghost"
+              size="sm"
+              class-name=${expandButtonClass}
+              ?disabled=${disabled}
+              @click=${() => this._handleClickExpanded()}>
+              <span class="${prefix}--snippet-btn--text">
+                ${expandCodeBtnText}
+              </span>
+              ${ChevronDown16({
+                class: `${prefix}--icon-chevron--down ${prefix}--snippet__icon`,
+                name: 'cheveron--down',
+                role: 'img',
+                slot: 'icon',
+              })}
+            </cds-button>
+          `
+        : ``}
     `;
   }
 
@@ -262,4 +467,4 @@ class BXCodeSnippet extends FocusMixin(LitElement) {
   static styles = styles;
 }
 
-export default BXCodeSnippet;
+export default CDSCodeSnippet;

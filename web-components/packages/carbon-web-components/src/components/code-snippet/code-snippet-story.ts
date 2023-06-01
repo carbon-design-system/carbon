@@ -8,193 +8,206 @@
  */
 
 import { html } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { action } from '@storybook/addon-actions';
-import { number, select } from '@storybook/addon-knobs';
+import { number, boolean } from '@storybook/addon-knobs';
 import { prefix } from '../../globals/settings';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import { CODE_SNIPPET_COLOR_SCHEME } from './code-snippet';
 import storyDocs from './code-snippet-story.mdx';
-import './code-snippet-skeleton';
+import './index';
 
-const colorSchemes = {
-  [`Regular`]: null,
-  [`Light (${CODE_SNIPPET_COLOR_SCHEME.LIGHT})`]:
-    CODE_SNIPPET_COLOR_SCHEME.LIGHT,
-};
-
-const defaultKnobs = {
-  [`${prefix}-code-snippet`]: () => ({
-    codeAssistiveText: textNullable(
-      'Assistive text for the code portion (code-assistive-text)',
-      ''
-    ),
-    copyButtonAssistiveText: textNullable(
-      'Assistive text for the copy button (copy-button-assistive-text)',
-      ''
-    ),
-    copyButtonFeedbackText: textNullable(
-      'Feedback text for copy button (copy-button-feedback-text)',
-      ''
-    ),
-    copyButtonFeedbackTimeout: number(
-      'Feedback timeout for copy button (copy-buttobn-feedback-timeout)',
-      2000
-    ),
-    colorScheme: select('Color scheme (color-scheme)', colorSchemes, null),
-    onClick: action('click'),
-  }),
-};
-
-export const singleLine = (args) => {
-  const {
-    codeAssistiveText,
-    copyButtonAssistiveText,
-    copyButtonFeedbackText,
-    copyButtonFeedbackTimeout,
-    colorScheme,
-    onClick,
-  } = args?.[`${prefix}-code-snippet`] ?? {};
-  const children = `
-    node -v Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, veritatis voluptate id incidunt molestiae
-    officia possimus, quasi itaque alias, architecto hic, dicta fugit? Debitis delectus quidem explicabo vitae
-    laboriosam!
-  `;
+export const inline = () => {
   return html`
-    <cds-code-snippet
-      code-assistive-text="${ifDefined(codeAssistiveText)}"
-      copy-button-assistive-text="${ifDefined(copyButtonAssistiveText)}"
-      copy-button-feedback-text="${ifDefined(copyButtonFeedbackText)}"
-      copy-button-feedback-timeout="${copyButtonFeedbackTimeout}"
-      color-scheme="${ifDefined(colorScheme)}"
-      @click="${onClick}"
-      >${children}</cds-code-snippet
-    >
+    <cds-code-snippet type="inline"
+      >node -v<span slot="button-description">Copy to clipboard</span>
+    </cds-code-snippet>
   `;
 };
 
-singleLine.storyName = 'Single line';
-
-singleLine.parameters = {
-  knobs: defaultKnobs,
+export const inlineWithLayer = () => {
+  return html`
+    <sb-template-layers>
+      <cds-code-snippet type="inline"
+        >node -v<span slot="button-description">Copy to clipboard</span>
+      </cds-code-snippet>
+    </sb-template-layers>
+  `;
 };
 
-export const multiLine = (args) => {
-  const {
-    codeAssistiveText,
-    copyButtonAssistiveText,
-    copyButtonFeedbackText,
-    copyButtonFeedbackTimeout,
-    collapseButtonText,
-    expandButtonText,
-    colorScheme,
-    onClick,
-  } = args?.[`${prefix}-code-snippet`] ?? {};
-  const children = `
-@mixin grid-container {
-  width: 100%;
-  padding-right: padding(mobile);
-  padding-left: padding(mobile);
-
-  @include breakpoint(bp--xs--major) {
-    padding-right: padding(xs);
-    padding-left: padding(xs);
-  }
-}
-
-$z-indexes: (
-  modal : 9000,
-  overlay : 8000,
-  dropdown : 7000,
-  header : 6000,
-  footer : 5000,
-  hidden : - 1,
-  overflowHidden: - 1,
-  floating: 10000
-);
-`.trim();
+export const multiline = () => {
+  const children = `"scripts": {
+    "build": "lerna run build --stream --prefix --npm-client yarn",
+    "ci-check": "carbon-cli ci-check",
+    "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
+    "doctoc": "doctoc --title '## Table of Contents'",
+    "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
+    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
+    "lint": "eslint actions config codemods packages",
+    "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
+    "sync": "carbon-cli sync",
+    "test": "cross-env BABEL_ENV=test jest",
+    "test:e2e": "cross-env BABEL_ENV=test jest --testPathPattern=e2e --testPathIgnorePatterns='examples,/packages/components/,/packages/react/'"
+  },
+  "resolutions": {
+    "react": "~16.9.0",
+    "react-dom": "~16.9.0",
+    "react-is": "~16.9.0",
+    "react-test-renderer": "~16.9.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.0",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-export-default-from": "^7.7.4",
+    "@babel/plugin-proposal-export-namespace-from": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.10.0",
+    "@babel/preset-env": "^7.10.0",
+    "@babel/preset-react": "^7.10.0",
+    "@babel/runtime": "^7.10.0",
+    "@commitlint/cli": "^8.3.5",
+`;
   // prettier-ignore
   return html`
-  <cds-code-snippet
-    type="multi"
-    code-assistive-text="${ifDefined(codeAssistiveText)}"
-    copy-button-assistive-text="${ifDefined(copyButtonAssistiveText)}"
-    copy-button-feedback-text="${ifDefined(copyButtonFeedbackText)}"
-    copy-button-feedback-timeout="${copyButtonFeedbackTimeout}"
-    collapse-button-text="${ifDefined(collapseButtonText)}"
-    expand-button-text="${ifDefined(expandButtonText)}"
-    color-scheme="${ifDefined(colorScheme)}"
-    @click="${onClick}"
-  >${children}</cds-code-snippet>
+    <cds-code-snippet
+      type="multi">${children}<span slot="button-description">Copy to clipboard</span>
+    </cds-code-snippet>
 `;
 };
 
-multiLine.storyName = 'Multi line';
-
-multiLine.parameters = {
-  knobs: {
-    [`${prefix}-code-snippet`]: () => ({
-      ...defaultKnobs[`${prefix}-code-snippet`](),
-      collapseButtonText: textNullable(
-        'The text for the collapse button (collapse-button-text)',
-        ''
-      ),
-      expandButtonText: textNullable(
-        'The text for the expand button (expand-button-text)',
-        ''
-      ),
-    }),
+export const multilineWithLayer = () => {
+  const children = `"scripts": {
+    "build": "lerna run build --stream --prefix --npm-client yarn",
+    "ci-check": "carbon-cli ci-check",
+    "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
+    "doctoc": "doctoc --title '## Table of Contents'",
+    "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
+    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
+    "lint": "eslint actions config codemods packages",
+    "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
+    "sync": "carbon-cli sync",
+    "test": "cross-env BABEL_ENV=test jest",
+    "test:e2e": "cross-env BABEL_ENV=test jest --testPathPattern=e2e --testPathIgnorePatterns='examples,/packages/components/,/packages/react/'"
   },
+  "resolutions": {
+    "react": "~16.9.0",
+    "react-dom": "~16.9.0",
+    "react-is": "~16.9.0",
+    "react-test-renderer": "~16.9.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.0",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-export-default-from": "^7.7.4",
+    "@babel/plugin-proposal-export-namespace-from": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.10.0",
+    "@babel/preset-env": "^7.10.0",
+    "@babel/preset-react": "^7.10.0",
+    "@babel/runtime": "^7.10.0",
+    "@commitlint/cli": "^8.3.5",
+`;
+  // prettier-ignore
+  return html`
+  <sb-template-layers>
+  <cds-code-snippet
+      type="multi">${children}<span slot="button-description">Copy to clipboard</span>
+    </cds-code-snippet>
+  </sb-template-layers>
+`;
 };
 
-export const inline = (args) => {
-  const {
-    codeAssistiveText,
-    copyButtonAssistiveText,
-    copyButtonFeedbackText,
-    copyButtonFeedbackTimeout,
-    colorScheme,
-    onClick,
-  } = args?.[`${prefix}-code-snippet`] ?? {};
+export const singleline = () => {
   return html`
-    <cds-code-snippet
-      type="inline"
-      code-assistive-text="${ifDefined(codeAssistiveText)}"
-      copy-button-assistive-text="${ifDefined(copyButtonAssistiveText)}"
-      copy-button-feedback-text="${ifDefined(copyButtonFeedbackText)}"
-      copy-button-feedback-timeout="${copyButtonFeedbackTimeout}"
-      color-scheme="${ifDefined(colorScheme)}"
-      @click="${onClick}"
-      >node -v</cds-code-snippet
-    >
+    <cds-code-snippet type="single">
+      yarn add carbon-components@latest carbon-components-react@latest
+      @carbon/icons-react@latest carbon-icons@latest
+      <span slot="button-description">Copy to clipboard</span>
+    </cds-code-snippet>
   `;
 };
 
-inline.storyName = 'Inline';
-
-inline.parameters = {
-  knobs: defaultKnobs,
+export const singlelineWithLayer = () => {
+  return html`
+    <sb-template-layers>
+      <cds-code-snippet type="single"
+        >yarn add carbon-components@latest carbon-components-react@latest
+        @carbon/icons-react@latest carbon-icons@latest<span
+          slot="button-description"
+          >Copy to clipboard</span
+        ></cds-code-snippet
+      >
+    </sb-template-layers>
+  `;
 };
 
-export const skeletonSingleLine = () =>
-  html` <cds-code-snippet-skeleton type="single"></cds-code-snippet-skeleton> `;
+export const skeleton = () =>
+  html`
+    <cds-code-snippet-skeleton
+      type="single"
+      style="margin-bottom: 8px"></cds-code-snippet-skeleton>
+    <cds-code-snippet-skeleton type="multi"></cds-code-snippet-skeleton>
+  `;
 
-skeletonSingleLine.storyName = 'Skeleton single line';
-
-skeletonSingleLine.parameters = {
+skeleton.parameters = {
   percy: {
     skip: true,
   },
 };
 
-export const skeletonMultiLine = () =>
-  html` <cds-code-snippet-skeleton type="multi"></cds-code-snippet-skeleton> `;
+export const Playground = (args) => {
+  const {
+    copyButtonDescription,
+    copyText,
+    disabled,
+    feedback,
+    feedbackTimeout,
+    hideCopyButton,
+    maxCollapsedNumberOfRows,
+    maxExpandedNumberOfRows,
+    minCollapsedNumberOfRows,
+    minExpandedNumberOfRows,
+    showLessText,
+    showMoreText,
+    wrapText,
+  } = args?.[`${prefix}-code-snippet`] ?? {};
+  return html`
+    <cds-code-snippet
+      type="single"
+      copy-text="${copyText}"
+      ?disabled="${disabled}"
+      maxCollapsedNumberOfRows="${maxCollapsedNumberOfRows}"
+      maxExpandedNumberOfRows="${maxExpandedNumberOfRows}"
+      minCollapsedNumberOfRows="${minCollapsedNumberOfRows}"
+      minExpandedNumberOfRows="${minExpandedNumberOfRows}"
+      ?hide-copy-button="${hideCopyButton}"
+      show-less-text="${showLessText}"
+      show-more-text="${showMoreText}"
+      ?wrap-text="${wrapText}"
+      feedback=${feedback}
+      feedback-timeout=${feedbackTimeout}
+      >yarn add @carbon/react<span slot="button-description"
+        >${copyButtonDescription}</span
+      >
+    </cds-code-snippet>
+  `;
+};
 
-skeletonMultiLine.storyName = 'Skeleton multi line';
-
-skeletonMultiLine.parameters = {
-  percy: {
-    skip: true,
+Playground.parameters = {
+  knobs: {
+    [`${prefix}-code-snippet`]: () => ({
+      copyButtonDescription: textNullable(
+        'Copy button description',
+        'Copy to clipboard'
+      ),
+      copyText: textNullable('Copy text', ''),
+      disabled: boolean('Disabled', false),
+      feedback: textNullable('Feedback', ''),
+      feedbackTimeout: number('Feedback timeout', 0),
+      hideCopyButton: boolean('Hide copy button', false),
+      maxCollapsedNumberOfRows: number('Max collapsed number of rows', 15),
+      maxExpandeddNumberOfRows: number('Max expanded number of rows', 0),
+      minCollapsedNumberOfRows: number('Min collapsed number of rows', 3),
+      minExpandeddNumberOfRows: number('Min expanded number of rows', 16),
+      showLessText: textNullable('Show less text', 'Show less'),
+      showMoreText: textNullable('Show more text', 'Show more'),
+      wrapText: boolean('Wrap text', false),
+    }),
   },
 };
 

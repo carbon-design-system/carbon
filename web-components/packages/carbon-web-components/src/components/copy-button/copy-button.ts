@@ -23,6 +23,18 @@ import '../copy/copy';
 @customElement(`${prefix}-copy-button`)
 class CDSCopyButton extends FocusMixin(LitElement) {
   /**
+   * Specify an optional className to be added to your Button
+   */
+  @property({ reflect: true, attribute: 'class-name' })
+  className;
+
+  /**
+   * `true` if the button should be disabled.
+   */
+  @property({ type: Boolean, reflect: true })
+  disabled = false;
+
+  /**
    * Specify the string that is displayed when the button is clicked and the content is copi
    */
   @property()
@@ -35,9 +47,20 @@ class CDSCopyButton extends FocusMixin(LitElement) {
   feedbackTimeout = 2000;
 
   render() {
-    const { feedback, feedbackTimeout } = this;
+    const { className, disabled, feedback, feedbackTimeout } = this;
+
+    let classes = `${prefix}--copy-btn`;
+
+    if (className) {
+      classes += ` ${className}`;
+    }
+
     return html`
-      <cds-copy feedback=${feedback} feedback-timeout=${feedbackTimeout}>
+      <cds-copy
+        ?disabled=${disabled}
+        feedback=${feedback}
+        feedback-timeout=${feedbackTimeout}
+        class-name=${classes}>
         ${Copy16({ slot: 'icon', class: `${prefix}--snippet__icon` })}
         <span slot="tooltip-content"><slot></slot></span>
       </cds-copy>

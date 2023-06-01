@@ -17,7 +17,7 @@ import styles from './code-snippet.scss';
  * Skeleton of code snippet.
  */
 @customElement(`${prefix}-code-snippet-skeleton`)
-class BXCodeSnippetSkeleton extends LitElement {
+class CDSCodeSnippetSkeleton extends LitElement {
   /**
    * The type of code snippet. Corresponds to the attribute with the same name.
    */
@@ -37,4 +37,4 @@ class BXCodeSnippetSkeleton extends LitElement {
   static styles = styles;
 }
 
-export default BXCodeSnippetSkeleton;
+export default CDSCodeSnippetSkeleton;

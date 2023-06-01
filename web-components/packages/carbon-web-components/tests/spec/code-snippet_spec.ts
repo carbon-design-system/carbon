@@ -9,25 +9,16 @@
 
 import { render } from 'lit';
 import {
-  singleLine,
-  multiLine,
+  singleline,
+  multiline,
   inline,
 } from '../../src/components/code-snippet/code-snippet-story';
 
-const singleLineTemplate = (props?) =>
-  singleLine({
-    'cds-code-snippet': props,
-  });
+const singleLineTemplate = () => singleline();
 
-const multiLineTemplate = (props?) =>
-  multiLine({
-    'cds-code-snippet': props,
-  });
+const multiLineTemplate = () => multiline();
 
-const inlineTemplate = (props?) =>
-  inline({
-    'cds-code-snippet': props,
-  });
+const inlineTemplate = () => inline();
 
 describe('cds-code-snippet', function () {
   describe('Rendering', function () {
@@ -62,15 +53,7 @@ describe('cds-code-snippet', function () {
     });
 
     it('Should render with various attributes for single line mode', async function () {
-      render(
-        singleLineTemplate({
-          codeAssistiveText: 'code-assistive-text-foo',
-          copyButtonAssistiveText: 'copy-button-assistive-text-foo',
-          copyButtonFeedbackText: 'copy-button-feedback-text-foo',
-          copyButtonFeedbackTimeout: 16,
-        }),
-        document.body
-      );
+      render(singleLineTemplate(), document.body);
       await Promise.resolve();
       expect(
         document.body.querySelector('cds-code-snippet' as any)
@@ -80,15 +63,7 @@ describe('cds-code-snippet', function () {
     });
 
     it('Should render with various attributes for multi line mode', async function () {
-      render(
-        multiLineTemplate({
-          codeAssistiveText: 'code-assistive-text-foo',
-          copyButtonAssistiveText: 'copy-button-assistive-text-foo',
-          copyButtonFeedbackText: 'copy-button-feedback-text-foo',
-          copyButtonFeedbackTimeout: 16,
-        }),
-        document.body
-      );
+      render(multiLineTemplate(), document.body);
       await Promise.resolve();
       expect(
         document.body.querySelector('cds-code-snippet' as any)
@@ -98,15 +73,7 @@ describe('cds-code-snippet', function () {
     });
 
     it('Should render with various attributes for inline mode', async function () {
-      render(
-        inlineTemplate({
-          codeAssistiveText: 'code-assistive-text-foo',
-          copyButtonAssistiveText: 'copy-button-assistive-text-foo',
-          copyButtonFeedbackText: 'copy-button-feedback-text-foo',
-          copyButtonFeedbackTimeout: 16,
-        }),
-        document.body
-      );
+      render(inlineTemplate(), document.body);
       await Promise.resolve();
       expect(
         document.body.querySelector('cds-code-snippet' as any)
@@ -163,10 +130,7 @@ describe('cds-code-snippet', function () {
     });
 
     it('Should support changing the duration', async function () {
-      render(
-        singleLineTemplate({ copyButtonFeedbackTimeout: 500 }),
-        document.body
-      );
+      render(singleLineTemplate(), document.body);
       await Promise.resolve();
       const button = document.body
         .querySelector('cds-code-snippet')!
@@ -191,13 +155,7 @@ describe('cds-code-snippet', function () {
 
   describe('Expand/collapse button in multi line mode', function () {
     it('Should render the expando', async function () {
-      render(
-        multiLineTemplate({
-          collapseButtonText: 'collapse-button-text-foo',
-          expandButtonText: 'expand-button-text-foo',
-        }),
-        document.body
-      );
+      render(multiLineTemplate(), document.body);
       await Promise.resolve();
       const snippet = document.body.querySelector('cds-code-snippet');
       snippet!.shadowRoot!.querySelector('pre')!.style.display = 'block';
@@ -211,13 +169,7 @@ describe('cds-code-snippet', function () {
     });
 
     it('Should change the button text by expanding/collapsing', async function () {
-      render(
-        multiLineTemplate({
-          collapseButtonText: 'collapse-button-text-foo',
-          expandButtonText: 'expand-button-text-foo',
-        }),
-        document.body
-      );
+      render(multiLineTemplate(), document.body);
       await Promise.resolve();
       const snippet = document.body.querySelector('cds-code-snippet');
       snippet!.shadowRoot!.querySelector('pre')!.style.display = 'block';

@@ -98,12 +98,6 @@ class CDSCopy extends CDSIconButton {
     super.connectedCallback();
   }
 
-  firstUpdated() {
-    this.shadowRoot
-      ?.querySelector('button')
-      ?.classList.add(`${prefix}--copy-btn`);
-  }
-
   updated(changedProperties) {
     this.shadowRoot
       ?.querySelector('button')

@@ -12,7 +12,12 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/utilities/keyframes' as *;
 @use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/components/button';
+@use '@carbon/styles/scss/components/tooltip';
+@use '@carbon/styles/scss/components/code-snippet/code-snippet' as *;
 @use '@carbon/styles/scss/components/copy-button/index';
+
+@include code-snippet;
 
 :host(#{$prefix}-copy-button) {
   display: inline-flex;
@@ -33,4 +38,16 @@ $css--plex: true !default;
 
 .#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in {
   animation: $duration-fast-02 motion(standard, productive) show-feedback;
+}
+
+// code snippet disabled overrides
+.#{$prefix}--snippet--disabled,
+.#{$prefix}--snippet--disabled
+  .#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
+  background-color: $layer !important; /* stylelint-disable-line declaration-no-important */
+  color: $text-disabled !important; /* stylelint-disable-line declaration-no-important */
+
+  ::slotted([slot='icon']) {
+    fill: $text-disabled !important; /* stylelint-disable-line declaration-no-important */
+  }
 }

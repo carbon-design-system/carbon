@@ -21,140 +21,121 @@ $css--plex: true !default;
 
 :host(#{$prefix}-code-snippet),
 :host(#{$prefix}-code-snippet-skeleton) {
-  @extend .#{$prefix}--snippet--single;
-
-  outline: none;
-
-  &::after {
-    background-color: $layer-01;
-    background-image: none;
-    mask-image: linear-gradient(to right, transparent 0%, $layer-01 100%);
-    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-      background-color: transparent;
-      background-image: linear-gradient(to right, transparent, $layer-01);
-    }
-  }
-
-  .#{$prefix}--snippet-button .#{$prefix}--btn--copy__feedback {
-    left: 50%;
-    right: auto;
-  }
+  @extend .#{$prefix}--snippet;
 
   .#{$prefix}--snippet-container {
-    display: flex;
-    align-items: center;
-    overflow-x: auto;
-    position: relative;
-    height: 100%;
+    @extend .#{$prefix}--snippet-container;
+  }
+}
+
+:host(#{$prefix}-code-snippet[disabled]) {
+  @extend .#{$prefix}--snippet--disabled;
+}
+
+:host(#{$prefix}-code-snippet[wrap-text]) {
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+}
+
+:host(#{$prefix}-code-snippet[hide-copy-button]) {
+  @extend .#{$prefix}--snippet--no-copy;
+}
+
+:host(#{$prefix}-code-snippet-skeleton[type='single']),
+:host(#{$prefix}-code-snippet[type='single']) {
+  @extend .#{$prefix}--snippet--single;
+}
+
+:host(#{$prefix}-code-snippet[type='single']) {
+  pre {
+    white-space: nowrap;
   }
 
-  .#{$prefix}--snippet-btn--expand {
-    z-index: 1;
-    min-height: rem(40px);
+  #{$prefix}-copy-button {
+    @extend .#{$prefix}--snippet, .#{$prefix}--popover-container;
+
+    code: {
+      overflow: hidden;
+    }
+  }
+}
+
+#{$prefix}-copy {
+  code {
+    padding: 0 $spacing-03;
+    @include type-style('code-01');
+  }
+}
+
+:host(#{$prefix}-code-snippet-skeleton[type='multi']),
+:host(#{$prefix}-code-snippet[type='multi']) {
+  @extend .#{$prefix}--snippet--multi;
+}
+
+:host(#{$prefix}-code-snippet[type='multi']) {
+  .#{$prefix}--snippet-container {
+    padding: 0;
+
+    @extend .#{$prefix}--snippet--multi, .#{$prefix}--snippet-container;
   }
 
   pre {
-    white-space: nowrap;
-    @include type-style('code-01');
-
-    padding-right: $spacing-03;
+    margin: 0;
+    padding: 0 $spacing-08 $spacing-06 0;
+    overflow-x: auto;
   }
-}
 
-// TODO: deprecate light color scheme
-// :host(#{$prefix}-code-snippet[color-scheme='light']) {
-//   background-color: $layer-02;
-
-//   button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
-//     background-color: $layer-02;
-//   }
-
-//   &:hover {
-//     background-color: $hover-ui-light;
-//   }
-
-//   .#{$prefix}--snippet-button:hover,
-//   button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand:hover {
-//     background-color: $hover-ui-light;
-//   }
-// }
-
-:host(#{$prefix}-code-snippet[type='multi']),
-:host(#{$prefix}-code-snippet-skeleton[type='multi']) {
-  @extend .#{$prefix}--snippet--multi;
-
-  height: auto;
-
-  &::after {
+  pre::after {
     position: absolute;
+    top: 0;
+    right: 0;
+    width: rem(16px);
+    height: 100%;
+    background-image: linear-gradient(to right, transparent, $layer);
     content: '';
-    left: 0;
-    top: auto;
-    bottom: rem(16px);
-    width: 100%;
-    height: rem(16px);
-    background-color: $layer-01;
-    background-image: none;
-    mask-image: linear-gradient(to bottom, transparent 0%, $layer-01 100%);
-    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-      background-color: transparent;
-      background-image: linear-gradient(to bottom, transparent, $layer-01);
-    }
   }
 
-  .#{$prefix}--snippet-container {
-    display: block;
-    overflow: hidden;
-    position: relative;
-    height: auto;
-    padding-bottom: 0;
-    max-height: rem(238px);
-    min-height: rem(56px);
-    transition: max-height $duration-moderate-01 motion(standard, productive);
+  #{$prefix}-button {
+    .#{$prefix}--snippet__icon {
+      margin-left: $spacing-03;
+    }
 
-    pre {
-      overflow: hidden;
-      padding-bottom: rem(24px);
-      white-space: pre;
-      padding-right: 0;
-
-      &::after {
-        // Use top-level pseudo element instead because `<pre>` here is inside a scrolling container
-        content: none;
-      }
-
-      code {
-        overflow: hidden;
+    &[disabled] {
+      .#{$prefix}--snippet-btn--text {
+        color: $text-disabled;
       }
     }
   }
 
-  .#{$prefix}-ce--snippet-container--expanded {
-    max-height: rem(1500px);
-    transition: max-height $duration-moderate-01 motion(standard, productive);
-
-    pre {
-      overflow-x: auto;
+  &[expanded-code] {
+    .#{$prefix}--snippet-container {
+      padding-bottom: $spacing-05;
+      transition: max-height $duration-moderate-01 motion(standard, productive);
     }
+
+    #{$prefix}-button {
+      .#{$prefix}--snippet__icon {
+        transform: rotate(180deg);
+        transition: transform $transition-expansion;
+      }
+    }
+  }
+
+  #{$prefix}-copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
   }
 }
 
-:host(#{$prefix}-code-snippet[type='inline']) {
-  display: inline-flex;
-  width: auto;
-  height: auto;
-  min-width: auto;
-  max-width: auto;
-  padding: 0;
+:host(#{$prefix}-code-snippet-skeleton[type='single']) {
+  @extend .#{$prefix}--snippet--single, .#{$prefix}--skeleton;
+}
 
-  &::after {
-    content: none;
-  }
-
-  .#{$prefix}--btn--copy__feedback {
-    // Half of the diagonal line of `0.6rem` square
-    top: rem(6.7882px);
-  }
+:host(#{$prefix}-code-snippet-skeleton[type='multi']) {
+  @extend .#{$prefix}--snippet--multi, .#{$prefix}--skeleton;
 }
 
 :host(#{$prefix}-code-snippet-skeleton) {

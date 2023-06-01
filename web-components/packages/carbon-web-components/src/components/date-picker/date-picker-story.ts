@@ -63,31 +63,13 @@ export const Simple = () => {
 
 export const SimpleWithLayer = () => {
   return html`
-    <cds-layer>
-      <cds-date-picker>
-        <cds-date-picker-input
-          label-text="Date Picker label"
-          placeholder="mm/dd/yyyy">
-        </cds-date-picker-input>
-      </cds-date-picker>
-      <cds-layer>
-        <cds-date-picker>
-          <cds-date-picker-input
-            label-text="Date Picker label"
-            placeholder="mm/dd/yyyy">
-          </cds-date-picker-input>
-        </cds-date-picker>
-        <cds-layer>
-          <cds-date-picker>
-            <cds-date-picker-input
-              label-text="Date Picker label"
-              placeholder="mm/dd/yyyy">
-            </cds-date-picker-input>
-          </cds-date-picker>
-        </cds-layer>
-      </cds-layer>
-      <cds-layer> </cds-layer
-    ></cds-layer>
+  <sb-template-layers>
+    <cds-date-picker>
+    <cds-date-picker-input
+      label-text="Date Picker label"
+      placeholder="mm/dd/yyyy">
+    </cds-date-picker-input>
+  </sb-template-layers>
   `;
 };
 
@@ -107,7 +89,7 @@ singleWithCalendar.storyName = 'Single with calendar';
 
 export const singleWithCalendarWithLayer = () => {
   return html`
-    <cds-layer>
+    <sb-template-layers>
       <cds-date-picker>
         <cds-date-picker-input
           kind="single"
@@ -115,25 +97,7 @@ export const singleWithCalendarWithLayer = () => {
           placeholder="mm/dd/yyyy">
         </cds-date-picker-input>
       </cds-date-picker>
-      <cds-layer>
-        <cds-date-picker>
-          <cds-date-picker-input
-            kind="single"
-            label-text="Date Picker label"
-            placeholder="mm/dd/yyyy">
-          </cds-date-picker-input>
-        </cds-date-picker>
-        <cds-layer>
-          <cds-date-picker>
-            <cds-date-picker-input
-              kind="single"
-              label-text="Date Picker label"
-              placeholder="mm/dd/yyyy">
-            </cds-date-picker-input>
-          </cds-date-picker>
-        </cds-layer>
-      </cds-layer>
-    </cds-layer>
+    </sb-template-layers>
   `;
 };
 
