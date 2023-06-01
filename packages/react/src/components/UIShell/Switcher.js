@@ -68,6 +68,7 @@ const Switcher = React.forwardRef(function Switcher(props, ref) {
         handleSwitcherItemFocus,
         ref,
         index,
+        key: index,
       })
   );
 

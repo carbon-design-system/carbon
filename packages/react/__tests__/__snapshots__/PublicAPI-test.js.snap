@@ -3920,6 +3920,9 @@ Map {
   "HeaderPanel" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "addFocusListeners": Object {
+        "type": "bool",
+      },
       "aria-label": [Function],
       "aria-labelledby": [Function],
       "className": Object {
@@ -7159,6 +7162,18 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "handleSwitcherItemFocus": Object {
+        "type": "func",
+      },
+      "index": Object {
+        "type": "number",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+      "onKeyUp": Object {
+        "type": "func",
       },
       "tabIndex": Object {
         "type": "number",
