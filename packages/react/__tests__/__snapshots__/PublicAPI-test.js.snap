@@ -3340,6 +3340,9 @@ Map {
       "tabIndex": "0",
     },
     "propTypes": Object {
+      "aria-describedby": Object {
+        "type": "string",
+      },
       "iconDescription": Object {
         "type": "string",
       },
@@ -6545,6 +6548,9 @@ Map {
       "defaultExpanded": Object {
         "type": "bool",
       },
+      "enterDelayMs": Object {
+        "type": "number",
+      },
       "expanded": Object {
         "type": "bool",
       },
@@ -8616,6 +8622,12 @@ Map {
       },
       "value": Object {
         "type": "string",
+      },
+      "warning": Object {
+        "type": "bool",
+      },
+      "warningText": Object {
+        "type": "node",
       },
     },
     "render": [Function],

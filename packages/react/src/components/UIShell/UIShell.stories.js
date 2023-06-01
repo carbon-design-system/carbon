@@ -160,6 +160,9 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      hideNoControlsWarning: true,
+    },
   },
   argTypes: {
     className: {
@@ -819,9 +822,9 @@ export const FixedSideNavWDivider = () => (
 
 FixedSideNavWDivider.storyName = 'Fixed SideNav w/ Divider';
 
-export const SideNavRail = () => (
+export const SideNavRail = (args) => (
   <>
-    <SideNav aria-label="Side navigation" href="#main-content" isRail>
+    <SideNav aria-label="Side navigation" href="#main-content" {...args}>
       <SideNavItems>
         <SideNavMenu renderIcon={Fade} title="Category title">
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
@@ -874,9 +877,33 @@ export const SideNavRail = () => (
   </>
 );
 
+SideNavRail.argTypes = {
+  isRail: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: true,
+    table: {
+      defaultValue: { summary: true },
+    },
+    description: 'Optional prop to display the side nav rail.',
+  },
+  enterDelayMs: {
+    control: {
+      type: 'number',
+    },
+    table: {
+      defaultValue: { summary: 100 },
+    },
+    defaultValue: 100,
+    description:
+      'Specify the duration in milliseconds to delay before displaying the sidenav',
+  },
+};
+
 SideNavRail.storyName = 'SideNav Rail';
 
-export const SideNavRailWHeader = () => (
+export const SideNavRailWHeader = (args) => (
   <HeaderContainer
     render={({ isSideNavExpanded, onClickSideNavExpand }) => (
       <>
@@ -922,11 +949,11 @@ export const SideNavRailWHeader = () => (
           </HeaderGlobalBar>
           <SideNav
             aria-label="Side navigation"
-            isRail
             expanded={isSideNavExpanded}
             onOverlayClick={onClickSideNavExpand}
             href="#main-content"
-            onSideNavBlur={onClickSideNavExpand}>
+            onSideNavBlur={onClickSideNavExpand}
+            {...args}>
             <SideNavItems>
               <SideNavMenu renderIcon={Fade} title="Category title">
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
@@ -981,6 +1008,30 @@ export const SideNavRailWHeader = () => (
     )}
   />
 );
+
+SideNavRailWHeader.argTypes = {
+  isRail: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: true,
+    table: {
+      defaultValue: { summary: true },
+    },
+    description: 'Optional prop to display the side nav rail.',
+  },
+  enterDelayMs: {
+    control: {
+      type: 'number',
+    },
+    table: {
+      defaultValue: { summary: 100 },
+    },
+    defaultValue: 100,
+    description:
+      'Specify the duration in milliseconds to delay before displaying the sidenav',
+  },
+};
 
 SideNavRailWHeader.storyName = 'SideNav Rail w/Header';
 
