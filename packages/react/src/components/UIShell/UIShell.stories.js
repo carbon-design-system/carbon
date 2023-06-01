@@ -614,7 +614,6 @@ export const HeaderBaseWActionsAndSwitcher = (args) => (
           </HeaderGlobalAction>
         </HeaderGlobalBar>
         <HeaderPanel
-          aria-label="Header Panel"
           expanded={isSideNavExpanded}
           onHeaderPanelFocus={onClickSideNavExpand}>
           <Switcher aria-label="Switcher Container">
