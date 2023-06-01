@@ -130,13 +130,13 @@ prop.
   titleText="ComboBox title"
   helperText="Combobox helper text"
   shouldFilterItem={(menu) =>
-    menu.item.toLowerCase().includes(menu.inputValue.toLowerCase())
+    menu?.item?.toLowerCase().includes(menu?.inputValue?.toLowerCase())
   }
 />
 
 ```jsx
 const filterItems = (menu) => {
-  return menu.item.toLowerCase().includes(menu.inputValue.toLowerCase());
+  return menu?.item?.toLowerCase().includes(menu?.inputValue?.toLowerCase());
 };
 
 <Combobox
