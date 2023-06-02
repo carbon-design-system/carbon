@@ -7,6 +7,7 @@
 
 'use strict';
 
+const remarkGfm = require('remark-gfm');
 const fs = require('fs');
 const glob = require('fast-glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -76,7 +77,16 @@ const config = {
     },
     '@storybook/addon-storysource',
     '@storybook/addon-a11y',
-    '@storybook/addon-mdx-gfm',
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
+      },
+    },
   ],
   features: {
     previewCsfV3: true,

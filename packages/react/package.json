@@ -109,6 +109,7 @@
     "prop-types": "^15.7.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "remark-gfm": "^3.0.1",
     "requestanimationframe": "^0.0.23",
     "rimraf": "^5.0.0",
     "rollup": "^2.79.1",

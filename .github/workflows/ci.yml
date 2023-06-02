@@ -138,7 +138,7 @@ jobs:
       - name: Build project
         run: yarn build --ignore '@carbon/sketch'
       - name: Build storybook
-        run: yarn workspace @carbon/react build-storybook
+        run: yarn workspace @carbon/react storybook build
       - name: Run storybook
         id: storybook
         run: |
@@ -196,7 +196,7 @@ jobs:
       - name: Build project
         run: yarn build --ignore '@carbon/sketch'
       - name: Build storybook
-        run: yarn workspace @carbon/react build-storybook
+        run: yarn workspace @carbon/react storybook build
       - name: Run storybook
         id: storybook
         run: |
