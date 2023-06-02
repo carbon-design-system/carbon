@@ -10,9 +10,11 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { usePrefix } from '../../internal/usePrefix';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 
-const Switcher = React.forwardRef(function Switcher(props, ref) {
-  const switcherRef = useRef(ref);
+const Switcher = React.forwardRef(function Switcher(props, forwardRef) {
+  const switcherRef = useRef(null);
+  const ref = useMergedRefs([switcherRef, forwardRef]);
 
   const prefix = usePrefix();
   const {
@@ -72,7 +74,7 @@ const Switcher = React.forwardRef(function Switcher(props, ref) {
   );
 
   return (
-    <ul ref={switcherRef} className={className} {...accessibilityLabel}>
+    <ul ref={ref} className={className} {...accessibilityLabel}>
       {childrenWithProps}
     </ul>
   );

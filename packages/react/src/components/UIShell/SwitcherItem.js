@@ -23,7 +23,6 @@ const SwitcherItem = React.forwardRef(function SwitcherItem(
     tabIndex = 0,
     index,
     handleSwitcherItemFocus,
-    onKeyDown = () => {},
     ...rest
   },
   ref
@@ -45,12 +44,14 @@ const SwitcherItem = React.forwardRef(function SwitcherItem(
 
   function setTabFocus(evt) {
     if (match(evt, keys.ArrowDown)) {
+      evt.preventDefault();
       handleSwitcherItemFocus?.({
         currentIndex: index,
         direction: 1,
       });
     }
     if (match(evt, keys.ArrowUp)) {
+      evt.preventDefault();
       handleSwitcherItemFocus?.({
         currentIndex: index,
         direction: -1,
@@ -63,7 +64,6 @@ const SwitcherItem = React.forwardRef(function SwitcherItem(
       <Link
         onKeyDown={(evt) => {
           setTabFocus(evt);
-          onKeyDown(evt);
         }}
         {...rest}
         ref={ref}
@@ -102,12 +102,6 @@ SwitcherItem.propTypes = {
    * If given, switcher item will render as a link with the given href
    */
   index: PropTypes.number,
-
-  /**
-   * event handlers
-   */
-  onKeyDown: PropTypes.func,
-  onKeyUp: PropTypes.func,
 
   /**
    * Specify the tab index of the Link
