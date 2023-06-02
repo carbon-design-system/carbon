@@ -13,6 +13,7 @@
 @use '../../utilities/component-tokens' as *;
 @use '../../utilities/convert' as *;
 @use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/layout';
 @use '../../spacing' as *;
 @use './tokens' as *;
 @use './mixins' as *;
@@ -23,6 +24,20 @@
 /// @group tag
 @mixin tag {
   .#{$prefix}--tag {
+    @include layout.redefine-tokens(
+      (
+        size: (
+          height: (
+            xs: rem(18px),
+            sm: rem(18px),
+            md: rem(24px),
+          ),
+        ),
+      )
+    );
+
+    @include layout.use('size', $default: 'md', $min: 'sm', $max: 'md');
+
     @include type-style('label-01');
     @include tag-theme($tag-background-gray, $tag-color-gray, $tag-hover-gray);
 
@@ -31,13 +46,13 @@
     min-width: rem(32px);
     // restricts size of contained elements
     max-width: 100%;
-    min-height: rem(24px);
+    min-height: layout.size('height');
     align-items: center;
     justify-content: center;
-    padding: $spacing-02 $spacing-03;
     margin: $spacing-02;
     border-radius: rem(15px);
     cursor: default;
+    padding-inline: $spacing-03;
     vertical-align: middle;
     word-break: break-word;
 
@@ -166,8 +181,8 @@
 
   .#{$prefix}--tag__close-icon {
     display: flex;
-    width: rem(24px);
-    height: rem(24px);
+    width: layout.size('height');
+    height: layout.size('height');
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
@@ -225,19 +240,11 @@
     fill: $icon-disabled;
   }
 
-  // small tags
-  .#{$prefix}--tag--sm {
-    min-height: rem(18px);
-    padding: 0 $spacing-03;
-  }
-
   .#{$prefix}--tag--sm.#{$prefix}--tag--filter {
     padding-right: 0;
   }
 
   .#{$prefix}--tag--sm .#{$prefix}--tag__close-icon {
-    width: rem(18px);
-    height: rem(18px);
     margin-left: rem(5px);
   }
 
