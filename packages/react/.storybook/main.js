@@ -94,9 +94,7 @@ const config = {
   },
   framework: {
     name: '@storybook/react-webpack5',
-    options: {
-      legacyRootApi: false,
-    },
+    options: {},
   },
   stories,
   typescript: {
