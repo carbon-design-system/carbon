@@ -3934,6 +3934,9 @@ Map {
       "expanded": Object {
         "type": "bool",
       },
+      "href": Object {
+        "type": "string",
+      },
       "onHeaderPanelFocus": Object {
         "type": "func",
       },
