@@ -128,6 +128,9 @@
     ],
     "README.md": [
       "all-contributors generate"
+    ],
+    ".all-contributorsrc": [
+      "all-contributors generate"
     ]
   },
   "eslintConfig": {
