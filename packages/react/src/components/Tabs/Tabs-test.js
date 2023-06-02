@@ -160,6 +160,7 @@ describe('Tab', () => {
         </TabPanels>
       </Tabs>
     );
+    // eslint-disable-next-line testing-library/no-node-access
     expect(screen.queryByText('test-secondary-label')).not.toBeInTheDocument();
   });
 
@@ -272,10 +273,9 @@ describe('Tab', () => {
       </Tabs>
     );
 
-    expect(
-      // eslint-disable-next-line testing-library/no-node-access
-      screen.queryAllByLabelText('Close tab')[0].parentElement
-    ).toHaveClass(`${prefix}--visually-hidden`);
+    expect(screen.queryAllByLabelText('Close tab')[0]).toHaveClass(
+      `${prefix}--visually-hidden`
+    );
   });
 
   it('should call onCloseTabRequest when dismissable and close icon clicked', async () => {
@@ -388,7 +388,28 @@ describe('Tab', () => {
     }
   });
 
-  it('should render close icon instead of renderIcon when dismissable', () => {
+  it('should render close icon when dismissable', () => {
+    render(
+      <Tabs dismissable>
+        <TabList aria-label="List of tabs">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    expect(screen.getAllByLabelText('Close tab')[0]).not.toHaveClass(
+      `${prefix}--visaully-hidden`
+    );
+  });
+
+  it('should render close icon and renderIcon when dismissable and icon supplied', () => {
     render(
       <Tabs dismissable>
         <TabList aria-label="List of tabs">
@@ -404,11 +425,14 @@ describe('Tab', () => {
       </Tabs>
     );
 
-    expect(
-      // eslint-disable-next-line testing-library/no-node-access
-      screen.getAllByLabelText('Close tab')[0].parentElement
-    ).not.toHaveClass(`${prefix}--visaully-hidden`);
-    expect(screen.queryByTestId('svg')).not.toBeInTheDocument();
+    expect(screen.getAllByLabelText('Close tab')[0]).not.toHaveClass(
+      `${prefix}--visaully-hidden`
+    );
+    expect(screen.getByTestId('svg')).toBeInTheDocument();
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(screen.getByTestId('svg').parentElement).toHaveClass(
+      `${prefix}--tabs__nav-item--icon-left`
+    );
   });
 });
 

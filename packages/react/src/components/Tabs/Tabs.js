@@ -646,6 +646,11 @@ const Tab = React.forwardRef(function Tab(
       tabIndex={selectedIndex === index ? '0' : '-1'}
       type="button">
       <div className={`${prefix}--tabs__nav-item-label-wrapper`}>
+        {dismissable && Icon && (
+          <div className={`${prefix}--tabs__nav-item--icon-left`}>
+            {<Icon size={16} />}
+          </div>
+        )}
         <span className={`${prefix}--tabs__nav-item-label`}>{children}</span>
         {/* always rendering dismissIcon so we don't lose reference to it, otherwise events do not work when switching from/to dismissable state */}
         <div

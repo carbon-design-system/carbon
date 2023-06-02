@@ -16,10 +16,14 @@
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/visually-hidden' as *;
+@use '../../utilities/layout';
 @use 'tokens' as *;
 
 @mixin button {
   .#{$prefix}--btn {
+    @include layout.use('size', $default: 'lg');
+    @include layout.use('density', $default: 'normal');
+
     @include button-base;
   }
 
@@ -107,7 +111,7 @@
       $layer-active
     );
 
-    padding: $button-padding-ghost;
+    padding-inline-end: calc(layout.density('padding-inline') - rem(1px));
 
     .#{$prefix}--btn__icon {
       position: static;
@@ -135,24 +139,25 @@
       outline: none;
     }
 
-    &.#{$prefix}--btn--sm {
-      padding: $button-padding-ghost-sm;
-    }
-
-    // V11: remove field
-    &.#{$prefix}--btn--field,
-    &.#{$prefix}--btn--md {
-      padding: $button-padding-ghost-field;
-    }
-
     &:not([disabled]) svg {
       fill: $icon-primary;
     }
   }
 
   .#{$prefix}--btn--icon-only {
-    padding-right: rem(15px);
-    padding-left: rem(15px);
+    width: layout.size('height');
+    height: layout.size('height');
+    justify-content: center;
+    padding: 0;
+    // -1px to compensate for border width
+    padding-block-start: min(
+      calc((layout.size('height') - rem(16px)) / 2 - rem(1px)),
+      var(--temp-padding-block-max)
+    );
+
+    > :first-child {
+      margin-block-start: rem(1px);
+    }
 
     .#{$prefix}--btn__icon {
       position: static;
@@ -191,18 +196,6 @@
 
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled] {
     cursor: not-allowed;
-  }
-
-  // V11: remove field
-  .#{$prefix}--btn--field.#{$prefix}--btn--icon-only,
-  .#{$prefix}--btn--md.#{$prefix}--btn--icon-only {
-    padding-right: rem(11px);
-    padding-left: rem(11px);
-  }
-
-  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
-    padding-right: rem(7px);
-    padding-left: rem(7px);
   }
 
   .#{$prefix}--btn--danger {
@@ -267,7 +260,7 @@
         $button-danger-active
       );
 
-      padding: $button-padding-ghost;
+      padding-inline-end: calc(layout.density('padding-inline') - rem(1px));
 
       .#{$prefix}--btn__icon {
         position: static;
@@ -290,48 +283,12 @@
         color: $text-disabled;
         outline: none;
       }
-
-      &.#{$prefix}--btn--sm {
-        padding: $button-padding-ghost-sm;
-      }
-
-      // V11: Remove field
-      &.#{$prefix}--btn--field,
-      &.#{$prefix}--btn--md {
-        padding: $button-padding-ghost-field;
-      }
     }
-  }
-
-  .#{$prefix}--btn--sm {
-    min-height: rem(32px);
-    padding: $button-padding-sm;
-  }
-
-  .#{$prefix}--btn--2xl:not(.#{$prefix}--btn--icon-only) {
-    @include button-padding-large;
-
-    min-height: rem(80px);
-  }
-
-  .#{$prefix}--btn--xl:not(.#{$prefix}--btn--icon-only) {
-    @include button-padding-large;
-
-    min-height: rem(64px);
-  }
-
-  // V11: Remove field
-  .#{$prefix}--btn--field,
-  .#{$prefix}--btn--md {
-    min-height: rem(40px);
-    padding: $button-padding-field;
   }
 
   //expressive styles
   .#{$prefix}--btn--expressive {
     @include type-style('body-compact-02');
-
-    min-height: 3rem;
   }
 
   .#{$prefix}--btn--icon-only.#{$prefix}--btn--expressive {
