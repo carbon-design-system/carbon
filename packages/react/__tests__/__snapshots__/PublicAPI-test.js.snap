@@ -7181,6 +7181,9 @@ Map {
       "index": Object {
         "type": "number",
       },
+      "onKeyDown": Object {
+        "type": "func",
+      },
       "tabIndex": Object {
         "type": "number",
       },
