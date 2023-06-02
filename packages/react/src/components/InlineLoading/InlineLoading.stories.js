@@ -20,28 +20,22 @@ export default {
   },
 };
 
-const CarbonBuilderLink = () => {
-  return (
-    <>
-      <a href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22InlineLoadingFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22inline-loading%22%2C%22status%22%3A%22active%22%2C%22activeText%22%3A%22Loading...%22%2C%22successText%22%3A%22Finished.%22%2C%22errorText%22%3A%22Error%21%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22inline-loading-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D" target="_blank" rel="noreferrer">
-        Edit on Carbon UI Builder 
-      </a>
-      <br></br>
-      <br></br>
-    </>
-  );
-};
-
-
 export const Default = () => (
-  <div>
-    <CarbonBuilderLink></CarbonBuilderLink>
+  <>
+    <a
+      href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22InlineLoadingFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22inline-loading%22%2C%22status%22%3A%22active%22%2C%22activeText%22%3A%22Loading...%22%2C%22successText%22%3A%22Finished.%22%2C%22errorText%22%3A%22Error%21%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22inline-loading-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+      target="_blank"
+      rel="noreferrer">
+      Edit on Carbon UI Builder
+    </a>
+    <br></br>
+    <br></br>
     <InlineLoading
       status="active"
       iconDescription="Loading"
       description="Loading data..."
     />
-  </div>
+  </>
 );
 
 export const UxExample = () => {
@@ -79,8 +73,15 @@ export const UxExample = () => {
   }
 
   return (
-    <div>
-      <CarbonBuilderLink></CarbonBuilderLink>
+    <>
+      <a
+        href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22InlineLoadingFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22inline-loading%22%2C%22status%22%3A%22active%22%2C%22activeText%22%3A%22Loading...%22%2C%22successText%22%3A%22Finished.%22%2C%22errorText%22%3A%22Error%21%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22inline-loading-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+        target="_blank"
+        rel="noreferrer">
+        Edit on Carbon UI Builder
+      </a>
+      <br></br>
+      <br></br>
       <MockSubmission>
         {({ handleSubmit, isSubmitting, success, description, ariaLive }) => (
           <div style={{ display: 'flex', width: '300px' }}>
@@ -100,11 +101,23 @@ export const UxExample = () => {
           </div>
         )}
       </MockSubmission>
-    </div>
+    </>
   );
 };
 
-export const Playground = (args) => <div><CarbonBuilderLink></CarbonBuilderLink><InlineLoading {...args} /></div>;
+export const Playground = (args) => (
+  <>
+    <a
+      href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22InlineLoadingFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22inline-loading%22%2C%22status%22%3A%22active%22%2C%22activeText%22%3A%22Loading...%22%2C%22successText%22%3A%22Finished.%22%2C%22errorText%22%3A%22Error%21%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22inline-loading-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+      target="_blank"
+      rel="noreferrer">
+      Edit on Carbon UI Builder
+    </a>
+    <br></br>
+    <br></br>
+    <InlineLoading {...args} />
+  </>
+);
 
 Playground.argTypes = {
   className: {

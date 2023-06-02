@@ -29,31 +29,32 @@ export default {
   },
 };
 
-const CarbonBuilderLink = ({ type }) => {
-  const snipetType = `https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22CodeSnippetFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22code-snippet%22%2C%22variant%22%3A%22${type}%22%2C%22code%22%3A%22%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22code-snippet-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D`;
-  return (
-    <>
-      <a href={snipetType} target="_blank" rel="noreferrer">
-        Edit on Carbon UI Builder
-      </a>
-      <br></br>
-      <br></br>
-    </>
-  );
-};
-
 export const Inline = () => (
-  <div>
-    <CarbonBuilderLink type="inline"></CarbonBuilderLink>
+  <>
+    <a
+      href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22CodeSnippetFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22code-snippet%22%2C%22variant%22%3A%22inline%22%2C%22code%22%3A%22%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22code-snippet-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+      target="_blank"
+      rel="noreferrer">
+      Edit on Carbon UI Builder
+    </a>
+    <br></br>
+    <br></br>
     <CodeSnippet type="inline" feedback="Copied to clipboard">
       {'node -v'}
     </CodeSnippet>
-  </div>
+  </>
 );
 
 export const Multiline = () => (
-  <div>
-    <CarbonBuilderLink type="multi"></CarbonBuilderLink>
+  <>
+    <a
+      href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22CodeSnippetFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22code-snippet%22%2C%22variant%22%3A%22multi%22%2C%22code%22%3A%22%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22code-snippet-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+      target="_blank"
+      rel="noreferrer">
+      Edit on Carbon UI Builder
+    </a>
+    <br></br>
+    <br></br>
     <CodeSnippet type="multi" feedback="Copied to clipboard">
       {`  "scripts": {
       "build": "lerna run build --stream --prefix --npm-client yarn",
@@ -85,33 +86,54 @@ export const Multiline = () => (
       "@babel/runtime": "^7.10.0",
       "@commitlint/cli": "^8.3.5",`}
     </CodeSnippet>
-  </div>
+  </>
 );
 
 export const Singleline = () => (
-  <div>
-    <CarbonBuilderLink type="single"></CarbonBuilderLink>
+  <>
+    <a
+      href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22CodeSnippetFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22code-snippet%22%2C%22variant%22%3A%22single%22%2C%22code%22%3A%22%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22code-snippet-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+      target="_blank"
+      rel="noreferrer">
+      Edit on Carbon UI Builder
+    </a>
+    <br></br>
+    <br></br>
     <CodeSnippet type="single" feedback="Copied to clipboard">
       yarn add carbon-components@latest carbon-components-react@latest
       @carbon/icons-react@latest carbon-icons@latest
     </CodeSnippet>
-  </div>
+  </>
 );
 
 export const InlineWithLayer = () => (
-  <div>
-    <CarbonBuilderLink type="inline"></CarbonBuilderLink>
+  <>
+    <a
+      href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22CodeSnippetFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22code-snippet%22%2C%22variant%22%3A%22inline%22%2C%22code%22%3A%22%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22code-snippet-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+      target="_blank"
+      rel="noreferrer">
+      Edit on Carbon UI Builder
+    </a>
+    <br></br>
+    <br></br>
     <WithLayer>
       <CodeSnippet type="inline" feedback="Copied to clipboard">
         {'node -v'}
       </CodeSnippet>
     </WithLayer>
-  </div>
+  </>
 );
 
 export const MultilineWithLayer = () => (
-  <div>
-    <CarbonBuilderLink type="multi"></CarbonBuilderLink>
+  <>
+    <a
+      href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22CodeSnippetFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22code-snippet%22%2C%22variant%22%3A%22multi%22%2C%22code%22%3A%22%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22code-snippet-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+      target="_blank"
+      rel="noreferrer">
+      Edit on Carbon UI Builder
+    </a>
+    <br></br>
+    <br></br>
     <WithLayer>
       <CodeSnippet type="multi" feedback="Copied to clipboard">
         {`  "scripts": {
@@ -145,36 +167,57 @@ export const MultilineWithLayer = () => (
           "@commitlint/cli": "^8.3.5",`}
       </CodeSnippet>
     </WithLayer>
-  </div>
+  </>
 );
 
 export const SinglelineWithLayer = () => (
-  <div>
-    <CarbonBuilderLink type="single"></CarbonBuilderLink>
+  <>
+    <a
+      href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22CodeSnippetFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22code-snippet%22%2C%22variant%22%3A%22single%22%2C%22code%22%3A%22%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22code-snippet-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+      target="_blank"
+      rel="noreferrer">
+      Edit on Carbon UI Builder
+    </a>
+    <br></br>
+    <br></br>
     <WithLayer>
       <CodeSnippet type="single" feedback="Copied to clipboard">
         yarn add carbon-components@latest carbon-components-react@latest
         @carbon/icons-react@latest carbon-icons@latest
       </CodeSnippet>
     </WithLayer>
-  </div>
+  </>
 );
 
 export const Skeleton = () => (
-  <div>
-    <CarbonBuilderLink type="single"></CarbonBuilderLink>
+  <>
+    <a
+      href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22CodeSnippetFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22code-snippet%22%2C%22variant%22%3A%22single%22%2C%22code%22%3A%22%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22code-snippet-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+      target="_blank"
+      rel="noreferrer">
+      Edit on Carbon UI Builder
+    </a>
+    <br></br>
+    <br></br>
     <CodeSnippetSkeleton type="single" style={{ marginBottom: 8 }} />
     <CodeSnippetSkeleton type="multi" />
-  </div>
+  </>
 );
 
 export const Playground = (args) => (
-  <div>
-    <CarbonBuilderLink type="single"></CarbonBuilderLink>
+  <>
+    <a
+      href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22CodeSnippetFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22code-snippet%22%2C%22variant%22%3A%22single%22%2C%22code%22%3A%22%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22code-snippet-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+      target="_blank"
+      rel="noreferrer">
+      Edit on Carbon UI Builder
+    </a>
+    <br></br>
+    <br></br>
     <CodeSnippet type="single" feedback="Copied to clipboard" {...args}>
       {'yarn add @carbon/react'}
     </CodeSnippet>
-  </div>
+  </>
 );
 
 Playground.argTypes = {

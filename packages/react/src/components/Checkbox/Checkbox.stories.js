@@ -34,34 +34,36 @@ export default {
   },
 };
 
-const CarbonBuilderLink = () => {
+export const Default = () => {
   return (
     <>
-      <a href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22CheckboxFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22checkbox%22%2C%22label%22%3A%22Checkbox%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22checkbox-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D" target="_blank" rel="noreferrer">
-        Edit on Carbon UI Builder 
+      <a
+        href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22CheckboxFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22checkbox%22%2C%22label%22%3A%22Checkbox%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22checkbox-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+        target="_blank"
+        rel="noreferrer">
+        Edit on Carbon UI Builder
       </a>
       <br></br>
       <br></br>
-    </>
-  );
-};
-
-export const Default = () => {
-  return (
-    <div>
-      <CarbonBuilderLink></CarbonBuilderLink>
       <CheckboxGroup {...fieldsetCheckboxProps()}>
         <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
         <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
       </CheckboxGroup>
-    </div>
+    </>
   );
 };
 
 export const Single = () => {
   return (
-    <div>
-      <CarbonBuilderLink></CarbonBuilderLink>
+    <>
+      <a
+        href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22CheckboxFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22checkbox%22%2C%22label%22%3A%22Checkbox%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22checkbox-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+        target="_blank"
+        rel="noreferrer">
+        Edit on Carbon UI Builder
+      </a>
+      <br></br>
+      <br></br>
       <Checkbox
         {...checkboxEvents}
         id="checkbox-3"
@@ -83,15 +85,34 @@ export const Single = () => {
       />
       <br /> <br />
       <Checkbox {...checkboxEvents} id="checkbox-6" readOnly />
-    </div>
+    </>
   );
 };
 
-export const Skeleton = () => <div><CarbonBuilderLink></CarbonBuilderLink><CheckboxSkeleton /></div>;
+export const Skeleton = () => (
+  <>
+    <a
+      href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22CheckboxFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22checkbox%22%2C%22label%22%3A%22Checkbox%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22checkbox-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+      target="_blank"
+      rel="noreferrer">
+      Edit on Carbon UI Builder
+    </a>
+    <br></br>
+    <br></br>
+    <CheckboxSkeleton />
+  </>
+);
 
 export const Playground = (args) => (
-  <div>
-    <CarbonBuilderLink></CarbonBuilderLink>
+  <>
+    <a
+      href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22CheckboxFragment%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22checkbox%22%2C%22label%22%3A%22Checkbox%22%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22checkbox-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+      target="_blank"
+      rel="noreferrer">
+      Edit on Carbon UI Builder
+    </a>
+    <br></br>
+    <br></br>
     <CheckboxGroup {...fieldsetCheckboxProps()} {...args}>
       <Checkbox
         defaultChecked
@@ -102,7 +123,7 @@ export const Playground = (args) => (
       <Checkbox {...checkboxEvents} id="checkbox-1" />
       <Checkbox disabled {...checkboxEvents} id="checkbox-2" />
     </CheckboxGroup>
-  </div>
+  </>
 );
 
 Playground.argTypes = {

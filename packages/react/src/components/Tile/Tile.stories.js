@@ -52,23 +52,17 @@ export default {
   },
 };
 
-const CarbonBuilderLink = ({ tileType }) => {
-  const link = `https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22Tile%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22${tileType}%22%2C%22items%22%3A%5B%7B%22type%22%3A%22text%22%2C%22text%22%3A%22tile%20content%20goes%20here..%22%2C%22id%22%3A%223%22%2C%22codeContext%22%3A%7B%22name%22%3A%22text-3%22%7D%7D%5D%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22${tileType}-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D`;
+export const Default = () => {
   return (
     <>
-      <a href={link} target="_blank" rel="noreferrer">
+      <a
+        href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22Tile%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22tile%22%2C%22items%22%3A%5B%7B%22type%22%3A%22text%22%2C%22text%22%3A%22tile%20content%20goes%20here..%22%2C%22id%22%3A%223%22%2C%22codeContext%22%3A%7B%22name%22%3A%22text-3%22%7D%7D%5D%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22tile-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+        target="_blank"
+        rel="noreferrer">
         Edit on Carbon UI Builder
       </a>
       <br></br>
       <br></br>
-    </>
-  );
-};
-
-export const Default = () => {
-  return (
-    <>
-      <CarbonBuilderLink tileType="tile"></CarbonBuilderLink>
       <Tile id="tile-1">
         Default tile
         <br />
@@ -81,7 +75,14 @@ export const Default = () => {
 
 export const DefaultWithLayer = () => (
   <>
-    <CarbonBuilderLink tileType="tile"></CarbonBuilderLink>
+    <a
+      href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22Tile%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22tile%22%2C%22items%22%3A%5B%7B%22type%22%3A%22text%22%2C%22text%22%3A%22tile%20content%20goes%20here..%22%2C%22id%22%3A%223%22%2C%22codeContext%22%3A%7B%22name%22%3A%22text-3%22%7D%7D%5D%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22tile-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+      target="_blank"
+      rel="noreferrer">
+      Edit on Carbon UI Builder
+    </a>
+    <br></br>
+    <br></br>
     <WithLayer>
       {(layer) => (
         <Tile id={`tile-${layer}`}>
@@ -98,7 +99,14 @@ export const DefaultWithLayer = () => (
 export const Clickable = (args) => {
   return (
     <>
-      <CarbonBuilderLink tileType="clickable-tile"></CarbonBuilderLink>
+      <a
+        href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22Tile%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22clickable-tile%22%2C%22items%22%3A%5B%7B%22type%22%3A%22text%22%2C%22text%22%3A%22tile%20content%20goes%20here..%22%2C%22id%22%3A%223%22%2C%22codeContext%22%3A%7B%22name%22%3A%22text-3%22%7D%7D%5D%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22clickable-tile-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+        target="_blank"
+        rel="noreferrer">
+        Edit on Carbon UI Builder
+      </a>
+      <br></br>
+      <br></br>
       <ClickableTile
         id="clickable-tile-1"
         href="https://www.carbondesignsystem.com/"
@@ -121,7 +129,14 @@ Clickable.argTypes = {
 export const ClickableWithCustomIcon = (args) => {
   return (
     <>
-      <CarbonBuilderLink tileType="clickable-tile"></CarbonBuilderLink>
+      <a
+        href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22Tile%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22clickable-tile%22%2C%22items%22%3A%5B%7B%22type%22%3A%22text%22%2C%22text%22%3A%22tile%20content%20goes%20here..%22%2C%22id%22%3A%223%22%2C%22codeContext%22%3A%7B%22name%22%3A%22text-3%22%7D%7D%5D%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22clickable-tile-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+        target="_blank"
+        rel="noreferrer">
+        Edit on Carbon UI Builder
+      </a>
+      <br></br>
+      <br></br>
       <ClickableTile
         id="clickable-tile-1"
         href="https://www.carbondesignsystem.com/"
@@ -144,7 +159,14 @@ Clickable.argTypes = {
 
 export const ClickableWithLayer = () => (
   <>
-    <CarbonBuilderLink tileType="clickable-tile"></CarbonBuilderLink>
+    <a
+      href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22Tile%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22clickable-tile%22%2C%22items%22%3A%5B%7B%22type%22%3A%22text%22%2C%22text%22%3A%22tile%20content%20goes%20here..%22%2C%22id%22%3A%223%22%2C%22codeContext%22%3A%7B%22name%22%3A%22text-3%22%7D%7D%5D%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22clickable-tile-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+      target="_blank"
+      rel="noreferrer">
+      Edit on Carbon UI Builder
+    </a>
+    <br></br>
+    <br></br>
     <WithLayer>
       {(layer) => (
         <ClickableTile
@@ -160,7 +182,14 @@ export const ClickableWithLayer = () => (
 export const Selectable = (args) => {
   return (
     <>
-      <CarbonBuilderLink tileType="selectable-tile"></CarbonBuilderLink>
+      <a
+        href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22Tile%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22selectable-tile%22%2C%22items%22%3A%5B%7B%22type%22%3A%22text%22%2C%22text%22%3A%22tile%20content%20goes%20here..%22%2C%22id%22%3A%223%22%2C%22codeContext%22%3A%7B%22name%22%3A%22text-3%22%7D%7D%5D%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22selectable-tile-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+        target="_blank"
+        rel="noreferrer">
+        Edit on Carbon UI Builder
+      </a>
+      <br></br>
+      <br></br>
       <SelectableTile
         id="selectable-tile-1"
         name="tiles"
@@ -184,7 +213,14 @@ Selectable.argTypes = {
 export const MultiSelect = (args) => {
   return (
     <>
-      <CarbonBuilderLink tileType="selectable-tile"></CarbonBuilderLink>
+      <a
+        href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22Tile%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22selectable-tile%22%2C%22items%22%3A%5B%7B%22type%22%3A%22text%22%2C%22text%22%3A%22tile%20content%20goes%20here..%22%2C%22id%22%3A%223%22%2C%22codeContext%22%3A%7B%22name%22%3A%22text-3%22%7D%7D%5D%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22selectable-tile-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+        target="_blank"
+        rel="noreferrer">
+        Edit on Carbon UI Builder
+      </a>
+      <br></br>
+      <br></br>
       <div role="group" aria-label="selectable tiles">
         <SelectableTile id="selectable-tile-1" name="tiles" {...args}>
           Option 1
@@ -212,7 +248,14 @@ MultiSelect.argTypes = {
 export const Radio = (args) => {
   return (
     <>
-      <CarbonBuilderLink tileType="selectable-tile"></CarbonBuilderLink>
+      <a
+        href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22Tile%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22selectable-tile%22%2C%22items%22%3A%5B%7B%22type%22%3A%22text%22%2C%22text%22%3A%22tile%20content%20goes%20here..%22%2C%22id%22%3A%223%22%2C%22codeContext%22%3A%7B%22name%22%3A%22text-3%22%7D%7D%5D%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22selectable-tile-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+        target="_blank"
+        rel="noreferrer">
+        Edit on Carbon UI Builder
+      </a>
+      <br></br>
+      <br></br>
       <TileGroup
         defaultSelected="default-selected"
         legend="Radio Tile Group"
@@ -251,7 +294,14 @@ Radio.argTypes = {
 
 export const RadioWithLayer = () => (
   <>
-    <CarbonBuilderLink tileType="selectable-tile"></CarbonBuilderLink>
+    <a
+      href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22Tile%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22selectable-tile%22%2C%22items%22%3A%5B%7B%22type%22%3A%22text%22%2C%22text%22%3A%22tile%20content%20goes%20here..%22%2C%22id%22%3A%223%22%2C%22codeContext%22%3A%7B%22name%22%3A%22text-3%22%7D%7D%5D%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22selectable-tile-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+      target="_blank"
+      rel="noreferrer">
+      Edit on Carbon UI Builder
+    </a>
+    <br></br>
+    <br></br>
     <WithLayer>
       {(layer) => (
         <TileGroup
@@ -275,7 +325,14 @@ export const RadioWithLayer = () => (
 
 export const Expandable = () => (
   <div style={{ width: '400px' }}>
-    <CarbonBuilderLink tileType="expandable-tile"></CarbonBuilderLink>
+    <a
+      href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22Tile%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22expandable-tile%22%2C%22items%22%3A%5B%7B%22type%22%3A%22text%22%2C%22text%22%3A%22tile%20content%20goes%20here..%22%2C%22id%22%3A%223%22%2C%22codeContext%22%3A%7B%22name%22%3A%22text-3%22%7D%7D%5D%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22expandable-tile-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+      target="_blank"
+      rel="noreferrer">
+      Edit on Carbon UI Builder
+    </a>
+    <br></br>
+    <br></br>
     <ExpandableTile
       id="expandable-tile-1"
       tileCollapsedIconText="Interact to Expand tile"
@@ -292,7 +349,14 @@ export const Expandable = () => (
 
 export const ExpandableWithInteractive = () => (
   <div style={{ width: '400px' }}>
-    <CarbonBuilderLink tileType="expandable-tile"></CarbonBuilderLink>
+    <a
+      href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22Tile%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22expandable-tile%22%2C%22items%22%3A%5B%7B%22type%22%3A%22text%22%2C%22text%22%3A%22tile%20content%20goes%20here..%22%2C%22id%22%3A%223%22%2C%22codeContext%22%3A%7B%22name%22%3A%22text-3%22%7D%7D%5D%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22expandable-tile-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+      target="_blank"
+      rel="noreferrer">
+      Edit on Carbon UI Builder
+    </a>
+    <br></br>
+    <br></br>
     <ExpandableTile
       onClick={() => console.log('click')}
       id="expandable-tile-1"
@@ -318,7 +382,14 @@ export const ExpandableWithInteractive = () => (
 
 export const ExpandableWithLayer = () => (
   <>
-    <CarbonBuilderLink tileType="expandable-tile"></CarbonBuilderLink>
+    <a
+      href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22Tile%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22type%22%3A%22expandable-tile%22%2C%22items%22%3A%5B%7B%22type%22%3A%22text%22%2C%22text%22%3A%22tile%20content%20goes%20here..%22%2C%22id%22%3A%223%22%2C%22codeContext%22%3A%7B%22name%22%3A%22text-3%22%7D%7D%5D%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22expandable-tile-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+      target="_blank"
+      rel="noreferrer">
+      Edit on Carbon UI Builder
+    </a>
+    <br></br>
+    <br></br>
     <WithLayer>
       {(layer) => (
         <div style={{ width: '400px' }}>

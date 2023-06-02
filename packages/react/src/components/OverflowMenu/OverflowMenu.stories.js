@@ -24,35 +24,37 @@ export default {
   },
 };
 
-const CarbonBuilderLink = () => {
-  return (
-    <>
-      <a href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22Overflow%20menu%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22flipped%22%3Afalse%2C%22placement%22%3A%22bottom%22%2C%22type%22%3A%22overflow-menu%22%2C%22items%22%3A%5B%7B%22type%22%3A%22overflow-menu-item%22%2C%22itemText%22%3A%22Option%201%22%2C%22disabled%22%3Afalse%2C%22isDelete%22%3Afalse%2C%22hasDivider%22%3Afalse%2C%22id%22%3A%223%22%2C%22codeContext%22%3A%7B%22name%22%3A%22overflow-menu-item-3%22%7D%7D%2C%7B%22type%22%3A%22overflow-menu-item%22%2C%22itemText%22%3A%22Option%202%22%2C%22disabled%22%3Afalse%2C%22isDelete%22%3Afalse%2C%22hasDivider%22%3Afalse%2C%22id%22%3A%224%22%2C%22codeContext%22%3A%7B%22name%22%3A%22overflow-menu-item-4%22%7D%7D%5D%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22overflow-menu-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D" target="_blank" rel="noreferrer">
-        Edit on Carbon UI Builder 
-      </a>
-      <br></br>
-      <br></br>
-    </>
-  );
-};
-
 export const Default = () => (
   <>
-    <CarbonBuilderLink></CarbonBuilderLink>
+    <a
+      href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22Overflow%20menu%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22flipped%22%3Afalse%2C%22placement%22%3A%22bottom%22%2C%22type%22%3A%22overflow-menu%22%2C%22items%22%3A%5B%7B%22type%22%3A%22overflow-menu-item%22%2C%22itemText%22%3A%22Option%201%22%2C%22disabled%22%3Afalse%2C%22isDelete%22%3Afalse%2C%22hasDivider%22%3Afalse%2C%22id%22%3A%223%22%2C%22codeContext%22%3A%7B%22name%22%3A%22overflow-menu-item-3%22%7D%7D%2C%7B%22type%22%3A%22overflow-menu-item%22%2C%22itemText%22%3A%22Option%202%22%2C%22disabled%22%3Afalse%2C%22isDelete%22%3Afalse%2C%22hasDivider%22%3Afalse%2C%22id%22%3A%224%22%2C%22codeContext%22%3A%7B%22name%22%3A%22overflow-menu-item-4%22%7D%7D%5D%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22overflow-menu-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+      target="_blank"
+      rel="noreferrer">
+      Edit on Carbon UI Builder
+    </a>
+    <br></br>
+    <br></br>
     <OverflowMenu aria-label="overflow-menu">
-        <OverflowMenuItem itemText="Stop app" />
-        <OverflowMenuItem itemText="Restart app" />
-        <OverflowMenuItem itemText="Rename app" />
-        <OverflowMenuItem itemText="Clone and move app" disabled requireTitle />
-        <OverflowMenuItem itemText="Edit routes and access" requireTitle />
-        <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
-      </OverflowMenu>
+      <OverflowMenuItem itemText="Stop app" />
+      <OverflowMenuItem itemText="Restart app" />
+      <OverflowMenuItem itemText="Rename app" />
+      <OverflowMenuItem itemText="Clone and move app" disabled requireTitle />
+      <OverflowMenuItem itemText="Edit routes and access" requireTitle />
+      <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
+    </OverflowMenu>
   </>
 );
 
 export const RenderCustomIcon = () => (
   <>
-    <CarbonBuilderLink></CarbonBuilderLink>
+    <a
+      href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22Overflow%20menu%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22flipped%22%3Afalse%2C%22placement%22%3A%22bottom%22%2C%22type%22%3A%22overflow-menu%22%2C%22items%22%3A%5B%7B%22type%22%3A%22overflow-menu-item%22%2C%22itemText%22%3A%22Option%201%22%2C%22disabled%22%3Afalse%2C%22isDelete%22%3Afalse%2C%22hasDivider%22%3Afalse%2C%22id%22%3A%223%22%2C%22codeContext%22%3A%7B%22name%22%3A%22overflow-menu-item-3%22%7D%7D%2C%7B%22type%22%3A%22overflow-menu-item%22%2C%22itemText%22%3A%22Option%202%22%2C%22disabled%22%3Afalse%2C%22isDelete%22%3Afalse%2C%22hasDivider%22%3Afalse%2C%22id%22%3A%224%22%2C%22codeContext%22%3A%7B%22name%22%3A%22overflow-menu-item-4%22%7D%7D%5D%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22overflow-menu-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+      target="_blank"
+      rel="noreferrer">
+      Edit on Carbon UI Builder
+    </a>
+    <br></br>
+    <br></br>
     <OverflowMenu renderIcon={Filter}>
       <OverflowMenuItem itemText="Filter A" />
       <OverflowMenuItem itemText="Filter B" />
@@ -62,7 +64,14 @@ export const RenderCustomIcon = () => (
 
 export const Playground = (args) => (
   <>
-    <CarbonBuilderLink></CarbonBuilderLink>
+    <a
+      href="https://builder.carbondesignsystem.com/from-json/%7B%22title%22%3A%22Overflow%20menu%22%2C%22data%22%3A%7B%22items%22%3A%5B%7B%22flipped%22%3Afalse%2C%22placement%22%3A%22bottom%22%2C%22type%22%3A%22overflow-menu%22%2C%22items%22%3A%5B%7B%22type%22%3A%22overflow-menu-item%22%2C%22itemText%22%3A%22Option%201%22%2C%22disabled%22%3Afalse%2C%22isDelete%22%3Afalse%2C%22hasDivider%22%3Afalse%2C%22id%22%3A%223%22%2C%22codeContext%22%3A%7B%22name%22%3A%22overflow-menu-item-3%22%7D%7D%2C%7B%22type%22%3A%22overflow-menu-item%22%2C%22itemText%22%3A%22Option%202%22%2C%22disabled%22%3Afalse%2C%22isDelete%22%3Afalse%2C%22hasDivider%22%3Afalse%2C%22id%22%3A%224%22%2C%22codeContext%22%3A%7B%22name%22%3A%22overflow-menu-item-4%22%7D%7D%5D%2C%22id%22%3A%222%22%2C%22codeContext%22%3A%7B%22name%22%3A%22overflow-menu-2%22%7D%7D%5D%2C%22id%22%3A1%7D%2C%22allCssClasses%22%3A%5B%5D%7D"
+      target="_blank"
+      rel="noreferrer">
+      Edit on Carbon UI Builder
+    </a>
+    <br></br>
+    <br></br>
     <OverflowMenu aria-label="overflow-menu" {...args}>
       <OverflowMenuItem itemText="Stop app" />
       <OverflowMenuItem itemText="Restart app" />
