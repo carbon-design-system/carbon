@@ -11,7 +11,6 @@ const fs = require('fs');
 const glob = require('fast-glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
-
 const stories = glob
   .sync(
     [
@@ -24,6 +23,7 @@ const stories = glob
       '../src/**/*-story.js',
     ],
     {
+      ignore: ['../src/**/docs/*.mdx', '../src/**/next/docs/*.mdx'],
       cwd: __dirname,
     }
   )
@@ -43,11 +43,9 @@ const stories = glob
       'DataTable-dynamic-content-story',
       'DataTable-expansion-story',
     ]);
-
     if (denylist.has(basename)) {
       return false;
     }
-
     if (basename.endsWith('-story')) {
       const component = basename.replace(/-story$/, '');
       const storyName = path.resolve(
@@ -56,18 +54,14 @@ const stories = glob
         'next',
         `${component}.stories.js`
       );
-
       if (fs.existsSync(storyName)) {
         return false;
       }
-
       return true;
     }
-
     return true;
   });
-
-module.exports = {
+const config = {
   addons: [
     {
       name: '@storybook/addon-essentials',
@@ -82,25 +76,26 @@ module.exports = {
     },
     '@storybook/addon-storysource',
     '@storybook/addon-a11y',
+    '@storybook/addon-mdx-gfm',
   ],
-  core: {
-    builder: 'webpack5',
-  },
   features: {
     previewCsfV3: true,
     buildStoriesJson: true,
   },
-  framework: '@storybook/react',
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {
+      legacyRootApi: false,
+    },
+  },
   stories,
   typescript: {
     reactDocgen: 'react-docgen', // Favor docgen from prop-types instead of TS interfaces
   },
-  reactOptions: {
-    legacyRootApi: false,
-  },
+
   webpack(config) {
     const babelLoader = config.module.rules.find((rule) => {
-      return rule.use.some(({ loader }) => {
+      return rule.use?.some(({ loader }) => {
         return loader.includes('babel-loader');
       });
     });
@@ -120,7 +115,6 @@ module.exports = {
       /packages\/.*\/(es|lib|umd)/,
       /packages\/icons-react\/next/,
     ];
-
     config.module.rules.push({
       test: /\.s?css$/,
       sideEffects: true,
@@ -167,7 +161,6 @@ module.exports = {
         },
       ],
     });
-
     if (process.env.NODE_ENV === 'production') {
       config.plugins.push(
         new MiniCssExtractPlugin({
@@ -175,7 +168,11 @@ module.exports = {
         })
       );
     }
-
     return config;
   },
+  docs: {
+    autodocs: true,
+  },
 };
+
+export default config;
