@@ -3,7 +3,7 @@
 exports[`Accordion should render 1`] = `
 <DocumentFragment>
   <ul
-    class="cds--accordion extra-class cds--accordion--end cds--accordion--md"
+    class="cds--accordion extra-class cds--accordion--end"
   >
     <li
       class="cds--accordion__item child"

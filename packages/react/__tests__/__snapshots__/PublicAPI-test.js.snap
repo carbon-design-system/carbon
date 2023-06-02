@@ -9263,6 +9263,56 @@ Map {
       },
     },
   },
+  "unstable_Layout" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "density": Object {
+        "args": Array [
+          Array [
+            "condensed",
+            "normal",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+            "2xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+    "render": [Function],
+  },
   "unstable_LayoutDirection" => Object {
     "propTypes": Object {
       "as": Object {
