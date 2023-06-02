@@ -8,6 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { LayoutConstraint } from '../../Layout';
 import { usePrefix } from '../../../internal/usePrefix';
 
 function ContainedListItem({
@@ -55,7 +56,11 @@ function ContainedListItem({
         </div>
       )}
       {action && (
-        <div className={`${prefix}--contained-list-item__action`}>{action}</div>
+        <LayoutConstraint
+          size={{ min: 'sm', max: 'lg' }}
+          className={`${prefix}--contained-list-item__action`}>
+          {action}
+        </LayoutConstraint>
       )}
     </li>
   );

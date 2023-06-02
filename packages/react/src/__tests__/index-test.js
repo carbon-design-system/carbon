@@ -225,6 +225,7 @@ describe('Carbon Components React', () => {
         "types",
         "unstable_ComboButton",
         "unstable_FeatureFlags",
+        "unstable_Layout",
         "unstable_LayoutDirection",
         "unstable_Menu",
         "unstable_MenuButton",

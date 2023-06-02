@@ -137,10 +137,11 @@ export { FluidTimePickerSelect as unstable__FluidTimePickerSelect } from './comp
 export * from './components/Heading';
 export * from './components/IconButton';
 export * from './components/Layer';
+export { Layout as unstable_Layout } from './components/Layout';
 export {
   LayoutDirection as unstable_LayoutDirection,
   useLayoutDirection as unstable_useLayoutDirection,
-} from './components/Layout';
+} from './components/LayoutDirection';
 export {
   Menu as unstable_Menu,
   MenuItem as unstable_MenuItem,
