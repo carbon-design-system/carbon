@@ -139,6 +139,76 @@ export const Dismissable = () => {
   );
 };
 
+export const DismissableWithIcons = ({ contained }) => {
+  const tabs = [
+    {
+      label: 'Tab label 1',
+      panel: <TabPanel>Tab Panel 1</TabPanel>,
+    },
+    {
+      label: 'Tab label 2',
+      panel: <TabPanel>Tab Panel 2</TabPanel>,
+    },
+    {
+      label: 'Tab label 3',
+      panel: <TabPanel>Tab Panel 3</TabPanel>,
+      disabled: true,
+    },
+    {
+      label: 'Tab label 4',
+      panel: <TabPanel>Tab Panel 4</TabPanel>,
+    },
+  ];
+  const [renderedTabs, setRenderedTabs] = useState(tabs);
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const handleTabChange = (evt) => {
+    setSelectedIndex(evt.selectedIndex);
+  };
+
+  const handleCloseTabRequest = (tabIndex) => {
+    const selectedTab = renderedTabs[selectedIndex];
+
+    const filteredTabs = renderedTabs.filter((_, index) => index !== tabIndex);
+    if (tabIndex === selectedIndex) {
+      const defaultTabIndex = filteredTabs.findIndex((tab) => !tab.disabled);
+      setSelectedIndex(defaultTabIndex);
+    } else {
+      setSelectedIndex(filteredTabs.indexOf(selectedTab));
+    }
+    setRenderedTabs(filteredTabs);
+  };
+
+  const resetTabs = () => {
+    setRenderedTabs(tabs);
+  };
+
+  const icons = [Bat, Bee, Corn, Monster];
+
+  return (
+    <>
+      <Button style={{ marginBottom: '3rem' }} onClick={resetTabs}>
+        Reset
+      </Button>
+      <Tabs
+        selectedIndex={selectedIndex}
+        onChange={handleTabChange}
+        dismissable
+        onTabCloseRequest={handleCloseTabRequest}>
+        <TabList aria-label="List of tabs" contained={contained}>
+          {renderedTabs.map((tab, index) => (
+            <Tab key={index} disabled={tab.disabled} renderIcon={icons[index]}>
+              {tab.label}
+            </Tab>
+          ))}
+        </TabList>
+        <TabPanels>{renderedTabs.map((tab) => tab.panel)}</TabPanels>
+      </Tabs>
+    </>
+  );
+};
+
 export const WithIcons = () => (
   <Tabs>
     <TabList activation="manual" aria-label="List of tabs">
