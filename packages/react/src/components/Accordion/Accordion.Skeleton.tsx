@@ -105,6 +105,12 @@ AccordionSkeleton.propTypes = {
   open: PropTypes.bool,
 };
 
+AccordionSkeleton.defaultProps = {
+  open: true,
+  count: 4,
+  align: 'end',
+};
+
 function AccordionSkeletonItem() {
   const prefix = usePrefix();
   return (
