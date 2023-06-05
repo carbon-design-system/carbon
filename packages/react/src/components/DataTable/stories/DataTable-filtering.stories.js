@@ -23,7 +23,6 @@ import DataTable, {
   TableToolbarAction,
 } from '..';
 import { rows, headers } from './shared';
-import mdx from '../DataTable.mdx';
 
 export default {
   title: 'Components/DataTable/Filtering',
@@ -54,11 +53,6 @@ export default {
   args: {
     size: 'lg',
     useZebraStyles: false,
-  },
-  parameters: {
-    docs: {
-      page: mdx,
-    },
   },
 };
 

@@ -1,6 +1,7 @@
-import { Story, Props } from '@storybook/addon-docs';
+import { Story, ArgsTable, Canvas } from '@storybook/blocks';
 import ComposedModal from '../ComposedModal';
 import { InlineNotification } from '../Notification';
+import * as ComposedModalStories from './ComposedModal.stories.js';
 
 # ComposedModal
 
@@ -37,13 +38,13 @@ import { InlineNotification } from '../Notification';
 Modal content can be customized via the `<ModalHeader>`, `<ModalBody>` and
 `<ModalFooter>` components.
 
-<Preview>
-  <Story id="components-composedmodal--with-state-manager" />
-</Preview>
+<Canvas>
+  <Story of={ComposedModalStories.WithStateManager} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ## Opening/closing modal
 

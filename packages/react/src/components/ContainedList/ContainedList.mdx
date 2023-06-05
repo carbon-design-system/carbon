@@ -1,4 +1,5 @@
-import { Props, Story, Preview } from '@storybook/addon-docs';
+import { ArgsTable, Story, Canvas } from '@storybook/blocks';
+import * as ContainedListStories from './ContainedList.stories.js';
 
 # ContainedList
 
@@ -23,9 +24,9 @@ import { Props, Story, Preview } from '@storybook/addon-docs';
 
 ## Overview
 
-<Preview>
-  <Story id="components-containedlist--default" />
-</Preview>
+<Canvas>
+  <Story of={ContainedListStories.Default} />
+</Canvas>
 
 ### Search
 
@@ -80,9 +81,9 @@ To prevent this potential conflict, we have added funtionality to support both d
     );
   };
 ```
-<Preview>
-  <Story id="components-containedlist--with-expandable-search" />
-</Preview>
+<Canvas>
+  <Story of={ContainedListStories.WithExpandableSearch} />
+</Canvas>
 
 #### Persistent Search:
 We have added in the capability to pass down the `Search` component as a child of `ContainedList`.
@@ -133,13 +134,13 @@ export const WithPersistentSearch = () => {
 
 ```
 
-<Preview>
-  <Story id="components-containedlist--with-persistent-search" />
-</Preview>
+<Canvas>
+  <Story of={ContainedListStories.WithPersistentSearch} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ## Feedback
 

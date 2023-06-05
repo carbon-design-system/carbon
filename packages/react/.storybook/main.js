@@ -18,6 +18,7 @@ const stories = glob
       './Welcome/Welcome.stories.js',
       '../src/**/*.stories.js',
       '../src/**/*.stories.mdx',
+      '../src/components/DataTable/DataTable.mdx',
       '../src/**/next/*.stories.js',
       '../src/**/next/**/*.stories.js',
       '../src/**/next/*.stories.mdx',

@@ -1,4 +1,5 @@
-import { Props, Story, Preview } from '@storybook/addon-docs';
+import { ArgsTable, Story, Canvas } from '@storybook/blocks';
+import * as CopyButtonStories from './CopyButton.stories.js';
 
 # CopyButton
 
@@ -23,13 +24,13 @@ The copy button should be accompanied by a tooltip. Tooltip feedback text should
 be concise and describe the action taken when the user clicks the copy button.
 By default we display the text “Copied!”.
 
-<Preview>
-  <Story id="components-copybutton--playground" />
-</Preview>
+<Canvas>
+  <Story of={CopyButtonStories.Playground} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ## Feedback
 

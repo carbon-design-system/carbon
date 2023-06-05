@@ -1,4 +1,13 @@
-import { Story, Props, Source, Preview } from '@storybook/addon-docs';
+import { Story, ArgsTable, Canvas, Meta } from '@storybook/blocks';
+import * as DataTableBasicStories from './stories/DataTable-basic.stories.js';
+import * as DataTableSortingStories from './stories/DataTable-sorting.stories.js';
+import * as DataTableExpansionStories from './stories/expansion/DataTable-expansion.stories.js';
+import * as DataTableSelectionStories from './stories/DataTable-selection.stories.js';
+import * as DataTableFilteringStories from './stories/DataTable-filtering.stories.js';
+import * as DataTableBatchActionsStories from './stories/DataTable-batch-actions.stories.js';
+import * as DataTableToolbarStories from './stories/DataTable-toolbar.stories.js';
+
+<Meta title="Components/DataTable/Docs" name="Docs" />
 
 # DataTable
 
@@ -8,9 +17,9 @@ import { Story, Props, Source, Preview } from '@storybook/addon-docs';
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/data-table/accessibility)
 
-<Preview>
-  <Story id="components-datatable-basic--playground" />
-</Preview>
+<Canvas>
+  <Story of={DataTableBasicStories.Playground} />
+</Canvas>
 
 {/* <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
@@ -141,9 +150,9 @@ into your render prop, visit the [render props](#render-props) section.
 In order to sort the rows in your data table, you will need to pass in the
 `isSortable` prop to the `DataTable` component.
 
-<Preview>
-  <Story id="components-datatable-sorting--playground" />
-</Preview>
+<Canvas>
+  <Story of={DataTableSortingStories.Playground} />
+</Canvas>
 
 Optionally, you can pass in `isSortable` to each `TableHeader` that you want to
 be sorted, or not sorted. This is useful if you only want to enable sorting on
@@ -194,9 +203,9 @@ function customSortRow(cellA, cellB, { sortDirection, sortStates, locale }) {
 The `DataTable` components supports row-level expansion when combined with the
 `TableExpandHeader`, `TableExpandRow`, and `TableExpandedRow` components.
 
-<Preview>
-  <Story id="components-datatable-expansion--playground" />
-</Preview>
+<Canvas>
+  <Story of={DataTableExpansionStories.Playground} />
+</Canvas>
 
 _Note: press "Show code" above to view a code snippet of this example_
 
@@ -217,9 +226,9 @@ row id as a single argument.
 The `DataTable` component supports row selection when used with the
 `TableSelectAll` and `TableSelectRow` components.
 
-<Preview>
-  <Story id="components-datatable-selection--playground" />
-</Preview>
+<Canvas>
+  <Story of={DataTableSelectionStories.Playground} />
+</Canvas>
 
 _Note: press "Show code" above to view a code snippet of this example_
 
@@ -253,9 +262,9 @@ the `TableToolbarSearch` component. Any input entered through
 By default `filterRows` is provided through our default implementation. However,
 you can provide your own method if needed.
 
-<Preview>
-  <Story id="components-datatable-filtering--playground" />
-</Preview>
+<Canvas>
+  <Story of={DataTableFilteringStories.Playground} />
+</Canvas>
 
 In order to integrate filtering into your data table, you will need to provide
 the `onInputChange` function provided to you from `DataTable`'s render prop and
@@ -276,17 +285,17 @@ the following components:
 - `TableSelectAll`
 - `TableSelectRow`
 
-<Preview>
-  <Story id="components-datatable-batch-actions--playground" />
-</Preview>
+<Canvas>
+  <Story of={DataTableBatchActionsStories.Playground} />
+</Canvas>
 
 _Note: press "Show code" above to view a code snippet of this example_
 
 ## Toolbar
 
-<Preview>
-  <Story id="components-datatable-toolbar--playground" />
-</Preview>
+<Canvas>
+  <Story of={DataTableToolbarStories.Playground} />
+</Canvas>
 
 ### Overflow Menu
 
@@ -316,7 +325,7 @@ cell.
 
 ## Props
 
-<Props />
+<ArgsTable />
 
 ### Render props
 

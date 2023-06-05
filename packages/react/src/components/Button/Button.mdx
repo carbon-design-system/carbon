@@ -1,8 +1,9 @@
-import { Story, Props, Source, Preview } from '@storybook/addon-docs';
+import { Story, ArgsTable, Canvas } from '@storybook/blocks';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import { Add, TrashCan } from '@carbon/icons-react';
+import * as ButtonStories from './Button.stories';
 
 # Button
 
@@ -47,12 +48,12 @@ communicate calls to action to the user and allow users to interact with pages
 in a variety of ways. `Button` labels express what action will occur when the
 user interacts with it.
 
-<Preview>
-  <Story id="components-button--default" />
-  <Story id="components-button--secondary" />
-  <Story id="components-button--tertiary" />
-  <Story id="components-button--ghost" />
-</Preview>
+<Canvas>
+  <Story of={ButtonStories.Default} />
+  <Story of={ButtonStories.Secondary} />
+  <Story of={ButtonStories.Tertiary} />
+  <Story of={ButtonStories.Ghost} />
+</Canvas>
 
 ## Danger Buttons
 
@@ -64,9 +65,9 @@ danger button style. However, if a destructive action is just one of several
 actions a user could choose from, then a lower emphasis style like the tertiary
 danger button or the ghost danger button may be more appropriate.
 
-<Preview>
-  <Story id="components-button--danger" />
-</Preview>
+<Canvas>
+  <Story of={ButtonStories.Danger} />
+</Canvas>
 
 ## Icon-only Buttons
 
@@ -75,9 +76,9 @@ Icon buttons can take the form of any of the seven types (Primary, Secondary,
 Tertiary, Danger, Danger tertiary, Danger ghost and Ghost) but most commonly
 will be styled as primary or ghost buttons.
 
-<Preview>
-  <Story id="components-button--icon-button" />
-</Preview>
+<Canvas>
+  <Story of={ButtonStories.IconButton} />
+</Canvas>
 
 ## Set of Buttons
 
@@ -88,9 +89,9 @@ Negative action buttons will be on the left. Positive action buttons should be
 on the right. When these two types buttons are paired in the correct order, they
 will automatically space themselves apart.
 
-<Preview>
-  <Story id="components-button--set-of-buttons" />
-</Preview>
+<Canvas>
+  <Story of={ButtonStories.SetOfButtons} />
+</Canvas>
 
 ## Skeleton state
 
@@ -98,13 +99,13 @@ You can use the `ButtonSkeleton` component to render a skeleton variant of a
 button. This is useful to display on initial page load to indicate to users that
 content is being loaded.
 
-<Preview>
-  <Story id="components-button--skeleton" />
-</Preview>
+<Canvas>
+  <Story of={ButtonStories.Skeleton} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 Additional props passed into `Button` will be forwarded along to the underlying
 button element.
