@@ -2,7 +2,7 @@
 
 ## `Rendering`
 
-#### `Should render with minimum attributes`
+####   `Should render with minimum attributes`
 
 ```
 <label class="bx--label">
@@ -61,7 +61,7 @@
 
 ```
 
-#### `Should render with various attributes`
+####   `Should render with various attributes`
 
 ```
 <label class="bx--label bx--label--disabled">
@@ -121,3 +121,4 @@
 </div>
 
 ```
+

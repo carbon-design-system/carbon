@@ -13,6 +13,7 @@
   part="button"
 >
 </button>
+
 ```
 
 ####     `should render with various attributes for inactive state`
@@ -25,6 +26,7 @@
   part="button"
 >
 </button>
+
 ```
 
 ####     `should render with various attributes for active state`
@@ -37,6 +39,7 @@
   part="button"
 >
 </button>
+
 ```
 
 ## `bx-header-menu`
@@ -52,6 +55,7 @@
   class="bx--header__menu-item bx--header__menu-title"
   href="javascript:void 0"
   part="trigger"
+  role="button"
   tabindex="0"
 >
 </a>
@@ -62,6 +66,7 @@
   <slot>
   </slot>
 </ul>
+
 ```
 
 ####     `should render with various attributes`
@@ -73,6 +78,7 @@
   class="bx--header__menu-item bx--header__menu-title"
   href="javascript:void 0"
   part="trigger"
+  role="button"
   tabindex="0"
 >
   trigger-content-foo
@@ -85,6 +91,7 @@
   <slot>
   </slot>
 </ul>
+
 ```
 
 ## `bx-header-name`
@@ -101,6 +108,7 @@
   <slot>
   </slot>
 </a>
+
 ```
 
 ####     `should render with various attributes`
@@ -143,6 +151,7 @@
   <slot>
   </slot>
 </ul>
+
 ```
 
 ####     `should render with various attributes`
@@ -161,6 +170,7 @@
   <slot>
   </slot>
 </ul>
+
 ```
 
 ## `bx-header-nav-item`
@@ -183,6 +193,7 @@
     </slot>
   </span>
 </a>
+
 ```
 
 ####     `should render with various attributes`
@@ -202,6 +213,7 @@
     </slot>
   </span>
 </a>
+
 ```
 
 ## `bx-side-nav-link`
@@ -233,6 +245,7 @@
     </slot>
   </span>
 </a>
+
 ```
 
 ####     `should render with various attributes`
@@ -259,6 +272,7 @@
     </slot>
   </span>
 </a>
+
 ```
 
 ## `bx-side-nav-menu`
@@ -302,6 +316,7 @@
   <slot>
   </slot>
 </ul>
+
 ```
 
 ####     `should render with various attributes`
@@ -342,6 +357,7 @@
   <slot>
   </slot>
 </ul>
+
 ```
 
 ####     `should support collapsing side nav menu upon parent side nav is collapsed as rail`
@@ -381,6 +397,7 @@
   <slot>
   </slot>
 </ul>
+
 ```
 
 ## `bx-side-nav-menu-item`
@@ -403,6 +420,7 @@
     </slot>
   </span>
 </a>
+
 ```
 
 ####     `should render with various attributes`
@@ -421,6 +439,7 @@
     </slot>
   </span>
 </a>
+
 ```
 
 ## `Misc attributes`

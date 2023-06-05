@@ -2,7 +2,7 @@
 
 ## `Rendering`
 
-#### `Should render with minimum attributes`
+####   `Should render with minimum attributes`
 
 ```
 <input
@@ -25,7 +25,7 @@
 
 ```
 
-#### `Should render with various attributes`
+####   `Should render with various attributes`
 
 ```
 <input
@@ -51,3 +51,4 @@
 </label>
 
 ```
+
