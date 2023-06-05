@@ -610,3 +610,20 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     @include high-contrast-mode('disabled');
   }
 }
+
+//-----------------------------
+// Grid contained tabs
+//-----------------------------
+
+.#{$prefix}--tabs--contained.#{$prefix}--tabs--normalized-width
+  .#{$prefix}--tab--list {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+}
+
+// .#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item {
+//   margin-left: 0;
+//   // Draws the border without affecting the inner-content
+//   box-shadow: rem(-1px) 0 0 0 $border-strong;
+// }

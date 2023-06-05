@@ -10,7 +10,9 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel, IconTab } from './Tabs';
 import TextInput from '../TextInput';
 import Checkbox from '../Checkbox';
 import Button from '../Button';
+import { Grid, Column } from '../Grid';
 import mdx from './Tabs.mdx';
+import './Tabs.stories.scss';
 
 import TabsSkeleton from './Tabs.Skeleton';
 import { Monster, Corn, Bat, Bee, Home } from '@carbon/icons-react';
@@ -477,6 +479,133 @@ export const ContainedWithSecondaryLabelsAndIcons = () => (
       <TabPanel>Tab Panel 5</TabPanel>
     </TabPanels>
   </Tabs>
+);
+
+export const ContainedWithGrid = () => (
+  <>
+    <Grid condensed>
+      <Column lg={16} md={8} sm={4}>
+        <Tabs>
+          <TabList aria-label="List of tabs" contained normalizeWidth>
+            <Tab>Tab Label 1</Tab>
+            <Tab>Tab Label 2</Tab>
+            <Tab disabled>Tab Label 3</Tab>
+            <Tab title="Tab Label 4 with a very long long title">
+              Tab Label 4 with a very long long title
+            </Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>Tab Panel 1</TabPanel>
+            <TabPanel>
+              <form>
+                <legend className={`cds--label`}>Validation example</legend>
+                <Checkbox id="cb" labelText="Accept privacy policy" />
+                <Button
+                  style={{ marginTop: '1rem', marginBottom: '1rem' }}
+                  type="submit">
+                  Submit
+                </Button>
+                <TextInput
+                  type="text"
+                  labelText="Text input label"
+                  helperText="Optional help text"
+                />
+              </form>
+            </TabPanel>
+            <TabPanel>Tab Panel 3</TabPanel>
+            <TabPanel>Tab Panel 4</TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Column>
+    </Grid>
+
+    <Grid condensed>
+      <Column lg={16} md={8} sm={4}>
+        <Tabs>
+          <TabList aria-label="List of tabs" contained normalizeWidth>
+            <Tab>Tab Label 1</Tab>
+            <Tab>Tab Label 2</Tab>
+            <Tab disabled>Tab Label 3</Tab>
+            <Tab title="Tab Label 4 with a very long long title">
+              Tab Label 4 with a very long long title
+            </Tab>
+            <Tab>Tab Label 5</Tab>
+            <Tab>Tab Label 6</Tab>
+            <Tab>Tab Label 7</Tab>
+            <Tab>Tab Label 8</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>Tab Panel 1</TabPanel>
+            <TabPanel>
+              <form>
+                <legend className={`cds--label`}>Validation example</legend>
+                <Checkbox id="cb" labelText="Accept privacy policy" />
+                <Button
+                  style={{ marginTop: '1rem', marginBottom: '1rem' }}
+                  type="submit">
+                  Submit
+                </Button>
+                <TextInput
+                  type="text"
+                  labelText="Text input label"
+                  helperText="Optional help text"
+                />
+              </form>
+            </TabPanel>
+            <TabPanel>Tab Panel 3</TabPanel>
+            <TabPanel>Tab Panel 4</TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Column>
+    </Grid>
+    <Grid condensed>
+      <Column lg={16} md={8} sm={4}>
+        <Tabs>
+          <TabList aria-label="List of tabs" contained normalizeWidth>
+            <Tab>Tab Label 1</Tab>
+            <Tab>Tab Label 2</Tab>
+            <Tab disabled>Tab Label 3</Tab>
+            <Tab title="Tab Label 4 with a very long long title">
+              Tab Label 4 with a very long long title
+            </Tab>
+            <Tab>Tab Label 5</Tab>
+            <Tab>Tab Label 6</Tab>
+            <Tab>Tab Label 7</Tab>
+            <Tab>Tab Label 8</Tab>
+            <Tab>Tab Label 5</Tab>
+            <Tab>Tab Label 9</Tab>
+            <Tab>Tab Label 10</Tab>
+            <Tab>Tab Label 11</Tab>
+            <Tab>Tab Label 12</Tab>
+            <Tab>Tab Label 13</Tab>
+            <Tab>Tab Label 14</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>Tab Panel 1</TabPanel>
+            <TabPanel>
+              <form>
+                <legend className={`cds--label`}>Validation example</legend>
+                <Checkbox id="cb" labelText="Accept privacy policy" />
+                <Button
+                  style={{ marginTop: '1rem', marginBottom: '1rem' }}
+                  type="submit">
+                  Submit
+                </Button>
+                <TextInput
+                  type="text"
+                  labelText="Text input label"
+                  helperText="Optional help text"
+                />
+              </form>
+            </TabPanel>
+            <TabPanel>Tab Panel 3</TabPanel>
+            <TabPanel>Tab Panel 4</TabPanel>
+            <TabPanel>Tab Panel 5</TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Column>
+    </Grid>
+  </>
 );
 
 export const Skeleton = () => {

@@ -6,6 +6,7 @@
  */
 
 import { ChevronLeft, ChevronRight } from '@carbon/icons-react';
+import { breakpoints } from '@carbon/layout';
 import cx from 'classnames';
 import debounce from 'lodash.debounce';
 import PropTypes from 'prop-types';
@@ -23,6 +24,7 @@ import { usePressable } from './usePressable';
 import deprecate from '../../prop-types/deprecate';
 import { Close } from '@carbon/icons-react';
 import { useEvent } from '../../internal/useEvent';
+import { useMatchMedia } from '../../internal/useMatchMedia';
 
 // Used to manage the overall state of the Tabs
 const TabsContext = React.createContext();
@@ -32,6 +34,9 @@ const TabContext = React.createContext();
 
 // Used to keep track of position in a list of tab panels
 const TabPanelContext = React.createContext();
+
+const lgMediaQuery = `(min-width: ${breakpoints.lg.width})`;
+
 function Tabs({
   children,
   defaultSelectedIndex = 0,
@@ -138,6 +143,7 @@ function TabList({
   children,
   className: customClassName,
   contained = false,
+  normalizeWidth = false,
   iconSize,
   leftOverflowButtonProps,
   light,
@@ -159,6 +165,14 @@ function TabList({
   const nextButton = useRef(null);
   const [isScrollable, setIsScrollable] = useState(false);
   const [scrollLeft, setScrollLeft] = useState(null);
+
+  const isLg = useMatchMedia(lgMediaQuery);
+
+  const distributeWidth =
+    normalizeWidth &&
+    contained &&
+    isLg &&
+    React.Children.toArray(children).length < 9;
 
   // Previous Button
   // VISIBLE IF:
@@ -186,6 +200,7 @@ function TabList({
     [`${prefix}--tabs__icon--default`]: iconSize === 'default',
     [`${prefix}--tabs__icon--lg`]: iconSize === 'lg',
     [`${prefix}--tabs--tall`]: hasSecondaryLabelTabs,
+    [`${prefix}--tabs--normalized-width`]: distributeWidth,
   });
 
   const isPreviousButtonVisible = ref.current
@@ -470,6 +485,10 @@ TabList.propTypes = {
       'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
   ),
 
+  /**
+   * Used for grid aware tabs, this makes it so all tabs span the same width. Only available on contained tabs with <9 children
+   */
+  normalizeWidth: PropTypes.bool,
   /**
    * Provide the props that describe the right overflow button
    */
