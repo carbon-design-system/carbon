@@ -43,6 +43,7 @@ function FileUploaderButton({
     // V11: remove field, small
     [`${prefix}--btn--md`]: size === 'field' || size === 'md',
     [`${prefix}--btn--sm`]: size === 'small' || size === 'sm',
+    [`${prefix}--layout--size-${size}`]: size,
   });
 
   // Adjust label text state based on changes to the labelText prop

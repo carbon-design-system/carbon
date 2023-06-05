@@ -550,7 +550,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               aria-expanded="false"
               aria-haspopup="true"
               aria-labelledby="tooltip-73"
-              class="cds--btn--icon-only cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--btn--primary"
+              class="cds--btn--icon-only cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--primary"
               title="Settings"
               type="button"
             >
@@ -592,7 +592,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
           </span>
         </span>
         <button
-          class="cds--btn cds--btn--sm cds--btn--primary"
+          class="cds--btn cds--btn--sm cds--layout--size-sm cds--btn--primary"
           type="button"
         >
           Add new
@@ -952,7 +952,7 @@ exports[`DataTable renders as expected - Component API should render and match s
               aria-expanded="false"
               aria-haspopup="true"
               aria-labelledby="tooltip-18"
-              class="cds--btn--icon-only cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--btn--primary"
+              class="cds--btn--icon-only cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--primary"
               title="Settings"
               type="button"
             >
@@ -994,7 +994,7 @@ exports[`DataTable renders as expected - Component API should render and match s
           </span>
         </span>
         <button
-          class="cds--btn cds--btn--sm cds--btn--primary"
+          class="cds--btn cds--btn--sm cds--layout--size-sm cds--btn--primary"
           type="button"
         >
           Add new

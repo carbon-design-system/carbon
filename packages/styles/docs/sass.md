@@ -11,10 +11,11 @@
 - [Colors](#colors)
 - [Config](#config)
 - [Feature Flags](#feature-flags)
+- [Font Face](#font-face)
+  - [Using IBM Plex](#using-ibm-plex)
 - [Grid](#grid)
   - [Using the grid](#using-the-grid)
   - [Classes provided](#classes-provided)
-  - [Grid Mixins](#grid-mixins)
 - [Motion](#motion)
 - [Reset](#reset)
 - [Spacing](#spacing)
@@ -23,6 +24,15 @@
 - [Type](#type)
 - [Components](#components)
 - [Utilities](#utilities)
+  - [Contextual layout tokens](#contextual-layout-tokens)
+    - [Concept](#concept)
+    - [Layout constraints](#layout-constraints)
+    - [sass helpers](#sass-helpers)
+      - [`layout.use`](#layoutuse)
+      - [`layout.size`](#layoutsize)
+      - [`layout.density`](#layoutdensity)
+      - [`layout.redefine-tokens`](#layoutredefine-tokens)
+- [Compatibility](#compatibility)
 - [Configuration](#configuration)
   - [`sass-loader`](#sass-loader)
   - [Parcel](#parcel)
@@ -529,26 +539,359 @@ $button-tokens: utilities.merge(
 
 **Files**
 
-| Import                                                     | Description                                                            |
-| :--------------------------------------------------------- | :--------------------------------------------------------------------- |
-| `@use '@carbon/styles/scss/utilities/box-shadow';`         | Adds the Carbon defined box-shadow value                               |
-| `@use '@carbon/styles/scss/utilities/button-reset';`       | Resets Button styles                                                   |
-| `@use '@carbon/styles/scss/utilities/component-reset';`    | Resets default styles                                                  |
-| `@use '@carbon/styles/scss/utilities/component-tokens';`   | Get tokens and inverse values for a given theme                        |
-| `@use '@carbon/styles/scss/utilities/convert';`            | Converts a given px value to a rem unit                                |
-| `@use '@carbon/styles/scss/utilities/custom-property';`    | Get the var() representation for a given token                         |
-| `@use '@carbon/styles/scss/utilities/focus-outline';`      | Adds the Carbon defined focus styles                                   |
-| `@use '@carbon/styles/scss/utilities/hide-at-breakpoint';` | Hides elements at specific breakpoints only                            |
-| `@use '@carbon/styles/scss/utilities/high-contrast-mode';` | Sets Windows High Contrast Mode styles                                 |
-| `@use '@carbon/styles/scss/utilities/keyframes';`          | Animations for skeleton states, showing + hiding                       |
-| `@use '@carbon/styles/scss/utilities/placeholder-colors';` | Sets the Carbon defined placeholder styles                             |
-| `@use '@carbon/styles/scss/utilities/rotate';`             | Adds rotational transformation                                         |
-| `@use '@carbon/styles/scss/utilities/skeleton';`           | Adds Carbon defined skeleton styles                                    |
-| `@use '@carbon/styles/scss/utilities/text-overflow';`      | Adds text overflow styling                                             |
-| `@use '@carbon/styles/scss/utilities/text-truncate';`      | Truncates text at beginning or end of text                             |
-| `@use '@carbon/styles/scss/utilities/tooltip';`            | Shared Tooltip styles                                                  |
-| `@use '@carbon/styles/scss/utilities/visually-hidden';`    | Hides elements visually, but available to screen reader/assistive text |
-| `@use '@carbon/styles/scss/utilities/z-index';`            | The Carbon stack hierarchy                                             |
+| Import                                                     | Description                                                                |
+| :--------------------------------------------------------- | :------------------------------------------------------------------------- |
+| `@use '@carbon/styles/scss/utilities/box-shadow';`         | Adds the Carbon defined box-shadow value                                   |
+| `@use '@carbon/styles/scss/utilities/button-reset';`       | Resets Button styles                                                       |
+| `@use '@carbon/styles/scss/utilities/component-reset';`    | Resets default styles                                                      |
+| `@use '@carbon/styles/scss/utilities/component-tokens';`   | Get tokens and inverse values for a given theme                            |
+| `@use '@carbon/styles/scss/utilities/convert';`            | Converts a given px value to a rem unit                                    |
+| `@use '@carbon/styles/scss/utilities/custom-property';`    | Get the var() representation for a given token                             |
+| `@use '@carbon/styles/scss/utilities/focus-outline';`      | Adds the Carbon defined focus styles                                       |
+| `@use '@carbon/styles/scss/utilities/hide-at-breakpoint';` | Hides elements at specific breakpoints only                                |
+| `@use '@carbon/styles/scss/utilities/high-contrast-mode';` | Sets Windows High Contrast Mode styles                                     |
+| `@use '@carbon/styles/scss/utilities/keyframes';`          | Animations for skeleton states, showing + hiding                           |
+| `@use '@carbon/styles/scss/utilities/layout';`             | [_(experimental)_ Use contextual layout tokens](#contextual-layout-tokens) |
+| `@use '@carbon/styles/scss/utilities/placeholder-colors';` | Sets the Carbon defined placeholder styles                                 |
+| `@use '@carbon/styles/scss/utilities/rotate';`             | Adds rotational transformation                                             |
+| `@use '@carbon/styles/scss/utilities/skeleton';`           | Adds Carbon defined skeleton styles                                        |
+| `@use '@carbon/styles/scss/utilities/text-overflow';`      | Adds text overflow styling                                                 |
+| `@use '@carbon/styles/scss/utilities/text-truncate';`      | Truncates text at beginning or end of text                                 |
+| `@use '@carbon/styles/scss/utilities/tooltip';`            | Shared Tooltip styles                                                      |
+| `@use '@carbon/styles/scss/utilities/visually-hidden';`    | Hides elements visually, but available to screen reader/assistive text     |
+| `@use '@carbon/styles/scss/utilities/z-index';`            | The Carbon stack hierarchy                                                 |
+
+### Contextual layout tokens
+
+**_Note: This feature is experimental and its API and behaviour may change at
+any time!_**
+
+#### Concept
+
+In your application, you can define layout contexts in which components alter
+their styling if supported. Layout contexts can help synchronize a certain
+rendering-related setting across multiple components. A new layout context can
+be set by wrapping the affected content in a container with the appropriate
+layout classes set. The container must always have the base css class
+(`.#{$prefix}--layout`) applied. Any other class is optional and targeted
+towards a layout token group. Currently, two groups exist: `size` and `density`.
+To define a group's setting, follow the structure of
+`.#{$prefix}--layout--group-step` with the details below (e.g.
+`.#{$prefix}--layout--size-lg`):
+
+| Group     | Steps                                         | Properties       |
+| :-------- | :-------------------------------------------- | :--------------- |
+| `size`    | `xs`<br>`sm`<br>`md`<br>`lg`<br>`xl`<br>`2xl` | `height`         |
+| `density` | `condensed`<br>`normal`                       | `padding-inline` |
+
+Inside a layout context, the associated css custom properties are available with
+the following naming structure: `--#{$prefix}-layout-group-property` (e.g.
+`--cds-layout-size-height` or `--cds-layout-density-padding-inline`). These css
+custom properties can be used in components to automatically react to the layout
+context and _should_ (but don't have to) be set on the css properties their
+names suggest (e.g. `height: var(--cds-layout-size-height);`). Note that these
+css custom properties are not set if a component is not within a layout context,
+so you'll need to provide a fallback. This should be the component's default
+styling and can still rely on the layout tokens by explicitely defining the
+step. For example, a component that, by default, should have a height of `md`
+but participate in layout contexts could be built in the following way:
+
+```scss
+.my-component {
+  height: var(
+    --#{$prefix}-layout-size-height,
+    var(--#{$prefix}-layout-size-height-md)
+  );
+}
+```
+
+In order to make your component support different layout modes explicitely via
+props, you can pass the layout sizes directly on your component as well.
+Example:
+
+```html
+<div class="cds--layout--size-lg">
+  <!-- This component will participate in the "lg" size mode -->
+  <div class="my-component">...</div>
+
+  <!-- This component will always render in "md" size mode, regardless of the parent layout context -->
+  <div class="my-component cds--layout--size-md">...</div>
+</div>
+```
+
+#### Layout constraints
+
+Naturally, with component-based development there will be scenarios where you
+want to re-use an exising component within a new one. These two components might
+not always share the same constraints (default, min, max) though. In order to
+control the child component's constraints but still participate in layout
+contexts, you can use some utility classes.
+
+Let's assume `my-component` supports sizes from `sm` to `lg` with a default of
+`md` and `button` supports sizes from `xs` to `2xl` with a default of `lg`.
+
+```html
+<div class="my-component">
+  ...
+  <div
+    class="cds--layout-constraint--size:default-md cds--layout-constraint--size:min-sm cds--layout-constraint--size:max-lg">
+    <!-- The button component will now be constrainted to the minimum size of 'sm', the maximum of 'lg' and default to 'md' -->
+    <div class="button">...</div>
+  </div>
+</div>
+```
+
+All layout groups offer the following utility classes:
+
+<table>
+<thead><tr><th>Class</th><th>CSS</th></tr></thead>
+<tbody>
+<tr><td>
+
+```
+cds--layout-constraint--group:default-step
+```
+
+</td><td>
+
+```scss
+.cds--layout-constraint--group\:default-step {
+  // for each property in this group:
+  --cds-layout-group-property: var(
+    --cds-layout-group-property-context,
+    var(--cds-layout-group-property-step, step-value)
+  );
+}
+```
+
+</td></tr><tr><td>
+
+```
+cds--layout-constraint--group:min-step
+```
+
+</td><td>
+
+```scss
+.cds--layout-constraint--group\:min-step {
+  // for each property in this group:
+  --cds-layout-group-property-min: var(
+    --cds-layout-group-property-step,
+    step-value
+  );
+}
+```
+
+</td></tr><tr><td>
+
+```
+cds--layout-constraint--group:max-step
+```
+
+</td><td>
+
+```scss
+.cds--layout-constraint--group\:max-step {
+  // for each property in this group:
+  --cds-layout-group-property-max: var(
+    --cds-layout-group-property-step,
+    step-value
+  );
+}
+```
+
+</td></tr>
+</tbody>
+</table>
+
+#### sass helpers
+
+In order to simplify contextual layout tokens, Carbon provides the following
+sass functions:
+
+##### `layout.use`
+
+`layout.use` is a mixin that should be included on the outermost selector of
+your component. It will emit local css custom properties for all properties in
+the passed layout group. Providing the group name and a default is required:
+
+```scss
+@use '@carbon/styles/scss/utilities/layout';
+
+.my-component {
+  // minimal required setup, provide the requested property and a default
+  @include layout.use('size', $default: 'md');
+
+  // optionally provide a minimum size for the component
+  @include layout.use('size', $default: 'md', $min: 'sm');
+
+  // optionally provide a maximum size for the component
+  @include layout.use('size', $default: 'md', $max: 'lg');
+
+  // optionally provide both a minimum and maximum size for the component
+  @include layout.use('size', $default: 'md', $min: 'sm', $max: 'lg');
+}
+```
+
+For reference, this table demonstrates the generated local css custom properties
+for each scenario.
+
+<table>
+<thead><tr><th>Usage</th><th>Return</th></tr></thead>
+<tbody>
+<tr><td>
+
+```scss
+.my-component {
+  @include layout.use('size', $default: 'md');
+}
+```
+
+</td><td>
+
+```scss
+.my-component {
+  --cds-layout-size-height-local: clamp(
+    var(--cds-layout-size-height-min),
+    var(--cds-layout-size-height, var(--cds-layout-size-height-md)),
+    var(--cds-layout-size-height-max)
+  );
+}
+```
+
+</td></tr><tr><td>
+
+```scss
+.my-component {
+  @include layout.use('size', $default: 'md', $min: 'sm');
+}
+```
+
+</td><td>
+
+```scss
+.my-component {
+  --cds-layout-size-height-local: clamp(
+    max(var(--cds-layout-size-height-min), var(--cds-layout-size-height-sm)),
+    var(--cds-layout-size-height, var(--cds-layout-size-height-md)),
+    var(--cds-layout-size-height-max)
+  );
+}
+```
+
+</td></tr><tr><td>
+
+```scss
+.my-component {
+  @include layout.use('size', $default: 'md', $max: 'lg');
+}
+```
+
+</td><td>
+
+```scss
+.my-component {
+  --cds-layout-size-height-local: clamp(
+    var(--cds-layout-size-height-min),
+    var(--cds-layout-size-height, var(--cds-layout-size-height-md)),
+    min(var(--cds-layout-size-height-max), var(--cds-layout-size-height-lg))
+  );
+}
+```
+
+</td></tr><tr><td>
+
+```scss
+.my-component {
+  @include layout.use('size', $default: 'md', $min: 'sm', $max: 'lg');
+}
+```
+
+</td><td>
+
+```scss
+.my-component {
+  --cds-layout-size-height-local: clamp(
+    max(var(--cds-layout-size-height-min), var(--cds-layout-size-height-sm)),
+    var(--cds-layout-size-height, var(--cds-layout-size-height-md)),
+    min(var(--cds-layout-size-height-max), var(--cds-layout-size-height-lg))
+  );
+}
+```
+
+</td></tr>
+</tbody>
+</table>
+
+##### `layout.size`
+
+`layout.size` returns the local css custom property for properties in the "size"
+layout group.
+
+```scss
+@use '@carbon/styles/scss/utilities/layout';
+
+.my-component {
+  @include layout.use('size', $default: 'md');
+
+  height: layout.size('height');
+  // => height: var(--cds-layout-size-height-local);
+}
+```
+
+##### `layout.density`
+
+`layout.density` returns the local css custom property for properties in the
+"density" layout group.
+
+```scss
+@use '@carbon/styles/scss/utilities/layout';
+
+.my-component {
+  @include layout.use('density', $default: 'normal');
+
+  padding-inline: layout.density('padding-inline');
+  // => padding-inline: var(--cds-layout-density-padding-inline-local);
+}
+```
+
+##### `layout.redefine-tokens`
+
+If a component should participate in layout contexts but uses non-standard
+values for the group steps, you can locally redefine the layout tokens by using
+this mixin. The mixin must be emitted at the outermost selector of the
+component.
+
+```scss
+@use '@carbon/styles/scss/utilities/layout';
+
+.my-component {
+  @include layout.redefine-tokens(
+    // all applicable overrides, must follow ( group: ( property: ( step: value ) ) )
+    $overrides:
+      (
+        size: (
+          height: (
+            sm: 1.125rem,
+            md: 1.5rem,
+          ),
+        )
+      )
+  );
+
+  @include layout.use('size', $default: 'md', $min: 'sm', $max: 'md');
+
+  height: layout.size('height');
+}
+```
+
+**_Note: Since this system uses CSS `clamp()` in order to enforce minimum and
+maximum values, you might need to override tokens you don't intend to use as
+well. In the example above, the new `sm (1.125rem)` value is smaller than the
+default `xs (1.5rem)` value. If a layout context is set to `xs`, the component
+will render in `1.5rem` size. It would therefore be appropriate to include
+`xs: 1.125rem` in this token definition even though the component doesn't
+support an explicit `xs` mode._**
 
 ## Compatibility
 

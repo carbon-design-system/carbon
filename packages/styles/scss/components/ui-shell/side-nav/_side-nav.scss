@@ -68,9 +68,6 @@
     width: 0;
   }
 
-  .#{$prefix}--side-nav.#{$prefix}--side-nav--rail:not(
-      .#{$prefix}--side-nav--fixed
-    ):hover,
   .#{$prefix}--side-nav--expanded {
     width: mini-units(32);
   }
