@@ -12,19 +12,24 @@
 @use '../../type' as *;
 @use '../../utilities/convert' as *;
 @use '../../utilities/visually-hidden' as *;
+@use '../../utilities/layout';
 
 /// Progress Bar styles
 /// @access public
 /// @group progress-bar
 @mixin progress-bar {
+  .#{$prefix}--progress-bar {
+    @include layout.use('density', $default: 'normal');
+  }
+
   .#{$prefix}--progress-bar__label {
     @include type-style('body-compact-01');
 
     display: flex;
     min-width: rem(48px);
     justify-content: space-between;
-    margin-bottom: $spacing-03;
     color: $text-primary;
+    margin-block-end: $spacing-03;
   }
 
   .#{$prefix}--progress-bar__label-text {
@@ -90,7 +95,7 @@
 
   .#{$prefix}--progress-bar__status-icon {
     flex-shrink: 0;
-    margin-left: $spacing-05;
+    margin-inline-start: layout.density('padding-inline');
   }
 
   .#{$prefix}--progress-bar--finished .#{$prefix}--progress-bar__bar,
@@ -122,7 +127,7 @@
     .#{$prefix}--progress-bar__label {
     flex-shrink: 1;
     justify-content: flex-start;
-    margin-right: 0;
+    margin-inline-end: 0;
   }
 
   @keyframes progress-bar-indeterminate {
@@ -144,7 +149,7 @@
   .#{$prefix}--progress-bar--inline .#{$prefix}--progress-bar__label {
     flex-shrink: 0;
     margin-bottom: 0;
-    margin-inline-end: $spacing-05;
+    margin-inline-end: layout.density('padding-inline');
   }
 
   .#{$prefix}--progress-bar--inline .#{$prefix}--progress-bar__track {
@@ -158,6 +163,6 @@
 
   .#{$prefix}--progress-bar--indented .#{$prefix}--progress-bar__label,
   .#{$prefix}--progress-bar--indented .#{$prefix}--progress-bar__helper-text {
-    padding-inline: $spacing-05;
+    padding-inline: layout.density('padding-inline');
   }
 }
