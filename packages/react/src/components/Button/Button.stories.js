@@ -77,24 +77,6 @@ export const Tertiary = (args) => {
     </Button>
   );
 };
-export const Test = () => {
-  return (
-    <>
-      <Button disabled hasIconOnly iconDescription="Tooltip first">
-        first
-      </Button>
-      <Button
-        tooltipPosition="bottom"
-        hasIconOnly
-        iconDescription="Tooltip second">
-        second
-      </Button>
-      <Button disabled hasIconOnly iconDescription="Tooltip third">
-        third
-      </Button>
-    </>
-  );
-};
 
 export const Danger = (args) => {
   return (
