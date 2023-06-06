@@ -7153,6 +7153,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "expanded": Object {
+        "type": "bool",
+      },
     },
     "render": [Function],
   },
