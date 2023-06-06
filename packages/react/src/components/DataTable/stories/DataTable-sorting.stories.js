@@ -111,6 +111,11 @@ Playground.argTypes = {
       disable: true,
     },
   },
+  radio: {
+    table: {
+      disable: true,
+    },
+  },
   rows: {
     table: {
       disable: true,
