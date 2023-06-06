@@ -308,7 +308,7 @@ export default class BXInput extends ValidityMixin(FormMixin(LitElement)) {
         ?data-invalid="${this.invalid}">
         ${this.invalid ? invalidIcon : null}
         <input
-          ?autocomplete="${this.autocomplete}"
+          autocomplete="${this.autocomplete}"
           ?autofocus="${this.autofocus}"
           class="${inputClasses}"
           ?data-invalid="${this.invalid}"
