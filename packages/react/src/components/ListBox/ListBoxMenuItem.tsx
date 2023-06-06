@@ -70,6 +70,7 @@ const ListBoxMenuItem = React.forwardRef<HTMLDivElement, ListBoxMenuItemProps>(
         className={className}
         title={isTruncated ? title : undefined}
         tabIndex={-1}>
+        {/* @ts-ignore Layer is not typed yet*/}
         <Layer>
           <div
             className={`${prefix}--list-box__menu-item__option`}
