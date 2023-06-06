@@ -326,10 +326,16 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       .#{$prefix}--tabs__nav-item--close-icon {
         padding: $spacing-02;
         margin: -$spacing-02;
-        cursor: pointer;
         line-height: 0;
         pointer-events: auto;
       }
+    }
+
+    .#{$prefix}--tabs__nav-item--icon-left {
+      display: flex;
+      align-items: center;
+      padding-right: $spacing-03;
+      margin-top: -2px;
     }
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--icon {
