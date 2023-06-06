@@ -14,7 +14,7 @@ import { ComboButton } from './';
 import mdx from './ComboButton.mdx';
 
 export default {
-  title: 'Experimental/unstable__ComboButton',
+  title: 'Components/ComboButton',
   component: ComboButton,
   subcomponents: {
     MenuItem,

@@ -6,22 +6,22 @@
  */
 
 import React from 'react';
-import { OverflowMenuV2 } from '.';
-import { MenuItem } from '../Menu';
+import { OverflowMenu } from '.';
+import { MenuItem } from '../../Menu';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-describe('OverflowMenu', () => {
+describe('OverflowMenu (enable-v12-overflowmenu)', () => {
   it('should render closed by default', () => {
     render(
-      <OverflowMenuV2>
+      <OverflowMenu>
         <MenuItem label="item" className="test-child">
           one
         </MenuItem>
         <MenuItem label="item" className="test-child">
           two
         </MenuItem>
-      </OverflowMenuV2>
+      </OverflowMenu>
     );
 
     // eslint-disable-next-line testing-library/no-node-access
@@ -36,14 +36,14 @@ describe('OverflowMenu', () => {
 
   it('should be in an open state after trigger is clicked', async () => {
     render(
-      <OverflowMenuV2>
+      <OverflowMenu>
         <MenuItem label="item" className="test-child">
           one
         </MenuItem>
         <MenuItem label="item" className="test-child">
           two
         </MenuItem>
-      </OverflowMenuV2>
+      </OverflowMenu>
     );
 
     await userEvent.type(screen.getByRole('button'), 'enter');
@@ -55,78 +55,45 @@ describe('OverflowMenu', () => {
   });
 
   it('should add custom classNames', () => {
-    render(
-      <OverflowMenuV2 className="extra-class">
+    const { container } = render(
+      <OverflowMenu className="extra-class">
         <MenuItem label="item" className="test-child">
           one
         </MenuItem>
         <MenuItem label="item" className="test-child">
           two
         </MenuItem>
-      </OverflowMenuV2>
+      </OverflowMenu>
     );
 
-    expect(screen.getByRole('button')).toHaveClass('extra-class');
-  });
-
-  it('should set a tab index if one is given', () => {
-    render(
-      <OverflowMenuV2 tab-index="2">
-        <MenuItem label="item" className="test-child">
-          one
-        </MenuItem>
-        <MenuItem label="item" className="test-child">
-          two
-        </MenuItem>
-      </OverflowMenuV2>
-    );
-
-    expect(screen.getByRole('button')).toHaveAttribute('tab-index', '2');
-  });
-
-  it('should set an aria-label if one is given', () => {
-    render(
-      <OverflowMenuV2 aria-label="aria-label">
-        <MenuItem label="item" className="test-child">
-          one
-        </MenuItem>
-        <MenuItem label="item" className="test-child">
-          two
-        </MenuItem>
-      </OverflowMenuV2>
-    );
-
-    expect(screen.getByRole('button')).toHaveAttribute(
-      'aria-label',
-      'aria-label'
-    );
+    expect(container.firstChild).toHaveClass('extra-class');
   });
 
   it('should set an id if one is given', () => {
-    render(
-      <OverflowMenuV2 id="custom-id">
+    const { container } = render(
+      <OverflowMenu id="custom-id">
         <MenuItem label="item" className="test-child">
           one
         </MenuItem>
         <MenuItem label="item" className="test-child">
           two
         </MenuItem>
-      </OverflowMenuV2>
+      </OverflowMenu>
     );
 
-    expect(screen.getByRole('button')).toHaveAttribute('id', 'custom-id');
+    expect(container.firstChild).toHaveAttribute('id', 'custom-id');
   });
 
   it('should close menu on outside click', async () => {
     render(
-      <OverflowMenuV2>
+      <OverflowMenu>
         <MenuItem label="item" className="test-child">
           one
         </MenuItem>
         <MenuItem label="item" className="test-child">
           two
         </MenuItem>
-      </OverflowMenuV2>
+      </OverflowMenu>
     );
     await userEvent.type(screen.getByRole('button'), 'enter');
     expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');

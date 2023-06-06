@@ -18,6 +18,7 @@ export CheckboxGroup from './components/CheckboxGroup';
 export { ClassPrefix } from './components/ClassPrefix';
 export CodeSnippet from './components/CodeSnippet';
 export ComboBox from './components/ComboBox';
+export { ComboButton } from './components/ComboButton';
 export {
   ComposedModal,
   ModalHeader,
@@ -26,6 +27,7 @@ export {
 } from './components/ComposedModal';
 export ContainedList, { ContainedListItem } from './components/ContainedList';
 export ContentSwitcher from './components/ContentSwitcher';
+export { useContextMenu } from './components/ContextMenu';
 export Copy from './components/Copy';
 export CopyButton from './components/CopyButton';
 export DangerButton from './components/DangerButton';
@@ -77,6 +79,15 @@ export InlineLoading from './components/InlineLoading';
 export Link from './components/Link';
 export ListItem from './components/ListItem';
 export Loading from './components/Loading';
+export {
+  Menu,
+  MenuItem,
+  MenuItemDivider,
+  MenuItemGroup,
+  MenuItemRadioGroup,
+  MenuItemSelectable,
+} from './components/Menu';
+export { MenuButton } from './components/MenuButton';
 export Modal from './components/Modal';
 export ModalWrapper from './components/ModalWrapper';
 export MultiSelect from './components/MultiSelect';
@@ -208,7 +219,6 @@ export {
 } from './components/UIShell';
 
 // Experimental
-export { useContextMenu as unstable_useContextMenu } from './components/ContextMenu';
 export {
   FeatureFlags as unstable_FeatureFlags,
   useFeatureFlag as unstable_useFeatureFlag,
@@ -264,17 +274,7 @@ export {
   LayoutDirection as unstable_LayoutDirection,
   useLayoutDirection as unstable_useLayoutDirection,
 } from './components/LayoutDirection';
-export {
-  Menu as unstable_Menu,
-  MenuItem as unstable_MenuItem,
-  MenuItemDivider as unstable_MenuItemDivider,
-  MenuItemGroup as unstable_MenuItemGroup,
-  MenuItemRadioGroup as unstable_MenuItemRadioGroup,
-  MenuItemSelectable as unstable_MenuItemSelectable,
-} from './components/Menu';
 export { OverflowMenuV2 as unstable_OverflowMenuV2 } from './components/OverflowMenuV2';
-export { ComboButton as unstable_ComboButton } from './components/ComboButton';
-export { MenuButton as unstable_MenuButton } from './components/MenuButton';
 export {
   PageSelector as unstable_PageSelector,
   Pagination as unstable_Pagination,

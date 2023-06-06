@@ -198,6 +198,16 @@
     cursor: not-allowed;
   }
 
+  // Workaround to ensure onMouseEnter events fire when moving
+  // from a disabled button to a non-disabled button (#13815)
+  .#{$prefix}--icon-tooltip--disabled .#{$prefix}--tooltip-trigger__wrapper {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--icon-tooltip--disabled .#{$prefix}--btn--icon-only[disabled] {
+    pointer-events: none;
+  }
+
   .#{$prefix}--btn--danger {
     @include button-theme(
       $button-danger-primary,
