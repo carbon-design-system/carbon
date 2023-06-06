@@ -238,6 +238,8 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/guidari"><img src="https://avatars.githubusercontent.com/u/52183462?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Guilherme Datilio Ribeiro</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=guidari" title="Code">💻</a> <a href="https://github.com/carbon-design-system/carbon/commits?author=guidari" title="Documentation">📖</a> <a href="#a11y-guidari" title="Accessibility">️️️️♿️</a> <a href="https://github.com/carbon-design-system/carbon/pulls?q=is%3Apr+reviewed-by%3Aguidari" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/kubijo"><img src="https://avatars.githubusercontent.com/u/11244314?v=4?s=100" width="100px;" alt=""/><br /><sub><b>kubijo</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=kubijo" title="Code">💻</a></td>
     <td align="center"><a href="http://www.steveblackonline.com/"><img src="https://avatars.githubusercontent.com/u/7853451?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Steven Black</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=sjbeatle" title="Code">💻</a> <a href="#a11y-sjbeatle" title="Accessibility">️️️️♿️</a></td>
+  </tr>
+  <tr>
     <td align="center"><a href="https://github.com/mrkjdy"><img src="https://avatars.githubusercontent.com/u/32761859?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mark Judy</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=mrkjdy" title="Code">💻</a></td>
   </tr>
 </table>
