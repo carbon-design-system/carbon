@@ -33,6 +33,10 @@
   }
 
   .#{$prefix}--modal-container {
+    transform: translate3d(0, 0, 0);
+  }
+
+  .#{$prefix}--modal-container {
     @include carbon--breakpoint(md) {
       ::slotted(#{$prefix}-modal-header),
       ::slotted(#{$prefix}-modal-body) {
