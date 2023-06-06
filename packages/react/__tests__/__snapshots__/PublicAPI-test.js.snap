@@ -4038,6 +4038,9 @@ Map {
       "defaultOpen": Object {
         "type": "bool",
       },
+      "disabled": Object {
+        "type": "bool",
+      },
       "enterDelayMs": Object {
         "type": "number",
       },

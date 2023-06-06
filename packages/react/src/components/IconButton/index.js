@@ -20,6 +20,7 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
     className,
     closeOnActivation = true,
     defaultOpen = false,
+    disabled,
     enterDelayMs,
     kind,
     label,
@@ -30,7 +31,9 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
   } = props;
   const prefix = usePrefix();
 
-  const tooltipClasses = classNames(wrapperClasses, `${prefix}--icon-tooltip`);
+  const tooltipClasses = classNames(wrapperClasses, `${prefix}--icon-tooltip`, {
+    [`${prefix}--icon-tooltip--disabled`]: disabled,
+  });
 
   return (
     <Tooltip
@@ -43,6 +46,7 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
       leaveDelayMs={leaveDelayMs}>
       <Button
         {...rest}
+        disabled={disabled}
         kind={kind}
         ref={ref}
         size={size}
@@ -87,6 +91,11 @@ IconButton.propTypes = {
    * Specify whether the tooltip should be open when it first renders
    */
   defaultOpen: PropTypes.bool,
+
+  /**
+   * Specify whether the Button should be disabled, or not
+   */
+  disabled: PropTypes.bool,
 
   /**
    * Specify the duration in milliseconds to delay before displaying the tooltip
