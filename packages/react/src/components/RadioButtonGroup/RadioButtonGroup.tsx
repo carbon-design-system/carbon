@@ -213,7 +213,6 @@ const RadioButtonGroup = React.forwardRef(
           className={fieldsetClasses}
           disabled={disabled}
           data-invalid={invalid ? true : undefined}
-          aria-readonly={readOnly}
           aria-describedby={showHelper && helperText ? helperId : undefined}
           {...rest}>
           {legendText && (
