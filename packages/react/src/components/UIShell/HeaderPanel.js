@@ -43,22 +43,6 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
   const eventHandlers = {};
 
   if (addFocusListeners) {
-    eventHandlers.onFocus = (event) => {
-      if (!event.currentTarget.contains(event.relatedTarget)) {
-        setExpandedState(true);
-        if (!expanded) {
-          onHeaderPanelFocus();
-        }
-      }
-    };
-    eventHandlers.onBlur = (event) => {
-      if (!event.currentTarget.contains(event.relatedTarget)) {
-        setExpandedState(false);
-        if (expanded) {
-          onHeaderPanelFocus();
-        }
-      }
-    };
     eventHandlers.onKeyDown = (event) => {
       if (match(event, keys.Escape)) {
         setExpandedState(false);

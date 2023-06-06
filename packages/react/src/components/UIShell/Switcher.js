@@ -22,6 +22,7 @@ const Switcher = React.forwardRef(function Switcher(props, forwardRef) {
     'aria-labelledby': ariaLabelledBy,
     className: customClassName,
     children,
+    expanded,
   } = props;
 
   const accessibilityLabel = {
@@ -70,6 +71,7 @@ const Switcher = React.forwardRef(function Switcher(props, forwardRef) {
         handleSwitcherItemFocus,
         index,
         key: index,
+        expanded,
       })
   );
 
@@ -96,6 +98,11 @@ Switcher.propTypes = {
    * Optionally provide a custom class to apply to the underlying `<ul>` node
    */
   className: PropTypes.string,
+
+  /**
+   * Specify whether the panel is expanded
+   */
+  expanded: PropTypes.bool,
 };
 
 export default Switcher;

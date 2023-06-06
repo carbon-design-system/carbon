@@ -611,6 +611,7 @@ export const HeaderBaseWActionsAndSwitcher = (args) => (
               aria-label={
                 isSideNavExpanded ? 'Close switcher' : 'Open switcher'
               }
+              aria-expanded={isSideNavExpanded}
               isActive={isSideNavExpanded}
               onClick={onClickSideNavExpand}
               tooltipAlignment="end">
@@ -625,7 +626,9 @@ export const HeaderBaseWActionsAndSwitcher = (args) => (
             expanded={isSideNavExpanded}
             onHeaderPanelFocus={onClickSideNavExpand}
             href="#main-content">
-            <Switcher aria-label="Switcher Container">
+            <Switcher
+              aria-label="Switcher Container"
+              expanded={isSideNavExpanded}>
               <SwitcherItem isSelected aria-label="Link 1" href="#">
                 Link 1
               </SwitcherItem>
