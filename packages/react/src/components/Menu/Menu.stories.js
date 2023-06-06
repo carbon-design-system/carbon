@@ -19,7 +19,7 @@ import {
 import mdx from './Menu.mdx';
 
 export default {
-  title: 'Experimental/unstable__Menu',
+  title: 'Components/Menu',
   component: Menu,
   subcomponents: {
     MenuItem,

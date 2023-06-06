@@ -17,7 +17,7 @@ test.describe('MenuButton', () => {
       test('menu-button @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'MenuButton',
-          id: 'experimental-unstable-menubutton--default',
+          id: 'components-menubutton--default',
           theme,
         });
       });
@@ -27,7 +27,7 @@ test.describe('MenuButton', () => {
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'MenuButton',
-      id: 'experimental-unstable-menubutton--default',
+      id: 'components-menubutton--default',
       globals: {
         theme: 'white',
       },
