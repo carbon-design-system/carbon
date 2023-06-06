@@ -315,12 +315,14 @@ MenuItemGroup.propTypes = {
   label: PropTypes.string.isRequired,
 };
 
+const defaultItemToString = (item) => item.toString();
+
 const MenuItemRadioGroup = React.forwardRef(function MenuItemRadioGroup(
   {
     className,
     defaultSelectedItem,
     items,
-    itemToString = (item) => item.toString(),
+    itemToString = defaultItemToString,
     label,
     onChange,
     selectedItem,
