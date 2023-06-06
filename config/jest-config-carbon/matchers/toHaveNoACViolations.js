@@ -19,6 +19,7 @@ async function toHaveNoACViolations(node, label) {
       'skip_main_exists',
       'html_skipnav_exists',
       'aria_content_in_landmark',
+      'aria_child_tabbable',
     ]);
     const ruleset = await aChecker.getRuleset('IBM_Accessibility');
     const customRuleset = JSON.parse(JSON.stringify(ruleset));
