@@ -281,7 +281,7 @@ class CDSNumberInput extends CDSTextInput {
 
     const input = html`
       <input
-        ?autocomplete="${this.autocomplete}"
+        autocomplete="${this.autocomplete}"
         ?autofocus="${this.autofocus}"
         ?data-invalid="${normalizedProps.invalid}"
         ?disabled="${normalizedProps.disabled}"

@@ -135,7 +135,7 @@ class CDSTextarea extends CDSTextInput {
       <div class="${textareaWrapperClasses}" ?data-invalid="${this.invalid}">
         ${icon()}
         <textarea
-          ?autocomplete="${this.autocomplete}"
+          autocomplete="${this.autocomplete}"
           ?autofocus="${this.autofocus}"
           class="${textareaClasses}"
           cols="${ifDefined(this.cols)}"

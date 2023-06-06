@@ -439,7 +439,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
           <div class="${fieldWrapperClasses}" ?data-invalid="${invalid}">
             ${normalizedProps.icon}
             <input
-              ?autocomplete="${this.autocomplete}"
+              autocomplete="${this.autocomplete}"
               ?autofocus="${this.autofocus}"
               class="${inputClasses}"
               ?data-invalid="${invalid}"
