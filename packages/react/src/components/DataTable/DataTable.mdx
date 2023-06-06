@@ -1,4 +1,5 @@
 import { Story, ArgsTable, Canvas, Meta } from '@storybook/blocks';
+import { DataTable } from './DataTable'
 import * as DataTableBasicStories from './stories/DataTable-basic.stories.js';
 import * as DataTableSortingStories from './stories/DataTable-sorting.stories.js';
 import * as DataTableExpansionStories from './stories/expansion/DataTable-expansion.stories.js';
@@ -7,7 +8,7 @@ import * as DataTableFilteringStories from './stories/DataTable-filtering.storie
 import * as DataTableBatchActionsStories from './stories/DataTable-batch-actions.stories.js';
 import * as DataTableToolbarStories from './stories/DataTable-toolbar.stories.js';
 
-<Meta title="Components/DataTable/Docs" name="Docs" />
+<Meta title="Components/DataTable" name="Docs" />
 
 # DataTable
 
@@ -325,7 +326,7 @@ cell.
 
 ## Props
 
-<ArgsTable />
+<ArgsTable of={DataTable} />
 
 ### Render props
 

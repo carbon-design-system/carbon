@@ -1,4 +1,5 @@
-import { Props, Story, Preview } from '@storybook/addon-docs';
+import { ArgsTable, Story, Canvas } from '@storybook/blocks';
+import * as FormGroupStories from './FormGroup.stories';
 
 # FormGroup
 
@@ -20,9 +21,9 @@ import { Props, Story, Preview } from '@storybook/addon-docs';
 
 ## Overview
 
-<Preview>
-  <Story id="components-formgroup--default" />
-</Preview>
+<Canvas>
+  <Story of={FormGroupStories.Default} />
+</Canvas>
 
 ## Component API
 

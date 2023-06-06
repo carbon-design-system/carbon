@@ -1,5 +1,6 @@
-import { Props, Story, Preview } from '@storybook/addon-docs';
+import { ArgsTable, Story, Canvas } from '@storybook/blocks';
 import Tooltip from '../Tooltip';
+import * as FormLabelStories from './FormLabel.stories';
 
 # FormLabel
 
@@ -21,9 +22,9 @@ import Tooltip from '../Tooltip';
 
 ## Overview
 
-<Preview>
-  <Story id="components-formlabel--default" />
-</Preview>
+<Canvas>
+  <Story of={FormLabelStories.Default} />
+</Canvas>
 
 ## Component API
 

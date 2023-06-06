@@ -1,4 +1,5 @@
-import { ArgsTable, Canvas, Story } from '@storybook/addon-docs';
+import { ArgsTable, Canvas, Story } from '@storybook/blocks';
+import * as PopoverStories from './Popover.stories';
 
 # Popover
 
@@ -66,7 +67,7 @@ state in conjunction with the callback prop to set `open` to false when
 `onRequestClose` is called.
 
 <Canvas>
-  <Story id="components-popover--tab-tip" />
+  <Story of={PopoverStories.TabTip} />
 </Canvas>
 
 ## Alignment

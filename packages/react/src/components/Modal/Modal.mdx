@@ -1,6 +1,7 @@
-import { Story, Props } from '@storybook/addon-docs';
+import { Story, ArgsTable, Canvas } from '@storybook/blocks';
 import Modal from '../Modal';
 import { InlineNotification } from '../Notification';
+import * as ModalStories from './Modal.stories';
 
 # Modal
 
@@ -37,13 +38,13 @@ the modal body content. You can also use `modalLabel`, `modalHeading`,
 `secondaryButtonText` and `primaryButtonText` props to change the corresponding
 text.
 
-<Preview>
-  <Story id="components-modal--with-state-manager" />
-</Preview>
+<Canvas>
+  <Story of={ModalStories.WithStateManager} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ## Opening/closing modal
 

@@ -1,4 +1,5 @@
-import { Story, Preview, Props } from '@storybook/addon-docs';
+import { Story, Canvas, ArgsTable } from '@storybook/blocks';
+import * as ProgressIndicatorStories from './ProgressIndicator.stories';
 
 # ProgressIndicator
 
@@ -25,9 +26,9 @@ import { Story, Preview, Props } from '@storybook/addon-docs';
 
 ## Overview
 
-<Preview>
-  <Story id="components-progressindicator--default" />
-</Preview>
+<Canvas>
+  <Story of={ProgressIndicatorStories.Default} />
+</Canvas>
 
 For React usage, `ProgressIndicator` holds the `currentIndex` state to indicate
 which `ProgressStep` is the current step. The `ProgressIndicator` component
@@ -44,7 +45,7 @@ the `onChange` handler.
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ## Feedback
 

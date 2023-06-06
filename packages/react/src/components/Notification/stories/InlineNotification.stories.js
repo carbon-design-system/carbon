@@ -8,17 +8,11 @@
 import React from 'react';
 import { InlineNotification } from '../../Notification';
 import { action } from '@storybook/addon-actions';
-import mdx from '../Notification.mdx';
 
 // eslint-disable-next-line storybook/csf-component
 export default {
   title: 'Components/Notifications/Inline',
   component: InlineNotification,
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
   args: {
     kind: 'error',
     lowContrast: false,

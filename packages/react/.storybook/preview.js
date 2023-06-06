@@ -4,6 +4,14 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+  Stories,
+} from '@storybook/blocks';
 
 import './styles.scss';
 import '../src/feature-flags';
@@ -131,6 +139,16 @@ export const parameters = {
   },
   docs: {
     theme,
+    page: () => (
+      <>
+        <Title />
+        <Subtitle />
+        <Description />
+        <Primary />
+        <ArgsTable />
+        <Stories includePrimary={false} />
+      </>
+    ),
   },
   // Small (<672)
   // Medium (672 - 1056px)
