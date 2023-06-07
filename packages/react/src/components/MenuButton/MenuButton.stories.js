@@ -14,7 +14,7 @@ import { MenuButton } from './';
 import mdx from './MenuButton.mdx';
 
 export default {
-  title: 'Experimental/unstable__MenuButton',
+  title: 'Components/MenuButton',
   component: MenuButton,
   subcomponents: {
     MenuItem,
