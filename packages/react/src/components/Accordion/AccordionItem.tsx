@@ -45,7 +45,7 @@ interface AccordionItemProps {
   onClick?: MouseEventHandler<HTMLLIElement>;
 
   /**
-   * he handler of the massaged `click` event on
+   * The handler of the massaged `click` event on
    * the heading.
    */
   onHeadingClick?: ({
