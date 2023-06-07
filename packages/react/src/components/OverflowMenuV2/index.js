@@ -66,10 +66,6 @@ function OverflowMenuV2({
 
 OverflowMenuV2.propTypes = {
   /**
-   * Specify element's id to be used as the label for this OverflowMenu
-   */
-  'aria-labelledby': PropTypes.string,
-  /**
    * A collection of MenuItems to be rendered within this OverflowMenu.
    */
   children: PropTypes.node,
