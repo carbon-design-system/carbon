@@ -312,7 +312,7 @@ export const Icon20Only = () => (
 
 export const IconOnly = () => (
   <Tabs>
-    <TabList iconSize="default" aria-label="List of tabs">
+    <TabList aria-label="List of tabs">
       <IconTab label="Monster" disabled>
         <Monster aria-label="Monster" />
       </IconTab>
