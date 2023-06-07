@@ -17,7 +17,7 @@ test.describe('Menu', () => {
       test('menu @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Menu',
-          id: 'experimental-unstable-menu--playground',
+          id: 'components-menu--playground',
           theme,
         });
       });
@@ -27,7 +27,7 @@ test.describe('Menu', () => {
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'Menu',
-      id: 'experimental-unstable-menu--playground',
+      id: 'components-menu--playground',
       globals: {
         theme: 'white',
       },

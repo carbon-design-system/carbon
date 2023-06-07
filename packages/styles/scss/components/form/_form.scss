@@ -140,6 +140,7 @@ $input-label-weight: 400 !default;
   .#{$prefix}--date-picker-input__wrapper--warn,
   .#{$prefix}--date-picker-input__wrapper--invalid,
   .#{$prefix}--time-picker--invalid,
+  .#{$prefix}--time-picker--warning,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--text-input__field-wrapper--warning,
   .#{$prefix}--text-input__field-wrapper--warning > .#{$prefix}--text-input,
