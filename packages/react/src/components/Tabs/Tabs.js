@@ -143,7 +143,7 @@ function TabList({
   children,
   className: customClassName,
   contained = false,
-  normalizeWidth = false,
+  fullWidth = false,
   iconSize,
   leftOverflowButtonProps,
   light,
@@ -169,7 +169,7 @@ function TabList({
   const isLg = useMatchMedia(lgMediaQuery);
 
   const distributeWidth =
-    normalizeWidth &&
+    fullWidth &&
     contained &&
     isLg &&
     React.Children.toArray(children).length < 9;
@@ -200,7 +200,7 @@ function TabList({
     [`${prefix}--tabs__icon--default`]: iconSize === 'default',
     [`${prefix}--tabs__icon--lg`]: iconSize === 'lg',
     [`${prefix}--tabs--tall`]: hasSecondaryLabelTabs,
-    [`${prefix}--tabs--normalized-width`]: distributeWidth,
+    [`${prefix}--tabs--full-width`]: distributeWidth,
   });
 
   const isPreviousButtonVisible = ref.current
@@ -467,6 +467,11 @@ TabList.propTypes = {
   contained: PropTypes.bool,
 
   /**
+   * Used for tabs within a grid, this makes it so tabs span the full container width and have the same width. Only available on contained tabs with <9 children
+   */
+  fullWidth: PropTypes.bool,
+
+  /**
    * If using `IconTab`, specify the size of the icon being used.
    */
   iconSize: PropTypes.oneOf(['default', 'lg']),
@@ -485,10 +490,6 @@ TabList.propTypes = {
       'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
   ),
 
-  /**
-   * Used for grid aware tabs, this makes it so all tabs span the same width. Only available on contained tabs with <9 children
-   */
-  normalizeWidth: PropTypes.bool,
   /**
    * Provide the props that describe the right overflow button
    */
@@ -670,7 +671,9 @@ const Tab = React.forwardRef(function Tab(
             {<Icon size={16} />}
           </div>
         )}
-        <span className={`${prefix}--tabs__nav-item-label`}>{children}</span>
+        <span className={`${prefix}--tabs__nav-item-label`} title={children}>
+          {children}
+        </span>
         {/* always rendering dismissIcon so we don't lose reference to it, otherwise events do not work when switching from/to dismissable state */}
         <div
           className={cx(`${prefix}--tabs__nav-item--icon`, {
@@ -681,7 +684,9 @@ const Tab = React.forwardRef(function Tab(
         </div>
       </div>
       {hasSecondaryLabel && (
-        <div className={`${prefix}--tabs__nav-item-secondary-label`}>
+        <div
+          className={`${prefix}--tabs__nav-item-secondary-label`}
+          title={secondaryLabel}>
           {secondaryLabel}
         </div>
       )}

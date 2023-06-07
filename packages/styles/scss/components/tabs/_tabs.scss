@@ -614,15 +614,20 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
 // Grid contained tabs
 //-----------------------------
 
-.#{$prefix}--tabs--contained.#{$prefix}--tabs--normalized-width
+.#{$prefix}--tabs.#{$prefix}--tabs--contained.#{$prefix}--tabs--full-width
   .#{$prefix}--tab--list {
   display: grid;
   width: 100%;
   grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-}
 
-// .#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item {
-//   margin-left: 0;
-//   // Draws the border without affecting the inner-content
-//   box-shadow: rem(-1px) 0 0 0 $border-strong;
-// }
+  .#{$prefix}--tabs__nav-link {
+    .#{$prefix}--tabs__nav-item-label,
+    .#{$prefix}--tabs__nav-item-secondary-label {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .#{$prefix}--tabs__nav-item--icon {
+      margin-left: auto;
+    }
+  }
+}
