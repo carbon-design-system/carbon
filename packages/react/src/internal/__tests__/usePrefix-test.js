@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { cleanup, render } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import React from 'react';
 import { usePrefix, PrefixContext } from '../usePrefix';
 
@@ -30,12 +30,12 @@ describe('usePrefix', () => {
       return <span data-testid="test">{contextValue}</span>;
     }
 
-    const { getByTestId } = render(
+    render(
       <PrefixContext.Provider value="test">
         <TestComponent />
       </PrefixContext.Provider>
     );
 
-    expect(getByTestId('test')).toHaveTextContent('test');
+    expect(screen.getByTestId('test')).toHaveTextContent('test');
   });
 });

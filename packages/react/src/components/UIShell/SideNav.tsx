@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, {
-  useState,
   useRef,
   type ForwardedRef,
   type ComponentProps,
@@ -20,6 +19,9 @@ import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { CARBON_SIDENAV_ITEMS } from './_utils';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
+import { useMergedRefs } from '../../internal/useMergedRefs';
+import { useWindowEvent } from '../../internal/useEvent';
+import { useDelayedState } from '../../internal/useDelayedState';
 // TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
 
@@ -31,6 +33,7 @@ interface SideNavProps extends ComponentProps<'nav'> {
     event: FocusEvent<HTMLElement> | KeyboardEvent<HTMLElement> | boolean,
     value: boolean
   ) => void | undefined;
+  href?: string | undefined;
   // TO-DO: comment back in when footer is added for rails
   // translateById?: ((id: TranslationId) => Translation) | undefined;
   isFixedNav?: boolean | undefined;
@@ -39,6 +42,8 @@ interface SideNavProps extends ComponentProps<'nav'> {
   addFocusListeners?: boolean | undefined;
   addMouseListeners?: boolean | undefined;
   onOverlayClick?: MouseEventHandler<HTMLDivElement> | undefined;
+  onSideNavBlur?: () => void | undefined;
+  enterDelayMs?: number;
 }
 
 function SideNavRenderFunction(
@@ -53,32 +58,37 @@ function SideNavRenderFunction(
     className: customClassName,
     // TO-DO: comment back in when footer is added for rails
     // translateById: t = (id) => translations[id],
+    href,
     isFixedNav = false,
     isRail,
     isPersistent = true,
     addFocusListeners = true,
     addMouseListeners = true,
     onOverlayClick,
+    onSideNavBlur,
+    enterDelayMs = 100,
     ...other
   }: SideNavProps,
   ref: ForwardedRef<HTMLElement>
 ) {
   const prefix = usePrefix();
   const { current: controlled } = useRef(expandedProp !== undefined);
-  const [expandedState, setExpandedState] = useState(defaultExpanded);
+  const [expandedState, setExpandedState] = useDelayedState(defaultExpanded);
   const [expandedViaHoverState, setExpandedViaHoverState] =
-    useState(defaultExpanded);
+    useDelayedState(defaultExpanded);
   const expanded = controlled ? expandedProp : expandedState;
+  const sideNavRef = useRef<HTMLDivElement>(null);
+  const navRef = useMergedRefs([sideNavRef, ref]);
 
   const handleToggle: typeof onToggle = (event, value = !expanded) => {
     if (!controlled) {
-      setExpandedState(value);
+      setExpandedState(value, enterDelayMs);
     }
     if (onToggle) {
       onToggle(event, value);
     }
     if (controlled || isRail) {
-      setExpandedViaHoverState(value);
+      setExpandedViaHoverState(value, enterDelayMs);
     }
   };
 
@@ -135,7 +145,12 @@ function SideNavRenderFunction(
   const eventHandlers: Partial<
     Pick<
       ComponentProps<'nav'>,
-      'onFocus' | 'onBlur' | 'onKeyDown' | 'onMouseEnter' | 'onMouseLeave'
+      | 'onFocus'
+      | 'onBlur'
+      | 'onKeyDown'
+      | 'onMouseEnter'
+      | 'onMouseLeave'
+      | 'onClick'
     >
   > = {};
 
@@ -149,18 +164,53 @@ function SideNavRenderFunction(
       if (!event.currentTarget.contains(event.relatedTarget)) {
         handleToggle(event, false);
       }
+      if (!event.currentTarget.contains(event.relatedTarget) && expanded) {
+        if (onSideNavBlur) {
+          onSideNavBlur();
+        }
+      }
     };
     eventHandlers.onKeyDown = (event) => {
       if (match(event, keys.Escape)) {
         handleToggle(event, false);
+        if (href) {
+          window.location.href = href;
+        }
       }
     };
   }
 
   if (addMouseListeners && isRail) {
-    eventHandlers.onMouseEnter = () => handleToggle(true, true);
-    eventHandlers.onMouseLeave = () => handleToggle(false, false);
+    eventHandlers.onMouseEnter = () => {
+      handleToggle(true, true);
+    };
+    eventHandlers.onMouseLeave = () => {
+      setExpandedState(false);
+      setExpandedViaHoverState(false);
+      handleToggle(false, false);
+    };
+    eventHandlers.onClick = () => {
+      //if delay is enabled, and user intentionally clicks it to see it expanded immediately
+      setExpandedState(true);
+      setExpandedViaHoverState(true);
+      handleToggle(true, true);
+    };
   }
+
+  useWindowEvent('keydown', (event: Event) => {
+    const focusedElement = document.activeElement;
+
+    if (
+      match(event, keys.Tab) &&
+      expanded &&
+      !isFixedNav &&
+      sideNavRef.current &&
+      focusedElement?.classList.contains(`${prefix}--header__menu-toggle`) &&
+      !focusedElement.closest('nav')
+    ) {
+      sideNavRef.current.focus();
+    }
+  });
 
   return (
     <>
@@ -169,7 +219,8 @@ function SideNavRenderFunction(
         <div className={overlayClassName} onClick={onOverlayClick} />
       )}
       <nav
-        ref={ref}
+        tabIndex={-1}
+        ref={navRef}
         className={`${prefix}--side-nav__navigation ${className}`}
         {...accessibilityLabel}
         {...eventHandlers}
@@ -211,10 +262,21 @@ SideNav.propTypes = {
   defaultExpanded: PropTypes.bool,
 
   /**
+   * Specify the duration in milliseconds to delay before displaying the sidenavigation
+   */
+  enterDelayMs: PropTypes.number,
+
+  /**
    * If `true`, the SideNav will be expanded, otherwise it will be collapsed.
    * Using this prop causes SideNav to become a controled component.
    */
   expanded: PropTypes.bool,
+
+  /**
+   * Provide the `href` to the id of the element on your package that is the
+   * main content.
+   */
+  href: PropTypes.string,
 
   /**
    * Optionally provide a custom class to apply to the underlying `<li>` node
@@ -242,6 +304,12 @@ SideNav.propTypes = {
    * @param {object} event
    */
   onOverlayClick: PropTypes.func,
+
+  /**
+   * An optional listener that is called a callback to collapse the SideNav
+   */
+
+  onSideNavBlur: PropTypes.func,
 
   /**
    * An optional listener that is called when an event that would cause

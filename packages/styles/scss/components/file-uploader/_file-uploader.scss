@@ -64,9 +64,6 @@
     display: inline-block;
     width: 100%;
     max-width: rem(320px);
-    @if not enabled('enable-v11-release') {
-      margin-bottom: $spacing-03;
-    }
 
     color: $link-primary;
     cursor: pointer;

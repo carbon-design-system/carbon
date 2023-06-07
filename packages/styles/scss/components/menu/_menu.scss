@@ -106,6 +106,10 @@
     white-space: nowrap;
   }
 
+  .#{$prefix}--menu-item__shortcut {
+    display: flex;
+  }
+
   .#{$prefix}--menu--with-icons > .#{$prefix}--menu-item,
   .#{$prefix}--menu--with-icons
     > .#{$prefix}--menu-item-group

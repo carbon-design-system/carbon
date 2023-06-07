@@ -46,7 +46,8 @@ const Tag = ({
   const tagClasses = classNames(`${prefix}--tag`, className, {
     [`${prefix}--tag--disabled`]: disabled,
     [`${prefix}--tag--filter`]: filter,
-    [`${prefix}--tag--${size}`]: size,
+    [`${prefix}--tag--${size}`]: size, // TODO: V12 - Remove this class
+    [`${prefix}--layout--size-${size}`]: size,
     [`${prefix}--tag--${type}`]: type,
     [`${prefix}--tag--interactive`]: other.onClick && !filter,
   });
@@ -59,15 +60,7 @@ const Tag = ({
 
   if (filter) {
     return (
-      <div
-        className={tagClasses}
-        aria-label={
-          title !== undefined
-            ? `${title} ${children}`
-            : `Clear filter ${children}`
-        }
-        id={tagId}
-        {...other}>
+      <div className={tagClasses} id={tagId} {...other}>
         <span
           className={`${prefix}--tag__label`}
           title={typeof children === 'string' ? children : null}>

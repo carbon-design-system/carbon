@@ -104,10 +104,7 @@ describe('IconSwitch', () => {
           <Workspace />
         </IconSwitch>
       );
-
-      expect(
-        container.querySelector(`.${prefix}--popover-container`)
-      ).toHaveClass(`${prefix}--popover--bottom`);
+      expect(container.firstChild).toHaveClass(`${prefix}--popover--bottom`);
     });
   });
 });

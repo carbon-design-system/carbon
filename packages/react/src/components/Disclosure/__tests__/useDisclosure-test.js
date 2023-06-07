@@ -40,9 +40,11 @@ describe('useDisclosure', () => {
     await userEvent.tab();
     expect(trigger).toHaveFocus();
 
+    // eslint-disable-next-line testing-library/no-node-access
     await userEvent.click(document.activeElement);
     expect(content).toBeVisible();
 
+    // eslint-disable-next-line testing-library/no-node-access
     await userEvent.click(document.activeElement);
     expect(content).not.toBeVisible();
   });

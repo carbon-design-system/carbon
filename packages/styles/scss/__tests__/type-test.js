@@ -51,6 +51,8 @@ describe('@carbon/styles/scss/type', () => {
     });
     expect(api.variables).toMatchInlineSnapshot(`
       Array [
+        "caption-01",
+        "caption-02",
         "label-01",
         "label-02",
         "helper-text-01",

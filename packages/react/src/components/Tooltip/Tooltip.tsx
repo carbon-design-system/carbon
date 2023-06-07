@@ -17,7 +17,7 @@ import {
   getInteractiveContent,
 } from '../../internal/useNoInteractiveChildren';
 import { usePrefix } from '../../internal/usePrefix';
-import { PolymorphicProps } from '../../types/common';
+import { type PolymorphicProps } from '../../types/common';
 
 interface TooltipBaseProps {
   /**
@@ -96,7 +96,7 @@ function Tooltip<T extends React.ElementType>({
   closeOnActivation = false,
   ...rest
 }: TooltipProps<T>) {
-  const containerRef = useRef<Element>(null);
+  const containerRef = useRef<HTMLElement>(null);
   const tooltipRef = useRef<HTMLSpanElement>(null);
   const [open, setOpen] = useDelayedState(defaultOpen);
   const id = useId('tooltip');
@@ -186,12 +186,14 @@ function Tooltip<T extends React.ElementType>({
       onMouseLeave={onMouseLeave}
       open={open}
       ref={containerRef}>
-      {child !== undefined
-        ? React.cloneElement(child, {
-            ...triggerProps,
-            ...getChildEventHandlers(child.props),
-          })
-        : null}
+      <div className={`${prefix}--tooltip-trigger__wrapper`}>
+        {child !== undefined
+          ? React.cloneElement(child, {
+              ...triggerProps,
+              ...getChildEventHandlers(child.props),
+            })
+          : null}
+      </div>
       <PopoverContent
         aria-hidden="true"
         className={`${prefix}--tooltip-content`}
