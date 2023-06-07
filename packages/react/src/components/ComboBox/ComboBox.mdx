@@ -20,6 +20,7 @@ import ComboBox from '../ComboBox';
 - [initialSelectedItem](#initialselecteditem)
 - [itemToElement](#itemtoelement)
 - [itemToString](#itemtostring)
+- [shouldFilterItem](#shouldfilteritem)
 - [With Layer](#with-layer)
 - [Feedback](#feedback)
 
@@ -68,7 +69,7 @@ _in addition to_ a placeholder.
 If you want the Combobox to render with a value already selected, but do not
 want to fully control the component, you can use `initialSelectedItem`
 
-```
+```jsx
 const items = ['Option 1', 'Option 2', 'Option 3']
 
 <Combobox initialSelectedItem={items[2]} />;
@@ -80,16 +81,16 @@ The Combobox takes in an `items` array and can then be formatted by
 `itemToElement` and `itemToString`. `itemToElement` allows you to wrap each
 dropdown item in a custom element.
 
-```
+```jsx
 <Combobox
   items={[
-    { id: 'option-0', text: 'Option 0'  },
-    { id: 'option-1', text: 'Option 1'  },
-    { id: 'option-2', text: 'Option 2'  },
+    { id: 'option-0', text: 'Option 0' },
+    { id: 'option-1', text: 'Option 1' },
+    { id: 'option-2', text: 'Option 2' },
   ]}
   itemToElement={(item) =>
     item ? (
-      <span className="test" style={{ color: 'red'  }}>
+      <span className="test" style={{ color: 'red' }}>
         {item.text} 🔥
       </span>
     ) : (
@@ -105,7 +106,7 @@ dropdown item in a custom element.
 If the `items` array is not an array of strings, you'll need to use
 `itemToString` to grab the text to be used as the `Combobox` item text.
 
-```
+```jsx
 <Combobox
   items={[
     { id: 'option-0', text: 'Option 0' },
@@ -114,6 +115,36 @@ If the `items` array is not an array of strings, you'll need to use
   ]}
   itemToString={(item) => (item ? item.text : '')}
 />
+```
+
+## `shouldFilterItem`
+
+By default, the Combobox will _not_ filter out items that do not match the input
+string. If you would like to hide items that do not match what the user is
+typing, you can pass in your own filtering function to the `shouldFilterItem`
+prop.
+
+<ComboBox
+  id="carbon-combobox"
+  items={['Apple', 'Orange', 'Banana']}
+  titleText="ComboBox title"
+  helperText="Combobox helper text"
+  shouldFilterItem={(menu) =>
+    menu?.item?.toLowerCase().includes(menu?.inputValue?.toLowerCase())
+  }
+/>
+
+```jsx
+const filterItems = (menu) => {
+  return menu?.item?.toLowerCase().includes(menu?.inputValue?.toLowerCase());
+};
+
+<Combobox
+  titleText="ComboBox title"
+  helperText="Combobox helper text"
+  items={['Apple', 'Orange', 'Banana']}
+  shouldFilterItem={filterItems}
+/>;
 ```
 
 ## With Layer

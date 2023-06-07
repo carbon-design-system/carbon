@@ -36,7 +36,7 @@ The `Menu` component's `children` must be a collection of any of these subcompon
 
 You must provide a reference point for the `Menu` to position itself at. The props `x` and `y` either accept a single number each or an array of two numbers.
 
-The latter option is used to specify the trigger boundaries. For example, Carbon uses this for the [OverflowMenuV2](http://localhost:3000/?path=/story/experimental-unstable-overflowmenuv2--overflow-menu-v-2) where it passes `[x, x + width]` and `[y, y + height]` of the trigger button. This way, the `Menu` is able to automatically determine its ideal position on the screen (which side to open at and in which direction) while always staying visually attached to the trigger.
+The latter option is used to specify the trigger boundaries. For example, Carbon uses this for the [next version of OverflowMenu](/story/experimental-feature-flags-overflowmenu--overflow-menu) where we pass `[x, x + width]` and `[y, y + height]` of the trigger button. This way, the `Menu` is able to automatically determine its ideal position on the screen (which side to open at and in which direction) while always staying visually attached to the trigger.
 Each `MenuItem` that has `children` and therfore a submenu uses the same approach under the hood to correctly position the submenu.
 
 ## Subcomponents
@@ -149,7 +149,7 @@ const items = [
 
 ## Context menu (right-click menu)
 
-The `Menu` component is suited to be used as a context menu for complex web applications. To make this easy, Carbon provides a [`useContextMenu`](http://localhost:3000/?path=/story/experimental-unstable-usecontextmenu--use-context-menu) react hook. Please refer to the [hook's documentation](http://localhost:3000/?path=/docs/experimental-unstable-usecontextmenu--use-context-menu) for more details.
+The `Menu` component is suited to be used as a context menu for complex web applications. To make this easy, Carbon provides a [`useContextMenu`](/story/hooks-usecontextmenu--use-context-menu) react hook. Please refer to the [hook's documentation](/docs/hooks-usecontextmenu--use-context-menu) for more details.
 
 ## Component API
 

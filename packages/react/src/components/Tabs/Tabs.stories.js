@@ -100,6 +100,9 @@ export const Dismissable = () => {
   };
 
   const handleCloseTabRequest = (tabIndex) => {
+    if (renderedTabs[tabIndex].disabled) {
+      return;
+    }
     const selectedTab = renderedTabs[selectedIndex];
 
     const filteredTabs = renderedTabs.filter((_, index) => index !== tabIndex);
@@ -168,6 +171,9 @@ export const DismissableWithIcons = ({ contained }) => {
   };
 
   const handleCloseTabRequest = (tabIndex) => {
+    if (renderedTabs[tabIndex].disabled) {
+      return;
+    }
     const selectedTab = renderedTabs[selectedIndex];
 
     const filteredTabs = renderedTabs.filter((_, index) => index !== tabIndex);
