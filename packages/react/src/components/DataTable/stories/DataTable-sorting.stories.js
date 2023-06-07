@@ -16,6 +16,7 @@ import DataTable, {
   TableRow,
 } from '..';
 import { rows, headers } from './shared';
+import mdx from '../DataTable.mdx';
 
 export default {
   title: 'Components/DataTable/Sorting',
@@ -28,6 +29,11 @@ export default {
     TableHead,
     TableHeader,
     TableRow,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
   },
 };
 

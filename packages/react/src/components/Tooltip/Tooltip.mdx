@@ -1,4 +1,5 @@
-import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
+import { Story, ArgsTable, Canvas } from '@storybook/blocks';
+import * as TooltipStories from './Tooltip.stories';
 
 # Tooltip
 
@@ -41,7 +42,7 @@ the component you provide renders an interactive element. In addition, you can
 specify the contents of the popup through the `label` or `description` prop.
 
 <Canvas>
-  <Story id="components-tooltip--default" />
+  <Story of={TooltipStories.Default} />
 </Canvas>
 
 ### Toggletips vs Tooltips
@@ -80,7 +81,7 @@ Similarly, if you provide `align="bottom"` then the tooltip will render below
 your component.
 
 <Canvas>
-  <Story id="components-tooltip--alignment" />
+  <Story of={TooltipStories.Alignment} />
 </Canvas>
 
 You can also configure the placement of the caret, if it is enabled, by choosing
@@ -101,7 +102,7 @@ are shown. You can also customize the delay between when a tooltip is dismissed
 and its contents are hidden.
 
 <Canvas>
-  <Story id="components-tooltip--duration" />
+  <Story of={TooltipStories.Duration} />
 </Canvas>
 
 The `enterDelayMs` prop allows you to provide a time, in milliseconds, that the

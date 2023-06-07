@@ -18,6 +18,7 @@ import DataTable, {
   TableSelectRow,
 } from '..';
 import { rows, headers } from './shared';
+import mdx from '../DataTable.mdx';
 import { action } from '@storybook/addon-actions';
 
 export default {
@@ -33,6 +34,11 @@ export default {
     TableHead,
     TableHeader,
     TableRow,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
   },
 };
 

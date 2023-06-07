@@ -1,4 +1,5 @@
-import { ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { ArgsTable, Story, Canvas } from '@storybook/blocks';
+import * as ThemeStories from './Theme.stories';
 
 # Theme
 
@@ -36,7 +37,7 @@ files by writing:
 You also get this file when you import `@carbon/react` directly in your Sass.
 
 <Canvas>
-  <Story id="components-theme--default" />
+  <Story of={ThemeStories.Default} />
 </Canvas>
 
 ## Setting the global theme
@@ -78,7 +79,7 @@ function ExamplePage() {
 ```
 
 <Canvas>
-  <Story id="components-theme--default" />
+  <Story of={ThemeStories.Default} />
 </Canvas>
 
 ## Getting the current theme in a component
@@ -97,7 +98,7 @@ function ExampleComponent() {
 ```
 
 <Canvas>
-  <Story id="components-theme--use-theme" />
+  <Story of={ThemeStories.UseTheme} />
 </Canvas>
 
 ## Component API

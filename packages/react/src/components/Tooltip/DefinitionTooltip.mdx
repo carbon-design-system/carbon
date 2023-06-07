@@ -1,4 +1,5 @@
-import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
+import { Story, ArgsTable, Canvas } from '@storybook/blocks';
+import * as DefinitionTooltipStories from './DefinitionTooltip.stories';
 
 # DefinitionTooltip
 
@@ -33,7 +34,7 @@ You can customize the contents of the tooltip through the `definition` prop. You
 can customize the term by providing your own `children` to this component.
 
 <Canvas>
-  <Story id="components-definitiontooltip--default" />
+  <Story of={DefinitionTooltipStories.Default} />
 </Canvas>
 
 ### Customizing the content of a definition tooltip

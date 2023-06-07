@@ -30,6 +30,7 @@ import DataTable, {
 } from '..';
 
 import { batchActionClick, rows, headers } from './shared';
+import mdx from '../DataTable.mdx';
 
 export default {
   title: 'Components/DataTable/Batch Actions',
@@ -49,6 +50,11 @@ export default {
     TableHead,
     TableHeader,
     TableRow,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
   },
 };
 

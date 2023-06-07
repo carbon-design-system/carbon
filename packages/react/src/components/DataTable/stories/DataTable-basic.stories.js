@@ -18,6 +18,7 @@ const {
   TableRow,
 } = DataTable;
 
+import mdx from '../DataTable.mdx';
 import './datatable-story.scss';
 
 export default {
@@ -31,6 +32,11 @@ export default {
     TableHeader,
     TableBody,
     TableCell,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
   },
 };
 

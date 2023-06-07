@@ -25,6 +25,7 @@ import {
   TableToolbarSearch,
   TableToolbarMenu,
 } from '..';
+import mdx from '../DataTable.mdx';
 import { headers, rows } from './shared';
 
 export default {
@@ -38,6 +39,11 @@ export default {
     TableHeader,
     TableBody,
     TableCell,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
   },
 };
 

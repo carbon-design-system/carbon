@@ -1,5 +1,6 @@
-import { Props, Preview, Story } from '@storybook/addon-docs';
+import { ArgsTable, Canvas, Story } from '@storybook/blocks';
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from './Tabs';
+import * as TabsStories from './Tabs.stories';
 
 # Tabs
 
@@ -32,25 +33,25 @@ what is in rendered inside of `Tab` and `TabPanel`.
 
 ### Line Tabs
 
-<Preview>
-  <Story id="components-tabs--line" />
-</Preview>
+<Canvas>
+  <Story of={TabsStories.Default} />
+</Canvas>
 
 ### Contained Tabs
 
-<Preview>
-  <Story id="components-tabs--contained" />
-</Preview>
+<Canvas>
+  <Story of={TabsStories.Contained} />
+</Canvas>
 
 ### Icon Tabs
 
-<Preview>
-  <Story id="components-tabs--icon-only" />
-</Preview>
+<Canvas>
+  <Story of={TabsStories.IconOnly} />
+</Canvas>
 
-<Preview>
-  <Story id="components-tabs--icon-20-only" />
-</Preview>
+<Canvas>
+  <Story of={TabsStories.Icon20Only} />
+</Canvas>
 
 ### Dismissable Tabs
 
@@ -169,13 +170,13 @@ return (
 
 And there you have it! Working dismissable tabs.
 
-<Preview>
-  <Story id="components-tabs--dismissable" />
-</Preview>
+<Canvas>
+  <Story of={TabsStories.Dismissable} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ### Tab - render content on click
 

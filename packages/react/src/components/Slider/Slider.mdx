@@ -1,4 +1,5 @@
-import { Props, Story, Preview } from '@storybook/addon-docs';
+import { ArgsTable, Story, Canvas } from '@storybook/blocks';
+import * as SliderStories from './Slider.stories';
 
 # Slider
 
@@ -20,13 +21,13 @@ import { Props, Story, Preview } from '@storybook/addon-docs';
 Sliders provide a visual indication of adjustable content, where the user can
 increase or decrease the value by moving the handle along a horizontal track.
 
-<Preview>
-  <Story id="components-slider--playground" />
-</Preview>
+<Canvas>
+  <Story of={SliderStories.Playground} />
+</Canvas>
 
 ## Component API
 
-###
+<ArgsTable />
 
 ### `step` Prop
 
@@ -35,11 +36,9 @@ input must adhere to the step value. For example, if the `step` is `5`, with a
 range of values from `0-100`, `40` would be valid, and `42` would be considered
 `invalid`.
 
-<Preview>
-  <Story id="components-slider--playground" />
-</Preview>
-
-<Props />
+<Canvas>
+  <Story of={SliderStories.Playground} />
+</Canvas>
 
 ## Feedback
 

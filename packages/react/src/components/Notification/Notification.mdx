@@ -1,10 +1,4 @@
 import { Story, Canvas, ArgsTable, Meta } from '@storybook/blocks';
-import { ActionableNotification } from './Notification';
-import * as ActionableNotificationStories from './stories/ActionableNotification.stories';
-import * as InlineNotificationStories from './stories/InlineNotification.stories';
-import * as ToastNotificationStories from './stories/ToastNotification.stories';
-
-<Meta title="Components/Notifications" name="Docs" />
 
 # Notification
 
@@ -29,24 +23,24 @@ There are 3 different types of notification components:
 
 ## Component API
 
-<ArgsTable of={ActionableNotification} />
+<ArgsTable />
 
 ## Actionable
 
 <Canvas>
-  <Story of={ActionableNotificationStories.Playground} />
+  <Story id="components-notifications-actionable--playground" />
 </Canvas>
 
 ## Inline
 
 <Canvas>
-  <Story of={InlineNotificationStories.Playground} />
+  <Story id="components-notifications-inline--playground" />
 </Canvas>
 
 ## Toast
 
 <Canvas>
-  <Story of={ToastNotificationStories.Playground} />
+  <Story id="components-notifications-toast--playground" />
 </Canvas>
 
 ## Feedback
