@@ -199,17 +199,28 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     ref
   ) {
     const prefix = usePrefix();
-    const [isOpen, setisOpen] = useState<boolean>(!!open);
-    const [prevOpen, setPrevOpen] = useState<boolean>(!!open);
+    const [isOpen, setIsOpen] = useState<boolean>(!!open);
+    const [wasOpen, setWasOpen] = useState<boolean>(!!open);
     const innerModal = useRef<HTMLDivElement>(null);
     const button = useRef<HTMLButtonElement>(null);
     const startSentinel = useRef<HTMLButtonElement>(null);
     const endSentinel = useRef<HTMLButtonElement>(null);
 
-    if (open !== prevOpen) {
-      setisOpen(!!open);
-      setPrevOpen(!!open);
-    }
+    // Kepp track of modal open/close state
+    // and propagate it to the document.body
+    useEffect(() => {
+      if (open !== wasOpen) {
+        setIsOpen(!!open);
+        setWasOpen(!!open);
+        toggleClass(document.body, `${prefix}--body--with-modal-open`, !!open);
+      }
+    }, [open, wasOpen, prefix]);
+    // Remove the document.body className on unmount
+    useEffect(() => {
+      return () => {
+        toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
+      };
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     function handleKeyDown(evt: KeyboardEvent) {
       if (match(evt, keys.Escape)) {
@@ -218,19 +229,12 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
 
       onKeyDown?.(evt);
     }
-
     function handleMousedown(evt: MouseEvent) {
-      if (
-        !innerModal.current?.contains(evt.target as Node) &&
-        preventCloseOnClickOutside
-      ) {
-        return;
-      }
-      if (innerModal.current?.contains(evt.target as Node)) {
+      const isInside = innerModal.current?.contains(evt.target as Node);
+      if (!isInside && !preventCloseOnClickOutside) {
         closeModal(evt);
       }
     }
-
     function handleBlur({
       target: oldActiveNode,
       relatedTarget: currentActiveNode,
@@ -254,7 +258,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
 
     function closeModal(evt) {
       if (!onClose || onClose(evt) !== false) {
-        setisOpen(false);
+        setIsOpen(false);
       }
     }
 
@@ -299,21 +303,6 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
           return child;
       }
     });
-
-    useEffect(() => {
-      if (prevOpen !== isOpen) {
-        toggleClass(document.body, `${prefix}--body--with-modal-open`, isOpen);
-      }
-    });
-
-    useEffect(() => {
-      return () =>
-        toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    useEffect(() => {
-      toggleClass(document.body, `${prefix}--body--with-modal-open`, !!open);
-    }, [open, prefix]);
 
     useEffect(() => {
       const focusButton = (focusContainerElement) => {
