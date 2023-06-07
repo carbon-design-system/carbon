@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -86,7 +86,7 @@ describe('ComboButton', () => {
       });
     });
 
-    describe('supports props.tooltipAlign', () => {
+    describe('supports props.tooltipAlignment', () => {
       const alignments = [
         'top',
         'top-left',
@@ -99,9 +99,9 @@ describe('ComboButton', () => {
       ];
 
       alignments.forEach((alignment) => {
-        it(`tooltipAlign="${alignment}"`, () => {
+        it(`tooltipAlignment="${alignment}"`, () => {
           const { container } = render(
-            <ComboButton label="Primary action" tooltipAlign={alignment}>
+            <ComboButton label="Primary action" tooltipAlignment={alignment}>
               <MenuItem label="Additional action" />
             </ComboButton>
           );
