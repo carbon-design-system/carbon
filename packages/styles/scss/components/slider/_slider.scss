@@ -46,7 +46,7 @@
   }
 
   .#{$prefix}--slider__range-label {
-    @include type-style('code-02');
+    @include type-style('body-compact-01');
 
     color: $text-primary;
     white-space: nowrap;
