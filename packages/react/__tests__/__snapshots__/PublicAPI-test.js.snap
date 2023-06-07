@@ -3913,6 +3913,9 @@ Map {
   "HeaderMenuItem" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "as": Object {
+        "type": "elementType",
+      },
       "children": Object {
         "isRequired": true,
         "type": "node",
@@ -3920,9 +3923,7 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "element": Object {
-        "type": "elementType",
-      },
+      "element": [Function],
       "isActive": Object {
         "type": "bool",
       },
@@ -3944,6 +3945,9 @@ Map {
       "prefix": "IBM",
     },
     "propTypes": Object {
+      "as": Object {
+        "type": "elementType",
+      },
       "children": Object {
         "isRequired": true,
         "type": "node",
@@ -3951,9 +3955,7 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "element": Object {
-        "type": "elementType",
-      },
+      "element": [Function],
       "href": Object {
         "type": "string",
       },
@@ -6993,6 +6995,9 @@ Map {
   "SideNavLink" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "as": Object {
+        "type": "elementType",
+      },
       "children": Object {
         "isRequired": true,
         "type": "node",
@@ -7000,9 +7005,7 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "element": Object {
-        "type": "elementType",
-      },
+      "element": [Function],
       "isActive": Object {
         "type": "bool",
       },
