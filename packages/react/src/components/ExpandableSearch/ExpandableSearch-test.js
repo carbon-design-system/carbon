@@ -29,7 +29,7 @@ describe('ExpandableSearch', () => {
 
     it('is expanded by default if expanded prop is set', () => {
       const { container } = render(
-        <ExpandableSearch expanded labelText="test-search" />
+        <ExpandableSearch isExpanded labelText="test-search" />
       );
 
       // There is not a reliable way to test for expansion other than by class.

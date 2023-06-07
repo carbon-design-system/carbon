@@ -58,7 +58,7 @@ export interface SearchProps extends InputPropsBase {
   /**
    * Specify whether or not ExpandableSearch should render expanded or not
    */
-  expanded?: boolean;
+  isExpanded?: boolean;
 
   /**
    * Specify a custom `id` for the input
@@ -126,7 +126,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
     closeButtonLabelText = 'Clear search input',
     defaultValue,
     disabled,
-    expanded = true,
+    isExpanded = true,
     id,
     labelText,
     // @ts-expect-error: deprecated prop
@@ -170,7 +170,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
 
   const clearClasses = cx({
     [`${prefix}--search-close`]: true,
-    [`${prefix}--search-close--hidden`]: !hasContent || !expanded,
+    [`${prefix}--search-close--hidden`]: !hasContent || !isExpanded,
   });
 
   if (value !== prevValue) {
@@ -275,14 +275,14 @@ Search.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Specify whether or not ExpandableSearch should render expanded or not
-   */
-  expanded: PropTypes.bool,
-
-  /**
    * Specify a custom `id` for the input
    */
   id: PropTypes.string,
+
+  /**
+   * Specify whether or not ExpandableSearch should render expanded or not
+   */
+  isExpanded: PropTypes.bool,
 
   /**
    * Provide the label text for the Search icon

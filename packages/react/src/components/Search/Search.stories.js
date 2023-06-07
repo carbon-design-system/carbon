@@ -79,7 +79,7 @@ export const Test = () => (
     <p>Expandable with default value and expanded prop</p>
     <ExpandableSearch
       defaultValue="This is a test"
-      expanded
+      isExpanded
       size="lg"
       labelText="Search"
       closeButtonLabelText="Clear search input"
@@ -90,7 +90,7 @@ export const Test = () => (
     <br />
     <p>Expandable with expanded prop</p>
     <ExpandableSearch
-      expanded
+      isExpanded
       size="lg"
       labelText="Search"
       closeButtonLabelText="Clear search input"
