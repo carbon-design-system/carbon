@@ -56,6 +56,11 @@ export interface SearchProps extends InputPropsBase {
   disabled?: boolean;
 
   /**
+   * Specify whether or not ExpandableSearch should render expanded or not
+   */
+  expanded?: boolean;
+
+  /**
    * Specify a custom `id` for the input
    */
   id?: string;
@@ -121,6 +126,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
     closeButtonLabelText = 'Clear search input',
     defaultValue,
     disabled,
+    expanded = true,
     id,
     labelText,
     // @ts-expect-error: deprecated prop
@@ -139,6 +145,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
   },
   forwardRef
 ) {
+  const hasPropValue = value || defaultValue ? true : false;
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -146,7 +153,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
   const inputId = useId('search-input');
   const uniqueId = id || inputId;
   const searchId = `${uniqueId}-search`;
-  const [hasContent, setHasContent] = useState(value || defaultValue || false);
+  const [hasContent, setHasContent] = useState(hasPropValue || false);
   const [prevValue, setPrevValue] = useState(value);
   const searchClasses = cx(
     {
@@ -160,9 +167,10 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
     },
     className
   );
+
   const clearClasses = cx({
     [`${prefix}--search-close`]: true,
-    [`${prefix}--search-close--hidden`]: !hasContent,
+    [`${prefix}--search-close--hidden`]: !hasContent || !expanded,
   });
 
   if (value !== prevValue) {
@@ -265,6 +273,11 @@ Search.propTypes = {
    * Specify whether the `<input>` should be disabled
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Specify whether or not ExpandableSearch should render expanded or not
+   */
+  expanded: PropTypes.bool,
 
   /**
    * Specify a custom `id` for the input
