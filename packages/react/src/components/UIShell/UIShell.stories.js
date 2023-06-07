@@ -624,8 +624,7 @@ export const HeaderBaseWActionsAndSwitcher = (args) => (
           </HeaderGlobalBar>
           <HeaderPanel
             expanded={isSideNavExpanded}
-            onHeaderPanelFocus={onClickSideNavExpand}
-            href="#main-content">
+            onHeaderPanelFocus={onClickSideNavExpand}>
             <Switcher
               aria-label="Switcher Container"
               expanded={isSideNavExpanded}>
