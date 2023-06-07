@@ -7,8 +7,44 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { PropsWithChildren, ReactHTML } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
+
+interface AspectRatioProps {
+  /**
+   * Provide a custom component or string to be rendered as
+   * the outermost node of the component. This is useful if you want
+   * to deviate from the default `div` tag, where you could specify
+   * `section` or `article` instead.
+   *
+   * ```jsx
+   * <AspectRatio as="article">My content</AspectRatio>
+   * ```
+   */
+  as?: keyof ReactHTML;
+
+  /**
+   * Specify a class name for the outermost node
+   * of the component.
+   */
+  className?: string;
+
+  /**
+   * Specify the ratio to be used by the aspect ratio
+   * container. This will  determine what aspect ratio your content
+   * will be displayed in.
+   */
+  ratio?:
+    | '1x1'
+    | '2x3'
+    | '3x2'
+    | '3x4'
+    | '4x3'
+    | '1x2'
+    | '2x1'
+    | '9x16'
+    | '16x9';
+}
 
 /**
  * The AspectRatio component provides a `ratio` prop that will be used to
@@ -16,13 +52,13 @@ import { usePrefix } from '../../internal/usePrefix';
  * This is often useful alongside our grid components, or for media assets like
  * images or videos.
  */
-function AspectRatio({
+const AspectRatio = ({
   as: BaseComponent = 'div',
   className: containerClassName,
   children,
   ratio = '1x1',
   ...rest
-}) {
+}: PropsWithChildren<AspectRatioProps>) => {
   const prefix = usePrefix();
   const className = cx(
     containerClassName,
@@ -34,7 +70,7 @@ function AspectRatio({
       {children}
     </BaseComponent>
   );
-}
+};
 
 AspectRatio.propTypes = {
   /**

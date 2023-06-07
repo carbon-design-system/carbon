@@ -16,13 +16,15 @@ function Accordion({
   className: customClassName,
   disabled = false,
   isFlush = false,
-  size = 'md',
+  size,
   ...rest
 }) {
   const prefix = usePrefix();
+
   const className = cx(`${prefix}--accordion`, customClassName, {
     [`${prefix}--accordion--${align}`]: align,
-    [`${prefix}--accordion--${size}`]: size,
+    [`${prefix}--accordion--${size}`]: size, // TODO: V12 - Remove this class
+    [`${prefix}--layout--size-${size}`]: size,
     [`${prefix}--accordion--flush`]: isFlush && align !== 'start',
   });
   return (
