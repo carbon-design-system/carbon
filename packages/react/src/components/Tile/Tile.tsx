@@ -278,6 +278,7 @@ export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
 
   /**
    * The `name` of the `<input>`.
+   * @deprecated
    */
   name?: string;
 
@@ -313,6 +314,7 @@ export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
 
   /**
    * The value of the `<input>`.
+   * @deprecated
    */
   value: string | number;
 }
@@ -328,14 +330,12 @@ export const SelectableTile = React.forwardRef<
     id,
     // @ts-expect-error: Deprecated prop
     light,
-    name,
     onClick = () => {},
     onChange = () => {},
     onKeyDown = () => {},
     selected = false,
     tabIndex = 0,
     title = 'title',
-    value = 'value',
     ...rest
   },
   ref
@@ -343,20 +343,17 @@ export const SelectableTile = React.forwardRef<
   const prefix = usePrefix();
 
   const clickHandler = onClick;
-
   const keyDownHandler = onKeyDown;
 
-  const [isSelected, setIsSelected] = useState(selected);
-  const [prevSelected, setPrevSelected] = useState(selected);
+  const [isSelected, setIsSelected] = useState<boolean>(selected);
+  const [prevSelected, setPrevSelected] = useState<boolean>(selected);
 
   const classes = cx(
     `${prefix}--tile`,
     `${prefix}--tile--selectable`,
-    {
-      [`${prefix}--tile--is-selected`]: isSelected,
-      [`${prefix}--tile--light`]: light,
-      [`${prefix}--tile--disabled`]: disabled,
-    },
+    isSelected && `${prefix}--tile--is-selected`,
+    light && `${prefix}--tile--light`,
+    disabled && `${prefix}--tile--disabled`,
     className
   );
 
@@ -450,6 +447,7 @@ SelectableTile.propTypes = {
 
   /**
    * The `name` of the `<input>`.
+   * @deprecated
    */
   name: PropTypes.string,
 
@@ -485,6 +483,7 @@ SelectableTile.propTypes = {
 
   /**
    * The value of the `<input>`.
+   * @deprecated
    */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
