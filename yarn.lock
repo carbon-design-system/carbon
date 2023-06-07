@@ -2082,6 +2082,7 @@ __metadata:
     babel-preset-carbon: ^0.5.0
     browserify-zlib: ^0.2.0
     browserslist-config-carbon: ^11.2.0
+    canvas: ^2.11.2
     classnames: 2.3.2
     clipboardy: ^2.1.0
     copy-to-clipboard: ^3.3.1
@@ -4372,6 +4373,25 @@ __metadata:
     npmlog: ^6.0.2
     write-file-atomic: ^4.0.1
   checksum: 2b2cba47132cd8765575ac241ef9a837bc73e62b432bc27d7c8a0749ce2814f43ff68e2d7e8eae06819e77978c10ec4ec48dc89aecaa772884ded6be7a8209af
+  languageName: node
+  linkType: hard
+
+"@mapbox/node-pre-gyp@npm:^1.0.0":
+  version: 1.0.10
+  resolution: "@mapbox/node-pre-gyp@npm:1.0.10"
+  dependencies:
+    detect-libc: ^2.0.0
+    https-proxy-agent: ^5.0.0
+    make-dir: ^3.1.0
+    node-fetch: ^2.6.7
+    nopt: ^5.0.0
+    npmlog: ^5.0.1
+    rimraf: ^3.0.2
+    semver: ^7.3.5
+    tar: ^6.1.11
+  bin:
+    node-pre-gyp: bin/node-pre-gyp
+  checksum: 1a98db05d955b74dad3814679593df293b9194853698f3f5f1ed00ecd93128cdd4b14fb8767fe44ac6981ef05c23effcfdc88710e7c1de99ccb6f647890597c8
   languageName: node
   linkType: hard
 
@@ -11256,6 +11276,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"canvas@npm:^2.11.2":
+  version: 2.11.2
+  resolution: "canvas@npm:2.11.2"
+  dependencies:
+    "@mapbox/node-pre-gyp": ^1.0.0
+    nan: ^2.17.0
+    node-gyp: latest
+    simple-get: ^3.0.3
+  checksum: 61e554aef80022841dc836964534082ec21435928498032562089dfb7736215f039c7d99ee546b0cf10780232d9bf310950f8b4d489dc394e0fb6f6adfc97994
+  languageName: node
+  linkType: hard
+
 "capital-case@npm:^1.0.4":
   version: 1.0.4
   resolution: "capital-case@npm:1.0.4"
@@ -13726,6 +13758,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"decompress-response@npm:^4.2.0":
+  version: 4.2.1
+  resolution: "decompress-response@npm:4.2.1"
+  dependencies:
+    mimic-response: ^2.0.0
+  checksum: 4e783ca4dfe9417354d61349750fe05236f565a4415a6ca20983a311be2371debaedd9104c0b0e7b36e5f167aeaae04f84f1a0b3f8be4162f1d7d15598b8fdba
+  languageName: node
+  linkType: hard
+
 "decompress-response@npm:^6.0.0":
   version: 6.0.0
   resolution: "decompress-response@npm:6.0.0"
@@ -14027,6 +14068,13 @@ __metadata:
   bin:
     detect-libc: ./bin/detect-libc.js
   checksum: daaaed925ffa7889bd91d56e9624e6c8033911bb60f3a50a74a87500680652969dbaab9526d1e200a4c94acf80fc862a22131841145a0a8482d60a99c24f4a3e
+  languageName: node
+  linkType: hard
+
+"detect-libc@npm:^2.0.0":
+  version: 2.0.1
+  resolution: "detect-libc@npm:2.0.1"
+  checksum: ccb05fcabbb555beb544d48080179c18523a343face9ee4e1a86605a8715b4169f94d663c21a03c310ac824592f2ba9a5270218819bb411ad7be578a527593d7
   languageName: node
   linkType: hard
 
@@ -23000,6 +23048,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"mimic-response@npm:^2.0.0":
+  version: 2.1.0
+  resolution: "mimic-response@npm:2.1.0"
+  checksum: 014fad6ab936657e5f2f48bd87af62a8e928ebe84472aaf9e14fec4fcb31257a5edff77324d8ac13ddc6685ba5135cf16e381efac324e5f174fb4ddbf902bf07
+  languageName: node
+  linkType: hard
+
 "mimic-response@npm:^3.1.0":
   version: 3.1.0
   resolution: "mimic-response@npm:3.1.0"
@@ -23409,12 +23464,12 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"nan@npm:^2.12.1":
-  version: 2.14.0
-  resolution: "nan@npm:2.14.0"
+"nan@npm:^2.12.1, nan@npm:^2.17.0":
+  version: 2.17.0
+  resolution: "nan@npm:2.17.0"
   dependencies:
     node-gyp: latest
-  checksum: 6dfd00d9bf71769898dfab21ef9d2ef278b392c586147616a718b995d6a582f5caa7f2ca0f83ce956fb0def698aca813b2b6fd4598125cd16bdc85924c34a37d
+  checksum: ec609aeaf7e68b76592a3ba96b372aa7f5df5b056c1e37410b0f1deefbab5a57a922061e2c5b369bae9c7c6b5e6eecf4ad2dac8833a1a7d3a751e0a7c7f849ed
   languageName: node
   linkType: hard
 
@@ -29578,6 +29633,24 @@ fsevents@^1.2.7:
   version: 4.0.1
   resolution: "signal-exit@npm:4.0.1"
   checksum: 832043367dca23e61ab6033e8b41c595fc805119bfe4fee63dea201cdc809a8b086bc54597bbbc1b2cde1a63c7dd554d1295ed2cca92db598233834a0b59b281
+  languageName: node
+  linkType: hard
+
+"simple-concat@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "simple-concat@npm:1.0.1"
+  checksum: 4d211042cc3d73a718c21ac6c4e7d7a0363e184be6a5ad25c8a1502e49df6d0a0253979e3d50dbdd3f60ef6c6c58d756b5d66ac1e05cda9cacd2e9fc59e3876a
+  languageName: node
+  linkType: hard
+
+"simple-get@npm:^3.0.3":
+  version: 3.1.1
+  resolution: "simple-get@npm:3.1.1"
+  dependencies:
+    decompress-response: ^4.2.0
+    once: ^1.3.1
+    simple-concat: ^1.0.0
+  checksum: 80195e70bf171486e75c31e28e5485468195cc42f85940f8b45c4a68472160144d223eb4d07bc82ef80cb974b7c401db021a540deb2d34ac4b3b8883da2d6401
   languageName: node
   linkType: hard
 
