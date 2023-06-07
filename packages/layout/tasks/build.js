@@ -15,7 +15,14 @@ const { reporter } = require('@carbon/cli-reporter');
 const { types: t, generate } = require('@carbon/scss-generator');
 const fs = require('fs-extra');
 const path = require('path');
-const { container, iconSize, spacing, fluidSpacing, sizes } = require('../lib');
+const {
+  container,
+  iconSize,
+  spacing,
+  fluidSpacing,
+  sizes,
+  layout,
+} = require('../lib');
 
 async function build() {
   reporter.info('Building scss files for layout...');
@@ -81,6 +88,12 @@ async function build() {
       filepath: path.join(SCSS_DIR, '_fluid-spacing.scss'),
       builder() {
         return buildModulesTokenFile(fluidSpacing, 'fluid-spacing', '');
+      },
+    },
+    {
+      filepath: path.join(SCSS_DIR, '_layout.scss'),
+      builder() {
+        return buildModulesTokenFile(layout, 'layout');
       },
     },
   ];

@@ -71,12 +71,16 @@
     height: 1rem;
   }
 
-  .#{$prefix}--list-box__wrapper--fluid:not(.#{$prefix}--list-box__wrapper--fluid--condensed)
+  .#{$prefix}--list-box__wrapper--fluid:not(
+      .#{$prefix}--list-box__wrapper--fluid--condensed
+    )
     .#{$prefix}--list-box__menu-item {
     height: $spacing-10;
   }
 
-  .#{$prefix}--list-box__wrapper--fluid:not(.#{$prefix}--list-box__wrapper--fluid--condensed)
+  .#{$prefix}--list-box__wrapper--fluid:not(
+      .#{$prefix}--list-box__wrapper--fluid--condensed
+    )
     .#{$prefix}--list-box__menu-item__selected-icon {
     top: rem(20px);
   }
@@ -122,7 +126,9 @@
   }
 
   // Invalid / Warning styles
-  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid:not(.#{$prefix}--list-box__wrapper--fluid--focus) {
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid:not(
+      .#{$prefix}--list-box__wrapper--fluid--focus
+    ) {
     @include focus-outline('invalid');
 
     z-index: 2;

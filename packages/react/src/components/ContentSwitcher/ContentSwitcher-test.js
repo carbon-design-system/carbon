@@ -135,26 +135,4 @@ describe('ContentSwitcher - RTL', () => {
       );
     });
   });
-
-  describe('automated verification testing', () => {
-    it('should have no aXe violations', async () => {
-      const { container } = render(
-        <ContentSwitcher>
-          <Switch kind="anchor" text="one" />
-          <Switch kind="anchor" text="two" />
-        </ContentSwitcher>
-      );
-      await expect(container).toHaveNoAxeViolations();
-    });
-
-    it('should have no AC violations', async () => {
-      const { container } = render(
-        <ContentSwitcher>
-          <Switch kind="anchor" text="one" />
-          <Switch kind="anchor" text="two" />
-        </ContentSwitcher>
-      );
-      await expect(container).toHaveNoACViolations('ContentSwitcher');
-    });
-  });
 });

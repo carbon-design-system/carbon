@@ -33,6 +33,7 @@ describe('Column', () => {
         <span id="test">Test</span>
       </Column>
     );
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const testNode = container.querySelector('#test');
     expect(testNode).toBeInstanceOf(HTMLElement);
   });
