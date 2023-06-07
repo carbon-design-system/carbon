@@ -123,6 +123,46 @@
     text-align: left;
     vertical-align: middle;
   }
+  .#{$prefix}--data-table.#{$prefix}--data-table--top-aligned-body {
+    &.#{$prefix}--data-table--lg
+      tr:not([data-child-row])
+      td:not(.#{$prefix}--table-expand) {
+      padding-top: $spacing-05;
+      padding-bottom: $spacing-05;
+
+      &.#{$prefix}--table-column-menu {
+        padding-top: $spacing-03;
+      }
+
+      &.#{$prefix}--table-column-checkbox:not(.#{$prefix}--table-column-radio) {
+        padding-top: rem(13px);
+      }
+    }
+
+    td {
+      vertical-align: top;
+    }
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--top-aligned-header {
+    &.#{$prefix}--data-table--lg
+      th:not(.#{$prefix}--table-expand):not(.#{$prefix}--table-sort__header) {
+      padding-top: $spacing-05;
+      padding-bottom: $spacing-05;
+
+      &.#{$prefix}--table-column-menu {
+        padding-top: $spacing-03;
+      }
+
+      &.#{$prefix}--table-column-checkbox {
+        padding-top: rem(13px);
+      }
+    }
+
+    th {
+      vertical-align: top;
+    }
+  }
 
   .#{$prefix}--data-table th[align='right'],
   .#{$prefix}--data-table td[align='right'] {
@@ -495,8 +535,14 @@
     height: calc(100% + 1px);
   }
 
-  .#{$prefix}--data-table.#{$prefix}--data-table--xs
-    .#{$prefix}--table-column-checkbox {
+  .#{$prefix}--data-table.#{$prefix}--data-table--xs:not(
+      .#{$prefix}--data-table--top-aligned-body
+    )
+    td.#{$prefix}--table-column-checkbox,
+  .#{$prefix}--data-table.#{$prefix}--data-table--xs:not(
+      .#{$prefix}--data-table--top-aligned-header
+    )
+    th.#{$prefix}--table-column-checkbox {
     padding-top: 0;
     padding-bottom: 0;
   }
@@ -524,13 +570,21 @@
   }
 
   .#{$prefix}--data-table--sm td,
-  .#{$prefix}--data-table--sm tbody tr th {
+  .#{$prefix}--data-table--sm tbody tr th,
+  .#{$prefix}--data-table--sm.#{$prefix}--data-table--top-aligned-header
+    th.#{$prefix}--table-column-checkbox {
     padding-top: rem(7px);
     padding-bottom: rem(6px);
   }
 
-  .#{$prefix}--data-table.#{$prefix}--data-table--sm
-    .#{$prefix}--table-column-checkbox {
+  .#{$prefix}--data-table.#{$prefix}--data-table--sm:not(
+      .#{$prefix}--data-table--top-aligned-body
+    )
+    td.#{$prefix}--table-column-checkbox,
+  .#{$prefix}--data-table.#{$prefix}--data-table--sm:not(
+      .#{$prefix}--data-table--top-aligned-header
+    )
+    th.#{$prefix}--table-column-checkbox {
     padding-top: rem(3px);
     padding-bottom: rem(3px);
   }
@@ -548,7 +602,9 @@
     height: rem(40px);
   }
 
-  .#{$prefix}--data-table--md .#{$prefix}--table-header-label {
+  .#{$prefix}--data-table--md .#{$prefix}--table-header-label,
+  .#{$prefix}--data-table--md.#{$prefix}--data-table--top-aligned-header
+    th.#{$prefix}--table-column-checkbox {
     padding-top: rem(7px);
     padding-bottom: rem(7px);
   }
@@ -559,8 +615,14 @@
     padding-bottom: rem(6px);
   }
 
-  .#{$prefix}--data-table.#{$prefix}--data-table--md
-    .#{$prefix}--table-column-checkbox {
+  .#{$prefix}--data-table.#{$prefix}--data-table--md:not(
+      .#{$prefix}--data-table--top-aligned-body
+    )
+    td.#{$prefix}--table-column-checkbox,
+  .#{$prefix}--data-table.#{$prefix}--data-table--md:not(
+      .#{$prefix}--data-table--top-aligned-header
+    )
+    th.#{$prefix}--table-column-checkbox {
     padding-top: rem(3px);
     padding-bottom: rem(3px);
   }
@@ -586,7 +648,8 @@
 
   .#{$prefix}--data-table--xl td,
   .#{$prefix}--data-table--xl tbody tr th {
-    padding-top: 1rem;
+    padding-top: $spacing-05;
+    padding-bottom: $spacing-05;
   }
 
   .#{$prefix}--data-table--xl th,
