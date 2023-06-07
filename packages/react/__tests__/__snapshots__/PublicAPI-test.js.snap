@@ -3004,6 +3004,9 @@ Map {
       "id": Object {
         "type": "string",
       },
+      "isExpanded": Object {
+        "type": "bool",
+      },
       "labelText": Object {
         "isRequired": true,
         "type": "node",
@@ -6534,6 +6537,9 @@ Map {
       },
       "id": Object {
         "type": "string",
+      },
+      "isExpanded": Object {
+        "type": "bool",
       },
       "labelText": Object {
         "isRequired": true,
