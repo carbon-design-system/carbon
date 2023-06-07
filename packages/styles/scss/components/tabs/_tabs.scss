@@ -326,7 +326,6 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       .#{$prefix}--tabs__nav-item--close-icon {
         padding: $spacing-02;
         margin: -$spacing-02;
-        cursor: pointer;
         line-height: 0;
         pointer-events: auto;
       }

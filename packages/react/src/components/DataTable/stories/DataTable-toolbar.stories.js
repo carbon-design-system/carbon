@@ -361,12 +361,10 @@ Playground.argTypes = {
   useZebraStyles: {
     control: { type: 'boolean' },
   },
-  radio: {
-    control: { type: 'boolean' },
-  },
   isSortable: { control: { type: 'boolean' } },
   persistent: { control: { type: 'boolean' } },
   overflowMenuOnHover: {
     control: { type: 'boolean' },
   },
+  radio: { table: { disable: true } },
 };

@@ -6,7 +6,7 @@ exports[`DataTable.TableSelectRow renders as expected - Component API should ren
     class="cds--data-table-content"
   >
     <table
-      class="cds--data-table"
+      class="cds--data-table cds--data-table--lg"
     >
       <thead>
         <tr>
