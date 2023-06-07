@@ -1,0 +1,31 @@
+@use '@carbon/react/scss/compat/theme';
+@use '@carbon/react/scss/type';
+
+.theme-row,
+.theme {
+  display: flex;
+  align-items: center;
+}
+
+.theme-row p {
+  @include type.type-style('code-01');
+  margin-left: 1rem;
+}
+
+.theme-row > div {
+  height: 2rem;
+  width: 2rem;
+  margin-left: 0.5rem;
+}
+
+.ui-01 {
+  background-color: theme.$ui-01;
+}
+
+.icon-01 {
+  background-color: theme.$icon-01;
+}
+
+.link-01 {
+  background-color: theme.$link-01;
+}
