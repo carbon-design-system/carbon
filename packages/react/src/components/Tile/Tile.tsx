@@ -7,6 +7,7 @@ import React, {
   type KeyboardEvent,
   type HTMLAttributes,
   type ChangeEvent,
+  type ComponentType,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -30,16 +31,12 @@ import { useFeatureFlag } from '../FeatureFlags';
 export interface TileProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
   className?: string;
+  /** @deprecated */
+  light?: boolean;
 }
 
 export const Tile = React.forwardRef<HTMLDivElement, TileProps>(function Tile(
-  {
-    children,
-    className,
-    // @ts-expect-error: Deprecated prop
-    light = false,
-    ...rest
-  },
+  { children, className, light = false, ...rest },
   ref
 ) {
   const prefix = usePrefix();
@@ -71,18 +68,21 @@ Tile.propTypes = {
   /**
    * `true` to use the light version. For use on $ui-01 backgrounds only.
    * Don't use this to make tile background color same as container background color.
+   *
+   * @deprecated
    */
-  // @ts-expect-error: Deprecated prop
   light: deprecate(
     PropTypes.bool,
     'The `light` prop for `Tile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
   ),
 };
 
-export interface ClickableTileProps extends HTMLAttributes<HTMLDivElement> {
+export interface ClickableTileProps extends HTMLAttributes<HTMLAnchorElement> {
   children?: ReactNode;
-
   className?: string;
+
+  /** @deprecated */
+  light?: boolean;
 
   /**
    * Boolean for whether a tile has been clicked.
@@ -98,6 +98,11 @@ export interface ClickableTileProps extends HTMLAttributes<HTMLDivElement> {
    * The href for the link.
    */
   href?: string;
+
+  /**
+   * Optional prop to allow overriding the icon rendering.
+   */
+  renderIcon?: ComponentType<{ className?: string }>;
 
   /**
    * Specify the function to run when the ClickableTile is clicked
@@ -116,7 +121,7 @@ export interface ClickableTileProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const ClickableTile = React.forwardRef<
-  HTMLDivElement,
+  HTMLAnchorElement,
   ClickableTileProps
 >(function ClickableTile(
   {
@@ -125,7 +130,6 @@ export const ClickableTile = React.forwardRef<
     clicked = false,
     disabled,
     href,
-    // @ts-expect-error: Deprecated prop
     light,
     onClick = () => {},
     onKeyDown = () => {},
@@ -138,10 +142,8 @@ export const ClickableTile = React.forwardRef<
   const classes = cx(
     `${prefix}--tile`,
     `${prefix}--tile--clickable`,
-    {
-      [`${prefix}--tile--is-clicked`]: clicked,
-      [`${prefix}--tile--light`]: light,
-    },
+    clicked && `${prefix}--tile--is-clicked`,
+    light && `${prefix}--tile--light`,
     className
   );
 
@@ -181,11 +183,10 @@ export const ClickableTile = React.forwardRef<
   });
 
   return (
-    // @ts-expect-error: Invalid derived props, should be fine when explicit types are added
     <Link
       className={classes}
       href={href}
-      onClick={!disabled ? handleOnClick : null}
+      onClick={!disabled ? handleOnClick : undefined}
       onKeyDown={handleOnKeyDown}
       ref={ref}
       disabled={disabled}
@@ -227,7 +228,6 @@ ClickableTile.propTypes = {
    * `true` to use the light version. For use on $ui-01 backgrounds only.
    * Don't use this to make tile background color same as container background color.
    */
-  // @ts-expect-error: Deprecated prop
   light: deprecate(
     PropTypes.bool,
     'The `light` prop for `ClickableTile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
@@ -252,19 +252,16 @@ ClickableTile.propTypes = {
    * Optional prop to allow overriding the icon rendering.
    * Can be a React component class
    */
+  // @ts-expect-error: Invalid derived prop type, seemingly no real solution.
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
 export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
-  /**
-   * The child nodes.
-   */
   children?: ReactNode;
-
-  /**
-   * The CSS class names.
-   */
   className?: string;
+
+  /** @deprecated */
+  light?: boolean;
 
   /**
    * Specify whether the SelectableTile should be disabled
@@ -328,7 +325,6 @@ export const SelectableTile = React.forwardRef<
     className,
     disabled,
     id,
-    // @ts-expect-error: Deprecated prop
     light,
     onClick = () => {},
     onChange = () => {},
@@ -415,14 +411,7 @@ export const SelectableTile = React.forwardRef<
 
 SelectableTile.displayName = 'SelectableTile';
 SelectableTile.propTypes = {
-  /**
-   * The child nodes.
-   */
   children: PropTypes.node,
-
-  /**
-   * The CSS class names.
-   */
   className: PropTypes.string,
 
   /**
@@ -439,7 +428,6 @@ SelectableTile.propTypes = {
    * `true` to use the light version. For use on $ui-01 backgrounds only.
    * Don't use this to make tile background color same as container background color.
    */
-  // @ts-expect-error: Deprecated prop
   light: deprecate(
     PropTypes.bool,
     'The `light` prop for `SelectableTile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
@@ -489,15 +477,11 @@ SelectableTile.propTypes = {
 };
 
 export interface ExpandableTileProps extends HTMLAttributes<HTMLDivElement> {
-  /**
-   * The child nodes.
-   */
   children?: ReactNode;
-
-  /**
-   * The CSS class names.
-   */
   className?: string;
+
+  /** @deprecated */
+  light?: boolean;
 
   /**
    * `true` if the tile is expanded.
@@ -566,7 +550,6 @@ export const ExpandableTile = React.forwardRef<
     tileExpandedIconText = 'Interact to collapse Tile',
     tileCollapsedLabel,
     tileExpandedLabel,
-    // @ts-expect-error: Deprecated prop
     light,
     ...rest
   },
@@ -645,10 +628,8 @@ export const ExpandableTile = React.forwardRef<
     `${prefix}--tile`,
     `${prefix}--tile--expandable`,
     `${prefix}--tile--expandable--interactive`,
-    {
-      [`${prefix}--tile--is-expanded`]: isExpanded,
-      [`${prefix}--tile--light`]: light,
-    },
+    isExpanded && `${prefix}--tile--is-expanded`,
+    light && `${prefix}--tile--light`,
     className
   );
 
@@ -770,14 +751,7 @@ export const ExpandableTile = React.forwardRef<
 });
 
 ExpandableTile.propTypes = {
-  /**
-   * The child nodes.
-   */
   children: PropTypes.node,
-
-  /**
-   * The CSS class names.
-   */
   className: PropTypes.string,
 
   /**
@@ -794,7 +768,6 @@ ExpandableTile.propTypes = {
    * `true` to use the light version. For use on $ui-01 backgrounds only.
    * Don't use this to make tile background color same as container background color.
    */
-  // @ts-expect-error: Deprecated prop
   light: deprecate(
     PropTypes.bool,
     'The `light` prop for `ExpandableTile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
