@@ -18,8 +18,7 @@ const stories = glob
       './Welcome/Welcome.stories.js',
       '../src/**/*.stories.js',
       '../src/**/*.stories.mdx',
-      '../src/components/DataTable/DataTable.mdx',
-      '../src/components/Notification/Notification.mdx',
+      '../src/components/Tile/Tile.mdx',
       '../src/**/next/*.stories.js',
       '../src/**/next/**/*.stories.js',
       '../src/**/next/*.stories.mdx',
@@ -182,6 +181,7 @@ const config = {
   },
   docs: {
     autodocs: true,
+    defaultName: 'Overview',
   },
 };
 

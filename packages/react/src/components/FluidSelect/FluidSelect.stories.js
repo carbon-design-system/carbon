@@ -131,53 +131,55 @@ export const Skeleton = () => (
   </div>
 );
 
+Playground.args = {
+  playgroundWidth: 400,
+  className: 'test-class',
+  disabled: false,
+  invalid: false,
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  warn: false,
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+};
+
 Playground.argTypes = {
   playgroundWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
-    defaultValue: 400,
   },
   className: {
     control: {
       type: 'text',
     },
-    defaultValue: 'test-class',
   },
   disabled: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   invalid: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   invalidText: {
     control: {
       type: 'text',
     },
-    defaultValue:
-      'Error message that is really long can wrap to more lines but should not be excessively long.',
   },
   labelText: {
     control: {
       type: 'text',
     },
-    defaultValue: ToggleTip,
   },
   warn: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   warnText: {
     control: {
       type: 'text',
     },
-    defaultValue:
-      'Warning message that is really long can wrap to more lines but should not be excessively long.',
   },
 };

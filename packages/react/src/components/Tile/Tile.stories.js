@@ -81,12 +81,15 @@ export const Clickable = (args) => {
   );
 };
 
+Clickable.args = {
+  disabled: false,
+};
+
 Clickable.argTypes = {
   disabled: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
 };
 
@@ -102,12 +105,15 @@ export const ClickableWithCustomIcon = (args) => {
   );
 };
 
-Clickable.argTypes = {
+ClickableWithCustomIcon.args = {
+  disabled: false,
+};
+
+ClickableWithCustomIcon.argTypes = {
   disabled: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
 };
 
@@ -135,12 +141,15 @@ export const Selectable = (args) => {
   );
 };
 
+Selectable.args = {
+  disabled: false,
+};
+
 Selectable.argTypes = {
   disabled: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
 };
 
@@ -160,12 +169,15 @@ export const MultiSelect = (args) => {
   );
 };
 
+MultiSelect.args = {
+  disabled: false,
+};
+
 MultiSelect.argTypes = {
   disabled: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
 };
 
@@ -197,12 +209,15 @@ export const Radio = (args) => {
   );
 };
 
+Radio.args = {
+  disabled: false,
+};
+
 Radio.argTypes = {
   disabled: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
 };
 

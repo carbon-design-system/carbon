@@ -26,6 +26,13 @@ export const Default = () => <SkeletonText />;
 
 export const Playground = (args) => <SkeletonText {...args} />;
 
+Playground.args = {
+  heading: false,
+  paragraph: false,
+  width: '100%',
+  lineCount: 3,
+};
+
 Playground.argTypes = {
   className: {
     control: false,
@@ -34,24 +41,20 @@ Playground.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   paragraph: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   width: {
     control: {
       type: 'text',
     },
-    defaultValue: '100%',
   },
   lineCount: {
     control: {
       type: 'number',
     },
-    defaultValue: 3,
   },
 };

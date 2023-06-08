@@ -83,12 +83,7 @@ export const Playground = (args) => {
   );
 };
 
-Playground.argTypes = {
-  open: {
-    defaultValue: true,
-  },
-};
-
 Playground.args = {
   onClose: action('onClose'),
+  open: true,
 };

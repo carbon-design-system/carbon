@@ -207,15 +207,16 @@ export const parameters = {
       // To story the stories, we first build up a list of matches based on
       // keywords. Each keyword has a specific weight that will be used to
       // determine order later on.
-      const UNKNOWN_KEYWORD = 3;
+      const UNKNOWN_KEYWORD = 4;
       const keywords = new Map([
         ['welcome', 0],
-        ['default', 1],
-        ['usage', 2],
-        ['playground', 4],
-        ['development', 5],
-        ['deprecated', 6],
-        ['unstable', 7],
+        ['overview', 1],
+        ['default', 2],
+        ['usage', 3],
+        ['playground', 5],
+        ['development', 6],
+        ['deprecated', 7],
+        ['unstable', 8],
       ]);
       const matches = new Map();
 

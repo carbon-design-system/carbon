@@ -868,12 +868,16 @@ export const SideNavRail = (args) => (
   </>
 );
 
+SideNavRail.args = {
+  isRail: true,
+  enterDelayMs: 100,
+};
+
 SideNavRail.argTypes = {
   isRail: {
     control: {
       type: 'boolean',
     },
-    defaultValue: true,
     table: {
       defaultValue: { summary: true },
     },
@@ -886,7 +890,6 @@ SideNavRail.argTypes = {
     table: {
       defaultValue: { summary: 100 },
     },
-    defaultValue: 100,
     description:
       'Specify the duration in milliseconds to delay before displaying the sidenav',
   },
@@ -1000,12 +1003,16 @@ export const SideNavRailWHeader = (args) => (
   />
 );
 
+SideNavRailWHeader.args = {
+  isRail: true,
+  enterDelayMs: 100,
+};
+
 SideNavRailWHeader.argTypes = {
   isRail: {
     control: {
       type: 'boolean',
     },
-    defaultValue: true,
     table: {
       defaultValue: { summary: true },
     },
@@ -1018,7 +1025,6 @@ SideNavRailWHeader.argTypes = {
     table: {
       defaultValue: { summary: 100 },
     },
-    defaultValue: 100,
     description:
       'Specify the duration in milliseconds to delay before displaying the sidenav',
   },

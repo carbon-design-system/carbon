@@ -510,6 +510,12 @@ export const Playground = ({ dismissable, ...args }) => (
   </Tabs>
 );
 
+Playground.args = {
+  contained: false,
+  dismissable: false,
+  scrollDebounceWait: 200,
+};
+
 Playground.argTypes = {
   automatic: {
     control: { type: 'select' },
@@ -519,13 +525,11 @@ Playground.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   dismissable: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   iconSize: {
     control: { type: 'select' },
@@ -545,7 +549,6 @@ Playground.argTypes = {
     control: {
       type: 'number',
     },
-    defaultValue: 200,
   },
   scrollIntoView: {
     control: {
