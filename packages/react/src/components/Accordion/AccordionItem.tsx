@@ -119,12 +119,12 @@ function AccordionItem({
   const [isOpen, setIsOpen] = useState(open);
   const [prevIsOpen, setPrevIsOpen] = useState(open);
   const [animation, setAnimation] = useState('');
-  const accodionState = useContext(AccordionContext);
+  const accordionState = useContext(AccordionContext);
 
   const disabledIsControlled = typeof controlledDisabled === 'boolean';
   const disabled = disabledIsControlled
     ? controlledDisabled
-    : accodionState.disabled;
+    : accordionState.disabled;
 
   const id = useId('accordion-item');
   const prefix = usePrefix();

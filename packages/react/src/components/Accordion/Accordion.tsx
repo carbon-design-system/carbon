@@ -43,14 +43,6 @@ interface AccordionProps {
   size?: 'sm' | 'md' | 'lg';
 }
 
-interface AccordionV10Props extends Omit<AccordionProps, 'size'> {
-  /**
-   * Specify the size of the Accordion. Currently
-   * supports the following: `sm`, `md`, `lg`, `xl`.
-   */
-  size?: 'sm' | 'md' | 'lg' | 'xl';
-}
-
 function Accordion({
   align = 'end',
   children,
@@ -59,7 +51,7 @@ function Accordion({
   isFlush = false,
   size,
   ...rest
-}: PropsWithChildren<AccordionProps | AccordionV10Props>) {
+}: PropsWithChildren<AccordionProps>) {
   const prefix = usePrefix();
 
   const className = cx(`${prefix}--accordion`, customClassName, {
