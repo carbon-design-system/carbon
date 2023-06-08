@@ -6,6 +6,7 @@
  */
 
 import React, { useRef } from 'react';
+
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useControllableState } from '../../internal/useControllableState';
@@ -37,7 +38,7 @@ export function Toggle({
   });
 
   function handleClick(e) {
-    if (!readOnly) {
+    if (!readOnly && !disabled) {
       setChecked(!checked);
     }
     if (onClick) {

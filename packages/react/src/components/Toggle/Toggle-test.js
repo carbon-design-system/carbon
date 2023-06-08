@@ -130,6 +130,19 @@ describe('Toggle', () => {
       );
     });
 
+    it('does not change value when disabled', () => {
+      const onClick = jest.fn();
+      const onToggle = jest.fn();
+      wrapper.rerender(
+        <Toggle {...props} onClick={onClick} onToggle={onToggle} disabled />
+      );
+
+      expect(onClick).not.toHaveBeenCalled();
+      userEvent.click(wrapper.getByRole('switch'));
+      expect(onClick).not.toHaveBeenCalled();
+      expect(onToggle).not.toHaveBeenCalled();
+    });
+
     it('does not change value when readonly', () => {
       const onClick = jest.fn();
       const onToggle = jest.fn();
