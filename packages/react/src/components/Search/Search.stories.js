@@ -63,56 +63,6 @@ export const Expandable = () => (
   />
 );
 
-export const Test = () => (
-  <>
-    <p>Expandable with default value</p>
-    <ExpandableSearch
-      defaultValue="This is a test"
-      size="lg"
-      labelText="Search"
-      closeButtonLabelText="Clear search input"
-      id="search-expandable-1"
-      onChange={() => {}}
-      onKeyDown={() => {}}
-    />
-    <br />
-    <p>Expandable with default value and expanded prop</p>
-    <ExpandableSearch
-      defaultValue="This is a test"
-      isExpanded
-      size="lg"
-      labelText="Search"
-      closeButtonLabelText="Clear search input"
-      id="search-expandable-1"
-      onChange={() => {}}
-      onKeyDown={() => {}}
-    />
-    <br />
-    <p>Expandable with expanded prop</p>
-    <ExpandableSearch
-      isExpanded
-      size="lg"
-      labelText="Search"
-      closeButtonLabelText="Clear search input"
-      id="search-expandable-1"
-      onChange={() => {}}
-      onKeyDown={() => {}}
-    />
-    <br />
-    <p>Basic search with default value prop</p>
-    <Search
-      defaultValue="This is a test"
-      size="lg"
-      labelText="Search"
-      closeButtonLabelText="Clear search input"
-      id="search-expandable-1"
-      onChange={() => {}}
-      onKeyDown={() => {}}
-    />
-    <br />
-  </>
-);
-
 export const _WithLayer = () => (
   <WithLayer>
     {(layer) => (
