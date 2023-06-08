@@ -12,21 +12,27 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../../utilities/button-reset';
 @use '../../utilities/convert' as *;
 @use '../../utilities/focus-outline' as *;
-@use '../../utilities/button-reset';
+@use '../../utilities/layout';
 
 /// Contained List styles
 /// @access public
 /// @group contained-list
 @mixin contained-list {
+  .#{$prefix}--contained-list {
+    @include layout.use('size', $default: 'lg', $min: 'sm', $max: 'xl');
+    @include layout.use('density', $default: 'normal');
+  }
+
   .#{$prefix}--contained-list__header {
     position: sticky;
     z-index: 1;
     top: 0;
     display: flex;
     align-items: center;
-    padding-inline: $spacing-05;
+    padding-inline: layout.density('padding-inline');
   }
 
   .#{$prefix}--contained-list__label {
@@ -36,7 +42,7 @@
   .#{$prefix}--contained-list .#{$prefix}--search {
     position: sticky;
     z-index: 1;
-    top: 48px;
+    top: layout.size('height');
 
     &.#{$prefix}--search--expandable .#{$prefix}--search-input {
       background-color: $field;
@@ -79,35 +85,6 @@
     outline: none;
   }
 
-  // Sizes
-
-  $sizes: (
-    // size: (height, item-block-padding)
-    'sm': (rem(32px), $spacing-03),
-    'md': (rem(40px), $spacing-04),
-    'lg': (rem(48px), $spacing-05),
-    'xl': (rem(64px), $spacing-06)
-  );
-
-  @each $size, $definition in $sizes {
-    $height: list.nth($definition, 1);
-    $item-block-padding: list.nth($definition, 2);
-
-    .#{$prefix}--contained-list--on-page.#{$prefix}--contained-list--#{$size}
-      .#{$prefix}--contained-list__header {
-      height: $height;
-    }
-
-    .#{$prefix}--contained-list--#{$size}
-      .#{$prefix}--contained-list-item__content,
-    .#{$prefix}--contained-list--#{$size}
-      .#{$prefix}--contained-list-item--clickable
-      .#{$prefix}--contained-list-item__content {
-      min-height: $height;
-      padding: calc(#{$item-block-padding} - #{rem(2px)}) $spacing-05;
-    }
-  }
-
   // "On Page" variant
 
   .#{$prefix}--contained-list--on-page + .#{$prefix}--contained-list--on-page {
@@ -117,6 +94,7 @@
   .#{$prefix}--contained-list--on-page .#{$prefix}--contained-list__header {
     @include type-style('heading-compact-01');
 
+    height: layout.size('height');
     border-bottom: 1px solid $border-subtle;
     background-color: $background;
     color: $text-primary;
@@ -166,8 +144,14 @@
   .#{$prefix}--contained-list-item__content,
   .#{$prefix}--contained-list-item--clickable
     .#{$prefix}--contained-list-item__content {
+    // https://caniuse.com/mdn-css_types_length_lh
+    --temp-1lh: (var(--#{$prefix}-body-01-line-height) * 1em);
+
     @include type-style('body-01');
 
+    min-height: layout.size('height');
+    padding: calc(calc((#{layout.size('height')} - var(--temp-1lh)) / 2))
+      layout.density('padding-inline');
     color: $text-primary;
   }
 
@@ -183,8 +167,8 @@
 
   .#{$prefix}--contained-list--inset-rulers
     .#{$prefix}--contained-list-item:not(:last-of-type)::before {
-    right: $spacing-05;
-    left: $spacing-05;
+    right: layout.density('padding-inline');
+    left: layout.density('padding-inline');
   }
 
   .#{$prefix}--contained-list-item--clickable

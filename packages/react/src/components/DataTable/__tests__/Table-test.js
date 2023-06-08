@@ -7,7 +7,16 @@
 
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { Table } from '../';
+import {
+  Table,
+  TableHead,
+  TableRow,
+  TableBody,
+  TableCell,
+  TableHeader,
+} from '../';
+
+const prefix = 'cds';
 
 describe('Table', () => {
   it.each(['xs', 'sm', 'md', 'lg', 'xl'])(
@@ -76,6 +85,192 @@ describe('Table', () => {
       rerender(<Table overflowMenuOnHover={false} />);
       expect(screen.getByRole('table')).toHaveClass(
         'cds--data-table--visible-overflow-menu'
+      );
+    });
+  });
+
+  describe('experimentalAutoAlign', () => {
+    it('should align content top when property passed in and content is wrapping', () => {
+      Element.prototype.getBoundingClientRect = jest.fn(() => {
+        return {
+          width: 1,
+          height: 1,
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+        };
+      });
+      render(
+        <Table experimentalAutoAlign>
+          <TableHead>
+            <TableRow>
+              <TableHeader>Header1</TableHeader>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>Wrapping content</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      );
+      expect(screen.getByRole('table')).toHaveClass(
+        `${prefix}--data-table--top-aligned-body`
+      );
+    });
+
+    it('should not align content top when property not passed in and content is wrapping', () => {
+      Element.prototype.getBoundingClientRect = jest.fn(() => {
+        return {
+          width: 1,
+          height: 1,
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+        };
+      });
+      render(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader>Header1</TableHeader>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>Wrapping content</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      );
+      expect(screen.getByRole('table')).not.toHaveClass(
+        `${prefix}--data-table--top-aligned-body`
+      );
+      expect(screen.getByRole('table')).not.toHaveClass(
+        `${prefix}--data-table--top-aligned-header`
+      );
+    });
+
+    it('should not align content top when property  passed in and content is not wrapping', () => {
+      Element.prototype.getBoundingClientRect = jest.fn(() => {
+        return {
+          width: 10000,
+          height: 1,
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+        };
+      });
+      render(
+        <Table experimentalAutoAlign>
+          <TableHead>
+            <TableRow>
+              <TableHeader>Header1</TableHeader>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>Wrapping content</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      );
+      expect(screen.getByRole('table')).not.toHaveClass(
+        `${prefix}--data-table--top-aligned-body`
+      );
+      expect(screen.getByRole('table')).not.toHaveClass(
+        `${prefix}--data-table--top-aligned-header`
+      );
+    });
+
+    it('should only align header top when property passed in and header content is wrapping but body content is not wrapping', () => {
+      HTMLTableCellElement.prototype.getBoundingClientRect = jest.fn(() => {
+        return {
+          width: 10000,
+          height: 1,
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+        };
+      });
+
+      HTMLDivElement.prototype.getBoundingClientRect = jest.fn(() => {
+        return {
+          width: 1,
+          height: 1,
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+        };
+      });
+
+      render(
+        <Table experimentalAutoAlign>
+          <TableHead>
+            <TableRow>
+              <TableHeader>Header1</TableHeader>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>Wrapping content</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      );
+      expect(screen.getByRole('table')).toHaveClass(
+        `${prefix}--data-table--top-aligned-header`
+      );
+      expect(screen.getByRole('table')).not.toHaveClass(
+        `${prefix}--data-table--top-aligned-body`
+      );
+    });
+
+    it('should only align body top when property passed in and body content is wrapping but header content is not wrapping', () => {
+      HTMLTableCellElement.prototype.getBoundingClientRect = jest.fn(() => {
+        return {
+          width: 1,
+          height: 1,
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+        };
+      });
+      HTMLDivElement.prototype.getBoundingClientRect = jest.fn(() => {
+        return {
+          width: 10000,
+          height: 1,
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+        };
+      });
+      render(
+        <Table experimentalAutoAlign>
+          <TableHead>
+            <TableRow>
+              <TableHeader>Header1</TableHeader>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>Wrapping content</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      );
+      expect(screen.getByRole('table')).toHaveClass(
+        `${prefix}--data-table--top-aligned-body`
+      );
+      expect(screen.getByRole('table')).not.toHaveClass(
+        `${prefix}--data-table--top-aligned-header`
       );
     });
   });

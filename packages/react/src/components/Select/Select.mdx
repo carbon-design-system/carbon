@@ -1,5 +1,9 @@
 import { Props } from '@storybook/addon-docs';
 
+import Select from './';
+
+import SelectItem from '../SelectItem';
+
 # Select
 
 [Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Select)
@@ -8,9 +12,107 @@ import { Props } from '@storybook/addon-docs';
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/select/accessibility)
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of Contents
 
-## Overview
+- [Default state](#default-state)
+  - [Empty default option](#empty-default-option)
+  - [First option default](#first-option-default)
+  - [Custom option default](#custom-option-default)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Default state
+
+Carbon recommends that a select has an empty option selected by default.
+Depending on the use case, this defaulted behavior can be modified to be a
+prefilled selection to the first option in the list, which is typically shown in
+alphabetical order, or the prefilled selection could be a frequent or commonly
+used option that is on the list.
+
+### Empty default option
+
+To get a default empty selection on your select, make the first child in your
+`Select` component a `SelectItem` with empty `text` and `value` props.
+
+<Select
+  id={`select-1`}
+  labelText="Select an option"
+  helperText="Optional helper text">
+  <SelectItem value="" text="" />
+  <SelectItem value="option-1" text="Option 1" />
+  <SelectItem value="option-2" text="Option 2" />
+</Select>
+
+```jsx
+<Select
+  id={`select-1`}
+  labelText="Select an option"
+  helperText="Optional helper text">
+  <SelectItem value="" text="" />
+  <SelectItem value="option-1" text="Option 1" />
+  <SelectItem value="option-2" text="Option 2" />
+</Select>
+```
+
+### First option default
+
+The select will default to the first provided option given that no
+`defaultValue` is specified. No further action needed. Keep in mind that
+Carbon's design guidance is to present select options in alphabetical order. If
+you need an option pre-selected that isn't displayed in first place, see
+[Custom option default](#custom-option-default)
+
+<Select
+  id={`select-2`}
+  labelText="Select an option"
+  helperText="Optional helper text">
+  <SelectItem value="option-1" text="Option 1" />
+  <SelectItem value="option-2" text="Option 2" />
+  <SelectItem value="option-3" text="Option 3" />
+</Select>
+
+```jsx
+<Select
+  id={`select-2`}
+  labelText="Select an option"
+  helperText="Optional helper text">
+  <SelectItem value="option-1" text="Option 1" />
+  <SelectItem value="option-2" text="Option 2" />
+  <SelectItem value="option-3" text="Option 3" />
+</Select>
+```
+
+### Custom option default
+
+To have a custom option from the select's option list be selected by default,
+simply set a `defaultValue` on the `Select` component equal to the value of the
+desired option.
+
+<Select
+  id={`select-3`}
+  labelText="Select an option"
+  helperText="Optional helper text"
+  defaultValue="option-3">
+  <SelectItem value="option-1" text="Option 1" />
+  <SelectItem value="option-2" text="Option 2" />
+  <SelectItem value="option-3" text="Option 3" />
+</Select>
+
+```jsx
+<Select
+  id={`select-3`}
+  labelText="Select an option"
+  helperText="Optional helper text"
+  defaultValue="option-3">
+  <SelectItem value="option-1" text="Option 1" />
+  <SelectItem value="option-2" text="Option 2" />
+  <SelectItem value="option-3" text="Option 3" />
+</Select>
+```
 
 ## Component API
 

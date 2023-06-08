@@ -175,11 +175,13 @@ const TableHeader = React.forwardRef(function TableHeader(
       sortStates,
     });
 
+  const headerClasses = cx(headerClassName, `${prefix}--table-sort__header`);
+
   return (
     <th
       id={id}
       aria-sort={ariaSort}
-      className={headerClassName}
+      className={headerClasses}
       colSpan={colSpan}
       ref={ref}
       scope={scope}>

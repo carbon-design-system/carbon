@@ -62,21 +62,15 @@ const MenuButton = React.forwardRef(function MenuButton(
     menuRef.current.style.width = `${width}px`;
   }
 
-  const triggerClasses = classNames(
-    `${prefix}--menu-button__trigger`,
-    {
-      [`${prefix}--menu-button__trigger--open`]: open,
-    },
-    className
-  );
+  const triggerClasses = classNames(`${prefix}--menu-button__trigger`, {
+    [`${prefix}--menu-button__trigger--open`]: open,
+  });
 
   const buttonKind = validButtonKinds.includes(kind) ? kind : defaultButtonKind;
 
   return (
-    <>
+    <div {...rest} ref={ref} aria-owns={open ? id : null} className={className}>
       <Button
-        {...rest}
-        ref={ref}
         className={triggerClasses}
         size={size}
         kind={buttonKind}
@@ -86,7 +80,7 @@ const MenuButton = React.forwardRef(function MenuButton(
         aria-expanded={open}
         onClick={handleClick}
         onMouseDown={handleMousedown}
-        aria-owns={open ? id : null}>
+        aria-controls={open ? id : null}>
         {label}
       </Button>
       <Menu
@@ -101,7 +95,7 @@ const MenuButton = React.forwardRef(function MenuButton(
         y={[y[0] - spacing, y[1] + spacing]}>
         {children}
       </Menu>
-    </>
+    </div>
   );
 });
 

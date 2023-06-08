@@ -16,7 +16,7 @@ function WithDeprecationNotice({ children, text }) {
       type="deprecation-notice"
       text={
         <div>
-          Deprecation notice
+          <strong>Deprecation notice</strong>
           <br />
           {text}
         </div>

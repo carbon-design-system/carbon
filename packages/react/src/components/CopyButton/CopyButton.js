@@ -10,17 +10,20 @@ import React from 'react';
 import classnames from 'classnames';
 import { Copy as CopyIcon } from '@carbon/icons-react';
 import Copy from '../Copy';
+import { LayoutConstraint } from '../Layout';
 import { usePrefix } from '../../internal/usePrefix';
 
 export default function CopyButton({ iconDescription, className, ...other }) {
   const prefix = usePrefix();
   return (
-    <Copy
-      className={classnames(className, `${prefix}--copy-btn`)}
-      aria-label={iconDescription}
-      {...other}>
-      <CopyIcon className={`${prefix}--snippet__icon`} />
-    </Copy>
+    <LayoutConstraint size={{ default: 'md', max: 'lg' }}>
+      <Copy
+        className={classnames(className, `${prefix}--copy-btn`)}
+        aria-label={iconDescription}
+        {...other}>
+        <CopyIcon className={`${prefix}--snippet__icon`} />
+      </Copy>
+    </LayoutConstraint>
   );
 }
 
