@@ -95,6 +95,7 @@
     "babel-preset-carbon": "^0.5.0",
     "browserify-zlib": "^0.2.0",
     "browserslist-config-carbon": "^11.2.0",
+    "canvas": "^2.11.2",
     "clipboardy": "^2.1.0",
     "css-loader": "^6.5.1",
     "enquirer": "^2.3.6",
