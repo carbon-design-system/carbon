@@ -55,20 +55,14 @@ Inline theming can be done by using the mixin. For example:
 @use '@carbon/themes/scss/themes';
 @use '@carbon/themes/scss/theme';
 
-// Use the default white theme here
+// Uses the default white theme here
 
 .my-dark-theme {
   @include theme.theme(themes.$g90)
-  &__something {
-    //any theme references in here, or in any nested classes/components will resolve to g90
-  }
 }
 
 .my-darker-theme {
   @include theme.theme(themes.$g100)
-  &__something {
-    //any theme references in here, or in any nested classes/components will resolve to g100
-  }
 }
 ```
 
