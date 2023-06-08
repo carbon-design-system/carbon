@@ -20,7 +20,7 @@ const props = () => ({
 });
 
 export default {
-  title: 'Components/DataTable',
+  title: 'Components/DataTable/Skeleton',
   decorators: [withKnobs],
   component: DataTableSkeleton,
 };
@@ -33,4 +33,26 @@ export const Skeleton = () => {
       <br />
     </div>
   );
+};
+
+export const Playground = (args) => {
+  return (
+    <div style={{ width: '800px' }}>
+      <DataTableSkeleton {...args} headers={headers} />
+      <br />
+    </div>
+  );
+};
+
+Playground.argTypes = {
+  headers: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
 };

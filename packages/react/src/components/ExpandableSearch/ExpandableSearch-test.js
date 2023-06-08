@@ -27,20 +27,41 @@ describe('ExpandableSearch', () => {
       );
     });
 
-    it('expands on click', () => {
+    it('is expanded by default if expanded prop is set', () => {
+      const { container } = render(
+        <ExpandableSearch isExpanded labelText="test-search" />
+      );
+
+      // There is not a reliable way to test for expansion other than by class.
+      // We can not use .toBeVisible on the input because the input is hidden
+      // via width, not via `display: none` or similar.
+      expect(container.firstChild).toHaveClass(`${prefix}--search--expanded`);
+    });
+
+    it('is renders a defaultValue', () => {
+      render(
+        <ExpandableSearch
+          defaultValue="This is default text"
+          labelText="test-search"
+        />
+      );
+      expect(screen.getByRole('searchbox')).toHaveValue('This is default text');
+    });
+
+    it('expands on click', async () => {
       const { container } = render(
         <ExpandableSearch labelText="test-search" />
       );
 
-      userEvent.click(screen.getAllByRole('button')[0]);
+      await userEvent.click(screen.getAllByRole('button')[0]);
 
       expect(container.firstChild).toHaveClass(`${prefix}--search--expanded`);
     });
 
-    it('places focus on the input after expansion', () => {
+    it('places focus on the input after expansion', async () => {
       render(<ExpandableSearch labelText="test-search" />);
 
-      userEvent.click(screen.getAllByRole('button')[0]);
+      await userEvent.click(screen.getAllByRole('button')[0]);
 
       expect(screen.getByRole('searchbox')).toHaveFocus();
     });
@@ -59,18 +80,18 @@ describe('ExpandableSearch', () => {
         `${prefix}--search--expanded`
       );
 
-      userEvent.click(screen.getAllByRole('button')[0]);
+      await userEvent.click(screen.getAllByRole('button')[0]);
 
       expect(container.firstChild).toHaveClass(`${prefix}--search--expanded`);
 
-      userEvent.click(screen.getByText('second-element'));
+      await userEvent.click(screen.getByText('second-element'));
 
       expect(container.firstChild).not.toHaveClass(
         `${prefix}--search--expanded`
       );
     });
 
-    it('does not close on blur when the input has a value', () => {
+    it('does not close on blur when the input has a value', async () => {
       // Render a button next to the search so that there is another focusable element
       // next to the expandable search to receive focus.
       const { container } = render(
@@ -80,9 +101,9 @@ describe('ExpandableSearch', () => {
         </>
       );
 
-      userEvent.click(screen.getAllByRole('button')[0]);
-      userEvent.type(screen.getByRole('searchbox'), 'test-value');
-      userEvent.click(screen.getByText('second-element'));
+      await userEvent.click(screen.getAllByRole('button')[0]);
+      await userEvent.type(screen.getByRole('searchbox'), 'test-value');
+      await userEvent.click(screen.getByText('second-element'));
 
       expect(container.firstChild).toHaveClass(`${prefix}--search--expanded`);
     });

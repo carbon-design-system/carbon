@@ -8,13 +8,23 @@
 import React from 'react';
 import { default as Checkbox, CheckboxSkeleton } from './';
 import mdx from './Checkbox.mdx';
+import CheckboxGroup from '../CheckboxGroup';
 
-const prefix = 'cds';
+const checkboxEvents = {
+  className: 'some-class',
+  labelText: 'Checkbox label',
+};
+
+const fieldsetCheckboxProps = () => ({
+  className: 'some-class',
+  legendText: 'Group label',
+});
 
 export default {
   title: 'Components/Checkbox',
   component: Checkbox,
   subcomponents: {
+    CheckboxGroup,
     CheckboxSkeleton,
   },
   parameters: {
@@ -26,55 +36,156 @@ export default {
 
 export const Default = () => {
   return (
-    <fieldset className={`${prefix}--fieldset`}>
-      <legend className={`${prefix}--label`}>Group label</legend>
+    <CheckboxGroup {...fieldsetCheckboxProps()}>
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
-    </fieldset>
+    </CheckboxGroup>
+  );
+};
+
+export const Single = () => {
+  return (
+    <>
+      <Checkbox
+        {...checkboxEvents}
+        id="checkbox-3"
+        helperText="Helper text goes here"
+      />
+      <br /> <br />
+      <Checkbox
+        {...checkboxEvents}
+        id="checkbox-4"
+        invalid
+        invalidText="Invalid text goes here"
+      />
+      <br /> <br />
+      <Checkbox
+        {...checkboxEvents}
+        id="checkbox-5"
+        warn
+        warnText="Warning text goes here"
+      />
+      <br /> <br />
+      <Checkbox {...checkboxEvents} id="checkbox-6" readOnly />
+    </>
   );
 };
 
 export const Skeleton = () => <CheckboxSkeleton />;
 
 export const Playground = (args) => (
-  <fieldset className={`${prefix}--fieldset`}>
-    <legend className={`${prefix}--label`}>Group label</legend>
-    <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" {...args} />
-    <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" {...args} />
-  </fieldset>
+  <CheckboxGroup {...fieldsetCheckboxProps()} {...args}>
+    <Checkbox
+      defaultChecked
+      {...checkboxEvents}
+      id="checkbox-0"
+      helperText="hello"
+    />
+    <Checkbox {...checkboxEvents} id="checkbox-1" />
+    <Checkbox disabled {...checkboxEvents} id="checkbox-2" />
+  </CheckboxGroup>
 );
 
 Playground.argTypes = {
-  checked: {
+  helperText: {
+    description: 'Provide text for the form group for additional help',
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Helper text goes here',
+  },
+  invalid: {
+    description: 'Specify whether the form group is currently invalid',
     control: {
       type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  invalidText: {
+    description:
+      'Provide the text that is displayed when the form group is in an invalid state',
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Invalid message goes here',
+  },
+  legendText: {
+    description:
+      'Provide the text to be rendered inside of the fieldset <legend>',
+    control: {
+      type: 'text',
+    },
+  },
+  readOnly: {
+    description: 'Specify whether the CheckboxGroup is read-only',
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  warn: {
+    description: 'Specify whether the form group is currently in warning state',
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  warnText: {
+    description:
+      'Provide the text that is displayed when the form group is in warning state',
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Warning message goes here',
+  },
+  checked: {
+    table: {
+      disable: true,
     },
   },
   className: {
-    control: false,
+    table: {
+      disable: true,
+    },
   },
   defaultChecked: {
-    control: false,
+    table: {
+      disable: true,
+    },
   },
   disabled: {
-    control: {
-      type: 'boolean',
+    table: {
+      disable: true,
     },
   },
   hideLabel: {
-    control: {
-      type: 'boolean',
+    table: {
+      disable: true,
     },
   },
   id: {
-    control: false,
+    table: {
+      disable: true,
+    },
   },
   indeterminate: {
-    control: {
-      type: 'boolean',
+    table: {
+      disable: true,
     },
   },
   labelText: {
-    control: false,
+    table: {
+      disable: true,
+    },
+  },
+  onChange: {
+    table: {
+      disable: true,
+    },
+  },
+  title: {
+    table: {
+      disable: true,
+    },
   },
 };

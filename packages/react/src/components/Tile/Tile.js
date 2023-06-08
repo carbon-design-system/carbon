@@ -5,6 +5,8 @@ import {
   Checkbox,
   CheckboxCheckedFilled,
   ChevronDown,
+  Error,
+  ArrowRight,
 } from '@carbon/icons-react';
 import Link from '../Link';
 import { keys, matches } from '../../internal/keyboard';
@@ -13,6 +15,8 @@ import { composeEventHandlers } from '../../tools/events';
 import { usePrefix } from '../../internal/usePrefix';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { getInteractiveContent } from '../../internal/useNoInteractiveChildren';
+import { useMergedRefs } from '../../internal/useMergedRefs';
+import { useFeatureFlag } from '../FeatureFlags';
 
 export const Tile = React.forwardRef(function Tile(
   { children, className, light = false, ...rest },
@@ -61,10 +65,12 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
     children,
     className,
     clicked = false,
+    disabled,
     href,
     light,
     onClick = () => {},
     onKeyDown = () => {},
+    renderIcon: Icon,
     ...rest
   },
   ref
@@ -98,15 +104,34 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
     onKeyDown(evt);
   }
 
+  const v12DefaultIcons = useFeatureFlag('enable-v12-tile-default-icons');
+  if (v12DefaultIcons) {
+    if (!Icon) {
+      Icon = ArrowRight;
+    }
+
+    if (disabled) {
+      Icon = Error;
+    }
+  }
+
+  const iconClasses = cx({
+    [`${prefix}--tile--icon`]:
+      !v12DefaultIcons || (v12DefaultIcons && !disabled),
+    [`${prefix}--tile--disabled-icon`]: v12DefaultIcons && disabled,
+  });
+
   return (
     <Link
       className={classes}
       href={href}
-      onClick={handleOnClick}
+      onClick={!disabled ? handleOnClick : null}
       onKeyDown={handleOnKeyDown}
       ref={ref}
+      disabled={disabled}
       {...rest}>
       {children}
+      {Icon && <Icon className={iconClasses} aria-hidden="true" />}
     </Link>
   );
 });
@@ -127,6 +152,11 @@ ClickableTile.propTypes = {
    * Boolean for whether a tile has been clicked.
    */
   clicked: PropTypes.bool,
+
+  /**
+   * Specify whether the ClickableTile should be disabled
+   */
+  disabled: PropTypes.bool,
 
   /**
    * The href for the link.
@@ -156,6 +186,12 @@ ClickableTile.propTypes = {
    * The rel property for the link.
    */
   rel: PropTypes.string,
+
+  /**
+   * Optional prop to allow overriding the icon rendering.
+   * Can be a React component class
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
 export const SelectableTile = React.forwardRef(function SelectableTile(
@@ -327,34 +363,38 @@ SelectableTile.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
-export function ExpandableTile({
-  tabIndex,
-  className,
-  children,
-  expanded,
-  tileMaxHeight, // eslint-disable-line
-  tilePadding, // eslint-disable-line
-  onClick,
-  onKeyUp,
-  tileCollapsedIconText,
-  tileExpandedIconText,
-  tileCollapsedLabel,
-  tileExpandedLabel,
-  light,
-  ...rest
-}) {
+export const ExpandableTile = React.forwardRef(function ExpandableTile(
+  {
+    tabIndex,
+    className,
+    children,
+    expanded,
+    tileMaxHeight, // eslint-disable-line
+    tilePadding, // eslint-disable-line
+    onClick,
+    onKeyUp,
+    tileCollapsedIconText,
+    tileExpandedIconText,
+    tileCollapsedLabel,
+    tileExpandedLabel,
+    light,
+    ...rest
+  },
+  forwardRef
+) {
   const [isTileMaxHeight, setIsTileMaxHeight] = useState(tileMaxHeight);
   const [isTilePadding, setIsTilePadding] = useState(tilePadding);
   const [prevExpanded, setPrevExpanded] = useState(expanded);
   const [prevTileMaxHeight, setPrevTileMaxHeight] = useState(tileMaxHeight);
   const [prevTilePadding, setPrevTilePadding] = useState(tilePadding);
   const [isExpanded, setIsExpanded] = useState(expanded);
-  const [interactive, setInteractive] = useState(false);
+  const [interactive, setInteractive] = useState(true);
   const aboveTheFold = useRef(null);
   const belowTheFold = useRef(null);
   const tileContent = useRef(null);
   const tile = useRef(null);
   const prefix = usePrefix();
+  const ref = useMergedRefs([forwardRef, tile]);
 
   if (expanded !== prevExpanded) {
     setIsExpanded(expanded);
@@ -441,11 +481,11 @@ export function ExpandableTile({
   }, [isTileMaxHeight]);
 
   useIsomorphicEffect(() => {
-    if (getInteractiveContent(belowTheFold.current)) {
-      setInteractive(true);
+    if (!getInteractiveContent(belowTheFold.current)) {
+      setInteractive(false);
       return;
-    } else if (getInteractiveContent(aboveTheFold.current)) {
-      setInteractive(true);
+    } else if (!getInteractiveContent(aboveTheFold.current)) {
+      setInteractive(false);
     }
   }, []);
 
@@ -469,7 +509,7 @@ export function ExpandableTile({
   }, []);
   return interactive ? (
     <div
-      ref={tile}
+      ref={ref}
       className={interactiveClassNames}
       aria-expanded={isExpanded}
       {...rest}>
@@ -494,7 +534,7 @@ export function ExpandableTile({
   ) : (
     <button
       type="button"
-      ref={tile}
+      ref={ref}
       className={classNames}
       aria-expanded={isExpanded}
       title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
@@ -516,7 +556,7 @@ export function ExpandableTile({
       </div>
     </button>
   );
-}
+});
 
 ExpandableTile.propTypes = {
   /**

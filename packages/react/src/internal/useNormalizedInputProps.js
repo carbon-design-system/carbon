@@ -25,6 +25,7 @@ import { usePrefix } from './usePrefix';
  * @property {boolean} disabled - Whether the input is disabled
  * @property {boolean} invalid - Whether the input is invalid (takes precedence over warn)
  * @property {string} invalidId - The invalid message's id
+ * @property {string} helperId - id used for helper text
  * @property {boolean} warn - Whether the input is in warning state
  * @property {string} warnId - The warning message's id
  * @property {React.ReactNode | null} validation – React node rendering the appropriate validation message (if any)

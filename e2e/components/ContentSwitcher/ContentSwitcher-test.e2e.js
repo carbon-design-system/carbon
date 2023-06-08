@@ -29,6 +29,14 @@ test.describe('ContentSwitcher', () => {
           theme,
         });
       });
+
+      test('icon only with layer @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'ContentSwitcher',
+          id: 'components-contentswitcher--icon-only-with-layer',
+          theme,
+        });
+      });
     });
   });
 
@@ -41,5 +49,14 @@ test.describe('ContentSwitcher', () => {
       },
     });
     await expect(page).toHaveNoACViolations('ContentSwitcher');
+
+    await visitStory(page, {
+      component: 'ContentSwitcher',
+      id: 'components-contentswitcher--icon-only',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('ContentSwitcher-IconOnly');
   });
 });

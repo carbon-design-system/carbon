@@ -76,7 +76,7 @@ describe('TableSelectAll', () => {
         </Table>
       );
 
-      expect(screen.getByRole('checkbox').checked).toEqual(true);
+      expect(screen.getByRole('checkbox')).toBeChecked();
     });
 
     it('should support a custom `className` prop on the outermost element', () => {
@@ -118,7 +118,7 @@ describe('TableSelectAll', () => {
         </Table>
       );
 
-      expect(screen.getByRole('checkbox').disabled).toEqual(true);
+      expect(screen.getByRole('checkbox')).toBeDisabled();
     });
 
     it('should respect id prop', () => {
@@ -186,7 +186,7 @@ describe('TableSelectAll', () => {
   });
 
   describe('behaves as expected', () => {
-    it('should respect onSelect prop', () => {
+    it('should respect onSelect prop', async () => {
       const onSelect = jest.fn();
       render(
         <Table>
@@ -206,7 +206,7 @@ describe('TableSelectAll', () => {
       );
 
       expect(onSelect).toHaveBeenCalledTimes(0);
-      userEvent.click(screen.getByRole('checkbox'));
+      await userEvent.click(screen.getByRole('checkbox'));
       expect(onSelect).toHaveBeenCalledTimes(1);
     });
   });

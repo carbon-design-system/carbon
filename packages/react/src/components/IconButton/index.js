@@ -8,6 +8,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Button from '../Button';
+import classNames from 'classnames';
 import { Tooltip } from '../Tooltip';
 import { usePrefix } from '../../internal/usePrefix';
 import cx from 'classnames';
@@ -17,27 +18,35 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
     align,
     children,
     className,
+    closeOnActivation = true,
     defaultOpen = false,
+    disabled,
     enterDelayMs,
     kind,
     label,
     leaveDelayMs,
-    size = 'md',
+    wrapperClasses,
+    size,
     ...rest
   } = props;
   const prefix = usePrefix();
 
+  const tooltipClasses = classNames(wrapperClasses, `${prefix}--icon-tooltip`, {
+    [`${prefix}--icon-tooltip--disabled`]: disabled,
+  });
+
   return (
     <Tooltip
       align={align}
-      className={`${prefix}--icon-tooltip`}
-      closeOnActivation
+      closeOnActivation={closeOnActivation}
+      className={tooltipClasses}
       defaultOpen={defaultOpen}
       enterDelayMs={enterDelayMs}
       label={label}
       leaveDelayMs={leaveDelayMs}>
       <Button
         {...rest}
+        disabled={disabled}
         kind={kind}
         ref={ref}
         size={size}
@@ -74,9 +83,19 @@ IconButton.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Determines whether the tooltip should close when inner content is activated (click, Enter or Space)
+   */
+  closeOnActivation: PropTypes.bool,
+
+  /**
    * Specify whether the tooltip should be open when it first renders
    */
   defaultOpen: PropTypes.bool,
+
+  /**
+   * Specify whether the Button should be disabled, or not
+   */
+  disabled: PropTypes.bool,
 
   /**
    * Specify the duration in milliseconds to delay before displaying the tooltip
@@ -105,6 +124,11 @@ IconButton.propTypes = {
    * Specify the size of the Button. Defaults to `md`.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * Specify an optional className to be added to your Tooltip wrapper
+   */
+  wrapperClasses: PropTypes.string,
 };
 
 export { IconButton };

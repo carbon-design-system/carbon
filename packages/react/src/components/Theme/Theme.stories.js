@@ -7,8 +7,11 @@
 
 import './Theme-story.scss';
 import React from 'react';
+
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { VStack } from '../Stack';
+
 import { GlobalTheme, Theme, useTheme } from '../Theme';
-import { Layer } from '../Layer';
 import mdx from './Theme.mdx';
 
 export default {
@@ -87,36 +90,22 @@ export const UseTheme = () => {
 
 UseTheme.storyName = 'useTheme';
 
-export const WithLayer = () => {
-  function Layers() {
-    const { theme } = useTheme();
-    return (
-      <article className="theme-layer-example">
-        <header className="theme-layer-header">{theme} theme</header>
-        <div className="theme-with-layer">Layer one</div>
-        <Layer>
-          <div className="theme-with-layer">Layer two</div>
-          <Layer>
-            <div className="theme-with-layer">Layer three</div>
-          </Layer>
-        </Layer>
-      </article>
-    );
-  }
+export const _WithLayer = () => {
+  const themes = ['white', 'g10', 'g90', 'g100'];
 
   return (
-    <>
-      <Layers />
-      <Theme theme="g10">
-        <Layers />
-        <Theme theme="g90">
-          <Layers />
-          <Theme theme="g100">
-            <Layers />
-          </Theme>
+    <VStack gap={7}>
+      {themes.map((theme) => (
+        <Theme key={theme} theme={theme}>
+          <article className="theme-layer-example">
+            <header className="theme-layer-header">{theme} theme</header>
+            <WithLayer>
+              <div className="theme-with-layer">Content</div>
+            </WithLayer>
+          </article>
         </Theme>
-      </Theme>
-    </>
+      ))}
+    </VStack>
   );
 };
 

@@ -18,11 +18,13 @@ import wrapFocus, {
 } from '../../internal/wrapFocus';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
+import { keys, match } from '../../internal/keyboard';
 
 const getInstanceId = setupGetInstanceId();
 
 const Modal = React.forwardRef(function Modal(
   {
+    'aria-label': ariaLabelProp,
     children,
     className,
     modalHeading,
@@ -72,11 +74,11 @@ const Modal = React.forwardRef(function Modal(
 
   function handleKeyDown(evt) {
     if (open) {
-      if (evt.which === 27) {
+      if (match(evt, keys.Escape)) {
         onRequestClose(evt);
       }
       if (
-        evt.which === 13 &&
+        match(evt, keys.Enter) &&
         shouldSubmitOnEnter &&
         !isCloseButton(evt.target)
       ) {
@@ -140,25 +142,8 @@ const Modal = React.forwardRef(function Modal(
       Array.isArray(secondaryButtons) && secondaryButtons.length === 2,
   });
 
-  const modalButton = (
-    <button
-      className={modalCloseButtonClass}
-      type="button"
-      onClick={onRequestClose}
-      title={ariaLabel}
-      aria-label={closeButtonLabel ? closeButtonLabel : 'close'}
-      ref={button}>
-      <Close
-        size={20}
-        aria-hidden="true"
-        tabIndex="-1"
-        className={`${modalCloseButtonClass}__icon`}
-      />
-    </button>
-  );
-
   const ariaLabel =
-    modalLabel || rest['aria-label'] || modalAriaLabel || modalHeading;
+    modalLabel || ariaLabelProp || modalAriaLabel || modalHeading;
   const getAriaLabelledBy = modalLabel ? modalLabelId : modalHeadingId;
 
   const hasScrollingContentProps = hasScrollingContent
@@ -217,6 +202,23 @@ const Modal = React.forwardRef(function Modal(
     }
   }, [open, selectorPrimaryFocus, danger, prefix]);
 
+  const modalButton = (
+    <button
+      className={modalCloseButtonClass}
+      type="button"
+      onClick={onRequestClose}
+      title={ariaLabel}
+      aria-label={closeButtonLabel ? closeButtonLabel : 'close'}
+      ref={button}>
+      <Close
+        size={20}
+        aria-hidden="true"
+        tabIndex="-1"
+        className={`${modalCloseButtonClass}__icon`}
+      />
+    </button>
+  );
+
   const modalBody = (
     <div
       ref={innerModal}
@@ -241,8 +243,7 @@ const Modal = React.forwardRef(function Modal(
       <div
         id={modalBodyId}
         className={contentClasses}
-        {...hasScrollingContentProps}
-        aria-labelledby={getAriaLabelledBy}>
+        {...hasScrollingContentProps}>
         {children}
       </div>
       {hasScrollingContent && (

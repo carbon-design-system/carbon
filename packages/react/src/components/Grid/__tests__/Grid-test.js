@@ -5,13 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, cleanup } from '@carbon/test-utils/react';
+import { render } from '@testing-library/react';
 import React from 'react';
 import { Grid } from '../';
 
 describe('Grid', () => {
-  afterEach(cleanup);
-
   it('should support a custom element as the root node', () => {
     const { container } = render(<Grid as="section" />);
     expect(container.firstChild.tagName).toBe('SECTION');
@@ -19,12 +17,12 @@ describe('Grid', () => {
 
   it('should include a custom className', () => {
     const { container } = render(<Grid className="test" />);
-    expect(container.firstChild.classList.contains('test')).toBe(true);
+    expect(container.firstChild).toHaveClass('test');
   });
 
   it('should pass un-used props to the top-level node that is rendered', () => {
     const { container } = render(<Grid id="test" />);
-    expect(container.firstChild.getAttribute('id')).toBe('test');
+    expect(container.firstChild).toHaveAttribute('id', 'test');
   });
 
   it('should render `children` that are given', () => {
@@ -33,6 +31,7 @@ describe('Grid', () => {
         <span id="test">Test</span>
       </Grid>
     );
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const testNode = container.querySelector('#test');
     expect(testNode).toBeInstanceOf(HTMLElement);
   });

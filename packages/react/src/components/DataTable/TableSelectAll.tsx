@@ -69,7 +69,7 @@ const TableSelectAll = ({
       scope="col"
       className={cx(`${prefix}--table-column-checkbox`, className)}>
       <InlineCheckbox
-        ariaLabel={ariaLabel}
+        aria-label={ariaLabel}
         checked={checked}
         id={id}
         indeterminate={indeterminate}

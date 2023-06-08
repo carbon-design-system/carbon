@@ -6,8 +6,10 @@
  */
 
 import React from 'react';
+
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
+
 import { default as Dropdown, DropdownSkeleton } from './';
-import { Layer } from '../Layer';
 import mdx from './Dropdown.mdx';
 
 export default {
@@ -121,7 +123,7 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue: 'this is an example label',
+    defaultValue: 'This is an example label',
   },
   warn: {
     control: {
@@ -139,7 +141,7 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue: 'this is an example title',
+    defaultValue: 'This is an example title',
   },
   size: {
     options: ['sm', 'md', 'lg'],
@@ -158,7 +160,6 @@ export const Default = () => (
       id="default"
       titleText="Dropdown label"
       helperText="This is some helper text"
-      initialSelectedItem={items[0]}
       label="Dropdown menu options"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
@@ -171,7 +172,6 @@ export const Inline = () => (
     <Dropdown
       id="inline"
       titleText="Inline dropdown label"
-      initialSelectedItem={items[0]}
       label="Dropdown menu options"
       type="inline"
       items={items}
@@ -180,76 +180,38 @@ export const Inline = () => (
   </div>
 );
 
-export const WithLayer = () => (
-  <div style={{ width: 400 }}>
-    <Dropdown
-      id="default"
-      titleText="First Layer"
-      helperText="This is some helper text"
-      initialSelectedItem={items[0]}
-      label="Dropdown menu options"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-    />
-    <Layer>
-      <Dropdown
-        id="default"
-        titleText="Second Layer"
-        helperText="This is some helper text"
-        initialSelectedItem={items[0]}
-        label="Dropdown menu options"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-      />
-      <Layer>
+export const _WithLayer = () => (
+  <WithLayer>
+    {(layer) => (
+      <div style={{ width: 400 }}>
         <Dropdown
-          id="default"
-          titleText="Third Layer"
+          id={`default-${layer}`}
+          titleText="Dropdown label"
           helperText="This is some helper text"
-          initialSelectedItem={items[0]}
           label="Dropdown menu options"
           items={items}
           itemToString={(item) => (item ? item.text : '')}
         />
-      </Layer>
-    </Layer>
-  </div>
+      </div>
+    )}
+  </WithLayer>
 );
 
 export const InlineWithLayer = () => (
-  <div style={{ width: 600 }}>
-    <Dropdown
-      id="inline"
-      titleText="First Layer"
-      initialSelectedItem={items[0]}
-      label="Dropdown menu options"
-      type="inline"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-    />
-    <Layer>
-      <Dropdown
-        id="inline"
-        titleText="Second Layer"
-        initialSelectedItem={items[0]}
-        label="Dropdown menu options"
-        type="inline"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-      />
-      <Layer>
+  <WithLayer>
+    {(layer) => (
+      <div style={{ width: 600 }}>
         <Dropdown
-          id="inline"
-          titleText="Third Layer"
-          initialSelectedItem={items[0]}
+          id={`inline-${layer}`}
+          titleText="Inline dropdown label"
           label="Dropdown menu options"
           type="inline"
           items={items}
           itemToString={(item) => (item ? item.text : '')}
         />
-      </Layer>
-    </Layer>
-  </div>
+      </div>
+    )}
+  </WithLayer>
 );
 
 export const Skeleton = () => (

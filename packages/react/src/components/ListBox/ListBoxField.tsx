@@ -14,12 +14,10 @@ import { ReactAttr } from '../../types/common';
 export const translationIds = {};
 
 export interface ListBoxFieldProps extends ReactAttr<HTMLDivElement> {
-
   /**
    * Specify if the parent <ListBox> is disabled
    */
   disabled?: boolean;
-
 }
 
 /**
@@ -27,7 +25,12 @@ export interface ListBoxFieldProps extends ReactAttr<HTMLDivElement> {
  * elements inside of a field. It also provides a11y-related attributes like
  * `role` to make sure a user can focus the given field.
  */
-function ListBoxField({ children, disabled, tabIndex, ...rest }: ListBoxFieldProps) {
+function ListBoxField({
+  children,
+  disabled,
+  tabIndex,
+  ...rest
+}: ListBoxFieldProps) {
   const prefix = usePrefix();
 
   return (
@@ -69,6 +72,6 @@ ListBoxField.propTypes = {
   tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
-export type ListBoxFieldComponent = React.FC<ListBoxFieldProps>
+export type ListBoxFieldComponent = React.FC<ListBoxFieldProps>;
 
 export default ListBoxField as ListBoxFieldComponent;

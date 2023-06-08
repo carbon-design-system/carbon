@@ -25,12 +25,9 @@ function menuReducer(state, action) {
     case 'registerItem':
       return {
         ...state,
-        items: [...state.items, action.payload],
-      };
-    case 'clearRegisteredItems':
-      return {
-        ...state,
-        items: [],
+        items: [...state.items, action.payload].filter(
+          (item) => item.ref.current !== null
+        ),
       };
   }
 }

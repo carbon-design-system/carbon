@@ -20,7 +20,8 @@ export function StructuredListWrapper(props) {
     children,
     selection,
     className,
-    ariaLabel,
+    ['aria-label']: ariaLabel,
+    ariaLabel: deprecatedAriaLabel,
     isCondensed,
     isFlush,
     ...other
@@ -29,14 +30,18 @@ export function StructuredListWrapper(props) {
   const classes = classNames(`${prefix}--structured-list`, className, {
     [`${prefix}--structured-list--selection`]: selection,
     [`${prefix}--structured-list--condensed`]: isCondensed,
-    [`${prefix}--structured-list--flush`]: isFlush,
+    [`${prefix}--structured-list--flush`]: isFlush && !selection,
   });
   const [selectedRow, setSelectedRow] = React.useState(null);
 
   return (
     <GridSelectedRowStateContext.Provider value={selectedRow}>
       <GridSelectedRowDispatchContext.Provider value={setSelectedRow}>
-        <div role="table" className={classes} {...other} aria-label={ariaLabel}>
+        <div
+          role="table"
+          className={classes}
+          {...other}
+          aria-label={deprecatedAriaLabel || ariaLabel}>
           {children}
         </div>
       </GridSelectedRowDispatchContext.Provider>
@@ -48,7 +53,16 @@ StructuredListWrapper.propTypes = {
   /**
    * Specify a label to be read by screen readers on the container node
    */
-  ariaLabel: PropTypes.string,
+  ['aria-label']: PropTypes.string,
+
+  /**
+   * Deprecated, please use `aria-label` instead.
+   * Specify a label to be read by screen readers on the container note.
+   */
+  ariaLabel: deprecate(
+    PropTypes.string,
+    'This prop syntax has been deprecated. Please use the new `aria-label`.'
+  ),
 
   /**
    * Provide the contents of your StructuredListWrapper
@@ -66,7 +80,7 @@ StructuredListWrapper.propTypes = {
   isCondensed: PropTypes.bool,
 
   /**
-   * Specify if structured list is flush, default is false
+   * Specify if structured list is flush, not valid for selection variant, default is false
    */
   isFlush: PropTypes.bool,
 
@@ -80,7 +94,7 @@ StructuredListWrapper.defaultProps = {
   selection: false,
   isCondensed: false,
   isFlush: false,
-  ariaLabel: 'Structured list section',
+  ['aria-label']: 'Structured list section',
 };
 
 export function StructuredListHead(props) {
@@ -148,12 +162,14 @@ export function StructuredListRow(props) {
   const { onKeyDown, children, className, head, ...other } = props;
   const [hasFocusWithin, setHasFocusWithin] = useState(false);
   const id = useId('grid-input');
+  const selectedRow = React.useContext(GridSelectedRowStateContext);
   const setSelectedRow = React.useContext(GridSelectedRowDispatchContext);
   const prefix = usePrefix();
   const value = { id };
   const classes = classNames(`${prefix}--structured-list-row`, className, {
     [`${prefix}--structured-list-row--header-row`]: head,
     [`${prefix}--structured-list-row--focused-within`]: hasFocusWithin,
+    [`${prefix}--structured-list-row--selected`]: selectedRow === id,
   });
 
   return head ? (
@@ -223,6 +239,7 @@ export function StructuredListInput(props) {
     name = `structured-list-input-${defaultId}`,
     title,
     id,
+    onChange,
     ...other
   } = props;
   const prefix = usePrefix();
@@ -244,6 +261,7 @@ export function StructuredListInput(props) {
       value={row?.id ?? ''}
       onChange={(event) => {
         setSelectedRow(event.target.value);
+        onChange(event);
       }}
       id={id ?? defaultId}
       className={classes}
@@ -280,10 +298,7 @@ StructuredListInput.propTypes = {
   /**
    * Provide an optional hook that is called each time the input is updated
    */
-  onChange: deprecate(
-    PropTypes.func,
-    `\nThe prop \`onChange\` will be removed in the next major version of Carbon.`
-  ),
+  onChange: PropTypes.func,
 
   /**
    * Provide a `title` for the input

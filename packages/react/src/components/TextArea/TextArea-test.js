@@ -25,10 +25,10 @@ describe('TextArea', () => {
     });
 
     it('should support a custom `className` prop on the outermost element', () => {
-      render(
+      const { container } = render(
         <TextArea className="custom-class" id="testing" labelText="testLabel" />
       );
-      expect(screen.getByLabelText('testLabel')).toHaveClass('custom-class');
+      expect(container.firstChild).toHaveClass('custom-class');
     });
 
     it('should have default cols settings as expected', () => {
@@ -55,14 +55,12 @@ describe('TextArea', () => {
 
     it('should not be disabled by default', () => {
       render(<TextArea id="testing" labelText="testLabel" />);
-      expect(screen.getByLabelText('testLabel')).not.toHaveAttribute(
-        'disabled'
-      );
+      expect(screen.getByLabelText('testLabel')).toBeEnabled();
     });
 
     it('should be disabled as expected', () => {
       render(<TextArea disabled id="testing" labelText="testLabel" />);
-      expect(screen.getByLabelText('testLabel')).toHaveAttribute('disabled');
+      expect(screen.getByLabelText('testLabel')).toBeDisabled();
     });
 
     it('should respect hideLabel prop', () => {
@@ -167,6 +165,7 @@ describe('TextArea', () => {
       );
       expect(screen.getByText('This is helper text.').tagName).toBe('SPAN');
       expect(
+        // eslint-disable-next-line testing-library/no-node-access
         screen.getByText('This is helper text.').parentElement
       ).toHaveClass(`${prefix}--form__helper-text`);
     });
@@ -193,7 +192,9 @@ describe('TextArea', () => {
       expect(
         screen
           .getByText('testLabel')
+          // eslint-disable-next-line testing-library/no-node-access
           .closest(`.${prefix}--text-area__label-wrapper`)
+          // eslint-disable-next-line testing-library/no-node-access
           .getElementsByClassName(`${prefix}--label`).length
       ).toEqual(1);
     });
@@ -206,7 +207,9 @@ describe('TextArea', () => {
       expect(
         screen
           .getByText('testLabel')
+          // eslint-disable-next-line testing-library/no-node-access
           .closest(`.${prefix}--text-area__label-wrapper`)
+          // eslint-disable-next-line testing-library/no-node-access
           .getElementsByClassName(`${prefix}--label`).length
       ).toEqual(1);
     });
@@ -232,7 +235,7 @@ describe('TextArea', () => {
 
   describe('events', () => {
     describe('disabled textarea', () => {
-      it('should not invoke onClick when textarea is clicked', () => {
+      it('should not invoke onClick when textarea is clicked', async () => {
         const onClick = jest.fn();
         render(
           <TextArea
@@ -242,11 +245,11 @@ describe('TextArea', () => {
             onClick={onClick}
           />
         );
-        userEvent.click(screen.getByLabelText('testLabel'));
+        await userEvent.click(screen.getByLabelText('testLabel'));
         expect(onClick).not.toHaveBeenCalled();
       });
 
-      it('should not invoke onChange', () => {
+      it('should not invoke onChange', async () => {
         const onChange = jest.fn();
         render(
           <TextArea
@@ -256,8 +259,8 @@ describe('TextArea', () => {
             onChange={onChange}
           />
         );
-        userEvent.click(screen.getByLabelText('testLabel'));
-        userEvent.keyboard('big blue');
+        await userEvent.click(screen.getByLabelText('testLabel'));
+        await userEvent.keyboard('big blue');
         expect(onChange).not.toHaveBeenCalled();
       });
     });
@@ -288,7 +291,7 @@ describe('TextArea', () => {
           />
         );
         await userEvent.click(screen.getByLabelText('testLabel'));
-        userEvent.keyboard('big blue');
+        await userEvent.keyboard('big blue');
         expect(onChange).toHaveBeenCalled();
       });
     });

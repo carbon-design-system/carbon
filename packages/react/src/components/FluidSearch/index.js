@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './FluidSearch';
-export FluidSearch from './FluidSearch';
+export { default, default as FluidSearch } from './FluidSearch';
 
 export { default as FluidSearchSkeleton } from './FluidSearch.Skeleton';

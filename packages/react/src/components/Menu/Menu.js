@@ -31,6 +31,7 @@ const Menu = React.forwardRef(function Menu(
     className,
     label,
     onClose,
+    onOpen,
     open,
     size = 'sm',
     target = document.body,
@@ -67,7 +68,7 @@ const Menu = React.forwardRef(function Menu(
 
   const [position, setPosition] = useState([-1, -1]);
   const focusableItems = childContext.state.items.filter(
-    (item) => !item.disabled
+    (item) => !item.disabled && item.ref.current
   );
 
   function returnFocus() {
@@ -79,8 +80,17 @@ const Menu = React.forwardRef(function Menu(
   function handleOpen() {
     if (menu.current) {
       focusReturn.current = document.activeElement;
-      setPosition(calculatePosition());
+
+      const pos = calculatePosition();
+      menu.current.style.left = `${pos[0]}px`;
+      menu.current.style.top = `${pos[1]}px`;
+      setPosition(pos);
+
       menu.current.focus();
+
+      if (onOpen) {
+        onOpen();
+      }
     }
   }
 
@@ -93,8 +103,6 @@ const Menu = React.forwardRef(function Menu(
       returnFocus();
     }
 
-    childDispatch({ type: 'clearRegisteredItems' });
-
     if (onClose) {
       onClose();
     }
@@ -102,11 +110,6 @@ const Menu = React.forwardRef(function Menu(
 
   function handleKeyDown(e) {
     e.stopPropagation();
-
-    const currentItem = focusableItems.findIndex((item) =>
-      item.ref.current.contains(document.activeElement)
-    );
-    let indexToFocus = currentItem;
 
     // if the user presses escape or this is a submenu
     // and the user presses ArrowLeft, close it
@@ -116,28 +119,39 @@ const Menu = React.forwardRef(function Menu(
     ) {
       handleClose(e);
     } else {
-      // if currentItem is -1, the menu itself is focused.
-      // in this case, the arrow keys define the first item
-      // to be focused.
+      focusItem(e);
+    }
+  }
+
+  function focusItem(e) {
+    const currentItem = focusableItems.findIndex((item) =>
+      item.ref.current.contains(document.activeElement)
+    );
+    let indexToFocus = currentItem;
+
+    // if currentItem is -1, no menu item is focused yet.
+    // in this case, the first item should receive focus.
+    if (currentItem === -1) {
+      indexToFocus = 0;
+    } else if (e) {
       if (match(e, keys.ArrowUp)) {
-        indexToFocus =
-          currentItem === -1 ? focusableItems.length - 1 : indexToFocus - 1;
+        indexToFocus = indexToFocus - 1;
       }
       if (match(e, keys.ArrowDown)) {
-        indexToFocus = currentItem === -1 ? 0 : indexToFocus + 1;
+        indexToFocus = indexToFocus + 1;
       }
+    }
 
-      if (indexToFocus < 0) {
-        indexToFocus = 0;
-      }
-      if (indexToFocus >= focusableItems.length) {
-        indexToFocus = focusableItems.length - 1;
-      }
+    if (indexToFocus < 0) {
+      indexToFocus = focusableItems.length - 1;
+    }
+    if (indexToFocus >= focusableItems.length) {
+      indexToFocus = 0;
+    }
 
-      if (indexToFocus !== currentItem) {
-        const nodeToFocus = focusableItems[indexToFocus];
-        nodeToFocus.ref.current.focus();
-      }
+    if (indexToFocus !== currentItem) {
+      const nodeToFocus = focusableItems[indexToFocus];
+      nodeToFocus.ref.current.focus();
     }
   }
 
@@ -201,6 +215,13 @@ const Menu = React.forwardRef(function Menu(
   }
 
   useEffect(() => {
+    if (open && focusableItems.length > 0) {
+      focusItem();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, focusableItems]);
+
+  useEffect(() => {
     if (open) {
       handleOpen();
     } else {
@@ -236,12 +257,7 @@ const Menu = React.forwardRef(function Menu(
         aria-label={label}
         tabIndex={-1}
         onKeyDown={handleKeyDown}
-        onBlur={handleBlur}
-        // eslint-disable-next-line react/forbid-dom-props
-        style={{
-          left: `${position[0]}px`,
-          top: `${position[1]}px`,
-        }}>
+        onBlur={handleBlur}>
         {children}
       </ul>
     </MenuContext.Provider>
@@ -270,6 +286,11 @@ Menu.propTypes = {
    * Provide an optional function to be called when the Menu should be closed.
    */
   onClose: PropTypes.func,
+
+  /**
+   * Provide an optional function to be called when the Menu is opened.
+   */
+  onOpen: PropTypes.func,
 
   /**
    * Whether the Menu is open or not.

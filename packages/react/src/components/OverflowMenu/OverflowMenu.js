@@ -20,6 +20,9 @@ import mergeRefs from '../../tools/mergeRefs';
 import { PrefixContext } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { IconButton } from '../IconButton';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
+
+const getInstanceId = setupGetInstanceId();
 
 const on = (element, ...args) => {
   element.addEventListener(...args);
@@ -94,12 +97,22 @@ export const getMenuOffset = (menuBody, direction, trigger, flip) => {
 
 class OverflowMenu extends Component {
   state = {};
+  instanceId = getInstanceId();
 
   static propTypes = {
     /**
-     * The ARIA label.
+     * Specify a label to be read by screen readers on the container node
      */
-    ariaLabel: PropTypes.string.isRequired,
+    ['aria-label']: PropTypes.string,
+
+    /**
+     * Deprecated, please use `aria-label` instead.
+     * Specify a label to be read by screen readers on the container note.
+     */
+    ariaLabel: deprecate(
+      PropTypes.string,
+      'This prop syntax has been deprecated. Please use the new `aria-label`.'
+    ),
 
     /**
      * The child nodes.
@@ -227,7 +240,7 @@ class OverflowMenu extends Component {
   static contextType = PrefixContext;
 
   static defaultProps = {
-    ariaLabel: null,
+    ['aria-label']: null,
     iconDescription: 'Options',
     open: false,
     direction: DIRECTION_BOTTOM,
@@ -458,7 +471,8 @@ class OverflowMenu extends Component {
     const prefix = this.context;
     const {
       id,
-      ariaLabel,
+      ['aria-label']: ariaLabel,
+      ariaLabel: deprecatedAriaLabel,
       children,
       iconDescription,
       direction,
@@ -519,13 +533,16 @@ class OverflowMenu extends Component {
         })
     );
 
+    const menuBodyId = `overflow-menu-${this.instanceId}__menu-body`;
+
     const menuBody = (
       <ul
         className={overflowMenuOptionsClasses}
         tabIndex="-1"
         role="menu"
-        aria-label={ariaLabel}
-        onKeyDown={this.handleKeyPress}>
+        aria-label={ariaLabel || deprecatedAriaLabel}
+        onKeyDown={this.handleKeyPress}
+        id={menuBodyId}>
         {childrenWithProps}
       </ul>
     );
@@ -554,16 +571,20 @@ class OverflowMenu extends Component {
 
     return (
       <ClickListener onClickOutside={this.handleClickOutside}>
-        <span className={`${prefix}--overflow-menu__wrapper`}>
+        <span
+          className={`${prefix}--overflow-menu__wrapper`}
+          aria-owns={open ? menuBodyId : null}>
           <IconButton
             {...other}
             type="button"
             aria-haspopup
             aria-expanded={this.state.open}
+            aria-controls={open ? menuBodyId : null}
             className={overflowMenuClasses}
             onClick={this.handleClick}
             id={id}
             ref={mergeRefs(this._triggerRef, ref)}
+            size={size}
             label={iconDescription}>
             <IconElement {...iconProps} />
           </IconButton>

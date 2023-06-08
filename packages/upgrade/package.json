@@ -1,7 +1,7 @@
 {
   "name": "@carbon/upgrade",
   "description": "A tool for upgrading Carbon versions",
-  "version": "11.6.1",
+  "version": "11.7.0",
   "license": "Apache-2.0",
   "bin": {
     "carbon-upgrade": "./bin/carbon-upgrade.js"
@@ -50,7 +50,7 @@
     "memfs": "^3.4.0",
     "nanoid": "^3.1.30",
     "npm-which": "^3.0.1",
-    "rimraf": "^4.0.0",
+    "rimraf": "^5.0.0",
     "semver": "^7.3.5",
     "yargs": "^17.0.1"
   },

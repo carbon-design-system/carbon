@@ -2042,9 +2042,9 @@ fsevents@~2.3.1:
   linkType: hard
 
 "minimist@npm:^1.2.0, minimist@npm:^1.2.3":
-  version: 1.2.5
-  resolution: "minimist@npm:1.2.5"
-  checksum: b77b8590147a4e217ff34266236bc39de23b52e6e33054076991ff674c7397a1380a7bde11111916f16f003a94aaa7e4f3d92595a32189644ff607fabc65a5b6
+  version: 1.2.8
+  resolution: "minimist@npm:1.2.8"
+  checksum: 8/75a6d645fb122dad29c06a7597bddea977258957ed88d7a6df59b5cd3fe4a527e253e9bbf2e783e4b73657f9098b96a5fe96ab8a113655d4109108577ecf85b0
   languageName: node
   linkType: hard
 
@@ -2697,16 +2697,16 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^17.0.1":
-  version: 17.0.1
-  resolution: "react-dom@npm:17.0.1"
+"react-dom@npm:^17.0.2":
+  version: 17.0.2
+  resolution: "react-dom@npm:17.0.2"
   dependencies:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
-    scheduler: ^0.20.1
+    scheduler: ^0.20.2
   peerDependencies:
-    react: 17.0.1
-  checksum: 6a70028fbe3c95e0056c5e8ce065b4a9b8d4ff3bffde9b016454072bde5e4b012af7668ca45b7235ace428267d5be5237b68ea87ce8c296e54e81a8d678a4355
+    react: 17.0.2
+  checksum: 8/1c1eaa3bca7c7228d24b70932e3d7c99e70d1d04e13bb0843bbf321582bc25d7961d6b8a6978a58a598af2af496d1cedcfb1bf65f6b0960a0a8161cb8dab743c
   languageName: node
   linkType: hard
 
@@ -2724,13 +2724,13 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"react@npm:^17.0.1":
-  version: 17.0.1
-  resolution: "react@npm:17.0.1"
+"react@npm:^17.0.2":
+  version: 17.0.2
+  resolution: "react@npm:17.0.2"
   dependencies:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
-  checksum: a76d86ec973eb4b25a46071ac7f974adfd66ed89ad1db63043be1d976ec25417520a210e6d724b0ad937422b706afcf9962cedda9e92125992a8c0e8a95f2051
+  checksum: 8/b254cc17ce3011788330f7bbf383ab653c6848902d7936a87b09d835d091e3f295f7e9dd1597c6daac5dc80f90e778c8230218ba8ad599f74adcc11e33b9d61b
   languageName: node
   linkType: hard
 
@@ -2861,8 +2861,8 @@ fsevents@~2.3.1:
   dependencies:
     "@carbon/themes": "link:../../"
     next: ^10.0.6
-    react: ^17.0.1
-    react-dom: ^17.0.1
+    react: ^17.0.2
+    react-dom: ^17.0.2
     sass: ^1.36.0
   languageName: unknown
   linkType: soft
@@ -2880,13 +2880,13 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"scheduler@npm:^0.20.1":
-  version: 0.20.1
-  resolution: "scheduler@npm:0.20.1"
+"scheduler@npm:^0.20.2":
+  version: 0.20.2
+  resolution: "scheduler@npm:0.20.2"
   dependencies:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
-  checksum: 377b4ad0d8313c4548bac7374bc38409e9d142799979ce396787efa04d1bcabf2591540f243f2131e3df8e56e7f5b29c5415248523e88ecb60f13a32db2e076f
+  checksum: 8/c4b35cf967c8f0d3e65753252d0f260271f81a81e427241295c5a7b783abf4ea9e905f22f815ab66676f5313be0a25f47be582254db8f9241b259213e999b8fc
   languageName: node
   linkType: hard
 

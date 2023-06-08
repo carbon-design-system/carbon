@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import deprecate from '../../prop-types/deprecate';
+import { LayoutConstraint } from '../Layout';
 import { composeEventHandlers } from '../../tools/events';
 import { getNextIndex, matches, keys } from '../../internal/keyboard';
 import { PrefixContext } from '../../internal/usePrefix';
@@ -61,9 +62,8 @@ export default class ContentSwitcher extends React.Component {
 
     /**
      * Specify the size of the Content Switcher. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
-     * TODO V11: remove `xl` (replaced with lg)
      */
-    size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+    size: PropTypes.oneOf(['sm', 'md', 'lg']),
   };
 
   static contextType = PrefixContext;
@@ -141,13 +141,23 @@ export default class ContentSwitcher extends React.Component {
       ...other
     } = this.props;
 
+    const isIconOnly = React.Children.map(children, (child) => {
+      return child.type.displayName === 'IconSwitch';
+    }).every((val) => val === true);
+
     const classes = classNames(`${prefix}--content-switcher`, className, {
       [`${prefix}--content-switcher--light`]: light,
-      [`${prefix}--content-switcher--${size}`]: size,
+      [`${prefix}--content-switcher--${size}`]: size, // TODO: V12 - Remove this class
+      [`${prefix}--layout--size-${size}`]: size,
+      [`${prefix}--content-switcher--icon-only`]: isIconOnly,
     });
 
     return (
-      <div {...other} className={classes} role="tablist">
+      <LayoutConstraint
+        size={{ default: 'md', min: 'sm', max: 'lg' }}
+        {...other}
+        className={classes}
+        role="tablist">
         {React.Children.map(children, (child, index) =>
           React.cloneElement(child, {
             index,
@@ -158,9 +168,10 @@ export default class ContentSwitcher extends React.Component {
             onKeyDown: this.handleChildChange,
             selected: index === this.state.selectedIndex,
             ref: this.handleItemRef(index),
+            size,
           })
         )}
-      </div>
+      </LayoutConstraint>
     );
   }
 }

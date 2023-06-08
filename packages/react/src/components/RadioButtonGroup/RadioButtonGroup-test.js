@@ -23,7 +23,7 @@ describe('RadioButtonGroup', () => {
     const legend = screen.getByText('test', {
       selector: 'legend',
     });
-    expect(legend).toBeDefined();
+    expect(legend).toBeInTheDocument();
   });
 
   it('should render `legendText` in a <fieldset>', () => {
@@ -38,6 +38,7 @@ describe('RadioButtonGroup', () => {
       .getByText('test', {
         selector: 'legend',
       })
+      // eslint-disable-next-line testing-library/no-node-access
       .closest('fieldset');
     expect(fieldset).toBeDefined();
   });
@@ -54,6 +55,7 @@ describe('RadioButtonGroup', () => {
       .getByText('test', {
         selector: 'legend',
       })
+      // eslint-disable-next-line testing-library/no-node-access
       .closest('fieldset');
     expect(fieldset).toContainElement(screen.getByLabelText('test-1'));
     expect(fieldset).toContainElement(screen.getByLabelText('test-2'));
@@ -90,11 +92,12 @@ describe('RadioButtonGroup', () => {
         .getByText('test', {
           selector: 'legend',
         })
+        // eslint-disable-next-line testing-library/no-node-access
         .closest('fieldset');
       expect(fieldset).toBeDisabled();
     });
 
-    it('should support readonly to prevent changes', () => {
+    it('should support readonly to prevent changes', async () => {
       render(
         <RadioButtonGroup
           defaultSelected="test-1"
@@ -112,7 +115,7 @@ describe('RadioButtonGroup', () => {
       expect(radio1).toBeChecked();
       expect(radio2).not.toBeChecked();
 
-      userEvent.click(radio2);
+      await userEvent.click(radio2);
 
       // no change
       expect(radio1).toBeChecked();
@@ -208,7 +211,7 @@ describe('RadioButtonGroup', () => {
       );
     });
 
-    it('should call `onChange` when the value of the group changes', () => {
+    it('should call `onChange` when the value of the group changes', async () => {
       const onChange = jest.fn();
 
       render(
@@ -218,7 +221,7 @@ describe('RadioButtonGroup', () => {
         </RadioButtonGroup>
       );
 
-      userEvent.click(screen.getByLabelText('Option one'));
+      await userEvent.click(screen.getByLabelText('Option one'));
       expect(onChange).toHaveBeenCalled();
       expect(onChange).toHaveBeenCalledWith(
         'option-one',

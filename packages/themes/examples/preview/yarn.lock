@@ -1019,7 +1019,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^17.0.1":
+"react-dom@npm:^17.0.2":
   version: 17.0.2
   resolution: "react-dom@npm:17.0.2"
   dependencies:
@@ -1032,7 +1032,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"react@npm:^17.0.1":
+"react@npm:^17.0.2":
   version: 17.0.2
   resolution: "react@npm:17.0.2"
   dependencies:
@@ -1271,8 +1271,8 @@ fsevents@~2.3.2:
     "@carbon/colors": "link:../../../colors"
     "@carbon/themes": "link:../../"
     next: ^12.1.0
-    react: ^17.0.1
-    react-dom: ^17.0.1
+    react: ^17.0.2
+    react-dom: ^17.0.2
     sass: ^1.36.0
   languageName: unknown
   linkType: soft

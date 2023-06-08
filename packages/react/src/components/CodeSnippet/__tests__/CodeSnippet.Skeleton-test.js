@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, cleanup } from '@carbon/test-utils/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { CodeSnippetSkeleton } from '../';
 
@@ -13,8 +13,6 @@ const prefix = 'cds';
 const snippetTypes = ['single', 'multi'];
 
 describe('CodeSnippetSkeleton', () => {
-  afterEach(cleanup);
-
   describe('automated accessibility testing', () => {
     it.each(snippetTypes)(
       'should have no Axe violations with type="%s"',
@@ -36,15 +34,15 @@ describe('CodeSnippetSkeleton', () => {
   });
 
   it('should default to type="single"', () => {
-    const { container } = render(<CodeSnippetSkeleton />);
-    expect(
-      container.querySelector(`.${prefix}--snippet--single`)
-    ).toBeInstanceOf(HTMLElement);
+    render(<CodeSnippetSkeleton data-testid="single type" />);
+    expect(screen.getByTestId('single type')).toHaveClass(
+      `${prefix}--snippet--single`
+    );
   });
 
   it('should support a custom `className` on the outer-most element', () => {
     const className = 'test';
     const { container } = render(<CodeSnippetSkeleton className={className} />);
-    expect(container.firstChild.classList.contains(className)).toBe(true);
+    expect(container.firstChild).toHaveClass(className);
   });
 });

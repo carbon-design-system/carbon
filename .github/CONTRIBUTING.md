@@ -57,8 +57,8 @@ repo of Carbon associated with your account.
 
 1.  Go to your [GitHub Repositories](https://github.com/settings/repositories).
 1.  Click on `[your_github_username]/carbon`.
-1.  Click on the `Clone or Download` button and copy the URL from the
-    `Clone with SSH` option. It should start with `git@github.com...`
+1.  Click on the `Code` button and copy the URL from the `Clone with SSH`
+    option. It should start with `git@github.com...`
 
 In your terminal:
 

@@ -1,7 +1,7 @@
 {
   "name": "@carbon/scss-generator",
   "private": true,
-  "version": "10.15.0",
+  "version": "10.18.0",
   "license": "Apache-2.0",
   "main": "src/index.js",
   "repository": {
@@ -23,6 +23,6 @@
     "access": "public"
   },
   "dependencies": {
-    "prettier": "^2.7.1"
+    "prettier": "^2.8.8"
   }
 }

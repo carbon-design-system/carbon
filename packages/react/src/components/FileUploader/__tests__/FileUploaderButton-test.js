@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, cleanup } from '@carbon/test-utils/react';
+import { act, render } from '@testing-library/react';
 import { getByText } from '@carbon/test-utils/dom';
 import React from 'react';
 import { Simulate } from 'react-dom/test-utils';
@@ -13,8 +13,6 @@ import { FileUploaderButton } from '../';
 import { uploadFiles } from '../test-helpers';
 
 describe('FileUploaderButton', () => {
-  afterEach(cleanup);
-
   describe('automated accessibility tests', () => {
     it('should have no axe violations', async () => {
       const { container } = render(<FileUploaderButton name="test" />);
@@ -24,7 +22,7 @@ describe('FileUploaderButton', () => {
 
   it('should support a custom class name on the root element', () => {
     const { container } = render(<FileUploaderButton className="test" />);
-    expect(container.firstChild.classList.contains('test')).toBe(true);
+    expect(container.firstChild).toHaveClass('test');
   });
 
   it('should call `onClick` if the label is clicked', () => {
@@ -32,6 +30,7 @@ describe('FileUploaderButton', () => {
     const { container } = render(
       <FileUploaderButton labelText="test" onClick={onClick} />
     );
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     const label = getByText(container, 'test');
     Simulate.click(label);
     expect(onClick).toHaveBeenCalledTimes(1);
@@ -42,6 +41,7 @@ describe('FileUploaderButton', () => {
     const { container } = render(
       <FileUploaderButton onChange={onChange} accept={['.png']} />
     );
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const input = container.querySelector('input');
     const file = new File(['test'], 'test.png', { type: 'image/png' });
     uploadFiles(input, file);
@@ -50,6 +50,7 @@ describe('FileUploaderButton', () => {
 
   it('should not support multiple files by default', () => {
     const { container } = render(<FileUploaderButton />);
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const input = container.querySelector('input');
     expect(input.getAttribute('multiple')).toBeFalsy();
   });
@@ -61,6 +62,7 @@ describe('FileUploaderButton', () => {
         <FileUploaderButton />
       </>
     );
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const inputs = container.querySelectorAll('input');
     expect(inputs[0].getAttribute('id')).not.toBe(inputs[1].getAttribute('id'));
   });
@@ -69,6 +71,7 @@ describe('FileUploaderButton', () => {
     const { container } = render(
       <FileUploaderButton accept={['.png']} labelText="test" />
     );
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const input = container.querySelector('button');
 
     const filename = 'test.png';
@@ -83,9 +86,11 @@ describe('FileUploaderButton', () => {
   it('should update the label text if it receives a new value from props', () => {
     const container = document.createElement('div');
     render(<FileUploaderButton labelText="test" />, { container });
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     expect(getByText(container, 'test')).toBeInstanceOf(HTMLElement);
 
     render(<FileUploaderButton labelText="tester" />, { container });
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     expect(getByText(container, 'tester')).toBeInstanceOf(HTMLElement);
   });
 
@@ -94,14 +99,19 @@ describe('FileUploaderButton', () => {
       const { container } = render(
         <FileUploaderButton accept={['.png']} labelText="test" />
       );
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const input = container.querySelector('input');
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       const label = getByText(container, 'test');
       expect(label).toBeInstanceOf(HTMLElement);
 
       const filename = 'test.png';
       const file = new File(['test'], filename, { type: 'image/png' });
-      uploadFiles(input, [file]);
+      act(() => {
+        uploadFiles(input, [file]);
+      });
 
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       expect(getByText(container, filename)).toBeInstanceOf(HTMLElement);
     });
 
@@ -109,7 +119,9 @@ describe('FileUploaderButton', () => {
       const { container } = render(
         <FileUploaderButton accept={['.png']} labelText="test" multiple />
       );
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const input = container.querySelector('input');
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       const label = getByText(container, 'test');
       expect(label).toBeInstanceOf(HTMLElement);
 
@@ -119,7 +131,10 @@ describe('FileUploaderButton', () => {
         new File(['test-3'], 'test-1.png', { type: 'image/png' }),
       ];
 
-      uploadFiles(input, files);
+      act(() => {
+        uploadFiles(input, files);
+      });
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       expect(getByText(container, `${files.length} files`)).toBeInstanceOf(
         HTMLElement
       );
@@ -133,7 +148,9 @@ describe('FileUploaderButton', () => {
           disableLabelChanges
         />
       );
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const input = container.querySelector('input');
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       const label = getByText(container, 'test');
       expect(label).toBeInstanceOf(HTMLElement);
 
@@ -141,6 +158,7 @@ describe('FileUploaderButton', () => {
       const file = new File(['test'], filename, { type: 'image/png' });
       uploadFiles(input, [file]);
 
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       expect(getByText(container, 'test')).toBeInstanceOf(HTMLElement);
     });
   });

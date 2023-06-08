@@ -34,7 +34,8 @@ describe('FormGroup', () => {
       </FormGroup>
     );
 
-    expect(screen.queryByText('legendtest')).toBeDefined();
+    // eslint-disable-next-line testing-library/prefer-presence-queries
+    expect(screen.queryByText('legendtest')).toBeInTheDocument();
   });
 
   it('should set the id for legend based on legendId', () => {
@@ -61,7 +62,8 @@ describe('FormGroup', () => {
       </FormGroup>
     );
 
-    expect(screen.queryByText('Message text')).toBeDefined();
+    // eslint-disable-next-line testing-library/prefer-presence-queries
+    expect(screen.queryByText('Message text')).toBeInTheDocument();
   });
 
   it('should not display the messageText if message is false', () => {
@@ -75,6 +77,6 @@ describe('FormGroup', () => {
       </FormGroup>
     );
 
-    expect(screen.queryByText('Message text')).toBeNull();
+    expect(screen.queryByText('Message text')).not.toBeInTheDocument();
   });
 });

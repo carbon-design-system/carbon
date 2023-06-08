@@ -12,7 +12,6 @@ import { matches, keys } from '../../internal/keyboard';
 import { ButtonKinds } from '../../prop-types/types';
 import uid from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
-import * as FeatureFlags from '@carbon/feature-flags';
 import deprecate from '../../prop-types/deprecate';
 
 function noop() {}
@@ -44,6 +43,7 @@ function FileUploaderButton({
     // V11: remove field, small
     [`${prefix}--btn--md`]: size === 'field' || size === 'md',
     [`${prefix}--btn--sm`]: size === 'small' || size === 'sm',
+    [`${prefix}--layout--size-${size}`]: size,
   });
 
   // Adjust label text state based on changes to the labelText prop
@@ -54,11 +54,13 @@ function FileUploaderButton({
 
   function onClick(event) {
     event.target.value = null;
+    inputNode.current.value = '';
     inputNode.current.click();
   }
 
   function onKeyDown(event) {
     if (matches(event, [keys.Enter, keys.Space])) {
+      inputNode.current.value = '';
       inputNode.current.click();
     }
   }
@@ -178,9 +180,7 @@ FileUploaderButton.propTypes = {
    * Specify the size of the FileUploaderButton, from a list of available
    * sizes.
    */
-  size: FeatureFlags.enabled('enable-v11-release')
-    ? PropTypes.oneOf(['sm', 'md', 'lg'])
-    : PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * Provide a custom tabIndex value for the `<FileUploaderButton>`

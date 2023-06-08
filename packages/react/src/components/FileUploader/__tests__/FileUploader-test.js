@@ -6,77 +6,94 @@
  */
 
 import { getByLabel, getByText } from '@carbon/test-utils/dom';
-import { render, cleanup } from '@carbon/test-utils/react';
+import { act, render } from '@testing-library/react';
 import React from 'react';
 import FileUploader from '../';
 import { uploadFiles } from '../test-helpers';
 
-describe('FileUploader', () => {
-  afterEach(cleanup);
+const iconDescription = 'test description';
+const requiredProps = { iconDescription };
 
+describe('FileUploader', () => {
   describe('automated accessibility tests', () => {
     it.skip('should have no axe violations', async () => {
-      const { container } = render(<FileUploader />);
+      const { container } = render(<FileUploader {...requiredProps} />);
       await expect(container).toHaveNoAxeViolations();
     });
 
     it.skip('should have no AC violations', async () => {
-      const { container } = render(<FileUploader />);
+      const { container } = render(<FileUploader {...requiredProps} />);
       await expect(container).toHaveNoACViolations('FileUploader');
     });
   });
 
   it('should support a custom class name on the root element', () => {
-    const { container } = render(<FileUploader className="test" />);
-    expect(container.firstChild.classList.contains('test')).toBe(true);
+    const { container } = render(
+      <FileUploader {...requiredProps} className="test" />
+    );
+    expect(container.firstChild).toHaveClass('test');
   });
 
   it('should not update the label by default when selecting files', () => {
-    const { container } = render(<FileUploader buttonLabel="upload" />);
+    const { container } = render(
+      <FileUploader {...requiredProps} buttonLabel="upload" />
+    );
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const input = container.querySelector('input');
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     const label = getByText(container, 'upload');
 
     expect(label).toBeInstanceOf(HTMLElement);
-    uploadFiles(input, [new File(['test'], 'test.png', { type: 'image/png' })]);
+    act(() => {
+      uploadFiles(input, [
+        new File(['test'], 'test.png', { type: 'image/png' }),
+      ]);
+    });
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     expect(getByText(container, 'upload')).toBeInstanceOf(HTMLElement);
   });
 
   it('should clear all uploaded files when `clearFiles` is called on a ref', () => {
     const ref = React.createRef();
-    const { container } = render(<FileUploader ref={ref} />);
+    const { container } = render(<FileUploader {...requiredProps} ref={ref} />);
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const input = container.querySelector('input');
 
     const filename = 'test.png';
-    uploadFiles(input, [new File(['test'], filename, { type: 'image/png' })]);
+    act(() => {
+      uploadFiles(input, [new File(['test'], filename, { type: 'image/png' })]);
+    });
 
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     expect(getByText(container, filename)).toBeInstanceOf(HTMLElement);
-    ref.current.clearFiles();
+    act(() => {
+      ref.current.clearFiles();
+    });
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     expect(getByText(container, filename)).not.toBeInstanceOf(HTMLElement);
   });
 
   it('should synchronize the filename status state when its prop changes', () => {
     const container = document.createElement('div');
-    const description = 'test';
-    render(
-      <FileUploader filenameStatus="edit" iconDescription={description} />,
-      {
-        container,
-      }
-    );
+    render(<FileUploader {...requiredProps} filenameStatus="edit" />, {
+      container,
+    });
 
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const input = container.querySelector('input');
-    uploadFiles(input, [new File(['test'], 'test.png', { type: 'image/png' })]);
+    act(() => {
+      uploadFiles(input, [
+        new File(['test'], 'test.png', { type: 'image/png' }),
+      ]);
+    });
 
-    const edit = getByLabel(container, description);
+    const edit = getByLabel(container, iconDescription);
 
-    render(
-      <FileUploader filenameStatus="complete" iconDescription={description} />,
-      {
-        container,
-      }
-    );
+    render(<FileUploader {...requiredProps} filenameStatus="complete" />, {
+      container,
+    });
 
-    const complete = getByLabel(container, description);
-    expect(edit.parentNode).not.toEqual(complete.parentNode);
+    const complete = getByLabel(container, iconDescription);
+    expect(edit).not.toEqual(complete);
   });
 });

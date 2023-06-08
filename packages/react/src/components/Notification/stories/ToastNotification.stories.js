@@ -23,7 +23,7 @@ export default {
     kind: 'error',
     lowContrast: false,
     hideCloseButton: false,
-    ariaLabel: 'closes notification',
+    ['aria-label']: 'closes notification',
     statusIconDescription: 'notification',
     onClose: action('onClose'),
     onCloseButtonClick: action('onCloseButtonClick'),
@@ -48,6 +48,11 @@ Playground.argTypes = {
       disable: true,
     },
   },
+  ['aria-label']: {
+    table: {
+      disable: true,
+    },
+  },
   ariaLabel: {
     table: {
       disable: true,
@@ -59,10 +64,10 @@ Playground.argTypes = {
     },
   },
   onClose: {
-    action: 'clicked',
+    action: 'onClose',
   },
   onCloseButtonClick: {
-    action: 'clicked',
+    action: 'onCloseButtonClick',
   },
   children: {
     table: {

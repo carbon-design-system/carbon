@@ -7,6 +7,7 @@
 
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
+import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 
@@ -16,7 +17,8 @@ const InlineCheckbox = React.forwardRef(function InlineCheckbox(
   forwardRef
 ) {
   const {
-    ariaLabel,
+    ['aria-label']: ariaLabel,
+    ariaLabel: deprecatedAriaLabel,
     checked = false,
     disabled,
     id,
@@ -61,7 +63,7 @@ const InlineCheckbox = React.forwardRef(function InlineCheckbox(
         <label
           htmlFor={id}
           className={`${prefix}--checkbox-label`}
-          aria-label={ariaLabel}
+          aria-label={deprecatedAriaLabel || ariaLabel}
           title={title}
           onClick={(evt) => {
             evt.stopPropagation();
@@ -76,7 +78,16 @@ InlineCheckbox.propTypes = {
   /**
    * Specify the label for the control
    */
-  ariaLabel: PropTypes.string.isRequired,
+  ['aria-label']: PropTypes.string.isRequired,
+
+  /**
+   * Deprecated, please use `aria-label` instead.
+   * Specify the label for the control
+   */
+  ariaLabel: deprecate(
+    PropTypes.string.isRequired,
+    'The `ariaLabel` prop has been deprecated in favor of `aria-label`. This prop will be removed in the next major release.'
+  ),
 
   /**
    * Specify whether the underlying control is checked, or not

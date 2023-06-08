@@ -315,16 +315,16 @@ Playground.argTypes = {
     },
   },
   onKeyDown: {
-    action: 'clicked',
+    action: 'onKeyDown',
   },
   onRequestClose: {
-    action: 'clicked',
+    action: 'onRequestClose',
   },
   onRequestSubmit: {
-    action: 'clicked',
+    action: 'onRequestSubmit',
   },
   onSecondarySubmit: {
-    action: 'clicked',
+    action: 'onSecondarySubmit',
     table: {
       disable: true,
     },

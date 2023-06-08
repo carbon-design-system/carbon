@@ -6,10 +6,13 @@
  */
 
 import React from 'react';
+
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
+
 import { default as Select, SelectSkeleton } from '../Select';
 import SelectItem from '../SelectItem';
 import SelectItemGroup from '../SelectItemGroup';
-import { Layer } from '../Layer';
+import mdx from './Select.mdx';
 
 export default {
   title: 'Components/Select',
@@ -62,6 +65,11 @@ export default {
     SelectItemGroup,
     SelectSkeleton,
   },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 export const Default = () => {
@@ -69,23 +77,13 @@ export const Default = () => {
     <div>
       <Select
         id="select-1"
-        defaultValue="placeholder-item"
         labelText="Select an option"
         helperText="Optional helper text">
-        <SelectItem
-          disabled
-          hidden
-          value="placeholder-item"
-          text="Choose an option"
-        />
-        <SelectItemGroup label="Category 1">
-          <SelectItem value="option-1" text="Option 1" />
-          <SelectItem value="option-2" text="Option 2" />
-        </SelectItemGroup>
-        <SelectItemGroup label="Category 2">
-          <SelectItem value="option-3" text="Option 3" />
-          <SelectItem value="option-4" text="Option 4" />
-        </SelectItemGroup>
+        <SelectItem value="" text="" />
+        <SelectItem value="option-1" text="Option 1" />
+        <SelectItem value="option-2" text="Option 2" />
+        <SelectItem value="option-3" text="Option 3" />
+        <SelectItem value="option-4" text="Option 4" />
       </Select>
     </div>
   );
@@ -97,23 +95,13 @@ export const Inline = () => {
       <Select
         inline
         id="select-1"
-        defaultValue="placeholder-item"
         labelText="Select"
         helperText="Optional helper text">
-        <SelectItem
-          disabled
-          hidden
-          value="placeholder-item"
-          text="Choose an option"
-        />
-        <SelectItemGroup label="Category 1">
-          <SelectItem value="option-1" text="Option 1" />
-          <SelectItem value="option-2" text="Option 2" />
-        </SelectItemGroup>
-        <SelectItemGroup label="Category 2">
-          <SelectItem value="option-3" text="Option 3" />
-          <SelectItem value="option-4" text="Option 4" />
-        </SelectItemGroup>
+        <SelectItem value="" text="" />
+        <SelectItem value="option-1" text="Option 1" />
+        <SelectItem value="option-2" text="Option 2" />
+        <SelectItem value="option-3" text="Option 3" />
+        <SelectItem value="option-4" text="Option 4" />
       </Select>
     </div>
   );
@@ -130,86 +118,34 @@ export const Skeleton = () => (
   </div>
 );
 
-export const WithLayer = () => {
-  return (
-    <>
+export const _WithLayer = () => (
+  <WithLayer>
+    {(layer) => (
       <Select
-        id="select-1"
-        defaultValue="placeholder-item"
+        id={`select-${layer}`}
         labelText=""
-        helperText="First layer">
-        <SelectItem
-          disabled
-          hidden
-          value="placeholder-item"
-          text="Choose an option"
-        />
+        helperText="Optional helper text">
+        <SelectItem value="" text="" />
         <SelectItem value="option-1" text="Option 1" />
         <SelectItem value="option-2" text="Option 2" />
       </Select>
-      <Layer>
-        <Select
-          id="select-1"
-          defaultValue="placeholder-item"
-          labelText=""
-          helperText=" Second layer">
-          <SelectItem
-            disabled
-            hidden
-            value="placeholder-item"
-            text="Choose an option"
-          />
-          <SelectItem value="option-1" text="Option 1" />
-          <SelectItem value="option-2" text="Option 2" />
-          <SelectItem value="option-3" text="Option 3" />
-          <SelectItem value="option-4" text="Option 4" />
-        </Select>
-        <Layer>
-          <Select
-            id="select-1"
-            defaultValue="placeholder-item"
-            labelText=""
-            helperText="Third layer">
-            <SelectItem
-              disabled
-              hidden
-              value="placeholder-item"
-              text="Choose an option"
-            />
-            <SelectItem value="option-1" text="Option 1" />
-            <SelectItem value="option-2" text="Option 2" />
-            <SelectItem value="option-3" text="Option 3" />
-            <SelectItem value="option-4" text="Option 4" />
-          </Select>
-        </Layer>
-      </Layer>
-    </>
-  );
-};
+    )}
+  </WithLayer>
+);
 
 export const Playground = (args) => {
   return (
     <div>
       <Select
         id="select-1"
-        defaultValue="placeholder-item"
         labelText="Select an option"
         helperText="Optional helper text"
         {...args}>
-        <SelectItem
-          disabled
-          hidden
-          value="placeholder-item"
-          text="Choose an option"
-        />
-        <SelectItemGroup label="Category 1">
-          <SelectItem value="option-1" text="Option 1" />
-          <SelectItem value="option-2" text="Option 2" />
-        </SelectItemGroup>
-        <SelectItemGroup label="Category 2">
-          <SelectItem value="option-3" text="Option 3" />
-          <SelectItem value="option-4" text="Option 4" />
-        </SelectItemGroup>
+        <SelectItem value="" text="" />
+        <SelectItem value="option-1" text="Option 1" />
+        <SelectItem value="option-2" text="Option 2" />
+        <SelectItem value="option-3" text="Option 3" />
+        <SelectItem value="option-4" text="Option 4" />
       </Select>
     </div>
   );

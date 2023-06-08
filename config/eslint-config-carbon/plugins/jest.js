@@ -8,9 +8,10 @@
 'use strict';
 
 module.exports = {
-  plugins: ['eslint-plugin-jest'],
+  plugins: ['eslint-plugin-jest', 'jest-dom'],
   overrides: [
     {
+      extends: ['plugin:jest-dom/recommended'],
       files: ['*-test.js', '*.test.js', '*-spec.js', '*.spec.js'],
       env: {
         'jest/globals': true,

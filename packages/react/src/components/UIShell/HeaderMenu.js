@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 import { keys, matches } from '../../internal/keyboard';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { PrefixContext } from '../../internal/usePrefix';
+import deprecate from '../../prop-types/deprecate';
 
 /**
  * `HeaderMenu` is used to render submenu's in the `Header`. Most often children
@@ -37,9 +38,19 @@ class HeaderMenu extends React.Component {
     focusRef: PropTypes.func,
 
     /**
-     * Applies selected styles to the item if a user sets this to true and aria-current !== 'page'.
+     * Applies selected styles to the item if a user sets this to true and `aria-current !== 'page'`.
      */
-    isCurrentPage: PropTypes.bool,
+    isActive: PropTypes.bool,
+
+    /**
+     * Applies selected styles to the item if a user sets this to true and `aria-current !== 'page'`.
+     * @deprecated Please use `isActive` instead. This will be removed in the next major release.
+     */
+    isCurrentPage: deprecate(
+      PropTypes.bool,
+      'The `isCurrentPage` prop for `HeaderMenu` has ' +
+        'been deprecated. Please use `isActive` instead. This will be removed in the next major release.'
+    ),
 
     /**
      * Provide a label for the link text
@@ -170,6 +181,7 @@ class HeaderMenu extends React.Component {
   render() {
     const prefix = this.context;
     const {
+      isActive,
       isCurrentPage,
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
@@ -181,6 +193,10 @@ class HeaderMenu extends React.Component {
       ...rest
     } = this.props;
 
+    const hasActiveChildren = React.Children.toArray(children).some(
+      (child) => child.props.isActive || child.props.isCurrentPage
+    );
+
     const accessibilityLabel = {
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
@@ -189,12 +205,14 @@ class HeaderMenu extends React.Component {
       [`${prefix}--header__submenu`]: true,
       [customClassName]: !!customClassName,
     });
+    let isActivePage = isActive ? isActive : isCurrentPage;
     const linkClassName = cx({
       [`${prefix}--header__menu-item`]: true,
       [`${prefix}--header__menu-title`]: true,
-      // We set the current class only if `isCurrentPage` is passed in and we do
+      // We set the current class only if `isActive` is passed in and we do
       // not have an `aria-current="page"` set for the breadcrumb item
-      [`${prefix}--header__menu-item--current`]: isCurrentPage,
+      [`${prefix}--header__menu-item--current`]:
+        isActivePage || (hasActiveChildren && !this.state.expanded),
     });
 
     // Notes on eslint comments and based on the examples in:

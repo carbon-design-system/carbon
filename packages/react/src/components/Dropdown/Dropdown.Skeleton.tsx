@@ -13,9 +13,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
 
 export interface DropdownSkeletonProps extends ReactAttr<HTMLDivElement> {
-
   size?: ListBoxSize;
-
 }
 
 const DropdownSkeleton: React.FC<DropdownSkeletonProps> = ({

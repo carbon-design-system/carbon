@@ -10,9 +10,9 @@ import React from 'react';
 import { HeaderMenuItem } from '../';
 
 describe('HeaderMenuItem', () => {
-  it('should set the current class based on isCurrentPage', () => {
+  it('should set the current class based on isActive', () => {
     render(
-      <HeaderMenuItem data-testid="test" isCurrentPage>
+      <HeaderMenuItem data-testid="test" isActive>
         test
       </HeaderMenuItem>
     );

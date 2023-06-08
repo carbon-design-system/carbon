@@ -29,8 +29,7 @@ export default class ClickListener extends React.Component {
   constructor(props) {
     super(props);
     // We manually bind handlers in this Component, versus using class
-    // properties, so that we can properly test the `handleRef` handler with
-    // enzyme.
+    // properties, so that we can properly test the `handleRef` handler.
     this.handleRef = this.handleRef.bind(this);
     this.handleDocumentClick = this.handleDocumentClick.bind(this);
   }

@@ -14,20 +14,23 @@ import { useFallbackId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 
-function RadioTile({
-  children,
-  className: customClassName,
-  disabled,
-  // eslint-disable-next-line no-unused-vars
-  light,
-  checked,
-  name,
-  value,
-  id,
-  onChange,
-  tabIndex,
-  ...rest
-}) {
+const RadioTile = React.forwardRef(function RadioTile(
+  {
+    children,
+    className: customClassName,
+    disabled,
+    // eslint-disable-next-line no-unused-vars
+    light,
+    checked,
+    name,
+    value,
+    id,
+    onChange,
+    tabIndex,
+    ...rest
+  },
+  ref
+) {
   const prefix = usePrefix();
   const inputId = useFallbackId(id);
   const className = cx(
@@ -53,7 +56,7 @@ function RadioTile({
   }
 
   return (
-    <>
+    <div>
       <input
         checked={checked}
         className={`${prefix}--tile-input`}
@@ -65,6 +68,7 @@ function RadioTile({
         tabIndex={!disabled ? tabIndex : null}
         type="radio"
         value={value}
+        ref={ref}
       />
       <label {...rest} htmlFor={inputId} className={className}>
         <span className={`${prefix}--tile__checkmark`}>
@@ -72,9 +76,9 @@ function RadioTile({
         </span>
         <span className={`${prefix}--tile-content`}>{children}</span>
       </label>
-    </>
+    </div>
   );
-}
+});
 
 RadioTile.propTypes = {
   /**

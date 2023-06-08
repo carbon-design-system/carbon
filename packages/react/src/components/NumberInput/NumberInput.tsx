@@ -209,8 +209,8 @@ const NumberInput = React.forwardRef(function NumberInput(
     invalid = false,
     invalidText,
     light,
-    max = 100,
-    min = 0,
+    max,
+    min,
     onChange,
     onClick,
     onKeyUp,
@@ -291,6 +291,9 @@ const NumberInput = React.forwardRef(function NumberInput(
   }
   if (normalizedProps.warn) {
     ariaDescribedBy = normalizedProps.warnId;
+  }
+  if (!normalizedProps.validation) {
+    ariaDescribedBy = helperText ? normalizedProps.helperId : undefined;
   }
 
   function handleOnChange(event) {
@@ -441,7 +444,11 @@ const NumberInput = React.forwardRef(function NumberInput(
         {normalizedProps.validation ? (
           normalizedProps.validation
         ) : (
-          <HelperText disabled={disabled} description={helperText} />
+          <HelperText
+            id={normalizedProps.helperId}
+            disabled={disabled}
+            description={helperText}
+          />
         )}
       </div>
     </div>
@@ -619,17 +626,22 @@ Label.propTypes = {
 };
 
 interface HelperTextProps {
+  id?: string;
   description?: ReactNode;
   disabled?: boolean;
 }
-function HelperText({ disabled, description }: HelperTextProps) {
+function HelperText({ disabled, description, id }: HelperTextProps) {
   const prefix = usePrefix();
   const className = cx(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
   });
 
   if (description) {
-    return <div className={className}>{description}</div>;
+    return (
+      <div id={id} className={className}>
+        {description}
+      </div>
+    );
   }
   return null;
 }
@@ -637,6 +649,7 @@ function HelperText({ disabled, description }: HelperTextProps) {
 HelperText.propTypes = {
   description: PropTypes.node,
   disabled: PropTypes.bool,
+  id: PropTypes.string,
 };
 
 /**
@@ -688,12 +701,16 @@ function disableWheel(e) {
 
 /**
  * Clamp the given value between the upper bound `max` and the lower bound `min`
+ *
+ * 16 digit min/max more precise than Infinity. Somewhere in 9 quadrillion,
+ * there will be integer display issues at runtime. 9quad is a safe cutoff.
  * @param {number} max
  * @param {number} min
  * @param {number} value
  */
-function clamp(max, min, value) {
+const boundLimit = 9000000000000000; // 16 digit, 9 quadrillion
+
+function clamp(max = boundLimit, min = -boundLimit, value) {
   return Math.min(max, Math.max(min, value));
 }
-
 export { NumberInput };

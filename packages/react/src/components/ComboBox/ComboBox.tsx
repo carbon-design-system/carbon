@@ -24,7 +24,6 @@ import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import mergeRefs from '../../tools/mergeRefs';
-import { useFeatureFlag } from '../FeatureFlags';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
@@ -86,6 +85,13 @@ export interface ComboBoxProps
     ExcludedAttributes
   > {
   /**
+   * Specify a label to be read by screen readers on the container node
+   * 'aria-label' of the ListBox component.
+   */
+  ['aria-label']?: string;
+
+  /**
+   * @deprecated please use `aria-label` instead.
    * 'aria-label' of the ListBox component.
    */
   ariaLabel?: string;
@@ -250,7 +256,8 @@ export interface ComboBoxProps
 
 const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
   const {
-    ariaLabel,
+    ['aria-label']: ariaLabel,
+    ariaLabel: deprecatedAriaLabel,
     className: containerClassName,
     direction,
     disabled,
@@ -374,18 +381,13 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
     }
   };
 
-  const enabled = useFeatureFlag('enable-v11-release');
-
   const showWarning = !invalid && warn;
-  const className = cx(
-    `${prefix}--combo-box`,
-    [enabled ? null : containerClassName],
-    {
-      [`${prefix}--list-box--up`]: direction === 'top',
-      [`${prefix}--combo-box--warning`]: showWarning,
-      [`${prefix}--combo-box--readonly`]: readOnly,
-    }
-  );
+  const className = cx(`${prefix}--combo-box`, {
+    [`${prefix}--list-box--up`]: direction === 'top',
+    [`${prefix}--combo-box--warning`]: showWarning,
+    [`${prefix}--combo-box--readonly`]: readOnly,
+  });
+
   const titleClasses = cx(`${prefix}--label`, {
     [`${prefix}--label--disabled`]: disabled,
   });
@@ -396,7 +398,7 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
     [`${prefix}--form__helper-text--disabled`]: disabled,
   });
   const wrapperClasses = cx(`${prefix}--list-box__wrapper`, [
-    enabled ? containerClassName : null,
+    containerClassName,
     {
       [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
       [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
@@ -480,6 +482,25 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
             if (match(event, keys.Enter) && !inputValue) {
               toggleMenu();
             }
+
+            if (match(event, keys.Escape) && inputValue) {
+              if (event.target === textInput.current && isOpen) {
+                toggleMenu();
+                event.preventDownshiftDefault = true;
+                event.persist();
+              }
+            }
+
+            if (match(event, keys.Home)) {
+              event.target.setSelectionRange(0, 0);
+            }
+
+            if (match(event, keys.End)) {
+              event.target.setSelectionRange(
+                event.target.value.length,
+                event.target.value.length
+              );
+            }
           },
         });
 
@@ -534,6 +555,11 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
                   {...readOnlyEventHandlers}
                   readOnly={readOnly}
                   ref={mergeRefs(textInput, ref)}
+                  aria-describedby={
+                    helperText && !invalid && !warn && !isFluid
+                      ? comboBoxHelperId
+                      : undefined
+                  }
                 />
                 {invalid && (
                   <WarningFilled
@@ -560,7 +586,10 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
                   translateWithId={translateWithId}
                 />
               </div>
-              <ListBox.Menu {...getMenuProps({ 'aria-label': ariaLabel })}>
+              <ListBox.Menu
+                {...getMenuProps({
+                  'aria-label': deprecatedAriaLabel || ariaLabel,
+                })}>
                 {isOpen
                   ? filterItems(items, itemToString, inputValue).map(
                       (item, index) => {
@@ -627,8 +656,19 @@ ComboBox.displayName = 'ComboBox';
 ComboBox.propTypes = {
   /**
    * 'aria-label' of the ListBox component.
+   * Specify a label to be read by screen readers on the container node
    */
-  ariaLabel: PropTypes.string,
+  ['aria-label']: PropTypes.string,
+
+  /**
+   * Deprecated, please use `aria-label` instead.
+   * Specify a label to be read by screen readers on the container note.
+   * 'aria-label' of the ListBox component.
+   */
+  ariaLabel: deprecate(
+    PropTypes.string,
+    'This prop syntax has been deprecated. Please use the new `aria-label`.'
+  ),
 
   /**
    * An optional className to add to the container node
@@ -805,7 +845,7 @@ ComboBox.defaultProps = {
   itemToElement: null,
   shouldFilterItem: defaultShouldFilterItem,
   type: 'default',
-  ariaLabel: 'Choose an item',
+  ['aria-label']: 'Choose an item',
   direction: 'bottom',
 };
 

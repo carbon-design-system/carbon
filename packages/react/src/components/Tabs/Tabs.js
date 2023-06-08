@@ -20,6 +20,9 @@ import { getInteractiveContent } from '../../internal/useNoInteractiveChildren';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match, matches } from '../../internal/keyboard';
 import { usePressable } from './usePressable';
+import deprecate from '../../prop-types/deprecate';
+import { Close } from '@carbon/icons-react';
+import { useEvent } from '../../internal/useEvent';
 
 // Used to manage the overall state of the Tabs
 const TabsContext = React.createContext();
@@ -34,6 +37,8 @@ function Tabs({
   defaultSelectedIndex = 0,
   onChange,
   selectedIndex: controlledSelectedIndex,
+  dismissable,
+  onTabCloseRequest,
 }) {
   const baseId = useId('ccs');
   // The active index is used to track the element which has focus in our tablist
@@ -53,6 +58,8 @@ function Tabs({
     baseId,
     activeIndex,
     defaultSelectedIndex,
+    dismissable,
+    onTabCloseRequest,
     setActiveIndex,
     selectedIndex,
     setSelectedIndex,
@@ -75,10 +82,28 @@ Tabs.propTypes = {
   defaultSelectedIndex: PropTypes.number,
 
   /**
+   * Whether the render Tab children should be dismissable.
+   */
+  dismissable: PropTypes.bool,
+
+  /**
    * Provide an optional function which is called whenever the state of the
    * `Tabs` changes
    */
   onChange: PropTypes.func,
+
+  /**
+   * If specifying the `onTabCloseRequest` prop, provide a callback function
+   * responsible for removing the tab when close button is pressed on one of the Tab elements
+   */
+  onTabCloseRequest: (props) => {
+    if (props.dismissable && !props.onTabCloseRequest) {
+      return new Error(
+        'dismissable property specified without also providing an onTabCloseRequest property.'
+      );
+    }
+    return undefined;
+  },
 
   /**
    * Control which content panel is currently selected. This puts the component
@@ -121,36 +146,50 @@ function TabList({
   scrollIntoView,
   ...rest
 }) {
-  const { activeIndex, selectedIndex, setSelectedIndex, setActiveIndex } =
-    React.useContext(TabsContext);
+  const {
+    activeIndex,
+    selectedIndex,
+    setSelectedIndex,
+    setActiveIndex,
+    dismissable,
+  } = React.useContext(TabsContext);
   const prefix = usePrefix();
   const ref = useRef(null);
   const previousButton = useRef(null);
   const nextButton = useRef(null);
   const [isScrollable, setIsScrollable] = useState(false);
   const [scrollLeft, setScrollLeft] = useState(null);
-  const className = cx(`${prefix}--tabs`, customClassName, {
-    [`${prefix}--tabs--contained`]: contained,
-    [`${prefix}--tabs--light`]: light,
-    [`${prefix}--tabs__icon--default`]: iconSize === 'default',
-    [`${prefix}--tabs__icon--lg`]: iconSize === 'lg',
-  });
 
   // Previous Button
   // VISIBLE IF:
   //   SCROLLABLE
   //   AND SCROLL_LEFT > 0
   const buttonWidth = 44;
-  const isPreviousButtonVisible = ref.current
-    ? isScrollable && scrollLeft > 0
-    : false;
   // Next Button
   // VISIBLE IF:
   //   SCROLLABLE
   //   AND SCROLL_LEFT + CLIENT_WIDTH < SCROLL_WIDTH
-  const isNextButtonVisible = ref.current
-    ? scrollLeft + buttonWidth + ref.current.clientWidth <
-      ref.current.scrollWidth
+  const [isNextButtonVisible, setIsNextButtonVisible] = useState(
+    ref.current
+      ? scrollLeft + buttonWidth + ref.current.clientWidth <
+          ref.current.scrollWidth
+      : false
+  );
+  const hasSecondaryLabelTabs =
+    contained &&
+    !!React.Children.toArray(children).filter(
+      (child) => child.props.secondaryLabel
+    ).length;
+  const className = cx(`${prefix}--tabs`, customClassName, {
+    [`${prefix}--tabs--contained`]: contained,
+    [`${prefix}--tabs--light`]: light,
+    [`${prefix}--tabs__icon--default`]: iconSize === 'default',
+    [`${prefix}--tabs__icon--lg`]: iconSize === 'lg',
+    [`${prefix}--tabs--tall`]: hasSecondaryLabelTabs,
+  });
+
+  const isPreviousButtonVisible = ref.current
+    ? isScrollable && scrollLeft > 0
     : false;
   const previousButtonClasses = cx(
     `${prefix}--tab--overflow-nav-button`,
@@ -210,6 +249,21 @@ function TabList({
       });
     }
   });
+
+  useEffect(() => {
+    setIsNextButtonVisible(
+      ref.current
+        ? scrollLeft + buttonWidth + ref.current.clientWidth <
+            ref.current.scrollWidth
+        : false
+    );
+
+    if (dismissable) {
+      if (ref.current) {
+        setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth);
+      }
+    }
+  }, [scrollLeft, children, dismissable]);
 
   useEffectOnce(() => {
     if (tabs.current[selectedIndex].disabled) {
@@ -277,12 +331,12 @@ function TabList({
         setScrollLeft(start - buttonWidth);
       }
 
-      // The end of teh tab is clipped and not visible
+      // The end of the tab is clipped and not visible
       if (end > visibleEnd) {
         setScrollLeft(end + buttonWidth - ref.current.clientWidth);
       }
     }
-  }, [activation, activeIndex, selectedIndex, isScrollable]);
+  }, [activation, activeIndex, selectedIndex, isScrollable, children]);
 
   usePressable(previousButton, {
     onPress({ longPress }) {
@@ -320,6 +374,7 @@ function TabList({
     <div className={className}>
       <button
         aria-hidden="true"
+        tabIndex="-1"
         aria-label="Scroll left"
         ref={previousButton}
         className={previousButtonClasses}
@@ -338,7 +393,12 @@ function TabList({
         onKeyDown={onKeyDown}>
         {React.Children.map(children, (child, index) => {
           return (
-            <TabContext.Provider value={index}>
+            <TabContext.Provider
+              value={{
+                index,
+                hasSecondaryLabel: hasSecondaryLabelTabs,
+                contained,
+              }}>
               {React.cloneElement(child, {
                 ref: (node) => {
                   tabs.current[index] = node;
@@ -350,6 +410,7 @@ function TabList({
       </div>
       <button
         aria-hidden="true"
+        tabIndex="-1"
         aria-label="Scroll right"
         ref={nextButton}
         className={nextButtonClasses}
@@ -403,7 +464,11 @@ TabList.propTypes = {
   /**
    * Specify whether or not to use the light component variant
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `TabList` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
 
   /**
    * Provide the props that describe the right overflow button
@@ -476,14 +541,25 @@ const Tab = React.forwardRef(function Tab(
     disabled,
     onClick,
     onKeyDown,
+    secondaryLabel,
+    renderIcon: Icon,
     ...rest
   },
-  ref
+  forwardRef
 ) {
   const prefix = usePrefix();
-  const { selectedIndex, setSelectedIndex, baseId } =
-    React.useContext(TabsContext);
-  const index = React.useContext(TabContext);
+  const {
+    selectedIndex,
+    setSelectedIndex,
+    baseId,
+    dismissable,
+    onTabCloseRequest,
+  } = React.useContext(TabsContext);
+  const { index, hasSecondaryLabel, contained } = React.useContext(TabContext);
+  const dismissIconRef = useRef(null);
+  const tabRef = useRef(null);
+  const ref = useMergedRefs([forwardRef, tabRef]);
+  const [ignoreHover, setIgnoreHover] = useState(false);
   const id = `${baseId}-tab-${index}`;
   const panelId = `${baseId}-tabpanel-${index}`;
   const className = cx(
@@ -493,8 +569,58 @@ const Tab = React.forwardRef(function Tab(
     {
       [`${prefix}--tabs__nav-item--selected`]: selectedIndex === index,
       [`${prefix}--tabs__nav-item--disabled`]: disabled,
+      [`${prefix}--tabs__nav-item--hover-off`]: ignoreHover,
     }
   );
+
+  const onDismissIconMouseEnter = (evt) => {
+    if (contained) {
+      evt.stopPropagation();
+      setIgnoreHover(true);
+      tabRef.current.classList.add(`${prefix}--tabs__nav-item--hover-off`);
+    }
+  };
+
+  const onDismissIconMouseLeave = () => {
+    if (contained) {
+      tabRef.current.classList.remove(`${prefix}--tabs__nav-item--hover-off`);
+      setIgnoreHover(false);
+    }
+  };
+
+  useEvent(dismissIconRef, 'mouseover', onDismissIconMouseEnter);
+  useEvent(dismissIconRef, 'mouseleave', onDismissIconMouseLeave);
+
+  const handleClose = (evt) => {
+    evt.stopPropagation();
+    onTabCloseRequest?.(index);
+  };
+
+  const handleKeyDown = (event) => {
+    if (dismissable && match(event, keys.Delete)) {
+      handleClose(event);
+    }
+    onKeyDown?.(event);
+  };
+
+  const DismissIcon = (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+    <div
+      role="button"
+      tabIndex={-1}
+      aria-hidden={true}
+      className={cx(`${prefix}--tabs__nav-item--close-icon`, {
+        [`${prefix}--visually-hidden`]: !dismissable,
+      })}
+      onClick={handleClose}
+      aria-label="Close tab"
+      title="Close tab"
+      ref={dismissIconRef}>
+      <Close />
+    </div>
+  );
+
+  const hasIcon = Icon || dismissable;
 
   return (
     <BaseComponent
@@ -516,10 +642,30 @@ const Tab = React.forwardRef(function Tab(
           onClick(evt);
         }
       }}
-      onKeyDown={onKeyDown}
+      onKeyDown={handleKeyDown}
       tabIndex={selectedIndex === index ? '0' : '-1'}
       type="button">
-      {children}
+      <div className={`${prefix}--tabs__nav-item-label-wrapper`}>
+        {dismissable && Icon && (
+          <div className={`${prefix}--tabs__nav-item--icon-left`}>
+            {<Icon size={16} />}
+          </div>
+        )}
+        <span className={`${prefix}--tabs__nav-item-label`}>{children}</span>
+        {/* always rendering dismissIcon so we don't lose reference to it, otherwise events do not work when switching from/to dismissable state */}
+        <div
+          className={cx(`${prefix}--tabs__nav-item--icon`, {
+            [`${prefix}--visually-hidden`]: !hasIcon,
+          })}>
+          {DismissIcon}
+          {!dismissable && hasIcon && <Icon size={16} />}
+        </div>
+      </div>
+      {hasSecondaryLabel && (
+        <div className={`${prefix}--tabs__nav-item-secondary-label`}>
+          {secondaryLabel}
+        </div>
+      )}
     </BaseComponent>
   );
 });
@@ -561,6 +707,18 @@ Tab.propTypes = {
    * side router libraries.
    **/
   renderButton: PropTypes.func,
+
+  /**
+   * Optional prop to render an icon next to the label.
+   * Can be a React component class
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /*
+   * An optional label to render under the primary tab label.
+  /* This prop is only useful for conained tabs
+   **/
+  secondaryLabel: PropTypes.string,
 };
 
 const IconTab = React.forwardRef(function IconTab(
@@ -577,7 +735,10 @@ const IconTab = React.forwardRef(function IconTab(
 ) {
   const prefix = usePrefix();
 
-  const classNames = cx(`${prefix}--tabs__nav-item--icon`, customClassName);
+  const classNames = cx(
+    `${prefix}--tabs__nav-item--icon-only`,
+    customClassName
+  );
   return (
     <Tooltip
       align="bottom"

@@ -34,7 +34,7 @@ describe('DOM test helpers', () => {
     });
 
     it('should return null if no matches are found', () => {
-      expect(getByText(container, 'Not found')).toEqual(null);
+      expect(getByText(container, 'Not found')).not.toBeInTheDocument();
     });
   });
 

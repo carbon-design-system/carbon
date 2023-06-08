@@ -38,8 +38,7 @@ function CSSGrid<T extends React.ElementType>({
           as={BaseComponent}
           className={customClassName}
           mode={mode}
-          {...rest}
-          >
+          {...rest}>
           {children}
         </Subgrid>
       </GridSettings>
@@ -54,7 +53,7 @@ function CSSGrid<T extends React.ElementType>({
   });
 
   // cast as any to let TypeScript allow passing in attributes to base component
-  const BaseComponentAsAny: any = BaseComponent
+  const BaseComponentAsAny: any = BaseComponent;
   return (
     <GridSettings mode="css-grid" subgrid>
       <BaseComponentAsAny className={className} {...rest}>
@@ -98,10 +97,9 @@ CSSGrid.propTypes = {
   narrow: PropTypes.bool,
 };
 
-type SubgridMode = 'wide' | 'narrow' | 'condensed'
+type SubgridMode = 'wide' | 'narrow' | 'condensed';
 
 interface SubgridBaseProps {
-
   /**
    * Pass in content that will be rendered within the `Subgrid`
    */
@@ -116,10 +114,9 @@ interface SubgridBaseProps {
    * Specify the grid mode for the subgrid
    */
   mode?: SubgridMode;
-
 }
 
-type SubgridProps = PolymorphicProps<any, SubgridBaseProps>
+type SubgridProps = PolymorphicProps<any, SubgridBaseProps>;
 
 const Subgrid = ({
   as: BaseComponent = 'div',
@@ -140,7 +137,7 @@ const Subgrid = ({
       {children}
     </BaseComponent>
   );
-}
+};
 
 Subgrid.propTypes = {
   /**

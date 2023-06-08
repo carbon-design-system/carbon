@@ -45,7 +45,7 @@ export const BreadcrumbWithOverflowMenu = () => (
     </BreadcrumbItem>
     <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
     <BreadcrumbItem data-floating-menu-container>
-      <OverflowMenu ariaLabel="Overflow menu in a breadcrumb">
+      <OverflowMenu aria-label="Overflow menu in a breadcrumb">
         <OverflowMenuItem itemText="Breadcrumb 3" />
         <OverflowMenuItem itemText="Breadcrumb 4" />
       </OverflowMenu>

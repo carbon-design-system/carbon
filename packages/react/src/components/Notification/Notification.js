@@ -7,6 +7,7 @@
 
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
+import deprecate from '../../prop-types/deprecate';
 import cx from 'classnames';
 import {
   Close,
@@ -96,7 +97,8 @@ NotificationActionButton.propTypes = {
 };
 
 export function NotificationButton({
-  ariaLabel,
+  ['aria-label']: ariaLabel,
+  ariaLabel: deprecatedAriaLabel,
   className,
   type,
   renderIcon: IconTag,
@@ -119,8 +121,8 @@ export function NotificationButton({
       {...rest}
       // eslint-disable-next-line react/button-has-type
       type={type}
-      aria-label={ariaLabel}
-      title={ariaLabel}
+      aria-label={deprecatedAriaLabel || ariaLabel}
+      title={deprecatedAriaLabel || ariaLabel}
       className={buttonClassName}>
       {IconTag && <IconTag className={iconClassName} name={name} />}
     </button>
@@ -129,9 +131,18 @@ export function NotificationButton({
 
 NotificationButton.propTypes = {
   /**
-   * Specify a label to be read by screen readers on the notification button
+   * Specify a label to be read by screen readers on the container node
    */
-  ariaLabel: PropTypes.string,
+  ['aria-label']: PropTypes.string,
+
+  /**
+   * Deprecated, please use `aria-label` instead.
+   * Specify a label to be read by screen readers on the container note.
+   */
+  ariaLabel: deprecate(
+    PropTypes.string,
+    'This prop syntax has been deprecated. Please use the new `aria-label`.'
+  ),
 
   /**
    * Specify an optional className to be applied to the notification button
@@ -162,7 +173,7 @@ NotificationButton.propTypes = {
 };
 
 NotificationButton.defaultProps = {
-  ariaLabel: 'close notification',
+  ['aria-label']: 'close notification',
   notificationType: 'toast',
   type: 'button',
   renderIcon: Close,
@@ -206,6 +217,8 @@ NotificationIcon.propTypes = {
 };
 
 export function ToastNotification({
+  ['aria-label']: ariaLabel,
+  ariaLabel: deprecatedAriaLabel,
   role,
   onClose,
   onCloseButtonClick,
@@ -300,6 +313,7 @@ export function ToastNotification({
           notificationType="toast"
           onClick={handleCloseButtonClick}
           aria-hidden="true"
+          aria-label={deprecatedAriaLabel || ariaLabel}
           tabIndex="-1"
         />
       )}
@@ -311,7 +325,16 @@ ToastNotification.propTypes = {
   /**
    * Provide a description for "close" icon button that can be read by screen readers
    */
-  ariaLabel: PropTypes.string,
+  ['aria-label']: PropTypes.string,
+
+  /**
+   * Deprecated, please use `aria-label` instead.
+   * Provide a description for "close" icon button that can be read by screen readers
+   */
+  ariaLabel: deprecate(
+    PropTypes.string,
+    'This prop syntax has been deprecated. Please use the new `aria-label`.'
+  ),
 
   /**
    * Specify the caption
@@ -396,6 +419,7 @@ ToastNotification.defaultProps = {
 };
 
 export function InlineNotification({
+  ['aria-label']: ariaLabel,
   children,
   title,
   subtitle,
@@ -466,6 +490,7 @@ export function InlineNotification({
           notificationType="inline"
           onClick={handleCloseButtonClick}
           aria-hidden="true"
+          aria-label={ariaLabel}
           tabIndex="-1"
         />
       )}
@@ -474,6 +499,11 @@ export function InlineNotification({
 }
 
 InlineNotification.propTypes = {
+  /**
+   * Provide a description for "close" icon button that can be read by screen readers
+   */
+  ['aria-label']: PropTypes.string,
+
   /**
    * Specify the content
    */
@@ -547,7 +577,8 @@ InlineNotification.defaultProps = {
 
 export function ActionableNotification({
   actionButtonLabel,
-  ariaLabel,
+  ['aria-label']: ariaLabel,
+  ariaLabel: deprecatedAriaLabel,
   children,
   role,
   onActionButtonClick,
@@ -637,7 +668,7 @@ export function ActionableNotification({
 
       {!hideCloseButton && (
         <NotificationButton
-          aria-label={ariaLabel}
+          aria-label={deprecatedAriaLabel || ariaLabel}
           notificationType="actionable"
           onClick={handleCloseButtonClick}
         />
@@ -655,7 +686,16 @@ ActionableNotification.propTypes = {
   /**
    * Provide a description for "close" icon button that can be read by screen readers
    */
-  ariaLabel: PropTypes.string,
+  ['aria-label']: PropTypes.string,
+
+  /**
+   * Deprecated, please use `aria-label` instead.
+   * Provide a description for "close" icon button that can be read by screen readers
+   */
+  ariaLabel: deprecate(
+    PropTypes.string,
+    'This prop syntax has been deprecated. Please use the new `aria-label`.'
+  ),
 
   /**
    * Specify the content

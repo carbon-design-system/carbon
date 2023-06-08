@@ -68,7 +68,6 @@ const ToggleTip = (
 export const Default = () => (
   <div style={{ width: '400px' }}>
     <FluidComboBox
-      placeholder="Filter..."
       onChange={() => {}}
       id="default"
       titleText="Label"
@@ -82,7 +81,6 @@ export const Default = () => (
 export const Condensed = () => (
   <div style={{ width: '400px' }}>
     <FluidComboBox
-      placeholder="Filter..."
       onChange={() => {}}
       id="default"
       isCondensed
@@ -97,7 +95,6 @@ export const Condensed = () => (
 export const Playground = (args) => (
   <div style={{ width: args.playgroundWidth }}>
     <FluidComboBox
-      placeholder="Filter..."
       onChange={() => {}}
       id="default"
       titleText="Label"
@@ -108,7 +105,6 @@ export const Playground = (args) => (
     />
     <br />
     <FluidComboBox
-      placeholder="Filter..."
       {...args}
       onChange={() => {}}
       id="default-3"

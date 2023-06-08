@@ -9,7 +9,6 @@ import React from 'react';
 import TextInput from '../TextInput';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
-import { FeatureFlags } from '../../FeatureFlags';
 
 const prefix = 'cds';
 
@@ -32,20 +31,6 @@ describe('TextInput', () => {
 
     it('should support a custom `className` prop on the outermost element', () => {
       const { container } = render(
-        <FeatureFlags flags={{ 'enable-v11-release': true }}>
-          <TextInput
-            id="input-1"
-            labelText="TextInput label"
-            className="custom-class"
-          />
-        </FeatureFlags>
-      );
-
-      expect(container.firstChild).toHaveClass('custom-class');
-    });
-
-    it('should support a custom `className` prop on the input element (V10)', () => {
-      render(
         <TextInput
           id="input-1"
           labelText="TextInput label"
@@ -53,7 +38,7 @@ describe('TextInput', () => {
         />
       );
 
-      expect(screen.getByRole('textbox')).toHaveClass('custom-class');
+      expect(container.firstChild).toHaveClass('custom-class');
     });
 
     it('should respect defaultValue prop', () => {
@@ -65,10 +50,7 @@ describe('TextInput', () => {
         />
       );
 
-      expect(screen.getByRole('textbox')).toHaveAttribute(
-        'value',
-        'This is default text'
-      );
+      expect(screen.getByRole('textbox')).toHaveValue('This is default text');
     });
 
     it('should respect disabled prop', () => {
@@ -122,6 +104,7 @@ describe('TextInput', () => {
         <TextInput id="input-1" labelText="TextInput" invalid />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const invalidIcon = container.querySelector(
         `svg.${prefix}--text-input__invalid-icon`
       );
@@ -197,10 +180,7 @@ describe('TextInput', () => {
         />
       );
 
-      expect(screen.getByRole('textbox')).toHaveAttribute(
-        'value',
-        'This is a test value'
-      );
+      expect(screen.getByRole('textbox')).toHaveValue('This is a test value');
     });
 
     it('should respect warn prop', () => {
@@ -208,6 +188,7 @@ describe('TextInput', () => {
         <TextInput id="input-1" labelText="TextInput label" warn />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const warnIcon = container.querySelector(
         `svg.${prefix}--text-input__invalid-icon--warning`
       );
@@ -236,7 +217,7 @@ describe('TextInput', () => {
   });
 
   describe('behaves as expected - Component API', () => {
-    it('should respect onChange prop', () => {
+    it('should respect onChange prop', async () => {
       const onChange = jest.fn();
       render(
         <TextInput
@@ -247,7 +228,7 @@ describe('TextInput', () => {
         />
       );
 
-      userEvent.type(screen.getByRole('textbox'), 'x');
+      await userEvent.type(screen.getByRole('textbox'), 'x');
       expect(screen.getByRole('textbox')).toHaveValue('x');
       expect(onChange).toHaveBeenCalledTimes(1);
       expect(onChange).toHaveBeenCalledWith(
@@ -257,7 +238,7 @@ describe('TextInput', () => {
       );
     });
 
-    it('should respect onClick prop', () => {
+    it('should respect onClick prop', async () => {
       const onClick = jest.fn();
       render(
         <TextInput
@@ -268,7 +249,7 @@ describe('TextInput', () => {
         />
       );
 
-      userEvent.click(screen.getByRole('textbox'));
+      await userEvent.click(screen.getByRole('textbox'));
       expect(onClick).toHaveBeenCalledTimes(1);
       expect(onClick).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -277,7 +258,7 @@ describe('TextInput', () => {
       );
     });
 
-    it('should not call `onClick` when the `<input>` is clicked but disabled', () => {
+    it('should not call `onClick` when the `<input>` is clicked but disabled', async () => {
       const onClick = jest.fn();
       render(
         <TextInput
@@ -288,11 +269,11 @@ describe('TextInput', () => {
         />
       );
 
-      userEvent.click(screen.getByRole('textbox'));
+      await userEvent.click(screen.getByRole('textbox'));
       expect(onClick).not.toHaveBeenCalled();
     });
 
-    it('should respect readOnly prop', () => {
+    it('should respect readOnly prop', async () => {
       const onChange = jest.fn();
       const onClick = jest.fn();
       render(
@@ -306,11 +287,11 @@ describe('TextInput', () => {
       );
 
       // Click events should fire
-      userEvent.click(screen.getByRole('textbox'));
+      await userEvent.click(screen.getByRole('textbox'));
       expect(onClick).toHaveBeenCalledTimes(1);
 
       // Change events should *not* fire
-      userEvent.type(screen.getByRole('textbox'), 'x');
+      await userEvent.type(screen.getByRole('textbox'), 'x');
       expect(screen.getByRole('textbox')).not.toHaveValue('x');
       expect(onChange).toHaveBeenCalledTimes(0);
     });

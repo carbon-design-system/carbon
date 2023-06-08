@@ -50,6 +50,7 @@ describe('DataTable.TableSelectRow', () => {
         </Table>
       );
 
+      // eslint-disable-next-line testing-library/no-node-access
       expect(screen.getByRole('checkbox').nextSibling).toHaveAttribute(
         'aria-label',
         mockProps.ariaLabel
@@ -67,7 +68,7 @@ describe('DataTable.TableSelectRow', () => {
         </Table>
       );
 
-      expect(screen.getByRole('checkbox').checked).toBe(true);
+      expect(screen.getByRole('checkbox')).toBeChecked();
     });
 
     it('should support a custom `className` prop on the outermost element', () => {
@@ -97,7 +98,7 @@ describe('DataTable.TableSelectRow', () => {
         </Table>
       );
 
-      expect(screen.getByRole('checkbox').disabled).toBe(true);
+      expect(screen.getByRole('checkbox')).toBeDisabled();
     });
 
     it('should respect id prop', () => {
@@ -147,7 +148,7 @@ describe('DataTable.TableSelectRow', () => {
   });
 
   describe('behaves as expected', () => {
-    it('should invoke `onSelect` when clicked', () => {
+    it('should invoke `onSelect` when clicked', async () => {
       render(
         <Table>
           <TableHead>
@@ -158,11 +159,11 @@ describe('DataTable.TableSelectRow', () => {
         </Table>
       );
 
-      userEvent.click(screen.getByRole('checkbox'));
+      await userEvent.click(screen.getByRole('checkbox'));
       expect(mockProps.onSelect).toHaveBeenCalledTimes(1);
     });
 
-    it('should invoke `onChange` when expected', () => {
+    it('should invoke `onChange` when expected', async () => {
       render(
         <Table>
           <TableHead>
@@ -174,7 +175,7 @@ describe('DataTable.TableSelectRow', () => {
       );
 
       // perform action to call onChange
-      userEvent.type(screen.getByRole('checkbox'), 'test');
+      await userEvent.type(screen.getByRole('checkbox'), 'test');
 
       expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     });

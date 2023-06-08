@@ -28,7 +28,6 @@ import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { keys, match } from '../../internal/keyboard';
-import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ListBoxProps } from '../ListBox/ListBox';
@@ -41,7 +40,6 @@ const {
   MenuBlur,
   MenuKeyDownArrowDown,
   MenuKeyDownArrowUp,
-  MenuKeyDownEnter,
   MenuKeyDownEscape,
   MenuKeyDownSpaceButton,
   ToggleButtonClick,
@@ -213,7 +211,7 @@ export interface MultiSelectProps<ItemType>
 
   /**
    * `onMenuChange` is a utility for this controlled component to communicate to a
-   * consuming component that the menu was opend(`true`)/closed(`false`).
+   * consuming component that the menu was open(`true`)/closed(`false`).
    */
   onMenuChange?(open: boolean): void;
 
@@ -315,7 +313,8 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
   const { current: multiSelectInstanceId } = useRef(getInstanceId());
   const [highlightedIndex, setHighlightedIndex] = useState();
   const [isFocused, setIsFocused] = useState(false);
-  const [isOpen, setIsOpen] = useState(open);
+  const [inputFocused, setInputFocused] = useState(false);
+  const [isOpen, setIsOpen] = useState(open || false);
   const [prevOpenProp, setPrevOpenProp] = useState(open);
   const [topItems, setTopItems] = useState([]);
   const {
@@ -340,14 +339,29 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
     highlightedIndex,
     isOpen,
     itemToString: (items) => {
-      return (items as ItemType[]).map((item) => itemToString(item)).join(', ');
+      return (
+        (Array.isArray(items) &&
+          items
+            .map(function (item) {
+              return itemToString(item);
+            })
+            .join(', ')) ||
+        ''
+      );
     },
     onStateChange,
     selectedItem: controlledSelectedItems,
     items,
   });
 
-  const toggleButtonProps = getToggleButtonProps();
+  const toggleButtonProps = getToggleButtonProps({
+    onFocus: () => {
+      setInputFocused(true);
+    },
+    onBlur: () => {
+      setInputFocused(false);
+    },
+  });
   const mergedRef = mergeRefs(toggleButtonProps.ref, ref);
 
   const selectedItems = selectedItem as ItemType[];
@@ -373,12 +387,10 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
   const inline = type === 'inline';
   const showWarning = !invalid && warn;
 
-  const enabled = useFeatureFlag('enable-v11-release');
-
   const wrapperClasses = cx(
     `${prefix}--multi-select__wrapper`,
     `${prefix}--list-box__wrapper`,
-    [enabled ? containerClassName : null],
+    containerClassName,
     {
       [`${prefix}--multi-select__wrapper--inline`]: inline,
       [`${prefix}--list-box__wrapper--inline`]: inline,
@@ -401,19 +413,16 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
     [`${prefix}--form__helper-text--disabled`]: disabled,
   });
 
-  const className = cx(
-    `${prefix}--multi-select`,
-    [enabled ? null : containerClassName],
-    {
-      [`${prefix}--multi-select--invalid`]: invalid,
-      [`${prefix}--multi-select--warning`]: showWarning,
-      [`${prefix}--multi-select--inline`]: inline,
-      [`${prefix}--multi-select--selected`]:
-        selectedItems && selectedItems.length > 0,
-      [`${prefix}--list-box--up`]: direction === 'top',
-      [`${prefix}--multi-select--readonly`]: readOnly,
-    }
-  );
+  const className = cx(`${prefix}--multi-select`, {
+    [`${prefix}--multi-select--invalid`]: invalid,
+    [`${prefix}--multi-select--invalid--focused`]: invalid && inputFocused,
+    [`${prefix}--multi-select--warning`]: showWarning,
+    [`${prefix}--multi-select--inline`]: inline,
+    [`${prefix}--multi-select--selected`]:
+      selectedItems && selectedItems.length > 0,
+    [`${prefix}--list-box--up`]: direction === 'top',
+    [`${prefix}--multi-select--readonly`]: readOnly,
+  });
 
   // needs to be capitalized for react to render it correctly
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -441,7 +450,6 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
     switch (type) {
       case ItemClick:
       case MenuKeyDownSpaceButton:
-      case MenuKeyDownEnter:
         if (changes.selectedItem === undefined) {
           break;
         }
@@ -464,11 +472,24 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
   }
 
   const onKeyDown = (e) => {
-    if (match(e, keys.Delete) && !disabled) {
-      clearSelection();
-      e.stopPropagation();
+    if (!disabled) {
+      if (match(e, keys.Delete) || match(e, keys.Escape)) {
+        clearSelection();
+        e.stopPropagation();
+      }
+
+      if (match(e, keys.Space) || match(e, keys.ArrowDown)) {
+        setIsOpenWrapper(true);
+      }
     }
   };
+
+  const multiSelectFieldWrapperClasses = cx(
+    `${prefix}--list-box__field--wrapper`,
+    {
+      [`${prefix}--list-box__field--wrapper--input-focused`]: inputFocused,
+    }
+  );
 
   const handleFocus = (evt: React.FocusEvent<HTMLDivElement>) => {
     evt.target.classList.contains(`${prefix}--tag__close-icon`)
@@ -529,15 +550,7 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
             className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
           />
         )}
-        <button
-          type="button"
-          className={`${prefix}--list-box__field`}
-          disabled={disabled}
-          aria-disabled={disabled || readOnly}
-          {...toggleButtonProps}
-          ref={mergedRef}
-          onKeyDown={onKeyDown}
-          {...readOnlyEventHandlers}>
+        <div className={multiSelectFieldWrapperClasses}>
           {selectedItems.length > 0 && (
             <ListBox.Selection
               readOnly={readOnly}
@@ -548,14 +561,27 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
               disabled={disabled}
             />
           )}
-          <span id={fieldLabelId} className={`${prefix}--list-box__label`}>
-            {label}
-          </span>
-          <ListBox.MenuIcon
-            isOpen={!!isOpen}
-            translateWithId={translateWithId}
-          />
-        </button>
+          <button
+            type="button"
+            className={`${prefix}--list-box__field`}
+            disabled={disabled}
+            aria-disabled={disabled || readOnly}
+            aria-describedby={
+              !inline && !invalid && !warn && helperText ? helperId : undefined
+            }
+            {...toggleButtonProps}
+            ref={mergedRef}
+            onKeyDown={onKeyDown}
+            {...readOnlyEventHandlers}>
+            <span id={fieldLabelId} className={`${prefix}--list-box__label`}>
+              {label}
+            </span>
+            <ListBox.MenuIcon
+              isOpen={isOpen}
+              translateWithId={translateWithId}
+            />
+          </button>
+        </div>
         <ListBox.Menu aria-multiselectable="true" {...getMenuProps()}>
           {isOpen &&
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -737,7 +763,7 @@ MultiSelect.propTypes = {
 
   /**
    * `onMenuChange` is a utility for this controlled component to communicate to a
-   * consuming component that the menu was opend(`true`)/closed(`false`).
+   * consuming component that the menu was open(`true`)/closed(`false`).
    */
   onMenuChange: PropTypes.func,
 

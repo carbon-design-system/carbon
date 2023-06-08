@@ -125,7 +125,9 @@ $input-label-weight: 400 !default;
     > .#{$prefix}--text-area--invalid:not(:focus),
   .#{$prefix}--select-input__wrapper[data-invalid]
     .#{$prefix}--select-input:not(:focus),
-  .#{$prefix}--list-box[data-invalid]:not(:focus),
+  .#{$prefix}--list-box[data-invalid]:not(
+      .#{$prefix}--multi-select--invalid--focused
+    ),
   .#{$prefix}--combo-box[data-invalid]:not(.#{$prefix}--multi-select--selected)
     .#{$prefix}--text-input:not(:focus) {
     @include focus-outline('invalid');
@@ -138,10 +140,12 @@ $input-label-weight: 400 !default;
   .#{$prefix}--date-picker-input__wrapper--warn,
   .#{$prefix}--date-picker-input__wrapper--invalid,
   .#{$prefix}--time-picker--invalid,
+  .#{$prefix}--time-picker--warning,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--text-input__field-wrapper--warning,
   .#{$prefix}--text-input__field-wrapper--warning > .#{$prefix}--text-input,
   .#{$prefix}--text-area__wrapper[data-invalid],
+  .#{$prefix}--text-area__wrapper--warn,
   .#{$prefix}--select-input__wrapper[data-invalid],
   .#{$prefix}--select--warning .#{$prefix}--select-input__wrapper,
   .#{$prefix}--time-picker[data-invalid],
@@ -174,12 +178,6 @@ $input-label-weight: 400 !default;
   .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper--warning {
     display: block;
-  }
-
-  @if not enabled('enable-v11-release') {
-    .#{$prefix}--form--fluid .#{$prefix}--fieldset {
-      margin: 0;
-    }
   }
 
   .#{$prefix}--form--fluid input[data-invalid] {

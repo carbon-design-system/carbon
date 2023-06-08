@@ -96,7 +96,7 @@ const TableSelectRow = ({
           labelText: ariaLabel,
           hideLabel: true,
         })}
-        {...(!radio && { ariaLabel })}
+        {...(!radio && { ['aria-label']: ariaLabel })}
       />
     </td>
   );

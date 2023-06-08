@@ -15,10 +15,9 @@ import { useGridSettings } from './GridContext';
 
 type ColumnSpanPercent = '25%' | '50%' | '75%' | '100%';
 
-type ColumnSpanSimple = boolean | number | ColumnSpanPercent
+type ColumnSpanSimple = boolean | number | ColumnSpanPercent;
 
 interface ColumnSpanObject {
-
   span?: ColumnSpanSimple;
 
   offset?: number;
@@ -26,13 +25,11 @@ interface ColumnSpanObject {
   start?: number;
 
   end?: number;
-
 }
 
-export type ColumnSpan = ColumnSpanSimple | ColumnSpanObject
+export type ColumnSpan = ColumnSpanSimple | ColumnSpanObject;
 
 interface ColumnBaseProps {
-
   /**
    * Pass in content that will be rendered within the `Column`
    */
@@ -41,7 +38,7 @@ interface ColumnBaseProps {
   /**
    * Specify a custom className to be applied to the `Column`
    */
-  className?: string,
+  className?: string;
 
   /**
    * Specify column span for the `lg` breakpoint (Default breakpoint up to 1312px)
@@ -88,13 +85,18 @@ interface ColumnBaseProps {
    * based on breakpoint
    */
   span?: ColumnSpan;
-
 }
 
-export type ColumnProps<T extends React.ElementType> = PolymorphicProps<T, ColumnBaseProps>;
+export type ColumnProps<T extends React.ElementType> = PolymorphicProps<
+  T,
+  ColumnBaseProps
+>;
 
 export interface ColumnComponent {
-  <T extends React.ElementType>(props: ColumnProps<T>, context?: any): React.ReactElement<any, any> | null;
+  <T extends React.ElementType>(
+    props: ColumnProps<T>,
+    context?: any
+  ): React.ReactElement<any, any> | null;
 }
 
 function Column<T extends React.ElementType>({
@@ -136,7 +138,7 @@ function Column<T extends React.ElementType>({
   });
 
   // cast as any to let TypeScript allow passing in attributes to base component
-  const BaseComponentAsAny: any = BaseComponent
+  const BaseComponentAsAny: any = BaseComponent;
   return (
     <BaseComponentAsAny className={className} {...rest}>
       {children}
@@ -337,7 +339,10 @@ const breakpointNames = ['sm', 'md', 'lg', 'xlg', 'max'];
  * @param {Array<boolean|number|Breakpoint>} breakpoints
  * @returns {string}
  */
-function getClassNameForBreakpoints(breakpoints: (ColumnSpan | undefined)[], prefix: string): string {
+function getClassNameForBreakpoints(
+  breakpoints: (ColumnSpan | undefined)[],
+  prefix: string
+): string {
   const classNames: string[] = [];
 
   for (let i = 0; i < breakpoints.length; i++) {
@@ -375,15 +380,15 @@ function getClassNameForBreakpoints(breakpoints: (ColumnSpan | undefined)[], pre
       if (typeof offset === 'number' && offset > 0) {
         classNames.push(`${prefix}--${name}:col-start-${offset + 1}`);
       }
-  
+
       if (typeof start === 'number') {
         classNames.push(`${prefix}--${name}:col-start-${start}`);
       }
-  
+
       if (typeof end === 'number') {
         classNames.push(`${prefix}--${name}:col-end-${end}`);
       }
-  
+
       if (typeof span === 'number') {
         classNames.push(`${prefix}--${name}:col-span-${span}`);
       } else if (typeof span === 'string') {
@@ -401,7 +406,10 @@ function getClassNameForBreakpoints(breakpoints: (ColumnSpan | undefined)[], pre
  * @param {Array<boolean|number|Breakpoint>} breakpoints
  * @returns {string}
  */
-function getClassNameForFlexGridBreakpoints(breakpoints: (ColumnSpan | undefined)[], prefix: string): string {
+function getClassNameForFlexGridBreakpoints(
+  breakpoints: (ColumnSpan | undefined)[],
+  prefix: string
+): string {
   const classNames: string[] = [];
 
   for (let i = 0; i < breakpoints.length; i++) {
@@ -448,7 +456,10 @@ function getClassNameForFlexGridBreakpoints(breakpoints: (ColumnSpan | undefined
 /**
  * Build the appropriate className for a span value
  */
-function getClassNameForSpan(value: ColumnSpan | undefined, prefix: string): string {
+function getClassNameForSpan(
+  value: ColumnSpan | undefined,
+  prefix: string
+): string {
   const classNames: string[] = [];
 
   if (typeof value === 'number' || typeof value === 'string') {

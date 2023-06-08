@@ -11,7 +11,6 @@ import * as React from 'react';
 export type GridMode = 'flexbox' | 'css-grid';
 
 export interface GridSettingContext {
-
   /**
    * The grid mode for the GridContext
    */
@@ -21,7 +20,6 @@ export interface GridSettingContext {
    * Specifies whether subgrid should be enabled
    */
   subgrid?: boolean;
-
 }
 
 /**
@@ -34,7 +32,6 @@ const GridSettingsContext = React.createContext<GridSettingContext>({
 });
 
 export interface GridSettingsProps {
-
   /**
    * Pass in components which will be rendered within the `GridSettings`
    * component
@@ -50,13 +47,12 @@ export interface GridSettingsProps {
    * Specify whether subgrid should be enabled
    */
   subgrid?: boolean;
-
 }
 
 export const GridSettings: React.FC<GridSettingsProps> = ({
   children,
   mode,
-  subgrid = false
+  subgrid = false,
 }) => {
   const value = React.useMemo(() => {
     return {
@@ -69,7 +65,7 @@ export const GridSettings: React.FC<GridSettingsProps> = ({
       {children}
     </GridSettingsContext.Provider>
   );
-}
+};
 
 const gridModes: GridMode[] = ['flexbox', 'css-grid'];
 
@@ -96,4 +92,4 @@ GridSettings.propTypes = {
  */
 export const useGridSettings = () => {
   return React.useContext(GridSettingsContext);
-}
+};

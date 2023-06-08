@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020
+ * Copyright IBM Corp. 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,6 +15,7 @@ describe('Menu', () => {
     it('should place a className on the outermost element', () => {
       render(<Menu className="custom-class" open />);
 
+      // eslint-disable-next-line testing-library/no-node-access
       expect(document.querySelector('.custom-class')).toBeDefined();
     });
 
@@ -33,7 +34,7 @@ describe('Menu', () => {
       expect(screen.getByRole('menu')).toHaveAttribute('id', 'test-id');
     });
 
-    it('should call onClose on key down', () => {
+    it('should call onClose on key down', async () => {
       const onClose = jest.fn();
       render(
         <Menu open onClose={onClose}>
@@ -41,12 +42,12 @@ describe('Menu', () => {
         </Menu>
       );
 
-      userEvent.type(screen.getByRole('menuitem'), '{enter}');
+      await userEvent.type(screen.getByRole('menuitem'), '{enter}');
 
       expect(onClose).toHaveBeenCalled();
     });
 
-    it('should call onClose on click', () => {
+    it('should call onClose on click', async () => {
       const onClose = jest.fn();
       render(
         <Menu open onClose={onClose}>
@@ -54,7 +55,7 @@ describe('Menu', () => {
         </Menu>
       );
 
-      userEvent.click(screen.getByRole('menuitem'));
+      await userEvent.click(screen.getByRole('menuitem'));
 
       expect(onClose).toHaveBeenCalled();
     });
@@ -77,6 +78,7 @@ describe('Menu', () => {
       el.classList.add('custom-class');
       render(<Menu open target={el} />);
 
+      // eslint-disable-next-line testing-library/no-node-access
       expect(document.querySelector('.custom-class')).toBeInTheDocument();
       document.body.removeChild(el);
     });

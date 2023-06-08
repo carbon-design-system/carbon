@@ -1089,7 +1089,7 @@ fsevents@~2.3.2:
     change-case: ^4.1.1
     next: ^12.1.0
     prismjs: ^1.20.0
-    react: ^17.0.1
+    react: ^17.0.2
     react-dom: ^17.0.1
     sass: ^1.36.0
     url-polyfill: ^1.1.9
@@ -1155,13 +1155,13 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"react@npm:^17.0.1":
-  version: 17.0.1
-  resolution: "react@npm:17.0.1"
+"react@npm:^17.0.2":
+  version: 17.0.2
+  resolution: "react@npm:17.0.2"
   dependencies:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
-  checksum: 83b9df9529a2b489f00a4eaa608fc7d55518b258e046c100344ae068713e43ae64e477a140f87e38cfe75489bcfd26d27fce5818f89f4ec41bdbda7ead4bb426
+  checksum: b254cc17ce3011788330f7bbf383ab653c6848902d7936a87b09d835d091e3f295f7e9dd1597c6daac5dc80f90e778c8230218ba8ad599f74adcc11e33b9d61b
   languageName: node
   linkType: hard
 

@@ -6,9 +6,11 @@
  */
 
 import React, { useState } from 'react';
+
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
+
 import { SliderSkeleton } from '.';
 import Slider from './Slider';
-import { Layer } from '../Layer';
 import mdx from './Slider.mdx';
 
 export default {
@@ -56,48 +58,24 @@ export const ControlledSlider = () => {
   );
 };
 
-export const WithLayer = () => {
-  return (
-    <>
-      <Slider
-        labelText="First Layer"
-        value={50}
-        min={0}
-        max={100}
-        step={1}
-        stepMultiplier={10}
-        noValidate
-      />
-      <Layer>
-        <Slider
-          labelText="Second Layer"
-          value={50}
-          min={0}
-          max={100}
-          step={1}
-          stepMultiplier={10}
-          noValidate
-        />
-        <Layer>
-          <Slider
-            labelText="Third Layer"
-            value={50}
-            min={0}
-            max={100}
-            step={1}
-            stepMultiplier={10}
-            noValidate
-          />
-        </Layer>
-      </Layer>
-    </>
-  );
-};
+export const _WithLayer = () => (
+  <WithLayer>
+    <Slider
+      labelText="Slider label"
+      value={50}
+      min={0}
+      max={100}
+      step={1}
+      stepMultiplier={10}
+      noValidate
+    />
+  </WithLayer>
+);
 
 export const ControlledSliderWithLayer = () => {
   const [val, setVal] = useState(87);
   return (
-    <>
+    <WithLayer>
       <button
         type="button"
         onClick={() => setVal(Math.round(Math.random() * 100))}>
@@ -110,35 +88,7 @@ export const ControlledSliderWithLayer = () => {
         onChange={({ value }) => setVal(value)}
       />
       <h1>{val}</h1>
-      <Layer>
-        <button
-          type="button"
-          onClick={() => setVal(Math.round(Math.random() * 100))}>
-          randomize value
-        </button>
-        <Slider
-          max={100}
-          min={0}
-          value={val}
-          onChange={({ value }) => setVal(value)}
-        />
-        <h1>{val}</h1>
-        <Layer>
-          <button
-            type="button"
-            onClick={() => setVal(Math.round(Math.random() * 100))}>
-            randomize value
-          </button>
-          <Slider
-            max={100}
-            min={0}
-            value={val}
-            onChange={({ value }) => setVal(value)}
-          />
-          <h1>{val}</h1>
-        </Layer>
-      </Layer>
-    </>
+    </WithLayer>
   );
 };
 
@@ -168,12 +118,35 @@ Playground.argTypes = {
     },
   },
   disabled: {
-    control: { type: 'boolean' },
+    control: {
+      control: {
+        type: 'boolean',
+      },
+      defaultValue: false,
+    },
   },
   formatLabel: {
     table: {
       disable: true,
     },
+  },
+  hideTextInput: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  invalid: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  invalidText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Invalid message goes here',
   },
   labelText: {
     table: {
@@ -188,8 +161,17 @@ Playground.argTypes = {
     control: { type: 'number' },
     defaultValue: 100,
   },
+  readOnly: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
   required: {
-    control: { type: 'boolean' },
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
   },
   step: {
     control: { type: 'number' },
@@ -222,5 +204,17 @@ Playground.argTypes = {
     table: {
       disable: true,
     },
+  },
+  warn: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  warnText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Warning message goes here',
   },
 };

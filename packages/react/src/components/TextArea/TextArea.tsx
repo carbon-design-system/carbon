@@ -6,23 +6,21 @@
  */
 
 import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { useState, useContext, useRef } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import classNames from 'classnames';
 import deprecate from '../../prop-types/deprecate';
-import { WarningFilled } from '@carbon/icons-react';
-import { useFeatureFlag } from '../FeatureFlags';
+import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { useAnnouncer } from '../../internal/useAnnouncer';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
-type ExcludedAttributes = '';
+const getInstanceId = setupGetInstanceId();
+
 export interface TextAreaProps
-  extends Omit<
-    React.InputHTMLAttributes<HTMLTextAreaElement>,
-    ExcludedAttributes
-  > {
+  extends React.InputHTMLAttributes<HTMLTextAreaElement> {
   /**
    * Provide a custom className that is applied directly to the underlying
    * `<textarea>` node
@@ -123,6 +121,16 @@ export interface TextAreaProps
    * Provide the current value of the `<textarea>`
    */
   value?: string | number;
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText?: ReactNodeLike;
 }
 
 const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
@@ -140,15 +148,23 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     placeholder,
     enableCounter,
     maxCount,
+    warn = false,
+    warnText,
     ...other
   } = props;
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
-  const enabled = useFeatureFlag('enable-v11-release');
   const { defaultValue, value, disabled } = other;
   const [textCount, setTextCount] = useState(
-    defaultValue?.toString().length || value?.toString().length || 0
+    defaultValue?.toString()?.length || value?.toString()?.length || 0
   );
+  const { current: textAreaInstanceId } = useRef(getInstanceId());
+
+  useEffect(() => {
+    setTextCount(
+      defaultValue?.toString()?.length || value?.toString()?.length || 0
+    );
+  }, [value, defaultValue]);
 
   const textareaProps: {
     id: TextAreaProps['id'];
@@ -159,7 +175,10 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     id,
     onChange: (evt) => {
       if (!other.disabled && onChange) {
-        setTextCount(evt.target.value?.length);
+        // delay textCount assignation to give the textarea element value time to catch up if is a controlled input
+        setTimeout(() => {
+          setTextCount(evt.target.value?.length);
+        }, 0);
         onChange(evt);
       }
     },
@@ -199,8 +218,14 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     [`${prefix}--form__helper-text--disabled`]: other.disabled,
   });
 
+  const helperId = !helperText
+    ? undefined
+    : `text-area-helper-text-${textAreaInstanceId}`;
+
   const helper = helperText ? (
-    <div className={helperTextClasses}>{helperText}</div>
+    <div id={helperId} className={helperTextClasses}>
+      {helperText}
+    </div>
   ) : null;
 
   const errorId = id + '-error-msg';
@@ -214,14 +239,22 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     </div>
   ) : null;
 
-  const textareaClasses = classNames(
-    `${prefix}--text-area`,
-    [enabled ? null : className],
-    {
-      [`${prefix}--text-area--light`]: light,
-      [`${prefix}--text-area--invalid`]: invalid,
-    }
-  );
+  const warning = warn ? (
+    <div role="alert" className={`${prefix}--form-requirement`}>
+      {warnText}
+      {isFluid && (
+        <WarningAltFilled
+          className={`${prefix}--text-area__invalid-icon ${prefix}--text-area__invalid-icon--warning`}
+        />
+      )}
+    </div>
+  ) : null;
+
+  const textareaClasses = classNames(`${prefix}--text-area`, {
+    [`${prefix}--text-area--light`]: light,
+    [`${prefix}--text-area--invalid`]: invalid,
+    [`${prefix}--text-area--warn`]: warn,
+  });
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const ref = useMergedRefs([forwardRef, textareaRef]) as
@@ -237,6 +270,14 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     }
   }, [other.cols]);
 
+  let ariaDescribedBy;
+
+  if (invalid) {
+    ariaDescribedBy = errorId;
+  } else if (!invalid && !warn && !isFluid && helperText) {
+    ariaDescribedBy = helperId;
+  }
+
   const input = (
     <textarea
       {...other}
@@ -244,7 +285,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
       placeholder={placeholder}
       className={textareaClasses}
       aria-invalid={invalid}
-      aria-describedby={invalid ? errorId : undefined}
+      aria-describedby={ariaDescribedBy}
       disabled={other.disabled}
       readOnly={other.readOnly}
       ref={ref}
@@ -252,12 +293,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   );
 
   return (
-    <div
-      className={
-        enabled
-          ? classNames(`${prefix}--form-item`, className)
-          : `${prefix}--form-item`
-      }>
+    <div className={classNames(`${prefix}--form-item`, className)}>
       <div className={`${prefix}--text-area__label-wrapper`}>
         {label}
         {counter}
@@ -265,10 +301,16 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
       <div
         className={classNames(`${prefix}--text-area__wrapper`, {
           [`${prefix}--text-area__wrapper--readonly`]: other.readOnly,
+          [`${prefix}--text-area__wrapper--warn`]: warn,
         })}
         data-invalid={invalid || null}>
         {invalid && !isFluid && (
           <WarningFilled className={`${prefix}--text-area__invalid-icon`} />
+        )}
+        {warn && !invalid && !isFluid && (
+          <WarningAltFilled
+            className={`${prefix}--text-area__invalid-icon ${prefix}--text-area__invalid-icon--warning`}
+          />
         )}
         {input}
         <span className={`${prefix}--text-area__counter-alert`} role="alert">
@@ -276,8 +318,11 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
         </span>
         {isFluid && <hr className={`${prefix}--text-area__divider`} />}
         {isFluid && invalid ? error : null}
+        {isFluid && warn && !invalid ? warning : null}
       </div>
-      {invalid && !isFluid ? error : helper}
+      {!invalid && !warn && !isFluid ? helper : null}
+      {invalid && !isFluid ? error : null}
+      {warn && !invalid && !isFluid ? warning : null}
     </div>
   );
 });
@@ -387,6 +432,16 @@ TextArea.propTypes = {
    * Provide the current value of the `<textarea>`
    */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText: PropTypes.node,
 };
 
 TextArea.defaultProps = {
@@ -400,6 +455,8 @@ TextArea.defaultProps = {
   helperText: '',
   enableCounter: false,
   maxCount: undefined,
+  warn: false,
+  warnText: '',
 };
 
 export default TextArea;

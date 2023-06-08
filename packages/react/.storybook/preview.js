@@ -8,13 +8,52 @@
 import './styles.scss';
 import '../src/feature-flags';
 
-import { configureActions } from '@storybook/addon-actions';
 import { white, g10, g90, g100 } from '@carbon/themes';
 import React from 'react';
 import { breakpoints } from '@carbon/layout';
 import { GlobalTheme } from '../src/components/Theme';
+import { Layout } from '../src/components/Layout';
 
 import theme from './theme';
+
+const devTools = {
+  layoutSize: {
+    name: 'unstable__Layout size',
+    description: "Set the layout context's size",
+    defaultValue: false,
+    toolbar: {
+      showName: true,
+      items: [
+        {
+          value: false,
+          title: 'None',
+        },
+        'xs',
+        'sm',
+        'md',
+        'lg',
+        'xl',
+        '2xl',
+      ],
+    },
+  },
+  layoutDensity: {
+    name: 'unstable__Layout density',
+    description: "Set the layout context's density",
+    defaultValue: false,
+    toolbar: {
+      showName: true,
+      items: [
+        {
+          value: false,
+          title: 'None',
+        },
+        'condensed',
+        'normal',
+      ],
+    },
+  },
+};
 
 export const globalTypes = {
   locale: {
@@ -46,6 +85,7 @@ export const globalTypes = {
       items: ['white', 'g10', 'g90', 'g100'],
     },
   },
+  ...(process.env.NODE_ENV === 'development' ? devTools : {}),
 };
 
 export const parameters = {
@@ -203,14 +243,9 @@ export const parameters = {
   },
 };
 
-configureActions({
-  depth: 3,
-  limit: 10,
-});
-
 export const decorators = [
   (Story, context) => {
-    const { locale, theme } = context.globals;
+    const { layoutDensity, layoutSize, locale, theme } = context.globals;
 
     React.useEffect(() => {
       document.documentElement.setAttribute('data-carbon-theme', theme);
@@ -222,7 +257,9 @@ export const decorators = [
 
     return (
       <GlobalTheme theme={theme}>
-        <Story {...context} />
+        <Layout size={layoutSize || null} density={layoutDensity || null}>
+          <Story {...context} />
+        </Layout>
       </GlobalTheme>
     );
   },

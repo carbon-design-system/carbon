@@ -12,7 +12,6 @@ import Filename from './Filename';
 import { keys, matches } from '../../internal/keyboard';
 import uid from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
-import * as FeatureFlags from '@carbon/feature-flags';
 
 function FileUploaderItem({
   uuid,
@@ -40,13 +39,15 @@ function FileUploaderItem({
       </p>
       <span className={`${prefix}--file__state-container`}>
         <Filename
+          name={name}
           iconDescription={iconDescription}
-          aria-describedby={name}
           status={status}
           invalid={invalid}
+          aria-describedby={`${name}-id-error`}
           onKeyDown={(evt) => {
             if (matches(evt, [keys.Enter, keys.Space])) {
               if (status === 'edit') {
+                evt.preventDefault();
                 onDelete(evt, { uuid: id });
               }
             }
@@ -59,7 +60,10 @@ function FileUploaderItem({
         />
       </span>
       {invalid && errorSubject && (
-        <div className={`${prefix}--form-requirement`}>
+        <div
+          className={`${prefix}--form-requirement`}
+          role="alert"
+          id={`${name}-id-error`}>
           <div className={`${prefix}--form-requirement__title`}>
             {errorSubject}
           </div>
@@ -110,9 +114,7 @@ FileUploaderItem.propTypes = {
    * Specify the size of the FileUploaderButton, from a list of available
    * sizes.
    */
-  size: FeatureFlags.enabled('enable-v11-release')
-    ? PropTypes.oneOf(['sm', 'md', 'lg'])
-    : PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * Status of the file upload

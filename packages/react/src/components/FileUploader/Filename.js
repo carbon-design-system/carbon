@@ -11,7 +11,14 @@ import React from 'react';
 import Loading from '../Loading';
 import { usePrefix } from '../../internal/usePrefix';
 
-function Filename({ iconDescription, status, invalid, ...rest }) {
+function Filename({
+  iconDescription,
+  status,
+  invalid,
+  name,
+  ['aria-describedBy']: ariaDescribedBy,
+  ...rest
+}) {
   const prefix = usePrefix();
   switch (status) {
     case 'uploading':
@@ -23,7 +30,8 @@ function Filename({ iconDescription, status, invalid, ...rest }) {
         <>
           {invalid && <WarningFilled className={`${prefix}--file-invalid`} />}
           <button
-            aria-label={iconDescription}
+            aria-label={`${iconDescription} - ${name}`}
+            aria-describedby={invalid ? ariaDescribedBy : null}
             className={`${prefix}--file-close`}
             type="button"
             {...rest}>
@@ -48,6 +56,11 @@ function Filename({ iconDescription, status, invalid, ...rest }) {
 
 Filename.propTypes = {
   /**
+   * Specify an id that describes the error to be read by screen readers when the filename is invalid
+   */
+  ['aria-describedby']: PropTypes.string,
+
+  /**
    * Provide a description of the SVG icon to denote file upload status
    */
   iconDescription: PropTypes.string,
@@ -56,6 +69,11 @@ Filename.propTypes = {
    * Specify if the file is invalid
    */
   invalid: PropTypes.bool,
+
+  /**
+   * Name of the uploaded file
+   */
+  name: PropTypes.string,
 
   /**
    * Status of the file upload
