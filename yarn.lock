@@ -1865,7 +1865,7 @@ __metadata:
     js-yaml: ^3.14.0
     rimraf: ^5.0.0
     rollup: ^2.79.1
-    rollup-plugin-strip-banner: ^2.0.0
+    rollup-plugin-strip-banner: ^3.0.0
   languageName: unknown
   linkType: soft
 
@@ -1914,7 +1914,7 @@ __metadata:
     react-dom: ^18.2.0
     rimraf: ^5.0.0
     rollup: ^2.79.1
-    rollup-plugin-strip-banner: ^2.0.0
+    rollup-plugin-strip-banner: ^3.0.0
     svg-parser: ^2.0.4
     svgo: ^1.1.1
     svgson: ^5.2.1
@@ -2110,7 +2110,7 @@ __metadata:
     requestanimationframe: ^0.0.23
     rimraf: ^5.0.0
     rollup: ^2.79.1
-    rollup-plugin-strip-banner: ^2.0.0
+    rollup-plugin-strip-banner: ^3.0.0
     rtlcss: ^4.0.0
     sass: ^1.51.0
     sass-loader: ^13.0.0
@@ -11375,7 +11375,7 @@ __metadata:
     react-dom: ^18.2.0
     rimraf: ^5.0.0
     rollup: ^2.79.1
-    rollup-plugin-strip-banner: ^2.0.0
+    rollup-plugin-strip-banner: ^3.0.0
   peerDependencies:
     react: ^16.8.6 || ^17.0.1 || ^18.2.0
     react-dom: ^16.8.6 || ^17.0.1 || ^18.2.0
@@ -22432,12 +22432,12 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"magic-string@npm:0.25.7":
-  version: 0.25.7
-  resolution: "magic-string@npm:0.25.7"
+"magic-string@npm:0.26.7, magic-string@npm:^0.26.4":
+  version: 0.26.7
+  resolution: "magic-string@npm:0.26.7"
   dependencies:
-    sourcemap-codec: ^1.4.4
-  checksum: 727a1fb70f9610304fe384f1df0251eb7d1d9dd779c07ef1225690361b71b216f26f5d934bfb11c919b5b0e7ba50f6240c823a6f2e44cfd33d4a07d7747ca829
+    sourcemap-codec: ^1.4.8
+  checksum: 89b0d60cbb32bbf3d1e23c46ea93db082d18a8230b972027aecb10a40bba51be519ecce0674f995571e3affe917b76b09f59d8dbc9a1b2c9c4102a2b6e8a2b01
   languageName: node
   linkType: hard
 
@@ -22447,15 +22447,6 @@ fsevents@^1.2.7:
   dependencies:
     sourcemap-codec: ^1.4.8
   checksum: 9a0e55a15c7303fc360f9572a71cffba1f61451bc92c5602b1206c9d17f492403bf96f946dfce7483e66822d6b74607262e24392e87b0ac27b786e69a40e9b1a
-  languageName: node
-  linkType: hard
-
-"magic-string@npm:^0.26.4":
-  version: 0.26.7
-  resolution: "magic-string@npm:0.26.7"
-  dependencies:
-    sourcemap-codec: ^1.4.8
-  checksum: 89b0d60cbb32bbf3d1e23c46ea93db082d18a8230b972027aecb10a40bba51be519ecce0674f995571e3affe917b76b09f59d8dbc9a1b2c9c4102a2b6e8a2b01
   languageName: node
   linkType: hard
 
@@ -28828,16 +28819,16 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"rollup-plugin-strip-banner@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "rollup-plugin-strip-banner@npm:2.0.0"
+"rollup-plugin-strip-banner@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "rollup-plugin-strip-banner@npm:3.0.0"
   dependencies:
     extract-banner: 0.1.2
-    magic-string: 0.25.7
+    magic-string: 0.26.7
     rollup-pluginutils: 2.8.2
   peerDependencies:
-    rollup: ^1.0.0 || ^2.0.0
-  checksum: 28cc5c277f7a5baaf3646ebcd2f6b18f37be3d33411f8017d7e4f2d10c726459da161814fdb8e06ca4c75b7fb840f6d10a07614c2b47a2b55def8533bbb3841c
+    rollup: ^1.0.0 || ^2.0.0 || ^3.0.0
+  checksum: 8f1332932cca8cd9e6699e5365008141376f6517d86eff5cea5b3ad59ea423aeb2568c2a3b66e8771518ab1e05ff9d76c21dd68c363949f482660cfb5114487f
   languageName: node
   linkType: hard
 
@@ -30003,7 +29994,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"sourcemap-codec@npm:^1.4.4, sourcemap-codec@npm:^1.4.8":
+"sourcemap-codec@npm:^1.4.8":
   version: 1.4.8
   resolution: "sourcemap-codec@npm:1.4.8"
   checksum: b57981c05611afef31605732b598ccf65124a9fcb03b833532659ac4d29ac0f7bfacbc0d6c5a28a03e84c7510e7e556d758d0bb57786e214660016fb94279316
