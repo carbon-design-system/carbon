@@ -16,7 +16,11 @@ export const rows = [
     port: 3000,
     rule: 'Round robin',
     attached_groups: 'Kevin’s VM Groups',
-    status: <Link disabled={true}>Disabled</Link>,
+    status: (
+      <Link href="#" disabled={true}>
+        Disabled
+      </Link>
+    ),
   },
   {
     id: 'b',
@@ -25,7 +29,7 @@ export const rows = [
     port: 443,
     rule: 'Round robin',
     attached_groups: 'Maureen’s VM Groups',
-    status: <Link>Starting</Link>,
+    status: <Link href="#">Starting</Link>,
   },
   {
     id: 'c',
@@ -34,7 +38,7 @@ export const rows = [
     port: 80,
     rule: 'DNS delegation',
     attached_groups: 'Andrew’s VM Groups',
-    status: <Link>Active</Link>,
+    status: <Link href="#">Active</Link>,
   },
   {
     id: 'd',
@@ -43,7 +47,11 @@ export const rows = [
     port: 3000,
     rule: 'Round robin',
     attached_groups: 'Marc’s VM Groups',
-    status: <Link disabled={true}>Disabled</Link>,
+    status: (
+      <Link href="#" disabled={true}>
+        Disabled
+      </Link>
+    ),
   },
   {
     id: 'e',
@@ -52,7 +60,7 @@ export const rows = [
     port: 443,
     rule: 'Round robin',
     attached_groups: 'Mel’s VM Groups',
-    status: <Link>Starting</Link>,
+    status: <Link href="#">Starting</Link>,
   },
   {
     id: 'f',
@@ -61,7 +69,7 @@ export const rows = [
     port: 80,
     rule: 'DNS delegation',
     attached_groups: 'Ronja’s VM Groups',
-    status: <Link>Active</Link>,
+    status: <Link href="#">Active</Link>,
   },
 ];
 
