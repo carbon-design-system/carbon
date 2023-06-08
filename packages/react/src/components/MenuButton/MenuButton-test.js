@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -70,13 +70,15 @@ describe('MenuButton', () => {
 
       sizes.forEach((size) => {
         it(`size="${size}"`, () => {
-          const { container } = render(
+          render(
             <MenuButton label="Actions" size={size}>
               <MenuItem label="Action" />
             </MenuButton>
           );
 
-          expect(container.firstChild).toHaveClass(`${prefix}--btn--${size}`);
+          expect(screen.getByRole('button')).toHaveClass(
+            `${prefix}--btn--${size}`
+          );
         });
       });
     });
@@ -86,13 +88,15 @@ describe('MenuButton', () => {
 
       kinds.forEach((kind) => {
         it(`kind="${kind}"`, () => {
-          const { container } = render(
+          render(
             <MenuButton label="Actions" kind={kind}>
               <MenuItem label="Action" />
             </MenuButton>
           );
 
-          expect(container.firstChild).toHaveClass(`${prefix}--btn--${kind}`);
+          expect(screen.getByRole('button')).toHaveClass(
+            `${prefix}--btn--${kind}`
+          );
         });
       });
     });
