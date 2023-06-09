@@ -449,6 +449,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "small": Object {
+        "type": "bool",
+      },
     },
   },
   "ButtonTooltipAlignments" => Object {

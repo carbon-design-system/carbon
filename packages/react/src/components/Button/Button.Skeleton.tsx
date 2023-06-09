@@ -21,10 +21,19 @@ export interface ButtonSkeletonProps extends React.HTMLAttributes<HTMLElement> {
    * Specify the size of the button, from a list of available sizes.
    */
   size?: ButtonSize;
+
+  /**
+   * @deprecated This property will be removed in the next major Carbon version,
+   * use size={sm} instead.
+   *
+   * Specify whether the Button should be a small variant
+   */
+  small?: boolean;
 }
 
 const ButtonSkeleton: React.FC<ButtonSkeletonProps> = ({
   className,
+  small = false,
   href,
   size = 'lg',
   ...rest
@@ -34,7 +43,7 @@ const ButtonSkeleton: React.FC<ButtonSkeletonProps> = ({
   const buttonClasses = cx(className, {
     [`${prefix}--skeleton`]: true,
     [`${prefix}--btn`]: true,
-    [`${prefix}--btn--sm`]: size === 'sm',
+    [`${prefix}--btn--sm`]: small || size === 'sm',
     [`${prefix}--btn--md`]: size === 'md',
     [`${prefix}--btn--lg`]: size === 'lg',
     [`${prefix}--btn--xl`]: size === 'xl',
@@ -70,6 +79,14 @@ ButtonSkeleton.propTypes = {
    * In the next major release of Carbon, `default`, `field`, and `small` will be removed
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl', '2xl']),
+
+  /**
+   * @deprecated This property will be removed in the next major Carbon version,
+   * use size={sm} instead.
+   *
+   * Specify whether the Button should be a small variant
+   */
+  small: PropTypes.bool,
 };
 
 export default ButtonSkeleton;
