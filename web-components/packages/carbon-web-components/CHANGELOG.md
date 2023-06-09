@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.29.0-rc.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.28.0...@carbon/web-components@1.29.0-rc.0) (2023-06-09)
+
+
+### Bug Fixes
+
+* **bx-header-menu:** add button role ([#10440](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10440)) ([c5d8c5d](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/c5d8c5db8c42e129a901cda81aba7eeadb5f8c79)), closes [#10392](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10392)
+* **input:** autocomplete property ([#10540](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10540)) ([6096958](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/60969585cc3792409e967784437fefd2bf096c71)), closes [#10498](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10498)
+* **modal:** small screen view ([#10511](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10511)) ([7f4aaef](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/7f4aaef392fa7b3482b3544a4b0b7833034ccf33))
+
+
+
+
+
 # [1.28.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.28.0-rc.2...@carbon/web-components@1.28.0) (2023-05-23)
 
 **Note:** Version bump only for package @carbon/web-components
