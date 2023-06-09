@@ -153,7 +153,7 @@ describe('Toggle', () => {
       );
 
       expect(onClick).not.toHaveBeenCalled();
-      userEvent.click(wrapper.getByRole('switch'));
+      userEvent.click(screen.getByRole('switch'));
       expect(onClick).not.toHaveBeenCalled();
       expect(onToggle).not.toHaveBeenCalled();
     });
