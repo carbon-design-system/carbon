@@ -8,25 +8,13 @@
 import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { usePrefix } from '../../internal/usePrefix';
 
 const HeaderPanel = React.forwardRef(function HeaderPanel(
-  {
-    'aria-label': ariaLabel,
-    'aria-labelledby': ariaLabelledBy,
-    children,
-    className: customClassName,
-    expanded,
-    ...other
-  },
+  { children, className: customClassName, expanded, ...other },
   ref
 ) {
   const prefix = usePrefix();
-  const accessibilityLabel = {
-    'aria-label': ariaLabel,
-    'aria-labelledby': ariaLabelledBy,
-  };
 
   const className = cx(`${prefix}--header-panel`, {
     [`${prefix}--header-panel--expanded`]: expanded,
@@ -34,7 +22,7 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
   });
 
   return (
-    <div {...other} className={className} {...accessibilityLabel} ref={ref}>
+    <div {...other} className={className} ref={ref}>
       {children}
     </div>
   );
@@ -42,9 +30,9 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
 
 HeaderPanel.propTypes = {
   /**
-   * Required props for accessibility label on the underlying menu
+   * The content that will render inside of the `HeaderPanel`
    */
-  ...AriaLabelPropType,
+  children: PropTypes.node,
 
   /**
    * Optionally provide a custom class to apply to the underlying `<li>` node

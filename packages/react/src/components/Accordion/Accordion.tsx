@@ -8,7 +8,40 @@
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
+import { AccordionProvider } from './AccordionProvider';
+
+interface AccordionProps {
+  /**
+   * Specify the alignment of the accordion heading
+   * title and chevron. Defaults to `end`.
+   */
+  align?: 'start' | 'end';
+
+  /**
+   * Specify an optional className to be applied to
+   * the container node.
+   */
+  className?: string;
+
+  /**
+   * Specify whether an individual AccordionItem
+   * should be disabled.
+   */
+  disabled?: boolean;
+
+  /**
+   * Specify whether Accordion text should be flush,
+   * default is `false`, does not work with `align="start"`.
+   */
+  isFlush?: boolean;
+
+  /**
+   * Specify the size of the Accordion. Currently
+   * supports the following: `sm`, `md`, `lg`
+   */
+  size?: 'sm' | 'md' | 'lg';
+}
 
 function Accordion({
   align = 'end',
@@ -16,23 +49,24 @@ function Accordion({
   className: customClassName,
   disabled = false,
   isFlush = false,
-  size = 'md',
+  size,
   ...rest
-}) {
+}: PropsWithChildren<AccordionProps>) {
   const prefix = usePrefix();
+
   const className = cx(`${prefix}--accordion`, customClassName, {
     [`${prefix}--accordion--${align}`]: align,
-    [`${prefix}--accordion--${size}`]: size,
+    [`${prefix}--accordion--${size}`]: size, // TODO: V12 - Remove this class
+    [`${prefix}--layout--size-${size}`]: size,
     [`${prefix}--accordion--flush`]: isFlush && align !== 'start',
   });
+
   return (
-    <ul className={className} {...rest}>
-      {disabled
-        ? React.Children.toArray(children).map((child) => {
-            return React.cloneElement(child, { disabled });
-          })
-        : children}
-    </ul>
+    <AccordionProvider disabled={disabled}>
+      <ul className={className} {...rest}>
+        {children}
+      </ul>
+    </AccordionProvider>
   );
 }
 

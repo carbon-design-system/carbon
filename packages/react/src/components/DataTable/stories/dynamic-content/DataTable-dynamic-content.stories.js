@@ -328,7 +328,11 @@ export const Playground = (args) => {
                 <TableHead>
                   <TableRow>
                     <TableExpandHeader />
-                    <TableSelectAll {...getSelectionProps()} />
+                    {args.radio ? (
+                      <th scope="col" />
+                    ) : (
+                      <TableSelectAll {...getSelectionProps()} />
+                    )}
                     {headers.map((header, i) => (
                       <TableHeader key={i} {...getHeaderProps({ header })}>
                         {header.header}

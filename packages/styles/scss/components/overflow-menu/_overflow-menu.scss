@@ -47,6 +47,10 @@
     }
   }
 
+  .#{$prefix}--overflow-menu > :first-child {
+    margin-block-start: 0;
+  }
+
   .#{$prefix}--overflow-menu--sm {
     width: rem(32px);
     height: rem(32px);
