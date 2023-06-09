@@ -247,6 +247,12 @@
       display: flex;
     }
 
+    &:not(.#{$prefix}--tabs--contained)
+      .#{$prefix}--tabs__nav-item-label-wrapper {
+      position: relative;
+      top: rem(1px);
+    }
+
     //-----------------------------
     // Item
     //-----------------------------
