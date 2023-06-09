@@ -18,6 +18,9 @@
 @use '../../utilities/visually-hidden' as *;
 @use '../../utilities/layout';
 
+// padding + icon size (1rem) + padding
+$-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
+
 /// Tile styles
 /// @access public
 /// @group tile
@@ -138,7 +141,7 @@
 
   .#{$prefix}--tile--selectable {
     border: 1px solid transparent;
-    padding-inline-end: calc(#{layout.density('padding-inline')} * 2 + 1rem);
+    padding-inline-end: $-icon-container-size;
 
     @if (
       enabled('enable-experimental-tile-contrast') or
@@ -177,8 +180,8 @@
     right: 0;
     bottom: 0;
     display: flex;
-    width: calc(#{layout.density('padding-inline')} * 2 + 1rem);
-    height: calc(#{layout.density('padding-inline')} * 2 + 1rem);
+    width: $-icon-container-size;
+    height: $-icon-container-size;
     align-items: center;
     justify-content: center;
 
@@ -207,8 +210,8 @@
     right: 0;
     bottom: 0;
     display: flex;
-    width: calc(#{layout.density('padding-inline')} * 2 + 1rem);
-    height: calc(#{layout.density('padding-inline')} * 2 + 1rem);
+    width: $-icon-container-size;
+    height: $-icon-container-size;
     align-items: center;
     justify-content: center;
 
