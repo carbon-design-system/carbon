@@ -235,6 +235,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://seongryoo.github.io"><img src="https://avatars.githubusercontent.com/u/106095943?s=96&v=4?s=100" width="100px;" alt=""/><br /><sub><b>Seong-Hyun Ryoo</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=shryoo-ibm" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/pratikkarad"><img src="https://avatars.githubusercontent.com/u/32093370?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Pratik Karad</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=pratikkarad" title="Code">💻</a> <a href="#a11y-pratikkarad" title="Accessibility">️️️️♿️</a></td>
     <td align="center"><a href="https://github.com/gerzonc"><img src="https://avatars.githubusercontent.com/u/36211892?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Gerzon</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=gerzonc" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/modaslam"><img src="https://avatars.githubusercontent.com/u/33179527?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mohammed Aslam P. A.</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=modaslam" title="Code">💻</a> <a href="https://github.com/carbon-design-system/carbon/commits?author=modaslam" title="Documentation">📖</a></td>
   </tr>
 </table>
 
