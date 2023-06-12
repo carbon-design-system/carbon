@@ -50,9 +50,11 @@ export const Default = () => {
     <p>
       Custom domains direct requests for your apps in this Cloud Foundry
       organization to a{' '}
-      <DefinitionTooltip definition={definition}>URL</DefinitionTooltip> that
-      you own. A custom domain can be a shared domain, a shared subdomain, or a
-      shared domain and host.
+      <DefinitionTooltip openOnHover definition={definition}>
+        URL
+      </DefinitionTooltip>{' '}
+      that you own. A custom domain can be a shared domain, a shared subdomain,
+      or a shared domain and host.
     </p>
   );
 };
@@ -93,7 +95,7 @@ Playground.argTypes = {
     },
   },
   defaultOpen: {
-    defaultValue: true,
+    defaultValue: false,
   },
   definition: {
     control: {
@@ -108,7 +110,7 @@ Playground.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
+    defaultValue: true,
   },
   tooltipText: {
     table: {
