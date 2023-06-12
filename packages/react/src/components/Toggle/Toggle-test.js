@@ -7,7 +7,7 @@
 
 import React from 'react';
 import Toggle from './Toggle';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 const prefix = 'cds';
@@ -143,6 +143,19 @@ describe('Toggle', () => {
       wrapper.rerender(<Toggle {...props} toggled={true} />);
       // eslint-disable-next-line testing-library/prefer-screen-queries
       expect(wrapper.getByRole('switch')).toBeChecked();
+    });
+
+    it('does not change value when disabled', () => {
+      const onClick = jest.fn();
+      const onToggle = jest.fn();
+      wrapper.rerender(
+        <Toggle {...props} onClick={onClick} onToggle={onToggle} disabled />
+      );
+
+      expect(onClick).not.toHaveBeenCalled();
+      userEvent.click(screen.getByRole('switch'));
+      expect(onClick).not.toHaveBeenCalled();
+      expect(onToggle).not.toHaveBeenCalled();
     });
 
     it('does not change value when readonly', async () => {
