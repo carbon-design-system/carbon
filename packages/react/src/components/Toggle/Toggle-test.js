@@ -7,7 +7,7 @@
 
 import React from 'react';
 import Toggle from './Toggle';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 const prefix = 'cds';
