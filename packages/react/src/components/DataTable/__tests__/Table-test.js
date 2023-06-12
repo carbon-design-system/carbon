@@ -105,7 +105,7 @@ describe('Table', () => {
         return {
           measureText: () => {
             return {
-              width: 100,
+              width: 101,
             };
           },
         };
