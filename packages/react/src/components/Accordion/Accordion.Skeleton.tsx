@@ -12,14 +12,43 @@ import { ChevronRight } from '@carbon/icons-react';
 import SkeletonText from '../SkeletonText';
 import { usePrefix } from '../../internal/usePrefix';
 
+interface AccordionSkeletonProps {
+  /**
+   * Specify the alignment of the accordion heading
+   * title and chevron.
+   */
+  align?: 'start' | 'end';
+
+  /**
+   * Specify an optional className to add.
+   */
+  className?: string;
+
+  /**
+   * Set number of items to render.
+   */
+  count?: number;
+
+  /**
+   * Specify whether an individual AccordionItem should
+   * be flush, default is false.
+   */
+  isFlush?: boolean;
+
+  /**
+   * `false` to not display the first item opened.
+   */
+  open?: boolean;
+}
+
 function AccordionSkeleton({
-  align,
+  align = 'end',
   className,
-  count,
+  count = 4,
   isFlush,
-  open,
+  open = true,
   ...rest
-}) {
+}: AccordionSkeletonProps) {
   const prefix = usePrefix();
   const classes = cx(`${prefix}--accordion`, `${prefix}--skeleton`, className, {
     [`${prefix}--accordion--${align}`]: align,

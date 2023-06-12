@@ -1,7 +1,7 @@
 {
   "name": "@carbon/cli",
   "description": "Task automation for working with the Carbon Design System",
-  "version": "11.11.0-rc.0",
+  "version": "11.11.0",
   "license": "Apache-2.0",
   "bin": {
     "carbon-cli": "./bin/carbon-cli.js"
@@ -43,7 +43,7 @@
     "lodash.template": "^4.5.0",
     "markdown-toc": "^1.2.0",
     "prettier": "^2.8.8",
-    "prettier-config-carbon": "^0.11.0-rc.0",
+    "prettier-config-carbon": "^0.11.0",
     "progress-estimator": "^0.3.0",
     "remark": "^10.0.1",
     "replace-in-file": "^6.1.0",
