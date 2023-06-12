@@ -19,7 +19,6 @@ module.exports = {
     'eslint:recommended',
     require.resolve('./rules/best-practices'),
     require.resolve('./plugins/jsdoc'),
-    require.resolve('./plugins/cypress'),
   ],
   rules: {
     // Handle cases where we are destructuring but may not be using the initial
