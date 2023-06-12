@@ -6,26 +6,52 @@
  */
 
 import PropTypes from 'prop-types';
-
-import React, { useRef } from 'react';
+import React, { MutableRefObject, ReactNode, useRef } from 'react';
 import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 const randoms = [0.973051493507435, 0.15334737213558558, 0.5671034553053769];
 
-function getRandomInt(min, max, n) {
+function getRandomInt(min: number, max: number, n: number) {
   return Math.floor(randoms[n % 3] * (max - min + 1)) + min;
 }
 
+interface SkeletonTextProps {
+  /**
+   * Specify an optional className to be applied to the container node.
+   */
+  className?: string;
+
+  /**
+   * Generates skeleton text at a larger size.
+   */
+  heading?: boolean;
+
+  /**
+   * The number of lines shown if paragraph is true.
+   */
+  lineCount?: number;
+
+  /**
+   * Set this to true to generate multiple lines of text.
+   */
+  paragraph?: boolean;
+
+  /**
+   * Width (in px or %) of single line of text or max-width of paragraph lines.
+   */
+  width?: string;
+}
+
 const SkeletonText = ({
-  paragraph,
-  lineCount,
-  width,
-  heading,
-  className,
-  ...other
-}) => {
+  paragraph = false,
+  lineCount = 3,
+  width = '100%',
+  heading = false,
+  className = '',
+  ...rest
+}: SkeletonTextProps) => {
   const prefix = usePrefix();
   const skeletonTextClasses = classNames({
     [`${prefix}--skeleton__text`]: true,
@@ -34,19 +60,16 @@ const SkeletonText = ({
   });
 
   const widthNum = parseInt(width, 10);
-
   const widthPx = width.includes('px');
-
   const widthPercent = width.includes('%');
 
-  let lineCountNumber;
-  if (!paragraph) {
-    lineCountNumber = '1';
-  } else {
+  let lineCountNumber = 1;
+
+  if (paragraph) {
     lineCountNumber = lineCount;
   }
 
-  const refs = useRef([]);
+  const refs: MutableRefObject<(HTMLParagraphElement | null)[]> = useRef([]);
 
   useIsomorphicEffect(() => {
     refs.current.map((item, j) => {
@@ -74,23 +97,24 @@ const SkeletonText = ({
     widthPx,
   ]);
 
-  const lines = [];
-  for (var i = 0; i < lineCountNumber; i++) {
+  const lines: ReactNode[] = [];
+  for (let i = 0; i < lineCountNumber; i++) {
     lines.push(
       <p
         className={skeletonTextClasses}
         key={i}
         ref={(el) => (refs.current = [...refs.current, el])}
-        {...other}
+        {...rest}
       />
     );
   }
 
-  if (lineCountNumber !== '1') {
+  if (lineCountNumber !== 1) {
     return <div>{lines}</div>;
-  } else {
-    return lines;
   }
+
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  return <>{lines}</>;
 };
 
 SkeletonText.propTypes = {

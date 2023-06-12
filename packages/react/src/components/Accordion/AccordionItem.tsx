@@ -4,34 +4,128 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
 import { ChevronRight } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, {
+  AnimationEventHandler,
+  AriaAttributes,
+  KeyboardEvent,
+  MouseEventHandler,
+  PropsWithChildren,
+  ReactElement,
+  ReactNode,
+  useContext,
+  useState,
+} from 'react';
 import { Text } from '../Text';
 import { match, keys } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
+import { AccordionContext } from './AccordionProvider';
 
-const defaultRenderToggle = (props) => <button type="button" {...props} />;
+interface AccordionItemProps {
+  /**
+   * Specify an optional className to be
+   * applied to the container node.
+   */
+  className?: string;
+
+  /**
+   * Specify whether an individual `AccordionItem` should
+   * be disabled (overrides the parent accordion state). If undefined,
+   * this value will be managed by the parent Accordion.
+   */
+  disabled?: boolean;
+
+  /**
+   * The handler of the massaged `click` event.
+   */
+  onClick?: MouseEventHandler<HTMLLIElement>;
+
+  /**
+   * The handler of the massaged `click` event on
+   * the heading.
+   */
+  onHeadingClick?: ({
+    isOpen,
+    event,
+  }: {
+    isOpen: boolean;
+    event: Parameters<MouseEventHandler<HTMLButtonElement>>[0];
+  }) => void;
+
+  /**
+   * `true` to open the expand.
+   */
+  open?: boolean;
+
+  /**
+   * @deprecated This prop has been deprecated and will be
+   * removed in the next major release of Carbon. Use the
+   * `renderToggle` prop instead.
+   */
+  renderExpando?: (
+    props: PropsWithChildren<AccordionToggleProps>
+  ) => ReactElement;
+
+  /**
+   * The callback function to render the expand button.
+   * Can be a React component class.
+   */
+  renderToggle?: (
+    props: PropsWithChildren<AccordionToggleProps>
+  ) => ReactElement;
+
+  /**
+   * The accordion title.
+   */
+  title?: ReactNode;
+
+  /**
+   * The callback function to run on the `onAnimationEnd`
+   * event for the list item.
+   */
+  handleAnimationEnd?: AnimationEventHandler<HTMLLIElement>;
+}
+
+interface AccordionToggleProps {
+  'aria-controls'?: AriaAttributes['aria-controls'];
+  'aria-expanded'?: AriaAttributes['aria-expanded'];
+  className?: string;
+  disabled?: boolean;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+  onKeyDown?: (event: KeyboardEvent<HTMLButtonElement>) => void;
+  type?: 'button';
+}
+
+const defaultRenderToggle = (props: AccordionToggleProps) => (
+  <button type="button" {...props} />
+);
 
 function AccordionItem({
   children,
-  className: customClassName,
-  iconDescription, // eslint-disable-line
+  className: customClassName = '',
   open = false,
   onHeadingClick,
   renderExpando = defaultRenderToggle, // remove renderExpando in next major release
   renderToggle,
   title = 'title',
-  disabled,
+  disabled: controlledDisabled,
+  handleAnimationEnd,
   ...rest
-}) {
+}: PropsWithChildren<AccordionItemProps>) {
   const [isOpen, setIsOpen] = useState(open);
   const [prevIsOpen, setPrevIsOpen] = useState(open);
   const [animation, setAnimation] = useState('');
+  const accordionState = useContext(AccordionContext);
+
+  const disabledIsControlled = typeof controlledDisabled === 'boolean';
+  const disabled = disabledIsControlled
+    ? controlledDisabled
+    : accordionState.disabled;
+
   const id = useId('accordion-item');
   const prefix = usePrefix();
   const className = cx({
@@ -70,15 +164,15 @@ function AccordionItem({
     }
   }
 
-  function handleAnimationEnd(event) {
-    if (rest.handleAnimationEnd) {
-      rest.handleAnimationEnd(event);
+  function onAnimationEnd(event) {
+    if (handleAnimationEnd) {
+      handleAnimationEnd(event);
     }
     setAnimation('');
   }
 
   return (
-    <li className={className} {...rest} onAnimationEnd={handleAnimationEnd}>
+    <li className={className} {...rest} onAnimationEnd={onAnimationEnd}>
       <Toggle
         disabled={disabled}
         aria-controls={id}

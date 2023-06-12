@@ -3010,6 +3010,9 @@ Map {
       "id": Object {
         "type": "string",
       },
+      "isExpanded": Object {
+        "type": "bool",
+      },
       "labelText": Object {
         "isRequired": true,
         "type": "node",
@@ -3982,8 +3985,9 @@ Map {
   "HeaderPanel" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
-      "aria-label": [Function],
-      "aria-labelledby": [Function],
+      "children": Object {
+        "type": "node",
+      },
       "className": Object {
         "type": "string",
       },
@@ -6542,6 +6546,9 @@ Map {
       },
       "id": Object {
         "type": "string",
+      },
+      "isExpanded": Object {
+        "type": "bool",
       },
       "labelText": Object {
         "isRequired": true,
