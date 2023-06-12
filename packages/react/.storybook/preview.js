@@ -196,6 +196,13 @@ export const parameters = {
   },
   options: {
     storySort: (storyA, storyB) => {
+      if (storyA.id.includes('welcome')) {
+        return -1;
+      }
+      if (storyB.id.includes('welcome')) {
+        return 1;
+      }
+
       // By default, sort by the top-level title of the story
       if (storyA.title !== storyB.title) {
         return storyA.title.localeCompare(storyB.title);
@@ -223,9 +230,9 @@ export const parameters = {
       // We use this list of keywords to determine a collection of matches. By
       // default, we will look for the greatest valued matched
       for (const [keyword, weight] of keywords) {
-        // If we already have a match for a given id that is greater than the
+        // If we already have a match for a given id that is lesser than the
         // specific keyword we're looking for, break early
-        if (matches.get(idA) > weight || matches.get(idB) > weight) {
+        if (matches.get(idA) < weight || matches.get(idB) < weight) {
           break;
         }
 

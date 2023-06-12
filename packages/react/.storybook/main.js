@@ -15,7 +15,7 @@ const path = require('path');
 const stories = glob
   .sync(
     [
-      './Welcome/Welcome.stories.js',
+      './Welcome/Welcome.mdx',
       '../src/**/*.stories.js',
       '../src/**/*.stories.mdx',
       '../src/components/Tile/Tile.mdx',
