@@ -7,7 +7,7 @@
 
 'use strict';
 
-const remarkGfm = require('remark-gfm');
+import remarkGfm from 'remark-gfm';
 const fs = require('fs');
 const glob = require('fast-glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');

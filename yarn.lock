@@ -2418,7 +2418,6 @@ __metadata:
     "@storybook/addon-docs": ^7.0.18
     "@storybook/addon-essentials": ^7.0.18
     "@storybook/addon-knobs": ^7.0.2
-    "@storybook/addon-mdx-gfm": ^7.0.18
     "@storybook/addon-notes": ^5.3.21
     "@storybook/addon-storysource": ^7.0.18
     "@storybook/react": ^7.0.18
@@ -6449,17 +6448,6 @@ __metadata:
     react-dom:
       optional: true
   checksum: a28a61bb18d4c07edd3b031abbc9c81b48cf1c2b7d0707177f383c70f01b1e91d6f364969e42cdb34a7b761bc68e7603b53136c01887e56e24b408eb843d36fe
-  languageName: node
-  linkType: hard
-
-"@storybook/addon-mdx-gfm@npm:^7.0.18":
-  version: 7.0.18
-  resolution: "@storybook/addon-mdx-gfm@npm:7.0.18"
-  dependencies:
-    "@storybook/node-logger": 7.0.18
-    remark-gfm: ^3.0.1
-    ts-dedent: ^2.0.0
-  checksum: db284f0d567255afc77acec74913434857ab614b64561380f885dcb01deb03189a008c066338405d334931125a41869855b4065d502238a76bea4113c875d617
   languageName: node
   linkType: hard
 
