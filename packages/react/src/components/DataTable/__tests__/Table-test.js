@@ -101,6 +101,15 @@ describe('Table', () => {
           right: 0,
         };
       });
+      HTMLCanvasElement.prototype.getContext = jest.fn(() => {
+        return {
+          measureText: () => {
+            return {
+              width: 101,
+            };
+          },
+        };
+      });
       render(
         <Table experimentalAutoAlign>
           <TableHead>
@@ -129,6 +138,15 @@ describe('Table', () => {
           left: 0,
           bottom: 0,
           right: 0,
+        };
+      });
+      HTMLCanvasElement.prototype.getContext = jest.fn(() => {
+        return {
+          measureText: () => {
+            return {
+              width: 100,
+            };
+          },
         };
       });
       render(
@@ -164,6 +182,15 @@ describe('Table', () => {
           right: 0,
         };
       });
+      HTMLCanvasElement.prototype.getContext = jest.fn(() => {
+        return {
+          measureText: () => {
+            return {
+              width: 100,
+            };
+          },
+        };
+      });
       render(
         <Table experimentalAutoAlign>
           <TableHead>
@@ -197,7 +224,15 @@ describe('Table', () => {
           right: 0,
         };
       });
-
+      HTMLCanvasElement.prototype.getContext = jest.fn(() => {
+        return {
+          measureText: () => {
+            return {
+              width: 100,
+            };
+          },
+        };
+      });
       HTMLDivElement.prototype.getBoundingClientRect = jest.fn(() => {
         return {
           width: 1,
@@ -250,6 +285,15 @@ describe('Table', () => {
           left: 0,
           bottom: 0,
           right: 0,
+        };
+      });
+      HTMLCanvasElement.prototype.getContext = jest.fn(() => {
+        return {
+          measureText: () => {
+            return {
+              width: 100,
+            };
+          },
         };
       });
       render(
