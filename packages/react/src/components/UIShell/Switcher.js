@@ -5,97 +5,78 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { usePrefix } from '../../internal/usePrefix';
-import { useMergedRefs } from '../../internal/useMergedRefs';
+import { keys, match } from '../../internal/keyboard';
 
-const Switcher = React.forwardRef(function Switcher(props, forwardRef) {
-  const switcherRef = useRef(null);
-  const ref = useMergedRefs([switcherRef, forwardRef]);
-
-  const prefix = usePrefix();
-  const {
-    'aria-label': ariaLabel,
-    'aria-labelledby': ariaLabelledBy,
-    className: customClassName,
+const HeaderPanel = React.forwardRef(function HeaderPanel(
+  {
     children,
+    className: customClassName,
     expanded,
-  } = props;
+    addFocusListeners = true,
+    onHeaderPanelFocus,
+    ...other
+  },
+  ref
+) {
+  const prefix = usePrefix();
+  const controlled = useRef(expanded !== undefined).current;
+  const [expandedState, setExpandedState] = useState(expanded);
+  const expandedProp = controlled ? expanded : expandedState;
 
-  const accessibilityLabel = {
-    'aria-label': ariaLabel,
-    'aria-labelledby': ariaLabelledBy,
-  };
-
-  const className = cx(`${prefix}--switcher`, {
+  const className = cx(`${prefix}--header-panel`, {
+    [`${prefix}--header-panel--expanded`]: expandedProp,
     [customClassName]: !!customClassName,
   });
 
-  const handleSwitcherItemFocus = ({ currentIndex, direction }) => {
-    const enabledIndices = React.Children.toArray(children).reduce(
-      (acc, curr, i) => {
-        if (Object.keys(curr.props).length !== 0) {
-          acc.push(i);
+  const eventHandlers = {};
+
+  if (addFocusListeners) {
+    eventHandlers.onBlur = (event) => {
+      if (!event.currentTarget.contains(event.relatedTarget)) {
+        setExpandedState(false);
+        if (expanded) {
+          onHeaderPanelFocus();
         }
-
-        return acc;
-      },
-      []
-    );
-
-    const nextValidIndex = (() => {
-      const nextIndex = enabledIndices.indexOf(currentIndex) + direction;
-
-      switch (enabledIndices[nextIndex]) {
-        case undefined:
-          if (direction === -1) {
-            return enabledIndices[enabledIndices.length - 1];
-          }
-          return 0;
-        default:
-          return enabledIndices[nextIndex];
       }
-    })();
-
-    const switcherItem =
-      switcherRef.current.children[nextValidIndex].children[0];
-    switcherItem?.focus();
-  };
-
-  const childrenWithProps = React.Children.toArray(children).map(
-    (child, index) =>
-      React.cloneElement(child, {
-        handleSwitcherItemFocus,
-        index,
-        key: index,
-        expanded,
-      })
-  );
+    };
+    eventHandlers.onKeyDown = (event) => {
+      if (match(event, keys.Escape)) {
+        setExpandedState(false);
+        onHeaderPanelFocus();
+      }
+    };
+  }
 
   return (
-    <ul ref={ref} className={className} {...accessibilityLabel}>
-      {childrenWithProps}
-    </ul>
+    <div {...other} className={className} ref={ref} {...eventHandlers}>
+      {children}
+    </div>
   );
 });
 
-Switcher.displayName = 'Switcher';
-Switcher.propTypes = {
+HeaderPanel.propTypes = {
   /**
    * Required props for accessibility label on the underlying menu
    */
   ...AriaLabelPropType,
 
   /**
-   * expects to receive <SwitcherItem />
+   * Specify whether focus and blur listeners are added. They are by default.
    */
-  children: PropTypes.node.isRequired,
+  addFocusListeners: PropTypes.bool,
 
   /**
-   * Optionally provide a custom class to apply to the underlying `<ul>` node
+   * The content that will render inside of the `HeaderPanel`
+   */
+  children: PropTypes.node,
+
+  /**
+   * Optionally provide a custom class to apply to the underlying `<li>` node
    */
   className: PropTypes.string,
 
@@ -103,6 +84,14 @@ Switcher.propTypes = {
    * Specify whether the panel is expanded
    */
   expanded: PropTypes.bool,
+
+  /**
+   * An optional listener that is called a callback to collapse the HeaderPanel
+   */
+
+  onHeaderPanelFocus: PropTypes.func,
 };
 
-export default Switcher;
+HeaderPanel.displayName = 'HeaderPanel';
+
+export default HeaderPanel;
