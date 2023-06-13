@@ -208,6 +208,12 @@ export const parameters = {
 
       // By default, sort by the top-level title of the story
       if (storyA.title !== storyB.title) {
+        if (idA.includes('overview') && !idB.includes('overview')) {
+          return -1;
+        }
+        if (idB.includes('overview') && !idA.includes('overview')) {
+          return 1;
+        }
         return storyA.title.localeCompare(storyB.title);
       }
 
