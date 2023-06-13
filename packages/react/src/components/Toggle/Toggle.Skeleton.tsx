@@ -23,7 +23,7 @@ const ToggleSkeleton: React.FC<ToggleSkeletonProps> = ({
   const prefix = usePrefix();
 
   const skeletonClassNames = cx(
-    `${prefix}--toggle ${prefix}--skeleton`,
+    `${prefix}--toggle ${prefix}--toggle--skeleton`,
     className
   );
 

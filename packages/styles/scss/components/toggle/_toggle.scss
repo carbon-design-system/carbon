@@ -200,19 +200,20 @@
   }
 
   // Skeleton state
-  .#{$prefix}--skeleton {
+  .#{$prefix}--toggle--skeleton {
     display: flex;
     align-items: center;
   }
 
-  .#{$prefix}--toggle__skeleton-circle {
+  .#{$prefix}--toggle--skeleton .#{$prefix}--toggle__skeleton-circle {
+    @include circular-skeleton;
+
     width: rem(18px);
     height: rem(18px);
-    background: $border-subtle-01;
     border-radius: 50%;
   }
 
-  .#{$prefix}--toggle__skeleton-rectangle {
+  .#{$prefix}--toggle--skeleton .#{$prefix}--toggle__skeleton-rectangle {
     @include skeleton;
 
     width: rem(24px);
