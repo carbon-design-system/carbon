@@ -8,7 +8,6 @@
 import React, { useRef, useState } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 
@@ -60,11 +59,6 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
 });
 
 HeaderPanel.propTypes = {
-  /**
-   * Required props for accessibility label on the underlying menu
-   */
-  ...AriaLabelPropType,
-
   /**
    * Specify whether focus and blur listeners are added. They are by default.
    */
