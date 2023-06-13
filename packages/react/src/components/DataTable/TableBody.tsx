@@ -5,10 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
-const TableBody = ({ children, className, ...rest }) => (
+export interface TableBodyProps
+  extends React.HTMLAttributes<HTMLTableSectionElement> {
+  /**
+   * `polite` Adjust the notification behavior of screen readers
+   */
+  'aria-live'?: 'polite' | 'assertive' | 'off';
+}
+
+const TableBody = ({ children, className, ...rest }: TableBodyProps) => (
   <tbody className={className} {...rest}>
     {children}
   </tbody>
