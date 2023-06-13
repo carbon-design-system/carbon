@@ -389,7 +389,7 @@ ControlledPasswordInput.defaultProps = {
   invalid: false,
   invalidText: '',
   helperText: '',
-  size: '',
+  size: undefined,
 };
 
 export default ControlledPasswordInput;
