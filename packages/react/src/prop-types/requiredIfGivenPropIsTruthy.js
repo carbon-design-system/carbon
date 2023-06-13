@@ -6,7 +6,7 @@
  */
 
 /**
- * @param {Function} name The name of the prop that must exist to validate
+ * @param {string} name The name of the prop that must exist to validate
  * the current prop.
  * @param {Function} propType The original prop type checker.
  * @returns {Function} The new prop type checker for the current prop that

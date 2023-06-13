@@ -33,6 +33,11 @@ Array [
     "relativePath": "scss/layer",
   },
   Object {
+    "filepath": "scss/_layout.scss",
+    "importPath": "@carbon/styles/scss/layout",
+    "relativePath": "scss/layout",
+  },
+  Object {
     "filepath": "scss/_motion.scss",
     "importPath": "@carbon/styles/scss/motion",
     "relativePath": "scss/motion",
@@ -151,6 +156,16 @@ Array [
     "filepath": "scss/components/combo-box/_index.scss",
     "importPath": "@carbon/styles/scss/components/combo-box",
     "relativePath": "scss/components/combo-box",
+  },
+  Object {
+    "filepath": "scss/components/contained-list/_contained-list.scss",
+    "importPath": "@carbon/styles/scss/components/contained-list/contained-list",
+    "relativePath": "scss/components/contained-list/contained-list",
+  },
+  Object {
+    "filepath": "scss/components/contained-list/_index.scss",
+    "importPath": "@carbon/styles/scss/components/contained-list",
+    "relativePath": "scss/components/contained-list",
   },
   Object {
     "filepath": "scss/components/content-switcher/_content-switcher.scss",
@@ -921,6 +936,11 @@ Array [
     "filepath": "scss/utilities/_keyframes.scss",
     "importPath": "@carbon/styles/scss/utilities/keyframes",
     "relativePath": "scss/utilities/keyframes",
+  },
+  Object {
+    "filepath": "scss/utilities/_layout.scss",
+    "importPath": "@carbon/styles/scss/utilities/layout",
+    "relativePath": "scss/utilities/layout",
   },
   Object {
     "filepath": "scss/utilities/_placeholder-colors.scss",
