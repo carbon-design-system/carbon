@@ -18,51 +18,95 @@ import './progress-step-skeleton';
 import storyDocs from './progress-indicator-story.mdx';
 import { prefix } from '../../globals/settings';
 
-export const Default = (args) => {
-  const { vertical } = args?.[`${prefix}-progress-indicator`] ?? {};
+export const Default = () => html`
+  <cds-progress-indicator>
+    <cds-progress-step
+      state="complete"
+      label="First step"
+      secondary-label="Optional label"
+      description="Step 1: Getting started with Carbon Design System"></cds-progress-step>
+    <cds-progress-step
+      label="Second step with tooltip"
+      state="current"></cds-progress-step>
+    <cds-progress-step
+      label="Third step with tooltip"
+      state="incomplete"></cds-progress-step>
+    <cds-progress-step
+      label="Fourth step"
+      secondary-label="Example invalid step"
+      state="invalid"></cds-progress-step>
+    <cds-progress-step
+      disabled
+      label="Fifth step"
+      state="incomplete"></cds-progress-step>
+  </cds-progress-indicator>
+`;
+
+export const Interactive = () => html`
+  <cds-progress-indicator>
+    <cds-progress-step
+      label="Click me"
+      description="Step 1: Register a onChange event"
+      state="complete"></cds-progress-step>
+    <cds-progress-step
+      label="Really long label"
+      description="The progress indicator will listen for clicks on the steps"
+      state="current"></cds-progress-step>
+    <cds-progress-step
+      label="Third step with tooltip"
+      description="The progress indicator will listen for clicks on the steps"
+      state="incomplete"></cds-progress-step>
+  </cds-progress-indicator>
+`;
+
+export const Playground = (args) => {
+  const { vertical, spaceEqually } =
+    args?.[`${prefix}-progress-indicator`] ?? {};
   const { iconLabel, secondaryLabelText } =
     args?.[`${prefix}-progress-step`] ?? {};
   return html`
-    <cds-progress-indicator ?vertical="${vertical}">
+    <cds-progress-indicator
+      ?vertical="${vertical}"
+      ?space-equally="${spaceEqually}">
       <cds-progress-step
-        icon-label="${ifDefined(iconLabel)}"
-        label-text="First step"
-        secondary-label-text="${ifDefined(secondaryLabelText)}"
+        description="${ifDefined(iconLabel)}"
+        label="First step"
+        secondary-label="${ifDefined(secondaryLabelText)}"
         state="complete"></cds-progress-step>
       <cds-progress-step
-        icon-label="${ifDefined(iconLabel)}"
-        label-text="Second step with tooltip"
+        description="${ifDefined(iconLabel)}"
+        label="Second step with tooltip"
         state="current"></cds-progress-step>
       <cds-progress-step
-        icon-label="${ifDefined(iconLabel)}"
-        label-text="Third step with tooltip"
+        description="${ifDefined(iconLabel)}"
+        label="Third step with tooltip"
         state="incomplete"></cds-progress-step>
       <cds-progress-step
-        icon-label="${ifDefined(iconLabel)}"
-        label-text="Fourth step"
-        secondary-label-text="Example invalid step"
+        description="${ifDefined(iconLabel)}"
+        label="Fourth step"
+        secondary-label="Example invalid step"
         state="invalid"></cds-progress-step>
       <cds-progress-step
         disabled
-        icon-label="${ifDefined(iconLabel)}"
-        label-text="Fifth step"
+        description="${ifDefined(iconLabel)}"
+        label="Fifth step"
         state="incomplete"></cds-progress-step>
     </cds-progress-indicator>
   `;
 };
 
-Default.storyName = 'Default';
-
-Default.parameters = {
+Playground.parameters = {
+  ...storyDocs.parameters,
   knobs: {
     [`${prefix}-progress-indicator`]: () => ({
       vertical: boolean('Vertical (vertical)', false),
+      spaceEqually: boolean('Space equally (space-equally)', false),
     }),
     [`${prefix}-progress-step`]: () => ({
-      iconLabel: textNullable('Icon label (icon-label)', ''),
+      description: textNullable('Icon label (description)', ''),
       secondaryLabelText: textNullable(
-        'Secondary label text (secondary-label-text)',
-        'Secondary label'
+        'Secondary label text (secondary-label)',
+        'Optional label'
       ),
     }),
   },
@@ -72,6 +116,7 @@ export const skeleton = (args) => {
   const { vertical } = args?.[`${prefix}-progress-indicator-skeleton`];
   return html`
     <cds-progress-indicator-skeleton ?vertical="${vertical}">
+      <cds-progress-step-skeleton></cds-progress-step-skeleton>
       <cds-progress-step-skeleton></cds-progress-step-skeleton>
       <cds-progress-step-skeleton></cds-progress-step-skeleton>
       <cds-progress-step-skeleton></cds-progress-step-skeleton>
@@ -92,7 +137,4 @@ skeleton.parameters = {
 
 export default {
   title: 'Components/Progress indicator',
-  parameters: {
-    ...storyDocs.parameters,
-  },
 };

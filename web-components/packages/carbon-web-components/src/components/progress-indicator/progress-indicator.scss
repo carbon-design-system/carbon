@@ -48,13 +48,13 @@ $css--plex: true !default;
 :host(#{$prefix}-progress-step[vertical]),
 :host(#{$prefix}-progress-step-skeleton[vertical]) {
   display: list-item;
-  min-height: $spacing-12;
+  min-height: 3.625rem;
   width: initial;
   min-width: initial;
 
   svg {
     display: inline-block;
-    margin: 0.1rem 0.5rem;
+    margin: 0.1rem $spacing-02 0.1rem $spacing-03;
   }
 
   .#{$prefix}--progress-label {
@@ -80,7 +80,11 @@ $css--plex: true !default;
   .#{$prefix}--progress-optional {
     margin-top: auto;
     position: initial;
-    margin-left: 2.25rem;
+    margin-left: $spacing-07;
+  }
+
+  .#{$prefix}--progress-step-button {
+    display: block;
   }
 }
 
@@ -108,13 +112,6 @@ $css--plex: true !default;
   @extend .#{$prefix}--progress-step--incomplete;
 }
 
-:host(#{$prefix}-progress-step-skeleton) .#{$prefix}--progress-label {
-  @include skeleton;
-
-  height: rem(12px);
-  width: rem(40px);
-}
-
 :host(#{$prefix}-progress-step-skeleton) {
   svg {
     fill: $layer-selected-inverse;
@@ -123,4 +120,8 @@ $css--plex: true !default;
   .#{$prefix}--progress-line {
     background-color: $layer-accent-01;
   }
+}
+
+:host(#{$prefix}-progress-step[spaceEqually]) {
+  flex-grow: 1;
 }

@@ -9,10 +9,10 @@
 
 import { render } from 'lit';
 import { PROGRESS_STEP_STAT } from '../../src/components/progress-indicator/progress-step';
-import { Default } from '../../src/components/progress-indicator/progress-indicator-story';
+import { Playground } from '../../src/components/progress-indicator/progress-indicator-story';
 
 const template = (props?) =>
-  Default({
+  Playground({
     'cds-progress-step': props,
   });
 
