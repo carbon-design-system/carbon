@@ -196,10 +196,13 @@ export const parameters = {
   },
   options: {
     storySort: (storyA, storyB) => {
-      if (storyA.id.includes('welcome')) {
+      const idA = storyA.id;
+      const idB = storyB.id;
+
+      if (idA.includes('welcome')) {
         return -1;
       }
-      if (storyB.id.includes('welcome')) {
+      if (idB.includes('welcome')) {
         return 1;
       }
 
@@ -207,9 +210,6 @@ export const parameters = {
       if (storyA.title !== storyB.title) {
         return storyA.title.localeCompare(storyB.title);
       }
-
-      const idA = storyA.id;
-      const idB = storyB.id;
 
       // To story the stories, we first build up a list of matches based on
       // keywords. Each keyword has a specific weight that will be used to
