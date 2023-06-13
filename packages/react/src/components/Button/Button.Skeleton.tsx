@@ -10,13 +10,37 @@ import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
+export interface ButtonSkeletonProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Specify an optional className to add.
+   */
+  className?: string;
+
+  /**
+   * Optionally specify an href for your Button to become an `<a>` element
+   */
+  href?: string;
+
+  /**
+   * Specify the size of the button, from a list of available sizes.
+   * For `default` buttons, this prop can remain unspecified or use `default`.
+   * In the next major release of Carbon, `default`, `field`, and `small` will be removed
+   */
+  size?: 'sm' | 'md' | 'field' | 'lg' | 'xl' | '2xl';
+
+  /**
+   * Specify whether the Button should be a small variant
+   */
+  small?: boolean;
+}
+
 const ButtonSkeleton = ({
   className,
   small = false,
   href,
   size = 'lg',
   ...rest
-}) => {
+}: ButtonSkeletonProps) => {
   const prefix = usePrefix();
 
   const buttonClasses = cx(className, {
