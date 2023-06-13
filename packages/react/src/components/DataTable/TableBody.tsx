@@ -6,6 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
+import React from 'react';
 import { ReactAttr } from '../../types/common';
 
 export interface TableBodyProps extends ReactAttr<HTMLTableSectionElement> {
