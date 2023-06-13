@@ -3422,7 +3422,17 @@ Map {
         "type": "oneOf",
       },
       "tabIndex": Object {
-        "type": "string",
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
+            },
+            Object {
+              "type": "string",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
     },
   },

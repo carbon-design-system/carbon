@@ -14,7 +14,8 @@ import { ReactAttr } from '../../types/common';
 
 export type FilenameStatus = 'edit' | 'complete' | 'uploading';
 
-export interface FilenameProps extends ReactAttr<HTMLElement> {
+export interface FilenameProps
+  extends Omit<ReactAttr<HTMLElement>, 'tabIndex'> {
   /**
    * Specify an id that describes the error to be read by screen readers when the filename is invalid
    */
@@ -43,7 +44,7 @@ export interface FilenameProps extends ReactAttr<HTMLElement> {
   /**
    * Provide a custom tabIndex value for the `<Filename>`
    */
-  tabIndex?: number;
+  tabIndex?: number | string;
 }
 
 function Filename({
@@ -69,6 +70,11 @@ function Filename({
             className={`${prefix}--file-close`}
             type="button"
             {...rest}
+            tabIndex={
+              rest.tabIndex !== undefined
+                ? parseInt(rest.tabIndex as string, 10)
+                : undefined
+            }
             aria-describedby={invalid ? ariaDescribedBy : undefined}>
             <Close />
           </button>
@@ -118,7 +124,7 @@ Filename.propTypes = {
   /**
    * Provide a custom tabIndex value for the `<Filename>`
    */
-  tabIndex: PropTypes.number,
+  tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 Filename.defaultProps = {

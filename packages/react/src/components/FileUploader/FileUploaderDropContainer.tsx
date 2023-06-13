@@ -16,7 +16,7 @@ import deprecate from '../../prop-types/deprecate';
 import { ReactAttr } from '../../types/common';
 
 export interface FileUploaderDropContainerProps
-  extends ReactAttr<HTMLButtonElement> {
+  extends Omit<ReactAttr<HTMLButtonElement>, 'tabIndex'> {
   /**
    * Specify the types of files that this input should be able to receive
    */
@@ -78,7 +78,7 @@ export interface FileUploaderDropContainerProps
   /**
    * @deprecated The `tabIndex` prop for `FileUploaderButton` has been deprecated since it now renders a button element by default.
    */
-  tabIndex?: number;
+  tabIndex?: number | string;
 }
 
 function FileUploaderDropContainer({

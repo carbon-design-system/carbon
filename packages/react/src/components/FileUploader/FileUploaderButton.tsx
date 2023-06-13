@@ -18,7 +18,7 @@ import { ReactAttr } from '../../types/common';
 function noop() {}
 
 export interface FileUploaderButtonProps
-  extends Omit<ReactAttr<HTMLButtonElement>, 'onChange'> {
+  extends Omit<ReactAttr<HTMLButtonElement>, 'onChange' | 'tabIndex'> {
   /**
    * Specify the types of files that this input should be able to receive
    */
@@ -100,7 +100,7 @@ export interface FileUploaderButtonProps
   /**
    * @deprecated The `tabIndex` prop for `FileUploaderButton` has been deprecated since it now renders a button element by default.
    */
-  tabIndex?: number;
+  tabIndex?: number | string;
 
   innerRef?: React.RefObject<HTMLLabelElement>;
 }
@@ -177,7 +177,12 @@ function FileUploaderButton({
         className={classes}
         onClick={onClick}
         onKeyDown={onKeyDown}
-        {...other}>
+        {...other}
+        tabIndex={
+          other.tabIndex !== undefined
+            ? parseInt(other.tabIndex as string)
+            : undefined
+        }>
         {labelText}
       </button>
       <label
