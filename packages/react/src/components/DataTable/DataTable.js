@@ -76,6 +76,11 @@ const translateWithId = (id) => defaultTranslations[id];
 class DataTable extends React.Component {
   static propTypes = {
     /**
+     * Experimental property. Allows table to align cell contents to the top if there is text wrapping in the content. Might have performance issues, intended for smaller tables
+     */
+    experimentalAutoAlign: PropTypes.bool,
+
+    /**
      * Optional hook to manually control filtering of the rows from the
      * TableToolbarSearch component
      */
@@ -183,31 +188,31 @@ class DataTable extends React.Component {
     this.instanceId = getInstanceId();
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps === this.props) {
-      return;
+  // if state needs to be updated then wait for only update after state is finished
+  shouldComponentUpdate(nextProps) {
+    if (this.props !== nextProps) {
+      const nextRowIds = nextProps.rows.map((row) => row.id);
+      const rowIds = this.props.rows.map((row) => row.id);
+
+      if (!isEqual(nextRowIds, rowIds)) {
+        this.setState((state) => getDerivedStateFromProps(this.props, state));
+        return false;
+      }
+
+      const nextHeaders = nextProps.headers.map((header) => header.key);
+      const headers = this.props.headers.map((header) => header.key);
+
+      if (!isEqual(nextHeaders, headers)) {
+        this.setState((state) => getDerivedStateFromProps(this.props, state));
+        return false;
+      }
+
+      if (!isEqual(nextProps.rows, this.props.rows)) {
+        this.setState((state) => getDerivedStateFromProps(this.props, state));
+        return false;
+      }
     }
-
-    const prevRowIds = prevProps.rows.map((row) => row.id);
-    const rowIds = this.props.rows.map((row) => row.id);
-
-    if (!isEqual(prevRowIds, rowIds)) {
-      this.setState((state) => getDerivedStateFromProps(this.props, state));
-      return;
-    }
-
-    const prevHeaders = prevProps.headers.map((header) => header.key);
-    const headers = this.props.headers.map((header) => header.key);
-
-    if (!isEqual(prevHeaders, headers)) {
-      this.setState((state) => getDerivedStateFromProps(this.props, state));
-      return;
-    }
-
-    if (!isEqual(prevProps.rows, this.props.rows)) {
-      this.setState((state) => getDerivedStateFromProps(this.props, state));
-      return;
-    }
+    return true;
   }
 
   /**
@@ -416,6 +421,7 @@ class DataTable extends React.Component {
       useStaticWidth,
       stickyHeader,
       overflowMenuOnHover,
+      experimentalAutoAlign,
     } = this.props;
     return {
       useZebraStyles,
@@ -424,6 +430,7 @@ class DataTable extends React.Component {
       useStaticWidth,
       stickyHeader,
       overflowMenuOnHover,
+      experimentalAutoAlign,
     };
   };
 
@@ -486,19 +493,16 @@ class DataTable extends React.Component {
    */
   setAllSelectedState = (initialState, isSelected, filteredRowIds) => {
     const { rowIds } = initialState;
+    const isFiltered = rowIds.length != filteredRowIds.length;
     return {
-      rowsById: rowIds.reduce(
-        (acc, id) => ({
-          ...acc,
-          [id]: {
-            ...initialState.rowsById[id],
-            ...(!initialState.rowsById[id].disabled && {
-              isSelected: filteredRowIds.includes(id) && isSelected,
-            }),
-          },
-        }),
-        {}
-      ),
+      rowsById: rowIds.reduce((acc, id) => {
+        const row = { ...initialState.rowsById[id] };
+        if (!row.disabled && (!isFiltered || filteredRowIds.includes(id))) {
+          row.isSelected = isSelected;
+        }
+        acc[id] = row; // Local mutation for performance with large tables
+        return acc;
+      }, {}),
     };
   };
 

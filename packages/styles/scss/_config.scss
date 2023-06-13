@@ -62,7 +62,7 @@ $prefix: 'cds' !default;
 /// @group @carbon/grid
 $flex-grid-columns: 16 !default;
 
-/// Specify if the default grid type should be the flexbox grid
+/// Specify if the flexbox grid styles should be emitted
 /// @type Boolean
 /// @group config
 $use-flexbox-grid: false !default;

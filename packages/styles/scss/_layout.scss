@@ -1,0 +1,85 @@
+//
+// Copyright IBM Corp. 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+@use 'sass:list';
+
+@use './config' as *;
+@use './utilities/custom-property';
+@use './utilities/convert' as *;
+@use './utilities/layout' as *;
+
+:root {
+  @each $group, $properties in $tokens {
+    @each $property, $steps in $properties {
+      @each $step, $value in $steps {
+        @include custom-property.declaration(
+          'layout-#{$group}-#{$property}-#{$step}',
+          $value
+        );
+      }
+
+      // CSS max() doesn't accept '0' as a value without a unit
+      // stylelint-disable length-zero-no-unit
+      @include custom-property.declaration(
+        'layout-#{$group}-#{$property}-min',
+        0px
+      );
+      // stylelint-enable length-zero-no-unit
+
+      @include custom-property.declaration(
+        'layout-#{$group}-#{$property}-max',
+        999999999px
+      );
+    }
+  }
+}
+
+@each $group, $properties in $tokens {
+  @each $property, $steps in $properties {
+    @each $step, $value in $steps {
+      .#{$prefix}--layout--#{$group}-#{$step} {
+        @include custom-property.declaration(
+          'layout-#{$group}-#{$property}-context',
+          custom-property.get-var(
+            'layout-#{$group}-#{$property}-#{$step}',
+            $value
+          )
+        );
+        @include custom-property.declaration(
+          'layout-#{$group}-#{$property}',
+          custom-property.get-var('layout-#{$group}-#{$property}-context')
+        );
+      }
+
+      .#{$prefix}--layout-constraint--#{$group}\:default-#{$step} {
+        @include custom-property.declaration(
+          'layout-#{$group}-#{$property}',
+          custom-property.get-var(
+            'layout-#{$group}-#{$property}-context',
+            custom-property.get-var(
+              'layout-#{$group}-#{$property}-#{$step}',
+              $value
+            )
+          )
+        );
+      }
+
+      @each $constraint in ('min', 'max') {
+        .#{$prefix}--layout-constraint--#{$group}\:#{$constraint}-#{$step} {
+          @include custom-property.declaration(
+            'layout-#{$group}-#{$property}-#{$constraint}',
+            custom-property.get-var(
+              'layout-#{$group}-#{$property}-#{$step}',
+              $value
+            )
+          );
+        }
+      }
+    }
+  }
+}

@@ -15,6 +15,7 @@ describe('RadioTile', () => {
     it('should spread extra props onto outermost element', () => {
       render(<RadioTile value="standard" data-testid="test-id" />);
 
+      // eslint-disable-next-line testing-library/no-node-access
       expect(document.querySelector('.cds--tile')).toHaveAttribute(
         'data-testid',
         'test-id'
@@ -22,11 +23,9 @@ describe('RadioTile', () => {
     });
 
     it('should respect checked prop', () => {
-      const { container } = render(
-        <RadioTile value="standard" checked data-testid="test-id" />
-      );
+      render(<RadioTile value="standard" checked data-testid="test-id" />);
 
-      expect(container.firstChild).toHaveAttribute('checked');
+      expect(screen.getByRole('radio')).toBeChecked();
       expect(screen.getByTestId('test-id')).toHaveClass(
         'cds--tile--is-selected'
       );
@@ -45,11 +44,9 @@ describe('RadioTile', () => {
     });
 
     it('should respect disabled prop', () => {
-      const { container } = render(
-        <RadioTile value="standard" disabled data-testid="test-id" />
-      );
+      render(<RadioTile value="standard" disabled data-testid="test-id" />);
 
-      expect(container.firstChild).toHaveAttribute('disabled');
+      expect(screen.getByRole('radio')).toBeDisabled();
       expect(screen.getByTestId('test-id')).toHaveClass('cds--tile--disabled');
     });
 
@@ -65,14 +62,13 @@ describe('RadioTile', () => {
       expect(screen.getByRole('radio')).toHaveAttribute('name', 'tile');
     });
 
-    it('should call onChange when expected', () => {
+    it('should call onChange when expected', async () => {
       const onChange = jest.fn();
       render(<RadioTile value="standard" onChange={onChange} />);
 
-      userEvent.click(screen.getByRole('radio'));
-      userEvent.type(screen.getByRole('radio'), '{space}');
+      await userEvent.click(screen.getByRole('radio'));
 
-      expect(onChange).toHaveBeenCalledTimes(2);
+      expect(onChange).toHaveBeenCalledTimes(1);
     });
 
     it('should respect tabIndex prop', () => {

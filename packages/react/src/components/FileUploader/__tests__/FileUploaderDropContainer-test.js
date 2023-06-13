@@ -6,15 +6,13 @@
  */
 
 import { getByText } from '@carbon/test-utils/dom';
-import { render, cleanup } from '@carbon/test-utils/react';
+import { render } from '@testing-library/react';
 import React from 'react';
 import { Simulate } from 'react-dom/test-utils';
 import { FileUploaderDropContainer } from '../';
 import { uploadFiles } from '../test-helpers';
 
 describe('FileUploaderDropContainer', () => {
-  afterEach(cleanup);
-
   it('should not have axe violations', async () => {
     const { container } = render(<FileUploaderDropContainer />);
     await expect(container).toHaveNoAxeViolations();
@@ -24,6 +22,7 @@ describe('FileUploaderDropContainer', () => {
     const { container } = render(
       <FileUploaderDropContainer className="test" />
     );
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const dropArea = container.querySelector('button');
     expect(dropArea).toHaveClass('test');
   });
@@ -35,18 +34,21 @@ describe('FileUploaderDropContainer', () => {
         <FileUploaderDropContainer />
       </>
     );
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const inputs = container.querySelectorAll('input');
     expect(inputs[0].getAttribute('id')).not.toBe(inputs[1].getAttribute('id'));
   });
 
   it('should render with the default labelText prop', () => {
     const { container } = render(<FileUploaderDropContainer />);
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     const label = getByText(container, 'Add file');
     expect(label).toBeInstanceOf(HTMLElement);
   });
 
   it('should render with multiple set to false by default', () => {
     const { container } = render(<FileUploaderDropContainer />);
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const input = container.querySelector('input');
     expect(input.getAttribute('multiple')).toBeFalsy();
   });
@@ -55,6 +57,7 @@ describe('FileUploaderDropContainer', () => {
     const { container } = render(
       <FileUploaderDropContainer labelText="test" />
     );
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const input = container.querySelector('input');
 
     uploadFiles(input, [
@@ -70,6 +73,7 @@ describe('FileUploaderDropContainer', () => {
     const { container } = render(
       <FileUploaderDropContainer onAddFiles={onAddFiles} />
     );
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const input = container.querySelector('input');
     const files = [
       new File(['foo'], 'foo.txt', { type: 'text/plain' }),
@@ -93,6 +97,7 @@ describe('FileUploaderDropContainer', () => {
     const { container } = render(
       <FileUploaderDropContainer onAddFiles={onAddFiles} accept={['.txt']} />
     );
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const input = container.querySelector('input');
 
     const files = [
@@ -135,6 +140,7 @@ describe('FileUploaderDropContainer', () => {
     const { container } = render(
       <FileUploaderDropContainer onAddFiles={onAddFiles} accept={['.jpeg']} />
     );
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const input = container.querySelector('input');
 
     const files = [
@@ -177,6 +183,7 @@ describe('FileUploaderDropContainer', () => {
         pattern=".[0-9a-z-_]+$"
       />
     );
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const input = container.querySelector('input');
 
     const files = [

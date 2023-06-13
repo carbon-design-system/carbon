@@ -7,7 +7,6 @@
 
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import * as FeatureFlags from '@carbon/feature-flags';
 import React from 'react';
 import Filename from './Filename';
 import FileUploaderButton from './FileUploaderButton';
@@ -52,9 +51,7 @@ export default class FileUploader extends React.Component {
     /**
      * Provide a description for the complete/close icon that can be read by screen readers
      */
-    iconDescription: FeatureFlags.enabled('enable-v11-release')
-      ? PropTypes.string.isRequired
-      : PropTypes.string,
+    iconDescription: PropTypes.string.isRequired,
 
     /**
      * Specify the description text of this `<FileUploader>`
@@ -98,18 +95,13 @@ export default class FileUploader extends React.Component {
      * Specify the size of the FileUploaderButton, from a list of available
      * sizes.
      */
-    size: FeatureFlags.enabled('enable-v11-release')
-      ? PropTypes.oneOf(['sm', 'md', 'lg'])
-      : PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
+    size: PropTypes.oneOf(['sm', 'md', 'lg']),
   };
 
   static contextType = PrefixContext;
 
   static defaultProps = {
     disabled: false,
-    iconDescription: FeatureFlags.enabled('enable-v11-release')
-      ? undefined
-      : 'Provide icon description',
     filenameStatus: 'uploading',
     buttonLabel: '',
     buttonKind: 'primary',
@@ -209,7 +201,7 @@ export default class FileUploader extends React.Component {
 
     return (
       <div className={classes} {...other}>
-        {FeatureFlags.enabled('enable-v11-release') && !labelTitle ? null : (
+        {!labelTitle ? null : (
           <p className={getHelperLabelClasses(`${prefix}--file--label`)}>
             {labelTitle}
           </p>

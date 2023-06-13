@@ -39,6 +39,7 @@ describe('PasswordInput', () => {
         .getByText('TestGroup', {
           selector: 'legend',
         })
+        // eslint-disable-next-line testing-library/no-node-access
         .closest('fieldset');
       expect(fieldset).toContainElement(screen.getByDisplayValue('test-1'));
       expect(fieldset).toContainElement(screen.getByDisplayValue('test-2'));
@@ -75,6 +76,7 @@ describe('PasswordInput', () => {
         .getByText('TestGroup', {
           selector: 'legend',
         })
+        // eslint-disable-next-line testing-library/no-node-access
         .closest('fieldset');
       expect(fieldset).toBeDisabled();
     });
@@ -150,7 +152,7 @@ describe('PasswordInput', () => {
   });
 
   describe('behaves as expected', () => {
-    it('should set `checked` on correct child when `onChange is called', () => {
+    it('should set `checked` on correct child when `onChange is called', async () => {
       const onChange = jest.fn();
       render(
         <TileGroup legend="TestGroup" name="test" onChange={onChange}>
@@ -159,7 +161,7 @@ describe('PasswordInput', () => {
         </TileGroup>
       );
 
-      userEvent.click(screen.getByDisplayValue('test-1'));
+      await userEvent.click(screen.getByDisplayValue('test-1'));
       expect(onChange).toHaveBeenCalled();
       expect(onChange).toHaveBeenCalledWith(
         'test-1',

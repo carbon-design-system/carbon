@@ -15,19 +15,17 @@ import { render, screen } from '@testing-library/react';
 describe('OverflowMenu', () => {
   describe('Renders as expected', () => {
     it('should support a custom `className` prop on the button element', () => {
-      const { container } = render(
+      render(
         <OverflowMenu open aria-label="Overflow menu" className="extra-class">
           <OverflowMenuItem className="test-child" itemText="one" />
           <OverflowMenuItem className="test-child" itemText="two" />
         </OverflowMenu>
       );
-      expect(container.querySelector('button.cds--overflow-menu')).toHaveClass(
-        'extra-class'
-      );
+      expect(screen.getByRole('button')).toHaveClass('extra-class');
     });
 
     it('should spread extra props on the button element', () => {
-      const { container } = render(
+      render(
         <OverflowMenu
           data-testid="test"
           aria-label="Overflow menu"
@@ -36,12 +34,10 @@ describe('OverflowMenu', () => {
           <OverflowMenuItem className="test-child" itemText="two" />
         </OverflowMenu>
       );
-      expect(
-        container.querySelector('button.cds--overflow-menu')
-      ).toHaveAttribute('data-testid', 'test');
+      expect(screen.getByRole('button')).toHaveAttribute('data-testid', 'test');
     });
 
-    it('should flip menu alignment', () => {
+    it('should flip menu alignment', async () => {
       render(
         <OverflowMenu
           flipped={true}
@@ -52,14 +48,15 @@ describe('OverflowMenu', () => {
         </OverflowMenu>
       );
 
-      userEvent.click(screen.getByRole('button'));
+      await userEvent.click(screen.getByRole('button'));
 
       expect(
+        // eslint-disable-next-line testing-library/no-node-access
         document.querySelector('.cds--overflow-menu--flip')
       ).toBeInTheDocument();
     });
 
-    it('should call onClick', () => {
+    it('should call onClick', async () => {
       const onClick = jest.fn();
       render(
         <OverflowMenu
@@ -71,11 +68,11 @@ describe('OverflowMenu', () => {
         </OverflowMenu>
       );
 
-      userEvent.click(screen.getByRole('button'));
+      await userEvent.click(screen.getByRole('button'));
       expect(onClick).toHaveBeenCalled();
     });
 
-    it('should call onClose', () => {
+    it('should call onClose', async () => {
       const onClose = jest.fn();
       render(
         <OverflowMenu
@@ -87,12 +84,12 @@ describe('OverflowMenu', () => {
         </OverflowMenu>
       );
 
-      userEvent.click(screen.getByRole('button'));
-      userEvent.click(screen.getByText('one'));
+      await userEvent.click(screen.getByRole('button'));
+      await userEvent.click(screen.getByText('one'));
       expect(onClose).toHaveBeenCalled();
     });
 
-    it('should call onFocus', () => {
+    it('should call onFocus', async () => {
       const onFocus = jest.fn();
       render(
         <OverflowMenu
@@ -104,7 +101,7 @@ describe('OverflowMenu', () => {
         </OverflowMenu>
       );
 
-      userEvent.click(screen.getByRole('button'));
+      await userEvent.click(screen.getByRole('button'));
       expect(onFocus).toHaveBeenCalled();
     });
 
@@ -154,7 +151,7 @@ describe('OverflowMenu', () => {
       expect(screen.getByRole('button')).toHaveClass('cds--overflow-menu--lg');
     });
 
-    it('should open on click', () => {
+    it('should open on click', async () => {
       render(
         <OverflowMenu aria-label="Overflow menu" className="extra-class">
           <OverflowMenuItem className="test-child" itemText="one" />
@@ -167,7 +164,7 @@ describe('OverflowMenu', () => {
         'false'
       );
 
-      userEvent.click(screen.getByRole('button'));
+      await userEvent.click(screen.getByRole('button'));
 
       expect(screen.getByRole('button')).toHaveAttribute(
         'aria-expanded',

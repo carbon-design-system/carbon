@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, cleanup } from '@carbon/test-utils/react';
+import { render } from '@testing-library/react';
 import { getByLabel, getByText } from '@carbon/test-utils/dom';
 import React from 'react';
 import { Simulate } from 'react-dom/test-utils';
@@ -15,8 +15,6 @@ import { keys } from '../../../internal/keyboard';
 const statuses = ['uploading', 'edit', 'complete'];
 
 describe('FileUploaderItem', () => {
-  afterEach(cleanup);
-
   describe('automated accessibility tests', () => {
     it.each(statuses)(
       'should have no axe violations with status %s',
@@ -32,6 +30,7 @@ describe('FileUploaderItem', () => {
   it('should support calling `onDelete` if the user interacts with the filename during editing', () => {
     const onDelete = jest.fn();
     const description = 'test-description';
+    // eslint-disable-next-line testing-library/render-result-naming-convention
     const edit = render(
       <FileUploaderItem
         uuid="edit"
@@ -54,6 +53,7 @@ describe('FileUploaderItem', () => {
 
     onDelete.mockReset();
 
+    // eslint-disable-next-line testing-library/render-result-naming-convention
     const uploading = render(
       <FileUploaderItem
         uuid="uploading"
@@ -63,6 +63,7 @@ describe('FileUploaderItem', () => {
         onDelete={onDelete}
       />
     );
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     removeFile = getByText(uploading.container, description);
 
     Simulate.click(removeFile);

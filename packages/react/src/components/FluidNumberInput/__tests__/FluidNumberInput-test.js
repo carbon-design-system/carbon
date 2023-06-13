@@ -8,7 +8,6 @@
 import React from 'react';
 import FluidNumberInput from '../FluidNumberInput';
 import { render } from '@testing-library/react';
-import { FeatureFlags } from '../../FeatureFlags';
 
 const prefix = 'cds';
 
@@ -16,9 +15,7 @@ describe('FluidNumberInput', () => {
   describe('renders as expected - Component API', () => {
     it('should render as expected', () => {
       const { container } = render(
-        <FeatureFlags flags={{ 'enable-v11-release': true }}>
-          <FluidNumberInput id="input-1" label="FluidTextInput label" />
-        </FeatureFlags>
+        <FluidNumberInput id="input-1" label="FluidTextInput label" />
       );
 
       expect(container.firstChild).toHaveClass(

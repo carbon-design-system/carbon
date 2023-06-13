@@ -5,6 +5,8 @@ import {
   Checkbox,
   CheckboxCheckedFilled,
   ChevronDown,
+  Error,
+  ArrowRight,
 } from '@carbon/icons-react';
 import Link from '../Link';
 import { keys, matches } from '../../internal/keyboard';
@@ -14,6 +16,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { getInteractiveContent } from '../../internal/useNoInteractiveChildren';
 import { useMergedRefs } from '../../internal/useMergedRefs';
+import { useFeatureFlag } from '../FeatureFlags';
 
 export const Tile = React.forwardRef(function Tile(
   { children, className, light = false, ...rest },
@@ -67,6 +70,7 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
     light,
     onClick = () => {},
     onKeyDown = () => {},
+    renderIcon: Icon,
     ...rest
   },
   ref
@@ -100,6 +104,23 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
     onKeyDown(evt);
   }
 
+  const v12DefaultIcons = useFeatureFlag('enable-v12-tile-default-icons');
+  if (v12DefaultIcons) {
+    if (!Icon) {
+      Icon = ArrowRight;
+    }
+
+    if (disabled) {
+      Icon = Error;
+    }
+  }
+
+  const iconClasses = cx({
+    [`${prefix}--tile--icon`]:
+      !v12DefaultIcons || (v12DefaultIcons && !disabled),
+    [`${prefix}--tile--disabled-icon`]: v12DefaultIcons && disabled,
+  });
+
   return (
     <Link
       className={classes}
@@ -110,6 +131,7 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
       disabled={disabled}
       {...rest}>
       {children}
+      {Icon && <Icon className={iconClasses} aria-hidden="true" />}
     </Link>
   );
 });
@@ -164,6 +186,12 @@ ClickableTile.propTypes = {
    * The rel property for the link.
    */
   rel: PropTypes.string,
+
+  /**
+   * Optional prop to allow overriding the icon rendering.
+   * Can be a React component class
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
 export const SelectableTile = React.forwardRef(function SelectableTile(

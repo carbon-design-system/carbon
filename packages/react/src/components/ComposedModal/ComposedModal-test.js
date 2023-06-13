@@ -86,7 +86,7 @@ describe('ComposedModal', () => {
       );
     });
 
-    it('calls onClose when close button is clicked', () => {
+    it('calls onClose when close button is clicked', async () => {
       const onClose = jest.fn();
       render(
         <ComposedModal open onClose={onClose}>
@@ -95,12 +95,12 @@ describe('ComposedModal', () => {
         </ComposedModal>
       );
 
-      userEvent.click(screen.getByTitle('Close'));
+      await userEvent.click(screen.getByTitle('Close'));
 
       expect(onClose).toHaveBeenCalled();
     });
 
-    it('should not close when onClose returns false', () => {
+    it('should not close when onClose returns false', async () => {
       const onClose = () => false;
       render(
         <ComposedModal open onClose={onClose}>
@@ -109,7 +109,7 @@ describe('ComposedModal', () => {
         </ComposedModal>
       );
 
-      userEvent.click(screen.getByTitle('Close'));
+      await userEvent.click(screen.getByTitle('Close'));
 
       expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
         'is-visible'
@@ -130,7 +130,7 @@ describe('ComposedModal', () => {
       );
     });
 
-    it('should prevent close on click outside', () => {
+    it('should prevent close on click outside', async () => {
       render(
         <>
           <button type="button">Click me</button>
@@ -144,23 +144,19 @@ describe('ComposedModal', () => {
         'is-visible'
       );
 
-      userEvent.click(screen.getByText('Click me'));
+      await userEvent.click(screen.getByText('Click me'));
 
       expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
         'is-visible'
       );
     });
 
-    it('should focus selector on open', () => {
-      const ComposedModalExample = () => {
+    it('should focus selector on open', async () => {
+      function ComposedModalExample() {
         const [isOpen, setIsOpen] = React.useState(false);
         return (
           <>
-            <button
-              type="button"
-              onClick={() => {
-                setIsOpen(!isOpen);
-              }}>
+            <button type="button" onClick={() => setIsOpen(!isOpen)}>
               Click me
             </button>
             <ComposedModal
@@ -179,16 +175,16 @@ describe('ComposedModal', () => {
             </ComposedModal>
           </>
         );
-      };
-
+      }
       render(<ComposedModalExample />);
 
-      userEvent.click(screen.getByText('Click me'), { clickCount: 3 });
-      expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
-        'is-visible'
-      );
+      await userEvent.click(screen.getByText('Click me'), { clickCount: 3 });
 
-      expect(screen.getByTestId('test-id-1')).toHaveFocus();
+      const elementModal = screen.getByRole('presentation', { hidden: true });
+      expect(elementModal).toHaveClass('is-visible');
+
+      const elementInput = screen.getByTestId('test-id-1');
+      expect(elementInput).toHaveFocus();
     });
 
     it('should change size based on size prop', () => {

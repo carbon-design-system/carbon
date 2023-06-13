@@ -9,9 +9,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import './WithLayer.scss';
 
-import { Layers as Icon } from '@carbon/react/icons';
 import { Layer } from '../../../src';
 
+import { Annotation } from '../Annotation';
 import { prefix } from '../_prefix';
 
 function WithLayer({ children }) {
@@ -20,39 +20,25 @@ function WithLayer({ children }) {
   }
 
   return (
-    <div className={`${prefix}--with-layer`}>
-      <div className={`${prefix}--with-layer__layer`}>
-        <div className={`${prefix}--with-layer__label`}>
-          <Icon />
-          Layer 1
-        </div>
-        <div className={`${prefix}--with-layer__content`}>
-          {renderChild(0)}
+    <Annotation type="layer" text="Layer 1" className={`${prefix}--with-layer`}>
+      {renderChild(0)}
 
-          <div className={`${prefix}--with-layer__layer`}>
-            <div className={`${prefix}--with-layer__label`}>
-              <Icon />
-              Layer 2
-            </div>
-            <div className={`${prefix}--with-layer__content`}>
-              <Layer>
-                {renderChild(1)}
+      <Annotation
+        type="layer"
+        text="Layer 2"
+        className={`${prefix}--with-layer`}>
+        <Layer>
+          {renderChild(1)}
 
-                <div className={`${prefix}--with-layer__layer`}>
-                  <div className={`${prefix}--with-layer__label`}>
-                    <Icon />
-                    Layer 3
-                  </div>
-                  <div className={`${prefix}--with-layer__content`}>
-                    <Layer>{renderChild(2)}</Layer>
-                  </div>
-                </div>
-              </Layer>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+          <Annotation
+            type="layer"
+            text="Layer 3"
+            className={`${prefix}--with-layer`}>
+            <Layer>{renderChild(2)}</Layer>
+          </Annotation>
+        </Layer>
+      </Annotation>
+    </Annotation>
   );
 }
 

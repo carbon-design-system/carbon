@@ -61,6 +61,7 @@ describe('TreeView', () => {
         <TreeView className="custom-class" label="Tree" />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const ul = container?.getElementsByTagName('ul')[0];
 
       expect(ul).toHaveClass('custom-class');
@@ -88,7 +89,8 @@ describe('TreeView', () => {
       expect(screen.getByLabelText('Tree View')).toBeInTheDocument();
     });
 
-    it('should respect multiselect prop', () => {
+    it('should respect multiselect prop', async () => {
+      const user = userEvent.setup();
       render(
         <TreeView multiselect label="Tree">
           <TreeNode data-testid="Node 1" label="Node 1" />
@@ -96,11 +98,11 @@ describe('TreeView', () => {
         </TreeView>
       );
 
-      const tree = screen.getByRole('tree');
-      const lists = tree?.getElementsByTagName('li');
+      const lists = screen.getAllByRole('treeitem');
 
-      userEvent.click(lists[0], { ctrlKey: true });
-      userEvent.click(lists[1], { ctrlKey: true });
+      await user.keyboard('[ControlLeft>]');
+      await user.click(lists[0]);
+      await user.click(lists[1]);
 
       expect(lists[0]).toHaveAttribute('aria-selected', 'true');
       expect(lists[1]).toHaveAttribute('aria-selected', 'true');
@@ -157,6 +159,7 @@ describe('TreeView', () => {
       );
 
       const nodeParent = screen.getByTestId('Node 1');
+      // eslint-disable-next-line testing-library/no-node-access
       const nodeChild = nodeParent?.querySelector('div > span');
 
       expect(nodeChild).toHaveClass(`${prefix}--tree-parent-node__toggle`);

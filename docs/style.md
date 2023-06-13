@@ -65,6 +65,8 @@ row before the </tbody></table> line.
   - [Guidelines](#guidelines)
     - [Writing a component](#writing-a-component)
       - [When to use `React.ForwardRef`](#when-to-use-reactforwardref)
+    - [Class names, `data-testid` attributes, and `...rest`](#class-names-data-testid-attributes-and-rest)
+    - [Authoring dynamic/inline styles](#authoring-dynamicinline-styles)
     - [Translating a component](#translating-a-component)
       - [Working with messages that depend on state](#working-with-messages-that-depend-on-state)
     - [Using `useCallback` and `useMemo`](#using-usecallback-and-usememo)
@@ -76,6 +78,7 @@ row before the </tbody></table> line.
   - [Testing](#testing)
     - [Strategy](#strategy)
     - [Organization](#organization)
+    - [Stable selectors](#stable-selectors)
     - [Recipes](#recipes)
       - [`ComponentName-test.js`](#componentname-testjs)
       - [`ComponentName-test.a11y.js`](#componentname-testa11yjs)
@@ -254,6 +257,68 @@ Note that adding a forwarded ref to a component should be considered a breaking
 change. When creating a new component, even if you do not anticipate an explicit
 need to provide a forwarded ref, it's likely still worthwhile to include one to
 avoid unecessary breaking changes in the future.
+
+#### `className`, `data-testid`, and `...rest`
+
+Where possible, the following should be placed on the outermost, parent, or root
+element within a component:
+
+- The `className` prop
+- Additional props spread via `...rest`
+- `data-testid` attributes
+
+```jsx
+function MyComponent({ className, ...rest }) {
+  return (
+    <div className={className} {...rest}>
+      <div>
+        <div></div>
+      </div>
+    </div>
+  );
+}
+```
+
+The location and placement of what elements these props are placed on should be
+stable across major, minor, and patch versions. This may not always be possible,
+but movement of any of these to different elements should ideally only happen
+within a major version change. In some rare cases to fix critical bugs we can
+consider moving placement in a minor version, but we'll need to be highly
+communicative of the change on all of our support channels. Consumers rely on
+the placement of these within the DOM and any changes can cause tests,
+functionality, and custom styling to break within consuming applications.
+
+##### Stable selectors
+
+We also support the placement of `data-testid` attributes on components as a
+"stable selector" for locating elements for testing when
+[all other options](https://testing-library.com/docs/queries/about#priority) are
+exhausted. The location and placement of these in the DOM should remain stable
+between versions. This can be accomplished by explicitly placing this prop on
+the outermost element, or it can be accomplished by having `...rest` spread on
+the outermost element.
+
+In some cases `...rest` can not be spread on the outermost element and needs to
+be spread on other key interior elements, such as inputs. For these cases we
+cannot rely on `data-testid` being included in `...rest` and it must explicitly
+be applied to the outermost element.
+
+```jsx
+function MyComponent({ className, ...rest }) {
+  return (
+    <div className={className} data-testid={rest['data-testid']}>
+      <div>
+        <input {...rest} />
+      </div>
+    </div>
+  );
+}
+```
+
+**We highly encourage consuming applications to _avoid using `data-testid`
+unless absolutely necessary_ and instead use more stable
+[relative queries focused on accessible roles](https://testing-library.com/docs/queries/about#priority)
+or HTML5 and ARIA semantics for selecting elements for testing.**
 
 #### Authoring dynamic/inline styles
 

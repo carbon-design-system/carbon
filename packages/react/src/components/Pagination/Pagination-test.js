@@ -83,7 +83,7 @@ describe('Pagination', () => {
       expect(screen.getByText('éléments par page')).toBeInTheDocument();
     });
 
-    it('should call onChange when approrpiate', () => {
+    it('should call onChange when approrpiate', async () => {
       const onChange = jest.fn();
       render(
         <Pagination
@@ -94,8 +94,8 @@ describe('Pagination', () => {
         />
       );
 
-      userEvent.click(screen.getByLabelText('Previous page'));
-      userEvent.click(screen.getByLabelText('Next page'));
+      await userEvent.click(screen.getByLabelText('Previous page'));
+      await userEvent.click(screen.getByLabelText('Next page'));
       expect(onChange).toHaveBeenCalledTimes(2);
     });
 
@@ -116,6 +116,7 @@ describe('Pagination', () => {
       render(<Pagination pageSizes={[10]} pageInputDisabled />);
 
       expect(
+        // eslint-disable-next-line testing-library/no-node-access
         document.querySelectorAll('.cds--select-input')[1]
       ).toHaveAttribute('disabled');
     });
@@ -160,6 +161,7 @@ describe('Pagination', () => {
       );
 
       expect(
+        // eslint-disable-next-line testing-library/no-node-access
         document.querySelectorAll('.cds--select-input')[0]
       ).toHaveAttribute('disabled');
     });

@@ -17,6 +17,7 @@ import {
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 import Link from '../Link';
+import { Add } from '@carbon/icons-react';
 
 const prefix = 'cds';
 
@@ -69,10 +70,21 @@ describe('Tile', () => {
       userEvent.click(screen.getByText('🚦'));
       expect(onClick).not.toHaveBeenCalled();
     });
+    it('should allow for a custom icon', () => {
+      render(
+        <ClickableTile
+          href="https://www.carbondesignsystem.com"
+          renderIcon={() => <Add data-testid="test" />}>
+          Clickable Tile
+        </ClickableTile>
+      );
+
+      expect(screen.getByTestId('test')).toBeInTheDocument();
+    });
   });
 
   describe('Multi Select', () => {
-    it('does not invoke the click handler if SelectableTile is disabled', () => {
+    it('does not invoke the click handler if SelectableTile is disabled', async () => {
       const onClick = jest.fn();
       render(
         <div role="group" aria-label="selectable tiles">
@@ -88,11 +100,11 @@ describe('Tile', () => {
           </SelectableTile>
         </div>
       );
-      userEvent.click(screen.getByText('🚦'));
+      await userEvent.click(screen.getByText('🚦'));
       expect(onClick).not.toHaveBeenCalled();
     });
 
-    it('should cycle elements in document tab order', () => {
+    it('should cycle elements in document tab order', async () => {
       render(
         <div role="group" aria-label="selectable tiles">
           <SelectableTile
@@ -121,24 +133,24 @@ describe('Tile', () => {
       const [id1, id2, id3] = screen.getAllByTestId('element');
       expect(document.body).toHaveFocus();
 
-      userEvent.tab();
+      await userEvent.tab();
 
       expect(id1).toHaveFocus();
 
-      userEvent.tab();
+      await userEvent.tab();
 
       expect(id2).toHaveFocus();
 
-      userEvent.tab();
+      await userEvent.tab();
 
       expect(id3).toHaveFocus();
 
-      userEvent.tab();
+      await userEvent.tab();
 
       // cycle goes back to the body element
       expect(document.body).toHaveFocus();
 
-      userEvent.tab();
+      await userEvent.tab();
 
       expect(id1).toHaveFocus();
     });
@@ -169,7 +181,7 @@ describe('Tile', () => {
       expect(screen.getByRole('button')).toHaveClass(`extra-class`);
     });
 
-    it('toggles the expandable class on click', () => {
+    it('toggles the expandable class on click', async () => {
       const onClick = jest.fn();
       render(
         <ExpandableTile onClick={onClick}>
@@ -185,7 +197,7 @@ describe('Tile', () => {
         `${prefix}--tile--is-expanded`
       );
       const tile = screen.getByText('TestAbove');
-      userEvent.click(tile);
+      await userEvent.click(tile);
       expect(onClick).toHaveBeenCalled();
       expect(screen.getByRole('button')).toHaveClass(
         `${prefix}--tile--is-expanded`
@@ -208,14 +220,14 @@ describe('Tile', () => {
         'title',
         'Interact to expand Tile'
       );
-      userEvent.click(expandableTile);
+      await userEvent.click(expandableTile);
       expect(expandableTile).toHaveAttribute(
         'title',
         'Interact to collapse Tile'
       );
     });
 
-    it('displays the custom tooltips for the button depending on state', () => {
+    it('displays the custom tooltips for the button depending on state', async () => {
       render(
         <ExpandableTile
           tileCollapsedIconText={'Click To Expand'}
@@ -231,7 +243,7 @@ describe('Tile', () => {
 
       const expandableTile = screen.getByRole('button');
       expect(expandableTile).toHaveAttribute('title', 'Click To Expand');
-      userEvent.click(expandableTile);
+      await userEvent.click(expandableTile);
       expect(expandableTile).toHaveAttribute('title', 'Click To Collapse');
     });
 

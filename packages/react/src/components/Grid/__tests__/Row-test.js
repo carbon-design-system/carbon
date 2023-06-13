@@ -5,13 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, cleanup } from '@carbon/test-utils/react';
+import { render } from '@testing-library/react';
 import React from 'react';
 import { Row } from '../';
 
 describe('Row', () => {
-  afterEach(cleanup);
-
   it('should support a custom element as the root node', () => {
     const { container } = render(<Row as="section" />);
     expect(container.firstChild.tagName).toBe('SECTION');
@@ -33,6 +31,7 @@ describe('Row', () => {
         <span id="test">Test</span>
       </Row>
     );
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const testNode = container.querySelector('#test');
     expect(testNode).toBeInstanceOf(HTMLElement);
   });

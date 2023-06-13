@@ -31,6 +31,7 @@ describe('InlineLoading', () => {
   it('should render the success state if status is finished', () => {
     render(<InlineLoading status="finished" />);
 
+    // eslint-disable-next-line testing-library/no-node-access
     expect(document.querySelector('svg')).toHaveClass(
       'cds--inline-loading__checkmark-container'
     );
@@ -39,6 +40,7 @@ describe('InlineLoading', () => {
   it('should render the error state if status is error', () => {
     render(<InlineLoading status="error" />);
 
+    // eslint-disable-next-line testing-library/no-node-access
     expect(document.querySelector('svg')).toHaveClass(
       'cds--inline-loading--error'
     );
@@ -48,6 +50,7 @@ describe('InlineLoading', () => {
     render(<InlineLoading />);
 
     expect(
+      // eslint-disable-next-line testing-library/no-node-access
       document.querySelector('.cds--inline-loading__text')
     ).not.toBeInTheDocument();
   });

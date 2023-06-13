@@ -16,52 +16,40 @@ export default {
 export const Default = () => {
   return (
     <>
-      <Tag className="some-class" type="red" size="sm" title="Clear Filter">
+      <Tag className="some-class" type="red" title="Clear Filter">
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="magenta" size="sm" title="Clear Filter">
+      <Tag className="some-class" type="magenta" title="Clear Filter">
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="purple" size="sm" title="Clear Filter">
+      <Tag className="some-class" type="purple" title="Clear Filter">
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="blue" size="sm" title="Clear Filter">
+      <Tag className="some-class" type="blue" title="Clear Filter">
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="cyan" size="sm" title="Clear Filter">
+      <Tag className="some-class" type="cyan" title="Clear Filter">
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="teal" size="sm" title="Clear Filter">
+      <Tag className="some-class" type="teal" title="Clear Filter">
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="green" size="sm" title="Clear Filter">
+      <Tag className="some-class" type="green" title="Clear Filter">
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="gray" size="sm" title="Clear Filter">
+      <Tag className="some-class" type="gray" title="Clear Filter">
         {'Tag content'}
       </Tag>
-      <Tag
-        className="some-class"
-        type="cool-gray"
-        size="sm"
-        title="Clear Filter">
+      <Tag className="some-class" type="cool-gray" title="Clear Filter">
         {'Tag content'}
       </Tag>
-      <Tag
-        className="some-class"
-        type="warm-gray"
-        size="sm"
-        title="Clear Filter">
+      <Tag className="some-class" type="warm-gray" title="Clear Filter">
         {'Tag content'}
       </Tag>
-      <Tag
-        className="some-class"
-        type="high-contrast"
-        size="sm"
-        title="Clear Filter">
+      <Tag className="some-class" type="high-contrast" title="Clear Filter">
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="outline" size="sm" title="Clear Filter">
+      <Tag className="some-class" type="outline" title="Clear Filter">
         {'Tag content'}
       </Tag>
     </>

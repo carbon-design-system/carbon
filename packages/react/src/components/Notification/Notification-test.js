@@ -95,6 +95,7 @@ describe('ToastNotification', () => {
         <p>Sample text</p>
       </ToastNotification>
     );
+    // eslint-disable-next-line testing-library/prefer-presence-queries
     expect(screen.queryByText(/Sample text/i)).toBeInTheDocument();
   });
 
@@ -139,14 +140,14 @@ describe('ToastNotification', () => {
     const closeButton = screen.queryByRole('button', {
       hidden: true,
     });
-    userEvent.click(closeButton);
+    await userEvent.click(closeButton);
     expect(onClose).toHaveBeenCalledTimes(1);
     await waitFor(() => {
       expect(screen.queryByRole('status')).not.toBeInTheDocument();
     });
   });
 
-  it('keeps notification open if `onClose` returns false', () => {
+  it('keeps notification open if `onClose` returns false', async () => {
     render(
       <ToastNotification title="Notification title" onClose={() => false} />
     );
@@ -154,11 +155,12 @@ describe('ToastNotification', () => {
     const closeButton = screen.queryByRole('button', {
       hidden: true,
     });
-    userEvent.click(closeButton);
+    await userEvent.click(closeButton);
+    // eslint-disable-next-line testing-library/prefer-presence-queries
     expect(screen.queryByRole('status')).toBeInTheDocument();
   });
 
-  it('calls `onCloseButtonClick` when notification is closed', () => {
+  it('calls `onCloseButtonClick` when notification is closed', async () => {
     const onCloseButtonClick = jest.fn();
     render(
       <ToastNotification
@@ -170,7 +172,7 @@ describe('ToastNotification', () => {
     const closeButton = screen.queryByRole('button', {
       hidden: true,
     });
-    userEvent.click(closeButton);
+    await userEvent.click(closeButton);
     expect(onCloseButtonClick).toHaveBeenCalledTimes(1);
   });
 });
@@ -216,6 +218,7 @@ describe('InlineNotification', () => {
         <p>Sample text</p>
       </InlineNotification>
     );
+    // eslint-disable-next-line testing-library/prefer-presence-queries
     expect(screen.queryByText(/Sample text/i)).toBeInTheDocument();
   });
 
@@ -259,14 +262,14 @@ describe('InlineNotification', () => {
     const closeButton = screen.queryByRole('button', {
       hidden: true,
     });
-    userEvent.click(closeButton);
+    await userEvent.click(closeButton);
     expect(onClose).toHaveBeenCalledTimes(1);
     await waitFor(() => {
       expect(screen.queryByRole('status')).not.toBeInTheDocument();
     });
   });
 
-  it('keeps notification open if `onClose` returns false', () => {
+  it('keeps notification open if `onClose` returns false', async () => {
     render(
       <InlineNotification title="Notification title" onClose={() => false} />
     );
@@ -274,11 +277,12 @@ describe('InlineNotification', () => {
     const closeButton = screen.queryByRole('button', {
       hidden: true,
     });
-    userEvent.click(closeButton);
+    await userEvent.click(closeButton);
+    // eslint-disable-next-line testing-library/prefer-presence-queries
     expect(screen.queryByRole('status')).toBeInTheDocument();
   });
 
-  it('calls `onCloseButtonClick` when notification is closed', () => {
+  it('calls `onCloseButtonClick` when notification is closed', async () => {
     const onCloseButtonClick = jest.fn();
     render(
       <InlineNotification
@@ -290,7 +294,7 @@ describe('InlineNotification', () => {
     const closeButton = screen.queryByRole('button', {
       hidden: true,
     });
-    userEvent.click(closeButton);
+    await userEvent.click(closeButton);
     expect(onCloseButtonClick).toHaveBeenCalledTimes(1);
   });
 });
@@ -324,13 +328,13 @@ describe('ActionableNotification', () => {
     );
 
     // without focus being on/in the notification, it should not close via escape
-    userEvent.keyboard('{Escape}');
+    await userEvent.keyboard('{Escape}');
     expect(onCloseButtonClick).toHaveBeenCalledTimes(0);
     expect(onClose).toHaveBeenCalledTimes(0);
 
     // after focus is placed, the notification should close via escape
-    userEvent.tab();
-    userEvent.keyboard('{Escape}');
+    await userEvent.tab();
+    await userEvent.keyboard('{Escape}');
     expect(onCloseButtonClick).toHaveBeenCalledTimes(1);
     expect(onClose).toHaveBeenCalledTimes(1);
 

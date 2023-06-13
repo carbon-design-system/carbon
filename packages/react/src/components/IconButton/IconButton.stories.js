@@ -38,7 +38,7 @@ export default {
 
 export const Default = () => (
   <div style={{ margin: '3rem' }}>
-    <IconButton>
+    <IconButton label="label">
       <Edit />
     </IconButton>
   </div>

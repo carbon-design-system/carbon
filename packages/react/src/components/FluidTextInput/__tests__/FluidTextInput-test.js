@@ -9,7 +9,6 @@ import React from 'react';
 import FluidTextInput from '../FluidTextInput';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
-import { FeatureFlags } from '../../FeatureFlags';
 
 const prefix = 'cds';
 
@@ -17,9 +16,7 @@ describe('FluidTextInput', () => {
   describe('renders as expected - Component API', () => {
     it('should render as expected', () => {
       const { container } = render(
-        <FeatureFlags flags={{ 'enable-v11-release': true }}>
-          <FluidTextInput id="input-1" labelText="FluidTextInput label" />
-        </FeatureFlags>
+        <FluidTextInput id="input-1" labelText="FluidTextInput label" />
       );
 
       expect(container.firstChild).toHaveClass(`${prefix}--text-input--fluid`);
@@ -42,20 +39,6 @@ describe('FluidTextInput', () => {
 
     it('should support a custom `className` prop on the outermost element', () => {
       const { container } = render(
-        <FeatureFlags flags={{ 'enable-v11-release': true }}>
-          <FluidTextInput
-            id="input-1"
-            labelText="FluidTextInput label"
-            className="custom-class"
-          />
-        </FeatureFlags>
-      );
-
-      expect(container.firstChild).toHaveClass('custom-class');
-    });
-
-    it('should support a custom `className` prop on the input element (V10)', () => {
-      render(
         <FluidTextInput
           id="input-1"
           labelText="FluidTextInput label"
@@ -63,7 +46,7 @@ describe('FluidTextInput', () => {
         />
       );
 
-      expect(screen.getByRole('textbox')).toHaveClass('custom-class');
+      expect(container.firstChild).toHaveClass('custom-class');
     });
 
     it('should respect defaultValue prop', () => {
@@ -101,6 +84,7 @@ describe('FluidTextInput', () => {
         <FluidTextInput id="input-1" labelText="FluidTextInput" invalid />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const invalidIcon = container.querySelector(
         `svg.${prefix}--text-input__invalid-icon`
       );
@@ -191,6 +175,7 @@ describe('FluidTextInput', () => {
         <FluidTextInput id="input-1" labelText="FluidTextInput label" warn />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const warnIcon = container.querySelector(
         `svg.${prefix}--text-input__invalid-icon--warning`
       );
@@ -219,7 +204,7 @@ describe('FluidTextInput', () => {
   });
 
   describe('behaves as expected - Component API', () => {
-    it('should respect onChange prop', () => {
+    it('should respect onChange prop', async () => {
       const onChange = jest.fn();
       render(
         <FluidTextInput
@@ -230,7 +215,7 @@ describe('FluidTextInput', () => {
         />
       );
 
-      userEvent.type(screen.getByRole('textbox'), 'x');
+      await userEvent.type(screen.getByRole('textbox'), 'x');
       expect(screen.getByRole('textbox')).toHaveValue('x');
       expect(onChange).toHaveBeenCalledTimes(1);
       expect(onChange).toHaveBeenCalledWith(
@@ -240,7 +225,7 @@ describe('FluidTextInput', () => {
       );
     });
 
-    it('should respect onClick prop', () => {
+    it('should respect onClick prop', async () => {
       const onClick = jest.fn();
       render(
         <FluidTextInput
@@ -251,7 +236,7 @@ describe('FluidTextInput', () => {
         />
       );
 
-      userEvent.click(screen.getByRole('textbox'));
+      await userEvent.click(screen.getByRole('textbox'));
       expect(onClick).toHaveBeenCalledTimes(1);
       expect(onClick).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -260,7 +245,7 @@ describe('FluidTextInput', () => {
       );
     });
 
-    it('should not call `onClick` when the `<input>` is clicked but disabled', () => {
+    it('should not call `onClick` when the `<input>` is clicked but disabled', async () => {
       const onClick = jest.fn();
       render(
         <FluidTextInput
@@ -271,11 +256,11 @@ describe('FluidTextInput', () => {
         />
       );
 
-      userEvent.click(screen.getByRole('textbox'));
+      await userEvent.click(screen.getByRole('textbox'));
       expect(onClick).not.toHaveBeenCalled();
     });
 
-    it('should respect readOnly prop', () => {
+    it('should respect readOnly prop', async () => {
       const onChange = jest.fn();
       const onClick = jest.fn();
       render(
@@ -289,11 +274,11 @@ describe('FluidTextInput', () => {
       );
 
       // Click events should fire
-      userEvent.click(screen.getByRole('textbox'));
+      await userEvent.click(screen.getByRole('textbox'));
       expect(onClick).toHaveBeenCalledTimes(1);
 
       // Change events should *not* fire
-      userEvent.type(screen.getByRole('textbox'), 'x');
+      await userEvent.type(screen.getByRole('textbox'), 'x');
       expect(screen.getByRole('textbox')).not.toHaveValue('x');
       expect(onChange).toHaveBeenCalledTimes(0);
     });

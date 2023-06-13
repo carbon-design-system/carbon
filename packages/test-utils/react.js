@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 const containers = new Set();
 
@@ -13,21 +13,23 @@ export function render(
   element,
   { container = document.createElement('div') } = {}
 ) {
-  containers.add(container);
   document.body.appendChild(container);
-  ReactDOM.render(element, container);
+  const root = createRoot(container);
+  root.render(element);
+  containers.add({ container, root });
   return {
     container,
     rerender() {
-      ReactDOM.render(element, container);
+      const root = createRoot(container);
+      root.render(element);
     },
   };
 }
 
 export function cleanup() {
   for (const node of containers) {
-    ReactDOM.unmountComponentAtNode(node);
-    node.parentNode.removeChild(node);
+    node.root.unmount();
+    node.container.parentNode.removeChild(node);
     containers.delete(node);
   }
 }

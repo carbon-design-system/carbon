@@ -51,7 +51,9 @@
     }
   }
 
-  .#{$prefix}--inline-notification:not(.#{$prefix}--inline-notification--low-contrast)
+  .#{$prefix}--inline-notification:not(
+      .#{$prefix}--inline-notification--low-contrast
+    )
     a {
     color: $link-inverse;
   }
@@ -169,7 +171,10 @@
 
   .#{$prefix}--inline-notification--warning
     .#{$prefix}--inline-notification__icon
-    path[opacity='0'] {
+    path[opacity='0'],
+  .#{$prefix}--inline-notification--warning-alt
+    .#{$prefix}--inline-notification__icon
+    path:first-of-type {
     fill: $black-100;
     opacity: 1;
   }
@@ -218,7 +223,9 @@
     }
   }
 
-  .#{$prefix}--inline-notification:not(.#{$prefix}--inline-notification--low-contrast)
+  .#{$prefix}--inline-notification:not(
+      .#{$prefix}--inline-notification--low-contrast
+    )
     .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
     color: $link-inverse;
   }

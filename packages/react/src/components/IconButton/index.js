@@ -8,6 +8,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Button from '../Button';
+import classNames from 'classnames';
 import { Tooltip } from '../Tooltip';
 import { usePrefix } from '../../internal/usePrefix';
 import cx from 'classnames';
@@ -19,26 +20,33 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
     className,
     closeOnActivation = true,
     defaultOpen = false,
+    disabled,
     enterDelayMs,
     kind,
     label,
     leaveDelayMs,
-    size = 'md',
+    wrapperClasses,
+    size,
     ...rest
   } = props;
   const prefix = usePrefix();
 
+  const tooltipClasses = classNames(wrapperClasses, `${prefix}--icon-tooltip`, {
+    [`${prefix}--icon-tooltip--disabled`]: disabled,
+  });
+
   return (
     <Tooltip
       align={align}
-      className={`${prefix}--icon-tooltip`}
       closeOnActivation={closeOnActivation}
+      className={tooltipClasses}
       defaultOpen={defaultOpen}
       enterDelayMs={enterDelayMs}
       label={label}
       leaveDelayMs={leaveDelayMs}>
       <Button
         {...rest}
+        disabled={disabled}
         kind={kind}
         ref={ref}
         size={size}
@@ -85,6 +93,11 @@ IconButton.propTypes = {
   defaultOpen: PropTypes.bool,
 
   /**
+   * Specify whether the Button should be disabled, or not
+   */
+  disabled: PropTypes.bool,
+
+  /**
    * Specify the duration in milliseconds to delay before displaying the tooltip
    */
   enterDelayMs: PropTypes.number,
@@ -111,6 +124,11 @@ IconButton.propTypes = {
    * Specify the size of the Button. Defaults to `md`.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * Specify an optional className to be added to your Tooltip wrapper
+   */
+  wrapperClasses: PropTypes.string,
 };
 
 export { IconButton };

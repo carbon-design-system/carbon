@@ -11,7 +11,6 @@ import SelectItem from '../../SelectItem';
 import SelectSkeleton from '../../Select/Select.Skeleton';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
-import { FeatureFlags } from '../../FeatureFlags';
 
 const prefix = 'cds';
 
@@ -58,9 +57,7 @@ describe('Select', () => {
 
     it('should support a custom `className` prop on the outermost element', () => {
       const { container } = render(
-        <FeatureFlags flags={{ 'enable-v11-release': true }}>
-          <Select id="select" labelText="Select" className="custom-class" />
-        </FeatureFlags>
+        <Select id="select" labelText="Select" className="custom-class" />
       );
 
       expect(container.firstChild).toHaveClass('custom-class');
@@ -118,6 +115,7 @@ describe('Select', () => {
         <Select id="select" labelText="Select" inline />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const selectWrapper = container.querySelector(`.${prefix}--select`);
       expect(selectWrapper).toHaveClass(`${prefix}--select--inline`);
     });
@@ -127,7 +125,9 @@ describe('Select', () => {
         <Select id="select" labelText="Select" invalid />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const selectWrapper = container.querySelector(`.${prefix}--select`);
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const selectInput = container.querySelector(`.${prefix}--select-input`);
 
       expect(selectWrapper).toHaveClass(`${prefix}--select--invalid`);
@@ -162,12 +162,13 @@ describe('Select', () => {
         <Select id="select" labelText="Select" noLabel />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const selectWrapper = container.querySelector('label');
 
       expect(selectWrapper).not.toBeInTheDocument();
     });
 
-    it.skip('should respect readOnly prop', () => {
+    it.skip('should respect readOnly prop', async () => {
       const onChange = jest.fn();
       const onClick = jest.fn();
 
@@ -186,7 +187,7 @@ describe('Select', () => {
 
       // Click events should fire
       const theSelect = screen.getByRole('combobox');
-      userEvent.click(theSelect);
+      await userEvent.click(theSelect);
       expect(onClick).toHaveBeenCalledTimes(1);
 
       //------------------------------------------------------------------------
@@ -196,7 +197,7 @@ describe('Select', () => {
       // or have a way to click on a slotted option.
       // https://github.com/testing-library/user-event/issues/786
       //------------------------------------------------------------------------
-      userEvent.selectOptions(theSelect, 'option-1');
+      await userEvent.selectOptions(theSelect, 'option-1');
 
       // Change events should *not* fire
       expect(screen.getByText('Option 1').selected).toBe(false);
@@ -217,6 +218,7 @@ describe('Select', () => {
         <Select id="select" labelText="Select" warn />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const selectWrapper = container.querySelector(`.${prefix}--select`);
 
       expect(selectWrapper).toHaveClass(`${prefix}--select--warning`);
@@ -241,7 +243,7 @@ describe('Select', () => {
 
   describe('behaves as expected', () => {
     // Add tests for relevant component behavior. For more information, visit https://github.com/carbon-design-system/carbon/issues/10184#issuecomment-992978122
-    it('should call onChange when expected', () => {
+    it('should call onChange when expected', async () => {
       const onChange = jest.fn();
       render(
         <Select id="select" labelText="Select" onChange={onChange}>
@@ -251,13 +253,13 @@ describe('Select', () => {
       );
 
       expect(onChange).toHaveBeenCalledTimes(0);
-      userEvent.selectOptions(screen.getByRole('combobox'), 'Option 2');
-      userEvent.selectOptions(screen.getByRole('combobox'), 'Option 1');
+      await userEvent.selectOptions(screen.getByRole('combobox'), 'Option 2');
+      await userEvent.selectOptions(screen.getByRole('combobox'), 'Option 1');
 
       expect(onChange).toHaveBeenCalledTimes(2);
     });
 
-    it('should call onClick when expected', () => {
+    it('should call onClick when expected', async () => {
       const onClick = jest.fn();
       render(
         <Select id="select" labelText="Select" onClick={onClick}>
@@ -267,11 +269,11 @@ describe('Select', () => {
       );
 
       expect(onClick).toHaveBeenCalledTimes(0);
-      userEvent.click(screen.getByRole('combobox'));
+      await userEvent.click(screen.getByRole('combobox'));
       expect(onClick).toHaveBeenCalledTimes(1);
     });
 
-    it('should not call onClick when disabled', () => {
+    it('should not call onClick when disabled', async () => {
       const onClick = jest.fn();
       render(
         <Select id="select" labelText="Select" onClick={onClick} disabled>
@@ -281,11 +283,11 @@ describe('Select', () => {
       );
 
       expect(onClick).toHaveBeenCalledTimes(0);
-      userEvent.click(screen.getByRole('combobox'));
+      await userEvent.click(screen.getByRole('combobox'));
       expect(onClick).toHaveBeenCalledTimes(0);
     });
 
-    it('should receive focus when tab is pressed', () => {
+    it('should receive focus when tab is pressed', async () => {
       render(
         <Select id="select" labelText="Select">
           <SelectItem value="option-1" text="Option 1" />
@@ -294,11 +296,11 @@ describe('Select', () => {
       );
 
       expect(document.body).toHaveFocus();
-      userEvent.tab();
+      await userEvent.tab();
       expect(screen.getByRole('combobox')).toHaveFocus();
     });
 
-    it('should not receive focus when disabled', () => {
+    it('should not receive focus when disabled', async () => {
       render(
         <Select id="select" labelText="Select" disabled>
           <SelectItem value="option-1" text="Option 1" />
@@ -307,7 +309,7 @@ describe('Select', () => {
       );
 
       expect(document.body).toHaveFocus();
-      userEvent.tab();
+      await userEvent.tab();
       expect(document.body).toHaveFocus();
     });
 
@@ -326,6 +328,7 @@ describe('Select', () => {
     it('should render a skeleton state', () => {
       const { container } = render(<SelectSkeleton />);
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const selectWrapper = container.querySelector(`.${prefix}--select`);
 
       expect(selectWrapper).toHaveClass(`${prefix}--skeleton`);

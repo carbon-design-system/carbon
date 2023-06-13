@@ -332,6 +332,15 @@ export {
   // Icon sizes
   iconSize01,
   iconSize02,
+  // Layout
+  // Deprecated ☠️
+  layout01,
+  layout02,
+  layout03,
+  layout04,
+  layout05,
+  layout06,
+  layout07,
 } from '@carbon/layout';
 
 // Deprecated ☠️

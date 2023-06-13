@@ -16,7 +16,6 @@ import {
   generateGenericItem,
 } from '../../ListBox/test-helpers';
 import FluidDropdown from '../FluidDropdown';
-import { FeatureFlags } from '../../FeatureFlags';
 
 const prefix = 'cds';
 
@@ -34,22 +33,14 @@ describe('FluidDropdown', () => {
   });
 
   it('should render with fluid classes', () => {
-    const { container } = render(
-      <FeatureFlags flags={{ 'enable-v11-release': true }}>
-        <FluidDropdown {...mockProps} />
-      </FeatureFlags>
-    );
+    const { container } = render(<FluidDropdown {...mockProps} />);
     expect(container.firstChild).toHaveClass(
       `${prefix}--list-box__wrapper--fluid`
     );
   });
 
   it('should render with condensed styles if isCondensed is provided', () => {
-    const { container } = render(
-      <FeatureFlags flags={{ 'enable-v11-release': true }}>
-        <FluidDropdown isCondensed {...mockProps} />
-      </FeatureFlags>
-    );
+    const { container } = render(<FluidDropdown isCondensed {...mockProps} />);
     expect(container.firstChild).toHaveClass(
       `${prefix}--list-box__wrapper--fluid--condensed`
     );
@@ -60,27 +51,27 @@ describe('FluidDropdown', () => {
     assertMenuClosed();
   });
 
-  it('should let the user open the menu by clicking on the control', () => {
+  it('should let the user open the menu by clicking on the control', async () => {
     render(<FluidDropdown {...mockProps} />);
-    openMenu();
+    await openMenu();
     assertMenuOpen(mockProps);
   });
 
-  it('should render with strings as items', () => {
+  it('should render with strings as items', async () => {
     render(<FluidDropdown {...mockProps} items={['zar', 'doz']} />);
-    openMenu();
+    await openMenu();
 
     expect(screen.getByText('zar')).toBeInTheDocument();
     expect(screen.getByText('doz')).toBeInTheDocument();
   });
 
-  it('should render custom item components', () => {
+  it('should render custom item components', async () => {
     const itemToElement = jest.fn((item) => {
       return <div className="mock-item">{item.label}</div>;
     });
 
     render(<FluidDropdown itemToElement={itemToElement} {...mockProps} />);
-    openMenu();
+    await openMenu();
 
     expect(itemToElement).toHaveBeenCalled();
   });
@@ -103,6 +94,7 @@ describe('FluidDropdown', () => {
     );
     // custom element should be rendered for the selected item
     expect(
+      // eslint-disable-next-line testing-library/no-node-access
       document.querySelector('#a-custom-element-for-selected-item')
     ).toBeDefined();
     // the title should use the normal itemToString method
@@ -122,11 +114,11 @@ describe('FluidDropdown', () => {
     });
   });
 
-  it('should let the user select an option by clicking on the option node', () => {
+  it('should let the user select an option by clicking on the option node', async () => {
     render(<FluidDropdown {...mockProps} />);
-    openMenu();
+    await openMenu();
 
-    userEvent.click(screen.getByText('Item 0'));
+    await userEvent.click(screen.getByText('Item 0'));
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[0],
@@ -135,8 +127,8 @@ describe('FluidDropdown', () => {
 
     mockProps.onChange.mockClear();
 
-    openMenu();
-    userEvent.click(screen.getByText('Item 1'));
+    await openMenu();
+    await userEvent.click(screen.getByText('Item 1'));
 
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
