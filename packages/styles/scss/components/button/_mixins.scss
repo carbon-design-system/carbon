@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:map';
+
 @use 'vars' as *;
 @use '../../config' as *;
 @use '../../motion' as *;
@@ -21,10 +23,16 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
 
 @mixin button-base {
   // https://caniuse.com/mdn-css_types_length_lh
-  --temp-1lh: (var(--#{$prefix}-body-compact-01-line-height) * 1em);
+  --temp-1lh: (
+    #{custom-property.get-var(
+        'body-compact-01-line-height',
+        map.get($body-compact-01, line-height)
+      )} * 1em
+  );
   // -1px to compensate for border width
   --temp-padding-block-max: calc(
-    (var(--#{$prefix}-layout-size-height-lg) - var(--temp-1lh)) / 2 - #{rem(1px)}
+    (#{custom-property.get-var('layout-size-height-lg')} - var(--temp-1lh)) / 2 -
+      #{rem(1px)}
   );
 
   @include component-reset.reset;
