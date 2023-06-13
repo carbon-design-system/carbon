@@ -430,6 +430,7 @@ const Dropdown = React.forwardRef(
             // aria-expanded is already being passed through {...toggleButtonProps}
             role="combobox" // eslint-disable-line jsx-a11y/role-has-required-aria-props
             aria-owns={getMenuProps().id}
+            aria-controls={getMenuProps().id}
             className={`${prefix}--list-box__field`}
             disabled={disabled}
             aria-disabled={readOnly ? true : undefined} // aria-disabled to remain focusable
