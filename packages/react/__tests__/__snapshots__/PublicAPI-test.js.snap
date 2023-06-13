@@ -3987,6 +3987,8 @@ Map {
       "addFocusListeners": Object {
         "type": "bool",
       },
+      "aria-label": [Function],
+      "aria-labelledby": [Function],
       "children": Object {
         "type": "node",
       },
@@ -7444,10 +7446,10 @@ Map {
   "Switcher" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
-      "aria-label": [Function],
-      "aria-labelledby": [Function],
+      "addFocusListeners": Object {
+        "type": "bool",
+      },
       "children": Object {
-        "isRequired": true,
         "type": "node",
       },
       "className": Object {
@@ -7455,6 +7457,9 @@ Map {
       },
       "expanded": Object {
         "type": "bool",
+      },
+      "onHeaderPanelFocus": Object {
+        "type": "func",
       },
     },
     "render": [Function],
