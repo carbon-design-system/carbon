@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use 'sass:list';
+@use 'sass:map';
 
 @use '../../config' as *;
 @use '../../motion' as *;
@@ -15,6 +15,7 @@
 @use '../../utilities/button-reset';
 @use '../../utilities/convert' as *;
 @use '../../utilities/focus-outline' as *;
+@use '../../utilities/custom-property';
 @use '../../utilities/layout';
 
 /// Contained List styles
@@ -24,6 +25,11 @@
   .#{$prefix}--contained-list {
     @include layout.use('size', $default: 'lg', $min: 'sm', $max: 'xl');
     @include layout.use('density', $default: 'normal');
+  }
+
+  .#{$prefix}--contained-list > ul {
+    padding: 0;
+    margin: 0;
   }
 
   .#{$prefix}--contained-list__header {
@@ -126,10 +132,15 @@
 
   .#{$prefix}--contained-list-item {
     position: relative;
+    list-style: none;
   }
 
   .#{$prefix}--contained-list-item:not(:first-of-type) {
     margin-top: -1px;
+  }
+
+  .#{$prefix}--contained-list-item__content {
+    box-sizing: border-box;
   }
 
   .#{$prefix}--contained-list-item--clickable
@@ -145,7 +156,12 @@
   .#{$prefix}--contained-list-item--clickable
     .#{$prefix}--contained-list-item__content {
     // https://caniuse.com/mdn-css_types_length_lh
-    --temp-1lh: (var(--#{$prefix}-body-01-line-height) * 1em);
+    --temp-1lh: (
+      #{custom-property.get-var(
+          'body-01-line-height',
+          map.get($body-01, line-height)
+        )} * 1em
+    );
 
     @include type-style('body-01');
 
