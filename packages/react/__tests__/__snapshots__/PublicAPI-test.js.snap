@@ -1355,7 +1355,6 @@ Map {
   "ComposedModal" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "onKeyDown": [Function],
       "selectorPrimaryFocus": "[data-modal-primary-focus]",
     },
     "propTypes": Object {
@@ -4843,8 +4842,6 @@ Map {
   "ModalHeader" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "buttonOnClick": [Function],
-      "closeModal": [Function],
       "iconDescription": "Close",
     },
     "propTypes": Object {

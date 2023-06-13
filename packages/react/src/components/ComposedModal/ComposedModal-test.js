@@ -152,15 +152,11 @@ describe('ComposedModal', () => {
     });
 
     it('should focus selector on open', async () => {
-      const ComposedModalExample = () => {
+      function ComposedModalExample() {
         const [isOpen, setIsOpen] = React.useState(false);
         return (
           <>
-            <button
-              type="button"
-              onClick={() => {
-                setIsOpen(!isOpen);
-              }}>
+            <button type="button" onClick={() => setIsOpen(!isOpen)}>
               Click me
             </button>
             <ComposedModal
@@ -179,16 +175,16 @@ describe('ComposedModal', () => {
             </ComposedModal>
           </>
         );
-      };
-
+      }
       render(<ComposedModalExample />);
 
       await userEvent.click(screen.getByText('Click me'), { clickCount: 3 });
-      expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
-        'is-visible'
-      );
 
-      expect(screen.getByTestId('test-id-1')).toHaveFocus();
+      const elementModal = screen.getByRole('presentation', { hidden: true });
+      expect(elementModal).toHaveClass('is-visible');
+
+      const elementInput = screen.getByTestId('test-id-1');
+      expect(elementInput).toHaveFocus();
     });
 
     it('should change size based on size prop', () => {
