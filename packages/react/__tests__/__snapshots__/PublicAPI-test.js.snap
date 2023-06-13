@@ -3987,8 +3987,9 @@ Map {
       "addFocusListeners": Object {
         "type": "bool",
       },
-      "aria-label": [Function],
-      "aria-labelledby": [Function],
+      "children": Object {
+        "type": "node",
+      },
       "className": Object {
         "type": "string",
       },
