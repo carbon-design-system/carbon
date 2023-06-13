@@ -8,7 +8,6 @@
 import React, { useRef, useState } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 
@@ -33,6 +32,7 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
   const controlled = useRef(expanded !== undefined).current;
   const [expandedState, setExpandedState] = useState(expanded);
   const expandedProp = controlled ? expanded : expandedState;
+
 
   const className = cx(`${prefix}--header-panel`, {
     [`${prefix}--header-panel--expanded`]: expandedProp,
@@ -72,9 +72,9 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
 
 HeaderPanel.propTypes = {
   /**
-   * Required props for accessibility label on the underlying menu
+   * The content that will render inside of the `HeaderPanel`
    */
-  ...AriaLabelPropType,
+  children: PropTypes.node,
 
   /**
    * Specify whether focus and blur listeners are added. They are by default.

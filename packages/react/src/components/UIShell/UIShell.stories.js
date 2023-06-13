@@ -580,7 +580,7 @@ export const HeaderBaseWActionsAndRightPanel = () => (
         <SwitcherIcon size={20} />
       </HeaderGlobalAction>
     </HeaderGlobalBar>
-    <HeaderPanel aria-label="Header Panel" expanded />
+    <HeaderPanel expanded />
   </Header>
 );
 

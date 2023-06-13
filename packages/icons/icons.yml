@@ -3232,8 +3232,13 @@
   sizes:
     - 32
 - name: chart--logistic-regression
-  friendly_name: chart--logistic-regression
-  aliases: []
+  friendly_name: Chart logistic regression
+  aliases: 
+    - chart logistic regression
+    - logistic regression chart
+    - chart
+    - graph
+    - data  
   sizes:
     - 32
 - name: chart--marimekko
@@ -5280,8 +5285,16 @@
     - click
     - pointer
 - name: customer-service
-  friendly_name: customer-service
-  aliases: []
+  friendly_name: Customer service
+  aliases: 
+    - customer
+    - inquiry
+    - phone
+    - support
+    - chat
+    - client
+    - person
+    - headset
   sizes:
     - 32
 - name: cut
@@ -5402,8 +5415,19 @@
   sizes:
     - 32
 - name: data--categorical
-  friendly_name: data--categorical
-  aliases: []
+  friendly_name: Data categorical
+  aliases: 
+    - circle
+    - triangle
+    - square
+    - data types
+    - sort
+    - data
+    - category
+    - definite
+    - class
+    - group
+    - rank
   sizes:
     - 32
 - name: data--center
@@ -5469,8 +5493,13 @@
     - metrics
     - characters
 - name: data--regular
-  friendly_name: data--regular
-  aliases: []
+  friendly_name: Data regular
+  aliases: 
+    - data 
+    - regular
+    - normal
+    - circle
+    - dot
   sizes:
     - 32
 - name: data--set
@@ -12241,8 +12270,17 @@
     - tag
     - identification
 - name: logo--mastodon
-  friendly_name: logo--mastodon
-  aliases: []
+  friendly_name: Logo Mastodon
+  aliases: 
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+    - elephant
   sizes:
     - 32
 - name: logo--medium
@@ -12259,8 +12297,16 @@
     - tag
     - identification
 - name: logo--npm
-  friendly_name: logo--npm
-  aliases: []
+  friendly_name: Logo npm
+  aliases: 
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
   sizes:
     - 32
 - name: logo--openshift
@@ -14336,8 +14382,12 @@
   sizes:
     - 32
 - name: package--text-analysis
-  friendly_name: package--text-analysis
-  aliases: []
+  friendly_name: Package text analysis
+  aliases: 
+    - file
+    - package
+    - text
+    - analysis
   sizes:
     - 32
 - name: page--first
@@ -14481,28 +14531,51 @@
   sizes:
     - 32
 - name: partition--auto
-  friendly_name: partition--auto
-  aliases: []
+  friendly_name: Partition auto
+  aliases: 
+    - data
+    - partition
+    - auto
+    - cycle
   sizes:
     - 32
 - name: partition--collection
-  friendly_name: partition--collection
-  aliases: []
+  friendly_name: Partition collection
+  aliases: 
+    - data
+    - partition
+    - collection
+    - gather
+    - collect
   sizes:
     - 32
 - name: partition--repartition
-  friendly_name: partition--repartition
-  aliases: []
+  friendly_name: Partition repartition
+  aliases: 
+    - data
+    - partition
+    - repartition
+    - refine
   sizes:
     - 32
 - name: partition--same
-  friendly_name: partition--same
-  aliases: []
+  friendly_name: Partition same
+  aliases: 
+    - data
+    - partition
+    - auto
+    - duplicate
+    - parallel
   sizes:
     - 32
 - name: partition--specific
-  friendly_name: partition--specific
-  aliases: []
+  friendly_name: Partition specific
+  aliases: 
+    - data
+    - partition
+    - specific
+    - specify
+    - select
   sizes:
     - 32
 - name: partly-cloudy
@@ -15864,8 +15937,12 @@
   sizes:
     - 32
 - name: result--draft
-  friendly_name: result--draft
-  aliases: []
+  friendly_name: Result draft
+  aliases: 
+    - clipboard
+    - result
+    - edit
+    - document
   sizes:
     - 32
 - name: result--new
@@ -16234,13 +16311,31 @@
   sizes:
     - 32
 - name: rule--locked
-  friendly_name: rule--locked
-  aliases: []
+  friendly_name: Rule locked
+  aliases: 
+    - rule
+    - governance
+    - control
+    - policy
+    - quality
+    - security
+    - shield
+    - lock
+    - data
   sizes:
     - 32
 - name: rule--partial
-  friendly_name: rule--partial
-  aliases: []
+  friendly_name: Rule partial
+  aliases: 
+    - rule
+    - governance
+    - control
+    - policy
+    - quality
+    - security
+    - shield
+    - data
+    - incomplete
   sizes:
     - 32
 - name: rule--test

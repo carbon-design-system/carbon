@@ -8,6 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { LayoutConstraint } from '../Layout';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -56,16 +57,19 @@ function ContainedList({
   isInset,
   kind = variants[0],
   label,
-  size = 'lg',
+  size,
 }) {
   const labelId = `${useId('contained-list')}-header`;
   const prefix = usePrefix();
 
   const classes = classNames(
     `${prefix}--contained-list`,
-    { [`${prefix}--contained-list--inset-rulers`]: isInset },
+    {
+      [`${prefix}--contained-list--inset-rulers`]: isInset,
+      [`${prefix}--contained-list--${size}`]: size, // TODO: V12 - Remove this class
+      [`${prefix}--layout--size-${size}`]: size,
+    },
     `${prefix}--contained-list--${kind}`,
-    `${prefix}--contained-list--${size}`,
     className
   );
 
@@ -83,7 +87,11 @@ function ContainedList({
         <div id={labelId} className={`${prefix}--contained-list__label`}>
           {label}
         </div>
-        <div className={`${prefix}--contained-list__action`}>{action}</div>
+        <LayoutConstraint
+          size={{ min: 'sm', max: 'xl' }}
+          className={`${prefix}--contained-list__action`}>
+          {action}
+        </LayoutConstraint>
       </div>
       {children && (
         <ul aria-labelledby={labelId}>

@@ -47,6 +47,10 @@ $types: (
   column-gap: spacing.$spacing-02;
 }
 
+.#{$prefix}--annotation__label > :first-child {
+  flex-shrink: 0;
+}
+
 .#{$prefix}--annotation__label a {
   color: inherit;
   text-decoration: underline;

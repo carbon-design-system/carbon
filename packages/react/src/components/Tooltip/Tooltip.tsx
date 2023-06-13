@@ -186,12 +186,14 @@ function Tooltip<T extends React.ElementType>({
       onMouseLeave={onMouseLeave}
       open={open}
       ref={containerRef}>
-      {child !== undefined
-        ? React.cloneElement(child, {
-            ...triggerProps,
-            ...getChildEventHandlers(child.props),
-          })
-        : null}
+      <div className={`${prefix}--tooltip-trigger__wrapper`}>
+        {child !== undefined
+          ? React.cloneElement(child, {
+              ...triggerProps,
+              ...getChildEventHandlers(child.props),
+            })
+          : null}
+      </div>
       <PopoverContent
         aria-hidden="true"
         className={`${prefix}--tooltip-content`}
