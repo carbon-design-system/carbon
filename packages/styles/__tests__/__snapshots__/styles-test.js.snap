@@ -33,6 +33,11 @@ Array [
     "relativePath": "scss/layer",
   },
   Object {
+    "filepath": "scss/_layout.scss",
+    "importPath": "@carbon/styles/scss/layout",
+    "relativePath": "scss/layout",
+  },
+  Object {
     "filepath": "scss/_motion.scss",
     "importPath": "@carbon/styles/scss/motion",
     "relativePath": "scss/motion",
@@ -921,6 +926,11 @@ Array [
     "filepath": "scss/utilities/_keyframes.scss",
     "importPath": "@carbon/styles/scss/utilities/keyframes",
     "relativePath": "scss/utilities/keyframes",
+  },
+  Object {
+    "filepath": "scss/utilities/_layout.scss",
+    "importPath": "@carbon/styles/scss/utilities/layout",
+    "relativePath": "scss/utilities/layout",
   },
   Object {
     "filepath": "scss/utilities/_placeholder-colors.scss",
