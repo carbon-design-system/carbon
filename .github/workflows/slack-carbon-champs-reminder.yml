@@ -1,4 +1,4 @@
-name: Slack Office Hours Reminder - Dev
+name: Carbon Champions Nomination Reminder
 
 on:
   schedule:
