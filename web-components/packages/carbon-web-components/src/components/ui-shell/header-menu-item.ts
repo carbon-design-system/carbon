@@ -9,7 +9,7 @@
 
 import { customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import BXHeaderNavItem from './header-nav-item';
+import CDSHeaderNavItem from './header-nav-item';
 
 /**
  * Header submenu item.
@@ -17,6 +17,6 @@ import BXHeaderNavItem from './header-nav-item';
  * @element cds-header-menu-item
  */
 @customElement(`${prefix}-header-menu-item`)
-class BXHeaderMenuItem extends BXHeaderNavItem {}
+class CDSHeaderMenuItem extends CDSHeaderNavItem {}
 
-export default BXHeaderMenuItem;
+export default CDSHeaderMenuItem;

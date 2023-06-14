@@ -118,9 +118,14 @@ export { default as CDSHeaderMenuItem } from './components/ui-shell/header-menu-
 export { default as CDSHeaderName } from './components/ui-shell/header-name';
 export { default as CDSHeaderNav } from './components/ui-shell/header-nav';
 export { default as CDSHeaderNavItem } from './components/ui-shell/header-nav-item';
+export { default as CDSHeaderSideNavItems } from './components/ui-shell/header-side-nav-items';
+export { default as CDSHeaderPanel } from './components/ui-shell/header-panel';
 export { default as CDSSideNav } from './components/ui-shell/side-nav';
 export { default as CDSSideNavItems } from './components/ui-shell/side-nav-items';
 export { default as CDSSideNavLink } from './components/ui-shell/side-nav-link';
 export { default as CDSSideNavMenu } from './components/ui-shell/side-nav-menu';
 export { default as CDSSideNavMenuItem } from './components/ui-shell/side-nav-menu-item';
+export { default as CDSSwitcher } from './components/ui-shell/switcher';
+export { default as CDSSwitcherItem } from './components/ui-shell/switcher-item';
+export { default as CDSSwitcherDivider } from './components/ui-shell/switcher-divider';
 export { default as CDSStack } from './components/stack/stack';

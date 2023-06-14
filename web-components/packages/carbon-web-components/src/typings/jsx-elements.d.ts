@@ -112,6 +112,11 @@ declare global {
       'cds-header-menu-item': any;
       'cds-header-menu-button': any;
       'cds-header-name': any;
+      'cds-header-panel': any;
+      'cds-header-side-nav-items': any;
+      'cds-switcher': any;
+      'cds-switcher-divider': any;
+      'cds-switcher-item': any;
       'cds-side-nav': any;
       'cds-side-nav-items': any;
       'cds-side-nav-menu': any;

@@ -11,7 +11,12 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/button';
+@use '@carbon/styles/scss/components/popover/index';
+@use '@carbon/styles/scss/components/tooltip';
 @use '@carbon/styles/scss/components/ui-shell/header';
+@use '@carbon/styles/scss/components/ui-shell/header-panel';
+@use '@carbon/styles/scss/components/ui-shell/switcher';
 
 :host(#{$prefix}-header) {
   @extend .#{$prefix}--header;
@@ -46,6 +51,7 @@ $css--plex: true !default;
 
   a.#{$prefix}--header__menu-item {
     height: $spacing-09;
+    background-color: $layer;
 
     &:hover {
       background-color: $background-hover;
@@ -55,6 +61,41 @@ $css--plex: true !default;
     &:active {
       background-color: $background-active;
     }
+  }
+
+  a.#{$prefix}--header__menu-item--current {
+    background-color: $layer-selected;
+
+    &:hover {
+      background-color: $layer-selected-hover;
+    }
+
+    &::after {
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      bottom: -2px;
+      width: 3px;
+      height: 100%;
+      background-color: $border-interactive;
+      content: '';
+    }
+  }
+}
+
+:host(#{$prefix}-header-global-action) {
+  ::slotted(svg) {
+    fill: $icon-secondary;
+  }
+  &:hover ::slotted(svg) {
+    fill: $icon-primary;
+  }
+}
+
+:host(#{$prefix}-header-nav-item),
+:host(#{$prefix}-header-menu) {
+  a.#{$prefix}--header__menu-item {
+    box-sizing: border-box;
   }
 }
 
@@ -80,4 +121,32 @@ $css--plex: true !default;
 :host(#{$prefix}-header-name) {
   display: content;
   height: 100%;
+
+  a {
+    box-sizing: border-box;
+  }
+}
+
+:host(#{$prefix}-header-panel) {
+  @extend .#{$prefix}--header-panel;
+}
+
+:host(#{$prefix}-header-panel) {
+  @extend .#{$prefix}--header-panel--expanded;
+}
+
+:host(#{$prefix}-switcher) {
+  @extend .#{$prefix}--switcher;
+}
+
+:host(#{$prefix}-switcher-item) {
+  @extend .#{$prefix}--switcher__item;
+
+  a {
+    box-sizing: border-box;
+  }
+}
+
+:host(#{$prefix}-switcher-divider) {
+  @extend .#{$prefix}--switcher__item--divider;
 }

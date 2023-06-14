@@ -25,21 +25,3 @@
     margin-left: 16rem;
   }
 }
-
-.#{$prefix}-ce-demo-devenv--with-rail .#{$prefix}-ce-demo-devenv--container {
-  margin-left: $spacing-09;
-}
-
-.#{$prefix}-ce-demo-devenv--rail-expanded
-  .#{$prefix}-ce-demo-devenv--container {
-  @include breakpoint('lg') {
-    margin-left: 16rem;
-  }
-}
-
-.#{$prefix}-ce-demo-devenv--with-side-nav-for-header
-  .#{$prefix}-ce-demo-devenv--container {
-  @include breakpoint('lg') {
-    margin-left: 0;
-  }
-}

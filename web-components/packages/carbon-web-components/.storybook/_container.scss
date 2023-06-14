@@ -7,7 +7,10 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '@carbon/styles' as *;
+@use '@carbon/styles' as * with (
+  $use-flexbox-grid: true
+);
+
 @include reset();
 
 *,
@@ -53,19 +56,7 @@ body {
 }
 
 .#{$prefix}--content.#{$prefix}-ce-demo-devenv--ui-shell-content {
-  background-color: $layer-01;
   margin: 0;
   height: 100vh;
   width: 100%;
-
-  h2 {
-    font-weight: 800;
-    /* stylelint-disable declaration-property-unit-whitelist */
-    margin: 30px 0;
-    font-size: 20px;
-  }
-
-  p {
-    line-height: 20px;
-  }
 }

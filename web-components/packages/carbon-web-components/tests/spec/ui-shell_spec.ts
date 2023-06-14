@@ -40,7 +40,6 @@ const headerMenuButtonTemplate = (props?) => {
     buttonLabelInactive,
     collapseMode,
     disabled,
-    usageMode,
   } = props ?? {};
   return html`
     <cds-header-menu-button
@@ -48,8 +47,7 @@ const headerMenuButtonTemplate = (props?) => {
       button-label-active="${ifDefined(buttonLabelActive)}"
       button-label-inactive="${ifDefined(buttonLabelInactive)}"
       collapse-mode="${ifDefined(collapseMode)}"
-      ?disabled="${disabled}"
-      usage-mode="${ifDefined(usageMode)}">
+      ?disabled="${disabled}">
     </cds-header-menu-button>
   `;
 };
@@ -440,22 +438,6 @@ describe('ui-shell', function () {
           SIDE_NAV_COLLAPSE_MODE.RAIL
         );
         expect((menuButton as BXSideNavMenuButton).active).toBe(true);
-      });
-
-      it('should propagate usage mode to header menu button', async function () {
-        render(
-          sideNavTemplate({
-            usageMode: SIDE_NAV_USAGE_MODE.HEADER_NAV,
-          }),
-          document.body
-        );
-        await Promise.resolve();
-        const menuButton = document.body.querySelector(
-          'cds-header-menu-button'
-        );
-        expect((menuButton as BXSideNavMenuButton).usageMode).toBe(
-          SIDE_NAV_USAGE_MODE.HEADER_NAV
-        );
       });
     });
   });

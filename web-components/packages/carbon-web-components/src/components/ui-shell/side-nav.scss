@@ -13,45 +13,8 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/components/ui-shell/side-nav';
 
-:host(#{$prefix}-side-nav) {
-  @extend .#{$prefix}--side-nav;
-  @extend .#{$prefix}--side-nav--ux;
-  @extend .#{$prefix}--side-nav__navigation;
-
-  top: 0;
-}
-
-:host(#{$prefix}-side-nav[collapse-mode='fixed']) {
-  // TODO: Consider making `@extend .#{$prefix}--side-nav--fixed` work, possibly caused by `:not()` styles
-  width: 16rem;
-}
-
-:host(#{$prefix}-side-nav[collapse-mode='rail']) {
-  // TODO: audit
-  width: $spacing-09;
-
-  &:hover {
-    // TODO: audit
-    width: 16rem;
-  }
-}
-
-:host(#{$prefix}-side-nav[expanded]),
-:host(#{$prefix}-side-nav[collapse-mode][expanded]) {
-  @extend .#{$prefix}--side-nav--expanded;
-}
-
-:host(#{$prefix}-side-nav[usage-mode='header-nav']),
-:host(#{$prefix}-side-nav[collapse-mode][usage-mode='header-nav']) {
-  width: 0;
-}
-
-:host(#{$prefix}-side-nav[expanded][usage-mode='header-nav']),
-:host(#{$prefix}-side-nav[collapse-mode][expanded][usage-mode='header-nav']) {
-  @include breakpoint-down('lg') {
-    // TODO: audit
-    width: 16rem;
-  }
+:host(#{$prefix}-side-nav[expanded]) ::slotted(#{$prefix}-side-nav-items) {
+  overflow-y: auto;
 }
 
 :host(#{$prefix}-side-nav-items) {
@@ -74,6 +37,10 @@ $css--plex: true !default;
       display: none;
     }
   }
+
+  &[large] {
+    @extend .#{$prefix}--side-nav__item--large;
+  }
 }
 
 :host(#{$prefix}-side-nav-divider) {
@@ -86,12 +53,14 @@ $css--plex: true !default;
   @extend .#{$prefix}--side-nav__item;
 
   display: block;
-  outline: none;
-  width: auto;
-  height: auto;
 
   .#{$prefix}--side-nav__icon[hidden] {
     display: none;
+  }
+
+  .#{$prefix}--side-nav__menu {
+    margin: 0;
+    padding: 0;
   }
 }
 
@@ -99,7 +68,6 @@ $css--plex: true !default;
   @extend .#{$prefix}--side-nav__item--active;
 
   // TODO: audit
-  background-color: $background-selected;
   color: $text-primary;
   position: relative;
 
@@ -128,6 +96,10 @@ $css--plex: true !default;
   @extend .#{$prefix}--side-nav__item--icon;
 }
 
+:host(#{$prefix}-side-nav-menu[large]) {
+  @extend .#{$prefix}--side-nav__item--large;
+}
+
 :host(#{$prefix}-side-nav-menu-item) {
   @extend .#{$prefix}--side-nav__menu-item;
 
@@ -137,18 +109,16 @@ $css--plex: true !default;
   height: auto;
 
   a.#{$prefix}--side-nav__link {
-    // TODO: audit
-    height: $spacing-05;
-    min-height: $spacing-05;
-    padding-left: $spacing-05;
+    height: $spacing-07;
+    min-height: $spacing-07;
+    padding-left: $spacing-07;
     font-weight: 400;
   }
 }
 
 :host(#{$prefix}-side-nav-menu-item[parent-has-icon])
   a.#{$prefix}--side-nav__link {
-  // TODO: audit
-  padding-left: rem(72px);
+  padding-left: 4.5rem;
 }
 
 :host(#{$prefix}-side-nav-item) .#{$prefix}--side-nav__link:hover,
@@ -157,4 +127,12 @@ $css--plex: true !default;
   // TODO: audit
   background-color: $background-hover;
   color: $text-primary;
+}
+
+:host(#{$prefix}-header-side-nav-items) {
+  @extend .#{$prefix}--side-nav__header-navigation;
+
+  &[has-divider] {
+    @extend .#{$prefix}--side-nav__header-divider;
+  }
 }
