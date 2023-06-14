@@ -50,6 +50,8 @@ const files = [
   'scss/components/code-snippet/_index.scss',
   'scss/components/combo-box/_combo-box.scss',
   'scss/components/combo-box/_index.scss',
+  'scss/components/contained-list/_contained-list.scss',
+  'scss/components/contained-list/_index.scss',
   'scss/components/content-switcher/_content-switcher.scss',
   'scss/components/content-switcher/_index.scss',
   'scss/components/copy-button/_copy-button.scss',
