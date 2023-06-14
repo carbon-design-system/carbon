@@ -40,7 +40,6 @@ import {
   Notification,
   Fade,
   Switcher as SwitcherIcon,
-  Close,
 } from '@carbon/icons-react';
 import mdx from './UIShell.mdx';
 
@@ -615,11 +614,7 @@ export const HeaderBaseWActionsAndSwitcher = (args) => (
               isActive={isSideNavExpanded}
               onClick={onClickSideNavExpand}
               tooltipAlignment="end">
-              {isSideNavExpanded ? (
-                <Close size={20} />
-              ) : (
-                <SwitcherIcon size={20} />
-              )}
+              <SwitcherIcon size={20} />
             </HeaderGlobalAction>
           </HeaderGlobalBar>
           <HeaderPanel

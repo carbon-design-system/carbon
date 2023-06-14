@@ -10,6 +10,8 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
+import { useWindowEvent } from '../../internal/useEvent';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 
 const HeaderPanel = React.forwardRef(function HeaderPanel(
   {
@@ -23,6 +25,8 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
   ref
 ) {
   const prefix = usePrefix();
+  const headerPanelReference = useRef(null);
+  const headerPanelRef = useMergedRefs([headerPanelReference, ref]);
 
   const controlled = useRef(expanded !== undefined).current;
   const [expandedState, setExpandedState] = useState(expanded);
@@ -52,8 +56,26 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
     };
   }
 
+  useWindowEvent('click', () => {
+    const focusedElement = document.activeElement;
+    if (
+      children.type.__docgenInfo.displayName === 'Switcher' &&
+      !focusedElement?.closest(`.${prefix}--header-panel--expanded`) &&
+      !focusedElement?.closest(`.${prefix}--header__action`) &&
+      !headerPanelRef?.current?.classList.contains(`${prefix}--switcher`) &&
+      expanded
+    ) {
+      setExpandedState(false);
+      onHeaderPanelFocus();
+    }
+  });
+
   return (
-    <div {...other} className={className} ref={ref} {...eventHandlers}>
+    <div
+      {...other}
+      className={className}
+      ref={headerPanelRef}
+      {...eventHandlers}>
       {children}
     </div>
   );
