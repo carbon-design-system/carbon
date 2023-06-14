@@ -7,18 +7,13 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, {
-  ElementType,
-  HTMLAttributes,
-  ReactNode,
-  WeakValidationMap,
-} from 'react';
+import React, { ElementType, HTMLAttributes, ReactNode } from 'react';
 
 import { usePrefix } from '../../internal/usePrefix';
 
-const sizes = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
+const sizes: Size[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
 
-const densities = ['condensed', 'normal'];
+const densities: Density[] = ['condensed', 'normal'];
 
 /**
  * Density of components within this layout
@@ -103,13 +98,13 @@ Layout.propTypes = {
   /**
    * Specify the desired density of components within this layout
    */
-  density: PropTypes.oneOf(densities),
+  density: PropTypes.oneOf<Density>(densities),
 
   /**
    * Specify the desired size of components within this layout
    */
-  size: PropTypes.oneOf(sizes),
-} as WeakValidationMap<LayoutProps & React.RefAttributes<React.ReactNode>>;
+  size: PropTypes.oneOf<Size>(sizes),
+};
 
 export interface LayoutConstraintProps extends HTMLAttributes<HTMLElement> {
   /**
@@ -136,16 +131,16 @@ export interface LayoutConstraintProps extends HTMLAttributes<HTMLElement> {
     min?: Density | null;
     default?: Density | null;
     max?: Density | null;
-  };
+  } | null;
 
   /**
    * Specify the desired layout size constraints of this element's children
    */
   size?: {
-    min?: Size;
-    default?: Size;
-    max?: Size;
-  };
+    min?: Size | null;
+    default?: Size | null;
+    max?: Size | null;
+  } | null;
 }
 
 const LayoutConstraint = React.forwardRef<ReactNode, LayoutConstraintProps>(
@@ -204,21 +199,19 @@ LayoutConstraint.propTypes = {
    * Specify the desired layout density constraints of this element's children
    */
   density: PropTypes.shape({
-    min: PropTypes.oneOf(['condensed', 'normal']),
-    default: PropTypes.oneOf(['condensed', 'normal']),
-    max: PropTypes.oneOf(['condensed', 'normal']),
+    min: PropTypes.oneOf<Density>(densities),
+    default: PropTypes.oneOf<Density>(densities),
+    max: PropTypes.oneOf<Density>(densities),
   }),
 
   /**
    * Specify the desired layout size constraints of this element's children
    */
   size: PropTypes.shape({
-    min: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', '2xl']),
-    default: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', '2xl']),
-    max: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', '2xl']),
+    min: PropTypes.oneOf<Size>(sizes),
+    default: PropTypes.oneOf<Size>(sizes),
+    max: PropTypes.oneOf<Size>(sizes),
   }),
-} as WeakValidationMap<
-  LayoutConstraintProps & React.RefAttributes<React.ReactNode>
->;
+};
 
 export { Layout, LayoutConstraint };
