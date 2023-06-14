@@ -315,7 +315,8 @@
 
   /* Tertiary action button when not inline (toast) */
   .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary {
-    padding: 0 $spacing-05;
+    padding-right: $spacing-05;
+    padding-left: $spacing-05;
     margin-bottom: $spacing-05;
 
     // Button should be left aligned with text.
