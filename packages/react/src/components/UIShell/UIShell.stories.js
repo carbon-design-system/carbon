@@ -406,7 +406,8 @@ export const HeaderBaseWNavigationActionsAndSideNav = () => (
           <SideNav
             aria-label="Side navigation"
             expanded={isSideNavExpanded}
-            onSideNavBlur={onClickSideNavExpand}>
+            onSideNavBlur={onClickSideNavExpand}
+            href="#main-content">
             <SideNavItems>
               <HeaderSideNavItems hasDivider={true}>
                 <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
@@ -613,17 +614,19 @@ export const HeaderBaseWActionsAndSwitcher = (args) => (
               aria-expanded={isSideNavExpanded}
               isActive={isSideNavExpanded}
               onClick={onClickSideNavExpand}
-              tooltipAlignment="end">
+              tooltipAlignment="end"
+              id="switcher-button">
               <SwitcherIcon size={20} />
             </HeaderGlobalAction>
           </HeaderGlobalBar>
           <HeaderPanel
             expanded={isSideNavExpanded}
-            onHeaderPanelFocus={onClickSideNavExpand}>
+            onHeaderPanelFocus={onClickSideNavExpand}
+            href="#switcher-button">
             <Switcher
               aria-label="Switcher Container"
               expanded={isSideNavExpanded}>
-              <SwitcherItem isSelected aria-label="Link 1" href="#">
+              <SwitcherItem aria-label="Link 1" href="#">
                 Link 1
               </SwitcherItem>
               <SwitcherDivider />

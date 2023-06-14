@@ -20,6 +20,7 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
     expanded,
     addFocusListeners = true,
     onHeaderPanelFocus,
+    href,
     ...other
   },
   ref
@@ -52,6 +53,9 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
       if (match(event, keys.Escape)) {
         setExpandedState(false);
         onHeaderPanelFocus();
+        if (href) {
+          window.location.href = href;
+        }
       }
     };
   }
@@ -101,6 +105,12 @@ HeaderPanel.propTypes = {
    * Specify whether the panel is expanded
    */
   expanded: PropTypes.bool,
+
+  /**
+   * Provide the `href` to the id of the element on your package that could
+   * be target.
+   */
+  href: PropTypes.string,
 
   /**
    * An optional listener that is called a callback to collapse the HeaderPanel
