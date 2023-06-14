@@ -57,7 +57,7 @@
     position: absolute;
     width: 200%;
     height: 100%;
-    animation: 3000ms ease-in-out skeleton-circle infinite;
+    animation: 3000ms ease-in-out skeleton infinite;
     background: $skeleton-element;
     content: '';
     will-change: transform-origin, transform, opacity;
