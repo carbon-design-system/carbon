@@ -1558,7 +1558,7 @@ Map {
       "invalidText": "",
       "onChange": [Function],
       "onClick": [Function],
-      "size": "",
+      "size": undefined,
     },
     "propTypes": Object {
       "className": Object {
@@ -8431,7 +8431,7 @@ Map {
         "invalidText": "",
         "onChange": [Function],
         "onClick": [Function],
-        "size": "",
+        "size": undefined,
       },
       "propTypes": Object {
         "className": Object {
