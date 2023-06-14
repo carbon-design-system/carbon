@@ -33,7 +33,7 @@ const ToggleSkeleton: React.FC<ToggleSkeletonProps> = ({
       <div className={`${prefix}--toggle__skeleton-rectangle`} />
     </div>
   );
-}
+};
 
 ToggleSkeleton.propTypes = {
   'aria-label': PropTypes.string,
