@@ -832,7 +832,8 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/1190770?v=4",
       "profile": "https://haakon.dev/",
       "contributions": [
-        "code"
+        "code",
+        "doc"
       ]
     },
     {
@@ -1145,6 +1146,15 @@
       "name": "kubijo",
       "avatar_url": "https://avatars.githubusercontent.com/u/11244314?v=4",
       "profile": "https://github.com/kubijo",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "SunnyJohal",
+      "name": "Sunny Johal",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19283532?v=4",
+      "profile": "https://github.com/SunnyJohal",
       "contributions": [
         "code"
       ]

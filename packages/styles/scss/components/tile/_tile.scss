@@ -16,6 +16,10 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/visually-hidden' as *;
+@use '../../utilities/layout';
+
+// padding + icon size (1rem) + padding
+$-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
 /// Tile styles
 /// @access public
@@ -26,11 +30,13 @@
   }
 
   .#{$prefix}--tile {
+    @include layout.use('density', $default: 'normal');
+
     position: relative;
     display: block;
     min-width: 8rem;
     min-height: 4rem;
-    padding: $spacing-05;
+    padding: layout.density('padding-inline');
     background-color: $layer;
     outline: 2px solid transparent;
     outline-offset: -2px;
@@ -99,7 +105,6 @@
   .#{$prefix}--tile--clickable.#{$prefix}--link--disabled,
   .#{$prefix}--tile--clickable:hover.#{$prefix}--link--disabled {
     display: block;
-    padding: $spacing-05;
     background-color: $layer;
     color: $text-disabled;
     cursor: not-allowed;
@@ -116,8 +121,8 @@
   .#{$prefix}--tile--clickable.#{$prefix}--link--disabled
     .#{$prefix}--tile--disabled-icon {
     position: absolute;
-    right: 1rem;
-    bottom: 1rem;
+    right: layout.density('padding-inline');
+    bottom: layout.density('padding-inline');
   }
 
   .#{$prefix}--tile--clickable .#{$prefix}--tile--icon {
@@ -135,8 +140,8 @@
   }
 
   .#{$prefix}--tile--selectable {
-    padding-right: $spacing-09;
     border: 1px solid transparent;
+    padding-inline-end: $-icon-container-size;
 
     @if (
       enabled('enable-experimental-tile-contrast') or
@@ -148,8 +153,8 @@
 
   .#{$prefix}--tile__checkmark {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: layout.density('padding-inline');
+    right: layout.density('padding-inline');
     height: 1rem;
     border: none;
     background: transparent;
@@ -175,8 +180,8 @@
     right: 0;
     bottom: 0;
     display: flex;
-    width: $spacing-09;
-    height: $spacing-09;
+    width: $-icon-container-size;
+    height: $-icon-container-size;
     align-items: center;
     justify-content: center;
 
@@ -205,8 +210,8 @@
     right: 0;
     bottom: 0;
     display: flex;
-    width: $spacing-09;
-    height: $spacing-09;
+    width: $-icon-container-size;
+    height: $-icon-container-size;
     align-items: center;
     justify-content: center;
 

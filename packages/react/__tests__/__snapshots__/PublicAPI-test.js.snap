@@ -1355,7 +1355,6 @@ Map {
   "ComposedModal" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "onKeyDown": [Function],
       "selectorPrimaryFocus": "[data-modal-primary-focus]",
     },
     "propTypes": Object {
@@ -3010,6 +3009,9 @@ Map {
       "id": Object {
         "type": "string",
       },
+      "isExpanded": Object {
+        "type": "bool",
+      },
       "labelText": Object {
         "isRequired": true,
         "type": "node",
@@ -3982,8 +3984,9 @@ Map {
   "HeaderPanel" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
-      "aria-label": [Function],
-      "aria-labelledby": [Function],
+      "children": Object {
+        "type": "node",
+      },
       "className": Object {
         "type": "string",
       },
@@ -4839,8 +4842,6 @@ Map {
   "ModalHeader" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "buttonOnClick": [Function],
-      "closeModal": [Function],
       "iconDescription": "Close",
     },
     "propTypes": Object {
@@ -6542,6 +6543,9 @@ Map {
       },
       "id": Object {
         "type": "string",
+      },
+      "isExpanded": Object {
+        "type": "bool",
       },
       "labelText": Object {
         "isRequired": true,

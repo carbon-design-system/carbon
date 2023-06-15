@@ -27,6 +27,27 @@ describe('ExpandableSearch', () => {
       );
     });
 
+    it('is expanded by default if expanded prop is set', () => {
+      const { container } = render(
+        <ExpandableSearch isExpanded labelText="test-search" />
+      );
+
+      // There is not a reliable way to test for expansion other than by class.
+      // We can not use .toBeVisible on the input because the input is hidden
+      // via width, not via `display: none` or similar.
+      expect(container.firstChild).toHaveClass(`${prefix}--search--expanded`);
+    });
+
+    it('is renders a defaultValue', () => {
+      render(
+        <ExpandableSearch
+          defaultValue="This is default text"
+          labelText="test-search"
+        />
+      );
+      expect(screen.getByRole('searchbox')).toHaveValue('This is default text');
+    });
+
     it('expands on click', async () => {
       const { container } = render(
         <ExpandableSearch labelText="test-search" />
