@@ -11,10 +11,29 @@
 @use './config' as *;
 @use './utilities/custom-property';
 @use './utilities/convert' as *;
-@use './utilities/layout' as *;
+@use './spacing' as *;
+
+$layout-tokens: (
+  size: (
+    height: (
+      xs: rem(24px),
+      sm: rem(32px),
+      md: rem(40px),
+      lg: rem(48px),
+      xl: rem(64px),
+      2xl: rem(80px),
+    ),
+  ),
+  density: (
+    padding-inline: (
+      condensed: $spacing-03,
+      normal: $spacing-05,
+    ),
+  ),
+);
 
 :root {
-  @each $group, $properties in $tokens {
+  @each $group, $properties in $layout-tokens {
     @each $property, $steps in $properties {
       @each $step, $value in $steps {
         @include custom-property.declaration(
@@ -39,7 +58,7 @@
   }
 }
 
-@each $group, $properties in $tokens {
+@each $group, $properties in $layout-tokens {
   @each $property, $steps in $properties {
     @each $step, $value in $steps {
       .#{$prefix}--layout--#{$group}-#{$step} {

@@ -8,28 +8,8 @@
 @use 'sass:map';
 
 @use '../config';
-@use '../spacing' as *;
+@use '../layout' as *;
 @use './custom-property';
-@use './convert' as *;
-
-$tokens: (
-  size: (
-    height: (
-      xs: rem(24px),
-      sm: rem(32px),
-      md: rem(40px),
-      lg: rem(48px),
-      xl: rem(64px),
-      2xl: rem(80px),
-    ),
-  ),
-  density: (
-    padding-inline: (
-      condensed: $spacing-03,
-      normal: $spacing-05,
-    ),
-  ),
-);
 
 /// Enables the use of contextual layout tokens within a component. This mixin should be
 /// included on the outermost selector of the component.
@@ -41,7 +21,7 @@ $tokens: (
 /// @group utilities
 /// @access public
 @mixin use($group, $default, $min: null, $max: null) {
-  $properties: map.get($tokens, $group);
+  $properties: map.get($layout-tokens, $group);
 
   @each $property, $steps in $properties {
     $minValue: custom-property.get-var('layout-#{$group}-#{$property}-min');
@@ -106,7 +86,7 @@ $tokens: (
 }
 
 /// Internal base function for retrieving a property from a layout group.
-/// @param {String} $group - The group name as defined in the $tokens
+/// @param {String} $group - The group name as defined in the $layout-tokens
 /// @param {String} $property - The property name
 /// @example @include -group('size', $property)
 /// @group utilities
