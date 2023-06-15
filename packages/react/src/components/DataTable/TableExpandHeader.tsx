@@ -5,13 +5,66 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import cx from 'classnames';
-import PropTypes from 'prop-types';
-import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
-import deprecate from '../../prop-types/deprecate';
-import React from 'react';
 import { ChevronRight } from '@carbon/icons-react';
+import cx from 'classnames';
+import PropTypes, { Validator } from 'prop-types';
+import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
+import deprecate from '../../prop-types/deprecate';
+import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
+import { ReactAttr } from '../../types/common';
+
+type TableExpandHeaderPropsBase = {
+  /**
+   * Specify the string read by a voice reader when the expand trigger is
+   * focused
+   */
+  ariaLabel?: string;
+  /**
+   * @deprecated The enableExpando prop is being replaced by `enableToggle`
+   */
+  enableExpando?: false | undefined;
+  /**
+   * Specify whether an expand all button should be displayed
+   */
+  enableToggle?: false | undefined;
+  /**
+   * The description of the chevron right icon, to be put in its SVG `<title>` element.
+   */
+  expandIconDescription?: string;
+  /**
+   * Specify whether this row is expanded or not. This helps coordinate data
+   * attributes so that `TableExpandRow` and `TableExpandedRow` work together
+   */
+  isExpanded?: boolean;
+  /**
+   * Hook for when a listener initiates a request to expand the given row
+   */
+  onExpand?(event: React.MouseEvent<HTMLButtonElement>): void;
+} & ReactAttr<HTMLTableCellElement>;
+
+type TableExpandHeaderPropsWithToggle = Omit<
+  TableExpandHeaderPropsBase,
+  'ariaLabel' | 'enableToggle' | 'onExpand'
+> & {
+  enableToggle: true;
+  ariaLabel: string;
+  onExpand(event: React.MouseEvent<HTMLButtonElement>): void;
+};
+
+type TableExpandHeaderPropsWithExpando = Omit<
+  TableExpandHeaderPropsBase,
+  'ariaLabel' | 'enableExpando' | 'onExpand'
+> & {
+  enableExpando: true;
+  ariaLabel: string;
+  onExpand(event: React.MouseEvent<HTMLButtonElement>): void;
+};
+
+export type TableExpandHeaderProps =
+  | TableExpandHeaderPropsWithToggle
+  | TableExpandHeaderPropsWithExpando
+  | TableExpandHeaderPropsBase;
 
 const TableExpandHeader = ({
   ariaLabel,
@@ -24,7 +77,7 @@ const TableExpandHeader = ({
   expandIconDescription,
   children,
   ...rest
-}) => {
+}: TableExpandHeaderProps) => {
   const prefix = usePrefix();
   const className = cx(`${prefix}--table-expand`, headerClassName);
   const previousValue = isExpanded ? 'collapsed' : undefined;
@@ -60,8 +113,14 @@ TableExpandHeader.propTypes = {
    * focused
    */
   ariaLabel: PropTypes.oneOfType([
-    requiredIfGivenPropIsTruthy('enableExpando', PropTypes.string),
-    requiredIfGivenPropIsTruthy('enableToggle', PropTypes.string),
+    requiredIfGivenPropIsTruthy(
+      'enableExpando',
+      PropTypes.string
+    ) as Validator<any>,
+    requiredIfGivenPropIsTruthy(
+      'enableToggle',
+      PropTypes.string
+    ) as Validator<any>,
   ]),
 
   children: PropTypes.node,
@@ -101,8 +160,14 @@ TableExpandHeader.propTypes = {
    * Hook for when a listener initiates a request to expand the given row
    */
   onExpand: PropTypes.oneOfType([
-    requiredIfGivenPropIsTruthy('enableExpando', PropTypes.func),
-    requiredIfGivenPropIsTruthy('enableToggle', PropTypes.func),
+    requiredIfGivenPropIsTruthy(
+      'enableExpando',
+      PropTypes.func
+    ) as Validator<any>,
+    requiredIfGivenPropIsTruthy(
+      'enableToggle',
+      PropTypes.func
+    ) as Validator<any>,
   ]),
 };
 
