@@ -24,7 +24,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
     >
       <table
         aria-labelledby="tc-149-title"
-        class="cds--data-table"
+        class="cds--data-table cds--data-table--lg"
       >
         <thead>
           <tr>
@@ -193,7 +193,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
     >
       <table
         aria-labelledby="tc-143-title"
-        class="cds--data-table"
+        class="cds--data-table cds--data-table--lg"
       >
         <thead>
           <tr>
@@ -608,7 +608,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
     >
       <table
         aria-labelledby="tc-67-title"
-        class="cds--data-table"
+        class="cds--data-table cds--data-table--lg"
       >
         <thead>
           <tr>

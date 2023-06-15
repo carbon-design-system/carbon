@@ -83,7 +83,11 @@ export function Toggle({
               // the keyboard event which already calls handleClick. if we wouldn't catch this, the
               // onClick and onToggle functions would be called twice whenever the user activates the
               // toggle by keyboard and props['aria-labelledby'] is passed.
-              if (buttonElement.current && e.target !== buttonElement.current) {
+              if (
+                buttonElement.current &&
+                e.target !== buttonElement.current &&
+                !disabled
+              ) {
                 handleClick(e);
                 buttonElement.current.focus();
               }

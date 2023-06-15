@@ -579,7 +579,7 @@ export const HeaderBaseWActionsAndRightPanel = () => (
         <SwitcherIcon size={20} />
       </HeaderGlobalAction>
     </HeaderGlobalBar>
-    <HeaderPanel aria-label="Header Panel" expanded />
+    <HeaderPanel expanded />
   </Header>
 );
 
@@ -608,7 +608,7 @@ export const HeaderBaseWActionsAndSwitcher = () => (
         <SwitcherIcon size={20} />
       </HeaderGlobalAction>
     </HeaderGlobalBar>
-    <HeaderPanel aria-label="Header Panel" expanded>
+    <HeaderPanel expanded>
       <Switcher aria-label="Switcher Container">
         <SwitcherItem isSelected aria-label="Link 1" href="#">
           Link 1
