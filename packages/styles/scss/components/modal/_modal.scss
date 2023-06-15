@@ -5,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../button';
 @use '../../config' as *;
 @use '../../breakpoint' as *;
 @use '../../motion' as *;
@@ -16,8 +17,6 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/z-index' as *;
-
-@use '../button';
 
 /// Modal styles
 /// @access public

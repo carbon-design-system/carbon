@@ -5,10 +5,14 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../radio-button';
+@use '../checkbox';
 @use '../../config' as *;
+@use '../../layer' as *;
 @use '../../theme';
 @use '../../utilities/box-shadow' as *;
 @use '../../utilities/button-reset';
+@use '../../utilities/component-reset';
 @use '../../utilities/custom-property';
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/focus-outline' as *;
@@ -117,6 +121,8 @@ $popover-caret-height: custom-property.get-var(
 
   // Popover content
   .#{$prefix}--popover-content {
+    @include component-reset.reset;
+
     position: absolute;
     z-index: z('floating');
     display: none;

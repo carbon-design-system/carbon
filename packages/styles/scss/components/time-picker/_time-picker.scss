@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../text-input';
+@use '../select';
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
