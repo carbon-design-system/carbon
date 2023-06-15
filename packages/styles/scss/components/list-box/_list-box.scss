@@ -704,8 +704,8 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__menu-item--highlighted {
-    border-color: transparent;
-    background-color: $layer-selected;
+    @include focus-outline('outline');
+
     color: $text-primary;
   }
 
