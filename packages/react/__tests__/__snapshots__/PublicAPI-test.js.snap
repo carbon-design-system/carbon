@@ -3106,15 +3106,6 @@ Map {
   },
   "ExpandableTile" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "expanded": false,
-      "onClick": [Function],
-      "tabIndex": 0,
-      "tileCollapsedIconText": "Interact to expand Tile",
-      "tileExpandedIconText": "Interact to collapse Tile",
-      "tileMaxHeight": 0,
-      "tilePadding": 0,
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
