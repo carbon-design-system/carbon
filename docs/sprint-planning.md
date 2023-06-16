@@ -85,6 +85,14 @@ devs.
   - [ ] Assignees: Check who is next on
         [release rotation](https://github.com/carbon-design-system/carbon/wiki/Release-rotation),
         should be 2 devs
+- [ ] Add draft "Dev Sprint Planning" issue:
+  - [ ] Area: Support
+  - [ ] Effort: 1
+  - [ ] Role: Dev
+  - [ ] Status: Backlog
+  - [ ] Assignee: Check who is next on
+        [sprint planning rotation](https://github.com/carbon-design-system/carbon/wiki/Release-rotation),
+        should be 1 dev
 - [ ] Add draft "Developer PR Reviews" issue:
   - [ ] Area: Support
   - [ ] Effort: 5x number of developers working in the upcoming sprint, adjust
