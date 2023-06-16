@@ -10,7 +10,6 @@ import React, { ForwardedRef, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
 import { ForwardRefReturn, ReactAttr } from '../../types/common';
-import { Layer } from '../Layer';
 
 function useIsTruncated(ref) {
   const [isTruncated, setIsTruncated] = useState(false);
@@ -70,14 +69,11 @@ const ListBoxMenuItem = React.forwardRef<HTMLDivElement, ListBoxMenuItemProps>(
         className={className}
         title={isTruncated ? title : undefined}
         tabIndex={-1}>
-        {/* @ts-ignore Layer is not typed yet*/}
-        <Layer>
-          <div
-            className={`${prefix}--list-box__menu-item__option`}
-            ref={forwardedRef?.menuItemOptionRef || ref}>
-            {children}
-          </div>
-        </Layer>
+        <div
+          className={`${prefix}--list-box__menu-item__option`}
+          ref={forwardedRef?.menuItemOptionRef || ref}>
+          {children}
+        </div>
       </div>
     );
   }
