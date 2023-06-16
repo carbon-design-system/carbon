@@ -4,9 +4,5 @@ storybook-static
 # Generated metadata
 react-docgen.json
 
-# Cypress artifacts
-cypress/videos
-cypress/screenshots
-
 # Typescript
 tsconfig.tsbuildinfo
