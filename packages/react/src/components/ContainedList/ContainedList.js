@@ -94,7 +94,15 @@ function ContainedList({
         </LayoutConstraint>
       </div>
       {children && (
-        <ul aria-labelledby={labelId}>
+        /**
+         * Webkit removes implicit "list" semantics when "list-style-type: none" is set.
+         * Explicitly setting the "list" role ensures assistive technology in webkit
+         * browsers correctly announce the semantics.
+         *
+         * Ref https://bugs.webkit.org/show_bug.cgi?id=170179#c1
+         */
+        // eslint-disable-next-line jsx-a11y/no-redundant-roles
+        <ul role="list" aria-labelledby={labelId}>
           {isActionSearch ? filteredChildren : renderedChildren}
         </ul>
       )}
