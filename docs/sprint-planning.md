@@ -1,3 +1,20 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Dev Sprint Plannning](#dev-sprint-plannning)
+  - [Process](#process)
+    - [Dev Sprint Planning Meeting](#dev-sprint-planning-meeting)
+      - [Previous to meeting](#previous-to-meeting)
+      - [In meeting](#in-meeting)
+    - [System Squad Sprint Planning Meeting](#system-squad-sprint-planning-meeting)
+      - [Previous to meeting](#previous-to-meeting-1)
+      - [In meeting](#in-meeting-1)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Overview
 
 Sprint Planning is a ritual that happens once a sprint during the second week of
