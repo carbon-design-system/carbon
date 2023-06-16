@@ -242,6 +242,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
   <tr>
     <td align="center"><a href="http://www.steveblackonline.com/"><img src="https://avatars.githubusercontent.com/u/7853451?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Steven Black</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=sjbeatle" title="Code">💻</a> <a href="#a11y-sjbeatle" title="Accessibility">️️️️♿️</a></td>
     <td align="center"><a href="https://github.com/mrkjdy"><img src="https://avatars.githubusercontent.com/u/32761859?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mark Judy</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=mrkjdy" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/anton-tsymuk-viacomcbs"><img src="https://avatars.githubusercontent.com/u/112623876?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Anton Tsymuk</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=anton-tsymuk-viacomcbs" title="Code">💻</a></td>
   </tr>
 </table>
 
