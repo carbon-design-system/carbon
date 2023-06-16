@@ -397,6 +397,16 @@ Map {
     },
     "render": [Function],
   },
+  "ButtonKinds" => Object {
+    "0": "primary",
+    "1": "secondary",
+    "2": "danger",
+    "3": "ghost",
+    "4": "danger--primary",
+    "5": "danger--ghost",
+    "6": "danger--tertiary",
+    "7": "tertiary",
+  },
   "ButtonSet" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
@@ -411,6 +421,13 @@ Map {
       },
     },
     "render": [Function],
+  },
+  "ButtonSizes" => Object {
+    "0": "sm",
+    "1": "md",
+    "2": "lg",
+    "3": "xl",
+    "4": "2xl",
   },
   "ButtonSkeleton" => Object {
     "propTypes": Object {
@@ -436,6 +453,17 @@ Map {
         "type": "bool",
       },
     },
+  },
+  "ButtonTooltipAlignments" => Object {
+    "0": "start",
+    "1": "center",
+    "2": "end",
+  },
+  "ButtonTooltipPositions" => Object {
+    "0": "top",
+    "1": "right",
+    "2": "bottom",
+    "3": "left",
   },
   "Checkbox" => Object {
     "$$typeof": Symbol(react.forward_ref),

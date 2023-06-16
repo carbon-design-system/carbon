@@ -3,7 +3,7 @@ name: Carbon Champions Nomination Reminder
 on:
   schedule:
     # Run every 2nd Wednesday of the month at 09:00AM CT, 02:00PM UTC
-    - cron: '0 14 11-16 * WED'
+    - cron: '0 14 11-16 * 3-3'
 
 jobs:
   post-reminder:
