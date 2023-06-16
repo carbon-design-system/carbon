@@ -8,13 +8,113 @@
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 import classNames from 'classnames';
-import { ButtonKinds } from '../../prop-types/types';
 import { IconButton } from '../IconButton';
 import { composeEventHandlers } from '../../tools/events';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
+import { PolymorphicProps } from '../../types/common';
+import { PopoverAlignment } from '../Popover';
 
-const Button = React.forwardRef(function Button(
+export const ButtonKinds = [
+  'primary',
+  'secondary',
+  'danger',
+  'ghost',
+  'danger--primary',
+  'danger--ghost',
+  'danger--tertiary',
+  'tertiary',
+] as const;
+
+export type ButtonKind = (typeof ButtonKinds)[number];
+
+export const ButtonSizes = ['sm', 'md', 'lg', 'xl', '2xl'] as const;
+
+export type ButtonSize = (typeof ButtonSizes)[number];
+
+export const ButtonTooltipAlignments = ['start', 'center', 'end'] as const;
+
+export type ButtonTooltipAlignment = (typeof ButtonTooltipAlignments)[number];
+
+export const ButtonTooltipPositions = ['top', 'right', 'bottom', 'left'];
+
+export type ButtonTooltipPosition = (typeof ButtonTooltipPositions)[number];
+
+interface ButtonBaseProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * Specify the message read by screen readers for the danger button variant
+   */
+  dangerDescription?: string;
+
+  /**
+   * Specify if the button is an icon-only button
+   */
+  hasIconOnly?: boolean;
+
+  /**
+   * Optionally specify an href for your Button to become an `<a>` element
+   */
+  href?: string;
+
+  /**
+   * If specifying the `renderIcon` prop, provide a description for that icon that can
+   * be read by screen readers
+   */
+  iconDescription?: string;
+
+  /**
+   * Specify whether the Button is expressive, or not
+   */
+  isExpressive?: boolean;
+
+  /**
+   * Specify whether the Button is currently selected. Only applies to the Ghost variant.
+   */
+  isSelected?: boolean;
+
+  /**
+   * Specify the kind of Button you want to create
+   */
+  kind?: ButtonKind;
+
+  /**
+   * Optional prop to allow overriding the icon rendering.
+   * Can be a React component class
+   */
+  renderIcon?: React.ElementType;
+
+  /**
+   * Specify the size of the button, from the following list of sizes:
+   */
+  size?: ButtonSize;
+
+  /**
+   * Specify the alignment of the tooltip to the icon-only button.
+   * Can be one of: start, center, or end.
+   */
+  tooltipAlignment?: ButtonTooltipAlignment;
+
+  /**
+   * Specify the direction of the tooltip for icon-only buttons.
+   * Can be either top, right, bottom, or left.
+   */
+  tooltipPosition?: ButtonTooltipPosition;
+}
+
+export type ButtonProps<T extends React.ElementType> = PolymorphicProps<
+  T,
+  ButtonBaseProps
+>;
+
+export interface ButtonComponent {
+  <T extends React.ElementType>(
+    props: ButtonProps<T>,
+    context?: any
+  ): React.ReactElement<any, any> | null;
+}
+
+const Button = React.forwardRef(function Button<T extends React.ElementType>(
   {
     as,
     children,
@@ -39,13 +139,13 @@ const Button = React.forwardRef(function Button(
     tooltipPosition = 'top',
     type = 'button',
     ...rest
-  },
-  ref
+  }: ButtonProps<T>,
+  ref: React.Ref<unknown>
 ) {
   const tooltipRef = useRef(null);
   const prefix = usePrefix();
 
-  const handleClick = (evt) => {
+  const handleClick = (evt: React.MouseEvent) => {
     // Prevent clicks on the tooltip from triggering the button click event
     if (evt.target === tooltipRef.current) {
       evt.preventDefault();
@@ -85,31 +185,29 @@ const Button = React.forwardRef(function Button(
 
   const dangerButtonVariants = ['danger', 'danger--tertiary', 'danger--ghost'];
 
-  let component = 'button';
+  let component: React.ElementType = 'button';
   const assistiveId = useId('danger-description');
-  let otherProps = {
+  const { 'aria-pressed': ariaPressed } = rest;
+  let otherProps: Partial<ButtonBaseProps> = {
     disabled,
     type,
     'aria-describedby': dangerButtonVariants.includes(kind)
       ? assistiveId
-      : null,
+      : undefined,
     'aria-pressed':
-      rest['aria-pressed'] ??
-      (hasIconOnly && kind === 'ghost' ? isSelected : null),
+      ariaPressed ?? (hasIconOnly && kind === 'ghost' ? isSelected : undefined),
   };
   const anchorProps = {
     href,
   };
 
-  let assistiveText;
+  let assistiveText: JSX.Element | null = null;
   if (dangerButtonVariants.includes(kind)) {
     assistiveText = (
       <span id={assistiveId} className={`${prefix}--visually-hidden`}>
         {dangerDescription}
       </span>
     );
-  } else {
-    assistiveText = null;
   }
 
   if (as) {
@@ -141,7 +239,7 @@ const Button = React.forwardRef(function Button(
   );
 
   if (hasIconOnly) {
-    let align;
+    let align: PopoverAlignment | undefined = undefined;
 
     if (tooltipPosition === 'top' || tooltipPosition === 'bottom') {
       if (tooltipAlignment === 'center') {
@@ -233,7 +331,7 @@ Button.propTypes = {
         'renderIcon property specified without also providing an iconDescription property.'
       );
     }
-    return undefined;
+    return null;
   },
 
   /**
@@ -320,4 +418,4 @@ Button.propTypes = {
   type: PropTypes.oneOf(['button', 'reset', 'submit']),
 };
 
-export default Button;
+export default Button as ButtonComponent;
