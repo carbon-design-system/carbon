@@ -75,7 +75,7 @@ $layout-tokens: (
         );
       }
 
-      .#{$prefix}--layout-constraint--#{$group}---default-#{$step} {
+      .#{$prefix}--layout-constraint--#{$group}__default-#{$step} {
         @include custom-property.declaration(
           'layout-#{$group}-#{$property}',
           custom-property.get-var(
