@@ -9,6 +9,40 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import { ReactAttr } from '../../types/common';
+
+export interface FormGroupProps extends ReactAttr<HTMLFieldSetElement> {
+  /**
+   * Provide the children form elements to be rendered inside of the <fieldset>
+   */
+  children: React.ReactNode;
+  /**
+   * Provide a custom className to be applied to the containing <fieldset> node
+   */
+  className?: string;
+  /**
+   * Specify whether the <FormGroup> is invalid
+   */
+  invalid?: boolean;
+  /**
+   * Provide id for the fieldset <legend> which corresponds to the fieldset
+   * `aria-labelledby`
+   */
+  legendId?: string;
+  /**
+   * Provide the text to be rendered inside of the fieldset <legend>
+   */
+  legendText: React.ReactNode;
+
+  /**
+   * Specify whether the message should be displayed in the <FormGroup>
+   */
+  message?: boolean;
+  /**
+   * Provide the text for the message in the <FormGroup>
+   */
+  messageText?: string;
+}
 
 const FormGroup = ({
   legendId,
@@ -19,7 +53,7 @@ const FormGroup = ({
   message,
   messageText,
   ...rest
-}) => {
+}: FormGroupProps) => {
   const prefix = usePrefix();
 
   const classNamesFieldset = cx(`${prefix}--fieldset`, className);
