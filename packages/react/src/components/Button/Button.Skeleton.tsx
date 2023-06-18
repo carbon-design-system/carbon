@@ -26,7 +26,7 @@ export interface ButtonSkeletonProps extends React.HTMLAttributes<HTMLElement> {
    * For `default` buttons, this prop can remain unspecified or use `default`.
    * In the next major release of Carbon, `default`, `field`, and `small` will be removed
    */
-  size?: 'sm' | 'md' | 'field' | 'lg' | 'xl' | '2xl';
+  size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
   /**
    * Specify whether the Button should be a small variant
@@ -47,7 +47,6 @@ const ButtonSkeleton = ({
     [`${prefix}--skeleton`]: true,
     [`${prefix}--btn`]: true,
     [`${prefix}--btn--sm`]: small || size === 'sm',
-    [`${prefix}--btn--md`]: size === 'field' || size === 'md',
     [`${prefix}--btn--lg`]: size === 'lg',
     [`${prefix}--btn--xl`]: size === 'xl',
     [`${prefix}--btn--2xl`]: size === '2xl',
