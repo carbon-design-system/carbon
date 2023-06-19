@@ -58,7 +58,7 @@ styles from the project or include the styles for a specific component:
 // Bring in all the styles for Carbon
 @use '@carbon/react';
 
-// Preferred: bring in the styles for one component
+// Or bring in the styles for just one component
 @use '@carbon/react/scss/components/button';
 ```
 

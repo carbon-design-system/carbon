@@ -36,7 +36,7 @@ const ComboButton = React.forwardRef(function ComboButton(
     label,
     onClick,
     size = 'lg',
-    tooltipAlign,
+    tooltipAlignment,
     translateWithId: t = defaultTranslateWithId,
     ...rest
   },
@@ -91,7 +91,11 @@ const ComboButton = React.forwardRef(function ComboButton(
   const triggerClasses = classNames(`${prefix}--combo-button__trigger`);
 
   return (
-    <div {...rest} className={containerClasses} ref={ref}>
+    <div
+      {...rest}
+      className={containerClasses}
+      ref={ref}
+      aria-owns={open ? id : null}>
       <div className={primaryActionClasses}>
         <Button
           size={size}
@@ -105,12 +109,12 @@ const ComboButton = React.forwardRef(function ComboButton(
         label={t('carbon.combo-button.additional-actions')}
         size={size}
         disabled={disabled}
-        align={tooltipAlign}
+        align={tooltipAlignment}
         aria-haspopup
         aria-expanded={open}
         onClick={handleTriggerClick}
         onMouseDown={handleTriggerMousedown}
-        aria-owns={open ? id : null}>
+        aria-controls={open ? id : null}>
         <ChevronDown />
       </IconButton>
       <Menu
@@ -163,7 +167,7 @@ ComboButton.propTypes = {
   /**
    * Specify how the trigger tooltip should be aligned.
    */
-  tooltipAlign: PropTypes.oneOf([
+  tooltipAlignment: PropTypes.oneOf([
     'top',
     'top-left',
     'top-right',

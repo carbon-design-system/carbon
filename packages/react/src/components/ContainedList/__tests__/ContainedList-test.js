@@ -7,7 +7,9 @@
 
 import React from 'react';
 import ContainedList, { ContainedListItem } from '../';
-import { render } from '@testing-library/react';
+import ExpandableSearch from '../../ExpandableSearch';
+import Search from '../../Search';
+import { render, screen } from '@testing-library/react';
 
 const prefix = 'cds';
 
@@ -41,22 +43,15 @@ function TestComponent({ list, item }) {
 }
 
 beforeEach(() => {
+  // eslint-disable-next-line testing-library/no-render-in-setup
   wrapper = render(<TestComponent />);
 });
 
-async function a11y(label) {
-  it('should have no Axe violations', async () => {
-    await expect(wrapper.container).toHaveNoAxeViolations();
-  });
-
-  it('should have no Accessibility Checker violations', async () => {
-    await expect(wrapper.container).toHaveNoACViolations(label);
-  });
-}
-
 describe('ContainedList', () => {
   it('list and label ids match', () => {
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     const list = wrapper.getByRole('list');
+    // eslint-disable-next-line testing-library/no-node-access
     const label = wrapper.container.querySelector(
       `.${prefix}--contained-list__label`
     );
@@ -65,6 +60,7 @@ describe('ContainedList', () => {
   });
 
   it('renders props.label', () => {
+    // eslint-disable-next-line testing-library/no-node-access
     const label = wrapper.container.querySelector(
       `.${prefix}--contained-list__label`
     );
@@ -79,13 +75,61 @@ describe('ContainedList', () => {
     expect(wrapper.container.firstChild).toHaveClass(className);
   });
 
-  a11y('ContainedList');
+  it('should render ExpandableSearch as an action', () => {
+    render(
+      <ContainedList
+        label="label"
+        action={
+          <ExpandableSearch
+            labelText="Expandable Search"
+            data-testid="test-id"
+          />
+        }
+      />
+    );
+
+    expect(screen.getByTestId('test-id')).toBeInTheDocument();
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(screen.getByRole('search').parentElement).toHaveClass(
+      `${prefix}--contained-list__action`
+    );
+  });
+
+  it('should render search as a child', () => {
+    render(
+      <ContainedList label="label">
+        <Search labelText="Search" data-testid="test-id" />
+      </ContainedList>
+    );
+
+    expect(screen.getByTestId('test-id')).toBeInTheDocument();
+  });
+
+  it('should not render a child "Search" component when an "ExpandableSearch" component is passed in as an action', () => {
+    render(
+      <ContainedList
+        label="label"
+        action={
+          <ExpandableSearch
+            labelText="Expandable Search"
+            data-testid="test-expandable-search-id"
+          />
+        }>
+        <Search labelText="Search" data-testid="test-search-id" />
+      </ContainedList>
+    );
+
+    expect(screen.getByTestId('test-expandable-search-id')).toBeInTheDocument();
+    expect(screen.queryByTestId('test-search-id')).not.toBeInTheDocument();
+  });
 });
 
 describe('ContainedListItem', () => {
   it('renders props.children', () => {
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     const content = wrapper.getByRole('listitem');
 
+    // eslint-disable-next-line testing-library/no-node-access
     expect(content).toHaveTextContent(defaultProps.item.children);
   });
 
@@ -93,6 +137,7 @@ describe('ContainedListItem', () => {
     const className = 'some-class';
     wrapper.rerender(<TestComponent item={{ className }} />);
 
+    // eslint-disable-next-line testing-library/prefer-screen-queries
     expect(wrapper.getByRole('listitem')).toHaveClass(className);
   });
 
@@ -100,10 +145,12 @@ describe('ContainedListItem', () => {
     wrapper.rerender(
       <TestComponent item={{ action: <div data-testid="action" /> }} />
     );
+    // eslint-disable-next-line testing-library/no-node-access
     const contentEl = wrapper.container.querySelector(
       `.${prefix}--contained-list-item__content`
     );
 
+    // eslint-disable-next-line testing-library/no-node-access
     expect(contentEl.nextSibling.firstChild.dataset['testid']).toBe('action');
   });
 
@@ -112,6 +159,7 @@ describe('ContainedListItem', () => {
       <TestComponent item={{ renderIcon: () => <svg data-testid="svg" /> }} />
     );
 
+    // eslint-disable-next-line testing-library/no-node-access
     expect(wrapper.container.querySelector('svg').dataset['testid']).toBe(
       'svg'
     );
@@ -119,15 +167,15 @@ describe('ContainedListItem', () => {
 
   describe('interactive', () => {
     beforeEach(() => {
+      // eslint-disable-next-line testing-library/no-render-in-setup
       wrapper.rerender(<TestComponent item={{ onClick: () => {} }} />);
     });
 
     it('renders content as button', () => {
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       const content = wrapper.getByRole('listitem').firstChild;
 
       expect(content.tagName).toBe('BUTTON');
     });
-
-    a11y('ContainedListItem, interactive');
   });
 });

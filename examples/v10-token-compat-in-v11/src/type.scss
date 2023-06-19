@@ -1,0 +1,109 @@
+@use '@carbon/react/scss/type';
+
+.type p {
+  margin: 0.5rem;
+}
+
+.caption-01 {
+  @include type.type-style('caption-01', true);
+}
+
+.caption-02 {
+  @include type.type-style('caption-02', true);
+}
+
+.body-short-01 {
+  @include type.type-style('body-short-01', true);
+}
+
+.body-short-02 {
+  @include type.type-style('body-short-02', true);
+}
+
+.body-long-01 {
+  @include type.type-style('body-long-01', true);
+}
+
+.body-long-02 {
+  @include type.type-style('body-long-02', true);
+}
+
+.productive-heading-01 {
+  @include type.type-style('productive-heading-01', true);
+}
+
+.productive-heading-02 {
+  @include type.type-style('productive-heading-02', true);
+}
+
+.expressive-heading-01 {
+  @include type.type-style('expressive-heading-01', true);
+}
+
+.expressive-heading-02 {
+  @include type.type-style('expressive-heading-02', true);
+}
+
+.productive-heading-03 {
+  @include type.type-style('productive-heading-03', true);
+}
+
+.productive-heading-04 {
+  @include type.type-style('productive-heading-04', true);
+}
+
+.productive-heading-05 {
+  @include type.type-style('productive-heading-05', true);
+}
+
+.productive-heading-06 {
+  @include type.type-style('productive-heading-06', true);
+}
+
+.productive-heading-07 {
+  @include type.type-style('productive-heading-07', true);
+}
+
+.expressive-heading-03 {
+  @include type.type-style('expressive-heading-03', true);
+}
+
+.expressive-heading-04 {
+  @include type.type-style('expressive-heading-04', true);
+}
+
+.expressive-heading-05 {
+  @include type.type-style('expressive-heading-05', true);
+}
+
+.expressive-heading-06 {
+  @include type.type-style('expressive-heading-06', true);
+}
+
+.expressive-paragraph-01 {
+  @include type.type-style('expressive-paragraph-01', true);
+}
+
+.quotation-01 {
+  @include type.type-style('quotation-01', true);
+}
+
+.quotation-02 {
+  @include type.type-style('quotation-02', true);
+}
+
+.display-01 {
+  @include type.type-style('display-01', true);
+}
+
+.display-02 {
+  @include type.type-style('display-02', true);
+}
+
+.display-03 {
+  @include type.type-style('display-03', true);
+}
+
+.display-04 {
+  @include type.type-style('display-04', true);
+}

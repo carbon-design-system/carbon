@@ -77,7 +77,7 @@ const SideNavMenu = React.forwardRef(function SideNavMenu(props, ref) {
     </li>
   );
 });
-
+SideNavMenu.displayName = 'SideNavMenu';
 SideNavMenu.propTypes = {
   /**
    * Provide <SideNavMenuItem>'s inside of the `SideNavMenu`

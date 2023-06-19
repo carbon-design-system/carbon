@@ -265,13 +265,15 @@ $copy-btn-feedback: $background-inverse !default;
     transition: all $duration-fast-01 motion(standard, productive);
   }
 
+  .#{$prefix}--btn > .#{$prefix}--snippet__icon {
+    margin-block-start: 0;
+  }
+
   .#{$prefix}--copy-btn {
     @include reset;
 
     display: flex;
     overflow: visible;
-    width: $spacing-08;
-    height: $spacing-08;
     align-items: center;
     justify-content: center;
     padding: 0;
@@ -298,17 +300,14 @@ $copy-btn-feedback: $background-inverse !default;
 
   // Overrides for codesnippet copy btn
   // TLDR: Copy/CopyButton now uses IconButton, which uses Carbon buttons under the hood
-  // v10 opy just used native html button so it didn't have extra carbon styles that needed overriding
-  .#{$prefix}--snippet--inline.#{$prefix}--btn--md.#{$prefix}--btn--icon-only {
-    padding-right: 0;
-    padding-left: 0;
+  // v10 Copy just used native html button so it didn't have extra carbon styles that needed overriding
+  .#{$prefix}--snippet--inline.#{$prefix}--btn {
+    width: initial;
+    height: 1.25rem;
+    padding-inline: 0;
   }
 
-  .#{$prefix}--snippet--inline.#{$prefix}--btn--md {
-    min-height: 1.25rem;
-  }
-
-  .#{$prefix}--snippet--inline.#{$prefix}--btn--primary:hover {
+  .#{$prefix}--snippet--inline.#{$prefix}--btn.#{$prefix}--btn--primary:hover {
     color: $text-primary;
   }
 
@@ -319,12 +318,8 @@ $copy-btn-feedback: $background-inverse !default;
     right: 0.5rem;
   }
 
-  .#{$prefix}--snippet--multi .#{$prefix}--copy-btn.#{$prefix}--btn--md {
+  .#{$prefix}--snippet--multi .#{$prefix}--copy-btn {
     z-index: 10;
-    width: $spacing-07;
-    height: $spacing-07;
-    min-height: $spacing-07;
-    padding: 0;
   }
 
   // Show more / less button

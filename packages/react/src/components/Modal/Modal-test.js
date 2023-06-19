@@ -146,6 +146,7 @@ describe('Modal', () => {
       </Modal>
     );
 
+    // eslint-disable-next-line testing-library/no-node-access
     expect(document.querySelector('.cds--modal-close__icon')).toHaveAttribute(
       'aria-hidden',
       'true'
@@ -168,6 +169,7 @@ describe('Modal', () => {
       </Modal>
     );
 
+    // eslint-disable-next-line testing-library/no-node-access
     expect(document.querySelector('.cds--modal-close__icon')).toHaveAttribute(
       'focusable',
       'false'

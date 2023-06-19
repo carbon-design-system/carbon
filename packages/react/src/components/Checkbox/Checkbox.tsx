@@ -66,7 +66,7 @@ export interface CheckboxProps
   /**
    * Provide the text that is displayed when the Checkbox is in an invalid state
    */
-  invalidText: React.ReactNode;
+  invalidText?: React.ReactNode;
 
   /**
    * Specify whether the Checkbox is currently invalid
@@ -76,7 +76,7 @@ export interface CheckboxProps
   /**
    * Provide the text that is displayed when the Checkbox is in an invalid state
    */
-  warnText: React.ReactNode;
+  warnText?: React.ReactNode;
 
   /**
    * Provide an optional handler that is called when the internal state of
@@ -160,8 +160,8 @@ const Checkbox = React.forwardRef(
           className={`${prefix}--checkbox`}
           id={id}
           ref={(el) => {
-            if (el && indeterminate) {
-              el.indeterminate = indeterminate;
+            if (el) {
+              el.indeterminate = indeterminate ?? false;
             }
             if (typeof ref === 'function') {
               ref(el);

@@ -9,7 +9,7 @@ import React from 'react';
 import { useFeatureFlag } from '../components/FeatureFlags';
 
 export function createComponentToggle(spec) {
-  const { name, flag = 'enable-v11-release', next, classic } = spec;
+  const { name, flag, next, classic } = spec;
 
   function ComponentToggle(props, ref) {
     const enabled = useFeatureFlag(flag);

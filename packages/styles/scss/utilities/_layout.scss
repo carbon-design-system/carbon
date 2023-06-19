@@ -1,0 +1,114 @@
+//
+// Copyright IBM Corp. 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+
+@use '../config';
+@use '../layout' as *;
+@use './custom-property';
+
+/// Enables the use of contextual layout tokens within a component. This mixin should be
+/// included on the outermost selector of the component.
+/// @param {String} $group - The layout group to use for this component
+/// @param {String} $default - The default step if the component is not within a layout
+/// @param {String} $min - The minimum step supported by this component (optional)
+/// @param {String} $max - The maximum step supported by this component (optional)
+/// @example @include use('size', $default: 'md', $min: 'sm', $max: 'lg')
+/// @group utilities
+/// @access public
+@mixin use($group, $default, $min: null, $max: null) {
+  $properties: map.get($layout-tokens, $group);
+
+  @each $property, $steps in $properties {
+    $minValue: custom-property.get-var('layout-#{$group}-#{$property}-min');
+    @if $min {
+      $minValue: max(
+        $minValue,
+        custom-property.get-var('layout-#{$group}-#{$property}-#{$min}')
+      );
+    }
+
+    $maxValue: custom-property.get-var('layout-#{$group}-#{$property}-max');
+    @if $max {
+      $maxValue: min(
+        $maxValue,
+        custom-property.get-var('layout-#{$group}-#{$property}-#{$max}')
+      );
+    }
+
+    $value: clamp(
+      $minValue,
+      custom-property.get-var(
+        'layout-#{$group}-#{$property}',
+        custom-property.get-var('layout-#{$group}-#{$property}-#{$default}')
+      ),
+      $maxValue
+    );
+
+    @include custom-property.declaration(
+      'layout-#{$group}-#{$property}-local',
+      $value
+    );
+  }
+}
+
+/// Allows to redefine any token values of the layout module in case a component is using
+/// non-standard values and should still participate in the layout context
+/// @param {Map} $overrides - The map of overrides. Must follow ( group: ( property: ( step: value ) ) )
+/// @example @include redefine-tokens(( size: ( height: ( sm: 1.125rem, md: 1.5rem ) ) ))
+/// @group utilities
+/// @access public
+@mixin redefine-tokens($overrides) {
+  @each $group, $properties in $overrides {
+    @each $property, $steps in $properties {
+      @each $step, $value in $steps {
+        @include custom-property.declaration(
+          'layout-#{$group}-#{$property}-#{$step}',
+          $value
+        );
+
+        .#{config.$prefix}--layout--#{$group}-#{$step} & {
+          $token: custom-property.get-var(
+            'layout-#{$group}-#{$property}-#{$step}'
+          );
+          @include custom-property.declaration(
+            'layout-#{$group}-#{$property}',
+            $token
+          );
+        }
+      }
+    }
+  }
+}
+
+/// Internal base function for retrieving a property from a layout group.
+/// @param {String} $group - The group name as defined in the $layout-tokens
+/// @param {String} $property - The property name
+/// @example @include -group('size', $property)
+/// @group utilities
+/// @access private
+@function -group($group, $property) {
+  @return custom-property.get-var('layout-#{$group}-#{$property}-local');
+}
+
+/// Retrieves the current value for a property token in the layout size.
+/// @param {String} $property - The property name
+/// @example height: size('height');
+/// @group utilities
+/// @access public
+@function size($property) {
+  @return -group('size', $property);
+}
+
+/// Retrieves the current value for a property token in the layout density.
+/// @param {String} $property - The property name
+/// @example padding-inline: density('padding-inline');
+/// @group utilities
+/// @access public
+@function density($property) {
+  @return -group('density', $property);
+}
