@@ -990,7 +990,7 @@ const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(function IconTab(
   {
     children,
     className: customClassName,
-    defaultOpen,
+    defaultOpen = false,
     enterDelayMs,
     leaveDelayMs,
     label,
