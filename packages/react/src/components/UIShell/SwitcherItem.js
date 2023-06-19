@@ -102,7 +102,7 @@ SwitcherItem.propTypes = {
   handleSwitcherItemFocus: PropTypes.func,
 
   /**
-   * If given, switcher item will render as a link with the given href
+   * If provided, switcher item will render as a Link with the provided href
    */
   index: PropTypes.number,
 
