@@ -137,7 +137,7 @@ export interface NotificationButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Specify an optional icon for the Button through a string,
-   * if something but regular "close" icon is desirable
+   * if provided. However, regular "close" icon is preferred.
    */
   name?: string;
 
