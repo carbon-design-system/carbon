@@ -634,7 +634,7 @@ Let's assume `my-component` supports sizes from `sm` to `lg` with a default of
 <div class="my-component">
   ...
   <div
-    class="cds--layout-constraint--size:default-md cds--layout-constraint--size:min-sm cds--layout-constraint--size:max-lg">
+    class="cds--layout-constraint--size__default-md cds--layout-constraint--size__min-sm cds--layout-constraint--size__max-lg">
     <!-- The button component will now be constrainted to the minimum size of 'sm', the maximum of 'lg' and default to 'md' -->
     <div class="button">...</div>
   </div>
@@ -649,13 +649,13 @@ All layout groups offer the following utility classes:
 <tr><td>
 
 ```
-cds--layout-constraint--group:default-step
+cds--layout-constraint--group__default-step
 ```
 
 </td><td>
 
 ```scss
-.cds--layout-constraint--group\:default-step {
+.cds--layout-constraint--group__default-step {
   // for each property in this group:
   --cds-layout-group-property: var(
     --cds-layout-group-property-context,
@@ -667,13 +667,13 @@ cds--layout-constraint--group:default-step
 </td></tr><tr><td>
 
 ```
-cds--layout-constraint--group:min-step
+cds--layout-constraint--group__min-step
 ```
 
 </td><td>
 
 ```scss
-.cds--layout-constraint--group\:min-step {
+.cds--layout-constraint--group__min-step {
   // for each property in this group:
   --cds-layout-group-property-min: var(
     --cds-layout-group-property-step,
@@ -685,13 +685,13 @@ cds--layout-constraint--group:min-step
 </td></tr><tr><td>
 
 ```
-cds--layout-constraint--group:max-step
+cds--layout-constraint--group__max-step
 ```
 
 </td><td>
 
 ```scss
-.cds--layout-constraint--group\:max-step {
+.cds--layout-constraint--group__max-step {
   // for each property in this group:
   --cds-layout-group-property-max: var(
     --cds-layout-group-property-step,
