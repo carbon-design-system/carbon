@@ -7,10 +7,117 @@ import { warning } from '../../internal/warning';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { ReactAttr } from '../../types/common';
 
 const getInstanceId = setupGetInstanceId();
 
 let didWarnAboutDeprecation = false;
+
+export interface ControlledPasswordInputProps
+  extends ReactAttr<HTMLInputElement> {
+  /**
+   * Provide a custom className that is applied directly to the underlying
+   * `<input>` node
+   */
+  className?: string;
+
+  /**
+   * Optionally provide the default value of the `<input>`
+   */
+  defaultValue?: string | number;
+
+  /**
+   * Specify whether the control is disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Provide text that is used alongside the control label for additional help
+   */
+  helperText?: React.ReactNode;
+
+  /**
+   * Specify whether or not the underlying label is visually hidden
+   */
+  hideLabel?: boolean;
+
+  /**
+   * "Hide password" tooltip text on password visibility toggle
+   */
+  hidePasswordLabel?: string;
+
+  /**
+   * Provide a unique identifier for the input field
+   */
+  id: string;
+
+  /**
+   * Specify whether the control is currently invalid
+   */
+  invalid?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in an invalid state
+   */
+  invalidText?: React.ReactNode;
+
+  /**
+   * Provide the text that will be read by a screen reader when visiting this
+   * control
+   */
+  labelText: React.ReactNode;
+
+  /**
+   * @deprecated The `light` prop for `ControlledPasswordInput` has been deprecated in favor of the new `Layer` component. It will be removed in the next major release.
+   */
+  light?: boolean;
+
+  /**
+   * Optionally provide an `onChange` handler that is called whenever `<input>`
+   * is updated
+   */
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+
+  /**
+   * Optionally provide an `onClick` handler that is called whenever the
+   * `<input>` is clicked
+   */
+  onClick?: (event: React.MouseEvent<HTMLInputElement>) => void;
+
+  /**
+   * Specify the placeholder attribute for the `<input>`
+   */
+  placeholder?: string;
+
+  /**
+   * "Show password" tooltip text on password visibility toggle
+   */
+  showPasswordLabel?: string;
+
+  /**
+   * Specify the size of the Text Input.
+   */
+  size?: 'sm' | 'md' | 'lg';
+
+  /**
+   * Specify the alignment of the tooltip to the icon-only button.
+   * Can be one of?: start, center, or end.
+   */
+  tooltipAlignment?: 'start' | 'center' | 'end';
+
+  /**
+   * Specify the direction of the tooltip for icon-only buttons.
+   * Can be either top, right, bottom, or left.
+   */
+  tooltipPosition?: 'top' | 'right' | 'bottom' | 'left';
+
+  /**
+   * Provide the current value of the `<input>`
+   */
+  value?: string | number;
+  togglePasswordVisibility?(event: React.MouseEvent<HTMLButtonElement>): void;
+  type?: string;
+}
 
 const ControlledPasswordInput = React.forwardRef(
   function ControlledPasswordInput(
@@ -36,7 +143,7 @@ const ControlledPasswordInput = React.forwardRef(
       showPasswordLabel = 'Show password',
       size,
       ...other
-    },
+    }: ControlledPasswordInputProps,
     ref
   ) {
     const prefix = usePrefix();
@@ -63,14 +170,14 @@ const ControlledPasswordInput = React.forwardRef(
     );
     const sharedTextInputProps = {
       id,
-      onChange: (evt) => {
+      onChange: (evt: React.ChangeEvent<HTMLInputElement>) => {
         if (!other.disabled) {
-          onChange(evt);
+          onChange?.(evt);
         }
       },
-      onClick: (evt) => {
+      onClick: (evt: React.MouseEvent<HTMLInputElement>) => {
         if (!other.disabled) {
-          onClick(evt);
+          onClick?.(evt);
         }
       },
       placeholder,
@@ -125,7 +232,7 @@ const ControlledPasswordInput = React.forwardRef(
             invalid,
             sharedTextInputProps,
             invalidId: errorId,
-            hasHelper: !error && helperText,
+            hasHelper: !error && helperText ? true : false,
             helperId,
           })}
           data-toggle-password-visibility={type === 'password'}
@@ -282,7 +389,7 @@ ControlledPasswordInput.defaultProps = {
   invalid: false,
   invalidText: '',
   helperText: '',
-  size: '',
+  size: undefined,
 };
 
 export default ControlledPasswordInput;
