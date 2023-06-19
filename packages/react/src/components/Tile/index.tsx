@@ -5,20 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {
-  Tile,
-  ClickableTile,
-  SelectableTile,
-  ExpandableTile,
-  TileAboveTheFoldContent,
-  TileBelowTheFoldContent,
-} from './Tile';
-
 export {
   Tile,
+  type TileProps,
   ClickableTile,
+  type ClickableTileProps,
   SelectableTile,
+  type SelectableTileProps,
   ExpandableTile,
+  type ExpandableTileProps,
   TileAboveTheFoldContent,
+  type TileAboveTheFoldContentProps,
   TileBelowTheFoldContent,
-};
+  type TileBelowTheFoldContentProps,
+} from './Tile';

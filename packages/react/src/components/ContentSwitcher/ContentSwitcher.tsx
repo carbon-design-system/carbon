@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { HTMLAttributes, ReactElement } from 'react';
 import classNames from 'classnames';
 import deprecate from '../../prop-types/deprecate';
 import { LayoutConstraint } from '../Layout';
@@ -14,15 +14,73 @@ import { composeEventHandlers } from '../../tools/events';
 import { getNextIndex, matches, keys } from '../../internal/keyboard';
 import { PrefixContext } from '../../internal/usePrefix';
 
-export default class ContentSwitcher extends React.Component {
+interface SwitchEventHandlersParams {
+  index?: number;
+  name?: string | number;
+  text?: string;
+  key?: string | number;
+}
+
+export interface ContentSwitcherProps
+  extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
+  /**
+   * Pass in Switch components to be rendered in the ContentSwitcher
+   */
+  children?: ReactElement[];
+
+  /**
+   * Specify an optional className to be added to the container node
+   */
+  className?: string;
+
+  /**
+   * `true` to use the light version.
+   *
+   * @deprecated The `light` prop for `ContentSwitcher` has
+   *     been deprecated in favor of the new `Layer` component. It will be removed in the next major release.
+   */
+  light?: boolean;
+
+  /**
+   * Specify an `onChange` handler that is called whenever the ContentSwitcher
+   * changes which item is selected
+   */
+  onChange: (params: SwitchEventHandlersParams) => void;
+
+  /**
+   * Specify a selected index for the initially selected content
+   */
+  selectedIndex: number;
+
+  /**
+   * Choose whether or not to automatically change selection on focus
+   */
+  selectionMode: 'automatic' | 'manual';
+
+  /**
+   * Specify the size of the Content Switcher. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   */
+  size: 'sm' | 'md' | 'lg';
+}
+
+interface ContentSwitcherState {
+  selectedIndex?: number;
+}
+
+export default class ContentSwitcher extends React.Component<
+  ContentSwitcherProps,
+  ContentSwitcherState
+> {
   /**
    * The DOM references of child `<Switch>`.
    * @type {Array<Element>}
    * @private
    */
-  _switchRefs = [];
+  _switchRefs: HTMLButtonElement[] = [];
 
-  state = {};
+  state = {
+    selectedIndex: undefined,
+  };
 
   static propTypes = {
     /**
@@ -97,10 +155,14 @@ export default class ContentSwitcher extends React.Component {
     const { key } = data;
 
     if (matches(data, [keys.ArrowRight, keys.ArrowLeft])) {
-      const nextIndex = getNextIndex(key, index, this.props.children.length);
+      const nextIndex = getNextIndex(
+        key,
+        index,
+        this.props.children?.length as number
+      );
       const children = React.Children.toArray(this.props.children);
       if (selectionMode === 'manual') {
-        const switchRef = this._switchRefs[nextIndex];
+        const switchRef = this._switchRefs[nextIndex as number];
         switchRef && switchRef.focus();
       } else {
         this.setState(
@@ -108,7 +170,11 @@ export default class ContentSwitcher extends React.Component {
             selectedIndex: nextIndex,
           },
           () => {
-            const child = children[this.state.selectedIndex];
+            if (typeof this.state.selectedIndex !== 'number') {
+              return;
+            }
+
+            const child = children[this.state.selectedIndex] as ReactElement;
             const switchRef = this._switchRefs[this.state.selectedIndex];
             switchRef && switchRef.focus();
             this.props.onChange({
@@ -135,15 +201,20 @@ export default class ContentSwitcher extends React.Component {
       children,
       className,
       light,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       selectedIndex, // eslint-disable-line no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       selectionMode, // eslint-disable-line no-unused-vars
       size,
       ...other
     } = this.props;
 
-    const isIconOnly = React.Children.map(children, (child) => {
-      return child.type.displayName === 'IconSwitch';
-    }).every((val) => val === true);
+    const isIconOnly = React.Children?.map(children, (child) => {
+      return (
+        (child as { type: { displayName: string } }).type.displayName ===
+        'IconSwitch'
+      );
+    })?.every((val) => val === true);
 
     const classes = classNames(`${prefix}--content-switcher`, className, {
       [`${prefix}--content-switcher--light`]: light,
@@ -157,20 +228,22 @@ export default class ContentSwitcher extends React.Component {
         size={{ default: 'md', min: 'sm', max: 'lg' }}
         {...other}
         className={classes}
-        role="tablist">
-        {React.Children.map(children, (child, index) =>
-          React.cloneElement(child, {
-            index,
-            onClick: composeEventHandlers([
-              this.handleChildChange,
-              child.props.onClick,
-            ]),
-            onKeyDown: this.handleChildChange,
-            selected: index === this.state.selectedIndex,
-            ref: this.handleItemRef(index),
-            size,
-          })
-        )}
+        role="tablist"
+        onChange={undefined}>
+        {children &&
+          React.Children.map(children, (child: ReactElement, index) =>
+            React.cloneElement(child, {
+              index,
+              onClick: composeEventHandlers([
+                this.handleChildChange,
+                child.props.onClick,
+              ]),
+              onKeyDown: this.handleChildChange,
+              selected: index === this.state.selectedIndex,
+              ref: this.handleItemRef(index),
+              size,
+            })
+          )}
       </LayoutConstraint>
     );
   }

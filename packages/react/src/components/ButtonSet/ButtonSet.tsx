@@ -9,21 +9,31 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import { ForwardRefReturn } from '../../types/common';
 
-const ButtonSet = React.forwardRef(function ButtonSet(
-  { children, className, stacked, ...rest },
-  ref
-) {
-  const prefix = usePrefix();
-  const buttonSetClasses = classNames(className, `${prefix}--btn-set`, {
-    [`${prefix}--btn-set--stacked`]: stacked,
+export interface ButtonSetProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Specify the button arrangement of the set (vertically stacked or
+   * horizontal)
+   */
+  stacked?: boolean;
+}
+
+const ButtonSet: ForwardRefReturn<HTMLDivElement, ButtonSetProps> =
+  React.forwardRef(function ButtonSet(
+    { children, className, stacked, ...rest }: ButtonSetProps,
+    ref: React.Ref<HTMLDivElement>
+  ) {
+    const prefix = usePrefix();
+    const buttonSetClasses = classNames(className, `${prefix}--btn-set`, {
+      [`${prefix}--btn-set--stacked`]: stacked,
+    });
+    return (
+      <div {...rest} className={buttonSetClasses} ref={ref}>
+        {children}
+      </div>
+    );
   });
-  return (
-    <div {...rest} className={buttonSetClasses} ref={ref}>
-      {children}
-    </div>
-  );
-});
 
 ButtonSet.displayName = 'ButtonSet';
 ButtonSet.propTypes = {

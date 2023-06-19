@@ -26,7 +26,7 @@
  *   }
  * }
  *
- * @param {Event} event
+ * @param {Event|React.SyntheticEvent} event
  * @param {Array<Key>} keysToMatch
  * @returns {boolean}
  */
