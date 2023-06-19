@@ -832,7 +832,8 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/1190770?v=4",
       "profile": "https://haakon.dev/",
       "contributions": [
-        "code"
+        "code",
+        "doc"
       ]
     },
     {
@@ -1173,6 +1174,15 @@
       "name": "Mark Judy",
       "avatar_url": "https://avatars.githubusercontent.com/u/32761859?v=4",
       "profile": "https://github.com/mrkjdy",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "anton-tsymuk-viacomcbs",
+      "name": "Anton Tsymuk",
+      "avatar_url": "https://avatars.githubusercontent.com/u/112623876?v=4",
+      "profile": "https://github.com/anton-tsymuk-viacomcbs",
       "contributions": [
         "code"
       ]
