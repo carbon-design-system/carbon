@@ -8,9 +8,30 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useMemo } from 'react';
+import { ReactAttr } from '../../types/common';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import { TableContext } from './TableContext';
+
+export interface TableContainerProps
+  extends Omit<ReactAttr<HTMLDivElement>, 'title'> {
+  /**
+   * Optional description text for the Table
+   */
+  description?: React.ReactNode;
+  /**
+   * Specify whether the table should have a sticky header
+   */
+  stickyHeader?: boolean;
+  /**
+   * If true, will use a width of 'fit-content' to match the inner table width
+   */
+  useStaticWidth?: boolean;
+  /**
+   * Provide a title for the Table
+   */
+  title?: React.ReactNode;
+}
 
 const TableContainer = ({
   className,
@@ -20,7 +41,7 @@ const TableContainer = ({
   stickyHeader,
   useStaticWidth,
   ...rest
-}) => {
+}: TableContainerProps) => {
   const baseId = useId('tc');
   const titleId = `${baseId}-title`;
   const descriptionId = `${baseId}-description`;
@@ -35,8 +56,8 @@ const TableContainer = ({
   );
   const value = useMemo(() => {
     return {
-      titleId: title ? titleId : null,
-      descriptionId: description ? descriptionId : null,
+      titleId: title ? titleId : undefined,
+      descriptionId: description ? descriptionId : undefined,
     };
   }, [title, description, titleId, descriptionId]);
 
