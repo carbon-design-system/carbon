@@ -1186,6 +1186,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "modaslam",
+      "name": "Mohammed Aslam P. A.",
+      "avatar_url": "https://avatars.githubusercontent.com/u/33179527?v=4",
+      "profile": "https://github.com/modaslam",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "commitConvention": "none"
