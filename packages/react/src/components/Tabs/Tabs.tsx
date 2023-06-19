@@ -265,6 +265,11 @@ export interface TabListProps extends DivAttributes {
   leftOverflowButtonProps: HTMLAttributes<HTMLButtonElement>;
 
   /**
+   * Specify whether to use the light component variant
+   */
+  light?: boolean;
+
+  /**
    * Provide the props that describe the right overflow button
    */
   rightOverflowButtonProps: HTMLAttributes<HTMLButtonElement>;
@@ -292,7 +297,6 @@ function TabList({
   contained = false,
   iconSize,
   leftOverflowButtonProps,
-  // @ts-expect-error: Deprecated prop
   light,
   rightOverflowButtonProps,
   scrollDebounceWait = 200,
