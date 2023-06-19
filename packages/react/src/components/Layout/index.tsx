@@ -156,11 +156,11 @@ const LayoutConstraint = React.forwardRef<ReactNode, LayoutConstraintProps>(
         size,
         density,
       }).map(([group, constraints]) => ({
-        [`${prefix}--layout-constraint--${group}:default-${constraints?.default}`]:
+        [`${prefix}--layout-constraint--${group}__default-${constraints?.default}`]:
           constraints?.default,
-        [`${prefix}--layout-constraint--${group}:min-${constraints?.min}`]:
+        [`${prefix}--layout-constraint--${group}__min-${constraints?.min}`]:
           constraints?.min,
-        [`${prefix}--layout-constraint--${group}:max-${constraints?.max}`]:
+        [`${prefix}--layout-constraint--${group}__max-${constraints?.max}`]:
           constraints?.max,
       }))
     );
