@@ -893,7 +893,7 @@ export interface ActionableNotificationProps
 
   /**
    * By default, this value is "alertdialog". You can also provide an alternate
-   * role if it makes sense from the accessibility-side.
+   * role if it makes sense from from an accessibility perspective.
    */
   role?: string;
 
