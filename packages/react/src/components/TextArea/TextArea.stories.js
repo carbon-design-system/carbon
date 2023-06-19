@@ -139,6 +139,11 @@ Playground.argTypes = {
     },
     defaultValue: 'This is a warning message.',
   },
+  value: {
+    control: {
+      type: 'text',
+    },
+  },
 };
 
 Playground.args = {

@@ -3231,6 +3231,16 @@
     - data
   sizes:
     - 32
+- name: chart--logistic-regression
+  friendly_name: Chart logistic regression
+  aliases: 
+    - chart logistic regression
+    - logistic regression chart
+    - chart
+    - graph
+    - data  
+  sizes:
+    - 32
 - name: chart--marimekko
   friendly_name: Chart Marimekko
   aliases:
@@ -5274,6 +5284,19 @@
     - mouse
     - click
     - pointer
+- name: customer-service
+  friendly_name: Customer service
+  aliases: 
+    - customer
+    - inquiry
+    - phone
+    - support
+    - chat
+    - client
+    - person
+    - headset
+  sizes:
+    - 32
 - name: cut
   friendly_name: Cut
   aliases:
@@ -5391,6 +5414,22 @@
     - characters
   sizes:
     - 32
+- name: data--categorical
+  friendly_name: Data categorical
+  aliases: 
+    - circle
+    - triangle
+    - square
+    - data types
+    - sort
+    - data
+    - category
+    - definite
+    - class
+    - group
+    - rank
+  sizes:
+    - 32
 - name: data--center
   friendly_name: Data center
   aliases:
@@ -5453,6 +5492,16 @@
     - numbers
     - metrics
     - characters
+- name: data--regular
+  friendly_name: Data regular
+  aliases: 
+    - data 
+    - regular
+    - normal
+    - circle
+    - dot
+  sizes:
+    - 32
 - name: data--set
   friendly_name: Data set
   sizes:
@@ -9211,6 +9260,11 @@
     - z16
   sizes:
     - 32
+- name: ibm--openshift-container-platform-on-vpc-for-regulated-industries
+  friendly_name: ibm--openshift-container-platform-on-vpc-for-regulated-industries
+  aliases: []
+  sizes:
+    - 32
 - name: ibm--power-vs
   friendly_name: IBM Power® Virtual Server
   aliases:
@@ -9224,8 +9278,28 @@
     - solution
   sizes:
     - 32
+- name: ibm--power-with-vpc
+  friendly_name: ibm--power-with-vpc
+  aliases: []
+  sizes:
+    - 32
+- name: ibm--private-path-services
+  friendly_name: ibm--private-path-services
+  aliases: []
+  sizes:
+    - 32
 - name: ibm--process-mining
   friendly_name: ibm--process-mining
+  aliases: []
+  sizes:
+    - 32
+- name: ibm--sap-on-power
+  friendly_name: ibm--sap-on-power
+  aliases: []
+  sizes:
+    - 32
+- name: ibm--secure-infrastructure-on-vpc-for-regulated-industries
+  friendly_name: ibm--secure-infrastructure-on-vpc-for-regulated-industries
   aliases: []
   sizes:
     - 32
@@ -9257,6 +9331,11 @@
     - application programming interface
     - wrench
     - chain
+  sizes:
+    - 32
+- name: ibm--vsi-on-vpc-for-regulated-industries
+  friendly_name: ibm--vsi-on-vpc-for-regulated-industries
+  aliases: []
   sizes:
     - 32
 - name: ibm-cloud
@@ -9689,6 +9768,16 @@
     - restricted access
   sizes:
     - 32
+- name: ibm-cloud--projects
+  friendly_name: ibm-cloud--projects
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud--resiliency
+  friendly_name: ibm-cloud--resiliency
+  aliases: []
+  sizes:
+    - 32
 - name: ibm-cloud--secrets-manager
   friendly_name: IBM Cloud® Secrets Manager
   aliases:
@@ -9712,6 +9801,11 @@
     - compliance
     - center
     - app
+  sizes:
+    - 32
+- name: ibm-cloud--security-compliance-center-workload-protection
+  friendly_name: ibm-cloud--security-compliance-center-workload-protection
+  aliases: []
   sizes:
     - 32
 - name: ibm-cloud--subnets
@@ -10207,6 +10301,11 @@
     - app
   sizes:
     - 32
+- name: ibm-z--environments-dev-sec-ops
+  friendly_name: ibm-z--environments-dev-sec-ops
+  aliases: []
+  sizes:
+    - 32
 - name: ibm-z-cloud--provisioning
   friendly_name: IBM Z® and Cloud Modernization Stack Provisioning
   aliases:
@@ -10215,6 +10314,16 @@
     - provisioning
     - mainframe
     - app
+  sizes:
+    - 32
+- name: ibm-z-os--ai-control-interface
+  friendly_name: ibm-z-os--ai-control-interface
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-z-os--containers
+  friendly_name: ibm-z-os--containers
+  aliases: []
   sizes:
     - 32
 - name: ibm-z-os--package-manager
@@ -12160,6 +12269,20 @@
     - avatar
     - tag
     - identification
+- name: logo--mastodon
+  friendly_name: Logo Mastodon
+  aliases: 
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+    - elephant
+  sizes:
+    - 32
 - name: logo--medium
   friendly_name: Logo Medium
   sizes:
@@ -12174,8 +12297,16 @@
     - tag
     - identification
 - name: logo--npm
-  friendly_name: logo--npm
-  aliases: []
+  friendly_name: Logo npm
+  aliases: 
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
   sizes:
     - 32
 - name: logo--openshift
@@ -14250,6 +14381,15 @@
     - operations
   sizes:
     - 32
+- name: package--text-analysis
+  friendly_name: Package text analysis
+  aliases: 
+    - file
+    - package
+    - text
+    - analysis
+  sizes:
+    - 32
 - name: page--first
   friendly_name: Page first
   sizes:
@@ -14388,6 +14528,54 @@
     - org
     - data
     - hierarchy
+  sizes:
+    - 32
+- name: partition--auto
+  friendly_name: Partition auto
+  aliases: 
+    - data
+    - partition
+    - auto
+    - cycle
+  sizes:
+    - 32
+- name: partition--collection
+  friendly_name: Partition collection
+  aliases: 
+    - data
+    - partition
+    - collection
+    - gather
+    - collect
+  sizes:
+    - 32
+- name: partition--repartition
+  friendly_name: Partition repartition
+  aliases: 
+    - data
+    - partition
+    - repartition
+    - refine
+  sizes:
+    - 32
+- name: partition--same
+  friendly_name: Partition same
+  aliases: 
+    - data
+    - partition
+    - auto
+    - duplicate
+    - parallel
+  sizes:
+    - 32
+- name: partition--specific
+  friendly_name: Partition specific
+  aliases: 
+    - data
+    - partition
+    - specific
+    - specify
+    - select
   sizes:
     - 32
 - name: partly-cloudy
@@ -15748,6 +15936,15 @@
     - file
   sizes:
     - 32
+- name: result--draft
+  friendly_name: Result draft
+  aliases: 
+    - clipboard
+    - result
+    - edit
+    - document
+  sizes:
+    - 32
 - name: result--new
   friendly_name: Result new
   aliases:
@@ -16111,6 +16308,34 @@
     - filled
     - security
     - shield
+  sizes:
+    - 32
+- name: rule--locked
+  friendly_name: Rule locked
+  aliases: 
+    - rule
+    - governance
+    - control
+    - policy
+    - quality
+    - security
+    - shield
+    - lock
+    - data
+  sizes:
+    - 32
+- name: rule--partial
+  friendly_name: Rule partial
+  aliases: 
+    - rule
+    - governance
+    - control
+    - policy
+    - quality
+    - security
+    - shield
+    - data
+    - incomplete
   sizes:
     - 32
 - name: rule--test
@@ -18149,6 +18374,11 @@
   friendly_name: Sunset
   aliases:
     - sunset
+  sizes:
+    - 32
+- name: support-vector-machine
+  friendly_name: support-vector-machine
+  aliases: []
   sizes:
     - 32
 - name: SVG
@@ -20284,6 +20514,21 @@
     - file
     - document
     - version
+  sizes:
+    - 32
+- name: version--major
+  friendly_name: version--major
+  aliases: []
+  sizes:
+    - 32
+- name: version--minor
+  friendly_name: version--minor
+  aliases: []
+  sizes:
+    - 32
+- name: version--patch
+  friendly_name: version--patch
+  aliases: []
   sizes:
     - 32
 - name: vertical-view

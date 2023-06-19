@@ -47,6 +47,10 @@
     }
   }
 
+  .#{$prefix}--overflow-menu > :first-child {
+    margin-block-start: 0;
+  }
+
   .#{$prefix}--overflow-menu--sm {
     width: rem(32px);
     height: rem(32px);
@@ -136,7 +140,9 @@
     background-color: $layer;
   }
 
-  .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']:not(.#{$prefix}--breadcrumb-menu-options)::after {
+  .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']:not(
+      .#{$prefix}--breadcrumb-menu-options
+    )::after {
     top: rem(-3px);
     left: 0;
     width: rem(40px);

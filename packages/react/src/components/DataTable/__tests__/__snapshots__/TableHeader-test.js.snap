@@ -6,7 +6,7 @@ exports[`TableHeader renders as expected - Component API should render 1`] = `
     class="cds--data-table-content"
   >
     <table
-      class="cds--data-table"
+      class="cds--data-table cds--data-table--lg"
     >
       <thead>
         <tr>

@@ -10,13 +10,13 @@ import PropTypes, { ReactNodeLike } from 'prop-types';
 
 import classNames from 'classnames';
 import throttle from 'lodash.throttle';
-import * as FeatureFlags from '@carbon/feature-flags';
 
 import * as keys from '../../internal/keyboard/keys';
 import { matches } from '../../internal/keyboard/match';
 import { PrefixContext } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { FeatureFlagContext } from '../FeatureFlags';
+import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 
 const defaultFormatLabel = (value, label) => {
   return typeof label === 'function' ? label(value) : `${value}${label}`;
@@ -84,9 +84,14 @@ export interface SliderProps
   inputType?: string;
 
   /**
-   * `true` to specify if the control is invalid.
+   * `Specify whether the Slider is currently invalid
    */
   invalid?: boolean;
+
+  /**
+   * Provide the text that is displayed when the Slider is in an invalid state
+   */
+  invalidText?: React.ReactNode;
 
   /**
    * The label for the slider.
@@ -172,6 +177,16 @@ export interface SliderProps
    * The value.
    */
   value: number;
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText?: React.ReactNode;
 }
 
 interface CalcValueProps {
@@ -223,9 +238,14 @@ export default class Slider extends PureComponent<SliderProps> {
     inputType: PropTypes.string,
 
     /**
-     * `true` to specify if the control is invalid.
+     * `Specify whether the Slider is currently invalid
      */
     invalid: PropTypes.bool,
+
+    /**
+     * Provide the text that is displayed when the Slider is in an invalid state
+     */
+    invalidText: PropTypes.node,
 
     /**
      * The label for the slider.
@@ -312,6 +332,16 @@ export default class Slider extends PureComponent<SliderProps> {
      * The value.
      */
     value: PropTypes.number.isRequired,
+
+    /**
+     * `Specify whether the Slider is in a warn state
+     */
+    warn: PropTypes.bool,
+
+    /**
+     * Provide the text that is displayed when the Slider is in an warn state
+     */
+    warnText: PropTypes.node,
   };
 
   static defaultProps = {
@@ -322,9 +352,6 @@ export default class Slider extends PureComponent<SliderProps> {
     minLabel: '',
     maxLabel: '',
     inputType: 'number',
-    ariaLabelInput: FeatureFlags.enabled('enable-v11-release')
-      ? undefined
-      : 'Slider number input',
     readOnly: false,
   };
 
@@ -723,11 +750,14 @@ export default class Slider extends PureComponent<SliderProps> {
       step,
       stepMultiplier: _stepMultiplier,
       inputType,
+      invalidText,
       required,
       disabled,
       name,
       light,
       readOnly,
+      warn,
+      warnText,
       ...other
     } = this.props;
 
@@ -735,13 +765,6 @@ export default class Slider extends PureComponent<SliderProps> {
     delete other.invalid;
 
     const { value, isValid } = this.state;
-
-    const scope = this.context;
-    let enabled;
-
-    if (scope.enabled) {
-      enabled = scope.enabled('enable-v11-release');
-    }
 
     return (
       <PrefixContext.Consumer>
@@ -754,8 +777,7 @@ export default class Slider extends PureComponent<SliderProps> {
           const sliderClasses = classNames(
             `${prefix}--slider`,
             { [`${prefix}--slider--disabled`]: disabled },
-            { [`${prefix}--slider--readonly`]: readOnly },
-            [enabled ? null : className]
+            { [`${prefix}--slider--readonly`]: readOnly }
           );
 
           const inputClasses = classNames(
@@ -763,18 +785,15 @@ export default class Slider extends PureComponent<SliderProps> {
             `${prefix}--slider-text-input`,
             {
               [`${prefix}--text-input--light`]: light,
-              [`${prefix}--text-input--invalid`]: isValid === false,
+              [`${prefix}--text-input--invalid`]:
+                !readOnly && isValid === false,
               [`${prefix}--slider-text-input--hidden`]: hideTextInput,
+              [`${prefix}--slider-text-input--warn`]: !readOnly && warn,
             }
           );
 
           return (
-            <div
-              className={
-                enabled
-                  ? classNames(`${prefix}--form-item`, className)
-                  : `${prefix}--form-item`
-              }>
+            <div className={classNames(`${prefix}--form-item`, className)}>
               <label htmlFor={id} className={labelClasses} id={labelId}>
                 {labelText}
               </label>
@@ -793,7 +812,7 @@ export default class Slider extends PureComponent<SliderProps> {
                   onKeyDown={this.onKeyDown}
                   role="presentation"
                   tabIndex={-1}
-                  data-invalid={isValid ? null : true}
+                  data-invalid={!isValid && !readOnly ? true : null}
                   {...other}>
                   <div
                     className={`${prefix}--slider__thumb`}
@@ -836,11 +855,41 @@ export default class Slider extends PureComponent<SliderProps> {
                   onChange={this.onChange}
                   onBlur={this.onBlur}
                   onKeyUp={this.props.onInputKeyUp}
-                  data-invalid={isValid ? null : true}
-                  aria-invalid={isValid ? undefined : true}
+                  data-invalid={!isValid && !readOnly ? true : null}
+                  aria-invalid={!isValid && !readOnly ? true : undefined}
                   readOnly={readOnly}
                 />
+                {!readOnly && isValid === false && (
+                  <WarningFilled
+                    className={`${prefix}--slider__invalid-icon`}
+                  />
+                )}
+
+                {!readOnly && warn && isValid && (
+                  <WarningAltFilled
+                    className={`${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`}
+                  />
+                )}
               </div>
+              {!readOnly && isValid === false && (
+                <div
+                  className={classNames(
+                    `${prefix}--slider__validation-msg`,
+                    `${prefix}--slider__validation-msg--invalid`,
+                    `${prefix}--form-requirement`
+                  )}>
+                  {invalidText}
+                </div>
+              )}
+              {!readOnly && warn && isValid && (
+                <div
+                  className={classNames(
+                    `${prefix}--slider__validation-msg`,
+                    `${prefix}--form-requirement`
+                  )}>
+                  {warnText}
+                </div>
+              )}
             </div>
           );
         }}

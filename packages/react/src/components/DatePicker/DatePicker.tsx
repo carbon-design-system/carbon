@@ -462,14 +462,13 @@ const DatePicker = React.forwardRef(function DatePicker(
     });
   };
 
-  //const savedOnOpen = useSavedCallback(onOpen);
   const endInputField = useRef<HTMLTextAreaElement>(null);
   const calendarRef: any | undefined = useRef(null);
-  const savedOnChange = useSavedCallback(() => onChange);
+  const savedOnChange = useSavedCallback(onChange);
   const savedOnClose = useSavedCallback(
     datePickerType === 'range' ? onCalendarClose : onClose
   );
-  const savedOnOpen = useSavedCallback(() => onOpen);
+  const savedOnOpen = useSavedCallback(onOpen);
 
   const datePickerClasses = cx(`${prefix}--date-picker`, {
     [`${prefix}--date-picker--short`]: short,
@@ -530,7 +529,7 @@ const DatePicker = React.forwardRef(function DatePicker(
       return;
     }
 
-    const onHook = (_electedDates, _dateStr, instance, prefix) => {
+    const onHook = (_electedDates, _dateStr, instance) => {
       updateClassNames(instance, prefix);
       if (startInputField?.current) {
         startInputField.current.readOnly = readOnly;
@@ -610,7 +609,7 @@ const DatePicker = React.forwardRef(function DatePicker(
       onReady: onHook,
       onMonthChange: onHook,
       onYearChange: onHook,
-      onOpen: (...args: [any, string, string, string]) => {
+      onOpen: (...args: [any, string, string]) => {
         onHook(...args);
         savedOnOpen(...args);
       },

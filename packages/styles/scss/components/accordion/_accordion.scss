@@ -14,6 +14,7 @@
 @use '../../utilities/button-reset';
 @use '../../utilities/component-reset';
 @use '../../utilities/convert';
+@use '../../utilities/layout';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 
@@ -30,12 +31,12 @@ $justify-content: flex-start !default;
 /// @type Value
 /// @access public
 /// @group accordion
-$arrow-margin: 2px $spacing-05 0 0 !default;
+$arrow-margin: 0 layout.density('padding-inline') 0 0 !default;
 
 /// @type Value
 /// @access public
 /// @group accordion
-$title-margin: 0 0 0 $spacing-05 !default;
+$title-margin: 0 0 0 layout.density('padding-inline') !default;
 
 /// @type Value
 /// @access public
@@ -44,6 +45,9 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
 @mixin accordion {
   .#{$prefix}--accordion {
+    @include layout.use('size', $default: 'md', $min: 'sm', $max: 'lg');
+    @include layout.use('density', $default: 'normal');
+
     @include component-reset.reset;
 
     width: 100%;
@@ -67,11 +71,10 @@ $content-padding: 0 0 0 $spacing-05 !default;
     position: relative;
     display: flex;
     width: 100%;
-    min-height: convert.rem(40px);
+    min-height: layout.size('height');
     flex-direction: $flex-direction;
-    align-items: flex-start;
+    align-items: center;
     justify-content: $justify-content;
-    padding: convert.rem(10px) 0;
     margin: 0;
     color: $text-primary;
     cursor: pointer;
@@ -98,17 +101,6 @@ $content-padding: 0 0 0 $spacing-05 !default;
     &:focus::before {
       @include focus-outline('outline-compat');
     }
-  }
-
-  // Size styles
-  .#{$prefix}--accordion--lg .#{$prefix}--accordion__heading {
-    min-height: convert.rem(48px);
-    align-items: center;
-  }
-
-  .#{$prefix}--accordion--sm .#{$prefix}--accordion__heading {
-    min-height: convert.rem(32px);
-    padding: convert.rem(5px) 0;
   }
 
   // Disabled styles
@@ -164,8 +156,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
   .#{$prefix}--accordion__content {
     display: none;
-    padding-right: $spacing-05;
-    padding-left: $spacing-05;
+    padding-inline: layout.density('padding-inline');
     // Transition property for when the accordion closes
     transition: padding motion(standard, productive) $duration-fast-02;
 
@@ -190,7 +181,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
   .#{$prefix}--accordion--start .#{$prefix}--accordion__arrow {
     // Alters `$arrow-margin` token:
-    margin: 2px 0 0 $spacing-05;
+    margin: 2px 0 0 layout.density('padding-inline');
   }
 
   .#{$prefix}--accordion--start .#{$prefix}--accordion__title {
@@ -198,7 +189,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
   }
 
   .#{$prefix}--accordion--start .#{$prefix}--accordion__content {
-    margin-left: $spacing-07;
+    margin-left: calc(#{layout.density('padding-inline')} + #{$spacing-05});
   }
 
   .#{$prefix}--accordion__item--collapsing .#{$prefix}--accordion__content,

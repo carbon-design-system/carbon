@@ -31,6 +31,7 @@ describe('Grid', () => {
         <span id="test">Test</span>
       </Grid>
     );
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const testNode = container.querySelector('#test');
     expect(testNode).toBeInstanceOf(HTMLElement);
   });

@@ -4,6 +4,8 @@ import { act } from 'react-dom/test-utils';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+const prefix = 'cds';
+
 describe('Tabs', () => {
   it('should update selected index based on the default provided', () => {
     render(
@@ -117,6 +119,7 @@ describe('Tab', () => {
         </TabPanels>
       </Tabs>
     );
+    // eslint-disable-next-line testing-library/no-node-access
     expect(screen.getByText('Tab Label 1').parentElement.tagName).toBe('DIV');
   });
 
@@ -157,6 +160,7 @@ describe('Tab', () => {
         </TabPanels>
       </Tabs>
     );
+    // eslint-disable-next-line testing-library/no-node-access
     expect(screen.queryByText('test-secondary-label')).not.toBeInTheDocument();
   });
 
@@ -181,6 +185,7 @@ describe('Tab', () => {
     );
 
     expect(screen.getByTestId('svg')).toBeInTheDocument();
+    // eslint-disable-next-line testing-library/no-node-access
     expect(screen.getByTestId('svg').parentElement).toHaveClass(
       'cds--tabs__nav-item--icon'
     );
@@ -228,6 +233,206 @@ describe('Tab', () => {
     await userEvent.type(screen.getByText('Tab Label 1'), 'enter');
 
     expect(onKeyDown).toHaveBeenCalled();
+  });
+
+  it('should render close icon if dismissable', () => {
+    render(
+      <Tabs dismissable onTabCloseRequest={() => {}}>
+        <TabList aria-label="List of tabs">
+          <Tab disabled>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    expect(
+      // eslint-disable-next-line testing-library/no-node-access
+      screen.getAllByLabelText('Close tab')[0].parentElement
+    ).not.toHaveClass(`${prefix}--visually-hidden`);
+  });
+
+  it('should not render close icon if not dismissable', () => {
+    render(
+      <Tabs>
+        <TabList aria-label="List of tabs">
+          <Tab disabled>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    expect(screen.queryAllByLabelText('Close tab')[0]).toHaveClass(
+      `${prefix}--visually-hidden`
+    );
+  });
+
+  it('should call onCloseTabRequest when dismissable and close icon clicked', async () => {
+    const onTabCloseRequest = jest.fn();
+    render(
+      <Tabs dismissable onTabCloseRequest={onTabCloseRequest}>
+        <TabList aria-label="List of tabs">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+    await userEvent.click(screen.getAllByLabelText('Close tab')[0]);
+    expect(onTabCloseRequest).toHaveBeenCalledTimes(1);
+  });
+
+  it('should not call onTabCloseRequest when dismissable and close icon clicked but tab disabled', async () => {
+    const onTabCloseRequest = jest.fn();
+    render(
+      <Tabs dismissable onTabCloseRequest={onTabCloseRequest}>
+        <TabList aria-label="List of tabs">
+          <Tab disabled>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+    await userEvent.click(screen.getAllByLabelText('Close tab')[0]);
+    expect(onTabCloseRequest).not.toHaveBeenCalled();
+  });
+
+  it('should call onCloseTabRequest when dismissable and delete pressed on focused tab', async () => {
+    const onTabCloseRequest = jest.fn();
+    render(
+      <Tabs dismissable onTabCloseRequest={onTabCloseRequest}>
+        <TabList aria-label="List of tabs">
+          <Tab disabled>Tab Label 1</Tab>
+          <Tab data-testid="tab-testid">Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+    screen.getByTestId('tab-testid').focus();
+    await userEvent.keyboard('[Delete]');
+    expect(onTabCloseRequest).toHaveBeenCalledTimes(1);
+  });
+
+  it('should not call onCloseTabRequest when dismissable and delete pressed on focused disabled tab', async () => {
+    const onTabCloseRequest = jest.fn();
+    render(
+      <Tabs dismissable onTabCloseRequest={onTabCloseRequest}>
+        <TabList aria-label="List of tabs">
+          <Tab data-testid="tab-testid" disabled>
+            Tab Label 1
+          </Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+    screen.getByTestId('tab-testid').focus();
+    await userEvent.keyboard('[Delete]');
+    expect(onTabCloseRequest).not.toHaveBeenCalled();
+  });
+
+  it('should throw error when dismissable and onTabCloseRequest prop not supplied', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    try {
+      render(
+        <Tabs dismissable>
+          <TabList aria-label="List of tabs">
+            <Tab data-testid="tab-testid" disabled>
+              Tab Label 1
+            </Tab>
+            <Tab>Tab Label 2</Tab>
+            <Tab>Tab Label 3</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>Tab Panel 1</TabPanel>
+            <TabPanel>Tab Panel 2</TabPanel>
+            <TabPanel>Tab Panel 3</TabPanel>
+          </TabPanels>
+        </Tabs>
+      );
+
+      expect(spy).toHaveBeenCalled();
+    } finally {
+      spy.mockRestore();
+    }
+  });
+
+  it('should render close icon when dismissable', () => {
+    render(
+      <Tabs dismissable>
+        <TabList aria-label="List of tabs">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    expect(screen.getAllByLabelText('Close tab')[0]).not.toHaveClass(
+      `${prefix}--visaully-hidden`
+    );
+  });
+
+  it('should render close icon and renderIcon when dismissable and icon supplied', () => {
+    render(
+      <Tabs dismissable>
+        <TabList aria-label="List of tabs">
+          <Tab renderIcon={() => <svg data-testid="svg" />}>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    expect(screen.getAllByLabelText('Close tab')[0]).not.toHaveClass(
+      `${prefix}--visaully-hidden`
+    );
+    expect(screen.getByTestId('svg')).toBeInTheDocument();
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(screen.getByTestId('svg').parentElement).toHaveClass(
+      `${prefix}--tabs__nav-item--icon-left`
+    );
   });
 });
 
@@ -310,6 +515,7 @@ describe('TabPanel', () => {
 
     expect(screen.getByText('Tab Panel 1')).toHaveAttribute('tabIndex', '-1');
 
+    // eslint-disable-next-line testing-library/no-unnecessary-act
     await act(async () => {
       rerender(
         <Tabs>

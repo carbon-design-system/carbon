@@ -48,13 +48,15 @@ describe('Slider', () => {
         `${prefix}--slider__thumb`
       );
       expect(container.firstChild).toHaveClass(`${prefix}--form-item`);
-      expect(screen.getByLabelText(labelTextValue)).toBeInTheDocument();
+      expect(
+        screen.getByLabelText(labelTextValue, { selector: 'input' })
+      ).toBeInTheDocument();
     });
 
     it('should render extra classes passed in via className', () => {
       const customSliderClass = 'slider-custom-class';
-      renderSlider({ className: customSliderClass });
-      expect(screen.getByRole('presentation')).toHaveClass(customSliderClass);
+      const { container } = renderSlider({ className: customSliderClass });
+      expect(container.firstChild).toHaveClass(customSliderClass);
     });
 
     it('should be able to apply a disabled state', () => {
@@ -63,6 +65,24 @@ describe('Slider', () => {
       expect(screen.getByRole('presentation')).toHaveClass(
         `${prefix}--slider--disabled`
       );
+    });
+
+    it('should be able to apply a warning state', () => {
+      renderSlider({
+        warn: true,
+        ariaLabelInput: inputAriaValue,
+        warnText: 'Warning message',
+      });
+      expect(screen.getByText('Warning message')).toBeInTheDocument();
+    });
+
+    it('should be able to apply a invalid state', () => {
+      renderSlider({
+        invalid: true,
+        ariaLabelInput: inputAriaValue,
+        invalidText: 'Error message',
+      });
+      expect(screen.getByText('Error message')).toBeInTheDocument();
     });
 
     it('should be able to set value via props', () => {
@@ -107,6 +127,7 @@ describe('Slider', () => {
         ariaLabelInput: inputAriaValue,
         hideTextInput: true,
       });
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const inputElement = container.querySelector(
         `.${prefix}--text-input.${prefix}--slider-text-input`
       );
@@ -384,6 +405,7 @@ describe('Slider', () => {
           maxLabel: 'max',
           value: 50,
         });
+        // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
         const rangeLabels = container.querySelectorAll(
           `.${prefix}--slider__range-label`
         );
@@ -400,6 +422,7 @@ describe('Slider', () => {
           value: 50,
           formatLabel: (value, label) => `${value}-${label}`,
         });
+        // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
         const rangeLabels = container.querySelectorAll(
           `.${prefix}--slider__range-label`
         );
