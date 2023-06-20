@@ -1586,7 +1586,7 @@ Map {
       "invalidText": "",
       "onChange": [Function],
       "onClick": [Function],
-      "size": "",
+      "size": undefined,
     },
     "propTypes": Object {
       "className": Object {
@@ -8450,7 +8450,7 @@ Map {
         "invalidText": "",
         "onChange": [Function],
         "onClick": [Function],
-        "size": "",
+        "size": undefined,
       },
       "propTypes": Object {
         "className": Object {
@@ -9086,32 +9086,12 @@ Map {
     },
   },
   "ToggleSkeleton" => Object {
-    "defaultProps": Object {
-      "aria-label": "Toggle is loading",
-      "size": "md",
-    },
     "propTypes": Object {
       "aria-label": Object {
-        "isRequired": true,
         "type": "string",
       },
       "className": Object {
         "type": "string",
-      },
-      "id": Object {
-        "type": "string",
-      },
-      "labelText": Object {
-        "type": "string",
-      },
-      "size": Object {
-        "args": Array [
-          Array [
-            "sm",
-            "md",
-          ],
-        ],
-        "type": "oneOf",
       },
     },
   },

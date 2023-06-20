@@ -1143,7 +1143,7 @@
     },
     {
       "login": "kubijo",
-      "name": "kubijo",
+      "name": "Josef Kubíček",
       "avatar_url": "https://avatars.githubusercontent.com/u/11244314?v=4",
       "profile": "https://github.com/kubijo",
       "contributions": [
@@ -1188,12 +1188,13 @@
       ]
     },
     {
-      "login": "tongyy",
-      "name": "Tony ZL",
-      "avatar_url": "https://avatars.githubusercontent.com/u/24784725?v=4",
-      "profile": "https://github.com/tongyy",
+      "login": "modaslam",
+      "name": "Mohammed Aslam P. A.",
+      "avatar_url": "https://avatars.githubusercontent.com/u/33179527?v=4",
+      "profile": "https://github.com/modaslam",
       "contributions": [
-        "code"
+        "code",
+        "doc"
       ]
     }
   ],
