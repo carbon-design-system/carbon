@@ -2412,11 +2412,10 @@ __metadata:
     "@storybook/addon-essentials": ^7.0.18
     "@storybook/addon-knobs": ^7.0.2
     "@storybook/addon-notes": ^5.3.21
-    "@storybook/addon-storysource": ^6.5.6
-    "@storybook/builder-webpack5": ^6.5.6
-    "@storybook/manager-webpack5": ^6.5.6
-    "@storybook/react": ^6.5.6
-    "@storybook/theming": ^6.5.6
+    "@storybook/addon-storysource": ^7.0.18
+    "@storybook/react": ^7.0.18
+    "@storybook/react-webpack5": ^7.0.18
+    "@storybook/theming": ^7.0.18
     "@types/react-is": ~18.2.0
     autoprefixer: ^10.4.0
     babel-loader: ^9.0.0
