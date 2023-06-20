@@ -33,9 +33,6 @@ packages/components/node_modules
 packages/components/scss/globals/vendor/**
 packages/components/src/globals/scss/vendor/**
 
-# Sketch
-*.sketchplugin
-
 # Upgrade
 **/__testfixtures__/**
 packages/upgrade/cli.js
