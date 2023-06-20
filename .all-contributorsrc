@@ -1196,6 +1196,15 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "tongyy",
+      "name": "Tony ZL",
+      "avatar_url": "https://avatars.githubusercontent.com/u/24784725?v=4",
+      "profile": "https://github.com/tongyy",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
