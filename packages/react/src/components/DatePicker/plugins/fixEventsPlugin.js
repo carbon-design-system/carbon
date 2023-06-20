@@ -12,11 +12,11 @@ import { match, keys } from '../../../internal/keyboard';
  * @returns {Plugin} A Flatpickr plugin to fix Flatpickr's behavior of certain events.
  */
 export default (config) => (fp) => {
+  const { inputFrom, inputTo, lastStartValue } = config;
   /**
    * Handles `keydown` event.
    */
   const handleKeydown = (event) => {
-    const { inputFrom, inputTo } = config;
     const { target } = event;
     if (inputFrom === target || inputTo === target) {
       if (match(event, keys.Enter)) {
@@ -43,6 +43,9 @@ export default (config) => (fp) => {
     }
   };
 
+  const parseDateWithFormat = (dateStr) =>
+    fp.parseDate(dateStr, fp.config.dateFormat);
+
   /**
    * Handles `blur` event.
    *
@@ -51,7 +54,6 @@ export default (config) => (fp) => {
    * set the date again, triggering the calendar to update.
    */
   const handleBlur = (event) => {
-    const { inputFrom, inputTo, lastStartValue } = config;
     const { target } = event;
 
     // Only fall into this logic if the event is on the `to` input and there is a
@@ -59,8 +61,11 @@ export default (config) => (fp) => {
     if (inputTo === target && fp.selectedDates[1]) {
       // Using getTime() enables the ability to more readily compare the date currently
       // selected in the calendar and the date currently in the value of the input
-      const selectedToDate = new Date(fp.selectedDates[1]).setHours(0, 0, 0, 0);
-      const currentValueToDate = new Date(inputTo.value).setHours(0, 0, 0, 0);
+      const withoutTime = (date) => date.setHours(0, 0, 0, 0);
+      const selectedToDate = withoutTime(new Date(fp.selectedDates[1]));
+      const currentValueToDate = withoutTime(
+        parseDateWithFormat(inputTo.value)
+      );
 
       // The date should only be set if both dates are valid dates, and they don't match.
       // When they don't match, this indiciates that the date selected in the calendar is stale,
@@ -79,11 +84,10 @@ export default (config) => (fp) => {
       }
     }
 
+    const isValidDate = (date) => date.toString() !== 'Invalid Date';
     // save end date in calendar inmediately after it's been written down
     if (inputTo === target && fp.selectedDates.length === 1 && inputTo.value) {
-      let currentEndDate = new Date(inputTo.value);
-
-      if (currentEndDate.toString() !== 'Invalid Date') {
+      if (isValidDate(parseDateWithFormat(inputTo.value))) {
         fp.setDate(
           [inputFrom.value, inputTo.value],
           true,
@@ -94,9 +98,7 @@ export default (config) => (fp) => {
 
     // overriding the flatpickr bug where the startDate gets deleted on blur
     if (inputTo === target && !inputFrom.value && lastStartValue.current) {
-      let currentStartDate = new Date(lastStartValue.current);
-
-      if (currentStartDate.toString() !== 'Invalid Date') {
+      if (isValidDate(parseDateWithFormat(lastStartValue.current))) {
         inputFrom.value = lastStartValue.current;
         if (inputTo.value) {
           fp.setDate(

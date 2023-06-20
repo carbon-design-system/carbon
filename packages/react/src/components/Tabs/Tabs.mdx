@@ -64,9 +64,9 @@ First, we'll want to import the components from the react package.
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@carbon/react';
 ```
 
-In order to be able to "close" or "remove" tabs, we'll need to access and
-render your tabs programmatically. For such purposes we'll need to store your
-tabs in an array variable and put them in the state
+In order to be able to "close" or "remove" tabs, we'll need to access and render
+your tabs programmatically. For such purposes we'll need to store your tabs in
+an array variable and put them in the state
 
 ```js
 const tabs = [
@@ -91,13 +91,13 @@ const tabs = [
 const [renderedTabs, setRenderedTabs] = useState(tabs);
 ```
 
-The `Tabs` component accepts an `onTabCloseRequest` prop function that will forward
-us the index of the requested tab to be closed. You may use this function to
-open up a confirmation modal previous to deleting the tab; in our case, we'll
-just go ahead and remove that tab directly from the `renderedTab`s array and
-cover for some `selectedIndex` edge cases (i.e., when a tab is removed from the
-array, the selectedIndex might need to be updated to point to a new tab or
-index).
+The `Tabs` component accepts an `onTabCloseRequest` prop function that will
+forward us the index of the requested tab to be closed. You may use this
+function to open up a confirmation modal previous to deleting the tab; in our
+case, we'll just go ahead and remove that tab directly from the `renderedTab`s
+array and cover for some `selectedIndex` edge cases (i.e., when a tab is removed
+from the array, the selectedIndex might need to be updated to point to a new tab
+or index).
 
 In order to be able to modify the `selectedIndex` on our end we'll need to use
 the `Tabs` component in a controlled state, which means we'll also have to
@@ -112,6 +112,11 @@ const handleTabChange = (evt) => {
 };
 
 const handleCloseTabRequest = (tabIndex) => {
+  // ignore close requests on disabled tabs
+  if (renderedTabs[tabIndex].disabled) {
+    return;
+  }
+
   const selectedTab = renderedTabs[selectedIndex];
 
   const filteredTabs = renderedTabs.filter((_, index) => index !== tabIndex);
@@ -154,9 +159,7 @@ return (
       onTabCloseRequest={handleCloseTabRequest}>
       <TabList aria-label="List of tabs">
         {renderedTabs.map((tab, index) => (
-          <Tab
-            key={index}
-            disabled={tab.disabled}>
+          <Tab key={index} disabled={tab.disabled}>
             {tab.label}
           </Tab>
         ))}

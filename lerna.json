@@ -3,7 +3,6 @@
   "version": "independent",
   "npmClient": "yarn",
   "npmClientArgs": ["--frozen-lockfile"],
-  "useWorkspaces": true,
   "ignoreChanges": [
     "actions/**",
     "**/__fixtures__/**",
