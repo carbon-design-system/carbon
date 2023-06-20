@@ -11,7 +11,7 @@ module.exports = {
   preset: 'jest-config-carbon',
   collectCoverageFrom: [
     'packages/**/src/**/*.js',
-    '!packages/{cli,components,sketch}/**',
+    '!packages/{cli,components}/**',
     '!packages/**/{examples,stories}/**',
     '!**/*-story.js',
     '!**/*.stories.js',
