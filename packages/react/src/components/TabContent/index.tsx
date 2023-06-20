@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+export { type TabContentProps } from './TabContent';
 import TabContent from './TabContent';
-
 export default TabContent;
 export { TabContent };
