@@ -28,6 +28,8 @@ import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 
+const  {keyDownArrowDown, keyDownArrowUp, keyDownEscape, clickButton, blurButton, changeInput} = Downshift.stateChangeTypes
+
 const defaultItemToString = (item) => {
   if (typeof item === 'string') {
     return item;
@@ -302,6 +304,7 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
   const [isFocused, setIsFocused] = useState(false);
   const [prevSelectedItem, setPrevSelectedItem] = useState<any>();
   const [doneInitialSelectedItem, setDoneInitialSelectedItem] = useState(false);
+  const [highlightedIndex, setHighlightedIndex] = useState<number>();
   const savedOnInputChange = useRef(onInputChange);
 
   if (!doneInitialSelectedItem || prevSelectedItem !== selectedItem) {
@@ -354,19 +357,41 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
     }
   };
 
-  const handleOnStateChange = (newState, { setHighlightedIndex }) => {
-    if (Object.prototype.hasOwnProperty.call(newState, 'inputValue')) {
-      const { inputValue } = newState;
+  const getHighlightedIndex = (changes) => {
+    if (Object.prototype.hasOwnProperty.call(changes, 'inputValue')) {
+      const { inputValue } = changes;
       const filteredItems = filterItems(items, itemToString, inputValue);
-      setHighlightedIndex(
-        findHighlightedIndex(
-          {
-            ...props,
-            items: filteredItems,
-          },
-          inputValue
-        )
-      );
+      const indexToHighlight =
+      findHighlightedIndex(
+        {
+          ...props,
+          items: filteredItems,
+        },
+        inputValue
+      )
+      setHighlightedIndex(indexToHighlight);
+      return indexToHighlight
+    }
+    return highlightedIndex
+  }
+
+  const handleOnStateChange = (changes, {setHighlightedIndex: updateHighlightedIndex}) => {
+    const { type } = changes;
+    switch (type) {
+      case keyDownArrowDown:
+      case keyDownArrowUp:
+        setHighlightedIndex(changes.highlightedIndex);
+        break;
+      case blurButton:
+      case keyDownEscape:
+        setHighlightedIndex(changes.highlightedIndex);
+        break;
+      case clickButton:
+        setHighlightedIndex(changes.highlightedIndex);
+        break;
+      case changeInput:
+        updateHighlightedIndex(getHighlightedIndex(changes));
+        break;
     }
   };
 
@@ -412,6 +437,7 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
 
   // needs to be Capitalized for react to render it correctly
   const ItemToElement = itemToElement;
+
   return (
     <Downshift
       {...downshiftProps}
@@ -436,7 +462,6 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
         isOpen,
         inputValue,
         selectedItem,
-        highlightedIndex,
         clearSelection,
         toggleMenu,
       }) => {
@@ -606,12 +631,7 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
                           <ListBox.MenuItem
                             key={itemProps.id}
                             isActive={selectedItem === item}
-                            isHighlighted={
-                              highlightedIndex === index ||
-                              ((selectedItem as any)?.id &&
-                                (selectedItem as any)?.id === item.id) ||
-                              false
-                            }
+                            isHighlighted={highlightedIndex === index}
                             title={
                               itemToElement
                                 ? item.text
