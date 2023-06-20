@@ -75,7 +75,7 @@ $layout-tokens: (
         );
       }
 
-      .#{$prefix}--layout-constraint--#{$group}\:default-#{$step} {
+      .#{$prefix}--layout-constraint--#{$group}__default-#{$step} {
         @include custom-property.declaration(
           'layout-#{$group}-#{$property}',
           custom-property.get-var(
@@ -89,7 +89,7 @@ $layout-tokens: (
       }
 
       @each $constraint in ('min', 'max') {
-        .#{$prefix}--layout-constraint--#{$group}\:#{$constraint}-#{$step} {
+        .#{$prefix}--layout-constraint--#{$group}__#{$constraint}-#{$step} {
           @include custom-property.declaration(
             'layout-#{$group}-#{$property}-#{$constraint}',
             custom-property.get-var(
