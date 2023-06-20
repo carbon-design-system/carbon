@@ -42,3 +42,28 @@
     }
   }
 }
+
+/// Circular Skeleton loading animation
+/// @access public
+/// @example @include circular-skeleton;
+/// @group utilities
+@mixin circular-skeleton {
+  position: relative;
+  overflow: hidden;
+  background: $skeleton-background;
+  border-radius: 50%;
+
+  &::before {
+    position: absolute;
+    width: 200%;
+    height: 100%;
+    animation: 3000ms ease-in-out skeleton infinite;
+    background: $skeleton-element;
+    content: '';
+    will-change: transform-origin, transform, opacity;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
+}
