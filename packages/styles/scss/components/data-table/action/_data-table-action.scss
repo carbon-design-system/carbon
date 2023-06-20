@@ -13,7 +13,6 @@
 @use '../../../utilities/button-reset';
 @use '../../../utilities/convert' as *;
 @use '../../../utilities/focus-outline' as *;
-@use '../../button/vars' as *;
 
 /// Data table action styles
 /// @access public
@@ -411,7 +410,8 @@
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn {
-    padding: $button-padding-ghost;
+    padding-right: $spacing-05;
+    padding-left: $spacing-05;
     color: $text-on-color;
     white-space: nowrap;
   }

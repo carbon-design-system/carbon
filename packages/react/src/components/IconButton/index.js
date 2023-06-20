@@ -21,10 +21,10 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
     closeOnActivation = true,
     defaultOpen = false,
     disabled,
-    enterDelayMs,
+    enterDelayMs = 100,
     kind,
     label,
-    leaveDelayMs,
+    leaveDelayMs = 100,
     wrapperClasses,
     size,
     ...rest

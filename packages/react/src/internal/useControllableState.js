@@ -19,7 +19,7 @@ import { warning } from './warning';
  * uncontrolled, or vice-versa.
  *
  * @param {object} config
- * @param {string} config.name - the name of the custom component
+ * @param {string} [config.name] - the name of the custom component
  * @param {any} config.defaultValue - the default value used for the state. This will be
  * the fallback value used if `value` is not defined.
  * @param {Function} config.onChange - an optional function that is called when
@@ -27,7 +27,7 @@ import { warning } from './warning';
  * controlled components that the value is requesting to be changed.
  * @param {any} config.value - a controlled value. Omitting this means that the state is
  * uncontrolled
- * @returns {[any, Function]}
+ * @returns {[any, (v: any) => void]}
  */
 export function useControllableState({
   defaultValue,
