@@ -76,7 +76,6 @@ const TabContext = React.createContext<{
 
 const lgMediaQuery = `(min-width: ${breakpoints.lg.width})`;
 
-
 // Used to keep track of position in a list of tab panels
 const TabPanelContext = React.createContext<number>(0);
 
@@ -355,7 +354,6 @@ function TabList({
     },
     customClassName
   );
-
 
   // Previous Button
   // VISIBLE IF:
@@ -903,7 +901,9 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
             {<Icon size={16} />}
           </div>
         )}
-        <span className={`${prefix}--tabs__nav-item-label`} title={children as string}>
+        <span
+          className={`${prefix}--tabs__nav-item-label`}
+          title={children as string}>
           {children}
         </span>
         {/* always rendering dismissIcon so we don't lose reference to it, otherwise events do not work when switching from/to dismissable state */}
