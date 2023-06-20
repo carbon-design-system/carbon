@@ -267,7 +267,7 @@ const Dropdown = React.forwardRef(
       highlightedIndex,
       initialSelectedItem,
       onSelectedItemChange,
-      onStateChange
+      onStateChange,
     };
     const { current: dropdownInstanceId } = useRef(getInstanceId());
 

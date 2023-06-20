@@ -28,7 +28,14 @@ import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 
-const  {keyDownArrowDown, keyDownArrowUp, keyDownEscape, clickButton, blurButton, changeInput} = Downshift.stateChangeTypes
+const {
+  keyDownArrowDown,
+  keyDownArrowUp,
+  keyDownEscape,
+  clickButton,
+  blurButton,
+  changeInput,
+} = Downshift.stateChangeTypes;
 
 const defaultItemToString = (item) => {
   if (typeof item === 'string') {
@@ -361,21 +368,23 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
     if (Object.prototype.hasOwnProperty.call(changes, 'inputValue')) {
       const { inputValue } = changes;
       const filteredItems = filterItems(items, itemToString, inputValue);
-      const indexToHighlight =
-      findHighlightedIndex(
+      const indexToHighlight = findHighlightedIndex(
         {
           ...props,
           items: filteredItems,
         },
         inputValue
-      )
+      );
       setHighlightedIndex(indexToHighlight);
-      return indexToHighlight
+      return indexToHighlight;
     }
-    return highlightedIndex
-  }
+    return highlightedIndex;
+  };
 
-  const handleOnStateChange = (changes, {setHighlightedIndex: updateHighlightedIndex}) => {
+  const handleOnStateChange = (
+    changes,
+    { setHighlightedIndex: updateHighlightedIndex }
+  ) => {
     const { type } = changes;
     switch (type) {
       case keyDownArrowDown:
