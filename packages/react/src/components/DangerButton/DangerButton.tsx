@@ -6,8 +6,10 @@
  */
 
 import React from 'react';
-import Button from '../Button';
+import Button, { ButtonComponent, ButtonProps } from '../Button';
 
-const DangerButton = (props) => <Button kind="danger" {...props} />;
+const DangerButton: ButtonComponent = <T extends React.ElementType>(
+  props: ButtonProps<T>
+) => <Button kind="danger" {...props} />;
 
 export default DangerButton;

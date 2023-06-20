@@ -55,7 +55,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
-    "@types/react-is": "~17.0.3",
+    "@types/react-is": "~18.2.0",
     "accessibility-checker": "^3.1.48",
     "all-contributors-cli": "^6.19.0",
     "cross-env": "^7.0.0",
