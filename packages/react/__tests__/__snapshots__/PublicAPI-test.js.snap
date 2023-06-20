@@ -7548,9 +7548,6 @@ Map {
     "render": [Function],
   },
   "TabContent" => Object {
-    "defaultProps": Object {
-      "selected": false,
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",

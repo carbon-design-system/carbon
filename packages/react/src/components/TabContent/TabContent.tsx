@@ -6,7 +6,13 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useRef } from 'react';
+import React, {
+  useState,
+  useRef,
+  type RefObject,
+  type HTMLAttributes,
+  type ReactNode,
+} from 'react';
 import classNames from 'classnames';
 import { selectorTabbable } from '../../internal/keyboard/navigation';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
@@ -15,26 +21,41 @@ import { usePrefix } from '../../internal/usePrefix';
 /**
  * Determine if the node within the provided ref contains content that is tabbable.
  */
-function useTabbableContent(ref) {
+function useTabbableContent(ref: RefObject<HTMLDivElement>) {
   const [hasTabbableContent, setHasTabbableContent] = useState(false);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useIsomorphicEffect(() => {
     if (ref.current) {
-      setHasTabbableContent(ref.current.querySelector(selectorTabbable));
+      setHasTabbableContent(!!ref.current.querySelector(selectorTabbable));
     }
   });
 
   return hasTabbableContent;
 }
 
-const TabContent = (props) => {
+export interface TabContentProps extends HTMLAttributes<HTMLDivElement> {
+  /**
+   * Pass in content to render inside the TabContent
+   */
+  children?: ReactNode;
+
+  /**
+   * Provide a className for the tab content container
+   */
+  className?: string;
+
+  /**
+   * Specify whether the TabContent is selected
+   */
+  selected?: boolean;
+}
+
+export default function TabContent(props) {
   const { className, selected, children, ...other } = props;
   const prefix = usePrefix();
-  const tabContentClasses = classNames(`${prefix}--tab-content`, {
-    [className]: className,
-  });
-  const ref = useRef(null);
+  const tabContentClasses = classNames(`${prefix}--tab-content`, className);
+  const ref = useRef<HTMLDivElement>(null);
   const hasTabbableContent = useTabbableContent(ref);
   return (
     <div
@@ -48,11 +69,11 @@ const TabContent = (props) => {
       {children}
     </div>
   );
-};
+}
 
 TabContent.propTypes = {
   /**
-   * Pass in content to render inside of the TabContent
+   * Pass in content to render inside the TabContent
    */
   children: PropTypes.node,
 
@@ -66,9 +87,3 @@ TabContent.propTypes = {
    */
   selected: PropTypes.bool,
 };
-
-TabContent.defaultProps = {
-  selected: false,
-};
-
-export default TabContent;
