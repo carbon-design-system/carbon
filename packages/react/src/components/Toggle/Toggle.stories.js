@@ -8,7 +8,7 @@
 import React from 'react';
 
 import { VStack } from '../Stack';
-import Toggle from '../Toggle';
+import Toggle, { ToggleSkeleton } from '../Toggle';
 
 export default {
   title: 'Components/Toggle',
@@ -105,4 +105,10 @@ export const WithAcessibleLabels = () => (
       <Toggle id="toggle-7" hideLabel />
     </div>
   </VStack>
+);
+
+export const Skeleton = () => (
+  <div>
+    <ToggleSkeleton aria-label="Toggle is loading" />
+  </div>
 );
