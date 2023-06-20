@@ -94,6 +94,7 @@ const Link = React.forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
     const linkProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
       className,
       rel,
+      target,
     };
 
     // Reference for disabled links:
