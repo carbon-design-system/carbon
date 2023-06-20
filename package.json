@@ -74,7 +74,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.0",
-    "stylelint": "^14.3.0"
+    "stylelint": "^15.0.0"
   },
   "commitlint": {
     "extends": [
