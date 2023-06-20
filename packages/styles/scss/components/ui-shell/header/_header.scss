@@ -48,6 +48,10 @@
     }
   }
 
+  .#{$prefix}--header__global .#{$prefix}--popover {
+    z-index: z('header') + 1;
+  }
+
   .#{$prefix}--header__action > :first-child {
     margin-block-start: 0;
   }

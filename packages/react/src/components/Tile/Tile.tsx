@@ -1,4 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+  type MouseEvent,
+  type KeyboardEvent,
+  type HTMLAttributes,
+  type ChangeEvent,
+  type ComponentType,
+} from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
@@ -18,7 +28,14 @@ import { getInteractiveContent } from '../../internal/useNoInteractiveChildren';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useFeatureFlag } from '../FeatureFlags';
 
-export const Tile = React.forwardRef(function Tile(
+export interface TileProps extends HTMLAttributes<HTMLDivElement> {
+  children?: ReactNode;
+  className?: string;
+  /** @deprecated */
+  light?: boolean;
+}
+
+export const Tile = React.forwardRef<HTMLDivElement, TileProps>(function Tile(
   { children, className, light = false, ...rest },
   ref
 ) {
@@ -26,9 +43,7 @@ export const Tile = React.forwardRef(function Tile(
 
   const tileClasses = cx(
     `${prefix}--tile`,
-    {
-      [`${prefix}--tile--light`]: light,
-    },
+    light && `${prefix}--tile--light`,
     className
   );
   return (
@@ -53,6 +68,8 @@ Tile.propTypes = {
   /**
    * `true` to use the light version. For use on $ui-01 backgrounds only.
    * Don't use this to make tile background color same as container background color.
+   *
+   * @deprecated
    */
   light: deprecate(
     PropTypes.bool,
@@ -60,7 +77,53 @@ Tile.propTypes = {
   ),
 };
 
-export const ClickableTile = React.forwardRef(function ClickableTile(
+export interface ClickableTileProps extends HTMLAttributes<HTMLAnchorElement> {
+  children?: ReactNode;
+  className?: string;
+
+  /** @deprecated */
+  light?: boolean;
+
+  /**
+   * Boolean for whether a tile has been clicked.
+   */
+  clicked?: boolean;
+
+  /**
+   * Specify whether the ClickableTile should be disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * The href for the link.
+   */
+  href?: string;
+
+  /**
+   * Optional prop to allow overriding the icon rendering.
+   */
+  renderIcon?: ComponentType<{ className?: string }>;
+
+  /**
+   * Specify the function to run when the ClickableTile is clicked
+   */
+  onClick?(event: MouseEvent): void;
+
+  /**
+   * Specify the function to run when the ClickableTile is interacted with via a keyboard
+   */
+  onKeyDown?(event: KeyboardEvent): void;
+
+  /**
+   * The rel property for the link.
+   */
+  rel?: string;
+}
+
+export const ClickableTile = React.forwardRef<
+  HTMLAnchorElement,
+  ClickableTileProps
+>(function ClickableTile(
   {
     children,
     className,
@@ -79,22 +142,20 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
   const classes = cx(
     `${prefix}--tile`,
     `${prefix}--tile--clickable`,
-    {
-      [`${prefix}--tile--is-clicked`]: clicked,
-      [`${prefix}--tile--light`]: light,
-    },
+    clicked && `${prefix}--tile--is-clicked`,
+    light && `${prefix}--tile--light`,
     className
   );
 
   const [isSelected, setIsSelected] = useState(clicked);
 
-  function handleOnClick(evt) {
+  function handleOnClick(evt: MouseEvent) {
     evt.persist();
     setIsSelected(!isSelected);
     onClick(evt);
   }
 
-  function handleOnKeyDown(evt) {
+  function handleOnKeyDown(evt: KeyboardEvent) {
     evt.persist();
     if (matches(evt, [keys.Enter, keys.Space])) {
       evt.preventDefault();
@@ -125,7 +186,7 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
     <Link
       className={classes}
       href={href}
-      onClick={!disabled ? handleOnClick : null}
+      onClick={!disabled ? handleOnClick : undefined}
       onKeyDown={handleOnKeyDown}
       ref={ref}
       disabled={disabled}
@@ -191,24 +252,86 @@ ClickableTile.propTypes = {
    * Optional prop to allow overriding the icon rendering.
    * Can be a React component class
    */
+  // @ts-expect-error: Invalid derived prop type, seemingly no real solution.
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
-export const SelectableTile = React.forwardRef(function SelectableTile(
+export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
+  children?: ReactNode;
+  className?: string;
+
+  /** @deprecated */
+  light?: boolean;
+
+  /**
+   * Specify whether the SelectableTile should be disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * The ID of the `<input>`.
+   */
+  id?: string;
+
+  /**
+   * The `name` of the `<input>`.
+   * @deprecated
+   */
+  name?: string;
+
+  /**
+   * The empty handler of the `<input>`.
+   */
+  onChange?(event: ChangeEvent<HTMLDivElement>): void;
+
+  /**
+   * Specify the function to run when the SelectableTile is clicked
+   */
+  onClick?(event: MouseEvent<HTMLDivElement>): void;
+
+  /**
+   * Specify the function to run when the SelectableTile is interacted with via a keyboard
+   */
+  onKeyDown?(event: KeyboardEvent<HTMLDivElement>): void;
+
+  /**
+   * `true` to select this tile.
+   */
+  selected?: boolean;
+
+  /**
+   * Specify the tab index of the wrapper element
+   */
+  tabIndex?: number;
+
+  /**
+   * The `title` of the `<input>`.
+   */
+  title?: string;
+
+  /**
+   * The value of the `<input>`.
+   * @deprecated
+   */
+  value: string | number;
+}
+
+export const SelectableTile = React.forwardRef<
+  HTMLDivElement,
+  SelectableTileProps
+>(function SelectableTile(
   {
     children,
     className,
     disabled,
     id,
     light,
-    name,
     onClick = () => {},
     onChange = () => {},
     onKeyDown = () => {},
     selected = false,
     tabIndex = 0,
     title = 'title',
-    value = 'value',
     ...rest
   },
   ref
@@ -216,20 +339,17 @@ export const SelectableTile = React.forwardRef(function SelectableTile(
   const prefix = usePrefix();
 
   const clickHandler = onClick;
-
   const keyDownHandler = onKeyDown;
 
-  const [isSelected, setIsSelected] = useState(selected);
-  const [prevSelected, setPrevSelected] = useState(selected);
+  const [isSelected, setIsSelected] = useState<boolean>(selected);
+  const [prevSelected, setPrevSelected] = useState<boolean>(selected);
 
   const classes = cx(
     `${prefix}--tile`,
     `${prefix}--tile--selectable`,
-    {
-      [`${prefix}--tile--is-selected`]: isSelected,
-      [`${prefix}--tile--light`]: light,
-      [`${prefix}--tile--disabled`]: disabled,
-    },
+    isSelected && `${prefix}--tile--is-selected`,
+    light && `${prefix}--tile--light`,
+    disabled && `${prefix}--tile--disabled`,
     className
   );
 
@@ -264,20 +384,18 @@ export const SelectableTile = React.forwardRef(function SelectableTile(
   }
 
   return (
+    // eslint-disable-next-line jsx-a11y/interactive-supports-focus
     <div
       className={classes}
-      onClick={!disabled ? handleOnClick : null}
+      onClick={!disabled ? handleOnClick : undefined}
       role="checkbox"
       aria-checked={isSelected}
-      disabled={disabled}
-      onKeyDown={!disabled ? handleOnKeyDown : null}
+      onKeyDown={!disabled ? handleOnKeyDown : undefined}
       // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-      tabIndex={!disabled ? tabIndex : null}
-      value={value}
-      name={name}
+      tabIndex={!disabled ? tabIndex : undefined}
       ref={ref}
       id={id}
-      onChange={!disabled ? handleChange : null}
+      onChange={!disabled ? handleChange : undefined}
       title={title}
       {...rest}>
       <span
@@ -293,14 +411,7 @@ export const SelectableTile = React.forwardRef(function SelectableTile(
 
 SelectableTile.displayName = 'SelectableTile';
 SelectableTile.propTypes = {
-  /**
-   * The child nodes.
-   */
   children: PropTypes.node,
-
-  /**
-   * The CSS class names.
-   */
   className: PropTypes.string,
 
   /**
@@ -324,6 +435,7 @@ SelectableTile.propTypes = {
 
   /**
    * The `name` of the `<input>`.
+   * @deprecated
    */
   name: PropTypes.string,
 
@@ -359,22 +471,83 @@ SelectableTile.propTypes = {
 
   /**
    * The value of the `<input>`.
+   * @deprecated
    */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
-export const ExpandableTile = React.forwardRef(function ExpandableTile(
+export interface ExpandableTileProps extends HTMLAttributes<HTMLDivElement> {
+  children?: ReactNode;
+  className?: string;
+
+  /** @deprecated */
+  light?: boolean;
+
+  /**
+   * `true` if the tile is expanded.
+   */
+  expanded?: boolean;
+
+  /**
+   * An ID that can be provided to aria-labelledby
+   */
+  id?: string;
+
+  /**
+   * Specify the function to run when the ExpandableTile is clicked
+   */
+  onClick?(event: MouseEvent): void;
+
+  /**
+   * optional handler to trigger a function when a key is pressed
+   */
+  onKeyUp?(event: KeyboardEvent): void;
+
+  /**
+   * The `tabindex` attribute.
+   */
+  tabIndex?: number;
+
+  /**
+   * The description of the "collapsed" icon that can be read by screen readers.
+   */
+  tileCollapsedIconText?: string;
+
+  /**
+   * When "collapsed", a label to appear next to the chevron (e.g., "View more").
+   */
+  tileCollapsedLabel?: string;
+
+  /**
+   * The description of the "expanded" icon that can be read by screen readers.
+   */
+  tileExpandedIconText?: string;
+
+  /**
+   * When "expanded", a label to appear next to the chevron (e.g., "View less").
+   */
+  tileExpandedLabel?: string;
+
+  tileMaxHeight?: number;
+
+  tilePadding?: number;
+}
+
+export const ExpandableTile = React.forwardRef<
+  HTMLElement,
+  ExpandableTileProps
+>(function ExpandableTile(
   {
-    tabIndex,
+    tabIndex = 0,
     className,
     children,
-    expanded,
-    tileMaxHeight, // eslint-disable-line
-    tilePadding, // eslint-disable-line
+    expanded = false,
+    tileMaxHeight = 0, // eslint-disable-line
+    tilePadding = 0, // eslint-disable-line
     onClick,
     onKeyUp,
-    tileCollapsedIconText,
-    tileExpandedIconText,
+    tileCollapsedIconText = 'Interact to expand Tile',
+    tileExpandedIconText = 'Interact to collapse Tile',
     tileCollapsedLabel,
     tileExpandedLabel,
     light,
@@ -382,19 +555,20 @@ export const ExpandableTile = React.forwardRef(function ExpandableTile(
   },
   forwardRef
 ) {
-  const [isTileMaxHeight, setIsTileMaxHeight] = useState(tileMaxHeight);
-  const [isTilePadding, setIsTilePadding] = useState(tilePadding);
-  const [prevExpanded, setPrevExpanded] = useState(expanded);
-  const [prevTileMaxHeight, setPrevTileMaxHeight] = useState(tileMaxHeight);
-  const [prevTilePadding, setPrevTilePadding] = useState(tilePadding);
-  const [isExpanded, setIsExpanded] = useState(expanded);
-  const [interactive, setInteractive] = useState(true);
-  const aboveTheFold = useRef(null);
-  const belowTheFold = useRef(null);
-  const tileContent = useRef(null);
-  const tile = useRef(null);
-  const prefix = usePrefix();
+  const [isTileMaxHeight, setIsTileMaxHeight] = useState<number>(tileMaxHeight);
+  const [isTilePadding, setIsTilePadding] = useState<number>(tilePadding);
+  const [prevExpanded, setPrevExpanded] = useState<boolean>(expanded);
+  const [prevTileMaxHeight, setPrevTileMaxHeight] =
+    useState<number>(tileMaxHeight);
+  const [prevTilePadding, setPrevTilePadding] = useState<number>(tilePadding);
+  const [isExpanded, setIsExpanded] = useState<boolean>(expanded);
+  const [interactive, setInteractive] = useState<boolean>(true);
+  const aboveTheFold = useRef<HTMLDivElement>(null);
+  const belowTheFold = useRef<HTMLDivElement>(null);
+  const tileContent = useRef<HTMLDivElement>(null);
+  const tile = useRef<HTMLElement>(null);
   const ref = useMergedRefs([forwardRef, tile]);
+  const prefix = usePrefix();
 
   if (expanded !== prevExpanded) {
     setIsExpanded(expanded);
@@ -413,20 +587,22 @@ export const ExpandableTile = React.forwardRef(function ExpandableTile(
   }
 
   function setMaxHeight() {
-    if (isExpanded) {
-      setIsTileMaxHeight(tileContent.current.getBoundingClientRect().height);
+    if (isExpanded && tileContent.current) {
+      setIsTileMaxHeight(tileContent.current.getBoundingClientRect()?.height);
     }
 
-    setIsTileMaxHeight(aboveTheFold.current.getBoundingClientRect().height);
+    if (aboveTheFold.current) {
+      setIsTileMaxHeight(aboveTheFold.current.getBoundingClientRect().height);
+    }
   }
 
-  function handleClick(evt) {
+  function handleClick(evt: MouseEvent) {
     evt.persist();
     setIsExpanded(!isExpanded);
     setMaxHeight();
   }
 
-  function handleKeyUp(evt) {
+  function handleKeyUp(evt: KeyboardEvent) {
     if (evt.target !== tile.current) {
       if (matches(evt, [keys.Enter, keys.Space])) {
         evt.preventDefault();
@@ -452,10 +628,8 @@ export const ExpandableTile = React.forwardRef(function ExpandableTile(
     `${prefix}--tile`,
     `${prefix}--tile--expandable`,
     `${prefix}--tile--expandable--interactive`,
-    {
-      [`${prefix}--tile--is-expanded`]: isExpanded,
-      [`${prefix}--tile--light`]: light,
-    },
+    isExpanded && `${prefix}--tile--is-expanded`,
+    light && `${prefix}--tile--light`,
     className
   );
 
@@ -467,6 +641,10 @@ export const ExpandableTile = React.forwardRef(function ExpandableTile(
   const childrenAsArray = getChildren();
 
   useIsomorphicEffect(() => {
+    if (!tile.current || !aboveTheFold.current) {
+      return;
+    }
+
     const getStyle = window.getComputedStyle(tile.current, null);
     const { current: node } = aboveTheFold;
     const { height } = node.getBoundingClientRect();
@@ -481,6 +659,10 @@ export const ExpandableTile = React.forwardRef(function ExpandableTile(
   }, [isTileMaxHeight]);
 
   useIsomorphicEffect(() => {
+    if (!aboveTheFold.current || !belowTheFold.current) {
+      return;
+    }
+
     if (!getInteractiveContent(belowTheFold.current)) {
       setInteractive(false);
       return;
@@ -490,25 +672,34 @@ export const ExpandableTile = React.forwardRef(function ExpandableTile(
   }, []);
 
   useIsomorphicEffect(() => {
+    if (!tile.current) {
+      return;
+    }
+
     if (isExpanded) {
-      tile.current.style.maxHeight = null;
+      tile.current.style.maxHeight = '';
     } else {
       tile.current.style.maxHeight = isTileMaxHeight + isTilePadding + 'px';
     }
   }, [isExpanded, isTileMaxHeight, isTilePadding]);
 
   useEffect(() => {
+    if (!aboveTheFold.current) {
+      return;
+    }
+
     const resizeObserver = new ResizeObserver((entries) => {
       const [aboveTheFold] = entries;
       setIsTileMaxHeight(aboveTheFold.contentRect.height);
     });
-
     resizeObserver.observe(aboveTheFold.current);
 
     return () => resizeObserver.disconnect();
   }, []);
+
   return interactive ? (
     <div
+      // @ts-expect-error: Needlesly strict & deep typing for the element type
       ref={ref}
       className={interactiveClassNames}
       aria-expanded={isExpanded}
@@ -534,6 +725,7 @@ export const ExpandableTile = React.forwardRef(function ExpandableTile(
   ) : (
     <button
       type="button"
+      // @ts-expect-error: Needlesly strict & deep typing for the element type
       ref={ref}
       className={classNames}
       aria-expanded={isExpanded}
@@ -559,14 +751,7 @@ export const ExpandableTile = React.forwardRef(function ExpandableTile(
 });
 
 ExpandableTile.propTypes = {
-  /**
-   * The child nodes.
-   */
   children: PropTypes.node,
-
-  /**
-   * The CSS class names.
-   */
   className: PropTypes.string,
 
   /**
@@ -623,30 +808,27 @@ ExpandableTile.propTypes = {
    */
   tileExpandedLabel: PropTypes.string,
 };
-
-ExpandableTile.defaultProps = {
-  tabIndex: 0,
-  expanded: false,
-  tileMaxHeight: 0,
-  tilePadding: 0,
-  onClick: () => {},
-  tileCollapsedIconText: 'Interact to expand Tile',
-  tileExpandedIconText: 'Interact to collapse Tile',
-};
-
 ExpandableTile.displayName = 'ExpandableTile';
 
-export const TileAboveTheFoldContent = React.forwardRef(
-  function TilAboveTheFoldContent({ children }, ref) {
-    const prefix = usePrefix();
+export interface TileAboveTheFoldContentProps {
+  /**
+   * The child nodes.
+   */
+  children?: ReactNode;
+}
 
-    return (
-      <span ref={ref} className={`${prefix}--tile-content__above-the-fold`}>
-        {children}
-      </span>
-    );
-  }
-);
+export const TileAboveTheFoldContent = React.forwardRef<
+  HTMLSpanElement,
+  TileAboveTheFoldContentProps
+>(function TilAboveTheFoldContent({ children }, ref) {
+  const prefix = usePrefix();
+
+  return (
+    <span ref={ref} className={`${prefix}--tile-content__above-the-fold`}>
+      {children}
+    </span>
+  );
+});
 
 TileAboveTheFoldContent.propTypes = {
   /**
@@ -654,20 +836,27 @@ TileAboveTheFoldContent.propTypes = {
    */
   children: PropTypes.node,
 };
-
 TileAboveTheFoldContent.displayName = 'TileAboveTheFoldContent';
 
-export const TileBelowTheFoldContent = React.forwardRef(
-  function TileBelowTheFoldContent({ children }, ref) {
-    const prefix = usePrefix();
+export interface TileBelowTheFoldContentProps {
+  /**
+   * The child nodes.
+   */
+  children?: ReactNode;
+}
 
-    return (
-      <span ref={ref} className={`${prefix}--tile-content__below-the-fold`}>
-        {children}
-      </span>
-    );
-  }
-);
+export const TileBelowTheFoldContent = React.forwardRef<
+  HTMLSpanElement,
+  TileBelowTheFoldContentProps
+>(function TileBelowTheFoldContent({ children }, ref) {
+  const prefix = usePrefix();
+
+  return (
+    <span ref={ref} className={`${prefix}--tile-content__below-the-fold`}>
+      {children}
+    </span>
+  );
+});
 
 TileBelowTheFoldContent.propTypes = {
   /**
@@ -675,5 +864,4 @@ TileBelowTheFoldContent.propTypes = {
    */
   children: PropTypes.node,
 };
-
 TileBelowTheFoldContent.displayName = 'TileBelowTheFoldContent';

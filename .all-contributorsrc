@@ -832,7 +832,8 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/1190770?v=4",
       "profile": "https://haakon.dev/",
       "contributions": [
-        "code"
+        "code",
+        "doc"
       ]
     },
     {
@@ -1142,7 +1143,7 @@
     },
     {
       "login": "kubijo",
-      "name": "kubijo",
+      "name": "Josef Kubíček",
       "avatar_url": "https://avatars.githubusercontent.com/u/11244314?v=4",
       "profile": "https://github.com/kubijo",
       "contributions": [
@@ -1175,6 +1176,25 @@
       "profile": "https://github.com/mrkjdy",
       "contributions": [
         "code"
+      ]
+    },
+    {
+      "login": "anton-tsymuk-viacomcbs",
+      "name": "Anton Tsymuk",
+      "avatar_url": "https://avatars.githubusercontent.com/u/112623876?v=4",
+      "profile": "https://github.com/anton-tsymuk-viacomcbs",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "modaslam",
+      "name": "Mohammed Aslam P. A.",
+      "avatar_url": "https://avatars.githubusercontent.com/u/33179527?v=4",
+      "profile": "https://github.com/modaslam",
+      "contributions": [
+        "code",
+        "doc"
       ]
     }
   ],

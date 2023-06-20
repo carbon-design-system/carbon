@@ -156,6 +156,7 @@
     );
 
     > :first-child {
+      min-width: rem(16px);
       margin-block-start: rem(1px);
     }
 
