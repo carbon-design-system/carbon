@@ -33,9 +33,6 @@ packages/components/docs/js
 # Icons react
 packages/icons-react/next/**
 
-# Sketch
-**/*.sketchplugin/**
-
 # Changelogs
 **/CHANGELOG.md
 
