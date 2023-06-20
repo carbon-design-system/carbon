@@ -91,7 +91,7 @@ test.describe('UIShell @avt', () => {
     );
   });
 
-  test.only('sidenav rail w/header - keyboard nav', async ({ page }) => {
+  test('sidenav rail w/header - keyboard nav', async ({ page }) => {
     await visitStory(page, {
       component: 'UIShell',
       id: 'components-ui-shell--side-nav-rail-w-header',
