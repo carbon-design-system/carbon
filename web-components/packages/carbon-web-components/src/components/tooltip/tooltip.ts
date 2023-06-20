@@ -31,6 +31,12 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
   align = 'top';
 
   /**
+   * `true` if this tooltip is in a data table row
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'data-table' })
+  dataTable = false;
+
+  /**
    * Specify whether the tooltip should be closed when clicked
    */
   @property({ reflect: true, type: Boolean })
@@ -53,6 +59,18 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
    */
   @property({ attribute: 'leave-delay-ms', type: Number })
   leaveDelayMs = 300;
+
+  /**
+   * Specify the size of the tooltip
+   */
+  @property({ reflect: true })
+  size = false;
+
+  /**
+   * Specify whether the tooltip should be open when it first renders
+   */
+  @property({ reflect: true, attribute: 'toolbar-action', type: Boolean })
+  toolbarAction = false;
 
   /**
    * Handles `mouseover` event on this element.
@@ -96,7 +114,6 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
   /**
    * Handles `keydown` event on this element.
    * Space & enter will toggle state, Escape will only close.
-
    */
   @HostListener('click')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
@@ -115,6 +132,9 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
       .filter(
         (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
       );
+    if (!component[0]) {
+      return;
+    }
     (component[0] as HTMLElement).addEventListener('focus', this._handleHover);
     (component[0] as HTMLElement).addEventListener(
       'focusout',

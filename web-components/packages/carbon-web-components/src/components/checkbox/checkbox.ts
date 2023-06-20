@@ -42,6 +42,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
         bubbles: true,
         composed: true,
         detail: {
+          checked,
           indeterminate,
         },
       })
@@ -68,14 +69,27 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
   /**
    * Specify whether the underlying input should be checked
    */
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean, reflect: true, attribute: 'checked' })
   checked = false;
+
+  /**
+   * Specify if checkbox is being used in a data table
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'data-table' })
+  dataTable = false;
 
   /**
    * Specify whether the Checkbox should be disabled
    */
   @property({ type: Boolean, reflect: true })
   disabled = false;
+
+  /**
+   * Specify whether the checkbox should be present in the DOM,
+   * but invisible and uninteractable. Used for data-table purposes.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'hide-checkbox' })
+  hideCheckbox = false;
 
   /**
    * Specify whether the label should be hidden, or not

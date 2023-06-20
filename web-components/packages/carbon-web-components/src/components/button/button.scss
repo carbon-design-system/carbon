@@ -8,8 +8,9 @@
 $css--plex: true !default;
 
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
-@use '@carbon/styles/scss/components/button';
+@use '@carbon/styles/scss/components/button' as *;
 @use '@carbon/styles/scss/components/popover/index';
 @use '@carbon/styles/scss/components/code-snippet/code-snippet' as *;
 @use '@carbon/styles/scss/components/tooltip';
@@ -46,6 +47,24 @@ $css--plex: true !default;
         &:active {
           background-color: $layer-hover;
         }
+      }
+    }
+  }
+
+  &[batch-action] {
+    .#{$prefix}--btn {
+      padding: $button-padding-ghost;
+
+      &:focus {
+        outline: 2px solid $layer;
+        outline-offset: -#{$spacing-01};
+      }
+    }
+
+    &[has-main-content] {
+      ::slotted([slot='icon']) {
+        position: static;
+        margin-left: $spacing-02;
       }
     }
   }

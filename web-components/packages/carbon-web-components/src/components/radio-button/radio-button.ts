@@ -134,6 +134,18 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
       if (this._manager) {
         this._manager.select(radioButtonDelegate, this.readOnly);
       }
+      this.dispatchEvent(
+        new CustomEvent(
+          (this.constructor as typeof CDSRadioButton).eventChange,
+          {
+            bubbles: true,
+            composed: true,
+            detail: {
+              checked: this.checked,
+            },
+          }
+        )
+      );
     }
   };
 
@@ -168,6 +180,12 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
    */
   @property({ type: Boolean, reflect: true })
   checked = false;
+
+  /**
+   * `true` if the radio button is used in a data table
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'data-table' })
+  dataTable = false;
 
   /**
    * `true` if the radio button item should be disabled.

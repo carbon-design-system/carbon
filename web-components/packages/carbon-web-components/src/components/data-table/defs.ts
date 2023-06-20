@@ -8,21 +8,6 @@
  */
 
 /**
- * Table color scheme.
- */
-export enum TABLE_COLOR_SCHEME {
-  /**
-   * Regular color scheme.
-   */
-  REGULAR = '',
-
-  /**
-   * Color scheme with zebra stripe.
-   */
-  ZEBRA = 'zebra',
-}
-
-/**
  * Table size.
  */
 export enum TABLE_SIZE {

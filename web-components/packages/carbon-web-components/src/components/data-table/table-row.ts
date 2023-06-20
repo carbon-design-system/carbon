@@ -10,8 +10,14 @@
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
+import ChevronRight16 from '@carbon/web-components/es/icons/chevron--right/16';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './data-table.scss';
+
+import HostListener from '../../globals/decorators/host-listener';
+import HostListenerMixin from '../../globals/mixins/host-listener';
+import CDSTableExpandedRow from './table-expanded-row';
+import CDSTableCell from './table-cell';
 
 /**
  * Data table row.
@@ -24,14 +30,17 @@ import styles from './data-table.scss';
  *   Cancellation of this event stops the user-initiated change in selection.
  */
 @customElement(`${prefix}-table-row`)
-class BXTableRow extends FocusMixin(LitElement) {
+class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
   /**
-   * Handles `click` event on the check box.
+   * Handles `click` event on the radio button.
    *
    * @param event The event.
    */
-  private _handleClickSelectionCheckbox(event: Event) {
-    const selected = (event.target as HTMLInputElement).checked;
+  @HostListener('eventRadioChange')
+  // @ts-ignore
+  private _handleClickSelectionRadio(event: CustomEvent) {
+    const { detail } = event;
+    const selected = detail.checked;
     const init = {
       bubbles: true,
       cancelable: true,
@@ -40,14 +49,132 @@ class BXTableRow extends FocusMixin(LitElement) {
         selected,
       },
     };
-    const constructor = this.constructor as typeof BXTableRow;
+    const constructor = this.constructor as typeof CDSTableRow;
     if (
       this.dispatchEvent(
         new CustomEvent(constructor.eventBeforeChangeSelection, init)
       )
     ) {
       this.selected = selected;
+      const { selectorExpandedRow } = this.constructor as typeof CDSTableRow;
+
+      if (this.nextElementSibling?.matches(selectorExpandedRow)) {
+        (this.nextElementSibling as CDSTableExpandedRow).selected = selected;
+      }
     }
+  }
+
+  /**
+   * Handles `click` event on the check box.
+   *
+   * @param event The event.
+   */
+  @HostListener('eventCheckboxChange')
+  // @ts-ignore
+  private _handleClickSelectionCheckbox(event: CustomEvent) {
+    const { detail } = event;
+    const selected = detail.checked;
+    const init = {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+      detail: {
+        selected,
+      },
+    };
+    const constructor = this.constructor as typeof CDSTableRow;
+    if (
+      this.dispatchEvent(
+        new CustomEvent(constructor.eventBeforeChangeSelection, init)
+      )
+    ) {
+      this.selected = selected;
+      const { selectorExpandedRow } = this.constructor as typeof CDSTableRow;
+
+      if (this.nextElementSibling?.matches(selectorExpandedRow)) {
+        (this.nextElementSibling as CDSTableExpandedRow).selected = selected;
+      }
+    }
+  }
+
+  /**
+   * Handles `click` event on the expando button.
+   */
+  private _handleClickExpando() {
+    this._handleUserInitiatedToggleExpando();
+  }
+
+  /**
+   * Handles `mouseover`/`mouseout` event handler on this element.
+   *
+   * @param event The event.
+   */
+  @HostListener('mouseover')
+  @HostListener('mouseout')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleMouseOverOut(event: MouseEvent) {
+    const { selectorExpandedRow, selectorTableCellOverflowMenu } = this
+      .constructor as typeof CDSTableRow;
+    const { nextElementSibling } = this;
+    if (nextElementSibling?.matches(selectorExpandedRow)) {
+      (nextElementSibling as CDSTableExpandedRow).highlighted =
+        event.type === 'mouseover';
+    }
+    if (this.overflowMenuOnHover) {
+      const overflowMenu = this.querySelector(selectorTableCellOverflowMenu);
+      const parentCell = overflowMenu?.parentElement;
+
+      if (event.type === 'mouseout') {
+        (parentCell as CDSTableCell).overflowMenuOnHover = true;
+      } else {
+        (parentCell as CDSTableCell).overflowMenuOnHover = false;
+      }
+    }
+  }
+
+  /**
+   * Handles user-initiated toggle request of the expando button in this table row.
+   *
+   * @param expanded The new expanded state.
+   */
+  _handleUserInitiatedToggleExpando(expanded = !this.expanded) {
+    const init = {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+      detail: {
+        expanded,
+      },
+    };
+    if (
+      this.dispatchEvent(
+        new CustomEvent(
+          (this.constructor as typeof CDSTableRow).eventBeforeExpandoToggle,
+          init
+        )
+      )
+    ) {
+      this.expanded = expanded;
+      this.dispatchEvent(
+        new CustomEvent(
+          (this.constructor as typeof CDSTableRow).eventExpandoToggle,
+          init
+        )
+      );
+    }
+  }
+
+  protected _renderExpandButton() {
+    const { _handleClickExpando: handleClickExpando } = this;
+    return html`
+      <div class="${prefix}--table-expand">
+        <button
+          class="${prefix}--table-expand__button"
+          @click="${handleClickExpando}">
+          ${ChevronRight16({ class: `${prefix}--table-expand__svg` })}
+        </button>
+      </div>
+    `;
   }
 
   /**
@@ -56,37 +183,37 @@ class BXTableRow extends FocusMixin(LitElement) {
   protected _renderFirstCells() {
     const {
       disabled,
+      hideCheckbox,
+      radio,
       selected,
       selectionLabel,
       selectionName,
       selectionValue,
     } = this;
-    // Using `@click` instead of `@change` to support `.preventDefault()`
     return !selectionName
       ? undefined
       : html`
-          <div
-            part="selection-container"
-            class="${prefix}--table-column-checkbox">
-            ${html`
-              <input
-                id="selection"
-                part="selection"
-                class="${prefix}--checkbox"
-                type="checkbox"
-                value="${selectionValue}"
-                name="${selectionName}"
-                ?disabled="${disabled}"
-                .checked=${selected}
-                @click=${this._handleClickSelectionCheckbox} />
-              <label
-                for="selection"
-                class="${prefix}--checkbox-label"
-                aria-label="${selectionLabel}"></label>
-            `}
+          <div class="${prefix}--table-column-checkbox">
+            ${radio
+              ? html`<cds-radio-button data-table></cds-radio-button>`
+              : html`<cds-checkbox
+                  hide-label
+                  ?hide-checkbox="${hideCheckbox}"
+                  label-text="${selectionLabel}"
+                  name=${selectionName}
+                  data-table
+                  ?disabled=${disabled}
+                  ?checked=${selected}
+                  value=${selectionValue}></cds-checkbox> `}
           </div>
         `;
   }
+
+  /**
+   * `true` if this table should support batch expansion
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'batch-expansion' })
+  batchExpansion = false;
 
   /**
    * `true` if this table row should be disabled.
@@ -104,6 +231,41 @@ class BXTableRow extends FocusMixin(LitElement) {
   even = false;
 
   /**
+   * `true` if this table row can be expanded to show content underneath
+   *
+   * @private
+   */
+  @property({ type: Boolean, reflect: true })
+  expandable = false;
+
+  /**
+   * `true` when the table row expanded is showing
+   *
+   * @private
+   */
+  @property({ type: Boolean, reflect: true })
+  expanded = false;
+
+  /**
+   * `true` if this table row should be filtered out.
+   */
+  @property({ type: Boolean, reflect: true })
+  filtered = false;
+
+  /**
+   * Specify whether the checkbox should be present in the DOM,
+   * but invisible and uninteractable.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'hide-checkbox' })
+  hideCheckbox = false;
+
+  /**
+   * `true` if the table row should be highlighted.
+   */
+  @property({ type: Boolean, reflect: true })
+  highlighted = false;
+
+  /**
    * `true` if this table row is placed at an odd position in parent `<cds-table-body>`.
    * `<cds-table-body>` sets this property, _only_ in zebra stripe mode.
    *
@@ -111,6 +273,24 @@ class BXTableRow extends FocusMixin(LitElement) {
    */
   @property({ type: Boolean, reflect: true })
   odd = false;
+
+  /**
+   * Specify whether the overflow menu (if it exists) should be shown always, or only on hover
+   */
+  @property({
+    type: Boolean,
+    reflect: true,
+    attribute: 'overflow-menu-on-hover',
+  })
+  overflowMenuOnHover = false;
+
+  /**
+   * Specify whether the control should be a radio button or inline checkbox
+   *
+   * @private
+   */
+  @property({ type: Boolean, reflect: true })
+  radio = false;
 
   /**
    * `true` if this table row should be selected.
@@ -137,6 +317,14 @@ class BXTableRow extends FocusMixin(LitElement) {
   @property({ attribute: 'selection-value' })
   selectionValue = '';
 
+  /**
+   * TODO: Uncomment when Carbon fully implements sticky header
+   * Specify whether the header should be sticky.
+   * Still experimental: may not work with every combination of table props
+   */
+  // @property({ type: Boolean, reflect: true, attribute: 'sticky-header' })
+  // stickyHeader = false;
+
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'row');
@@ -144,8 +332,49 @@ class BXTableRow extends FocusMixin(LitElement) {
     super.connectedCallback();
   }
 
+  updated(changedProperties) {
+    if (changedProperties.has('expanded')) {
+      const { selectorExpandedRow } = this.constructor as typeof CDSTableRow;
+      const { expanded, nextElementSibling } = this;
+      if (nextElementSibling?.matches(selectorExpandedRow)) {
+        (nextElementSibling as CDSTableExpandedRow).expanded = expanded;
+      }
+    }
+
+    if (changedProperties.has('highlighted')) {
+      const { selectorExpandedRow } = this.constructor as typeof CDSTableRow;
+      const { highlighted, nextElementSibling } = this;
+      if (nextElementSibling?.matches(selectorExpandedRow)) {
+        (nextElementSibling as CDSTableExpandedRow).highlighted = highlighted;
+      }
+    }
+  }
+
   render() {
-    return html` ${this._renderFirstCells()}<slot></slot> `;
+    if (this.selectionName) {
+      this.closest(
+        (this.constructor as typeof CDSTableRow).selectorTable
+      )?.setAttribute('is-selectable', '');
+    }
+    return html`
+      ${this.expandable ? this._renderExpandButton() : ''}
+      ${this._renderFirstCells()}
+      <slot></slot>
+    `;
+  }
+
+  /**
+   * The name of the custom event fired after this radio button changes its checked state.
+   */
+  static get eventRadioChange() {
+    return `${prefix}-radio-button-changed`;
+  }
+
+  /**
+   * The name of the custom event fired after this radio button changes its checked state.
+   */
+  static get eventCheckboxChange() {
+    return `${prefix}-checkbox-changed`;
   }
 
   /**
@@ -157,13 +386,42 @@ class BXTableRow extends FocusMixin(LitElement) {
   }
 
   /**
-   * The CSS selector to find the table.
+   * A selector that will return the parent table
    */
   static get selectorTable() {
     return `${prefix}-table`;
   }
 
+  /**
+   * The CSS selector to find the overflow menu on the table cell
+   */
+  static get selectorTableCellOverflowMenu() {
+    return `${prefix}-table-cell ${prefix}-overflow-menu`;
+  }
+
+  /**
+   * A selector that will return the corresponding expanded row.
+   */
+  static get selectorExpandedRow() {
+    return `${prefix}-table-expanded-row`;
+  }
+
+  /**
+   * The name of the custom event fired before the expanded state this row is being toggled upon a user gesture.
+   * Cancellation of this event stops the user-initiated action of toggling the expanded state.
+   */
+  static get eventBeforeExpandoToggle() {
+    return `${prefix}-table-row-expando-beingtoggled`;
+  }
+
+  /**
+   * The name of the custom event fired after the expanded state this row is toggled upon a user gesture.
+   */
+  static get eventExpandoToggle() {
+    return `${prefix}-table-row-expando-toggled`;
+  }
+
   static styles = styles;
 }
 
-export default BXTableRow;
+export default CDSTableRow;

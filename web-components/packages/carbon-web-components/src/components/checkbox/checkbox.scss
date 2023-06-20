@@ -8,6 +8,8 @@
 $css--plex: true !default;
 
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities';
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/checkbox';
@@ -18,6 +20,20 @@ $css--plex: true !default;
 
   &[readonly] {
     @extend .#{$prefix}--checkbox-wrapper--readonly;
+  }
+
+  &[data-table] {
+    margin: 0;
+
+    &[hide-checkbox] {
+      pointer-events: none;
+
+      .#{$prefix}--checkbox-label::before,
+      .#{$prefix}--checkbox-label::after {
+        background-color: transparent;
+        border-color: transparent;
+      }
+    }
   }
 }
 

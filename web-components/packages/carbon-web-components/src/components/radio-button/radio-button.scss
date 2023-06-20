@@ -10,7 +10,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/radio-button/radio-button' as *;
 
@@ -36,6 +36,16 @@ $css--plex: true !default;
 
   .#{$prefix}--radio-button__label {
     flex-direction: row;
+  }
+}
+
+:host(#{$prefix}-radio-button[data-table]) {
+  .#{$prefix}--radio-button__label {
+    width: rem(28px);
+  }
+
+  .#{$prefix}--radio-button__appearance {
+    margin-right: -#{$spacing-01};
   }
 }
 

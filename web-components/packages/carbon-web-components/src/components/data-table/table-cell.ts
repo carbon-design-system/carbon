@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './data-table.scss';
 
@@ -18,7 +18,31 @@ import styles from './data-table.scss';
  * @element cds-table-cell
  */
 @customElement(`${prefix}-table-cell`)
-class BXTableCell extends LitElement {
+class CDSTableCell extends LitElement {
+  /**
+   * Specify whether the overflow menu (if it exists) should be shown always, or only on hover
+   */
+  @property({
+    type: Boolean,
+    reflect: true,
+    attribute: 'overflow-menu-on-hover',
+  })
+  overflowMenuOnHover = false;
+
+  /**
+   * The table size.
+   */
+  @property({ reflect: true })
+  size;
+
+  /**
+   * TODO: Uncomment when Carbon fully implements sticky header
+   * Specify whether the header should be sticky.
+   * Still experimental: may not work with every combination of table props
+   */
+  // @property({ type: Boolean, reflect: true, attribute: 'sticky-header' })
+  // stickyHeader = false;
+
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'cell');
@@ -27,10 +51,10 @@ class BXTableCell extends LitElement {
   }
 
   render() {
-    return html` <slot></slot> `;
+    return html`<slot></slot>`;
   }
 
   static styles = styles;
 }
 
-export default BXTableCell;
+export default CDSTableCell;

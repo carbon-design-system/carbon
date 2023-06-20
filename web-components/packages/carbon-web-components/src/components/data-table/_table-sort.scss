@@ -9,21 +9,6 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/components/data-table/sort';
 
-:host(#{$prefix}-table-header-row[size='compact'])
-  ::slotted(#{$prefix}-table-header-cell[sort-direction]) {
-  height: rem(24px);
-}
-
-:host(#{$prefix}-table-header-row[size='short'])
-  ::slotted(#{$prefix}-table-header-cell[sort-direction]) {
-  height: rem(32px);
-}
-
-:host(#{$prefix}-table-header-row[size='tall'])
-  ::slotted(#{$prefix}-table-header-cell[sort-direction]) {
-  height: rem(64px);
-}
-
 // Padding of header cell for sorting
 //
 // Let sort button rather than the cell define the padding
@@ -36,15 +21,14 @@
   padding-right: 0;
 }
 
-:host(#{$prefix}-table-header-cell[sort-direction]) .#{$prefix}--table-sort {
-  height: 100%;
-  padding-left: $spacing-04;
-  padding-right: $spacing-04;
-}
-
 :host(#{$prefix}-table-header-cell[sort-direction]:first-of-type)
   .#{$prefix}--table-sort {
   padding-left: $spacing-05;
+}
+
+:host(#{$prefix}-table-header-cell[sort-direction][expandable][selection-name])
+  .#{$prefix}--table-sort {
+  padding-left: 0;
 }
 
 //

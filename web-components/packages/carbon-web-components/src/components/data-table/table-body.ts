@@ -10,8 +10,7 @@
 import { LitElement, html } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import { TABLE_COLOR_SCHEME } from './defs';
-import BXTableRow from './table-row';
+import CDSTableRow from './table-row';
 import styles from './data-table.scss';
 
 /**
@@ -20,7 +19,7 @@ import styles from './data-table.scss';
  * @element cds-table-body
  */
 @customElement(`${prefix}-table-body`)
-class BXTableBody extends LitElement {
+class CDSTableBody extends LitElement {
   /**
    * The `<slot>` element in the shadow DOM.
    */
@@ -31,14 +30,12 @@ class BXTableBody extends LitElement {
    * Updates `even`/`odd` properties of the child `<cds-table-row>`s.
    */
   private _updateZebra() {
-    const { colorScheme, _slotNode: slotNode } = this;
+    const { useZebraStyles, _slotNode: slotNode } = this;
     slotNode.assignedNodes().forEach((node) => {
       if (node.nodeType === Node.ELEMENT_NODE) {
-        const odd = (node as HTMLElement).matches('*:nth-of-type(odd)');
-        (node as BXTableRow).even =
-          colorScheme === TABLE_COLOR_SCHEME.ZEBRA && !odd;
-        (node as BXTableRow).odd =
-          colorScheme === TABLE_COLOR_SCHEME.ZEBRA && odd;
+        const even = (node as HTMLElement).matches('*:nth-of-type(even)');
+        (node as CDSTableRow).even = useZebraStyles && even;
+        (node as CDSTableRow).odd = useZebraStyles && !even;
       }
     });
   }
@@ -51,10 +48,18 @@ class BXTableBody extends LitElement {
   };
 
   /**
+   * TODO: Uncomment when Carbon fully implements sticky header
+   * Specify whether the header should be sticky.
+   * Still experimental: may not work with every combination of table props
+   */
+  // @property({ type: Boolean, reflect: true, attribute: 'sticky-header' })
+  // stickyHeader = false;
+
+  /**
    * The color scheme.
    */
-  @property({ reflect: true, attribute: 'color-scheme' })
-  colorScheme = TABLE_COLOR_SCHEME.REGULAR;
+  @property({ type: Boolean, reflect: true, attribute: 'use-zebra-styles' })
+  useZebraStyles = false;
 
   connectedCallback() {
     if (!this.hasAttribute('role')) {
@@ -64,7 +69,7 @@ class BXTableBody extends LitElement {
   }
 
   updated(changedProperties) {
-    if (changedProperties.has('colorScheme')) {
+    if (changedProperties.has('useZebraStyles')) {
       this._updateZebra();
     }
   }
@@ -77,4 +82,4 @@ class BXTableBody extends LitElement {
   static styles = styles;
 }
 
-export default BXTableBody;
+export default CDSTableBody;

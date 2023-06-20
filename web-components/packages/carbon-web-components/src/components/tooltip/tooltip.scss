@@ -10,6 +10,32 @@
 @use '@carbon/styles/scss/config' as *;
 @use '../popover/popover';
 @use '@carbon/styles/scss/components/tooltip';
+@use '@carbon/styles/scss/theme' as *;
+
+// For some reason `#{prefix}-tooltip` doesn't work here, will need to investigate
+
+:host(cds-tooltip[data-table]) {
+  display: contents;
+
+  &:hover {
+    ::slotted(button) {
+      background-color: $layer-selected-hover !important;
+    }
+  }
+}
+
+:host(cds-tooltip[data-table][size='xs']),
+:host(cds-tooltip[data-table][size='sm']) {
+  ::slotted(button) {
+    height: calc(100% + 1px) !important;
+  }
+}
+
+:host(cds-tooltip[toolbar-action]) {
+  ::slotted(button) {
+    outline: none !important;
+  }
+}
 
 :host(#{prefix}-tooltip-content) {
   ::slotted(.#{$prefix}-tooltip-content) {

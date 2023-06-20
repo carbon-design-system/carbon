@@ -24,7 +24,7 @@ import styles from './data-table.scss';
  * @fires cds-search-input - The custom event fired after the search content is changed upon a user gesture.
  */
 @customElement(`${prefix}-table-toolbar-search`)
-class BXTableToolbarSearch extends HostListenerMixin(CDSSearch) {
+class CDSTableToolbarSearch extends HostListenerMixin(CDSSearch) {
   @query('input')
   private _inputNode!: HTMLInputElement;
 
@@ -55,7 +55,11 @@ class BXTableToolbarSearch extends HostListenerMixin(CDSSearch) {
   @HostListener('focusout')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleFocusOut(event: FocusEvent) {
-    if (!this.contains(event.relatedTarget as Node) && !this.value) {
+    if (
+      !this.contains(event.relatedTarget as Node) &&
+      !this.value &&
+      !this.persistent
+    ) {
       this.expanded = false;
     }
   }
@@ -74,10 +78,16 @@ class BXTableToolbarSearch extends HostListenerMixin(CDSSearch) {
   expanded = false;
 
   /**
+   * `true` if the search box should be always be open.
+   */
+  @property({ type: Boolean, reflect: true })
+  persistent = false;
+
+  /**
    * The search box size.
    */
   @property({ reflect: true })
-  size = INPUT_SIZE.SMALL;
+  size = INPUT_SIZE.LARGE;
 
   connectedCallback() {
     if (!this.hasAttribute('role')) {
@@ -88,11 +98,19 @@ class BXTableToolbarSearch extends HostListenerMixin(CDSSearch) {
 
   render() {
     const result = super.render();
-    const { expanded, size, _handleSearchClick: handleSearchClick } = this;
+    const {
+      persistent,
+      expanded,
+      size,
+      _handleSearchClick: handleSearchClick,
+    } = this;
     const classes = classMap({
       [`${prefix}--search`]: true,
       [`${prefix}--search--${size}`]: size,
     });
+    if (persistent) {
+      this.expanded = true;
+    }
     return html`
       <div
         class="${classes}"
@@ -118,4 +136,4 @@ class BXTableToolbarSearch extends HostListenerMixin(CDSSearch) {
   static styles = styles;
 }
 
-export default BXTableToolbarSearch;
+export default CDSTableToolbarSearch;

@@ -46,11 +46,6 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
   private _hasIcon = false;
 
   /**
-   * `true` if there is a non-icon content.
-   */
-  private _hasMainContent = false;
-
-  /**
    * Handles `slotchange` event.
    */
   private _handleSlotChange({ target }: Event) {
@@ -60,7 +55,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
       .some(
         (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
       );
-    this[name === 'icon' ? '_hasIcon' : '_hasMainContent'] = hasContent;
+    this[name === 'icon' ? '_hasIcon' : 'hasMainContent'] = hasContent;
     this.requestUpdate();
   }
 
@@ -115,6 +110,12 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
   autofocus = false;
 
   /**
+   * `true` if the button is being used within a data table batch action toolbar
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'batch-action' })
+  batchAction = false;
+
+  /**
    * Specify an optional className to be added to your Button
    */
   @property({ reflect: true, attribute: 'class-name' })
@@ -137,6 +138,12 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
    */
   @property({ reflect: true })
   download!: string;
+
+  /**
+   * `true` if there is a non-icon content.
+   */
+  @property({ reflect: true, attribute: 'has-main-content', type: Boolean })
+  hasMainContent = false;
 
   /**
    * Link `href`. If present, this button is rendered as `<a>`.
@@ -255,7 +262,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
       tooltipText,
       type,
       _hasIcon: hasIcon,
-      _hasMainContent: hasMainContent,
+      hasMainContent,
       _handleSlotChange: handleSlotChange,
     } = this;
 

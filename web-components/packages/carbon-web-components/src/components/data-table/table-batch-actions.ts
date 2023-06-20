@@ -19,12 +19,13 @@ import styles from './data-table.scss';
  * @fires cds-table-batch-actions-cancel-clicked - The custom event fired after the Cancel button is clicked.
  */
 @customElement(`${prefix}-table-batch-actions`)
-class BXTableBatchActions extends LitElement {
+class CDSTableBatchActions extends LitElement {
   /**
    * Handles `click` event on the Cancel button.
    */
   private _handleCancel() {
-    const { eventClickCancel } = this.constructor as typeof BXTableBatchActions;
+    const { eventClickCancel } = this
+      .constructor as typeof CDSTableBatchActions;
     this.dispatchEvent(
       new CustomEvent(eventClickCancel, { bubbles: true, composed: true })
     );
@@ -49,6 +50,14 @@ class BXTableBatchActions extends LitElement {
    */
   @property({ type: Number, attribute: 'selected-rows-count' })
   selectedRowsCount = 0;
+
+  firstUpdated() {
+    this.querySelectorAll(
+      (this.constructor as typeof CDSTableBatchActions).selectorButtons
+    ).forEach((e) => {
+      e.setAttribute('batch-action', '');
+    });
+  }
 
   updated(changedProperties) {
     if (changedProperties.has('active')) {
@@ -80,6 +89,13 @@ class BXTableBatchActions extends LitElement {
   }
 
   /**
+   * The CSS selector to find the action buttons.
+   */
+  static get selectorButtons() {
+    return `${prefix}-button`;
+  }
+
+  /**
    * The name of the custom event fired after the Cancel button is clicked.
    */
   static get eventClickCancel() {
@@ -89,4 +105,4 @@ class BXTableBatchActions extends LitElement {
   static styles = styles;
 }
 
-export default BXTableBatchActions;
+export default CDSTableBatchActions;

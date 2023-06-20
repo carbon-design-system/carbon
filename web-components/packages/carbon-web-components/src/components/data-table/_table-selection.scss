@@ -8,36 +8,46 @@
 //
 // Selection check box
 //
+:host(#{$prefix}-table-header-row) {
+  .#{$prefix}--table-column-checkbox {
+    border-top: none;
+    border-bottom: none;
 
-:host(#{$prefix}-table-header-row) .#{$prefix}--table-column-checkbox {
-  position: relative;
-  background-color: $border-subtle-01;
-  // 16px padding left + 8px padding right + 20px checkbox width
-  width: rem(44px);
-  transition: background-color $duration-fast-01 motion(entrance, productive);
-}
-
-:host(#{$prefix}-table-row) .#{$prefix}--table-column-checkbox {
-  .#{$prefix}--checkbox-label {
     padding-left: $spacing-05;
+    padding-right: $spacing-02;
+    transition: background-color $duration-fast-01 motion(entrance, productive);
+
+    .#{$prefix}--checkbox-label {
+      width: 20px;
+    }
   }
 }
 
-:host(#{$prefix}-table-header-row) .#{$prefix}--table-column-checkbox:hover {
-  // Highlight "select all" columns like sorting column
-  background-color: $data-table-column-hover;
+:host(#{$prefix}-table-row) {
+  .#{$prefix}--table-column-checkbox {
+    padding-left: $spacing-05;
+    padding-right: $spacing-02;
+    border-top: 1px solid $layer-01;
+    border-bottom: 1px solid $border-subtle;
+
+    .#{$prefix}--checkbox-label {
+      padding-left: $spacing-05;
+    }
+  }
 }
 
-:host(#{$prefix}-table-row[size='tall']) .#{$prefix}--table-column-checkbox {
-  padding-top: rem(12px);
+:host(#{$prefix}-table-row:hover) {
+  .#{$prefix}--table-column-checkbox {
+    border-top-color: $layer-hover-01;
+    border-bottom-color: $layer-hover-01;
+    background-color: $background-hover;
+  }
 }
-
-//
-// Selected rows
-//
 
 :host(#{$prefix}-table-row[selected]) {
+  .#{$prefix}--table-column-checkbox,
   ::slotted(#{$prefix}-table-cell),
+  .#{$prefix}--table-expand,
   .#{$prefix}--table-column-checkbox {
     color: $text-primary;
     background-color: $layer-accent-01;
@@ -48,10 +58,16 @@
 }
 
 :host(#{$prefix}-table-row[selected]:hover) {
+  .#{$prefix}--table-column-checkbox,
   ::slotted(#{$prefix}-table-cell),
+  .#{$prefix}--table-expand,
   .#{$prefix}--table-column-checkbox {
     background-color: $data-table-column-hover;
-    border-top-color: $data-table-column-hover;
     border-bottom-color: $data-table-column-hover;
   }
+}
+
+:host(#{$prefix}-table-expanded-row[filtered]),
+:host(#{$prefix}-table-row[filtered]) {
+  display: none !important;
 }

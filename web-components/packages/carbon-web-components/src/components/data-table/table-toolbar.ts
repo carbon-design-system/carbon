@@ -8,9 +8,10 @@
  */
 
 import { LitElement, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './data-table.scss';
+import { CDSTableToolbarContent } from '../..';
 
 /**
  * Table toolbar.
@@ -18,7 +19,19 @@ import styles from './data-table.scss';
  * @element cds-table-toolbar
  */
 @customElement(`${prefix}-table-toolbar`)
-class BXTableToolbar extends LitElement {
+class CDSTableToolbar extends LitElement {
+  /**
+   * Boolean to reflect the overflow menu body
+   */
+  @property({ type: Boolean, reflect: true })
+  flipped = true;
+
+  /**
+   * Toolbar size
+   */
+  @property({ reflect: true })
+  size;
+
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'section');
@@ -26,11 +39,41 @@ class BXTableToolbar extends LitElement {
     super.connectedCallback();
   }
 
+  updated(changedProperties) {
+    if (changedProperties.has('flipped')) {
+      this.querySelector(
+        (this.constructor as typeof CDSTableToolbar).selectorOverflowMenuBody
+      )?.setAttribute('flipped', '');
+    }
+
+    if (changedProperties.has('size')) {
+      (
+        this.querySelector(
+          (this.constructor as typeof CDSTableToolbar).selectorToolbarContent
+        ) as CDSTableToolbarContent
+      ).size = this.size;
+    }
+  }
+
   render() {
     return html` <slot></slot> `;
+  }
+
+  /**
+   * The CSS selector to find the overflow menu body
+   */
+  static get selectorOverflowMenuBody() {
+    return `${prefix}-overflow-menu-body`;
+  }
+
+  /**
+   * The CSS selector to find the toolbar contents
+   */
+  static get selectorToolbarContent() {
+    return `${prefix}-table-toolbar-content`;
   }
 
   static styles = styles;
 }
 
-export default BXTableToolbar;
+export default CDSTableToolbar;

@@ -19,33 +19,27 @@ LICENSE file in the root directory of this source tree.
       }
     </style>
     <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/data-table.min.js"></script>
-    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/pagination.min.js"></script>
   </head>
   <body>
-    <h1>Default tabe</h1>
     <cds-table>
       <cds-table-head>
         <cds-table-header-row>
-          <cds-table-header-cell>Foo</cds-table-header-cell>
-          <cds-table-header-cell>Bar</cds-table-header-cell>
-          <cds-table-header-cell>Baz</cds-table-header-cell>
+          <cds-table-header-cell>Name</cds-table-header-cell>
+          <cds-table-header-cell>Status</cds-table-header-cell>
         </cds-table-header-row>
       </cds-table-head>
       <cds-table-body>
         <cds-table-row>
-          <cds-table-cell>Foo1</cds-table-cell>
-          <cds-table-cell>Bar1</cds-table-cell>
-          <cds-table-cell>Baz1</cds-table-cell>
+          <cds-table-cell>Load Balancer 1</cds-table-cell>
+          <cds-table-cell>Disabled</cds-table-cell>
         </cds-table-row>
         <cds-table-row>
-          <cds-table-cell>Foo2</cds-table-cell>
-          <cds-table-cell>Bar2</cds-table-cell>
-          <cds-table-cell>Baz2</cds-table-cell>
+          <cds-table-cell>Load Balancer 2</cds-table-cell>
+          <cds-table-cell>Starting</cds-table-cell>
         </cds-table-row>
         <cds-table-row>
-          <cds-table-cell>Foo3</cds-table-cell>
-          <cds-table-cell>Bar3</cds-table-cell>
-          <cds-table-cell>Baz3</cds-table-cell>
+          <cds-table-cell>Load Balancer 3</cds-table-cell>
+          <cds-table-cell>Active</cds-table-cell>
         </cds-table-row>
       </cds-table-body>
     </cds-table>
@@ -56,14 +50,27 @@ LICENSE file in the root directory of this source tree.
 
     <h1>Sortable table</h1>
     <div id="sortable-table"></div>
-    <script src="./sortable-table.js"></script>
-
-    <br />
-    <br />
-    <br />
-
-    <h1>Sortable table with pagination</h1>
-    <div id="sortable-pagination"></div>
-    <script src="./sortable-pagination.js"></script>
+    <cds-table is-sortable>
+      <cds-table-head>
+        <cds-table-header-row>
+          <cds-table-header-cell>Name</cds-table-header-cell>
+          <cds-table-header-cell>Status</cds-table-header-cell>
+        </cds-table-header-row>
+      </cds-table-head>
+      <cds-table-body>
+        <cds-table-row>
+          <cds-table-cell>Load Balancer 1</cds-table-cell>
+          <cds-table-cell>Disabled</cds-table-cell>
+        </cds-table-row>
+        <cds-table-row>
+          <cds-table-cell>Load Balancer 2</cds-table-cell>
+          <cds-table-cell>Starting</cds-table-cell>
+        </cds-table-row>
+        <cds-table-row>
+          <cds-table-cell>Load Balancer 3</cds-table-cell>
+          <cds-table-cell>Active</cds-table-cell>
+        </cds-table-row>
+      </cds-table-body>
+    </cds-table>
   </body>
 </html>

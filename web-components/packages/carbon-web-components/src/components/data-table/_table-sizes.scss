@@ -5,8 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// TODO: consider consolidating size classes with css vars
-
 //
 // "xs" table size variant
 //
@@ -16,11 +14,22 @@
   height: $spacing-06;
 }
 
+:host(#{$prefix}-table-header-row[size='xs']),
 :host(#{$prefix}-table-row[size='xs']) {
-  ::slotted(#{$prefix}-table-cell),
-  ::slotted(#{$prefix}-table-cell-skeleton) {
+  ::slotted(#{$prefix}-table-header-cell) {
+    height: $spacing-06;
+  }
+
+  ::slotted(#{$prefix}-table-cell) {
     padding-top: rem(2px);
     padding-bottom: rem(2px);
+    padding-left: $spacing-05;
+  }
+
+  .#{$prefix}--table-expand {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: $spacing-06;
   }
 }
 
@@ -33,11 +42,25 @@
   height: $spacing-07;
 }
 
+:host(#{$prefix}-table-header-row[size='sm']),
 :host(#{$prefix}-table-row[size='sm']) {
-  ::slotted(#{$prefix}-table-cell),
-  ::slotted(#{$prefix}-table-cell-skeleton) {
+  ::slotted(#{$prefix}-table-header-cell) {
+    height: $spacing-07;
+  }
+
+  ::slotted(#{$prefix}-table-cell) {
     padding-top: rem(7px);
     padding-bottom: rem(6px);
+    padding-left: $spacing-05;
+  }
+
+  .#{$prefix}--table-expand {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  ::slotted(#{$prefix}-overflow-menu) {
+    height: $spacing-07;
   }
 }
 
@@ -50,11 +73,24 @@
   height: $spacing-08;
 }
 
-:host(#{$prefix}-table-row[size='md']) {
-  ::slotted(#{$prefix}-table-cell),
-  ::slotted(#{$prefix}-table-cell-skeleton) {
-    padding-top: rem(4px);
-    padding-bottom: rem(4px);
+:host(#{$prefix}-table-row[size='md']),
+:host(#{$prefix}-table-header-row[size='md']) {
+  ::slotted(#{$prefix}-table-header-cell) {
+    height: $spacing-08;
+  }
+  ::slotted(#{$prefix}-table-cell) {
+    padding-top: rem(7px);
+    padding-left: $spacing-05;
+    padding-bottom: rem(6px);
+  }
+
+  .#{$prefix}--table-expand {
+    padding-top: $spacing-02;
+    padding-bottom: $spacing-02;
+  }
+
+  ::slotted(#{$prefix}-overflow-menu) {
+    height: $spacing-08;
   }
 }
 
@@ -67,13 +103,6 @@
   height: $spacing-09;
 }
 
-:host(#{$prefix}-table-row[size='lg']) {
-  ::slotted(#{$prefix}-table-cell),
-  ::slotted(#{$prefix}-table-cell-skeleton) {
-    padding-top: rem(16px);
-  }
-}
-
 //
 // "xl" table size variant
 //
@@ -83,9 +112,122 @@
   height: $spacing-10;
 }
 
+:host(#{$prefix}-table-header-row[size='xl']) {
+  ::slotted(#{$prefix}-table-header-cell) {
+    vertical-align: top;
+    padding-top: $spacing-05;
+  }
+}
+
+:host(#{$prefix}-table-header-row[size='xl']),
 :host(#{$prefix}-table-row[size='xl']) {
-  ::slotted(#{$prefix}-table-cell),
-  ::slotted(#{$prefix}-table-cell-skeleton) {
+  ::slotted(#{$prefix}-table-cell) {
     padding-top: rem(16px);
+  }
+
+  .#{$prefix}--table-expand {
+    padding-bottom: 1.375rem;
+  }
+
+  .#{$prefix}--table-expand,
+  .#{$prefix}--table-column-checkbox {
+    vertical-align: top;
+    padding-top: rem(10px);
+  }
+
+  &[radio] {
+    .#{$prefix}--table-column-checkbox {
+      padding-top: $spacing-05;
+    }
+  }
+}
+
+:host(#{$prefix}-table-expanded-row[size='xl'][expanded]) {
+  td {
+    padding-top: $spacing-05;
+    padding-right: $spacing-05;
+    padding-bottom: $spacing-03;
+  }
+}
+
+// Small persistent toolbar
+:host(#{$prefix}-table-toolbar[size='xs']),
+:host(#{$prefix}-table-toolbar-content[size='xs']) {
+  &,
+  ::slotted(#{$prefix}-table-toolbar-search),
+  ::slotted(#{$prefix}-overflow-menu),
+  ::slotted(#{$prefix}-button) {
+    min-height: $spacing-07;
+    height: $spacing-07;
+  }
+  ::slotted(#{$prefix}-table-toolbar-search),
+  ::slotted(#{$prefix}-overflow-menu) {
+    width: 2rem;
+  }
+}
+
+:host(#{$prefix}-table-toolbar[size='sm']),
+:host(#{$prefix}-table-toolbar-content[size='sm']) {
+  &,
+  ::slotted(#{$prefix}-table-toolbar-search),
+  ::slotted(#{$prefix}-overflow-menu),
+  ::slotted(#{$prefix}-button) {
+    min-height: $spacing-07;
+    height: $spacing-07;
+  }
+
+  ::slotted(#{$prefix}-table-toolbar-search),
+  ::slotted(#{$prefix}-overflow-menu) {
+    width: 2rem;
+  }
+}
+
+//
+// "selection" and "expandable" sizes
+//
+:host(#{$prefix}-table-header-row[selection-name][expandable]),
+:host(#{$prefix}-table-row[selection-name][expandable]) {
+  ::slotted(#{$prefix}-table-header-cell),
+  ::slotted(#{$prefix}-table-cell) {
+    padding-left: $spacing-03;
+  }
+}
+
+:host(#{$prefix}-table-header-row[selection-name][expandable][size='xs']),
+:host(#{$prefix}-table-row[selection-name][expandable][size='xs']) {
+  .#{$prefix}--table-column-checkbox {
+    padding: 0 rem(6px);
+  }
+}
+
+:host(#{$prefix}-table-header-row[selection-name][expandable][size='sm']),
+:host(#{$prefix}-table-row[selection-name][expandable][size='sm']),
+:host(#{$prefix}-table-header-row[selection-name][expandable][size='md']),
+:host(#{$prefix}-table-row[selection-name][expandable][size='md']) {
+  .#{$prefix}--table-column-checkbox {
+    padding: rem(3px) rem(6px);
+  }
+}
+
+:host(#{$prefix}-table-header-row[selection-name][expandable][size='xl']) {
+  .#{$prefix}--table-column-checkbox {
+    padding-left: rem(6px);
+    padding-right: rem(6px);
+  }
+}
+
+//
+// table cell size for overflow menu
+//
+:host(#{$prefix}-table-cell[size='xs']),
+:host(#{$prefix}-table-cell[size='sm']) {
+  ::slotted(#{$prefix}-overflow-menu) {
+    height: calc(100% + 1px);
+  }
+}
+
+:host(#{$prefix}-table-cell[size='md']) {
+  ::slotted(#{$prefix}-overflow-menu) {
+    height: $spacing-08;
   }
 }

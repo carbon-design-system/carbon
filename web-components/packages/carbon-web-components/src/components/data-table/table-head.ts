@@ -18,7 +18,15 @@ import styles from './data-table.scss';
  * @element cds-table-head
  */
 @customElement(`${prefix}-table-head`)
-class BXTableHead extends LitElement {
+class CDSTableHead extends LitElement {
+  /**
+   * TODO: Uncomment when Carbon fully implements sticky header
+   * Specify whether the header should be sticky.
+   * Still experimental: may not work with every combination of table props
+   */
+  //@property({ type: Boolean, reflect: true, attribute: 'sticky-header' })
+  // stickyHeader = false;
+
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'rowgroup');
@@ -33,4 +41,4 @@ class BXTableHead extends LitElement {
   static styles = styles;
 }
 
-export default BXTableHead;
+export default CDSTableHead;

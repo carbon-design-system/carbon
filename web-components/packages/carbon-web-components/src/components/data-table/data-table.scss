@@ -7,18 +7,20 @@
 
 $css--plex: true !default;
 
+@use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/components/checkbox';
 
 @use '@carbon/styles/scss/components/data-table' as *;
+@use '@carbon/styles/scss/components/link' as *;
+
 @use '@carbon/styles/scss/components/data-table/expandable';
-// TODO: deprecate
-// @use '@carbon/styles/scss/components/data-table/data-table-inline-edit';
 @use '@carbon/styles/scss/components/data-table/skeleton';
 
 // TODO: deprecate @import
@@ -28,4 +30,3 @@ $css--plex: true !default;
 @import 'table-sizes';
 @import 'table-selection';
 @import 'table-sort';
-@import 'table-skeleton';

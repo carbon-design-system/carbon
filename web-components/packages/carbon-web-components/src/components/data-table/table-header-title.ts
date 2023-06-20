@@ -7,21 +7,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import BXTableCell from './table-cell';
+import styles from './data-table.scss';
 
 /**
- * Data table cell with skeleton content.
+ * Data table header title
  *
- * @element cds-table-cell-skeleton
+ * @element cds-table-header-title
  */
-@customElement(`${prefix}-table-cell-skeleton`)
-class BXTableCellSkeleton extends BXTableCell {
+@customElement(`${prefix}-table-header-title`)
+class CDSTableHeader extends LitElement {
   render() {
-    return html` <span></span> `;
+    return html` <slot></slot> `;
   }
+
+  static styles = styles;
 }
 
-export default BXTableCellSkeleton;
+export default CDSTableHeader;

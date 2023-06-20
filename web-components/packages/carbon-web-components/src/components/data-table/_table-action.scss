@@ -20,6 +20,9 @@
 
 :host(#{$prefix}-table-toolbar) {
   @extend .#{$prefix}--table-toolbar;
+
+  display: table-caption;
+  z-index: 1;
 }
 
 :host(#{$prefix}-table-toolbar-content) {
@@ -28,27 +31,11 @@
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 
   ::slotted(#{$prefix}-overflow-menu) {
-    @include button-reset;
-
     display: flex;
     cursor: pointer;
-    height: $spacing-04;
-    width: $spacing-04;
-    padding: $spacing-05;
+    height: $spacing-09;
+    width: $spacing-09;
     transition: background-color $duration-fast-02 motion(entrance, productive);
-  }
-
-  ::slotted(#{$prefix}-overflow-menu:hover) {
-    background-color: $background-hover;
-  }
-
-  ::slotted(#{$prefix}-overflow-menu[disabled]:hover) {
-    background-color: transparent;
-  }
-
-  .#{$prefix}--search .#{$prefix}--search-input {
-    // For tool bar animation with (esp.) persistent search box
-    background-color: transparent;
   }
 }
 
@@ -71,25 +58,47 @@
     height: 100%;
 
     .#{$prefix}--search-magnifier {
-      height: $spacing-04;
-      width: $spacing-04;
-      padding: $spacing-05;
       left: 0;
       cursor: pointer;
       pointer-events: all;
       transition: background $duration-fast-02 motion(entrance, productive);
+
+      &-icon {
+        height: auto;
+        width: auto;
+      }
+    }
+
+    .#{$prefix}--search-input {
+      border-bottom: 0;
     }
 
     .#{$prefix}--search-close {
-      height: $spacing-04;
-      width: $spacing-04;
-
       &::before {
-        top: 2px;
-        height: calc(100% - 4px);
+        width: 0;
         background-color: $background-hover;
       }
+
+      :hover {
+        background-color: none;
+      }
     }
+
+    :hover {
+      background-color: none;
+    }
+  }
+
+  svg {
+    left: 0;
+  }
+}
+
+:host(#{$prefix}-table-toolbar-search[size='xs']),
+:host(#{$prefix}-table-toolbar-search[size='sm']) {
+  svg {
+    left: $spacing-03;
+    padding: 0;
   }
 }
 
@@ -99,16 +108,25 @@
   flex: auto;
 }
 
-:host(#{$prefix}-table-toolbar-search[persistent]) {
-  @extend .#{$prefix}--toolbar-search-container-persistent;
+:host(#{$prefix}-table-toolbar-search[size='xs'][expanded]),
+:host(#{$prefix}-table-toolbar-search[size='sm'][expanded]) {
+  svg {
+    left: $spacing-05;
+  }
+}
+
+:host(#{$prefix}-table-toolbar-search[persistent]:hover),
+:host(#{$prefix}-table-toolbar-search[persistent]:hover) {
+  .#{$prefix}--search-input {
+    background-color: $field-hover;
+  }
 }
 
 :host(#{$prefix}-table-batch-actions) {
   @extend .#{$prefix}--batch-actions;
-
   box-sizing: border-box;
-}
 
-:host(#{$prefix}-table-batch-actions[active]) {
-  @extend .#{$prefix}--batch-actions--active;
+  &[active] {
+    @extend .#{$prefix}--batch-actions--active;
+  }
 }
