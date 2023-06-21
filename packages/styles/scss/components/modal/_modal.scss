@@ -72,6 +72,20 @@
       background-color: $border-subtle-02;
     }
 
+    .#{$prefix}--list-box__menu-item__option {
+      border-top-color: $border-subtle-02;
+    }
+
+    .#{$prefix}--list-box__menu-item:hover
+      .#{$prefix}--list-box__menu-item__option {
+      border-top-color: $layer-hover;
+    }
+
+    .#{$prefix}--list-box__menu-item--active:hover
+      .#{$prefix}--list-box__menu-item__option {
+      border-top-color: $layer-selected-hover;
+    }
+
     // Fluid inputs
     .#{$prefix}--text-input--fluid .#{$prefix}--text-input,
     .#{$prefix}--text-area--fluid .#{$prefix}--text-area__wrapper,
