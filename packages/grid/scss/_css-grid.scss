@@ -14,7 +14,7 @@
 
 /// Emit all the styles related to the CSS Grid, these include:
 /// - The base grid class
-/// - The various grid modes
+/// - The various gutter modes
 /// - The ability to specifiy column span
 /// - The ability to specifiy column start,end position
 /// - Support for subgrid
@@ -137,7 +137,7 @@
   }
 
   // -----------------------------------------------------------------------------
-  // Grid modes
+  // Gutter modes
   // -----------------------------------------------------------------------------
 
   // Narrow
@@ -167,7 +167,7 @@
     }
   }
 
-  // Support the grid modes in subgrids
+  // Support the gutter modes in subgrids
   .#{$prefix}--subgrid--wide {
     --cds-grid-gutter-start: #{math.div($grid-gutter, 2)};
     --cds-grid-gutter-end: #{math.div($grid-gutter, 2)};

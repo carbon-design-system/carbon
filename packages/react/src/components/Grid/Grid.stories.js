@@ -156,7 +156,7 @@ export const Subgrid = () => {
   );
 };
 
-export const MixedGridModes = () => {
+export const MixedGutterModes = () => {
   return (
     <>
       <Grid>

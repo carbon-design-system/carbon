@@ -78,10 +78,10 @@ test.describe('FlexGrid', () => {
         });
       });
 
-      test('mixed grid modes @vrt', async ({ page }) => {
+      test('mixed gutter modes @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FlexGrid',
-          id: 'components-flexgrid--mixed-grid-modes',
+          id: 'components-flexgrid--mixed-gutter-modes',
           theme,
         });
       });
