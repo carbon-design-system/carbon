@@ -194,4 +194,26 @@
     .#{$prefix}--toggle__switch {
     @include high-contrast-mode('focus');
   }
+
+  // Skeleton state
+  .#{$prefix}--toggle--skeleton {
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--toggle--skeleton .#{$prefix}--toggle__skeleton-circle {
+    @include circular-skeleton;
+
+    width: rem(18px);
+    height: rem(18px);
+    border-radius: 50%;
+  }
+
+  .#{$prefix}--toggle--skeleton .#{$prefix}--toggle__skeleton-rectangle {
+    @include skeleton;
+
+    width: rem(24px);
+    height: rem(8px);
+    margin-left: rem(8px);
+  }
 }
