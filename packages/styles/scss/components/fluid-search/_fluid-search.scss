@@ -58,35 +58,26 @@
   }
 
   .#{$prefix}--search--fluid .#{$prefix}--search-magnifier-icon {
-    top: auto;
-    right: 1rem;
-    bottom: rem(13px);
-    left: auto;
+    inset: auto 1rem rem(13px) auto;
     transform: none;
   }
 
   .#{$prefix}--search--fluid .#{$prefix}--search-close {
-    top: auto;
-    right: rem(48px);
-    bottom: 0;
-    left: auto;
     width: rem(40px);
     height: rem(40px);
     border: none;
+    inset: auto rem(48px) 0 auto;
     transition: background-color $duration-fast-01 motion(standard, productive);
   }
 
   .#{$prefix}--search--fluid .#{$prefix}--search-close::before {
     position: absolute;
-    top: auto;
-    right: rem(-1px);
-    bottom: rem(14px);
-    left: auto;
     display: block;
     width: rem(1px);
     height: 1rem;
     background: $border-subtle;
     content: '';
+    inset: auto rem(-1px) rem(14px) auto;
   }
 
   .#{$prefix}--search--fluid

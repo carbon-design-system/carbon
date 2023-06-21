@@ -158,6 +158,16 @@ Array [
     "relativePath": "scss/components/combo-box",
   },
   Object {
+    "filepath": "scss/components/contained-list/_contained-list.scss",
+    "importPath": "@carbon/styles/scss/components/contained-list/contained-list",
+    "relativePath": "scss/components/contained-list/contained-list",
+  },
+  Object {
+    "filepath": "scss/components/contained-list/_index.scss",
+    "importPath": "@carbon/styles/scss/components/contained-list",
+    "relativePath": "scss/components/contained-list",
+  },
+  Object {
     "filepath": "scss/components/content-switcher/_content-switcher.scss",
     "importPath": "@carbon/styles/scss/components/content-switcher/content-switcher",
     "relativePath": "scss/components/content-switcher/content-switcher",
