@@ -15,9 +15,8 @@
       "node": "./lib/components-react-node/",
       "default": "./es/components-react/"
     },
-    "./es/components/": {
-      "node": "./lib/components/",
-      "default": "./es/components/"
+    "./es/components/*": {
+      "default": "./es/components/*"
     },
     "./es/globals/": {
       "node": "./lib/globals/",
