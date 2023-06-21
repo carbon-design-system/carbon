@@ -33,6 +33,8 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
   const [expandedState, setExpandedState] = useState(expanded);
   const expandedProp = controlled ? expanded : expandedState;
 
+  const [lastClickedElement, setLastClickedElement] = useState(null);
+
   const className = cx(`${prefix}--header-panel`, {
     [`${prefix}--header-panel--expanded`]: expandedProp,
     [customClassName]: !!customClassName,
@@ -42,8 +44,12 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
 
   if (addFocusListeners) {
     eventHandlers.onBlur = (event) => {
-      if (!event.currentTarget.contains(event.relatedTarget)) {
+      if (
+        !event.currentTarget.contains(event.relatedTarget) &&
+        !lastClickedElement.classList.contains('cds--switcher__item-link')
+      ) {
         setExpandedState(false);
+        setLastClickedElement(null);
         if (expanded) {
           onHeaderPanelFocus();
         }
@@ -62,6 +68,8 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
 
   useWindowEvent('click', () => {
     const focusedElement = document.activeElement;
+    setLastClickedElement(focusedElement);
+
     if (
       children.type.__docgenInfo.displayName === 'Switcher' &&
       !focusedElement?.closest(`.${prefix}--header-panel--expanded`) &&
