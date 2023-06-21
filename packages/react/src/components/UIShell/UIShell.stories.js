@@ -406,7 +406,8 @@ export const HeaderBaseWNavigationActionsAndSideNav = () => (
           <SideNav
             aria-label="Side navigation"
             expanded={isSideNavExpanded}
-            onSideNavBlur={onClickSideNavExpand}>
+            onSideNavBlur={onClickSideNavExpand}
+            href="#main-content">
             <SideNavItems>
               <HeaderSideNavItems hasDivider={true}>
                 <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
@@ -586,56 +587,82 @@ export const HeaderBaseWActionsAndRightPanel = () => (
 HeaderBaseWActionsAndRightPanel.storyName =
   'Header Base w/ Actions and Right Panel';
 
-export const HeaderBaseWActionsAndSwitcher = () => (
-  <Header aria-label="IBM Platform Name">
-    <HeaderName href="#" prefix="IBM">
-      [Platform]
-    </HeaderName>
-    <HeaderGlobalBar>
-      <HeaderGlobalAction aria-label="Search" onClick={action('search click')}>
-        <Search size={20} />
-      </HeaderGlobalAction>
-      <HeaderGlobalAction
-        aria-label="Notifications"
-        onClick={action('notification click')}>
-        <Notification size={20} />
-      </HeaderGlobalAction>
-      <HeaderGlobalAction
-        aria-label="App Switcher"
-        isActive
-        onClick={action('app-switcher click')}
-        tooltipAlignment="end">
-        <SwitcherIcon size={20} />
-      </HeaderGlobalAction>
-    </HeaderGlobalBar>
-    <HeaderPanel expanded>
-      <Switcher aria-label="Switcher Container">
-        <SwitcherItem isSelected aria-label="Link 1" href="#">
-          Link 1
-        </SwitcherItem>
-        <SwitcherDivider />
-        <SwitcherItem href="#" aria-label="Link 2">
-          Link 2
-        </SwitcherItem>
-        <SwitcherItem href="#" aria-label="Link 3">
-          Link 3
-        </SwitcherItem>
-        <SwitcherItem href="#" aria-label="Link 4">
-          Link 4
-        </SwitcherItem>
-        <SwitcherItem href="#" aria-label="Link 5">
-          Link 5
-        </SwitcherItem>
-        <SwitcherDivider />
-        <SwitcherItem href="#" aria-label="Link 6">
-          Link 6
-        </SwitcherItem>
-      </Switcher>
-    </HeaderPanel>
-  </Header>
+export const HeaderBaseWActionsAndSwitcher = (args) => (
+  <HeaderContainer
+    {...args}
+    render={({ isSideNavExpanded, onClickSideNavExpand }) => (
+      <>
+        <Header aria-label="IBM Platform Name">
+          <HeaderName href="#" prefix="IBM">
+            [Platform]
+          </HeaderName>
+          <HeaderGlobalBar>
+            <HeaderGlobalAction
+              aria-label="Search"
+              onClick={action('search click')}>
+              <Search size={20} />
+            </HeaderGlobalAction>
+            <HeaderGlobalAction
+              aria-label="Notifications"
+              onClick={action('notification click')}>
+              <Notification size={20} />
+            </HeaderGlobalAction>
+            <HeaderGlobalAction
+              aria-label={
+                isSideNavExpanded ? 'Close switcher' : 'Open switcher'
+              }
+              aria-expanded={isSideNavExpanded}
+              isActive={isSideNavExpanded}
+              onClick={onClickSideNavExpand}
+              tooltipAlignment="end"
+              id="switcher-button">
+              <SwitcherIcon size={20} />
+            </HeaderGlobalAction>
+          </HeaderGlobalBar>
+          <HeaderPanel
+            expanded={isSideNavExpanded}
+            onHeaderPanelFocus={onClickSideNavExpand}
+            href="#switcher-button">
+            <Switcher
+              aria-label="Switcher Container"
+              expanded={isSideNavExpanded}>
+              <SwitcherItem aria-label="Link 1" href="#">
+                Link 1
+              </SwitcherItem>
+              <SwitcherDivider />
+              <SwitcherItem href="#" aria-label="Link 2">
+                Link 2
+              </SwitcherItem>
+              <SwitcherItem href="#" aria-label="Link 3">
+                Link 3
+              </SwitcherItem>
+              <SwitcherItem href="#" aria-label="Link 4">
+                Link 4
+              </SwitcherItem>
+              <SwitcherItem href="#" aria-label="Link 5">
+                Link 5
+              </SwitcherItem>
+              <SwitcherDivider />
+              <SwitcherItem href="#" aria-label="Link 6">
+                Link 6
+              </SwitcherItem>
+            </Switcher>
+          </HeaderPanel>
+        </Header>
+        <StoryContent />
+      </>
+    )}
+  />
 );
 
 HeaderBaseWActionsAndSwitcher.storyName = 'Header Base w/ Actions and Switcher';
+
+HeaderBaseWActionsAndSwitcher.argTypes = {
+  isSideNavExpanded: {
+    defaultValue: true,
+    description: 'Optional prop to display the HeaderPanel.',
+  },
+};
 
 export const FixedSideNav = () => (
   <>
