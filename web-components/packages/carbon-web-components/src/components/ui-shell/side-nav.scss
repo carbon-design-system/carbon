@@ -12,6 +12,11 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/components/ui-shell/side-nav';
+@use '@carbon/styles/scss/layer/layer-tokens';
+
+:host(#{$prefix}-side-nav) {
+  @include layer-tokens.emit-layer-tokens(1);
+}
 
 :host(#{$prefix}-side-nav[expanded]) ::slotted(#{$prefix}-side-nav-items) {
   overflow-y: auto;
@@ -37,10 +42,10 @@ $css--plex: true !default;
       display: none;
     }
   }
+}
 
-  &[large] {
-    @extend .#{$prefix}--side-nav__item--large;
-  }
+:host(#{$prefix}-side-nav-link[large]) {
+  @extend .#{$prefix}--side-nav__item--large;
 }
 
 :host(#{$prefix}-side-nav-divider) {
@@ -131,8 +136,8 @@ $css--plex: true !default;
 
 :host(#{$prefix}-header-side-nav-items) {
   @extend .#{$prefix}--side-nav__header-navigation;
+}
 
-  &[has-divider] {
-    @extend .#{$prefix}--side-nav__header-divider;
-  }
+:host(#{$prefix}-header-side-nav-items[has-divider]) {
+  @extend .#{$prefix}--side-nav__header-divider;
 }

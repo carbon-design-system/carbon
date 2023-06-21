@@ -15,9 +15,12 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/link/index' as *;
 @use '@carbon/styles/scss/components/form/index' as *;
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/layer/layer-tokens';
 
 :host(#{$prefix}-tile) {
   @extend .#{$prefix}--tile;
+
+  @include layer-tokens.emit-layer-tokens(1);
 
   ::slotted(.#{$prefix}--link) {
     @extend .#{$prefix}--link;
@@ -35,6 +38,8 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-clickable-tile) {
+  @include layer-tokens.emit-layer-tokens(1);
+
   display: grid;
   outline: none;
 
@@ -66,6 +71,8 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-radio-tile) {
+  @include layer-tokens.emit-layer-tokens(1);
+
   display: block;
   outline: none;
 
@@ -73,6 +80,8 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-selectable-tile) {
+  @include layer-tokens.emit-layer-tokens(1);
+
   display: content;
   outline: none;
 
@@ -91,6 +100,8 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-expandable-tile) {
+  @include layer-tokens.emit-layer-tokens(1);
+
   @extend .#{$prefix}--tile;
   @extend .#{$prefix}--tile--expandable;
 
@@ -106,36 +117,36 @@ $css--plex: true !default;
     max-height: 0;
     transition: max-height $duration-fast-02 motion(standard, productive);
   }
+}
 
-  &[expanded] {
-    @extend .#{$prefix}--tile--is-expanded;
+:host(#{$prefix}-expandable-tile[expanded]) {
+  @extend .#{$prefix}--tile--is-expanded;
 
-    ::slotted(#{$prefix}-tile-below-the-fold-content) {
-      opacity: 1;
-      transition: $duration-fast-02 motion(standard, productive);
-    }
+  ::slotted(#{$prefix}-tile-below-the-fold-content) {
+    opacity: 1;
+    transition: $duration-fast-02 motion(standard, productive);
+  }
+}
+
+:host(#{$prefix}-expandable-tile[with-interactive]) {
+  cursor: default;
+  transition: max-height $duration-moderate-01 motion(standard, productive);
+
+  &:hover {
+    background-color: $layer;
   }
 
-  &[with-interactive] {
-    cursor: default;
-    transition: max-height $duration-moderate-01 motion(standard, productive);
-
-    &:hover {
-      background-color: $layer;
-    }
-
-    &:focus {
-      outline: none;
-    }
+  &:focus {
+    outline: none;
   }
+}
 
-  &:not([with-interactive]) {
-    .#{$prefix}--tile__chevron {
-      background: none;
-      border: none;
-      outline: none;
-      cursor: pointer;
-    }
+:host(#{$prefix}-expandable-tile:not([with-interactive])) {
+  .#{$prefix}--tile__chevron {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
   }
 }
 

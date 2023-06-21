@@ -113,13 +113,13 @@ like:
 
 ```javascript
 import { css, customElement } from 'lit';
-import BXDropdown from '@carbon/web-components/es/components/dropdown/dropdown';
+import CDSDropdown from '@carbon/web-components/es/components/dropdown/dropdown';
 
 @customElement('my-dropdown')
-class MyDropdown extends BXDropdown {
+class MyDropdown extends CDSDropdown {
   // Custom CSS to enforce `field-02` (light) style of the dropdown
   static styles = css`
-    ${BXDropdown.styles}
+    ${CDSDropdown.styles}
     .cds--list-box {
       background-color: white;
     }

@@ -11,6 +11,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/search' as *;
 
@@ -18,48 +19,50 @@ $css--plex: true !default;
 @include search;
 
 :host(#{$prefix}-search) {
+  @include layer-tokens.emit-layer-tokens(1);
+
   @extend .#{$prefix}--search;
 
   outline: none;
+}
 
-  &[expandable] {
-    @extend .#{$prefix}--search--expandable;
+:host(#{$prefix}-search[expandable]) {
+  @extend .#{$prefix}--search--expandable;
+}
 
-    &[expanded] {
-      @extend .#{$prefix}--search--expanded;
+:host(#{$prefix}-search[expandable][expanded]) {
+  @extend .#{$prefix}--search--expanded;
+}
 
-      &[size='sm'] {
-        .#{$prefix}--search-input {
-          padding: 0 $spacing-07;
-        }
-      }
+:host(#{$prefix}-search[expandable][expanded][size='sm']) {
+  .#{$prefix}--search-input {
+    padding: 0 $spacing-07;
+  }
+}
 
-      &[size='md'] {
-        .#{$prefix}--search-input {
-          padding: 0 $spacing-08;
-        }
-      }
+:host(#{$prefix}-search[expandable][expanded][size='md']) {
+  .#{$prefix}--search-input {
+    padding: 0 $spacing-08;
+  }
+}
 
-      &[size='lg'] {
-        .#{$prefix}--search-input {
-          padding: 0 $spacing-09;
-        }
-      }
-    }
+:host(#{$prefix}-search[expandable][expanded][size='lg']) {
+  .#{$prefix}--search-input {
+    padding: 0 $spacing-09;
+  }
+}
+
+:host(#{$prefix}-search[disabled]) {
+  svg {
+    fill: $icon-on-color-disabled;
   }
 
-  &[disabled] {
-    svg {
-      fill: $icon-on-color-disabled;
-    }
+  .#{$prefix}--search-close {
+    pointer-events: none;
+    outline: none;
 
-    .#{$prefix}--search-close {
-      pointer-events: none;
-      outline: none;
-
-      &::before {
-        background: none;
-      }
+    &::before {
+      background: none;
     }
   }
 }
@@ -78,17 +81,17 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-search),
-:host(#{$prefix}-search-skeleton) {
-  &[size='sm'] {
-    @extend .#{$prefix}--search--sm;
-  }
+:host(#{$prefix}-search[size='sm']),
+:host(#{$prefix}-search-skeleton[size='sm']) {
+  @extend .#{$prefix}--search--sm;
+}
 
-  &[size='md'] {
-    @extend .#{$prefix}--search--md;
-  }
+:host(#{$prefix}-search[size='md']),
+:host(#{$prefix}-search-skeleton[size='md']) {
+  @extend .#{$prefix}--search--md;
+}
 
-  &[size='lg'] {
-    @extend .#{$prefix}--search--lg;
-  }
+:host(#{$prefix}-search[size='lg']),
+:host(#{$prefix}-search-skeleton[size='lg']) {
+  @extend .#{$prefix}--search--lg;
 }

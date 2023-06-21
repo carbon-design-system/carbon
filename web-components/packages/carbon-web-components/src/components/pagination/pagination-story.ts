@@ -10,7 +10,7 @@
 import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { boolean, number, text, select } from '@storybook/addon-knobs';
-import './pagination';
+import './index';
 import storyDocs from './pagination-story.mdx';
 import { prefix } from '../../globals/settings';
 import { PAGINATION_SIZE } from './defs';

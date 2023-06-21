@@ -8,7 +8,7 @@
  */
 
 import React from 'react';
-import BXDropdownDemo from '../components/BXDropdownDemo';
+import CDSDropdownDemo from '../components/CDSDropdownDemo';
 
-const RootPage = () => <BXDropdownDemo />;
+const RootPage = () => <CDSDropdownDemo />;
 export default RootPage;

@@ -18,7 +18,7 @@ import styles from './structured-list.scss';
  * @element cds-structured-list-header-cell
  */
 @customElement(`${prefix}-structured-list-header-cell`)
-class BXStructuredListHeaderCell extends LitElement {
+class CDSStructuredListHeaderCell extends LitElement {
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'columnheader');
@@ -33,4 +33,4 @@ class BXStructuredListHeaderCell extends LitElement {
   static styles = styles;
 }
 
-export default BXStructuredListHeaderCell;
+export default CDSStructuredListHeaderCell;

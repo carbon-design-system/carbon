@@ -25,9 +25,11 @@ $css--plex: true !default;
   outline: none;
 }
 
-:host(#{$prefix}-actionable-notification-button):not(
-    [low-contrast]
-  )[kind='tertiary']
+:host(
+    #{$prefix}-actionable-notification-button:not(
+        [low-contrast]
+      )[kind='tertiary']
+  )
   button {
   @include button-mixins.button-theme(
     transparent,
@@ -57,7 +59,7 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-actionable-notification-button)[low-contrast][kind='ghost']
+:host(#{$prefix}-actionable-notification-button[low-contrast][kind='ghost'])
   button {
   &:hover,
   &:active {
@@ -69,21 +71,21 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-actionable-notification-button):not(
-    [low-contrast]
-  )[kind='ghost']
+:host(
+    #{$prefix}-actionable-notification-button:not([low-contrast])[kind='ghost']
+  )
   button {
   color: $link-inverse;
 }
 
 :host(
-    #{$prefix}-actionable-notification-button
-  )[hide-close-button][kind='ghost']
+    #{$prefix}-actionable-notification-button[hide-close-button][kind='ghost']
+  )
   button {
   margin-right: $spacing-03;
 }
 
-:host(#{$prefix}-actionable-notification):not([inline]) {
+:host(#{$prefix}-actionable-notification:not([inline])) {
   @extend .#{$prefix}--actionable-notification--toast;
 }
 

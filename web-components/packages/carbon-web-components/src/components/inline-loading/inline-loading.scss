@@ -7,6 +7,7 @@
 
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/components/loading';
 @use '@carbon/styles/scss/components/inline-loading/inline-loading' as *;
@@ -15,4 +16,6 @@
 
 :host(#{$prefix}-inline-loading) {
   @extend .#{$prefix}--inline-loading;
+
+  @include layer-tokens.emit-layer-tokens(1);
 }

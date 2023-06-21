@@ -88,7 +88,7 @@ import HostListenerMixin from '../../globals/mixins/HostListener';
 ...
 
 @customElement(`${prefix}-modal` as any)
-class BXModal extends HostListenerMixin(LitElement) {
+class CDSModal extends HostListenerMixin(LitElement) {
   ...
 
   @HostListener('click')

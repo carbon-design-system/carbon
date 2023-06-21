@@ -22,7 +22,7 @@ import styles from './toggletip.scss';
  * @element cds-toggletip
  */
 @customElement(`${prefix}-toggletip`)
-class BXToggletip extends FocusMixin(LitElement) {
+class CDSToggletip extends FocusMixin(LitElement) {
   /**
    * How the tooltip is aligned to the trigger button.
    */
@@ -84,4 +84,4 @@ class BXToggletip extends FocusMixin(LitElement) {
   static styles = styles;
 }
 
-export default BXToggletip;
+export default CDSToggletip;

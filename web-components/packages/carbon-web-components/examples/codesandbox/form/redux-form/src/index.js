@@ -12,7 +12,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import { Field, SubmissionError, reduxForm, reducer as reduxFormReducer } from 'redux-form';
-import BXBtn from '@carbon/web-components/es/components-react/button/button.js';
+import CDSButton from '@carbon/web-components/es/components-react/button/button.js';
 import CDSFormItem from '@carbon/web-components/es/components-react/form/form-item.js';
 import CDSTextInput from '@carbon/web-components/es/components-react/text-input/text-input.js';
 import CDSInlineNotification from '@carbon/web-components/es/components-react/notification/inline-notification.js';
@@ -79,12 +79,12 @@ const SubmitValidationForm = reduxForm({
           NOTE: `onsubmit` event (with `type="submit"`) does not work across shadow DOM boundary
           (does not have `composed` flag, etc.) and thus we handle `onclick` directly here
         */}
-      <BXBtn disabled={submitting} onClick={handleSubmit(submit)}>
+      <CDSButton disabled={submitting} onClick={handleSubmit(submit)}>
         Log in
-      </BXBtn>
-      <BXBtn kind="secondary" disabled={pristine || submitting} onClick={reset}>
+      </CDSButton>
+      <CDSButton kind="secondary" disabled={pristine || submitting} onClick={reset}>
         Clear Values
-      </BXBtn>
+      </CDSButton>
     </div>
   </form>
 ));

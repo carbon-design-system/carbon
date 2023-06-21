@@ -39,9 +39,9 @@ class StructuredListRowRadioButtonDelegate
   /**
    * The structured list row to target.
    */
-  private _row: BXStructuredListRow;
+  private _row: CDSStructuredListRow;
 
-  constructor(row: BXStructuredListRow) {
+  constructor(row: CDSStructuredListRow) {
     this._row = row;
   }
 
@@ -81,7 +81,7 @@ class StructuredListRowRadioButtonDelegate
  * @element cds-structured-list-row
  */
 @customElement(`${prefix}-structured-list-row`)
-class BXStructuredListRow extends HostListenerMixin(LitElement) {
+class CDSStructuredListRow extends HostListenerMixin(LitElement) {
   /**
    * The radio group manager associated with the radio button.
    */
@@ -234,4 +234,4 @@ class BXStructuredListRow extends HostListenerMixin(LitElement) {
   static styles = styles;
 }
 
-export default BXStructuredListRow;
+export default CDSStructuredListRow;

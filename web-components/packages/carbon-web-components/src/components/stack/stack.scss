@@ -13,14 +13,6 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/stack/index';
 
 :host(#{$prefix}-stack) {
-  &[orientation='vertical'] {
-    @extend .#{$prefix}--stack-vertical;
-  }
-
-  &[orientation='horizontal'] {
-    @extend .#{$prefix}--stack-horizontal;
-  }
-
   $index: 1;
 
   @each $step, $value in spacing.$spacing {
@@ -30,4 +22,12 @@ $css--plex: true !default;
 
     $index: $index + 1;
   }
+}
+
+:host(#{$prefix}-stack[orientation='vertical']) {
+  @extend .#{$prefix}--stack-vertical;
+}
+
+:host(#{$prefix}-stack[orientation='horizontal']) {
+  @extend .#{$prefix}--stack-horizontal;
 }

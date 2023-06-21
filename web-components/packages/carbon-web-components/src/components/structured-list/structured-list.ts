@@ -13,7 +13,7 @@ import { property, customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { forEach } from '../../globals/internal/collection-helpers';
 import FocusMixin from '../../globals/mixins/focus';
-import BXStructuredListRow from './structured-list-row';
+import CDSStructuredListRow from './structured-list-row';
 import styles from './structured-list.scss';
 
 /**
@@ -22,7 +22,7 @@ import styles from './structured-list.scss';
  * @element cds-structured-list
  */
 @customElement(`${prefix}-structured-list`)
-class BXStructuredList extends FocusMixin(LitElement) {
+class CDSStructuredList extends FocusMixin(LitElement) {
   /**
    * The `name` attribute for the `<input>` for selection.
    * If present, this structured list will be a selectable one.
@@ -54,10 +54,10 @@ class BXStructuredList extends FocusMixin(LitElement) {
       // Propagate `selectionName` attribute to descendants until `:host-context()` gets supported in all major browsers
       forEach(
         this.querySelectorAll(
-          (this.constructor as typeof BXStructuredList).selectorRowsWithHeader
+          (this.constructor as typeof CDSStructuredList).selectorRowsWithHeader
         ),
         (elem) => {
-          (elem as BXStructuredListRow).selectionName = this.selectionName;
+          (elem as CDSStructuredListRow).selectionName = this.selectionName;
         }
       );
     }
@@ -71,7 +71,8 @@ class BXStructuredList extends FocusMixin(LitElement) {
         // Propagate watched attribute to descendants until `:host-context()` gets supported in all major browsers
         forEach(
           this.querySelectorAll(
-            (this.constructor as typeof BXStructuredList).selectorRowsWithHeader
+            (this.constructor as typeof CDSStructuredList)
+              .selectorRowsWithHeader
           ),
           (elem) => {
             this[`${attr}`]
@@ -107,4 +108,4 @@ class BXStructuredList extends FocusMixin(LitElement) {
   static styles = styles;
 }
 
-export default BXStructuredList;
+export default CDSStructuredList;

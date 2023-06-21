@@ -11,8 +11,8 @@ import { delay } from 'bluebird';
 import { render } from 'lit';
 import EventManager from '../utils/event-manager';
 
-import BXMultiSelect from '../../src/components/multi-select/multi-select';
-import BXMultiSelectItem from '../../src/components/multi-select/multi-select-item';
+import CDSMultiSelect from '../../src/components/multi-select/multi-select';
+import CDSMultiSelectItem from '../../src/components/multi-select/multi-select-item';
 import { Playground } from '../../src/components/multi-select/multi-select-story';
 
 const template = (props?) =>
@@ -81,7 +81,7 @@ describe('cds-multi-select', function () {
     });
 
     it('should remove "open" stateful modifier class (closed default state)', async function () {
-      (elem as BXMultiSelect).open = true;
+      (elem as CDSMultiSelect).open = true;
       await Promise.resolve();
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (inner as HTMLElement).click();
@@ -90,7 +90,7 @@ describe('cds-multi-select', function () {
     });
 
     it('should always close multi-select when clicking document', async function () {
-      (elem as BXMultiSelect).open = true;
+      (elem as CDSMultiSelect).open = true;
       await Promise.resolve();
       elem.dispatchEvent(new CustomEvent('focusout'));
       await Promise.resolve();
@@ -99,7 +99,7 @@ describe('cds-multi-select', function () {
     });
 
     it('should keep multi-select open when clicking on an item', async function () {
-      (elem as BXMultiSelect).open = true;
+      (elem as CDSMultiSelect).open = true;
       await Promise.resolve();
       (itemNode as HTMLElement).click();
       await Promise.resolve();
@@ -118,7 +118,7 @@ describe('cds-multi-select', function () {
     });
 
     it('should provide a way to cancel closing', async function () {
-      (elem as BXMultiSelect).open = true;
+      (elem as CDSMultiSelect).open = true;
       await Promise.resolve();
       events.on(elem, 'cds-multi-select-beingtoggled', (event: CustomEvent) => {
         event.preventDefault();
@@ -191,7 +191,7 @@ describe('cds-multi-select', function () {
         ) as HTMLElement
       ).click();
       await Promise.resolve();
-      expect((elem as BXMultiSelect).value).toBe('all,staging');
+      expect((elem as CDSMultiSelect).value).toBe('all,staging');
       (
         document.body.querySelector(
           'cds-multi-select-item[value="staging"]'
@@ -204,7 +204,7 @@ describe('cds-multi-select', function () {
         ) as HTMLElement
       ).click();
       await Promise.resolve();
-      expect((elem as BXMultiSelect).value).toBe('');
+      expect((elem as CDSMultiSelect).value).toBe('');
     });
 
     it('should support selecting an item with space key', async function () {
@@ -215,7 +215,7 @@ describe('cds-multi-select', function () {
       (
         document.body.querySelector(
           'cds-multi-select-item[value="staging"]'
-        ) as BXMultiSelectItem
+        ) as CDSMultiSelectItem
       ).highlighted = true;
       await Promise.resolve();
       elem.shadowRoot!.querySelector('.cds--list-box')!.dispatchEvent(event);
@@ -235,7 +235,7 @@ describe('cds-multi-select', function () {
       (
         document.body.querySelector(
           'cds-multi-select-item[value="staging"]'
-        ) as BXMultiSelectItem
+        ) as CDSMultiSelectItem
       ).highlighted = true;
       await Promise.resolve();
       elem.shadowRoot!.querySelector('.cds--list-box')!.dispatchEvent(event);
@@ -248,7 +248,7 @@ describe('cds-multi-select', function () {
     });
 
     it('should provide a way to switch item with a value', async function () {
-      (elem as BXMultiSelect).value = 'staging';
+      (elem as CDSMultiSelect).value = 'staging';
       await Promise.resolve(); // Update cycle for `<cds-multi-select>`
       await Promise.resolve(); // Update cycle for `<cds-multi-select-item>`
       expect(itemNodes[0].hasAttribute('selected')).toBe(false);
@@ -287,17 +287,17 @@ describe('cds-multi-select', function () {
       expect(itemNodes[2].hasAttribute('selected')).toBe(false);
       expect(itemNodes[3].hasAttribute('selected')).toBe(false);
       expect(itemNodes[4].hasAttribute('selected')).toBe(false);
-      expect((elem as BXMultiSelect).value).toBe('all');
+      expect((elem as CDSMultiSelect).value).toBe('all');
     });
 
     it('should reflect the added child to the selection', async function () {
       const itemNode = document.createElement('cds-multi-select-item');
-      (itemNode as unknown as BXMultiSelectItem).value = 'value-added';
+      (itemNode as unknown as CDSMultiSelectItem).value = 'value-added';
       elem.appendChild(itemNode);
-      (elem as BXMultiSelect).value = 'value-added';
+      (elem as CDSMultiSelect).value = 'value-added';
       await delay(0); // Workaround for IE MutationObserver scheduling bug for moving elements to slot
       try {
-        expect((elem as BXMultiSelect).value).toBe('value-added');
+        expect((elem as CDSMultiSelect).value).toBe('value-added');
       } finally {
         itemNode.parentNode!.removeChild(itemNode);
       }
@@ -326,7 +326,7 @@ describe('cds-multi-select', function () {
       expect(itemNodes[3].hasAttribute('selected')).toBe(false);
       expect(itemNodes[4].hasAttribute('selected')).toBe(false);
       await Promise.resolve();
-      expect((elem as BXMultiSelect).value).toBe('');
+      expect((elem as CDSMultiSelect).value).toBe('');
       expect(
         elem.shadowRoot!.querySelector('.cds--list-box__selection--multi')
       ).toBeNull();
@@ -350,7 +350,7 @@ describe('cds-multi-select', function () {
       expect(itemNodes[2].hasAttribute('selected')).toBe(false);
       expect(itemNodes[3].hasAttribute('selected')).toBe(false);
       expect(itemNodes[4].hasAttribute('selected')).toBe(false);
-      expect((elem as BXMultiSelect).value).toBe('');
+      expect((elem as CDSMultiSelect).value).toBe('');
       expect(
         elem.shadowRoot!.querySelector('.cds--list-box__selection--multi')
       ).toBeNull();
@@ -375,7 +375,7 @@ describe('cds-multi-select', function () {
       expect(itemNodes[2].hasAttribute('selected')).toBe(false);
       expect(itemNodes[3].hasAttribute('selected')).toBe(false);
       expect(itemNodes[4].hasAttribute('selected')).toBe(false);
-      expect((elem as BXMultiSelect).value).toBe('');
+      expect((elem as CDSMultiSelect).value).toBe('');
       expect(
         elem.shadowRoot!.querySelector('.cds--list-box__selection--multi')
       ).toBeNull();

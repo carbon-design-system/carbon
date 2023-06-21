@@ -12,16 +12,16 @@ $css--plex: true !default;
 
 :host(#{$prefix}-toggle) {
   outline: none;
+}
 
-  &[disabled] {
-    @extend .#{$prefix}--toggle--disabled !optional;
+:host(#{$prefix}-toggle[disabled]) {
+  @extend .#{$prefix}--toggle--disabled !optional;
 
-    .#{$prefix}--toggle__appearance {
-      cursor: not-allowed;
-    }
+  .#{$prefix}--toggle__appearance {
+    cursor: not-allowed;
   }
+}
 
-  &[read-only] {
-    @extend .#{$prefix}--toggle--readonly;
-  }
+:host(#{$prefix}-toggle[read-only]) {
+  @extend .#{$prefix}--toggle--readonly;
 }

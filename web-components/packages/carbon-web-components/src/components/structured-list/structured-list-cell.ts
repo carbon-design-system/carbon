@@ -18,7 +18,7 @@ import styles from './structured-list.scss';
  * @element cds-structured-list-cell
  */
 @customElement(`${prefix}-structured-list-cell`)
-class BXStructuredListCell extends LitElement {
+class CDSStructuredListCell extends LitElement {
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'cell');
@@ -33,4 +33,4 @@ class BXStructuredListCell extends LitElement {
   static styles = styles;
 }
 
-export default BXStructuredListCell;
+export default CDSStructuredListCell;

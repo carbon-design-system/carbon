@@ -11,6 +11,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/components/overflow-menu/overflow-menu' as *;
 
 // https://github.com/carbon-design-system/carbon/issues/11408
@@ -18,16 +19,18 @@ $css--plex: true !default;
 
 :host(#{$prefix}-overflow-menu),
 :host(#{$prefix}-breadcrumb-overflow-menu) {
+  @include layer-tokens.emit-layer-tokens(1);
+
   @extend .#{$prefix}--overflow-menu;
 }
 
-:host(#{$prefix}-overflow-menu)[size='sm'],
-:host(#{$prefix}-breadcrumb-overflow-menu)[size='sm'] {
+:host(#{$prefix}-overflow-menu[size='sm']),
+:host(#{$prefix}-breadcrumb-overflow-menu[size='sm']) {
   @extend .#{$prefix}--overflow-menu--sm;
 }
 
-:host(#{$prefix}-overflow-menu)[size='lg'],
-:host(#{$prefix}-breadcrumb-overflow-menu)[size='lg'] {
+:host(#{$prefix}-overflow-menu[size='lg']),
+:host(#{$prefix}-breadcrumb-overflow-menu[size='lg']) {
   @extend .#{$prefix}--overflow-menu--lg;
 }
 

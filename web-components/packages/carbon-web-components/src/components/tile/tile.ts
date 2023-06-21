@@ -21,7 +21,7 @@ export { TILE_COLOR_SCHEME };
  * @element cds-tile
  */
 @customElement(`${prefix}-tile`)
-class BXTile extends LitElement {
+class CDSTile extends LitElement {
   /**
    * The color scheme.
    */
@@ -45,4 +45,4 @@ class BXTile extends LitElement {
   static styles = styles;
 }
 
-export default BXTile;
+export default CDSTile;

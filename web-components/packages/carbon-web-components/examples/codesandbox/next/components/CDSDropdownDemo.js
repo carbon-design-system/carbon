@@ -10,11 +10,12 @@
 import React from 'react';
 import CDSDropdown from '@carbon/web-components/es/components-react/dropdown/dropdown.js';
 import CDSDropdownItem from '@carbon/web-components/es/components-react/dropdown/dropdown-item.js';
+import styles from './CDSDropdownDemo.module.css';
 
 const App = () => (
-  <>
+  <div className={styles.contents}>
     <h1>Hello World! 👋</h1>
-    <div id="app">
+    <div className={styles['dropdown-container']}>
       <CDSDropdown triggerContent="Select an item">
         <CDSDropdownItem value="all">Option 1</CDSDropdownItem>
         <CDSDropdownItem value="cloudFoundry">Option 2</CDSDropdownItem>
@@ -23,7 +24,7 @@ const App = () => (
         <CDSDropdownItem value="router">Option 5</CDSDropdownItem>
       </CDSDropdown>
     </div>
-  </>
+  </div>
 );
 
 export default App;

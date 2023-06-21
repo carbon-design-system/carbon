@@ -27,7 +27,7 @@ import HostListener from '../../globals/decorators/host-listener';
  * @fires cds-selectable-tile-changed - The custom event fired after this selectable tile changes its selected state.
  */
 @customElement(`${prefix}-selectable-tile`)
-class BXSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
+class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   @query('input')
   protected _inputNode!: HTMLInputElement;
 
@@ -43,7 +43,7 @@ class BXSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
     this.selected = this._inputNode.checked;
 
     const selected = this.selected;
-    const { eventChange } = this.constructor as typeof BXSelectableTile;
+    const { eventChange } = this.constructor as typeof CDSSelectableTile;
     this.dispatchEvent(
       new CustomEvent(eventChange, {
         bubbles: true,
@@ -169,4 +169,4 @@ class BXSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   static styles = styles;
 }
 
-export default BXSelectableTile;
+export default CDSSelectableTile;

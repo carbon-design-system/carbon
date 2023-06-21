@@ -10,7 +10,7 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { property, customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import BXLink from '../link/link';
+import CDSLink from '../link/link';
 import { TILE_COLOR_SCHEME } from './defs';
 import styles from './tile.scss';
 
@@ -20,7 +20,7 @@ import styles from './tile.scss';
  * @element cds-clickable-tile
  */
 @customElement(`${prefix}-clickable-tile`)
-class BXClickableTile extends BXLink {
+class CDSClickableTile extends CDSLink {
   protected get _classes() {
     const { colorScheme, disabled } = this;
     return classMap({
@@ -47,4 +47,4 @@ class BXClickableTile extends BXLink {
   static styles = styles;
 }
 
-export default BXClickableTile;
+export default CDSClickableTile;

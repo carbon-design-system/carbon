@@ -18,7 +18,7 @@ import styles from './structured-list.scss';
  * @element cds-structured-list-header-row
  */
 @customElement(`${prefix}-structured-list-header-row`)
-class BXStructuredListHeaderRow extends LitElement {
+class CDSStructuredListHeaderRow extends LitElement {
   /**
    * The `name` attribute for the `<input>` for selection.
    * If present, this structured list header row will show its selectable version of the UI.
@@ -48,4 +48,4 @@ class BXStructuredListHeaderRow extends LitElement {
   static styles = styles;
 }
 
-export default BXStructuredListHeaderRow;
+export default CDSStructuredListHeaderRow;

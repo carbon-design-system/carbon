@@ -10,9 +10,9 @@
 import { render } from 'lit';
 import EventManager from '../utils/event-manager';
 import { TILE_COLOR_SCHEME } from '../../src/components/tile/tile';
-import BXExpandableTile from '../../src/components/tile/expandable-tile';
-import BXSelectableTile from '../../src/components/tile/selectable-tile';
-import BXRadioTile from '../../src/components/tile/radio-tile';
+import CDSExpandableTile from '../../src/components/tile/expandable-tile';
+import CDSSelectableTile from '../../src/components/tile/selectable-tile';
+import CDSRadioTile from '../../src/components/tile/radio-tile';
 import {
   clickable,
   expandable,
@@ -125,7 +125,7 @@ describe('cds-tile', function () {
         events.on(tile!, 'cds-expandable-tile-beingtoggled', spyBeforeToggle);
         events.on(tile!, 'cds-expandable-tile-toggled', spyAfterToggle);
         tile!.shadowRoot!.querySelector('button')!.click();
-        expect((tile as BXExpandableTile).expanded).toBe(true);
+        expect((tile as CDSExpandableTile).expanded).toBe(true);
         expect(spyBeforeToggle).toHaveBeenCalled();
         expect(spyBeforeToggle.calls.argsFor(0)[0].detail.expanded).toBe(true);
         expect(spyAfterToggle).toHaveBeenCalled();
@@ -141,7 +141,7 @@ describe('cds-tile', function () {
         events.on(tile!, 'cds-expandable-tile-beingtoggled', spyBeforeToggle);
         events.on(tile!, 'cds-expandable-tile-toggled', spyAfterToggle);
         tile!.shadowRoot!.querySelector('button')!.click();
-        expect((tile as BXExpandableTile).expanded).toBe(false);
+        expect((tile as CDSExpandableTile).expanded).toBe(false);
         expect(spyBeforeToggle).toHaveBeenCalled();
         expect(spyBeforeToggle.calls.argsFor(0)[0].detail.expanded).toBe(false);
         expect(spyAfterToggle).toHaveBeenCalled();
@@ -158,7 +158,7 @@ describe('cds-tile', function () {
         });
         events.on(tile!, 'cds-expandable-tile-toggled', spyAfterToggle);
         tile!.shadowRoot!.querySelector('button')!.click();
-        expect((tile as BXExpandableTile).expanded).toBe(false);
+        expect((tile as CDSExpandableTile).expanded).toBe(false);
         expect(spyAfterToggle).not.toHaveBeenCalled();
       });
 
@@ -172,7 +172,7 @@ describe('cds-tile', function () {
         });
         events.on(tile!, 'cds-expandable-tile-toggled', spyAfterToggle);
         tile!.shadowRoot!.querySelector('button')!.click();
-        expect((tile as BXExpandableTile).expanded).toBe(true);
+        expect((tile as CDSExpandableTile).expanded).toBe(true);
         expect(spyAfterToggle).not.toHaveBeenCalled();
       });
     });
@@ -219,7 +219,7 @@ describe('cds-tile', function () {
         expect(
           Array.prototype.map.call(
             tiles,
-            (item) => (item as BXRadioTile).selected
+            (item) => (item as CDSRadioTile).selected
           )
         ).toEqual([false, true, false]);
       });
@@ -261,9 +261,9 @@ describe('cds-tile', function () {
         const tile = document.body.querySelector('cds-selectable-tile');
         const input = tile!.shadowRoot!.querySelector('input');
         input!.click();
-        expect((tile as BXSelectableTile).selected).toBe(true);
+        expect((tile as CDSSelectableTile).selected).toBe(true);
         input!.click();
-        expect((tile as BXSelectableTile).selected).toBe(false);
+        expect((tile as CDSSelectableTile).selected).toBe(false);
       });
     });
   });

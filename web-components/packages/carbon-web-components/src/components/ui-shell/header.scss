@@ -17,9 +17,12 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/ui-shell/header';
 @use '@carbon/styles/scss/components/ui-shell/header-panel';
 @use '@carbon/styles/scss/components/ui-shell/switcher';
+@use '@carbon/styles/scss/layer/layer-tokens';
 
 :host(#{$prefix}-header) {
   @extend .#{$prefix}--header;
+
+  @include layer-tokens.emit-layer-tokens(1);
 }
 
 :host(#{$prefix}-header-nav) {

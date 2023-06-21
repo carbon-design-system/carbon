@@ -12,7 +12,7 @@ import { html } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
-import BXCheckbox from '../checkbox/checkbox';
+import CDSCheckbox from '../checkbox/checkbox';
 import { TOGGLE_SIZE } from './defs';
 import styles from './toggle.scss';
 import HostListener from '../../globals/decorators/host-listener';
@@ -30,7 +30,7 @@ export { TOGGLE_SIZE };
  * @fires cds-toggle-changed - The custom event fired after this changebox changes its checked state.
  */
 @customElement(`${prefix}-toggle`)
-class CDSToggle extends HostListenerMixin(BXCheckbox) {
+class CDSToggle extends HostListenerMixin(CDSCheckbox) {
   @query('button')
   protected _checkboxNode!: HTMLInputElement;
 
@@ -42,7 +42,7 @@ class CDSToggle extends HostListenerMixin(BXCheckbox) {
     if (this.disabled || this.readOnly) return;
     this.checked = !checked;
     this.indeterminate = indeterminate;
-    const { eventChange } = this.constructor as typeof BXCheckbox;
+    const { eventChange } = this.constructor as typeof CDSCheckbox;
     this.dispatchEvent(
       new CustomEvent(eventChange, {
         bubbles: true,

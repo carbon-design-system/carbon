@@ -14,21 +14,21 @@ import { html, render } from 'lit';
 import Fade16 from '@carbon/web-components/es/icons/fade/16';
 import EventManager from '../utils/event-manager';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import BXHeaderMenu from '../../src/components/ui-shell/header-menu';
+import CDSHeaderMenu from '../../src/components/ui-shell/header-menu';
 // Above import does not seem to register the custom element
 import '../../src/components/ui-shell/header-menu';
-import BXSideNavMenuButton from '../../src/components/ui-shell/header-menu-button';
+import CDSSideNavMenuButton from '../../src/components/ui-shell/header-menu-button';
 // Above import does not seem to register the custom element
 import '../../src/components/ui-shell/header-menu-button';
 import '../../src/components/ui-shell/header-name';
 import '../../src/components/ui-shell/header-nav';
 import '../../src/components/ui-shell/header-nav-item';
-import BXSideNav, {
+import CDSSideNav, {
   SIDE_NAV_COLLAPSE_MODE,
   SIDE_NAV_USAGE_MODE,
 } from '../../src/components/ui-shell/side-nav';
 import '../../src/components/ui-shell/side-nav-link';
-import BXSideNavMenu from '../../src/components/ui-shell/side-nav-menu';
+import CDSSideNavMenu from '../../src/components/ui-shell/side-nav-menu';
 // Above import does not seem to register the custom element
 import '../../src/components/ui-shell/side-nav-menu';
 import '../../src/components/ui-shell/side-nav-menu-item';
@@ -232,9 +232,9 @@ describe('ui-shell', function () {
         await Promise.resolve();
         const menu = document.body.querySelector('cds-header-menu');
         menu!.shadowRoot!.querySelector('a')!.click();
-        expect((menu as BXHeaderMenu).expanded).toBe(true);
+        expect((menu as CDSHeaderMenu).expanded).toBe(true);
         menu!.shadowRoot!.querySelector('a')!.click();
-        expect((menu as BXHeaderMenu).expanded).toBe(false);
+        expect((menu as CDSHeaderMenu).expanded).toBe(false);
       });
 
       it('should collapse upon hitting ESC key', async function () {
@@ -248,7 +248,7 @@ describe('ui-shell', function () {
             key: 'Escape',
           })
         );
-        expect((menu as BXHeaderMenu).expanded).toBe(false);
+        expect((menu as CDSHeaderMenu).expanded).toBe(false);
         expect(trigger!.focus).toHaveBeenCalled();
       });
 
@@ -259,7 +259,7 @@ describe('ui-shell', function () {
         (menu as HTMLElement).dispatchEvent(
           new CustomEvent('focusout', { bubbles: true })
         );
-        expect((menu as BXHeaderMenu).expanded).toBe(false);
+        expect((menu as CDSHeaderMenu).expanded).toBe(false);
       });
     });
   });
@@ -388,13 +388,13 @@ describe('ui-shell', function () {
         await Promise.resolve();
         const nav = document.body.querySelector('cds-side-nav');
         const menu = document.body.querySelector('cds-side-nav-menu');
-        expect((menu as BXSideNavMenu).forceCollapsed).toBe(true);
+        expect((menu as CDSSideNavMenu).forceCollapsed).toBe(true);
         nav!.dispatchEvent(new CustomEvent('mouseover', { bubbles: true }));
         await Promise.resolve();
-        expect((menu as BXSideNavMenu).forceCollapsed).toBe(false);
+        expect((menu as CDSSideNavMenu).forceCollapsed).toBe(false);
         nav!.dispatchEvent(new CustomEvent('mouseout', { bubbles: true }));
         await Promise.resolve();
-        expect((menu as BXSideNavMenu).forceCollapsed).toBe(true);
+        expect((menu as CDSSideNavMenu).forceCollapsed).toBe(true);
       });
 
       it('should toggle expand state upon upon clicking on header menu button', async function () {
@@ -410,14 +410,14 @@ describe('ui-shell', function () {
             detail: { active: true },
           })
         );
-        expect((nav as BXSideNav).expanded).toBe(true);
+        expect((nav as CDSSideNav).expanded).toBe(true);
         menuButton!.dispatchEvent(
           new CustomEvent('cds-header-menu-button-toggled', {
             bubbles: true,
             detail: { active: false },
           })
         );
-        expect((nav as BXSideNav).expanded).toBe(false);
+        expect((nav as CDSSideNav).expanded).toBe(false);
       });
     });
 
@@ -434,10 +434,10 @@ describe('ui-shell', function () {
         const menuButton = document.body.querySelector(
           'cds-header-menu-button'
         );
-        expect((menuButton as BXSideNavMenuButton).collapseMode).toBe(
+        expect((menuButton as CDSSideNavMenuButton).collapseMode).toBe(
           SIDE_NAV_COLLAPSE_MODE.RAIL
         );
-        expect((menuButton as BXSideNavMenuButton).active).toBe(true);
+        expect((menuButton as CDSSideNavMenuButton).active).toBe(true);
       });
     });
   });
@@ -577,7 +577,7 @@ describe('ui-shell', function () {
         render(sideNavMenuItemTemplate({ active: true }), document.body);
         await Promise.resolve();
         expect(
-          (document.body.querySelector('cds-side-nav-menu') as BXSideNavMenu)
+          (document.body.querySelector('cds-side-nav-menu') as CDSSideNavMenu)
             .active
         ).toBe(true);
       });

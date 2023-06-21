@@ -12,8 +12,13 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/utilities/custom-property';
 @use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/components/popover';
+
+:host(#{$prefix}-popover) {
+  @include layer-tokens.emit-layer-tokens(1);
+}
 
 :host(#{$prefix}-tooltip[highContrast]),
 :host(#{$prefix}-popover[highContrast]) {
@@ -40,17 +45,20 @@ $css--plex: true !default;
   .#{$prefix}--popover-content {
     display: block;
   }
+}
 
-  &[tabTip] {
-    .#{$prefix}--popover-content {
-      border-radius: 0;
-      background: theme.$layer;
-    }
+:host(#{$prefix}-tooltip-content[open][tabTip]),
+:host(#{$prefix}-popover-content[open][tabTip]) {
+  .#{$prefix}--popover-content {
+    border-radius: 0;
+    background: theme.$layer;
   }
-  &[caret] {
-    .#{$prefix}--popover-caret {
-      display: block;
-    }
+}
+
+:host(#{$prefix}-tooltip-content[open][caret]),
+:host(#{$prefix}-popover-content[open][caret]) {
+  .#{$prefix}--popover-caret {
+    display: block;
   }
 }
 

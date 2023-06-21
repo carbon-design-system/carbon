@@ -7,15 +7,18 @@
 
 $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/components/text-area/index';
 
 :host(#{$prefix}-textarea) {
-  outline: none;
+  @include layer-tokens.emit-layer-tokens(1);
 
-  &[cols='0'],
-  &:not([cols]),
-  textarea[cols='0'],
-  textarea:not([cols]) {
-    width: 100%;
-  }
+  outline: none;
+}
+
+:host(#{$prefix}-textarea[cols='0']),
+:host(#{$prefix}-textarea:not([cols])),
+:host(#{$prefix}-textarea) textarea[cols='0'],
+:host(#{$prefix}-textarea) textarea:not([cols]) {
+  width: 100%;
 }

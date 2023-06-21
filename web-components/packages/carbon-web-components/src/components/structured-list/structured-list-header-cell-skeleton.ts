@@ -16,7 +16,7 @@ import styles from './structured-list.scss';
  * Skeleton of structured list header cell.
  */
 @customElement(`${prefix}-structured-list-header-cell-skeleton`)
-class BXStructuredListHeaderCellSkeleton extends LitElement {
+class CDSStructuredListHeaderCellSkeleton extends LitElement {
   render() {
     return html` <span></span> `;
   }
@@ -24,4 +24,4 @@ class BXStructuredListHeaderCellSkeleton extends LitElement {
   static styles = styles;
 }
 
-export default BXStructuredListHeaderCellSkeleton;
+export default CDSStructuredListHeaderCellSkeleton;

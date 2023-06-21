@@ -16,7 +16,7 @@ import styles from './radio-button.scss';
  * Skeleton of radio button.
  */
 @customElement(`${prefix}-radio-button-skeleton`)
-class BXRadioButtonSkeleton extends LitElement {
+class CDSRadioButtonSkeleton extends LitElement {
   render() {
     return html`
       <div class="${prefix}--radio-button ${prefix}--skeleton"></div>
@@ -27,4 +27,4 @@ class BXRadioButtonSkeleton extends LitElement {
   static styles = styles;
 }
 
-export default BXRadioButtonSkeleton;
+export default CDSRadioButtonSkeleton;

@@ -12,10 +12,15 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/components/structured-list/structured-list' as *;
 
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include structured-list;
+
+:host(#{$prefix}-structured-list) {
+  @include layer-tokens.emit-layer-tokens(1);
+}
 
 .#{$prefix}--structured-list ::slotted(#{$prefix}-structured-list-head) {
   @extend .#{$prefix}--structured-list-thead;

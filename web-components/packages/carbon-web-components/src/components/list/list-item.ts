@@ -19,7 +19,7 @@ import styles from './list.scss';
  * @slot nested - The nested child list.
  */
 @customElement(`${prefix}-list-item`)
-class BXListItem extends LitElement {
+class CDSListItem extends LitElement {
   /**
    * `true` if there is slotted nested child list.
    */
@@ -48,7 +48,9 @@ class BXListItem extends LitElement {
     this.toggleAttribute(
       'nested',
       Boolean(
-        this.closest((this.constructor as typeof BXListItem).selectorNestedList)
+        this.closest(
+          (this.constructor as typeof CDSListItem).selectorNestedList
+        )
       )
     );
     if (!this.hasAttribute('role')) {
@@ -82,4 +84,4 @@ class BXListItem extends LitElement {
   static styles = styles;
 }
 
-export default BXListItem;
+export default CDSListItem;

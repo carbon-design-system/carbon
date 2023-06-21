@@ -320,17 +320,17 @@ example:
 ```javascript
 import React from 'react';
 import { render } from 'react-dom';
-import BXDropdown from '@carbon/web-components/es/components-react/dropdown/dropdown.js';
-import BXDropdownItem from '@carbon/web-components/es/components-react/dropdown/dropdown-item.js';
+import CDSDropdown from '@carbon/web-components/es/components-react/dropdown/dropdown.js';
+import CDSDropdownItem from '@carbon/web-components/es/components-react/dropdown/dropdown-item.js';
 
 const App = () => (
-  <BXDropdown triggerContent="Select an item">
-    <BXDropdownItem value="all">Option 1</BXDropdownItem>
-    <BXDropdownItem value="cloudFoundry">Option 2</BXDropdownItem>
-    <BXDropdownItem value="staging">Option 3</BXDropdownItem>
-    <BXDropdownItem value="dea">Option 4</BXDropdownItem>
-    <BXDropdownItem value="router">Option 5</BXDropdownItem>
-  </BXDropdown>
+  <CDSDropdown triggerContent="Select an item">
+    <CDSDropdownItem value="all">Option 1</CDSDropdownItem>
+    <CDSDropdownItem value="cloudFoundry">Option 2</CDSDropdownItem>
+    <CDSDropdownItem value="staging">Option 3</CDSDropdownItem>
+    <CDSDropdownItem value="dea">Option 4</CDSDropdownItem>
+    <CDSDropdownItem value="router">Option 5</CDSDropdownItem>
+  </CDSDropdown>
 );
 
 render(<App />, document.getElementById('root'));

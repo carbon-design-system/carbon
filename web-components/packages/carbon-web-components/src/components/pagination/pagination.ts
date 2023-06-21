@@ -18,6 +18,7 @@ import HostListener from '../../globals/decorators/host-listener';
 import styles from './pagination.scss';
 import { PAGINATION_SIZE } from './defs';
 import CDSSelect from '../select/select';
+import '../button/index';
 
 /**
  * Pagination UI.

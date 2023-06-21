@@ -8,15 +8,15 @@
  */
 
 import { css } from 'lit';
-import BXDropdown from '@carbon/web-components/es/components/dropdown/dropdown.js';
+import CDSDropdown from '@carbon/web-components/es/components/dropdown/dropdown.js';
 import '@carbon/web-components/es/components/dropdown/dropdown-item.js';
 
-class MyDropdown extends BXDropdown {}
+class MyDropdown extends CDSDropdown {}
 
 // We seem to have hit something similar to: https://github.com/codesandbox/codesandbox-client/issues/1935
 // Custom CSS to enforce `field-02` (light) style of the dropdown
 MyDropdown.styles = [
-  BXDropdown.styles,
+  CDSDropdown.styles,
   css`
     .cds--list-box {
       background-color: white;
