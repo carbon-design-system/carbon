@@ -103,7 +103,15 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--expanded {
-    border-bottom-color: $border-subtle;
+    border-bottom-color: $border-subtle-01;
+  }
+
+  .#{$prefix}--layer-two .#{$prefix}--list-box--expanded {
+    border-bottom-color: $border-subtle-02;
+  }
+
+  .#{$prefix}--layer-three .#{$prefix}--list-box--expanded {
+    border-bottom-color: $border-subtle-03;
   }
 
   .#{$prefix}--list-box--expanded:hover {
@@ -582,7 +590,19 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box--disabled
     .#{$prefix}--list-box__menu-item__option:hover {
-    border-top-color: $border-subtle;
+    border-top-color: $border-subtle-01;
+  }
+
+  .#{$prefix}--layer-two
+    .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item__option:hover {
+    border-top-color: $border-subtle-02;
+  }
+
+  .#{$prefix}--layer-three
+    .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item__option:hover {
+    border-top-color: $border-subtle-03;
   }
 
   .#{$prefix}--list-box__menu-item:first-of-type
@@ -595,17 +615,35 @@ $list-box-menu-width: rem(300px);
     color: $text-primary;
   }
 
-  .#{$prefix}--list-box__menu-item:hover
-    + .#{$prefix}--list-box__menu-item
-    .#{$prefix}--list-box__menu-item__option {
-    border-top-color: transparent;
-  }
-
   .#{$prefix}--list-box--disabled
     .#{$prefix}--list-box__menu-item:hover
     + .#{$prefix}--list-box__menu-item
     .#{$prefix}--list-box__menu-item__option {
-    border-top-color: $border-subtle;
+    border-top-color: $border-subtle-01;
+  }
+
+  .#{$prefix}--layer-two
+    .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $border-subtle-02;
+  }
+
+  .#{$prefix}--layer-three
+    .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $border-subtle-03;
+  }
+
+  .#{$prefix}--layer-two .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $border-subtle-02;
+  }
+
+  .#{$prefix}--layer-three .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $border-subtle-03;
   }
 
   .#{$prefix}--list-box__menu-item__option {
@@ -617,7 +655,7 @@ $list-box-menu-width: rem(300px);
     padding: rem(11px) 0;
     padding-right: $spacing-06;
     border-top: 1px solid transparent;
-    border-top-color: $border-subtle;
+    border-top-color: $border-subtle-01;
     border-bottom: 1px solid transparent;
     margin: 0 $spacing-05;
     color: $text-secondary;
@@ -682,14 +720,40 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__menu-item[disabled]
-    .#{$prefix}--list-box__menu-item__option {
-    border-top-color: $border-subtle;
-  }
-
+    .#{$prefix}--list-box__menu-item__option,
   .#{$prefix}--list-box__menu-item[disabled]:hover
     + .#{$prefix}--list-box__menu-item
     .#{$prefix}--list-box__menu-item__option {
-    border-top-color: $border-subtle;
+    border-top-color: $border-subtle-01;
+  }
+
+  .#{$prefix}--layer-two
+    .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--list-box__menu-item__option,
+  .#{$prefix}--layer-two
+    .#{$prefix}--list-box__menu-item[disabled]:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $border-subtle-02;
+  }
+
+  .#{$prefix}--layer-three
+    .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--list-box__menu-item__option,
+  .#{$prefix}--layer-three
+    .#{$prefix}--list-box__menu-item[disabled]:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $border-subtle-03;
+  }
+
+  .#{$prefix}--list-box__menu-item--active
+    + .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--list-box__menu-item__option,
+  .#{$prefix}--list-box__menu-item:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: transparent;
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
