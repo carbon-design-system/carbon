@@ -543,7 +543,6 @@ Changes:
  - @carbon/icons-vue: 10.4.0 => 10.4.1
  - @carbon/icons: 10.4.0 => 10.4.1
  - carbon-components-react: 7.4.1 => 7.4.2
- - @carbon/sketch: 10.4.0 => 10.4.1 (private)
 
 ? Are you sure you want to create these versions? (ynH)
 ```
@@ -680,7 +679,6 @@ following steps to release:
     - @carbon/icons-vue: 10.4.0 => 10.4.1
     - @carbon/icons: 10.4.0 => 10.4.1
     - carbon-components-react: 7.4.1 => 7.4.2
-    - @carbon/sketch: 10.4.0 => 10.4.1 (private)
 
    ? Are you sure you want to create these versions? (ynH)
    ```
@@ -825,7 +823,6 @@ can be released on-demand in specific circumstances.
       - @carbon/icons-vue: 10.5.0 => 10.6.0
       - @carbon/icons: 10.5.0 => 10.6.0
       - carbon-components-react: 7.5.0 => 7.6.0
-      - @carbon/sketch: 10.5.0 => 10.6.0 (private)
 
      ? Are you sure you want to create these versions? (ynH)
      ```
