@@ -13,12 +13,13 @@
 @use '../../theme' as *;
 @use '../../type' as *;
 @use '../../layer' as *;
+@use '../../utilities/component-reset';
 @use '../../utilities/convert' as *;
 @use '../../utilities/skeleton' as *;
 
 @mixin breadcrumb {
   .#{$prefix}--breadcrumb {
-    @include reset;
+    @include component-reset.reset;
     @include type-style('body-compact-01');
 
     display: inline;

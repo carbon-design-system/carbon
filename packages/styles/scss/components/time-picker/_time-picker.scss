@@ -50,6 +50,10 @@
     transform: translateY(-50%);
   }
 
+  .#{$prefix}--time-picker__error__icon svg {
+    fill: $support-error;
+  }
+
   .#{$prefix}--time-picker .#{$prefix}--select-input {
     width: auto;
     min-width: auto;
