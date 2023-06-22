@@ -8,12 +8,17 @@
 import React from 'react';
 import Switcher from '../Switcher';
 import { render, screen } from '@testing-library/react';
+import SwitcherItem from '../SwitcherItem';
 
 describe('Switcher', () => {
   describe('renders as expected - Component API', () => {
     it('should respect aria-label prop', () => {
       const { container } = render(
-        <Switcher aria-label="test-aria-label">Dummy child</Switcher>
+        <Switcher aria-label="test-aria-label">
+          <SwitcherItem aria-label="test-aria-label-switcheritem">
+            Dummy child
+          </SwitcherItem>
+        </Switcher>
       );
 
       expect(container.firstChild).toHaveAttribute(
@@ -24,7 +29,11 @@ describe('Switcher', () => {
 
     it('should respect aria-labelledby prop', () => {
       const { container } = render(
-        <Switcher aria-labelledby="test-aria-labelledby">Dummy child</Switcher>
+        <Switcher aria-labelledby="test-aria-labelledby">
+          <SwitcherItem aria-label="test-aria-label-switcheritem">
+            Dummy child
+          </SwitcherItem>
+        </Switcher>
       );
 
       expect(container.firstChild).toHaveAttribute(
@@ -34,15 +43,23 @@ describe('Switcher', () => {
     });
 
     it('should render children as expected', () => {
-      render(<Switcher aria-label="dummy-aria-label">text child</Switcher>);
+      render(
+        <Switcher aria-label="dummy-aria-label">
+          <SwitcherItem aria-label="test-aria-label-switcheritem">
+            Dummy child
+          </SwitcherItem>
+        </Switcher>
+      );
 
-      expect(screen.getByText('text child')).toBeInTheDocument();
+      expect(screen.getByText('Dummy child')).toBeInTheDocument();
     });
 
     it('should support a custom `className` prop on the outermost element', () => {
       const { container } = render(
         <Switcher aria-label="dummy-aria-label" className="custom-class">
-          Dummy child
+          <SwitcherItem aria-label="test-aria-label-switcheritem">
+            Dummy child
+          </SwitcherItem>
         </Switcher>
       );
 

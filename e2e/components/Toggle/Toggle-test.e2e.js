@@ -29,6 +29,14 @@ test.describe('Toggle', () => {
           theme,
         });
       });
+
+      test('skeleton @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Toggle',
+          id: 'components-toggle--skeleton',
+          theme,
+        });
+      });
     });
   });
 
