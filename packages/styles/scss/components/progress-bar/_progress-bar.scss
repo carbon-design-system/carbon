@@ -68,10 +68,6 @@
   .#{$prefix}--progress-bar--indeterminate
     .#{$prefix}--progress-bar__track::after {
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
     animation-duration: 1400ms;
     animation-iteration-count: infinite;
     animation-name: progress-bar-indeterminate;
@@ -84,6 +80,7 @@
     background-position-x: 0%;
     background-size: 200% 100%;
     content: '';
+    inset: 0;
   }
 
   .#{$prefix}--progress-bar__helper-text {
