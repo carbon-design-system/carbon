@@ -1,5 +1,6 @@
-import { Props, Preview, Story } from '@storybook/addon-docs';
+import { Props, Preview, Story, Canvas } from '@storybook/addon-docs';
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from './Tabs';
+import { Grid, Column } from '../Grid'
 
 # Tabs
 
@@ -9,6 +10,8 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from './Tabs';
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/tabs/accessibility)
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of Contents
 
 - [Overview](#overview)
@@ -18,11 +21,14 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from './Tabs';
   - [Dismissable Tabs](#dismissable-tabs)
 - [Component API](#component-api)
   - [Tab - render content on click](#tab---render-content-on-click)
+  - [Tabs and the Grid - fullWidth prop](#tabs-and-the-grid---fullwidth-prop)
 - [V11](#v11)
   - [Tabs composition](#tabs-composition)
   - [Various updates](#various-updates)
   - [Max width](#max-width)
 - [Feedback](#feedback)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Overview
 
@@ -200,6 +206,158 @@ loaded when the Tab is clicked. In v11, to do this, you can this by setting
   </TabPanels>
 </Tabs>
 ```
+
+### Tabs and the Grid - fullWidth prop
+
+By default, a `Tab` component is only as wide as it's content. This posses difficulties when trying to align tabs to the grid.
+Alternatively, you may choose to use the `fullWidth` prop to allow `Tab` elements to grow as  wide as their container allows.
+
+Note that this feature is *only available* for `contained` tabs in large and extra large screen sizes.
+The prop is a no-op for smaller screens and will also be ignored for `TabList`s with more than 8 tabs.
+`fullWidth` paired up with a wrapping `Grid` component will allow for "grid-aware" tabs:
+
+<Canvas>
+  <Grid condensed>
+    <Column lg={16} md={8} sm={4}>
+      <Tabs>
+        <TabList aria-label="List of tabs" contained fullWidth>
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab disabled>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    </Column>
+  </Grid>
+</Canvas>
+
+```jsx
+    <Grid condensed>
+      <Column lg={16} md={8} sm={4}>
+        <Tabs>
+          <TabList aria-label="List of tabs" contained fullWidth>
+            <Tab>Tab Label 1</Tab>
+            <Tab>Tab Label 2</Tab>
+            <Tab disabled>Tab Label 3</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>Tab Panel 1</TabPanel>
+            <TabPanel>Tab Panel 2</TabPanel>
+            <TabPanel>Tab Panel 3</TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Column>
+    </Grid>
+```
+
+Using the `fullWidth` prop alone within a `Grid` makes it so that the `Tabs` container aligns to the `Grid`, but not the individual `Tab` items;
+to have each individual `Tab` take up exactly one or many columns within the `Grid`, you must specify the number of columns as a multiple of the number of `Tab` items within the `TabList`.
+
+For example, to have 5 tabs and each tab span exactly two columns:
+
+<Canvas>
+  <Grid condensed>
+    <Column lg={10}>
+      <Tabs>
+        <TabList aria-label="List of tabs" contained fullWidth>
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab disabled>Tab Label 3</Tab>
+          <Tab>Tab Label 4</Tab>
+          <Tab>Tab Label 5</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+          <TabPanel>Tab Panel 5</TabPanel>
+        </TabPanels>
+      </Tabs>
+    </Column>
+  </Grid>
+</Canvas>
+
+```jsx
+  <Grid condensed>
+    <Column lg={10}>
+      <Tabs>
+        <TabList aria-label="List of tabs" contained fullWidth>
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab disabled>Tab Label 3</Tab>
+          <Tab>Tab Label 4</Tab>
+          <Tab>Tab Label 5</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+          <TabPanel>Tab Panel 5</TabPanel>
+        </TabPanels>
+      </Tabs>
+    </Column>
+  </Grid>
+```
+
+Or, to have 5 tabs and each tab span exactly three columns:
+
+<Canvas>
+  <Grid condensed>
+    <Column lg={15}>
+      <Tabs>
+        <TabList aria-label="List of tabs" contained fullWidth>
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab disabled>Tab Label 3</Tab>
+          <Tab>Tab Label 4</Tab>
+          <Tab>Tab Label 5</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+          <TabPanel>Tab Panel 5</TabPanel>
+        </TabPanels>
+      </Tabs>
+    </Column>
+  </Grid>
+</Canvas>
+
+```jsx
+  <Grid condensed>
+    <Column lg={15}>
+      <Tabs>
+        <TabList aria-label="List of tabs" contained fullWidth>
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab disabled>Tab Label 3</Tab>
+          <Tab>Tab Label 4</Tab>
+          <Tab>Tab Label 5</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+          <TabPanel>Tab Panel 5</TabPanel>
+        </TabPanels>
+      </Tabs>
+    </Column>
+  </Grid>
+```
+
+
+
+
+
+
 
 ## V11
 

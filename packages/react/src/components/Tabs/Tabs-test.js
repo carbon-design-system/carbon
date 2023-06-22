@@ -3,10 +3,16 @@ import { Tabs, Tab, TabPanel, TabPanels, TabList } from './Tabs';
 import { act } from 'react-dom/test-utils';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import * as hooks from '../../internal/useMatchMedia';
 
 const prefix = 'cds';
 
 describe('Tabs', () => {
+  beforeEach(() => {
+    jest.resetModules();
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
+  });
+
   it('should update selected index based on the default provided', () => {
     render(
       <Tabs defaultSelectedIndex={1}>
@@ -53,6 +59,11 @@ describe('Tabs', () => {
 });
 
 describe('Tab', () => {
+  beforeEach(() => {
+    jest.resetModules();
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
+  });
+
   it('should set a className from props on outermost element in Tab', () => {
     render(
       <Tabs>
@@ -437,6 +448,11 @@ describe('Tab', () => {
 });
 
 describe('TabPanel', () => {
+  beforeEach(() => {
+    jest.resetModules();
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
+  });
+
   it('should have a className if provided by props', () => {
     render(
       <Tabs>
@@ -534,5 +550,95 @@ describe('TabPanel', () => {
     });
 
     expect(screen.getByText('Tab Panel 1')).toHaveAttribute('tabIndex', '0');
+  });
+});
+
+describe('TabList', () => {
+  it('should span fullWidth if lg and fullWidth prop is passed in', () => {
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
+    const { container } = render(
+      <Tabs>
+        <TabList aria-label="List of tabs" contained fullWidth>
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel className="custom-class">
+            Tab Panel 1<button type="button">Submit</button>
+          </TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    expect(container.firstChild).toHaveClass(`${prefix}--tabs--full-width`);
+  });
+
+  it('should ignore fullWidth prop if screen smaller than lg', () => {
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => false);
+    const { container } = render(
+      <Tabs>
+        <TabList aria-label="List of tabs" contained fullWidth>
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel className="custom-class">
+            Tab Panel 1<button type="button">Submit</button>
+          </TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    expect(container.firstChild).not.toHaveClass(`${prefix}--tabs--full-width`);
+  });
+
+  it('should ignore fullWidth prop if tabs are not contained', () => {
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
+    const { container } = render(
+      <Tabs>
+        <TabList aria-label="List of tabs" fullWidth>
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel className="custom-class">
+            Tab Panel 1<button type="button">Submit</button>
+          </TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    expect(container.firstChild).not.toHaveClass(`${prefix}--tabs--full-width`);
+  });
+
+  it('should not be fullWidth in default state', () => {
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
+    const { container } = render(
+      <Tabs>
+        <TabList aria-label="List of tabs" contained>
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel className="custom-class">
+            Tab Panel 1<button type="button">Submit</button>
+          </TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    expect(container.firstChild).not.toHaveClass(`${prefix}--tabs--full-width`);
   });
 });
