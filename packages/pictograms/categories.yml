@@ -416,7 +416,6 @@ categories:
   - name: Data Storage
     members:
       - accelerated-computing
-      - app--modernization
       - archive
       - availability
       - business--continuity
@@ -456,6 +455,7 @@ categories:
   - name: Design and development
     members:
       - app--developer
+      - app--modernization
       - application
       - art--tools--01
       - birthday--cake
@@ -622,8 +622,6 @@ categories:
   - name: IBM
     members:
       - bee
-      - carbon--for-ibm-dotcom
-      - carbon--for-ibm-product
       - enterprise--design--thinking--01
       - enterprise--design--thinking--02
       - eye
@@ -934,7 +932,6 @@ categories:
   - name: Supply Chain
     members:
       - connected--nodes--to--the--cloud
-      - delivered
       - managing--contractual--flow
       - managing--items
       - monitored--item--on--conveyor
@@ -943,7 +940,6 @@ categories:
       - movement--of--goods--02
       - movement--of--goods--03
       - movement--of--items
-      - moving-dolly
       - process
   - name: Systems DevOps
     members:

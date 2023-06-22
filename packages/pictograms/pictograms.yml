@@ -703,28 +703,6 @@
     - government
     - municipal
     - legislature
-- name: carbon--for-ibm-dotcom
-  friendly_name: Carbon for IBM dotcom
-  aliases:
-    - pals
-    - carbon
-    - pattern asset library
-    - components
-    - patterns
-    - website design
-    - marketing pages
-    - dotcom
-- name: carbon--for-ibm-product
-  friendly_name: Carbon for IBM product
-  aliases:
-    - pal
-    - pal site
-    - pattern asset library
-    - components
-    - patterns
-    - product
-    - product design
-    - software design
 - name: care
   friendly_name: Care
   aliases:
@@ -1780,11 +1758,6 @@
     - deliver insights
     - insights
     - watson
-- name: delivered
-  friendly_name: Delivered
-  aliases:
-    - delivery
-    - delivered
 - name: delivery--truck
   friendly_name: Delivery truck
   aliases:
@@ -2843,32 +2816,30 @@
     - precipitation
     - forecast
 - name: hamburg--philharmone
-  friendly_name: Hamburg Elbphilharmonie
+  friendly_name: Hamburg Philharmone
   aliases:
-    - Hamburg Elbphilharmonie
+    - Hamburg Philharmone
     - Hamburg
     - Germany
-    - Elbphilharmonie
+    - Philharmone
     - city
     - cities
 - name: handicap
-  friendly_name: Disabled user
+  friendly_name: Handicap
   aliases:
     - handicap
-    - disabled user
     - people
     - wheelchair
 - name: handicap--active
-  friendly_name: Disabled user active
+  friendly_name: Handicap active
   aliases:
     - handicap active
     - people
-    - disabled user 
     - wheelchair
 - name: hard--drive
-  friendly_name: Hard disk drive
+  friendly_name: Hard drive
   aliases:
-    - hard disk drive
+    - hard drive
     - hardware
     - storage
     - data storage
@@ -3863,12 +3834,6 @@
     - movement of items
     - goods
     - shipping
-- name: moving-dolly
-  friendly_name: Moving dolly
-  aliases:
-    - moving dolly
-    - delivered
-    - delivery
 - name: mqa
   friendly_name: MQA
   aliases:
@@ -4100,14 +4065,14 @@
     - Shurijo
     - Japan
 - name: on-premise
-  friendly_name: On premises
+  friendly_name: On-premise
   aliases:
-    - on premises
+    - on-premise
     - Cloud
 - name: on-premise--to-cloud
-  friendly_name: On premises to cloud
+  friendly_name: On-premise to cloud
   aliases:
-    - on premises to cloud
+    - on-premise to cloud
     - Cloud
 - name: open-source
   friendly_name: Open source
@@ -6373,22 +6338,22 @@
     - electronics
     - appliances
 - name: washington-dc
-  friendly_name: Washington DC
+  friendly_name: Washington D.C.
   aliases:
-    - Washington DC
+    - Washington D.C.
     - cities
     - city
 - name: washington-dc--capitol
-  friendly_name: Washington DC capitol
+  friendly_name: Washington D.C. capitol
   aliases:
-    - Washington DC capitol
+    - Washington D.C. capitol
     - capitol
     - cities
     - city
 - name: washington-dc--monument
-  friendly_name: Washington DC monument
+  friendly_name: Washington D.C. monument
   aliases:
-    - Washington DC monument
+    - Washington D.C. monument
     - monument
     - cities
     - city
