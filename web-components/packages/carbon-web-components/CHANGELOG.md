@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.29.0-rc.1](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.29.0-rc.0...@carbon/web-components@1.29.0-rc.1) (2023-06-22)
+
+
+### Bug Fixes
+
+* **masthead:** Esc to close Cloud Masthead ([#10555](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10555)) ([#10588](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10588)) ([06cd69d](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/06cd69dec6d91cafb358e078d8d083ae62edfc13)), closes [#10174](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10174)
+
+
+
+
+
 # [1.29.0-rc.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.28.0...@carbon/web-components@1.29.0-rc.0) (2023-06-09)
 
 
