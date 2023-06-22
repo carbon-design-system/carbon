@@ -1,8 +1,6 @@
 {
-  "lerna": "6.4.0",
   "version": "independent",
   "npmClient": "yarn",
-  "npmClientArgs": ["--immutable"],
   "ignoreChanges": [
     "actions/**",
     "**/__fixtures__/**",
@@ -16,5 +14,6 @@
     "version": {
       "message": "chore(release): %s"
     }
-  }
+  },
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json"
 }
