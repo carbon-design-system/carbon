@@ -2,7 +2,7 @@
   "lerna": "6.4.0",
   "version": "independent",
   "npmClient": "yarn",
-  "npmClientArgs": ["--frozen-lockfile"],
+  "npmClientArgs": ["--immutable"],
   "ignoreChanges": [
     "actions/**",
     "**/__fixtures__/**",
