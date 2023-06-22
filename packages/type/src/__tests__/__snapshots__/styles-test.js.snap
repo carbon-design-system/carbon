@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`styles body01 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 0.875rem;
 font-weight: 400;
 line-height: 1.42857;
@@ -9,7 +9,7 @@ letter-spacing: 0.16px;"
 `;
 
 exports[`styles body02 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 1rem;
 font-weight: 400;
 line-height: 1.5;
@@ -17,7 +17,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles bodyCompact01 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 0.875rem;
 font-weight: 400;
 line-height: 1.28572;
@@ -25,7 +25,7 @@ letter-spacing: 0.16px;"
 `;
 
 exports[`styles bodyCompact02 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 1rem;
 font-weight: 400;
 line-height: 1.375;
@@ -33,7 +33,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles bodyLong01 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 0.875rem;
 font-weight: 400;
 line-height: 1.42857;
@@ -41,7 +41,7 @@ letter-spacing: 0.16px;"
 `;
 
 exports[`styles bodyLong02 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 1rem;
 font-weight: 400;
 line-height: 1.5;
@@ -49,7 +49,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles bodyShort01 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 0.875rem;
 font-weight: 400;
 line-height: 1.28572;
@@ -57,7 +57,7 @@ letter-spacing: 0.16px;"
 `;
 
 exports[`styles bodyShort02 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 1rem;
 font-weight: 400;
 line-height: 1.375;
@@ -65,7 +65,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles caption01 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 0.75rem;
 font-weight: 400;
 line-height: 1.33333;
@@ -73,7 +73,7 @@ letter-spacing: 0.32px;"
 `;
 
 exports[`styles caption02 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 0.875rem;
 font-weight: 400;
 line-height: 1.28572;
@@ -97,7 +97,7 @@ letter-spacing: 0.32px;"
 `;
 
 exports[`styles display01 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 2.625rem;
 font-weight: 300;
 line-height: 1.19;
@@ -105,7 +105,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles display02 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 2.625rem;
 font-weight: 600;
 line-height: 1.19;
@@ -113,7 +113,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles display03 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 2.625rem;
 font-weight: 300;
 line-height: 1.19;
@@ -121,7 +121,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles display04 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 2.625rem;
 font-weight: 300;
 line-height: 1.19;
@@ -129,7 +129,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles expressiveHeading01 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 0.875rem;
 font-weight: 600;
 line-height: 1.25;
@@ -137,7 +137,7 @@ letter-spacing: 0.16px;"
 `;
 
 exports[`styles expressiveHeading02 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 1rem;
 font-weight: 600;
 line-height: 1.5;
@@ -145,7 +145,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles expressiveHeading03 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 1.25rem;
 font-weight: 400;
 line-height: 1.4;
@@ -153,7 +153,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles expressiveHeading04 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 1.75rem;
 font-weight: 400;
 line-height: 1.28572;
@@ -161,7 +161,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles expressiveHeading05 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 2rem;
 font-weight: 400;
 line-height: 1.25;
@@ -169,7 +169,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles expressiveHeading06 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 2rem;
 font-weight: 600;
 line-height: 1.25;
@@ -177,7 +177,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles expressiveParagraph01 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 1.5rem;
 font-weight: 300;
 line-height: 1.334;
@@ -185,7 +185,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles fluidDisplay01 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 2.625rem;
 font-weight: 300;
 line-height: 1.19;
@@ -193,7 +193,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles fluidDisplay02 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 2.625rem;
 font-weight: 600;
 line-height: 1.19;
@@ -201,7 +201,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles fluidDisplay03 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 2.625rem;
 font-weight: 300;
 line-height: 1.19;
@@ -209,7 +209,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles fluidDisplay04 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 2.625rem;
 font-weight: 300;
 line-height: 1.19;
@@ -217,7 +217,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles fluidHeading03 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 1.25rem;
 font-weight: 400;
 line-height: 1.4;
@@ -225,7 +225,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles fluidHeading04 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 1.75rem;
 font-weight: 400;
 line-height: 1.28572;
@@ -233,7 +233,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles fluidHeading05 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 2rem;
 font-weight: 400;
 line-height: 1.25;
@@ -241,7 +241,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles fluidHeading06 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 2rem;
 font-weight: 600;
 line-height: 1.25;
@@ -249,7 +249,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles fluidParagraph01 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 1.5rem;
 font-weight: 300;
 line-height: 1.334;
@@ -273,7 +273,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles heading01 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 0.875rem;
 font-weight: 600;
 line-height: 1.42857;
@@ -281,7 +281,7 @@ letter-spacing: 0.16px;"
 `;
 
 exports[`styles heading02 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 1rem;
 font-weight: 600;
 line-height: 1.5;
@@ -289,7 +289,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles heading03 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 1.25rem;
 font-weight: 400;
 line-height: 1.4;
@@ -297,7 +297,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles heading04 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 1.75rem;
 font-weight: 400;
 line-height: 1.28572;
@@ -305,7 +305,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles heading05 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 2rem;
 font-weight: 400;
 line-height: 1.25;
@@ -313,7 +313,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles heading06 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 2.625rem;
 font-weight: 300;
 line-height: 1.199;
@@ -321,7 +321,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles heading07 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 3.375rem;
 font-weight: 300;
 line-height: 1.199;
@@ -329,7 +329,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles headingCompact01 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 0.875rem;
 font-weight: 600;
 line-height: 1.28572;
@@ -337,7 +337,7 @@ letter-spacing: 0.16px;"
 `;
 
 exports[`styles headingCompact02 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 1rem;
 font-weight: 600;
 line-height: 1.375;
@@ -345,21 +345,21 @@ letter-spacing: 0;"
 `;
 
 exports[`styles helperText01 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 0.75rem;
 line-height: 1.33333;
 letter-spacing: 0.32px;"
 `;
 
 exports[`styles helperText02 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 0.875rem;
 line-height: 1.28572;
 letter-spacing: 0.16px;"
 `;
 
 exports[`styles label01 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 0.75rem;
 font-weight: 400;
 line-height: 1.33333;
@@ -367,7 +367,7 @@ letter-spacing: 0.32px;"
 `;
 
 exports[`styles label02 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 0.875rem;
 font-weight: 400;
 line-height: 1.28572;
@@ -375,7 +375,7 @@ letter-spacing: 0.16px;"
 `;
 
 exports[`styles legal01 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 0.75rem;
 font-weight: 400;
 line-height: 1.33333;
@@ -383,7 +383,7 @@ letter-spacing: 0.32px;"
 `;
 
 exports[`styles legal02 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 0.875rem;
 font-weight: 400;
 line-height: 1.28572;
@@ -391,7 +391,7 @@ letter-spacing: 0.16px;"
 `;
 
 exports[`styles productiveHeading01 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 0.875rem;
 font-weight: 600;
 line-height: 1.28572;
@@ -399,7 +399,7 @@ letter-spacing: 0.16px;"
 `;
 
 exports[`styles productiveHeading02 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 1rem;
 font-weight: 600;
 line-height: 1.375;
@@ -407,7 +407,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles productiveHeading03 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 1.25rem;
 font-weight: 400;
 line-height: 1.4;
@@ -415,7 +415,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles productiveHeading04 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 1.75rem;
 font-weight: 400;
 line-height: 1.28572;
@@ -423,7 +423,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles productiveHeading05 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 2rem;
 font-weight: 400;
 line-height: 1.25;
@@ -431,7 +431,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles productiveHeading06 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 2.625rem;
 font-weight: 300;
 line-height: 1.199;
@@ -439,7 +439,7 @@ letter-spacing: 0;"
 `;
 
 exports[`styles productiveHeading07 should be printable 1`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-size: 3.375rem;
 font-weight: 300;
 line-height: 1.199;
