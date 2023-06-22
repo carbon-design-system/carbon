@@ -39,7 +39,6 @@ jobs:
           id: slack
           uses: slackapi/slack-github-action@v1.24.0
           with:
-            # For posting a rich message using Block Kit
             payload: |
               {
                 "username": "Carbon Design System",
