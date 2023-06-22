@@ -70,6 +70,14 @@ test.describe('Tabs', () => {
         });
       });
 
+      test('contained fullWidth @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Tabs',
+          id: 'components-tabs--contained-full-width',
+          theme,
+        });
+      });
+
       test('contained with secondary labels @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Tabs',
