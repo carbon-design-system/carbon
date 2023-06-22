@@ -33,8 +33,8 @@ class BXHeaderMenu extends HostListenerMixin(FocusMixin(LitElement)) {
   /**
    * The trigger button.
    */
-  @query('a')
-  private _trigger!: HTMLElement;
+  @query('[part="trigger"]')
+  protected _topMenuItem!: HTMLElement;
 
   /**
    * Handles `click` event handler on this element.
@@ -46,6 +46,8 @@ class BXHeaderMenu extends HostListenerMixin(FocusMixin(LitElement)) {
   /**
    * Handler for the `keydown` event on the trigger button.
    */
+  @HostListener('keydown')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydownTrigger({ key }: KeyboardEvent) {
     if (key === 'Esc' || key === 'Escape') {
       this._handleUserInitiatedToggle(false);
@@ -60,7 +62,7 @@ class BXHeaderMenu extends HostListenerMixin(FocusMixin(LitElement)) {
   private _handleUserInitiatedToggle(force: boolean = !this.expanded) {
     this.expanded = force;
     if (!force) {
-      this._trigger.focus();
+      this._topMenuItem.focus();
     }
   }
 
@@ -123,7 +125,6 @@ class BXHeaderMenu extends HostListenerMixin(FocusMixin(LitElement)) {
       triggerContent,
       menuLabel,
       _handleClick: handleClick,
-      _handleKeydownTrigger: handleKeydownTrigger,
     } = this;
     return html`
       <a
@@ -134,8 +135,7 @@ class BXHeaderMenu extends HostListenerMixin(FocusMixin(LitElement)) {
         href="javascript:void 0"
         aria-haspopup="menu"
         aria-expanded="${String(Boolean(expanded))}"
-        @click=${handleClick}
-        @keydown=${handleKeydownTrigger}>
+        @click=${handleClick}>
         ${triggerContent}${ChevronDownGlyph({
           part: 'trigger-icon',
           class: `${prefix}--header__menu-arrow`,
