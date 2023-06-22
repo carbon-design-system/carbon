@@ -72,3 +72,9 @@ $use-flexbox-grid: false !default;
     $prefix: $prefix,
     $flex-grid-columns: $flex-grid-columns
   );
+
+:root {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}

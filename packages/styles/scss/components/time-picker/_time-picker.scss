@@ -50,7 +50,7 @@
     transform: translateY(-50%);
   }
 
-  .#{$prefix}--time-picker__error__icon svg {
+  .#{$prefix}--time-picker__error__icon .#{$prefix}--checkbox__invalid-icon {
     fill: $support-error;
   }
 
