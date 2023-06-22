@@ -34,7 +34,8 @@
     "build": "yarn clean && node tasks/build-styles.js && node tasks/build.js",
     "clean": "rimraf es lib icons/index.js icons/index.esm.js storybook-static",
     "postinstall": "carbon-telemetry collect --install",
-    "storybook": "storybook dev -p 3000"
+    "storybook": "storybook dev -p 3000",
+    "storybook:build": "storybook build"
   },
   "peerDependencies": {
     "react": "^16.8.6 || ^17.0.1 || ^18.2.0",
