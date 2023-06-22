@@ -583,6 +583,7 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
                   aria-expanded={rootProps['aria-expanded']}
                   aria-haspopup="listbox"
                   aria-controls={inputProps['aria-controls']}
+                  aria-owns={getMenuProps().id}
                   title={textInput?.current?.value}
                   {...inputProps}
                   {...rest}
