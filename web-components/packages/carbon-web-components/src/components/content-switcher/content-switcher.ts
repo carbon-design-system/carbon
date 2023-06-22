@@ -12,7 +12,7 @@ import { property, customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { forEach, indexOf } from '../../globals/internal/collection-helpers';
 import { NAVIGATION_DIRECTION, CONTENT_SWITCHER_SIZE } from './defs';
-import BXSwitch from './content-switcher-item';
+import CDSContentSwitcherItem from './content-switcher-item';
 import styles from './content-switcher.scss';
 
 export { NAVIGATION_DIRECTION, CONTENT_SWITCHER_SIZE };
@@ -42,14 +42,14 @@ const capIndex = (index: number, length: number) => {
  * @fires cds-content-switcher-selected - The custom event fired after a a content switcher item is selected upon a user gesture.
  */
 @customElement(`${prefix}-content-switcher`)
-class BXContentSwitcher extends LitElement {
+export default class CDSContentSwitcher extends LitElement {
   /**
    * Handles `mouseover`/`mouseout` events on `<slot>`.
    *
    * @param event The event.
    */
   private _handleHover({ target, type }: MouseEvent) {
-    const { selectorItem } = this.constructor as typeof BXContentSwitcher;
+    const { selectorItem } = this.constructor as typeof CDSContentSwitcher;
     const items = this.querySelectorAll(selectorItem);
     const index =
       type !== 'mouseover'
@@ -59,8 +59,17 @@ class BXContentSwitcher extends LitElement {
     forEach(this.querySelectorAll(selectorItem), (elem, i) => {
       // Specifies child `<cds-content-switcher-item>` to hide its divider instead of using CSS,
       // until `:host-context()` gets supported in all major browsers
-      (elem as BXSwitch).hideDivider = i === nextIndex;
+      (elem as CDSContentSwitcherItem).hideDivider = i === nextIndex;
     });
+
+    const { selectorItemSelected } = this
+      .constructor as typeof CDSContentSwitcher;
+    const selectedItem = this.querySelector(selectorItemSelected);
+    const nextItem = this._getNextItem(
+      selectedItem as CDSContentSwitcherItem,
+      1
+    );
+    (nextItem as CDSContentSwitcherItem).hideDivider = true;
   }
 
   /**
@@ -68,9 +77,12 @@ class BXContentSwitcher extends LitElement {
    * @param direction The navigation direction.
    * @returns The item to be selected.
    */
-  protected _getNextItem(currentItem: BXSwitch, direction: number) {
+  protected _getNextItem(
+    currentItem: CDSContentSwitcherItem,
+    direction: number
+  ) {
     const items = this.querySelectorAll(
-      (this.constructor as typeof BXContentSwitcher).selectorItemEnabled
+      (this.constructor as typeof CDSContentSwitcher).selectorItemEnabled
     );
     const currentIndex = indexOf(items, currentItem);
     const nextIndex = capIndex(currentIndex + direction, items.length);
@@ -83,7 +95,7 @@ class BXContentSwitcher extends LitElement {
    * @param event The event.
    */
   protected _handleClick({ target }: MouseEvent) {
-    this._handleUserInitiatedSelectItem(target as BXSwitch);
+    this._handleUserInitiatedSelectItem(target as CDSContentSwitcherItem);
   }
 
   /**
@@ -102,7 +114,7 @@ class BXContentSwitcher extends LitElement {
    *
    * @param [item] The content switcher item user wants to select.
    */
-  protected _handleUserInitiatedSelectItem(item: BXSwitch) {
+  protected _handleUserInitiatedSelectItem(item: CDSContentSwitcherItem) {
     if (!item.disabled && item.value !== this.value) {
       const init = {
         bubbles: true,
@@ -111,7 +123,7 @@ class BXContentSwitcher extends LitElement {
           item,
         },
       };
-      const constructor = this.constructor as typeof BXContentSwitcher;
+      const constructor = this.constructor as typeof CDSContentSwitcher;
       const beforeSelectEvent = new CustomEvent(constructor.eventBeforeSelect, {
         ...init,
         cancelable: true,
@@ -131,13 +143,13 @@ class BXContentSwitcher extends LitElement {
    */
   protected _navigate(direction: number) {
     const { selectorItemSelected } = this
-      .constructor as typeof BXContentSwitcher;
+      .constructor as typeof CDSContentSwitcher;
     const nextItem = this._getNextItem(
-      this.querySelector(selectorItemSelected) as BXSwitch,
+      this.querySelector(selectorItemSelected) as CDSContentSwitcherItem,
       direction
     );
     if (nextItem) {
-      this._handleUserInitiatedSelectItem(nextItem as BXSwitch);
+      this._handleUserInitiatedSelectItem(nextItem as CDSContentSwitcherItem);
       this.requestUpdate();
     }
   }
@@ -147,20 +159,33 @@ class BXContentSwitcher extends LitElement {
    *
    * @param itemToSelect A content switcher item.
    */
-  protected _selectionDidChange(itemToSelect: BXSwitch) {
+  protected _selectionDidChange(itemToSelect: CDSContentSwitcherItem) {
     this.value = itemToSelect.value;
     forEach(
       this.querySelectorAll(
-        (this.constructor as typeof BXContentSwitcher).selectorItemSelected
+        (this.constructor as typeof CDSContentSwitcher).selectorItemSelected
       ),
       (item) => {
-        (item as BXSwitch).selected = false;
+        (item as CDSContentSwitcherItem).selected = false;
       }
     );
     itemToSelect.selected = true;
     // Waits for rendering with the new state that updates `tabindex`
     Promise.resolve().then(() => {
       itemToSelect.focus();
+
+      const { selectorItem } = this.constructor as typeof CDSContentSwitcher;
+      const items = this.querySelectorAll(selectorItem);
+      const index = indexOf(
+        items,
+        (itemToSelect as Element).closest(selectorItem)!
+      );
+      const nextIndex = index < 0 ? index : index + 1;
+      forEach(this.querySelectorAll(selectorItem), (elem, i) => {
+        // Specifies child `<cds-content-switcher-item>` to hide its divider instead of using CSS,
+        // until `:host-context()` gets supported in all major browsers
+        (elem as CDSContentSwitcherItem).hideDivider = i === nextIndex;
+      });
     });
   }
 
@@ -176,14 +201,39 @@ class BXContentSwitcher extends LitElement {
   @property({ reflect: true })
   size = CONTENT_SWITCHER_SIZE.REGULAR;
 
+  /**
+   * Icon only.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'icon' })
+  iconOnly = false;
+
   shouldUpdate(changedProperties) {
     if (changedProperties.has('value')) {
-      const { selectorItem } = this.constructor as typeof BXContentSwitcher;
+      const { selectorItem } = this.constructor as typeof CDSContentSwitcher;
       forEach(this.querySelectorAll(selectorItem), (elem) => {
-        (elem as BXSwitch).selected = (elem as BXSwitch).value === this.value;
+        (elem as CDSContentSwitcherItem).selected =
+          (elem as CDSContentSwitcherItem).value === this.value;
       });
     }
+    const { selectorIconItem } = this.constructor as typeof CDSContentSwitcher;
+    if (this.querySelector(selectorIconItem)) {
+      this.iconOnly = true;
+    }
     return true;
+  }
+
+  _handleSlotchange() {
+    const { selectorItemSelected } = this
+      .constructor as typeof CDSContentSwitcher;
+    const selectedItem = this.querySelector(selectorItemSelected);
+    const nextItem = this._getNextItem(
+      selectedItem as CDSContentSwitcherItem,
+      1
+    );
+
+    // Specifies child `<cds-content-switcher-item>` to hide its divider instead of using CSS,
+    // until `:host-context()` gets supported in all major browsers
+    (nextItem as CDSContentSwitcherItem).hideDivider = true;
   }
 
   /**
@@ -191,6 +241,13 @@ class BXContentSwitcher extends LitElement {
    */
   static get selectorItem() {
     return `${prefix}-content-switcher-item`;
+  }
+
+  /**
+   * A selector that will return content switcher icon items.
+   */
+  static get selectorIconItem() {
+    return `${prefix}-content-switcher-item[icon]`;
   }
 
   /**
@@ -223,17 +280,20 @@ class BXContentSwitcher extends LitElement {
   }
 
   render() {
-    const { _handleHover: handleHover, _handleKeydown: handleKeydown } = this;
+    const {
+      _handleHover: handleHover,
+      _handleKeydown: handleKeydown,
+      _handleSlotchange: handleSlotchange,
+    } = this;
     return html`
       <slot
         @click="${this._handleClick}"
         @keydown="${handleKeydown}"
         @mouseover="${handleHover}"
-        @mouseout="${handleHover}"></slot>
+        @mouseout="${handleHover}"
+        @slotchange=${handleSlotchange}></slot>
     `;
   }
 
   static styles = styles;
 }
-
-export default BXContentSwitcher;

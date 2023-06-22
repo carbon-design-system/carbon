@@ -10,10 +10,10 @@
 import { render } from 'lit';
 import EventManager from '../utils/event-manager';
 import BXTabs from '../../src/components/tabs/tabs';
-import { Default } from '../../src/components/content-switcher/content-switcher-story';
+import { Playground } from '../../src/components/content-switcher/content-switcher-story';
 
 const template = (props?) =>
-  Default({
+  Playground({
     'cds-content-switcher': props,
   });
 

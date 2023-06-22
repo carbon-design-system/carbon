@@ -21,7 +21,7 @@ import styles from './content-switcher.scss';
  * @element cds-content-switcher-item
  */
 @customElement(`${prefix}-content-switcher-item`)
-class BXContentSwitcherItem extends FocusMixin(LitElement) {
+export default class CDSContentSwitcherItem extends FocusMixin(LitElement) {
   /**
    * `true` if this content switcher item should be disabled.
    */
@@ -51,10 +51,63 @@ class BXContentSwitcherItem extends FocusMixin(LitElement) {
   target!: string;
 
   /**
-   * The `value` attribute that is set to the parent `<cds-content-switcher>` when this content switcher item is selected.
+   * The `value` attribute that is set to the parent `<cds-content-switcher>`
+   * when this content switcher item is selected.
    */
   @property()
   value = '';
+
+  /**
+   * `true` if the content switcher button should be icon-only.
+   */
+  @property({ type: Boolean, reflect: true })
+  icon = false;
+
+  /**
+   * Specify how the trigger should align with the tooltip for icon-only
+   * switcher item
+   */
+  @property({ reflect: true, type: String })
+  align = 'top';
+
+  /**
+   * Determines whether the tooltip should close when inner content is
+   * activated (click, Enter or Space)
+   */
+  @property({ attribute: 'close-on-activation', reflect: true, type: Boolean })
+  closeOnActivation = true;
+
+  /**
+   * Specify the duration in milliseconds to delay before displaying the
+   * tooltip for icon-only switcher item
+   */
+  enterDelayMs = 100;
+
+  /**
+   * Specify the duration in milliseconds to delay before hiding the tooltip
+   * for icon-only switcher-item
+   *
+   * TODO: match upstream value once #10471 is resolved
+   */
+  leaveDelayMs = 100;
+
+  updated(changedProperties) {
+    if (changedProperties) {
+      this.shadowRoot
+        ?.querySelector(`${prefix}-tooltip`)
+        ?.shadowRoot?.querySelector(`.${prefix}--tooltip`)
+        ?.classList.add(`${prefix}--icon-tooltip`);
+    }
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  protected _renderTooltipContent() {
+    return html`
+      <cds-tooltip-content>
+        <slot name="tooltip-content"></slot>
+      </cds-tooltip-content>
+    `;
+  }
 
   shouldUpdate(changedProperties) {
     if (changedProperties.has('selected') || changedProperties.has('target')) {
@@ -62,10 +115,8 @@ class BXContentSwitcherItem extends FocusMixin(LitElement) {
       if (target) {
         const doc = this.getRootNode() as HTMLDocument;
         // `doc` can be an element if such element is orphaned
-        const targetNode = doc.getElementById && doc.getElementById(target);
-        if (targetNode) {
-          targetNode.toggleAttribute('hidden', !selected);
-        }
+        const targetNode = doc?.getElementById(target);
+        targetNode?.toggleAttribute('hidden', !selected);
       }
     }
     return true;
@@ -77,18 +128,28 @@ class BXContentSwitcherItem extends FocusMixin(LitElement) {
       [`${prefix}--content-switcher-btn`]: true,
       [`${prefix}--content-switcher--selected`]: selected,
     });
-    return html`
-      <button
-        type="button"
-        role="tab"
-        class="${className}"
-        ?disabled="${disabled}"
-        tabindex="${selected ? '0' : '-1'}"
-        aria-controls="${ifDefined(target)}"
-        aria-selected="${Boolean(selected)}">
-        <span class="${prefix}--content-switcher__label"><slot></slot></span>
-      </button>
-    `;
+    const switcherItem = html`<button
+      type="button"
+      role="tab"
+      class="${className}"
+      ?disabled="${disabled}"
+      tabindex="${selected ? '0' : '-1'}"
+      aria-controls="${ifDefined(target)}"
+      aria-selected="${Boolean(selected)}">
+      <span class="${prefix}--content-switcher__label"><slot></slot></span>
+    </button>`;
+
+    if (this.icon) {
+      const { align, closeOnActivation, enterDelayMs, leaveDelayMs } = this;
+      return html`<cds-tooltip
+        align=${align}
+        close-on-activation="${closeOnActivation}"
+        enter-delay-ms=${enterDelayMs}
+        leave-delay-ms=${leaveDelayMs}>
+        ${switcherItem} ${this._renderTooltipContent()}
+      </cds-tooltip>`;
+    }
+    return switcherItem;
   }
 
   static shadowRootOptions = {
@@ -97,5 +158,3 @@ class BXContentSwitcherItem extends FocusMixin(LitElement) {
   };
   static styles = styles;
 }
-
-export default BXContentSwitcherItem;

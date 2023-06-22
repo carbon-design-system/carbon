@@ -13,7 +13,7 @@ import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import { find, forEach } from '../../globals/internal/collection-helpers';
-import BXContentSwitcher, {
+import CDSContentSwitcher, {
   NAVIGATION_DIRECTION,
 } from '../content-switcher/content-switcher';
 import {
@@ -43,7 +43,7 @@ export {
  * @fires cds-tabs-selected - The custom event fired after a a tab is selected upon a user gesture.
  */
 @customElement(`${prefix}-tabs`)
-class BXTabs extends HostListenerMixin(BXContentSwitcher) {
+class BXTabs extends HostListenerMixin(CDSContentSwitcher) {
   /**
    * The latest status of this dropdown, for screen reader to accounce.
    */

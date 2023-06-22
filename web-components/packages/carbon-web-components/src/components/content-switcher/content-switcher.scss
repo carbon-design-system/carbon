@@ -22,6 +22,10 @@ $css--plex: true !default;
   @include layer-tokens.emit-layer-tokens(1);
 }
 
+:host(#{$prefix}-content-switcher[icon]) {
+  @extend .#{$prefix}--content-switcher--icon-only;
+}
+
 :host(#{$prefix}-content-switcher[size='sm']) {
   @extend .#{$prefix}--content-switcher--sm;
 }
@@ -68,6 +72,36 @@ $css--plex: true !default;
       border-bottom-color: $border-inverse;
     }
   }
+
+  &[icon] {
+    width: initial;
+
+    .#{$prefix}--content-switcher-btn {
+      padding-left: rem(11px);
+      padding-right: rem(11px);
+      height: rem(40px);
+    }
+
+    .#{$prefix}--content-switcher__label {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+:host(#{$prefix}-content-switcher-item)[icon] {
+  width: initial;
+
+  .#{$prefix}--content-switcher-btn {
+    padding-left: rem(11px);
+    padding-right: rem(11px);
+    height: rem(40px);
+  }
+
+  .#{$prefix}--content-switcher__label {
+    display: flex;
+    align-items: center;
+  }
 }
 
 :host(#{$prefix}-content-switcher-item[hide-divider])
@@ -84,10 +118,6 @@ $css--plex: true !default;
   &::before {
     content: none;
   }
-
-  &.#{$prefix}--content-switcher--selected {
-    border-left: none;
-  }
 }
 
 :host(#{$prefix}-content-switcher-item:last-of-type)
@@ -95,8 +125,4 @@ $css--plex: true !default;
   border-top-right-radius: rem(4px);
   border-bottom-right-radius: rem(4px);
   border-right: rem(1px) solid $border-inverse;
-
-  &.#{$prefix}--content-switcher--selected {
-    border-right: none;
-  }
 }
