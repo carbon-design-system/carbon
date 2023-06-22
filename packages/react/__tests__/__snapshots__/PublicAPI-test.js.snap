@@ -7605,6 +7605,9 @@ Map {
       "contained": Object {
         "type": "bool",
       },
+      "fullWidth": Object {
+        "type": "bool",
+      },
       "iconSize": Object {
         "args": Array [
           Array [
