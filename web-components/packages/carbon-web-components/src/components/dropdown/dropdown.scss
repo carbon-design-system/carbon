@@ -11,6 +11,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/components/list-box/list-box' as *;
 @use '@carbon/styles/scss/components/dropdown' as *;
 @use '@carbon/styles/scss/components/form';
@@ -21,6 +22,7 @@ $css--plex: true !default;
 @include list-box;
 
 :host(#{$prefix}-dropdown) {
+  @include layer-tokens.emit-layer-tokens(1);
   outline: none;
 
   .#{$prefix}--assistive-text {
@@ -38,58 +40,56 @@ $css--plex: true !default;
     margin-top: 1px;
     outline: 1px solid $focus;
   }
+}
 
-  &[open] {
-    .#{$prefix}--list-box__field {
-      outline: none;
-    }
+:host(#{$prefix}-dropdown[open]) {
+  .#{$prefix}--list-box__field {
+    outline: none;
+  }
+}
+
+:host(#{$prefix}-dropdown[invalid]) {
+  .#{$prefix}--list-box__field {
+    outline: none;
   }
 
-  &[invalid] {
-    .#{$prefix}--list-box__field {
-      outline: none;
-    }
-
-    .#{$prefix}--form__helper-text {
-      color: $text-error;
-    }
+  .#{$prefix}--form__helper-text {
+    color: $text-error;
   }
+}
 
-  &[read-only] {
-    @extend .#{$prefix}--dropdown--readonly;
+:host(#{$prefix}-dropdown[read-only]) {
+  @extend .#{$prefix}--dropdown--readonly;
 
-    .#{$prefix}--list-box {
-      background-color: transparent;
-      border-bottom-color: $border-subtle;
-    }
+  .#{$prefix}--list-box {
+    background-color: transparent;
+    border-bottom-color: $border-subtle;
   }
+}
 
-  &[direction='top'] {
-    @extend .#{$prefix}--list-box--up;
+:host(#{$prefix}-dropdown[direction='top']) {
+  @extend .#{$prefix}--list-box--up;
 
-    .#{$prefix}--list-box__menu {
-      top: auto;
-    }
+  .#{$prefix}--list-box__menu {
+    top: auto;
   }
+}
 
-  &[type='inline'] {
-    @extend .#{$prefix}--list-box__wrapper--inline;
+:host(#{$prefix}-dropdown[type='inline']) {
+  @extend .#{$prefix}--list-box__wrapper--inline;
 
-    grid-gap: 0 $spacing-06;
+  grid-gap: 0 $spacing-06;
+}
 
-    &[warn] {
-      .#{$prefix}--list-box__field {
-        padding-left: $spacing-05;
-        padding-right: calc(#{$spacing-08} + #{$spacing-05});
-      }
-    }
+:host(#{$prefix}-dropdown[type='inline'][warn]) .#{$prefix}--list-box__field {
+  padding-left: $spacing-05;
+  padding-right: calc(#{$spacing-08} + #{$spacing-05});
+}
 
-    &[warn],
-    &[invalid] {
-      .#{$prefix}--form__helper-text {
-        grid-column: 2;
-      }
-    }
+:host(#{$prefix}-dropdown[warn]),
+:host(#{$prefix}-dropdown[invalid]) {
+  .#{$prefix}--form__helper-text {
+    grid-column: 2;
   }
 }
 
@@ -101,47 +101,50 @@ $css--plex: true !default;
   .#{$prefix}--list-box__menu-item__option {
     height: auto;
   }
+}
 
-  &[highlighted] {
-    @extend .#{$prefix}--list-box__menu-item--highlighted;
+:host(#{$prefix}-dropdown-item:hover) {
+  background-color: $layer-hover;
+}
+
+:host(#{$prefix}-dropdown-item[highlighted]) {
+  @extend .#{$prefix}--list-box__menu-item--highlighted;
+}
+
+:host(#{$prefix}-dropdown-item[disabled])
+  .#{$prefix}--list-box__menu-item__option {
+  color: $text-disabled;
+  text-decoration: none;
+}
+
+:host(#{$prefix}-dropdown-item[selected]) {
+  @extend .#{$prefix}--list-box__menu-item--active;
+  @extend .#{$prefix}--list-box__menu-item--highlighted;
+
+  .#{$prefix}--list-box__menu-item__option {
+    color: $text-primary;
   }
 
-  &[disabled] {
-    .#{$prefix}--list-box__menu-item__option {
-      color: $text-disabled;
-      text-decoration: none;
-    }
+  .#{$prefix}--list-box__menu-item__selected-icon {
+    display: block;
   }
+}
 
-  &[selected] {
-    @extend .#{$prefix}--list-box__menu-item--active;
-    @extend .#{$prefix}--list-box__menu-item--highlighted;
+:host(#{$prefix}-dropdown-item[size='sm']) {
+  height: $spacing-07;
 
-    .#{$prefix}--list-box__menu-item__option {
-      color: $text-primary;
-    }
-
-    .#{$prefix}--list-box__menu-item__selected-icon {
-      display: block;
-    }
+  .#{$prefix}--list-box__menu-item__option {
+    padding-top: rem(7px);
+    padding-bottom: rem(7px);
   }
+}
 
-  &[size='sm'] {
-    height: $spacing-07;
+:host(#{$prefix}-dropdown-item[size='lg']) {
+  height: $spacing-09;
 
-    .#{$prefix}--list-box__menu-item__option {
-      padding-top: rem(7px);
-      padding-bottom: rem(7px);
-    }
-  }
-
-  &[size='lg'] {
-    height: $spacing-09;
-
-    .#{$prefix}--list-box__menu-item__option {
-      padding-top: rem(15px);
-      padding-bottom: rem(15px);
-    }
+  .#{$prefix}--list-box__menu-item__option {
+    padding-top: rem(15px);
+    padding-bottom: rem(15px);
   }
 }
 

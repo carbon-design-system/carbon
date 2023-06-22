@@ -11,23 +11,27 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/layer' as *;
+@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/components/modal' as *;
 @use '@carbon/styles/scss/components/button' as *;
 
+:host(#{$prefix}-modal[open]) {
+  @extend .#{$prefix}--modal;
+  @extend .is-visible;
+}
+
 :host(#{$prefix}-modal) {
   @extend .#{$prefix}--modal;
 
-  &[full-width] {
-    ::slotted(#{$prefix}-modal-body) {
-      margin: 0;
-      padding: 0;
-    }
-  }
+  @include layer-tokens.emit-layer-tokens(1);
+}
 
-  &[open] {
-    @extend .#{$prefix}--modal, .is-visible;
+:host(#{$prefix}-modal[full-width]) {
+  ::slotted(#{$prefix}-modal-body) {
+    margin: 0;
+    padding: 0;
   }
 }
 
@@ -74,37 +78,29 @@
 
   display: block;
   padding-right: calc(20% - #{$spacing-07});
+}
 
-  &[description] {
-    margin-bottom: $spacing-05;
-  }
+:host(#{$prefix}-modal-body-content[description]) {
+  margin-bottom: $spacing-05;
 }
 
 :host(#{$prefix}-modal-footer) {
   @extend .#{$prefix}--modal-footer;
+}
 
-  &[has-three-buttons] {
-    @extend .#{$prefix}--modal-footer--three-button;
+:host(#{$prefix}-modal-footer[has-three-buttons]) {
+  @extend .#{$prefix}--modal-footer--three-button;
 
-    ::slotted(#{$prefix}-modal-footer-button) {
-      flex: 0 1 25%;
-    }
+  ::slotted(#{$prefix}-modal-footer-button) {
+    flex: 0 1 25%;
   }
 }
 
+:host(#{$prefix}-modal-footer-button:first-of-type) .#{$prefix}--btn {
+  box-shadow: inherit;
+}
+
 :host(#{$prefix}-modal-footer-button) {
-  &,
-  &:first-of-type {
-    .#{$prefix}--btn {
-      box-shadow: inherit;
-
-      &:focus {
-        box-shadow: inset 0 0 0 $button-outline-width $focus,
-          inset 0 0 0 $button-border-width $background;
-      }
-    }
-  }
-
   .#{$prefix}--btn {
     width: 100%;
     max-width: none;
@@ -112,6 +108,11 @@
     padding-top: rem(16px);
     padding-bottom: rem(32px);
     box-shadow: rem(-1px) 0 0 0 $button-separator;
+
+    &:focus {
+      box-shadow: inset 0 0 0 $button-outline-width $focus,
+        inset 0 0 0 $button-border-width $background;
+    }
   }
 }
 

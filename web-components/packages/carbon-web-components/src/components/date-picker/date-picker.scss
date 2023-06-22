@@ -11,6 +11,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/date-picker/date-picker' as *;
 
@@ -19,6 +20,8 @@ $css--plex: true !default;
 
 :host(#{$prefix}-date-picker) {
   @extend .#{$prefix}--date-picker;
+
+  @include layer-tokens.emit-layer-tokens(1);
 
   #floating-menu-container {
     position: absolute;

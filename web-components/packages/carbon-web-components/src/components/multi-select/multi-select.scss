@@ -11,6 +11,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/components/list-box/list-box';
 @use '@carbon/styles/scss/components/multiselect/index';
 @use '@carbon/styles/scss/components/form';
@@ -18,6 +19,8 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/tag';
 
 :host(#{$prefix}-multi-select) {
+  @include layer-tokens.emit-layer-tokens(1);
+
   outline: none;
 
   .#{$prefix}--assistive-text {
@@ -44,43 +47,6 @@ $css--plex: true !default;
     }
   }
 
-  &[filterable] {
-    .#{$prefix}--list-box__field:focus-within {
-      outline: 2px solid $focus;
-      outline-offset: -2px;
-    }
-  }
-
-  &[direction='top'] {
-    @extend .#{$prefix}--list-box--up;
-
-    .#{$prefix}--list-box__menu {
-      top: auto;
-    }
-  }
-
-  &[invalid] {
-    .#{$prefix}--list-box__field {
-      outline: none;
-    }
-
-    .#{$prefix}--form__helper-text {
-      color: $text-error;
-    }
-  }
-
-  &[type='inline'] {
-    @extend .#{$prefix}--list-box__wrapper--inline;
-
-    .#{$prefix}--form__helper-text {
-      grid-column: 2;
-    }
-  }
-
-  &[type='inline'][warn] .#{$prefix}--list-box__field {
-    padding-right: rem(56px);
-  }
-
   .#{$prefix}--tag--disabled {
     @extend .#{$prefix}--tag--disabled;
   }
@@ -88,6 +54,43 @@ $css--plex: true !default;
   .#{$prefix}--list-box__field:focus {
     @extend .#{$prefix}--multi-select--filterable--input-focused;
   }
+}
+
+:host(#{$prefix}-multi-select[filterable])
+  .#{$prefix}--list-box__field:focus-within {
+  outline: 2px solid $focus;
+  outline-offset: -2px;
+}
+
+:host(#{$prefix}-multi-select[direction='top']) {
+  @extend .#{$prefix}--list-box--up;
+
+  .#{$prefix}--list-box__menu {
+    top: auto;
+  }
+}
+
+:host(#{$prefix}-multi-select[invalid]) {
+  .#{$prefix}--list-box__field {
+    outline: none;
+  }
+
+  .#{$prefix}--form__helper-text {
+    color: $text-error;
+  }
+}
+
+:host(#{$prefix}-multi-select[type='inline']) {
+  @extend .#{$prefix}--list-box__wrapper--inline;
+
+  .#{$prefix}--form__helper-text {
+    grid-column: 2;
+  }
+}
+
+:host(#{$prefix}-multi-select[type='inline'][warn])
+  .#{$prefix}--list-box__field {
+  padding-right: rem(56px);
 }
 
 :host(#{$prefix}-multi-select-item) {
@@ -118,10 +121,14 @@ $css--plex: true !default;
       flex-direction: row;
     }
   }
+}
 
-  &[filtered] {
-    display: none;
-  }
+:host(#{$prefix}-multi-select-item:hover) {
+  background-color: $layer-hover;
+}
+
+:host(#{$prefix}-multi-select-item[filtered]) {
+  display: none;
 }
 
 :host(#{$prefix}-multi-select-item[size='sm']) {

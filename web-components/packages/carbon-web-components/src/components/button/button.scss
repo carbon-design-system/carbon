@@ -10,62 +10,75 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/components/button' as *;
 @use '@carbon/styles/scss/components/popover/index';
 @use '@carbon/styles/scss/components/code-snippet/code-snippet' as *;
 @use '@carbon/styles/scss/components/tooltip';
-@use '@carbon/styles/scss/theme' as *;
 
 @include code-snippet;
 
 :host(#{$prefix}-button),
 :host(#{$prefix}-modal-footer-button) {
+  @include layer-tokens.emit-layer-tokens(1);
   display: inline-flex;
+}
 
-  &[isExpressive] ::slotted([slot='icon']) {
-    width: rem(20px);
-    height: rem(20px);
-  }
+:host(#{$prefix}-button[isExpressive]) ::slotted([slot='icon']),
+:host(#{$prefix}-modal-footer-button[isExpressive]) ::slotted([slot='icon']) {
+  width: rem(20px);
+  height: rem(20px);
+}
 
-  &[pagination] {
-    .#{$prefix}--btn {
-      border: none;
-      border-left: 1px solid $border-subtle;
-      transition: none;
+:host(#{$prefix}-button[pagination]),
+:host(#{$prefix}-modal-footer-button[pagination]) {
+  .#{$prefix}--btn {
+    border: none;
+    border-left: 1px solid $border-subtle;
+    transition: none;
 
-      &:focus {
-        outline: 2px solid $focus;
-        outline-offset: -2px;
-        box-shadow: none;
-        border-left: 1px solid transparent;
-      }
-    }
-
-    &:not([disabled]) {
-      .#{$prefix}--btn {
-        color: $icon-primary;
-        &:active {
-          background-color: $layer-hover;
-        }
-      }
+    &:focus {
+      outline: 2px solid $focus;
+      outline-offset: -2px;
+      box-shadow: none;
+      border-left: 1px solid transparent;
     }
   }
+}
 
-  &[batch-action] {
-    .#{$prefix}--btn {
-      padding: $button-padding-ghost;
-
-      &:focus {
-        outline: 2px solid $layer;
-        outline-offset: -#{$spacing-01};
-      }
+:host(#{$prefix}-button[pagination]:not([disabled])),
+:host(#{$prefix}-modal-footer-button[pagination]:not([disabled])) {
+  .#{$prefix}--btn {
+    color: $icon-primary;
+    &:active {
+      background-color: $layer-hover;
     }
+  }
+}
 
-    &[has-main-content] {
-      ::slotted([slot='icon']) {
-        position: static;
-        margin-left: $spacing-02;
-      }
+:host(#{$prefix}-button[pagination][batch-action]:not([disabled])),
+:host(
+    #{$prefix}-modal-footer-button[pagination][batch-action]:not([disabled])
+  ) {
+  .#{$prefix}--btn {
+    padding: $button-padding-ghost;
+
+    &:focus {
+      outline: 2px solid $layer;
+      outline-offset: -#{$spacing-01};
+    }
+  }
+
+  :host(#{$prefix}-button[pagination][has-main-content]:not([disabled])),
+  :host(
+      #{$prefix}-modal-footer-button[pagination][has-main-content]:not(
+          [disabled]
+        )
+    ) {
+    ::slotted([slot='icon']) {
+      position: static;
+      margin-left: $spacing-02;
     }
   }
 }
@@ -83,8 +96,8 @@ $css--plex: true !default;
     // 196px from design kit
     max-width: rem(196px);
   }
+}
 
-  &[stacked] {
-    @extend .#{$prefix}--btn-set--stacked;
-  }
+:host(#{$prefix}-button-set[stacked]) {
+  @extend .#{$prefix}--btn-set--stacked;
 }

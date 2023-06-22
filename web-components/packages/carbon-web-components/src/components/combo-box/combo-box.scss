@@ -11,6 +11,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/components/combo-box/combo-box';
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/text-input/text-input';
@@ -18,6 +19,8 @@ $css--plex: true !default;
 
 :host(#{$prefix}-combo-box) {
   @extend :host(#{$prefix}-dropdown);
+
+  @include layer-tokens.emit-layer-tokens(1);
 
   outline: none;
 
@@ -39,24 +42,24 @@ $css--plex: true !default;
     top: 100%;
     margin-top: 1px;
   }
+}
 
-  &[isClosable] {
-    .#{$prefix}--list-box__invalid-icon {
-      right: rem(66px) !important;
-    }
+:host(#{$prefix}-combo-box[isClosable]) {
+  .#{$prefix}--list-box__invalid-icon {
+    right: rem(66px) !important;
   }
+}
 
-  &[disabled],
-  &[read-only] {
-    .#{$prefix}--list-box__selection {
-      pointer-events: none;
-    }
+:host(#{$prefix}-combo-box[disabled]),
+:host(#{$prefix}-combo-box[read-only]) {
+  .#{$prefix}--list-box__selection {
+    pointer-events: none;
   }
+}
 
-  &[read-only] {
-    .#{$prefix}--list-box__selection svg {
-      fill: $icon-disabled;
-    }
+:host(#{$prefix}-combo-box[read-only]) {
+  .#{$prefix}--list-box__selection svg {
+    fill: $icon-disabled;
   }
 }
 
@@ -68,46 +71,46 @@ $css--plex: true !default;
   .#{$prefix}--list-box__menu-item__option {
     height: auto;
   }
+}
 
-  &[disabled] {
-    .#{$prefix}--list-box__menu-item__option {
-      color: $text-disabled;
-      text-decoration: none;
-    }
+:host(#{$prefix}-combo-box-item[disabled]) {
+  .#{$prefix}--list-box__menu-item__option {
+    color: $text-disabled;
+    text-decoration: none;
+  }
+}
+
+:host(#{$prefix}-combo-box-item[highlighted]) {
+  @extend .#{$prefix}--list-box__menu-item--highlighted;
+}
+
+:host(#{$prefix}-combo-box-item[selected]) {
+  @extend .#{$prefix}--list-box__menu-item--active;
+  @extend .#{$prefix}--list-box__menu-item--highlighted;
+
+  .#{$prefix}--list-box__menu-item__option {
+    color: $text-primary;
   }
 
-  &[highlighted] {
-    @extend .#{$prefix}--list-box__menu-item--highlighted;
+  .#{$prefix}--list-box__menu-item__selected-icon {
+    display: block;
   }
+}
 
-  &[selected] {
-    @extend .#{$prefix}--list-box__menu-item--active;
-    @extend .#{$prefix}--list-box__menu-item--highlighted;
+:host(#{$prefix}-combo-box-item[size='sm']) {
+  height: $spacing-07;
 
-    .#{$prefix}--list-box__menu-item__option {
-      color: $text-primary;
-    }
-
-    .#{$prefix}--list-box__menu-item__selected-icon {
-      display: block;
-    }
+  .#{$prefix}--list-box__menu-item__option {
+    padding-top: rem(7px);
+    padding-bottom: rem(7px);
   }
+}
 
-  &[size='sm'] {
-    height: $spacing-07;
+:host(#{$prefix}-combo-box-item[size='lg']) {
+  height: $spacing-09;
 
-    .#{$prefix}--list-box__menu-item__option {
-      padding-top: rem(7px);
-      padding-bottom: rem(7px);
-    }
-  }
-
-  &[size='lg'] {
-    height: $spacing-09;
-
-    .#{$prefix}--list-box__menu-item__option {
-      padding-top: rem(15px);
-      padding-bottom: rem(15px);
-    }
+  .#{$prefix}--list-box__menu-item__option {
+    padding-top: rem(15px);
+    padding-bottom: rem(15px);
   }
 }

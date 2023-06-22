@@ -17,23 +17,23 @@ $css--plex: true !default;
 :host(#{$prefix}-checkbox) {
   @extend .#{$prefix}--form-item;
   @extend .#{$prefix}--checkbox-wrapper;
+}
 
-  &[readonly] {
-    @extend .#{$prefix}--checkbox-wrapper--readonly;
-  }
+:host(#{$prefix}-checkbox[readonly]) {
+  @extend .#{$prefix}--checkbox-wrapper--readonly;
+}
 
-  &[data-table] {
-    margin: 0;
+:host(#{$prefix}-checkbox[data-table]) {
+  margin: 0;
+}
 
-    &[hide-checkbox] {
-      pointer-events: none;
+:host(#{$prefix}-checkbox[data-table][hide-checkbox]) {
+  pointer-events: none;
 
-      .#{$prefix}--checkbox-label::before,
-      .#{$prefix}--checkbox-label::after {
-        background-color: transparent;
-        border-color: transparent;
-      }
-    }
+  .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-label::after {
+    background-color: transparent;
+    border-color: transparent;
   }
 }
 

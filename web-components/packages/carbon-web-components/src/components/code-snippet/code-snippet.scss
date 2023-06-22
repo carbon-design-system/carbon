@@ -13,6 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/components/code-snippet/code-snippet' as *;
 @use '@carbon/styles/scss/components/copy-button/copy-button';
 
@@ -22,6 +23,8 @@ $css--plex: true !default;
 :host(#{$prefix}-code-snippet),
 :host(#{$prefix}-code-snippet-skeleton) {
   @extend .#{$prefix}--snippet;
+
+  @include layer-tokens.emit-layer-tokens(1);
 
   .#{$prefix}--snippet-container {
     @extend .#{$prefix}--snippet-container;
@@ -109,24 +112,24 @@ $css--plex: true !default;
     }
   }
 
-  &[expanded-code] {
-    .#{$prefix}--snippet-container {
-      padding-bottom: $spacing-05;
-      transition: max-height $duration-moderate-01 motion(standard, productive);
-    }
-
-    #{$prefix}-button {
-      .#{$prefix}--snippet__icon {
-        transform: rotate(180deg);
-        transition: transform $transition-expansion;
-      }
-    }
-  }
-
   #{$prefix}-copy-button {
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
+  }
+}
+
+:host(#{$prefix}-code-snippet[type='multi'][expanded-code]) {
+  .#{$prefix}--snippet-container {
+    padding-bottom: $spacing-05;
+    transition: max-height $duration-moderate-01 motion(standard, productive);
+  }
+
+  #{$prefix}-button {
+    .#{$prefix}--snippet__icon {
+      transform: rotate(180deg);
+      transition: transform $transition-expansion;
+    }
   }
 }
 

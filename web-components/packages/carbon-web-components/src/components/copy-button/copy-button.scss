@@ -12,6 +12,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/utilities/keyframes' as *;
 @use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/components/button';
 @use '@carbon/styles/scss/components/tooltip';
 @use '@carbon/styles/scss/components/code-snippet/code-snippet' as *;
@@ -22,6 +23,8 @@ $css--plex: true !default;
 :host(#{$prefix}-copy-button) {
   display: inline-flex;
   outline: none;
+
+  @include layer-tokens.emit-layer-tokens(1);
 }
 
 .#{$prefix}--snippet__icon {

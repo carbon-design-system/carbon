@@ -10,6 +10,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/components/content-switcher/content-switcher' as *;
 
 // https://github.com/carbon-design-system/carbon/issues/11408
@@ -17,6 +18,8 @@ $css--plex: true !default;
 
 :host(#{$prefix}-content-switcher) {
   @extend .#{$prefix}--content-switcher;
+
+  @include layer-tokens.emit-layer-tokens(1);
 }
 
 :host(#{$prefix}-content-switcher[size='sm']) {

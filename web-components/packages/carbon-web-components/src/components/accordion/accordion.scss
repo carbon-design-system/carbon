@@ -11,11 +11,14 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/components/accordion';
 
 :host(#{$prefix}-accordion),
 :host(#{$prefix}-accordion-skeleton) {
   @extend .#{$prefix}--accordion;
+
+  @include layer-tokens.emit-layer-tokens(1);
 }
 
 :host(#{$prefix}-accordion-item),
@@ -33,22 +36,26 @@ $css--plex: true !default;
       margin: 0;
     }
   }
+}
 
-  &[size='sm'] {
-    @extend .#{$prefix}--accordion--sm;
-  }
+:host(#{$prefix}-accordion-item[size='sm']),
+:host(#{$prefix}-accordion-item-skeleton[size='sm']) {
+  @extend .#{$prefix}--accordion--sm;
+}
 
-  &[size='lg'] {
-    @extend .#{$prefix}--accordion--lg;
-  }
+:host(#{$prefix}-accordion-item[size='lg']),
+:host(#{$prefix}-accordion-item-skeleton[size='lg']) {
+  @extend .#{$prefix}--accordion--lg;
+}
 
-  &[alignment='start'] {
-    @extend .#{$prefix}--accordion--start;
-  }
+:host(#{$prefix}-accordion-item[alignment='start']),
+:host(#{$prefix}-accordion-item-skeleton[alignment='start']) {
+  @extend .#{$prefix}--accordion--start;
+}
 
-  &[isFlush] {
-    @extend .#{$prefix}--accordion--flush;
-  }
+:host(#{$prefix}-accordion-item[isFlush]),
+:host(#{$prefix}-accordion-item-skeleton[isFlush]) {
+  @extend .#{$prefix}--accordion--flush;
 }
 
 :host(#{$prefix}-accordion-item[expanding]) {
