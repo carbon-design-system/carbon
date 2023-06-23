@@ -13,21 +13,17 @@
 @use '../../utilities/convert' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/layout';
 
 @mixin content-switcher {
   .#{$prefix}--content-switcher {
+    @include layout.use('size', $default: 'md', $min: 'sm', $max: 'lg');
+    @include layout.use('density', $default: 'normal');
+
     display: flex;
     width: 100%;
-    height: rem(40px);
+    height: layout.size('height');
     justify-content: space-evenly;
-  }
-
-  .#{$prefix}--content-switcher--sm {
-    height: rem(32px);
-  }
-
-  .#{$prefix}--content-switcher--lg {
-    height: rem(48px);
   }
 
   .#{$prefix}--content-switcher-btn {
@@ -39,9 +35,6 @@
     position: relative;
     display: inline-flex;
     overflow: hidden;
-    width: 100%;
-    align-items: center;
-    padding: $spacing-03 $spacing-05;
     border: none;
     border-top: rem(1px) solid $border-inverse;
     border-bottom: rem(1px) solid $border-inverse;
@@ -111,6 +104,13 @@
     &:disabled:last-child {
       border-color: $border-disabled;
     }
+  }
+
+  .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
+    .#{$prefix}--content-switcher-btn {
+    width: 100%;
+    align-items: center;
+    padding: $spacing-03 layout.density('padding-inline');
   }
 
   .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)

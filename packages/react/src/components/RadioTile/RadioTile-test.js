@@ -15,6 +15,7 @@ describe('RadioTile', () => {
     it('should spread extra props onto outermost element', () => {
       render(<RadioTile value="standard" data-testid="test-id" />);
 
+      // eslint-disable-next-line testing-library/no-node-access
       expect(document.querySelector('.cds--tile')).toHaveAttribute(
         'data-testid',
         'test-id'

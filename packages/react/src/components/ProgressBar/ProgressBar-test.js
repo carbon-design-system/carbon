@@ -18,12 +18,15 @@ describe('ProgressBar', () => {
   let wrapper;
 
   beforeEach(() => {
+    // eslint-disable-next-line testing-library/no-render-in-setup
     wrapper = render(<ProgressBar {...props} />);
   });
 
   describe('renders as expected', () => {
     it('progress bar and label ids match', () => {
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       const bar = wrapper.getByRole('progressbar');
+      // eslint-disable-next-line testing-library/no-node-access
       const label = wrapper.container.querySelector(
         `.${prefix}--progress-bar__label`
       );
@@ -33,6 +36,7 @@ describe('ProgressBar', () => {
     it('renders helper text when passed', () => {
       const text = 'ProgressBar helper text';
       wrapper.rerender(<ProgressBar {...props} helperText={text} />);
+      // eslint-disable-next-line testing-library/no-node-access
       const helperTextNode = wrapper.container.querySelector(
         `.${prefix}--progress-bar__helper-text`
       );
@@ -43,6 +47,7 @@ describe('ProgressBar', () => {
 
     it('still renders accessible label when hideLabel is passed', () => {
       wrapper.rerender(<ProgressBar {...props} hideLabel />);
+      // eslint-disable-next-line testing-library/no-node-access
       const label = wrapper.container.querySelector(
         `.${prefix}--progress-bar__label`
       );
@@ -52,12 +57,14 @@ describe('ProgressBar', () => {
     });
 
     it('renders as indeterminate when no value is passed', () => {
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       const bar = wrapper.getByRole('progressbar');
 
       expect(bar).not.toHaveAttribute('aria-valuenow');
       expect(bar).not.toHaveAttribute('aria-valuemax');
       expect(bar).not.toHaveAttribute('aria-valuemin');
       expect(
+        // eslint-disable-next-line testing-library/no-node-access
         wrapper.container.querySelector(`.${prefix}--progress-bar`)
       ).toHaveClass(`${prefix}--progress-bar--indeterminate`);
     });
@@ -66,6 +73,7 @@ describe('ProgressBar', () => {
       const value = 42;
       wrapper.rerender(<ProgressBar {...props} value={value} />);
 
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       expect(wrapper.getByRole('progressbar')).toHaveAttribute(
         'aria-valuenow',
         value.toString()
@@ -76,6 +84,7 @@ describe('ProgressBar', () => {
       const max = 84;
       wrapper.rerender(<ProgressBar {...props} value={0} max={max} />);
 
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       expect(wrapper.getByRole('progressbar')).toHaveAttribute(
         'aria-valuemax',
         max.toString()
@@ -87,6 +96,7 @@ describe('ProgressBar', () => {
       wrapper.rerender(<ProgressBar {...props} className={className} />);
 
       expect(
+        // eslint-disable-next-line testing-library/no-node-access
         wrapper.container.querySelector(`.${prefix}--progress-bar`)
       ).toHaveClass(className);
     });
@@ -95,9 +105,11 @@ describe('ProgressBar', () => {
       wrapper.rerender(<ProgressBar {...props} status="finished" />);
 
       expect(
+        // eslint-disable-next-line testing-library/no-node-access
         wrapper.container.querySelector(`.${prefix}--progress-bar`)
       ).toHaveClass(`${prefix}--progress-bar--finished`);
 
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       expect(wrapper.getByRole('progressbar')).toHaveAttribute(
         'aria-valuenow',
         '100'
@@ -108,14 +120,17 @@ describe('ProgressBar', () => {
       wrapper.rerender(<ProgressBar {...props} status="error" />);
 
       expect(
+        // eslint-disable-next-line testing-library/no-node-access
         wrapper.container.querySelector(`.${prefix}--progress-bar`)
       ).toHaveClass(`${prefix}--progress-bar--error`);
 
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       expect(wrapper.getByRole('progressbar')).toHaveAttribute(
         'aria-valuenow',
         '0'
       );
 
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       expect(wrapper.getByRole('progressbar')).toHaveAttribute(
         'aria-invalid',
         'true'
@@ -129,6 +144,7 @@ describe('ProgressBar', () => {
       const max = 50;
       wrapper.rerender(<ProgressBar {...props} value={value} max={max} />);
 
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       expect(wrapper.getByRole('progressbar')).toHaveAttribute(
         'aria-valuenow',
         max.toString()
@@ -139,6 +155,7 @@ describe('ProgressBar', () => {
       const value = -10;
       wrapper.rerender(<ProgressBar {...props} value={value} />);
 
+      // eslint-disable-next-line testing-library/prefer-screen-queries
       expect(wrapper.getByRole('progressbar')).toHaveAttribute(
         'aria-valuenow',
         '0'

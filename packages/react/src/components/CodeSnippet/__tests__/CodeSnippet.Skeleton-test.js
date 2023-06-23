@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { CodeSnippetSkeleton } from '../';
 
@@ -34,10 +34,10 @@ describe('CodeSnippetSkeleton', () => {
   });
 
   it('should default to type="single"', () => {
-    const { container } = render(<CodeSnippetSkeleton />);
-    expect(
-      container.querySelector(`.${prefix}--snippet--single`)
-    ).toBeInstanceOf(HTMLElement);
+    render(<CodeSnippetSkeleton data-testid="single type" />);
+    expect(screen.getByTestId('single type')).toHaveClass(
+      `${prefix}--snippet--single`
+    );
   });
 
   it('should support a custom `className` on the outer-most element', () => {

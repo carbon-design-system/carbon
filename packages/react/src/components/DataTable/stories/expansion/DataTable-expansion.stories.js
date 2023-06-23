@@ -196,3 +196,11 @@ export const Playground = (args) => (
     )}
   </DataTable>
 );
+
+Playground.argTypes = {
+  radio: {
+    table: {
+      disable: true,
+    },
+  },
+};

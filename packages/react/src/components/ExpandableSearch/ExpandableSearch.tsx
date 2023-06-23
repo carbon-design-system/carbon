@@ -16,10 +16,12 @@ function ExpandableSearch({
   onChange,
   onExpand,
   onFocus,
+  defaultValue,
+  isExpanded,
   ...props
 }: SearchProps) {
-  const [expanded, setExpanded] = useState(false);
-  const [hasContent, setHasContent] = useState(false);
+  const [expanded, setExpanded] = useState(isExpanded || false);
+  const [hasContent, setHasContent] = useState(defaultValue ? true : false);
   const searchRef = useRef<HTMLInputElement>(null);
   const prefix = usePrefix();
 
@@ -58,6 +60,8 @@ function ExpandableSearch({
   return (
     <Search
       {...props}
+      defaultValue={defaultValue}
+      isExpanded={expanded}
       ref={searchRef}
       className={classes}
       onFocus={composeEventHandlers([onFocus, handleFocus])}

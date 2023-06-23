@@ -1,5 +1,6 @@
-import { Props, Preview, Story } from '@storybook/addon-docs';
+import { Props, Preview, Story, Canvas } from '@storybook/addon-docs';
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from './Tabs';
+import { Grid, Column } from '../Grid'
 
 # Tabs
 
@@ -9,19 +10,25 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from './Tabs';
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/tabs/accessibility)
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of Contents
 
 - [Overview](#overview)
   - [Line Tabs](#line-tabs)
   - [Contained Tabs](#contained-tabs)
   - [Icon Tabs](#icon-tabs)
+  - [Dismissable Tabs](#dismissable-tabs)
 - [Component API](#component-api)
   - [Tab - render content on click](#tab---render-content-on-click)
+  - [Tabs and the Grid - fullWidth prop](#tabs-and-the-grid---fullwidth-prop)
 - [V11](#v11)
   - [Tabs composition](#tabs-composition)
   - [Various updates](#various-updates)
   - [Max width](#max-width)
 - [Feedback](#feedback)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Overview
 
@@ -51,6 +58,130 @@ what is in rendered inside of `Tab` and `TabPanel`.
   <Story id="components-tabs--icon-20-only" />
 </Preview>
 
+### Dismissable Tabs
+
+You can implement dismissable tabs in your project using Carbon's `Tabs`
+components. In order to put this in place, there are some events and props we'll
+need to forward through the component's API that have been outlined here.
+
+First, we'll want to import the components from the react package.
+
+```js
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@carbon/react';
+```
+
+In order to be able to "close" or "remove" tabs, we'll need to access and render
+your tabs programmatically. For such purposes we'll need to store your tabs in
+an array variable and put them in the state
+
+```js
+const tabs = [
+  {
+    label: 'Tab label 1',
+    panel: <TabPanel>Tab Panel 1</TabPanel>,
+  },
+  {
+    label: 'Tab label 2',
+    panel: <TabPanel>Tab Panel 2</TabPanel>,
+  },
+  {
+    label: 'Tab label 3',
+    panel: <TabPanel>Tab Panel 3</TabPanel>,
+    disabled: true,
+  },
+  {
+    label: 'Tab label 4',
+    panel: <TabPanel>Tab Panel 4</TabPanel>,
+  },
+];
+const [renderedTabs, setRenderedTabs] = useState(tabs);
+```
+
+The `Tabs` component accepts an `onTabCloseRequest` prop function that will
+forward us the index of the requested tab to be closed. You may use this
+function to open up a confirmation modal previous to deleting the tab; in our
+case, we'll just go ahead and remove that tab directly from the `renderedTab`s
+array and cover for some `selectedIndex` edge cases (i.e., when a tab is removed
+from the array, the selectedIndex might need to be updated to point to a new tab
+or index).
+
+In order to be able to modify the `selectedIndex` on our end we'll need to use
+the `Tabs` component in a controlled state, which means we'll also have to
+implement the `Tabs`' `onChange` function, which we are calling
+`handleTabChange`.
+
+```js
+const [selectedIndex, setSelectedIndex] = useState(0);
+
+const handleTabChange = (evt) => {
+  setSelectedIndex(evt.selectedIndex);
+};
+
+const handleCloseTabRequest = (tabIndex) => {
+  // ignore close requests on disabled tabs
+  if (renderedTabs[tabIndex].disabled) {
+    return;
+  }
+
+  const selectedTab = renderedTabs[selectedIndex];
+
+  const filteredTabs = renderedTabs.filter((_, index) => index !== tabIndex);
+  // if the tab being deleted is the currently selected tab, we're re-setting the selectedIndex
+  // to the first tab available that isn't disabled
+  if (tabIndex === selectedIndex) {
+    const defaultTabIndex = filteredTabs.findIndex((tab) => !tab.disabled);
+    setSelectedIndex(defaultTabIndex);
+  } else {
+    // we're re-calculating the selectedIndex since the selected tab's index might have shifted
+    // due to a tab element being removed from the array
+    setSelectedIndex(filteredTabs.indexOf(selectedTab));
+  }
+  setRenderedTabs(filteredTabs);
+};
+```
+
+Finally, we'll use a `resetTabs` function to demonstrate how you can re-render
+tabs after they've been removed
+
+```js
+const resetTabs = () => {
+  setRenderedTabs(tabs);
+};
+```
+
+Now we're ready to render our `Tabs`, remember to pass the `dismissable` prop in
+as well as your `handleCloseTabRequest` function
+
+```jsx
+return (
+  <>
+    <Button style={{ marginBottom: '3rem' }} onClick={resetTabs}>
+      Reset
+    </Button>
+    <Tabs
+      selectedIndex={selectedIndex}
+      onChange={handleTabChange}
+      dismissable
+      onTabCloseRequest={handleCloseTabRequest}>
+      <TabList aria-label="List of tabs">
+        {renderedTabs.map((tab, index) => (
+          <Tab key={index} disabled={tab.disabled}>
+            {tab.label}
+          </Tab>
+        ))}
+      </TabList>
+      <TabPanels>{renderedTabs.map((tab) => tab.panel)}</TabPanels>
+    </Tabs>
+  </>
+);
+```
+
+And there you have it! Working dismissable tabs.
+
+<Preview>
+  <Story id="components-tabs--dismissable" />
+</Preview>
+
 ## Component API
 
 <Props />
@@ -75,6 +206,158 @@ loaded when the Tab is clicked. In v11, to do this, you can this by setting
   </TabPanels>
 </Tabs>
 ```
+
+### Tabs and the Grid - fullWidth prop
+
+By default, a `Tab` component is only as wide as it's content. This posses difficulties when trying to align tabs to the grid.
+Alternatively, you may choose to use the `fullWidth` prop to allow `Tab` elements to grow as  wide as their container allows.
+
+Note that this feature is *only available* for `contained` tabs in large and extra large screen sizes.
+The prop is a no-op for smaller screens and will also be ignored for `TabList`s with more than 8 tabs.
+`fullWidth` paired up with a wrapping `Grid` component will allow for "grid-aware" tabs:
+
+<Canvas>
+  <Grid condensed>
+    <Column lg={16} md={8} sm={4}>
+      <Tabs>
+        <TabList aria-label="List of tabs" contained fullWidth>
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab disabled>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    </Column>
+  </Grid>
+</Canvas>
+
+```jsx
+    <Grid condensed>
+      <Column lg={16} md={8} sm={4}>
+        <Tabs>
+          <TabList aria-label="List of tabs" contained fullWidth>
+            <Tab>Tab Label 1</Tab>
+            <Tab>Tab Label 2</Tab>
+            <Tab disabled>Tab Label 3</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>Tab Panel 1</TabPanel>
+            <TabPanel>Tab Panel 2</TabPanel>
+            <TabPanel>Tab Panel 3</TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Column>
+    </Grid>
+```
+
+Using the `fullWidth` prop alone within a `Grid` makes it so that the `Tabs` container aligns to the `Grid`, but not the individual `Tab` items;
+to have each individual `Tab` take up exactly one or many columns within the `Grid`, you must specify the number of columns as a multiple of the number of `Tab` items within the `TabList`.
+
+For example, to have 5 tabs and each tab span exactly two columns:
+
+<Canvas>
+  <Grid condensed>
+    <Column lg={10}>
+      <Tabs>
+        <TabList aria-label="List of tabs" contained fullWidth>
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab disabled>Tab Label 3</Tab>
+          <Tab>Tab Label 4</Tab>
+          <Tab>Tab Label 5</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+          <TabPanel>Tab Panel 5</TabPanel>
+        </TabPanels>
+      </Tabs>
+    </Column>
+  </Grid>
+</Canvas>
+
+```jsx
+  <Grid condensed>
+    <Column lg={10}>
+      <Tabs>
+        <TabList aria-label="List of tabs" contained fullWidth>
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab disabled>Tab Label 3</Tab>
+          <Tab>Tab Label 4</Tab>
+          <Tab>Tab Label 5</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+          <TabPanel>Tab Panel 5</TabPanel>
+        </TabPanels>
+      </Tabs>
+    </Column>
+  </Grid>
+```
+
+Or, to have 5 tabs and each tab span exactly three columns:
+
+<Canvas>
+  <Grid condensed>
+    <Column lg={15}>
+      <Tabs>
+        <TabList aria-label="List of tabs" contained fullWidth>
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab disabled>Tab Label 3</Tab>
+          <Tab>Tab Label 4</Tab>
+          <Tab>Tab Label 5</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+          <TabPanel>Tab Panel 5</TabPanel>
+        </TabPanels>
+      </Tabs>
+    </Column>
+  </Grid>
+</Canvas>
+
+```jsx
+  <Grid condensed>
+    <Column lg={15}>
+      <Tabs>
+        <TabList aria-label="List of tabs" contained fullWidth>
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab disabled>Tab Label 3</Tab>
+          <Tab>Tab Label 4</Tab>
+          <Tab>Tab Label 5</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+          <TabPanel>Tab Panel 5</TabPanel>
+        </TabPanels>
+      </Tabs>
+    </Column>
+  </Grid>
+```
+
+
+
+
+
+
 
 ## V11
 

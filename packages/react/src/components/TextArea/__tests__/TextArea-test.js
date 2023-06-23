@@ -81,6 +81,7 @@ describe('TextArea', () => {
         <TextArea id="textarea-1" labelText="TextArea" invalid />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const invalidIcon = container.querySelector(
         `svg.${prefix}--text-area__invalid-icon`
       );
@@ -147,6 +148,7 @@ describe('TextArea', () => {
         <TextArea id="textarea-1" labelText="TextArea label" warn />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const warnIcon = container.querySelector(
         `svg.${prefix}--text-area__invalid-icon--warning`
       );

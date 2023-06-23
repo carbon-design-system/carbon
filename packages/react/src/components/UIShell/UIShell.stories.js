@@ -160,6 +160,9 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      hideNoControlsWarning: true,
+    },
   },
   argTypes: {
     className: {
@@ -187,6 +190,7 @@ export const HeaderBaseWNavigation = () => (
           aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
           onClick={onClickSideNavExpand}
           isActive={isSideNavExpanded}
+          aria-expanded={isSideNavExpanded}
         />
         <HeaderName href="#" prefix="IBM">
           [Platform]
@@ -297,6 +301,7 @@ export const HeaderBaseWNavigationAndActions = () => (
           aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
           onClick={onClickSideNavExpand}
           isActive={isSideNavExpanded}
+          aria-expanded={isSideNavExpanded}
         />
         <HeaderName href="#" prefix="IBM">
           [Platform]
@@ -365,6 +370,7 @@ export const HeaderBaseWNavigationActionsAndSideNav = () => (
             aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
             onClick={onClickSideNavExpand}
             isActive={isSideNavExpanded}
+            aria-expanded={isSideNavExpanded}
           />
           <HeaderName href="#" prefix="IBM">
             [Platform]
@@ -400,7 +406,8 @@ export const HeaderBaseWNavigationActionsAndSideNav = () => (
           <SideNav
             aria-label="Side navigation"
             expanded={isSideNavExpanded}
-            onSideNavBlur={onClickSideNavExpand}>
+            onSideNavBlur={onClickSideNavExpand}
+            href="#main-content">
             <SideNavItems>
               <HeaderSideNavItems hasDivider={true}>
                 <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
@@ -482,6 +489,7 @@ export const HeaderBaseWSideNav = () => (
             aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
             onClick={onClickSideNavExpand}
             isActive={isSideNavExpanded}
+            aria-expanded={isSideNavExpanded}
           />
           <HeaderName href="#" prefix="IBM">
             [Platform]
@@ -572,63 +580,89 @@ export const HeaderBaseWActionsAndRightPanel = () => (
         <SwitcherIcon size={20} />
       </HeaderGlobalAction>
     </HeaderGlobalBar>
-    <HeaderPanel aria-label="Header Panel" expanded />
+    <HeaderPanel expanded />
   </Header>
 );
 
 HeaderBaseWActionsAndRightPanel.storyName =
   'Header Base w/ Actions and Right Panel';
 
-export const HeaderBaseWActionsAndSwitcher = () => (
-  <Header aria-label="IBM Platform Name">
-    <HeaderName href="#" prefix="IBM">
-      [Platform]
-    </HeaderName>
-    <HeaderGlobalBar>
-      <HeaderGlobalAction aria-label="Search" onClick={action('search click')}>
-        <Search size={20} />
-      </HeaderGlobalAction>
-      <HeaderGlobalAction
-        aria-label="Notifications"
-        onClick={action('notification click')}>
-        <Notification size={20} />
-      </HeaderGlobalAction>
-      <HeaderGlobalAction
-        aria-label="App Switcher"
-        isActive
-        onClick={action('app-switcher click')}
-        tooltipAlignment="end">
-        <SwitcherIcon size={20} />
-      </HeaderGlobalAction>
-    </HeaderGlobalBar>
-    <HeaderPanel aria-label="Header Panel" expanded>
-      <Switcher aria-label="Switcher Container">
-        <SwitcherItem isSelected aria-label="Link 1" href="#">
-          Link 1
-        </SwitcherItem>
-        <SwitcherDivider />
-        <SwitcherItem href="#" aria-label="Link 2">
-          Link 2
-        </SwitcherItem>
-        <SwitcherItem href="#" aria-label="Link 3">
-          Link 3
-        </SwitcherItem>
-        <SwitcherItem href="#" aria-label="Link 4">
-          Link 4
-        </SwitcherItem>
-        <SwitcherItem href="#" aria-label="Link 5">
-          Link 5
-        </SwitcherItem>
-        <SwitcherDivider />
-        <SwitcherItem href="#" aria-label="Link 6">
-          Link 6
-        </SwitcherItem>
-      </Switcher>
-    </HeaderPanel>
-  </Header>
+export const HeaderBaseWActionsAndSwitcher = (args) => (
+  <HeaderContainer
+    {...args}
+    render={({ isSideNavExpanded, onClickSideNavExpand }) => (
+      <>
+        <Header aria-label="IBM Platform Name">
+          <HeaderName href="#" prefix="IBM">
+            [Platform]
+          </HeaderName>
+          <HeaderGlobalBar>
+            <HeaderGlobalAction
+              aria-label="Search"
+              onClick={action('search click')}>
+              <Search size={20} />
+            </HeaderGlobalAction>
+            <HeaderGlobalAction
+              aria-label="Notifications"
+              onClick={action('notification click')}>
+              <Notification size={20} />
+            </HeaderGlobalAction>
+            <HeaderGlobalAction
+              aria-label={
+                isSideNavExpanded ? 'Close switcher' : 'Open switcher'
+              }
+              aria-expanded={isSideNavExpanded}
+              isActive={isSideNavExpanded}
+              onClick={onClickSideNavExpand}
+              tooltipAlignment="end"
+              id="switcher-button">
+              <SwitcherIcon size={20} />
+            </HeaderGlobalAction>
+          </HeaderGlobalBar>
+          <HeaderPanel
+            expanded={isSideNavExpanded}
+            onHeaderPanelFocus={onClickSideNavExpand}
+            href="#switcher-button">
+            <Switcher
+              aria-label="Switcher Container"
+              expanded={isSideNavExpanded}>
+              <SwitcherItem aria-label="Link 1" href="#">
+                Link 1
+              </SwitcherItem>
+              <SwitcherDivider />
+              <SwitcherItem href="#" aria-label="Link 2">
+                Link 2
+              </SwitcherItem>
+              <SwitcherItem href="#" aria-label="Link 3">
+                Link 3
+              </SwitcherItem>
+              <SwitcherItem href="#" aria-label="Link 4">
+                Link 4
+              </SwitcherItem>
+              <SwitcherItem href="#" aria-label="Link 5">
+                Link 5
+              </SwitcherItem>
+              <SwitcherDivider />
+              <SwitcherItem href="#" aria-label="Link 6">
+                Link 6
+              </SwitcherItem>
+            </Switcher>
+          </HeaderPanel>
+        </Header>
+        <StoryContent />
+      </>
+    )}
+  />
 );
 
 HeaderBaseWActionsAndSwitcher.storyName = 'Header Base w/ Actions and Switcher';
+
+HeaderBaseWActionsAndSwitcher.argTypes = {
+  isSideNavExpanded: {
+    defaultValue: true,
+    description: 'Optional prop to display the HeaderPanel.',
+  },
+};
 
 export const FixedSideNav = () => (
   <>
@@ -806,9 +840,9 @@ export const FixedSideNavWDivider = () => (
 
 FixedSideNavWDivider.storyName = 'Fixed SideNav w/ Divider';
 
-export const SideNavRail = () => (
+export const SideNavRail = (args) => (
   <>
-    <SideNav aria-label="Side navigation" href="#main-content" isRail>
+    <SideNav aria-label="Side navigation" href="#main-content" {...args}>
       <SideNavItems>
         <SideNavMenu renderIcon={Fade} title="Category title">
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
@@ -861,9 +895,33 @@ export const SideNavRail = () => (
   </>
 );
 
+SideNavRail.argTypes = {
+  isRail: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: true,
+    table: {
+      defaultValue: { summary: true },
+    },
+    description: 'Optional prop to display the side nav rail.',
+  },
+  enterDelayMs: {
+    control: {
+      type: 'number',
+    },
+    table: {
+      defaultValue: { summary: 100 },
+    },
+    defaultValue: 100,
+    description:
+      'Specify the duration in milliseconds to delay before displaying the sidenav',
+  },
+};
+
 SideNavRail.storyName = 'SideNav Rail';
 
-export const SideNavRailWHeader = () => (
+export const SideNavRailWHeader = (args) => (
   <HeaderContainer
     render={({ isSideNavExpanded, onClickSideNavExpand }) => (
       <>
@@ -874,6 +932,7 @@ export const SideNavRailWHeader = () => (
             isCollapsible
             onClick={onClickSideNavExpand}
             isActive={isSideNavExpanded}
+            aria-expanded={isSideNavExpanded}
           />
           <HeaderName href="#" prefix="IBM">
             [Platform]
@@ -908,11 +967,11 @@ export const SideNavRailWHeader = () => (
           </HeaderGlobalBar>
           <SideNav
             aria-label="Side navigation"
-            isRail
             expanded={isSideNavExpanded}
             onOverlayClick={onClickSideNavExpand}
             href="#main-content"
-            onSideNavBlur={onClickSideNavExpand}>
+            onSideNavBlur={onClickSideNavExpand}
+            {...args}>
             <SideNavItems>
               <SideNavMenu renderIcon={Fade} title="Category title">
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
@@ -967,6 +1026,30 @@ export const SideNavRailWHeader = () => (
     )}
   />
 );
+
+SideNavRailWHeader.argTypes = {
+  isRail: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: true,
+    table: {
+      defaultValue: { summary: true },
+    },
+    description: 'Optional prop to display the side nav rail.',
+  },
+  enterDelayMs: {
+    control: {
+      type: 'number',
+    },
+    table: {
+      defaultValue: { summary: 100 },
+    },
+    defaultValue: 100,
+    description:
+      'Specify the duration in milliseconds to delay before displaying the sidenav',
+  },
+};
 
 SideNavRailWHeader.storyName = 'SideNav Rail w/Header';
 

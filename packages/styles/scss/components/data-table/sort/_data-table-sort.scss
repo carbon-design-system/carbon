@@ -90,6 +90,39 @@
     justify-content: space-between;
   }
 
+  .#{$prefix}--data-table--top-aligned-header th .#{$prefix}--table-sort__flex {
+    align-items: start;
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--top-aligned-header.#{$prefix}--data-table--lg
+    th.#{$prefix}--table-sort__header {
+    padding-top: $spacing-05;
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--top-aligned-header.#{$prefix}--data-table--sm
+    th.#{$prefix}--table-sort__header
+    .#{$prefix}--table-sort__flex
+    .#{$prefix}--table-header-label,
+  .#{$prefix}--data-table.#{$prefix}--data-table--top-aligned-header.#{$prefix}--data-table--xs
+    th.#{$prefix}--table-sort__header
+    .#{$prefix}--table-sort__flex
+    .#{$prefix}--table-header-label {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--top-aligned-header.#{$prefix}--data-table--sm
+    th.#{$prefix}--table-sort__header {
+    padding-top: rem(7px);
+    padding-bottom: rem(7px);
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--top-aligned-header.#{$prefix}--data-table--xs
+    th.#{$prefix}--table-sort__header {
+    padding-top: rem(2px);
+    padding-bottom: rem(2px);
+  }
+
   .#{$prefix}--data-table--sort:not(.#{$prefix}--data-table--xs):not(
       .#{$prefix}--data-table--sm
     ):not(.#{$prefix}--data-table--md):not(.#{$prefix}--data-table--xl)

@@ -22,6 +22,22 @@ test.describe('Tabs', () => {
         });
       });
 
+      test('dismissable @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Tabs',
+          id: 'components-tabs--dismissable',
+          theme,
+        });
+      });
+
+      test('dismissable with icons @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Tabs',
+          id: 'components-tabs--dismissable-with-icons',
+          theme,
+        });
+      });
+
       test('manual @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Tabs',
@@ -50,6 +66,14 @@ test.describe('Tabs', () => {
         await snapshotStory(page, {
           component: 'Tabs',
           id: 'components-tabs--contained',
+          theme,
+        });
+      });
+
+      test('contained fullWidth @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Tabs',
+          id: 'components-tabs--contained-full-width',
           theme,
         });
       });
