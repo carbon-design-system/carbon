@@ -822,7 +822,7 @@ export interface ActionableNotificationProps
   /**
    * Pass in the action button label that will be rendered within the ActionableNotification.
    */
-  actionButtonLabel: string;
+  actionButtonLabel?: string;
 
   /**
    * Provide a description for "close" icon button that can be read by screen readers
@@ -1022,7 +1022,7 @@ ActionableNotification.propTypes = {
   /**
    * Pass in the action button label that will be rendered within the ActionableNotification.
    */
-  actionButtonLabel: PropTypes.string.isRequired,
+  actionButtonLabel: PropTypes.string,
 
   /**
    * Provide a description for "close" icon button that can be read by screen readers

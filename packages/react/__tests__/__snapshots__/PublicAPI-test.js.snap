@@ -108,7 +108,6 @@ Map {
     },
     "propTypes": Object {
       "actionButtonLabel": Object {
-        "isRequired": true,
         "type": "string",
       },
       "aria-label": Object {
