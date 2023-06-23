@@ -108,7 +108,6 @@ Map {
     },
     "propTypes": Object {
       "actionButtonLabel": Object {
-        "isRequired": true,
         "type": "string",
       },
       "aria-label": Object {
@@ -166,7 +165,7 @@ Map {
         "type": "string",
       },
       "subtitle": Object {
-        "type": "string",
+        "type": "node",
       },
       "title": Object {
         "type": "string",
