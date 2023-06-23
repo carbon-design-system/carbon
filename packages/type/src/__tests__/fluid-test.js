@@ -61,7 +61,6 @@ describe('fluid', () => {
           "letterSpacing": "-0.96px",
           "lineHeight": 1.05,
         },
-        "fontFamily": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif",
         "fontSize": "calc(2.625rem + 1.625 * ((100vw - 20rem) / 22))",
         "fontWeight": 300,
         "letterSpacing": 0,

@@ -11,7 +11,6 @@ import { fontFamilies } from './fontFamily';
 import { scale } from './scale';
 
 export const caption01 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
   lineHeight: 1.33333,
@@ -19,7 +18,6 @@ export const caption01 = {
 };
 
 export const caption02 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
   lineHeight: 1.28572,
@@ -27,7 +25,6 @@ export const caption02 = {
 };
 
 export const label01 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
   lineHeight: 1.33333,
@@ -35,7 +32,6 @@ export const label01 = {
 };
 
 export const label02 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
   lineHeight: 1.28572,
@@ -43,21 +39,18 @@ export const label02 = {
 };
 
 export const helperText01 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[0]),
   lineHeight: 1.33333,
   letterSpacing: px(0.32),
 };
 
 export const helperText02 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[1]),
   lineHeight: 1.28572,
   letterSpacing: px(0.16),
 };
 
 export const bodyShort01 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
   lineHeight: 1.28572,
@@ -65,7 +58,6 @@ export const bodyShort01 = {
 };
 
 export const bodyLong01 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
   lineHeight: 1.42857,
@@ -73,7 +65,6 @@ export const bodyLong01 = {
 };
 
 export const bodyShort02 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[2]),
   fontWeight: fontWeights.regular,
   lineHeight: 1.375,
@@ -81,7 +72,6 @@ export const bodyShort02 = {
 };
 
 export const bodyLong02 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[2]),
   fontWeight: fontWeights.regular,
   lineHeight: 1.5,
@@ -105,7 +95,6 @@ export const code02 = {
 };
 
 export const heading01 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.semibold,
   lineHeight: 1.42857,
@@ -113,7 +102,6 @@ export const heading01 = {
 };
 
 export const productiveHeading01 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.semibold,
   lineHeight: 1.28572,
@@ -121,7 +109,6 @@ export const productiveHeading01 = {
 };
 
 export const heading02 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[2]),
   fontWeight: fontWeights.semibold,
   lineHeight: 1.5,
@@ -129,7 +116,6 @@ export const heading02 = {
 };
 
 export const productiveHeading02 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[2]),
   fontWeight: fontWeights.semibold,
   lineHeight: 1.375,
@@ -137,7 +123,6 @@ export const productiveHeading02 = {
 };
 
 export const productiveHeading03 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[4]),
   fontWeight: fontWeights.regular,
   lineHeight: 1.4,
@@ -145,7 +130,6 @@ export const productiveHeading03 = {
 };
 
 export const productiveHeading04 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[6]),
   fontWeight: fontWeights.regular,
   lineHeight: 1.28572,
@@ -153,7 +137,6 @@ export const productiveHeading04 = {
 };
 
 export const productiveHeading05 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[7]),
   fontWeight: fontWeights.regular,
   lineHeight: 1.25,
@@ -161,7 +144,6 @@ export const productiveHeading05 = {
 };
 
 export const productiveHeading06 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[9]),
   fontWeight: fontWeights.light,
   lineHeight: 1.199,
@@ -169,7 +151,6 @@ export const productiveHeading06 = {
 };
 
 export const productiveHeading07 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[11]),
   fontWeight: fontWeights.light,
   lineHeight: 1.199,
@@ -187,7 +168,6 @@ export const expressiveHeading02 = {
 };
 
 export const expressiveHeading03 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[4]),
   fontWeight: fontWeights.regular,
   lineHeight: 1.4,
@@ -205,7 +185,6 @@ export const expressiveHeading03 = {
 };
 
 export const expressiveHeading04 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[6]),
   fontWeight: fontWeights.regular,
   lineHeight: 1.28572,
@@ -224,7 +203,6 @@ export const expressiveHeading04 = {
 };
 
 export const expressiveHeading05 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[7]),
   fontWeight: fontWeights.regular,
   lineHeight: 1.25,
@@ -254,7 +232,6 @@ export const expressiveHeading05 = {
 };
 
 export const expressiveHeading06 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[7]),
   fontWeight: fontWeights.semibold,
   lineHeight: 1.25,
@@ -287,7 +264,6 @@ export const expressiveHeading06 = {
 };
 
 export const expressiveParagraph01 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[5]),
   fontWeight: fontWeights.light,
   lineHeight: 1.334,
@@ -363,7 +339,6 @@ export const quotation02 = {
 };
 
 export const display01 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[9]),
   fontWeight: fontWeights.light,
   lineHeight: 1.19,
@@ -387,7 +362,6 @@ export const display01 = {
 };
 
 export const display02 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[9]),
   fontWeight: fontWeights.semibold,
   lineHeight: 1.19,
@@ -411,7 +385,6 @@ export const display02 = {
 };
 
 export const display03 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[9]),
   fontWeight: fontWeights.light,
   lineHeight: 1.19,
@@ -439,7 +412,6 @@ export const display03 = {
 };
 
 export const display04 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[9]),
   fontWeight: fontWeights.light,
   lineHeight: 1.19,
@@ -472,7 +444,6 @@ export const display04 = {
 // Small styles
 // No changes for code-01, code-02, label-01, label-02
 export const legal01 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
   lineHeight: 1.33333,
@@ -480,7 +451,6 @@ export const legal01 = {
 };
 
 export const legal02 = {
-  fontFamily: fontFamilies.sans,
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
   lineHeight: 1.28572,

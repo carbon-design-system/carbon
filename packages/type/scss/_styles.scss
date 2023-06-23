@@ -20,7 +20,6 @@
 /// @deprecated
 /// @group @carbon/type
 $caption-01: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(1),
   font-weight: font-family.font-weight('regular'),
   line-height: 1.33333,
@@ -32,7 +31,6 @@ $caption-01: (
 /// @deprecated
 /// @group @carbon/type
 $caption-02: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(2),
   font-weight: font-family.font-weight('regular'),
   line-height: 1.28572,
@@ -43,7 +41,6 @@ $caption-02: (
 /// @access public
 /// @group @carbon/type
 $label-01: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(1),
   font-weight: font-family.font-weight('regular'),
   line-height: 1.33333,
@@ -54,7 +51,6 @@ $label-01: (
 /// @access public
 /// @group @carbon/type
 $label-02: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(2),
   font-weight: font-family.font-weight('regular'),
   line-height: 1.28572,
@@ -65,7 +61,6 @@ $label-02: (
 /// @access public
 /// @group @carbon/type
 $legal-01: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(1),
   font-weight: font-family.font-weight('regular'),
   line-height: 1.33333,
@@ -76,7 +71,6 @@ $legal-01: (
 /// @access public
 /// @group @carbon/type
 $legal-02: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(2),
   font-weight: font-family.font-weight('regular'),
   line-height: 1.28572,
@@ -88,7 +82,6 @@ $legal-02: (
 /// @deprecated
 /// @group @carbon/type
 $helper-text-01: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(1),
   line-height: 1.33333,
   letter-spacing: 0.32px,
@@ -99,7 +92,6 @@ $helper-text-01: (
 /// @deprecated
 /// @group @carbon/type
 $helper-text-02: (
-  font-family: font-family.font-family('sans'),
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
   line-height: 1.28572,
@@ -110,7 +102,6 @@ $helper-text-02: (
 /// @access public
 /// @group @carbon/type
 $body-short-01: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(2),
   font-weight: font-family.font-weight('regular'),
   line-height: 1.28572,
@@ -126,7 +117,6 @@ $body-compact-01: $body-short-01 !default;
 /// @access public
 /// @group @carbon/type
 $body-long-01: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(2),
   font-weight: font-family.font-weight('regular'),
   line-height: 1.42857,
@@ -142,7 +132,6 @@ $body-01: $body-long-01 !default;
 /// @access public
 /// @group @carbon/type
 $body-short-02: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(3),
   font-weight: font-family.font-weight('regular'),
   line-height: 1.375,
@@ -158,7 +147,6 @@ $body-compact-02: $body-short-02 !default;
 /// @access public
 /// @group @carbon/type
 $body-long-02: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(3),
   font-weight: font-family.font-weight('regular'),
   line-height: 1.5,
@@ -196,7 +184,6 @@ $code-02: (
 /// @access public
 /// @group @carbon/type
 $heading-01: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(2),
   font-weight: font-family.font-weight('semibold'),
   line-height: 1.42857,
@@ -207,7 +194,6 @@ $heading-01: (
 /// @access public
 /// @group @carbon/type
 $productive-heading-01: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(2),
   font-weight: font-family.font-weight('semibold'),
   line-height: 1.28572,
@@ -223,7 +209,6 @@ $heading-compact-01: $productive-heading-01 !default;
 /// @access public
 /// @group @carbon/type
 $heading-02: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(3),
   font-weight: font-family.font-weight('semibold'),
   line-height: 1.5,
@@ -234,7 +219,6 @@ $heading-02: (
 /// @access public
 /// @group @carbon/type
 $productive-heading-02: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(3),
   font-weight: font-family.font-weight('semibold'),
   line-height: 1.375,
@@ -250,7 +234,6 @@ $heading-compact-02: $productive-heading-02 !default;
 /// @access public
 /// @group @carbon/type
 $productive-heading-03: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(5),
   font-weight: font-family.font-weight('regular'),
   line-height: 1.4,
@@ -266,7 +249,6 @@ $heading-03: $productive-heading-03 !default;
 /// @access public
 /// @group @carbon/type
 $productive-heading-04: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(7),
   font-weight: font-family.font-weight('regular'),
   line-height: 1.28572,
@@ -282,7 +264,6 @@ $heading-04: $productive-heading-04 !default;
 /// @access public
 /// @group @carbon/type
 $productive-heading-05: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(8),
   font-weight: font-family.font-weight('regular'),
   line-height: 1.25,
@@ -298,7 +279,6 @@ $heading-05: $productive-heading-05 !default;
 /// @access public
 /// @group @carbon/type
 $productive-heading-06: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(10),
   font-weight: font-family.font-weight('light'),
   // Extra digit needed for precision in Chrome
@@ -315,7 +295,6 @@ $heading-06: $productive-heading-06 !default;
 /// @access public
 /// @group @carbon/type
 $productive-heading-07: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(12),
   font-weight: font-family.font-weight('light'),
   line-height: 1.19,
@@ -341,7 +320,6 @@ $expressive-heading-02: $heading-02 !default;
 /// @access public
 /// @group @carbon/type
 $expressive-heading-03: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(5),
   font-weight: font-family.font-weight('regular'),
   line-height: 1.4,
@@ -367,7 +345,6 @@ $fluid-heading-03: $expressive-heading-03 !default;
 /// @access public
 /// @group @carbon/type
 $expressive-heading-04: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(7),
   font-weight: font-family.font-weight('regular'),
   line-height: 1.28572,
@@ -394,7 +371,6 @@ $fluid-heading-04: $expressive-heading-04 !default;
 /// @access public
 /// @group @carbon/type
 $expressive-heading-05: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(8),
   font-weight: font-family.font-weight('regular'),
   line-height: 1.25,
@@ -428,7 +404,6 @@ $fluid-heading-05: $expressive-heading-05 !default;
 /// @access public
 /// @group @carbon/type
 $expressive-heading-06: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(8),
   font-weight: font-family.font-weight('semibold'),
   line-height: 1.25,
@@ -461,7 +436,6 @@ $fluid-heading-06: $expressive-heading-06 !default;
 /// @access public
 /// @group @carbon/type
 $expressive-paragraph-01: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(6),
   font-weight: font-family.font-weight('light'),
   line-height: 1.334,
@@ -553,7 +527,6 @@ $fluid-quotation-02: $quotation-02 !default;
 /// @access public
 /// @group @carbon/type
 $display-01: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(10),
   font-weight: font-family.font-weight('light'),
   line-height: 1.19,
@@ -585,7 +558,6 @@ $fluid-display-01: $display-01 !default;
 /// @access public
 /// @group @carbon/type
 $display-02: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(10),
   font-weight: font-family.font-weight('semibold'),
   line-height: 1.19,
@@ -617,7 +589,6 @@ $fluid-display-02: $display-02 !default;
 /// @access public
 /// @group @carbon/type
 $display-03: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(10),
   font-weight: font-family.font-weight('light'),
   line-height: 1.19,
@@ -654,7 +625,6 @@ $fluid-display-03: $display-03 !default;
 /// @access public
 /// @group @carbon/type
 $display-04: (
-  font-family: font-family.font-family('sans'),
   font-size: scale.type-scale(10),
   font-weight: font-family.font-weight('light'),
   line-height: 1.19,
