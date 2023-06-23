@@ -57,11 +57,6 @@ jobs:
         if: ${{ github.event.inputs.type == 'minor' }}
         run: |
           yarn lerna version minor --no-git-tag-version --no-push --yes
-      - name: Update lockfile
-        run: |
-          # We want the following command to update the lockfile since
-          # the package versions have been changed
-          yarn install --no-immutable
       - name: Generate token
         uses: tibdex/github-app-token@v1
         id: generate_token
