@@ -17,6 +17,7 @@ import React, {
   type KeyboardEvent,
   type ComponentType,
   type FunctionComponent,
+  type MouseEvent,
 } from 'react';
 import { focus } from '../../internal/focus';
 import { keys, match } from '../../internal/keyboard';
@@ -83,7 +84,7 @@ export interface SearchProps extends InputPropsBase {
   /**
    * Optional callback called when the magnifier icon is clicked in ExpandableSearch.
    */
-  onExpand?(): void;
+  onExpand?(e: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>): void;
 
   /**
    * Provide an optional placeholder text for the Search.
@@ -150,6 +151,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
   const { isFluid } = useContext(FormContext);
   const inputRef = useRef<HTMLInputElement>(null);
   const ref = useMergedRefs<HTMLInputElement>([forwardRef, inputRef]);
+  const expandButtonRef = useRef<HTMLDivElement>(null);
   const inputId = useId('search-input');
   const uniqueId = id || inputId;
   const searchId = `${uniqueId}-search`;
@@ -200,6 +202,21 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
     if (match(event, keys.Escape)) {
       event.stopPropagation();
       clearInput();
+
+      // ExpandableSearch closes on escape when isExpanded, focus search activation button
+      if(isExpanded){
+        expandButtonRef.current?.focus()
+      }
+    }
+  }
+
+
+  function handleExpandButtonKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    if(match(event, keys.Enter) || match(event, keys.Space)){
+      event.stopPropagation();
+      if(onExpand){
+        onExpand(event)
+      }
     }
   }
 
@@ -212,7 +229,10 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
         aria-labelledby={onExpand ? uniqueId : undefined}
         role={onExpand ? 'button' : undefined}
         className={`${prefix}--search-magnifier`}
-        onClick={onExpand}>
+        onClick={onExpand}
+        onKeyDown={handleExpandButtonKeyDown}
+        tabIndex={onExpand ? -1 : undefined}
+        ref={expandButtonRef}>
         <CustomSearchIcon icon={renderIcon} />
       </div>
       <label id={searchId} htmlFor={uniqueId} className={`${prefix}--label`}>

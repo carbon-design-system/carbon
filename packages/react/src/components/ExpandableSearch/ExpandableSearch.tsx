@@ -10,12 +10,14 @@ import classnames from 'classnames';
 import Search, { type SearchProps } from '../Search';
 import { usePrefix } from '../../internal/usePrefix';
 import { composeEventHandlers } from '../../tools/events';
+import { match, keys } from '../../internal/keyboard';
 
 function ExpandableSearch({
   onBlur,
   onChange,
   onExpand,
   onFocus,
+  onKeyDown,
   defaultValue,
   isExpanded,
   ...props
@@ -49,6 +51,13 @@ function ExpandableSearch({
     searchRef.current?.focus?.();
   }
 
+  function handleKeyDown(evt) {
+    if (expanded && match(evt, keys.Escape)) {
+      evt.stopPropagation();
+      setExpanded(false);
+    }
+  }
+
   const classes = classnames(
     `${prefix}--search--expandable`,
     {
@@ -68,6 +77,7 @@ function ExpandableSearch({
       onBlur={composeEventHandlers([onBlur, handleBlur])}
       onChange={composeEventHandlers([onChange, handleChange])}
       onExpand={composeEventHandlers([onExpand, handleExpand])}
+      onKeyDown={composeEventHandlers([onKeyDown, handleKeyDown])}
     />
   );
 }

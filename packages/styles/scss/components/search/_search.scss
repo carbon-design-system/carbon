@@ -347,6 +347,10 @@
   .#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
     position: absolute;
     cursor: pointer;
+
+    &:focus {
+      outline: 1px solid $focus;
+    }
   }
 
   .#{$prefix}--search--expandable .#{$prefix}--search-magnifier:hover {
