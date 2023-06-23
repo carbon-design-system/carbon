@@ -19,7 +19,13 @@ jobs:
             '\b(Instana|QRadar|MaaS360|Environmental Intelligence Suite|Watson
             Orchestrate|Watson Assistant|Planning Analytics|ReaQta|API
             Connect|Fusion|Flash Storage|Envizi|Maximo|Turbonomic|Fusion
-            Microsoft 360)\b'
+            Microsoft 360)|StepZen|APP Connect Enterprise|Watson
+            Discovery|Watson Code Assistant|Hybrid Cloud Mesh|AIOps
+            Insights|Databand|OpenPages|watsonx.data|watsonx.ai|watsonx.gov|QRadar
+            Log Insights|QRadar XDR|QRadar EDR (ReaQta)|QRadar SOAR|Randori
+            ASM|Guardium Insights|Trusteer Fraud Protection|Security Verify on
+            Cloud|Sterling Data Exchange SaaS|TRIRIGA|Sterling Order and
+            Inventory Management|Supply Chain Intelligence Suite\b'
           flags: g
       - uses: actions/github-script@v6
         if: ${{ steps.regex-match.outputs.match != '' }}

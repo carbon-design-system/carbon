@@ -9,7 +9,7 @@ exports[`Accordion should render 1`] = `
       class="cds--accordion__item child"
     >
       <button
-        aria-controls="accordion-item-1"
+        aria-controls="accordion-item-:r0:"
         aria-expanded="false"
         class="cds--accordion__heading"
         type="button"
@@ -38,7 +38,7 @@ exports[`Accordion should render 1`] = `
       </button>
       <div
         class="cds--accordion__content"
-        id="accordion-item-1"
+        id="accordion-item-:r0:"
       >
         Panel A
       </div>
@@ -47,7 +47,7 @@ exports[`Accordion should render 1`] = `
       class="cds--accordion__item child"
     >
       <button
-        aria-controls="accordion-item-2"
+        aria-controls="accordion-item-:r1:"
         aria-expanded="false"
         class="cds--accordion__heading"
         type="button"
@@ -76,7 +76,7 @@ exports[`Accordion should render 1`] = `
       </button>
       <div
         class="cds--accordion__content"
-        id="accordion-item-2"
+        id="accordion-item-:r1:"
       >
         Panel B
       </div>
@@ -85,7 +85,7 @@ exports[`Accordion should render 1`] = `
       class="cds--accordion__item child"
     >
       <button
-        aria-controls="accordion-item-3"
+        aria-controls="accordion-item-:r2:"
         aria-expanded="false"
         class="cds--accordion__heading"
         type="button"
@@ -114,7 +114,7 @@ exports[`Accordion should render 1`] = `
       </button>
       <div
         class="cds--accordion__content"
-        id="accordion-item-3"
+        id="accordion-item-:r2:"
       >
         Panel C
       </div>
