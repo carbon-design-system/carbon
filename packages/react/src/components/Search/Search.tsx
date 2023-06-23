@@ -84,7 +84,9 @@ export interface SearchProps extends InputPropsBase {
   /**
    * Optional callback called when the magnifier icon is clicked in ExpandableSearch.
    */
-  onExpand?(e: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>): void;
+  onExpand?(
+    e: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>
+  ): void;
 
   /**
    * Provide an optional placeholder text for the Search.
@@ -204,18 +206,17 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
       clearInput();
 
       // ExpandableSearch closes on escape when isExpanded, focus search activation button
-      if(isExpanded){
-        expandButtonRef.current?.focus()
+      if (isExpanded) {
+        expandButtonRef.current?.focus();
       }
     }
   }
 
-
   function handleExpandButtonKeyDown(event: KeyboardEvent<HTMLDivElement>) {
-    if(match(event, keys.Enter) || match(event, keys.Space)){
+    if (match(event, keys.Enter) || match(event, keys.Space)) {
       event.stopPropagation();
-      if(onExpand){
-        onExpand(event)
+      if (onExpand) {
+        onExpand(event);
       }
     }
   }
