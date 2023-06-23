@@ -4319,7 +4319,7 @@ Map {
         "type": "string",
       },
       "subtitle": Object {
-        "type": "node",
+        "type": "string",
       },
       "title": Object {
         "type": "string",
@@ -9043,7 +9043,7 @@ Map {
         "type": "string",
       },
       "subtitle": Object {
-        "type": "node",
+        "type": "string",
       },
       "timeout": Object {
         "type": "number",
