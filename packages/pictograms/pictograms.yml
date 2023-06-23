@@ -2892,10 +2892,11 @@
     - people
     - wheelchair
 - name: handicap--active
-  friendly_name: Handicap active
+  friendly_name: Disabled user active
   aliases:
     - handicap active
     - people
+    - disabled user
     - wheelchair
 - name: hard--drive
   friendly_name: Hard disk drive
