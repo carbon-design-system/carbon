@@ -61,6 +61,9 @@
     - heart
     - human
     - person
+- name: advocate--mask
+  friendly_name: advocate--mask
+  aliases: []
 - name: agility
   friendly_name: Agility
   aliases:
@@ -703,6 +706,28 @@
     - government
     - municipal
     - legislature
+- name: carbon--for-ibm-dotcom
+  friendly_name: Carbon for IBM dotcom
+  aliases:
+    - pals
+    - carbon
+    - pattern asset library
+    - components
+    - patterns
+    - website design
+    - marketing pages
+    - dotcom
+- name: carbon--for-ibm-product
+  friendly_name: Carbon for IBM product
+  aliases:
+    - pal
+    - pal site
+    - pattern asset library
+    - components
+    - patterns
+    - product
+    - product design
+    - software design
 - name: care
   friendly_name: Care
   aliases:
@@ -1493,6 +1518,12 @@
   aliases:
     - construct
     - cloud
+- name: construction-worker
+  friendly_name: construction-worker
+  aliases: []
+- name: construction-worker--mask
+  friendly_name: construction-worker--mask
+  aliases: []
 - name: consumer--engagement--food--journey
   friendly_name: Consumer engagement food journey
   aliases:
@@ -1621,6 +1652,30 @@
     - cupcake
     - cake
     - creative
+- name: curve--cubic
+  friendly_name: curve--cubic
+  aliases: []
+- name: curve--exponential
+  friendly_name: curve--exponential
+  aliases: []
+- name: curve--inverse
+  friendly_name: curve--inverse
+  aliases: []
+- name: curve--linear
+  friendly_name: curve--linear
+  aliases: []
+- name: curve--logarithmic
+  friendly_name: curve--logarithmic
+  aliases: []
+- name: curve--logistic
+  friendly_name: curve--logistic
+  aliases: []
+- name: curve--power
+  friendly_name: curve--power
+  aliases: []
+- name: curve--quadratic
+  friendly_name: curve--quadratic
+  aliases: []
 - name: custom--workloads
   friendly_name: Custom workloads
   aliases:
@@ -1758,6 +1813,11 @@
     - deliver insights
     - insights
     - watson
+- name: delivered
+  friendly_name: Delivered
+  aliases:
+    - delivery
+    - delivered
 - name: delivery--truck
   friendly_name: Delivery truck
   aliases:
@@ -2816,18 +2876,19 @@
     - precipitation
     - forecast
 - name: hamburg--philharmone
-  friendly_name: Hamburg Philharmone
+  friendly_name: Hamburg Elbphilharmonie
   aliases:
-    - Hamburg Philharmone
+    - Hamburg Elbphilharmonie
     - Hamburg
     - Germany
-    - Philharmone
+    - Elbphilharmonie
     - city
     - cities
 - name: handicap
-  friendly_name: Handicap
+  friendly_name: Disabled user
   aliases:
     - handicap
+    - disabled user
     - people
     - wheelchair
 - name: handicap--active
@@ -2837,9 +2898,9 @@
     - people
     - wheelchair
 - name: hard--drive
-  friendly_name: Hard drive
+  friendly_name: Hard disk drive
   aliases:
-    - hard drive
+    - hard disk drive
     - hardware
     - storage
     - data storage
@@ -3834,6 +3895,12 @@
     - movement of items
     - goods
     - shipping
+- name: moving-dolly
+  friendly_name: Moving dolly
+  aliases:
+    - moving dolly
+    - delivered
+    - delivery
 - name: mqa
   friendly_name: MQA
   aliases:
@@ -4065,14 +4132,14 @@
     - Shurijo
     - Japan
 - name: on-premise
-  friendly_name: On-premise
+  friendly_name: On premises
   aliases:
-    - on-premise
+    - on premises
     - Cloud
 - name: on-premise--to-cloud
-  friendly_name: On-premise to cloud
+  friendly_name: On premises to cloud
   aliases:
-    - on-premise to cloud
+    - on premises to cloud
     - Cloud
 - name: open-source
   friendly_name: Open source
@@ -4567,6 +4634,9 @@
     - qr code
     - code
     - ID
+- name: quantum
+  friendly_name: quantum
+  aliases: []
 - name: quantum--safe
   friendly_name: Quantum safe
   aliases:
@@ -6183,6 +6253,9 @@
     - interface
     - UX
     - design and development
+- name: user--mask
+  friendly_name: user--mask
+  aliases: []
 - name: user--profile
   friendly_name: User profile
   aliases:
@@ -6338,22 +6411,22 @@
     - electronics
     - appliances
 - name: washington-dc
-  friendly_name: Washington D.C.
+  friendly_name: Washington DC
   aliases:
-    - Washington D.C.
+    - Washington DC
     - cities
     - city
 - name: washington-dc--capitol
-  friendly_name: Washington D.C. capitol
+  friendly_name: Washington DC capitol
   aliases:
-    - Washington D.C. capitol
+    - Washington DC capitol
     - capitol
     - cities
     - city
 - name: washington-dc--monument
-  friendly_name: Washington D.C. monument
+  friendly_name: Washington DC monument
   aliases:
-    - Washington D.C. monument
+    - Washington DC monument
     - monument
     - cities
     - city
@@ -6365,6 +6438,18 @@
     - watson
     - ibm watson
     - avatar
+- name: watsonx
+  friendly_name: watsonx
+  aliases: []
+- name: watsonx--ai
+  friendly_name: watsonx--ai
+  aliases: []
+- name: watsonx--data
+  friendly_name: watsonx--data
+  aliases: []
+- name: watsonx--governance
+  friendly_name: watsonx--governance
+  aliases: []
 - name: weather
   friendly_name: Weather
   aliases:
