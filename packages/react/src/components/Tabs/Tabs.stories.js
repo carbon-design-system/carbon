@@ -10,6 +10,7 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel, IconTab } from './Tabs';
 import TextInput from '../TextInput';
 import Checkbox from '../Checkbox';
 import Button from '../Button';
+import { Grid, Column } from '../Grid';
 import mdx from './Tabs.mdx';
 
 import TabsSkeleton from './Tabs.Skeleton';
@@ -483,6 +484,50 @@ export const ContainedWithSecondaryLabelsAndIcons = () => (
       <TabPanel>Tab Panel 5</TabPanel>
     </TabPanels>
   </Tabs>
+);
+
+export const ContainedFullWidth = () => (
+  <Grid condensed>
+    <Column lg={16} md={8} sm={4}>
+      <Tabs>
+        <TabList aria-label="List of tabs" contained fullWidth>
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab disabled>Tab Label 3</Tab>
+          <Tab>Tab Label 4 with a very long long title</Tab>
+          <Tab>Tab Label 5</Tab>
+          <Tab>Tab Label 6</Tab>
+          <Tab>Tab Label 7</Tab>
+          <Tab>Tab Label 8</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>
+            <form>
+              <legend className={`cds--label`}>Validation example</legend>
+              <Checkbox id="cb" labelText="Accept privacy policy" />
+              <Button
+                style={{ marginTop: '1rem', marginBottom: '1rem' }}
+                type="submit">
+                Submit
+              </Button>
+              <TextInput
+                type="text"
+                labelText="Text input label"
+                helperText="Optional help text"
+              />
+            </form>
+          </TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+          <TabPanel>Tab Panel 5</TabPanel>
+          <TabPanel>Tab Panel 6</TabPanel>
+          <TabPanel>Tab Panel 7</TabPanel>
+          <TabPanel>Tab Panel 8</TabPanel>
+        </TabPanels>
+      </Tabs>
+    </Column>
+  </Grid>
 );
 
 export const Skeleton = () => {
