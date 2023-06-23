@@ -561,7 +561,7 @@ ToastNotification.propTypes = {
   /**
    * Specify the subtitle
    */
-  subtitle: PropTypes.node,
+  subtitle: PropTypes.string,
 
   /**
    * Specify an optional duration the notification should be closed in
@@ -798,7 +798,7 @@ InlineNotification.propTypes = {
   /**
    * Specify the subtitle
    */
-  subtitle: PropTypes.node,
+  subtitle: PropTypes.string,
 
   /**
    * Specify the title
@@ -905,7 +905,7 @@ export interface ActionableNotificationProps
   /**
    * Specify the subtitle
    */
-  subtitle?: string;
+  subtitle?: ReactNode;
 
   /**
    * Specify the title
@@ -1001,9 +1001,11 @@ export function ActionableNotification({
         </div>
       </div>
 
-      <NotificationActionButton onClick={onActionButtonClick} inline={inline}>
-        {actionButtonLabel}
-      </NotificationActionButton>
+      {actionButtonLabel && (
+        <NotificationActionButton onClick={onActionButtonClick} inline={inline}>
+          {actionButtonLabel}
+        </NotificationActionButton>
+      )}
 
       {!hideCloseButton && (
         <NotificationButton
