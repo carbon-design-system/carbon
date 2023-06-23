@@ -6,6 +6,7 @@
  */
 
 import { ChevronLeft, ChevronRight } from '@carbon/icons-react';
+import { breakpoints } from '@carbon/layout';
 import cx from 'classnames';
 import debounce from 'lodash.debounce';
 import PropTypes from 'prop-types';
@@ -39,6 +40,7 @@ import { usePressable } from './usePressable';
 import deprecate from '../../prop-types/deprecate';
 import { Close } from '@carbon/icons-react';
 import { useEvent } from '../../internal/useEvent';
+import { useMatchMedia } from '../../internal/useMatchMedia';
 
 // Used to manage the overall state of the Tabs
 type TabsContextType = {
@@ -71,6 +73,8 @@ const TabContext = React.createContext<{
   index: 0,
   hasSecondaryLabel: false,
 });
+
+const lgMediaQuery = `(min-width: ${breakpoints.lg.width})`;
 
 // Used to keep track of position in a list of tab panels
 const TabPanelContext = React.createContext<number>(0);
@@ -255,6 +259,11 @@ export interface TabListProps extends DivAttributes {
   contained?: boolean;
 
   /**
+   * Used for tabs within a grid, this makes it so tabs span the full container width and have the same width. Only available on contained tabs with <9 children
+   */
+  fullWidth?: boolean;
+
+  /**
    * If using `IconTab`, specify the size of the icon being used.
    */
   iconSize?: 'default' | 'lg';
@@ -295,6 +304,7 @@ function TabList({
   children,
   className: customClassName,
   contained = false,
+  fullWidth = false,
   iconSize,
   leftOverflowButtonProps,
   light,
@@ -323,6 +333,15 @@ function TabList({
       return isElement(child) && !!child.props.secondaryLabel;
     });
   }
+
+  const isLg = useMatchMedia(lgMediaQuery);
+
+  const distributeWidth =
+    fullWidth &&
+    contained &&
+    isLg &&
+    React.Children.toArray(children).length < 9;
+
   const className = cx(
     `${prefix}--tabs`,
     {
@@ -331,6 +350,7 @@ function TabList({
       [`${prefix}--tabs__icon--default`]: iconSize === 'default',
       [`${prefix}--tabs__icon--lg`]: iconSize === 'lg',
       [`${prefix}--tabs--tall`]: hasSecondaryLabelTabs,
+      [`${prefix}--tabs--full-width`]: distributeWidth,
     },
     customClassName
   );
@@ -615,6 +635,11 @@ TabList.propTypes = {
   contained: PropTypes.bool,
 
   /**
+   * Used for tabs within a grid, this makes it so tabs span the full container width and have the same width. Only available on contained tabs with <9 children
+   */
+  fullWidth: PropTypes.bool,
+
+  /**
    * If using `IconTab`, specify the size of the icon being used.
    */
   iconSize: PropTypes.oneOf(['default', 'lg']),
@@ -876,7 +901,11 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
             {<Icon size={16} />}
           </div>
         )}
-        <span className={`${prefix}--tabs__nav-item-label`}>{children}</span>
+        <span
+          className={`${prefix}--tabs__nav-item-label`}
+          title={children as string}>
+          {children}
+        </span>
         {/* always rendering dismissIcon so we don't lose reference to it, otherwise events do not work when switching from/to dismissable state */}
         <div
           className={cx(`${prefix}--tabs__nav-item--icon`, {
@@ -887,7 +916,9 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
         </div>
       </div>
       {hasSecondaryLabel && (
-        <div className={`${prefix}--tabs__nav-item-secondary-label`}>
+        <div
+          className={`${prefix}--tabs__nav-item-secondary-label`}
+          title={secondaryLabel}>
           {secondaryLabel}
         </div>
       )}

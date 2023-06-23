@@ -11,18 +11,25 @@ import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import Link from './Link';
 import { usePrefix } from '../../internal/usePrefix';
+import { keys, match } from '../../internal/keyboard';
 
-const SwitcherItem = React.forwardRef(function SwitcherItem(props, ref) {
-  const prefix = usePrefix();
-  const {
+const SwitcherItem = React.forwardRef(function SwitcherItem(
+  {
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
     className: customClassName,
     children,
     isSelected,
-    tabIndex = 0,
+    expanded,
+    tabIndex = expanded ? 0 : -1,
+    index,
+    handleSwitcherItemFocus,
+    onKeyDown = () => {},
     ...rest
-  } = props;
+  },
+  ref
+) {
+  const prefix = usePrefix();
 
   const className = cx(`${prefix}--switcher__item`, {
     [customClassName]: !!customClassName,
@@ -37,9 +44,30 @@ const SwitcherItem = React.forwardRef(function SwitcherItem(props, ref) {
     [`${prefix}--switcher__item-link--selected`]: isSelected,
   });
 
+  function setTabFocus(evt) {
+    if (match(evt, keys.ArrowDown)) {
+      evt.preventDefault();
+      handleSwitcherItemFocus?.({
+        currentIndex: index,
+        direction: 1,
+      });
+    }
+    if (match(evt, keys.ArrowUp)) {
+      evt.preventDefault();
+      handleSwitcherItemFocus?.({
+        currentIndex: index,
+        direction: -1,
+      });
+    }
+  }
+
   return (
     <li className={className}>
       <Link
+        onKeyDown={(evt) => {
+          setTabFocus(evt);
+          onKeyDown(evt);
+        }}
         {...rest}
         ref={ref}
         className={linkClassName}
@@ -67,6 +95,21 @@ SwitcherItem.propTypes = {
    * Optionally provide a custom class to apply to the underlying `<li>` node
    */
   className: PropTypes.string,
+
+  /**
+   * event handlers
+   */
+  handleSwitcherItemFocus: PropTypes.func,
+
+  /**
+   * Specify the index of the SwitcherItem
+   */
+  index: PropTypes.number,
+
+  /**
+   * event handlers
+   */
+  onKeyDown: PropTypes.func,
 
   /**
    * Specify the tab index of the Link

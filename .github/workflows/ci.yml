@@ -69,7 +69,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Build project
-        run: yarn build --ignore '@carbon/sketch'
+        run: yarn build
       - name: Check generated styles
         run: |
           yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures|compat)/**' 'packages/**/*.scss'
@@ -108,7 +108,7 @@ jobs:
               - 'packages/icon-build-helpers/**'
       - name: Build project
         if: ${{ steps.filter.outputs.e2e == 'true' }}
-        run: yarn build --ignore '@carbon/sketch'
+        run: yarn build
       - name: Run e2e tests
         if: ${{ steps.filter.outputs.e2e == 'true' }}
         run: yarn test:e2e
@@ -136,7 +136,7 @@ jobs:
       - name: Install browsers
         run: yarn playwright install --with-deps
       - name: Build project
-        run: yarn build --ignore '@carbon/sketch'
+        run: yarn build
       - name: Build storybook
         run: yarn workspace @carbon/react build-storybook
       - name: Run storybook
@@ -194,7 +194,7 @@ jobs:
       - name: Install browsers
         run: yarn playwright install --with-deps
       - name: Build project
-        run: yarn build --ignore '@carbon/sketch'
+        run: yarn build
       - name: Build storybook
         run: yarn workspace @carbon/react build-storybook
       - name: Run storybook
