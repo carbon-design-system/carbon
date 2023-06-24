@@ -9,13 +9,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import { ButtonSize } from './Button';
 
 export interface ButtonSkeletonProps extends React.HTMLAttributes<HTMLElement> {
-  /**
-   * Specify an optional className to add.
-   */
-  className?: string;
-
   /**
    * Optionally specify an href for your Button to become an `<a>` element
    */
@@ -23,18 +19,19 @@ export interface ButtonSkeletonProps extends React.HTMLAttributes<HTMLElement> {
 
   /**
    * Specify the size of the button, from a list of available sizes.
-   * For `default` buttons, this prop can remain unspecified or use `default`.
-   * In the next major release of Carbon, `default`, `field`, and `small` will be removed
    */
-  size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+  size?: ButtonSize;
 
   /**
+   * @deprecated This property will be removed in the next major Carbon version,
+   * use size={sm} instead.
+   *
    * Specify whether the Button should be a small variant
    */
   small?: boolean;
 }
 
-const ButtonSkeleton = ({
+const ButtonSkeleton: React.FC<ButtonSkeletonProps> = ({
   className,
   small = false,
   href,
@@ -47,6 +44,7 @@ const ButtonSkeleton = ({
     [`${prefix}--skeleton`]: true,
     [`${prefix}--btn`]: true,
     [`${prefix}--btn--sm`]: small || size === 'sm',
+    [`${prefix}--btn--md`]: size === 'md',
     [`${prefix}--btn--lg`]: size === 'lg',
     [`${prefix}--btn--xl`]: size === 'xl',
     [`${prefix}--btn--2xl`]: size === '2xl',
@@ -83,6 +81,9 @@ ButtonSkeleton.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl', '2xl']),
 
   /**
+   * @deprecated This property will be removed in the next major Carbon version,
+   * use size={sm} instead.
+   *
    * Specify whether the Button should be a small variant
    */
   small: PropTypes.bool,

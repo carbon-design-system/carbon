@@ -16,7 +16,7 @@ import React, {
 } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 
-interface LinkProps {
+interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
    * @description Indicates the element that represents the
    *   current item within a container or set of related
@@ -94,6 +94,7 @@ const Link = React.forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
     const linkProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
       className,
       rel,
+      target,
     };
 
     // Reference for disabled links:
