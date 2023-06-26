@@ -3961,9 +3961,6 @@ Map {
     "render": [Function],
   },
   "HeaderName" => Object {
-    "defaultProps": Object {
-      "prefix": "IBM",
-    },
     "propTypes": Object {
       "as": Object {
         "type": "elementType",
