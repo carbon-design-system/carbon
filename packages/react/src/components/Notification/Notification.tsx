@@ -822,7 +822,7 @@ export interface ActionableNotificationProps
   /**
    * Pass in the action button label that will be rendered within the ActionableNotification.
    */
-  actionButtonLabel: string;
+  actionButtonLabel?: string;
 
   /**
    * Provide a description for "close" icon button that can be read by screen readers
@@ -905,7 +905,7 @@ export interface ActionableNotificationProps
   /**
    * Specify the subtitle
    */
-  subtitle?: string;
+  subtitle?: ReactNode;
 
   /**
    * Specify the title
@@ -1001,9 +1001,11 @@ export function ActionableNotification({
         </div>
       </div>
 
-      <NotificationActionButton onClick={onActionButtonClick} inline={inline}>
-        {actionButtonLabel}
-      </NotificationActionButton>
+      {actionButtonLabel && (
+        <NotificationActionButton onClick={onActionButtonClick} inline={inline}>
+          {actionButtonLabel}
+        </NotificationActionButton>
+      )}
 
       {!hideCloseButton && (
         <NotificationButton
@@ -1020,7 +1022,7 @@ ActionableNotification.propTypes = {
   /**
    * Pass in the action button label that will be rendered within the ActionableNotification.
    */
-  actionButtonLabel: PropTypes.string.isRequired,
+  actionButtonLabel: PropTypes.string,
 
   /**
    * Provide a description for "close" icon button that can be read by screen readers
@@ -1112,7 +1114,7 @@ ActionableNotification.propTypes = {
   /**
    * Specify the subtitle
    */
-  subtitle: PropTypes.string,
+  subtitle: PropTypes.node,
 
   /**
    * Specify the title
