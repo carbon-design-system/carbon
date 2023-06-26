@@ -22,7 +22,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "react-dom": "^16.9.0 || ^17.0.1"
+    "react-dom": "^18.0.0"
   },
   "dependencies": {
     "prettier": "^2.8.8",

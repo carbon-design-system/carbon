@@ -2178,7 +2178,7 @@ __metadata:
     sass: ^1.51.0
     tabbable: ^4.0.0
   peerDependencies:
-    react-dom: ^16.9.0 || ^17.0.1
+    react-dom: ^18.0.0
   languageName: unknown
   linkType: soft
 
@@ -7422,14 +7422,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:~17.0.2":
-  version: 17.0.50
-  resolution: "@types/react@npm:17.0.50"
+"@types/react@npm:~18.2.0":
+  version: 18.2.14
+  resolution: "@types/react@npm:18.2.14"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: b5629dff7c2f3e9fcba95a19b2b3bfd78d7cacc33ba5fc26413dba653d34afcac3b93ddabe563e8062382688a1eac7db68e93739bb8e712d27637a03aaafbbb8
+  checksum: a6a5e8cc78f486b9020d1ad009aa6c56943c68c7c6376e0f8399e9cbcd950b7b8f5d73f00200f5379f5e58d31d57d8aed24357f301d8e86108cd438ce6c8b3dd
   languageName: node
   linkType: hard
 
