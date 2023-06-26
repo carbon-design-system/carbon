@@ -10,15 +10,51 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Loading from '../Loading';
 import { usePrefix } from '../../internal/usePrefix';
+import { ReactAttr } from '../../types/common';
+
+export type FilenameStatus = 'edit' | 'complete' | 'uploading';
+
+export interface FilenameProps
+  extends Omit<ReactAttr<HTMLElement>, 'tabIndex'> {
+  /**
+   * Specify an id that describes the error to be read by screen readers when the filename is invalid
+   */
+  ['aria-describedby']?: string;
+
+  /**
+   * Provide a description of the SVG icon to denote file upload status
+   */
+  iconDescription?: string;
+
+  /**
+   * Specify if the file is invalid
+   */
+  invalid?: boolean;
+
+  /**
+   * Name of the uploaded file
+   */
+  name?: string;
+
+  /**
+   * Status of the file upload
+   */
+  status?: FilenameStatus;
+
+  /**
+   * Provide a custom tabIndex value for the `<Filename>`
+   */
+  tabIndex?: number | string;
+}
 
 function Filename({
   iconDescription,
   status,
   invalid,
   name,
-  ['aria-describedBy']: ariaDescribedBy,
+  ['aria-describedby']: ariaDescribedBy,
   ...rest
-}) {
+}: FilenameProps) {
   const prefix = usePrefix();
   switch (status) {
     case 'uploading':
@@ -31,10 +67,15 @@ function Filename({
           {invalid && <WarningFilled className={`${prefix}--file-invalid`} />}
           <button
             aria-label={`${iconDescription} - ${name}`}
-            aria-describedby={invalid ? ariaDescribedBy : null}
             className={`${prefix}--file-close`}
             type="button"
-            {...rest}>
+            {...rest}
+            tabIndex={
+              rest.tabIndex !== undefined
+                ? parseInt(rest.tabIndex as string, 10)
+                : undefined
+            }
+            aria-describedby={invalid ? ariaDescribedBy : undefined}>
             <Close />
           </button>
         </>
@@ -83,7 +124,7 @@ Filename.propTypes = {
   /**
    * Provide a custom tabIndex value for the `<Filename>`
    */
-  tabIndex: PropTypes.string,
+  tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 Filename.defaultProps = {
