@@ -70,10 +70,10 @@ test.describe('DataTable', () => {
         });
       });
 
-      test('toolbar - default toolbar @vrt', async ({ page }) => {
+      test('toolbar - default @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'DataTable',
-          id: 'components-datatable-toolbar--default-toolbar',
+          id: 'components-datatable-toolbar--default',
           theme,
         });
       });
