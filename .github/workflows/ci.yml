@@ -148,7 +148,7 @@ jobs:
       - uses: ./actions/wait-for-it
         with:
           URL: 'http://localhost:3000'
-        timeout-minutes: 1
+        timeout-minutes: 3
       - name: Run VRT
         if: github.repository == 'carbon-design-system/carbon'
         env:
@@ -206,7 +206,7 @@ jobs:
       - uses: ./actions/wait-for-it
         with:
           URL: 'http://localhost:3000'
-        timeout-minutes: 1
+        timeout-minutes: 3
       - name: Run AVT
         if: github.repository == 'carbon-design-system/carbon'
         run: |
