@@ -15,13 +15,13 @@ const path = require('path');
 const stories = glob
   .sync(
     [
-      './Welcome/Welcome.mdx',
+      // './Welcome/Welcome.mdx',
       '../src/**/*.stories.js',
-      '../src/**/*.stories.mdx',
-      '../src/components/Tile/Tile.mdx',
+      // '../src/**/*.stories.mdx',
+      // '../src/components/Tile/Tile.mdx',
       '../src/**/next/*.stories.js',
       '../src/**/next/**/*.stories.js',
-      '../src/**/next/*.stories.mdx',
+      // '../src/**/next/*.stories.mdx',
       '../src/**/*-story.js',
     ],
     {
@@ -92,6 +92,7 @@ const config = {
   features: {
     previewCsfV3: true,
     buildStoriesJson: true,
+    storyStoreV7: false,
   },
   framework: {
     name: '@storybook/react-webpack5',
