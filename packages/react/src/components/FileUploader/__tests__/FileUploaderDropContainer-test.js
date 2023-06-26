@@ -24,7 +24,7 @@ describe('FileUploaderDropContainer', () => {
     const { container } = render(
       <FileUploaderDropContainer className="test" />
     );
-    const dropArea = container.querySelector('[role="button"]');
+    const dropArea = container.querySelector('button');
     expect(dropArea.classList.contains('test')).toBe(true);
   });
 

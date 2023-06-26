@@ -272,7 +272,6 @@
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-complete {
-    cursor: pointer;
     fill: $interactive-04;
 
     &:focus {
@@ -318,6 +317,9 @@
   }
 
   .#{$prefix}--file__drop-container {
+    @include button-reset;
+    @include type-style('body-short-01');
+
     display: flex;
     overflow: hidden;
     height: rem(96px);

@@ -237,6 +237,7 @@ export default class FileUploader extends React.Component {
                   <p className={`${prefix}--file-filename`}>{name}</p>
                   <span className={`${prefix}--file__state-container`}>
                     <Filename
+                      name={name}
                       iconDescription={iconDescription}
                       status={filenameStatus}
                       onKeyDown={(evt) => {

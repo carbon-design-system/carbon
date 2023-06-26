@@ -11,6 +11,8 @@ import classNames from 'classnames';
 import { keys, matches } from '../../internal/keyboard';
 import uniqueId from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
+import { composeEventHandlers } from '../../tools/events';
+import deprecate from '../../prop-types/deprecate';
 
 function FileUploaderDropContainer({
   accept,
@@ -21,22 +23,23 @@ function FileUploaderDropContainer({
   multiple,
   name,
   onAddFiles,
+  onClick,
   pattern,
-  role,
-  tabIndex,
   ...rest
 }) {
   const prefix = usePrefix();
   const inputRef = useRef(null);
   const { current: uid } = useRef(id || uniqueId());
   const [isActive, setActive] = useState(false);
-  const labelClasses = classNames(`${prefix}--file-browse-btn`, {
-    [`${prefix}--file-browse-btn--disabled`]: disabled,
-  });
-  const dropareaClasses = classNames(`${prefix}--file__drop-container`, {
-    [`${prefix}--file__drop-container--drag-over`]: isActive,
-    [className]: className,
-  });
+  const dropareaClasses = classNames(
+    `${prefix}--file__drop-container`,
+    `${prefix}--file-browse-btn`,
+    {
+      [`${prefix}--file__drop-container--drag-over`]: isActive,
+      [`${prefix}--file-browse-btn--disabled`]: disabled,
+      [className]: className,
+    }
+  );
 
   /**
    * Filters the array of added files based on file type restrictions
@@ -72,6 +75,12 @@ function FileUploaderDropContainer({
     return onAddFiles(event, { addedFiles });
   }
 
+  const handleClick = () => {
+    if (!disabled) {
+      inputRef.current.click();
+    }
+  };
+
   return (
     <div
       className={`${prefix}--file`}
@@ -102,20 +111,21 @@ function FileUploaderDropContainer({
         setActive(false);
         handleChange(evt);
       }}>
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-      <label
-        className={labelClasses}
-        htmlFor={uid}
-        tabIndex={tabIndex || 0}
+      <button
+        type="button"
+        className={dropareaClasses}
         onKeyDown={(evt) => {
           if (matches(evt, [keys.Enter, keys.Space])) {
+            evt.preventDefault();
             inputRef.current.click();
           }
         }}
+        onClick={composeEventHandlers([onClick, handleClick])}
         {...rest}>
-        <div className={dropareaClasses} role={role || 'button'}>
-          {labelText}
-        </div>
+        {labelText}
+      </button>
+      <label htmlFor={uid} className={`${prefix}--visually-hidden`}>
+        {labelText}
       </label>
       <input
         type="file"
@@ -180,6 +190,12 @@ FileUploaderDropContainer.propTypes = {
   onAddFiles: PropTypes.func,
 
   /**
+   * Provide an optional function to be called when the button element
+   * is clicked
+   */
+  onClick: PropTypes.func,
+
+  /**
    * Provide a custom regex pattern for the acceptedTypes
    */
   pattern: PropTypes.string,
@@ -187,16 +203,23 @@ FileUploaderDropContainer.propTypes = {
   /**
    * Provide an accessibility role for the <FileUploaderButton>
    */
-  role: PropTypes.string,
+  role: deprecate(
+    PropTypes.number,
+    'The `role` prop for `FileUploaderButton` has ' +
+      'been deprecated since it now renders a button element by default, and has an implicit role of button.'
+  ),
 
   /**
    * Provide a custom tabIndex value for the <FileUploaderButton>
    */
-  tabIndex: PropTypes.number,
+  tabIndex: deprecate(
+    PropTypes.number,
+    'The `tabIndex` prop for `FileUploaderButton` has ' +
+      'been deprecated since it now renders a button element by default.'
+  ),
 };
 
 FileUploaderDropContainer.defaultProps = {
-  tabIndex: 0,
   labelText: 'Add file',
   multiple: false,
   onAddFiles: () => {},

@@ -224,10 +224,14 @@ function CodeSnippet({
     <div {...rest} className={codeSnippetClasses}>
       <div
         ref={codeContainerRef}
-        role={type === 'single' ? 'textbox' : null}
-        tabIndex={type === 'single' && !disabled ? 0 : null}
+        role={type === 'single' || type === 'multi' ? 'textbox' : null}
+        tabIndex={
+          (type === 'single' || type === 'multi') && !disabled ? 0 : null
+        }
         className={`${prefix}--snippet-container`}
         aria-label={ariaLabel || copyLabel || 'code-snippet'}
+        aria-readonly={type === 'single' || type === 'multi' ? true : null}
+        aria-multiline={type === 'multi' ? true : null}
         onScroll={(type === 'single' && handleScroll) || null}
         {...containerStyle}>
         <pre

@@ -77,6 +77,6 @@ describe('FileUploader', () => {
     );
 
     const complete = getByLabel(container, description);
-    expect(edit.parentNode).not.toEqual(complete.parentNode);
+    expect(edit).not.toEqual(complete);
   });
 });

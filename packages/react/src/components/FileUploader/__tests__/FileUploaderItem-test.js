@@ -42,7 +42,7 @@ describe('FileUploaderItem', () => {
       />
     );
 
-    let removeFile = getByLabel(edit.container, description);
+    let removeFile = getByLabel(edit.container, 'test-description - edit');
     Simulate.click(removeFile);
     expect(onDelete).toHaveBeenCalledTimes(1);
 
