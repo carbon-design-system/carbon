@@ -96,6 +96,85 @@ export const globalTypes = {
   ...(process.env.NODE_ENV === 'development' ? devTools : {}),
 };
 
+const storySort =
+  process.env.STORYBOOK_STORE_7 === 'false'
+    ? undefined
+    : (storyA, storyB) => {
+        const idA = storyA.id;
+        const idB = storyB.id;
+
+        if (idA.includes('welcome')) {
+          return -1;
+        }
+        if (idB.includes('welcome')) {
+          return 1;
+        }
+
+        // By default, sort by the top-level title of the story
+        if (storyA.title !== storyB.title) {
+          if (idA.includes('overview') && !idB.includes('overview')) {
+            return -1;
+          }
+          if (idB.includes('overview') && !idA.includes('overview')) {
+            return 1;
+          }
+          return storyA.title.localeCompare(storyB.title);
+        }
+
+        // To story the stories, we first build up a list of matches based on
+        // keywords. Each keyword has a specific weight that will be used to
+        // determine order later on.
+        const UNKNOWN_KEYWORD = 4;
+        const keywords = new Map([
+          ['welcome', 0],
+          ['overview', 1],
+          ['default', 2],
+          ['usage', 3],
+          ['playground', 5],
+          ['development', 6],
+          ['deprecated', 7],
+          ['unstable', 8],
+        ]);
+        const matches = new Map();
+
+        // We use this list of keywords to determine a collection of matches. By
+        // default, we will look for the greatest valued matched
+        for (const [keyword, weight] of keywords) {
+          // If we already have a match for a given id that is lesser than the
+          // specific keyword we're looking for, break early
+          if (matches.get(idA) < weight || matches.get(idB) < weight) {
+            break;
+          }
+
+          // If we don't have a match already for either id, we check to see if
+          // the id includes the keyword and assigns the relevant weight, if so
+          if (idA.includes(keyword)) {
+            matches.set(idA, weight);
+          }
+
+          if (idB.includes(keyword)) {
+            matches.set(idB, weight);
+          }
+        }
+
+        // If we have matches for either id, then we will compare the ids based on
+        // the weight assigned to the matching keyword
+        if (matches.size > 0) {
+          const weightA = matches.get(idA) ?? UNKNOWN_KEYWORD;
+          const weightB = matches.get(idB) ?? UNKNOWN_KEYWORD;
+          // If we have the same weight for the ids, then we should compare them
+          // using locale compare instead of by weight
+          if (weightA === weightB) {
+            return idA.localeCompare(idB);
+          }
+          return weightA - weightB;
+        }
+
+        // By default, if we have no matches we'll do a locale compare between the
+        // two ids
+        return idA.localeCompare(idB);
+      };
+
 export const parameters = {
   backgrounds: {
     // https://storybook.js.org/docs/react/essentials/backgrounds#grid
@@ -194,83 +273,7 @@ export const parameters = {
       },
     },
   },
-  options: {
-    storySort: (storyA, storyB) => {
-      const idA = storyA.id;
-      const idB = storyB.id;
-
-      if (idA.includes('welcome')) {
-        return -1;
-      }
-      if (idB.includes('welcome')) {
-        return 1;
-      }
-
-      // By default, sort by the top-level title of the story
-      if (storyA.title !== storyB.title) {
-        if (idA.includes('overview') && !idB.includes('overview')) {
-          return -1;
-        }
-        if (idB.includes('overview') && !idA.includes('overview')) {
-          return 1;
-        }
-        return storyA.title.localeCompare(storyB.title);
-      }
-
-      // To story the stories, we first build up a list of matches based on
-      // keywords. Each keyword has a specific weight that will be used to
-      // determine order later on.
-      const UNKNOWN_KEYWORD = 4;
-      const keywords = new Map([
-        ['welcome', 0],
-        ['overview', 1],
-        ['default', 2],
-        ['usage', 3],
-        ['playground', 5],
-        ['development', 6],
-        ['deprecated', 7],
-        ['unstable', 8],
-      ]);
-      const matches = new Map();
-
-      // We use this list of keywords to determine a collection of matches. By
-      // default, we will look for the greatest valued matched
-      for (const [keyword, weight] of keywords) {
-        // If we already have a match for a given id that is lesser than the
-        // specific keyword we're looking for, break early
-        if (matches.get(idA) < weight || matches.get(idB) < weight) {
-          break;
-        }
-
-        // If we don't have a match already for either id, we check to see if
-        // the id includes the keyword and assigns the relevant weight, if so
-        if (idA.includes(keyword)) {
-          matches.set(idA, weight);
-        }
-
-        if (idB.includes(keyword)) {
-          matches.set(idB, weight);
-        }
-      }
-
-      // If we have matches for either id, then we will compare the ids based on
-      // the weight assigned to the matching keyword
-      if (matches.size > 0) {
-        const weightA = matches.get(idA) ?? UNKNOWN_KEYWORD;
-        const weightB = matches.get(idB) ?? UNKNOWN_KEYWORD;
-        // If we have the same weight for the ids, then we should compare them
-        // using locale compare instead of by weight
-        if (weightA === weightB) {
-          return idA.localeCompare(idB);
-        }
-        return weightA - weightB;
-      }
-
-      // By default, if we have no matches we'll do a locale compare between the
-      // two ids
-      return idA.localeCompare(idB);
-    },
-  },
+  options: { storySort },
 };
 
 export const decorators = [

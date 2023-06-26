@@ -12,23 +12,31 @@ const fs = require('fs');
 const glob = require('fast-glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
+
+const storyGlobs =
+  process.env.STORYBOOK_STORE_7 === 'false'
+    ? [
+        '../src/**/*.stories.js',
+        '../src/**/next/*.stories.js',
+        '../src/**/next/**/*.stories.js',
+        '../src/**/*-story.js',
+      ]
+    : [
+        './Welcome/Welcome.mdx',
+        '../src/**/*.stories.js',
+        '../src/**/*.stories.mdx',
+        '../src/components/Tile/Tile.mdx',
+        '../src/**/next/*.stories.js',
+        '../src/**/next/**/*.stories.js',
+        '../src/**/next/*.stories.mdx',
+        '../src/**/*-story.js',
+      ];
+
 const stories = glob
-  .sync(
-    [
-      // './Welcome/Welcome.mdx',
-      '../src/**/*.stories.js',
-      // '../src/**/*.stories.mdx',
-      // '../src/components/Tile/Tile.mdx',
-      '../src/**/next/*.stories.js',
-      '../src/**/next/**/*.stories.js',
-      // '../src/**/next/*.stories.mdx',
-      '../src/**/*-story.js',
-    ],
-    {
-      ignore: ['../src/**/docs/*.mdx', '../src/**/next/docs/*.mdx'],
-      cwd: __dirname,
-    }
-  )
+  .sync(storyGlobs, {
+    ignore: ['../src/**/docs/*.mdx', '../src/**/next/docs/*.mdx'],
+    cwd: __dirname,
+  })
   // Filters the stories by finding the paths that have a story file that ends
   // in `-story.js` and checks to see if they also have a `.stories.js`,
   // if so then defer to the `.stories.js`
@@ -92,7 +100,7 @@ const config = {
   features: {
     previewCsfV3: true,
     buildStoriesJson: true,
-    storyStoreV7: false,
+    storyStoreV7: process.env.STORYBOOK_STORE_7 !== 'false',
   },
   framework: {
     name: '@storybook/react-webpack5',
