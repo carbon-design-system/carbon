@@ -841,86 +841,86 @@ export const FixedSideNavWDivider = () => (
 
 FixedSideNavWDivider.storyName = 'Fixed SideNav w/ Divider';
 
-// export const SideNavRail = (args) => (
-//   <>
-//     <SideNav aria-label="Side navigation" href="#main-content" {...args}>
-//       <SideNavItems>
-//         <SideNavMenu renderIcon={Fade} title="Category title">
-//           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-//             Link
-//           </SideNavMenuItem>
-//           <SideNavMenuItem
-//             aria-current="page"
-//             href="https://www.carbondesignsystem.com/">
-//             Link
-//           </SideNavMenuItem>
-//           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-//             Link
-//           </SideNavMenuItem>
-//         </SideNavMenu>
-//         <SideNavMenu renderIcon={Fade} title="Category title">
-//           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-//             Link
-//           </SideNavMenuItem>
-//           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-//             Link
-//           </SideNavMenuItem>
-//           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-//             Link
-//           </SideNavMenuItem>
-//         </SideNavMenu>
-//         <SideNavMenu renderIcon={Fade} title="Category title">
-//           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-//             Link
-//           </SideNavMenuItem>
-//           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-//             Link
-//           </SideNavMenuItem>
-//           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-//             Link
-//           </SideNavMenuItem>
-//         </SideNavMenu>
-//         <SideNavLink
-//           renderIcon={Fade}
-//           href="https://www.carbondesignsystem.com/">
-//           Link
-//         </SideNavLink>
-//         <SideNavLink
-//           renderIcon={Fade}
-//           href="https://www.carbondesignsystem.com/">
-//           Link
-//         </SideNavLink>
-//       </SideNavItems>
-//     </SideNav>
-//     <StoryContent />
-//   </>
-// );
+export const SideNavRail = (args) => (
+  <>
+    <SideNav aria-label="Side navigation" href="#main-content" {...args}>
+      <SideNavItems>
+        <SideNavMenu renderIcon={Fade} title="Category title">
+          <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+            Link
+          </SideNavMenuItem>
+          <SideNavMenuItem
+            aria-current="page"
+            href="https://www.carbondesignsystem.com/">
+            Link
+          </SideNavMenuItem>
+          <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+            Link
+          </SideNavMenuItem>
+        </SideNavMenu>
+        <SideNavMenu renderIcon={Fade} title="Category title">
+          <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+            Link
+          </SideNavMenuItem>
+          <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+            Link
+          </SideNavMenuItem>
+          <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+            Link
+          </SideNavMenuItem>
+        </SideNavMenu>
+        <SideNavMenu renderIcon={Fade} title="Category title">
+          <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+            Link
+          </SideNavMenuItem>
+          <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+            Link
+          </SideNavMenuItem>
+          <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+            Link
+          </SideNavMenuItem>
+        </SideNavMenu>
+        <SideNavLink
+          renderIcon={Fade}
+          href="https://www.carbondesignsystem.com/">
+          Link
+        </SideNavLink>
+        <SideNavLink
+          renderIcon={Fade}
+          href="https://www.carbondesignsystem.com/">
+          Link
+        </SideNavLink>
+      </SideNavItems>
+    </SideNav>
+    <StoryContent />
+  </>
+);
 
-// SideNavRail.argTypes = {
-//   isRail: {
-//     control: {
-//       type: 'boolean',
-//     },
-//     defaultValue: true,
-//     table: {
-//       defaultValue: { summary: true },
-//     },
-//     description: 'Optional prop to display the side nav rail.',
-//   },
-//   enterDelayMs: {
-//     control: {
-//       type: 'number',
-//     },
-//     table: {
-//       defaultValue: { summary: 100 },
-//     },
-//     defaultValue: 100,
-//     description:
-//       'Specify the duration in milliseconds to delay before displaying the sidenav',
-//   },
-// };
+SideNavRail.argTypes = {
+  isRail: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: true,
+    table: {
+      defaultValue: { summary: true },
+    },
+    description: 'Optional prop to display the side nav rail.',
+  },
+  enterDelayMs: {
+    control: {
+      type: 'number',
+    },
+    table: {
+      defaultValue: { summary: 100 },
+    },
+    defaultValue: 100,
+    description:
+      'Specify the duration in milliseconds to delay before displaying the sidenav',
+  },
+};
 
-// SideNavRail.storyName = 'SideNav Rail';
+SideNavRail.storyName = 'SideNav Rail';
 
 export const SideNavRailWHeader = (args) => (
   <HeaderContainer
