@@ -108,7 +108,6 @@ Map {
     },
     "propTypes": Object {
       "actionButtonLabel": Object {
-        "isRequired": true,
         "type": "string",
       },
       "aria-label": Object {
@@ -166,7 +165,7 @@ Map {
         "type": "string",
       },
       "subtitle": Object {
-        "type": "string",
+        "type": "node",
       },
       "title": Object {
         "type": "string",
@@ -4003,6 +4002,9 @@ Map {
   "HeaderPanel" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "addFocusListeners": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
@@ -4011,6 +4013,12 @@ Map {
       },
       "expanded": Object {
         "type": "bool",
+      },
+      "href": Object {
+        "type": "string",
+      },
+      "onHeaderPanelFocus": Object {
+        "type": "func",
       },
     },
     "render": [Function],
@@ -7466,6 +7474,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "expanded": Object {
+        "type": "bool",
+      },
     },
     "render": [Function],
   },
@@ -7487,6 +7498,15 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "handleSwitcherItemFocus": Object {
+        "type": "func",
+      },
+      "index": Object {
+        "type": "number",
+      },
+      "onKeyDown": Object {
+        "type": "func",
       },
       "tabIndex": Object {
         "type": "number",
@@ -7582,6 +7602,9 @@ Map {
         "type": "string",
       },
       "contained": Object {
+        "type": "bool",
+      },
+      "fullWidth": Object {
         "type": "bool",
       },
       "iconSize": Object {
