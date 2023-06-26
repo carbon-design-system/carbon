@@ -92,6 +92,7 @@ const config = {
   features: {
     previewCsfV3: true,
     buildStoriesJson: true,
+    storyStoreV7: false,
   },
   framework: {
     name: '@storybook/react-webpack5',
