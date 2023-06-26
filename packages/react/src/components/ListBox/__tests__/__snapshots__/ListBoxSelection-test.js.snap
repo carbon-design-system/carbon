@@ -37,9 +37,8 @@ exports[`ListBoxSelection should render 1`] = `
     aria-label="translation"
     className="bx--list-box__selection"
     onClick={[Function]}
-    onKeyDown={[Function]}
     role="button"
-    tabIndex={0}
+    tabIndex={-1}
     title="translation"
   >
     <ForwardRef(Close16)>
@@ -118,9 +117,8 @@ exports[`ListBoxSelection should render 2`] = `
       aria-label="translation"
       className="bx--tag__close-icon"
       onClick={[Function]}
-      onKeyDown={[Function]}
       role="button"
-      tabIndex={0}
+      tabIndex={-1}
       title="translation"
     >
       <ForwardRef(Close16)>

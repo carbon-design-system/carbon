@@ -17,9 +17,8 @@ exports[`ListBoxField should render 1`] = `
         aria-label="Clear selected item"
         className="bx--list-box__selection"
         onClick={[Function]}
-        onKeyDown={[Function]}
         role="button"
-        tabIndex={0}
+        tabIndex={-1}
         title="Clear selected item"
       >
         <ForwardRef(Close16)>
