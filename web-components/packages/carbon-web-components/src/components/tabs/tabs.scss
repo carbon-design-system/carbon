@@ -12,23 +12,50 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/components/button/index' as *;
 @use '@carbon/styles/scss/components/tabs/index';
 @use '@carbon/styles/scss/components/tabs/vars' as *;
 @use '@carbon/styles/scss/utilities/button-reset';
 
+$inset-transition: inset 110ms motion(standard, productive);
+
 :host(#{$prefix}-tabs),
 :host(#{$prefix}-tabs-skeleton) {
   @extend .#{$prefix}--tabs;
+
+  .#{$prefix}--tabs-nav-content-container {
+    flex: 1 1 0%;
+    position: relative;
+    overflow: scroll;
+    height: 42px; // for some reason, overflow: hidden shrinks the content
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  /* Set to zero-slecificity so it can be overridden by dynamic stylesheet */
+  /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+  :where(.#{$prefix}--tabs-nav-content) {
+    position: absolute;
+    height: 100%;
+    inset-inline-start: 0;
+    transition: $inset-transition;
+  }
+
+  .#{$prefix}--tabs-nav {
+    display: block;
+    position: absolute;
+  }
+
+  .#{$prefix}--tab--overflow-nav-button {
+    z-index: 1;
+  }
 }
 
 :host(#{$prefix}-tabs) {
   @include focus-outline('reset');
-
-  display: block;
-
-  &[color-scheme='light'] {
-    background-color: $layer-01;
-  }
 
   .#{$prefix}--tabs-trigger svg {
     width: auto;
@@ -53,6 +80,8 @@
     @include focus-outline('reset');
     @include type-style('body-compact-01');
 
+    display: flex;
+    align-items: center;
     width: 100%;
     overflow: hidden;
     max-width: 10rem;
@@ -74,7 +103,7 @@
 
   &[selected] {
     .#{$prefix}--tabs__nav-link {
-      @include type-style('heading-01');
+      @include type-style('heading-compact-01');
 
       border-bottom: 2px solid $border-interactive;
     }
@@ -84,51 +113,44 @@
 }
 
 :host(#{$prefix}-tab:hover) {
-  @include breakpoint(md) {
-    background-color: transparent;
-    box-shadow: none;
-  }
-
   background-color: transparent;
   box-shadow: 0 -1px 0 $background-hover;
-}
-
-:host(#{$prefix}-tab[type='container']) {
-  @include breakpoint(md) {
-    background-color: $layer-accent-01;
-
-    + .#{$prefix}--tabs__nav-item {
-      margin-left: 0;
-      // Draws the border without affecting the inner-content
-      box-shadow: -1px 0 0 0 $border-strong-01;
-    }
-
-    + .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected,
-    &.#{$prefix}--tabs__nav-item--selected + .#{$prefix}--tabs__nav-item {
-      box-shadow: none;
-    }
-  }
 
   a.#{$prefix}--tabs__nav-link {
-    @include breakpoint(md) {
-      height: rem(48px);
-      // height - vertical padding
-      /* stylelint-disable declaration-property-unit-whitelist */
-      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
-    }
+    border-bottom: $tab-underline-color-hover;
+    color: $text-primary;
   }
 }
 
-// `[role]` is only for specificity.
-// We have `:not()` usage in the corresponding Carbon core style
-// which puts specificity of "specific" scenario though the style is for "regular" scenario
-:host(#{$prefix}-tab[type='container'][role]),
-:host(#{$prefix}-tab[type='container'][role]:hover) {
+:host(#{$prefix}-tabs[type='contained'])
+  .#{$prefix}--tabs-nav-content-container {
+  height: $spacing-09;
+}
+
+:host(#{$prefix}-tab[type='contained']) {
+  background-color: $layer-accent-01;
+
   a.#{$prefix}--tabs__nav-link {
-    @include breakpoint(md) {
-      border-bottom: none;
-    }
+    height: $spacing-09;
+    padding: $spacing-03 $spacing-05;
+    // height - vertical padding
+    /* stylelint-disable declaration-property-unit-whitelist */
+    line-height: calc(#{$spacing-09} - (#{$spacing-03} * 2));
   }
+}
+
+:host(#{$prefix}-tab[type='contained']),
+:host(#{$prefix}-tab[type='contained']:hover) {
+  a.#{$prefix}--tabs__nav-link {
+    border-bottom: none;
+    // Draws the border without affecting the inner-content
+    box-shadow: rem(-1px) 0 0 0 $border-strong;
+  }
+}
+
+:host(#{$prefix}-tab[type='contained'][hide-divider])
+  a.#{$prefix}--tabs__nav-link {
+  box-shadow: rem(-1px) 0 0 0 transparent;
 }
 
 // `[role]` is only for specificity.
@@ -141,35 +163,32 @@
   cursor: not-allowed;
   outline: none;
 
-  @include breakpoint(md) {
-    background-color: transparent;
-  }
-
   .#{$prefix}--tabs__nav-link {
     color: $tab-text-disabled;
     pointer-events: none;
     outline: none;
-
-    @include breakpoint(md) {
-      border-bottom: $tab-underline-disabled;
-    }
+    border-bottom: $tab-underline-disabled;
   }
 }
 
-:host(#{$prefix}-tab[type='container'][disabled][role])
+:host(#{$prefix}-tab[type='contained'][disabled][role])
   .#{$prefix}--tabs__nav-link {
-  @include breakpoint(md) {
-    color: $text-on-color-disabled;
-  }
+  background-color: $button-disabled;
+  border-bottom: none;
+  color: $text-on-color-disabled;
 }
 
 :host(#{$prefix}-tab[selected]) {
+  display: flex;
+  background-color: transparent;
+
+  .#{$prefix}--tabs__nav-link {
+    @include type-style('heading-01');
+  }
   transition: color $duration-fast-01 motion(standard, productive);
 
   &:hover {
-    @include breakpoint(md) {
-      background-color: transparent;
-    }
+    background-color: transparent;
   }
 
   .#{$prefix}--tabs__nav-link {
@@ -180,65 +199,28 @@
       color: $text-primary;
     }
   }
-
-  @include breakpoint(md) {
-    display: flex;
-    background-color: transparent;
-
-    .#{$prefix}--tabs__nav-link {
-      @include type-style('heading-01');
-
-      border-bottom: 3px solid $background-brand;
-
-      &:focus,
-      &:active {
-        border-bottom-width: 2px;
-      }
-    }
-  }
 }
 
-:host(#{$prefix}-tab[type='container'][selected]),
-:host(#{$prefix}-tab[type='container'][selected]:hover) {
-  @include breakpoint(md) {
-    background-color: $layer-01;
+:host(#{$prefix}-tab[type='contained'][selected]),
+:host(#{$prefix}-tab[type='contained'][selected]:hover) {
+  background-color: $layer-01;
 
-    .#{$prefix}--tabs__nav-link {
-      // height - vertical padding
-      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
-      // Draws the border without affecting the inner-content
-      box-shadow: inset 0 2px 0 0 $interactive;
-      border-bottom: none;
-    }
-
-    .#{$prefix}--tabs__nav-link:focus,
-    .#{$prefix}--tabs__nav-link:active {
-      box-shadow: none;
-    }
+  .#{$prefix}--tabs__nav-link {
+    // height - vertical padding
+    line-height: calc(#{$spacing-09} - (#{$spacing-03} * 2));
+    // Draws the border without affecting the inner-content
+    box-shadow: inset 0 2px 0 0 $interactive;
+    border-bottom: none;
   }
-}
 
-:host(#{$prefix}-tab[highlighted]),
-:host(#{$prefix}-tab[highlighted]:hover) {
-  box-shadow: 0 -1px 0 $background-hover;
-
-  // `highlighted` is not used in wide mode,
-  // but we need guard for a scenario where a tab is highlighted and then the UI turned to wide mode
-  @include breakpoint(md) {
-    background-color: transparent;
+  .#{$prefix}--tabs__nav-link:focus,
+  .#{$prefix}--tabs__nav-link:active {
     box-shadow: none;
   }
 }
 
-:host(#{$prefix}-tab[highlighted][selected]),
-:host(#{$prefix}-tab[highlighted][selected]:hover) {
-  background-color: $background-selected;
-
-  // `highlighted` is not used in wide mode,
-  // but we need guard for a scenario where a tab is highlighted and then the UI turned to wide mode
-  @include breakpoint(md) {
-    background-color: transparent;
-  }
+:host(#{$prefix}-tab[type='contained']:hover) {
+  background-color: $layer-accent-hover;
 }
 
 // Disabled tab never gets selected, but we guard for manual addition of `selected` attribute
@@ -250,23 +232,17 @@
   background-color: transparent;
   box-shadow: none;
 
-  @include breakpoint(md) {
-    @include focus-outline('reset');
-
-    background-color: transparent;
-  }
+  @include focus-outline('reset');
 
   .#{$prefix}--tabs__nav-link {
-    @include breakpoint(md) {
-      @include type-style('body-short-01');
+    @include type-style('body-short-01');
 
-      color: $tab-text-disabled;
-      border-bottom: $tab-underline-disabled;
+    color: $tab-text-disabled;
+    border-bottom: $tab-underline-disabled;
 
-      &:focus,
-      &:active {
-        border-bottom-width: 3px;
-      }
+    &:focus,
+    &:active {
+      border-bottom-width: 3px;
     }
   }
 }
@@ -278,9 +254,7 @@
 }
 
 :host(#{$prefix}-tab-skeleton) {
-  @include breakpoint(md) {
-    margin-left: rem(2px);
-  }
+  margin-left: rem(2px);
 
   .#{$prefix}--tabs__nav-link {
     @include skeleton;
@@ -291,7 +265,5 @@
 }
 
 :host(#{$prefix}-tab-skeleton:first-of-type) {
-  @include breakpoint(md) {
-    margin-left: 0;
-  }
+  margin-left: 0;
 }

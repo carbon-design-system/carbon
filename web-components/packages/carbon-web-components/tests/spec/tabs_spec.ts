@@ -9,12 +9,12 @@
 
 import { render } from 'lit';
 import EventManager from '../utils/event-manager';
-import BXTabs from '../../src/components/tabs/tabs';
-import BXTab from '../../src/components/tabs/tab';
-import { Default } from '../../src/components/tabs/tabs-story';
+import CDSTabs from '../../src/components/tabs/tabs';
+import CDSTab from '../../src/components/tabs/tab';
+import { Playground } from '../../src/components/tabs/tabs-story';
 
 const template = (props?) =>
-  Default({
+  Playground({
     'cds-tabs': props,
   });
 
@@ -90,7 +90,7 @@ describe('cds-tabs', function () {
       const itemNodes = document.body.querySelectorAll('cds-tab');
       (itemNodes[2] as HTMLElement).click();
       await Promise.resolve();
-      expect((document.body.querySelector('cds-tabs') as BXTabs).value).toBe(
+      expect((document.body.querySelector('cds-tabs') as CDSTabs).value).toBe(
         'staging'
       );
     });
@@ -98,7 +98,7 @@ describe('cds-tabs', function () {
     it('should provide a way to switch item with a value', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      (document.body.querySelector('cds-tabs') as BXTabs).value = 'staging';
+      (document.body.querySelector('cds-tabs') as CDSTabs).value = 'staging';
       await Promise.resolve(); // Update cycle for `<cds-tabs>`
       await Promise.resolve(); // Update cycle for `<cds-tab>`
       const itemNodes = document.body.querySelectorAll('cds-tab');
@@ -114,7 +114,7 @@ describe('cds-tabs', function () {
       await Promise.resolve();
       const elem = document.body.querySelector('cds-tabs');
       const itemNodes = document.body.querySelectorAll('cds-tab');
-      (document.body.querySelector('cds-tabs') as BXTabs).value = 'all';
+      (document.body.querySelector('cds-tabs') as CDSTabs).value = 'all';
       await Promise.resolve();
       events.on(elem!, 'cds-tabs-beingselected', (event: CustomEvent) => {
         expect(event.detail.item).toBe(itemNodes[2]);
@@ -155,7 +155,7 @@ describe('cds-tabs', function () {
       render(template(), document.body);
       await Promise.resolve();
       const elem = document.body.querySelector('cds-tabs');
-      (elem as BXTabs).value = 'all';
+      (elem as CDSTabs).value = 'all';
       await Promise.resolve(); // Update cycle for `<cds-tabs>`
       await Promise.resolve(); // Update cycle for `<cds-tab>`
       const triggerNode = elem!.shadowRoot!.getElementById('trigger');
@@ -178,7 +178,7 @@ describe('cds-tabs', function () {
       render(template(), document.body);
       await Promise.resolve();
       const elem = document.body.querySelector('cds-tabs');
-      (elem as BXTabs).value = 'router';
+      (elem as CDSTabs).value = 'router';
       await Promise.resolve(); // Update cycle for `<cds-tabs>`
       await Promise.resolve(); // Update cycle for `<cds-tab>`
       const triggerNode = elem!.shadowRoot!.getElementById('trigger');
@@ -201,7 +201,7 @@ describe('cds-tabs', function () {
       render(template(), document.body);
       await Promise.resolve();
       const elem = document.body.querySelector('cds-tabs');
-      (elem as BXTabs).value = 'all';
+      (elem as CDSTabs).value = 'all';
       (elem as any)._open = true;
       await Promise.resolve(); // Update cycle for `<cds-tabs>`
       await Promise.resolve(); // Update cycle for `<cds-tab>`
@@ -225,7 +225,7 @@ describe('cds-tabs', function () {
       render(template(), document.body);
       await Promise.resolve();
       const elem = document.body.querySelector('cds-tabs');
-      (elem as BXTabs).value = 'router';
+      (elem as CDSTabs).value = 'router';
       (elem as any)._open = true;
       await Promise.resolve(); // Update cycle for `<cds-tabs>`
       await Promise.resolve(); // Update cycle for `<cds-tab>`
@@ -249,7 +249,7 @@ describe('cds-tabs', function () {
       render(template(), document.body);
       await Promise.resolve();
       const elem = document.body.querySelector('cds-tabs');
-      (elem as BXTabs).value = 'all';
+      (elem as CDSTabs).value = 'all';
       await Promise.resolve(); // Update cycle for `<cds-tabs>`
       await Promise.resolve(); // Update cycle for `<cds-tab>`
       const triggerNode = elem!.shadowRoot!.getElementById('trigger');
@@ -273,7 +273,7 @@ describe('cds-tabs', function () {
       render(template(), document.body);
       await Promise.resolve();
       const elem = document.body.querySelector('cds-tabs');
-      (elem as BXTabs).value = 'all';
+      (elem as CDSTabs).value = 'all';
       await Promise.resolve(); // Update cycle for `<cds-tabs>`
       await Promise.resolve(); // Update cycle for `<cds-tab>`
       const triggerNode = elem!.shadowRoot!.getElementById('trigger');
@@ -313,7 +313,7 @@ describe('cds-tabs', function () {
       const elem = document.body.querySelector('cds-tabs');
       (elem as any)._open = true;
       const itemNodes = document.body.querySelectorAll('cds-tab');
-      (itemNodes[2] as BXTab).highlighted = true;
+      (itemNodes[2] as CDSTab).highlighted = true;
       await Promise.resolve();
       const triggerNode = elem!.shadowRoot!.getElementById('trigger');
       spyOnProperty(triggerNode!, 'offsetParent').and.returnValue({});
@@ -324,17 +324,17 @@ describe('cds-tabs', function () {
       );
       await Promise.resolve();
       expect((elem as any)._open).toBe(false);
-      expect((elem as BXTabs).value).toBe('staging');
+      expect((elem as CDSTabs).value).toBe('staging');
     });
 
     it('should simply close the dropdown if user tries to choose the same selection in narrow mode', async function () {
       render(template(), document.body);
       await Promise.resolve();
       const elem = document.body.querySelector('cds-tabs');
-      (elem as BXTabs).value = 'staging';
+      (elem as CDSTabs).value = 'staging';
       (elem as any)._open = true;
       const itemNodes = document.body.querySelectorAll('cds-tab');
-      (itemNodes[2] as BXTab).highlighted = true;
+      (itemNodes[2] as CDSTab).highlighted = true;
       await Promise.resolve(); // Update cycle for `<cds-tabs>`
       await Promise.resolve(); // Update cycle for `<cds-tab>`
       const triggerNode = elem!.shadowRoot!.getElementById('trigger');

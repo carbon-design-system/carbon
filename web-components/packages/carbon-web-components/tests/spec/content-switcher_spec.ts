@@ -9,7 +9,7 @@
 
 import { render } from 'lit';
 import EventManager from '../utils/event-manager';
-import BXTabs from '../../src/components/tabs/tabs';
+import CDSTabs from '../../src/components/tabs/tabs';
 import { Playground } from '../../src/components/content-switcher/content-switcher-story';
 
 const template = (props?) =>
@@ -45,14 +45,14 @@ describe('cds-content-switcher', function () {
       (itemNodes[2] as HTMLElement).click();
       await Promise.resolve();
       expect(
-        (document.body.querySelector('cds-content-switcher') as BXTabs).value
+        (document.body.querySelector('cds-content-switcher') as CDSTabs).value
       ).toBe('staging');
     });
 
     it('should provide a way to switch item with a value', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      (document.body.querySelector('cds-content-switcher') as BXTabs).value =
+      (document.body.querySelector('cds-content-switcher') as CDSTabs).value =
         'staging';
       await Promise.resolve(); // Update cycle for `<cds-content-switcher>`
       await Promise.resolve(); // Update cycle for `<cds-content-switcher-item>`
@@ -73,7 +73,7 @@ describe('cds-content-switcher', function () {
       const itemNodes = document.body.querySelectorAll(
         'cds-content-switcher-item'
       );
-      (document.body.querySelector('cds-content-switcher') as BXTabs).value =
+      (document.body.querySelector('cds-content-switcher') as CDSTabs).value =
         'all';
       await Promise.resolve();
       events.on(
