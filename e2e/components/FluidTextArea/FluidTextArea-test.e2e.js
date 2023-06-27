@@ -21,6 +21,14 @@ test.describe('FluidTextArea', () => {
           theme,
         });
       });
+
+      test('fluid textarea playground @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'FluidTextArea',
+          id: 'experimental-unstable-fluidtextarea--playground',
+          theme,
+        });
+      });
     });
   });
 

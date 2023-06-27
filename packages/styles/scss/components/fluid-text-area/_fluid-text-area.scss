@@ -65,8 +65,10 @@
 
   //counter
   .#{$prefix}--text-area--fluid div.#{$prefix}--label {
-    right: 1rem;
-    left: initial;
+    // right: 1rem;
+    // left: initial;
+    display: flex;
+    justify-content: flex-end;
   }
 
   .#{$prefix}--text-area--fluid .#{$prefix}--text-area {
