@@ -10,6 +10,39 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
+import { ReactAttr } from '../../types/common';
+
+export interface LoadingProps extends ReactAttr<HTMLDivElement> {
+  /**
+   * Specify whether you want the loading indicator to be spinning or not
+   */
+  active?: boolean;
+
+  /**
+   * Provide an optional className to be applied to the containing node
+   */
+  className?: string;
+
+  /**
+   * Specify a description that would be used to best describe the loading state
+   */
+  description?: string;
+
+  /**
+   * @deprecated The prop `id` is no longer needed
+   */
+  id?: string;
+
+  /**
+   * Specify whether you would like the small variant of <Loading>
+   */
+  small?: boolean;
+
+  /**
+   * Specify whether you want the loader to be applied with an overlay
+   */
+  withOverlay: boolean;
+}
 
 function Loading({
   active = true,
@@ -18,7 +51,7 @@ function Loading({
   small = false,
   description = 'loading',
   ...rest
-}) {
+}: LoadingProps) {
   const prefix = usePrefix();
   const loadingClassName = cx(customClassName, {
     [`${prefix}--loading`]: true,
