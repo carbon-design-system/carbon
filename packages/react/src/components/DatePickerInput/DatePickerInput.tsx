@@ -66,7 +66,7 @@ interface DatePickerInputProps
   /**
    * Specify the text to be rendered when the input is invalid
    */
-  invalidText: ReactNodeLike;
+  invalidText?: ReactNodeLike;
 
   /**
    * Provide the text that will be read by a screen reader when visiting this
@@ -89,7 +89,7 @@ interface DatePickerInputProps
    * Provide a regular expression that the input value must match
    * TODO:need to be rewritten
    */
-  pattern: (
+  pattern?: (
     props: { [key: string]: any },
     propName: string,
     componentName: string
