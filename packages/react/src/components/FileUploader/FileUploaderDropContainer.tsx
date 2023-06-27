@@ -13,6 +13,73 @@ import uniqueId from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
 import { composeEventHandlers } from '../../tools/events';
 import deprecate from '../../prop-types/deprecate';
+import { ReactAttr } from '../../types/common';
+
+export interface FileUploaderDropContainerProps
+  extends Omit<ReactAttr<HTMLButtonElement>, 'tabIndex'> {
+  /**
+   * Specify the types of files that this input should be able to receive
+   */
+  accept?: string[];
+
+  /**
+   * Provide a custom className to be applied to the container node
+   */
+  className?: string;
+
+  /**
+   * Specify whether file input is disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Provide a unique id for the underlying `<input>` node
+   */
+  id?: string;
+
+  /**
+   * Provide the label text to be read by screen readers when interacting with
+   * this control
+   */
+  labelText: string;
+
+  /**
+   * Specify if the component should accept multiple files to upload
+   */
+  multiple?: boolean;
+
+  /**
+   * Provide a name for the underlying `<input>` node
+   */
+  name?: string;
+
+  /**
+   * Event handler that is called after files are added to the uploader
+   * The event handler signature looks like `onAddFiles(evt, { addedFiles })`
+   */
+  onAddFiles?: () => void;
+
+  /**
+   * Provide an optional function to be called when the button element
+   * is clicked
+   */
+  onClick?: () => void;
+
+  /**
+   * Provide a custom regex pattern for the acceptedTypes
+   */
+  pattern?: string;
+
+  /**
+   * @deprecated The `role` prop for `FileUploaderButton` has been deprecated since it now renders a button element by default, and has an implicit role of button.
+   */
+  role?: string;
+
+  /**
+   * @deprecated The `tabIndex` prop for `FileUploaderButton` has been deprecated since it now renders a button element by default.
+   */
+  tabIndex?: number | string;
+}
 
 function FileUploaderDropContainer({
   accept,
@@ -30,7 +97,7 @@ function FileUploaderDropContainer({
   ...rest
 }) {
   const prefix = usePrefix();
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const { current: uid } = useRef(id || uniqueId());
   const [isActive, setActive] = useState(false);
   const dropareaClasses = classNames(
@@ -84,7 +151,7 @@ function FileUploaderDropContainer({
 
   const handleClick = () => {
     if (!disabled) {
-      inputRef.current.click();
+      inputRef.current?.click();
     }
   };
 
@@ -123,9 +190,9 @@ function FileUploaderDropContainer({
         className={dropareaClasses}
         ref={innerRef}
         onKeyDown={(evt) => {
-          if (matches(evt, [keys.Enter, keys.Space])) {
+          if (matches(evt as unknown as Event, [keys.Enter, keys.Space])) {
             evt.preventDefault();
-            inputRef.current.click();
+            inputRef.current?.click();
           }
         }}
         onClick={composeEventHandlers([onClick, handleClick])}
@@ -140,14 +207,14 @@ function FileUploaderDropContainer({
         id={uid}
         className={`${prefix}--file-input`}
         ref={inputRef}
-        tabIndex="-1"
+        tabIndex={-1}
         disabled={disabled}
         accept={accept}
         name={name}
         multiple={multiple}
         onChange={handleChange}
         onClick={(evt) => {
-          evt.target.value = null;
+          (evt.target as HTMLInputElement).value = null as unknown as string;
         }}
       />
     </div>

@@ -11,6 +11,14 @@ import cx from 'classnames';
 import SkeletonText from '../SkeletonText';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 import { usePrefix } from '../../internal/usePrefix';
+import { ReactAttr } from '../../types/common';
+
+export interface FileUploaderSkeletonProps extends ReactAttr<HTMLDivElement> {
+  /**
+   * Specify an optional className to add.
+   */
+  className?: string;
+}
 
 function FileUploaderSkeleton({ className, ...rest }) {
   const prefix = usePrefix();
