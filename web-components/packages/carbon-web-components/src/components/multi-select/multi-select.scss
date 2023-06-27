@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -37,13 +37,12 @@ $css--plex: true !default;
       outline: none;
     }
   }
+}
 
-  &[filterable] {
-    .#{$prefix}--list-box__field:focus-within {
-      outline: 2px solid $focus;
-      outline-offset: -2px;
-    }
-  }
+:host(#{$prefix}-multi-select[filterable])
+  .#{$prefix}--list-box__field:focus-within {
+  outline: 2px solid $focus;
+  outline-offset: -2px;
 }
 
 :host(#{$prefix}-multi-select[type='inline']) {
@@ -80,10 +79,10 @@ $css--plex: true !default;
       flex-direction: row;
     }
   }
+}
 
-  &[filtered] {
-    display: none;
-  }
+:host(#{$prefix}-multi-select-item[filtered]) {
+  display: none;
 }
 
 :host(#{$prefix}-multi-select-item[size='sm']) {
