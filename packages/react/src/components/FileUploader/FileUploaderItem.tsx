@@ -12,6 +12,56 @@ import Filename from './Filename';
 import { keys, matches } from '../../internal/keyboard';
 import uid from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
+import { ReactAttr } from '../../types/common';
+
+export interface FileUploaderItemProps extends ReactAttr<HTMLSpanElement> {
+  /**
+   * Error message body for an invalid file upload
+   */
+  errorBody?: string;
+
+  /**
+   * Error message subject for an invalid file upload
+   */
+  errorSubject?: string;
+
+  /**
+   * Description of status icon (displayed in native tooltip)
+   */
+  iconDescription?: string;
+
+  /**
+   * Specify if the currently uploaded file is invalid
+   */
+  invalid?: boolean;
+
+  /**
+   * Name of the uploaded file
+   */
+  name?: string;
+
+  /**
+   * Event handler that is called after removing a file from the file uploader
+   * The event handler signature looks like `onDelete(evt, { uuid })`
+   */
+  onDelete?: (event: any, opts: { uuid: string }) => void;
+
+  /**
+   * Specify the size of the FileUploaderButton, from a list of available
+   * sizes.
+   */
+  size?: 'sm' | 'md' | 'lg';
+
+  /**
+   * Status of the file upload
+   */
+  status?: 'uploading' | 'edit' | 'complete';
+
+  /**
+   * Unique identifier for the file object
+   */
+  uuid?: string;
+}
 
 function FileUploaderItem({
   uuid,
@@ -45,7 +95,7 @@ function FileUploaderItem({
           invalid={invalid}
           aria-describedby={`${name}-id-error`}
           onKeyDown={(evt) => {
-            if (matches(evt, [keys.Enter, keys.Space])) {
+            if (matches(evt as unknown as Event, [keys.Enter, keys.Space])) {
               if (status === 'edit') {
                 evt.preventDefault();
                 onDelete(evt, { uuid: id });
