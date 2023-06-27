@@ -424,7 +424,6 @@ export default class FilterableMultiSelect extends React.Component {
                     inputValue,
                     selectedItem,
                   }) => {
-                    console.log(this.state.inputFocused);
                     const className = cx(
                       `${prefix}--multi-select`,
                       `${prefix}--combo-box`,
