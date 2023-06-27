@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.29.0-rc.3](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.29.0-rc.2...@carbon/web-components@1.29.0-rc.3) (2023-06-27)
+
+
+### Bug Fixes
+
+* **multi-select:** move filterable attribute out of scope for styles ([#10608](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10608)) ([1c1cf35](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/1c1cf35ced1d73c9b0558ce474edd124ce773da8))
+
+
+
+
+
 # [1.29.0-rc.2](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.29.0-rc.1...@carbon/web-components@1.29.0-rc.2) (2023-06-23)
 
 **Note:** Version bump only for package @carbon/web-components
