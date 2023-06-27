@@ -22,8 +22,18 @@
 // This ensures that we won't encounter a mismatch in ids between server and
 // client, at the cost of runtime patching of the id value in
 // `useLayoutEffect`
+//
+// React 18 introduced a new hook called `useId` that takes care of hydration
+// mismatches. Now we are checking if the user is running React 18 to apply
+// the new hook and call the `nativeReactUseid` function, but if the user is
+// running a version older than React 18 we will keep using our old hook.
 
-import { useEffect, useLayoutEffect, useState } from 'react';
+import {
+  useEffect,
+  useLayoutEffect,
+  useState,
+  useId as reactUseId,
+} from 'react';
 import setupGetInstanceId from '../tools/setupGetInstanceId';
 import { canUseDOM } from './environment';
 import { useIdPrefix } from './useIdPrefix';
@@ -59,6 +69,19 @@ export function useId(prefix = 'id') {
       serverHandoffCompleted = true;
     }
   }, []);
+
+  if (reactUseId) {
+    const id = nativeReactUseId(_prefix, prefix);
+    return id;
+  }
+
+  return id;
+}
+
+function nativeReactUseId(_prefix, prefix) {
+  const getId = reactUseId();
+
+  const id = `${_prefix ? `${_prefix}-` : ``}${prefix}-${getId}`;
 
   return id;
 }
