@@ -21,6 +21,15 @@ import { Story, Preview, Props } from '@storybook/addon-docs';
 There are 3 different types of notification components:
 `ActionableNotification`, `InlineNotification`, and `ToastNotification`.
 
+`InlineNotification` and `ToastNotification` can not contain interactive
+elements or rich text.
+
+To include an action, interactive elements or rich text in notifications, use
+`ActionableNotification`. It uses Toast-like styling by default, but if you'd
+like it to be visually similar to an InlineNotifcation, you can use the `inline`
+prop. If `actionButtonLabel` is not provided, an action button will not be
+rendered.
+
 ## Component API
 
 <Props />
