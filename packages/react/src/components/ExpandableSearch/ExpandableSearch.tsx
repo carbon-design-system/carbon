@@ -41,7 +41,7 @@ function ExpandableSearch({
   }
 
   function handleExpand() {
-    setExpanded(true)
+    setExpanded(true);
     searchRef.current?.focus?.();
   }
 
