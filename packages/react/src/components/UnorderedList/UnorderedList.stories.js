@@ -70,11 +70,14 @@ export const Playground = (args) => (
   </UnorderedList>
 );
 
+Playground.args = {
+  isExpressive: false,
+};
+
 Playground.argTypes = {
   isExpressive: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
 };

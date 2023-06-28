@@ -1,5 +1,6 @@
-import { Story, Props, Source, Preview } from '@storybook/addon-docs';
 import Accordion, { AccordionItem, AccordionSkeleton } from '../Accordion';
+import { Story, ArgsTable, Canvas } from '@storybook/blocks';
+import * as AccordionStories from './Accordion.stories';
 
 # Accordion
 
@@ -9,8 +10,8 @@ import Accordion, { AccordionItem, AccordionSkeleton } from '../Accordion';
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/accordion/accessibility)
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> */}
+{/* <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
 ## Table of Contents
 
@@ -20,7 +21,7 @@ import Accordion, { AccordionItem, AccordionSkeleton } from '../Accordion';
 - [References](#references)
 - [Feedback](#feedback)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
 
 ## Overview
 
@@ -33,9 +34,9 @@ You can configure the accordion item's heading using the `title` prop.
 Everything you pass in as a child of `AccordionItem` will be rendered in the
 accordion's panel.
 
-<Preview>
-  <Story id="components-accordion--accordion-story" />
-</Preview>
+<Canvas>
+  <Story of={AccordionStories.Default} />
+</Canvas>
 
 ## Skeleton state
 
@@ -43,13 +44,13 @@ You can use the `AccordionSkeleton` component to render a skeleton variant of an
 accordion. This is useful to display while content in your accordion is being
 fetched from an external resource like an API.
 
-<Preview>
-  <Story id="components-accordion--skeleton" />
-</Preview>
+<Canvas>
+  <Story of={AccordionStories.Skeleton} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 Additional props passed into `Accordion` will be forwarded along to the
 underlying accordion container.

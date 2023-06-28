@@ -1,6 +1,7 @@
-import { Story, Props, Source, Preview } from '@storybook/addon-docs';
+import { Story, ArgsTable, Canvas } from '@storybook/blocks';
 import Dropdown from '../Dropdown';
 import DropdownSkeleton from './Dropdown.Skeleton';
+import * as DropdownStories from './Dropdown.stories';
 
 # Dropdown
 
@@ -12,8 +13,8 @@ import DropdownSkeleton from './Dropdown.Skeleton';
 
 ## Table of Contents
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
 - [Overview](#overview)
   - [Inline dropdown](#inline-dropdown)
@@ -33,7 +34,7 @@ import DropdownSkeleton from './Dropdown.Skeleton';
 - [References](#references)
 - [Feedback](#feedback)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
 
 ## Overview
 
@@ -41,18 +42,18 @@ Dropdowns present a list of options from which a user can select one option, or
 several. A selected option can represent a value in a form, or can be used as an
 action to filter or sort existing content.
 
-<Preview>
-  <Story id="components-dropdown--default" />
-</Preview>
+<Canvas>
+  <Story of={DropdownStories.Default} />
+</Canvas>
 
 ### Inline dropdown
 
 You can place a `Dropdown` inline with other content by using the `inline`
 variant
 
-<Preview>
-  <Story id="components-dropdown--inline" />
-</Preview>
+<Canvas>
+  <Story of={DropdownStories.Inline} />
+</Canvas>
 
 ### Skeleton state
 
@@ -60,13 +61,13 @@ You can use the `DropdownSkeleton` component to render a skeleton variant of a
 `Dropdown`. This is useful to display on initial page load or when data needs to
 be fetched from an external API.
 
-<Preview>
-  <Story id="components-dropdown--skeleton" />
-</Preview>
+<Canvas>
+  <Story of={DropdownStories.Skeleton} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ### Dropdown `direction`
 

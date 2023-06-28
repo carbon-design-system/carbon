@@ -17,7 +17,7 @@ test.describe('FlexGrid', () => {
       test('auto columns @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FlexGrid',
-          id: 'components-flexgrid--auto-columns',
+          id: 'elements-flexgrid--auto-columns',
           theme,
         });
       });
@@ -25,7 +25,7 @@ test.describe('FlexGrid', () => {
       test('responsive grid @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FlexGrid',
-          id: 'components-flexgrid--responsive-grid',
+          id: 'elements-flexgrid--responsive-grid',
           theme,
         });
       });
@@ -33,7 +33,7 @@ test.describe('FlexGrid', () => {
       test('offset @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FlexGrid',
-          id: 'components-flexgrid--offset',
+          id: 'elements-flexgrid--offset',
           theme,
         });
       });
@@ -41,7 +41,7 @@ test.describe('FlexGrid', () => {
       test('condensed @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FlexGrid',
-          id: 'components-flexgrid--condensed',
+          id: 'elements-flexgrid--condensed',
           theme,
         });
       });
@@ -49,7 +49,7 @@ test.describe('FlexGrid', () => {
       test('condensed columns @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FlexGrid',
-          id: 'components-flexgrid--condensed-columns',
+          id: 'elements-flexgrid--condensed-columns',
           theme,
         });
       });
@@ -57,7 +57,7 @@ test.describe('FlexGrid', () => {
       test('narrow @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FlexGrid',
-          id: 'components-flexgrid--narrow',
+          id: 'elements-flexgrid--narrow',
           theme,
         });
       });
@@ -65,7 +65,7 @@ test.describe('FlexGrid', () => {
       test('narrow columns @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FlexGrid',
-          id: 'components-flexgrid--narrow-columns',
+          id: 'elements-flexgrid--narrow-columns',
           theme,
         });
       });
@@ -73,7 +73,7 @@ test.describe('FlexGrid', () => {
       test('full width @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FlexGrid',
-          id: 'components-flexgrid--full-width',
+          id: 'elements-flexgrid--full-width',
           theme,
         });
       });
@@ -81,7 +81,7 @@ test.describe('FlexGrid', () => {
       test('mixed grid modes @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FlexGrid',
-          id: 'components-flexgrid--mixed-grid-modes',
+          id: 'elements-flexgrid--mixed-grid-modes',
           theme,
         });
       });
@@ -91,7 +91,7 @@ test.describe('FlexGrid', () => {
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'FlexGrid',
-      id: 'components-flexgrid--auto-columns',
+      id: 'elements-flexgrid--auto-columns',
       globals: {
         theme: 'white',
       },
