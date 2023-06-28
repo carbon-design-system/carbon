@@ -22,7 +22,7 @@ test.describe('Modal @avt', () => {
     await expect(page).toHaveNoACViolations('Modal');
   });
 
-  test.only('default state - keyboard nav', async ({ page }) => {
+  test('default state - keyboard nav', async ({ page }) => {
     await visitStory(page, {
       component: 'Modal',
       id: 'components-modal--with-state-manager',
@@ -72,7 +72,7 @@ test.describe('Modal @avt', () => {
     await expect(page.locator('body')).toBeFocused();
   });
 
-  test.only('danger modal - keyboard nav', async ({ page }) => {
+  test('danger modal - keyboard nav', async ({ page }) => {
     await visitStory(page, {
       component: 'Modal',
       id: 'components-modal--danger-modal',
@@ -85,7 +85,7 @@ test.describe('Modal @avt', () => {
     await expect(page.getByRole('button', { name: 'Cancel' })).toBeFocused();
   });
 
-  test.only('default state, no interactive elements in body - keyboard nav', async ({
+  test('default state, no interactive elements in body - keyboard nav', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -100,7 +100,7 @@ test.describe('Modal @avt', () => {
     await expect(page.getByRole('button', { name: 'Add' })).toBeFocused();
   });
 
-  test.only('passive modal - keyboard nav', async ({ page }) => {
+  test('passive modal - keyboard nav', async ({ page }) => {
     await visitStory(page, {
       component: 'Modal',
       id: 'components-modal--passive-modal',
