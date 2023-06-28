@@ -22,7 +22,7 @@ const config = {
   ],
 
   // https://playwright.dev/docs/api/class-testconfig#test-config-test-match
-  testMatch: /.*-test.e2e\.m?js$/,
+  testMatch: /.*-test(.avt|.vrt)?.e2e\.m?js$/,
 
   // https://playwright.dev/docs/api/class-testconfig#test-config-timeout
   timeout: 1000 * 30,
