@@ -43,7 +43,7 @@ test.describe('Modal @avt', () => {
       page.getByRole('textbox', { name: 'Domain name' })
     ).toBeFocused();
 
-    // Instead of testing the entirety of what's inside the modal, instead we'll skip to the cancel button
+    // Instead of testing the entirety of what's inside the modal, we'll skip to the cancel button
     page.getByRole('button', { name: 'Cancel' }).focus();
     await expect(page.getByRole('button', { name: 'Cancel' })).toBeFocused();
     await page.keyboard.press('Tab');
