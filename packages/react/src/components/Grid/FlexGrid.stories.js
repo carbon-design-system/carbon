@@ -316,12 +316,18 @@ export const Playground = (args) => (
   </FlexGrid>
 );
 
+Playground.args = {
+  as: 'div',
+  fullWidth: false,
+  narrow: false,
+  condensed: false,
+};
+
 Playground.argTypes = {
   as: {
     control: {
       type: 'text',
     },
-    defaultValue: 'div',
   },
   children: {
     control: false,
@@ -333,18 +339,15 @@ Playground.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   narrow: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   condensed: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
 };

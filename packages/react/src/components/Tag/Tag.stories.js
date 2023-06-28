@@ -60,6 +60,13 @@ export const Playground = (args) => {
   return <Tag {...args}>{'Tag content'}</Tag>;
 };
 
+Playground.args = {
+  disabled: false,
+  filter: false,
+  size: 'md',
+  title: 'Clear filter',
+};
+
 Playground.argTypes = {
   children: {
     control: false,
@@ -71,13 +78,11 @@ Playground.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   filter: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   id: {
     control: false,
@@ -86,7 +91,6 @@ Playground.argTypes = {
     control: false,
   },
   size: {
-    defaultValue: 'md',
     options: ['sm', 'md'],
     control: {
       type: 'select',
@@ -96,7 +100,6 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue: 'Clear filter',
   },
   type: {
     options: [

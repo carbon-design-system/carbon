@@ -70,13 +70,11 @@ Playground.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   enableCounter: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   helperText: {
     control: {
@@ -87,7 +85,6 @@ Playground.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   id: {
     control: false,
@@ -96,14 +93,11 @@ Playground.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   invalidText: {
     control: {
       type: 'text',
     },
-    defaultValue:
-      'Error message that is really long can wrap to more lines but should not be excessively long.',
   },
   labelText: {
     control: {
@@ -119,25 +113,21 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue: '',
   },
   rows: {
     control: {
       type: 'number',
     },
-    defaultValue: 4,
   },
   warn: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   warnText: {
     control: {
       type: 'text',
     },
-    defaultValue: 'This is a warning message.',
   },
   value: {
     control: {
@@ -151,4 +141,13 @@ Playground.args = {
   helperText: 'TextArea helper text',
   labelText: 'TextArea label',
   maxCount: 500,
+  disabled: false,
+  hideLabel: false,
+  invalid: false,
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  placeholder: '',
+  rows: 4,
+  warn: false,
+  warnText: 'This is a warning message.',
 };
