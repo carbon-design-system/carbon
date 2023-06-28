@@ -247,10 +247,13 @@ export const Playground = (args) => (
   </TreeView>
 );
 
+Playground.args = {
+  hideLabel: false,
+  multiselect: false,
+};
+
 Playground.argTypes = {
   active: { control: { type: 'text' } },
-  hideLabel: { defaultValue: false },
-  multiselect: { defaultValue: false },
   size: {
     options: ['xs', 'sm'],
     control: { type: 'select' },
