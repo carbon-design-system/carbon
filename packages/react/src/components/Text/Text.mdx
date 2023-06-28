@@ -1,13 +1,9 @@
-import { Preview, Props, Story } from '@storybook/addon-docs';
+import { Canvas, ArgsTable, Story } from '@storybook/blocks';
+import * as TextStories from './Text-story';
 
 # Text
 
 [Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Text)
-
-<!-- &nbsp;|&nbsp;
-[Usage guidelines](https://www.carbondesignsystem.com/components/select/usage)
-&nbsp;|&nbsp;
-[Accessibility](https://www.carbondesignsystem.com/components/select/accessibility) -->
 
 ## Table of Contents
 
@@ -34,18 +30,18 @@ direction independently of text direction.
 `Text` can be used for applying the correct `dir` attribute on a particular text
 node based on the `TextDirection`, defaulting to `auto`.
 
-<Preview>
-  <Story id="experimental-unstable-text--default" />
-</Preview>
+<Canvas>
+  <Story of={TextStories.Default} />
+</Canvas>
 
 ## Layout Direction
 
 `LayoutDirection` can be used for setting the layout direction in a part of an
 application.
 
-<Preview>
-  <Story id="experimental-unstable-text--layout-and-text" />
-</Preview>
+<Canvas>
+  <Story of={TextStories.LayoutAndText} />
+</Canvas>
 
 ## Text Direction
 
@@ -53,9 +49,9 @@ application.
 application. It allows you to force the text direction of any particular text in
 the sub-tree.
 
-<Preview>
-  <Story id="experimental-unstable-text--set-text-direction" />
-</Preview>
+<Canvas>
+  <Story of={TextStories.SetTextDirection} />
+</Canvas>
 
 ## Usage Examples
 
@@ -70,13 +66,13 @@ transformation functions that return nodes, like `itemToElement` on `Dropdown`.
 The Usage Examples story below provides some examples of how to do this with
 various components.
 
-<Preview>
-  <Story id="experimental-unstable-text--usage-examples" />
-</Preview>
+<Canvas>
+  <Story of={TextStories.UsageExamples} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ## Feedback
 

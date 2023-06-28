@@ -91,7 +91,6 @@ Playground.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   messageText: {
     control: {
@@ -103,4 +102,5 @@ Playground.argTypes = {
 Playground.args = {
   legendId: 'form-group-1',
   legendText: 'FormGroup Legend',
+  message: false,
 };

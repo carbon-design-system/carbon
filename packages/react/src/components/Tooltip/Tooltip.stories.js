@@ -105,9 +105,15 @@ const PlaygroundStory = (props) => {
 
 export const Playground = PlaygroundStory.bind({});
 
+Playground.args = {
+  align: 'bottom',
+  closeOnActivation: false,
+  defaultOpen: true,
+  label: 'Custom label',
+};
+
 Playground.argTypes = {
   align: {
-    defaultValue: 'bottom',
     options: [
       'top',
       'top-left',
@@ -129,17 +135,10 @@ Playground.argTypes = {
       type: 'select',
     },
   },
-  closeOnActivation: {
-    defaultValue: false,
-  },
-  defaultOpen: {
-    defaultValue: true,
-  },
   label: {
     control: {
       type: 'text',
     },
-    defaultValue: 'Custom label',
   },
   description: {
     control: {

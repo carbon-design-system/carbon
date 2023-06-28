@@ -1,4 +1,5 @@
-import { Story, Props, Preview } from '@storybook/addon-docs';
+import { Story, ArgsTable, Canvas } from '@storybook/blocks';
+import * as SkeletonPlaceholderStories from './SkeletonPlaceholder.stories';
 
 # SkeletonPlaceholder
 
@@ -10,13 +11,13 @@ import { Story, Props, Preview } from '@storybook/addon-docs';
 
 ## Overview
 
-<Preview>
-  <Story id="components-skeleton-skeletonplaceholder--default" />
-</Preview>
+<Canvas>
+  <Story of={SkeletonPlaceholderStories.Default} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ## Feedback
 

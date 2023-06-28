@@ -89,30 +89,38 @@ export const Playground = (args) => (
   </div>
 );
 
+Playground.args = {
+  invalid: false,
+  invalidText: 'invalid selection',
+  disabled: false,
+  hideLabel: false,
+  label: 'This is an example label',
+  warn: false,
+  warnText: 'please notice the warning',
+  titleText: 'This is an example title',
+  type: 'default',
+};
+
 Playground.argTypes = {
   invalid: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   invalidText: {
     control: {
       type: 'text',
     },
-    defaultValue: 'invalid selection',
   },
   disabled: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   hideLabel: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   helperText: {
     control: {
@@ -123,25 +131,21 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue: 'This is an example label',
   },
   warn: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   warnText: {
     control: {
       type: 'text',
     },
-    defaultValue: 'please notice the warning',
   },
   titleText: {
     control: {
       type: 'text',
     },
-    defaultValue: 'This is an example title',
   },
   size: {
     options: ['sm', 'md', 'lg'],
@@ -150,7 +154,6 @@ Playground.argTypes = {
   type: {
     control: { type: 'select' },
     options: ['default', 'inline'],
-    defaultValue: 'default',
   },
 };
 
