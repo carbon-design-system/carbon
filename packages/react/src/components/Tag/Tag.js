@@ -39,6 +39,7 @@ const Tag = ({
   disabled,
   onClose,
   size,
+  as: BaseComponent,
   ...other
 }) => {
   const prefix = usePrefix();
@@ -59,8 +60,9 @@ const Tag = ({
   };
 
   if (filter) {
+    const ComponentTag = BaseComponent ?? 'div';
     return (
-      <div className={tagClasses} id={tagId} {...other}>
+      <ComponentTag className={tagClasses} id={tagId} {...other}>
         <span
           className={`${prefix}--tag__label`}
           title={typeof children === 'string' ? children : null}>
@@ -75,11 +77,11 @@ const Tag = ({
           title={title}>
           <Close />
         </button>
-      </div>
+      </ComponentTag>
     );
   }
 
-  const ComponentTag = other.onClick ? 'button' : 'div';
+  const ComponentTag = BaseComponent ?? (other.onClick ? 'button' : 'div');
 
   return (
     <ComponentTag
@@ -102,6 +104,12 @@ const Tag = ({
 };
 
 Tag.propTypes = {
+  /**
+   * Provide an alternative tag or component to use instead of the default
+   * wrapping element
+   */
+  as: PropTypes.elementType,
+
   /**
    * Provide content to be rendered inside of a <Tag>
    */
