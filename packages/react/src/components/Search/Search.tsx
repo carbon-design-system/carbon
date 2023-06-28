@@ -206,7 +206,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
       clearInput();
 
       // ExpandableSearch closes on escape when isExpanded, focus search activation button
-      if (isExpanded) {
+      if (onExpand && isExpanded) {
         expandButtonRef.current?.focus();
       }
     }
@@ -232,7 +232,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
         className={`${prefix}--search-magnifier`}
         onClick={onExpand}
         onKeyDown={handleExpandButtonKeyDown}
-        tabIndex={onExpand ? -1 : undefined}
+        tabIndex={onExpand && !isExpanded ? 1 : -1}
         ref={expandButtonRef}>
         <CustomSearchIcon icon={renderIcon} />
       </div>
@@ -253,6 +253,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
         placeholder={placeholder}
         type={type}
         value={value}
+        tabIndex={onExpand && !isExpanded ? -1 : undefined}
       />
       <button
         aria-label={closeButtonLabelText}

@@ -16,7 +16,6 @@ function ExpandableSearch({
   onBlur,
   onChange,
   onExpand,
-  onFocus,
   onKeyDown,
   defaultValue,
   isExpanded,
@@ -26,12 +25,6 @@ function ExpandableSearch({
   const [hasContent, setHasContent] = useState(defaultValue ? true : false);
   const searchRef = useRef<HTMLInputElement>(null);
   const prefix = usePrefix();
-
-  function handleFocus() {
-    if (!expanded) {
-      setExpanded(true);
-    }
-  }
 
   function handleBlur(evt) {
     const relatedTargetIsAllowed =
@@ -48,6 +41,7 @@ function ExpandableSearch({
   }
 
   function handleExpand() {
+    setExpanded(true)
     searchRef.current?.focus?.();
   }
 
@@ -73,7 +67,6 @@ function ExpandableSearch({
       isExpanded={expanded}
       ref={searchRef}
       className={classes}
-      onFocus={composeEventHandlers([onFocus, handleFocus])}
       onBlur={composeEventHandlers([onBlur, handleBlur])}
       onChange={composeEventHandlers([onChange, handleChange])}
       onExpand={composeEventHandlers([onExpand, handleExpand])}
