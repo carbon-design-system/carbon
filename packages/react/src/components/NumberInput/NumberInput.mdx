@@ -1,4 +1,5 @@
-import { Props, Preview, Story } from '@storybook/addon-docs';
+import { ArgsTable, Canvas, Story } from '@storybook/blocks';
+import * as NumberInputStories from './NumberInput.stories';
 
 # NumberInput
 
@@ -17,19 +18,19 @@ import { Props, Preview, Story } from '@storybook/addon-docs';
 
 ## Overview
 
-<Preview>
-  <Story id="components-numberinput--playground" />
-</Preview>
+<Canvas>
+  <Story of={NumberInputStories.Playground} />
+</Canvas>
 
 ## Skeleton State
 
-<Preview>
-  <Story id="components-numberinput--skeleton" />
-</Preview>
+<Canvas>
+  <Story of={NumberInputStories.Skeleton} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ## Feedback
 

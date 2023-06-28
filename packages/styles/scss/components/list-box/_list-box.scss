@@ -510,6 +510,7 @@ $list-box-menu-width: rem(300px);
     z-index: z('dropdown');
     right: 0;
     left: 0;
+    display: none;
     width: $list-box-width;
     background-color: $layer;
     overflow-y: auto;
@@ -521,11 +522,12 @@ $list-box-menu-width: rem(300px);
     }
   }
 
-  .#{$prefix}--list-box
-    .#{$prefix}--list-box__field[aria-expanded='false']
-    + .#{$prefix}--list-box__menu {
-    display: none;
-    max-height: 0;
+  .#{$prefix}--list-box .#{$prefix}--list-box__field[aria-expanded='false'] {
+    .#{$prefix}--list-box__menu {
+      display: none;
+      max-height: 0;
+      visibility: hidden;
+    }
   }
 
   .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
@@ -768,8 +770,8 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__menu-item--highlighted {
-    border-color: transparent;
-    background-color: $layer-selected;
+    @include focus-outline('outline');
+
     color: $text-primary;
   }
 

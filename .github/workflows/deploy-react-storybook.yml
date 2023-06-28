@@ -40,7 +40,7 @@ jobs:
       - name: Build React storybook
         run: |
           cd packages/react
-          yarn build-storybook
+          yarn storybook:build
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact

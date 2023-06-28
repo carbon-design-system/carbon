@@ -49,6 +49,11 @@ export const Playground = (args) => {
   );
 };
 
+Playground.args = {
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+};
+
 Playground.argTypes = {
   className: {
     table: {
@@ -100,8 +105,6 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue:
-      'Warning message that is really long can wrap to more lines but should not be excessively long.',
   },
 };
 

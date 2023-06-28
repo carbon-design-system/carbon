@@ -12,12 +12,12 @@ import { renderToString } from 'react-dom/server';
 import { useId } from '../useId';
 
 describe('useId SSR', () => {
-  it('should not generate an id on the server', () => {
+  it('should generate an id on the server', () => {
     function Test() {
       const id = useId('test');
       return <span id={id}>test</span>;
     }
     const view = renderToString(<Test />);
-    expect(view.indexOf('id="')).toBe(-1);
+    expect(view.indexOf('id="')).toBe(6);
   });
 });
