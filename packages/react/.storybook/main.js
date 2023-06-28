@@ -13,6 +13,8 @@ const glob = require('fast-glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
+// We can't use .mdx files in conjuction with `storyStoreV7`, which we are using to preload stories for CI purposes only.
+// MDX files are fine to ignore in CI mode since they don't make a difference for VRT testing
 const storyGlobs =
   process.env.STORYBOOK_STORE_7 === 'false'
     ? [
