@@ -53,7 +53,7 @@ export function matches(event, keysToMatch) {
  *   }
  * }
  *
- * @param {React.KeyboardEvent|Event|number|string} eventOrCode
+ * @param {React.SyntheticEvent|Event|number|string} eventOrCode
  * @param {Key} key
  * @returns {boolean}
  */
