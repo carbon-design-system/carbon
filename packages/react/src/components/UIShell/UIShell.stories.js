@@ -659,9 +659,13 @@ HeaderBaseWActionsAndSwitcher.storyName = 'Header Base w/ Actions and Switcher';
 
 HeaderBaseWActionsAndSwitcher.argTypes = {
   isSideNavExpanded: {
-    defaultValue: true,
     description: 'Optional prop to display the HeaderPanel.',
+    control: false,
   },
+};
+
+HeaderBaseWActionsAndSwitcher.args = {
+  isSideNavExpanded: true,
 };
 
 export const FixedSideNav = () => (
