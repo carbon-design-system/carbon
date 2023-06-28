@@ -176,6 +176,15 @@ export const Playground = (args) => {
   );
 };
 
+Playground.args = {
+  labelText: 'Time',
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  placeholder: 'hh:mm',
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+};
+
 Playground.argTypes = {
   children: {
     table: {
@@ -192,26 +201,20 @@ Playground.argTypes = {
   },
   labelText: {
     control: { type: 'string' },
-    defaultValue: 'Time',
   },
   invalid: {
     control: { type: 'boolean' },
   },
   invalidText: {
     control: { type: 'text' },
-    defaultValue:
-      'Error message that is really long can wrap to more lines but should not be excessively long.',
   },
   placeholder: {
     control: { type: 'text' },
-    defaultValue: 'hh:mm',
   },
   warn: {
     control: { type: 'boolean' },
   },
   warnText: {
     control: { type: 'text' },
-    defaultValue:
-      'Warning message that is really long can wrap to more lines but should not be excessively long.',
   },
 };

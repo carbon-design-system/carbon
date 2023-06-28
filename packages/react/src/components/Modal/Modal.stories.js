@@ -282,6 +282,10 @@ export const Playground = ({ numberOfButtons, ...args }) => {
   );
 };
 
+Playground.args = {
+  numberOfButtons: 'Two (2)',
+};
+
 Playground.argTypes = {
   children: {
     table: {
@@ -306,7 +310,6 @@ Playground.argTypes = {
   },
   numberOfButtons: {
     description: 'Count of Footer Buttons',
-    defaultValue: 'Two (2)',
     options: Object.keys(buttons),
     mapping: buttons,
     control: {

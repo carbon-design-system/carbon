@@ -75,11 +75,9 @@ Playground.argTypes = {
       disable: true,
     },
   },
-  label: {
-    defaultValue: 'Primary action',
-  },
 };
 
 Playground.args = {
   onClick: action('onClick'),
+  label: 'Primary action',
 };

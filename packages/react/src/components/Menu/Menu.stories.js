@@ -40,7 +40,7 @@ export const Playground = (args) => {
   const selectableOnChange = action('onChange (MenuItemSelectable)');
   const radioOnChange = action('onChange (MenuItemRadioGroup)');
 
-  const target = document.getElementById('root');
+  const target = document.getElementById('storybook-root');
 
   return (
     <Menu {...args} target={target}>
@@ -83,12 +83,7 @@ export const Playground = (args) => {
   );
 };
 
-Playground.argTypes = {
-  open: {
-    defaultValue: true,
-  },
-};
-
 Playground.args = {
   onClose: action('onClose'),
+  open: true,
 };
