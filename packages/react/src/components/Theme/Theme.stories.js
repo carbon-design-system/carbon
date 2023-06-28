@@ -39,9 +39,9 @@ export default {
         disable: true,
       },
     },
-    theme: {
-      defaultValue: 'g10',
-    },
+  },
+  args: {
+    theme: 'g10',
   },
 };
 

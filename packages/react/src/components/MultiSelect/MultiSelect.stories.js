@@ -124,6 +124,22 @@ export const Playground = (args) => {
   );
 };
 
+Playground.args = {
+  size: 'md',
+  type: 'default',
+  titleText: 'This is a MultiSelect Title',
+  disabled: false,
+  hideLabel: false,
+  invalid: false,
+  warn: false,
+  warnText: 'whoopsie!',
+  invalidText: 'whoopsie!',
+  label: 'This is a label',
+  clearSelectionDescription: 'Total items selected: ',
+  useTitleInItem: 'this is the item title',
+  clearSelectionText: 'To clear selection, press Delete or Backspace,',
+};
+
 Playground.argTypes = {
   selectionFeedback: {
     options: ['top', 'fixed', 'top-after-reopen'],
@@ -132,7 +148,6 @@ Playground.argTypes = {
   size: {
     options: ['sm', 'md', 'lg'],
     control: { type: 'select' },
-    defaultValue: 'md',
   },
   direction: {
     options: ['top', 'bottom'],
@@ -141,73 +156,61 @@ Playground.argTypes = {
   type: {
     options: ['inline', 'default'],
     control: { type: 'radio' },
-    defaultValue: 'default',
   },
   titleText: {
     control: {
       type: 'text',
     },
-    defaultValue: 'This is a MultiSelect Title',
   },
   disabled: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   hideLabel: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   invalid: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   warn: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   warnText: {
     control: {
       type: 'text',
     },
-    defaultValue: 'whoopsie!',
   },
   invalidText: {
     control: {
       type: 'text',
     },
-    defaultValue: 'whoopsie!',
   },
   label: {
     control: {
       type: 'text',
     },
-    defaultValue: 'This is a label',
   },
   clearSelectionDescription: {
     control: {
       type: 'text',
     },
-    defaultValue: 'Total items selected: ',
   },
   useTitleInItem: {
     control: {
       type: 'text',
     },
-    defaultValue: 'this is the item title',
   },
   clearSelectionText: {
     control: {
       type: 'text',
     },
-    defaultValue: 'To clear selection, press Delete or Backspace,',
   },
   readOnly: {
     control: { type: 'boolean' },

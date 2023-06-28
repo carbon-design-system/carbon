@@ -1,4 +1,5 @@
-import { Story, Props, Source, Preview } from '@storybook/addon-docs';
+import { Story, ArgsTable, Canvas } from '@storybook/blocks';
+import * as OverflowMenuStories from './OverflowMenu.stories';
 
 # OverflowMenu
 
@@ -15,9 +16,9 @@ import { Story, Props, Source, Preview } from '@storybook/addon-docs';
 The overflow menu component is a clickable element that contains additional
 options that are available to the user, but there is a space constraint.
 
-<Preview>
-  <Story id="components-overflowmenu--default" />
-</Preview>
+<Canvas>
+  <Story of={OverflowMenuStories.Default} />
+</Canvas>
 
 ### `data-floating-menu-container`
 
@@ -28,9 +29,9 @@ this attribute is found, the menu will be placed on `document.body`.
 
 ## Render Custom Icon
 
-<Preview>
-  <Story id="components-overflowmenu--render-custom-icon" />
-</Preview>
+<Canvas>
+  <Story of={OverflowMenuStories.RenderCustomIcon} />
+</Canvas>
 
 ## Customizing the tooltip
 
@@ -50,7 +51,7 @@ To modify the tooltip's alignment, you may make use of the `align` property as d
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ## Feedback
 

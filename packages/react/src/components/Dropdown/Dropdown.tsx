@@ -14,7 +14,13 @@ import React, {
   MouseEvent,
   ReactNode,
 } from 'react';
-import { useSelect, UseSelectProps, UseSelectState } from 'downshift';
+import {
+  useSelect,
+  UseSelectInterface,
+  UseSelectProps,
+  UseSelectState,
+  UseSelectStateChangeTypes,
+} from 'downshift';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import {
@@ -35,6 +41,16 @@ import { ReactAttr } from '../../types/common';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const getInstanceId = setupGetInstanceId();
+
+const {
+  MenuBlur,
+  MenuKeyDownArrowDown,
+  MenuKeyDownArrowUp,
+  MenuKeyDownEscape,
+  ToggleButtonClick,
+} = useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
+  ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
+};
 
 const defaultItemToString = <ItemType,>(item?: ItemType): string => {
   if (typeof item === 'string') {
@@ -242,15 +258,35 @@ const Dropdown = React.forwardRef(
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
     const prefix = usePrefix();
+    const [highlightedIndex, setHighlightedIndex] = useState();
     const { isFluid } = useContext(FormContext);
     const selectProps: UseSelectProps<ItemType> = {
       ...downshiftProps,
       items,
       itemToString,
+      highlightedIndex,
       initialSelectedItem,
       onSelectedItemChange,
+      onStateChange,
     };
     const { current: dropdownInstanceId } = useRef(getInstanceId());
+
+    function onStateChange(changes) {
+      const { type } = changes;
+      switch (type) {
+        case MenuKeyDownArrowDown:
+        case MenuKeyDownArrowUp:
+          setHighlightedIndex(changes.highlightedIndex);
+          break;
+        case MenuBlur:
+        case MenuKeyDownEscape:
+          setHighlightedIndex(changes.highlightedIndex);
+          break;
+        case ToggleButtonClick:
+          setHighlightedIndex(changes.highlightedIndex);
+          break;
+      }
+    }
 
     // only set selectedItem if the prop is defined. Setting if it is undefined
     // will overwrite default selected items from useSelect
@@ -264,7 +300,6 @@ const Dropdown = React.forwardRef(
       getLabelProps,
       getMenuProps,
       getItemProps,
-      highlightedIndex,
       selectedItem,
     } = useSelect(selectProps);
     const inline = type === 'inline';
@@ -364,7 +399,6 @@ const Dropdown = React.forwardRef(
         }
       : {
           onKeyDown: (evt: React.KeyboardEvent<HTMLButtonElement>) => {
-            console.log('typing should be false', isTyping);
             if (
               evt.code !== 'Space' ||
               !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
@@ -376,7 +410,6 @@ const Dropdown = React.forwardRef(
               (isTyping && evt.code === 'Space') ||
               !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
             ) {
-              console.log(evt.key);
               if (evt.code === 'Space') {
                 evt.preventDefault();
                 return;
@@ -476,9 +509,7 @@ const Dropdown = React.forwardRef(
                   <ListBox.MenuItem
                     key={itemProps.id}
                     isActive={selectedItem === item}
-                    isHighlighted={
-                      highlightedIndex === index || selectedItem === item
-                    }
+                    isHighlighted={highlightedIndex === index}
                     title={title}
                     ref={{
                       menuItemOptionRef: menuItemOptionRefs.current[index],
