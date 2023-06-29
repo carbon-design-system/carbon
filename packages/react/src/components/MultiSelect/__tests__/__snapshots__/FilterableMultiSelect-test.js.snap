@@ -80,7 +80,7 @@ exports[`FilterableMultiSelect should render 1`] = `
       suppressRefError={false}
     >
       <div
-        className="bx--multi-select__wrapper bx--list-box__wrapper"
+        className="bx--multi-select__wrapper bx--multi-select--filterable__wrapper bx--list-box__wrapper"
       >
         <ListBox
           className="bx--multi-select bx--combo-box bx--multi-select--filterable"

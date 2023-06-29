@@ -85,7 +85,7 @@
     > .#{$prefix}--text-area--invalid:not(:focus),
   .#{$prefix}--select-input__wrapper[data-invalid]
     .#{$prefix}--select-input:not(:focus),
-  .#{$prefix}--list-box[data-invalid]:not(:focus),
+  .#{$prefix}--list-box[data-invalid]:not(.#{$prefix}--multi-select--invalid--focused),
   .#{$prefix}--combo-box[data-invalid] .#{$prefix}--text-input:not(:focus) {
     @include focus-outline('invalid');
   }
