@@ -55,13 +55,13 @@ export const _WithLayer = () => (
 export const IconOnly = (args) => (
   <ContentSwitcher {...args}>
     <IconSwitch name="one" text="Table of Contents">
-      <TableOfContents />
+      <TableOfContents aria-label="Table of Contents Icon" />
     </IconSwitch>
     <IconSwitch name="two" text="Workspace Test">
-      <Workspace />
+      <Workspace aria-label="Workspace Icon" />
     </IconSwitch>
     <IconSwitch name="three" text="View Mode">
-      <ViewMode_2 />
+      <ViewMode_2 aria-label="View Mode Icon" />
     </IconSwitch>
   </ContentSwitcher>
 );
@@ -70,13 +70,13 @@ export const IconOnlyWithLayer = (args) => (
   <WithLayer>
     <ContentSwitcher {...args}>
       <IconSwitch name="one" text="Table of Contents">
-        <TableOfContents />
+        <TableOfContents aria-label="Table of Contents Icon" />
       </IconSwitch>
       <IconSwitch name="two" text="Workspace Test">
-        <Workspace />
+        <Workspace aria-label="Workspace Icon" />
       </IconSwitch>
       <IconSwitch name="three" text="View Mode">
-        <ViewMode_2 />
+        <ViewMode_2 aria-label="View Mode Icon" />
       </IconSwitch>
     </ContentSwitcher>
   </WithLayer>
