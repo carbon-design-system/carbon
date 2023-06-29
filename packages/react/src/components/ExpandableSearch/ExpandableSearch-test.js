@@ -133,8 +133,6 @@ describe('ExpandableSearch', () => {
     });
 
     it('closes and clears value on escape', async () => {
-      // Render a button next to the search so that there is another focusable element
-      // next to the expandable search to receive focus.
       const { container } = render(
         <ExpandableSearch labelText="test-search" />
       );
