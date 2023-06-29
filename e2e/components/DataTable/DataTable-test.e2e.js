@@ -30,18 +30,18 @@ test.describe('DataTable', () => {
         });
       });
 
-      test('filtering - usage @vrt', async ({ page }) => {
+      test('filtering - default @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'DataTable',
-          id: 'components-datatable-filtering--usage',
+          id: 'components-datatable-filtering--default',
           theme,
         });
       });
 
-      test('selection - usage @vrt', async ({ page }) => {
+      test('selection - default @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'DataTable',
-          id: 'components-datatable-selection--usage',
+          id: 'components-datatable-selection--default',
           theme,
         });
       });
@@ -62,18 +62,18 @@ test.describe('DataTable', () => {
         });
       });
 
-      test('sorting - usage @vrt', async ({ page }) => {
+      test('sorting - default @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'DataTable',
-          id: 'components-datatable-sorting--usage',
+          id: 'components-datatable-sorting--default',
           theme,
         });
       });
 
-      test('toolbar - default toolbar @vrt', async ({ page }) => {
+      test('toolbar - default @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'DataTable',
-          id: 'components-datatable-toolbar--default-toolbar',
+          id: 'components-datatable-toolbar--default',
           theme,
         });
       });
@@ -102,18 +102,18 @@ test.describe('DataTable', () => {
         });
       });
 
-      test('dynamic - example @vrt', async ({ page }) => {
+      test('dynamic - default @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'DataTable',
-          id: 'components-datatable-dynamic--example',
+          id: 'components-datatable-dynamic--default',
           theme,
         });
       });
 
-      test('expansion - usage @vrt', async ({ page }) => {
+      test('expansion - default @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'DataTable',
-          id: 'components-datatable-expansion--usage',
+          id: 'components-datatable-expansion--default',
           theme,
         });
       });

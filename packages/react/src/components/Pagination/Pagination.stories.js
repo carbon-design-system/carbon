@@ -101,6 +101,22 @@ PaginationWithCustomPageSizesLabel.storyName =
 
 export const Playground = (args) => <Pagination {...args} />;
 
+Playground.args = {
+  backwardText: 'Previous page',
+  forwardText: 'Next page',
+  disabled: false,
+  isLastPage: false,
+  itemsPerPageText: 'Items per page:',
+  page: 1,
+  pageInputDisabled: false,
+  pageSize: 10,
+  pageSizes: [10, 20, 30, 40, 50],
+  pageNumberText: 'Page Number',
+  pagesUnknown: false,
+  pageSizeInputDisabled: false,
+  totalItems: 103,
+};
+
 Playground.argTypes = {
   className: {
     control: false,
@@ -115,73 +131,61 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue: 'Previous page',
   },
   forwardText: {
     control: {
       type: 'text',
     },
-    defaultValue: 'Next page',
   },
   disabled: {
     control: {
       type: 'boolean',
     },
-    defaultValue: 'false',
   },
   isLastPage: {
     control: {
       type: 'boolean',
     },
-    defaultValue: 'false',
   },
   itemsPerPageText: {
     control: {
       type: 'text',
     },
-    defaultValue: 'Items per page:',
   },
   page: {
     control: {
       type: 'number',
     },
-    defaultValue: 1,
   },
   pageInputDisabled: {
     control: {
       type: 'boolean',
     },
-    defaultValue: 'false',
   },
   pageSize: {
     control: {
       type: 'number',
     },
-    defaultValue: 10,
   },
   pageSizes: {
     control: {
       type: 'array',
     },
-    defaultValue: [10, 20, 30, 40, 50],
   },
   pageNumberText: {
     control: {
       type: 'text',
     },
-    defaultValue: 'Page Number',
   },
   pagesUnknown: {
     control: {
       type: 'boolean',
     },
-    defaultValue: 'false',
   },
   pageSizeInputDisabled: {
     control: {
       type: 'boolean',
     },
-    defaultValue: 'false',
   },
   size: {
     options: ['sm', 'md', 'lg'],
@@ -191,6 +195,5 @@ Playground.argTypes = {
     control: {
       type: 'number',
     },
-    defaultValue: 103,
   },
 };

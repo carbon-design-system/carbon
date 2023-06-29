@@ -53,6 +53,12 @@ export const Playground = (args) => (
   </OverflowMenu>
 );
 
+Playground.args = {
+  flipped: false,
+  focusTrap: false,
+  open: false,
+};
+
 Playground.argTypes = {
   ariaLabel: {
     table: {
@@ -78,13 +84,11 @@ Playground.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   focusTrap: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   iconClass: {
     table: {
@@ -123,7 +127,6 @@ Playground.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   renderIcon: {
     table: {
