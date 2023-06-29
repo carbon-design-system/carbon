@@ -221,7 +221,7 @@ const parameters = {
         return titleA.localeCompare(titleB);
       }
 
-      // To story the stories, we first build up a list of matches based on
+      // To sort the stories, we first build up a list of matches based on
       // keywords. Each keyword has a specific weight that will be used to
       // determine order later on.
       const UNKNOWN_KEYWORD = 4;
