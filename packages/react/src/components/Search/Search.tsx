@@ -233,7 +233,9 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
         onClick={onExpand}
         onKeyDown={handleExpandButtonKeyDown}
         tabIndex={onExpand && !isExpanded ? 1 : -1}
-        ref={expandButtonRef}>
+        ref={expandButtonRef}
+        aria-expanded={onExpand && isExpanded ? true : undefined}
+        aria-controls={onExpand ? uniqueId : undefined}>
         <CustomSearchIcon icon={renderIcon} />
       </div>
       <label id={searchId} htmlFor={uniqueId} className={`${prefix}--label`}>
