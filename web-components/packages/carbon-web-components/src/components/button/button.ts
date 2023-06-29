@@ -118,8 +118,8 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
   /**
    * Specify an optional className to be added to your Button
    */
-  @property({ reflect: true, attribute: 'class-name' })
-  className;
+  @property({ reflect: true, attribute: 'button-class-name' })
+  buttonClassName;
 
   /**
    * Specify the message read by screen readers for the danger button variant
@@ -242,7 +242,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
   render() {
     const {
       autofocus,
-      className,
+      buttonClassName,
       dangerDescriptor,
       disabled,
       download,
@@ -277,9 +277,9 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
       [`${prefix}--btn--selected`]: isSelected && kind === 'ghost',
     };
 
-    if (className) {
+    if (buttonClassName) {
       const outputObject = {};
-      className?.split(' ').forEach((element) => {
+      buttonClassName?.split(' ').forEach((element) => {
         outputObject[element] = true;
       });
       defaultClasses = outputObject;
