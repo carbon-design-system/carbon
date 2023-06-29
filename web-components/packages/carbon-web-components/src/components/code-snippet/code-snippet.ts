@@ -360,7 +360,7 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
       // Ensures no extra whitespace text node
       // prettier-ignore
       return html`
-        <cds-copy class-name="${classes}" @click="${handleCopyClick}">
+        <cds-copy button-class-name="${classes}" @click="${handleCopyClick}">
           <code slot="icon"><slot></slot></code>
           <span slot="tooltip-content"><slot name="button-description"></slot> </span>
         </cds-copy>
@@ -430,7 +430,7 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
         : html`
             <cds-copy-button
               ?disabled=${disabled}
-              class-name=${disabledCopyButtonClasses}
+              button-class-name=${disabledCopyButtonClasses}
               feedback=${feedback}
               feedback-timeout=${feedbackTimeout}
               @click="${handleCopyClick}">
@@ -442,7 +442,7 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
             <cds-button
               kind="ghost"
               size="sm"
-              class-name=${expandButtonClass}
+              button-class-name=${expandButtonClass}
               ?disabled=${disabled}
               @click=${() => this._handleClickExpanded()}>
               <span class="${prefix}--snippet-btn--text">

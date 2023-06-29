@@ -220,8 +220,8 @@ class CDSTileGroup extends HostListenerMixin(LitElement) {
   /**
    * Provide an optional className to be applied to the component
    */
-  @property({ reflect: true, attribute: 'class-name' })
-  className;
+  @property({ reflect: true, attribute: 'fieldset-class-name' })
+  fieldsetClassName;
 
   /**
    * Specify whether the group is disabled
@@ -265,9 +265,9 @@ class CDSTileGroup extends HostListenerMixin(LitElement) {
   }
 
   render() {
-    const { className, disabled } = this;
+    const { fieldsetClassName, disabled } = this;
     return html`
-      <fieldset class="${className}" ?disabled=${disabled}>
+      <fieldset class="${fieldsetClassName}" ?disabled=${disabled}>
         <slot name="legend" class="${prefix}--label"></slot>
         <slot></slot>
       </fieldset>
