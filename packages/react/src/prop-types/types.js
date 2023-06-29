@@ -5,6 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/**
+ * @deprecated use ButtonKinds export from Button component instead
+ */
 export const ButtonKinds = [
   'primary',
   'secondary',

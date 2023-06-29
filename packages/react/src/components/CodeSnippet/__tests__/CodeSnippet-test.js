@@ -110,13 +110,13 @@ describe('CodeSnippet', () => {
   });
 
   it('should allow custom classes to be applied when passed in via className', () => {
-    const { container } = render(
+    render(
       <CodeSnippet type="inline" data-testid="code-5" className="custom-class">
         {inline}
       </CodeSnippet>
     );
-
-    expect(container.firstChild).toHaveClass('custom-class');
+    // note: outtermost component is a Tooltip
+    expect(screen.getByTestId('code-5')).toHaveClass('custom-class');
   });
 
   it('should allow hiding the copy button', () => {
@@ -126,7 +126,7 @@ describe('CodeSnippet', () => {
       </CodeSnippet>
     );
 
-    expect(document.querySelector('button')).not.toBeInTheDocument();
+    expect(screen.queryByRole('button')).not.toBeInTheDocument();
   });
 
   it('should set disabled on copy button if it is passed via props', () => {
@@ -136,7 +136,7 @@ describe('CodeSnippet', () => {
       </CodeSnippet>
     );
 
-    expect(document.querySelector('button')).toHaveAttribute('disabled');
+    expect(screen.getByRole('button')).toBeDisabled();
   });
 });
 
@@ -149,8 +149,7 @@ describe('CodeSnippet events', () => {
       </CodeSnippet>
     );
 
-    const button = document.querySelector('button');
-    await userEvent.click(button);
+    await userEvent.click(screen.getByRole('button'));
     expect(onClick).toHaveBeenCalled();
   });
 

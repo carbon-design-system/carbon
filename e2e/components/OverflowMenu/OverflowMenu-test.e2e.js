@@ -29,6 +29,22 @@ test.describe('OverflowMenu', () => {
           theme,
         });
       });
+
+      test('feature flags default @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'OverflowMenu',
+          id: 'experimental-feature-flags-overflowmenu--overflow-menu',
+          theme,
+        });
+      });
+
+      test('feature flags render custom icon @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'OverflowMenu',
+          id: 'experimental-feature-flags-overflowmenu--custom-icon',
+          theme,
+        });
+      });
     });
   });
 
@@ -36,6 +52,17 @@ test.describe('OverflowMenu', () => {
     await visitStory(page, {
       component: 'OverflowMenu',
       id: 'components-overflowmenu--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('OverflowMenu');
+  });
+
+  test('feature flag accessibility-checker @avt', async ({ page }) => {
+    await visitStory(page, {
+      component: 'OverflowMenu',
+      id: 'experimental-feature-flags-overflowmenu--overflow-menu',
       globals: {
         theme: 'white',
       },

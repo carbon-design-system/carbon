@@ -32,8 +32,20 @@
   }
 
   .#{$prefix}--time-picker__input {
+    position: relative;
     display: flex;
     flex-direction: column;
+  }
+
+  .#{$prefix}--time-picker__error__icon {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    display: flex;
+    height: 100%;
+    place-items: center;
+    // top/transform used to center invalid icon in IE11
+    transform: translateY(-50%);
   }
 
   .#{$prefix}--time-picker .#{$prefix}--select-input {
@@ -58,6 +70,10 @@
     &::placeholder {
       @include placeholder-colors;
     }
+  }
+
+  .#{$prefix}--time-picker__input-field-error {
+    width: 6.175rem;
   }
 
   // V11: Possibly deprecate

@@ -5,11 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Tabs, TabList, Tab, TabPanels, TabPanel, IconTab } from './Tabs';
 import TextInput from '../TextInput';
 import Checkbox from '../Checkbox';
 import Button from '../Button';
+import { Grid, Column } from '../Grid';
 import mdx from './Tabs.mdx';
 
 import TabsSkeleton from './Tabs.Skeleton';
@@ -70,6 +71,150 @@ export const Default = () => (
     </TabPanels>
   </Tabs>
 );
+
+export const Dismissable = () => {
+  const tabs = [
+    {
+      label: 'Tab label 1',
+      panel: <TabPanel>Tab Panel 1</TabPanel>,
+    },
+    {
+      label: 'Tab label 2',
+      panel: <TabPanel>Tab Panel 2</TabPanel>,
+    },
+    {
+      label: 'Tab label 3',
+      panel: <TabPanel>Tab Panel 3</TabPanel>,
+      disabled: true,
+    },
+    {
+      label: 'Tab label 4',
+      panel: <TabPanel>Tab Panel 4</TabPanel>,
+    },
+  ];
+  const [renderedTabs, setRenderedTabs] = useState(tabs);
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const handleTabChange = (evt) => {
+    setSelectedIndex(evt.selectedIndex);
+  };
+
+  const handleCloseTabRequest = (tabIndex) => {
+    if (renderedTabs[tabIndex].disabled) {
+      return;
+    }
+    const selectedTab = renderedTabs[selectedIndex];
+
+    const filteredTabs = renderedTabs.filter((_, index) => index !== tabIndex);
+    if (tabIndex === selectedIndex) {
+      const defaultTabIndex = filteredTabs.findIndex((tab) => !tab.disabled);
+      setSelectedIndex(defaultTabIndex);
+    } else {
+      setSelectedIndex(filteredTabs.indexOf(selectedTab));
+    }
+    setRenderedTabs(filteredTabs);
+  };
+
+  const resetTabs = () => {
+    setRenderedTabs(tabs);
+  };
+
+  return (
+    <>
+      <Button style={{ marginBottom: '3rem' }} onClick={resetTabs}>
+        Reset
+      </Button>
+      <Tabs
+        selectedIndex={selectedIndex}
+        onChange={handleTabChange}
+        dismissable
+        onTabCloseRequest={handleCloseTabRequest}>
+        <TabList aria-label="List of tabs">
+          {renderedTabs.map((tab, index) => (
+            <Tab key={index} disabled={tab.disabled}>
+              {tab.label}
+            </Tab>
+          ))}
+        </TabList>
+        <TabPanels>{renderedTabs.map((tab) => tab.panel)}</TabPanels>
+      </Tabs>
+    </>
+  );
+};
+
+export const DismissableWithIcons = ({ contained }) => {
+  const tabs = [
+    {
+      label: 'Tab label 1',
+      panel: <TabPanel>Tab Panel 1</TabPanel>,
+    },
+    {
+      label: 'Tab label 2',
+      panel: <TabPanel>Tab Panel 2</TabPanel>,
+    },
+    {
+      label: 'Tab label 3',
+      panel: <TabPanel>Tab Panel 3</TabPanel>,
+      disabled: true,
+    },
+    {
+      label: 'Tab label 4',
+      panel: <TabPanel>Tab Panel 4</TabPanel>,
+    },
+  ];
+  const [renderedTabs, setRenderedTabs] = useState(tabs);
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const handleTabChange = (evt) => {
+    setSelectedIndex(evt.selectedIndex);
+  };
+
+  const handleCloseTabRequest = (tabIndex) => {
+    if (renderedTabs[tabIndex].disabled) {
+      return;
+    }
+    const selectedTab = renderedTabs[selectedIndex];
+
+    const filteredTabs = renderedTabs.filter((_, index) => index !== tabIndex);
+    if (tabIndex === selectedIndex) {
+      const defaultTabIndex = filteredTabs.findIndex((tab) => !tab.disabled);
+      setSelectedIndex(defaultTabIndex);
+    } else {
+      setSelectedIndex(filteredTabs.indexOf(selectedTab));
+    }
+    setRenderedTabs(filteredTabs);
+  };
+
+  const resetTabs = () => {
+    setRenderedTabs(tabs);
+  };
+
+  const icons = [Bat, Bee, Corn, Monster];
+
+  return (
+    <>
+      <Button style={{ marginBottom: '3rem' }} onClick={resetTabs}>
+        Reset
+      </Button>
+      <Tabs
+        selectedIndex={selectedIndex}
+        onChange={handleTabChange}
+        dismissable
+        onTabCloseRequest={handleCloseTabRequest}>
+        <TabList aria-label="List of tabs" contained={contained}>
+          {renderedTabs.map((tab, index) => (
+            <Tab key={index} disabled={tab.disabled} renderIcon={icons[index]}>
+              {tab.label}
+            </Tab>
+          ))}
+        </TabList>
+        <TabPanels>{renderedTabs.map((tab) => tab.panel)}</TabPanels>
+      </Tabs>
+    </>
+  );
+};
 
 export const WithIcons = () => (
   <Tabs>
@@ -341,6 +486,50 @@ export const ContainedWithSecondaryLabelsAndIcons = () => (
   </Tabs>
 );
 
+export const ContainedFullWidth = () => (
+  <Grid condensed>
+    <Column lg={16} md={8} sm={4}>
+      <Tabs>
+        <TabList aria-label="List of tabs" contained fullWidth>
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab disabled>Tab Label 3</Tab>
+          <Tab>Tab Label 4 with a very long long title</Tab>
+          <Tab>Tab Label 5</Tab>
+          <Tab>Tab Label 6</Tab>
+          <Tab>Tab Label 7</Tab>
+          <Tab>Tab Label 8</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>
+            <form>
+              <legend className={`cds--label`}>Validation example</legend>
+              <Checkbox id="cb" labelText="Accept privacy policy" />
+              <Button
+                style={{ marginTop: '1rem', marginBottom: '1rem' }}
+                type="submit">
+                Submit
+              </Button>
+              <TextInput
+                type="text"
+                labelText="Text input label"
+                helperText="Optional help text"
+              />
+            </form>
+          </TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+          <TabPanel>Tab Panel 5</TabPanel>
+          <TabPanel>Tab Panel 6</TabPanel>
+          <TabPanel>Tab Panel 7</TabPanel>
+          <TabPanel>Tab Panel 8</TabPanel>
+        </TabPanels>
+      </Tabs>
+    </Column>
+  </Grid>
+);
+
 export const Skeleton = () => {
   return (
     <div style={{ maxWidth: '100%' }}>
@@ -349,8 +538,8 @@ export const Skeleton = () => {
   );
 };
 
-export const Playground = (args) => (
-  <Tabs>
+export const Playground = ({ dismissable, ...args }) => (
+  <Tabs dismissable={dismissable} onTabCloseRequest={() => {}}>
     <TabList aria-label="List of tabs" {...args}>
       <Tab>Tab label 1</Tab>
       <Tab>Tab label 2</Tab>
@@ -366,6 +555,12 @@ export const Playground = (args) => (
   </Tabs>
 );
 
+Playground.args = {
+  contained: false,
+  dismissable: false,
+  scrollDebounceWait: 200,
+};
+
 Playground.argTypes = {
   automatic: {
     control: { type: 'select' },
@@ -375,7 +570,11 @@ Playground.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
+  },
+  dismissable: {
+    control: {
+      type: 'boolean',
+    },
   },
   iconSize: {
     control: { type: 'select' },
@@ -395,7 +594,6 @@ Playground.argTypes = {
     control: {
       type: 'number',
     },
-    defaultValue: 200,
   },
   scrollIntoView: {
     control: {

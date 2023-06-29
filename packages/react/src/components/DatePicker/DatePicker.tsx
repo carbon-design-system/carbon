@@ -13,7 +13,6 @@ import React, {
   useImperativeHandle,
   useCallback,
   useState,
-  ChangeEventHandler,
   ForwardedRef,
 } from 'react';
 import cx from 'classnames';
@@ -206,12 +205,12 @@ interface DatePickerProps
    * flatpickr prop passthrough. Allows the user to enter a date directly
    * into the input field
    */
-  allowInput: boolean | undefined;
+  allowInput?: boolean;
 
   /**
    * The DOM element the flatpickr should be inserted into `<body>` by default.
    */
-  appendTo: object | undefined;
+  appendTo?: object;
 
   /**
    * The child nodes.
@@ -221,12 +220,12 @@ interface DatePickerProps
   /**
    * The CSS class names.
    */
-  className: string | undefined;
+  className?: string;
 
   /**
    * flatpickr prop passthrough. Controls whether the calendar dropdown closes upon selection.
    */
-  closeOnSelect: boolean | undefined;
+  closeOnSelect?: boolean;
 
   /**
    * The date format.
@@ -255,22 +254,22 @@ interface DatePickerProps
   /**
    * The flatpickr `inline` option.
    */
-  inline: boolean | undefined;
+  inline?: boolean;
 
   /**
    * Specify whether or not the control is invalid (Fluid only)
    */
-  invalid: boolean | undefined;
+  invalid?: boolean;
 
   /**
    * Provide the text that is displayed when the control is in error state (Fluid Only)
    */
-  invalidText: ReactNodeLike;
+  invalidText?: ReactNodeLike;
 
   /**
    * `true` to use the light version.
    */
-  light: boolean;
+  light?: boolean;
 
   /**
    *  The language locale used to format the days of the week, months, and numbers. The full list of supported locales can be found here https://github.com/flatpickr/flatpickr/tree/master/src/l10n
@@ -354,17 +353,17 @@ interface DatePickerProps
   /**
    * The `change` event handler.
    */
-  onChange?: ChangeEventHandler<HTMLSelectElement>;
+  onChange?: flatpickr.Options.Hook;
 
   /**
    * The `close` event handler.
    */
-  onClose?: any;
+  onClose?: flatpickr.Options.Hook;
 
   /**
    * The `open` event handler.
    */
-  onOpen?: ChangeEventHandler<HTMLSelectElement>;
+  onOpen?: flatpickr.Options.Hook;
 
   /**
    * whether the DatePicker is to be readOnly
@@ -392,7 +391,7 @@ interface DatePickerProps
   /**
    * Provide the text that is displayed when the control is in warning state (Fluid only)
    */
-  warnText: ReactNodeLike;
+  warnText?: ReactNodeLike;
 }
 
 const DatePicker = React.forwardRef(function DatePicker(
@@ -462,14 +461,13 @@ const DatePicker = React.forwardRef(function DatePicker(
     });
   };
 
-  //const savedOnOpen = useSavedCallback(onOpen);
   const endInputField = useRef<HTMLTextAreaElement>(null);
   const calendarRef: any | undefined = useRef(null);
-  const savedOnChange = useSavedCallback(() => onChange);
+  const savedOnChange = useSavedCallback(onChange);
   const savedOnClose = useSavedCallback(
     datePickerType === 'range' ? onCalendarClose : onClose
   );
-  const savedOnOpen = useSavedCallback(() => onOpen);
+  const savedOnOpen = useSavedCallback(onOpen);
 
   const datePickerClasses = cx(`${prefix}--date-picker`, {
     [`${prefix}--date-picker--short`]: short,
@@ -530,7 +528,7 @@ const DatePicker = React.forwardRef(function DatePicker(
       return;
     }
 
-    const onHook = (_electedDates, _dateStr, instance, prefix) => {
+    const onHook = (_electedDates, _dateStr, instance) => {
       updateClassNames(instance, prefix);
       if (startInputField?.current) {
         startInputField.current.readOnly = readOnly;
@@ -610,7 +608,7 @@ const DatePicker = React.forwardRef(function DatePicker(
       onReady: onHook,
       onMonthChange: onHook,
       onYearChange: onHook,
-      onOpen: (...args: [any, string, string, string]) => {
+      onOpen: (...args: [any, string, string]) => {
         onHook(...args);
         savedOnOpen(...args);
       },
@@ -971,16 +969,19 @@ DatePicker.propTypes = {
 
   /**
    * The `change` event handler.
+   * `(dates: Date[], dStr: string, fp: Instance, data?: any):void;`
    */
   onChange: PropTypes.func,
 
   /**
    * The `close` event handler.
+   * `(dates: Date[], dStr: string, fp: Instance, data?: any):void;`
    */
   onClose: PropTypes.func,
 
   /**
    * The `open` event handler.
+   * `(dates: Date[], dStr: string, fp: Instance, data?: any):void;`
    */
   onOpen: PropTypes.func,
 

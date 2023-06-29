@@ -19,7 +19,9 @@
 @use '../fluid-combo-box';
 
 @mixin fluid-multiselect {
-  .#{$prefix}--multi-select__wrapper.#{$prefix}--list-box__wrapper--fluid--focus:not(.#{$prefix}--multi-select--filterable__wrapper)
+  .#{$prefix}--multi-select__wrapper.#{$prefix}--list-box__wrapper--fluid--focus:not(
+      .#{$prefix}--multi-select--filterable__wrapper
+    )
     .#{$prefix}--list-box__field--wrapper--input-focused {
     outline: none;
   }

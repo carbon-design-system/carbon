@@ -14,7 +14,7 @@ import { MenuButton } from './';
 import mdx from './MenuButton.mdx';
 
 export default {
-  title: 'Experimental/unstable__MenuButton',
+  title: 'Components/MenuButton',
   component: MenuButton,
   subcomponents: {
     MenuItem,
@@ -70,6 +70,10 @@ export const Playground = (args) => {
   );
 };
 
+Playground.args = {
+  label: 'Actions',
+};
+
 Playground.argTypes = {
   children: {
     table: {
@@ -80,8 +84,5 @@ Playground.argTypes = {
     table: {
       disable: true,
     },
-  },
-  label: {
-    defaultValue: 'Actions',
   },
 };

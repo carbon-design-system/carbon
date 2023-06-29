@@ -96,6 +96,7 @@ describe('Feedback', () => {
     await user.click(button);
 
     expect(button).toHaveClass('cds--copy-btn--animating');
+    // eslint-disable-next-line testing-library/no-unnecessary-act
     act(() => {
       jest.runAllTimers();
       fireEvent.animationEnd(screen.getByTestId('copy-button-5'), {
@@ -117,7 +118,7 @@ describe('Feedback', () => {
 
     const button = screen.getByTestId('copy-button-6');
     await user.click(button);
-    expect(screen.getAllByText('overriding-default-feedback').length).toBe(2);
+    expect(screen.getAllByText('overriding-default-feedback').length).toBe(1);
   });
 
   it('should allow users to override default feedback timeout via prop', async () => {
@@ -134,6 +135,7 @@ describe('Feedback', () => {
     await user.click(button);
 
     expect(button).toHaveClass('cds--copy-btn--animating');
+    // eslint-disable-next-line testing-library/no-unnecessary-act
     act(() => {
       jest.runAllTimers();
       fireEvent.animationEnd(screen.getByTestId('copy-button-7'), {

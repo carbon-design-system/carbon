@@ -118,11 +118,30 @@ Playground.argTypes = {
     },
   },
   disabled: {
-    control: { type: 'boolean' },
+    control: {
+      control: {
+        type: 'boolean',
+      },
+    },
   },
   formatLabel: {
     table: {
       disable: true,
+    },
+  },
+  hideTextInput: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  invalid: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  invalidText: {
+    control: {
+      type: 'text',
     },
   },
   labelText: {
@@ -132,26 +151,28 @@ Playground.argTypes = {
   },
   min: {
     control: { type: 'number' },
-    defaultValue: 0,
   },
   max: {
     control: { type: 'number' },
-    defaultValue: 100,
+  },
+  readOnly: {
+    control: {
+      type: 'boolean',
+    },
   },
   required: {
-    control: { type: 'boolean' },
+    control: {
+      type: 'boolean',
+    },
   },
   step: {
     control: { type: 'number' },
-    defaultValue: 5,
   },
   stepMultiplier: {
     control: { type: 'number' },
-    defaultValue: 5,
   },
   value: {
     control: { type: 'number' },
-    defaultValue: 50,
   },
   onBlur: {
     table: {
@@ -173,4 +194,30 @@ Playground.argTypes = {
       disable: true,
     },
   },
+  warn: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  warnText: {
+    control: {
+      type: 'text',
+    },
+  },
+};
+
+Playground.args = {
+  disabled: false,
+  hideTextInput: false,
+  invalid: false,
+  invalidText: 'Invalid message goes here',
+  min: 0,
+  max: 100,
+  readOnly: false,
+  required: false,
+  step: 5,
+  stepMultiplier: 5,
+  value: 50,
+  warn: false,
+  warnText: 'Warning message goes here',
 };

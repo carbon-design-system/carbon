@@ -1,5 +1,6 @@
-import { Props, Preview, Story } from '@storybook/addon-docs';
+import { ArgsTable, Canvas, Story } from '@storybook/blocks';
 import InlineLoading from '../InlineLoading';
+import * as InlineLoadingStories from './InlineLoading.stories';
 
 # InlineLoading
 
@@ -13,13 +14,13 @@ import InlineLoading from '../InlineLoading';
 
 ## Overview
 
-<Preview>
-  <Story id="components-inlineloading--default" />
-</Preview>
+<Canvas>
+  <Story of={InlineLoadingStories.Default} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ## Feedback
 

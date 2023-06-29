@@ -124,6 +124,7 @@ describe('PasswordInput', () => {
         <PasswordInput id="input-1" labelText="PasswordInput label" invalid />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const invalidIcon = container.querySelector(
         `svg.${prefix}--text-input__invalid-icon`
       );
@@ -232,6 +233,7 @@ describe('PasswordInput', () => {
         <PasswordInput id="input-1" labelText="PasswordInput label" warn />
       );
 
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const warnIcon = container.querySelector(
         `svg.${prefix}--text-input__invalid-icon--warning`
       );

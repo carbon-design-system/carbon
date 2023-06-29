@@ -17,7 +17,7 @@ test.describe('ComboButton', () => {
       test('combo-button @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'ComboButton',
-          id: 'experimental-unstable-combobutton--default',
+          id: 'components-combobutton--default',
           theme,
         });
       });
@@ -27,7 +27,7 @@ test.describe('ComboButton', () => {
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'ComboButton',
-      id: 'experimental-unstable-combobutton--default',
+      id: 'components-combobutton--default',
       globals: {
         theme: 'white',
       },

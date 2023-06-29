@@ -80,6 +80,13 @@ export const Playground = (args) => {
   );
 };
 
+Playground.args = {
+  helperText: 'Helper text',
+  invalidText: 'Invalid selection',
+  warn: false,
+  warnText: 'Please notice the warning',
+};
+
 Playground.argTypes = {
   readOnly: {
     description: 'Specify whether the RadioButtonGroup is read-only',
@@ -93,7 +100,6 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue: 'Helper text',
   },
   invalid: {
     description: 'Specify whether the RadioButtonGroup is invalid',
@@ -107,7 +113,6 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue: 'Invalid selection',
   },
   orientation: {
     description: 'Provide how radio buttons should be displayed',
@@ -119,7 +124,6 @@ Playground.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   warnText: {
     description:
@@ -127,6 +131,5 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue: 'Please notice the warning',
   },
 };

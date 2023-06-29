@@ -90,7 +90,8 @@ export const TabTip = () => {
             setOpen(false);
           }
         }}
-        isTabTip>
+        isTabTip
+        onRequestClose={() => setOpen(false)}>
         <button
           aria-label="Settings"
           type="button"
@@ -122,7 +123,11 @@ export const TabTip = () => {
         </PopoverContent>
       </Popover>
 
-      <Popover open={openTwo} isTabTip align="bottom-right">
+      <Popover
+        open={openTwo}
+        isTabTip
+        align="bottom-right"
+        onRequestClose={() => setOpenTwo(false)}>
         <button
           aria-label="Settings"
           type="button"
@@ -159,6 +164,13 @@ export const TabTip = () => {
 
 export const Playground = PlaygroundStory.bind({});
 
+Playground.args = {
+  caret: true,
+  dropShadow: true,
+  highContrast: false,
+  open: true,
+};
+
 Playground.argTypes = {
   align: {
     options: [
@@ -186,25 +198,21 @@ Playground.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: true,
   },
   dropShadow: {
     control: {
       type: 'boolean',
     },
-    defaultValue: true,
   },
   highContrast: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   open: {
     control: {
       type: 'boolean',
     },
-    defaultValue: true,
   },
 };
 

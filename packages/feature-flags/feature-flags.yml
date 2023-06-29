@@ -21,8 +21,16 @@ feature-flags:
   - name: enable-v11-release
     description: >
       Enable the features and functionality for the v11 Release
-    enabled: false
+    enabled: true
   - name: enable-experimental-tile-contrast
     description: >
       Enable the experimental tile improved contrast styles
+    enabled: false
+  - name: enable-v12-tile-default-icons
+    description: >
+      Enable rendering of default icons in the tile components
+    enabled: false
+  - name: enable-v12-overflowmenu
+    description: >
+      Enable the use of the v12 OverflowMenu leveraging the Menu subcomponents
     enabled: false

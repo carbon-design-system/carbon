@@ -16,7 +16,6 @@ import {
   generateGenericItem,
 } from '../../ListBox/test-helpers';
 import FluidDropdown from '../FluidDropdown';
-import { FeatureFlags } from '../../FeatureFlags';
 
 const prefix = 'cds';
 
@@ -34,22 +33,14 @@ describe('FluidDropdown', () => {
   });
 
   it('should render with fluid classes', () => {
-    const { container } = render(
-      <FeatureFlags flags={{ 'enable-v11-release': true }}>
-        <FluidDropdown {...mockProps} />
-      </FeatureFlags>
-    );
+    const { container } = render(<FluidDropdown {...mockProps} />);
     expect(container.firstChild).toHaveClass(
       `${prefix}--list-box__wrapper--fluid`
     );
   });
 
   it('should render with condensed styles if isCondensed is provided', () => {
-    const { container } = render(
-      <FeatureFlags flags={{ 'enable-v11-release': true }}>
-        <FluidDropdown isCondensed {...mockProps} />
-      </FeatureFlags>
-    );
+    const { container } = render(<FluidDropdown isCondensed {...mockProps} />);
     expect(container.firstChild).toHaveClass(
       `${prefix}--list-box__wrapper--fluid--condensed`
     );
@@ -103,6 +94,7 @@ describe('FluidDropdown', () => {
     );
     // custom element should be rendered for the selected item
     expect(
+      // eslint-disable-next-line testing-library/no-node-access
       document.querySelector('#a-custom-element-for-selected-item')
     ).toBeDefined();
     // the title should use the normal itemToString method

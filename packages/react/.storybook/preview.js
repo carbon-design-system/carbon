@@ -4,6 +4,14 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+  Stories,
+} from '@storybook/blocks';
 
 import './styles.scss';
 import '../src/feature-flags';
@@ -12,8 +20,48 @@ import { white, g10, g90, g100 } from '@carbon/themes';
 import React from 'react';
 import { breakpoints } from '@carbon/layout';
 import { GlobalTheme } from '../src/components/Theme';
+import { Layout } from '../src/components/Layout';
 
 import theme from './theme';
+
+const devTools = {
+  layoutSize: {
+    name: 'unstable__Layout size',
+    description: "Set the layout context's size",
+    defaultValue: false,
+    toolbar: {
+      showName: true,
+      items: [
+        {
+          value: false,
+          title: 'None',
+        },
+        'xs',
+        'sm',
+        'md',
+        'lg',
+        'xl',
+        '2xl',
+      ],
+    },
+  },
+  layoutDensity: {
+    name: 'unstable__Layout density',
+    description: "Set the layout context's density",
+    defaultValue: false,
+    toolbar: {
+      showName: true,
+      items: [
+        {
+          value: false,
+          title: 'None',
+        },
+        'condensed',
+        'normal',
+      ],
+    },
+  },
+};
 
 export const globalTypes = {
   locale: {
@@ -45,6 +93,7 @@ export const globalTypes = {
       items: ['white', 'g10', 'g90', 'g100'],
     },
   },
+  ...(process.env.NODE_ENV === 'development' ? devTools : {}),
 };
 
 export const parameters = {
@@ -90,6 +139,16 @@ export const parameters = {
   },
   docs: {
     theme,
+    page: () => (
+      <>
+        <Title />
+        <Subtitle />
+        <Description />
+        <Primary />
+        <ArgsTable />
+        <Stories includePrimary={false} />
+      </>
+    ),
   },
   // Small (<672)
   // Medium (672 - 1056px)
@@ -136,75 +195,91 @@ export const parameters = {
     },
   },
   options: {
-    storySort: (storyA, storyB) => {
-      // By default, sort by the story "kind". The "kind" refers to the
-      // top-level title of the story, either through Component Story Format
-      // with the default export, or the `storiesOf('kind', module)` format
-      if (storyA[1].kind !== storyB[1].kind) {
-        return storyA[1].kind.localeCompare(storyB[1].kind);
-      }
+    ...(process.env.STORYBOOK_STORE_7 === 'false'
+      ? {}
+      : {
+          storySort: (storyA, storyB) => {
+            const idA = storyA.id;
+            const idB = storyB.id;
 
-      const idA = storyA[0];
-      const idB = storyB[0];
+            if (idA.includes('welcome')) {
+              return -1;
+            }
+            if (idB.includes('welcome')) {
+              return 1;
+            }
 
-      // To story the stories, we first build up a list of matches based on
-      // keywords. Each keyword has a specific weight that will be used to
-      // determine order later on.
-      const UNKNOWN_KEYWORD = 3;
-      const keywords = new Map([
-        ['welcome', 0],
-        ['default', 1],
-        ['usage', 2],
-        ['playground', 4],
-        ['development', 5],
-        ['deprecated', 6],
-        ['unstable', 7],
-      ]);
-      const matches = new Map();
+            // By default, sort by the top-level title of the story
+            if (storyA.title !== storyB.title) {
+              if (idA.includes('overview') && !idB.includes('overview')) {
+                return -1;
+              }
+              if (idB.includes('overview') && !idA.includes('overview')) {
+                return 1;
+              }
+              return storyA.title.localeCompare(storyB.title);
+            }
 
-      // We use this list of keywords to determine a collection of matches. By
-      // default, we will look for the greatest valued matched
-      for (const [keyword, weight] of keywords) {
-        // If we already have a match for a given id that is greater than the
-        // specific keyword we're looking for, break early
-        if (matches.get(idA) > weight || matches.get(idB) > weight) {
-          break;
-        }
+            // To story the stories, we first build up a list of matches based on
+            // keywords. Each keyword has a specific weight that will be used to
+            // determine order later on.
+            const UNKNOWN_KEYWORD = 4;
+            const keywords = new Map([
+              ['welcome', 0],
+              ['overview', 1],
+              ['default', 2],
+              ['usage', 3],
+              ['playground', 5],
+              ['development', 6],
+              ['deprecated', 7],
+              ['unstable', 8],
+            ]);
+            const matches = new Map();
 
-        // If we don't have a match already for either id, we check to see if
-        // the id includes the keyword and assigns the relevant weight, if so
-        if (idA.includes(keyword)) {
-          matches.set(idA, weight);
-        }
+            // We use this list of keywords to determine a collection of matches. By
+            // default, we will look for the greatest valued matched
+            for (const [keyword, weight] of keywords) {
+              // If we already have a match for a given id that is lesser than the
+              // specific keyword we're looking for, break early
+              if (matches.get(idA) < weight || matches.get(idB) < weight) {
+                break;
+              }
 
-        if (idB.includes(keyword)) {
-          matches.set(idB, weight);
-        }
-      }
+              // If we don't have a match already for either id, we check to see if
+              // the id includes the keyword and assigns the relevant weight, if so
+              if (idA.includes(keyword)) {
+                matches.set(idA, weight);
+              }
 
-      // If we have matches for either id, then we will compare the ids based on
-      // the weight assigned to the matching keyword
-      if (matches.size > 0) {
-        const weightA = matches.get(idA) ?? UNKNOWN_KEYWORD;
-        const weightB = matches.get(idB) ?? UNKNOWN_KEYWORD;
-        // If we have the same weight for the ids, then we should compare them
-        // using locale compare instead of by weight
-        if (weightA === weightB) {
-          return idA.localeCompare(idB);
-        }
-        return weightA - weightB;
-      }
+              if (idB.includes(keyword)) {
+                matches.set(idB, weight);
+              }
+            }
 
-      // By default, if we have no matches we'll do a locale compare between the
-      // two ids
-      return idA.localeCompare(idB);
-    },
+            // If we have matches for either id, then we will compare the ids based on
+            // the weight assigned to the matching keyword
+            if (matches.size > 0) {
+              const weightA = matches.get(idA) ?? UNKNOWN_KEYWORD;
+              const weightB = matches.get(idB) ?? UNKNOWN_KEYWORD;
+              // If we have the same weight for the ids, then we should compare them
+              // using locale compare instead of by weight
+              if (weightA === weightB) {
+                return idA.localeCompare(idB);
+              }
+              return weightA - weightB;
+            }
+
+            // By default, if we have no matches we'll do a locale compare between the
+            // two ids
+            return idA.localeCompare(idB);
+          },
+        }),
   },
 };
 
 export const decorators = [
   (Story, context) => {
-    const { locale, theme } = context.globals;
+    const { layoutDensity, layoutSize, locale, theme } = context.globals;
 
     React.useEffect(() => {
       document.documentElement.setAttribute('data-carbon-theme', theme);
@@ -216,7 +291,9 @@ export const decorators = [
 
     return (
       <GlobalTheme theme={theme}>
-        <Story {...context} />
+        <Layout size={layoutSize || null} density={layoutDensity || null}>
+          <Story {...context} />
+        </Layout>
       </GlobalTheme>
     );
   },

@@ -75,6 +75,13 @@ export const Playground = (args) => {
   );
 };
 
+Playground.args = {
+  disabled: false,
+  hideLabel: false,
+  invalid: false,
+  warning: false,
+};
+
 Playground.argTypes = {
   children: {
     table: {
@@ -95,21 +102,26 @@ Playground.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   hideLabel: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   invalid: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   invalidText: {
+    control: { type: 'text' },
+  },
+  warning: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  warningText: {
     control: { type: 'text' },
   },
   labelText: {

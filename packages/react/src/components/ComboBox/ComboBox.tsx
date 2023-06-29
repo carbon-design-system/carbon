@@ -24,10 +24,18 @@ import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import mergeRefs from '../../tools/mergeRefs';
-import { useFeatureFlag } from '../FeatureFlags';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
+
+const {
+  keyDownArrowDown,
+  keyDownArrowUp,
+  keyDownEscape,
+  clickButton,
+  blurButton,
+  changeInput,
+} = Downshift.stateChangeTypes;
 
 const defaultItemToString = (item) => {
   if (typeof item === 'string') {
@@ -303,6 +311,7 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
   const [isFocused, setIsFocused] = useState(false);
   const [prevSelectedItem, setPrevSelectedItem] = useState<any>();
   const [doneInitialSelectedItem, setDoneInitialSelectedItem] = useState(false);
+  const [highlightedIndex, setHighlightedIndex] = useState<number>();
   const savedOnInputChange = useRef(onInputChange);
 
   if (!doneInitialSelectedItem || prevSelectedItem !== selectedItem) {
@@ -355,19 +364,43 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
     }
   };
 
-  const handleOnStateChange = (newState, { setHighlightedIndex }) => {
-    if (Object.prototype.hasOwnProperty.call(newState, 'inputValue')) {
-      const { inputValue } = newState;
+  const getHighlightedIndex = (changes) => {
+    if (Object.prototype.hasOwnProperty.call(changes, 'inputValue')) {
+      const { inputValue } = changes;
       const filteredItems = filterItems(items, itemToString, inputValue);
-      setHighlightedIndex(
-        findHighlightedIndex(
-          {
-            ...props,
-            items: filteredItems,
-          },
-          inputValue
-        )
+      const indexToHighlight = findHighlightedIndex(
+        {
+          ...props,
+          items: filteredItems,
+        },
+        inputValue
       );
+      setHighlightedIndex(indexToHighlight);
+      return indexToHighlight;
+    }
+    return highlightedIndex;
+  };
+
+  const handleOnStateChange = (
+    changes,
+    { setHighlightedIndex: updateHighlightedIndex }
+  ) => {
+    const { type } = changes;
+    switch (type) {
+      case keyDownArrowDown:
+      case keyDownArrowUp:
+        setHighlightedIndex(changes.highlightedIndex);
+        break;
+      case blurButton:
+      case keyDownEscape:
+        setHighlightedIndex(changes.highlightedIndex);
+        break;
+      case clickButton:
+        setHighlightedIndex(changes.highlightedIndex);
+        break;
+      case changeInput:
+        updateHighlightedIndex(getHighlightedIndex(changes));
+        break;
     }
   };
 
@@ -382,18 +415,13 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
     }
   };
 
-  const enabled = useFeatureFlag('enable-v11-release');
-
   const showWarning = !invalid && warn;
-  const className = cx(
-    `${prefix}--combo-box`,
-    [enabled ? null : containerClassName],
-    {
-      [`${prefix}--list-box--up`]: direction === 'top',
-      [`${prefix}--combo-box--warning`]: showWarning,
-      [`${prefix}--combo-box--readonly`]: readOnly,
-    }
-  );
+  const className = cx(`${prefix}--combo-box`, {
+    [`${prefix}--list-box--up`]: direction === 'top',
+    [`${prefix}--combo-box--warning`]: showWarning,
+    [`${prefix}--combo-box--readonly`]: readOnly,
+  });
+
   const titleClasses = cx(`${prefix}--label`, {
     [`${prefix}--label--disabled`]: disabled,
   });
@@ -404,7 +432,7 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
     [`${prefix}--form__helper-text--disabled`]: disabled,
   });
   const wrapperClasses = cx(`${prefix}--list-box__wrapper`, [
-    enabled ? containerClassName : null,
+    containerClassName,
     {
       [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
       [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
@@ -418,6 +446,7 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
 
   // needs to be Capitalized for react to render it correctly
   const ItemToElement = itemToElement;
+
   return (
     <Downshift
       {...downshiftProps}
@@ -442,7 +471,6 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
         isOpen,
         inputValue,
         selectedItem,
-        highlightedIndex,
         clearSelection,
         toggleMenu,
       }) => {
@@ -555,6 +583,7 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
                   aria-expanded={rootProps['aria-expanded']}
                   aria-haspopup="listbox"
                   aria-controls={inputProps['aria-controls']}
+                  aria-owns={getMenuProps().id}
                   title={textInput?.current?.value}
                   {...inputProps}
                   {...rest}
@@ -612,12 +641,7 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
                           <ListBox.MenuItem
                             key={itemProps.id}
                             isActive={selectedItem === item}
-                            isHighlighted={
-                              highlightedIndex === index ||
-                              ((selectedItem as any)?.id &&
-                                (selectedItem as any)?.id === item.id) ||
-                              false
-                            }
+                            isHighlighted={highlightedIndex === index}
                             title={
                               itemToElement
                                 ? item.text

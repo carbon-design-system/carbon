@@ -1,11 +1,12 @@
-import { Preview, Props, Story } from '@storybook/addon-docs';
+import { Canvas, ArgsTable, Story } from '@storybook/blocks';
+import * as HeadingStories from './Heading.stories';
 
 # Heading
 
 [Source code](https://github.com/carbon-design-system/carbon/tree/master/packages/react/src/components/Heading)
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
 ## Table of Contents
 
@@ -13,7 +14,7 @@ import { Preview, Props, Story } from '@storybook/addon-docs';
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
 
 ## Overview
 
@@ -31,13 +32,13 @@ appropriate heading level without you having to manually specify it. To do this,
 you use the `Section` component for each section of your page. Every `Heading`
 component in that `Section` will use the correct heading level.
 
-<Preview>
-  <Story id="components-heading--heading-story" />
-</Preview>
+<Canvas>
+  <Story of={HeadingStories.Default} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ### Section as
 
@@ -54,7 +55,9 @@ For example, to render an `article` you could use `as="article"`:
 ```
 
 ### Custom level
+
 You can use the `level` prop to override the level of a section:
+
 ```jsx
 <Section level={5}>
   <Heading>rendered as h5</Heading>

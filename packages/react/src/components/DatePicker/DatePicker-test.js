@@ -50,6 +50,7 @@ describe('DatePicker', () => {
     );
 
     expect(
+      // eslint-disable-next-line testing-library/no-node-access
       document.querySelector('.cds--date-picker--simple')
     ).toBeInTheDocument();
   });
@@ -69,6 +70,7 @@ describe('DatePicker', () => {
     );
 
     expect(
+      // eslint-disable-next-line testing-library/no-node-access
       document.querySelector('.cds--date-picker--single')
     ).toBeInTheDocument();
   });
@@ -90,6 +92,7 @@ describe('DatePicker', () => {
     );
 
     expect(
+      // eslint-disable-next-line testing-library/no-node-access
       document.querySelector('.cds--date-picker--range')
     ).toBeInTheDocument();
   });
@@ -220,10 +223,10 @@ describe('Simple date picker', () => {
         </React.Suspense>
       );
 
-      expect(
-        await screen.findByLabelText('Date Picker label')
-      ).toBeInTheDocument();
+      const labeledElement = await screen.findByLabelText('Date Picker label');
+      expect(labeledElement).toBeInTheDocument();
 
+      // eslint-disable-next-line testing-library/no-node-access
       const input = document.querySelector('.cds--date-picker__input');
 
       expect(screen.getByRole('application')).not.toHaveClass('open');
@@ -264,6 +267,7 @@ describe('Single date picker', () => {
       </DatePicker>
     );
 
+    // eslint-disable-next-line testing-library/no-node-access
     const input = document.querySelector('.cds--date-picker__input');
 
     expect(screen.getByRole('application')).not.toHaveClass('open');
@@ -367,6 +371,7 @@ describe('Date picker with minDate and maxDate', () => {
         />
       </DatePicker>
     );
+    // eslint-disable-next-line testing-library/no-node-access
     const belowMinDate = document.querySelector(
       '[aria-label="December 31, 2017"]'
     );
@@ -394,6 +399,7 @@ describe('Date picker with minDate and maxDate', () => {
       </DatePicker>
     );
 
+    // eslint-disable-next-line testing-library/no-node-access
     const aboveMaxDate = document.querySelector(
       '[aria-label="January 4, 2018"]'
     );
@@ -464,5 +470,31 @@ describe('Date picker with minDate and maxDate', () => {
     await userEvent.type(theEnd, '02/02/2018{enter}'); // should not be possible to type
 
     expect(onChange).toHaveBeenCalledTimes(0);
+  });
+
+  it('should work with ISO 8601 format or others', async () => {
+    const onChange = jest.fn();
+
+    render(
+      <DatePicker dateFormat="Y-m-d" onChange={onChange} datePickerType="range">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          labelText="Start date"
+        />
+        <DatePickerInput
+          id="date-picker-input-id-finish"
+          labelText="End date"
+        />
+      </DatePicker>
+    );
+    const theStart = screen.getByLabelText('Start date');
+    const theEnd = screen.getByLabelText('End date');
+
+    await userEvent.type(theStart, '2023-01-05{tab}');
+    await userEvent.type(theEnd, '2023-01-19{enter}');
+    expect(onChange).toHaveBeenCalledTimes(2);
+    expect(screen.getByRole('application')).toHaveClass('open');
+    await userEvent.keyboard('{escape}');
+    expect(screen.getByRole('application')).not.toHaveClass('open');
   });
 });

@@ -27,9 +27,15 @@ export const Playground = (args) => (
   </div>
 );
 
+Playground.args = {
+  loop: false,
+  itemsShown: 10,
+  page: 0,
+  totalItems: 25,
+};
+
 Playground.argTypes = {
   loop: {
-    defaultValue: false,
     control: {
       type: 'boolean',
     },
@@ -38,18 +44,15 @@ Playground.argTypes = {
     control: {
       type: 'number',
     },
-    defaultValue: 10,
   },
   page: {
     control: {
       type: 'number',
     },
-    defaultValue: 0,
   },
   totalItems: {
     control: {
       type: 'number',
     },
-    defaultValue: 25,
   },
 };

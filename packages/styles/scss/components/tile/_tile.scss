@@ -16,21 +16,27 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/visually-hidden' as *;
+@use '../../utilities/layout';
+
+// padding + icon size (1rem) + padding
+$-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
 /// Tile styles
 /// @access public
 /// @group tile
-@mixin tile($local-enable-experimental-tile-contrast: false) {
+@mixin tile($enable-experimental-tile-contrast: false) {
   .#{$prefix}--tile-group {
     @include reset;
   }
 
   .#{$prefix}--tile {
+    @include layout.use('density', $default: 'normal');
+
     position: relative;
     display: block;
     min-width: 8rem;
     min-height: 4rem;
-    padding: $spacing-05;
+    padding: layout.density('padding-inline');
     background-color: $layer;
     outline: 2px solid transparent;
     outline-offset: -2px;
@@ -65,7 +71,7 @@
 
     @if (
       enabled('enable-experimental-tile-contrast') or
-        $local-enable-experimental-tile-contrast
+        $enable-experimental-tile-contrast
     ) {
       border: 1px solid $border-tile;
     }
@@ -99,18 +105,47 @@
   .#{$prefix}--tile--clickable.#{$prefix}--link--disabled,
   .#{$prefix}--tile--clickable:hover.#{$prefix}--link--disabled {
     display: block;
-    padding: $spacing-05;
     background-color: $layer;
     color: $text-disabled;
-  }
-
-  .#{$prefix}--tile--selectable {
-    padding-right: $spacing-09;
-    border: 1px solid transparent;
+    cursor: not-allowed;
 
     @if (
       enabled('enable-experimental-tile-contrast') or
-        $local-enable-experimental-tile-contrast
+        $enable-experimental-tile-contrast
+    ) {
+      border: 1px solid $border-disabled;
+    }
+  }
+
+  .#{$prefix}--tile--clickable .#{$prefix}--tile--icon,
+  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled
+    .#{$prefix}--tile--disabled-icon {
+    position: absolute;
+    right: layout.density('padding-inline');
+    bottom: layout.density('padding-inline');
+  }
+
+  .#{$prefix}--tile--clickable .#{$prefix}--tile--icon {
+    fill: $icon-interactive;
+  }
+
+  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled
+    .#{$prefix}--tile--disabled-icon {
+    fill: $icon-disabled;
+  }
+
+  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled
+    .#{$prefix}--tile--icon {
+    display: none;
+  }
+
+  .#{$prefix}--tile--selectable {
+    border: 1px solid transparent;
+    padding-inline-end: $-icon-container-size;
+
+    @if (
+      enabled('enable-experimental-tile-contrast') or
+        $enable-experimental-tile-contrast
     ) {
       border: 1px solid $border-tile;
     }
@@ -118,8 +153,8 @@
 
   .#{$prefix}--tile__checkmark {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: layout.density('padding-inline');
+    right: layout.density('padding-inline');
     height: 1rem;
     border: none;
     background: transparent;
@@ -145,8 +180,8 @@
     right: 0;
     bottom: 0;
     display: flex;
-    width: $spacing-09;
-    height: $spacing-09;
+    width: $-icon-container-size;
+    height: $-icon-container-size;
     align-items: center;
     justify-content: center;
 
@@ -175,8 +210,8 @@
     right: 0;
     bottom: 0;
     display: flex;
-    width: $spacing-09;
-    height: $spacing-09;
+    width: $-icon-container-size;
+    height: $-icon-container-size;
     align-items: center;
     justify-content: center;
 
@@ -207,7 +242,7 @@
 
     @if (
       enabled('enable-experimental-tile-contrast') or
-        $local-enable-experimental-tile-contrast
+        $enable-experimental-tile-contrast
     ) {
       border: 1px solid $border-tile;
     }
@@ -307,6 +342,13 @@
     background-color: $layer;
     color: $text-disabled;
     cursor: not-allowed;
+
+    @if (
+      enabled('enable-experimental-tile-contrast') or
+        $enable-experimental-tile-contrast
+    ) {
+      border: 1px solid $border-disabled;
+    }
   }
 
   // V11: Possibly deprecate
@@ -315,7 +357,7 @@
   }
 
   .#{$prefix}--tile--disabled.#{$prefix}--tile--is-selected {
-    border-color: button.$button-disabled;
+    border-color: $border-disabled;
   }
 
   .#{$prefix}--tile--disabled .#{$prefix}--tile__checkmark svg {

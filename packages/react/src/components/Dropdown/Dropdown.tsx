@@ -14,7 +14,13 @@ import React, {
   MouseEvent,
   ReactNode,
 } from 'react';
-import { useSelect, UseSelectProps, UseSelectState } from 'downshift';
+import {
+  useSelect,
+  UseSelectInterface,
+  UseSelectProps,
+  UseSelectState,
+  UseSelectStateChangeTypes,
+} from 'downshift';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import {
@@ -29,13 +35,22 @@ import ListBox, {
 } from '../ListBox';
 import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
-import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ReactAttr } from '../../types/common';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const getInstanceId = setupGetInstanceId();
+
+const {
+  MenuBlur,
+  MenuKeyDownArrowDown,
+  MenuKeyDownArrowUp,
+  MenuKeyDownEscape,
+  ToggleButtonClick,
+} = useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
+  ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
+};
 
 const defaultItemToString = <ItemType,>(item?: ItemType): string => {
   if (typeof item === 'string') {
@@ -243,15 +258,35 @@ const Dropdown = React.forwardRef(
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
     const prefix = usePrefix();
+    const [highlightedIndex, setHighlightedIndex] = useState();
     const { isFluid } = useContext(FormContext);
     const selectProps: UseSelectProps<ItemType> = {
       ...downshiftProps,
       items,
       itemToString,
+      highlightedIndex,
       initialSelectedItem,
       onSelectedItemChange,
+      onStateChange,
     };
     const { current: dropdownInstanceId } = useRef(getInstanceId());
+
+    function onStateChange(changes) {
+      const { type } = changes;
+      switch (type) {
+        case MenuKeyDownArrowDown:
+        case MenuKeyDownArrowUp:
+          setHighlightedIndex(changes.highlightedIndex);
+          break;
+        case MenuBlur:
+        case MenuKeyDownEscape:
+          setHighlightedIndex(changes.highlightedIndex);
+          break;
+        case ToggleButtonClick:
+          setHighlightedIndex(changes.highlightedIndex);
+          break;
+      }
+    }
 
     // only set selectedItem if the prop is defined. Setting if it is undefined
     // will overwrite default selected items from useSelect
@@ -265,31 +300,24 @@ const Dropdown = React.forwardRef(
       getLabelProps,
       getMenuProps,
       getItemProps,
-      highlightedIndex,
       selectedItem,
     } = useSelect(selectProps);
     const inline = type === 'inline';
     const showWarning = !invalid && warn;
 
-    const enabled = useFeatureFlag('enable-v11-release');
-
     const [isFocused, setIsFocused] = useState(false);
 
-    const className = cx(
-      `${prefix}--dropdown`,
-      [enabled ? null : containerClassName],
-      {
-        [`${prefix}--dropdown--invalid`]: invalid,
-        [`${prefix}--dropdown--warning`]: showWarning,
-        [`${prefix}--dropdown--open`]: isOpen,
-        [`${prefix}--dropdown--inline`]: inline,
-        [`${prefix}--dropdown--disabled`]: disabled,
-        [`${prefix}--dropdown--light`]: light,
-        [`${prefix}--dropdown--readonly`]: readOnly,
-        [`${prefix}--dropdown--${size}`]: size,
-        [`${prefix}--list-box--up`]: direction === 'top',
-      }
-    );
+    const className = cx(`${prefix}--dropdown`, {
+      [`${prefix}--dropdown--invalid`]: invalid,
+      [`${prefix}--dropdown--warning`]: showWarning,
+      [`${prefix}--dropdown--open`]: isOpen,
+      [`${prefix}--dropdown--inline`]: inline,
+      [`${prefix}--dropdown--disabled`]: disabled,
+      [`${prefix}--dropdown--light`]: light,
+      [`${prefix}--dropdown--readonly`]: readOnly,
+      [`${prefix}--dropdown--${size}`]: size,
+      [`${prefix}--list-box--up`]: direction === 'top',
+    });
 
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
@@ -303,7 +331,7 @@ const Dropdown = React.forwardRef(
     const wrapperClasses = cx(
       `${prefix}--dropdown__wrapper`,
       `${prefix}--list-box__wrapper`,
-      [enabled ? containerClassName : null],
+      containerClassName,
       {
         [`${prefix}--dropdown__wrapper--inline`]: inline,
         [`${prefix}--list-box__wrapper--inline`]: inline,
@@ -346,6 +374,11 @@ const Dropdown = React.forwardRef(
 
     const mergedRef = mergeRefs(toggleButtonProps.ref, ref);
 
+    const [currTimer, setCurrTimer] = useState<NodeJS.Timeout>();
+
+    // eslint-disable-next-line prefer-const
+    let [isTyping, setIsTyping] = useState(false);
+
     const readOnlyEventHandlers = readOnly
       ? {
           onClick: (evt: MouseEvent<HTMLButtonElement>) => {
@@ -364,7 +397,38 @@ const Dropdown = React.forwardRef(
             }
           },
         }
-      : {};
+      : {
+          onKeyDown: (evt: React.KeyboardEvent<HTMLButtonElement>) => {
+            if (
+              evt.code !== 'Space' ||
+              !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
+            ) {
+              setIsTyping(true);
+            }
+
+            if (
+              (isTyping && evt.code === 'Space') ||
+              !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
+            ) {
+              if (evt.code === 'Space') {
+                evt.preventDefault();
+                return;
+              }
+
+              if (currTimer) {
+                clearTimeout(currTimer);
+              }
+              setCurrTimer(
+                setTimeout(() => {
+                  setIsTyping(false);
+                }, 3000)
+              );
+            }
+            toggleButtonProps.onKeyDown(evt);
+          },
+        };
+
+    const menuProps = getMenuProps();
 
     return (
       <div className={wrapperClasses} {...other}>
@@ -398,6 +462,7 @@ const Dropdown = React.forwardRef(
             type="button"
             // aria-expanded is already being passed through {...toggleButtonProps}
             role="combobox" // eslint-disable-line jsx-a11y/role-has-required-aria-props
+            aria-owns={getMenuProps().id}
             aria-controls={getMenuProps().id}
             className={`${prefix}--list-box__field`}
             disabled={disabled}
@@ -425,7 +490,7 @@ const Dropdown = React.forwardRef(
               translateWithId={translateWithId}
             />
           </button>
-          <ListBox.Menu {...getMenuProps()}>
+          <ListBox.Menu {...menuProps}>
             {isOpen &&
               items.map((item, index) => {
                 const isObject = item !== null && typeof item === 'object';
@@ -444,9 +509,7 @@ const Dropdown = React.forwardRef(
                   <ListBox.MenuItem
                     key={itemProps.id}
                     isActive={selectedItem === item}
-                    isHighlighted={
-                      highlightedIndex === index || selectedItem === item
-                    }
+                    isHighlighted={highlightedIndex === index}
                     title={title}
                     ref={{
                       menuItemOptionRef: menuItemOptionRefs.current[index],

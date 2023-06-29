@@ -14,7 +14,7 @@ import { ComboButton } from './';
 import mdx from './ComboButton.mdx';
 
 export default {
-  title: 'Experimental/unstable__ComboButton',
+  title: 'Components/ComboButton',
   component: ComboButton,
   subcomponents: {
     MenuItem,
@@ -75,11 +75,9 @@ Playground.argTypes = {
       disable: true,
     },
   },
-  label: {
-    defaultValue: 'Primary action',
-  },
 };
 
 Playground.args = {
   onClick: action('onClick'),
+  label: 'Primary action',
 };
