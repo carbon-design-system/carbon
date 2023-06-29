@@ -21,20 +21,35 @@ yarn add @carbon/react
 This package requires [Dart Sass](http://npmjs.com/package/sass) in order to
 compile styles.
 
-If you're new to Sass, or are wondering how to configure Sass for your project,
-we recommend checking out the following resources and links:
+If you're new to Sass, we recommend checking out the following resources and
+links:
 
 - [Sass Basics](https://sass-lang.com/guide)
-- [Webpack with Sass](https://webpack.js.org/loaders/sass-loader/)
+- [The Sass `@use` documentation for Sass modules](https://sass-lang.com/documentation/at-rules/use/)
+- [The Carbon Design System FAQ on Sass](https://carbondesignsystem.com/migrating/faq/#sass-and-package-management)
+
+For info on how to configure Sass for your project, here are some common
+framework's documentation worth reviewing:
+
 - [Next.js with Sass](https://nextjs.org/docs/basic-features/built-in-css-support#sass-support)
-- [Create React App with Sass](https://create-react-app.dev/docs/adding-a-sass-stylesheet/)
+- [Remix with Sass](https://remix.run/docs/en/1.18.0/guides/styling#css-preprocessors)
+- [Gatsby with Sass](https://www.gatsbyjs.com/docs/how-to/styling/sass/)
+
+Or if you're just using a bundler:
+
 - [Parcel with Sass](https://v2.parceljs.org/languages/sass/)
 - [Vite with Sass](https://vitejs.dev/guide/features.html#css-pre-processors)
+
+Or anything else not listed above:
+
+- [Webpack with Sass](https://webpack.js.org/loaders/sass-loader/)
+- [Create React App with Sass](https://create-react-app.dev/docs/adding-a-sass-stylesheet/)
 - [Snowpack with Sass](https://www.snowpack.dev/guides/sass/)
 
-Once you get Sass up and running in your project, configure Sass to include
-`node_modules` in its `includePaths` option. For more information, checkout the
-[configuration](../styles/docs/sass.md#configuration) section in our Sass docs.
+Once you get Sass up and running in your project, you may need to configure Sass
+to include `node_modules` in its `includePaths` option. For more information,
+checkout the [configuration](../styles/docs/sass.md#configuration) section in
+our Sass docs.
 
 ## Usage
 
