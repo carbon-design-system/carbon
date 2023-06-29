@@ -40,10 +40,17 @@ export const Playground = (args) => (
   </div>
 );
 
+Playground.args = {
+  playgroundWidth: 400,
+  closeButtonLabelText: 'Clear search input',
+  disabled: false,
+  labelText: 'Search',
+  placeholder: 'Prompt text',
+};
+
 Playground.argTypes = {
   playgroundWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
-    defaultValue: 400,
   },
   className: {
     table: {
@@ -54,13 +61,11 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue: 'Clear search input',
   },
   disabled: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   id: {
     table: {
@@ -76,12 +81,10 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue: 'Search',
   },
   placeholder: {
     control: {
       type: 'text',
     },
-    defaultValue: 'Prompt text',
   },
 };

@@ -659,9 +659,13 @@ HeaderBaseWActionsAndSwitcher.storyName = 'Header Base w/ Actions and Switcher';
 
 HeaderBaseWActionsAndSwitcher.argTypes = {
   isSideNavExpanded: {
-    defaultValue: true,
     description: 'Optional prop to display the HeaderPanel.',
+    control: false,
   },
+};
+
+HeaderBaseWActionsAndSwitcher.args = {
+  isSideNavExpanded: true,
 };
 
 export const FixedSideNav = () => (
@@ -895,12 +899,16 @@ export const SideNavRail = (args) => (
   </>
 );
 
+SideNavRail.args = {
+  isRail: true,
+  enterDelayMs: 100,
+};
+
 SideNavRail.argTypes = {
   isRail: {
     control: {
       type: 'boolean',
     },
-    defaultValue: true,
     table: {
       defaultValue: { summary: true },
     },
@@ -913,7 +921,6 @@ SideNavRail.argTypes = {
     table: {
       defaultValue: { summary: 100 },
     },
-    defaultValue: 100,
     description:
       'Specify the duration in milliseconds to delay before displaying the sidenav',
   },
@@ -1027,12 +1034,16 @@ export const SideNavRailWHeader = (args) => (
   />
 );
 
+SideNavRailWHeader.args = {
+  isRail: true,
+  enterDelayMs: 100,
+};
+
 SideNavRailWHeader.argTypes = {
   isRail: {
     control: {
       type: 'boolean',
     },
-    defaultValue: true,
     table: {
       defaultValue: { summary: true },
     },
@@ -1045,7 +1056,6 @@ SideNavRailWHeader.argTypes = {
     table: {
       defaultValue: { summary: 100 },
     },
-    defaultValue: 100,
     description:
       'Specify the duration in milliseconds to delay before displaying the sidenav',
   },

@@ -7,26 +7,38 @@
 
 'use strict';
 
+import remarkGfm from 'remark-gfm';
 const fs = require('fs');
 const glob = require('fast-glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
+// We can't use .mdx files in conjuction with `storyStoreV7`, which we are using to preload stories for CI purposes only.
+// MDX files are fine to ignore in CI mode since they don't make a difference for VRT testing
+const storyGlobs =
+  process.env.STORYBOOK_STORE_7 === 'false'
+    ? [
+        '../src/**/*.stories.js',
+        '../src/**/next/*.stories.js',
+        '../src/**/next/**/*.stories.js',
+        '../src/**/*-story.js',
+      ]
+    : [
+        './Welcome/Welcome.mdx',
+        '../src/**/*.stories.js',
+        '../src/**/*.stories.mdx',
+        '../src/components/Tile/Tile.mdx',
+        '../src/**/next/*.stories.js',
+        '../src/**/next/**/*.stories.js',
+        '../src/**/next/*.stories.mdx',
+        '../src/**/*-story.js',
+      ];
+
 const stories = glob
-  .sync(
-    [
-      './Welcome/Welcome.stories.js',
-      '../src/**/*.stories.js',
-      '../src/**/*.stories.mdx',
-      '../src/**/next/*.stories.js',
-      '../src/**/next/**/*.stories.js',
-      '../src/**/next/*.stories.mdx',
-      '../src/**/*-story.js',
-    ],
-    {
-      cwd: __dirname,
-    }
-  )
+  .sync(storyGlobs, {
+    ignore: ['../src/**/docs/*.mdx', '../src/**/next/docs/*.mdx'],
+    cwd: __dirname,
+  })
   // Filters the stories by finding the paths that have a story file that ends
   // in `-story.js` and checks to see if they also have a `.stories.js`,
   // if so then defer to the `.stories.js`
@@ -43,11 +55,9 @@ const stories = glob
       'DataTable-dynamic-content-story',
       'DataTable-expansion-story',
     ]);
-
     if (denylist.has(basename)) {
       return false;
     }
-
     if (basename.endsWith('-story')) {
       const component = basename.replace(/-story$/, '');
       const storyName = path.resolve(
@@ -56,18 +66,14 @@ const stories = glob
         'next',
         `${component}.stories.js`
       );
-
       if (fs.existsSync(storyName)) {
         return false;
       }
-
       return true;
     }
-
     return true;
   });
-
-module.exports = {
+const config = {
   addons: [
     {
       name: '@storybook/addon-essentials',
@@ -82,25 +88,34 @@ module.exports = {
     },
     '@storybook/addon-storysource',
     '@storybook/addon-a11y',
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
+      },
+    },
   ],
-  core: {
-    builder: 'webpack5',
-  },
   features: {
     previewCsfV3: true,
     buildStoriesJson: true,
+    storyStoreV7: process.env.STORYBOOK_STORE_7 !== 'false',
   },
-  framework: '@storybook/react',
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {},
+  },
   stories,
   typescript: {
     reactDocgen: 'react-docgen', // Favor docgen from prop-types instead of TS interfaces
   },
-  reactOptions: {
-    legacyRootApi: false,
-  },
+
   webpack(config) {
     const babelLoader = config.module.rules.find((rule) => {
-      return rule.use.some(({ loader }) => {
+      return rule.use?.some(({ loader }) => {
         return loader.includes('babel-loader');
       });
     });
@@ -120,7 +135,6 @@ module.exports = {
       /packages\/.*\/(es|lib|umd)/,
       /packages\/icons-react\/next/,
     ];
-
     config.module.rules.push({
       test: /\.s?css$/,
       sideEffects: true,
@@ -167,7 +181,6 @@ module.exports = {
         },
       ],
     });
-
     if (process.env.NODE_ENV === 'production') {
       config.plugins.push(
         new MiniCssExtractPlugin({
@@ -175,7 +188,12 @@ module.exports = {
         })
       );
     }
-
     return config;
   },
+  docs: {
+    autodocs: true,
+    defaultName: 'Overview',
+  },
 };
+
+export default config;

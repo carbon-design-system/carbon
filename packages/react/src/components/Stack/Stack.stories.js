@@ -55,12 +55,15 @@ export const Playground = (args) => {
   );
 };
 
+Playground.args = {
+  as: 'div',
+};
+
 Playground.argTypes = {
   as: {
     control: {
       type: 'text',
     },
-    defaultValue: 'div',
   },
   gap: {
     options: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],

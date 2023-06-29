@@ -1,4 +1,5 @@
-import { Props, Story, Preview } from '@storybook/addon-docs';
+import { ArgsTable, Story, Canvas } from '@storybook/blocks';
+import * as ContainedListStories from './ContainedList.stories.js';
 
 # ContainedList
 
@@ -8,8 +9,8 @@ import { Props, Story, Preview } from '@storybook/addon-docs';
 
 ## Table of Contents
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 ## Table of Contents
 
 - [Overview](#overview)
@@ -19,22 +20,22 @@ import { Props, Story, Preview } from '@storybook/addon-docs';
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
 
 ## Overview
 
-<Preview>
-  <Story id="components-containedlist--default" />
-</Preview>
+<Canvas>
+  <Story of={ContainedListStories.Default} />
+</Canvas>
 
 ### Search
 
-#### Expandable Search: 
-Within the Contained List you can pass in an `ExpandableSearch` component within the `action` prop as seen below. 
-The `ExpandableSearch` will give you the capability to expand and collapse the search bar within the title. 
-However, we do not support passing in the `ExpandableSearch` within the title action prop while passing in the `Search` component 
-as a child at the same time. If this happens, the `ExpandableSearch` in the title will override any other `Search` passed in as a child. 
-To prevent this potential conflict, we have added funtionality to support both designs and both use cases. Please see [Persistent Search](#persistent-search) docs below. 
+#### Expandable Search:
+Within the Contained List you can pass in an `ExpandableSearch` component within the `action` prop as seen below.
+The `ExpandableSearch` will give you the capability to expand and collapse the search bar within the title.
+However, we do not support passing in the `ExpandableSearch` within the title action prop while passing in the `Search` component
+as a child at the same time. If this happens, the `ExpandableSearch` in the title will override any other `Search` passed in as a child.
+To prevent this potential conflict, we have added funtionality to support both designs and both use cases. Please see [Persistent Search](#persistent-search) docs below.
 
 ```js
   export const WithExpandableSearch = () => {
@@ -80,15 +81,15 @@ To prevent this potential conflict, we have added funtionality to support both d
     );
   };
 ```
-<Preview>
-  <Story id="components-containedlist--with-expandable-search" />
-</Preview>
+<Canvas>
+  <Story of={ContainedListStories.WithExpandableSearch} />
+</Canvas>
 
-#### Persistent Search: 
+#### Persistent Search:
 We have added in the capability to pass down the `Search` component as a child of `ContainedList`.
 The `Search` component itself is not a prop but does render with specific styling such that the `Search` bar appears below the Contained List title as opposed to rendering inline.
-If you would like the Search to render inline to the Contained List title, please see the [Expandable Search](#expandable-search) docs above 
-The `Search` component will also remain persistent under the title, so that it remains visible on scroll, when there are many list items passed in. 
+If you would like the Search to render inline to the Contained List title, please see the [Expandable Search](#expandable-search) docs above
+The `Search` component will also remain persistent under the title, so that it remains visible on scroll, when there are many list items passed in.
 
 ```js
 
@@ -133,13 +134,13 @@ export const WithPersistentSearch = () => {
 
 ```
 
-<Preview>
-  <Story id="components-containedlist--with-persistent-search" />
-</Preview>
+<Canvas>
+  <Story of={ContainedListStories.WithPersistentSearch} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ## Feedback
 

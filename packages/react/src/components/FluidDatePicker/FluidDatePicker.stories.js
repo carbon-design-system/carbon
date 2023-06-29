@@ -153,6 +153,13 @@ export const Playground = (args) => {
   );
 };
 
+Playground.args = {
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+};
+
 Playground.argTypes = {
   appendTo: {
     table: {
@@ -229,8 +236,6 @@ Playground.argTypes = {
     table: {
       category: 'DatePickerInput',
     },
-    defaultValue:
-      'Error message that is really long can wrap to more lines but should not be excessively long.',
   },
   placeholder: {
     control: { type: 'text' },
@@ -249,7 +254,5 @@ Playground.argTypes = {
     table: {
       category: 'DatePickerInput',
     },
-    defaultValue:
-      'Warning message that is really long can wrap to more lines but should not be excessively long.',
   },
 };
