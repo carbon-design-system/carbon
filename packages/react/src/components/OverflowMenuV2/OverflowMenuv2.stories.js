@@ -41,7 +41,7 @@ export const _OverflowMenuV2 = () => {
         <span>
           `OverflowMenuV2` is deprecated and will be removed in the next major
           version. Use `OverflowMenu` with the `enable-v12-overflowmenu`{' '}
-          <a href="/?path=/story/experimental-feature-flags-overview--page">
+          <a href="/?path=/story/experimental-feature-flags--overview">
             feature flag
           </a>{' '}
           instead.

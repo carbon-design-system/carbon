@@ -1,4 +1,5 @@
-import { ArgsTable, Canvas, Story } from '@storybook/addon-docs';
+import { ArgsTable, Canvas, Story } from '@storybook/blocks';
+import * as PopoverStories from './Popover.stories';
 
 # Popover
 
@@ -7,8 +8,8 @@ import { ArgsTable, Canvas, Story } from '@storybook/addon-docs';
 [Usage guidelines](https://www.carbondesignsystem.com/components/popover/usage)
 &nbsp;|&nbsp;
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
 ## Table of Contents
 
@@ -16,7 +17,7 @@ import { ArgsTable, Canvas, Story } from '@storybook/addon-docs';
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
 
 ## Overview
 
@@ -66,7 +67,7 @@ state in conjunction with the callback prop to set `open` to false when
 `onRequestClose` is called.
 
 <Canvas>
-  <Story id="components-popover--tab-tip" />
+  <Story of={PopoverStories.TabTip} />
 </Canvas>
 
 ## Alignment

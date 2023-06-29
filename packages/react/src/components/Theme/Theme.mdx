@@ -1,12 +1,13 @@
-import { ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { ArgsTable, Story, Canvas } from '@storybook/blocks';
+import * as ThemeStories from './Theme.stories';
 
 # Theme
 
 [Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Theme)
 
-<!-- prettier-ignore-start -->
+{/* <!-- prettier-ignore-start -->
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 ## Table of Contents
 
 - [Overview](#overview)
@@ -15,8 +16,8 @@ import { ArgsTable, Story, Canvas } from '@storybook/addon-docs';
   - [Theme as](#theme-as)
 - [Feedback](#feedback)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-<!-- prettier-ignore-end -->
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<!-- prettier-ignore-end --> */}
 
 ## Overview
 
@@ -36,7 +37,7 @@ files by writing:
 You also get this file when you import `@carbon/react` directly in your Sass.
 
 <Canvas>
-  <Story id="components-theme--default" />
+  <Story of={ThemeStories.Default} />
 </Canvas>
 
 ## Setting the global theme
@@ -78,7 +79,7 @@ function ExamplePage() {
 ```
 
 <Canvas>
-  <Story id="components-theme--default" />
+  <Story of={ThemeStories.Default} />
 </Canvas>
 
 ## Getting the current theme in a component
@@ -97,7 +98,7 @@ function ExampleComponent() {
 ```
 
 <Canvas>
-  <Story id="components-theme--use-theme" />
+  <Story of={ThemeStories.UseTheme} />
 </Canvas>
 
 ## Component API

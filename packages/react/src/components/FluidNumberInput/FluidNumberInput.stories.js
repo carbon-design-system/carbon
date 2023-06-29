@@ -93,53 +93,56 @@ export const Playground = (args) => (
   </div>
 );
 
+Playground.args = {
+  playgroundWidth: 400,
+  defaultValue: 50,
+  invalid: false,
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  disabled: false,
+  label: 'Label',
+  warn: false,
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+};
+
 Playground.argTypes = {
   playgroundWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
-    defaultValue: 400,
   },
   defaultValue: {
     control: {
       type: 'number',
     },
-    defaultValue: 50,
   },
   invalid: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   invalidText: {
     control: {
       type: 'text',
     },
-    defaultValue:
-      'Error message that is really long can wrap to more lines but should not be excessively long.',
   },
   disabled: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   label: {
     control: {
       type: 'text',
     },
-    defaultValue: 'Label',
   },
   warn: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   warnText: {
     control: {
       type: 'text',
     },
-    defaultValue:
-      'Warning message that is really long can wrap to more lines but should not be excessively long.',
   },
 };
