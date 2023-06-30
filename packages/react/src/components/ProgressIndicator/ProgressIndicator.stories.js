@@ -104,6 +104,12 @@ export const Playground = (args) => (
   </ProgressIndicator>
 );
 
+Playground.args = {
+  currentIndex: 0,
+  spaceEqually: false,
+  vertical: false,
+};
+
 Playground.argTypes = {
   children: {
     table: {
@@ -122,14 +128,11 @@ Playground.argTypes = {
   },
   currentIndex: {
     control: { type: 'number' },
-    defaultValue: 0,
   },
   spaceEqually: {
     control: { type: 'boolean' },
-    defaultValue: false,
   },
   vertical: {
     control: { type: 'boolean' },
-    defaultValue: false,
   },
 };

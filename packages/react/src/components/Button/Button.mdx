@@ -1,8 +1,9 @@
-import { Story, Props, Source, Preview } from '@storybook/addon-docs';
+import { Story, ArgsTable, Canvas, Unstyled } from '@storybook/blocks';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import { Add, TrashCan } from '@carbon/icons-react';
+import * as ButtonStories from './Button.stories';
 
 # Button
 
@@ -14,8 +15,8 @@ import { Add, TrashCan } from '@carbon/icons-react';
 
 ## Table of Contents
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
 - [Overview](#overview)
 - [Danger Buttons](#danger-buttons)
@@ -38,7 +39,7 @@ import { Add, TrashCan } from '@carbon/icons-react';
 - [References](#references)
 - [Feedback](#feedback)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
 
 ## Overview
 
@@ -47,12 +48,12 @@ communicate calls to action to the user and allow users to interact with pages
 in a variety of ways. `Button` labels express what action will occur when the
 user interacts with it.
 
-<Preview>
-  <Story id="components-button--default" />
-  <Story id="components-button--secondary" />
-  <Story id="components-button--tertiary" />
-  <Story id="components-button--ghost" />
-</Preview>
+<Canvas>
+  <Story of={ButtonStories.Default} />
+  <Story of={ButtonStories.Secondary} />
+  <Story of={ButtonStories.Tertiary} />
+  <Story of={ButtonStories.Ghost} />
+</Canvas>
 
 ## Danger Buttons
 
@@ -64,9 +65,9 @@ danger button style. However, if a destructive action is just one of several
 actions a user could choose from, then a lower emphasis style like the tertiary
 danger button or the ghost danger button may be more appropriate.
 
-<Preview>
-  <Story id="components-button--danger" />
-</Preview>
+<Canvas>
+  <Story of={ButtonStories.Danger} />
+</Canvas>
 
 ## Icon-only Buttons
 
@@ -75,9 +76,9 @@ Icon buttons can take the form of any of the seven types (Primary, Secondary,
 Tertiary, Danger, Danger tertiary, Danger ghost and Ghost) but most commonly
 will be styled as primary or ghost buttons.
 
-<Preview>
-  <Story id="components-button--icon-button" />
-</Preview>
+<Canvas>
+  <Story of={ButtonStories.IconButton} />
+</Canvas>
 
 ## Set of Buttons
 
@@ -88,9 +89,9 @@ Negative action buttons will be on the left. Positive action buttons should be
 on the right. When these two types buttons are paired in the correct order, they
 will automatically space themselves apart.
 
-<Preview>
-  <Story id="components-button--set-of-buttons" />
-</Preview>
+<Canvas>
+  <Story of={ButtonStories.SetOfButtons} />
+</Canvas>
 
 ## Skeleton state
 
@@ -98,13 +99,13 @@ You can use the `ButtonSkeleton` component to render a skeleton variant of a
 button. This is useful to display on initial page load to indicate to users that
 content is being loaded.
 
-<Preview>
-  <Story id="components-button--skeleton" />
-</Preview>
+<Canvas>
+  <Story of={ButtonStories.Skeleton} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 Additional props passed into `Button` will be forwarded along to the underlying
 button element.
@@ -144,7 +145,9 @@ you can configure both the `tooltipAlignment`
 tooltip should be rendered. These props default to `center` and `bottom`,
 respectively.
 
-<Button hasIconOnly renderIcon={Add} iconDescription="Add" />
+<Unstyled>
+  <Button hasIconOnly renderIcon={Add} iconDescription="Add" />
+</Unstyled>
 
 ```jsx
 <Button hasIconOnly renderIcon={Add} iconDescription="Add" />
@@ -155,7 +158,9 @@ respectively.
 This prop allows you to specify an address to navigate to on click. This will
 change the underlying `Button` element to be rendered as an `a` anchor element.
 
-<Button href="https://www.carbondesignsystem.com">Navigate</Button>
+<Unstyled>
+  <Button href="https://www.carbondesignsystem.com">Navigate</Button>
+</Unstyled>
 
 ```jsx
 <Button href="https://www.carbondesignsystem.com">Navigate</Button>
@@ -177,15 +182,19 @@ button is interacted with.
 Carbon has seven types of buttons, `primary`, `secondary`, `tertiary`, `ghost`,
 `danger`, `danger--tertiary`, and `danger--ghost`. If no `kind` is specified, a
 `primary` button will be rendered. For more information on when to use each
-variant, check out the
-[design documentation](https://www.carbondesignsystem.com/components/button/usage#overview)
+variant, check out the [design documentation](https://www.carbondesignsystem.com/components/button/usage#overview)
 
-<Button>Primary</Button> <Button kind="secondary">Secondary</Button> <Button kind="tertiary">
-  Tertiary{' '}
-</Button> <Button kind="danger">Danger</Button> <Button kind="danger--tertiary">
-  Danger Tertiary
-</Button>
-<Button kind="danger--ghost">Danger Ghost</Button> <Button kind="ghost">Ghost</Button>
+<Unstyled>
+  <div style={{display: 'flex', justifyContent: 'space-between'}}>
+    <Button>Primary</Button>
+    <Button kind="secondary">Secondary</Button>
+    <Button kind="tertiary">Tertiary </Button>
+    <Button kind="danger">Danger</Button>
+    <Button kind="danger--tertiary">Danger Tertiary</Button>
+    <Button kind="danger--ghost">Danger Ghost</Button>
+    <Button kind="ghost">Ghost</Button>
+  </div>
+</Unstyled>
 
 ```jsx
 <Button>Primary</Button>
@@ -213,14 +222,13 @@ with screen-reader support if you use the `renderIcon` prop. If you are trying
 to render icon-only buttons, please refer to the section on the
 [hasIconOnly](#button-hasicononly) prop
 
-<Button renderIcon={Add} iconDescription="Add">
-  Add
-</Button> <Button
-  renderIcon={TrashCan}
-  kind="danger"
-  iconDescription="TrashCan">
-  Delete
-</Button>
+<Unstyled>
+  <Button renderIcon={Add} iconDescription="Add" style={{marginRight: '3px'}}>Add</Button>
+  <Button
+    renderIcon={TrashCan}
+    kind="danger"
+    iconDescription="TrashCan">Delete</Button>
+</Unstyled>
 
 ```jsx
 <Button renderIcon={Add} iconDescription="Add">Add</Button>
@@ -230,18 +238,15 @@ to render icon-only buttons, please refer to the section on the
 To render an icon of a different `size`, pass a function that spreads props on
 the Icon to ensure the proper classes are applied:
 
-<Button
-  renderIcon={(props) => <Add size={24} {...props} />}
-  iconDescription="Add">
-  Add
-</Button>
-
-<Button
-  renderIcon={(props) => <TrashCan size={24} {...props} />}
-  kind="danger"
-  iconDescription="TrashCan">
-  Delete
-</Button>
+<Unstyled>
+  <Button
+    renderIcon={(props) => <Add size={24} {...props} />}
+    iconDescription="Add" style={{marginRight: '3px'}}>Add</Button>
+  <Button
+    renderIcon={(props) => <TrashCan size={24} {...props} />}
+    kind="danger"
+    iconDescription="TrashCan">Delete</Button>
+</Unstyled>
 
 ```jsx
 <Button renderIcon={(props) => <Add size={24} {...props} />} iconDescription="Add">Add</Button>
@@ -255,9 +260,9 @@ need to add a `role` for accessibility reasons. Adding `role="button"` will make
 an element appear as a button control to a screen reader. Check out the
 [References](#references) section for more information.
 
-<Button as="div" role="button">
-  a11y Button
-</Button>
+<Unstyled>
+  <Button as="div" role="button">a11y Button</Button>
+</Unstyled>
 
 ```jsx
 <Button as="div" role="button">
@@ -268,7 +273,8 @@ an element appear as a button control to a screen reader. Check out the
 ### Button `size`
 
 This prop specifies which size the `Button` should be rendered at. Valid values
-are `sm`, `md`, `lg`, `xl`, and `2xl`. If no `size` is specified, it renders as `lg`.
+are `sm`, `md`, `lg`, `xl`, and `2xl`. If no `size` is specified, it renders as
+`lg`.
 
 <Button>Submit</Button> <Button size="sm">Submit</Button> <Button size="md">
   Submit

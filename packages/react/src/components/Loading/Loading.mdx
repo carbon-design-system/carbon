@@ -1,5 +1,6 @@
-import { Props, Preview, Story } from '@storybook/addon-docs';
+import { ArgsTable, Canvas, Story } from '@storybook/blocks';
 import Loading from '../Loading';
+import * as LoadingStories from './Loading.stories';
 
 # Loading
 
@@ -13,13 +14,13 @@ import Loading from '../Loading';
 
 ## Overview
 
-<Preview>
-  <Story id="components-loading--default" />
-</Preview>
+<Canvas>
+  <Story of={LoadingStories.Default} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ## Feedback
 
