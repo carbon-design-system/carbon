@@ -1,39 +1,50 @@
 /**
- * Copyright IBM Corp. 2021
+ * Copyright IBM Corp. 2021, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, {MouseEventHandler, useRef} from 'react';
+import React, { MouseEventHandler, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {useControllableState} from '../../internal/useControllableState';
-import {usePrefix} from '../../internal/usePrefix';
+import { useControllableState } from '../../internal/useControllableState';
+import { usePrefix } from '../../internal/usePrefix';
 
-type ExcludedAttributes = 'aria-labelledby' | 'aria-checked' | 'type' | 'role' | 'id' |  'size' | 'onClick';
+type ExcludedAttributes =
+  | 'aria-labelledby'
+  | 'aria-checked'
+  | 'type'
+  | 'role'
+  | 'id'
+  | 'size'
+  | 'onClick';
 
-export interface ToggleProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, ExcludedAttributes> {
+export interface ToggleProps
+  extends Omit<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    ExcludedAttributes
+  > {
   /**
    * Specify another element's id to be used as the label for this toggle
    */
-  'aria-labelledby'?: string,
+  'aria-labelledby'?: string;
 
   /**
    * Provide an id that unique represents the underlying `<button>`
    */
 
-  id: string,
+  id: string;
 
   /**
    * Specify the label for the "off" position
    */
-  labelA?: string | undefined,
+  labelA?: string | undefined;
 
   /**
    * Specify the label for the "on" position
    */
-  labelB?: string | undefined,
+  labelB?: string | undefined;
 
   /**
    * Provide the text that will be read by a screen reader when visiting this
@@ -41,43 +52,43 @@ export interface ToggleProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonE
    * or you use an external <label> element with its "for" attribute set to the
    * toggle's id.
    */
-  labelText?: string | undefined,
+  labelText?: string | undefined;
 
   /**
    * If true, the side labels (props.labelA and props.labelB) will be replaced by
    * props.labelText (if passed), so that the toggle doesn't render a top label.
    */
-  hideLabel?: boolean,
+  hideLabel?: boolean;
 
   /**
    * Provide an event listener that is called when the control is toggled
    */
-  onClick:  MouseEventHandler<HTMLDivElement> | undefined;
+  onClick: MouseEventHandler<HTMLDivElement> | undefined;
 
   /**
    * Provide an event listener that is called when the control is toggled
    */
-  onToggle?(checked: boolean): void,
+  onToggle?(checked: boolean): void;
 
   /**
    * Specify the size of the Toggle. Currently only supports 'sm' or 'md' (default)
    */
-  size?: "sm" | "md" | undefined,
+  size?: 'sm' | 'md' | undefined;
 
   /**
    * Whether the toggle should be read-only
    */
-  readOnly?: boolean | undefined,
+  readOnly?: boolean | undefined;
 
   /**
    * Specify whether the toggle should be on by default
    */
-  defaultToggled?: boolean | undefined,
+  defaultToggled?: boolean | undefined;
 
   /**
    * Specify whether the control is toggled
    */
-  toggled?: boolean | undefined,
+  toggled?: boolean | undefined;
 }
 
 export function Toggle({
