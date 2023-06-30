@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { MouseEventHandler, useRef } from 'react';
+import React, { KeyboardEventHandler, MouseEventHandler, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useControllableState } from '../../internal/useControllableState';
@@ -63,7 +63,10 @@ export interface ToggleProps
   /**
    * Provide an event listener that is called when the control is toggled
    */
-  onClick: MouseEventHandler<HTMLDivElement> | undefined;
+  onClick:
+    | MouseEventHandler<HTMLDivElement>
+    | KeyboardEventHandler<HTMLDivElement>
+    | undefined;
 
   /**
    * Provide an event listener that is called when the control is toggled
