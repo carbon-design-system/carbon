@@ -1,4 +1,5 @@
-import { Props, Preview, Story } from '@storybook/addon-docs';
+import { ArgsTable, Canvas, Story } from '@storybook/blocks';
+import * as OrderedListStories from './OrderedList.stories';
 
 # OrderedList
 
@@ -12,13 +13,15 @@ import { Props, Preview, Story } from '@storybook/addon-docs';
 
 ## Overview
 
-<Preview>
-  <Story id="components-orderedlist--playground" />
-</Preview>
+<Canvas>
+  <div style={{paddingLeft: '15px'}}>
+    <Story of={OrderedListStories.Playground} />
+  </div>
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ## Feedback
 

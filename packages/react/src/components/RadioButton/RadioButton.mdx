@@ -1,4 +1,5 @@
-import { Props } from '@storybook/addon-docs';
+import { ArgsTable, Canvas, Story } from '@storybook/blocks';
+import * as RadioButtonStories from './RadioButton.stories';
 
 # RadioButton
 
@@ -21,13 +22,13 @@ checkboxes that allow users to make one or more selections from a group. In use
 cases where only one selection from a group is allowed, use the radio button
 component instead of the checkbox.
 
-<Preview>
-  <Story id="components-radiobutton--default" />
-</Preview>
+<Canvas>
+  <Story of={RadioButtonStories.Default} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ## Feedback
 

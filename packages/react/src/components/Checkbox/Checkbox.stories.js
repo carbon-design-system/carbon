@@ -86,20 +86,27 @@ export const Playground = (args) => (
   </CheckboxGroup>
 );
 
+Playground.args = {
+  helperText: 'Helper text goes here',
+  invalid: false,
+  invalidText: 'Invalid message goes here',
+  readOnly: false,
+  warn: false,
+  warnText: 'Warning message goes here',
+};
+
 Playground.argTypes = {
   helperText: {
     description: 'Provide text for the form group for additional help',
     control: {
       type: 'text',
     },
-    defaultValue: 'Helper text goes here',
   },
   invalid: {
     description: 'Specify whether the form group is currently invalid',
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   invalidText: {
     description:
@@ -107,7 +114,6 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue: 'Invalid message goes here',
   },
   legendText: {
     description:
@@ -121,14 +127,12 @@ Playground.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   warn: {
     description: 'Specify whether the form group is currently in warning state',
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   warnText: {
     description:
@@ -136,7 +140,6 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue: 'Warning message goes here',
   },
   checked: {
     table: {

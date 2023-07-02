@@ -390,6 +390,14 @@ categories:
       - chart--t-SNE
       - circle--packing
       - code--syntax
+      - curve--cubic
+      - curve--exponential
+      - curve--inverse
+      - curve--linear
+      - curve--logarithmic
+      - curve--logistic
+      - curve--power
+      - curve--quadratic
       - dashboard
       - data--apis
       - data--set
@@ -401,6 +409,7 @@ categories:
       - math--curve
       - population--diagram
       - q-q-plot
+      - quantum
       - rank
       - relationship--diagram
       - report
@@ -456,6 +465,7 @@ categories:
   - name: Design and development
     members:
       - app--developer
+      - app--modernization
       - application
       - art--tools--01
       - birthday--cake
@@ -639,6 +649,8 @@ categories:
       - cargo--crane
       - cargo--ship
       - cheese
+      - construction-worker--mask
+      - construction-worker
       - farm--01
       - farm--02
       - farmer--01
@@ -788,6 +800,7 @@ categories:
   - name: People
     members:
       - advocate
+      - advocate--mask
       - design-thinking-team
       - expand--user
       - face--dissatisfied
@@ -815,6 +828,7 @@ categories:
       - team--alignment
       - teammates
       - user
+      - user--mask
       - user--profile
       - user--search
   - name: Red Hat
@@ -1019,6 +1033,10 @@ categories:
       - visual--insights
       - visual--recognition
       - watson--logo
+      - watsonx--ai
+      - watsonx--data
+      - watsonx--governance
+      - watsonx
   - name: Weather
     members:
       - cloudy

@@ -49,7 +49,7 @@ export const Default = () => {
 };
 
 export const Playground = {
-  render: ({ ratio }, ...args) => {
+  render: ({ ratio, ...args }) => {
     return (
       <Grid {...args}>
         <Column sm={1} md={2} lg={4}>
@@ -89,7 +89,6 @@ Playground.argTypes = {
     control: {
       type: 'select',
     },
-    defaultValue: '1x1',
     options: ['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1'],
   },
 };

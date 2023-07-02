@@ -109,70 +109,73 @@ export const Playground = (args) => (
   </div>
 );
 
+Playground.args = {
+  playgroundWidth: 300,
+  className: 'test-class',
+  placeholder: 'Placeholder text',
+  invalid: false,
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  disabled: false,
+  enableCounter: false,
+  labelText: 'Text Area label',
+  maxCount: '500',
+  warn: false,
+  warnText: 'This is a warning message.',
+};
+
 Playground.argTypes = {
   playgroundWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
-    defaultValue: 300,
   },
   className: {
     control: {
       type: 'text',
     },
-    defaultValue: 'test-class',
   },
   placeholder: {
     control: {
       type: 'text',
     },
-    defaultValue: 'Placeholder text',
   },
   invalid: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   invalidText: {
     control: {
       type: 'text',
     },
-    defaultValue:
-      'Error message that is really long can wrap to more lines but should not be excessively long.',
   },
   disabled: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   enableCounter: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   labelText: {
     control: {
       type: 'text',
     },
-    defaultValue: 'Text Area label',
   },
   maxCount: {
     control: {
       type: 'text',
     },
-    defaultValue: '500',
   },
   warn: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   warnText: {
     control: {
       type: 'text',
     },
-    defaultValue: 'This is a warning message.',
   },
 };
