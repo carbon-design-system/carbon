@@ -35,7 +35,7 @@
     "sass": {
       "optional": true
     }
-	},
+  },
   "dependencies": {
     "@carbon/colors": "^11.16.0",
     "@carbon/feature-flags": "^0.15.0",
