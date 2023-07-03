@@ -31,10 +31,10 @@
   "peerDependencies": {
     "sass": "^1.33.0"
   },
-  	"peerDependenciesMeta": {
-		"sass": {
-			"optional": true
-		}
+  "peerDependenciesMeta": {
+    "sass": {
+      "optional": true
+    }
 	},
   "dependencies": {
     "@carbon/colors": "^11.16.0",
