@@ -7,7 +7,7 @@ import {
   blue20,
   blue30,
   blue40,
-  blue60,
+  platonColors.purple60,
   blue70,
 
   // platonColors.grey
@@ -33,8 +33,8 @@ import {
   purple60,
 
   // Constants
-  white,
-  whiteHover,
+ platonColors.white,
+ platonColors.whiteHover,
   platonColors.grey80Hover,
   platonColors.grey10Hover,
   platonColors,
@@ -143,60 +143,60 @@ export const borderDisabled = platonColors.grey40;
 // Text
 export const textPrimary = platonColors.grey100;
 export const textSecondary = platonColors.grey70;
-export const textPlaceholder = adjustAlpha(textPrimary, 0.4);
-export const textHelper = platonColors.grey60;
-export const textError = red60;
-export const textInverse = white;
-export const textOnColor = white;
+export const textPlaceholder = platonColors.grey60;
+export const textHelper = platonColors.grey70;
+export const textError = platonColors.red70;
+export const textInverse = platonColors.white;
+export const textOnColor = platonColors.white;
 export const textOnColorDisabled = platonColors.grey50;
-export const textDisabled = adjustAlpha(textPrimary, 0.25);
+export const textDisabled = platonColors.grey40;
 
 // Link
-export const linkPrimary = blue60;
-export const linkPrimaryHover = blue70;
-export const linkSecondary = blue70;
-export const linkInverse = blue40;
-export const linkVisited = purple60;
-export const linkInverseActive = platonColors.grey10;
-export const linkInverseHover = blue30;
+export const linkPrimary = platonColors.purple60;
+export const linkPrimaryHover = platonColors.purple70;
+export const linkSecondary = platonColors.purple70;
+export const linkInverse = platonColors.purple30;
+export const linkVisited = platonColors.purple30;
+export const linkInverseActive = platonColors.purple30; // TODO: ask Taikonauten for a value
+export const linkInverseHover = platonColors.purple30;
 
 // Icon
 export const iconPrimary = platonColors.grey100;
 export const iconSecondary = platonColors.grey70;
-export const iconInverse = white;
-export const iconOnColor = white;
+export const iconInverse = platonColors.white;
+export const iconOnColor = platonColors.white;
 export const iconOnColorDisabled = platonColors.grey50;
-export const iconDisabled = adjustAlpha(iconPrimary, 0.25);
-export const iconInteractive = blue60;
+export const iconDisabled = platonColors.grey40;
+export const iconInteractive = platonColors.purple60;
 
 // Support
-export const supportError = red60;
-export const supportSuccess = green50;
-export const supportWarning = yellow30;
-export const supportInfo = blue70;
-export const supportErrorInverse = red50;
-export const supportSuccessInverse = green40;
-export const supportWarningInverse = yellow30;
-export const supportInfoInverse = blue50;
-export const supportCautionMinor = yellow30;
-export const supportCautionMajor = orange40;
-export const supportCautionUndefined = purple60;
+export const supportError = platonColors.red70;
+export const supportSuccess = platonColors.green50;
+export const supportWarning = platonColors.yellow40;
+export const supportInfo = platonColors.purple40;
+export const supportErrorInverse = platonColors.red50;
+export const supportSuccessInverse = platonColors.green40;
+export const supportWarningInverse = platonColors.yellow30;
+export const supportInfoInverse = platonColors.purple30;
+export const supportCautionMinor = platonColors.yellow40;
+export const supportCautionMajor = platonColors.orange50;
+export const supportCautionUndefined = platonColors.purple40;
 
 // Focus
-export const focus = blue60;
-export const focusInset = white;
-export const focusInverse = white;
+export const focus = platonColors.purple60;
+export const focusInset = platonColors.white;
+export const focusInverse = platonColors.white;
 
 // Skeleton
-export const skeletonBackground = whiteHover;
-export const skeletonElement = platonColors.grey30;
+export const skeletonBackground = platonColors.white; // TODO: ask Taikonauten for a value
+export const skeletonElement = platonColors.grey30; // TODO: ask Taikonauten for a value
 
 // Misc
-export const interactive = blue60;
-export const highlight = blue20;
-export const overlay = 'rgba(22, 22, 22, 0.5)';
-export const toggleOff = platonColors.grey50;
-export const shadow = 'rgba(0, 0, 0, 0.3)';
+export const interactive = platonColors.purple50;
+export const highlight = platonColors.purple20;
+export const overlay = platonColors.grey40;
+export const toggleOff = platonColors.grey30;
+export const shadow = platonColors.grey30; // TODO: ask Taikonauten for a value
 
 // Type
 export {
