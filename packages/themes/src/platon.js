@@ -3,40 +3,6 @@
  */
 
 import {
-  // Blue
-  blue20,
-  blue30,
-  blue40,
-  platonColors.purple60,
-  blue70,
-
-  // platonColors.grey
-  platonColors.grey10,
-  platonColors.grey20,
-  platonColors.grey20Hover,
-  platonColors.grey30,
-  platonColors.grey40,
-  platonColors.grey50,
-  platonColors.grey60,
-  platonColors.grey70,
-  platonColors.grey80,
-  platonColors.grey100,
-
-  // Support
-  blue50,
-  green40,
-  green50,
-  yellow30,
-  orange40,
-  red50,
-  red60,
-  purple60,
-
-  // Constants
- platonColors.white,
- platonColors.whiteHover,
-  platonColors.grey80Hover,
-  platonColors.grey10Hover,
   platonColors,
 } from '@carbon/colors';
 import { adjustAlpha } from './tools';
@@ -238,20 +204,21 @@ export {
 
 // Layout
 // Spacing
+export const spacing01 = '0.125rem';
+export const spacing02 = '0.25rem';
+export const spacing03 = '0.5rem';
+export const spacing04 = '0.75rem';
+export const spacing05 = '1rem';
+export const spacing06 = '1.25rem';
+export const spacing07 = '1.5rem';
+export const spacing08 = '2rem';
+export const spacing09 = '2.5rem';
+export const spacing10 = '3rem';
+export const spacing11 = '4rem';
+export const spacing12 = '5rem';
+export const spacing13 = '6rem';
+export const spacing14 = '10rem';
 export {
-  spacing01,
-  spacing02,
-  spacing03,
-  spacing04,
-  spacing05,
-  spacing06,
-  spacing07,
-  spacing08,
-  spacing09,
-  spacing10,
-  spacing11,
-  spacing12,
-  spacing13,
   // Fluid spacing
   fluidSpacing01,
   fluidSpacing02,
