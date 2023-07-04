@@ -5,17 +5,16 @@
 import {
   platonColors,
 } from '@carbon/colors';
-import { adjustAlpha } from './tools';
 
 // Background
 export const background = platonColors.white;
 export const backgroundInverse = platonColors.platonColors.grey100;
 export const backgroundBrand = platonColors.purple70;
 export const backgroundActive = platonColors.purple60;
-export const backgroundHover = adjustAlpha(platonColors.purple60, 0.12); // TODO: ask Taikonauten for a value
+export const backgroundHover = platonColors.purple60; // TODO: ask Taikonauten for a value
 export const backgroundInverseHover = platonColors.grey80;
-export const backgroundSelected = adjustAlpha(platonColors.platonColors.grey50, 0.2); // TODO: ask Taikonauten for a value
-export const backgroundSelectedHover = adjustAlpha(gplatonColors.ray50, 0.32); // TODO: ask Taikonauten for a value
+export const backgroundSelected = platonColors.grey50; // TODO: ask Taikonauten for a value
+export const backgroundSelectedHover = platonColors.ray50; // TODO: ask Taikonauten for a value
 
 // Layer
 // layer-01
