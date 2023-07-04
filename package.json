@@ -8,11 +8,7 @@
     "node": ">=18.x"
   },
   "workspaces": [
-    "actions/*",
-    "config/*",
-    "examples/*",
-    "packages/*",
-    "www"
+    "packages/*"
   ],
   "scripts": {
     "build": "lerna run build --stream --prefix",
@@ -25,8 +21,7 @@
     "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
     "sync": "carbon-cli sync",
     "test": "cross-env BABEL_ENV=test jest",
-    "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js",
-    "postinstall": "husky install"
+    "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js"
   },
   "resolutions": {
     "@types/react": "~17.0.2",
@@ -46,7 +41,7 @@
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.17.12",
     "@babel/runtime": "^7.18.3",
-    "@carbon/cli": "workspace:packages/cli",
+    "@carbon/cli": "^11.11.0",
     "@commitlint/cli": "^17.0.0",
     "@commitlint/config-conventional": "^17.0.0",
     "@percy/cli": "^1.1.0",
@@ -75,45 +70,6 @@
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.0",
     "stylelint": "^15.0.0"
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ],
-    "rules": {
-      "header-max-length": [
-        2,
-        "always",
-        72
-      ],
-      "body-max-line-length": [
-        2,
-        "always",
-        80
-      ],
-      "scope-case": [
-        0,
-        "always",
-        "lower-case"
-      ],
-      "type-enum": [
-        2,
-        "always",
-        [
-          "build",
-          "ci",
-          "chore",
-          "docs",
-          "feat",
-          "fix",
-          "perf",
-          "refactor",
-          "revert",
-          "test",
-          "style"
-        ]
-      ]
-    }
   },
   "lint-staged": {
     "**/*.js": [

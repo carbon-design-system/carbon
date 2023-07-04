@@ -57,3 +57,5 @@ package-lock.json
 
 # Playwright
 .playwright
+
+.yarn
