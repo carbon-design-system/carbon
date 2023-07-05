@@ -1,4 +1,5 @@
-import { Props, Preview, Story } from '@storybook/addon-docs';
+import { ArgsTable, Canvas, Story } from '@storybook/blocks';
+import * as LinkStories from './Link.stories';
 
 # Link
 
@@ -22,13 +23,13 @@ interactive elements, too many links will clutter a page and make it difficult
 for users to identify their next steps. This is especially true for inline
 links, which should be used sparingly.
 
-<Preview>
-  <Story id="components-link--default" />
-</Preview>
+<Canvas>
+  <Story of={LinkStories.Default} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ## Feedback
 

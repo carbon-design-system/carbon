@@ -10,7 +10,7 @@ import React from 'react';
 
 export default {
   title: 'Helpers/HideAtBreakpoint',
-  component: HideAtBreakpoint,
+  component: 'HideAtBreakpoint',
 };
 
 export const HideAtBreakpoint = () => {
