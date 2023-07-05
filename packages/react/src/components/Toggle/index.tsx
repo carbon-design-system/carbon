@@ -5,8 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import Toggle from './Toggle';
+import { default as Toggle, ToggleProps } from './Toggle';
 
 export * from './Toggle.Skeleton';
 export default Toggle;
+
 export { Toggle };
+
+export type { ToggleProps };
