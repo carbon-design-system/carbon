@@ -87,16 +87,29 @@ export const Playground = (args) => (
   </div>
 );
 
+Playground.args = {
+  playgroundWidth: 300,
+  className: 'input-test-class',
+  placeholder: 'Placeholder text',
+  invalid: false,
+  invalidText: 'Error message goes here',
+  disabled: false,
+  labelText: 'Label text',
+  helperText: 'Helper text',
+  warn: false,
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  size: 'md',
+};
+
 Playground.argTypes = {
   playgroundWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
-    defaultValue: 300,
   },
   className: {
     control: {
       type: 'text',
     },
-    defaultValue: 'input-test-class',
   },
   defaultValue: {
     control: {
@@ -107,50 +120,41 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue: 'Placeholder text',
   },
   invalid: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   invalidText: {
     control: {
       type: 'text',
     },
-    defaultValue: 'Error message goes here',
   },
   disabled: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   labelText: {
     control: {
       type: 'text',
     },
-    defaultValue: 'Label text',
   },
   helperText: {
     control: {
       type: 'text',
     },
-    defaultValue: 'Helper text',
   },
   warn: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   warnText: {
     control: {
       type: 'text',
     },
-    defaultValue:
-      'Warning message that is really long can wrap to more lines but should not be excessively long.',
   },
   value: {
     control: {
@@ -164,7 +168,6 @@ Playground.argTypes = {
     action: 'onClick',
   },
   size: {
-    defaultValue: 'md',
     options: ['sm', 'md', 'lg', 'xl'],
     control: {
       type: 'select',

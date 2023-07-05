@@ -1,12 +1,13 @@
-import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
+import { Story, ArgsTable, Canvas } from '@storybook/blocks';
 import { IdPrefix } from '../IdPrefix';
+import * as IdPrefixStories from './IdPrefix.stories';
 
 # Prefix
 
 [Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/ClassPrefix)
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
 ## Table of Contents
 
@@ -14,16 +15,16 @@ import { IdPrefix } from '../IdPrefix';
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
 
 ## Overview
 
 The `IdPrefix` component is used to change the prefix applied to the
 automatically generated `id` attributes placed on certain DOM elements.
 
-<Preview>
-  <Story id="components-idprefix--default" />
-</Preview>
+<Canvas>
+  <Story of={IdPrefixStories.Default} />
+</Canvas>
 
 This component is intended to be used in limited cases, primarily only if
 you have id conflicts when using v10 and v11 packages at the same time during
@@ -47,7 +48,7 @@ export default function MyApp() {
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ## Feedback
 

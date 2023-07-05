@@ -1,6 +1,7 @@
-import { Story, Props, Source, Preview } from '@storybook/addon-docs';
+import { Story, ArgsTable, Canvas } from '@storybook/blocks';
 import ContentSwitcher from '../ContentSwitcher';
 import Switch from '../Switch';
+import * as ContentSwitcherStories from './ContentSwitcher.stories.js';
 
 # Content Switcher
 
@@ -12,8 +13,8 @@ import Switch from '../Switch';
 
 ## Table of Contents
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
 - [Overview](#overview)
 - [Component API](#component-api)
@@ -29,7 +30,7 @@ import Switch from '../Switch';
   - [Accessibility concerns](#accessibility-concerns)
 - [Feedback](#feedback)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
 
 ## Overview
 
@@ -37,13 +38,13 @@ Content switchers allow users to toggle between two or more content sections
 within the same space on screen. Only one content section is shown at a time.
 Create Switch components for each section in the content switcher.
 
-<Preview>
-  <Story id="components-contentswitcher--playground" />
-</Preview>
+<Canvas>
+  <Story of={ContentSwitcherStories.Playground} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ### ContentSwitcher `className`
 
