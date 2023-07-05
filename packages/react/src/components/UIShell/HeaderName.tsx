@@ -6,22 +6,25 @@
  */
 
 import cx from 'classnames';
-import React from 'react';
+import React, { type ElementType } from 'react';
 import PropTypes from 'prop-types';
-import Link, { LinkPropTypes } from './Link';
+import Link, { type LinkProps, LinkPropTypes } from './Link';
 import { usePrefix } from '../../internal/usePrefix';
 
-function HeaderName({
+type HeaderNameProps<E extends ElementType> = LinkProps<E> & {
+  prefix?: string | undefined;
+};
+
+export default function HeaderName<E extends ElementType = 'a'>({
   children,
   className: customClassName,
-  prefix,
-  href,
+  prefix = 'IBM',
   ...rest
-}) {
+}: HeaderNameProps<E>) {
   const selectorPrefix = usePrefix();
   const className = cx(`${selectorPrefix}--header__name`, customClassName);
   return (
-    <Link {...rest} className={className} href={href}>
+    <Link {...rest} className={className}>
       {prefix && (
         <>
           <span className={`${selectorPrefix}--header__name--prefix`}>
@@ -64,9 +67,3 @@ HeaderName.propTypes = {
    */
   prefix: PropTypes.string,
 };
-
-HeaderName.defaultProps = {
-  prefix: 'IBM',
-};
-
-export default HeaderName;
