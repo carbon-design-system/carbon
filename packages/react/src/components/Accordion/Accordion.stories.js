@@ -153,6 +153,11 @@ export const Playground = (args) => (
   </Accordion>
 );
 
+Playground.args = {
+  disabled: false,
+  isFlush: false,
+};
+
 Playground.argTypes = {
   align: {
     options: ['start', 'end'],
@@ -168,18 +173,20 @@ Playground.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   isFlush: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   size: {
     options: ['sm', 'md', 'lg'],
     control: { type: 'select' },
   },
+};
+
+Skeleton.args = {
+  isFlush: false,
 };
 
 Skeleton.argTypes = {
@@ -200,7 +207,6 @@ Skeleton.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   size: {
     control: false,

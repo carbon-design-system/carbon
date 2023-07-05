@@ -1,4 +1,5 @@
-import { Story, Preview, Props } from '@storybook/addon-docs';
+import { Story, Canvas, ArgsTable } from '@storybook/blocks';
+import * as FlexGridStories from './FlexGrid.stories';
 
 # Grid
 
@@ -6,9 +7,9 @@ import { Story, Preview, Props } from '@storybook/addon-docs';
 &nbsp;|&nbsp;
 [Usage guidelines](https://www.carbondesignsystem.com/guidelines/2x-grid/overview)
 
-<!-- prettier-ignore-start -->
+{/* <!-- prettier-ignore-start -->
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 ## Table of Contents
 
 - [Overview](#overview)
@@ -26,8 +27,8 @@ import { Story, Preview, Props } from '@storybook/addon-docs';
   - [Can I nest grid components?](#can-i-nest-grid-components)
 - [Feedback](#feedback)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-<!-- prettier-ignore-end -->
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<!-- prettier-ignore-end --> */}
 
 Carbon's grid components help developers use the
 [2x Grid](https://www.carbondesignsystem.com/guidelines/2x-grid/overview). The
@@ -47,9 +48,9 @@ import { FlexGrid, Row, Column } from '@carbon/react';
 );
 ```
 
-<Preview>
-  <Story id="elements-flexgrid--responsive-grid" />
-</Preview>
+<Canvas>
+  <Story of={FlexGridStories.ResponsiveGrid} />
+</Canvas>
 
 ## Overview
 
@@ -92,9 +93,9 @@ You can pair up multiple breakpoint props to specify how many columns the
 we will use the `sm`, `md`, and `lg` prop to specify how many columns the
 `Column` components should span at the small, medium, and large breakpoints.
 
-<Preview>
-  <Story id="elements-flexgrid--responsive-grid" />
-</Preview>
+<Canvas>
+  <Story of={FlexGridStories.ResponsiveGrid} />
+</Canvas>
 
 ## Grid modes
 
@@ -112,27 +113,27 @@ to mix-and-match certain grid modes to achieve a particular layout.
 
 ### Wide grid
 
-<Preview>
-  <Story id="elements-flexgrid--full-width" />
-</Preview>
+<Canvas>
+  <Story of={FlexGridStories.FullWidth} />
+</Canvas>
 
 ### Narrow grid
 
-<Preview>
-  <Story id="elements-flexgrid--narrow" />
-</Preview>
+<Canvas>
+  <Story of={FlexGridStories.Narrow} />
+</Canvas>
 
 ### Condensed grid
 
-<Preview>
-  <Story id="elements-flexgrid--condensed" />
-</Preview>
+<Canvas>
+  <Story of={FlexGridStories.Condensed} />
+</Canvas>
 
 ### Mix-and-match
 
-<Preview>
-  <Story id="elements-flexgrid--mixed-grid-modes" />
-</Preview>
+<Canvas>
+  <Story of={FlexGridStories.MixedGridModes} />
+</Canvas>
 
 ## Auto columns
 
@@ -150,9 +151,9 @@ For example, if you have on `Column` component it would span 100%, two `Column`
 components would span 50% each, four `Column` components would span 25% each,
 and so on.
 
-<Preview>
-  <Story id="elements-flexgrid--auto-columns" />
-</Preview>
+<Canvas>
+  <Story of={FlexGridStories.AutoColumns} />
+</Canvas>
 
 ## Offset columns
 
@@ -171,13 +172,13 @@ breakpoint. At the medium breakpoint, it will be offset by two columns.
 <Column sm={2} md={{ span: 4, offset: 2 }} />
 ```
 
-<Preview>
-  <Story id="elements-flexgrid--offset" />
-</Preview>
+<Canvas>
+  <Story of={FlexGridStories.Offset} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ### Using the `as` prop
 

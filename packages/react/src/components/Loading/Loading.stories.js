@@ -27,6 +27,13 @@ export const Playground = (args) => {
   return <Loading className={'some-class'} {...args} />;
 };
 
+Playground.args = {
+  active: true,
+  withOverlay: false,
+  small: false,
+  description: 'Loading',
+};
+
 Playground.argTypes = {
   children: {
     table: {
@@ -48,24 +55,20 @@ Playground.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: true,
   },
   withOverlay: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   small: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   description: {
     control: {
       type: 'text',
     },
-    defaultValue: 'Loading',
   },
 };

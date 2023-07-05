@@ -1,6 +1,9 @@
-import { Story, Props } from '@storybook/addon-docs';
+import { Story, ArgsTable, Canvas, Unstyled } from '@storybook/blocks';
 import ComposedModal from '../ComposedModal';
 import { InlineNotification } from '../Notification';
+import CodeSnippet from '../CodeSnippet';
+import * as ComposedModalStories from './ComposedModal.stories.js';
+import './ComposedModal.stories.scss'
 
 # ComposedModal
 
@@ -12,8 +15,8 @@ import { InlineNotification } from '../Notification';
 
 ## Table of Contents
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
 - [Overview](#overview)
 - [Component API](#component-api)
@@ -29,7 +32,7 @@ import { InlineNotification } from '../Notification';
 - [References](#references)
 - [Feedback](#feedback)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
 
 ## Overview
 
@@ -37,13 +40,13 @@ import { InlineNotification } from '../Notification';
 Modal content can be customized via the `<ModalHeader>`, `<ModalBody>` and
 `<ModalFooter>` components.
 
-<Preview>
-  <Story id="components-composedmodal--with-state-manager" />
-</Preview>
+<Canvas>
+  <Story of={ComposedModalStories.WithStateManager} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ## Opening/closing modal
 
@@ -94,13 +97,14 @@ const ModalStateManager = ({
 };
 ```
 
-<InlineNotification
-  kind="warning"
-  title="Warning"
-  subtitle="`Modal` and `ComposedModal` have to be put at the
-  top level in a React tree. The easiest way to ensure that is using React
-  portal as shown in above example."
-/>
+<Unstyled>
+  <InlineNotification kind="warning" title="Warning" className="sb-notification">
+    <CodeSnippet type="inline" hideCopyButton>{'Modal'}</CodeSnippet>
+  and <CodeSnippet type="inline" hideCopyButton>{'ComposedModal'}</CodeSnippet>
+    have to be put at the top level in a React tree. The easiest way to ensure that is using React
+    portal as shown in above example.
+  </InlineNotification>
+</Unstyled>
 
 ## Modal sizes
 
@@ -201,13 +205,14 @@ With `<ComposedModal>`, you can control the buttons with the following code.
 </ComposedModal>
 ```
 
-<InlineNotification
-  kind="warning"
-  title="Warning"
-  subtitle="As the instruction for the three buttons implies, <ModalFooter>
-  is flexible on the buttons as you render <Button>'s by yourself,
-  as shown below. In this case, the application code needs to take care of running
-  actions upon clicking those buttons, e.g. closing the modal"></InlineNotification>
+<Unstyled>
+  <InlineNotification kind="warning" title="Warning" className="sb-notification">
+    As the instruction for the three buttons implies, <CodeSnippet type="inline" hideCopyButton>{'ModalFooter'}</CodeSnippet>
+    is flexible on the buttons as you render <CodeSnippet type="inline" hideCopyButton>{'Button'}</CodeSnippet>'s by yourself,
+    as shown below. In this case, the application code needs to take care of running
+    actions upon clicking those buttons, e.g. closing the modal
+  </InlineNotification>
+</Unstyled>
 
 ```jsx
 <ComposedModal>

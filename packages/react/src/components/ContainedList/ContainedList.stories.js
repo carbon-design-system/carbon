@@ -361,14 +361,8 @@ const PlaygroundStory = (args) => (
 
 export const Playground = PlaygroundStory.bind({});
 
-Playground.argTypes = {
-  label: {
-    defaultValue: 'List title',
-  },
-  kind: {
-    defaultValue: 'on-page',
-  },
-  size: {
-    defaultValue: 'lg',
-  },
+Playground.args = {
+  label: 'List title',
+  kind: 'on-page',
+  size: 'lg',
 };

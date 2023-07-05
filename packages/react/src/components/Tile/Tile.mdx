@@ -1,4 +1,8 @@
-import { Story, Props, Source, Preview } from '@storybook/addon-docs';
+import { Story, ArgsTable, Canvas, Meta } from '@storybook/blocks';
+import * as TileStories from './Tile.stories';
+import * as TileFeatureFlagStories from './Tile.featureflag.stories'
+
+<Meta of={TileStories} />
 
 # Tile
 
@@ -12,45 +16,45 @@ import { Story, Props, Source, Preview } from '@storybook/addon-docs';
 
 ## Overview
 
-<Preview>
-  <Story id="components-tile--default" />
-</Preview>
+<Canvas>
+  <Story of={TileStories.Default} />
+</Canvas>
 
 ## Clickable
 
-<Preview>
-  <Story id="components-tile--clickable" />
-</Preview>
+<Canvas>
+  <Story of={TileStories.Clickable} />
+</Canvas>
 
 ## Expandable
 
-<Preview>
-  <Story id="components-tile--expandable" />
-</Preview>
+<Canvas>
+  <Story of={TileStories.Expandable} />
+</Canvas>
 
 ## Expandable with Interactive
 
-<Preview>
-  <Story id="components-tile--expandable-with-interactive" />
-</Preview>
+<Canvas>
+  <Story of={TileStories.ExpandableWithInteractive} />
+</Canvas>
 
 ## Multi Select
 
-<Preview>
-  <Story id="components-tile--selectable" />
-</Preview>
+<Canvas>
+  <Story of={TileStories.Selectable} />
+</Canvas>
 
 ## Multi Select
 
-<Preview>
-  <Story id="components-tile--multi-select" />
-</Preview>
+<Canvas>
+  <Story of={TileStories.MultiSelect} />
+</Canvas>
 
 ## Radio
 
-<Preview>
-  <Story id="components-tile--radio" />
-</Preview>
+<Canvas>
+  <Story of={TileStories.Radio} />
+</Canvas>
 
 ## Experimental Improved Contrast
 
@@ -70,27 +74,27 @@ or if you have multiple feature flags you can enable them this way.
 );
 ```
 
-<Preview>
+<Canvas>
   <div style={{ width: '1018px', maxWidth: '100%' }}>
-    <Story id="components-tile-experimental-improved-contrast--clickable" />
+    <Story of={TileFeatureFlagStories.Clickable} meta={TileFeatureFlagStories} />
   </div>
   <div style={{ width: '1018px', maxWidth: '100%' }}>
-    <Story id="components-tile-experimental-improved-contrast--expandable" />
+    <Story of={TileFeatureFlagStories.Expandable} meta={TileFeatureFlagStories} />
   </div>
   <div style={{ width: '1018px', maxWidth: '100%' }}>
-    <Story id="components-tile-experimental-improved-contrast--multi-select" />
+    <Story of={TileFeatureFlagStories.MultiSelect} meta={TileFeatureFlagStories} />
   </div>
   <div style={{ width: '1018px', maxWidth: '100%' }}>
-    <Story id="components-tile-experimental-improved-contrast--radio" />
+    <Story of={TileFeatureFlagStories.Radio} meta={TileFeatureFlagStories} />
   </div>
   <div style={{ width: '1018px', maxWidth: '100%' }}>
-    <Story id="components-tile-experimental-improved-contrast--selectable" />
+    <Story of={TileFeatureFlagStories.Selectable} meta={TileFeatureFlagStories} />
   </div>
-</Preview>
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ## Feedback
 
