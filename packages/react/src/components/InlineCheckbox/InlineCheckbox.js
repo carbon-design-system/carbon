@@ -52,7 +52,9 @@ const InlineCheckbox = React.forwardRef(function InlineCheckbox(
   }
 
   useEffect(() => {
-    inputRef.current.indeterminate = indeterminate;
+    if (inputRef?.current) {
+      inputRef.current.indeterminate = indeterminate;
+    }
   }, [indeterminate]);
 
   return (

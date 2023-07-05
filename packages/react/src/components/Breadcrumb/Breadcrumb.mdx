@@ -1,5 +1,6 @@
-import { Story, Preview, Props } from '@storybook/addon-docs';
+import { Story, Canvas, ArgsTable } from '@storybook/blocks';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbSkeleton } from '../Breadcrumb';
+import * as BreadcrumbStories from './Breadcrumb.stories';
 
 # Breadcrumb
 
@@ -24,9 +25,9 @@ You can build a breadcrumb using a combination of the `Breadcrumb` and
 `BreadcrumbItem` components as `children` and each `BreadcrumbItem` is
 responsible for displaying the page links in the hierarchy.
 
-<Preview>
-  <Story id="components-breadcrumb--breadcrumb-story" />
-</Preview>
+<Canvas>
+  <Story of={BreadcrumbStories.Default} />
+</Canvas>
 
 ## Breadcrumb with `OverflowMenu`
 
@@ -35,9 +36,9 @@ The first and last two page links should be shown, but the remaining breadcrumbs
 in between are condensed into an overflow menu. Breadcrumbs should never wrap
 onto a second line.
 
-<Preview>
-  <Story id="components-breadcrumb--breadcrumb-with-overflow-menu" />
-</Preview>
+<Canvas>
+  <Story of={BreadcrumbStories.BreadcrumbWithOverflowMenu} />
+</Canvas>
 
 ## Skeleton state
 
@@ -45,13 +46,13 @@ You can use the `BreadcrumbSkeleton` component to render a skeleton variant of a
 breadcrumb. This is useful to display while content in your breadcrumb is being
 fetched from an external resource like an API.
 
-<Preview>
-  <Story id="components-breadcrumb--skeleton" />
-</Preview>
+<Canvas>
+  <Story of={BreadcrumbStories.Skeleton} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ### Breadcrumb noTrailingSlash
 
