@@ -132,7 +132,7 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
 
 // eslint-disable-next-line storybook/csf-component
 export default {
-  title: 'Components/UI Shell/HeaderBase',
+  title: 'Components/UI Shell/Header',
   component: Header,
   subcomponents: {
     Content,
@@ -173,7 +173,7 @@ export default {
   },
 };
 
-export const HeaderBaseWNavigation = () => (
+export const HeaderWNavigation = () => (
   <HeaderContainer
     render={({ isSideNavExpanded, onClickSideNavExpand }) => (
       <>
@@ -227,9 +227,9 @@ export const HeaderBaseWNavigation = () => (
   />
 );
 
-HeaderBaseWNavigation.storyName = 'Header Base w/ Navigation';
+HeaderWNavigation.storyName = 'Header w/ Navigation';
 
-export const HeaderBaseWNavigationAndActions = () => (
+export const HeaderWNavigationAndActions = () => (
   <HeaderContainer
     render={({ isSideNavExpanded, onClickSideNavExpand }) => (
       <>
@@ -297,10 +297,9 @@ export const HeaderBaseWNavigationAndActions = () => (
   />
 );
 
-HeaderBaseWNavigationAndActions.storyName =
-  'Header Base w/ Navigation and Actions';
+HeaderWNavigationAndActions.storyName = 'Header w/ Navigation and Actions';
 
-export const HeaderBaseWNavigationActionsAndSideNav = () => (
+export const HeaderWNavigationActionsAndSideNav = () => (
   <HeaderContainer
     render={({ isSideNavExpanded, onClickSideNavExpand }) => (
       <>
@@ -416,10 +415,10 @@ export const HeaderBaseWNavigationActionsAndSideNav = () => (
   />
 );
 
-HeaderBaseWNavigationActionsAndSideNav.storyName =
-  'Header Base w/ Navigation, Actions and SideNav';
+HeaderWNavigationActionsAndSideNav.storyName =
+  'Header w/ Navigation, Actions and SideNav';
 
-export const HeaderBaseWSideNav = () => (
+export const HeaderWSideNav = () => (
   <HeaderContainer
     render={({ isSideNavExpanded, onClickSideNavExpand }) => (
       <>
@@ -497,9 +496,9 @@ export const HeaderBaseWSideNav = () => (
   />
 );
 
-HeaderBaseWSideNav.storyName = 'Header Base w/ SideNav';
+HeaderWSideNav.storyName = 'Header w/ SideNav';
 
-export const HeaderBaseWActionsAndRightPanel = () => (
+export const HeaderWActionsAndRightPanel = () => (
   <>
     <Header aria-label="IBM Platform Name">
       <HeaderName href="#" prefix="IBM">
@@ -530,10 +529,9 @@ export const HeaderBaseWActionsAndRightPanel = () => (
   </>
 );
 
-HeaderBaseWActionsAndRightPanel.storyName =
-  'Header Base w/ Actions and Right Panel';
+HeaderWActionsAndRightPanel.storyName = 'Header w/ Actions and Right Panel';
 
-export const HeaderBaseWActionsAndSwitcher = (args) => (
+export const HeaderWActionsAndSwitcher = (args) => (
   <HeaderContainer
     {...args}
     render={({ isSideNavExpanded, onClickSideNavExpand }) => (
@@ -601,9 +599,9 @@ export const HeaderBaseWActionsAndSwitcher = (args) => (
   />
 );
 
-HeaderBaseWActionsAndSwitcher.storyName = 'Header Base w/ Actions and Switcher';
+HeaderWActionsAndSwitcher.storyName = 'Header w/ Actions and Switcher';
 
-HeaderBaseWActionsAndSwitcher.argTypes = {
+HeaderWActionsAndSwitcher.argTypes = {
   isSideNavExpanded: {
     defaultValue: true,
     description: 'Optional prop to display the HeaderPanel.',

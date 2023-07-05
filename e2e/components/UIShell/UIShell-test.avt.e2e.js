@@ -11,10 +11,10 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('UIShell @avt', () => {
-  test('header base', async ({ page }) => {
+  test('header', async ({ page }) => {
     await visitStory(page, {
       component: 'UIShell',
-      id: 'components-ui-shell-headerbase--header-base-w-navigation',
+      id: 'components-ui-shell-header--header-base-w-navigation',
       globals: {
         theme: 'white',
       },
