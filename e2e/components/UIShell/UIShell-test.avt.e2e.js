@@ -14,7 +14,7 @@ test.describe('UIShell @avt', () => {
   test('header', async ({ page }) => {
     await visitStory(page, {
       component: 'UIShell',
-      id: 'components-ui-shell-header--header-base-w-navigation',
+      id: 'components-ui-shell-header--header-w-navigation',
       globals: {
         theme: 'white',
       },
