@@ -2502,6 +2502,9 @@ __metadata:
     sass: ^1.51.0
   peerDependencies:
     sass: ^1.33.0
+  peerDependenciesMeta:
+    sass:
+      optional: true
   languageName: unknown
   linkType: soft
 
