@@ -47,8 +47,6 @@ jobs:
           delete-branch: true
           title: 'chore(release): update carbon deps'
           token: ${{ steps.generate_token.outputs.token }}
-          path: carbon-design-system/carbon-website
-          base: main
           body: |
             Automated pull request to update Carbon on the website
 
