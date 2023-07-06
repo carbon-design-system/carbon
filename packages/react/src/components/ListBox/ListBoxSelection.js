@@ -9,7 +9,6 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Close16 } from '@carbon/icons-react';
-import { match, keys } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 
 /**
@@ -39,20 +38,7 @@ const ListBoxSelection = ({
       onClearSelection(event);
     }
   };
-  const handleOnKeyDown = (event) => {
-    event.stopPropagation();
-    if (disabled) {
-      return;
-    }
 
-    // When a user hits ENTER, we'll clear the selection
-    if (match(event, keys.Enter)) {
-      clearSelection(event);
-      if (onClearSelection) {
-        onClearSelection(event);
-      }
-    }
-  };
   const description = selectionCount ? t('clear.all') : t('clear.selection');
   const tagClasses = cx(
     `${prefix}--tag`,
@@ -62,6 +48,8 @@ const ListBoxSelection = ({
       [`${prefix}--tag--disabled`]: disabled,
     }
   );
+
+  /* eslint-disable jsx-a11y/click-events-have-key-events */
   return selectionCount ? (
     <div className={tagClasses}>
       <span className={`${prefix}--tag__label`} title={selectionCount}>
@@ -69,10 +57,9 @@ const ListBoxSelection = ({
       </span>
       <div
         role="button"
-        tabIndex={disabled ? -1 : 0}
+        tabIndex={-1}
         className={`${prefix}--tag__close-icon`}
         onClick={handleOnClick}
-        onKeyDown={handleOnKeyDown}
         disabled={disabled}
         aria-label={t('clear.all')}
         title={description}>
@@ -83,9 +70,8 @@ const ListBoxSelection = ({
     <div
       role="button"
       className={className}
-      tabIndex={disabled ? -1 : 0}
+      tabIndex={-1}
       onClick={handleOnClick}
-      onKeyDown={handleOnKeyDown}
       aria-label={description}
       title={description}>
       {selectionCount}

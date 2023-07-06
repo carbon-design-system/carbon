@@ -75,7 +75,8 @@ const MultiSelect = React.forwardRef(function MultiSelect(
   const prefix = usePrefix();
   const { current: multiSelectInstanceId } = useRef(getInstanceId());
   const [highlightedIndex, setHighlightedIndex] = useState(null);
-  const [isOpen, setIsOpen] = useState(open);
+  const [inputFocused, setInputFocused] = useState(false);
+  const [isOpen, setIsOpen] = useState(open || false);
   const [prevOpenProp, setPrevOpenProp] = useState(open);
   const [topItems, setTopItems] = useState([]);
   const {
@@ -160,6 +161,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
     [enabled ? null : containerClassName],
     {
       [`${prefix}--multi-select--invalid`]: invalid,
+      [`${prefix}--multi-select--invalid--focused`]: invalid && inputFocused,
       [`${prefix}--multi-select--warning`]: showWarning,
       [`${prefix}--multi-select--inline`]: inline,
       [`${prefix}--multi-select--selected`]:
@@ -216,13 +218,29 @@ const MultiSelect = React.forwardRef(function MultiSelect(
   }
 
   const onKeyDown = (e) => {
-    if (match(e, keys.Delete) && !disabled) {
-      clearSelection();
-      e.stopPropagation();
+    if (!disabled) {
+      if (match(e, keys.Delete) || match(e, keys.Escape)) {
+        clearSelection();
+        e.stopPropagation();
+      }
     }
   };
 
-  const toggleButtonProps = getToggleButtonProps();
+  const multiSelectFieldWrapperClasses = cx(
+    `${prefix}--list-box__field--wrapper`,
+    {
+      [`${prefix}--list-box__field--wrapper--input-focused`]: inputFocused,
+    }
+  );
+
+  const toggleButtonProps = getToggleButtonProps({
+    onFocus: () => {
+      setInputFocused(true);
+    },
+    onBlur: () => {
+      setInputFocused(false);
+    },
+  });
 
   return (
     <div className={wrapperClasses}>
@@ -255,14 +273,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
             className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
           />
         )}
-        <button
-          type="button"
-          className={`${prefix}--list-box__field`}
-          disabled={disabled}
-          aria-disabled={disabled}
-          {...toggleButtonProps}
-          ref={mergeRefs(toggleButtonProps.ref, ref)}
-          onKeyDown={onKeyDown}>
+        <div className={multiSelectFieldWrapperClasses}>
           {selectedItems.length > 0 && (
             <ListBox.Selection
               clearSelection={!disabled ? clearSelection : noop}
@@ -271,11 +282,23 @@ const MultiSelect = React.forwardRef(function MultiSelect(
               disabled={disabled}
             />
           )}
-          <span id={fieldLabelId} className={`${prefix}--list-box__label`}>
-            {label}
-          </span>
-          <ListBox.MenuIcon isOpen={isOpen} translateWithId={translateWithId} />
-        </button>
+          <button
+            type="button"
+            className={`${prefix}--list-box__field`}
+            disabled={disabled}
+            aria-disabled={disabled}
+            {...toggleButtonProps}
+            ref={mergeRefs(toggleButtonProps.ref, ref)}
+            onKeyDown={onKeyDown}>
+            <span id={fieldLabelId} className={`${prefix}--list-box__label`}>
+              {label}
+            </span>
+            <ListBox.MenuIcon
+              isOpen={isOpen}
+              translateWithId={translateWithId}
+            />
+          </button>
+        </div>
         <ListBox.Menu aria-multiselectable="true" {...getMenuProps()}>
           {isOpen &&
             sortItems(items, sortOptions).map((item, index) => {
@@ -424,7 +447,7 @@ MultiSelect.propTypes = {
 
   /**
    * `onMenuChange` is a utility for this controlled component to communicate to a
-   * consuming component that the menu was opend(`true`)/closed(`false`).
+   * consuming component that the menu was open(`true`)/closed(`false`).
    */
   onMenuChange: PropTypes.func,
 

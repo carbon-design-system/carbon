@@ -349,6 +349,7 @@ export default class FilterableMultiSelect extends React.Component {
         {(prefix) => {
           const wrapperClasses = cx(
             `${prefix}--multi-select__wrapper`,
+            `${prefix}--multi-select--filterable__wrapper`,
             `${prefix}--list-box__wrapper`,
             [enabled ? containerClassName : null],
             {
@@ -430,6 +431,8 @@ export default class FilterableMultiSelect extends React.Component {
                       [enabled ? null : containerClassName],
                       {
                         [`${prefix}--multi-select--invalid`]: invalid,
+                        [`${prefix}--multi-select--invalid--focused`]:
+                          invalid && this.state.inputFocused,
                         [`${prefix}--multi-select--open`]: isOpen,
                         [`${prefix}--multi-select--inline`]: inline,
                         [`${prefix}--multi-select--selected`]:
@@ -483,12 +486,30 @@ export default class FilterableMultiSelect extends React.Component {
                         if (match(event, keys.Space)) {
                           event.stopPropagation();
                         }
+
+                        if (!disabled) {
+                          if (
+                            match(event, keys.Delete) ||
+                            match(event, keys.Escape)
+                          ) {
+                            if (isOpen) {
+                              this.handleOnMenuChange(true);
+                              this.clearInputValue();
+                              event.stopPropagation();
+                            } else if (!isOpen) {
+                              this.clearInputValue();
+                              clearSelection();
+                              event.stopPropagation();
+                            }
+                          }
+                        }
                       },
                       onFocus: () => {
                         this.setState({ inputFocused: true });
                       },
                       onBlur: () => {
-                        this.setState({ inputFocused: false });
+                        this.setState({ inputFocused: false, inputValue: '' });
+                        this.handleOnMenuChange(false);
                       },
                     });
                     const menuProps = getMenuProps(
