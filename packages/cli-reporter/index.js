@@ -9,15 +9,6 @@
 
 const chalk = require('chalk');
 
-// Fix bold on Windows
-// Reference: https://github.com/yarnpkg/yarn/blob/ed2c8a50c02505bdd6bd67d5e8c4461abc2b8dae/src/reporters/console/console-reporter.js#L32-L35
-if (
-  process.platform === 'win32' &&
-  !(process.env.TERM && /^xterm/i.test(process.env.TERM))
-) {
-  chalk.bold._styles[0].close += '\u001b[m';
-}
-
 class ConsoleReporter {
   constructor({
     stderr = process.stderr,

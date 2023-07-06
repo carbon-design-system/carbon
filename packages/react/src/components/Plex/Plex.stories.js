@@ -17,7 +17,6 @@ export default {
       control: {
         type: 'radio',
       },
-      defaultValue: 'Regular',
       mapping: {
         Light: 300,
         Regular: 400,
@@ -25,6 +24,9 @@ export default {
       },
       options: ['Light', 'Regular', 'SemiBold'],
     },
+  },
+  args: {
+    fontWeight: 'Regular',
   },
 };
 
