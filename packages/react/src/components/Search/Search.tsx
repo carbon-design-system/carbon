@@ -99,7 +99,7 @@ export interface SearchProps extends InputPropsBase {
   renderIcon?: ComponentType | FunctionComponent;
 
   /**
-   * Specify the role for the underlying `<input>`, defaults to `searchbox`
+   * Optional prop to specify the role for the underlying `<input>`
    */
   role?: string;
 
@@ -137,7 +137,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
     onExpand,
     placeholder = 'Search',
     renderIcon,
-    role = 'searchbox',
+    role,
     size = 'md',
     type = 'text',
     value,
@@ -204,7 +204,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
   }
 
   return (
-    <div role="search" aria-label={placeholder} className={searchClasses}>
+    <div role="search"className={searchClasses}>
       {/* the magnifier is used in ExpandableSearch as a click target to expand,
       however, it does not need a keyboard event bc the input element gets focus on keyboard nav and expands that way*/}
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
@@ -333,7 +333,7 @@ Search.propTypes = {
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
-   * Specify the role for the underlying `<input>`, defaults to `searchbox`
+   * Optional prop to specify the role for the underlying `<input>`
    */
   role: PropTypes.string,
 
