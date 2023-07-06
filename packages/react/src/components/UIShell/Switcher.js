@@ -70,7 +70,7 @@ const Switcher = React.forwardRef(function Switcher(props, forwardRef) {
       // handleSwitcherItemFocus should only be passed down if the child is a SwitcherItem
       // SwitcherDivider, for example, does not accept a handleSwitcherItemFocus prop
       if (child.type?.displayName === 'SwitcherItem') {
-        React.cloneElement(child, {
+        return React.cloneElement(child, {
           handleSwitcherItemFocus,
           index,
           key: index,
@@ -78,7 +78,7 @@ const Switcher = React.forwardRef(function Switcher(props, forwardRef) {
         });
       }
 
-      React.cloneElement(child, {
+      return React.cloneElement(child, {
         index,
         key: index,
         expanded,
