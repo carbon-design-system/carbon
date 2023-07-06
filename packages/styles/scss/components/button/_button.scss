@@ -5,19 +5,21 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '../../config' as *;
+@use 'tokens' as *;
 @use 'vars' as *;
 @use 'mixins' as *;
+@use '../tooltip';
+@use '../../config' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../../layer' as *;
 @use '../../utilities/convert' as *;
 @use '../../utilities/focus-outline';
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/visually-hidden' as *;
 @use '../../utilities/layout';
-@use 'tokens' as *;
 
 @mixin button {
   .#{$prefix}--btn {

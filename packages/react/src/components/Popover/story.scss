@@ -8,6 +8,7 @@
 @use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/utilities/component-reset';
 
 /// Utilities
 .flex {
@@ -84,11 +85,13 @@
 }
 
 .popover-title {
+  @include component-reset.reset;
   @include type.type-style('heading-compact-01');
   margin-bottom: spacing.$spacing-01;
 }
 
 .popover-details {
+  @include component-reset.reset;
   @include type.type-style('body-compact-01');
 }
 

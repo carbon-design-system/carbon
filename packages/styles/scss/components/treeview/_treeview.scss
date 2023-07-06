@@ -5,12 +5,14 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../form';
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
 @use '../../utilities/convert' as *;
+@use '../../utilities/component-reset';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/skeleton' as *;
 
@@ -19,6 +21,8 @@
 /// @group treeview
 @mixin treeview {
   .#{$prefix}--tree {
+    @include component-reset.reset;
+
     overflow: hidden;
   }
 
@@ -34,6 +38,12 @@
     &:hover {
       cursor: pointer;
     }
+  }
+
+  .#{$prefix}--tree-node__children {
+    @include component-reset.reset;
+
+    list-style-type: none;
   }
 
   .#{$prefix}--tree-node--with-icon .#{$prefix}--tree-node {

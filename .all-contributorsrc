@@ -165,6 +165,15 @@
         "a11y"
       ]
     },
+     {
+          "login": "erifsx",
+          "name": "Eric Marcoux",
+          "avatar_url": "https://avatars3.githubusercontent.com/u/997572?v=4",
+          "profile": "https://github.com/erifsx",
+          "contributions": [
+            "code"
+          ]
+        },
     {
       "login": "vpicone",
       "name": "Vince Picone",
@@ -1202,6 +1211,15 @@
       "name": "Tony ZL",
       "avatar_url": "https://avatars.githubusercontent.com/u/24784725?v=4",
       "profile": "https://github.com/tongyy",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "tulivlk",
+      "name": "Petr Kadlec",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67226666?v=4",
+      "profile": "https://github.com/tulivlk",
       "contributions": [
         "code"
       ]

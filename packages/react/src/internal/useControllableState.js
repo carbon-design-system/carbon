@@ -22,7 +22,7 @@ import { warning } from './warning';
  * @param {string} [config.name] - the name of the custom component
  * @param {any} config.defaultValue - the default value used for the state. This will be
  * the fallback value used if `value` is not defined.
- * @param {Function} config.onChange - an optional function that is called when
+ * @param {Function|undefined} config.onChange - an optional function that is called when
  * the value of the state changes. This is useful for communicating to parents of
  * controlled components that the value is requesting to be changed.
  * @param {any} config.value - a controlled value. Omitting this means that the state is

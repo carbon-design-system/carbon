@@ -9,6 +9,8 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../../layer' as *;
+@use '../../utilities/component-reset';
 @use '../../utilities/convert' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/skeleton' as *;
@@ -32,7 +34,7 @@ $input-label-weight: 400 !default;
   }
 
   .#{$prefix}--fieldset {
-    @include reset;
+    @include component-reset.reset;
   }
 
   .#{$prefix}--form-item {

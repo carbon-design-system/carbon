@@ -8,6 +8,7 @@
 //-----------------------------
 // Fluid Text Area
 //-----------------------------
+@use '../text-area';
 @use '../../config' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -65,8 +66,8 @@
 
   //counter
   .#{$prefix}--text-area--fluid div.#{$prefix}--label {
-    right: 1rem;
-    left: initial;
+    display: flex;
+    justify-content: flex-end;
   }
 
   .#{$prefix}--text-area--fluid .#{$prefix}--text-area {
