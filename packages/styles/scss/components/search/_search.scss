@@ -9,6 +9,7 @@
 // Search
 //-----------------------------
 
+@use '../text-input';
 @use '../../theme' as *;
 @use '../../config' as *;
 @use '../../type';
@@ -122,6 +123,8 @@
   }
 
   .#{$prefix}--search-magnifier-icon {
+    @include reset;
+
     position: absolute;
     z-index: 2;
     top: 50%;
