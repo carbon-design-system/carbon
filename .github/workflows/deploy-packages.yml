@@ -43,6 +43,7 @@ jobs:
         uses: peter-evans/create-pull-request@v5
         with:
           branch: 'release/update-carbon-deps-${{ github.ref }}'
+          base: 'main'
           commit-message: 'chore(release): update carbon deps'
           delete-branch: true
           title: 'chore(release): update carbon deps'
