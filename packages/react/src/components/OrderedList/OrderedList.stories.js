@@ -101,6 +101,12 @@ export const Playground = (args) => (
   </OrderedList>
 );
 
+Playground.args = {
+  isExpressive: false,
+  native: false,
+  nested: false,
+};
+
 Playground.argTypes = {
   children: {
     table: {
@@ -116,18 +122,15 @@ Playground.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   native: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   nested: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
 };

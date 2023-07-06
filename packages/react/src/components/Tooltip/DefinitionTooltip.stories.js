@@ -70,9 +70,15 @@ const PlaygroundStory = (props) => {
 
 export const Playground = PlaygroundStory.bind({});
 
+Playground.args = {
+  align: 'bottom-left',
+  defaultOpen: false,
+  definition: 'Example definition',
+  openOnHover: true,
+};
+
 Playground.argTypes = {
   align: {
-    defaultValue: 'bottom-left',
     options: [
       'top',
       'top-left',
@@ -94,14 +100,10 @@ Playground.argTypes = {
       type: 'select',
     },
   },
-  defaultOpen: {
-    defaultValue: false,
-  },
   definition: {
     control: {
       type: 'text',
     },
-    defaultValue: 'Example definition',
   },
   id: {
     table: { disable: true },
@@ -110,7 +112,6 @@ Playground.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: true,
   },
   tooltipText: {
     table: {

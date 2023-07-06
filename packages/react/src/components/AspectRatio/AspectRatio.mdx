@@ -1,4 +1,5 @@
-import { Story, Props, Source, Preview } from '@storybook/addon-docs';
+import { Story, ArgsTable, Canvas } from '@storybook/blocks';
+import * as AspectRatioStories from './AspectRatio.stories';
 import { Grid, Row, Column } from '../Grid';
 import { AspectRatio } from '.';
 
@@ -8,8 +9,8 @@ import { AspectRatio } from '.';
 &nbsp;|&nbsp;
 [Usage guidelines](https://www.carbondesignsystem.com/guidelines/2x-grid/overview#aspect-ratio)
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
 ## Table of Contents
 
@@ -17,7 +18,7 @@ import { AspectRatio } from '.';
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
 
 ## Overview
 
@@ -27,16 +28,16 @@ the width and the height of your content. The width will be determined by
 spanning 100% of the space available in your layout, and the height will be
 determined by the ratio that you specified.
 
-<Preview>
-  <Story id="components-aspectratio--default" />
-</Preview>
+<Canvas>
+  <Story of={AspectRatioStories.Default} />
+</Canvas>
 
 To see the full list of ratios supported by the `ratio` prop, check out the prop
 table in the [Component API](#component-api) section below.
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ### AspectRatio as
 

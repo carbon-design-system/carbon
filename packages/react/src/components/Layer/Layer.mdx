@@ -1,12 +1,13 @@
-import { ArgsTable, Canvas, Story } from '@storybook/addon-docs';
+import { ArgsTable, Canvas, Story } from '@storybook/blocks';
+import * as LayerStories from './Layer.stories';
 
 # Layer
 
 [Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Layer)
 
-<!-- prettier-ignore-start -->
+{/* <!-- prettier-ignore-start -->
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 ## Table of Contents
 
 - [Overview](#overview)
@@ -16,8 +17,8 @@ import { ArgsTable, Canvas, Story } from '@storybook/addon-docs';
   - [Layer as](#layer-as)
 - [Feedback](#feedback)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-<!-- prettier-ignore-end -->
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<!-- prettier-ignore-end --> */}
 
 ## Overview
 
@@ -27,7 +28,7 @@ tokens directly, or use contextual tokens from our styles package like `$layer`
 or `$field`.
 
 <Canvas>
-  <Story id="components-layer--default" />
+  <Story of={LayerStories.Default} />
 </Canvas>
 
 
