@@ -3935,6 +3935,9 @@ Map {
       "isActive": Object {
         "type": "bool",
       },
+      "isCollapsible": Object {
+        "type": "bool",
+      },
       "onClick": Object {
         "type": "func",
       },
