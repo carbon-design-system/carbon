@@ -1,7 +1,7 @@
 {
   "name": "@carbon/cli",
   "description": "Task automation for working with the Carbon Design System",
-  "version": "11.11.0",
+  "version": "11.12.0-rc.0",
   "license": "Apache-2.0",
   "bin": {
     "carbon-cli": "./bin/carbon-cli.js"
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.18.2",
-    "@carbon/cli-reporter": "^10.6.0",
+    "@carbon/cli-reporter": "^10.7.0-rc.0",
     "@octokit/plugin-retry": "^3.0.7",
     "@octokit/plugin-throttling": "^4.0.0",
     "@octokit/rest": "^19.0.0",
