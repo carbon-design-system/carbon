@@ -10,7 +10,8 @@
 //-----------------------------
 
 @use 'vars' as *;
-
+@use '../button/tokens' as button;
+@use '../tooltip';
 @use '../../config' as *;
 @use '../../theme' as *;
 @use '../../colors' as *;
@@ -18,10 +19,11 @@
 @use '../../breakpoint' as *;
 @use '../../spacing' as *;
 @use '../../motion' as *;
-@use '../button/tokens' as button;
+@use '../../layer' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/rotate' as *;
 @use '../../utilities/box-shadow' as *;
+@use '../../utilities/component-reset';
 @use '../../utilities/component-tokens' as *;
 @use '../../utilities/custom-property';
 @use '../../utilities/skeleton' as *;
@@ -66,6 +68,8 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     }
 
     .#{$prefix}--tabs__nav {
+      @include component-reset.reset;
+
       display: flex;
     }
 

@@ -10,13 +10,14 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../../utilities/component-reset';
 @use '../../utilities/convert' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/visually-hidden' as *;
 
 @mixin checkbox {
   .#{$prefix}--checkbox-group {
-    @include reset;
+    @include component-reset.reset;
   }
 
   // Spacing between checkboxes

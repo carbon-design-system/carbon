@@ -5,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../checkbox';
 @use '../list-box';
 @use '../../config' as *;
 @use '../../motion' as *;
@@ -26,6 +27,10 @@
 
   .#{$prefix}--multi-select .#{$prefix}--list-box__field:focus {
     @include focus-outline('reset');
+  }
+
+  .#{$prefix}--multi-select--filterable .#{$prefix}--list-box__field {
+    padding: 0;
   }
 
   .#{$prefix}--multi-select .#{$prefix}--tag {

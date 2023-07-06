@@ -9,11 +9,13 @@
 @use '../functions' as *;
 @use '../../../breakpoint' as *;
 @use '../../../config' as *;
+@use '../../../layer' as *;
 @use '../../../motion' as *;
 @use '../../../spacing' as *;
 @use '../../../theme' as *;
 @use '../../../type' as *;
 @use '../../../utilities/button-reset';
+@use '../../../utilities/component-reset';
 @use '../../../utilities/convert' as *;
 @use '../../../utilities/focus-outline' as *;
 @use '../../../utilities/high-contrast-mode' as *;
@@ -124,6 +126,8 @@
   // Side-nav > Navigation > Item(s)
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav__items {
+    @include component-reset.reset;
+
     overflow: hidden;
     flex: 1 1 0%;
     padding: 1rem 0 0;
@@ -186,6 +190,7 @@
     height: 1px;
     margin: $spacing-03 $spacing-05;
     background-color: $border-subtle;
+    list-style-type: none;
   }
 
   //----------------------------------------------------------------------------
@@ -277,6 +282,8 @@
   }
 
   .#{$prefix}--side-nav__menu {
+    @include component-reset.reset;
+
     display: block;
     max-height: 0;
     visibility: hidden;
@@ -439,6 +446,8 @@
   }
 
   .#{$prefix}--side-nav__header-navigation {
+    @include component-reset.reset;
+
     display: none;
 
     @include breakpoint-down('lg') {
