@@ -5,16 +5,17 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'vars' as *;
+@use 'functions' as *;
+@use 'animation';
 @use '../../config' as *;
+@use '../../layer' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../utilities/component-reset';
 @use '../../utilities/convert';
 @use '../../utilities/z-index' as *;
-@use 'vars' as *;
-@use 'functions' as *;
-@use 'animation';
 
 /// Loading styles
 /// @access private

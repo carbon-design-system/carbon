@@ -15,8 +15,10 @@
 @use '../../type' as *;
 @use '../../spacing' as *;
 @use '../../motion' as *;
+@use '../../layer' as *;
 @use '../../utilities/box-shadow' as *;
 @use '../../utilities/button-reset';
+@use '../../utilities/component-reset';
 @use '../../utilities/convert' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
@@ -649,6 +651,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__menu-item__option {
+    @include component-reset.reset;
     @include focus-outline('reset');
 
     display: block;

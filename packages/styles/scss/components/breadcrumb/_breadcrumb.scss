@@ -5,18 +5,21 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../overflow-menu';
 @use '../../config' as *;
 @use '../../breakpoint' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../../layer' as *;
+@use '../../utilities/component-reset';
 @use '../../utilities/convert' as *;
 @use '../../utilities/skeleton' as *;
 
 @mixin breadcrumb {
   .#{$prefix}--breadcrumb {
-    @include reset;
+    @include component-reset.reset;
     @include type-style('body-compact-01');
 
     display: inline;
