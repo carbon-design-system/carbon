@@ -24,14 +24,17 @@ test.describe('Tooltip @avt', () => {
 
   test('default state - keyboard nav', async ({ page }) => {
     await visitStory(page, {
-      component: 'Modal',
+      component: 'Tooltip',
       id: 'components-tooltip--default',
       globals: {
         theme: 'white',
       },
     });
 
-    // Expect tooltip to be visible
+    // Expect tooltip to be focused
+    await page.keyboard.press('Tab');
     await expect(page.getByRole('button')).toBeVisible();
+    await page.keyboard.press('Tab');
+    await expect(page.getByRole('button')).toBeFocused();
   });
 });
