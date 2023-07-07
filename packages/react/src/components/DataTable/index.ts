@@ -11,7 +11,7 @@ import DataTable, {
   type DataTableRow,
   type DataTableProps,
   type DataTableRenderProps,
-  type DataTableSize
+  type DataTableSize,
 } from './DataTable';
 import Table from './Table';
 import TableActionList from './TableActionList';

@@ -71,7 +71,7 @@ const dataTableDefaultProps = {
   size: 'lg',
   sortRow: defaultSortRow,
   translateWithId,
-}
+};
 
 export type DataTableSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
@@ -101,52 +101,55 @@ export interface DataTableHeader {
 }
 
 export interface DataTableRenderProps {
-  headers: Array<DataTableHeader>,
-  rows: Array<DataTableRow>,
-  selectedRows: Array<DataTableRow>,
+  headers: Array<DataTableHeader>;
+  rows: Array<DataTableRow>;
+  selectedRows: Array<DataTableRow>;
 
   // Prop accessors/getters
   getHeaderProps: (getHeaderPropsArgs: {
     header: DataTableHeader;
     isSortable?: boolean;
-    onClick?: (e: MouseEvent, sortState: { sortHeaderKey: string; sortDirection: DataTableSortState }) => void;
+    onClick?: (
+      e: MouseEvent,
+      sortState: { sortHeaderKey: string; sortDirection: DataTableSortState }
+    ) => void;
     [key: string]: unknown;
-  }) => ({
+  }) => {
     isSortable: boolean | undefined;
     isSortHeader: boolean;
     key: string;
     onClick: (e: MouseEvent) => void;
     sortDirection: DataTableSortState;
     [key: string]: unknown;
-  }),
+  };
   getExpandHeaderProps: (getExpandHeaderPropsArgs?: {
     onClick?: (e: MouseEvent, expandState: { isExpanded?: boolean }) => void;
     onExpand?: (e: MouseEvent) => void;
     [key: string]: unknown;
-  }) => ({
+  }) => {
     ariaLabel: string;
     isExpanded: boolean;
     onExpand: (e: MouseEvent) => void;
     [key: string]: unknown;
-  }),
+  };
   getRowProps: (getRowPropsArgs: {
     onClick?: (e: MouseEvent) => void;
     row: DataTableRow;
     [key: string]: unknown;
-  }) => ({
+  }) => {
     ariaLabel: string;
     disabled: boolean | undefined;
     isExpanded?: boolean;
     isSelected?: boolean;
-    key: String,
+    key: string;
     onExpand: (e: MouseEvent) => void;
     [key: string]: unknown;
-  }),
+  };
   getSelectionProps: (getSelectionPropsArgs: {
     onClick?: (e: MouseEvent) => void;
     row: DataTableRow;
     [key: string]: unknown;
-  }) => ({
+  }) => {
     ariaLabel: string;
     checked: boolean | undefined;
     disabled?: boolean | undefined;
@@ -156,22 +159,20 @@ export interface DataTableRenderProps {
     onSelect: (e: MouseEvent) => void;
     radio?: boolean | null;
     [key: string]: unknown;
-  }),
-  getToolbarProps: (getToolbarPropsArgs?: {
-    [key: string]: unknown;
-  }) => ({
+  };
+  getToolbarProps: (getToolbarPropsArgs?: { [key: string]: unknown }) => {
     size: 'sm' | undefined;
     [key: string]: unknown;
-  }),
+  };
   getBatchActionProps: (getBatchActionPropsArgs?: {
     [key: string]: unknown;
-  }) => ({
+  }) => {
     onCancel: () => void;
     shouldShowBatchActions: boolean;
     totalSelected: number;
     [key: string]: unknown;
-  }),
-  getTableProps: () => ({
+  };
+  getTableProps: () => {
     experimentalAutoAlign?: boolean;
     isSortable?: boolean;
     overflowMenuOnHover: boolean;
@@ -179,11 +180,11 @@ export interface DataTableRenderProps {
     stickyHeader?: boolean;
     useStaticWidth?: boolean;
     useZebraStyles?: boolean;
-  }),
-  getTableContainerProps: () => ({
+  };
+  getTableContainerProps: () => {
     stickyHeader?: boolean;
     useStaticWidth?: boolean;
-  }),
+  };
 
   // Custom event handlers
   onInputChange: (e: Event, defaultValue?: string) => void;
@@ -215,11 +216,15 @@ export interface DataTableProps {
   render?: (renderProps: DataTableRenderProps) => React.ReactElement;
   rows: Array<Omit<DataTableRow, 'cells'>>;
   size?: DataTableSize;
-  sortRow?: (cellA: DataTableCell, cellB: DataTableCell, sortRowOptions: {
-    sortDirection: DataTableSortState;
-    sortStates: Record<DataTableSortState, DataTableSortState>;
-    locale: string;
-  }) => number;
+  sortRow?: (
+    cellA: DataTableCell,
+    cellB: DataTableCell,
+    sortRowOptions: {
+      sortDirection: DataTableSortState;
+      sortStates: Record<DataTableSortState, DataTableSortState>;
+      locale: string;
+    }
+  ) => number;
   stickyHeader?: boolean;
   translateWithId?: (id: string) => string;
   useStaticWidth?: boolean;
@@ -236,7 +241,7 @@ interface DataTableState {
   shouldShowBatchActions: boolean;
   sortDirection: DataTableSortState;
   sortHeaderKey: string | null;
-};
+}
 
 /**
  * Data Tables are used to represent a collection of resources, displaying a
@@ -248,7 +253,10 @@ interface DataTableState {
  * and updating the state of the single entity will cascade updates to the
  * consumer.
  */
-class DataTable extends React.Component<DataTableProps & typeof dataTableDefaultProps, DataTableState> {
+class DataTable extends React.Component<
+  DataTableProps & typeof dataTableDefaultProps,
+  DataTableState
+> {
   instanceId: number;
 
   static defaultProps = dataTableDefaultProps;
@@ -423,7 +431,10 @@ class DataTable extends React.Component<DataTableProps & typeof dataTableDefault
     ...rest
   }: {
     header: DataTableHeader;
-    onClick?: (e: MouseEvent, sortState: { sortHeaderKey: string; sortDirection: DataTableSortState }) => void;
+    onClick?: (
+      e: MouseEvent,
+      sortState: { sortHeaderKey: string; sortDirection: DataTableSortState }
+    ) => void;
     isSortable?: boolean;
     [key: string]: unknown;
   }) => {
@@ -457,11 +468,13 @@ class DataTable extends React.Component<DataTableProps & typeof dataTableDefault
    * @param {Function} config.onExpand a custom click handler called when header is expanded
    * @returns {object}
    */
-  getExpandHeaderProps = ({ onClick, onExpand, ...rest } = {} as {
-    onClick?: (e: MouseEvent, expandState: { isExpanded: boolean }) => void;
-    onExpand?: (e: MouseEvent) => void;
-    [key: string]: unknown;
-  }) => {
+  getExpandHeaderProps = (
+    { onClick, onExpand, ...rest } = {} as {
+      onClick?: (e: MouseEvent, expandState: { isExpanded: boolean }) => void;
+      onExpand?: (e: MouseEvent) => void;
+      [key: string]: unknown;
+    }
+  ) => {
     const { translateWithId: t } = this.props;
     const { isExpandedAll, rowIds, rowsById } = this.state;
     const isExpanded =
@@ -478,10 +491,10 @@ class DataTable extends React.Component<DataTableProps & typeof dataTableDefault
       onExpand: composeEventHandlers([
         this.handleOnExpandAll,
         onExpand,
-        onClick
-          && this.handleOnExpandHeaderClick(onClick, {
-              isExpanded,
-            })
+        onClick &&
+          this.handleOnExpandHeaderClick(onClick, {
+            isExpanded,
+          }),
       ]),
     };
   };
@@ -516,7 +529,11 @@ class DataTable extends React.Component<DataTableProps & typeof dataTableDefault
    * @param {Function} config.onClick a custom click handler for the header
    * @returns {object}
    */
-  getRowProps = ({ row, onClick, ...rest }: {
+  getRowProps = ({
+    row,
+    onClick,
+    ...rest
+  }: {
     onClick?: (e: MouseEvent) => void;
     row: DataTableRow;
     [key: string]: unknown;
@@ -548,11 +565,13 @@ class DataTable extends React.Component<DataTableProps & typeof dataTableDefault
    * @param {object} row.row
    * @returns {object}
    */
-  getSelectionProps = ({ onClick, row, ...rest } = {} as {
-    onClick?: (e: MouseEvent) => void;
-    row: DataTableRow;
-    [key: string]: unknown;
-  }) => {
+  getSelectionProps = (
+    { onClick, row, ...rest } = {} as {
+      onClick?: (e: MouseEvent) => void;
+      row: DataTableRow;
+      [key: string]: unknown;
+    }
+  ) => {
     const { translateWithId: t } = this.props;
 
     // If we're given a row, return the selection state values for that row
@@ -598,12 +617,14 @@ class DataTable extends React.Component<DataTableProps & typeof dataTableDefault
     };
   };
 
-  getToolbarProps = (props = {}): {
+  getToolbarProps = (
+    props = {}
+  ): {
     size: 'sm' | undefined;
     [key: string]: unknown;
   } => {
     const { size } = this.props;
-    let isSmall = size === 'xs' || size === 'sm';
+    const isSmall = size === 'xs' || size === 'sm';
     return {
       ...props,
       size: isSmall ? 'sm' : undefined,
