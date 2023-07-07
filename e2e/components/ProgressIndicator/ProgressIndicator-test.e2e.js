@@ -42,4 +42,40 @@ test.describe('ProgressIndicator', () => {
     });
     await expect(page).toHaveNoACViolations('ProgressIndicator');
   });
+
+  // test('progress indicator - hover state', async ({ page }) => {
+  //   await visitStory(page, {
+  //     component: 'ProgressIndicator',
+  //     id: 'components-progressindicator--default',
+  //     globals: {
+  //       theme: 'white',
+  //     },
+  //   });
+
+  //   await page.getByRole('svg', { name: 'First step' }).hover();
+  //   await expect(
+  //     page.getByRole('button', {
+  //       name: 'Step 1: Getting started with Carbon Design System',
+  //     })
+  //   ).toBeVisible();
+  // });
+
+  test('progress indicator - active state', async ({ page }) => {
+    await visitStory(page, {
+      component: 'ProgressIndicator',
+      id: 'components-progressindicator--interactive',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await page.keyboard.press('Tab');
+    // await expect(page.getByText('Click me')).toBeFocused();
+    await expect(
+      page.getByRole('paragraph', { name: 'Click me' })
+    ).toBeFocutsed();
+
+    // await page.getByRole('button', { name: 'Click me' }).click();
+
+    // await expect(page.getByRole('alert', { name: 'Clicked' })).toBeVisible();
+  });
 });
