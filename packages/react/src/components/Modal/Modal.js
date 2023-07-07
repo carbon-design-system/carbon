@@ -243,7 +243,8 @@ const Modal = React.forwardRef(function Modal(
       <div
         id={modalBodyId}
         className={contentClasses}
-        {...hasScrollingContentProps}>
+        {...hasScrollingContentProps}
+        tabIndex={-1}>
         {children}
       </div>
       {hasScrollingContent && (

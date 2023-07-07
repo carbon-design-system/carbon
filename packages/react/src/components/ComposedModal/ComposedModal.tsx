@@ -348,7 +348,8 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
           <button
             type="button"
             ref={startSentinel}
-            className={`${prefix}--visually-hidden`}>
+            className={`${prefix}--visually-hidden`}
+            tabIndex={-1}>
             Focus sentinel
           </button>
           <div ref={innerModal} className={`${prefix}--modal-container-body`}>
@@ -358,7 +359,8 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
           <button
             type="button"
             ref={endSentinel}
-            className={`${prefix}--visually-hidden`}>
+            className={`${prefix}--visually-hidden`}
+            tabIndex={-1}>
             Focus sentinel
           </button>
         </div>
