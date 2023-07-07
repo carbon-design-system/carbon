@@ -31,9 +31,9 @@ test.describe('Tooltip @avt', () => {
       },
     });
 
-    // Expect tooltip to be focused
     await page.keyboard.press('Tab');
     await expect(page.getByRole('button')).toBeVisible();
+    // Expect tooltip to be focused
     await page.keyboard.press('Tab');
     await expect(page.getByRole('button')).toBeFocused();
   });
