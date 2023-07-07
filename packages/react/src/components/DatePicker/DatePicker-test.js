@@ -471,4 +471,30 @@ describe('Date picker with minDate and maxDate', () => {
 
     expect(onChange).toHaveBeenCalledTimes(0);
   });
+
+  it('should work with ISO 8601 format or others', async () => {
+    const onChange = jest.fn();
+
+    render(
+      <DatePicker dateFormat="Y-m-d" onChange={onChange} datePickerType="range">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          labelText="Start date"
+        />
+        <DatePickerInput
+          id="date-picker-input-id-finish"
+          labelText="End date"
+        />
+      </DatePicker>
+    );
+    const theStart = screen.getByLabelText('Start date');
+    const theEnd = screen.getByLabelText('End date');
+
+    await userEvent.type(theStart, '2023-01-05{tab}');
+    await userEvent.type(theEnd, '2023-01-19{enter}');
+    expect(onChange).toHaveBeenCalledTimes(2);
+    expect(screen.getByRole('application')).toHaveClass('open');
+    await userEvent.keyboard('{escape}');
+    expect(screen.getByRole('application')).not.toHaveClass('open');
+  });
 });

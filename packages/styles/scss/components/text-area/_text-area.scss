@@ -12,6 +12,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../../utilities/component-reset';
 @use '../../utilities/convert' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/placeholder-colors' as *;
@@ -22,7 +23,7 @@
 /// @group text-area
 @mixin text-area {
   .#{$prefix}--text-area {
-    @include reset;
+    @include component-reset.reset;
     @include type-style('body-01');
     @include focus-outline('reset');
 

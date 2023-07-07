@@ -165,6 +165,15 @@
         "a11y"
       ]
     },
+     {
+          "login": "erifsx",
+          "name": "Eric Marcoux",
+          "avatar_url": "https://avatars3.githubusercontent.com/u/997572?v=4",
+          "profile": "https://github.com/erifsx",
+          "contributions": [
+            "code"
+          ]
+        },
     {
       "login": "vpicone",
       "name": "Vince Picone",
@@ -832,7 +841,8 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/1190770?v=4",
       "profile": "https://haakon.dev/",
       "contributions": [
-        "code"
+        "code",
+        "doc"
       ]
     },
     {
@@ -1142,7 +1152,7 @@
     },
     {
       "login": "kubijo",
-      "name": "kubijo",
+      "name": "Josef Kubíček",
       "avatar_url": "https://avatars.githubusercontent.com/u/11244314?v=4",
       "profile": "https://github.com/kubijo",
       "contributions": [
@@ -1173,6 +1183,43 @@
       "name": "Mark Judy",
       "avatar_url": "https://avatars.githubusercontent.com/u/32761859?v=4",
       "profile": "https://github.com/mrkjdy",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "anton-tsymuk-viacomcbs",
+      "name": "Anton Tsymuk",
+      "avatar_url": "https://avatars.githubusercontent.com/u/112623876?v=4",
+      "profile": "https://github.com/anton-tsymuk-viacomcbs",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "modaslam",
+      "name": "Mohammed Aslam P. A.",
+      "avatar_url": "https://avatars.githubusercontent.com/u/33179527?v=4",
+      "profile": "https://github.com/modaslam",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "tongyy",
+      "name": "Tony ZL",
+      "avatar_url": "https://avatars.githubusercontent.com/u/24784725?v=4",
+      "profile": "https://github.com/tongyy",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "tulivlk",
+      "name": "Petr Kadlec",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67226666?v=4",
+      "profile": "https://github.com/tulivlk",
       "contributions": [
         "code"
       ]

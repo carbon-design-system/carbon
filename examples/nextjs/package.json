@@ -1,7 +1,7 @@
 {
   "name": "examples-nextjs",
   "private": true,
-  "version": "0.31.0",
+  "version": "0.33.0",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
@@ -9,14 +9,14 @@
     "start": "next start"
   },
   "dependencies": {
-    "@carbon/react": "^1.31.0",
-    "next": "12.1.4",
+    "@carbon/react": "^1.33.0",
+    "next": "13.4.7",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
     "eslint": "8.40.0",
-    "eslint-config-next": "12.1.4",
+    "eslint-config-next": "13.4.7",
     "sass": "^1.51.0"
   }
 }

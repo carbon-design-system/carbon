@@ -176,6 +176,60 @@ export const upgrades = [
         },
       },
       {
+        name: 'size-prop-update',
+        description: 'Updates xl sized components to lg',
+        migrate: async (options) => {
+          const transform = path.join(TRANSFORM_DIR, 'size-prop-update.js');
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                  ],
+                });
+
+          await run({
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+          });
+        },
+      },
+      {
+        name: 'small-to-size-prop',
+        description: 'Update usage of small prop to size="sm"',
+        migrate: async (options) => {
+          const transform = path.join(TRANSFORM_DIR, 'small-to-size-prop.js');
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                  ],
+                });
+
+          await run({
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+          });
+        },
+      },
+      {
         name: 'update-carbon-components-react-import-to-scoped',
         description:
           'Rewrites imports from `carbon-components-react` to `@carbon/react`',

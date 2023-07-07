@@ -25,7 +25,7 @@ function WithFeatureFlags({ children }) {
         text={
           <span>
             This story is rendered with{' '}
-            <a href="/?path=/story/experimental-feature-flags-overview--page">
+            <a href="/?path=/story/experimental-feature-flags--overview">
               all available feature flags
             </a>{' '}
             enabled

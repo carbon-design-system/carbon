@@ -79,6 +79,11 @@ export const Default = (args) => (
   </StructuredListWrapper>
 );
 
+Default.args = {
+  isCondensed: false,
+  isFlush: false,
+};
+
 Default.argTypes = {
   selection: {
     control: {
@@ -89,13 +94,11 @@ Default.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   isFlush: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
 };
 
@@ -163,6 +166,10 @@ export const Skeleton = (args) => (
   </div>
 );
 
+Skeleton.args = {
+  rowCount: 5,
+};
+
 Skeleton.argTypes = {
   isFlush: {
     table: {
@@ -198,6 +205,5 @@ Skeleton.argTypes = {
     control: {
       type: 'number',
     },
-    defaultValue: 5,
   },
 };

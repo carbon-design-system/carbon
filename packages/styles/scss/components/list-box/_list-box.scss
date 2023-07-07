@@ -15,8 +15,10 @@
 @use '../../type' as *;
 @use '../../spacing' as *;
 @use '../../motion' as *;
+@use '../../layer' as *;
 @use '../../utilities/box-shadow' as *;
 @use '../../utilities/button-reset';
+@use '../../utilities/component-reset';
 @use '../../utilities/convert' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
@@ -103,7 +105,15 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--expanded {
-    border-bottom-color: $border-subtle;
+    border-bottom-color: $border-subtle-01;
+  }
+
+  .#{$prefix}--layer-two .#{$prefix}--list-box--expanded {
+    border-bottom-color: $border-subtle-02;
+  }
+
+  .#{$prefix}--layer-three .#{$prefix}--list-box--expanded {
+    border-bottom-color: $border-subtle-03;
   }
 
   .#{$prefix}--list-box--expanded:hover {
@@ -502,6 +512,7 @@ $list-box-menu-width: rem(300px);
     z-index: z('dropdown');
     right: 0;
     left: 0;
+    display: none;
     width: $list-box-width;
     background-color: $layer;
     overflow-y: auto;
@@ -513,11 +524,12 @@ $list-box-menu-width: rem(300px);
     }
   }
 
-  .#{$prefix}--list-box
-    .#{$prefix}--list-box__field[aria-expanded='false']
-    + .#{$prefix}--list-box__menu {
-    display: none;
-    max-height: 0;
+  .#{$prefix}--list-box .#{$prefix}--list-box__field[aria-expanded='false'] {
+    .#{$prefix}--list-box__menu {
+      display: none;
+      max-height: 0;
+      visibility: hidden;
+    }
   }
 
   .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
@@ -582,7 +594,19 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box--disabled
     .#{$prefix}--list-box__menu-item__option:hover {
-    border-top-color: $border-subtle;
+    border-top-color: $border-subtle-01;
+  }
+
+  .#{$prefix}--layer-two
+    .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item__option:hover {
+    border-top-color: $border-subtle-02;
+  }
+
+  .#{$prefix}--layer-three
+    .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item__option:hover {
+    border-top-color: $border-subtle-03;
   }
 
   .#{$prefix}--list-box__menu-item:first-of-type
@@ -595,20 +619,39 @@ $list-box-menu-width: rem(300px);
     color: $text-primary;
   }
 
-  .#{$prefix}--list-box__menu-item:hover
-    + .#{$prefix}--list-box__menu-item
-    .#{$prefix}--list-box__menu-item__option {
-    border-top-color: transparent;
-  }
-
   .#{$prefix}--list-box--disabled
     .#{$prefix}--list-box__menu-item:hover
     + .#{$prefix}--list-box__menu-item
     .#{$prefix}--list-box__menu-item__option {
-    border-top-color: $border-subtle;
+    border-top-color: $border-subtle-01;
+  }
+
+  .#{$prefix}--layer-two
+    .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $border-subtle-02;
+  }
+
+  .#{$prefix}--layer-three
+    .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $border-subtle-03;
+  }
+
+  .#{$prefix}--layer-two .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $border-subtle-02;
+  }
+
+  .#{$prefix}--layer-three .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $border-subtle-03;
   }
 
   .#{$prefix}--list-box__menu-item__option {
+    @include component-reset.reset;
     @include focus-outline('reset');
 
     display: block;
@@ -617,7 +660,7 @@ $list-box-menu-width: rem(300px);
     padding: rem(11px) 0;
     padding-right: $spacing-06;
     border-top: 1px solid transparent;
-    border-top-color: $border-subtle;
+    border-top-color: $border-subtle-01;
     border-bottom: 1px solid transparent;
     margin: 0 $spacing-05;
     color: $text-secondary;
@@ -682,14 +725,40 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__menu-item[disabled]
-    .#{$prefix}--list-box__menu-item__option {
-    border-top-color: $border-subtle;
-  }
-
+    .#{$prefix}--list-box__menu-item__option,
   .#{$prefix}--list-box__menu-item[disabled]:hover
     + .#{$prefix}--list-box__menu-item
     .#{$prefix}--list-box__menu-item__option {
-    border-top-color: $border-subtle;
+    border-top-color: $border-subtle-01;
+  }
+
+  .#{$prefix}--layer-two
+    .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--list-box__menu-item__option,
+  .#{$prefix}--layer-two
+    .#{$prefix}--list-box__menu-item[disabled]:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $border-subtle-02;
+  }
+
+  .#{$prefix}--layer-three
+    .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--list-box__menu-item__option,
+  .#{$prefix}--layer-three
+    .#{$prefix}--list-box__menu-item[disabled]:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $border-subtle-03;
+  }
+
+  .#{$prefix}--list-box__menu-item--active
+    + .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--list-box__menu-item__option,
+  .#{$prefix}--list-box__menu-item:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: transparent;
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
@@ -704,8 +773,8 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__menu-item--highlighted {
-    border-color: transparent;
-    background-color: $layer-selected;
+    @include focus-outline('outline');
+
     color: $text-primary;
   }
 

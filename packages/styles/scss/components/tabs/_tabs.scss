@@ -10,7 +10,8 @@
 //-----------------------------
 
 @use 'vars' as *;
-
+@use '../button/tokens' as button;
+@use '../tooltip';
 @use '../../config' as *;
 @use '../../theme' as *;
 @use '../../colors' as *;
@@ -18,10 +19,11 @@
 @use '../../breakpoint' as *;
 @use '../../spacing' as *;
 @use '../../motion' as *;
-@use '../button/tokens' as button;
+@use '../../layer' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/rotate' as *;
 @use '../../utilities/box-shadow' as *;
+@use '../../utilities/component-reset';
 @use '../../utilities/component-tokens' as *;
 @use '../../utilities/custom-property';
 @use '../../utilities/skeleton' as *;
@@ -76,6 +78,8 @@
     }
 
     .#{$prefix}--tabs__nav {
+      @include component-reset.reset;
+
       display: flex;
     }
 
@@ -608,5 +612,27 @@
     .#{$prefix}--tabs__nav-item--disabled
     .#{$prefix}--tabs__nav-link {
     @include high-contrast-mode('disabled');
+  }
+}
+
+//-----------------------------
+// Grid contained tabs
+//-----------------------------
+
+.#{$prefix}--tabs.#{$prefix}--tabs--contained.#{$prefix}--tabs--full-width
+  .#{$prefix}--tab--list {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+
+  .#{$prefix}--tabs__nav-link {
+    .#{$prefix}--tabs__nav-item-label,
+    .#{$prefix}--tabs__nav-item-secondary-label {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .#{$prefix}--tabs__nav-item--icon {
+      margin-left: auto;
+    }
   }
 }

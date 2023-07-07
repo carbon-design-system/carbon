@@ -108,7 +108,6 @@ Map {
     },
     "propTypes": Object {
       "actionButtonLabel": Object {
-        "isRequired": true,
         "type": "string",
       },
       "aria-label": Object {
@@ -166,7 +165,7 @@ Map {
         "type": "string",
       },
       "subtitle": Object {
-        "type": "string",
+        "type": "node",
       },
       "title": Object {
         "type": "string",
@@ -397,6 +396,16 @@ Map {
     },
     "render": [Function],
   },
+  "ButtonKinds" => Object {
+    "0": "primary",
+    "1": "secondary",
+    "2": "danger",
+    "3": "ghost",
+    "4": "danger--primary",
+    "5": "danger--ghost",
+    "6": "danger--tertiary",
+    "7": "tertiary",
+  },
   "ButtonSet" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
@@ -411,6 +420,13 @@ Map {
       },
     },
     "render": [Function],
+  },
+  "ButtonSizes" => Object {
+    "0": "sm",
+    "1": "md",
+    "2": "lg",
+    "3": "xl",
+    "4": "2xl",
   },
   "ButtonSkeleton" => Object {
     "propTypes": Object {
@@ -436,6 +452,17 @@ Map {
         "type": "bool",
       },
     },
+  },
+  "ButtonTooltipAlignments" => Object {
+    "0": "start",
+    "1": "center",
+    "2": "end",
+  },
+  "ButtonTooltipPositions" => Object {
+    "0": "top",
+    "1": "right",
+    "2": "bottom",
+    "3": "left",
   },
   "Checkbox" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -1558,7 +1585,7 @@ Map {
       "invalidText": "",
       "onChange": [Function],
       "onClick": [Function],
-      "size": "",
+      "size": undefined,
     },
     "propTypes": Object {
       "className": Object {
@@ -3078,15 +3105,6 @@ Map {
   },
   "ExpandableTile" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "expanded": false,
-      "onClick": [Function],
-      "tabIndex": 0,
-      "tileCollapsedIconText": "Interact to expand Tile",
-      "tileExpandedIconText": "Interact to collapse Tile",
-      "tileMaxHeight": 0,
-      "tilePadding": 0,
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -3422,7 +3440,17 @@ Map {
         "type": "oneOf",
       },
       "tabIndex": Object {
-        "type": "string",
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
+            },
+            Object {
+              "type": "string",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
     },
   },
@@ -3907,6 +3935,9 @@ Map {
       "isActive": Object {
         "type": "bool",
       },
+      "isCollapsible": Object {
+        "type": "bool",
+      },
       "onClick": Object {
         "type": "func",
       },
@@ -3943,9 +3974,6 @@ Map {
     "render": [Function],
   },
   "HeaderName" => Object {
-    "defaultProps": Object {
-      "prefix": "IBM",
-    },
     "propTypes": Object {
       "as": Object {
         "type": "elementType",
@@ -3984,6 +4012,9 @@ Map {
   "HeaderPanel" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "addFocusListeners": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
@@ -3992,6 +4023,12 @@ Map {
       },
       "expanded": Object {
         "type": "bool",
+      },
+      "href": Object {
+        "type": "string",
+      },
+      "onHeaderPanelFocus": Object {
+        "type": "func",
       },
     },
     "render": [Function],
@@ -7447,6 +7484,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "expanded": Object {
+        "type": "bool",
+      },
     },
     "render": [Function],
   },
@@ -7468,6 +7508,15 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "handleSwitcherItemFocus": Object {
+        "type": "func",
+      },
+      "index": Object {
+        "type": "number",
+      },
+      "onKeyDown": Object {
+        "type": "func",
       },
       "tabIndex": Object {
         "type": "number",
@@ -7529,9 +7578,6 @@ Map {
     "render": [Function],
   },
   "TabContent" => Object {
-    "defaultProps": Object {
-      "selected": false,
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -7566,6 +7612,9 @@ Map {
         "type": "string",
       },
       "contained": Object {
+        "type": "bool",
+      },
+      "fullWidth": Object {
         "type": "bool",
       },
       "iconSize": Object {
@@ -8229,6 +8278,9 @@ Map {
   },
   "Tag" => Object {
     "propTypes": Object {
+      "as": Object {
+        "type": "elementType",
+      },
       "children": Object {
         "type": "node",
       },
@@ -8431,7 +8483,7 @@ Map {
         "invalidText": "",
         "onChange": [Function],
         "onClick": [Function],
-        "size": "",
+        "size": undefined,
       },
       "propTypes": Object {
         "className": Object {
@@ -9067,32 +9119,12 @@ Map {
     },
   },
   "ToggleSkeleton" => Object {
-    "defaultProps": Object {
-      "aria-label": "Toggle is loading",
-      "size": "md",
-    },
     "propTypes": Object {
       "aria-label": Object {
-        "isRequired": true,
         "type": "string",
       },
       "className": Object {
         "type": "string",
-      },
-      "id": Object {
-        "type": "string",
-      },
-      "labelText": Object {
-        "type": "string",
-      },
-      "size": Object {
-        "args": Array [
-          Array [
-            "sm",
-            "md",
-          ],
-        ],
-        "type": "oneOf",
       },
     },
   },

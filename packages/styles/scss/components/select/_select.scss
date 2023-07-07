@@ -5,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../form';
 @use '../../config' as *;
 @use '../../spacing' as *;
 @use '../../motion' as *;
@@ -16,7 +17,6 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/skeleton' as *;
-@use '../form';
 
 /// Select styles
 /// @access public

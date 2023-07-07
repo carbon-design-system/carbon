@@ -31,7 +31,6 @@ function SecondaryButtonSet({
 
   if (Array.isArray(secondaryButtons) && secondaryButtons.length <= 2) {
     return secondaryButtons.map(({ buttonText, onClick: onButtonClick }, i) => (
-      // @ts-expect-error: Invalid derived type, will be fine once explicit types are added
       <Button
         key={`${buttonText}-${i}`}
         className={secondaryClassName}
@@ -43,7 +42,6 @@ function SecondaryButtonSet({
   }
   if (secondaryButtonText) {
     return (
-      // @ts-expect-error: Invalid derived type, will be fine once explicit types are added
       <Button
         className={secondaryClassName}
         onClick={handleRequestClose}
@@ -204,7 +202,6 @@ export const ModalFooter = React.forwardRef<HTMLElement, ModalFooterProps>(
         {/* @ts-expect-error: Invalid derived types, will be fine once explicit types are added */}
         <SecondaryButtonSet {...secondaryButtonProps} />
         {primaryButtonText && (
-          // @ts-expect-error: Invalid derived types, will be fine once explicit types are added
           <Button
             onClick={onRequestSubmit}
             className={primaryClassName}

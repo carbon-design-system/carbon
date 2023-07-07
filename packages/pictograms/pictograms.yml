@@ -61,6 +61,9 @@
     - heart
     - human
     - person
+- name: advocate--mask
+  friendly_name: advocate--mask
+  aliases: []
 - name: agility
   friendly_name: Agility
   aliases:
@@ -1515,6 +1518,12 @@
   aliases:
     - construct
     - cloud
+- name: construction-worker
+  friendly_name: construction-worker
+  aliases: []
+- name: construction-worker--mask
+  friendly_name: construction-worker--mask
+  aliases: []
 - name: consumer--engagement--food--journey
   friendly_name: Consumer engagement food journey
   aliases:
@@ -1643,6 +1652,30 @@
     - cupcake
     - cake
     - creative
+- name: curve--cubic
+  friendly_name: curve--cubic
+  aliases: []
+- name: curve--exponential
+  friendly_name: curve--exponential
+  aliases: []
+- name: curve--inverse
+  friendly_name: curve--inverse
+  aliases: []
+- name: curve--linear
+  friendly_name: curve--linear
+  aliases: []
+- name: curve--logarithmic
+  friendly_name: curve--logarithmic
+  aliases: []
+- name: curve--logistic
+  friendly_name: curve--logistic
+  aliases: []
+- name: curve--power
+  friendly_name: curve--power
+  aliases: []
+- name: curve--quadratic
+  friendly_name: curve--quadratic
+  aliases: []
 - name: custom--workloads
   friendly_name: Custom workloads
   aliases:
@@ -2863,7 +2896,7 @@
   aliases:
     - handicap active
     - people
-    - disabled user 
+    - disabled user
     - wheelchair
 - name: hard--drive
   friendly_name: Hard disk drive
@@ -4602,6 +4635,9 @@
     - qr code
     - code
     - ID
+- name: quantum
+  friendly_name: quantum
+  aliases: []
 - name: quantum--safe
   friendly_name: Quantum safe
   aliases:
@@ -6218,6 +6254,9 @@
     - interface
     - UX
     - design and development
+- name: user--mask
+  friendly_name: user--mask
+  aliases: []
 - name: user--profile
   friendly_name: User profile
   aliases:
@@ -6400,6 +6439,18 @@
     - watson
     - ibm watson
     - avatar
+- name: watsonx
+  friendly_name: watsonx
+  aliases: []
+- name: watsonx--ai
+  friendly_name: watsonx--ai
+  aliases: []
+- name: watsonx--data
+  friendly_name: watsonx--data
+  aliases: []
+- name: watsonx--governance
+  friendly_name: watsonx--governance
+  aliases: []
 - name: weather
   friendly_name: Weather
   aliases:
