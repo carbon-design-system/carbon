@@ -5,20 +5,20 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'flatpickr' as *;
+@use '../form';
 @use '../../colors' as *;
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../theme' as *;
 @use '../../spacing' as *;
 @use '../../type' as *;
-@use '../form/form';
 @use '../../utilities/component-reset';
 @use '../../utilities/convert' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/placeholder-colors' as *;
 @use '../../utilities/skeleton' as *;
-@use 'flatpickr' as *;
 
 /// Date picker styles
 /// @access public

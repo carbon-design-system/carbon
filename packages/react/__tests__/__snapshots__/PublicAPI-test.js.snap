@@ -8278,6 +8278,9 @@ Map {
   },
   "Tag" => Object {
     "propTypes": Object {
+      "as": Object {
+        "type": "elementType",
+      },
       "children": Object {
         "type": "node",
       },
