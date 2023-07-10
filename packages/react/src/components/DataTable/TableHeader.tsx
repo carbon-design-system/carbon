@@ -96,7 +96,7 @@ interface TableHeaderProps
   /**
    * Hook that is invoked when the header is clicked
    */
-  onClick?: MouseEventHandler<HTMLButtonElement>;
+  onClick?: MouseEventHandler<HTMLElement>;
 
   /**
    * Specify the scope of this table header. You can find more info about this
@@ -149,7 +149,8 @@ const TableHeader = React.forwardRef(function TableHeader(
         className={headerClassName}
         scope={scope}
         colSpan={colSpan}
-        ref={ref}>
+        ref={ref}
+        onClick={onClick}>
         {children ? (
           <div className={`${prefix}--table-header-label`}>{children}</div>
         ) : null}
