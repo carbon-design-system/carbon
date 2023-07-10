@@ -52,7 +52,7 @@ export default {
 
 export const Default = () => (
   <>
-    <FluidForm {...additionalProps}>
+    <FluidForm aria-label="sample form" {...additionalProps}>
       <div style={{ display: 'flex' }}>
         <FluidTimePicker
           id="time-picker-1"

@@ -110,7 +110,7 @@ export default {
 };
 
 export const Default = () => (
-  <Form>
+  <Form aria-label="sample form">
     <Stack gap={7}>
       <FormGroup {...fieldsetCheckboxProps()}>
         <Checkbox defaultChecked {...checkboxEvents} id="checkbox-0" />
