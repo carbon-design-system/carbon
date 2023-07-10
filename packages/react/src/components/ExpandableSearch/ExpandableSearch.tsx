@@ -50,7 +50,7 @@ function ExpandableSearch({
       evt.stopPropagation();
 
       // escape key only clears if the input is empty, otherwise it clears the input
-      if(!evt.target?.value){
+      if (!evt.target?.value) {
         setExpanded(false);
       }
     }
