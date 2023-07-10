@@ -5,15 +5,18 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../../button';
 @use '../mixins' as *;
 @use '../functions' as *;
 @use '../../../breakpoint' as *;
 @use '../../../config' as *;
+@use '../../../layer' as *;
 @use '../../../motion' as *;
 @use '../../../spacing' as *;
 @use '../../../theme' as *;
 @use '../../../type' as *;
 @use '../../../utilities/button-reset';
+@use '../../../utilities/component-reset';
 @use '../../../utilities/convert' as *;
 @use '../../../utilities/z-index' as *;
 
@@ -22,6 +25,8 @@
 /// @group ui-shell
 @mixin header {
   .#{$prefix}--header {
+    @include component-reset.reset;
+
     position: fixed;
     z-index: z('header');
     top: 0;
@@ -201,6 +206,8 @@
   }
 
   .#{$prefix}--header__menu-bar {
+    @include component-reset.reset;
+
     display: flex;
     height: 100%;
     padding: 0;

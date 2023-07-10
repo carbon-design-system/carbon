@@ -5,14 +5,17 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../button' as button;
+@use '../tooltip';
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
-@use '../button/tokens' as button;
+@use '../../layer' as *;
 @use '../../utilities/box-shadow' as *;
 @use '../../utilities/button-reset';
+@use '../../utilities/component-reset';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/convert' as *;
@@ -25,7 +28,7 @@
   .#{$prefix}--overflow-menu,
   .#{$prefix}--overflow-menu__trigger {
     @include button-reset.reset;
-    @include reset;
+    @include component-reset.reset;
     @include focus-outline('reset');
 
     position: relative;
@@ -96,7 +99,7 @@
   }
 
   .#{$prefix}--overflow-menu-options {
-    @include reset;
+    @include component-reset.reset;
     @include box-shadow;
 
     position: absolute;
@@ -215,7 +218,7 @@
   }
 
   .#{$prefix}--overflow-menu-options__option {
-    @include reset;
+    @include component-reset.reset;
 
     display: flex;
     width: 100%;
