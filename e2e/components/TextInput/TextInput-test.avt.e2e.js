@@ -30,11 +30,11 @@ test.describe('TextInput @avt', () => {
         theme: 'white',
       },
       args: {
-        disabled: '!true',
+        disabled: 'true',
       },
     });
 
     await expect(page.getByRole('textbox')).toBeDisabled();
-    await expect(page).toHaveNoACViolations('TextInput');
+    await expect(page).toHaveNoACViolations('TextInput-Disabled');
   });
 });
