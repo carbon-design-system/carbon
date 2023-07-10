@@ -149,6 +149,10 @@ describe('ExpandableSearch', () => {
 
       expect(screen.getByRole('searchbox')).not.toHaveValue('test-value');
 
+      expect(container.firstChild).toHaveClass(`${prefix}--search--expanded`);
+
+      await userEvent.keyboard('[Escape]');
+
       expect(container.firstChild).not.toHaveClass(
         `${prefix}--search--expanded`
       );
