@@ -28,12 +28,7 @@
 // the new hook and call the `nativeReactUseid` function, but if the user is
 // running a version older than React 18 we will keep using our old hook.
 
-import {
-  useEffect,
-  useLayoutEffect,
-  useState,
-  useId as reactUseId,
-} from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import setupGetInstanceId from '../tools/setupGetInstanceId';
 import { canUseDOM } from './environment';
 import { useIdPrefix } from './useIdPrefix';
@@ -70,7 +65,7 @@ export function useId(prefix = 'id') {
     }
   }, []);
 
-  if (reactUseId) {
+  if (typeof React['useId'] === 'function') {
     const id = nativeReactUseId(_prefix, prefix);
     return id;
   }
@@ -79,7 +74,7 @@ export function useId(prefix = 'id') {
 }
 
 function nativeReactUseId(_prefix, prefix) {
-  const getId = reactUseId();
+  const getId = React['useId']();
 
   const id = `${_prefix ? `${_prefix}-` : ``}${prefix}-${getId}`;
 
