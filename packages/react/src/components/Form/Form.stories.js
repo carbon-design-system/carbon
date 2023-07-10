@@ -20,6 +20,7 @@ import SelectItem from '../SelectItem';
 import TextArea from '../TextArea';
 import TextInput from '../TextInput';
 import { Stack } from '../Stack';
+import mdx from './Form.mdx';
 
 const checkboxEvents = {
   className: 'some-class',
@@ -107,6 +108,11 @@ const buttonEvents = {
 export default {
   title: 'Components/Form',
   component: Form,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 export const Default = () => (
