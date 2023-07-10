@@ -203,10 +203,11 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
   function handleKeyDown(event: KeyboardEvent) {
     if (match(event, keys.Escape)) {
       event.stopPropagation();
-      clearInput();
-
+      if(inputRef.current?.value){
+        clearInput();
+      }
       // ExpandableSearch closes on escape when isExpanded, focus search activation button
-      if (onExpand && isExpanded) {
+      else if (onExpand && isExpanded) {
         expandButtonRef.current?.focus();
       }
     }

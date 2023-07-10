@@ -48,7 +48,11 @@ function ExpandableSearch({
   function handleKeyDown(evt) {
     if (expanded && match(evt, keys.Escape)) {
       evt.stopPropagation();
-      setExpanded(false);
+
+      // escape key only clears if the input is empty, otherwise it clears the input
+      if(!evt.target?.value){
+        setExpanded(false);
+      }
     }
   }
 
