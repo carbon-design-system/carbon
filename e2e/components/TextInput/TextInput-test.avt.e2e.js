@@ -34,7 +34,7 @@ test.describe('TextInput @avt', () => {
       },
     });
 
-    expect(page.getByRole('textbox')).toBeDisabled();
+    await expect(page.getByRole('textbox')).toBeDisabled();
     await expect(page).toHaveNoACViolations('TextInput');
   });
 });
