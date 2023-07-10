@@ -348,7 +348,8 @@ function TabList({
       [`${prefix}--tabs--contained`]: contained,
       [`${prefix}--tabs--light`]: light,
       [`${prefix}--tabs__icon--default`]: iconSize === 'default',
-      [`${prefix}--tabs__icon--lg`]: iconSize === 'lg',
+      [`${prefix}--tabs__icon--lg`]: iconSize === 'lg', // TODO: V12 - Remove this class
+      [`${prefix}--layout--size-lg`]: iconSize === 'lg',
       [`${prefix}--tabs--tall`]: hasSecondaryLabelTabs,
       [`${prefix}--tabs--full-width`]: distributeWidth,
     },
