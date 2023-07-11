@@ -5,7 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import DataTable from './DataTable';
+import DataTable, {
+  type DataTableCell,
+  type DataTableHeader,
+  type DataTableRow,
+  type DataTableProps,
+  type DataTableRenderProps,
+  type DataTableSize,
+} from './DataTable';
 import Table from './Table';
 import TableActionList from './TableActionList';
 import TableBatchAction from './TableBatchAction';
@@ -50,6 +57,12 @@ DataTable.TableToolbarMenu = TableToolbarMenu;
 
 export {
   DataTable,
+  type DataTableCell,
+  type DataTableHeader,
+  type DataTableProps,
+  type DataTableRenderProps,
+  type DataTableRow,
+  type DataTableSize,
   Table,
   TableActionList,
   TableBatchAction,
