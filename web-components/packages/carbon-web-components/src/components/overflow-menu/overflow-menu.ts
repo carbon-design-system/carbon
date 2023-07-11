@@ -128,9 +128,6 @@ class CDSOverflowMenu
     if (!this.hasAttribute('aria-haspopup')) {
       this.setAttribute('aria-haspopup', 'true');
     }
-    if (!this.hasAttribute('aria-expanded')) {
-      this.setAttribute('aria-expanded', 'false');
-    }
     if (!this.shadowRoot) {
       this.attachShadow({ mode: 'open' });
     }
@@ -158,7 +155,12 @@ class CDSOverflowMenu
       const { _menuBody: menuBody } = this;
       if (menuBody) {
         menuBody.open = open;
-        this.setAttribute('aria-expanded', String(Boolean(open)));
+
+        const tooltipContent = this.querySelector(
+          '[slot=tooltip-content]'
+        )?.textContent;
+        button?.setAttribute('aria-expanded', String(Boolean(open)));
+        button?.setAttribute('aria-label', String(tooltipContent));
       }
     }
 

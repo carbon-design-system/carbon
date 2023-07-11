@@ -66,7 +66,7 @@ export const multiline = () => {
   // prettier-ignore
   return html`
     <cds-code-snippet
-      type="multi">${children}<span slot="button-description">Copy to clipboard</span>
+      type="multi" tooltip-content="Copy to Clipboard">${children}
     </cds-code-snippet>
 `;
 };
@@ -106,7 +106,7 @@ export const multilineWithLayer = () => {
   return html`
   <sb-template-layers>
   <cds-code-snippet
-      type="multi">${children}<span slot="button-description">Copy to clipboard</span>
+      type="multi" tooltip-content="Copy to Clipboard">${children}
     </cds-code-snippet>
   </sb-template-layers>
 `;
@@ -114,10 +114,9 @@ export const multilineWithLayer = () => {
 
 export const singleline = () => {
   return html`
-    <cds-code-snippet type="single">
+    <cds-code-snippet type="single" tooltip-content="Copy to Clipboard">
       yarn add carbon-components@latest carbon-components-react@latest
       @carbon/icons-react@latest carbon-icons@latest
-      <span slot="button-description">Copy to clipboard</span>
     </cds-code-snippet>
   `;
 };
@@ -125,12 +124,9 @@ export const singleline = () => {
 export const singlelineWithLayer = () => {
   return html`
     <sb-template-layers>
-      <cds-code-snippet type="single"
+      <cds-code-snippet type="single" tooltip-content="Copy to Clipboard"
         >yarn add carbon-components@latest carbon-components-react@latest
-        @carbon/icons-react@latest carbon-icons@latest<span
-          slot="button-description"
-          >Copy to clipboard</span
-        ></cds-code-snippet
+        @carbon/icons-react@latest carbon-icons@latest ></cds-code-snippet
       >
     </sb-template-layers>
   `;
@@ -181,9 +177,8 @@ export const Playground = (args) => {
       ?wrap-text="${wrapText}"
       feedback=${feedback}
       feedback-timeout=${feedbackTimeout}
-      >yarn add @carbon/react<span slot="button-description"
-        >${copyButtonDescription}</span
-      >
+      tooltip-content="${copyButtonDescription}"
+      >yarn add @carbon/reacttooltip-content="Copy to Clipboard"
     </cds-code-snippet>
   `;
 };

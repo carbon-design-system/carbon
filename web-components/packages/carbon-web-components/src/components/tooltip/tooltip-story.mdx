@@ -31,10 +31,10 @@ import Information16 from '@carbon/icons/lib/information/16';
 ```html
 <cds-tooltip
   align="bottom">
-   <div class="sb-tooltip-trigger">
+   <div class="sb-tooltip-trigger" aria-labelledby="content">
   ${Information16()}
   </div>
-  <cds-tooltip-content>
+  <cds-tooltip-content id="content">
     Occassionally, services are updated in a specified time window to ensure no down time for customers.
   </cds-tooltip-content>
 </cds-tooltip>

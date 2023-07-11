@@ -341,7 +341,8 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
               class="${classes}"
               ?autofocus="${autofocus}"
               ?disabled="${disabled}"
-              type="${ifDefined(type)}">
+              type="${ifDefined(type)}"
+              aria-label="${ifDefined(tooltipText)}">
               <slot @slotchange="${handleSlotChange}"></slot>
               <slot name="icon" @slotchange="${handleSlotChange}"></slot>
             </button>

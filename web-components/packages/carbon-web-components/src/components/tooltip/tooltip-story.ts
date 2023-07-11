@@ -41,10 +41,13 @@ export const Default = () => {
       ${styles}
     </style>
     <cds-tooltip align="bottom">
-      <button class="sb-tooltip-trigger" role="button">
+      <button
+        class="sb-tooltip-trigger"
+        role="button"
+        aria-labelledby="content">
         ${Information16()}
       </button>
-      <cds-tooltip-content>
+      <cds-tooltip-content id="content">
         Occassionally, services are updated in a specified time window to ensure
         no down time for customers.
       </cds-tooltip-content>
@@ -58,10 +61,15 @@ export const Alignment = () => {
       ${styles}
     </style>
     <cds-tooltip align="bottom-left">
-      <button class="sb-tooltip-trigger" role="button">
+      <button
+        class="sb-tooltip-trigger"
+        role="button"
+        aria-labelledby="content">
         ${Information16()}
       </button>
-      <cds-tooltip-content> Tooltip alignment </cds-tooltip-content>
+      <cds-tooltip-content id="content">
+        Tooltip alignment
+      </cds-tooltip-content>
     </cds-tooltip>
   `;
 };
@@ -72,10 +80,13 @@ export const Duration = () => {
       ${styles}
     </style>
     <cds-tooltip enter-delay-ms=${0} leave-delay-ms=${300}>
-      <button class="sb-tooltip-trigger" role="button">
+      <button
+        class="sb-tooltip-trigger"
+        role="button"
+        aria-labelledby="content">
         ${Information16()}
       </button>
-      <cds-tooltip-content> Label one </cds-tooltip-content>
+      <cds-tooltip-content id="content"> Label one </cds-tooltip-content>
     </cds-tooltip>
   `;
 };
@@ -99,10 +110,13 @@ export const Playground = (args) => {
       enter-delay-ms=${enterDelay}
       leave-delay-ms=${leaveDelay}
       ?closeOnActivation=${closeOnActivation}>
-      <button class="sb-tooltip-trigger" role="button">
+      <button
+        class="sb-tooltip-trigger"
+        role="button"
+        aria-labelledby="content">
         ${Information16()}
       </button>
-      <cds-tooltip-content> ${label} </cds-tooltip-content>
+      <cds-tooltip-content id="content"> ${label} </cds-tooltip-content>
     </cds-tooltip>
   `;
 };
