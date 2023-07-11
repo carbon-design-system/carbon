@@ -22,6 +22,32 @@ test.describe('ProgressIndicator', () => {
     await expect(page).toHaveNoACViolations('ProgressIndicator');
   });
 
+  test('accessibility-checker interactive progressindicator @avt', async ({
+    page,
+  }) => {
+    await visitStory(page, {
+      component: 'ProgressIndicator',
+      id: 'components-progressindicator--interactive',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('ProgressIndicator');
+  });
+
+  test('accessibility-checker skeleton progressindicator @avt', async ({
+    page,
+  }) => {
+    await visitStory(page, {
+      component: 'ProgressIndicator',
+      id: 'components-progressindicator--skeleton',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('ProgressIndicator');
+  });
+
   test('progress indicator - keyboard nav', async ({ page }) => {
     await visitStory(page, {
       component: 'ProgressIndicator',
@@ -30,18 +56,24 @@ test.describe('ProgressIndicator', () => {
         theme: 'white',
       },
     });
-    // Focus the first element
+    // Testing the first element interaction
     await page.keyboard.press('Tab');
     await expect(page.getByRole('button', { name: 'Click me' })).toBeVisible();
     await page.keyboard.press('Tab');
     await expect(page.getByRole('button', { name: 'Click me' })).toBeFocused();
 
-    // Testing the click in the first element
     await page.keyboard.press('Enter');
     await page.keyboard.press('Escape');
 
-    // Focus the third element
+    // Testing the third element interaction
     await page.keyboard.press('Tab');
+    await expect(
+      page.getByRole('button', { name: 'Third step' })
+    ).toBeFocused();
+
+    await page.keyboard.press('Enter');
+    await page.keyboard.press('Escape');
+
     await expect(
       page.getByRole('button', { name: 'Third step' })
     ).toBeFocused();
