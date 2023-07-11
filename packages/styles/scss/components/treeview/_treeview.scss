@@ -98,7 +98,8 @@
     }
   }
 
-  .cds--tree-node:not(.cds--tree-parent-node) .#{$prefix}--tree-node__label {
+  .#{$prefix}--tree-node:not(.#{$prefix}--tree-parent-node)
+    .#{$prefix}--tree-node__label {
     // (min-height 32px - single line text height 18px) / 2 = 7px
     padding-top: rem(7px);
     padding-bottom: rem(7px);
@@ -216,9 +217,18 @@
     }
   }
 
+  // xs size variant
   .#{$prefix}--tree--xs .#{$prefix}--tree-node__label {
     min-height: rem(24px);
-    padding-top: rem(4px);
-    padding-bottom: rem(4px);
+  }
+
+  .#{$prefix}--tree--xs
+    .#{$prefix}--tree-node:not(.#{$prefix}--tree-parent-node)
+    .#{$prefix}--tree-node__label {
+    padding: 0;
+  }
+
+  .#{$prefix}--tree--xs .#{$prefix}--tree-parent-node__toggle {
+    margin-top: 0;
   }
 }
