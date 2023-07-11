@@ -62,7 +62,7 @@ class CDSCopyButton extends FocusMixin(LitElement) {
         feedback-timeout=${feedbackTimeout}
         button-class-name=${classes}>
         ${Copy16({ slot: 'icon', class: `${prefix}--snippet__icon` })}
-        <span slot="tooltip-content"><slot></slot></span>
+        <slot slot="tooltip-content"></slot>
       </cds-copy>
     `;
   }

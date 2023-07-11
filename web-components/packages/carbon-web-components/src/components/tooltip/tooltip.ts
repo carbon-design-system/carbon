@@ -173,7 +173,6 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
       this.open
         ? toolTipContent?.setAttribute('open', '')
         : toolTipContent?.removeAttribute('open');
-      this.setAttribute('aria-expanded', String(Boolean(this.open)));
     }
 
     ['align', 'caret'].forEach((name) => {

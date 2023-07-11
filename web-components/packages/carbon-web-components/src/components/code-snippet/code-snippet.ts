@@ -278,6 +278,12 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
   showMoreText = 'Show more';
 
   /**
+   * Tooltip content for the copy button.
+   */
+  @property({ attribute: 'tooltip-content' })
+  tooltipContent = 'Copy to clipboard';
+
+  /**
    * `true` if the button should be disabled.
    */
   @property({ type: Boolean, reflect: true, attribute: 'wrap-text' })
@@ -290,9 +296,6 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
   type = CODE_SNIPPET_TYPE.SINGLE;
 
   connectedCallback() {
-    if (!this.hasAttribute('role')) {
-      this.setAttribute('role', 'listitem');
-    }
     super.connectedCallback();
     if (this._hObserveResize) {
       this._hObserveResize = this._hObserveResize.release();
@@ -326,6 +329,7 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
       minCollapsedNumberOfRows,
       type,
       wrapText,
+      tooltipContent,
       showMoreText,
       showLessText,
       _expandedCode: expandedCode,
@@ -434,7 +438,7 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
               feedback=${feedback}
               feedback-timeout=${feedbackTimeout}
               @click="${handleCopyClick}">
-              <slot name="button-description"></slot>
+              ${tooltipContent}
             </cds-copy-button>
           `}
       ${shouldShowMoreLessBtn
