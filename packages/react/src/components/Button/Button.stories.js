@@ -58,6 +58,57 @@ export default {
   },
 };
 
+export const ASizeTest = () => {
+  return (
+    <div>
+      <Button renderIcon={Add} size="sm">
+        Small button
+      </Button>
+      <br />
+      <br />
+      <Button renderIcon={Add} size="sm">
+        Small button that demonstrates wrapping
+      </Button>
+      <br />
+      <br />
+      <Button renderIcon={Add} size="md">
+        Medium button
+      </Button>
+      <br />
+      <br />
+      <Button renderIcon={Add} size="md">
+        Medium button that demonstrates wrapping
+      </Button>
+      <br />
+      <br />
+      <Button renderIcon={Add}>Large button</Button>
+      <br />
+      <br />
+      <Button renderIcon={Add}>Large button that demonstrates wrapping</Button>
+      <br />
+      <br />
+      <Button renderIcon={Add} size="xl">
+        XL button
+      </Button>
+      <br />
+      <br />
+      <Button renderIcon={Add} size="xl">
+        XL button that demonstrates wrapping
+      </Button>
+      <br />
+      <br />
+      <Button renderIcon={Add} size="2xl">
+        2XL button
+      </Button>
+      <br />
+      <br />
+      <Button renderIcon={Add} size="2xl">
+        2XL button that demonstrates wrapping
+      </Button>
+    </div>
+  );
+};
+
 export const Default = (args) => {
   return <Button {...args}>Button</Button>;
 };
