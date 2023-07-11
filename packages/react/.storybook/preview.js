@@ -30,7 +30,6 @@ const devTools = {
     defaultValue: false,
     toolbar: {
       title: 'unstable__Layout size',
-      showName: true,
       items: [
         {
           value: false,
