@@ -26,10 +26,10 @@ import theme from './theme';
 
 const devTools = {
   layoutSize: {
-    name: 'unstable__Layout size',
     description: "Set the layout context's size",
     defaultValue: false,
     toolbar: {
+      title: 'unstable__Layout size',
       showName: true,
       items: [
         {
@@ -46,11 +46,10 @@ const devTools = {
     },
   },
   layoutDensity: {
-    name: 'unstable__Layout density',
     description: "Set the layout context's density",
     defaultValue: false,
     toolbar: {
-      showName: true,
+      title: 'unstable__Layout density',
       items: [
         {
           value: false,
