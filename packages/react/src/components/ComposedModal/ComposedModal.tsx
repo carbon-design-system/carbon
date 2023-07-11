@@ -340,33 +340,31 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
         onMouseDown={handleMousedown}
         onKeyDown={handleKeyDown}
         className={modalClass}>
-        {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-        <span
-          role="link"
-          tabIndex={0}
-          ref={startSentinel}
-          className={`${prefix}--visually-hidden`}>
-          Focus sentinel
-        </span>
         <div
           className={containerClass}
           role="dialog"
           aria-modal="true"
           aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}
-          aria-labelledby={ariaLabelledBy}
-          ref={innerModal}>
-          <div className={`${prefix}--modal-container-body`}>
+          aria-labelledby={ariaLabelledBy}>
+          {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
+
+          <button
+            type="button"
+            ref={startSentinel}
+            className={`${prefix}--visually-hidden`}>
+            Focus sentinel
+          </button>
+          <div ref={innerModal} className={`${prefix}--modal-container-body`}>
             {childrenWithProps}
           </div>
+          {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
+          <button
+            type="button"
+            ref={endSentinel}
+            className={`${prefix}--visually-hidden`}>
+            Focus sentinel
+          </button>
         </div>
-        {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-        <span
-          role="link"
-          tabIndex={0}
-          ref={endSentinel}
-          className={`${prefix}--visually-hidden`}>
-          Focus sentinel
-        </span>
       </div>
     );
   }
