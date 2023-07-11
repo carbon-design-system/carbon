@@ -24,6 +24,10 @@ $css--plex: true !default;
   @include layer-tokens.emit-layer-tokens(1);
   display: inline-flex;
 
+  ::slotted([slot='icon']) {
+    @extend .#{$prefix}--btn__icon;
+  }
+
   .#{$prefix}--btn {
     flex-grow: 1;
     max-width: 100%;
