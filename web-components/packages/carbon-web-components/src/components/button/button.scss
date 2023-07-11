@@ -23,6 +23,11 @@ $css--plex: true !default;
 :host(#{$prefix}-modal-footer-button) {
   @include layer-tokens.emit-layer-tokens(1);
   display: inline-flex;
+
+  .#{$prefix}--btn {
+    flex-grow: 1;
+    max-width: 100%;
+  }
 }
 
 :host(#{$prefix}-button[isExpressive]) ::slotted([slot='icon']),
