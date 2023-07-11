@@ -22,6 +22,22 @@ test.describe('ProgressIndicator', () => {
     await expect(page).toHaveNoACViolations('ProgressIndicator');
   });
 
+  test('accessibility-checker on hover @avt', async ({ page }) => {
+    await visitStory(page, {
+      component: 'ProgressIndicator',
+      id: 'components-progressindicator--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    await expect(page.getByText('First step')).toBeVisible();
+
+    page.getByText('First step').hover();
+
+    await expect(page).toHaveNoACViolations('ProgressIndicator-onhover');
+  });
+
   test('accessibility-checker interactive progressindicator @avt', async ({
     page,
   }) => {
@@ -32,7 +48,7 @@ test.describe('ProgressIndicator', () => {
         theme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('ProgressIndicator');
+    await expect(page).toHaveNoACViolations('ProgressIndicator-interactive');
   });
 
   test('accessibility-checker skeleton progressindicator @avt', async ({
@@ -45,7 +61,7 @@ test.describe('ProgressIndicator', () => {
         theme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('ProgressIndicator');
+    await expect(page).toHaveNoACViolations('ProgressIndicator-skeleton');
   });
 
   test('progress indicator - keyboard nav', async ({ page }) => {
