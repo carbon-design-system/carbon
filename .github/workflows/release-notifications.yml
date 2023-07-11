@@ -11,12 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@main
+      - name: Generate token
+        uses: tibdex/github-app-token@v1
+        id: generate_token
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
       - name: Add release information on pull requests
         uses: ./actions/release-notifications
         with:
-          GITHUB_TOKEN: ${{ secrets.GH_BOT_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
           OWNER: 'carbon-design-system'
           REPO_NAME: 'carbon'
           enabled: true
-        env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
