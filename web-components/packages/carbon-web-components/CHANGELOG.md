@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.30.0-rc.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.29.0...@carbon/web-components@1.30.0-rc.0) (2023-07-11)
+
+
+### Bug Fixes
+
+* **date-picker:** prevent range inputs from clearing prematurely ([#10603](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10603)) ([77306c8](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/77306c89d2b5d374efdafba99b77e50cf65f61b7))
+* **masthead:** Esc to close Cloud Masthead ([#10555](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10555)) ([de67bf8](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/de67bf8242ff47f2c26f285fc878f932bc822397)), closes [#10174](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10174)
+
+
+
+
+
 # [1.29.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.29.0-rc.3...@carbon/web-components@1.29.0) (2023-06-27)
 
 **Note:** Version bump only for package @carbon/web-components
