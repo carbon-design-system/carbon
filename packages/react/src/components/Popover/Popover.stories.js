@@ -9,6 +9,7 @@ import './story.scss';
 import { Checkbox as CheckboxIcon } from '@carbon/icons-react';
 import React, { useState } from 'react';
 import { Popover, PopoverContent } from '../Popover';
+import { IconButton } from '../IconButton';
 import RadioButton from '../RadioButton';
 import RadioButtonGroup from '../RadioButtonGroup';
 import { default as Checkbox } from '../Checkbox';
@@ -154,6 +155,54 @@ export const TabTip = () => {
               defaultChecked
               labelText="Location"
               id="checkbox-label-10"
+            />
+          </fieldset>
+        </PopoverContent>
+      </Popover>
+    </div>
+  );
+};
+
+export const TabTipTest = () => {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="popover-tabtip-story" style={{ display: 'flex' }}>
+      <Popover
+        open={open}
+        onKeyDown={(evt) => {
+          if (match(evt, keys.Escape)) {
+            setOpen(false);
+          }
+        }}
+        isTabTip
+        onRequestClose={() => setOpen(false)}>
+        <IconButton
+          align="top-left"
+          kind="ghost"
+          label="Settings test long string"
+          onClick={() => {
+            setOpen(!open);
+          }}>
+          <Settings />
+        </IconButton>
+        <PopoverContent className="p-3">
+          <RadioButtonGroup
+            style={{ alignItems: 'flex-start', flexDirection: 'column' }}
+            legendText="Row height"
+            name="radio-button-group"
+            defaultSelected="small">
+            <RadioButton labelText="Small" value="small" id="radio-small" />
+            <RadioButton labelText="Large" value="large" id="radio-large" />
+          </RadioButtonGroup>
+          <hr />
+          <fieldset className={`${prefix}--fieldset`}>
+            <legend className={`${prefix}--label`}>Edit columns</legend>
+            <Checkbox defaultChecked labelText="Name" id="checkbox-label-1" />
+            <Checkbox defaultChecked labelText="Type" id="checkbox-label-2" />
+            <Checkbox
+              defaultChecked
+              labelText="Location"
+              id="checkbox-label-3"
             />
           </fieldset>
         </PopoverContent>
