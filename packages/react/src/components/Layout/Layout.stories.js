@@ -8,7 +8,7 @@
 import React from 'react';
 
 import { Accordion, AccordionItem } from '../Accordion';
-import { Button } from '../Button';
+import Button from '../Button';
 import { HStack, VStack } from '../Stack';
 import { TextInput } from '../TextInput';
 
