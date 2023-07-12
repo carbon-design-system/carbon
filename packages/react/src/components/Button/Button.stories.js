@@ -105,6 +105,16 @@ export const ASizeTest = () => {
       <Button renderIcon={Add} size="2xl">
         2XL button that demonstrates wrapping
       </Button>
+      <br />
+      <br />
+      <Button renderIcon={Add} isExpressive>
+        Large expressive
+      </Button>
+      <br />
+      <br />
+      <Button renderIcon={Add} isExpressive>
+        Large expressive button that demonstrates wrapping
+      </Button>
     </div>
   );
 };
