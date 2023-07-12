@@ -60,61 +60,103 @@ export default {
 
 export const ASizeTest = () => {
   return (
-    <div>
-      <Button renderIcon={Add} size="sm">
-        Small button
-      </Button>
-      <br />
-      <br />
-      <Button renderIcon={Add} size="sm">
-        Small button that demonstrates wrapping
-      </Button>
-      <br />
-      <br />
-      <Button renderIcon={Add} size="md">
-        Medium button
-      </Button>
-      <br />
-      <br />
-      <Button renderIcon={Add} size="md">
-        Medium button that demonstrates wrapping
-      </Button>
-      <br />
-      <br />
-      <Button renderIcon={Add}>Large button</Button>
-      <br />
-      <br />
-      <Button renderIcon={Add}>Large button that demonstrates wrapping</Button>
-      <br />
-      <br />
-      <Button renderIcon={Add} size="xl">
-        XL button
-      </Button>
-      <br />
-      <br />
-      <Button renderIcon={Add} size="xl">
-        XL button that demonstrates wrapping
-      </Button>
-      <br />
-      <br />
-      <Button renderIcon={Add} size="2xl">
-        2XL button
-      </Button>
-      <br />
-      <br />
-      <Button renderIcon={Add} size="2xl">
-        2XL button that demonstrates wrapping
-      </Button>
-      <br />
-      <br />
-      <Button renderIcon={Add} isExpressive>
-        Large expressive
-      </Button>
-      <br />
-      <br />
-      <Button renderIcon={Add} isExpressive>
-        Large expressive button that demonstrates wrapping
-      </Button>
+    <div style={{ display: 'flex' }}>
+      <div>
+        <Button renderIcon={Add} size="sm">
+          Small button
+        </Button>
+        <br />
+        <br />
+        <Button renderIcon={Add} size="sm">
+          Small button that demonstrates wrapping
+        </Button>
+        <br />
+        <br />
+        <Button renderIcon={Add} size="md">
+          Medium button
+        </Button>
+        <br />
+        <br />
+        <Button renderIcon={Add} size="md">
+          Medium button that demonstrates wrapping
+        </Button>
+        <br />
+        <br />
+        <Button renderIcon={Add}>Large button</Button>
+        <br />
+        <br />
+        <Button renderIcon={Add}>
+          Large button that demonstrates wrapping
+        </Button>
+        <br />
+        <br />
+        <Button renderIcon={Add} size="xl">
+          XL button
+        </Button>
+        <br />
+        <br />
+        <Button renderIcon={Add} size="xl">
+          XL button that demonstrates wrapping
+        </Button>
+        <br />
+        <br />
+        <Button renderIcon={Add} size="2xl">
+          2XL button
+        </Button>
+        <br />
+        <br />
+        <Button renderIcon={Add} size="2xl">
+          2XL button that demonstrates wrapping
+        </Button>
+      </div>
+      <div>
+        <Button renderIcon={Add} isExpressive size="sm">
+          Small expressive button
+        </Button>
+        <br />
+        <br />
+        <Button renderIcon={Add} isExpressive size="sm">
+          Small expressive button that demonstrates wrapping
+        </Button>
+        <br />
+        <br />
+        <Button renderIcon={Add} isExpressive size="md">
+          Medium expressive button
+        </Button>
+        <br />
+        <br />
+        <Button renderIcon={Add} isExpressive size="md">
+          Medium expressive button that demonstrates wrapping
+        </Button>
+        <br />
+        <br />
+        <Button renderIcon={Add}>Large button</Button>
+        <br />
+        <br />
+        <Button renderIcon={Add}>
+          Large expressive button that demonstrates wrapping
+        </Button>
+        <br />
+        <br />
+        <Button renderIcon={Add} isExpressive size="xl">
+          XL expressive button
+        </Button>
+        <br />
+        <br />
+        <Button renderIcon={Add} isExpressive size="xl">
+          XL expressive button that demonstrates wrapping
+        </Button>
+        <br />
+        <br />
+        <Button renderIcon={Add} isExpressive size="2xl">
+          2XL expressive button
+        </Button>
+        <br />
+        <br />
+        <Button renderIcon={Add} isExpressive size="2xl">
+          2XL expressive button that demonstrates wrapping
+        </Button>
+      </div>
     </div>
   );
 };
