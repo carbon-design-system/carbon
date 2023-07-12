@@ -10,12 +10,13 @@ import classnames from 'classnames';
 import Search, { type SearchProps } from '../Search';
 import { usePrefix } from '../../internal/usePrefix';
 import { composeEventHandlers } from '../../tools/events';
+import { match, keys } from '../../internal/keyboard';
 
 function ExpandableSearch({
   onBlur,
   onChange,
   onExpand,
-  onFocus,
+  onKeyDown,
   defaultValue,
   isExpanded,
   ...props
@@ -24,12 +25,6 @@ function ExpandableSearch({
   const [hasContent, setHasContent] = useState(defaultValue ? true : false);
   const searchRef = useRef<HTMLInputElement>(null);
   const prefix = usePrefix();
-
-  function handleFocus() {
-    if (!expanded) {
-      setExpanded(true);
-    }
-  }
 
   function handleBlur(evt) {
     const relatedTargetIsAllowed =
@@ -46,7 +41,19 @@ function ExpandableSearch({
   }
 
   function handleExpand() {
+    setExpanded(true);
     searchRef.current?.focus?.();
+  }
+
+  function handleKeyDown(evt) {
+    if (expanded && match(evt, keys.Escape)) {
+      evt.stopPropagation();
+
+      // escape key only clears if the input is empty, otherwise it clears the input
+      if (!evt.target?.value) {
+        setExpanded(false);
+      }
+    }
   }
 
   const classes = classnames(
@@ -64,10 +71,10 @@ function ExpandableSearch({
       isExpanded={expanded}
       ref={searchRef}
       className={classes}
-      onFocus={composeEventHandlers([onFocus, handleFocus])}
       onBlur={composeEventHandlers([onBlur, handleBlur])}
       onChange={composeEventHandlers([onChange, handleChange])}
       onExpand={composeEventHandlers([onExpand, handleExpand])}
+      onKeyDown={composeEventHandlers([onKeyDown, handleKeyDown])}
     />
   );
 }
