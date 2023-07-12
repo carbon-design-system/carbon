@@ -5,14 +5,16 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../button/tokens' as button;
 @use '../../config' as *;
 @use '../../feature-flags' as *;
+@use '../../layer' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
-@use '../button/tokens' as button;
 @use '../../utilities/button-reset';
+@use '../../utilities/component-reset';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/visually-hidden' as *;
@@ -30,6 +32,7 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   }
 
   .#{$prefix}--tile {
+    @include type-style('body-compact-01');
     @include layout.use('density', $default: 'normal');
 
     position: relative;
@@ -40,8 +43,6 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     background-color: $layer;
     outline: 2px solid transparent;
     outline-offset: -2px;
-
-    @include type-style('body-compact-01');
 
     &:focus {
       @include focus-outline('outline');
@@ -55,6 +56,10 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
   .#{$prefix}--tile--clickable,
   .#{$prefix}--tile--selectable {
+    @include component-reset.reset;
+    @include type-style('body-compact-01');
+
+    padding: layout.density('padding-inline');
     cursor: pointer;
     transition: $duration-moderate-01 motion(standard, productive);
 
@@ -64,8 +69,6 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   }
 
   .#{$prefix}--tile--clickable {
-    @include reset;
-
     color: $text-primary;
     text-decoration: none;
 

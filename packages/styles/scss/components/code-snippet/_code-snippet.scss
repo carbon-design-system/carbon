@@ -5,20 +5,22 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'mixins' as *;
+@use '../copy-button';
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
-@use '../copy-button';
+@use '../../layer' as *;
 @use '../../utilities/convert' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/keyframes' as *;
+@use '../../utilities/layout' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/tooltip' as *;
 @use '../../utilities/z-index' as *;
-@use 'mixins' as *;
 
 /// @type Color
 /// @access public
