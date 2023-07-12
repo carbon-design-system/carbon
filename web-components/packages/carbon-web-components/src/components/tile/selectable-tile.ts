@@ -9,7 +9,7 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html, svg } from 'lit';
-import { property, customElement, query } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import Checkbox16 from '@carbon/icons/lib/checkbox/16';
 import CheckboxCheckedFilled16 from '@carbon/icons/lib/checkbox--checked--filled/16';
@@ -19,6 +19,7 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 import { TILE_COLOR_SCHEME } from './defs';
 import styles from './tile.scss';
 import HostListener from '../../globals/decorators/host-listener';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Multi-selectable tile.

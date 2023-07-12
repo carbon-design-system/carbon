@@ -9,7 +9,7 @@
 
 import { styleMap } from 'lit/directives/style-map.js';
 import { LitElement, html } from 'lit';
-import { property, customElement } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import ChevronDown16 from '@carbon/icons/lib/chevron--down/16';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
@@ -19,6 +19,7 @@ import Handle from '../../globals/internal/handle';
 import '../copy-button/index';
 import '../copy/copy';
 import '../button/button';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { CODE_SNIPPET_COLOR_SCHEME, CODE_SNIPPET_TYPE };
 

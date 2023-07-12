@@ -8,10 +8,11 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, customElement } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { TILE_COLOR_SCHEME } from './defs';
 import styles from './tile.scss';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { TILE_COLOR_SCHEME };
 

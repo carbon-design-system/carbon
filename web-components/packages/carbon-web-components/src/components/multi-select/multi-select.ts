@@ -8,7 +8,7 @@
  */
 
 import { html, TemplateResult } from 'lit';
-import { property, customElement, query } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import Close16 from '@carbon/icons/lib/close/16';
 import { prefix } from '../../globals/settings';
@@ -24,6 +24,7 @@ import CDSDropdown, {
 import { SELECTION_FEEDBACK_OPTION } from './defs';
 import CDSMultiSelectItem from './multi-select-item';
 import styles from './multi-select.scss';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export {
   DROPDOWN_SIZE,

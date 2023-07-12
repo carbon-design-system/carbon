@@ -9,11 +9,12 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
-import { property, customElement } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './slider.scss';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * The `<input>` box for slider.

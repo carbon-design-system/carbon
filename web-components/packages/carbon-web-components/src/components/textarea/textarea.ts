@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, customElement, query } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
 import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16';
@@ -17,6 +17,7 @@ import ifNonEmpty from '../../globals/directives/if-non-empty';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import CDSTextInput from '../text-input/text-input';
 import styles from './textarea.scss';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Text area.

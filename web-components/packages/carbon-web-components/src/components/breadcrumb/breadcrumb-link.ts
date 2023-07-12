@@ -8,10 +8,10 @@
  */
 
 import { html } from 'lit';
-import { customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSLink from '../link/link';
 import styles from './breadcrumb.scss';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Link in breadcrumb.
