@@ -17,6 +17,11 @@ $css--plex: true !default;
 :host(#{$prefix}-breadcrumb),
 :host(#{$prefix}-breadcrumb-skeleton) {
   @extend .#{$prefix}--breadcrumb;
+
+  .#{$prefix}--breadcrumb {
+    padding: 0;
+    margin: 0;
+  }
 }
 
 :host(#{$prefix}-breadcrumb-item),
