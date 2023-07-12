@@ -143,7 +143,6 @@ exports[`ModalWrapper should render 1`] = `
             </button>
           </div>
           <div
-            aria-labelledby="bx--modal-header__label--modal-1"
             className="bx--modal-content"
             id="bx--modal-body--modal-1"
           >
