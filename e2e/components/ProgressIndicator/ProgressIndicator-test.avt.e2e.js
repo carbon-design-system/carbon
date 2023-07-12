@@ -22,22 +22,6 @@ test.describe('ProgressIndicator', () => {
     await expect(page).toHaveNoACViolations('ProgressIndicator');
   });
 
-  test('accessibility-checker on hover @avt', async ({ page }) => {
-    await visitStory(page, {
-      component: 'ProgressIndicator',
-      id: 'components-progressindicator--default',
-      globals: {
-        theme: 'white',
-      },
-    });
-
-    await expect(page.getByText('First step')).toBeVisible();
-
-    page.getByText('First step').hover();
-
-    await expect(page).toHaveNoACViolations('ProgressIndicator-onhover');
-  });
-
   test('accessibility-checker interactive progressindicator @avt', async ({
     page,
   }) => {
@@ -62,6 +46,66 @@ test.describe('ProgressIndicator', () => {
       },
     });
     await expect(page).toHaveNoACViolations('ProgressIndicator-skeleton');
+  });
+
+  test('accessibility-checker - onHover @avt', async ({ page }) => {
+    await visitStory(page, {
+      component: 'ProgressIndicator',
+      id: 'components-progressindicator--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    await expect(page.getByText('First step')).toBeVisible();
+
+    page.getByText('First step').hover();
+
+    await expect(page).toHaveNoACViolations('ProgressIndicator-onhover');
+  });
+
+  test('accessibility-checker - complete @avt', async ({ page }) => {
+    await visitStory(page, {
+      component: 'ProgressIndicator',
+      id: 'components-progressindicator--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    // Checking if the 'complete' prop is adding the correct class
+    expect(page.locator('.cds--progress-step--complete')).toBeTruthy();
+  });
+
+  test('accessibility-checker - current @avt', async ({ page }) => {
+    await visitStory(page, {
+      component: 'ProgressIndicator',
+      id: 'components-progressindicator--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    // Checking if the 'current' prop is adding the correct class
+    expect(page.locator('.cds--progress-step--current')).toBeTruthy();
+  });
+
+  test('accessibility-checker - interactive onHover @avt', async ({ page }) => {
+    await visitStory(page, {
+      component: 'ProgressIndicator',
+      id: 'components-progressindicator--interactive',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    await expect(page.getByText('Click me')).toBeVisible();
+
+    page.getByText('Click me').hover();
+
+    await expect(page).toHaveNoACViolations(
+      'ProgressIndicator-interactive-onhover'
+    );
   });
 
   test('progress indicator - keyboard nav', async ({ page }) => {
