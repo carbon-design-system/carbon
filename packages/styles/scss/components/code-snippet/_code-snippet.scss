@@ -335,6 +335,7 @@ $copy-btn-feedback: $background-inverse !default;
     right: 0;
     bottom: 0;
     display: inline-flex;
+    height: rem(32px);
     align-items: center;
 
     padding: $spacing-03 $spacing-05;
