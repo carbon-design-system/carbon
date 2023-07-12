@@ -9,18 +9,26 @@ component.
 
 ## Getting Started
 
-First, run `yarn` or `npm install` and then run the development server:
+First run `yarn build` in the root of the `carbon` repository.
 
-```bash
-npm run dev
-# or
-yarn dev
+```sh
+yarn install && yarn build
 ```
 
-Ensure that you have executed `yarn build` or `npm run build` in the root
-directory of your project before run `yarn dev` or `npm run dev`.
+Now you can install and run the development server.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the
+```sh
+yarn install
+# or
+npm install
+
+
+yarn dev
+# or
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) with your browser to see the
 result.
 
 ## Sass

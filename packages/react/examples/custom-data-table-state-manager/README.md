@@ -1,6 +1,23 @@
 # Getting Started with custom data table state manager
 
-Run `yarn start` or `npm run start` to execute the development server:
+First run `yarn build` in the root of the `carbon` repository.
 
-Ensure that you have executed `yarn build` or `npm run build` in the root
-directory of your project before run `yarn start` or `npm run start`.
+```sh
+yarn install && yarn build
+```
+
+Now you can install and run the development server.
+
+```sh
+yarn install
+# or
+npm install
+
+
+yarn start
+# or
+npm run start
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the
+result.

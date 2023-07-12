@@ -1,6 +1,23 @@
 # Getting Started with Layout preview
 
-Run `yarn develop` or `npm run develop` to execute the development server:
+First run `yarn build` in the root of the `carbon` repository.
 
-Ensure that you have executed `yarn build` or `npm run build` in the root
-directory of your project before run `yarn develop` or `npm run develop`.
+```sh
+yarn install && yarn build
+```
+
+Now you can install and run the development server.
+
+```sh
+yarn install
+# or
+npm install
+
+
+yarn develop
+# or
+npm run develop
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the
+result.

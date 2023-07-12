@@ -1,6 +1,23 @@
 # Getting Started with Custom Theme
 
-Run `yarn dev` or `npm run dev` to execute the development server:
+First run `yarn build` in the root of the `carbon` repository.
 
-Ensure that you have executed `yarn build` or `npm run build` in the root
-directory of your project before run `yarn dev` or `npm run dev`.
+```sh
+yarn install && yarn build
+```
+
+Now you can install and run the development server.
+
+```sh
+yarn install
+# or
+npm install
+
+
+yarn dev
+# or
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) with your browser to see the
+result.

@@ -15,8 +15,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-Ensure that you have executed `npm run build` in the root directory of your
-project before run `npm run start`.
+Ensure that you have executed `yarn build` in the root directory of your project
+before run `npm run start` or `yarn start`.
 
 ### `npm test`
 
