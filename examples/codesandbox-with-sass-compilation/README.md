@@ -16,7 +16,7 @@ The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
 Ensure that you have executed `yarn build` in the root directory of your project
-before run `npm run start` or `yarn start`.
+before running `npm run start` or `yarn start`.
 
 ### `npm test`
 

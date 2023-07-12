@@ -19,7 +19,7 @@ First run `yarn build` in the root of the `carbon` repository.
 yarn install && yarn build
 ```
 
-Now you can install and run the development server.
+Now, all you need to do is `cd` into the directory and run:
 
 ```sh
 yarn install
