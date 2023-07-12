@@ -8,7 +8,7 @@ yarn install
 
 ## Build the project
 
-Run `yarn build` in the root of your project before start the development server.
+Run `yarn build` in the root of your project before starting the development server.
 
 ### Compiles and hot-reloads for development
 
