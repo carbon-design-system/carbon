@@ -108,53 +108,15 @@ export const ASizeTest = () => {
         <Button renderIcon={Add} size="2xl">
           2XL button that demonstrates wrapping
         </Button>
-      </div>
-      <div>
-        <Button renderIcon={Add} isExpressive size="sm">
-          Small expressive button
+        <br />
+        <br />
+        <Button isExpressive renderIcon={Add}>
+          Large expressive button
         </Button>
         <br />
         <br />
-        <Button renderIcon={Add} isExpressive size="sm">
-          Small expressive button that demonstrates wrapping
-        </Button>
-        <br />
-        <br />
-        <Button renderIcon={Add} isExpressive size="md">
-          Medium expressive button
-        </Button>
-        <br />
-        <br />
-        <Button renderIcon={Add} isExpressive size="md">
-          Medium expressive button that demonstrates wrapping
-        </Button>
-        <br />
-        <br />
-        <Button renderIcon={Add}>Large button</Button>
-        <br />
-        <br />
-        <Button renderIcon={Add}>
+        <Button isExpressive renderIcon={Add}>
           Large expressive button that demonstrates wrapping
-        </Button>
-        <br />
-        <br />
-        <Button renderIcon={Add} isExpressive size="xl">
-          XL expressive button
-        </Button>
-        <br />
-        <br />
-        <Button renderIcon={Add} isExpressive size="xl">
-          XL expressive button that demonstrates wrapping
-        </Button>
-        <br />
-        <br />
-        <Button renderIcon={Add} isExpressive size="2xl">
-          2XL expressive button
-        </Button>
-        <br />
-        <br />
-        <Button renderIcon={Add} isExpressive size="2xl">
-          2XL expressive button that demonstrates wrapping
         </Button>
       </div>
     </div>

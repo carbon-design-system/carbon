@@ -29,6 +29,12 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
         map.get($body-compact-01, line-height)
       )} * 1em
   );
+  --temp-expressive-1lh: (
+    #{custom-property.get-var(
+        'body-compact-02-line-height',
+        map.get($body-compact-02, line-height)
+      )} * 1em
+  );
   // -1px to compensate for border width
   --temp-padding-block-max: calc(
     (#{custom-property.get-var('layout-size-height-lg')} - var(--temp-1lh)) / 2 -
