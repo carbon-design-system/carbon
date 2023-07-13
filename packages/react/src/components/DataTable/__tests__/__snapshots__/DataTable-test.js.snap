@@ -484,6 +484,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
         >
           <div
             class="cds--search-magnifier"
+            tabindex="-1"
           >
             <svg
               aria-hidden="true"
@@ -514,7 +515,6 @@ exports[`DataTable behaves as expected selection should render and match snapsho
             id="custom-id"
             placeholder="Filter table"
             role="searchbox"
-            tabindex="0"
             type="text"
             value=""
           />
@@ -890,6 +890,7 @@ exports[`DataTable renders as expected - Component API should render and match s
         >
           <div
             class="cds--search-magnifier"
+            tabindex="-1"
           >
             <svg
               aria-hidden="true"
@@ -920,7 +921,6 @@ exports[`DataTable renders as expected - Component API should render and match s
             id="custom-id"
             placeholder="Filter table"
             role="searchbox"
-            tabindex="0"
             type="text"
             value=""
           />
