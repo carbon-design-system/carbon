@@ -10,7 +10,8 @@
 //-----------------------------
 
 @use 'vars' as *;
-
+@use '../button/tokens' as button;
+@use '../tooltip';
 @use '../../config' as *;
 @use '../../theme' as *;
 @use '../../colors' as *;
@@ -18,10 +19,11 @@
 @use '../../breakpoint' as *;
 @use '../../spacing' as *;
 @use '../../motion' as *;
-@use '../button/tokens' as button;
+@use '../../layer' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/rotate' as *;
 @use '../../utilities/box-shadow' as *;
+@use '../../utilities/component-reset';
 @use '../../utilities/component-tokens' as *;
 @use '../../utilities/custom-property';
 @use '../../utilities/skeleton' as *;
@@ -29,27 +31,37 @@
 @use '../../utilities/button-reset';
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/convert' as *;
-
-$icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
+@use '../../utilities/layout';
 
 /// Tabs styles
 /// @access public
 /// @group tabs
 @mixin tabs {
+  .#{$prefix}--tabs,
+  .#{$prefix}--tab-content {
+    @include layout.use('density', $default: 'normal');
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--tabs--tall,
+  .#{$prefix}--tabs.#{$prefix}--tabs--contained.#{$prefix}--tabs--tall {
+    @include layout.use('size', $min: 'lg', $max: 'xl', $default: 'xl');
+  }
+
   .#{$prefix}--tabs {
     @include reset;
     @include type-style('body-compact-01');
+    @include layout.use('size', $min: 'sm', $max: 'lg', $default: 'md');
 
     position: relative;
     display: flex;
     width: 100%;
     height: auto;
-    min-height: rem(40px);
-    max-height: 4rem;
+    min-height: layout.size('height');
+    max-height: custom-property.get-var('layout-size-height-xl');
     color: $text-primary;
 
     &.#{$prefix}--tabs--contained {
-      min-height: rem(48px);
+      @include layout.use('size', $min: 'sm', $max: 'xl', $default: 'lg');
     }
 
     .#{$prefix}--tab--list {
@@ -66,6 +78,8 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     }
 
     .#{$prefix}--tabs__nav {
+      @include component-reset.reset;
+
       display: flex;
     }
 
@@ -237,6 +251,12 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       display: flex;
     }
 
+    &:not(.#{$prefix}--tabs--contained)
+      .#{$prefix}--tabs__nav-item-label-wrapper {
+      position: relative;
+      top: rem(1px);
+    }
+
     //-----------------------------
     // Item
     //-----------------------------
@@ -281,11 +301,6 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--disabled)
       .#{$prefix}--tabs__nav-item--icon
       .#{$prefix}--tabs__nav-item--close-icon {
-      padding: $spacing-05;
-      margin-top: -$spacing-03;
-      margin-right: -$spacing-05;
-      margin-left: -$spacing-05;
-
       &:hover {
         background-color: inherit;
       }
@@ -339,7 +354,7 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     }
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--icon {
-      padding-left: $spacing-05;
+      padding-inline-start: layout.density('padding-inline');
     }
 
     //-----------------------------
@@ -351,9 +366,9 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       @include type-style('body-compact-01');
 
       overflow: hidden;
-      padding: $spacing-04 $spacing-05 $spacing-03;
       border-bottom: $tab-underline-color;
       color: $text-secondary;
+      padding-inline: layout.density('padding-inline');
       text-align: left;
       text-decoration: none;
       text-overflow: ellipsis;
@@ -368,9 +383,8 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     }
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-link {
-      height: rem(48px);
-      padding: $spacing-03 $spacing-05;
       border-bottom: 0;
+      padding-inline: layout.density('padding-inline');
     }
 
     &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--tall)
@@ -385,11 +399,6 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       min-height: rem(16px);
     }
 
-    &.#{$prefix}--tabs--contained.#{$prefix}--tabs--tall
-      .#{$prefix}--tabs__nav-link {
-      height: rem(64px);
-    }
-
     //-----------------------------
     // Icon Item
     //-----------------------------
@@ -401,8 +410,8 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     .#{$prefix}--tabs__nav-item--icon-only,
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--icon-only {
       display: flex;
-      width: $icon-tab-size;
-      height: $icon-tab-size;
+      width: layout.size('height');
+      height: layout.size('height');
       align-items: center;
       justify-content: center;
       padding: 0;
@@ -410,10 +419,6 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       .#{$prefix}--tabs__nav-item-label {
         line-height: 0;
       }
-    }
-
-    &.#{$prefix}--tabs__icon--lg {
-      @include custom-property.declaration('icon-tab-size', rem(48px));
     }
 
     //-----------------------------
@@ -554,7 +559,7 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
   //  Tab Content Container
   //-----------------------------
   .#{$prefix}--tab-content {
-    padding: $spacing-05;
+    padding: layout.density('padding-inline');
 
     &:focus {
       @include focus-outline('outline');
@@ -585,7 +590,7 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     width: 10rem;
     height: 100%;
     align-items: center;
-    padding: 0 1rem;
+    padding: 0 layout.density('padding-inline');
   }
 
   .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link span {

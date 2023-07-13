@@ -3,7 +3,7 @@
 exports[`reset should be printable 1`] = `"font-size: 16px;"`;
 
 exports[`reset should be printable 2`] = `
-"font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+"font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 font-weight: 400;
 text-rendering: optimizeLegibility;
 --webkit--font--smoothing: antialiased;

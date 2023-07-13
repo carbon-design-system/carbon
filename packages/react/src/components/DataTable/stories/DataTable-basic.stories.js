@@ -102,7 +102,7 @@ export const Default = () => {
   const headers = ['Name', 'Rule', 'Status', 'Other', 'Example'];
 
   return (
-    <Table size="lg" useZebraStyles={false}>
+    <Table size="lg" useZebraStyles={false} aria-label="sample table">
       <TableHead>
         <TableRow>
           {headers.map((header) => (
@@ -224,7 +224,7 @@ export const XLWithTwoLines = () => {
   const headers = ['Name', 'Rule', 'Status', 'Other', 'Example'];
 
   return (
-    <Table size="xl" useZebraStyles={false}>
+    <Table size="xl" useZebraStyles={false} aria-label="sample table">
       <TableHead>
         <TableRow>
           {headers.map((header) => (
@@ -311,7 +311,7 @@ export const Playground = (args) => {
   const headers = ['Name', 'Rule', 'Status', 'Other', 'Example'];
 
   return (
-    <Table {...args}>
+    <Table {...args} aria-label="sample table">
       <TableHead>
         <TableRow>
           {headers.map((header) => (

@@ -29,6 +29,12 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
         map.get($body-compact-01, line-height)
       )} * 1em
   );
+  --temp-expressive-1lh: (
+    #{custom-property.get-var(
+        'body-compact-02-line-height',
+        map.get($body-compact-02, line-height)
+      )} * 1em
+  );
   // -1px to compensate for border width
   --temp-padding-block-max: calc(
     (#{custom-property.get-var('layout-size-height-lg')} - var(--temp-1lh)) / 2 -
@@ -42,7 +48,7 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
   display: inline-flex;
   width: max-content;
   max-width: rem(320px);
-  height: layout.size('height');
+  min-height: layout.size('height');
   flex-shrink: 0;
   justify-content: space-between;
   // Fix to remove added margins on buttons in safari (see #5155)
@@ -51,7 +57,7 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
   cursor: pointer;
   outline: none;
   // -1px to compensate for border width
-  padding-block-start: min(
+  padding-block: min(
     calc((layout.size('height') - var(--temp-1lh)) / 2 - rem(1px)),
     var(--temp-padding-block-max)
   );
