@@ -46,7 +46,6 @@ $css--plex: true !default;
       outline: none;
     }
   }
-}
 
   .#{$prefix}--tag--disabled {
     @extend .#{$prefix}--tag--disabled;
