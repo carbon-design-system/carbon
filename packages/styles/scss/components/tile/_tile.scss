@@ -108,6 +108,7 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile--clickable.#{$prefix}--link--disabled,
   .#{$prefix}--tile--clickable:hover.#{$prefix}--link--disabled {
     display: block;
+    padding: layout.density('padding-inline');
     background-color: $layer;
     color: $text-disabled;
     cursor: not-allowed;
