@@ -14,7 +14,7 @@ This example illustrates how v11 and v10 work together.
 
 ## Getting Started
 
-First run `yarn build` in the root of the `carbon` repository.
+First, run `yarn build` in the root of the `carbon` repository.
 
 ```sh
 yarn install && yarn build

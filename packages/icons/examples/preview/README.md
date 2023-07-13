@@ -1,6 +1,6 @@
 # Getting Started with CSS grid
 
-First run `yarn build` in the root of the `carbon` repository.
+First, run `yarn build` in the root of the `carbon` repository.
 
 ```sh
 yarn install && yarn build

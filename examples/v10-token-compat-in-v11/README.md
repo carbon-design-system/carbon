@@ -13,7 +13,7 @@ Color tokens, you'll need to pull in the compatibility tokens like so:
 
 ## Getting Started
 
-First run `yarn build` in the root of the `carbon` repository.
+First, run `yarn build` in the root of the `carbon` repository.
 
 ```sh
 yarn install && yarn build

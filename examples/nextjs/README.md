@@ -3,7 +3,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with
 
 ## Getting Started
 
-First run `yarn build` in the root of the `carbon` repository.
+First, run `yarn build` in the root of the `carbon` repository.
 
 ```sh
 yarn install && yarn build

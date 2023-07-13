@@ -1,6 +1,6 @@
 # Getting Started with Code Sandbox
 
-First run `yarn build` in the root of the `carbon` repository.
+First, run `yarn build` in the root of the `carbon` repository.
 
 ```sh
 yarn install && yarn build
