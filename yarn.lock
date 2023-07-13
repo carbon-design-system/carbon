@@ -2252,7 +2252,7 @@ __metadata:
     joi: ^14.3.1
     js-yaml: ^3.12.1
     klaw-sync: ^6.0.0
-    memfs: ^3.4.0
+    memfs: ^4.0.0
     prettier: ^2.8.8
     prop-types: ^15.6.2
     react: ^18.2.0
@@ -2584,7 +2584,7 @@ __metadata:
     jscodeshift: ^0.13.1
     lodash.clonedeep: ^4.5.0
     lodash.merge: ^4.6.2
-    memfs: ^3.4.0
+    memfs: ^4.0.0
     nanoid: ^3.1.30
     npm-which: ^3.0.1
     rimraf: ^5.0.0
@@ -9094,10 +9094,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"arg@npm:^5.0.1":
-  version: 5.0.1
-  resolution: "arg@npm:5.0.1"
-  checksum: 9aefbcb1204f8dbd541a045bfe99b6515b4dc697c2f704ef2bb5e9fe5464575d97571e91e673a6f23ad72dd1cc24d7d8cf2d1d828e72c08e4d4f6f9237adc761
+"arg@npm:^5.0.1, arg@npm:^5.0.2":
+  version: 5.0.2
+  resolution: "arg@npm:5.0.2"
+  checksum: 6c69ada1a9943d332d9e5382393e897c500908d91d5cb735a01120d5f71daf1b339b7b8980cbeaba8fd1afc68e658a739746179e4315a26e8a28951ff9930078
   languageName: node
   linkType: hard
 
@@ -17326,6 +17326,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hyperdyperid@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "hyperdyperid@npm:1.2.0"
+  checksum: 210029d1c86926f09109f6317d143f8b056fc38e8dd11b0c3e3205fc6c6ff8429fb55b4b9c2bce065462719ed9d34366eced387aaa0035d93eb76b306a8547ef
+  languageName: node
+  linkType: hard
+
 "iconv-lite@npm:0.4.24, iconv-lite@npm:^0.4.24":
   version: 0.4.24
   resolution: "iconv-lite@npm:0.4.24"
@@ -20011,6 +20018,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"json-joy@npm:^9.2.0":
+  version: 9.3.0
+  resolution: "json-joy@npm:9.3.0"
+  dependencies:
+    arg: ^5.0.2
+    hyperdyperid: ^1.2.0
+  peerDependencies:
+    quill-delta: ^5
+    rxjs: 7
+    tslib: 2
+  bin:
+    json-pack: bin/json-pack.js
+    json-pack-test: bin/json-pack-test.js
+    json-patch: bin/json-patch.js
+    json-patch-test: bin/json-patch-test.js
+    json-pointer: bin/json-pointer.js
+    json-pointer-test: bin/json-pointer-test.js
+    json-unpack: bin/json-unpack.js
+  checksum: 65ce4e841d3ed6b3fd49e7a2defaade8199cf6a6e089db67cecfccb5277856af3a234877d2c1e4054f98b6772b6b09917a995e51f753386a0fd6637e61afd179
+  languageName: node
+  linkType: hard
+
 "json-parse-better-errors@npm:^1.0.1":
   version: 1.0.2
   resolution: "json-parse-better-errors@npm:1.0.2"
@@ -21677,12 +21706,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"memfs@npm:^3.1.2, memfs@npm:^3.4.0, memfs@npm:^3.4.1":
+"memfs@npm:^3.1.2, memfs@npm:^3.4.1":
   version: 3.4.1
   resolution: "memfs@npm:3.4.1"
   dependencies:
     fs-monkey: 1.0.3
   checksum: 6d2f49d447d1be24ff9c747618933784eeb059189bc6a0d77b7a51c7daf06e2d3a74674a2e2ff1520e2c312bf91e719ed37144cf05087379b3ba0aef0b6aa062
+  languageName: node
+  linkType: hard
+
+"memfs@npm:^4.0.0":
+  version: 4.2.0
+  resolution: "memfs@npm:4.2.0"
+  dependencies:
+    json-joy: ^9.2.0
+    thingies: ^1.11.1
+  peerDependencies:
+    tslib: 2
+  checksum: d1d102c890fc4d7999280be5a3b906daec5cb1121e56a75dd96cd30ec75ab9fcf3311affa33146d5749b3ad82ecd8ff8a8f8ba638aaf6fae769ff0083b3d82c7
   languageName: node
   linkType: hard
 
@@ -29936,6 +29977,15 @@ __metadata:
   version: 0.2.0
   resolution: "text-table@npm:0.2.0"
   checksum: b6937a38c80c7f84d9c11dd75e49d5c44f71d95e810a3250bd1f1797fc7117c57698204adf676b71497acc205d769d65c16ae8fa10afad832ae1322630aef10a
+  languageName: node
+  linkType: hard
+
+"thingies@npm:^1.11.1":
+  version: 1.12.0
+  resolution: "thingies@npm:1.12.0"
+  peerDependencies:
+    tslib: ^2
+  checksum: 04b75d264e1880676fb9f400b2c0e069abdd00de1fa006d9daee527ad6d899828169fd46bb17e7cabf2802b7dbd64053106e29e7a7aa271659f5b41b3a11657f
   languageName: node
   linkType: hard
 
