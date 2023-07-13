@@ -260,6 +260,37 @@ export const upgrades = [
           });
         },
       },
+      {
+        name: 'update-carbon-icons-react-import-to-carbon-react',
+        description:
+          'Rewrites imports from `@carbon/icons-react` to `@carbon/react/icons`',
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'update-carbon-icons-react-import-to-carbon-react.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                  ],
+                });
+
+          await run({
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+          });
+        },
+      },
     ],
   },
   {
