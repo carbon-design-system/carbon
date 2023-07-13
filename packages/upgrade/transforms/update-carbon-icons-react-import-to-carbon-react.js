@@ -4,15 +4,15 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * Rewrites imports from 'carbon-components-react' to '@carbon/react'
+ * Rewrites imports from '@carbon/icons-react' to '@carbon/react/icons'
  *
  * Transforms:
  *
- * import { Button } from 'carbon-components-react';
+ * import { Add } from '@carbon/icons-react';
  *
  * Into:
  *
- * import { Button } from "@carbon/react";
+ * import { Add } from "@carbon/react/icons";
  */
 
 function transformer(file, api) {
