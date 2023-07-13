@@ -490,8 +490,7 @@ export default class Modal extends Component {
         <div
           id={this.modalBodyId}
           className={contentClasses}
-          {...hasScrollingContentProps}
-          aria-labelledby={getAriaLabelledBy}>
+          {...hasScrollingContentProps}>
           {this.props.children}
         </div>
         {hasScrollingContent && (
