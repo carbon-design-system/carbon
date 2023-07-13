@@ -8,12 +8,21 @@
 const { snapshot } = require('./snapshot');
 
 async function visitStory(page, options) {
-  const { component, story, id, globals } = options;
+  const { component, story, id, globals, args } = options;
   let url = getStoryUrl({
     component,
     story,
     id,
   });
+
+  if (args) {
+    const values = Object.entries(args)
+      .map(([key, value]) => {
+        return `${key}:${value}`;
+      })
+      .join(';');
+    url = url + `&args=${values}`;
+  }
 
   if (globals) {
     const values = Object.entries(globals)

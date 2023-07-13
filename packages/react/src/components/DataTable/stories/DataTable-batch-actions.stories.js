@@ -140,7 +140,7 @@ export const Default = () => (
               </Button>
             </TableToolbarContent>
           </TableToolbar>
-          <Table {...getTableProps()}>
+          <Table {...getTableProps()} aria-label="sample table">
             <TableHead>
               <TableRow>
                 <TableSelectAll {...getSelectionProps()} />
@@ -241,7 +241,7 @@ export const Playground = (args) => (
               </Button>
             </TableToolbarContent>
           </TableToolbar>
-          <Table {...getTableProps()}>
+          <Table {...getTableProps()} aria-label="sample table">
             <TableHead>
               <TableRow>
                 {args.radio ? (
