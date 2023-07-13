@@ -64,7 +64,7 @@ interface ButtonBaseProps
   iconDescription?: string;
 
   /**
-   * Specify whether the Button is expressive, or not
+   * Specify whether the Button is expressive, or not. Only applies to the large/default button size.
    */
   isExpressive?: boolean;
 

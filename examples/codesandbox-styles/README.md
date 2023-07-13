@@ -1,4 +1,4 @@
-# Getting Started with CSS grid
+# Getting Started with Code Sandbox styles
 
 First, run `yarn build` in the root of the `carbon` repository.
 
@@ -14,10 +14,10 @@ yarn install
 npm install
 
 
-yarn develop
+yarn dev
 # or
-npm run develop
+npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the
+Open [http://localhost:5173](http://localhost:5173) with your browser to see the
 result.

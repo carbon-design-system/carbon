@@ -5,7 +5,13 @@
 
 ## Usage
 
-To run this example, all you need to do is `cd` into the directory, run
+First, run `yarn build` in the root of the `carbon` repository.
+
+```sh
+yarn install && yarn build
+```
+
+Now to run this example, all you need to do is `cd` into the directory, run
 `yarn install`, and then `yarn start`.
 
 ## Learn Next.js

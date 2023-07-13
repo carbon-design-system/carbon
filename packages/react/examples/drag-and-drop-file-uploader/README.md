@@ -1,4 +1,4 @@
-# Getting Started with CSS grid
+# Getting Started with drag and drop file uploader
 
 First, run `yarn build` in the root of the `carbon` repository.
 
@@ -14,9 +14,9 @@ yarn install
 npm install
 
 
-yarn develop
+yarn start
 # or
-npm run develop
+npm run start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the
