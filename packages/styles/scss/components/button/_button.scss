@@ -302,6 +302,11 @@
   //expressive styles
   .#{$prefix}--btn--expressive {
     @include type-style('body-compact-02');
+
+    padding-block: min(
+      calc((layout.size('height') - var(--temp-expressive-1lh)) / 2 - rem(1px)),
+      var(--temp-padding-block-max)
+    );
   }
 
   .#{$prefix}--btn--icon-only.#{$prefix}--btn--expressive {
