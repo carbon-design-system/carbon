@@ -1,4 +1,4 @@
-# Getting Started with CSS grid
+# Getting Started with Colors sass modules
 
 First, run `yarn build` in the root of the `carbon` repository.
 

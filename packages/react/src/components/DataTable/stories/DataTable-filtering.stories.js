@@ -91,7 +91,7 @@ export const Default = () => (
             <Button onClick={action('Button click')}>Primary Button</Button>
           </TableToolbarContent>
         </TableToolbar>
-        <Table {...getTableProps()}>
+        <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
             <TableRow>
               {headers.map((header) => (
@@ -150,7 +150,7 @@ export const Playground = (args) => (
             <Button onClick={action('Button click')}>Primary Button</Button>
           </TableToolbarContent>
         </TableToolbar>
-        <Table {...getTableProps()}>
+        <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
             <TableRow>
               {headers.map((header) => (
