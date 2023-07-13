@@ -626,10 +626,15 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                   type="checkbox"
                 />
                 <label
-                  aria-label="Select all rows"
                   class="cds--checkbox-label"
                   for="data-table-7__select-all"
-                />
+                >
+                  <span
+                    class="cds--visually-hidden"
+                  >
+                    Select all rows
+                  </span>
+                </label>
               </div>
             </th>
             <th
@@ -669,10 +674,15 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                   type="checkbox"
                 />
                 <label
-                  aria-label="Select row"
                   class="cds--checkbox-label"
                   for="data-table-7__select-row-b"
-                />
+                >
+                  <span
+                    class="cds--visually-hidden"
+                  >
+                    Select row
+                  </span>
+                </label>
               </div>
             </td>
             <td>
@@ -696,10 +706,15 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                   type="checkbox"
                 />
                 <label
-                  aria-label="Select row"
                   class="cds--checkbox-label"
                   for="data-table-7__select-row-a"
-                />
+                >
+                  <span
+                    class="cds--visually-hidden"
+                  >
+                    Select row
+                  </span>
+                </label>
               </div>
             </td>
             <td>
@@ -723,10 +738,15 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                   type="checkbox"
                 />
                 <label
-                  aria-label="Select row"
                   class="cds--checkbox-label"
                   for="data-table-7__select-row-c"
-                />
+                >
+                  <span
+                    class="cds--visually-hidden"
+                  >
+                    Select row
+                  </span>
+                </label>
               </div>
             </td>
             <td>
