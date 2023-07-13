@@ -2891,11 +2891,11 @@ fsevents@~2.3.1:
   linkType: hard
 
 "semver@npm:^5.4.1":
-  version: 5.7.1
-  resolution: "semver@npm:5.7.1"
+  version: 5.7.2
+  resolution: "semver@npm:5.7.2"
   bin:
-    semver: ./bin/semver
-  checksum: 06ff0ed753ebf741b7602be8faad620d6e160a2cb3f61019d00d919c8bca141638aa23c34da779b8595afdc9faa3678bfbb5f60366b6a4f65f98cf86605bbcdb
+    semver: bin/semver
+  checksum: 8/fb4ab5e0dd1c22ce0c937ea390b4a822147a9c53dbd2a9a0132f12fe382902beef4fbf12cf51bb955248d8d15874ce8cd89532569756384f994309825f10b686
   languageName: node
   linkType: hard
 
