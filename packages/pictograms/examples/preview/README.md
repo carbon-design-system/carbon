@@ -1,4 +1,4 @@
-# Getting Started with CSS grid
+# Getting Started with Pictograms preview
 
 First, run `yarn build` in the root of the `carbon` repository.
 
