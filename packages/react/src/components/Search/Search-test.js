@@ -103,6 +103,18 @@ describe('Search', () => {
       await userEvent.click(screen.getAllByRole('button')[0]);
 
       expect(onExpand).toHaveBeenCalled();
+
+      await screen.getAllByRole('button')[0].focus();
+
+      await userEvent.keyboard('[Space]');
+
+      expect(onExpand).toHaveBeenCalledTimes(2);
+
+      await screen.getAllByRole('button')[0].focus();
+
+      await userEvent.keyboard('[Enter]');
+
+      expect(onExpand).toHaveBeenCalledTimes(3);
     });
 
     it('should call onKeyDown when expected', async () => {
@@ -112,6 +124,42 @@ describe('Search', () => {
       await userEvent.type(screen.getByRole('searchbox'), 'test');
 
       expect(onKeyDown).toHaveBeenCalled();
+    });
+
+    it('should call focus expand button on Escape when expanded', async () => {
+      render(
+        <Search labelText="test-search" onExpand={() => {}} isExpanded={true} />
+      );
+
+      await screen.getByRole('searchbox').focus();
+
+      await userEvent.keyboard('[Escape]');
+
+      expect(screen.getAllByRole('button')[0]).toHaveFocus();
+    });
+
+    it('should have tabbable button and untabbable input if expandable and not expanded', async () => {
+      render(
+        <Search
+          labelText="test-search"
+          onExpand={() => {}}
+          isExpanded={false}
+        />
+      );
+
+      expect(screen.getAllByRole('button')[0]).toHaveAttribute('tabIndex', '1');
+      expect(screen.getByRole('searchbox')).toHaveAttribute('tabIndex', '-1');
+    });
+
+    it('should have tabbable input and untabbable button if not expandable', async () => {
+      render(<Search labelText="test-search" />);
+
+      // will only have 1 button which is the close button
+      expect(screen.getAllByRole('button').length).toBe(1);
+      expect(screen.getByRole('searchbox')).not.toHaveAttribute(
+        'tabIndex',
+        '-1'
+      );
     });
 
     it('should respect placeholder prop', () => {
