@@ -105,7 +105,7 @@ test.describe('Tile @avt', () => {
     await expect(page.locator('#expandable-tile-1')).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(page.locator('#expandable-tile-1')).toHaveClass(
-      'cds--tile--is-expanded'
+      'cds--tile cds--tile--expandable cds--tile--is-expanded'
     );
   });
 });
