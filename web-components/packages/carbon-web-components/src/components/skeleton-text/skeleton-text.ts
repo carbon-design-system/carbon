@@ -9,10 +9,11 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
-import { property, customElement } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { SKELETON_TEXT_TYPE } from './defs';
 import styles from './skeleton-text.scss';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { SKELETON_TEXT_TYPE };
 

@@ -310,7 +310,7 @@
 </div>
 ```
 
-## `Handling events`
+##   `Handling events`
 
 ####   `Should handle drag-over`
 
