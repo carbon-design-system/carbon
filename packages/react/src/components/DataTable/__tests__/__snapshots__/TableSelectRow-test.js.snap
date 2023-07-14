@@ -23,10 +23,15 @@ exports[`DataTable.TableSelectRow renders as expected - Component API should ren
                 type="checkbox"
               />
               <label
-                aria-label="Aria label"
                 class="cds--checkbox-label"
                 for="id"
-              />
+              >
+                <span
+                  class="cds--visually-hidden"
+                >
+                  Aria label
+                </span>
+              </label>
             </div>
           </td>
         </tr>
