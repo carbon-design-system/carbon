@@ -92,7 +92,7 @@ test.describe('Tile @avt', () => {
     await expect(page).toHaveNoACViolations('ClickableTile-Disabled');
   });
 
-  test('ExpandableTile expanded state', async ({ page }) => {
+  test('ExpandableTile keyboard expanded state', async ({ page }) => {
     await visitStory(page, {
       component: 'ExpandableTile',
       id: 'components-tile--expandable',
@@ -100,10 +100,12 @@ test.describe('Tile @avt', () => {
         theme: 'white',
       },
     });
-    // Expand Tile by keyboard
-    // todo
-
-    // The tile should expand
-    // todo
+    await expect(page.locator('body')).toBeFocused();
+    await page.keyboard.press('Tab');
+    await expect(page.locator('#expandable-tile-1')).toBeFocused();
+    await page.keyboard.press('Enter');
+    await expect(page.locator('#expandable-tile-1')).toHaveClass(
+      'cds--tile--is-expanded'
+    );
   });
 });
