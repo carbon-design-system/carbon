@@ -72,6 +72,10 @@
     row-gap: spacing.$spacing-05;
   }
 
+  .#{$prefix}--toggletip-content p {
+    @include type.type-style('body-01');
+  }
+
   .#{$prefix}--toggletip-actions {
     display: flex;
     align-items: center;

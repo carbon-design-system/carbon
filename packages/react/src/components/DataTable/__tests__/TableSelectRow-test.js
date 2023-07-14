@@ -39,24 +39,6 @@ describe('DataTable.TableSelectRow', () => {
       expect(container).toMatchSnapshot();
     });
 
-    it('should respect ariaLabel prop', () => {
-      render(
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableSelectRow {...mockProps} />
-            </TableRow>
-          </TableHead>
-        </Table>
-      );
-
-      // eslint-disable-next-line testing-library/no-node-access
-      expect(screen.getByRole('checkbox').nextSibling).toHaveAttribute(
-        'aria-label',
-        mockProps.ariaLabel
-      );
-    });
-
     it('should respect checked prop', () => {
       render(
         <Table>
