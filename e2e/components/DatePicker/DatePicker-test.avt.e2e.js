@@ -49,7 +49,8 @@ test.describe('DatePicker @avt', () => {
     await expect(page).toHaveNoACViolations('DatePicker-Disabled');
   });
 
-  test.skip('skeleton state @avt', async ({ page }) => {
+  // skipping for now due to accessibility violation
+  test.only('skeleton state @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'DatePicker',
       id: 'components-datepicker--skeleton',
