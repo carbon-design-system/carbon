@@ -109,10 +109,10 @@ test.describe('Tile @avt', () => {
     );
   });
 
-  test('SelectableTile multi-select keyboard', async ({ page }) => {
+  test('SelectableTile keyboard', async ({ page }) => {
     await visitStory(page, {
       component: 'SelectableTile',
-      id: 'components-tile--multi-select',
+      id: 'components-tile--selectable',
       globals: {
         theme: 'white',
       },
@@ -121,7 +121,9 @@ test.describe('Tile @avt', () => {
     await page.keyboard.press('Tab');
     await expect(page.locator('#selectable-tile-1')).toBeFocused();
     await page.keyboard.press('Enter');
-    await expect(page.locator('#expandable-tile-1')).toBeChecked();
+    await expect(page.locator('#selectable-tile-1')).toHaveClass(
+      'cds--tile cds--tile--selectable cds--tile--is-selected'
+    );
   });
 
   test('RadioTile keyboard', async ({ page }) => {
