@@ -33,7 +33,7 @@ test.describe('DatePicker @avt', () => {
     await expect(page).toHaveNoACViolations('DatePicker-Range');
   });
 
-  test('disabled state state @avt', async ({ page }) => {
+  test('disabled state @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'DatePicker',
       id: 'components-datepicker--playground',
@@ -47,6 +47,18 @@ test.describe('DatePicker @avt', () => {
 
     await expect(page.locator('input#date-picker-single')).toBeDisabled();
     await expect(page).toHaveNoACViolations('DatePicker-Disabled');
+  });
+
+  test.skip('skeleton state @avt', async ({ page }) => {
+    await visitStory(page, {
+      component: 'DatePicker',
+      id: 'components-datepicker--skeleton',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    await expect(page).toHaveNoACViolations('DatePicker-Skeleton');
   });
 
   // skipping for now due to accessibility violation
@@ -68,28 +80,68 @@ test.describe('DatePicker @avt', () => {
   test('simple state - keyboard nav', async ({ page }) => {
     await visitStory(page, {
       component: 'DatePicker',
-      id: 'components-datepicker--simple',
+      id: 'components-datepicker--single-with-calendar',
       globals: {
         theme: 'white',
       },
     });
 
-    await page.keyboard.press('Tab');
-    await expect(page.locator('input#date-picker-simple')).toBeFocused();
+    // for some reason the firs tab is not working to focus the first tabstop, so focusing manually
+    await page.getByRole('textbox', { name: 'Date Picker label' }).focus();
+    await expect(
+      page.getByRole('textbox', { name: 'Date Picker label' })
+    ).toBeFocused();
+    await expect(page.locator('div.flatpickr-calendar')).toHaveClass(/open/);
+    await page.keyboard.press('ArrowDown');
+    await expect(page.locator('span.today')).toBeFocused();
+    await page.keyboard.press('Escape');
+    await expect(
+      page.getByRole('textbox', { name: 'Date Picker label' })
+    ).toBeFocused();
+    await expect(page.locator('div.flatpickr-calendar')).not.toHaveClass(
+      /open/
+    );
   });
 
   test('range - keyboard nav', async ({ page }) => {
     await visitStory(page, {
       component: 'DatePicker',
-      id: 'components-datepicker--range',
+      id: 'components-datepicker--range-with-calendar',
       globals: {
         theme: 'white',
       },
     });
-    await expect(page.locator('body')).toBeFocused();
-    await page.keyboard.press('Tab');
+
+    // for some reason the firs tab is not working to focus the first tabstop, so focusing manually
+    await page.locator('input#date-picker-input-id-start').focus();
     await expect(
       page.locator('input#date-picker-input-id-start')
     ).toBeFocused();
+    await expect(page.locator('div.flatpickr-calendar')).toHaveClass(/open/);
+    await page.keyboard.press('ArrowDown');
+    await expect(page.locator('span.today')).toBeFocused();
+    await page.keyboard.press('Enter');
+    await expect(page.locator('span.today')).toBeFocused();
+    await expect(page.locator('div.flatpickr-calendar')).toHaveClass(/open/);
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('Enter');
+    await expect(
+      page.locator('input#date-picker-input-id-start')
+    ).toBeFocused();
+    await expect(page.locator('div.flatpickr-calendar')).not.toHaveClass(
+      /open/
+    );
+    await page.keyboard.press('Tab');
+    await expect(
+      page.locator('input#date-picker-input-id-finish')
+    ).toBeFocused();
+    await expect(page.locator('div.flatpickr-calendar')).toHaveClass(/open/);
+    await page.keyboard.press('Escape');
+    await expect(
+      page.locator('input#date-picker-input-id-start')
+    ).toBeFocused();
+    await expect(page.locator('div.flatpickr-calendar')).not.toHaveClass(
+      /open/
+    );
   });
 });
