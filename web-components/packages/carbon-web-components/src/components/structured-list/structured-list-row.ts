@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, customElement, query } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16';
 import { prefix } from '../../globals/settings';
@@ -19,6 +19,7 @@ import RadioGroupManager, {
   ManagedRadioButtonDelegate,
 } from '../../globals/internal/radio-group-manager';
 import styles from './structured-list.scss';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Map of navigation direction by key.

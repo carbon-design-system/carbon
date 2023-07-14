@@ -16,7 +16,7 @@
 <div class="cds--text-input__field-wrapper">
   <input
     aria-describedby="helper-text"
-    autocomplete=""
+    autocomplete="on"
     autofocus=""
     class="cds--text-input cds--text-input--light cds--text-input--xl"
     disabled=""

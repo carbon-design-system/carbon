@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, customElement } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import on from '../../globals/mixins/on';
 import { prefix } from '../../globals/settings';
@@ -20,6 +20,7 @@ import { SIDE_NAV_COLLAPSE_MODE, SIDE_NAV_USAGE_MODE } from './defs';
 import CDSHeaderMenuButton from './header-menu-button';
 import CDSSideNavMenu from './side-nav-menu';
 import styles from './side-nav.scss';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { SIDE_NAV_COLLAPSE_MODE, SIDE_NAV_USAGE_MODE };
 

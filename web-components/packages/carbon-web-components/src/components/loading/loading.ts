@@ -9,11 +9,12 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
-import { property, customElement } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { LOADING_TYPE } from './defs';
 import getLoadingIcon from './loading-icon';
 import styles from './loading.scss';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Spinner indicating loading state.
