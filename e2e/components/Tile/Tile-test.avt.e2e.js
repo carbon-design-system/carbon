@@ -108,4 +108,34 @@ test.describe('Tile @avt', () => {
       'cds--tile cds--tile--expandable cds--tile--is-expanded'
     );
   });
+
+  test('SelectableTile multi-select keyboard', async ({ page }) => {
+    await visitStory(page, {
+      component: 'SelectableTile',
+      id: 'components-tile--multi-select',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page.locator('body')).toBeFocused();
+    await page.keyboard.press('Tab');
+    await expect(page.locator('#selectable-tile-1')).toBeFocused();
+    await page.keyboard.press('Enter');
+    await expect(page.locator('#expandable-tile-1')).toBeChecked();
+  });
+
+  test('RadioTile keyboard', async ({ page }) => {
+    await visitStory(page, {
+      component: 'RadioTile',
+      id: 'components-tile--radio',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page.locator('body')).toBeFocused();
+    await page.keyboard.press('Tab');
+    await expect(page.locator('#radio-tile-2')).toBeFocused();
+    await page.keyboard.press('ArrowUp');
+    await expect(page.locator('#radio-tile-1')).toBeChecked();
+  });
 });
