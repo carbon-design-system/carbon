@@ -8,12 +8,11 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './progress-indicator.scss';
 import CircleDash from '@carbon/web-components/es/icons/circle-dash/16';
 import '../skeleton-text';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Skeleton of progress step.

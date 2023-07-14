@@ -9,13 +9,12 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { forEach } from '../../globals/internal/collection-helpers';
 import FocusMixin from '../../globals/mixins/focus';
 import CDSStructuredListRow from './structured-list-row';
 import styles from './structured-list.scss';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Structured list wrapper.

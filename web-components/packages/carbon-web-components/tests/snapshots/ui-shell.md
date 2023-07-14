@@ -55,7 +55,6 @@
   class="cds--header__menu-item cds--header__menu-title"
   href="javascript:void 0"
   part="trigger"
-  role="button"
   tabindex="0"
 >
 </a>
@@ -78,7 +77,6 @@
   class="cds--header__menu-item cds--header__menu-title"
   href="javascript:void 0"
   part="trigger"
-  role="button"
   tabindex="0"
 >
   trigger-content-foo
@@ -442,7 +440,7 @@
 
 ```
 
-##   `Misc attributes`
+## `Misc attributes`
 
 ####   `should render with minimum attributes`
 

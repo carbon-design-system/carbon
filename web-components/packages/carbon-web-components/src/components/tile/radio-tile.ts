@@ -10,10 +10,10 @@
 import { html, svg } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import SelectableTile from './selectable-tile';
 import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Single-selectable tile.

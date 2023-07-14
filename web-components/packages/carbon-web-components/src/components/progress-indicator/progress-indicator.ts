@@ -8,12 +8,11 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { forEach } from '../../globals/internal/collection-helpers';
 import CDSProgressStep from './progress-step';
 import styles from './progress-indicator.scss';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Progress indicator.

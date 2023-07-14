@@ -8,11 +8,10 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, query } from 'lit/decorators.js';
+import { property, customElement, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSTableRow from './table-row';
 import styles from './data-table.scss';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Data table body.

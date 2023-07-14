@@ -8,7 +8,7 @@
  */
 
 import { css } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -16,7 +16,6 @@ import CDSPopover from '../popover/popover';
 import '../popover/popover-content';
 import styles from './tooltip.scss';
 import CDSTooltipContent from './tooltip-content';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Trigger button of tooltip.
@@ -114,6 +113,7 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
 
   /**
    * Handles `keydown` event on this element.
+   * Space & enter will toggle state, Escape will only close.
    */
   @HostListener('click')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to

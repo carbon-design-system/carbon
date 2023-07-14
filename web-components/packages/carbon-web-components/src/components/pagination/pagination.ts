@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, query } from 'lit/decorators.js';
+import { property, customElement, query } from 'lit/decorators.js';
 import CaretLeft16 from '@carbon/icons/lib/caret--left/16';
 import CaretRight16 from '@carbon/icons/lib/caret--right/16';
 import { prefix } from '../../globals/settings';
@@ -19,7 +19,6 @@ import styles from './pagination.scss';
 import { PAGINATION_SIZE } from './defs';
 import CDSSelect from '../select/select';
 import '../button/index';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Pagination UI.

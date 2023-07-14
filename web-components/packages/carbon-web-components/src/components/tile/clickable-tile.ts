@@ -8,12 +8,11 @@
  */
 
 import { classMap } from 'lit/directives/class-map.js';
-import { property } from 'lit/decorators.js';
+import { property, customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSLink from '../link/link';
 import { TILE_COLOR_SCHEME } from './defs';
 import styles from './tile.scss';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Clickable tile.

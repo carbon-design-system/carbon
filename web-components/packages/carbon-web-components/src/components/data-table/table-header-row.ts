@@ -7,9 +7,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSTableRow from './table-row';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Data table header row.

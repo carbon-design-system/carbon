@@ -87,16 +87,13 @@ export default (config: DatePickerFocusPluginConfig): Plugin =>
       if (
         isOpen &&
         calendarContainer.contains(target as Node) &&
-        !calendarContainer.contains(relatedTarget as Node) &&
-        relatedTarget !== config.inputFrom &&
-        relatedTarget !== config.inputTo
+        !calendarContainer.contains(relatedTarget as Node)
       ) {
         Promise.resolve().then(() => {
           const rootNode = (target as Node).getRootNode();
-          // This `blur` event handler can be called from Flatpickr's code,
-          // cleaning up the calendar dropdowns DOM. Changing focus in such
-          // condition causes removing an orphaned DOM node, because Flatpickr
-          // redraws the calendar dropdown when the `<input>` gets focus.
+          // This `blur` event handler can be called from Flatpickr's code cleaning up calenar dropdown's DOM,
+          // and changing focus in such condition causes removing an orphaned DOM node,
+          // because Flatpickr redraws the calendar dropdown when the `<input>` gets focus.
           if (
             rootNode.nodeType === Node.DOCUMENT_NODE ||
             rootNode.nodeType === Node.DOCUMENT_FRAGMENT_NODE

@@ -9,7 +9,7 @@
 
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { LitElement, html } from 'lit';
-import { property, query } from 'lit/decorators.js';
+import { property, customElement, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import ChevronDownGlyph from '@carbon/icons/lib/chevron--down/16';
 import { prefix } from '../../globals/settings';
@@ -19,7 +19,6 @@ import HostListener from '../../globals/decorators/host-listener';
 import { forEach } from '../../globals/internal/collection-helpers';
 import CDSHeaderMenuItem from './header-menu-item';
 import styles from './header.scss';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Header menu.
@@ -34,8 +33,8 @@ class CDSHeaderMenu extends HostListenerMixin(FocusMixin(LitElement)) {
   /**
    * The trigger button.
    */
-  @query('[part="trigger"]')
-  protected _topMenuItem!: HTMLElement;
+  @query('a')
+  private _trigger!: HTMLElement;
 
   /**
    * keeps track if header menu has any active submenus
@@ -52,8 +51,6 @@ class CDSHeaderMenu extends HostListenerMixin(FocusMixin(LitElement)) {
   /**
    * Handler for the `keydown` event on the trigger button.
    */
-  @HostListener('keydown')
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydownTrigger({ key }: KeyboardEvent) {
     if (key === 'Esc' || key === 'Escape') {
       this._handleUserInitiatedToggle(false);
@@ -68,7 +65,7 @@ class CDSHeaderMenu extends HostListenerMixin(FocusMixin(LitElement)) {
   private _handleUserInitiatedToggle(force: boolean = !this.expanded) {
     this.expanded = force;
     if (!force) {
-      this._topMenuItem.focus();
+      this._trigger.focus();
     }
   }
 
@@ -139,6 +136,7 @@ class CDSHeaderMenu extends HostListenerMixin(FocusMixin(LitElement)) {
       menuLabel,
       _hasActiveChildren,
       _handleClick: handleClick,
+      _handleKeydownTrigger: handleKeydownTrigger,
     } = this;
 
     const linkClasses = classMap({
@@ -151,13 +149,13 @@ class CDSHeaderMenu extends HostListenerMixin(FocusMixin(LitElement)) {
     return html`
       <a
         part="trigger"
-        role="button"
         tabindex="0"
         class="${linkClasses}"
         href="javascript:void 0"
         aria-haspopup="menu"
         aria-expanded="${String(Boolean(expanded))}"
-        @click=${handleClick}>
+        @click=${handleClick}
+        @keydown=${handleKeydownTrigger}>
         ${triggerContent}${ChevronDownGlyph({
           part: 'trigger-icon',
           class: `${prefix}--header__menu-arrow`,

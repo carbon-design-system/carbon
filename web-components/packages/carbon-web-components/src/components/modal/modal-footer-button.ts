@@ -7,11 +7,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSButton from '../button/button';
 import buttonStyles from '../button/button.scss';
 import styles from './modal.scss';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Modal footer button.

@@ -15,10 +15,9 @@ import InformationSquareFilled20 from '@carbon/icons/lib/information--square--fi
 import WarningFilled20 from '@carbon/icons/lib/warning--filled/20';
 import WarningAltFilled20 from '@carbon/icons/lib/warning--alt--filled/20';
 import { LitElement, html, svg } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, customElement } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import FocusMixin from '../../globals/mixins/focus';
 import { NOTIFICATION_KIND, NOTIFICATION_TYPE } from './defs';
 import styles from './inline-notification.scss';
