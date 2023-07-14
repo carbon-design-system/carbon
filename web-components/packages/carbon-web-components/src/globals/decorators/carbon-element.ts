@@ -28,12 +28,12 @@
  * not an arrow function.
  */
 
-import { LitElement } from 'lit-element';
+import { LitElement } from 'lit';
 
 import {
   PropertyDeclaration,
-  UpdatingElement,
-} from 'lit-element/lib/updating-element';
+  ReactiveElement,
+} from '@lit/reactive-element/reactive-element';
 
 export type Constructor<T> = {
   // tslint:disable-next-line:no-any
@@ -131,7 +131,7 @@ const standardProperty = (
   ) {
     return {
       ...element,
-      finisher(clazz: typeof UpdatingElement) {
+      finisher(clazz: typeof ReactiveElement) {
         clazz.createProperty(element.key, options);
       },
     };
@@ -158,7 +158,7 @@ const standardProperty = (
           this[element.key as string] = element.initializer.call(this);
         }
       },
-      finisher(clazz: typeof UpdatingElement) {
+      finisher(clazz: typeof ReactiveElement) {
         clazz.createProperty(element.key, options);
       },
     };
@@ -170,7 +170,7 @@ const legacyProperty = (
   proto: Object,
   name: PropertyKey
 ) => {
-  (proto.constructor as typeof UpdatingElement).createProperty(name, options);
+  (proto.constructor as typeof ReactiveElement).createProperty(name, options);
 };
 
 /**
@@ -422,10 +422,10 @@ const standardEventOptions = (
 ) => {
   return {
     ...element,
-    finisher(clazz: typeof UpdatingElement) {
+    finisher(clazz: typeof ReactiveElement) {
       Object.assign(
         // @ts-ignore TS2769: No overload matches this call.
-        clazz.prototype[element.key as keyof UpdatingElement],
+        clazz.prototype[element.key as keyof ReactiveElement],
         options
       );
     },

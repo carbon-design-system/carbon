@@ -36,20 +36,12 @@ $css--plex: true !default;
   display: none;
 }
 
-:host(#{$prefix}-inline-notification[low-contrast]) {
-  &[low-contrast] {
-    @extend .#{$prefix}--inline-notification--low-contrast;
-  }
-}
-
 :host(#{$prefix}-inline-notification[kind='success']) {
   @extend .#{$prefix}--inline-notification--success;
 
   &[low-contrast] {
-    @include notification--experimental(
-      $support-success,
-      get-token-value($notification-colors, 'notification-background-success')
-    );
+    @extend .#{$prefix}--inline-notification--low-contrast,
+      .#{$prefix}--inline-notification--success;
   }
 }
 
@@ -57,10 +49,8 @@ $css--plex: true !default;
   @extend .#{$prefix}--inline-notification--info;
 
   &[low-contrast] {
-    @include notification--experimental(
-      $support-info,
-      get-token-value($notification-colors, 'notification-background-info')
-    );
+    @extend .#{$prefix}--inline-notification--low-contrast,
+      .#{$prefix}--inline-notification--info;
   }
 }
 
@@ -77,10 +67,8 @@ $css--plex: true !default;
   @extend .#{$prefix}--inline-notification--warning;
 
   &[low-contrast] {
-    @include notification--experimental(
-      $support-warning,
-      get-token-value($notification-colors, 'notification-background-warning')
-    );
+    @extend .#{$prefix}--inline-notification--low-contrast,
+      .#{$prefix}--inline-notification--warning;
   }
 }
 
@@ -88,10 +76,8 @@ $css--plex: true !default;
   @extend .#{$prefix}--inline-notification--error;
 
   &[low-contrast] {
-    @include notification--experimental(
-      $support-error,
-      get-token-value($notification-colors, 'notification-background-error')
-    );
+    @extend .#{$prefix}--inline-notification--low-contrast,
+      .#{$prefix}--inline-notification--error;
   }
 }
 
