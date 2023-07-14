@@ -9,19 +9,18 @@
 // Radio
 //-----------------------------
 
+@use '../form';
+@use '../button/tokens' as *;
+@use '../../config' as *;
+@use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type';
-@use '../form';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/component-reset' as *;
 @use '../../utilities/visually-hidden' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/convert' as *;
-@use '../../config' as *;
-@use '../../spacing' as *;
-
-@use '../button/tokens' as *;
 
 /// @type Number
 /// @access public

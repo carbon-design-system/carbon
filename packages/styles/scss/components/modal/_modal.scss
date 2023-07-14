@@ -5,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../button';
 @use '../../config' as *;
 @use '../../breakpoint' as *;
 @use '../../motion' as *;
@@ -12,12 +13,10 @@
 @use '../../theme' as *;
 @use '../../type' as *;
 @use '../../utilities/convert' as *;
-@use '../../utilities/component-reset' as *;
+@use '../../utilities/component-reset';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/z-index' as *;
-
-@use '../button';
 
 /// Modal styles
 /// @access public
@@ -227,6 +226,7 @@
   }
 
   .#{$prefix}--modal-header__label {
+    @include component-reset.reset;
     @include type-style('label-01');
 
     margin-bottom: $spacing-02;
@@ -234,6 +234,7 @@
   }
 
   .#{$prefix}--modal-header__heading {
+    @include component-reset.reset;
     @include type-style('heading-03');
 
     // padding should take into account the left and right padding of modal container

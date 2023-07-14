@@ -62,8 +62,18 @@
     - human
     - person
 - name: advocate--mask
-  friendly_name: advocate--mask
-  aliases: []
+  friendly_name: Advocate mask
+  aliases:
+    - advocate
+    - carer
+    - helper
+    - heart
+    - kind
+    - human
+    - person
+    - covid
+    - covid worker
+    - mask
 - name: agility
   friendly_name: Agility
   aliases:
@@ -1519,11 +1529,22 @@
     - construct
     - cloud
 - name: construction-worker
-  friendly_name: construction-worker
-  aliases: []
+  friendly_name: Construction worker
+  aliases:
+    - construction
+    - construction worker
+    - hardhat
+    - safety
 - name: construction-worker--mask
-  friendly_name: construction-worker--mask
-  aliases: []
+  friendly_name: Construction worker mask
+  aliases:
+    - construction
+    - construction worker
+    - hardhat
+    - safety
+    - covid
+    - covid worker
+    - mask
 - name: consumer--engagement--food--journey
   friendly_name: Consumer engagement food journey
   aliases:
@@ -1653,29 +1674,54 @@
     - cake
     - creative
 - name: curve--cubic
-  friendly_name: curve--cubic
-  aliases: []
+  friendly_name: Cubic curve
+  aliases:
+    - curve
+    - cubic
+    - cubic regression
 - name: curve--exponential
-  friendly_name: curve--exponential
-  aliases: []
+  friendly_name: Exponential curve
+  aliases:
+    - curve
+    - compound
+    - growth
+    - exponential
 - name: curve--inverse
-  friendly_name: curve--inverse
-  aliases: []
+  friendly_name: Inverse curve
+  aliases:
+    - curve
+    - inverse
+    - inverse model
 - name: curve--linear
-  friendly_name: curve--linear
-  aliases: []
+  friendly_name: Linear curve
+  aliases:
+    - curve
+    - linear
+    - linear regression
+    - linear model
 - name: curve--logarithmic
-  friendly_name: curve--logarithmic
-  aliases: []
+  friendly_name: Logarithmic curve
+  aliases:
+    - curve
+    - logarithmic
+    - logarithmic model
 - name: curve--logistic
-  friendly_name: curve--logistic
-  aliases: []
+  friendly_name: Logistic curve
+  aliases:
+    - curve
+    - logistic
+    - logistic regression
 - name: curve--power
-  friendly_name: curve--power
-  aliases: []
+  friendly_name: Power curve
+  aliases:
+    - curve
+    - power
 - name: curve--quadratic
-  friendly_name: curve--quadratic
-  aliases: []
+  friendly_name: Quadratic curve
+  aliases:
+    - curve
+    - quadritic
+    - quadratic regression
 - name: custom--workloads
   friendly_name: Custom workloads
   aliases:
@@ -4636,8 +4682,13 @@
     - code
     - ID
 - name: quantum
-  friendly_name: quantum
-  aliases: []
+  friendly_name: Quantum
+  aliases:
+    - quantum
+    - qsphere
+    - qbits
+    - optimize
+    - quantum computing
 - name: quantum--safe
   friendly_name: Quantum safe
   aliases:
@@ -6255,8 +6306,16 @@
     - UX
     - design and development
 - name: user--mask
-  friendly_name: user--mask
-  aliases: []
+  friendly_name: User mask
+  aliases:
+    - user
+    - people
+    - human
+    - employee
+    - person
+    - covid
+    - covid user
+    - mask
 - name: user--profile
   friendly_name: User profile
   aliases:
@@ -6440,17 +6499,53 @@
     - ibm watson
     - avatar
 - name: watsonx
-  friendly_name: watsonx
-  aliases: []
+  friendly_name: IBM® watsonx™
+  aliases:
+    - IBM watsonx
+    - circle
+    - enterprise
+    - platform
+    - AI
+    - data
 - name: watsonx--ai
-  friendly_name: watsonx--ai
-  aliases: []
+  friendly_name: IBM® watsonx.ai™
+  aliases:
+    - IBM watsonx
+    - circle
+    - enterprise
+    - platform
+    - AI
+    - data
+    - workload
 - name: watsonx--data
-  friendly_name: watsonx--data
-  aliases: []
+  friendly_name: IBM® watsonx.data™
+  aliases:
+    - IBM watsonx
+    - circle
+    - enterprise
+    - platform
+    - AI
+    - data
+    - train
+    - validate
+    - tune
+    - deploy
+    - foundation model
+    - machine learning model
+    - scalability
+    - workload
 - name: watsonx--governance
-  friendly_name: watsonx--governance
-  aliases: []
+  friendly_name: IBM® watsonx.governance™
+  aliases:
+    - IBM watsonx
+    - circle
+    - enterprise
+    - platform
+    - AI
+    - data
+    - responsible workflow
+    - transparent workflow
+    - explainability
 - name: weather
   friendly_name: Weather
   aliases:

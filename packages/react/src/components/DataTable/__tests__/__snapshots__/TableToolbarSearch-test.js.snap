@@ -9,6 +9,7 @@ exports[`TableToolbarSearch renders as expected - Component API should render 1`
   >
     <div
       class="cds--search-magnifier"
+      tabindex="-1"
     >
       <svg
         aria-hidden="true"
@@ -39,7 +40,6 @@ exports[`TableToolbarSearch renders as expected - Component API should render 1`
       id="custom-id"
       placeholder="Filter table"
       role="searchbox"
-      tabindex="0"
       type="text"
       value=""
     />

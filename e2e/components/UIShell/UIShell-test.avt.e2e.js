@@ -11,10 +11,10 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('UIShell @avt', () => {
-  test('header base', async ({ page }) => {
+  test('header', async ({ page }) => {
     await visitStory(page, {
       component: 'UIShell',
-      id: 'components-ui-shell--header-base',
+      id: 'components-ui-shell-header--header-w-navigation',
       globals: {
         theme: 'white',
       },
@@ -25,7 +25,7 @@ test.describe('UIShell @avt', () => {
   test('sidenav rail w/header', async ({ page }) => {
     await visitStory(page, {
       component: 'UIShell',
-      id: 'components-ui-shell--side-nav-rail-w-header',
+      id: 'components-ui-shell-sidenav--side-nav-rail-w-header',
       globals: {
         theme: 'white',
       },
@@ -33,28 +33,12 @@ test.describe('UIShell @avt', () => {
     await expect(page).toHaveNoACViolations('UIShell-side-nav-rail-w-header');
   });
 
-  test('sidenav rail w/header - expanded state', async ({ page }) => {
-    await visitStory(page, {
-      component: 'UIShell',
-      id: 'components-ui-shell--side-nav-rail-w-header',
-      globals: {
-        theme: 'white',
-      },
-    });
-
-    // open the menu
-    page.getByRole('button', { name: 'Open menu' }).click();
-    await expect(page).toHaveNoACViolations(
-      'UIShell-side-nav-rail-w-header--expanded'
-    );
-  });
-
   test('sidenav rail w/header - expanded state open category sidenav', async ({
     page,
   }) => {
     await visitStory(page, {
       component: 'UIShell',
-      id: 'components-ui-shell--side-nav-rail-w-header',
+      id: 'components-ui-shell-sidenav--side-nav-rail-w-header',
       globals: {
         theme: 'white',
       },
@@ -75,7 +59,7 @@ test.describe('UIShell @avt', () => {
   }) => {
     await visitStory(page, {
       component: 'UIShell',
-      id: 'components-ui-shell--side-nav-rail-w-header',
+      id: 'components-ui-shell-sidenav--side-nav-rail-w-header',
       globals: {
         theme: 'white',
       },
@@ -94,7 +78,7 @@ test.describe('UIShell @avt', () => {
   test('sidenav rail w/header - keyboard nav', async ({ page }) => {
     await visitStory(page, {
       component: 'UIShell',
-      id: 'components-ui-shell--side-nav-rail-w-header',
+      id: 'components-ui-shell-sidenav--side-nav-rail-w-header',
       globals: {
         theme: 'white',
       },
@@ -105,7 +89,7 @@ test.describe('UIShell @avt', () => {
       page.getByRole('link', { name: 'Skip to main content' })
     ).toBeFocused();
     // tab through the links in the header, landing on the link with sublinks
-    await page.keyboard.press('Tab');
+    // await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
