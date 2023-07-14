@@ -5,6 +5,8 @@ on:
     branches: [main, v10]
   pull_request:
     branches: [main, v10]
+  merge_group:
+    types: [checks_requested]
   schedule:
     - cron: '0 12 * * 1'
 
