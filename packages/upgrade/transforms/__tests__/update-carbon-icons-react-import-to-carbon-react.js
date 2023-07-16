@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import Toggle from './Toggle';
+'use strict';
 
-export * from './Toggle.Skeleton';
-export default Toggle;
-export { Toggle };
+const { defineTest } = require('jscodeshift/dist/testUtils');
+
+defineTest(__dirname, 'update-carbon-icons-react-import-to-carbon-react');

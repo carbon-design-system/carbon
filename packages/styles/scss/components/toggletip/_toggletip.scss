@@ -5,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../button';
 @use '../../config' as *;
 @use '../../spacing';
 @use '../../theme';
@@ -69,6 +70,10 @@
     max-width: 18rem;
     padding: spacing.$spacing-05;
     row-gap: spacing.$spacing-05;
+  }
+
+  .#{$prefix}--toggletip-content p {
+    @include type.type-style('body-01');
   }
 
   .#{$prefix}--toggletip-actions {

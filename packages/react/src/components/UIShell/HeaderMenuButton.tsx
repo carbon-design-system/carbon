@@ -83,6 +83,11 @@ HeaderMenuButton.propTypes = {
   isActive: PropTypes.bool,
 
   /**
+   * Specify whether the menu button is collapsible.
+   */
+  isCollapsible: PropTypes.bool,
+
+  /**
    * Optionally provide an onClick handler that is called when the underlying
    * button fires it's onclick event
    */

@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../text-input';
+@use '../select';
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
@@ -46,6 +48,10 @@
     place-items: center;
     // top/transform used to center invalid icon in IE11
     transform: translateY(-50%);
+  }
+
+  .#{$prefix}--time-picker__error__icon .#{$prefix}--checkbox__invalid-icon {
+    fill: $support-error;
   }
 
   .#{$prefix}--time-picker .#{$prefix}--select-input {

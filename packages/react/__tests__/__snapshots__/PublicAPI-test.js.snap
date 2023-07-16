@@ -3935,6 +3935,9 @@ Map {
       "isActive": Object {
         "type": "bool",
       },
+      "isCollapsible": Object {
+        "type": "bool",
+      },
       "onClick": Object {
         "type": "func",
       },
@@ -8275,6 +8278,9 @@ Map {
   },
   "Tag" => Object {
     "propTypes": Object {
+      "as": Object {
+        "type": "elementType",
+      },
       "children": Object {
         "type": "node",
       },
