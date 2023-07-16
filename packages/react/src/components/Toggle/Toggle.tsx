@@ -39,12 +39,12 @@ export interface ToggleProps
   /**
    * Specify the label for the "off" position
    */
-  labelA?: string | undefined;
+  labelA?: string;
 
   /**
    * Specify the label for the "on" position
    */
-  labelB?: string | undefined;
+  labelB?: string;
 
   /**
    * Provide the text that will be read by a screen reader when visiting this
@@ -52,7 +52,7 @@ export interface ToggleProps
    * or you use an external <label> element with its "for" attribute set to the
    * toggle's id.
    */
-  labelText?: string | undefined;
+  labelText?: string;
 
   /**
    * If true, the side labels (props.labelA and props.labelB) will be replaced by
@@ -63,10 +63,9 @@ export interface ToggleProps
   /**
    * Provide an event listener that is called when the control is toggled
    */
-  onClick:
+  onClick?:
     | MouseEventHandler<HTMLDivElement>
-    | KeyboardEventHandler<HTMLDivElement>
-    | undefined;
+    | KeyboardEventHandler<HTMLDivElement>;
 
   /**
    * Provide an event listener that is called when the control is toggled
@@ -76,22 +75,22 @@ export interface ToggleProps
   /**
    * Specify the size of the Toggle. Currently only supports 'sm' or 'md' (default)
    */
-  size?: 'sm' | 'md' | undefined;
+  size?: 'sm' | 'md';
 
   /**
    * Whether the toggle should be read-only
    */
-  readOnly?: boolean | undefined;
+  readOnly?: boolean;
 
   /**
    * Specify whether the toggle should be on by default
    */
-  defaultToggled?: boolean | undefined;
+  defaultToggled?: boolean;
 
   /**
    * Specify whether the control is toggled
    */
-  toggled?: boolean | undefined;
+  toggled?: boolean;
 }
 
 export function Toggle({
