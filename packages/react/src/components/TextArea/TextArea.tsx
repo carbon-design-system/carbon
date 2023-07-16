@@ -201,9 +201,9 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   } = {
     id,
     onKeyDown: (evt) => {
-      if (!other.disabled && counterMode === 'word') {
+      if (!other.disabled && enableCounter && counterMode === 'word') {
         const key = evt.which;
-        if (textCount == maxCount && key == 32) {
+        if (textCount == maxCount && key === 32) {
           evt.preventDefault();
         }
       }
@@ -224,7 +224,11 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
             return;
           }
 
-          if (typeof maxCount !== 'undefined' && textareaRef.current !== null) {
+          if (
+            enableCounter &&
+            typeof maxCount !== 'undefined' &&
+            textareaRef.current !== null
+          ) {
             const matchedWords = evt.target.value.match(/\w+/g);
             if (matchedWords && matchedWords.length <= maxCount) {
               textareaRef.current.removeAttribute('maxLength');
