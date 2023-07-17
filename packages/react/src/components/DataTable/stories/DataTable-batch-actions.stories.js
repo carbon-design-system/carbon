@@ -85,7 +85,8 @@ export const Default = () => (
               <TableBatchAction
                 tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
                 renderIcon={TrashCan}
-                onClick={batchActionClick(selectedRows)}>
+                onClick={batchActionClick(selectedRows)}
+                disabled>
                 Delete
               </TableBatchAction>
               <TableBatchAction
