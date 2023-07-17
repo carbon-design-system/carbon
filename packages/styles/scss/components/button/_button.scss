@@ -5,19 +5,21 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '../../config' as *;
+@use 'tokens' as *;
 @use 'vars' as *;
 @use 'mixins' as *;
+@use '../tooltip';
+@use '../../config' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../../layer' as *;
 @use '../../utilities/convert' as *;
 @use '../../utilities/focus-outline';
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/visually-hidden' as *;
 @use '../../utilities/layout';
-@use 'tokens' as *;
 
 @mixin button {
   .#{$prefix}--btn {
@@ -300,6 +302,11 @@
   //expressive styles
   .#{$prefix}--btn--expressive {
     @include type-style('body-compact-02');
+
+    padding-block: min(
+      calc((layout.size('height') - var(--temp-expressive-1lh)) / 2 - rem(1px)),
+      var(--temp-padding-block-max)
+    );
   }
 
   .#{$prefix}--btn--icon-only.#{$prefix}--btn--expressive {

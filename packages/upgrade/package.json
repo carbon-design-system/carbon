@@ -1,7 +1,7 @@
 {
   "name": "@carbon/upgrade",
   "description": "A tool for upgrading Carbon versions",
-  "version": "11.9.0-rc.0",
+  "version": "11.9.0",
   "license": "Apache-2.0",
   "bin": {
     "carbon-upgrade": "./bin/carbon-upgrade.js"
@@ -47,7 +47,7 @@
     "jest-diff": "^28.1.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.merge": "^4.6.2",
-    "memfs": "^3.4.0",
+    "memfs": "^4.0.0",
     "nanoid": "^3.1.30",
     "npm-which": "^3.0.1",
     "rimraf": "^5.0.0",
