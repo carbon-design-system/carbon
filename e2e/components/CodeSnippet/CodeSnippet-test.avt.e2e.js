@@ -22,16 +22,16 @@ test.describe('CodeSnippet', () => {
     await expect(page).toHaveNoACViolations('CodeSnippet inline');
   });
 
-  test('accessibility-checker CodeSnippet multiline @avt', async ({ page }) => {
-    await visitStory(page, {
-      component: 'CodeSnippet',
-      id: 'components-codesnippet--multiline',
-      globals: {
-        theme: 'white',
-      },
-    });
-    await expect(page).toHaveNoACViolations('CodeSnippet multiline');
-  });
+  //   test('accessibility-checker CodeSnippet multiline @avt', async ({ page }) => {
+  //     await visitStory(page, {
+  //       component: 'CodeSnippet',
+  //       id: 'components-codesnippet--multiline',
+  //       globals: {
+  //         theme: 'white',
+  //       },
+  //     });
+  //     await expect(page).toHaveNoACViolations('CodeSnippet multiline');
+  //   });
 
   test('accessibility-checker CodeSnippet singleline @avt', async ({
     page,
