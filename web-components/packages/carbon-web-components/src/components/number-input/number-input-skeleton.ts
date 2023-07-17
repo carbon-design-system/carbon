@@ -8,9 +8,10 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, customElement } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './number-input.scss';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Skeleton of number input.

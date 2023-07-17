@@ -8,11 +8,12 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, customElement } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { forEach } from '../../globals/internal/collection-helpers';
 import { ACCORDION_SIZE, ACCORDION_ALIGNMENT } from './defs';
 import styles from './accordion.scss';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { ACCORDION_SIZE, ACCORDION_ALIGNMENT };
 

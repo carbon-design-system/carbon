@@ -9,11 +9,12 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
-import { property, customElement } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import CDSSideNavMenu from './side-nav-menu';
 import styles from './side-nav.scss';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Side nav menu item.

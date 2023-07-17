@@ -10,7 +10,7 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { LitElement, html, TemplateResult } from 'lit';
-import { property, customElement, query } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import ChevronDown16 from '@carbon/icons/lib/chevron--down/16';
 import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
@@ -34,6 +34,7 @@ import {
 } from './defs';
 import CDSDropdownItem from './dropdown-item';
 import styles from './dropdown.scss';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export {
   DROPDOWN_KEYBOARD_ACTION,

@@ -9,10 +9,11 @@
 
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { LitElement, html } from 'lit';
-import { property, customElement } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './header.scss';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * The product name UI in header nav.
