@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('CodeSnippet', () => {
-  test('accessibility-checker @avt', async ({ page }) => {
+  test('accessibility-checker CodeSnippet inline @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'CodeSnippet',
       id: 'components-codesnippet--inline',
@@ -22,7 +22,7 @@ test.describe('CodeSnippet', () => {
     await expect(page).toHaveNoACViolations('CodeSnippet inline');
   });
 
-  test('accessibility-checker @avt', async ({ page }) => {
+  test('accessibility-checker CodeSnippet multiline @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'CodeSnippet',
       id: 'components-codesnippet--multiline',
@@ -33,7 +33,9 @@ test.describe('CodeSnippet', () => {
     await expect(page).toHaveNoACViolations('CodeSnippet multiline');
   });
 
-  test('accessibility-checker @avt', async ({ page }) => {
+  test('accessibility-checker CodeSnippet singleline @avt', async ({
+    page,
+  }) => {
     await visitStory(page, {
       component: 'CodeSnippet',
       id: 'components-codesnippet--singleline',
@@ -44,7 +46,7 @@ test.describe('CodeSnippet', () => {
     await expect(page).toHaveNoACViolations('CodeSnippet singleline');
   });
 
-  test('accessibility-checker @avt', async ({ page }) => {
+  test('accessibility-checker CodeSnippet skeleton @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'CodeSnippet',
       id: 'components-codesnippet--skeleton',
