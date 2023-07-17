@@ -13,15 +13,26 @@ Color tokens, you'll need to pull in the compatibility tokens like so:
 
 ## Getting Started
 
-First, run `yarn` or `npm install` and then run the development server:
+First, run `yarn build` in the root of the `carbon` repository.
 
-```bash
-npm run dev
-# or
-yarn dev
+```sh
+yarn install && yarn build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the
+Now, all you need to do is `cd` into the directory and run:
+
+```sh
+yarn install
+# or
+npm install
+
+
+yarn dev
+# or
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) with your browser to see the
 result.
 
 ## Sass

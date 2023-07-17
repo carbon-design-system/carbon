@@ -6,6 +6,8 @@ on:
   pull_request:
     branches:
       - v10
+  merge_group:
+    types: [checks_requested]
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true

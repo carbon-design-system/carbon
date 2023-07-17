@@ -154,7 +154,7 @@ export const Default = () => {
                   </TableToolbarMenu>
                 </TableToolbarContent>
               </TableToolbar>
-              <Table {...getTableProps()}>
+              <Table {...getTableProps()} aria-label="sample table">
                 <TableHead>
                   <TableRow>
                     <TableExpandHeader />
@@ -324,7 +324,7 @@ export const Playground = (args) => {
                   </TableToolbarMenu>
                 </TableToolbarContent>
               </TableToolbar>
-              <Table {...getTableProps()}>
+              <Table {...getTableProps()} aria-label="sample table">
                 <TableHead>
                   <TableRow>
                     <TableExpandHeader />
