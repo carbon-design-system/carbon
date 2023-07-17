@@ -28,3 +28,20 @@ body {
   background: styles.$background;
   color: styles.$text-primary;
 }
+
+// Docs overrides
+.docblock-argstable-head ~ .docblock-argstable-body,
+.docblock-argstable-head ~ .docblock-argstable-body p {
+  @include styles.type-style('body-01');
+}
+
+.docblock-argstable-head ~ .docblock-argstable-body table tbody {
+  filter: none;
+}
+
+/* stylelint-disable */
+.docblock-argstable-head ~ .docblock-argstable-body table tbody > tr > td {
+  border: none !important;
+  box-shadow: none;
+}
+/* stylelint-enable */

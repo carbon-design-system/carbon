@@ -392,6 +392,10 @@ $popover-caret-height: custom-property.get-var(
     border-radius: 0;
   }
 
+  .#{$prefix}--popover--tab-tip .#{$prefix}--popover {
+    will-change: filter;
+  }
+
   .#{$prefix}--popover--tab-tip__button {
     @include button-reset.reset;
 
