@@ -305,28 +305,30 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     });
 
     useEffect(() => {
+      const initialFocus = (focusContainerElement) => {
+        const containerElement = focusContainerElement || innerModal.current;
+        const primaryFocusElement = containerElement
+          ? containerElement.querySelector(selectorPrimaryFocus)
+          : null;
+
+        if (primaryFocusElement) {
+          return primaryFocusElement;
+        }
+
+        return button && button.current;
+      };
+
       const focusButton = (focusContainerElement) => {
-        if (focusContainerElement) {
-          const primaryFocusElement =
-            focusContainerElement.querySelector(selectorPrimaryFocus);
-          if (primaryFocusElement) {
-            primaryFocusElement.focus();
-            return;
-          }
-          if (button.current) {
-            button.current.focus();
-          }
+        const target = initialFocus(focusContainerElement);
+        if (target) {
+          target.focus();
         }
       };
 
-      if (!open) {
-        return;
-      }
-
-      if (innerModal.current) {
+      if (open && isOpen) {
         focusButton(innerModal.current);
       }
-    }, [open, selectorPrimaryFocus]);
+    }, [open, selectorPrimaryFocus, isOpen]);
 
     return (
       <div
@@ -345,6 +347,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
           aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}
           aria-labelledby={ariaLabelledBy}>
           {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
+
           <button
             type="button"
             ref={startSentinel}
