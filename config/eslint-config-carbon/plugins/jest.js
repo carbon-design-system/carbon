@@ -73,9 +73,6 @@ module.exports = {
         // Disallow Jasmine globals
         'jest/no-jasmine-globals': 'error',
 
-        // Disallow importing Jest
-        'jest/no-jest-import': 'error',
-
         // Disallow large snapshots
         'jest/no-large-snapshots': 'off',
 
