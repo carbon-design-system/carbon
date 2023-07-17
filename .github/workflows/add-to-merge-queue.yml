@@ -1,23 +1,15 @@
 name: Add To Merge Queue
 on:
   pull_request:
-    types: [labeled]
-
-env:
-  LABEL_READY_TO_MERGE: 'status: ready to merge 🎉'
-  LABEL_ENABLE_AUTOMERGE: 'status: enable automerge 🟠'
+    types: [labeled, opened, reopened]
 
 jobs:
   add-to-merge-queue:
-    name: Add the PR to the merge queue
+    name: Add to Merge Queue if the PR is labelled with any of the automerge labels
     runs-on: ubuntu-latest
+    if: ${{ contains(github.event.issue.labels.*.name, 'status: ready to merge 🎉') || contains(github.event.issue.labels.*.name, 'status: enable automerge 🟠')}}
     steps:
-      - name: 'Add to merge queue if either of the automerge labels are added'
-        if:
-          ${{ contains(github.event.issue.labels.*.name,
-          env.LABEL_READY_TO_MERGE) ||
-          contains(github.event.issue.labels.*.name, env.LABEL_ENABLE_AUTOMERGE)
-          }}
+      - name: 'Add the PR to the merge queue via the GitHub CLI'
         run: gh pr merge
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
