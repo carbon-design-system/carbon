@@ -119,28 +119,30 @@ function SideNavRenderFunction(
   let childrenToRender = children;
 
   // if a rail, pass the expansion state as a prop, so children can update themselves to match
-  if (isRail) {
-    childrenToRender = React.Children.map(children, (child) => {
-      // if we are controlled, check for if we have hovered over or the expanded state, else just use the expanded state (uncontrolled)
-      const currentExpansionState = controlled
-        ? expandedViaHoverState || expanded
-        : expanded;
-      if (isValidElement(child)) {
-        const childJsxElement = child as JSX.Element;
-        // avoid spreading `isSideNavExpanded` to non-Carbon UI Shell children
-        return React.cloneElement(childJsxElement, {
-          ...(CARBON_SIDENAV_ITEMS.includes(
-            childJsxElement.type?.displayName ?? childJsxElement.type?.name
-          )
-            ? {
-                isSideNavExpanded: currentExpansionState,
-              }
-            : {}),
-        });
-      }
-      return child;
-    });
-  }
+  // if (isRail) {
+  childrenToRender = React.Children.map(children, (child) => {
+    // if we are controlled, check for if we have hovered over or the expanded state, else just use the expanded state (uncontrolled)
+    const currentExpansionState = controlled
+      ? expandedViaHoverState || expanded
+      : expanded;
+    if (isValidElement(child)) {
+      const childJsxElement = child as JSX.Element;
+      // avoid spreading `isSideNavExpanded` to non-Carbon UI Shell children
+      return React.cloneElement(childJsxElement, {
+        ...(CARBON_SIDENAV_ITEMS.includes(
+          childJsxElement.type?.displayName ?? childJsxElement.type?.name
+        )
+          ? {
+              isSideNavExpanded: currentExpansionState,
+              isFixedNav,
+              isRail,
+            }
+          : {}),
+      });
+    }
+    return child;
+  });
+  // }
 
   const eventHandlers: Partial<
     Pick<
@@ -156,7 +158,7 @@ function SideNavRenderFunction(
 
   if (addFocusListeners) {
     eventHandlers.onFocus = (event) => {
-      if (!event.currentTarget.contains(event.relatedTarget)) {
+      if (!event.currentTarget.contains(event.relatedTarget) && isRail) {
         handleToggle(event, true);
       }
     };
@@ -164,7 +166,11 @@ function SideNavRenderFunction(
       if (!event.currentTarget.contains(event.relatedTarget)) {
         handleToggle(event, false);
       }
-      if (!event.currentTarget.contains(event.relatedTarget) && expanded) {
+      if (
+        !event.currentTarget.contains(event.relatedTarget) &&
+        expanded &&
+        !isFixedNav
+      ) {
         if (onSideNavBlur) {
           onSideNavBlur();
         }

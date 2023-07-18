@@ -20,6 +20,8 @@ const SideNavLink = React.forwardRef(function SideNavLink(
     className: customClassName,
     renderIcon: IconElement,
     isActive,
+    isSideNavExpanded,
+    isRail,
     large = false,
     ...rest
   },
@@ -34,7 +36,11 @@ const SideNavLink = React.forwardRef(function SideNavLink(
 
   return (
     <SideNavItem large={large}>
-      <Link {...rest} className={className} ref={ref}>
+      <Link
+        {...rest}
+        className={className}
+        ref={ref}
+        tabIndex={!isSideNavExpanded && !isRail ? -1 : 0}>
         {IconElement && (
           <SideNavIcon small>
             <IconElement />

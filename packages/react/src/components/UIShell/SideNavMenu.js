@@ -22,6 +22,7 @@ const SideNavMenu = React.forwardRef(function SideNavMenu(props, ref) {
     large = false,
     renderIcon: IconElement,
     isSideNavExpanded,
+    isRail,
     title,
   } = props;
   const prefix = usePrefix();
@@ -60,7 +61,8 @@ const SideNavMenu = React.forwardRef(function SideNavMenu(props, ref) {
           setIsExpanded(!isExpanded);
         }}
         ref={ref}
-        type="button">
+        type="button"
+        tabIndex={!isSideNavExpanded && !isRail ? -1 : 0}>
         {IconElement && (
           <SideNavIcon>
             <IconElement />
@@ -101,6 +103,11 @@ SideNavMenu.propTypes = {
    * page.
    */
   isActive: PropTypes.bool,
+
+  /**
+   * Optional prop to display the side nav rail.
+   */
+  isRail: PropTypes.bool,
 
   /**
    * Property to indicate if the side nav container is open (or not). Use to

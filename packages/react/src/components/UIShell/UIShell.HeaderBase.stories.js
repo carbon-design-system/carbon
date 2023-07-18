@@ -204,7 +204,9 @@ export const HeaderWNavigation = () => (
             aria-label="Side navigation"
             expanded={isSideNavExpanded}
             isPersistent={false}
-            onSideNavBlur={onClickSideNavExpand}>
+            onSideNavBlur={onClickSideNavExpand}
+            inert={isSideNavExpanded ? false : -1} // With the `inert` prop you can disable the navigation from all children elements
+          >
             <SideNavItems>
               <HeaderSideNavItems>
                 <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
@@ -276,7 +278,9 @@ export const HeaderWNavigationAndActions = () => (
             aria-label="Side navigation"
             expanded={isSideNavExpanded}
             isPersistent={false}
-            onSideNavBlur={onClickSideNavExpand}>
+            onSideNavBlur={onClickSideNavExpand}
+            inert={isSideNavExpanded ? false : -1} // With the `inert` prop you can disable the navigation from all children elements
+          >
             <SideNavItems>
               <HeaderSideNavItems>
                 <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
@@ -346,7 +350,9 @@ export const HeaderWNavigationActionsAndSideNav = () => (
             aria-label="Side navigation"
             expanded={isSideNavExpanded}
             onSideNavBlur={onClickSideNavExpand}
-            href="#main-content">
+            href="#main-content"
+            inert={isSideNavExpanded ? false : -1} // With the `inert` prop you can disable the navigation from all children elements
+          >
             <SideNavItems>
               <HeaderSideNavItems hasDivider={true}>
                 <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
@@ -437,7 +443,9 @@ export const HeaderWSideNav = () => (
             aria-label="Side navigation"
             expanded={isSideNavExpanded}
             onSideNavBlur={onClickSideNavExpand}
-            href="#main-content">
+            href="#main-content"
+            inert={isSideNavExpanded ? false : -1} // With the `inert` prop you can disable the navigation from all children elements
+          >
             <SideNavItems>
               <SideNavMenu renderIcon={Fade} title="Category title">
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
