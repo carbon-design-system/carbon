@@ -80,7 +80,7 @@ export const Default = () => (
             <Button onClick={action('Button click')}>Primary Button</Button>
           </TableToolbarContent>
         </TableToolbar>
-        <Table {...getTableProps()}>
+        <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
             <TableRow>
               {headers.map((header) => (
@@ -138,7 +138,7 @@ export const PersistentToolbar = () => (
             <Button onClick={action('Button click')}>Primary Button</Button>
           </TableToolbarContent>
         </TableToolbar>
-        <Table {...getTableProps()}>
+        <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
             <TableRow>
               {headers.map((header) => (
@@ -199,7 +199,7 @@ export const SmallPersistentToolbar = () => (
             <Button onClick={action('Button click')}>Primary Button</Button>
           </TableToolbarContent>
         </TableToolbar>
-        <Table {...getTableProps()} size="sm">
+        <Table {...getTableProps()} size="sm" aria-label="sample table">
           <TableHead>
             <TableRow>
               {headers.map((header) => (
@@ -253,7 +253,7 @@ export const WithOverflowMenu = () => (
             <Button onClick={action('Button click')}>Primary Button</Button>
           </TableToolbarContent>
         </TableToolbar>
-        <Table {...getTableProps()}>
+        <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
             <TableRow>
               {headers.map((header) => (
@@ -320,7 +320,7 @@ export const Playground = (args) => (
             <Button onClick={action('Button click')}>Primary Button</Button>
           </TableToolbarContent>
         </TableToolbar>
-        <Table {...getTableProps()}>
+        <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
             <TableRow>
               {headers.map((header) => (

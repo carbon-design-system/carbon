@@ -1,4 +1,19 @@
-import { ArgsTable } from '@storybook/blocks';
+import { ArgsTable, Canvas, Story } from '@storybook/blocks';
+import * as FormStories from './Form.stories';
+
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+## Table of Contents
+
+- [Form](#form)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Accessibility Considerations](#accessibility-considerations)
+    - [Accessible Name](#accessible-name)
+  - [Component API](#component-api)
+  - [Feedback](#feedback)
+
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
 
 # Form
 
@@ -11,6 +26,22 @@ import { ArgsTable } from '@storybook/blocks';
 ## Table of Contents
 
 ## Overview
+
+The `Form` component is configurable to fit various use cases and layouts. It is
+purposely simple out of the box, and users are responsible for configuring it to
+suit their needs.
+
+<Canvas>
+  <Story of={FormStories.Default} />
+</Canvas>
+
+## Accessibility Considerations
+
+### Accessible Name
+
+To comply with accessibility requirements, make sure to supply the component with an accessible name by providing eiher the `aria-label`, `aria-labelledby` or
+`title` attribute. Read more on the accessible naming rule
+[here](https://able.ibm.com/rules/archives/latest/doc/en-US/aria_accessiblename_exists.html).
 
 ## Component API
 
