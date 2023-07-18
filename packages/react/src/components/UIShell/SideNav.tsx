@@ -118,8 +118,7 @@ function SideNavRenderFunction(
 
   let childrenToRender = children;
 
-  // if a rail, pass the expansion state as a prop, so children can update themselves to match
-  // if (isRail) {
+  // Pass the expansion state as a prop, so children can update themselves to match
   childrenToRender = React.Children.map(children, (child) => {
     // if we are controlled, check for if we have hovered over or the expanded state, else just use the expanded state (uncontrolled)
     const currentExpansionState = controlled
@@ -142,7 +141,6 @@ function SideNavRenderFunction(
     }
     return child;
   });
-  // }
 
   const eventHandlers: Partial<
     Pick<
