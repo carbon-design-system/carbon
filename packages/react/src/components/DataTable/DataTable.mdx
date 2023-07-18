@@ -15,7 +15,6 @@ import { Table, TableHead, TableHeader, TableRow, TableCell, TableBody } from '.
 
 {/* <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
-
 ## Table of Contents
 
 - [Getting started](#getting-started)
@@ -33,6 +32,8 @@ import { Table, TableHead, TableHeader, TableRow, TableCell, TableBody } from '.
 - [Text Wrapping Alignment](#text-wrapping-alignment)
   - [Table with `experimentalAutoAlign = true`](#table-with-experimentalautoalign--true)
   - [Table with `experimentalAutoAlign = false`](#table-with-experimentalautoalign--false)
+- [Accessibility Considerations](#accessibility-considerations)
+  - [Accessible Name](#accessible-name)
 - [Props](#props)
   - [Render props](#render-props)
     - [Prop getters](#prop-getters)
@@ -434,6 +435,14 @@ is experimental and might not be performant in tables with large datasets.
   </Table>
 </div>
 ```
+
+## Accessibility Considerations
+
+### Accessible Name
+
+To comply with accessibility requirements, make sure to supply the component with an accessible name by providing eiher the `aria-label`, `aria-labelledby` or
+`title` attribute to the `Table` component. Read more on the accessible naming rule
+[here](https://able.ibm.com/rules/archives/latest/doc/en-US/aria_accessiblename_exists.html).
 
 ## Props
 
