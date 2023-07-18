@@ -10,7 +10,7 @@
 const path = require('path');
 
 module.exports = {
-  ruleArchive: '26May2023',
+  ruleArchive: 'latest',
   policies: ['Custom_Ruleset'],
   failLevels: ['violation'],
   reportLevels: [

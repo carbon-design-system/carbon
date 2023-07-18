@@ -14,76 +14,76 @@ const { snapshotStory } = require('../../test-utils/storybook');
 test.describe('UIShell', () => {
   themes.forEach((theme) => {
     test.describe(theme, () => {
-      test('header base @vrt', async ({ page }) => {
+      test('header @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'UIShell',
-          id: 'components-ui-shell--header-base',
+          id: 'components-ui-shell--header',
           theme,
         });
       });
 
-      test('header base w/ navigation @vrt', async ({ page }) => {
+      test('header w/ navigation @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'UIShell',
-          id: 'components-ui-shell--header-base-w-navigation',
+          id: 'components-ui-shell--header-w-navigation',
           theme,
         });
       });
 
-      test('header base w/ actions @vrt', async ({ page }) => {
+      test('header w/ actions @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'UIShell',
-          id: 'components-ui-shell--header-base-w-actions',
+          id: 'components-ui-shell--header-w-actions',
           theme,
         });
       });
 
-      test('header base w/ skiptocontent @vrt', async ({ page }) => {
+      test('header w/ skiptocontent @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'UIShell',
-          id: 'components-ui-shell--header-base-w-skip-to-content',
+          id: 'components-ui-shell--header-w-skip-to-content',
           theme,
         });
       });
 
-      test('header base w/ navigation and actions @vrt', async ({ page }) => {
+      test('header w/ navigation and actions @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'UIShell',
-          id: 'components-ui-shell--header-base-w-navigation-and-actions',
+          id: 'components-ui-shell--header-w-navigation-and-actions',
           theme,
         });
       });
 
-      test('header base w/ navigation, actions and sidenav @vrt', async ({
+      test('header w/ navigation, actions and sidenav @vrt', async ({
         page,
       }) => {
         await snapshotStory(page, {
           component: 'UIShell',
-          id: 'components-ui-shell--header-base-w-navigation-actions-and-side-nav',
+          id: 'components-ui-shell--header-w-navigation-actions-and-side-nav',
           theme,
         });
       });
 
-      test('header base w/ sidenav @vrt', async ({ page }) => {
+      test('header w/ sidenav @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'UIShell',
-          id: 'components-ui-shell--header-base-w-side-nav',
+          id: 'components-ui-shell--header-w-side-nav',
           theme,
         });
       });
 
-      test('header base w/ actions and right panel @vrt', async ({ page }) => {
+      test('header w/ actions and right panel @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'UIShell',
-          id: 'components-ui-shell--header-base-w-actions-and-right-panel',
+          id: 'components-ui-shell--header-w-actions-and-right-panel',
           theme,
         });
       });
 
-      test('header base w/ actions and switcher @vrt', async ({ page }) => {
+      test('header w/ actions and switcher @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'UIShell',
-          id: 'components-ui-shell--header-base-w-actions-and-switcher',
+          id: 'components-ui-shell--header-w-actions-and-switcher',
           theme,
         });
       });

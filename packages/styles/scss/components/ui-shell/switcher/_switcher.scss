@@ -9,6 +9,7 @@
 @use '../../../spacing' as *;
 @use '../../../theme' as *;
 @use '../../../type' as *;
+@use '../../../utilities/component-reset';
 @use '../../../utilities/convert' as *;
 
 /// UI shell side nav
@@ -19,6 +20,8 @@
   // Header Switcher
   //----------------------------------------------------------------------------
   .#{$prefix}--switcher {
+    @include component-reset.reset;
+
     display: flex;
     flex-direction: column;
     align-items: center;

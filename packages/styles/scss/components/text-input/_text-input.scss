@@ -8,13 +8,13 @@
 //-----------------------------
 // Text
 //-----------------------------
+@use '../form';
 @use '../../config' as *;
 @use '../../colors' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
 @use '../../spacing' as *;
 @use '../../motion' as *;
-
 @use '../../utilities/component-reset';
 @use '../../utilities/placeholder-colors' as *;
 @use '../../utilities/tooltip' as *;
@@ -22,10 +22,8 @@
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/convert' as *;
 @use '../../utilities/layout';
-
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/button-reset';
-@use '../form';
 
 /// Text input styles
 /// @access public
@@ -34,8 +32,7 @@
   .#{$prefix}--text-input {
     @include layout.use('size', $default: 'md', $min: 'sm', $max: 'lg');
     @include layout.use('density', $default: 'normal');
-
-    @include reset;
+    @include component-reset.reset;
     @include type-style('body-compact-01');
     @include focus-outline('reset');
 

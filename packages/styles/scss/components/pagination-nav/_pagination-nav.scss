@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'mixins' as *;
+@use '../button';
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
@@ -15,7 +17,6 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/visually-hidden' as *;
-@use 'mixins' as *;
 
 /// Pagination nav base styles
 /// @access public

@@ -9,20 +9,18 @@
 // Slider
 //-----------------------------
 
+@use '../form';
+@use '../text-input';
 @use '../../config' as *;
 @use '../../colors' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
-
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/convert' as *;
-
-@use '../form';
-@use '../text-input';
 
 /// Slider styles
 /// @access public

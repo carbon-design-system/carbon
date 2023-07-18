@@ -9,7 +9,7 @@
 // Condensed, IBM Plex Sans Hebrew, and IBM Plex Serif
 export const fontFamilies = {
   mono: "'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace",
-  sans: "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
+  sans: "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif",
   sansCondensed:
     "'IBM Plex Sans Condensed', 'Helvetica Neue', Arial, sans-serif",
   sansHebrew:
