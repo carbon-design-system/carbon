@@ -24,7 +24,10 @@ import deprecate from '../../prop-types/deprecate';
 import { composeEventHandlers } from '../../tools/events';
 import { usePrefix } from '../../internal/usePrefix';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
-import { getInteractiveContent } from '../../internal/useNoInteractiveChildren';
+import {
+  getInteractiveContent,
+  getRoleContent,
+} from '../../internal/useNoInteractiveChildren';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useFeatureFlag } from '../FeatureFlags';
 
@@ -663,10 +666,14 @@ export const ExpandableTile = React.forwardRef<
       return;
     }
 
-    if (!getInteractiveContent(belowTheFold.current)) {
-      setInteractive(false);
-      return;
-    } else if (!getInteractiveContent(aboveTheFold.current)) {
+    // Interactive elements or elements that are given a role should be treated
+    // the same because elements with a role can not be rendered inside a `button`
+    if (
+      !getInteractiveContent(belowTheFold.current) &&
+      !getRoleContent(belowTheFold.current) &&
+      !getInteractiveContent(aboveTheFold.current) &&
+      !getRoleContent(aboveTheFold.current)
+    ) {
       setInteractive(false);
     }
   }, []);
