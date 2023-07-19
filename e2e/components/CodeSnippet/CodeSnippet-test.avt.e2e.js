@@ -10,8 +10,8 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('CodeSnippet', () => {
-  test('accessibility-checker CodeSnippet inline @avt', async ({ page }) => {
+test.describe('CodeSnippet @avt', () => {
+  test('accessibility-checker CodeSnippet inline', async ({ page }) => {
     await visitStory(page, {
       component: 'CodeSnippet',
       id: 'components-codesnippet--inline',
