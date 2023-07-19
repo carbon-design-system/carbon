@@ -133,7 +133,6 @@ function SideNavRenderFunction(
         )
           ? {
               isSideNavExpanded: currentExpansionState,
-              isFixedNav,
               isRail,
             }
           : {}),
