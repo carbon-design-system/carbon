@@ -93,6 +93,10 @@ $css--plex: true !default;
   &:hover ::slotted(svg) {
     fill: $icon-primary;
   }
+
+  .#{$prefix}--popover {
+    z-index: 8001;
+  }
 }
 
 :host(#{$prefix}-header-nav-item),

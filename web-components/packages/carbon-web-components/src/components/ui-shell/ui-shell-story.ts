@@ -372,14 +372,18 @@ export const HeaderBaseWActionsRightPanel = () => {
         >[Platform]</cds-header-name
       >
       <div class="${prefix}--header__global">
-        <cds-header-global-action aria-label="Search">
+        <cds-header-global-action aria-label="Search" tooltip-text="Search">
           ${Search20({ slot: 'icon' })}
         </cds-header-global-action>
-        <cds-header-global-action active aria-label="Notification">
+        <cds-header-global-action
+          active
+          aria-label="Notification"
+          tooltip-text="Notification">
           ${Notification20({ slot: 'icon' })}
         </cds-header-global-action>
         <cds-header-global-action
           aria-label="App Switcher"
+          tooltip-text="App Switcher"
           tooltip-alignment="right">
           ${SwitcherIcon20({ slot: 'icon' })}
         </cds-header-global-action>
@@ -400,15 +404,18 @@ export const HeaderBaseWActionsSwitcher = () => {
         >[Platform]</cds-header-name
       >
       <div class="${prefix}--header__global">
-        <cds-header-global-action aria-label="Search">
+        <cds-header-global-action aria-label="Search" tooltip-text="Search">
           ${Search20({ slot: 'icon' })}
         </cds-header-global-action>
-        <cds-header-global-action aria-label="Notification">
+        <cds-header-global-action
+          aria-label="Notification"
+          tooltip-text="Notification">
           ${Notification20({ slot: 'icon' })}
         </cds-header-global-action>
         <cds-header-global-action
           active
           aria-label="App Switcher"
+          tooltip-text="App Switcher"
           tooltip-alignment="right">
           ${SwitcherIcon20({ slot: 'icon' })}
         </cds-header-global-action>
