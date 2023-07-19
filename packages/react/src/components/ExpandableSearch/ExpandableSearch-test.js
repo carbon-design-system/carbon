@@ -58,6 +58,30 @@ describe('ExpandableSearch', () => {
       expect(container.firstChild).toHaveClass(`${prefix}--search--expanded`);
     });
 
+    it('expands on enter', async () => {
+      const { container } = render(
+        <ExpandableSearch labelText="test-search" />
+      );
+
+      await screen.getAllByRole('button')[0].focus();
+
+      await userEvent.keyboard('[Enter]');
+
+      expect(container.firstChild).toHaveClass(`${prefix}--search--expanded`);
+    });
+
+    it('expands on space', async () => {
+      const { container } = render(
+        <ExpandableSearch labelText="test-search" />
+      );
+
+      await screen.getAllByRole('button')[0].focus();
+
+      await userEvent.keyboard('[Space]');
+
+      expect(container.firstChild).toHaveClass(`${prefix}--search--expanded`);
+    });
+
     it('places focus on the input after expansion', async () => {
       render(<ExpandableSearch labelText="test-search" />);
 
@@ -106,6 +130,32 @@ describe('ExpandableSearch', () => {
       await userEvent.click(screen.getByText('second-element'));
 
       expect(container.firstChild).toHaveClass(`${prefix}--search--expanded`);
+    });
+
+    it('closes and clears value on escape', async () => {
+      const { container } = render(
+        <ExpandableSearch labelText="test-search" />
+      );
+
+      await userEvent.click(screen.getAllByRole('button')[0]);
+
+      expect(container.firstChild).toHaveClass(`${prefix}--search--expanded`);
+
+      await userEvent.type(screen.getByRole('searchbox'), 'test-value');
+
+      expect(screen.getByRole('searchbox')).toHaveValue('test-value');
+
+      await userEvent.keyboard('[Escape]');
+
+      expect(screen.getByRole('searchbox')).not.toHaveValue('test-value');
+
+      expect(container.firstChild).toHaveClass(`${prefix}--search--expanded`);
+
+      await userEvent.keyboard('[Escape]');
+
+      expect(container.firstChild).not.toHaveClass(
+        `${prefix}--search--expanded`
+      );
     });
   });
 });

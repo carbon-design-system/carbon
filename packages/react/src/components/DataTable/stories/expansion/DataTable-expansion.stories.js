@@ -59,7 +59,7 @@ export const Default = () => (
         title="DataTable"
         description="With expansion"
         {...getTableContainerProps()}>
-        <Table {...getTableProps()}>
+        <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
             <TableRow>
               <TableExpandHeader />
@@ -110,7 +110,7 @@ export const BatchExpansion = () => (
         title="DataTable"
         description="With batch expansion"
         {...getTableContainerProps()}>
-        <Table {...getTableProps()}>
+        <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
             <TableRow>
               <TableExpandHeader
@@ -161,7 +161,7 @@ export const Playground = (args) => (
         title="DataTable"
         description="With expansion"
         {...getTableContainerProps()}>
-        <Table {...getTableProps()}>
+        <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
             <TableRow>
               <TableExpandHeader />
