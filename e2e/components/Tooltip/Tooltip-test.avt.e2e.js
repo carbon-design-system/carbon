@@ -11,7 +11,9 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('Tooltip @avt', () => {
-  test('default state', async ({ page }) => {
+  test('accessibility-checker @avt - Tooltip default state', async ({
+    page,
+  }) => {
     await visitStory(page, {
       component: 'Tooltip',
       id: 'components-tooltip--default',
@@ -20,6 +22,28 @@ test.describe('Tooltip @avt', () => {
       },
     });
     await expect(page).toHaveNoACViolations('Tooltip');
+  });
+
+  test('accessibility-checker - tooltip alignment', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Tooltip',
+      id: 'components-tooltip--alignment',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('Tooltip - alignment');
+  });
+
+  test('accessibility-checker - tooltip duration', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Tooltip',
+      id: 'components-tooltip--duration',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('Tooltip - duration');
   });
 
   test('default state - keyboard nav', async ({ page }) => {
@@ -36,5 +60,7 @@ test.describe('Tooltip @avt', () => {
     // Expect tooltip to be focused
     await page.keyboard.press('Tab');
     await expect(page.getByRole('button')).toBeFocused();
+    // Expect tooltip content to be visible
+    await expect(page.getByTestId('tooltip-test-id')).toHaveClass(/open/);
   });
 });
