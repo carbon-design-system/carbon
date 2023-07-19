@@ -92,9 +92,9 @@ test.describe('Slider @avt', () => {
     ).toBeFocused();
 
     await page.keyboard.press('Tab');
-    await expect(page.getByTestId('slider-input-id')).toBeFocused();
+    await expect(page.getByRole('spinbutton')).toBeFocused();
 
     await page.keyboard.insertText('20');
-    await expect(page.getByTestId('slider-input-id')).toHaveValue('20');
+    await expect(page.getByRole('spinbutton')).toHaveValue('20');
   });
 });

@@ -842,7 +842,6 @@ export default class Slider extends PureComponent<SliderProps> {
                 <input
                   type={hideTextInput ? 'hidden' : inputType}
                   id={`${id}-input-for-slider`}
-                  data-testid="slider-input-id"
                   name={name}
                   className={inputClasses}
                   value={value}
