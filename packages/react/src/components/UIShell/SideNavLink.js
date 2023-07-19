@@ -79,6 +79,17 @@ SideNavLink.propTypes = {
   isActive: PropTypes.bool,
 
   /**
+   * Optional prop to display the side nav rail.
+   */
+  isRail: PropTypes.bool,
+
+  /**
+   * Property to indicate if the side nav container is open (or not). Use to
+   * keep local state and styling in step with the SideNav expansion state.
+   */
+  isSideNavExpanded: PropTypes.bool,
+
+  /**
    * Specify if this is a large variation of the SideNavLink
    */
   large: PropTypes.bool,
