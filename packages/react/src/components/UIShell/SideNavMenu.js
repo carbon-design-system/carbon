@@ -23,6 +23,7 @@ const SideNavMenu = React.forwardRef(function SideNavMenu(props, ref) {
     renderIcon: IconElement,
     isSideNavExpanded,
     isRail,
+    tabIndex,
     title,
   } = props;
   const prefix = usePrefix();
@@ -62,7 +63,13 @@ const SideNavMenu = React.forwardRef(function SideNavMenu(props, ref) {
         }}
         ref={ref}
         type="button"
-        tabIndex={!isSideNavExpanded && !isRail ? -1 : 0}>
+        tabIndex={
+          tabIndex === undefined
+            ? !isSideNavExpanded && !isRail
+              ? -1
+              : 0
+            : tabIndex
+        }>
         {IconElement && (
           <SideNavIcon>
             <IconElement />
@@ -124,6 +131,11 @@ SideNavMenu.propTypes = {
    * Pass in a custom icon to render next to the `SideNavMenu` title
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
+   * Optional prop to specify the tabIndex of the button. If undefined, it will be applied default validation
+   */
+  tabIndex: PropTypes.number,
 
   /**
    * Provide the text for the overall menu name

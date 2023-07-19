@@ -23,6 +23,7 @@ const SideNavLink = React.forwardRef(function SideNavLink(
     isSideNavExpanded,
     isRail,
     large = false,
+    tabIndex,
     ...rest
   },
   ref
@@ -40,7 +41,13 @@ const SideNavLink = React.forwardRef(function SideNavLink(
         {...rest}
         className={className}
         ref={ref}
-        tabIndex={!isSideNavExpanded && !isRail ? -1 : 0}>
+        tabIndex={
+          tabIndex === undefined
+            ? !isSideNavExpanded && !isRail
+              ? -1
+              : 0
+            : tabIndex
+        }>
         {IconElement && (
           <SideNavIcon small>
             <IconElement />
@@ -80,6 +87,11 @@ SideNavLink.propTypes = {
    * Provide an icon to render in the side navigation link. Should be a React class.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
+   * Optional prop to specify the tabIndex of the button. If undefined, it will be applied default validation
+   */
+  tabIndex: PropTypes.number,
 };
 
 // eslint-disable-next-line react/display-name
