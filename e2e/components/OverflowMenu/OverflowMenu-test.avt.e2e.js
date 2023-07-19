@@ -33,7 +33,7 @@ test.describe('OverflowMenu', () => {
     await expect(page).toHaveNoACViolations('OverflowMenu-custom-icon');
   });
 
-  test('accessibility-checker-menu-open @avt', async ({ page }) => {
+  test('accessibility-checker open menu @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'OverflowMenu',
       id: 'components-overflowmenu--default',
@@ -51,6 +51,28 @@ test.describe('OverflowMenu', () => {
     await expect(toggleButton).toHaveClass(/cds--overflow-menu--open/);
 
     await expect(page).toHaveNoACViolations('OverflowMenu-open');
+  });
+
+  test('accessibility-checker render custom icon open @avt', async ({
+    page,
+  }) => {
+    await visitStory(page, {
+      component: 'OverflowMenu',
+      id: 'components-overflowmenu--render-custom-icon',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page.getByRole('button')).toBeVisible();
+
+    // Tab and open the toggle button for the OverflowMenu
+    await page.keyboard.press('Tab');
+    const toggleButton = page.getByRole('button');
+    await expect(toggleButton).toBeFocused();
+    await page.keyboard.press('Enter');
+    await expect(toggleButton).toHaveClass(/cds--overflow-menu--open/);
+
+    await expect(page).toHaveNoACViolations('OverflowMenu-custom-icon-open');
   });
 
   test('overflow-menu - keyboard nav', async ({ page }) => {
