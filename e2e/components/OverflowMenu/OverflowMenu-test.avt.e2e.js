@@ -70,9 +70,9 @@ test.describe('OverflowMenu', () => {
     await page.keyboard.press('Enter');
     await expect(toggleButton).toHaveClass(/cds--overflow-menu--open/);
     // Navigation inside the menu
-    await expect(page.locator('#stop-app')).toBeFocused();
+    await expect(page.getByTestId('stop-app')).toBeFocused();
     await page.keyboard.press('ArrowDown');
-    await expect(page.locator('#restart-app')).toBeFocused();
+    await expect(page.getByTestId('restart-app')).toBeFocused();
     await page.keyboard.press('Enter');
     // focus comes back to the toggle button
     await expect(toggleButton).toBeFocused();
