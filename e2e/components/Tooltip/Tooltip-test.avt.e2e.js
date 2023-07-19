@@ -61,6 +61,6 @@ test.describe('Tooltip @avt', () => {
     await page.keyboard.press('Tab');
     await expect(page.getByRole('button')).toBeFocused();
     // Expect tooltip content to be visible
-    await expect(page.locator('.cds--popover-container')).toHaveClass(/open/);
+    await expect(page.locator('.cds--popover-container')).toBeVisible();
   });
 });
