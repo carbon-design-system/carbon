@@ -10,8 +10,8 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('OverflowMenu', () => {
-  test('accessibility-checker @avt', async ({ page }) => {
+test.describe('OverflowMenu @avt', () => {
+  test('accessibility-checker', async ({ page }) => {
     await visitStory(page, {
       component: 'OverflowMenu',
       id: 'components-overflowmenu--default',
@@ -22,7 +22,7 @@ test.describe('OverflowMenu', () => {
     await expect(page).toHaveNoACViolations('OverflowMenu');
   });
 
-  test('accessibility-checker render custom icon @avt', async ({ page }) => {
+  test('accessibility-checker render custom icon', async ({ page }) => {
     await visitStory(page, {
       component: 'OverflowMenu',
       id: 'components-overflowmenu--render-custom-icon',
@@ -33,7 +33,7 @@ test.describe('OverflowMenu', () => {
     await expect(page).toHaveNoACViolations('OverflowMenu-custom-icon');
   });
 
-  test('accessibility-checker open menu @avt', async ({ page }) => {
+  test('accessibility-checker open menu', async ({ page }) => {
     await visitStory(page, {
       component: 'OverflowMenu',
       id: 'components-overflowmenu--default',
@@ -53,9 +53,7 @@ test.describe('OverflowMenu', () => {
     await expect(page).toHaveNoACViolations('OverflowMenu-open');
   });
 
-  test('accessibility-checker render custom icon open @avt', async ({
-    page,
-  }) => {
+  test('accessibility-checker render custom icon open', async ({ page }) => {
     await visitStory(page, {
       component: 'OverflowMenu',
       id: 'components-overflowmenu--render-custom-icon',
@@ -92,9 +90,13 @@ test.describe('OverflowMenu', () => {
     await page.keyboard.press('Enter');
     await expect(toggleButton).toHaveClass(/cds--overflow-menu--open/);
     // Navigation inside the menu
-    await expect(page.getByTestId('stop-app')).toBeFocused();
+    await expect(
+      page.locator('button').filter({ hasText: 'Stop app' })
+    ).toBeFocused();
     await page.keyboard.press('ArrowDown');
-    await expect(page.getByTestId('restart-app')).toBeFocused();
+    await expect(
+      page.locator('button').filter({ hasText: 'Restart app' })
+    ).toBeFocused();
     await page.keyboard.press('Enter');
     // focus comes back to the toggle button
     await expect(toggleButton).toBeFocused();
