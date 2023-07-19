@@ -26,8 +26,8 @@ export default {
 
 export const Default = () => (
   <OverflowMenu aria-label="overflow-menu">
-    <OverflowMenuItem itemText="Stop app" />
-    <OverflowMenuItem itemText="Restart app" />
+    <OverflowMenuItem itemText="Stop app" id="stop-app" />
+    <OverflowMenuItem itemText="Restart app" id="restart-app" />
     <OverflowMenuItem itemText="Rename app" />
     <OverflowMenuItem itemText="Clone and move app" disabled requireTitle />
     <OverflowMenuItem itemText="Edit routes and access" requireTitle />

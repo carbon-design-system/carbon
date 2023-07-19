@@ -1,0 +1,80 @@
+/**
+ * Copyright IBM Corp. 2016, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+'use strict';
+
+const { expect, test } = require('@playwright/test');
+const { visitStory } = require('../../test-utils/storybook');
+
+test.describe('OverflowMenu', () => {
+  test('accessibility-checker @avt', async ({ page }) => {
+    await visitStory(page, {
+      component: 'OverflowMenu',
+      id: 'components-overflowmenu--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('OverflowMenu');
+  });
+
+  test('accessibility-checker render custom icon @avt', async ({ page }) => {
+    await visitStory(page, {
+      component: 'OverflowMenu',
+      id: 'components-overflowmenu--render-custom-icon',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('OverflowMenu-custom-icon');
+  });
+
+  test('accessibility-checker-menu-open @avt', async ({ page }) => {
+    await visitStory(page, {
+      component: 'OverflowMenu',
+      id: 'components-overflowmenu--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page.getByRole('button')).toBeVisible();
+
+    // Tab and open the toggle button for the OverflowMenu
+    await page.keyboard.press('Tab');
+    const toggleButton = page.getByRole('button');
+    await expect(toggleButton).toBeFocused();
+    await page.keyboard.press('Enter');
+    await expect(toggleButton).toHaveClass(/cds--overflow-menu--open/);
+
+    await expect(page).toHaveNoACViolations('OverflowMenu-open');
+  });
+
+  test('overflow-menu - keyboard nav', async ({ page }) => {
+    await visitStory(page, {
+      component: 'OverflowMenu',
+      id: 'components-overflowmenu--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page.getByRole('button')).toBeVisible();
+
+    // Tab and open the toggle button for the OverflowMenu
+    await page.keyboard.press('Tab');
+    const toggleButton = page.getByRole('button');
+    await expect(toggleButton).toBeFocused();
+    await page.keyboard.press('Enter');
+    await expect(toggleButton).toHaveClass(/cds--overflow-menu--open/);
+    // Navigation inside the menu
+    await expect(page.locator('#stop-app')).toBeFocused();
+    await page.keyboard.press('ArrowDown');
+    await expect(page.locator('#restart-app')).toBeFocused();
+    await page.keyboard.press('Enter');
+    // focus comes back to the toggle button
+    await expect(toggleButton).toBeFocused();
+  });
+});
