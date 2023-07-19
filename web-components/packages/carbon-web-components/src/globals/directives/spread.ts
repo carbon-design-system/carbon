@@ -74,7 +74,7 @@ class SpreadDirective extends Directive {
    * in the update() function.
    *
    * @param attributesInfo The key-value pair to be set as the attribute name/value pairs.
-   * @returns
+   * @returns the attributes info
    */
   render(attributesInfo: AttributesInfo) {
     return attributesInfo;
