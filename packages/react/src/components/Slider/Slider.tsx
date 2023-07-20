@@ -553,24 +553,9 @@ export default class Slider extends PureComponent<SliderProps> {
       this.element?.ownerDocument.addEventListener(element, this.onDrag);
     });
 
-    // If we're set to two handles, negotiate which drag handle is closest to
-    // the users interaction, set the state and pass it along.
-    let activeHandle;
-    if (this.props.twoHandles) {
-      // @todo calculate distance to each handle, implement as a method.
-      const distanceToLower = 0;
-      const distanceToUpper = 0;
-      if (distanceToLower <= distanceToUpper) {
-        activeHandle = LOWER;
-      } else {
-        activeHandle = UPPER;
-      }
-      this.setState({ activeHandle });
-    }
-
     // Perform first recalculation since we probably didn't click exactly in the
     // middle of the thumb
-    this.onDrag(evt, activeHandle);
+    this.onDrag(evt);
   };
 
   /**
@@ -603,7 +588,7 @@ export default class Slider extends PureComponent<SliderProps> {
    *
    * @param {Event} evt The event.
    */
-  _onDrag = (evt, activeHandle) => {
+  _onDrag = (evt) => {
     // Do nothing if component is disabled or we have no event
     if (this.props.disabled || this.props.readOnly || !evt) {
       return;
@@ -623,8 +608,23 @@ export default class Slider extends PureComponent<SliderProps> {
       return;
     }
 
-    const { value, left } = this.calcValue({ clientX });
-    this.setState({ value, left, isValid: true });
+    const { value, left } = this.calcValue({
+      clientX,
+      value: this.state.value,
+    });
+    // If we're set to two handles, negotiate which drag handle is closest to
+    // the users' interaction.
+    if (this.props.twoHandles) {
+      const distanceToLower = this.calcDistanceToHandle(LOWER, clientX);
+      const distanceToUpper = this.calcDistanceToHandle(UPPER, clientX);
+      if (distanceToLower <= distanceToUpper) {
+        this.setState({ valueLower: value, leftLower: left, isValid: true });
+      } else {
+        this.setState({ valueUpper: value, leftUpper: left, isValid: true });
+      }
+    } else {
+      this.setState({ value, left, isValid: true });
+    }
   };
 
   /**
@@ -817,6 +817,14 @@ export default class Slider extends PureComponent<SliderProps> {
 
     return { value: steppedValue, left: steppedPercent * 100 };
   };
+
+  calcDistanceToHandle(handle, clientX) {
+    // left is a whole value between 0 and 100.
+    const left = handle === LOWER ? this.state.leftLower : this.state.leftUpper;
+    const boundingRect = this.element?.getBoundingClientRect();
+    const handleX = boundingRect.left + (left / 100) * boundingRect.width;
+    return Math.abs(handleX - clientX);
+  }
 
   // syncs invalid state and prop
   static getDerivedStateFromProps(props, state) {

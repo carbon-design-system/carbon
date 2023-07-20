@@ -94,7 +94,7 @@ export const ControlledSliderWithLayer = () => {
   );
 };
 
-export const TwoThumbSlider = () => (
+export const TwoHandleSlider = () => (
   <Slider
     labelText="Slider Label"
     valueLower={10}
