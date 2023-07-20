@@ -501,8 +501,6 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
           },
         });
         const inputProps: any = getInputProps({
-          // Remove excess aria `aria-labelledby`. HTML <label for> provides this aria information.
-          'aria-labelledby': null,
           disabled,
           placeholder,
           onClick() {
