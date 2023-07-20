@@ -83,12 +83,12 @@ test.describe('OverflowMenu @avt', () => {
     });
     await expect(page.getByRole('button')).toBeVisible();
 
-    // Tab and open the toggle button for the OverflowMenu
+    // Tab and open the OverflowMenu
     await page.keyboard.press('Tab');
     const toggleButton = page.getByRole('button');
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Enter');
-    await expect(toggleButton).toHaveClass(/cds--overflow-menu--open/);
+    await expect(page.getByRole('menu')).toBeVisible();
     // Navigation inside the menu
     await expect(
       page.locator('button').filter({ hasText: 'Stop app' })
