@@ -352,6 +352,9 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
     onStateChange,
     selectedItem: controlledSelectedItems,
     items,
+    isItemDisabled(item, _index) {
+      return (item as any).disabled;
+    },
   });
 
   const toggleButtonProps = getToggleButtonProps({
@@ -360,6 +363,18 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
     },
     onBlur: () => {
       setInputFocused(false);
+    },
+    onKeyDown: (e) => {
+      if (!disabled) {
+        if (match(e, keys.Delete) || match(e, keys.Escape)) {
+          clearSelection();
+          e.stopPropagation();
+        }
+
+        if (match(e, keys.Space) || match(e, keys.ArrowDown)) {
+          setIsOpenWrapper(true);
+        }
+      }
     },
   });
   const mergedRef = mergeRefs(toggleButtonProps.ref, ref);
@@ -471,18 +486,14 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
     }
   }
 
-  const onKeyDown = (e) => {
-    if (!disabled) {
-      if (match(e, keys.Delete) || match(e, keys.Escape)) {
-        clearSelection();
-        e.stopPropagation();
-      }
-
-      if (match(e, keys.Space) || match(e, keys.ArrowDown)) {
-        setIsOpenWrapper(true);
-      }
-    }
-  };
+  // const onKeyDown = (e) => {
+  //   if (!disabled) {
+  //     if (match(e, keys.Delete) || match(e, keys.Escape)) {
+  //       clearSelection();
+  //       e.stopPropagation();
+  //     }
+  //   }
+  // };
 
   const multiSelectFieldWrapperClasses = cx(
     `${prefix}--list-box__field--wrapper`,
@@ -571,7 +582,6 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
             }
             {...toggleButtonProps}
             ref={mergedRef}
-            onKeyDown={onKeyDown}
             {...readOnlyEventHandlers}>
             <span id={fieldLabelId} className={`${prefix}--list-box__label`}>
               {label}
@@ -596,7 +606,6 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
                   // we don't want Downshift to set aria-selected for us
                   // we also don't want to set 'false' for reader verbosity's sake
                   ['aria-selected']: isChecked ? true : undefined,
-                  disabled: (item as any).disabled,
                 });
                 const itemText = itemToString(item);
 
@@ -607,6 +616,7 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
                     aria-label={itemText}
                     isHighlighted={highlightedIndex === index}
                     title={itemText}
+                    disabled={itemProps['aria-disabled']}
                     {...itemProps}>
                     <div className={`${prefix}--checkbox-wrapper`}>
                       <span
