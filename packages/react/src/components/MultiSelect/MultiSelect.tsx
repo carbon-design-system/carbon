@@ -37,11 +37,11 @@ const noop = () => {};
 const getInstanceId = setupGetInstanceId();
 const {
   ItemClick,
-  MenuBlur,
-  MenuKeyDownArrowDown,
-  MenuKeyDownArrowUp,
-  MenuKeyDownEscape,
-  MenuKeyDownSpaceButton,
+  ToggleButtonBlur,
+  ToggleButtonKeyDownArrowDown,
+  ToggleButtonKeyDownArrowUp,
+  ToggleButtonKeyDownEscape,
+  ToggleButtonKeyDownSpaceButton,
   ToggleButtonClick,
 } = useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
   ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
@@ -449,18 +449,18 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
     const { type } = changes;
     switch (type) {
       case ItemClick:
-      case MenuKeyDownSpaceButton:
+      case ToggleButtonKeyDownSpaceButton:
         if (changes.selectedItem === undefined) {
           break;
         }
         onItemChange(changes.selectedItem);
         break;
-      case MenuKeyDownArrowDown:
-      case MenuKeyDownArrowUp:
+      case ToggleButtonKeyDownArrowDown:
+      case ToggleButtonKeyDownArrowUp:
         setHighlightedIndex(changes.highlightedIndex);
         break;
-      case MenuBlur:
-      case MenuKeyDownEscape:
+      case ToggleButtonBlur:
+      case ToggleButtonKeyDownEscape:
         setIsOpenWrapper(false);
         setHighlightedIndex(changes.highlightedIndex);
         break;
