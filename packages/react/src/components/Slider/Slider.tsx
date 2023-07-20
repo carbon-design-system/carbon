@@ -54,7 +54,7 @@ export interface SliderProps
   children?: ReactNodeLike;
 
   /**
-   * The CSS class name for the slider.
+   * The CSS class name for the slider, set on the wrapping div.
    */
   className?: string;
 
@@ -172,6 +172,11 @@ export interface SliderProps
    * which will be `(max - min) / stepMultiplier`.
    */
   stepMultiplier?: number;
+
+  /**
+   * Turn the slider into a range slider.
+   */
+  twoHandles?: boolean;
 
   /**
    * The value.
@@ -328,6 +333,8 @@ export default class Slider extends PureComponent<SliderProps> {
      */
     stepMultiplier: PropTypes.number,
 
+    twoHandles: PropTypes.bool,
+
     /**
      * The value.
      */
@@ -353,6 +360,7 @@ export default class Slider extends PureComponent<SliderProps> {
     maxLabel: '',
     inputType: 'number',
     readOnly: false,
+    twoHandles: false,
   };
 
   static contextType = FeatureFlagContext;
@@ -758,6 +766,7 @@ export default class Slider extends PureComponent<SliderProps> {
       readOnly,
       warn,
       warnText,
+      twoHandles,
       ...other
     } = this.props;
 
@@ -815,7 +824,7 @@ export default class Slider extends PureComponent<SliderProps> {
                   data-invalid={!isValid && !readOnly ? true : null}
                   {...other}>
                   <div
-                    className={`${prefix}--slider__thumb`}
+                    className={`${prefix}--slider__thumb ${prefix}--slider__thumb--lower`}
                     role="slider"
                     id={id}
                     tabIndex={!readOnly ? 0 : -1}
@@ -825,6 +834,18 @@ export default class Slider extends PureComponent<SliderProps> {
                     aria-labelledby={labelId}
                     ref={this.thumbRef}
                   />
+                  {twoHandles ? (
+                    <div
+                      className={`${prefix}--slider__thumb ${prefix}--slider__thumb--upper`}
+                      role="slider"
+                      id={id}
+                      tabIndex={!readOnly ? 0 : -1}
+                      aria-valuemax={max}
+                      aria-valuemin={min}
+                      aria-valuenow={value}
+                      aria-labelledby={labelId}
+                    />
+                  ) : null}
                   <div
                     className={`${prefix}--slider__track`}
                     ref={(node) => {
