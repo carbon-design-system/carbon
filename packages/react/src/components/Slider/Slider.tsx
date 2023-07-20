@@ -37,6 +37,10 @@ const DRAG_EVENT_TYPES = new Set(['mousemove', 'touchmove']);
  */
 const DRAG_STOP_EVENT_TYPES = new Set(['mouseup', 'touchend', 'touchcancel']);
 
+const LOWER = 'lower';
+
+const UPPER = 'upper';
+
 type ExcludedAttributes = 'onChange' | 'onBlur';
 export interface SliderProps
   extends Omit<
@@ -206,6 +210,12 @@ interface CalcValueProps {
   clientX?: number;
   value?: number;
   useRawValue?: boolean;
+}
+
+interface CalcLeftPercentProps {
+  clientX?: number;
+  value?: number;
+  range?: number;
 }
 
 export default class Slider extends PureComponent<SliderProps> {
@@ -386,11 +396,16 @@ export default class Slider extends PureComponent<SliderProps> {
     valueLower: this.props.valueLower,
     valueUpper: this.props.valueUpper,
     left: 0,
+    leftLower: 0,
+    leftUpper: 0,
     needsOnRelease: false,
     isValid: true,
+    activeHandle: null,
   };
 
   thumbRef: React.RefObject<HTMLDivElement>;
+  thumbRefLower: React.RefObject<HTMLDivElement>;
+  thumbRefUpper: React.RefObject<HTMLDivElement>;
   filledTrackRef: React.RefObject<HTMLDivElement>;
   element: HTMLDivElement | null = null;
   inputId = '';
@@ -399,6 +414,8 @@ export default class Slider extends PureComponent<SliderProps> {
   constructor(props) {
     super(props);
     this.thumbRef = React.createRef<HTMLDivElement>();
+    this.thumbRefLower = React.createRef<HTMLDivElement>();
+    this.thumbRefUpper = React.createRef<HTMLDivElement>();
     this.filledTrackRef = React.createRef<HTMLDivElement>();
   }
 
@@ -406,11 +423,25 @@ export default class Slider extends PureComponent<SliderProps> {
    * Sets up initial slider position and value in response to component mount.
    */
   componentDidMount() {
+    const { twoHandles } = this.props;
     if (this.element) {
-      const { value, left } = this.calcValue({
-        useRawValue: true,
-      });
-      this.setState({ value, left });
+      if (twoHandles) {
+        const { value: valueLower, left: leftLower } = this.calcValue({
+          value: this.state.valueLower,
+          useRawValue: true,
+        });
+        const { value: valueUpper, left: leftUpper } = this.calcValue({
+          value: this.state.valueUpper,
+          useRawValue: true,
+        });
+        this.setState({ valueLower, leftLower, valueUpper, leftUpper });
+      } else {
+        const { value, left } = this.calcValue({
+          value: this.state.value,
+          useRawValue: true,
+        });
+        this.setState({ value, left });
+      }
     }
   }
 
@@ -426,13 +457,29 @@ export default class Slider extends PureComponent<SliderProps> {
     // Fire onChange event handler if present, if there's a usable value, and
     // if the value is different from the last one
 
-    if (this.thumbRef.current) {
-      this.thumbRef.current.style.left = `${this.state.left}%`;
-    }
-    if (this.filledTrackRef.current) {
-      this.filledTrackRef.current.style.transform = `translate(0%, -50%) scaleX(${
-        this.state.left / 100
-      })`;
+    if (this.props.twoHandles) {
+      if (this.thumbRefLower.current) {
+        this.thumbRefLower.current.style.left = `${this.state.leftLower}%`;
+      }
+      if (this.thumbRefUpper.current) {
+        this.thumbRefUpper.current.style.left = `${this.state.leftUpper}%`;
+      }
+      if (this.filledTrackRef.current) {
+        this.filledTrackRef.current.style.transform = `translate(${
+          this.state.leftLower
+        }%, -50%) scaleX(${
+          (this.state.leftUpper - this.state.leftLower) / 100
+        })`;
+      }
+    } else {
+      if (this.thumbRef.current) {
+        this.thumbRef.current.style.left = `${this.state.left}%`;
+      }
+      if (this.filledTrackRef.current) {
+        this.filledTrackRef.current.style.transform = `translate(0%, -50%) scaleX(${
+          this.state.left / 100
+        })`;
+      }
     }
     if (
       prevState.value !== this.state.value &&
@@ -455,6 +502,8 @@ export default class Slider extends PureComponent<SliderProps> {
     // Otherwise, do prop -> state sync without "value capping".
     if (
       prevProps.value === this.props.value &&
+      prevProps.valueLower === this.props.valueLower &&
+      prevProps.valueUpper === this.props.valueUpper &&
       prevProps.max === this.props.max &&
       prevProps.min === this.props.min
     ) {
@@ -504,9 +553,24 @@ export default class Slider extends PureComponent<SliderProps> {
       this.element?.ownerDocument.addEventListener(element, this.onDrag);
     });
 
+    // If we're set to two handles, negotiate which drag handle is closest to
+    // the users interaction, set the state and pass it along.
+    let activeHandle;
+    if (this.props.twoHandles) {
+      // @todo calculate distance to each handle, implement as a method.
+      const distanceToLower = 0;
+      const distanceToUpper = 0;
+      if (distanceToLower <= distanceToUpper) {
+        activeHandle = LOWER;
+      } else {
+        activeHandle = UPPER;
+      }
+      this.setState({ activeHandle });
+    }
+
     // Perform first recalculation since we probably didn't click exactly in the
     // middle of the thumb
-    this.onDrag(evt);
+    this.onDrag(evt, activeHandle);
   };
 
   /**
@@ -539,7 +603,7 @@ export default class Slider extends PureComponent<SliderProps> {
    *
    * @param {Event} evt The event.
    */
-  _onDrag = (evt) => {
+  _onDrag = (evt, activeHandle) => {
     // Do nothing if component is disabled or we have no event
     if (this.props.disabled || this.props.readOnly || !evt) {
       return;
@@ -673,6 +737,43 @@ export default class Slider extends PureComponent<SliderProps> {
     this.props.onBlur?.({ value });
   };
 
+  calcLeftPercent = ({ clientX, value, range }: CalcLeftPercentProps) => {
+    const boundingRect = this.element?.getBoundingClientRect?.();
+    let width = boundingRect ? boundingRect.right - boundingRect.left : 0;
+
+    // Enforce a minimum width of at least 1 for calculations
+    if (width <= 0) {
+      width = 1;
+    }
+
+    // If a clientX is specified, use it to calculate the leftPercent. If not,
+    // use the provided value to calculate it instead.
+    if (clientX != null) {
+      const leftOffset = clientX - (boundingRect?.left ?? 0);
+      return leftOffset / width;
+    } else {
+      // Prevent NaN calculation if the range is 0.
+      return range === 0 ? 0 : (value - this.props.min) / range;
+    }
+  };
+
+  calcSteppedValuePercent = ({ leftPercent, range }) => {
+    const totalSteps = range / (this.props.step ?? Slider.defaultProps.step);
+
+    let steppedValue =
+      Math.round(leftPercent * totalSteps) *
+      (this.props.step ?? Slider.defaultProps.step);
+    const steppedPercent = this.clamp(steppedValue / range, 0, 1);
+
+    steppedValue = this.clamp(
+      steppedValue + this.props.min,
+      this.props.min,
+      this.props.max
+    );
+
+    return [steppedValue, steppedPercent];
+  };
+
   /**
    * Calculates a new Slider `value` and `left` (thumb offset) given a `clientX`,
    * `value`, or neither of those.
@@ -692,31 +793,14 @@ export default class Slider extends PureComponent<SliderProps> {
    *   clientX is not provided.
    * @param {boolean} [params.useRawValue=false] `true` to use the given value as-is.
    */
-
   calcValue = ({ clientX, value, useRawValue = false }: CalcValueProps) => {
     const range = this.props.max - this.props.min;
-    const boundingRect = this.element?.getBoundingClientRect?.();
-    const totalSteps = range / (this.props.step ?? Slider.defaultProps.step);
-    let width = boundingRect ? boundingRect.right - boundingRect.left : 0;
 
-    // Enforce a minimum width of at least 1 for calculations
-    if (width <= 0) {
-      width = 1;
-    }
-
-    // If a clientX is specified, use it to calculate the leftPercent. If not,
-    // use the provided value or state's value to calculate it instead.
-    let leftPercent;
-    if (clientX != null) {
-      const leftOffset = clientX - (boundingRect?.left ?? 0);
-      leftPercent = leftOffset / width;
-    } else {
-      if (value == null) {
-        value = this.state.value;
-      }
-      // prevent NaN calculation if the range is 0
-      leftPercent = range === 0 ? 0 : (value - this.props.min) / range;
-    }
+    const leftPercent = this.calcLeftPercent({
+      clientX,
+      value,
+      range,
+    });
 
     if (useRawValue) {
       // Adjusts only for min/max of thumb position
@@ -726,16 +810,10 @@ export default class Slider extends PureComponent<SliderProps> {
       };
     }
 
-    let steppedValue =
-      Math.round(leftPercent * totalSteps) *
-      (this.props.step ?? Slider.defaultProps.step);
-    const steppedPercent = this.clamp(steppedValue / range, 0, 1);
-
-    steppedValue = this.clamp(
-      steppedValue + this.props.min,
-      this.props.min,
-      this.props.max
-    );
+    const [steppedValue, steppedPercent] = this.calcSteppedValuePercent({
+      leftPercent,
+      range,
+    });
 
     return { value: steppedValue, left: steppedPercent * 100 };
   };
@@ -887,7 +965,8 @@ export default class Slider extends PureComponent<SliderProps> {
                     aria-valuemin={min}
                     aria-valuenow={value}
                     aria-labelledby={labelId}
-                    ref={this.thumbRef}
+                    ref={twoHandles ? this.thumbRefLower : this.thumbRef}
+                    onFocus={() => this.setState({ activeHandle: LOWER })}
                   />
                   {twoHandles ? (
                     <div
@@ -899,6 +978,8 @@ export default class Slider extends PureComponent<SliderProps> {
                       aria-valuemin={min}
                       aria-valuenow={value}
                       aria-labelledby={labelId}
+                      ref={this.thumbRefUpper}
+                      onFocus={() => this.setState({ activeHandle: UPPER })}
                     />
                   ) : null}
                   <div
