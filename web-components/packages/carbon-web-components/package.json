@@ -30,6 +30,8 @@
     "./package.json": "./package.json"
   },
   "scripts": {
+    "postinstall": "node tools/fix-carbon-sass-imports.js",
+    "prebuild": "node tools/fix-carbon-sass-imports.js",
     "build": "gulp build && yarn wca",
     "build:dist": "gulp build:dist",
     "build:dist:dev": "gulp build:dist:dev",
