@@ -138,7 +138,7 @@ $css--plex: true !default;
   @extend .#{$prefix}--header-panel;
 }
 
-:host(#{$prefix}-header-panel) {
+:host(#{$prefix}-header-panel[expanded]) {
   @extend .#{$prefix}--header-panel--expanded;
 }
 
