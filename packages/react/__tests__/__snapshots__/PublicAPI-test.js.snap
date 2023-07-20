@@ -7028,6 +7028,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "isRail": Object {
+        "type": "bool",
+      },
       "isSideNavExpanded": Object {
         "type": "bool",
       },
@@ -7050,6 +7053,9 @@ Map {
       "isActive": Object {
         "type": "bool",
       },
+      "isRail": Object {
+        "type": "bool",
+      },
       "isSideNavExpanded": Object {
         "type": "bool",
       },
@@ -7068,6 +7074,9 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "tabIndex": Object {
+        "type": "number",
       },
     },
     "render": [Function],
@@ -7098,6 +7107,9 @@ Map {
       "isActive": Object {
         "type": "bool",
       },
+      "isRail": Object {
+        "type": "bool",
+      },
       "isSideNavExpanded": Object {
         "type": "bool",
       },
@@ -7116,6 +7128,9 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "tabIndex": Object {
+        "type": "number",
       },
       "title": Object {
         "isRequired": true,
