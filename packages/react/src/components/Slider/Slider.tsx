@@ -129,6 +129,10 @@ export interface SliderProps
    */
   name?: string;
 
+  nameLower?: string;
+
+  nameUpper?: string;
+
   /**
    * Provide an optional function to be called when the input element
    * loses focus
@@ -182,6 +186,10 @@ export interface SliderProps
    * The value.
    */
   value: number;
+
+  valueLower?: number;
+
+  valueUpper?: number;
 
   /**
    * Specify whether the control is currently in warning state
@@ -291,6 +299,10 @@ export default class Slider extends PureComponent<SliderProps> {
      */
     name: PropTypes.string,
 
+    nameLower: PropTypes.string,
+
+    nameUpper: PropTypes.string,
+
     /**
      * Provide an optional function to be called when the input element
      * loses focus
@@ -340,6 +352,10 @@ export default class Slider extends PureComponent<SliderProps> {
      */
     value: PropTypes.number.isRequired,
 
+    valueLower: PropTypes.number,
+
+    valueUpper: PropTypes.number,
+
     /**
      * `Specify whether the Slider is in a warn state
      */
@@ -367,6 +383,8 @@ export default class Slider extends PureComponent<SliderProps> {
 
   state = {
     value: this.props.value,
+    valueLower: this.props.valueLower,
+    valueUpper: this.props.valueUpper,
     left: 0,
     needsOnRelease: false,
     isValid: true,
@@ -762,6 +780,8 @@ export default class Slider extends PureComponent<SliderProps> {
       required,
       disabled,
       name,
+      nameLower,
+      nameUpper,
       light,
       readOnly,
       warn,
@@ -773,7 +793,7 @@ export default class Slider extends PureComponent<SliderProps> {
     delete other.onRelease;
     delete other.invalid;
 
-    const { value, isValid } = this.state;
+    const { value, valueLower, valueUpper, isValid } = this.state;
 
     return (
       <PrefixContext.Consumer>
@@ -789,17 +809,30 @@ export default class Slider extends PureComponent<SliderProps> {
             { [`${prefix}--slider--readonly`]: readOnly }
           );
 
-          const inputClasses = classNames(
+          const fixedInputClasses = [
             `${prefix}--text-input`,
             `${prefix}--slider-text-input`,
-            {
-              [`${prefix}--text-input--light`]: light,
-              [`${prefix}--text-input--invalid`]:
-                !readOnly && isValid === false,
-              [`${prefix}--slider-text-input--hidden`]: hideTextInput,
-              [`${prefix}--slider-text-input--warn`]: !readOnly && warn,
-            }
+          ];
+          const conditionalClasses = {
+            [`${prefix}--text-input--light`]: light,
+            [`${prefix}--text-input--invalid`]: !readOnly && isValid === false,
+            [`${prefix}--slider-text-input--hidden`]: hideTextInput,
+            [`${prefix}--slider-text-input--warn`]: !readOnly && warn,
+          };
+          const inputClasses = classNames(
+            fixedInputClasses,
+            conditionalClasses
           );
+          const lowerInputClasses = classNames([
+            ...fixedInputClasses,
+            `${prefix}--slider-text-input--lower`,
+            conditionalClasses,
+          ]);
+          const upperInputClasses = classNames([
+            ...fixedInputClasses,
+            `${prefix}--slider-text-input--upper`,
+            conditionalClasses,
+          ]);
 
           return (
             <div className={classNames(`${prefix}--form-item`, className)}>
@@ -807,6 +840,28 @@ export default class Slider extends PureComponent<SliderProps> {
                 {labelText}
               </label>
               <div className={`${prefix}--slider-container`}>
+                {twoHandles ? (
+                  <input
+                    type={hideTextInput ? 'hidden' : inputType}
+                    id={`${id}-lower-input-for-slider`}
+                    name={nameLower}
+                    className={lowerInputClasses}
+                    value={valueLower}
+                    aria-labelledby={!ariaLabelInput ? labelId : undefined}
+                    aria-label={ariaLabelInput ? ariaLabelInput : undefined}
+                    disabled={disabled}
+                    required={required}
+                    min={min}
+                    max={max}
+                    step={step}
+                    onChange={this.onChange}
+                    onBlur={this.onBlur}
+                    onKeyUp={this.props.onInputKeyUp}
+                    data-invalid={!isValid && !readOnly ? true : null}
+                    aria-invalid={!isValid && !readOnly ? true : undefined}
+                    readOnly={readOnly}
+                  />
+                ) : null}
                 <span className={`${prefix}--slider__range-label`}>
                   {formatLabel(min, minLabel)}
                 </span>
@@ -862,10 +917,10 @@ export default class Slider extends PureComponent<SliderProps> {
                 </span>
                 <input
                   type={hideTextInput ? 'hidden' : inputType}
-                  id={`${id}-input-for-slider`}
-                  name={name}
-                  className={inputClasses}
-                  value={value}
+                  id={`${id}-${twoHandles ? 'upper-' : ''}input-for-slider`}
+                  name={twoHandles ? nameUpper : name}
+                  className={twoHandles ? upperInputClasses : inputClasses}
+                  value={twoHandles ? valueUpper : value}
                   aria-labelledby={!ariaLabelInput ? labelId : undefined}
                   aria-label={ariaLabelInput ? ariaLabelInput : undefined}
                   disabled={disabled}

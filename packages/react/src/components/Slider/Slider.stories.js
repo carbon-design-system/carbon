@@ -97,7 +97,8 @@ export const ControlledSliderWithLayer = () => {
 export const TwoThumbSlider = () => (
   <Slider
     labelText="Slider Label"
-    value={50}
+    valueLower={10}
+    valueUpper={90}
     min={0}
     max={100}
     step={1}
