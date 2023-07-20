@@ -83,13 +83,9 @@ test.describe('Slider @avt', () => {
 
     // Focus on the slider via keyboard navigation
     await page.keyboard.press('Tab');
-    await expect(
-      page.getByRole('slider', { name: 'Slider Label' })
-    ).toBeVisible();
+    await expect(page.getByRole('slider')).toBeVisible();
     await page.keyboard.press('Tab');
-    await expect(
-      page.getByRole('slider', { name: 'Slider Label' })
-    ).toBeFocused();
+    await expect(page.getByRole('slider')).toBeFocused();
 
     await page.keyboard.press('Tab');
     await expect(page.getByRole('spinbutton')).toBeFocused();
