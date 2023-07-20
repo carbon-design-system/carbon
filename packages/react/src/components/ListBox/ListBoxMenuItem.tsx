@@ -32,6 +32,11 @@ export interface ListBoxMenuItemProps extends ReactAttr<HTMLDivElement> {
    * Specify whether the current menu item is "highlighted".
    */
   isHighlighted?: boolean;
+
+  /**
+   * Specify whether the item should be disabled
+   */
+  disabled?: boolean;
 }
 
 export type ListBoxMenuItemForwardedRef =
@@ -86,6 +91,11 @@ ListBoxMenuItem.propTypes = {
    * Menu Item
    */
   children: PropTypes.node,
+
+  /**
+   * Specify if the item should be disabled
+   */
+  disabled: PropTypes.bool,
 
   /**
    * Specify whether the current menu item is "active".
