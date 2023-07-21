@@ -128,9 +128,13 @@ class CDSTextarea extends CDSTextInput {
 
     return html`
       <div class="${prefix}--text-area__label-wrapper">
-        <label class="${labelClasses}" for="input">
-          <slot name="label-text"> ${this.label} </slot>
-        </label>
+        ${this.hideLabel
+          ? html``
+          : html`
+              <label class="${labelClasses}" for="input">
+                <slot name="label-text"> ${this.label} </slot>
+              </label>
+            `}
         ${counter}
       </div>
       <div class="${textareaWrapperClasses}" ?data-invalid="${this.invalid}">

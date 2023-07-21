@@ -36,14 +36,14 @@ const popoverAlignments = {
 };
 
 export const Playground = (args) => {
-  const { caret, highContrast, align, dropShadow } =
+  const { caret, highContrast, align, dropShadow, open } =
     args?.[`${prefix}-popover`] ?? {};
   return html`
     <style>
       ${styles}
     </style>
     <cds-popover
-      open
+      ?open=${open}
       ?caret=${caret}
       ?highContrast=${highContrast}
       align=${align}
@@ -178,6 +178,7 @@ Playground.parameters = {
         popoverAlignments.bottom
       ),
       dropShadow: boolean('drop shadow (dropShadow)', true),
+      open: boolean('open (open)', true),
     }),
   },
 };

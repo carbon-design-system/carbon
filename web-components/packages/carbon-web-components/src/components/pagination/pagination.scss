@@ -38,3 +38,11 @@ $css--plex: true !default;
     transform: rotate(0) #{'/*rtl:rotate(180deg)*/'};
   }
 }
+
+:host(#{$prefix}-pagination[size='sm']) {
+  @extend .#{$prefix}--pagination--sm;
+}
+
+:host(#{$prefix}-pagination[size='lg']) {
+  @extend .#{$prefix}--pagination--lg;
+}

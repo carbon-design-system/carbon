@@ -136,4 +136,5 @@ export default {
       }),
     },
   },
+  decorators: [(story) => html`<div style="max-width: 800px">${story()}</div>`],
 };

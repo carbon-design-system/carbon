@@ -207,6 +207,12 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
   hideLabel = false;
 
   /**
+   * Specify if the currently value is invalid.
+   */
+  @property({ type: Boolean, reflect: true })
+  invalid = false;
+
+  /**
    * The label position.
    */
   @property({ reflect: true, attribute: 'label-position' })

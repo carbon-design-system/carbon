@@ -27,19 +27,22 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-content-switcher[size='sm']) {
-  @extend .#{$prefix}--content-switcher--sm;
+  @extend .#{$prefix}--layout--size-sm;
 }
 
 :host(#{$prefix}-content-switcher[size='lg']) {
-  @extend .#{$prefix}--content-switcher--lg;
+  @extend .#{$prefix}--layout--size-lg;
 }
 
 :host(#{$prefix}-content-switcher-item) {
-  width: 100%;
   outline: none;
+  width: 100%;
 
   .#{$prefix}--content-switcher-btn {
     height: 100%;
+    width: 100%;
+    align-items: center;
+    padding: 0.5rem var(--cds-layout-density-padding-inline-local);
 
     &:first-child,
     &:last-child {
@@ -70,21 +73,6 @@ $css--plex: true !default;
     &:disabled {
       border-top-color: $border-inverse;
       border-bottom-color: $border-inverse;
-    }
-  }
-
-  &[icon] {
-    width: initial;
-
-    .#{$prefix}--content-switcher-btn {
-      padding-left: rem(11px);
-      padding-right: rem(11px);
-      height: rem(40px);
-    }
-
-    .#{$prefix}--content-switcher__label {
-      display: flex;
-      align-items: center;
     }
   }
 }

@@ -175,7 +175,7 @@ Playground.parameters = {
         'Placeholder (placeholder)',
         'Choose an option'
       ),
-      size: select('Dropdown size (size)', sizes, INPUT_SIZE.MEDIUM),
+      size: select('size (size)', sizes, INPUT_SIZE.MEDIUM),
       readonly: boolean('Read only (readonly)', false),
       warn: boolean('Warn (warn)', false),
       warnText: textNullable('Warn text (warn-text)', 'Warning message'),

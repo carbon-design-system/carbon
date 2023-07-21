@@ -23,7 +23,7 @@ import { INPUT_SIZE } from './text-input';
 
 const sizes = {
   [`Small size (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,
-  Regular: null,
+  [`Medium size (${INPUT_SIZE.MEDIUM})`]: INPUT_SIZE.MEDIUM,
   [`Large size (${INPUT_SIZE.LARGE})`]: INPUT_SIZE.LARGE,
 };
 
@@ -142,7 +142,7 @@ Playground.parameters = {
         max: 800,
         step: 50,
       }),
-      size: select('Dropdown size (size)', sizes, INPUT_SIZE.MEDIUM),
+      size: select('Size (size)', sizes, INPUT_SIZE.MEDIUM),
       readonly: boolean('Read only (readonly)', false),
       type: textNullable('Type (type)', 'text'),
       warn: boolean('Warn (warn)', false),

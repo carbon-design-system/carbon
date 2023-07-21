@@ -164,6 +164,7 @@ class CDSFileUploaderButton extends HostListenerMixin(LitElement) {
     const buttonClasses = classMap({
       [`${prefix}--btn`]: true,
       [`${prefix}--btn--${buttonKind}`]: buttonKind,
+      [`${prefix}--layout--size-${size}`]: size,
       [`${prefix}--btn--disabled`]: disabled,
       [`${prefix}--btn--${size}`]: size,
     });

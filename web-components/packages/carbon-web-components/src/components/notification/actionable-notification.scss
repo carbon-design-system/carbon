@@ -12,6 +12,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/components/notification/index' as *;
+@use '@carbon/styles/scss/components/notification/mixins' as *;
 @use '@carbon/styles/scss/components/button';
 @use '@carbon/styles/scss/components/button/mixins' as button-mixins;
 @use '@carbon/styles/scss/components/button/vars' as button-vars;
@@ -89,6 +90,20 @@ $css--plex: true !default;
   @extend .#{$prefix}--actionable-notification--toast;
 }
 
+:host(#{$prefix}-actionable-notification[inline][low-contrast])::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border-width: 1px 1px 1px 0;
+  border-style: solid;
+  content: '';
+  filter: opacity(0.4);
+  pointer-events: none;
+}
+
 :host(#{$prefix}-actionable-notification[open]) {
   display: flex;
 }
@@ -100,38 +115,47 @@ $css--plex: true !default;
 
 :host(#{$prefix}-actionable-notification[kind='success']) {
   @extend .#{$prefix}--actionable-notification--success;
+}
 
-  &[low-contrast] {
-    @extend .#{$prefix}--actionable-notification--low-contrast,
-      .#{$prefix}--actionable-notification--success;
+:host(#{$prefix}-actionable-notification[kind='success'][low-contrast]) {
+  @extend .#{$prefix}--actionable-notification--low-contrast,
+    .#{$prefix}--actionable-notification--success;
+
+  @include notification--experimental(
+    $support-success,
+    $notification-background-success
+  );
+
+  &::before {
+    border-color: $support-success;
   }
 }
 
 :host(#{$prefix}-actionable-notification[kind='info']) {
   @extend .#{$prefix}--actionable-notification--info;
-
-  &[low-contrast] {
-    @extend .#{$prefix}--actionable-notification--low-contrast,
-      .#{$prefix}--actionable-notification--info;
-  }
 }
 
 :host(#{$prefix}-actionable-notification[kind='info-square']) {
   @extend .#{$prefix}--actionable-notification--info-square;
+}
 
-  &[low-contrast] {
-    @extend .#{$prefix}--actionable-notification--low-contrast,
-      .#{$prefix}--actionable-notification--info;
+:host(#{$prefix}-actionable-notification[kind='info'][low-contrast]),
+:host(#{$prefix}-actionable-notification[kind='info-square'][low-contrast]) {
+  @extend .#{$prefix}--actionable-notification--low-contrast,
+    .#{$prefix}--actionable-notification--info;
+
+  @include notification--experimental(
+    $support-info,
+    $notification-background-info
+  );
+
+  &::before {
+    border-color: $support-info;
   }
 }
 
 :host(#{$prefix}-actionable-notification[kind='warning']) {
   @extend .#{$prefix}--actionable-notification--warning;
-
-  &[low-contrast] {
-    @extend .#{$prefix}--actionable-notification--low-contrast,
-      .#{$prefix}--actionable-notification--warning;
-  }
 
   /* TODO: Remove this once the following issue with icon fill is resolved:
   ** https://github.com/carbon-design-system/carbon/issues/13616
@@ -145,11 +169,6 @@ $css--plex: true !default;
 :host(#{$prefix}-actionable-notification[kind='warning-alt']) {
   @extend .#{$prefix}--actionable-notification--warning-alt;
 
-  &[low-contrast] {
-    @extend .#{$prefix}--actionable-notification--low-contrast,
-      .#{$prefix}--actionable-notification--warning;
-  }
-
   /* TODO: Remove this once the following issue with icon fill is resolved:
   ** https://github.com/carbon-design-system/carbon/issues/13616
   */
@@ -162,11 +181,35 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-actionable-notification[kind='warning'][low-contrast]),
+:host(#{$prefix}-actionable-notification[kind='warning-alt'][low-contrast]) {
+  @extend .#{$prefix}--actionable-notification--low-contrast,
+    .#{$prefix}--actionable-notification--warning;
+
+  @include notification--experimental(
+    $support-warning,
+    $notification-background-warning
+  );
+
+  &::before {
+    border-color: $support-warning;
+  }
+}
+
 :host(#{$prefix}-actionable-notification[kind='error']) {
   @extend .#{$prefix}--actionable-notification--error;
+}
 
-  &[low-contrast] {
-    @extend .#{$prefix}--actionable-notification--low-contrast,
-      .#{$prefix}--actionable-notification--error;
+:host(#{$prefix}-actionable-notification[kind='error'][low-contrast]) {
+  @extend .#{$prefix}--actionable-notification--low-contrast,
+    .#{$prefix}--actionable-notification--error;
+
+  @include notification--experimental(
+    $support-error,
+    $notification-background-error
+  );
+
+  &::before {
+    border-color: $support-error;
   }
 }

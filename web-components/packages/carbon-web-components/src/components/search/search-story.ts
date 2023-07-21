@@ -15,6 +15,8 @@ import { INPUT_SIZE } from '../text-input/text-input';
 import './search-skeleton';
 import storyDocs from './search-story.mdx';
 import { prefix } from '../../globals/settings';
+import '../layer';
+import '../../../.storybook/templates/with-layer';
 
 const sizes = {
   [`Small size (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,
@@ -66,32 +68,17 @@ export const Expandable = () => {
 
 export const ExpandableWithLayer = () => {
   return html`
-    <cds-layer>
-      <cds-search size="lg" expandable placeholder="Layer one"></cds-search>
-      <cds-layer>
-        <cds-search size="lg" expandable placeholder="Layer two"></cds-search>
-        <cds-layer>
-          <cds-search
-            size="lg"
-            expandable
-            placeholder="Layer three"></cds-search>
-        </cds-layer>
-      </cds-layer>
-    </cds-layer>
+    <sb-template-layers>
+      <cds-search size="lg" expandable placeholder="Layer two"></cds-search>
+    </sb-template-layers>
   `;
 };
 
 export const WithLayer = () => {
   return html`
-    <cds-layer>
-      <cds-search size="lg" placeholder="Layer one"></cds-search>
-      <cds-layer>
-        <cds-search size="lg" placeholder="Layer two"></cds-search>
-        <cds-layer>
-          <cds-search size="lg" placeholder="Layer three"></cds-search>
-        </cds-layer>
-      </cds-layer>
-    </cds-layer>
+    <sb-template-layers>
+      <cds-search size="lg" placeholder="Find your items"></cds-search>
+    </sb-template-layers>
   `;
 };
 
@@ -152,7 +139,7 @@ Playground.parameters = {
       role: textNullable('The role of the <input> (role)', 'searchbox'),
       size: select('Search size (size)', sizes, null),
       type: textNullable('The type of the <input> (type)', 'text'),
-      value: textNullable('Value (value)', ''),
+      value: textNullable('Value (value)', 'Default value'),
     }),
   },
 };

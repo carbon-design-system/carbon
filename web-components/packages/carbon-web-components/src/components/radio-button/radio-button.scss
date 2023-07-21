@@ -18,7 +18,7 @@ $css--plex: true !default;
 @include radio-button;
 
 :host(#{$prefix}-radio-button-group) {
-  @extend .#{$prefix}--radio-button-group;
+  @extend .#{$prefix}--form-item;
 }
 
 :host(#{$prefix}-radio-button-group[label-position='left']) {
@@ -29,6 +29,24 @@ $css--plex: true !default;
   @extend .#{$prefix}--radio-button-group--vertical;
 }
 
+:host(#{$prefix}-radio-button-group[invalid]),
+:host(#{$prefix}-radio-button-group[warn])
+  .#{$prefix}--radio-button__validation-msg {
+  display: flex;
+
+  .#{$prefix}--form-requirement {
+    display: block;
+    overflow: visible;
+    max-height: 100%;
+    margin-top: 0;
+    margin-left: $spacing-03;
+  }
+}
+
+:host(#{$prefix}-radio-button-group[invalid]) .#{$prefix}--form-requirement {
+  color: $text-error;
+}
+
 :host(#{$prefix}-radio-button) {
   @extend .#{$prefix}--radio-button-wrapper;
 
@@ -37,6 +55,10 @@ $css--plex: true !default;
   .#{$prefix}--radio-button__label {
     flex-direction: row;
   }
+}
+
+:host(#{$prefix}-radio-button[invalid]) .#{$prefix}--radio-button__appearance {
+  border-color: $support-error;
 }
 
 :host(#{$prefix}-radio-button[data-table]) {
