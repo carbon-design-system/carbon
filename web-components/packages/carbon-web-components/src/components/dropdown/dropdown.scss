@@ -67,6 +67,7 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-combo-box[direction='top']),
 :host(#{$prefix}-dropdown[direction='top']) {
   @extend .#{$prefix}--list-box--up;
 

@@ -16,6 +16,8 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import { find, forEach } from '../../globals/internal/collection-helpers';
 import { RADIO_BUTTON_LABEL_POSITION, RADIO_BUTTON_ORIENTATION } from './defs';
+import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
+import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16';
 import CDSRadioButton from './radio-button';
 import styles from './radio-button.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -95,6 +97,36 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
   legendText = '';
 
   /**
+   * The helper text.
+   */
+  @property({ attribute: 'helper-text' })
+  helperText;
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  @property({ type: Boolean, reflect: true })
+  warn = false;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  @property({ attribute: 'warn-text' })
+  warnText = '';
+
+  /**
+   * Specify if the currently value is invalid.
+   */
+  @property({ type: Boolean, reflect: true })
+  invalid = false;
+
+  /**
+   * Message which is displayed if the value is invalid.
+   */
+  @property({ attribute: 'invalid-text' })
+  invalidText = '';
+
+  /**
    * The `name` attribute for the `<input>` for selection.
    */
   @property()
@@ -139,25 +171,70 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
           value === (elem as CDSRadioButton).value;
       });
     }
+    if (changedProperties.has('invalid')) {
+      forEach(this.querySelectorAll(selectorRadioButton), (elem) => {
+        (elem as CDSRadioButton).invalid = this.invalid;
+      });
+    }
   }
 
   render() {
+    const {
+      readOnly,
+      invalid,
+      invalidText,
+      warn,
+      warnText,
+      disabled,
+      orientation,
+      legendText,
+      helperText,
+    } = this;
+
+    const showWarning = !readOnly && !invalid && warn;
+    const showHelper = !invalid && !disabled && !warn;
+
+    const invalidIcon = WarningFilled16({
+      class: `${prefix}--radio-button__invalid-icon`,
+    });
+
+    const warnIcon = WarningAltFilled16({
+      class: `${prefix}--radio-button__invalid-icon ${prefix}--radio-button__invalid-icon--warning`,
+    });
+
+    const helper = helperText
+      ? html`<div class="${prefix}--form__helper-text">${helperText}</div>`
+      : null;
+
     const fieldsetClasses = classMap({
       [`${prefix}--radio-button-group`]: true,
-      [`${prefix}--radio-button-group--readonly`]: this.readOnly,
-      [`${prefix}--radio-button-group--${this.orientation}`]:
-        this.orientation === 'vertical',
+      [`${prefix}--radio-button-group--readonly`]: readOnly,
+      [`${prefix}--radio-button-group--${orientation}`]:
+        orientation === 'vertical',
     });
 
     return html` <fieldset
-      class="${fieldsetClasses}"
-      ?disabled="${this.disabled}"
-      aria-readonly="${this.readOnly}">
-      ${this.legendText
-        ? html` <legend class="${prefix}--label">${this.legendText}</legend>`
-        : ``}
-      <slot></slot>
-    </fieldset>`;
+        class="${fieldsetClasses}"
+        ?disabled="${disabled}"
+        aria-readonly="${readOnly}">
+        ${legendText
+          ? html` <legend class="${prefix}--label">${legendText}</legend>`
+          : ``}
+        <slot></slot>
+      </fieldset>
+      <div class="${prefix}--radio-button__validation-msg">
+        ${!readOnly && invalid
+          ? html`
+              ${invalidIcon}
+              <div class="${prefix}--form-requirement">${invalidText}</div>
+            `
+          : null}
+        ${showWarning
+          ? html`${warnIcon}
+              <div class="${prefix}--form-requirement">${warnText}</div>`
+          : null}
+      </div>
+      ${showHelper ? helper : null}`;
   }
 
   /**

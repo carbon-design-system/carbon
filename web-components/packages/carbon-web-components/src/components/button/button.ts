@@ -273,6 +273,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
       [`${prefix}--btn--disabled`]: disabled,
       [`${prefix}--btn--icon-only`]: hasIcon && !hasMainContent,
       [`${prefix}--btn--${size}`]: size,
+      [`${prefix}--layout--size-${size}`]: size,
       [`${prefix}-ce--btn--has-icon`]: hasIcon,
       [`${prefix}--btn--expressive`]: isExpressive,
       [`${prefix}--btn--selected`]: isSelected && kind === 'ghost',
@@ -283,7 +284,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
       buttonClassName?.split(' ').forEach((element) => {
         outputObject[element] = true;
       });
-      defaultClasses = outputObject;
+      defaultClasses = { ...defaultClasses, ...outputObject };
     }
     const classes = classMap(defaultClasses);
 

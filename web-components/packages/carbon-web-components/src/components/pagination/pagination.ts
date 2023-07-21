@@ -348,6 +348,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
           id="page-size-select"
           left-select
           pagination
+          size="${size}"
           inline
           value="${pageSize}">
           <slot @slotchange=${handleSlotChange}></slot>
@@ -372,6 +373,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
                 ?disabled=${disabled || pageInputDisabled}
                 id="pages-select"
                 pagination
+                size="${size}"
                 inline
                 value="${page}">
                 ${Array.from(new Array(totalPages)).map(
@@ -389,6 +391,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
                 ?disabled=${disabled || pageInputDisabled}
                 id="pages-select"
                 pagination
+                size="${size}"
                 inline
                 value="${page}">
                 ${Array.from(new Array(totalPages)).map(
@@ -408,6 +411,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
         <div class="${prefix}--pagination__control-buttons">
           <cds-button
             pagination
+            size="${size}"
             ?disabled="${prevButtonDisabled}"
             button-class-name="${prevButtonClasses}"
             tooltip-text="${backwardText}"
@@ -417,6 +421,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
           <cds-button
             tooltip-position="top-right"
             pagination
+            size="${size}"
             ?disabled="${nextButtonDisabled}"
             button-class-name="${nextButtonClasses}"
             tooltip-text="${forwardText}"

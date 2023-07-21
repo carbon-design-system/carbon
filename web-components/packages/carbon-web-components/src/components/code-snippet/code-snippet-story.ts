@@ -178,7 +178,7 @@ export const Playground = (args) => {
       feedback=${feedback}
       feedback-timeout=${feedbackTimeout}
       tooltip-content="${copyButtonDescription}"
-      >yarn add @carbon/reacttooltip-content="Copy to Clipboard"
+      >yarn add @carbon/react
     </cds-code-snippet>
   `;
 };

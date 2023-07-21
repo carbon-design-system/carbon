@@ -11,6 +11,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/components/button';
 @use '@carbon/styles/scss/components/popover/index';
 @use '@carbon/styles/scss/components/tooltip';
@@ -152,6 +153,10 @@ $css--plex: true !default;
   a {
     box-sizing: border-box;
   }
+}
+
+:host(#{$prefix}-switcher-item:nth-child(1)) {
+  margin-top: $spacing-05;
 }
 
 :host(#{$prefix}-switcher-divider) {

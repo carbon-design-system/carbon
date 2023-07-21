@@ -110,10 +110,3 @@ $css--plex: true !default;
 :host(#{$prefix}-button-set[stacked]) {
   @extend .#{$prefix}--btn-set--stacked;
 }
-
-//TODO: remove once we are able to upgrade @carbon/styles to include https://github.com/carbon-design-system/carbon/pull/13287
-.#{$prefix}--btn--xl:not(.#{$prefix}--btn--icon-only),
-.#{$prefix}--btn--2xl:not(.#{$prefix}--btn--icon-only) {
-  align-items: start;
-  padding: $button-padding-ghost;
-}

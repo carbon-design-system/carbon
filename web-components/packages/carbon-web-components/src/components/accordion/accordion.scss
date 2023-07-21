@@ -40,12 +40,18 @@ $css--plex: true !default;
 
 :host(#{$prefix}-accordion-item[size='sm']),
 :host(#{$prefix}-accordion-item-skeleton[size='sm']) {
-  @extend .#{$prefix}--accordion--sm;
+  button {
+    @extend .#{$prefix}--layout--size-sm;
+    min-height: var(--cds-layout-size-height-context);
+  }
 }
 
 :host(#{$prefix}-accordion-item[size='lg']),
 :host(#{$prefix}-accordion-item-skeleton[size='lg']) {
-  @extend .#{$prefix}--accordion--lg;
+  button {
+    @extend .#{$prefix}--layout--size-lg;
+    min-height: var(--cds-layout-size-height-context);
+  }
 }
 
 :host(#{$prefix}-accordion-item[alignment='start']),

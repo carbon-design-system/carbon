@@ -14,11 +14,8 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/layer/layer-tokens';
-@use '@carbon/styles/scss/components/code-snippet/code-snippet' as *;
+@use '@carbon/styles/scss/components/code-snippet/index';
 @use '@carbon/styles/scss/components/copy-button/copy-button';
-
-// https://github.com/carbon-design-system/carbon/issues/11408
-@include code-snippet;
 
 :host(#{$prefix}-code-snippet),
 :host(#{$prefix}-code-snippet-skeleton) {
@@ -57,7 +54,11 @@ $css--plex: true !default;
   }
 
   #{$prefix}-copy-button {
-    @extend .#{$prefix}--snippet, .#{$prefix}--popover-container;
+    @include font-family('sans');
+
+    position: absolute;
+    top: 0;
+    right: 0;
 
     code: {
       overflow: hidden;

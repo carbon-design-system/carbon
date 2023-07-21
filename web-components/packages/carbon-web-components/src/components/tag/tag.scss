@@ -17,10 +17,12 @@ $css--plex: true !default;
   @include layer-tokens.emit-layer-tokens(1);
 
   @extend .#{$prefix}--tag;
+  @extend .#{$prefix}--layout--size-md;
 }
 
 :host(#{$prefix}-tag[size='sm']) {
   @extend .#{$prefix}--tag--sm;
+  @extend .#{$prefix}--layout--size-sm;
 
   .#{$prefix}--tag__close-icon {
     width: rem(18px);

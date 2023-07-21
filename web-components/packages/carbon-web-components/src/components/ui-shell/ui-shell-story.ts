@@ -422,7 +422,7 @@ export const HeaderBaseWActionsSwitcher = () => {
       </div>
       <cds-header-panel expanded aria-label="Header Panel">
         <cds-switcher aria-label="Switcher Container">
-          <cds-switcher-item selected aria-label="Link 1" href="#"
+          <cds-switcher-item aria-label="Link 1" href="#"
             >Link 1</cds-switcher-item
           >
           <cds-switcher-divider></cds-switcher-divider>
