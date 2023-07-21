@@ -71,17 +71,19 @@ test.describe('Dropdown @avt', () => {
     await expect(
       page.getByRole('option', {
         name: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-        selected: true,
       })
-    ).toBeVisible();
+    ).toHaveClass(
+      'cds--list-box__menu-item cds--list-box__menu-item--highlighted'
+    );
     // move to second option
     await page.keyboard.press('ArrowDown');
     await expect(
       page.getByRole('option', {
         name: 'Option 1',
-        selected: true,
       })
-    ).toBeVisible();
+    ).toHaveClass(
+      'cds--list-box__menu-item cds--list-box__menu-item--highlighted'
+    );
     // select second option
     await page.keyboard.press('Enter');
     // focus comes back to the toggle button
