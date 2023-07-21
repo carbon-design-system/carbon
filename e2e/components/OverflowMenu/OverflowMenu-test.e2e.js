@@ -67,6 +67,6 @@ test.describe('OverflowMenu', () => {
         theme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('OverflowMenu');
+    await expect(page).toHaveNoACViolations('OverflowMenu feature-flag');
   });
 });
