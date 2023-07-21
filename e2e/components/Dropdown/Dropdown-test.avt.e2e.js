@@ -55,12 +55,17 @@ test.describe('Dropdown @avt', () => {
     });
     await expect(page.getByRole('combobox')).toBeVisible();
 
-    // Tab and open the Dropdown
+    // Tab and open the Dropdown with Arrow Down
     await page.keyboard.press('Tab');
     const toggleButton = page.getByRole('combobox');
     await expect(toggleButton).toBeFocused();
-    await page.keyboard.press('Enter');
+    await page.keyboard.press('ArrowDown');
     await expect(page.getByRole('listbox')).toBeVisible();
+    // Close with Escape, retain focus, and open with Enter
+    await page.keyboard.press('Escape');
+    await expect(page.getByRole('listbox')).not.toBeVisible();
+    await expect(toggleButton).toBeFocused();
+    await page.keyboard.press('Enter');
     // Navigation inside the menu
     await page.keyboard.press('ArrowDown');
     await expect(
