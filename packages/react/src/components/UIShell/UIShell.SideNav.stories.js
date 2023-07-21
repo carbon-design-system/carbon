@@ -416,6 +416,7 @@ export const SideNavRailWHeader = (args) => (
             onOverlayClick={onClickSideNavExpand}
             href="#main-content"
             onSideNavBlur={onClickSideNavExpand}
+            isRail
             {...args}>
             <SideNavItems>
               {isSideNavExpanded && (
