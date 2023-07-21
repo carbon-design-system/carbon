@@ -47,7 +47,7 @@ export default {
 
 export const Default = () => {
   const label =
-    'Occassionally, services are updated in a specified time window to ensure no down time for customers.';
+    'Occasionally, services are updated in a specified time window to ensure no down time for customers.';
   return (
     <Tooltip align="bottom" label={label}>
       <button className="sb-tooltip-trigger" type="button">
