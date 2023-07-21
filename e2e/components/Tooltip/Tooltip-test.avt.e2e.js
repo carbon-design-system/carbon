@@ -47,6 +47,7 @@ test.describe('Tooltip @avt', () => {
   });
 
   test('default state - keyboard nav', async ({ page }) => {
+    test.slow();
     await visitStory(page, {
       component: 'Tooltip',
       id: 'components-tooltip--default',
@@ -59,8 +60,6 @@ test.describe('Tooltip @avt', () => {
     await expect(page.getByRole('button')).toBeVisible();
     // Expect tooltip to be focused
     await page.keyboard.press('Tab');
-    // testing timeout
-    test.slow();
     await expect(page.getByRole('button')).toBeFocused();
     // Expect tooltip content to be visible
     await expect(page.locator('.cds--popover-container')).toBeVisible();
