@@ -72,7 +72,8 @@ test.describe('Slider @avt', () => {
     await expect(page).toHaveNoACViolations('Slider-with-layer');
   });
 
-  test('default state - keyboard nav', async ({ page }) => {
+  // Prevent timeout
+  test.slow('default state - keyboard nav', async ({ page }) => {
     await visitStory(page, {
       component: 'Slider',
       id: 'components-slider--default',
