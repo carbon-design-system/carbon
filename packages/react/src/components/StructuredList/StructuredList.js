@@ -159,7 +159,7 @@ StructuredListBody.defaultProps = {
 const GridRowContext = React.createContext(null);
 
 export function StructuredListRow(props) {
-  const { onKeyDown, children, className, head, onClick, ...other } = props;
+  const { onKeyDown, children, className, head, ...other } = props;
   const [hasFocusWithin, setHasFocusWithin] = useState(false);
   const id = useId('grid-input');
   const selectedRow = React.useContext(GridSelectedRowStateContext);
@@ -182,9 +182,8 @@ export function StructuredListRow(props) {
       {...other}
       role="row"
       className={classes}
-      onClick={(event) => {
+      onClick={() => {
         setSelectedRow(id);
-        onClick(event);
       }}
       onFocus={() => {
         setHasFocusWithin(true);
@@ -223,11 +222,6 @@ StructuredListRow.propTypes = {
     PropTypes.bool,
     `\nThe \`label\` prop is no longer needed and will be removed in the next major version of Carbon.`
   ),
-
-  /**
-   * Provide a handler that is invoked on the onClick event,
-   */
-  onClick: PropTypes.func,
 
   /**
    * Provide a handler that is invoked on the key down event for the control,
@@ -270,6 +264,10 @@ export function StructuredListInput(props) {
       onChange={(event) => {
         setSelectedRow(event.target.value);
         onChange(event);
+      }}
+      onFocus={(event) => {
+        setSelectedRow(event.target.value);
+        onChange && onChange(event);
       }}
       id={id ?? defaultId}
       className={classes}

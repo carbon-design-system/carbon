@@ -7377,9 +7377,6 @@ Map {
         "type": "bool",
       },
       "label": [Function],
-      "onClick": Object {
-        "type": "func",
-      },
       "onKeyDown": Object {
         "type": "func",
       },
