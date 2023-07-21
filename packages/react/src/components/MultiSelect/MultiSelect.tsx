@@ -336,7 +336,6 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
     selectedItem,
   } = useSelect<ItemType>({
     ...downshiftProps,
-    highlightedIndex,
     isOpen,
     itemToString: (items) => {
       return (

@@ -265,7 +265,6 @@ const Dropdown = React.forwardRef(
       ...downshiftProps,
       items,
       itemToString,
-      highlightedIndex,
       initialSelectedItem,
       onSelectedItemChange,
       onStateChange,

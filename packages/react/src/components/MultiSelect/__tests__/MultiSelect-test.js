@@ -64,8 +64,11 @@ describe('MultiSelect', () => {
     const labelNode = getByText(container, label);
     await userEvent.click(labelNode);
 
-    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
-    expect(screen.getByRole('button')).toHaveAttribute(
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'aria-expanded',
+      'true'
+    );
+    expect(screen.getByRole('combobox')).toHaveAttribute(
       'aria-haspopup',
       'listbox'
     );
@@ -78,8 +81,11 @@ describe('MultiSelect', () => {
     await userEvent.tab();
     await userEvent.keyboard('[Space]');
 
-    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
-    expect(screen.getByRole('button')).toHaveAttribute(
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'aria-expanded',
+      'true'
+    );
+    expect(screen.getByRole('combobox')).toHaveAttribute(
       'aria-haspopup',
       'listbox'
     );
@@ -92,8 +98,11 @@ describe('MultiSelect', () => {
     await userEvent.tab();
     await userEvent.keyboard('[Enter]');
 
-    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
-    expect(screen.getByRole('button')).toHaveAttribute(
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'aria-expanded',
+      'true'
+    );
+    expect(screen.getByRole('combobox')).toHaveAttribute(
       'aria-haspopup',
       'listbox'
     );
