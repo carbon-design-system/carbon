@@ -261,10 +261,7 @@ export function StructuredListInput(props) {
       tabIndex={0}
       checked={row && row.id === selectedRow}
       value={row?.id ?? ''}
-      onChange={(event) => {
-        setSelectedRow(event.target.value);
-        onChange(event);
-      }}
+      onChange={() => {}}
       onFocus={(event) => {
         setSelectedRow(event.target.value);
         onChange && onChange(event);
