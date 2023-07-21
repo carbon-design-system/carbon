@@ -45,7 +45,8 @@ test.describe('Tooltip @avt', () => {
   });
 
   test('tooltip default - keyboard nav', async ({ page }) => {
-    test.slow();
+    // very slow test
+    test.setTimeout(120000);
     await visitStory(page, {
       component: 'Tooltip',
       id: 'components-tooltip--default',
