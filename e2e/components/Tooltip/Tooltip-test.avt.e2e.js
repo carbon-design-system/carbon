@@ -11,9 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('Tooltip @avt', () => {
-  test('accessibility-checker @avt - Tooltip default state', async ({
-    page,
-  }) => {
+  test('accessibility-checker - tooltip default', async ({ page }) => {
     await visitStory(page, {
       component: 'Tooltip',
       id: 'components-tooltip--default',
@@ -46,7 +44,7 @@ test.describe('Tooltip @avt', () => {
     await expect(page).toHaveNoACViolations('Tooltip - duration');
   });
 
-  test('default state - keyboard nav', async ({ page }) => {
+  test('tooltip default - keyboard nav', async ({ page }) => {
     test.slow();
     await visitStory(page, {
       component: 'Tooltip',
