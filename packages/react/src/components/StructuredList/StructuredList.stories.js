@@ -105,7 +105,9 @@ Default.argTypes = {
 export const Selection = (args) => {
   const structuredListBodyRowGenerator = (numRows) => {
     return Array.apply(null, Array(numRows)).map((n, i) => (
-      <StructuredListRow key={`row-${i}`}>
+      <StructuredListRow
+        key={`row-${i}`}
+        onClick={() => console.log('onClick called')}>
         <StructuredListCell>Row {i}</StructuredListCell>
         <StructuredListCell>Row {i}</StructuredListCell>
         <StructuredListCell>
@@ -119,7 +121,6 @@ export const Selection = (args) => {
           value={`row-${i}`}
           title={`row-${i}`}
           name="row-0"
-          onChange={() => console.log('onChange called')}
         />
         <StructuredListCell>
           <CheckmarkFilled

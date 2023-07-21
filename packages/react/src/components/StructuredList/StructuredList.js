@@ -159,7 +159,7 @@ StructuredListBody.defaultProps = {
 const GridRowContext = React.createContext(null);
 
 export function StructuredListRow(props) {
-  const { onKeyDown, children, className, head, ...other } = props;
+  const { onKeyDown, children, className, head, onClick, ...other } = props;
   const [hasFocusWithin, setHasFocusWithin] = useState(false);
   const id = useId('grid-input');
   const selectedRow = React.useContext(GridSelectedRowStateContext);
@@ -182,8 +182,12 @@ export function StructuredListRow(props) {
       {...other}
       role="row"
       className={classes}
-      onClick={() => {
+      onClick={(event) => {
         setSelectedRow(id);
+        // Avoid that the onClick gets called when arrow down
+        if (!event.target.className.includes('cds--structured-list-input')) {
+          onClick && onClick();
+        }
       }}
       onFocus={() => {
         setHasFocusWithin(true);
@@ -224,6 +228,11 @@ StructuredListRow.propTypes = {
   ),
 
   /**
+   * Provide a handler that is invoked on the click,
+   */
+  onClick: PropTypes.func,
+
+  /**
    * Provide a handler that is invoked on the key down event for the control,
    */
   onKeyDown: PropTypes.func,
@@ -261,8 +270,7 @@ export function StructuredListInput(props) {
       tabIndex={0}
       checked={row && row.id === selectedRow}
       value={row?.id ?? ''}
-      onChange={() => {}}
-      onFocus={(event) => {
+      onChange={(event) => {
         setSelectedRow(event.target.value);
         onChange && onChange(event);
       }}
