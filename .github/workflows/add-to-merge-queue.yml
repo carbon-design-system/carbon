@@ -1,15 +1,15 @@
-name: Add To Merge Queue
+name: Merge Queue
 on:
   pull_request:
     types: [labeled, opened, reopened]
 
+permissions:
+  pull-requests: write
+
 jobs:
   add-to-merge-queue:
-    name:
-      Add to Merge Queue if the PR is labelled with any of the automerge labels
+    name: Add to queue when automerge labels are present
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
     steps:
       - name: Log github event
         env:
