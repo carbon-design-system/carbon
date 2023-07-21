@@ -44,7 +44,7 @@ test.describe('Tooltip @avt', () => {
     await expect(page).toHaveNoACViolations('Tooltip - duration');
   });
 
-  // very slow test
+  // Prevent timeout
   test.slow('tooltip default - keyboard nav', async ({ page }) => {
     await visitStory(page, {
       component: 'Tooltip',
