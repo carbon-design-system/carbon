@@ -21,6 +21,7 @@ jobs:
           format('status{0} ready to merge 🎉', ':')) ||
           contains(github.event.pull_request.labels.*.name, format('status{0}
           enable automerge 🟠', ':'))}}
-        run: gh pr merge
+        run: gh pr merge "$PR_URL"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{github.event.pull_request.html_url}}
