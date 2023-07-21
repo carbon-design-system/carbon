@@ -10,15 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Log github event issue labels
+      - name: Log github event
         env:
-          $GITHUB_CONTEXT_LABELS: ${{ toJson(github.event.issue.labels) }}
+          $GITHUB_CONTEXT_LABELS:
+            ${{ toJson(github.event.pull_request.labels) }}
         run: echo "$GITHUB_CONTEXT_LABELS"
       - name: 'Add the PR to the merge queue via the GitHub CLI'
         if:
-          ${{ contains(github.event.issue.labels.*.name, format('status{0} ready
-          to merge 🎉', ':')) || contains(github.event.issue.labels.*.name,
-          format('status{0} enable automerge 🟠', ':'))}}
+          ${{ contains(github.event.pull_request.labels.*.name,
+          format('status{0} ready to merge 🎉', ':')) ||
+          contains(github.event.pull_request.labels.*.name, format('status{0}
+          enable automerge 🟠', ':'))}}
         run: gh pr merge
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
