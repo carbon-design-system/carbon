@@ -8,12 +8,17 @@ jobs:
     name:
       Add to Merge Queue if the PR is labelled with any of the automerge labels
     runs-on: ubuntu-latest
-    if:
-      "${{ contains(github.event.issue.labels.*.name, 'status: ready to merge
-      🎉') || contains(github.event.issue.labels.*.name, 'status: enable
-      automerge 🟠')}}"
+
     steps:
+      - name: Log github event issue labels
+        env:
+          $GITHUB_CONTEXT_LABELS: ${{ toJson(github.event.issue.labels) }}
+        run: echo "$GITHUB_CONTEXT_LABELS"
       - name: 'Add the PR to the merge queue via the GitHub CLI'
+        if:
+          ${{ contains(github.event.issue.labels.*.name, format('status{0} ready
+          to merge 🎉', ':')) || contains(github.event.issue.labels.*.name,
+          format('status{0} enable automerge 🟠', ':'))}}
         run: gh pr merge
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
