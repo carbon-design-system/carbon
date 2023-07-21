@@ -172,11 +172,6 @@ export function StructuredListRow(props) {
     [`${prefix}--structured-list-row--selected`]: selectedRow === id,
   });
 
-  const handleOnClick = () => {
-    setSelectedRow(id);
-    onClick();
-  };
-
   return head ? (
     <div role="row" {...other} className={classes}>
       {children}
@@ -187,7 +182,10 @@ export function StructuredListRow(props) {
       {...other}
       role="row"
       className={classes}
-      onClick={handleOnClick}
+      onClick={(event) => {
+        setSelectedRow(id);
+        onClick(event);
+      }}
       onFocus={() => {
         setHasFocusWithin(true);
       }}
