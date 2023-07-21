@@ -3,6 +3,7 @@ categories:
     members:
       - cloud--download
       - cloud--upload
+      - coupon
       - crop
       - delete
       - do-not
@@ -13,9 +14,11 @@ categories:
       - export--01
       - export--02
       - launch
+      - link
       - love
       - maximize
       - minimize
+      - music
       - paper--clip
       - player--flow
       - refresh
@@ -130,7 +133,8 @@ categories:
       - sao-paulo
       - seattle
       - seoul--gyeongbokgung-palace
-      #    - shanghai
+      - shanghai--cityscape
+      - shanghai--oriental-pearl-tower
       - singapore
       - stockholm
       - taipei--bubble-tea
@@ -191,6 +195,7 @@ categories:
       - cloud--vmware
       - cloud-pak--family
       - cloud-pak--for-applications
+      - cloud-pak--for-business-automation
       - cloud-pak--for-data
       - cloud-pak--for-integration
       - cloud-pak--for-multicloud-management
@@ -427,6 +432,7 @@ categories:
       - accelerated-computing
       - app--modernization
       - archive
+      - asset-management
       - availability
       - business--continuity
       - cloud--infrastructure-management
@@ -523,9 +529,15 @@ categories:
       - college
       - education
       - feedback--02
+      - flag
       - goals
       - growth
+      - handshake
       - insights
+      - medal--01
+      - medal--02
+      - scan-code
+      - trophy
       - university
   - name: Electronics
     members:
@@ -559,6 +571,7 @@ categories:
       - rich--text--format
   - name: Finance
     members:
+      - banking
       - client--financing--01
       - client--financing--02
       - commercial--financing--01
@@ -587,6 +600,8 @@ categories:
     members:
       - capitol
       - fairness
+      - government--01
+      - government--02
       - justice
       - parliament
   - name: Healthcare
@@ -723,20 +738,28 @@ categories:
     members:
       - apple
       - backpack
+      - balloon
+      - balloon--hot-air
       - blender
       - cafe
+      - candy
       - cherries
       - cookie
       - dining
       - hard--ice--cream
+      - firecracker
       - flower--01
       - flower--02
       - guitar
       - juice
+      - lantern
+      - moon-cake
+      - ornament
       - perfume
       - racetrack
       - rock-on
       - scale
+      - snowflake
       - soft--ice--cream
       - sports
       - stationary--bicycle
@@ -770,6 +793,10 @@ categories:
       - automation--decision
       - bluepages
       - distribution--ledger
+      - event--automation
+      - event--endpoint-management
+      - event--processing
+      - event--streams
       - global--network
       - integration
       - inspect--data
@@ -870,6 +897,7 @@ categories:
       - price
       - qr-code
       - receipt
+      - retail--sustainable
       - secure--search
       - select--product
       - shirt
@@ -958,6 +986,19 @@ categories:
       - movement--of--items
       - moving-dolly
       - process
+      - supply-chain--01
+      - supply-chain--02
+  - name: Sustainability
+    members:
+      - energy--crisis
+      - esg-reporting--01
+      - esg-reporting--02
+      - green-it--01
+      - green-it--02
+      - sustainability--02
+      - sustainability--03
+      - sustainability--04
+      - sustainability--strategy
   - name: Systems DevOps
     members:
       - developer-z-os
@@ -1052,6 +1093,7 @@ categories:
       - humid
       - hurricane
       - lightning
+      - moon--full
       - night--clear
       - overcast
       - rainy
