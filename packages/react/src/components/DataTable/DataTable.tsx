@@ -110,7 +110,7 @@ export interface DataTableRenderProps {
     header: DataTableHeader;
     isSortable?: boolean;
     onClick?: (
-      e: MouseEvent,
+      e: React.MouseEvent,
       sortState: { sortHeaderKey: string; sortDirection: DataTableSortState }
     ) => void;
     [key: string]: unknown;
@@ -187,7 +187,10 @@ export interface DataTableRenderProps {
   };
 
   // Custom event handlers
-  onInputChange: (e: Event, defaultValue?: string) => void;
+  onInputChange: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    defaultValue?: string
+  ) => void;
 
   // Expose internal state change actions
   sortBy: (headerKey: string) => void;
@@ -432,7 +435,7 @@ class DataTable extends React.Component<
   }: {
     header: DataTableHeader;
     onClick?: (
-      e: MouseEvent,
+      e: React.MouseEvent,
       sortState: { sortHeaderKey: string; sortDirection: DataTableSortState }
     ) => void;
     isSortable?: boolean;
