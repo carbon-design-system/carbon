@@ -2444,14 +2444,6 @@ Map {
     ],
   },
   "DataTableSkeleton" => Object {
-    "defaultProps": Object {
-      "columnCount": 5,
-      "compact": false,
-      "rowCount": 5,
-      "showHeader": true,
-      "showToolbar": true,
-      "zebra": false,
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -2464,23 +2456,20 @@ Map {
       },
       "headers": Object {
         "args": Array [
-          Array [
-            Object {
-              "type": "array",
-            },
-            Object {
-              "args": Array [
-                Object {
-                  "key": Object {
-                    "type": "string",
-                  },
+          Object {
+            "args": Array [
+              Object {
+                "header": Object {
+                  "isRequired": true,
+                  "type": "node",
                 },
-              ],
-              "type": "shape",
-            },
-          ],
+              },
+            ],
+            "isRequired": true,
+            "type": "shape",
+          },
         ],
-        "type": "oneOfType",
+        "type": "arrayOf",
       },
       "rowCount": Object {
         "type": "number",
