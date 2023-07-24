@@ -37,9 +37,10 @@ const DRAG_EVENT_TYPES = new Set(['mousemove', 'touchmove']);
  */
 const DRAG_STOP_EVENT_TYPES = new Set(['mouseup', 'touchend', 'touchcancel']);
 
-const LOWER = 'lower';
-
-const UPPER = 'upper';
+enum HandlePosition {
+  LOWER = 'lower',
+  UPPER = 'upper',
+}
 
 type ExcludedAttributes = 'onChange' | 'onBlur';
 export interface SliderProps
@@ -553,9 +554,27 @@ export default class Slider extends PureComponent<SliderProps> {
       this.element?.ownerDocument.addEventListener(element, this.onDrag);
     });
 
+    let activeHandle;
+    if (this.props.twoHandles) {
+      const distanceToLower = this.calcDistanceToHandle(
+        HandlePosition.LOWER,
+        evt.clientX
+      );
+      const distanceToUpper = this.calcDistanceToHandle(
+        HandlePosition.UPPER,
+        evt.clientX
+      );
+      if (distanceToLower <= distanceToUpper) {
+        activeHandle = HandlePosition.LOWER;
+      } else {
+        activeHandle = HandlePosition.UPPER;
+      }
+    }
+    this.setState({ activeHandle });
+
     // Perform first recalculation since we probably didn't click exactly in the
-    // middle of the thumb
-    this.onDrag(evt);
+    // middle of the thumb.
+    this.onDrag(evt, activeHandle);
   };
 
   /**
@@ -578,8 +597,9 @@ export default class Slider extends PureComponent<SliderProps> {
       this.element?.ownerDocument.removeEventListener(element, this.onDrag);
     });
 
-    // Set needsOnRelease flag so event fires on next update
-    this.setState({ needsOnRelease: true, isValid: true });
+    // Set needsOnRelease flag so event fires on next update. Also unset the
+    // activeHandle.
+    this.setState({ needsOnRelease: true, isValid: true, activeHandle: null });
   };
 
   /**
@@ -587,9 +607,13 @@ export default class Slider extends PureComponent<SliderProps> {
    * accordingly.
    *
    * @param {Event} evt The event.
+   * @param activeHandle
+   *   The first drag event call, we may have an explicit activeHandle value,
+   *   which is to be used before state is used.
    */
-  _onDrag = (evt) => {
-    // Do nothing if component is disabled or we have no event
+  _onDrag = (evt, activeHandle: HandlePosition | null = null) => {
+    activeHandle = activeHandle ?? this.state.activeHandle;
+    // Do nothing if component is disabled, or we have no event.
     if (this.props.disabled || this.props.readOnly || !evt) {
       return;
     }
@@ -614,14 +638,8 @@ export default class Slider extends PureComponent<SliderProps> {
     });
     // If we're set to two handles, negotiate which drag handle is closest to
     // the users' interaction.
-    if (this.props.twoHandles) {
-      const distanceToLower = this.calcDistanceToHandle(LOWER, clientX);
-      const distanceToUpper = this.calcDistanceToHandle(UPPER, clientX);
-      if (distanceToLower <= distanceToUpper) {
-        this.setState({ valueLower: value, leftLower: left, isValid: true });
-      } else {
-        this.setState({ valueUpper: value, leftUpper: left, isValid: true });
-      }
+    if (this.props.twoHandles && activeHandle) {
+      this.setStateForHandle(activeHandle, { value, left });
     } else {
       this.setState({ value, left, isValid: true });
     }
@@ -818,12 +836,33 @@ export default class Slider extends PureComponent<SliderProps> {
     return { value: steppedValue, left: steppedPercent * 100 };
   };
 
-  calcDistanceToHandle(handle, clientX) {
+  calcDistanceToHandle(handle: HandlePosition, clientX) {
     // left is a whole value between 0 and 100.
-    const left = handle === LOWER ? this.state.leftLower : this.state.leftUpper;
+    const left =
+      handle === HandlePosition.LOWER
+        ? this.state.leftLower
+        : this.state.leftUpper;
     const boundingRect = this.element?.getBoundingClientRect();
     const handleX = boundingRect.left + (left / 100) * boundingRect.width;
     return Math.abs(handleX - clientX);
+  }
+
+  setStateForHandle(handle: HandlePosition, { value, left }) {
+    const { valueLower, valueUpper, leftLower, leftUpper } = this.state;
+    if (handle === HandlePosition.LOWER) {
+      // Don't allow higher than the upper handle.
+      this.setState({
+        valueLower: valueUpper && value > valueUpper ? valueUpper : value,
+        leftLower: valueUpper && value > valueUpper ? leftUpper : left,
+        isValid: true,
+      });
+    } else {
+      this.setState({
+        valueUpper: valueLower && value < valueLower ? valueLower : value,
+        leftUpper: valueLower && value < valueLower ? leftLower : left,
+        isValid: true,
+      });
+    }
   }
 
   // syncs invalid state and prop
@@ -974,7 +1013,9 @@ export default class Slider extends PureComponent<SliderProps> {
                     aria-valuenow={value}
                     aria-labelledby={labelId}
                     ref={twoHandles ? this.thumbRefLower : this.thumbRef}
-                    onFocus={() => this.setState({ activeHandle: LOWER })}
+                    onFocus={() =>
+                      this.setState({ activeHandle: HandlePosition.LOWER })
+                    }
                   />
                   {twoHandles ? (
                     <div
@@ -987,7 +1028,9 @@ export default class Slider extends PureComponent<SliderProps> {
                       aria-valuenow={value}
                       aria-labelledby={labelId}
                       ref={this.thumbRefUpper}
-                      onFocus={() => this.setState({ activeHandle: UPPER })}
+                      onFocus={() =>
+                        this.setState({ activeHandle: HandlePosition.UPPER })
+                      }
                     />
                   ) : null}
                   <div
