@@ -12,6 +12,8 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
+import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
+import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './slider.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -79,8 +81,14 @@ class CDSSliderInput extends FocusMixin(LitElement) {
   /**
    * true to specify if the control is invalid.
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   invalid = false;
+
+  /**
+   * true to specify if the control should display warn icon and text.
+   */
+  @property({ type: Boolean, reflect: true })
+  warn = false;
 
   /**
    * The maximum value.
@@ -152,18 +160,26 @@ class CDSSliderInput extends FocusMixin(LitElement) {
       type,
       value,
       invalid,
+      warn,
       _handleChange: handleChange,
       _handleInput: handleInput,
     } = this;
-    // NOTE: Our React variant has an option to add `invalid` option here,
-    // but there doesn't seem a corresponding style to the thumb.
-    // Because of that, in addition to the mininum/maximum constraint enforced,
-    // the code here start without `invalid` styling option for now.
+
     const classes = classMap({
       [`${prefix}--text-input`]: true,
       [`${prefix}--slider-text-input`]: true,
       [`${prefix}--text-input--invalid`]: invalid,
+      [`${prefix}--slider-text-input--warn`]: warn,
     });
+
+    const invalidIcon = WarningFilled16({
+      class: `${prefix}--slider__invalid-icon`,
+    });
+
+    const warnIcon = WarningAltFilled16({
+      class: `${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`,
+    });
+
     return html`
       <input
         ?disabled="${disabled}"
@@ -177,6 +193,8 @@ class CDSSliderInput extends FocusMixin(LitElement) {
         .value="${value}"
         @change="${handleChange}"
         @input="${handleInput}" />
+      ${invalid ? html`${invalidIcon}` : null}
+      ${warn ? html`${warnIcon}` : null}
     `;
   }
 

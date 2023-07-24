@@ -102,6 +102,7 @@
 
 :host(#{$prefix}-modal-footer-button) {
   .#{$prefix}--btn {
+    height: 100%;
     width: 100%;
     max-width: none;
 
@@ -123,5 +124,4 @@
   width: 50%;
   height: rem(64px);
   margin: 0;
-  padding-bottom: $spacing-07;
 }

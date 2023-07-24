@@ -32,6 +32,10 @@ $css--plex: true !default;
 
 :host(#{$prefix}-search[expandable][expanded]) {
   @extend .#{$prefix}--search--expanded;
+
+  .#{$prefix}--search-input {
+    width: 100%;
+  }
 }
 
 :host(#{$prefix}-search[expandable][expanded][size='sm']) {

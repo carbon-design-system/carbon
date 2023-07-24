@@ -386,8 +386,26 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   /**
    * true to specify if the control is invalid.
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   invalid = false;
+
+  /**
+   * Message which is displayed if the value is invalid.
+   */
+  @property({ attribute: 'invalid-text' })
+  invalidText = '';
+
+  /**
+   * true to specify if the control should display warn icon and text.
+   */
+  @property({ type: Boolean, reflect: true })
+  warn = false;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  @property({ attribute: 'warn-text' })
+  warnText = '';
 
   /**
    * The snapping step of the value.
@@ -423,6 +441,26 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
    */
   @property({ type: Number })
   value;
+
+  /**
+   * is slide input valid
+   */
+  @property({ type: Boolean })
+  isValid;
+
+  _getInputValidity(input) {
+    if (this.invalid) {
+      return false;
+    }
+
+    if (
+      input?.valueAsNumber > Number(this.max) ||
+      input?.valueAsNumber < Number(this.min)
+    ) {
+      return false;
+    }
+    return true;
+  }
 
   connectedCallback() {
     super.connectedCallback();
@@ -469,11 +507,26 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
         }
       });
 
-      if (changedProperties.has('value') || changedProperties.has('invalid')) {
-        if (this.value < this.min || this.value > this.max || this.invalid) {
+      if (
+        changedProperties.has('value') ||
+        changedProperties.has('invalid') ||
+        changedProperties.has('warn') ||
+        changedProperties.has('readonly')
+      ) {
+        const innerInput = input?.shadowRoot?.querySelector('input');
+
+        this.isValid = this._getInputValidity(innerInput);
+
+        if (!this.readonly && !this.isValid) {
           input.invalid = true;
         } else {
           input.invalid = false;
+        }
+
+        if (!this.readonly && !this.invalid && this.warn && this.isValid) {
+          input.warn = true;
+        } else {
+          input.warn = false;
         }
       }
     }
@@ -490,8 +543,12 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       min,
       maxLabel,
       minLabel,
-      value,
       readonly,
+      invalidText,
+      isValid,
+      warn,
+      warnText,
+      value,
       _rate: rate,
       _handleClickLabel: handleClickLabel,
       _handleKeydown: handleKeydown,
@@ -499,6 +556,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       _startDrag: startDrag,
       _endDrag: endDrag,
     } = this;
+
     const labelClasses = classMap({
       [`${prefix}--label`]: true,
       [`${prefix}--label--disabled`]: disabled,
@@ -508,6 +566,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       [`${prefix}--slider--disabled`]: disabled,
       [`${prefix}--slider--readonly`]: readonly,
     });
+
     return html`
       <label class="${labelClasses}" @click="${handleClickLabel}">
         <slot name="label-text">${labelText}</slot>
@@ -546,6 +605,21 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
         </span>
         <slot></slot>
       </div>
+
+      ${!readonly && !isValid
+        ? html`
+            <div
+              class="${prefix}--slider__validation-msg ${prefix}--slider__validation-msg--invalid ${prefix}--form-requirement">
+              ${invalidText}
+            </div>
+          `
+        : null}
+      ${!readonly && warn && isValid
+        ? html`<div
+            class="${prefix}--slider__validation-msg ${prefix}--form-requirement">
+            ${warnText}
+          </div>`
+        : null}
     `;
   }
 

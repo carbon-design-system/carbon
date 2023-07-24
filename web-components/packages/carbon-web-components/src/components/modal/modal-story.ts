@@ -49,18 +49,20 @@ export const Default = () => {
           <cds-text-input placeholder="e.g. github.com" label="Domain name">
           </cds-text-input>
         </cds-form-item>
-        <cds-select label-text="Domain name" placeholder="US South">
-          <cds-select-item value="us-south">Option 1</cds-select-item>
-          <cds-select-item value="us-east">Option 2</cds-select-item>
-        </cds-select>
-        <cds-dropdown label-text="Dropdown" trigger-content="Dropdown">
+
+        <cds-form-item>
+          <cds-select placeholder="US South" label-text="Region">
+            <cds-select-item value="us-south">US South</cds-select-item>
+            <cds-select-item value="us-east">US East</cds-select-item>
+          </cds-select>
+        </cds-form-item>
+
+        <cds-dropdown label="Dropdown" title-text="Dropdown">
           <cds-dropdown-item value="one">One</cds-dropdown-item>
           <cds-dropdown-item value="two">Two</cds-dropdown-item>
         </cds-dropdown>
 
-        <cds-multi-select
-          label-text="Multiselect"
-          trigger-content="Multiselect">
+        <cds-multi-select label="Multiselect" title-text="Multiselect">
           <cds-multi-select-item value="option-1"
             >Option 1</cds-multi-select-item
           >
@@ -73,7 +75,7 @@ export const Default = () => {
         <cds-modal-footer-button kind="secondary"
           >Cancel</cds-modal-footer-button
         >
-        <cds-modal-footer-button>Save</cds-modal-footer-button>
+        <cds-modal-footer-button>Add</cds-modal-footer-button>
       </cds-modal-footer>
     </cds-modal>
   `;

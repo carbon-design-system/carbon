@@ -170,14 +170,6 @@ class CDSOverflowMenu
       tooltip?.setAttribute('data-table', '');
     }
 
-    if (changedProperties.has('flipped')) {
-      (
-        this.querySelector(
-          `${prefix}-overflow-menu-body`
-        ) as CDSOverflowMenuBody
-      ).flipped = true;
-    }
-
     if (changedProperties.has('size')) {
       const { size } = this;
       const { _menuBody: menuBody } = this;

@@ -373,7 +373,7 @@ export const WithOverflowMenu = () => {
               ${OverflowMenuVertical16({ slot: 'icon' })}
               <span slot="tooltip-content"> Options </span>
 
-              <cds-overflow-menu-body>
+              <cds-overflow-menu-body flipped>
                 <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
@@ -393,7 +393,7 @@ export const WithOverflowMenu = () => {
               ${OverflowMenuVertical16({ slot: 'icon' })}
               <span slot="tooltip-content"> Options </span>
 
-              <cds-overflow-menu-body>
+              <cds-overflow-menu-body flipped>
                 <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
@@ -413,7 +413,7 @@ export const WithOverflowMenu = () => {
               ${OverflowMenuVertical16({ slot: 'icon' })}
               <span slot="tooltip-content"> Options </span>
 
-              <cds-overflow-menu-body>
+              <cds-overflow-menu-body flipped>
                 <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
@@ -435,7 +435,7 @@ export const WithOverflowMenu = () => {
               ${OverflowMenuVertical16({ slot: 'icon' })}
               <span slot="tooltip-content"> Options </span>
 
-              <cds-overflow-menu-body>
+              <cds-overflow-menu-body flipped>
                 <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
@@ -455,7 +455,7 @@ export const WithOverflowMenu = () => {
               ${OverflowMenuVertical16({ slot: 'icon' })}
               <span slot="tooltip-content"> Options </span>
 
-              <cds-overflow-menu-body>
+              <cds-overflow-menu-body flipped>
                 <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
@@ -475,7 +475,7 @@ export const WithOverflowMenu = () => {
               ${OverflowMenuVertical16({ slot: 'icon' })}
               <span slot="tooltip-content"> Options </span>
 
-              <cds-overflow-menu-body>
+              <cds-overflow-menu-body flipped>
                 <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
@@ -554,7 +554,7 @@ export const Playground = (args) => {
               ${OverflowMenuVertical16({ slot: 'icon' })}
               <span slot="tooltip-content"> Options </span>
 
-              <cds-overflow-menu-body>
+              <cds-overflow-menu-body flipped>
                 <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
@@ -574,7 +574,7 @@ export const Playground = (args) => {
               ${OverflowMenuVertical16({ slot: 'icon' })}
               <span slot="tooltip-content"> Options </span>
 
-              <cds-overflow-menu-body>
+              <cds-overflow-menu-body flipped>
                 <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
@@ -594,7 +594,7 @@ export const Playground = (args) => {
               ${OverflowMenuVertical16({ slot: 'icon' })}
               <span slot="tooltip-content"> Options </span>
 
-              <cds-overflow-menu-body>
+              <cds-overflow-menu-body flipped>
                 <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
@@ -616,7 +616,7 @@ export const Playground = (args) => {
               ${OverflowMenuVertical16({ slot: 'icon' })}
               <span slot="tooltip-content"> Options </span>
 
-              <cds-overflow-menu-body>
+              <cds-overflow-menu-body flipped>
                 <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
@@ -636,7 +636,7 @@ export const Playground = (args) => {
               ${OverflowMenuVertical16({ slot: 'icon' })}
               <span slot="tooltip-content"> Options </span>
 
-              <cds-overflow-menu-body>
+              <cds-overflow-menu-body flipped>
                 <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
@@ -656,7 +656,7 @@ export const Playground = (args) => {
               ${OverflowMenuVertical16({ slot: 'icon' })}
               <span slot="tooltip-content"> Options </span>
 
-              <cds-overflow-menu-body>
+              <cds-overflow-menu-body flipped>
                 <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
                 <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
