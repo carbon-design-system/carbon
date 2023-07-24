@@ -682,9 +682,6 @@ export default class Slider extends PureComponent<SliderProps> {
       delta *= stepMultiplier ?? Slider.defaultProps.stepMultiplier;
     }
 
-    Math.floor(
-      this.state.value / (this.props.step ?? Slider.defaultProps.step)
-    ) * (this.props.step ?? Slider.defaultProps.step);
     const { value, left } = this.calcValue({
       // Ensures custom value from `<input>` won't cause skipping next stepping point with right arrow key,
       // e.g. Typing 51 in `<input>`, moving focus onto the thumb and the hitting right arrow key should yield 52 instead of 54
