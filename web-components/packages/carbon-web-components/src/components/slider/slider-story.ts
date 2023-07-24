@@ -132,6 +132,7 @@ export const Playground = (args) => {
     disabled,
     hideTextInput,
     invalid,
+    invalidText,
     inputType,
     labelText,
     max,
@@ -143,6 +144,8 @@ export const Playground = (args) => {
     required,
     step,
     stepMultiplier,
+    warn,
+    warnText,
     value,
     onChange,
   } = args?.[`${prefix}-slider`] || {};
@@ -152,6 +155,7 @@ export const Playground = (args) => {
         ?disabled="${disabled}"
         ?hide-text-input="${hideTextInput}"
         ?invalid="${invalid}"
+        invalid-text="${ifDefined(invalidText)}"
         label-text="${labelText}"
         max="${ifDefined(max)}"
         min="${ifDefined(min)}"
@@ -160,6 +164,8 @@ export const Playground = (args) => {
         ?readonly="${ifDefined(readonly)}"
         step="${ifDefined(step)}"
         step-multiplier="${ifDefined(stepMultiplier)}"
+        ?warn="${warn}"
+        warn-text="${warnText}"
         value="${ifDefined(value)}"
         @cds-slider-changed="${onChange}">
         ${!hideTextInput
@@ -188,6 +194,10 @@ Playground.parameters = {
       ),
       inputType: text('Input type (type)', 'number'),
       invalid: boolean('Invalid (invalid)', false),
+      invalidText: text(
+        'Invalid text (invalid-text)',
+        'Invalid message goes here'
+      ),
       name: text('Name (name)', ''),
       max: number('Maximum value (max)', 100),
       min: number('Minimum value (min)', 0),
@@ -197,6 +207,8 @@ Playground.parameters = {
       required: boolean('Required (required)', false),
       step: number('Step (step)', 5),
       stepMultiplier: number('Step multiplier (step-multiplier)', 5),
+      warn: boolean('Warn (warn)', false),
+      warnText: text('Warn text (warn-text)', 'Warning message goes here'),
       value: number('Value (value)', 50),
       onAfterChange: action(`${prefix}-slider-changed`),
     }),

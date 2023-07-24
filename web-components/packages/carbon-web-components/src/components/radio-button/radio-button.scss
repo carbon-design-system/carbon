@@ -30,16 +30,17 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-radio-button-group[invalid]),
-:host(#{$prefix}-radio-button-group[warn])
+:host(#{$prefix}-radio-button-group[warn]) {
   .#{$prefix}--radio-button__validation-msg {
-  display: flex;
+    display: flex;
 
-  .#{$prefix}--form-requirement {
-    display: block;
-    overflow: visible;
-    max-height: 100%;
-    margin-top: 0;
-    margin-left: $spacing-03;
+    .#{$prefix}--form-requirement {
+      display: block;
+      overflow: visible;
+      max-height: 100%;
+      margin-top: 0;
+      margin-left: $spacing-03;
+    }
   }
 }
 

@@ -22,12 +22,6 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 @customElement(`${prefix}-table-toolbar`)
 class CDSTableToolbar extends LitElement {
   /**
-   * Boolean to reflect the overflow menu body
-   */
-  @property({ type: Boolean, reflect: true })
-  flipped = true;
-
-  /**
    * Toolbar size
    */
   @property({ reflect: true })
@@ -41,12 +35,6 @@ class CDSTableToolbar extends LitElement {
   }
 
   updated(changedProperties) {
-    if (changedProperties.has('flipped')) {
-      this.querySelector(
-        (this.constructor as typeof CDSTableToolbar).selectorOverflowMenuBody
-      )?.setAttribute('flipped', '');
-    }
-
     if (changedProperties.has('size')) {
       (
         this.querySelector(
@@ -58,13 +46,6 @@ class CDSTableToolbar extends LitElement {
 
   render() {
     return html` <slot></slot> `;
-  }
-
-  /**
-   * The CSS selector to find the overflow menu body
-   */
-  static get selectorOverflowMenuBody() {
-    return `${prefix}-overflow-menu-body`;
   }
 
   /**

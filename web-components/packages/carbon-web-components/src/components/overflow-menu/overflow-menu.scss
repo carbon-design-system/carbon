@@ -85,6 +85,10 @@ $css--plex: true !default;
   @extend .#{$prefix}--overflow-menu-options__option;
 
   outline: none;
+
+  button:hover {
+    background-color: $layer-hover;
+  }
 }
 
 :host(#{$prefix}-overflow-menu-item[size='sm']) {
