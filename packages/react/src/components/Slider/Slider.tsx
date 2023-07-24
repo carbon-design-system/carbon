@@ -54,6 +54,16 @@ export interface SliderProps
   ariaLabelInput?: string;
 
   /**
+   * The `ariaLabel` for the lower bound `<input>` when twoHandles is set.
+   */
+  ariaLabelInputLower?: string;
+
+  /**
+   * The `ariaLabel` for the upper bound `<input>` when twoHandles is set.
+   */
+  ariaLabelInputUpper?: string;
+
+  /**
    * The child nodes.
    */
   children?: ReactNodeLike;
@@ -225,6 +235,16 @@ export default class Slider extends PureComponent<SliderProps> {
      * The `ariaLabel` for the `<input>`.
      */
     ariaLabelInput: PropTypes.string,
+
+    /**
+     * The `ariaLabel` for the lower bound `<input>` when twoHandles is set.
+     */
+    ariaLabelInputLower: PropTypes.string,
+
+    /**
+     * The `ariaLabel` for the upper bound `<input>` when twoHandles is set.
+     */
+    ariaLabelInputUpper: PropTypes.string,
 
     /**
      * The child nodes.
@@ -924,6 +944,8 @@ export default class Slider extends PureComponent<SliderProps> {
   render() {
     const {
       ariaLabelInput,
+      ariaLabelInputLower,
+      ariaLabelInputUpper,
       className,
       hideTextInput,
       id = (this.inputId =
@@ -1009,8 +1031,10 @@ export default class Slider extends PureComponent<SliderProps> {
                     name={nameLower}
                     className={lowerInputClasses}
                     value={valueLower}
-                    aria-labelledby={!ariaLabelInput ? labelId : undefined}
-                    aria-label={ariaLabelInput ? ariaLabelInput : undefined}
+                    aria-labelledby={!ariaLabelInputLower ? labelId : undefined}
+                    aria-label={
+                      ariaLabelInputLower ? ariaLabelInputLower : undefined
+                    }
                     disabled={disabled}
                     required={required}
                     min={min}
@@ -1048,9 +1072,9 @@ export default class Slider extends PureComponent<SliderProps> {
                     role="slider"
                     id={id}
                     tabIndex={!readOnly ? 0 : -1}
-                    aria-valuemax={max}
+                    aria-valuemax={twoHandles ? valueUpper : max}
                     aria-valuemin={min}
-                    aria-valuenow={value}
+                    aria-valuenow={twoHandles ? valueLower : value}
                     aria-labelledby={labelId}
                     ref={twoHandles ? this.thumbRefLower : this.thumbRef}
                     onFocus={() =>
@@ -1064,8 +1088,8 @@ export default class Slider extends PureComponent<SliderProps> {
                       id={id}
                       tabIndex={!readOnly ? 0 : -1}
                       aria-valuemax={max}
-                      aria-valuemin={min}
-                      aria-valuenow={value}
+                      aria-valuemin={valueLower}
+                      aria-valuenow={valueUpper}
                       aria-labelledby={labelId}
                       ref={this.thumbRefUpper}
                       onFocus={() =>
@@ -1093,8 +1117,19 @@ export default class Slider extends PureComponent<SliderProps> {
                   name={twoHandles ? nameUpper : name}
                   className={twoHandles ? upperInputClasses : inputClasses}
                   value={twoHandles ? valueUpper : value}
-                  aria-labelledby={!ariaLabelInput ? labelId : undefined}
-                  aria-label={ariaLabelInput ? ariaLabelInput : undefined}
+                  aria-labelledby={
+                    (twoHandles && !ariaLabelInputUpper) ||
+                    (!twoHandles && !ariaLabelInput)
+                      ? labelId
+                      : undefined
+                  }
+                  aria-label={
+                    twoHandles && ariaLabelInputUpper
+                      ? ariaLabelInputUpper
+                      : ariaLabelInput
+                      ? ariaLabelInput
+                      : undefined
+                  }
                   disabled={disabled}
                   required={required}
                   min={min}
