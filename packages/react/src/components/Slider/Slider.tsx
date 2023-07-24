@@ -727,18 +727,33 @@ export default class Slider extends PureComponent<SliderProps> {
 
     const targetValue = Number.parseFloat(evt.target.value);
 
-    // Avoid calling calcValue for invalid numbers, but still update the state
+    // Avoid calling calcValue for invalid numbers, but still update the state.
+    const activeHandle =
+      evt.target.dataset.handlePosition ?? HandlePosition.LOWER;
     if (isNaN(targetValue)) {
-      this.setState({ value: evt.target.value });
+      if (this.props.twoHandles && activeHandle === HandlePosition.LOWER) {
+        this.setState({ valueLower: evt.target.value });
+      } else if (
+        this.props.twoHandles &&
+        activeHandle === HandlePosition.UPPER
+      ) {
+        this.setState({ valueUpper: evt.target.value });
+      } else {
+        this.setState({ value: evt.target.value });
+      }
     } else {
       const { value, left } = this.calcValue({
         value: targetValue,
         useRawValue: true,
       });
-      this.setState({
-        value,
-        left,
-      });
+      if (this.props.twoHandles) {
+        this.setStateForHandle(activeHandle, { value, left });
+      } else {
+        this.setState({
+          value,
+          left,
+        });
+      }
     }
   };
 
@@ -1005,6 +1020,9 @@ export default class Slider extends PureComponent<SliderProps> {
                     onBlur={this.onBlur}
                     onKeyUp={this.props.onInputKeyUp}
                     data-invalid={!isValid && !readOnly ? true : null}
+                    data-handle-position={
+                      twoHandles ? HandlePosition.LOWER : null
+                    }
                     aria-invalid={!isValid && !readOnly ? true : undefined}
                     readOnly={readOnly}
                   />
@@ -1086,6 +1104,9 @@ export default class Slider extends PureComponent<SliderProps> {
                   onBlur={this.onBlur}
                   onKeyUp={this.props.onInputKeyUp}
                   data-invalid={!isValid && !readOnly ? true : null}
+                  data-handle-position={
+                    twoHandles ? HandlePosition.UPPER : null
+                  }
                   aria-invalid={!isValid && !readOnly ? true : undefined}
                   readOnly={readOnly}
                 />
