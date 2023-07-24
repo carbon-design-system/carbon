@@ -7,9 +7,9 @@
 
 'use strict';
 
-const { expect, test } = require('@playwright/test'); // eslint-disable-line
+const { test } = require('@playwright/test'); // eslint-disable-line
 const { themes } = require('../../test-utils/env');
-const { snapshotStory, visitStory } = require('../../test-utils/storybook'); // eslint-disable-line
+const { snapshotStory } = require('../../test-utils/storybook'); // eslint-disable-line
 
 test.describe('Slider', () => {
   themes.forEach((theme) => {
@@ -31,17 +31,4 @@ test.describe('Slider', () => {
       });
     });
   });
-
-  // TODO: uncomment when https://github.com/IBMa/equal-access/issues/761 is resolved
-
-  // test('accessibility-checker @avt', async ({ page }) => {
-  //   await visitStory(page, {
-  //     component: 'Slider',
-  //     id: 'components-slider--default',
-  //     globals: {
-  //       theme: 'white',
-  //     },
-  //   });
-  //   await expect(page).toHaveNoACViolations('Slider');
-  // });
 });
