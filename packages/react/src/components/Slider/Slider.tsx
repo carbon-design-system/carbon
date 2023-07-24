@@ -773,13 +773,16 @@ export default class Slider extends PureComponent<SliderProps> {
 
     // If a clientX is specified, use it to calculate the leftPercent. If not,
     // use the provided value to calculate it instead.
-    if (clientX != null) {
+    if (clientX) {
       const leftOffset = clientX - (boundingRect?.left ?? 0);
       return leftOffset / width;
-    } else {
+    } else if (value && range) {
       // Prevent NaN calculation if the range is 0.
       return range === 0 ? 0 : (value - this.props.min) / range;
     }
+    // We should never end up in this scenario, but in case we do, and to
+    // re-assure Typescript, return 0.
+    return 0;
   };
 
   calcSteppedValuePercent = ({ leftPercent, range }) => {
@@ -849,7 +852,7 @@ export default class Slider extends PureComponent<SliderProps> {
       handle === HandlePosition.LOWER
         ? this.state.leftLower
         : this.state.leftUpper;
-    const boundingRect = this.element?.getBoundingClientRect();
+    const boundingRect = this.getSliderBoundingRect();
     const handleX = boundingRect.left + (left / 100) * boundingRect.width;
     return Math.abs(handleX - clientX);
   }
@@ -877,6 +880,11 @@ export default class Slider extends PureComponent<SliderProps> {
         isValid: true,
       });
     }
+  }
+
+  getSliderBoundingRect() {
+    const boundingRect = this.element?.getBoundingClientRect();
+    return boundingRect ?? new DOMRect();
   }
 
   // syncs invalid state and prop
