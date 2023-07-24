@@ -682,18 +682,28 @@ export default class Slider extends PureComponent<SliderProps> {
       delta *= stepMultiplier ?? Slider.defaultProps.stepMultiplier;
     }
 
-    const { value, left } = this.calcValue({
-      // Ensures custom value from `<input>` won't cause skipping next stepping point with right arrow key,
-      // e.g. Typing 51 in `<input>`, moving focus onto the thumb and the hitting right arrow key should yield 52 instead of 54
-      value:
-        (delta > 0
-          ? Math.floor(
-              this.state.value / (this.props.step ?? Slider.defaultProps.step)
-            ) * (this.props.step ?? Slider.defaultProps.step)
-          : this.state.value) + delta,
-    });
-
-    this.setState({ value, left, isValid: true });
+    if (this.props.twoHandles && this.state.activeHandle) {
+      const currentValue =
+        this.state.activeHandle === HandlePosition.LOWER
+          ? this.state.valueLower
+          : this.state.valueUpper;
+      const { value, left } = this.calcValue({
+        value: this.calcValueForDelta(currentValue, delta, this.props.step),
+      });
+      this.setStateForHandle(this.state.activeHandle, {
+        value,
+        left,
+      });
+    } else {
+      const { value, left } = this.calcValue({
+        // Ensures custom value from `<input>` won't cause skipping next stepping
+        // point with right arrow key, e.g. Typing 51 in `<input>`, moving focus
+        // onto the thumb and the hitting right arrow key should yield 52 instead
+        // of 54.
+        value: this.calcValueForDelta(this.state.value, delta, this.props.step),
+      });
+      this.setState({ value, left, isValid: true });
+    }
   };
 
   /**
@@ -842,6 +852,13 @@ export default class Slider extends PureComponent<SliderProps> {
     const boundingRect = this.element?.getBoundingClientRect();
     const handleX = boundingRect.left + (left / 100) * boundingRect.width;
     return Math.abs(handleX - clientX);
+  }
+
+  calcValueForDelta(currentValue, delta, step = Slider.defaultProps.step) {
+    return (
+      (delta > 0 ? Math.floor(currentValue / step) * step : currentValue) +
+      delta
+    );
   }
 
   setStateForHandle(handle: HandlePosition, { value, left }) {
