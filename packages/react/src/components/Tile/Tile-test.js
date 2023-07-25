@@ -303,13 +303,17 @@ describe('Tile', () => {
 
       expect(tile.nodeName).not.toBe('BUTTON');
       expect(tile).toContainElement(expandButton);
-      expect(tile).toHaveAttribute('aria-expanded', 'false');
+      expect(tile).not.toHaveAttribute('aria-expanded');
+
       expect(expandButton).toHaveAttribute('aria-expanded', 'false');
+      expect(expandButton).toHaveAttribute(
+        'aria-controls',
+        expect.stringContaining('expandable-tile-interactive')
+      );
 
       await userEvent.click(expandButton);
 
       expect(onClick).toHaveBeenCalled();
-      expect(tile).toHaveAttribute('aria-expanded', 'true');
       expect(expandButton).toHaveAttribute('aria-expanded', 'true');
     });
   });
@@ -337,13 +341,17 @@ describe('Tile', () => {
 
       expect(tile.nodeName).not.toBe('BUTTON');
       expect(tile).toContainElement(expandButton);
-      expect(tile).toHaveAttribute('aria-expanded', 'false');
+      expect(tile).not.toHaveAttribute('aria-expanded');
+
       expect(expandButton).toHaveAttribute('aria-expanded', 'false');
+      expect(expandButton).toHaveAttribute(
+        'aria-controls',
+        expect.stringContaining('expandable-tile-interactive')
+      );
 
       await userEvent.click(expandButton);
 
       expect(onClick).toHaveBeenCalled();
-      expect(tile).toHaveAttribute('aria-expanded', 'true');
       expect(expandButton).toHaveAttribute('aria-expanded', 'true');
     });
   });
