@@ -659,7 +659,6 @@ FilterableMultiSelect.propTypes = {
 };
 
 FilterableMultiSelect.defaultProps = {
-  ['aria-label']: 'Choose an item',
   compareItems: defaultCompareItems,
   direction: 'bottom',
   disabled: false,
