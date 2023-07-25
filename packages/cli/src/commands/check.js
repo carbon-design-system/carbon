@@ -21,6 +21,12 @@ async function check({ glob: pattern, ignore = [], list = false }) {
   logger.info(`Running in: ${cwd}`);
   logger.info(`Checking pattern: '${pattern}', ignoring: '${ignore}'`);
 
+  // fast-glob's ignore option only accepts an array of strings, not a string
+  // See: https://github.com/mrmlnc/fast-glob/issues/404#issuecomment-1624832288
+  if (typeof ignore === 'string') {
+    ignore = [ignore];
+  }
+
   const files = await glob(pattern, {
     cwd,
     ignore,
