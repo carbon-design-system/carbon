@@ -27,7 +27,6 @@ import { FormContext } from '../FluidForm';
 
 const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
   {
-    ['aria-label']: ariaLabel,
     className: containerClassName,
     compareItems,
     direction,
@@ -347,14 +346,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
               },
             });
 
-            const menuProps = getMenuProps(
-              {
-                'aria-label': ariaLabel,
-              },
-              {
-                suppressRefError: true,
-              }
-            );
+            const menuProps = getMenuProps({}, { suppressRefError: true });
 
             const handleFocus = (evt) => {
               if (
