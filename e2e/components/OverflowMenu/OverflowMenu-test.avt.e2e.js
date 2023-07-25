@@ -48,7 +48,7 @@ test.describe('OverflowMenu @avt', () => {
     const toggleButton = page.getByRole('button');
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Enter');
-    await expect(toggleButton).toHaveClass(/cds--overflow-menu--open/);
+    await expect(page.getByRole('menu')).toBeVisible();
 
     await expect(page).toHaveNoACViolations('OverflowMenu-open');
   });
@@ -68,7 +68,7 @@ test.describe('OverflowMenu @avt', () => {
     const toggleButton = page.getByRole('button');
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Enter');
-    await expect(toggleButton).toHaveClass(/cds--overflow-menu--open/);
+    await expect(page.getByRole('menu')).toBeVisible();
 
     await expect(page).toHaveNoACViolations('OverflowMenu-custom-icon-open');
   });
