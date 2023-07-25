@@ -16,7 +16,7 @@ export default {
   title: 'Components/MultiSelect',
   component: MultiSelect,
   subcomponents: {
-    'MultiSelect.Filterable': MultiSelect.Filterable,
+    FilterableMultiSelect,
   },
   argTypes: {
     size: {
