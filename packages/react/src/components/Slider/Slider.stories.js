@@ -118,6 +118,15 @@ export const Playground = (args) => (
 );
 
 Playground.argTypes = {
+  ariaLabelInput: {
+    control: { type: 'text' },
+  },
+  ariaLabelInputLower: {
+    control: { type: 'text' },
+  },
+  ariaLabelInputUpper: {
+    control: { type: 'text' },
+  },
   light: {
     table: {
       disable: true,
@@ -171,6 +180,15 @@ Playground.argTypes = {
   max: {
     control: { type: 'number' },
   },
+  name: {
+    control: { type: 'text' },
+  },
+  nameLower: {
+    control: { type: 'text' },
+  },
+  nameUpper: {
+    control: { type: 'text' },
+  },
   readOnly: {
     control: {
       type: 'boolean',
@@ -188,6 +206,12 @@ Playground.argTypes = {
     control: { type: 'number' },
   },
   value: {
+    control: { type: 'number' },
+  },
+  valueLower: {
+    control: { type: 'number' },
+  },
+  valueUpper: {
     control: { type: 'number' },
   },
   onBlur: {
@@ -233,7 +257,10 @@ Playground.args = {
   required: false,
   step: 5,
   stepMultiplier: 5,
+  twoHandles: false,
   value: 50,
+  valueLower: 10,
+  valueUpper: 90,
   warn: false,
   warnText: 'Warning message goes here',
 };
