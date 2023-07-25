@@ -96,6 +96,8 @@ export const ControlledSliderWithLayer = () => {
 
 export const TwoHandleSlider = () => (
   <Slider
+    ariaLabelLower="Lower bound"
+    ariaLabelUpper="Upper bound"
     labelText="Slider Label"
     valueLower={10}
     valueUpper={90}
@@ -121,10 +123,10 @@ Playground.argTypes = {
   ariaLabelInput: {
     control: { type: 'text' },
   },
-  ariaLabelInputLower: {
+  ariaLabelLower: {
     control: { type: 'text' },
   },
-  ariaLabelInputUpper: {
+  ariaLabelUpper: {
     control: { type: 'text' },
   },
   light: {
@@ -247,6 +249,8 @@ Playground.argTypes = {
 };
 
 Playground.args = {
+  ariaLabelLower: 'Lower bound',
+  ariaLabelUpper: 'Upper bound',
   disabled: false,
   hideTextInput: false,
   invalid: false,

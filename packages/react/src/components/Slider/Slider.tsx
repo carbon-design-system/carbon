@@ -57,14 +57,14 @@ export interface SliderProps
   ariaLabelInput?: string;
 
   /**
-   * The `ariaLabel` for the lower bound `<input>` when twoHandles is set.
+   * The `ariaLabel` for the lower bound `<input>` and handle when twoHandles is set.
    */
-  ariaLabelInputLower?: string;
+  ariaLabelLower?: string;
 
   /**
-   * The `ariaLabel` for the upper bound `<input>` when twoHandles is set.
+   * The `ariaLabel` for the upper bound `<input>` and handle when twoHandles is set.
    */
-  ariaLabelInputUpper?: string;
+  ariaLabelUpper?: string;
 
   /**
    * The child nodes.
@@ -263,14 +263,15 @@ export default class Slider extends PureComponent<SliderProps> {
     ariaLabelInput: PropTypes.string,
 
     /**
-     * The `ariaLabel` for the lower bound `<input>` when twoHandles is set.
+     * The `ariaLabel` for the lower bound `<input>` and handle when twoHandles
+     * is set.
      */
-    ariaLabelInputLower: PropTypes.string,
+    ariaLabelLower: PropTypes.string,
 
     /**
-     * The `ariaLabel` for the upper bound `<input>` when twoHandles is set.
+     * The `ariaLabel` for the upper bound `<input>` and when twoHandles is set.
      */
-    ariaLabelInputUpper: PropTypes.string,
+    ariaLabelUpper: PropTypes.string,
 
     /**
      * The child nodes.
@@ -1025,8 +1026,8 @@ export default class Slider extends PureComponent<SliderProps> {
   render() {
     const {
       ariaLabelInput,
-      ariaLabelInputLower,
-      ariaLabelInputUpper,
+      ariaLabelLower,
+      ariaLabelUpper,
       className,
       hideTextInput,
       id = (this.inputId =
@@ -1101,7 +1102,10 @@ export default class Slider extends PureComponent<SliderProps> {
 
           return (
             <div className={classNames(`${prefix}--form-item`, className)}>
-              <label htmlFor={id} className={labelClasses} id={labelId}>
+              <label
+                htmlFor={twoHandles ? undefined : id}
+                className={labelClasses}
+                id={labelId}>
                 {labelText}
               </label>
               <div className={`${prefix}--slider-container`}>
@@ -1112,10 +1116,7 @@ export default class Slider extends PureComponent<SliderProps> {
                     name={nameLower}
                     className={lowerInputClasses}
                     value={valueLower}
-                    aria-labelledby={!ariaLabelInputLower ? labelId : undefined}
-                    aria-label={
-                      ariaLabelInputLower ? ariaLabelInputLower : undefined
-                    }
+                    aria-label={ariaLabelLower}
                     disabled={disabled}
                     required={required}
                     min={min}
@@ -1151,12 +1152,13 @@ export default class Slider extends PureComponent<SliderProps> {
                   <div
                     className={`${prefix}--slider__thumb ${prefix}--slider__thumb--lower`}
                     role="slider"
-                    id={id}
+                    id={twoHandles ? undefined : id}
                     tabIndex={!readOnly ? 0 : -1}
                     aria-valuemax={twoHandles ? valueUpper : max}
                     aria-valuemin={min}
                     aria-valuenow={twoHandles ? valueLower : value}
-                    aria-labelledby={labelId}
+                    aria-labelledby={twoHandles ? undefined : labelId}
+                    aria-label={twoHandles ? ariaLabelLower : undefined}
                     ref={twoHandles ? this.thumbRefLower : this.thumbRef}
                     onFocus={() =>
                       this.setState({ activeHandle: HandlePosition.LOWER })
@@ -1166,12 +1168,11 @@ export default class Slider extends PureComponent<SliderProps> {
                     <div
                       className={`${prefix}--slider__thumb ${prefix}--slider__thumb--upper`}
                       role="slider"
-                      id={id}
                       tabIndex={!readOnly ? 0 : -1}
                       aria-valuemax={max}
                       aria-valuemin={valueLower}
                       aria-valuenow={valueUpper}
-                      aria-labelledby={labelId}
+                      aria-label={ariaLabelUpper}
                       ref={this.thumbRefUpper}
                       onFocus={() =>
                         this.setState({ activeHandle: HandlePosition.UPPER })
@@ -1199,14 +1200,11 @@ export default class Slider extends PureComponent<SliderProps> {
                   className={twoHandles ? upperInputClasses : inputClasses}
                   value={twoHandles ? valueUpper : value}
                   aria-labelledby={
-                    (twoHandles && !ariaLabelInputUpper) ||
-                    (!twoHandles && !ariaLabelInput)
-                      ? labelId
-                      : undefined
+                    !ariaLabelInput && !twoHandles ? labelId : undefined
                   }
                   aria-label={
-                    twoHandles && ariaLabelInputUpper
-                      ? ariaLabelInputUpper
+                    twoHandles
+                      ? ariaLabelUpper
                       : ariaLabelInput
                       ? ariaLabelInput
                       : undefined
