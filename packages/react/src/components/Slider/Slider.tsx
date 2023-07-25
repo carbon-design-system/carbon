@@ -37,6 +37,9 @@ const DRAG_EVENT_TYPES = new Set(['mousemove', 'touchmove']);
  */
 const DRAG_STOP_EVENT_TYPES = new Set(['mouseup', 'touchend', 'touchcancel']);
 
+/**
+ * When twoHandles prop is set, we're in range slider mode with two handles.
+ */
 enum HandlePosition {
   LOWER = 'lower',
   UPPER = 'upper',
@@ -144,8 +147,14 @@ export interface SliderProps
    */
   name?: string;
 
+  /**
+   * The `name` attribute of the lower bound `<input>` when twoHandles is set.
+   */
   nameLower?: string;
 
+  /**
+   * The `name` attribute of the upper bound `<input>` when twoHandles is set.
+   */
   nameUpper?: string;
 
   /**
@@ -202,8 +211,14 @@ export interface SliderProps
    */
   value: number;
 
+  /**
+   * The lower bound value when twoHandles in set.
+   */
   valueLower?: number;
 
+  /**
+   * The upper bound value when twoHandles in set.
+   */
   valueUpper?: number;
 
   /**
@@ -330,8 +345,14 @@ export default class Slider extends PureComponent<SliderProps> {
      */
     name: PropTypes.string,
 
+    /**
+     * The `name` attribute of the lower bound `<input>` when twoHandles is set.
+     */
     nameLower: PropTypes.string,
 
+    /**
+     * The `name` attribute of the upper bound `<input>` when twoHandles is set.
+     */
     nameUpper: PropTypes.string,
 
     /**
@@ -376,6 +397,9 @@ export default class Slider extends PureComponent<SliderProps> {
      */
     stepMultiplier: PropTypes.number,
 
+    /**
+     * Turn the slider into a range slider.
+     */
     twoHandles: PropTypes.bool,
 
     /**
@@ -383,8 +407,14 @@ export default class Slider extends PureComponent<SliderProps> {
      */
     value: PropTypes.number.isRequired,
 
+    /**
+     * The lower bound value when twoHandles in set.
+     */
     valueLower: PropTypes.number,
 
+    /**
+     * The upper bound value when twoHandles in set.
+     */
     valueUpper: PropTypes.number,
 
     /**
@@ -881,7 +911,7 @@ export default class Slider extends PureComponent<SliderProps> {
     return { value: steppedValue, left: steppedPercent * 100 };
   };
 
-  calcDistanceToHandle(handle: HandlePosition, clientX) {
+  calcDistanceToHandle = (handle: HandlePosition, clientX) => {
     // left is a whole value between 0 and 100.
     const left =
       handle === HandlePosition.LOWER
@@ -890,16 +920,36 @@ export default class Slider extends PureComponent<SliderProps> {
     const boundingRect = this.getSliderBoundingRect();
     const handleX = boundingRect.left + (left / 100) * boundingRect.width;
     return Math.abs(handleX - clientX);
-  }
+  };
 
-  calcValueForDelta(currentValue, delta, step = Slider.defaultProps.step) {
+  /**
+   * Given the current value, delta and step, calculate the new value.
+   *
+   * @param {number} currentValue
+   *   Current value user is moving from.
+   * @param {number} delta
+   *   Movement from the current value. Can be positive or negative.
+   * @param {number} step
+   *   A value determining how much the value should increase/decrease by moving
+   *   the thumb by mouse.
+   */
+  calcValueForDelta = (
+    currentValue,
+    delta,
+    step = Slider.defaultProps.step
+  ) => {
     return (
       (delta > 0 ? Math.floor(currentValue / step) * step : currentValue) +
       delta
     );
-  }
+  };
 
-  setStateForHandle(handle: HandlePosition, { value, left }) {
+  /**
+   * Sets state relevant to the given handle position.
+   *
+   * Guards against setting either lower or upper values beyond its counterpart.
+   */
+  setStateForHandle = (handle: HandlePosition, { value, left }) => {
     const { valueLower, valueUpper, leftLower, leftUpper } = this.state;
     if (handle === HandlePosition.LOWER) {
       // Don't allow higher than the upper handle.
@@ -915,12 +965,17 @@ export default class Slider extends PureComponent<SliderProps> {
         isValid: true,
       });
     }
-  }
+  };
 
-  getSliderBoundingRect() {
+  /**
+   * Get the bounding rect for the slider DOM element.
+   *
+   * If the bounding rect is not available, a new, empty DOMRect is returned.
+   */
+  getSliderBoundingRect = (): DOMRect => {
     const boundingRect = this.element?.getBoundingClientRect();
     return boundingRect ?? new DOMRect();
-  }
+  };
 
   // syncs invalid state and prop
   static getDerivedStateFromProps(props, state) {
