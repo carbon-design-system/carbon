@@ -48,6 +48,7 @@ export const ControlledSlider = () => {
         randomize value
       </button>
       <Slider
+        labelText="Slider label"
         max={100}
         min={0}
         value={val}
@@ -82,6 +83,7 @@ export const ControlledSliderWithLayer = () => {
         randomize value
       </button>
       <Slider
+        labelText="Slider label"
         max={100}
         min={0}
         value={val}
