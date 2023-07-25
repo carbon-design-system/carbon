@@ -64,4 +64,54 @@ test.describe('RadioButton @avt', () => {
     await expect(page.getByText('Invalid selection')).toBeVisible();
     await expect(page).toHaveNoACViolations('RadioButton-invalid');
   });
+
+  test('accessibility-checker - warn state', async ({ page }) => {
+    await visitStory(page, {
+      component: 'RadioButton',
+      id: 'components-radiobutton--playground',
+      globals: {
+        theme: 'white',
+      },
+      args: {
+        warn: 'true',
+        warnText: 'Please notice the warning',
+      },
+    });
+
+    await expect(page.getByText('Please notice the warning')).toBeVisible();
+    await expect(page).toHaveNoACViolations('RadioButton-warn');
+  });
+
+  test('accessibility-checker - disabled state', async ({ page }) => {
+    await visitStory(page, {
+      component: 'RadioButton',
+      id: 'components-radiobutton--playground',
+      globals: {
+        theme: 'white',
+      },
+      args: {
+        disabled: 'true',
+      },
+    });
+
+    await expect(page.locator('input#radio-1')).toBeDisabled();
+    await expect(page).toHaveNoACViolations('RadioButton-disabled');
+  });
+
+  test('accessibility-checker - read only state', async ({ page }) => {
+    await visitStory(page, {
+      component: 'RadioButton',
+      id: 'components-radiobutton--playground',
+      globals: {
+        theme: 'white',
+      },
+      args: {
+        readOnly: 'true',
+      },
+    });
+
+    const inputElement = await page.locator('input#radio-1').isChecked();
+    expect(inputElement).toBeFalsy();
+    await expect(page).toHaveNoACViolations('RadioButton-read-only');
+  });
 });
