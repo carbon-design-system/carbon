@@ -7,12 +7,13 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 import Link, { LinkPropTypes } from './Link';
 import SideNavIcon from './SideNavIcon';
 import SideNavItem from './SideNavItem';
 import SideNavLinkText from './SideNavLinkText';
 import { usePrefix } from '../../internal/usePrefix';
+import { SideNavContext } from './SideNav';
 
 const SideNavLink = React.forwardRef(function SideNavLink(
   {
@@ -21,13 +22,14 @@ const SideNavLink = React.forwardRef(function SideNavLink(
     renderIcon: IconElement,
     isActive,
     isSideNavExpanded,
-    isRail,
     large = false,
     tabIndex,
     ...rest
   },
   ref
 ) {
+  const isRail = useContext(SideNavContext);
+
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--side-nav__link`]: true,
@@ -77,11 +79,6 @@ SideNavLink.propTypes = {
    * Specify whether the link is the current page
    */
   isActive: PropTypes.bool,
-
-  /**
-   * Optional prop to display the side nav rail.
-   */
-  isRail: PropTypes.bool,
 
   /**
    * Property to indicate if the side nav container is open (or not). Use to

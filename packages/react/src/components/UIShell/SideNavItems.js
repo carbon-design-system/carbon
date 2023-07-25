@@ -15,7 +15,6 @@ const SideNavItems = ({
   className: customClassName,
   children,
   isSideNavExpanded,
-  isRail,
 }) => {
   const prefix = usePrefix();
   const className = cx([`${prefix}--side-nav__items`], customClassName);
@@ -26,7 +25,6 @@ const SideNavItems = ({
         ...(CARBON_SIDENAV_ITEMS.includes(child.type?.displayName)
           ? {
               isSideNavExpanded,
-              isRail,
             }
           : {}),
       });
@@ -47,11 +45,6 @@ SideNavItems.propTypes = {
    * Provide an optional class to be applied to the containing node
    */
   className: PropTypes.string,
-
-  /**
-   * Optional prop to display the side nav rail.
-   */
-  isRail: PropTypes.bool,
 
   /**
    * Property to indicate if the side nav container is open (or not). Use to

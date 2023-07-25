@@ -8,10 +8,11 @@
 import { ChevronDown } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import SideNavIcon from './SideNavIcon';
 import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
+import { SideNavContext } from './SideNav';
 
 const SideNavMenu = React.forwardRef(function SideNavMenu(props, ref) {
   const {
@@ -22,10 +23,10 @@ const SideNavMenu = React.forwardRef(function SideNavMenu(props, ref) {
     large = false,
     renderIcon: IconElement,
     isSideNavExpanded,
-    isRail,
     tabIndex,
     title,
   } = props;
+  const isRail = useContext(SideNavContext);
   const prefix = usePrefix();
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
   const [prevExpanded, setPrevExpanded] = useState(defaultExpanded);
@@ -110,11 +111,6 @@ SideNavMenu.propTypes = {
    * page.
    */
   isActive: PropTypes.bool,
-
-  /**
-   * Optional prop to display the side nav rail.
-   */
-  isRail: PropTypes.bool,
 
   /**
    * Property to indicate if the side nav container is open (or not). Use to

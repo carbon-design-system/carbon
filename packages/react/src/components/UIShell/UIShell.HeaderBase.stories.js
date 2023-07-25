@@ -204,9 +204,7 @@ export const HeaderWNavigation = () => (
             aria-label="Side navigation"
             expanded={isSideNavExpanded}
             isPersistent={false}
-            onSideNavBlur={onClickSideNavExpand}
-            inert={isSideNavExpanded ? false : -1} // With the `inert` prop you can disable the navigation from all children elements
-          >
+            onSideNavBlur={onClickSideNavExpand}>
             <SideNavItems>
               <HeaderSideNavItems>
                 <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
@@ -278,9 +276,7 @@ export const HeaderWNavigationAndActions = () => (
             aria-label="Side navigation"
             expanded={isSideNavExpanded}
             isPersistent={false}
-            onSideNavBlur={onClickSideNavExpand}
-            inert={isSideNavExpanded ? false : -1} // With the `inert` prop you can disable the navigation from all children elements
-          >
+            onSideNavBlur={onClickSideNavExpand}>
             <SideNavItems>
               <HeaderSideNavItems>
                 <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
@@ -350,9 +346,7 @@ export const HeaderWNavigationActionsAndSideNav = () => (
             aria-label="Side navigation"
             expanded={isSideNavExpanded}
             onSideNavBlur={onClickSideNavExpand}
-            href="#main-content"
-            inert={isSideNavExpanded ? false : -1} // With the `inert` prop you can disable the navigation from all children elements
-          >
+            href="#main-content">
             <SideNavItems>
               <HeaderSideNavItems hasDivider={true}>
                 <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
@@ -443,9 +437,7 @@ export const HeaderWSideNav = () => (
             aria-label="Side navigation"
             expanded={isSideNavExpanded}
             onSideNavBlur={onClickSideNavExpand}
-            href="#main-content"
-            inert={isSideNavExpanded ? false : -1} // With the `inert` prop you can disable the navigation from all children elements
-          >
+            href="#main-content">
             <SideNavItems>
               <SideNavMenu renderIcon={Fade} title="Category title">
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">

@@ -12,6 +12,7 @@ import React, {
   type KeyboardEvent,
   type MouseEventHandler,
   isValidElement,
+  createContext,
 } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -44,7 +45,16 @@ interface SideNavProps extends ComponentProps<'nav'> {
   onOverlayClick?: MouseEventHandler<HTMLDivElement> | undefined;
   onSideNavBlur?: () => void | undefined;
   enterDelayMs?: number;
+  inert?: boolean;
 }
+
+interface SideNavContextData {
+  isRail?: boolean | undefined;
+}
+
+export const SideNavContext = createContext<SideNavContextData>(
+  {} as SideNavContextData
+);
 
 function SideNavRenderFunction(
   {
@@ -216,7 +226,7 @@ function SideNavRenderFunction(
   });
 
   return (
-    <>
+    <SideNavContext.Provider value={{ isRail }}>
       {isFixedNav ? null : (
         // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
         <div className={overlayClassName} onClick={onOverlayClick} />
@@ -225,12 +235,13 @@ function SideNavRenderFunction(
         tabIndex={-1}
         ref={navRef}
         className={`${prefix}--side-nav__navigation ${className}`}
+        inert={!isRail && (expanded ? undefined : -1)}
         {...accessibilityLabel}
         {...eventHandlers}
         {...other}>
         {childrenToRender}
       </nav>
-    </>
+    </SideNavContext.Provider>
   );
 }
 
