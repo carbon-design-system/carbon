@@ -1232,6 +1232,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "haocheng6",
+      "name": "Hao Cheng",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7645930?v=4",
+      "profile": "https://github.com/haocheng6",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
