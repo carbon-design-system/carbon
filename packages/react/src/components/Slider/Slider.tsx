@@ -161,7 +161,10 @@ export interface SliderProps
    * Provide an optional function to be called when the input element
    * loses focus
    */
-  onBlur?: (data: { value: string }) => void;
+  onBlur?: (data: {
+    value: string;
+    handlePosition: HandlePosition | undefined;
+  }) => void;
 
   /**
    * The callback to get notified of change in value.
@@ -834,7 +837,12 @@ export default class Slider extends PureComponent<SliderProps> {
     const { value } = evt.target;
 
     this.setState({ isValid: validity });
-    this.props.onBlur?.({ value });
+    this.props.onBlur?.({
+      value,
+      handlePosition: evt.target?.dataset?.handlePosition as
+        | HandlePosition
+        | undefined,
+    });
   };
 
   calcLeftPercent = ({ clientX, value, range }: CalcLeftPercentProps) => {
