@@ -841,9 +841,27 @@ export default class Slider extends PureComponent<SliderProps> {
       return;
     }
 
-    // determine validity of input change after clicking out of input
-    const validity = evt.target.checkValidity();
+    // Determine validity of input change after clicking out of input.
+    let validity = evt.target.checkValidity();
     const { value } = evt.target;
+
+    // If twoHandles is set, we'll also have the data-handle-position attribute
+    // to consider the other value before settling on the validity to set.
+    const handlePosition = evt.target?.dataset?.handlePosition as
+      | HandlePosition
+      | undefined;
+    if (
+      (handlePosition === HandlePosition.LOWER &&
+        this.state.valueUpper &&
+        (this.state.valueUpper < +value ||
+          this.state.valueUpper > this.props.max)) ||
+      (handlePosition === HandlePosition.UPPER &&
+        this.state.valueLower &&
+        (this.state.valueLower > +value ||
+          this.state.valueLower < this.props.min))
+    ) {
+      validity = false;
+    }
 
     this.setState({ isValid: validity });
     this.props.onBlur?.({
