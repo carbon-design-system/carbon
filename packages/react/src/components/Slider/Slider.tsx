@@ -168,7 +168,11 @@ export interface SliderProps
    * `({ value}) => void`
   //  * @param {{ value }}
    */
-  onChange?: (data: { value: SliderProps['value'] }) => void;
+  onChange?: (data: {
+    value: SliderProps['value'];
+    valueLower: SliderProps['valueLower'];
+    valueUpper: SliderProps['valueUpper'];
+  }) => void;
 
   /**
    * Provide an optional function to be called when a key is pressed in the number input
@@ -207,9 +211,9 @@ export interface SliderProps
   twoHandles?: boolean;
 
   /**
-   * The value.
+   * The single value when twoHandles is not set.
    */
-  value: number;
+  value?: number;
 
   /**
    * The lower bound value when twoHandles in set.
@@ -533,10 +537,16 @@ export default class Slider extends PureComponent<SliderProps> {
       }
     }
     if (
-      prevState.value !== this.state.value &&
+      (prevState.value !== this.state.value ||
+        prevState.valueLower !== this.state.valueLower ||
+        prevState.valueUpper !== this.state.valueUpper) &&
       typeof this.props.onChange === 'function'
     ) {
-      this.props.onChange({ value: this.state.value });
+      this.props.onChange({
+        value: this.state.value,
+        valueLower: this.state.valueLower,
+        valueUpper: this.state.valueUpper,
+      });
     }
 
     // Fire onRelease event handler if present and if needed
