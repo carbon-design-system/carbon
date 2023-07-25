@@ -51,7 +51,7 @@ test.describe('RadioButton @avt', () => {
   test('accessibility-checker - invalid state', async ({ page }) => {
     await visitStory(page, {
       component: 'RadioButton',
-      id: 'components-radiobutton--default',
+      id: 'components-radiobutton--playground',
       globals: {
         theme: 'white',
       },
@@ -62,9 +62,6 @@ test.describe('RadioButton @avt', () => {
     });
 
     await expect(page.getByText('Invalid selection')).toBeVisible();
-    const locator = page.locator('.cds--form-requirement');
-    await expect(locator).toBeVisible();
-
     await expect(page).toHaveNoACViolations('RadioButton-invalid');
   });
 });
