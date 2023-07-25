@@ -271,7 +271,7 @@ export interface TabListProps extends DivAttributes {
   /**
    * Provide the props that describe the left overflow button
    */
-  leftOverflowButtonProps: HTMLAttributes<HTMLButtonElement>;
+  leftOverflowButtonProps?: HTMLAttributes<HTMLButtonElement>;
 
   /**
    * Specify whether to use the light component variant
@@ -281,7 +281,7 @@ export interface TabListProps extends DivAttributes {
   /**
    * Provide the props that describe the right overflow button
    */
-  rightOverflowButtonProps: HTMLAttributes<HTMLButtonElement>;
+  rightOverflowButtonProps?: HTMLAttributes<HTMLButtonElement>;
 
   /**
    * Optionally provide a delay (in milliseconds) passed to the lodash
@@ -1199,11 +1199,17 @@ export interface TabPanelsProps {
 }
 
 function TabPanels({ children }: TabPanelsProps) {
-  return React.Children.map(children, (child, index) => {
-    return (
-      <TabPanelContext.Provider value={index}>{child}</TabPanelContext.Provider>
-    );
-  });
+  return (
+    <>
+      {React.Children.map(children, (child, index) => {
+        return (
+          <TabPanelContext.Provider value={index}>
+            {child}
+          </TabPanelContext.Provider>
+        );
+      })}
+    </>
+  );
 }
 
 TabPanels.propTypes = {
