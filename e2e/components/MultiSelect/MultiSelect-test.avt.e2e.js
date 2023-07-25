@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('MultiSelect @avt', () => {
-  test('accessibility-checker', async ({ page }) => {
+  test('accessibility-checker multiselect', async ({ page }) => {
     await visitStory(page, {
       component: 'MultiSelect',
       id: 'components-multiselect--default',
@@ -20,6 +20,42 @@ test.describe('MultiSelect @avt', () => {
       },
     });
     await expect(page).toHaveNoACViolations('MultiSelect');
+  });
+
+  test('accessibility-checker filterable multiselect', async ({ page }) => {
+    await visitStory(page, {
+      component: 'FilterableMultiSelect',
+      id: 'components-multiselect--filterable',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('FilterableMultiSelect');
+  });
+
+  // Skipping now due to AVT violation, possible false positive
+  test.skip('accessibility-checker open filterable multiselect', async ({
+    page,
+  }) => {
+    await visitStory(page, {
+      component: 'FilterableMultiSelect',
+      id: 'components-multiselect--filterable',
+      globals: {
+        theme: 'white',
+      },
+    });
+    const toggleButton = page.getByRole('button');
+    const menu = page.getByRole('listbox');
+
+    await expect(toggleButton).toBeVisible();
+    // Tab and open the MultiSelect
+    await page.keyboard.press('Tab');
+    await expect(toggleButton).toBeFocused();
+    await page.keyboard.press('Enter');
+    await expect(page.getByRole('combobox', { expanded: true })).toBeVisible;
+    await expect(menu).toBeFocused();
+
+    await expect(page).toHaveNoACViolations('MultiSelect-open');
   });
 
   // Skipping now due to AVT violation, possible false positive
@@ -136,7 +172,7 @@ test.describe('MultiSelect @avt', () => {
 
   test('filterable multiselect - keyboard nav', async ({ page }) => {
     await visitStory(page, {
-      component: 'MultiSelect',
+      component: 'FilterableMultiSelect',
       id: 'components-multiselect--filterable',
       globals: {
         theme: 'white',

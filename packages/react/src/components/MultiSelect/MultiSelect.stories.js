@@ -16,7 +16,7 @@ export default {
   title: 'Components/MultiSelect',
   component: MultiSelect,
   subcomponents: {
-    'MultiSelect.Filterable': MultiSelect.Filterable,
+    FilterableMultiSelect,
   },
   argTypes: {
     size: {
@@ -254,6 +254,7 @@ export const _Filterable = () => {
   return (
     <div style={{ width: 300 }}>
       <FilterableMultiSelect
+        aria-label="test"
         id="carbon-multiselect-example-3"
         titleText="Multiselect title"
         helperText="This is helper text"
