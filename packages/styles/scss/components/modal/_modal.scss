@@ -67,6 +67,11 @@
       background-color: $field-02;
     }
 
+    // Override to align layer token with field
+    .#{$prefix}--list-box__menu {
+      background-color: $layer-02;
+    }
+
     .#{$prefix}--number__rule-divider {
       background-color: $border-subtle-02;
     }
@@ -104,6 +109,11 @@
       .c#{$prefix}ds--date-picker-input__wrapper
       .#{$prefix}--date-picker__input {
       background-color: $field-01;
+    }
+
+    // Override to align layer token with field
+    .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__menu {
+      background-color: $layer-01;
     }
 
     .#{$prefix}--number-input--fluid
