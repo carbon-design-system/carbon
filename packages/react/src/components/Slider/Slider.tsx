@@ -178,14 +178,18 @@ export interface SliderProps
   }) => void;
 
   /**
-   * Provide an optional function to be called when a key is pressed in the number input
+   * Provide an optional function to be called when a key is pressed in the number input. When twoHandles is set, you can obtain the relevant handle position by using `event.target.dataset.handlePosition`.
    */
   onInputKeyUp?: KeyboardEventHandler<HTMLInputElement>;
 
   /**
    * The callback to get notified of value on handle release.
    */
-  onRelease?: (data: { value: SliderProps['value'] }) => void;
+  onRelease?: (data: {
+    value: SliderProps['value'];
+    valueLower: SliderProps['valueLower'];
+    valueUpper: SliderProps['valueUpper'];
+  }) => void;
 
   /**
    * Whether the slider should be read-only
@@ -557,7 +561,11 @@ export default class Slider extends PureComponent<SliderProps> {
       this.state.needsOnRelease &&
       typeof this.props.onRelease === 'function'
     ) {
-      this.props.onRelease({ value: this.state.value });
+      this.props.onRelease({
+        value: this.state.value,
+        valueLower: this.state.valueLower,
+        valueUpper: this.state.valueUpper,
+      });
       // Reset the flag
       this.setState({ needsOnRelease: false });
     }
