@@ -1097,7 +1097,7 @@ export default class Slider extends PureComponent<SliderProps> {
             `${prefix}--text-input`,
             `${prefix}--slider-text-input`,
           ];
-          const conditionalClasses = {
+          const conditionalInputClasses = {
             [`${prefix}--text-input--light`]: light,
             [`${prefix}--text-input--invalid`]: !readOnly && isValid === false,
             [`${prefix}--slider-text-input--hidden`]: hideTextInput,
@@ -1105,17 +1105,25 @@ export default class Slider extends PureComponent<SliderProps> {
           };
           const inputClasses = classNames(
             fixedInputClasses,
-            conditionalClasses
+            conditionalInputClasses
           );
           const lowerInputClasses = classNames([
             ...fixedInputClasses,
             `${prefix}--slider-text-input--lower`,
-            conditionalClasses,
+            conditionalInputClasses,
           ]);
           const upperInputClasses = classNames([
             ...fixedInputClasses,
             `${prefix}--slider-text-input--upper`,
-            conditionalClasses,
+            conditionalInputClasses,
+          ]);
+          const lowerInputWrapperClasses = classNames([
+            `${prefix}--text-input-wrapper`,
+            `${prefix}--text-input-wrapper--lower`,
+          ]);
+          const upperInputWrapperClasses = classNames([
+            `${prefix}--text-input-wrapper`,
+            `${prefix}--text-input-wrapper--upper`,
           ]);
 
           return (
@@ -1128,28 +1136,41 @@ export default class Slider extends PureComponent<SliderProps> {
               </label>
               <div className={`${prefix}--slider-container`}>
                 {twoHandles ? (
-                  <input
-                    type={hideTextInput ? 'hidden' : inputType}
-                    id={`${id}-lower-input-for-slider`}
-                    name={nameLower}
-                    className={lowerInputClasses}
-                    value={valueLower}
-                    aria-label={ariaLabelLower}
-                    disabled={disabled}
-                    required={required}
-                    min={min}
-                    max={max}
-                    step={step}
-                    onChange={this.onChange}
-                    onBlur={this.onBlur}
-                    onKeyUp={this.props.onInputKeyUp}
-                    data-invalid={!isValid && !readOnly ? true : null}
-                    data-handle-position={
-                      twoHandles ? HandlePosition.LOWER : null
-                    }
-                    aria-invalid={!isValid && !readOnly ? true : undefined}
-                    readOnly={readOnly}
-                  />
+                  <div className={lowerInputWrapperClasses}>
+                    <input
+                      type={hideTextInput ? 'hidden' : inputType}
+                      id={`${id}-lower-input-for-slider`}
+                      name={nameLower}
+                      className={lowerInputClasses}
+                      value={valueLower}
+                      aria-label={ariaLabelLower}
+                      disabled={disabled}
+                      required={required}
+                      min={min}
+                      max={max}
+                      step={step}
+                      onChange={this.onChange}
+                      onBlur={this.onBlur}
+                      onKeyUp={this.props.onInputKeyUp}
+                      data-invalid={!isValid && !readOnly ? true : null}
+                      data-handle-position={
+                        twoHandles ? HandlePosition.LOWER : null
+                      }
+                      aria-invalid={!isValid && !readOnly ? true : undefined}
+                      readOnly={readOnly}
+                    />
+                    {!readOnly && isValid === false && (
+                      <WarningFilled
+                        className={`${prefix}--slider__invalid-icon`}
+                      />
+                    )}
+
+                    {!readOnly && warn && isValid && (
+                      <WarningAltFilled
+                        className={`${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`}
+                      />
+                    )}
+                  </div>
                 ) : null}
                 <span className={`${prefix}--slider__range-label`}>
                   {formatLabel(min, minLabel)}
@@ -1211,48 +1232,51 @@ export default class Slider extends PureComponent<SliderProps> {
                 <span className={`${prefix}--slider__range-label`}>
                   {formatLabel(max, maxLabel)}
                 </span>
-                <input
-                  type={hideTextInput ? 'hidden' : inputType}
-                  id={`${id}-${twoHandles ? 'upper-' : ''}input-for-slider`}
-                  name={twoHandles ? nameUpper : name}
-                  className={twoHandles ? upperInputClasses : inputClasses}
-                  value={twoHandles ? valueUpper : value}
-                  aria-labelledby={
-                    !ariaLabelInput && !twoHandles ? labelId : undefined
-                  }
-                  aria-label={
-                    twoHandles
-                      ? ariaLabelUpper
-                      : ariaLabelInput
-                      ? ariaLabelInput
-                      : undefined
-                  }
-                  disabled={disabled}
-                  required={required}
-                  min={min}
-                  max={max}
-                  step={step}
-                  onChange={this.onChange}
-                  onBlur={this.onBlur}
-                  onKeyUp={this.props.onInputKeyUp}
-                  data-invalid={!isValid && !readOnly ? true : null}
-                  data-handle-position={
-                    twoHandles ? HandlePosition.UPPER : null
-                  }
-                  aria-invalid={!isValid && !readOnly ? true : undefined}
-                  readOnly={readOnly}
-                />
-                {!readOnly && isValid === false && (
-                  <WarningFilled
-                    className={`${prefix}--slider__invalid-icon`}
-                  />
-                )}
 
-                {!readOnly && warn && isValid && (
-                  <WarningAltFilled
-                    className={`${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`}
+                <div className={upperInputWrapperClasses}>
+                  <input
+                    type={hideTextInput ? 'hidden' : inputType}
+                    id={`${id}-${twoHandles ? 'upper-' : ''}input-for-slider`}
+                    name={twoHandles ? nameUpper : name}
+                    className={twoHandles ? upperInputClasses : inputClasses}
+                    value={twoHandles ? valueUpper : value}
+                    aria-labelledby={
+                      !ariaLabelInput && !twoHandles ? labelId : undefined
+                    }
+                    aria-label={
+                      twoHandles
+                        ? ariaLabelUpper
+                        : ariaLabelInput
+                        ? ariaLabelInput
+                        : undefined
+                    }
+                    disabled={disabled}
+                    required={required}
+                    min={min}
+                    max={max}
+                    step={step}
+                    onChange={this.onChange}
+                    onBlur={this.onBlur}
+                    onKeyUp={this.props.onInputKeyUp}
+                    data-invalid={!isValid && !readOnly ? true : null}
+                    data-handle-position={
+                      twoHandles ? HandlePosition.UPPER : null
+                    }
+                    aria-invalid={!isValid && !readOnly ? true : undefined}
+                    readOnly={readOnly}
                   />
-                )}
+                  {!readOnly && isValid === false && (
+                    <WarningFilled
+                      className={`${prefix}--slider__invalid-icon`}
+                    />
+                  )}
+
+                  {!readOnly && warn && isValid && (
+                    <WarningAltFilled
+                      className={`${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`}
+                    />
+                  )}
+                </div>
               </div>
               {!readOnly && isValid === false && (
                 <div

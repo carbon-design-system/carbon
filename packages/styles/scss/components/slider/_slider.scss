@@ -117,6 +117,10 @@
     display: none;
   }
 
+  .#{$prefix}--text-input-wrapper {
+    position: relative;
+  }
+
   .#{$prefix}--slider-text-input,
   .#{$prefix}-slider-text-input {
     width: rem(64px);
@@ -157,7 +161,6 @@
     display: block;
     overflow: visible;
     max-height: 100%;
-    margin-top: 0;
   }
 
   .#{$prefix}--slider__validation-msg--invalid {
