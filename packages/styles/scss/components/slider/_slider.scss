@@ -374,11 +374,20 @@
     pointer-events: none;
   }
 
-  .#{$prefix}--slider-container.#{$prefix}--skeleton
+  .#{$prefix}--slider-container.#{$prefix}--skeleton {
     .#{$prefix}--slider__thumb {
-    left: 50%;
-    cursor: default;
-    pointer-events: none;
+      left: 50%;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .#{$prefix}--slider__thumb--lower {
+      left: 0;
+    }
+
+    .#{$prefix}--slider__thumb--upper {
+      left: 100%;
+    }
   }
 
   // Windows HCM fix

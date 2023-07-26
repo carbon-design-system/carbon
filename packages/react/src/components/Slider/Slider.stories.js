@@ -113,6 +113,8 @@ export const TwoHandleSlider = () => (
 
 export const Skeleton = () => <SliderSkeleton />;
 
+export const TwoHandleSkeleton = () => <SliderSkeleton twoHandles={true} />;
+
 export const Playground = (args) => (
   <Slider
     {...args}
