@@ -195,7 +195,7 @@ function Tooltip<T extends React.ElementType>({
           : null}
       </div>
       <PopoverContent
-        aria-hidden={open ? 'true' : 'false'}
+        aria-hidden={open ? 'false' : 'true'}
         className={`${prefix}--tooltip-content`}
         id={id}
         ref={tooltipRef}
