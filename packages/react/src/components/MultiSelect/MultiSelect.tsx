@@ -311,7 +311,7 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
   const { current: multiSelectInstanceId } = useRef(getInstanceId());
-  const [highlightedIndex, setHighlightedIndex] = useState();
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const [isFocused, setIsFocused] = useState(false);
   const [inputFocused, setInputFocused] = useState(false);
   const [isOpen, setIsOpen] = useState(open || false);
@@ -336,6 +336,7 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
     selectedItem,
   } = useSelect<ItemType>({
     ...downshiftProps,
+    highlightedIndex,
     isOpen,
     itemToString: (items) => {
       return (
