@@ -97,19 +97,20 @@ const ModalStateManager = ({
 };
 ```
 
+{/* <!-- prettier-ignore-start --> */}
+
 <Unstyled>
   <InlineNotification
     title="Warning"
     kind="warning"
     className="sb-notification">
-    <CodeSnippet type="inline" hideCopyButton>
-      {'<Modal>'}
-    </CodeSnippet>
-    /<CodeSnippet type="inline" hideCopyButton>{`<ComposedModal>`}</CodeSnippet>{' '}
+    <CodeSnippet type="inline" hideCopyButton>{'<Modal>'}</CodeSnippet>
+    <CodeSnippet type="inline" hideCopyButton>{`<ComposedModal>`}</CodeSnippet>{' '}
     has to be put at the top level in a React tree. The easiest way to ensure
     that is using React portal as shown in above example.
   </InlineNotification>
 </Unstyled>
+{/* <!-- prettier-ignore-end --> */}
 
 ## Modal sizes
 
@@ -210,24 +211,23 @@ With `<ComposedModal>`, you can control the buttons with the following code.
 </ComposedModal>
 ```
 
+{/* <!-- prettier-ignore-start --> */}
+
 <Unstyled>
   <InlineNotification
     title="Warning"
     kind="warning"
     className="sb-notification">
     As the instruction for the three buttons implies,{' '}
-    <CodeSnippet type="inline" hideCopyButton>
-      {'<ModalFooter>'}
-    </CodeSnippet>
-    is flexible on the buttons as you render <CodeSnippet
-      type="inline"
-      hideCopyButton>
-      {'<Button>'}
-    </CodeSnippet>s by yourself, as shown below. In this case, the application code
+    <CodeSnippet type="inline" hideCopyButton>{'<ModalFooter>'}</CodeSnippet>
+    is flexible on the buttons as you render 
+    <CodeSnippet type="inline" hideCopyButton>{'<Button>'}</CodeSnippet>
+    s by yourself, as shown below. In this case, the application code
     needs to take care of running actions upon clicking those buttons, e.g. closing
     the modal:
   </InlineNotification>
 </Unstyled>
+{/* <!-- prettier-ignore-end --> */}
 
 ```jsx
 <ComposedModal>
