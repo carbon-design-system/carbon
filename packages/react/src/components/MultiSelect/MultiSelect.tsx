@@ -581,7 +581,7 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
             />
           </button>
         </div>
-        <ListBox.Menu aria-multiselectable="true" {...getMenuProps()}>
+        <ListBox.Menu {...getMenuProps()}>
           {isOpen &&
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             sortItems!(items, sortOptions as SortItemsOptions<ItemType>).map(

@@ -467,7 +467,6 @@ const Dropdown = React.forwardRef(
           <button
             type="button"
             // aria-expanded is already being passed through {...toggleButtonProps}
-            aria-owns={getMenuProps().id}
             className={`${prefix}--list-box__field`}
             disabled={disabled}
             aria-disabled={readOnly ? true : undefined} // aria-disabled to remain focusable
