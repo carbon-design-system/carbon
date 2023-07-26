@@ -1125,6 +1125,12 @@ export default class Slider extends PureComponent<SliderProps> {
             `${prefix}--text-input-wrapper`,
             `${prefix}--text-input-wrapper--upper`,
           ]);
+          const lowerThumbClasses = classNames(`${prefix}--slider__thumb`, {
+            [`${prefix}--slider__thumb--lower`]: twoHandles,
+          });
+          const upperThumbClasses = classNames(`${prefix}--slider__thumb`, {
+            [`${prefix}--slider__thumb--upper`]: twoHandles,
+          });
 
           return (
             <div className={classNames(`${prefix}--form-item`, className)}>
@@ -1189,7 +1195,7 @@ export default class Slider extends PureComponent<SliderProps> {
                   data-invalid={!isValid && !readOnly ? true : null}
                   {...other}>
                   <div
-                    className={`${prefix}--slider__thumb ${prefix}--slider__thumb--lower`}
+                    className={lowerThumbClasses}
                     role="slider"
                     id={twoHandles ? undefined : id}
                     tabIndex={!readOnly ? 0 : -1}
@@ -1205,7 +1211,7 @@ export default class Slider extends PureComponent<SliderProps> {
                   />
                   {twoHandles ? (
                     <div
-                      className={`${prefix}--slider__thumb ${prefix}--slider__thumb--upper`}
+                      className={upperThumbClasses}
                       role="slider"
                       tabIndex={!readOnly ? 0 : -1}
                       aria-valuemax={max}

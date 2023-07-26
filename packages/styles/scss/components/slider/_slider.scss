@@ -113,6 +113,112 @@
     }
   }
 
+  .#{$prefix}--slider__thumb--lower,
+  .#{$prefix}--slider__thumb--upper {
+    display: flex;
+    width: 12px;
+    height: 24px;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $background;
+    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+    border-radius: unset;
+    box-shadow: none;
+    transform: translate(-50%, -50%);
+    transition: none;
+
+    &::before {
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-left: 10px solid $layer-selected-inverse;
+      content: '';
+    }
+
+    &::after {
+      display: block;
+      width: 1px;
+      height: 12px;
+      background-color: $layer-selected-inverse;
+      content: '';
+    }
+
+    &:hover {
+      transform: translate(-50%, -50%);
+
+      &::before {
+        border-left-color: $text-secondary;
+      }
+
+      &::after {
+        background-color: $text-secondary;
+      }
+    }
+
+    &:active {
+      box-shadow: none;
+      transform: translate(-50%, -50%);
+
+      &::before {
+        border-left-color: $interactive;
+      }
+
+      &::after {
+        background-color: $interactive;
+      }
+    }
+
+    &:focus {
+      width: 16px;
+      justify-content: space-around;
+      border: 1px solid $interactive;
+      background-color: $background;
+      box-shadow: none;
+      transform: translate(calc(-50% - 2px), -50%);
+
+      &::before {
+        border-left-color: $interactive;
+        transform: translate(1px, 0);
+      }
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  .#{$prefix}--slider__thumb--upper {
+    flex-direction: row-reverse;
+
+    &::before {
+      border-right: 10px solid $layer-selected-inverse;
+      border-left: none;
+    }
+
+    &:hover {
+      &::before {
+        border-right-color: $text-secondary;
+      }
+    }
+
+    &:active {
+      &::before {
+        border-right-color: $interactive;
+      }
+    }
+
+    &:focus {
+      transform: translate(calc(-50% + 2px), -50%);
+
+      &::before {
+        border-right-color: $interactive;
+        transform: translate(-1px, 0);
+      }
+    }
+  }
+
   .#{$prefix}--slider__input {
     display: none;
   }
