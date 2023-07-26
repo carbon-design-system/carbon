@@ -41,6 +41,7 @@ module.exports = {
   },
 
   features: {
+    buildStoriesJson: true,
     previewCsfV3: true,
   },
 
