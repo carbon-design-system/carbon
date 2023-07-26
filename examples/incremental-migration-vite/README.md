@@ -19,5 +19,7 @@ yarn dev
 npm run dev
 ```
 
+This example takes a little bit of time to first start.
+
 Open [http://localhost:5173](http://localhost:5173) with your browser to see the
 result.
