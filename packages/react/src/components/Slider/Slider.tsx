@@ -415,9 +415,9 @@ export default class Slider extends PureComponent<SliderProps> {
     twoHandles: PropTypes.bool,
 
     /**
-     * The value.
+     * The single value for the slider when twoHandles is unset.
      */
-    value: PropTypes.number.isRequired,
+    value: PropTypes.number,
 
     /**
      * The lower bound value when twoHandles in set.
@@ -1076,6 +1076,8 @@ export default class Slider extends PureComponent<SliderProps> {
 
     delete other.onRelease;
     delete other.invalid;
+    delete other.valueLower;
+    delete other.valueUpper;
 
     const { value, valueLower, valueUpper, isValid } = this.state;
 
