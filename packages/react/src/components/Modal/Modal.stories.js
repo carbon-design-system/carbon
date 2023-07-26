@@ -6,7 +6,6 @@
  */
 
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import { action } from '@storybook/addon-actions';
 import Modal from './Modal';
 import Button from '../Button';
@@ -356,58 +355,61 @@ Playground.argTypes = {
 };
 
 export const WithStateManager = () => {
-  /**
-   * Simple state manager for modals.
-   */
-  const ModalStateManager = ({
-    renderLauncher: LauncherContent,
-    children: ModalContent,
-  }) => {
-    const [open, setOpen] = useState(false);
-    return (
-      <>
-        {!ModalContent || typeof document === 'undefined'
-          ? null
-          : ReactDOM.createPortal(
-              <ModalContent open={open} setOpen={setOpen} />,
-              document.body
-            )}
-        {LauncherContent && <LauncherContent open={open} setOpen={setOpen} />}
-      </>
-    );
-  };
+  const [open, setOpen] = useState(false);
   return (
-    <ModalStateManager
-      renderLauncher={({ setOpen }) => (
-        <Button onClick={() => setOpen(true)}>Launch modal</Button>
-      )}>
-      {({ open, setOpen }) => (
+    <div>
+      <Modal
+        modalHeading="Add a custom domain"
+        modalLabel="Account resources"
+        primaryButtonText="Add"
+        secondaryButtonText="Cancel"
+        open={open}
+        onRequestClose={() => setOpen(false)}>
+        <p style={{ marginBottom: '1rem' }}>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+          placeholder="e.g. github.com"
+          style={{ marginBottom: '1rem' }}
+        />
+        <Select id="select-1" defaultValue="us-south" labelText="Region">
+          <SelectItem value="us-south" text="US South" />
+          <SelectItem value="us-east" text="US East" />
+        </Select>
+      </Modal>
+      <Button onClick={() => setOpen(true)}>Launch modal</Button>
+    </div>
+  );
+};
+
+export const Nested = () => {
+  const [open1, setOpen1] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  return (
+    <div>
+      <Modal
+        id="modal1"
+        modalHeading="Modal One"
+        passiveModal
+        open={open1}
+        onRequestClose={() => setOpen1(false)}>
         <Modal
-          modalHeading="Add a custom domain"
-          modalLabel="Account resources"
-          primaryButtonText="Add"
-          secondaryButtonText="Cancel"
-          open={open}
-          onRequestClose={() => setOpen(false)}>
-          <p style={{ marginBottom: '1rem' }}>
-            Custom domains direct requests for your apps in this Cloud Foundry
-            organization to a URL that you own. A custom domain can be a shared
-            domain, a shared subdomain, or a shared domain and host.
-          </p>
-          <TextInput
-            data-modal-primary-focus
-            id="text-input-1"
-            labelText="Domain name"
-            placeholder="e.g. github.com"
-            style={{ marginBottom: '1rem' }}
-          />
-          <Select id="select-1" defaultValue="us-south" labelText="Region">
-            <SelectItem value="us-south" text="US South" />
-            <SelectItem value="us-east" text="US East" />
-          </Select>
+          id="modal2"
+          modalHeading="Modal Two"
+          passiveModal
+          open={open2}
+          onRequestClose={() => setOpen2(false)}>
+          <p>The second modal</p>
         </Modal>
-      )}
-    </ModalStateManager>
+        <Button onClick={() => setOpen2(true)}>Launch nested modal</Button>
+      </Modal>
+      <Button onClick={() => setOpen1(true)}>Launch modal</Button>
+    </div>
   );
 };
 

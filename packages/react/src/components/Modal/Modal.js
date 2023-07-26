@@ -19,6 +19,7 @@ import wrapFocus, {
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
+import { Portal } from '../Portal';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -283,32 +284,38 @@ const Modal = React.forwardRef(function Modal(
   );
 
   return (
-    <div
-      {...rest}
-      onKeyDown={handleKeyDown}
-      onMouseDown={handleMousedown}
-      onBlur={handleBlur}
-      className={modalClasses}
-      role="presentation"
-      ref={ref}>
-      {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-      <span
-        ref={startTrap}
-        tabIndex="0"
-        role="link"
-        className={`${prefix}--visually-hidden`}>
-        Focus sentinel
-      </span>
-      {modalBody}
-      {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-      <span
-        ref={endTrap}
-        tabIndex="0"
-        role="link"
-        className={`${prefix}--visually-hidden`}>
-        Focus sentinel
-      </span>
-    </div>
+    <Portal>
+      <div
+        {...rest}
+        className={modalClasses}
+        ref={ref}
+        role="presentation"
+        onKeyDown={handleKeyDown}>
+        <div
+          className={`${prefix}--modal-background`}
+          onMouseDown={handleMousedown}
+          onBlur={handleBlur}
+          aria-hidden
+        />
+        {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
+        <span
+          ref={startTrap}
+          tabIndex="0"
+          role="link"
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </span>
+        {modalBody}
+        {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
+        <span
+          ref={endTrap}
+          tabIndex="0"
+          role="link"
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </span>
+      </div>
+    </Portal>
   );
 });
 
