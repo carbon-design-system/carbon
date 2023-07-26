@@ -477,23 +477,12 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
       case ToggleButtonBlur:
       case ToggleButtonKeyDownEscape:
         setIsOpenWrapper(false);
-        setHighlightedIndex(changes.highlightedIndex);
         break;
       case ToggleButtonClick:
         setIsOpenWrapper(changes.isOpen || false);
-        setHighlightedIndex(changes.highlightedIndex);
         break;
     }
   }
-
-  // const onKeyDown = (e) => {
-  //   if (!disabled) {
-  //     if (match(e, keys.Delete) || match(e, keys.Escape)) {
-  //       clearSelection();
-  //       e.stopPropagation();
-  //     }
-  //   }
-  // };
 
   const multiSelectFieldWrapperClasses = cx(
     `${prefix}--list-box__field--wrapper`,
@@ -605,7 +594,7 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
                   item,
                   // we don't want Downshift to set aria-selected for us
                   // we also don't want to set 'false' for reader verbosity's sake
-                  ['aria-selected']: isChecked ? true : undefined,
+                  ['aria-selected']: isChecked,
                 });
                 const itemText = itemToString(item);
 
