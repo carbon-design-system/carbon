@@ -6,6 +6,8 @@ on:
   pull_request:
     branches:
       - main
+  merge_group:
+    types: [checks_requested]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -138,7 +140,8 @@ jobs:
       - name: Build project
         run: yarn build
       - name: Build storybook
-        run: yarn workspace @carbon/react build-storybook
+        run:
+          STORYBOOK_STORE_7=false yarn workspace @carbon/react storybook:build
       - name: Run storybook
         id: storybook
         run: |
@@ -148,7 +151,7 @@ jobs:
       - uses: ./actions/wait-for-it
         with:
           URL: 'http://localhost:3000'
-        timeout-minutes: 1
+        timeout-minutes: 3
       - name: Run VRT
         if: github.repository == 'carbon-design-system/carbon'
         env:
@@ -196,7 +199,8 @@ jobs:
       - name: Build project
         run: yarn build
       - name: Build storybook
-        run: yarn workspace @carbon/react build-storybook
+        run:
+          STORYBOOK_STORE_7=false yarn workspace @carbon/react storybook:build
       - name: Run storybook
         id: storybook
         run: |
@@ -206,7 +210,7 @@ jobs:
       - uses: ./actions/wait-for-it
         with:
           URL: 'http://localhost:3000'
-        timeout-minutes: 1
+        timeout-minutes: 3
       - name: Run AVT
         if: github.repository == 'carbon-design-system/carbon'
         run: |

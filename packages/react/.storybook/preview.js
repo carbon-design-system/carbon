@@ -4,6 +4,14 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+  Stories,
+} from '@storybook/blocks';
 
 import './styles.scss';
 import '../src/feature-flags';
@@ -18,11 +26,10 @@ import theme from './theme';
 
 const devTools = {
   layoutSize: {
-    name: 'unstable__Layout size',
     description: "Set the layout context's size",
     defaultValue: false,
     toolbar: {
-      showName: true,
+      title: 'unstable__Layout size',
       items: [
         {
           value: false,
@@ -38,11 +45,10 @@ const devTools = {
     },
   },
   layoutDensity: {
-    name: 'unstable__Layout density',
     description: "Set the layout context's density",
     defaultValue: false,
     toolbar: {
-      showName: true,
+      title: 'unstable__Layout density',
       items: [
         {
           value: false,
@@ -55,7 +61,7 @@ const devTools = {
   },
 };
 
-export const globalTypes = {
+const globalTypes = {
   locale: {
     name: 'Locale',
     description: 'Set the localization for the storybook',
@@ -88,7 +94,7 @@ export const globalTypes = {
   ...(process.env.NODE_ENV === 'development' ? devTools : {}),
 };
 
-export const parameters = {
+const parameters = {
   backgrounds: {
     // https://storybook.js.org/docs/react/essentials/backgrounds#grid
     grid: {
@@ -131,6 +137,16 @@ export const parameters = {
   },
   docs: {
     theme,
+    page: () => (
+      <>
+        <Title />
+        <Subtitle />
+        <Description />
+        <Primary />
+        <ArgsTable />
+        <Stories includePrimary={false} />
+      </>
+    ),
   },
   // Small (<672)
   // Medium (672 - 1056px)
@@ -178,37 +194,53 @@ export const parameters = {
   },
   options: {
     storySort: (storyA, storyB) => {
-      // By default, sort by the story "kind". The "kind" refers to the
-      // top-level title of the story, either through Component Story Format
-      // with the default export, or the `storiesOf('kind', module)` format
-      if (storyA[1].kind !== storyB[1].kind) {
-        return storyA[1].kind.localeCompare(storyB[1].kind);
+      const isUsingV6Store = process.env.STORYBOOK_STORE_7 === 'false';
+
+      const idA = isUsingV6Store ? storyA[1].id : storyA.id;
+      const idB = isUsingV6Store ? storyB[1].id : storyB.id;
+      const titleA = isUsingV6Store ? storyA[1].title : storyA.title;
+      const titleB = isUsingV6Store ? storyB[1].title : storyB.title;
+
+      if (idA.includes('welcome')) {
+        return -1;
+      }
+      if (idB.includes('welcome')) {
+        return 1;
       }
 
-      const idA = storyA[0];
-      const idB = storyB[0];
+      // By default, sort by the top-level title of the story
+      if (titleA !== titleB) {
+        if (idA.includes('overview') && !idB.includes('overview')) {
+          return -1;
+        }
+        if (idB.includes('overview') && !idA.includes('overview')) {
+          return 1;
+        }
+        return titleA.localeCompare(titleB);
+      }
 
-      // To story the stories, we first build up a list of matches based on
+      // To sort the stories, we first build up a list of matches based on
       // keywords. Each keyword has a specific weight that will be used to
       // determine order later on.
-      const UNKNOWN_KEYWORD = 3;
+      const UNKNOWN_KEYWORD = 4;
       const keywords = new Map([
         ['welcome', 0],
-        ['default', 1],
-        ['usage', 2],
-        ['playground', 4],
-        ['development', 5],
-        ['deprecated', 6],
-        ['unstable', 7],
+        ['overview', 1],
+        ['default', 2],
+        ['usage', 3],
+        ['playground', 5],
+        ['development', 6],
+        ['deprecated', 7],
+        ['unstable', 8],
       ]);
       const matches = new Map();
 
       // We use this list of keywords to determine a collection of matches. By
       // default, we will look for the greatest valued matched
       for (const [keyword, weight] of keywords) {
-        // If we already have a match for a given id that is greater than the
+        // If we already have a match for a given id that is lesser than the
         // specific keyword we're looking for, break early
-        if (matches.get(idA) > weight || matches.get(idB) > weight) {
+        if (matches.get(idA) < weight || matches.get(idB) < weight) {
           break;
         }
 
@@ -243,7 +275,7 @@ export const parameters = {
   },
 };
 
-export const decorators = [
+const decorators = [
   (Story, context) => {
     const { layoutDensity, layoutSize, locale, theme } = context.globals;
 
@@ -264,3 +296,11 @@ export const decorators = [
     );
   },
 ];
+
+const preview = {
+  parameters,
+  decorators,
+  globalTypes,
+};
+
+export default preview;

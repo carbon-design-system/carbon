@@ -158,7 +158,7 @@ export const WithExpandableSearch = () => {
       kind="on-page"
       action={
         <ExpandableSearch
-          placeholder="Search"
+          placeholder="Filterable search"
           value={searchTerm}
           onChange={handleChange}
           closeButtonLabelText="Clear search input"
@@ -196,7 +196,7 @@ export const WithPersistentSearch = () => {
   return (
     <ContainedList label="List title" kind="on-page" action={''}>
       <Search
-        placeholder="Search"
+        placeholder="Filterable search"
         value={searchTerm}
         onChange={handleChange}
         closeButtonLabelText="Clear search input"
@@ -248,7 +248,9 @@ export const WithListTitleDecorators = () => (
           justifyContent: 'space-between',
         }}>
         <span>List title</span>
-        <Tag size="sm">4</Tag>
+        <Tag size="sm" role="status" aria-label="4 items in list">
+          4
+        </Tag>
       </div>
     }
     kind="on-page">
@@ -361,14 +363,8 @@ const PlaygroundStory = (args) => (
 
 export const Playground = PlaygroundStory.bind({});
 
-Playground.argTypes = {
-  label: {
-    defaultValue: 'List title',
-  },
-  kind: {
-    defaultValue: 'on-page',
-  },
-  size: {
-    defaultValue: 'lg',
-  },
+Playground.args = {
+  label: 'List title',
+  kind: 'on-page',
+  size: 'lg',
 };

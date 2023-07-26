@@ -3457,7 +3457,6 @@ Map {
   "FilterableMultiSelect" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "aria-label": "Choose an item",
       "compareItems": [Function],
       "direction": "bottom",
       "disabled": false,
@@ -3470,9 +3469,7 @@ Map {
       "sortItems": [Function],
     },
     "propTypes": Object {
-      "aria-label": Object {
-        "type": "string",
-      },
+      "aria-label": [Function],
       "ariaLabel": [Function],
       "compareItems": Object {
         "isRequired": true,
@@ -3935,6 +3932,9 @@ Map {
       "isActive": Object {
         "type": "bool",
       },
+      "isCollapsible": Object {
+        "type": "bool",
+      },
       "onClick": Object {
         "type": "func",
       },
@@ -3971,9 +3971,6 @@ Map {
     "render": [Function],
   },
   "HeaderName" => Object {
-    "defaultProps": Object {
-      "prefix": "IBM",
-    },
     "propTypes": Object {
       "as": Object {
         "type": "elementType",
@@ -5029,7 +5026,6 @@ Map {
     "Filterable": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "aria-label": "Choose an item",
         "compareItems": [Function],
         "direction": "bottom",
         "disabled": false,
@@ -5042,9 +5038,7 @@ Map {
         "sortItems": [Function],
       },
       "propTypes": Object {
-        "aria-label": Object {
-          "type": "string",
-        },
+        "aria-label": [Function],
         "ariaLabel": [Function],
         "compareItems": Object {
           "isRequired": true,
@@ -8278,6 +8272,9 @@ Map {
   },
   "Tag" => Object {
     "propTypes": Object {
+      "as": Object {
+        "type": "elementType",
+      },
       "children": Object {
         "type": "node",
       },

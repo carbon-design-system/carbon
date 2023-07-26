@@ -271,7 +271,7 @@ export interface TabListProps extends DivAttributes {
   /**
    * Provide the props that describe the left overflow button
    */
-  leftOverflowButtonProps: HTMLAttributes<HTMLButtonElement>;
+  leftOverflowButtonProps?: HTMLAttributes<HTMLButtonElement>;
 
   /**
    * Specify whether to use the light component variant
@@ -281,7 +281,7 @@ export interface TabListProps extends DivAttributes {
   /**
    * Provide the props that describe the right overflow button
    */
-  rightOverflowButtonProps: HTMLAttributes<HTMLButtonElement>;
+  rightOverflowButtonProps?: HTMLAttributes<HTMLButtonElement>;
 
   /**
    * Optionally provide a delay (in milliseconds) passed to the lodash
@@ -348,7 +348,8 @@ function TabList({
       [`${prefix}--tabs--contained`]: contained,
       [`${prefix}--tabs--light`]: light,
       [`${prefix}--tabs__icon--default`]: iconSize === 'default',
-      [`${prefix}--tabs__icon--lg`]: iconSize === 'lg',
+      [`${prefix}--tabs__icon--lg`]: iconSize === 'lg', // TODO: V12 - Remove this class
+      [`${prefix}--layout--size-lg`]: iconSize === 'lg',
       [`${prefix}--tabs--tall`]: hasSecondaryLabelTabs,
       [`${prefix}--tabs--full-width`]: distributeWidth,
     },
@@ -1198,11 +1199,17 @@ export interface TabPanelsProps {
 }
 
 function TabPanels({ children }: TabPanelsProps) {
-  return React.Children.map(children, (child, index) => {
-    return (
-      <TabPanelContext.Provider value={index}>{child}</TabPanelContext.Provider>
-    );
-  });
+  return (
+    <>
+      {React.Children.map(children, (child, index) => {
+        return (
+          <TabPanelContext.Provider value={index}>
+            {child}
+          </TabPanelContext.Provider>
+        );
+      })}
+    </>
+  );
 }
 
 TabPanels.propTypes = {

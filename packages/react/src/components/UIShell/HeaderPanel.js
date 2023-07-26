@@ -46,7 +46,7 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
     eventHandlers.onBlur = (event) => {
       if (
         !event.currentTarget.contains(event.relatedTarget) &&
-        !lastClickedElement.classList.contains('cds--switcher__item-link')
+        !lastClickedElement?.classList?.contains('cds--switcher__item-link')
       ) {
         setExpandedState(false);
         setLastClickedElement(null);
@@ -71,7 +71,7 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
     setLastClickedElement(focusedElement);
 
     if (
-      children.type.__docgenInfo.displayName === 'Switcher' &&
+      children.type?.displayName === 'Switcher' &&
       !focusedElement?.closest(`.${prefix}--header-panel--expanded`) &&
       !focusedElement?.closest(`.${prefix}--header__action`) &&
       !headerPanelRef?.current?.classList.contains(`${prefix}--switcher`) &&

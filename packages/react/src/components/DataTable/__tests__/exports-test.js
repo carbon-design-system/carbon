@@ -21,7 +21,7 @@ const blocklist = new Set([
   'DataTable-story.js',
   '__tests__',
   '__mocks__',
-  'DataTable.js',
+  'DataTable.tsx',
   'DataTable.mdx',
   'stories',
   'next',

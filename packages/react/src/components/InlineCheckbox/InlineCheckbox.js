@@ -65,12 +65,14 @@ const InlineCheckbox = React.forwardRef(function InlineCheckbox(
         <label
           htmlFor={id}
           className={`${prefix}--checkbox-label`}
-          aria-label={deprecatedAriaLabel || ariaLabel}
           title={title}
           onClick={(evt) => {
             evt.stopPropagation();
-          }}
-        />
+          }}>
+          <span className={`${prefix}--visually-hidden`}>
+            {deprecatedAriaLabel || ariaLabel}
+          </span>
+        </label>
       }
     </div>
   );

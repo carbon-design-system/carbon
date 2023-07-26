@@ -5,16 +5,18 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../button/tokens' as button-tokens;
 @use '../../config' as *;
+@use '../../layer' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
-@use '../button/tokens' as button-tokens;
 @use '../../utilities/box-shadow' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/z-index' as *;
 @use '../../utilities/convert' as *;
+@use '../../utilities/component-reset';
 
 /// Menu styles
 /// @access public
@@ -23,6 +25,7 @@
   // Menu
 
   .#{$prefix}--menu {
+    @include component-reset.reset;
     @include box-shadow;
 
     position: fixed;
@@ -108,6 +111,11 @@
 
   .#{$prefix}--menu-item__shortcut {
     display: flex;
+  }
+
+  .#{$prefix}--menu-item-group > ul,
+  .#{$prefix}--menu-item-radio-group > ul {
+    @include component-reset.reset;
   }
 
   .#{$prefix}--menu--with-icons > .#{$prefix}--menu-item,

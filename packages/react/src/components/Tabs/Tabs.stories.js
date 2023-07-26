@@ -313,7 +313,7 @@ export const Icon20Only = () => (
 
 export const IconOnly = () => (
   <Tabs>
-    <TabList iconSize="default" aria-label="List of tabs">
+    <TabList aria-label="List of tabs">
       <IconTab label="Monster" disabled>
         <Monster aria-label="Monster" />
       </IconTab>
@@ -555,6 +555,12 @@ export const Playground = ({ dismissable, ...args }) => (
   </Tabs>
 );
 
+Playground.args = {
+  contained: false,
+  dismissable: false,
+  scrollDebounceWait: 200,
+};
+
 Playground.argTypes = {
   automatic: {
     control: { type: 'select' },
@@ -564,13 +570,11 @@ Playground.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   dismissable: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   iconSize: {
     control: { type: 'select' },
@@ -590,7 +594,6 @@ Playground.argTypes = {
     control: {
       type: 'number',
     },
-    defaultValue: 200,
   },
   scrollIntoView: {
     control: {
