@@ -3471,6 +3471,8 @@ Map {
   "FilterableMultiSelect" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
+      "clearSelectionDescription": "Total items selected: ",
+      "clearSelectionText": "To clear selection, press Delete or Backspace,",
       "compareItems": [Function],
       "direction": "bottom",
       "disabled": false,
@@ -3485,6 +3487,12 @@ Map {
     "propTypes": Object {
       "aria-label": [Function],
       "ariaLabel": [Function],
+      "clearSelectionDescription": Object {
+        "type": "string",
+      },
+      "clearSelectionText": Object {
+        "type": "string",
+      },
       "compareItems": Object {
         "isRequired": true,
         "type": "func",
@@ -5054,6 +5062,8 @@ Map {
     "Filterable": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
+        "clearSelectionDescription": "Total items selected: ",
+        "clearSelectionText": "To clear selection, press Delete or Backspace,",
         "compareItems": [Function],
         "direction": "bottom",
         "disabled": false,
@@ -5068,6 +5078,12 @@ Map {
       "propTypes": Object {
         "aria-label": [Function],
         "ariaLabel": [Function],
+        "clearSelectionDescription": Object {
+          "type": "string",
+        },
+        "clearSelectionText": Object {
+          "type": "string",
+        },
         "compareItems": Object {
           "isRequired": true,
           "type": "func",
