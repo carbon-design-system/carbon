@@ -124,7 +124,7 @@
     /* stylelint-disable-next-line declaration-property-value-disallowed-list */
     border-radius: unset;
     box-shadow: none;
-    transform: translate(-50%, -50%);
+    transform: translate(-100%, -50%);
     transition: none;
 
     &::before {
@@ -146,7 +146,7 @@
     }
 
     &:hover {
-      transform: translate(-50%, -50%);
+      transform: translate(-100%, -50%);
 
       &::before {
         border-left-color: $text-secondary;
@@ -159,7 +159,7 @@
 
     &:active {
       box-shadow: none;
-      transform: translate(-50%, -50%);
+      transform: translate(-100%, -50%);
 
       &::before {
         border-left-color: $interactive;
@@ -176,7 +176,7 @@
       border: 1px solid $interactive;
       background-color: $background;
       box-shadow: none;
-      transform: translate(calc(-50% - 2px), -50%);
+      transform: translate(-100%, -50%);
 
       &::before {
         border-left-color: $interactive;
@@ -191,6 +191,7 @@
 
   .#{$prefix}--slider__thumb--upper {
     flex-direction: row-reverse;
+    transform: translate(0, -50%);
 
     &::before {
       border-right: 10px solid $layer-selected-inverse;
@@ -198,19 +199,23 @@
     }
 
     &:hover {
+      transform: translate(0, -50%);
+
       &::before {
         border-right-color: $text-secondary;
       }
     }
 
     &:active {
+      transform: translate(0, -50%);
+
       &::before {
         border-right-color: $interactive;
       }
     }
 
     &:focus {
-      transform: translate(calc(-50% + 2px), -50%);
+      transform: translate(0, -50%);
 
       &::before {
         border-right-color: $interactive;
