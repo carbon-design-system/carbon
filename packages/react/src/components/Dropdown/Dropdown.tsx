@@ -414,11 +414,6 @@ const Dropdown = React.forwardRef(
               (isTyping && evt.code === 'Space') ||
               !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
             ) {
-              if (evt.code === 'Space') {
-                evt.preventDefault();
-                return;
-              }
-
               if (currTimer) {
                 clearTimeout(currTimer);
               }

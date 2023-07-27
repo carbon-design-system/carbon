@@ -40,6 +40,7 @@ const {
   ToggleButtonBlur,
   ToggleButtonKeyDownArrowDown,
   ToggleButtonKeyDownArrowUp,
+  ToggleButtonKeyDownEnter,
   ToggleButtonKeyDownEscape,
   ToggleButtonKeyDownSpaceButton,
   ToggleButtonClick,
@@ -465,6 +466,7 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
     switch (type) {
       case ItemClick:
       case ToggleButtonKeyDownSpaceButton:
+      case ToggleButtonKeyDownEnter:
         if (changes.selectedItem === undefined) {
           break;
         }

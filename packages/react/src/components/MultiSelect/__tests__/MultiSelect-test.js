@@ -188,7 +188,7 @@ describe('MultiSelect', () => {
     ).toBeFalsy();
   });
 
-  it('should not toggle selection with enter', async () => {
+  it('should toggle selection with enter', async () => {
     const items = generateItems(4, generateGenericItem);
     const label = 'test-label';
     const { container } = render(
@@ -207,7 +207,7 @@ describe('MultiSelect', () => {
     await userEvent.keyboard('[ArrowDown]');
     await userEvent.keyboard('[Enter]');
 
-    expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'false');
+    expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'true');
   });
 
   it('should clear selected items when the user clicks the clear selection button', async () => {

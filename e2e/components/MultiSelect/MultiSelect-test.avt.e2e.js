@@ -122,7 +122,14 @@ test.describe('MultiSelect @avt', () => {
     ).toHaveClass(
       'cds--list-box__menu-item cds--list-box__menu-item--highlighted'
     );
-    // select first option (should only select with space bar)
+    // select first option (should select with enter and space)
+    await page.keyboard.press('Enter');
+    await expect(
+      page.getByRole('option', {
+        name: 'An example option that is really long to show what should be done to handle long text',
+        selected: true,
+      })
+    ).toBeVisible();
     await page.keyboard.press('Enter');
     await expect(
       page.getByRole('option', {
