@@ -47,6 +47,8 @@ const {
   ToggleButtonKeyDownArrowDown,
   ToggleButtonKeyDownArrowUp,
   ToggleButtonKeyDownEscape,
+  ToggleButtonKeyDownHome,
+  ToggleButtonKeyDownEnd,
   ToggleButtonClick,
 } = useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
   ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
@@ -280,6 +282,8 @@ const Dropdown = React.forwardRef(
       switch (type) {
         case ToggleButtonKeyDownArrowDown:
         case ToggleButtonKeyDownArrowUp:
+        case ToggleButtonKeyDownHome:
+        case ToggleButtonKeyDownEnd:
           setHighlightedIndex(changes.highlightedIndex);
           break;
         case ToggleButtonBlur:

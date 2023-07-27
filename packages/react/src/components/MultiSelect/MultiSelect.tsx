@@ -43,6 +43,8 @@ const {
   ToggleButtonKeyDownEnter,
   ToggleButtonKeyDownEscape,
   ToggleButtonKeyDownSpaceButton,
+  ToggleButtonKeyDownHome,
+  ToggleButtonKeyDownEnd,
   ToggleButtonClick,
 } = useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
   ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
@@ -372,7 +374,7 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
           e.stopPropagation();
         }
 
-        if (match(e, keys.Space) || match(e, keys.ArrowDown)) {
+        if ((match(e, keys.Space) || match(e, keys.ArrowDown)) && !isOpen) {
           setIsOpenWrapper(true);
         }
       }
@@ -474,6 +476,8 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
         break;
       case ToggleButtonKeyDownArrowDown:
       case ToggleButtonKeyDownArrowUp:
+      case ToggleButtonKeyDownHome:
+      case ToggleButtonKeyDownEnd:
         setHighlightedIndex(changes.highlightedIndex);
         break;
       case ToggleButtonBlur:
