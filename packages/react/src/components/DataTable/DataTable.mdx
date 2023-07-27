@@ -1,5 +1,12 @@
 import { Story, ArgsTable, Canvas, Meta } from '@storybook/blocks';
-import { Table, TableHead, TableHeader, TableRow, TableCell, TableBody } from '../DataTable'
+import {
+  Table,
+  TableHead,
+  TableHeader,
+  TableRow,
+  TableCell,
+  TableBody,
+} from '../DataTable';
 
 # DataTable
 
@@ -13,8 +20,8 @@ import { Table, TableHead, TableHeader, TableRow, TableCell, TableBody } from '.
   <Story id="components-datatable-basic--playground" />
 </Canvas>
 
-{/* <!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
 ## Table of Contents
 
 - [Getting started](#getting-started)
@@ -24,7 +31,7 @@ import { Table, TableHead, TableHeader, TableRow, TableCell, TableBody } from '.
 - [Expansion](#expansion)
   - [Programmatic expansion](#programmatic-expansion)
 - [Selection](#selection)
-    - [Programmatic selection](#programmatic-selection)
+  - [Programmatic selection](#programmatic-selection)
 - [Filtering](#filtering)
 - [Batch actions](#batch-actions)
 - [Toolbar](#toolbar)
@@ -292,7 +299,7 @@ _Note: press "Show code" above to view a code snippet of this example_
 ## Toolbar
 
 <Canvas>
-  <Story id="components-datatable-toolbar--playground"/>
+  <Story id="components-datatable-toolbar--playground" />
 </Canvas>
 
 ### Overflow Menu
@@ -323,60 +330,48 @@ cell.
 
 ## Text Wrapping Alignment
 
-DataTable provides an experimental `experimentalAutoAlign` prop that you may
-opt into to have the table automatically align contents to the top when at least
-one table cell content is being wrapped on the table. Keep in mind this feature
-is experimental and might not be performant in tables with large datasets.
+DataTable provides an experimental `experimentalAutoAlign` prop that you may opt
+into to have the table automatically align contents to the top when at least one
+table cell content is being wrapped on the table. Keep in mind this feature is
+experimental and might not be performant in tables with large datasets.
 
 ### Table with `experimentalAutoAlign = true`
 
-<div style={{width: '300px'}}>
+<div style={{ width: '300px' }}>
   <Table experimentalAutoAlign>
     <TableHead>
       <TableRow>
-          <TableHeader>
-            Header1
-          </TableHeader>
-          <TableHeader>
-            Header2
-          </TableHeader>
-          <TableHeader>
-            Header3
-          </TableHeader>
+        <TableHeader>Header1</TableHeader>
+        <TableHeader>Header2</TableHeader>
+        <TableHeader>Header3</TableHeader>
       </TableRow>
     </TableHead>
     <TableBody>
-        <TableRow>
-          <TableCell>Wrapping content</TableCell>
-          <TableCell>content</TableCell>
-          <TableCell>content</TableCell>
-        </TableRow>
+      <TableRow>
+        <TableCell>Wrapping content</TableCell>
+        <TableCell>content</TableCell>
+        <TableCell>content</TableCell>
+      </TableRow>
     </TableBody>
   </Table>
 </div>
 
 ```jsx
-<div style={{width: '300px'}}>
+<div style={{ width: '300px' }}>
   <Table experimentalAutoAlign>
     <TableHead>
       <TableRow>
-          <TableHeader>
-            Header1
-          </TableHeader>
-          <TableHeader>
-            Header2
-          </TableHeader>
-          <TableHeader>
-            Header3
-          </TableHeader>
+        <TableHeader>Header1</TableHeader>
+        <TableHeader>Header2</TableHeader>
+        <TableHeader>Header3</TableHeader>
       </TableRow>
     </TableHead>
     <TableBody>
-        <TableRow>
-          <TableCell>Wrapping content</TableCell>
-          <TableCell>content</TableCell>
-          <TableCell>content</TableCell>
-        </TableRow>
+      <TableRow>
+        <TableCell>Wrapping content</TableCell>
+        <TableCell>content</TableCell>
+        <TableCell>content</TableCell>
+      </TableRow>
     </TableBody>
   </Table>
 </div>
@@ -384,53 +379,41 @@ is experimental and might not be performant in tables with large datasets.
 
 ### Table with `experimentalAutoAlign = false`
 
-<div style={{width: '300px'}}>
+<div style={{ width: '300px' }}>
   <Table>
     <TableHead>
       <TableRow>
-          <TableHeader>
-            Header1
-          </TableHeader>
-          <TableHeader>
-            Header2
-          </TableHeader>
-          <TableHeader>
-            Header3
-          </TableHeader>
+        <TableHeader>Header1</TableHeader>
+        <TableHeader>Header2</TableHeader>
+        <TableHeader>Header3</TableHeader>
       </TableRow>
     </TableHead>
     <TableBody>
-        <TableRow>
-          <TableCell>Wrapping content</TableCell>
-          <TableCell>content</TableCell>
-          <TableCell>content</TableCell>
-        </TableRow>
+      <TableRow>
+        <TableCell>Wrapping content</TableCell>
+        <TableCell>content</TableCell>
+        <TableCell>content</TableCell>
+      </TableRow>
     </TableBody>
   </Table>
 </div>
 
 ```jsx
-<div style={{width: '300px'}}>
+<div style={{ width: '300px' }}>
   <Table>
     <TableHead>
       <TableRow>
-          <TableHeader>
-            Header1
-          </TableHeader>
-          <TableHeader>
-            Header2
-          </TableHeader>
-          <TableHeader>
-            Header3
-          </TableHeader>
+        <TableHeader>Header1</TableHeader>
+        <TableHeader>Header2</TableHeader>
+        <TableHeader>Header3</TableHeader>
       </TableRow>
     </TableHead>
     <TableBody>
-        <TableRow>
-          <TableCell>Wrapping content</TableCell>
-          <TableCell>content</TableCell>
-          <TableCell>content</TableCell>
-        </TableRow>
+      <TableRow>
+        <TableCell>Wrapping content</TableCell>
+        <TableCell>content</TableCell>
+        <TableCell>content</TableCell>
+      </TableRow>
     </TableBody>
   </Table>
 </div>
@@ -440,8 +423,10 @@ is experimental and might not be performant in tables with large datasets.
 
 ### Accessible Name
 
-To comply with accessibility requirements, make sure to supply the component with an accessible name by providing eiher the `aria-label`, `aria-labelledby` or
-`title` attribute to the `Table` component. Read more on the accessible naming rule
+To comply with accessibility requirements, make sure to supply the component
+with an accessible name by providing eiher the `aria-label`, `aria-labelledby`
+or `title` attribute to the `Table` component. Read more on the accessible
+naming rule
 [here](https://able.ibm.com/rules/archives/latest/doc/en-US/aria_accessiblename_exists.html).
 
 ## Props
