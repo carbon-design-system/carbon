@@ -2,8 +2,7 @@
 
 [Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/ContextMenu)
 
-{/* <!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
 - [Overview](#overview)
 - [Component API](#component-api)
@@ -13,9 +12,13 @@
 
 ## Overview
 
-The `useContextMenu` hook is meant to be used in conjunction with `Menu` (see this [component's documentation](/docs/components-menu--playground) for more details). It provides an easy way to generate the necessary props for `Menu`.
+The `useContextMenu` hook is meant to be used in conjunction with `Menu` (see
+this [component's documentation](/docs/components-menu--playground) for more
+details). It provides an easy way to generate the necessary props for `Menu`.
 
-By default, it will listen to the `contextmenu` event on `document`. In most cases you'll want to restrict a context menu to a certain element or group of elements only. You can pass that element as the argument for `useContextMenu`.
+By default, it will listen to the `contextmenu` event on `document`. In most
+cases you'll want to restrict a context menu to a certain element or group of
+elements only. You can pass that element as the argument for `useContextMenu`.
 
 ```jsx
 function SomeComponent() {
@@ -24,9 +27,7 @@ function SomeComponent() {
 
   return (
     <>
-      <div ref={el}>
-        …
-      </div>
+      <div ref={el}>…</div>
 
       <Menu {...menuProps}>
         <MenuItem label="Cut" />
@@ -38,7 +39,9 @@ function SomeComponent() {
 }
 ```
 
-Be aware that the following props are not set by `useContextMenu` and can therefore be configured by the user:
+Be aware that the following props are not set by `useContextMenu` and can
+therefore be configured by the user:
+
 - className
 - label
 - size
@@ -52,7 +55,7 @@ Be aware that the following props are not set by `useContextMenu` and can theref
 const menuProps = useContextMenu(
   // the DOM element or react ref the "contextmenu" event should be attached to.
   // defaults to document.
-  trigger,
+  trigger
 );
 ```
 

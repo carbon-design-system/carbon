@@ -4,8 +4,7 @@ import { ArgsTable } from '@storybook/blocks';
 
 [Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Menu)
 
-{/* <!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
 - [Overview](#overview)
 - [Positioning](#positioning)
@@ -23,9 +22,14 @@ import { ArgsTable } from '@storybook/blocks';
 
 ## Overview
 
-`Menu` is a versatile component that can be used in a variety of situations. It implements the [menu design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/) defined in the ARIA Authoring Practices Guide (APG).
+`Menu` is a versatile component that can be used in a variety of situations. It
+implements the
+[menu design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/) defined
+in the ARIA Authoring Practices Guide (APG).
 
-The `Menu` component's `children` must be a collection of any of these subcomponents:
+The `Menu` component's `children` must be a collection of any of these
+subcomponents:
+
 - [MenuItem](#menuitem)
 - [MenuItemDivider](#menuitemdivider)
 - [MenuItemGroup](#menuitemgroup)
@@ -34,16 +38,28 @@ The `Menu` component's `children` must be a collection of any of these subcompon
 
 ## Positioning
 
-You must provide a reference point for the `Menu` to position itself at. The props `x` and `y` either accept a single number each or an array of two numbers.
+You must provide a reference point for the `Menu` to position itself at. The
+props `x` and `y` either accept a single number each or an array of two numbers.
 
-The latter option is used to specify the trigger boundaries. For example, Carbon uses this for the [next version of OverflowMenu](/story/experimental-feature-flags-overflowmenu--overflow-menu) where we pass `[x, x + width]` and `[y, y + height]` of the trigger button. This way, the `Menu` is able to automatically determine its ideal position on the screen (which side to open at and in which direction) while always staying visually attached to the trigger.
-Each `MenuItem` that has `children` and therfore a submenu uses the same approach under the hood to correctly position the submenu.
+The latter option is used to specify the trigger boundaries. For example, Carbon
+uses this for the
+[next version of OverflowMenu](/story/experimental-feature-flags-overflowmenu--overflow-menu)
+where we pass `[x, x + width]` and `[y, y + height]` of the trigger button. This
+way, the `Menu` is able to automatically determine its ideal position on the
+screen (which side to open at and in which direction) while always staying
+visually attached to the trigger. Each `MenuItem` that has `children` and
+therfore a submenu uses the same approach under the hood to correctly position
+the submenu.
 
 ## Subcomponents
 
 ### MenuItem
 
-A `MenuItem` renders a basic menu item with a label an optionally a shortcut hint (_note: the component only renders this hint and doesn't actually register the shortcut in the browser_). Each `MenuItem` can be clicked unless it's marked as `disabled`. If it triggers a destructive action, you can pass it `kind="danger"` to highlight it specially on hover and focus.
+A `MenuItem` renders a basic menu item with a label an optionally a shortcut
+hint (_note: the component only renders this hint and doesn't actually register
+the shortcut in the browser_). Each `MenuItem` can be clicked unless it's marked
+as `disabled`. If it triggers a destructive action, you can pass it
+`kind="danger"` to highlight it specially on hover and focus.
 
 ```jsx
 <Menu>
@@ -53,7 +69,8 @@ A `MenuItem` renders a basic menu item with a label an optionally a shortcut hin
 </Menu>
 ```
 
-In order to render a submenu, you can pass any of the above mentioned subcomponents as `children` of a `MenuItem`.
+In order to render a submenu, you can pass any of the above mentioned
+subcomponents as `children` of a `MenuItem`.
 
 ```jsx
 <Menu>
@@ -69,7 +86,8 @@ In order to render a submenu, you can pass any of the above mentioned subcompone
 
 ### MenuItemDivider
 
-The `MenuItemDivider` renders a thin dividing line, visually separating menu items. Use this to enhance grouping of related items.
+The `MenuItemDivider` renders a thin dividing line, visually separating menu
+items. Use this to enhance grouping of related items.
 
 ```jsx
 <Menu>
@@ -83,11 +101,18 @@ The `MenuItemDivider` renders a thin dividing line, visually separating menu ite
 
 ### MenuItemGroup
 
-You can logically group multiple menu items by wrapping them inside a `MenuItemGroup`. This doesn't affect the visual rendering but can tremendously improve the experience for assistive technology users. You'll always want to use a `MenuItemGroup` if you have multiple [`MenuItemSelectable`](#menuitemselectable) that are relatd to each other.
+You can logically group multiple menu items by wrapping them inside a
+`MenuItemGroup`. This doesn't affect the visual rendering but can tremendously
+improve the experience for assistive technology users. You'll always want to use
+a `MenuItemGroup` if you have multiple
+[`MenuItemSelectable`](#menuitemselectable) that are relatd to each other.
 
 ### MenuItemSelectable
 
-`MenuItemSelectable` is a checkbox in a menu context. Each `MenuItemSelectable` can be checked and unchecked unrelated to other items. If multiple items are related to each other, you'll want to wrap them in a `MenuItemGroup` for improved accessibility.
+`MenuItemSelectable` is a checkbox in a menu context. Each `MenuItemSelectable`
+can be checked and unchecked unrelated to other items. If multiple items are
+related to each other, you'll want to wrap them in a `MenuItemGroup` for
+improved accessibility.
 
 ```jsx
 <Menu>
@@ -99,34 +124,31 @@ You can logically group multiple menu items by wrapping them inside a `MenuItemG
 ```
 
 ### MenuItemRadioGroup
-`MenuItemRadioGroup` is a radio button group in a menu context. Only one item can be selected at a time. The component automatically wraps itself in a `MenuItemGroup`, so you won't have to nest it manually.
+
+`MenuItemRadioGroup` is a radio button group in a menu context. Only one item
+can be selected at a time. The component automatically wraps itself in a
+`MenuItemGroup`, so you won't have to nest it manually.
 
 ```jsx
 <Menu>
   <MenuItemRadioGroup
     label="Font family"
-    items={[
-      'Sans',
-      'Serif',
-      'Mono',
-    ]}
+    items={['Sans', 'Serif', 'Mono']}
     selectedItem="Sans"
   />
   <MenuItemDivider />
   <MenuItemRadioGroup
     label="Text decoration"
-    items={[
-      'None',
-      'Overline',
-      'Line-through',
-      'Underline',
-    ]}
+    items={['None', 'Overline', 'Line-through', 'Underline']}
     selectedItem="None"
   />
 </Menu>
 ```
 
-The `items` prop is designed to accept arbitrary items to best match your data structure. If you pass your items as anything that doesn't support `.toString()` out of the box, you'll need to pass a custom `itemToString` function that will be used for rendering the labels.
+The `items` prop is designed to accept arbitrary items to best match your data
+structure. If you pass your items as anything that doesn't support `.toString()`
+out of the box, you'll need to pass a custom `itemToString` function that will
+be used for rendering the labels.
 
 ```jsx
 const items = [
@@ -144,12 +166,17 @@ const items = [
   items={items}
   selectedItem={items[3]}
   itemToString={(item) => item.label}
-/>
+/>;
 ```
 
 ## Context menu (right-click menu)
 
-The `Menu` component is suited to be used as a context menu for complex web applications. To make this easy, Carbon provides a [`useContextMenu`](/story/hooks-usecontextmenu--use-context-menu) react hook. Please refer to the [hook's documentation](/docs/hooks-usecontextmenu--use-context-menu) for more details.
+The `Menu` component is suited to be used as a context menu for complex web
+applications. To make this easy, Carbon provides a
+[`useContextMenu`](/story/hooks-usecontextmenu--use-context-menu) react hook.
+Please refer to the
+[hook's documentation](/docs/hooks-usecontextmenu--use-context-menu) for more
+details.
 
 ## Component API
 
