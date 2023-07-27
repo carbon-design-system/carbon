@@ -413,14 +413,15 @@ export const HeaderBaseWActionsSwitcher = () => {
           ${Notification20({ slot: 'icon' })}
         </cds-header-global-action>
         <cds-header-global-action
-          active
-          aria-label="App Switcher"
-          tooltip-text="App Switcher"
+          button-label-active="Close switcher"
+          button-label-inactive="Open switcher"
+          tooltip-text="Open switcher"
+          panel-id="switcher-panel"
           tooltip-alignment="right">
           ${SwitcherIcon20({ slot: 'icon' })}
         </cds-header-global-action>
       </div>
-      <cds-header-panel expanded aria-label="Header Panel">
+      <cds-header-panel id="switcher-panel" aria-label="Header Panel">
         <cds-switcher aria-label="Switcher Container">
           <cds-switcher-item aria-label="Link 1" href="#"
             >Link 1</cds-switcher-item
@@ -444,7 +445,8 @@ export const HeaderBaseWActionsSwitcher = () => {
           >
         </cds-switcher>
       </cds-header-panel>
-    </cds-header>`;
+    </cds-header>
+    ${StoryContent({ useResponsiveOffset: true })}`;
 };
 
 HeaderBaseWActionsSwitcher.storyName = 'Header Base w/ Actions and Switcher';
