@@ -32,7 +32,7 @@ $layout-tokens: (
   ),
 );
 
-:root {
+@mixin emit-layout-tokens {
   @each $group, $properties in $layout-tokens {
     @each $property, $steps in $properties {
       @each $step, $value in $steps {
@@ -101,4 +101,8 @@ $layout-tokens: (
       }
     }
   }
+}
+
+:root {
+  @include emit-layout-tokens();
 }

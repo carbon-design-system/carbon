@@ -11,7 +11,7 @@ import classNames from 'classnames';
 
 import { ChevronDown } from '@carbon/icons-react';
 import { IconButton } from '../IconButton';
-import { Button } from '../Button';
+import Button from '../Button';
 import { Menu } from '../Menu';
 
 import { useAttachedMenu } from '../../internal/useAttachedMenu';
