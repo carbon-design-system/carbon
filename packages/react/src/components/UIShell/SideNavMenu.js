@@ -8,10 +8,11 @@
 import { ChevronDown } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import SideNavIcon from './SideNavIcon';
 import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
+import { SideNavContext } from './SideNav';
 
 const SideNavMenu = React.forwardRef(function SideNavMenu(props, ref) {
   const {
@@ -22,8 +23,10 @@ const SideNavMenu = React.forwardRef(function SideNavMenu(props, ref) {
     large = false,
     renderIcon: IconElement,
     isSideNavExpanded,
+    tabIndex,
     title,
   } = props;
+  const isRail = useContext(SideNavContext);
   const prefix = usePrefix();
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
   const [prevExpanded, setPrevExpanded] = useState(defaultExpanded);
@@ -60,7 +63,14 @@ const SideNavMenu = React.forwardRef(function SideNavMenu(props, ref) {
           setIsExpanded(!isExpanded);
         }}
         ref={ref}
-        type="button">
+        type="button"
+        tabIndex={
+          tabIndex === undefined
+            ? !isSideNavExpanded && !isRail
+              ? -1
+              : 0
+            : tabIndex
+        }>
         {IconElement && (
           <SideNavIcon>
             <IconElement />
@@ -117,6 +127,11 @@ SideNavMenu.propTypes = {
    * Pass in a custom icon to render next to the `SideNavMenu` title
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
+   * Optional prop to specify the tabIndex of the button. If undefined, it will be applied default validation
+   */
+  tabIndex: PropTypes.number,
 
   /**
    * Provide the text for the overall menu name
