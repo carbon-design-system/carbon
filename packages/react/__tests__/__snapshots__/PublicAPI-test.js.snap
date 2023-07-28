@@ -2444,14 +2444,6 @@ Map {
     ],
   },
   "DataTableSkeleton" => Object {
-    "defaultProps": Object {
-      "columnCount": 5,
-      "compact": false,
-      "rowCount": 5,
-      "showHeader": true,
-      "showToolbar": true,
-      "zebra": false,
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -2464,23 +2456,20 @@ Map {
       },
       "headers": Object {
         "args": Array [
-          Array [
-            Object {
-              "type": "array",
-            },
-            Object {
-              "args": Array [
-                Object {
-                  "key": Object {
-                    "type": "string",
-                  },
+          Object {
+            "args": Array [
+              Object {
+                "header": Object {
+                  "isRequired": true,
+                  "type": "node",
                 },
-              ],
-              "type": "shape",
-            },
-          ],
+              },
+            ],
+            "isRequired": true,
+            "type": "shape",
+          },
         ],
-        "type": "oneOfType",
+        "type": "arrayOf",
       },
       "rowCount": Object {
         "type": "number",
@@ -3457,7 +3446,6 @@ Map {
   "FilterableMultiSelect" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "aria-label": "Choose an item",
       "compareItems": [Function],
       "direction": "bottom",
       "disabled": false,
@@ -3470,9 +3458,7 @@ Map {
       "sortItems": [Function],
     },
     "propTypes": Object {
-      "aria-label": Object {
-        "type": "string",
-      },
+      "aria-label": [Function],
       "ariaLabel": [Function],
       "compareItems": Object {
         "isRequired": true,
@@ -5029,7 +5015,6 @@ Map {
     "Filterable": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "aria-label": "Choose an item",
         "compareItems": [Function],
         "direction": "bottom",
         "disabled": false,
@@ -5042,9 +5027,7 @@ Map {
         "sortItems": [Function],
       },
       "propTypes": Object {
-        "aria-label": Object {
-          "type": "string",
-        },
+        "aria-label": [Function],
         "ariaLabel": [Function],
         "compareItems": Object {
           "isRequired": true,
@@ -7069,6 +7052,9 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "tabIndex": Object {
+        "type": "number",
+      },
     },
     "render": [Function],
   },
@@ -7116,6 +7102,9 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "tabIndex": Object {
+        "type": "number",
       },
       "title": Object {
         "isRequired": true,
