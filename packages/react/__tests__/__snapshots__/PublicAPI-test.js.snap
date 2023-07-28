@@ -7052,6 +7052,9 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "tabIndex": Object {
+        "type": "number",
+      },
     },
     "render": [Function],
   },
@@ -7099,6 +7102,9 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "tabIndex": Object {
+        "type": "number",
       },
       "title": Object {
         "isRequired": true,
