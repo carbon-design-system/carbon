@@ -19,7 +19,8 @@ yarn dev
 npm run dev
 ```
 
-This example takes a little bit of time to first start.
+This example only takes a little bit of time to start, once it's up and running,
+it's very fast.
 
 Open [http://localhost:5173](http://localhost:5173) with your browser to see the
 result.
