@@ -20,7 +20,7 @@
   ],
   "publishConfig": {
     "access": "public",
-    "provenance": "true"
+    "provenance": true
   },
   "devDependencies": {
     "@babel/core": "^7.18.2",

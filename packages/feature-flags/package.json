@@ -26,7 +26,7 @@
   ],
   "publishConfig": {
     "access": "public",
-    "provenance": "true"
+    "provenance": true
   },
   "scripts": {
     "build": "yarn clean && node tasks/build.js && rollup -c",

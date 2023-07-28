@@ -29,7 +29,7 @@
   ],
   "publishConfig": {
     "access": "public",
-    "provenance": "true"
+    "provenance": true
   },
   "scripts": {
     "build": "esbuild src/cli.js --bundle --platform=node --outfile=cli.js --target=node14 --external:jscodeshift",

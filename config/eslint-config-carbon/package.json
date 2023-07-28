@@ -27,7 +27,7 @@
   ],
   "publishConfig": {
     "access": "public",
-    "provenance": "true"
+    "provenance": true
   },
   "peerDependencies": {
     "eslint": "^8.0.0"

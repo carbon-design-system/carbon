@@ -21,7 +21,7 @@
   ],
   "publishConfig": {
     "access": "public",
-    "provenance": "true"
+    "provenance": true
   },
   "dependencies": {
     "chalk": "^4.1.1"

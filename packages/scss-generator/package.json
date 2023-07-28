@@ -21,7 +21,7 @@
   ],
   "publishConfig": {
     "access": "public",
-    "provenance": "true"
+    "provenance": true
   },
   "dependencies": {
     "prettier": "^2.8.8"

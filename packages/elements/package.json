@@ -29,7 +29,7 @@
   ],
   "publishConfig": {
     "access": "public",
-    "provenance": "true"
+    "provenance": true
   },
   "scripts": {
     "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonElements",

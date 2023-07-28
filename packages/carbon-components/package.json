@@ -32,7 +32,7 @@
   ],
   "publishConfig": {
     "access": "public",
-    "provenance": "true"
+    "provenance": true
   },
   "scripts": {
     "build": "node tasks/build-styles.js",

@@ -21,7 +21,7 @@
   ],
   "publishConfig": {
     "access": "public",
-    "provenance": "true"
+    "provenance": true
   },
   "peerDependencies": {
     "stylelint": "^15.0.0"

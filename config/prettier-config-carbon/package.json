@@ -19,7 +19,7 @@
   ],
   "publishConfig": {
     "access": "public",
-    "provenance": "true"
+    "provenance": true
   },
   "peerDependencies": {
     "prettier": "2.x"
