@@ -11,6 +11,10 @@ jobs:
     name: Create Release
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    # Needed as recommended by npm docs on publishing with provenance https://docs.npmjs.com/generating-provenance-statements
+    permissions:
+      id-token: write
+      contents: write
     steps:
       - uses: actions/checkout@v3
 
