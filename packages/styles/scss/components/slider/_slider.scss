@@ -41,10 +41,10 @@
     max-width: rem(640px);
     padding: $spacing-05 0;
     cursor: pointer;
-  }
 
-  .#{$prefix}--slider--two-handles {
-    margin-inline: rem(4px);
+    .#{$prefix}--slider-container--two-handles & {
+      margin-inline: rem(4px);
+    }
   }
 
   .#{$prefix}--slider__range-label {
@@ -232,7 +232,7 @@
     display: none;
   }
 
-  .#{$prefix}--text-input-wrapper {
+  .#{$prefix}--slider-text-input-wrapper {
     position: relative;
   }
 
@@ -354,12 +354,17 @@
     cursor: default;
   }
 
-  .#{$prefix}--slider--readonly .#{$prefix}--slider__thumb {
+  .#{$prefix}--slider-container--readonly .#{$prefix}--slider__thumb {
     width: 0;
     height: 0;
+
+    &::before,
+    &::after {
+      display: none;
+    }
   }
 
-  .#{$prefix}--slider--readonly ~ .#{$prefix}--slider-text-input {
+  .#{$prefix}--slider-container--readonly .#{$prefix}--slider-text-input {
     background-color: transparent;
   }
 

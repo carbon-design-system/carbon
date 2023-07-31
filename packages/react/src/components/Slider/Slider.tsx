@@ -1089,8 +1089,12 @@ export default class Slider extends PureComponent<SliderProps> {
             [`${prefix}--label--disabled`]: disabled,
           });
 
+          const containerClasses = classNames(`${prefix}--slider-container`, {
+            [`${prefix}--slider-container--two-handles`]: twoHandles,
+            [`${prefix}--slider-container--disabled`]: disabled,
+            [`${prefix}--slider-container--readonly`]: readOnly,
+          });
           const sliderClasses = classNames(`${prefix}--slider`, {
-            [`${prefix}--slider--two-handles`]: twoHandles,
             [`${prefix}--slider--disabled`]: disabled,
             [`${prefix}--slider--readonly`]: readOnly,
           });
@@ -1121,11 +1125,19 @@ export default class Slider extends PureComponent<SliderProps> {
           ]);
           const lowerInputWrapperClasses = classNames([
             `${prefix}--text-input-wrapper`,
-            `${prefix}--text-input-wrapper--lower`,
+            `${prefix}--slider-text-input-wrapper`,
+            `${prefix}--slider-text-input-wrapper--lower`,
+            {
+              [`${prefix}--text-input-wrapper--readonly`]: readOnly,
+            },
           ]);
           const upperInputWrapperClasses = classNames([
             `${prefix}--text-input-wrapper`,
-            `${prefix}--text-input-wrapper--upper`,
+            `${prefix}--slider-text-input-wrapper`,
+            `${prefix}--slider-text-input-wrapper--upper`,
+            {
+              [`${prefix}--text-input-wrapper--readonly`]: readOnly,
+            },
           ]);
           const lowerThumbClasses = classNames(`${prefix}--slider__thumb`, {
             [`${prefix}--slider__thumb--lower`]: twoHandles,
@@ -1142,7 +1154,7 @@ export default class Slider extends PureComponent<SliderProps> {
                 id={labelId}>
                 {labelText}
               </label>
-              <div className={`${prefix}--slider-container`}>
+              <div className={containerClasses}>
                 {twoHandles ? (
                   <div className={lowerInputWrapperClasses}>
                     <input
