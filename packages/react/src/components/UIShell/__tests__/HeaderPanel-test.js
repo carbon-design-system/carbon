@@ -7,7 +7,8 @@
 
 import React from 'react';
 import HeaderPanel from '../HeaderPanel';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 describe('HeaderPanel', () => {
   describe('renders as expected - Component API', () => {
@@ -62,6 +63,39 @@ describe('HeaderPanel', () => {
 
       const childrenArray = screen.getAllByText('Test');
       expect(childrenArray.length).toEqual(2);
+    });
+
+    it('should call `onHeaderPanelFocus` callback, when defined', async () => {
+      const callback = jest.fn();
+      render(
+        <HeaderPanel onHeaderPanelFocus={callback}>
+          <button data-testid="button" type="button">
+            Test
+          </button>
+        </HeaderPanel>
+      );
+
+      screen.getByTestId('button').focus();
+      await userEvent.keyboard('{Escape}');
+
+      await waitFor(() => expect(callback).toHaveBeenCalled());
+    });
+
+    it('should not error when `onHeaderPanelFocus` is not defined', async () => {
+      render(
+        <HeaderPanel>
+          <button data-testid="button" type="button">
+            Test
+          </button>
+        </HeaderPanel>
+      );
+
+      await waitFor(() =>
+        expect(async () => {
+          screen.getByTestId('button').focus();
+          await userEvent.keyboard('{Escape}');
+        }).not.toThrow()
+      );
     });
   });
 });
