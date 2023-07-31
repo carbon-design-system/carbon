@@ -35,6 +35,13 @@ const SliderSkeleton = ({
   ...rest
 }: SliderSkeletonProps) => {
   const prefix = usePrefix();
+  const containerClasses = classNames(
+    `${prefix}--slider-container`,
+    `${prefix}--skeleton`,
+    {
+      [`${prefix}--slider-container--two-handles`]: twoHandles,
+    }
+  );
   const lowerThumbClasses = classNames(`${prefix}--slider__thumb`, {
     [`${prefix}--slider__thumb--lower`]: twoHandles,
   });
@@ -46,7 +53,7 @@ const SliderSkeleton = ({
       {!hideLabel && (
         <span className={`${prefix}--label ${prefix}--skeleton`} />
       )}
-      <div className={`${prefix}--slider-container ${prefix}--skeleton`}>
+      <div className={containerClasses}>
         <span className={`${prefix}--slider__range-label`} />
         <div className={`${prefix}--slider`}>
           <div className={`${prefix}--slider__track`} />
