@@ -1089,11 +1089,11 @@ export default class Slider extends PureComponent<SliderProps> {
             [`${prefix}--label--disabled`]: disabled,
           });
 
-          const sliderClasses = classNames(
-            `${prefix}--slider`,
-            { [`${prefix}--slider--disabled`]: disabled },
-            { [`${prefix}--slider--readonly`]: readOnly }
-          );
+          const sliderClasses = classNames(`${prefix}--slider`, {
+            [`${prefix}--slider--two-handles`]: twoHandles,
+            [`${prefix}--slider--disabled`]: disabled,
+            [`${prefix}--slider--readonly`]: readOnly,
+          });
 
           const fixedInputClasses = [
             `${prefix}--text-input`,

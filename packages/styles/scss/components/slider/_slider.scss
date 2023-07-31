@@ -43,6 +43,10 @@
     cursor: pointer;
   }
 
+  .#{$prefix}--slider--two-handles {
+    margin-inline: rem(4px);
+  }
+
   .#{$prefix}--slider__range-label {
     @include type-style('body-compact-01');
 
