@@ -21,6 +21,12 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/notification/index.js';
 ```
 
+### SCSS (must include with JS import)
+
+```css
+ @use "@carbon/styles/scss/components/notification";
+```
+
 <Description markdown={`${cdnJs({ components: ['notification'] })}`} />
 <Description markdown={`${cdnCss()}`} />
 
@@ -80,24 +86,6 @@ few seconds.
   title="Notification title"
   subtitle="Subtitle text goes here.">
 </cds-toast-notification>
-```
-
-## Themeing
-
-In order to get the correct token value for the notification background, you
-will need to apply the following in you `scss` to your themed class. For
-example:
-
-```css
-@use '@carbon/styles/scss/vendor/@carbon/elements/scss/themes/mixins';
-@use '@carbon/styles/scss/component-tokens';
-@import 'carbon-components/src/components/notification/inline-notification';
-@import 'carbon-components/src/components/notification/toast-notification';
-.dds-theme-zone-g90 {
-  @include carbon--theme($carbon--theme--g90, true) {
-    @include emit-component-tokens($notification-colors);
-  }
-}
 ```
 
 ## `<cds-actionable-notification>` attributes, properties and events

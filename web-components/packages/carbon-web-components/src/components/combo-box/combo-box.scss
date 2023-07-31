@@ -11,7 +11,6 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities' as *;
-@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/components/combo-box/combo-box';
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/text-input/text-input';
@@ -20,21 +19,12 @@ $css--plex: true !default;
 :host(#{$prefix}-combo-box) {
   @extend :host(#{$prefix}-dropdown);
 
-  @include layer-tokens.emit-layer-tokens(1);
-
   outline: none;
 
   .#{$prefix}--assistive-text {
     // Hides screen reader cursor
     left: -100%;
     top: -100%;
-  }
-
-  .#{$prefix}--list-box__field,
-  // To get more specifity than:
-  // https://github.com/carbon-design-system/carbon/blob/v10.16.0/packages/components/src/components/list-box/_list-box.scss#L126
-  .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field {
-    padding: 0;
   }
 
   .#{$prefix}--list-box__menu {

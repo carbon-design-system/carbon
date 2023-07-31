@@ -14,7 +14,7 @@
 
 // For some reason `#{prefix}-tooltip` doesn't work here, will need to investigate
 
-:host(cds-tooltip[data-table]) {
+:host(#{$prefix}-tooltip[data-table]) {
   display: contents;
 
   &:hover {
@@ -24,14 +24,14 @@
   }
 }
 
-:host(cds-tooltip[data-table][size='xs']),
-:host(cds-tooltip[data-table][size='sm']) {
+:host(#{$prefix}-tooltip[data-table][size='xs']),
+:host(#{$prefix}-tooltip[data-table][size='sm']) {
   ::slotted(button) {
     height: calc(100% + 1px) !important;
   }
 }
 
-:host(cds-tooltip[toolbar-action]) {
+:host(#{$prefix}-tooltip[toolbar-action]) {
   ::slotted(button) {
     outline: none !important;
   }

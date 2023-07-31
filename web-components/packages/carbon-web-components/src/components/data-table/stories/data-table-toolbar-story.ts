@@ -40,7 +40,10 @@ export const Default = () => {
           <cds-table-toolbar-search
             placeholder="Filter table"></cds-table-toolbar-search>
           <cds-overflow-menu toolbar-action>
-            ${Settings16({ slot: 'icon' })}
+            ${Settings16({
+              slot: 'icon',
+              class: `${prefix}--overflow-menu__icon`,
+            })}
             <cds-overflow-menu-body>
               <cds-overflow-menu-item @click=${() => alert('Alert 1')}>
                 Action 1
@@ -139,7 +142,10 @@ export const PersistentToolbar = () => {
             persistent
             placeholder="Filter table"></cds-table-toolbar-search>
           <cds-overflow-menu toolbar-action>
-            ${Settings16({ slot: 'icon' })}
+            ${Settings16({
+              slot: 'icon',
+              class: `${prefix}--overflow-menu__icon`,
+            })}
             <cds-overflow-menu-body>
               <cds-overflow-menu-item @click=${() => alert('Alert 1')}>
                 Action 1
@@ -238,7 +244,10 @@ export const SmallPersistentToolbar = () => {
             persistent
             placeholder="Filter table"></cds-table-toolbar-search>
           <cds-overflow-menu toolbar-action>
-            ${Settings16({ slot: 'icon' })}
+            ${Settings16({
+              slot: 'icon',
+              class: `${prefix}--overflow-menu__icon`,
+            })}
             <cds-overflow-menu-body>
               <cds-overflow-menu-item> Action 1 </cds-overflow-menu-item>
               <cds-overflow-menu-item> Action 2 </cds-overflow-menu-item>
@@ -330,7 +339,10 @@ export const WithOverflowMenu = () => {
           <cds-table-toolbar-search
             placeholder="Filter table"></cds-table-toolbar-search>
           <cds-overflow-menu toolbar-action>
-            ${Settings16({ slot: 'icon' })}
+            ${Settings16({
+              slot: 'icon',
+              class: `${prefix}--overflow-menu__icon`,
+            })}
             <cds-overflow-menu-body>
               <cds-overflow-menu-item @click=${() => alert('Alert 1')}>
                 Action 1
@@ -517,7 +529,10 @@ export const Playground = (args) => {
           <cds-table-toolbar-search
             placeholder="Filter table"></cds-table-toolbar-search>
           <cds-overflow-menu toolbar-action>
-            ${Settings16({ slot: 'icon' })}
+            ${Settings16({
+              slot: 'icon',
+              class: `${prefix}--overflow-menu__icon`,
+            })}
             <cds-overflow-menu-body>
               <cds-overflow-menu-item> Action 1 </cds-overflow-menu-item>
               <cds-overflow-menu-item> Action 2 </cds-overflow-menu-item>

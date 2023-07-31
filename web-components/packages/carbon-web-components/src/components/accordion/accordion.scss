@@ -11,14 +11,13 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
-@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/components/accordion';
+@use '../../globals/mixins/temp-layout' as *;
 
 :host(#{$prefix}-accordion),
 :host(#{$prefix}-accordion-skeleton) {
   @extend .#{$prefix}--accordion;
-
-  @include layer-tokens.emit-layer-tokens(1);
+  @include emit-layout-tokens();
 }
 
 :host(#{$prefix}-accordion-item),

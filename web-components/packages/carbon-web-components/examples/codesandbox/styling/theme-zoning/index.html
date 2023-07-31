@@ -1,7 +1,7 @@
 <!--
 @license
 
-Copyright IBM Corp. 2019
+Copyright IBM Corp. 2020
 
 This source code is licensed under the Apache-2.0 license found in the
 LICENSE file in the root directory of this source tree.
@@ -11,11 +11,17 @@ LICENSE file in the root directory of this source tree.
   <head>
     <title>carbon-web-components example</title>
     <meta charset="UTF-8" />
-    <!-- Production application should limit the CSS import here to @carbon/grid CSS and `@carbon/styles/scss/components/ui-shell/_content.scss` -->
     <link
       rel="stylesheet"
-      type="text/css"
-      href="https://unpkg.com/carbon-components@10.17.0/css/carbon-components.min.css" />
+      href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"
+    />
+    <link rel="stylesheet" href="src/styles.scss" />
+    <style>
+      /* Suppress custom element until styles are loaded */
+      cds-header:not(:defined) {
+        display: none;
+      }
+    </style>
     <script type="module" src="src/index.js"></script>
   </head>
   <body>
@@ -76,7 +82,7 @@ LICENSE file in the root directory of this source tree.
     <footer>
       <p>
         <span>Have questions?</span>
-        <cds-button kind="secondary">Nope!</cds-button>
+        <cds-button kind="tertiary">Nope!</cds-button>
         <cds-button
           href="https://github.com/carbon-design-system/carbon-web-components/issues/new"
           target="_blank"

@@ -8,9 +8,4 @@
 $css--plex: true !default;
 
 @use '@carbon/styles/scss/config' as *;
-@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/components/progress-bar' as *;
-
-:host(#{$prefix}-progress-bar) {
-  @include layer-tokens.emit-layer-tokens(1);
-}

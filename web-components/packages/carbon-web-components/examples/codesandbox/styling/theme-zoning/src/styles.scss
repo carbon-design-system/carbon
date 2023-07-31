@@ -1,11 +1,8 @@
-//
-// Copyright IBM Corp. 2020, 2023
-//
-// This source code is licensed under the Apache-2.0 license found in the
-// LICENSE file in the root directory of this source tree.
-//
-
-@use '@carbon/styles/scss/vendor/@carbon/elements/scss/themes/mixins';
+@use "@carbon/styles/scss/reset";
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/themes";
+@use '@carbon/styles/scss/components/button/tokens' as button-tokens;
+@include theme.add-component-tokens(button-tokens.$button-tokens);
 
 html {
   height: 100%;
@@ -19,11 +16,11 @@ body {
 }
 
 footer {
-  @include carbon--theme($carbon--theme--g100, true);
+   @include theme.theme(themes.$g100);
 
   > p {
-    background-color: var(--cds-ui-background);
-    color: var(--cds-text-01);
+    background-color: var(--cds-background);
+    color: var(--cds-text-primary);
     height: 5rem;
     padding: 0 1rem;
     display: flex;
@@ -59,7 +56,7 @@ cds-header {
 }
 
 .cds--content.cds-ce-demo-theme-zoning--ui-shell-content {
-  background-color: var(--cds-ui-01, #f4f4f4);
+  background-color: var(--cds-layer-01, #f4f4f4);
   margin: 0;
   width: 100%;
 
@@ -73,3 +70,4 @@ cds-header {
     line-height: 20px;
   }
 }
+

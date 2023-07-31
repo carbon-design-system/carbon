@@ -15,12 +15,11 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/link/index' as *;
 @use '@carbon/styles/scss/components/form/index' as *;
 @use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/layer/layer-tokens';
+@use '../../globals/mixins/temp-layout' as *;
 
 :host(#{$prefix}-tile) {
   @extend .#{$prefix}--tile;
-
-  @include layer-tokens.emit-layer-tokens(1);
+  @include emit-layout-tokens();
 
   ::slotted(.#{$prefix}--link) {
     @extend .#{$prefix}--link;
@@ -38,7 +37,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-clickable-tile) {
-  @include layer-tokens.emit-layer-tokens(1);
+  @include emit-layout-tokens();
 
   display: grid;
   outline: none;
@@ -71,7 +70,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-radio-tile) {
-  @include layer-tokens.emit-layer-tokens(1);
+  @include emit-layout-tokens();
 
   display: block;
   outline: none;
@@ -80,7 +79,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-selectable-tile) {
-  @include layer-tokens.emit-layer-tokens(1);
+  @include emit-layout-tokens();
 
   display: content;
   outline: none;
@@ -100,10 +99,9 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-expandable-tile) {
-  @include layer-tokens.emit-layer-tokens(1);
-
   @extend .#{$prefix}--tile;
   @extend .#{$prefix}--tile--expandable;
+  @include emit-layout-tokens();
 
   ::slotted(#{$prefix}-tile-above-the-fold-content) {
     @extend .#{$prefix}--tile-content__above-the-fold;

@@ -7,12 +7,9 @@
 
 $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
-@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/components/text-area/index';
 
 :host(#{$prefix}-textarea) {
-  @include layer-tokens.emit-layer-tokens(1);
-
   outline: none;
 }
 
