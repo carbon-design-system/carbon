@@ -60,7 +60,7 @@
     "babel-plugin-dev-expression": "^0.2.3",
     "babel-preset-carbon": "^0.5.0",
     "browserslist-config-carbon": "^11.2.0",
-    "fs-extra": "^10.0.0",
+    "fs-extra": "^11.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.0",
