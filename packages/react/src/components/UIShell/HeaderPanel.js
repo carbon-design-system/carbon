@@ -19,7 +19,7 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
     className: customClassName,
     expanded,
     addFocusListeners = true,
-    onHeaderPanelFocus,
+    onHeaderPanelFocus = () => {},
     href,
     ...other
   },
@@ -123,7 +123,6 @@ HeaderPanel.propTypes = {
   /**
    * An optional listener that is called a callback to collapse the HeaderPanel
    */
-
   onHeaderPanelFocus: PropTypes.func,
 };
 
