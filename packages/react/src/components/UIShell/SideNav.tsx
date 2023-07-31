@@ -91,7 +91,7 @@ function SideNavRenderFunction(
   const navRef = useMergedRefs([sideNavRef, ref]);
 
   const handleToggle: typeof onToggle = (event, value = !expanded) => {
-    if (!controlled) {
+    if (controlled === undefined) {
       setExpandedState(value, enterDelayMs);
     }
     if (onToggle) {
