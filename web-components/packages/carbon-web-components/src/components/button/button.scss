@@ -11,17 +11,18 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/components/button' as *;
 @use '@carbon/styles/scss/components/popover/index';
 @use '@carbon/styles/scss/components/code-snippet/code-snippet' as *;
 @use '@carbon/styles/scss/components/tooltip';
+@use '../../globals/mixins/temp-layout' as *;
 
 @include code-snippet;
 
 :host(#{$prefix}-button),
 :host(#{$prefix}-modal-footer-button) {
-  @include layer-tokens.emit-layer-tokens(1);
+  @include emit-layout-tokens();
+
   display: inline-flex;
 
   ::slotted([slot='icon']) {

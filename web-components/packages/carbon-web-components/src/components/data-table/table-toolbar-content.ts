@@ -39,7 +39,12 @@ class CDSTableToolbarContent extends LitElement {
 
     if (changedProperties.has('size')) {
       [...this.children].forEach((e) => {
-        const size = this.size === 'xs' ? 'sm' : this.size;
+        const size =
+          this.size === 'xs'
+            ? 'sm'
+            : this.size === 'md' || this.size === 'xl'
+            ? 'lg'
+            : this.size;
         e.setAttribute('size', size);
       });
     }

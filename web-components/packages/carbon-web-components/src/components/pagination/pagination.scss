@@ -12,13 +12,10 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
-@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/components/pagination' as *;
 @use '@carbon/styles/scss/utilities/visually-hidden' as *;
 
 :host(#{$prefix}-pagination) {
-  @include layer-tokens.emit-layer-tokens(1);
-
   @extend .#{$prefix}--pagination;
 
   position: relative;

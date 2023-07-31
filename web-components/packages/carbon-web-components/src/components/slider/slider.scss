@@ -9,13 +9,12 @@ $css--plex: true !default;
 
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/components/slider';
+@use '../../globals/mixins/temp-layout' as *;
 
 :host(#{$prefix}-slider) {
-  @include layer-tokens.emit-layer-tokens(1);
-
   outline: none;
+  @include emit-layout-tokens();
 
   .#{$prefix}--slider {
     transform: rotate(0) #{'/*rtl:rotate(180deg)*/'};

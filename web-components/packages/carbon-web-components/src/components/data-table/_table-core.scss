@@ -10,8 +10,6 @@
 //
 
 :host(#{$prefix}-table) {
-  @include layer-tokens.emit-layer-tokens(1);
-
   @extend .#{$prefix}--data-table;
 
   display: table;

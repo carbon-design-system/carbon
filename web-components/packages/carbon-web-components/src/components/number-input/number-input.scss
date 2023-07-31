@@ -11,13 +11,10 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities';
 @use '@carbon/styles/scss/components/form';
-@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/components/number-input/index';
 
 :host(#{$prefix}-number-input),
 :host(#{$prefix}-number-input-skeleton) {
-  @include layer-tokens.emit-layer-tokens(1);
-
   // the base text-input class has a 100% so we need to propagate it up to the host element
   width: 100%;
   outline: none;

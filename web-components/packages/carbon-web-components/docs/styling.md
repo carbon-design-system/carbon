@@ -41,36 +41,35 @@ theme:
 
 The names of CSS Custom Properties you can use are the Carbon theme tokens
 prefixed with `--cds-`. The list of Carbon theme tokens can be found at
-[here](https://github.com/carbon-design-system/carbon/blob/v10.7.0/packages/themes/scss/generated/_themes.scss#L14-L454).
+[here](https://github.com/carbon-design-system/carbon/blob/v11.34.1/packages/themes/src/index.js).
 
 With CSS Custom Properties approach, you can switch the entire theme under the
 specific element by:
 
 ```css
-@use '@carbon/styles/scss/utilities';
-@use '@carbon/styles/scss/vendor/@carbon/elements/scss/themes/mixins';
+@use "@carbon/styles/scss/reset";
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/themes";
 
 footer {
-  @include carbon--theme(
-    $carbon--theme--g100,
-    true
-  ); // Emits all theme tokens in CSS Custom Properties
-}
+   @include theme.theme(themes.$g100);
+ } // Emits all theme tokens in CSS Custom Properties
 ```
 
-Some components such as `Notification` and `Tag` have specific tokens per theme
+Some components such as `Button`, `Notification`, & `Tag` have specific tokens per theme
 that need to emitted in the styles. You can do this for example by adding the
 following:
 
 ```css
-@use '@carbon/styles/scss/vendor/@carbon/elements/scss/themes/mixins';
-@use '@carbon/styles/scss/component-tokens';
-@import 'carbon-components/src/components/tag/tag';
-.dds-theme-zone-g90 {
-  @include carbon--theme($carbon--theme--g90, true) {
-    @include emit-component-tokens($tag-colors);
-  }
-}
+@use "@carbon/styles/scss/reset";
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/themes";
+@use '@carbon/styles/scss/components/button/tokens' as button-tokens;
+@use '@carbon/styles/scss/components/notification/tokens' as notification-tokens;
+@use '@carbon/styles/scss/components/tag/tokens' as tag-tokens;
+@include theme.add-component-tokens(button-tokens.$button-tokens);
+@include theme.add-component-tokens(notification-tokens.$notification-tokens);
+@include theme.add-component-tokens(tag-tokens.$tag-tokens);
 ```
 
 ## Dependency injection

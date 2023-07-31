@@ -12,11 +12,6 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/components/ui-shell/side-nav';
-@use '@carbon/styles/scss/layer/layer-tokens';
-
-:host(#{$prefix}-side-nav) {
-  @include layer-tokens.emit-layer-tokens(1);
-}
 
 :host(#{$prefix}-side-nav[expanded]) ::slotted(#{$prefix}-side-nav-items) {
   overflow-y: auto;

@@ -11,7 +11,6 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/utilities' as *;
-@use '@carbon/styles/scss/layer/layer-tokens';
 @use '@carbon/styles/scss/components/list-box/list-box';
 @use '@carbon/styles/scss/components/multiselect/index';
 @use '@carbon/styles/scss/components/form';
@@ -19,8 +18,6 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/tag';
 
 :host(#{$prefix}-multi-select) {
-  @include layer-tokens.emit-layer-tokens(1);
-
   outline: none;
 
   .#{$prefix}--assistive-text {

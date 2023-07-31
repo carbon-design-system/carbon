@@ -16,11 +16,13 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/button';
 @use '@carbon/styles/scss/components/button/mixins' as button-mixins;
 @use '@carbon/styles/scss/components/button/vars' as button-vars;
+@use '../../globals/mixins/temp-layout' as *;
 
 @include actionable-notification;
 
 :host(#{$prefix}-actionable-notification) {
   @extend .#{$prefix}--actionable-notification;
+  @include emit-layout-tokens();
 
   display: none;
   outline: none;
