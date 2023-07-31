@@ -42,7 +42,7 @@
     "@rollup/plugin-babel": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.0.0",
     "change-case": "^4.1.2",
-    "fs-extra": "^10.0.0",
+    "fs-extra": "^11.0.0",
     "js-yaml": "^3.14.0",
     "rimraf": "^5.0.0",
     "rollup": "^2.79.1",
