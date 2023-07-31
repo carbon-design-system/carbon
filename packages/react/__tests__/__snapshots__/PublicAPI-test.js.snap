@@ -1406,6 +1406,26 @@ Map {
       "isFullWidth": Object {
         "type": "bool",
       },
+      "launcherButtonRef": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "current": Object {
+                    "type": "any",
+                  },
+                },
+              ],
+              "type": "shape",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "onClose": Object {
         "type": "func",
       },
@@ -4709,6 +4729,26 @@ Map {
       },
       "isFullWidth": Object {
         "type": "bool",
+      },
+      "launcherButtonRef": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "current": Object {
+                    "type": "any",
+                  },
+                },
+              ],
+              "type": "shape",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "modalAriaLabel": Object {
         "type": "string",
