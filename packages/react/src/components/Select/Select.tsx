@@ -25,6 +25,7 @@ import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { composeEventHandlers } from '../../tools/events';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -148,6 +149,7 @@ const Select = React.forwardRef(function Select(
     size,
     warn = false,
     warnText,
+    onChange,
     ...other
   }: SelectProps,
   ref: ForwardedRef<HTMLSelectElement>
@@ -155,6 +157,7 @@ const Select = React.forwardRef(function Select(
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
   const [isFocused, setIsFocused] = useState(false);
+  const [title, setTitle] = useState('');
   const { current: selectInstanceId } = useRef(getInstanceId());
 
   const selectClasses = classNames({
@@ -215,6 +218,10 @@ const Select = React.forwardRef(function Select(
     setIsFocused(evt.type === 'focus' ? true : false);
   };
 
+  const handleChange = (evt) => {
+    setTitle(evt?.target?.value);
+  };
+
   const readOnlyEventHandlers = {
     onMouseDown: (evt) => {
       // NOTE: does not prevent click
@@ -244,6 +251,8 @@ const Select = React.forwardRef(function Select(
           disabled={disabled || undefined}
           aria-invalid={invalid || undefined}
           aria-readonly={readOnly || undefined}
+          title={title}
+          onChange={composeEventHandlers([onChange, handleChange])}
           {...readOnlyEventHandlers}
           ref={ref}>
           {children}
