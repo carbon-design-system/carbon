@@ -35,7 +35,7 @@
     "browserslist-config-carbon": "^11.2.0",
     "change-case": "^4.1.1",
     "core-js": "^3.16.0",
-    "fs-extra": "^10.0.0",
+    "fs-extra": "^11.0.0",
     "joi": "^14.3.1",
     "js-yaml": "^3.12.1",
     "klaw-sync": "^6.0.0",
