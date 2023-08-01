@@ -252,6 +252,14 @@ class CDSSideNav extends HostListenerMixin(LitElement) {
     }
   }
 
+  /**
+   * Handles the `click` event for the side nav overlay.
+   *
+   */
+  private _onOverlayClick() {
+    this.expanded = false;
+  }
+
   render() {
     const { collapseMode, expanded, isNotChildOfHeader, isNotPersistent } =
       this;
@@ -273,7 +281,9 @@ class CDSSideNav extends HostListenerMixin(LitElement) {
     });
     return html`${this.collapseMode === SIDE_NAV_COLLAPSE_MODE.FIXED
         ? null
-        : html`<div class="${overlayClasses}"></div>`}
+        : html`<div
+            class="${overlayClasses}"
+            @click=${this._onOverlayClick}></div>`}
       <div
         class="${classes}"
         @mouseover="${this._handleNavMouseOver}"
