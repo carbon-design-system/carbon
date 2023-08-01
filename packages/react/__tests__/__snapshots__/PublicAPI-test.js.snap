@@ -7262,6 +7262,9 @@ Map {
       "hideLabel": Object {
         "type": "bool",
       },
+      "twoHandles": Object {
+        "type": "bool",
+      },
     },
   },
   "Stack" => Object {
