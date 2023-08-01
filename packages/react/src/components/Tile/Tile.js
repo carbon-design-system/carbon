@@ -250,9 +250,6 @@ export function SelectableTile(props) {
     },
     className
   );
-  const inputClasses = cx(`${prefix}--tile-input`, {
-    [`${prefix}--tile-input--checked`]: isSelected,
-  });
 
   // TODO: rename to handleClick when handleClick prop is deprecated
   function handleOnClick(evt) {
@@ -284,36 +281,30 @@ export function SelectableTile(props) {
   }, [selected]);
 
   return (
-    <>
-      <input
-        ref={input}
-        tabIndex={-1}
-        id={id}
-        className={inputClasses}
-        value={value}
-        onChange={!disabled ? handleChange : null}
-        type="checkbox"
-        disabled={disabled}
-        name={name}
-        title={title}
-        checked={isSelected}
-      />
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-      <label
-        htmlFor={id}
-        className={classes}
-        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-        tabIndex={!disabled ? tabIndex : null}
-        {...rest}
-        onClick={!disabled ? handleOnClick : null}
-        onKeyDown={!disabled ? handleOnKeyDown : null}>
-        <span
-          className={`${prefix}--tile__checkmark ${prefix}--tile__checkmark--persistent`}>
-          {isSelected ? <CheckboxCheckedFilled16 /> : <Checkbox16 />}
-        </span>
-        <span className={`${prefix}--tile-content`}>{children}</span>
+    <div
+      className={classes}
+      onClick={!disabled ? handleOnClick : null}
+      role="checkbox"
+      aria-checked={isSelected}
+      disabled={disabled}
+      onKeyDown={!disabled ? handleOnKeyDown : null}
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+      tabIndex={!disabled ? tabIndex : null}
+      value={value}
+      name={name}
+      ref={input}
+      id={id}
+      onChange={!disabled ? handleChange : null}
+      title={title}
+      {...rest}>
+      <span
+        className={`${prefix}--tile__checkmark ${prefix}--tile__checkmark--persistent`}>
+        {isSelected ? <CheckboxCheckedFilled16 /> : <Checkbox16 />}
+      </span>
+      <label htmlFor={id} className={`${prefix}--tile-content`}>
+        {children}
       </label>
-    </>
+    </div>
   );
 }
 
