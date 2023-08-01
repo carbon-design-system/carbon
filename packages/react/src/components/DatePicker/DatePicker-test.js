@@ -223,7 +223,7 @@ describe('Simple date picker', () => {
         </React.Suspense>
       );
 
-      const labeledElement = await screen.findByLabelText('Date Picker label');
+      const labeledElement = await screen.findByText('Date Picker label');
       expect(labeledElement).toBeInTheDocument();
 
       const input = screen.getByRole('textbox');
