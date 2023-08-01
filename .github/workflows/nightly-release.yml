@@ -8,6 +8,10 @@ on:
 jobs:
   release:
     runs-on: macos-11
+    # Needed as recommended by npm docs on publishing with provenance https://docs.npmjs.com/generating-provenance-statements
+    permissions:
+      id-token: write
+      contents: write
     steps:
       - uses: actions/checkout@main
       - name: Use Node.js 18.x
