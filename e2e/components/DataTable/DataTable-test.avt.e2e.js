@@ -74,6 +74,115 @@ test.describe('DataTable @avt', () => {
         'components-datatable-dynamic--default'
       );
     });
+
+    test('default keyboard navigation sequence', async ({ page }) => {
+      await visitStory(page, {
+        component: 'DataTable',
+        id: 'components-datatable-dynamic--default',
+        globals: {
+          theme: 'white',
+        },
+      });
+
+      await expect(page).toHaveNoACViolations(
+        'components-datatable-dynamic--default'
+      );
+
+      // Start off by manually focusing the search input
+      await page.getByRole('searchbox').focus();
+      await expect(page.getByRole('searchbox')).toBeFocused();
+
+      // Navigate to the gear/settings button
+      await page.keyboard.press('Tab');
+      await expect(
+        page.getByRole('button', { name: 'Settings' })
+      ).toBeFocused();
+
+      // Navigate to the select all checkbox
+      await page.keyboard.press('Tab');
+      await expect(
+        page.getByRole('checkbox', { name: 'Select all rows' })
+      ).toBeFocused();
+
+      // Pressing enter on the select all checkbox shouldn't do anything
+      await page.keyboard.press('Enter');
+      await expect(
+        page.getByRole('checkbox', { name: 'Select all rows' })
+      ).not.toBeChecked();
+
+      // Pressing space should check the select all checkbox
+      await page.keyboard.press('Space');
+      await expect(
+        page.getByRole('checkbox', { name: 'Select all rows' })
+      ).toBeChecked();
+
+      // Every checkbox should be checked
+      for (const checkbox of await page.getByRole('checkbox').all()) {
+        await expect(checkbox).toBeChecked();
+      }
+
+      // Pressing space should uncheck the select all checkbox
+      await page.keyboard.press('Space');
+      await expect(
+        page.getByRole('checkbox', { name: 'Select all rows' })
+      ).not.toBeChecked();
+      // Every checkbox should no longer be checked
+      for (const checkbox of await page.getByRole('checkbox').all()) {
+        await expect(checkbox).not.toBeChecked();
+      }
+
+      // Navigate to the first expansion button
+      await page.keyboard.press('Tab');
+      await expect(
+        page.getByRole('button', { name: 'Expand current row' }).first()
+      ).toBeFocused();
+      // Expand the first row
+      await page.keyboard.press('Space');
+      await expect(
+        page.getByRole('heading', { name: 'Expandable row content' }).first()
+      ).toBeVisible();
+
+      // Navigate to the first row selection checkbox and check it
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Space');
+      await expect(page.getByText('1 item selected')).toBeVisible();
+
+      // Navigate backwards up into the batch action bar
+      await page.keyboard.press('Shift+Tab');
+      await page.keyboard.press('Shift+Tab');
+      await page.keyboard.press('Shift+Tab');
+      await page.keyboard.press('Shift+Tab');
+      await page.keyboard.press('Shift+Tab');
+      await page.keyboard.press('Shift+Tab');
+      await page.keyboard.press('Shift+Tab');
+      await page.keyboard.press('Shift+Tab');
+
+      await page
+        .getByRole('heading', { name: 'Expandable row content' })
+        .first()
+        .hover();
+      await expect(page).toHaveNoACViolations(
+        'components-datatable-dynamic--default---with-batch-actions-open-and-row-expanded'
+      );
+      await expect(page.getByRole('button', { name: 'Delete' })).toBeFocused();
+
+      // Navigate forwards through the batch action buttons
+      await page.keyboard.press('Tab');
+      await expect(page.getByRole('button', { name: 'Save' })).toBeFocused();
+      await page.keyboard.press('Tab');
+      await expect(
+        page.getByRole('button', { name: 'Download' })
+      ).toBeFocused();
+      await page.keyboard.press('Tab');
+      await expect(page.getByRole('button', { name: 'Cancel' })).toBeFocused();
+      // Invoke the cancel button
+      await page.keyboard.press('Space');
+      await expect(page.getByText('1 item selected')).not.toBeVisible();
+      // Every checkbox should no longer be checked
+      for (const checkbox of await page.getByRole('checkbox').all()) {
+        await expect(checkbox).not.toBeChecked();
+      }
+    });
   });
 
   test.describe('expansion', () => {
