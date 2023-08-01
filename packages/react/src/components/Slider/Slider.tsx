@@ -626,15 +626,17 @@ export default class Slider extends PureComponent<SliderProps> {
       this.element?.ownerDocument.addEventListener(element, this.onDrag);
     });
 
+    const clientX = this.getClientXFromEvent(evt);
+
     let activeHandle;
     if (this.props.twoHandles) {
       const distanceToLower = this.calcDistanceToHandle(
         HandlePosition.LOWER,
-        evt.clientX
+        clientX
       );
       const distanceToUpper = this.calcDistanceToHandle(
         HandlePosition.UPPER,
-        evt.clientX
+        clientX
       );
       if (distanceToLower <= distanceToUpper) {
         activeHandle = HandlePosition.LOWER;
@@ -690,19 +692,7 @@ export default class Slider extends PureComponent<SliderProps> {
       return;
     }
 
-    let clientX;
-    if ('clientX' in evt) {
-      clientX = evt.clientX;
-    } else if (
-      'touches' in evt &&
-      0 in evt.touches &&
-      'clientX' in evt.touches[0]
-    ) {
-      clientX = evt.touches[0].clientX;
-    } else {
-      // Do nothing if we have no valid clientX
-      return;
-    }
+    const clientX = this.getClientXFromEvent(evt);
 
     const { value, left } = this.calcValue({
       clientX,
@@ -1021,6 +1011,20 @@ export default class Slider extends PureComponent<SliderProps> {
     const boundingRect = this.element?.getBoundingClientRect();
     return boundingRect ?? new DOMRect();
   };
+
+  getClientXFromEvent(event: MouseEvent | TouchEvent) {
+    let clientX;
+    if ('clientX' in event) {
+      clientX = event.clientX;
+    } else if (
+      'touches' in event &&
+      0 in event.touches &&
+      'clientX' in event.touches[0]
+    ) {
+      clientX = event.touches[0].clientX;
+    }
+    return clientX;
+  }
 
   // syncs invalid state and prop
   static getDerivedStateFromProps(props, state) {
