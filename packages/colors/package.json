@@ -29,7 +29,8 @@
     "react"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "scripts": {
     "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonColors && node tasks/build.js && carbon-cli check \"scss/*.scss\"",

@@ -28,7 +28,8 @@
     "react"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "scripts": {
     "build": "yarn clean && node tasks/build-styles.js && node tasks/build.js",
