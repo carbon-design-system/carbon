@@ -9,8 +9,8 @@ import * as ContainedListStories from './ContainedList.stories.js';
 
 ## Table of Contents
 
-{/* <!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -31,68 +31,76 @@ import * as ContainedListStories from './ContainedList.stories.js';
 ### Search
 
 #### Expandable Search:
-Within the Contained List you can pass in an `ExpandableSearch` component within the `action` prop as seen below.
-The `ExpandableSearch` will give you the capability to expand and collapse the search bar within the title.
-However, we do not support passing in the `ExpandableSearch` within the title action prop while passing in the `Search` component
-as a child at the same time. If this happens, the `ExpandableSearch` in the title will override any other `Search` passed in as a child.
-To prevent this potential conflict, we have added funtionality to support both designs and both use cases. Please see [Persistent Search](#persistent-search) docs below.
+
+Within the Contained List you can pass in an `ExpandableSearch` component within
+the `action` prop as seen below. The `ExpandableSearch` will give you the
+capability to expand and collapse the search bar within the title. However, we
+do not support passing in the `ExpandableSearch` within the title action prop
+while passing in the `Search` component as a child at the same time. If this
+happens, the `ExpandableSearch` in the title will override any other `Search`
+passed in as a child. To prevent this potential conflict, we have added
+funtionality to support both designs and both use cases. Please see
+[Persistent Search](#persistent-search) docs below.
 
 ```js
-  export const WithExpandableSearch = () => {
-    const [searchTerm, setSearchTerm] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
-    const handleChange = (event) => {
-      setSearchTerm(event.target.value);
-    };
-
-    useEffect(() => {
-      const listItems = [
-        'List item 1',
-        'List item 2',
-        'List item 3',
-        'List item 4'
-      ];
-
-      const results = listItems.filter((listItem) =>
-        listItem.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setSearchResults(results);
-    }, [searchTerm]);
-
-    return (
-      <ContainedList
-        label="List title"
-        kind="on-page"
-        action={
-          <ExpandableSearch
-            placeholder="Filterable search"
-            value={searchTerm}
-            onChange={handleChange}
-            closeButtonLabelText="Clear search input"
-            size="lg"
-          />
-        }>
-        {searchResults.map((listItem, key) => (
-          <ContainedListItem key={key}>
-            {listItem}
-          </ContainedListItem>
-        ))}
-      </ContainedList>
-    );
+export const WithExpandableSearch = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
   };
+
+  useEffect(() => {
+    const listItems = [
+      'List item 1',
+      'List item 2',
+      'List item 3',
+      'List item 4',
+    ];
+
+    const results = listItems.filter((listItem) =>
+      listItem.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(results);
+  }, [searchTerm]);
+
+  return (
+    <ContainedList
+      label="List title"
+      kind="on-page"
+      action={
+        <ExpandableSearch
+          placeholder="Filterable search"
+          value={searchTerm}
+          onChange={handleChange}
+          closeButtonLabelText="Clear search input"
+          size="lg"
+        />
+      }>
+      {searchResults.map((listItem, key) => (
+        <ContainedListItem key={key}>{listItem}</ContainedListItem>
+      ))}
+    </ContainedList>
+  );
+};
 ```
+
 <Canvas>
   <Story of={ContainedListStories.WithExpandableSearch} />
 </Canvas>
 
 #### Persistent Search:
-We have added in the capability to pass down the `Search` component as a child of `ContainedList`.
-The `Search` component itself is not a prop but does render with specific styling such that the `Search` bar appears below the Contained List title as opposed to rendering inline.
-If you would like the Search to render inline to the Contained List title, please see the [Expandable Search](#expandable-search) docs above
-The `Search` component will also remain persistent under the title, so that it remains visible on scroll, when there are many list items passed in.
+
+We have added in the capability to pass down the `Search` component as a child
+of `ContainedList`. The `Search` component itself is not a prop but does render
+with specific styling such that the `Search` bar appears below the Contained
+List title as opposed to rendering inline. If you would like the Search to
+render inline to the Contained List title, please see the
+[Expandable Search](#expandable-search) docs above The `Search` component will
+also remain persistent under the title, so that it remains visible on scroll,
+when there are many list items passed in.
 
 ```js
-
 export const WithPersistentSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -105,7 +113,7 @@ export const WithPersistentSearch = () => {
       'List item 1',
       'List item 2',
       'List item 3',
-      'List item 4'
+      'List item 4',
     ];
 
     const results = listItems.filter((listItem) =>
@@ -124,14 +132,11 @@ export const WithPersistentSearch = () => {
         size="lg"
       />
       {searchResults.map((listItem, key) => (
-        <ContainedListItem key={key}>
-          {listItem}
-        </ContainedListItem>
+        <ContainedListItem key={key}>{listItem}</ContainedListItem>
       ))}
     </ContainedList>
   );
 };
-
 ```
 
 <Canvas>

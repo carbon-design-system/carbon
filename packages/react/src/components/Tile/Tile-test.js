@@ -183,7 +183,7 @@ describe('Tile', () => {
 
     it('toggles the expandable class on click', async () => {
       const onClick = jest.fn();
-      render(
+      const { container } = render(
         <ExpandableTile onClick={onClick}>
           <TileAboveTheFoldContent>
             <div>TestAbove</div>
@@ -193,6 +193,7 @@ describe('Tile', () => {
           </TileBelowTheFoldContent>
         </ExpandableTile>
       );
+      expect(container.firstChild.nodeName).toBe('BUTTON');
       expect(screen.getByRole('button')).not.toHaveClass(
         `${prefix}--tile--is-expanded`
       );
@@ -278,6 +279,80 @@ describe('Tile', () => {
       expect(screen.getByRole('button')).not.toHaveClass(
         `${prefix}--tile--is-expanded`
       );
+    });
+  });
+
+  describe('ExpandableTile with interactive elements', () => {
+    it('does not render the tile as a button and expands/collapses', async () => {
+      const onClick = jest.fn();
+      const { container } = render(
+        <ExpandableTile onClick={onClick}>
+          <TileAboveTheFoldContent>
+            <button type="button">TestAbove</button>
+          </TileAboveTheFoldContent>
+          <TileBelowTheFoldContent>
+            <button type="button">TestBelow</button>
+          </TileBelowTheFoldContent>
+        </ExpandableTile>
+      );
+
+      const tile = container.firstChild;
+      const expandButton = screen.getByRole('button', {
+        name: 'Interact to expand Tile',
+      });
+
+      expect(tile.nodeName).not.toBe('BUTTON');
+      expect(tile).toContainElement(expandButton);
+      expect(tile).not.toHaveAttribute('aria-expanded');
+
+      expect(expandButton).toHaveAttribute('aria-expanded', 'false');
+      expect(expandButton).toHaveAttribute(
+        'aria-controls',
+        expect.stringContaining('expandable-tile-interactive')
+      );
+
+      await userEvent.click(expandButton);
+
+      expect(onClick).toHaveBeenCalled();
+      expect(expandButton).toHaveAttribute('aria-expanded', 'true');
+    });
+  });
+
+  describe('ExpandableTile with role elements', () => {
+    it('does not render the tile as a button and expands/collapses', async () => {
+      const onClick = jest.fn();
+      const { container } = render(
+        <ExpandableTile onClick={onClick}>
+          <TileAboveTheFoldContent>
+            <div role="table" className="testing">
+              TestAbove
+            </div>
+          </TileAboveTheFoldContent>
+          <TileBelowTheFoldContent>
+            <div>TestBelow</div>
+          </TileBelowTheFoldContent>
+        </ExpandableTile>
+      );
+
+      const tile = container.firstChild;
+      const expandButton = screen.getByRole('button', {
+        name: 'Interact to expand Tile',
+      });
+
+      expect(tile.nodeName).not.toBe('BUTTON');
+      expect(tile).toContainElement(expandButton);
+      expect(tile).not.toHaveAttribute('aria-expanded');
+
+      expect(expandButton).toHaveAttribute('aria-expanded', 'false');
+      expect(expandButton).toHaveAttribute(
+        'aria-controls',
+        expect.stringContaining('expandable-tile-interactive')
+      );
+
+      await userEvent.click(expandButton);
+
+      expect(onClick).toHaveBeenCalled();
+      expect(expandButton).toHaveAttribute('aria-expanded', 'true');
     });
   });
 });

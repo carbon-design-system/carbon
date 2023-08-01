@@ -1,7 +1,7 @@
 {
   "name": "@carbon/feature-flags",
   "description": "Build with feature flags in Carbon",
-  "version": "0.15.0",
+  "version": "0.16.0-rc.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -25,7 +25,8 @@
     "react"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "scripts": {
     "build": "yarn clean && node tasks/build.js && rollup -c",
@@ -42,7 +43,7 @@
     "@rollup/plugin-babel": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.0.0",
     "change-case": "^4.1.2",
-    "fs-extra": "^10.0.0",
+    "fs-extra": "^11.0.0",
     "js-yaml": "^3.14.0",
     "rimraf": "^5.0.0",
     "rollup": "^2.79.1",

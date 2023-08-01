@@ -69,7 +69,7 @@
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
-    padding-left: 4rem;
+    padding-left: 3.5rem;
     border-bottom: 1px solid $border-subtle;
     transition: padding-bottom $duration-fast-02 motion(standard, productive),
       transform $duration-fast-02 motion(standard, productive),
