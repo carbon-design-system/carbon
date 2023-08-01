@@ -226,9 +226,7 @@ describe('Simple date picker', () => {
       const labeledElement = await screen.findByLabelText('Date Picker label');
       expect(labeledElement).toBeInTheDocument();
 
-      // eslint-disable-next-line testing-library/no-node-access
-      const input = document.querySelector('.cds--date-picker__input');
-
+      const input = screen.getByRole('textbox');
       expect(screen.getByRole('application')).not.toHaveClass('open');
       await userEvent.click(input);
       expect(screen.getByRole('application')).toHaveClass('open');
