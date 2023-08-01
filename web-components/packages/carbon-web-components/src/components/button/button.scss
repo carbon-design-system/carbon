@@ -35,6 +35,10 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-button-skeleton) {
+  @include emit-layout-tokens();
+}
+
 :host(#{$prefix}-button[isExpressive]) ::slotted([slot='icon']),
 :host(#{$prefix}-modal-footer-button[isExpressive]) ::slotted([slot='icon']) {
   width: rem(20px);

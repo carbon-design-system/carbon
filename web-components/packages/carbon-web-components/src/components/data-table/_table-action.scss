@@ -50,6 +50,10 @@
   @extend .#{$prefix}--toolbar-action;
   @extend .#{$prefix}--toolbar-search-container-expandable;
 
+  &:hover {
+    background-color: $field-hover;
+  }
+
   flex: none;
   transition: flex 175ms $standard-easing;
 
