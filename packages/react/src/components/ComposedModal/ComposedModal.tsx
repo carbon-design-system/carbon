@@ -7,6 +7,7 @@ import React, {
   type HTMLAttributes,
   type ReactNode,
   type ReactElement,
+  type RefObject,
 } from 'react';
 import { isElement } from 'react-is';
 import PropTypes from 'prop-types';
@@ -148,6 +149,11 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   isFullWidth?: boolean;
 
   /**
+   * Provide a ref to return focus to once the modal is closed.
+   */
+  launcherButtonRef?: RefObject<HTMLButtonElement>;
+
+  /**
    * Specify an optional handler for closing modal.
    * Returning `false` here prevents closing modal.
    */
@@ -194,6 +200,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       selectorPrimaryFocus,
       selectorsFloatingMenus,
       size,
+      launcherButtonRef,
       ...rest
     },
     ref
@@ -305,6 +312,14 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     });
 
     useEffect(() => {
+      if (!open && launcherButtonRef) {
+        setTimeout(() => {
+          launcherButtonRef?.current?.focus();
+        });
+      }
+    }, [open, launcherButtonRef]);
+
+    useEffect(() => {
       const initialFocus = (focusContainerElement) => {
         const containerElement = focusContainerElement || innerModal.current;
         const primaryFocusElement = containerElement
@@ -406,6 +421,17 @@ ComposedModal.propTypes = {
    * Specify whether the Modal content should have any inner padding.
    */
   isFullWidth: PropTypes.bool,
+
+  /**
+   * Provide a ref to return focus to once the modal is closed.
+   */
+  // @ts-expect-error: Invalid derived type
+  launcherButtonRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({
+      current: PropTypes.any,
+    }),
+  ]),
 
   /**
    * Specify an optional handler for closing modal.

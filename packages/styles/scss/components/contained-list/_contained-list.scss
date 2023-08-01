@@ -134,6 +134,7 @@
 
   .#{$prefix}--contained-list-item {
     position: relative;
+    display: list-item;
     list-style: none;
   }
 
