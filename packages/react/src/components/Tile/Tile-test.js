@@ -15,6 +15,7 @@ import {
   TileBelowTheFoldContent,
 } from '../Tile';
 import { shallow, mount } from 'enzyme';
+import { render } from '@carbon/test-utils/react';
 
 const prefix = 'bx';
 
@@ -229,8 +230,15 @@ describe('Tile', () => {
       expect(wrapper.find('div').at(0).props().disabled).toEqual(true);
     });
 
-    it('should have no Accessibility Checker violations', () => {
-      expect(wrapper).toHaveNoACViolations('SelectableTile');
+    it('should have no AC violations', async () => {
+      const { container } = render(
+        <main>
+          <SelectableTile id="tile-1" name="tiles" value="selectable">
+            Selectable
+          </SelectableTile>
+        </main>
+      );
+      await expect(container).toHaveNoACViolations('SelectableTile');
     });
   });
 
