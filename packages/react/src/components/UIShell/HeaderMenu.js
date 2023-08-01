@@ -13,6 +13,7 @@ import { keys, matches } from '../../internal/keyboard';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { PrefixContext } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
+import { composeEventHandlers } from '../../tools/events';
 
 /**
  * `HeaderMenu` is used to render submenu's in the `Header`. Most often children
@@ -56,6 +57,24 @@ class HeaderMenu extends React.Component {
      * Provide a label for the link text
      */
     menuLinkName: PropTypes.string.isRequired,
+
+    /**
+     * Optionally provide an onBlur handler that is called when the underlying
+     * button fires it's onblur event
+     */
+    onBlur: PropTypes.func,
+
+    /**
+     * Optionally provide an onClick handler that is called when the underlying
+     * button fires it's onclick event
+     */
+    onClick: PropTypes.func,
+
+    /**
+     * Optionally provide an onKeyDown handler that is called when the underlying
+     * button fires it's onkeydown event
+     */
+    onKeyDown: PropTypes.func,
 
     /**
      * Optional component to render instead of string
@@ -190,6 +209,9 @@ class HeaderMenu extends React.Component {
       renderMenuContent: MenuContent,
       menuLinkName,
       focusRef, // eslint-disable-line no-unused-vars
+      onBlur,
+      onClick,
+      onKeyDown,
       ...rest
     } = this.props;
 
@@ -226,9 +248,9 @@ class HeaderMenu extends React.Component {
       <li // eslint-disable-line jsx-a11y/mouse-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions
         {...rest}
         className={itemClassName}
-        onKeyDown={this.handleMenuClose}
-        onClick={this.handleOnClick}
-        onBlur={this.handleOnBlur}>
+        onKeyDown={composeEventHandlers([onKeyDown, this.handleMenuClose])}
+        onClick={composeEventHandlers([onClick, this.handleOnClick])}
+        onBlur={composeEventHandlers([onBlur, this.handleOnBlur])}>
         <a // eslint-disable-line jsx-a11y/role-supports-aria-props,jsx-a11y/anchor-is-valid
           aria-haspopup="menu" // eslint-disable-line jsx-a11y/aria-proptypes
           aria-expanded={this.state.expanded}
