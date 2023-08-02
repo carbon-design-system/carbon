@@ -1349,7 +1349,7 @@
   friendly_name: Cloud private
   aliases:
     - private
-    -cloud
+    - cloud
 - name: cloud--sap
   friendly_name: Cloud SAP
   aliases:
@@ -1570,7 +1570,7 @@
     - compliant
     - cloud
 - name: compost--bin
-  friendly_name: Copmpost bin
+  friendly_name: Compost bin
   aliases:
     - compost
     - compost bin
@@ -1724,17 +1724,17 @@
     - 'container,'
     - containers
     - kubernetes
+- name: content--design
+  friendly_name: Content design
+  aliases:
+    - content design
 - name: content-delivery-network
-  friendly_name: Contentn delivery network
+  friendly_name: Content delivery network
   aliases:
     - content
     - delivery
     - network
     - cloud
-- name: content--design
-  friendly_name: Content design
-  aliases:
-    - content design
 - name: continuous
   friendly_name: Continuous
   aliases:
@@ -1780,7 +1780,7 @@
   friendly_name: Copenhagen planetarium
   aliases:
     - copenhagen planetarium
-    - copenhage
+    - copenhagen
     - planetarium
     - city
     - cities
@@ -1870,7 +1870,7 @@
   friendly_name: Quadratic curve
   aliases:
     - curve
-    - quadritic
+    - quadratic
     - quadratic regression
 - name: custom--workloads
   friendly_name: Custom workloads
@@ -2204,7 +2204,7 @@
 - name: distribution--ledger
   friendly_name: Distribution ledger
   aliases:
-    - distibution ledger
+    - distribution ledger
 - name: dna
   friendly_name: DNA
   aliases:
@@ -2546,11 +2546,6 @@
     - africa
     - continent
     - location
-- name: event-driven
-  friendly_name: Event driven
-  aliases:
-    - event driven
-    - cloud
 - name: event--automation
   friendly_name: Event automation
   aliases:
@@ -2610,6 +2605,11 @@
     - events
     - processing
     - cloud
+- name: event-driven
+  friendly_name: Event driven
+  aliases:
+    - event driven
+    - cloud
 - name: expand--horz
   friendly_name: Expand horz
   aliases:
@@ -2640,7 +2640,7 @@
     - export
     - send
     - ship
-    - tranmit
+    - transmit
 - name: export--02
   friendly_name: Export 02
   aliases:
@@ -2680,7 +2680,7 @@
 - name: face--dissatisfied
   friendly_name: Face dissatisfied
   aliases:
-    - face dissatistified
+    - face dissatisfied
     - face
     - unhappy
     - people
@@ -2693,21 +2693,21 @@
 - name: face--satisfied
   friendly_name: Face satisfied
   aliases:
-    - face satistified
+    - face satisfied
     - face
     - happy
     - people
 - name: face--very--dissatisfied
   friendly_name: Face very dissatisfied
   aliases:
-    - face very dissatistified
+    - face very dissatisfied
     - face
     - unhappy
     - people
 - name: face--very--satisfied
   friendly_name: Face very satisfied
   aliases:
-    - face very satistified
+    - face very satisfied
     - face
     - happy
     - people
@@ -3429,6 +3429,12 @@
   aliases:
     - high performance
     - Cloud
+- name: high--performance--computing
+  friendly_name: High performance computing
+  aliases:
+    - high performance
+    - computing
+    - cloud
 - name: high--risk--users
   friendly_name: High Risk Users
   aliases:
@@ -3437,14 +3443,8 @@
     - risk
     - users
     - security
-- name: high--performance--computing
-  friendly_name: High performance computing
-  aliases:
-    - high performance
-    - computing
-    - cloud
 - name: high--speed--data-transport
-  friendly_name: High speed data trasnport
+  friendly_name: High speed data transport
   aliases:
     - high speed
     - data
@@ -3735,6 +3735,11 @@
   aliases:
     - India
     - South Asia
+- name: infrastructure-as-a-service
+  friendly_name: Infrastructure-as-a-service
+  aliases:
+    - infrastructure-as-a-service
+    - cloud
 - name: infrastructure-security
   friendly_name: Infrastructure security
   aliases:
@@ -3742,11 +3747,6 @@
     - secure servers
     - secure storage
     - secure hardware
-- name: infrastructure-as-a-service
-  friendly_name: Infrastructure-as-a-service
-  aliases:
-    - infrastructure-as-a-service
-    - cloud
 - name: inner-source
   friendly_name: Inner source
   aliases:
@@ -3801,7 +3801,7 @@
   aliases:
     - integration
     - cloud
-- name: integraion--03
+- name: integration--03
   friendly_name: Integration 03
   aliases:
     - integration
@@ -4389,8 +4389,11 @@
   aliases:
     - microservices
     - cloud
+- name: microservices--02
+  friendly_name: microservices--02
+  aliases: []
 - name: migration
-  friendly_name: Migratio
+  friendly_name: Migration
   aliases:
     - migration
     - cloud
@@ -4434,7 +4437,7 @@
 - name: mobile--chat
   friendly_name: Mobile chat
   aliases:
-    - mobile chate
+    - mobile chat
     - mobile
     - device interaction
     - device
@@ -4472,12 +4475,6 @@
     - tracking
     - track
     - RFID
-- name: moon-cake
-  friendly_name: Moon cake
-  aliases:
-    - moon cake
-    - celebration
-    - food
 - name: moon--full
   friendly_name: Full moon
   aliases:
@@ -4486,6 +4483,12 @@
     - star
     - sky
     - night
+- name: moon-cake
+  friendly_name: Moon cake
+  aliases:
+    - moon cake
+    - celebration
+    - food
 - name: mortar-and-pestle
   friendly_name: Mortar and pestle
   aliases:
@@ -5598,6 +5601,9 @@
   aliases:
     - resources
     - Cloud
+- name: resseller-programs
+  friendly_name: resseller-programs
+  aliases: []
 - name: retail
   friendly_name: Retail
   aliases:
@@ -5638,7 +5644,7 @@
   aliases:
     - Rio
     - sugarloaf
-    - Rio de Jeneiro
+    - Rio de Janeiro
 - name: robot
   friendly_name: Robot
   aliases:
@@ -5970,6 +5976,13 @@
     - data
     - storage
     - backup
+- name: shanghai--cityscape
+  friendly_name: Shanghai cityscape
+  aliases:
+    - Shanghai
+    - city
+    - cityscape
+    - China
 - name: shanghai--oriental-pearl-tower
   friendly_name: Shanghai Oriental Pearl Tower
   aliases:
@@ -5978,13 +5991,6 @@
     - cityscape
     - tower
     - pearl
-    - China
-- name: shanghai--cityscape
-  friendly_name: Shanghai cityscape
-  aliases:
-    - Shanghai
-    - city
-    - cityscape
     - China
 - name: sharing-data
   friendly_name: Sharing data
@@ -6379,6 +6385,22 @@
     - weather
     - sky
     - forecast
+- name: supply--chain--optimization--01
+  friendly_name: Supply chain optimization 01
+  aliases:
+    - supply chain optimization 01
+    - supply chain
+    - optimization
+    - optimize
+    - blockchain
+- name: supply--chain--optimization--02
+  friendly_name: Supply chain optimization 02
+  aliases:
+    - supply chain optimization 02
+    - supply chain
+    - optimization
+    - optimize
+    - blockchain
 - name: supply-chain--01
   friendly_name: Supply chain 01
   aliases:
@@ -6397,22 +6419,6 @@
     - circle
     - green
     - leaf
-- name: supply--chain--optimization--01
-  friendly_name: Supply chain optimization 01
-  aliases:
-    - supply chain optimization 01
-    - supply chain
-    - optimization
-    - optimize
-    - blockchain
-- name: supply--chain--optimization--02
-  friendly_name: Supply chain optimization 02
-  aliases:
-    - supply chain optimization 02
-    - supply chain
-    - optimization
-    - optimize
-    - blockchain
 - name: support
   friendly_name: Support
   aliases:
