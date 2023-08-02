@@ -836,6 +836,8 @@ export default class Slider extends PureComponent<SliderProps> {
       return;
     }
 
+    const { value: targetValue } = evt.target;
+
     this.processNewInputValue(evt.target);
 
     this.props.onBlur?.({
