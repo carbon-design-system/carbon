@@ -150,15 +150,8 @@ test.describe('Button @avt', () => {
       },
     });
     await expect(page.getByRole('button')).toBeVisible();
-    const buttonLocator = page.getByRole('button');
+    page.getByRole('button').hover();
 
-    const initialColor = await buttonLocator.evaluate(
-      (el) => el.style.backgroundColor
-    );
-    await buttonLocator.hover();
-    const finalColor = await buttonLocator.evaluate(
-      (el) => el.style.backgroundColor
-    );
-    expect(finalColor).not.toBe(initialColor);
+    await expect(page).toHaveNoACViolations('Button-hover');
   });
 });
