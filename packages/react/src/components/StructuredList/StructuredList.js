@@ -267,6 +267,7 @@ export function StructuredListInput(props) {
       className={classes}
       name={name}
       title={title}
+      aria-label={title}
     />
   );
 }
