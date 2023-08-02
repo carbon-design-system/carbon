@@ -359,7 +359,7 @@ export const HeaderBaseWActionsRightPanel = () => {
           ${Search20({ slot: 'icon' })}
         </cds-header-global-action>
         <cds-header-global-action
-          active
+          panel-id="notification-panel"
           aria-label="Notification"
           tooltip-text="Notification">
           ${Notification20({ slot: 'icon' })}
@@ -371,7 +371,10 @@ export const HeaderBaseWActionsRightPanel = () => {
           ${SwitcherIcon20({ slot: 'icon' })}
         </cds-header-global-action>
       </div>
-      <cds-header-panel expanded aria-label="Header Panel"></cds-header-panel>
+      <cds-header-panel
+        id="notification-panel"
+        expanded
+        aria-label="Header Panel"></cds-header-panel>
     </cds-header>`;
 };
 
