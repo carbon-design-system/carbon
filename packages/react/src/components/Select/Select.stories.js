@@ -110,16 +110,7 @@ export const Inline = () => {
   );
 };
 
-export const Skeleton = () => (
-  <div
-    aria-label="loading select"
-    aria-live="assertive"
-    role="status"
-    tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
-  >
-    <SelectSkeleton />
-  </div>
-);
+export const Skeleton = () => <SelectSkeleton />;
 
 export const _WithLayer = () => (
   <WithLayer>
