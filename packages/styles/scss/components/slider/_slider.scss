@@ -166,24 +166,24 @@
       transform: translate(-100%, -50%);
 
       &::before {
-        border-left-color: $interactive;
+        border-left-color: $focus;
       }
 
       &::after {
-        background-color: $interactive;
+        background-color: $focus;
       }
     }
 
     &:focus {
       width: 16px;
       justify-content: space-around;
-      border: 1px solid $interactive;
+      border: 1px solid $focus;
       background-color: $background;
       box-shadow: none;
       transform: translate(-100%, -50%);
 
       &::before {
-        border-left-color: $interactive;
+        border-left-color: $focus;
         transform: translate(1px, 0);
       }
 
@@ -214,7 +214,7 @@
       transform: translate(0, -50%);
 
       &::before {
-        border-right-color: $interactive;
+        border-right-color: $focus;
       }
     }
 
@@ -222,7 +222,7 @@
       transform: translate(0, -50%);
 
       &::before {
-        border-right-color: $interactive;
+        border-right-color: $focus;
         transform: translate(-1px, 0);
       }
     }
