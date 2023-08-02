@@ -15,6 +15,7 @@ import {
   TileBelowTheFoldContent,
 } from '../Tile';
 import { shallow, mount } from 'enzyme';
+import { render } from '@carbon/test-utils/react';
 
 const prefix = 'bx';
 
@@ -167,7 +168,7 @@ describe('Tile', () => {
 
     it('the input should be checked when state is selected', () => {
       label.simulate('click');
-      expect(wrapper.find('input').props().checked).toEqual(true);
+      expect(wrapper.find('div').at(0).prop('aria-checked')).toEqual(true);
     });
 
     it('supports setting initial selected state from props', () => {
@@ -195,10 +196,14 @@ describe('Tile', () => {
     it('supports light version', () => {
       const wrapper = mount(<SelectableTile>Test</SelectableTile>);
       expect(wrapper.props().light).toEqual(false);
-      expect(wrapper.childAt(1).hasClass('bx--tile--light')).toEqual(false);
+      expect(wrapper.find('div').at(0).hasClass('bx--tile--light')).toEqual(
+        false
+      );
       wrapper.setProps({ light: true });
       expect(wrapper.props().light).toEqual(true);
-      expect(wrapper.childAt(1).hasClass('bx--tile--light')).toEqual(true);
+      expect(wrapper.find('div').at(0).hasClass('bx--tile--light')).toEqual(
+        true
+      );
     });
 
     it('should call onChange when the checkbox value changes', () => {
@@ -222,7 +227,18 @@ describe('Tile', () => {
 
     it('supports disabled state', () => {
       wrapper.setProps({ disabled: true });
-      expect(wrapper.find('input').props().disabled).toEqual(true);
+      expect(wrapper.find('div').at(0).props().disabled).toEqual(true);
+    });
+
+    it('should have no AC violations', async () => {
+      const { container } = render(
+        <main>
+          <SelectableTile id="tile-1" name="tiles" value="selectable">
+            Selectable
+          </SelectableTile>
+        </main>
+      );
+      await expect(container).toHaveNoACViolations('SelectableTile');
     });
   });
 
