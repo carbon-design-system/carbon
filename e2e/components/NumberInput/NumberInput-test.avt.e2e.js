@@ -79,5 +79,10 @@ test.describe('NumberInput @avt', () => {
     await input.fill('101');
     await expect(input).toHaveValue('101');
     await expect(input).toHaveAttribute('data-invalid', 'true');
+
+    // Allow setting value under `min`, but should cause input to be invalid
+    await input.fill('-1');
+    await expect(input).toHaveValue('-1');
+    await expect(input).toHaveAttribute('data-invalid', 'true');
   });
 });
