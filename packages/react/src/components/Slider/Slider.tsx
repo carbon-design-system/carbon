@@ -701,7 +701,7 @@ export default class Slider extends PureComponent<SliderProps> {
     // If we're set to two handles, negotiate which drag handle is closest to
     // the users' interaction.
     if (this.props.twoHandles && activeHandle) {
-      this.setStateForHandle(activeHandle, { value, left });
+      this.setValueLeftForHandle(activeHandle, { value, left });
     } else {
       this.setState({ value, left, isValid: true });
     }
@@ -752,7 +752,7 @@ export default class Slider extends PureComponent<SliderProps> {
       const { value, left } = this.calcValue({
         value: this.calcValueForDelta(currentValue, delta, this.props.step),
       });
-      this.setStateForHandle(this.state.activeHandle, {
+      this.setValueLeftForHandle(this.state.activeHandle, {
         value,
         left,
       });
@@ -787,35 +787,14 @@ export default class Slider extends PureComponent<SliderProps> {
       return;
     }
 
-    const targetValue = Number.parseFloat(evt.target.value);
-
     // Avoid calling calcValue for invalid numbers, but still update the state.
     const activeHandle =
       evt.target.dataset.handlePosition ?? HandlePosition.LOWER;
-    if (isNaN(targetValue)) {
-      if (this.props.twoHandles && activeHandle === HandlePosition.LOWER) {
-        this.setState({ valueLower: evt.target.value });
-      } else if (
-        this.props.twoHandles &&
-        activeHandle === HandlePosition.UPPER
-      ) {
-        this.setState({ valueUpper: evt.target.value });
-      } else {
-        this.setState({ value: evt.target.value });
-      }
+
+    if (this.props.twoHandles) {
+      this.setValueForHandle(activeHandle, evt.target.value);
     } else {
-      const { value, left } = this.calcValue({
-        value: targetValue,
-        useRawValue: true,
-      });
-      if (this.props.twoHandles) {
-        this.setStateForHandle(activeHandle, { value, left });
-      } else {
-        this.setState({
-          value,
-          left,
-        });
-      }
+      this.setState({ value: evt.target.value });
     }
   };
 
@@ -831,35 +810,73 @@ export default class Slider extends PureComponent<SliderProps> {
       return;
     }
 
-    // Determine validity of input change after clicking out of input.
-    let validity = evt.target.checkValidity();
-    const { value } = evt.target;
+    this.processNewInputValue(evt.target);
 
-    // If twoHandles is set, we'll also have the data-handle-position attribute
-    // to consider the other value before settling on the validity to set.
-    const handlePosition = evt.target?.dataset?.handlePosition as
-      | HandlePosition
-      | undefined;
-    if (
-      (handlePosition === HandlePosition.LOWER &&
-        this.state.valueUpper &&
-        (this.state.valueUpper < +value ||
-          this.state.valueUpper > this.props.max)) ||
-      (handlePosition === HandlePosition.UPPER &&
-        this.state.valueLower &&
-        (this.state.valueLower > +value ||
-          this.state.valueLower < this.props.min))
-    ) {
-      validity = false;
-    }
-
-    this.setState({ isValid: validity });
     this.props.onBlur?.({
-      value,
+      value: targetValue,
       handlePosition: evt.target?.dataset?.handlePosition as
         | HandlePosition
         | undefined,
     });
+  };
+
+  onInputKeyDown = (evt) => {
+    // Do nothing if component is disabled, or we don't have a valid event.
+    if (this.props.disabled || this.props.readOnly || !('which' in evt)) {
+      return;
+    }
+
+    // Do nothing if we have no valid event, target, or value.
+    if (!evt || !('target' in evt) || typeof evt.target.value !== 'string') {
+      return;
+    }
+
+    if (matches(evt.which, [keys.Enter, keys.ArrowUp, keys.ArrowDown])) {
+      this.processNewInputValue(evt.target);
+    }
+  };
+
+  processNewInputValue = (input: HTMLInputElement) => {
+    // Determine validity of input change.
+    const validity = input.checkValidity();
+    const { value: targetValue } = input;
+
+    // If twoHandles is set, we'll also have the data-handle-position attribute
+    // to consider the other value before settling on the validity to set.
+    const handlePosition = input?.dataset?.handlePosition as
+      | HandlePosition
+      | undefined;
+
+    this.setState({ isValid: validity });
+
+    if (validity) {
+      const adjustedValue = handlePosition
+        ? this.getAdjustedValueForPosition({
+            handle: handlePosition,
+            value: targetValue,
+            min: this.props.min,
+            max: this.props.max,
+          })
+        : this.getAdjustedValue({
+            value: targetValue,
+            min: this.props.min,
+            max: this.props.max,
+          });
+
+      const { value, left } = this.calcValue({
+        value: adjustedValue,
+        useRawValue: true,
+      });
+
+      if (handlePosition) {
+        this.setValueLeftForHandle(handlePosition, { value, left });
+      } else {
+        this.setState({
+          value,
+          left,
+        });
+      }
+    }
   };
 
   calcLeftPercent = ({ clientX, value, range }: CalcLeftPercentProps) => {
@@ -984,7 +1001,7 @@ export default class Slider extends PureComponent<SliderProps> {
    *
    * Guards against setting either lower or upper values beyond its counterpart.
    */
-  setStateForHandle = (handle: HandlePosition, { value, left }) => {
+  setValueLeftForHandle = (handle: HandlePosition, { value, left }) => {
     const { valueLower, valueUpper, leftLower, leftUpper } = this.state;
     if (handle === HandlePosition.LOWER) {
       // Don't allow higher than the upper handle.
@@ -1000,6 +1017,54 @@ export default class Slider extends PureComponent<SliderProps> {
         isValid: true,
       });
     }
+  };
+
+  setValueForHandle = (handle: HandlePosition, value) => {
+    if (handle === HandlePosition.LOWER) {
+      this.setState({ valueLower: value, isValid: true });
+    } else {
+      this.setState({ valueUpper: value, isValid: true });
+    }
+  };
+
+  isValidValueForPosition = ({ handle, value, min, max }) => {
+    const { valueLower, valueUpper } = this.state;
+
+    if (value < min || value > max) {
+      return false;
+    }
+
+    if (handle === HandlePosition.LOWER) {
+      return !valueUpper || value <= valueUpper;
+    } else if (handle === HandlePosition.UPPER) {
+      return !valueLower || value >= valueLower;
+    }
+
+    return false;
+  };
+
+  getAdjustedValueForPosition = ({ handle, value, min, max }) => {
+    const { valueLower, valueUpper } = this.state;
+
+    value = this.getAdjustedValue({ value, min, max });
+
+    // Next adjust to the opposite handle.
+    if (handle === HandlePosition.LOWER && valueUpper) {
+      value = value > valueUpper ? valueUpper : value;
+    } else if (handle === HandlePosition.UPPER && valueLower) {
+      value = value < valueLower ? valueLower : value;
+    }
+    return value;
+  };
+
+  getAdjustedValue = ({ value, min, max }) => {
+    if (value < min) {
+      value = min;
+    }
+    if (value > max) {
+      value = max;
+    }
+    return value;
   };
 
   /**
@@ -1176,6 +1241,7 @@ export default class Slider extends PureComponent<SliderProps> {
                       onChange={this.onChange}
                       onBlur={this.onBlur}
                       onKeyUp={this.props.onInputKeyUp}
+                      onKeyDown={this.onInputKeyDown}
                       data-invalid={!isValid && !readOnly ? true : null}
                       data-handle-position={
                         twoHandles ? HandlePosition.LOWER : null
@@ -1281,6 +1347,7 @@ export default class Slider extends PureComponent<SliderProps> {
                     step={step}
                     onChange={this.onChange}
                     onBlur={this.onBlur}
+                    onKeyDown={this.onInputKeyDown}
                     onKeyUp={this.props.onInputKeyUp}
                     data-invalid={!isValid && !readOnly ? true : null}
                     data-handle-position={
