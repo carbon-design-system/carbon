@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('NumberInput @avt', () => {
-  test.skip('accessibility-checker default', async ({ page }) => {
+  test('accessibility-checker default', async ({ page }) => {
     await visitStory(page, {
       component: 'NumberInput',
       id: 'components-numberinput--default',
@@ -22,7 +22,7 @@ test.describe('NumberInput @avt', () => {
     await expect(page).toHaveNoACViolations('components-numberinput--default');
   });
 
-  test.skip('accessibility-checker skeleton', async ({ page }) => {
+  test('accessibility-checker skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'NumberInput',
       id: 'components-numberinput--skeleton',
@@ -74,5 +74,10 @@ test.describe('NumberInput @avt', () => {
     await decrement.click();
     await expect(input).toHaveValue('50');
     await expect(input).not.toBeFocused();
+
+    // Allow setting value over `max`, but should cause input to be invalid
+    await input.fill('101');
+    await expect(input).toHaveValue('101');
+    await expect(input).toHaveAttribute('data-invalid', 'true');
   });
 });
