@@ -4389,9 +4389,6 @@
   aliases:
     - microservices
     - cloud
-- name: microservices--02
-  friendly_name: microservices--02
-  aliases: []
 - name: migration
   friendly_name: Migration
   aliases:
@@ -5601,9 +5598,6 @@
   aliases:
     - resources
     - Cloud
-- name: resseller-programs
-  friendly_name: resseller-programs
-  aliases: []
 - name: retail
   friendly_name: Retail
   aliases:
