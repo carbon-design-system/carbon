@@ -463,6 +463,8 @@ export default class Slider extends PureComponent<SliderProps> {
     leftUpper: 0,
     needsOnRelease: false,
     isValid: true,
+    isValidLower: true,
+    isValidUpper: true,
     activeHandle: null,
   };
 
@@ -673,7 +675,13 @@ export default class Slider extends PureComponent<SliderProps> {
 
     // Set needsOnRelease flag so event fires on next update. Also unset the
     // activeHandle.
-    this.setState({ needsOnRelease: true, isValid: true, activeHandle: null });
+    this.setState({
+      needsOnRelease: true,
+      isValid: true,
+      isValidLower: true,
+      isValidUpper: true,
+      activeHandle: null,
+    });
   };
 
   /**
@@ -790,11 +798,29 @@ export default class Slider extends PureComponent<SliderProps> {
     // Avoid calling calcValue for invalid numbers, but still update the state.
     const activeHandle =
       evt.target.dataset.handlePosition ?? HandlePosition.LOWER;
+    const targetValue = Number.parseFloat(evt.target.value);
 
     if (this.props.twoHandles) {
-      this.setValueForHandle(activeHandle, evt.target.value);
+      if (isNaN(targetValue)) {
+        this.setValueForHandle(activeHandle, evt.target.value);
+      } else if (
+        this.isValidValueForPosition({
+          handle: activeHandle,
+          value: targetValue,
+          min: this.props.min,
+          max: this.props.max,
+        })
+      ) {
+        this.processNewInputValue(evt.target);
+      } else {
+        this.setValueForHandle(activeHandle, evt.target.value);
+      }
     } else {
-      this.setState({ value: evt.target.value });
+      if (isNaN(targetValue)) {
+        this.setState({ value: evt.target.value });
+      } else {
+        this.processNewInputValue(evt.target);
+      }
     }
   };
 
@@ -831,15 +857,14 @@ export default class Slider extends PureComponent<SliderProps> {
       return;
     }
 
-    if (matches(evt.which, [keys.Enter, keys.ArrowUp, keys.ArrowDown])) {
+    if (matches(evt.which, [keys.Enter])) {
       this.processNewInputValue(evt.target);
     }
   };
 
   processNewInputValue = (input: HTMLInputElement) => {
-    // Determine validity of input change.
-    const validity = input.checkValidity();
-    const { value: targetValue } = input;
+    const targetValue = Number.parseFloat(input.value);
+    const validity = !isNaN(targetValue);
 
     // If twoHandles is set, we'll also have the data-handle-position attribute
     // to consider the other value before settling on the validity to set.
@@ -847,6 +872,11 @@ export default class Slider extends PureComponent<SliderProps> {
       | HandlePosition
       | undefined;
 
+    if (handlePosition === HandlePosition.LOWER) {
+      this.setState({ isValidLower: validity });
+    } else if (handlePosition === HandlePosition.UPPER) {
+      this.setState({ isValidUpper: validity });
+    }
     this.setState({ isValid: validity });
 
     if (validity) {
@@ -1008,22 +1038,28 @@ export default class Slider extends PureComponent<SliderProps> {
       this.setState({
         valueLower: valueUpper && value > valueUpper ? valueUpper : value,
         leftLower: valueUpper && value > valueUpper ? leftUpper : left,
-        isValid: true,
+        isValidLower: true,
       });
     } else {
       this.setState({
         valueUpper: valueLower && value < valueLower ? valueLower : value,
         leftUpper: valueLower && value < valueLower ? leftLower : left,
-        isValid: true,
+        isValidUpper: true,
       });
     }
   };
 
   setValueForHandle = (handle: HandlePosition, value) => {
     if (handle === HandlePosition.LOWER) {
-      this.setState({ valueLower: value, isValid: true });
+      this.setState({
+        valueLower: value,
+        isValidLower: true,
+      });
     } else {
-      this.setState({ valueUpper: value, isValid: true });
+      this.setState({
+        valueUpper: value,
+        isValidUpper: true,
+      });
     }
   };
 
@@ -1093,21 +1129,50 @@ export default class Slider extends PureComponent<SliderProps> {
 
   // syncs invalid state and prop
   static getDerivedStateFromProps(props, state) {
-    const { isValid } = state;
-    // will override state in favor of invalid prop
-    if (props.invalid === true && isValid === true) {
-      return {
-        isValid: false,
-      };
-    }
+    const { isValid, isValidLower, isValidUpper } = state;
+    let derivedState = {};
 
-    if (props.invalid === false && isValid === false) {
-      return {
-        isValid: true,
-      };
+    // Will override state in favor of invalid prop
+    if (props.invalid === true) {
+      if (isValid === true) {
+        derivedState = {
+          ...derivedState,
+          isValid: false,
+        };
+      }
+      if (isValidLower === true) {
+        derivedState = {
+          ...derivedState,
+          isValidLower: false,
+        };
+      }
+      if (isValidUpper === true) {
+        derivedState = {
+          ...derivedState,
+          isValidUpper: false,
+        };
+      }
+    } else if (props.invalid === false) {
+      if (isValid === false) {
+        derivedState = {
+          ...derivedState,
+          isValid: true,
+        };
+      }
+      if (isValidLower === false) {
+        derivedState = {
+          ...derivedState,
+          isValidLower: true,
+        };
+      }
+      if (isValidUpper === false) {
+        derivedState = {
+          ...derivedState,
+          isValidUpper: true,
+        };
+      }
     }
-    //if invalid prop is not provided, state will remain the same
-    return null;
+    return Object.entries(derivedState).length > 0 ? derivedState : null;
   }
 
   render() {
@@ -1148,7 +1213,14 @@ export default class Slider extends PureComponent<SliderProps> {
     delete other.valueLower;
     delete other.valueUpper;
 
-    const { value, valueLower, valueUpper, isValid } = this.state;
+    const {
+      value,
+      valueLower,
+      valueUpper,
+      isValid,
+      isValidLower,
+      isValidUpper,
+    } = this.state;
 
     return (
       <PrefixContext.Consumer>
@@ -1174,7 +1246,6 @@ export default class Slider extends PureComponent<SliderProps> {
           ];
           const conditionalInputClasses = {
             [`${prefix}--text-input--light`]: light,
-            [`${prefix}--text-input--invalid`]: !readOnly && isValid === false,
             [`${prefix}--slider-text-input--hidden`]: hideTextInput,
             [`${prefix}--slider-text-input--warn`]: !readOnly && warn,
           };
@@ -1186,11 +1257,19 @@ export default class Slider extends PureComponent<SliderProps> {
             ...fixedInputClasses,
             `${prefix}--slider-text-input--lower`,
             conditionalInputClasses,
+            {
+              [`${prefix}--text-input--invalid`]:
+                !readOnly && (twoHandles ? !isValidLower : !isValid),
+            },
           ]);
           const upperInputClasses = classNames([
             ...fixedInputClasses,
             `${prefix}--slider-text-input--upper`,
             conditionalInputClasses,
+            {
+              [`${prefix}--text-input--invalid`]:
+                !readOnly && (twoHandles ? !isValidUpper : !isValid),
+            },
           ]);
           const lowerInputWrapperClasses = classNames([
             `${prefix}--text-input-wrapper`,
@@ -1242,20 +1321,20 @@ export default class Slider extends PureComponent<SliderProps> {
                       onBlur={this.onBlur}
                       onKeyUp={this.props.onInputKeyUp}
                       onKeyDown={this.onInputKeyDown}
-                      data-invalid={!isValid && !readOnly ? true : null}
-                      data-handle-position={
-                        twoHandles ? HandlePosition.LOWER : null
+                      data-invalid={!isValidLower && !readOnly ? true : null}
+                      data-handle-position={HandlePosition.LOWER}
+                      aria-invalid={
+                        !isValidLower && !readOnly ? true : undefined
                       }
-                      aria-invalid={!isValid && !readOnly ? true : undefined}
                       readOnly={readOnly}
                     />
-                    {!readOnly && isValid === false && (
+                    {!readOnly && !isValidLower && (
                       <WarningFilled
                         className={`${prefix}--slider__invalid-icon`}
                       />
                     )}
 
-                    {!readOnly && warn && isValid && (
+                    {!readOnly && warn && isValidLower && (
                       <WarningAltFilled
                         className={`${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`}
                       />
@@ -1276,7 +1355,12 @@ export default class Slider extends PureComponent<SliderProps> {
                   onKeyDown={this.onKeyDown}
                   role="presentation"
                   tabIndex={-1}
-                  data-invalid={!isValid && !readOnly ? true : null}
+                  data-invalid={
+                    (twoHandles ? !isValidLower || !isValidUpper : !isValid) &&
+                    !readOnly
+                      ? true
+                      : null
+                  }
                   {...other}>
                   <div
                     className={lowerThumbClasses}
@@ -1349,27 +1433,37 @@ export default class Slider extends PureComponent<SliderProps> {
                     onBlur={this.onBlur}
                     onKeyDown={this.onInputKeyDown}
                     onKeyUp={this.props.onInputKeyUp}
-                    data-invalid={!isValid && !readOnly ? true : null}
+                    data-invalid={
+                      (twoHandles ? !isValidUpper : !isValid) && !readOnly
+                        ? true
+                        : null
+                    }
                     data-handle-position={
                       twoHandles ? HandlePosition.UPPER : null
                     }
-                    aria-invalid={!isValid && !readOnly ? true : undefined}
+                    aria-invalid={
+                      (twoHandles ? !isValidUpper : !isValid) && !readOnly
+                        ? true
+                        : undefined
+                    }
                     readOnly={readOnly}
                   />
-                  {!readOnly && isValid === false && (
+                  {!readOnly && (twoHandles ? !isValidUpper : !isValid) && (
                     <WarningFilled
                       className={`${prefix}--slider__invalid-icon`}
                     />
                   )}
 
-                  {!readOnly && warn && isValid && (
-                    <WarningAltFilled
-                      className={`${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`}
-                    />
-                  )}
+                  {!readOnly &&
+                    warn &&
+                    (twoHandles ? isValidUpper : isValid) && (
+                      <WarningAltFilled
+                        className={`${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`}
+                      />
+                    )}
                 </div>
               </div>
-              {!readOnly && isValid === false && (
+              {!readOnly && (!isValid || !isValidLower || !isValidUpper) && (
                 <div
                   className={classNames(
                     `${prefix}--slider__validation-msg`,
@@ -1379,7 +1473,7 @@ export default class Slider extends PureComponent<SliderProps> {
                   {invalidText}
                 </div>
               )}
-              {!readOnly && warn && isValid && (
+              {!readOnly && warn && isValid && isValidLower && isValidUpper && (
                 <div
                   className={classNames(
                     `${prefix}--slider__validation-msg`,
