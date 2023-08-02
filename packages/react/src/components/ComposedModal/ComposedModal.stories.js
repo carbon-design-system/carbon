@@ -136,7 +136,7 @@ export const PassiveModal = () => {
 };
 
 export const WithStateManager = () => {
-  const closeButton = useRef();
+  const button = useRef();
 
   /**
    * Simple state manager for modals.
@@ -161,7 +161,7 @@ export const WithStateManager = () => {
   return (
     <ModalStateManager
       renderLauncher={({ setOpen }) => (
-        <Button ref={closeButton} onClick={() => setOpen(true)}>
+        <Button ref={button} onClick={() => setOpen(true)}>
           Launch composed modal
         </Button>
       )}>
@@ -170,10 +170,8 @@ export const WithStateManager = () => {
           open={open}
           onClose={() => {
             setOpen(false);
-            setTimeout(() => {
-              closeButton.current.focus();
-            });
-          }}>
+          }}
+          launcherButtonRef={button}>
           <ModalHeader label="Account resources" title="Add a custom domain" />
           <ModalBody>
             <p style={{ marginBottom: '1rem' }}>

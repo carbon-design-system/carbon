@@ -250,6 +250,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/djragsdale"><img src="https://avatars.githubusercontent.com/u/4396766?v=4?s=100" width="100px;" alt=""/><br /><sub><b>David Ragsdale</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=djragsdale" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/haocheng6"><img src="https://avatars.githubusercontent.com/u/7645930?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Hao Cheng</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=haocheng6" title="Code">💻</a></td>
   </tr>
 </table>
 

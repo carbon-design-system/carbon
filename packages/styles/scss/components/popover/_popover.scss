@@ -173,7 +173,7 @@ $popover-caret-height: custom-property.get-var(
   }
 
   .#{$prefix}--popover--tab-tip
-    .#{$prefix}--popover
+    > .#{$prefix}--popover
     .#{$prefix}--popover-caret {
     display: none;
   }
@@ -183,13 +183,17 @@ $popover-caret-height: custom-property.get-var(
   //-----------------------------------------------------------------------------
 
   // Popover content placement
-  .#{$prefix}--popover--bottom .#{$prefix}--popover-content {
+  .#{$prefix}--popover--bottom
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content {
     bottom: 0;
     left: 50%;
     transform: translate(-50%, calc(100% + $popover-offset));
   }
 
-  .#{$prefix}--popover--bottom-left .#{$prefix}--popover-content {
+  .#{$prefix}--popover--bottom-left
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content {
     bottom: 0;
     left: 0;
     transform: translate(
@@ -198,16 +202,24 @@ $popover-caret-height: custom-property.get-var(
     );
   }
 
-  .#{$prefix}--popover--bottom-right .#{$prefix}--popover-content {
+  .#{$prefix}--popover--bottom-right
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content {
     right: 0;
     bottom: 0;
     transform: translate($popover-offset, calc(100% + $popover-offset));
   }
 
   // Popover hover area placement
-  .#{$prefix}--popover--bottom .#{$prefix}--popover-content::before,
-  .#{$prefix}--popover--bottom-left .#{$prefix}--popover-content::before,
-  .#{$prefix}--popover--bottom-right .#{$prefix}--popover-content::before {
+  .#{$prefix}--popover--bottom
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--bottom-left
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--bottom-right
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content::before {
     top: 0;
     right: 0;
     left: 0;
@@ -216,9 +228,15 @@ $popover-caret-height: custom-property.get-var(
   }
 
   // Caret placement
-  .#{$prefix}--popover--bottom .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--bottom-left .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--bottom-right .#{$prefix}--popover-caret {
+  .#{$prefix}--popover--bottom
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--bottom-left
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--bottom-right
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-caret {
     bottom: 0;
     left: 50%;
     width: $popover-caret-width;
@@ -232,13 +250,17 @@ $popover-caret-height: custom-property.get-var(
   //-----------------------------------------------------------------------------
 
   // Popover content placement
-  .#{$prefix}--popover--top .#{$prefix}--popover-content {
+  .#{$prefix}--popover--top
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content {
     top: 0;
     left: 50%;
     transform: translate(-50%, calc(-100% - $popover-offset));
   }
 
-  .#{$prefix}--popover--top-left .#{$prefix}--popover-content {
+  .#{$prefix}--popover--top-left
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content {
     top: 0;
     left: 0;
     transform: translate(
@@ -247,16 +269,24 @@ $popover-caret-height: custom-property.get-var(
     );
   }
 
-  .#{$prefix}--popover--top-right .#{$prefix}--popover-content {
+  .#{$prefix}--popover--top-right
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content {
     top: 0;
     right: 0;
     transform: translate($popover-offset, calc(-100% - $popover-offset));
   }
 
   // Popover hover area placement
-  .#{$prefix}--popover--top .#{$prefix}--popover-content::before,
-  .#{$prefix}--popover--top-left .#{$prefix}--popover-content::before,
-  .#{$prefix}--popover--top-right .#{$prefix}--popover-content::before {
+  .#{$prefix}--popover--top
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--top-left
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--top-right
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content::before {
     right: 0;
     bottom: 0;
     left: 0;
@@ -265,9 +295,13 @@ $popover-caret-height: custom-property.get-var(
   }
 
   // Caret placement
-  .#{$prefix}--popover--top .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--top-left .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--top-right .#{$prefix}--popover-caret {
+  .#{$prefix}--popover--top > .#{$prefix}--popover .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top-left
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top-right
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-caret {
     top: 0;
     left: 50%;
     width: $popover-caret-width;
@@ -281,7 +315,9 @@ $popover-caret-height: custom-property.get-var(
   //-----------------------------------------------------------------------------
 
   // Popover content placement
-  .#{$prefix}--popover--right .#{$prefix}--popover-content {
+  .#{$prefix}--popover--right
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content {
     top: 50%;
     left: 100%;
     // Add in 0.1px to prevent rounding errors where the content is
@@ -289,7 +325,9 @@ $popover-caret-height: custom-property.get-var(
     transform: translate($popover-offset, -50%);
   }
 
-  .#{$prefix}--popover--right-top .#{$prefix}--popover-content {
+  .#{$prefix}--popover--right-top
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content {
     top: 50%;
     left: 100%;
     transform: translate(
@@ -298,16 +336,24 @@ $popover-caret-height: custom-property.get-var(
     );
   }
 
-  .#{$prefix}--popover--right-bottom .#{$prefix}--popover-content {
+  .#{$prefix}--popover--right-bottom
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content {
     bottom: 50%;
     left: 100%;
     transform: translate($popover-offset, calc(0.5 * $popover-offset + 16px));
   }
 
   // Popover hover area placement
-  .#{$prefix}--popover--right .#{$prefix}--popover-content::before,
-  .#{$prefix}--popover--right-top .#{$prefix}--popover-content::before,
-  .#{$prefix}--popover--right-bottom .#{$prefix}--popover-content::before {
+  .#{$prefix}--popover--right
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--right-top
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--right-bottom
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content::before {
     top: 0;
     bottom: 0;
     left: 0;
@@ -316,9 +362,13 @@ $popover-caret-height: custom-property.get-var(
   }
 
   // Caret placement
-  .#{$prefix}--popover--right .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--right-top .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--right-bottom .#{$prefix}--popover-caret {
+  .#{$prefix}--popover--right > .#{$prefix}--popover .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--right-top
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--right-bottom
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-caret {
     top: 50%;
     left: 100%;
     width: $popover-caret-height;
@@ -332,7 +382,9 @@ $popover-caret-height: custom-property.get-var(
   //-----------------------------------------------------------------------------
 
   // Popover content placement
-  .#{$prefix}--popover--left .#{$prefix}--popover-content {
+  .#{$prefix}--popover--left
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content {
     top: 50%;
     right: 100%;
     // Add in 0.1px to prevent rounding errors where the content is
@@ -340,7 +392,9 @@ $popover-caret-height: custom-property.get-var(
     transform: translate(calc(-1 * $popover-offset + 0.1px), -50%);
   }
 
-  .#{$prefix}--popover--left-top .#{$prefix}--popover-content {
+  .#{$prefix}--popover--left-top
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content {
     top: -50%;
     right: 100%;
     // Add in 0.1px to prevent rounding errors where the content is
@@ -351,7 +405,9 @@ $popover-caret-height: custom-property.get-var(
     );
   }
 
-  .#{$prefix}--popover--left-bottom .#{$prefix}--popover-content {
+  .#{$prefix}--popover--left-bottom
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content {
     right: 100%;
     bottom: -50%;
     // Add in 0.1px to prevent rounding errors where the content is
@@ -363,9 +419,15 @@ $popover-caret-height: custom-property.get-var(
   }
 
   // Popover hover area placement
-  .#{$prefix}--popover--left .#{$prefix}--popover-content::before,
-  .#{$prefix}--popover--left-top .#{$prefix}--popover-content::before,
-  .#{$prefix}--popover--left-bottom .#{$prefix}--popover-content::before {
+  .#{$prefix}--popover--left
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--left-top
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--left-bottom
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content::before {
     top: 0;
     right: 0;
     bottom: 0;
@@ -374,9 +436,13 @@ $popover-caret-height: custom-property.get-var(
   }
 
   // Caret placement
-  .#{$prefix}--popover--left .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--left-top .#{$prefix}--popover-caret,
-  .#{$prefix}--popover--left-bottom .#{$prefix}--popover-caret {
+  .#{$prefix}--popover--left > .#{$prefix}--popover .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--left-top
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--left-bottom
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-caret {
     top: 50%;
     right: 100%;
     width: $popover-caret-height;
@@ -388,7 +454,9 @@ $popover-caret-height: custom-property.get-var(
   //-----------------------------------------------------------------------------
   // Tab Tip Variant
   //-----------------------------------------------------------------------------
-  .#{$prefix}--popover--tab-tip .#{$prefix}--popover-content {
+  .#{$prefix}--popover--tab-tip
+    > .#{$prefix}--popover
+    .#{$prefix}--popover-content {
     border-radius: 0;
   }
 
