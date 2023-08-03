@@ -376,8 +376,6 @@ const Dropdown = React.forwardRef(
       }
     }
 
-    const menuItemOptionRefs = useRef(items.map((_) => React.createRef()));
-
     const handleFocus = (evt: FocusEvent<HTMLDivElement>) => {
       setIsFocused(evt.type === 'focus' ? true : false);
     };
@@ -512,9 +510,6 @@ const Dropdown = React.forwardRef(
                     isActive={selectedItem === item}
                     isHighlighted={highlightedIndex === index}
                     title={title as string}
-                    ref={{
-                      menuItemOptionRef: menuItemOptionRefs.current[index],
-                    }}
                     disabled={itemProps['aria-disabled']}
                     {...itemProps}>
                     {typeof item === 'object' &&
