@@ -821,8 +821,16 @@ export default class Slider extends PureComponent<SliderProps> {
     } else {
       if (isNaN(targetValue)) {
         this.setState({ value: evt.target.value });
-      } else {
+      } else if (
+        this.isValidValue({
+          value: targetValue,
+          min: this.props.min,
+          max: this.props.max,
+        })
+      ) {
         this.processNewInputValue(evt.target);
+      } else {
+        this.setState({ value: evt.target.value });
       }
     }
   };
@@ -1073,7 +1081,7 @@ export default class Slider extends PureComponent<SliderProps> {
   isValidValueForPosition = ({ handle, value, min, max }) => {
     const { valueLower, valueUpper } = this.state;
 
-    if (value < min || value > max) {
+    if (!this.isValidValue({ value, min, max })) {
       return false;
     }
 
@@ -1084,6 +1092,10 @@ export default class Slider extends PureComponent<SliderProps> {
     }
 
     return false;
+  };
+
+  isValidValue = ({ value, min, max }) => {
+    return !(value < min || value > max);
   };
 
   getAdjustedValueForPosition = ({ handle, value, min, max }) => {
