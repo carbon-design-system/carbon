@@ -678,14 +678,12 @@ export default class Slider extends PureComponent<SliderProps> {
       this.element?.ownerDocument.removeEventListener(element, this.onDrag);
     });
 
-    // Set needsOnRelease flag so event fires on next update. Also unset the
-    // activeHandle.
+    // Set needsOnRelease flag so event fires on next update.
     this.setState({
       needsOnRelease: true,
       isValid: true,
       isValidLower: true,
       isValidUpper: true,
-      activeHandle: null,
     });
   };
 
