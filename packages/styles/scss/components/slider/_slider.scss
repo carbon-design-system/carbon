@@ -253,7 +253,7 @@
   }
 
   .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {
-    background-color: $interactive;
+    background-color: $focus;
   }
 
   // Invalid & warn state
