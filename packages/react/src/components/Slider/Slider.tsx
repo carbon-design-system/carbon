@@ -830,7 +830,7 @@ export default class Slider extends PureComponent<SliderProps> {
       ) {
         this.processNewInputValue(evt.target);
       } else {
-        this.setState({ value: evt.target.value });
+        this.setState({ value: targetValue });
       }
     }
   };
@@ -1268,10 +1268,6 @@ export default class Slider extends PureComponent<SliderProps> {
             [`${prefix}--slider-text-input--hidden`]: hideTextInput,
             [`${prefix}--slider-text-input--warn`]: !readOnly && warn,
           };
-          const inputClasses = classNames(
-            fixedInputClasses,
-            conditionalInputClasses
-          );
           const lowerInputClasses = classNames([
             ...fixedInputClasses,
             `${prefix}--slider-text-input--lower`,
@@ -1431,7 +1427,7 @@ export default class Slider extends PureComponent<SliderProps> {
                     type={hideTextInput ? 'hidden' : inputType}
                     id={`${id}-${twoHandles ? 'upper-' : ''}input-for-slider`}
                     name={twoHandles ? nameUpper : name}
-                    className={twoHandles ? upperInputClasses : inputClasses}
+                    className={upperInputClasses}
                     value={twoHandles ? valueUpper : value}
                     aria-labelledby={
                       !ariaLabelInput && !twoHandles ? labelId : undefined
