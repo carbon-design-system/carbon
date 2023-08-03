@@ -13,6 +13,8 @@ import { fireEvent, render, screen } from '@testing-library/react';
 const prefix = 'cds';
 const inputAriaValue = 'slider-input-aria-label-value';
 const initialValue = 50;
+const initialValueLower = 10;
+const initialValueUpper = 90;
 const defaultSliderValue = 1;
 const onBlur = jest.fn();
 const onChange = jest.fn();
@@ -28,6 +30,9 @@ const renderSlider = ({
   ...rest
 } = {}) =>
   render(<Slider value={value} min={min} max={max} step={step} {...rest} />);
+
+const renderTwoHandleSlider = (props = {}) =>
+  renderSlider({ twoHandles: true, ...props });
 
 describe('Slider', () => {
   beforeEach(() => {
@@ -510,6 +515,63 @@ describe('Slider', () => {
         mouseMove(container.firstChild, { clientX: 1000 });
         expect(onRelease).not.toHaveBeenCalled();
       });
+    });
+  });
+
+  describe('behaves as expected - Two Handle Slider', () => {
+    it('should render two handles and two inputs', () => {
+      renderTwoHandleSlider({
+        ariaLabelLower: 'Lower bound',
+        ariaLabelUpper: 'Upper bound',
+      });
+      expect(
+        screen.getByLabelText(/lower bound/i, { selector: '[role=slider]' })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByLabelText(/upper bound/i, { selector: '[role=slider]' })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByLabelText(/lower bound/i, { selector: 'input' })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByLabelText(/upper bound/i, { selector: 'input' })
+      ).toBeInTheDocument();
+    });
+
+    it('should be able to set value via props', () => {
+      renderTwoHandleSlider({
+        ariaLabelLower: 'Lower bound',
+        ariaLabelUpper: 'Upper bound',
+        valueLower: initialValueLower,
+        valueUpper: initialValueUpper,
+        min: 0,
+        max: 100,
+      });
+      const lowerInput = screen.getByLabelText(/lower bound/i, {
+        selector: 'input',
+      });
+      const lowerSlider = screen.getByLabelText(/lower bound/i, {
+        selector: '[role=slider]',
+      });
+      const upperInput = screen.getByLabelText(/upper bound/i, {
+        selector: 'input',
+      });
+      const upperSlider = screen.getByLabelText(/upper bound/i, {
+        selector: '[role=slider]',
+      });
+
+      expect(parseInt(lowerInput.getAttribute('value'))).toEqual(
+        initialValueLower
+      );
+      expect(parseInt(lowerSlider.getAttribute('aria-valuenow'))).toEqual(
+        initialValueLower
+      );
+      expect(parseInt(upperInput.getAttribute('value'))).toEqual(
+        initialValueUpper
+      );
+      expect(parseInt(upperSlider.getAttribute('aria-valuenow'))).toEqual(
+        initialValueUpper
+      );
     });
   });
 });
