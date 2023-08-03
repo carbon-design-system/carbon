@@ -43,13 +43,8 @@ import setupGetInstanceId from '../../tools/setupGetInstanceId';
 const getInstanceId = setupGetInstanceId();
 
 const {
-  ToggleButtonBlur,
   ToggleButtonKeyDownArrowDown,
   ToggleButtonKeyDownArrowUp,
-  ToggleButtonKeyDownEscape,
-  ToggleButtonKeyDownHome,
-  ToggleButtonKeyDownEnd,
-  ToggleButtonClick,
   ItemMouseMove,
 } = useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
   ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
