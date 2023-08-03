@@ -38,6 +38,11 @@ const DRAG_EVENT_TYPES = new Set(['mousemove', 'touchmove']);
 const DRAG_STOP_EVENT_TYPES = new Set(['mouseup', 'touchend', 'touchcancel']);
 
 /**
+ * Width of each two handle range handle when idle.
+ */
+const TWO_HANDLE_IDLE_WIDTH = 12;
+
+/**
  * When twoHandles prop is set, we're in range slider mode with two handles.
  */
 enum HandlePosition {
@@ -996,10 +1001,12 @@ export default class Slider extends PureComponent<SliderProps> {
   };
 
   calcDistanceToHandle = (handle: HandlePosition, clientX) => {
-    // left is a whole value between 0 and 100.
+    // Left is a whole value between 0 and 100. Note that the lower handle is
+    // translated in CSS by -100% of its width, which is 12px. We adjust the
+    // calculation accordingly.
     const left =
       handle === HandlePosition.LOWER
-        ? this.state.leftLower
+        ? this.state.leftLower - TWO_HANDLE_IDLE_WIDTH
         : this.state.leftUpper;
     const boundingRect = this.getSliderBoundingRect();
     const handleX = boundingRect.left + (left / 100) * boundingRect.width;
