@@ -80,10 +80,13 @@ export const Default = () => {
         labelText="Select an option"
         helperText="Optional helper text">
         <SelectItem value="" text="" />
-        <SelectItem value="option-1" text="Option 1" />
-        <SelectItem value="option-2" text="Option 2" />
-        <SelectItem value="option-3" text="Option 3" />
-        <SelectItem value="option-4" text="Option 4" />
+        <SelectItem
+          value="An example option that is really long to show what should be done to handle long text"
+          text="An example option that is really long to show what should be done to handle long text"
+        />
+        <SelectItem value="Option 2" text="Option 2" />
+        <SelectItem value="Option 3" text="Option 3" />
+        <SelectItem value="Option 4" text="Option 4" />
       </Select>
     </div>
   );
@@ -98,10 +101,10 @@ export const Inline = () => {
         labelText="Select"
         helperText="Optional helper text">
         <SelectItem value="" text="" />
-        <SelectItem value="option-1" text="Option 1" />
-        <SelectItem value="option-2" text="Option 2" />
-        <SelectItem value="option-3" text="Option 3" />
-        <SelectItem value="option-4" text="Option 4" />
+        <SelectItem value="Option 1" text="Option 1" />
+        <SelectItem value="Option 2" text="Option 2" />
+        <SelectItem value="Option 3" text="Option 3" />
+        <SelectItem value="Option 4" text="Option 4" />
       </Select>
     </div>
   );
@@ -126,8 +129,11 @@ export const _WithLayer = () => (
         labelText=""
         helperText="Optional helper text">
         <SelectItem value="" text="" />
-        <SelectItem value="option-1" text="Option 1" />
-        <SelectItem value="option-2" text="Option 2" />
+        <SelectItem
+          value="An example option that is really long to show what should be done to handle long text"
+          text="An example option that is really long to show what should be done to handle long text"
+        />
+        <SelectItem value="Option 2" text="Option 2" />
       </Select>
     )}
   </WithLayer>
@@ -142,10 +148,13 @@ export const Playground = (args) => {
         helperText="Optional helper text"
         {...args}>
         <SelectItem value="" text="" />
-        <SelectItem value="option-1" text="Option 1" />
-        <SelectItem value="option-2" text="Option 2" />
-        <SelectItem value="option-3" text="Option 3" />
-        <SelectItem value="option-4" text="Option 4" />
+        <SelectItem
+          value="An example option that is really long to show what should be done to handle long text"
+          text="An example option that is really long to show what should be done to handle long text"
+        />
+        <SelectItem value="Option 2" text="Option 2" />
+        <SelectItem value="Option 3" text="Option 3" />
+        <SelectItem value="Option 4" text="Option 4" />
       </Select>
     </div>
   );
