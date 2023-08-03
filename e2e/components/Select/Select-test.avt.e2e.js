@@ -60,7 +60,7 @@ test.describe('Select  @avt', () => {
     await expect(select).toBeFocused();
     await expect(select).toHaveValue('');
     // Select Option 4
-    await select.selectOption('option-4');
-    await expect(select).toHaveValue('option-4');
+    await select.selectOption('Option 4');
+    await expect(select).toHaveValue('Option 4');
   });
 });
