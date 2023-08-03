@@ -182,12 +182,9 @@ export function StructuredListRow(props) {
       {...other}
       role="row"
       className={classes}
-      onClick={(event) => {
+      onClick={() => {
         setSelectedRow(id);
-        // Avoid that the onClick gets called when arrow down
-        if (!event.target.className.includes('cds--structured-list-input')) {
-          onClick && onClick();
-        }
+        onClick && onClick();
       }}
       onFocus={() => {
         setHasFocusWithin(true);
