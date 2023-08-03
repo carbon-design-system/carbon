@@ -50,6 +50,7 @@ const {
   ToggleButtonKeyDownHome,
   ToggleButtonKeyDownEnd,
   ToggleButtonClick,
+  ItemMouseMove,
 } = useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
   ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
 };
@@ -260,7 +261,6 @@ const Dropdown = React.forwardRef(
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
     const prefix = usePrefix();
-    const [highlightedIndex, setHighlightedIndex] = useState();
     const { isFluid } = useContext(FormContext);
 
     const selectProps: UseSelectProps<ItemType> = {
@@ -269,7 +269,7 @@ const Dropdown = React.forwardRef(
       itemToString,
       initialSelectedItem,
       onSelectedItemChange,
-      onStateChange,
+      stateReducer,
       isItemDisabled(item, _index) {
         const isObject = item !== null && typeof item === 'object';
         return isObject && 'disabled' in item && item.disabled === true;
@@ -277,23 +277,24 @@ const Dropdown = React.forwardRef(
     };
     const { current: dropdownInstanceId } = useRef(getInstanceId());
 
-    function onStateChange(changes) {
-      const { type } = changes;
+    function stateReducer(state, actionAndChanges) {
+      const { changes, props, type } = actionAndChanges;
+      const { highlightedIndex } = changes;
+
       switch (type) {
         case ToggleButtonKeyDownArrowDown:
         case ToggleButtonKeyDownArrowUp:
-        case ToggleButtonKeyDownHome:
-        case ToggleButtonKeyDownEnd:
-          setHighlightedIndex(changes.highlightedIndex);
-          break;
-        case ToggleButtonBlur:
-        case ToggleButtonKeyDownEscape:
-          setHighlightedIndex(changes.highlightedIndex);
-          break;
-        case ToggleButtonClick:
-          setHighlightedIndex(changes.highlightedIndex);
-          break;
+          if (highlightedIndex > -1) {
+            const itemArray = document.querySelectorAll(
+              `div.${prefix}--list-box__menu-item[role="option"]`
+            );
+            props.scrollIntoView(itemArray[highlightedIndex]);
+          }
+          return changes;
+        case ItemMouseMove:
+          return { ...changes, highlightedIndex: state.highlightedIndex };
       }
+      return changes;
     }
 
     // only set selectedItem if the prop is defined. Setting if it is undefined
@@ -309,6 +310,7 @@ const Dropdown = React.forwardRef(
       getMenuProps,
       getItemProps,
       selectedItem,
+      highlightedIndex,
     } = useSelect(selectProps);
     const inline = type === 'inline';
     const showWarning = !invalid && warn;
