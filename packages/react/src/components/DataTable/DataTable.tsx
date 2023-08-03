@@ -129,7 +129,8 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     onExpand?: (e: MouseEvent) => void;
     [key: string]: unknown;
   }) => {
-    ariaLabel: string;
+    ariaLabel: string; // TODO Remove in v12
+    ['aria-label']: string;
     isExpanded: boolean;
     onExpand: (e: MouseEvent) => void;
     [key: string]: unknown;
@@ -139,7 +140,8 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     row: DataTableRow<ColTypes>;
     [key: string]: unknown;
   }) => {
-    ariaLabel: string;
+    ariaLabel: string; // TODO Remove in v12
+    ['aria-label']: string;
     disabled: boolean | undefined;
     isExpanded?: boolean;
     isSelected?: boolean;
@@ -493,7 +495,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
       : translationKeys.expandAll;
     return {
       ...rest,
-      ariaLabel: t(translationKey),
+      'aria-label': t(translationKey),
       isExpanded,
       // Compose the event handlers so we don't overwrite a consumer's `onClick`
       // handler
@@ -558,7 +560,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
       // handler
       onExpand: composeEventHandlers([this.handleOnExpandRow(row.id), onClick]),
       isExpanded: row.isExpanded,
-      ariaLabel: t(translationKey),
+      'aria-label': t(translationKey),
       isSelected: row.isSelected,
       disabled: row.disabled,
     };

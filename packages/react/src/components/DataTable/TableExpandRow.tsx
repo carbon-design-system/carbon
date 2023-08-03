@@ -12,13 +12,26 @@ import { ChevronRight } from '@carbon/icons-react';
 import TableCell from './TableCell';
 import { usePrefix } from '../../internal/usePrefix';
 import { TableRowProps } from './TableRow';
+import deprecate from '../../prop-types/deprecate';
 
 interface TableExpandRowProps extends PropsWithChildren<TableRowProps> {
+  /**
+   * Space separated list of one or more ID values referencing the TableExpandedRow(s) being controlled by the TableExpandRow
+   */
+  ['aria-controls']: string;
+
+  /**
+   * @deprecated This prop has been deprecated and will be
+   * removed in the next major release of Carbon. Use the
+   * `aria-label` prop instead.
+   */
+  ariaLabel?: string;
+
   /**
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */
-  ariaLabel: string;
+  ['aria-label']: string;
 
   /**
    * The id of the matching th node in the table head. Addresses a11y concerns outlined here: https://www.ibm.com/able/guidelines/ci162/info_and_relationships.html and https://www.w3.org/TR/WCAG20-TECHS/H43
@@ -43,7 +56,9 @@ interface TableExpandRowProps extends PropsWithChildren<TableRowProps> {
 }
 
 const TableExpandRow = ({
-  ariaLabel,
+  ['aria-controls']: ariaControls,
+  ['aria-label']: ariaLabel,
+  ariaLabel: deprecatedAriaLabel,
   className: rowClassName,
   children,
   isExpanded,
@@ -75,7 +90,9 @@ const TableExpandRow = ({
           className={`${prefix}--table-expand__button`}
           onClick={onExpand}
           title={expandIconDescription}
-          aria-label={ariaLabel}>
+          aria-label={deprecatedAriaLabel || ariaLabel}
+          aria-expanded={isExpanded}
+          aria-controls={ariaControls}>
           <ChevronRight
             className={`${prefix}--table-expand__svg`}
             aria-label={expandIconDescription}
@@ -89,10 +106,26 @@ const TableExpandRow = ({
 
 TableExpandRow.propTypes = {
   /**
+   * Space separated list of one or more ID values referencing the TableExpandedRow(s) being controlled by the TableExpandRow
+   */
+  ['aria-controls']: PropTypes.string.isRequired,
+
+  /**
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */
-  ariaLabel: PropTypes.string.isRequired,
+  ['aria-label']: PropTypes.string.isRequired,
+
+  /**
+   * Deprecated, please use `aria-label` instead.
+   * Specify the string read by a voice reader when the expand trigger is
+   * focused
+   */
+  ariaLabel: deprecate(
+    PropTypes.string.isRequired,
+    'The `ariaLabel` prop has been deprecated in favor of `aria-label`. This prop will be removed in the next major release.'
+  ),
+
   children: PropTypes.node,
   className: PropTypes.string,
   /**
