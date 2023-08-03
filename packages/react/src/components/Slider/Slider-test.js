@@ -166,7 +166,7 @@ describe('Slider', () => {
       expect(onChange).toHaveBeenLastCalledWith({ value: 12 });
     });
 
-    it('should check for the invalid class on the input', async () => {
+    it('should check for auto-correct on the input', async () => {
       const { type, tab } = userEvent;
       renderSlider({
         ariaLabelInput: inputAriaValue,
@@ -178,7 +178,8 @@ describe('Slider', () => {
       await tab(); // Brings focus to input
       await type(inputElement, '{selectall}101');
       await tab(); // Need to tab away from input for invalid class to be applied
-      expect(inputElement).toHaveClass(`${prefix}--text-input--invalid`);
+      expect(inputElement).not.toHaveClass(`${prefix}--text-input--invalid`);
+      expect(parseInt(inputElement.getAttribute('value'))).toEqual(100);
     });
 
     it('should apply the given id to the element with role of slider', () => {
