@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { action } from '@storybook/addon-actions';
 import Modal from './Modal';
@@ -379,13 +379,19 @@ export const WithStateManager = () => {
       </>
     );
   };
+
+  const button = useRef();
+
   return (
     <ModalStateManager
       renderLauncher={({ setOpen }) => (
-        <Button onClick={() => setOpen(true)}>Launch modal</Button>
+        <Button ref={button} onClick={() => setOpen(true)}>
+          Launch modal
+        </Button>
       )}>
       {({ open, setOpen }) => (
         <Modal
+          launcherButtonRef={button}
           modalHeading="Add a custom domain"
           modalLabel="Account resources"
           primaryButtonText="Add"

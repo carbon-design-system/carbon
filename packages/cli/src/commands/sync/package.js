@@ -85,6 +85,7 @@ function run({ packagePaths }) {
         if (!packageJson.private) {
           packageJson.publishConfig = {
             access: 'public',
+            provenance: 'true',
           };
         }
 
