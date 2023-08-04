@@ -92,7 +92,7 @@ $css--plex: true !default;
     position: absolute;
     top: 0;
     right: 0;
-    width: rem(16px);
+    width: $spacing-05;
     height: 100%;
     background-image: linear-gradient(to right, transparent, $layer);
     content: '';
@@ -112,8 +112,8 @@ $css--plex: true !default;
 
   #{$prefix}-copy-button {
     position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
+    top: $spacing-03;
+    right: $spacing-03;
   }
 }
 
@@ -146,9 +146,9 @@ $css--plex: true !default;
     @include skeleton;
 
     width: 100%;
-    height: 1rem;
+    height: $spacing-05;
     display: block;
-    margin-top: 0.5rem;
+    margin-top: $spacing-03;
 
     &:first-child {
       margin: 0;

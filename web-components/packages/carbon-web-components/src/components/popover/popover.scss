@@ -11,6 +11,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/utilities/custom-property';
+@use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/components/popover';
@@ -33,7 +34,7 @@ $css--plex: true !default;
 :host(#{$prefix}-popover[tabTip][open]) {
   ::slotted(.#{$prefix}--popover--tab-tip__button) {
     background: theme.$layer !important; /* stylelint-disable-line declaration-no-important */
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 $spacing-01 $spacing-01 rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -67,7 +68,7 @@ $css--plex: true !default;
 :host(#{$prefix}-popover-content[dropShadow]) {
   @include custom-property.declaration(
     'popover-drop-shadow',
-    drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2))
+    drop-shadow(0 $spacing-01 $spacing-01 rgba(0, 0, 0, 0.2))
   );
 }
 

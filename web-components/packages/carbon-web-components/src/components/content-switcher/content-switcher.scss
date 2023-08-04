@@ -8,6 +8,7 @@
 $css--plex: true !default;
 
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/components/content-switcher/content-switcher' as *;
@@ -41,7 +42,7 @@ $css--plex: true !default;
     height: 100%;
     width: 100%;
     align-items: center;
-    padding: 0.5rem var(--cds-layout-density-padding-inline-local);
+    padding: $spacing-03 var(--cds-layout-density-padding-inline-local);
 
     &:first-child,
     &:last-child {
@@ -53,7 +54,7 @@ $css--plex: true !default;
     &::before {
       content: '';
       display: block;
-      height: rem(16px);
+      height: $spacing-05;
       width: rem(1px);
       background-color: $border-subtle;
       position: absolute;
@@ -82,7 +83,7 @@ $css--plex: true !default;
   .#{$prefix}--content-switcher-btn {
     padding-left: rem(11px);
     padding-right: rem(11px);
-    height: rem(40px);
+    height: $spacing-08;
   }
 
   .#{$prefix}--content-switcher__label {
@@ -98,8 +99,8 @@ $css--plex: true !default;
 
 :host(#{$prefix}-content-switcher-item:first-of-type)
   .#{$prefix}--content-switcher-btn {
-  border-top-left-radius: rem(4px);
-  border-bottom-left-radius: rem(4px);
+  border-top-left-radius: $spacing-02;
+  border-bottom-left-radius: $spacing-02;
   border-left: rem(1px) solid $border-inverse;
 
   &::before {
@@ -109,7 +110,7 @@ $css--plex: true !default;
 
 :host(#{$prefix}-content-switcher-item:last-of-type)
   .#{$prefix}--content-switcher-btn {
-  border-top-right-radius: rem(4px);
-  border-bottom-right-radius: rem(4px);
+  border-top-right-radius: $spacing-02;
+  border-bottom-right-radius: $spacing-02;
   border-right: rem(1px) solid $border-inverse;
 }

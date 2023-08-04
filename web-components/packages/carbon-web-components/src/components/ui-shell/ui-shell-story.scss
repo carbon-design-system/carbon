@@ -12,8 +12,8 @@
 
 /* stylelint-disable selector-type-no-unknown */
 #{$prefix}-header ~ #{$prefix}-side-nav {
-  margin-top: 3rem;
-  height: calc(100% - 3rem);
+  margin-top: $spacing-09;
+  height: calc(100% - $spacing-09);
 }
 
 .#{$prefix}-ce-demo-devenv--container {

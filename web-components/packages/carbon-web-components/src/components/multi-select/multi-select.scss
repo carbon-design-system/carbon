@@ -55,8 +55,8 @@ $css--plex: true !default;
 
 :host(#{$prefix}-multi-select[filterable])
   .#{$prefix}--list-box__field:focus-within {
-  outline: 2px solid $focus;
-  outline-offset: -2px;
+  outline: $spacing-01 solid $focus;
+  outline-offset: -#{$spacing-01};
 }
 
 :host(#{$prefix}-multi-select[direction='top']) {

@@ -55,8 +55,8 @@ $css--plex: true !default;
   // Used to mimic link underline
   ::after {
     position: absolute;
-    bottom: 2px;
-    width: rem(12px);
+    bottom: $spacing-01;
+    width: $spacing-04;
     height: 1px;
     background: $link-primary-hover;
     content: '';

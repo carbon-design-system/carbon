@@ -53,8 +53,8 @@ $css--plex: true !default;
     transition: none;
 
     &:focus {
-      outline: 2px solid $focus;
-      outline-offset: -2px;
+      outline: $spacing-01 solid $focus;
+      outline-offset: -#{$spacing-01};
       box-shadow: none;
       border-left: 1px solid transparent;
     }
@@ -79,7 +79,7 @@ $css--plex: true !default;
     padding: $button-padding-ghost;
 
     &:focus {
-      outline: 2px solid $layer;
+      outline: $spacing-01 solid $layer;
       outline-offset: -#{$spacing-01};
     }
   }

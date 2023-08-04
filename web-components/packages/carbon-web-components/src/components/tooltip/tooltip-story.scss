@@ -7,7 +7,7 @@
 
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/utilities/button-reset';
-@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/type';
 
@@ -27,8 +27,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+  width: $spacing-07;
+  height: $spacing-07;
   border: 1px solid theme.$border-subtle;
 }
 

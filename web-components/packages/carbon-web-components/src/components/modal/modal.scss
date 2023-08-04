@@ -103,8 +103,8 @@
     width: 100%;
     max-width: none;
 
-    padding-top: rem(16px);
-    padding-bottom: rem(32px);
+    padding-top: $spacing-05;
+    padding-bottom: $spacing-07;
     box-shadow: rem(-1px) 0 0 0 $button-separator;
 
     &:focus {
@@ -119,6 +119,6 @@
   flex: 0 1 50%;
   max-width: none;
   width: 50%;
-  height: rem(64px);
+  height: $spacing-10;
   margin: 0;
 }

@@ -12,7 +12,7 @@ body {
   font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
   height: 100%;
   display: grid;
-  grid-template-rows: auto 1fr 5rem;
+  grid-template-rows: auto 1fr $spacing-11;
 }
 
 footer {
@@ -21,8 +21,8 @@ footer {
   > p {
     background-color: var(--cds-background);
     color: var(--cds-text-primary);
-    height: 5rem;
-    padding: 0 1rem;
+    height: $spacing-11;
+    padding: 0 $spacing-05;
     display: flex;
     align-items: center;
 
@@ -32,7 +32,7 @@ footer {
   }
 
   cds-button + cds-button {
-    margin-left: 1rem;
+    margin-left: $spacing-05;
   }
 }
 

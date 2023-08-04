@@ -9,7 +9,7 @@
 
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/utilities' as *;
-@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/type';
 
@@ -59,27 +59,27 @@
 }
 
 .mb-3 {
-  margin-bottom: 1rem;
+  margin-bottom: $spacing-05;
 }
 
 .mt-9 {
-  padding-top: 3rem;
+  padding-top: $spacing-09;
 }
 
 .mt-10 {
-  padding-top: 4rem;
+  padding-top: $spacing-10;
 }
 
 .p-3 {
-  padding: 1rem;
+  padding: $spacing-05;
 }
 
 #{$prefix}-popover .playground-trigger {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+  width: $spacing-07;
+  height: $spacing-07;
   border: 1px solid theme.$border-subtle;
 }
 
@@ -89,7 +89,7 @@
 
 #{$prefix}-popover .popover-title {
   @include type.type-style('heading-compact-01');
-  margin-bottom: spacing.$spacing-01;
+  margin-bottom: $spacing-01;
 }
 
 #{$prefix}-popover .popover-details {
@@ -108,14 +108,14 @@
 }
 
 .popover-tabtip-story #{$prefix}-popover .#{$prefix}--radio-button-wrapper {
-  margin-bottom: 0.5rem;
+  margin-bottom: $spacing-03;
 }
 
 .popover-tabtip-story hr {
   border: none;
   background: theme.$border-subtle;
   height: 1px;
-  margin: 8px 0 16px;
+  margin: $spacing-03 0 $spacing-05;
 }
 
 .popover-tabtip-story #{$prefix}-popover:last-of-type {

@@ -54,7 +54,7 @@ $css--plex: true !default;
 :host(#{$prefix}-breadcrumb-overflow-menu[open]) {
   background-color: $layer-01;
   transition: none;
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 $spacing-01 6px 0 rgba(0, 0, 0, 0.3);
 
   :hover {
     background-color: $layer;

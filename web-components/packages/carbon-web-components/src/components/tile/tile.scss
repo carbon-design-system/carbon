@@ -49,7 +49,7 @@ $css--plex: true !default;
   .#{$prefix}--tile {
     // Overrides what `.#{$prefix}--link` defines
     padding: $spacing-05;
-    outline: 2px solid transparent;
+    outline: $spacing-01 solid transparent;
   }
 
   .#{$prefix}--tile--clickable {

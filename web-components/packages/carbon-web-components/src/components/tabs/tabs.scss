@@ -84,7 +84,7 @@ $inset-transition: inset 110ms motion(standard, productive);
     align-items: center;
     width: 100%;
     overflow: hidden;
-    max-width: 10rem;
+    max-width: $spacing-13;
     padding: $spacing-04 $spacing-05 $spacing-03;
     border-bottom: $tab-underline-color;
     color: $text-secondary;
@@ -105,7 +105,7 @@ $inset-transition: inset 110ms motion(standard, productive);
     .#{$prefix}--tabs__nav-link {
       @include type-style('heading-compact-01');
 
-      border-bottom: 2px solid $border-interactive;
+      border-bottom: $spacing-01 solid $border-interactive;
     }
   }
 
@@ -209,7 +209,7 @@ $inset-transition: inset 110ms motion(standard, productive);
     // height - vertical padding
     line-height: calc(#{$spacing-09} - (#{$spacing-03} * 2));
     // Draws the border without affecting the inner-content
-    box-shadow: inset 0 2px 0 0 $interactive;
+    box-shadow: inset 0 $spacing-01 0 0 $interactive;
     border-bottom: none;
   }
 
@@ -254,13 +254,13 @@ $inset-transition: inset 110ms motion(standard, productive);
 }
 
 :host(#{$prefix}-tab-skeleton) {
-  margin-left: rem(2px);
+  margin-left: $spacing-01;
 
   .#{$prefix}--tabs__nav-link {
     @include skeleton;
 
     width: rem(75px);
-    height: rem(12px);
+    height: $spacing-04;
   }
 }
 

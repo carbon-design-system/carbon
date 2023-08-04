@@ -35,7 +35,7 @@ $css--plex: true !default;
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-    height: rem(24px);
+    height: $spacing-06;
     width: rem(1px);
     background-color: $border-subtle;
   }
@@ -77,9 +77,9 @@ $css--plex: true !default;
 
     &::after {
       position: absolute;
-      top: -2px;
-      left: -2px;
-      bottom: -2px;
+      top: -#{$spacing-01};
+      left: -#{$spacing-01};
+      bottom: -#{$spacing-01};
       width: 3px;
       height: 100%;
       background-color: $border-interactive;
