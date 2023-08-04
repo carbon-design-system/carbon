@@ -45,6 +45,8 @@ const {
   ToggleButtonKeyDownSpaceButton,
   ItemMouseMove,
   ToggleButtonClick,
+  ToggleButtonKeyDownHome,
+  ToggleButtonKeyDownEnd,
 } = useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
   ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
 };
@@ -375,7 +377,12 @@ const MultiSelect = React.forwardRef(
             e.stopPropagation();
           }
 
-          if ((match(e, keys.Space) || match(e, keys.ArrowDown)) && !isOpen) {
+          if (
+            (match(e, keys.Space) ||
+              match(e, keys.ArrowDown) ||
+              match(e, keys.Enter)) &&
+            !isOpen
+          ) {
             setIsOpenWrapper(true);
           }
         }
@@ -477,7 +484,7 @@ const MultiSelect = React.forwardRef(
             break;
           }
           onItemChange(changes.selectedItem);
-          break;
+          return { ...changes, highlightedIndex: state.highlightedIndex };
         case ToggleButtonBlur:
         case ToggleButtonKeyDownEscape:
           setIsOpenWrapper(false);
@@ -487,9 +494,11 @@ const MultiSelect = React.forwardRef(
           break;
         case ToggleButtonKeyDownArrowDown:
         case ToggleButtonKeyDownArrowUp:
+        case ToggleButtonKeyDownHome:
+        case ToggleButtonKeyDownEnd:
           if (highlightedIndex > -1) {
             const itemArray = document.querySelectorAll(
-              `div.${prefix}--list-box__menu-item[role="option"]`
+              `li.${prefix}--list-box__menu-item[role="option"]`
             );
             props.scrollIntoView(itemArray[highlightedIndex]);
           }

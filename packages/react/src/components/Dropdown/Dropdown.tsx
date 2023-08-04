@@ -45,6 +45,8 @@ const getInstanceId = setupGetInstanceId();
 const {
   ToggleButtonKeyDownArrowDown,
   ToggleButtonKeyDownArrowUp,
+  ToggleButtonKeyDownHome,
+  ToggleButtonKeyDownEnd,
   ItemMouseMove,
 } = useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
   ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
@@ -279,9 +281,11 @@ const Dropdown = React.forwardRef(
       switch (type) {
         case ToggleButtonKeyDownArrowDown:
         case ToggleButtonKeyDownArrowUp:
+        case ToggleButtonKeyDownHome:
+        case ToggleButtonKeyDownEnd:
           if (highlightedIndex > -1) {
             const itemArray = document.querySelectorAll(
-              `div.${prefix}--list-box__menu-item[role="option"]`
+              `li.${prefix}--list-box__menu-item[role="option"]`
             );
             props.scrollIntoView(itemArray[highlightedIndex]);
           }
@@ -365,7 +369,6 @@ const Dropdown = React.forwardRef(
     function onSelectedItemChange({
       selectedItem,
     }: Partial<UseSelectState<ItemType>>) {
-      setIsFocused(false);
       if (onChange) {
         onChange({ selectedItem: selectedItem ?? null });
       }
