@@ -62,7 +62,7 @@ Or, with [Yarn](https://yarnpkg.com/):
 yarn add carbon-components@^10.35.0 carbon-components-react@^7.35.0
 ```
 
-Next, follow our [feature flags guide](../migration/v11.x.md#feature-flags) to
+Next, follow our [feature flags guide](../migration/v11.md#feature-flags) to
 enable the appropriate feature flags in Sass and React. Here's a quick breakdown
 of the flags that are available and what features they correspond with:
 
@@ -202,7 +202,7 @@ entrypoint. This entrypoint is temporary during v10 and will be moved to
 `@carbon/icons-react` in v11.
 
 For more details on migrating from the v10 icons to v11, check out our
-[migration guide](../migration/11.x-carbon-icons-react.md).
+[migration guide](../migration/11.md).
 
 _Note: there will be a codemod to help with automatically updating icon usage in
 our next beta release_

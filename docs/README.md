@@ -35,7 +35,7 @@
 
 ## Getting started
 
-If you're just getting started, check out [`@carbon/react`](./packages/react).
+If you're just getting started, check out [`@carbon/react`](../packages/react).
 
 We also have community-contributed components for the following technologies:
 
@@ -49,17 +49,17 @@ we support!
 
 | Package name                                  | Description                                                                                                                                                                                                                                   |
 | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`@carbon/react`](./packages/react)           | React components and styles                                                                                                                                                                                                                   |
-| [`@carbon/styles`](./packages/styles)         | Sass styles for components                                                                                                                                                                                                                    |
-| [`@carbon/elements`](./packages/elements)     | IBM Design Language elements like colors, type, iconography, and more                                                                                                                                                                         |
-| [`@carbon/colors`](./packages/colors)         | Work with IBM Design Language colors                                                                                                                                                                                                          |
-| [`@carbon/grid`](./packages/grid)             | Build layouts using the new 16 column grid system                                                                                                                                                                                             |
-| [`@carbon/icons`](./packages/icons)           | Iconography assets. We also offer support in: [React](./packages/icons-react), [Angular](https://github.com/carbon-design-system/carbon-icons-angular), [Vue](./packages/icons-vue), and [Svelte](https://github.com/IBM/carbon-icons-svelte) |
+| [`@carbon/react`](../packages/react)          | React components and styles                                                                                                                                                                                                                   |
+| [`@carbon/styles`](../packages/styles)        | Sass styles for components                                                                                                                                                                                                                    |
+| [`@carbon/elements`](../packages/elements)    | IBM Design Language elements like colors, type, iconography, and more                                                                                                                                                                         |
+| [`@carbon/colors`](../packages/colors)        | Work with IBM Design Language colors                                                                                                                                                                                                          |
+| [`@carbon/grid`](../packages/grid)            | Build layouts using the new 16 column grid system                                                                                                                                                                                             |
+| [`@carbon/icons`](../packages/icons)          | Iconography assets. We also offer support in: [React](./packages/icons-react), [Angular](https://github.com/carbon-design-system/carbon-icons-angular), [Vue](./packages/icons-vue), and [Svelte](https://github.com/IBM/carbon-icons-svelte) |
 | [`@carbon/pictograms`](./packages/pictograms) | Pictogram assets. We also offer support in: [React](./packages/pictograms-react) and [Svelte](https://github.com/IBM/carbon-pictograms-svelte)                                                                                                |
-| [`@carbon/layout`](./packages/layout)         | Layout-based units and spacing scale                                                                                                                                                                                                          |
-| [`@carbon/motion`](./packages/motion)         | Productive and expressive motion curves                                                                                                                                                                                                       |
-| [`@carbon/themes`](./packages/themes)         | Color tokens available in the Carbon Design System, like `$interactive-01`                                                                                                                                                                    |
-| [`@carbon/type`](./packages/type)             | New type tokens used alongside IBM Plex                                                                                                                                                                                                       |
+| [`@carbon/layout`](../packages/layout)        | Layout-based units and spacing scale                                                                                                                                                                                                          |
+| [`@carbon/motion`](../packages/motion)        | Productive and expressive motion curves                                                                                                                                                                                                       |
+| [`@carbon/themes`](../packages/themes)        | Color tokens available in the Carbon Design System, like `$interactive-01`                                                                                                                                                                    |
+| [`@carbon/type`](../packages/type)            | New type tokens used alongside IBM Plex                                                                                                                                                                                                       |
 
 ## :books: Documentation
 
@@ -69,16 +69,16 @@ we support!
 - [Contributing](/.github/CONTRIBUTING.md): Guidelines for making contributions
   to this repo.
 - 🏃‍♀️ Migration Guides
-  - [v10 to v11](./docs/migration/v11.md)
-  - [v9 to v10 (vanilla)](./packages/carbon-components/docs/migration/migrate-to-10.x.md)
-  - [v9 to v10 (v6 to v7 React)](./packages/react/docs/migration/migrate-to-7.x.md)
+  - [v10 to v11](migration/v11.md)
+  - [v9 to v10 (vanilla)](../packages/carbon-components/docs/migration/migrate-to-10.x.md)
+  - [v9 to v10 (v6 to v7 React)](../packages/react/docs/migration/migrate-to-7.x.md)
 
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new features,
 or help us improve the project documentation. If you're interested, definitely
 check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
-[Developer Guide](./docs/developer-handbook.md)! 👀
+[Developer Guide](developer-handbook.md)! 👀
 
 ## Contributors
 

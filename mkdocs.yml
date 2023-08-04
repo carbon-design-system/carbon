@@ -1,0 +1,8 @@
+site_name: Carbon Design System
+
+nav:
+  - Intro: README.md
+  - Developer Handbook: developer-handbook.md
+  - V11 Migration: migration/v11.md
+  - Contributing: CONTRIBUTING.md
+

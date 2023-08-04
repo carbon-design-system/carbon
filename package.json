@@ -127,7 +127,7 @@
     "!(*sass).md": [
       "prettier --cache --write"
     ],
-    "README.md": [
+    "docs/README.md": [
       "all-contributors generate"
     ],
     ".all-contributorsrc": [
