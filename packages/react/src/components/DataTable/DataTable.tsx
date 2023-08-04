@@ -495,6 +495,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
       : translationKeys.expandAll;
     return {
       ...rest,
+      ariaLabel: t(translationKey),
       'aria-label': t(translationKey),
       isExpanded,
       // Compose the event handlers so we don't overwrite a consumer's `onClick`
@@ -560,6 +561,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
       // handler
       onExpand: composeEventHandlers([this.handleOnExpandRow(row.id), onClick]),
       isExpanded: row.isExpanded,
+      ariaLabel: t(translationKey),
       'aria-label': t(translationKey),
       isSelected: row.isSelected,
       disabled: row.disabled,

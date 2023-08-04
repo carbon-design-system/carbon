@@ -79,7 +79,6 @@ export const Default = () => (
                   {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}
-                  }
                 </TableExpandRow>
                 <TableExpandedRow
                   colSpan={headers.length + 1}
