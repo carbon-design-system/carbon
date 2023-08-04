@@ -116,77 +116,89 @@ export const Default = () => {
             selectedRows,
             getTableProps,
             getTableContainerProps,
-          }) => (
-            <TableContainer
-              title="DataTable"
-              description="Use the toolbar menu to add rows and headers"
-              {...getTableContainerProps()}>
-              <TableToolbar {...getToolbarProps()}>
-                <TableBatchActions {...getBatchActionProps()}>
-                  <TableBatchAction
-                    renderIcon={TrashCan}
-                    iconDescription="Delete the selected rows"
-                    onClick={batchActionClick(selectedRows)}>
-                    Delete
-                  </TableBatchAction>
-                  <TableBatchAction
-                    renderIcon={Save}
-                    iconDescription="Save the selected rows"
-                    onClick={batchActionClick(selectedRows)}>
-                    Save
-                  </TableBatchAction>
-                  <TableBatchAction
-                    renderIcon={Download}
-                    iconDescription="Download the selected rows"
-                    onClick={batchActionClick(selectedRows)}>
-                    Download
-                  </TableBatchAction>
-                </TableBatchActions>
-                <TableToolbarContent>
-                  <TableToolbarSearch onChange={onInputChange} />
-                  <TableToolbarMenu>
-                    <TableToolbarAction onClick={this.handleOnRowAdd}>
-                      Add row
-                    </TableToolbarAction>
-                    <TableToolbarAction onClick={this.handleOnHeaderAdd}>
-                      Add header
-                    </TableToolbarAction>
-                  </TableToolbarMenu>
-                </TableToolbarContent>
-              </TableToolbar>
-              <Table {...getTableProps()} aria-label="sample table">
-                <TableHead>
-                  <TableRow>
-                    <TableExpandHeader />
-                    <TableSelectAll {...getSelectionProps()} />
-                    {headers.map((header, i) => (
-                      <TableHeader key={i} {...getHeaderProps({ header })}>
-                        {header.header}
-                      </TableHeader>
+          }) => {
+            const batchActionProps = getBatchActionProps();
+            return (
+              <TableContainer
+                title="DataTable"
+                description="Use the toolbar menu to add rows and headers"
+                {...getTableContainerProps()}>
+                <TableToolbar {...getToolbarProps()}>
+                  <TableBatchActions {...getBatchActionProps()}>
+                    <TableBatchAction
+                      renderIcon={TrashCan}
+                      iconDescription="Delete the selected rows"
+                      onClick={batchActionClick(selectedRows)}
+                      tabIndex={
+                        batchActionProps.shouldShowBatchActions ? 0 : -1
+                      }>
+                      Delete
+                    </TableBatchAction>
+                    <TableBatchAction
+                      renderIcon={Save}
+                      iconDescription="Save the selected rows"
+                      onClick={batchActionClick(selectedRows)}
+                      tabIndex={
+                        batchActionProps.shouldShowBatchActions ? 0 : -1
+                      }>
+                      Save
+                    </TableBatchAction>
+                    <TableBatchAction
+                      renderIcon={Download}
+                      iconDescription="Download the selected rows"
+                      onClick={batchActionClick(selectedRows)}
+                      tabIndex={
+                        batchActionProps.shouldShowBatchActions ? 0 : -1
+                      }>
+                      Download
+                    </TableBatchAction>
+                  </TableBatchActions>
+                  <TableToolbarContent>
+                    <TableToolbarSearch onChange={onInputChange} />
+                    <TableToolbarMenu>
+                      <TableToolbarAction onClick={this.handleOnRowAdd}>
+                        Add row
+                      </TableToolbarAction>
+                      <TableToolbarAction onClick={this.handleOnHeaderAdd}>
+                        Add header
+                      </TableToolbarAction>
+                    </TableToolbarMenu>
+                  </TableToolbarContent>
+                </TableToolbar>
+                <Table {...getTableProps()} aria-label="sample table">
+                  <TableHead>
+                    <TableRow>
+                      <TableExpandHeader aria-label="expand row" />
+                      <TableSelectAll {...getSelectionProps()} />
+                      {headers.map((header, i) => (
+                        <TableHeader key={i} {...getHeaderProps({ header })}>
+                          {header.header}
+                        </TableHeader>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <React.Fragment key={row.id}>
+                        <TableExpandRow {...getRowProps({ row })}>
+                          <TableSelectRow {...getSelectionProps({ row })} />
+                          {row.cells.map((cell) => (
+                            <TableCell key={cell.id}>{cell.value}</TableCell>
+                          ))}
+                        </TableExpandRow>
+                        <TableExpandedRow
+                          colSpan={headers.length + 3}
+                          className="demo-expanded-td">
+                          <h6>Expandable row content</h6>
+                          <div>Description here</div>
+                        </TableExpandedRow>
+                      </React.Fragment>
                     ))}
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {rows.map((row) => (
-                    <React.Fragment key={row.id}>
-                      <TableExpandRow {...getRowProps({ row })}>
-                        <TableSelectRow {...getSelectionProps({ row })} />
-                        {row.cells.map((cell) => (
-                          <TableCell key={cell.id}>{cell.value}</TableCell>
-                        ))}
-                      </TableExpandRow>
-                      <TableExpandedRow
-                        colSpan={headers.length + 3}
-                        className="demo-expanded-td">
-                        <h6>Expandable row content</h6>
-                        <div>Description here</div>
-                      </TableExpandedRow>
-                    </React.Fragment>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            );
+          }}
         />
       );
     }
@@ -273,99 +285,111 @@ export const Playground = (args) => {
             selectedRows,
             getTableProps,
             getTableContainerProps,
-          }) => (
-            <TableContainer
-              title="DataTable"
-              description="Use the toolbar menu to add rows and headers"
-              {...getTableContainerProps()}>
-              <TableToolbar {...getToolbarProps()}>
-                <TableBatchActions {...getBatchActionProps()}>
-                  <TableBatchAction
-                    renderIcon={TrashCan}
-                    iconDescription="Delete the selected rows"
-                    onClick={batchActionClick(selectedRows)}>
-                    Delete
-                  </TableBatchAction>
-                  <TableBatchAction
-                    renderIcon={Save}
-                    iconDescription="Save the selected rows"
-                    onClick={batchActionClick(selectedRows)}>
-                    Save
-                  </TableBatchAction>
-                  <TableBatchAction
-                    renderIcon={Download}
-                    iconDescription="Download the selected rows"
-                    onClick={batchActionClick(selectedRows)}>
-                    Download
-                  </TableBatchAction>
-                </TableBatchActions>
-                <TableToolbarContent>
-                  <TableToolbarSearch
-                    onChange={(evt) => {
-                      action('TableToolbarSearch - onChange')(evt);
-                      onInputChange(evt);
-                    }}
-                  />
-                  <TableToolbarMenu>
-                    <TableToolbarAction
-                      onClick={(evt) => {
-                        action('handleOnRowAdd')(evt);
-                        this.handleOnRowAdd();
-                      }}>
-                      Add row
-                    </TableToolbarAction>
-                    <TableToolbarAction
-                      onClick={(evt) => {
-                        action('handleOnHeaderAdd')(evt);
-                        this.handleOnHeaderAdd();
-                      }}>
-                      Add header
-                    </TableToolbarAction>
-                  </TableToolbarMenu>
-                </TableToolbarContent>
-              </TableToolbar>
-              <Table {...getTableProps()} aria-label="sample table">
-                <TableHead>
-                  <TableRow>
-                    <TableExpandHeader />
-                    {args.radio ? (
-                      <th scope="col" />
-                    ) : (
-                      <TableSelectAll {...getSelectionProps()} />
-                    )}
-                    {headers.map((header, i) => (
-                      <TableHeader key={i} {...getHeaderProps({ header })}>
-                        {header.header}
-                      </TableHeader>
+          }) => {
+            const batchActionProps = getBatchActionProps();
+            return (
+              <TableContainer
+                title="DataTable"
+                description="Use the toolbar menu to add rows and headers"
+                {...getTableContainerProps()}>
+                <TableToolbar {...getToolbarProps()}>
+                  <TableBatchActions {...getBatchActionProps()}>
+                    <TableBatchAction
+                      renderIcon={TrashCan}
+                      iconDescription="Delete the selected rows"
+                      onClick={batchActionClick(selectedRows)}
+                      tabIndex={
+                        batchActionProps.shouldShowBatchActions ? 0 : -1
+                      }>
+                      Delete
+                    </TableBatchAction>
+                    <TableBatchAction
+                      renderIcon={Save}
+                      iconDescription="Save the selected rows"
+                      onClick={batchActionClick(selectedRows)}
+                      tabIndex={
+                        batchActionProps.shouldShowBatchActions ? 0 : -1
+                      }>
+                      Save
+                    </TableBatchAction>
+                    <TableBatchAction
+                      renderIcon={Download}
+                      iconDescription="Download the selected rows"
+                      onClick={batchActionClick(selectedRows)}
+                      tabIndex={
+                        batchActionProps.shouldShowBatchActions ? 0 : -1
+                      }>
+                      Download
+                    </TableBatchAction>
+                  </TableBatchActions>
+                  <TableToolbarContent>
+                    <TableToolbarSearch
+                      onChange={(evt) => {
+                        action('TableToolbarSearch - onChange')(evt);
+                        onInputChange(evt);
+                      }}
+                    />
+                    <TableToolbarMenu>
+                      <TableToolbarAction
+                        onClick={(evt) => {
+                          action('handleOnRowAdd')(evt);
+                          this.handleOnRowAdd();
+                        }}>
+                        Add row
+                      </TableToolbarAction>
+                      <TableToolbarAction
+                        onClick={(evt) => {
+                          action('handleOnHeaderAdd')(evt);
+                          this.handleOnHeaderAdd();
+                        }}>
+                        Add header
+                      </TableToolbarAction>
+                    </TableToolbarMenu>
+                  </TableToolbarContent>
+                </TableToolbar>
+                <Table {...getTableProps()} aria-label="sample table">
+                  <TableHead>
+                    <TableRow>
+                      <TableExpandHeader />
+                      {args.radio ? (
+                        <th scope="col" />
+                      ) : (
+                        <TableSelectAll {...getSelectionProps()} />
+                      )}
+                      {headers.map((header, i) => (
+                        <TableHeader key={i} {...getHeaderProps({ header })}>
+                          {header.header}
+                        </TableHeader>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <React.Fragment key={row.id}>
+                        <TableExpandRow
+                          {...getRowProps({ row })}
+                          onClick={action('onClick')}>
+                          <TableSelectRow
+                            {...getSelectionProps({ row })}
+                            onChange={action('TableSelectRow - onChange')}
+                          />
+                          {row.cells.map((cell) => (
+                            <TableCell key={cell.id}>{cell.value}</TableCell>
+                          ))}
+                        </TableExpandRow>
+                        <TableExpandedRow
+                          colSpan={headers.length + 3}
+                          className="demo-expanded-td">
+                          <h6>Expandable row content</h6>
+                          <div>Description here</div>
+                        </TableExpandedRow>
+                      </React.Fragment>
                     ))}
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {rows.map((row) => (
-                    <React.Fragment key={row.id}>
-                      <TableExpandRow
-                        {...getRowProps({ row })}
-                        onClick={action('onClick')}>
-                        <TableSelectRow
-                          {...getSelectionProps({ row })}
-                          onChange={action('TableSelectRow - onChange')}
-                        />
-                        {row.cells.map((cell) => (
-                          <TableCell key={cell.id}>{cell.value}</TableCell>
-                        ))}
-                      </TableExpandRow>
-                      <TableExpandedRow
-                        colSpan={headers.length + 3}
-                        className="demo-expanded-td">
-                        <h6>Expandable row content</h6>
-                        <div>Description here</div>
-                      </TableExpandedRow>
-                    </React.Fragment>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            );
+          }}
         />
       );
     }

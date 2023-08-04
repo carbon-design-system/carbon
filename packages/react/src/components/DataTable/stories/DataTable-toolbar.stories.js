@@ -261,7 +261,7 @@ export const WithOverflowMenu = () => (
                   {header.header}
                 </TableHeader>
               ))}
-              <TableHeader />
+              <TableHeader aria-label="overflow actions" />
             </TableRow>
           </TableHead>
           <TableBody>
