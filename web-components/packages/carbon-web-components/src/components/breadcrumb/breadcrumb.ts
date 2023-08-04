@@ -29,7 +29,7 @@ class CDSBreadcrumb extends LitElement {
 
   connectedCallback() {
     if (!this.hasAttribute('role')) {
-      this.setAttribute('role', 'nav');
+      this.setAttribute('role', 'navigation');
     }
     super.connectedCallback();
   }
