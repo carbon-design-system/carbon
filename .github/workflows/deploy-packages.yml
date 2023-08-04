@@ -112,12 +112,11 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - name: Update dependencies
         run: |
-          yarn upgrade \
+          yarn workspace gatsby-theme-carbon up  \
             @carbon/elements@next \
             @carbon/grid@next \
             @carbon/themes@next \
             @carbon/pictograms-react@next \
-            @carbon/icons-react@next \
             @carbon/react@next
       - name: Generate token
         uses: tibdex/github-app-token@v1
