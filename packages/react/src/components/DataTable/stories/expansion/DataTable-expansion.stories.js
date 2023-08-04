@@ -119,7 +119,9 @@ export const BatchExpansion = () => (
               <TableExpandHeader
                 enableToggle={true}
                 aria-label="expand row"
-                aria-controls={rows.map((row) => row.id).join(' ')}
+                aria-controls={rows
+                  .map((row) => `expanded-row-${row.id}`)
+                  .join(' ')}
                 {...getExpandHeaderProps()}
               />
               {headers.map((header, i) => (
