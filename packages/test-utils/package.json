@@ -19,7 +19,8 @@
     "react"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "peerDependencies": {
     "react-dom": "^16.9.0 || ^17.0.1"

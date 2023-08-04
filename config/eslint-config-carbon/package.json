@@ -1,7 +1,7 @@
 {
   "name": "eslint-config-carbon",
   "description": "ESLint configuration for Carbon",
-  "version": "3.7.0",
+  "version": "3.8.0",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": {
@@ -26,7 +26,8 @@
     "react"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "peerDependencies": {
     "eslint": "^8.0.0"
