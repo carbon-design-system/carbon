@@ -9,10 +9,11 @@
 
 const fs = require('fs-extra');
 const path = require('path');
-const prettier = require('prettier');
-const lerna = require('../lerna.json');
+const prettier = require('prettier'); //eslint-disable-line no-unused-vars
+const lerna = require('../lerna.json'); //eslint-disable-line no-unused-vars
 const packageJson = require('../package.json');
 
+//eslint-disable-next-line no-unused-vars
 const prettierOptions = {
   ...packageJson.prettier,
   parser: 'markdown',
@@ -101,6 +102,7 @@ async function sync() {
       file.license = 'Apache-2.0';
       file.publishConfig = {
         access: 'public',
+        provenance: 'true',
       };
 
       if (Array.isArray(file.keywords)) {
@@ -143,6 +145,7 @@ async function sync() {
     '**/tasks/**',
   ];
   await Promise.all(
+    //eslint-disable-next-line no-unused-vars
     packages.map(async ({ packageJson, packagePath }) => {
       const ignorePath = path.join(packagePath, '.npmignore');
       const ignorePatterns = [...defaultIgnorePatterns];

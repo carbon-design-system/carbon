@@ -3,7 +3,7 @@ import ComposedModal from '../ComposedModal';
 import { InlineNotification } from '../Notification';
 import CodeSnippet from '../CodeSnippet';
 import * as ComposedModalStories from './ComposedModal.stories.js';
-import './ComposedModal.stories.scss'
+import './ComposedModal.stories.scss';
 
 # ComposedModal
 
@@ -15,8 +15,7 @@ import './ComposedModal.stories.scss'
 
 ## Table of Contents
 
-{/* <!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
 - [Overview](#overview)
 - [Component API](#component-api)
@@ -97,14 +96,21 @@ const ModalStateManager = ({
 };
 ```
 
+{/* <!-- prettier-ignore-start --> */}
+
 <Unstyled>
-  <InlineNotification kind="warning" title="Warning" className="sb-notification">
-    <CodeSnippet type="inline" hideCopyButton>{'Modal'}</CodeSnippet>
-  and <CodeSnippet type="inline" hideCopyButton>{'ComposedModal'}</CodeSnippet>
-    have to be put at the top level in a React tree. The easiest way to ensure that is using React
-    portal as shown in above example.
+  <InlineNotification
+    kind="warning"
+    title="Warning"
+    className="sb-notification">
+    <CodeSnippet type="inline" hideCopyButton>Modal</CodeSnippet>
+    and
+    <CodeSnippet type="inline" hideCopyButton>ComposedModal</CodeSnippet>
+    have to be put at the top level in a React tree. The easiest way to ensure
+    that is using React portal as shown in above example.
   </InlineNotification>
 </Unstyled>
+{/* <!-- prettier-ignore-end --> */}
 
 ## Modal sizes
 
@@ -205,14 +211,23 @@ With `<ComposedModal>`, you can control the buttons with the following code.
 </ComposedModal>
 ```
 
+{/* <!-- prettier-ignore-start --> */}
+
 <Unstyled>
-  <InlineNotification kind="warning" title="Warning" className="sb-notification">
-    As the instruction for the three buttons implies, <CodeSnippet type="inline" hideCopyButton>{'ModalFooter'}</CodeSnippet>
-    is flexible on the buttons as you render <CodeSnippet type="inline" hideCopyButton>{'Button'}</CodeSnippet>'s by yourself,
-    as shown below. In this case, the application code needs to take care of running
-    actions upon clicking those buttons, e.g. closing the modal
+  <InlineNotification
+    kind="warning"
+    title="Warning"
+    className="sb-notification">
+    As the instruction for the three buttons implies,{' '}
+    <CodeSnippet type="inline" hideCopyButton>ModalFooter</CodeSnippet>
+    is flexible on the buttons as you render 
+    <CodeSnippet type="inline" hideCopyButton>Button</CodeSnippet>
+    's by yourself, as shown below. In this case, the application code
+    needs to take care of running actions upon clicking those buttons, e.g. closing
+    the modal
   </InlineNotification>
 </Unstyled>
+{/* <!-- prettier-ignore-end --> */}
 
 ```jsx
 <ComposedModal>

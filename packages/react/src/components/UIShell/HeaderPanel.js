@@ -13,13 +13,14 @@ import { keys, match } from '../../internal/keyboard';
 import { useWindowEvent } from '../../internal/useEvent';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 
+const noopFn = () => {};
 const HeaderPanel = React.forwardRef(function HeaderPanel(
   {
     children,
     className: customClassName,
     expanded,
     addFocusListeners = true,
-    onHeaderPanelFocus,
+    onHeaderPanelFocus = noopFn,
     href,
     ...other
   },
@@ -123,7 +124,6 @@ HeaderPanel.propTypes = {
   /**
    * An optional listener that is called a callback to collapse the HeaderPanel
    */
-
   onHeaderPanelFocus: PropTypes.func,
 };
 

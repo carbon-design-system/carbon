@@ -9,9 +9,9 @@
     "@carbon/styles": "link:../../../styles",
     "@carbon/type": "link:../../",
     "change-case": "^4.1.1",
-    "next": "^12.1.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "next": "^13.4.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "sass": "^1.36.0"
   }
 }

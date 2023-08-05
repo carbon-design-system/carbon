@@ -12,6 +12,7 @@ import React, {
   type KeyboardEvent,
   type MouseEventHandler,
   isValidElement,
+  createContext,
 } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -44,7 +45,16 @@ interface SideNavProps extends ComponentProps<'nav'> {
   onOverlayClick?: MouseEventHandler<HTMLDivElement> | undefined;
   onSideNavBlur?: () => void | undefined;
   enterDelayMs?: number;
+  inert?: boolean;
 }
+
+interface SideNavContextData {
+  isRail?: boolean | undefined;
+}
+
+export const SideNavContext = createContext<SideNavContextData>(
+  {} as SideNavContextData
+);
 
 function SideNavRenderFunction(
   {
@@ -118,29 +128,27 @@ function SideNavRenderFunction(
 
   let childrenToRender = children;
 
-  // if a rail, pass the expansion state as a prop, so children can update themselves to match
-  if (isRail) {
-    childrenToRender = React.Children.map(children, (child) => {
-      // if we are controlled, check for if we have hovered over or the expanded state, else just use the expanded state (uncontrolled)
-      const currentExpansionState = controlled
-        ? expandedViaHoverState || expanded
-        : expanded;
-      if (isValidElement(child)) {
-        const childJsxElement = child as JSX.Element;
-        // avoid spreading `isSideNavExpanded` to non-Carbon UI Shell children
-        return React.cloneElement(childJsxElement, {
-          ...(CARBON_SIDENAV_ITEMS.includes(
-            childJsxElement.type?.displayName ?? childJsxElement.type?.name
-          )
-            ? {
-                isSideNavExpanded: currentExpansionState,
-              }
-            : {}),
-        });
-      }
-      return child;
-    });
-  }
+  // Pass the expansion state as a prop, so children can update themselves to match
+  childrenToRender = React.Children.map(children, (child) => {
+    // if we are controlled, check for if we have hovered over or the expanded state, else just use the expanded state (uncontrolled)
+    const currentExpansionState = controlled
+      ? expandedViaHoverState || expanded
+      : expanded;
+    if (isValidElement(child)) {
+      const childJsxElement = child as JSX.Element;
+      // avoid spreading `isSideNavExpanded` to non-Carbon UI Shell children
+      return React.cloneElement(childJsxElement, {
+        ...(CARBON_SIDENAV_ITEMS.includes(
+          childJsxElement.type?.displayName ?? childJsxElement.type?.name
+        )
+          ? {
+              isSideNavExpanded: currentExpansionState,
+            }
+          : {}),
+      });
+    }
+    return child;
+  });
 
   const eventHandlers: Partial<
     Pick<
@@ -156,7 +164,7 @@ function SideNavRenderFunction(
 
   if (addFocusListeners) {
     eventHandlers.onFocus = (event) => {
-      if (!event.currentTarget.contains(event.relatedTarget)) {
+      if (!event.currentTarget.contains(event.relatedTarget) && isRail) {
         handleToggle(event, true);
       }
     };
@@ -164,7 +172,11 @@ function SideNavRenderFunction(
       if (!event.currentTarget.contains(event.relatedTarget)) {
         handleToggle(event, false);
       }
-      if (!event.currentTarget.contains(event.relatedTarget) && expanded) {
+      if (
+        !event.currentTarget.contains(event.relatedTarget) &&
+        expanded &&
+        !isFixedNav
+      ) {
         if (onSideNavBlur) {
           onSideNavBlur();
         }
@@ -213,7 +225,7 @@ function SideNavRenderFunction(
   });
 
   return (
-    <>
+    <SideNavContext.Provider value={{ isRail }}>
       {isFixedNav ? null : (
         // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
         <div className={overlayClassName} onClick={onOverlayClick} />
@@ -222,12 +234,13 @@ function SideNavRenderFunction(
         tabIndex={-1}
         ref={navRef}
         className={`${prefix}--side-nav__navigation ${className}`}
+        inert={!isRail && (expanded ? undefined : -1)}
         {...accessibilityLabel}
         {...eventHandlers}
         {...other}>
         {childrenToRender}
       </nav>
-    </>
+    </SideNavContext.Provider>
   );
 }
 

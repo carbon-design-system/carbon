@@ -4,8 +4,8 @@ import { ArgsTable } from '@storybook/blocks';
 
 [Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Layout)
 
-{/* <!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -17,13 +17,22 @@ import { ArgsTable } from '@storybook/blocks';
 
 ## Overview
 
-The `Layout` component provides a way to set layout contexts for specific parts of a web application. It uses Carbon's experimental `layout` sass module (exported from `@carbon/styles`) to control layout-related settings like size and density of all components within a layout context.
+The `Layout` component provides a way to set layout contexts for specific parts
+of a web application. It uses Carbon's experimental `layout` sass module
+(exported from `@carbon/styles`) to control layout-related settings like size
+and density of all components within a layout context.
 
-All children components that support it will react to the `size` and `density` you pass in the `Layout` props. Note that not all components support the entire spectrum of options available. In these cases, a component will typically cap out at the maximum or minimum size it supports in order to still best suit the layout context's intent.
+All children components that support it will react to the `size` and `density`
+you pass in the `Layout` props. Note that not all components support the entire
+spectrum of options available. In these cases, a component will typically cap
+out at the maximum or minimum size it supports in order to still best suit the
+layout context's intent.
 
-If a component is outside a layout context or `props.size` / `props.density` isn't set, it will fall back to its default rendering.
+If a component is outside a layout context or `props.size` / `props.density`
+isn't set, it will fall back to its default rendering.
 
-Components that are explicitely passed a `size` to are unaffected by the layout context. Example:
+Components that are explicitely passed a `size` to are unaffected by the layout
+context. Example:
 
 ```jsx
 <div>
@@ -45,9 +54,13 @@ Components that are explicitely passed a `size` to are unaffected by the layout 
 
 ### LayoutConstraint
 
-In order to apply specific constraints to children components that might differ from their own preference, the `<LayoutConstraint>` utility component can be used.
+In order to apply specific constraints to children components that might differ
+from their own preference, the `<LayoutConstraint>` utility component can be
+used.
 
-An example of this use case is the icon-only content switcher. It uses `IconButton` under the hood which supports all sizes and defaults to `lg`. The `ContentSwitcher` though only supports `sm`->`lg` and defaults to `md`.
+An example of this use case is the icon-only content switcher. It uses
+`IconButton` under the hood which supports all sizes and defaults to `lg`. The
+`ContentSwitcher` though only supports `sm`->`lg` and defaults to `md`.
 
 ```jsx
 <div>
@@ -58,13 +71,15 @@ An example of this use case is the icon-only content switcher. It uses `IconButt
 </div>
 ```
 
-The constraints for a group (`size` and `density`) must be passed as an object with any of these keys:
+The constraints for a group (`size` and `density`) must be passed as an object
+with any of these keys:
+
 - `min`
 - `default`
 - `max`
 
-Example: `size={{ min: 'sm', max: 'lg }}`<br />
-Example: `density={{ default: 'condensed' }}`
+Example: `size={{ min: 'sm', max: 'lg }}`<br /> Example:
+`density={{ default: 'condensed' }}`
 
 ## Component API
 

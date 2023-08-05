@@ -92,8 +92,8 @@ $helper-text-01: (
 /// @deprecated
 /// @group @carbon/type
 $helper-text-02: (
-  font-size: carbon--type-scale(2),
-  font-weight: carbon--font-weight('regular'),
+  font-size: scale.type-scale(2),
+  font-weight: font-family.font-weight('regular'),
   line-height: 1.28572,
   letter-spacing: 0.16px,
 ) !default;

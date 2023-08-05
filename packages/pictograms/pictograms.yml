@@ -328,6 +328,18 @@
   aliases:
     - assessment used
     - Cloud
+- name: asset-management
+  friendly_name: Asset management
+  aliases:
+    - sustainability
+    - asset management
+    - file
+    - data
+    - hand
+    - document
+    - ESG
+    - strategy
+    - storage
 - name: assets
   friendly_name: Assets
   aliases:
@@ -428,6 +440,20 @@
     - shopping
     - shop
     - retail
+- name: balloon
+  friendly_name: Balloon
+  aliases:
+    - balloon
+    - toy
+    - celebration
+- name: balloon--hot-air
+  friendly_name: Hot air balloon
+  aliases:
+    - balloon
+    - basket
+    - transportation
+    - flight
+    - air
 - name: bangalore
   friendly_name: Bangalore
   aliases:
@@ -435,6 +461,18 @@
     - india
     - cities
     - city
+- name: banking
+  friendly_name: Banking
+  aliases:
+    - sustainability
+    - banking
+    - industry
+    - column
+    - finance
+    - institution
+    - money
+    - economic
+    - ESG
 - name: barcelona
   friendly_name: Barcelona
   aliases:
@@ -709,6 +747,13 @@
   aliases:
     - canada
     - Maple leaf
+- name: candy
+  friendly_name: Candy
+  aliases:
+    - candy
+    - sweet
+    - celebration
+    - food
 - name: capitol
   friendly_name: Capitol
   aliases:
@@ -1288,6 +1333,16 @@
   friendly_name: Cloud Pak for Applications
   aliases:
     - Cloud Pak for Applications
+- name: cloud-pak--for-business-automation
+  friendly_name: Cloud Pak for Business Automation
+  aliases:
+    - automation
+    - business
+    - cloud
+    - hexagon
+    - gear
+    - automate
+    - process
 - name: cloud-pak--for-data
   friendly_name: Cloud Pak for Data
   aliases:
@@ -1655,6 +1710,14 @@
   aliases:
     - coronavirus covid-19
     - virus
+- name: coupon
+  friendly_name: Coupon
+  aliases:
+    - coupon
+    - refund
+    - discount
+    - torn
+    - money
 - name: credit--card
   friendly_name: Credit card
   aliases:
@@ -2236,6 +2299,17 @@
     - endpoint
     - protection
     - security
+- name: energy--crisis
+  friendly_name: Energy crisis
+  aliases:
+    - sustainability
+    - energy crisis
+    - green
+    - plug
+    - exclamation point
+    - circle
+    - electricity
+    - power
 - name: engine
   friendly_name: Engine
   aliases:
@@ -2282,6 +2356,25 @@
   aliases:
     - escalator up
     - escalator
+- name: esg-reporting--01
+  friendly_name: ESG reporting 01
+  aliases:
+    - sustainability
+    - ESG reporting
+    - green
+    - report
+    - data
+    - leaf
+- name: esg-reporting--02
+  friendly_name: ESG reporting 02
+  aliases:
+    - sustainability
+    - ESG reporting
+    - report
+    - data
+    - document
+    - arrow
+    - file
 - name: europe--africa
   friendly_name: Europe Africa
   aliases:
@@ -2294,6 +2387,58 @@
   aliases:
     - event driven
     - Cloud
+- name: event--automation
+  friendly_name: Event automation
+  aliases:
+    - event
+    - events
+    - EDA
+    - processing
+    - kafka
+    - event driven architecture
+    - event automation
+    - event streams
+    - event processing
+    - event distribution
+    - event discovery
+    - event endpoint management
+- name: event--endpoint-management
+  friendly_name: Event endpoint management
+  aliases:
+    - event
+    - events
+    - EDA
+    - processing
+    - kafka
+    - event driven architecture
+    - event automation
+    - event distribution
+    - event discovery
+    - event endpoint management
+- name: event--processing
+  friendly_name: Event processing
+  aliases:
+    - event
+    - events
+    - EDA
+    - processing
+    - kafka
+    - event driven architecture
+    - event automation
+    - event processing
+    - event discovery
+- name: event--streams
+  friendly_name: Event streams
+  aliases:
+    - event
+    - events
+    - EDA
+    - processing
+    - kafka
+    - event driven architecture
+    - event automation
+    - event streams
+    - event discovery
 - name: expand--horz
   friendly_name: Expand horz
   aliases:
@@ -2545,6 +2690,13 @@
     - fire extinguisher
     - fire
     - extinguisher
+- name: firecracker
+  friendly_name: Firecracker
+  aliases:
+    - firecracker
+    - fireworks
+    - explosive
+    - celebration
 - name: firefighter
   friendly_name: Firefighter
   aliases:
@@ -2565,6 +2717,12 @@
     - aid
     - medical
     - healthcare
+- name: flag
+  friendly_name: Flag
+  aliases:
+    - flag
+    - pennant
+    - banner
 - name: flash--storage
   friendly_name: Flash storage
   aliases:
@@ -2862,6 +3020,28 @@
     - users
     - identities
     - security
+- name: government--01
+  friendly_name: Government 01
+  aliases:
+    - sustainability
+    - government
+    - govern
+    - industry
+    - column
+    - municipal
+    - institution
+    - ESG
+- name: government--02
+  friendly_name: Government 02
+  aliases:
+    - sustainability
+    - government
+    - govern
+    - industry
+    - column
+    - municipal
+    - institution
+    - ESG
 - name: graphic-intensive-workloads
   friendly_name: Graphic intensive workloads
   aliases:
@@ -2873,6 +3053,25 @@
     - green energy
     - green electric
     - energy consumption
+- name: green-it--01
+  friendly_name: Green IT 01
+  aliases:
+    - sustainability
+    - green IT
+    - information technology
+    - ESG
+    - leaf
+    - data
+    - source
+- name: green-it--02
+  friendly_name: Green IT 02
+  aliases:
+    - sustainability
+    - green IT
+    - information technology
+    - ESG
+    - leaf
+    - globe
 - name: group
   friendly_name: Group
   aliases:
@@ -2944,6 +3143,13 @@
     - people
     - disabled user
     - wheelchair
+- name: handshake
+  friendly_name: Handshake
+  aliases:
+    - handshake
+    - agreement
+    - friendship
+    - hands
 - name: hard--drive
   friendly_name: Hard disk drive
   aliases:
@@ -3493,6 +3699,12 @@
     - language
     - translation
     - watson
+- name: lantern
+  friendly_name: Lantern
+  aliases:
+    - lantern
+    - light
+    - celebration
 - name: launch
   friendly_name: Launch
   aliases:
@@ -3515,6 +3727,13 @@
     - lightning
     - weather
     - forecast
+- name: link
+  friendly_name: Link
+  aliases:
+    - link
+    - hyperlink
+    - url
+    - reference
 - name: list--bullet
   friendly_name: List bullet
   aliases:
@@ -3752,6 +3971,25 @@
     - expand
     - expansion
     - growth
+- name: medal--01
+  friendly_name: Medal 01
+  aliases:
+    - medal
+    - award
+    - ribbon
+    - star
+    - circle
+    - certificate
+    - honor
+    - win
+- name: medal--02
+  friendly_name: Medal 02
+  aliases:
+    - medal
+    - award
+    - ribbon
+    - honor
+    - win
 - name: medical
   friendly_name: Medical
   aliases:
@@ -3898,6 +4136,20 @@
     - tracking
     - track
     - RFID
+- name: moon-cake
+  friendly_name: Moon cake
+  aliases:
+    - moon cake
+    - celebration
+    - food
+- name: moon--full
+  friendly_name: Full moon
+  aliases:
+    - moon
+    - cloud
+    - star
+    - sky
+    - night
 - name: mortar-and-pestle
   friendly_name: Mortar and pestle
   aliases:
@@ -3981,6 +4233,14 @@
     - munich
     - city
     - cities
+- name: music
+  friendly_name: Music
+  aliases:
+    - music
+    - notes
+    - sound
+    - soundtrack
+    - audio
 - name: natural--language--classifier
   friendly_name: Natural language classifier
   aliases:
@@ -4244,6 +4504,13 @@
   aliases:
     - organization
     - design organization
+- name: ornament
+  friendly_name: Ornament
+  aliases:
+    - ornament
+    - decoration
+    - bauble
+    - holiday
 - name: overcast
   friendly_name: Overcast
   aliases:
@@ -4943,6 +5210,18 @@
   aliases:
     - resources
     - Cloud
+- name: retail--sustainable
+  friendly_name: Sustainable retail
+  aliases:
+    - sustainability
+    - retail
+    - industry
+    - sustainable
+    - cart
+    - shopping
+    - green
+    - leaf
+    - ESG
 - name: retrieve--and--rank
   friendly_name: Retrieve and rank
   aliases:
@@ -5082,6 +5361,13 @@
   aliases:
     - scaling containers
     - Cloud
+- name: scan-code
+  friendly_name: Scan code
+  aliases:
+    - scanner
+    - target
+    - code
+    - focus
 - name: scatter--matrix
   friendly_name: Scatter matrix
   aliases:
@@ -5220,6 +5506,22 @@
     - data
     - storage
     - backup
+- name: shanghai--oriental-pearl-tower
+  friendly_name: Shanghai Oriental Pearl Tower
+  aliases:
+    - Shanghai
+    - city
+    - cityscape
+    - tower
+    - pearl
+    - China
+- name: shanghai--cityscape
+  friendly_name: Shanghai cityscape
+  aliases:
+    - Shanghai
+    - city
+    - cityscape
+    - China
 - name: sharing-data
   friendly_name: Sharing data
   aliases:
@@ -5304,6 +5606,12 @@
     - precipitation
     - weather
     - forecast
+- name: snowflake
+  friendly_name: Snowflake
+  aliases:
+    - snow
+    - weather
+    - holiday
 - name: social--work--01
   friendly_name: Social work 01
   aliases:
@@ -5581,6 +5889,24 @@
     - weather
     - sky
     - forecast
+- name: supply-chain--01
+  friendly_name: Supply chain 01
+  aliases:
+    - sustainability
+    - supply chain
+    - ESG
+    - square
+    - cycle
+    - arrow
+- name: supply-chain--02
+  friendly_name: Supply chain 02
+  aliases:
+    - sustainability
+    - supply chain
+    - ESG
+    - circle
+    - green
+    - leaf
 - name: supply--chain--optimization--01
   friendly_name: Supply chain optimization 01
   aliases:
@@ -5615,6 +5941,41 @@
   aliases:
     - sustainability
     - environmental
+- name: sustainability--02
+  friendly_name: Sustainability 02
+  aliases:
+    - sustainability
+    - ESG
+    - green
+    - leaf
+    - growth
+    - branch
+- name: sustainability--03
+  friendly_name: Sustainability 03
+  aliases:
+    - sustainability
+    - ESG
+    - green
+    - leaf
+    - globe
+- name: sustainability--04
+  friendly_name: Sustainability 04
+  aliases:
+    - sustainability
+    - ESG
+    - green
+    - leaf
+    - cycle
+    - circle
+    - arrow
+- name: sustainability--strategy
+  friendly_name: Sustainability strategy
+  aliases:
+    - sustainability
+    - strategy
+    - green
+    - leaf
+    - cycle
 - name: swipe--left
   friendly_name: Swipe left
   aliases:
@@ -6128,6 +6489,13 @@
     - data
     - analytics
     - data analytics
+- name: trophy
+  friendly_name: Trophy
+  aliases:
+    - honor
+    - win
+    - award
+    - cup
 - name: troubleshooting
   friendly_name: Troubleshooting
   aliases:
