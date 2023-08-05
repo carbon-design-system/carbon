@@ -13,7 +13,7 @@ to the Carbon community.
 
 We value all of our community members, and thus want to foster a positive
 contributing environment. Please take a look at our
-[code of conduct](./CODE_OF_CONDUCT.md) before engaging in our workspaces.
+[code of conduct](CODE_OF_CONDUCT.md) before engaging in our workspaces.
 
 ## Prerequisites
 
@@ -29,7 +29,7 @@ installed:
     version manager for Node.
 - Git
 - [Yarn](https://yarnpkg.com/en/docs/install)
-- [WSL](../docs/guides/setup/windows.md) (Windows Only)
+- [WSL](guides/setup/windows.md) (Windows Only)
 
 If you're using Windows, there are some
 [additional steps](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/setup/windows.md)
@@ -261,8 +261,8 @@ GitHub.
 
 - **Development:** If coding is your thing, you can help us by contributing bug
   fixes or community components. Checkout our
-  [Developer Handbook](../docs/developer-handbook.md) to get your dev
-  environment set up, read up on our best practices and more.
+  [Developer Handbook](developer-handbook.md) to get your dev environment set
+  up, read up on our best practices and more.
 - **Design:** Design contributions can vary from visual assets, UX interactions,
   motion design, Sketch kit bug fixes and more.
 - **Content:** Our documentation is just as important as our design and code
@@ -285,9 +285,8 @@ GitHub.
    out properly according to the issue template.
 2. **Development environment:** If you haven't already, fork and clone whichever
    repo you want to contribute to. Then, create a new branch and add your
-   contribution in it. Checkout our
-   [Developer Handbook](../docs/developer-handbook.md) to read up on our best
-   coding practices and proper commit messages.
+   contribution in it. Check out our [Developer Handbook](developer-handbook.md)
+   to read up on our best coding practices and proper commit messages.
 3. **Pull request:** Submit a PR. Be sure to fill out the template properly.
 4. **Developer Certificate of Origin:** In order to contribute any code, we need
    you to sign a Developer Certificate of Origin (DCO). Code doesn't just mean

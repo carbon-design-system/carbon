@@ -22,7 +22,7 @@
   <a href="https://lerna.js.org/">
     <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="Maintained with Lerna" />
   </a>
-  <a href="https://github.com/carbon-design-system/carbon/blob/master/.github/CONTRIBUTING.md">
+  <a href="https://github.com/carbon-design-system/carbon/blob/main/docs/CONTRIBUTING.md">
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome" />
   </a>
   <a href="https://bestpractices.coreinfrastructure.org/projects/7034">
@@ -66,8 +66,6 @@ we support!
 - See our documentation site
   [here](https://www.carbondesignsystem.com/developing/frameworks/react/) for
   full how-to docs and guidelines
-- [Contributing](/.github/CONTRIBUTING.md): Guidelines for making contributions
-  to this repo.
 - 🏃‍♀️ Migration Guides
   - [v10 to v11](migration/v11.md)
   - [v9 to v10 (vanilla)](../packages/carbon-components/docs/migration/migrate-to-10.x.md)
@@ -77,7 +75,7 @@ we support!
 
 We're always looking for contributors to help us fix bugs, build new features,
 or help us improve the project documentation. If you're interested, definitely
-check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
+check out our [Contributing Guide](CONTRIBUTING.md) and our
 [Developer Guide](developer-handbook.md)! 👀
 
 ## Contributors

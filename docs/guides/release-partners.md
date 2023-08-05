@@ -202,7 +202,7 @@ entrypoint. This entrypoint is temporary during v10 and will be moved to
 `@carbon/icons-react` in v11.
 
 For more details on migrating from the v10 icons to v11, check out our
-[migration guide](../migration/11.md).
+[migration guide](../migration/v11.md).
 
 _Note: there will be a codemod to help with automatically updating icon usage in
 our next beta release_
