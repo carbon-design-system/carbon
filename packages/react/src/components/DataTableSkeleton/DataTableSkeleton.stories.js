@@ -29,7 +29,11 @@ export const Skeleton = () => {
   const { ...rest } = props();
   return (
     <div style={{ width: '800px' }}>
-      <DataTableSkeleton {...rest} headers={headers} />
+      <DataTableSkeleton
+        {...rest}
+        headers={headers}
+        aria-label="sample table"
+      />
       <br />
     </div>
   );
@@ -38,7 +42,11 @@ export const Skeleton = () => {
 export const Playground = (args) => {
   return (
     <div style={{ width: '800px' }}>
-      <DataTableSkeleton {...args} headers={headers} />
+      <DataTableSkeleton
+        {...args}
+        headers={headers}
+        aria-label="sample table"
+      />
       <br />
     </div>
   );
