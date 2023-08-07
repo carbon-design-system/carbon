@@ -23,6 +23,35 @@ test.describe('Notifications @avt', () => {
     await expect(page).toHaveNoACViolations('Notifications actionable');
   });
 
+  test('accessibility-checker Notifications actionable keyboard', async ({
+    page,
+  }) => {
+    await visitStory(page, {
+      component: 'Notifications',
+      id: 'components-notifications-actionable--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    const actionButton = page.getByRole('button', { name: 'Action' });
+    const closeButton = page.getByRole('button', {
+      name: 'close notification',
+    });
+
+    await expect(actionButton).toBeVisible();
+
+    await page.keyboard.press('Tab');
+    await expect(actionButton).toBeFocused();
+
+    await page.keyboard.press('Tab');
+    await expect(closeButton).toBeFocused();
+
+    await expect(page).toHaveNoACViolations(
+      'Notifications actionable keyboard'
+    );
+  });
+
   test('accessibility-checker Notifications actionable low contrast', async ({
     page,
   }) => {
