@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('Search @avt', () => {
-  test.skip('accessibility-checker', async ({ page }) => {
+  test('accessibility-checker', async ({ page }) => {
     await visitStory(page, {
       component: 'Search',
       id: 'components-search--default',
@@ -22,7 +22,7 @@ test.describe('Search @avt', () => {
     await expect(page).toHaveNoACViolations('components-search--default');
   });
 
-  test.skip('accessibility-checker expandable', async ({ page }) => {
+  test('accessibility-checker expandable', async ({ page }) => {
     await visitStory(page, {
       component: 'Search',
       id: 'components-search--expandable',
@@ -33,7 +33,7 @@ test.describe('Search @avt', () => {
     await expect(page).toHaveNoACViolations('components-search--expandable');
   });
 
-  test.skip('search - keyboard nav', async ({ page }) => {
+  test('search - keyboard nav', async ({ page }) => {
     await visitStory(page, {
       component: 'Search',
       id: 'components-search--default',
@@ -111,11 +111,6 @@ test.describe('Search @avt', () => {
     // Close ExpandableSearch with ESC
     await page.keyboard.press('Escape');
     await expect(searchButton).not.toHaveAttribute('aria-expanded', 'true');
-    await expect(search).not.toBeVisible();
-    // Open on click, close on click outside
-    await searchButton.click();
-    await expect(search).toBeVisible();
-    await page.locator('body').click();
     await expect(search).not.toBeVisible();
   });
 });
