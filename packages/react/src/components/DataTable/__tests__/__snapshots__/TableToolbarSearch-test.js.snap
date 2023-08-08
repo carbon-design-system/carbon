@@ -40,6 +40,7 @@ exports[`TableToolbarSearch renders as expected - Component API should render 1`
       id="custom-id"
       placeholder="Filter table"
       role="searchbox"
+      tabindex="0"
       type="text"
       value=""
     />
