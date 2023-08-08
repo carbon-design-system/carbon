@@ -59,6 +59,10 @@ export interface DataTableSkeletonProps
    * Optionally specify whether you want the DataTable to be zebra striped
    */
   zebra?: boolean;
+  /**
+   * Optionally specify whether you want the DataTable to be styled
+   */
+  className?: string;
 }
 
 const DataTableSkeleton: FunctionComponent<DataTableSkeletonProps> = ({
