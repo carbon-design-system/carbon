@@ -2783,6 +2783,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "hideLabel": Object {
+        "type": "bool",
+      },
       "id": Object {
         "type": "string",
       },
