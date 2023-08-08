@@ -1,0 +1,92 @@
+/**
+ * Copyright IBM Corp. 2016, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+'use strict';
+
+const { expect, test } = require('@playwright/test');
+const { visitStory } = require('../../test-utils/storybook');
+
+test.describe('Pagination @avt', () => {
+  test('accessibility-checker default', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Pagination',
+      id: 'components-pagination--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('components-pagination--default');
+  });
+
+  test('accessibility-checker multiple-pagination-components', async ({
+    page,
+  }) => {
+    await visitStory(page, {
+      component: 'Pagination',
+      id: 'components-pagination--multiple-pagination-components',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations(
+      'components-pagination--multiple-pagination-components'
+    );
+  });
+
+  test('pagination - keyboard nav', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Pagination',
+      id: 'components-pagination--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    const itemsPerPage = page.getByRole('combobox', {
+      name: 'Items per page:',
+    });
+    const pageSelector = page.getByRole('combobox', {
+      name: 'Page number, of 11 pages',
+    });
+    const updatedPageSelector = page.getByRole('combobox', {
+      name: 'Page number, of 3 pages',
+    });
+    const nextPageButton = page.getByRole('button', { name: 'Next page' });
+    const prevPageButton = page.getByRole('button').first();
+
+    await expect(itemsPerPage).toBeVisible();
+    await expect(pageSelector).toBeVisible();
+    await expect(updatedPageSelector).not.toBeVisible();
+
+    // Tab to first items per page
+    await page.keyboard.press('Tab');
+    await expect(itemsPerPage).toBeFocused();
+    // Select 50 items per page
+    await itemsPerPage.selectOption('50');
+    await expect(itemsPerPage).toHaveValue('50');
+    // Should update the pages text
+    await expect(pageSelector).not.toBeVisible();
+    await expect(updatedPageSelector).toBeVisible();
+    // Should still be on page one
+    await expect(updatedPageSelector).toHaveValue('1');
+    // Tab to next page arrow key
+    await page.keyboard.press('Tab');
+    await expect(updatedPageSelector).toBeFocused();
+    await expect(prevPageButton).toBeDisabled();
+    await page.keyboard.press('Tab');
+    await expect(nextPageButton).toBeFocused();
+    // Go to next page
+    await page.keyboard.press('Enter');
+    await expect(updatedPageSelector).toHaveValue('2');
+    // Tab to previous page
+    await expect(prevPageButton).not.toBeDisabled();
+    await page.keyboard.press('Shift+Tab');
+    await page.keyboard.press('Enter');
+    await expect(updatedPageSelector).toHaveValue('1');
+    await expect(prevPageButton).toBeDisabled();
+  });
+});

@@ -50,7 +50,8 @@ Maintenance, consuming projects should begin migrating to the new Active major
 version.  During Maintenance we also consider adding non-critical bug fixes on
 an ad hoc basis, by request only. To request a fix be back-ported to a
 Maintenance release, please
-[open an issue](https://github.com/carbon-design-system/carbon/issues/new?assignees=&labels=type%3A+bug+%F0%9F%90%9B&projects=&template=BUG_REPORT.yaml&title=%5BBug%5D%3A+).
+[open an issue](https://github.com/carbon-design-system/carbon/issues/new?assignees=&labels=type%3A+bug+%F0%9F%90%9B&projects=&template=BUG_REPORT.yaml&title=%5BBug%5D%3A+)
+and include a link to the v11 fix pull request.
 
 ## Assets managed under this release schedule
 
