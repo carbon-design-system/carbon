@@ -154,8 +154,6 @@ test.describe('DataTable @avt', () => {
       await page.keyboard.press('Shift+Tab');
       await page.keyboard.press('Shift+Tab');
       await page.keyboard.press('Shift+Tab');
-      await page.keyboard.press('Shift+Tab');
-      await page.keyboard.press('Shift+Tab');
 
       await page
         .getByRole('heading', { name: 'Expandable row content' })

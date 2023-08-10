@@ -154,8 +154,16 @@ export const Default = () => {
                     </TableBatchAction>
                   </TableBatchActions>
                   <TableToolbarContent>
-                    <TableToolbarSearch onChange={onInputChange} />
-                    <TableToolbarMenu>
+                    <TableToolbarSearch
+                      tabIndex={
+                        batchActionProps.shouldShowBatchActions ? -1 : 0
+                      }
+                      onChange={onInputChange}
+                    />
+                    <TableToolbarMenu
+                      tabIndex={
+                        batchActionProps.shouldShowBatchActions ? -1 : 0
+                      }>
                       <TableToolbarAction onClick={this.handleOnRowAdd}>
                         Add row
                       </TableToolbarAction>
@@ -328,8 +336,14 @@ export const Playground = (args) => {
                         action('TableToolbarSearch - onChange')(evt);
                         onInputChange(evt);
                       }}
+                      tabIndex={
+                        batchActionProps.shouldShowBatchActions ? -1 : 0
+                      }
                     />
-                    <TableToolbarMenu>
+                    <TableToolbarMenu
+                      tabIndex={
+                        batchActionProps.shouldShowBatchActions ? -1 : 0
+                      }>
                       <TableToolbarAction
                         onClick={(evt) => {
                           action('handleOnRowAdd')(evt);

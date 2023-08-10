@@ -174,7 +174,7 @@ $popover-caret-height: custom-property.get-var(
 
   .#{$prefix}--popover--tab-tip
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret {
+    > .#{$prefix}--popover-caret {
     display: none;
   }
 
@@ -185,7 +185,7 @@ $popover-caret-height: custom-property.get-var(
   // Popover content placement
   .#{$prefix}--popover--bottom
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content {
+    > .#{$prefix}--popover-content {
     bottom: 0;
     left: 50%;
     transform: translate(-50%, calc(100% + $popover-offset));
@@ -193,7 +193,7 @@ $popover-caret-height: custom-property.get-var(
 
   .#{$prefix}--popover--bottom-left
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content {
+    > .#{$prefix}--popover-content {
     bottom: 0;
     left: 0;
     transform: translate(
@@ -204,7 +204,7 @@ $popover-caret-height: custom-property.get-var(
 
   .#{$prefix}--popover--bottom-right
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content {
+    > .#{$prefix}--popover-content {
     right: 0;
     bottom: 0;
     transform: translate($popover-offset, calc(100% + $popover-offset));
@@ -213,13 +213,13 @@ $popover-caret-height: custom-property.get-var(
   // Popover hover area placement
   .#{$prefix}--popover--bottom
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content::before,
+    > .#{$prefix}--popover-content::before,
   .#{$prefix}--popover--bottom-left
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content::before,
+    > .#{$prefix}--popover-content::before,
   .#{$prefix}--popover--bottom-right
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content::before {
+    > .#{$prefix}--popover-content::before {
     top: 0;
     right: 0;
     left: 0;
@@ -230,13 +230,13 @@ $popover-caret-height: custom-property.get-var(
   // Caret placement
   .#{$prefix}--popover--bottom
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--bottom-left
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--bottom-right
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret {
+    > .#{$prefix}--popover-caret {
     bottom: 0;
     left: 50%;
     width: $popover-caret-width;
@@ -252,7 +252,7 @@ $popover-caret-height: custom-property.get-var(
   // Popover content placement
   .#{$prefix}--popover--top
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content {
+    > .#{$prefix}--popover-content {
     top: 0;
     left: 50%;
     transform: translate(-50%, calc(-100% - $popover-offset));
@@ -260,7 +260,7 @@ $popover-caret-height: custom-property.get-var(
 
   .#{$prefix}--popover--top-left
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content {
+    > .#{$prefix}--popover-content {
     top: 0;
     left: 0;
     transform: translate(
@@ -271,7 +271,7 @@ $popover-caret-height: custom-property.get-var(
 
   .#{$prefix}--popover--top-right
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content {
+    > .#{$prefix}--popover-content {
     top: 0;
     right: 0;
     transform: translate($popover-offset, calc(-100% - $popover-offset));
@@ -280,13 +280,13 @@ $popover-caret-height: custom-property.get-var(
   // Popover hover area placement
   .#{$prefix}--popover--top
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content::before,
+    > .#{$prefix}--popover-content::before,
   .#{$prefix}--popover--top-left
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content::before,
+    > .#{$prefix}--popover-content::before,
   .#{$prefix}--popover--top-right
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content::before {
+    > .#{$prefix}--popover-content::before {
     right: 0;
     bottom: 0;
     left: 0;
@@ -295,13 +295,13 @@ $popover-caret-height: custom-property.get-var(
   }
 
   // Caret placement
-  .#{$prefix}--popover--top > .#{$prefix}--popover .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top > .#{$prefix}--popover > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--top-left
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--top-right
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret {
+    > .#{$prefix}--popover-caret {
     top: 0;
     left: 50%;
     width: $popover-caret-width;
@@ -317,7 +317,7 @@ $popover-caret-height: custom-property.get-var(
   // Popover content placement
   .#{$prefix}--popover--right
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content {
+    > .#{$prefix}--popover-content {
     top: 50%;
     left: 100%;
     // Add in 0.1px to prevent rounding errors where the content is
@@ -327,7 +327,7 @@ $popover-caret-height: custom-property.get-var(
 
   .#{$prefix}--popover--right-top
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content {
+    > .#{$prefix}--popover-content {
     top: 50%;
     left: 100%;
     transform: translate(
@@ -338,7 +338,7 @@ $popover-caret-height: custom-property.get-var(
 
   .#{$prefix}--popover--right-bottom
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content {
+    > .#{$prefix}--popover-content {
     bottom: 50%;
     left: 100%;
     transform: translate($popover-offset, calc(0.5 * $popover-offset + 16px));
@@ -347,13 +347,13 @@ $popover-caret-height: custom-property.get-var(
   // Popover hover area placement
   .#{$prefix}--popover--right
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content::before,
+    > .#{$prefix}--popover-content::before,
   .#{$prefix}--popover--right-top
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content::before,
+    > .#{$prefix}--popover-content::before,
   .#{$prefix}--popover--right-bottom
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content::before {
+    > .#{$prefix}--popover-content::before {
     top: 0;
     bottom: 0;
     left: 0;
@@ -362,13 +362,15 @@ $popover-caret-height: custom-property.get-var(
   }
 
   // Caret placement
-  .#{$prefix}--popover--right > .#{$prefix}--popover .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--right
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--right-top
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--right-bottom
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret {
+    > .#{$prefix}--popover-caret {
     top: 50%;
     left: 100%;
     width: $popover-caret-height;
@@ -384,7 +386,7 @@ $popover-caret-height: custom-property.get-var(
   // Popover content placement
   .#{$prefix}--popover--left
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content {
+    > .#{$prefix}--popover-content {
     top: 50%;
     right: 100%;
     // Add in 0.1px to prevent rounding errors where the content is
@@ -394,7 +396,7 @@ $popover-caret-height: custom-property.get-var(
 
   .#{$prefix}--popover--left-top
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content {
+    > .#{$prefix}--popover-content {
     top: -50%;
     right: 100%;
     // Add in 0.1px to prevent rounding errors where the content is
@@ -407,7 +409,7 @@ $popover-caret-height: custom-property.get-var(
 
   .#{$prefix}--popover--left-bottom
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content {
+    > .#{$prefix}--popover-content {
     right: 100%;
     bottom: -50%;
     // Add in 0.1px to prevent rounding errors where the content is
@@ -421,13 +423,13 @@ $popover-caret-height: custom-property.get-var(
   // Popover hover area placement
   .#{$prefix}--popover--left
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content::before,
+    > .#{$prefix}--popover-content::before,
   .#{$prefix}--popover--left-top
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content::before,
+    > .#{$prefix}--popover-content::before,
   .#{$prefix}--popover--left-bottom
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content::before {
+    > .#{$prefix}--popover-content::before {
     top: 0;
     right: 0;
     bottom: 0;
@@ -436,13 +438,15 @@ $popover-caret-height: custom-property.get-var(
   }
 
   // Caret placement
-  .#{$prefix}--popover--left > .#{$prefix}--popover .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--left
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--left-top
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--left-bottom
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret {
+    > .#{$prefix}--popover-caret {
     top: 50%;
     right: 100%;
     width: $popover-caret-height;
@@ -456,7 +460,7 @@ $popover-caret-height: custom-property.get-var(
   //-----------------------------------------------------------------------------
   .#{$prefix}--popover--tab-tip
     > .#{$prefix}--popover
-    .#{$prefix}--popover-content {
+    > .#{$prefix}--popover-content {
     border-radius: 0;
   }
 
