@@ -70,8 +70,8 @@ $-loading-gap-small: 110;
   }
 
   .#{$prefix}--inline-loading--error {
-    width: rem(16px);
-    height: rem(16px);
+    width: to-rem(16px);
+    height: to-rem(16px);
     fill: $support-error;
 
     &[hidden] {

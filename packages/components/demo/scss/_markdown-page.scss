@@ -305,7 +305,7 @@
       flex-direction: column;
       background-color: rgba($brand-01, 0.8);
       color: $inverse-01;
-      font-size: rem(12px);
+      font-size: to-rem(12px);
       font-style: normal;
       cursor: pointer;
       transition: $transition--base ease;

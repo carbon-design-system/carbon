@@ -28,8 +28,8 @@
     width: 100%;
     min-width: 10rem;
     height: 100%;
-    min-height: rem(40px);
-    padding: rem(11px) $carbon--spacing-05;
+    min-height: to-rem(40px);
+    padding: to-rem(11px) $carbon--spacing-05;
     border: none;
     border-bottom: 1px solid $ui-04;
     background-color: $field-01;
@@ -93,7 +93,7 @@
   .#{$prefix}--text-area.#{$prefix}--skeleton {
     @include skeleton;
 
-    height: rem(100px);
+    height: to-rem(100px);
 
     &::placeholder {
       color: transparent;

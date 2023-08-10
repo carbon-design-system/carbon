@@ -44,7 +44,7 @@
   }
 
   .#{$prefix}--list--nested {
-    margin-left: convert.rem(32px);
+    margin-left: convert.to-rem(32px);
   }
 
   .#{$prefix}--list--nested .#{$prefix}--list__item {
@@ -63,7 +63,7 @@
   .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested)
     > .#{$prefix}--list__item::before {
     position: absolute;
-    left: convert.rem(-24px);
+    left: convert.to-rem(-24px);
     content: counter(item) '.';
     counter-increment: item;
   }

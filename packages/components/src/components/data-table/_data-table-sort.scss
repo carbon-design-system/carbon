@@ -141,7 +141,7 @@
   }
 
   .#{$prefix}--table-sort__icon-unsorted {
-    width: rem(20px);
+    width: to-rem(20px);
     min-width: $spacing-05;
     margin-right: $spacing-03;
     margin-left: $spacing-03;
@@ -170,7 +170,7 @@
   }
 
   .#{$prefix}--table-sort__icon {
-    width: rem(20px);
+    width: to-rem(20px);
     min-width: $spacing-05;
     margin-right: $spacing-03;
     margin-left: $spacing-03;
@@ -187,27 +187,27 @@
   // V11: remove compact
   .#{$prefix}--data-table--compact.#{$prefix}--data-table--sort th,
   .#{$prefix}--data-table--xs.#{$prefix}--data-table--sort th {
-    height: rem(24px);
+    height: to-rem(24px);
   }
 
   // Sortable Short
   // V11: remove short
   .#{$prefix}--data-table--short.#{$prefix}--data-table--sort th,
   .#{$prefix}--data-table--sm.#{$prefix}--data-table--sort th {
-    height: rem(32px);
+    height: to-rem(32px);
   }
 
   // Sortable Medium
   // V11: remove short
   .#{$prefix}--data-table--md.#{$prefix}--data-table--sort th {
-    height: rem(40px);
+    height: to-rem(40px);
   }
 
   // Sortable Tall
   // V11: remove tall
   .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort th,
   .#{$prefix}--data-table--xl.#{$prefix}--data-table--sort th {
-    height: rem(64px);
+    height: to-rem(64px);
   }
 
   // V11: remove tall
@@ -218,7 +218,7 @@
     th
     .#{$prefix}--table-sort {
     display: inline-block;
-    height: rem(64px);
+    height: to-rem(64px);
   }
 
   // V11: remove tall
@@ -226,7 +226,7 @@
   .#{$prefix}--data-table--tall .#{$prefix}--table-sort__icon,
   .#{$prefix}--data-table--xl .#{$prefix}--table-sort__icon-unsorted,
   .#{$prefix}--data-table--xl .#{$prefix}--table-sort__icon {
-    margin-top: rem(13px);
+    margin-top: to-rem(13px);
   }
 
   // Windows HCM fix

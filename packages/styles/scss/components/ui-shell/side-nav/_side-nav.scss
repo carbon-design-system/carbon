@@ -75,7 +75,7 @@
 
   .#{$prefix}--side-nav__overlay {
     position: fixed;
-    top: rem(48px);
+    top: to-rem(48px);
     left: 0;
     width: 0;
     height: 0;
@@ -228,8 +228,8 @@
   }
 
   .#{$prefix}--side-nav__submenu-chevron > svg {
-    width: rem(16px);
-    height: rem(16px);
+    width: to-rem(16px);
+    height: to-rem(16px);
     transition: transform $duration-fast-02;
   }
 
@@ -283,7 +283,7 @@
 
   .#{$prefix}--side-nav__submenu[aria-expanded='true']
     + .#{$prefix}--side-nav__menu {
-    max-height: rem(1500px);
+    max-height: to-rem(1500px);
     visibility: inherit;
   }
 
@@ -341,7 +341,7 @@
     @include text-overflow();
 
     color: $text-secondary;
-    font-size: rem(14px);
+    font-size: to-rem(14px);
     letter-spacing: 0.1px;
     line-height: 1.25rem;
     user-select: none;
@@ -443,16 +443,16 @@
     @include breakpoint-down('lg') {
       position: relative;
       display: block;
-      margin-bottom: rem(32px);
+      margin-bottom: to-rem(32px);
     }
   }
 
   .#{$prefix}--side-nav__header-divider::after {
     position: absolute;
-    bottom: rem(-16px);
-    left: rem(16px);
+    bottom: to-rem(-16px);
+    left: to-rem(16px);
     width: calc(100% - 32px);
-    height: rem(1px);
+    height: to-rem(1px);
     background: $border-subtle;
     content: '';
   }

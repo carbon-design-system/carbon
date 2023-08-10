@@ -49,14 +49,14 @@
   // TODO: deprecate this block
   .#{$prefix}--file-btn {
     display: inline-flex;
-    padding-right: rem(64px);
+    padding-right: to-rem(64px);
     margin: 0;
   }
 
   .#{$prefix}--file-browse-btn {
     display: inline-block;
     width: 100%;
-    max-width: rem(320px);
+    max-width: to-rem(320px);
     @if not feature-flag-enabled('enable-v11-release') {
       margin-bottom: $carbon--spacing-03;
     }
@@ -129,12 +129,12 @@
 
   .#{$prefix}--file__selected-file {
     display: grid;
-    max-width: rem(320px);
+    max-width: to-rem(320px);
     min-height: $carbon--spacing-09;
     align-items: center;
     margin-bottom: $carbon--spacing-03;
     background-color: $field-01;
-    gap: rem(12px) $carbon--spacing-05;
+    gap: to-rem(12px) $carbon--spacing-05;
     grid-auto-rows: auto;
     grid-template-columns: 1fr auto;
     word-break: break-word;
@@ -168,12 +168,12 @@
   // V11: Remove --field
   .#{$prefix}--file__selected-file--field,
   .#{$prefix}--file__selected-file--md {
-    min-height: rem(40px);
+    min-height: to-rem(40px);
     gap: $carbon--spacing-03 $carbon--spacing-05;
   }
 
   .#{$prefix}--file__selected-file--sm {
-    min-height: rem(32px);
+    min-height: to-rem(32px);
     gap: $carbon--spacing-02 $carbon--spacing-05;
   }
 
@@ -181,7 +181,7 @@
   .#{$prefix}--file__selected-file--invalid__wrapper {
     @include focus-outline('invalid');
 
-    max-width: rem(320px);
+    max-width: to-rem(320px);
     margin-bottom: $carbon--spacing-03;
     background-color: $field-01;
     outline-width: 1px;
@@ -190,7 +190,7 @@
   .#{$prefix}--file__selected-file--invalid {
     @include focus-outline('invalid');
 
-    padding: rem(12px) 0;
+    padding: to-rem(12px) 0;
   }
 
   .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--sm {
@@ -210,7 +210,7 @@
 
   .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--sm
     .#{$prefix}--form-requirement {
-    padding-top: rem(7px);
+    padding-top: to-rem(7px);
   }
 
   // V11: Remove --field
@@ -218,7 +218,7 @@
     .#{$prefix}--form-requirement,
   .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--md
     .#{$prefix}--form-requirement {
-    padding-top: rem(11px);
+    padding-top: to-rem(11px);
   }
 
   .#{$prefix}--file__selected-file--invalid
@@ -246,7 +246,7 @@
 
     display: block;
     overflow: visible;
-    max-height: rem(200px);
+    max-height: to-rem(200px);
     padding: $carbon--spacing-03 $carbon--spacing-05;
     color: $text-error;
     font-weight: 400;
@@ -322,7 +322,7 @@
 
     display: flex;
     overflow: hidden;
-    height: rem(96px);
+    height: to-rem(96px);
     align-items: flex-start;
     justify-content: space-between;
     padding: $carbon--spacing-05;

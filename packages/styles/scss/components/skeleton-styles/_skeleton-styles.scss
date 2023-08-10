@@ -19,17 +19,17 @@
     @include skeleton;
 
     display: inline-block;
-    width: rem(16px);
-    height: rem(16px);
+    width: to-rem(16px);
+    height: to-rem(16px);
   }
 
   //skeleton placeholder
   .#{$prefix}--skeleton__placeholder {
     @include skeleton;
 
-    width: rem(100px);
+    width: to-rem(100px);
 
-    height: rem(100px);
+    height: to-rem(100px);
   }
 
   //skeleton text

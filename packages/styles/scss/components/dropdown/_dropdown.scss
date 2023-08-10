@@ -25,7 +25,7 @@
   .#{$prefix}--dropdown__wrapper--inline {
     display: inline-grid;
     align-items: center;
-    grid-gap: 0 rem(24px);
+    grid-gap: 0 to-rem(24px);
     grid-template: auto auto / auto min-content;
 
     .#{$prefix}--label {
@@ -50,7 +50,7 @@
     position: relative;
     display: block;
     width: 100%;
-    height: rem(40px);
+    height: to-rem(40px);
     border: none;
     border-bottom: 1px solid $border-strong;
     background-color: $field;
@@ -71,21 +71,21 @@
   }
 
   .#{$prefix}--dropdown--lg {
-    height: rem(48px);
-    max-height: rem(48px);
+    height: to-rem(48px);
+    max-height: to-rem(48px);
   }
 
   .#{$prefix}--dropdown--lg .#{$prefix}--dropdown__arrow {
-    top: rem(16px);
+    top: to-rem(16px);
   }
 
   .#{$prefix}--dropdown--sm {
-    height: rem(32px);
-    max-height: rem(32px);
+    height: to-rem(32px);
+    max-height: to-rem(32px);
   }
 
   .#{$prefix}--dropdown--sm .#{$prefix}--dropdown__arrow {
-    top: rem(8px);
+    top: to-rem(8px);
   }
 
   .#{$prefix}--dropdown--open {
@@ -96,12 +96,12 @@
     @include focus-outline('invalid');
 
     .#{$prefix}--dropdown-text {
-      padding-right: rem(56px);
+      padding-right: to-rem(56px);
     }
 
     + .#{$prefix}--form-requirement {
       display: inline-block;
-      max-height: rem(200px);
+      max-height: to-rem(200px);
       color: $text-error;
     }
   }
@@ -126,7 +126,7 @@
     @include box-shadow;
 
     // 40px item height * 5.5 items shown
-    max-height: rem(220px);
+    max-height: to-rem(220px);
     transition: max-height $duration-fast-02 motion(entrance, productive);
   }
 
@@ -145,7 +145,7 @@
 
   .#{$prefix}--dropdown__arrow {
     position: absolute;
-    top: rem(13px);
+    top: to-rem(13px);
     right: 1rem;
     fill: $icon-primary;
     pointer-events: none;
@@ -174,7 +174,7 @@
     // Account for the border in `.bx--dropdown`
     height: calc(100% + 1px);
     // 2rem + SVG width
-    padding-right: rem(42px);
+    padding-right: to-rem(42px);
     padding-left: $spacing-05;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -244,8 +244,8 @@
 
     display: block;
     overflow: hidden;
-    height: rem(40px);
-    padding: rem(11px) 0;
+    height: to-rem(40px);
+    padding: to-rem(11px) 0;
     border: 1px solid transparent;
     border-top-color: $border-subtle;
     margin: 0 $spacing-05;
@@ -268,16 +268,16 @@
   }
 
   .#{$prefix}--dropdown--sm .#{$prefix}--dropdown-link {
-    height: rem(32px);
-    padding-top: rem(7px);
-    padding-bottom: rem(7px);
+    height: to-rem(32px);
+    padding-top: to-rem(7px);
+    padding-bottom: to-rem(7px);
   }
 
   .#{$prefix}--dropdown--focused,
   .#{$prefix}--dropdown-link:focus {
     @include focus-outline('outline');
 
-    padding: rem(11px) rem(16px);
+    padding: to-rem(11px) to-rem(16px);
     margin: 0;
   }
 
@@ -285,7 +285,7 @@
   .#{$prefix}--dropdown-list[aria-activedescendant]
     .#{$prefix}--dropdown-link:focus {
     // Copied from .bx--dropdown-link styles
-    padding: rem(11px) 0;
+    padding: to-rem(11px) 0;
     margin: 0 $spacing-05;
     outline: none;
   }
@@ -296,7 +296,7 @@
     // copied from default focus styles
     @include focus-outline('outline');
 
-    padding: rem(11px) rem(16px);
+    padding: to-rem(11px) to-rem(16px);
     margin: 0;
   }
 
@@ -322,7 +322,7 @@
   .#{$prefix}--dropdown--open.#{$prefix}--dropdown--sm
     .#{$prefix}--dropdown-list {
     // 32px item height * 5.5 items shown
-    max-height: rem(176px);
+    max-height: to-rem(176px);
   }
 
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown-item {
@@ -365,7 +365,7 @@
 
   .#{$prefix}--dropdown--auto-width {
     width: auto;
-    max-width: rem(400px);
+    max-width: to-rem(400px);
   }
 
   .#{$prefix}--dropdown--inline {
@@ -385,8 +385,8 @@
     }
 
     .#{$prefix}--dropdown__arrow {
-      top: rem(8px);
-      right: rem(8px);
+      top: to-rem(8px);
+      right: to-rem(8px);
     }
   }
 
@@ -397,8 +397,8 @@
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-text {
     display: inline-block;
     overflow: visible;
-    height: rem(32px);
-    padding: rem(7px) $spacing-07 rem(7px) $spacing-04;
+    height: to-rem(32px);
+    padding: to-rem(7px) $spacing-07 to-rem(7px) $spacing-04;
     color: $text-primary;
   }
 
@@ -414,12 +414,12 @@
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid
     .#{$prefix}--dropdown__invalid-icon {
-    right: rem(32px);
+    right: to-rem(32px);
   }
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid
     .#{$prefix}--dropdown-text {
-    padding-right: rem(56px);
+    padding-right: to-rem(56px);
   }
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open:focus

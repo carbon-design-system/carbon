@@ -28,15 +28,15 @@
 
     display: inline-flex;
     // ensures tag stays pill shaped;
-    min-width: rem(32px);
+    min-width: to-rem(32px);
     // restricts size of contained elements
     max-width: 100%;
-    min-height: rem(24px);
+    min-height: to-rem(24px);
     align-items: center;
     justify-content: center;
     padding: $spacing-02 $spacing-03;
     margin: $spacing-02;
-    border-radius: rem(15px);
+    border-radius: to-rem(15px);
     cursor: default;
     vertical-align: middle;
     word-break: break-word;
@@ -164,14 +164,14 @@
 
   .#{$prefix}--tag__close-icon {
     display: flex;
-    width: rem(24px);
-    height: rem(24px);
+    width: to-rem(24px);
+    height: to-rem(24px);
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
     padding: 0;
     border: 0;
-    margin: 0 0 0 rem(2px);
+    margin: 0 0 0to-rem(2px);
     background-color: transparent;
     border-radius: 50%;
     color: currentColor;
@@ -185,8 +185,8 @@
   }
 
   .#{$prefix}--tag__custom-icon {
-    width: rem(16px);
-    height: rem(16px);
+    width: to-rem(16px);
+    height: to-rem(16px);
     flex-shrink: 0;
     padding: 0;
     border: 0;
@@ -225,7 +225,7 @@
 
   // small tags
   .#{$prefix}--tag--sm {
-    min-height: rem(18px);
+    min-height: to-rem(18px);
     padding: 0 $spacing-03;
   }
 
@@ -234,9 +234,9 @@
   }
 
   .#{$prefix}--tag--sm .#{$prefix}--tag__close-icon {
-    width: rem(18px);
-    height: rem(18px);
-    margin-left: rem(5px);
+    width: to-rem(18px);
+    height: to-rem(18px);
+    margin-left: to-rem(5px);
   }
 
   // Skeleton state
@@ -247,7 +247,7 @@
     );
 
     overflow: hidden;
-    width: rem(60px);
+    width: to-rem(60px);
 
     // Safari specific bug (#7672)
     @media not all and (min-resolution: 0.001dpcm) {

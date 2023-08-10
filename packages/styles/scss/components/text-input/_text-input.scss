@@ -36,7 +36,7 @@
     @include focus-outline('reset');
 
     width: 100%;
-    height: rem(40px);
+    height: to-rem(40px);
     padding: 0 $spacing-05;
     border: none;
     border-bottom: 1px solid $border-strong;
@@ -59,11 +59,11 @@
   // TODO V11: Remove xl selector
   .#{$prefix}--text-input--xl,
   .#{$prefix}--text-input--lg {
-    height: rem(48px);
+    height: to-rem(48px);
   }
 
   .#{$prefix}--text-input--sm {
-    height: rem(32px);
+    height: to-rem(32px);
   }
 
   .#{$prefix}--password-input {
@@ -132,7 +132,7 @@
     position: absolute;
     right: 0;
     display: flex;
-    width: rem(40px);
+    width: to-rem(40px);
     height: 100%;
     min-height: auto;
     align-items: center;
@@ -146,12 +146,12 @@
 
   .#{$prefix}--text-input--sm
     + .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
-    width: rem(32px);
+    width: to-rem(32px);
   }
 
   .#{$prefix}--text-input--lg
     + .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
-    width: rem(48px);
+    width: to-rem(48px);
   }
 
   .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
@@ -185,7 +185,7 @@
   }
 
   .#{$prefix}--text-input--invalid.#{$prefix}--password-input {
-    padding-right: rem(64px);
+    padding-right: to-rem(64px);
   }
 
   .#{$prefix}--text-input--invalid +
@@ -273,7 +273,7 @@
   .#{$prefix}--form--fluid .#{$prefix}--label {
     position: absolute;
     z-index: 1;
-    top: rem(13px);
+    top: to-rem(13px);
     left: $spacing-05;
     margin: 0;
   }
@@ -283,8 +283,8 @@
   }
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input {
-    min-height: rem(64px);
-    padding: rem(32px) $spacing-05 rem(13px);
+    min-height: to-rem(64px);
+    padding: to-rem(32px) $spacing-05 to-rem(13px);
   }
 
   .#{$prefix}--text-input__divider,
@@ -311,7 +311,7 @@
   }
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input__invalid-icon {
-    top: rem(80px);
+    top: to-rem(80px);
   }
 
   // V11: Possibly deprecate
@@ -346,31 +346,31 @@
 
   .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline {
     flex: 1;
-    margin: rem(13px) 0 0 0;
+    margin: to-rem(13px) 0 0 0;
     overflow-wrap: break-word;
     word-break: break-word;
   }
 
   .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline--sm {
-    margin-top: rem(9px);
+    margin-top: to-rem(9px);
   }
 
   // TODO V11: Remove xl selector
   .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline--xl,
   .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline--lg {
-    margin-top: rem(17px);
+    margin-top: to-rem(17px);
   }
 
   .#{$prefix}--text-input__label-helper-wrapper {
-    max-width: rem(128px);
+    max-width: to-rem(128px);
     flex: 2;
     flex-direction: column;
-    margin-right: rem(24px);
+    margin-right: to-rem(24px);
     overflow-wrap: break-word;
   }
 
   .#{$prefix}--text-input-wrapper .#{$prefix}--form__helper-text--inline {
-    margin-top: rem(2px);
+    margin-top: to-rem(2px);
   }
 
   .#{$prefix}--text-input__field-outer-wrapper {

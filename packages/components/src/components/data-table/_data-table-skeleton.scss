@@ -22,8 +22,8 @@
 
       display: block;
 
-      width: rem(64px);
-      height: rem(16px);
+      width: to-rem(64px);
+      height: to-rem(16px);
     }
 
     tr:hover {
@@ -55,16 +55,16 @@
     .#{$prefix}--data-table-header__title {
     @include skeleton;
 
-    width: rem(120px);
-    height: rem(24px);
+    width: to-rem(120px);
+    height: to-rem(24px);
   }
 
   .#{$prefix}--data-table-container.#{$prefix}--skeleton
     .#{$prefix}--data-table-header__description {
     @include skeleton;
 
-    width: rem(160px);
-    height: rem(16px);
+    width: to-rem(160px);
+    height: to-rem(16px);
 
     margin-top: $spacing-03;
   }

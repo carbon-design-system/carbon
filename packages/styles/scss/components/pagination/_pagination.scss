@@ -31,7 +31,7 @@
 
     display: flex;
     width: calc(100% - 1px);
-    min-height: rem(40px);
+    min-height: to-rem(40px);
     align-items: center;
     justify-content: space-between;
     border-top: 1px solid $border-subtle;
@@ -64,11 +64,11 @@
   }
 
   .#{$prefix}--pagination--sm {
-    min-height: rem(32px);
+    min-height: to-rem(32px);
   }
 
   .#{$prefix}--pagination--lg {
-    min-height: rem(48px);
+    min-height: to-rem(48px);
   }
 
   .#{$prefix}--pagination .#{$prefix}--select {
@@ -87,7 +87,7 @@
     width: auto;
     min-width: auto;
     height: 100%;
-    line-height: rem(40px);
+    line-height: to-rem(40px);
   }
 
   // Extra specificity is needed to preserve padding
@@ -98,11 +98,11 @@
   }
 
   .#{$prefix}--pagination--sm .#{$prefix}--select-input {
-    line-height: rem(32px);
+    line-height: to-rem(32px);
   }
 
   .#{$prefix}--pagination--lg .#{$prefix}--select-input {
-    line-height: rem(48px);
+    line-height: to-rem(48px);
   }
 
   .#{$prefix}--pagination .#{$prefix}--select-input:hover {
@@ -158,12 +158,12 @@
   }
 
   .#{$prefix}--pagination__left .#{$prefix}--pagination__text {
-    margin-right: rem(1px);
+    margin-right: to-rem(1px);
   }
 
   .#{$prefix}--pagination__right .#{$prefix}--pagination__text {
     margin-right: 1rem;
-    margin-left: rem(1px);
+    margin-left: to-rem(1px);
   }
 
   .#{$prefix}--pagination__left {
@@ -194,9 +194,9 @@
     @include component-reset.reset;
 
     display: flex;
-    width: rem(40px);
-    height: rem(40px);
-    min-height: rem(32px);
+    width: to-rem(40px);
+    height: to-rem(40px);
+    min-height: to-rem(32px);
     align-items: center;
     justify-content: center;
     border: none;
@@ -212,15 +212,15 @@
   .#{$prefix}--pagination--sm .#{$prefix}--pagination__button,
   .#{$prefix}--pagination--sm
     .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
-    width: rem(32px);
-    height: rem(32px);
+    width: to-rem(32px);
+    height: to-rem(32px);
   }
 
   .#{$prefix}--pagination--lg .#{$prefix}--pagination__button,
   .#{$prefix}--pagination--lg
     .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
-    width: rem(48px);
-    height: rem(48px);
+    width: to-rem(48px);
+    height: to-rem(48px);
   }
 
   .#{$prefix}--pagination__button:focus,

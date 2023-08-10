@@ -84,7 +84,7 @@
     align-items: center;
     padding-left: mini-units(2);
     color: $ibm-color__gray-10;
-    font-size: rem(14px);
+    font-size: to-rem(14px);
     font-weight: 400;
     text-decoration: none;
   }
@@ -95,8 +95,8 @@
   }
 
   a.#{$prefix}--navigation-link:focus {
-    outline: rem(3px) solid $ibm-color__blue-60;
-    outline-offset: rem(-3px);
+    outline: to-rem(3px) solid $ibm-color__blue-60;
+    outline-offset: to-rem(-3px);
   }
 
   .#{$prefix}--navigation-item--icon > a.#{$prefix}--navigation-link {
@@ -122,8 +122,8 @@
   }
 
   .#{$prefix}--navigation__category-toggle:focus {
-    outline: rem(3px) solid $ibm-color__blue-60;
-    outline-offset: rem(-3px);
+    outline: to-rem(3px) solid $ibm-color__blue-60;
+    outline-offset: to-rem(-3px);
   }
 
   .#{$prefix}--navigation__category-title {
@@ -135,7 +135,7 @@
     padding-right: mini-units(2);
     padding-left: mini-units(2);
     color: $ibm-color__gray-10;
-    font-size: rem(14px);
+    font-size: to-rem(14px);
     font-weight: 400;
   }
 

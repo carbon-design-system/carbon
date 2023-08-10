@@ -170,8 +170,8 @@
   .#{$prefix}--data-table
     td.#{$prefix}--table-expand
     + .#{$prefix}--table-column-checkbox {
-    padding-right: rem(6px);
-    padding-left: rem(6px);
+    padding-right: to-rem(6px);
+    padding-left: to-rem(6px);
   }
 
   .#{$prefix}--data-table
@@ -182,7 +182,7 @@
     td.#{$prefix}--table-expand
     + .#{$prefix}--table-column-checkbox
     + td {
-    padding-left: rem(8px);
+    padding-left: to-rem(8px);
   }
 
   .#{$prefix}--data-table td.#{$prefix}--table-expand,
@@ -229,7 +229,7 @@
   // V11: remove tall
   .#{$prefix}--data-table--tall .#{$prefix}--table-expand__button,
   .#{$prefix}--data-table--xl .#{$prefix}--table-expand__button {
-    width: rem(32px);
+    width: to-rem(32px);
     padding: 0;
   }
 
@@ -238,10 +238,10 @@
     td.#{$prefix}--table-expand
     + td::after {
     position: absolute;
-    bottom: rem(-1px);
+    bottom: to-rem(-1px);
     left: 0;
-    width: rem(8px);
-    height: rem(1px);
+    width: to-rem(8px);
+    height: to-rem(1px);
     background: $layer-accent;
     content: '';
   }
@@ -378,7 +378,7 @@
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
     + tr[data-child-row]:last-of-type
     td {
-    padding-bottom: rem(24px);
+    padding-bottom: to-rem(24px);
     box-shadow: inset 0 -1px $layer-active;
   }
 

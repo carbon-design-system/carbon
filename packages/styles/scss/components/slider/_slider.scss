@@ -36,8 +36,8 @@
   .#{$prefix}--slider {
     position: relative;
     width: 100%;
-    min-width: rem(200px);
-    max-width: rem(640px);
+    min-width: to-rem(200px);
+    max-width: to-rem(640px);
     padding: $spacing-05 0;
     margin: 0 $spacing-05;
     cursor: pointer;
@@ -57,18 +57,18 @@
   .#{$prefix}--slider__track {
     position: absolute;
     width: 100%;
-    height: rem(2px);
+    height: to-rem(2px);
     background: $border-subtle;
     transform: translate(0%, -50%);
   }
 
   .#{$prefix}--slider__track:before {
     position: absolute;
-    top: rem(-5px);
+    top: to-rem(-5px);
     left: 50%;
     display: inline-block;
-    width: rem(2px);
-    height: rem(4px);
+    width: to-rem(2px);
+    height: to-rem(4px);
     background: $border-subtle;
     content: '';
     transform: translate(-50%, 0);
@@ -77,7 +77,7 @@
   .#{$prefix}--slider__filled-track {
     position: absolute;
     width: 100%;
-    height: rem(2px);
+    height: to-rem(2px);
     background: $layer-selected-inverse;
     pointer-events: none;
     transform: translate(0%, -50%);
@@ -88,8 +88,8 @@
   .#{$prefix}--slider__thumb {
     position: absolute;
     z-index: 3;
-    width: rem(14px);
-    height: rem(14px);
+    width: to-rem(14px);
+    height: to-rem(14px);
     background: $layer-selected-inverse;
     border-radius: 50%;
     box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 2px transparent;
@@ -123,8 +123,8 @@
 
   .#{$prefix}--slider-text-input,
   .#{$prefix}-slider-text-input {
-    width: rem(64px);
-    height: rem(40px);
+    width: to-rem(64px);
+    height: to-rem(40px);
     -moz-appearance: textfield;
     text-align: center;
 
@@ -205,8 +205,8 @@
     .#{$prefix}--slider__range-label {
     @include skeleton;
 
-    width: rem(20px);
-    height: rem(12px);
+    width: to-rem(20px);
+    height: to-rem(12px);
   }
 
   .#{$prefix}--slider-container.#{$prefix}--skeleton

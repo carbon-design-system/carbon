@@ -44,7 +44,10 @@
   }
 
   .#{$prefix}--toggletip {
-    @include custom-property.declaration('popover-offset', convert.rem(13px));
+    @include custom-property.declaration(
+      'popover-offset',
+      convert.to-rem(13px)
+    );
   }
 
   .#{$prefix}--toggletip-content {

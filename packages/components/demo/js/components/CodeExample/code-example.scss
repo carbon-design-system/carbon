@@ -64,15 +64,15 @@ $temp-bg: #fff;
 
 .code-example__expand {
   position: absolute;
-  bottom: rem(2px);
-  right: rem(2px);
+  bottom: to-rem(2px);
+  right: to-rem(2px);
   background-color: $temp-bg;
   border: none;
   padding: 1rem;
   cursor: pointer;
 
   span {
-    font-size: rem(12px);
+    font-size: to-rem(12px);
   }
 
   &--icon {

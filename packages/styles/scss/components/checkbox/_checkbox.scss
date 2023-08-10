@@ -23,7 +23,7 @@
 
   // Spacing above collection of checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:first-of-type {
-    margin-top: rem(3px);
+    margin-top: to-rem(3px);
   }
 
   // Shift collection of checkboxes up if label is present
@@ -34,7 +34,7 @@
 
   // Spacing below collection of checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type {
-    margin-bottom: rem(3px);
+    margin-bottom: to-rem(3px);
   }
 
   // Visually, we'll hide the checkbox input and create our own styled version
@@ -55,16 +55,16 @@
 
     position: relative;
     display: flex;
-    min-height: rem(24px);
-    padding-top: rem(3px);
-    padding-left: rem(20px);
+    min-height: to-rem(24px);
+    padding-top: to-rem(3px);
+    padding-left: to-rem(20px);
     cursor: pointer;
     user-select: none;
   }
 
   .#{$prefix}--checkbox-label-text {
     // Add extra spacing when label is present
-    padding-left: rem(6px);
+    padding-left: to-rem(6px);
   }
 
   // Required because `$css--reset: true` cannot currently apply to this `::before` and `::after`
@@ -80,17 +80,17 @@
     // `top` since we don't want the checkbox to be centered vertically with the
     // text overflows.
     position: absolute;
-    top: rem(2px);
+    top: to-rem(2px);
     left: 0;
 
     // According to the spec, we'll want the bounding box for our checkbox to
     // be 16px. The border size will be what will be updated during the
     // different checkbox states.
-    width: rem(16px);
-    height: rem(16px);
+    width: to-rem(16px);
+    height: to-rem(16px);
     border: 1px solid $icon-primary;
     // increase left margin for #6480
-    margin: rem(2px) rem(2px) rem(2px) rem(3px);
+    margin: to-rem(2px) to-rem(2px) to-rem(2px) to-rem(3px);
 
     // Checkboxes with a background color look visually off against a parent container.
     background-color: transparent;
@@ -101,13 +101,13 @@
   // Create the appearance of the check in the `after` pseudo-element
   .#{$prefix}--checkbox-label::after {
     position: absolute;
-    top: rem(8px);
-    left: rem(7px);
-    width: rem(9px);
-    height: rem(5px);
+    top: to-rem(8px);
+    left: to-rem(7px);
+    width: to-rem(9px);
+    height: to-rem(5px);
     border-bottom: 2px solid $icon-inverse;
     border-left: 2px solid $icon-inverse;
-    margin-top: rem(-3px) #{'/*rtl:0rem*/'};
+    margin-top: to-rem(-3px) #{'/*rtl:0rem*/'};
     background: none;
     content: '';
     transform: scale(0) rotate(-45deg);
@@ -137,8 +137,8 @@
   // Indeterminate symbol
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::after,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::after {
-    top: rem(11px);
-    width: rem(8px);
+    top: to-rem(11px);
+    width: to-rem(8px);
     border-bottom: 2px solid $icon-inverse;
     border-left: 0 solid $icon-inverse;
     transform: scale(1) rotate(0deg);
@@ -191,11 +191,11 @@
   .#{$prefix}--checkbox-label-text.#{$prefix}--skeleton {
     @include skeleton;
 
-    width: rem(100px);
+    width: to-rem(100px);
     height: $spacing-05;
 
     // Add extra spacing when label is present
-    margin: rem(1px) 0 0 rem(6px);
+    margin: to-rem(1px) 0 0 to-rem(6px);
   }
 
   //-----------------------------------------------

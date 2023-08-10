@@ -64,10 +64,13 @@ $popover-offset: custom-property.get-var('popover-offset', 0rem);
 // Customize the dimensions of the caret by specifying its width or height.
 // These values will be flipped in left or right directions to have the
 // correct dimensions
-$popover-caret-width: custom-property.get-var('popover-caret-width', rem(12px));
+$popover-caret-width: custom-property.get-var(
+  'popover-caret-width',
+  to-rem(12px)
+);
 $popover-caret-height: custom-property.get-var(
   'popover-caret-height',
-  rem(6px)
+  to-rem(6px)
 );
 
 @mixin popover {
@@ -101,7 +104,7 @@ $popover-caret-height: custom-property.get-var(
 
   // Caret tip modifier
   .#{$prefix}--popover--caret {
-    @include custom-property.declaration('popover-offset', rem(10px));
+    @include custom-property.declaration('popover-offset', to-rem(10px));
   }
 
   // Popover, this element contains both the caret and the popover content
@@ -121,7 +124,7 @@ $popover-caret-height: custom-property.get-var(
     z-index: z('floating');
     display: none;
     width: max-content;
-    max-width: rem(368px);
+    max-width: to-rem(368px);
     background-color: $popover-background-color;
     border-radius: $popover-border-radius;
     color: $popover-text-color;

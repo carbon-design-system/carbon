@@ -25,7 +25,7 @@ $list-box-width: 100%;
 /// @type Number
 /// @access private
 /// @group list-box
-$list-box-height: rem(40px);
+$list-box-height: to-rem(40px);
 
 /// @type Number
 /// @access private
@@ -35,7 +35,7 @@ $list-box-inline-height: $list-box-height;
 /// @type Number
 /// @access private
 /// @group list-box
-$list-box-menu-width: rem(300px);
+$list-box-menu-width: to-rem(300px);
 
 /// List box styles
 /// @access private
@@ -46,7 +46,7 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box__wrapper--inline {
     display: inline-grid;
     align-items: center;
-    grid-gap: rem(4px);
+    grid-gap: to-rem(4px);
     grid-template: auto auto / auto auto;
 
     .#{$prefix}--label {
@@ -73,8 +73,8 @@ $list-box-menu-width: rem(300px);
 
     position: relative;
     width: $list-box-width;
-    height: rem(40px);
-    max-height: rem(40px);
+    height: to-rem(40px);
+    max-height: to-rem(40px);
     border: none;
     border-bottom: 1px solid $ui-04;
     background-color: $field-01;
@@ -90,13 +90,13 @@ $list-box-menu-width: rem(300px);
   // TODO V11: Remove xl selector
   .#{$prefix}--list-box--xl,
   .#{$prefix}--list-box--lg {
-    height: rem(48px);
-    max-height: rem(48px);
+    height: to-rem(48px);
+    max-height: to-rem(48px);
   }
 
   .#{$prefix}--list-box--sm {
-    height: rem(32px);
-    max-height: rem(32px);
+    height: to-rem(32px);
+    max-height: to-rem(32px);
   }
 
   .#{$prefix}--list-box--expanded {
@@ -274,12 +274,12 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--dropdown--inline .#{$prefix}--list-box__field {
-    max-width: rem(480px);
+    max-width: to-rem(480px);
   }
 
   .#{$prefix}--dropdown--inline .#{$prefix}--list-box__menu {
-    min-width: rem(288px);
-    max-width: rem(480px);
+    min-width: to-rem(288px);
+    max-width: to-rem(480px);
   }
 
   // The field we use for input, showing selection, etc.
@@ -322,7 +322,7 @@ $list-box-menu-width: rem(300px);
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input {
     // to account for clear input button outline
-    padding-right: rem(98px);
+    padding-right: to-rem(98px);
   }
 
   .#{$prefix}--list-box[data-invalid]
@@ -334,7 +334,7 @@ $list-box-menu-width: rem(300px);
     .#{$prefix}--text-input
     + .#{$prefix}--list-box__invalid-icon {
     // to account for clear input button outline
-    right: rem(66px);
+    right: to-rem(66px);
   }
 
   // empty input field
@@ -361,7 +361,7 @@ $list-box-menu-width: rem(300px);
     .#{$prefix}--text-input--empty
     + .#{$prefix}--list-box__invalid-icon {
     // to account for clear input button outline
-    right: rem(40px);
+    right: to-rem(40px);
   }
 
   // Label for a `list-box__field`
@@ -382,8 +382,8 @@ $list-box-menu-width: rem(300px);
     position: absolute;
     right: $carbon--spacing-05;
     display: flex;
-    width: rem(24px);
-    height: rem(24px);
+    width: to-rem(24px);
+    height: to-rem(24px);
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -396,7 +396,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__menu-icon--open {
-    width: rem(24px);
+    width: to-rem(24px);
     justify-content: center;
     transform: rotate(180deg);
   }
@@ -408,10 +408,10 @@ $list-box-menu-width: rem(300px);
     position: absolute;
     top: 50%;
     /* to preserve .5rem space between icons according to spec top/transform used to center the combobox clear selection icon in IE11 */
-    right: rem(40px);
+    right: to-rem(40px);
     display: flex;
-    width: rem(24px);
-    height: rem(24px);
+    width: to-rem(24px);
+    height: to-rem(24px);
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -444,25 +444,25 @@ $list-box-menu-width: rem(300px);
     top: auto;
     display: flex;
     width: auto;
-    height: rem(24px);
+    height: to-rem(24px);
     align-items: center;
     justify-content: space-between;
-    padding: rem(8px);
+    padding: to-rem(8px);
     // Align with hover circle of X button
-    padding-right: rem(2px);
-    margin-right: rem(10px);
+    padding-right: to-rem(2px);
+    margin-right: to-rem(10px);
     background-color: $inverse-02;
-    border-radius: rem(12px);
+    border-radius: to-rem(12px);
     color: $inverse-01;
     line-height: 0;
     transform: none;
   }
 
   .#{$prefix}--list-box__selection--multi > svg {
-    width: rem(20px);
-    height: rem(20px);
-    padding: rem(2px);
-    margin-left: rem(4px);
+    width: to-rem(20px);
+    height: to-rem(20px);
+    padding: to-rem(2px);
+    margin-left: to-rem(4px);
     fill: $inverse-01;
 
     &:hover {
@@ -514,7 +514,7 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
     // 40px item height * 5.5 items shown
-    max-height: rem(220px);
+    max-height: to-rem(220px);
   }
 
   // TODO V11: Remove xl selector
@@ -523,13 +523,13 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box--expanded.#{$prefix}--list-box--lg
     .#{$prefix}--list-box__menu {
     // 48px item height * 5.5 items shown
-    max-height: rem(264px);
+    max-height: to-rem(264px);
   }
 
   .#{$prefix}--list-box--expanded.#{$prefix}--list-box--sm
     .#{$prefix}--list-box__menu {
     // 32px item height * 5.5 items shown
-    max-height: rem(176px);
+    max-height: to-rem(176px);
   }
 
   // Descendant of a `list-box__menu` that represents a selection for a control
@@ -537,7 +537,7 @@ $list-box-menu-width: rem(300px);
     @include type-style('body-short-01');
 
     position: relative;
-    height: rem(40px);
+    height: to-rem(40px);
     color: $text-02;
     cursor: pointer;
     transition: background $duration--fast-01 motion(standard, productive);
@@ -557,13 +557,13 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item {
-    height: rem(32px);
+    height: to-rem(32px);
   }
 
   // TODO V11: Remove xl selector
   .#{$prefix}--list-box--xl .#{$prefix}--list-box__menu-item,
   .#{$prefix}--list-box--lg .#{$prefix}--list-box__menu-item {
-    height: rem(48px);
+    height: to-rem(48px);
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover {
@@ -607,8 +607,8 @@ $list-box-menu-width: rem(300px);
 
     display: block;
     overflow: hidden;
-    height: rem(40px);
-    padding: rem(11px) 0;
+    height: to-rem(40px);
+    padding: to-rem(11px) 0;
     padding-right: $carbon--spacing-06;
     border-top: 1px solid transparent;
     border-top-color: $ui-03;
@@ -626,7 +626,7 @@ $list-box-menu-width: rem(300px);
     &:focus {
       @include focus-outline('outline');
 
-      padding: rem(11px) rem(16px);
+      padding: to-rem(11px) to-rem(16px);
       border-color: transparent;
       margin: 0;
     }
@@ -638,17 +638,17 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item__option {
-    height: rem(32px);
-    padding-top: rem(7px);
-    padding-bottom: rem(7px);
+    height: to-rem(32px);
+    padding-top: to-rem(7px);
+    padding-bottom: to-rem(7px);
   }
 
   // TODO V11: Remove xl selector
   .#{$prefix}--list-box--xl .#{$prefix}--list-box__menu-item__option,
   .#{$prefix}--list-box--lg .#{$prefix}--list-box__menu-item__option {
-    height: rem(48px);
-    padding-top: rem(15px);
-    padding-bottom: rem(15px);
+    height: to-rem(48px);
+    padding-top: to-rem(15px);
+    padding-bottom: to-rem(15px);
   }
 
   .#{$prefix}--list-box--disabled
@@ -750,7 +750,7 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box__menu-item__selected-icon {
     position: absolute;
     top: 50%;
-    right: rem(16px);
+    right: to-rem(16px);
     display: none;
     fill: $icon-01;
     transform: translateY(-50%);
@@ -758,7 +758,7 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box--inline
     .#{$prefix}--list-box__menu-item__selected-icon {
-    right: rem(8px);
+    right: to-rem(8px);
   }
 
   .#{$prefix}--list-box__menu-item--active

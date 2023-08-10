@@ -69,7 +69,7 @@
       @include type-style('body-compact-01');
 
       display: flex;
-      min-height: rem(32px);
+      min-height: to-rem(32px);
       flex: 1;
       align-items: center;
 
@@ -163,7 +163,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: rem(4px);
+        width: to-rem(4px);
         height: 100%;
         background-color: $interactive;
         content: '';
@@ -172,6 +172,6 @@
   }
 
   .#{$prefix}--tree--xs .#{$prefix}--tree-node__label {
-    min-height: rem(24px);
+    min-height: to-rem(24px);
   }
 }

@@ -263,7 +263,7 @@
   // Manually center the loading indicator given the offset of its bounding box
   .#{$prefix}--data-table-cell--saving .#{$prefix}--loading {
     position: relative;
-    left: rem(7px);
+    left: to-rem(7px);
   }
 
   // Status - Success ----------------------------------------------------------
@@ -294,14 +294,14 @@
 
     position: absolute;
     z-index: 1000;
-    top: rem(-1px);
+    top: to-rem(-1px);
     right: -1rem;
     padding: 1rem;
     border: 1px solid $border-subtle;
     background-color: $icon-inverse;
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
     color: $text-error;
-    font-size: rem(12px);
+    font-size: to-rem(12px);
     opacity: 0;
     transform: translateY(-100%);
   }
@@ -313,8 +313,8 @@
     right: 1rem;
     // TODO: shift down half of height
     bottom: -7px;
-    width: rem(10px);
-    height: rem(10px);
+    width: to-rem(10px);
+    height: to-rem(10px);
     border: 1px solid $border-subtle;
     border-top: 1px solid transparent;
     border-left: 1px solid transparent;

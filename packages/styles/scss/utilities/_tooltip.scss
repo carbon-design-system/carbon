@@ -37,16 +37,16 @@
 
   z-index: z('floating');
   width: max-content;
-  min-width: rem(24px);
-  max-width: rem(208px);
+  min-width: to-rem(24px);
+  max-width: to-rem(208px);
   height: auto;
   padding: if(
     $tooltip-type == 'definition',
-    rem(8px) rem(16px),
-    rem(3px) rem(16px)
+    to-rem(8px) to-rem(16px),
+    to-rem(3px) to-rem(16px)
   );
   background-color: $background-inverse;
-  border-radius: rem(2px);
+  border-radius: to-rem(2px);
   color: $text-inverse;
   font-weight: 400;
   text-align: left;
@@ -232,11 +232,11 @@
   $align: 'center'
 ) {
   // position and alignment
-  $caret-spacing: if($tooltip-type == 'definition', rem(4px), rem(8px));
+  $caret-spacing: if($tooltip-type == 'definition', to-rem(4px), to-rem(8px));
 
   // space between caret and trigger button
-  $caret-height: rem(5px);
-  $caret-width: rem(8px);
+  $caret-height: to-rem(5px);
+  $caret-width: to-rem(8px);
   $body-spacing: $caret-spacing + $caret-height;
 
   // Use pseudo element to create invisible hover area to keep tooltip open on hover
@@ -249,26 +249,26 @@
     @if ($position == 'top' or $position == 'bottom') {
       left: 0;
       width: 100%;
-      height: rem(12px);
+      height: to-rem(12px);
     }
 
     @if ($position == 'left' or $position == 'right') {
       top: 0;
-      width: rem(12px);
+      width: to-rem(12px);
       height: 100%;
     }
 
     @if ($position == 'top') {
-      bottom: rem(-12px);
+      bottom: to-rem(-12px);
     }
     @if ($position == 'right') {
-      left: rem(-12px);
+      left: to-rem(-12px);
     }
     @if ($position == 'bottom') {
-      top: rem(-12px);
+      top: to-rem(-12px);
     }
     @if ($position == 'left') {
-      right: rem(-12px);
+      right: to-rem(-12px);
     }
   }
 
@@ -298,25 +298,25 @@
   &::before {
     @if ($position == 'top') {
       top: -$caret-spacing;
-      border-width: rem(5px) rem(4px) 0 rem(4px);
+      border-width: to-rem(5px) to-rem(4px) 0 to-rem(4px);
       border-color: $background-inverse transparent transparent transparent;
       transform: translate(-50%, -100%);
     }
     @if ($position == 'right') {
       right: -$caret-spacing;
-      border-width: rem(4px) rem(5px) rem(4px) 0;
+      border-width: to-rem(4px) to-rem(5px) to-rem(4px) 0;
       border-color: transparent $background-inverse transparent transparent;
       transform: translate(100%, -50%);
     }
     @if ($position == 'bottom') {
       bottom: -$caret-spacing;
-      border-width: 0 rem(4px) rem(5px) rem(4px);
+      border-width: 0 to-rem(4px) to-rem(5px) to-rem(4px);
       border-color: transparent transparent $background-inverse transparent;
       transform: translate(-50%, 100%);
     }
     @if ($position == 'left') {
       left: -$caret-spacing;
-      border-width: rem(4px) 0 rem(4px) rem(5px);
+      border-width: to-rem(4px) 0 to-rem(4px) to-rem(5px);
       border-color: transparent transparent transparent $background-inverse;
       transform: translate(-100%, -50%);
     }
@@ -369,7 +369,7 @@
     &.#{$prefix}--tooltip--a11y + .#{$prefix}--assistive-text {
       @if ($position == 'bottom') {
         // carryover from https://github.com/carbon-design-system/carbon/pull/3151/files#diff-93734be0784e9530b6d14a7b03b0d352R261-R265
-        bottom: -($body-spacing - rem(1px));
+        bottom: -($body-spacing - to-rem(1px));
         @if ($align == 'start' or $align == 'end') {
           transform: translate(0, 100%);
         } @else {

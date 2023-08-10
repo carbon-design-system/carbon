@@ -56,7 +56,7 @@
 
   .#{$prefix}--inline-edit-input--active {
     display: block;
-    margin-left: rem(-12px);
+    margin-left: to-rem(-12px);
 
     input {
       padding-left: $spacing-04;

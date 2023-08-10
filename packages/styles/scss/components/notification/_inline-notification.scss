@@ -29,10 +29,10 @@
     position: relative;
     display: flex;
     width: 100%;
-    min-width: rem(288px);
-    max-width: rem(288px);
+    min-width: to-rem(288px);
+    max-width: to-rem(288px);
     height: auto;
-    min-height: rem(48px);
+    min-height: to-rem(48px);
     flex-wrap: wrap;
     @if not enabled('enable-v11-release') {
       margin-top: $spacing-05;
@@ -42,16 +42,16 @@
     color: $text-inverse;
 
     @include breakpoint(md) {
-      max-width: rem(608px);
+      max-width: to-rem(608px);
       flex-wrap: nowrap;
     }
 
     @include breakpoint(lg) {
-      max-width: rem(736px);
+      max-width: to-rem(736px);
     }
 
     @include breakpoint(max) {
-      max-width: rem(832px);
+      max-width: to-rem(832px);
     }
   }
 
@@ -190,14 +190,14 @@
 
   .#{$prefix}--inline-notification__icon {
     flex-shrink: 0;
-    margin-top: rem(14px);
+    margin-top: to-rem(14px);
     margin-right: $spacing-05;
   }
 
   .#{$prefix}--inline-notification__text-wrapper {
     display: flex;
     flex-wrap: wrap;
-    padding: rem(15px) 0;
+    padding: to-rem(15px) 0;
   }
 
   @if feature-flags.enabled('enable-v11-release') {
@@ -221,7 +221,7 @@
   }
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
-    height: rem(32px);
+    height: to-rem(32px);
     margin-bottom: $spacing-03;
     margin-left: $spacing-08;
 
@@ -271,10 +271,10 @@
     top: 0;
     right: 0;
     display: flex;
-    width: rem(48px);
-    min-width: rem(48px);
-    max-width: rem(48px);
-    height: rem(48px);
+    width: to-rem(48px);
+    min-width: to-rem(48px);
+    max-width: to-rem(48px);
+    height: to-rem(48px);
     flex-direction: column;
     align-items: center;
     justify-content: center;

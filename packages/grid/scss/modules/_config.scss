@@ -24,13 +24,13 @@ $flex-grid-columns: 16 !default;
 /// @type Number
 /// @access public
 /// @group @carbon/layout
-$grid-gutter: convert.rem(32px) !default;
+$grid-gutter: convert.to-rem(32px) !default;
 
 /// Carbon condensed gutter size in rem
 /// @type Number
 /// @access public
 /// @group @carbon/layout
-$grid-gutter-condensed: convert.rem(1px) !default;
+$grid-gutter-condensed: convert.to-rem(1px) !default;
 
 // Initial map of our breakpoints and their values
 /// @type Map
@@ -40,27 +40,27 @@ $grid-breakpoints: (
   sm: (
     columns: 4,
     margin: 0,
-    width: convert.rem(320px),
+    width: convert.to-rem(320px),
   ),
   md: (
     columns: 8,
-    margin: convert.rem(16px),
-    width: convert.rem(672px),
+    margin: convert.to-rem(16px),
+    width: convert.to-rem(672px),
   ),
   lg: (
     columns: 16,
-    margin: convert.rem(16px),
-    width: convert.rem(1056px),
+    margin: convert.to-rem(16px),
+    width: convert.to-rem(1056px),
   ),
   xlg: (
     columns: 16,
-    margin: convert.rem(16px),
-    width: convert.rem(1312px),
+    margin: convert.to-rem(16px),
+    width: convert.to-rem(1312px),
   ),
   max: (
     columns: 16,
-    margin: convert.rem(24px),
-    width: convert.rem(1584px),
+    margin: convert.to-rem(24px),
+    width: convert.to-rem(1584px),
   ),
 ) !default;
 

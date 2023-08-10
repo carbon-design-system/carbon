@@ -25,7 +25,7 @@ $css--helpers: true;
 
     display: flex;
     width: 100%;
-    height: rem(48px);
+    height: to-rem(48px);
     align-items: center;
     justify-content: space-between;
     border-top: 1px solid $ui-03;
@@ -60,13 +60,13 @@ $css--helpers: true;
 
   .#{$prefix}--unstable-pagination__left
     .#{$prefix}--unstable-pagination__text {
-    margin-right: rem(1px);
+    margin-right: to-rem(1px);
   }
 
   .#{$prefix}--unstable-pagination__right
     .#{$prefix}--unstable-pagination__text {
     margin-right: $carbon--spacing-05;
-    margin-left: rem(1px);
+    margin-left: to-rem(1px);
   }
 
   .#{$prefix}--unstable-pagination__button {
@@ -76,7 +76,7 @@ $css--helpers: true;
     height: 100%;
     align-items: center;
     justify-content: center;
-    padding: 0 rem(14px);
+    padding: 0 to-rem(14px);
     border: none;
     border-left: 1px solid $ui-03;
     margin: 0;

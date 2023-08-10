@@ -45,7 +45,7 @@
 
     display: block;
     width: 100%;
-    height: rem(40px);
+    height: to-rem(40px);
     padding: 0 $spacing-09 0 $spacing-05;
     border: none;
     border-bottom: 1px solid $border-strong;
@@ -97,13 +97,13 @@
   }
 
   .#{$prefix}--select-input--sm {
-    height: rem(32px);
-    max-height: rem(32px);
+    height: to-rem(32px);
+    max-height: to-rem(32px);
   }
 
   .#{$prefix}--select-input--lg {
-    height: rem(48px);
-    max-height: rem(48px);
+    height: to-rem(48px);
+    max-height: to-rem(48px);
   }
 
   .#{$prefix}--select--disabled .#{$prefix}--label,
@@ -195,7 +195,7 @@
     .#{$prefix}--form__helper-text {
     align-self: flex-start;
     // Offset label text margin
-    margin-top: rem(13px);
+    margin-top: to-rem(13px);
   }
 
   .#{$prefix}--select--inline .#{$prefix}--form__helper-text {
@@ -234,7 +234,7 @@
 
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
     .#{$prefix}--select-input {
-    padding-right: rem(56px);
+    padding-right: to-rem(56px);
   }
 
   .#{$prefix}--select--inline.#{$prefix}--select--invalid

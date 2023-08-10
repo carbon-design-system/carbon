@@ -48,18 +48,18 @@
 
     .#{$prefix}--toggle__switch {
       position: relative;
-      width: rem(48px);
-      height: rem(24px);
+      width: to-rem(48px);
+      height: to-rem(24px);
       background-color: $toggle-off;
-      border-radius: rem(12px);
+      border-radius: to-rem(12px);
       transition: background-color $duration-fast-01 motion(exit, productive);
 
       &::before {
         position: absolute;
-        top: rem(3px);
-        left: rem(3px);
-        width: rem(18px);
-        height: rem(18px);
+        top: to-rem(3px);
+        left: to-rem(3px);
+        width: to-rem(18px);
+        height: to-rem(18px);
         background-color: $icon-on-color;
         border-radius: 50%;
         content: '';
@@ -84,7 +84,7 @@
       background-color: $support-success;
 
       &::before {
-        transform: translateX(rem(24px));
+        transform: translateX(to-rem(24px));
       }
     }
 
@@ -95,24 +95,24 @@
     }
 
     .#{$prefix}--toggle__appearance--sm .#{$prefix}--toggle__switch {
-      width: rem(32px);
-      height: rem(16px);
+      width: to-rem(32px);
+      height: to-rem(16px);
 
       &::before {
-        width: rem(10px);
-        height: rem(10px);
+        width: to-rem(10px);
+        height: to-rem(10px);
       }
     }
 
     .#{$prefix}--toggle__appearance--sm
       .#{$prefix}--toggle__switch--checked::before {
-      transform: translateX(rem(16px));
+      transform: translateX(to-rem(16px));
     }
 
     .#{$prefix}--toggle__check {
       position: absolute;
-      top: rem(6px);
-      right: rem(5px);
+      top: to-rem(6px);
+      right: to-rem(5px);
       fill: $support-success;
       visibility: hidden;
     }
@@ -183,19 +183,19 @@
     // There seem to be quite a few references throughout this file.
     .#{$prefix}--toggle__appearance {
       position: relative;
-      width: rem(48px);
-      height: rem(24px);
+      width: to-rem(48px);
+      height: to-rem(24px);
 
       // Toggle background oval
       &::before {
         position: absolute;
         top: 0;
         display: block;
-        width: rem(48px);
-        height: rem(24px);
+        width: to-rem(48px);
+        height: to-rem(24px);
         box-sizing: border-box;
         background-color: $toggle-off;
-        border-radius: rem(15px);
+        border-radius: to-rem(15px);
         // Corresponds to the double-border for focused state (`0 0 0 1px $ui-02, 0 0 0 3px $focus`)
         box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
         content: '';
@@ -212,11 +212,11 @@
       // Toggle circle
       &::after {
         position: absolute;
-        top: rem(3px);
-        left: rem(3px);
+        top: to-rem(3px);
+        left: to-rem(3px);
         display: block;
-        width: rem(18px);
-        height: rem(18px);
+        width: to-rem(18px);
+        height: to-rem(18px);
         box-sizing: border-box;
         background-color: $icon-on-color;
         border-radius: 50%;
@@ -233,10 +233,10 @@
     .#{$prefix}--toggle__check {
       position: absolute;
       z-index: 1;
-      top: rem(6px);
-      left: rem(6px);
-      width: rem(6px);
-      height: rem(5px);
+      top: to-rem(6px);
+      left: to-rem(6px);
+      width: to-rem(6px);
+      height: to-rem(5px);
       fill: $icon-on-color;
       transform: scale(0.2);
       transition: $duration-fast-01 motion(exit, productive);
@@ -252,7 +252,7 @@
 
     .#{$prefix}--toggle__text--left {
       position: absolute;
-      left: rem(48px);
+      left: to-rem(48px);
     }
 
     .#{$prefix}--toggle:checked
@@ -282,7 +282,7 @@
 
       &::after {
         background-color: $icon-on-color;
-        transform: translateX(rem(24px));
+        transform: translateX(to-rem(24px));
       }
     }
 
@@ -360,22 +360,22 @@
     .#{$prefix}--toggle--small
       + .#{$prefix}--toggle__label
       .#{$prefix}--toggle__appearance {
-      width: rem(32px);
-      height: rem(16px);
+      width: to-rem(32px);
+      height: to-rem(16px);
 
       &::before {
         top: 0;
-        width: rem(32px);
-        height: rem(16px);
+        width: to-rem(32px);
+        height: to-rem(16px);
         box-sizing: border-box;
         border-radius: 0.9375rem;
       }
 
       &::after {
-        top: rem(3px);
-        left: rem(3px);
-        width: rem(10px);
-        height: rem(10px);
+        top: to-rem(3px);
+        left: to-rem(3px);
+        width: to-rem(10px);
+        height: to-rem(10px);
       }
     }
 
@@ -383,13 +383,13 @@
       + .#{$prefix}--toggle__label
       .#{$prefix}--toggle__check {
       fill: $support-success;
-      transform: scale(1) translateX(rem(16px));
+      transform: scale(1) translateX(to-rem(16px));
     }
 
     .#{$prefix}--toggle--small
       + .#{$prefix}--toggle__label
       .#{$prefix}--toggle__text--left {
-      left: rem(32px);
+      left: to-rem(32px);
     }
 
     .#{$prefix}--toggle--small:checked
@@ -397,7 +397,7 @@
       .#{$prefix}--toggle__appearance {
       &::after {
         margin-left: 0;
-        transform: translateX(rem(17px));
+        transform: translateX(to-rem(17px));
       }
     }
 
@@ -427,8 +427,8 @@
     .#{$prefix}--toggle__switch {
       position: relative;
       display: flex;
-      width: rem(48px);
-      height: rem(24px);
+      width: to-rem(48px);
+      height: to-rem(24px);
       align-items: center;
       cursor: pointer;
 
@@ -437,11 +437,11 @@
         position: absolute;
         top: 0;
         display: block;
-        width: rem(48px);
-        height: rem(24px);
+        width: to-rem(48px);
+        height: to-rem(24px);
         box-sizing: border-box;
         background-color: $toggle-off;
-        border-radius: rem(15px);
+        border-radius: to-rem(15px);
         // Corresponds to the double-border for focused state (`0 0 0 1px $ui-02, 0 0 0 3px $focus`)
         box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
         content: '';
@@ -457,11 +457,11 @@
       // Toggle circle
       &::after {
         position: absolute;
-        top: rem(3px);
-        left: rem(3px);
+        top: to-rem(3px);
+        left: to-rem(3px);
         display: block;
-        width: rem(18px);
-        height: rem(18px);
+        width: to-rem(18px);
+        height: to-rem(18px);
         box-sizing: border-box;
         background-color: $icon-on-color;
         border-radius: 50%;
@@ -481,7 +481,7 @@
       position: absolute;
       // top offset needed to vertically center absolutely positioned flex child in IE11
       top: 50%;
-      margin-left: rem(56px);
+      margin-left: to-rem(56px);
       transform: translateY(-50%);
       user-select: none;
       white-space: nowrap;
@@ -510,7 +510,7 @@
 
       &::after {
         background-color: $icon-on-color;
-        transform: translateX(rem(24px));
+        transform: translateX(to-rem(24px));
       }
     }
 
@@ -569,36 +569,36 @@
     // ---------------------------------------------
     .#{$prefix}--toggle-input--small + .#{$prefix}--toggle-input__label {
       > .#{$prefix}--toggle__switch {
-        width: rem(32px);
-        height: rem(16px);
+        width: to-rem(32px);
+        height: to-rem(16px);
 
         &::before {
-          width: rem(32px);
-          height: rem(16px);
+          width: to-rem(32px);
+          height: to-rem(16px);
           border-radius: 0.9375rem;
         }
 
         &::after {
-          width: rem(10px);
-          height: rem(10px);
+          width: to-rem(10px);
+          height: to-rem(10px);
         }
       }
 
       .#{$prefix}--toggle__text--off,
       .#{$prefix}--toggle__text--on {
-        margin-left: rem(40px);
+        margin-left: to-rem(40px);
       }
     }
 
     .#{$prefix}--toggle-input--small:checked
       + .#{$prefix}--toggle-input__label {
       > .#{$prefix}--toggle__switch::after {
-        transform: translateX(rem(17px));
+        transform: translateX(to-rem(17px));
       }
 
       .#{$prefix}--toggle__check {
         fill: $support-success;
-        transform: scale(1) translateX(rem(16px));
+        transform: scale(1) translateX(to-rem(16px));
       }
     }
 

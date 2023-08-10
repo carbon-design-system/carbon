@@ -1,13 +1,13 @@
 // @access public
 // @content Includes a block of styles for sticky data tables that sets table max-width, max-height and column min-width
-// @example - @include sticky-header($max-height: rem(900px), $min-width: rem(30px));
+// @example - @include sticky-header($max-height: to-rem(900px), $min-width: to-rem(30px));
 // @param {value} $max-width [100%] - sets the max-width of the data table parent container
-// @param {value} $max-height [rem(300px)] - sets the max-height of the data table
-// @param {value} $min-width [rem(100px)] - sets the min-width of th's and td's so their sizes align
+// @param {value} $max-height [to-rem(300px)] - sets the max-height of the data table
+// @param {value} $min-width [to-rem(100px)] - sets the min-width of th's and td's so their sizes align
 @mixin sticky-header(
   $min-width: false,
   $max-width: 100%,
-  $max-height: rem(300px)
+  $max-height: to-rem(300px)
 ) {
   .#{$prefix}--data-table--max-width {
     max-width: $max-width;

@@ -30,11 +30,11 @@ $css--helpers: true;
     margin: 1rem 0;
 
     > div {
-      margin: 0 rem(4px);
+      margin: 0 to-rem(4px);
     }
 
     .#{$prefix}--search-input {
-      height: rem(32px);
+      height: to-rem(32px);
       background-color: transparent;
       outline: none;
     }
@@ -49,8 +49,8 @@ $css--helpers: true;
     }
 
     .#{$prefix}--search-magnifier {
-      top: rem(8px);
-      left: rem(6px);
+      top: to-rem(8px);
+      left: to-rem(6px);
       cursor: pointer;
       fill: $text-02;
       transform: scale(1.15);
@@ -63,10 +63,10 @@ $css--helpers: true;
     }
 
     .#{$prefix}--toolbar-search--active {
-      width: rem(250px);
+      width: to-rem(250px);
 
       .#{$prefix}--search-magnifier {
-        top: rem(9px);
+        top: to-rem(9px);
         transform: scale(1);
       }
 
@@ -97,8 +97,8 @@ $css--helpers: true;
     position: absolute;
     top: 0;
     left: 0;
-    width: rem(32px);
-    height: rem(32px);
+    width: to-rem(32px);
+    height: to-rem(32px);
     border: 0;
     background: transparent;
 

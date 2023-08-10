@@ -77,8 +77,8 @@
   // Overflow Menu overrides
   .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu {
     position: relative;
-    width: rem(20px);
-    height: rem(18px);
+    width: to-rem(20px);
+    height: to-rem(18px);
 
     &:focus {
       outline: 1px solid $focus;
@@ -92,7 +92,7 @@
     &::after {
       position: absolute;
       bottom: 2px;
-      width: rem(12px);
+      width: to-rem(12px);
       height: 1px;
       background: $hover-primary-text;
       content: '';
@@ -131,7 +131,7 @@
     outline: none;
   }
 
-  $caret-size: rem(7px);
+  $caret-size: to-rem(7px);
   .#{$prefix}--breadcrumb-menu-options.#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
     top: -$caret-size;
     left: $caret-size * 2;
@@ -148,7 +148,7 @@
   .#{$prefix}--breadcrumb.#{$prefix}--skeleton .#{$prefix}--link {
     @include skeleton;
 
-    width: rem(100px);
+    width: to-rem(100px);
     height: 1rem;
   }
 }

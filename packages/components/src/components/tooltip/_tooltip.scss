@@ -49,7 +49,7 @@
     left: 0;
     width: 0;
     height: 0;
-    border-width: 0 rem(4px) rem(5px) rem(4px);
+    border-width: 0 to-rem(4px) to-rem(5px) to-rem(4px);
     border-style: solid;
     border-color: transparent transparent $inverse-02 transparent;
     margin: 0 auto;
@@ -61,13 +61,13 @@
   &::after {
     @include box-shadow;
 
-    min-width: rem(24px);
-    max-width: rem(208px);
-    height: rem(24px);
+    min-width: to-rem(24px);
+    max-width: to-rem(208px);
+    height: to-rem(24px);
     padding: 0 1rem;
     margin-left: 50%;
     background-color: $inverse-02;
-    border-radius: rem(2px);
+    border-radius: to-rem(2px);
     color: $inverse-01;
     content: attr(aria-label);
     font-weight: 400;
@@ -178,11 +178,11 @@
     position: absolute;
     z-index: 1;
     display: none;
-    width: rem(208px);
+    width: to-rem(208px);
     padding: $carbon--spacing-03 $carbon--spacing-05;
     margin-top: $carbon--spacing-04;
     background: $inverse-02;
-    border-radius: rem(2px);
+    border-radius: to-rem(2px);
     pointer-events: none;
 
     p {
@@ -210,7 +210,7 @@
 
   // Tooltip Definition caret - top position
   .#{$prefix}--tooltip--definition__top {
-    margin-top: rem(-32px);
+    margin-top: to-rem(-32px);
     transform: translateY(-100%);
 
     .#{$prefix}--tooltip__caret {
@@ -242,7 +242,7 @@
 
   .#{$prefix}--tooltip--definition__align-end .#{$prefix}--tooltip__caret {
     left: auto;
-    margin-right: rem(16px);
+    margin-right: to-rem(16px);
     margin-left: auto;
   }
 }
@@ -319,7 +319,7 @@
 /// @group tooltip
 @mixin tooltip {
   // Caret's original size was 13.75px square
-  $caret-size: rem(6.875px);
+  $caret-size: to-rem(6.875px);
 
   .#{$prefix}--tooltip__label {
     @include type-style('label-01');
@@ -372,12 +372,12 @@
     position: absolute;
     z-index: z('floating');
     display: none;
-    min-width: rem(208px);
-    max-width: rem(288px);
+    min-width: to-rem(208px);
+    max-width: to-rem(288px);
     padding: $carbon--spacing-05;
     margin-top: $carbon--spacing-02;
     background: $inverse-02;
-    border-radius: rem(2px);
+    border-radius: to-rem(2px);
     color: $inverse-01;
     word-wrap: break-word;
 
@@ -456,7 +456,7 @@
 
     .#{$prefix}--link {
       color: $inverse-link;
-      font-size: rem(14px);
+      font-size: to-rem(14px);
 
       &:focus {
         outline: 1px solid $inverse-focus-ui;
@@ -571,7 +571,7 @@
   .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition {
     @include type-style('label-01');
 
-    border-bottom: rem(1px) dotted $text-02;
+    border-bottom: to-rem(1px) dotted $text-02;
     transition: border-color $duration--fast-02;
   }
 

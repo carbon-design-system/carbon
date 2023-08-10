@@ -49,14 +49,14 @@ td {
   }
 
   .page__divider-heading {
-    font-size: rem(12px);
+    font-size: to-rem(12px);
     width: 100%;
     padding-bottom: 1rem;
     border-bottom: 2px solid $brand-01;
     text-transform: capitalize;
     color: $text-01;
     margin-bottom: 3rem;
-    max-width: rem(660px);
+    max-width: to-rem(660px);
   }
 
   .page__desc {
@@ -88,7 +88,7 @@ td {
       text-transform: capitalize;
       color: $text-01;
       margin-bottom: 3rem;
-      max-width: rem(660px);
+      max-width: to-rem(660px);
     }
 
     h1 {

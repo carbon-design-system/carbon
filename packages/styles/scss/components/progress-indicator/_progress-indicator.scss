@@ -39,7 +39,7 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     position: relative;
     display: inline-flex;
     overflow: visible;
-    width: rem(128px);
+    width: to-rem(128px);
     min-width: 7rem;
     flex-direction: row;
 
@@ -56,14 +56,14 @@ $progress-indicator-bar-width: 1px inset transparent !default;
   .#{$prefix}--progress-line {
     position: absolute;
     left: 0;
-    width: rem(128px);
+    width: to-rem(128px);
     height: 1px;
     border: $progress-indicator-bar-width;
   }
 
   .#{$prefix}--progress--space-equal .#{$prefix}--progress-line {
     width: 100%;
-    min-width: rem(128px);
+    min-width: to-rem(128px);
   }
 
   .#{$prefix}--progress-step svg {
@@ -72,7 +72,7 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     width: $spacing-05;
     height: $spacing-05;
     flex-shrink: 0;
-    margin: rem(10px) $spacing-03 0 0;
+    margin: to-rem(10px) $spacing-03 0 0;
     border-radius: 50%;
     fill: $interactive;
   }
@@ -81,7 +81,7 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     @include type-style('body-compact-01');
 
     overflow: hidden;
-    max-width: rem(88px);
+    max-width: to-rem(88px);
     margin: $spacing-03 0 0 0;
     color: $text-primary;
     line-height: 1.45;
@@ -97,13 +97,13 @@ $progress-indicator-bar-width: 1px inset transparent !default;
   }
 
   .#{$prefix}--progress-label:hover {
-    box-shadow: 0 rem(1px) $link-primary;
+    box-shadow: 0 to-rem(1px) $link-primary;
     color: $link-primary;
     cursor: pointer;
   }
 
   .#{$prefix}--progress-label:focus {
-    box-shadow: 0 rem(3px) 0 0 $link-primary;
+    box-shadow: 0 to-rem(3px) 0 0 $link-primary;
     color: $link-primary;
     outline: none;
   }
@@ -115,7 +115,7 @@ $progress-indicator-bar-width: 1px inset transparent !default;
 
   .#{$prefix}--progress-step-button:not(.#{$prefix}--progress-step-button--unclickable)
     .#{$prefix}--progress-label:active {
-    box-shadow: 0 rem(3px) 0 0 $background-brand;
+    box-shadow: 0 to-rem(3px) 0 0 $background-brand;
     color: $background-brand;
   }
 
@@ -126,7 +126,7 @@ $progress-indicator-bar-width: 1px inset transparent !default;
   }
 
   .#{$prefix}--progress-step .#{$prefix}--tooltip .#{$prefix}--tooltip__caret {
-    margin-left: rem(10px);
+    margin-left: to-rem(10px);
   }
 
   .#{$prefix}--tooltip__text {
@@ -140,13 +140,13 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     @include type-style('body-01');
 
     display: block;
-    width: rem(125px);
+    width: to-rem(125px);
 
-    min-width: rem(115px);
+    min-width: to-rem(115px);
     min-height: $spacing-06;
     padding: $spacing-03 $spacing-05;
-    margin-top: rem(40px);
-    margin-left: rem(22px);
+    margin-top: to-rem(40px);
+    margin-left: to-rem(22px);
     color: $text-inverse;
     visibility: hidden;
   }
@@ -155,7 +155,7 @@ $progress-indicator-bar-width: 1px inset transparent !default;
   .#{$prefix}--progress-step .#{$prefix}--tooltip_multi {
     @include type-style('body-01');
 
-    width: rem(150px);
+    width: to-rem(150px);
     height: auto;
     color: $text-inverse;
   }
@@ -166,7 +166,7 @@ $progress-indicator-bar-width: 1px inset transparent !default;
 
     position: absolute;
     left: 0;
-    margin-top: rem(28px);
+    margin-top: to-rem(28px);
     margin-left: $spacing-06;
     color: $text-secondary;
     text-align: start;
@@ -220,7 +220,7 @@ $progress-indicator-bar-width: 1px inset transparent !default;
 
   .#{$prefix}--progress-step-button--unclickable
     .#{$prefix}--tooltip__label:hover {
-    box-shadow: 0 rem(1px) $link-primary;
+    box-shadow: 0 to-rem(1px) $link-primary;
     color: $link-primary;
     cursor: pointer;
   }
@@ -268,8 +268,8 @@ $progress-indicator-bar-width: 1px inset transparent !default;
   .#{$prefix}--progress.#{$prefix}--skeleton .#{$prefix}--progress-label {
     @include skeleton;
 
-    width: rem(40px);
-    height: rem(14px);
+    width: to-rem(40px);
+    height: to-rem(14px);
     margin-top: 0.625rem;
   }
 
@@ -298,13 +298,13 @@ $progress-indicator-bar-width: 1px inset transparent !default;
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button svg {
     display: inline-block;
     // 1px top margin based on visual review
-    margin: rem(1px) $spacing-03 0;
+    margin: to-rem(1px) $spacing-03 0;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-label {
     display: inline-block;
     width: initial;
-    max-width: rem(160px);
+    max-width: to-rem(160px);
     margin: 0;
     vertical-align: top;
     white-space: initial;
