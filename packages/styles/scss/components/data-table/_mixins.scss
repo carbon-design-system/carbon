@@ -5,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 @use '../../config' as *;
+@use '../../utilities/convert';
 
 // @access public
 // @content Includes a block of styles for sticky data tables that sets table max-width, max-height and column min-width
@@ -15,7 +16,7 @@
 @mixin sticky-header(
   $min-width: false,
   $max-width: 100%,
-  $max-height: rem(300px)
+  $max-height: convert.rem(300px)
 ) {
   .#{$prefix}--data-table--max-width {
     max-width: $max-width;

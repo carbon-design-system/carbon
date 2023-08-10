@@ -57,7 +57,7 @@
     "postcss": "^8.4.14",
     "postcss-flexbugs-fixes": "^5.0.2",
     "rimraf": "^5.0.0",
-    "sass": "^1.51.0"
+    "sass": "^1.65.1"
   },
   "sideEffects": [
     "index.scss",
