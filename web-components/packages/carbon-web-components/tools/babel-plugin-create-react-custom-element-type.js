@@ -545,7 +545,7 @@ module.exports = function generateCreateReactCustomElementType(
             buildCreateReactCustomElementTypeImport(declaredProps),
             ...template.ast`
                import PropTypes from "prop-types";
-               import settings from "../../globals/settings"
+               import settings from "../../globals/settings";
                var prefix = settings.prefix;
                export var descriptor = ${descriptorsWithParent};
                export var propTypes = ${propTypesWithParent};
