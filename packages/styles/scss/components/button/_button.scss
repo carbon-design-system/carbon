@@ -108,9 +108,9 @@
       transparent,
       transparent,
       $link-primary,
-      $layer-hover,
+      $background-hover,
       currentColor,
-      $layer-active
+      $background-active
     );
 
     padding-inline-end: calc(layout.density('padding-inline') - rem(1px));
