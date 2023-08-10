@@ -51,18 +51,18 @@
 
   .#{$prefix}--toggle__switch {
     position: relative;
-    width: convert.rem(48px);
-    height: convert.rem(24px);
+    width: convert.to-rem(48px);
+    height: convert.to-rem(24px);
     background-color: $toggle-off;
-    border-radius: convert.rem(12px);
+    border-radius: convert.to-rem(12px);
     transition: background-color $duration-fast-01 motion(exit, productive);
 
     &::before {
       position: absolute;
-      top: convert.rem(3px);
-      left: convert.rem(3px);
-      width: convert.rem(18px);
-      height: convert.rem(18px);
+      top: convert.to-rem(3px);
+      left: convert.to-rem(3px);
+      width: convert.to-rem(18px);
+      height: convert.to-rem(18px);
       background-color: $icon-on-color;
       border-radius: 50%;
       content: '';
@@ -86,7 +86,7 @@
     background-color: $support-success;
 
     &::before {
-      transform: translateX(convert.rem(24px));
+      transform: translateX(convert.to-rem(24px));
     }
   }
 
@@ -97,26 +97,26 @@
   }
 
   .#{$prefix}--toggle__appearance--sm .#{$prefix}--toggle__switch {
-    width: convert.rem(32px);
-    height: convert.rem(16px);
+    width: convert.to-rem(32px);
+    height: convert.to-rem(16px);
 
     &::before {
-      width: convert.rem(10px);
-      height: convert.rem(10px);
+      width: convert.to-rem(10px);
+      height: convert.to-rem(10px);
     }
   }
 
   .#{$prefix}--toggle__appearance--sm
     .#{$prefix}--toggle__switch--checked::before {
-    transform: translateX(convert.rem(16px));
+    transform: translateX(convert.to-rem(16px));
   }
 
   .#{$prefix}--toggle__check {
     position: absolute;
-    top: convert.rem(6px);
-    right: convert.rem(5px);
-    width: convert.rem(6px);
-    height: convert.rem(5px);
+    top: convert.to-rem(6px);
+    right: convert.to-rem(5px);
+    width: convert.to-rem(6px);
+    height: convert.to-rem(5px);
     fill: $support-success;
     visibility: hidden;
   }
@@ -162,15 +162,15 @@
     background-color: transparent;
 
     &::before {
-      top: convert.rem(2px);
-      left: convert.rem(2px);
+      top: convert.to-rem(2px);
+      left: convert.to-rem(2px);
       background-color: $text-primary;
     }
   }
 
   .#{$prefix}--toggle--readonly .#{$prefix}--toggle__check {
-    top: convert.rem(5px);
-    right: convert.rem(4px);
+    top: convert.to-rem(5px);
+    right: convert.to-rem(4px);
     fill: $background;
   }
 
@@ -204,16 +204,16 @@
   .#{$prefix}--toggle--skeleton .#{$prefix}--toggle__skeleton-circle {
     @include circular-skeleton;
 
-    width: convert.rem(18px);
-    height: convert.rem(18px);
+    width: convert.to-rem(18px);
+    height: convert.to-rem(18px);
     border-radius: 50%;
   }
 
   .#{$prefix}--toggle--skeleton .#{$prefix}--toggle__skeleton-rectangle {
     @include skeleton;
 
-    width: convert.rem(24px);
-    height: convert.rem(8px);
-    margin-left: convert.rem(8px);
+    width: convert.to-rem(24px);
+    height: convert.to-rem(8px);
+    margin-left: convert.to-rem(8px);
   }
 }

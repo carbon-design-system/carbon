@@ -16,12 +16,12 @@
 $layout-tokens: (
   size: (
     height: (
-      xs: convert.rem(24px),
-      sm: convert.rem(32px),
-      md: convert.rem(40px),
-      lg: convert.rem(48px),
-      xl: convert.rem(64px),
-      2xl: convert.rem(80px),
+      xs: convert.to-rem(24px),
+      sm: convert.to-rem(32px),
+      md: convert.to-rem(40px),
+      lg: convert.to-rem(48px),
+      xl: convert.to-rem(64px),
+      2xl: convert.to-rem(80px),
     ),
   ),
   density: (

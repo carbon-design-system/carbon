@@ -27,7 +27,7 @@
     @include type-style('body-compact-01');
 
     display: flex;
-    min-width: convert.rem(48px);
+    min-width: convert.to-rem(48px);
     justify-content: space-between;
     color: $text-primary;
     margin-block-end: $spacing-03;
@@ -42,17 +42,17 @@
   .#{$prefix}--progress-bar__track {
     position: relative;
     width: 100%;
-    min-width: convert.rem(48px);
-    height: convert.rem(8px);
+    min-width: convert.to-rem(48px);
+    height: convert.to-rem(8px);
     background-color: $layer;
   }
 
   .#{$prefix}--progress-bar--big .#{$prefix}--progress-bar__track {
-    height: convert.rem(8px);
+    height: convert.to-rem(8px);
   }
 
   .#{$prefix}--progress-bar--small .#{$prefix}--progress-bar__track {
-    height: convert.rem(4px);
+    height: convert.to-rem(4px);
   }
 
   .#{$prefix}--progress-bar__bar {

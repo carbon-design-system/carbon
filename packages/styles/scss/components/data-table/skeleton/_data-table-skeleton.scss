@@ -26,8 +26,8 @@
 
     display: block;
 
-    width: convert.rem(64px);
-    height: convert.rem(16px);
+    width: convert.to-rem(64px);
+    height: convert.to-rem(16px);
   }
 
   .#{$prefix}--data-table.#{$prefix}--skeleton tr:hover td {
@@ -56,16 +56,16 @@
     .#{$prefix}--data-table-header__title {
     @include skeleton;
 
-    width: convert.rem(120px);
-    height: convert.rem(24px);
+    width: convert.to-rem(120px);
+    height: convert.to-rem(24px);
   }
 
   .#{$prefix}--data-table-container.#{$prefix}--skeleton
     .#{$prefix}--data-table-header__description {
     @include skeleton;
 
-    width: convert.rem(160px);
-    height: convert.rem(16px);
+    width: convert.to-rem(160px);
+    height: convert.to-rem(16px);
 
     margin-top: $spacing-03;
   }

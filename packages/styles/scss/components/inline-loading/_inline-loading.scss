@@ -71,8 +71,8 @@ $-loading-gap-small: 110;
   }
 
   .#{$prefix}--inline-loading--error {
-    width: convert.rem(16px);
-    height: convert.rem(16px);
+    width: convert.to-rem(16px);
+    height: convert.to-rem(16px);
     fill: $support-error;
 
     &[hidden] {

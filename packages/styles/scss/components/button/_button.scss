@@ -114,7 +114,7 @@
     );
 
     padding-inline-end: calc(
-      layout.density('padding-inline') - convert.rem(1px)
+      layout.density('padding-inline') - convert.to-rem(1px)
     );
 
     .#{$prefix}--btn__icon {
@@ -155,13 +155,15 @@
     padding: 0;
     // -1px to compensate for border width
     padding-block-start: min(
-      calc((layout.size('height') - convert.rem(16px)) / 2 - convert.rem(1px)),
+      calc(
+        (layout.size('height') - convert.to-rem(16px)) / 2 - convert.to-rem(1px)
+      ),
       var(--temp-padding-block-max)
     );
 
     > :first-child {
-      min-width: convert.rem(16px);
-      margin-block-start: convert.rem(1px);
+      min-width: convert.to-rem(16px);
+      margin-block-start: convert.to-rem(1px);
     }
 
     .#{$prefix}--btn__icon {
@@ -276,7 +278,7 @@
       );
 
       padding-inline-end: calc(
-        layout.density('padding-inline') - convert.rem(1px)
+        layout.density('padding-inline') - convert.to-rem(1px)
       );
 
       .#{$prefix}--btn__icon {
@@ -310,7 +312,7 @@
     padding-block: min(
       calc(
         (layout.size('height') - var(--temp-expressive-1lh)) / 2 -
-          convert.rem(1px)
+          convert.to-rem(1px)
       ),
       var(--temp-padding-block-max)
     );
@@ -322,19 +324,19 @@
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--expressive .#{$prefix}--btn__icon {
-    width: convert.rem(20px);
-    height: convert.rem(20px);
+    width: convert.to-rem(20px);
+    height: convert.to-rem(20px);
   }
 
   .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--expressive {
-    max-width: convert.rem(320px);
+    max-width: convert.to-rem(320px);
   }
 
   // Skeleton State
   .#{$prefix}--btn.#{$prefix}--skeleton {
     @include skeleton;
 
-    width: convert.rem(150px);
+    width: convert.to-rem(150px);
   }
 
   // button set styles
@@ -349,10 +351,10 @@
   .#{$prefix}--btn-set .#{$prefix}--btn {
     width: 100%;
     // 196px from design kit
-    max-width: convert.rem(196px);
+    max-width: convert.to-rem(196px);
 
     &:not(:focus) {
-      box-shadow: convert.rem(-1px) 0 0 0 $button-separator;
+      box-shadow: convert.to-rem(-1px) 0 0 0 $button-separator;
     }
 
     &:first-of-type:not(:focus) {
@@ -365,7 +367,7 @@
   }
 
   .#{$prefix}--btn-set--stacked .#{$prefix}--btn:not(:focus) {
-    box-shadow: 0 convert.rem(-1px) 0 0 $button-separator;
+    box-shadow: 0 convert.to-rem(-1px) 0 0 $button-separator;
   }
 
   .#{$prefix}--btn-set--stacked .#{$prefix}--btn:first-of-type:not(:focus) {
@@ -373,7 +375,7 @@
   }
 
   .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--disabled {
-    box-shadow: convert.rem(-1px) 0 0 0 $icon-on-color-disabled;
+    box-shadow: convert.to-rem(-1px) 0 0 0 $icon-on-color-disabled;
 
     &:first-of-type {
       box-shadow: none;
@@ -381,7 +383,7 @@
   }
 
   .#{$prefix}--btn-set--stacked .#{$prefix}--btn.#{$prefix}--btn--disabled {
-    box-shadow: 0 convert.rem(-1px) 0 0 $layer-selected-disabled;
+    box-shadow: 0 convert.to-rem(-1px) 0 0 $layer-selected-disabled;
 
     &:first-of-type {
       box-shadow: none;

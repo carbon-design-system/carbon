@@ -40,7 +40,7 @@
 
   .#{$prefix}--switcher__item--divider {
     display: block;
-    width: convert.rem(224px);
+    width: convert.to-rem(224px);
     height: 1px;
     border: none;
     margin: $spacing-03 $spacing-05;
@@ -52,7 +52,7 @@
 
     display: block;
     height: $spacing-07;
-    padding: convert.rem(6px) $spacing-05;
+    padding: convert.to-rem(6px) $spacing-05;
     color: $text-secondary;
     text-decoration: none;
 

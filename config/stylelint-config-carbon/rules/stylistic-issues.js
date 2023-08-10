@@ -40,7 +40,12 @@ module.exports = {
     // Limit the number of adjacent empty lines within functions.
     'function-max-empty-lines': 0,
     // Specify lowercase or uppercase for function names.
-    'function-name-case': 'lower',
+    'function-name-case': [
+      'lower',
+      {
+        ignoreFunctions: ['convert.*'],
+      },
+    ],
     // Require a newline or disallow whitespace on the inside of the parentheses
     // of functions.
     'function-parentheses-newline-inside': 'always-multi-line',
