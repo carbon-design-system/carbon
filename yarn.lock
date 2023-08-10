@@ -2208,7 +2208,7 @@ __metadata:
     rollup: ^2.79.1
     rollup-plugin-strip-banner: ^3.0.0
     rtlcss: ^4.0.0
-    sass: ^1.51.0
+    sass: ^1.65.1
     sass-loader: ^13.0.0
     storybook: ^7.1.0
     storybook-readme: ^5.0.9
@@ -27717,20 +27717,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.51.0":
-  version: 1.62.1
-  resolution: "sass@npm:1.62.1"
-  dependencies:
-    chokidar: ">=3.0.0 <4.0.0"
-    immutable: ^4.0.0
-    source-map-js: ">=0.6.2 <2.0.0"
-  bin:
-    sass: sass.js
-  checksum: 1b1b3584b38a63dd94156b65f13b90e3f84b170a38c3d5e3fa578b7a32a37aeb349b4926b0eaf9448d48e955e86b1ee01b13993f19611dad8068af07a607c13b
-  languageName: node
-  linkType: hard
-
-"sass@npm:^1.65.1":
+"sass@npm:^1.51.0, sass@npm:^1.65.1":
   version: 1.65.1
   resolution: "sass@npm:1.65.1"
   dependencies:
