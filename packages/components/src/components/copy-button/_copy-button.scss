@@ -20,7 +20,7 @@
     overflow: visible;
 
     .#{$prefix}--btn__icon {
-      margin-left: rem(5px);
+      margin-left: to-rem(5px);
     }
   }
 

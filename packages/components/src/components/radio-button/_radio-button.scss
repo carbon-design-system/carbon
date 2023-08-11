@@ -70,11 +70,11 @@
   .#{$prefix}--radio-button__appearance {
     @include reset;
 
-    width: rem(18px);
-    height: rem(18px);
+    width: to-rem(18px);
+    height: to-rem(18px);
     flex-shrink: 0;
     border: $radio-border-width solid $icon-01;
-    margin: rem(1px) $carbon--spacing-03 rem(2px) rem(2px);
+    margin: to-rem(1px) $carbon--spacing-03 to-rem(2px) to-rem(2px);
     background-color: transparent;
     border-radius: 50%;
   }
@@ -135,8 +135,8 @@
   .#{$prefix}--radio-button__label.#{$prefix}--skeleton {
     @include skeleton;
 
-    width: rem(100px);
-    height: rem(18px);
+    width: to-rem(100px);
+    height: to-rem(18px);
   }
 
   .#{$prefix}--radio-button__label.#{$prefix}--skeleton

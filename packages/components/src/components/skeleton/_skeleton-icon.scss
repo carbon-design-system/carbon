@@ -14,7 +14,7 @@
     @include skeleton;
 
     display: inline-block;
-    width: rem(16px);
-    height: rem(16px);
+    width: to-rem(16px);
+    height: to-rem(16px);
   }
 }

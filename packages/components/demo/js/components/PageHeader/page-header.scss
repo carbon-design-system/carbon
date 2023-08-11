@@ -1,6 +1,6 @@
 .page-header {
   @include grid-padding;
-  height: rem(196px);
+  height: to-rem(196px);
   background-color: $ui-02;
   display: flex;
   flex-direction: column;
@@ -14,7 +14,7 @@
   }
 
   @media all and (max-width: 550px) {
-    height: rem(250px);
+    height: to-rem(250px);
   }
 }
 
@@ -41,10 +41,10 @@
   padding: 0;
 
   @include breakpoint('500px') {
-    font-size: rem(52px);
+    font-size: to-rem(52px);
   }
 
   @include breakpoint('840px') {
-    font-size: rem(66px);
+    font-size: to-rem(66px);
   }
 }

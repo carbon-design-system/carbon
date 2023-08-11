@@ -28,7 +28,7 @@ $carbon--type-scale: ();
 @for $i from 1 through 23 {
   $carbon--type-scale: append(
     $carbon--type-scale,
-    carbon--rem(carbon--get-type-size($i))
+    to-rem(carbon--get-type-size($i))
   );
 }
 

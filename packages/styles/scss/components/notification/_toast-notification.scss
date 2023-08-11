@@ -29,7 +29,7 @@
     @include reset;
 
     display: flex;
-    width: rem(288px);
+    width: to-rem(288px);
     height: auto;
     padding-left: $spacing-05;
     @if not enabled('enable-v11-release') {
@@ -48,7 +48,7 @@
     }
 
     @include breakpoint(max) {
-      width: rem(352px);
+      width: to-rem(352px);
     }
   }
 
@@ -175,10 +175,10 @@
     @include focus-outline('reset');
 
     display: flex;
-    width: rem(48px);
-    min-width: rem(48px);
-    height: rem(48px);
-    min-height: rem(48px);
+    width: to-rem(48px);
+    min-width: to-rem(48px);
+    height: to-rem(48px);
+    min-height: to-rem(48px);
     flex-direction: column;
     align-items: center;
     justify-content: center;

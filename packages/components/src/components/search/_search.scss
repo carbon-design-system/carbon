@@ -83,13 +83,13 @@
   .#{$prefix}--search--sm .#{$prefix}--search-input,
   .#{$prefix}--search--sm.#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-input {
-    height: rem(32px);
+    height: to-rem(32px);
     // 8px padding on either side of icon + 16px icon (32px)
     padding: 0 $spacing-07;
   }
 
   .#{$prefix}--search--sm .#{$prefix}--search-magnifier-icon {
-    left: rem(8px);
+    left: to-rem(8px);
   }
 
   // Large styles
@@ -97,21 +97,21 @@
   .#{$prefix}--search--lg .#{$prefix}--search-input,
   .#{$prefix}--search--lg.#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-input {
-    height: rem(40px);
+    height: to-rem(40px);
     // 12px padding on either side of icon + 16px icon (40px)
     padding: 0 $spacing-08;
   }
 
   // V11: change lg to md
   .#{$prefix}--search--lg .#{$prefix}--search-magnifier-icon {
-    left: rem(12px);
+    left: to-rem(12px);
   }
 
   // V11: change xl to lg
   .#{$prefix}--search--xl .#{$prefix}--search-input,
   .#{$prefix}--search--xl.#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-input {
-    height: rem(48px);
+    height: to-rem(48px);
     // 16px padding on either side of icon + 16px icon (48px)
     padding: 0 $spacing-09;
   }
@@ -121,8 +121,8 @@
     z-index: 2;
     top: 50%;
     left: $spacing-05;
-    width: rem(16px);
-    height: rem(16px);
+    width: to-rem(16px);
+    height: to-rem(16px);
     fill: $icon-02;
     pointer-events: none;
     transform: translateY(-50%);
@@ -138,7 +138,7 @@
 
     &::before {
       position: absolute;
-      top: rem(1px);
+      top: to-rem(1px);
       left: 0;
       display: block;
       width: 2px;
@@ -180,8 +180,8 @@
   .#{$prefix}--search-close,
   .#{$prefix}--search-button {
     display: flex;
-    width: rem(40px);
-    height: rem(40px);
+    width: to-rem(40px);
+    height: to-rem(40px);
     align-items: center;
     justify-content: center;
     border-width: 1px 0;
@@ -247,12 +247,12 @@
     ~ .#{$prefix}--search-button,
     &.#{$prefix}--search--expandable,
     &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
-      width: rem(32px);
-      height: rem(32px);
+      width: to-rem(32px);
+      height: to-rem(32px);
     }
 
     &.#{$prefix}--search--expandable .#{$prefix}--search-input::placeholder {
-      padding: 0 rem(32px);
+      padding: 0 to-rem(32px);
     }
   }
 
@@ -262,12 +262,12 @@
     ~ .#{$prefix}--search-button,
     &.#{$prefix}--search--expandable,
     &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
-      width: rem(40px);
-      height: rem(40px);
+      width: to-rem(40px);
+      height: to-rem(40px);
     }
 
     &.#{$prefix}--search--expandable .#{$prefix}--search-input::placeholder {
-      padding: 0 rem(40px);
+      padding: 0 to-rem(40px);
     }
   }
 
@@ -277,12 +277,12 @@
     ~ .#{$prefix}--search-button,
     &.#{$prefix}--search--expandable,
     &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
-      width: rem(48px);
-      height: rem(48px);
+      width: to-rem(48px);
+      height: to-rem(48px);
     }
 
     &.#{$prefix}--search--expandable .#{$prefix}--search-input::placeholder {
-      padding: 0 rem(48px);
+      padding: 0 to-rem(48px);
     }
   }
 

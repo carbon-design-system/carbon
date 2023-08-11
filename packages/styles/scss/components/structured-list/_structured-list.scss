@@ -136,7 +136,7 @@
     @include type-style('heading-compact-01');
 
     display: table-cell;
-    height: rem(40px);
+    height: to-rem(40px);
     color: $text-primary;
     font-weight: 600;
     text-align: left;

@@ -92,7 +92,7 @@
   .flatpickr-calendar {
     position: absolute;
     overflow: hidden;
-    width: rem(315px);
+    width: to-rem(315px);
     max-height: 0;
     box-sizing: border-box;
     padding: 0;
@@ -110,7 +110,7 @@
   .flatpickr-calendar.open,
   .flatpickr-calendar.inline {
     overflow: visible;
-    max-height: rem(640px);
+    max-height: to-rem(640px);
     opacity: 1;
     visibility: inherit;
   }
@@ -121,14 +121,14 @@
     z-index: 99999;
     display: flex;
     overflow: hidden;
-    width: rem(288px);
-    height: rem(336px);
+    width: to-rem(288px);
+    height: to-rem(336px);
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: $spacing-02 $spacing-02 $spacing-03 $spacing-02;
     border: none;
-    margin-top: rem(-2px);
+    margin-top: to-rem(-2px);
     background-color: $layer-01;
 
     &:focus {
@@ -146,7 +146,7 @@
 
   .flatpickr-calendar.inline {
     position: relative;
-    top: rem(2px);
+    top: to-rem(2px);
     display: block;
   }
 
@@ -166,7 +166,7 @@
 
   .dayContainer {
     display: flex;
-    height: rem(246px);
+    height: to-rem(246px);
     flex-wrap: wrap;
     justify-content: space-around;
     padding: 0;
@@ -185,7 +185,7 @@
   }
 
   .flatpickr-calendar.showTimeInput.hasTime .flatpickr-time {
-    height: rem(40px);
+    height: to-rem(40px);
     border-top: 1px solid #e6e6e6;
   }
 
@@ -207,7 +207,7 @@
     @include type-style('heading-compact-01');
 
     display: flex;
-    height: rem(40px);
+    height: to-rem(40px);
     align-items: center;
     background-color: transparent;
     color: $text-primary;
@@ -219,8 +219,8 @@
   .flatpickr-next-month {
     z-index: 3;
     display: flex;
-    width: rem(40px);
-    height: rem(40px);
+    width: to-rem(40px);
+    height: to-rem(40px);
     align-items: center;
     justify-content: center;
     padding: 0;
@@ -258,7 +258,7 @@
     @include type-style('heading-compact-01');
 
     display: flex;
-    height: rem(28px);
+    height: to-rem(28px);
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -275,7 +275,7 @@
 
   .numInputWrapper {
     position: relative;
-    width: rem(60px);
+    width: to-rem(60px);
 
     &:hover {
       background-color: $background-hover;
@@ -317,19 +317,19 @@
   }
 
   .numInputWrapper .arrowUp {
-    top: rem(4px);
+    top: to-rem(4px);
     border-bottom: 0;
 
     &::after {
-      border-bottom: rem(4px) solid $icon-primary;
+      border-bottom: to-rem(4px) solid $icon-primary;
     }
   }
 
   .numInputWrapper .arrowDown {
-    top: rem(11px);
+    top: to-rem(11px);
 
     &::after {
-      border-top: rem(4px) solid $icon-primary;
+      border-top: to-rem(4px) solid $icon-primary;
     }
   }
 
@@ -337,9 +337,9 @@
   .numInputWrapper .arrowDown {
     position: absolute;
     left: 2.6rem;
-    width: rem(12px);
+    width: to-rem(12px);
     height: 50%;
-    padding: 0 rem(4px) 0 rem(2px);
+    padding: 0 to-rem(4px) 0 to-rem(2px);
     border: none;
     cursor: pointer;
     line-height: 50%;
@@ -349,8 +349,8 @@
       position: absolute;
       top: 33%;
       display: block;
-      border-right: rem(4px) solid transparent;
-      border-left: rem(4px) solid transparent;
+      border-right: to-rem(4px) solid transparent;
+      border-left: to-rem(4px) solid transparent;
       content: '';
     }
 
@@ -385,7 +385,7 @@
 
   .flatpickr-weekdays {
     display: flex;
-    height: rem(40px);
+    height: to-rem(40px);
     align-items: center;
   }
 
@@ -436,8 +436,8 @@
     @include type-style('body-compact-01');
 
     display: flex;
-    width: rem(40px);
-    height: rem(40px);
+    width: to-rem(40px);
+    height: to-rem(40px);
     align-items: center;
     justify-content: center;
     color: $text-primary;
@@ -467,11 +467,11 @@
 
     &::after {
       position: absolute;
-      bottom: rem(7px);
+      bottom: to-rem(7px);
       left: 50%;
       display: block;
-      width: rem(4px);
-      height: rem(4px);
+      width: to-rem(4px);
+      height: to-rem(4px);
       background-color: $link-primary;
       content: '';
       transform: translateX(-50%);
@@ -503,8 +503,8 @@
     }
 
     &:focus {
-      outline: rem(1px) solid $layer-02;
-      outline-offset: rem(-3px);
+      outline: to-rem(1px) solid $layer-02;
+      outline-offset: to-rem(-3px);
     }
   }
 

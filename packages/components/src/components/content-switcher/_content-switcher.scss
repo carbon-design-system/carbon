@@ -18,18 +18,18 @@
   .#{$prefix}--content-switcher {
     display: flex;
     width: 100%;
-    height: rem(40px);
+    height: to-rem(40px);
     justify-content: space-evenly;
   }
 
   .#{$prefix}--content-switcher--sm {
-    height: rem(32px);
+    height: to-rem(32px);
   }
 
   // TODO V11: Remove xl selector
   .#{$prefix}--content-switcher--xl,
   .#{$prefix}--content-switcher--lg {
-    height: rem(48px);
+    height: to-rem(48px);
   }
 
   .#{$prefix}--content-switcher-btn {
@@ -44,8 +44,8 @@
     align-items: center;
     padding: $carbon--spacing-03 $carbon--spacing-05;
     border: none;
-    border-top: rem(1px) solid $border-inverse;
-    border-bottom: rem(1px) solid $border-inverse;
+    border-top: to-rem(1px) solid $border-inverse;
+    border-bottom: to-rem(1px) solid $border-inverse;
     margin: 0;
     background-color: transparent;
     color: $text-secondary;
@@ -115,15 +115,15 @@
   }
 
   .#{$prefix}--content-switcher-btn:first-child {
-    border-left: rem(1px) solid $border-inverse;
-    border-bottom-left-radius: rem(4px);
-    border-top-left-radius: rem(4px);
+    border-left: to-rem(1px) solid $border-inverse;
+    border-bottom-left-radius: to-rem(4px);
+    border-top-left-radius: to-rem(4px);
   }
 
   .#{$prefix}--content-switcher-btn:last-child {
-    border-right: rem(1px) solid $border-inverse;
-    border-bottom-right-radius: rem(4px);
-    border-top-right-radius: rem(4px);
+    border-right: to-rem(1px) solid $border-inverse;
+    border-bottom-right-radius: to-rem(4px);
+    border-top-right-radius: to-rem(4px);
   }
 
   .#{$prefix}--content-switcher--selected,
@@ -137,8 +137,8 @@
     z-index: 2;
     left: 0;
     display: block;
-    width: rem(1px);
-    height: rem(16px);
+    width: to-rem(1px);
+    height: to-rem(16px);
     background-color: $border-subtle;
     content: '';
   }

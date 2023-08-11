@@ -114,8 +114,8 @@
     height: $spacing-09;
 
     &::before {
-      top: rem(2px);
-      height: calc(100% - #{rem(4px)});
+      top: to-rem(2px);
+      height: calc(100% - #{to-rem(4px)});
       background-color: $field-hover;
     }
   }
@@ -381,7 +381,7 @@
 
   .#{$prefix}--batch-download {
     //makes it smaller to match other icons
-    padding: rem(1px);
+    padding: to-rem(1px);
   }
 
   // Override btn styles
@@ -394,7 +394,7 @@
 
   .#{$prefix}--action-list .#{$prefix}--btn--primary:focus {
     outline: 2px solid $layer;
-    outline-offset: rem(-2px);
+    outline-offset: to-rem(-2px);
   }
 
   // cancel btn pseudo element
@@ -410,10 +410,10 @@
   .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before {
     position: absolute;
     //visually 16px spacing is 1px too low
-    top: rem(15px);
+    top: to-rem(15px);
     left: 0;
     display: block;
-    width: rem(1px);
+    width: to-rem(1px);
     height: $spacing-05;
     border: none;
     background-color: $text-on-color;
@@ -455,31 +455,31 @@
   // V11: remove --small
   .#{$prefix}--table-toolbar--small,
   .#{$prefix}--table-toolbar--sm {
-    height: rem(32px);
-    min-height: rem(32px);
+    height: to-rem(32px);
+    min-height: to-rem(32px);
 
     .#{$prefix}--toolbar-search-container-expandable,
     .#{$prefix}--toolbar-search-container-persistent {
-      height: rem(32px);
+      height: to-rem(32px);
     }
 
     .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search-input,
     .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-input {
-      height: rem(32px);
+      height: to-rem(32px);
     }
 
     .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search-close,
     .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-close {
-      width: rem(32px);
-      height: rem(32px);
+      width: to-rem(32px);
+      height: to-rem(32px);
     }
 
     .#{$prefix}--toolbar-search-container-expandable
       .#{$prefix}--search-magnifier-icon,
     .#{$prefix}--toolbar-search-container-persistent
       .#{$prefix}--search-magnifier-icon {
-      width: rem(32px);
-      height: rem(32px);
+      width: to-rem(32px);
+      height: to-rem(32px);
       padding: $spacing-03;
     }
 
@@ -497,7 +497,7 @@
 
     //hidden
     .#{$prefix}--toolbar-search-container-expandable {
-      width: rem(32px);
+      width: to-rem(32px);
     }
 
     .#{$prefix}--toolbar-search-container-expandable
@@ -542,14 +542,14 @@
     }
 
     .#{$prefix}--overflow-menu.#{$prefix}--toolbar-action {
-      width: rem(32px);
+      width: to-rem(32px);
       //:after element is 2rem but w/o this trigger button is for some reason 28px
-      min-width: rem(32px);
-      height: rem(32px);
+      min-width: to-rem(32px);
+      height: to-rem(32px);
     }
 
     .#{$prefix}--toolbar-content {
-      height: rem(32px);
+      height: to-rem(32px);
     }
   }
 
@@ -567,21 +567,21 @@
   .#{$prefix}--table-toolbar--sm
     .#{$prefix}--batch-actions
     .#{$prefix}--action-list {
-    height: rem(32px);
+    height: to-rem(32px);
   }
 
   // V11: remove --small selector block
   .#{$prefix}--table-toolbar--small .#{$prefix}--toolbar-action,
   .#{$prefix}--table-toolbar--sm .#{$prefix}--toolbar-action {
-    width: rem(32px);
-    height: rem(32px);
+    width: to-rem(32px);
+    height: to-rem(32px);
     padding: $spacing-03 0;
   }
 
   // V11: remove --small selector block
   .#{$prefix}--table-toolbar--small .#{$prefix}--btn--primary,
   .#{$prefix}--table-toolbar--sm .#{$prefix}--btn--primary {
-    height: rem(32px);
+    height: to-rem(32px);
     min-height: auto;
     padding-top: calc(0.375rem - 3px);
     padding-bottom: calc(0.375rem - 3px);
@@ -592,7 +592,7 @@
     .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before,
   .#{$prefix}--table-toolbar--sm
     .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before {
-    top: rem(8px);
+    top: to-rem(8px);
   }
 
   // V11: remove --small selector block
@@ -603,7 +603,7 @@
     .#{$prefix}--toolbar-action
     ~ .#{$prefix}--btn {
     overflow: hidden;
-    height: rem(32px);
+    height: to-rem(32px);
   }
 
   // V11: remove --small selector block

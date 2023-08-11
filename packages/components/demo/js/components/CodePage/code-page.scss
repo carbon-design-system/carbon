@@ -9,8 +9,8 @@
 
     &:before {
       content: '';
-      width: rem(80px);
-      height: rem(5px);
+      width: to-rem(80px);
+      height: to-rem(5px);
       display: block;
       background-color: $brand-01;
       position: absolute;

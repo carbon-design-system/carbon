@@ -38,7 +38,7 @@ $t: test($${name});
       const { calls } = await render(`
 @import '../typography';
 
-$t: test(rem(16px));
+$t: test(to-rem(16px));
 $t: test(em(16px));
 `);
 

@@ -25,7 +25,7 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
   position: relative;
   display: inline-flex;
   width: max-content;
-  max-width: rem(320px);
+  max-width: to-rem(320px);
   min-height: $button-height;
   flex-shrink: 0;
   align-items: center;
@@ -59,9 +59,9 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
 
   .#{$prefix}--btn__icon {
     position: absolute;
-    right: rem(16px);
-    width: rem(16px);
-    height: rem(16px);
+    right: to-rem(16px);
+    width: to-rem(16px);
+    height: to-rem(16px);
     flex-shrink: 0;
   }
 }

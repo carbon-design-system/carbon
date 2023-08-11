@@ -39,7 +39,7 @@
     display: inline-flex;
     width: mini-units(6);
     height: mini-units(6);
-    border: rem(1px) solid transparent;
+    border: to-rem(1px) solid transparent;
     transition: background-color $duration-fast-02,
       border-color $duration-fast-02;
   }
@@ -130,7 +130,7 @@
     height: 100%;
     align-items: center;
     padding: 0 mini-units(4) 0 mini-units(2);
-    border: rem(2px) solid transparent;
+    border: to-rem(2px) solid transparent;
     font-weight: 600;
     letter-spacing: 0.1px;
     line-height: 1.25rem;
@@ -156,7 +156,7 @@
 
   .#{$prefix}--header__menu-toggle:not(.#{$prefix}--header__menu-toggle__hidden)
     ~ .#{$prefix}--header__name {
-    padding-left: rem(8px);
+    padding-left: to-rem(8px);
   }
 
   //--------------------------------------------------------------------------
@@ -178,8 +178,8 @@
       top: 50%;
       left: 0;
       display: block;
-      width: rem(1px);
-      height: rem(24px);
+      width: to-rem(1px);
+      height: to-rem(24px);
       background-color: $border-subtle;
       content: '';
       transform: translateY(-50%);
@@ -206,7 +206,7 @@
     background-color: $background;
     color: $text-secondary;
     // Text styles
-    font-size: rem(14px);
+    font-size: to-rem(14px);
     font-weight: 400;
     letter-spacing: 0;
     line-height: 1.125rem;

@@ -13,13 +13,13 @@
 /// @type Number
 /// @access public
 /// @group @carbon/layout
-$carbon--grid-gutter: carbon--rem(32px);
+$carbon--grid-gutter: to-rem(32px);
 
 /// Carbon condensed gutter size in rem
 /// @type Number
 /// @access public
 /// @group @carbon/layout
-$carbon--grid-gutter--condensed: carbon--rem(1px);
+$carbon--grid-gutter--condensed: to-rem(1px);
 
 // Initial map of our breakpoints and their values
 /// @type Map
@@ -29,27 +29,27 @@ $carbon--grid-breakpoints: (
   sm: (
     columns: 4,
     margin: 0,
-    width: carbon--rem(320px),
+    width: to-rem(320px),
   ),
   md: (
     columns: 8,
-    margin: carbon--rem(16px),
-    width: carbon--rem(672px),
+    margin: to-rem(16px),
+    width: to-rem(672px),
   ),
   lg: (
     columns: 16,
-    margin: carbon--rem(16px),
-    width: carbon--rem(1056px),
+    margin: to-rem(16px),
+    width: to-rem(1056px),
   ),
   xlg: (
     columns: 16,
-    margin: carbon--rem(16px),
-    width: carbon--rem(1312px),
+    margin: to-rem(16px),
+    width: to-rem(1312px),
   ),
   max: (
     columns: 16,
-    margin: carbon--rem(24px),
-    width: carbon--rem(1584px),
+    margin: to-rem(24px),
+    width: to-rem(1584px),
   ),
 ) !default;
 

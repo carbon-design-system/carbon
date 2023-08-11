@@ -17,6 +17,6 @@
 
   position: relative;
   width: 100%;
-  max-width: rem(768px);
+  max-width: to-rem(768px);
   background-color: $layer;
 }

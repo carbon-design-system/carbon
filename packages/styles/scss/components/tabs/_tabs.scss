@@ -30,7 +30,7 @@
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/convert' as *;
 
-$icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
+$icon-tab-size: custom-property.get-var('icon-tab-size', to-rem(40px));
 
 /// Tabs styles
 /// @access public
@@ -44,12 +44,12 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     display: flex;
     width: 100%;
     height: auto;
-    min-height: rem(40px);
+    min-height: to-rem(40px);
     max-height: 4rem;
     color: $text-primary;
 
     &.#{$prefix}--tabs--contained {
-      min-height: rem(48px);
+      min-height: to-rem(48px);
     }
 
     .#{$prefix}--tab--list {
@@ -245,7 +245,7 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     }
 
     .#{$prefix}--tabs__nav-item + .#{$prefix}--tabs__nav-item {
-      margin-left: rem(1px);
+      margin-left: to-rem(1px);
     }
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item {
@@ -257,7 +257,7 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       + .#{$prefix}--tabs__nav-item {
       margin-left: 0;
       // Draws the border without affecting the inner-content
-      box-shadow: rem(-1px) 0 0 0 $border-strong;
+      box-shadow: to-rem(-1px) 0 0 0 $border-strong;
     }
 
     .#{$prefix}--tabs__nav-item .#{$prefix}--tabs__nav-link {
@@ -275,7 +275,7 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       @include type-style('body-compact-01');
 
       @if not feature-flag-enabled('enable-v11-release') {
-        width: rem(160px);
+        width: to-rem(160px);
       }
 
       overflow: hidden;
@@ -296,11 +296,11 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     }
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-link {
-      height: rem(48px);
+      height: to-rem(48px);
       padding: $spacing-03 $spacing-05;
       border-bottom: 0;
       // height - vertical padding
-      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+      line-height: calc(#{to-rem(48px)} - (#{$spacing-03} * 2));
       text-align: left;
     }
 
@@ -319,7 +319,7 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     }
 
     &.#{$prefix}--tabs__icon--lg {
-      @include custom-property.declaration('icon-tab-size', rem(48px));
+      @include custom-property.declaration('icon-tab-size', to-rem(48px));
     }
 
     //-----------------------------
@@ -364,7 +364,7 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--selected:hover {
       background-color: $layer;
       // height - vertical padding
-      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+      line-height: calc(#{to-rem(48px)} - (#{$spacing-03} * 2));
 
       .#{$prefix}--tabs__nav-link:focus,
       .#{$prefix}--tabs__nav-link:active {
@@ -481,7 +481,7 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
 
     display: block;
     width: 100%;
-    height: rem(14px);
+    height: to-rem(14px);
   }
 
   // Windows HCM fix

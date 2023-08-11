@@ -13,8 +13,8 @@
   .#{$prefix}--skeleton__placeholder {
     @include skeleton;
 
-    width: rem(100px);
+    width: to-rem(100px);
 
-    height: rem(100px);
+    height: to-rem(100px);
   }
 }

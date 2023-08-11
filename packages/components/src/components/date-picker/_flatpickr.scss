@@ -77,7 +77,7 @@
   .flatpickr-calendar {
     position: absolute;
     box-sizing: border-box;
-    width: rem(315px);
+    width: to-rem(315px);
     max-height: 0;
     padding: 0;
     overflow: hidden;
@@ -93,7 +93,7 @@
 
   .flatpickr-calendar.open,
   .flatpickr-calendar.inline {
-    max-height: rem(640px);
+    max-height: to-rem(640px);
     overflow: visible;
     visibility: inherit;
     opacity: 1;
@@ -107,9 +107,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: rem(288px);
-    height: rem(336px);
-    margin-top: rem(-2px);
+    width: to-rem(288px);
+    height: to-rem(336px);
+    margin-top: to-rem(-2px);
     padding: $carbon--spacing-02 $carbon--spacing-02 $carbon--spacing-03
       $carbon--spacing-02;
     overflow: hidden;
@@ -127,7 +127,7 @@
 
   .flatpickr-calendar.inline {
     position: relative;
-    top: rem(2px);
+    top: to-rem(2px);
     display: block;
   }
 
@@ -149,7 +149,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    height: rem(246px);
+    height: to-rem(246px);
     padding: 0;
     outline: 0;
   }
@@ -166,7 +166,7 @@
   }
 
   .flatpickr-calendar.showTimeInput.hasTime .flatpickr-time {
-    height: rem(40px);
+    height: to-rem(40px);
     border-top: 1px solid #e6e6e6;
   }
 
@@ -189,7 +189,7 @@
 
     display: flex;
     align-items: center;
-    height: rem(40px);
+    height: to-rem(40px);
     color: $text-01;
     line-height: 1;
     text-align: center;
@@ -202,8 +202,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: rem(40px);
-    height: rem(40px);
+    width: to-rem(40px);
+    height: to-rem(40px);
     padding: 0;
     line-height: 16px;
     text-decoration: none;
@@ -235,7 +235,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: rem(28px);
+    height: to-rem(28px);
     text-align: center;
   }
 
@@ -250,7 +250,7 @@
 
   .numInputWrapper {
     position: relative;
-    width: rem(60px);
+    width: to-rem(60px);
 
     &:hover {
       background-color: $hover-ui;
@@ -292,19 +292,19 @@
   }
 
   .numInputWrapper .arrowUp {
-    top: rem(4px);
+    top: to-rem(4px);
     border-bottom: 0;
 
     &::after {
-      border-bottom: rem(4px) solid $icon-01;
+      border-bottom: to-rem(4px) solid $icon-01;
     }
   }
 
   .numInputWrapper .arrowDown {
-    top: rem(11px);
+    top: to-rem(11px);
 
     &::after {
-      border-top: rem(4px) solid $icon-01;
+      border-top: to-rem(4px) solid $icon-01;
     }
   }
 
@@ -312,9 +312,9 @@
   .numInputWrapper .arrowDown {
     position: absolute;
     left: 2.6rem;
-    width: rem(12px);
+    width: to-rem(12px);
     height: 50%;
-    padding: 0 rem(4px) 0 rem(2px);
+    padding: 0 to-rem(4px) 0 to-rem(2px);
     line-height: 50%;
     border: none;
     cursor: pointer;
@@ -324,8 +324,8 @@
       position: absolute;
       top: 33%;
       display: block;
-      border-right: rem(4px) solid transparent;
-      border-left: rem(4px) solid transparent;
+      border-right: to-rem(4px) solid transparent;
+      border-left: to-rem(4px) solid transparent;
       content: '';
     }
 
@@ -361,7 +361,7 @@
   .flatpickr-weekdays {
     display: flex;
     align-items: center;
-    height: rem(40px);
+    height: to-rem(40px);
   }
 
   .flatpickr-weekdaycontainer {
@@ -413,8 +413,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: rem(40px);
-    height: rem(40px);
+    width: to-rem(40px);
+    height: to-rem(40px);
     color: $text-01;
     cursor: pointer;
     transition: all $duration--fast-01 motion(standard, productive);
@@ -442,11 +442,11 @@
 
     &::after {
       position: absolute;
-      bottom: rem(7px);
+      bottom: to-rem(7px);
       left: 50%;
       display: block;
-      width: rem(4px);
-      height: rem(4px);
+      width: to-rem(4px);
+      height: to-rem(4px);
       background-color: $link-01;
       transform: translateX(-50%);
       content: '';
@@ -475,8 +475,8 @@
     background-color: $interactive-01;
 
     &:focus {
-      outline: rem(1px) solid $ui-02;
-      outline-offset: rem(-3px);
+      outline: to-rem(1px) solid $ui-02;
+      outline-offset: to-rem(-3px);
     }
   }
 

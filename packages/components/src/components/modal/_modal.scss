@@ -274,7 +274,7 @@
     bottom: $spacing-09;
     left: 0;
     width: 100%;
-    height: rem(32px);
+    height: to-rem(32px);
     // Safari interprets `transparent` differently, so make color token value transparent instead:
     background-image: linear-gradient(to bottom, rgba($ui-01, 0), $ui-01);
     content: '';
@@ -315,7 +315,7 @@
   // -----------------------------
   .#{$prefix}--modal-footer {
     display: flex;
-    height: rem(64px);
+    height: to-rem(64px);
     justify-content: flex-end;
     margin-top: auto;
     grid-column: 1/-1;
@@ -324,7 +324,7 @@
 
   .#{$prefix}--modal-footer .#{$prefix}--btn {
     max-width: none;
-    height: rem(64px);
+    height: to-rem(64px);
     flex: 0 1 50%;
     padding-top: $spacing-05;
     padding-bottom: $spacing-07;
@@ -347,7 +347,7 @@
     overflow: hidden;
     width: 3rem;
     height: 3rem;
-    padding: rem(12px);
+    padding: to-rem(12px);
     border: 2px solid transparent;
     background-color: transparent;
     cursor: pointer;
@@ -368,8 +368,8 @@
   }
 
   .#{$prefix}--modal-close__icon {
-    width: rem(20px);
-    height: rem(20px);
+    width: to-rem(20px);
+    height: to-rem(20px);
     fill: $icon-01;
   }
 

@@ -146,15 +146,15 @@ $deprecations--message: 'Deprecated code was found, this code will be removed be
 
 .demo--theme-switcher {
   position: absolute;
-  top: rem(16px);
-  right: rem(16px);
+  top: to-rem(16px);
+  right: to-rem(16px);
   display: none; // Temporarily hide theme switcher
 }
 
 .demo--theme-switcher--dropdown {
   position: absolute;
-  top: rem(32px);
-  right: rem(32px);
+  top: to-rem(32px);
+  right: to-rem(32px);
   display: block;
 }
 

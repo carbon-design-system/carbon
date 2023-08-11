@@ -66,11 +66,11 @@ $content-padding: 0 0 0 $spacing-05 !default;
     position: relative;
     display: flex;
     width: 100%;
-    min-height: convert.rem(40px);
+    min-height: convert.to-rem(40px);
     flex-direction: $flex-direction;
     align-items: flex-start;
     justify-content: $justify-content;
-    padding: convert.rem(10px) 0;
+    padding: convert.to-rem(10px) 0;
     margin: 0;
     color: $text-primary;
     cursor: pointer;
@@ -101,12 +101,12 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
   // Size styles
   .#{$prefix}--accordion--lg .#{$prefix}--accordion__heading {
-    min-height: convert.rem(48px);
+    min-height: convert.to-rem(48px);
   }
 
   .#{$prefix}--accordion--sm .#{$prefix}--accordion__heading {
-    min-height: convert.rem(32px);
-    padding: convert.rem(5px) 0;
+    min-height: convert.to-rem(32px);
+    padding: convert.to-rem(5px) 0;
   }
 
   // Disabled styles

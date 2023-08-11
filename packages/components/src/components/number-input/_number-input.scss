@@ -32,15 +32,16 @@
     display: inline-flex;
     width: 100%;
     min-width: 9.375rem;
-    height: rem(40px);
+    height: to-rem(40px);
     box-sizing: border-box;
-    padding-right: rem(128px);
+    padding-right: to-rem(128px);
     padding-left: $carbon--spacing-05;
     border: 0;
-    border-bottom: rem(1px) solid $ui-04;
+    border-bottom: to-rem(1px) solid $ui-04;
 
     // Firefox: Hide spinner (up and down buttons)
     -moz-appearance: textfield;
+    appearance: textfield;
     background-color: $field-01;
     border-radius: 0;
     color: $text-01;
@@ -76,11 +77,11 @@
   // TODO V11: Remove xl selector
   .#{$prefix}--number--xl.#{$prefix}--number input[type='number'],
   .#{$prefix}--number--lg.#{$prefix}--number input[type='number'] {
-    padding-right: rem(144px);
+    padding-right: to-rem(144px);
   }
 
   .#{$prefix}--number--sm.#{$prefix}--number input[type='number'] {
-    padding-right: rem(112px);
+    padding-right: to-rem(112px);
   }
 
   .#{$prefix}--number input[type='number']:disabled {
@@ -104,7 +105,7 @@
     top: 50%;
     right: 0;
     display: flex;
-    width: rem(80px);
+    width: to-rem(80px);
     height: 100%;
     flex-direction: row;
     align-items: center;
@@ -120,17 +121,17 @@
     height: 100%;
     align-items: center;
     justify-content: center;
-    border-bottom: rem(1px) solid $ui-04;
+    border-bottom: to-rem(1px) solid $ui-04;
     color: $icon-01;
 
     &::before,
     &::after {
       position: absolute;
-      top: rem(2px);
+      top: to-rem(2px);
       display: block;
-      width: rem(2px);
+      width: to-rem(2px);
       // height: calc(100% - 4px) is calculated differently in Safari
-      height: rem(36px);
+      height: to-rem(36px);
       background-color: $field-01;
       content: '';
     }
@@ -246,8 +247,8 @@
   .#{$prefix}--number__rule-divider {
     position: absolute;
     z-index: z('overlay');
-    width: rem(1px);
-    height: rem(16px);
+    width: to-rem(1px);
+    height: to-rem(16px);
     background-color: $ui-03;
 
     &:first-of-type {
@@ -296,23 +297,23 @@
 
   .#{$prefix}--number__invalid {
     position: absolute;
-    right: rem(96px);
+    right: to-rem(96px);
     fill: $support-01;
   }
 
   // TODO V11: Remove xl selector
   .#{$prefix}--number--xl .#{$prefix}--number__invalid,
   .#{$prefix}--number--lg .#{$prefix}--number__invalid {
-    right: rem(112px);
+    right: to-rem(112px);
   }
 
   .#{$prefix}--number--sm .#{$prefix}--number__invalid {
-    right: rem(80px);
+    right: to-rem(80px);
   }
 
   .#{$prefix}--number__invalid + .#{$prefix}--number__rule-divider {
     position: absolute;
-    right: rem(80px);
+    right: to-rem(80px);
   }
 
   // TODO V11: Remove xl selector
@@ -322,13 +323,13 @@
   .#{$prefix}--number--lg
     .#{$prefix}--number__invalid
     + .#{$prefix}--number__rule-divider {
-    right: rem(96px);
+    right: to-rem(96px);
   }
 
   .#{$prefix}--number--sm
     .#{$prefix}--number__invalid
     + .#{$prefix}--number__rule-divider {
-    right: rem(64px);
+    right: to-rem(64px);
   }
 
   .#{$prefix}--number__control-btn.down-icon:hover
@@ -385,42 +386,42 @@
   // TODO V11: Remove xl selector
   .#{$prefix}--number--xl input[type='number'],
   .#{$prefix}--number--lg input[type='number'] {
-    height: rem(48px);
+    height: to-rem(48px);
   }
 
   // TODO V11: Remove xl selector
   .#{$prefix}--number--xl .#{$prefix}--number__controls,
   .#{$prefix}--number--lg .#{$prefix}--number__controls {
-    width: rem(96px);
+    width: to-rem(96px);
   }
 
   // TODO V11: Remove xl selector
   .#{$prefix}--number--xl .#{$prefix}--number__control-btn,
   .#{$prefix}--number--lg .#{$prefix}--number__control-btn {
-    width: rem(48px);
+    width: to-rem(48px);
 
     &::before,
     &::after {
       // height: calc(100% - 4px) is calculated differently in Safari
-      height: rem(44px);
+      height: to-rem(44px);
     }
   }
 
   .#{$prefix}--number--sm input[type='number'] {
-    height: rem(32px);
+    height: to-rem(32px);
   }
 
   .#{$prefix}--number--sm .#{$prefix}--number__controls {
-    width: rem(64px);
+    width: to-rem(64px);
   }
 
   .#{$prefix}--number--sm .#{$prefix}--number__control-btn {
-    width: rem(32px);
+    width: to-rem(32px);
 
     &::before,
     &::after {
       // height: calc(100% - 4px) is calculated differently in Safari
-      height: rem(28px);
+      height: to-rem(28px);
     }
   }
 
@@ -433,11 +434,11 @@
 
   // No steppers
   .#{$prefix}--number--nosteppers input[type='number'] {
-    padding-right: rem(48px);
+    padding-right: to-rem(48px);
   }
 
   .#{$prefix}--number--nosteppers .#{$prefix}--number__invalid {
-    right: rem(16px);
+    right: to-rem(16px);
   }
 
   // Readonly
@@ -451,7 +452,7 @@
 
   .#{$prefix}--number__readonly-icon {
     position: absolute;
-    right: rem(16px);
+    right: to-rem(16px);
   }
 
   // Skeleton State

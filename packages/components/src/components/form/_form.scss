@@ -69,8 +69,8 @@
   .#{$prefix}--label.#{$prefix}--skeleton {
     @include skeleton;
 
-    width: rem(75px);
-    height: rem(14px);
+    width: to-rem(75px);
+    height: to-rem(14px);
   }
 
   input[type='number'] {
@@ -109,7 +109,7 @@
     ~ .#{$prefix}--form-requirement {
       display: block;
       overflow: visible;
-      max-height: rem(200px);
+      max-height: to-rem(200px);
       font-weight: 400;
     }
   }
@@ -146,7 +146,7 @@
   }
 
   .#{$prefix}--form--fluid .#{$prefix}--form-requirement {
-    padding: $carbon--spacing-03 rem(40px) $carbon--spacing-03
+    padding: $carbon--spacing-03 to-rem(40px) $carbon--spacing-03
       $carbon--spacing-05;
     margin: 0;
   }

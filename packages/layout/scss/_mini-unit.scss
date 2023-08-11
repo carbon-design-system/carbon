@@ -19,5 +19,5 @@ $carbon--mini-unit-size: 8px !default;
 /// @access public
 /// @group @carbon/layout
 @function carbon--mini-units($count) {
-  @return carbon--rem($carbon--mini-unit-size * $count);
+  @return to-rem($carbon--mini-unit-size * $count);
 }

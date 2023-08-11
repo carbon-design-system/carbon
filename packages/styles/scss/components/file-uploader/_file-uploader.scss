@@ -56,14 +56,14 @@
   // TODO: deprecate this block
   .#{$prefix}--file-btn {
     display: inline-flex;
-    padding-right: rem(64px);
+    padding-right: to-rem(64px);
     margin: 0;
   }
 
   .#{$prefix}--file-browse-btn {
     display: inline-block;
     width: 100%;
-    max-width: rem(320px);
+    max-width: to-rem(320px);
     @if not enabled('enable-v11-release') {
       margin-bottom: $spacing-03;
     }
@@ -136,12 +136,12 @@
 
   .#{$prefix}--file__selected-file {
     display: grid;
-    max-width: rem(320px);
+    max-width: to-rem(320px);
     min-height: $spacing-09;
     align-items: center;
     margin-bottom: $spacing-03;
     background-color: $layer;
-    gap: rem(12px) $spacing-05;
+    gap: to-rem(12px) $spacing-05;
     grid-auto-rows: auto;
     grid-template-columns: 1fr auto;
     word-break: break-word;
@@ -173,12 +173,12 @@
   }
 
   .#{$prefix}--file__selected-file--md {
-    min-height: rem(40px);
+    min-height: to-rem(40px);
     gap: $spacing-03 $spacing-05;
   }
 
   .#{$prefix}--file__selected-file--sm {
-    min-height: rem(32px);
+    min-height: to-rem(32px);
     gap: $spacing-02 $spacing-05;
   }
 
@@ -186,7 +186,7 @@
   .#{$prefix}--file__selected-file--invalid__wrapper {
     @include focus-outline('invalid');
 
-    max-width: rem(320px);
+    max-width: to-rem(320px);
     margin-bottom: $spacing-03;
     background-color: $layer;
     outline-width: 1px;
@@ -195,7 +195,7 @@
   .#{$prefix}--file__selected-file--invalid {
     @include focus-outline('invalid');
 
-    padding: rem(12px) 0;
+    padding: to-rem(12px) 0;
   }
 
   .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--sm {
@@ -213,12 +213,12 @@
 
   .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--sm
     .#{$prefix}--form-requirement {
-    padding-top: rem(7px);
+    padding-top: to-rem(7px);
   }
 
   .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--md
     .#{$prefix}--form-requirement {
-    padding-top: rem(11px);
+    padding-top: to-rem(11px);
   }
 
   .#{$prefix}--file__selected-file--invalid
@@ -246,7 +246,7 @@
 
     display: block;
     overflow: visible;
-    max-height: rem(200px);
+    max-height: to-rem(200px);
     padding: $spacing-03 $spacing-05;
     color: $text-error;
     font-weight: 400;
@@ -321,7 +321,7 @@
 
     display: flex;
     overflow: hidden;
-    height: rem(96px);
+    height: to-rem(96px);
     align-items: flex-start;
     justify-content: space-between;
     padding: $spacing-05;

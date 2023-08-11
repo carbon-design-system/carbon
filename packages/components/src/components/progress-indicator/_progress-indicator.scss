@@ -28,7 +28,7 @@
     position: relative;
     display: inline-flex;
     overflow: visible;
-    width: rem(128px);
+    width: to-rem(128px);
     min-width: 7rem;
     flex-direction: row;
 
@@ -45,14 +45,14 @@
   .#{$prefix}--progress-line {
     position: absolute;
     left: 0;
-    width: rem(128px);
+    width: to-rem(128px);
     height: 1px;
     border: $progress-indicator-bar-width;
   }
 
   .#{$prefix}--progress--space-equal .#{$prefix}--progress-line {
     width: 100%;
-    min-width: rem(128px);
+    min-width: to-rem(128px);
   }
 
   .#{$prefix}--progress-step svg {
@@ -61,7 +61,7 @@
     width: $carbon--spacing-05;
     height: $carbon--spacing-05;
     flex-shrink: 0;
-    margin: rem(10px) $carbon--spacing-03 0 0;
+    margin: to-rem(10px) $carbon--spacing-03 0 0;
     border-radius: 50%;
     fill: $interactive-04;
   }
@@ -70,7 +70,7 @@
     @include type-style('body-short-01');
 
     overflow: hidden;
-    max-width: rem(88px);
+    max-width: to-rem(88px);
     margin: $carbon--spacing-03 0 0 0;
     color: $text-01;
     line-height: 1.45;
@@ -86,13 +86,13 @@
   }
 
   .#{$prefix}--progress-label:hover {
-    box-shadow: 0 rem(1px) $link-01;
+    box-shadow: 0 to-rem(1px) $link-01;
     color: $link-01;
     cursor: pointer;
   }
 
   .#{$prefix}--progress-label:focus {
-    box-shadow: 0 rem(3px) 0 0 $link-01;
+    box-shadow: 0 to-rem(3px) 0 0 $link-01;
     color: $link-01;
     outline: none;
   }
@@ -104,7 +104,7 @@
 
   .#{$prefix}--progress-step-button:not(.#{$prefix}--progress-step-button--unclickable)
     .#{$prefix}--progress-label:active {
-    box-shadow: 0 rem(3px) 0 0 $interactive;
+    box-shadow: 0 to-rem(3px) 0 0 $interactive;
     color: $interactive;
   }
 
@@ -115,7 +115,7 @@
   }
 
   .#{$prefix}--progress-step .#{$prefix}--tooltip .#{$prefix}--tooltip__caret {
-    margin-left: rem(10px);
+    margin-left: to-rem(10px);
   }
 
   .#{$prefix}--tooltip__text {
@@ -129,13 +129,13 @@
     @include type-style('body-long-01');
 
     display: block;
-    width: rem(125px);
+    width: to-rem(125px);
 
-    min-width: rem(115px);
+    min-width: to-rem(115px);
     min-height: $carbon--spacing-06;
     padding: $carbon--spacing-03 $carbon--spacing-05;
-    margin-top: rem(40px);
-    margin-left: rem(22px);
+    margin-top: to-rem(40px);
+    margin-left: to-rem(22px);
     color: $inverse-01;
     visibility: hidden;
   }
@@ -144,7 +144,7 @@
   .#{$prefix}--progress-step .#{$prefix}--tooltip_multi {
     @include type-style('body-long-01');
 
-    width: rem(150px);
+    width: to-rem(150px);
     height: auto;
     color: $inverse-01;
   }
@@ -155,7 +155,7 @@
 
     position: absolute;
     left: 0;
-    margin-top: rem(28px);
+    margin-top: to-rem(28px);
     margin-left: $carbon--spacing-06;
     color: $text-02;
     text-align: start;
@@ -209,7 +209,7 @@
 
   .#{$prefix}--progress-step-button--unclickable
     .#{$prefix}--tooltip__label:hover {
-    box-shadow: 0 rem(1px) $link-01;
+    box-shadow: 0 to-rem(1px) $link-01;
     color: $link-01;
     cursor: pointer;
   }
@@ -257,8 +257,8 @@
   .#{$prefix}--progress.#{$prefix}--skeleton .#{$prefix}--progress-label {
     @include skeleton;
 
-    width: rem(40px);
-    height: rem(14px);
+    width: to-rem(40px);
+    height: to-rem(14px);
     margin-top: 0.625rem;
   }
 
@@ -287,13 +287,13 @@
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button svg {
     display: inline-block;
     // 1px top margin based on visual review
-    margin: rem(1px) $carbon--spacing-03 0;
+    margin: to-rem(1px) $carbon--spacing-03 0;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-label {
     display: inline-block;
     width: initial;
-    max-width: rem(160px);
+    max-width: to-rem(160px);
     margin: 0;
     vertical-align: top;
     white-space: initial;

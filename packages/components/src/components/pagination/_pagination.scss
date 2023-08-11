@@ -154,12 +154,12 @@ $css--helpers: true;
   }
 
   .#{$prefix}--pagination__left .#{$prefix}--pagination__text {
-    margin-right: rem(1px);
+    margin-right: to-rem(1px);
   }
 
   .#{$prefix}--pagination__right .#{$prefix}--pagination__text {
     margin-right: 1rem;
-    margin-left: rem(1px);
+    margin-left: to-rem(1px);
   }
 
   .#{$prefix}--pagination__left {

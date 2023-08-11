@@ -32,7 +32,7 @@ $tooltip-padding-inline: custom-property.get-var(
   .#{$prefix}--tooltip-content {
     @include type.type-style('body-01');
 
-    max-width: convert.rem(288px);
+    max-width: convert.to-rem(288px);
     padding: $tooltip-padding-block $tooltip-padding-inline;
 
     color: theme.$text-inverse;
@@ -62,8 +62,8 @@ $tooltip-padding-inline: custom-property.get-var(
   .#{$prefix}--definition-tooltip {
     @include type.type-style('body-01');
 
-    max-width: convert.rem(176px);
-    padding: convert.rem(8px) convert.rem(16px);
+    max-width: convert.to-rem(176px);
+    padding: convert.to-rem(8px) convert.to-rem(16px);
   }
 }
 
@@ -71,17 +71,17 @@ $tooltip-padding-inline: custom-property.get-var(
   .#{$prefix}--icon-tooltip {
     @include custom-property.declaration(
       'tooltip-padding-block',
-      convert.rem(2px)
+      convert.to-rem(2px)
     );
     @include custom-property.declaration(
       'popover-caret-width',
-      convert.rem(8px)
+      convert.to-rem(8px)
     );
     @include custom-property.declaration(
       'popover-caret-height',
-      convert.rem(4px)
+      convert.to-rem(4px)
     );
-    @include custom-property.declaration('popover-offset', convert.rem(8px));
+    @include custom-property.declaration('popover-offset', convert.to-rem(8px));
   }
 
   .#{$prefix}--icon-tooltip .#{$prefix}--tooltip-content {

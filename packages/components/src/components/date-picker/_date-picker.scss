@@ -48,7 +48,7 @@
   .#{$prefix}--date-picker.#{$prefix}--date-picker--simple
     .#{$prefix}--date-picker__input,
   .#{$prefix}--date-picker.#{$prefix}--date-picker--simple .#{$prefix}--label {
-    width: rem(120px);
+    width: to-rem(120px);
   }
 
   .#{$prefix}--date-picker.#{$prefix}--date-picker--simple
@@ -57,7 +57,7 @@
     .#{$prefix}--date-picker-input__wrapper--warn {
     .#{$prefix}--date-picker__input,
     ~ .#{$prefix}--form-requirement {
-      width: rem(152px);
+      width: to-rem(152px);
     }
   }
 
@@ -69,7 +69,7 @@
 
   .#{$prefix}--date-picker.#{$prefix}--date-picker--single
     .#{$prefix}--date-picker__input {
-    width: rem(288px);
+    width: to-rem(288px);
   }
 
   .#{$prefix}--date-picker
@@ -84,7 +84,7 @@
 
     position: relative;
     display: block;
-    height: rem(40px);
+    height: to-rem(40px);
     padding: 0 $carbon--spacing-05;
     border: none;
     border-bottom: 1px solid $border-strong;
@@ -121,11 +121,11 @@
   // TODO V11: Remove xl selector
   .#{$prefix}--date-picker__input--xl,
   .#{$prefix}--date-picker__input--lg {
-    height: rem(48px);
+    height: to-rem(48px);
   }
 
   .#{$prefix}--date-picker__input--sm {
-    height: rem(32px);
+    height: to-rem(32px);
   }
 
   .#{$prefix}--date-picker__icon {
@@ -169,12 +169,12 @@
 
   .#{$prefix}--date-picker--range
     > .#{$prefix}--date-picker-container:first-child {
-    margin-right: rem(1px);
+    margin-right: to-rem(1px);
   }
 
   .#{$prefix}--date-picker--range .#{$prefix}--date-picker-container,
   .#{$prefix}--date-picker--range .#{$prefix}--date-picker__input {
-    width: rem(143.5px);
+    width: to-rem(143.5px);
   }
 
   // Skeleton State
@@ -192,8 +192,8 @@
   .#{$prefix}--date-picker.#{$prefix}--skeleton .#{$prefix}--label {
     @include skeleton;
 
-    width: rem(75px);
-    height: rem(14px);
+    width: to-rem(75px);
+    height: to-rem(14px);
   }
 
   // Windows HCM fix

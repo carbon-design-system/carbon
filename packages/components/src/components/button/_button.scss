@@ -259,8 +259,8 @@
   }
 
   .#{$prefix}--btn--icon-only {
-    padding-right: rem(15px);
-    padding-left: rem(15px);
+    padding-right: to-rem(15px);
+    padding-left: to-rem(15px);
 
     .#{$prefix}--btn__icon {
       position: static;
@@ -304,13 +304,13 @@
   // V11: remove field
   .#{$prefix}--btn--field.#{$prefix}--btn--icon-only,
   .#{$prefix}--btn--md.#{$prefix}--btn--icon-only {
-    padding-right: rem(11px);
-    padding-left: rem(11px);
+    padding-right: to-rem(11px);
+    padding-left: to-rem(11px);
   }
 
   .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
-    padding-right: rem(7px);
-    padding-left: rem(7px);
+    padding-right: to-rem(7px);
+    padding-left: to-rem(7px);
   }
 
   .#{$prefix}--btn--danger {
@@ -415,7 +415,7 @@
   }
 
   .#{$prefix}--btn--sm {
-    min-height: rem(32px);
+    min-height: to-rem(32px);
     padding: $button-padding-sm;
   }
 
@@ -423,20 +423,20 @@
   .#{$prefix}--btn--xl:not(.#{$prefix}--btn--icon-only) {
     @include button-padding-large;
 
-    min-height: rem(80px);
+    min-height: to-rem(80px);
   }
 
   // V11: change lg to xl
   .#{$prefix}--btn--lg:not(.#{$prefix}--btn--icon-only) {
     @include button-padding-large;
 
-    min-height: rem(64px);
+    min-height: to-rem(64px);
   }
 
   // V11: Remove field
   .#{$prefix}--btn--field,
   .#{$prefix}--btn--md {
-    min-height: rem(40px);
+    min-height: to-rem(40px);
     padding: $button-padding-field;
   }
 
@@ -453,19 +453,19 @@
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--expressive .#{$prefix}--btn__icon {
-    width: rem(20px);
-    height: rem(20px);
+    width: to-rem(20px);
+    height: to-rem(20px);
   }
 
   .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--expressive {
-    max-width: rem(320px);
+    max-width: to-rem(320px);
   }
 
   // Skeleton State
   .#{$prefix}--btn.#{$prefix}--skeleton {
     @include skeleton;
 
-    width: rem(150px);
+    width: to-rem(150px);
   }
 
   // button set styles
@@ -480,10 +480,10 @@
   .#{$prefix}--btn-set .#{$prefix}--btn {
     width: 100%;
     // 196px from design kit
-    max-width: rem(196px);
+    max-width: to-rem(196px);
 
     &:not(:focus) {
-      box-shadow: rem(-1px) 0 0 0 $button-separator;
+      box-shadow: to-rem(-1px) 0 0 0 $button-separator;
     }
 
     &:first-of-type:not(:focus) {
@@ -496,7 +496,7 @@
   }
 
   .#{$prefix}--btn-set--stacked .#{$prefix}--btn:not(:focus) {
-    box-shadow: 0 rem(-1px) 0 0 $button-separator;
+    box-shadow: 0 to-rem(-1px) 0 0 $button-separator;
   }
 
   .#{$prefix}--btn-set--stacked .#{$prefix}--btn:first-of-type:not(:focus) {
@@ -504,7 +504,7 @@
   }
 
   .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--disabled {
-    box-shadow: rem(-1px) 0 0 0 $disabled-03;
+    box-shadow: to-rem(-1px) 0 0 0 $disabled-03;
 
     &:first-of-type {
       box-shadow: none;
@@ -512,7 +512,7 @@
   }
 
   .#{$prefix}--btn-set--stacked .#{$prefix}--btn.#{$prefix}--btn--disabled {
-    box-shadow: 0 rem(-1px) 0 0 $disabled-03;
+    box-shadow: 0 to-rem(-1px) 0 0 $disabled-03;
 
     &:first-of-type {
       box-shadow: none;

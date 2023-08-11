@@ -39,11 +39,11 @@
     position: relative;
     display: flex;
     width: 100%;
-    min-height: rem(40px);
+    min-height: to-rem(40px);
     flex-direction: $accordion-flex-direction;
     align-items: flex-start;
     justify-content: $accordion-justify-content;
-    padding: rem(10px) 0;
+    padding: to-rem(10px) 0;
     margin: 0;
     color: $text-01;
     cursor: pointer;
@@ -76,12 +76,12 @@
   // TODO V11: Remove xl selector
   .#{$prefix}--accordion--xl .#{$prefix}--accordion__heading,
   .#{$prefix}--accordion--lg .#{$prefix}--accordion__heading {
-    min-height: rem(48px);
+    min-height: to-rem(48px);
   }
 
   .#{$prefix}--accordion--sm .#{$prefix}--accordion__heading {
-    min-height: rem(32px);
-    padding: rem(5px) 0;
+    min-height: to-rem(32px);
+    padding: to-rem(5px) 0;
   }
 
   // Disabled styles

@@ -26,7 +26,7 @@
 
     display: flex;
     width: 100%;
-    min-height: rem(40px);
+    min-height: to-rem(40px);
     align-items: center;
     justify-content: space-between;
     border-top: 1px solid $border-subtle;
@@ -61,22 +61,22 @@
 
   .#{$prefix}--unstable-pagination__left
     .#{$prefix}--unstable-pagination__text {
-    margin-right: rem(1px);
+    margin-right: to-rem(1px);
   }
 
   .#{$prefix}--unstable-pagination__right
     .#{$prefix}--unstable-pagination__text {
     margin-right: $spacing-05;
-    margin-left: rem(1px);
+    margin-left: to-rem(1px);
   }
 
   .#{$prefix}--unstable-pagination__button {
     @include component-reset.reset;
 
     display: flex;
-    width: rem(40px);
-    height: rem(40px);
-    min-height: rem(32px);
+    width: to-rem(40px);
+    height: to-rem(40px);
+    min-height: to-rem(32px);
     align-items: center;
     justify-content: center;
     border: none;
@@ -144,7 +144,7 @@
     min-width: auto;
     height: 100%;
     padding: 0 2.25rem 0 $spacing-05;
-    line-height: rem(40px);
+    line-height: to-rem(40px);
   }
 
   .#{$prefix}--unstable-pagination__page-selector
