@@ -65,8 +65,7 @@
   "dependencies": {
     "@carbon/telemetry": "0.1.0",
     "flatpickr": "4.6.1",
-    "lodash.debounce": "^4.0.8",
-    "warning": "^3.0.0"
+    "lodash.debounce": "^4.0.8"
   },
   "devDependencies": {
     "@babel/core": "^7.16.7",
