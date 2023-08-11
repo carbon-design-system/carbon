@@ -33,7 +33,7 @@
     "chalk": "^4.1.1",
     "jest-circus": "^28.1.0",
     "jest-environment-jsdom": "^28.1.0",
-    "jest-watch-typeahead": "^1.1.0",
+    "jest-watch-typeahead": "^2.0.0",
     "sass": "^1.51.0"
   },
   "devDependencies": {
