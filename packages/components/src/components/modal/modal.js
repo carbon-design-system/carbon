@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import warning from 'warning';
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -110,7 +109,7 @@ class Modal extends mixin(
           this.element.querySelector(settings.selectorTabbable);
         focusableItem.focus();
         if (__DEV__) {
-          warning(
+          console.warn(
             focusableItem,
             `Modals need to contain a focusable element by either using ` +
               `\`${this.options.selectorPrimaryFocus}\` or settings.selectorTabbable.`
