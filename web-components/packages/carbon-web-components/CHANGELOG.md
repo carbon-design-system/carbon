@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.31.0-rc.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.30.0...@carbon/web-components@1.31.0-rc.0) (2023-08-14)
+
+
+### Bug Fixes
+
+* **breadcrumb:** update aria role to now have the value of navigation ([#10780](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10780)) ([e964047](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/e96404775f1bb14e8954f29f5b519d88f79e7b79)), closes [#10730](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10730)
+
+
+
+
+
 # [1.30.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.30.0-rc.0...@carbon/web-components@1.30.0) (2023-07-26)
 
 **Note:** Version bump only for package @carbon/web-components
