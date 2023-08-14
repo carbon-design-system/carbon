@@ -15,7 +15,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/link/index' as *;
 @use '@carbon/styles/scss/components/form/index' as *;
 @use '@carbon/styles/scss/theme' as *;
-@use '../../globals/mixins/temp-layout' as *;
+@use '@carbon/styles/scss/layout' as *;
 
 :host(#{$prefix}-tile) {
   @extend .#{$prefix}--tile;

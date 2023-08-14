@@ -10,7 +10,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/components/file-uploader/file-uploader' as *;
-@use '../../globals/mixins/temp-layout' as *;
+@use '@carbon/styles/scss/layout' as *;
 
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include file-uploader;

@@ -10,7 +10,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
-@use '../../globals/mixins/temp-layout' as *;
+@use '@carbon/styles/scss/layout' as *;
 @use '../tooltip/tooltip';
 @use '../button/button';
 

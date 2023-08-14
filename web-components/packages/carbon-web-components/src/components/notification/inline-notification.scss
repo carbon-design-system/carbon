@@ -14,7 +14,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/notification/index' as *;
 @use '@carbon/styles/scss/components/notification/mixins' as *;
 @use '@carbon/styles/scss/components/button';
-@use '../../globals/mixins/temp-layout' as *;
+@use '@carbon/styles/scss/layout' as *;
 
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include inline-notification;

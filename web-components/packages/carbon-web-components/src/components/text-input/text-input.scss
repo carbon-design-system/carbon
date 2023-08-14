@@ -11,7 +11,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/components/text-input/index';
-@use '../../globals/mixins/temp-layout' as *;
+@use '@carbon/styles/scss/layout' as *;
 
 :host(#{$prefix}-text-input) {
   @include emit-layout-tokens();
