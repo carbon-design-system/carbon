@@ -11,7 +11,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/components/tag/index' as *;
-@use '../../globals/mixins/temp-layout' as *;
+@use '@carbon/styles/scss/layout' as *;
 
 :host(#{$prefix}-tag) {
   @extend .#{$prefix}--tag;

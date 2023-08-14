@@ -12,7 +12,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/components/accordion';
-@use '../../globals/mixins/temp-layout' as *;
+@use '@carbon/styles/scss/layout' as *;
 
 :host(#{$prefix}-accordion),
 :host(#{$prefix}-accordion-skeleton) {
