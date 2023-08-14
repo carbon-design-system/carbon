@@ -988,11 +988,16 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                               type="checkbox"
                             />
                             <label
-                              aria-label="Select all rows"
                               className="bx--checkbox-label"
                               htmlFor="data-table-7__select-all"
                               onClick={[Function]}
-                            />
+                            >
+                              <span
+                                className="bx--visually-hidden"
+                              >
+                                Select all rows
+                              </span>
+                            </label>
                           </div>
                         </ForwardRef(InlineCheckbox)>
                       </th>
@@ -1388,11 +1393,16 @@ exports[`DataTable selection should render 1`] = `
                               type="checkbox"
                             />
                             <label
-                              aria-label="Select all rows"
                               className="bx--checkbox-label"
                               htmlFor="data-table-6__select-all"
                               onClick={[Function]}
-                            />
+                            >
+                              <span
+                                className="bx--visually-hidden"
+                              >
+                                Select all rows
+                              </span>
+                            </label>
                           </div>
                         </ForwardRef(InlineCheckbox)>
                       </th>
@@ -1483,11 +1493,16 @@ exports[`DataTable selection should render 1`] = `
                               type="checkbox"
                             />
                             <label
-                              aria-label="Select row"
                               className="bx--checkbox-label"
                               htmlFor="data-table-6__select-row-b"
                               onClick={[Function]}
-                            />
+                            >
+                              <span
+                                className="bx--visually-hidden"
+                              >
+                                Select row
+                              </span>
+                            </label>
                           </div>
                         </ForwardRef(InlineCheckbox)>
                       </td>
@@ -1546,11 +1561,16 @@ exports[`DataTable selection should render 1`] = `
                               type="checkbox"
                             />
                             <label
-                              aria-label="Select row"
                               className="bx--checkbox-label"
                               htmlFor="data-table-6__select-row-a"
                               onClick={[Function]}
-                            />
+                            >
+                              <span
+                                className="bx--visually-hidden"
+                              >
+                                Select row
+                              </span>
+                            </label>
                           </div>
                         </ForwardRef(InlineCheckbox)>
                       </td>
@@ -1609,11 +1629,16 @@ exports[`DataTable selection should render 1`] = `
                               type="checkbox"
                             />
                             <label
-                              aria-label="Select row"
                               className="bx--checkbox-label"
                               htmlFor="data-table-6__select-row-c"
                               onClick={[Function]}
-                            />
+                            >
+                              <span
+                                className="bx--visually-hidden"
+                              >
+                                Select row
+                              </span>
+                            </label>
                           </div>
                         </ForwardRef(InlineCheckbox)>
                       </td>
