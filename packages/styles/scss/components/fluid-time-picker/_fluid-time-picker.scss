@@ -12,7 +12,7 @@
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../fluid-text-input';
 @use '../fluid-select';
@@ -89,7 +89,7 @@
 
   // Invalid + Warn states
   .#{$prefix}--time-picker--fluid .#{$prefix}--form-requirement {
-    padding: $spacing-03 rem(40px) $spacing-03 $spacing-05;
+    padding: $spacing-03 convert.to-rem(40px) $spacing-03 $spacing-05;
     margin: 0;
     background: $field;
   }
@@ -108,7 +108,7 @@
   }
 
   .#{$prefix}--time-picker--fluid--invalid .#{$prefix}--select-input {
-    padding-top: rem(30px);
+    padding-top: convert.to-rem(30px);
     border-top: 2px solid transparent;
   }
 
@@ -142,7 +142,7 @@
   .#{$prefix}--time-picker--fluid--invalid .#{$prefix}--time-picker__icon,
   .#{$prefix}--time-picker--fluid--warning .#{$prefix}--time-picker__icon {
     position: absolute;
-    top: rem(72px);
+    top: convert.to-rem(72px);
     right: $spacing-05;
     display: block;
   }
@@ -214,7 +214,7 @@
   .#{$prefix}--time-picker--fluid--skeleton {
     display: flex;
     width: 100%;
-    height: rem(64px);
+    height: convert.to-rem(64px);
   }
 
   .#{$prefix}--time-picker--fluid--skeleton > * {

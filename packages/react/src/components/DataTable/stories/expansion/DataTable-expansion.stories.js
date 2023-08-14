@@ -62,7 +62,7 @@ export const Default = () => (
         <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
             <TableRow>
-              <TableExpandHeader />
+              <TableExpandHeader aria-label="expand row" />
               {headers.map((header, i) => (
                 <TableHeader key={i} {...getHeaderProps({ header })}>
                   {header.header}
@@ -115,6 +115,7 @@ export const BatchExpansion = () => (
             <TableRow>
               <TableExpandHeader
                 enableExpando={true}
+                aria-label="expand row"
                 {...getExpandHeaderProps()}
               />
               {headers.map((header, i) => (

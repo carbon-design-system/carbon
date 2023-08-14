@@ -13,7 +13,7 @@
 @use '../../theme' as *;
 @use '../../type' as *;
 @use '../../utilities/component-reset';
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/placeholder-colors' as *;
 @use '../../utilities/skeleton' as *;
@@ -29,8 +29,8 @@
 
     min-width: 10rem;
     height: 100%;
-    min-height: rem(40px);
-    padding: rem(11px) $spacing-05;
+    min-height: convert.to-rem(40px);
+    padding: convert.to-rem(11px) $spacing-05;
     border: none;
     border-bottom: 1px solid $border-strong;
     background-color: $field;
@@ -127,7 +127,7 @@
     @include skeleton;
 
     width: 100%;
-    height: rem(100px);
+    height: convert.to-rem(100px);
 
     &::placeholder {
       color: transparent;

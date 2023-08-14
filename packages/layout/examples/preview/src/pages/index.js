@@ -13,7 +13,7 @@ export default function IndexPage() {
         </header>
         <p>Used for converting from pixel values to rem or em values.</p>
         <div>
-          <div class="convert-box"></div>
+          <div className="convert-box"></div>
         </div>
       </article>
 
@@ -24,25 +24,25 @@ export default function IndexPage() {
         <p>Provides the steps in the scale used for spacing internal, and external, to a component.</p>
         <div>
           <h3>Fixed</h3>
-          <ol class="spacing-scale">
-            <li class="fixed-spacing-scale-1"></li>
-            <li class="fixed-spacing-scale-2"></li>
-            <li class="fixed-spacing-scale-3"></li>
-            <li class="fixed-spacing-scale-4"></li>
-            <li class="fixed-spacing-scale-5"></li>
-            <li class="fixed-spacing-scale-6"></li>
-            <li class="fixed-spacing-scale-7"></li>
-            <li class="fixed-spacing-scale-8"></li>
-            <li class="fixed-spacing-scale-9"></li>
+          <ol className="spacing-scale">
+            <li className="fixed-spacing-scale-1"></li>
+            <li className="fixed-spacing-scale-2"></li>
+            <li className="fixed-spacing-scale-3"></li>
+            <li className="fixed-spacing-scale-4"></li>
+            <li className="fixed-spacing-scale-5"></li>
+            <li className="fixed-spacing-scale-6"></li>
+            <li className="fixed-spacing-scale-7"></li>
+            <li className="fixed-spacing-scale-8"></li>
+            <li className="fixed-spacing-scale-9"></li>
           </ol>
         </div>
         <div>
           <h3>Fluid</h3>
-          <ol class="spacing-scale">
-            <li class="fluid-spacing-scale-1"></li>
-            <li class="fluid-spacing-scale-2"></li>
-            <li class="fluid-spacing-scale-3"></li>
-            <li class="fluid-spacing-scale-4"></li>
+          <ol className="spacing-scale">
+            <li className="fluid-spacing-scale-1"></li>
+            <li className="fluid-spacing-scale-2"></li>
+            <li className="fluid-spacing-scale-3"></li>
+            <li className="fluid-spacing-scale-4"></li>
           </ol>
         </div>
       </article>

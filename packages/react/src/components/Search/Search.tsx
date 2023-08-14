@@ -243,7 +243,6 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
         {labelText}
       </label>
       <input
-        {...rest}
         autoComplete={autoComplete}
         className={`${prefix}--search-input`}
         defaultValue={defaultValue}
@@ -257,6 +256,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(function Search(
         type={type}
         value={value}
         tabIndex={onExpand && !isExpanded ? -1 : undefined}
+        {...rest}
       />
       <button
         aria-label={closeButtonLabelText}

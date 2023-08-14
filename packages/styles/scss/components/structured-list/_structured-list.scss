@@ -15,7 +15,7 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/high-contrast-mode' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/component-reset';
 
 @mixin structured-list {
@@ -149,7 +149,7 @@
     @include type-style('heading-compact-01');
 
     display: table-cell;
-    height: rem(40px);
+    height: convert.to-rem(40px);
     color: $text-primary;
     font-weight: 600;
     text-align: left;
