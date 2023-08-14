@@ -10,18 +10,18 @@
 
 @use './config' as *;
 @use './utilities/custom-property';
-@use './utilities/convert' as *;
+@use './utilities/convert';
 @use './spacing' as *;
 
 $layout-tokens: (
   size: (
     height: (
-      xs: rem(24px),
-      sm: rem(32px),
-      md: rem(40px),
-      lg: rem(48px),
-      xl: rem(64px),
-      2xl: rem(80px),
+      xs: convert.to-rem(24px),
+      sm: convert.to-rem(32px),
+      md: convert.to-rem(40px),
+      lg: convert.to-rem(48px),
+      xl: convert.to-rem(64px),
+      2xl: convert.to-rem(80px),
     ),
   ),
   density: (
