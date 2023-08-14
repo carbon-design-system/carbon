@@ -435,7 +435,9 @@ class NumberInput extends Component {
           });
 
           const helper = helperText ? (
-            <div className={helperTextClasses}>{helperText}</div>
+            <div className={helperTextClasses} id={normalizedProps.helperId}>
+              {helperText}
+            </div>
           ) : null;
 
           const labelClasses = classNames(`${prefix}--label`, {
@@ -474,6 +476,9 @@ class NumberInput extends Component {
           }
           if (normalizedProps.warn) {
             ariaDescribedBy = normalizedProps.warnId;
+          }
+          if (!normalizedProps.validation) {
+            ariaDescribedBy = helperText ? normalizedProps.helperId : undefined;
           }
 
           return (
