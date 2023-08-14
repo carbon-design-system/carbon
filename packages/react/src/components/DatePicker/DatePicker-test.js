@@ -227,6 +227,7 @@ describe('Simple date picker', () => {
       expect(labeledElement).toBeInTheDocument();
 
       const input = screen.getByRole('textbox');
+
       expect(screen.getByRole('application')).not.toHaveClass('open');
       await userEvent.click(input);
       expect(screen.getByRole('application')).toHaveClass('open');
