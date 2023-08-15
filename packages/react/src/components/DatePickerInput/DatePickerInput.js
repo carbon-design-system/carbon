@@ -15,6 +15,7 @@ import {
   WarningAltFilled16,
 } from '@carbon/icons-react';
 import { PrefixContext } from '../../internal/usePrefix';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 export default class DatePickerInput extends Component {
   static propTypes = {
@@ -163,6 +164,13 @@ export default class DatePickerInput extends Component {
       ...other
     } = this.props;
 
+    const getInstanceId = setupGetInstanceId();
+    const datePickerInputInstanceId = getInstanceId();
+
+    const datePickerInputHelperId = !helperText
+      ? undefined
+      : `detepicker-input-helper-text-${datePickerInputInstanceId}`;
+
     const datePickerInputProps = {
       id,
       onChange: (evt) => {
@@ -178,6 +186,7 @@ export default class DatePickerInput extends Component {
       placeholder,
       type,
       pattern,
+      ['aria-describedby']: helperText ? datePickerInputHelperId : undefined,
     };
 
     return (
@@ -245,7 +254,9 @@ export default class DatePickerInput extends Component {
           ) : null;
 
           const helper = helperText ? (
-            <div className={helperTextClasses}>{helperText}</div>
+            <div id={datePickerInputHelperId} className={helperTextClasses}>
+              {helperText}
+            </div>
           ) : null;
 
           let error = null;

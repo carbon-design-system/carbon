@@ -20,6 +20,9 @@ import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
+
+const getInstanceId = setupGetInstanceId();
 
 const defaultItemToString = (item) => {
   if (typeof item === 'string') {
@@ -68,6 +71,11 @@ const Dropdown = React.forwardRef(function Dropdown(
     initialSelectedItem,
     onSelectedItemChange,
   });
+  const { current: dropdownInstanceId } = useRef(getInstanceId());
+
+  const helperId = !helperText
+    ? undefined
+    : `dropdown-helper-text-${dropdownInstanceId}`;
 
   // only set selectedItem if the prop is defined. Setting if it is undefined
   // will overwrite default selected items from useSelect
@@ -129,7 +137,9 @@ const Dropdown = React.forwardRef(function Dropdown(
   const ItemToElement = itemToElement;
   const toggleButtonProps = getToggleButtonProps();
   const helper = helperText ? (
-    <div className={helperClasses}>{helperText}</div>
+    <div id={helperId} className={helperClasses}>
+      {helperText}
+    </div>
   ) : null;
 
   function onSelectedItemChange({ selectedItem }) {
@@ -171,6 +181,9 @@ const Dropdown = React.forwardRef(function Dropdown(
           className={`${prefix}--list-box__field`}
           disabled={disabled}
           aria-disabled={disabled}
+          aria-describedby={
+            !inline && !invalid && !warn && helper ? helperId : undefined
+          }
           title={selectedItem ? itemToString(selectedItem) : label}
           {...toggleButtonProps}
           ref={mergeRefs(toggleButtonProps.ref, ref)}>
