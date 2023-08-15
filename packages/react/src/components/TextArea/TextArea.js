@@ -6,11 +6,14 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import classNames from 'classnames';
 import { WarningFilled16 } from '@carbon/icons-react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
+
+const getInstanceId = setupGetInstanceId();
 
 const TextArea = React.forwardRef(function TextArea(
   {
@@ -37,6 +40,8 @@ const TextArea = React.forwardRef(function TextArea(
   const [textCount, setTextCount] = useState(
     defaultValue?.length || value?.length || 0
   );
+
+  const { current: textAreaInstanceId } = useRef(getInstanceId());
 
   const textareaProps = {
     id,
@@ -82,8 +87,14 @@ const TextArea = React.forwardRef(function TextArea(
     [`${prefix}--form__helper-text--disabled`]: other.disabled,
   });
 
+  const helperId = !helperText
+    ? undefined
+    : `text-area-helper-text-${textAreaInstanceId}`;
+
   const helper = helperText ? (
-    <div className={helperTextClasses}>{helperText}</div>
+    <div id={helperId} className={helperTextClasses}>
+      {helperText}
+    </div>
   ) : null;
 
   const errorId = id + '-error-msg';
@@ -103,6 +114,14 @@ const TextArea = React.forwardRef(function TextArea(
     }
   );
 
+  let ariaDescribedBy;
+
+  if (invalid) {
+    ariaDescribedBy = errorId;
+  } else if (!invalid && helperText) {
+    ariaDescribedBy = helperId;
+  }
+
   const input = (
     <textarea
       {...other}
@@ -110,7 +129,7 @@ const TextArea = React.forwardRef(function TextArea(
       placeholder={placeholder || null}
       className={textareaClasses}
       aria-invalid={invalid || null}
-      aria-describedby={invalid ? errorId : null}
+      aria-describedby={ariaDescribedBy}
       disabled={other.disabled}
     />
   );

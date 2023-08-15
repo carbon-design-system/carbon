@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useRef } from 'react';
 import classNames from 'classnames';
 import {
   ChevronDown16,
@@ -17,6 +17,9 @@ import deprecate from '../../prop-types/deprecate';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import * as FeatureFlags from '@carbon/feature-flags';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
+
+const getInstanceId = setupGetInstanceId();
 
 const Select = React.forwardRef(function Select(
   {
@@ -44,6 +47,7 @@ const Select = React.forwardRef(function Select(
 ) {
   const prefix = usePrefix();
   const enabled = useFeatureFlag('enable-v11-release');
+  const { current: selectInstanceId } = useRef(getInstanceId());
 
   const selectClasses = classNames(
     {
@@ -82,12 +86,19 @@ const Select = React.forwardRef(function Select(
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
   });
+  const helperId = !helperText
+    ? undefined
+    : `select-helper-text-${selectInstanceId}`;
   const helper = helperText ? (
-    <div className={helperTextClasses}>{helperText}</div>
+    <div id={helperId} className={helperTextClasses}>
+      {helperText}
+    </div>
   ) : null;
   const ariaProps = {};
   if (invalid) {
     ariaProps['aria-describedby'] = errorId;
+  } else if (!inline) {
+    ariaProps['aria-describedby'] = helper ? helperId : undefined;
   }
   const input = (() => {
     return (

@@ -334,6 +334,11 @@ const ComboBox = React.forwardRef((props, ref) => {
                   {...inputProps}
                   {...rest}
                   ref={mergeRefs(textInput, ref)}
+                  aria-describedby={
+                    helperText && !invalid && !warn
+                      ? comboBoxHelperId
+                      : undefined
+                  }
                 />
                 {invalid && (
                   <WarningFilled16
