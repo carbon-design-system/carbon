@@ -11,7 +11,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/component-reset';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/skeleton' as *;
@@ -88,7 +88,7 @@
     @include type-style('body-compact-01');
 
     display: flex;
-    min-height: rem(32px);
+    min-height: convert.to-rem(32px);
     flex: 1;
     align-items: center;
 
@@ -101,8 +101,8 @@
   .#{$prefix}--tree-node:not(.#{$prefix}--tree-parent-node)
     .#{$prefix}--tree-node__label {
     // (min-height 32px - single line text height 18px) / 2 = 7px
-    padding-top: rem(7px);
-    padding-bottom: rem(7px);
+    padding-top: convert.to-rem(7px);
+    padding-bottom: convert.to-rem(7px);
   }
 
   .#{$prefix}--tree-node__label:hover .#{$prefix}--tree-node__label__details {
@@ -140,8 +140,8 @@
 
   .#{$prefix}--tree-parent-node__toggle {
     display: flex;
-    width: rem(24px);
-    height: rem(24px);
+    width: convert.to-rem(24px);
+    height: convert.to-rem(24px);
     align-items: center;
     align-self: flex-start;
     padding-left: $spacing-02;
@@ -173,7 +173,7 @@
     min-width: 1rem;
     min-height: 1rem;
     align-self: flex-start;
-    margin-top: rem(1px);
+    margin-top: convert.to-rem(1px);
     margin-right: $spacing-03;
     margin-left: $spacing-03;
     fill: $icon-secondary;
@@ -210,7 +210,7 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: rem(4px);
+      width: convert.to-rem(4px);
       height: 100%;
       background-color: $interactive;
       content: '';
@@ -219,7 +219,7 @@
 
   // xs size variant
   .#{$prefix}--tree--xs .#{$prefix}--tree-node__label {
-    min-height: rem(24px);
+    min-height: convert.to-rem(24px);
   }
 
   .#{$prefix}--tree--xs

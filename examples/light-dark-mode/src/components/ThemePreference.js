@@ -1,7 +1,10 @@
 import { GlobalTheme } from '@carbon/react';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-const ThemePreferenceContext = createContext();
+const ThemePreferenceContext = createContext({
+  theme: 'g10',
+  setTheme: () => null,
+});
 
 function useThemePreference() {
   return useContext(ThemePreferenceContext);

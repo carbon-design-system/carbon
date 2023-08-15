@@ -10,7 +10,7 @@
 @use '../../../spacing' as *;
 @use '../../../theme' as *;
 @use '../../../utilities/button-reset';
-@use '../../../utilities/convert' as *;
+@use '../../../utilities/convert';
 @use '../../../utilities/focus-outline' as *;
 @use '../../../utilities/high-contrast-mode' as *;
 
@@ -113,14 +113,14 @@
 
   .#{$prefix}--data-table.#{$prefix}--data-table--top-aligned-header.#{$prefix}--data-table--sm
     th.#{$prefix}--table-sort__header {
-    padding-top: rem(7px);
-    padding-bottom: rem(7px);
+    padding-top: convert.to-rem(7px);
+    padding-bottom: convert.to-rem(7px);
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--top-aligned-header.#{$prefix}--data-table--xs
     th.#{$prefix}--table-sort__header {
-    padding-top: rem(2px);
-    padding-bottom: rem(2px);
+    padding-top: convert.to-rem(2px);
+    padding-bottom: convert.to-rem(2px);
   }
 
   .#{$prefix}--data-table--sort:not(.#{$prefix}--data-table--xs):not(
@@ -174,7 +174,7 @@
   }
 
   .#{$prefix}--table-sort__icon-unsorted {
-    width: rem(20px);
+    width: convert.to-rem(20px);
     min-width: $spacing-05;
     margin-right: $spacing-03;
     margin-left: $spacing-03;
@@ -203,7 +203,7 @@
   }
 
   .#{$prefix}--table-sort__icon {
-    width: rem(20px);
+    width: convert.to-rem(20px);
     min-width: $spacing-05;
     margin-right: $spacing-03;
     margin-left: $spacing-03;
@@ -218,34 +218,34 @@
   //----------------------------------------------------------------------------
   // Sortable compact
   .#{$prefix}--data-table--xs.#{$prefix}--data-table--sort th {
-    height: rem(24px);
+    height: convert.to-rem(24px);
   }
 
   // Sortable Short
   .#{$prefix}--data-table--sm.#{$prefix}--data-table--sort th {
-    height: rem(32px);
+    height: convert.to-rem(32px);
   }
 
   // Sortable Medium
   .#{$prefix}--data-table--md.#{$prefix}--data-table--sort th {
-    height: rem(40px);
+    height: convert.to-rem(40px);
   }
 
   // Sortable Tall
   .#{$prefix}--data-table--xl.#{$prefix}--data-table--sort th {
-    height: rem(64px);
+    height: convert.to-rem(64px);
   }
 
   .#{$prefix}--data-table--xl.#{$prefix}--data-table--sort
     th
     .#{$prefix}--table-sort {
     display: inline-block;
-    height: rem(64px);
+    height: convert.to-rem(64px);
   }
 
   .#{$prefix}--data-table--xl .#{$prefix}--table-sort__icon-unsorted,
   .#{$prefix}--data-table--xl .#{$prefix}--table-sort__icon {
-    margin-top: rem(13px);
+    margin-top: convert.to-rem(13px);
   }
 
   // Windows HCM fix
