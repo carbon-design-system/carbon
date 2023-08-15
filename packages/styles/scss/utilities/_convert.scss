@@ -18,7 +18,7 @@ $base-font-size: 16px !default;
 /// @return {Number} Number with rem unit
 /// @access public
 /// @group utilities
-@function rem($px) {
+@function to-rem($px) {
   @if unit($px) != 'px' {
     @error "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
   }

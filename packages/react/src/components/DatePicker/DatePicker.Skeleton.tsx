@@ -14,21 +14,24 @@ export interface DatePickerSkeletonProps
   extends HTMLAttributes<HTMLDivElement> {
   // Specify whether the skeleton should be of range date picker.
   range?: boolean;
+
+  /**
+   * Specify whether the label should be hidden, or not
+   */
+  hideLabel?: boolean;
 }
 
 const DatePickerSkeleton = ({
   range,
   id,
+  hideLabel,
   className,
   ...rest
 }: DatePickerSkeletonProps) => {
   const prefix = usePrefix();
   const dateInput = (
     <div className={`${prefix}--date-picker-container`}>
-      {
-        /* eslint-disable jsx-a11y/label-has-for,jsx-a11y/label-has-associated-control */
-        <label className={`${prefix}--label`} htmlFor={id} />
-      }
+      {!hideLabel && <span className={`${prefix}--label`} id={id} />}
       <div className={`${prefix}--date-picker__input ${prefix}--skeleton`} />
     </div>
   );
@@ -73,6 +76,11 @@ DatePickerSkeleton.propTypes = {
    * Specify an optional className to add.
    */
   className: PropTypes.string,
+
+  /**
+   * Specify whether the label should be hidden, or not
+   */
+  hideLabel: PropTypes.bool,
 
   /**
    * Specify the id to add.

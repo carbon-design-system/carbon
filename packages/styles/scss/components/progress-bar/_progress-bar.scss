@@ -11,7 +11,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/visually-hidden' as *;
 @use '../../utilities/layout';
 
@@ -27,7 +27,7 @@
     @include type-style('body-compact-01');
 
     display: flex;
-    min-width: rem(48px);
+    min-width: convert.to-rem(48px);
     justify-content: space-between;
     color: $text-primary;
     margin-block-end: $spacing-03;
@@ -42,17 +42,17 @@
   .#{$prefix}--progress-bar__track {
     position: relative;
     width: 100%;
-    min-width: rem(48px);
-    height: rem(8px);
+    min-width: convert.to-rem(48px);
+    height: convert.to-rem(8px);
     background-color: $layer;
   }
 
   .#{$prefix}--progress-bar--big .#{$prefix}--progress-bar__track {
-    height: rem(8px);
+    height: convert.to-rem(8px);
   }
 
   .#{$prefix}--progress-bar--small .#{$prefix}--progress-bar__track {
-    height: rem(4px);
+    height: convert.to-rem(4px);
   }
 
   .#{$prefix}--progress-bar__bar {
