@@ -60,12 +60,12 @@ const InlineCheckbox = React.forwardRef(function InlineCheckbox(
         <label
           htmlFor={id}
           className={`${prefix}--checkbox-label`}
-          aria-label={ariaLabel}
           title={title}
           onClick={(evt) => {
             evt.stopPropagation();
-          }}
-        />
+          }}>
+          <span className={`${prefix}--visually-hidden`}>{ariaLabel}</span>
+        </label>
       }
     </div>
   );
