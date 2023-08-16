@@ -11,7 +11,7 @@
 @use '../../motion' as *;
 @use '../../config' as *;
 @use '../../utilities/component-tokens' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/layout';
 @use '../../spacing' as *;
@@ -28,9 +28,9 @@
       (
         size: (
           height: (
-            xs: rem(18px),
-            sm: rem(18px),
-            md: rem(24px),
+            xs: convert.to-rem(18px),
+            sm: convert.to-rem(18px),
+            md: convert.to-rem(24px),
           ),
         ),
       )
@@ -43,14 +43,14 @@
 
     display: inline-flex;
     // ensures tag stays pill shaped;
-    min-width: rem(32px);
+    min-width: convert.to-rem(32px);
     // restricts size of contained elements
     max-width: 100%;
     min-height: layout.size('height');
     align-items: center;
     justify-content: center;
     margin: $spacing-02;
-    border-radius: rem(15px);
+    border-radius: convert.to-rem(15px);
     cursor: default;
     padding-inline: $spacing-03;
     vertical-align: middle;
@@ -188,7 +188,7 @@
     justify-content: center;
     padding: 0;
     border: 0;
-    margin: 0 0 0 rem(2px);
+    margin: 0 0 0 convert.to-rem(2px);
     background-color: transparent;
     border-radius: 50%;
     color: currentColor;
@@ -202,8 +202,8 @@
   }
 
   .#{$prefix}--tag__custom-icon {
-    width: rem(16px);
-    height: rem(16px);
+    width: convert.to-rem(16px);
+    height: convert.to-rem(16px);
     flex-shrink: 0;
     padding: 0;
     border: 0;
@@ -245,7 +245,7 @@
   }
 
   .#{$prefix}--tag--sm .#{$prefix}--tag__close-icon {
-    margin-left: rem(5px);
+    margin-left: convert.to-rem(5px);
   }
 
   // Skeleton state
@@ -256,7 +256,7 @@
     );
 
     overflow: hidden;
-    width: rem(60px);
+    width: convert.to-rem(60px);
 
     // Safari specific bug (#7672)
     @media not all and (min-resolution: 0.001dpcm) {

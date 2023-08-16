@@ -14,7 +14,7 @@
 @use '../../type' as *;
 @use '../../layer' as *;
 @use '../../utilities/component-reset';
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/skeleton' as *;
 
 @mixin breadcrumb {
@@ -79,8 +79,8 @@
   // Overflow Menu overrides
   .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu {
     position: relative;
-    width: rem(20px);
-    height: rem(18px);
+    width: convert.to-rem(20px);
+    height: convert.to-rem(18px);
 
     &:focus {
       outline: 1px solid $focus;
@@ -94,7 +94,7 @@
     &::after {
       position: absolute;
       bottom: 2px;
-      width: rem(12px);
+      width: convert.to-rem(12px);
       height: 1px;
       background: $link-primary-hover;
       content: '';
@@ -133,7 +133,7 @@
     outline: none;
   }
 
-  $caret-size: rem(7px);
+  $caret-size: convert.to-rem(7px);
   .#{$prefix}--breadcrumb-menu-options.#{$prefix}--overflow-menu-options::after {
     top: -$caret-size;
     left: $caret-size * 2;
@@ -150,7 +150,7 @@
   .#{$prefix}--breadcrumb.#{$prefix}--skeleton .#{$prefix}--link {
     @include skeleton;
 
-    width: rem(100px);
+    width: convert.to-rem(100px);
     height: 1rem;
   }
 
