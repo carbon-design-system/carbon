@@ -4,9 +4,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Using custom styles in components
 
-As Shadow DOM (one of the Web Components specs that `carbon-web-components`
-uses) promises, styles that `carbon-web-components` defines does not affect
-styles in your application, or vice versa.
+As Shadow DOM (one of the Web Components specs that `@carbon/web-components` uses) promises, styles that `@carbon/web-components` defines does not affect styles in your application, or vice versa.
 
 However, in cases where your application or a Carbon-derived style guide wants
 to change the styles of our components, there are a few options.
@@ -17,17 +15,17 @@ to change the styles of our components, there are a few options.
 - [Using CSS Custom Properties](#using-css-custom-properties)
 - [Dependency injection](#dependency-injection)
 - [Creating derived components with different style](#creating-derived-components-with-different-style)
-- [CSS Shadow Parts](#css-shadow-parts)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 
 ## Using CSS Custom Properties
 
 Changes to CSS Custom Properties of the Carbon theme are reflected in the color
-scheme of `carbon-web-components` components:
+scheme of `@carbon/web-components` components:
 
 <iframe
-  src="https://codesandbox.io/embed/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/styling/theme-zoning?fontsize=14&hidenavigation=1&theme=light"
+  src="https://stackblitz.com/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/styling/theme-zoning?embed=1&file=src%2Findex.js&hideExplorer=1&hideNavigation=1&theme=light&terminalHeight=0&hidedevtools=1"
   style={{
     width: '100%',
     height: '700px',
@@ -71,42 +69,21 @@ footer {
  } // Emits all theme tokens in CSS Custom Properties
 ```
 
-## Dependency injection
+Some components such as `Button`, `Notification`, & `Tag` have specific tokens per theme
+that need to emitted in the styles. You can do this for example by adding the
+following:
 
-You can let our custom elements modules load alternate `CSSResult` module. Below
-example uses
-[Webpack `NormalModuleReplacementPlugin`](https://webpack.js.org/plugins/normal-module-replacement-plugin/)
-to let our custom elements modules load RTL version of `CSSResult` module that
-is shipped alongside with default `CSSResult` modules, instead of loading the
-default version:
-
-```javascript
-const reCssBundle = /\.css\.js$/i;
-
-...
-
-module.exports = {
-  ...
-  plugins: [
-    ...
-    new webpack.NormalModuleReplacementPlugin(reCssBundle, resource => {
-      resource.request = resource.request.replace(reCssBundle, '.rtl.css.js');
-    }),
-  ],
-  ...
-};
+```css
+@use "@carbon/styles/scss/reset";
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/themes";
+@use '@carbon/styles/scss/components/button/tokens' as button-tokens;
+@use '@carbon/styles/scss/components/notification/tokens' as notification-tokens;
+@use '@carbon/styles/scss/components/tag/tokens' as tag-tokens;
+@include theme.add-component-tokens(button-tokens.$button-tokens);
+@include theme.add-component-tokens(notification-tokens.$notification-tokens);
+@include theme.add-component-tokens(tag-tokens.$tag-tokens);
 ```
-
-<iframe
-  src="https://codesandbox.io/embed/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/rtl?fontsize=14&hidenavigation=1&theme=light"
-  style={{
-    width: '100%',
-    height: '500px',
-    border: 'solid rgba(0,0,0,0.1) 1px',
-    boxShadow: 'rgba(0,0,0,0.1) 0 1px 3px 0',
-  }}
-  title="carbon-web-components-getting-started"
-  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 ## Creating derived components with different style
 
@@ -131,7 +108,7 @@ class MyDropdown extends CDSDropdown {
 ```
 
 <iframe
-  src="https://codesandbox.io/embed/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/styling/custom-style?fontsize=14&hidenavigation=1&theme=light"
+  src="https://stackblitz.com/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/styling/custom-style?embed=1&file=src%2Findex.js&hideExplorer=1&hideNavigation=1&theme=light&terminalHeight=0&hidedevtools=1"
   style={{
     width: '100%',
     height: '500px',
@@ -140,10 +117,3 @@ class MyDropdown extends CDSDropdown {
   }}
   title="carbon-web-components-getting-started"
   sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
-
-## CSS Shadow Parts
-
-In the future, we'd like to support
-[CSS Shadow Parts](https://www.w3.org/TR/css-shadow-parts-1/) too, so you can
-use your application's CSS to affect `carbon-web-components` styles in a more
-flexible manner.

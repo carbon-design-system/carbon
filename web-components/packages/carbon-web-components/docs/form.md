@@ -25,7 +25,7 @@ button.addEventListener('click', () => {
 });
 ```
 
-[![Edit carbon-web-components with formdata event](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/form/basic)
+[![Edit carbon-web-components with formdata event](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/form/basic)
 
 ## Redux Form
 
