@@ -12,49 +12,6 @@ on:
       - completed
 
 jobs:
-  carbon-website:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          repository: carbon-design-system/carbon-website
-          ref: main
-      - name: Use Node.js 18.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18.x'
-          registry-url: 'https://registry.npmjs.org'
-      - name: Update dependencies
-        run: |
-          yarn upgrade \
-            @carbon/elements@next \
-            @carbon/pictograms@next \
-            @carbon/pictograms-react@next \
-            @carbon/icons-react@next \
-            @carbon/react@next
-      - name: Generate token
-        uses: tibdex/github-app-token@v1
-        id: generate_token
-        with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
-        with:
-          branch: 'release/update-carbon-deps'
-          commit-message: 'chore(release): update carbon deps'
-          delete-branch: true
-          title: 'chore(release): update carbon deps'
-          token: ${{ steps.generate_token.outputs.token }}
-          body: |
-            Automated pull request to update Carbon on the website
-
-            **Checklist**
-
-            - [ ] Verify package version bumps are accurate
-            - [ ] Verify CI passes as expected
-            - [ ] Verify no regressions on the website in the deploy preview
   design-language-website:
     runs-on: ubuntu-latest
     timeout-minutes: 15

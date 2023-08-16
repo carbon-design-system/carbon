@@ -110,9 +110,6 @@ git push upstream v11.2.0-rc.0
 
 - [ ] Verify that this triggers a run of the
       [Release Workflow](https://github.com/carbon-design-system/carbon/actions/workflows/release.yml)
-- [ ] Review and approve the Pull Request generated from this action on the
-      [Carbon Website](https://github.com/carbon-design-system/carbon-website)
-      to verify no breaking changes have occurred in this release
 
 #### Releasing another prerelease
 
@@ -165,7 +162,7 @@ git push upstream v11.2.0
 - [ ] Verify that this triggers a run of the
       [Release Workflow](https://github.com/carbon-design-system/carbon/actions/workflows/release.yml)
 - [ ] Review and approve the Pull Request generated from this action on the
-      [Carbon Website](https://github.com/carbon-design-system/carbon-website)
+      [gatsby-theme-carbon](https://github.com/carbon-design-system/gatsby-theme-carbon)
       to verify no breaking changes have occurred in this release. If the PR
       from the previous release was not merged, the existing PR will be updated.
 
