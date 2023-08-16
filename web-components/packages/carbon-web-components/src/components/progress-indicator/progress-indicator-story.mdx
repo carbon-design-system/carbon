@@ -4,10 +4,10 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Progress indicator
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/progress-indicator)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/progress-indicator)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/progress-indicator)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/progress-indicator)
 
 Progress indicator is a visual representation of a users progress through a set
 of steps. They guide the user through a number of steps in order to complete a
@@ -37,27 +37,22 @@ import '@carbon/web-components/es/components/progress-indicator/index.js';
   <cds-progress-step
     label-text="Label"
     secondary-label-text="Secondary label"
-    state="invalid"
-  ></cds-progress-step>
+    state="invalid"></cds-progress-step>
   <cds-progress-step
     label-text="Label"
     secondary-label-text="Secondary label"
-    state="complete"
-  ></cds-progress-step>
+    state="complete"></cds-progress-step>
   <cds-progress-step
     label-text="Label"
     secondary-label-text="Secondary label"
-    state="current"
-  ></cds-progress-step>
+    state="current"></cds-progress-step>
   <cds-progress-step
     disabled
     label-text="Label"
-    secondary-label-text="Secondary label"
-  ></cds-progress-step>
+    secondary-label-text="Secondary label"></cds-progress-step>
   <cds-progress-step
     label-text="Label"
-    secondary-label-text="Secondary label"
-  ></cds-progress-step>
+    secondary-label-text="Secondary label"></cds-progress-step>
 </cds-progress-indicator>
 ```
 
@@ -85,7 +80,7 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 ## `<cds-progress-step>` attributes and properties
 
 Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-progress-step disabled>`) and `false` means not setting the attribute (e.g.
-`<cds-progress-step>` without `disabled` attribute).
+`<cds-progress-step disabled>`) and `false` means not setting the attribute
+(e.g. `<cds-progress-step>` without `disabled` attribute).
 
 <Props of="cds-progress-step" />

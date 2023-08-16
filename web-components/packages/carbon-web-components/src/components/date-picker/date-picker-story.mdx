@@ -4,10 +4,10 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Date picker
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/date-picker)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/date-picker)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/date-picker)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/date-picker)
 
 Date and time pickers allow users to select a single or a range of dates and
 times.
@@ -29,7 +29,9 @@ import '@carbon/web-components/es/components/date-picker/index.js';
 
 ```html
 <cds-date-picker>
-  <cds-date-picker-input label-text="Date Picker label" placeholder="mm/dd/yyyy">
+  <cds-date-picker-input
+    label-text="Date Picker label"
+    placeholder="mm/dd/yyyy">
   </cds-date-picker-input>
 </cds-date-picker>
 ```
@@ -43,8 +45,7 @@ A single Date Picker consists of an input field and a calendar.
   <cds-date-picker-input
     kind="single"
     label-text="Date Picker label"
-    placeholder="mm/dd/yyyy"
-  >
+    placeholder="mm/dd/yyyy">
   </cds-date-picker-input>
 </cds-date-picker>
 ```
@@ -59,15 +60,13 @@ A range Date Picker consists of two input fields and a calendar.
     kind="from"
     label-text="Date Picker label"
     placeholder="mm/dd/yyyy"
-    size="lg"
-  >
+    size="lg">
   </cds-date-picker-input>
   <cds-date-picker-input
     kind="to"
     label-text="Date Picker label"
     placeholder="mm/dd/yyyy"
-    size="lg"
-  >
+    size="lg">
   </cds-date-picker-input>
 </cds-date-picker>
 ```

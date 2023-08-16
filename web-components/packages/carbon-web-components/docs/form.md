@@ -25,7 +25,7 @@ button.addEventListener('click', () => {
 });
 ```
 
-[![Edit carbon-web-components with formdata event](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/form/basic)
+[![Edit carbon-web-components with formdata event](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/form/basic)
 
 ## Redux Form
 
@@ -60,4 +60,4 @@ const FieldImpl = ({ input, label, type, meta: { touched, error } }) => {
 <Field name="username" type="text" component={FieldImpl} label="Username" />
 ```
 
-[![Edit carbon-web-components with Redux Form](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/form/redux-form)
+[![Edit carbon-web-components with Redux Form](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/feat/cwc-v2/examples/codesandbox/form/redux-form)

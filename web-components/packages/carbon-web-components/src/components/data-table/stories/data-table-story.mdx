@@ -4,17 +4,17 @@ import { cdnJs, cdnCss } from '../../../globals/internal/storybook-cdn';
 # Data table
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/data-table)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/data-table)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/data-table)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/data-table)
 
 Data table in `@carbon/web-components` focuses on primitives that constructs
 table UI, consisting of the following:
 
-| Tag                      | Description     | HTML tag counterpart |
-| ------------------------ | --------------- | -------------------- |
-| `<cds-table>`            | The container   | N/A                  |
+| Tag                       | Description     | HTML tag counterpart |
+| ------------------------- | --------------- | -------------------- |
+| `<cds-table>`             | The container   | N/A                  |
 | `<cds-table>`             | The table       | `<table>`            |
 | `<cds-table-head>`        | The header      | `<thead>`            |
 | `<cds-table-header-row>`  | The header row  | `<tr>` in `<thead>`  |
@@ -24,6 +24,7 @@ table UI, consisting of the following:
 | `<cds-table-cell>`        | The header cell | `<td>`               |
 
 ## Table of Contents
+
 - [Getting started](#getting-started)
 - [Sorting](#sorting)
   - [Programmatic sorting](#programmatic-sorting)
@@ -55,7 +56,8 @@ import '@carbon/web-components/es/components/data-table/index.js';
 
 ### HTML
 
-Here is an example of a basic data table with a header row with two columns, and three regular rows:
+Here is an example of a basic data table with a header row with two columns, and
+three regular rows:
 
 ```html
 <cds-table>
@@ -88,7 +90,8 @@ filtering, row selection, batch actions.
 
 For more information, see each usage section below for the functionality that
 you're interested in. If you want to see a full list of the arguments passed
-into your render prop, visit the [render props](#attributes-properties-and-events) section.
+into your render prop, visit the
+[render props](#attributes-properties-and-events) section.
 
 ### Table header
 
@@ -130,7 +133,6 @@ that would require a second line, you can use the `<cds-table-cell-content>`
 component as such:
 
 ```html
-
 <cds-table size="xl">
   ...
   <cds-table-row>
@@ -149,28 +151,30 @@ component as such:
 
 This requires the table to be of `size="xl"` to accomodate the content properly.
 
-
 ## Sorting
 
-In order to sort the rows in your data table, you will need to pass in the `is-sortable` prop to the `<cds-table>` component.
+In order to sort the rows in your data table, you will need to pass in the
+`is-sortable` prop to the `<cds-table>` component.
 
-Optionally, you can pass in `is-sortable` to each `<cds-table-header-cell>` that you want to be sorted, or not sorted.
-This is useful if you only want to enable sorting on some table column headers, but not all.
+Optionally, you can pass in `is-sortable` to each `<cds-table-header-cell>` that
+you want to be sorted, or not sorted. This is useful if you only want to enable
+sorting on some table column headers, but not all.
 
 ```html
-<cds-table is-sortable>
-...
-</cds-table>
+<cds-table is-sortable> ... </cds-table>
 ```
 
 ### Programmatic sorting
 
-You can also change the sort status of the table by querying the
-specific `<cds-table-header-cell>` you would like to sort. 
+You can also change the sort status of the table by querying the specific
+`<cds-table-header-cell>` you would like to sort.
 
 ```js
-  // sorting the first column
-  document.querySelectorAll('cds-table-header-cell')[0].shadowRoot.querySelector('button').click()
+// sorting the first column
+document
+  .querySelectorAll('cds-table-header-cell')[0]
+  .shadowRoot.querySelector('button')
+  .click();
 ```
 
 ### Custom sorting
@@ -199,10 +203,10 @@ As a result, `customSortRow` function would take on the following shape:
   document.querySelector('cds-table').customSortRow = customSortRow;
 ```
 
-If you would like to use a different locale for collator comparisons, 
-you can change the `locale` property and it will be updated accordingly.
-In case a different collator is needed, you can create a new object and 
-pass it in as such:
+If you would like to use a different locale for collator comparisons, you can
+change the `locale` property and it will be updated accordingly. In case a
+different collator is needed, you can create a new object and pass it in as
+such:
 
 ```js
   document.querySelector('cds-table').collator = // new collator here;
@@ -210,10 +214,11 @@ pass it in as such:
 
 ## Expansion
 
-The `<cds-table>` component supports row-level expansion when using the `expandable` prop.
-Setting the prop will apply the `expandable` prop to every row. This is useful when every
-row can be expandable. In order to make a row be expandable, it is necessary for the row to
-have a `<cds-table-expanded-row>` component directly following it.
+The `<cds-table>` component supports row-level expansion when using the
+`expandable` prop. Setting the prop will apply the `expandable` prop to every
+row. This is useful when every row can be expandable. In order to make a row be
+expandable, it is necessary for the row to have a `<cds-table-expanded-row>`
+component directly following it.
 
 ```html
 <cds-table expandable>
@@ -239,7 +244,7 @@ have a `<cds-table-expanded-row>` component directly following it.
     <cds-table-expanded-row>
       <h6>Expandable row content</h6>
       <div>Description here</div>
-    </cds-table-expanded-row>    
+    </cds-table-expanded-row>
     <cds-table-row>
       <cds-table-cell>Load Balancer 3</cds-table-cell>
       <cds-table-cell>Active</cds-table-cell>
@@ -247,166 +252,228 @@ have a `<cds-table-expanded-row>` component directly following it.
     <cds-table-expanded-row>
       <h6>Expandable row content</h6>
       <div>Description here</div>
-    </cds-table-expanded-row>    
+    </cds-table-expanded-row>
   </cds-table-body>
 </cds-table>
 ```
 
-In case you'd like a button to expand all the rows at once, you can
-use the `batch-expansion` prop in `<cds-table>`.
+In case you'd like a button to expand all the rows at once, you can use the
+`batch-expansion` prop in `<cds-table>`.
 
 In case you only want to set specific rows to be expandable, be sure to set the
-`expandable` prop only on that specific `<cds-table-row>` component, and have its 
-adjacent sibling `<cds-table-expanded-row>` directly following it.
+`expandable` prop only on that specific `<cds-table-row>` component, and have
+its adjacent sibling `<cds-table-expanded-row>` directly following it.
 
 ### Programmatic expansion
 
-You can programmatically trigger a row expansion by querying the desired row as such:
+You can programmatically trigger a row expansion by querying the desired row as
+such:
 
 ```js
-  document.querySelectorAll('cds-table-row')[0].shadowRoot.querySelector('.cds--table-expand__button').click();
+document
+  .querySelectorAll('cds-table-row')[0]
+  .shadowRoot.querySelector('.cds--table-expand__button')
+  .click();
 ```
 
 ## Selection
 
-The `<cds-table>` component supports row selection when using the `is-selectable` prop.
-Setting the prop will automatically set a numerical `selection-name` attribute to every row, 
-though this can also be customized with your own custom name.
+The `<cds-table>` component supports row selection when using the
+`is-selectable` prop. Setting the prop will automatically set a numerical
+`selection-name` attribute to every row, though this can also be customized with
+your own custom name.
 
 ```html
-  <cds-table is-selectable>
-  </cds-table>
+<cds-table is-selectable> </cds-table>
 ```
 
-By default, the `<cds-table-header-row>` component will render with its own checkbox, used to
-select all the rows at once. If you would like to disable this behavior, set the `hide-checkbox`
-prop within the component.
+By default, the `<cds-table-header-row>` component will render with its own
+checkbox, used to select all the rows at once. If you would like to disable this
+behavior, set the `hide-checkbox` prop within the component.
 
 ```html
-  <cds-table is-selectable>
-    ...
-      <cds-table-header-row hide-checkbox>
-        ...
-      </cds-table-header-row>
-    ...
-  </cds-table>
+<cds-table is-selectable>
+  ...
+  <cds-table-header-row hide-checkbox> ... </cds-table-header-row>
+  ...
+</cds-table>
 ```
 
 ### Programmatic selection
 
-You can programmatically trigger a row selection by querying the desired row as such:
+You can programmatically trigger a row selection by querying the desired row as
+such:
 
 ```js
-document.querySelectorAll('cds-table-row')[0].shadowRoot.querySelector('cds-checkbox').shadowRoot.querySelector('input').click()
+document
+  .querySelectorAll('cds-table-row')[0]
+  .shadowRoot.querySelector('cds-checkbox')
+  .shadowRoot.querySelector('input')
+  .click();
 ```
 
 ## Filtering
 
-Filtering in a `<cds-table>` is provided through usage of the `<cds-table-toolbar>` and
-the `<cds-table-toolbar-search>` component. Any input entered through
-`<cds-table-toolbar-search>` will be used in the built-in filtering function.
+Filtering in a `<cds-table>` is provided through usage of the
+`<cds-table-toolbar>` and the `<cds-table-toolbar-search>` component. Any input
+entered through `<cds-table-toolbar-search>` will be used in the built-in
+filtering function.
 
 ```html
-  <cds-table>
-    <cds-table-head>
-      <cds-table-toolbar slot="toolbar">
-        <cds-table-toolbar-content>
-          <cds-table-toolbar-search
-            placeholder="Filter table"></cds-table-toolbar-search>
-        </cds-table-toolbar-content>
-      </cds-table-toolbar>
-      ... header
-    </cds-table-head>
-    ... body and rows 
-  </cds-table>
+<cds-table>
+  <cds-table-head>
+    <cds-table-toolbar slot="toolbar">
+      <cds-table-toolbar-content>
+        <cds-table-toolbar-search
+          placeholder="Filter table"></cds-table-toolbar-search>
+      </cds-table-toolbar-content>
+    </cds-table-toolbar>
+    ... header
+  </cds-table-head>
+  ... body and rows
+</cds-table>
 ```
 
-Our built-in filtering function scans the rows' strings and attempts to
-match to the current search value input. If there are no matches in a given row,
-the current row will be filtered out.
+Our built-in filtering function scans the rows' strings and attempts to match to
+the current search value input. If there are no matches in a given row, the
+current row will be filtered out.
 
-In other words, a custom function will be doing its own string comparison per row,
-and thus it would have the following structure:
+In other words, a custom function will be doing its own string comparison per
+row, and thus it would have the following structure:
 
 ```js
 const newFilterRows = (rowText, searchString) => {
-  return // provide custom string comparison return boolean;
-}
+  return; // provide custom string comparison return boolean;
+};
 
-  document.querySelector('cds-table').filterRows = newFilterRows;
+document.querySelector('cds-table').filterRows = newFilterRows;
 ```
 
 ## Batch actions
 
-You can combine batch actions with the `<cds-table>` component to allow the user to 
-perform a single action on multiple selected rows.
+You can combine batch actions with the `<cds-table>` component to allow the user
+to perform a single action on multiple selected rows.
 
-This toolbar is highly customizable, as any action can be adhered to a `<cds-button>`
-and inserted into the toolbar. 
+This toolbar is highly customizable, as any action can be adhered to a
+`<cds-button>` and inserted into the toolbar.
 
-In the example below, we have custom `<cds-button>`s that we can customize to our liking
-by using the `onclick` property and passing it any custom functions. 
+In the example below, we have custom `<cds-button>`s that we can customize to
+our liking by using the `onclick` property and passing it any custom functions.
 
-The component has a built-in download function, that is called whenever one of the 
-`<cds-button>`s has a `download` attribute. The component will create a JSON object containing
-the currently selected rows, and trigger its download within the browser.
+The component has a built-in download function, that is called whenever one of
+the `<cds-button>`s has a `download` attribute. The component will create a JSON
+object containing the currently selected rows, and trigger its download within
+the browser.
 
 ```js
 const alertFunction = () => alert('Alert!');
 ```
 
 ```html
-  <cds-table>
-    <cds-table-head>
-      <cds-table-toolbar slot="toolbar">
-        <cds-table-batch-actions>
-          <cds-button>Delete <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" width="16" height="16" viewBox="0 0 32 32" slot="icon"><path d="M12 12H14V24H12zM18 12H20V24H18z"></path><path d="M4 6V8H6V28a2 2 0 002 2H24a2 2 0 002-2V8h2V6zM8 28V8H24V28zM12 2H20V4H12z"></path></svg>
-          </cds-button>
-          <cds-button tooltip-position="bottom" tooltip-text="Save" onclick="alertFunction()"
-            >Save <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" slot="icon"><path d="M13.9,4.6l-2.5-2.5C11.3,2.1,11.1,2,11,2H3C2.4,2,2,2.4,2,3v10c0,0.6,0.4,1,1,1h10c0.6,0,1-0.4,1-1V5	C14,4.9,13.9,4.7,13.9,4.6z M6,3h4v2H6V3z M10,13H6V9h4V13z M11,13V9c0-0.6-0.4-1-1-1H6C5.4,8,5,8.4,5,9v4H3V3h2v2c0,0.6,0.4,1,1,1	h4c0.6,0,1-0.4,1-1V3.2l2,2V13H11z"></path></svg></cds-button
-          >
-          <cds-button href="javascript:void 0" download="table-data.json">
-            Download <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" slot="icon"><path d="M13 7L12.3 6.3 8.5 10.1 8.5 1 7.5 1 7.5 10.1 3.7 6.3 3 7 8 12zM13 12v2H3v-2H2v2l0 0c0 .6.4 1 1 1h10c.6 0 1-.4 1-1l0 0v-2H13z"></path></svg>
-          </cds-button>
-        </cds-table-batch-actions>
-      </cds-table-toolbar>
-      ... headers
-    </cds-table-head>
-    ... body and rows
-  </cds-table>
+<cds-table>
+  <cds-table-head>
+    <cds-table-toolbar slot="toolbar">
+      <cds-table-batch-actions>
+        <cds-button
+          >Delete
+          <svg
+            focusable="false"
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            aria-hidden="true"
+            width="16"
+            height="16"
+            viewBox="0 0 32 32"
+            slot="icon">
+            <path d="M12 12H14V24H12zM18 12H20V24H18z"></path>
+            <path
+              d="M4 6V8H6V28a2 2 0 002 2H24a2 2 0 002-2V8h2V6zM8 28V8H24V28zM12 2H20V4H12z"></path>
+          </svg>
+        </cds-button>
+        <cds-button
+          tooltip-position="bottom"
+          tooltip-text="Save"
+          onclick="alertFunction()"
+          >Save
+          <svg
+            focusable="false"
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            aria-hidden="true"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            slot="icon">
+            <path
+              d="M13.9,4.6l-2.5-2.5C11.3,2.1,11.1,2,11,2H3C2.4,2,2,2.4,2,3v10c0,0.6,0.4,1,1,1h10c0.6,0,1-0.4,1-1V5	C14,4.9,13.9,4.7,13.9,4.6z M6,3h4v2H6V3z M10,13H6V9h4V13z M11,13V9c0-0.6-0.4-1-1-1H6C5.4,8,5,8.4,5,9v4H3V3h2v2c0,0.6,0.4,1,1,1	h4c0.6,0,1-0.4,1-1V3.2l2,2V13H11z"></path></svg
+        ></cds-button>
+        <cds-button href="javascript:void 0" download="table-data.json">
+          Download
+          <svg
+            focusable="false"
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            aria-hidden="true"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            slot="icon">
+            <path
+              d="M13 7L12.3 6.3 8.5 10.1 8.5 1 7.5 1 7.5 10.1 3.7 6.3 3 7 8 12zM13 12v2H3v-2H2v2l0 0c0 .6.4 1 1 1h10c.6 0 1-.4 1-1l0 0v-2H13z"></path>
+          </svg>
+        </cds-button>
+      </cds-table-batch-actions>
+    </cds-table-toolbar>
+    ... headers
+  </cds-table-head>
+  ... body and rows
+</cds-table>
 ```
 
-## Toolbar 
+## Toolbar
 
-As mentioned earlier, you can add a `<cds-table-toolbar-search>` component to the toolbar.
-You can also add an overflow menu and a button within the toolbar as such:
+As mentioned earlier, you can add a `<cds-table-toolbar-search>` component to
+the toolbar. You can also add an overflow menu and a button within the toolbar
+as such:
 
 ```html
-  <cds-table>
-    <cds-table-head>
-      <cds-table-toolbar slot="toolbar">
-        <cds-table-toolbar-content>
-          <cds-table-toolbar-search
-            placeholder="Filter table"></cds-table-toolbar-search>
-          <cds-overflow-menu toolbar-action>
-            <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" slot="icon"><path d="M13.5,8.4c0-0.1,0-0.3,0-0.4c0-0.1,0-0.3,0-0.4l1-0.8c0.4-0.3,0.4-0.9,0.2-1.3l-1.2-2C13.3,3.2,13,3,12.6,3	c-0.1,0-0.2,0-0.3,0.1l-1.2,0.4c-0.2-0.1-0.4-0.3-0.7-0.4l-0.3-1.3C10.1,1.3,9.7,1,9.2,1H6.8c-0.5,0-0.9,0.3-1,0.8L5.6,3.1	C5.3,3.2,5.1,3.3,4.9,3.4L3.7,3C3.6,3,3.5,3,3.4,3C3,3,2.7,3.2,2.5,3.5l-1.2,2C1.1,5.9,1.2,6.4,1.6,6.8l0.9,0.9c0,0.1,0,0.3,0,0.4	c0,0.1,0,0.3,0,0.4L1.6,9.2c-0.4,0.3-0.5,0.9-0.2,1.3l1.2,2C2.7,12.8,3,13,3.4,13c0.1,0,0.2,0,0.3-0.1l1.2-0.4	c0.2,0.1,0.4,0.3,0.7,0.4l0.3,1.3c0.1,0.5,0.5,0.8,1,0.8h2.4c0.5,0,0.9-0.3,1-0.8l0.3-1.3c0.2-0.1,0.4-0.2,0.7-0.4l1.2,0.4	c0.1,0,0.2,0.1,0.3,0.1c0.4,0,0.7-0.2,0.9-0.5l1.1-2c0.2-0.4,0.2-0.9-0.2-1.3L13.5,8.4z M12.6,12l-1.7-0.6c-0.4,0.3-0.9,0.6-1.4,0.8	L9.2,14H6.8l-0.4-1.8c-0.5-0.2-0.9-0.5-1.4-0.8L3.4,12l-1.2-2l1.4-1.2c-0.1-0.5-0.1-1.1,0-1.6L2.2,6l1.2-2l1.7,0.6	C5.5,4.2,6,4,6.5,3.8L6.8,2h2.4l0.4,1.8c0.5,0.2,0.9,0.5,1.4,0.8L12.6,4l1.2,2l-1.4,1.2c0.1,0.5,0.1,1.1,0,1.6l1.4,1.2L12.6,12z"></path><path d="M8,11c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3C11,9.6,9.7,11,8,11C8,11,8,11,8,11z M8,6C6.9,6,6,6.8,6,7.9C6,7.9,6,8,6,8	c0,1.1,0.8,2,1.9,2c0,0,0.1,0,0.1,0c1.1,0,2-0.8,2-1.9c0,0,0-0.1,0-0.1C10,6.9,9.2,6,8,6C8.1,6,8,6,8,6z"></path></svg>
-            <cds-overflow-menu-body>
-              <cds-overflow-menu-item
-                >Example 1</cds-overflow-menu-item
-              >
-              <cds-overflow-menu-item
-                >Example 2</cds-overflow-menu-item
-              >
-            </cds-overflow-menu-body>
-          </cds-overflow-menu>
-          <cds-button>Example button</cds-button>
-        </cds-table-toolbar-content>
-      </cds-table-toolbar>
-      ... header
-    </cds-table-head>
-    ... body and rows 
-  </cds-table>
-
+<cds-table>
+  <cds-table-head>
+    <cds-table-toolbar slot="toolbar">
+      <cds-table-toolbar-content>
+        <cds-table-toolbar-search
+          placeholder="Filter table"></cds-table-toolbar-search>
+        <cds-overflow-menu toolbar-action>
+          <svg
+            focusable="false"
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            aria-hidden="true"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            slot="icon">
+            <path
+              d="M13.5,8.4c0-0.1,0-0.3,0-0.4c0-0.1,0-0.3,0-0.4l1-0.8c0.4-0.3,0.4-0.9,0.2-1.3l-1.2-2C13.3,3.2,13,3,12.6,3	c-0.1,0-0.2,0-0.3,0.1l-1.2,0.4c-0.2-0.1-0.4-0.3-0.7-0.4l-0.3-1.3C10.1,1.3,9.7,1,9.2,1H6.8c-0.5,0-0.9,0.3-1,0.8L5.6,3.1	C5.3,3.2,5.1,3.3,4.9,3.4L3.7,3C3.6,3,3.5,3,3.4,3C3,3,2.7,3.2,2.5,3.5l-1.2,2C1.1,5.9,1.2,6.4,1.6,6.8l0.9,0.9c0,0.1,0,0.3,0,0.4	c0,0.1,0,0.3,0,0.4L1.6,9.2c-0.4,0.3-0.5,0.9-0.2,1.3l1.2,2C2.7,12.8,3,13,3.4,13c0.1,0,0.2,0,0.3-0.1l1.2-0.4	c0.2,0.1,0.4,0.3,0.7,0.4l0.3,1.3c0.1,0.5,0.5,0.8,1,0.8h2.4c0.5,0,0.9-0.3,1-0.8l0.3-1.3c0.2-0.1,0.4-0.2,0.7-0.4l1.2,0.4	c0.1,0,0.2,0.1,0.3,0.1c0.4,0,0.7-0.2,0.9-0.5l1.1-2c0.2-0.4,0.2-0.9-0.2-1.3L13.5,8.4z M12.6,12l-1.7-0.6c-0.4,0.3-0.9,0.6-1.4,0.8	L9.2,14H6.8l-0.4-1.8c-0.5-0.2-0.9-0.5-1.4-0.8L3.4,12l-1.2-2l1.4-1.2c-0.1-0.5-0.1-1.1,0-1.6L2.2,6l1.2-2l1.7,0.6	C5.5,4.2,6,4,6.5,3.8L6.8,2h2.4l0.4,1.8c0.5,0.2,0.9,0.5,1.4,0.8L12.6,4l1.2,2l-1.4,1.2c0.1,0.5,0.1,1.1,0,1.6l1.4,1.2L12.6,12z"></path>
+            <path
+              d="M8,11c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3C11,9.6,9.7,11,8,11C8,11,8,11,8,11z M8,6C6.9,6,6,6.8,6,7.9C6,7.9,6,8,6,8	c0,1.1,0.8,2,1.9,2c0,0,0.1,0,0.1,0c1.1,0,2-0.8,2-1.9c0,0,0-0.1,0-0.1C10,6.9,9.2,6,8,6C8.1,6,8,6,8,6z"></path>
+          </svg>
+          <cds-overflow-menu-body>
+            <cds-overflow-menu-item>Example 1</cds-overflow-menu-item>
+            <cds-overflow-menu-item>Example 2</cds-overflow-menu-item>
+          </cds-overflow-menu-body>
+        </cds-overflow-menu>
+        <cds-button>Example button</cds-button>
+      </cds-table-toolbar-content>
+    </cds-table-toolbar>
+    ... header
+  </cds-table-head>
+  ... body and rows
+</cds-table>
 ```
 
 ### Overflow Menu
@@ -415,54 +482,75 @@ An overflow menu can be added to the toolbar table row. To add an overflow menu,
 simply add a `<cds-table-cell>` containing the `<cds-overflow-menu>`.
 
 ```html
-  ...
-  <cds-table-row>
-    <cds-table-cell>Load Balancer 4</cds-table-cell>
-    <cds-table-cell>HTTP</cds-table-cell>
-    <cds-table-cell>443</cds-table-cell>
-    <cds-table-cell>Round robin</cds-table-cell>
-    <cds-table-cell>Mel's VM Groups</cds-table-cell>
-    <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
-    <cds-table-cell>
-      <cds-overflow-menu toolbar-action>
-        <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" width="16" height="16" viewBox="0 0 32 32" slot="icon"><circle cx="16" cy="8" r="2"></circle><circle cx="16" cy="16" r="2"></circle><circle cx="16" cy="24" r="2"></circle></svg>
-        <span slot="tooltip-content"> Options </span>
-        <cds-overflow-menu-body>
-          <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-          <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-          <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-        </cds-overflow-menu-body>
-      </cds-overflow-menu>
-    </cds-table-cell>
-  </cds-table-row>
-  ...
+...
+<cds-table-row>
+  <cds-table-cell>Load Balancer 4</cds-table-cell>
+  <cds-table-cell>HTTP</cds-table-cell>
+  <cds-table-cell>443</cds-table-cell>
+  <cds-table-cell>Round robin</cds-table-cell>
+  <cds-table-cell>Mel's VM Groups</cds-table-cell>
+  <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
+  <cds-table-cell>
+    <cds-overflow-menu toolbar-action>
+      <svg
+        focusable="false"
+        preserveAspectRatio="xMidYMid meet"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        aria-hidden="true"
+        width="16"
+        height="16"
+        viewBox="0 0 32 32"
+        slot="icon">
+        <circle cx="16" cy="8" r="2"></circle>
+        <circle cx="16" cy="16" r="2"></circle>
+        <circle cx="16" cy="24" r="2"></circle>
+      </svg>
+      <span slot="tooltip-content"> Options </span>
+      <cds-overflow-menu-body>
+        <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
+        <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
+        <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
+      </cds-overflow-menu-body>
+    </cds-overflow-menu>
+  </cds-table-cell>
+</cds-table-row>
+...
 ```
 
 ## Skeleton
 
-The default Skeleton table will render with 5 rows and columns, the header, and the toolbar.
+The default Skeleton table will render with 5 rows and columns, the header, and
+the toolbar.
 
 ```html
- <cds-table-skeleton> </cds-table-skeleton>
+<cds-table-skeleton> </cds-table-skeleton>
 ```
 
-Specify the number of rows and columns you need with the `row-count` and `column-count` attributes.
+Specify the number of rows and columns you need with the `row-count` and
+`column-count` attributes.
 
 ```html
- <cds-table-skeleton row-count="5" column-count="5"> </cds-table-skeleton>
+<cds-table-skeleton row-count="5" column-count="5"> </cds-table-skeleton>
 ```
-
 
 ### Custom headers
 
 Optionally, you can specify to have header titles on the Skeleton table.
 
 ```html
- <cds-table-skeleton> </cds-table-skeleton>
+<cds-table-skeleton> </cds-table-skeleton>
 ```
 
 ```javascript
-const customHeaders = ['Name', 'Protocol', 'Port', 'Rule', 'Attached groups', 'Status'];
+const customHeaders = [
+  'Name',
+  'Protocol',
+  'Port',
+  'Rule',
+  'Attached groups',
+  'Status',
+];
 document.querySelector('cds-table-skeleton').headers = customHeaders;
 ```
 

@@ -4,10 +4,10 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Link
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/link)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/link)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/link)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/link)
 
 Represents a link. Provided for convenience purpose, you can alternatively use
 `<a class="cds--link">` with Carbon style in place in light DOM.
@@ -39,11 +39,10 @@ Import the desired icon and incorporate with the link text:
 import Download16 from '@carbon/web-components/es/icons/download/16';
 
 function App() {
-  return (
-    html`<cds-link href="https://www.ibm.com"> Download ${Download16({ slot: 'icon' })}</cds-link>`
-  );
+  return html`<cds-link href="https://www.ibm.com">
+    Download ${Download16({ slot: 'icon' })}</cds-link
+  >`;
 }
-
 ```
 
 ## `<cds-link>` attributes and properties

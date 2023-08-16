@@ -5,10 +5,10 @@ import Add16 from '@carbon/web-components/es/icons/add/16';
 # Button
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/button)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/button)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/button)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/button)
 
 ## Overview
 
@@ -30,7 +30,7 @@ import '@carbon/web-components/es/components/button/index.js';
 ### SCSS (must include with JS import)
 
 ```css
- @use "@carbon/styles/scss/components/button";
+@use '@carbon/styles/scss/components/button';
 ```
 
 <Description markdown={`${cdnJs({ components: ['button'] })}`} />
@@ -41,6 +41,7 @@ import '@carbon/web-components/es/components/button/index.js';
 ```html
 <cds-button href="https://www.ibm.com"> Button </cds-button>
 ```
+
 ## Danger Buttons
 
 The danger button has three different styles: primary, tertiary, and ghost.
@@ -64,28 +65,21 @@ will be styled as primary or ghost buttons.
 
 Our Storybook example also shows off the Tooltip feature, explained later.
 
-```html
+````html
 import Add16 from '@carbon/web-components/es/icons/add/16';
 
-    <cds-button>
-      ${Add16({ slot: 'icon' })}
-    </cds-button>```
-
-## Set of Buttons
-
-You can wrap two `Button` elements in a `ButtonSet` when an action required by
-the user has more than one option. Always use a negative action button
-(secondary) paired with a positive action button (primary) in that order.
-Negative action buttons will be on the left. Positive action buttons should be
-on the right. When these two types buttons are paired in the correct order, they
-will automatically space themselves apart.
-
-```html
+<cds-button> ${Add16({ slot: 'icon' })} </cds-button>``` ## Set of Buttons You
+can wrap two `Button` elements in a `ButtonSet` when an action required by the
+user has more than one option. Always use a negative action button (secondary)
+paired with a positive action button (primary) in that order. Negative action
+buttons will be on the left. Positive action buttons should be on the right.
+When these two types buttons are paired in the correct order, they will
+automatically space themselves apart. ```html
 <cds-button-set>
   <cds-button href="https://www.ibm.com"> Secondary 1</cds-button>
   <cds-button href="https://www.ibm.com"> Primary 2</cds-button>
 </cds-button-set>
-```
+````
 
 ## Skeleton
 
@@ -99,28 +93,27 @@ For the skeleton variation, utilize `<cds-button-skeleton>`.
 
 ### Button `size`
 
-This attribute specifies which size the `Button` should be rendered at. Valid values
-are `sm`, `md`, `lg`, `xl` and `2xl`. If no `size` is specified, it
+This attribute specifies which size the `Button` should be rendered at. Valid
+values are `sm`, `md`, `lg`, `xl` and `2xl`. If no `size` is specified, it
 renders as `lg`.
 
 ### Button `tooltipAlignment`
 
-The `tooltip-alignment` attribute is used to change where the tooltip text and caret
-is rendered in relation to the `Button`. Accepted options are `start`, `center`,
-and `end`. The default alignment is `center`.
+The `tooltip-alignment` attribute is used to change where the tooltip text and
+caret is rendered in relation to the `Button`. Accepted options are `start`,
+`center`, and `end`. The default alignment is `center`.
 
 ### Button `tooltipPosition`
 
 When using an icon-only button, you may be in a situation where you need to
-change where the tooltip is positioned on the screen. `tooltip-position` takes in
-a position and will render the tooltip accordingly. Accepted options are `top`,
-`bottom`, `left`, and `right`. The default is position is `top`.
+change where the tooltip is positioned on the screen. `tooltip-position` takes
+in a position and will render the tooltip accordingly. Accepted options are
+`top`, `bottom`, `left`, and `right`. The default is position is `top`.
 
 ### ButtonSet `stacked`
 
-By passing in `stacked` to the `cds-button-set` component, you can arrange your two
-`Button` elements vertically
-
+By passing in `stacked` to the `cds-button-set` component, you can arrange your
+two `Button` elements vertically
 
 ## `<cds-button>` attributes and properties
 
