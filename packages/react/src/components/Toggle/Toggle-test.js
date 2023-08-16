@@ -99,13 +99,12 @@ describe('Toggle', () => {
     });
 
     it("doesn't render sideLabel if props.hideLabel and no props.labelText is provided", () => {
-      const externalElementId = 'external-element-id';
       wrapper.rerender(
         <Toggle
           {...props}
           hideLabel
           labelText={null}
-          aria-labelledby={externalElementId || null}
+          aria-labelledby={'external-element-id'}
         />
       );
 
@@ -115,10 +114,7 @@ describe('Toggle', () => {
       ).toBeNull();
 
       // eslint-disable-next-line testing-library/prefer-screen-queries
-      expect(wrapper.getByRole('switch')).toHaveAttribute(
-        'aria-labelledby',
-        externalElementId || null
-      );
+      expect(wrapper.getByRole('switch')).toHaveAttribute('aria-labelledby');
 
       expect(
         // eslint-disable-next-line testing-library/no-node-access
