@@ -105,7 +105,7 @@ describe('Toggle', () => {
           {...props}
           hideLabel
           labelText={null}
-          aria-labelledby={externalElementId}
+          aria-labelledby={externalElementId || null}
         />
       );
 
@@ -117,7 +117,7 @@ describe('Toggle', () => {
       // eslint-disable-next-line testing-library/prefer-screen-queries
       expect(wrapper.getByRole('switch')).toHaveAttribute(
         'aria-labelledby',
-        externalElementId
+        externalElementId || null
       );
 
       expect(
