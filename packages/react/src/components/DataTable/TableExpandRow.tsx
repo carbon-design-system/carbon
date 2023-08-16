@@ -12,7 +12,6 @@ import { ChevronRight } from '@carbon/icons-react';
 import TableCell from './TableCell';
 import { usePrefix } from '../../internal/usePrefix';
 import { TableRowProps } from './TableRow';
-import deprecate from '../../prop-types/deprecate';
 
 interface TableExpandRowProps extends PropsWithChildren<TableRowProps> {
   /**
@@ -107,21 +106,22 @@ const TableExpandRow = ({
 TableExpandRow.propTypes = {
   /**
    * Space separated list of one or more ID values referencing the TableExpandedRow(s) being controlled by the TableExpandRow
+   * TODO: make this required in v12
    */
-  ['aria-controls']: PropTypes.string.isRequired,
+  ['aria-controls']: PropTypes.string,
 
   /**
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */
-  ['aria-label']: PropTypes.string.isRequired,
+  ['aria-label']: PropTypes.string,
 
   /**
    * Deprecated, please use `aria-label` instead.
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */
-  ariaLabel: PropTypes.string.isRequired,
+  ariaLabel: PropTypes.string,
 
   children: PropTypes.node,
   className: PropTypes.string,

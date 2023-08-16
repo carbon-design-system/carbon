@@ -130,38 +130,20 @@ TableExpandHeader.propTypes = {
   /**
    * Space separated list of one or more ID values referencing the TableExpandedRow(s) being controlled by the TableExpandHeader
    */
-  ['aria-controls']: PropTypes.oneOfType([
-    requiredIfGivenPropIsTruthy(
-      'enableExpando',
-      PropTypes.string
-    ) as Validator<any>,
-    requiredIfGivenPropIsTruthy(
-      'enableToggle',
-      PropTypes.string
-    ) as Validator<any>,
-  ]),
+  ['aria-controls']: PropTypes.string,
 
   /**
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */
-  ['aria-label']: PropTypes.oneOfType([
-    requiredIfGivenPropIsTruthy(
-      'enableExpando',
-      PropTypes.string
-    ) as Validator<any>,
-    requiredIfGivenPropIsTruthy(
-      'enableToggle',
-      PropTypes.string
-    ) as Validator<any>,
-  ]),
+  ['aria-label']: PropTypes.string,
 
   /**
    * Deprecated, please use `aria-label` instead.
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */
-  ariaLabel: PropTypes.string.isRequired,
+  ariaLabel: PropTypes.string,
 
   children: PropTypes.node,
 

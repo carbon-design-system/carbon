@@ -52,6 +52,7 @@ export const Default = () => (
       headers,
       getHeaderProps,
       getRowProps,
+      getExpandedRowProps,
       getTableProps,
       getTableContainerProps,
     }) => (
@@ -73,9 +74,7 @@ export const Default = () => (
           <TableBody>
             {rows.map((row) => (
               <React.Fragment key={row.id}>
-                <TableExpandRow
-                  aria-controls={`expanded-row-${row.id}`}
-                  {...getRowProps({ row })}>
+                <TableExpandRow {...getRowProps({ row })}>
                   {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}
@@ -83,7 +82,7 @@ export const Default = () => (
                 <TableExpandedRow
                   colSpan={headers.length + 1}
                   className="demo-expanded-td"
-                  id={`expanded-row-${row.id}`}>
+                  {...getExpandedRowProps({ row })}>
                   <h6>Expandable row content</h6>
                   <div>Description here</div>
                 </TableExpandedRow>
@@ -106,6 +105,7 @@ export const BatchExpansion = () => (
       getHeaderProps,
       getExpandHeaderProps,
       getRowProps,
+      getExpandedRowProps,
       getTableProps,
       getTableContainerProps,
     }) => (
@@ -118,10 +118,6 @@ export const BatchExpansion = () => (
             <TableRow>
               <TableExpandHeader
                 enableToggle={true}
-                aria-label="expand row"
-                aria-controls={rows
-                  .map((row) => `expanded-row-${row.id}`)
-                  .join(' ')}
                 {...getExpandHeaderProps()}
               />
               {headers.map((header, i) => (
@@ -134,9 +130,7 @@ export const BatchExpansion = () => (
           <TableBody>
             {rows.map((row) => (
               <React.Fragment key={row.id}>
-                <TableExpandRow
-                  aria-controls={`expanded-row-${row.id}`}
-                  {...getRowProps({ row })}>
+                <TableExpandRow {...getRowProps({ row })}>
                   {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}
@@ -144,7 +138,7 @@ export const BatchExpansion = () => (
                 <TableExpandedRow
                   colSpan={headers.length + 1}
                   className="demo-expanded-td"
-                  id={`expanded-row-${row.id}`}>
+                  {...getExpandedRowProps({ row })}>
                   <h6>Expandable row content</h6>
                   <div>Description here</div>
                 </TableExpandedRow>
@@ -164,6 +158,7 @@ export const Playground = (args) => (
       headers,
       getHeaderProps,
       getRowProps,
+      getExpandedRowProps,
       getTableProps,
       getTableContainerProps,
     }) => (
@@ -186,7 +181,6 @@ export const Playground = (args) => (
             {rows.map((row) => (
               <React.Fragment key={row.id}>
                 <TableExpandRow
-                  aria-controls={`expanded-row-${row.id}`}
                   {...getRowProps({ row })}
                   onClick={action('onClick')}>
                   {row.cells.map((cell) => (
@@ -196,7 +190,7 @@ export const Playground = (args) => (
                 <TableExpandedRow
                   colSpan={headers.length + 1}
                   className="demo-expanded-td"
-                  id={`expanded-row-${row.id}`}>
+                  {...getExpandedRowProps({ row })}>
                   <h6>Expandable row content</h6>
                   <div>Description here</div>
                 </TableExpandedRow>
