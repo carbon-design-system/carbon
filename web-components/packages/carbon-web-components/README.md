@@ -80,12 +80,12 @@ version `v1.16.0`):
 <!-- By `latest` tag -->
 <script
   type="module"
-  src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/accordion.min.js"></script>
+  src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/accordion.min.js"></script>
 
 <!-- By specific version -->
 <script
   type="module"
-  src="https://1.www.s81c.com/common/carbon/web-components/version/v1.16.0/accordion.min.js"></script>
+  src="https://1.www.s81c.com/common/carbon/web-components/version/v2.0.0/accordion.min.js"></script>
 ```
 
 These are the list of available components via CDN:
@@ -139,12 +139,12 @@ extention from `.min.js` to `.rtl.min.js`. For example:
 <!-- By `latest` tag (RTL) -->
 <script
   type="module"
-  src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/accordion.rtl.min.js"></script>
+  src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/accordion.rtl.min.js"></script>
 
 <!-- By specific version (RTL) -->
 <script
   type="module"
-  src="https://1.www.s81c.com/common/carbon/web-components/version/v1.16.0/accordion.rtl.min.js"></script>
+  src="https://1.www.s81c.com/common/carbon/web-components/version/v2.0.0/accordion.rtl.min.js"></script>
 ```
 
 #### Basic usage
@@ -158,7 +158,7 @@ directly used once the script tag has been added to the page. For example:
   <head>
     <script
       type="module"
-      src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/dropdown.min.js"></script>
+      src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/dropdown.min.js"></script>
     <style type="text/css">
       // Suppresses the custom element until it has been defined
       cds-dropdown:not(:defined),
@@ -184,7 +184,7 @@ directly used once the script tag has been added to the page. For example:
 Our example at [CodeSandbox](https://codesandbox.io) shows usage with only CDN
 artifacts:
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/cdn)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/cdn)
 
 ### Using ES imports
 
@@ -272,8 +272,6 @@ turn, this also comes with the benefits of encapsulation within the Shadow DOM:
 
 ### Angular
 
-[![Edit carbon-web-components with Angular](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/angular)
-
 Angular users can use our components in the same manner as native HTML tags,
 too, once you add
 [`CUSTOM_ELEMENTS_SCHEMA`](https://angular.io/api/core/CUSTOM_ELEMENTS_SCHEMA)
@@ -309,7 +307,7 @@ application can use those `.d.ts` files:
 
 ### React
 
-[![Edit carbon-web-components with React](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/react)
+[![Edit carbon-web-components with React](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/react)
 
 You can use wrapper React components in
 `@carbon/web-components/es/components-react` generated
@@ -343,15 +341,15 @@ To run the wrapper React components in SSR environment requires Node `12.16.3`
 or above that supports
 ["conditional mapping" feature](https://github.com/jkrems/proposal-pkg-exports#2-conditional-mapping):
 
-[![Edit carbon-web-components with React SSR](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/react-ssr)
+[![Edit carbon-web-components with React SSR](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/react-ssr)
 
 Same Node version requirement applies to Next.js:
 
-[![Edit carbon-web-components with React SSR](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/next)
+[![Edit carbon-web-components with React SSR](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/next)
 
 ### Vue
 
-[![Edit carbon-web-components with Vue](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/vue)
+[![Edit carbon-web-components with Vue](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/vue)
 
 Vue users can use our components in the same manner as native HTML tags, without
 any additional steps!
@@ -360,16 +358,8 @@ any additional steps!
 
 1. Fork this repository and clone it
 2. `yarn install`
-3. `yarn wca && yarn storybook`
-
-## Running React/Angular/Vue Storybook demo
-
-- React: `yarn storybook:react` (Live demo:
-  https://web-components.carbondesignsystem.com/react/index.html)
-- Angular: `yarn storybook:angular` (Live demo:
-  https://web-components.carbondesignsystem.com/angular/index.html)
-- Vue: `yarn storybook:vue` (Live demo:
-  https://web-components.carbondesignsystem.com/vue/index.html)
+3. `cd packages/carbon-web-components`
+4. `yarn wca && yarn storybook`
 
 ## List of available components
 
@@ -403,7 +393,7 @@ To support IE, you need a couple additional setups:
 
 Here's an example code that shows such setup:
 
-[![Edit carbon-web-components with IE](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/ie)
+[![Edit carbon-web-components with IE](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/ie)
 
 ## Coding conventions
 
@@ -417,91 +407,3 @@ Can be found at [here](./src/coding-conventions.md).
 ```
 
 You'll see the build artifacts in `/path/to/carbon-web-components/es` directory.
-
-## Running unit test
-
-You can run unit test by:
-
-```
-> gulp test:unit
-```
-
-You can run specific test spec by:
-
-```
-> gulp test:unit -s tests/spec/dropdown_spec.ts
-```
-
-You can choose a browser (instead of Headless Chrome) by:
-
-```
-> gulp test:unit -b Firefox
-```
-
-You can keep the browser after the test (and re-run the test when files change)
-by:
-
-```
-> gulp test:unit -b Chrome -k
-```
-
-You can prevent code coverate instrumentation code from being generated by:
-
-```
-> gulp test:unit -d
-```
-
-You can update snapshots by:
-
-```
-> gulp test:unit --update-snapshot
-```
-
-Above options can be used together. This is useful to debug your code as you
-test:
-
-```
-> gulp test:unit -s tests/spec/dropdown_spec.ts -b Chrome -d -k
-```
-
-## Running build integration test
-
-You can run build integration test by:
-
-```
-> yarn test:integration:build
-```
-
-You can run a specific set of UI test steps (e.g. running
-`tests/integration/build/form-angular_steps.js` only) by:
-
-```
-> yarn test:integration:build form-angular_steps
-```
-
-By default Chrome runs in headless mode. You can show Chrome UI by:
-
-```
-> CI=false yarn test:integration:build
-```
-
-## Running UI integration test
-
-You can run UI integration test by:
-
-```
-> yarn test:integration:ui
-```
-
-You can run a specific set of UI test steps (e.g. running
-`tests/integration/ui/dropdown_steps.js` only) by:
-
-```
-> yarn test:integration:ui dropdown_steps
-```
-
-By default Chrome runs in headless mode. You can show Chrome UI by:
-
-```
-> CI=false yarn test:integration:ui
-```

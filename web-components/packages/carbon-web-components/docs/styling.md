@@ -11,16 +11,15 @@ to change the styles of our components, there are a few options.
 - [Using CSS Custom Properties](#using-css-custom-properties)
 - [Dependency injection](#dependency-injection)
 - [Creating derived components with different style](#creating-derived-components-with-different-style)
-- [CSS Shadow Parts](#css-shadow-parts)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Using CSS Custom Properties
 
 Changes to CSS Custom Properties of the Carbon theme are reflected in the color
-scheme of `carbon-web-components` components:
+scheme of `@carbon/web-components` components:
 
-[![Edit carbon-web-components with custom style](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/styling/theme-zoning)
+[![Edit carbon-web-components with custom style](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/styling/theme-zoning)
 
 For example, if you add CSS like below:
 
@@ -81,7 +80,7 @@ to let our custom elements modules load RTL version of `CSSResult` module that
 is shipped alongside with default `CSSResult` modules, instead of loading the
 default version:
 
-[![Edit carbon-web-components with custom style](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/rtl)
+[![Edit @carbon/web-components with custom style](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/rtl?)
 
 ```javascript
 const reCssBundle = /\.css\.js$/i;
@@ -106,7 +105,7 @@ You can create a derived class of our component and override
 [static `styles` property](https://lit-element.polymer-project.org/guide/styles#static-styles),
 like:
 
-[![Edit carbon-web-components with custom style](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/styling/custom-style)
+[![Edit @carbon/web-components with custom style](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/styling/custom-style)
 
 ```javascript
 import { css, customElement } from 'lit';
@@ -123,10 +122,3 @@ class MyDropdown extends CDSDropdown {
   `;
 }
 ```
-
-## CSS Shadow Parts
-
-In the future, we'd like to support
-[CSS Shadow Parts](https://www.w3.org/TR/css-shadow-parts-1/) too, so you can
-use your application's CSS to affect `carbon-web-components` styles in a more
-flexible manner.
