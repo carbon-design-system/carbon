@@ -16,6 +16,7 @@ const rootCarbonPath = [__dirname, '..', '..', '..', 'node_modules', '@carbon'];
 const modulesMap = new Map([
   ['colors', 'styles/scss/_colors.scss'],
   ['feature-flags', 'styles/scss/_feature-flags.scss'],
+  ['motion', 'styles/scss/_motion.scss'],
 ]);
 
 modulesMap.forEach((localModuleIndex, packageName) => {
