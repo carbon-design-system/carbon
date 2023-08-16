@@ -7,8 +7,9 @@
 
 'use strict';
 
-const { themes } = require('../../test-utils/env');
-const { snapshotStory } = require('../../test-utils/storybook');
+import { themes } from '../../test-utils/env';
+import { snapshotStory } from '../../test-utils/storybook';
+import { test } from '@playwright/test';
 
 test.describe('accordion', () => {
   themes.forEach((theme) => {
