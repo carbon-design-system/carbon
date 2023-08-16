@@ -15,7 +15,7 @@
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/layout';
 
 /// The Popover component is used for triggering a pop-up next to a trigger
@@ -68,10 +68,13 @@ $popover-offset: custom-property.get-var('popover-offset', 0rem);
 // Customize the dimensions of the caret by specifying its width or height.
 // These values will be flipped in left or right directions to have the
 // correct dimensions
-$popover-caret-width: custom-property.get-var('popover-caret-width', rem(12px));
+$popover-caret-width: custom-property.get-var(
+  'popover-caret-width',
+  convert.to-rem(12px)
+);
 $popover-caret-height: custom-property.get-var(
   'popover-caret-height',
-  rem(6px)
+  convert.to-rem(6px)
 );
 
 @mixin popover {
@@ -105,7 +108,10 @@ $popover-caret-height: custom-property.get-var(
 
   // Caret tip modifier
   .#{$prefix}--popover--caret {
-    @include custom-property.declaration('popover-offset', rem(10px));
+    @include custom-property.declaration(
+      'popover-offset',
+      convert.to-rem(10px)
+    );
   }
 
   // Popover, this element contains both the caret and the popover content
@@ -125,7 +131,7 @@ $popover-caret-height: custom-property.get-var(
     z-index: z('floating');
     display: none;
     width: max-content;
-    max-width: rem(368px);
+    max-width: convert.to-rem(368px);
     background-color: $popover-background-color;
     border-radius: $popover-border-radius;
     color: $popover-text-color;
@@ -473,8 +479,8 @@ $popover-caret-height: custom-property.get-var(
 
     position: relative;
     display: inline-flex;
-    width: rem(32px);
-    height: rem(32px);
+    width: convert.to-rem(32px);
+    height: convert.to-rem(32px);
     align-items: center;
     justify-content: center;
 

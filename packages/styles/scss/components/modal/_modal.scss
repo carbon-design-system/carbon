@@ -12,7 +12,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/component-reset';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
@@ -356,7 +356,7 @@
     bottom: $spacing-09;
     left: 0;
     width: 100%;
-    height: rem(32px);
+    height: convert.to-rem(32px);
     background-image: linear-gradient(to bottom, transparent, $layer);
     content: '';
     grid-column: 1/-1;
@@ -396,7 +396,7 @@
   // -----------------------------
   .#{$prefix}--modal-footer {
     display: flex;
-    height: rem(64px);
+    height: convert.to-rem(64px);
     justify-content: flex-end;
     margin-top: auto;
     grid-column: 1/-1;
@@ -405,10 +405,10 @@
 
   .#{$prefix}--modal-footer .#{$prefix}--btn {
     max-width: none;
-    height: rem(64px);
+    height: convert.to-rem(64px);
     flex: 0 1 50%;
     align-items: baseline;
-    padding-top: calc($spacing-05 - rem(2px));
+    padding-top: calc($spacing-05 - convert.to-rem(2px));
     padding-bottom: $spacing-07;
     margin: 0;
   }
@@ -429,7 +429,7 @@
     overflow: hidden;
     width: 3rem;
     height: 3rem;
-    padding: rem(12px);
+    padding: convert.to-rem(12px);
     border: 2px solid transparent;
     background-color: transparent;
     cursor: pointer;
@@ -450,8 +450,8 @@
   }
 
   .#{$prefix}--modal-close__icon {
-    width: rem(20px);
-    height: rem(20px);
+    width: convert.to-rem(20px);
+    height: convert.to-rem(20px);
     fill: $icon-primary;
   }
 
