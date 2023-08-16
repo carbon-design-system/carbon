@@ -239,7 +239,7 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     cursor: pointer;
     font-family: inherit;
     font-size: inherit;
-    text-align: left;
+    text-align: start;
     transition: max-height $duration-moderate-01 motion(standard, productive);
 
     @include type-style('body-compact-01');
