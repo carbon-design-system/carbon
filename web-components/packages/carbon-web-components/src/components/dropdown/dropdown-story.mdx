@@ -4,10 +4,10 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Dropdown
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/dropdown)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/dropdown)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/dropdown)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/dropdown)
 
 Dropdown presents a list of options that can be used to filter or sort existing
 content.
@@ -41,15 +41,17 @@ When user attempts to select a dropdown item, `cds-dropdown-beingselected` event
 fires on `<cds-dropdown>`, which has the following properties in the event
 details:
 
-| Property | Description                              |
-| -------- | ---------------------------------------- |
+| Property | Description                               |
+| -------- | ----------------------------------------- |
 | `item`   | The `<cds-dropdown-item>` being selected. |
 
 `cds-dropdown-beingselected` bubbles and is cancelable. Canceling this event
 means canceling change in selection.
 
 ## Inline dropdown
-You can place a `cds-dropdown` inline with other content by using the inline variant
+
+You can place a `cds-dropdown` inline with other content by using the inline
+variant
 
 ```html
 <cds-dropdown type="inline">
@@ -78,7 +80,7 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 ## `<cds-dropdown-item>` attributes and properties
 
 Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-dropdown-item disabled>`) and `false` means not setting the attribute (e.g.
-`<cds-dropdown-item>` without `disabled` attribute).
+`<cds-dropdown-item disabled>`) and `false` means not setting the attribute
+(e.g. `<cds-dropdown-item>` without `disabled` attribute).
 
 <Props of="cds-dropdown-item" />

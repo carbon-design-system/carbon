@@ -4,12 +4,13 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Combo box
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/combo-box)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/combo-box)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/combo-box)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/combo-box)
 
-A combobox allows the user to make a selection from a predefined list of options and is typically used when there are a large amount of options to choose from.
+A combobox allows the user to make a selection from a predefined list of options
+and is typically used when there are a large amount of options to choose from.
 
 ## Getting started
 
@@ -30,8 +31,7 @@ import '@carbon/web-components/es/components/combo-box/index.js';
 <cds-combo-box
   helper-text="This is some helper text"
   title-text="Combo box title"
-  label="Filter..."
->
+  label="Filter...">
   <cds-combo-box-item value="all">Option 1</cds-combo-box-item>
   <cds-combo-box-item value="cloudFoundry">Option 2</cds-combo-box-item>
   <cds-combo-box-item value="staging">Option 3</cds-combo-box-item>
@@ -45,18 +45,18 @@ import '@carbon/web-components/es/components/combo-box/index.js';
 
 ## Disabled
 
-A disabled combobox is available but should not be used as the sole means of conveying information. 
-For example, if the user must complete a previous form input before moving on to the combobox, 
-make sure to make that clear to the user via an error state on the previous form element in addition 
-to disabling the next element.
+A disabled combobox is available but should not be used as the sole means of
+conveying information. For example, if the user must complete a previous form
+input before moving on to the combobox, make sure to make that clear to the user
+via an error state on the previous form element in addition to disabling the
+next element.
 
 ```html
 <cds-combo-box
   helper-text="This is some helper text"
   title-text="Combo box title"
   label="Filter..."
-  disabled
->
+  disabled>
   <cds-combo-box-item value="all">Option 1</cds-combo-box-item>
   <cds-combo-box-item value="cloudFoundry">Option 2</cds-combo-box-item>
   <cds-combo-box-item value="staging">Option 3</cds-combo-box-item>
@@ -69,18 +69,20 @@ to disabling the next element.
 ```
 
 ## Labels and Helper Texts
-The label is not a replacement for a helper or title text under any circumstances including space restraints.
-A label should be used to provide additive information regarding the format of the input. 
-In all cases a helper text is required in addition to a placeholder.
+
+The label is not a replacement for a helper or title text under any
+circumstances including space restraints. A label should be used to provide
+additive information regarding the format of the input. In all cases a helper
+text is required in addition to a placeholder.
 
 ## Selection
 
 When user attempts to select a combo box item, `cds-combo-box-beingselected`
-event fires on `<cds-combo-box>`, which has the following properties in the event
-details:
+event fires on `<cds-combo-box>`, which has the following properties in the
+event details:
 
-| Property | Description                               |
-| -------- | ----------------------------------------- |
+| Property | Description                                |
+| -------- | ------------------------------------------ |
 | `item`   | The `<cds-combo-box-item>` being selected. |
 
 `cds-combo-box-beingselected` bubbles and is cancelable. Canceling this event

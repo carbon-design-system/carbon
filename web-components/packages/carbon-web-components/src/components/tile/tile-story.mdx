@@ -4,10 +4,10 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Tile
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/tile)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/tile)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/tile)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/tile)
 
 Tiles are a highly flexible component for displaying a wide variety of content,
 including informational, getting started, how-to, next steps, and more.
@@ -62,11 +62,10 @@ contain separate internal CTAs.
 
 ## Radio tile
 
-Radio tiles work like a radio button, where the entire tile is a click
-target. Radio tiles may contain internal CTAs (like links to docs) if the
-internal CTA is given its own click target. Radio tiles work well for
-presenting options to a user in a structured manner, such as a set of pricing
-plans.
+Radio tiles work like a radio button, where the entire tile is a click target.
+Radio tiles may contain internal CTAs (like links to docs) if the internal CTA
+is given its own click target. Radio tiles work well for presenting options to a
+user in a structured manner, such as a set of pricing plans.
 
 ```html
 <cds-tile-group>
@@ -112,26 +111,27 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
   </cds-selectable-tile>
   <cds-selectable-tile name="selectable-tile3">
     Selectable Tile 3
-  </cds-selectable-tile>  
-<cds-tile-group>
+  </cds-selectable-tile>
+  <cds-tile-group></cds-tile-group
+></cds-tile-group>
 ```
 
 ## Capturing tile selection
 
-If using the `cds-tile-group` component alongside either Radio or Selectable tiles,
-you can capture the events using an event listener for the following event names:
+If using the `cds-tile-group` component alongside either Radio or Selectable
+tiles, you can capture the events using an event listener for the following
+event names:
 
-* For radio tiles, capture:
+- For radio tiles, capture:
   - `cds-current-radio-tile-selection`
-* For selectable tiles, capture:
+- For selectable tiles, capture:
   - `cds-current-selectable-tile-selections`
 
 ```javascript
 document.addEventListener('cds-current-radio-tile-selection', (event) => {
   // use values from the detail object within the event
-})
+});
 ```
-
 
 ## Expandable tile
 
@@ -145,8 +145,7 @@ given its own click target.
 <cds-expandable-tile>
   <cds-tile-above-the-fold-content
     slot="above-the-fold-content"
-    style="height: 200px"
-  >
+    style="height: 200px">
     Above the fold content here
   </cds-tile-above-the-fold-content>
   <cds-tile-below-the-fold-content style="height: 300px">
@@ -155,8 +154,8 @@ given its own click target.
 </cds-expandable-tile>
 ```
 
-If the desired behavior is expanding only upon clicking the button with the caret icon,
-use the `with-interactive` attribute instead.
+If the desired behavior is expanding only upon clicking the button with the
+caret icon, use the `with-interactive` attribute instead.
 
 ## `<cds-expandable-tile>` attributes, properties and events
 

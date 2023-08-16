@@ -184,7 +184,7 @@ directly used once the script tag has been added to the page. For example:
 Our example at [CodeSandbox](https://codesandbox.io) shows usage with only CDN
 artifacts:
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/cdn)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/cdn)
 
 ### Using ES imports
 
@@ -224,7 +224,7 @@ yarn add @carbon/web-components
 
 Our example at [CodeSandbox](https://codesandbox.io) shows the most basic usage:
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic)
 
 The first thing you need is **setting up a module bundler** to resolve
 ECMAScript `import`s. The above example uses [Webpack](https://webpack.js.org),
@@ -307,7 +307,7 @@ application can use those `.d.ts` files:
 
 ### React
 
-[![Edit carbon-web-components with React](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/react)
+[![Edit carbon-web-components with React](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/react)
 
 You can use wrapper React components in
 `@carbon/web-components/es/components-react` generated
@@ -341,15 +341,15 @@ To run the wrapper React components in SSR environment requires Node `12.16.3`
 or above that supports
 ["conditional mapping" feature](https://github.com/jkrems/proposal-pkg-exports#2-conditional-mapping):
 
-[![Edit carbon-web-components with React SSR](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/react-ssr)
+[![Edit carbon-web-components with React SSR](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/react-ssr)
 
 Same Node version requirement applies to Next.js:
 
-[![Edit carbon-web-components with React SSR](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/next)
+[![Edit carbon-web-components with React SSR](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/next)
 
 ### Vue
 
-[![Edit carbon-web-components with Vue](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/vue)
+[![Edit carbon-web-components with Vue](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/vue)
 
 Vue users can use our components in the same manner as native HTML tags, without
 any additional steps!
@@ -393,7 +393,7 @@ To support IE, you need a couple additional setups:
 
 Here's an example code that shows such setup:
 
-[![Edit carbon-web-components with IE](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/ie)
+[![Edit carbon-web-components with IE](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/ie)
 
 ## Coding conventions
 
