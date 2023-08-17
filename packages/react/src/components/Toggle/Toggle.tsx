@@ -184,10 +184,11 @@ export function Toggle({
         role="switch"
         type="button"
         aria-checked={checked}
-        aria-labelledby={ariaLabelledby}
+        aria-labelledby={id}
         disabled={disabled}
         onClick={handleClick}
       />
+      {console.log(ariaLabelledby ? ariaLabelledby : id, 'here')}
       <LabelComponent
         htmlFor={ariaLabelledby ? undefined : id}
         className={`${prefix}--toggle__label`}>
