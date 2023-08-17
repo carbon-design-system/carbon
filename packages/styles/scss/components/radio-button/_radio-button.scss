@@ -20,7 +20,7 @@
 @use '../../utilities/visually-hidden' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/skeleton' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 
 /// @type Number
 /// @access public
@@ -81,11 +81,12 @@ $radio-border-width: 1px !default;
   .#{$prefix}--radio-button__appearance {
     @include reset;
 
-    width: rem(18px);
-    height: rem(18px);
+    width: convert.to-rem(18px);
+    height: convert.to-rem(18px);
     flex-shrink: 0;
     border: $radio-border-width solid $icon-primary;
-    margin: rem(1px) $spacing-03 rem(2px) rem(2px);
+    margin: convert.to-rem(1px) $spacing-03 convert.to-rem(2px)
+      convert.to-rem(2px);
     background-color: transparent;
     border-radius: 50%;
   }
@@ -163,11 +164,11 @@ $radio-border-width: 1px !default;
   .#{$prefix}--radio-button__validation-msg {
     display: none;
     align-items: flex-end;
-    margin-top: rem(6px);
+    margin-top: convert.to-rem(6px);
   }
 
   .#{$prefix}--radio-button__invalid-icon {
-    margin: 0 rem(1px) 0 rem(3px);
+    margin: 0 convert.to-rem(1px) 0 convert.to-rem(3px);
     fill: $support-error;
   }
 
@@ -206,7 +207,7 @@ $radio-border-width: 1px !default;
   }
 
   .#{$prefix}--radio-button-group ~ .#{$prefix}--form__helper-text {
-    margin-top: rem(6px);
+    margin-top: convert.to-rem(6px);
   }
 
   // Focus
@@ -222,8 +223,8 @@ $radio-border-width: 1px !default;
   .#{$prefix}--radio-button__label.#{$prefix}--skeleton {
     @include skeleton;
 
-    width: rem(100px);
-    height: rem(18px);
+    width: convert.to-rem(100px);
+    height: convert.to-rem(18px);
   }
 
   .#{$prefix}--radio-button__label.#{$prefix}--skeleton
