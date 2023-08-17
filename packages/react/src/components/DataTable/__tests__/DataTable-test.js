@@ -35,28 +35,32 @@ import { render, screen, within } from '@testing-library/react';
 const getLastCallFor = (mocker) =>
   mocker.mock.calls[mocker.mock.calls.length - 1];
 
+const onSelectAllFn = jest.fn();
+
+const rows = [
+  {
+    id: 'b',
+    fieldA: 'Field 2:A',
+    fieldB: 'Field 2:B',
+  },
+  {
+    id: 'a',
+    fieldA: 'Field 1:A',
+    fieldB: 'Field 1:B',
+  },
+  {
+    id: 'c',
+    fieldA: 'Field 3:A',
+    fieldB: 'Field 3:B',
+  },
+];
+
 describe('DataTable', () => {
   let mockProps;
 
   beforeEach(() => {
     mockProps = {
-      rows: [
-        {
-          id: 'b',
-          fieldA: 'Field 2:A',
-          fieldB: 'Field 2:B',
-        },
-        {
-          id: 'a',
-          fieldA: 'Field 1:A',
-          fieldB: 'Field 1:B',
-        },
-        {
-          id: 'c',
-          fieldA: 'Field 3:A',
-          fieldB: 'Field 3:B',
-        },
-      ],
+      rows,
       headers: [
         {
           key: 'fieldA',
@@ -334,7 +338,10 @@ describe('DataTable', () => {
             }) => (
               <TableContainer title="DataTable with selection">
                 <TableToolbar>
-                  <TableBatchActions {...getBatchActionProps()}>
+                  <TableBatchActions
+                    {...getBatchActionProps({
+                      onSelectAll: onSelectAllFn,
+                    })}>
                     <TableBatchAction onClick={jest.fn()}>
                       Ghost
                     </TableBatchAction>
@@ -451,6 +458,18 @@ describe('DataTable', () => {
         expect(selectAllCheckbox).not.toBeChecked();
         const { selectedRows } = getLastCallFor(mockProps.render)[0];
         expect(selectedRows.length).toBe(0);
+      });
+
+      it('should call the onSelectAll prop if supplied to TableBatchAction component', async () => {
+        render(<DataTable {...mockProps} />);
+        const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
+
+        await userEvent.click(selectAllCheckbox);
+        expect(selectAllCheckbox).toBeChecked();
+
+        const selectAllButton = screen.getByText(`Select all (${rows.length})`);
+        await userEvent.click(selectAllButton);
+        expect(onSelectAllFn).toHaveBeenCalledTimes(1);
       });
     });
 
