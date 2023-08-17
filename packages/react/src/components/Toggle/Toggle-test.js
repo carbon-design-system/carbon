@@ -20,6 +20,7 @@ describe('Toggle', () => {
     labelText: 'Toggle label',
     toggled: false,
     onToggle: () => {},
+    ariaLabelledBy: 'aria-labelledby',
   };
   let wrapper;
 
@@ -99,13 +100,13 @@ describe('Toggle', () => {
     });
 
     it("doesn't render sideLabel if props.hideLabel and no props.labelText is provided", () => {
-      const externalElementId = 'external-element-id';
       wrapper.rerender(
         <Toggle
+          role="switch"
           {...props}
           hideLabel
           labelText={null}
-          aria-labelledby={externalElementId}
+          aria-labelledby={props.ariaLabelledBy}
         />
       );
 
@@ -117,7 +118,7 @@ describe('Toggle', () => {
       // eslint-disable-next-line testing-library/prefer-screen-queries
       expect(wrapper.getByRole('switch')).toHaveAttribute(
         'aria-labelledby',
-        externalElementId
+        'aria-labelledby'
       );
 
       expect(
