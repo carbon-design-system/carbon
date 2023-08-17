@@ -125,8 +125,8 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile--clickable.#{$prefix}--link--disabled
     .#{$prefix}--tile--disabled-icon {
     position: absolute;
-    right: layout.density('padding-inline');
-    bottom: layout.density('padding-inline');
+    inset-block-end: layout.density('padding-inline');
+    inset-inline-end: layout.density('padding-inline');
   }
 
   .#{$prefix}--tile--clickable .#{$prefix}--tile--icon {
@@ -157,11 +157,11 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
   .#{$prefix}--tile__checkmark {
     position: absolute;
-    top: layout.density('padding-inline');
-    right: layout.density('padding-inline');
     height: 1rem;
     border: none;
     background: transparent;
+    inset-block-start: layout.density('padding-inline');
+    inset-inline-end: layout.density('padding-inline');
     opacity: 0;
     transition: $duration-fast-02 motion(standard, productive);
 
@@ -181,13 +181,13 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
   .#{$prefix}--tile__chevron {
     position: absolute;
-    right: 0;
-    bottom: 0;
     display: flex;
     width: $-icon-container-size;
     height: $-icon-container-size;
     align-items: center;
     justify-content: center;
+    inset-block-end: 0;
+    inset-inline-end: 0;
 
     svg {
       fill: $icon-primary;
@@ -211,13 +211,13 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     @include button-reset.reset;
 
     position: absolute;
-    right: 0;
-    bottom: 0;
     display: flex;
     width: $-icon-container-size;
     height: $-icon-container-size;
     align-items: center;
     justify-content: center;
+    inset-block-end: 0;
+    inset-inline-end: 0;
 
     &:focus {
       outline: 2px solid $focus;
@@ -239,7 +239,7 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     cursor: pointer;
     font-family: inherit;
     font-size: inherit;
-    text-align: left;
+    text-align: start;
     transition: max-height $duration-moderate-01 motion(standard, productive);
 
     @include type-style('body-compact-01');
