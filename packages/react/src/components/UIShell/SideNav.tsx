@@ -23,6 +23,8 @@ import { keys, match } from '../../internal/keyboard';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useWindowEvent } from '../../internal/useEvent';
 import { useDelayedState } from '../../internal/useDelayedState';
+import { breakpoints } from '@carbon/layout';
+import { useMatchMedia } from '../../internal/useMatchMedia';
 // TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
 
@@ -224,6 +226,9 @@ function SideNavRenderFunction(
     }
   });
 
+  const lgMediaQuery = `(min-width: ${breakpoints.lg.width})`;
+  const isLg = useMatchMedia(lgMediaQuery);
+
   return (
     <SideNavContext.Provider value={{ isRail }}>
       {isFixedNav ? null : (
@@ -234,7 +239,7 @@ function SideNavRenderFunction(
         tabIndex={-1}
         ref={navRef}
         className={`${prefix}--side-nav__navigation ${className}`}
-        inert={!isRail && (expanded ? undefined : -1)}
+        inert={!isRail && (expanded || isLg ? undefined : -1)}
         {...accessibilityLabel}
         {...eventHandlers}
         {...other}>
