@@ -1,7 +1,7 @@
 {
   "name": "@carbon/icon-helpers",
   "description": "Helpers used alongside icons for digital and software products using the Carbon Design System",
-  "version": "10.28.1",
+  "version": "10.28.2",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -33,7 +33,7 @@
     "clean": "rimraf es lib umd"
   },
   "devDependencies": {
-    "@carbon/cli": "^10.34.1",
+    "@carbon/cli": "^10.34.2",
     "rimraf": "^3.0.0"
   },
   "sideEffects": false
