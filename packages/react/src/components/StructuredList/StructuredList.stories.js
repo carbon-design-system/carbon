@@ -105,7 +105,7 @@ Default.argTypes = {
 export const Selection = (args) => {
   const structuredListBodyRowGenerator = (numRows) => {
     return Array.apply(null, Array(numRows)).map((n, i) => (
-      <StructuredListRow key={`row-${i}`} aria-busy="true">
+      <StructuredListRow key={`row-${i}`}>
         <StructuredListCell>Row {i}</StructuredListCell>
         <StructuredListCell>Row {i}</StructuredListCell>
         <StructuredListCell>
