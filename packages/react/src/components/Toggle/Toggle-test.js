@@ -20,7 +20,6 @@ describe('Toggle', () => {
     labelText: 'Toggle label',
     toggled: false,
     onToggle: () => {},
-    ariaLabelledBy: 'aria-labelledby',
   };
   let wrapper;
 
@@ -106,7 +105,7 @@ describe('Toggle', () => {
           {...props}
           hideLabel
           labelText={null}
-          aria-labelledby={props.ariaLabelledBy}
+          aria-labelledby={props.id}
         />
       );
 
@@ -118,7 +117,7 @@ describe('Toggle', () => {
       // eslint-disable-next-line testing-library/prefer-screen-queries
       expect(wrapper.getByRole('switch')).toHaveAttribute(
         'aria-labelledby',
-        'aria-labelledby'
+        props.id
       );
 
       expect(
