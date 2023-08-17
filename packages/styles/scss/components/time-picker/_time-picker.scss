@@ -12,7 +12,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/placeholder-colors' as *;
 
@@ -57,7 +57,7 @@
   .#{$prefix}--time-picker .#{$prefix}--select-input {
     width: auto;
     min-width: auto;
-    padding-right: rem(48px);
+    padding-right: convert.to-rem(48px);
     margin: 0;
     line-height: 1;
   }
@@ -68,7 +68,7 @@
 
     display: flex;
     width: 4.875rem;
-    height: rem(40px);
+    height: convert.to-rem(40px);
     align-items: center;
     transition: outline $duration-fast-01 motion(standard, productive),
       background-color $duration-fast-01 motion(standard, productive);
@@ -101,14 +101,14 @@
 
   .#{$prefix}--time-picker--sm .#{$prefix}--select-input,
   .#{$prefix}--time-picker--sm .#{$prefix}--time-picker__input-field {
-    height: rem(32px);
-    max-height: rem(32px);
+    height: convert.to-rem(32px);
+    max-height: convert.to-rem(32px);
   }
 
   .#{$prefix}--time-picker--lg .#{$prefix}--select-input,
   .#{$prefix}--time-picker--lg .#{$prefix}--time-picker__input-field {
-    height: rem(48px);
-    max-height: rem(48px);
+    height: convert.to-rem(48px);
+    max-height: convert.to-rem(48px);
   }
 
   // readonly

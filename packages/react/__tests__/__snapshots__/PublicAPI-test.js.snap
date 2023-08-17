@@ -1406,6 +1406,26 @@ Map {
       "isFullWidth": Object {
         "type": "bool",
       },
+      "launcherButtonRef": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "current": Object {
+                    "type": "any",
+                  },
+                },
+              ],
+              "type": "shape",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "onClose": Object {
         "type": "func",
       },
@@ -2762,6 +2782,9 @@ Map {
     "propTypes": Object {
       "className": Object {
         "type": "string",
+      },
+      "hideLabel": Object {
+        "type": "bool",
       },
       "id": Object {
         "type": "string",
@@ -4709,6 +4732,26 @@ Map {
       },
       "isFullWidth": Object {
         "type": "bool",
+      },
+      "launcherButtonRef": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "current": Object {
+                    "type": "any",
+                  },
+                },
+              ],
+              "type": "shape",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "modalAriaLabel": Object {
         "type": "string",
@@ -7366,6 +7409,9 @@ Map {
         "type": "bool",
       },
       "label": [Function],
+      "onClick": Object {
+        "type": "func",
+      },
       "onKeyDown": Object {
         "type": "func",
       },

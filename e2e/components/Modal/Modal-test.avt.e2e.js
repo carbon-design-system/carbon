@@ -31,12 +31,12 @@ test.describe('Modal @avt', () => {
       },
     });
 
+    const button = page.getByRole('button', { name: 'Launch modal' });
+
     // Open the modal via keyboard navigation
     await page.keyboard.press('Tab');
-    await expect(
-      page.getByRole('button', { name: 'Launch modal' })
-    ).toBeFocused();
-    page.getByRole('button', { name: 'Launch modal' }).press('Enter');
+    await expect(button).toBeFocused();
+    button.press('Enter');
 
     // The first interactive item in the modal should be focused once the modal is open
     await expect(
@@ -67,9 +67,8 @@ test.describe('Modal @avt', () => {
 
     // The modal should no longer be open/visisble
     await expect(page.getByRole('dialog')).not.toBeVisible();
-    // Focus moves to the body
-    // TODO: on close of the modal, focus should return to the element that opened the modal, see https://github.com/carbon-design-system/carbon/issues/13680
-    await expect(page.locator('body')).toBeFocused();
+    // Focus moves to the button that opened the Modal
+    await expect(button).toBeFocused();
   });
 
   test('danger modal - keyboard nav', async ({ page }) => {

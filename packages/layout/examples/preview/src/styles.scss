@@ -8,8 +8,8 @@ body {
 // Conversion
 //------------------------------------------------------------------------------
 .convert-box {
-  width: rem(48px);
-  height: rem(48px);
+  width: to-rem(48px);
+  height: to-rem(48px);
   background-color: black;
 }
 

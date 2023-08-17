@@ -50,7 +50,7 @@ test.describe('DatePicker @avt', () => {
   });
 
   // skipping for now due to accessibility violation
-  test.skip('skeleton state @avt', async ({ page }) => {
+  test('skeleton state @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'DatePicker',
       id: 'components-datepicker--skeleton',
@@ -63,7 +63,7 @@ test.describe('DatePicker @avt', () => {
   });
 
   // skipping for now due to accessibility violation
-  test.skip('open state @avt', async ({ page }) => {
+  test('open state @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'DatePicker',
       id: 'components-datepicker--playground',

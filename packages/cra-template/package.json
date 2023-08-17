@@ -1,6 +1,6 @@
 {
   "name": "@carbon/cra-template",
-  "version": "0.1.0",
+  "version": "0.2.0-rc.0",
   "description": "The Carbon Design System template for Create React App",
   "license": "Apache-2.0",
   "engines": {
