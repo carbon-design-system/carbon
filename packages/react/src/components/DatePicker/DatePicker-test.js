@@ -201,13 +201,13 @@ describe('Simple date picker', () => {
 
     it('should initialize a calendar when using react.lazy', async () => {
       LazyDatePicker = React.lazy(() =>
-        import('carbon-components-react').then((module) => ({
+        import('@carbon/react').then((module) => ({
           default: module.DatePicker,
         }))
       );
 
       LazyDatePickerInput = React.lazy(() =>
-        import('carbon-components-react').then((module) => ({
+        import('@carbon/react').then((module) => ({
           default: module.DatePickerInput,
         }))
       );
@@ -222,7 +222,6 @@ describe('Simple date picker', () => {
           </LazyDatePicker>
         </React.Suspense>
       );
-
       const labeledElement = await screen.findByLabelText('Date Picker label');
       expect(labeledElement).toBeInTheDocument();
 
