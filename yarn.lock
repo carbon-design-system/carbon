@@ -2137,7 +2137,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/react@^1.36.0, @carbon/react@workspace:packages/react":
+"@carbon/react@^1.34.0, @carbon/react@^1.36.0, @carbon/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@carbon/react@workspace:packages/react"
   dependencies:
