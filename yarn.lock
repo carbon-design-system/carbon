@@ -2137,7 +2137,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/react@^1.36.0, @carbon/react@workspace:packages/react":
+"@carbon/react@^1.34.0, @carbon/react@^1.36.0, @carbon/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@carbon/react@workspace:packages/react"
   dependencies:
@@ -17675,6 +17675,23 @@ __metadata:
   checksum: 7cae75c8cd9a50f57dadd77482359f659eaebac0319dd9368bcd1714f55e65badd6929ca58569da2b6494ef13fdd5598cd700b1eba23f8b79c5f19d195a3ecf7
   languageName: node
   linkType: hard
+
+"incremental-migration-vite@workspace:examples/incremental-migration-vite":
+  version: 0.0.0-use.local
+  resolution: "incremental-migration-vite@workspace:examples/incremental-migration-vite"
+  dependencies:
+    "@carbon/icons-react": ^10.49.0
+    "@carbon/react": ^1.34.0
+    "@vitejs/plugin-react": 4.0.0
+    carbon-components: ^10.57.0
+    carbon-components-react: ^7.57.0
+    carbon-icons: ^7.0.7
+    react: 18.2.0
+    react-dom: 18.2.0
+    sass: ^1.51.0
+    vite: ^4.3.8
+  languageName: unknown
+  linkType: soft
 
 "incremental-migration@workspace:examples/incremental-migration":
   version: 0.0.0-use.local
