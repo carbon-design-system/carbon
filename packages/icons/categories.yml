@@ -45,6 +45,7 @@ categories:
           - settings
           - settings--adjust
           - settings--check
+          - settings--edit
           - settings--services
           - settings--view
           - shrink-screen
@@ -216,9 +217,11 @@ categories:
           - text--kerning
           - text--leading
           - text--line-spacing
+          - text--long-paragraph
           - text--new-line
           - text--scale
           - text--selection
+          - text--short-paragraph
           - text--small-caps
           - text--strikethrough
           - text--subscript
@@ -237,6 +240,7 @@ categories:
           - add
           - add--alt
           - add--filled
+          - add--large
           - apps
           - arrow--down
           - arrow--down-left
@@ -256,6 +260,7 @@ categories:
           - chevron--up
           - close
           - close--filled
+          - close--large
           - close--outline
           - down-to-bottom
           - draggable
@@ -268,6 +273,7 @@ categories:
           - select--window
           - subtract
           - subtract--alt
+          - subtract--large
           - switcher
           - up-to-top
           - zoom--area
@@ -515,6 +521,7 @@ categories:
           - logo--angular
           - logo--ansible-community
           - logo--figma
+          - logo--gitlab
           - logo--invision
           - logo--jupyter
           - logo--keybase
@@ -536,6 +543,7 @@ categories:
           - carbon
           - carbon-for-ibm-dotcom
           - carbon-for-ibm-product
+          - carbon-for-mobile
           - carbon--ui-builder
           - cloud-app
           - edt-loop
@@ -543,6 +551,10 @@ categories:
           - ibm-security
           - watson
           - watson--machine-learning
+          - watsonx
+          - watsonx-ai
+          - watsonx-data
+          - watsonx-governance
       - name: Social
         members:
           - logo--digg
@@ -587,6 +599,7 @@ categories:
           - content-delivery-network
           - database--datastax
           - database--elastic
+          - database--enterprisedb
           - database--enterprise-db2
           - database--etcd
           - database--mongodb
@@ -596,27 +609,42 @@ categories:
           - direct-link
           - dns-services
           - flow-logs-vpc
+          - ibm--ai-on-z
+          - ibm--aiops-insights
           - ibm--bluepay
+          - ibm--cloudant
           - ibm--content-services
           - ibm--data-replication
           - ibm--datastage
           - ibm--db2
+          - ibm--db2-warehouse
           - ibm--db2--alt
+          - ibm--event-automation
+          - ibm--event-endpoint-mgmt
+          - ibm--event-processing
+          - ibm--event-streams
           - ibm--match-360
           - ibm--mq
           - ibm--open-enterprise-languages
           - ibm--openshift-container-platform-on-vpc-for-regulated-industries
           - ibm--power-vs
+          - ibm--power-vs-private-cloud
           - ibm--power-with-vpc
           - ibm--private-path-services
           - ibm--process-mining
+          - ibm--saas-console
           - ibm--sap-on-power
           - ibm--secure-infrastructure-on-vpc-for-regulated-industries
           - ibm--telehealth
           - ibm--tenet
           - ibm--toolchain
+          - ibm--turbonomic
+          - ibm--vpn-for-vpc
           - ibm--vsi-on-vpc-for-regulated-industries
+          - ibm--wazi-deploy
           - ibm-cloud--app-id
+          - ibm-cloud--bare-metal-server
+          - ibm-cloud--bare-metal-servers-vpc
           - ibm-cloud--citrix-daas
           - ibm-cloud--continuous-delivery
           - ibm-cloud--dedicated-host
@@ -630,6 +658,7 @@ categories:
           - ibm-cloud--event-notification
           - ibm-cloud--event-streams
           - ibm-cloud--for-education
+          - ibm-cloud--hpc
           - ibm-cloud--HSM
           - ibm-cloud--hyper-protect-crypto-services
           - ibm-cloud--hyper-protect-dbaas
@@ -650,6 +679,9 @@ categories:
           - ibm-cloud--subnets
           - ibm-cloud--sysdig-secure
           - ibm-cloud--transit-gateway
+          - ibm-cloud--virtual-server-classic
+          - ibm-cloud--virtual-server-vpc
+          - ibm-cloud--vpc
           - ibm-cloud--vpc-endpoints
           - ibm-cloud-pak--applications
           - ibm-cloud-pak--business-automation
@@ -678,9 +710,14 @@ categories:
           - ibm-watson--studio
           - ibm-watson--text-to-speech
           - ibm-watson--tone-analyzer
+          - ibm-watsonx--assistant
+          - ibm-watsonx--code-assistant
+          - ibm-watsonx--code-assistant-for-z
+          - ibm-watsonx--orchestrate
           - ibm-z--cloud-mod-stack
           - ibm-z--environments-dev-sec-ops
           - ibm-z-cloud--provisioning
+          - ibm-z-os
           - ibm-z-os--ai-control-interface
           - ibm-z-os--containers
           - ibm-z-os--package-manager
@@ -753,6 +790,7 @@ categories:
           - stack-limitation
           - store
           - strawberry
+          - sustainability
           - tennis
           - tennis-ball
           - this-side-up
@@ -1011,6 +1049,7 @@ categories:
           - chart--combo
           - chart--combo-stacked
           - chart--custom
+          - chart--dual-y-axis
           - chart--error-bar
           - chart--error-bar--alt
           - chart--evaluation
@@ -1072,6 +1111,7 @@ categories:
           - data--regular
           - data--set
           - data--structured
+          - data--unreal
           - data--unstructured
           - data--view
           - data--view--alt
@@ -1109,6 +1149,7 @@ categories:
           - flow--modeler--reference
           - flow--stream
           - flow--stream--reference
+          - global-loan-and-trial
           - graphical-data-flow
           - growth
           - hashtag
@@ -1999,6 +2040,8 @@ categories:
           - uv-index--alt
           - uv-index--filled
           - vegetation--asset
+          - vegetation--encroachment
+          - vegetation--height
           - wave-direction
           - wave-height
           - wave-period
@@ -2044,6 +2087,7 @@ categories:
           - building--insights-1
           - building--insights-2
           - building--insights-3
+          - business-processes
           - calculator
           - calculator--check
           - camera
@@ -2107,6 +2151,7 @@ categories:
           - mobile--check
           - mobile--download
           - mobile--landscape
+          - model--tuned
           - outage
           - password
           - phone--ip
@@ -2115,6 +2160,7 @@ categories:
           - port--input
           - port--output
           - printer
+          - prompt-session
           - qr-code
           - radio
           - radio--combat
@@ -2130,6 +2176,7 @@ categories:
           - tablet--landscape
           - terminal
           - transmission-lte
+          - tuning
           - USB
           - voicemail
           - VPN
