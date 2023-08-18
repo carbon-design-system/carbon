@@ -7,7 +7,7 @@ on:
 
 jobs:
   release:
-    runs-on: macos-11
+    runs-on: macos-13
     # Needed as recommended by npm docs on publishing with provenance https://docs.npmjs.com/generating-provenance-statements
     permissions:
       id-token: write
