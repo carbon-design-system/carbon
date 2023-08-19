@@ -29250,7 +29250,7 @@ __metadata:
     stylelint-config-standard-scss: ^3.0.0
     stylelint-no-unsupported-browser-features: ^5.0.2
     stylelint-order: ^5.0.0
-    stylelint-prettier: ^2.0.0
+    stylelint-prettier: 3
     stylelint-scss: ^4.1.0
   peerDependencies:
     stylelint: ^15.0.0
@@ -29363,15 +29363,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-prettier@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "stylelint-prettier@npm:2.0.0"
+"stylelint-prettier@npm:3":
+  version: 3.0.0
+  resolution: "stylelint-prettier@npm:3.0.0"
   dependencies:
     prettier-linter-helpers: ^1.0.0
   peerDependencies:
     prettier: ">=2.0.0"
     stylelint: ">=14.0.0"
-  checksum: 6ce7628517a492e0c2e6104f654c9bc710f1aaf035c8b5274e187b68e8d510e70bae5ded2cb65df76aa01096460b9dfe02f844fea13bfba7e3dcca13baec2ff4
+  checksum: 094f53ef5dbe3806524db7f580b9312ceca444651803fc08c8baa48cd9a270985c709fa4f083681a685310dc347b8e55aa93d462554ba7d4ae6258a3bdf6a278
   languageName: node
   linkType: hard
 
