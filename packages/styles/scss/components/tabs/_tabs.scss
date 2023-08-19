@@ -30,7 +30,7 @@
 @use '../../utilities/visually-hidden' as *;
 @use '../../utilities/button-reset';
 @use '../../utilities/high-contrast-mode' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/layout';
 
 /// Tabs styles
@@ -254,7 +254,7 @@
     &:not(.#{$prefix}--tabs--contained)
       .#{$prefix}--tabs__nav-item-label-wrapper {
       position: relative;
-      top: rem(1px);
+      top: convert.to-rem(1px);
     }
 
     //-----------------------------
@@ -272,7 +272,7 @@
     }
 
     .#{$prefix}--tabs__nav-item + .#{$prefix}--tabs__nav-item {
-      margin-left: rem(1px);
+      margin-left: convert.to-rem(1px);
     }
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item {
@@ -284,7 +284,7 @@
       + .#{$prefix}--tabs__nav-item {
       margin-left: 0;
       // Draws the border without affecting the inner-content
-      box-shadow: rem(-1px) 0 0 0 $border-strong;
+      box-shadow: convert.to-rem(-1px) 0 0 0 $border-strong;
     }
 
     .#{$prefix}--tabs__nav-item .#{$prefix}--tabs__nav-link {
@@ -390,13 +390,13 @@
     &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--tall)
       .#{$prefix}--tabs__nav-item-label {
       // height - vertical padding
-      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+      line-height: calc(#{convert.to-rem(48px)} - (#{$spacing-03} * 2));
     }
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item-secondary-label {
       @include type-style('label-01');
 
-      min-height: rem(16px);
+      min-height: convert.to-rem(16px);
     }
 
     //-----------------------------
@@ -478,7 +478,7 @@
     &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--tall)
       .#{$prefix}--tabs__nav-item--selected:hover {
       // height - vertical padding
-      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+      line-height: calc(#{convert.to-rem(48px)} - (#{$spacing-03} * 2));
     }
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--selected,
@@ -598,7 +598,7 @@
 
     display: block;
     width: 100%;
-    height: rem(14px);
+    height: convert.to-rem(14px);
   }
 
   // Windows HCM fix

@@ -16,7 +16,7 @@
 @use '../../theme' as *;
 @use '../../themes' as *;
 @use '../../type' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/focus-outline' as *;
 @use './tokens' as *;
@@ -29,15 +29,15 @@
     @include reset;
 
     display: flex;
-    width: rem(288px);
+    width: convert.to-rem(288px);
     height: auto;
-    padding-left: rem(13px);
+    padding-left: convert.to-rem(13px);
 
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
     color: $text-inverse;
 
     @include breakpoint(max) {
-      width: rem(352px);
+      width: convert.to-rem(352px);
     }
   }
 
@@ -153,10 +153,10 @@
     @include focus-outline('reset');
 
     display: flex;
-    width: rem(48px);
-    min-width: rem(48px);
-    height: rem(48px);
-    min-height: rem(48px);
+    width: convert.to-rem(48px);
+    min-width: convert.to-rem(48px);
+    height: convert.to-rem(48px);
+    min-height: convert.to-rem(48px);
     flex-direction: column;
     align-items: center;
     justify-content: center;

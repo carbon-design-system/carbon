@@ -16,7 +16,7 @@
 @use '../../utilities/button-reset';
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/focus-outline' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/z-index' as *;
 
 /// Number input styles
@@ -35,7 +35,7 @@
   .#{$prefix}--number
     .#{$prefix}--number__input-wrapper--warning
     input[type='number'] {
-    padding-right: rem(128px);
+    padding-right: convert.to-rem(128px);
   }
 
   .#{$prefix}--number input[type='number'] {
@@ -45,15 +45,16 @@
     display: inline-flex;
     width: 100%;
     min-width: 9.375rem;
-    height: rem(40px);
+    height: convert.to-rem(40px);
     box-sizing: border-box;
-    padding-right: rem(96px);
+    padding-right: convert.to-rem(96px);
     padding-left: $spacing-05;
     border: 0;
-    border-bottom: rem(1px) solid $border-strong;
+    border-bottom: convert.to-rem(1px) solid $border-strong;
 
     // Firefox: Hide spinner (up and down buttons)
     -moz-appearance: textfield;
+    appearance: textfield;
     background-color: $field;
     border-radius: 0;
     color: $text-primary;
@@ -86,35 +87,35 @@
     }
 
     &[data-invalid] {
-      padding-right: rem(128px);
+      padding-right: convert.to-rem(128px);
     }
   }
 
   .#{$prefix}--number--lg.#{$prefix}--number {
     input[type='number'] {
-      padding-right: rem(112px);
+      padding-right: convert.to-rem(112px);
 
       &[data-invalid] {
-        padding-right: rem(144px);
+        padding-right: convert.to-rem(144px);
       }
     }
 
     .#{$prefix}--number__input-wrapper--warning input[type='number'] {
-      padding-right: rem(144px);
+      padding-right: convert.to-rem(144px);
     }
   }
 
   .#{$prefix}--number--sm.#{$prefix}--number {
     input[type='number'] {
-      padding-right: rem(80px);
+      padding-right: convert.to-rem(80px);
 
       &[data-invalid] {
-        padding-right: rem(112px);
+        padding-right: convert.to-rem(112px);
       }
     }
 
     .#{$prefix}--number__input-wrapper--warning input[type='number'] {
-      padding-right: rem(112px);
+      padding-right: convert.to-rem(112px);
     }
   }
 
@@ -139,7 +140,7 @@
     top: 50%;
     right: 0;
     display: flex;
-    width: rem(80px);
+    width: convert.to-rem(80px);
     height: 100%;
     flex-direction: row;
     align-items: center;
@@ -155,17 +156,17 @@
     height: 100%;
     align-items: center;
     justify-content: center;
-    border-bottom: rem(1px) solid $border-strong;
+    border-bottom: convert.to-rem(1px) solid $border-strong;
     color: $icon-primary;
 
     &::before,
     &::after {
       position: absolute;
-      top: rem(2px);
+      top: convert.to-rem(2px);
       display: block;
-      width: rem(2px);
+      width: convert.to-rem(2px);
       // height: calc(100% - 4px) is calculated differently in Safari
-      height: rem(36px);
+      height: convert.to-rem(36px);
       background-color: $field;
       content: '';
     }
@@ -279,8 +280,8 @@
   .#{$prefix}--number__rule-divider {
     position: absolute;
     z-index: z('overlay');
-    width: rem(1px);
-    height: rem(16px);
+    width: convert.to-rem(1px);
+    height: convert.to-rem(16px);
     background-color: $border-subtle;
 
     &:first-of-type {
@@ -330,33 +331,33 @@
 
   .#{$prefix}--number__invalid {
     position: absolute;
-    right: rem(96px);
+    right: convert.to-rem(96px);
     fill: $support-error;
   }
 
   .#{$prefix}--number--lg .#{$prefix}--number__invalid {
-    right: rem(112px);
+    right: convert.to-rem(112px);
   }
 
   .#{$prefix}--number--sm .#{$prefix}--number__invalid {
-    right: rem(80px);
+    right: convert.to-rem(80px);
   }
 
   .#{$prefix}--number__invalid + .#{$prefix}--number__rule-divider {
     position: absolute;
-    right: rem(80px);
+    right: convert.to-rem(80px);
   }
 
   .#{$prefix}--number--lg
     .#{$prefix}--number__invalid
     + .#{$prefix}--number__rule-divider {
-    right: rem(96px);
+    right: convert.to-rem(96px);
   }
 
   .#{$prefix}--number--sm
     .#{$prefix}--number__invalid
     + .#{$prefix}--number__rule-divider {
-    right: rem(64px);
+    right: convert.to-rem(64px);
   }
 
   .#{$prefix}--number__control-btn.down-icon:hover
@@ -413,38 +414,38 @@
 
   // Size Variant styles
   .#{$prefix}--number--lg input[type='number'] {
-    height: rem(48px);
+    height: convert.to-rem(48px);
   }
 
   .#{$prefix}--number--lg .#{$prefix}--number__controls {
-    width: rem(96px);
+    width: convert.to-rem(96px);
   }
 
   .#{$prefix}--number--lg .#{$prefix}--number__control-btn {
-    width: rem(48px);
+    width: convert.to-rem(48px);
 
     &::before,
     &::after {
       // height: calc(100% - 4px) is calculated differently in Safari
-      height: rem(44px);
+      height: convert.to-rem(44px);
     }
   }
 
   .#{$prefix}--number--sm input[type='number'] {
-    height: rem(32px);
+    height: convert.to-rem(32px);
   }
 
   .#{$prefix}--number--sm .#{$prefix}--number__controls {
-    width: rem(64px);
+    width: convert.to-rem(64px);
   }
 
   .#{$prefix}--number--sm .#{$prefix}--number__control-btn {
-    width: rem(32px);
+    width: convert.to-rem(32px);
 
     &::before,
     &::after {
       // height: calc(100% - 4px) is calculated differently in Safari
-      height: rem(28px);
+      height: convert.to-rem(28px);
     }
   }
 
@@ -457,11 +458,11 @@
 
   // No steppers
   .#{$prefix}--number--nosteppers input[type='number'] {
-    padding-right: rem(48px);
+    padding-right: convert.to-rem(48px);
   }
 
   .#{$prefix}--number--nosteppers .#{$prefix}--number__invalid {
-    right: rem(16px);
+    right: convert.to-rem(16px);
   }
 
   // Readonly

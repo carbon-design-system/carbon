@@ -321,6 +321,7 @@ categories:
           - continuous-deployment
           - continuous-integration
           - convert-to-cloud
+          - delete
           - deploy
           - deploy-rules
           - drag--horizontal
@@ -392,6 +393,7 @@ categories:
           - reset--alt
           - restart
           - retry--failed
+          - return
           - review
           - rotate
           - run

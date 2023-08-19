@@ -7,7 +7,7 @@
 
 @use '../../theme' as *;
 @use '../../type' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 
 /// Code snippet base styles
 /// @access private
@@ -17,6 +17,6 @@
 
   position: relative;
   width: 100%;
-  max-width: rem(768px);
+  max-width: convert.to-rem(768px);
   background-color: $layer;
 }

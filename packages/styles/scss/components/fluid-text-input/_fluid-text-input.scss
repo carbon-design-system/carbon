@@ -12,7 +12,7 @@
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../text-input';
 
@@ -28,11 +28,11 @@
   .#{$prefix}--text-input--fluid .#{$prefix}--label {
     position: absolute;
     z-index: 1;
-    top: rem(13px);
+    top: convert.to-rem(13px);
     left: $spacing-05;
     display: flex;
     width: calc(100% - 2rem);
-    height: rem(16px);
+    height: convert.to-rem(16px);
     align-items: center;
     margin: 0;
   }
@@ -60,8 +60,8 @@
   }
 
   .#{$prefix}--text-input--fluid .#{$prefix}--text-input {
-    min-height: rem(64px);
-    padding: rem(32px) $spacing-05 rem(13px);
+    min-height: convert.to-rem(64px);
+    padding: convert.to-rem(32px) $spacing-05 convert.to-rem(13px);
   }
 
   .#{$prefix}--text-input__divider,
@@ -81,7 +81,7 @@
   }
 
   .#{$prefix}--text-input--fluid .#{$prefix}--form-requirement {
-    padding: $spacing-03 rem(40px) $spacing-03 $spacing-05;
+    padding: $spacing-03 convert.to-rem(40px) $spacing-03 $spacing-05;
     margin: 0;
   }
 
@@ -104,7 +104,7 @@
   }
 
   .#{$prefix}--text-input--fluid .#{$prefix}--text-input__invalid-icon {
-    top: rem(80px);
+    top: convert.to-rem(80px);
   }
 
   .#{$prefix}--text-input--fluid
@@ -155,16 +155,16 @@
 
   .#{$prefix}--text-input--fluid
     .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
-    top: rem(26px);
+    top: convert.to-rem(26px);
     right: $spacing-03;
-    width: rem(32px);
-    height: rem(32px);
+    width: convert.to-rem(32px);
+    height: convert.to-rem(32px);
   }
 
   // Skeleton
   .#{$prefix}--text-input--fluid__skeleton {
     position: relative;
-    height: rem(64px);
+    height: convert.to-rem(64px);
     border-bottom: 1px solid $skeleton-element;
     background: $skeleton-background;
   }
@@ -174,15 +174,15 @@
     top: $spacing-05;
     left: $spacing-05;
     width: 25%;
-    height: rem(8px);
+    height: convert.to-rem(8px);
   }
 
   .#{$prefix}--text-input--fluid__skeleton .#{$prefix}--label {
     position: absolute;
-    top: rem(36px);
+    top: convert.to-rem(36px);
     left: $spacing-05;
     width: 50%;
-    height: rem(8px);
+    height: convert.to-rem(8px);
     padding: 0;
   }
 }
