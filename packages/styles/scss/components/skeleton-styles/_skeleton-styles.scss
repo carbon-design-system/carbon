@@ -7,7 +7,7 @@
 
 @use '../../config' as *;
 @use '../../utilities/skeleton' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../spacing' as *;
 
 /// Skeleton styles
@@ -19,17 +19,17 @@
     @include skeleton;
 
     display: inline-block;
-    width: rem(16px);
-    height: rem(16px);
+    width: convert.to-rem(16px);
+    height: convert.to-rem(16px);
   }
 
   //skeleton placeholder
   .#{$prefix}--skeleton__placeholder {
     @include skeleton;
 
-    width: rem(100px);
+    width: convert.to-rem(100px);
 
-    height: rem(100px);
+    height: convert.to-rem(100px);
   }
 
   //skeleton text

@@ -12,7 +12,7 @@
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../date-picker';
 
@@ -33,11 +33,11 @@
   .#{$prefix}--date-picker--fluid .#{$prefix}--label {
     position: absolute;
     z-index: 1;
-    top: rem(13px);
+    top: convert.to-rem(13px);
     left: $spacing-05;
     display: flex;
     width: calc(100% - 2rem);
-    height: rem(16px);
+    height: convert.to-rem(16px);
     align-items: center;
     margin: 0;
   }
@@ -63,9 +63,9 @@
   .#{$prefix}--date-picker--fluid
     .#{$prefix}--date-picker-input__wrapper
     .#{$prefix}--date-picker__input {
-    min-width: rem(144px);
-    min-height: rem(64px);
-    padding: rem(32px) $spacing-05 rem(13px);
+    min-width: convert.to-rem(144px);
+    min-height: convert.to-rem(64px);
+    padding: convert.to-rem(32px) $spacing-05 convert.to-rem(13px);
     border-bottom: none;
     background: transparent;
   }
@@ -90,7 +90,7 @@
 
   // Single, Range
   .#{$prefix}--date-picker--fluid .#{$prefix}--date-picker__icon {
-    top: rem(43px);
+    top: convert.to-rem(43px);
   }
 
   .#{$prefix}--date-picker--fluid
@@ -130,8 +130,8 @@
     .#{$prefix}--date-picker--range
     .#{$prefix}--date-picker-container {
     width: 100%;
-    min-width: rem(144px);
-    min-height: rem(63px);
+    min-width: convert.to-rem(144px);
+    min-height: convert.to-rem(63px);
   }
 
   .#{$prefix}--date-picker--fluid
@@ -175,7 +175,7 @@
     .#{$prefix}--form-requirement,
   .#{$prefix}--date-picker-container.#{$prefix}--date-picker--fluid--warn
     .#{$prefix}--form-requirement {
-    padding: $spacing-03 rem(40px) $spacing-03 $spacing-05;
+    padding: $spacing-03 convert.to-rem(40px) $spacing-03 $spacing-05;
     margin: 0;
   }
 
@@ -225,7 +225,7 @@
     .#{$prefix}--date-picker--range
     .#{$prefix}--date-picker--fluid--warn.#{$prefix}--date-picker-container:last-child::after {
     position: absolute;
-    top: rem(8px);
+    top: convert.to-rem(8px);
     right: 0;
     display: block;
     width: 1px;
@@ -251,7 +251,7 @@
     .#{$prefix}--date-picker__icon--invalid,
   .#{$prefix}--date-picker-container.#{$prefix}--date-picker--fluid--warn
     .#{$prefix}--date-picker__icon--warn {
-    top: rem(80px);
+    top: convert.to-rem(80px);
   }
 
   .#{$prefix}--date-picker--fluid
@@ -281,7 +281,7 @@
     display: block;
     overflow: visible;
     max-height: 100%;
-    padding: $spacing-03 rem(40px) $spacing-03 $spacing-05;
+    padding: $spacing-03 convert.to-rem(40px) $spacing-03 $spacing-05;
     margin-top: 0;
   }
 
@@ -302,12 +302,12 @@
   .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--warn
     .#{$prefix}--date-picker--range
     + .#{$prefix}--date-picker__icon {
-    top: rem(80px);
+    top: convert.to-rem(80px);
   }
 
   // Skeleton
   .#{$prefix}--date-picker--fluid__skeleton {
-    height: rem(64px);
+    height: convert.to-rem(64px);
     border-bottom: 1px solid $skeleton-element;
     background: $skeleton-background;
   }
@@ -323,19 +323,19 @@
     top: $spacing-05;
     left: $spacing-05;
     width: 25%;
-    height: rem(8px);
+    height: convert.to-rem(8px);
   }
 
   .#{$prefix}--date-picker--fluid__skeleton .#{$prefix}--label {
-    margin-bottom: rem(4px);
+    margin-bottom: convert.to-rem(4px);
   }
 
   .#{$prefix}--date-picker--fluid__skeleton .#{$prefix}--text-input {
     position: absolute;
-    top: rem(36px);
+    top: convert.to-rem(36px);
     left: $spacing-05;
     width: 50%;
-    height: rem(8px);
+    height: convert.to-rem(8px);
     padding: 0;
   }
 

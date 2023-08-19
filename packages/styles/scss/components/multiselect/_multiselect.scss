@@ -11,7 +11,7 @@
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 
 /// Multi select styles
@@ -57,7 +57,7 @@
     display: inline-block;
     overflow: hidden;
     width: 100%;
-    padding-left: rem(28px);
+    padding-left: convert.to-rem(28px);
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -82,7 +82,7 @@
 
   .#{$prefix}--multi-select--filterable.#{$prefix}--combo-box
     .#{$prefix}--text-input {
-    border: rem(2px) solid transparent;
+    border: convert.to-rem(2px) solid transparent;
     background-clip: padding-box;
     outline: none;
   }

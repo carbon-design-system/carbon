@@ -11,7 +11,7 @@
 @use '../../type' as *;
 @use '../../layer' as *;
 @use '../../utilities/component-reset';
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/skeleton' as *;
 @use '../..//utilities/button-reset';
@@ -111,8 +111,8 @@ $input-label-weight: 400 !default;
   .#{$prefix}--label.#{$prefix}--skeleton {
     @include skeleton;
 
-    width: rem(75px);
-    height: rem(14px);
+    width: convert.to-rem(75px);
+    height: convert.to-rem(14px);
   }
 
   input[type='number'] {
@@ -156,7 +156,7 @@ $input-label-weight: 400 !default;
     ~ .#{$prefix}--form-requirement {
       display: block;
       overflow: visible;
-      max-height: rem(200px);
+      max-height: convert.to-rem(200px);
       font-weight: 400;
     }
   }
@@ -187,7 +187,7 @@ $input-label-weight: 400 !default;
   }
 
   .#{$prefix}--form--fluid .#{$prefix}--form-requirement {
-    padding: $spacing-03 rem(40px) $spacing-03 $spacing-05;
+    padding: $spacing-03 convert.to-rem(40px) $spacing-03 $spacing-05;
     margin: 0;
   }
 
