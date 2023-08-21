@@ -67,6 +67,12 @@ export const PairedWithIcon = () => (
   </Link>
 );
 
+export const WithAcessibleAriaLabel = () => (
+  <Link href="#" renderIcon={() => <Download aria-label="Download" />}>
+    Carbon Docs
+  </Link>
+);
+
 export const Playground = (args) => (
   <Link href="#" {...args}>
     Link
