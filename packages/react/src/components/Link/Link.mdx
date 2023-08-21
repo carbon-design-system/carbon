@@ -27,9 +27,11 @@ links, which should be used sparingly.
   <Story of={LinkStories.Default} />
 </Canvas>
 
-## Acessible Link
+## Acessible Link with Icon
 
-If your Link text is not
+If the text of your link doesn't correspond to the action represented by the
+icon, consider incorporating an `aria-label` for the icon. This will ensure that
+visually impaired users can comprehend the outcome of clicking the link.
 
 <Canvas>
   <Story of={LinkStories.WithAcessibleAriaLabel} />
