@@ -188,7 +188,6 @@ export function Toggle({
         disabled={disabled}
         onClick={handleClick}
       />
-      {console.log(ariaLabelledby ? ariaLabelledby : id, 'here')}
       <LabelComponent
         htmlFor={ariaLabelledby ? undefined : id}
         className={`${prefix}--toggle__label`}>
