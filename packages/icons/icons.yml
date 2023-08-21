@@ -3233,12 +3233,12 @@
     - 32
 - name: chart--logistic-regression
   friendly_name: Chart logistic regression
-  aliases: 
+  aliases:
     - chart logistic regression
     - logistic regression chart
     - chart
     - graph
-    - data  
+    - data
   sizes:
     - 32
 - name: chart--marimekko
@@ -5286,7 +5286,7 @@
     - pointer
 - name: customer-service
   friendly_name: Customer service
-  aliases: 
+  aliases:
     - customer
     - inquiry
     - phone
@@ -5416,7 +5416,7 @@
     - 32
 - name: data--categorical
   friendly_name: Data categorical
-  aliases: 
+  aliases:
     - circle
     - triangle
     - square
@@ -5494,8 +5494,8 @@
     - characters
 - name: data--regular
   friendly_name: Data regular
-  aliases: 
-    - data 
+  aliases:
+    - data
     - regular
     - normal
     - circle
@@ -5915,6 +5915,11 @@
     - decision
     - tree
     - hierarchy
+  sizes:
+    - 32
+- name: delete
+  friendly_name: Delete
+  aliases: []
   sizes:
     - 32
 - name: delivery
@@ -12271,7 +12276,7 @@
     - identification
 - name: logo--mastodon
   friendly_name: Logo Mastodon
-  aliases: 
+  aliases:
     - brand
     - emblem
     - logotype
@@ -12298,7 +12303,7 @@
     - identification
 - name: logo--npm
   friendly_name: Logo npm
-  aliases: 
+  aliases:
     - brand
     - emblem
     - logotype
@@ -14383,7 +14388,7 @@
     - 32
 - name: package--text-analysis
   friendly_name: Package text analysis
-  aliases: 
+  aliases:
     - file
     - package
     - text
@@ -14532,7 +14537,7 @@
     - 32
 - name: partition--auto
   friendly_name: Partition auto
-  aliases: 
+  aliases:
     - data
     - partition
     - auto
@@ -14541,7 +14546,7 @@
     - 32
 - name: partition--collection
   friendly_name: Partition collection
-  aliases: 
+  aliases:
     - data
     - partition
     - collection
@@ -14551,7 +14556,7 @@
     - 32
 - name: partition--repartition
   friendly_name: Partition repartition
-  aliases: 
+  aliases:
     - data
     - partition
     - repartition
@@ -14560,7 +14565,7 @@
     - 32
 - name: partition--same
   friendly_name: Partition same
-  aliases: 
+  aliases:
     - data
     - partition
     - auto
@@ -14570,7 +14575,7 @@
     - 32
 - name: partition--specific
   friendly_name: Partition specific
-  aliases: 
+  aliases:
     - data
     - partition
     - specific
@@ -15938,7 +15943,7 @@
     - 32
 - name: result--draft
   friendly_name: Result draft
-  aliases: 
+  aliases:
     - clipboard
     - result
     - edit
@@ -15971,6 +15976,11 @@
     - retry
     - failed
     - operations
+  sizes:
+    - 32
+- name: return
+  friendly_name: Return
+  aliases: []
   sizes:
     - 32
 - name: review
@@ -16312,7 +16322,7 @@
     - 32
 - name: rule--locked
   friendly_name: Rule locked
-  aliases: 
+  aliases:
     - rule
     - governance
     - control
@@ -16326,7 +16336,7 @@
     - 32
 - name: rule--partial
   friendly_name: Rule partial
-  aliases: 
+  aliases:
     - rule
     - governance
     - control

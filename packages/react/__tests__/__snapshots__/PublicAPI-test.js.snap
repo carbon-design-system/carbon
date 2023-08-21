@@ -2783,6 +2783,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "hideLabel": Object {
+        "type": "bool",
+      },
       "id": Object {
         "type": "string",
       },
@@ -7409,6 +7412,9 @@ Map {
         "type": "bool",
       },
       "label": [Function],
+      "onClick": Object {
+        "type": "func",
+      },
       "onKeyDown": Object {
         "type": "func",
       },

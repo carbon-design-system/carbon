@@ -611,6 +611,23 @@ export default class Slider extends PureComponent<SliderProps> {
   }
 
   /**
+   * Takes a value and ensures it fits to the steps of the range
+   * @param value
+   * @returns value of the nearest step
+   */
+  nearestStepValue(value) {
+    const tempInput = document.createElement('input');
+
+    tempInput.type = 'range';
+    tempInput.min = `${this.props.min}`;
+    tempInput.max = `${this.props.max}`;
+    tempInput.step = `${this.props.step}`;
+    tempInput.value = `${value}`;
+
+    return parseFloat(tempInput.value);
+  }
+
+  /**
    * Sets up "drag" event handlers and calls `this.onDrag` in case dragging
    * started on somewhere other than the thumb without a corresponding "move"
    * event.
@@ -712,9 +729,16 @@ export default class Slider extends PureComponent<SliderProps> {
     // If we're set to two handles, negotiate which drag handle is closest to
     // the users' interaction.
     if (this.props.twoHandles && activeHandle) {
-      this.setValueLeftForHandle(activeHandle, { value, left });
+      this.setValueLeftForHandle(activeHandle, {
+        value: this.nearestStepValue(value),
+        left,
+      });
     } else {
-      this.setState({ value, left, isValid: true });
+      this.setState({
+        value: this.nearestStepValue(value),
+        left,
+        isValid: true,
+      });
     }
   };
 
@@ -764,7 +788,7 @@ export default class Slider extends PureComponent<SliderProps> {
         value: this.calcValueForDelta(currentValue, delta, this.props.step),
       });
       this.setValueLeftForHandle(this.state.activeHandle, {
-        value,
+        value: this.nearestStepValue(value),
         left,
       });
     } else {
@@ -775,7 +799,11 @@ export default class Slider extends PureComponent<SliderProps> {
         // of 54.
         value: this.calcValueForDelta(this.state.value, delta, this.props.step),
       });
-      this.setState({ value, left, isValid: true });
+      this.setState({
+        value: this.nearestStepValue(value),
+        left,
+        isValid: true,
+      });
     }
   };
 

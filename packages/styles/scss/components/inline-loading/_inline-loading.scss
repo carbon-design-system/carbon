@@ -11,7 +11,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 
 /// @type Number
 /// @access private
@@ -71,8 +71,8 @@ $-loading-gap-small: 110;
   }
 
   .#{$prefix}--inline-loading--error {
-    width: rem(16px);
-    height: rem(16px);
+    width: convert.to-rem(16px);
+    height: convert.to-rem(16px);
     fill: $support-error;
 
     &[hidden] {

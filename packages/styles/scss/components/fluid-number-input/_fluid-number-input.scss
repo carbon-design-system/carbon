@@ -12,7 +12,7 @@
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../number-input';
 
@@ -26,11 +26,11 @@
   .#{$prefix}--number-input--fluid .#{$prefix}--label {
     position: absolute;
     z-index: 1;
-    top: rem(13px);
+    top: convert.to-rem(13px);
     left: $spacing-05;
     display: flex;
     width: calc(100% - 2rem);
-    height: rem(16px);
+    height: convert.to-rem(16px);
     align-items: center;
     margin: 0;
   }
@@ -58,15 +58,16 @@
   }
 
   .#{$prefix}--number-input--fluid input[type='number'] {
-    min-height: rem(64px);
-    padding: rem(32px) rem(80px) rem(13px) $spacing-05;
+    min-height: convert.to-rem(64px);
+    padding: convert.to-rem(32px) convert.to-rem(80px) convert.to-rem(13px)
+      $spacing-05;
     background: transparent;
     outline: none;
   }
 
   .#{$prefix}--number-input--fluid .#{$prefix}--number__controls {
-    top: rem(23px);
-    height: rem(40px);
+    top: convert.to-rem(23px);
+    height: convert.to-rem(40px);
     transform: translate(0);
   }
 
@@ -134,7 +135,7 @@
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn::after {
     top: 0;
-    height: calc(100% - rem(1px));
+    height: calc(100% - convert.to-rem(1px));
   }
 
   .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--focus
@@ -177,7 +178,7 @@
   }
 
   .#{$prefix}--number-input--fluid .#{$prefix}--number__invalid {
-    top: rem(73px);
+    top: convert.to-rem(73px);
     right: $spacing-05;
     pointer-events: none;
   }
@@ -206,17 +207,17 @@
     .#{$prefix}--number__input-wrapper--warning
     + .#{$prefix}--number-input__divider {
     position: absolute;
-    top: rem(63px);
+    top: convert.to-rem(63px);
     display: block;
     width: calc(100% - 2rem);
-    height: rem(1px);
+    height: convert.to-rem(1px);
     border: none;
     border-bottom: 1px solid $border-subtle;
     margin: 0 1rem;
   }
 
   .#{$prefix}--number-input--fluid .#{$prefix}--form-requirement {
-    padding: $spacing-03 rem(40px) $spacing-03 $spacing-05;
+    padding: $spacing-03 convert.to-rem(40px) $spacing-03 $spacing-05;
     margin: 0;
   }
 
@@ -273,7 +274,7 @@
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
     border: initial;
-    border-bottom-width: rem(1px);
+    border-bottom-width: convert.to-rem(1px);
   }
 
   // Disabled states
