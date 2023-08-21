@@ -5,7 +5,7 @@ dist
 es
 lib
 node_modules
-scss
+/scss
 storybook-static
 tests/coverage
 .vscode

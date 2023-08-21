@@ -1,0 +1,37 @@
+//
+// Copyright IBM Corp. 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/themes/scss/themes';
+@use '@carbon/styles/scss/theme';
+
+@use '@carbon/styles/scss/components/button/tokens' as button-tokens;
+@use '@carbon/styles/scss/components/tag/tokens' as tag-tokens;
+@use '@carbon/styles/scss/components/notification/tokens' as notification-tokens;
+@include theme.add-component-tokens(button-tokens.$button-tokens);
+@include theme.add-component-tokens(tag-tokens.$tag-tokens);
+@include theme.add-component-tokens(notification-tokens.$notification-tokens);
+
+:host(.#{$prefix}-theme-zone-white),
+.#{$prefix}-theme-zone-white {
+  @include theme.theme(themes.$white);
+}
+
+:host(.#{$prefix}-theme-zone-g10),
+.#{$prefix}-theme-zone-g10 {
+  @include theme.theme(themes.$g10);
+}
+
+:host(.#{$prefix}-theme-zone-g90),
+.#{$prefix}-theme-zone-g90 {
+  @include theme.theme(themes.$g90);
+}
+
+:host(.#{$prefix}-theme-zone-g100),
+.#{$prefix}-theme-zone-g100 {
+  @include theme.theme(themes.$g100);
+}
