@@ -73,7 +73,7 @@ Rulesets are a moving target though. What was once fully compliant can be
 non-compliant again as new standards, rules, and techniques are required in new
 rulesets.
 
-Beginning with v11, tests are ran against the most current ruleset at the time
+Beginning with v11, tests are run against the most current ruleset at the time
 of release. Versions are not re-tested against newer or older rulesets. For
 instance, v11.35.0 was released on Aug 17 2023 and at the time the current
 ruleset was the `August 09 2023 Deployment`. This release was not tested on
