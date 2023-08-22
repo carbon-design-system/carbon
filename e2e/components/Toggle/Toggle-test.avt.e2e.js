@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('Toggle @avt', () => {
-  test('accessibility-checker @avt', async ({ page }) => {
+  test('accessibility-checker', async ({ page }) => {
     await visitStory(page, {
       component: 'Toggle',
       id: 'components-toggle--default',
