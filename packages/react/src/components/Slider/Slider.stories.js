@@ -97,16 +97,15 @@ export const ControlledSliderWithLayer = () => {
 
 export const TwoHandleSlider = () => (
   <Slider
-    ariaLabelLower="Lower bound"
-    ariaLabelUpper="Upper bound"
+    ariaLabelInput="Lower bound"
+    ariaLabelInputUpper="Upper bound"
     labelText="Slider Label"
-    valueLower={10}
+    value={10}
     valueUpper={90}
     min={0}
     max={100}
     step={1}
     stepMultiplier={10}
-    twoHandles
     invalidText="Yeah, I'm gonna need you to come in on Saturdayyyyy"
   />
 );
@@ -126,10 +125,7 @@ Playground.argTypes = {
   ariaLabelInput: {
     control: { type: 'text' },
   },
-  ariaLabelLower: {
-    control: { type: 'text' },
-  },
-  ariaLabelUpper: {
+  ariaLabelInputUpper: {
     control: { type: 'text' },
   },
   light: {
@@ -188,9 +184,6 @@ Playground.argTypes = {
   name: {
     control: { type: 'text' },
   },
-  nameLower: {
-    control: { type: 'text' },
-  },
   nameUpper: {
     control: { type: 'text' },
   },
@@ -211,9 +204,6 @@ Playground.argTypes = {
     control: { type: 'number' },
   },
   value: {
-    control: { type: 'number' },
-  },
-  valueLower: {
     control: { type: 'number' },
   },
   valueUpper: {
@@ -252,8 +242,8 @@ Playground.argTypes = {
 };
 
 Playground.args = {
-  ariaLabelLower: 'Lower bound',
-  ariaLabelUpper: 'Upper bound',
+  ariaLabelInput: 'Lower bound',
+  ariaLabelInputUpper: 'Upper bound',
   disabled: false,
   hideTextInput: false,
   invalid: false,
@@ -264,10 +254,8 @@ Playground.args = {
   required: false,
   step: 5,
   stepMultiplier: 5,
-  twoHandles: false,
   value: 50,
-  valueLower: 10,
-  valueUpper: 90,
+  valueUpper: undefined,
   warn: false,
   warnText: 'Warning message goes here',
 };

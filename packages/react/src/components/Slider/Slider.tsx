@@ -12,7 +12,7 @@ import classNames from 'classnames';
 import throttle from 'lodash.throttle';
 
 import * as keys from '../../internal/keyboard/keys';
-import { matches } from '../../internal/keyboard/match';
+import { matches } from '../../internal/keyboard';
 import { PrefixContext } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { FeatureFlagContext } from '../FeatureFlags';
@@ -43,7 +43,7 @@ const DRAG_STOP_EVENT_TYPES = new Set(['mouseup', 'touchend', 'touchcancel']);
 const TWO_HANDLE_IDLE_WIDTH = 12;
 
 /**
- * When twoHandles prop is set, we're in range slider mode with two handles.
+ * Distinguish two handles by lower and upper positions.
  */
 enum HandlePosition {
   LOWER = 'lower',
@@ -62,14 +62,9 @@ export interface SliderProps
   ariaLabelInput?: string;
 
   /**
-   * The `ariaLabel` for the lower bound `<input>` and handle when twoHandles is set.
+   * The `ariaLabel` for the upper bound `<input>` and handle when there are two handles.
    */
-  ariaLabelLower?: string;
-
-  /**
-   * The `ariaLabel` for the upper bound `<input>` and handle when twoHandles is set.
-   */
-  ariaLabelUpper?: string;
+  ariaLabelInputUpper?: string;
 
   /**
    * The child nodes.
@@ -153,12 +148,7 @@ export interface SliderProps
   name?: string;
 
   /**
-   * The `name` attribute of the lower bound `<input>` when twoHandles is set.
-   */
-  nameLower?: string;
-
-  /**
-   * The `name` attribute of the upper bound `<input>` when twoHandles is set.
+   * The `name` attribute of the upper bound `<input>` when there are two handles.
    */
   nameUpper?: string;
 
@@ -178,12 +168,11 @@ export interface SliderProps
    */
   onChange?: (data: {
     value: SliderProps['value'];
-    valueLower: SliderProps['valueLower'];
     valueUpper: SliderProps['valueUpper'];
   }) => void;
 
   /**
-   * Provide an optional function to be called when a key is pressed in the number input. When twoHandles is set, you can obtain the relevant handle position by using `event.target.dataset.handlePosition`.
+   * Provide an optional function to be called when a key is pressed in the number input. When there are two handles, you can obtain the relevant handle position by using `event.target.dataset.handlePosition`.
    */
   onInputKeyUp?: KeyboardEventHandler<HTMLInputElement>;
 
@@ -192,7 +181,6 @@ export interface SliderProps
    */
   onRelease?: (data: {
     value: SliderProps['value'];
-    valueLower: SliderProps['valueLower'];
     valueUpper: SliderProps['valueUpper'];
   }) => void;
 
@@ -207,7 +195,7 @@ export interface SliderProps
   required?: boolean;
 
   /**
-   * A value determining how much the value should increase/decrease by moving the thumb by mouse. If a value other than 1 is provided and the input is *not* hidden, the new step requirement should be added to a visible label. Values outside of the `step` increment will be considered invalid.
+   * A value determining how much the value should increase/decrease by moving the thumb by mouse. If a value other than 1 is provided and the input is *not* hidden, the new step requirement should be added to a visible label. Values outside the `step` increment will be considered invalid.
    */
   step?: number;
 
@@ -218,22 +206,13 @@ export interface SliderProps
   stepMultiplier?: number;
 
   /**
-   * Turn the slider into a range slider.
+   * The value of the slider. When there are two handles, value is the lower
+   * bound.
    */
-  twoHandles?: boolean;
+  value: number;
 
   /**
-   * The single value when twoHandles is not set.
-   */
-  value?: number;
-
-  /**
-   * The lower bound value when twoHandles in set.
-   */
-  valueLower?: number;
-
-  /**
-   * The upper bound value when twoHandles in set.
+   * The upper bound when there are two handles.
    */
   valueUpper?: number;
 
@@ -268,15 +247,9 @@ export default class Slider extends PureComponent<SliderProps> {
     ariaLabelInput: PropTypes.string,
 
     /**
-     * The `ariaLabel` for the lower bound `<input>` and handle when twoHandles
-     * is set.
+     * The `ariaLabel` for the upper bound `<input>` when there are two handles.
      */
-    ariaLabelLower: PropTypes.string,
-
-    /**
-     * The `ariaLabel` for the upper bound `<input>` and when twoHandles is set.
-     */
-    ariaLabelUpper: PropTypes.string,
+    ariaLabelInputUpper: PropTypes.string,
 
     /**
      * The child nodes.
@@ -363,12 +336,7 @@ export default class Slider extends PureComponent<SliderProps> {
     name: PropTypes.string,
 
     /**
-     * The `name` attribute of the lower bound `<input>` when twoHandles is set.
-     */
-    nameLower: PropTypes.string,
-
-    /**
-     * The `name` attribute of the upper bound `<input>` when twoHandles is set.
+     * The `name` attribute of the upper bound `<input>` when there are two handles.
      */
     nameUpper: PropTypes.string,
 
@@ -404,7 +372,7 @@ export default class Slider extends PureComponent<SliderProps> {
     required: PropTypes.bool,
 
     /**
-     * A value determining how much the value should increase/decrease by moving the thumb by mouse. If a value other than 1 is provided and the input is *not* hidden, the new step requirement should be added to a visible label. Values outside of the `step` increment will be considered invalid.
+     * A value determining how much the value should increase/decrease by moving the thumb by mouse. If a value other than 1 is provided and the input is *not* hidden, the new step requirement should be added to a visible label. Values outside the `step` increment will be considered invalid.
      */
     step: PropTypes.number,
 
@@ -415,22 +383,13 @@ export default class Slider extends PureComponent<SliderProps> {
     stepMultiplier: PropTypes.number,
 
     /**
-     * Turn the slider into a range slider.
+     * The value of the slider. When there are two handles, value is the lower
+     * bound.
      */
-    twoHandles: PropTypes.bool,
+    value: PropTypes.number.isRequired,
 
     /**
-     * The single value for the slider when twoHandles is unset.
-     */
-    value: PropTypes.number,
-
-    /**
-     * The lower bound value when twoHandles in set.
-     */
-    valueLower: PropTypes.number,
-
-    /**
-     * The upper bound value when twoHandles in set.
+     * The upper bound when there are two handles.
      */
     valueUpper: PropTypes.number,
 
@@ -440,7 +399,7 @@ export default class Slider extends PureComponent<SliderProps> {
     warn: PropTypes.bool,
 
     /**
-     * Provide the text that is displayed when the Slider is in an warn state
+     * Provide the text that is displayed when the Slider is in a warn state
      */
     warnText: PropTypes.node,
   };
@@ -454,27 +413,22 @@ export default class Slider extends PureComponent<SliderProps> {
     maxLabel: '',
     inputType: 'number',
     readOnly: false,
-    twoHandles: false,
   };
 
   static contextType = FeatureFlagContext;
 
   state = {
     value: this.props.value,
-    valueLower: this.props.valueLower,
     valueUpper: this.props.valueUpper,
     left: 0,
-    leftLower: 0,
     leftUpper: 0,
     needsOnRelease: false,
     isValid: true,
-    isValidLower: true,
     isValidUpper: true,
     activeHandle: null,
   };
 
   thumbRef: React.RefObject<HTMLDivElement>;
-  thumbRefLower: React.RefObject<HTMLDivElement>;
   thumbRefUpper: React.RefObject<HTMLDivElement>;
   filledTrackRef: React.RefObject<HTMLDivElement>;
   element: HTMLDivElement | null = null;
@@ -484,7 +438,6 @@ export default class Slider extends PureComponent<SliderProps> {
   constructor(props) {
     super(props);
     this.thumbRef = React.createRef<HTMLDivElement>();
-    this.thumbRefLower = React.createRef<HTMLDivElement>();
     this.thumbRefUpper = React.createRef<HTMLDivElement>();
     this.filledTrackRef = React.createRef<HTMLDivElement>();
   }
@@ -493,18 +446,17 @@ export default class Slider extends PureComponent<SliderProps> {
    * Sets up initial slider position and value in response to component mount.
    */
   componentDidMount() {
-    const { twoHandles } = this.props;
     if (this.element) {
-      if (twoHandles) {
-        const { value: valueLower, left: leftLower } = this.calcValue({
-          value: this.state.valueLower,
+      if (this.hasTwoHandles()) {
+        const { value, left } = this.calcValue({
+          value: this.state.value,
           useRawValue: true,
         });
         const { value: valueUpper, left: leftUpper } = this.calcValue({
           value: this.state.valueUpper,
           useRawValue: true,
         });
-        this.setState({ valueLower, leftLower, valueUpper, leftUpper });
+        this.setState({ value, left, valueUpper, leftUpper });
       } else {
         const { value, left } = this.calcValue({
           value: this.state.value,
@@ -526,20 +478,17 @@ export default class Slider extends PureComponent<SliderProps> {
   componentDidUpdate(prevProps, prevState) {
     // Fire onChange event handler if present, if there's a usable value, and
     // if the value is different from the last one
-
-    if (this.props.twoHandles) {
-      if (this.thumbRefLower.current) {
-        this.thumbRefLower.current.style.left = `${this.state.leftLower}%`;
+    if (this.hasTwoHandles()) {
+      if (this.thumbRef.current) {
+        this.thumbRef.current.style.left = `${this.state.left}%`;
       }
       if (this.thumbRefUpper.current) {
         this.thumbRefUpper.current.style.left = `${this.state.leftUpper}%`;
       }
       if (this.filledTrackRef.current) {
         this.filledTrackRef.current.style.transform = `translate(${
-          this.state.leftLower
-        }%, -50%) scaleX(${
-          (this.state.leftUpper - this.state.leftLower) / 100
-        })`;
+          this.state.left
+        }%, -50%) scaleX(${(this.state.leftUpper - this.state.left) / 100})`;
       }
     } else {
       if (this.thumbRef.current) {
@@ -553,13 +502,11 @@ export default class Slider extends PureComponent<SliderProps> {
     }
     if (
       (prevState.value !== this.state.value ||
-        prevState.valueLower !== this.state.valueLower ||
         prevState.valueUpper !== this.state.valueUpper) &&
       typeof this.props.onChange === 'function'
     ) {
       this.props.onChange({
         value: this.state.value,
-        valueLower: this.state.valueLower,
         valueUpper: this.state.valueUpper,
       });
     }
@@ -571,7 +518,6 @@ export default class Slider extends PureComponent<SliderProps> {
     ) {
       this.props.onRelease({
         value: this.state.value,
-        valueLower: this.state.valueLower,
         valueUpper: this.state.valueUpper,
       });
       // Reset the flag
@@ -582,7 +528,6 @@ export default class Slider extends PureComponent<SliderProps> {
     // Otherwise, do prop -> state sync without "value capping".
     if (
       prevProps.value === this.props.value &&
-      prevProps.valueLower === this.props.valueLower &&
       prevProps.valueUpper === this.props.valueUpper &&
       prevProps.max === this.props.max &&
       prevProps.min === this.props.min
@@ -653,7 +598,7 @@ export default class Slider extends PureComponent<SliderProps> {
     const clientX = this.getClientXFromEvent(evt);
 
     let activeHandle;
-    if (this.props.twoHandles) {
+    if (this.hasTwoHandles()) {
       const distanceToLower = this.calcDistanceToHandle(
         HandlePosition.LOWER,
         clientX
@@ -699,7 +644,6 @@ export default class Slider extends PureComponent<SliderProps> {
     this.setState({
       needsOnRelease: true,
       isValid: true,
-      isValidLower: true,
       isValidUpper: true,
     });
   };
@@ -728,7 +672,7 @@ export default class Slider extends PureComponent<SliderProps> {
     });
     // If we're set to two handles, negotiate which drag handle is closest to
     // the users' interaction.
-    if (this.props.twoHandles && activeHandle) {
+    if (this.hasTwoHandles() && activeHandle) {
       this.setValueLeftForHandle(activeHandle, {
         value: this.nearestStepValue(value),
         left,
@@ -758,7 +702,7 @@ export default class Slider extends PureComponent<SliderProps> {
    * @param {Event} evt The event.
    */
   onKeyDown = (evt) => {
-    // Do nothing if component is disabled or we don't have a valid event
+    // Do nothing if component is disabled, or we don't have a valid event
     if (this.props.disabled || this.props.readOnly || !('which' in evt)) {
       return;
     }
@@ -779,10 +723,10 @@ export default class Slider extends PureComponent<SliderProps> {
       delta *= stepMultiplier ?? Slider.defaultProps.stepMultiplier;
     }
 
-    if (this.props.twoHandles && this.state.activeHandle) {
+    if (this.hasTwoHandles() && this.state.activeHandle) {
       const currentValue =
         this.state.activeHandle === HandlePosition.LOWER
-          ? this.state.valueLower
+          ? this.state.value
           : this.state.valueUpper;
       const { value, left } = this.calcValue({
         value: this.calcValueForDelta(currentValue, delta, this.props.step),
@@ -831,7 +775,7 @@ export default class Slider extends PureComponent<SliderProps> {
       evt.target.dataset.handlePosition ?? HandlePosition.LOWER;
     const targetValue = Number.parseFloat(evt.target.value);
 
-    if (this.props.twoHandles) {
+    if (this.hasTwoHandles()) {
       if (isNaN(targetValue)) {
         this.setValueForHandle(activeHandle, evt.target.value);
       } else if (
@@ -907,14 +851,15 @@ export default class Slider extends PureComponent<SliderProps> {
     const targetValue = Number.parseFloat(input.value);
     const validity = !isNaN(targetValue);
 
-    // If twoHandles is set, we'll also have the data-handle-position attribute
-    // to consider the other value before settling on the validity to set.
+    // When there are two handles, we'll also have the data-handle-position
+    // attribute to consider the other value before settling on the validity to
+    // set.
     const handlePosition = input?.dataset?.handlePosition as
       | HandlePosition
       | undefined;
 
     if (handlePosition === HandlePosition.LOWER) {
-      this.setState({ isValidLower: validity });
+      this.setState({ isValid: validity });
     } else if (handlePosition === HandlePosition.UPPER) {
       this.setState({ isValidUpper: validity });
     }
@@ -1040,7 +985,7 @@ export default class Slider extends PureComponent<SliderProps> {
     // calculation accordingly.
     const left =
       handle === HandlePosition.LOWER
-        ? this.state.leftLower - TWO_HANDLE_IDLE_WIDTH
+        ? this.state.left - TWO_HANDLE_IDLE_WIDTH
         : this.state.leftUpper;
     const boundingRect = this.getSliderBoundingRect();
     const handleX = boundingRect.left + (left / 100) * boundingRect.width;
@@ -1074,19 +1019,22 @@ export default class Slider extends PureComponent<SliderProps> {
    *
    * Guards against setting either lower or upper values beyond its counterpart.
    */
-  setValueLeftForHandle = (handle: HandlePosition, { value, left }) => {
-    const { valueLower, valueUpper, leftLower, leftUpper } = this.state;
+  setValueLeftForHandle = (
+    handle: HandlePosition,
+    { value: newValue, left: newLeft }
+  ) => {
+    const { value, valueUpper, left, leftUpper } = this.state;
     if (handle === HandlePosition.LOWER) {
       // Don't allow higher than the upper handle.
       this.setState({
-        valueLower: valueUpper && value > valueUpper ? valueUpper : value,
-        leftLower: valueUpper && value > valueUpper ? leftUpper : left,
-        isValidLower: true,
+        value: valueUpper && newValue > valueUpper ? valueUpper : newValue,
+        left: valueUpper && newValue > valueUpper ? leftUpper : newLeft,
+        isValid: true,
       });
     } else {
       this.setState({
-        valueUpper: valueLower && value < valueLower ? valueLower : value,
-        leftUpper: valueLower && value < valueLower ? leftLower : left,
+        valueUpper: value && newValue < value ? value : newValue,
+        leftUpper: value && newValue < value ? left : newLeft,
         isValidUpper: true,
       });
     }
@@ -1095,8 +1043,8 @@ export default class Slider extends PureComponent<SliderProps> {
   setValueForHandle = (handle: HandlePosition, value) => {
     if (handle === HandlePosition.LOWER) {
       this.setState({
-        valueLower: value,
-        isValidLower: true,
+        value,
+        isValid: true,
       });
     } else {
       this.setState({
@@ -1106,17 +1054,17 @@ export default class Slider extends PureComponent<SliderProps> {
     }
   };
 
-  isValidValueForPosition = ({ handle, value, min, max }) => {
-    const { valueLower, valueUpper } = this.state;
+  isValidValueForPosition = ({ handle, value: newValue, min, max }) => {
+    const { value, valueUpper } = this.state;
 
-    if (!this.isValidValue({ value, min, max })) {
+    if (!this.isValidValue({ value: newValue, min, max })) {
       return false;
     }
 
     if (handle === HandlePosition.LOWER) {
-      return !valueUpper || value <= valueUpper;
+      return !valueUpper || newValue <= valueUpper;
     } else if (handle === HandlePosition.UPPER) {
-      return !valueLower || value >= valueLower;
+      return !value || newValue >= value;
     }
 
     return false;
@@ -1126,18 +1074,18 @@ export default class Slider extends PureComponent<SliderProps> {
     return !(value < min || value > max);
   };
 
-  getAdjustedValueForPosition = ({ handle, value, min, max }) => {
-    const { valueLower, valueUpper } = this.state;
+  getAdjustedValueForPosition = ({ handle, value: newValue, min, max }) => {
+    const { value, valueUpper } = this.state;
 
-    value = this.getAdjustedValue({ value, min, max });
+    newValue = this.getAdjustedValue({ value: newValue, min, max });
 
     // Next adjust to the opposite handle.
     if (handle === HandlePosition.LOWER && valueUpper) {
-      value = value > valueUpper ? valueUpper : value;
-    } else if (handle === HandlePosition.UPPER && valueLower) {
-      value = value < valueLower ? valueLower : value;
+      newValue = newValue > valueUpper ? valueUpper : newValue;
+    } else if (handle === HandlePosition.UPPER && value) {
+      newValue = newValue < value ? value : newValue;
     }
-    return value;
+    return newValue;
   };
 
   getAdjustedValue = ({ value, min, max }) => {
@@ -1174,9 +1122,13 @@ export default class Slider extends PureComponent<SliderProps> {
     return clientX;
   }
 
+  hasTwoHandles() {
+    return this.state.valueUpper !== undefined;
+  }
+
   // syncs invalid state and prop
   static getDerivedStateFromProps(props, state) {
-    const { isValid, isValidLower, isValidUpper } = state;
+    const { isValid, isValidUpper } = state;
     let derivedState = {};
 
     // Will override state in favor of invalid prop
@@ -1187,10 +1139,10 @@ export default class Slider extends PureComponent<SliderProps> {
           isValid: false,
         };
       }
-      if (isValidLower === true) {
+      if (isValid === true) {
         derivedState = {
           ...derivedState,
-          isValidLower: false,
+          isValid: false,
         };
       }
       if (isValidUpper === true) {
@@ -1206,10 +1158,10 @@ export default class Slider extends PureComponent<SliderProps> {
           isValid: true,
         };
       }
-      if (isValidLower === false) {
+      if (isValid === false) {
         derivedState = {
           ...derivedState,
-          isValidLower: true,
+          isValid: true,
         };
       }
       if (isValidUpper === false) {
@@ -1225,8 +1177,7 @@ export default class Slider extends PureComponent<SliderProps> {
   render() {
     const {
       ariaLabelInput,
-      ariaLabelLower,
-      ariaLabelUpper,
+      ariaLabelInputUpper,
       className,
       hideTextInput,
       id = (this.inputId =
@@ -1245,33 +1196,24 @@ export default class Slider extends PureComponent<SliderProps> {
       required,
       disabled,
       name,
-      nameLower,
       nameUpper,
       light,
       readOnly,
       warn,
       warnText,
-      twoHandles,
       ...other
     } = this.props;
 
     delete other.onRelease;
     delete other.invalid;
-    delete other.valueLower;
     delete other.valueUpper;
 
-    const {
-      value,
-      valueLower,
-      valueUpper,
-      isValid,
-      isValidLower,
-      isValidUpper,
-    } = this.state;
+    const { value, valueUpper, isValid, isValidUpper } = this.state;
 
     return (
       <PrefixContext.Consumer>
         {(prefix) => {
+          const twoHandles = this.hasTwoHandles();
           const labelId = `${id}-label`;
           const labelClasses = classNames(`${prefix}--label`, {
             [`${prefix}--label--disabled`]: disabled,
@@ -1301,8 +1243,7 @@ export default class Slider extends PureComponent<SliderProps> {
             `${prefix}--slider-text-input--lower`,
             conditionalInputClasses,
             {
-              [`${prefix}--text-input--invalid`]:
-                !readOnly && (twoHandles ? !isValidLower : !isValid),
+              [`${prefix}--text-input--invalid`]: !readOnly && !isValid,
             },
           ]);
           const upperInputClasses = classNames([
@@ -1351,10 +1292,10 @@ export default class Slider extends PureComponent<SliderProps> {
                     <input
                       type={hideTextInput ? 'hidden' : inputType}
                       id={`${id}-lower-input-for-slider`}
-                      name={nameLower}
+                      name={name}
                       className={lowerInputClasses}
-                      value={valueLower}
-                      aria-label={ariaLabelLower}
+                      value={value}
+                      aria-label={ariaLabelInput}
                       disabled={disabled}
                       required={required}
                       min={min}
@@ -1364,20 +1305,18 @@ export default class Slider extends PureComponent<SliderProps> {
                       onBlur={this.onBlur}
                       onKeyUp={this.props.onInputKeyUp}
                       onKeyDown={this.onInputKeyDown}
-                      data-invalid={!isValidLower && !readOnly ? true : null}
+                      data-invalid={!isValid && !readOnly ? true : null}
                       data-handle-position={HandlePosition.LOWER}
-                      aria-invalid={
-                        !isValidLower && !readOnly ? true : undefined
-                      }
+                      aria-invalid={!isValid && !readOnly ? true : undefined}
                       readOnly={readOnly}
                     />
-                    {!readOnly && !isValidLower && (
+                    {!readOnly && !isValid && (
                       <WarningFilled
                         className={`${prefix}--slider__invalid-icon`}
                       />
                     )}
 
-                    {!readOnly && warn && isValidLower && (
+                    {!readOnly && warn && isValid && (
                       <WarningAltFilled
                         className={`${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`}
                       />
@@ -1399,7 +1338,7 @@ export default class Slider extends PureComponent<SliderProps> {
                   role="presentation"
                   tabIndex={-1}
                   data-invalid={
-                    (twoHandles ? !isValidLower || !isValidUpper : !isValid) &&
+                    (twoHandles ? !isValid || !isValidUpper : !isValid) &&
                     !readOnly
                       ? true
                       : null
@@ -1412,10 +1351,10 @@ export default class Slider extends PureComponent<SliderProps> {
                     tabIndex={!readOnly ? 0 : -1}
                     aria-valuemax={twoHandles ? valueUpper : max}
                     aria-valuemin={min}
-                    aria-valuenow={twoHandles ? valueLower : value}
+                    aria-valuenow={value}
                     aria-labelledby={twoHandles ? undefined : labelId}
-                    aria-label={twoHandles ? ariaLabelLower : undefined}
-                    ref={twoHandles ? this.thumbRefLower : this.thumbRef}
+                    aria-label={twoHandles ? ariaLabelInput : undefined}
+                    ref={this.thumbRef}
                     onFocus={() =>
                       this.setState({ activeHandle: HandlePosition.LOWER })
                     }
@@ -1426,9 +1365,9 @@ export default class Slider extends PureComponent<SliderProps> {
                       role="slider"
                       tabIndex={!readOnly ? 0 : -1}
                       aria-valuemax={max}
-                      aria-valuemin={valueLower}
+                      aria-valuemin={value}
                       aria-valuenow={valueUpper}
-                      aria-label={ariaLabelUpper}
+                      aria-label={ariaLabelInputUpper}
                       ref={this.thumbRefUpper}
                       onFocus={() =>
                         this.setState({ activeHandle: HandlePosition.UPPER })
@@ -1462,7 +1401,7 @@ export default class Slider extends PureComponent<SliderProps> {
                     }
                     aria-label={
                       twoHandles
-                        ? ariaLabelUpper
+                        ? ariaLabelInputUpper
                         : ariaLabelInput
                         ? ariaLabelInput
                         : undefined
@@ -1506,7 +1445,7 @@ export default class Slider extends PureComponent<SliderProps> {
                     )}
                 </div>
               </div>
-              {!readOnly && (!isValid || !isValidLower || !isValidUpper) && (
+              {!readOnly && (!isValid || !isValidUpper) && (
                 <div
                   className={classNames(
                     `${prefix}--slider__validation-msg`,
@@ -1516,7 +1455,7 @@ export default class Slider extends PureComponent<SliderProps> {
                   {invalidText}
                 </div>
               )}
-              {!readOnly && warn && isValid && isValidLower && isValidUpper && (
+              {!readOnly && warn && isValid && isValidUpper && (
                 <div
                   className={classNames(
                     `${prefix}--slider__validation-msg`,

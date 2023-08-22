@@ -31,9 +31,6 @@ const renderSlider = ({
 } = {}) =>
   render(<Slider value={value} min={min} max={max} step={step} {...rest} />);
 
-const renderTwoHandleSlider = (props = {}) =>
-  renderSlider({ twoHandles: true, ...props });
-
 describe('Slider', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -519,30 +516,11 @@ describe('Slider', () => {
   });
 
   describe('behaves as expected - Two Handle Slider', () => {
-    it('should render two handles and two inputs', () => {
-      renderTwoHandleSlider({
-        ariaLabelLower: 'Lower bound',
-        ariaLabelUpper: 'Upper bound',
-      });
-      expect(
-        screen.getByLabelText(/lower bound/i, { selector: '[role=slider]' })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByLabelText(/upper bound/i, { selector: '[role=slider]' })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByLabelText(/lower bound/i, { selector: 'input' })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByLabelText(/upper bound/i, { selector: 'input' })
-      ).toBeInTheDocument();
-    });
-
     it('should be able to set value via props', () => {
-      renderTwoHandleSlider({
-        ariaLabelLower: 'Lower bound',
-        ariaLabelUpper: 'Upper bound',
-        valueLower: initialValueLower,
+      renderSlider({
+        ariaLabelInput: 'Lower bound',
+        ariaLabelInputUpper: 'Upper bound',
+        value: initialValueLower,
         valueUpper: initialValueUpper,
         min: 0,
         max: 100,
