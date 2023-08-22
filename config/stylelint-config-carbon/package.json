@@ -33,7 +33,7 @@
     "stylelint-config-standard-scss": "^3.0.0",
     "stylelint-no-unsupported-browser-features": "^5.0.2",
     "stylelint-order": "^5.0.0",
-    "stylelint-prettier": "3",
+    "stylelint-prettier": "^3.0.0",
     "stylelint-scss": "^4.1.0"
   },
   "devDependencies": {
