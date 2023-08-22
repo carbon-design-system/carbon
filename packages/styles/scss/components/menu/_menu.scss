@@ -15,7 +15,7 @@
 @use '../../utilities/box-shadow' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/z-index' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/component-reset';
 
 /// Menu styles
@@ -152,7 +152,7 @@
   .#{$prefix}--menu-item-divider {
     display: block;
     width: 100%;
-    height: rem(1px);
+    height: convert.to-rem(1px);
     background-color: $border-subtle;
     margin-block: $spacing-02;
   }

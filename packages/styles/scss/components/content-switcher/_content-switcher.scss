@@ -11,7 +11,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/layout';
@@ -37,8 +37,8 @@
     display: inline-flex;
     overflow: hidden;
     border: none;
-    border-top: rem(1px) solid $border-inverse;
-    border-bottom: rem(1px) solid $border-inverse;
+    border-top: convert.to-rem(1px) solid $border-inverse;
+    border-bottom: convert.to-rem(1px) solid $border-inverse;
     margin: 0;
     background-color: transparent;
     color: $text-secondary;
@@ -116,9 +116,9 @@
 
   .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
     .#{$prefix}--content-switcher-btn:first-child {
-    border-left: rem(1px) solid $border-inverse;
-    border-bottom-left-radius: rem(4px);
-    border-top-left-radius: rem(4px);
+    border-left: convert.to-rem(1px) solid $border-inverse;
+    border-bottom-left-radius: convert.to-rem(4px);
+    border-top-left-radius: convert.to-rem(4px);
 
     &:disabled {
       border-color: $border-disabled;
@@ -128,9 +128,9 @@
 
   .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
     .#{$prefix}--content-switcher-btn:last-child {
-    border-right: rem(1px) solid $border-inverse;
-    border-bottom-right-radius: rem(4px);
-    border-top-right-radius: rem(4px);
+    border-right: convert.to-rem(1px) solid $border-inverse;
+    border-bottom-right-radius: convert.to-rem(4px);
+    border-top-right-radius: convert.to-rem(4px);
 
     &:disabled {
       border-color: $border-disabled;
@@ -152,8 +152,8 @@
     z-index: 2;
     left: 0;
     display: block;
-    width: rem(1px);
-    height: rem(16px);
+    width: convert.to-rem(1px);
+    height: convert.to-rem(16px);
     background-color: $border-subtle;
     content: '';
   }
@@ -244,9 +244,9 @@
   .#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-popover__wrapper:first-child
     .#{$prefix}--content-switcher-btn {
-    border-left: rem(1px) solid $border-inverse;
-    border-bottom-left-radius: rem(4px);
-    border-top-left-radius: rem(4px);
+    border-left: convert.to-rem(1px) solid $border-inverse;
+    border-bottom-left-radius: convert.to-rem(4px);
+    border-top-left-radius: convert.to-rem(4px);
   }
 
   .#{$prefix}--content-switcher--icon-only
@@ -261,9 +261,9 @@
   .#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-popover__wrapper:last-child
     .#{$prefix}--content-switcher-btn {
-    border-right: rem(1px) solid $border-inverse;
-    border-bottom-right-radius: rem(4px);
-    border-top-right-radius: rem(4px);
+    border-right: convert.to-rem(1px) solid $border-inverse;
+    border-bottom-right-radius: convert.to-rem(4px);
+    border-top-right-radius: convert.to-rem(4px);
   }
 
   .#{$prefix}--content-switcher--icon-only
@@ -277,8 +277,8 @@
 
   .#{$prefix}--content-switcher--lg .#{$prefix}--content-switcher-btn {
     // accounts for the larger icon sizes to keep the switcher at 48px
-    padding-right: rem(14px);
-    padding-left: rem(14px);
+    padding-right: convert.to-rem(14px);
+    padding-left: convert.to-rem(14px);
   }
 
   .#{$prefix}--content-switcher--lg .#{$prefix}--content-switcher-btn svg {
