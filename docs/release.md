@@ -205,7 +205,6 @@ Friday of a sprint. To make the switch, you will need to:
 - [ ] Uncheck "this is a prerelease" on the Release
 
 - [ ] Post the release announcement in slack
-
   - [ ] #carbon-announcements
   - [ ] #carbon-components
   - [ ] #carbon-design-system
