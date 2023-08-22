@@ -69,6 +69,10 @@ module.exports = {
       },
     ],
 
+    // At-rule
+    // Require or disallow an empty line before at-rules (Autofixable).
+    'at-rule-empty-line-before': OFF,
+
     // Comment
     // Require or disallow an empty line before comments (Autofixable).
     'comment-empty-line-before': OFF,
