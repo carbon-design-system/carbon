@@ -33,7 +33,7 @@ const TableRow = (props: TableRowProps) => {
   const cleanProps = {
     ...omit(props, [
       'ariaLabel',
-      'aria-Label',
+      'aria-label',
       'aria-controls',
       'onExpand',
       'isExpanded',
