@@ -181,19 +181,19 @@
     // There seem to be quite a few references throughout this file.
     .#{$prefix}--toggle__appearance {
       position: relative;
-      width: to-to-rem(48px);
-      height: to-to-rem(24px);
+      width: to-rem(48px);
+      height: to-rem(24px);
 
       // Toggle background oval
       &::before {
         position: absolute;
         top: 0;
         display: block;
-        width: to-to-rem(48px);
-        height: to-to-rem(24px);
+        width: to-rem(48px);
+        height: to-rem(24px);
         box-sizing: border-box;
         background-color: $ui-04;
-        border-radius: to-to-rem(15px);
+        border-radius: to-rem(15px);
         // Corresponds to the double-border for focused state (`0 0 0 1px $ui-02, 0 0 0 3px $focus`)
         box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
         content: '';
@@ -210,11 +210,11 @@
       // Toggle circle
       &::after {
         position: absolute;
-        top: to-to-rem(3px);
-        left: to-to-rem(3px);
+        top: to-rem(3px);
+        left: to-rem(3px);
         display: block;
-        width: to-to-rem(18px);
-        height: to-to-rem(18px);
+        width: to-rem(18px);
+        height: to-rem(18px);
         box-sizing: border-box;
         background-color: $icon-03;
         border-radius: 50%;
@@ -227,10 +227,10 @@
     .#{$prefix}--toggle__check {
       position: absolute;
       z-index: 1;
-      top: to-to-rem(6px);
-      left: to-to-rem(6px);
-      width: to-to-rem(6px);
-      height: to-to-rem(5px);
+      top: to-rem(6px);
+      left: to-rem(6px);
+      width: to-rem(6px);
+      height: to-rem(5px);
       fill: $icon-03;
       transform: scale(0.2);
       transition: $duration--fast-01 motion(exit, productive);
@@ -246,7 +246,7 @@
 
     .#{$prefix}--toggle__text--left {
       position: absolute;
-      left: to-to-rem(48px);
+      left: to-rem(48px);
     }
 
     .#{$prefix}--toggle:checked
@@ -276,7 +276,7 @@
 
       &::after {
         background-color: $icon-03;
-        transform: translateX(to-to-rem(24px));
+        transform: translateX(to-rem(24px));
       }
     }
 
@@ -354,22 +354,22 @@
     .#{$prefix}--toggle--small
       + .#{$prefix}--toggle__label
       .#{$prefix}--toggle__appearance {
-      width: to-to-rem(32px);
-      height: to-to-rem(16px);
+      width: to-rem(32px);
+      height: to-rem(16px);
 
       &::before {
         top: 0;
-        width: to-to-rem(32px);
-        height: to-to-rem(16px);
+        width: to-rem(32px);
+        height: to-rem(16px);
         box-sizing: border-box;
         border-radius: 0.9375rem;
       }
 
       &::after {
-        top: to-to-rem(3px);
-        left: to-to-rem(3px);
-        width: to-to-rem(10px);
-        height: to-to-rem(10px);
+        top: to-rem(3px);
+        left: to-rem(3px);
+        width: to-rem(10px);
+        height: to-rem(10px);
       }
     }
 
@@ -377,13 +377,13 @@
       + .#{$prefix}--toggle__label
       .#{$prefix}--toggle__check {
       fill: $support-02;
-      transform: scale(1) translateX(to-to-rem(16px));
+      transform: scale(1) translateX(to-rem(16px));
     }
 
     .#{$prefix}--toggle--small
       + .#{$prefix}--toggle__label
       .#{$prefix}--toggle__text--left {
-      left: to-to-rem(32px);
+      left: to-rem(32px);
     }
 
     .#{$prefix}--toggle--small:checked
@@ -421,8 +421,8 @@
     .#{$prefix}--toggle__switch {
       position: relative;
       display: flex;
-      width: to-to-rem(48px);
-      height: to-to-rem(24px);
+      width: to-rem(48px);
+      height: to-rem(24px);
       align-items: center;
       cursor: pointer;
 
@@ -431,11 +431,11 @@
         position: absolute;
         top: 0;
         display: block;
-        width: to-to-rem(48px);
-        height: to-to-rem(24px);
+        width: to-rem(48px);
+        height: to-rem(24px);
         box-sizing: border-box;
         background-color: $ui-04;
-        border-radius: to-to-rem(15px);
+        border-radius: to-rem(15px);
         // Corresponds to the double-border for focused state (`0 0 0 1px $ui-02, 0 0 0 3px $focus`)
         box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
         content: '';
@@ -451,11 +451,11 @@
       // Toggle circle
       &::after {
         position: absolute;
-        top: to-to-rem(3px);
-        left: to-to-rem(3px);
+        top: to-rem(3px);
+        left: to-rem(3px);
         display: block;
-        width: to-to-rem(18px);
-        height: to-to-rem(18px);
+        width: to-rem(18px);
+        height: to-rem(18px);
         box-sizing: border-box;
         background-color: $icon-03;
         border-radius: 50%;
@@ -504,7 +504,7 @@
 
       &::after {
         background-color: $icon-03;
-        transform: translateX(to-to-rem(24px));
+        transform: translateX(to-rem(24px));
       }
     }
 
@@ -563,36 +563,36 @@
     // ---------------------------------------------
     .#{$prefix}--toggle-input--small + .#{$prefix}--toggle-input__label {
       > .#{$prefix}--toggle__switch {
-        width: to-to-rem(32px);
-        height: to-to-rem(16px);
+        width: to-rem(32px);
+        height: to-rem(16px);
 
         &::before {
-          width: to-to-rem(32px);
-          height: to-to-rem(16px);
+          width: to-rem(32px);
+          height: to-rem(16px);
           border-radius: 0.9375rem;
         }
 
         &::after {
-          width: to-to-rem(10px);
-          height: to-to-rem(10px);
+          width: to-rem(10px);
+          height: to-rem(10px);
         }
       }
 
       .#{$prefix}--toggle__text--off,
       .#{$prefix}--toggle__text--on {
-        margin-left: to-to-rem(40px);
+        margin-left: to-rem(40px);
       }
     }
 
     .#{$prefix}--toggle-input--small:checked
       + .#{$prefix}--toggle-input__label {
       > .#{$prefix}--toggle__switch::after {
-        transform: translateX(to-to-rem(17px));
+        transform: translateX(to-rem(17px));
       }
 
       .#{$prefix}--toggle__check {
         fill: $support-02;
-        transform: scale(1) translateX(to-to-rem(16px));
+        transform: scale(1) translateX(to-rem(16px));
       }
     }
 
