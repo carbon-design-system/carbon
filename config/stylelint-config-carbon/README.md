@@ -29,6 +29,18 @@ You can use `stylelint-config-carbon` in your project by extending it in your
 }
 ```
 
+## Developing
+
+When updating plugins, follow this approach to see effective changes to the
+ruleset:
+
+1. run `npx stylelint . --print-config > currentconfig.json`.
+2. make updates
+3. run `npx stylelint . --print-config > newconfig.json`
+4. run `npx json-diff --max-elisions 1 currentrules.json newrules.json`
+
+Include the `json-diff` output in the PR.
+
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new features,
