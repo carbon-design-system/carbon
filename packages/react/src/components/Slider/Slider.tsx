@@ -540,6 +540,18 @@ export default class Slider extends PureComponent<SliderProps> {
         useRawValue: true,
       })
     );
+    if (this.props.valueUpper !== undefined) {
+      const { value: valueUpper, left: leftUpper } = this.calcValue({
+        value: this.props.valueUpper,
+        useRawValue: true,
+      });
+      this.setState({
+        valueUpper,
+        leftUpper,
+      });
+    } else {
+      this.setState({ valueUpper: undefined, leftUpper: undefined });
+    }
   }
 
   /**
