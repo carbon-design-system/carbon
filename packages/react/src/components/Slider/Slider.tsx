@@ -64,7 +64,7 @@ export interface SliderProps
   /**
    * The `ariaLabel` for the upper bound `<input>` and handle when there are two handles.
    */
-  ariaLabelInputUpper?: string;
+  unstable_ariaLabelInputUpper?: string;
 
   /**
    * The child nodes.
@@ -150,7 +150,7 @@ export interface SliderProps
   /**
    * The `name` attribute of the upper bound `<input>` when there are two handles.
    */
-  nameUpper?: string;
+  unstable_nameUpper?: string;
 
   /**
    * Provide an optional function to be called when the input element
@@ -168,7 +168,7 @@ export interface SliderProps
    */
   onChange?: (data: {
     value: SliderProps['value'];
-    valueUpper: SliderProps['valueUpper'];
+    valueUpper: SliderProps['unstable_valueUpper'];
   }) => void;
 
   /**
@@ -181,7 +181,7 @@ export interface SliderProps
    */
   onRelease?: (data: {
     value: SliderProps['value'];
-    valueUpper: SliderProps['valueUpper'];
+    valueUpper: SliderProps['unstable_valueUpper'];
   }) => void;
 
   /**
@@ -214,7 +214,7 @@ export interface SliderProps
   /**
    * The upper bound when there are two handles.
    */
-  valueUpper?: number;
+  unstable_valueUpper?: number;
 
   /**
    * Specify whether the control is currently in warning state
@@ -245,11 +245,6 @@ export default class Slider extends PureComponent<SliderProps> {
      * The `ariaLabel` for the `<input>`.
      */
     ariaLabelInput: PropTypes.string,
-
-    /**
-     * The `ariaLabel` for the upper bound `<input>` when there are two handles.
-     */
-    ariaLabelInputUpper: PropTypes.string,
 
     /**
      * The child nodes.
@@ -336,11 +331,6 @@ export default class Slider extends PureComponent<SliderProps> {
     name: PropTypes.string,
 
     /**
-     * The `name` attribute of the upper bound `<input>` when there are two handles.
-     */
-    nameUpper: PropTypes.string,
-
-    /**
      * Provide an optional function to be called when the input element
      * loses focus
      */
@@ -383,15 +373,25 @@ export default class Slider extends PureComponent<SliderProps> {
     stepMultiplier: PropTypes.number,
 
     /**
-     * The value of the slider. When there are two handles, value is the lower
-     * bound.
+     * The `ariaLabel` for the upper bound `<input>` when there are two handles.
      */
-    value: PropTypes.number.isRequired,
+    unstable_ariaLabelInputUpper: PropTypes.string,
+
+    /**
+     * The `name` attribute of the upper bound `<input>` when there are two handles.
+     */
+    unstable_nameUpper: PropTypes.string,
 
     /**
      * The upper bound when there are two handles.
      */
-    valueUpper: PropTypes.number,
+    unstable_valueUpper: PropTypes.number,
+
+    /**
+     * The value of the slider. When there are two handles, value is the lower
+     * bound.
+     */
+    value: PropTypes.number.isRequired,
 
     /**
      * `Specify whether the Slider is in a warn state
@@ -419,7 +419,7 @@ export default class Slider extends PureComponent<SliderProps> {
 
   state = {
     value: this.props.value,
-    valueUpper: this.props.valueUpper,
+    valueUpper: this.props.unstable_valueUpper,
     left: 0,
     leftUpper: 0,
     needsOnRelease: false,
@@ -528,7 +528,7 @@ export default class Slider extends PureComponent<SliderProps> {
     // Otherwise, do prop -> state sync without "value capping".
     if (
       prevProps.value === this.props.value &&
-      prevProps.valueUpper === this.props.valueUpper &&
+      prevProps.unstable_valueUpper === this.props.unstable_valueUpper &&
       prevProps.max === this.props.max &&
       prevProps.min === this.props.min
     ) {
@@ -540,9 +540,9 @@ export default class Slider extends PureComponent<SliderProps> {
         useRawValue: true,
       })
     );
-    if (this.props.valueUpper !== undefined) {
+    if (this.props.unstable_valueUpper !== undefined) {
       const { value: valueUpper, left: leftUpper } = this.calcValue({
-        value: this.props.valueUpper,
+        value: this.props.unstable_valueUpper,
         useRawValue: true,
       });
       this.setState({
@@ -1189,7 +1189,7 @@ export default class Slider extends PureComponent<SliderProps> {
   render() {
     const {
       ariaLabelInput,
-      ariaLabelInputUpper,
+      unstable_ariaLabelInputUpper: ariaLabelInputUpper,
       className,
       hideTextInput,
       id = (this.inputId =
@@ -1208,7 +1208,7 @@ export default class Slider extends PureComponent<SliderProps> {
       required,
       disabled,
       name,
-      nameUpper,
+      unstable_nameUpper: nameUpper,
       light,
       readOnly,
       warn,
@@ -1218,7 +1218,7 @@ export default class Slider extends PureComponent<SliderProps> {
 
     delete other.onRelease;
     delete other.invalid;
-    delete other.valueUpper;
+    delete other.unstable_valueUpper;
 
     const { value, valueUpper, isValid, isValidUpper } = this.state;
 

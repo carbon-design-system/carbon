@@ -519,9 +519,9 @@ describe('Slider', () => {
     it('should be able to set value via props', () => {
       renderSlider({
         ariaLabelInput: 'Lower bound',
-        ariaLabelInputUpper: 'Upper bound',
+        unstable_ariaLabelInputUpper: 'Upper bound',
         value: initialValueLower,
-        valueUpper: initialValueUpper,
+        unstable_valueUpper: initialValueUpper,
         min: 0,
         max: 100,
       });

@@ -98,10 +98,10 @@ export const ControlledSliderWithLayer = () => {
 export const TwoHandleSlider = () => (
   <Slider
     ariaLabelInput="Lower bound"
-    ariaLabelInputUpper="Upper bound"
+    unstable_ariaLabelInputUpper="Upper bound"
     labelText="Slider Label"
     value={10}
-    valueUpper={90}
+    unstable_valueUpper={90}
     min={0}
     max={100}
     step={1}
@@ -125,7 +125,7 @@ Playground.argTypes = {
   ariaLabelInput: {
     control: { type: 'text' },
   },
-  ariaLabelInputUpper: {
+  unstable_ariaLabelInputUpper: {
     control: { type: 'text' },
   },
   light: {
@@ -184,7 +184,7 @@ Playground.argTypes = {
   name: {
     control: { type: 'text' },
   },
-  nameUpper: {
+  unstable_nameUpper: {
     control: { type: 'text' },
   },
   readOnly: {
@@ -206,7 +206,7 @@ Playground.argTypes = {
   value: {
     control: { type: 'number' },
   },
-  valueUpper: {
+  unstable_valueUpper: {
     control: { type: 'number' },
   },
   onBlur: {
@@ -243,7 +243,7 @@ Playground.argTypes = {
 
 Playground.args = {
   ariaLabelInput: 'Lower bound',
-  ariaLabelInputUpper: 'Upper bound',
+  unstable_ariaLabelInputUpper: 'Upper bound',
   disabled: false,
   hideTextInput: false,
   invalid: false,
@@ -255,7 +255,7 @@ Playground.args = {
   step: 5,
   stepMultiplier: 5,
   value: 50,
-  valueUpper: undefined,
+  unstable_valueUpper: undefined,
   warn: false,
   warnText: 'Warning message goes here',
 };
