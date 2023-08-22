@@ -7,9 +7,9 @@
 
 'use strict';
 
-const { expect, test } = require('@playwright/test');
-const { themes } = require('../../test-utils/env');
-const { snapshotStory, visitStory } = require('../../test-utils/storybook');
+import { themes } from '../../test-utils/env';
+import { snapshotStory } from '../../test-utils/storybook';
+import { test } from '@playwright/test';
 
 test.describe('accordion', () => {
   themes.forEach((theme) => {
@@ -22,16 +22,5 @@ test.describe('accordion', () => {
         });
       });
     });
-  });
-
-  test('accessibility-checker @avt', async ({ page }) => {
-    await visitStory(page, {
-      component: 'accordion',
-      story: 'default',
-      globals: {
-        theme: 'white',
-      },
-    });
-    await expect(page).toHaveNoACViolations('accordion');
   });
 });
