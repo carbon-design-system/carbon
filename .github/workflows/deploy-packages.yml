@@ -90,7 +90,7 @@ jobs:
           title: 'chore(release): update carbon deps'
           token: ${{ steps.generate_token.outputs.token }}
           body: |
-            Automated pull request to update Carbon on the website
+            Automated pull request to update Carbon in gatsby-theme-carbon
 
             **Checklist**
 
