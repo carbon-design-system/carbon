@@ -109,6 +109,6 @@ export const WithAccessibleLabels = () => (
 
 export const Skeleton = () => (
   <div>
-    <ToggleSkeleton aria-label="Toggle is loading" />
+    <ToggleSkeleton />
   </div>
 );

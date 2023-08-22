@@ -30,7 +30,7 @@ test.describe('Toggle @avt', () => {
         theme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('Toggle-accessible-labels');
+    await expect(page).toHaveNoACViolations('Toggle-skeleton');
   });
 
   test('accessibility-checker small toggle', async ({ page }) => {
