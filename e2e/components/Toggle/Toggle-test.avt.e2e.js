@@ -22,6 +22,17 @@ test.describe('Toggle @avt', () => {
     await expect(page).toHaveNoACViolations('Toggle');
   });
 
+  test('accessibility-checker skeleton', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Tabs',
+      id: 'components-toggle--skeleton',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('Toggle-accessible-labels');
+  });
+
   test('accessibility-checker small toggle', async ({ page }) => {
     await visitStory(page, {
       component: 'Tabs',
@@ -32,6 +43,7 @@ test.describe('Toggle @avt', () => {
     });
     await expect(page).toHaveNoACViolations('Toggle-small');
   });
+
   test('accessibility-checker with accessible labels', async ({ page }) => {
     await visitStory(page, {
       component: 'Tabs',
