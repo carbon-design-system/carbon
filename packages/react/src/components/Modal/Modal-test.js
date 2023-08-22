@@ -333,6 +333,35 @@ describe('Modal', () => {
       'cds--btn--danger'
     );
   });
+
+  it('disables buttons when inline loading status is active', () => {
+    render(
+      <Modal
+        id="custom-modal-id"
+        data-testid="modal-4"
+        loadingStatus="active"
+        loadingDescription="loading..."
+        primaryButtonText="Save"
+        secondaryButtonText="Cancel">
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    expect(screen.getByTitle('loading')).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'loading loading...' })
+    ).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Cancel' })).toBeDisabled();
+  });
 });
 
 describe('events', () => {

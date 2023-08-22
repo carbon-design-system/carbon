@@ -199,5 +199,25 @@ describe('ComposedModal', () => {
         'cds--modal-container--lg'
       );
     });
+
+    it('disables buttons when inline loading status is active', () => {
+      render(
+        <ComposedModal open>
+          <ModalHeader>Modal header</ModalHeader>
+          <ModalBody>This is the modal body content</ModalBody>
+          <ModalFooter
+            primaryButtonText="Add"
+            secondaryButtonText="Cancel"
+            loadingStatus="active"
+            loadingDescription="loading..."></ModalFooter>
+        </ComposedModal>
+      );
+
+      expect(screen.getByTitle('loading')).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: 'loading loading...' })
+      ).toBeDisabled();
+      expect(screen.getByRole('button', { name: 'Cancel' })).toBeDisabled();
+    });
   });
 });
