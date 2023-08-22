@@ -83,7 +83,7 @@ Playground.argTypes = {
   },
 };
 
-export const WithAcessibleLabels = () => (
+export const WithAccessibleLabels = () => (
   <VStack gap={7}>
     <Toggle id="toggle-4" labelText="Toggle label" />
 
