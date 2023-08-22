@@ -9,15 +9,14 @@
 
 module.exports = {
   extends: [
-    require.resolve('stylelint-config-standard'),
+    require.resolve('stylelint-config-standard-scss'),
     require.resolve('stylelint-no-unsupported-browser-features'),
     require.resolve('stylelint-config-idiomatic-order'),
-    require.resolve('stylelint-config-standard-scss'),
+    require.resolve('stylelint-prettier/recommended'),
     require.resolve('./rules/possible-errors'),
     require.resolve('./rules/limit-language-features'),
     require.resolve('./rules/stylistic-issues'),
     require.resolve('./plugins/a11y'),
-    require.resolve('./plugins/prettier'),
     require.resolve('./plugins/scss'),
   ],
 };
