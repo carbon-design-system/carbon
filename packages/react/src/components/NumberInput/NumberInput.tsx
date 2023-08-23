@@ -8,13 +8,7 @@
 import { Add, Subtract } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, {
-  LegacyRef,
-  ReactNode,
-  useContext,
-  useRef,
-  useState,
-} from 'react';
+import React, { ReactNode, useContext, useRef, useState } from 'react';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useNormalizedInputProps as normalize } from '../../internal/useNormalizedInputProps';
 import { usePrefix } from '../../internal/usePrefix';
@@ -691,18 +685,4 @@ function disableWheel(e) {
   e.preventDefault();
 }
 
-/**
- * Clamp the given value between the upper bound `max` and the lower bound `min`
- *
- * 16 digit min/max more precise than Infinity. Somewhere in 9 quadrillion,
- * there will be integer display issues at runtime. 9quad is a safe cutoff.
- * @param {number} max
- * @param {number} min
- * @param {number} value
- */
-const boundLimit = 9000000000000000; // 16 digit, 9 quadrillion
-
-function clamp(max = boundLimit, min = -boundLimit, value) {
-  return Math.min(max, Math.max(min, value));
-}
 export { NumberInput };
