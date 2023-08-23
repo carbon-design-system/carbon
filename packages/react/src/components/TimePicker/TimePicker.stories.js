@@ -43,6 +43,22 @@ export const Default = () => {
   );
 };
 
+export const Test = () => {
+  const is24HourLocale = true;
+  return (
+    <div>
+      <TimePicker labelText="label">
+        {!is24HourLocale && (
+          <TimePickerSelect id="time-picker-select-">
+            <SelectItem disabled={false} text="AM" value="AM" />
+            <SelectItem disabled={false} text="PM" value="PM" />
+          </TimePickerSelect>
+        )}
+      </TimePicker>
+    </div>
+  );
+};
+
 export const _WithLayer = () => (
   <WithLayer>
     {(layer) => (
