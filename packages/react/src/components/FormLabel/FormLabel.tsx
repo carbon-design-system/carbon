@@ -10,7 +10,30 @@ import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-function FormLabel({ className: customClassName, children, id, ...rest }) {
+export interface FormLabelProps
+  extends Omit<React.LabelHTMLAttributes<HTMLLabelElement>, 'htmlFor'> {
+  /**
+   * Specify the content of the form label
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Provide a custom className to be applied to the containing <label> node
+   */
+  className?: string;
+
+  /**
+   * Provide a unique id for the given <FormLabel>
+   */
+  id?: string;
+}
+
+function FormLabel({
+  className: customClassName,
+  children,
+  id,
+  ...rest
+}: FormLabelProps) {
   const prefix = usePrefix();
   const className = cx(
     `${prefix}--label`,
