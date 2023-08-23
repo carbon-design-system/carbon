@@ -16,7 +16,6 @@ interface ToggleSkeletonProps {
 }
 
 const ToggleSkeleton: React.FC<ToggleSkeletonProps> = ({
-  'aria-label': ariaLabel = 'Toggle is loading',
   className,
   ...rest
 }) => {
@@ -28,7 +27,7 @@ const ToggleSkeleton: React.FC<ToggleSkeletonProps> = ({
   );
 
   return (
-    <div className={skeletonClassNames} {...rest} aria-label={ariaLabel}>
+    <div className={skeletonClassNames} {...rest}>
       <div className={`${prefix}--toggle__skeleton-circle`} />
       <div className={`${prefix}--toggle__skeleton-rectangle`} />
     </div>
