@@ -31,7 +31,14 @@ const TableRow = (props: TableRowProps) => {
     [`${prefix}--data-table--selected`]: props.isSelected,
   });
   const cleanProps = {
-    ...omit(props, ['ariaLabel', 'onExpand', 'isExpanded', 'isSelected']),
+    ...omit(props, [
+      'ariaLabel',
+      'aria-label',
+      'aria-controls',
+      'onExpand',
+      'isExpanded',
+      'isSelected',
+    ]),
     className: className || undefined,
   };
   return <tr {...cleanProps} />;
