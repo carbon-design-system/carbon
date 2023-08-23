@@ -22,7 +22,7 @@ function useIsTruncated(ref) {
   return isTruncated;
 }
 
-export interface ListBoxMenuItemProps extends ReactAttr<HTMLDivElement> {
+export interface ListBoxMenuItemProps extends ReactAttr<HTMLLIElement> {
   /**
    * Specify whether the current menu item is "active".
    */
@@ -32,10 +32,15 @@ export interface ListBoxMenuItemProps extends ReactAttr<HTMLDivElement> {
    * Specify whether the current menu item is "highlighted".
    */
   isHighlighted?: boolean;
+
+  /**
+   * Specify whether the item should be disabled
+   */
+  disabled?: boolean;
 }
 
 export type ListBoxMenuItemForwardedRef =
-  | (ForwardedRef<HTMLDivElement> & {
+  | (ForwardedRef<HTMLLIElement> & {
       menuItemOptionRef?: React.Ref<HTMLDivElement>;
     })
   | null;
@@ -50,7 +55,7 @@ export type ListBoxMenuItemComponent = ForwardRefReturn<
  * name, alongside any classes for any corresponding states, for a generic list
  * box menu item.
  */
-const ListBoxMenuItem = React.forwardRef<HTMLDivElement, ListBoxMenuItemProps>(
+const ListBoxMenuItem = React.forwardRef<HTMLLIElement, ListBoxMenuItemProps>(
   function ListBoxMenuItem(
     { children, isActive, isHighlighted, title, ...rest }: ListBoxMenuItemProps,
     forwardedRef: ListBoxMenuItemForwardedRef
@@ -64,17 +69,16 @@ const ListBoxMenuItem = React.forwardRef<HTMLDivElement, ListBoxMenuItemProps>(
     });
 
     return (
-      <div
+      <li
         {...rest}
         className={className}
-        title={isTruncated ? title : undefined}
-        tabIndex={-1}>
+        title={isTruncated ? title : undefined}>
         <div
           className={`${prefix}--list-box__menu-item__option`}
           ref={forwardedRef?.menuItemOptionRef || ref}>
           {children}
         </div>
-      </div>
+      </li>
     );
   }
 );
@@ -86,6 +90,11 @@ ListBoxMenuItem.propTypes = {
    * Menu Item
    */
   children: PropTypes.node,
+
+  /**
+   * Specify if the item should be disabled
+   */
+  disabled: PropTypes.bool,
 
   /**
    * Specify whether the current menu item is "active".
