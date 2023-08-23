@@ -369,6 +369,12 @@
     background-color: transparent;
   }
 
+  .#{$prefix}--slider__status-msg.#{$prefix}--form-requirement {
+    display: block;
+    overflow: visible;
+    max-height: 100%;
+  }
+
   // Skeleton state
   .#{$prefix}--slider-container.#{$prefix}--skeleton
     .#{$prefix}--slider__range-label {

@@ -426,6 +426,7 @@ export default class Slider extends PureComponent<SliderProps> {
     isValid: true,
     isValidUpper: true,
     activeHandle: null,
+    correctedValue: null,
   };
 
   thumbRef: React.RefObject<HTMLDivElement>;
@@ -696,6 +697,7 @@ export default class Slider extends PureComponent<SliderProps> {
         isValid: true,
       });
     }
+    this.setState({ correctedValue: null });
   };
 
   /**
@@ -761,6 +763,8 @@ export default class Slider extends PureComponent<SliderProps> {
         isValid: true,
       });
     }
+
+    this.setState({ correctedValue: null });
   };
 
   /**
@@ -890,6 +894,12 @@ export default class Slider extends PureComponent<SliderProps> {
             min: this.props.min,
             max: this.props.max,
           });
+
+      if (adjustedValue !== targetValue) {
+        this.setState({ correctedValue: targetValue });
+      } else {
+        this.setState({ correctedValue: null });
+      }
 
       const { value, left } = this.calcValue({
         value: adjustedValue,
@@ -1220,7 +1230,8 @@ export default class Slider extends PureComponent<SliderProps> {
     delete other.invalid;
     delete other.unstable_valueUpper;
 
-    const { value, valueUpper, isValid, isValidUpper } = this.state;
+    const { value, valueUpper, isValid, isValidUpper, correctedValue } =
+      this.state;
 
     return (
       <PrefixContext.Consumer>
@@ -1474,6 +1485,17 @@ export default class Slider extends PureComponent<SliderProps> {
                     `${prefix}--form-requirement`
                   )}>
                   {warnText}
+                </div>
+              )}
+              {correctedValue && (
+                <div
+                  role="alert"
+                  className={classNames(
+                    `${prefix}--slider__status-msg`,
+                    `${prefix}--form-requirement`
+                  )}>
+                  The inputted value &quot;{correctedValue}&quot; was corrected
+                  to the nearest allowed digit.
                 </div>
               )}
             </div>
