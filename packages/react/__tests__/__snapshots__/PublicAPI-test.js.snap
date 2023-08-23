@@ -1960,14 +1960,14 @@ Map {
     },
     "TableExpandHeader": Object {
       "propTypes": Object {
+        "aria-controls": Object {
+          "type": "string",
+        },
+        "aria-label": Object {
+          "type": "string",
+        },
         "ariaLabel": Object {
-          "args": Array [
-            Array [
-              [Function],
-              [Function],
-            ],
-          ],
-          "type": "oneOfType",
+          "type": "string",
         },
         "children": Object {
           "type": "node",
@@ -1999,8 +1999,13 @@ Map {
     },
     "TableExpandRow": Object {
       "propTypes": Object {
+        "aria-controls": Object {
+          "type": "string",
+        },
+        "aria-label": Object {
+          "type": "string",
+        },
         "ariaLabel": Object {
-          "isRequired": true,
           "type": "string",
         },
         "children": Object {
@@ -7815,14 +7820,14 @@ Map {
   },
   "TableExpandHeader" => Object {
     "propTypes": Object {
+      "aria-controls": Object {
+        "type": "string",
+      },
+      "aria-label": Object {
+        "type": "string",
+      },
       "ariaLabel": Object {
-        "args": Array [
-          Array [
-            [Function],
-            [Function],
-          ],
-        ],
-        "type": "oneOfType",
+        "type": "string",
       },
       "children": Object {
         "type": "node",
@@ -7854,8 +7859,13 @@ Map {
   },
   "TableExpandRow" => Object {
     "propTypes": Object {
+      "aria-controls": Object {
+        "type": "string",
+      },
+      "aria-label": Object {
+        "type": "string",
+      },
       "ariaLabel": Object {
-        "isRequired": true,
         "type": "string",
       },
       "children": Object {

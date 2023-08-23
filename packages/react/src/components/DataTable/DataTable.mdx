@@ -218,7 +218,9 @@ The `TableExpandHeader` is placed before all the other headers as a placeholder
 column. In each row that you would like to be expanded, you will use
 `TableExpandRow`. It's important that `getRowProps` is applied to
 `TableExpandRow` so that it has the necessary props. `TableExpandedRow` is used
-for the content that will be displayed only when the row is expanded.
+for the content that will be displayed only when the row is expanded. It's
+important that `getExpandedRowProps` is applied to `TableExpandedRow` so that it
+has the necessary props.
 
 ### Programmatic expansion
 
