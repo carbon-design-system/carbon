@@ -1108,40 +1108,26 @@ Map {
             "environment": Object {
               "args": Array [
                 Object {
-                  "Node": Object {
-                    "isRequired": true,
-                    "type": "func",
-                  },
                   "addEventListener": Object {
-                    "isRequired": true,
                     "type": "func",
                   },
                   "document": Object {
                     "args": Array [
                       Object {
                         "activeElement": Object {
-                          "isRequired": true,
                           "type": "any",
                         },
                         "body": Object {
-                          "isRequired": true,
                           "type": "any",
                         },
-                        "createElement": Object {
-                          "isRequired": true,
-                          "type": "func",
-                        },
                         "getElementById": Object {
-                          "isRequired": true,
                           "type": "func",
                         },
                       },
                     ],
-                    "isRequired": true,
                     "type": "shape",
                   },
                   "removeEventListener": Object {
-                    "isRequired": true,
                     "type": "func",
                   },
                 },
@@ -3536,40 +3522,26 @@ Map {
             "environment": Object {
               "args": Array [
                 Object {
-                  "Node": Object {
-                    "isRequired": true,
-                    "type": "func",
-                  },
                   "addEventListener": Object {
-                    "isRequired": true,
                     "type": "func",
                   },
                   "document": Object {
                     "args": Array [
                       Object {
                         "activeElement": Object {
-                          "isRequired": true,
                           "type": "any",
                         },
                         "body": Object {
-                          "isRequired": true,
                           "type": "any",
                         },
-                        "createElement": Object {
-                          "isRequired": true,
-                          "type": "func",
-                        },
                         "getElementById": Object {
-                          "isRequired": true,
                           "type": "func",
                         },
                       },
                     ],
-                    "isRequired": true,
                     "type": "shape",
                   },
                   "removeEventListener": Object {
-                    "isRequired": true,
                     "type": "func",
                   },
                 },
@@ -5147,40 +5119,26 @@ Map {
               "environment": Object {
                 "args": Array [
                   Object {
-                    "Node": Object {
-                      "isRequired": true,
-                      "type": "func",
-                    },
                     "addEventListener": Object {
-                      "isRequired": true,
                       "type": "func",
                     },
                     "document": Object {
                       "args": Array [
                         Object {
                           "activeElement": Object {
-                            "isRequired": true,
                             "type": "any",
                           },
                           "body": Object {
-                            "isRequired": true,
                             "type": "any",
                           },
-                          "createElement": Object {
-                            "isRequired": true,
-                            "type": "func",
-                          },
                           "getElementById": Object {
-                            "isRequired": true,
                             "type": "func",
                           },
                         },
                       ],
-                      "isRequired": true,
                       "type": "shape",
                     },
                     "removeEventListener": Object {
-                      "isRequired": true,
                       "type": "func",
                     },
                   },
@@ -9102,9 +9060,6 @@ Map {
     },
   },
   "ToggleSmallSkeleton" => Object {
-    "defaultProps": Object {
-      "aria-label": "Toggle is loading",
-    },
     "propTypes": Object {
       "aria-label": Object {
         "isRequired": true,
