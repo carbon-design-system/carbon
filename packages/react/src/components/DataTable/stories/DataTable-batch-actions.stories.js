@@ -72,10 +72,17 @@ export const Default = () => (
       selectedRows,
       getTableProps,
       getTableContainerProps,
+      selectRow,
     }) => {
       const batchActionProps = {
         ...getBatchActionProps({
-          onSelectAll: action('Select all rows across all pages'),
+          onSelectAll: () => {
+            rows.map((row) => {
+              if (!row.isSelected) {
+                selectRow(row.id);
+              }
+            });
+          },
         }),
       };
 
