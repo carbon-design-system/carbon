@@ -8,7 +8,7 @@
     "start": "webpack serve"
   },
   "dependencies": {
-    "@carbon/web-components": "latest"
+    "@carbon/web-components": "v1-latest"
   },
   "devDependencies": {
     "html-webpack-plugin": "^4.5.0",
