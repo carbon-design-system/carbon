@@ -16,10 +16,23 @@ import { ReactAttr } from '../../types/common';
 
 type TableExpandHeaderPropsBase = {
   /**
+   * Space separated list of one or more ID values referencing the TableExpandedRow(s) being controlled by the TableExpandHeader
+   */
+  ['aria-controls']: string;
+
+  /**
+   * @deprecated This prop has been deprecated and will be
+   * removed in the next major release of Carbon. Use the
+   * `aria-label` prop instead.
+   */
+  ariaLabel?: string;
+
+  /**
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */
-  ariaLabel?: string;
+  ['aria-label']: string;
+
   /**
    * @deprecated The enableExpando prop is being replaced by `enableToggle`
    */
@@ -45,19 +58,21 @@ type TableExpandHeaderPropsBase = {
 
 type TableExpandHeaderPropsWithToggle = Omit<
   TableExpandHeaderPropsBase,
-  'ariaLabel' | 'enableToggle' | 'onExpand'
+  'ariaLabel' | 'aria-label' | 'enableToggle' | 'onExpand'
 > & {
   enableToggle: true;
   ariaLabel: string;
+  ['aria-label']: string;
   onExpand(event: React.MouseEvent<HTMLButtonElement>): void;
 };
 
 type TableExpandHeaderPropsWithExpando = Omit<
   TableExpandHeaderPropsBase,
-  'ariaLabel' | 'enableExpando' | 'onExpand'
+  'ariaLabel' | 'aria-label' | 'enableExpando' | 'onExpand'
 > & {
   enableExpando: true;
   ariaLabel: string;
+  ['aria-label']: string;
   onExpand(event: React.MouseEvent<HTMLButtonElement>): void;
 };
 
@@ -67,7 +82,9 @@ export type TableExpandHeaderProps =
   | TableExpandHeaderPropsBase;
 
 const TableExpandHeader = ({
-  ariaLabel,
+  ['aria-controls']: ariaControls,
+  ['aria-label']: ariaLabel,
+  ariaLabel: deprecatedAriaLabel,
   className: headerClassName,
   enableExpando,
   enableToggle,
@@ -95,7 +112,9 @@ const TableExpandHeader = ({
           className={`${prefix}--table-expand__button`}
           onClick={onExpand}
           title={expandIconDescription}
-          aria-label={ariaLabel}>
+          aria-label={deprecatedAriaLabel || ariaLabel}
+          aria-expanded={isExpanded}
+          aria-controls={ariaControls}>
           <ChevronRight
             className={`${prefix}--table-expand__svg`}
             aria-label={expandIconDescription}
@@ -109,19 +128,22 @@ const TableExpandHeader = ({
 
 TableExpandHeader.propTypes = {
   /**
+   * Space separated list of one or more ID values referencing the TableExpandedRow(s) being controlled by the TableExpandHeader
+   */
+  ['aria-controls']: PropTypes.string,
+
+  /**
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */
-  ariaLabel: PropTypes.oneOfType([
-    requiredIfGivenPropIsTruthy(
-      'enableExpando',
-      PropTypes.string
-    ) as Validator<any>,
-    requiredIfGivenPropIsTruthy(
-      'enableToggle',
-      PropTypes.string
-    ) as Validator<any>,
-  ]),
+  ['aria-label']: PropTypes.string,
+
+  /**
+   * Deprecated, please use `aria-label` instead.
+   * Specify the string read by a voice reader when the expand trigger is
+   * focused
+   */
+  ariaLabel: PropTypes.string,
 
   children: PropTypes.node,
 

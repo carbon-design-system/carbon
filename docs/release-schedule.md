@@ -53,6 +53,44 @@ Maintenance release, please
 [open an issue](https://github.com/carbon-design-system/carbon/issues/new?assignees=&labels=type%3A+bug+%F0%9F%90%9B&projects=&template=BUG_REPORT.yaml&title=%5BBug%5D%3A+)
 and include a link to the v11 fix pull request.
 
+Changes required for critical security and bug fixes may lead to semver-major
+changes landing within a release stream, such situations will be rare and will
+land as semver-minor. Although, those changes should have a revert option
+included.
+
+The term 'supported release lines' will be used to refer to all release lines
+that are not End-of-Life.
+
+## Accessibility
+
+Active release lines are tested using IBMa's `accessibility-checker` in a real
+browser environment to ensure accessibility compliance. The most current ruleset
+is used for these automated tests. These tests cover default component states,
+complex/interior component states (like open, focused, etc.) as well as keyboard
+navigation flows.
+
+Rulesets are a moving target though. What was once fully compliant can be
+non-compliant again as new standards, rules, and techniques are required in new
+rulesets.
+
+Beginning with v11, tests are run against the most current ruleset at the time
+of release. Versions are not re-tested against newer or older rulesets. For
+instance, v11.35.0 was released on Aug 17 2023 and at the time the current
+ruleset was the `August 09 2023 Deployment`. This release was not tested on
+prior rulesets and will not be tested on rulesets newer than the
+`August 09 2023 Deployment`. Rulesets and their deployment dates can be found on
+the
+[IBM Accessibility website](https://www.ibm.com/able/requirements/checker-rule-sets/).
+
+For these reasons, we recommend staying up to date with the latest active
+version line to ensure the greatest accessibility compliance, particularly when
+a new major version is released.
+
+`Maintenance` release lines are not tested against newer rulesets. If you're
+using a maintenance release line, there may be gaps in accessibility that you
+will need to patch yourself or submit a fix by
+[opening a pull request](https://github.com/carbon-design-system/carbon/blob/main/.github/CONTRIBUTING.md).
+
 ## Assets managed under this release schedule
 
 This plan covers the design and development assets under maintenance of the

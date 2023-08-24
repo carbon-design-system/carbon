@@ -93,7 +93,7 @@ export const WithAccessibleLabels = () => (
       <div id="toggle-6-label" style={{ marginBlockEnd: '0.5rem' }}>
         External toggle label
       </div>
-      <Toggle id="toggle-6" aria-labelledby="toggle-6-label" hideLabel />
+      <Toggle id="toggle-6" hideLabel />
     </div>
 
     <div>
@@ -109,6 +109,6 @@ export const WithAccessibleLabels = () => (
 
 export const Skeleton = () => (
   <div>
-    <ToggleSkeleton aria-label="Toggle is loading" />
+    <ToggleSkeleton />
   </div>
 );

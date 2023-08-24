@@ -10,12 +10,24 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-const SkeletonPlaceholder = ({ className, ...other }) => {
+export interface SkeletonPlaceholderProps {
+  /**
+   * Add a custom class to the component to set the height and width
+   */
+  className?: string;
+}
+
+const SkeletonPlaceholder = ({
+  className,
+  ...other
+}: SkeletonPlaceholderProps) => {
   const prefix = usePrefix();
-  const skeletonPlaceholderClasses = classNames({
-    [`${prefix}--skeleton__placeholder`]: true,
-    [className]: className,
-  });
+  const skeletonPlaceholderClasses = classNames(
+    {
+      [`${prefix}--skeleton__placeholder`]: true,
+    },
+    className
+  );
 
   return <div className={skeletonPlaceholderClasses} {...other} />;
 };
