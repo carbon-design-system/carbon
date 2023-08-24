@@ -125,11 +125,11 @@ $notification-action-hover: (
   values: (
     (
       theme: themes.$white,
-      value: map.get(notification.$notification-background-info, white-theme),
+      value: map.get(notification.$notification-action-hover, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: map.get(notification.$notification-background-info, g-10),
+      value: map.get(notification.$notification-action-hover, g-10),
     ),
     (
       theme: themes.$g90,

@@ -44,8 +44,7 @@ test.describe('MultiSelect @avt', () => {
         theme: 'white',
       },
     });
-    const toggleButton = page.getByRole('button');
-    const menu = page.getByRole('listbox');
+    const toggleButton = page.getByRole('combobox');
 
     await expect(toggleButton).toBeVisible();
     // Tab and open the MultiSelect
@@ -53,7 +52,6 @@ test.describe('MultiSelect @avt', () => {
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(page.getByRole('combobox', { expanded: true })).toBeVisible;
-    await expect(menu).toBeFocused();
 
     await expect(page).toHaveNoACViolations('MultiSelect-open');
   });
@@ -67,8 +65,7 @@ test.describe('MultiSelect @avt', () => {
         theme: 'white',
       },
     });
-    const toggleButton = page.getByRole('button');
-    const menu = page.getByRole('listbox');
+    const toggleButton = page.getByRole('combobox');
 
     await expect(toggleButton).toBeVisible();
     // Tab and open the MultiSelect
@@ -76,7 +73,6 @@ test.describe('MultiSelect @avt', () => {
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(page.getByRole('combobox', { expanded: true })).toBeVisible;
-    await expect(menu).toBeFocused();
 
     await expect(page).toHaveNoACViolations('MultiSelect-open');
   });
@@ -89,9 +85,8 @@ test.describe('MultiSelect @avt', () => {
         theme: 'white',
       },
     });
-    const toggleButton = page.getByRole('button', {
+    const toggleButton = page.getByRole('combobox', {
       expanded: false,
-      name: 'Multiselect Label',
     });
     const selection = page.getByRole('button', {
       name: 'Clear all selected items',
@@ -127,7 +122,14 @@ test.describe('MultiSelect @avt', () => {
     ).toHaveClass(
       'cds--list-box__menu-item cds--list-box__menu-item--highlighted'
     );
-    // select first option (should only select with space bar)
+    // select first option (should select with enter and space)
+    await page.keyboard.press('Enter');
+    await expect(
+      page.getByRole('option', {
+        name: 'An example option that is really long to show what should be done to handle long text',
+        selected: true,
+      })
+    ).toBeVisible();
     await page.keyboard.press('Enter');
     await expect(
       page.getByRole('option', {
