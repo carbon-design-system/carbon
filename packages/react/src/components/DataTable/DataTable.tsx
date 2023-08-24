@@ -179,7 +179,9 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     [key: string]: unknown;
   }) => {
     onCancel: () => void;
+    onSelectAll?: () => void | undefined;
     shouldShowBatchActions: boolean;
+    totalCount: number;
     totalSelected: number;
     [key: string]: unknown;
   };
@@ -678,6 +680,8 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
     const { shouldShowBatchActions } = this.state;
     const totalSelected = this.getSelectedRows().length;
     return {
+      onSelectAll: undefined,
+      totalCount: this.state.rowIds.length || 0,
       ...props,
       shouldShowBatchActions: shouldShowBatchActions && totalSelected > 0,
       totalSelected,
