@@ -1108,26 +1108,40 @@ Map {
             "environment": Object {
               "args": Array [
                 Object {
+                  "Node": Object {
+                    "isRequired": true,
+                    "type": "func",
+                  },
                   "addEventListener": Object {
+                    "isRequired": true,
                     "type": "func",
                   },
                   "document": Object {
                     "args": Array [
                       Object {
                         "activeElement": Object {
+                          "isRequired": true,
                           "type": "any",
                         },
                         "body": Object {
+                          "isRequired": true,
                           "type": "any",
                         },
+                        "createElement": Object {
+                          "isRequired": true,
+                          "type": "func",
+                        },
                         "getElementById": Object {
+                          "isRequired": true,
                           "type": "func",
                         },
                       },
                     ],
+                    "isRequired": true,
                     "type": "shape",
                   },
                   "removeEventListener": Object {
+                    "isRequired": true,
                     "type": "func",
                   },
                 },
@@ -1953,14 +1967,14 @@ Map {
     },
     "TableExpandHeader": Object {
       "propTypes": Object {
+        "aria-controls": Object {
+          "type": "string",
+        },
+        "aria-label": Object {
+          "type": "string",
+        },
         "ariaLabel": Object {
-          "args": Array [
-            Array [
-              [Function],
-              [Function],
-            ],
-          ],
-          "type": "oneOfType",
+          "type": "string",
         },
         "children": Object {
           "type": "node",
@@ -1992,8 +2006,13 @@ Map {
     },
     "TableExpandRow": Object {
       "propTypes": Object {
+        "aria-controls": Object {
+          "type": "string",
+        },
+        "aria-label": Object {
+          "type": "string",
+        },
         "ariaLabel": Object {
-          "isRequired": true,
           "type": "string",
         },
         "children": Object {
@@ -3476,6 +3495,8 @@ Map {
   "FilterableMultiSelect" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
+      "clearSelectionDescription": "Total items selected: ",
+      "clearSelectionText": "To clear selection, press Delete or Backspace,",
       "compareItems": [Function],
       "direction": "bottom",
       "disabled": false,
@@ -3490,6 +3511,12 @@ Map {
     "propTypes": Object {
       "aria-label": [Function],
       "ariaLabel": [Function],
+      "clearSelectionDescription": Object {
+        "type": "string",
+      },
+      "clearSelectionText": Object {
+        "type": "string",
+      },
       "compareItems": Object {
         "isRequired": true,
         "type": "func",
@@ -3521,26 +3548,40 @@ Map {
             "environment": Object {
               "args": Array [
                 Object {
+                  "Node": Object {
+                    "isRequired": true,
+                    "type": "func",
+                  },
                   "addEventListener": Object {
+                    "isRequired": true,
                     "type": "func",
                   },
                   "document": Object {
                     "args": Array [
                       Object {
                         "activeElement": Object {
+                          "isRequired": true,
                           "type": "any",
                         },
                         "body": Object {
+                          "isRequired": true,
                           "type": "any",
                         },
+                        "createElement": Object {
+                          "isRequired": true,
+                          "type": "func",
+                        },
                         "getElementById": Object {
+                          "isRequired": true,
                           "type": "func",
                         },
                       },
                     ],
+                    "isRequired": true,
                     "type": "shape",
                   },
                   "removeEventListener": Object {
+                    "isRequired": true,
                     "type": "func",
                   },
                 },
@@ -5065,6 +5106,8 @@ Map {
     "Filterable": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
+        "clearSelectionDescription": "Total items selected: ",
+        "clearSelectionText": "To clear selection, press Delete or Backspace,",
         "compareItems": [Function],
         "direction": "bottom",
         "disabled": false,
@@ -5079,6 +5122,12 @@ Map {
       "propTypes": Object {
         "aria-label": [Function],
         "ariaLabel": [Function],
+        "clearSelectionDescription": Object {
+          "type": "string",
+        },
+        "clearSelectionText": Object {
+          "type": "string",
+        },
         "compareItems": Object {
           "isRequired": true,
           "type": "func",
@@ -5110,26 +5159,40 @@ Map {
               "environment": Object {
                 "args": Array [
                   Object {
+                    "Node": Object {
+                      "isRequired": true,
+                      "type": "func",
+                    },
                     "addEventListener": Object {
+                      "isRequired": true,
                       "type": "func",
                     },
                     "document": Object {
                       "args": Array [
                         Object {
                           "activeElement": Object {
+                            "isRequired": true,
                             "type": "any",
                           },
                           "body": Object {
+                            "isRequired": true,
                             "type": "any",
                           },
+                          "createElement": Object {
+                            "isRequired": true,
+                            "type": "func",
+                          },
                           "getElementById": Object {
+                            "isRequired": true,
                             "type": "func",
                           },
                         },
                       ],
+                      "isRequired": true,
                       "type": "shape",
                     },
                     "removeEventListener": Object {
+                      "isRequired": true,
                       "type": "func",
                     },
                   },
@@ -5345,127 +5408,7 @@ Map {
         "type": "bool",
       },
       "downshiftProps": Object {
-        "args": Array [
-          Object {
-            "children": Object {
-              "type": "func",
-            },
-            "defaultHighlightedIndex": Object {
-              "type": "number",
-            },
-            "defaultIsOpen": Object {
-              "type": "bool",
-            },
-            "environment": Object {
-              "args": Array [
-                Object {
-                  "addEventListener": Object {
-                    "type": "func",
-                  },
-                  "document": Object {
-                    "args": Array [
-                      Object {
-                        "activeElement": Object {
-                          "type": "any",
-                        },
-                        "body": Object {
-                          "type": "any",
-                        },
-                        "getElementById": Object {
-                          "type": "func",
-                        },
-                      },
-                    ],
-                    "type": "shape",
-                  },
-                  "removeEventListener": Object {
-                    "type": "func",
-                  },
-                },
-              ],
-              "type": "shape",
-            },
-            "getA11yStatusMessage": Object {
-              "type": "func",
-            },
-            "getItemId": Object {
-              "type": "func",
-            },
-            "highlightedIndex": Object {
-              "type": "number",
-            },
-            "id": Object {
-              "type": "string",
-            },
-            "initialHighlightedIndex": Object {
-              "type": "number",
-            },
-            "initialInputValue": Object {
-              "type": "string",
-            },
-            "initialIsOpen": Object {
-              "type": "bool",
-            },
-            "initialSelectedItem": Object {
-              "type": "any",
-            },
-            "inputId": Object {
-              "type": "string",
-            },
-            "inputValue": Object {
-              "type": "string",
-            },
-            "isOpen": Object {
-              "type": "bool",
-            },
-            "itemCount": Object {
-              "type": "number",
-            },
-            "itemToString": Object {
-              "type": "func",
-            },
-            "labelId": Object {
-              "type": "string",
-            },
-            "menuId": Object {
-              "type": "string",
-            },
-            "onChange": Object {
-              "type": "func",
-            },
-            "onInputValueChange": Object {
-              "type": "func",
-            },
-            "onOuterClick": Object {
-              "type": "func",
-            },
-            "onSelect": Object {
-              "type": "func",
-            },
-            "onStateChange": Object {
-              "type": "func",
-            },
-            "onUserAction": Object {
-              "type": "func",
-            },
-            "scrollIntoView": Object {
-              "type": "func",
-            },
-            "selectedItem": Object {
-              "type": "any",
-            },
-            "selectedItemChanged": Object {
-              "type": "func",
-            },
-            "stateReducer": Object {
-              "type": "func",
-            },
-            "suppressRefError": Object {
-              "type": "bool",
-            },
-          },
-        ],
-        "type": "shape",
+        "type": "object",
       },
       "helperText": Object {
         "type": "node",
@@ -7891,14 +7834,14 @@ Map {
   },
   "TableExpandHeader" => Object {
     "propTypes": Object {
+      "aria-controls": Object {
+        "type": "string",
+      },
+      "aria-label": Object {
+        "type": "string",
+      },
       "ariaLabel": Object {
-        "args": Array [
-          Array [
-            [Function],
-            [Function],
-          ],
-        ],
-        "type": "oneOfType",
+        "type": "string",
       },
       "children": Object {
         "type": "node",
@@ -7930,8 +7873,13 @@ Map {
   },
   "TableExpandRow" => Object {
     "propTypes": Object {
+      "aria-controls": Object {
+        "type": "string",
+      },
+      "aria-label": Object {
+        "type": "string",
+      },
       "ariaLabel": Object {
-        "isRequired": true,
         "type": "string",
       },
       "children": Object {
@@ -9178,9 +9126,6 @@ Map {
     },
   },
   "ToggleSmallSkeleton" => Object {
-    "defaultProps": Object {
-      "aria-label": "Toggle is loading",
-    },
     "propTypes": Object {
       "aria-label": Object {
         "isRequired": true,

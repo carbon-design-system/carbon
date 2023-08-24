@@ -20,6 +20,7 @@ exports[`DataTable.TableExpandRow renders as expected - Component API should ren
             headers="expand"
           >
             <button
+              aria-expanded="false"
               aria-label="Aria label"
               class="cds--table-expand__button"
               type="button"

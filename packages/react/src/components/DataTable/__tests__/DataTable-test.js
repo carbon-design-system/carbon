@@ -787,6 +787,7 @@ describe('DataTable', () => {
               getSelectionProps,
               getBatchActionProps,
               getRowProps,
+              getExpandedRowProps,
               onInputChange,
             }) => (
               <TableContainer title="container">
@@ -820,7 +821,9 @@ describe('DataTable', () => {
                           ))}
                         </TableExpandRow>
                         {row.isExpanded && (
-                          <TableExpandedRow colSpan={headers.length + 3}>
+                          <TableExpandedRow
+                            {...getExpandedRowProps({ row })}
+                            colSpan={headers.length + 3}>
                             <h1>Expandable row content</h1>
                             <p>Description here</p>
                           </TableExpandedRow>
