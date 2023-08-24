@@ -150,7 +150,7 @@ export const parameters = {
 export const decorators = [
   function decoratorContainer(story, context) {
     const result = story();
-    const { hasMainTag } = result as any;
+    const { hasMainTag } = result;
     const { theme } = context.globals;
 
     document.documentElement.setAttribute('storybook-carbon-theme', theme);
