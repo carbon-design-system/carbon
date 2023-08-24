@@ -717,14 +717,14 @@ export default class Slider extends PureComponent<SliderProps> {
    */
   onKeyDown = (evt) => {
     // Do nothing if component is disabled, or we don't have a valid event
-    if (this.props.disabled || this.props.readOnly || !('which' in evt)) {
+    if (this.props.disabled || this.props.readOnly) {
       return;
     }
 
     let delta = 0;
-    if (matches(evt.which, [keys.ArrowDown, keys.ArrowLeft])) {
+    if (matches(evt, [keys.ArrowDown, keys.ArrowLeft])) {
       delta = -(this.props.step ?? Slider.defaultProps.step);
-    } else if (matches(evt.which, [keys.ArrowUp, keys.ArrowRight])) {
+    } else if (matches(evt, [keys.ArrowUp, keys.ArrowRight])) {
       delta = this.props.step ?? Slider.defaultProps.step;
     } else {
       // Ignore keys we don't want to handle
@@ -849,7 +849,7 @@ export default class Slider extends PureComponent<SliderProps> {
 
   onInputKeyDown = (evt) => {
     // Do nothing if component is disabled, or we don't have a valid event.
-    if (this.props.disabled || this.props.readOnly || !('which' in evt)) {
+    if (this.props.disabled || this.props.readOnly) {
       return;
     }
 
@@ -858,7 +858,7 @@ export default class Slider extends PureComponent<SliderProps> {
       return;
     }
 
-    if (matches(evt.which, [keys.Enter])) {
+    if (matches(evt, [keys.Enter])) {
       this.processNewInputValue(evt.target);
     }
   };
