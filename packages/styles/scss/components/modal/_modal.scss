@@ -63,7 +63,8 @@
     .#{$prefix}--date-picker__input,
     .#{$prefix}--multi-select,
     .#{$prefix}--number__control-btn::before,
-    .#{$prefix}--number__control-btn::after {
+    .#{$prefix}--number__control-btn::after,
+    .#{$prefix}--list-box input[role='combobox'] {
       background-color: $field-02;
     }
 
