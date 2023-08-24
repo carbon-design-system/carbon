@@ -1888,8 +1888,14 @@ Map {
           "isRequired": true,
           "type": "func",
         },
+        "onSelectAll": Object {
+          "type": "func",
+        },
         "shouldShowBatchActions": Object {
           "type": "bool",
+        },
+        "totalCount": Object {
+          "type": "number",
         },
         "totalSelected": Object {
           "isRequired": true,
@@ -1903,6 +1909,7 @@ Map {
         "carbon.table.batch.cancel",
         "carbon.table.batch.items.selected",
         "carbon.table.batch.item.selected",
+        "carbon.table.batch.selectAll",
       ],
     },
     "TableBody": Object {
@@ -7748,8 +7755,14 @@ Map {
         "isRequired": true,
         "type": "func",
       },
+      "onSelectAll": Object {
+        "type": "func",
+      },
       "shouldShowBatchActions": Object {
         "type": "bool",
+      },
+      "totalCount": Object {
+        "type": "number",
       },
       "totalSelected": Object {
         "isRequired": true,
@@ -7763,6 +7776,7 @@ Map {
       "carbon.table.batch.cancel",
       "carbon.table.batch.items.selected",
       "carbon.table.batch.item.selected",
+      "carbon.table.batch.selectAll",
     ],
   },
   "TableBody" => Object {
