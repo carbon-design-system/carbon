@@ -9112,9 +9112,6 @@ Map {
     },
   },
   "ToggleSmallSkeleton" => Object {
-    "defaultProps": Object {
-      "aria-label": "Toggle is loading",
-    },
     "propTypes": Object {
       "aria-label": Object {
         "isRequired": true,

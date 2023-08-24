@@ -184,7 +184,7 @@ export function Toggle({
         role="switch"
         type="button"
         aria-checked={checked}
-        aria-labelledby={ariaLabelledby}
+        aria-labelledby={id}
         disabled={disabled}
         onClick={handleClick}
       />
