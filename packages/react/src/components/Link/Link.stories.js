@@ -62,12 +62,6 @@ export const Inline = () => (
 );
 
 export const PairedWithIcon = () => (
-  <Link href="#" renderIcon={Download}>
-    Download
-  </Link>
-);
-
-export const WithAccessibleAriaLabel = () => (
   <Link href="#" renderIcon={() => <Download aria-label="Download" />}>
     Carbon Docs
   </Link>
