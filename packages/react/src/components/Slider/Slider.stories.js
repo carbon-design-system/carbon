@@ -35,7 +35,7 @@ export const Default = () => (
     step={1}
     stepMultiplier={10}
     noValidate
-    invalidText="Yeah, I'm gonna need you to come in on Saturdayyyyy"
+    invalidText="Invalid message goes here"
   />
 );
 
@@ -106,7 +106,7 @@ export const TwoHandleSlider = () => (
     max={100}
     step={1}
     stepMultiplier={10}
-    invalidText="Yeah, I'm gonna need you to come in on Saturdayyyyy"
+    invalidText="Invalid message goes here"
   />
 );
 
