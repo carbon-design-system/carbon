@@ -8,13 +8,7 @@
 import { Add, Subtract } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, {
-  LegacyRef,
-  ReactNode,
-  useContext,
-  useRef,
-  useState,
-} from 'react';
+import React, { ReactNode, useContext, useRef, useState } from 'react';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useNormalizedInputProps as normalize } from '../../internal/useNormalizedInputProps';
 import { usePrefix } from '../../internal/usePrefix';
@@ -190,270 +184,262 @@ export interface NumberInputProps
   warnText?: ReactNode;
 }
 
-const NumberInput = React.forwardRef(function NumberInput(
-  props: NumberInputProps,
-  forwardRef
-) {
-  const {
-    allowEmpty = false,
-    className: customClassName,
-    disabled = false,
-    disableWheel: disableWheelProp = false,
-    defaultValue,
-    helperText = '',
-    hideLabel = false,
-    hideSteppers,
-    iconDescription,
-    id,
-    label,
-    invalid = false,
-    invalidText,
-    light,
-    max,
-    min,
-    onChange,
-    onClick,
-    onKeyUp,
-    readOnly,
-    size = 'md',
-    step = 1,
-    translateWithId: t = (id) => defaultTranslations[id],
-    warn = false,
-    warnText = '',
-    value: controlledValue,
-    ...rest
-  } = props;
-  const prefix = usePrefix();
-  const { isFluid } = useContext(FormContext);
-  const [isFocused, setIsFocused] = useState(false);
-  const [value, setValue] = useState(() => {
-    if (controlledValue !== undefined) {
-      return controlledValue;
-    }
-    if (defaultValue !== undefined) {
-      return defaultValue;
-    }
-    return 0;
-  });
-  const [prevControlledValue, setPrevControlledValue] =
-    useState(controlledValue);
-  const inputRef = useRef(null);
-  const ref = useMergedRefs([forwardRef, inputRef]) as
-    | LegacyRef<HTMLInputElement>
-    | undefined;
-  const numberInputClasses = cx({
-    [`${prefix}--number`]: true,
-    [`${prefix}--number--helpertext`]: true,
-    [`${prefix}--number--readonly`]: readOnly,
-    [`${prefix}--number--light`]: light,
-    [`${prefix}--number--nolabel`]: hideLabel,
-    [`${prefix}--number--nosteppers`]: hideSteppers,
-    [`${prefix}--number--${size}`]: size,
-  });
-  const isInputValid = getInputValidity({
-    allowEmpty,
-    invalid,
-    value,
-    max,
-    min,
-  });
-  const normalizedProps = normalize({
-    id,
-    readOnly,
-    disabled,
-    invalid: !isInputValid,
-    invalidText,
-    warn,
-    warnText,
-  });
-  const [incrementNumLabel, decrementNumLabel] = [
-    t('increment.number'),
-    t('decrement.number'),
-  ];
-  const wrapperClasses = cx(`${prefix}--number__input-wrapper`, {
-    [`${prefix}--number__input-wrapper--warning`]: normalizedProps.warn,
-  });
-  const iconClasses = cx({
-    [`${prefix}--number__invalid`]:
-      normalizedProps.invalid || normalizedProps.warn,
-    [`${prefix}--number__invalid--warning`]: normalizedProps.warn,
-  });
+const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
+  function NumberInput(props: NumberInputProps, forwardRef) {
+    const {
+      allowEmpty = false,
+      className: customClassName,
+      disabled = false,
+      disableWheel: disableWheelProp = false,
+      defaultValue,
+      helperText = '',
+      hideLabel = false,
+      hideSteppers,
+      iconDescription,
+      id,
+      label,
+      invalid = false,
+      invalidText,
+      light,
+      max,
+      min,
+      onChange,
+      onClick,
+      onKeyUp,
+      readOnly,
+      size = 'md',
+      step = 1,
+      translateWithId: t = (id) => defaultTranslations[id],
+      warn = false,
+      warnText = '',
+      value: controlledValue,
+      ...rest
+    } = props;
+    const prefix = usePrefix();
+    const { isFluid } = useContext(FormContext);
+    const [isFocused, setIsFocused] = useState(false);
+    const [value, setValue] = useState(() => {
+      if (controlledValue !== undefined) {
+        return controlledValue;
+      }
+      if (defaultValue !== undefined) {
+        return defaultValue;
+      }
+      return 0;
+    });
+    const [prevControlledValue, setPrevControlledValue] =
+      useState(controlledValue);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const ref = useMergedRefs<HTMLInputElement>([forwardRef, inputRef]);
+    const numberInputClasses = cx({
+      [`${prefix}--number`]: true,
+      [`${prefix}--number--helpertext`]: true,
+      [`${prefix}--number--readonly`]: readOnly,
+      [`${prefix}--number--light`]: light,
+      [`${prefix}--number--nolabel`]: hideLabel,
+      [`${prefix}--number--nosteppers`]: hideSteppers,
+      [`${prefix}--number--${size}`]: size,
+    });
+    const isInputValid = getInputValidity({
+      allowEmpty,
+      invalid,
+      value,
+      max,
+      min,
+    });
+    const normalizedProps = normalize({
+      id,
+      readOnly,
+      disabled,
+      invalid: !isInputValid,
+      invalidText,
+      warn,
+      warnText,
+    });
+    const [incrementNumLabel, decrementNumLabel] = [
+      t('increment.number'),
+      t('decrement.number'),
+    ];
+    const wrapperClasses = cx(`${prefix}--number__input-wrapper`, {
+      [`${prefix}--number__input-wrapper--warning`]: normalizedProps.warn,
+    });
+    const iconClasses = cx({
+      [`${prefix}--number__invalid`]:
+        normalizedProps.invalid || normalizedProps.warn,
+      [`${prefix}--number__invalid--warning`]: normalizedProps.warn,
+    });
 
-  if (controlledValue !== prevControlledValue) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    setValue(controlledValue!);
-    setPrevControlledValue(controlledValue);
-  }
-
-  let ariaDescribedBy: string | undefined = undefined;
-  if (normalizedProps.invalid) {
-    ariaDescribedBy = normalizedProps.invalidId;
-  }
-  if (normalizedProps.warn) {
-    ariaDescribedBy = normalizedProps.warnId;
-  }
-  if (!normalizedProps.validation) {
-    ariaDescribedBy = helperText ? normalizedProps.helperId : undefined;
-  }
-
-  function handleOnChange(event) {
-    if (disabled) {
-      return;
+    if (controlledValue !== prevControlledValue) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      setValue(controlledValue!);
+      setPrevControlledValue(controlledValue);
     }
 
-    const state = {
-      value: event.target.value,
-      direction: value < event.target.value ? 'up' : 'down',
+    let ariaDescribedBy: string | undefined = undefined;
+    if (normalizedProps.invalid) {
+      ariaDescribedBy = normalizedProps.invalidId;
+    }
+    if (normalizedProps.warn) {
+      ariaDescribedBy = normalizedProps.warnId;
+    }
+    if (!normalizedProps.validation) {
+      ariaDescribedBy = helperText ? normalizedProps.helperId : undefined;
+    }
+
+    function handleOnChange(event) {
+      if (disabled) {
+        return;
+      }
+
+      const state = {
+        value: event.target.value,
+        direction: value < event.target.value ? 'up' : 'down',
+      };
+      setValue(state.value);
+
+      if (onChange) {
+        onChange(event, state);
+      }
+    }
+
+    const handleFocus: React.FocusEventHandler<
+      HTMLInputElement | HTMLDivElement
+    > = (evt) => {
+      if ('type' in evt.target && evt.target.type === 'button') {
+        setIsFocused(false);
+      } else {
+        setIsFocused(evt.type === 'focus' ? true : false);
+      }
     };
-    setValue(state.value);
 
-    if (onChange) {
-      onChange(event, state);
+    const outerElementClasses = cx(`${prefix}--form-item`, {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      [customClassName!]: !!customClassName,
+      [`${prefix}--number-input--fluid--invalid`]:
+        isFluid && normalizedProps.invalid,
+      [`${prefix}--number-input--fluid--focus`]: isFluid && isFocused,
+      [`${prefix}--number-input--fluid--disabled`]: isFluid && disabled,
+    });
+
+    const Icon = normalizedProps.icon as any;
+
+    function handleStepperClick(event, direction) {
+      if (inputRef.current) {
+        direction === 'up'
+          ? inputRef.current.stepUp()
+          : inputRef.current.stepDown();
+
+        const state = {
+          value: Number(inputRef.current.value),
+          direction: direction,
+        };
+        setValue(state.value);
+
+        if (onChange) {
+          onChange(event, state);
+        }
+
+        if (onClick) {
+          onClick(event, state);
+        }
+      }
     }
-  }
 
-  const handleFocus: React.FocusEventHandler<
-    HTMLInputElement | HTMLDivElement
-  > = (evt) => {
-    if ('type' in evt.target && evt.target.type === 'button') {
-      setIsFocused(false);
-    } else {
-      setIsFocused(evt.type === 'focus' ? true : false);
-    }
-  };
-
-  const outerElementClasses = cx(`${prefix}--form-item`, {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    [customClassName!]: !!customClassName,
-    [`${prefix}--number-input--fluid--invalid`]:
-      isFluid && normalizedProps.invalid,
-    [`${prefix}--number-input--fluid--focus`]: isFluid && isFocused,
-    [`${prefix}--number-input--fluid--disabled`]: isFluid && disabled,
-  });
-
-  const Icon = normalizedProps.icon as any;
-  return (
-    <div
-      className={outerElementClasses}
-      onFocus={isFluid ? handleFocus : undefined}
-      onBlur={isFluid ? handleFocus : undefined}>
+    return (
       <div
-        className={numberInputClasses}
-        data-invalid={normalizedProps.invalid ? true : undefined}>
-        <Label
-          disabled={normalizedProps.disabled}
-          hideLabel={hideLabel}
-          id={id}
-          label={label}
-        />
-        <div className={wrapperClasses}>
-          <input
-            {...rest}
-            data-invalid={normalizedProps.invalid ? true : undefined}
-            aria-invalid={normalizedProps.invalid}
-            aria-describedby={ariaDescribedBy}
+        className={outerElementClasses}
+        onFocus={isFluid ? handleFocus : undefined}
+        onBlur={isFluid ? handleFocus : undefined}>
+        <div
+          className={numberInputClasses}
+          data-invalid={normalizedProps.invalid ? true : undefined}>
+          <Label
             disabled={normalizedProps.disabled}
-            ref={ref}
+            hideLabel={hideLabel}
             id={id}
-            max={max}
-            min={min}
-            onClick={onClick}
-            onChange={handleOnChange}
-            onKeyUp={onKeyUp}
-            onFocus={(e) => {
-              if (disableWheelProp) {
-                e.target.addEventListener('wheel', disableWheel);
-              }
-
-              if (rest.onFocus) {
-                rest.onFocus(e);
-              }
-            }}
-            onBlur={(e) => {
-              if (disableWheelProp) {
-                e.target.removeEventListener('wheel', disableWheel);
-              }
-
-              if (rest.onBlur) {
-                rest.onBlur(e);
-              }
-            }}
-            pattern="[0-9]*"
-            readOnly={readOnly}
-            step={step}
-            type="number"
-            value={value}
+            label={label}
           />
-          {Icon ? <Icon className={iconClasses} /> : null}
-          {!hideSteppers && (
-            <div className={`${prefix}--number__controls`}>
-              <button
-                aria-label={decrementNumLabel || iconDescription}
-                className={`${prefix}--number__control-btn down-icon`}
-                disabled={disabled || readOnly}
-                onClick={(event) => {
-                  const state = {
-                    value: clamp(max, min, parseInt(value as string) - step),
-                    direction: 'down',
-                  };
-                  setValue(state.value);
+          <div className={wrapperClasses}>
+            <input
+              {...rest}
+              data-invalid={normalizedProps.invalid ? true : undefined}
+              aria-invalid={normalizedProps.invalid}
+              aria-describedby={ariaDescribedBy}
+              disabled={normalizedProps.disabled}
+              ref={ref}
+              id={id}
+              max={max}
+              min={min}
+              onClick={onClick}
+              onChange={handleOnChange}
+              onKeyUp={onKeyUp}
+              onFocus={(e) => {
+                if (disableWheelProp) {
+                  e.target.addEventListener('wheel', disableWheel);
+                }
 
-                  if (onChange) {
-                    onChange(event, state);
-                  }
+                if (rest.onFocus) {
+                  rest.onFocus(e);
+                }
+              }}
+              onBlur={(e) => {
+                if (disableWheelProp) {
+                  e.target.removeEventListener('wheel', disableWheel);
+                }
 
-                  if (onClick) {
-                    onClick(event, state);
-                  }
-                }}
-                tabIndex={-1}
-                title={decrementNumLabel || iconDescription}
-                type="button">
-                <Subtract className="down-icon" />
-              </button>
-              <div className={`${prefix}--number__rule-divider`} />
-              <button
-                aria-label={incrementNumLabel || iconDescription}
-                className={`${prefix}--number__control-btn up-icon`}
-                disabled={disabled || readOnly}
-                onClick={(event) => {
-                  const state = {
-                    value: clamp(max, min, parseInt(value as string) + step),
-                    direction: 'up',
-                  };
-                  setValue(state.value);
-
-                  if (onChange) {
-                    onChange(event, state);
-                  }
-
-                  if (onClick) {
-                    onClick(event, state);
-                  }
-                }}
-                tabIndex={-1}
-                title={incrementNumLabel || iconDescription}
-                type="button">
-                <Add className="up-icon" />
-              </button>
-              <div className={`${prefix}--number__rule-divider`} />
-            </div>
+                if (rest.onBlur) {
+                  rest.onBlur(e);
+                }
+              }}
+              pattern="[0-9]*"
+              readOnly={readOnly}
+              step={step}
+              type="number"
+              value={value}
+            />
+            {Icon ? <Icon className={iconClasses} /> : null}
+            {!hideSteppers && (
+              <div className={`${prefix}--number__controls`}>
+                <button
+                  aria-label={decrementNumLabel || iconDescription}
+                  className={`${prefix}--number__control-btn down-icon`}
+                  disabled={disabled || readOnly}
+                  onClick={(event) => handleStepperClick(event, 'down')}
+                  tabIndex={-1}
+                  title={decrementNumLabel || iconDescription}
+                  type="button">
+                  <Subtract className="down-icon" />
+                </button>
+                <div className={`${prefix}--number__rule-divider`} />
+                <button
+                  aria-label={incrementNumLabel || iconDescription}
+                  className={`${prefix}--number__control-btn up-icon`}
+                  disabled={disabled || readOnly}
+                  onClick={(event) => handleStepperClick(event, 'up')}
+                  tabIndex={-1}
+                  title={incrementNumLabel || iconDescription}
+                  type="button">
+                  <Add className="up-icon" />
+                </button>
+                <div className={`${prefix}--number__rule-divider`} />
+              </div>
+            )}
+          </div>
+          {isFluid && <hr className={`${prefix}--number-input__divider`} />}
+          {normalizedProps.validation ? (
+            normalizedProps.validation
+          ) : (
+            <HelperText
+              id={normalizedProps.helperId}
+              disabled={disabled}
+              description={helperText}
+            />
           )}
         </div>
-        {isFluid && <hr className={`${prefix}--number-input__divider`} />}
-        {normalizedProps.validation ? (
-          normalizedProps.validation
-        ) : (
-          <HelperText
-            id={normalizedProps.helperId}
-            disabled={disabled}
-            description={helperText}
-          />
-        )}
       </div>
-    </div>
-  );
-});
+    );
+  }
+);
 
 NumberInput.propTypes = {
   /**
@@ -699,18 +685,4 @@ function disableWheel(e) {
   e.preventDefault();
 }
 
-/**
- * Clamp the given value between the upper bound `max` and the lower bound `min`
- *
- * 16 digit min/max more precise than Infinity. Somewhere in 9 quadrillion,
- * there will be integer display issues at runtime. 9quad is a safe cutoff.
- * @param {number} max
- * @param {number} min
- * @param {number} value
- */
-const boundLimit = 9000000000000000; // 16 digit, 9 quadrillion
-
-function clamp(max = boundLimit, min = -boundLimit, value) {
-  return Math.min(max, Math.max(min, value));
-}
 export { NumberInput };

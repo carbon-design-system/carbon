@@ -7,9 +7,9 @@
 
 'use strict';
 
-const { expect, test } = require('@playwright/test'); // eslint-disable-line
+const { test } = require('@playwright/test'); // eslint-disable-line
 const { themes } = require('../../test-utils/env');
-const { snapshotStory, visitStory } = require('../../test-utils/storybook'); // eslint-disable-line
+const { snapshotStory } = require('../../test-utils/storybook'); // eslint-disable-line
 
 test.describe('Toggle', () => {
   themes.forEach((theme) => {
@@ -39,17 +39,4 @@ test.describe('Toggle', () => {
       });
     });
   });
-
-  // TODO: uncomment when https://github.com/IBMa/equal-access/issues/761 is resolved
-
-  // test('accessibility-checker @avt', async ({ page }) => {
-  //   await visitStory(page, {
-  //     component: 'Toggle',
-  //     id: 'components-toggle--default',
-  //     globals: {
-  //       theme: 'white',
-  //     },
-  //   });
-  //   await expect(page).toHaveNoACViolations('Toggle');
-  // });
 });
