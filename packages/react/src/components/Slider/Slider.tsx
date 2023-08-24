@@ -804,7 +804,7 @@ export default class Slider extends PureComponent<SliderProps> {
       ) {
         this.processNewInputValue(evt.target);
       } else {
-        this.setValueForHandle(activeHandle, evt.target.value);
+        this.setValueForHandle(activeHandle, targetValue);
       }
     } else {
       if (isNaN(targetValue)) {
