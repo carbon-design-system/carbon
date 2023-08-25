@@ -39,7 +39,7 @@
     inset-block-start: 0;
     display: flex;
     align-items: center;
-    padding-inline-end: layout.density('padding-inline');
+    padding-inline: layout.density('padding-inline');
   }
 
   .#{$prefix}--contained-list__label {

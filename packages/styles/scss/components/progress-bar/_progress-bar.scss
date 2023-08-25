@@ -161,6 +161,6 @@
 
   .#{$prefix}--progress-bar--indented .#{$prefix}--progress-bar__label,
   .#{$prefix}--progress-bar--indented .#{$prefix}--progress-bar__helper-text {
-    padding-inline-end: layout.density('padding-inline');
+    padding-inline: layout.density('padding-inline');
   }
 }

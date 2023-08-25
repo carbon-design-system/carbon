@@ -70,7 +70,7 @@
     column-gap: $spacing-03;
     cursor: pointer;
     grid-template-columns: 1fr max-content;
-    padding-inline-end: $spacing-05;
+    padding-inline: $spacing-05;
     transition: background-color $duration-fast-01 motion(standard, productive);
 
     &:focus {

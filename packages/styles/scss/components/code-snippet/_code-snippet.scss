@@ -307,7 +307,7 @@ $copy-btn-feedback: $background-inverse !default;
     inline-size: initial;
     block-size: 1.25rem;
     min-block-size: 1.25rem;
-    padding-inline-end: 0;
+    padding-inline: 0;
   }
 
   .#{$prefix}--snippet--inline.#{$prefix}--btn.#{$prefix}--btn--primary:hover {
