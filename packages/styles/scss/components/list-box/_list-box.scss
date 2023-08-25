@@ -79,11 +79,11 @@ $list-box-menu-width: convert.to-rem(300px);
     @include reset;
 
     position: relative;
-    width: $list-box-width;
-    height: convert.to-rem(40px);
+    inline-size: $list-box-width;
+    block-size: convert.to-rem(40px);
     max-height: convert.to-rem(40px);
     border: none;
-    border-bottom: 1px solid $border-strong;
+    border-block-end: 1px solid $border-strong;
     background-color: $field;
     color: $text-primary;
     cursor: pointer;
@@ -95,12 +95,12 @@ $list-box-menu-width: convert.to-rem(300px);
   }
 
   .#{$prefix}--list-box--lg {
-    height: convert.to-rem(48px);
+    block-size: convert.to-rem(48px);
     max-height: convert.to-rem(48px);
   }
 
   .#{$prefix}--list-box--sm {
-    height: convert.to-rem(32px);
+    block-size: convert.to-rem(32px);
     max-height: convert.to-rem(32px);
   }
 
@@ -127,13 +127,13 @@ $list-box-menu-width: convert.to-rem(300px);
 
   .#{$prefix}--list-box .#{$prefix}--text-input {
     min-width: 0;
-    height: 100%;
+    block-size: 100%;
   }
 
   // invalid states
   .#{$prefix}--list-box__invalid-icon {
     position: absolute;
-    top: 50%;
+    inset-block-start: 50%;
     right: $spacing-08;
     fill: $support-error;
     transform: translateY(-50%);
@@ -151,15 +151,15 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field,
   .#{$prefix}--list-box.#{$prefix}--list-box--warning
     .#{$prefix}--list-box__field {
-    padding-right: $spacing-10;
-    border-bottom: 0;
+    padding-inline-end: $spacing-10;
+    border-block-end: 0;
   }
 
   .#{$prefix}--list-box[data-invalid].#{$prefix}--list-box--inline
     .#{$prefix}--list-box__field,
   .#{$prefix}--list-box.#{$prefix}--list-box--warning.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__field {
-    padding-right: convert.to-rem(56px);
+    padding-inline-end: convert.to-rem(56px);
   }
 
   // V11: Possibly deprecate
@@ -235,12 +235,12 @@ $list-box-menu-width: convert.to-rem(300px);
   // disabled && invalid
   .#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field {
-    padding-right: $spacing-09;
+    padding-inline-end: $spacing-09;
   }
 
   .#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid].#{$prefix}--list-box--inline
     .#{$prefix}--list-box__field {
-    padding-right: $spacing-07;
+    padding-inline-end: $spacing-07;
   }
 
   // Inline variant for a `list-box`
@@ -287,7 +287,7 @@ $list-box-menu-width: convert.to-rem(300px);
   }
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
-    height: 100%;
+    block-size: 100%;
   }
 
   .#{$prefix}--dropdown--inline .#{$prefix}--list-box__field {
@@ -307,7 +307,7 @@ $list-box-menu-width: convert.to-rem(300px);
     display: inline-flex;
     overflow: hidden;
     // Account for the border in `.bx--list-box`
-    height: calc(100% + 1px);
+    block-size: calc(100% + 1px);
     align-items: center;
     padding: 0 $spacing-09 0 $spacing-05;
     cursor: pointer;
@@ -328,7 +328,7 @@ $list-box-menu-width: convert.to-rem(300px);
 
   // populated input field
   .#{$prefix}--list-box__field .#{$prefix}--text-input {
-    padding-right: convert.to-rem(72px);
+    padding-inline-end: convert.to-rem(72px);
   }
 
   // invalid && populated input field
@@ -339,7 +339,7 @@ $list-box-menu-width: convert.to-rem(300px);
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input {
     // to account for clear input button outline
-    padding-right: convert.to-rem(98px);
+    padding-inline-end: convert.to-rem(98px);
   }
 
   .#{$prefix}--list-box[data-invalid]
@@ -356,7 +356,7 @@ $list-box-menu-width: convert.to-rem(300px);
 
   // empty input field
   .#{$prefix}--list-box__field .#{$prefix}--text-input--empty {
-    padding-right: $spacing-09;
+    padding-inline-end: $spacing-09;
   }
 
   // invalid && empty input field
@@ -366,7 +366,7 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box--warning
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input--empty {
-    padding-right: carbon--mini-units(9);
+    padding-inline-end: carbon--mini-units(9);
   }
 
   .#{$prefix}--list-box[data-invalid]
@@ -399,8 +399,8 @@ $list-box-menu-width: convert.to-rem(300px);
     position: absolute;
     right: $spacing-05;
     display: flex;
-    width: convert.to-rem(24px);
-    height: convert.to-rem(24px);
+    inline-size: convert.to-rem(24px);
+    block-size: convert.to-rem(24px);
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -413,7 +413,7 @@ $list-box-menu-width: convert.to-rem(300px);
   }
 
   .#{$prefix}--list-box__menu-icon--open {
-    width: convert.to-rem(24px);
+    inline-size: convert.to-rem(24px);
     justify-content: center;
     transform: rotate(180deg);
   }
@@ -423,12 +423,12 @@ $list-box-menu-width: convert.to-rem(300px);
     @include button-reset.reset($width: false);
 
     position: absolute;
-    top: 50%;
+    inset-block-start: 50%;
     /* to preserve .5rem space between icons according to spec top/transform used to center the combobox clear selection icon in IE11 */
     right: convert.to-rem(36px);
     display: flex;
-    width: convert.to-rem(24px);
-    height: convert.to-rem(24px);
+    inline-size: convert.to-rem(24px);
+    block-size: convert.to-rem(24px);
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -458,16 +458,16 @@ $list-box-menu-width: convert.to-rem(300px);
     @include type-style('label-01');
 
     position: static;
-    top: auto;
+    inset-block-start: auto;
     display: flex;
-    width: auto;
-    height: convert.to-rem(24px);
+    inline-size: auto;
+    block-size: convert.to-rem(24px);
     align-items: center;
     justify-content: space-between;
     padding: convert.to-rem(8px);
     // Align with hover circle of X button
-    padding-right: convert.to-rem(2px);
-    margin-right: convert.to-rem(10px);
+    padding-inline-end: convert.to-rem(2px);
+    margin-inline-end: convert.to-rem(10px);
     background-color: $background-inverse;
     border-radius: convert.to-rem(12px);
     color: $text-inverse;
@@ -476,10 +476,10 @@ $list-box-menu-width: convert.to-rem(300px);
   }
 
   .#{$prefix}--list-box__selection--multi > svg {
-    width: convert.to-rem(20px);
-    height: convert.to-rem(20px);
+    inline-size: convert.to-rem(20px);
+    block-size: convert.to-rem(20px);
     padding: convert.to-rem(2px);
-    margin-left: convert.to-rem(4px);
+    margin-inline-start: convert.to-rem(4px);
     fill: $icon-inverse;
 
     &:hover {
@@ -511,9 +511,9 @@ $list-box-menu-width: convert.to-rem(300px);
     position: absolute;
     z-index: z('dropdown');
     right: 0;
-    left: 0;
+    inset-inline-start: 0;
     display: none;
-    width: $list-box-width;
+    inline-size: $list-box-width;
     background-color: $layer;
     overflow-y: auto;
     transition: max-height $duration-fast-02 motion(standard, productive);
@@ -555,7 +555,7 @@ $list-box-menu-width: convert.to-rem(300px);
     @include type-style('body-compact-01');
 
     position: relative;
-    height: convert.to-rem(40px);
+    block-size: convert.to-rem(40px);
     color: $text-secondary;
     cursor: pointer;
     transition: background $duration-fast-01 motion(standard, productive);
@@ -576,11 +576,11 @@ $list-box-menu-width: convert.to-rem(300px);
   }
 
   .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item {
-    height: convert.to-rem(32px);
+    block-size: convert.to-rem(32px);
   }
 
   .#{$prefix}--list-box--lg .#{$prefix}--list-box__menu-item {
-    height: convert.to-rem(48px);
+    block-size: convert.to-rem(48px);
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover {
@@ -656,12 +656,12 @@ $list-box-menu-width: convert.to-rem(300px);
 
     display: block;
     overflow: hidden;
-    height: convert.to-rem(40px);
+    block-size: convert.to-rem(40px);
     padding: convert.to-rem(11px) 0;
-    padding-right: $spacing-06;
+    padding-inline-end: $spacing-06;
     border-top: 1px solid transparent;
     border-top-color: $border-subtle-01;
-    border-bottom: 1px solid transparent;
+    border-block-end: 1px solid transparent;
     margin: 0 $spacing-05;
     color: $text-secondary;
     font-weight: normal;
@@ -687,14 +687,14 @@ $list-box-menu-width: convert.to-rem(300px);
   }
 
   .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item__option {
-    height: convert.to-rem(32px);
-    padding-top: convert.to-rem(7px);
+    block-size: convert.to-rem(32px);
+    padding-block-start: convert.to-rem(7px);
     padding-bottom: convert.to-rem(7px);
   }
 
   .#{$prefix}--list-box--lg .#{$prefix}--list-box__menu-item__option {
-    height: convert.to-rem(48px);
-    padding-top: convert.to-rem(15px);
+    block-size: convert.to-rem(48px);
+    padding-block-start: convert.to-rem(15px);
     padding-bottom: convert.to-rem(15px);
   }
 
@@ -766,8 +766,8 @@ $list-box-menu-width: convert.to-rem(300px);
     margin: 0 $spacing-03;
 
     &:focus {
-      padding-right: $spacing-03;
-      padding-left: $spacing-03;
+      padding-inline-end: $spacing-03;
+      padding-inline-start: $spacing-03;
       margin: 0;
     }
   }
@@ -822,7 +822,7 @@ $list-box-menu-width: convert.to-rem(300px);
 
   .#{$prefix}--list-box__menu-item__selected-icon {
     position: absolute;
-    top: 50%;
+    inset-block-start: 50%;
     right: convert.to-rem(16px);
     display: none;
     fill: $icon-primary;
@@ -840,7 +840,7 @@ $list-box-menu-width: convert.to-rem(300px);
   }
 
   .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label {
-    width: 100%;
+    inline-size: 100%;
   }
 
   .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label-text {
@@ -851,7 +851,7 @@ $list-box-menu-width: convert.to-rem(300px);
 
   // Dropdown top orientation modifiers
   .#{$prefix}--list-box--up .#{$prefix}--list-box__menu {
-    bottom: 2.5rem;
+    inset-block-end: 2.5rem;
   }
 
   .#{$prefix}--list-box--up.#{$prefix}--dropdown--sm
@@ -861,7 +861,7 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box--up
     .#{$prefix}--list-box--sm
     .#{$prefix}--list-box__menu {
-    bottom: 2rem;
+    inset-block-end: 2rem;
   }
 
   .#{$prefix}--list-box--up.#{$prefix}--dropdown--lg
@@ -871,7 +871,7 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box--up
     .#{$prefix}--list-box--lg
     .#{$prefix}--list-box__menu {
-    bottom: 3rem;
+    inset-block-end: 3rem;
   }
 
   // Tweaks for descendants

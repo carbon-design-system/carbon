@@ -36,20 +36,20 @@
   .#{$prefix}--contained-list__header {
     position: sticky;
     z-index: 1;
-    top: 0;
+    inset-block-start: 0;
     display: flex;
     align-items: center;
-    padding-inline: layout.density('padding-inline');
+    padding-inline-end: layout.density('padding-inline');
   }
 
   .#{$prefix}--contained-list__label {
-    width: 100%;
+    inline-size: 100%;
   }
 
   .#{$prefix}--contained-list .#{$prefix}--search {
     position: sticky;
     z-index: 1;
-    top: layout.size('height');
+    inset-block-start: layout.size('height');
 
     &.#{$prefix}--search--expandable .#{$prefix}--search-input {
       background-color: $field;
@@ -57,7 +57,7 @@
   }
 
   .#{$prefix}--contained-list .#{$prefix}--search .#{$prefix}--search-input {
-    border-bottom: 1px solid $border-subtle;
+    border-block-end: 1px solid $border-subtle;
     background-color: $background;
   }
 
@@ -68,7 +68,7 @@
   }
 
   .#{$prefix}--contained-list .#{$prefix}--search .#{$prefix}--search-close {
-    border-right: 2px solid transparent;
+    border-inline-end: 2px solid transparent;
     outline: none;
 
     &:focus {
@@ -80,7 +80,7 @@
     .#{$prefix}--search
     .#{$prefix}--search-input
     ~ .#{$prefix}--search-close:hover {
-    border-bottom: 1px solid transparent;
+    border-block-end: 1px solid transparent;
   }
 
   .#{$prefix}--contained-list
@@ -88,7 +88,7 @@
     .#{$prefix}--search-input:focus
     ~ .#{$prefix}--search-close:hover {
     border: 2px solid $focus;
-    border-left: 0;
+    border-inline-start: 0;
     outline: none;
   }
 
@@ -101,8 +101,8 @@
   .#{$prefix}--contained-list--on-page .#{$prefix}--contained-list__header {
     @include type-style('heading-compact-01');
 
-    height: layout.size('height');
-    border-bottom: 1px solid $border-subtle;
+    block-size: layout.size('height');
+    border-block-end: 1px solid $border-subtle;
     background-color: $background;
     color: $text-primary;
   }
@@ -124,7 +124,7 @@
   .#{$prefix}--contained-list--disclosed .#{$prefix}--contained-list__header {
     @include type-style('label-01');
 
-    height: $spacing-07;
+    block-size: $spacing-07;
     background-color: $layer;
     color: $text-secondary;
   }
@@ -167,7 +167,7 @@
 
     @include type-style('body-01');
 
-    min-height: layout.size('height');
+    min-block-size: layout.size('height');
     padding: calc(calc((#{layout.size('height')} - var(--temp-1lh)) / 2))
       layout.density('padding-inline');
     color: $text-primary;
@@ -176,9 +176,9 @@
   .#{$prefix}--contained-list-item:not(:last-of-type)::before {
     position: absolute;
     right: 0;
-    bottom: 0;
-    left: 0;
-    height: 1px;
+    inset-block-end: 0;
+    inset-inline-start: 0;
+    block-size: 1px;
     background-color: $border-subtle;
     content: '';
   }
@@ -186,7 +186,7 @@
   .#{$prefix}--contained-list--inset-rulers
     .#{$prefix}--contained-list-item:not(:last-of-type)::before {
     right: layout.density('padding-inline');
-    left: layout.density('padding-inline');
+    inset-inline-start: layout.density('padding-inline');
   }
 
   .#{$prefix}--contained-list-item--clickable
@@ -227,9 +227,9 @@
   .#{$prefix}--contained-list__action,
   .#{$prefix}--contained-list-item__action {
     position: absolute;
-    top: 0;
+    inset-block-start: 0;
     right: 0;
-    left: 0;
+    inset-inline-start: 0;
     display: flex;
     justify-content: flex-end;
     pointer-events: none;
@@ -249,6 +249,6 @@
 
   .#{$prefix}--contained-list-item__icon {
     display: inline-flex;
-    padding-top: $spacing-01;
+    padding-block-start: $spacing-01;
   }
 }

@@ -27,7 +27,7 @@
     @include layout.redefine-tokens(
       (
         size: (
-          height: (
+          block-size: (
             xs: convert.to-rem(18px),
             sm: convert.to-rem(18px),
             md: convert.to-rem(24px),
@@ -46,18 +46,18 @@
     min-width: convert.to-rem(32px);
     // restricts size of contained elements
     max-width: 100%;
-    min-height: layout.size('height');
+    min-block-size: layout.size('height');
     align-items: center;
     justify-content: center;
     margin: $spacing-02;
     border-radius: convert.to-rem(15px);
     cursor: default;
-    padding-inline: $spacing-03;
+    padding-inline-end: $spacing-03;
     vertical-align: middle;
     word-break: break-word;
 
     &:not(:first-child) {
-      margin-left: 0;
+      margin-inline-start: 0;
     }
   }
 
@@ -165,8 +165,8 @@
 
   // tags used for filtering
   .#{$prefix}--tag--filter {
-    padding-top: 0;
-    padding-right: 0;
+    padding-block-start: 0;
+    padding-inline-end: 0;
     padding-bottom: 0;
     cursor: pointer;
 
@@ -181,8 +181,8 @@
 
   .#{$prefix}--tag__close-icon {
     display: flex;
-    width: layout.size('height');
-    height: layout.size('height');
+    inline-size: layout.size('height');
+    block-size: layout.size('height');
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
@@ -202,12 +202,12 @@
   }
 
   .#{$prefix}--tag__custom-icon {
-    width: convert.to-rem(16px);
-    height: convert.to-rem(16px);
+    inline-size: convert.to-rem(16px);
+    block-size: convert.to-rem(16px);
     flex-shrink: 0;
     padding: 0;
     border: 0;
-    margin-right: $spacing-02;
+    margin-inline-end: $spacing-02;
     background-color: transparent;
     color: currentColor;
     outline: none;
@@ -241,11 +241,11 @@
   }
 
   .#{$prefix}--tag--sm.#{$prefix}--tag--filter {
-    padding-right: 0;
+    padding-inline-end: 0;
   }
 
   .#{$prefix}--tag--sm .#{$prefix}--tag__close-icon {
-    margin-left: convert.to-rem(5px);
+    margin-inline-start: convert.to-rem(5px);
   }
 
   // Skeleton state
@@ -256,7 +256,7 @@
     );
 
     overflow: hidden;
-    width: convert.to-rem(60px);
+    inline-size: convert.to-rem(60px);
 
     // Safari specific bug (#7672)
     @media not all and (min-resolution: 0.001dpcm) {

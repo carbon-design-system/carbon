@@ -27,7 +27,7 @@
 
     position: relative;
     display: flex;
-    width: 100%;
+    inline-size: 100%;
     flex-direction: column;
     align-items: flex-start;
   }
@@ -35,7 +35,7 @@
   .#{$prefix}--select-input__wrapper {
     position: relative;
     display: flex;
-    width: 100%;
+    inline-size: 100%;
     align-items: center;
   }
 
@@ -44,11 +44,11 @@
     @include focus-outline('reset');
 
     display: block;
-    width: 100%;
-    height: convert.to-rem(40px);
+    inline-size: 100%;
+    block-size: convert.to-rem(40px);
     padding: 0 $spacing-09 0 $spacing-05;
     border: none;
-    border-bottom: 1px solid $border-strong;
+    border-block-end: 1px solid $border-strong;
     appearance: none;
     background-color: $field;
     border-radius: 0;
@@ -98,12 +98,12 @@
   }
 
   .#{$prefix}--select-input--sm {
-    height: convert.to-rem(32px);
+    block-size: convert.to-rem(32px);
     max-height: convert.to-rem(32px);
   }
 
   .#{$prefix}--select-input--lg {
-    height: convert.to-rem(48px);
+    block-size: convert.to-rem(48px);
     max-height: convert.to-rem(48px);
   }
 
@@ -114,7 +114,7 @@
 
   .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input,
   .#{$prefix}--select--warning .#{$prefix}--select-input {
-    padding-right: $spacing-10;
+    padding-inline-end: $spacing-10;
   }
 
   .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
@@ -138,9 +138,9 @@
 
   .#{$prefix}--select__arrow {
     position: absolute;
-    top: 0;
+    inset-block-start: 0;
     right: $spacing-05;
-    height: 100%;
+    block-size: 100%;
     fill: $icon-primary;
     pointer-events: none;
 
@@ -201,7 +201,7 @@
 
   .#{$prefix}--select--inline .#{$prefix}--form__helper-text {
     margin-bottom: 0;
-    margin-left: $spacing-03;
+    margin-inline-start: $spacing-03;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--label {
@@ -210,10 +210,10 @@
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input {
-    width: auto;
-    padding-right: $spacing-07;
-    padding-left: $spacing-03;
-    border-bottom: none;
+    inline-size: auto;
+    padding-inline-end: $spacing-07;
+    padding-inline-start: $spacing-03;
+    border-block-end: none;
     background-color: transparent;
     color: $text-primary;
   }
@@ -235,7 +235,7 @@
 
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
     .#{$prefix}--select-input {
-    padding-right: convert.to-rem(56px);
+    padding-inline-end: convert.to-rem(56px);
   }
 
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
@@ -268,8 +268,8 @@
   .#{$prefix}--select.#{$prefix}--skeleton {
     @include skeleton;
 
-    width: 100%;
-    height: 2.5rem;
+    inline-size: 100%;
+    block-size: 2.5rem;
   }
 
   .#{$prefix}--select.#{$prefix}--skeleton .#{$prefix}--select-input {

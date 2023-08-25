@@ -25,12 +25,12 @@
     @include type-style('body-compact-01');
 
     display: flex;
-    width: 100%;
-    min-height: convert.to-rem(40px);
+    inline-size: 100%;
+    min-block-size: convert.to-rem(40px);
     align-items: center;
     justify-content: space-between;
     border-top: 1px solid $border-subtle;
-    border-bottom: 1px solid transparent;
+    border-block-end: 1px solid transparent;
     background-color: $layer;
   }
 
@@ -46,7 +46,7 @@
   .#{$prefix}--unstable-pagination__left,
   .#{$prefix}--unstable-pagination__right {
     display: flex;
-    height: 100%;
+    block-size: 100%;
     align-items: center;
   }
 
@@ -56,31 +56,31 @@
 
   .#{$prefix}--unstable-pagination__left > .#{$prefix}--form-item,
   .#{$prefix}--unstable-pagination__right > .#{$prefix}--form-item {
-    height: 100%;
+    block-size: 100%;
   }
 
   .#{$prefix}--unstable-pagination__left
     .#{$prefix}--unstable-pagination__text {
-    margin-right: convert.to-rem(1px);
+    margin-inline-end: convert.to-rem(1px);
   }
 
   .#{$prefix}--unstable-pagination__right
     .#{$prefix}--unstable-pagination__text {
-    margin-right: $spacing-05;
-    margin-left: convert.to-rem(1px);
+    margin-inline-end: $spacing-05;
+    margin-inline-start: convert.to-rem(1px);
   }
 
   .#{$prefix}--unstable-pagination__button {
     @include component-reset.reset;
 
     display: flex;
-    width: convert.to-rem(40px);
-    height: convert.to-rem(40px);
-    min-height: convert.to-rem(32px);
+    inline-size: convert.to-rem(40px);
+    block-size: convert.to-rem(40px);
+    min-block-size: convert.to-rem(32px);
     align-items: center;
     justify-content: center;
     border: none;
-    border-left: 1px solid $border-subtle;
+    border-inline-start: 1px solid $border-subtle;
     margin: 0;
     background: none;
     color: $icon-primary;
@@ -92,8 +92,8 @@
 
   // Unset height/width set by icon-only button:
   .#{$prefix}--unstable-pagination__button .#{$prefix}--btn__icon {
-    width: initial;
-    height: initial;
+    inline-size: initial;
+    block-size: initial;
   }
 
   .#{$prefix}--unstable-pagination__button.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
@@ -124,7 +124,7 @@
 
   .#{$prefix}--unstable-pagination__page-selector,
   .#{$prefix}--unstable-pagination__page-sizer {
-    height: 100%;
+    block-size: 100%;
     align-items: center;
   }
 
@@ -133,16 +133,16 @@
   .#{$prefix}--unstable-pagination__page-sizer
     .#{$prefix}--select-input--inline__wrapper {
     display: flex;
-    height: 100%;
+    block-size: 100%;
   }
 
   .#{$prefix}--unstable-pagination__page-selector .#{$prefix}--select-input,
   .#{$prefix}--unstable-pagination__page-sizer .#{$prefix}--select-input {
     @include type-style('body-short-01');
 
-    width: auto;
+    inline-size: auto;
     min-width: auto;
-    height: 100%;
+    block-size: 100%;
     padding: 0 2.25rem 0 $spacing-05;
     line-height: convert.to-rem(40px);
   }
@@ -155,7 +155,7 @@
 
   .#{$prefix}--unstable-pagination__page-selector .#{$prefix}--select__arrow,
   .#{$prefix}--unstable-pagination__page-sizer .#{$prefix}--select__arrow {
-    top: 50%;
+    inset-block-start: 50%;
     transform: translateY(-50%);
 
     @include breakpoint('md') {
@@ -164,10 +164,10 @@
   }
 
   .#{$prefix}--unstable-pagination__page-selector {
-    border-left: 1px solid $border-subtle;
+    border-inline-start: 1px solid $border-subtle;
   }
 
   .#{$prefix}--unstable-pagination__page-sizer {
-    border-right: 1px solid $border-subtle;
+    border-inline-end: 1px solid $border-subtle;
   }
 }

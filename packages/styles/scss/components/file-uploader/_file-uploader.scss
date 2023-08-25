@@ -26,11 +26,11 @@
 /// @group file-uploader
 @mixin file-uploader {
   .#{$prefix}--file {
-    width: 100%;
+    inline-size: 100%;
   }
 
   .#{$prefix}--file--invalid {
-    margin-right: $spacing-03;
+    margin-inline-end: $spacing-03;
     fill: $support-error;
   }
 
@@ -56,13 +56,13 @@
   // TODO: deprecate this block
   .#{$prefix}--file-btn {
     display: inline-flex;
-    padding-right: convert.to-rem(64px);
+    padding-inline-end: convert.to-rem(64px);
     margin: 0;
   }
 
   .#{$prefix}--file-browse-btn {
     display: inline-block;
-    width: 100%;
+    inline-size: 100%;
     max-width: convert.to-rem(320px);
 
     color: $link-primary;
@@ -118,7 +118,7 @@
   }
 
   .#{$prefix}--file-container--drop {
-    width: 100%;
+    inline-size: 100%;
   }
 
   // For backwards compatibility
@@ -138,7 +138,7 @@
   .#{$prefix}--file__selected-file {
     display: grid;
     max-width: convert.to-rem(320px);
-    min-height: $spacing-09;
+    min-block-size: $spacing-09;
     align-items: center;
     margin-bottom: $spacing-03;
     background-color: $layer;
@@ -160,26 +160,26 @@
 
     .#{$prefix}--inline-loading__animation .#{$prefix}--loading {
       // Vanilla markup has `.bx--inline-loading__animation` which is used for `margin-right` adjustment
-      margin-right: 0;
+      margin-inline-end: 0;
     }
 
     .#{$prefix}--file-filename {
       @include type-style('body-compact-01');
 
       overflow: hidden;
-      margin-left: $spacing-05;
+      margin-inline-start: $spacing-05;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
   }
 
   .#{$prefix}--file__selected-file--md {
-    min-height: convert.to-rem(40px);
+    min-block-size: convert.to-rem(40px);
     gap: $spacing-03 $spacing-05;
   }
 
   .#{$prefix}--file__selected-file--sm {
-    min-height: convert.to-rem(32px);
+    min-block-size: convert.to-rem(32px);
     gap: $spacing-02 $spacing-05;
   }
 
@@ -208,18 +208,18 @@
   }
 
   .#{$prefix}--file__selected-file--invalid .#{$prefix}--form-requirement {
-    padding-top: $spacing-05;
+    padding-block-start: $spacing-05;
     border-top: 1px solid $border-subtle;
   }
 
   .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--sm
     .#{$prefix}--form-requirement {
-    padding-top: convert.to-rem(7px);
+    padding-block-start: convert.to-rem(7px);
   }
 
   .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--md
     .#{$prefix}--form-requirement {
-    padding-top: convert.to-rem(11px);
+    padding-block-start: convert.to-rem(11px);
   }
 
   .#{$prefix}--file__selected-file--invalid
@@ -265,7 +265,7 @@
     min-width: 1.5rem;
     align-items: center;
     justify-content: center;
-    padding-right: $spacing-05;
+    padding-inline-end: $spacing-05;
 
     .#{$prefix}--loading__svg {
       stroke: $icon-primary;
@@ -287,15 +287,15 @@
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-invalid {
-    width: $spacing-05;
-    height: $spacing-05;
+    inline-size: $spacing-05;
+    block-size: $spacing-05;
     fill: $support-error;
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close {
     display: flex;
-    width: $spacing-06;
-    height: $spacing-06;
+    inline-size: $spacing-06;
+    block-size: $spacing-06;
     align-items: center;
     justify-content: center;
     padding: 0;
@@ -314,7 +314,7 @@
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--inline-loading__animation {
-    margin-right: -$spacing-03;
+    margin-inline-end: -$spacing-03;
   }
 
   .#{$prefix}--file__drop-container {
@@ -322,7 +322,7 @@
 
     display: flex;
     overflow: hidden;
-    height: convert.to-rem(96px);
+    block-size: convert.to-rem(96px);
     align-items: flex-start;
     justify-content: space-between;
     padding: $spacing-05;

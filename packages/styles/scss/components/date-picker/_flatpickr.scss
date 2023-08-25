@@ -92,7 +92,7 @@
   .flatpickr-calendar {
     position: absolute;
     overflow: hidden;
-    width: convert.to-rem(315px);
+    inline-size: convert.to-rem(315px);
     max-height: 0;
     box-sizing: border-box;
     padding: 0;
@@ -121,8 +121,8 @@
     z-index: 99999;
     display: flex;
     overflow: hidden;
-    width: convert.to-rem(288px);
-    height: convert.to-rem(336px);
+    inline-size: convert.to-rem(288px);
+    block-size: convert.to-rem(336px);
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -146,13 +146,13 @@
 
   .flatpickr-calendar.inline {
     position: relative;
-    top: convert.to-rem(2px);
+    inset-block-start: convert.to-rem(2px);
     display: block;
   }
 
   .flatpickr-calendar.static {
     position: absolute;
-    top: calc(100% + 2px);
+    inset-block-start: calc(100% + 2px);
   }
 
   .flatpickr-calendar.static.open {
@@ -161,12 +161,12 @@
   }
 
   .flatpickr-calendar.hasWeeks {
-    width: auto;
+    inline-size: auto;
   }
 
   .dayContainer {
     display: flex;
-    height: convert.to-rem(246px);
+    block-size: convert.to-rem(246px);
     flex-wrap: wrap;
     justify-content: space-around;
     padding: 0;
@@ -175,22 +175,22 @@
 
   .flatpickr-calendar .hasWeeks .dayContainer,
   .flatpickr-calendar .hasTime .dayContainer {
-    border-bottom: 0;
+    border-block-end: 0;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
 
   .flatpickr-calendar .hasWeeks .dayContainer {
-    border-left: 0;
+    border-inline-start: 0;
   }
 
   .flatpickr-calendar.showTimeInput.hasTime .flatpickr-time {
-    height: convert.to-rem(40px);
+    block-size: convert.to-rem(40px);
     border-top: 1px solid #e6e6e6;
   }
 
   .flatpickr-calendar.noCalendar.hasTime .flatpickr-time {
-    height: auto;
+    block-size: auto;
   }
 
   .flatpickr-calendar:focus {
@@ -199,7 +199,7 @@
 
   .flatpickr-months {
     display: flex;
-    width: 100%;
+    inline-size: 100%;
     justify-content: space-between;
   }
 
@@ -207,7 +207,7 @@
     @include type-style('heading-compact-01');
 
     display: flex;
-    height: convert.to-rem(40px);
+    block-size: convert.to-rem(40px);
     align-items: center;
     background-color: transparent;
     color: $text-primary;
@@ -219,8 +219,8 @@
   .flatpickr-next-month {
     z-index: 3;
     display: flex;
-    width: convert.to-rem(40px);
-    height: convert.to-rem(40px);
+    inline-size: convert.to-rem(40px);
+    block-size: convert.to-rem(40px);
     align-items: center;
     justify-content: center;
     padding: 0;
@@ -258,15 +258,15 @@
     @include type-style('heading-compact-01');
 
     display: flex;
-    height: convert.to-rem(28px);
+    block-size: convert.to-rem(28px);
     align-items: center;
     justify-content: center;
     text-align: center;
   }
 
   .flatpickr-current-month .cur-month {
-    margin-right: $spacing-02;
-    margin-left: $spacing-02;
+    margin-inline-end: $spacing-02;
+    margin-inline-start: $spacing-02;
 
     &:hover {
       background-color: $layer-hover;
@@ -275,7 +275,7 @@
 
   .numInputWrapper {
     position: relative;
-    width: convert.to-rem(60px);
+    inline-size: convert.to-rem(60px);
 
     &:hover {
       background-color: $background-hover;
@@ -284,7 +284,7 @@
 
   .numInputWrapper .numInput {
     display: inline-block;
-    width: 100%;
+    inline-size: 100%;
     padding: $spacing-02;
     border: none;
     margin: 0;
@@ -317,16 +317,16 @@
   }
 
   .numInputWrapper .arrowUp {
-    top: convert.to-rem(4px);
-    border-bottom: 0;
+    inset-block-start: convert.to-rem(4px);
+    border-block-end: 0;
 
     &::after {
-      border-bottom: convert.to-rem(4px) solid $icon-primary;
+      border-block-end: convert.to-rem(4px) solid $icon-primary;
     }
   }
 
   .numInputWrapper .arrowDown {
-    top: convert.to-rem(11px);
+    inset-block-start: convert.to-rem(11px);
 
     &::after {
       border-top: convert.to-rem(4px) solid $icon-primary;
@@ -336,9 +336,9 @@
   .numInputWrapper .arrowUp,
   .numInputWrapper .arrowDown {
     position: absolute;
-    left: 2.6rem;
-    width: convert.to-rem(12px);
-    height: 50%;
+    inset-inline-start: 2.6rem;
+    inline-size: convert.to-rem(12px);
+    block-size: 50%;
     padding: 0 convert.to-rem(4px) 0 convert.to-rem(2px);
     border: none;
     cursor: pointer;
@@ -347,10 +347,10 @@
 
     &::after {
       position: absolute;
-      top: 33%;
+      inset-block-start: 33%;
       display: block;
-      border-right: convert.to-rem(4px) solid transparent;
-      border-left: convert.to-rem(4px) solid transparent;
+      border-inline-end: convert.to-rem(4px) solid transparent;
+      border-inline-start: convert.to-rem(4px) solid transparent;
       content: '';
     }
 
@@ -385,13 +385,13 @@
 
   .flatpickr-weekdays {
     display: flex;
-    height: convert.to-rem(40px);
+    block-size: convert.to-rem(40px);
     align-items: center;
   }
 
   .flatpickr-weekdaycontainer {
     display: flex;
-    width: 100%;
+    inline-size: 100%;
   }
 
   .flatpickr-weekday {
@@ -436,8 +436,8 @@
     @include type-style('body-compact-01');
 
     display: flex;
-    width: convert.to-rem(40px);
-    height: convert.to-rem(40px);
+    inline-size: convert.to-rem(40px);
+    block-size: convert.to-rem(40px);
     align-items: center;
     justify-content: center;
     color: $text-primary;
@@ -467,11 +467,11 @@
 
     &::after {
       position: absolute;
-      bottom: convert.to-rem(7px);
-      left: 50%;
+      inset-block-end: convert.to-rem(7px);
+      inset-inline-start: 50%;
       display: block;
-      width: convert.to-rem(4px);
-      height: convert.to-rem(4px);
+      inline-size: convert.to-rem(4px);
+      block-size: convert.to-rem(4px);
       background-color: $link-primary;
       content: '';
       transform: translateX(-50%);

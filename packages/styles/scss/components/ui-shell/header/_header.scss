@@ -29,13 +29,13 @@
 
     position: fixed;
     z-index: z('header');
-    top: 0;
+    inset-block-start: 0;
     right: 0;
-    left: 0;
+    inset-inline-start: 0;
     display: flex;
-    height: mini-units(6);
+    block-size: mini-units(6);
     align-items: center;
-    border-bottom: 1px solid $border-subtle;
+    border-block-end: 1px solid $border-subtle;
     background-color: $background;
   }
 
@@ -43,8 +43,8 @@
     @include button-reset.reset();
 
     display: inline-flex;
-    width: mini-units(6);
-    height: mini-units(6);
+    inline-size: mini-units(6);
+    block-size: mini-units(6);
     border: convert.to-rem(1px) solid transparent;
     transition: background-color $duration-fast-02,
       border-color $duration-fast-02;
@@ -78,9 +78,9 @@
   }
 
   .#{$prefix}--header__action--active {
-    border-right: 1px solid $border-subtle;
-    border-bottom: 1px solid transparent;
-    border-left: 1px solid $border-subtle;
+    border-inline-end: 1px solid $border-subtle;
+    border-block-end: 1px solid transparent;
+    border-inline-start: 1px solid $border-subtle;
     background: $layer;
   }
 
@@ -143,7 +143,7 @@
     @include type-style('body-compact-01');
 
     display: flex;
-    height: 100%;
+    block-size: 100%;
     align-items: center;
     padding: 0 mini-units(4) 0 mini-units(2);
     border: convert.to-rem(2px) solid transparent;
@@ -175,7 +175,7 @@
 
   .#{$prefix}--header__menu-toggle:not(.#{$prefix}--header__menu-toggle__hidden)
     ~ .#{$prefix}--header__name {
-    padding-left: convert.to-rem(8px);
+    padding-inline-start: convert.to-rem(8px);
   }
 
   //--------------------------------------------------------------------------
@@ -184,8 +184,8 @@
   .#{$prefix}--header__nav {
     position: relative;
     display: none;
-    height: 100%;
-    padding-left: mini-units(2);
+    block-size: 100%;
+    padding-inline-start: mini-units(2);
 
     @include breakpoint('lg') {
       display: block;
@@ -194,11 +194,11 @@
     // header nav divider
     &::before {
       position: absolute;
-      top: 50%;
-      left: 0;
+      inset-block-start: 50%;
+      inset-inline-start: 0;
       display: block;
-      width: convert.to-rem(1px);
-      height: convert.to-rem(24px);
+      inline-size: convert.to-rem(1px);
+      block-size: convert.to-rem(24px);
       background-color: $border-subtle;
       content: '';
       transform: translateY(-50%);
@@ -209,7 +209,7 @@
     @include component-reset.reset;
 
     display: flex;
-    height: 100%;
+    block-size: 100%;
     padding: 0;
     margin: 0;
     list-style: none;
@@ -219,7 +219,7 @@
     position: relative;
     display: flex;
     // Used for links that are directly in the menubar to span the full height
-    height: 100%;
+    block-size: 100%;
     align-items: center;
     padding: 0 mini-units(2);
     // Used for focus styles
@@ -269,10 +269,10 @@
   a.#{$prefix}--header__menu-item[aria-current='page']::after,
   .#{$prefix}--header__menu-item--current::after {
     position: absolute;
-    bottom: -2px;
-    left: -2px;
-    width: calc(100% + 4px);
-    height: 3px;
+    inset-block-end: -2px;
+    inset-inline-start: -2px;
+    inline-size: calc(100% + 4px);
+    block-size: 3px;
     background-color: $border-interactive;
     content: '';
   }
@@ -285,20 +285,20 @@
   .#{$prefix}--header__submenu .#{$prefix}--header__menu {
     a.#{$prefix}--header__menu-item[aria-current='page']::after,
     .#{$prefix}--header__menu-item--current::after {
-      top: -2px;
-      left: -2px;
-      width: 3px;
-      height: calc(100% + 4px);
+      inset-block-start: -2px;
+      inset-inline-start: -2px;
+      inline-size: 3px;
+      block-size: calc(100% + 4px);
       background-color: $border-interactive;
     }
 
     a.#{$prefix}--header__menu-item[aria-current='page']:focus::after,
     .#{$prefix}--header__menu-item--current:focus::after {
-      top: -2px;
-      left: -2px;
+      inset-block-start: -2px;
+      inset-inline-start: -2px;
       // extra, hidden width prevents flickering on focus change
-      width: 5px;
-      height: calc(100% + 4px);
+      inline-size: 5px;
+      block-size: calc(100% + 4px);
       background-color: $border-interactive;
     }
   }
@@ -340,10 +340,10 @@
     + .#{$prefix}--header__menu {
     position: absolute;
     z-index: #{z('header') + 1};
-    bottom: 0;
-    left: 0;
+    inset-block-end: 0;
+    inset-inline-start: 0;
     display: flex;
-    width: mini-units(25);
+    inline-size: mini-units(25);
     flex-direction: column;
     background-color: $layer;
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 50%);
@@ -382,11 +382,11 @@
   }
 
   .#{$prefix}--header__menu .#{$prefix}--header__menu-item {
-    height: mini-units(6);
+    block-size: mini-units(6);
   }
 
   .#{$prefix}--header__menu-arrow {
-    margin-left: mini-units(1);
+    margin-inline-start: mini-units(1);
     fill: $icon-secondary;
     transition: transform $duration-fast-02, fill $duration-fast-02;
   }
@@ -396,7 +396,7 @@
   //--------------------------------------------------------------------------
   .#{$prefix}--header__global {
     display: flex;
-    height: 100%;
+    block-size: 100%;
     flex: 1 1 0%;
     justify-content: flex-end;
   }
@@ -407,8 +407,8 @@
   .#{$prefix}--skip-to-content {
     position: absolute;
     overflow: hidden;
-    width: 1px;
-    height: 1px;
+    inline-size: 1px;
+    block-size: 1px;
     padding: 0;
     border: 0;
     margin: -1px;
@@ -419,11 +419,11 @@
 
   .#{$prefix}--skip-to-content:focus {
     z-index: 9999;
-    top: 0;
-    left: 0;
+    inset-block-start: 0;
+    inset-inline-start: 0;
     display: flex;
-    width: auto;
-    height: 3rem;
+    inline-size: auto;
+    block-size: 3rem;
     align-items: center;
     padding: 0 1rem;
     border: 4px solid $focus;

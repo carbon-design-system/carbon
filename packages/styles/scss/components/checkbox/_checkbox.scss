@@ -47,8 +47,8 @@
   .#{$prefix}--checkbox {
     @include visually-hidden;
     //even though its hidden, positioning is for native validation to be aligned to checkbox
-    top: 1.25rem;
-    left: 0.7rem;
+    inset-block-start: 1.25rem;
+    inset-inline-start: 0.7rem;
   }
 
   // The label corresponds to the content inside of the `label` tag. Since we're
@@ -60,16 +60,16 @@
 
     position: relative;
     display: flex;
-    min-height: convert.to-rem(24px);
-    padding-top: convert.to-rem(3px);
-    padding-left: convert.to-rem(20px);
+    min-block-size: convert.to-rem(24px);
+    padding-block-start: convert.to-rem(3px);
+    padding-inline-start: convert.to-rem(20px);
     cursor: pointer;
     user-select: none;
   }
 
   .#{$prefix}--checkbox-label-text {
     // Add extra spacing when label is present
-    padding-left: convert.to-rem(6px);
+    padding-inline-start: convert.to-rem(6px);
   }
 
   // Required because `$css--reset: true` cannot currently apply to this `::before` and `::after`
@@ -85,14 +85,14 @@
     // `top` since we don't want the checkbox to be centered vertically with the
     // text overflows.
     position: absolute;
-    top: convert.to-rem(2px);
-    left: 0;
+    inset-block-start: convert.to-rem(2px);
+    inset-inline-start: 0;
 
     // According to the spec, we'll want the bounding box for our checkbox to
     // be 16px. The border size will be what will be updated during the
     // different checkbox states.
-    width: convert.to-rem(16px);
-    height: convert.to-rem(16px);
+    inline-size: convert.to-rem(16px);
+    block-size: convert.to-rem(16px);
     border: 1px solid $icon-primary;
     // increase left margin for #6480
     margin: convert.to-rem(2px) convert.to-rem(2px) convert.to-rem(2px)
@@ -107,12 +107,12 @@
   // Create the appearance of the check in the `after` pseudo-element
   .#{$prefix}--checkbox-label::after {
     position: absolute;
-    top: convert.to-rem(7.5px);
-    left: convert.to-rem(7px);
-    width: convert.to-rem(9px);
-    height: convert.to-rem(5px);
-    border-bottom: 1.5px solid $icon-inverse;
-    border-left: 1.5px solid $icon-inverse;
+    inset-block-start: convert.to-rem(7.5px);
+    inset-inline-start: convert.to-rem(7px);
+    inline-size: convert.to-rem(9px);
+    block-size: convert.to-rem(5px);
+    border-block-end: 1.5px solid $icon-inverse;
+    border-inline-start: 1.5px solid $icon-inverse;
     margin-top: convert.to-rem(-3px) #{'/*rtl:0rem*/'};
     background: none;
     content: '';
@@ -141,10 +141,10 @@
 
   // Indeterminate symbol
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::after {
-    top: convert.to-rem(11px);
-    width: convert.to-rem(8px);
-    border-bottom: 2px solid $icon-inverse;
-    border-left: 0 solid $icon-inverse;
+    inset-block-start: convert.to-rem(11px);
+    inline-size: convert.to-rem(8px);
+    border-block-end: 2px solid $icon-inverse;
+    border-inline-start: 0 solid $icon-inverse;
     transform: scale(1) rotate(0deg);
   }
 
@@ -268,7 +268,7 @@
     overflow: visible;
     max-height: 100%;
     margin-top: 0;
-    margin-left: $spacing-03;
+    margin-inline-start: $spacing-03;
   }
 
   .#{$prefix}--checkbox-group--invalid
@@ -332,8 +332,8 @@
   .#{$prefix}--checkbox-label-text.#{$prefix}--skeleton {
     @include skeleton;
 
-    width: convert.to-rem(100px);
-    height: $spacing-05;
+    inline-size: convert.to-rem(100px);
+    block-size: $spacing-05;
 
     // Add extra spacing when label is present
     margin: convert.to-rem(1px) 0 0 convert.to-rem(6px);

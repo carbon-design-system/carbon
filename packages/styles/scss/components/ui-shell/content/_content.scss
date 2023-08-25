@@ -24,10 +24,10 @@
   }
 
   .#{$prefix}--side-nav ~ .#{$prefix}--content {
-    margin-left: mini-units(6);
+    margin-inline-start: mini-units(6);
   }
 
   .#{$prefix}--side-nav.#{$prefix}--side-nav--expanded ~ .#{$prefix}--content {
-    margin-left: mini-units(32);
+    margin-inline-start: mini-units(32);
   }
 }

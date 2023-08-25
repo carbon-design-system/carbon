@@ -54,7 +54,7 @@ $radio-border-width: 1px !default;
     }
 
     .#{$prefix}--radio-button__label {
-      margin-right: 0;
+      margin-inline-end: 0;
       line-height: 1.25;
     }
 
@@ -74,15 +74,15 @@ $radio-border-width: 1px !default;
 
     display: flex;
     align-items: center;
-    margin-right: $spacing-05;
+    margin-inline-end: $spacing-05;
     cursor: pointer;
   }
 
   .#{$prefix}--radio-button__appearance {
     @include reset;
 
-    width: convert.to-rem(18px);
-    height: convert.to-rem(18px);
+    inline-size: convert.to-rem(18px);
+    block-size: convert.to-rem(18px);
     flex-shrink: 0;
     border: $radio-border-width solid $icon-primary;
     margin: convert.to-rem(1px) $spacing-03 convert.to-rem(2px)
@@ -102,8 +102,8 @@ $radio-border-width: 1px !default;
     &::before {
       position: relative;
       display: inline-block;
-      width: 100%;
-      height: 100%;
+      inline-size: 100%;
+      block-size: 100%;
       background-color: $icon-primary;
       border-radius: 50%;
       content: '';
@@ -197,7 +197,7 @@ $radio-border-width: 1px !default;
     overflow: visible;
     max-height: 100%;
     margin-top: 0;
-    margin-left: $spacing-03;
+    margin-inline-start: $spacing-03;
   }
 
   .#{$prefix}--radio-button-group--invalid
@@ -223,8 +223,8 @@ $radio-border-width: 1px !default;
   .#{$prefix}--radio-button__label.#{$prefix}--skeleton {
     @include skeleton;
 
-    width: convert.to-rem(100px);
-    height: convert.to-rem(18px);
+    inline-size: convert.to-rem(100px);
+    block-size: convert.to-rem(18px);
   }
 
   .#{$prefix}--radio-button__label.#{$prefix}--skeleton
@@ -240,12 +240,12 @@ $radio-border-width: 1px !default;
   }
 
   .#{$prefix}--radio-button-wrapper:not(:last-of-type) {
-    margin-right: $spacing-05;
+    margin-inline-end: $spacing-05;
   }
 
   .#{$prefix}--radio-button-group--vertical
     .#{$prefix}--radio-button-wrapper:not(:last-of-type) {
-    margin-right: 0;
+    margin-inline-end: 0;
     margin-bottom: $spacing-03;
   }
 
@@ -265,7 +265,7 @@ $radio-border-width: 1px !default;
     .#{$prefix}--radio-button__appearance,
   .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-left
     .#{$prefix}--radio-button__appearance {
-    margin-right: 0;
-    margin-left: $spacing-03;
+    margin-inline-end: 0;
+    margin-inline-start: $spacing-03;
   }
 }

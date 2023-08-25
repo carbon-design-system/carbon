@@ -36,11 +36,11 @@
     @include type-style('body-compact-01');
     @include focus-outline('reset');
 
-    width: 100%;
-    height: layout.size('height');
+    inline-size: 100%;
+    block-size: layout.size('height');
     padding: 0 layout.density('padding-inline');
     border: none;
-    border-bottom: 1px solid $border-strong;
+    border-block-end: 1px solid $border-strong;
     background-color: $field;
     color: $text-primary;
     font-family: inherit;
@@ -58,15 +58,15 @@
   }
 
   .#{$prefix}--password-input {
-    padding-right: $spacing-08;
+    padding-inline-end: $spacing-08;
   }
 
   .#{$prefix}--text-input--sm.#{$prefix}--password-input {
-    padding-right: $spacing-07;
+    padding-inline-end: $spacing-07;
   }
 
   .#{$prefix}--text-input--lg.#{$prefix}--password-input {
-    padding-right: $spacing-09;
+    padding-inline-end: $spacing-09;
   }
 
   .#{$prefix}--text-input::placeholder {
@@ -84,13 +84,13 @@
   .#{$prefix}--text-input__field-wrapper {
     position: relative;
     display: flex;
-    width: 100%;
+    inline-size: 100%;
   }
 
   .#{$prefix}--text-input__invalid-icon {
     position: absolute;
     // top/transform used to center invalid icon in IE11
-    top: 50%;
+    inset-block-start: 50%;
     right: $spacing-05;
     fill: $support-error;
     transform: translateY(-50%);
@@ -117,9 +117,9 @@
     position: absolute;
     right: 0;
     display: flex;
-    width: convert.to-rem(40px);
-    height: 100%;
-    min-height: auto;
+    inline-size: convert.to-rem(40px);
+    block-size: 100%;
+    min-block-size: auto;
     align-items: center;
     justify-content: center;
     padding: 0;
@@ -131,12 +131,12 @@
 
   .#{$prefix}--text-input--sm
     + .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
-    width: convert.to-rem(32px);
+    inline-size: convert.to-rem(32px);
   }
 
   .#{$prefix}--text-input--lg
     + .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
-    width: convert.to-rem(48px);
+    inline-size: convert.to-rem(48px);
   }
 
   .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
@@ -165,11 +165,11 @@
 
   .#{$prefix}--text-input--invalid,
   .#{$prefix}--text-input--warning {
-    padding-right: $spacing-08;
+    padding-inline-end: $spacing-08;
   }
 
   .#{$prefix}--text-input--invalid.#{$prefix}--password-input {
-    padding-right: convert.to-rem(64px);
+    padding-inline-end: convert.to-rem(64px);
   }
 
   .#{$prefix}--text-input--invalid
@@ -199,8 +199,8 @@
   .#{$prefix}--text-input__counter-alert {
     position: absolute;
     overflow: hidden;
-    width: 1px;
-    height: 1px;
+    inline-size: 1px;
+    block-size: 1px;
     padding: 0;
     border: 0;
     margin: -1px;
@@ -213,7 +213,7 @@
   .#{$prefix}--text-input:disabled {
     @include focus-outline('reset');
 
-    border-bottom: 1px solid transparent;
+    border-block-end: 1px solid transparent;
     background-color: $field;
     color: $text-disabled;
     cursor: not-allowed;
@@ -266,10 +266,10 @@
   .#{$prefix}--form--fluid .#{$prefix}--label {
     position: absolute;
     z-index: 1;
-    top: convert.to-rem(13px);
-    left: $spacing-05;
+    inset-block-start: convert.to-rem(13px);
+    inset-inline-start: $spacing-05;
     display: flex;
-    height: convert.to-rem(16px);
+    block-size: convert.to-rem(16px);
     align-items: center;
     margin: 0;
   }
@@ -279,7 +279,7 @@
   }
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input {
-    min-height: convert.to-rem(64px);
+    min-block-size: convert.to-rem(64px);
     padding: convert.to-rem(32px) $spacing-05 convert.to-rem(13px);
   }
 
@@ -290,7 +290,7 @@
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input--invalid,
   .#{$prefix}--form--fluid .#{$prefix}--text-input--warning {
-    border-bottom: none;
+    border-block-end: none;
   }
 
   .#{$prefix}--form--fluid
@@ -302,12 +302,12 @@
     display: block;
     border-style: solid;
     border-color: $border-subtle;
-    border-bottom: none;
+    border-block-end: none;
     margin: 0 1rem;
   }
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input__invalid-icon {
-    top: convert.to-rem(80px);
+    inset-block-start: convert.to-rem(80px);
   }
 
   .#{$prefix}--form--fluid
@@ -320,7 +320,7 @@
   }
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper--warning {
-    border-bottom: 1px solid $border-strong;
+    border-block-end: 1px solid $border-strong;
   }
 
   .#{$prefix}--form--fluid
@@ -370,7 +370,7 @@
     max-width: convert.to-rem(128px);
     flex: 2;
     flex-direction: column;
-    margin-right: convert.to-rem(24px);
+    margin-inline-end: convert.to-rem(24px);
     overflow-wrap: break-word;
   }
 
@@ -380,7 +380,7 @@
 
   .#{$prefix}--text-input__field-outer-wrapper {
     display: flex;
-    width: 100%;
+    inline-size: 100%;
     flex: 1 1 auto;
     flex-direction: column;
     align-items: flex-start;
@@ -422,7 +422,7 @@
 
   .#{$prefix}--text-input__label-wrapper {
     display: flex;
-    width: 100%;
+    inline-size: 100%;
     justify-content: space-between;
 
     .#{$prefix}--text-input__label-counter {

@@ -30,8 +30,8 @@
   }
 
   .#{$prefix}--switcher__item {
-    width: 100%;
-    height: $spacing-07;
+    inline-size: 100%;
+    block-size: $spacing-07;
   }
 
   .#{$prefix}--switcher__item:nth-child(1) {
@@ -40,8 +40,8 @@
 
   .#{$prefix}--switcher__item--divider {
     display: block;
-    width: convert.to-rem(224px);
-    height: 1px;
+    inline-size: convert.to-rem(224px);
+    block-size: 1px;
     border: none;
     margin: $spacing-03 $spacing-05;
     background: $border-subtle;
@@ -51,7 +51,7 @@
     @include type-style('heading-compact-01');
 
     display: block;
-    height: $spacing-07;
+    block-size: $spacing-07;
     padding: convert.to-rem(6px) $spacing-05;
     color: $text-secondary;
     text-decoration: none;

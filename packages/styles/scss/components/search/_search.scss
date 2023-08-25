@@ -31,7 +31,7 @@
   .#{$prefix}--search {
     position: relative;
     display: flex;
-    width: 100%;
+    inline-size: 100%;
     align-items: center;
   }
 
@@ -44,11 +44,11 @@
     @include type.type-style('body-compact-01');
     @include focus-outline('reset');
 
-    width: 100%;
+    inline-size: 100%;
     order: 1;
     padding: 0 $spacing-08;
     border: none;
-    border-bottom: 1px solid $border-strong;
+    border-block-end: 1px solid $border-strong;
     appearance: none;
     background-color: $field;
     color: $text-primary;
@@ -70,7 +70,7 @@
   }
 
   .#{$prefix}--search-input[disabled] {
-    border-bottom: 1px solid transparent;
+    border-block-end: 1px solid transparent;
     background-color: $field;
     color: $text-disabled;
     cursor: not-allowed;
@@ -91,33 +91,33 @@
   .#{$prefix}--search--sm .#{$prefix}--search-input,
   .#{$prefix}--search--sm.#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-input {
-    height: convert.to-rem(32px);
+    block-size: convert.to-rem(32px);
     // 8px padding on either side of icon + 16px icon (32px)
     padding: 0 $spacing-07;
   }
 
   .#{$prefix}--search--sm .#{$prefix}--search-magnifier-icon {
-    left: convert.to-rem(8px);
+    inset-inline-start: convert.to-rem(8px);
   }
 
   // Medium styles
   .#{$prefix}--search--md .#{$prefix}--search-input,
   .#{$prefix}--search--md.#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-input {
-    height: convert.to-rem(40px);
+    block-size: convert.to-rem(40px);
     // 12px padding on either side of icon + 16px icon (40px)
     padding: 0 $spacing-08;
   }
 
   .#{$prefix}--search--md .#{$prefix}--search-magnifier-icon {
-    left: convert.to-rem(12px);
+    inset-inline-start: convert.to-rem(12px);
   }
 
   // Large styles
   .#{$prefix}--search--lg .#{$prefix}--search-input,
   .#{$prefix}--search--lg.#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-input {
-    height: convert.to-rem(48px);
+    block-size: convert.to-rem(48px);
     // 16px padding on either side of icon + 16px icon (48px)
     padding: 0 $spacing-09;
   }
@@ -127,10 +127,10 @@
 
     position: absolute;
     z-index: 2;
-    top: 50%;
-    left: $spacing-05;
-    width: convert.to-rem(16px);
-    height: convert.to-rem(16px);
+    inset-block-start: 50%;
+    inset-inline-start: $spacing-05;
+    inline-size: convert.to-rem(16px);
+    block-size: convert.to-rem(16px);
     fill: $icon-secondary;
     pointer-events: none;
     transform: translateY(-50%);
@@ -141,16 +141,16 @@
     @include focus-outline('reset');
 
     position: absolute;
-    top: 0;
+    inset-block-start: 0;
     right: 0;
 
     &::before {
       position: absolute;
-      top: convert.to-rem(1px);
-      left: 0;
+      inset-block-start: convert.to-rem(1px);
+      inset-inline-start: 0;
       display: block;
-      width: 2px;
-      height: calc(100% - 2px);
+      inline-size: 2px;
+      block-size: calc(100% - 2px);
       background-color: $field;
       content: '';
       transition: background-color $duration-fast-02
@@ -162,7 +162,7 @@
     }
 
     &:hover {
-      border-bottom: 1px solid $border-strong;
+      border-block-end: 1px solid $border-strong;
 
       &::before {
         background-color: $field-hover;
@@ -172,7 +172,7 @@
 
   .#{$prefix}--search-button {
     flex-shrink: 0;
-    margin-left: $spacing-01;
+    margin-inline-start: $spacing-01;
     background-color: $field;
 
     svg {
@@ -188,8 +188,8 @@
   .#{$prefix}--search-close,
   .#{$prefix}--search-button {
     display: flex;
-    width: convert.to-rem(40px);
-    height: convert.to-rem(40px);
+    inline-size: convert.to-rem(40px);
+    block-size: convert.to-rem(40px);
     align-items: center;
     justify-content: center;
     border-width: 1px 0;
@@ -256,8 +256,8 @@
     ~ .#{$prefix}--search-button,
     &.#{$prefix}--search--expandable,
     &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
-      width: convert.to-rem(32px);
-      height: convert.to-rem(32px);
+      inline-size: convert.to-rem(32px);
+      block-size: convert.to-rem(32px);
     }
 
     &.#{$prefix}--search--expandable .#{$prefix}--search-input::placeholder {
@@ -271,8 +271,8 @@
     ~ .#{$prefix}--search-button,
     &.#{$prefix}--search--expandable,
     &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
-      width: convert.to-rem(40px);
-      height: convert.to-rem(40px);
+      inline-size: convert.to-rem(40px);
+      block-size: convert.to-rem(40px);
     }
 
     &.#{$prefix}--search--expandable .#{$prefix}--search-input::placeholder {
@@ -286,8 +286,8 @@
     ~ .#{$prefix}--search-button,
     &.#{$prefix}--search--expandable,
     &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
-      width: convert.to-rem(48px);
-      height: convert.to-rem(48px);
+      inline-size: convert.to-rem(48px);
+      block-size: convert.to-rem(48px);
     }
 
     &.#{$prefix}--search--expandable .#{$prefix}--search-input::placeholder {
@@ -305,7 +305,7 @@
   .#{$prefix}--search--sm.#{$prefix}--skeleton .#{$prefix}--search-input {
     @include skeleton;
 
-    width: 100%;
+    inline-size: 100%;
 
     &::placeholder {
       color: transparent;
@@ -317,11 +317,11 @@
   }
 
   .#{$prefix}--search--expandable.#{$prefix}--search--expanded {
-    width: 100%;
+    inline-size: 100%;
   }
 
   .#{$prefix}--search--expandable .#{$prefix}--search-input {
-    width: 0;
+    inline-size: 0;
     padding: 0;
     transition: padding $duration-fast-01 motion(standard, productive),
       width 0s linear $duration-fast-01;
@@ -337,7 +337,7 @@
 
   .#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-input {
-    width: 100%;
+    inline-size: 100%;
     transition: padding $duration-fast-01 motion(standard, productive);
 
     &::placeholder {

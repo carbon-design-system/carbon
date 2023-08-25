@@ -20,8 +20,8 @@
 @mixin multiselect {
   .#{$prefix}--multi-select .#{$prefix}--list-box__field--wrapper {
     display: inline-flex;
-    width: 100%;
-    height: calc(100% + 1px);
+    inline-size: 100%;
+    block-size: calc(100% + 1px);
     align-items: center;
   }
 
@@ -46,8 +46,8 @@
     .#{$prefix}--list-box__menu-item__option
     .#{$prefix}--checkbox-wrapper {
     display: flex;
-    width: 100%;
-    height: 100%;
+    inline-size: 100%;
+    block-size: 100%;
     align-items: center;
   }
 
@@ -56,8 +56,8 @@
     .#{$prefix}--checkbox-label {
     display: inline-block;
     overflow: hidden;
-    width: 100%;
-    padding-left: convert.to-rem(28px);
+    inline-size: 100%;
+    padding-inline-start: convert.to-rem(28px);
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -97,7 +97,7 @@
     .#{$prefix}--text-input,
   .#{$prefix}--multi-select.#{$prefix}--multi-select--selected
     .#{$prefix}--list-box__field {
-    padding-left: 0;
+    padding-inline-start: 0;
   }
 
   .#{$prefix}--multi-select--filterable.#{$prefix}--list-box--disabled:hover:not(
@@ -115,7 +115,7 @@
   .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--inline,
   .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--inline
     .#{$prefix}--text-input {
-    border-bottom: 0;
+    border-block-end: 0;
     background-color: transparent;
   }
 
