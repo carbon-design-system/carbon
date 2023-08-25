@@ -22,11 +22,11 @@
   .#{$prefix}--header-panel {
     position: fixed;
     z-index: z('header');
-    top: mini-units(6);
+    inset-block-start: mini-units(6);
     right: 0;
-    bottom: 0;
+    inset-block-end: 0;
     overflow: hidden;
-    width: 0;
+    inline-size: 0;
     border: none;
     background-color: $layer;
     color: $text-secondary;
@@ -35,8 +35,8 @@
   }
 
   .#{$prefix}--header-panel--expanded {
-    width: mini-units(32);
-    border-right: 1px solid $border-subtle;
-    border-left: 1px solid $border-subtle;
+    inline-size: mini-units(32);
+    border-inline-end: 1px solid $border-subtle;
+    border-inline-start: 1px solid $border-subtle;
   }
 }

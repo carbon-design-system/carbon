@@ -35,7 +35,7 @@
 
   .#{$prefix}--slider {
     position: relative;
-    width: 100%;
+    inline-size: 100%;
     min-width: convert.to-rem(200px);
     max-width: convert.to-rem(640px);
     padding: $spacing-05 0;
@@ -50,25 +50,25 @@
     white-space: nowrap;
 
     &:last-of-type {
-      margin-right: $spacing-05;
+      margin-inline-end: $spacing-05;
     }
   }
 
   .#{$prefix}--slider__track {
     position: absolute;
-    width: 100%;
-    height: convert.to-rem(2px);
+    inline-size: 100%;
+    block-size: convert.to-rem(2px);
     background: $border-subtle;
     transform: translate(0%, -50%);
   }
 
   .#{$prefix}--slider__track:before {
     position: absolute;
-    top: convert.to-rem(-5px);
-    left: 50%;
+    inset-block-start: convert.to-rem(-5px);
+    inset-inline-start: 50%;
     display: inline-block;
-    width: convert.to-rem(2px);
-    height: convert.to-rem(4px);
+    inline-size: convert.to-rem(2px);
+    block-size: convert.to-rem(4px);
     background: $border-subtle;
     content: '';
     transform: translate(-50%, 0);
@@ -76,8 +76,8 @@
 
   .#{$prefix}--slider__filled-track {
     position: absolute;
-    width: 100%;
-    height: convert.to-rem(2px);
+    inline-size: 100%;
+    block-size: convert.to-rem(2px);
     background: $layer-selected-inverse;
     pointer-events: none;
     transform: translate(0%, -50%);
@@ -88,8 +88,8 @@
   .#{$prefix}--slider__thumb {
     position: absolute;
     z-index: 3;
-    width: convert.to-rem(14px);
-    height: convert.to-rem(14px);
+    inline-size: convert.to-rem(14px);
+    block-size: convert.to-rem(14px);
     background: $layer-selected-inverse;
     border-radius: 50%;
     box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 2px transparent;
@@ -123,8 +123,8 @@
 
   .#{$prefix}--slider-text-input,
   .#{$prefix}-slider-text-input {
-    width: convert.to-rem(64px);
-    height: convert.to-rem(40px);
+    inline-size: convert.to-rem(64px);
+    block-size: convert.to-rem(40px);
     -moz-appearance: textfield;
     appearance: textfield;
 
@@ -145,14 +145,14 @@
   // Invalid & warn state
   .#{$prefix}--slider-text-input.#{$prefix}--text-input--invalid,
   .#{$prefix}--slider-text-input--warn {
-    width: 6rem;
-    padding-right: $spacing-09;
+    inline-size: 6rem;
+    padding-inline-end: $spacing-09;
   }
 
   .#{$prefix}--slider__invalid-icon {
     position: absolute;
     // top/transform used to center invalid icon in IE11
-    top: 50%;
+    inset-block-start: 50%;
     right: $spacing-05;
     fill: $support-error;
     transform: translateY(-50%);
@@ -242,8 +242,8 @@
   }
 
   .#{$prefix}--slider--readonly .#{$prefix}--slider__thumb {
-    width: 0;
-    height: 0;
+    inline-size: 0;
+    block-size: 0;
   }
 
   .#{$prefix}--slider--readonly ~ .#{$prefix}--slider-text-input {
@@ -255,8 +255,8 @@
     .#{$prefix}--slider__range-label {
     @include skeleton;
 
-    width: convert.to-rem(20px);
-    height: convert.to-rem(12px);
+    inline-size: convert.to-rem(20px);
+    block-size: convert.to-rem(12px);
   }
 
   .#{$prefix}--slider-container.#{$prefix}--skeleton
@@ -267,7 +267,7 @@
 
   .#{$prefix}--slider-container.#{$prefix}--skeleton
     .#{$prefix}--slider__thumb {
-    left: 50%;
+    inset-inline-start: 50%;
     cursor: default;
     pointer-events: none;
   }

@@ -31,12 +31,12 @@
   .#{$prefix}--side-nav {
     position: fixed;
     z-index: z('header');
-    top: 0;
-    bottom: 0;
-    left: 0;
+    inset-block-start: 0;
+    inset-block-end: 0;
+    inset-inline-start: 0;
     // Useful to toggle this property to see what's going on when not expanded
     overflow: hidden;
-    width: mini-units(6);
+    inline-size: mini-units(6);
     max-width: mini-units(32);
     background-color: $background;
     color: $text-secondary;
@@ -46,11 +46,11 @@
   }
 
   .#{$prefix}--side-nav--ux {
-    top: $spacing-09;
-    width: mini-units(32);
+    inset-block-start: $spacing-09;
+    inline-size: mini-units(32);
 
     @include breakpoint-down('lg') {
-      width: 0;
+      inline-size: 0;
     }
   }
 
@@ -63,23 +63,23 @@
   // should have the same dimensions as when expanded on mouse over
 
   .#{$prefix}--side-nav--rail {
-    width: mini-units(6);
+    inline-size: mini-units(6);
   }
 
   .#{$prefix}--side-nav--hidden {
-    width: 0;
+    inline-size: 0;
   }
 
   .#{$prefix}--side-nav--expanded {
-    width: mini-units(32);
+    inline-size: mini-units(32);
   }
 
   .#{$prefix}--side-nav__overlay {
     position: fixed;
-    top: convert.to-rem(48px);
-    left: 0;
-    width: 0;
-    height: 0;
+    inset-block-start: convert.to-rem(48px);
+    inset-inline-start: 0;
+    inline-size: 0;
+    block-size: 0;
     background-color: transparent;
     opacity: 0;
     transition: opacity $transition-expansion $standard-easing,
@@ -89,8 +89,8 @@
   .#{$prefix}--side-nav__overlay-active {
     @include breakpoint-down('lg') {
       z-index: z('overlay');
-      width: 100vw;
-      height: 100vh;
+      inline-size: 100vw;
+      block-size: 100vh;
       background-color: $overlay;
       opacity: 1;
       transition: opacity $transition-expansion $standard-easing,
@@ -101,16 +101,16 @@
   // When used alongside the header, we update the `top` positioning so that we
   // can fit both widgets on the same page without overlapping.
   .#{$prefix}--header ~ .#{$prefix}--side-nav {
-    top: mini-units(6);
-    height: calc(100% - 48px);
+    inset-block-start: mini-units(6);
+    block-size: calc(100% - 48px);
   }
 
   .#{$prefix}--side-nav--fixed {
-    width: mini-units(32);
+    inline-size: mini-units(32);
   }
 
   .#{$prefix}--side-nav--collapsed {
-    width: mini-units(32);
+    inline-size: mini-units(32);
     transform: translateX(mini-units(-32));
   }
 
@@ -143,13 +143,13 @@
 
   .#{$prefix}--side-nav__item {
     overflow: hidden;
-    width: auto;
-    height: auto;
+    inline-size: auto;
+    block-size: auto;
   }
 
   .#{$prefix}--side-nav--ux .#{$prefix}--side-nav__item {
-    width: auto;
-    height: auto;
+    inline-size: auto;
+    block-size: auto;
   }
 
   .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active):hover
@@ -180,14 +180,14 @@
   }
 
   .#{$prefix}--side-nav__item--large {
-    height: mini-units(6);
+    block-size: mini-units(6);
   }
 
   //----------------------------------------------------------------------------
   // Side-nav > Navigation > Divider
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav__divider {
-    height: 1px;
+    block-size: 1px;
     margin: $spacing-03 $spacing-05;
     background-color: $border-subtle;
     list-style-type: none;
@@ -202,7 +202,7 @@
     @include focus-outline('reset');
 
     display: flex;
-    height: mini-units(4);
+    block-size: mini-units(4);
     align-items: center;
 
     padding: 0 mini-units(2);
@@ -234,8 +234,8 @@
   }
 
   .#{$prefix}--side-nav__submenu-chevron > svg {
-    width: convert.to-rem(16px);
-    height: convert.to-rem(16px);
+    inline-size: convert.to-rem(16px);
+    block-size: convert.to-rem(16px);
     transition: transform $duration-fast-02;
   }
 
@@ -246,7 +246,7 @@
   }
 
   .#{$prefix}--side-nav__item--large .#{$prefix}--side-nav__submenu {
-    height: mini-units(6);
+    block-size: mini-units(6);
   }
 
   .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu:hover {
@@ -263,10 +263,10 @@
 
     &::before {
       position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      width: 3px;
+      inset-block-start: 0;
+      inset-block-end: 0;
+      inset-inline-start: 0;
+      inline-size: 3px;
       background-color: $border-interactive;
       content: '';
     }
@@ -296,15 +296,15 @@
   }
 
   .#{$prefix}--side-nav__menu a.#{$prefix}--side-nav__link {
-    height: mini-units(4);
-    min-height: mini-units(4);
-    padding-left: mini-units(4);
+    block-size: mini-units(4);
+    min-block-size: mini-units(4);
+    padding-inline-start: mini-units(4);
     font-weight: 400;
   }
 
   .#{$prefix}--side-nav__item.#{$prefix}--side-nav__item--icon
     a.#{$prefix}--side-nav__link {
-    padding-left: mini-units(9);
+    padding-inline-start: mini-units(9);
   }
   .#{$prefix}--side-nav__menu a.#{$prefix}--side-nav__link--current,
   .#{$prefix}--side-nav__menu a.#{$prefix}--side-nav__link[aria-current='page'],
@@ -330,7 +330,7 @@
 
     position: relative;
     display: flex;
-    min-height: mini-units(4);
+    min-block-size: mini-units(4);
     align-items: center;
     padding: 0 mini-units(2);
     text-decoration: none;
@@ -339,7 +339,7 @@
   }
 
   .#{$prefix}--side-nav__item--large a.#{$prefix}--side-nav__link {
-    height: mini-units(6);
+    block-size: mini-units(6);
   }
 
   a.#{$prefix}--side-nav__link > .#{$prefix}--side-nav__link-text,
@@ -375,10 +375,10 @@
   a.#{$prefix}--side-nav__link[aria-current='page']::before,
   a.#{$prefix}--side-nav__link--current::before {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 3px;
+    inset-block-start: 0;
+    inset-block-end: 0;
+    inset-inline-start: 0;
+    inline-size: 3px;
     background-color: $border-interactive;
     content: '';
   }
@@ -396,12 +396,12 @@
   }
 
   .#{$prefix}--side-nav__icon:not(.#{$prefix}--side-nav__submenu-chevron) {
-    margin-right: mini-units(3);
+    margin-inline-end: mini-units(3);
   }
 
   .#{$prefix}--side-nav__icon > svg {
-    width: mini-units(2);
-    height: mini-units(2);
+    inline-size: mini-units(2);
+    block-size: mini-units(2);
     fill: $icon-secondary;
   }
 
@@ -426,14 +426,14 @@
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav--fixed a.#{$prefix}--side-nav__link,
   .#{$prefix}--side-nav--fixed .#{$prefix}--side-nav__submenu {
-    padding-left: mini-units(2);
+    padding-inline-start: mini-units(2);
   }
 
   .#{$prefix}--side-nav--fixed
     .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--icon)
     .#{$prefix}--side-nav__menu
     a.#{$prefix}--side-nav__link {
-    padding-left: mini-units(4);
+    padding-inline-start: mini-units(4);
   }
 
   //----------------------------------------------------------------------------
@@ -459,10 +459,10 @@
 
   .#{$prefix}--side-nav__header-divider::after {
     position: absolute;
-    bottom: convert.to-rem(-16px);
-    left: convert.to-rem(16px);
-    width: calc(100% - 32px);
-    height: convert.to-rem(1px);
+    inset-block-end: convert.to-rem(-16px);
+    inset-inline-start: convert.to-rem(16px);
+    inline-size: calc(100% - 32px);
+    block-size: convert.to-rem(1px);
     background: $border-subtle;
     content: '';
   }
@@ -481,19 +481,19 @@
   .#{$prefix}--side-nav
     .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu {
-    bottom: inherit;
-    width: 100%;
+    inset-block-end: inherit;
+    inline-size: 100%;
     padding: 0;
     background-color: transparent;
     box-shadow: none;
     transform: none;
 
     li {
-      width: 100%;
+      inline-size: 100%;
     }
 
     a.#{$prefix}--header__menu-item {
-      padding-left: 4.25rem;
+      padding-inline-start: 4.25rem;
       font-weight: 400;
     }
 
@@ -514,14 +514,14 @@
   .#{$prefix}--side-nav
     .#{$prefix}--side-nav__header-navigation
     .#{$prefix}--header__menu-item--current::after {
-    width: 3px;
-    height: calc(100% + 4px);
+    inline-size: 3px;
+    block-size: calc(100% + 4px);
   }
 
   .#{$prefix}--side-nav
     .#{$prefix}--header__menu
     a.#{$prefix}--header__menu-item {
-    height: inherit;
+    block-size: inherit;
   }
 
   .#{$prefix}--side-nav

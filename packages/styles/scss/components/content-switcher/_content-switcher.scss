@@ -22,8 +22,8 @@
     @include layout.use('density', $default: 'normal');
 
     display: flex;
-    width: 100%;
-    height: layout.size('height');
+    inline-size: 100%;
+    block-size: layout.size('height');
     justify-content: space-evenly;
   }
 
@@ -38,7 +38,7 @@
     overflow: hidden;
     border: none;
     border-top: convert.to-rem(1px) solid $border-inverse;
-    border-bottom: convert.to-rem(1px) solid $border-inverse;
+    border-block-end: convert.to-rem(1px) solid $border-inverse;
     margin: 0;
     background-color: transparent;
     color: $text-secondary;
@@ -49,11 +49,11 @@
 
     &::after {
       position: absolute;
-      top: 0;
-      left: 0;
+      inset-block-start: 0;
+      inset-inline-start: 0;
       display: block;
-      width: 100%;
-      height: 100%;
+      inline-size: 100%;
+      block-size: 100%;
       background-color: $layer-selected-inverse;
       content: '';
       transform: scaleY(0);
@@ -109,14 +109,14 @@
 
   .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
     .#{$prefix}--content-switcher-btn {
-    width: 100%;
+    inline-size: 100%;
     align-items: center;
     padding: $spacing-03 layout.density('padding-inline');
   }
 
   .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
     .#{$prefix}--content-switcher-btn:first-child {
-    border-left: convert.to-rem(1px) solid $border-inverse;
+    border-inline-start: convert.to-rem(1px) solid $border-inverse;
     border-bottom-left-radius: convert.to-rem(4px);
     border-top-left-radius: convert.to-rem(4px);
 
@@ -128,7 +128,7 @@
 
   .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
     .#{$prefix}--content-switcher-btn:last-child {
-    border-right: convert.to-rem(1px) solid $border-inverse;
+    border-inline-end: convert.to-rem(1px) solid $border-inverse;
     border-bottom-right-radius: convert.to-rem(4px);
     border-top-right-radius: convert.to-rem(4px);
 
@@ -150,10 +150,10 @@
   .#{$prefix}--content-switcher-btn::before {
     position: absolute;
     z-index: 2;
-    left: 0;
+    inset-inline-start: 0;
     display: block;
-    width: convert.to-rem(1px);
-    height: convert.to-rem(16px);
+    inline-size: convert.to-rem(1px);
+    block-size: convert.to-rem(16px);
     background-color: $border-subtle;
     content: '';
   }
@@ -194,7 +194,7 @@
   }
 
   .#{$prefix}--content-switcher__icon + span {
-    margin-left: $spacing-03;
+    margin-inline-start: $spacing-03;
   }
 
   .#{$prefix}--content-switcher__label {
@@ -244,7 +244,7 @@
   .#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-popover__wrapper:first-child
     .#{$prefix}--content-switcher-btn {
-    border-left: convert.to-rem(1px) solid $border-inverse;
+    border-inline-start: convert.to-rem(1px) solid $border-inverse;
     border-bottom-left-radius: convert.to-rem(4px);
     border-top-left-radius: convert.to-rem(4px);
   }
@@ -261,7 +261,7 @@
   .#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-popover__wrapper:last-child
     .#{$prefix}--content-switcher-btn {
-    border-right: convert.to-rem(1px) solid $border-inverse;
+    border-inline-end: convert.to-rem(1px) solid $border-inverse;
     border-bottom-right-radius: convert.to-rem(4px);
     border-top-right-radius: convert.to-rem(4px);
   }
@@ -277,13 +277,13 @@
 
   .#{$prefix}--content-switcher--lg .#{$prefix}--content-switcher-btn {
     // accounts for the larger icon sizes to keep the switcher at 48px
-    padding-right: convert.to-rem(14px);
-    padding-left: convert.to-rem(14px);
+    padding-inline-end: convert.to-rem(14px);
+    padding-inline-start: convert.to-rem(14px);
   }
 
   .#{$prefix}--content-switcher--lg .#{$prefix}--content-switcher-btn svg {
-    width: 20px;
-    height: 20px;
+    inline-size: 20px;
+    block-size: 20px;
   }
 
   .#{$prefix}--content-switcher--icon-only
@@ -301,7 +301,7 @@
 
   .#{$prefix}--content-switcher--icon-only.#{$prefix}--content-switcher--sm
     .#{$prefix}--btn--sm {
-    height: 2rem;
+    block-size: 2rem;
   }
 
   // Subtle border overrides

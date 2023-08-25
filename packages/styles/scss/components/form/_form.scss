@@ -71,8 +71,8 @@ $input-label-weight: 400 !default;
 
   .#{$prefix}--label + .#{$prefix}--tooltip {
     position: relative;
-    top: 0.2rem;
-    left: 0.5rem;
+    inset-block-start: 0.2rem;
+    inset-inline-start: 0.5rem;
   }
 
   .#{$prefix}--label + .#{$prefix}--tooltip .#{$prefix}--tooltip__trigger {
@@ -103,16 +103,16 @@ $input-label-weight: 400 !default;
   }
 
   .#{$prefix}--label + .#{$prefix}--toggletip {
-    top: 0.2rem;
-    left: 0.5rem;
+    inset-block-start: 0.2rem;
+    inset-inline-start: 0.5rem;
   }
 
   // Skeleton State
   .#{$prefix}--label.#{$prefix}--skeleton {
     @include skeleton;
 
-    width: convert.to-rem(75px);
-    height: convert.to-rem(14px);
+    inline-size: convert.to-rem(75px);
+    block-size: convert.to-rem(14px);
   }
 
   input[type='number'] {
@@ -215,7 +215,7 @@ $input-label-weight: 400 !default;
 
     z-index: 0;
     // Added to prevent error text from displaying under helper text in Safari (#6392)
-    width: 100%;
+    inline-size: 100%;
     margin-top: $spacing-02;
     color: $text-secondary;
     opacity: 1;

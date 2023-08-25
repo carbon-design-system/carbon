@@ -64,13 +64,13 @@
     @include type-style('body-short-01');
 
     display: grid;
-    height: 2rem;
+    block-size: 2rem;
     align-items: center;
     color: $text-primary;
     column-gap: $spacing-03;
     cursor: pointer;
     grid-template-columns: 1fr max-content;
-    padding-inline: $spacing-05;
+    padding-inline-end: $spacing-05;
     transition: background-color $duration-fast-01 motion(standard, productive);
 
     &:focus {
@@ -91,7 +91,7 @@
 
   @each $size, $value in $supported-sizes {
     .#{$prefix}--menu--#{$size} .#{$prefix}--menu-item {
-      height: $value;
+      block-size: $value;
     }
   }
 
@@ -151,8 +151,8 @@
 
   .#{$prefix}--menu-item-divider {
     display: block;
-    width: 100%;
-    height: convert.to-rem(1px);
+    inline-size: 100%;
+    block-size: convert.to-rem(1px);
     background-color: $border-subtle;
     margin-block: $spacing-02;
   }

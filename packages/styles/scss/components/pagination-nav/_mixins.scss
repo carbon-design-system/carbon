@@ -17,11 +17,11 @@
   &:not(.#{$prefix}--pagination-nav__page--direction) {
     &::after {
       position: absolute;
-      bottom: 0;
-      left: 50%;
+      inset-block-end: 0;
+      inset-inline-start: 50%;
       display: block;
-      width: 0;
-      height: $spacing-02;
+      inline-size: 0;
+      block-size: $spacing-02;
       background-color: $border-interactive;
       content: '';
       opacity: 0;
@@ -35,8 +35,8 @@
 
   .#{$prefix}--pagination-nav__page--active + &::after,
   &.#{$prefix}--pagination-nav__page--active::after {
-    left: calc(50% - #{$spacing-05 * 0.5});
-    width: $spacing-05;
+    inset-inline-start: calc(50% - #{$spacing-05 * 0.5});
+    inline-size: $spacing-05;
     opacity: 1;
   }
 }

@@ -29,15 +29,15 @@
     @include reset;
 
     display: flex;
-    width: convert.to-rem(288px);
-    height: auto;
-    padding-left: convert.to-rem(13px);
+    inline-size: convert.to-rem(288px);
+    block-size: auto;
+    padding-inline-start: convert.to-rem(13px);
 
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
     color: $text-inverse;
 
     @include breakpoint(max) {
-      width: convert.to-rem(352px);
+      inline-size: convert.to-rem(352px);
     }
   }
 
@@ -142,27 +142,27 @@
   .#{$prefix}--toast-notification__icon {
     flex-shrink: 0;
     margin-top: $spacing-05;
-    margin-right: $spacing-05;
+    margin-inline-end: $spacing-05;
   }
 
   .#{$prefix}--toast-notification__details {
-    margin-right: $spacing-05;
+    margin-inline-end: $spacing-05;
   }
 
   .#{$prefix}--toast-notification__close-button {
     @include focus-outline('reset');
 
     display: flex;
-    width: convert.to-rem(48px);
+    inline-size: convert.to-rem(48px);
     min-width: convert.to-rem(48px);
-    height: convert.to-rem(48px);
-    min-height: convert.to-rem(48px);
+    block-size: convert.to-rem(48px);
+    min-block-size: convert.to-rem(48px);
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 0;
     border: none;
-    margin-left: auto;
+    margin-inline-start: auto;
     background-color: transparent;
     cursor: pointer;
     transition: outline $transition-base, background-color $transition-base;
@@ -213,7 +213,7 @@
   .#{$prefix}--toast-notification__caption {
     @include type-style('body-compact-01');
 
-    padding-top: $spacing-03;
+    padding-block-start: $spacing-03;
     margin-bottom: $spacing-05;
     color: $text-inverse;
   }

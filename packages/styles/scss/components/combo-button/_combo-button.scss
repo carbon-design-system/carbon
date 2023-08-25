@@ -34,7 +34,7 @@
   }
 
   .#{$prefix}--combo-button__primary-action .#{$prefix}--btn {
-    width: 100%;
+    inline-size: 100%;
   }
 
   .#{$prefix}--combo-button__trigger svg {

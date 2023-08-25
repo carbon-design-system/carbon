@@ -31,11 +31,11 @@
 
     position: relative;
     display: flex;
-    width: 100%;
+    inline-size: 100%;
     min-width: convert.to-rem(288px);
     max-width: convert.to-rem(288px);
-    height: auto;
-    min-height: convert.to-rem(48px);
+    block-size: auto;
+    min-block-size: convert.to-rem(48px);
     flex-wrap: wrap;
 
     color: $text-inverse;
@@ -93,10 +93,10 @@
       .#{$prefix}--actionable-notification--toast
     )::before {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 100%;
+    block-size: 100%;
     box-sizing: border-box;
     border-width: 1px 1px 1px 0;
     border-style: solid;
@@ -209,13 +209,13 @@
   .#{$prefix}--actionable-notification .#{$prefix}--inline-notification__icon {
     flex-shrink: 0;
     margin-top: convert.to-rem(14px);
-    margin-right: $spacing-05;
+    margin-inline-end: $spacing-05;
   }
 
   .#{$prefix}--actionable-notification .#{$prefix}--toast-notification__icon {
     flex-shrink: 0;
     margin-top: $spacing-05;
-    margin-right: $spacing-05;
+    margin-inline-end: $spacing-05;
   }
 
   .#{$prefix}--actionable-notification__text-wrapper {
@@ -245,14 +245,14 @@
   .#{$prefix}--actionable-notification__title {
     @include type-style('heading-compact-01');
 
-    margin-right: $spacing-02;
+    margin-inline-end: $spacing-02;
     font-weight: 600;
     word-break: break-word;
   }
 
   .#{$prefix}--actionable-notification--toast
     .#{$prefix}--actionable-notification__title {
-    margin-right: 0;
+    margin-inline-end: 0;
   }
 
   .#{$prefix}--actionable-notification__subtitle {
@@ -269,9 +269,9 @@
   }
   /* Ghost action button when inline */
   .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--ghost {
-    height: convert.to-rem(32px);
+    block-size: convert.to-rem(32px);
     margin-bottom: $spacing-03;
-    margin-left: $spacing-08;
+    margin-inline-start: $spacing-08;
 
     @include breakpoint(md) {
       margin: $spacing-03 0;
@@ -311,19 +311,19 @@
 
   .#{$prefix}--actionable-notification--hide-close-button
     .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--ghost {
-    margin-right: $spacing-03;
+    margin-inline-end: $spacing-03;
   }
 
   /* Tertiary action button when not inline (toast) */
   .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary {
-    padding-right: $spacing-05;
-    padding-left: $spacing-05;
+    padding-inline-end: $spacing-05;
+    padding-inline-start: $spacing-05;
     margin-bottom: $spacing-05;
 
     // Button should be left aligned with text.
     // 20px is the width of the notification icon
     // 2px is the width of the left border that should be negated
-    margin-left: calc(
+    margin-inline-start: calc(
       #{$spacing-07} + #{convert.to-rem(20px)} - #{convert.to-rem(2px)}
     );
   }
@@ -407,20 +407,20 @@
 
   .#{$prefix}--actionable-notification--hide-close-button
     .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary {
-    margin-right: $spacing-03;
+    margin-inline-end: $spacing-03;
   }
 
   .#{$prefix}--actionable-notification__close-button {
     @include focus-outline('reset');
 
     position: absolute;
-    top: 0;
+    inset-block-start: 0;
     right: 0;
     display: flex;
-    width: convert.to-rem(48px);
+    inline-size: convert.to-rem(48px);
     min-width: convert.to-rem(48px);
     max-width: convert.to-rem(48px);
-    height: convert.to-rem(48px);
+    block-size: convert.to-rem(48px);
     flex-direction: column;
     align-items: center;
     justify-content: center;

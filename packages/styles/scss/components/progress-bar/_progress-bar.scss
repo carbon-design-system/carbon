@@ -41,24 +41,24 @@
 
   .#{$prefix}--progress-bar__track {
     position: relative;
-    width: 100%;
+    inline-size: 100%;
     min-width: convert.to-rem(48px);
-    height: convert.to-rem(8px);
+    block-size: convert.to-rem(8px);
     background-color: $layer;
   }
 
   .#{$prefix}--progress-bar--big .#{$prefix}--progress-bar__track {
-    height: convert.to-rem(8px);
+    block-size: convert.to-rem(8px);
   }
 
   .#{$prefix}--progress-bar--small .#{$prefix}--progress-bar__track {
-    height: convert.to-rem(4px);
+    block-size: convert.to-rem(4px);
   }
 
   .#{$prefix}--progress-bar__bar {
     display: block;
-    width: 100%;
-    height: 100%;
+    inline-size: 100%;
+    block-size: 100%;
     background-color: currentColor;
     color: $interactive;
     transform: scaleX(0);
@@ -161,6 +161,6 @@
 
   .#{$prefix}--progress-bar--indented .#{$prefix}--progress-bar__label,
   .#{$prefix}--progress-bar--indented .#{$prefix}--progress-bar__helper-text {
-    padding-inline: layout.density('padding-inline');
+    padding-inline-end: layout.density('padding-inline');
   }
 }

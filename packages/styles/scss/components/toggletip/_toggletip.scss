@@ -19,7 +19,7 @@
   .#{$prefix}--toggletip-label {
     @include type.type-style('body-01');
 
-    margin-right: spacing.$spacing-03;
+    margin-inline-end: spacing.$spacing-03;
     color: theme.$text-secondary;
   }
 

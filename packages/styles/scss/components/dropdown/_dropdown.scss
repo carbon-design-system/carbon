@@ -50,10 +50,10 @@
 
     position: relative;
     display: block;
-    width: 100%;
-    height: convert.to-rem(40px);
+    inline-size: 100%;
+    block-size: convert.to-rem(40px);
     border: none;
-    border-bottom: 1px solid $border-strong;
+    border-block-end: 1px solid $border-strong;
     background-color: $field;
     color: $text-primary;
     cursor: pointer;
@@ -72,21 +72,21 @@
   }
 
   .#{$prefix}--dropdown--lg {
-    height: convert.to-rem(48px);
+    block-size: convert.to-rem(48px);
     max-height: convert.to-rem(48px);
   }
 
   .#{$prefix}--dropdown--lg .#{$prefix}--dropdown__arrow {
-    top: convert.to-rem(16px);
+    inset-block-start: convert.to-rem(16px);
   }
 
   .#{$prefix}--dropdown--sm {
-    height: convert.to-rem(32px);
+    block-size: convert.to-rem(32px);
     max-height: convert.to-rem(32px);
   }
 
   .#{$prefix}--dropdown--sm .#{$prefix}--dropdown__arrow {
-    top: convert.to-rem(8px);
+    inset-block-start: convert.to-rem(8px);
   }
 
   .#{$prefix}--dropdown--open {
@@ -97,7 +97,7 @@
     @include focus-outline('invalid');
 
     .#{$prefix}--dropdown-text {
-      padding-right: convert.to-rem(56px);
+      padding-inline-end: convert.to-rem(56px);
     }
 
     + .#{$prefix}--form-requirement {
@@ -109,7 +109,7 @@
 
   .#{$prefix}--dropdown__invalid-icon {
     position: absolute;
-    top: 50%;
+    inset-block-start: 50%;
     right: $spacing-08;
     fill: $support-error;
     transform: translateY(-50%);
@@ -140,12 +140,12 @@
   }
 
   .#{$prefix}--dropdown--up .#{$prefix}--dropdown-list {
-    bottom: 2rem;
+    inset-block-end: 2rem;
   }
 
   .#{$prefix}--dropdown__arrow {
     position: absolute;
-    top: convert.to-rem(13px);
+    inset-block-start: convert.to-rem(13px);
     right: 1rem;
     fill: $icon-primary;
     pointer-events: none;
@@ -154,7 +154,7 @@
   }
 
   button.#{$prefix}--dropdown-text {
-    width: 100%;
+    inline-size: 100%;
     border: none;
     // button-reset mixin contradicts with bx--dropdown-text styles
     background: none;
@@ -172,10 +172,10 @@
     display: block;
     overflow: hidden;
     // Account for the border in `.bx--dropdown`
-    height: calc(100% + 1px);
+    block-size: calc(100% + 1px);
     // 2rem + SVG width
-    padding-right: convert.to-rem(42px);
-    padding-left: $spacing-05;
+    padding-inline-end: convert.to-rem(42px);
+    padding-inline-start: $spacing-05;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -189,7 +189,7 @@
     position: absolute;
     z-index: z('dropdown');
     display: flex;
-    width: 100%;
+    inline-size: 100%;
     max-height: 0;
     flex-direction: column;
     background-color: $layer;
@@ -236,7 +236,7 @@
   }
 
   .#{$prefix}--dropdown-item:last-of-type .#{$prefix}--dropdown-link {
-    border-bottom: none;
+    border-block-end: none;
   }
 
   .#{$prefix}--dropdown-link {
@@ -244,7 +244,7 @@
 
     display: block;
     overflow: hidden;
-    height: convert.to-rem(40px);
+    block-size: convert.to-rem(40px);
     padding: convert.to-rem(11px) 0;
     border: 1px solid transparent;
     border-top-color: $border-subtle;
@@ -268,8 +268,8 @@
   }
 
   .#{$prefix}--dropdown--sm .#{$prefix}--dropdown-link {
-    height: convert.to-rem(32px);
-    padding-top: convert.to-rem(7px);
+    block-size: convert.to-rem(32px);
+    padding-block-start: convert.to-rem(7px);
     padding-bottom: convert.to-rem(7px);
   }
 
@@ -364,13 +364,13 @@
   }
 
   .#{$prefix}--dropdown--auto-width {
-    width: auto;
+    inline-size: auto;
     max-width: convert.to-rem(400px);
   }
 
   .#{$prefix}--dropdown--inline {
     display: inline-block;
-    width: auto;
+    inline-size: auto;
     border-bottom-color: transparent;
     background-color: transparent;
     justify-self: start;
@@ -385,7 +385,7 @@
     }
 
     .#{$prefix}--dropdown__arrow {
-      top: convert.to-rem(8px);
+      inset-block-start: convert.to-rem(8px);
       right: convert.to-rem(8px);
     }
   }
@@ -397,7 +397,7 @@
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-text {
     display: inline-block;
     overflow: visible;
-    height: convert.to-rem(32px);
+    block-size: convert.to-rem(32px);
     padding: convert.to-rem(7px) $spacing-07 convert.to-rem(7px) $spacing-04;
     color: $text-primary;
   }
@@ -419,7 +419,7 @@
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid
     .#{$prefix}--dropdown-text {
-    padding-right: convert.to-rem(56px);
+    padding-inline-end: convert.to-rem(56px);
   }
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open:focus

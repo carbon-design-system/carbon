@@ -31,7 +31,7 @@
     @include component-reset.reset;
 
     display: table;
-    width: 100%;
+    inline-size: 100%;
 
     background-color: transparent;
     border-collapse: collapse;
@@ -49,7 +49,7 @@
       .#{$prefix}--structured-list-td:first-of-type,
     .#{$prefix}--structured-list-row
       .#{$prefix}--structured-list-th:first-of-type {
-      padding-left: 1rem;
+      padding-inline-start: 1rem;
       // specs require 16px spacing between columns
       // 8px side padding between col creates 16 px, with exception of 1st col, which needs an override to be 16px
     }
@@ -67,8 +67,8 @@
     &.#{$prefix}--structured-list--flush
       .#{$prefix}--structured-list-row
       .#{$prefix}--structured-list-th:first-of-type {
-      padding-right: 1rem;
-      padding-left: 0;
+      padding-inline-end: 1rem;
+      padding-inline-start: 0;
     }
   }
 
@@ -81,7 +81,7 @@
 
   .#{$prefix}--structured-list-tbody
     .#{$prefix}--structured-list-row:last-child {
-    border-bottom: 1px solid $border-subtle;
+    border-block-end: 1px solid $border-subtle;
   }
 
   .#{$prefix}--structured-list-row--header-row {
@@ -149,7 +149,7 @@
     @include type-style('heading-compact-01');
 
     display: table-cell;
-    height: convert.to-rem(40px);
+    block-size: convert.to-rem(40px);
     color: $text-primary;
     font-weight: 600;
     text-align: left;
@@ -204,15 +204,15 @@
   .#{$prefix}--structured-list.#{$prefix}--skeleton {
     .#{$prefix}--structured-list-th {
       &:first-child {
-        width: 8%;
+        inline-size: 8%;
       }
 
       &:nth-child(3n + 2) {
-        width: 30%;
+        inline-size: 30%;
       }
 
       &:nth-child(3n + 3) {
-        width: 15%;
+        inline-size: 15%;
       }
     }
 
@@ -221,14 +221,14 @@
 
       display: block;
 
-      width: 75%;
-      height: 1rem;
+      inline-size: 75%;
+      block-size: 1rem;
     }
   }
 
   .#{$prefix}--structured-list.#{$prefix}--structured-list--selection.#{$prefix}--skeleton
     .#{$prefix}--structured-list-th:first-child {
-    width: 5%;
+    inline-size: 5%;
 
     span {
       display: none;

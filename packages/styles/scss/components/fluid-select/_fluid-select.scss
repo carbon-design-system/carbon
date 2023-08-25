@@ -19,7 +19,7 @@
 @mixin fluid-select {
   .#{$prefix}--select--fluid .#{$prefix}--select {
     position: relative;
-    height: 100%;
+    block-size: 100%;
     background: $field;
     transition: background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
@@ -28,11 +28,11 @@
   .#{$prefix}--select--fluid .#{$prefix}--label {
     position: absolute;
     z-index: 1;
-    top: convert.to-rem(13px);
-    left: $spacing-05;
+    inset-block-start: convert.to-rem(13px);
+    inset-inline-start: $spacing-05;
     display: flex;
-    width: calc(100% - 2rem);
-    height: convert.to-rem(16px);
+    inline-size: calc(100% - 2rem);
+    block-size: convert.to-rem(16px);
     align-items: center;
     margin: 0;
   }
@@ -54,7 +54,7 @@
   }
 
   .#{$prefix}--select--fluid .#{$prefix}--select-input {
-    min-height: convert.to-rem(64px);
+    min-block-size: convert.to-rem(64px);
     padding: convert.to-rem(32px) convert.to-rem(32px) convert.to-rem(13px)
       $spacing-05;
     outline: none;
@@ -62,8 +62,8 @@
   }
 
   .#{$prefix}--select--fluid .#{$prefix}--select__arrow {
-    top: $spacing-07;
-    height: 1rem;
+    inset-block-start: $spacing-07;
+    block-size: 1rem;
   }
 
   .#{$prefix}--select--fluid .#{$prefix}--select__divider {
@@ -85,9 +85,9 @@
     .#{$prefix}--select--warning
     .#{$prefix}--select__divider {
     display: block;
-    width: calc(100% - 2rem);
+    inline-size: calc(100% - 2rem);
     border: none;
-    border-bottom: 1px solid $border-subtle;
+    border-block-end: 1px solid $border-subtle;
     margin: 0 1rem;
   }
 
@@ -97,12 +97,12 @@
   .#{$prefix}--select--fluid
     .#{$prefix}--select--warning
     .#{$prefix}--select-input {
-    padding-right: convert.to-rem(32px);
-    border-bottom: 1px solid transparent;
+    padding-inline-end: convert.to-rem(32px);
+    border-block-end: 1px solid transparent;
   }
 
   .#{$prefix}--select--fluid .#{$prefix}--select--warning {
-    border-bottom: 1px solid $border-strong;
+    border-block-end: 1px solid $border-strong;
   }
 
   .#{$prefix}--select--fluid .#{$prefix}--select-input__wrapper {
@@ -156,7 +156,7 @@
   .#{$prefix}--select--fluid
     .#{$prefix}--select--warning
     .#{$prefix}--select__invalid-icon {
-    top: convert.to-rem(73px);
+    inset-block-start: convert.to-rem(73px);
     right: $spacing-05;
     pointer-events: none;
   }
@@ -173,7 +173,7 @@
     .#{$prefix}--select-input,
   .#{$prefix}--select--fluid
     .#{$prefix}--select--fluid--focus.#{$prefix}--select--warning {
-    border-bottom: 1px solid transparent;
+    border-block-end: 1px solid transparent;
   }
 
   // Disabled state

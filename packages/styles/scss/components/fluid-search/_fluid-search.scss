@@ -18,18 +18,18 @@
 
 @mixin fluid-search {
   .#{$prefix}--search--fluid {
-    height: convert.to-rem(64px);
+    block-size: convert.to-rem(64px);
   }
 
   .#{$prefix}--search--fluid .#{$prefix}--label {
     position: absolute;
     z-index: 1;
-    top: convert.to-rem(13px);
-    left: $spacing-05;
+    inset-block-start: convert.to-rem(13px);
+    inset-inline-start: $spacing-05;
     display: flex;
     overflow: initial;
-    width: calc(100% - 2rem);
-    height: convert.to-rem(16px);
+    inline-size: calc(100% - 2rem);
+    block-size: convert.to-rem(16px);
     align-items: center;
     margin: 0;
     clip: initial;
@@ -53,7 +53,7 @@
   }
 
   .#{$prefix}--search--fluid .#{$prefix}--search-input {
-    height: 100%;
+    block-size: 100%;
     padding: convert.to-rem(32px) convert.to-rem(88px) convert.to-rem(13px)
       $spacing-05;
   }
@@ -64,8 +64,8 @@
   }
 
   .#{$prefix}--search--fluid .#{$prefix}--search-close {
-    width: convert.to-rem(40px);
-    height: convert.to-rem(40px);
+    inline-size: convert.to-rem(40px);
+    block-size: convert.to-rem(40px);
     border: none;
     inset: auto convert.to-rem(48px) 0 auto;
     transition: background-color $duration-fast-01 motion(standard, productive);
@@ -74,8 +74,8 @@
   .#{$prefix}--search--fluid .#{$prefix}--search-close::before {
     position: absolute;
     display: block;
-    width: convert.to-rem(1px);
-    height: 1rem;
+    inline-size: convert.to-rem(1px);
+    block-size: 1rem;
     background: $border-subtle;
     content: '';
     inset: auto convert.to-rem(-1px) convert.to-rem(14px) auto;
@@ -89,11 +89,11 @@
 
   .#{$prefix}--search--fluid .#{$prefix}--search-close::after {
     position: absolute;
-    bottom: 0;
-    left: 0;
+    inset-block-end: 0;
+    inset-inline-start: 0;
     display: block;
-    width: 100%;
-    height: convert.to-rem(2px);
+    inline-size: 100%;
+    block-size: convert.to-rem(2px);
     content: '';
   }
 
@@ -106,7 +106,7 @@
   .#{$prefix}--search--fluid
     .#{$prefix}--search-input:not(:focus)
     ~ .#{$prefix}--search-close:not([disabled])::after {
-    height: convert.to-rem(1px);
+    block-size: convert.to-rem(1px);
     background: $border-strong;
   }
 
@@ -128,6 +128,6 @@
 
   .#{$prefix}--search--fluid.#{$prefix}--search--disabled
     .#{$prefix}--search-input[disabled] {
-    border-bottom: 1px solid $border-subtle;
+    border-block-end: 1px solid $border-subtle;
   }
 }
