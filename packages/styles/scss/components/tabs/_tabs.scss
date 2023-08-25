@@ -368,7 +368,7 @@
       overflow: hidden;
       border-block-end: $tab-underline-color;
       color: $text-secondary;
-      padding-inline-end: layout.density('padding-inline');
+      padding-inline: layout.density('padding-inline');
       text-align: left;
       text-decoration: none;
       text-overflow: ellipsis;
@@ -384,7 +384,7 @@
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-link {
       border-block-end: 0;
-      padding-inline-end: layout.density('padding-inline');
+      padding-inline: layout.density('padding-inline');
     }
 
     &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--tall)
