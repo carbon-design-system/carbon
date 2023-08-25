@@ -223,12 +223,13 @@
   .#{$prefix}--checkbox-group__validation-msg,
   .#{$prefix}--checkbox__validation-msg {
     display: none;
-    align-items: flex-end;
+    align-items: flex-start;
     margin-top: $spacing-02;
   }
 
   .#{$prefix}--checkbox__invalid-icon {
-    margin: 0 convert.to-rem(1px) 0 convert.to-rem(3px);
+    min-width: convert.to-rem(16px);
+    margin: convert.to-rem(1px) convert.to-rem(1px) 0 convert.to-rem(3px);
     fill: $support-error;
   }
 
