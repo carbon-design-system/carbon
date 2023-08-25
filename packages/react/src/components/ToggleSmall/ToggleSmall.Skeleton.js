@@ -32,10 +32,6 @@ class ToggleSmallSkeleton extends React.Component {
     labelText: PropTypes.string,
   };
 
-  static defaultProps = {
-    ['aria-label']: 'Toggle is loading',
-  };
-
   render() {
     const { id, labelText, className, ...rest } = this.props;
     return (

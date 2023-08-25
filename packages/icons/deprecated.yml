@@ -1,5 +1,19 @@
 deprecated:
-- name: kubernetes
-  reason: The current kubernetes icon has been replaced by logo--kubernetes
-- name: direct-link
-  reason: The current icon has been replaced with the correct version of the App icon, use the most appropriate ibm-cloud--direct-link icon variant instead
+  - name: kubernetes
+    reason: The current kubernetes icon has been replaced by logo--kubernetes
+  - name: direct-link
+    reason:
+      The current icon has been replaced with the correct version of the App
+      icon, use the most appropriate ibm-cloud--direct-link icon variant instead
+  - name: database--enterprise-db2
+    reason:
+      Icon name was requested by the product team to be renamed to and replaced
+      by database--enterprisedb
+  - name: virtual-private-cloud--alt
+    reason:
+      Icon name was requested by the product team to be renamed to and replaced
+      by ibm-cloud--vpc
+  - name: ibm-watson--assistant
+    reason:
+      Icon renamed and replaced by ibm-watsonx--assistant to correspond with the
+      new watsonx platform and product suite
