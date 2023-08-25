@@ -44,7 +44,6 @@
     @include focus-outline('reset');
 
     display: block;
-    padding: 0 $spacing-09 0 $spacing-05;
     border: none;
     appearance: none;
     background-color: $field;
@@ -57,6 +56,8 @@
     inline-size: 100%;
     // reset disabled <select> opacity
     opacity: 1;
+    padding-block: 0;
+    padding-inline: $spacing-05 $spacing-09;
     text-overflow: ellipsis;
 
     // Do not transition on background-color (see: https://github.com/carbon-design-system/carbon/issues/4464)
