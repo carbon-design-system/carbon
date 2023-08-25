@@ -31,8 +31,8 @@
   .#{$prefix}--search {
     position: relative;
     display: flex;
-    inline-size: 100%;
     align-items: center;
+    inline-size: 100%;
   }
 
   .#{$prefix}--search .#{$prefix}--label {
@@ -44,14 +44,15 @@
     @include type.type-style('body-compact-01');
     @include focus-outline('reset');
 
-    inline-size: 100%;
     order: 1;
     padding: 0 $spacing-08;
     border: none;
-    border-block-end: 1px solid $border-strong;
     appearance: none;
     background-color: $field;
+    border-block-end: 1px solid $border-strong;
     color: $text-primary;
+
+    inline-size: 100%;
     text-overflow: ellipsis;
     transition: background-color $duration-fast-02 motion(standard, productive),
       outline $duration-fast-02 motion(standard, productive);
@@ -70,8 +71,8 @@
   }
 
   .#{$prefix}--search-input[disabled] {
-    border-block-end: 1px solid transparent;
     background-color: $field;
+    border-block-end: 1px solid transparent;
     color: $text-disabled;
     cursor: not-allowed;
 
@@ -91,9 +92,9 @@
   .#{$prefix}--search--sm .#{$prefix}--search-input,
   .#{$prefix}--search--sm.#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-input {
-    block-size: convert.to-rem(32px);
     // 8px padding on either side of icon + 16px icon (32px)
     padding: 0 $spacing-07;
+    block-size: convert.to-rem(32px);
   }
 
   .#{$prefix}--search--sm .#{$prefix}--search-magnifier-icon {
@@ -104,9 +105,9 @@
   .#{$prefix}--search--md .#{$prefix}--search-input,
   .#{$prefix}--search--md.#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-input {
-    block-size: convert.to-rem(40px);
     // 12px padding on either side of icon + 16px icon (40px)
     padding: 0 $spacing-08;
+    block-size: convert.to-rem(40px);
   }
 
   .#{$prefix}--search--md .#{$prefix}--search-magnifier-icon {
@@ -117,9 +118,9 @@
   .#{$prefix}--search--lg .#{$prefix}--search-input,
   .#{$prefix}--search--lg.#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-input {
-    block-size: convert.to-rem(48px);
     // 16px padding on either side of icon + 16px icon (48px)
     padding: 0 $spacing-09;
+    block-size: convert.to-rem(48px);
   }
 
   .#{$prefix}--search-magnifier-icon {
@@ -127,11 +128,11 @@
 
     position: absolute;
     z-index: 2;
-    inset-block-start: 50%;
-    inset-inline-start: $spacing-05;
-    inline-size: convert.to-rem(16px);
     block-size: convert.to-rem(16px);
     fill: $icon-secondary;
+    inline-size: convert.to-rem(16px);
+    inset-block-start: 50%;
+    inset-inline-start: $spacing-05;
     pointer-events: none;
     transform: translateY(-50%);
   }
@@ -142,17 +143,17 @@
 
     position: absolute;
     inset-block-start: 0;
-    right: 0;
+    inset-inline-end: 0;
 
     &::before {
       position: absolute;
+      display: block;
+      background-color: $field;
+      block-size: calc(100% - 2px);
+      content: '';
+      inline-size: 2px;
       inset-block-start: convert.to-rem(1px);
       inset-inline-start: 0;
-      display: block;
-      inline-size: 2px;
-      block-size: calc(100% - 2px);
-      background-color: $field;
-      content: '';
       transition: background-color $duration-fast-02
         motion(standard, productive);
 
@@ -172,8 +173,8 @@
 
   .#{$prefix}--search-button {
     flex-shrink: 0;
-    margin-inline-start: $spacing-01;
     background-color: $field;
+    margin-inline-start: $spacing-01;
 
     svg {
       fill: currentColor;
@@ -188,15 +189,15 @@
   .#{$prefix}--search-close,
   .#{$prefix}--search-button {
     display: flex;
-    inline-size: convert.to-rem(40px);
-    block-size: convert.to-rem(40px);
     align-items: center;
     justify-content: center;
     border-width: 1px 0;
     border-style: solid;
     border-color: transparent;
+    block-size: convert.to-rem(40px);
     cursor: pointer;
     fill: $icon-primary;
+    inline-size: convert.to-rem(40px);
     opacity: 1;
     transition: opacity $duration-fast-02 motion(standard, productive),
       background-color $duration-fast-02 motion(standard, productive),
@@ -226,8 +227,8 @@
     outline: none;
 
     &:hover {
-      border-bottom-color: transparent;
       background-color: transparent;
+      border-block-end-color: transparent;
     }
 
     &:hover::before {
@@ -256,8 +257,8 @@
     ~ .#{$prefix}--search-button,
     &.#{$prefix}--search--expandable,
     &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
-      inline-size: convert.to-rem(32px);
       block-size: convert.to-rem(32px);
+      inline-size: convert.to-rem(32px);
     }
 
     &.#{$prefix}--search--expandable .#{$prefix}--search-input::placeholder {
@@ -271,8 +272,8 @@
     ~ .#{$prefix}--search-button,
     &.#{$prefix}--search--expandable,
     &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
-      inline-size: convert.to-rem(40px);
       block-size: convert.to-rem(40px);
+      inline-size: convert.to-rem(40px);
     }
 
     &.#{$prefix}--search--expandable .#{$prefix}--search-input::placeholder {
@@ -286,8 +287,8 @@
     ~ .#{$prefix}--search-button,
     &.#{$prefix}--search--expandable,
     &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
-      inline-size: convert.to-rem(48px);
       block-size: convert.to-rem(48px);
+      inline-size: convert.to-rem(48px);
     }
 
     &.#{$prefix}--search--expandable .#{$prefix}--search-input::placeholder {
@@ -321,8 +322,8 @@
   }
 
   .#{$prefix}--search--expandable .#{$prefix}--search-input {
-    inline-size: 0;
     padding: 0;
+    inline-size: 0;
     transition: padding $duration-fast-01 motion(standard, productive),
       width 0s linear $duration-fast-01;
 

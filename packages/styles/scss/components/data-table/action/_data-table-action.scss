@@ -29,16 +29,16 @@
     position: relative;
     z-index: 1;
     display: flex;
+    background-color: $layer;
     inline-size: 100%;
     min-block-size: $spacing-09;
-    background-color: $layer;
   }
 
   .#{$prefix}--toolbar-content {
     display: flex;
-    inline-size: 100%;
-    block-size: $spacing-09;
     justify-content: flex-end;
+    block-size: $spacing-09;
+    inline-size: 100%;
     transform: translate3d(0, 0, 0);
     transition: transform $duration-fast-02 motion(standard, productive),
       clip-path $duration-fast-02 motion(standard, productive);
@@ -49,15 +49,15 @@
   }
 
   .#{$prefix}--toolbar-content .#{$prefix}--search .#{$prefix}--search-input {
-    block-size: 3rem;
     padding: 0 3rem;
     // For toolbar animation with (esp.) persistent search box
     background-color: transparent;
+    block-size: 3rem;
   }
 
   .#{$prefix}--toolbar-content .#{$prefix}--overflow-menu {
-    inline-size: 3rem;
     block-size: 3rem;
+    inline-size: 3rem;
   }
 
   //-------------------------------------------------
@@ -75,10 +75,10 @@
   //-------------------------------------------------
   .#{$prefix}--toolbar-search-container-expandable {
     position: relative;
-    inline-size: $spacing-09;
     block-size: $spacing-09;
     box-shadow: none;
     cursor: pointer;
+    inline-size: $spacing-09;
     transition: width $transition-expansion $standard-easing,
       background-color $duration-fast-02 motion(entrance, productive);
 
@@ -115,13 +115,13 @@
 
   .#{$prefix}--toolbar-search-container-expandable.#{$prefix}--search
     .#{$prefix}--search-close {
-    inline-size: $spacing-09;
     block-size: $spacing-09;
+    inline-size: $spacing-09;
 
     &::before {
-      inset-block-start: convert.to-rem(2px);
-      block-size: calc(100% - #{convert.to-rem(4px)});
       background-color: $field-hover;
+      block-size: calc(100% - #{convert.to-rem(4px)});
+      inset-block-start: convert.to-rem(2px);
     }
   }
 
@@ -171,9 +171,9 @@
 
   .#{$prefix}--toolbar-search-container-expandable
     .#{$prefix}--search-magnifier-icon {
-    inline-size: $spacing-09;
-    block-size: $spacing-09;
     padding: $spacing-05;
+    block-size: $spacing-09;
+    inline-size: $spacing-09;
   }
 
   .#{$prefix}--toolbar-search-container-expandable.#{$prefix}--search--disabled
@@ -250,10 +250,10 @@
     @include button-reset.reset;
 
     display: flex;
-    inline-size: $spacing-09;
-    block-size: $spacing-09;
     padding: $spacing-05;
+    block-size: $spacing-09;
     cursor: pointer;
+    inline-size: $spacing-09;
     transition: background $duration-fast-02 motion(entrance, productive);
   }
 
@@ -262,9 +262,9 @@
     @include button-reset.reset;
 
     display: flex;
-    inline-size: $spacing-09;
     block-size: $spacing-09;
     cursor: pointer;
+    inline-size: $spacing-09;
     transition: background $duration-fast-02 motion(entrance, productive);
   }
 
@@ -296,8 +296,8 @@
   }
 
   .#{$prefix}--toolbar-action ~ .#{$prefix}--btn {
-    max-width: none;
     margin: 0;
+    max-inline-size: none;
     white-space: nowrap;
   }
 
@@ -309,10 +309,10 @@
   //TOOLBAR BUTTON ICONS
   //-------------------------------------------------
   .#{$prefix}--toolbar-action__icon {
-    inline-size: auto;
-    max-width: $spacing-05;
     block-size: $spacing-05;
     fill: $icon-primary;
+    inline-size: auto;
+    max-inline-size: $spacing-05;
   }
 
   //-------------------------------------------------
@@ -320,8 +320,8 @@
   //-------------------------------------------------
   .#{$prefix}--toolbar-search-container-persistent {
     position: relative;
-    inline-size: 100%;
     block-size: $spacing-09;
+    inline-size: 100%;
     opacity: 1;
   }
 
@@ -341,9 +341,9 @@
   }
 
   .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-input {
-    block-size: $spacing-09;
     padding: 0 $spacing-09;
     border: none;
+    block-size: $spacing-09;
   }
 
   .#{$prefix}--toolbar-search-container-persistent
@@ -364,8 +364,8 @@
   }
 
   .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-close {
-    inline-size: $spacing-09;
     block-size: $spacing-09;
+    inline-size: $spacing-09;
   }
 
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-search-container,
@@ -381,14 +381,14 @@
   //-------------------------------------------------
   .#{$prefix}--batch-actions {
     position: absolute;
-    right: 0;
-    inset-block-end: 0;
-    inset-inline-start: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: $background-brand;
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    inset-block-end: 0;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
     opacity: 0;
     pointer-events: none;
     transform: translate3d(0, 48px, 0);
@@ -417,9 +417,9 @@
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn {
+    color: $text-on-color;
     padding-inline-end: $spacing-05;
     padding-inline-start: $spacing-05;
-    color: $text-on-color;
     white-space: nowrap;
   }
 
@@ -432,8 +432,8 @@
 
   .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon {
     position: static;
-    margin-inline-start: $spacing-03;
     fill: $icon-on-color;
+    margin-inline-start: $spacing-03;
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon .st0 {
@@ -470,15 +470,15 @@
 
   .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before {
     position: absolute;
+    display: block;
+    border: none;
+    background-color: $text-on-color;
+    block-size: $spacing-05;
+    content: '';
+    inline-size: convert.to-rem(1px);
     //visually 16px spacing is 1px too low
     inset-block-start: convert.to-rem(15px);
     inset-inline-start: 0;
-    display: block;
-    inline-size: convert.to-rem(1px);
-    block-size: $spacing-05;
-    border: none;
-    background-color: $text-on-color;
-    content: '';
     opacity: 1;
     transition: opacity $duration-fast-02 motion(standard, productive);
   }
@@ -492,14 +492,14 @@
   .#{$prefix}--batch-summary {
     position: sticky;
     z-index: 100000;
-    inset-inline-start: 0;
     display: flex;
-    min-block-size: 3rem;
     align-items: center;
     padding: 0 $spacing-05;
     background-color: $background-brand;
 
     color: $text-on-color;
+    inset-inline-start: 0;
+    min-block-size: 3rem;
   }
 
   .#{$prefix}--batch-summary__scroll {
@@ -534,17 +534,17 @@
 
     .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search-close,
     .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-close {
-      inline-size: convert.to-rem(32px);
       block-size: convert.to-rem(32px);
+      inline-size: convert.to-rem(32px);
     }
 
     .#{$prefix}--toolbar-search-container-expandable
       .#{$prefix}--search-magnifier-icon,
     .#{$prefix}--toolbar-search-container-persistent
       .#{$prefix}--search-magnifier-icon {
-      inline-size: convert.to-rem(32px);
-      block-size: convert.to-rem(32px);
       padding: $spacing-03;
+      block-size: convert.to-rem(32px);
+      inline-size: convert.to-rem(32px);
     }
 
     .#{$prefix}--toolbar-action.#{$prefix}--toolbar-search-container-persistent {
@@ -598,10 +598,10 @@
     }
 
     .#{$prefix}--overflow-menu.#{$prefix}--toolbar-action {
+      block-size: convert.to-rem(32px);
       inline-size: convert.to-rem(32px);
       //:after element is 2rem but w/o this trigger button is for some reason 28px
-      min-width: convert.to-rem(32px);
-      block-size: convert.to-rem(32px);
+      min-inline-size: convert.to-rem(32px);
     }
 
     .#{$prefix}--toolbar-content {
@@ -609,8 +609,8 @@
     }
 
     .#{$prefix}--toolbar-content .#{$prefix}--overflow-menu {
-      inline-size: 2rem;
       block-size: 2rem;
+      inline-size: 2rem;
     }
   }
 
@@ -629,16 +629,16 @@
   }
 
   .#{$prefix}--table-toolbar--sm .#{$prefix}--toolbar-action {
-    inline-size: convert.to-rem(32px);
-    block-size: convert.to-rem(32px);
     padding: $spacing-03 0;
+    block-size: convert.to-rem(32px);
+    inline-size: convert.to-rem(32px);
   }
 
   .#{$prefix}--table-toolbar--sm .#{$prefix}--btn--primary {
     block-size: convert.to-rem(32px);
     min-block-size: auto;
+    padding-block-end: 0.375rem;
     padding-block-start: 0.375rem;
-    padding-bottom: 0.375rem;
   }
 
   .#{$prefix}--table-toolbar--sm

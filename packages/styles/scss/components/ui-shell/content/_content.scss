@@ -20,7 +20,7 @@
   }
 
   .#{$prefix}--header ~ .#{$prefix}--content {
-    margin-top: mini-units(6);
+    margin-block-start: mini-units(6);
   }
 
   .#{$prefix}--side-nav ~ .#{$prefix}--content {

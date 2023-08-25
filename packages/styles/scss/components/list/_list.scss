@@ -67,9 +67,9 @@
   .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested)
     > .#{$prefix}--list__item::before {
     position: absolute;
-    inset-inline-start: convert.to-rem(-24px);
     content: counter(item) '.';
     counter-increment: item;
+    inset-inline-start: convert.to-rem(-24px);
   }
 
   .#{$prefix}--list--ordered.#{$prefix}--list--nested,
@@ -82,17 +82,17 @@
 
     &::before {
       position: absolute;
-      inset-inline-start: calc(-1 * #{$spacing-05});
       // – en dash
       content: '\002013';
+      inset-inline-start: calc(-1 * #{$spacing-05});
     }
   }
 
   .#{$prefix}--list--unordered.#{$prefix}--list--nested
     > .#{$prefix}--list__item::before {
-    // offset to account for smaller ▪ vs –
-    inset-inline-start: calc(-1 * #{$spacing-04});
     // ▪ square
     content: '\0025AA';
+    // offset to account for smaller ▪ vs –
+    inset-inline-start: calc(-1 * #{$spacing-04});
   }
 }

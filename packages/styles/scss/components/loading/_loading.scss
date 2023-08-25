@@ -25,8 +25,9 @@
     @include component-reset.reset;
     @include animation.spin;
 
-    inline-size: $loading-size;
     block-size: $loading-size;
+
+    inline-size: $loading-size;
   }
 
   // Animation (Spin by default)
@@ -54,8 +55,8 @@
   }
 
   .#{$prefix}--loading--small {
-    inline-size: convert.to-rem(16px);
     block-size: convert.to-rem(16px);
+    inline-size: convert.to-rem(16px);
 
     circle {
       stroke-width: 16;
@@ -84,14 +85,14 @@
   .#{$prefix}--loading-overlay {
     position: fixed;
     z-index: z('overlay');
-    inset-block-start: 0;
-    inset-inline-start: 0;
     display: flex;
-    inline-size: 100%;
-    block-size: 100%;
     align-items: center;
     justify-content: center;
     background-color: $overlay;
+    block-size: 100%;
+    inline-size: 100%;
+    inset-block-start: 0;
+    inset-inline-start: 0;
     transition: background-color $duration-slow-02 motion(standard, expressive);
   }
 

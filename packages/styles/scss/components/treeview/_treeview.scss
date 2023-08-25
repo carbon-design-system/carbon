@@ -27,9 +27,9 @@
   }
 
   .#{$prefix}--tree-node {
-    padding-inline-start: $spacing-05;
     background-color: $layer-01;
     color: $text-secondary;
+    padding-inline-start: $spacing-05;
 
     &:focus {
       outline: none;
@@ -88,9 +88,9 @@
     @include type-style('body-compact-01');
 
     display: flex;
-    min-block-size: convert.to-rem(32px);
     flex: 1;
     align-items: center;
+    min-block-size: convert.to-rem(32px);
 
     &:hover {
       background-color: $layer-hover-01;
@@ -100,9 +100,9 @@
 
   .#{$prefix}--tree-node:not(.#{$prefix}--tree-parent-node)
     .#{$prefix}--tree-node__label {
+    padding-block-end: convert.to-rem(7px);
     // (min-height 32px - single line text height 18px) / 2 = 7px
     padding-block-start: convert.to-rem(7px);
-    padding-bottom: convert.to-rem(7px);
   }
 
   .#{$prefix}--tree-node__label:hover .#{$prefix}--tree-node__label__details {
@@ -140,15 +140,15 @@
 
   .#{$prefix}--tree-parent-node__toggle {
     display: flex;
-    inline-size: convert.to-rem(24px);
-    block-size: convert.to-rem(24px);
     align-items: center;
     align-self: flex-start;
-    padding-inline-start: $spacing-02;
     border: 0;
-    margin-top: $spacing-02;
+    block-size: convert.to-rem(24px);
+    inline-size: convert.to-rem(24px);
+    margin-block-start: $spacing-02;
     margin-inline-end: $spacing-02;
     margin-inline-start: -$spacing-02;
+    padding-inline-start: $spacing-02;
 
     &:hover {
       cursor: pointer;
@@ -170,13 +170,13 @@
   }
 
   .#{$prefix}--tree-node__icon {
-    min-width: 1rem;
-    min-block-size: 1rem;
     align-self: flex-start;
-    margin-top: convert.to-rem(1px);
+    fill: $icon-secondary;
+    margin-block-start: convert.to-rem(1px);
     margin-inline-end: $spacing-03;
     margin-inline-start: $spacing-03;
-    fill: $icon-secondary;
+    min-block-size: 1rem;
+    min-inline-size: 1rem;
   }
 
   .#{$prefix}--tree-parent-node__toggle
@@ -208,12 +208,12 @@
 
     &::before {
       position: absolute;
+      background-color: $interactive;
+      block-size: 100%;
+      content: '';
+      inline-size: convert.to-rem(4px);
       inset-block-start: 0;
       inset-inline-start: 0;
-      inline-size: convert.to-rem(4px);
-      block-size: 100%;
-      background-color: $interactive;
-      content: '';
     }
   }
 
@@ -229,6 +229,6 @@
   }
 
   .#{$prefix}--tree--xs .#{$prefix}--tree-parent-node__toggle {
-    margin-top: 0;
+    margin-block-start: 0;
   }
 }

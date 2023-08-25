@@ -25,9 +25,9 @@
     @include skeleton;
 
     display: block;
+    block-size: convert.to-rem(16px);
 
     inline-size: convert.to-rem(64px);
-    block-size: convert.to-rem(16px);
   }
 
   .#{$prefix}--data-table.#{$prefix}--skeleton tr:hover td {
@@ -56,17 +56,19 @@
     .#{$prefix}--data-table-header__title {
     @include skeleton;
 
-    inline-size: convert.to-rem(120px);
     block-size: convert.to-rem(24px);
+
+    inline-size: convert.to-rem(120px);
   }
 
   .#{$prefix}--data-table-container.#{$prefix}--skeleton
     .#{$prefix}--data-table-header__description {
     @include skeleton;
 
-    inline-size: convert.to-rem(160px);
     block-size: convert.to-rem(16px);
 
-    margin-top: $spacing-03;
+    inline-size: convert.to-rem(160px);
+
+    margin-block-start: $spacing-03;
   }
 }

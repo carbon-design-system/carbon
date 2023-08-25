@@ -24,7 +24,7 @@
 /// @group pagination
 @mixin pagination {
   .#{$prefix}--data-table-container + .#{$prefix}--pagination {
-    border-top: 0;
+    border-block-start: 0;
   }
 
   .#{$prefix}--pagination {
@@ -32,12 +32,12 @@
     @include type-style('body-compact-01');
 
     display: flex;
-    inline-size: calc(100% - 1px);
-    min-block-size: convert.to-rem(40px);
     align-items: center;
     justify-content: space-between;
-    border-top: 1px solid $border-subtle;
     background-color: $layer;
+    border-block-start: 1px solid $border-subtle;
+    inline-size: calc(100% - 1px);
+    min-block-size: convert.to-rem(40px);
     overflow-x: auto;
 
     @include breakpoint('md') {
@@ -74,8 +74,8 @@
   }
 
   .#{$prefix}--pagination .#{$prefix}--select {
-    block-size: 100%;
     align-items: center;
+    block-size: 100%;
   }
 
   .#{$prefix}--pagination .#{$prefix}--select-input--inline__wrapper {
@@ -86,10 +86,12 @@
   .#{$prefix}--pagination .#{$prefix}--select-input {
     @include type-style('body-compact-01');
 
-    inline-size: auto;
-    min-width: auto;
     block-size: 100%;
+
+    inline-size: auto;
     line-height: convert.to-rem(40px);
+
+    min-inline-size: auto;
   }
 
   // Extra specificity is needed to preserve padding
@@ -143,8 +145,8 @@
   .#{$prefix}--pagination__left,
   .#{$prefix}--pagination__right {
     display: flex;
-    block-size: 100%;
     align-items: center;
+    block-size: 100%;
   }
 
   .#{$prefix}--pagination__left > .#{$prefix}--form-item,
@@ -191,8 +193,8 @@
   }
 
   span.#{$prefix}--pagination__text {
-    margin-inline-start: $spacing-05;
     color: $text-primary;
+    margin-inline-start: $spacing-05;
   }
 
   span.#{$prefix}--pagination__text.#{$prefix}--pagination__items-count {
@@ -204,17 +206,17 @@
     @include component-reset.reset;
 
     display: flex;
-    inline-size: convert.to-rem(40px);
-    block-size: convert.to-rem(40px);
-    min-block-size: convert.to-rem(32px);
     align-items: center;
     justify-content: center;
     border: none;
-    border-inline-start: 1px solid $border-subtle;
     margin: 0;
     background: none;
+    block-size: convert.to-rem(40px);
+    border-inline-start: 1px solid $border-subtle;
     cursor: pointer;
     fill: $icon-primary;
+    inline-size: convert.to-rem(40px);
+    min-block-size: convert.to-rem(32px);
     transition: outline $duration-fast-02 motion(standard, productive),
       background-color $duration-fast-02 motion(standard, productive);
   }
@@ -227,15 +229,15 @@
   .#{$prefix}--pagination--sm .#{$prefix}--pagination__button,
   .#{$prefix}--pagination--sm
     .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
-    inline-size: convert.to-rem(32px);
     block-size: convert.to-rem(32px);
+    inline-size: convert.to-rem(32px);
   }
 
   .#{$prefix}--pagination--lg .#{$prefix}--pagination__button,
   .#{$prefix}--pagination--lg
     .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
-    inline-size: convert.to-rem(48px);
     block-size: convert.to-rem(48px);
+    inline-size: convert.to-rem(48px);
   }
 
   .#{$prefix}--pagination__button:focus,
@@ -268,8 +270,8 @@
 
   // Skeleton state
   .#{$prefix}--pagination.#{$prefix}--skeleton .#{$prefix}--skeleton__text {
+    margin-block-end: 0;
     margin-inline-end: 1rem;
-    margin-bottom: 0;
   }
 
   // Windows HCM fix

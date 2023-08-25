@@ -36,9 +36,9 @@
   .#{$prefix}--contained-list__header {
     position: sticky;
     z-index: 1;
-    inset-block-start: 0;
     display: flex;
     align-items: center;
+    inset-block-start: 0;
     padding-inline: layout.density('padding-inline');
   }
 
@@ -57,8 +57,8 @@
   }
 
   .#{$prefix}--contained-list .#{$prefix}--search .#{$prefix}--search-input {
-    border-block-end: 1px solid $border-subtle;
     background-color: $background;
+    border-block-end: 1px solid $border-subtle;
   }
 
   .#{$prefix}--contained-list
@@ -101,9 +101,10 @@
   .#{$prefix}--contained-list--on-page .#{$prefix}--contained-list__header {
     @include type-style('heading-compact-01');
 
+    background-color: $background;
+
     block-size: layout.size('height');
     border-block-end: 1px solid $border-subtle;
-    background-color: $background;
     color: $text-primary;
   }
 
@@ -124,8 +125,9 @@
   .#{$prefix}--contained-list--disclosed .#{$prefix}--contained-list__header {
     @include type-style('label-01');
 
-    block-size: $spacing-07;
     background-color: $layer;
+
+    block-size: $spacing-07;
     color: $text-secondary;
   }
 
@@ -138,7 +140,7 @@
   }
 
   .#{$prefix}--contained-list-item:not(:first-of-type) {
-    margin-top: -1px;
+    margin-block-start: -1px;
   }
 
   .#{$prefix}--contained-list-item__content {
@@ -167,25 +169,26 @@
 
     @include type-style('body-01');
 
-    min-block-size: layout.size('height');
     padding: calc(calc((#{layout.size('height')} - var(--temp-1lh)) / 2))
       layout.density('padding-inline');
     color: $text-primary;
+
+    min-block-size: layout.size('height');
   }
 
   .#{$prefix}--contained-list-item:not(:last-of-type)::before {
     position: absolute;
-    right: 0;
-    inset-block-end: 0;
-    inset-inline-start: 0;
-    block-size: 1px;
     background-color: $border-subtle;
+    block-size: 1px;
     content: '';
+    inset-block-end: 0;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
   }
 
   .#{$prefix}--contained-list--inset-rulers
     .#{$prefix}--contained-list-item:not(:last-of-type)::before {
-    right: layout.density('padding-inline');
+    inset-inline-end: layout.density('padding-inline');
     inset-inline-start: layout.density('padding-inline');
   }
 
@@ -227,11 +230,11 @@
   .#{$prefix}--contained-list__action,
   .#{$prefix}--contained-list-item__action {
     position: absolute;
-    inset-block-start: 0;
-    right: 0;
-    inset-inline-start: 0;
     display: flex;
     justify-content: flex-end;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
     pointer-events: none;
   }
 

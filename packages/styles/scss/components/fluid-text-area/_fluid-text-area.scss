@@ -18,9 +18,9 @@
 @mixin fluid-text-area {
   .#{$prefix}--text-area--fluid .#{$prefix}--text-area__wrapper {
     position: relative;
-    block-size: 100%;
     flex-direction: column;
     background: $field;
+    block-size: 100%;
   }
 
   .#{$prefix}--modal
@@ -37,13 +37,13 @@
   .#{$prefix}--text-area--fluid .#{$prefix}--label {
     position: absolute;
     z-index: 1;
-    inset-block-start: convert.to-rem(13px);
-    inset-inline-start: $spacing-05;
     display: flex;
-    inline-size: calc(100% - 2rem);
-    block-size: convert.to-rem(16px);
     align-items: center;
     margin: 0;
+    block-size: convert.to-rem(16px);
+    inline-size: calc(100% - 2rem);
+    inset-block-start: convert.to-rem(13px);
+    inset-inline-start: $spacing-05;
   }
 
   .#{$prefix}--text-area--fluid .#{$prefix}--label::-webkit-scrollbar,
@@ -71,9 +71,9 @@
   }
 
   .#{$prefix}--text-area--fluid .#{$prefix}--text-area {
-    min-block-size: convert.to-rem(64px);
     padding: 0 $spacing-05 convert.to-rem(13px);
-    margin-top: 2rem;
+    margin-block-start: 2rem;
+    min-block-size: convert.to-rem(64px);
     outline: none;
   }
 
@@ -100,7 +100,7 @@
   // accounts for 2px of border when invalid
   .#{$prefix}--text-area--fluid .#{$prefix}--text-area--invalid {
     padding: 0 convert.to-rem(14px) convert.to-rem(13px);
-    margin-top: convert.to-rem(30px);
+    margin-block-start: convert.to-rem(30px);
   }
 
   .#{$prefix}--text-area--fluid
@@ -112,8 +112,8 @@
     display: block;
     border-style: solid;
     border-color: $border-subtle;
-    border-block-end: none;
     margin: 0 1rem;
+    border-block-end: none;
   }
 
   // invalid & warning error message container
@@ -126,10 +126,10 @@
     position: relative;
     display: block;
     overflow: visible;
-    max-height: 12.5rem;
     padding: 0.5rem 2.5rem 0.5rem 1rem;
     margin: 0;
     background: $field;
+    max-block-size: 12.5rem;
   }
 
   .#{$prefix}--text-area--fluid
@@ -197,8 +197,8 @@
   // Skeleton
   .#{$prefix}--text-area--fluid__skeleton {
     padding: $spacing-05;
-    border-block-end: 1px solid $skeleton-element;
     background: $skeleton-background;
+    border-block-end: 1px solid $skeleton-element;
   }
 
   .#{$prefix}--text-area--fluid__skeleton .#{$prefix}--skeleton,
@@ -208,12 +208,12 @@
   }
 
   .#{$prefix}--text-area--fluid__skeleton .#{$prefix}--label {
-    margin-bottom: $spacing-04;
+    margin-block-end: $spacing-04;
   }
 
   .#{$prefix}--text-area--fluid__skeleton
     .#{$prefix}--text-area.#{$prefix}--skeleton {
-    inline-size: 80%;
     block-size: 4rem;
+    inline-size: 80%;
   }
 }
