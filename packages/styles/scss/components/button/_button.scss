@@ -149,10 +149,10 @@
   }
 
   .#{$prefix}--btn--icon-only {
-    inline-size: layout.size('height');
-    block-size: layout.size('height');
     justify-content: center;
     padding: 0;
+    block-size: layout.size('height');
+    inline-size: layout.size('height');
     // -1px to compensate for border width
     padding-block-start: min(
       calc(
@@ -162,8 +162,8 @@
     );
 
     > :first-child {
-      min-width: convert.to-rem(16px);
       margin-block-start: convert.to-rem(1px);
+      min-inline-size: convert.to-rem(16px);
     }
 
     .#{$prefix}--btn__icon {
@@ -324,12 +324,12 @@
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--expressive .#{$prefix}--btn__icon {
-    inline-size: convert.to-rem(20px);
     block-size: convert.to-rem(20px);
+    inline-size: convert.to-rem(20px);
   }
 
   .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--expressive {
-    max-width: convert.to-rem(320px);
+    max-inline-size: convert.to-rem(320px);
   }
 
   // Skeleton State
@@ -351,7 +351,7 @@
   .#{$prefix}--btn-set .#{$prefix}--btn {
     inline-size: 100%;
     // 196px from design kit
-    max-width: convert.to-rem(196px);
+    max-inline-size: convert.to-rem(196px);
 
     &:not(:focus) {
       box-shadow: convert.to-rem(-1px) 0 0 0 $button-separator;

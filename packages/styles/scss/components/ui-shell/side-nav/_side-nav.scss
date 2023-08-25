@@ -31,23 +31,23 @@
   .#{$prefix}--side-nav {
     position: fixed;
     z-index: z('header');
-    inset-block-start: 0;
-    inset-block-end: 0;
-    inset-inline-start: 0;
     // Useful to toggle this property to see what's going on when not expanded
     overflow: hidden;
-    inline-size: mini-units(6);
-    max-width: mini-units(32);
     background-color: $background;
     color: $text-secondary;
+    inline-size: mini-units(6);
+    inset-block-end: 0;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    max-inline-size: mini-units(32);
     // TODO: sync with motion work
     transition: width 0.11s cubic-bezier(0.2, 0, 1, 0.9);
     will-change: width;
   }
 
   .#{$prefix}--side-nav--ux {
-    inset-block-start: $spacing-09;
     inline-size: mini-units(32);
+    inset-block-start: $spacing-09;
 
     @include breakpoint-down('lg') {
       inline-size: 0;
@@ -76,11 +76,11 @@
 
   .#{$prefix}--side-nav__overlay {
     position: fixed;
+    background-color: transparent;
+    block-size: 0;
+    inline-size: 0;
     inset-block-start: convert.to-rem(48px);
     inset-inline-start: 0;
-    inline-size: 0;
-    block-size: 0;
-    background-color: transparent;
     opacity: 0;
     transition: opacity $transition-expansion $standard-easing,
       background-color $transition-expansion $standard-easing;
@@ -89,9 +89,9 @@
   .#{$prefix}--side-nav__overlay-active {
     @include breakpoint-down('lg') {
       z-index: z('overlay');
-      inline-size: 100vw;
-      block-size: 100vh;
       background-color: $overlay;
+      block-size: 100vh;
+      inline-size: 100vw;
       opacity: 1;
       transition: opacity $transition-expansion $standard-easing,
         background-color $transition-expansion $standard-easing;
@@ -101,8 +101,8 @@
   // When used alongside the header, we update the `top` positioning so that we
   // can fit both widgets on the same page without overlapping.
   .#{$prefix}--header ~ .#{$prefix}--side-nav {
-    inset-block-start: mini-units(6);
     block-size: calc(100% - 48px);
+    inset-block-start: mini-units(6);
   }
 
   .#{$prefix}--side-nav--fixed {
@@ -143,13 +143,13 @@
 
   .#{$prefix}--side-nav__item {
     overflow: hidden;
-    inline-size: auto;
     block-size: auto;
+    inline-size: auto;
   }
 
   .#{$prefix}--side-nav--ux .#{$prefix}--side-nav__item {
-    inline-size: auto;
     block-size: auto;
+    inline-size: auto;
   }
 
   .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active):hover
@@ -187,9 +187,9 @@
   // Side-nav > Navigation > Divider
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav__divider {
-    block-size: 1px;
     margin: $spacing-03 $spacing-05;
     background-color: $border-subtle;
+    block-size: 1px;
     list-style-type: none;
   }
 
@@ -202,10 +202,10 @@
     @include focus-outline('reset');
 
     display: flex;
-    block-size: mini-units(4);
     align-items: center;
 
     padding: 0 mini-units(2);
+    block-size: mini-units(4);
     color: $text-secondary;
     transition: color $duration-fast-02, background-color $duration-fast-02,
       outline $duration-fast-02;
@@ -224,7 +224,7 @@
   .#{$prefix}--side-nav__submenu-title {
     @include text-overflow();
 
-    text-align: left;
+    text-align: start;
   }
 
   .#{$prefix}--side-nav__icon.#{$prefix}--side-nav__submenu-chevron {
@@ -234,8 +234,8 @@
   }
 
   .#{$prefix}--side-nav__submenu-chevron > svg {
-    inline-size: convert.to-rem(16px);
     block-size: convert.to-rem(16px);
+    inline-size: convert.to-rem(16px);
     transition: transform $duration-fast-02;
   }
 
@@ -263,12 +263,12 @@
 
     &::before {
       position: absolute;
-      inset-block-start: 0;
-      inset-block-end: 0;
-      inset-inline-start: 0;
-      inline-size: 3px;
       background-color: $border-interactive;
       content: '';
+      inline-size: 3px;
+      inset-block-end: 0;
+      inset-block-start: 0;
+      inset-inline-start: 0;
     }
   }
 
@@ -285,21 +285,21 @@
     @include component-reset.reset;
 
     display: block;
-    max-height: 0;
+    max-block-size: 0;
     visibility: hidden;
   }
 
   .#{$prefix}--side-nav__submenu[aria-expanded='true']
     + .#{$prefix}--side-nav__menu {
-    max-height: convert.to-rem(1500px);
+    max-block-size: convert.to-rem(1500px);
     visibility: inherit;
   }
 
   .#{$prefix}--side-nav__menu a.#{$prefix}--side-nav__link {
     block-size: mini-units(4);
+    font-weight: 400;
     min-block-size: mini-units(4);
     padding-inline-start: mini-units(4);
-    font-weight: 400;
   }
 
   .#{$prefix}--side-nav__item.#{$prefix}--side-nav__item--icon
@@ -330,9 +330,9 @@
 
     position: relative;
     display: flex;
-    min-block-size: mini-units(4);
     align-items: center;
     padding: 0 mini-units(2);
+    min-block-size: mini-units(4);
     text-decoration: none;
     transition: color $duration-fast-02, background-color $duration-fast-02,
       outline $duration-fast-02;
@@ -375,12 +375,12 @@
   a.#{$prefix}--side-nav__link[aria-current='page']::before,
   a.#{$prefix}--side-nav__link--current::before {
     position: absolute;
-    inset-block-start: 0;
-    inset-block-end: 0;
-    inset-inline-start: 0;
-    inline-size: 3px;
     background-color: $border-interactive;
     content: '';
+    inline-size: 3px;
+    inset-block-end: 0;
+    inset-block-start: 0;
+    inset-inline-start: 0;
   }
 
   //----------------------------------------------------------------------------
@@ -400,9 +400,9 @@
   }
 
   .#{$prefix}--side-nav__icon > svg {
-    inline-size: mini-units(2);
     block-size: mini-units(2);
     fill: $icon-secondary;
+    inline-size: mini-units(2);
   }
 
   .#{$prefix}--side-nav__icon > svg.#{$prefix}--side-nav-collapse-icon {
@@ -453,18 +453,18 @@
     @include breakpoint-down('lg') {
       position: relative;
       display: block;
-      margin-bottom: convert.to-rem(32px);
+      margin-block-end: convert.to-rem(32px);
     }
   }
 
   .#{$prefix}--side-nav__header-divider::after {
     position: absolute;
+    background: $border-subtle;
+    block-size: convert.to-rem(1px);
+    content: '';
+    inline-size: calc(100% - 32px);
     inset-block-end: convert.to-rem(-16px);
     inset-inline-start: convert.to-rem(16px);
-    inline-size: calc(100% - 32px);
-    block-size: convert.to-rem(1px);
-    background: $border-subtle;
-    content: '';
   }
 
   //header menu items overrides
@@ -481,11 +481,11 @@
   .#{$prefix}--side-nav
     .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu {
-    inset-block-end: inherit;
-    inline-size: 100%;
     padding: 0;
     background-color: transparent;
     box-shadow: none;
+    inline-size: 100%;
+    inset-block-end: inherit;
     transform: none;
 
     li {
@@ -493,8 +493,8 @@
     }
 
     a.#{$prefix}--header__menu-item {
-      padding-inline-start: 4.25rem;
       font-weight: 400;
+      padding-inline-start: 4.25rem;
     }
 
     a.#{$prefix}--header__menu-item:hover {
@@ -514,8 +514,8 @@
   .#{$prefix}--side-nav
     .#{$prefix}--side-nav__header-navigation
     .#{$prefix}--header__menu-item--current::after {
-    inline-size: 3px;
     block-size: calc(100% + 4px);
+    inline-size: 3px;
   }
 
   .#{$prefix}--side-nav

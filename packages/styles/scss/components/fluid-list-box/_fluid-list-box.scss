@@ -19,27 +19,27 @@
 @mixin fluid-list-box {
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper {
     position: relative;
-    block-size: 100%;
     background: $field;
+    block-size: 100%;
     transition: background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
   }
 
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box {
-    min-block-size: convert.to-rem(64px);
     padding: 0;
+    min-block-size: convert.to-rem(64px);
   }
 
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--label {
     position: absolute;
     z-index: 1;
-    inset-block-start: convert.to-rem(13px);
-    inset-inline-start: $spacing-05;
     display: flex;
-    inline-size: calc(100% - 2rem);
-    block-size: convert.to-rem(16px);
     align-items: center;
     margin: 0;
+    block-size: convert.to-rem(16px);
+    inline-size: calc(100% - 2rem);
+    inset-block-start: convert.to-rem(13px);
+    inset-inline-start: $spacing-05;
   }
 
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--label::-webkit-scrollbar,
@@ -61,14 +61,14 @@
   }
 
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__field {
+    padding-block-end: convert.to-rem(13px);
     padding-block-start: convert.to-rem(33px);
-    padding-bottom: convert.to-rem(13px);
     padding-inline-start: $spacing-05;
   }
 
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__menu-icon {
-    inline-size: 1rem;
     block-size: 1rem;
+    inline-size: 1rem;
   }
 
   .#{$prefix}--list-box__wrapper--fluid:not(
@@ -176,7 +176,7 @@
     .#{$prefix}--list-box--warning
     ~ .#{$prefix}--form-requirement {
     padding: convert.to-rem(8px) 4rem convert.to-rem(8px) $spacing-05;
-    margin-top: 0;
+    margin-block-start: 0;
   }
 
   .#{$prefix}--list-box__wrapper--fluid
@@ -191,7 +191,7 @@
     .#{$prefix}--list-box--warning
     .#{$prefix}--list-box__invalid-icon {
     inset-block-start: convert.to-rem(81px);
-    right: $spacing-05;
+    inset-inline-end: $spacing-05;
     pointer-events: none;
   }
 
@@ -221,8 +221,8 @@
     ~ .#{$prefix}--list-box__divider {
     display: block;
     border: none;
-    border-block-end: 1px solid $border-subtle;
     margin: 0 1rem;
+    border-block-end: 1px solid $border-subtle;
   }
 
   .#{$prefix}--list-box__wrapper--fluid
@@ -243,29 +243,29 @@
 
   // Skeleton styles
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--skeleton {
-    border-block-end: 1px solid $skeleton-element;
     background: $skeleton-background;
+    border-block-end: 1px solid $skeleton-element;
   }
 
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--skeleton
     .#{$prefix}--list-box__field {
     position: absolute;
+    padding: 0;
+    block-size: convert.to-rem(8px);
+    inline-size: 50%;
     inset-block-start: convert.to-rem(36px);
     inset-inline-start: $spacing-05;
-    inline-size: 50%;
-    block-size: convert.to-rem(8px);
-    padding: 0;
   }
 
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--skeleton
     .#{$prefix}--list-box__label {
     position: absolute;
+    block-size: convert.to-rem(8px);
+    inline-size: 25%;
     inset-block-start: $spacing-05;
     inset-inline-start: $spacing-05;
-    inline-size: 25%;
-    block-size: convert.to-rem(8px);
   }
 
   .#{$prefix}--list-box__wrapper--fluid

@@ -23,10 +23,10 @@
   // -------------------------------------
   .#{$prefix}--data-table--sort th,
   .#{$prefix}--data-table th[aria-sort] {
-    block-size: $spacing-09;
     padding: 0;
-    border-top: none;
+    block-size: $spacing-09;
     border-block-end: none;
+    border-block-start: none;
   }
 
   // hidden sort description
@@ -41,16 +41,16 @@
     @include button-reset.reset(false);
 
     display: flex;
-    inline-size: 100%;
-    min-block-size: 100%;
     align-items: center;
     justify-content: space-between;
-    padding-inline-start: $spacing-05;
     background-color: $layer-accent;
     color: $text-primary;
     font: inherit;
+    inline-size: 100%;
     line-height: 1;
-    text-align: left;
+    min-block-size: 100%;
+    padding-inline-start: $spacing-05;
+    text-align: start;
     transition: background-color $duration-fast-01 motion(entrance, productive),
       outline $duration-fast-01 motion(entrance, productive);
   }
@@ -73,9 +73,9 @@
   .#{$prefix}--data-table.#{$prefix}--data-table--sort
     th
     > .#{$prefix}--table-header-label {
+    line-height: 1;
     padding-inline-end: $spacing-05;
     padding-inline-start: $spacing-05;
-    line-height: 1;
   }
 
   // -------------------------------------
@@ -83,11 +83,11 @@
   // -------------------------------------
   th .#{$prefix}--table-sort__flex {
     display: flex;
-    inline-size: 100%;
-    block-size: 100%;
-    min-block-size: 3rem;
     align-items: center;
     justify-content: space-between;
+    block-size: 100%;
+    inline-size: 100%;
+    min-block-size: 3rem;
   }
 
   .#{$prefix}--data-table--top-aligned-header th .#{$prefix}--table-sort__flex {
@@ -107,20 +107,20 @@
     th.#{$prefix}--table-sort__header
     .#{$prefix}--table-sort__flex
     .#{$prefix}--table-header-label {
+    padding-block-end: 0;
     padding-block-start: 0;
-    padding-bottom: 0;
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--top-aligned-header.#{$prefix}--data-table--sm
     th.#{$prefix}--table-sort__header {
+    padding-block-end: convert.to-rem(7px);
     padding-block-start: convert.to-rem(7px);
-    padding-bottom: convert.to-rem(7px);
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--top-aligned-header.#{$prefix}--data-table--xs
     th.#{$prefix}--table-sort__header {
+    padding-block-end: convert.to-rem(2px);
     padding-block-start: convert.to-rem(2px);
-    padding-bottom: convert.to-rem(2px);
   }
 
   .#{$prefix}--data-table--sort:not(.#{$prefix}--data-table--xs):not(
@@ -157,8 +157,8 @@
   .#{$prefix}--data-table--xl.#{$prefix}--data-table--sort
     th
     .#{$prefix}--table-sort__flex {
-    min-block-size: 4rem;
     align-items: flex-start;
+    min-block-size: 4rem;
   }
 
   // -------------------------------------
@@ -174,11 +174,11 @@
   }
 
   .#{$prefix}--table-sort__icon-unsorted {
+    fill: $icon-primary;
     inline-size: convert.to-rem(20px);
-    min-width: $spacing-05;
     margin-inline-end: $spacing-03;
     margin-inline-start: $spacing-03;
-    fill: $icon-primary;
+    min-inline-size: $spacing-05;
     opacity: 0;
   }
 
@@ -203,11 +203,11 @@
   }
 
   .#{$prefix}--table-sort__icon {
+    fill: $icon-primary;
     inline-size: convert.to-rem(20px);
-    min-width: $spacing-05;
     margin-inline-end: $spacing-03;
     margin-inline-start: $spacing-03;
-    fill: $icon-primary;
+    min-inline-size: $spacing-05;
     opacity: 1;
     transform: rotate(0);
     transition: transform $transition-base $standard-easing;
@@ -245,7 +245,7 @@
 
   .#{$prefix}--data-table--xl .#{$prefix}--table-sort__icon-unsorted,
   .#{$prefix}--data-table--xl .#{$prefix}--table-sort__icon {
-    margin-top: convert.to-rem(13px);
+    margin-block-start: convert.to-rem(13px);
   }
 
   // Windows HCM fix

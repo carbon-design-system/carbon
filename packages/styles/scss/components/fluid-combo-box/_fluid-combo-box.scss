@@ -45,8 +45,8 @@
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--combo-box
     .#{$prefix}--list-box__selection {
-    inset-block-start: auto;
     inset-block-end: convert.to-rem(10px);
+    inset-block-start: auto;
     transform: none;
   }
 
@@ -66,6 +66,6 @@
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input
     + .#{$prefix}--list-box__invalid-icon {
-    right: 1rem;
+    inset-inline-end: 1rem;
   }
 }

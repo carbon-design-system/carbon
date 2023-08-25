@@ -24,15 +24,15 @@
   .#{$prefix}--search--fluid .#{$prefix}--label {
     position: absolute;
     z-index: 1;
-    inset-block-start: convert.to-rem(13px);
-    inset-inline-start: $spacing-05;
     display: flex;
     overflow: initial;
-    inline-size: calc(100% - 2rem);
-    block-size: convert.to-rem(16px);
     align-items: center;
     margin: 0;
+    block-size: convert.to-rem(16px);
     clip: initial;
+    inline-size: calc(100% - 2rem);
+    inset-block-start: convert.to-rem(13px);
+    inset-inline-start: $spacing-05;
     white-space: initial;
   }
 
@@ -53,9 +53,9 @@
   }
 
   .#{$prefix}--search--fluid .#{$prefix}--search-input {
-    block-size: 100%;
     padding: convert.to-rem(32px) convert.to-rem(88px) convert.to-rem(13px)
       $spacing-05;
+    block-size: 100%;
   }
 
   .#{$prefix}--search--fluid .#{$prefix}--search-magnifier-icon {
@@ -64,9 +64,9 @@
   }
 
   .#{$prefix}--search--fluid .#{$prefix}--search-close {
-    inline-size: convert.to-rem(40px);
-    block-size: convert.to-rem(40px);
     border: none;
+    block-size: convert.to-rem(40px);
+    inline-size: convert.to-rem(40px);
     inset: auto convert.to-rem(48px) 0 auto;
     transition: background-color $duration-fast-01 motion(standard, productive);
   }
@@ -74,10 +74,10 @@
   .#{$prefix}--search--fluid .#{$prefix}--search-close::before {
     position: absolute;
     display: block;
-    inline-size: convert.to-rem(1px);
-    block-size: 1rem;
     background: $border-subtle;
+    block-size: 1rem;
     content: '';
+    inline-size: convert.to-rem(1px);
     inset: auto convert.to-rem(-1px) convert.to-rem(14px) auto;
   }
 
@@ -89,12 +89,12 @@
 
   .#{$prefix}--search--fluid .#{$prefix}--search-close::after {
     position: absolute;
-    inset-block-end: 0;
-    inset-inline-start: 0;
     display: block;
-    inline-size: 100%;
     block-size: convert.to-rem(2px);
     content: '';
+    inline-size: 100%;
+    inset-block-end: 0;
+    inset-inline-start: 0;
   }
 
   .#{$prefix}--search--fluid
@@ -106,12 +106,12 @@
   .#{$prefix}--search--fluid
     .#{$prefix}--search-input:not(:focus)
     ~ .#{$prefix}--search-close:not([disabled])::after {
-    block-size: convert.to-rem(1px);
     background: $border-strong;
+    block-size: convert.to-rem(1px);
   }
 
   .#{$prefix}--search--fluid .#{$prefix}--search-close svg {
-    margin-bottom: convert.to-rem(2px);
+    margin-block-end: convert.to-rem(2px);
   }
 
   // Disabled styles

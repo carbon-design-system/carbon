@@ -24,9 +24,9 @@ $-loading-gap-small: 110;
 @mixin inline-loading {
   .#{$prefix}--inline-loading {
     display: flex;
+    align-items: center;
     inline-size: 100%;
     min-block-size: 2rem;
-    align-items: center;
   }
 
   .#{$prefix}--inline-loading__text {
@@ -49,8 +49,8 @@ $-loading-gap-small: 110;
     // For deprecated older markup
     &.#{$prefix}--inline-loading__svg {
       position: absolute;
-      inset-block-start: 0.75rem;
       inline-size: 0.75rem;
+      inset-block-start: 0.75rem;
     }
 
     &[hidden] {
@@ -71,9 +71,9 @@ $-loading-gap-small: 110;
   }
 
   .#{$prefix}--inline-loading--error {
-    inline-size: convert.to-rem(16px);
     block-size: convert.to-rem(16px);
     fill: $support-error;
+    inline-size: convert.to-rem(16px);
 
     &[hidden] {
       display: none;
@@ -88,7 +88,7 @@ $-loading-gap-small: 110;
     screen and (-ms-high-contrast: none) {
     .#{$prefix}--inline-loading__checkmark-container {
       inset-block-start: 1px;
-      right: 0.5rem;
+      inset-inline-end: 0.5rem;
     }
 
     .#{$prefix}--inline-loading__checkmark {
