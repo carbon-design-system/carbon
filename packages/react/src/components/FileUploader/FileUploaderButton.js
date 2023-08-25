@@ -26,7 +26,6 @@ function FileUploaderButton({
   labelText: ownerLabelText = 'Add file',
   multiple = false,
   onChange = noop,
-  role = 'button',
   name,
   size = 'md',
   tabIndex = 0,
@@ -53,10 +52,16 @@ function FileUploaderButton({
 
   function onClick(event) {
     event.target.value = null;
+    if (inputNode.current) {
+      inputNode.current.value = '';
+      inputNode.current.click();
+    }
   }
 
   function onKeyDown(event) {
-    if (matches(event, [keys.Enter, keys.Space])) {
+    event.preventDefault();
+    if (matches(event, [keys.Enter, keys.Space]) && inputNode.current) {
+      inputNode.current.value = '';
       inputNode.current.click();
     }
   }
@@ -76,16 +81,18 @@ function FileUploaderButton({
 
   return (
     <>
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-      <label
-        tabIndex={disabled ? -1 : tabIndex || 0}
+      <button
+        type="button"
+        disabled={disabled}
         className={classes}
+        onClick={onClick}
         onKeyDown={onKeyDown}
-        htmlFor={inputId}
+        tabIndex={tabIndex ? tabIndex : undefined}
         {...other}>
-        <span role={role} aria-disabled={disabled}>
-          {labelText}
-        </span>
+        {labelText}
+      </button>
+      <label className={`${prefix}--visually-hidden`} htmlFor={inputId}>
+        <span>{labelText}</span>
       </label>
       <input
         className={`${prefix}--visually-hidden`}
@@ -93,12 +100,11 @@ function FileUploaderButton({
         id={inputId}
         disabled={disabled}
         type="file"
-        tabIndex="-1"
+        tabIndex={-1}
         multiple={multiple}
         accept={accept}
         name={name}
         onChange={handleOnChange}
-        onClick={onClick}
       />
     </>
   );

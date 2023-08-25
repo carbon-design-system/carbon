@@ -560,7 +560,7 @@ export const HeaderBaseWActionsAndRightPanel = withReadme(readme, () => {
           <Notification20 />
         </HeaderGlobalAction>
       </HeaderGlobalBar>
-      <HeaderPanel aria-label="Header Panel" expanded={expanded} />
+      <HeaderPanel expanded={expanded} />
     </Header>
   );
 });
@@ -590,7 +590,7 @@ export const HeaderBaseWActionsAndSwitcher = withReadme(readme, () => (
         <AppSwitcher20 />
       </HeaderGlobalAction>
     </HeaderGlobalBar>
-    <HeaderPanel aria-label="Header Panel" expanded>
+    <HeaderPanel expanded>
       <Switcher aria-label="Switcher Container">
         <SwitcherItem isSelected aria-label="Link 1" href="#">
           Link 1

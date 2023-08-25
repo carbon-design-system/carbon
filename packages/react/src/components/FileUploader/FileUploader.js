@@ -232,7 +232,7 @@ export default class FileUploader extends React.Component {
                 <span
                   key={index}
                   className={selectedFileClasses}
-                  ref={(node) => (this.nodes[index] = node)} // eslint-disable-line
+                  ref={(node) => (this.nodes[index] = node)}
                   {...other}>
                   <p className={`${prefix}--file-filename`}>{name}</p>
                   <span className={`${prefix}--file__state-container`}>
