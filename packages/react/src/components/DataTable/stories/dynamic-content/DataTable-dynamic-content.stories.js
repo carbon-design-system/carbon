@@ -112,6 +112,7 @@ export const Default = () => {
             getToolbarProps,
             getBatchActionProps,
             getRowProps,
+            getExpandedRowProps,
             onInputChange,
             selectedRows,
             getTableProps,
@@ -196,7 +197,8 @@ export const Default = () => {
                         </TableExpandRow>
                         <TableExpandedRow
                           colSpan={headers.length + 3}
-                          className="demo-expanded-td">
+                          className="demo-expanded-td"
+                          {...getExpandedRowProps({ row })}>
                           <h6>Expandable row content</h6>
                           <div>Description here</div>
                         </TableExpandedRow>

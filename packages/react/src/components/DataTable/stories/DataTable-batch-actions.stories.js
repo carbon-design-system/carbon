@@ -72,8 +72,19 @@ export const Default = () => (
       selectedRows,
       getTableProps,
       getTableContainerProps,
+      selectRow,
     }) => {
-      const batchActionProps = getBatchActionProps();
+      const batchActionProps = {
+        ...getBatchActionProps({
+          onSelectAll: () => {
+            rows.map((row) => {
+              if (!row.isSelected) {
+                selectRow(row.id);
+              }
+            });
+          },
+        }),
+      };
 
       return (
         <TableContainer
@@ -135,7 +146,7 @@ export const Default = () => (
               <Button
                 tabIndex={batchActionProps.shouldShowBatchActions ? -1 : 0}
                 onClick={action('Add new row')}
-                size="small"
+                size="sm"
                 kind="primary">
                 Add new
               </Button>
@@ -236,7 +247,7 @@ export const Playground = (args) => (
               <Button
                 tabIndex={batchActionProps.shouldShowBatchActions ? -1 : 0}
                 onClick={action('Add new row')}
-                size="small"
+                size="sm"
                 kind="primary">
                 Add new
               </Button>

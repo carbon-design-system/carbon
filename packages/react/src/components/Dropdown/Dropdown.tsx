@@ -43,16 +43,16 @@ import setupGetInstanceId from '../../tools/setupGetInstanceId';
 const getInstanceId = setupGetInstanceId();
 
 const {
-  MenuBlur,
-  MenuKeyDownArrowDown,
-  MenuKeyDownArrowUp,
-  MenuKeyDownEscape,
-  ToggleButtonClick,
+  ToggleButtonKeyDownArrowDown,
+  ToggleButtonKeyDownArrowUp,
+  ToggleButtonKeyDownHome,
+  ToggleButtonKeyDownEnd,
+  ItemMouseMove,
 } = useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
   ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
 };
 
-const defaultItemToString = <ItemType,>(item?: ItemType): string => {
+const defaultItemToString = <ItemType,>(item?: ItemType | null): string => {
   if (typeof item === 'string') {
     return item;
   }
@@ -148,7 +148,7 @@ export interface DropdownProps<ItemType>
    * given item to a string label. By default, it extracts the `label` field
    * from a given item to serve as the item label in the list.
    */
-  itemToString?(item: ItemType): string;
+  itemToString?(item: ItemType | null): string;
 
   /**
    * We try to stay as generic as possible here to allow individuals to pass
@@ -258,34 +258,42 @@ const Dropdown = React.forwardRef(
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
     const prefix = usePrefix();
-    const [highlightedIndex, setHighlightedIndex] = useState();
     const { isFluid } = useContext(FormContext);
+
     const selectProps: UseSelectProps<ItemType> = {
       ...downshiftProps,
       items,
       itemToString,
-      highlightedIndex,
       initialSelectedItem,
       onSelectedItemChange,
-      onStateChange,
+      stateReducer,
+      isItemDisabled(item, _index) {
+        const isObject = item !== null && typeof item === 'object';
+        return isObject && 'disabled' in item && item.disabled === true;
+      },
     };
     const { current: dropdownInstanceId } = useRef(getInstanceId());
 
-    function onStateChange(changes) {
-      const { type } = changes;
+    function stateReducer(state, actionAndChanges) {
+      const { changes, props, type } = actionAndChanges;
+      const { highlightedIndex } = changes;
+
       switch (type) {
-        case MenuKeyDownArrowDown:
-        case MenuKeyDownArrowUp:
-          setHighlightedIndex(changes.highlightedIndex);
-          break;
-        case MenuBlur:
-        case MenuKeyDownEscape:
-          setHighlightedIndex(changes.highlightedIndex);
-          break;
-        case ToggleButtonClick:
-          setHighlightedIndex(changes.highlightedIndex);
-          break;
+        case ToggleButtonKeyDownArrowDown:
+        case ToggleButtonKeyDownArrowUp:
+        case ToggleButtonKeyDownHome:
+        case ToggleButtonKeyDownEnd:
+          if (highlightedIndex > -1) {
+            const itemArray = document.querySelectorAll(
+              `li.${prefix}--list-box__menu-item[role="option"]`
+            );
+            props.scrollIntoView(itemArray[highlightedIndex]);
+          }
+          return changes;
+        case ItemMouseMove:
+          return { ...changes, highlightedIndex: state.highlightedIndex };
       }
+      return changes;
     }
 
     // only set selectedItem if the prop is defined. Setting if it is undefined
@@ -301,6 +309,7 @@ const Dropdown = React.forwardRef(
       getMenuProps,
       getItemProps,
       selectedItem,
+      highlightedIndex,
     } = useSelect(selectProps);
     const inline = type === 'inline';
     const showWarning = !invalid && warn;
@@ -360,13 +369,10 @@ const Dropdown = React.forwardRef(
     function onSelectedItemChange({
       selectedItem,
     }: Partial<UseSelectState<ItemType>>) {
-      setIsFocused(false);
       if (onChange) {
         onChange({ selectedItem: selectedItem ?? null });
       }
     }
-
-    const menuItemOptionRefs = useRef(items.map((_) => React.createRef()));
 
     const handleFocus = (evt: FocusEvent<HTMLDivElement>) => {
       setIsFocused(evt.type === 'focus' ? true : false);
@@ -410,11 +416,6 @@ const Dropdown = React.forwardRef(
               (isTyping && evt.code === 'Space') ||
               !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
             ) {
-              if (evt.code === 'Space') {
-                evt.preventDefault();
-                return;
-              }
-
               if (currTimer) {
                 clearTimeout(currTimer);
               }
@@ -424,7 +425,9 @@ const Dropdown = React.forwardRef(
                 }, 3000)
               );
             }
-            toggleButtonProps.onKeyDown(evt);
+            if (toggleButtonProps.onKeyDown) {
+              toggleButtonProps.onKeyDown(evt);
+            }
           },
         };
 
@@ -461,9 +464,6 @@ const Dropdown = React.forwardRef(
           <button
             type="button"
             // aria-expanded is already being passed through {...toggleButtonProps}
-            role="combobox" // eslint-disable-line jsx-a11y/role-has-required-aria-props
-            aria-owns={getMenuProps().id}
-            aria-controls={getMenuProps().id}
             className={`${prefix}--list-box__field`}
             disabled={disabled}
             aria-disabled={readOnly ? true : undefined} // aria-disabled to remain focusable
@@ -473,7 +473,7 @@ const Dropdown = React.forwardRef(
             title={
               selectedItem && itemToString !== undefined
                 ? itemToString(selectedItem)
-                : label
+                : defaultItemToString(label)
             }
             {...toggleButtonProps}
             {...readOnlyEventHandlers}
@@ -494,12 +494,9 @@ const Dropdown = React.forwardRef(
             {isOpen &&
               items.map((item, index) => {
                 const isObject = item !== null && typeof item === 'object';
-                const disabled =
-                  isObject && 'disabled' in item && item.disabled === true;
                 const itemProps = getItemProps({
                   item,
                   index,
-                  disabled,
                 });
                 const title =
                   isObject && 'text' in item && itemToElement
@@ -510,10 +507,8 @@ const Dropdown = React.forwardRef(
                     key={itemProps.id}
                     isActive={selectedItem === item}
                     isHighlighted={highlightedIndex === index}
-                    title={title}
-                    ref={{
-                      menuItemOptionRef: menuItemOptionRefs.current[index],
-                    }}
+                    title={title as string}
+                    disabled={itemProps['aria-disabled']}
                     {...itemProps}>
                     {typeof item === 'object' &&
                     ItemToElement !== undefined &&
