@@ -27,10 +27,7 @@
 
   .#{$prefix}--time-picker__select {
     justify-content: center;
-
-    &:not(:last-of-type) {
-      margin: 0 $spacing-01;
-    }
+    margin-left: $spacing-01;
   }
 
   .#{$prefix}--time-picker__input {
