@@ -16,8 +16,8 @@ import './index';
 
 export const inline = () => {
   return html`
-    <cds-code-snippet type="inline"
-      >node -v<span slot="button-description">Copy to clipboard</span>
+    <cds-code-snippet type="inline" tooltip-content="Copy to Clipboard"
+      >node -v
     </cds-code-snippet>
   `;
 };
@@ -25,8 +25,8 @@ export const inline = () => {
 export const inlineWithLayer = () => {
   return html`
     <sb-template-layers>
-      <cds-code-snippet type="inline"
-        >node -v<span slot="button-description">Copy to clipboard</span>
+      <cds-code-snippet type="inline" tooltip-content="Copy to Clipboard"
+        >node -v
       </cds-code-snippet>
     </sb-template-layers>
   `;
