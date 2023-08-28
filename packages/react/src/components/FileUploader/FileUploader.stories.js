@@ -65,31 +65,6 @@ export const _FileUploaderItem = (args) => {
     />
   );
 };
-_FileUploaderItem.args = {
-  // errorBody: '500kb max file size. Select a new file and try again.',
-  // invalid: false,
-  // labelTitle: 'Upload files',
-  // labelDescription: 'Max file size is 500mb. Only .jpg files are supported.',
-  // buttonLabel: 'Add file',
-  // buttonKind: 'primary',
-  // size: 'md',
-  // filenameStatus: 'edit',
-  // accept: ['.jpg', '.png'],
-  // multiple: true,
-  // disabled: false,
-  // iconDescription: 'Delete file',
-  // ---
-  // errorBody: PropTypes.string,
-  // errorSubject: PropTypes.string,
-  // iconDescription: PropTypes.string,
-  // invalid: PropTypes.bool,
-  // name: PropTypes.string,
-  // onDelete: PropTypes.func,
-  // size: PropTypes.oneOf(['sm', 'md', 'lg']),
-  // status: PropTypes.oneOf(['uploading', 'edit', 'complete']),
-  // uuid: PropTypes.string,
-};
-
 _FileUploaderItem.argTypes = {
   errorBody: {
     control: 'text',
