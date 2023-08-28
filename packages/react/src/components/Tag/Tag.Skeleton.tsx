@@ -10,7 +10,21 @@ import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-function TagSkeleton({ className, size, ...rest }) {
+export interface TagSkeletonProps
+  extends React.HTMLAttributes<HTMLSpanElement> {
+  /**
+   * Specify an optional className to add.
+   */
+  className?: string;
+
+  /**
+   * Specify the size of the Tag. Currently supports either `sm` or
+   * default sizes.
+   */
+  size?: 'sm';
+}
+
+function TagSkeleton({ className, size, ...rest }: TagSkeletonProps) {
   const prefix = usePrefix();
   return (
     <span

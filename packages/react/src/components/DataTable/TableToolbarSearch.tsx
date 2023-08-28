@@ -7,7 +7,15 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useMemo, useRef, useState, useEffect } from 'react';
+import React, {
+  useMemo,
+  useRef,
+  useState,
+  useEffect,
+  FocusEvent,
+  ReactNode,
+  RefObject,
+} from 'react';
 import Search from '../Search';
 import setupGetInstanceId from './tools/instanceId';
 import { usePrefix } from '../../internal/usePrefix';
@@ -18,9 +26,115 @@ const translationKeys = {
   'carbon.table.toolbar.search.placeholder': 'Filter table',
 };
 
-const translateWithId = (id) => {
+const translateWithId = (id: string): string => {
   return translationKeys[id];
 };
+
+export interface TableToolbarSearchProps {
+  children?: ReactNode;
+
+  /**
+   * Provide an optional class name for the search container
+   */
+  className?: string;
+
+  /**
+   * Specifies if the search should initially render in an expanded state
+   */
+  defaultExpanded?: boolean;
+
+  /**
+   * Provide an optional default value for the Search component
+   */
+  defaultValue?: string;
+
+  /**
+   * Specifies if the search should be disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Specifies if the search should expand
+   */
+  expanded?: boolean;
+
+  /**
+   * Provide an optional id for the search container
+   */
+  id?: string;
+
+  /**
+   * Provide an optional label text for the Search component icon
+   */
+  labelText?: string;
+
+  /**
+   * Provide an optional function to be called when the search input loses focus, this will be
+   * passed the event as the first parameter and a function to handle the expanding of the search
+   * input as the second
+   */
+  onBlur?: (
+    event: FocusEvent<HTMLInputElement>,
+    handleExpand: (event: FocusEvent<HTMLInputElement>, value: boolean) => void
+  ) => void;
+
+  /**
+   * Provide an optional hook that is called each time the input is updated
+   */
+  onChange?: (
+    event: '' | Partial<React.ChangeEventHandler<HTMLInputElement>>,
+    value?: string
+  ) => void;
+
+  /**
+   * Optional callback called when the search value is cleared.
+   */
+  onClear?: () => void;
+
+  /**
+   * Provide an optional hook that is called each time the input is expanded
+   */
+  onExpand?: (event: FocusEvent<HTMLInputElement>, value: boolean) => void;
+
+  /**
+   * Provide an optional function to be called when the search input gains focus, this will be
+   * passed the event as the first parameter and a function to handle the expanding of the search
+   * input as the second.
+   */
+  onFocus?: (
+    event: FocusEvent<HTMLInputElement>,
+    handleExpand: (event: FocusEvent<HTMLInputElement>, value: boolean) => void
+  ) => void;
+
+  /**
+   * Whether the search should be allowed to expand
+   */
+  persistent?: boolean;
+
+  /**
+   * Provide an optional placeholder text for the Search component
+   */
+  placeholder?: string;
+
+  /**
+   * Provide an optional className for the overall container of the Search
+   */
+  searchContainerClass?: string;
+
+  /**
+   * Specify the size of the Search
+   */
+  size?: 'sm' | 'md' | 'lg';
+
+  /**
+   * Optional prop to specify the tabIndex of the <Search> (in expanded state) or the container (in collapsed state)
+   */
+  tabIndex?: number | string;
+  /**
+   * Provide custom text for the component for each translation id
+   */
+  translateWithId: (id: string) => string;
+}
 
 const TableToolbarSearch = ({
   className,
@@ -40,21 +154,24 @@ const TableToolbarSearch = ({
   onBlur,
   onFocus,
   size = 'lg',
+  tabIndex,
   ...rest
-}) => {
+}: TableToolbarSearchProps) => {
   const { current: controlled } = useRef(expandedProp !== undefined);
-  const [expandedState, setExpandedState] = useState(
-    defaultExpanded || defaultValue
-  );
+  const [expandedState, setExpandedState] = useState<
+    string | boolean | undefined
+  >(defaultExpanded || defaultValue);
   const expanded = controlled ? expandedProp : expandedState;
   const [value, setValue] = useState(defaultValue || '');
   const uniqueId = useMemo(getInstanceId, []);
-  const [focusTarget, setFocusTarget] = useState(null);
+  const [focusTarget, setFocusTarget] = useState<RefObject<HTMLElement> | null>(
+    null
+  );
   const prefix = usePrefix();
 
   useEffect(() => {
     if (focusTarget) {
-      focusTarget.current.querySelector('input').focus();
+      focusTarget.current?.querySelector?.('input')?.focus();
       setFocusTarget(null);
     }
   }, [focusTarget]);
@@ -62,7 +179,7 @@ const TableToolbarSearch = ({
   useEffect(
     () => {
       if (defaultValue) {
-        onChangeProp('', defaultValue);
+        onChangeProp?.('', defaultValue);
       }
     },
     //eslint-disable-next-line react-hooks/exhaustive-deps
@@ -70,14 +187,18 @@ const TableToolbarSearch = ({
   );
 
   const searchClasses = cx(className, {
-    [searchContainerClass]: searchContainerClass,
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    [searchContainerClass!]: searchContainerClass,
     [`${prefix}--toolbar-search-container-active`]: expanded,
     [`${prefix}--toolbar-search-container-disabled`]: disabled,
     [`${prefix}--toolbar-search-container-expandable`]: !persistent,
     [`${prefix}--toolbar-search-container-persistent`]: persistent,
   });
 
-  const handleExpand = (event, value = !expanded) => {
+  const handleExpand = (
+    event: FocusEvent<HTMLInputElement>,
+    value = !expanded
+  ) => {
     if (!disabled) {
       if (!controlled && !persistent) {
         setExpandedState(value);
@@ -113,6 +234,9 @@ const TableToolbarSearch = ({
       }
       onBlur={onBlur ? (event) => onBlur(event, handleExpand) : handleOnBlur}
       size={size}
+      // HTMLAttributes defines tabIndex as number | undefined but in reality it
+      // also accepts a string, so we cast here to convince Typescript this is okay.
+      tabIndex={tabIndex as number | undefined}
       {...rest}
     />
   );

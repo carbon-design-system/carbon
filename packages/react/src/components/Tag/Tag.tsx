@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
+import { PolymorphicProps } from '../../types/common';
 
 const getInstanceId = setupGetInstanceId();
 const TYPES = {
@@ -28,7 +29,66 @@ const TYPES = {
   outline: 'Outline',
 };
 
-const Tag = ({
+export interface TagBaseProps {
+  /**
+   * Provide content to be rendered inside of a <Tag>
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Provide a custom className that is applied to the containing <span>
+   */
+  className?: string;
+
+  /**
+   * Specify if the <Tag> is disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Determine if <Tag> is a filter/chip
+   */
+  filter?: boolean;
+
+  /**
+   * Specify the id for the tag.
+   */
+  id?: string;
+
+  /**
+   * Click handler for filter tag close button.
+   */
+  onClose?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+
+  /**
+   * Optional prop to render a custom icon.
+   * Can be a React component class
+   */
+  renderIcon?: React.ElementType;
+
+  /**
+   * Specify the size of the Tag. Currently supports either `sm` or
+   * 'md' (default) sizes.
+   */
+  size?: 'sm' | 'md';
+
+  /**
+   * Text to show on clear filters
+   */
+  title?: string;
+
+  /**
+   * Specify the type of the <Tag>
+   */
+  type?: keyof typeof TYPES;
+}
+
+export type TagProps<T extends React.ElementType> = PolymorphicProps<
+  T,
+  TagBaseProps
+>;
+
+const Tag = <T extends React.ElementType>({
   children,
   className,
   id,
@@ -41,7 +101,7 @@ const Tag = ({
   size,
   as: BaseComponent,
   ...other
-}) => {
+}: TagProps<T>) => {
   const prefix = usePrefix();
   const tagId = id || `tag-${getInstanceId()}`;
   const tagClasses = classNames(`${prefix}--tag`, className, {
@@ -52,7 +112,11 @@ const Tag = ({
     [`${prefix}--tag--${type}`]: type,
     [`${prefix}--tag--interactive`]: other.onClick && !filter,
   });
-  const handleClose = (event) => {
+
+  const typeText =
+    type !== undefined && type in Object.keys(TYPES) ? TYPES[type] : '';
+
+  const handleClose = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (onClose) {
       event.stopPropagation();
       onClose(event);
@@ -65,8 +129,8 @@ const Tag = ({
       <ComponentTag className={tagClasses} id={tagId} {...other}>
         <span
           className={`${prefix}--tag__label`}
-          title={typeof children === 'string' ? children : null}>
-          {children !== null && children !== undefined ? children : TYPES[type]}
+          title={typeof children === 'string' ? children : undefined}>
+          {children !== null && children !== undefined ? children : typeText}
         </span>
         <button
           type="button"
@@ -96,8 +160,8 @@ const Tag = ({
       ) : (
         ''
       )}
-      <span title={typeof children === 'string' ? children : null}>
-        {children !== null && children !== undefined ? children : TYPES[type]}
+      <span title={typeof children === 'string' ? children : undefined}>
+        {children !== null && children !== undefined ? children : typeText}
       </span>
     </ComponentTag>
   );

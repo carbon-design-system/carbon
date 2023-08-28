@@ -13,7 +13,7 @@ import {
   Apple,
   Fish,
   Strawberry,
-  SubtractAlt,
+  Close,
   Wheat,
 } from '@carbon/icons-react';
 
@@ -115,7 +115,7 @@ export const WithActions = () => {
       kind="ghost"
       iconDescription="Dismiss"
       hasIconOnly
-      renderIcon={SubtractAlt}
+      renderIcon={Close}
     />
   );
 
@@ -216,7 +216,7 @@ export const WithInteractiveItemsAndActions = () => {
       kind="ghost"
       iconDescription="Dismiss"
       hasIconOnly
-      renderIcon={SubtractAlt}
+      renderIcon={Close}
     />
   );
 
