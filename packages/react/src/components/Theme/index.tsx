@@ -21,11 +21,6 @@ export const ThemeContext = React.createContext<GlobalThemeProps>({
   theme: 'white',
 });
 
-// export function GlobalTheme({
-//   children,
-//   theme,
-// }: PropsWithChildren<GlobalThemeProps>) {
-
 export const GlobalTheme = React.forwardRef(function GlobalTheme(
   { children, theme }: PropsWithChildren<GlobalThemeProps>,
   ref: React.Ref<unknown>
