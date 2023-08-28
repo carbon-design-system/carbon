@@ -32,6 +32,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { ListBoxProps } from '../ListBox/ListBox';
 import { OnChangeData } from '../Dropdown';
+import type { InternationalProps } from '../../types/common';
 
 const noop = () => {};
 const getInstanceId = setupGetInstanceId();
@@ -75,10 +76,6 @@ interface SharedOptions {
 
 interface DownshiftTypedProps<ItemType> {
   itemToString?(item: ItemType): string;
-}
-
-interface InternationalProps<MID = string, ARGS = Record<string, unknown>> {
-  translateWithId?(messageId: MID, args?: ARGS): string;
 }
 
 interface SortItemsOptions<ItemType>

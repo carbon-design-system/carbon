@@ -1,0 +1,32 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# GitHub recommends pinning actions to a commit SHA.
+# To get a newer version, you will need to update the SHA.
+# You can also reference a tag or branch, but the action may change without warning
+name: Add comment on Enhancement Label
+on:
+  issues:
+    types:
+      - labeled
+jobs:
+  add-comment:
+    ## TODO: figure out how to escape colons for labels
+    # if: github.event.label.name == "proposal: accepted" && github.event.label.name == "community contribution"
+    if: "${{ contains(github.event.label, 'proposal: accepted') && contains(github.event.label, 'communit contribution') }}"
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Add comment
+        uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410 #v6.4.1
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'The Carbon team has accepted this proposal! Our team doesn’t have the cycles to work on this now, so we are requesting community contributors. Please see the labels for roles that are needed. If you are willing to help out, comment below and we will get in touch!'
+            })

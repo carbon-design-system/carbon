@@ -7,30 +7,99 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type MouseEventHandler } from 'react';
 import Button from '../Button';
 import TableActionList from './TableActionList';
 import { Text } from '../Text';
 import { usePrefix } from '../../internal/usePrefix';
+import type { InternationalProps } from '../../types/common';
 
-const translationKeys = {
+const TableBatchActionsTranslationKeys = [
+  'carbon.table.batch.cancel',
+  'carbon.table.batch.items.selected',
+  'carbon.table.batch.item.selected',
+  'carbon.table.batch.selectAll',
+] as const;
+
+export type TableBatchActionsTranslationKey =
+  (typeof TableBatchActionsTranslationKeys)[number];
+
+export interface TableBatchActionsTranslationArgs {
+  totalSelected?: number;
+  totalCount?: number;
+}
+
+export interface TableBatchActionsProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    InternationalProps<
+      TableBatchActionsTranslationKey,
+      TableBatchActionsTranslationArgs
+    > {
+  /**
+   * Provide elements to be rendered inside of the component.
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Hook required to listen for when the user initiates a cancel request
+   * through this component.
+   */
+  onCancel: MouseEventHandler<HTMLButtonElement>;
+
+  /**
+   * Hook to listen for when the user initiates a select all
+   * request through this component. This _only_ controls the rendering
+   * of the `Select All` button and does not include built in functionality
+   */
+  onSelectAll?: MouseEventHandler<HTMLButtonElement>;
+
+  /**
+   * Boolean specifier for whether or not the batch action bar should be
+   * displayed.
+   */
+  shouldShowBatchActions?: boolean;
+
+  /**
+   * Numeric representation of the total number of items selected in a table.
+   * This number is used to derive the selection message.
+   */
+  totalSelected: number;
+
+  /**
+   * Numeric representation of the total number of items in a table.
+   * This number is used in the select all button text
+   */
+  totalCount?: number;
+}
+
+export interface TableBatchActionsComponent
+  extends React.FC<TableBatchActionsProps> {
+  translationKeys: ReadonlyArray<TableBatchActionsTranslationKey>;
+}
+
+const translationKeys: Readonly<
+  Record<TableBatchActionsTranslationKey, string>
+> = {
   'carbon.table.batch.cancel': 'Cancel',
   'carbon.table.batch.items.selected': 'items selected',
   'carbon.table.batch.item.selected': 'item selected',
   'carbon.table.batch.selectAll': 'Select all',
 };
 
-const translateWithId = (id, state) => {
+const translateWithId: TableBatchActionsProps['translateWithId'] = (
+  id,
+  { totalSelected, totalCount } = { totalSelected: 0, totalCount: 0 }
+) => {
   if (id === 'carbon.table.batch.cancel') {
     return translationKeys[id];
   }
   if (id === 'carbon.table.batch.selectAll') {
-    return `${translationKeys[id]} (${state.totalCount})`;
+    return `${translationKeys[id]} (${totalCount})`;
   }
-  return `${state.totalSelected} ${translationKeys[id]}`;
+  return `${totalSelected} ${translationKeys[id]}`;
 };
 
-const TableBatchActions = ({
+const TableBatchActions: TableBatchActionsComponent = ({
   className,
   children,
   shouldShowBatchActions,
@@ -38,10 +107,10 @@ const TableBatchActions = ({
   totalCount,
   onCancel,
   onSelectAll,
-  translateWithId: t,
+  translateWithId: t = translateWithId,
   ...rest
 }) => {
-  const [isScrolling, setIsScrolling] = React.useState();
+  const [isScrolling, setIsScrolling] = React.useState(false);
   const prefix = usePrefix();
   const batchActionsClasses = cx(
     {
@@ -95,7 +164,7 @@ const TableBatchActions = ({
   );
 };
 
-TableBatchActions.translationKeys = Object.keys(translationKeys);
+TableBatchActions.translationKeys = TableBatchActionsTranslationKeys;
 
 TableBatchActions.propTypes = {
   children: PropTypes.node,
@@ -108,7 +177,7 @@ TableBatchActions.propTypes = {
   onCancel: PropTypes.func.isRequired,
 
   /**
-   * Hook required to listen for when the user initiates a select all
+   * Hook to listen for when the user initiates a select all
    * request through this component. This _only_ controls the rendering
    * of the `Select All` button and does not include built in functionality
    */
