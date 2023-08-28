@@ -221,24 +221,24 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
     otherProps = anchorProps;
   }
 
-  const Button = React.createElement(
-    component,
-    {
-      onMouseEnter,
-      onMouseLeave,
-      onFocus,
-      onBlur,
-      onClick,
-      ...rest,
-      ...commonProps,
-      ...otherProps,
-    },
-    assistiveText,
-    children,
-    buttonImage
-  );
-
-  if (hasIconOnly) {
+  if (!hasIconOnly) {
+    return React.createElement(
+      component,
+      {
+        onMouseEnter,
+        onMouseLeave,
+        onFocus,
+        onBlur,
+        onClick,
+        ...rest,
+        ...commonProps,
+        ...otherProps,
+      },
+      assistiveText,
+      children,
+      buttonImage
+    );
+  } else {
     let align: PopoverAlignment | undefined = undefined;
 
     if (tooltipPosition === 'top' || tooltipPosition === 'bottom') {
@@ -276,7 +276,6 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
       </IconButton>
     );
   }
-  return Button;
 });
 
 Button.displayName = 'Button';
