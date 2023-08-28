@@ -18,7 +18,7 @@ describe('ProgressBar', () => {
   let wrapper;
 
   beforeEach(() => {
-    // eslint-disable-next-line testing-library/no-render-in-setup
+    // eslint-disable-next-line testing-library/no-render-in-lifecycle
     wrapper = render(<ProgressBar {...props} />);
   });
 
