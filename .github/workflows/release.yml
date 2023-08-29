@@ -29,8 +29,39 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache --check-cache
 
+      # For generating playwright json report for avt tests
+      - name: Install browsers
+        run: yarn playwright install --with-deps
+
       - name: Build project
         run: yarn build
+
+      # Additional steps for generating playwright json report for avt tests
+      - name: Build storybook
+        run:
+          STORYBOOK_STORE_7=false yarn workspace @carbon/react storybook:build
+      - name: Run storybook
+        id: storybook
+        run: |
+          npx serve -l 3000 packages/react/storybook-static &
+          pid=$!
+          echo ::set-output name=pid::"$pid"
+      - uses: ./actions/wait-for-it
+        with:
+          URL: 'http://localhost:3000'
+        timeout-minutes: 3
+      - name: Run AVT
+        if: github.repository == 'carbon-design-system/carbon'
+        run: |
+          yarn playwright test --project chromium --grep @avt
+      - name: Stop storybook
+        run: kill ${{ steps.storybook.outputs.pid }}
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-avt-report
+          path: .playwright
 
       - name: Run Continuous Integration checks
         run: yarn ci-check
