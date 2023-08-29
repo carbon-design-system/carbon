@@ -248,7 +248,7 @@ export const WithListTitleDecorators = () => (
           justifyContent: 'space-between',
         }}>
         <span>List title</span>
-        <Tag size="sm" role="status" aria-label="4 items in list">
+        <Tag role="status" aria-label="4 items in list">
           4
         </Tag>
       </div>

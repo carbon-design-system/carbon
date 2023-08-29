@@ -27,7 +27,7 @@
     @include layout.redefine-tokens(
       (
         size: (
-          block-size: (
+          height: (
             xs: convert.to-rem(18px),
             sm: convert.to-rem(18px),
             md: convert.to-rem(24px),
@@ -36,7 +36,7 @@
       )
     );
 
-    @include layout.use('size', $default: 'xs', $min: 'xs', $max: 'md');
+    @include layout.use('size', $default: 'md', $min: 'sm', $max: 'md');
 
     @include type-style('label-01');
     @include tag-theme($tag-background-gray, $tag-color-gray, $tag-hover-gray);
