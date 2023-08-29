@@ -12,7 +12,7 @@
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/skeleton' as *;
 
@@ -26,18 +26,18 @@
   }
 
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box {
-    min-height: rem(64px);
+    min-height: convert.to-rem(64px);
     padding: 0;
   }
 
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--label {
     position: absolute;
     z-index: 1;
-    top: rem(13px);
+    top: convert.to-rem(13px);
     left: $spacing-05;
     display: flex;
     width: calc(100% - 2rem);
-    height: rem(16px);
+    height: convert.to-rem(16px);
     align-items: center;
     margin: 0;
   }
@@ -61,8 +61,8 @@
   }
 
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__field {
-    padding-top: rem(33px);
-    padding-bottom: rem(13px);
+    padding-top: convert.to-rem(33px);
+    padding-bottom: convert.to-rem(13px);
     padding-left: $spacing-05;
   }
 
@@ -82,7 +82,7 @@
       .#{$prefix}--list-box__wrapper--fluid--condensed
     )
     .#{$prefix}--list-box__menu-item__selected-icon {
-    top: rem(20px);
+    top: convert.to-rem(20px);
   }
 
   // Disabled styles
@@ -122,7 +122,7 @@
   .#{$prefix}--list-box__wrapper--fluid
     :not(.#{$prefix}--list-box--up)
     .#{$prefix}--list-box__menu {
-    top: calc(100% + rem(3px));
+    top: calc(100% + convert.to-rem(3px));
   }
 
   // Invalid / Warning styles
@@ -175,7 +175,7 @@
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--list-box--warning
     ~ .#{$prefix}--form-requirement {
-    padding: rem(8px) 4rem rem(8px) $spacing-05;
+    padding: convert.to-rem(8px) 4rem convert.to-rem(8px) $spacing-05;
     margin-top: 0;
   }
 
@@ -190,7 +190,7 @@
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--list-box--warning
     .#{$prefix}--list-box__invalid-icon {
-    top: rem(81px);
+    top: convert.to-rem(81px);
     right: $spacing-05;
     pointer-events: none;
   }
@@ -251,10 +251,10 @@
     .#{$prefix}--skeleton
     .#{$prefix}--list-box__field {
     position: absolute;
-    top: rem(36px);
+    top: convert.to-rem(36px);
     left: $spacing-05;
     width: 50%;
-    height: rem(8px);
+    height: convert.to-rem(8px);
     padding: 0;
   }
 
@@ -265,7 +265,7 @@
     top: $spacing-05;
     left: $spacing-05;
     width: 25%;
-    height: rem(8px);
+    height: convert.to-rem(8px);
   }
 
   .#{$prefix}--list-box__wrapper--fluid

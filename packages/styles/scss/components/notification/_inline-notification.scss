@@ -14,7 +14,7 @@
 @use '../../theme' as *;
 @use '../../themes' as *;
 @use '../../type' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/focus-outline' as *;
 @use './tokens' as *;
@@ -29,25 +29,25 @@
     position: relative;
     display: flex;
     width: 100%;
-    min-width: rem(288px);
-    max-width: rem(288px);
+    min-width: convert.to-rem(288px);
+    max-width: convert.to-rem(288px);
     height: auto;
-    min-height: rem(48px);
+    min-height: convert.to-rem(48px);
     flex-wrap: wrap;
 
     color: $text-inverse;
 
     @include breakpoint(md) {
-      max-width: rem(608px);
+      max-width: convert.to-rem(608px);
       flex-wrap: nowrap;
     }
 
     @include breakpoint(lg) {
-      max-width: rem(736px);
+      max-width: convert.to-rem(736px);
     }
 
     @include breakpoint(max) {
-      max-width: rem(832px);
+      max-width: convert.to-rem(832px);
     }
   }
 
@@ -182,23 +182,23 @@
   .#{$prefix}--inline-notification__details {
     display: flex;
     flex-grow: 1;
-    margin: 0 $spacing-09 0 rem(13px);
+    margin: 0 $spacing-09 0 convert.to-rem(13px);
 
     @include breakpoint(md) {
-      margin: 0 rem(13px);
+      margin: 0 convert.to-rem(13px);
     }
   }
 
   .#{$prefix}--inline-notification__icon {
     flex-shrink: 0;
-    margin-top: rem(14px);
+    margin-top: convert.to-rem(14px);
     margin-right: $spacing-05;
   }
 
   .#{$prefix}--inline-notification__text-wrapper {
     display: flex;
     flex-wrap: wrap;
-    padding: rem(15px) 0;
+    padding: convert.to-rem(15px) 0;
   }
 
   .#{$prefix}--inline-notification__title {
@@ -214,7 +214,7 @@
   }
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
-    height: rem(32px);
+    height: convert.to-rem(32px);
     margin-bottom: $spacing-03;
     margin-left: $spacing-08;
 
@@ -266,10 +266,10 @@
     top: 0;
     right: 0;
     display: flex;
-    width: rem(48px);
-    min-width: rem(48px);
-    max-width: rem(48px);
-    height: rem(48px);
+    width: convert.to-rem(48px);
+    min-width: convert.to-rem(48px);
+    max-width: convert.to-rem(48px);
+    height: convert.to-rem(48px);
     flex-direction: column;
     align-items: center;
     justify-content: center;

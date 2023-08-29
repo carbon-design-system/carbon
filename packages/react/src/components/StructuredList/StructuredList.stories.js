@@ -119,6 +119,7 @@ export const Selection = (args) => {
           value={`row-${i}`}
           title={`row-${i}`}
           name="row-0"
+          aria-label={`row-${i}`}
         />
         <StructuredListCell>
           <CheckmarkFilled
@@ -137,7 +138,6 @@ export const Selection = (args) => {
           <StructuredListCell head>ColumnA</StructuredListCell>
           <StructuredListCell head>ColumnB</StructuredListCell>
           <StructuredListCell head>ColumnC</StructuredListCell>
-          <StructuredListCell head>{''}</StructuredListCell>
         </StructuredListRow>
       </StructuredListHead>
       <StructuredListBody>

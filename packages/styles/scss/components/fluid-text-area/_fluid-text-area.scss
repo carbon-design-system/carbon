@@ -12,7 +12,7 @@
 @use '../../config' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 
 @mixin fluid-text-area {
@@ -37,11 +37,11 @@
   .#{$prefix}--text-area--fluid .#{$prefix}--label {
     position: absolute;
     z-index: 1;
-    top: rem(13px);
+    top: convert.to-rem(13px);
     left: $spacing-05;
     display: flex;
     width: calc(100% - 2rem);
-    height: rem(16px);
+    height: convert.to-rem(16px);
     align-items: center;
     margin: 0;
   }
@@ -71,8 +71,8 @@
   }
 
   .#{$prefix}--text-area--fluid .#{$prefix}--text-area {
-    min-height: rem(64px);
-    padding: 0 $spacing-05 rem(13px);
+    min-height: convert.to-rem(64px);
+    padding: 0 $spacing-05 convert.to-rem(13px);
     margin-top: 2rem;
     outline: none;
   }
@@ -99,8 +99,8 @@
 
   // accounts for 2px of border when invalid
   .#{$prefix}--text-area--fluid .#{$prefix}--text-area--invalid {
-    padding: 0 rem(14px) rem(13px);
-    margin-top: rem(30px);
+    padding: 0 convert.to-rem(14px) convert.to-rem(13px);
+    margin-top: convert.to-rem(30px);
   }
 
   .#{$prefix}--text-area--fluid

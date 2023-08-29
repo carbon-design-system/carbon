@@ -43,6 +43,11 @@ test.describe('UIShell @avt', () => {
         theme: 'white',
       },
     });
+
+    await expect(
+      page.getByRole('button', { name: 'Category title' }).first()
+    ).toBeVisible();
+
     // open a category within the menu
     page
       .getByRole('button', { name: 'Category title' })
@@ -64,7 +69,7 @@ test.describe('UIShell @avt', () => {
         theme: 'white',
       },
     });
-
+    await expect(page.getByRole('link', { name: 'Link 4' })).toBeVisible();
     // open the header link dropdown
     page
       .getByRole('link', { name: 'Link 4' })
@@ -83,7 +88,9 @@ test.describe('UIShell @avt', () => {
         theme: 'white',
       },
     });
-
+    await expect(
+      page.getByRole('link', { name: 'Skip to main content' })
+    ).toBeVisible();
     await page.keyboard.press('Tab');
     await expect(
       page.getByRole('link', { name: 'Skip to main content' })

@@ -28,6 +28,7 @@ const RepoTable = ({ rows, headers }) => {
         headers,
         getHeaderProps,
         getRowProps,
+        getExpandedRowProps,
         getTableProps,
       }) => (
         <TableContainer
@@ -52,7 +53,9 @@ const RepoTable = ({ rows, headers }) => {
                       <TableCell key={cell.id}>{cell.value}</TableCell>
                     ))}
                   </TableExpandRow>
-                  <TableExpandedRow colSpan={headers.length + 1}>
+                  <TableExpandedRow
+                    {...getExpandedRowProps({ row })}
+                    colSpan={headers.length + 1}>
                     <p>{getRowDescription(row.id)}</p>
                   </TableExpandedRow>
                 </React.Fragment>

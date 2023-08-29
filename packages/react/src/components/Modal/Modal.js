@@ -50,6 +50,7 @@ const Modal = React.forwardRef(function Modal(
     closeButtonLabel,
     preventCloseOnClickOutside, // eslint-disable-line
     isFullWidth,
+    launcherButtonRef,
     ...rest
   },
   ref
@@ -174,6 +175,14 @@ const Modal = React.forwardRef(function Modal(
   useEffect(() => {
     toggleClass(document.body, `${prefix}--body--with-modal-open`, open);
   }, [open, prefix]);
+
+  useEffect(() => {
+    if (!open && launcherButtonRef) {
+      setTimeout(() => {
+        launcherButtonRef?.current?.focus();
+      });
+    }
+  }, [open, launcherButtonRef]);
 
   useEffect(() => {
     const initialFocus = (focusContainerElement) => {
@@ -368,6 +377,16 @@ Modal.propTypes = {
    * Specify whether or not the Modal content should have any inner padding.
    */
   isFullWidth: PropTypes.bool,
+
+  /**
+   * Provide a ref to return focus to once the modal is closed.
+   */
+  launcherButtonRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({
+      current: PropTypes.any,
+    }),
+  ]),
 
   /**
    * Specify a label to be read by screen readers on the modal root node
