@@ -12,36 +12,32 @@
 @use '@carbon/styles/scss/components/tooltip';
 @use '@carbon/styles/scss/theme' as *;
 
-@include popover;
-
 // For some reason `#{prefix}-tooltip` doesn't work here, will need to investigate
-@mixin tooltip {
-  :host(#{$prefix}-tooltip[data-table]) {
-    display: contents;
+:host(#{$prefix}-tooltip[data-table]) {
+  display: contents;
 
-    &:hover {
-      ::slotted(button) {
-        background-color: $layer-selected-hover !important;
-      }
-    }
-  }
-
-  :host(#{$prefix}-tooltip[data-table][size='xs']),
-  :host(#{$prefix}-tooltip[data-table][size='sm']) {
+  &:hover {
     ::slotted(button) {
-      height: calc(100% + 1px) !important;
+      background-color: $layer-selected-hover !important;
     }
   }
+}
 
-  :host(#{$prefix}-tooltip[toolbar-action]) {
-    ::slotted(button) {
-      outline: none !important;
-    }
+:host(#{$prefix}-tooltip[data-table][size='xs']),
+:host(#{$prefix}-tooltip[data-table][size='sm']) {
+  ::slotted(button) {
+    height: calc(100% + 1px) !important;
   }
+}
 
-  :host(#{prefix}-tooltip-content) {
-    ::slotted(.#{$prefix}-tooltip-content) {
-      @extend .#{$prefix}--tooltip-content;
-    }
+:host(#{$prefix}-tooltip[toolbar-action]) {
+  ::slotted(button) {
+    outline: none !important;
+  }
+}
+
+:host(#{prefix}-tooltip-content) {
+  ::slotted(.#{$prefix}-tooltip-content) {
+    @extend .#{$prefix}--tooltip-content;
   }
 }
