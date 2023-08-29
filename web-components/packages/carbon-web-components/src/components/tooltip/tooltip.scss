@@ -18,27 +18,27 @@
 @mixin tooltip {
   :host(#{$prefix}-tooltip[data-table]) {
     display: contents;
-  
+
     &:hover {
       ::slotted(button) {
         background-color: $layer-selected-hover !important;
       }
     }
   }
-  
+
   :host(#{$prefix}-tooltip[data-table][size='xs']),
   :host(#{$prefix}-tooltip[data-table][size='sm']) {
     ::slotted(button) {
       height: calc(100% + 1px) !important;
     }
   }
-  
+
   :host(#{$prefix}-tooltip[toolbar-action]) {
     ::slotted(button) {
       outline: none !important;
     }
   }
-  
+
   :host(#{prefix}-tooltip-content) {
     ::slotted(.#{$prefix}-tooltip-content) {
       @extend .#{$prefix}--tooltip-content;
