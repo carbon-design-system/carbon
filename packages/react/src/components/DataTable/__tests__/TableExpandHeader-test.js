@@ -234,6 +234,7 @@ describe('TableExpandHeader', () => {
                 getTableProps,
                 getHeaderProps,
                 getRowProps,
+                getExpandedRowProps,
                 getExpandHeaderProps,
               }) => (
                 <Table {...getTableProps()}>
@@ -260,7 +261,9 @@ describe('TableExpandHeader', () => {
                             <TableCell key={cell.id}>{cell.value}</TableCell>
                           ))}
                         </TableExpandRow>
-                        <TableExpandedRow colSpan={headers.length + 1}>
+                        <TableExpandedRow
+                          {...getExpandedRowProps({ row })}
+                          colSpan={headers.length + 1}>
                           Some content for {row.id}
                         </TableExpandedRow>
                       </React.Fragment>

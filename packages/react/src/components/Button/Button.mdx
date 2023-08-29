@@ -15,8 +15,7 @@ import * as ButtonStories from './Button.stories';
 
 ## Table of Contents
 
-{/* <!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
 - [Overview](#overview)
 - [Danger Buttons](#danger-buttons)
@@ -72,9 +71,9 @@ danger button or the ghost danger button may be more appropriate.
 ## Icon-only Buttons
 
 Icon buttons allow users to take actions, and make choices, with a single tap.
-Icon buttons can take the form of any of the seven types (Primary, Secondary,
-Tertiary, Danger, Danger tertiary, Danger ghost and Ghost) but most commonly
-will be styled as primary or ghost buttons.
+Icon buttons can take the form of Primary, Secondary, Tertiary, and Ghost but
+most commonly will be styled as primary or ghost buttons. Icon only buttons do
+not support Danger, Danger tertiary, or Danger ghost.
 
 <Canvas>
   <Story of={ButtonStories.IconButton} />
@@ -182,10 +181,11 @@ button is interacted with.
 Carbon has seven types of buttons, `primary`, `secondary`, `tertiary`, `ghost`,
 `danger`, `danger--tertiary`, and `danger--ghost`. If no `kind` is specified, a
 `primary` button will be rendered. For more information on when to use each
-variant, check out the [design documentation](https://www.carbondesignsystem.com/components/button/usage#overview)
+variant, check out the
+[design documentation](https://www.carbondesignsystem.com/components/button/usage#overview)
 
 <Unstyled>
-  <div style={{display: 'flex', justifyContent: 'space-between'}}>
+  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
     <Button>Primary</Button>
     <Button kind="secondary">Secondary</Button>
     <Button kind="tertiary">Tertiary </Button>
@@ -223,11 +223,12 @@ to render icon-only buttons, please refer to the section on the
 [hasIconOnly](#button-hasicononly) prop
 
 <Unstyled>
-  <Button renderIcon={Add} iconDescription="Add" style={{marginRight: '3px'}}>Add</Button>
-  <Button
-    renderIcon={TrashCan}
-    kind="danger"
-    iconDescription="TrashCan">Delete</Button>
+  <Button renderIcon={Add} iconDescription="Add" style={{ marginRight: '3px' }}>
+    Add
+  </Button>
+  <Button renderIcon={TrashCan} kind="danger" iconDescription="TrashCan">
+    Delete
+  </Button>
 </Unstyled>
 
 ```jsx
@@ -241,11 +242,16 @@ the Icon to ensure the proper classes are applied:
 <Unstyled>
   <Button
     renderIcon={(props) => <Add size={24} {...props} />}
-    iconDescription="Add" style={{marginRight: '3px'}}>Add</Button>
+    iconDescription="Add"
+    style={{ marginRight: '3px' }}>
+    Add
+  </Button>
   <Button
     renderIcon={(props) => <TrashCan size={24} {...props} />}
     kind="danger"
-    iconDescription="TrashCan">Delete</Button>
+    iconDescription="TrashCan">
+    Delete
+  </Button>
 </Unstyled>
 
 ```jsx
@@ -261,7 +267,9 @@ an element appear as a button control to a screen reader. Check out the
 [References](#references) section for more information.
 
 <Unstyled>
-  <Button as="div" role="button">a11y Button</Button>
+  <Button as="div" role="button">
+    a11y Button
+  </Button>
 </Unstyled>
 
 ```jsx

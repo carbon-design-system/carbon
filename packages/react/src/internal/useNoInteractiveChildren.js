@@ -52,6 +52,32 @@ export function getInteractiveContent(node) {
 }
 
 /**
+ * Determines if a given DOM node has a role, or has itself a role.
+ * It returns the node with a role if one is found
+ *
+ * @param {HTMLElement} node
+ * @returns {HTMLElement}
+ */
+export function getRoleContent(node) {
+  if (!node || !node.childNodes) {
+    return null;
+  }
+
+  if (node?.getAttribute?.('role') && node.getAttribute('role') !== '') {
+    return node;
+  }
+
+  for (const childNode of node.childNodes) {
+    const roleNode = getRoleContent(childNode);
+    if (roleNode) {
+      return roleNode;
+    }
+  }
+
+  return null;
+}
+
+/**
  * Determines if the given element is focusable, or not
  *
  * @param {HTMLElement} element

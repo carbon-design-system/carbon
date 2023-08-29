@@ -933,7 +933,7 @@ Object {
         Object {
           "position": Position {
             "end": Object {
-              "column": 72,
+              "column": 59,
               "line": 96,
             },
             "source": undefined,
@@ -944,12 +944,12 @@ Object {
           },
           "property": "font-size",
           "type": "declaration",
-          "value": "var(--cds-helper-text-02-font-size, carbon--type-scale(2))",
+          "value": "var(--cds-helper-text-02-font-size, 0.875rem)",
         },
         Object {
           "position": Position {
             "end": Object {
-              "column": 85,
+              "column": 58,
               "line": 97,
             },
             "source": undefined,
@@ -960,7 +960,7 @@ Object {
           },
           "property": "font-weight",
           "type": "declaration",
-          "value": "var(--cds-helper-text-02-font-weight, carbon--font-weight(\\"regular\\"))",
+          "value": "var(--cds-helper-text-02-font-weight, 400)",
         },
         Object {
           "position": Position {

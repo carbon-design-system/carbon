@@ -9,7 +9,7 @@
 @use '../menu';
 @use '../../config' as *;
 @use '../../motion' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 
 /// Combo Button styles
 /// @access public
@@ -17,19 +17,19 @@
 @mixin combo-button {
   .#{$prefix}--combo-button__container {
     display: inline-flex;
-    column-gap: rem(1px);
+    column-gap: convert.to-rem(1px);
   }
 
   $triggerSizes: (
-    'sm': rem(32px),
-    'md': rem(40px),
-    'lg': rem(48px),
+    'sm': convert.to-rem(32px),
+    'md': convert.to-rem(40px),
+    'lg': convert.to-rem(48px),
   );
 
   @each $size, $trigger in $triggerSizes {
     .#{$prefix}--combo-button__container--#{$size}
       .#{$prefix}--combo-button__primary-action {
-      min-width: 10rem - rem(1px) - $trigger;
+      min-width: 10rem - convert.to-rem(1px) - $trigger;
     }
   }
 

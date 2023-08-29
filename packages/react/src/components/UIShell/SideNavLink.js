@@ -7,12 +7,13 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 import Link, { LinkPropTypes } from './Link';
 import SideNavIcon from './SideNavIcon';
 import SideNavItem from './SideNavItem';
 import SideNavLinkText from './SideNavLinkText';
 import { usePrefix } from '../../internal/usePrefix';
+import { SideNavContext } from './SideNav';
 
 const SideNavLink = React.forwardRef(function SideNavLink(
   {
@@ -20,11 +21,15 @@ const SideNavLink = React.forwardRef(function SideNavLink(
     className: customClassName,
     renderIcon: IconElement,
     isActive,
+    isSideNavExpanded,
     large = false,
+    tabIndex,
     ...rest
   },
   ref
 ) {
+  const isRail = useContext(SideNavContext);
+
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--side-nav__link`]: true,
@@ -34,7 +39,17 @@ const SideNavLink = React.forwardRef(function SideNavLink(
 
   return (
     <SideNavItem large={large}>
-      <Link {...rest} className={className} ref={ref}>
+      <Link
+        {...rest}
+        className={className}
+        ref={ref}
+        tabIndex={
+          tabIndex === undefined
+            ? !isSideNavExpanded && !isRail
+              ? -1
+              : 0
+            : tabIndex
+        }>
         {IconElement && (
           <SideNavIcon small>
             <IconElement />
@@ -66,6 +81,12 @@ SideNavLink.propTypes = {
   isActive: PropTypes.bool,
 
   /**
+   * Property to indicate if the side nav container is open (or not). Use to
+   * keep local state and styling in step with the SideNav expansion state.
+   */
+  isSideNavExpanded: PropTypes.bool,
+
+  /**
    * Specify if this is a large variation of the SideNavLink
    */
   large: PropTypes.bool,
@@ -74,6 +95,11 @@ SideNavLink.propTypes = {
    * Provide an icon to render in the side navigation link. Should be a React class.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
+   * Optional prop to specify the tabIndex of the button. If undefined, it will be applied default validation
+   */
+  tabIndex: PropTypes.number,
 };
 
 // eslint-disable-next-line react/display-name

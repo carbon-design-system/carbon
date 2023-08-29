@@ -3,4 +3,5 @@ export const CARBON_SIDENAV_ITEMS = [
   'SideNavHeader',
   'SideNavItems',
   'SideNavMenu',
+  'SideNavLink',
 ];
