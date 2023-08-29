@@ -136,7 +136,7 @@
   // Display the check
   .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::after,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::after {
-    transform: scale(1) rotate(-45deg) #{'/*rtl:scale(1.2) rotate3d(.5, 1, 0, 158deg)*/'};
+    transform: scale(1) rotate(-45deg) #{'/*!rtl:scale(1.2) rotate3d(.5, 1, 0, 158deg)*/'};
   }
 
   // Indeterminate symbol
@@ -228,9 +228,9 @@
   }
 
   .#{$prefix}--checkbox__invalid-icon {
-    min-width: convert.to-rem(16px);
     margin: convert.to-rem(1px) convert.to-rem(1px) 0 convert.to-rem(3px);
     fill: $support-error;
+    min-inline-size: convert.to-rem(16px);
   }
 
   .#{$prefix}--checkbox__invalid-icon--warning {
