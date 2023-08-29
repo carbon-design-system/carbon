@@ -47,7 +47,10 @@ $aspect-ratios: (
   .#{$prefix}--aspect-ratio::before {
     block-size: 0;
     content: '';
-    float: inline-start;
+    // float: inline-start is not supported yet
+    // https://caniuse.com/mdn-css_properties_float_flow_relative_values
+    // stylelint-disable-next-line csstools/use-logical
+    float: left;
     inline-size: 1px;
     margin-inline-start: -1px;
   }
