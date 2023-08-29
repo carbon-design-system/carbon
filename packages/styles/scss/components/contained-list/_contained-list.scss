@@ -102,7 +102,6 @@
     @include type-style('heading-compact-01');
 
     background-color: $background;
-
     block-size: layout.size('height');
     border-block-end: 1px solid $border-subtle;
     color: $text-primary;
@@ -126,7 +125,6 @@
     @include type-style('label-01');
 
     background-color: $layer;
-
     block-size: $spacing-07;
     color: $text-secondary;
   }
@@ -172,7 +170,6 @@
     padding: calc(calc((#{layout.size('height')} - var(--temp-1lh)) / 2))
       layout.density('padding-inline');
     color: $text-primary;
-
     min-block-size: layout.size('height');
   }
 
