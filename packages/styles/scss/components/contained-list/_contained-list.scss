@@ -14,6 +14,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../../utilities/convert';
 @use '../../utilities/button-reset';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/custom-property';
@@ -26,6 +27,24 @@
   .#{$prefix}--contained-list {
     @include layout.use('size', $default: 'lg', $min: 'sm', $max: 'xl');
     @include layout.use('density', $default: 'normal');
+  }
+
+  .#{$prefix}--contained-list .#{$prefix}--tag {
+    @include layout.redefine-tokens(
+      (
+        size: (
+          height: (
+            xs: convert.to-rem(18px),
+            sm: convert.to-rem(18px),
+            md: convert.to-rem(24px),
+            lg: convert.to-rem(24px),
+            xl: convert.to-rem(24px),
+          ),
+        ),
+      )
+    );
+
+    @include layout.use('size', $default: 'md', $min: 'sm', $max: 'xl');
   }
 
   .#{$prefix}--contained-list > ul {
