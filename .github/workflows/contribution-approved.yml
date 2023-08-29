@@ -15,7 +15,7 @@ jobs:
   add-comment:
     ## TODO: figure out how to escape colons for labels
     # if: github.event.label.name == "proposal: accepted" && github.event.label.name == "community contribution"
-    if: "${{ contains(github.event.label, 'proposal: accepted') && contains(github.event.label, 'communit contribution') }}"
+    if: "${{ contains(github.event.label.*.name, format('proposal{0} accepted', ':')) && contains(github.event.label.*.name, format('communit contribution'))}}"
     runs-on: ubuntu-latest
     permissions:
       issues: write
