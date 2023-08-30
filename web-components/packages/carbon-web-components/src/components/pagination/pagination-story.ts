@@ -80,6 +80,7 @@ export const Playground = (args) => {
     itemsPerPageText,
     page,
     pageInputDisabled,
+    pageSize,
     pageSizeInputDisabled,
     pagesUnknown,
     size,
@@ -91,8 +92,9 @@ export const Playground = (args) => {
       ?disabled=${disabled}
       forward-text=${forwardText}
       ?is-last-page=${isLastPage}
-      items-per-page=${itemsPerPageText}
+      items-per-page-text=${itemsPerPageText}
       page=${page}
+      page-size=${pageSize}
       ?page-input-disabled=${pageInputDisabled}
       ?page-size-input-disabled=${pageSizeInputDisabled}
       size=${size}
@@ -122,9 +124,8 @@ export default {
           'Explicitly state that the user is at the last page (is-last-page)',
           false
         ),
-        itemsPerPage: text('Items per page text', 'Items per page:'),
+        itemsPerPageText: text('Items per page text', 'Items per page:'),
         page: number('The current page', 1),
-
         pageSize: number('Number of rows per page (page-size)', 10),
         pageInputDisabled: boolean('Pages input disabled', false),
         pageSizeInputDisabled: boolean('Pages size input disabled', false),
