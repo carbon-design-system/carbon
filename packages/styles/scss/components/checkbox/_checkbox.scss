@@ -115,9 +115,9 @@
     inline-size: convert.to-rem(9px);
     inset-block-start: convert.to-rem(7.5px);
     inset-inline-start: convert.to-rem(7px);
-    margin-block-start: convert.to-rem(-3px) #{'/*rtl:0rem*/'};
+    margin-block-start: convert.to-rem(-3px);
     transform: scale(0) rotate(-45deg);
-    transform-origin: bottom right #{'/*rtl:center*/'};
+    transform-origin: bottom right;
   }
 
   //----------------------------------------------
@@ -136,7 +136,22 @@
   // Display the check
   .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::after,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::after {
-    transform: scale(1) rotate(-45deg) #{'/*!rtl:scale(1.2) rotate3d(.5, 1, 0, 158deg)*/'};
+    transform: scale(1) rotate(-45deg);
+  }
+
+  // RTL overrides
+  [dir='rtl'] .#{$prefix}--checkbox-label::after {
+    margin-block-start: 0;
+    margin-inline-start: convert.to-rem(-1px);
+    transform-origin: center;
+  }
+
+  [dir='rtl']
+    .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label::after,
+  [dir='rtl']
+    .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::after {
+    transform: scale(1.2) rotate3d(0.5, 1, 0, 158deg);
   }
 
   // Indeterminate symbol
