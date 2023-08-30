@@ -54,11 +54,11 @@
 
     position: relative;
     display: flex;
-    width: 100%;
-    height: auto;
-    min-height: layout.size('height');
-    max-height: custom-property.get-var('layout-size-height-xl');
+    block-size: auto;
     color: $text-primary;
+    inline-size: 100%;
+    max-block-size: custom-property.get-var('layout-size-height-xl');
+    min-block-size: layout.size('height');
 
     &.#{$prefix}--tabs--contained {
       @include layout.use('size', $min: 'sm', $max: 'xl', $default: 'lg');
@@ -66,7 +66,7 @@
 
     .#{$prefix}--tab--list {
       display: flex;
-      width: auto;
+      inline-size: auto;
       overflow-x: auto;
       scroll-behavior: smooth;
       scrollbar-width: none;
@@ -90,11 +90,11 @@
       @include button-reset.reset;
 
       display: flex;
-      width: $spacing-08;
       flex-shrink: 0;
       align-items: center;
       justify-content: center;
       background-color: $background;
+      inline-size: $spacing-08;
 
       &:focus {
         @include focus-outline('outline');
@@ -106,9 +106,9 @@
     }
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tab--overflow-nav-button {
-      width: $spacing-09;
       margin: 0;
       background-color: $layer-accent;
+      inline-size: $spacing-09;
     }
 
     .#{$prefix}--tab--overflow-nav-button svg {
@@ -117,23 +117,23 @@
 
     .#{$prefix}--tab--overflow-nav-button--next {
       position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
+      inset-block-end: 0;
+      inset-block-start: 0;
+      inset-inline-end: 0;
     }
 
     .#{$prefix}--tab--overflow-nav-button--next::before {
       position: absolute;
       z-index: 1;
-      left: -$spacing-03;
-      width: $spacing-03;
-      height: 100%;
       background: linear-gradient(
         to right,
         rgba(255, 255, 255, 0),
         $background
       );
+      block-size: 100%;
       content: '';
+      inline-size: $spacing-03;
+      inset-inline-start: -$spacing-03;
     }
 
     &.#{$prefix}--tabs--contained
@@ -147,19 +147,19 @@
 
     .#{$prefix}--tab--overflow-nav-button--previous {
       position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
+      inset-block-end: 0;
+      inset-block-start: 0;
+      inset-inline-start: 0;
     }
 
     .#{$prefix}--tab--overflow-nav-button--previous::before {
       position: absolute;
       z-index: 1;
-      right: -$spacing-03;
-      width: $spacing-03;
-      height: 100%;
       background: linear-gradient(to left, rgba(255, 255, 255, 0), $background);
+      block-size: 100%;
       content: '';
+      inline-size: $spacing-03;
+      inset-inline-end: -$spacing-03;
     }
 
     &.#{$prefix}--tabs--contained
@@ -254,7 +254,7 @@
     &:not(.#{$prefix}--tabs--contained)
       .#{$prefix}--tabs__nav-item-label-wrapper {
       position: relative;
-      top: convert.to-rem(1px);
+      inset-block-start: convert.to-rem(1px);
     }
 
     //-----------------------------
@@ -272,7 +272,7 @@
     }
 
     .#{$prefix}--tabs__nav-item + .#{$prefix}--tabs__nav-item {
-      margin-left: convert.to-rem(1px);
+      margin-inline-start: convert.to-rem(1px);
     }
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item {
@@ -282,9 +282,9 @@
     &.#{$prefix}--tabs--contained
       .#{$prefix}--tabs__nav-item
       + .#{$prefix}--tabs__nav-item {
-      margin-left: 0;
       // Draws the border without affecting the inner-content
       box-shadow: convert.to-rem(-1px) 0 0 0 $border-strong;
+      margin-inline-start: 0;
     }
 
     .#{$prefix}--tabs__nav-item .#{$prefix}--tabs__nav-link {
@@ -306,10 +306,10 @@
       }
 
       svg {
-        width: 24px;
-        height: 24px;
         padding: $spacing-02;
         margin: -$spacing-02;
+        block-size: 24px;
+        inline-size: 24px;
       }
 
       svg:hover {
@@ -336,7 +336,7 @@
     .#{$prefix}--tabs__nav-item--icon {
       display: flex;
       align-items: center;
-      padding-left: $spacing-03;
+      padding-inline-start: $spacing-03;
 
       .#{$prefix}--tabs__nav-item--close-icon {
         padding: $spacing-02;
@@ -349,8 +349,8 @@
     .#{$prefix}--tabs__nav-item--icon-left {
       display: flex;
       align-items: center;
-      padding-right: $spacing-03;
-      margin-top: -2px;
+      margin-block-start: -2px;
+      padding-inline-end: $spacing-03;
     }
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--icon {
@@ -366,10 +366,10 @@
       @include type-style('body-compact-01');
 
       overflow: hidden;
-      border-bottom: $tab-underline-color;
+      border-block-end: $tab-underline-color;
       color: $text-secondary;
       padding-inline: layout.density('padding-inline');
-      text-align: left;
+      text-align: start;
       text-decoration: none;
       text-overflow: ellipsis;
       transition: border $duration-fast-01 motion(standard, productive),
@@ -383,7 +383,7 @@
     }
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-link {
-      border-bottom: 0;
+      border-block-end: 0;
       padding-inline: layout.density('padding-inline');
     }
 
@@ -396,7 +396,7 @@
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item-secondary-label {
       @include type-style('label-01');
 
-      min-height: convert.to-rem(16px);
+      min-block-size: convert.to-rem(16px);
     }
 
     //-----------------------------
@@ -410,11 +410,11 @@
     .#{$prefix}--tabs__nav-item--icon-only,
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--icon-only {
       display: flex;
-      width: layout.size('height');
-      height: layout.size('height');
       align-items: center;
       justify-content: center;
       padding: 0;
+      block-size: layout.size('height');
+      inline-size: layout.size('height');
 
       .#{$prefix}--tabs__nav-item-label {
         line-height: 0;
@@ -428,7 +428,7 @@
       .#{$prefix}--tabs__nav-item:not(
         .#{$prefix}--tabs__nav-item--selected
       ):not(.#{$prefix}--tabs__nav-item--disabled):hover {
-      border-bottom: $tab-underline-color-hover;
+      border-block-end: $tab-underline-color-hover;
       color: $text-primary;
     }
 
@@ -446,7 +446,7 @@
     // Item Selected
     //-----------------------------
     .#{$prefix}--tabs__nav-item--selected {
-      border-bottom: 2px solid $border-interactive;
+      border-block-end: 2px solid $border-interactive;
       transition: color $duration-fast-01 motion(standard, productive);
     }
 
@@ -503,14 +503,14 @@
     //-----------------------------
 
     .#{$prefix}--tabs__nav-item--disabled {
-      border-bottom: $tab-underline-disabled;
       background-color: transparent;
+      border-block-end: $tab-underline-disabled;
       color: $tab-text-disabled;
       outline: none;
     }
 
     .#{$prefix}--tabs__nav-item--disabled:hover {
-      border-bottom: $tab-underline-disabled;
+      border-block-end: $tab-underline-disabled;
       color: $tab-text-disabled;
       cursor: not-allowed;
     }
@@ -524,7 +524,7 @@
 
     .#{$prefix}--tabs__nav-item--disabled:focus,
     .#{$prefix}--tabs__nav-item--disabled:active {
-      border-bottom: $tab-underline-disabled;
+      border-block-end: $tab-underline-disabled;
       outline: none;
       pointer-events: none;
     }
@@ -532,13 +532,13 @@
     .#{$prefix}--tabs--light
       .#{$prefix}--tabs__nav-item--disabled
       .#{$prefix}--tabs__nav-link {
-      border-bottom-color: $border-subtle;
+      border-block-end-color: $border-subtle;
     }
 
     .#{$prefix}--tabs--light
       .#{$prefix}--tabs__nav-item--disabled:hover
       .#{$prefix}--tabs__nav-link {
-      border-bottom-color: $border-subtle;
+      border-block-end-color: $border-subtle;
     }
 
     .#{$prefix}--tabs--light
@@ -547,11 +547,11 @@
     .#{$prefix}--tabs--light
       .#{$prefix}--tabs__nav-item--disabled
       .#{$prefix}--tabs__nav-link:active {
-      border-bottom-color: $border-subtle;
+      border-block-end-color: $border-subtle;
     }
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--disabled {
-      border-bottom: none;
+      border-block-end: none;
       color: $text-on-color-disabled;
     }
   }
@@ -582,23 +582,23 @@
 
   .#{$prefix}--skeleton.#{$prefix}--tabs:not(.#{$prefix}--tabs--contained)
     .#{$prefix}--tabs__nav-link {
-    border-bottom: 2px solid $skeleton-element;
+    border-block-end: 2px solid $skeleton-element;
   }
 
   .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link {
     display: flex;
-    width: 10rem;
-    height: 100%;
     align-items: center;
     padding: 0 layout.density('padding-inline');
+    block-size: 100%;
+    inline-size: 10rem;
   }
 
   .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link span {
     @include skeleton;
 
     display: block;
-    width: 100%;
-    height: convert.to-rem(14px);
+    block-size: convert.to-rem(14px);
+    inline-size: 100%;
   }
 
   // Windows HCM fix
@@ -622,8 +622,8 @@
 .#{$prefix}--tabs.#{$prefix}--tabs--contained.#{$prefix}--tabs--full-width
   .#{$prefix}--tab--list {
   display: grid;
-  width: 100%;
   grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  inline-size: 100%;
 
   .#{$prefix}--tabs__nav-link {
     .#{$prefix}--tabs__nav-item-label,
@@ -632,7 +632,7 @@
       text-overflow: ellipsis;
     }
     .#{$prefix}--tabs__nav-item--icon {
-      margin-left: auto;
+      margin-inline-start: auto;
     }
   }
 }

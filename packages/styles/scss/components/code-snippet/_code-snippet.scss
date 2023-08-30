@@ -149,26 +149,26 @@ $copy-btn-feedback: $background-inverse !default;
     @include bx--snippet;
 
     display: flex;
-    height: $spacing-08;
     align-items: center;
-    padding-right: $spacing-08;
+    block-size: $spacing-08;
+    padding-inline-end: $spacing-08;
   }
 
   .#{$prefix}--snippet--single.#{$prefix}--snippet--no-copy {
     padding: 0;
 
     &::after {
-      right: $spacing-05;
+      inset-inline-end: $spacing-05;
     }
   }
 
   .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
     position: relative;
     display: flex;
-    height: 100%;
     align-items: center;
-    padding-left: $spacing-05;
+    block-size: 100%;
     overflow-x: auto;
+    padding-inline-start: $spacing-05;
 
     &:focus {
       @include focus-outline('outline');
@@ -178,7 +178,7 @@ $copy-btn-feedback: $background-inverse !default;
   .#{$prefix}--snippet--single pre {
     @include type-style('code-01');
 
-    padding-right: $spacing-03;
+    padding-inline-end: $spacing-03;
   }
 
   // Preserve whitespace, but don't allow wrapping for inline and single
@@ -198,9 +198,9 @@ $copy-btn-feedback: $background-inverse !default;
   //collapsed snippet container
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
     position: relative;
-    min-height: 100%;
-    max-height: 100%;
     order: 1;
+    max-block-size: 100%;
+    min-block-size: 100%;
     overflow-y: auto;
     transition: max-height $duration-moderate-01 motion(standard, productive);
 
@@ -214,7 +214,7 @@ $copy-btn-feedback: $background-inverse !default;
   // expanded snippet container
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
     .#{$prefix}--snippet-container {
-    padding-bottom: $spacing-05;
+    padding-block-end: $spacing-05;
     transition: max-height $duration-moderate-01 motion(standard, productive);
   }
 
@@ -225,15 +225,15 @@ $copy-btn-feedback: $background-inverse !default;
 
   // collapsed pre
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
-    padding-right: $spacing-08;
-    padding-bottom: convert.to-rem(24px);
     overflow-x: auto;
+    padding-block-end: convert.to-rem(24px);
+    padding-inline-end: $spacing-08;
   }
 
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--no-copy
     .#{$prefix}--snippet-container
     pre {
-    padding-right: 0;
+    padding-inline-end: 0;
   }
 
   // expanded pre
@@ -247,12 +247,12 @@ $copy-btn-feedback: $background-inverse !default;
     .#{$prefix}--snippet-container
     pre::after {
     position: absolute;
-    top: 0;
-    right: 0;
-    width: convert.to-rem(16px);
-    height: 100%;
     background-image: linear-gradient(to right, transparent, $layer);
+    block-size: 100%;
     content: '';
+    inline-size: convert.to-rem(16px);
+    inset-block-start: 0;
+    inset-inline-end: 0;
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre code {
@@ -261,9 +261,9 @@ $copy-btn-feedback: $background-inverse !default;
 
   //Copy Button
   .#{$prefix}--snippet__icon {
-    width: convert.to-rem(16px);
-    height: convert.to-rem(16px);
+    block-size: convert.to-rem(16px);
     fill: $icon-primary;
+    inline-size: convert.to-rem(16px);
     transition: all $duration-fast-01 motion(standard, productive);
   }
 
@@ -296,17 +296,17 @@ $copy-btn-feedback: $background-inverse !default;
     @include font-family('sans');
 
     position: absolute;
-    top: 0;
-    right: 0;
+    inset-block-start: 0;
+    inset-inline-end: 0;
   }
 
   // Overrides for codesnippet copy btn
   // TLDR: Copy/CopyButton now uses IconButton, which uses Carbon buttons under the hood
   // v10 Copy just used native html button so it didn't have extra carbon styles that needed overriding
   .#{$prefix}--snippet--inline.#{$prefix}--btn {
-    width: initial;
-    height: 1.25rem;
-    min-height: 1.25rem;
+    block-size: 1.25rem;
+    inline-size: initial;
+    min-block-size: 1.25rem;
     padding-inline: 0;
   }
 
@@ -317,8 +317,8 @@ $copy-btn-feedback: $background-inverse !default;
   // override multi copy btn styles
   .#{$prefix}--snippet.#{$prefix}--snippet--multi
     .#{$prefix}--popover-container {
-    top: 0.5rem;
-    right: 0.5rem;
+    inset-block-start: 0.5rem;
+    inset-inline-end: 0.5rem;
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--copy-btn {
@@ -332,21 +332,21 @@ $copy-btn-feedback: $background-inverse !default;
 
     position: absolute;
     z-index: 10;
-    right: 0;
-    bottom: 0;
     display: inline-flex;
-    height: convert.to-rem(32px);
     align-items: center;
 
     padding: $spacing-03 $spacing-05;
     border: 0;
     background-color: $layer;
+    block-size: convert.to-rem(32px);
     color: $text-primary;
+    inset-block-end: 0;
+    inset-inline-end: 0;
   }
 
   .#{$prefix}--snippet-btn--expand .#{$prefix}--snippet-btn--text {
     position: relative;
-    top: convert.to-rem(-1px);
+    inset-block-start: convert.to-rem(-1px);
   }
 
   .#{$prefix}--snippet-btn--expand--hide.#{$prefix}--snippet-btn--expand {
@@ -354,8 +354,8 @@ $copy-btn-feedback: $background-inverse !default;
   }
 
   .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
-    margin-left: $spacing-03;
     fill: $icon-primary;
+    margin-inline-start: $spacing-03;
     transform: rotate(0deg);
     transition: $duration-moderate-01 motion(standard, productive);
   }
@@ -416,22 +416,22 @@ $copy-btn-feedback: $background-inverse !default;
 
   // Skeleton State
   .#{$prefix}--snippet.#{$prefix}--skeleton .#{$prefix}--snippet-container {
-    width: 100%;
-    height: 100%;
+    block-size: 100%;
+    inline-size: 100%;
   }
 
   .#{$prefix}--snippet-button .#{$prefix}--btn--copy__feedback {
     // (The height of button) + (The height of the tooltip's triangle) + 4px
-    top: convert.to-rem(50.8px);
-    right: auto;
-    left: 50%;
+    inset-block-start: convert.to-rem(50.8px);
+    inset-inline-end: auto;
+    inset-inline-start: 50%;
 
     &::before {
-      top: 0;
+      inset-block-start: 0;
     }
 
     &::after {
-      top: convert.to-rem(-4px);
+      inset-block-start: convert.to-rem(-4px);
     }
   }
 
@@ -439,63 +439,63 @@ $copy-btn-feedback: $background-inverse !default;
     .#{$prefix}--snippet-button
     .#{$prefix}--btn--copy__feedback {
     // (The height of button) + (The height of the tooltip's triangle) + 4px
-    top: convert.to-rem(42.8px);
+    inset-block-start: convert.to-rem(42.8px);
   }
 
   .#{$prefix}--snippet--inline .#{$prefix}--btn--copy__feedback {
     // TODO: use updated global tooltip mixins under the hood
     // since all of the positioning values for the copy button tooltip are arbitrary hard coded rem values, we need this arbitrary 4px offset to keep the proper tooltip spacing according to the spec
-    top: calc(100% - #{convert.to-rem(4px)});
-    right: auto;
-    left: 50%;
+    inset-block-start: calc(100% - #{convert.to-rem(4px)});
+    inset-inline-end: auto;
+    inset-inline-start: 50%;
   }
 
   // Overflow Indicator
   .#{$prefix}--snippet__overflow-indicator--left,
   .#{$prefix}--snippet__overflow-indicator--right {
     z-index: 1;
-    width: $spacing-05;
     flex: 1 0 auto;
+    inline-size: $spacing-05;
   }
 
   .#{$prefix}--snippet__overflow-indicator--left {
     order: 0;
-    margin-right: -$spacing-05;
     background-image: linear-gradient(to left, transparent, $layer);
+    margin-inline-end: -$spacing-05;
   }
 
   .#{$prefix}--snippet__overflow-indicator--right {
     order: 2;
-    margin-left: -$spacing-05;
     background-image: linear-gradient(to right, transparent, $layer);
+    margin-inline-start: -$spacing-05;
   }
 
   .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--right,
   .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--left {
     position: absolute;
-    width: $spacing-07;
-    height: calc(100% - #{$spacing-02});
+    block-size: calc(100% - #{$spacing-02});
+    inline-size: $spacing-07;
   }
 
   .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--right {
-    right: $spacing-08;
+    inset-inline-end: $spacing-08;
   }
 
   .#{$prefix}--snippet--single.#{$prefix}--snippet--no-copy
     .#{$prefix}--snippet__overflow-indicator--right {
-    right: 0;
+    inset-inline-end: 0;
   }
 
   .#{$prefix}--snippet--single
     .#{$prefix}--snippet-container:focus
     ~ .#{$prefix}--snippet__overflow-indicator--right {
-    right: calc(#{$spacing-08} + #{convert.to-rem(2px)});
+    inset-inline-end: calc(#{$spacing-08} + #{convert.to-rem(2px)});
   }
 
   .#{$prefix}--snippet--single
     .#{$prefix}--snippet-container:focus
     + .#{$prefix}--snippet__overflow-indicator--left {
-    left: convert.to-rem(2px);
+    inset-inline-start: convert.to-rem(2px);
   }
 
   .#{$prefix}--snippet--light .#{$prefix}--snippet__overflow-indicator--left {
@@ -522,37 +522,37 @@ $copy-btn-feedback: $background-inverse !default;
   }
 
   .#{$prefix}--snippet--multi.#{$prefix}--skeleton {
-    height: convert.to-rem(98px);
+    block-size: convert.to-rem(98px);
   }
 
   .#{$prefix}--snippet--single.#{$prefix}--skeleton {
-    height: convert.to-rem(56px);
+    block-size: convert.to-rem(56px);
   }
 
   .#{$prefix}--snippet.#{$prefix}--skeleton span {
     @include skeleton;
 
     display: block;
-    width: 100%;
-    height: 1rem;
-    margin-top: 0.5rem;
+    block-size: 1rem;
+    inline-size: 100%;
+    margin-block-start: 0.5rem;
 
     &:first-child {
       margin: 0;
     }
 
     &:nth-child(2) {
-      width: 85%;
+      inline-size: 85%;
     }
 
     &:nth-child(3) {
-      width: 95%;
+      inline-size: 95%;
     }
   }
 
   .#{$prefix}--snippet--single.#{$prefix}--skeleton
     .#{$prefix}--snippet-container {
-    padding-bottom: 0;
+    padding-block-end: 0;
   }
 
   // Windows HCM fix

@@ -25,15 +25,15 @@
   .#{$prefix}--modal {
     position: fixed;
     z-index: z('modal');
-    top: 0;
-    left: 0;
     display: flex;
-    width: 100vw;
-    height: 100vh;
     align-items: center;
     justify-content: center;
     background-color: $overlay;
+    block-size: 100vh;
     content: '';
+    inline-size: 100vw;
+    inset-block-start: 0;
+    inset-inline-start: 0;
     opacity: 0;
     transition: opacity $duration-moderate-02 motion(exit, expressive),
       visibility 0ms linear $duration-moderate-02;
@@ -78,17 +78,17 @@
     }
 
     .#{$prefix}--list-box__menu-item__option {
-      border-top-color: $border-subtle-02;
+      border-block-start-color: $border-subtle-02;
     }
 
     .#{$prefix}--list-box__menu-item:hover
       .#{$prefix}--list-box__menu-item__option {
-      border-top-color: $layer-hover-02;
+      border-block-start-color: $layer-hover-02;
     }
 
     .#{$prefix}--list-box__menu-item--active:hover
       .#{$prefix}--list-box__menu-item__option {
-      border-top-color: $layer-selected-hover-02;
+      border-block-start-color: $layer-selected-hover-02;
     }
 
     // Fluid inputs
@@ -140,7 +140,7 @@
       .#{$prefix}--number__control-btn:focus::before,
     .#{$prefix}--number-input--fluid
       .#{$prefix}--number__control-btn:focus::after {
-      border-left: 2px solid $focus;
+      border-inline-start: 2px solid $focus;
     }
   }
 
@@ -154,15 +154,15 @@
   // -----------------------------
   .#{$prefix}--modal-container {
     position: fixed;
-    top: 0;
     display: grid;
     overflow: hidden;
-    width: 100%;
-    height: 100%;
-    max-height: 100%;
     background-color: $layer;
+    block-size: 100%;
     grid-template-columns: 100%;
     grid-template-rows: auto 1fr auto;
+    inline-size: 100%;
+    inset-block-start: 0;
+    max-block-size: 100%;
     // make modal edge visible on high contrast themes (#3880)
     outline: 3px solid transparent;
     outline-offset: -3px;
@@ -172,18 +172,18 @@
 
     @include breakpoint(md) {
       position: static;
-      width: 84%;
-      height: auto;
-      max-height: 90%;
+      block-size: auto;
+      inline-size: 84%;
+      max-block-size: 90%;
     }
 
     @include breakpoint(lg) {
-      width: 60%;
-      max-height: 84%;
+      inline-size: 60%;
+      max-block-size: 84%;
     }
 
     @include breakpoint(xlg) {
-      width: 48%;
+      inline-size: 48%;
     }
 
     .#{$prefix}--modal-container-body {
@@ -198,17 +198,17 @@
     @include type-style('body-01');
 
     position: relative;
-    // Required to accommodate focus outline's negative offset:
-    padding-top: $spacing-03;
-    // anything besides text/p spans full width, with just 16px padding
-    padding-right: $spacing-05;
-    padding-left: $spacing-05;
-    margin-bottom: $spacing-09;
     color: $text-primary;
     font-weight: 400;
     grid-column: 1/-1;
     grid-row: 2/-2;
+    margin-block-end: $spacing-09;
     overflow-y: auto;
+    // Required to accommodate focus outline's negative offset:
+    padding-block-start: $spacing-03;
+    // anything besides text/p spans full width, with just 16px padding
+    padding-inline-end: $spacing-05;
+    padding-inline-start: $spacing-05;
 
     &:focus {
       @include focus-outline('outline');
@@ -217,8 +217,8 @@
 
   // fluid form in modal
   .#{$prefix}--modal-content .#{$prefix}--form--fluid {
-    margin-right: -$spacing-05;
-    margin-left: -$spacing-05;
+    margin-inline-end: -$spacing-05;
+    margin-inline-start: -$spacing-05;
   }
 
   //TO-DO: remove .#{$prefix}--modal-content__regular-content in v11 since hasForm has been deprecated
@@ -227,42 +227,42 @@
   .#{$prefix}--modal-content__regular-content {
     @include type-style('body-01');
     // padding should take into account the left and right padding of modal container
-    padding-right: calc(20% - $spacing-07);
+    padding-inline-end: calc(20% - $spacing-07);
   }
 
   //TO-DO: remove .#{$prefix}--modal-content--with-form in v11 since hasForm has been deprecated\
   // anything besides text/p spans full width, with just 16px padding
   .#{$prefix}--modal-content--with-form {
-    padding-right: $spacing-05;
+    padding-inline-end: $spacing-05;
   }
 
   // -----------------------------
   // Modal header
   // -----------------------------
   .#{$prefix}--modal-header {
-    padding-top: $spacing-05;
-    padding-right: $spacing-09;
-    padding-left: $spacing-05;
-    margin-bottom: $spacing-03;
     grid-column: 1/-1;
     grid-row: 1/1;
+    margin-block-end: $spacing-03;
+    padding-block-start: $spacing-05;
+    padding-inline-end: $spacing-09;
+    padding-inline-start: $spacing-05;
   }
 
   .#{$prefix}--modal-header__label {
     @include component-reset.reset;
     @include type-style('label-01');
 
-    margin-bottom: $spacing-02;
     color: $text-secondary;
+    margin-block-end: $spacing-02;
   }
 
   .#{$prefix}--modal-header__heading {
     @include component-reset.reset;
     @include type-style('heading-03');
 
-    // padding should take into account the left and right padding of modal container
-    padding-right: calc(20% - $spacing-09);
     color: $text-primary;
+    // padding should take into account the left and right padding of modal container
+    padding-inline-end: calc(20% - $spacing-09);
   }
 
   // -----------------------------
@@ -271,25 +271,25 @@
   .#{$prefix}--modal-container--xs {
     //text always spans full width in xs modals
     .#{$prefix}--modal-content__regular-content {
-      padding-right: $spacing-05;
+      padding-inline-end: $spacing-05;
     }
 
     .#{$prefix}--modal-content > p {
       //.#{$prefix}--modal-content already has 16px padding so this doesn't need any
-      padding-right: 0;
+      padding-inline-end: 0;
     }
 
     @include breakpoint(md) {
-      width: 48%;
+      inline-size: 48%;
     }
 
     @include breakpoint(lg) {
-      width: 32%;
-      max-height: 48%;
+      inline-size: 32%;
+      max-block-size: 48%;
     }
 
     @include breakpoint(xlg) {
-      width: 24%;
+      inline-size: 24%;
     }
   }
 
@@ -299,30 +299,30 @@
   .#{$prefix}--modal-container--sm {
     //text spans full width in sm modals below 1056
     .#{$prefix}--modal-content__regular-content {
-      padding-right: $spacing-05;
+      padding-inline-end: $spacing-05;
     }
 
     .#{$prefix}--modal-content > p {
       //.#{$prefix}--modal-content already has 16px padding so this doesn't need any
-      padding-right: 0;
+      padding-inline-end: 0;
     }
 
     @include breakpoint(md) {
-      width: 60%;
+      inline-size: 60%;
     }
 
     @include breakpoint(lg) {
-      width: 42%;
-      max-height: 72%;
+      inline-size: 42%;
+      max-block-size: 72%;
 
       .#{$prefix}--modal-content > p,
       .#{$prefix}--modal-content__regular-content {
-        padding-right: 20%;
+        padding-inline-end: 20%;
       }
     }
 
     @include breakpoint(xlg) {
-      width: 36%;
+      inline-size: 36%;
     }
   }
 
@@ -331,16 +331,16 @@
   // -----------------------------
   .#{$prefix}--modal-container--lg {
     @include breakpoint(md) {
-      width: 96%;
+      inline-size: 96%;
     }
 
     @include breakpoint(lg) {
-      width: 84%;
-      max-height: 96%;
+      inline-size: 84%;
+      max-block-size: 96%;
     }
 
     @include breakpoint(xlg) {
-      width: 72%;
+      inline-size: 72%;
     }
   }
 
@@ -349,19 +349,19 @@
   // -----------------------------
   // Required so overflow-indicator disappears at end of content
   .#{$prefix}--modal-scroll-content > *:last-child {
-    padding-bottom: $spacing-07;
+    padding-block-end: $spacing-07;
   }
 
   .#{$prefix}--modal-content--overflow-indicator {
     position: absolute;
-    bottom: $spacing-09;
-    left: 0;
-    width: 100%;
-    height: convert.to-rem(32px);
     background-image: linear-gradient(to bottom, transparent, $layer);
+    block-size: convert.to-rem(32px);
     content: '';
     grid-column: 1/-1;
     grid-row: 2/-2;
+    inline-size: 100%;
+    inset-block-end: $spacing-09;
+    inset-inline-start: 0;
     pointer-events: none;
   }
 
@@ -378,13 +378,13 @@
 
   .#{$prefix}--modal-content:focus
     ~ .#{$prefix}--modal-content--overflow-indicator {
-    width: calc(100% - 4px);
     margin: 0 2px 2px;
+    inline-size: calc(100% - 4px);
   }
 
   @media screen and (-ms-high-contrast: active) {
     .#{$prefix}--modal-scroll-content > *:last-child {
-      padding-bottom: 0;
+      padding-block-end: 0;
     }
 
     .#{$prefix}--modal-content--overflow-indicator {
@@ -397,21 +397,21 @@
   // -----------------------------
   .#{$prefix}--modal-footer {
     display: flex;
-    height: convert.to-rem(64px);
     justify-content: flex-end;
-    margin-top: auto;
+    block-size: convert.to-rem(64px);
     grid-column: 1/-1;
     grid-row: -1/-1;
+    margin-block-start: auto;
   }
 
   .#{$prefix}--modal-footer .#{$prefix}--btn {
-    max-width: none;
-    height: convert.to-rem(64px);
     flex: 0 1 50%;
     align-items: baseline;
-    padding-top: calc($spacing-05 - convert.to-rem(2px));
-    padding-bottom: $spacing-07;
     margin: 0;
+    block-size: convert.to-rem(64px);
+    max-inline-size: none;
+    padding-block-end: $spacing-07;
+    padding-block-start: calc($spacing-05 - convert.to-rem(2px));
   }
 
   .#{$prefix}--modal-footer--three-button .#{$prefix}--btn {
@@ -425,15 +425,15 @@
   .#{$prefix}--modal-close {
     position: absolute;
     z-index: 2;
-    top: 0;
-    right: 0;
     overflow: hidden;
-    width: 3rem;
-    height: 3rem;
     padding: convert.to-rem(12px);
     border: 2px solid transparent;
     background-color: transparent;
+    block-size: 3rem;
     cursor: pointer;
+    inline-size: 3rem;
+    inset-block-start: 0;
+    inset-inline-end: 0;
     transition: background-color $duration-fast-02 motion(standard, productive);
 
     &:hover {
@@ -451,9 +451,9 @@
   }
 
   .#{$prefix}--modal-close__icon {
-    width: convert.to-rem(20px);
-    height: convert.to-rem(20px);
+    block-size: convert.to-rem(20px);
     fill: $icon-primary;
+    inline-size: convert.to-rem(20px);
   }
 
   .#{$prefix}--body--with-modal-open {
