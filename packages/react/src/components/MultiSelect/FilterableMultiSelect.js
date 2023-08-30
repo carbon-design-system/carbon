@@ -199,8 +199,8 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
     }
   }
 
-  function clearInputValue() {
-    textInput.current.value.length === 1
+  function clearInputValue(event) {
+    textInput.current.value.length === 1 || match(event, keys.Escape)
       ? setInputValue('')
       : setInputValue(textInput.current.value);
 
@@ -317,10 +317,10 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                   if (match(event, keys.Delete) || match(event, keys.Escape)) {
                     if (isOpen) {
                       handleOnMenuChange(true);
-                      clearInputValue();
+                      clearInputValue(event);
                       event.stopPropagation();
                     } else if (!isOpen) {
-                      clearInputValue();
+                      clearInputValue(event);
                       clearSelection();
                       event.stopPropagation();
                     }
