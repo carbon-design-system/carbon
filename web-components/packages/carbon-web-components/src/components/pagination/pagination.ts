@@ -133,7 +133,10 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
 
     if (event.composedPath()[0] === this._pageSizeSelect) {
       this.pageSize = parseInt(value);
-      this.totalPages = Math.ceil(totalItems / pageSize);
+      // Default pageSize to effectively be 1 when we have a value of 0 to avoid
+      // division by 0.
+      this.totalPages =
+        pageSize > 0 ? Math.ceil(totalItems / pageSize) : totalItems;
       this.page = 1;
       this.start = 0;
     } else {
@@ -274,7 +277,10 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
         pageSize;
     }
     if (changedProperties.has('pageSize') || changedProperties.has('start')) {
-      this.totalPages = Math.ceil(totalItems / pageSize);
+      // Default pageSize to effectively be 1 when we have a value of 0 to avoid
+      // division by 0.
+      this.totalPages =
+        pageSize > 0 ? Math.ceil(totalItems / pageSize) : totalItems;
       (this.shadowRoot!.querySelector(selectorPagesSelect) as CDSSelect).value =
         this.page.toString();
     }
