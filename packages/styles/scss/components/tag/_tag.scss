@@ -42,22 +42,22 @@
     @include tag-theme($tag-background-gray, $tag-color-gray, $tag-hover-gray);
 
     display: inline-flex;
-    // ensures tag stays pill shaped;
-    min-width: convert.to-rem(32px);
-    // restricts size of contained elements
-    max-width: 100%;
-    min-height: layout.size('height');
     align-items: center;
     justify-content: center;
     margin: $spacing-02;
     border-radius: convert.to-rem(15px);
     cursor: default;
+    // restricts size of contained elements
+    max-inline-size: 100%;
+    min-block-size: layout.size('height');
+    // ensures tag stays pill shaped;
+    min-inline-size: convert.to-rem(32px);
     padding-inline: $spacing-03;
     vertical-align: middle;
     word-break: break-word;
 
     &:not(:first-child) {
-      margin-left: 0;
+      margin-inline-start: 0;
     }
   }
 
@@ -149,7 +149,7 @@
 
   .#{$prefix}--tag__label {
     overflow: hidden;
-    max-width: 100%;
+    max-inline-size: 100%;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -165,10 +165,10 @@
 
   // tags used for filtering
   .#{$prefix}--tag--filter {
-    padding-top: 0;
-    padding-right: 0;
-    padding-bottom: 0;
     cursor: pointer;
+    padding-block-end: 0;
+    padding-block-start: 0;
+    padding-inline-end: 0;
 
     &:hover {
       outline: none;
@@ -181,8 +181,6 @@
 
   .#{$prefix}--tag__close-icon {
     display: flex;
-    width: layout.size('height');
-    height: layout.size('height');
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
@@ -190,9 +188,11 @@
     border: 0;
     margin: 0 0 0 convert.to-rem(2px);
     background-color: transparent;
+    block-size: layout.size('height');
     border-radius: 50%;
     color: currentColor;
     cursor: pointer;
+    inline-size: layout.size('height');
     transition: background-color $duration-fast-01 motion(standard, productive),
       box-shadow $duration-fast-01 motion(standard, productive);
 
@@ -202,14 +202,14 @@
   }
 
   .#{$prefix}--tag__custom-icon {
-    width: convert.to-rem(16px);
-    height: convert.to-rem(16px);
     flex-shrink: 0;
     padding: 0;
     border: 0;
-    margin-right: $spacing-02;
     background-color: transparent;
+    block-size: convert.to-rem(16px);
     color: currentColor;
+    inline-size: convert.to-rem(16px);
+    margin-inline-end: $spacing-02;
     outline: none;
 
     svg {
@@ -241,11 +241,11 @@
   }
 
   .#{$prefix}--tag--sm.#{$prefix}--tag--filter {
-    padding-right: 0;
+    padding-inline-end: 0;
   }
 
   .#{$prefix}--tag--sm .#{$prefix}--tag__close-icon {
-    margin-left: convert.to-rem(5px);
+    margin-inline-start: convert.to-rem(5px);
   }
 
   // Skeleton state
@@ -256,7 +256,7 @@
     );
 
     overflow: hidden;
-    width: convert.to-rem(60px);
+    inline-size: convert.to-rem(60px);
 
     // Safari specific bug (#7672)
     @media not all and (min-resolution: 0.001dpcm) {
