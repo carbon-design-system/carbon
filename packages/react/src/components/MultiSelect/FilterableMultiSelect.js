@@ -200,7 +200,10 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
   }
 
   function clearInputValue() {
-    setInputValue('');
+    textInput.current.value.length === 1
+      ? setInputValue('')
+      : setInputValue(textInput.current.value);
+
     if (textInput.current) {
       textInput.current.focus();
     }
