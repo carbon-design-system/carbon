@@ -11,7 +11,7 @@ import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
 test.describe('Accordion @avt', () => {
-  test('accessibility-checker default', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Accordion',
       id: 'components-accordion--default',
@@ -19,10 +19,10 @@ test.describe('Accordion @avt', () => {
         theme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('accordion');
+    await expect(page).toHaveNoACViolations('Accordion @avt-default-state');
   });
 
-  test('accessibility-checker skeleton', async ({ page }) => {
+  test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'Accordion',
       id: 'components-accordion--skeleton',
@@ -30,10 +30,12 @@ test.describe('Accordion @avt', () => {
         theme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('accordion--skeleton');
+    await expect(page).toHaveNoACViolations(
+      'Accordion @avt-advanced-states skeleton'
+    );
   });
 
-  test('accessibility-checker with layer', async ({ page }) => {
+  test('@avt-advanced-states with layer', async ({ page }) => {
     await visitStory(page, {
       component: 'Accordion',
       id: 'components-accordion--with-layer',
@@ -41,10 +43,12 @@ test.describe('Accordion @avt', () => {
         theme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('accordion--with-layer');
+    await expect(page).toHaveNoACViolations(
+      'Accordion @avt-advanced-states with layer'
+    );
   });
 
-  test('accessibility-checker keyboard nav', async ({ page }) => {
+  test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'Accordion',
       id: 'components-accordion--default',
@@ -78,7 +82,7 @@ test.describe('Accordion @avt', () => {
     await expect(accordin_btn2).toHaveAttribute('aria-expanded', 'false');
   });
 
-  test('accessibility-checker mouse click', async ({ page }) => {
+  test('@avt-advanced-states mouse click', async ({ page }) => {
     await visitStory(page, {
       component: 'Accordion',
       id: 'components-accordion--default',
@@ -91,12 +95,14 @@ test.describe('Accordion @avt', () => {
     await expect(accordin_btn1).toHaveAttribute('aria-expanded', 'true');
 
     // Checking for ACViolation
-    await expect(page).toHaveNoACViolations('accordion-mouse-click');
+    await expect(page).toHaveNoACViolations(
+      'Accordion @avt-advanced-states mouse click'
+    );
     await accordin_btn1.click();
     await expect(accordin_btn1).toHaveAttribute('aria-expanded', 'false');
   });
 
-  test('accessibility-checker mouse hover', async ({ page }) => {
+  test('@avt-advanced-states mouse hover', async ({ page }) => {
     await visitStory(page, {
       component: 'Accordion',
       id: 'components-accordion--default',
@@ -106,10 +112,12 @@ test.describe('Accordion @avt', () => {
     });
     const accordin_btn1 = page.getByRole('button', { name: 'Section 1 title' });
     await accordin_btn1.hover();
-    await expect(page).toHaveNoACViolations('accordion-mouse-hover');
+    await expect(page).toHaveNoACViolations(
+      'Accordion @avt-advanced-states mouse hover'
+    );
   });
 
-  test('accessibility-checker disabled accordion', async ({ page }) => {
+  test('@avt-advanced-states disabled', async ({ page }) => {
     await visitStory(page, {
       component: 'Accordion',
       id: 'components-accordion--playground',
@@ -122,6 +130,8 @@ test.describe('Accordion @avt', () => {
     });
     const accordin_btn1 = page.getByRole('button', { name: 'Section 1 title' });
     await expect(accordin_btn1).toBeDisabled();
-    await expect(page).toHaveNoACViolations('accordion-disabled');
+    await expect(page).toHaveNoACViolations(
+      'Accordion @avt-advanced-states disabled'
+    );
   });
 });
