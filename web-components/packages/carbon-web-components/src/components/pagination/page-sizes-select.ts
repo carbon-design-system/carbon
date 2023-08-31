@@ -54,14 +54,18 @@ class BXPageSizesSelect extends FocusMixin(LitElement) {
    * @param event The event.
    */
   private _handleSlotChange({ target }: Event) {
-    const { _selectNode: selectNode } = this;
+    const { _selectNode: selectNode, value } = this;
     while (selectNode.firstChild) {
       selectNode.removeChild(selectNode.firstChild);
     }
     (
       (target as HTMLSlotElement).assignedNodes() as HTMLOptionElement[]
     ).forEach((item) => {
-      selectNode?.appendChild(item.cloneNode(true));
+      const optionElement = item.cloneNode(true) as HTMLOptionElement;
+      if (value && Number(optionElement.value) === value) {
+        optionElement.selected = true;
+      }
+      selectNode?.appendChild(optionElement);
     });
   }
 

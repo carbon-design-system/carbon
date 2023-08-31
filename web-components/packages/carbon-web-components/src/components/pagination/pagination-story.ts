@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -52,7 +52,7 @@ export default {
     knobs: {
       'bx-pagination': () => ({
         atLastPage: boolean(
-          'Explicitly state that the user is at the last page (at-last-apge)',
+          'Explicitly state that the user is at the last page (at-last-page)',
           false
         ),
         pageSize: number('Number of rows per page (page-size)', 10),
