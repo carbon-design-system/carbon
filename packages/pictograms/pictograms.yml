@@ -149,6 +149,8 @@
     - air conditioner
     - cooling
     - cool
+    - workplace
+    - mechanical area
 - name: airplane
   friendly_name: Airplane
   aliases:
@@ -290,9 +292,10 @@
   friendly_name: Apple
   aliases:
     - apple
-    - fruit
+    - fruits
     - food
     - produce
+    - workplace
 - name: application
   friendly_name: Application
   aliases:
