@@ -165,7 +165,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: playwright-report
+          name: playwright-vrt-report
           path: .playwright
 
   vrt:
@@ -221,5 +221,5 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: playwright-report
+          name: playwright-avt-report
           path: .playwright
