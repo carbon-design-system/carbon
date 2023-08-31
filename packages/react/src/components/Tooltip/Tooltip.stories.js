@@ -47,7 +47,7 @@ export default {
 
 export const Default = () => {
   const label =
-    'Occassionally, services are updated in a specified time window to ensure no down time for customers.';
+    'Occasionally, services are updated in a specified time window to ensure no down time for customers.';
   return (
     <Tooltip align="bottom" label={label}>
       <button className="sb-tooltip-trigger" type="button">
@@ -105,9 +105,15 @@ const PlaygroundStory = (props) => {
 
 export const Playground = PlaygroundStory.bind({});
 
+Playground.args = {
+  align: 'bottom',
+  closeOnActivation: false,
+  defaultOpen: true,
+  label: 'Custom label',
+};
+
 Playground.argTypes = {
   align: {
-    defaultValue: 'bottom',
     options: [
       'top',
       'top-left',
@@ -129,17 +135,10 @@ Playground.argTypes = {
       type: 'select',
     },
   },
-  closeOnActivation: {
-    defaultValue: false,
-  },
-  defaultOpen: {
-    defaultValue: true,
-  },
   label: {
     control: {
       type: 'text',
     },
-    defaultValue: 'Custom label',
   },
   description: {
     control: {

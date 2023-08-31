@@ -22,7 +22,7 @@ const config = {
   ],
 
   // https://playwright.dev/docs/api/class-testconfig#test-config-test-match
-  testMatch: /.*-test.e2e\.m?js$/,
+  testMatch: /.*-test(.avt|.vrt)?.e2e\.m?js$/,
 
   // https://playwright.dev/docs/api/class-testconfig#test-config-timeout
   timeout: 1000 * 30,
@@ -52,6 +52,16 @@ const config = {
       'json',
       {
         outputFile: path.join(__dirname, '.playwright', 'results.json'),
+      },
+    ],
+    [
+      'json',
+      {
+        outputFile: path.join(
+          __dirname,
+          'packages/react/.playwright',
+          'INTERNAL_AVT_REPORT_DO_NOT_USE.json'
+        ),
       },
     ],
   ],

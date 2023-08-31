@@ -72,8 +72,19 @@ export const Default = () => (
       selectedRows,
       getTableProps,
       getTableContainerProps,
+      selectRow,
     }) => {
-      const batchActionProps = getBatchActionProps();
+      const batchActionProps = {
+        ...getBatchActionProps({
+          onSelectAll: () => {
+            rows.map((row) => {
+              if (!row.isSelected) {
+                selectRow(row.id);
+              }
+            });
+          },
+        }),
+      };
 
       return (
         <TableContainer
@@ -85,7 +96,8 @@ export const Default = () => (
               <TableBatchAction
                 tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
                 renderIcon={TrashCan}
-                onClick={batchActionClick(selectedRows)}>
+                onClick={batchActionClick(selectedRows)}
+                disabled>
                 Delete
               </TableBatchAction>
               <TableBatchAction
@@ -134,13 +146,13 @@ export const Default = () => (
               <Button
                 tabIndex={batchActionProps.shouldShowBatchActions ? -1 : 0}
                 onClick={action('Add new row')}
-                size="small"
+                size="sm"
                 kind="primary">
                 Add new
               </Button>
             </TableToolbarContent>
           </TableToolbar>
-          <Table {...getTableProps()}>
+          <Table {...getTableProps()} aria-label="sample table">
             <TableHead>
               <TableRow>
                 <TableSelectAll {...getSelectionProps()} />
@@ -235,13 +247,13 @@ export const Playground = (args) => (
               <Button
                 tabIndex={batchActionProps.shouldShowBatchActions ? -1 : 0}
                 onClick={action('Add new row')}
-                size="small"
+                size="sm"
                 kind="primary">
                 Add new
               </Button>
             </TableToolbarContent>
           </TableToolbar>
-          <Table {...getTableProps()}>
+          <Table {...getTableProps()} aria-label="sample table">
             <TableHead>
               <TableRow>
                 {args.radio ? (

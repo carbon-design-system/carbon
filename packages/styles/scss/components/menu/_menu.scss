@@ -5,16 +5,18 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../button/tokens' as button-tokens;
 @use '../../config' as *;
+@use '../../layer' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
-@use '../button/tokens' as button-tokens;
 @use '../../utilities/box-shadow' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/z-index' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
+@use '../../utilities/component-reset';
 
 /// Menu styles
 /// @access public
@@ -23,6 +25,7 @@
   // Menu
 
   .#{$prefix}--menu {
+    @include component-reset.reset;
     @include box-shadow;
 
     position: fixed;
@@ -110,6 +113,11 @@
     display: flex;
   }
 
+  .#{$prefix}--menu-item-group > ul,
+  .#{$prefix}--menu-item-radio-group > ul {
+    @include component-reset.reset;
+  }
+
   .#{$prefix}--menu--with-icons > .#{$prefix}--menu-item,
   .#{$prefix}--menu--with-icons
     > .#{$prefix}--menu-item-group
@@ -144,7 +152,7 @@
   .#{$prefix}--menu-item-divider {
     display: block;
     width: 100%;
-    height: rem(1px);
+    height: convert.to-rem(1px);
     background-color: $border-subtle;
     margin-block: $spacing-02;
   }

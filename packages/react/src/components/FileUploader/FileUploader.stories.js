@@ -51,7 +51,7 @@ export const Default = () => {
   );
 };
 
-export const _FileUploaderItem = () => {
+export const _FileUploaderItem = (args) => {
   return (
     <FileUploaderItem
       errorBody="500kb max file size. Select a new file and try again."
@@ -61,8 +61,71 @@ export const _FileUploaderItem = () => {
       name="README.md"
       status="edit"
       size="md"
+      {...args}
     />
   );
+};
+_FileUploaderItem.argTypes = {
+  errorBody: {
+    control: 'text',
+    description: 'Error message body for an invalid file upload',
+  },
+  errorSubject: {
+    control: 'text',
+    description: 'Error message subject for an invalid file upload',
+  },
+  iconDescription: { control: 'text' },
+  invalid: {
+    control: 'boolean',
+    description: 'Specify if the currently uploaded file is invalid',
+  },
+  name: { control: 'text', description: 'Name of the uploaded file' },
+  onDelete: { action: 'onDelete' },
+  size: { control: 'select', options: ['sm', 'md', 'lg'] },
+  status: {
+    control: 'inline-radio',
+    options: ['uploading', 'edit', 'complete'],
+    description: 'Status of the file upload',
+  },
+  uuid: {
+    control: 'text',
+    description: 'Unique identifier for the file object',
+  },
+
+  // Remove all the props that don't apply to FileUploaderItem
+  accept: {
+    table: { disable: true },
+  },
+  buttonKind: {
+    table: { disable: true },
+  },
+  buttonLabel: {
+    table: { disable: true },
+  },
+  className: {
+    table: { disable: true },
+  },
+  disabled: {
+    table: { disable: true },
+  },
+  labelDescription: {
+    table: { disable: true },
+  },
+  labelTitle: {
+    table: { disable: true },
+  },
+  multiple: {
+    table: { disable: true },
+  },
+  onChange: {
+    table: { disable: true },
+  },
+  onClick: {
+    table: { disable: true },
+  },
+  filenameStatus: {
+    table: { disable: true },
+  },
 };
 
 export const _FileUploaderDropContainer = () => (

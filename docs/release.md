@@ -110,9 +110,6 @@ git push upstream v11.2.0-rc.0
 
 - [ ] Verify that this triggers a run of the
       [Release Workflow](https://github.com/carbon-design-system/carbon/actions/workflows/release.yml)
-- [ ] Review and approve the Pull Request generated from this action on the
-      [Carbon Website](https://github.com/carbon-design-system/carbon-website)
-      to verify no breaking changes have occurred in this release
 
 #### Releasing another prerelease
 
@@ -164,12 +161,32 @@ git push upstream v11.2.0
 
 - [ ] Verify that this triggers a run of the
       [Release Workflow](https://github.com/carbon-design-system/carbon/actions/workflows/release.yml)
-- [ ] Review and approve the Pull Request generated from this action on the
-      [Carbon Website](https://github.com/carbon-design-system/carbon-website)
+- [ ] Review and approve the Pull Request generated from this action in
+      [gatsby-theme-carbon](https://github.com/carbon-design-system/gatsby-theme-carbon/pulls)
       to verify no breaking changes have occurred in this release. If the PR
       from the previous release was not merged, the existing PR will be updated.
 
 **Friday**
+
+After the PR to the Carbon Gatsby theme is merged it will trigger an automated
+release of the theme. To then update the Carbon website to the latest version of
+Carbon and gatsby-theme-carbon you will need to:
+
+- [ ] Check that the
+      [chore(release): update carbon deps](https://github.com/carbon-design-system/gatsby-theme-carbon/pulls)
+      PR has been merged in the gatsby-theme-carbon repo.
+- [ ] Check that
+      [gatsby-theme-carbon](https://github.com/carbon-design-system/gatsby-theme-carbon)
+      has been released and is on the
+      [latest version](https://github.com/carbon-design-system/gatsby-theme-carbon/blob/main/packages/gatsby-theme-carbon/package.json)
+      of Carbon
+- [ ] Run the
+      [Update Carbon and gatsby-theme-carbon deps workflow](https://github.com/carbon-design-system/carbon-website/actions/workflows/update-carbon-gatsby-deps.yml)
+      to automatically open a PR in the Carbon website to update to latest
+      Carbon and gatsby-theme-carbon versions.
+- [ ] Review and approve the
+      [pull request](https://github.com/carbon-design-system/carbon-website/pulls)
+      generate by the workflow.
 
 The packages that have been published will be switched to latest on the first
 Friday of a sprint. To make the switch, you will need to:
@@ -217,6 +234,9 @@ Thanks :tada:
 ```
 
 </details>
+
+Or, use the
+[Slack Block Kit Builder announcement template](<https://app.slack.com/block-kit-builder/T7MH7FZKL#%7B%22blocks%22:%5B%7B%22type%22:%22section%22,%22text%22:%7B%22type%22:%22plain_text%22,%22text%22:%22:carbon10:%20:carbon10:%20:carbon10:%22,%22emoji%22:true%7D%7D,%7B%22type%22:%22section%22,%22text%22:%7B%22type%22:%22mrkdwn%22,%22text%22:%22Hi%20all!%20:wave:%20We%20wanted%20to%20share%20the%20release%20notes%20for%20%3Chttps://github.com/carbon-design-system/carbon/releases/tag/v11.32.0%257Cv11.32.0%3E%20:rocket:%22%7D%7D,%7B%22type%22:%22rich_text%22,%22elements%22:%5B%7B%22type%22:%22rich_text_list%22,%22elements%22:%5B%7B%22type%22:%22rich_text_section%22,%22elements%22:%5B%7B%22type%22:%22link%22,%22url%22:%22https://react.carbondesignsystem.com/?path=/docs/components-tabs--default#tabs-and-the-grid---fullwidth-prop%22,%22text%22:%22Grid%20aware%20Tabs%22%7D,%7B%22type%22:%22text%22,%22text%22:%22%20(available%20for%20contained%20tabs%20only)!%20%22%7D%5D%7D,%7B%22type%22:%22rich_text_section%22,%22elements%22:%5B%7B%22type%22:%22text%22,%22text%22:%22New%20component%20types%20for%20Accordion%20&%20subcomponents%22%7D%5D%7D,%7B%22type%22:%22rich_text_section%22,%22elements%22:%5B%7B%22type%22:%22text%22,%22text%22:%22ContainedList%20&%20Dropdown%20accessibility%20improvements%20:wheelchair:%EF%B8%8F%22%7D%5D%7D,%7B%22type%22:%22rich_text_section%22,%22elements%22:%5B%7B%22type%22:%22text%22,%22text%22:%22...%20and%20a%20number%20of%20additional%20bugs%20squashed!%20:bug:%22%7D%5D%7D%5D,%22style%22:%22bullet%22,%22indent%22:0%7D%5D%7D,%7B%22type%22:%22section%22,%22text%22:%7B%22type%22:%22mrkdwn%22,%22text%22:%22If%20you%20want%20to%20stay%20up%20to%20date%20with%20our%20release%20schedule,%20check%20out%20our%20%3Chttps://github.com/carbon-design-system/carbon/wiki/Release-radar%257CRelease%20Radar%20wiki%20page%3E.%22%7D%7D,%7B%22type%22:%22section%22,%22text%22:%7B%22type%22:%22plain_text%22,%22text%22:%22If%20there%20are%20any%20issues%20that%20come%20up%20while%20using%20this%20release,%20please%20reach%20out%20on%20GitHub%20or%20Slack%20to%20let%20us%20know!%22,%22emoji%22:true%7D%7D,%7B%22type%22:%22section%22,%22text%22:%7B%22type%22:%22plain_text%22,%22text%22:%22%20%22,%22emoji%22:true%7D%7D,%7B%22type%22:%22section%22,%22text%22:%7B%22type%22:%22plain_text%22,%22text%22:%22Thanks%20:tada:%22,%22emoji%22:true%7D%7D,%7B%22type%22:%22section%22,%22text%22:%7B%22type%22:%22plain_text%22,%22text%22:%22%E2%80%94%20The%20Carbon%20team%20:carbon10:%22,%22emoji%22:true%7D%7D%5D%7D>)
 
 ### Post release
 

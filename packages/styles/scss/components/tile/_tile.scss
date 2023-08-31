@@ -5,14 +5,16 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../button/tokens' as button;
 @use '../../config' as *;
 @use '../../feature-flags' as *;
+@use '../../layer' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
-@use '../button/tokens' as button;
 @use '../../utilities/button-reset';
+@use '../../utilities/component-reset';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/visually-hidden' as *;
@@ -30,6 +32,7 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   }
 
   .#{$prefix}--tile {
+    @include type-style('body-compact-01');
     @include layout.use('density', $default: 'normal');
 
     position: relative;
@@ -40,8 +43,6 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     background-color: $layer;
     outline: 2px solid transparent;
     outline-offset: -2px;
-
-    @include type-style('body-compact-01');
 
     &:focus {
       @include focus-outline('outline');
@@ -55,6 +56,10 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
   .#{$prefix}--tile--clickable,
   .#{$prefix}--tile--selectable {
+    @include component-reset.reset;
+    @include type-style('body-compact-01');
+
+    padding: layout.density('padding-inline');
     cursor: pointer;
     transition: $duration-moderate-01 motion(standard, productive);
 
@@ -64,8 +69,6 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   }
 
   .#{$prefix}--tile--clickable {
-    @include reset;
-
     color: $text-primary;
     text-decoration: none;
 
@@ -105,6 +108,7 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile--clickable.#{$prefix}--link--disabled,
   .#{$prefix}--tile--clickable:hover.#{$prefix}--link--disabled {
     display: block;
+    padding: layout.density('padding-inline');
     background-color: $layer;
     color: $text-disabled;
     cursor: not-allowed;
@@ -121,8 +125,8 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile--clickable.#{$prefix}--link--disabled
     .#{$prefix}--tile--disabled-icon {
     position: absolute;
-    right: layout.density('padding-inline');
-    bottom: layout.density('padding-inline');
+    inset-block-end: layout.density('padding-inline');
+    inset-inline-end: layout.density('padding-inline');
   }
 
   .#{$prefix}--tile--clickable .#{$prefix}--tile--icon {
@@ -153,11 +157,11 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
   .#{$prefix}--tile__checkmark {
     position: absolute;
-    top: layout.density('padding-inline');
-    right: layout.density('padding-inline');
     height: 1rem;
     border: none;
     background: transparent;
+    inset-block-start: layout.density('padding-inline');
+    inset-inline-end: layout.density('padding-inline');
     opacity: 0;
     transition: $duration-fast-02 motion(standard, productive);
 
@@ -177,13 +181,13 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
   .#{$prefix}--tile__chevron {
     position: absolute;
-    right: 0;
-    bottom: 0;
     display: flex;
     width: $-icon-container-size;
     height: $-icon-container-size;
     align-items: center;
     justify-content: center;
+    inset-block-end: 0;
+    inset-inline-end: 0;
 
     svg {
       fill: $icon-primary;
@@ -207,13 +211,13 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     @include button-reset.reset;
 
     position: absolute;
-    right: 0;
-    bottom: 0;
     display: flex;
     width: $-icon-container-size;
     height: $-icon-container-size;
     align-items: center;
     justify-content: center;
+    inset-block-end: 0;
+    inset-inline-end: 0;
 
     &:focus {
       outline: 2px solid $focus;
@@ -235,7 +239,7 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     cursor: pointer;
     font-family: inherit;
     font-size: inherit;
-    text-align: left;
+    text-align: start;
     transition: max-height $duration-moderate-01 motion(standard, productive);
 
     @include type-style('body-compact-01');

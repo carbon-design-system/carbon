@@ -7,6 +7,7 @@ import React, {
   type HTMLAttributes,
   type ReactNode,
   type ReactElement,
+  type RefObject,
 } from 'react';
 import { isElement } from 'react-is';
 import PropTypes from 'prop-types';
@@ -148,6 +149,11 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   isFullWidth?: boolean;
 
   /**
+   * Provide a ref to return focus to once the modal is closed.
+   */
+  launcherButtonRef?: RefObject<HTMLButtonElement>;
+
+  /**
    * Specify an optional handler for closing modal.
    * Returning `false` here prevents closing modal.
    */
@@ -194,6 +200,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       selectorPrimaryFocus,
       selectorsFloatingMenus,
       size,
+      launcherButtonRef,
       ...rest
     },
     ref
@@ -305,28 +312,38 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     });
 
     useEffect(() => {
+      if (!open && launcherButtonRef) {
+        setTimeout(() => {
+          launcherButtonRef?.current?.focus();
+        });
+      }
+    }, [open, launcherButtonRef]);
+
+    useEffect(() => {
+      const initialFocus = (focusContainerElement) => {
+        const containerElement = focusContainerElement || innerModal.current;
+        const primaryFocusElement = containerElement
+          ? containerElement.querySelector(selectorPrimaryFocus)
+          : null;
+
+        if (primaryFocusElement) {
+          return primaryFocusElement;
+        }
+
+        return button && button.current;
+      };
+
       const focusButton = (focusContainerElement) => {
-        if (focusContainerElement) {
-          const primaryFocusElement =
-            focusContainerElement.querySelector(selectorPrimaryFocus);
-          if (primaryFocusElement) {
-            primaryFocusElement.focus();
-            return;
-          }
-          if (button.current) {
-            button.current.focus();
-          }
+        const target = initialFocus(focusContainerElement);
+        if (target) {
+          target.focus();
         }
       };
 
-      if (!open) {
-        return;
-      }
-
-      if (innerModal.current) {
+      if (open && isOpen) {
         focusButton(innerModal.current);
       }
-    }, [open, selectorPrimaryFocus]);
+    }, [open, selectorPrimaryFocus, isOpen]);
 
     return (
       <div
@@ -345,6 +362,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
           aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}
           aria-labelledby={ariaLabelledBy}>
           {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
+
           <button
             type="button"
             ref={startSentinel}
@@ -403,6 +421,17 @@ ComposedModal.propTypes = {
    * Specify whether the Modal content should have any inner padding.
    */
   isFullWidth: PropTypes.bool,
+
+  /**
+   * Provide a ref to return focus to once the modal is closed.
+   */
+  // @ts-expect-error: Invalid derived type
+  launcherButtonRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({
+      current: PropTypes.any,
+    }),
+  ]),
 
   /**
    * Specify an optional handler for closing modal.

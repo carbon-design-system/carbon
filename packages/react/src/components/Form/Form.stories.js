@@ -20,6 +20,7 @@ import SelectItem from '../SelectItem';
 import TextArea from '../TextArea';
 import TextInput from '../TextInput';
 import { Stack } from '../Stack';
+import mdx from './Form.mdx';
 
 const checkboxEvents = {
   className: 'some-class',
@@ -107,10 +108,15 @@ const buttonEvents = {
 export default {
   title: 'Components/Form',
   component: Form,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 export const Default = () => (
-  <Form>
+  <Form aria-label="sample form">
     <Stack gap={7}>
       <FormGroup {...fieldsetCheckboxProps()}>
         <Checkbox defaultChecked {...checkboxEvents} id="checkbox-0" />
@@ -124,9 +130,17 @@ export const Default = () => (
         <FileUploader
           {...fileUploaderEvents}
           id="file-1"
-          labelDescription="Choose Files..."
-          iconDescription="Dismiss file"
           role="button"
+          labelDescription="Max file size is 500mb. Only .jpg files are supported."
+          buttonLabel="Add file"
+          buttonKind="primary"
+          size="md"
+          filenameStatus="edit"
+          accept={['.jpg', '.png']}
+          multiple={true}
+          disabled={false}
+          iconDescription="Dismiss file"
+          name=""
         />
       </FormGroup>
 

@@ -52,6 +52,7 @@ export const Default = () => (
       headers,
       getHeaderProps,
       getRowProps,
+      getExpandedRowProps,
       getTableProps,
       getTableContainerProps,
     }) => (
@@ -59,10 +60,10 @@ export const Default = () => (
         title="DataTable"
         description="With expansion"
         {...getTableContainerProps()}>
-        <Table {...getTableProps()}>
+        <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
             <TableRow>
-              <TableExpandHeader />
+              <TableExpandHeader aria-label="expand row" />
               {headers.map((header, i) => (
                 <TableHeader key={i} {...getHeaderProps({ header })}>
                   {header.header}
@@ -80,7 +81,8 @@ export const Default = () => (
                 </TableExpandRow>
                 <TableExpandedRow
                   colSpan={headers.length + 1}
-                  className="demo-expanded-td">
+                  className="demo-expanded-td"
+                  {...getExpandedRowProps({ row })}>
                   <h6>Expandable row content</h6>
                   <div>Description here</div>
                 </TableExpandedRow>
@@ -103,6 +105,7 @@ export const BatchExpansion = () => (
       getHeaderProps,
       getExpandHeaderProps,
       getRowProps,
+      getExpandedRowProps,
       getTableProps,
       getTableContainerProps,
     }) => (
@@ -110,11 +113,11 @@ export const BatchExpansion = () => (
         title="DataTable"
         description="With batch expansion"
         {...getTableContainerProps()}>
-        <Table {...getTableProps()}>
+        <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
             <TableRow>
               <TableExpandHeader
-                enableExpando={true}
+                enableToggle={true}
                 {...getExpandHeaderProps()}
               />
               {headers.map((header, i) => (
@@ -134,7 +137,8 @@ export const BatchExpansion = () => (
                 </TableExpandRow>
                 <TableExpandedRow
                   colSpan={headers.length + 1}
-                  className="demo-expanded-td">
+                  className="demo-expanded-td"
+                  {...getExpandedRowProps({ row })}>
                   <h6>Expandable row content</h6>
                   <div>Description here</div>
                 </TableExpandedRow>
@@ -154,6 +158,7 @@ export const Playground = (args) => (
       headers,
       getHeaderProps,
       getRowProps,
+      getExpandedRowProps,
       getTableProps,
       getTableContainerProps,
     }) => (
@@ -161,10 +166,10 @@ export const Playground = (args) => (
         title="DataTable"
         description="With expansion"
         {...getTableContainerProps()}>
-        <Table {...getTableProps()}>
+        <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
             <TableRow>
-              <TableExpandHeader />
+              <TableExpandHeader aria-label="expand row" />
               {headers.map((header, i) => (
                 <TableHeader key={i} {...getHeaderProps({ header })}>
                   {header.header}
@@ -184,7 +189,8 @@ export const Playground = (args) => (
                 </TableExpandRow>
                 <TableExpandedRow
                   colSpan={headers.length + 1}
-                  className="demo-expanded-td">
+                  className="demo-expanded-td"
+                  {...getExpandedRowProps({ row })}>
                   <h6>Expandable row content</h6>
                   <div>Description here</div>
                 </TableExpandedRow>

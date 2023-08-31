@@ -57,7 +57,7 @@ export const Default = () => (
         title="DataTable"
         description="With selection"
         {...getTableContainerProps()}>
-        <Table {...getTableProps()}>
+        <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
             <TableRow>
               <TableSelectAll {...getSelectionProps()} />
@@ -99,7 +99,7 @@ export const WithRadioSelection = () => (
         title="DataTable"
         description="With radio selection"
         {...getTableContainerProps()}>
-        <Table {...getTableProps()}>
+        <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
             <TableRow>
               <th scope="col" />
@@ -141,7 +141,7 @@ export const WithSelectionAndSorting = () => (
         title="DataTable"
         description="With selection"
         {...getTableContainerProps()}>
-        <Table {...getTableProps()}>
+        <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
             <TableRow>
               <TableSelectAll {...getSelectionProps()} />
@@ -182,7 +182,7 @@ export const Playground = (args) => (
         title="DataTable"
         description="With selection"
         {...getTableContainerProps()}>
-        <Table {...getTableProps()}>
+        <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
             <TableRow>
               {args.radio ? (

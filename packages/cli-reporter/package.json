@@ -1,7 +1,7 @@
 {
   "name": "@carbon/cli-reporter",
   "description": "Reporter for CLI-based tools in the Carbon Design System",
-  "version": "10.6.0",
+  "version": "10.7.0",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": {
@@ -20,7 +20,8 @@
     "react"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "dependencies": {
     "chalk": "^4.1.1"

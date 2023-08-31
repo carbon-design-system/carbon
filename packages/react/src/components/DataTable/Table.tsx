@@ -186,7 +186,11 @@ export const Table = ({
   useWindowEvent('resize', debouncedSetTableAlignment);
 
   // recalculate table alignment once fonts have loaded
-  if (document?.fonts?.status && document.fonts.status !== 'loaded') {
+  if (
+    typeof document !== 'undefined' &&
+    document?.fonts?.status &&
+    document.fonts.status !== 'loaded'
+  ) {
     document.fonts.ready.then(() => {
       setTableAlignment();
     });

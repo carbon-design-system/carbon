@@ -49,10 +49,10 @@
     "@carbon/cli": "workspace:packages/cli",
     "@commitlint/cli": "^17.0.0",
     "@commitlint/config-conventional": "^17.0.0",
-    "@percy/cli": "^1.1.0",
+    "@percy/cli": "^1.27.0",
     "@percy/playwright": "^1.0.4",
-    "@playwright/test": "^1.28.0",
-    "@testing-library/jest-dom": "^5.16.5",
+    "@playwright/test": "^1.36.2",
+    "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/react-is": "~18.2.0",
@@ -62,7 +62,7 @@
     "cross-spawn": "^7.0.0",
     "doctoc": "^2.0.0",
     "eslint": "^8.40.0",
-    "fs-extra": "^10.0.0",
+    "fs-extra": "^11.0.0",
     "glob": "^10.0.0",
     "husky": "^8.0.0",
     "jest": "^28.1.0",
@@ -144,5 +144,5 @@
       "./config/stylelint-config-carbon"
     ]
   },
-  "packageManager": "yarn@3.6.0"
+  "packageManager": "yarn@3.6.3"
 }

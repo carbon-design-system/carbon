@@ -5,16 +5,18 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'mixins' as *;
 @use '../../config' as *;
 @use '../../feature-flags' as *;
-@use '../../type' as *;
+@use '../../layer' as *;
 @use '../../motion';
 @use '../../theme' as *;
+@use '../../type' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/high-contrast-mode' as *;
-@use '../../utilities/convert' as *;
-@use 'mixins' as *;
+@use '../../utilities/convert';
+@use '../../utilities/component-reset';
 
 @mixin structured-list {
   .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-td,
@@ -26,7 +28,7 @@
   }
 
   .#{$prefix}--structured-list {
-    @include reset;
+    @include component-reset.reset;
 
     display: table;
     width: 100%;
@@ -142,12 +144,12 @@
   }
 
   .#{$prefix}--structured-list-th {
-    @include reset;
+    @include component-reset.reset;
     @include padding-th;
     @include type-style('heading-compact-01');
 
     display: table-cell;
-    height: rem(40px);
+    height: convert.to-rem(40px);
     color: $text-primary;
     font-weight: 600;
     text-align: left;
@@ -161,7 +163,7 @@
   }
 
   .#{$prefix}--structured-list-td {
-    @include reset;
+    @include component-reset.reset;
     @include type-style('body-01');
     @include padding-td;
 

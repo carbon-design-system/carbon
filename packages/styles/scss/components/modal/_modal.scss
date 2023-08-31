@@ -5,19 +5,18 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../button';
 @use '../../config' as *;
 @use '../../breakpoint' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
-@use '../../utilities/convert' as *;
-@use '../../utilities/component-reset' as *;
+@use '../../utilities/convert';
+@use '../../utilities/component-reset';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/z-index' as *;
-
-@use '../button';
 
 /// Modal styles
 /// @access public
@@ -64,8 +63,14 @@
     .#{$prefix}--date-picker__input,
     .#{$prefix}--multi-select,
     .#{$prefix}--number__control-btn::before,
-    .#{$prefix}--number__control-btn::after {
+    .#{$prefix}--number__control-btn::after,
+    .#{$prefix}--list-box input[role='combobox'] {
       background-color: $field-02;
+    }
+
+    // Override to align layer token with field
+    .#{$prefix}--list-box__menu {
+      background-color: $layer-02;
     }
 
     .#{$prefix}--number__rule-divider {
@@ -78,12 +83,12 @@
 
     .#{$prefix}--list-box__menu-item:hover
       .#{$prefix}--list-box__menu-item__option {
-      border-top-color: $layer-hover;
+      border-top-color: $layer-hover-02;
     }
 
     .#{$prefix}--list-box__menu-item--active:hover
       .#{$prefix}--list-box__menu-item__option {
-      border-top-color: $layer-selected-hover;
+      border-top-color: $layer-selected-hover-02;
     }
 
     // Fluid inputs
@@ -105,6 +110,23 @@
       .c#{$prefix}ds--date-picker-input__wrapper
       .#{$prefix}--date-picker__input {
       background-color: $field-01;
+    }
+
+    // Override to align layer token with field
+    .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__menu {
+      background-color: $layer-01;
+    }
+
+    .#{$prefix}--list-box__menu-item:hover {
+      background-color: $layer-hover-02;
+    }
+
+    .#{$prefix}--list-box__menu-item--active {
+      background-color: $layer-selected-02;
+    }
+
+    .#{$prefix}--list-box__menu-item--active:hover {
+      background-color: $layer-selected-hover-02;
     }
 
     .#{$prefix}--number-input--fluid
@@ -227,6 +249,7 @@
   }
 
   .#{$prefix}--modal-header__label {
+    @include component-reset.reset;
     @include type-style('label-01');
 
     margin-bottom: $spacing-02;
@@ -234,6 +257,7 @@
   }
 
   .#{$prefix}--modal-header__heading {
+    @include component-reset.reset;
     @include type-style('heading-03');
 
     // padding should take into account the left and right padding of modal container
@@ -333,7 +357,7 @@
     bottom: $spacing-09;
     left: 0;
     width: 100%;
-    height: rem(32px);
+    height: convert.to-rem(32px);
     background-image: linear-gradient(to bottom, transparent, $layer);
     content: '';
     grid-column: 1/-1;
@@ -373,7 +397,7 @@
   // -----------------------------
   .#{$prefix}--modal-footer {
     display: flex;
-    height: rem(64px);
+    height: convert.to-rem(64px);
     justify-content: flex-end;
     margin-top: auto;
     grid-column: 1/-1;
@@ -382,10 +406,10 @@
 
   .#{$prefix}--modal-footer .#{$prefix}--btn {
     max-width: none;
-    height: rem(64px);
+    height: convert.to-rem(64px);
     flex: 0 1 50%;
     align-items: baseline;
-    padding-top: calc($spacing-05 - rem(2px));
+    padding-top: calc($spacing-05 - convert.to-rem(2px));
     padding-bottom: $spacing-07;
     margin: 0;
   }
@@ -406,7 +430,7 @@
     overflow: hidden;
     width: 3rem;
     height: 3rem;
-    padding: rem(12px);
+    padding: convert.to-rem(12px);
     border: 2px solid transparent;
     background-color: transparent;
     cursor: pointer;
@@ -427,8 +451,8 @@
   }
 
   .#{$prefix}--modal-close__icon {
-    width: rem(20px);
-    height: rem(20px);
+    width: convert.to-rem(20px);
+    height: convert.to-rem(20px);
     fill: $icon-primary;
   }
 

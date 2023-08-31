@@ -13,13 +13,14 @@ import { keys, match } from '../../internal/keyboard';
 import { useWindowEvent } from '../../internal/useEvent';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 
+const noopFn = () => {};
 const HeaderPanel = React.forwardRef(function HeaderPanel(
   {
     children,
     className: customClassName,
     expanded,
     addFocusListeners = true,
-    onHeaderPanelFocus,
+    onHeaderPanelFocus = noopFn,
     href,
     ...other
   },
@@ -46,7 +47,7 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
     eventHandlers.onBlur = (event) => {
       if (
         !event.currentTarget.contains(event.relatedTarget) &&
-        !lastClickedElement.classList.contains('cds--switcher__item-link')
+        !lastClickedElement?.classList?.contains('cds--switcher__item-link')
       ) {
         setExpandedState(false);
         setLastClickedElement(null);
@@ -71,7 +72,7 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
     setLastClickedElement(focusedElement);
 
     if (
-      children.type.__docgenInfo.displayName === 'Switcher' &&
+      children.type?.displayName === 'Switcher' &&
       !focusedElement?.closest(`.${prefix}--header-panel--expanded`) &&
       !focusedElement?.closest(`.${prefix}--header__action`) &&
       !headerPanelRef?.current?.classList.contains(`${prefix}--switcher`) &&
@@ -123,7 +124,6 @@ HeaderPanel.propTypes = {
   /**
    * An optional listener that is called a callback to collapse the HeaderPanel
    */
-
   onHeaderPanelFocus: PropTypes.func,
 };
 

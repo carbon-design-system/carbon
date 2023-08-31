@@ -1,4 +1,5 @@
-import { Story, Props, Preview } from '@storybook/addon-docs';
+import { ArgsTable, Canvas, Story} from '@storybook/blocks'
+import * as SkeletonTextStories from './SkeletonText.stories';
 
 # SkeletonText
 
@@ -10,13 +11,13 @@ import { Story, Props, Preview } from '@storybook/addon-docs';
 
 ## Overview
 
-<Preview>
-  <Story id="components-skeleton-skeletontext--default" />
-</Preview>
+<Canvas>
+  <Story of={SkeletonTextStories.Default} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ## Feedback
 

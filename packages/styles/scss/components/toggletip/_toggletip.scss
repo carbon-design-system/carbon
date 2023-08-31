@@ -5,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../button';
 @use '../../config' as *;
 @use '../../spacing';
 @use '../../theme';
@@ -43,7 +44,10 @@
   }
 
   .#{$prefix}--toggletip {
-    @include custom-property.declaration('popover-offset', convert.rem(13px));
+    @include custom-property.declaration(
+      'popover-offset',
+      convert.to-rem(13px)
+    );
   }
 
   .#{$prefix}--toggletip-content {
@@ -69,6 +73,10 @@
     max-width: 18rem;
     padding: spacing.$spacing-05;
     row-gap: spacing.$spacing-05;
+  }
+
+  .#{$prefix}--toggletip-content p {
+    @include type.type-style('body-01');
   }
 
   .#{$prefix}--toggletip-actions {

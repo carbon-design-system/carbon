@@ -79,6 +79,11 @@ export const Default = (args) => (
   </StructuredListWrapper>
 );
 
+Default.args = {
+  isCondensed: false,
+  isFlush: false,
+};
+
 Default.argTypes = {
   selection: {
     control: {
@@ -89,13 +94,11 @@ Default.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
   isFlush: {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
   },
 };
 
@@ -116,6 +119,7 @@ export const Selection = (args) => {
           value={`row-${i}`}
           title={`row-${i}`}
           name="row-0"
+          aria-label={`row-${i}`}
         />
         <StructuredListCell>
           <CheckmarkFilled
@@ -134,7 +138,6 @@ export const Selection = (args) => {
           <StructuredListCell head>ColumnA</StructuredListCell>
           <StructuredListCell head>ColumnB</StructuredListCell>
           <StructuredListCell head>ColumnC</StructuredListCell>
-          <StructuredListCell head>{''}</StructuredListCell>
         </StructuredListRow>
       </StructuredListHead>
       <StructuredListBody>
@@ -162,6 +165,10 @@ export const Skeleton = (args) => (
     <StructuredListSkeleton {...args} />
   </div>
 );
+
+Skeleton.args = {
+  rowCount: 5,
+};
 
 Skeleton.argTypes = {
   isFlush: {
@@ -198,6 +205,5 @@ Skeleton.argTypes = {
     control: {
       type: 'number',
     },
-    defaultValue: 5,
   },
 };

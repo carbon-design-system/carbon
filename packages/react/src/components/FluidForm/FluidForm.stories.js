@@ -19,6 +19,7 @@ import FluidTimePicker from '../FluidTimePicker';
 import FluidTimePickerSelect from '../FluidTimePickerSelect';
 import FluidNumberInput from '../FluidNumberInput';
 import ModalWrapper from '../ModalWrapper';
+import mdx from './FluidForm.mdx';
 
 const additionalProps = {
   className: 'some-class',
@@ -48,11 +49,16 @@ const InvalidPasswordProps = {
 export default {
   title: 'Experimental/FluidForm',
   component: FluidForm,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 export const Default = () => (
   <>
-    <FluidForm {...additionalProps}>
+    <FluidForm aria-label="sample form" {...additionalProps}>
       <div style={{ display: 'flex' }}>
         <FluidTimePicker
           id="time-picker-1"

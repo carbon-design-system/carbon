@@ -5,12 +5,12 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../button';
 @use '../../config' as *;
 @use '../../spacing' as *;
 @use '../../motion' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
-@use '../../utilities/convert' as *;
 @use '../../utilities/box-shadow' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/keyframes' as *;
@@ -81,6 +81,10 @@
       .#{$prefix}--copy-btn__feedback {
       animation: $duration-fast-02 motion(standard, productive) show-feedback;
     }
+  }
+
+  .#{$prefix}--copy-btn svg {
+    fill: $icon-primary;
   }
 
   // Needs to come after reset so hidden text is not set to font-size: 100%

@@ -87,6 +87,11 @@ export const UxExample = () => {
 
 export const Playground = (args) => <InlineLoading {...args} />;
 
+Playground.args = {
+  description: 'Loading',
+  iconDescription: 'Loading data...',
+};
+
 Playground.argTypes = {
   className: {
     table: {
@@ -97,13 +102,11 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue: 'Loading',
   },
   iconDescription: {
     control: {
       type: 'text',
     },
-    defaultValue: 'Loading data...',
   },
   onSuccess: {
     table: {

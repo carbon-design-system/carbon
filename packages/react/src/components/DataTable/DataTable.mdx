@@ -1,5 +1,12 @@
-import { Story, Props, Source, Preview } from '@storybook/addon-docs';
-import { Table, TableHead, TableHeader, TableRow, TableCell, TableBody } from '../DataTable'
+import { Story, ArgsTable, Canvas, Meta } from '@storybook/blocks';
+import {
+  Table,
+  TableHead,
+  TableHeader,
+  TableRow,
+  TableCell,
+  TableBody,
+} from '../DataTable';
 
 # DataTable
 
@@ -9,12 +16,12 @@ import { Table, TableHead, TableHeader, TableRow, TableCell, TableBody } from '.
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/data-table/accessibility)
 
-<Preview>
+<Canvas>
   <Story id="components-datatable-basic--playground" />
-</Preview>
+</Canvas>
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
 ## Table of Contents
 
 - [Getting started](#getting-started)
@@ -24,7 +31,7 @@ import { Table, TableHead, TableHeader, TableRow, TableCell, TableBody } from '.
 - [Expansion](#expansion)
   - [Programmatic expansion](#programmatic-expansion)
 - [Selection](#selection)
-    - [Programmatic selection](#programmatic-selection)
+  - [Programmatic selection](#programmatic-selection)
 - [Filtering](#filtering)
 - [Batch actions](#batch-actions)
 - [Toolbar](#toolbar)
@@ -32,6 +39,8 @@ import { Table, TableHead, TableHeader, TableRow, TableCell, TableBody } from '.
 - [Text Wrapping Alignment](#text-wrapping-alignment)
   - [Table with `experimentalAutoAlign = true`](#table-with-experimentalautoalign--true)
   - [Table with `experimentalAutoAlign = false`](#table-with-experimentalautoalign--false)
+- [Accessibility Considerations](#accessibility-considerations)
+  - [Accessible Name](#accessible-name)
 - [Props](#props)
   - [Render props](#render-props)
     - [Prop getters](#prop-getters)
@@ -39,7 +48,7 @@ import { Table, TableHead, TableHeader, TableRow, TableCell, TableBody } from '.
     - [State](#state)
 - [Feedback](#feedback)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
 
 ## Getting started
 
@@ -146,9 +155,9 @@ into your render prop, visit the [render props](#render-props) section.
 In order to sort the rows in your data table, you will need to pass in the
 `isSortable` prop to the `DataTable` component.
 
-<Preview>
+<Canvas>
   <Story id="components-datatable-sorting--playground" />
-</Preview>
+</Canvas>
 
 Optionally, you can pass in `isSortable` to each `TableHeader` that you want to
 be sorted, or not sorted. This is useful if you only want to enable sorting on
@@ -199,9 +208,9 @@ function customSortRow(cellA, cellB, { sortDirection, sortStates, locale }) {
 The `DataTable` components supports row-level expansion when combined with the
 `TableExpandHeader`, `TableExpandRow`, and `TableExpandedRow` components.
 
-<Preview>
+<Canvas>
   <Story id="components-datatable-expansion--playground" />
-</Preview>
+</Canvas>
 
 _Note: press "Show code" above to view a code snippet of this example_
 
@@ -209,7 +218,9 @@ The `TableExpandHeader` is placed before all the other headers as a placeholder
 column. In each row that you would like to be expanded, you will use
 `TableExpandRow`. It's important that `getRowProps` is applied to
 `TableExpandRow` so that it has the necessary props. `TableExpandedRow` is used
-for the content that will be displayed only when the row is expanded.
+for the content that will be displayed only when the row is expanded. It's
+important that `getExpandedRowProps` is applied to `TableExpandedRow` so that it
+has the necessary props.
 
 ### Programmatic expansion
 
@@ -222,9 +233,9 @@ row id as a single argument.
 The `DataTable` component supports row selection when used with the
 `TableSelectAll` and `TableSelectRow` components.
 
-<Preview>
+<Canvas>
   <Story id="components-datatable-selection--playground" />
-</Preview>
+</Canvas>
 
 _Note: press "Show code" above to view a code snippet of this example_
 
@@ -258,9 +269,9 @@ the `TableToolbarSearch` component. Any input entered through
 By default `filterRows` is provided through our default implementation. However,
 you can provide your own method if needed.
 
-<Preview>
+<Canvas>
   <Story id="components-datatable-filtering--playground" />
-</Preview>
+</Canvas>
 
 In order to integrate filtering into your data table, you will need to provide
 the `onInputChange` function provided to you from `DataTable`'s render prop and
@@ -281,17 +292,17 @@ the following components:
 - `TableSelectAll`
 - `TableSelectRow`
 
-<Preview>
+<Canvas>
   <Story id="components-datatable-batch-actions--playground" />
-</Preview>
+</Canvas>
 
 _Note: press "Show code" above to view a code snippet of this example_
 
 ## Toolbar
 
-<Preview>
+<Canvas>
   <Story id="components-datatable-toolbar--playground" />
-</Preview>
+</Canvas>
 
 ### Overflow Menu
 
@@ -321,60 +332,48 @@ cell.
 
 ## Text Wrapping Alignment
 
-DataTable provides an experimental `experimentalAutoAlign` prop that you may
-opt into to have the table automatically align contents to the top when at least
-one table cell content is being wrapped on the table. Keep in mind this feature
-is experimental and might not be performant in tables with large datasets.
+DataTable provides an experimental `experimentalAutoAlign` prop that you may opt
+into to have the table automatically align contents to the top when at least one
+table cell content is being wrapped on the table. Keep in mind this feature is
+experimental and might not be performant in tables with large datasets.
 
 ### Table with `experimentalAutoAlign = true`
 
-<div style={{width: '300px'}}>
+<div style={{ width: '300px' }}>
   <Table experimentalAutoAlign>
     <TableHead>
       <TableRow>
-          <TableHeader>
-            Header1
-          </TableHeader>
-          <TableHeader>
-            Header2
-          </TableHeader>
-          <TableHeader>
-            Header3
-          </TableHeader>
+        <TableHeader>Header1</TableHeader>
+        <TableHeader>Header2</TableHeader>
+        <TableHeader>Header3</TableHeader>
       </TableRow>
     </TableHead>
     <TableBody>
-        <TableRow>
-          <TableCell>Wrapping content</TableCell>
-          <TableCell>content</TableCell>
-          <TableCell>content</TableCell>
-        </TableRow>
+      <TableRow>
+        <TableCell>Wrapping content</TableCell>
+        <TableCell>content</TableCell>
+        <TableCell>content</TableCell>
+      </TableRow>
     </TableBody>
   </Table>
 </div>
 
 ```jsx
-<div style={{width: '300px'}}>
+<div style={{ width: '300px' }}>
   <Table experimentalAutoAlign>
     <TableHead>
       <TableRow>
-          <TableHeader>
-            Header1
-          </TableHeader>
-          <TableHeader>
-            Header2
-          </TableHeader>
-          <TableHeader>
-            Header3
-          </TableHeader>
+        <TableHeader>Header1</TableHeader>
+        <TableHeader>Header2</TableHeader>
+        <TableHeader>Header3</TableHeader>
       </TableRow>
     </TableHead>
     <TableBody>
-        <TableRow>
-          <TableCell>Wrapping content</TableCell>
-          <TableCell>content</TableCell>
-          <TableCell>content</TableCell>
-        </TableRow>
+      <TableRow>
+        <TableCell>Wrapping content</TableCell>
+        <TableCell>content</TableCell>
+        <TableCell>content</TableCell>
+      </TableRow>
     </TableBody>
   </Table>
 </div>
@@ -382,61 +381,59 @@ is experimental and might not be performant in tables with large datasets.
 
 ### Table with `experimentalAutoAlign = false`
 
-<div style={{width: '300px'}}>
+<div style={{ width: '300px' }}>
   <Table>
     <TableHead>
       <TableRow>
-          <TableHeader>
-            Header1
-          </TableHeader>
-          <TableHeader>
-            Header2
-          </TableHeader>
-          <TableHeader>
-            Header3
-          </TableHeader>
+        <TableHeader>Header1</TableHeader>
+        <TableHeader>Header2</TableHeader>
+        <TableHeader>Header3</TableHeader>
       </TableRow>
     </TableHead>
     <TableBody>
-        <TableRow>
-          <TableCell>Wrapping content</TableCell>
-          <TableCell>content</TableCell>
-          <TableCell>content</TableCell>
-        </TableRow>
+      <TableRow>
+        <TableCell>Wrapping content</TableCell>
+        <TableCell>content</TableCell>
+        <TableCell>content</TableCell>
+      </TableRow>
     </TableBody>
   </Table>
 </div>
 
 ```jsx
-<div style={{width: '300px'}}>
+<div style={{ width: '300px' }}>
   <Table>
     <TableHead>
       <TableRow>
-          <TableHeader>
-            Header1
-          </TableHeader>
-          <TableHeader>
-            Header2
-          </TableHeader>
-          <TableHeader>
-            Header3
-          </TableHeader>
+        <TableHeader>Header1</TableHeader>
+        <TableHeader>Header2</TableHeader>
+        <TableHeader>Header3</TableHeader>
       </TableRow>
     </TableHead>
     <TableBody>
-        <TableRow>
-          <TableCell>Wrapping content</TableCell>
-          <TableCell>content</TableCell>
-          <TableCell>content</TableCell>
-        </TableRow>
+      <TableRow>
+        <TableCell>Wrapping content</TableCell>
+        <TableCell>content</TableCell>
+        <TableCell>content</TableCell>
+      </TableRow>
     </TableBody>
   </Table>
 </div>
 ```
 
+## Accessibility Considerations
+
+### Accessible Name
+
+To comply with accessibility requirements, make sure to supply the component
+with an accessible name by providing eiher the `aria-label`, `aria-labelledby`
+or `title` attribute to the `Table` component. Read more on the accessible
+naming rule
+[here](https://able.ibm.com/rules/archives/latest/doc/en-US/aria_accessiblename_exists.html).
+
 ## Props
 
-<Props />
+<ArgsTable />
 
 ### Render props
 
