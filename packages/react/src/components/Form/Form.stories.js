@@ -130,9 +130,17 @@ export const Default = () => (
         <FileUploader
           {...fileUploaderEvents}
           id="file-1"
-          labelDescription="Choose Files..."
-          iconDescription="Dismiss file"
           role="button"
+          labelDescription="Max file size is 500mb. Only .jpg files are supported."
+          buttonLabel="Add file"
+          buttonKind="primary"
+          size="md"
+          filenameStatus="edit"
+          accept={['.jpg', '.png']}
+          multiple={true}
+          disabled={false}
+          iconDescription="Dismiss file"
+          name=""
         />
       </FormGroup>
 
