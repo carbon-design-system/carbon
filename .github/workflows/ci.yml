@@ -14,30 +14,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  dedupe:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js 18.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18.x'
-      - name: Run yarn dedupe
-        run: yarn dedupe --check
-
-  format:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js 18.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18.x'
-      - name: Install dependencies
-        run: yarn install --immutable --immutable-cache
-      - name: Check formatting of project files
-        run: yarn format:diff
-
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -46,8 +22,20 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
+          cache: 'yarn'
+      - uses: actions/cache@v3
+        id: cache
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - name: Run yarn dedupe
+        run: yarn dedupe --check
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
+      - name: Check formatting of project files
+        run: yarn format:diff
       - name: Lint JavaScript files
         run: yarn lint
       - name: Lint Sass files
@@ -61,6 +49,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
+          cache: 'yarn'
       - uses: actions/cache@v3
         id: cache
         with:
@@ -69,7 +58,7 @@ jobs:
             */**/node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
       - name: Build project
         run: yarn build
       - name: Check generated styles
@@ -87,6 +76,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
+          cache: 'yarn'
       - uses: actions/cache@v3
         id: cache
         with:
@@ -95,7 +85,7 @@ jobs:
             */**/node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
       - uses: dorny/paths-filter@v2.11.1
         id: filter
         with:
@@ -126,6 +116,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
+          cache: 'yarn'
       - uses: actions/cache@v3
         id: cache
         with:
@@ -134,7 +125,7 @@ jobs:
             */**/node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
       - name: Install browsers
         run: yarn playwright install --with-deps
       - name: Build project
@@ -185,6 +176,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
+          cache: 'yarn'
       - uses: actions/cache@v3
         id: cache
         with:
@@ -193,7 +185,7 @@ jobs:
             */**/node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
       - name: Install browsers
         run: yarn playwright install --with-deps
       - name: Build project
