@@ -21,10 +21,6 @@ async function build() {
     filepath: path.resolve(__dirname, '..', 'src', 'index.ts'),
     outputDirectory: path.resolve(__dirname, '..'),
   };
-  const iconsEntrypoint = {
-    filepath: path.resolve(__dirname, '..', 'icons', 'src', 'index.js'),
-    outputDirectory: path.resolve(__dirname, '..', 'icons'),
-  };
   const formats = [
     {
       type: 'esm',
@@ -55,20 +51,6 @@ async function build() {
       format: format.type,
       preserveModules: true,
       preserveModulesRoot: path.dirname(reactEntrypoint.filepath),
-      banner,
-      exports: 'named',
-    });
-  }
-
-  const iconsInputConfig = getRollupConfig(iconsEntrypoint.filepath);
-  const iconsBundle = await rollup(iconsInputConfig);
-
-  // Build @carbon/react icons
-  for (const format of formats) {
-    await iconsBundle.write({
-      file:
-        format.type === 'commonjs' ? 'icons/index.js' : 'icons/index.esm.js',
-      format: format.type,
       banner,
       exports: 'named',
     });

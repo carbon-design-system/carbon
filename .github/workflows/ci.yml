@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  lint:
+  lint-build-e2e:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -39,6 +39,24 @@ jobs:
         run: yarn lint
       - name: Lint Sass files
         run: yarn lint:styles
+      - name: Build project
+        if: ${{ steps.filter.outputs.e2e == 'true' }}
+        run: yarn build
+      - uses: dorny/paths-filter@v2.11.1
+        id: filter
+        with:
+          filters: |
+            e2e:
+              - 'e2e/**'
+              - 'packages/icons/**'
+              - 'packages/icons-react/**'
+              - 'packages/icons-vue/**'
+              - 'packages/pictograms/**'
+              - 'packages/pictograms-react/**'
+              - 'packages/icon-build-helpers/**'
+      - name: Run e2e tests
+        if: ${{ steps.filter.outputs.e2e == 'true' }}
+        run: yarn test:e2e
 
   test:
     runs-on: ubuntu-latest
@@ -65,43 +83,6 @@ jobs:
       - name: Run tests
         run: yarn test --ci
 
-  e2e:
-    name: 'test:e2e'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js 18.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18.x'
-      - uses: actions/cache@v3
-        id: cache
-        with:
-          path: |
-            node_modules
-            */**/node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-      - name: Install dependencies
-        run: yarn install --immutable --immutable-cache
-      - uses: dorny/paths-filter@v2.11.1
-        id: filter
-        with:
-          filters: |
-            e2e:
-              - 'e2e/**'
-              - 'packages/icons/**'
-              - 'packages/icons-react/**'
-              - 'packages/icons-vue/**'
-              - 'packages/pictograms/**'
-              - 'packages/pictograms-react/**'
-              - 'packages/icon-build-helpers/**'
-      - name: Build project
-        if: ${{ steps.filter.outputs.e2e == 'true' }}
-        run: yarn build
-      - name: Run e2e tests
-        if: ${{ steps.filter.outputs.e2e == 'true' }}
-        run: yarn test:e2e
-
   vrt-runner:
     strategy:
       matrix:
@@ -124,8 +105,8 @@ jobs:
         run: yarn install --immutable --immutable-cache
       - name: Install browsers
         run: yarn playwright install --with-deps
-      - name: Build project
-        run: yarn build
+      - name: Build required packages
+        run: npx lerna run build --scope=@carbon/{icons,icons-react,layout,type,colors,themes,icon-helpers,feature-flags}
       - name: Build storybook
         run:
           STORYBOOK_STORE_7=false yarn workspace @carbon/react storybook:build
@@ -183,8 +164,8 @@ jobs:
         run: yarn install --immutable --immutable-cache
       - name: Install browsers
         run: yarn playwright install --with-deps
-      - name: Build project
-        run: yarn build
+      - name: Build required packages
+        run: npx lerna run build --scope=@carbon/{icons,icons-react,layout,type,colors,themes,icon-helpers,feature-flags}
       - name: Build storybook
         run:
           STORYBOOK_STORE_7=false yarn workspace @carbon/react storybook:build

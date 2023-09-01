@@ -16,7 +16,7 @@ import {
   StructuredListInput,
   StructuredListCell,
 } from '@carbon/react';
-import { CheckmarkFilled } from '@carbon/react/icons';
+import { CheckmarkFilled } from '@carbon/icons-react';
 
 const prefix = 'cds';
 const dataTestId = 'structured-list-test-id';
