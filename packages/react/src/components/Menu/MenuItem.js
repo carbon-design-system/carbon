@@ -149,8 +149,7 @@ const MenuItem = React.forwardRef(function MenuItem(
       )}
       {hasChildren && (
         <>
-          <div
-            className={`${prefix}--menu-item__shortcut ${prefix}--menu-item__caret`}>
+          <div className={`${prefix}--menu-item__shortcut`}>
             <CaretRight />
           </div>
           <Menu
