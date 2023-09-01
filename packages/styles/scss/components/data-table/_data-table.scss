@@ -43,8 +43,10 @@
   // Table title text
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table-header {
-    padding: $spacing-05 0 $spacing-06 $spacing-05;
     background: $layer;
+    padding-block-end: $spacing-06;
+    padding-block-start: $spacing-05;
+    padding-inline: $spacing-05;
   }
 
   .#{$prefix}--data-table-header__title {
@@ -86,7 +88,6 @@
     @include type-style('body-compact-01');
 
     background-color: $layer;
-
     inline-size: 100%;
   }
 

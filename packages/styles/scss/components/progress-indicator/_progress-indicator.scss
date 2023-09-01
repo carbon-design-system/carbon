@@ -70,11 +70,12 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     position: relative;
     z-index: 1;
     flex-shrink: 0;
-    margin: convert.to-rem(10px) $spacing-03 0 0;
     block-size: $spacing-05;
     border-radius: 50%;
     fill: $interactive;
     inline-size: $spacing-05;
+    margin-block-start: convert.to-rem(10px);
+    margin-inline-end: $spacing-03;
   }
 
   .#{$prefix}--progress--space-equal .#{$prefix}--progress-text {

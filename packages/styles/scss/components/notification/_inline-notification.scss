@@ -182,7 +182,7 @@
   .#{$prefix}--inline-notification__details {
     display: flex;
     flex-grow: 1;
-    margin: 0 $spacing-09 0 convert.to-rem(13px);
+    margin-inline: convert.to-rem(13px) $spacing-09;
 
     @include breakpoint(md) {
       margin: 0 convert.to-rem(13px);
@@ -204,7 +204,7 @@
   .#{$prefix}--inline-notification__title {
     @include type-style('heading-compact-01');
 
-    margin: 0 $spacing-02 0 0;
+    margin-inline-end: $spacing-02;
   }
 
   .#{$prefix}--inline-notification__subtitle {

@@ -149,9 +149,8 @@ $content-padding: 0 0 0 $spacing-05 !default;
     @include type-style('body-01');
 
     z-index: 1;
-    margin: $title-margin;
     inline-size: 100%;
-    padding-inline-end: $spacing-05;
+    padding-inline-start: $spacing-05;
     text-align: start;
   }
 
@@ -292,6 +291,17 @@ $content-padding: 0 0 0 $spacing-05 !default;
   .#{$prefix}--accordion__arrow,
   .#{$prefix}--accordion__item--active .#{$prefix}--accordion__arrow {
     @include high-contrast-mode('icon-fill');
+  }
+
+  // RTL overrides
+  [dir='rtl'] .#{$prefix}--accordion--start .#{$prefix}--accordion__heading {
+    padding-inline-end: 0;
+    padding-inline-start: layout.density('padding-inline');
+  }
+
+  [dir='rtl'] .#{$prefix}--accordion--start .#{$prefix}--accordion__title {
+    margin-inline-end: 0;
+    padding-inline-start: 0;
   }
 }
 

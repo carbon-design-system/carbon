@@ -98,7 +98,7 @@
   .#{$prefix}--pagination
     .#{$prefix}--select--inline
     .#{$prefix}--select-input {
-    padding: 0 2.25rem 0 $spacing-05;
+    padding-inline: $spacing-05 2.25rem;
   }
 
   .#{$prefix}--pagination--sm .#{$prefix}--select-input {
@@ -279,5 +279,10 @@
   .#{$prefix}--pagination__button,
   .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
     @include high-contrast-mode('outline');
+  }
+
+  // RTL overrides
+  [dir='rtl'] .#{$prefix}--pagination .#{$prefix}--select__arrow {
+    transform: translate(0.5rem, -50%);
   }
 }
