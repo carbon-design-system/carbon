@@ -113,6 +113,10 @@
     display: flex;
   }
 
+  [dir='rtl'] .#{$prefix}--menu-item__caret {
+    transform: rotate(0.5turn);
+  }
+
   .#{$prefix}--menu-item-group > ul,
   .#{$prefix}--menu-item-radio-group > ul {
     @include component-reset.reset;
