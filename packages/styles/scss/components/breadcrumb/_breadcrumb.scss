@@ -146,6 +146,12 @@
     inset-inline-start: $caret-size * 2;
   }
 
+  [dir='rtl']
+    .#{$prefix}--breadcrumb-menu-options.#{$prefix}--overflow-menu-options::after {
+    inset-inline-end: $caret-size * 2;
+    inset-inline-start: initial;
+  }
+
   // Skeleton State
   .#{$prefix}--breadcrumb.#{$prefix}--skeleton .#{$prefix}--link {
     @include skeleton;

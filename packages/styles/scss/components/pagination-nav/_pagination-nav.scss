@@ -168,4 +168,9 @@
   .#{$prefix}--pagination-nav__accessibility-label {
     @include visually-hidden;
   }
+
+  // RTL overrides
+  [dir='rtl'] .#{$prefix}--pagination-nav__list-item svg {
+    transform: rotate(0.5turn);
+  }
 }

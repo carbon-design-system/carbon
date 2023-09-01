@@ -193,7 +193,7 @@
   .#{$prefix}--actionable-notification__details {
     display: flex;
     flex-grow: 1;
-    margin: 0 $spacing-09 0 convert.to-rem(13px);
+    margin-inline: convert.to-rem(13px) $spacing-09;
   }
 
   .#{$prefix}--actionable-notification:not(

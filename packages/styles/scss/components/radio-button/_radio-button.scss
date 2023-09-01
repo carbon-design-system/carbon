@@ -83,13 +83,12 @@ $radio-border-width: 1px !default;
 
     flex-shrink: 0;
     border: $radio-border-width solid $icon-primary;
-    margin: convert.to-rem(1px) $spacing-03 convert.to-rem(2px)
-      convert.to-rem(2px);
     background-color: transparent;
     block-size: convert.to-rem(18px);
     border-radius: 50%;
-
     inline-size: convert.to-rem(18px);
+    margin-block: convert.to-rem(1px) convert.to-rem(2px);
+    margin-inline: convert.to-rem(2px) $spacing-03;
   }
 
   .#{$prefix}--radio-button:checked
@@ -169,8 +168,8 @@ $radio-border-width: 1px !default;
   }
 
   .#{$prefix}--radio-button__invalid-icon {
-    margin: 0 convert.to-rem(1px) 0 convert.to-rem(3px);
     fill: $support-error;
+    margin-inline: convert.to-rem(3px) convert.to-rem(1px);
   }
 
   .#{$prefix}--radio-button__invalid-icon--warning {

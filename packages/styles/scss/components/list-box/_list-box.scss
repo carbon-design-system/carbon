@@ -307,11 +307,13 @@ $list-box-menu-width: convert.to-rem(300px);
     display: inline-flex;
     overflow: hidden;
     align-items: center;
-    padding: 0 $spacing-09 0 $spacing-05;
     // Account for the border in `.bx--list-box`
     block-size: calc(100% + 1px);
     cursor: pointer;
     outline: none;
+    padding-block: 0;
+    padding-inline-end: $spacing-09;
+    padding-inline-start: $spacing-05;
     text-overflow: ellipsis;
     vertical-align: top;
     white-space: nowrap;
