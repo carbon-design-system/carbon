@@ -8,12 +8,11 @@
  */
 
 @use '@carbon/styles/scss/config' as *;
-@use '../popover/popover';
+@use '../popover/popover' as *;
 @use '@carbon/styles/scss/components/tooltip';
 @use '@carbon/styles/scss/theme' as *;
 
 // For some reason `#{prefix}-tooltip` doesn't work here, will need to investigate
-
 :host(#{$prefix}-tooltip[data-table]) {
   display: contents;
 
