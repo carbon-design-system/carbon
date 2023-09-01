@@ -82,8 +82,15 @@ const Menu = React.forwardRef(function Menu(
       focusReturn.current = document.activeElement;
 
       const pos = calculatePosition();
-      menu.current.style.left = `${pos[0]}px`;
-      menu.current.style.top = `${pos[1]}px`;
+      if (document?.dir === 'rtl' && !rest?.id?.includes('MenuButton')) {
+        menu.current.style.insetInlineStart = `initial`;
+        menu.current.style.insetInlineEnd = `${pos[0]}px`;
+      } else {
+        menu.current.style.insetInlineStart = `${pos[0]}px`;
+        menu.current.style.insetInlineEnd = `initial`;
+      }
+
+      menu.current.style.insetBlockStart = `${pos[1]}px`;
       setPosition(pos);
 
       menu.current.focus();
