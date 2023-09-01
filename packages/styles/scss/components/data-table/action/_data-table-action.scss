@@ -416,7 +416,8 @@
     align-items: center;
   }
 
-  .#{$prefix}--action-list .#{$prefix}--btn {
+  .#{$prefix}--action-list .#{$prefix}--btn,
+  .#{$prefix}--batch-summary .#{$prefix}--btn {
     color: $text-on-color;
     padding-inline-end: $spacing-05;
     padding-inline-start: $spacing-05;
@@ -453,7 +454,8 @@
     display: none;
   }
 
-  .#{$prefix}--action-list .#{$prefix}--btn--primary:focus {
+  .#{$prefix}--action-list .#{$prefix}--btn--primary:focus,
+  .#{$prefix}--batch-summary .#{$prefix}--btn--primary:focus {
     outline: 2px solid $layer;
     outline-offset: convert.to-rem(-2px);
   }

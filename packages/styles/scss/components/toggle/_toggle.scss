@@ -218,4 +218,15 @@
     inline-size: convert.to-rem(24px);
     margin-inline-start: convert.to-rem(8px);
   }
+
+  // RTL overrides
+  [dir='rtl'] .#{$prefix}--toggle__switch--checked::before {
+    transform: translateX(convert.to-rem(-24px));
+  }
+
+  [dir='rtl']
+    .#{$prefix}--toggle__appearance--sm
+    .#{$prefix}--toggle__switch--checked::before {
+    transform: translateX(convert.to-rem(-16px));
+  }
 }

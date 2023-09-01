@@ -197,6 +197,13 @@ $popover-caret-height: custom-property.get-var(
     transform: translate(-50%, calc(100% + $popover-offset));
   }
 
+  [dir='rtl']
+    .#{$prefix}--popover--bottom
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    transform: translate(50%, calc(100% + $popover-offset));
+  }
+
   .#{$prefix}--popover--bottom-left
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
@@ -208,12 +215,27 @@ $popover-caret-height: custom-property.get-var(
     );
   }
 
+  [dir='rtl']
+    .#{$prefix}--popover--bottom-left
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-end: 0;
+    inset-inline-start: initial;
+  }
+
   .#{$prefix}--popover--bottom-right
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
     inset-block-end: 0;
     inset-inline-end: 0;
     transform: translate($popover-offset, calc(100% + $popover-offset));
+  }
+
+  [dir='rtl']
+    .#{$prefix}--popover--bottom-right
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-start: 0;
   }
 
   // Popover hover area placement
@@ -251,6 +273,21 @@ $popover-caret-height: custom-property.get-var(
     transform: translate(-50%, $popover-offset);
   }
 
+  [dir='rtl']
+    .#{$prefix}--popover--bottom
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  [dir='rtl']
+    .#{$prefix}--popover--bottom-left
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  [dir='rtl']
+    .#{$prefix}--popover--bottom-right
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    transform: translate(50%, $popover-offset);
+  }
+
   //-----------------------------------------------------------------------------
   // Top
   //-----------------------------------------------------------------------------
@@ -264,6 +301,13 @@ $popover-caret-height: custom-property.get-var(
     transform: translate(-50%, calc(-100% - $popover-offset));
   }
 
+  [dir='rtl']
+    .#{$prefix}--popover--top
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    transform: translate(50%, calc(-100% - $popover-offset));
+  }
+
   .#{$prefix}--popover--top-left
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
@@ -275,12 +319,27 @@ $popover-caret-height: custom-property.get-var(
     );
   }
 
+  [dir='rtl']
+    .#{$prefix}--popover--top-left
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-end: 0;
+    inset-inline-start: initial;
+  }
+
   .#{$prefix}--popover--top-right
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
     inset-block-start: 0;
     inset-inline-end: 0;
     transform: translate($popover-offset, calc(-100% - $popover-offset));
+  }
+
+  [dir='rtl']
+    .#{$prefix}--popover--top-right
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-start: 0;
   }
 
   // Popover hover area placement
@@ -314,6 +373,21 @@ $popover-caret-height: custom-property.get-var(
     inset-block-start: 0;
     inset-inline-start: 50%;
     transform: translate(-50%, calc(-1 * $popover-offset));
+  }
+
+  [dir='rtl']
+    .#{$prefix}--popover--top
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  [dir='rtl']
+    .#{$prefix}--popover--top-left
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  [dir='rtl']
+    .#{$prefix}--popover--top-right
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    transform: translate(50%, calc(-1 * $popover-offset));
   }
 
   //-----------------------------------------------------------------------------
@@ -350,6 +424,22 @@ $popover-caret-height: custom-property.get-var(
     transform: translate($popover-offset, calc(0.5 * $popover-offset + 16px));
   }
 
+  [dir='rtl']
+    .#{$prefix}--popover--right
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  [dir='rtl']
+    .#{$prefix}--popover--right-bottom
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  [dir='rtl']
+    .#{$prefix}--popover--right-top
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-end: 100%;
+    inset-inline-start: initial;
+  }
+
   // Popover hover area placement
   .#{$prefix}--popover--right
     > .#{$prefix}--popover
@@ -383,6 +473,22 @@ $popover-caret-height: custom-property.get-var(
     inset-block-start: 50%;
     inset-inline-start: 100%;
     transform: translate(calc($popover-offset - 100%), -50%);
+  }
+
+  [dir='rtl']
+    .#{$prefix}--popover--right
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  [dir='rtl']
+    .#{$prefix}--popover--right-top
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  [dir='rtl']
+    .#{$prefix}--popover--right-bottom
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    inset-inline-end: 100%;
+    inset-inline-start: initial;
   }
 
   //-----------------------------------------------------------------------------
@@ -426,6 +532,22 @@ $popover-caret-height: custom-property.get-var(
     );
   }
 
+  [dir='rtl']
+    .#{$prefix}--popover--left
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  [dir='rtl']
+    .#{$prefix}--popover--left-bottom
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  [dir='rtl']
+    .#{$prefix}--popover--left-top
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-end: initial;
+    inset-inline-start: 100%;
+  }
+
   // Popover hover area placement
   .#{$prefix}--popover--left
     > .#{$prefix}--popover
@@ -459,6 +581,22 @@ $popover-caret-height: custom-property.get-var(
     inset-block-start: 50%;
     inset-inline-end: 100%;
     transform: translate(calc(-1 * $popover-offset + 100%), -50%);
+  }
+
+  [dir='rtl']
+    .#{$prefix}--popover--left
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  [dir='rtl']
+    .#{$prefix}--popover--left-top
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  [dir='rtl']
+    .#{$prefix}--popover--left-bottom
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    inset-inline-end: initial;
+    inset-inline-start: 100%;
   }
 
   //-----------------------------------------------------------------------------
