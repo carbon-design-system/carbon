@@ -116,7 +116,7 @@
     }
   },
   "lint-staged": {
-    "**/*.js": [
+    "**/*.{js,jsx,ts,tsx}": [
       "prettier --cache --write",
       "eslint"
     ],
