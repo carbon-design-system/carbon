@@ -9,7 +9,7 @@ import React from 'react';
 import TextArea from '../TextArea';
 import userEvent from '@testing-library/user-event';
 import { fireEvent, waitFor } from '@testing-library/react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, createEvent } from '@testing-library/react';
 
 const prefix = 'cds';
 
@@ -328,7 +328,7 @@ describe('TextArea', () => {
 
       fireEvent.change(screen.getByRole('textbox'), {
         target: {
-          value: 'one two three four five six seven eight nine ten eleven',
+          value: 'one two three four five six seven eight nine ten',
         },
       });
 
@@ -370,6 +370,85 @@ describe('TextArea', () => {
 
       await waitFor(() => {
         expect(screen.getByRole('textbox')).toHaveValue('one two three');
+      });
+    });
+
+    it('should not trim words when enableCounter is disabled and then enabled', async () => {
+      const { rerender } = render(
+        <TextArea
+          id="input-1"
+          labelText="TextArea label"
+          enableCounter={false}
+          maxCount={5}
+          counterMode="word"
+          defaultValue="one two three four five"
+        />
+      );
+
+      fireEvent.change(screen.getByRole('textbox'), {
+        target: {
+          value: 'one two three four five six seven eight',
+        },
+      });
+
+      await waitFor(() => {
+        expect(screen.getByRole('textbox')).toHaveValue(
+          'one two three four five six seven eight'
+        );
+      });
+
+      rerender(
+        <TextArea
+          id="input-1"
+          labelText="TextArea label"
+          enableCounter={true}
+          maxCount={5}
+          counterMode="word"
+          // defaultValue="one two three four five"
+        />
+      );
+
+      await waitFor(() => {
+        expect(screen.getByRole('textbox')).toHaveValue(
+          'one two three four five six seven eight'
+        );
+      });
+    });
+    it('should trim words when text larger than max limit is pasted', async () => {
+      render(
+        <TextArea
+          id="input-1"
+          labelText="TextArea label"
+          enableCounter={true}
+          maxCount={5}
+          counterMode="word"
+          defaultValue="one two three four five"
+        />
+      );
+
+      const clipboardEvent = new Event('paste', {
+        bubbles: true,
+        cancelable: true,
+        composed: true,
+      });
+
+      clipboardEvent.clipboardData = {
+        getData: () => 'one two three four five six seven eight nine ten',
+      };
+
+      const paste = createEvent.paste(screen.getByRole('textbox'), {
+        clipboardData: {
+          getData: () =>
+            'test pasted content that should be trimmed to match max limit',
+        },
+      });
+
+      fireEvent(screen.getByRole('textbox'), paste);
+
+      await waitFor(() => {
+        expect(screen.getByRole('textbox')).toHaveValue(
+          'test pasted content that should'
+        );
       });
     });
   });

@@ -198,13 +198,43 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     onChange: TextAreaProps['onChange'];
     onClick: TextAreaProps['onClick'];
     maxLength?: number;
+    onPaste?: React.ClipboardEventHandler<HTMLTextAreaElement>;
   } = {
     id,
     onKeyDown: (evt) => {
       if (!other.disabled && enableCounter && counterMode === 'word') {
         const key = evt.which;
-        if (textCount == maxCount && key === 32) {
+        console.log(key);
+        if (maxCount && textCount >= maxCount && key === 32) {
           evt.preventDefault();
+        }
+      }
+    },
+    onPaste: (evt) => {
+      if (!other.disabled) {
+        if (
+          counterMode === 'word' &&
+          enableCounter &&
+          typeof maxCount !== 'undefined' &&
+          textareaRef.current !== null
+        ) {
+          const matchedWords = evt.clipboardData.getData('Text').match(/\w+/g);
+
+          if (matchedWords && matchedWords.length > maxCount) {
+            evt.preventDefault();
+
+            const first_max = evt.clipboardData
+              .getData('Text')
+              .split(/\s+/)
+              .slice(0, maxCount)
+              .join(' ');
+
+            setTimeout(() => {
+              setTextCount(maxCount);
+            }, 0);
+
+            textareaRef.current.value = first_max;
+          }
         }
       }
     },
@@ -230,7 +260,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
             typeof maxCount !== 'undefined' &&
             textareaRef.current !== null
           ) {
-            const matchedWords = evt.target.value.match(/\w+/g);
+            const matchedWords = evt.target?.value?.match(/\w+/g);
             if (matchedWords && matchedWords.length <= maxCount) {
               textareaRef.current.removeAttribute('maxLength');
 
@@ -238,15 +268,9 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
                 setTextCount(matchedWords.length);
               }, 0);
             } else if (matchedWords && matchedWords.length > maxCount) {
-              const first_max = evt.target.value
-                .split(/\s+/)
-                .slice(0, maxCount)
-                .join(' ');
-
               setTimeout(() => {
-                setTextCount(maxCount);
+                setTextCount(matchedWords.length);
               }, 0);
-              textareaRef.current.value = first_max;
             }
           }
         }
