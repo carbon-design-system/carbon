@@ -9,7 +9,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 
-import { CaretRight, Checkmark } from '@carbon/react/icons';
+import { CaretRight, CaretLeft, Checkmark } from '@carbon/react/icons';
 import { keys, match } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
 import { useMergedRefs } from '../../internal/useMergedRefs';
@@ -40,6 +40,7 @@ const MenuItem = React.forwardRef(function MenuItem(
   const menuItem = useRef();
   const ref = useMergedRefs([forwardRef, menuItem]);
   const [boundaries, setBoundaries] = useState({ x: -1, y: -1 });
+  const [isRtl, setRtl] = useState(false);
 
   const hasChildren = Boolean(children);
   const [submenuOpen, setSubmenuOpen] = useState(false);
@@ -60,10 +61,17 @@ const MenuItem = React.forwardRef(function MenuItem(
 
   function openSubmenu() {
     const { x, y, width, height } = menuItem.current.getBoundingClientRect();
-    setBoundaries({
-      x: [x, x + width],
-      y: [y, y + height],
-    });
+    if (isRtl) {
+      setBoundaries({
+        x: [-x, x - width],
+        y: [y, y + height],
+      });
+    } else {
+      setBoundaries({
+        x: [x, x + width],
+        y: [y, y + height],
+      });
+    }
 
     setSubmenuOpen(true);
   }
@@ -126,6 +134,14 @@ const MenuItem = React.forwardRef(function MenuItem(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (document?.dir === 'rtl') {
+      setRtl(true);
+    } else {
+      setRtl(false);
+    }
+  }, []);
+
   return (
     <li
       role="menuitem"
@@ -150,7 +166,7 @@ const MenuItem = React.forwardRef(function MenuItem(
       {hasChildren && (
         <>
           <div className={`${prefix}--menu-item__shortcut`}>
-            <CaretRight />
+            {isRtl ? <CaretLeft /> : <CaretRight />}
           </div>
           <Menu
             label={label}
