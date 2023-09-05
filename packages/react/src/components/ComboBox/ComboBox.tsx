@@ -6,9 +6,30 @@
  */
 
 import cx from 'classnames';
-import Downshift from 'downshift';
-import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import Downshift, {
+  ControllerStateAndHelpers,
+  StateChangeOptions,
+} from 'downshift';
+import PropTypes from 'prop-types';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+  useRef,
+  forwardRef,
+  type ComponentProps,
+  type ReactNode,
+  type ComponentType,
+  type ForwardedRef,
+  type ReactElement,
+  type RefAttributes,
+  type PropsWithChildren,
+  type PropsWithoutRef,
+  type InputHTMLAttributes,
+  type MouseEvent,
+  type KeyboardEvent,
+  type FocusEvent,
+} from 'react';
 import { Text } from '../Text';
 import {
   Checkmark,
@@ -37,21 +58,36 @@ const {
   changeInput,
 } = Downshift.stateChangeTypes;
 
-const defaultItemToString = (item) => {
+const defaultItemToString = <ItemType,>(item: ItemType | null) => {
   if (typeof item === 'string') {
     return item;
   }
-
-  return item && item.label;
+  if (typeof item === 'number') {
+    return `${item}`;
+  }
+  if (
+    item !== null &&
+    typeof item === 'object' &&
+    'label' in item &&
+    typeof item['label'] === 'string'
+  ) {
+    return item['label'];
+  }
+  return '';
 };
 
 const defaultShouldFilterItem = () => true;
 
-const getInputValue = ({
+const getInputValue = <ItemType,>({
   initialSelectedItem,
   inputValue,
   itemToString,
   selectedItem,
+}: {
+  initialSelectedItem?: ItemType | null;
+  inputValue: string;
+  itemToString: ItemToStringHandler<ItemType>;
+  selectedItem?: ItemType | null;
 }) => {
   if (selectedItem) {
     return itemToString(selectedItem);
@@ -64,9 +100,12 @@ const getInputValue = ({
   return inputValue || '';
 };
 
-const findHighlightedIndex = (
-  { items, itemToString = defaultItemToString },
-  inputValue
+const findHighlightedIndex = <ItemType,>(
+  {
+    items,
+    itemToString = defaultItemToString,
+  }: { items: ItemType[]; itemToString?: ItemToStringHandler<ItemType> },
+  inputValue?: string | null
 ) => {
   if (!inputValue) {
     return -1;
@@ -88,11 +127,14 @@ const getInstanceId = setupGetInstanceId();
 
 type ExcludedAttributes = 'id' | 'onChange' | 'onClick' | 'type' | 'size';
 
-export interface ComboBoxProps
-  extends Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    ExcludedAttributes
-  > {
+interface OnChangeData<ItemType> {
+  selectedItem: ItemType | null;
+}
+
+type ItemToStringHandler<ItemType> = (item: ItemType | null) => string;
+
+export interface ComboBoxProps<ItemType>
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes> {
   /**
    * Specify a label to be read by screen readers on the container node
    * 'aria-label' of the ListBox component.
@@ -123,13 +165,13 @@ export interface ComboBoxProps
   /**
    * Additional props passed to Downshift
    */
-  downshiftProps?: React.ComponentProps<typeof Downshift>;
+  downshiftProps?: ComponentProps<typeof Downshift<ItemType>>;
 
   /**
    * Provide helper text that is used alongside the control label for
    * additional help
    */
-  helperText?: string;
+  helperText?: ReactNode;
 
   /**
    * Specify a custom `id` for the input
@@ -140,7 +182,7 @@ export interface ComboBoxProps
    * Allow users to pass in an arbitrary item or a string (in case their items are an array of strings)
    * from their collection that are pre-selected
    */
-  initialSelectedItem?: object | string | number;
+  initialSelectedItem?: ItemType;
 
   /**
    * Specify if the currently selected value is invalid.
@@ -150,26 +192,26 @@ export interface ComboBoxProps
   /**
    * Message which is displayed if the value is invalid.
    */
-  invalidText?: ReactNodeLike;
+  invalidText?: ReactNode;
 
   /**
    * Optional function to render items as custom components instead of strings.
    * Defaults to null and is overridden by a getter
    */
-  itemToElement?: React.ComponentType | null;
+  itemToElement?: ComponentType<ItemType> | null;
 
   /**
    * Helper function passed to downshift that allows the library to render a
    * given item to a string label. By default, it extracts the `label` field
    * from a given item to serve as the item label in the list
    */
-  itemToString?: (item: unknown) => string;
+  itemToString?: ItemToStringHandler<ItemType>;
 
   /**
    * We try to stay as generic as possible here to allow individuals to pass
    * in a collection of whatever kind of data structure they prefer
    */
-  items: (object | string | number)[];
+  items: ItemType[];
 
   /**
    * @deprecated
@@ -183,7 +225,7 @@ export interface ComboBoxProps
    * `({ selectedItem }) => void`
   //  * @param {{ selectedItem }}
    */
-  onChange: (data: { selectedItem: any }) => void;
+  onChange: (data: OnChangeData<ItemType>) => void;
 
   /**
    * Callback function to notify consumer when the text input changes.
@@ -198,7 +240,7 @@ export interface ComboBoxProps
    * `(evt) => void`
    * @param {MouseEvent} event
    */
-  onToggleClick?: (evt: MouseEvent) => void;
+  onToggleClick?: (evt: MouseEvent<HTMLButtonElement>) => void;
 
   /**
    * Used to provide a placeholder text node before a user enters any input.
@@ -214,14 +256,18 @@ export interface ComboBoxProps
   /**
    * For full control of the selection
    */
-  selectedItem?: object | string | number;
+  selectedItem?: ItemType | null;
 
   /**
    * Specify your own filtering logic by passing in a `shouldFilterItem`
    * function that takes in the current input and an item and passes back
    * whether or not the item should be filtered.
    */
-  shouldFilterItem?: (input: any) => boolean;
+  shouldFilterItem?: (input: {
+    item: ItemType;
+    itemToString?: ItemToStringHandler<ItemType>;
+    inputValue: string | null;
+  }) => boolean;
 
   /**
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
@@ -232,13 +278,13 @@ export interface ComboBoxProps
    * Provide text to be used in a `<label>` element that is tied to the
    * combobox via ARIA attributes.
    */
-  titleText?: ReactNodeLike;
+  titleText?: ReactNode;
 
   /**
    * Specify a custom translation function that takes in a message identifier
    * and returns the localized string for the message
    */
-  translateWithId?: (id: any) => string;
+  translateWithId?: (id: string) => string;
 
   /**
    * Currently supports either the default type, or an inline variant
@@ -253,12 +299,16 @@ export interface ComboBoxProps
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText?: ReactNodeLike;
+  warnText?: ReactNode;
 }
 
-const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
+const ComboBox = forwardRef(
+  <ItemType,>(
+    props: ComboBoxProps<ItemType>,
+    ref: ForwardedRef<HTMLInputElement>
+  ) => {
   const {
-    ['aria-label']: ariaLabel,
+    ['aria-label']: ariaLabel = 'Choose an item',
     ariaLabel: deprecatedAriaLabel,
     className: containerClassName,
     direction,
@@ -271,7 +321,7 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
     invalidText,
     items,
     itemToElement,
-    itemToString,
+    itemToString = defaultItemToString,
     light,
     onChange,
     onInputChange,
@@ -279,7 +329,7 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
     placeholder,
     readOnly,
     selectedItem,
-    shouldFilterItem,
+    shouldFilterItem = defaultShouldFilterItem,
     size,
     titleText,
     translateWithId,
@@ -301,9 +351,10 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
     })
   );
   const [isFocused, setIsFocused] = useState(false);
-  const [prevSelectedItem, setPrevSelectedItem] = useState<any>();
-  const [doneInitialSelectedItem, setDoneInitialSelectedItem] = useState(false);
-  const [highlightedIndex, setHighlightedIndex] = useState<number>();
+  const [prevSelectedItem, setPrevSelectedItem] = useState<ItemType | null>();
+  const [doneInitialSelectedItem, setDoneInitialSelectedItem] =
+    useState(false);
+  const [highlightedIndex, setHighlightedIndex] = useState<number | null>();
   const savedOnInputChange = useRef(onInputChange);
 
   if (!doneInitialSelectedItem || prevSelectedItem !== selectedItem) {
@@ -319,7 +370,11 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
     );
   }
 
-  const filterItems = (items, itemToString, inputValue) =>
+  const filterItems = (
+    items: ItemType[],
+    itemToString: ItemToStringHandler<ItemType>,
+    inputValue: string | null
+  ) =>
     items.filter((item) =>
       shouldFilterItem
         ? shouldFilterItem({
@@ -330,13 +385,13 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
         : defaultShouldFilterItem()
     );
 
-  const handleOnChange = (selectedItem) => {
+  const handleOnChange = (selectedItem: ItemType | null) => {
     if (onChange) {
       onChange({ selectedItem });
     }
   };
 
-  const handleOnInputValueChange = (inputValue) => {
+  const handleOnInputValueChange = (inputValue?: string) => {
     setInputValue(inputValue || '');
   };
 
@@ -356,10 +411,14 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
     }
   };
 
-  const getHighlightedIndex = (changes) => {
+  const getHighlightedIndex = (changes: StateChangeOptions<ItemType>) => {
     if (Object.prototype.hasOwnProperty.call(changes, 'inputValue')) {
       const { inputValue } = changes;
-      const filteredItems = filterItems(items, itemToString, inputValue);
+      const filteredItems = filterItems(
+        items,
+        itemToString,
+        inputValue || null
+      );
       const indexToHighlight = findHighlightedIndex(
         {
           ...props,
@@ -370,12 +429,14 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
       setHighlightedIndex(indexToHighlight);
       return indexToHighlight;
     }
-    return highlightedIndex;
+    return highlightedIndex || 0;
   };
 
   const handleOnStateChange = (
-    changes,
-    { setHighlightedIndex: updateHighlightedIndex }
+    changes: StateChangeOptions<ItemType>,
+    {
+      setHighlightedIndex: updateHighlightedIndex,
+    }: ControllerStateAndHelpers<ItemType>
   ) => {
     const { type } = changes;
     switch (type) {
@@ -396,16 +457,22 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
     }
   };
 
-  const handleToggleClick = (isOpen) => (event) => {
-    if (onToggleClick) {
-      onToggleClick(event);
-    }
+  const handleToggleClick =
+    (isOpen: boolean) =>
+    (
+      event: MouseEvent<HTMLButtonElement> & {
+        preventDownshiftDefault: boolean;
+      }
+    ) => {
+      if (onToggleClick) {
+        onToggleClick(event);
+      }
 
-    if (event.target === textInput.current && isOpen) {
-      event.preventDownshiftDefault = true;
-      event?.persist?.();
-    }
-  };
+      if (event.target === textInput.current && isOpen) {
+        event.preventDownshiftDefault = true;
+        event?.persist?.();
+      }
+    };
 
   const showWarning = !invalid && warn;
   const className = cx(`${prefix}--combo-box`, {
@@ -495,10 +562,18 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
         const inputProps: any = getInputProps({
           disabled,
           placeholder,
-          onClick() {
+          onClick(): void {
             toggleMenu();
           },
-          onKeyDown: (event) => {
+          onKeyDown: (
+            event: KeyboardEvent<HTMLInputElement> & {
+              preventDownshiftDefault: boolean;
+              target: {
+                value: string;
+                setSelectionRange: (start: number, end: number) => void;
+              };
+            }
+          ): void => {
             if (match(event, keys.Space)) {
               event.stopPropagation();
             }
@@ -528,13 +603,13 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
           },
         });
 
-        const handleFocus = (evt) => {
+        const handleFocus = (evt: FocusEvent<HTMLDivElement>) => {
           setIsFocused(evt.type === 'focus');
         };
 
         const readOnlyEventHandlers = readOnly
           ? {
-              onKeyDown: (evt) => {
+              onKeyDown: (evt: KeyboardEvent<HTMLInputElement>) => {
                 // This prevents the select from opening for the above keys
                 if (evt.key !== 'Tab') {
                   evt.preventDefault();
@@ -568,7 +643,7 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
                   disabled={disabled}
                   className={inputClasses}
                   type="text"
-                  tabIndex="0"
+                  tabIndex={0}
                   aria-autocomplete="list"
                   aria-expanded={rootProps['aria-expanded']}
                   aria-haspopup="listbox"
@@ -618,6 +693,16 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
                 {isOpen
                   ? filterItems(items, itemToString, inputValue).map(
                       (item, index) => {
+                        const isObject =
+                          item !== null && typeof item === 'object';
+                        const title =
+                          isObject && 'text' in item && itemToElement
+                            ? item.text?.toString()
+                            : itemToString(item);
+                        const disabled =
+                          isObject && 'disabled' in item
+                            ? !!item.disabled
+                            : undefined;
                         const itemProps = getItemProps({
                           item,
                           index,
@@ -625,28 +710,19 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
                             selectedItem === item ? 'true' : 'false',
                           ['aria-selected']:
                             highlightedIndex === index ? 'true' : 'false',
-                          disabled: item.disabled,
+                          disabled,
                         });
                         return (
                           <ListBox.MenuItem
                             key={itemProps.id}
                             isActive={selectedItem === item}
                             isHighlighted={highlightedIndex === index}
-                            title={
-                              itemToElement
-                                ? item.text
-                                : itemToString
-                                ? itemToString(item)
-                                : undefined
-                            }
+                            title={title}
                             {...itemProps}>
-                            {itemToElement ? (
-                              // @ts-ignore
+                            {ItemToElement ? (
                               <ItemToElement key={itemProps.id} {...item} />
-                            ) : itemToString ? (
-                              itemToString(item)
                             ) : (
-                              defaultItemToString(item)
+                              itemToString(item)
                             )}
                             {selectedItem === item && (
                               <Checkmark
@@ -714,7 +790,7 @@ ComboBox.propTypes = {
    * Provide helper text that is used alongside the control label for
    * additional help
    */
-  helperText: PropTypes.string,
+  helperText: PropTypes.node,
 
   /**
    * Specify a custom `id` for the input
@@ -862,4 +938,12 @@ ComboBox.defaultProps = {
   direction: 'bottom',
 };
 
-export default ComboBox;
+type ComboboxComponentProps<ItemType> = PropsWithoutRef<
+  PropsWithChildren<ComboBoxProps<ItemType>> & RefAttributes<HTMLInputElement>
+>;
+
+interface ComboBoxComponent {
+  <ItemType>(props: ComboboxComponentProps<ItemType>): ReactElement | null;
+}
+
+export default ComboBox as ComboBoxComponent;
