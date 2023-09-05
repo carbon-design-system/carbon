@@ -37,4 +37,26 @@ test.describe('TextInput @avt', () => {
     await expect(page.getByRole('textbox')).toBeDisabled();
     await expect(page).toHaveNoACViolations('TextInput-Disabled');
   });
+
+  test('accessibility-checker keyboard nav', async ({ page }) => {
+    await visitStory(page, {
+      component: 'TextInput',
+      id: 'components-textinput--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+    const input = page.getByRole('textbox');
+
+    // Check the focus
+    await expect(input).toBeVisible();
+    await page.keyboard.press('Tab');
+    await expect(input).toBeFocused();
+
+    // Check input interaction
+    await input.fill('Text');
+    await expect(input).toHaveValue('Text');
+    await page.keyboard.press('Backspace');
+    await expect(input).toHaveValue('Tex');
+  });
 });
