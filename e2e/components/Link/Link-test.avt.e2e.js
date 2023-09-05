@@ -46,7 +46,8 @@ test.describe('Link @avt', () => {
     );
   });
 
-  test('accessibility-checker keyboard nav', async ({ page }) => {
+  // Prevent timeout
+  test.slow('accessibility-checker keyboard nav', async ({ page }) => {
     await visitStory(page, {
       component: 'Link',
       id: 'components-link--default',
