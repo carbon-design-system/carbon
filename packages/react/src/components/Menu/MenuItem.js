@@ -17,6 +17,7 @@ import { usePrefix } from '../../internal/usePrefix';
 
 import { Menu } from './Menu';
 import { MenuContext } from './MenuContext';
+import { useLayoutDirection } from '../LayoutDirection';
 
 const hoverIntentDelay = 150; // in ms
 
@@ -134,13 +135,15 @@ const MenuItem = React.forwardRef(function MenuItem(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Set RTL based on document direction or `LayoutDirection`
+  const { direction } = useLayoutDirection();
   useEffect(() => {
-    if (document?.dir === 'rtl') {
+    if (document?.dir === 'rtl' || direction === 'rtl') {
       setRtl(true);
     } else {
       setRtl(false);
     }
-  }, []);
+  }, [direction]);
 
   return (
     <li
