@@ -511,7 +511,6 @@ export const ContainedFullWidth = () => (
           <Tab>Firewall rules</Tab>
           <Tab>Range</Tab>
           <Tab>Mutual TLS</Tab>
-          <Tab>Advanced</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>Tab Panel 1</TabPanel>
