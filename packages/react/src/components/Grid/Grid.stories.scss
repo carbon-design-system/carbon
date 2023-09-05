@@ -20,7 +20,7 @@
   }
 
   .cds--css-grid p:first-of-type {
-    margin-top: 0;
+    margin-block-start: 0;
   }
 
   // Narrow
@@ -36,11 +36,10 @@
   }
 
   .cds--subgrid {
-    outline: 1px solid black;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
     position: relative;
     background: #eef4ff;
+    outline: 1px solid black;
+    padding-block: 2rem;
   }
 
   .cds--css-grid,
@@ -51,12 +50,14 @@
   .cds--css-grid--narrow,
   .cds--subgrid--narrow {
     --grid-mode-color: #20d5d2;
+
     background: $green-10;
   }
 
   .cds--css-grid--condensed,
   .cds--subgrid--condensed {
     --grid-mode-color: #bb8eff;
+
     background: $purple-10;
   }
 
@@ -70,14 +71,15 @@
 
   .cds--subgrid::before {
     @include type-style('code-01');
+
     position: absolute;
-    inset-block-start: 0;
-    inset-inline-start: 0;
     display: block;
-    content: 'subgrid';
+    padding: 0.125rem 0.25rem;
     background: var(--grid-mode-color, #97c1ff);
     color: $black;
-    padding: 0.125rem 0.25rem;
+    content: 'subgrid';
+    inset-block-start: 0;
+    inset-inline-start: 0;
   }
 
   // Column
@@ -86,7 +88,8 @@
 
     background: $white;
     box-shadow: 0 0 0 1px var(--border-color);
-    min-height: 80px;
+
+    min-block-size: 80px;
   }
 
   .cds--css-grid--narrow .cds--css-grid-column,

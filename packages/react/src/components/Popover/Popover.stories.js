@@ -81,9 +81,12 @@ const PlaygroundStory = (props) => {
 export const TabTip = () => {
   const [open, setOpen] = useState(true);
   const [openTwo, setOpenTwo] = useState(false);
+  const align = document?.dir === 'rtl' ? 'bottom-right' : 'bottom-left';
+  const alignTwo = document?.dir === 'rtl' ? 'bottom-left' : 'bottom-right';
   return (
     <div className="popover-tabtip-story" style={{ display: 'flex' }}>
       <Popover
+        align={align}
         open={open}
         onKeyDown={(evt) => {
           if (match(evt, keys.Escape)) {
@@ -126,7 +129,7 @@ export const TabTip = () => {
       <Popover
         open={openTwo}
         isTabTip
-        align="bottom-right"
+        align={alignTwo}
         onRequestClose={() => setOpenTwo(false)}>
         <button
           aria-label="Settings"
