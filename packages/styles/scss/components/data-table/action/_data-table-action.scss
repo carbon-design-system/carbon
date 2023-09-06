@@ -510,6 +510,10 @@
     @include type-style('body-compact-01');
   }
 
+  .#{$prefix}--batch-summary__divider {
+    padding-left: $spacing-03;
+  }
+
   //-------------------------------------------------
   //SMALL TOOLBAR
   //-------------------------------------------------

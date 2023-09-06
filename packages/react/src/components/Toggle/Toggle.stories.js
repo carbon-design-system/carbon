@@ -83,7 +83,7 @@ Playground.argTypes = {
   },
 };
 
-export const WithAcessibleLabels = () => (
+export const WithAccessibleLabels = () => (
   <VStack gap={7}>
     <Toggle id="toggle-4" labelText="Toggle label" />
 
@@ -93,7 +93,7 @@ export const WithAcessibleLabels = () => (
       <div id="toggle-6-label" style={{ marginBlockEnd: '0.5rem' }}>
         External toggle label
       </div>
-      <Toggle id="toggle-6" aria-labelledby="toggle-6-label" hideLabel />
+      <Toggle id="toggle-6" hideLabel />
     </div>
 
     <div>
@@ -109,6 +109,6 @@ export const WithAcessibleLabels = () => (
 
 export const Skeleton = () => (
   <div>
-    <ToggleSkeleton aria-label="Toggle is loading" />
+    <ToggleSkeleton />
   </div>
 );

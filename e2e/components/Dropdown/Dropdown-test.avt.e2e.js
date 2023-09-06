@@ -53,17 +53,22 @@ test.describe('Dropdown @avt', () => {
         theme: 'white',
       },
     });
-    await expect(page.getByRole('combobox')).toBeVisible();
+    const toggleButton = page.getByRole('combobox');
+    const menu = page.getByRole('listbox');
 
+    await expect(toggleButton).toBeVisible();
     // Tab and open the Dropdown with Arrow Down
     await page.keyboard.press('Tab');
-    const toggleButton = page.getByRole('combobox');
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('ArrowDown');
-    await expect(page.getByRole('listbox')).toBeVisible();
+    await expect(menu).toBeVisible();
+    // Close with Escape, retain focus, and open with Space
+    await page.keyboard.press('Escape');
+    await page.keyboard.press('Space');
+    await expect(menu).toBeVisible();
     // Close with Escape, retain focus, and open with Enter
     await page.keyboard.press('Escape');
-    await expect(page.getByRole('listbox')).not.toBeVisible();
+    await expect(menu).not.toBeVisible();
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Enter');
     // Navigation inside the menu
@@ -71,17 +76,19 @@ test.describe('Dropdown @avt', () => {
     await expect(
       page.getByRole('option', {
         name: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-        selected: true,
       })
-    ).toBeVisible();
+    ).toHaveClass(
+      'cds--list-box__menu-item cds--list-box__menu-item--highlighted'
+    );
     // move to second option
     await page.keyboard.press('ArrowDown');
     await expect(
       page.getByRole('option', {
         name: 'Option 1',
-        selected: true,
       })
-    ).toBeVisible();
+    ).toHaveClass(
+      'cds--list-box__menu-item cds--list-box__menu-item--highlighted'
+    );
     // select second option
     await page.keyboard.press('Enter');
     // focus comes back to the toggle button

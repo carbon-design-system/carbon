@@ -857,19 +857,19 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
   };
 
   const DismissIcon = (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <div
-      role="button"
       tabIndex={-1}
       aria-hidden={true}
       className={cx(`${prefix}--tabs__nav-item--close-icon`, {
         [`${prefix}--visually-hidden`]: !dismissable,
       })}
       onClick={handleClose}
-      aria-label="Close tab"
       title="Close tab"
       ref={dismissIconRef}>
-      <Close />
+      <Close
+        aria-hidden={dismissable ? 'false' : 'true'}
+        aria-label="Press delete to close tab"
+      />
     </div>
   );
 

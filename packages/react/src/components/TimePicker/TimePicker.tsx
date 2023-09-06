@@ -252,12 +252,14 @@ const TimePicker: TimePickerComponent = React.forwardRef<
     const mappedChildren = React.Children.map(children, (pickerSelect) => {
       const item = pickerSelect as any;
 
-      return React.cloneElement(item, {
-        ...item.props,
-        disabled: disabled,
-        readOnly: readOnly,
-        ...readOnlyEventHandlers,
-      });
+      if (item) {
+        return React.cloneElement(item, {
+          ...item.props,
+          disabled: disabled,
+          readOnly: readOnly,
+          ...readOnlyEventHandlers,
+        });
+      }
     });
 
     return mappedChildren;

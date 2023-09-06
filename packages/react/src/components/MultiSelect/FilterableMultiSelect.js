@@ -28,6 +28,8 @@ import { FormContext } from '../FluidForm';
 const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
   {
     className: containerClassName,
+    clearSelectionDescription,
+    clearSelectionText,
     compareItems,
     direction,
     disabled,
@@ -359,11 +361,26 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
               }
             };
 
+            const clearSelectionContent =
+              selectedItems.length > 0 ? (
+                <span className={`${prefix}--visually-hidden`}>
+                  {clearSelectionDescription} {selectedItems.length},
+                  {clearSelectionText}
+                </span>
+              ) : (
+                <span className={`${prefix}--visually-hidden`}>
+                  {clearSelectionDescription}: 0
+                </span>
+              );
+
             return (
               <div className={wrapperClasses}>
                 {titleText ? (
                   <label className={titleClasses} {...labelProps}>
                     {titleText}
+                    <span className={`${prefix}--visually-hidden`}>
+                      {clearSelectionContent}
+                    </span>
                   </label>
                 ) : null}
                 <ListBox
@@ -445,15 +462,17 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                           locale,
                         }
                       ).map((item, index) => {
-                        const itemProps = getItemProps({
-                          item,
-                          disabled: item.disabled,
-                        });
-                        const itemText = itemToString(item);
                         const isChecked =
                           selectedItem.filter((selected) =>
                             isEqual(selected, item)
                           ).length > 0;
+                        const itemProps = getItemProps({
+                          item,
+                          disabled: item.disabled,
+                          ['aria-selected']: isChecked,
+                        });
+                        const itemText = itemToString(item);
+
                         return (
                           <ListBox.MenuItem
                             key={itemProps.id}
@@ -509,6 +528,16 @@ FilterableMultiSelect.propTypes = {
     PropTypes.string,
     'ariaLabel / aria-label props are no longer required for FilterableMultiSelect'
   ),
+
+  /**
+   * Specify the text that should be read for screen readers that describes total items selected
+   */
+  clearSelectionDescription: PropTypes.string,
+
+  /**
+   * Specify the text that should be read for screen readers to clear selection.
+   */
+  clearSelectionText: PropTypes.string,
 
   /**
    * Specify the direction of the multiselect dropdown. Can be either top or bottom.
@@ -661,6 +690,8 @@ FilterableMultiSelect.defaultProps = {
   sortItems: defaultSortItems,
   open: false,
   selectionFeedback: 'top-after-reopen',
+  clearSelectionText: 'To clear selection, press Delete or Backspace,',
+  clearSelectionDescription: 'Total items selected: ',
 };
 
 export default FilterableMultiSelect;
