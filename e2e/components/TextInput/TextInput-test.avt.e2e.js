@@ -59,4 +59,25 @@ test.describe('TextInput @avt', () => {
     await page.keyboard.press('Backspace');
     await expect(input).toHaveValue('Tex');
   });
+
+  test('accessibility-checker keyboard nav for password', async ({ page }) => {
+    await visitStory(page, {
+      component: 'TextInput',
+      id: 'components-textinput--toggle-password-visibility',
+      globals: {
+        theme: 'white',
+      },
+    });
+    const input = page.getByRole('textbox');
+    const span = page.locator('span.cds--assistive-text');
+
+    await page.keyboard.press('Tab');
+    await input.fill('Text');
+
+    // Checking toggle interaction
+    await page.keyboard.press('Tab');
+    await expect(span).toHaveText('Show password');
+    await page.keyboard.press('Enter');
+    await expect(span).toHaveText('Hide password');
+  });
 });
