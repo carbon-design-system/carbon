@@ -192,7 +192,7 @@ export const Table = ({
     const tableContainer = tableRef?.current?.parentNode as HTMLElement;
     const tableHeader = tableRef?.current?.firstChild as HTMLElement;
 
-    if (tableHeader.scrollWidth > tableContainer.clientWidth) {
+    if (tableHeader?.scrollWidth > tableContainer?.clientWidth) {
       setIsScrollable(true);
     } else {
       setIsScrollable(false);
@@ -226,7 +226,7 @@ export const Table = ({
     <div
       className={`${prefix}--data-table-content`}
       // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-      tabIndex={isScrollable ? 0 : -1}>
+      tabIndex={isScrollable ? 0 : undefined}>
       <table
         aria-labelledby={titleId}
         aria-describedby={descriptionId}
