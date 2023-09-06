@@ -44,7 +44,10 @@ export interface FileUploaderItemProps extends ReactAttr<HTMLSpanElement> {
    * Event handler that is called after removing a file from the file uploader
    * The event handler signature looks like `onDelete(evt, { uuid })`
    */
-  onDelete?: (event: any, opts: { uuid: string }) => void;
+  onDelete?: (
+    event: React.SyntheticEvent<HTMLElement>,
+    opts: { uuid: string }
+  ) => void;
 
   /**
    * Specify the size of the FileUploaderButton, from a list of available
@@ -66,21 +69,21 @@ export interface FileUploaderItemProps extends ReactAttr<HTMLSpanElement> {
 function FileUploaderItem({
   uuid,
   name,
-  status,
+  status = 'uploading',
   iconDescription,
-  onDelete,
+  onDelete = () => {},
   invalid,
   errorSubject,
   errorBody,
   size,
   ...other
-}) {
+}: FileUploaderItemProps) {
   const prefix = usePrefix();
   const { current: id } = useRef(uuid || uid());
   const classes = cx(`${prefix}--file__selected-file`, {
     [`${prefix}--file__selected-file--invalid`]: invalid,
-    [`${prefix}--file__selected-file--md`]: size === 'field' || size === 'md',
-    [`${prefix}--file__selected-file--sm`]: size === 'small' || size === 'sm',
+    [`${prefix}--file__selected-file--md`]: size === 'md',
+    [`${prefix}--file__selected-file--sm`]: size === 'sm',
   });
   return (
     <span className={classes} {...other}>
