@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <path d="m24,30v-4.1c2.3-.5,4-2.5,4-4.9,0-2.4-1.7-4.4-4-4.9V2s-2,0-2,0v14.1c-2.3.5-4,2.5-4,4.9,0,2.4,1.7,4.4,4,4.9v4.1s2,0,2,0Zm-4-9c0-1.7,1.3-3,3-3s3,1.3,3,3c0,1.7-1.3,3-3,3s-3-1.3-3-3Z"/>
+  <path d="m8,2v4.1c-2.3.5-4,2.5-4,4.9,0,2.4,1.7,4.4,4,4.9v14.1s2,0,2,0v-14.1c2.3-.5,4-2.5,4-4.9,0-2.4-1.7-4.4-4-4.9V2s-2,0-2,0Zm4,9c0,1.7-1.3,3-3,3s-3-1.3-3-3,1.3-3,3-3,3,1.3,3,3Z"/>
+  <g id="_Transparent_Rectangle_" data-name="&amp;lt;Transparent Rectangle&amp;gt;">
+    <rect class="cls-1" width="32" height="32"/>
+  </g>
+</svg>

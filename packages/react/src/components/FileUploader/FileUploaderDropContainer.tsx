@@ -55,9 +55,11 @@ export interface FileUploaderDropContainerProps
 
   /**
    * Event handler that is called after files are added to the uploader
-   * The event handler signature looks like `onAddFiles(evt, { addedFiles })`
    */
-  onAddFiles?: () => void;
+  onAddFiles?: (
+    event: React.SyntheticEvent<HTMLElement>,
+    content: { addedFiles: File[] }
+  ) => void;
 
   /**
    * Provide an optional function to be called when the button element
@@ -71,6 +73,11 @@ export interface FileUploaderDropContainerProps
   pattern?: string;
 
   /**
+   * Ref to pass to the inner button element
+   */
+  innerRef?: React.LegacyRef<HTMLButtonElement>;
+
+  /**
    * @deprecated The `role` prop for `FileUploaderButton` has been deprecated since it now renders a button element by default, and has an implicit role of button.
    */
   role?: string;
@@ -81,21 +88,25 @@ export interface FileUploaderDropContainerProps
   tabIndex?: number | string;
 }
 
+interface AddedFile extends File {
+  invalidFileType?: boolean;
+}
+
 function FileUploaderDropContainer({
-  accept,
+  accept = [],
   className,
   id,
   disabled,
-  labelText,
-  multiple,
+  labelText = 'Add file',
+  multiple = false,
   name,
-  onAddFiles,
+  onAddFiles = () => {},
   onClick,
-  pattern,
+  pattern = '.[0-9a-z]+$',
   // eslint-disable-next-line react/prop-types
   innerRef,
   ...rest
-}) {
+}: FileUploaderDropContainerProps) {
   const prefix = usePrefix();
   const inputRef = useRef<HTMLInputElement>(null);
   const { current: uid } = useRef(id || uniqueId());
@@ -106,46 +117,45 @@ function FileUploaderDropContainer({
     {
       [`${prefix}--file__drop-container--drag-over`]: isActive,
       [`${prefix}--file-browse-btn--disabled`]: disabled,
-      [className]: className,
-    }
+    },
+    className
   );
 
   /**
    * Filters the array of added files based on file type restrictions
-   * @param {Event} event - Event object, used to get the list of files added
    */
-  function validateFiles(event) {
-    const transferredFiles =
-      event.type === 'drop'
-        ? [...event.dataTransfer.files]
-        : [...event.target.files];
+  function validateFiles(transferredFiles: AddedFile[]) {
     if (!accept.length) {
       return transferredFiles;
     }
     const acceptedTypes = new Set(accept);
-    return transferredFiles.reduce((acc, curr) => {
+    return transferredFiles.reduce<AddedFile[]>((acc, curr) => {
       const { name, type: mimeType = '' } = curr;
       const fileExtensionRegExp = new RegExp(pattern, 'i');
-      const hasFileExtension = fileExtensionRegExp.test(name);
-      if (!hasFileExtension) {
+      const [fileExtension] = name.match(fileExtensionRegExp) ?? [];
+      if (fileExtension === undefined) {
         return acc;
       }
-      const [fileExtension] = name.match(fileExtensionRegExp);
-
       if (
         acceptedTypes.has(mimeType) ||
         acceptedTypes.has(fileExtension.toLowerCase())
       ) {
         return acc.concat([curr]);
       }
-
       curr.invalidFileType = true;
       return acc.concat([curr]);
     }, []);
   }
 
-  function handleChange(event) {
-    const addedFiles = validateFiles(event);
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const files = [...(event.target.files ?? [])];
+    const addedFiles = validateFiles(files);
+    return onAddFiles(event, { addedFiles });
+  }
+
+  function handleDrop(event: React.DragEvent<HTMLDivElement>) {
+    const files = [...event.dataTransfer.files];
+    const addedFiles = validateFiles(files);
     return onAddFiles(event, { addedFiles });
   }
 
@@ -183,8 +193,9 @@ function FileUploaderDropContainer({
           return;
         }
         setActive(false);
-        handleChange(evt);
+        handleDrop(evt);
       }}>
+      {/* @ts-expect-error remove this ignore line when the explicit tabIndex prop is deleted */}
       <button
         type="button"
         className={dropareaClasses}
@@ -209,7 +220,7 @@ function FileUploaderDropContainer({
         ref={inputRef}
         tabIndex={-1}
         disabled={disabled}
-        accept={accept}
+        accept={accept.join(',')}
         name={name}
         multiple={multiple}
         onChange={handleChange}

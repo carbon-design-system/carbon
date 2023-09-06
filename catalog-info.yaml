@@ -1,0 +1,45 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: carbon
+  description: Carbon is an open-source design system built by IBM
+  tags:
+    - carbon
+    - designsystem
+  annotations:
+    github.com/project-slug: carbon-design-system/carbon
+  links:
+    - url: https://carbondesignsystem.com
+      title: Carbon Design System website
+    - url: https://ibm-studios.slack.com/archives/C0M053VPT
+      title: Internal carbon-design-system Slack channel
+    - url: https://discord.gg/J7JEUEkTRX
+      title: Discord channel
+spec:
+  type: library
+  lifecycle: production
+  owner: carbon
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: carbon-react
+  description: React components for the Carbon Design System
+  tags:
+    - carbon
+    - react
+  links:
+    - url: http://react.carbondesignsystem.com
+      title: Storybook
+    - url: https://ibm-studios.slack.com/archives/C2K6RFJ1G
+      title: Internal carbon-react slack channel
+    - url: https://carbondesignsystem.com/developing/frameworks/react/
+      title: How-to docs and guidelines
+spec:
+  type: library
+  lifecycle: production
+  subcomponentOf: carbon
+  owner: carbon
+---
+

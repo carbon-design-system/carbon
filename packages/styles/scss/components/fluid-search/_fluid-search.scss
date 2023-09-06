@@ -12,24 +12,24 @@
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../search';
 
 @mixin fluid-search {
   .#{$prefix}--search--fluid {
-    height: rem(64px);
+    height: convert.to-rem(64px);
   }
 
   .#{$prefix}--search--fluid .#{$prefix}--label {
     position: absolute;
     z-index: 1;
-    top: rem(13px);
+    top: convert.to-rem(13px);
     left: $spacing-05;
     display: flex;
     overflow: initial;
     width: calc(100% - 2rem);
-    height: rem(16px);
+    height: convert.to-rem(16px);
     align-items: center;
     margin: 0;
     clip: initial;
@@ -54,30 +54,31 @@
 
   .#{$prefix}--search--fluid .#{$prefix}--search-input {
     height: 100%;
-    padding: rem(32px) rem(88px) rem(13px) $spacing-05;
+    padding: convert.to-rem(32px) convert.to-rem(88px) convert.to-rem(13px)
+      $spacing-05;
   }
 
   .#{$prefix}--search--fluid .#{$prefix}--search-magnifier-icon {
-    inset: auto 1rem rem(13px) auto;
+    inset: auto 1rem convert.to-rem(13px) auto;
     transform: none;
   }
 
   .#{$prefix}--search--fluid .#{$prefix}--search-close {
-    width: rem(40px);
-    height: rem(40px);
+    width: convert.to-rem(40px);
+    height: convert.to-rem(40px);
     border: none;
-    inset: auto rem(48px) 0 auto;
+    inset: auto convert.to-rem(48px) 0 auto;
     transition: background-color $duration-fast-01 motion(standard, productive);
   }
 
   .#{$prefix}--search--fluid .#{$prefix}--search-close::before {
     position: absolute;
     display: block;
-    width: rem(1px);
+    width: convert.to-rem(1px);
     height: 1rem;
     background: $border-subtle;
     content: '';
-    inset: auto rem(-1px) rem(14px) auto;
+    inset: auto convert.to-rem(-1px) convert.to-rem(14px) auto;
   }
 
   .#{$prefix}--search--fluid
@@ -92,7 +93,7 @@
     left: 0;
     display: block;
     width: 100%;
-    height: rem(2px);
+    height: convert.to-rem(2px);
     content: '';
   }
 
@@ -105,12 +106,12 @@
   .#{$prefix}--search--fluid
     .#{$prefix}--search-input:not(:focus)
     ~ .#{$prefix}--search-close:not([disabled])::after {
-    height: rem(1px);
+    height: convert.to-rem(1px);
     background: $border-strong;
   }
 
   .#{$prefix}--search--fluid .#{$prefix}--search-close svg {
-    margin-bottom: rem(2px);
+    margin-bottom: convert.to-rem(2px);
   }
 
   // Disabled styles

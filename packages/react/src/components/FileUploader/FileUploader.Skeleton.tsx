@@ -20,7 +20,10 @@ export interface FileUploaderSkeletonProps extends ReactAttr<HTMLDivElement> {
   className?: string;
 }
 
-function FileUploaderSkeleton({ className, ...rest }) {
+function FileUploaderSkeleton({
+  className,
+  ...rest
+}: FileUploaderSkeletonProps) {
   const prefix = usePrefix();
   return (
     <div className={cx(`${prefix}--form-item`, className)} {...rest}>
