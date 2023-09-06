@@ -199,9 +199,9 @@ export const Table = ({
     }
   }, []);
 
-  const debouncedsetTabIndex = debounce(setTabIndex, 100);
+  const debouncedSetTabIndex = debounce(setTabIndex, 100);
 
-  useWindowEvent('resize', debouncedsetTabIndex);
+  useWindowEvent('resize', debouncedSetTabIndex);
 
   useLayoutEffect(() => {
     setTabIndex();
