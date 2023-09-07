@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.32.0-rc.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.31.0...@carbon/web-components@1.32.0-rc.0) (2023-09-06)
+
+
+### Bug Fixes
+
+* **lerna:** build packages & codesandbox updates ([#10876](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10876)) ([fa5bee0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/fa5bee07eb65a0f730c7cb1094a5eb8d122ab593))
+* **pagination:** mark selected option in page-sizes-select component ([#10884](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10884)) ([ec3e4cf](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/ec3e4cfaa4f50282c037c789898b7d6a61d6d54c))
+
+
+
+
+
 # [1.31.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.31.0-rc.2...@carbon/web-components@1.31.0) (2023-08-22)
 
 **Note:** Version bump only for package @carbon/web-components
