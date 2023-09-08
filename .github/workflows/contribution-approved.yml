@@ -14,11 +14,19 @@ on:
 permissions:
       issues: write
 
+
+
+
 jobs:
   add-comment:
     name: Add comment to with proposal accepted and community contribution
     runs-on: ubuntu-latest
     steps:
+      - name: Log github event
+        env:
+          $GITHUB_CONTEXT_LABELS:
+            ${{ toJson(github.event.issue.labels) }}
+        run: echo "$GITHUB_CONTEXT_LABELS"
       - name: Add comment
         if: 
           ${{ contains(github.event.issue.labels.*.name,
