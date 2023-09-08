@@ -199,8 +199,11 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
     }
   }
 
-  function clearInputValue() {
-    setInputValue('');
+  function clearInputValue(event) {
+    textInput.current.value.length === 1 || match(event, keys.Escape)
+      ? setInputValue('')
+      : setInputValue(textInput.current.value);
+
     if (textInput.current) {
       textInput.current.focus();
     }
@@ -314,10 +317,10 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                   if (match(event, keys.Delete) || match(event, keys.Escape)) {
                     if (isOpen) {
                       handleOnMenuChange(true);
-                      clearInputValue();
+                      clearInputValue(event);
                       event.stopPropagation();
                     } else if (!isOpen) {
-                      clearInputValue();
+                      clearInputValue(event);
                       clearSelection();
                       event.stopPropagation();
                     }
