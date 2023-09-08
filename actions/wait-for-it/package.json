@@ -18,7 +18,7 @@
     "react"
   ],
   "dependencies": {
-    "@actions/core": "^1.2.3",
+    "@actions/core": "^1.10.0",
     "got": "^13.0.0"
   }
 }

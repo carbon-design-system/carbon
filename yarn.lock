@@ -1861,7 +1861,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/actions-wait-for-it@workspace:actions/wait-for-it"
   dependencies:
-    "@actions/core": ^1.2.3
+    "@actions/core": ^1.10.0
     got: ^13.0.0
   languageName: unknown
   linkType: soft
