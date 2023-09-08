@@ -54,6 +54,16 @@ const config = {
         outputFile: path.join(__dirname, '.playwright', 'results.json'),
       },
     ],
+    [
+      'json',
+      {
+        outputFile: path.join(
+          __dirname,
+          'packages/react/.playwright',
+          'INTERNAL_AVT_REPORT_DO_NOT_USE.json'
+        ),
+      },
+    ],
   ],
 };
 
