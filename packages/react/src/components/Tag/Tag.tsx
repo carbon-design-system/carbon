@@ -95,7 +95,7 @@ const Tag = <T extends React.ElementType>({
   type,
   filter,
   renderIcon: CustomIconElement,
-  title,
+  title = 'Clear filter',
   disabled,
   onClose,
   size,
