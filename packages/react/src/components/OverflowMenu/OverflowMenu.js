@@ -20,6 +20,9 @@ import mergeRefs from '../../tools/mergeRefs';
 import { PrefixContext } from '../../internal/usePrefix';
 import * as FeatureFlags from '@carbon/feature-flags';
 import deprecate from '../../prop-types/deprecate';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
+
+const getInstanceId = setupGetInstanceId();
 
 const on = (element, ...args) => {
   element.addEventListener(...args);
@@ -94,6 +97,7 @@ export const getMenuOffset = (menuBody, direction, trigger, flip) => {
 
 class OverflowMenu extends Component {
   state = {};
+  instanceId = getInstanceId();
 
   static propTypes = {
     /**
@@ -524,12 +528,15 @@ class OverflowMenu extends Component {
         })
     );
 
+    const menuBodyId = `overflow-menu-${this.instanceId}__menu-body`;
+
     const menuBody = (
       <ul
         className={overflowMenuOptionsClasses}
         tabIndex="-1"
         role="menu"
-        aria-label={ariaLabel}>
+        aria-label={ariaLabel}
+        id={menuBodyId}>
         {childrenWithProps}
       </ul>
     );
@@ -568,7 +575,8 @@ class OverflowMenu extends Component {
           onClick={this.handleClick}
           aria-label={ariaLabel}
           id={id}
-          ref={mergeRefs(this._triggerRef, ref)}>
+          ref={mergeRefs(this._triggerRef, ref)}
+          aria-controls={this.state.open ? menuBodyId : null}>
           <IconElement {...iconProps}>
             {iconDescription && <title>{iconDescription}</title>}
           </IconElement>
