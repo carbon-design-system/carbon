@@ -7,8 +7,8 @@
 
 'use strict';
 
-const core = require('@actions/core');
-const got = require('got');
+import core from '@actions/core';
+import got from 'got';
 
 async function main() {
   let url = core.getInput('URL', {
