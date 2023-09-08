@@ -43,7 +43,7 @@ function TestComponent({ list, item }) {
 }
 
 beforeEach(() => {
-  // eslint-disable-next-line testing-library/no-render-in-setup
+  // eslint-disable-next-line testing-library/no-render-in-lifecycle
   wrapper = render(<TestComponent />);
 });
 
@@ -167,7 +167,7 @@ describe('ContainedListItem', () => {
 
   describe('interactive', () => {
     beforeEach(() => {
-      // eslint-disable-next-line testing-library/no-render-in-setup
+      // eslint-disable-next-line testing-library/no-render-in-lifecycle
       wrapper.rerender(<TestComponent item={{ onClick: () => {} }} />);
     });
 
