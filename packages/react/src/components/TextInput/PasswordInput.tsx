@@ -220,7 +220,8 @@ const PasswordInput = React.forwardRef(function PasswordInput(
       [`${prefix}--text-input--light`]: light,
       [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
       [`${prefix}--text-input--warning`]: normalizedProps.warn,
-      [`${prefix}--text-input--${size}`]: size,
+      [`${prefix}--text-input--${size}`]: size, // TODO: V12 - Remove this class
+      [`${prefix}--layout--size-${size}`]: size,
     }
   );
   const sharedTextInputProps = {

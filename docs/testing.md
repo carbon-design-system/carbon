@@ -37,6 +37,21 @@ in our elements site.
 These tests are authored within the `e2e` directory and match the file pattern:
 `*-test.e2e.js`.
 
+#### Tags
+
+Playwright tests are divided into different tag categories for reporting
+purposes. `@avt` test tags are used to populate accessibility test statuses
+within component pages on https://carbondesignsystem.com
+
+For avt tests, the test title should always include one of the following:
+
+| Tag                    | Description                                                                                                                    |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `@avt`                 | High level/root tag that should wrap all avt tests. This is usually placed in a `describe` block title.                        |
+| `@avt-default-state`   | Sub-tag of `@avt`, used to tag individual tests covering the default state of a component.                                     |
+| `@avt-advanced-states` | Sub-tag of `@avt`, used to tag individual tests covering advanced states of a component (open/close, invalid, expanded, etc.). |
+| `@avt-keyboard-nav`    | Sub-tag of `@avt`, used to tag individual tests covering keyboard navigation flows.                                            |
+
 #### Developing
 
 When working with Playwright locally, it's important to start up the service

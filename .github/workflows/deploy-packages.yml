@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac #v4.0.0
         with:
           repository: carbon-design-system/design-language-website
           ref: master
@@ -58,7 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac #v4.0.0
         with:
           repository: carbon-design-system/gatsby-theme-carbon
           ref: main
@@ -97,4 +97,3 @@ jobs:
             - [ ] Verify package version bumps are accurate
             - [ ] Verify CI passes as expected
             - [ ] Verify no regressions on the website in the deploy preview
-
