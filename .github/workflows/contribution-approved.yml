@@ -25,7 +25,7 @@ jobs:
       - name: Log github event
         env:
           $GITHUB_CONTEXT_LABELS:
-            ${{ toJson(github.event.issue.labels) }}
+            ${{ toJson(github.event.issue.label) }}
         run: echo "$GITHUB_CONTEXT_LABELS"
       - name: Add comment
         if: 
