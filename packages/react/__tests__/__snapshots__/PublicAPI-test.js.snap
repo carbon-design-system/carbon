@@ -4149,6 +4149,9 @@ Map {
       "enterDelayMs": Object {
         "type": "number",
       },
+      "isSelected": Object {
+        "type": "bool",
+      },
       "kind": Object {
         "args": Array [
           Array [
