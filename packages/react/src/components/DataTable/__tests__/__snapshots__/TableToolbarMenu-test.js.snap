@@ -39,6 +39,7 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
       onClickOutside={[Function]}
     >
       <button
+        aria-controls={null}
         aria-expanded={false}
         aria-haspopup={true}
         aria-label="Add"
