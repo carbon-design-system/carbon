@@ -13,7 +13,7 @@ import {
   Apple,
   Fish,
   Strawberry,
-  SubtractAlt,
+  Close,
   Wheat,
 } from '@carbon/icons-react';
 
@@ -115,7 +115,7 @@ export const WithActions = () => {
       kind="ghost"
       iconDescription="Dismiss"
       hasIconOnly
-      renderIcon={SubtractAlt}
+      renderIcon={Close}
     />
   );
 
@@ -158,7 +158,7 @@ export const WithExpandableSearch = () => {
       kind="on-page"
       action={
         <ExpandableSearch
-          placeholder="Filterable search"
+          placeholder="Filter"
           value={searchTerm}
           onChange={handleChange}
           closeButtonLabelText="Clear search input"
@@ -196,7 +196,7 @@ export const WithPersistentSearch = () => {
   return (
     <ContainedList label="List title" kind="on-page" action={''}>
       <Search
-        placeholder="Filterable search"
+        placeholder="Filter"
         value={searchTerm}
         onChange={handleChange}
         closeButtonLabelText="Clear search input"
@@ -216,7 +216,7 @@ export const WithInteractiveItemsAndActions = () => {
       kind="ghost"
       iconDescription="Dismiss"
       hasIconOnly
-      renderIcon={SubtractAlt}
+      renderIcon={Close}
     />
   );
 

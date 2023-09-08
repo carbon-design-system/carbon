@@ -411,7 +411,7 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
 
     if (event.target === textInput.current && isOpen) {
       event.preventDownshiftDefault = true;
-      event.persist();
+      event?.persist?.();
     }
   };
 
@@ -501,8 +501,6 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
           },
         });
         const inputProps: any = getInputProps({
-          // Remove excess aria `aria-labelledby`. HTML <label for> provides this aria information.
-          'aria-labelledby': null,
           disabled,
           placeholder,
           onClick() {
@@ -521,7 +519,7 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
               if (event.target === textInput.current && isOpen) {
                 toggleMenu();
                 event.preventDownshiftDefault = true;
-                event.persist();
+                event?.persist?.();
               }
             }
 

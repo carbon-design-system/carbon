@@ -3,6 +3,7 @@ categories:
     members:
       - cloud--download
       - cloud--upload
+      - coupon
       - crop
       - delete
       - do-not
@@ -13,9 +14,11 @@ categories:
       - export--01
       - export--02
       - launch
+      - link
       - love
       - maximize
       - minimize
+      - music
       - paper--clip
       - player--flow
       - refresh
@@ -34,7 +37,7 @@ categories:
       - transparency--01
       - transparency--02
       - trust
-  - name: Building Structure
+  - name: Building structure
     members:
       - alarm
       - apartment
@@ -130,7 +133,8 @@ categories:
       - sao-paulo
       - seattle
       - seoul--gyeongbokgung-palace
-      #    - shanghai
+      - shanghai--cityscape
+      - shanghai--oriental-pearl-tower
       - singapore
       - stockholm
       - taipei--bubble-tea
@@ -152,20 +156,31 @@ categories:
       - accelerating-transformation
       - access-management
       - active--server
+      - ad-tech
       - agility
       - agility-with-hybrid-multicloud
       - ai--ready
       - ai
+      - analytics
       - analyzing--containers
       - api
+      - api--lifecycle
+      - application--integration
+      - application--platform
+      - automation--software
       - apps
       - assessment-used
       - audio-data
       - audit-trail
       - automate--modular--management
       - automated
+      - back-up--and-restore
+      - balanced
+      - bare-metal
       - big-data
+      - blockchain--02
       - build-and-deploy-pipeline
+      - business--analytics
       - business--continuity--02
       - c--language
       - c-plus-plus--language
@@ -177,11 +192,14 @@ categories:
       - cloud--data--services
       - cloud--ecosystem
       - cloud--guidelines
+      - cloud--integration
       - cloud--managed--services
+      - cloud--object-storage
       - cloud--oracle
       - cloud--partners
       - cloud--planning
       - cloud--platform
+      - cloud--private
       - cloud--sap
       - cloud--services
       - cloud--services--pricing
@@ -191,6 +209,7 @@ categories:
       - cloud--vmware
       - cloud-pak--family
       - cloud-pak--for-applications
+      - cloud-pak--for-business-automation
       - cloud-pak--for-data
       - cloud-pak--for-integration
       - cloud-pak--for-multicloud-management
@@ -202,6 +221,7 @@ categories:
       - cognos--analytics
       - collaborate-with-teams
       - compliant
+      - compute
       - condition--builder
       - connect--to-cloud
       - connected--devices
@@ -209,6 +229,7 @@ categories:
       - construct
       - connectivity
       - containers
+      - content-delivery-network
       - continuous
       - control
       - control-panel
@@ -217,26 +238,41 @@ categories:
       - custom--workloads
       - customizable
       - data--centers
+      - data--management
       - data--privacy--02
       - data--protection-data--security
+      - data--science
       - data--transfer
+      - data--warehousing
+      - database
+      - db2
+      - dedicated--host
+      - dedicated--instance
       - deep-learning
       - deploying-containers
       - deployment
+      - dev-and-test
       - developer-tools
       - devops
+      - devops--02
       - devops--toolchain
       - digital
+      - directlink
+      - disaster-recovery
       - docker
       - documentation
       - drag-and-drop-interface
       - dynamic-workloads
+      - e-commerce
       - ease-of-use
       - ecosystem
       - efficient
       - elements-of-the-cloud
       - encryption
+      - enterprise
+      - enterprise--messaging
       - event-driven
+      - event--streams--02
       - expand--horz
       - expand--vert
       - expansion
@@ -248,28 +284,46 @@ categories:
       - fault-tolerant
       - filter-and-group-data
       - filter--variable
+      - financial--services
       - flexibility--02
       - focus-on-code
       - forecasting
       - free--trial
       - fully-managed
+      - functions-as-a-service
       - geographic-flexibility
       - global--business--services
       - global--footprint
       - global--technology--services
       - go--language
+      - gpu-computing
+      - graphic-design
       - graphic-intensive-workloads
+      - healthcare
       - help-desk
       - high--performance
+      - high--performance--computing
+      - high--speed--data-transport
       - high-volume-data
       - highly-available
       - hybrid--cloud
+      - hybrid--cloud--03
       - hybrid--cloud--services
+      - hybrid--it-management
+      - hyper-protect
+      - hyper-protect--containers
+      - hyper-protect--crypto-service
+      - hyper-protect--database-as-a-service
+      - hyper-protect--virtual-servers
       - ibm--automation-platform
       - ibm--cloud
       - identify-and-access
       - identify-and-resolve-issues
+      - infrastructure-as-a-service
+      - insurance--02
       - integration--02
+      - integration--03
+      - internet-of-things
       - java
       - javascript
       - keep-your-own-key
@@ -277,15 +331,29 @@ categories:
       - lift-and-shift
       - list--bullet
       - list--checkbox
+      - load-balancer
       - lowering-risk
       - machine--learning--07
+      - managed-hosting--01
+      - managed-hosting--02
+      - management
       - managing--containers
       - marketplace
       - mas
+      - mass-data-migration
+      - media-and-entertainment
+      - memory
+      - micro
+      - microservices
+      - migration
+      - mobile
       - modernize
       - monitor
       - mqa
+      - network--02
+      - network--appliances
       - network--of-devices
+      - network--security
       - network--traffic
       - new-financial-customer-experiences
       - new-revenue-streams
@@ -301,51 +369,79 @@ categories:
       - pay-for-what-you-use
       - php--language
       - planning--analytics
+      - platform-as-a-service
       - pli--language
+      - power--on
       - predictability
       - predictive-analytics
+      - process--automation
       - productivity
       - proven-technology
+      - public
       - public-cloud-to-private-cloud
       - r--language
       - random--samples
       - react-to-data
       - real-time
+      - real-estate
       - redefining-financial-services
       - reducing-cost
       - reliability--02
+      - reseller-programs
       - resource-health
       - resources
+      - retail
       - rocket
       - saas--enablement
+      - saas--integration
+      - salesforce-integration
+      - sap
       - save-time
       - scale--02
       - scaling--containers
+      - scientific--computing
+      - scientific--research
+      - secure--devops
+      - secure--gateway
       - security--02
+      - security--groups
+      - security--management
+      - security--visibility
       - select--range
       - serverless
+      - serverless--02
       - sharing-data
       - single--sign-on
       - small-components-making-a-larger-whole
+      - small-to-medium-business-smb
       - softlayer--enablement
+      - software
+      - spss
       - start-for-free
+      - start-ups
+      - storage
       - streaming-data
       - streamline--operations
       - subsecond
       - support
+      - telecommunications
       - text--data
       - training
       - transform-data
       - troubleshooting
       - trusted
+      - united-governance
       - unstructured-data
       - use-the-language-of-your-choice
       - view-graphs-and-dashboard
+      - virtual
       - virtualization--02
       - visibility
       - visionary
       - visual--data
       - websites
+      - websphere
+      - windows-hosting
       - workflows
   - name: Controls
     members:
@@ -358,7 +454,7 @@ categories:
       - video--chat
       - video--play
       - webcast
-  - name: Data Analytics
+  - name: Data analytics
     members:
       - analyze
       - blockchain
@@ -422,11 +518,12 @@ categories:
       - tree--map
       - user--analytics
       - word--cloud
-  - name: Data Storage
+  - name: Data storage
     members:
       - accelerated-computing
       - app--modernization
       - archive
+      - asset-management
       - availability
       - business--continuity
       - cloud--infrastructure-management
@@ -491,7 +588,7 @@ categories:
       - web--developer
       - wedding--cake
       - windows
-  - name: Device Interaction
+  - name: Device interaction
     members:
       - add--device
       - augmented--reality
@@ -523,9 +620,15 @@ categories:
       - college
       - education
       - feedback--02
+      - flag
       - goals
       - growth
+      - handshake
       - insights
+      - medal--01
+      - medal--02
+      - scan-code
+      - trophy
       - university
   - name: Electronics
     members:
@@ -559,6 +662,7 @@ categories:
       - rich--text--format
   - name: Finance
     members:
+      - banking
       - client--financing--01
       - client--financing--02
       - commercial--financing--01
@@ -587,6 +691,8 @@ categories:
     members:
       - capitol
       - fairness
+      - government--01
+      - government--02
       - justice
       - parliament
   - name: Healthcare
@@ -723,20 +829,28 @@ categories:
     members:
       - apple
       - backpack
+      - balloon
+      - balloon--hot-air
       - blender
       - cafe
+      - candy
       - cherries
       - cookie
       - dining
       - hard--ice--cream
+      - firecracker
       - flower--01
       - flower--02
       - guitar
       - juice
+      - lantern
+      - moon-cake
+      - ornament
       - perfume
       - racetrack
       - rock-on
       - scale
+      - snowflake
       - soft--ice--cream
       - sports
       - stationary--bicycle
@@ -770,6 +884,10 @@ categories:
       - automation--decision
       - bluepages
       - distribution--ledger
+      - event--automation
+      - event--endpoint-management
+      - event--processing
+      - event--streams
       - global--network
       - integration
       - inspect--data
@@ -870,6 +988,7 @@ categories:
       - price
       - qr-code
       - receipt
+      - retail--sustainable
       - secure--search
       - select--product
       - shirt
@@ -944,7 +1063,7 @@ categories:
       - summit
       - target
       - target--area
-  - name: Supply Chain
+  - name: Supply chain
     members:
       - connected--nodes--to--the--cloud
       - delivered
@@ -958,6 +1077,19 @@ categories:
       - movement--of--items
       - moving-dolly
       - process
+      - supply-chain--01
+      - supply-chain--02
+  - name: Sustainability
+    members:
+      - energy--crisis
+      - esg-reporting--01
+      - esg-reporting--02
+      - green-it--01
+      - green-it--02
+      - sustainability--02
+      - sustainability--03
+      - sustainability--04
+      - sustainability--strategy
   - name: Systems DevOps
     members:
       - developer-z-os
@@ -1052,6 +1184,7 @@ categories:
       - humid
       - hurricane
       - lightning
+      - moon--full
       - night--clear
       - overcast
       - rainy

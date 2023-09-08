@@ -14,7 +14,7 @@ import { ForwardRefReturn, ReactAttr } from '../../types/common';
 type ExcludedAttributes = 'id';
 
 export interface ListBoxMenuProps
-  extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes> {
+  extends Omit<ReactAttr<HTMLUListElement>, ExcludedAttributes> {
   /**
    * Specify a custom `id`
    */
@@ -22,7 +22,7 @@ export interface ListBoxMenuProps
 }
 
 export type ListBoxMenuComponent = ForwardRefReturn<
-  HTMLDivElement,
+  HTMLUListElement,
   ListBoxMenuProps
 >;
 
@@ -33,18 +33,18 @@ export type ListBoxMenuComponent = ForwardRefReturn<
  */
 const ListBoxMenu: ListBoxMenuComponent = React.forwardRef(function ListBoxMenu(
   { children, id, ...rest }: ListBoxMenuProps,
-  ref: ForwardedRef<HTMLDivElement>
+  ref: ForwardedRef<HTMLUListElement>
 ) {
   const prefix = usePrefix();
   return (
-    <div
+    <ul
       ref={ref}
       id={id}
       className={`${prefix}--list-box__menu`}
       role="listbox"
       {...rest}>
       {children}
-    </div>
+    </ul>
   );
 });
 

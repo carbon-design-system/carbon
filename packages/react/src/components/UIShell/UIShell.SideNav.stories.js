@@ -416,6 +416,7 @@ export const SideNavRailWHeader = (args) => (
             onOverlayClick={onClickSideNavExpand}
             href="#main-content"
             onSideNavBlur={onClickSideNavExpand}
+            isRail
             {...args}>
             <SideNavItems>
               {isSideNavExpanded && (
@@ -493,7 +494,19 @@ SideNavRailWHeader.argTypes = {
     table: {
       defaultValue: { summary: true },
     },
-    description: 'Optional prop to display the side nav rail.',
+    description:
+      "Optional prop to display the side nav rail. It doesn't work along side with `isFixedNav` prop.",
+  },
+  isFixedNav: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+    table: {
+      defaultValue: { summary: false },
+    },
+    description:
+      "Optional prop to set a fixed side nav. It doesn't work along side with `isRail` prop.",
   },
   enterDelayMs: {
     control: {

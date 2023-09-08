@@ -316,7 +316,4 @@ Playground.argTypes = {
       type: 'boolean',
     },
   },
-  columns: {
-    control: { type: 'number' },
-  },
 };

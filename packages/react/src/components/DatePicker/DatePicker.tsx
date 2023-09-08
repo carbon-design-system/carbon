@@ -171,6 +171,7 @@ function updateClassNames(calendar, prefix) {
     );
     forEach.call(daysContainer.querySelectorAll('.flatpickr-day'), (item) => {
       item.classList.add(`${prefix}--date-picker__day`);
+      item.setAttribute('role', 'button');
       if (
         item.classList.contains('today') &&
         calendar.selectedDates.length > 0

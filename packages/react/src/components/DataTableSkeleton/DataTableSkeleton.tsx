@@ -6,15 +6,15 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { TableHTMLAttributes } from 'react';
+import React, { type FunctionComponent, TableHTMLAttributes } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
 export interface DataTableSkeletonHeader {
   /**
-   * Optionally specify header label
+   * Specify header label
    */
-  header?: string;
+  header: React.ReactNode;
 
   /**
    * Optionally specify header key
@@ -59,17 +59,21 @@ export interface DataTableSkeletonProps
    * Optionally specify whether you want the DataTable to be zebra striped
    */
   zebra?: boolean;
+  /**
+   * Optionally specify whether you want the DataTable to be styled
+   */
+  className?: string;
 }
 
-const DataTableSkeleton = ({
+const DataTableSkeleton: FunctionComponent<DataTableSkeletonProps> = ({
   headers,
-  rowCount,
-  columnCount,
-  zebra,
-  compact,
+  rowCount = 5,
+  columnCount = 5,
+  zebra = false,
+  compact = false,
   className,
-  showHeader,
-  showToolbar,
+  showHeader = true,
+  showToolbar = true,
   ...rest
 }) => {
   const prefix = usePrefix();
@@ -156,12 +160,11 @@ DataTableSkeleton.propTypes = {
   /**
    * Optionally specify the displayed headers
    */
-  headers: PropTypes.oneOfType([
-    PropTypes.array,
+  headers: PropTypes.arrayOf(
     PropTypes.shape({
-      key: PropTypes.string,
-    }),
-  ]),
+      header: PropTypes.node.isRequired,
+    }).isRequired
+  ),
 
   /**
    * Specify the number of rows that you want to render in the skeleton state
@@ -182,15 +185,6 @@ DataTableSkeleton.propTypes = {
    * Optionally specify whether you want the DataTable to be zebra striped
    */
   zebra: PropTypes.bool,
-};
-
-DataTableSkeleton.defaultProps = {
-  rowCount: 5,
-  columnCount: 5,
-  zebra: false,
-  compact: false,
-  showHeader: true,
-  showToolbar: true,
 };
 
 export default DataTableSkeleton;

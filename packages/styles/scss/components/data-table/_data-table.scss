@@ -16,7 +16,7 @@
 @use '../../theme' as *;
 @use '../../type' as *;
 @use '../../layer' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/text-overflow' as *;
@@ -138,7 +138,7 @@
       }
 
       &.#{$prefix}--table-column-checkbox:not(.#{$prefix}--table-column-radio) {
-        padding-top: rem(13px);
+        padding-top: convert.to-rem(13px);
       }
     }
 
@@ -158,7 +158,7 @@
       }
 
       &.#{$prefix}--table-column-checkbox {
-        padding-top: rem(13px);
+        padding-top: convert.to-rem(13px);
       }
     }
 
@@ -286,7 +286,7 @@
     svg {
     position: relative;
     // Used to center svg without setting display flex //display block needed for overflow text truncation
-    top: rem(3px);
+    top: convert.to-rem(3px);
     margin-right: $spacing-03;
   }
 
@@ -311,17 +311,17 @@
 
   .#{$prefix}--data-table--xs td.#{$prefix}--table-column-menu,
   .#{$prefix}--data-table--sm td.#{$prefix}--table-column-menu {
-    height: rem(24px);
+    height: convert.to-rem(24px);
     padding-top: 0;
     padding-bottom: 0;
   }
 
   .#{$prefix}--data-table--sm td.#{$prefix}--table-column-menu {
-    height: rem(32px);
+    height: convert.to-rem(32px);
   }
 
   .#{$prefix}--data-table--md td.#{$prefix}--table-column-menu {
-    height: rem(40px);
+    height: convert.to-rem(40px);
   }
 
   .#{$prefix}--data-table--xl .#{$prefix}--table-column-menu {
@@ -367,7 +367,7 @@
   .#{$prefix}--data-table th.#{$prefix}--table-column-checkbox {
     // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
     position: static;
-    width: rem(32px);
+    width: convert.to-rem(32px);
     background: $layer-accent;
     transition: background-color $duration-fast-01 motion(entrance, productive);
   }
@@ -383,47 +383,47 @@
   .#{$prefix}--data-table tbody td.#{$prefix}--table-column-checkbox {
     min-width: 2.5rem;
     // spacing between checkbox / chevron and next cell should be 8px / 0.5rem
-    padding-right: rem(4px);
+    padding-right: convert.to-rem(4px);
     padding-left: 1rem;
   }
 
   .#{$prefix}--data-table thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table tbody td.#{$prefix}--table-expand {
-    width: rem(32px);
-    height: rem(32px);
+    width: convert.to-rem(32px);
+    height: convert.to-rem(32px);
   }
 
   .#{$prefix}--data-table--xs thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table--xs tbody td.#{$prefix}--table-expand {
-    width: rem(24px);
-    height: rem(24px);
+    width: convert.to-rem(24px);
+    height: convert.to-rem(24px);
     padding: 0 0 0 0.5rem;
   }
 
   .#{$prefix}--data-table--sm thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table--sm tbody td.#{$prefix}--table-expand {
-    width: rem(32px);
-    height: rem(32px);
+    width: convert.to-rem(32px);
+    height: convert.to-rem(32px);
     padding: 0;
     padding-left: 0.5rem;
   }
 
   .#{$prefix}--data-table--md thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table--md tbody td.#{$prefix}--table-expand {
-    width: rem(40px);
-    height: rem(40px);
-    padding: rem(4px) 0 rem(4px) rem(8px);
+    width: convert.to-rem(40px);
+    height: convert.to-rem(40px);
+    padding: convert.to-rem(4px) 0 convert.to-rem(4px) convert.to-rem(8px);
   }
 
   .#{$prefix}--data-table--xl thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table--xl tbody td.#{$prefix}--table-expand {
-    height: rem(64px);
-    padding-top: rem(10px);
-    padding-bottom: rem(22px);
+    height: convert.to-rem(64px);
+    padding-top: convert.to-rem(10px);
+    padding-bottom: convert.to-rem(22px);
   }
 
   .#{$prefix}--data-table--xl .#{$prefix}--table-column-checkbox {
-    padding-top: rem(13px);
+    padding-top: convert.to-rem(13px);
   }
 
   .#{$prefix}--data-table--xl .#{$prefix}--table-column-radio {
@@ -438,7 +438,7 @@
   }
 
   .#{$prefix}--table-column-radio .#{$prefix}--radio-button__appearance {
-    margin-right: rem(-2px);
+    margin-right: convert.to-rem(-2px);
   }
 
   // default selected row + zebra select - even child
@@ -519,22 +519,22 @@
   .#{$prefix}--data-table--xs thead tr,
   .#{$prefix}--data-table--xs tbody tr,
   .#{$prefix}--data-table--xs tbody tr th {
-    height: rem(24px);
+    height: convert.to-rem(24px);
   }
 
   .#{$prefix}--data-table--xs .#{$prefix}--table-header-label {
-    padding-top: rem(2px);
-    padding-bottom: rem(2px);
+    padding-top: convert.to-rem(2px);
+    padding-bottom: convert.to-rem(2px);
   }
 
   .#{$prefix}--data-table--xs td,
   .#{$prefix}--data-table--xs tbody tr th {
-    padding-top: rem(2px);
-    padding-bottom: rem(2px);
+    padding-top: convert.to-rem(2px);
+    padding-bottom: convert.to-rem(2px);
   }
 
   .#{$prefix}--data-table--xs .#{$prefix}--overflow-menu {
-    width: rem(32px);
+    width: convert.to-rem(32px);
     height: calc(100% + 1px);
   }
 
@@ -553,9 +553,9 @@
   .#{$prefix}--data-table.#{$prefix}--data-table--xs
     .#{$prefix}--table-column-checkbox
     .#{$prefix}--checkbox-label {
-    height: rem(23px);
+    height: convert.to-rem(23px);
     // 24px row - 1px border
-    min-height: rem(23px);
+    min-height: convert.to-rem(23px);
   }
 
   //----------------------------------------------------------------------------
@@ -564,20 +564,20 @@
   .#{$prefix}--data-table--sm thead tr,
   .#{$prefix}--data-table--sm tbody tr,
   .#{$prefix}--data-table--sm tbody tr th {
-    height: rem(32px);
+    height: convert.to-rem(32px);
   }
 
   .#{$prefix}--data-table--sm .#{$prefix}--table-header-label {
-    padding-top: rem(7px);
-    padding-bottom: rem(7px);
+    padding-top: convert.to-rem(7px);
+    padding-bottom: convert.to-rem(7px);
   }
 
   .#{$prefix}--data-table--sm td,
   .#{$prefix}--data-table--sm tbody tr th,
   .#{$prefix}--data-table--sm.#{$prefix}--data-table--top-aligned-header
     th.#{$prefix}--table-column-checkbox {
-    padding-top: rem(7px);
-    padding-bottom: rem(6px);
+    padding-top: convert.to-rem(7px);
+    padding-bottom: convert.to-rem(6px);
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--sm:not(
@@ -588,8 +588,8 @@
       .#{$prefix}--data-table--top-aligned-header
     )
     th.#{$prefix}--table-column-checkbox {
-    padding-top: rem(3px);
-    padding-bottom: rem(3px);
+    padding-top: convert.to-rem(3px);
+    padding-bottom: convert.to-rem(3px);
   }
 
   .#{$prefix}--data-table--sm .#{$prefix}--overflow-menu {
@@ -602,20 +602,20 @@
   .#{$prefix}--data-table--md thead tr,
   .#{$prefix}--data-table--md tbody tr,
   .#{$prefix}--data-table--md tbody tr th {
-    height: rem(40px);
+    height: convert.to-rem(40px);
   }
 
   .#{$prefix}--data-table--md .#{$prefix}--table-header-label,
   .#{$prefix}--data-table--md.#{$prefix}--data-table--top-aligned-header
     th.#{$prefix}--table-column-checkbox {
-    padding-top: rem(7px);
-    padding-bottom: rem(7px);
+    padding-top: convert.to-rem(7px);
+    padding-bottom: convert.to-rem(7px);
   }
 
   .#{$prefix}--data-table--md td,
   .#{$prefix}--data-table--md tbody tr th {
-    padding-top: rem(7px);
-    padding-bottom: rem(6px);
+    padding-top: convert.to-rem(7px);
+    padding-bottom: convert.to-rem(6px);
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--md:not(
@@ -626,13 +626,13 @@
       .#{$prefix}--data-table--top-aligned-header
     )
     th.#{$prefix}--table-column-checkbox {
-    padding-top: rem(3px);
-    padding-bottom: rem(3px);
+    padding-top: convert.to-rem(3px);
+    padding-bottom: convert.to-rem(3px);
   }
 
   .#{$prefix}--data-table--md .#{$prefix}--table-column-menu {
-    padding-top: rem(3px);
-    padding-bottom: rem(3px);
+    padding-top: convert.to-rem(3px);
+    padding-bottom: convert.to-rem(3px);
   }
 
   //----------------------------------------------------------------------------
@@ -641,7 +641,7 @@
   .#{$prefix}--data-table--xl thead tr,
   .#{$prefix}--data-table--xl tbody tr,
   .#{$prefix}--data-table--xl tbody tr th {
-    height: rem(64px);
+    height: convert.to-rem(64px);
   }
 
   .#{$prefix}--data-table--xl .#{$prefix}--table-header-label {
@@ -728,7 +728,7 @@
     }
 
     .#{$prefix}--table-expand {
-      max-width: rem(48px);
+      max-width: convert.to-rem(48px);
     }
 
     thead .#{$prefix}--table-expand {
@@ -745,7 +745,7 @@
       td:not(.#{$prefix}--table-column-menu):not(
         .#{$prefix}--table-column-checkbox
       ) {
-      padding-top: rem(14px);
+      padding-top: convert.to-rem(14px);
     }
 
     // Taken from L125 _data-table-expandable
@@ -767,8 +767,8 @@
     // Selectable fix
     thead th.#{$prefix}--table-column-checkbox,
     tbody tr td.#{$prefix}--table-column-checkbox {
-      width: rem(36px);
-      min-width: rem(36px);
+      width: convert.to-rem(36px);
+      min-width: convert.to-rem(36px);
       align-items: center;
     }
 
@@ -780,7 +780,7 @@
     // Overflow fix
     /* When using sticky header, with a selection element in the first column, we need to set the last item to a fixed width to match the table body. We only want this to happen when the last table header does not have any text */
     th.#{$prefix}--table-column-checkbox ~ th:last-of-type:empty {
-      max-width: rem(64px);
+      max-width: convert.to-rem(64px);
     }
 
     th:empty:not(.#{$prefix}--table-expand) {
@@ -828,24 +828,24 @@
     }
 
     &.#{$prefix}--data-table--xs tr:not(.#{$prefix}--expandable-row) {
-      min-height: rem(24px);
+      min-height: convert.to-rem(24px);
     }
 
     &.#{$prefix}--data-table--sm tr:not(.#{$prefix}--expandable-row) {
-      min-height: rem(32px);
+      min-height: convert.to-rem(32px);
     }
 
     &.#{$prefix}--data-table--xl tr:not(.#{$prefix}--expandable-row) {
-      min-height: rem(64px);
+      min-height: convert.to-rem(64px);
     }
 
     // Expansion overrides
     &.#{$prefix}--data-table--xs tr td.#{$prefix}--table-expand {
-      padding-top: rem(4px);
+      padding-top: convert.to-rem(4px);
     }
 
     &.#{$prefix}--data-table--sm tr td.#{$prefix}--table-expand {
-      padding-top: rem(8px);
+      padding-top: convert.to-rem(8px);
     }
 
     .#{$prefix}--table-header-label {
@@ -853,18 +853,18 @@
 
       max-width: calc(100% - 10px);
       // Needed to reduce 1px jump when toggling between variations
-      padding-top: rem(15px);
+      padding-top: convert.to-rem(15px);
       padding-bottom: 1rem;
       overflow-y: hidden;
     }
 
     &.#{$prefix}--data-table--xs th .#{$prefix}--table-header-label {
-      padding-top: rem(3px);
+      padding-top: convert.to-rem(3px);
       padding-bottom: 0;
     }
 
     &.#{$prefix}--data-table--sm th .#{$prefix}--table-header-label {
-      padding-top: rem(8px);
+      padding-top: convert.to-rem(8px);
       padding-bottom: 0;
     }
 
@@ -901,7 +901,7 @@
     .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type,
   .#{$prefix}--data-table--sm
     .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type {
-    margin: rem(-3px) 0;
+    margin: convert.to-rem(-3px) 0;
   }
 
   // Windows HCM fix

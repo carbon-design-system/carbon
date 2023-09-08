@@ -271,7 +271,7 @@ export interface TabListProps extends DivAttributes {
   /**
    * Provide the props that describe the left overflow button
    */
-  leftOverflowButtonProps: HTMLAttributes<HTMLButtonElement>;
+  leftOverflowButtonProps?: HTMLAttributes<HTMLButtonElement>;
 
   /**
    * Specify whether to use the light component variant
@@ -281,7 +281,7 @@ export interface TabListProps extends DivAttributes {
   /**
    * Provide the props that describe the right overflow button
    */
-  rightOverflowButtonProps: HTMLAttributes<HTMLButtonElement>;
+  rightOverflowButtonProps?: HTMLAttributes<HTMLButtonElement>;
 
   /**
    * Optionally provide a delay (in milliseconds) passed to the lodash
@@ -857,19 +857,19 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
   };
 
   const DismissIcon = (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <div
-      role="button"
       tabIndex={-1}
       aria-hidden={true}
       className={cx(`${prefix}--tabs__nav-item--close-icon`, {
         [`${prefix}--visually-hidden`]: !dismissable,
       })}
       onClick={handleClose}
-      aria-label="Close tab"
       title="Close tab"
       ref={dismissIconRef}>
-      <Close />
+      <Close
+        aria-hidden={dismissable ? 'false' : 'true'}
+        aria-label="Press delete to close tab"
+      />
     </div>
   );
 
@@ -1199,11 +1199,17 @@ export interface TabPanelsProps {
 }
 
 function TabPanels({ children }: TabPanelsProps) {
-  return React.Children.map(children, (child, index) => {
-    return (
-      <TabPanelContext.Provider value={index}>{child}</TabPanelContext.Provider>
-    );
-  });
+  return (
+    <>
+      {React.Children.map(children, (child, index) => {
+        return (
+          <TabPanelContext.Provider value={index}>
+            {child}
+          </TabPanelContext.Provider>
+        );
+      })}
+    </>
+  );
 }
 
 TabPanels.propTypes = {
