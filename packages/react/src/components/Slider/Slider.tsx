@@ -38,11 +38,6 @@ const DRAG_EVENT_TYPES = new Set(['mousemove', 'touchmove']);
 const DRAG_STOP_EVENT_TYPES = new Set(['mouseup', 'touchend', 'touchcancel']);
 
 /**
- * Width of each two handle range handle when idle.
- */
-const TWO_HANDLE_IDLE_WIDTH = 12;
-
-/**
  * Distinguish two handles by lower and upper positions.
  */
 enum HandlePosition {
@@ -1002,13 +997,9 @@ export default class Slider extends PureComponent<SliderProps> {
   };
 
   calcDistanceToHandle = (handle: HandlePosition, clientX) => {
-    // Left is a whole value between 0 and 100. Note that the lower handle is
-    // translated in CSS by -100% of its width, which is 12px. We adjust the
-    // calculation accordingly.
+    // Left is a whole value between 0 and 100.
     const left =
-      handle === HandlePosition.LOWER
-        ? this.state.left - TWO_HANDLE_IDLE_WIDTH
-        : this.state.leftUpper;
+      handle === HandlePosition.LOWER ? this.state.left : this.state.leftUpper;
     const boundingRect = this.getSliderBoundingRect();
     const handleX = boundingRect.left + (left / 100) * boundingRect.width;
     return Math.abs(handleX - clientX);
