@@ -48,6 +48,11 @@ export interface TextAreaProps
   enableCounter?: boolean;
 
   /**
+   * Specify whether to display the word counter
+   */
+  enableWordCounter?: boolean;
+
+  /**
    * Provide text that is used alongside the control label for additional help
    */
   helperText?: ReactNodeLike;
@@ -89,6 +94,11 @@ export interface TextAreaProps
    * Max character count allowed for the textarea. This is needed in order for enableCounter to display
    */
   maxCount?: number;
+
+  /**
+   * Max word count allowed for the textarea. This is needed in order for enableWordCounter to display
+   */
+  maxWordCount?: number;
 
   /**
    * Optionally provide an `onChange` handler that is called whenever `<textarea>`
@@ -147,7 +157,9 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     light,
     placeholder,
     enableCounter,
+    enableWordCounter,
     maxCount,
+    maxWordCount,
     warn = false,
     warnText,
     ...other
@@ -158,11 +170,21 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const [textCount, setTextCount] = useState(
     defaultValue?.toString()?.length || value?.toString()?.length || 0
   );
+  const [textWordCount, setTextWordCount] = useState(
+    defaultValue?.toString()?.trim().split(/\s+/).length ||
+      value?.toString()?.trim().split(/\s+/).length ||
+      0
+  );
   const { current: textAreaInstanceId } = useRef(getInstanceId());
 
   useEffect(() => {
     setTextCount(
       defaultValue?.toString()?.length || value?.toString()?.length || 0
+    );
+    setTextWordCount(
+      defaultValue?.toString()?.trim().split(/\s+/).length ||
+        value?.toString()?.trim().split(/\s+/).length ||
+        0
     );
   }, [value, defaultValue]);
 
@@ -179,6 +201,20 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
         // delay textCount assignation to give the textarea element value time to catch up if is a controlled input
         setTimeout(() => {
           setTextCount(evt.target?.value?.length);
+
+          // make sure that the words count is not greater than the maxWordCount
+          const words = evt.target?.value?.trim().split(/\s+/) || [];
+          let nbWords = words.length;
+          if (
+            enableWordCounter &&
+            !enableCounter &&
+            maxWordCount &&
+            words.length >= maxWordCount
+          ) {
+            evt.target.value = words.splice(0, maxWordCount).join(' ').trim();
+            nbWords = maxWordCount;
+          }
+          setTextWordCount(nbWords);
         }, 0);
         onChange(evt);
       }
@@ -213,6 +249,8 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const counter =
     enableCounter && maxCount ? (
       <div className={counterClasses}>{`${textCount}/${maxCount}`}</div>
+    ) : enableWordCounter && maxWordCount ? (
+      <div className={counterClasses}>{`${textWordCount}/${maxWordCount}`}</div>
     ) : null;
 
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
@@ -357,6 +395,11 @@ TextArea.propTypes = {
   enableCounter: PropTypes.bool,
 
   /**
+   * Specify whether to display the word counter
+   */
+  enableWordCounter: PropTypes.bool,
+
+  /**
    * Provide text that is used alongside the control label for additional help
    */
   helperText: PropTypes.node,
@@ -401,6 +444,11 @@ TextArea.propTypes = {
    * Max character count allowed for the textarea. This is needed in order for enableCounter to display
    */
   maxCount: PropTypes.number,
+
+  /**
+   * Max word count allowed for the textarea. This is needed in order for enableWordCounter to display
+   */
+  maxWordCount: PropTypes.number,
 
   /**
    * Optionally provide an `onChange` handler that is called whenever `<textarea>`
@@ -455,7 +503,9 @@ TextArea.defaultProps = {
   invalidText: '',
   helperText: '',
   enableCounter: false,
+  enableWordCounter: false,
   maxCount: undefined,
+  maxWordCount: undefined,
   warn: false,
   warnText: '',
 };

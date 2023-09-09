@@ -8362,10 +8362,12 @@ Map {
     "defaultProps": Object {
       "disabled": false,
       "enableCounter": false,
+      "enableWordCounter": false,
       "helperText": "",
       "invalid": false,
       "invalidText": "",
       "maxCount": undefined,
+      "maxWordCount": undefined,
       "onChange": [Function],
       "onClick": [Function],
       "placeholder": "",
@@ -8399,6 +8401,9 @@ Map {
       "enableCounter": Object {
         "type": "bool",
       },
+      "enableWordCounter": Object {
+        "type": "bool",
+      },
       "helperText": Object {
         "type": "node",
       },
@@ -8420,6 +8425,9 @@ Map {
       },
       "light": [Function],
       "maxCount": Object {
+        "type": "number",
+      },
+      "maxWordCount": Object {
         "type": "number",
       },
       "onChange": Object {
