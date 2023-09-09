@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
   assertMenuOpen,
@@ -183,8 +183,6 @@ describe('Dropdown', () => {
   });
 
   describe('Component API', () => {
-    afterEach(cleanup);
-
     it('should accept a `ref` for the underlying button element', () => {
       const ref = React.createRef();
       render(<Dropdown {...mockProps} ref={ref} />);

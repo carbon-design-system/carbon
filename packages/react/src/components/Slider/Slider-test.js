@@ -145,7 +145,7 @@ describe('Slider', () => {
       const inputElement = screen.getByLabelText(inputAriaValue);
       const slider = screen.getByRole('slider');
 
-      userEvent.clear(inputElement);
+      await userEvent.clear(inputElement);
       await type(inputElement, '999');
       expect(parseInt(slider.getAttribute('aria-valuenow'))).toEqual(999);
       expect(onChange).toHaveBeenLastCalledWith({ value: 999 });
@@ -161,7 +161,7 @@ describe('Slider', () => {
       });
       const inputElement = screen.getByLabelText(inputAriaValue);
 
-      userEvent.clear(inputElement);
+      await userEvent.clear(inputElement);
       await type(inputElement, '12');
       expect(onChange).toHaveBeenLastCalledWith({ value: 12 });
     });
