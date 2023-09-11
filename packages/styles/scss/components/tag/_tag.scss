@@ -17,7 +17,7 @@
 @use '../../spacing' as *;
 @use './tokens' as *;
 @use './mixins' as *;
-@use '../../utilities/skeleton';
+@use '../../utilities/skeleton' as *;
 
 /// Tag styles
 /// @access public
@@ -250,6 +250,8 @@
 
   // Skeleton state
   .#{$prefix}--tag.#{$prefix}--skeleton {
+    @include skeleton;
+
     @include tag-theme(
       $bg-color: $skeleton-background,
       $text-color: $text-primary
