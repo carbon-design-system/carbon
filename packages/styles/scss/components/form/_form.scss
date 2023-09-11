@@ -54,10 +54,10 @@ $input-label-weight: 400 !default;
     @include type-style('label-01');
 
     display: inline-block;
-    margin-bottom: $spacing-03;
     color: $text-secondary;
     font-weight: $input-label-weight;
     line-height: 1rem;
+    margin-block-end: $spacing-03;
     vertical-align: baseline;
   }
 
@@ -66,13 +66,13 @@ $input-label-weight: 400 !default;
   }
 
   .#{$prefix}--label--no-margin {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 
   .#{$prefix}--label + .#{$prefix}--tooltip {
     position: relative;
-    top: 0.2rem;
-    left: 0.5rem;
+    inset-block-start: 0.2rem;
+    inset-inline-start: 0.5rem;
   }
 
   .#{$prefix}--label + .#{$prefix}--tooltip .#{$prefix}--tooltip__trigger {
@@ -103,16 +103,17 @@ $input-label-weight: 400 !default;
   }
 
   .#{$prefix}--label + .#{$prefix}--toggletip {
-    top: 0.2rem;
-    left: 0.5rem;
+    inset-block-start: 0.2rem;
+    inset-inline-start: 0.5rem;
   }
 
   // Skeleton State
   .#{$prefix}--label.#{$prefix}--skeleton {
     @include skeleton;
 
-    width: convert.to-rem(75px);
-    height: convert.to-rem(14px);
+    block-size: convert.to-rem(14px);
+
+    inline-size: convert.to-rem(75px);
   }
 
   input[type='number'] {
@@ -156,8 +157,8 @@ $input-label-weight: 400 !default;
     ~ .#{$prefix}--form-requirement {
       display: block;
       overflow: visible;
-      max-height: convert.to-rem(200px);
       font-weight: 400;
+      max-block-size: convert.to-rem(200px);
     }
   }
 
@@ -202,22 +203,22 @@ $input-label-weight: 400 !default;
 
     display: none;
     overflow: hidden;
-    max-height: 0;
     margin: $spacing-02 0 0;
+    max-block-size: 0;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--form__helper-text {
-    margin-top: 0;
+    margin-block-start: 0;
   }
 
   .#{$prefix}--form__helper-text {
     @include type-style('helper-text-01');
 
     z-index: 0;
-    // Added to prevent error text from displaying under helper text in Safari (#6392)
-    width: 100%;
-    margin-top: $spacing-02;
     color: $text-secondary;
+    // Added to prevent error text from displaying under helper text in Safari (#6392)
+    inline-size: 100%;
+    margin-block-start: $spacing-02;
     opacity: 1;
   }
 

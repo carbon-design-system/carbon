@@ -24,7 +24,7 @@
 /// @group pagination
 @mixin pagination {
   .#{$prefix}--data-table-container + .#{$prefix}--pagination {
-    border-top: 0;
+    border-block-start: 0;
   }
 
   .#{$prefix}--pagination {
@@ -32,12 +32,12 @@
     @include type-style('body-compact-01');
 
     display: flex;
-    width: calc(100% - 1px);
-    min-height: convert.to-rem(40px);
     align-items: center;
     justify-content: space-between;
-    border-top: 1px solid $border-subtle;
     background-color: $layer;
+    border-block-start: 1px solid $border-subtle;
+    inline-size: calc(100% - 1px);
+    min-block-size: convert.to-rem(40px);
     overflow-x: auto;
 
     @include breakpoint('md') {
@@ -66,37 +66,39 @@
   }
 
   .#{$prefix}--pagination--sm {
-    min-height: convert.to-rem(32px);
+    min-block-size: convert.to-rem(32px);
   }
 
   .#{$prefix}--pagination--lg {
-    min-height: convert.to-rem(48px);
+    min-block-size: convert.to-rem(48px);
   }
 
   .#{$prefix}--pagination .#{$prefix}--select {
-    height: 100%;
     align-items: center;
+    block-size: 100%;
   }
 
   .#{$prefix}--pagination .#{$prefix}--select-input--inline__wrapper {
     display: flex;
-    height: 100%;
+    block-size: 100%;
   }
 
   .#{$prefix}--pagination .#{$prefix}--select-input {
     @include type-style('body-compact-01');
 
-    width: auto;
-    min-width: auto;
-    height: 100%;
+    block-size: 100%;
+
+    inline-size: auto;
     line-height: convert.to-rem(40px);
+
+    min-inline-size: auto;
   }
 
   // Extra specificity is needed to preserve padding
   .#{$prefix}--pagination
     .#{$prefix}--select--inline
     .#{$prefix}--select-input {
-    padding: 0 2.25rem 0 $spacing-05;
+    padding-inline: $spacing-05 2.25rem;
   }
 
   .#{$prefix}--pagination--sm .#{$prefix}--select-input {
@@ -126,30 +128,30 @@
   }
 
   .#{$prefix}--pagination .#{$prefix}--select__arrow {
-    top: 50%;
+    inset-block-start: 50%;
     transform: translate(-0.5rem, -50%);
   }
 
   .#{$prefix}--pagination
     .#{$prefix}--select__item-count
     .#{$prefix}--select-input {
-    border-right: 1px solid $border-subtle;
+    border-inline-end: 1px solid $border-subtle;
   }
 
   .#{$prefix}--pagination__right {
-    border-left: 1px solid $border-subtle;
+    border-inline-start: 1px solid $border-subtle;
   }
 
   .#{$prefix}--pagination__left,
   .#{$prefix}--pagination__right {
     display: flex;
-    height: 100%;
     align-items: center;
+    block-size: 100%;
   }
 
   .#{$prefix}--pagination__left > .#{$prefix}--form-item,
   .#{$prefix}--pagination__right > .#{$prefix}--form-item {
-    height: 100%;
+    block-size: 100%;
   }
 
   .#{$prefix}--pagination__left .#{$prefix}--pagination__text,
@@ -158,18 +160,18 @@
   }
 
   .#{$prefix}--pagination__left .#{$prefix}--pagination__text {
-    margin-right: convert.to-rem(1px);
+    margin-inline-end: convert.to-rem(1px);
   }
 
   .#{$prefix}--pagination__right .#{$prefix}--pagination__text {
-    margin-right: 1rem;
-    margin-left: convert.to-rem(1px);
+    margin-inline-end: 1rem;
+    margin-inline-start: convert.to-rem(1px);
   }
 
   .#{$prefix}--pagination__right
     .#{$prefix}--pagination__text.#{$prefix}--pagination__page-text {
-    margin-right: convert.to-rem(1px);
-    margin-left: 1rem;
+    margin-inline-end: convert.to-rem(1px);
+    margin-inline-start: 1rem;
   }
 
   .#{$prefix}--pagination__right .#{$prefix}--pagination__text:empty {
@@ -191,8 +193,8 @@
   }
 
   span.#{$prefix}--pagination__text {
-    margin-left: $spacing-05;
     color: $text-primary;
+    margin-inline-start: $spacing-05;
   }
 
   span.#{$prefix}--pagination__text.#{$prefix}--pagination__items-count {
@@ -204,17 +206,17 @@
     @include component-reset.reset;
 
     display: flex;
-    width: convert.to-rem(40px);
-    height: convert.to-rem(40px);
-    min-height: convert.to-rem(32px);
     align-items: center;
     justify-content: center;
     border: none;
-    border-left: 1px solid $border-subtle;
     margin: 0;
     background: none;
+    block-size: convert.to-rem(40px);
+    border-inline-start: 1px solid $border-subtle;
     cursor: pointer;
     fill: $icon-primary;
+    inline-size: convert.to-rem(40px);
+    min-block-size: convert.to-rem(32px);
     transition: outline $duration-fast-02 motion(standard, productive),
       background-color $duration-fast-02 motion(standard, productive);
   }
@@ -227,22 +229,22 @@
   .#{$prefix}--pagination--sm .#{$prefix}--pagination__button,
   .#{$prefix}--pagination--sm
     .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
-    width: convert.to-rem(32px);
-    height: convert.to-rem(32px);
+    block-size: convert.to-rem(32px);
+    inline-size: convert.to-rem(32px);
   }
 
   .#{$prefix}--pagination--lg .#{$prefix}--pagination__button,
   .#{$prefix}--pagination--lg
     .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
-    width: convert.to-rem(48px);
-    height: convert.to-rem(48px);
+    block-size: convert.to-rem(48px);
+    inline-size: convert.to-rem(48px);
   }
 
   .#{$prefix}--pagination__button:focus,
   .#{$prefix}--btn--ghost:focus.#{$prefix}--pagination__button {
     @include focus-outline('outline');
 
-    border-left: 0;
+    border-inline-start: 0;
   }
 
   .#{$prefix}--pagination__button:hover,
@@ -268,8 +270,8 @@
 
   // Skeleton state
   .#{$prefix}--pagination.#{$prefix}--skeleton .#{$prefix}--skeleton__text {
-    margin-right: 1rem;
-    margin-bottom: 0;
+    margin-block-end: 0;
+    margin-inline-end: 1rem;
   }
 
   // Windows HCM fix
@@ -277,5 +279,10 @@
   .#{$prefix}--pagination__button,
   .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
     @include high-contrast-mode('outline');
+  }
+
+  // RTL overrides
+  [dir='rtl'] .#{$prefix}--pagination .#{$prefix}--select__arrow {
+    transform: translate(0.5rem, -50%);
   }
 }

@@ -17,8 +17,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 250px;
   margin: auto;
+  min-block-size: 250px;
 }
 
 .sb-tooltip-trigger {
@@ -27,8 +27,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1rem;
-  height: 1rem;
+  block-size: 1rem;
+  inline-size: 1rem;
 }
 
 .sb-tooltip-trigger:focus {
@@ -41,7 +41,7 @@
 
 // DefinitionTooltip
 .sb-definition-tooltip {
-  max-width: 60ch;
+  max-inline-size: 60ch;
 }
 
 .sb-definition-tooltip p {

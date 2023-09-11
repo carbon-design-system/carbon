@@ -29599,6 +29599,7 @@ __metadata:
     stylelint-order: ^5.0.0
     stylelint-prettier: ^2.0.0
     stylelint-scss: ^4.1.0
+    stylelint-use-logical: ^2.1.0
   peerDependencies:
     stylelint: ^15.0.0
   languageName: unknown
@@ -29734,6 +29735,15 @@ __metadata:
   peerDependencies:
     stylelint: ^14.0.0
   checksum: 9dde9ecc6b1306530307a389f22b098df368bc6453eb09095b1f06a31d5395545d4171d842bc2c3996bb006c8977f5629076ff985c140548db4cbb794c15a780
+  languageName: node
+  linkType: hard
+
+"stylelint-use-logical@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "stylelint-use-logical@npm:2.1.0"
+  peerDependencies:
+    stylelint: ">= 11 < 16"
+  checksum: d8e0d2aea6e417479c7d3759f8ffa189111adbc3558f17f26f15459b4d863d7b25dcdc7cbdba2a361eb3f0950c224f35554c0be58253fd00b8dbe5ad0ab09450
   languageName: node
   linkType: hard
 

@@ -19,11 +19,11 @@
   $max-height: convert.to-rem(300px)
 ) {
   .#{$prefix}--data-table--max-width {
-    max-width: $max-width;
+    max-inline-size: $max-width;
   }
 
   .#{$prefix}--data-table--sticky-header {
-    max-height: $max-height;
+    max-block-size: $max-height;
 
     @if $min-width {
       th:not(.#{$prefix}--table-column-checkbox):not(
@@ -32,7 +32,7 @@
       td:not(.#{$prefix}--table-column-checkbox):not(
           .#{$prefix}--table-column-menu
         ):not(.#{$prefix}--table-expand):not(.#{$prefix}--table-column-icon) {
-        min-width: $min-width;
+        min-inline-size: $min-width;
       }
     }
   }
