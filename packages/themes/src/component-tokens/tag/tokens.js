@@ -2,52 +2,52 @@ import {
   red20,
   red70,
   red80,
-  red30,
+  red20Hover,
   red70Hover,
   magenta20,
   magenta70,
   magenta80,
-  magenta30,
+  magenta20Hover,
   magenta70Hover,
   purple20,
   purple70,
   purple80,
-  purple30,
+  purple20Hover,
   purple70Hover,
   blue20,
   blue70,
   blue80,
-  blue30,
+  blue20Hover,
   blue70Hover,
   cyan20,
   cyan70,
   cyan80,
-  cyan30,
+  cyan20Hover,
   cyan70Hover,
   teal20,
   teal70,
   teal80,
-  teal30,
+  teal20Hover,
   teal70Hover,
   green20,
   green70,
   green80,
-  green30,
+  green20Hover,
   green70Hover,
   gray20,
   gray70,
   gray80,
-  gray30,
+  gray20Hover,
   gray70Hover,
   warmGray20,
   warmGray70,
   warmGray80,
-  warmGray30,
+  warmGray20Hover,
   warmGray70Hover,
   coolGray20,
   coolGray70,
   coolGray80,
-  coolGray30,
+  coolGray20Hover,
   coolGray70Hover,
 } from '@carbon/colors';
 
@@ -66,8 +66,8 @@ export const tagColorRed = {
 };
 
 export const tagHoverRed = {
-  whiteTheme: red30,
-  g10: red30,
+  whiteTheme: red20Hover,
+  g10: red20Hover,
   g90: red70Hover,
   g100: red70Hover,
 };
@@ -87,8 +87,8 @@ export const tagColorMagenta = {
 };
 
 export const tagHoverMagenta = {
-  whiteTheme: magenta30,
-  g10: magenta30,
+  whiteTheme: magenta20Hover,
+  g10: magenta20Hover,
   g90: magenta70Hover,
   g100: magenta70Hover,
 };
@@ -108,8 +108,8 @@ export const tagColorPurple = {
 };
 
 export const tagHoverPurple = {
-  whiteTheme: purple30,
-  g10: purple30,
+  whiteTheme: purple20Hover,
+  g10: purple20Hover,
   g90: purple70Hover,
   g100: purple70Hover,
 };
@@ -129,8 +129,8 @@ export const tagColorBlue = {
 };
 
 export const tagHoverBlue = {
-  whiteTheme: blue30,
-  g10: blue30,
+  whiteTheme: blue20Hover,
+  g10: blue20Hover,
   g90: blue70Hover,
   g100: blue70Hover,
 };
@@ -150,8 +150,8 @@ export const tagColorCyan = {
 };
 
 export const tagHoverCyan = {
-  whiteTheme: cyan30,
-  g10: cyan30,
+  whiteTheme: cyan20Hover,
+  g10: cyan20Hover,
   g90: cyan70Hover,
   g100: cyan70Hover,
 };
@@ -169,8 +169,8 @@ export const tagColorTeal = {
 };
 
 export const tagHoverTeal = {
-  whiteTheme: teal30,
-  g10: teal30,
+  whiteTheme: teal20Hover,
+  g10: teal20Hover,
   g90: teal70Hover,
   g100: teal70Hover,
 };
@@ -190,8 +190,8 @@ export const tagColorGreen = {
 };
 
 export const tagHoverGreen = {
-  whiteTheme: green30,
-  g10: green30,
+  whiteTheme: green20Hover,
+  g10: green20Hover,
   g90: green70Hover,
   g100: green70Hover,
 };
@@ -211,8 +211,8 @@ export const tagColorGray = {
 };
 
 export const tagHoverGray = {
-  whiteTheme: gray30,
-  g10: gray30,
+  whiteTheme: gray20Hover,
+  g10: gray20Hover,
   g90: gray70Hover,
   g100: gray70Hover,
 };
@@ -232,8 +232,8 @@ export const tagColorCoolGray = {
 };
 
 export const tagHoverCoolGray = {
-  whiteTheme: coolGray30,
-  g10: coolGray30,
+  whiteTheme: coolGray20Hover,
+  g10: coolGray20Hover,
   g90: coolGray70Hover,
   g100: coolGray70Hover,
 };
@@ -253,8 +253,8 @@ export const tagColorWarmGray = {
 };
 
 export const tagHoverWarmGray = {
-  whiteTheme: warmGray30,
-  g10: warmGray30,
+  whiteTheme: warmGray20Hover,
+  g10: warmGray20Hover,
   g90: warmGray70Hover,
   g100: warmGray70Hover,
 };
