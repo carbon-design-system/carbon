@@ -16,6 +16,7 @@ jobs:
       contribution')) ) || ( contains(github.event.label.name, format('community
       contribution')) && contains(github.event.issue.labels.*.name,
       format('proposal{0} accepted', ':')) )}}
+
     steps:
       - name: Log github event
         env:
