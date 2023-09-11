@@ -27,15 +27,16 @@
     @include type-style('body-01');
     @include focus-outline('reset');
 
-    min-width: 10rem;
-    height: 100%;
-    min-height: convert.to-rem(40px);
     padding: convert.to-rem(11px) $spacing-05;
     border: none;
-    border-bottom: 1px solid $border-strong;
     background-color: $field;
+    block-size: 100%;
+    border-block-end: 1px solid $border-strong;
     color: $text-primary;
     font-family: inherit;
+    min-block-size: convert.to-rem(40px);
+
+    min-inline-size: 10rem;
     resize: vertical;
     transition: background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
@@ -57,20 +58,20 @@
   }
 
   .#{$prefix}--text-area--invalid {
-    padding-right: $spacing-08;
+    padding-inline-end: $spacing-08;
   }
 
   .#{$prefix}--text-area__wrapper {
     position: relative;
     display: flex;
-    width: 100%;
+    inline-size: 100%;
   }
 
   .#{$prefix}--text-area__invalid-icon {
     position: absolute;
-    top: $spacing-04;
-    right: $spacing-05;
     fill: $support-error;
+    inset-block-start: $spacing-04;
+    inset-inline-end: $spacing-05;
   }
 
   .#{$prefix}--text-area__invalid-icon--warning {
@@ -85,20 +86,20 @@
   .#{$prefix}--text-area__counter-alert {
     position: absolute;
     overflow: hidden;
-    width: 1px;
-    height: 1px;
     padding: 0;
     border: 0;
     margin: -1px;
+    block-size: 1px;
     clip: rect(0, 0, 0, 0);
+    inline-size: 1px;
   }
 
   //-----------------------------
   // Disabled
   //-----------------------------
   .#{$prefix}--text-area:disabled {
-    border-bottom: 1px solid transparent;
     background-color: $field;
+    border-block-end: 1px solid transparent;
     color: $text-disabled;
     cursor: not-allowed;
     outline: none;
@@ -113,8 +114,8 @@
   // Readonly
   //-----------------------------
   .#{$prefix}--text-area__wrapper--readonly .#{$prefix}--text-area {
-    border-bottom-color: $border-subtle;
     background: transparent;
+    border-block-end-color: $border-subtle;
   }
 
   // V11: Possibly deprecate
@@ -126,8 +127,9 @@
   .#{$prefix}--text-area.#{$prefix}--skeleton {
     @include skeleton;
 
-    width: 100%;
-    height: convert.to-rem(100px);
+    block-size: convert.to-rem(100px);
+
+    inline-size: 100%;
 
     &::placeholder {
       color: transparent;
@@ -136,7 +138,7 @@
 
   .#{$prefix}--text-area__label-wrapper {
     display: flex;
-    width: 100%;
     justify-content: space-between;
+    inline-size: 100%;
   }
 }

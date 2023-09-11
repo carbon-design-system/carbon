@@ -81,9 +81,12 @@ const PlaygroundStory = (props) => {
 export const TabTip = () => {
   const [open, setOpen] = useState(true);
   const [openTwo, setOpenTwo] = useState(false);
+  const align = document?.dir === 'rtl' ? 'bottom-right' : 'bottom-left';
+  const alignTwo = document?.dir === 'rtl' ? 'bottom-left' : 'bottom-right';
   return (
     <div className="popover-tabtip-story" style={{ display: 'flex' }}>
       <Popover
+        align={align}
         open={open}
         onKeyDown={(evt) => {
           if (match(evt, keys.Escape)) {
@@ -126,7 +129,7 @@ export const TabTip = () => {
       <Popover
         open={openTwo}
         isTabTip
-        align="bottom-right"
+        align={alignTwo}
         onRequestClose={() => setOpenTwo(false)}>
         <button
           aria-label="Settings"
@@ -229,9 +232,10 @@ export const AutoAlign = () => {
       <div
         style={{
           position: 'absolute',
-          bottom: 0,
-          right: '50%',
-          margin: '3rem',
+          insetBlockEnd: 0,
+          insetInlineEnd: '50%',
+          marginBlock: '3rem',
+          marginInline: '3rem',
         }}>
         <Popover open={open} autoAlign>
           <div className="playground-trigger">
@@ -260,7 +264,14 @@ export const AutoAlign = () => {
           </p>
         </PopoverContent>
       </Popover>
-      <div style={{ position: 'absolute', top: 0, right: 0, margin: '3rem' }}>
+      <div
+        style={{
+          position: 'absolute',
+          insetBlockStart: 0,
+          insetInlineEnd: 0,
+          marginBlock: '3rem',
+          marginInline: '3rem',
+        }}>
         <Popover open autoAlign>
           <div className="playground-trigger">
             <CheckboxIcon />
@@ -274,7 +285,13 @@ export const AutoAlign = () => {
         </Popover>
       </div>
       <div
-        style={{ position: 'absolute', bottom: 0, right: 0, margin: '3rem' }}>
+        style={{
+          position: 'absolute',
+          insetBlockEnd: 0,
+          insetInlineEnd: 0,
+          marginBlock: '3rem',
+          marginInline: '3rem',
+        }}>
         <Popover open autoAlign>
           <div className="playground-trigger">
             <CheckboxIcon />
@@ -287,7 +304,14 @@ export const AutoAlign = () => {
           </PopoverContent>
         </Popover>
       </div>
-      <div style={{ position: 'absolute', bottom: 0, left: 0, margin: '3rem' }}>
+      <div
+        style={{
+          position: 'absolute',
+          insetBlockEnd: 0,
+          insetInlineStart: 0,
+          marginBlock: '3rem',
+          marginInline: '3rem',
+        }}>
         <Popover open autoAlign>
           <div className="playground-trigger">
             <CheckboxIcon />

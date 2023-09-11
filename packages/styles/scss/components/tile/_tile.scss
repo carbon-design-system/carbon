@@ -37,10 +37,10 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
     position: relative;
     display: block;
-    min-width: 8rem;
-    min-height: 4rem;
     padding: layout.density('padding-inline');
     background-color: $layer;
+    min-block-size: 4rem;
+    min-inline-size: 8rem;
     outline: 2px solid transparent;
     outline-offset: -2px;
 
@@ -157,9 +157,9 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
   .#{$prefix}--tile__checkmark {
     position: absolute;
-    height: 1rem;
     border: none;
     background: transparent;
+    block-size: 1rem;
     inset-block-start: layout.density('padding-inline');
     inset-inline-end: layout.density('padding-inline');
     opacity: 0;
@@ -182,10 +182,10 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile__chevron {
     position: absolute;
     display: flex;
-    width: $-icon-container-size;
-    height: $-icon-container-size;
     align-items: center;
     justify-content: center;
+    block-size: $-icon-container-size;
+    inline-size: $-icon-container-size;
     inset-block-end: 0;
     inset-inline-end: 0;
 
@@ -212,10 +212,10 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
     position: absolute;
     display: flex;
-    width: $-icon-container-size;
-    height: $-icon-container-size;
     align-items: center;
     justify-content: center;
+    block-size: $-icon-container-size;
+    inline-size: $-icon-container-size;
     inset-block-end: 0;
     inset-inline-end: 0;
 
@@ -233,12 +233,12 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile--expandable {
     position: relative;
     overflow: hidden;
-    width: 100%;
     border: 0;
     color: inherit;
     cursor: pointer;
     font-family: inherit;
     font-size: inherit;
+    inline-size: 100%;
     text-align: start;
     transition: max-height $duration-moderate-01 motion(standard, productive);
 
@@ -330,8 +330,8 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   }
 
   .#{$prefix}--tile-content {
-    width: 100%;
-    height: 100%;
+    block-size: 100%;
+    inline-size: 100%;
   }
 
   .#{$prefix}--tile-input {

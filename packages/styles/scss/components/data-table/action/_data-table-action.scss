@@ -29,16 +29,16 @@
     position: relative;
     z-index: 1;
     display: flex;
-    width: 100%;
-    min-height: $spacing-09;
     background-color: $layer;
+    inline-size: 100%;
+    min-block-size: $spacing-09;
   }
 
   .#{$prefix}--toolbar-content {
     display: flex;
-    width: 100%;
-    height: $spacing-09;
     justify-content: flex-end;
+    block-size: $spacing-09;
+    inline-size: 100%;
     transform: translate3d(0, 0, 0);
     transition: transform $duration-fast-02 motion(standard, productive),
       clip-path $duration-fast-02 motion(standard, productive);
@@ -49,15 +49,15 @@
   }
 
   .#{$prefix}--toolbar-content .#{$prefix}--search .#{$prefix}--search-input {
-    height: 3rem;
     padding: 0 3rem;
     // For toolbar animation with (esp.) persistent search box
     background-color: transparent;
+    block-size: 3rem;
   }
 
   .#{$prefix}--toolbar-content .#{$prefix}--overflow-menu {
-    width: 3rem;
-    height: 3rem;
+    block-size: 3rem;
+    inline-size: 3rem;
   }
 
   //-------------------------------------------------
@@ -75,10 +75,10 @@
   //-------------------------------------------------
   .#{$prefix}--toolbar-search-container-expandable {
     position: relative;
-    width: $spacing-09;
-    height: $spacing-09;
+    block-size: $spacing-09;
     box-shadow: none;
     cursor: pointer;
+    inline-size: $spacing-09;
     transition: width $transition-expansion $standard-easing,
       background-color $duration-fast-02 motion(entrance, productive);
 
@@ -88,11 +88,11 @@
   }
 
   .#{$prefix}--search.#{$prefix}--toolbar-search-container-expandable {
-    width: 3rem;
+    inline-size: 3rem;
   }
 
   .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search-input {
-    height: 100%;
+    block-size: 100%;
     cursor: pointer;
     opacity: 0;
   }
@@ -115,13 +115,13 @@
 
   .#{$prefix}--toolbar-search-container-expandable.#{$prefix}--search
     .#{$prefix}--search-close {
-    width: $spacing-09;
-    height: $spacing-09;
+    block-size: $spacing-09;
+    inline-size: $spacing-09;
 
     &::before {
-      top: convert.to-rem(2px);
-      height: calc(100% - #{convert.to-rem(4px)});
       background-color: $field-hover;
+      block-size: calc(100% - #{convert.to-rem(4px)});
+      inset-block-start: convert.to-rem(2px);
     }
   }
 
@@ -137,14 +137,14 @@
   .#{$prefix}--table-toolbar
     .#{$prefix}--search--lg
     .#{$prefix}--search-magnifier-icon {
-    left: 0;
+    inset-inline-start: 0;
   }
 
   // lg persistent icon spacing
   .#{$prefix}--table-toolbar:not(.#{$prefix}--table-toolbar--sm)
     .#{$prefix}--toolbar-search-container-persistent.#{$prefix}--search--lg
     .#{$prefix}--search-magnifier-icon {
-    left: 1rem;
+    inset-inline-start: 1rem;
   }
 
   // sm expandable icon spacing
@@ -153,27 +153,27 @@
       .#{$prefix}--toolbar-search-container-active
     ):not(.#{$prefix}--toolbar-search-container-persistent)
     .#{$prefix}--search-magnifier-icon {
-    left: 0;
+    inset-inline-start: 0;
   }
 
   .#{$prefix}--table-toolbar.#{$prefix}--table-toolbar--sm
     .#{$prefix}--search--sm.#{$prefix}--toolbar-search-container-active
     .#{$prefix}--search-magnifier-icon {
-    left: 0.5rem;
+    inset-inline-start: 0.5rem;
   }
 
   // sm persistent icon spacing
   .#{$prefix}--table-toolbar
     .#{$prefix}--toolbar-search-container-persistent.#{$prefix}--search--sm
     .#{$prefix}--search-magnifier-icon {
-    left: 0.5rem;
+    inset-inline-start: 0.5rem;
   }
 
   .#{$prefix}--toolbar-search-container-expandable
     .#{$prefix}--search-magnifier-icon {
-    width: $spacing-09;
-    height: $spacing-09;
     padding: $spacing-05;
+    block-size: $spacing-09;
+    inline-size: $spacing-09;
   }
 
   .#{$prefix}--toolbar-search-container-expandable.#{$prefix}--search--disabled
@@ -199,7 +199,7 @@
   //-------------------------------------------------
 
   .#{$prefix}--toolbar-search-container-active.#{$prefix}--search {
-    width: 100%;
+    inline-size: 100%;
   }
 
   .#{$prefix}--toolbar-search-container-active .#{$prefix}--search-input {
@@ -250,10 +250,10 @@
     @include button-reset.reset;
 
     display: flex;
-    width: $spacing-09;
-    height: $spacing-09;
     padding: $spacing-05;
+    block-size: $spacing-09;
     cursor: pointer;
+    inline-size: $spacing-09;
     transition: background $duration-fast-02 motion(entrance, productive);
   }
 
@@ -262,9 +262,9 @@
     @include button-reset.reset;
 
     display: flex;
-    width: $spacing-09;
-    height: $spacing-09;
+    block-size: $spacing-09;
     cursor: pointer;
+    inline-size: $spacing-09;
     transition: background $duration-fast-02 motion(entrance, productive);
   }
 
@@ -296,23 +296,23 @@
   }
 
   .#{$prefix}--toolbar-action ~ .#{$prefix}--btn {
-    max-width: none;
     margin: 0;
+    max-inline-size: none;
     white-space: nowrap;
   }
 
   .#{$prefix}--overflow-menu--data-table {
-    height: $spacing-09;
+    block-size: $spacing-09;
   }
 
   //-------------------------------------------------
   //TOOLBAR BUTTON ICONS
   //-------------------------------------------------
   .#{$prefix}--toolbar-action__icon {
-    width: auto;
-    max-width: $spacing-05;
-    height: $spacing-05;
+    block-size: $spacing-05;
     fill: $icon-primary;
+    inline-size: auto;
+    max-inline-size: $spacing-05;
   }
 
   //-------------------------------------------------
@@ -320,15 +320,15 @@
   //-------------------------------------------------
   .#{$prefix}--toolbar-search-container-persistent {
     position: relative;
-    width: 100%;
-    height: $spacing-09;
+    block-size: $spacing-09;
+    inline-size: 100%;
     opacity: 1;
   }
 
   .#{$prefix}--toolbar-search-container-persistent
     + .#{$prefix}--toolbar-content {
     position: relative;
-    width: auto;
+    inline-size: auto;
   }
 
   .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search {
@@ -337,13 +337,13 @@
 
   .#{$prefix}--toolbar-search-container-persistent
     .#{$prefix}--search-magnifier-icon {
-    left: $spacing-05;
+    inset-inline-start: $spacing-05;
   }
 
   .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-input {
-    height: $spacing-09;
     padding: 0 $spacing-09;
     border: none;
+    block-size: $spacing-09;
   }
 
   .#{$prefix}--toolbar-search-container-persistent
@@ -364,8 +364,8 @@
   }
 
   .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-close {
-    width: $spacing-09;
-    height: $spacing-09;
+    block-size: $spacing-09;
+    inline-size: $spacing-09;
   }
 
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-search-container,
@@ -381,14 +381,14 @@
   //-------------------------------------------------
   .#{$prefix}--batch-actions {
     position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: $background-brand;
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    inset-block-end: 0;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
     opacity: 0;
     pointer-events: none;
     transform: translate3d(0, 48px, 0);
@@ -416,10 +416,11 @@
     align-items: center;
   }
 
-  .#{$prefix}--action-list .#{$prefix}--btn {
-    padding-right: $spacing-05;
-    padding-left: $spacing-05;
+  .#{$prefix}--action-list .#{$prefix}--btn,
+  .#{$prefix}--batch-summary .#{$prefix}--btn {
     color: $text-on-color;
+    padding-inline-end: $spacing-05;
+    padding-inline-start: $spacing-05;
     white-space: nowrap;
   }
 
@@ -432,8 +433,8 @@
 
   .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon {
     position: static;
-    margin-left: $spacing-03;
     fill: $icon-on-color;
+    margin-inline-start: $spacing-03;
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon .st0 {
@@ -453,7 +454,8 @@
     display: none;
   }
 
-  .#{$prefix}--action-list .#{$prefix}--btn--primary:focus {
+  .#{$prefix}--action-list .#{$prefix}--btn--primary:focus,
+  .#{$prefix}--batch-summary .#{$prefix}--btn--primary:focus {
     outline: 2px solid $layer;
     outline-offset: convert.to-rem(-2px);
   }
@@ -470,15 +472,15 @@
 
   .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before {
     position: absolute;
-    //visually 16px spacing is 1px too low
-    top: convert.to-rem(15px);
-    left: 0;
     display: block;
-    width: convert.to-rem(1px);
-    height: $spacing-05;
     border: none;
     background-color: $text-on-color;
+    block-size: $spacing-05;
     content: '';
+    inline-size: convert.to-rem(1px);
+    //visually 16px spacing is 1px too low
+    inset-block-start: convert.to-rem(15px);
+    inset-inline-start: 0;
     opacity: 1;
     transition: opacity $duration-fast-02 motion(standard, productive);
   }
@@ -492,14 +494,14 @@
   .#{$prefix}--batch-summary {
     position: sticky;
     z-index: 100000;
-    left: 0;
     display: flex;
-    min-height: 3rem;
     align-items: center;
     padding: 0 $spacing-05;
     background-color: $background-brand;
 
     color: $text-on-color;
+    inset-inline-start: 0;
+    min-block-size: 3rem;
   }
 
   .#{$prefix}--batch-summary__scroll {
@@ -511,7 +513,7 @@
   }
 
   .#{$prefix}--batch-summary__divider {
-    padding-left: $spacing-03;
+    padding-inline-start: $spacing-03;
   }
 
   //-------------------------------------------------
@@ -519,41 +521,41 @@
   //-------------------------------------------------
 
   .#{$prefix}--table-toolbar--sm {
-    height: convert.to-rem(32px);
-    min-height: convert.to-rem(32px);
+    block-size: convert.to-rem(32px);
+    min-block-size: convert.to-rem(32px);
 
     .#{$prefix}--toolbar-search-container-expandable,
     .#{$prefix}--toolbar-search-container-persistent {
-      height: convert.to-rem(32px);
+      block-size: convert.to-rem(32px);
     }
 
     .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search-input,
     .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-input {
-      height: convert.to-rem(32px);
+      block-size: convert.to-rem(32px);
     }
 
     .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search-close,
     .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-close {
-      width: convert.to-rem(32px);
-      height: convert.to-rem(32px);
+      block-size: convert.to-rem(32px);
+      inline-size: convert.to-rem(32px);
     }
 
     .#{$prefix}--toolbar-search-container-expandable
       .#{$prefix}--search-magnifier-icon,
     .#{$prefix}--toolbar-search-container-persistent
       .#{$prefix}--search-magnifier-icon {
-      width: convert.to-rem(32px);
-      height: convert.to-rem(32px);
       padding: $spacing-03;
+      block-size: convert.to-rem(32px);
+      inline-size: convert.to-rem(32px);
     }
 
     .#{$prefix}--toolbar-action.#{$prefix}--toolbar-search-container-persistent {
-      width: 100%;
+      inline-size: 100%;
     }
 
     //hidden
     .#{$prefix}--toolbar-search-container-expandable {
-      width: convert.to-rem(32px);
+      inline-size: convert.to-rem(32px);
     }
 
     .#{$prefix}--toolbar-search-container-expandable
@@ -598,19 +600,19 @@
     }
 
     .#{$prefix}--overflow-menu.#{$prefix}--toolbar-action {
-      width: convert.to-rem(32px);
+      block-size: convert.to-rem(32px);
+      inline-size: convert.to-rem(32px);
       //:after element is 2rem but w/o this trigger button is for some reason 28px
-      min-width: convert.to-rem(32px);
-      height: convert.to-rem(32px);
+      min-inline-size: convert.to-rem(32px);
     }
 
     .#{$prefix}--toolbar-content {
-      height: convert.to-rem(32px);
+      block-size: convert.to-rem(32px);
     }
 
     .#{$prefix}--toolbar-content .#{$prefix}--overflow-menu {
-      width: 2rem;
-      height: 2rem;
+      block-size: 2rem;
+      inline-size: 2rem;
     }
   }
 
@@ -625,35 +627,35 @@
   .#{$prefix}--table-toolbar--sm
     .#{$prefix}--batch-actions
     .#{$prefix}--action-list {
-    height: convert.to-rem(32px);
+    block-size: convert.to-rem(32px);
   }
 
   .#{$prefix}--table-toolbar--sm .#{$prefix}--toolbar-action {
-    width: convert.to-rem(32px);
-    height: convert.to-rem(32px);
     padding: $spacing-03 0;
+    block-size: convert.to-rem(32px);
+    inline-size: convert.to-rem(32px);
   }
 
   .#{$prefix}--table-toolbar--sm .#{$prefix}--btn--primary {
-    height: convert.to-rem(32px);
-    min-height: auto;
-    padding-top: 0.375rem;
-    padding-bottom: 0.375rem;
+    block-size: convert.to-rem(32px);
+    min-block-size: auto;
+    padding-block-end: 0.375rem;
+    padding-block-start: 0.375rem;
   }
 
   .#{$prefix}--table-toolbar--sm
     .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before {
-    top: convert.to-rem(8px);
+    inset-block-start: convert.to-rem(8px);
   }
 
   .#{$prefix}--table-toolbar--sm
     .#{$prefix}--toolbar-action
     ~ .#{$prefix}--btn {
     overflow: hidden;
-    height: convert.to-rem(32px);
+    block-size: convert.to-rem(32px);
   }
 
   .#{$prefix}--table-toolbar--sm .#{$prefix}--batch-summary {
-    min-height: 2rem;
+    min-block-size: 2rem;
   }
 }
