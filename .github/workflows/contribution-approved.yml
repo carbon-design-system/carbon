@@ -14,9 +14,6 @@ on:
 permissions:
       issues: write
 
-
-
-
 jobs:
   add-comment:
     name: Add comment to with proposal accepted and community contribution
@@ -29,9 +26,13 @@ jobs:
         run: echo "$GITHUB_CONTEXT_LABELS"
       - name: Add comment
         if: 
-          ${{ contains(github.event.label.name,
-          format('proposal{0} accepted', ':')) ||
-          contains(github.event.label.name, format('community contribution'))}}
+          ${{ (
+            contains(github.event.label.name, format('proposal{0} accepted', ':')) &&
+            contains(github.event.issue.labels.*.name, format('community contribution'))
+          ) || (
+            contains(github.event.label.name, format('community contribution')) &&
+            contains(github.event.issue.labels.*.name, format('proposal{0} accepted', ':'))
+          )}}
         uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410 #v6.4.1
         with:
           script: |
