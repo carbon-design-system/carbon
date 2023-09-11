@@ -39,9 +39,9 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     position: relative;
     display: inline-flex;
     overflow: visible;
-    width: convert.to-rem(128px);
-    min-width: 7rem;
     flex-direction: row;
+    inline-size: convert.to-rem(128px);
+    min-inline-size: 7rem;
 
     .#{$prefix}--tooltip__label {
       display: block;
@@ -49,32 +49,33 @@ $progress-indicator-bar-width: 1px inset transparent !default;
   }
 
   .#{$prefix}--progress--space-equal .#{$prefix}--progress-step {
-    min-width: 8rem;
     flex-grow: 1;
+    min-inline-size: 8rem;
   }
 
   .#{$prefix}--progress-line {
     position: absolute;
-    left: 0;
-    width: convert.to-rem(128px);
-    height: 2px;
     border: $progress-indicator-bar-width;
+    block-size: 2px;
+    inline-size: convert.to-rem(128px);
+    inset-inline-start: 0;
   }
 
   .#{$prefix}--progress--space-equal .#{$prefix}--progress-line {
-    width: 100%;
-    min-width: convert.to-rem(128px);
+    inline-size: 100%;
+    min-inline-size: convert.to-rem(128px);
   }
 
   .#{$prefix}--progress-step svg {
     position: relative;
     z-index: 1;
-    width: $spacing-05;
-    height: $spacing-05;
     flex-shrink: 0;
-    margin: convert.to-rem(10px) $spacing-03 0 0;
+    block-size: $spacing-05;
     border-radius: 50%;
     fill: $interactive;
+    inline-size: $spacing-05;
+    margin-block-start: convert.to-rem(10px);
+    margin-inline-end: $spacing-03;
   }
 
   .#{$prefix}--progress--space-equal .#{$prefix}--progress-text {
@@ -85,10 +86,10 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     @include type-style('body-compact-01');
 
     overflow: hidden;
-    max-width: convert.to-rem(88px);
     margin: $spacing-03 0 0 0;
     color: $text-primary;
     line-height: 1.45;
+    max-inline-size: convert.to-rem(88px);
     text-overflow: ellipsis;
     transition: box-shadow $duration-fast-02 motion(standard, productive),
       color $duration-fast-02 motion(standard, productive);
@@ -107,8 +108,8 @@ $progress-indicator-bar-width: 1px inset transparent !default;
   }
 
   .#{$prefix}--progress--space-equal .#{$prefix}--progress-label {
-    max-width: 100%;
-    margin-right: 0.75rem;
+    margin-inline-end: 0.75rem;
+    max-inline-size: 100%;
   }
 
   .#{$prefix}--progress-step-button:not(
@@ -134,7 +135,7 @@ $progress-indicator-bar-width: 1px inset transparent !default;
   }
 
   .#{$prefix}--progress-step .#{$prefix}--tooltip .#{$prefix}--tooltip__caret {
-    margin-left: convert.to-rem(10px);
+    margin-inline-start: convert.to-rem(10px);
   }
 
   .#{$prefix}--tooltip__text {
@@ -148,14 +149,14 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     @include type-style('body-01');
 
     display: block;
-    width: convert.to-rem(125px);
-
-    min-width: convert.to-rem(115px);
-    min-height: $spacing-06;
     padding: $spacing-03 $spacing-05;
-    margin-top: convert.to-rem(40px);
-    margin-left: convert.to-rem(22px);
     color: $text-inverse;
+    inline-size: convert.to-rem(125px);
+    margin-block-start: convert.to-rem(40px);
+    margin-inline-start: convert.to-rem(22px);
+    min-block-size: $spacing-06;
+
+    min-inline-size: convert.to-rem(115px);
     visibility: hidden;
   }
 
@@ -163,9 +164,10 @@ $progress-indicator-bar-width: 1px inset transparent !default;
   .#{$prefix}--progress-step .#{$prefix}--tooltip_multi {
     @include type-style('body-01');
 
-    width: convert.to-rem(150px);
-    height: auto;
+    block-size: auto;
     color: $text-inverse;
+
+    inline-size: convert.to-rem(150px);
   }
 
   //OPTIONAL HELPER TEXT STYLING
@@ -173,10 +175,10 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     @include type-style('label-01');
 
     position: absolute;
-    left: 0;
-    margin-top: convert.to-rem(28px);
-    margin-left: $spacing-06;
     color: $text-secondary;
+    inset-inline-start: 0;
+    margin-block-start: convert.to-rem(28px);
+    margin-inline-start: $spacing-06;
     text-align: start;
   }
 
@@ -210,7 +212,7 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     @include button-reset.reset;
 
     display: flex;
-    text-align: left;
+    text-align: start;
   }
 
   //unclickable button
@@ -270,14 +272,16 @@ $progress-indicator-bar-width: 1px inset transparent !default;
   .#{$prefix}--progress.#{$prefix}--skeleton .#{$prefix}--progress-label {
     @include skeleton;
 
-    width: convert.to-rem(40px);
-    height: convert.to-rem(14px);
-    margin-top: 0.625rem;
+    block-size: convert.to-rem(14px);
+
+    inline-size: convert.to-rem(40px);
+
+    margin-block-start: 0.625rem;
   }
 
   .#{$prefix}--progress.#{$prefix}--progress--vertical.#{$prefix}--skeleton
     .#{$prefix}--progress-label {
-    margin-top: 0.0625rem;
+    margin-block-start: 0.0625rem;
   }
 
   // Vertical Variant
@@ -295,10 +299,10 @@ $progress-indicator-bar-width: 1px inset transparent !default;
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step,
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button {
-    width: initial;
-    min-width: initial;
-    min-height: 3.625rem;
     align-content: flex-start;
+    inline-size: initial;
+    min-block-size: 3.625rem;
+    min-inline-size: initial;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step svg,
@@ -310,9 +314,9 @@ $progress-indicator-bar-width: 1px inset transparent !default;
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-label {
     display: inline-block;
-    width: initial;
-    max-width: convert.to-rem(160px);
     margin: 0;
+    inline-size: initial;
+    max-inline-size: convert.to-rem(160px);
     vertical-align: top;
     white-space: initial;
   }
@@ -320,20 +324,20 @@ $progress-indicator-bar-width: 1px inset transparent !default;
   .#{$prefix}--progress--vertical
     .#{$prefix}--progress-step
     .#{$prefix}--tooltip {
-    margin-top: 0.5rem;
+    margin-block-start: 0.5rem;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-optional {
     position: static;
-    width: 100%;
     margin: auto 0;
+    inline-size: 100%;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-line {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 1px;
-    height: 100%;
+    block-size: 100%;
+    inline-size: 1px;
+    inset-block-start: 0;
+    inset-inline-start: 0;
   }
 }

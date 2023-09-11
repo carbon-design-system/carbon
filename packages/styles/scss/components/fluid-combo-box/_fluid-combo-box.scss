@@ -45,15 +45,15 @@
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--combo-box
     .#{$prefix}--list-box__selection {
-    top: auto;
-    bottom: convert.to-rem(10px);
+    inset-block-end: convert.to-rem(10px);
+    inset-block-start: auto;
     transform: none;
   }
 
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--combo-box
     .#{$prefix}--list-box__menu-icon {
-    bottom: convert.to-rem(14px);
+    inset-block-end: convert.to-rem(14px);
   }
 
   .#{$prefix}--list-box__wrapper--fluid
@@ -66,6 +66,6 @@
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input
     + .#{$prefix}--list-box__invalid-icon {
-    right: 1rem;
+    inset-inline-end: 1rem;
   }
 }

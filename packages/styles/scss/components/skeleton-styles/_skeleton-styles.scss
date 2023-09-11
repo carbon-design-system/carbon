@@ -19,29 +19,31 @@
     @include skeleton;
 
     display: inline-block;
-    width: convert.to-rem(16px);
-    height: convert.to-rem(16px);
+    block-size: convert.to-rem(16px);
+    inline-size: convert.to-rem(16px);
   }
 
   //skeleton placeholder
   .#{$prefix}--skeleton__placeholder {
     @include skeleton;
 
-    width: convert.to-rem(100px);
+    block-size: convert.to-rem(100px);
 
-    height: convert.to-rem(100px);
+    inline-size: convert.to-rem(100px);
   }
 
   //skeleton text
   .#{$prefix}--skeleton__text {
     @include skeleton;
 
-    width: 100%;
-    height: 1rem;
-    margin-bottom: $spacing-03;
+    block-size: 1rem;
+
+    inline-size: 100%;
+
+    margin-block-end: $spacing-03;
   }
 
   .#{$prefix}--skeleton__heading {
-    height: 1.5rem;
+    block-size: 1.5rem;
   }
 }

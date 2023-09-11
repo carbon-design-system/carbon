@@ -16,7 +16,7 @@
   @include type-style('code-01');
 
   position: relative;
-  width: 100%;
-  max-width: convert.to-rem(768px);
   background-color: $layer;
+  inline-size: 100%;
+  max-inline-size: convert.to-rem(768px);
 }
