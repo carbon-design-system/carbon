@@ -27,10 +27,10 @@
     @include type-style('body-compact-01');
 
     display: flex;
-    min-width: convert.to-rem(48px);
     justify-content: space-between;
     color: $text-primary;
     margin-block-end: $spacing-03;
+    min-inline-size: convert.to-rem(48px);
   }
 
   .#{$prefix}--progress-bar__label-text {
@@ -41,26 +41,26 @@
 
   .#{$prefix}--progress-bar__track {
     position: relative;
-    width: 100%;
-    min-width: convert.to-rem(48px);
-    height: convert.to-rem(8px);
     background-color: $layer;
+    block-size: convert.to-rem(8px);
+    inline-size: 100%;
+    min-inline-size: convert.to-rem(48px);
   }
 
   .#{$prefix}--progress-bar--big .#{$prefix}--progress-bar__track {
-    height: convert.to-rem(8px);
+    block-size: convert.to-rem(8px);
   }
 
   .#{$prefix}--progress-bar--small .#{$prefix}--progress-bar__track {
-    height: convert.to-rem(4px);
+    block-size: convert.to-rem(4px);
   }
 
   .#{$prefix}--progress-bar__bar {
     display: block;
-    width: 100%;
-    height: 100%;
     background-color: currentColor;
+    block-size: 100%;
     color: $interactive;
+    inline-size: 100%;
     transform: scaleX(0);
     transform-origin: 0 center #{'/*rtl:100% center*/'};
     transition: transform $duration-fast-02 motion(standard, productive);
@@ -87,8 +87,9 @@
   .#{$prefix}--progress-bar__helper-text {
     @include type-style('helper-text-01');
 
-    margin-top: $spacing-03;
     color: $text-secondary;
+
+    margin-block-start: $spacing-03;
   }
 
   .#{$prefix}--progress-bar__status-icon {
@@ -146,7 +147,7 @@
 
   .#{$prefix}--progress-bar--inline .#{$prefix}--progress-bar__label {
     flex-shrink: 0;
-    margin-bottom: 0;
+    margin-block-end: 0;
     margin-inline-end: layout.density('padding-inline');
   }
 

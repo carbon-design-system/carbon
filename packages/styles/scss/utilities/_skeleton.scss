@@ -30,11 +30,11 @@
 
   &::before {
     position: absolute;
-    width: 100%;
-    height: 100%;
     animation: 3000ms ease-in-out skeleton infinite;
     background: $skeleton-element;
+    block-size: 100%;
     content: '';
+    inline-size: 100%;
     will-change: transform-origin, transform, opacity;
 
     @media (prefers-reduced-motion: reduce) {
@@ -55,11 +55,11 @@
 
   &::before {
     position: absolute;
-    width: 200%;
-    height: 100%;
     animation: 3000ms ease-in-out skeleton infinite;
     background: $skeleton-element;
+    block-size: 100%;
     content: '';
+    inline-size: 200%;
     will-change: transform-origin, transform, opacity;
 
     @media (prefers-reduced-motion: reduce) {

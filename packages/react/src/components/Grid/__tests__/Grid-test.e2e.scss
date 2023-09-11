@@ -9,7 +9,7 @@
 p {
   @include type-style('body-short-02');
 
-  margin-top: $spacing-05;
+  margin-block-start: $spacing-05;
 }
 
 // Gutter modes
@@ -24,7 +24,7 @@ p {
 
 p:first-of-type:not(.cds--progress-label) {
   //messing up progress indicator stories
-  margin-top: 0;
+  margin-block-start: 0;
 }
 
 .cds--css-grid.cds--css-grid--condensed {
@@ -40,7 +40,7 @@ p:first-of-type:not(.cds--progress-label) {
 // Columns
 .cds--css-grid > [class*='col'],
 .cds--subgrid > [class*='col'] {
-  min-height: 80px;
+  min-block-size: 80px;
 }
 
 .cds--css-grid > [class*='col'] {

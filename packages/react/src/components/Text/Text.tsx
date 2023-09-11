@@ -22,7 +22,7 @@ export type TextProps<T extends React.ElementType> = PolymorphicProps<
 function Text<T extends React.ElementType>({
   as,
   children,
-  dir = 'auto',
+  dir,
   ...rest
 }: TextProps<T>) {
   // TODO: Update with context typing once its been converted to TS

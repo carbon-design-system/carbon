@@ -59,7 +59,7 @@
   .#{$prefix}--date-picker.#{$prefix}--date-picker--simple
     .#{$prefix}--date-picker__input,
   .#{$prefix}--date-picker.#{$prefix}--date-picker--simple .#{$prefix}--label {
-    width: convert.to-rem(120px);
+    inline-size: convert.to-rem(120px);
   }
 
   .#{$prefix}--date-picker.#{$prefix}--date-picker--simple
@@ -68,19 +68,19 @@
     .#{$prefix}--date-picker-input__wrapper--warn {
     .#{$prefix}--date-picker__input,
     ~ .#{$prefix}--form-requirement {
-      width: convert.to-rem(152px);
+      inline-size: convert.to-rem(152px);
     }
   }
 
   .#{$prefix}--date-picker.#{$prefix}--date-picker--simple.#{$prefix}--date-picker--short {
     .#{$prefix}--date-picker__input {
-      width: 5.7rem;
+      inline-size: 5.7rem;
     }
   }
 
   .#{$prefix}--date-picker.#{$prefix}--date-picker--single
     .#{$prefix}--date-picker__input {
-    width: convert.to-rem(288px);
+    inline-size: convert.to-rem(288px);
   }
 
   .#{$prefix}--date-picker
@@ -95,11 +95,11 @@
 
     position: relative;
     display: block;
-    height: convert.to-rem(40px);
     padding: 0 $spacing-05;
     border: none;
-    border-bottom: 1px solid $border-strong;
     background-color: $field;
+    block-size: convert.to-rem(40px);
+    border-block-end: 1px solid $border-strong;
     color: $text-primary;
     transition: $duration-fast-01 motion(standard, productive) all;
 
@@ -109,8 +109,8 @@
     }
 
     &:disabled {
-      border-bottom: 1px solid transparent;
       background-color: $field;
+      border-block-end: 1px solid transparent;
       color: $text-disabled;
       cursor: not-allowed;
     }
@@ -120,7 +120,7 @@
     }
 
     &:disabled:hover {
-      border-bottom: 1px solid transparent;
+      border-block-end: 1px solid transparent;
     }
 
     &::placeholder {
@@ -130,20 +130,20 @@
 
   // Size variant styles
   .#{$prefix}--date-picker__input--lg {
-    height: convert.to-rem(48px);
+    block-size: convert.to-rem(48px);
   }
 
   .#{$prefix}--date-picker__input--sm {
-    height: convert.to-rem(32px);
+    block-size: convert.to-rem(32px);
   }
 
   .#{$prefix}--date-picker__icon {
     position: absolute;
     z-index: 1;
-    // vertically center icon within parent container on IE11
-    top: 50%;
-    right: 1rem;
     fill: $icon-primary;
+    // vertically center icon within parent container on IE11
+    inset-block-start: 50%;
+    inset-inline-end: 1rem;
     pointer-events: none;
     transform: translateY(-50%);
   }
@@ -168,7 +168,7 @@
   }
 
   .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
-    padding-right: $spacing-09;
+    padding-inline-end: $spacing-09;
   }
 
   .#{$prefix}--date-picker__input:disabled ~ .#{$prefix}--date-picker__icon {
@@ -178,12 +178,12 @@
 
   .#{$prefix}--date-picker--range
     > .#{$prefix}--date-picker-container:first-child {
-    margin-right: convert.to-rem(1px);
+    margin-inline-end: convert.to-rem(1px);
   }
 
   .#{$prefix}--date-picker--range .#{$prefix}--date-picker-container,
   .#{$prefix}--date-picker--range .#{$prefix}--date-picker__input {
-    width: convert.to-rem(143.5px);
+    inline-size: convert.to-rem(143.5px);
   }
 
   // Skeleton State
@@ -191,7 +191,7 @@
   .#{$prefix}--date-picker__input.#{$prefix}--skeleton {
     @include skeleton;
 
-    width: 100%;
+    inline-size: 100%;
 
     &::placeholder {
       color: transparent;
@@ -201,8 +201,9 @@
   .#{$prefix}--date-picker.#{$prefix}--skeleton .#{$prefix}--label {
     @include skeleton;
 
-    width: convert.to-rem(75px);
-    height: convert.to-rem(14px);
+    block-size: convert.to-rem(14px);
+
+    inline-size: convert.to-rem(75px);
   }
 
   // Windows HCM fix
@@ -213,8 +214,8 @@
 
   // readonly
   .#{$prefix}--date-picker__input[readonly] {
-    border-bottom-color: $border-subtle;
     background: transparent;
+    border-block-end-color: $border-subtle;
     cursor: text;
   }
 

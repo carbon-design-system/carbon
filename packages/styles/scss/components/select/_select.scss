@@ -27,16 +27,16 @@
 
     position: relative;
     display: flex;
-    width: 100%;
     flex-direction: column;
     align-items: flex-start;
+    inline-size: 100%;
   }
 
   .#{$prefix}--select-input__wrapper {
     position: relative;
     display: flex;
-    width: 100%;
     align-items: center;
+    inline-size: 100%;
   }
 
   .#{$prefix}--select-input {
@@ -44,19 +44,20 @@
     @include focus-outline('reset');
 
     display: block;
-    width: 100%;
-    height: convert.to-rem(40px);
-    padding: 0 $spacing-09 0 $spacing-05;
     border: none;
-    border-bottom: 1px solid $border-strong;
     appearance: none;
     background-color: $field;
+    block-size: convert.to-rem(40px);
+    border-block-end: 1px solid $border-strong;
     border-radius: 0;
     color: $text-primary;
     cursor: pointer;
     font-family: inherit;
+    inline-size: 100%;
     // reset disabled <select> opacity
     opacity: 1;
+    padding-block: 0;
+    padding-inline: $spacing-05 $spacing-09;
     text-overflow: ellipsis;
 
     // Do not transition on background-color (see: https://github.com/carbon-design-system/carbon/issues/4464)
@@ -90,21 +91,21 @@
 
     &:disabled,
     &:hover:disabled {
-      border-bottom-color: transparent;
       background-color: $field;
+      border-block-end-color: transparent;
       color: $text-disabled;
       cursor: not-allowed;
     }
   }
 
   .#{$prefix}--select-input--sm {
-    height: convert.to-rem(32px);
-    max-height: convert.to-rem(32px);
+    block-size: convert.to-rem(32px);
+    max-block-size: convert.to-rem(32px);
   }
 
   .#{$prefix}--select-input--lg {
-    height: convert.to-rem(48px);
-    max-height: convert.to-rem(48px);
+    block-size: convert.to-rem(48px);
+    max-block-size: convert.to-rem(48px);
   }
 
   .#{$prefix}--select--disabled .#{$prefix}--label,
@@ -114,7 +115,7 @@
 
   .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input,
   .#{$prefix}--select--warning .#{$prefix}--select-input {
-    padding-right: $spacing-10;
+    padding-inline-end: $spacing-10;
   }
 
   .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
@@ -138,10 +139,10 @@
 
   .#{$prefix}--select__arrow {
     position: absolute;
-    top: 0;
-    right: $spacing-05;
-    height: 100%;
+    block-size: 100%;
     fill: $icon-primary;
+    inset-block-start: 0;
+    inset-inline-end: $spacing-05;
     pointer-events: none;
 
     // Windows, Firefox HCM Fix
@@ -156,7 +157,7 @@
 
   .#{$prefix}--select__invalid-icon {
     position: absolute;
-    right: $spacing-08;
+    inset-inline-end: $spacing-08;
   }
 
   .#{$prefix}--select-input__wrapper[data-invalid]
@@ -196,12 +197,12 @@
     .#{$prefix}--form__helper-text {
     align-self: flex-start;
     // Offset label text margin
-    margin-top: convert.to-rem(13px);
+    margin-block-start: convert.to-rem(13px);
   }
 
   .#{$prefix}--select--inline .#{$prefix}--form__helper-text {
-    margin-bottom: 0;
-    margin-left: $spacing-03;
+    margin-block-end: 0;
+    margin-inline-start: $spacing-03;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--label {
@@ -210,12 +211,12 @@
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input {
-    width: auto;
-    padding-right: $spacing-07;
-    padding-left: $spacing-03;
-    border-bottom: none;
     background-color: transparent;
+    border-block-end: none;
     color: $text-primary;
+    inline-size: auto;
+    padding-inline-end: $spacing-07;
+    padding-inline-start: $spacing-03;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input:focus,
@@ -230,18 +231,18 @@
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select__arrow {
-    right: $spacing-03;
+    inset-inline-end: $spacing-03;
   }
 
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
     .#{$prefix}--select-input {
-    padding-right: convert.to-rem(56px);
+    padding-inline-end: convert.to-rem(56px);
   }
 
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
     .#{$prefix}--select-input
     ~ .#{$prefix}--select__invalid-icon {
-    right: $spacing-07;
+    inset-inline-end: $spacing-07;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input:disabled {
@@ -255,8 +256,8 @@
 
   // readonly
   .#{$prefix}--select--readonly .#{$prefix}--select-input {
-    border-bottom-color: $border-subtle;
     background-color: transparent;
+    border-block-end-color: $border-subtle;
     cursor: default;
   }
 
@@ -268,8 +269,9 @@
   .#{$prefix}--select.#{$prefix}--skeleton {
     @include skeleton;
 
-    width: 100%;
-    height: 2.5rem;
+    block-size: 2.5rem;
+
+    inline-size: 100%;
   }
 
   .#{$prefix}--select.#{$prefix}--skeleton .#{$prefix}--select-input {
