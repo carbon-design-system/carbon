@@ -62,7 +62,7 @@
     color: $interactive;
     inline-size: 100%;
     transform: scaleX(0);
-    transform-origin: 0 center #{'/*rtl:100% center*/'};
+    transform-origin: 0 center;
     transition: transform $duration-fast-02 motion(standard, productive);
   }
 
