@@ -95,7 +95,7 @@ const Tag = <T extends React.ElementType>({
   type,
   filter,
   renderIcon: CustomIconElement,
-  title,
+  title = 'Clear filter',
   disabled,
   onClose,
   size,
@@ -137,7 +137,7 @@ const Tag = <T extends React.ElementType>({
           className={`${prefix}--tag__close-icon`}
           onClick={handleClose}
           disabled={disabled}
-          aria-labelledby={tagId}
+          aria-label={title}
           title={title}>
           <Close />
         </button>
