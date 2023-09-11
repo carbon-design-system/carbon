@@ -33,7 +33,6 @@
 
 .sb-tooltip-trigger:focus {
   @include focus-outline.focus-outline;
-  border: 1px solid theme.$border-subtle;
 }
 
 .sb-tooltip-trigger svg {
