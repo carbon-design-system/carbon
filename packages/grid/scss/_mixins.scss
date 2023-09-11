@@ -29,23 +29,20 @@
   // Prevent columns from becoming too narrow when at smaller grid tiers by
   // always setting `width: 100%;`. This works because we use `flex` values
   // later on to override this initial width.
-  width: 100%;
-  padding-right: ($gutter * 0.5);
-  padding-left: ($gutter * 0.5);
+  inline-size: 100%;
+  padding-inline: ($gutter * 0.5);
 
   // For our condensed use-case, our gutters collapse to 2px solid, 1px on each
   // side.
   .#{$prefix}--row--condensed &,
   .#{$prefix}--grid--condensed & {
-    padding-right: ($condensed-gutter * 0.5);
-    padding-left: ($condensed-gutter * 0.5);
+    padding-inline: ($condensed-gutter * 0.5);
   }
 
   // For our narrow use-case, our container hangs 16px into the gutter
   .#{$prefix}--row--narrow &,
   .#{$prefix}--grid--narrow & {
-    padding-right: ($gutter * 0.5);
-    padding-left: 0;
+    padding-inline: 0 ($gutter * 0.5);
   }
 }
 
@@ -64,8 +61,8 @@
     // Add a `max-width` to ensure content within each column does not blow out
     // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
     // do not appear to require this.
-    max-width: math.percentage(math.div($span, $columns));
     flex: 0 0 math.percentage(math.div($span, $columns));
+    max-inline-size: math.percentage(math.div($span, $columns));
   }
 }
 
@@ -78,9 +75,9 @@
   $offset: 0;
   $offset: math.div($span, $columns);
   @if $offset == 0 {
-    margin-left: 0;
+    margin-inline-start: 0;
   } @else {
-    margin-left: math.percentage($offset);
+    margin-inline-start: math.percentage($offset);
   }
 }
 
@@ -117,17 +114,17 @@
       // Provide basic `.col-{bp}` classes for equal-width flexbox columns
       .#{$prefix}--col,
       .#{$prefix}--col#{$infix} {
-        max-width: 100%;
         flex-basis: 0;
         flex-grow: 1;
+        max-inline-size: 100%;
       }
 
       .#{$prefix}--col--auto,
       .#{$prefix}--col#{$infix}--auto {
-        width: auto;
-        // Reset earlier grid tiers
-        max-width: 100%;
         flex: 1 0 0%;
+        inline-size: auto;
+        // Reset earlier grid tiers
+        max-inline-size: 100%;
       }
 
       @for $i from 0 through $columns {
@@ -158,8 +155,7 @@
 @mixin make-row($gutter: $grid-gutter) {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -1 * $gutter * 0.5;
-  margin-left: -1 * $gutter * 0.5;
+  margin-inline: -1 * $gutter * 0.5;
 }
 
 // -----------------------------------------------------------------------------
@@ -173,18 +169,17 @@
 @mixin -no-gutter {
   .#{$prefix}--no-gutter,
   .#{$prefix}--row.#{$prefix}--no-gutter [class*='#{$prefix}--col'] {
-    padding-right: 0;
-    padding-left: 0;
+    padding-inline: 0;
   }
 
   .#{$prefix}--no-gutter--start,
   .#{$prefix}--row.#{$prefix}--no-gutter--start [class*='#{$prefix}--col'] {
-    padding-left: 0;
+    padding-inline-start: 0;
   }
 
   .#{$prefix}--no-gutter--end,
   .#{$prefix}--row.#{$prefix}--no-gutter--end [class*='#{$prefix}--col'] {
-    padding-right: 0;
+    padding-inline-end: 0;
   }
 }
 
@@ -199,11 +194,11 @@
 /// @group @carbon/grid
 @mixin -hang($gutter: $grid-gutter) {
   .#{$prefix}--hang--start {
-    padding-left: ($gutter * 0.5);
+    padding-inline-start: ($gutter * 0.5);
   }
 
   .#{$prefix}--hang--end {
-    padding-right: ($gutter * 0.5);
+    padding-inline-end: ($gutter * 0.5);
   }
 }
 
@@ -217,8 +212,7 @@
 /// @access private
 /// @group @carbon/grid
 @mixin -make-container($breakpoints: $grid-breakpoints) {
-  margin-right: auto;
-  margin-left: auto;
+  margin-inline: auto;
 
   @include -set-largest-breakpoint();
 
@@ -230,14 +224,12 @@
       $prev-margin: map.get($prev-breakpoint, margin);
       @if $prev-margin != $margin {
         @include breakpoint($name) {
-          padding-right: #{($grid-gutter * 0.5) + $margin};
-          padding-left: #{($grid-gutter * 0.5) + $margin};
+          padding-inline: #{($grid-gutter * 0.5) + $margin};
         }
       }
     } @else {
       @include breakpoint($name) {
-        padding-right: #{($grid-gutter * 0.5) + $margin};
-        padding-left: #{($grid-gutter * 0.5) + $margin};
+        padding-inline: #{($grid-gutter * 0.5) + $margin};
       }
     }
   }
@@ -250,7 +242,7 @@
 @mixin -set-largest-breakpoint($breakpoints: $grid-breakpoints) {
   $largest-breakpoint: last-map-item($breakpoints);
 
-  max-width: map.get($largest-breakpoint, 'width');
+  max-inline-size: map.get($largest-breakpoint, 'width');
 }
 
 /// Add in the max-widths for each breakpoint to the container
@@ -260,7 +252,7 @@
 @mixin -make-container-max-widths($breakpoints: $grid-breakpoints) {
   @each $name, $value in $breakpoints {
     @include breakpoint($name) {
-      max-width: map.get($value, width);
+      max-inline-size: map.get($value, width);
     }
   }
 }
@@ -282,7 +274,7 @@
 
   @include largest-breakpoint($breakpoints) {
     .#{$prefix}--grid--full-width {
-      max-width: 100%;
+      max-inline-size: 100%;
     }
   }
 
@@ -292,13 +284,11 @@
 
   .#{$prefix}--row-padding [class*='#{$prefix}--col'],
   .#{$prefix}--col-padding {
-    padding-top: $grid-gutter * 0.5;
-    padding-bottom: $grid-gutter * 0.5;
+    padding-block: $grid-gutter * 0.5;
   }
 
   .#{$prefix}--grid--condensed [class*='#{$prefix}--col'] {
-    padding-top: $condensed-gutter * 0.5;
-    padding-bottom: $condensed-gutter * 0.5;
+    padding-block: $condensed-gutter * 0.5;
   }
 
   @include -make-grid-columns($breakpoints, $grid-gutter);

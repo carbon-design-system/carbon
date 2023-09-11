@@ -19,8 +19,9 @@
   .#{$prefix}--toggletip-label {
     @include type.type-style('body-01');
 
-    margin-right: spacing.$spacing-03;
     color: theme.$text-secondary;
+
+    margin-inline-end: spacing.$spacing-03;
   }
 
   .#{$prefix}--toggletip-button {
@@ -70,8 +71,8 @@
     @include type.type-style('body-01');
 
     display: grid;
-    max-width: 18rem;
     padding: spacing.$spacing-05;
+    max-inline-size: 18rem;
     row-gap: spacing.$spacing-05;
   }
 
