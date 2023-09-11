@@ -193,7 +193,7 @@ $input-label-weight: 400 !default;
   }
 
   // Fix for red ring when input is marked required in Firefox, refs #744
-  input:not(output):not([data-invalid]):-moz-ui-invalid {
+  input:not(output, [data-invalid]):-moz-ui-invalid {
     box-shadow: none;
   }
 

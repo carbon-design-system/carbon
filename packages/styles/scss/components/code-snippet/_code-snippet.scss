@@ -509,7 +509,7 @@ $copy-btn-feedback: $background-inverse !default;
   // Safari-only media query
   // since fades won't appear correctly with CSS custom properties
   // see: tabs, code snippet, and modal overflow indicators
-  @media not all and (min-resolution: 0.001dpcm) {
+  @media not all and (min-resolution >= 0.001dpcm) {
     @supports (-webkit-appearance: none) and (stroke-color: transparent) {
       .#{$prefix}--snippet__overflow-indicator--left {
         background-image: linear-gradient(to left, rgba($layer, 0), $layer);

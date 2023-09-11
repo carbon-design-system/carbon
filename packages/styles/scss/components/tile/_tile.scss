@@ -302,7 +302,7 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
       // Safari-only media query
       // Fixes an issue with scrolling
       // and absolutely positioned elements (#8119)
-      @media not all and (min-resolution: 0.001dpcm) {
+      @media not all and (resolution >= 0.001dpcm) {
         @supports (-webkit-appearance: none) and (stroke-color: transparent) {
           overflow-y: auto;
         }
