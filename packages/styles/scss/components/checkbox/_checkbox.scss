@@ -333,10 +333,10 @@
     @include skeleton;
 
     // Add extra spacing when label is present
-    margin: convert.to-rem(1px) 0 0 convert.to-rem(6px);
     block-size: $spacing-05;
-
     inline-size: convert.to-rem(100px);
+    margin-block: convert.to-rem(1px) 0;
+    margin-inline: convert.to-rem(6px) 0;
   }
 
   //-----------------------------------------------

@@ -226,6 +226,11 @@
     margin-block-start: 0;
   }
 
+  [dir='rtl'] .#{$prefix}--pagination__button > svg,
+  [dir='rtl'] .#{$prefix}--btn--ghost.#{$prefix}--pagination__button > svg {
+    transform: rotate(0.5turn);
+  }
+
   .#{$prefix}--pagination--sm .#{$prefix}--pagination__button,
   .#{$prefix}--pagination--sm
     .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {

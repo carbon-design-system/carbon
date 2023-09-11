@@ -66,6 +66,10 @@
     transition: transform $duration-fast-02 motion(standard, productive);
   }
 
+  [dir='rtl'] .#{$prefix}--progress-bar__bar {
+    transform-origin: 100% center;
+  }
+
   .#{$prefix}--progress-bar--indeterminate
     .#{$prefix}--progress-bar__track::after {
     position: absolute;
