@@ -714,7 +714,6 @@ export default class Slider extends PureComponent<SliderProps> {
       const leftOffset = this.state.isRtl
         ? (boundingRect?.right ?? 0) - clientX
         : clientX - (boundingRect?.left ?? 0);
-      console.log(leftOffset / width);
       leftPercent = leftOffset / width;
     } else {
       if (value == null) {
