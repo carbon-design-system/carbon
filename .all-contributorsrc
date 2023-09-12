@@ -1264,7 +1264,13 @@
       "login": "misiekhardcore",
       "name": "Michał Konopski",
       "avatar_url": "https://avatars.githubusercontent.com/u/58469680?v=4",
-      "profile": "https://github.com/misiekhardcore",
+      "profile": "https://github.com/misiekhardcore"
+    },
+    {
+      "login": "cordesmj",
+      "name": "cordesmj",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7409239?v=4",
+      "profile": "https://github.com/cordesmj",
       "contributions": [
         "code"
       ]
