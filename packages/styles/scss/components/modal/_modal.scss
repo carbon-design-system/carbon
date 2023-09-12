@@ -368,7 +368,7 @@
   // Safari-only media query
   // won't appear correctly with CSS custom properties
   // see: code snippet and tabs overflow indicators
-  @media not all and (min-resolution: 0.001dpcm) {
+  @media not all and (min-resolution >= 0.001dpcm) {
     @supports (-webkit-appearance: none) and (stroke-color: transparent) {
       .#{$prefix}--modal-content--overflow-indicator {
         background-image: linear-gradient(to bottom, rgba($layer, 0), $layer);

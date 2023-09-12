@@ -255,6 +255,13 @@ $copy-btn-feedback: $background-inverse !default;
     inset-inline-end: 0;
   }
 
+  [dir='rtl']
+    .#{$prefix}--snippet--multi.#{$prefix}--snippet--has-right-overflow
+    .#{$prefix}--snippet-container
+    pre::after {
+    background-image: linear-gradient(to left, transparent, $layer);
+  }
+
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre code {
     overflow: hidden;
   }
@@ -470,6 +477,14 @@ $copy-btn-feedback: $background-inverse !default;
     margin-inline-start: -$spacing-05;
   }
 
+  [dir='rtl'] .#{$prefix}--snippet__overflow-indicator--left {
+    background-image: linear-gradient(to right, transparent, $layer);
+  }
+
+  [dir='rtl'] .#{$prefix}--snippet__overflow-indicator--right {
+    background-image: linear-gradient(to left, transparent, $layer);
+  }
+
   .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--right,
   .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--left {
     position: absolute;
@@ -509,7 +524,7 @@ $copy-btn-feedback: $background-inverse !default;
   // Safari-only media query
   // since fades won't appear correctly with CSS custom properties
   // see: tabs, code snippet, and modal overflow indicators
-  @media not all and (min-resolution: 0.001dpcm) {
+  @media not all and (min-resolution >= 0.001dpcm) {
     @supports (-webkit-appearance: none) and (stroke-color: transparent) {
       .#{$prefix}--snippet__overflow-indicator--left {
         background-image: linear-gradient(to left, rgba($layer, 0), $layer);

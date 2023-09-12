@@ -1257,10 +1257,9 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/60013060?v=4",
       "profile": "https://med-aziz-chebbi.web.app/",
       "contributions": [
-        "code",
-        "doc"
+        "code"
       ]
-    }
+    },
   ],
   "commitConvention": "none"
 }
