@@ -19,8 +19,8 @@
 @mixin fluid-text-input {
   .#{$prefix}--text-input--fluid.#{$prefix}--text-input-wrapper {
     position: relative;
-    height: 100%;
     background: $field;
+    block-size: 100%;
     transition: background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
   }
@@ -28,13 +28,13 @@
   .#{$prefix}--text-input--fluid .#{$prefix}--label {
     position: absolute;
     z-index: 1;
-    top: convert.to-rem(13px);
-    left: $spacing-05;
     display: flex;
-    width: calc(100% - 2rem);
-    height: convert.to-rem(16px);
     align-items: center;
     margin: 0;
+    block-size: convert.to-rem(16px);
+    inline-size: calc(100% - 2rem);
+    inset-block-start: convert.to-rem(13px);
+    inset-inline-start: $spacing-05;
   }
 
   .#{$prefix}--text-input--fluid .#{$prefix}--label::-webkit-scrollbar,
@@ -60,8 +60,8 @@
   }
 
   .#{$prefix}--text-input--fluid .#{$prefix}--text-input {
-    min-height: convert.to-rem(64px);
     padding: convert.to-rem(32px) $spacing-05 convert.to-rem(13px);
+    min-block-size: convert.to-rem(64px);
   }
 
   .#{$prefix}--text-input__divider,
@@ -87,7 +87,7 @@
 
   .#{$prefix}--text-input--fluid .#{$prefix}--text-input--invalid,
   .#{$prefix}--text-input--fluid .#{$prefix}--text-input--warning {
-    border-bottom: none;
+    border-block-end: none;
   }
 
   .#{$prefix}--text-input--fluid
@@ -99,12 +99,12 @@
     display: block;
     border-style: solid;
     border-color: $border-subtle;
-    border-bottom: none;
     margin: 0 1rem;
+    border-block-end: none;
   }
 
   .#{$prefix}--text-input--fluid .#{$prefix}--text-input__invalid-icon {
-    top: convert.to-rem(80px);
+    inset-block-start: convert.to-rem(80px);
   }
 
   .#{$prefix}--text-input--fluid
@@ -118,7 +118,7 @@
 
   .#{$prefix}--text-input--fluid
     .#{$prefix}--text-input__field-wrapper--warning {
-    border-bottom: 1px solid $border-strong;
+    border-block-end: 1px solid $border-strong;
   }
 
   .#{$prefix}--text-input--fluid
@@ -145,44 +145,44 @@
   // Password Input
   .#{$prefix}--text-input--fluid
     .#{$prefix}--text-input.#{$prefix}--password-input {
-    padding-right: $spacing-08;
+    padding-inline-end: $spacing-08;
   }
 
   .#{$prefix}--text-input--fluid.#{$prefix}--password-input-wrapper
     .#{$prefix}--text-input__invalid-icon {
-    right: $spacing-05;
+    inset-inline-end: $spacing-05;
   }
 
   .#{$prefix}--text-input--fluid
     .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
-    top: convert.to-rem(26px);
-    right: $spacing-03;
-    width: convert.to-rem(32px);
-    height: convert.to-rem(32px);
+    block-size: convert.to-rem(32px);
+    inline-size: convert.to-rem(32px);
+    inset-block-start: convert.to-rem(26px);
+    inset-inline-end: $spacing-03;
   }
 
   // Skeleton
   .#{$prefix}--text-input--fluid__skeleton {
     position: relative;
-    height: convert.to-rem(64px);
-    border-bottom: 1px solid $skeleton-element;
     background: $skeleton-background;
+    block-size: convert.to-rem(64px);
+    border-block-end: 1px solid $skeleton-element;
   }
 
   .#{$prefix}--text-input--fluid__skeleton .#{$prefix}--skeleton {
     position: absolute;
-    top: $spacing-05;
-    left: $spacing-05;
-    width: 25%;
-    height: convert.to-rem(8px);
+    block-size: convert.to-rem(8px);
+    inline-size: 25%;
+    inset-block-start: $spacing-05;
+    inset-inline-start: $spacing-05;
   }
 
   .#{$prefix}--text-input--fluid__skeleton .#{$prefix}--label {
     position: absolute;
-    top: convert.to-rem(36px);
-    left: $spacing-05;
-    width: 50%;
-    height: convert.to-rem(8px);
     padding: 0;
+    block-size: convert.to-rem(8px);
+    inline-size: 50%;
+    inset-block-start: convert.to-rem(36px);
+    inset-inline-start: $spacing-05;
   }
 }

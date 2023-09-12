@@ -1,28 +1,22 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-# GitHub recommends pinning actions to a commit SHA.
-# To get a newer version, you will need to update the SHA.
-# You can also reference a tag or branch, but the action may change without warning
-name: Add comment on enhancement issue
+name: Contribution triage - proposal not pursuing
 on:
   issues:
     types: [labeled, opened]
 
 permissions:
-      issues: write
+  issues: write
 
 jobs:
   add-comment:
-    name: If new enhancement issue is submitted, then post the following comment.
+    name:
+      If proposal is marked as not pursuing, then post the following comment.
     runs-on: ubuntu-latest
+    if:
+      ${{ contains(github.event.label.name, format('proposal{0} not pursuing',
+      ':')) }}
     steps:
       - name: Add comment
         uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410 #v6.4.1
-        if: 
-          github.event.label.name == 'proposal\uFE55 not pursuing'
         with:
           script: |
             github.rest.issues.createComment({
