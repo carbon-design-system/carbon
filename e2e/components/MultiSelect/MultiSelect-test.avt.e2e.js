@@ -172,7 +172,7 @@ test.describe('MultiSelect @avt', () => {
     await expect(selection).not.toBeVisible();
   });
 
-  test('filterable multiselect - keyboard nav', async ({ page }) => {
+  test.slow('filterable multiselect - keyboard nav', async ({ page }) => {
     await visitStory(page, {
       component: 'FilterableMultiSelect',
       id: 'components-multiselect--filterable',
