@@ -9,12 +9,10 @@ import '../../../../scss/components/accordion/_index.scss';
 
 import React from 'react';
 import { default as Accordion, AccordionItem } from '../';
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 describe('Accordion', () => {
-  afterEach(cleanup);
-
   it('should render', () => {
     const { asFragment } = render(
       <Accordion className="extra-class">

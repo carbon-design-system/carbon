@@ -13,7 +13,7 @@ import * as FlexGridStories from './FlexGrid.stories';
 ## Table of Contents
 
 - [Overview](#overview)
-- [Grid modes](#grid-modes)
+- [Gutter modes](#gutter-modes)
   - [Wide grid](#wide-grid)
   - [Narrow grid](#narrow-grid)
   - [Condensed grid](#condensed-grid)
@@ -97,19 +97,19 @@ we will use the `sm`, `md`, and `lg` prop to specify how many columns the
   <Story of={FlexGridStories.ResponsiveGrid} />
 </Canvas>
 
-## Grid modes
+## Gutter modes
 
 There are several
-[grid modes](https://www.carbondesignsystem.com/guidelines/2x-grid/implementation/#grid-modes)
+[gutter modes](https://www.carbondesignsystem.com/guidelines/2x-grid/implementation/#gutter-modes)
 that you can use depending on the layout effect you're looking to achieve. By
-default, `FlexGrid` uses the wide grid mode with a 32px gutter. However, you can
+default, `FlexGrid` uses the wide gutter mode with a 32px gutter. However, you can
 use the `narrow` or `condensed` props to enable the narrow and condensed grid
 modes, respectively.
 
 The same way that you can pass in `narrow` or `condensed` to the `FlexGrid`
 component, you can also pass in `narrow` or `condensed` to a `Row` component to
-enable a certain grid mode but only for a row. This can be useful when you need
-to mix-and-match certain grid modes to achieve a particular layout.
+enable a certain gutter mode but only for a row. This can be useful when you need
+to mix-and-match certain gutter modes to achieve a particular layout.
 
 ### Wide grid
 
@@ -132,7 +132,7 @@ to mix-and-match certain grid modes to achieve a particular layout.
 ### Mix-and-match
 
 <Canvas>
-  <Story of={FlexGridStories.MixedGridModes} />
+  <Story of={FlexGridStories.MixedGutterModes} />
 </Canvas>
 
 ## Auto columns

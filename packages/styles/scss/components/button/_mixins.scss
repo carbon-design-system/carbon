@@ -46,15 +46,15 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
 
   position: relative;
   display: inline-flex;
-  width: max-content;
-  max-width: convert.to-rem(320px);
-  min-height: layout.size('height');
   flex-shrink: 0;
   justify-content: space-between;
   // Fix to remove added margins on buttons in safari (see #5155)
   margin: 0;
   border-radius: $button-border-radius;
   cursor: pointer;
+  inline-size: max-content;
+  max-inline-size: convert.to-rem(320px);
+  min-block-size: layout.size('height');
   outline: none;
   // -1px to compensate for border width
   padding-block: min(
@@ -68,7 +68,7 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
   padding-inline-start: calc(
     layout.density('padding-inline') - convert.to-rem(1px)
   );
-  text-align: left;
+  text-align: start;
   text-decoration: none;
   transition: background $duration-fast-01 motion(entrance, productive),
     box-shadow $duration-fast-01 motion(entrance, productive),
@@ -91,17 +91,17 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
 
   .#{$prefix}--btn__icon {
     position: absolute;
+    flex-shrink: 0;
+    block-size: convert.to-rem(16px);
+    inline-size: convert.to-rem(16px);
     // -1px to compensate for border width
-    top: min(
+    inset-block-start: min(
       calc(
         (layout.size('height') - convert.to-rem(16px)) / 2 - convert.to-rem(1px)
       ),
       var(--temp-padding-block-max)
     );
-    right: layout.density('padding-inline');
-    width: convert.to-rem(16px);
-    height: convert.to-rem(16px);
-    flex-shrink: 0;
+    inset-inline-end: layout.density('padding-inline');
     margin-block-start: convert.to-rem(1px);
   }
 }
@@ -145,7 +145,7 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
 
 @mixin button-padding-large {
   align-items: baseline;
-  padding-top: $spacing-05;
-  padding-right: $spacing-10;
-  padding-left: $spacing-05;
+  padding-block-start: $spacing-05;
+  padding-inline-end: $spacing-10;
+  padding-inline-start: $spacing-05;
 }

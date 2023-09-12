@@ -23,23 +23,23 @@
   // Spacing between checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
     position: relative;
-    margin-bottom: $spacing-02;
+    margin-block-end: $spacing-02;
   }
 
   // Spacing above collection of checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:first-of-type {
-    margin-top: convert.to-rem(3px);
+    margin-block-start: convert.to-rem(3px);
   }
 
   // Shift collection of checkboxes up if label is present
   // to account for the 2px top margin for the first checkbox
   .#{$prefix}--label + .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
-    margin-top: -#{$spacing-01};
+    margin-block-start: -#{$spacing-01};
   }
 
   // Spacing below collection of checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type {
-    margin-bottom: convert.to-rem(3px);
+    margin-block-end: convert.to-rem(3px);
   }
 
   // Visually, we'll hide the checkbox input and create our own styled version
@@ -47,8 +47,8 @@
   .#{$prefix}--checkbox {
     @include visually-hidden;
     //even though its hidden, positioning is for native validation to be aligned to checkbox
-    top: 1.25rem;
-    left: 0.7rem;
+    inset-block-start: 1.25rem;
+    inset-inline-start: 0.7rem;
   }
 
   // The label corresponds to the content inside of the `label` tag. Since we're
@@ -60,16 +60,16 @@
 
     position: relative;
     display: flex;
-    min-height: convert.to-rem(24px);
-    padding-top: convert.to-rem(3px);
-    padding-left: convert.to-rem(20px);
     cursor: pointer;
+    min-block-size: convert.to-rem(24px);
+    padding-block-start: convert.to-rem(3px);
+    padding-inline-start: convert.to-rem(20px);
     user-select: none;
   }
 
   .#{$prefix}--checkbox-label-text {
     // Add extra spacing when label is present
-    padding-left: convert.to-rem(6px);
+    padding-inline-start: convert.to-rem(6px);
   }
 
   // Required because `$css--reset: true` cannot currently apply to this `::before` and `::after`
@@ -85,14 +85,6 @@
     // `top` since we don't want the checkbox to be centered vertically with the
     // text overflows.
     position: absolute;
-    top: convert.to-rem(2px);
-    left: 0;
-
-    // According to the spec, we'll want the bounding box for our checkbox to
-    // be 16px. The border size will be what will be updated during the
-    // different checkbox states.
-    width: convert.to-rem(16px);
-    height: convert.to-rem(16px);
     border: 1px solid $icon-primary;
     // increase left margin for #6480
     margin: convert.to-rem(2px) convert.to-rem(2px) convert.to-rem(2px)
@@ -100,24 +92,32 @@
 
     // Checkboxes with a background color look visually off against a parent container.
     background-color: transparent;
+    block-size: convert.to-rem(16px);
     border-radius: 2px;
     content: '';
+
+    // According to the spec, we'll want the bounding box for our checkbox to
+    // be 16px. The border size will be what will be updated during the
+    // different checkbox states.
+    inline-size: convert.to-rem(16px);
+    inset-block-start: convert.to-rem(2px);
+    inset-inline-start: 0;
   }
 
   // Create the appearance of the check in the `after` pseudo-element
   .#{$prefix}--checkbox-label::after {
     position: absolute;
-    top: convert.to-rem(7.5px);
-    left: convert.to-rem(7px);
-    width: convert.to-rem(9px);
-    height: convert.to-rem(5px);
-    border-bottom: 1.5px solid $icon-inverse;
-    border-left: 1.5px solid $icon-inverse;
-    margin-top: convert.to-rem(-3px) #{'/*rtl:0rem*/'};
     background: none;
+    block-size: convert.to-rem(5px);
+    border-block-end: 1.5px solid $icon-inverse;
+    border-inline-start: 1.5px solid $icon-inverse;
     content: '';
+    inline-size: convert.to-rem(9px);
+    inset-block-start: convert.to-rem(7.5px);
+    inset-inline-start: convert.to-rem(7px);
+    margin-block-start: convert.to-rem(-3px);
     transform: scale(0) rotate(-45deg);
-    transform-origin: bottom right #{'/*rtl:center*/'};
+    transform-origin: bottom right;
   }
 
   //----------------------------------------------
@@ -136,15 +136,15 @@
   // Display the check
   .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::after,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::after {
-    transform: scale(1) rotate(-45deg) #{'/*rtl:scale(1.2) rotate3d(.5, 1, 0, 158deg)*/'};
+    transform: scale(1) rotate(-45deg);
   }
 
   // Indeterminate symbol
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::after {
-    top: convert.to-rem(11px);
-    width: convert.to-rem(8px);
-    border-bottom: 2px solid $icon-inverse;
-    border-left: 0 solid $icon-inverse;
+    border-block-end: 2px solid $icon-inverse;
+    border-inline-start: 0 solid $icon-inverse;
+    inline-size: convert.to-rem(8px);
+    inset-block-start: convert.to-rem(11px);
     transform: scale(1) rotate(0deg);
   }
 
@@ -224,13 +224,13 @@
   .#{$prefix}--checkbox__validation-msg {
     display: none;
     align-items: flex-start;
-    margin-top: $spacing-02;
+    margin-block-start: $spacing-02;
   }
 
   .#{$prefix}--checkbox__invalid-icon {
-    min-width: convert.to-rem(16px);
     margin: convert.to-rem(1px) convert.to-rem(1px) 0 convert.to-rem(3px);
     fill: $support-error;
+    min-inline-size: convert.to-rem(16px);
   }
 
   .#{$prefix}--checkbox__invalid-icon--warning {
@@ -266,9 +266,9 @@
     .#{$prefix}--form-requirement {
     display: block;
     overflow: visible;
-    max-height: 100%;
-    margin-top: 0;
-    margin-left: $spacing-03;
+    margin-block-start: 0;
+    margin-inline-start: $spacing-03;
+    max-block-size: 100%;
   }
 
   .#{$prefix}--checkbox-group--invalid
@@ -332,11 +332,11 @@
   .#{$prefix}--checkbox-label-text.#{$prefix}--skeleton {
     @include skeleton;
 
-    width: convert.to-rem(100px);
-    height: $spacing-05;
-
     // Add extra spacing when label is present
     margin: convert.to-rem(1px) 0 0 convert.to-rem(6px);
+    block-size: $spacing-05;
+
+    inline-size: convert.to-rem(100px);
   }
 
   //-----------------------------------------------
@@ -344,5 +344,20 @@
   //-----------------------------------------------
   .#{$prefix}--checkbox--inline {
     position: relative;
+  }
+
+  // RTL overrides
+  [dir='rtl'] .#{$prefix}--checkbox-label::after {
+    margin-block-start: 0;
+    margin-inline-start: convert.to-rem(-1px);
+    transform-origin: center;
+  }
+
+  [dir='rtl']
+    .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label::after,
+  [dir='rtl']
+    .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::after {
+    transform: scale(1.2) rotate3d(0.5, 1, 0, 158deg);
   }
 }

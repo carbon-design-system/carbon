@@ -22,6 +22,7 @@ import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 
 import { MenuContext, menuReducer } from './MenuContext';
+import { useLayoutDirection } from '../LayoutDirection';
 
 const spacing = 8; // distance to keep to window edges, in px
 
@@ -71,6 +72,9 @@ const Menu = React.forwardRef(function Menu(
     (item) => !item.disabled && item.ref.current
   );
 
+  // Set RTL based on document direction or `LayoutDirection`
+  const { direction } = useLayoutDirection();
+
   function returnFocus() {
     if (focusReturn.current) {
       focusReturn.current.focus();
@@ -82,8 +86,18 @@ const Menu = React.forwardRef(function Menu(
       focusReturn.current = document.activeElement;
 
       const pos = calculatePosition();
-      menu.current.style.left = `${pos[0]}px`;
-      menu.current.style.top = `${pos[1]}px`;
+      if (
+        (document?.dir === 'rtl' || direction === 'rtl') &&
+        !rest?.id?.includes('MenuButton')
+      ) {
+        menu.current.style.insetInlineStart = `initial`;
+        menu.current.style.insetInlineEnd = `${pos[0]}px`;
+      } else {
+        menu.current.style.insetInlineStart = `${pos[0]}px`;
+        menu.current.style.insetInlineEnd = `initial`;
+      }
+
+      menu.current.style.insetBlockStart = `${pos[1]}px`;
       setPosition(pos);
 
       menu.current.focus();

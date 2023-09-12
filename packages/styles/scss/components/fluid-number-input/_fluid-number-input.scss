@@ -19,20 +19,20 @@
 @mixin fluid-number-input {
   .#{$prefix}--number-input--fluid {
     position: relative;
-    height: 100%;
     background: $field;
+    block-size: 100%;
   }
 
   .#{$prefix}--number-input--fluid .#{$prefix}--label {
     position: absolute;
     z-index: 1;
-    top: convert.to-rem(13px);
-    left: $spacing-05;
     display: flex;
-    width: calc(100% - 2rem);
-    height: convert.to-rem(16px);
     align-items: center;
     margin: 0;
+    block-size: convert.to-rem(16px);
+    inline-size: calc(100% - 2rem);
+    inset-block-start: convert.to-rem(13px);
+    inset-inline-start: $spacing-05;
   }
 
   .#{$prefix}--number-input--fluid .#{$prefix}--label::-webkit-scrollbar,
@@ -58,16 +58,16 @@
   }
 
   .#{$prefix}--number-input--fluid input[type='number'] {
-    min-height: convert.to-rem(64px);
     padding: convert.to-rem(32px) convert.to-rem(80px) convert.to-rem(13px)
       $spacing-05;
     background: transparent;
+    min-block-size: convert.to-rem(64px);
     outline: none;
   }
 
   .#{$prefix}--number-input--fluid .#{$prefix}--number__controls {
-    top: convert.to-rem(23px);
-    height: convert.to-rem(40px);
+    block-size: convert.to-rem(40px);
+    inset-block-start: convert.to-rem(23px);
     transform: translate(0);
   }
 
@@ -76,7 +76,7 @@
     input[type='number']:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
-    border-bottom: 1px solid transparent;
+    border-block-end: 1px solid transparent;
   }
 
   .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--focus
@@ -108,12 +108,12 @@
     input[type='number']:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:hover::before {
-    top: auto;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
     background: $focus;
+    block-size: 1px;
+    inline-size: 100%;
+    inset-block-end: 0;
+    inset-block-start: auto;
+    inset-inline-start: 0;
   }
   // End weirdness
 
@@ -126,7 +126,7 @@
     input[type='number']:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:hover {
-    border-bottom: 1px solid $focus;
+    border-block-end: 1px solid $focus;
     outline: none;
   }
 
@@ -134,8 +134,8 @@
     input[type='number']
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn::after {
-    top: 0;
-    height: calc(100% - convert.to-rem(1px));
+    block-size: calc(100% - convert.to-rem(1px));
+    inset-block-start: 0;
   }
 
   .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--focus
@@ -149,15 +149,15 @@
     input[type='number']
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn.up-icon::after {
-    height: calc(100%);
+    block-size: calc(100%);
   }
 
   .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--focus
     input[type='number']
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn.up-icon:hover::after {
-    height: calc(100%);
     background-color: $focus;
+    block-size: calc(100%);
   }
 
   .#{$prefix}--number-input--fluid--invalid
@@ -178,8 +178,8 @@
   }
 
   .#{$prefix}--number-input--fluid .#{$prefix}--number__invalid {
-    top: convert.to-rem(73px);
-    right: $spacing-05;
+    inset-block-start: convert.to-rem(73px);
+    inset-inline-end: $spacing-05;
     pointer-events: none;
   }
 
@@ -192,7 +192,7 @@
   .#{$prefix}--number-input--fluid
     .#{$prefix}--number__input-wrapper--warning
     input[type='number'] {
-    border-bottom: 1px solid transparent;
+    border-block-end: 1px solid transparent;
   }
 
   .#{$prefix}--number-input--fluid
@@ -207,13 +207,13 @@
     .#{$prefix}--number__input-wrapper--warning
     + .#{$prefix}--number-input__divider {
     position: absolute;
-    top: convert.to-rem(63px);
     display: block;
-    width: calc(100% - 2rem);
-    height: convert.to-rem(1px);
     border: none;
-    border-bottom: 1px solid $border-subtle;
     margin: 0 1rem;
+    block-size: convert.to-rem(1px);
+    border-block-end: 1px solid $border-subtle;
+    inline-size: calc(100% - 2rem);
+    inset-block-start: convert.to-rem(63px);
   }
 
   .#{$prefix}--number-input--fluid .#{$prefix}--form-requirement {
@@ -231,7 +231,7 @@
   .#{$prefix}--number-input--fluid--invalid
     .#{$prefix}--number[data-invalid]
     input[type='number'] {
-    border-bottom: 1px solid transparent;
+    border-block-end: 1px solid transparent;
   }
 
   .#{$prefix}--number-input--fluid--invalid
@@ -260,7 +260,7 @@
     input[type='number']
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
-    border-bottom: none;
+    border-block-end: none;
   }
 
   .#{$prefix}--number-input--fluid--invalid
@@ -274,7 +274,7 @@
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
     border: initial;
-    border-bottom-width: convert.to-rem(1px);
+    border-block-end-width: convert.to-rem(1px);
   }
 
   // Disabled states
@@ -282,7 +282,7 @@
       .#{$prefix}--number-input--fluid--invalid
     )
     .#{$prefix}--number {
-    border-bottom: 1px solid $border-subtle;
+    border-block-end: 1px solid $border-subtle;
   }
 
   .#{$prefix}--number-input--fluid--disabled.#{$prefix}--number-input--fluid--invalid
