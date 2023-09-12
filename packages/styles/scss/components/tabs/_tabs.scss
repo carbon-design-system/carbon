@@ -206,7 +206,7 @@
     // Safari-only media query
     // won't appear correctly with CSS custom properties
     // see: code snippet and modal overflow indicators
-    @media not all and (min-resolution: 0.001dpcm) {
+    @media not all and (resolution >= 0.001dpcm) {
       @supports (-webkit-appearance: none) and (stroke-color: transparent) {
         .#{$prefix}--tabs__overflow-indicator--left {
           background-image: linear-gradient(

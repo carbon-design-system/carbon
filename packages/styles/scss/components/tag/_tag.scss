@@ -261,7 +261,7 @@
     inline-size: convert.to-rem(60px);
 
     // Safari specific bug (#7672)
-    @media not all and (min-resolution: 0.001dpcm) {
+    @media not all and (min-resolution >= 0.001dpcm) {
       @supports (-webkit-appearance: none) and (stroke-color: transparent) {
         transform: translateZ(0);
       }
