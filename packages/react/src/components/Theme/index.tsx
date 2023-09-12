@@ -14,25 +14,34 @@ import { LayerContext } from '../Layer/LayerContext';
 
 interface GlobalThemeProps {
   theme?: 'white' | 'g10' | 'g90' | 'g100';
+  children?: React.ReactNode;
 }
 
 export const ThemeContext = React.createContext<GlobalThemeProps>({
   theme: 'white',
 });
 
-export function GlobalTheme({
-  children,
-  theme,
-}: PropsWithChildren<GlobalThemeProps>) {
+export const GlobalTheme = React.forwardRef(function GlobalTheme(
+  { children, theme }: PropsWithChildren<GlobalThemeProps>,
+  ref: React.Ref<unknown>
+) {
   const value = useMemo(() => {
     return {
       theme,
     };
   }, [theme]);
-  return (
-    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+
+  const childrenWithProps = React.cloneElement(
+    children as React.ReactElement<any>,
+    { ref: ref }
   );
-}
+
+  return (
+    <ThemeContext.Provider value={value}>
+      {childrenWithProps}
+    </ThemeContext.Provider>
+  );
+});
 
 GlobalTheme.propTypes = {
   /**
