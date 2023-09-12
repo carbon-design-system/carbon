@@ -13,6 +13,7 @@ import { keys, matches } from '../../internal/keyboard';
 import uid from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
+import FileUploaderButton from './FileUploaderButton';
 
 export interface FileUploaderItemProps extends ReactAttr<HTMLSpanElement> {
   /**
@@ -50,6 +51,11 @@ export interface FileUploaderItemProps extends ReactAttr<HTMLSpanElement> {
   ) => void;
 
   /**
+     Specify if the uploader will accept only one file
+    */
+  singleUpload?: boolean;
+
+  /**
    * Specify the size of the FileUploaderButton, from a list of available
    * sizes.
    */
@@ -76,6 +82,7 @@ function FileUploaderItem({
   errorSubject,
   errorBody,
   size,
+  singleUpload,
   ...other
 }: FileUploaderItemProps) {
   const prefix = usePrefix();
@@ -85,33 +92,44 @@ function FileUploaderItem({
     [`${prefix}--file__selected-file--md`]: size === 'md',
     [`${prefix}--file__selected-file--sm`]: size === 'sm',
   });
+
   return (
     <span className={classes} {...other}>
       <p className={`${prefix}--file-filename`} title={name} id={name}>
         {name}
       </p>
-      <span className={`${prefix}--file__state-container`}>
-        <Filename
-          name={name}
-          iconDescription={iconDescription}
-          status={status}
-          invalid={invalid}
-          aria-describedby={`${name}-id-error`}
-          onKeyDown={(evt) => {
-            if (matches(evt as unknown as Event, [keys.Enter, keys.Space])) {
+      <div className={`${prefix}--file-container-item`}>
+        {singleUpload && (
+          <FileUploaderButton
+            buttonKind="ghost"
+            labelText="Replace"
+            disabled={false}
+            disableLabelChanges={singleUpload}
+          />
+        )}
+        <span className={`${prefix}--file__state-container`}>
+          <Filename
+            name={name}
+            iconDescription={iconDescription}
+            status={status}
+            invalid={invalid}
+            aria-describedby={`${name}-id-error`}
+            onKeyDown={(evt) => {
+              if (matches(evt as unknown as Event, [keys.Enter, keys.Space])) {
+                if (status === 'edit') {
+                  evt.preventDefault();
+                  onDelete(evt, { uuid: id });
+                }
+              }
+            }}
+            onClick={(evt) => {
               if (status === 'edit') {
-                evt.preventDefault();
                 onDelete(evt, { uuid: id });
               }
-            }
-          }}
-          onClick={(evt) => {
-            if (status === 'edit') {
-              onDelete(evt, { uuid: id });
-            }
-          }}
-        />
-      </span>
+            }}
+          />
+        </span>
+      </div>
       {invalid && errorSubject && (
         <div
           className={`${prefix}--form-requirement`}
@@ -162,6 +180,11 @@ FileUploaderItem.propTypes = {
    * The event handler signature looks like `onDelete(evt, { uuid })`
    */
   onDelete: PropTypes.func,
+
+  /**
+     Specify if the uploader will accept only one file
+    */
+  singleUpload: PropTypes.bool,
 
   /**
    * Specify the size of the FileUploaderButton, from a list of available

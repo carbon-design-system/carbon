@@ -260,6 +260,12 @@
     color: $text-primary;
   }
 
+  .#{$prefix}--file-container-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .#{$prefix}--file__state-container {
     display: flex;
     min-width: 1.5rem;
