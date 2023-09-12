@@ -157,7 +157,14 @@ test.describe('CodeSnippet @avt', () => {
     await page.keyboard.press('Tab');
     await expect(page.getByRole('textbox')).toBeFocused();
 
+    // Checking the copy button
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Enter');
+    await expect(page.getByRole('tooltip')).toHaveText('Copied to clipboard');
+
     // Checking the Arrow navigation
+    await page.keyboard.press('Shift+Tab');
+
     await expect(
       page.locator('div.cds--snippet__overflow-indicator--right')
     ).toBeVisible();
