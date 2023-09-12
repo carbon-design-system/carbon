@@ -67,7 +67,7 @@ $list-box-menu-width: convert.to-rem(300px);
     }
 
     .#{$prefix}--form__helper-text {
-      max-width: none;
+      max-inline-size: none;
     }
 
     .#{$prefix}--form-requirement {
@@ -79,14 +79,14 @@ $list-box-menu-width: convert.to-rem(300px);
     @include reset;
 
     position: relative;
-    width: $list-box-width;
-    height: convert.to-rem(40px);
-    max-height: convert.to-rem(40px);
     border: none;
-    border-bottom: 1px solid $border-strong;
     background-color: $field;
+    block-size: convert.to-rem(40px);
+    border-block-end: 1px solid $border-strong;
     color: $text-primary;
     cursor: pointer;
+    inline-size: $list-box-width;
+    max-block-size: convert.to-rem(40px);
     transition: all $duration-fast-01 motion(standard, productive);
 
     &:hover {
@@ -95,25 +95,25 @@ $list-box-menu-width: convert.to-rem(300px);
   }
 
   .#{$prefix}--list-box--lg {
-    height: convert.to-rem(48px);
-    max-height: convert.to-rem(48px);
+    block-size: convert.to-rem(48px);
+    max-block-size: convert.to-rem(48px);
   }
 
   .#{$prefix}--list-box--sm {
-    height: convert.to-rem(32px);
-    max-height: convert.to-rem(32px);
+    block-size: convert.to-rem(32px);
+    max-block-size: convert.to-rem(32px);
   }
 
   .#{$prefix}--list-box--expanded {
-    border-bottom-color: $border-subtle-01;
+    border-block-end-color: $border-subtle-01;
   }
 
   .#{$prefix}--layer-two .#{$prefix}--list-box--expanded {
-    border-bottom-color: $border-subtle-02;
+    border-block-end-color: $border-subtle-02;
   }
 
   .#{$prefix}--layer-three .#{$prefix}--list-box--expanded {
-    border-bottom-color: $border-subtle-03;
+    border-block-end-color: $border-subtle-03;
   }
 
   .#{$prefix}--list-box--expanded:hover {
@@ -126,16 +126,16 @@ $list-box-menu-width: convert.to-rem(300px);
   }
 
   .#{$prefix}--list-box .#{$prefix}--text-input {
-    min-width: 0;
-    height: 100%;
+    block-size: 100%;
+    min-inline-size: 0;
   }
 
   // invalid states
   .#{$prefix}--list-box__invalid-icon {
     position: absolute;
-    top: 50%;
-    right: $spacing-08;
     fill: $support-error;
+    inset-block-start: 50%;
+    inset-inline-end: $spacing-08;
     transform: translateY(-50%);
   }
 
@@ -151,15 +151,15 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field,
   .#{$prefix}--list-box.#{$prefix}--list-box--warning
     .#{$prefix}--list-box__field {
-    padding-right: $spacing-10;
-    border-bottom: 0;
+    border-block-end: 0;
+    padding-inline-end: $spacing-10;
   }
 
   .#{$prefix}--list-box[data-invalid].#{$prefix}--list-box--inline
     .#{$prefix}--list-box__field,
   .#{$prefix}--list-box.#{$prefix}--list-box--warning.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__field {
-    padding-right: convert.to-rem(56px);
+    padding-inline-end: convert.to-rem(56px);
   }
 
   // V11: Possibly deprecate
@@ -179,11 +179,11 @@ $list-box-menu-width: convert.to-rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item__option {
-    border-top-color: $border-subtle;
+    border-block-start-color: $border-subtle;
   }
 
   .#{$prefix}--list-box--light.#{$prefix}--list-box--expanded {
-    border-bottom-color: transparent;
+    border-block-end-color: transparent;
   }
 
   // Disabled state for `list-box`
@@ -199,7 +199,7 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box--disabled,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field:focus {
-    border-bottom-color: transparent;
+    border-block-end-color: transparent;
     outline: none;
   }
 
@@ -235,12 +235,12 @@ $list-box-menu-width: convert.to-rem(300px);
   // disabled && invalid
   .#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field {
-    padding-right: $spacing-09;
+    padding-inline-end: $spacing-09;
   }
 
   .#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid].#{$prefix}--list-box--inline
     .#{$prefix}--list-box__field {
-    padding-right: $spacing-07;
+    padding-inline-end: $spacing-07;
   }
 
   // Inline variant for a `list-box`
@@ -254,7 +254,7 @@ $list-box-menu-width: convert.to-rem(300px);
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--expanded {
-    border-bottom-width: 0;
+    border-block-end-width: 0;
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--expanded
@@ -274,12 +274,12 @@ $list-box-menu-width: convert.to-rem(300px);
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__menu-icon {
-    right: $spacing-03;
+    inset-inline-end: $spacing-03;
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__invalid-icon {
-    right: $spacing-07;
+    inset-inline-end: $spacing-07;
   }
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__label {
@@ -287,16 +287,16 @@ $list-box-menu-width: convert.to-rem(300px);
   }
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
-    height: 100%;
+    block-size: 100%;
   }
 
   .#{$prefix}--dropdown--inline .#{$prefix}--list-box__field {
-    max-width: convert.to-rem(480px);
+    max-inline-size: convert.to-rem(480px);
   }
 
   .#{$prefix}--dropdown--inline .#{$prefix}--list-box__menu {
-    min-width: convert.to-rem(288px);
-    max-width: convert.to-rem(480px);
+    max-inline-size: convert.to-rem(480px);
+    min-inline-size: convert.to-rem(288px);
   }
 
   // The field we use for input, showing selection, etc.
@@ -306,12 +306,14 @@ $list-box-menu-width: convert.to-rem(300px);
     position: relative;
     display: inline-flex;
     overflow: hidden;
-    // Account for the border in `.bx--list-box`
-    height: calc(100% + 1px);
     align-items: center;
-    padding: 0 $spacing-09 0 $spacing-05;
+    // Account for the border in `.bx--list-box`
+    block-size: calc(100% + 1px);
     cursor: pointer;
     outline: none;
+    padding-block: 0;
+    padding-inline-end: $spacing-09;
+    padding-inline-start: $spacing-05;
     text-overflow: ellipsis;
     vertical-align: top;
     white-space: nowrap;
@@ -328,7 +330,7 @@ $list-box-menu-width: convert.to-rem(300px);
 
   // populated input field
   .#{$prefix}--list-box__field .#{$prefix}--text-input {
-    padding-right: convert.to-rem(72px);
+    padding-inline-end: convert.to-rem(72px);
   }
 
   // invalid && populated input field
@@ -339,7 +341,7 @@ $list-box-menu-width: convert.to-rem(300px);
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input {
     // to account for clear input button outline
-    padding-right: convert.to-rem(98px);
+    padding-inline-end: convert.to-rem(98px);
   }
 
   .#{$prefix}--list-box[data-invalid]
@@ -351,12 +353,12 @@ $list-box-menu-width: convert.to-rem(300px);
     .#{$prefix}--text-input
     + .#{$prefix}--list-box__invalid-icon {
     // to account for clear input button outline
-    right: convert.to-rem(66px);
+    inset-inline-end: convert.to-rem(66px);
   }
 
   // empty input field
   .#{$prefix}--list-box__field .#{$prefix}--text-input--empty {
-    padding-right: $spacing-09;
+    padding-inline-end: $spacing-09;
   }
 
   // invalid && empty input field
@@ -366,7 +368,7 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box--warning
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input--empty {
-    padding-right: carbon--mini-units(9);
+    padding-inline-end: carbon--mini-units(9);
   }
 
   .#{$prefix}--list-box[data-invalid]
@@ -378,7 +380,7 @@ $list-box-menu-width: convert.to-rem(300px);
     .#{$prefix}--text-input--empty
     + .#{$prefix}--list-box__invalid-icon {
     // to account for clear input button outline
-    right: convert.to-rem(40px);
+    inset-inline-end: convert.to-rem(40px);
   }
 
   // Label for a `list-box__field`
@@ -397,13 +399,13 @@ $list-box-menu-width: convert.to-rem(300px);
     @include button-reset.reset($width: false);
 
     position: absolute;
-    right: $spacing-05;
     display: flex;
-    width: convert.to-rem(24px);
-    height: convert.to-rem(24px);
     align-items: center;
     justify-content: center;
+    block-size: convert.to-rem(24px);
     cursor: pointer;
+    inline-size: convert.to-rem(24px);
+    inset-inline-end: $spacing-05;
     outline: none;
     transition: transform $duration-fast-01 motion(standard, productive);
   }
@@ -413,8 +415,8 @@ $list-box-menu-width: convert.to-rem(300px);
   }
 
   .#{$prefix}--list-box__menu-icon--open {
-    width: convert.to-rem(24px);
     justify-content: center;
+    inline-size: convert.to-rem(24px);
     transform: rotate(180deg);
   }
 
@@ -423,15 +425,15 @@ $list-box-menu-width: convert.to-rem(300px);
     @include button-reset.reset($width: false);
 
     position: absolute;
-    top: 50%;
-    /* to preserve .5rem space between icons according to spec top/transform used to center the combobox clear selection icon in IE11 */
-    right: convert.to-rem(36px);
     display: flex;
-    width: convert.to-rem(24px);
-    height: convert.to-rem(24px);
     align-items: center;
     justify-content: center;
+    block-size: convert.to-rem(24px);
     cursor: pointer;
+    inline-size: convert.to-rem(24px);
+    inset-block-start: 50%;
+    /* to preserve .5rem space between icons according to spec top/transform used to center the combobox clear selection icon in IE11 */
+    inset-inline-end: convert.to-rem(36px);
     transform: translateY(-50%);
     transition: background-color $duration-fast-01 motion(standard, productive);
     user-select: none;
@@ -458,29 +460,29 @@ $list-box-menu-width: convert.to-rem(300px);
     @include type-style('label-01');
 
     position: static;
-    top: auto;
     display: flex;
-    width: auto;
-    height: convert.to-rem(24px);
     align-items: center;
     justify-content: space-between;
     padding: convert.to-rem(8px);
-    // Align with hover circle of X button
-    padding-right: convert.to-rem(2px);
-    margin-right: convert.to-rem(10px);
     background-color: $background-inverse;
+    block-size: convert.to-rem(24px);
     border-radius: convert.to-rem(12px);
     color: $text-inverse;
+    inline-size: auto;
+    inset-block-start: auto;
     line-height: 0;
+    margin-inline-end: convert.to-rem(10px);
+    // Align with hover circle of X button
+    padding-inline-end: convert.to-rem(2px);
     transform: none;
   }
 
   .#{$prefix}--list-box__selection--multi > svg {
-    width: convert.to-rem(20px);
-    height: convert.to-rem(20px);
     padding: convert.to-rem(2px);
-    margin-left: convert.to-rem(4px);
+    block-size: convert.to-rem(20px);
     fill: $icon-inverse;
+    inline-size: convert.to-rem(20px);
+    margin-inline-start: convert.to-rem(4px);
 
     &:hover {
       background-color: $button-secondary-hover;
@@ -510,11 +512,11 @@ $list-box-menu-width: convert.to-rem(300px);
 
     position: absolute;
     z-index: z('dropdown');
-    right: 0;
-    left: 0;
     display: none;
-    width: $list-box-width;
     background-color: $layer;
+    inline-size: $list-box-width;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
     overflow-y: auto;
     transition: max-height $duration-fast-02 motion(standard, productive);
 
@@ -527,7 +529,7 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box .#{$prefix}--list-box__field[aria-expanded='false'] {
     .#{$prefix}--list-box__menu {
       display: none;
-      max-height: 0;
+      max-block-size: 0;
       visibility: hidden;
     }
   }
@@ -535,19 +537,19 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
     display: block;
     // 40px item height * 5.5 items shown
-    max-height: convert.to-rem(220px);
+    max-block-size: convert.to-rem(220px);
   }
 
   .#{$prefix}--list-box--expanded.#{$prefix}--list-box--lg
     .#{$prefix}--list-box__menu {
     // 48px item height * 5.5 items shown
-    max-height: convert.to-rem(264px);
+    max-block-size: convert.to-rem(264px);
   }
 
   .#{$prefix}--list-box--expanded.#{$prefix}--list-box--sm
     .#{$prefix}--list-box__menu {
     // 32px item height * 5.5 items shown
-    max-height: convert.to-rem(176px);
+    max-block-size: convert.to-rem(176px);
   }
 
   // Descendant of a `list-box__menu` that represents a selection for a control
@@ -555,7 +557,7 @@ $list-box-menu-width: convert.to-rem(300px);
     @include type-style('body-compact-01');
 
     position: relative;
-    height: convert.to-rem(40px);
+    block-size: convert.to-rem(40px);
     color: $text-secondary;
     cursor: pointer;
     transition: background $duration-fast-01 motion(standard, productive);
@@ -576,11 +578,11 @@ $list-box-menu-width: convert.to-rem(300px);
   }
 
   .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item {
-    height: convert.to-rem(32px);
+    block-size: convert.to-rem(32px);
   }
 
   .#{$prefix}--list-box--lg .#{$prefix}--list-box__menu-item {
-    height: convert.to-rem(48px);
+    block-size: convert.to-rem(48px);
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover {
@@ -594,24 +596,24 @@ $list-box-menu-width: convert.to-rem(300px);
 
   .#{$prefix}--list-box--disabled
     .#{$prefix}--list-box__menu-item__option:hover {
-    border-top-color: $border-subtle-01;
+    border-block-start-color: $border-subtle-01;
   }
 
   .#{$prefix}--layer-two
     .#{$prefix}--list-box--disabled
     .#{$prefix}--list-box__menu-item__option:hover {
-    border-top-color: $border-subtle-02;
+    border-block-start-color: $border-subtle-02;
   }
 
   .#{$prefix}--layer-three
     .#{$prefix}--list-box--disabled
     .#{$prefix}--list-box__menu-item__option:hover {
-    border-top-color: $border-subtle-03;
+    border-block-start-color: $border-subtle-03;
   }
 
   .#{$prefix}--list-box__menu-item:first-of-type
     .#{$prefix}--list-box__menu-item__option {
-    border-top-color: transparent;
+    border-block-start-color: transparent;
   }
 
   .#{$prefix}--list-box__menu-item:hover
@@ -623,7 +625,7 @@ $list-box-menu-width: convert.to-rem(300px);
     .#{$prefix}--list-box__menu-item:hover
     + .#{$prefix}--list-box__menu-item
     .#{$prefix}--list-box__menu-item__option {
-    border-top-color: $border-subtle-01;
+    border-block-start-color: $border-subtle-01;
   }
 
   .#{$prefix}--layer-two
@@ -631,7 +633,7 @@ $list-box-menu-width: convert.to-rem(300px);
     .#{$prefix}--list-box__menu-item:hover
     + .#{$prefix}--list-box__menu-item
     .#{$prefix}--list-box__menu-item__option {
-    border-top-color: $border-subtle-02;
+    border-block-start-color: $border-subtle-02;
   }
 
   .#{$prefix}--layer-three
@@ -639,15 +641,15 @@ $list-box-menu-width: convert.to-rem(300px);
     .#{$prefix}--list-box__menu-item:hover
     + .#{$prefix}--list-box__menu-item
     .#{$prefix}--list-box__menu-item__option {
-    border-top-color: $border-subtle-03;
+    border-block-start-color: $border-subtle-03;
   }
 
   .#{$prefix}--layer-two .#{$prefix}--list-box__menu-item__option {
-    border-top-color: $border-subtle-02;
+    border-block-start-color: $border-subtle-02;
   }
 
   .#{$prefix}--layer-three .#{$prefix}--list-box__menu-item__option {
-    border-top-color: $border-subtle-03;
+    border-block-start-color: $border-subtle-03;
   }
 
   .#{$prefix}--list-box__menu-item__option {
@@ -656,16 +658,16 @@ $list-box-menu-width: convert.to-rem(300px);
 
     display: block;
     overflow: hidden;
-    height: convert.to-rem(40px);
     padding: convert.to-rem(11px) 0;
-    padding-right: $spacing-06;
-    border-top: 1px solid transparent;
-    border-top-color: $border-subtle-01;
-    border-bottom: 1px solid transparent;
     margin: 0 $spacing-05;
+    block-size: convert.to-rem(40px);
+    border-block-end: 1px solid transparent;
+    border-block-start: 1px solid transparent;
+    border-block-start-color: $border-subtle-01;
     color: $text-secondary;
     font-weight: normal;
     line-height: 1rem;
+    padding-inline-end: $spacing-06;
     text-decoration: none;
     text-overflow: ellipsis;
     transition: border-color $duration-fast-01 motion(standard, productive),
@@ -687,15 +689,15 @@ $list-box-menu-width: convert.to-rem(300px);
   }
 
   .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item__option {
-    height: convert.to-rem(32px);
-    padding-top: convert.to-rem(7px);
-    padding-bottom: convert.to-rem(7px);
+    block-size: convert.to-rem(32px);
+    padding-block-end: convert.to-rem(7px);
+    padding-block-start: convert.to-rem(7px);
   }
 
   .#{$prefix}--list-box--lg .#{$prefix}--list-box__menu-item__option {
-    height: convert.to-rem(48px);
-    padding-top: convert.to-rem(15px);
-    padding-bottom: convert.to-rem(15px);
+    block-size: convert.to-rem(48px);
+    padding-block-end: convert.to-rem(15px);
+    padding-block-start: convert.to-rem(15px);
   }
 
   .#{$prefix}--list-box--disabled
@@ -729,7 +731,7 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box__menu-item[disabled]:hover
     + .#{$prefix}--list-box__menu-item
     .#{$prefix}--list-box__menu-item__option {
-    border-top-color: $border-subtle-01;
+    border-block-start-color: $border-subtle-01;
   }
 
   .#{$prefix}--layer-two
@@ -739,7 +741,7 @@ $list-box-menu-width: convert.to-rem(300px);
     .#{$prefix}--list-box__menu-item[disabled]:hover
     + .#{$prefix}--list-box__menu-item
     .#{$prefix}--list-box__menu-item__option {
-    border-top-color: $border-subtle-02;
+    border-block-start-color: $border-subtle-02;
   }
 
   .#{$prefix}--layer-three
@@ -749,7 +751,7 @@ $list-box-menu-width: convert.to-rem(300px);
     .#{$prefix}--list-box__menu-item[disabled]:hover
     + .#{$prefix}--list-box__menu-item
     .#{$prefix}--list-box__menu-item__option {
-    border-top-color: $border-subtle-03;
+    border-block-start-color: $border-subtle-03;
   }
 
   .#{$prefix}--list-box__menu-item--active
@@ -758,7 +760,7 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box__menu-item:hover
     + .#{$prefix}--list-box__menu-item
     .#{$prefix}--list-box__menu-item__option {
-    border-top-color: transparent;
+    border-block-start-color: transparent;
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
@@ -766,9 +768,9 @@ $list-box-menu-width: convert.to-rem(300px);
     margin: 0 $spacing-03;
 
     &:focus {
-      padding-right: $spacing-03;
-      padding-left: $spacing-03;
       margin: 0;
+      padding-inline-end: $spacing-03;
+      padding-inline-start: $spacing-03;
     }
   }
 
@@ -783,7 +785,7 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box__menu-item--highlighted
     + .#{$prefix}--list-box__menu-item
     .#{$prefix}--list-box__menu-item__option {
-    border-top-color: transparent;
+    border-block-start-color: transparent;
   }
 
   .#{$prefix}--list-box__menu-item--highlighted
@@ -792,20 +794,20 @@ $list-box-menu-width: convert.to-rem(300px);
   }
 
   .#{$prefix}--list-box__menu-item--active {
-    border-bottom-color: $layer-selected;
     background-color: $layer-selected;
+    border-block-end-color: $layer-selected;
     color: $text-primary;
   }
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item--active {
-    border-bottom-color: $layer-selected;
     background-color: $layer-selected;
+    border-block-end-color: $layer-selected;
   }
 
   .#{$prefix}--list-box__menu-item--active:hover {
-    border-bottom-color: $layer-selected-hover;
     background-color: $layer-selected-hover;
+    border-block-end-color: $layer-selected-hover;
   }
 
   .#{$prefix}--list-box__menu-item--active
@@ -817,21 +819,21 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box__menu-item--active
     + .#{$prefix}--list-box__menu-item
     > .#{$prefix}--list-box__menu-item__option {
-    border-top-color: transparent;
+    border-block-start-color: transparent;
   }
 
   .#{$prefix}--list-box__menu-item__selected-icon {
     position: absolute;
-    top: 50%;
-    right: convert.to-rem(16px);
     display: none;
     fill: $icon-primary;
+    inset-block-start: 50%;
+    inset-inline-end: convert.to-rem(16px);
     transform: translateY(-50%);
   }
 
   .#{$prefix}--list-box--inline
     .#{$prefix}--list-box__menu-item__selected-icon {
-    right: convert.to-rem(8px);
+    inset-inline-end: convert.to-rem(8px);
   }
 
   .#{$prefix}--list-box__menu-item--active
@@ -840,7 +842,7 @@ $list-box-menu-width: convert.to-rem(300px);
   }
 
   .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label {
-    width: 100%;
+    inline-size: 100%;
   }
 
   .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label-text {
@@ -851,7 +853,7 @@ $list-box-menu-width: convert.to-rem(300px);
 
   // Dropdown top orientation modifiers
   .#{$prefix}--list-box--up .#{$prefix}--list-box__menu {
-    bottom: 2.5rem;
+    inset-block-end: 2.5rem;
   }
 
   .#{$prefix}--list-box--up.#{$prefix}--dropdown--sm
@@ -861,7 +863,7 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box--up
     .#{$prefix}--list-box--sm
     .#{$prefix}--list-box__menu {
-    bottom: 2rem;
+    inset-block-end: 2rem;
   }
 
   .#{$prefix}--list-box--up.#{$prefix}--dropdown--lg
@@ -871,7 +873,7 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box--up
     .#{$prefix}--list-box--lg
     .#{$prefix}--list-box__menu {
-    bottom: 3rem;
+    inset-block-end: 3rem;
   }
 
   // Tweaks for descendants
@@ -881,8 +883,8 @@ $list-box-menu-width: convert.to-rem(300px);
   // TODO: remove [role='combobox'] in v11
   .#{$prefix}--list-box input[role='combobox'],
   .#{$prefix}--list-box input[type='text'] {
-    min-width: 0;
     background-color: inherit;
+    min-inline-size: 0;
     text-overflow: ellipsis;
   }
 

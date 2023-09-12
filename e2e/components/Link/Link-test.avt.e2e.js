@@ -45,4 +45,27 @@ test.describe('Link @avt', () => {
       'components-link--paired-with-icon'
     );
   });
+
+  // Prevent timeout
+  test.slow('accessibility-checker keyboard nav', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Link',
+      id: 'components-link--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    // Checking focus
+    const link = page.getByRole('link');
+    await expect(link).toBeVisible();
+    await page.keyboard.press('Tab');
+    await expect(link).toBeFocused();
+
+    // Checking if the link was triggered
+    await page.keyboard.press('Enter');
+    await expect(page).toHaveURL(
+      'iframe.html?id=components-link--default&viewMode=story&globals=theme:white#'
+    );
+  });
 });

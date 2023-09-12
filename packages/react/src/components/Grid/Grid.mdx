@@ -14,11 +14,11 @@ import * as GridStories from './Grid.stories';
 
 - [Overview](#overview)
   - [Debugging](#debugging)
-- [Grid modes](#grid-modes)
+- [Gutter modes](#gutter-modes)
   - [Wide grid](#wide-grid)
   - [Condensed grid](#condensed-grid)
 - [Subgrid](#subgrid)
-- [Mixed grid modes](#mixed-grid-modes)
+- [Mixed gutter modes](#mixed-gutter-modes)
 - [Auto columns](#auto-columns)
 - [Offset columns](#offset-columns)
 - [Component API](#component-api)
@@ -92,10 +92,10 @@ we will use the `sm`, `md`, and `lg` prop to specify how many columns the
 ### Debugging
 
 It is incredibly helpful when debugging CSS Grid to use the browser developer
-tools' css grid mode to view the grid definition. Depending on the browser,
+tools' css gutter mode to view the grid definition. Depending on the browser,
 these typically provide a toggle for overlaying a schematic showing the column
 and grid gap definition. With this overlay, it's much easier to visually
-understand if grid modes are configured and set properly on the grid.
+understand if gutter modes are configured and set properly on the grid.
 
 Documentation on these features is available for
 [Chrome](https://developer.chrome.com/docs/devtools/css/grid/),
@@ -104,13 +104,13 @@ and
 [Safari](https://webkit.org/blog/11588/introducing-css-grid-inspector/#:~:text=If%20you're%20using%20Safari,%23css%2Dgrid%2Ddemo%20.),
 among others.
 
-## Grid modes
+## Gutter modes
 
 There are several
-[grid modes](https://www.carbondesignsystem.com/guidelines/2x-grid/implementation/#grid-modes)
+[gutter modes](https://www.carbondesignsystem.com/guidelines/2x-grid/implementation/#gutter-modes)
 that you can use depending on the layout effect you're looking to achieve. By
-default, `Grid` uses the wide grid mode with a 32px gutter. However, you can use
-the `condensed` prop to enable the condensed grid mode with a 1px gutter or the
+default, `Grid` uses the wide gutter mode with a 32px gutter. However, you can use
+the `condensed` prop to enable the condensed gutter mode with a 1px gutter or the
 `narrow` prop to enable the narrow grid with a 16px gutter.
 
 ### Full width grid
@@ -145,15 +145,15 @@ in a `Column` enables you to define responsive parameters for the column (`sm`,
   <Story of={GridStories.Subgrid} />
 </Canvas>
 
-## Mixed grid modes
+## Mixed gutter modes
 
 The same way that you can pass in `condensed` to a root `Grid`, you can also
-pass in `condensed` to a nested `Grid` (subgrid) to enable a certain grid mode
+pass in `condensed` to a nested `Grid` (subgrid) to enable a certain gutter mode
 for only that subgrid. This can be useful when you need to mix-and-match certain
-grid modes to achieve a particular layout.
+gutter modes to achieve a particular layout.
 
 <Canvas>
-  <Story of={GridStories.MixedGridModes} />
+  <Story of={GridStories.MixedGutterModes} />
 </Canvas>
 
 ## Auto columns

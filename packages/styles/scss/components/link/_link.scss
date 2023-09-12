@@ -111,6 +111,6 @@ $link-focus-text-color: custom-property.get-var(
   .#{$prefix}--link__icon {
     display: inline-flex;
     align-self: center;
-    margin-left: $spacing-03;
+    margin-inline-start: $spacing-03;
   }
 }

@@ -34,7 +34,7 @@ describe('IconSwitch', () => {
       expect(screen.getByRole('tab')).toHaveClass('custom-class');
     });
 
-    it('should respect disabled prop', () => {
+    it('should respect disabled prop', async () => {
       const onClick = jest.fn();
       render(
         <IconSwitch text="Workspace" disabled onClick={onClick}>
@@ -44,7 +44,7 @@ describe('IconSwitch', () => {
 
       expect(screen.getByRole('tab')).toBeDisabled();
 
-      userEvent.click(screen.getByRole('tab'));
+      await userEvent.click(screen.getByRole('tab'));
 
       expect(onClick).not.toHaveBeenCalled();
     });
