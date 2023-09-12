@@ -91,6 +91,11 @@ $radio-border-width: 1px !default;
     margin-inline: convert.to-rem(2px) $spacing-03;
   }
 
+  .#{$prefix}--radio-button-group--vertical
+    .#{$prefix}--radio-button__appearance {
+    margin-block: 0;
+  }
+
   .#{$prefix}--radio-button:checked
     + .#{$prefix}--radio-button__label
     .#{$prefix}--radio-button__appearance {
@@ -240,14 +245,20 @@ $radio-border-width: 1px !default;
     margin: 0;
   }
 
+  .#{$prefix}--radio-button-group--vertical
+    .#{$prefix}--radio-button-wrapper
+    .#{$prefix}--radio-button__label {
+    margin-block-end: convert.to-rem(6px);
+    padding-block-start: convert.to-rem(2px);
+  }
+
   .#{$prefix}--radio-button-wrapper:not(:last-of-type) {
     margin-inline-end: $spacing-05;
   }
 
   .#{$prefix}--radio-button-group--vertical
     .#{$prefix}--radio-button-wrapper:not(:last-of-type) {
-    margin-block-end: $spacing-03;
-    margin-inline-end: 0;
+    margin: 0;
   }
 
   .#{$prefix}--radio-button-group--label-right .#{$prefix}--radio-button__label,
