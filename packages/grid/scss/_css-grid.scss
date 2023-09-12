@@ -94,23 +94,21 @@
     --cds-grid-column-hang: calc(var(--cds-grid-gutter) / 2);
 
     display: grid;
-    width: 100%;
-    max-width: get-grid-width(
+    grid-template-columns: repeat(var(--cds-grid-columns), minmax(0, 1fr));
+    inline-size: 100%;
+    margin-inline: auto;
+    max-inline-size: get-grid-width(
       $breakpoints,
       largest-breakpoint-name($breakpoints)
     );
-    padding-right: var(--cds-grid-margin);
-    padding-left: var(--cds-grid-margin);
-    margin-right: auto;
-    margin-left: auto;
-    grid-template-columns: repeat(var(--cds-grid-columns), minmax(0, 1fr));
+    padding-inline: var(--cds-grid-margin);
   }
 
   // -----------------------------------------------------------------------------
   // Full width
   // -----------------------------------------------------------------------------
   .#{$prefix}--css-grid--full-width {
-    max-width: 100%;
+    max-inline-size: 100%;
   }
 
   // -----------------------------------------------------------------------------
@@ -127,12 +125,10 @@
     --cds-grid-mode-start: var(--cds-grid-gutter-start);
     --cds-grid-mode-end: var(--cds-grid-gutter-end);
 
-    margin-right: var(--cds-grid-gutter-end);
-    margin-left: var(--cds-grid-gutter-start);
+    margin-inline: var(--cds-grid-gutter-start) var(--cds-grid-gutter-end);
 
     [dir='rtl'] & {
-      margin-right: var(--cds-grid-gutter-start);
-      margin-left: var(--cds-grid-gutter-end);
+      margin-inline: var(--cds-grid-gutter-end) var(--cds-grid-gutter-start);
     }
   }
 
@@ -157,13 +153,13 @@
   // -----------------------------------------------------------------------------
   .#{$prefix}--subgrid {
     display: grid;
-    margin-right: calc(var(--cds-grid-mode-end) * -1);
-    margin-left: calc(var(--cds-grid-mode-start) * -1);
     grid-template-columns: repeat(var(--cds-grid-columns), minmax(0, 1fr));
+    margin-inline: calc(var(--cds-grid-mode-start) * -1)
+      calc(var(--cds-grid-mode-end) * -1);
 
     [dir='rtl'] & {
-      margin-right: calc(var(--cds-grid-mode-start) * -1);
-      margin-left: calc(var(--cds-grid-mode-end) * -1);
+      margin-inline: calc(var(--cds-grid-mode-end) * -1)
+        calc(var(--cds-grid-mode-start) * -1);
     }
   }
 
@@ -194,11 +190,10 @@
   // Helper class to allow for text alignment in columns where the leading
   // gutter is missing (like narrow) or is reduced (like in condensed).
   .#{$prefix}--grid-column-hang {
-    margin-left: var(--cds-grid-column-hang);
+    margin-inline-start: var(--cds-grid-column-hang);
 
     [dir='rtl'] & {
-      margin-right: var(--cds-grid-column-hang);
-      margin-left: initial;
+      margin-inline: initial var(--cds-grid-column-hang);
     }
   }
 

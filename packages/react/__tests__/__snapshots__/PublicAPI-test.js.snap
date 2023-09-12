@@ -3866,6 +3866,7 @@ Map {
     },
   },
   "GlobalTheme" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -3882,6 +3883,7 @@ Map {
         "type": "oneOf",
       },
     },
+    "render": [Function],
   },
   "Grid" => Object {
     "propTypes": Object {
@@ -4104,6 +4106,7 @@ Map {
     },
   },
   "Heading" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -4112,6 +4115,7 @@ Map {
         "type": "string",
       },
     },
+    "render": [Function],
   },
   "IconButton" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -4393,6 +4397,7 @@ Map {
     },
   },
   "Layer" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "as": Object {
         "args": Array [
@@ -4427,6 +4432,7 @@ Map {
         "type": "oneOf",
       },
     },
+    "render": [Function],
   },
   "Link" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -6640,6 +6646,7 @@ Map {
   },
   "SecondaryButton" => Object {},
   "Section" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "as": Object {
         "type": "elementType",
@@ -6654,6 +6661,7 @@ Map {
         "type": "number",
       },
     },
+    "render": [Function],
   },
   "Select" => Object {
     "$$typeof": Symbol(react.forward_ref),

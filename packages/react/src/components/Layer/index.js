@@ -26,13 +26,16 @@ export function useLayer() {
   };
 }
 
-export function Layer({
-  as: BaseComponent = 'div',
-  className: customClassName,
-  children,
-  level: overrideLevel,
-  ...rest
-}) {
+export const Layer = React.forwardRef(function Layer(
+  {
+    as: BaseComponent = 'div',
+    className: customClassName,
+    children,
+    level: overrideLevel,
+    ...rest
+  },
+  ref
+) {
   const contextLevel = React.useContext(LayerContext);
   const level = overrideLevel ?? contextLevel;
   const prefix = usePrefix();
@@ -42,12 +45,12 @@ export function Layer({
 
   return (
     <LayerContext.Provider value={value}>
-      <BaseComponent {...rest} className={className}>
+      <BaseComponent ref={ref} {...rest} className={className}>
         {children}
       </BaseComponent>
     </LayerContext.Provider>
   );
-}
+});
 
 Layer.propTypes = {
   /**

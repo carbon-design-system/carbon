@@ -7,7 +7,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import cx from 'classnames';
+import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
 export interface TagSkeletonProps
@@ -26,14 +26,16 @@ export interface TagSkeletonProps
 
 function TagSkeleton({ className, size, ...rest }: TagSkeletonProps) {
   const prefix = usePrefix();
-  return (
-    <span
-      className={cx(`${prefix}--tag`, `${prefix}--skeleton`, className, {
-        [`${prefix}--tag--${size}`]: size,
-      })}
-      {...rest}
-    />
+  const tagClasses = classNames(
+    `${prefix}--tag`,
+    `${prefix}--skeleton`,
+    className,
+    {
+      [`${prefix}--tag--${size}`]: size, // TODO: V12 - Remove this class
+      [`${prefix}--layout--size-${size}`]: size,
+    }
   );
+  return <span className={tagClasses} {...rest} />;
 }
 
 TagSkeleton.propTypes = {
