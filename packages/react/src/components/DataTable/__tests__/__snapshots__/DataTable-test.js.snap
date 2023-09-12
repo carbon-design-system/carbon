@@ -2442,6 +2442,7 @@ exports[`DataTable should render 1`] = `
                     onClickOutside={[Function]}
                   >
                     <button
+                      aria-controls={null}
                       aria-expanded={false}
                       aria-haspopup={true}
                       aria-label="Settings"
@@ -3430,6 +3431,7 @@ exports[`DataTable sticky header should render 1`] = `
                     onClickOutside={[Function]}
                   >
                     <button
+                      aria-controls={null}
                       aria-expanded={false}
                       aria-haspopup={true}
                       aria-label="Settings"
