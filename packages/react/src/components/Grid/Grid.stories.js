@@ -36,14 +36,54 @@ export default {
   ],
 };
 
-export const Default = () => {
+// Remove before merging
+export const SubGridTestStory = () => {
   return (
     <Grid>
-      <Column sm={4} />
-      <Column sm={4} />
-      <Column sm={4} />
-      <Column sm={4} />
+      <Column lg={8}>
+        <Grid subGrid={false}>
+          <Column lg={4} />
+          <Column lg={4}>
+            <Grid>
+              <Column lg={2} />
+              <Column lg={2} />
+            </Grid>
+          </Column>
+        </Grid>
+      </Column>
+      <Column lg={8}>
+        <Grid>
+          <Column lg={4} />
+          <Column lg={4} />
+        </Grid>
+      </Column>
     </Grid>
+  );
+};
+
+export const Default = () => {
+  return (
+    <>
+      {/* <Grid subgrid={false}>
+        <Column sm={4} />
+        <Column sm={4} />
+        <Column sm={4} />
+        <Column sm={4} />
+      </Grid> */}
+      <Grid>
+        <Column sm={4}>
+          <Grid subGrid={false}>
+            <Column sm={4} />
+            <Column sm={4} />
+            <Column sm={4} />
+            <Column sm={4} />
+          </Grid>
+        </Column>
+        <Column sm={4} />
+        <Column sm={4} />
+        <Column sm={4} />
+      </Grid>
+    </>
   );
 };
 

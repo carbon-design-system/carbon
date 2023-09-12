@@ -20,18 +20,20 @@ function CSSGrid<T extends React.ElementType>({
   condensed = false,
   fullWidth = false,
   narrow = false,
+  subGrid = true,
   ...rest
 }: GridProps<T>) {
   const prefix = usePrefix();
   const { subgrid } = useGridSettings();
   let mode: SubgridMode = 'wide';
+
   if (narrow) {
     mode = 'narrow';
   } else if (condensed) {
     mode = 'condensed';
   }
 
-  if (subgrid) {
+  if (subgrid && subGrid) {
     return (
       <GridSettings mode="css-grid" subgrid>
         <Subgrid
