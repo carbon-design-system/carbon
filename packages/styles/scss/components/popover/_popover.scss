@@ -130,11 +130,11 @@ $popover-caret-height: custom-property.get-var(
     position: absolute;
     z-index: z('floating');
     display: none;
-    width: max-content;
-    max-width: convert.to-rem(368px);
     background-color: $popover-background-color;
     border-radius: $popover-border-radius;
     color: $popover-text-color;
+    inline-size: max-content;
+    max-inline-size: convert.to-rem(368px);
     pointer-events: auto;
   }
 
@@ -192,28 +192,50 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--bottom
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
-    bottom: 0;
-    left: 50%;
+    inset-block-end: 0;
+    inset-inline-start: 50%;
     transform: translate(-50%, calc(100% + $popover-offset));
+  }
+
+  [dir='rtl']
+    .#{$prefix}--popover--bottom
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    transform: translate(50%, calc(100% + $popover-offset));
   }
 
   .#{$prefix}--popover--bottom-left
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
-    bottom: 0;
-    left: 0;
+    inset-block-end: 0;
+    inset-inline-start: 0;
     transform: translate(
       calc(-1 * $popover-offset),
       calc(100% + $popover-offset)
     );
   }
 
+  [dir='rtl']
+    .#{$prefix}--popover--bottom-left
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-end: 0;
+    inset-inline-start: initial;
+  }
+
   .#{$prefix}--popover--bottom-right
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
-    right: 0;
-    bottom: 0;
+    inset-block-end: 0;
+    inset-inline-end: 0;
     transform: translate($popover-offset, calc(100% + $popover-offset));
+  }
+
+  [dir='rtl']
+    .#{$prefix}--popover--bottom-right
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-start: 0;
   }
 
   // Popover hover area placement
@@ -226,10 +248,10 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--bottom-right
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content::before {
-    top: 0;
-    right: 0;
-    left: 0;
-    height: $popover-offset;
+    block-size: $popover-offset;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
     transform: translateY(-100%);
   }
 
@@ -243,12 +265,27 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--bottom-right
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret {
-    bottom: 0;
-    left: 50%;
-    width: $popover-caret-width;
-    height: $popover-caret-height;
+    block-size: $popover-caret-height;
     clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+    inline-size: $popover-caret-width;
+    inset-block-end: 0;
+    inset-inline-start: 50%;
     transform: translate(-50%, $popover-offset);
+  }
+
+  [dir='rtl']
+    .#{$prefix}--popover--bottom
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  [dir='rtl']
+    .#{$prefix}--popover--bottom-left
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  [dir='rtl']
+    .#{$prefix}--popover--bottom-right
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    transform: translate(50%, $popover-offset);
   }
 
   //-----------------------------------------------------------------------------
@@ -259,28 +296,50 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--top
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
-    top: 0;
-    left: 50%;
+    inset-block-start: 0;
+    inset-inline-start: 50%;
     transform: translate(-50%, calc(-100% - $popover-offset));
+  }
+
+  [dir='rtl']
+    .#{$prefix}--popover--top
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    transform: translate(50%, calc(-100% - $popover-offset));
   }
 
   .#{$prefix}--popover--top-left
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
-    top: 0;
-    left: 0;
+    inset-block-start: 0;
+    inset-inline-start: 0;
     transform: translate(
       calc(-1 * $popover-offset),
       calc(-100% - $popover-offset)
     );
   }
 
+  [dir='rtl']
+    .#{$prefix}--popover--top-left
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-end: 0;
+    inset-inline-start: initial;
+  }
+
   .#{$prefix}--popover--top-right
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
-    top: 0;
-    right: 0;
+    inset-block-start: 0;
+    inset-inline-end: 0;
     transform: translate($popover-offset, calc(-100% - $popover-offset));
+  }
+
+  [dir='rtl']
+    .#{$prefix}--popover--top-right
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-start: 0;
   }
 
   // Popover hover area placement
@@ -293,10 +352,10 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--top-right
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content::before {
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: $popover-offset;
+    block-size: $popover-offset;
+    inset-block-end: 0;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
     transform: translateY(100%);
   }
 
@@ -308,12 +367,27 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--top-right
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret {
-    top: 0;
-    left: 50%;
-    width: $popover-caret-width;
-    height: $popover-caret-height;
+    block-size: $popover-caret-height;
     clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+    inline-size: $popover-caret-width;
+    inset-block-start: 0;
+    inset-inline-start: 50%;
     transform: translate(-50%, calc(-1 * $popover-offset));
+  }
+
+  [dir='rtl']
+    .#{$prefix}--popover--top
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  [dir='rtl']
+    .#{$prefix}--popover--top-left
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  [dir='rtl']
+    .#{$prefix}--popover--top-right
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    transform: translate(50%, calc(-1 * $popover-offset));
   }
 
   //-----------------------------------------------------------------------------
@@ -324,8 +398,8 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--right
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
-    top: 50%;
-    left: 100%;
+    inset-block-start: 50%;
+    inset-inline-start: 100%;
     // Add in 0.1px to prevent rounding errors where the content is
     // moved farther than the caret
     transform: translate($popover-offset, -50%);
@@ -334,8 +408,8 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--right-top
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
-    top: 50%;
-    left: 100%;
+    inset-block-start: 50%;
+    inset-inline-start: 100%;
     transform: translate(
       $popover-offset,
       calc(0.5 * $popover-offset * -1 - 16px)
@@ -345,9 +419,25 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--right-bottom
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
-    bottom: 50%;
-    left: 100%;
+    inset-block-end: 50%;
+    inset-inline-start: 100%;
     transform: translate($popover-offset, calc(0.5 * $popover-offset + 16px));
+  }
+
+  [dir='rtl']
+    .#{$prefix}--popover--right
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  [dir='rtl']
+    .#{$prefix}--popover--right-bottom
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  [dir='rtl']
+    .#{$prefix}--popover--right-top
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-end: 100%;
+    inset-inline-start: initial;
   }
 
   // Popover hover area placement
@@ -360,10 +450,10 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--right-bottom
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content::before {
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: $popover-offset;
+    inline-size: $popover-offset;
+    inset-block-end: 0;
+    inset-block-start: 0;
+    inset-inline-start: 0;
     transform: translateX(-100%);
   }
 
@@ -377,12 +467,28 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--right-bottom
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret {
-    top: 50%;
-    left: 100%;
-    width: $popover-caret-height;
-    height: $popover-caret-width;
+    block-size: $popover-caret-width;
     clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+    inline-size: $popover-caret-height;
+    inset-block-start: 50%;
+    inset-inline-start: 100%;
     transform: translate(calc($popover-offset - 100%), -50%);
+  }
+
+  [dir='rtl']
+    .#{$prefix}--popover--right
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  [dir='rtl']
+    .#{$prefix}--popover--right-top
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  [dir='rtl']
+    .#{$prefix}--popover--right-bottom
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    inset-inline-end: 100%;
+    inset-inline-start: initial;
   }
 
   //-----------------------------------------------------------------------------
@@ -393,8 +499,8 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--left
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
-    top: 50%;
-    right: 100%;
+    inset-block-start: 50%;
+    inset-inline-end: 100%;
     // Add in 0.1px to prevent rounding errors where the content is
     // moved farther than the caret
     transform: translate(calc(-1 * $popover-offset + 0.1px), -50%);
@@ -403,8 +509,8 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--left-top
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
-    top: -50%;
-    right: 100%;
+    inset-block-start: -50%;
+    inset-inline-end: 100%;
     // Add in 0.1px to prevent rounding errors where the content is
     // moved farther than the caret
     transform: translate(
@@ -416,14 +522,30 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--left-bottom
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
-    right: 100%;
-    bottom: -50%;
+    inset-block-end: -50%;
+    inset-inline-end: 100%;
     // Add in 0.1px to prevent rounding errors where the content is
     // moved farther than the caret
     transform: translate(
       calc(-1 * $popover-offset),
       calc(0.5 * $popover-offset - 16px)
     );
+  }
+
+  [dir='rtl']
+    .#{$prefix}--popover--left
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  [dir='rtl']
+    .#{$prefix}--popover--left-bottom
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  [dir='rtl']
+    .#{$prefix}--popover--left-top
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-end: initial;
+    inset-inline-start: 100%;
   }
 
   // Popover hover area placement
@@ -436,10 +558,10 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--left-bottom
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content::before {
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: $popover-offset;
+    inline-size: $popover-offset;
+    inset-block-end: 0;
+    inset-block-start: 0;
+    inset-inline-end: 0;
     transform: translateX(100%);
   }
 
@@ -453,12 +575,28 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--left-bottom
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret {
-    top: 50%;
-    right: 100%;
-    width: $popover-caret-height;
-    height: $popover-caret-width;
+    block-size: $popover-caret-width;
     clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+    inline-size: $popover-caret-height;
+    inset-block-start: 50%;
+    inset-inline-end: 100%;
     transform: translate(calc(-1 * $popover-offset + 100%), -50%);
+  }
+
+  [dir='rtl']
+    .#{$prefix}--popover--left
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  [dir='rtl']
+    .#{$prefix}--popover--left-top
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  [dir='rtl']
+    .#{$prefix}--popover--left-bottom
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    inset-inline-end: initial;
+    inset-inline-start: 100%;
   }
 
   //-----------------------------------------------------------------------------
@@ -479,10 +617,10 @@ $popover-caret-height: custom-property.get-var(
 
     position: relative;
     display: inline-flex;
-    width: convert.to-rem(32px);
-    height: convert.to-rem(32px);
     align-items: center;
     justify-content: center;
+    block-size: convert.to-rem(32px);
+    inline-size: convert.to-rem(32px);
 
     &:focus {
       @include focus-outline('outline');
@@ -503,11 +641,11 @@ $popover-caret-height: custom-property.get-var(
     .#{$prefix}--popover--tab-tip__button:not(:focus)::after {
     position: absolute;
     z-index: z('floating') + 1;
-    bottom: 0;
-    width: 100%;
-    height: 2px;
     background: theme.$layer;
+    block-size: 2px;
     content: '';
+    inline-size: 100%;
+    inset-block-end: 0;
   }
 
   .#{$prefix}--popover--tab-tip__button svg {

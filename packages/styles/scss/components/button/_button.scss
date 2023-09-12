@@ -119,7 +119,7 @@
 
     .#{$prefix}--btn__icon {
       position: static;
-      margin-left: $spacing-03;
+      margin-inline-start: $spacing-03;
     }
 
     &:hover,
@@ -149,10 +149,10 @@
   }
 
   .#{$prefix}--btn--icon-only {
-    width: layout.size('height');
-    height: layout.size('height');
     justify-content: center;
     padding: 0;
+    block-size: layout.size('height');
+    inline-size: layout.size('height');
     // -1px to compensate for border width
     padding-block-start: min(
       calc(
@@ -162,8 +162,8 @@
     );
 
     > :first-child {
-      min-width: convert.to-rem(16px);
       margin-block-start: convert.to-rem(1px);
+      min-inline-size: convert.to-rem(16px);
     }
 
     .#{$prefix}--btn__icon {
@@ -283,7 +283,7 @@
 
       .#{$prefix}--btn__icon {
         position: static;
-        margin-left: $spacing-03;
+        margin-inline-start: $spacing-03;
       }
 
       &:hover,
@@ -324,19 +324,19 @@
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--expressive .#{$prefix}--btn__icon {
-    width: convert.to-rem(20px);
-    height: convert.to-rem(20px);
+    block-size: convert.to-rem(20px);
+    inline-size: convert.to-rem(20px);
   }
 
   .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--expressive {
-    max-width: convert.to-rem(320px);
+    max-inline-size: convert.to-rem(320px);
   }
 
   // Skeleton State
   .#{$prefix}--btn.#{$prefix}--skeleton {
     @include skeleton;
 
-    width: convert.to-rem(150px);
+    inline-size: convert.to-rem(150px);
   }
 
   // button set styles
@@ -349,9 +349,9 @@
   }
 
   .#{$prefix}--btn-set .#{$prefix}--btn {
-    width: 100%;
+    inline-size: 100%;
     // 196px from design kit
-    max-width: convert.to-rem(196px);
+    max-inline-size: convert.to-rem(196px);
 
     &:not(:focus) {
       box-shadow: convert.to-rem(-1px) 0 0 0 $button-separator;
@@ -402,5 +402,10 @@
     path:not([data-icon-path]):not([fill='none']),
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only .#{$prefix}--btn__icon {
     @include high-contrast-mode('icon-fill');
+  }
+
+  // RTL overrides
+  [dir='rtl'] .#{$prefix}--btn-set .#{$prefix}--btn:not(:focus) {
+    box-shadow: convert.to-rem(1px) 0 0 0 $button-separator;
   }
 }
