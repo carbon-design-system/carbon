@@ -88,6 +88,12 @@
     inset: 0;
   }
 
+  [dir='rtl']
+    .#{$prefix}--progress-bar--indeterminate
+    .#{$prefix}--progress-bar__track::after {
+    animation-name: progress-bar-indeterminate-rtl;
+  }
+
   .#{$prefix}--progress-bar__helper-text {
     @include type-style('helper-text-01');
 
@@ -141,6 +147,17 @@
     80%,
     100% {
       background-position-x: -105%;
+    }
+  }
+
+  @keyframes progress-bar-indeterminate-rtl {
+    0% {
+      background-position-x: -105%;
+    }
+
+    80%,
+    100% {
+      background-position-x: 25%;
     }
   }
 
