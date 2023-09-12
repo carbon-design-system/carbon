@@ -6,18 +6,22 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-const IconSkeleton = ({ className, ...rest }) => {
+export interface IconSkeletonProps extends ComponentProps<'div'> {
+  /**
+   * Specify an optional className to add.
+   */
+  className?: string;
+}
+
+const IconSkeleton = ({ className, ...rest }: IconSkeletonProps) => {
   const prefix = usePrefix();
-  const props = {
-    ...rest,
-  };
 
   return (
-    <div className={cx(`${prefix}--icon--skeleton`, className)} {...props} />
+    <div className={cx(`${prefix}--icon--skeleton`, className)} {...rest} />
   );
 };
 
