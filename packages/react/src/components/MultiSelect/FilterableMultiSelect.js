@@ -163,9 +163,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
       case stateChangeTypes.keyDownHome:
       case stateChangeTypes.keyDownEnd:
         setHighlightedIndex(
-          changes.highlightedIndex !== undefined
-            ? changes.highlightedIndex
-            : null
+          changes.highlightedIndex !== undefined ? changes.highlightedIndex : 0
         );
         if (stateChangeTypes.keyDownArrowDown === type && !isOpen) {
           handleOnMenuChange(true);

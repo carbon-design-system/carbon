@@ -1,36 +1,26 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-# GitHub recommends pinning actions to a commit SHA.
-# To get a newer version, you will need to update the SHA.
-# You can also reference a tag or branch, but the action may change without warning
-name: Add comment on enhancement issue
+name: Contribution triage - proposal accepted and community contribution
 on:
   issues:
     types: [labeled, opened]
 
 permissions:
-      issues: write
+  issues: write
 
 jobs:
   add-comment:
     name: Add comment to with proposal accepted and community contribution
     runs-on: ubuntu-latest
-    if: 
-      ${{ (
-        contains(github.event.label.name, format('proposal{0} accepted', ':')) &&
-        contains(github.event.issue.labels.*.name, format('community contribution'))
-      ) || (
-        contains(github.event.label.name, format('community contribution')) &&
-        contains(github.event.issue.labels.*.name, format('proposal{0} accepted', ':'))
-      )}}
+    if:
+      ${{ ( contains(github.event.label.name, format('proposal{0} accepted',
+      ':')) && contains(github.event.issue.labels.*.name, format('community
+      contribution')) ) || ( contains(github.event.label.name, format('community
+      contribution')) && contains(github.event.issue.labels.*.name,
+      format('proposal{0} accepted', ':')) )}}
+
     steps:
       - name: Log github event
         env:
-          $GITHUB_CONTEXT_LABELS:
-            ${{ toJson(github.event.label) }}
+          $GITHUB_CONTEXT_LABELS: ${{ toJson(github.event.label) }}
         run: echo "$GITHUB_CONTEXT_LABELS"
       - name: Add comment
         uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410 #v6.4.1
