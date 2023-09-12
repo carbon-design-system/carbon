@@ -136,25 +136,22 @@ class HeaderMenu extends React.Component {
 
   /**
    * Handle our blur event from our underlying menuitems. Will mostly be used
-   * for toggling the expansion status of our menu in response to a user
-   * clicking off of the menu or menubar.
+   * for closing our menu in response to a user clicking off or tabbing out of
+   * the menu or menubar.
    */
   handleOnBlur = (event) => {
-    // Rough guess for a blur event that is triggered outside of our menu or
-    // menubar context
-    const itemTriggeredBlur = this.items.find(
+    // Close the menu on blur when the related target is not a sibling menu item
+    // or a child in a submenu
+    const siblingItemBlurredTo = this.items.find(
       (element) => element === event.relatedTarget
     );
-    if (
-      event.relatedTarget &&
-      ((event.relatedTarget.getAttribute('href') &&
-        event.relatedTarget.getAttribute('href') !== '#') ||
-        itemTriggeredBlur)
-    ) {
-      return;
-    }
+    const childItemBlurredTo = this._subMenus.current?.contains(
+      event.relatedTarget
+    );
 
-    this.setState({ expanded: false, selectedIndex: null });
+    if (!siblingItemBlurredTo && !childItemBlurredTo) {
+      this.setState({ expanded: false, selectedIndex: null });
+    }
   };
 
   /**
