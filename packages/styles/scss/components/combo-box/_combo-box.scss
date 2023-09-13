@@ -29,7 +29,7 @@
 
   .#{$prefix}--combo-box.#{$prefix}--list-box--expanded
     .#{$prefix}--text-input {
-    border-bottom-color: $border-subtle;
+    border-block-end-color: $border-subtle;
   }
 
   .#{$prefix}--combo-box--input--focus.#{$prefix}--text-input {
@@ -55,7 +55,7 @@
   }
 
   .#{$prefix}--combo-box--readonly .#{$prefix}--text-input {
-    border-bottom-color: $border-subtle;
+    border-block-end-color: $border-subtle;
   }
 
   .#{$prefix}--combo-box--readonly .#{$prefix}--list-box__menu-icon,

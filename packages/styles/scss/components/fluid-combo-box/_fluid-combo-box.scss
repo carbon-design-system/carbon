@@ -12,7 +12,7 @@
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../dropdown';
 @use '../fluid-list-box';
@@ -30,7 +30,7 @@
     .#{$prefix}--combo-box
     .#{$prefix}--text-input {
     overflow: hidden;
-    padding: rem(33px) $spacing-10 rem(13px) $spacing-05;
+    padding: convert.to-rem(33px) $spacing-10 convert.to-rem(13px) $spacing-05;
     text-overflow: ellipsis;
     transition: none;
     white-space: nowrap;
@@ -45,15 +45,15 @@
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--combo-box
     .#{$prefix}--list-box__selection {
-    top: auto;
-    bottom: rem(10px);
+    inset-block-end: convert.to-rem(10px);
+    inset-block-start: auto;
     transform: none;
   }
 
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--combo-box
     .#{$prefix}--list-box__menu-icon {
-    bottom: rem(14px);
+    inset-block-end: convert.to-rem(14px);
   }
 
   .#{$prefix}--list-box__wrapper--fluid
@@ -66,6 +66,6 @@
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input
     + .#{$prefix}--list-box__invalid-icon {
-    right: 1rem;
+    inset-inline-end: 1rem;
   }
 }

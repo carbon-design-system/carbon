@@ -156,7 +156,7 @@ export const Subgrid = () => {
   );
 };
 
-export const MixedGridModes = () => {
+export const MixedGutterModes = () => {
   return (
     <>
       <Grid>
@@ -315,8 +315,5 @@ Playground.argTypes = {
     control: {
       type: 'boolean',
     },
-  },
-  columns: {
-    control: { type: 'number' },
   },
 };

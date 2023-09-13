@@ -24,9 +24,13 @@ import deprecate from '../../prop-types/deprecate';
 import { composeEventHandlers } from '../../tools/events';
 import { usePrefix } from '../../internal/usePrefix';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
-import { getInteractiveContent } from '../../internal/useNoInteractiveChildren';
+import {
+  getInteractiveContent,
+  getRoleContent,
+} from '../../internal/useNoInteractiveChildren';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useFeatureFlag } from '../FeatureFlags';
+import { useId } from '../../internal/useId';
 
 export interface TileProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
@@ -150,13 +154,13 @@ export const ClickableTile = React.forwardRef<
   const [isSelected, setIsSelected] = useState(clicked);
 
   function handleOnClick(evt: MouseEvent) {
-    evt.persist();
+    evt?.persist?.();
     setIsSelected(!isSelected);
     onClick(evt);
   }
 
   function handleOnKeyDown(evt: KeyboardEvent) {
-    evt.persist();
+    evt?.persist?.();
     if (matches(evt, [keys.Enter, keys.Space])) {
       evt.preventDefault();
       setIsSelected(!isSelected);
@@ -356,7 +360,7 @@ export const SelectableTile = React.forwardRef<
   // TODO: rename to handleClick when handleClick prop is deprecated
   function handleOnClick(evt) {
     evt.preventDefault();
-    evt.persist();
+    evt?.persist?.();
     setIsSelected(!isSelected);
     clickHandler(evt);
     onChange(evt);
@@ -364,7 +368,7 @@ export const SelectableTile = React.forwardRef<
 
   // TODO: rename to handleKeyDown when handleKeyDown prop is deprecated
   function handleOnKeyDown(evt) {
-    evt.persist();
+    evt?.persist?.();
     if (matches(evt, [keys.Enter, keys.Space])) {
       evt.preventDefault();
       setIsSelected(!isSelected);
@@ -597,7 +601,7 @@ export const ExpandableTile = React.forwardRef<
   }
 
   function handleClick(evt: MouseEvent) {
-    evt.persist();
+    evt?.persist?.();
     setIsExpanded(!isExpanded);
     setMaxHeight();
   }
@@ -663,10 +667,14 @@ export const ExpandableTile = React.forwardRef<
       return;
     }
 
-    if (!getInteractiveContent(belowTheFold.current)) {
-      setInteractive(false);
-      return;
-    } else if (!getInteractiveContent(aboveTheFold.current)) {
+    // Interactive elements or elements that are given a role should be treated
+    // the same because elements with a role can not be rendered inside a `button`
+    if (
+      !getInteractiveContent(belowTheFold.current) &&
+      !getRoleContent(belowTheFold.current) &&
+      !getInteractiveContent(aboveTheFold.current) &&
+      !getRoleContent(aboveTheFold.current)
+    ) {
       setInteractive(false);
     }
   }, []);
@@ -697,12 +705,13 @@ export const ExpandableTile = React.forwardRef<
     return () => resizeObserver.disconnect();
   }, []);
 
+  const belowTheFoldId = useId('expandable-tile-interactive');
+
   return interactive ? (
     <div
       // @ts-expect-error: Needlesly strict & deep typing for the element type
       ref={ref}
       className={interactiveClassNames}
-      aria-expanded={isExpanded}
       {...rest}>
       <div ref={tileContent}>
         <div ref={aboveTheFold} className={`${prefix}--tile-content`}>
@@ -711,13 +720,17 @@ export const ExpandableTile = React.forwardRef<
         <button
           type="button"
           aria-expanded={isExpanded}
+          aria-controls={belowTheFoldId}
           onKeyUp={composeEventHandlers([onKeyUp, handleKeyUp])}
           onClick={composeEventHandlers([onClick, handleClick])}
           aria-label={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
           className={chevronInteractiveClassNames}>
           <ChevronDown />
         </button>
-        <div ref={belowTheFold} className={`${prefix}--tile-content`}>
+        <div
+          ref={belowTheFold}
+          className={`${prefix}--tile-content`}
+          id={belowTheFoldId}>
           {childrenAsArray[1]}
         </div>
       </div>

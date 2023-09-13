@@ -6,7 +6,7 @@
  */
 
 import { getByText, isElementVisible } from '@carbon/test-utils/dom';
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import MultiSelect from '../';
 import { generateItems, generateGenericItem } from '../../ListBox/test-helpers';
@@ -16,7 +16,6 @@ describe('MultiSelect', () => {
   beforeEach(() => {
     jest.mock('../../../internal/deprecateFieldOnObject');
   });
-  afterEach(cleanup);
 
   describe.skip('automated accessibility tests', () => {
     it('should have no axe violations', async () => {
@@ -64,8 +63,11 @@ describe('MultiSelect', () => {
     const labelNode = getByText(container, label);
     await userEvent.click(labelNode);
 
-    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
-    expect(screen.getByRole('button')).toHaveAttribute(
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'aria-expanded',
+      'true'
+    );
+    expect(screen.getByRole('combobox')).toHaveAttribute(
       'aria-haspopup',
       'listbox'
     );
@@ -78,8 +80,11 @@ describe('MultiSelect', () => {
     await userEvent.tab();
     await userEvent.keyboard('[Space]');
 
-    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
-    expect(screen.getByRole('button')).toHaveAttribute(
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'aria-expanded',
+      'true'
+    );
+    expect(screen.getByRole('combobox')).toHaveAttribute(
       'aria-haspopup',
       'listbox'
     );
@@ -92,8 +97,11 @@ describe('MultiSelect', () => {
     await userEvent.tab();
     await userEvent.keyboard('[Enter]');
 
-    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
-    expect(screen.getByRole('button')).toHaveAttribute(
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'aria-expanded',
+      'true'
+    );
+    expect(screen.getByRole('combobox')).toHaveAttribute(
       'aria-haspopup',
       'listbox'
     );
@@ -179,7 +187,7 @@ describe('MultiSelect', () => {
     ).toBeFalsy();
   });
 
-  it('should not toggle selection with enter', async () => {
+  it('should toggle selection with enter', async () => {
     const items = generateItems(4, generateGenericItem);
     const label = 'test-label';
     const { container } = render(
@@ -198,7 +206,7 @@ describe('MultiSelect', () => {
     await userEvent.keyboard('[ArrowDown]');
     await userEvent.keyboard('[Enter]');
 
-    expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'false');
+    expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'true');
   });
 
   it('should clear selected items when the user clicks the clear selection button', async () => {

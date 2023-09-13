@@ -14,7 +14,7 @@
   friendly_name: Access management
   aliases:
     - access management
-    - Cloud
+    - cloud
 - name: active--server
   friendly_name: Active server
   aliases:
@@ -22,6 +22,11 @@
     - active
     - server
     - 'on'
+- name: ad-tech
+  friendly_name: Ad tech
+  aliases:
+    - ad-tech
+    - cloud
 - name: add--device
   friendly_name: Add device
   aliases:
@@ -78,7 +83,7 @@
   friendly_name: Agility
   aliases:
     - agility
-    - Cloud
+    - cloud
 - name: agility-with-hybrid-multicloud
   friendly_name: Agility with hybrid multicloud
   aliases:
@@ -98,7 +103,7 @@
   friendly_name: AI
   aliases:
     - AI
-    - Cloud
+    - cloud
     - artificial intelligence
 - name: ai--ethics
   friendly_name: AI ethics
@@ -119,7 +124,7 @@
   friendly_name: AI ready
   aliases:
     - AI ready
-    - Cloud
+    - cloud
     - artificial intelligence
 - name: ai--robustness
   friendly_name: AI robustness
@@ -144,6 +149,8 @@
     - air conditioner
     - cooling
     - cool
+    - workplace
+    - mechanical area
 - name: airplane
   friendly_name: Airplane
   aliases:
@@ -211,6 +218,11 @@
     - windmill
     - city
     - cities
+- name: analytics
+  friendly_name: Analytics
+  aliases:
+    - analytics
+    - cloud
 - name: analyze
   friendly_name: Analyze
   aliases:
@@ -234,7 +246,7 @@
   friendly_name: Analyzing containers
   aliases:
     - analyzing containers
-    - Cloud
+    - cloud
 - name: anonymous--users
   friendly_name: Anonymous Users
   aliases:
@@ -258,6 +270,11 @@
     - interface
     - app
     - code
+- name: api--lifecycle
+  friendly_name: API lifecycle
+  aliases:
+    - API lifecycle
+    - cloud
 - name: app--developer
   friendly_name: App developer
   aliases:
@@ -275,9 +292,10 @@
   friendly_name: Apple
   aliases:
     - apple
-    - fruit
+    - fruits
     - food
     - produce
+    - workplace
 - name: application
   friendly_name: Application
   aliases:
@@ -285,6 +303,16 @@
     - app
     - program
     - software
+- name: application--integration
+  friendly_name: Application integration
+  aliases:
+    - application integration
+    - cloud
+- name: application--platform
+  friendly_name: Application platform
+  aliases:
+    - application platform
+    - cloud
 - name: application--security
   friendly_name: Application Security
   aliases:
@@ -295,7 +323,7 @@
   friendly_name: Apps
   aliases:
     - apps
-    - Cloud
+    - cloud
 - name: archive
   friendly_name: Archive
   aliases:
@@ -305,6 +333,8 @@
     - storage
     - historical
     - history
+    - workplace
+    - support
 - name: argentina--obelisk
   friendly_name: Argentina Obelisk
   aliases:
@@ -327,7 +357,19 @@
   friendly_name: Assessment used
   aliases:
     - assessment used
-    - Cloud
+    - cloud
+- name: asset-management
+  friendly_name: Asset management
+  aliases:
+    - sustainability
+    - asset management
+    - file
+    - data
+    - hand
+    - document
+    - ESG
+    - strategy
+    - storage
 - name: assets
   friendly_name: Assets
   aliases:
@@ -344,12 +386,12 @@
   friendly_name: Audio data
   aliases:
     - Audio data
-    - Cloud
+    - cloud
 - name: audit-trail
   friendly_name: Audit Trail
   aliases:
     - audit trail
-    - Cloud
+    - cloud
 - name: augmented--reality
   friendly_name: Augmented reality
   aliases:
@@ -379,13 +421,18 @@
   aliases:
     - automated
     - automate
-    - Cloud
+    - cloud
 - name: automation--decision
   friendly_name: Automation decision
   aliases:
     - automation decision
     - automation
     - decision
+- name: automation--software
+  friendly_name: Automation software
+  aliases:
+    - automation software
+    - cloud
 - name: automobile
   friendly_name: Automobile
   aliases:
@@ -394,6 +441,7 @@
     - vehicle
     - travel
     - transportation
+    - workplace
 - name: availability
   friendly_name: Availability
   aliases:
@@ -405,6 +453,15 @@
     - bottle
     - nursing
     - baby formula
+    - workplace
+    - wellness
+    - community
+- name: back-up--and-restore
+  friendly_name: Back-up and restore
+  aliases:
+    - back-up
+    - restore
+    - Cloud
 - name: backpack
   friendly_name: Backpack
   aliases:
@@ -414,6 +471,8 @@
     - computer case
     - case
     - travel
+    - workplace
+    - locker
 - name: badge
   friendly_name: Badge
   aliases:
@@ -428,6 +487,26 @@
     - shopping
     - shop
     - retail
+- name: balanced
+  friendly_name: Balanced
+  aliases:
+    - balanced
+    - balance
+    - cloud
+- name: balloon
+  friendly_name: Balloon
+  aliases:
+    - balloon
+    - toy
+    - celebration
+- name: balloon--hot-air
+  friendly_name: Hot air balloon
+  aliases:
+    - balloon
+    - basket
+    - transportation
+    - flight
+    - air
 - name: bangalore
   friendly_name: Bangalore
   aliases:
@@ -435,6 +514,18 @@
     - india
     - cities
     - city
+- name: banking
+  friendly_name: Banking
+  aliases:
+    - sustainability
+    - banking
+    - industry
+    - column
+    - finance
+    - institution
+    - money
+    - economic
+    - ESG
 - name: barcelona
   friendly_name: Barcelona
   aliases:
@@ -442,6 +533,11 @@
     - spain
     - cities
     - city
+- name: bare-metal
+  friendly_name: Bare metal
+  aliases:
+    - bare metal
+    - cloud
 - name: bee
   friendly_name: Bee
   aliases:
@@ -500,11 +596,12 @@
     - bike
     - travel
     - transportation
+    - workplace
 - name: big-data
   friendly_name: Big data
   aliases:
     - big data
-    - Cloud
+    - cloud
 - name: birthday--cake
   friendly_name: Birthday cake
   aliases:
@@ -517,12 +614,22 @@
     - blender
     - smoothie
     - protein shake
+    - workplace
+    - community
+    - food
 - name: blockchain
   friendly_name: Blockchain
   aliases:
     - block
     - chain
     - blockchain
+- name: blockchain--02
+  friendly_name: Blockchain 02
+  aliases:
+    - block
+    - chain
+    - blockchain
+    - cloud
 - name: bluepages
   friendly_name: Bluepages
   aliases:
@@ -552,6 +659,7 @@
     - sweep
     - clean
     - facilities
+    - workplace
 - name: budapest
   friendly_name: Budapest
   aliases:
@@ -590,7 +698,7 @@
   friendly_name: Build and deploy pipeline
   aliases:
     - build and deploy pipeline
-    - Cloud
+    - cloud
 - name: build-applications-anywhere
   friendly_name: Build applications anywhere
   aliases:
@@ -607,6 +715,7 @@
   aliases:
     - building
     - structure
+    - workplace
 - name: bulldozer
   friendly_name: Bulldozer
   aliases:
@@ -621,6 +730,13 @@
     - bus
     - transportation
     - travel
+    - workplace
+- name: business--analytics
+  friendly_name: Business analytics
+  aliases:
+    - business
+    - analytics
+    - cloud
 - name: business--continuity
   friendly_name: Business continuity
   aliases:
@@ -635,7 +751,7 @@
     - consistency
     - business consistency
     - infinity
-    - Cloud
+    - cloud
 - name: c--language
   friendly_name: C
   aliases:
@@ -656,6 +772,8 @@
     - beverage
     - hospitality
     - food
+    - workplace
+    - community
 - name: cairo--giza-plateau
   friendly_name: Cairo Giza Plateau
   aliases:
@@ -709,6 +827,13 @@
   aliases:
     - canada
     - Maple leaf
+- name: candy
+  friendly_name: Candy
+  aliases:
+    - candy
+    - sweet
+    - celebration
+    - food
 - name: capitol
   friendly_name: Capitol
   aliases:
@@ -1026,8 +1151,9 @@
   aliases:
     - cherries
     - food
-    - fruit
+    - fruits
     - snack
+    - workplace
 - name: chicago
   friendly_name: Chicago
   aliases:
@@ -1068,7 +1194,7 @@
   friendly_name: Choose how to get started
   aliases:
     - choose how to get started
-    - Cloud
+    - cloud
 - name: circle--packing
   friendly_name: Circle packing
   aliases:
@@ -1176,6 +1302,11 @@
   aliases:
     - cloud infrastructure management
     - hybrid cloud management
+- name: cloud--integration
+  friendly_name: Cloud integration
+  aliases:
+    - integration
+    - cloud
 - name: cloud--managed--services
   friendly_name: Cloud managed services
   aliases:
@@ -1200,8 +1331,13 @@
 - name: cloud--native--03
   friendly_name: Cloud native 03
   aliases:
-    - Cloud native
-    - Cloud
+    - cloud native
+    - cloud
+- name: cloud--object-storage
+  friendly_name: Cloud object storage
+  aliases:
+    - object storage
+    - cloud
 - name: cloud--oracle
   friendly_name: Cloud Oracle
   aliases:
@@ -1230,6 +1366,11 @@
     - process
     - automate
     - hyperscaler
+- name: cloud--private
+  friendly_name: Cloud private
+  aliases:
+    - private
+    - cloud
 - name: cloud--sap
   friendly_name: Cloud SAP
   aliases:
@@ -1288,6 +1429,16 @@
   friendly_name: Cloud Pak for Applications
   aliases:
     - Cloud Pak for Applications
+- name: cloud-pak--for-business-automation
+  friendly_name: Cloud Pak for Business Automation
+  aliases:
+    - automation
+    - business
+    - cloud
+    - hexagon
+    - gear
+    - automate
+    - process
 - name: cloud-pak--for-data
   friendly_name: Cloud Pak for Data
   aliases:
@@ -1371,6 +1522,8 @@
     - garment hanger
     - clothes hanger
     - retail
+    - workplace
+    - changing
 - name: cobol--language
   friendly_name: COBOL
   aliases:
@@ -1397,13 +1550,16 @@
   friendly_name: Collaborate with teams
   aliases:
     - collaborate with teams
-    - Cloud
+    - cloud
+    - workplace
+    - collaborate
 - name: collaboration
   friendly_name: Collaboration
   aliases:
     - collaboration
     - security
     - teamwork
+    - collaborate
 - name: college
   friendly_name: College
   aliases:
@@ -1438,15 +1594,21 @@
   friendly_name: Compliant
   aliases:
     - compliant
-    - Cloud
+    - cloud
 - name: compost--bin
-  friendly_name: Copmpost bin
+  friendly_name: Compost bin
   aliases:
     - compost
     - compost bin
     - recycle
     - environment
     - process
+    - workplace
+- name: compute
+  friendly_name: Compute
+  aliases:
+    - compute
+    - cloud
 - name: concept--expansion
   friendly_name: Concept expansion
   aliases:
@@ -1488,12 +1650,12 @@
   friendly_name: Connect to cloud
   aliases:
     - connect to cloud
-    - Cloud
+    - cloud
 - name: connected--devices
   friendly_name: Connected devices
   aliases:
     - connected devices
-    - Cloud
+    - cloud
 - name: connected--ecosystem
   friendly_name: Connected ecosystem
   aliases:
@@ -1509,7 +1671,7 @@
   friendly_name: Connectivity
   aliases:
     - connectivity
-    - Cloud
+    - cloud
 - name: console
   friendly_name: Console
   aliases:
@@ -1535,6 +1697,8 @@
     - construction worker
     - hardhat
     - safety
+    - workplace
+    - helmet
 - name: construction-worker--mask
   friendly_name: Construction worker mask
   aliases:
@@ -1581,7 +1745,7 @@
   friendly_name: Containers
   aliases:
     - containers
-    - Cloud
+    - cloud
 - name: containers-and-cloud-native
   friendly_name: Containers and Cloud Native
   aliases:
@@ -1593,11 +1757,18 @@
   friendly_name: Content design
   aliases:
     - content design
+- name: content-delivery-network
+  friendly_name: Content delivery network
+  aliases:
+    - content
+    - delivery
+    - network
+    - cloud
 - name: continuous
   friendly_name: Continuous
   aliases:
     - continuous
-    - Cloud
+    - cloud
 - name: continuous--security
   friendly_name: Continuous Security
   aliases:
@@ -1613,12 +1784,12 @@
   friendly_name: Control
   aliases:
     - control
-    - Cloud
+    - cloud
 - name: control-panel
   friendly_name: Control panel
   aliases:
     - control panel
-    - Cloud
+    - cloud
 - name: controls-framework
   friendly_name: Controls framework
   aliases:
@@ -1634,11 +1805,14 @@
     - cookie
     - cookies
     - cookies tracking
+    - workplace
+    - snack
+    - breadcrumb
 - name: copenhagen--planetarium
   friendly_name: Copenhagen planetarium
   aliases:
     - copenhagen planetarium
-    - copenhage
+    - copenhagen
     - planetarium
     - city
     - cities
@@ -1655,6 +1829,14 @@
   aliases:
     - coronavirus covid-19
     - virus
+- name: coupon
+  friendly_name: Coupon
+  aliases:
+    - coupon
+    - refund
+    - discount
+    - torn
+    - money
 - name: credit--card
   friendly_name: Credit card
   aliases:
@@ -1673,6 +1855,9 @@
     - cupcake
     - cake
     - creative
+    - food
+    - snack
+    - workplace
 - name: curve--cubic
   friendly_name: Cubic curve
   aliases:
@@ -1720,18 +1905,18 @@
   friendly_name: Quadratic curve
   aliases:
     - curve
-    - quadritic
+    - quadratic
     - quadratic regression
 - name: custom--workloads
   friendly_name: Custom workloads
   aliases:
     - custom workloads
-    - Cloud
+    - cloud
 - name: custom-reports
   friendly_name: Custom reports
   aliases:
     - custom reports
-    - Cloud
+    - cloud
 - name: customer--service
   friendly_name: Customer service
   aliases:
@@ -1764,16 +1949,23 @@
     - storage
     - data storage
 - name: data--centers
-  friendly_name: Data centers
+  friendly_name: Data center
   aliases:
-    - data centers
-    - Cloud
+    - data center
+    - cloud
+    - workplace
 - name: data--insights
   friendly_name: Data insights
   aliases:
     - data insights
     - data
     - insights
+- name: data--management
+  friendly_name: Data management
+  aliases:
+    - data
+    - management
+    - cloud
 - name: data--privacy
   friendly_name: Data privacy
   aliases:
@@ -1790,7 +1982,7 @@
     - shield
     - user
     - user privacy
-    - Cloud
+    - cloud
 - name: data--privacy--key
   friendly_name: Data privacy key
   aliases:
@@ -1810,7 +2002,13 @@
   aliases:
     - data protection
     - data security
-    - Cloud
+    - cloud
+- name: data--science
+  friendly_name: Data science
+  aliases:
+    - data
+    - science
+    - cloud
 - name: data--security
   friendly_name: Data Security
   aliases:
@@ -1835,18 +2033,46 @@
   aliases:
     - data
     - data transfer
-    - Cloud
+    - cloud
+- name: data--warehousing
+  friendly_name: Data warehousing
+  aliases:
+    - data
+    - warehousing
+    - cloud
+- name: database
+  friendly_name: Database
+  aliases:
+    - database
+    - cloud
+- name: db2
+  friendly_name: DB2
+  aliases:
+    - DB2
+    - cloud
 - name: decision-velocity
   friendly_name: Decision velocity
   aliases:
     - decision velocity
     - ai
     - decision making
+- name: dedicated--host
+  friendly_name: Dedicated host
+  aliases:
+    - dedicated
+    - host
+    - cloud
+- name: dedicated--instance
+  friendly_name: Dedicated instance
+  aliases:
+    - dedicated
+    - instance
+    - cloud
 - name: deep-learning
   friendly_name: Deep learning
   aliases:
     - deep learning
-    - Cloud
+    - cloud
 - name: delete
   friendly_name: Delete
   aliases:
@@ -1864,6 +2090,7 @@
   aliases:
     - delivery
     - delivered
+    - workplace
 - name: delivery--truck
   friendly_name: Delivery truck
   aliases:
@@ -1871,16 +2098,17 @@
     - truck
     - delivery
     - manufacturing
+    - workplace
 - name: deploying-containers
   friendly_name: Deploying containers
   aliases:
     - deploying containers
-    - Cloud
+    - cloud
 - name: deployment
   friendly_name: Deployment
   aliases:
     - deployment
-    - Cloud
+    - cloud
 - name: design--leadership
   friendly_name: Design leadership
   aliases:
@@ -1925,11 +2153,16 @@
     - advancing
     - threats
     - security
+- name: dev-and-test
+  friendly_name: Dev and test
+  aliases:
+    - dev and test
+    - cloud
 - name: developer-tools
   friendly_name: Developer tools
   aliases:
     - developer tools
-    - Cloud
+    - cloud
 - name: developer-z-os
   friendly_name: Developer z/OS®
   aliases:
@@ -1953,11 +2186,16 @@
   aliases:
     - devops
     - cloud
+- name: devops--02
+  friendly_name: Devops 02
+  aliases:
+    - devops
+    - cloud
 - name: devops--toolchain
   friendly_name: Devops toolchain
   aliases:
     - devops toolchain
-    - Cloud
+    - cloud
 - name: dialogue
   friendly_name: Dialogue
   aliases:
@@ -1991,10 +2229,24 @@
     - silverware
     - knife
     - fork
+    - workplace
+    - community
+    - food
+    - cafeteria
+- name: directlink
+  friendly_name: Directlink
+  aliases:
+    - directlink
+    - cloud
+- name: disaster-recovery
+  friendly_name: Disaster recovery
+  aliases:
+    - disaster recovery
+    - Cloud
 - name: distribution--ledger
   friendly_name: Distribution ledger
   aliases:
-    - distibution ledger
+    - distribution ledger
 - name: dna
   friendly_name: DNA
   aliases:
@@ -2052,7 +2304,7 @@
   friendly_name: Documentation
   aliases:
     - documentation
-    - Cloud
+    - cloud
 - name: door--handle
   friendly_name: Door handle
   aliases:
@@ -2074,7 +2326,7 @@
   friendly_name: Drag and drop interface
   aliases:
     - drag and drop interface
-    - Cloud
+    - cloud
 - name: dropper
   friendly_name: Dropper
   aliases:
@@ -2125,7 +2377,13 @@
   friendly_name: Dynamic workloads
   aliases:
     - dynamic workloads
-    - Cloud
+    - cloud
+- name: e-commerce
+  friendly_name: E-commerce
+  aliases:
+    - commerce
+    - e-commerce
+    - cloud
 - name: earth
   friendly_name: Earth
   aliases:
@@ -2139,12 +2397,12 @@
   friendly_name: Ease of use
   aliases:
     - ease of use
-    - Cloud
+    - cloud
 - name: ecosystem
   friendly_name: Ecosystem
   aliases:
     - ecosystem
-    - Cloud
+    - cloud
 - name: ecuador--quito
   friendly_name: Ecuador Quito
   aliases:
@@ -2173,7 +2431,7 @@
   friendly_name: Efficient
   aliases:
     - efficient
-    - Cloud
+    - cloud
 - name: electric
   friendly_name: Electric
   aliases:
@@ -2183,6 +2441,7 @@
     - power cord
     - power source
     - power
+    - workplace
 - name: electric--car
   friendly_name: Electric car
   aliases:
@@ -2193,6 +2452,7 @@
     - vehicle
     - travel
     - transportation
+    - workplace
 - name: electric--charge
   friendly_name: Electric charge
   aliases:
@@ -2202,6 +2462,7 @@
     - charger
     - charging station
     - charging
+    - workplace
 - name: elements-of-the-cloud
   friendly_name: Elements of the cloud
   aliases:
@@ -2211,6 +2472,7 @@
   friendly_name: Elevator
   aliases:
     - elevator
+    - workplace
 - name: embed
   friendly_name: Embed
   aliases:
@@ -2220,6 +2482,7 @@
   aliases:
     - emergency exit
     - emergency
+    - workplace
 - name: employee--insights
   friendly_name: Employee insights
   aliases:
@@ -2228,7 +2491,7 @@
   friendly_name: Encryption
   aliases:
     - encryption
-    - Cloud
+    - cloud
 - name: endpoint--protection
   friendly_name: Endpoint Protection
   aliases:
@@ -2236,11 +2499,27 @@
     - endpoint
     - protection
     - security
+- name: energy--crisis
+  friendly_name: Energy crisis
+  aliases:
+    - sustainability
+    - energy crisis
+    - green
+    - plug
+    - exclamation point
+    - circle
+    - electricity
+    - power
 - name: engine
   friendly_name: Engine
   aliases:
     - engine
     - motor
+- name: enterprise
+  friendly_name: Enterprise
+  aliases:
+    - enterprise
+    - cloud
 - name: enterprise--design--thinking--01
   friendly_name: Enterprise design thinking 01
   aliases:
@@ -2257,6 +2536,12 @@
     - design thinking
     - design
     - EDT
+- name: enterprise--messaging
+  friendly_name: Enterprise messaging
+  aliases:
+    - enterprise
+    - messaging
+    - cloud
 - name: envelope
   friendly_name: Envelope
   aliases:
@@ -2264,6 +2549,10 @@
     - email
     - stationery
     - message
+    - workplace
+    - communication
+    - communicate
+    - support
 - name: erlenmeyer--flask
   friendly_name: Erlenmeyer flask
   aliases:
@@ -2277,11 +2566,32 @@
   aliases:
     - escalator down
     - escalator
+    - workplace
 - name: escalator--up
   friendly_name: Escalator up
   aliases:
     - escalator up
     - escalator
+    - workplace
+- name: esg-reporting--01
+  friendly_name: ESG reporting 01
+  aliases:
+    - sustainability
+    - ESG reporting
+    - green
+    - report
+    - data
+    - leaf
+- name: esg-reporting--02
+  friendly_name: ESG reporting 02
+  aliases:
+    - sustainability
+    - ESG reporting
+    - report
+    - data
+    - document
+    - arrow
+    - file
 - name: europe--africa
   friendly_name: Europe Africa
   aliases:
@@ -2289,11 +2599,70 @@
     - africa
     - continent
     - location
+- name: event--automation
+  friendly_name: Event automation
+  aliases:
+    - event
+    - events
+    - EDA
+    - processing
+    - kafka
+    - event driven architecture
+    - event automation
+    - event streams
+    - event processing
+    - event distribution
+    - event discovery
+    - event endpoint management
+- name: event--endpoint-management
+  friendly_name: Event endpoint management
+  aliases:
+    - event
+    - events
+    - EDA
+    - processing
+    - kafka
+    - event driven architecture
+    - event automation
+    - event distribution
+    - event discovery
+    - event endpoint management
+- name: event--processing
+  friendly_name: Event processing
+  aliases:
+    - event
+    - events
+    - EDA
+    - processing
+    - kafka
+    - event driven architecture
+    - event automation
+    - event processing
+    - event discovery
+- name: event--streams
+  friendly_name: Event streams
+  aliases:
+    - event
+    - events
+    - EDA
+    - processing
+    - kafka
+    - event driven architecture
+    - event automation
+    - event streams
+    - event discovery
+- name: event--streams--02
+  friendly_name: Event streams 02
+  aliases:
+    - event
+    - events
+    - processing
+    - cloud
 - name: event-driven
   friendly_name: Event driven
   aliases:
     - event driven
-    - Cloud
+    - cloud
 - name: expand--horz
   friendly_name: Expand horz
   aliases:
@@ -2316,7 +2685,7 @@
   friendly_name: expansion
   aliases:
     - expansion
-    - Cloud
+    - cloud
 - name: export--01
   friendly_name: Export 01
   aliases:
@@ -2324,7 +2693,7 @@
     - export
     - send
     - ship
-    - tranmit
+    - transmit
 - name: export--02
   friendly_name: Export 02
   aliases:
@@ -2341,12 +2710,12 @@
   friendly_name: Extensible
   aliases:
     - extensible
-    - Cloud
+    - cloud
 - name: extract-text
   friendly_name: Extract text
   aliases:
     - extract text
-    - Cloud
+    - cloud
 - name: eye
   friendly_name: Eye
   aliases:
@@ -2364,7 +2733,7 @@
 - name: face--dissatisfied
   friendly_name: Face dissatisfied
   aliases:
-    - face dissatistified
+    - face dissatisfied
     - face
     - unhappy
     - people
@@ -2377,21 +2746,21 @@
 - name: face--satisfied
   friendly_name: Face satisfied
   aliases:
-    - face satistified
+    - face satisfied
     - face
     - happy
     - people
 - name: face--very--dissatisfied
   friendly_name: Face very dissatisfied
   aliases:
-    - face very dissatistified
+    - face very dissatisfied
     - face
     - unhappy
     - people
 - name: face--very--satisfied
   friendly_name: Face very satisfied
   aliases:
-    - face very satistified
+    - face very satisfied
     - face
     - happy
     - people
@@ -2426,7 +2795,7 @@
   friendly_name: Fast
   aliases:
     - fast
-    - Cloud
+    - cloud
 - name: faster-innovation-with-partners
   friendly_name: Faster innovation with partners
   aliases:
@@ -2438,11 +2807,12 @@
     - water
     - spigot
     - plumbing
+    - workplace
 - name: fault-tolerant
   friendly_name: Fault tolerant
   aliases:
     - fault tolerant
-    - Cloud
+    - cloud
 - name: feedback--01
   friendly_name: Feedback 01
   aliases:
@@ -2463,6 +2833,8 @@
     - focus
     - survey
     - input
+    - workplace
+    - individual
 - name: file--backup
   friendly_name: File backup
   aliases:
@@ -2490,7 +2862,7 @@
   friendly_name: Filter and group data
   aliases:
     - filter and group data
-    - Cloud
+    - cloud
 - name: finance--strategy
   friendly_name: Finance strategy
   aliases:
@@ -2533,18 +2905,33 @@
     - financial
     - news
     - finance
+- name: financial--services
+  friendly_name: Financial services
+  aliases:
+    - financial
+    - services
+    - cloud
 - name: fire--alarm
   friendly_name: Fire alarm
   aliases:
     - fire alarm
     - fire
     - alarm
+    - workplace
 - name: fire--extinguisher
   friendly_name: Fire extinguisher
   aliases:
     - fire extinguisher
     - fire
     - extinguisher
+    - workplace
+- name: firecracker
+  friendly_name: Firecracker
+  aliases:
+    - firecracker
+    - fireworks
+    - explosive
+    - celebration
 - name: firefighter
   friendly_name: Firefighter
   aliases:
@@ -2565,6 +2952,15 @@
     - aid
     - medical
     - healthcare
+    - workplace
+    - community
+    - wellness
+- name: flag
+  friendly_name: Flag
+  aliases:
+    - flag
+    - pennant
+    - banner
 - name: flash--storage
   friendly_name: Flash storage
   aliases:
@@ -2582,7 +2978,7 @@
   friendly_name: Flexibility 02
   aliases:
     - flexibility
-    - Cloud
+    - cloud
 - name: flexible--compute
   friendly_name: Flexible compute
   aliases:
@@ -2625,6 +3021,8 @@
   friendly_name: Focus on code
   aliases:
     - alias
+    - workplace
+    - individual
 - name: fog
   friendly_name: Fog
   aliases:
@@ -2643,7 +3041,7 @@
   friendly_name: Forecasting
   aliases:
     - forecasting
-    - Cloud
+    - cloud
 - name: forklift
   friendly_name: Forklift
   aliases:
@@ -2671,7 +3069,12 @@
   friendly_name: Fully managed
   aliases:
     - fully managed
-    - Cloud
+    - cloud
+- name: functions-as-a-service
+  friendly_name: Functions-as-a-service
+  aliases:
+    - functions-as-a-service
+    - cloud
 - name: gear
   friendly_name: Gear
   aliases:
@@ -2682,7 +3085,7 @@
   friendly_name: Geographic flexibility
   aliases:
     - geographic flexibility
-    - Cloud
+    - cloud
 - name: get--ahead--of--risk--and--compliance
   friendly_name: Get Ahead Of Risk and Compliance
   aliases:
@@ -2775,7 +3178,7 @@
   friendly_name: Global footprint
   aliases:
     - global footprint
-    - Cloud
+    - cloud
 - name: global--markets
   friendly_name: Global markets
   aliases:
@@ -2862,23 +3265,77 @@
     - users
     - identities
     - security
+- name: government--01
+  friendly_name: Government 01
+  aliases:
+    - sustainability
+    - government
+    - govern
+    - industry
+    - column
+    - municipal
+    - institution
+    - ESG
+- name: government--02
+  friendly_name: Government 02
+  aliases:
+    - sustainability
+    - government
+    - govern
+    - industry
+    - column
+    - municipal
+    - institution
+    - ESG
+- name: gpu-computing
+  friendly_name: GPU computing
+  aliases:
+    - GPU
+    - computing
+    - cloud
+- name: graphic-design
+  friendly_name: Graphic design
+  aliases:
+    - graphic design
+    - cloud
 - name: graphic-intensive-workloads
   friendly_name: Graphic intensive workloads
   aliases:
     - graphic intensive workloads
-    - Cloud
+    - cloud
 - name: green-energy
   friendly_name: Green energy
   aliases:
     - green energy
     - green electric
     - energy consumption
+- name: green-it--01
+  friendly_name: Green IT 01
+  aliases:
+    - sustainability
+    - green IT
+    - information technology
+    - ESG
+    - leaf
+    - data
+    - source
+- name: green-it--02
+  friendly_name: Green IT 02
+  aliases:
+    - sustainability
+    - green IT
+    - information technology
+    - ESG
+    - leaf
+    - globe
 - name: group
   friendly_name: Group
   aliases:
     - group
     - people
     - team
+    - workplace
+    - individual
 - name: growth
   friendly_name: Growth
   aliases:
@@ -2937,6 +3394,7 @@
     - disabled user
     - people
     - wheelchair
+    - workplace
 - name: handicap--active
   friendly_name: Disabled user active
   aliases:
@@ -2944,6 +3402,14 @@
     - people
     - disabled user
     - wheelchair
+    - workplace
+- name: handshake
+  friendly_name: Handshake
+  aliases:
+    - handshake
+    - agreement
+    - friendship
+    - hands
 - name: hard--drive
   friendly_name: Hard disk drive
   aliases:
@@ -2966,6 +3432,7 @@
     - ice cream
     - food
     - lifestyle
+    - workplace
 - name: hazy
   friendly_name: Hazy
   aliases:
@@ -2980,6 +3447,13 @@
     - audio
     - listen
     - podcast
+    - hearing protection
+    - workplace
+- name: healthcare
+  friendly_name: Healthcare
+  aliases:
+    - healthcare
+    - cloud
 - name: heart
   friendly_name: Heart
   aliases:
@@ -2991,6 +3465,9 @@
   aliases:
     - heart health
     - heart
+    - workplace
+    - community
+    - wellness
 - name: heat--map--01
   friendly_name: Heat map 01
   aliases:
@@ -3025,6 +3502,12 @@
   aliases:
     - high performance
     - Cloud
+- name: high--performance--computing
+  friendly_name: High performance computing
+  aliases:
+    - high performance
+    - computing
+    - cloud
 - name: high--risk--users
   friendly_name: High Risk Users
   aliases:
@@ -3033,17 +3516,24 @@
     - risk
     - users
     - security
+- name: high--speed--data-transport
+  friendly_name: High speed data transport
+  aliases:
+    - high speed
+    - data
+    - transport
+    - cloud
 - name: high-volume-data
   friendly_name: High volume data
   aliases:
     - high volume data
-    - Cloud
+    - cloud
 - name: highly-available
   friendly_name: Highly available
   aliases:
     - highly available
     - high availability
-    - Cloud
+    - cloud
 - name: hills
   friendly_name: Hills
   aliases:
@@ -3120,6 +3610,13 @@
     - cloud storage
     - hybrid cloud
     - cloud servers
+- name: hybrid--cloud--03
+  friendly_name: Hybrid cloud 03
+  aliases:
+    - hybrid cloud
+    - cloud
+    - cloud storage
+    - cloud servers
 - name: hybrid--cloud--infrastructure
   friendly_name: Hybrid Cloud infrastructure
   aliases:
@@ -3138,6 +3635,43 @@
     - hybrid
     - cloud
     - services
+- name: hybrid--it-management
+  friendly_name: Hybrid IT management
+  aliases:
+    - hybrid
+    - IT
+    - management
+    - cloud
+- name: hyper-protect
+  friendly_name: Hyper protect
+  aliases:
+    - hyper protect
+    - Cloud
+- name: hyper-protect--containers
+  friendly_name: Hyper protect / containers
+  aliases:
+    - hyper protect
+    - containers
+    - cloud
+- name: hyper-protect--crypto-service
+  friendly_name: Hyper protect / crypto service
+  aliases:
+    - hyper protect
+    - crypto
+    - service
+    - cloud
+- name: hyper-protect--database-as-a-service
+  friendly_name: Hyper protect / database-as-a-service
+  aliases:
+    - hyper protect
+    - database-as-a-service
+    - cloud
+- name: hyper-protect--virtual-servers
+  friendly_name: Hyper protect / virtual servers
+  aliases:
+    - hyper protect
+    - virtual servers
+    - cloud
 - name: ibm--automation-platform
   friendly_name: IBM Automation platform
   aliases:
@@ -3235,6 +3769,7 @@
     - employee
     - personnel
     - identity
+    - workplace
 - name: idea
   friendly_name: Idea
   aliases:
@@ -3274,6 +3809,11 @@
   aliases:
     - India
     - South Asia
+- name: infrastructure-as-a-service
+  friendly_name: Infrastructure-as-a-service
+  aliases:
+    - infrastructure-as-a-service
+    - cloud
 - name: infrastructure-security
   friendly_name: Infrastructure security
   aliases:
@@ -3317,6 +3857,12 @@
     - insure
     - health insurance
     - car insurance
+- name: insurance--02
+  friendly_name: Insurance 02
+  aliases:
+    - insurance
+    - insure
+    - cloud
 - name: integration
   friendly_name: Integration
   aliases:
@@ -3328,7 +3874,12 @@
   friendly_name: Integration 02
   aliases:
     - integration
-    - Cloud
+    - cloud
+- name: integration--03
+  friendly_name: Integration 03
+  aliases:
+    - integration
+    - cloud
 - name: intelligence
   friendly_name: Intelligence
   aliases:
@@ -3343,6 +3894,12 @@
     - communication
     - entry
     - security
+- name: internet-of-things
+  friendly_name: Internet of things (IoT)
+  aliases:
+    - internet of things
+    - iot
+    - cloud
 - name: invoice
   friendly_name: Invoice
   aliases:
@@ -3395,6 +3952,9 @@
     - citrus
     - drink
     - fruit
+    - workplace
+    - community
+    - food
 - name: justice
   friendly_name: Justice
   aliases:
@@ -3493,6 +4053,12 @@
     - language
     - translation
     - watson
+- name: lantern
+  friendly_name: Lantern
+  aliases:
+    - lantern
+    - light
+    - celebration
 - name: launch
   friendly_name: Launch
   aliases:
@@ -3515,6 +4081,13 @@
     - lightning
     - weather
     - forecast
+- name: link
+  friendly_name: Link
+  aliases:
+    - link
+    - hyperlink
+    - url
+    - reference
 - name: list--bullet
   friendly_name: List bullet
   aliases:
@@ -3528,6 +4101,11 @@
     - list checkbox
     - list
     - checkbox
+    - cloud
+- name: load-balancer
+  friendly_name: Load balancer
+  aliases:
+    - load balancer
     - cloud
 - name: location
   friendly_name: Location
@@ -3592,6 +4170,7 @@
     - suitcase
     - travel
     - carry-on
+    - workplace
 - name: lungs
   friendly_name: Lungs
   aliases:
@@ -3694,6 +4273,21 @@
     - anywhere
     - virtual
     - cloud
+- name: managed-hosting--01
+  friendly_name: Managed hosting 01
+  aliases:
+    - managed hosting
+    - cloud
+- name: managed-hosting--02
+  friendly_name: Managed hosting 02
+  aliases:
+    - managed hosting
+    - cloud
+- name: management
+  friendly_name: Management
+  aliases:
+    - management
+    - cloud
 - name: managing--containers
   friendly_name: Managing Containers
   aliases:
@@ -3729,6 +4323,12 @@
     - mas
     - code
     - software
+- name: mass-data-migration
+  friendly_name: Mass data migration
+  aliases:
+    - mass data
+    - migration
+    - cloud
 - name: master--threat--hunting
   friendly_name: Master Threat Hunting
   aliases:
@@ -3752,6 +4352,31 @@
     - expand
     - expansion
     - growth
+- name: medal--01
+  friendly_name: Medal 01
+  aliases:
+    - medal
+    - award
+    - ribbon
+    - star
+    - circle
+    - certificate
+    - honor
+    - win
+- name: medal--02
+  friendly_name: Medal 02
+  aliases:
+    - medal
+    - award
+    - ribbon
+    - honor
+    - win
+- name: media-and-entertainment
+  friendly_name: Media and entertainment
+  aliases:
+    - media
+    - entertainment
+    - cloud
 - name: medical
   friendly_name: Medical
   aliases:
@@ -3781,6 +4406,12 @@
     - melbourne
     - city
     - cities
+- name: memory
+  friendly_name: Memory
+  aliases:
+    - memory
+    - RAM
+    - cloud
 - name: meter
   friendly_name: Meter
   aliases:
@@ -3802,6 +4433,11 @@
     - museum
     - city
     - cities
+- name: micro
+  friendly_name: Micro
+  aliases:
+    - micro
+    - cloud
 - name: microorganisms
   friendly_name: Microorganisms
   aliases:
@@ -3819,6 +4455,7 @@
     - stream
     - record
     - podcast
+    - workplace
 - name: microscope
   friendly_name: Microscope
   aliases:
@@ -3826,6 +4463,16 @@
     - life science
     - research
     - medicine
+- name: microservices
+  friendly_name: Microservices
+  aliases:
+    - microservices
+    - cloud
+- name: migration
+  friendly_name: Migration
+  aliases:
+    - migration
+    - cloud
 - name: milan--duomo-di-milano
   friendly_name: Milan Duomo di Milano
   aliases:
@@ -3849,6 +4496,12 @@
     - input
     - feedback
     - results
+- name: mobile
+  friendly_name: Mobile
+  aliases:
+    - mobile
+    - cellular
+    - cloud
 - name: mobile--add
   friendly_name: Mobile add
   aliases:
@@ -3860,7 +4513,7 @@
 - name: mobile--chat
   friendly_name: Mobile chat
   aliases:
-    - mobile chate
+    - mobile chat
     - mobile
     - device interaction
     - device
@@ -3880,6 +4533,7 @@
     - device interaction
     - device
     - phone
+    - workplace
 - name: modernize
   friendly_name: Modernize
   aliases:
@@ -3898,6 +4552,20 @@
     - tracking
     - track
     - RFID
+- name: moon--full
+  friendly_name: Full moon
+  aliases:
+    - moon
+    - cloud
+    - star
+    - sky
+    - night
+- name: moon-cake
+  friendly_name: Moon cake
+  aliases:
+    - moon cake
+    - celebration
+    - food
 - name: mortar-and-pestle
   friendly_name: Mortar and pestle
   aliases:
@@ -3981,6 +4649,14 @@
     - munich
     - city
     - cities
+- name: music
+  friendly_name: Music
+  aliases:
+    - music
+    - notes
+    - sound
+    - soundtrack
+    - audio
 - name: natural--language--classifier
   friendly_name: Natural language classifier
   aliases:
@@ -3999,6 +4675,19 @@
     - network
     - networking
     - connect
+- name: network--02
+  friendly_name: Network 02
+  aliases:
+    - network
+    - networking
+    - connect
+    - cloud
+- name: network--appliances
+  friendly_name: Network appliances
+  aliases:
+    - network
+    - appliances
+    - cloud
 - name: network--of-devices
   friendly_name: Network of devices
   aliases:
@@ -4011,6 +4700,12 @@
     - network
     - protection
     - security
+- name: network--security
+  friendly_name: Network security
+  aliases:
+    - network
+    - security
+    - cloud
 - name: network--services
   friendly_name: Network services
   aliases:
@@ -4088,6 +4783,7 @@
   aliases:
     - no smoking
     - smoke-free area
+    - workplace
 - name: notifications
   friendly_name: Notifications
   aliases:
@@ -4159,6 +4855,7 @@
     - office
     - building structure
     - structure
+    - workplace
 - name: oil--pump
   friendly_name: Oil pump
   aliases:
@@ -4244,6 +4941,13 @@
   aliases:
     - organization
     - design organization
+- name: ornament
+  friendly_name: Ornament
+  aliases:
+    - ornament
+    - decoration
+    - bauble
+    - holiday
 - name: overcast
   friendly_name: Overcast
   aliases:
@@ -4369,12 +5073,16 @@
     - person 03
     - people
     - human
+    - workplace
+    - restroom
 - name: person--04
   friendly_name: Person 04
   aliases:
     - person 04
     - people
     - human
+    - workplace
+    - restroom
 - name: person--05
   friendly_name: Person 05
   aliases:
@@ -4393,6 +5101,9 @@
     - person 07
     - people
     - human
+    - workplace
+    - restroom
+    - all gender
 - name: person--08
   friendly_name: Person 08
   aliases:
@@ -4455,6 +5166,11 @@
     - planning
     - analytics
     - data
+- name: platform-as-a-service
+  friendly_name: Platform-as-a-service
+  aliases:
+    - platform-as-a-service
+    - cloud
 - name: player--flow
   friendly_name: Player flow
   aliases:
@@ -4504,6 +5220,12 @@
     - industry
     - electricity
     - tower
+- name: power--on
+  friendly_name: Power on
+  aliases:
+    - power on
+    - start
+    - cloud
 - name: prague--charles-bridge-tower
   friendly_name: Prague Charles Bridge Tower
   aliases:
@@ -4571,6 +5293,8 @@
     - speaker
     - audience
     - presenter
+    - workplace
+    - collaborate
 - name: presenter
   friendly_name: Presenter
   aliases:
@@ -4593,6 +5317,8 @@
     - electronics
     - office equipment
     - office
+    - workplace
+    - support
 - name: private--network--01
   friendly_name: Private network 01
   aliases:
@@ -4627,6 +5353,12 @@
     - process
     - working
     - cycle
+- name: process--automation
+  friendly_name: Process automation
+  aliases:
+    - process
+    - automation
+    - cloud
 - name: productivity
   friendly_name: Productivity
   aliases:
@@ -4656,6 +5388,11 @@
   aliases:
     - proven technology
     - Cloud
+- name: public
+  friendly_name: Public
+  aliases:
+    - public
+    - cloud
 - name: public-cloud-to-private-cloud
   friendly_name: Public cloud to private cloud
   aliases:
@@ -4783,6 +5520,11 @@
   aliases:
     - read
     - read only
+- name: real-estate
+  friendly_name: Real estate
+  aliases:
+    - real estate
+    - cloud
 - name: real-time
   friendly_name: Real time
   aliases:
@@ -4803,6 +5545,7 @@
     - industry
     - environment
     - process
+    - workplace
 - name: recycle--bin
   friendly_name: Recycle bin
   aliases:
@@ -4811,6 +5554,7 @@
     - industry
     - environment
     - process
+    - workplace
 - name: red-hat--applications
   friendly_name: Red Hat applications
   aliases:
@@ -4904,6 +5648,12 @@
   friendly_name: Research
   aliases:
     - research
+- name: reseller-programs
+  friendly_name: Reseller programs
+  aliases:
+    - reseller
+    - programs
+    - cloud
 - name: reset
   friendly_name: Reset
   aliases:
@@ -4943,6 +5693,25 @@
   aliases:
     - resources
     - Cloud
+- name: retail
+  friendly_name: Retail
+  aliases:
+    - retail
+    - cloud
+    - shop
+    - shopping
+- name: retail--sustainable
+  friendly_name: Sustainable retail
+  aliases:
+    - sustainability
+    - retail
+    - industry
+    - sustainable
+    - cart
+    - shopping
+    - green
+    - leaf
+    - ESG
 - name: retrieve--and--rank
   friendly_name: Retrieve and rank
   aliases:
@@ -4964,7 +5733,7 @@
   aliases:
     - Rio
     - sugarloaf
-    - Rio de Jeneiro
+    - Rio de Janeiro
 - name: robot
   friendly_name: Robot
   aliases:
@@ -5011,10 +5780,22 @@
     - enablement
     - cloud
     - software as a service
+- name: saas--integration
+  friendly_name: SaaS integration
+  aliases:
+    - SaaS
+    - integration
+    - cloud
 - name: sales--connect
   friendly_name: Sales connect
   aliases:
     - sales connect
+- name: salesforce-integration
+  friendly_name: Salesforce integration
+  aliases:
+    - salesforce
+    - integration
+    - cloud
 - name: sample--file
   friendly_name: Sample file
   aliases:
@@ -5042,6 +5823,11 @@
     - Sao Paulo
     - city
     - cities
+- name: sap
+  friendly_name: SAP
+  aliases:
+    - SAP
+    - cloud
 - name: sap--hana
   friendly_name: SAP HANA
   aliases:
@@ -5082,6 +5868,13 @@
   aliases:
     - scaling containers
     - Cloud
+- name: scan-code
+  friendly_name: Scan code
+  aliases:
+    - scanner
+    - target
+    - code
+    - focus
 - name: scatter--matrix
   friendly_name: Scatter matrix
   aliases:
@@ -5093,6 +5886,20 @@
     - data visualization
     - data
     - analytics
+- name: scientific--computing
+  friendly_name: Scientific computing
+  aliases:
+    - scientific
+    - science
+    - computing
+    - cloud
+- name: scientific--research
+  friendly_name: Scientific research
+  aliases:
+    - scientific
+    - science
+    - research
+    - cloud
 - name: seattle
   friendly_name: Seattle
   aliases:
@@ -5108,6 +5915,18 @@
     - data analytics
     - analytics
     - security
+- name: secure--devops
+  friendly_name: Secure devops
+  aliases:
+    - secure
+    - devops
+    - cloud
+- name: secure--gateway
+  friendly_name: Secure gateway
+  aliases:
+    - secure
+    - gateway
+    - cloud
 - name: secure--hybrid--cloud
   friendly_name: Secure Hybrid Cloud
   aliases:
@@ -5148,6 +5967,12 @@
     - security as a service
     - security
     - service
+- name: security--groups
+  friendly_name: Security groups
+  aliases:
+    - security
+    - groups
+    - cloud
 - name: security--hygiene
   friendly_name: Security Hygiene
   aliases:
@@ -5160,12 +5985,24 @@
     - security intelligence
     - security
     - intelligence
+- name: security--management
+  friendly_name: Security management
+  aliases:
+    - security
+    - management
+    - cloud
 - name: security--shield
   friendly_name: IBM Security™
   aliases:
     - IBM
     - security
     - shield
+- name: security--visibility
+  friendly_name: Security visibility
+  aliases:
+    - security
+    - visibility
+    - Cloud
 - name: select--product
   friendly_name: Select product
   aliases:
@@ -5205,6 +6042,7 @@
     - data
     - storage
     - backup
+    - workplace
 - name: serverless
   friendly_name: Serverless
   aliases:
@@ -5212,6 +6050,14 @@
     - scale
     - workload
     - resource
+- name: serverless--02
+  friendly_name: Serverless 02
+  aliases:
+    - serverless
+    - scale
+    - workload
+    - resource
+    - cloud
 - name: servers
   friendly_name: Servers
   aliases:
@@ -5220,6 +6066,22 @@
     - data
     - storage
     - backup
+- name: shanghai--cityscape
+  friendly_name: Shanghai cityscape
+  aliases:
+    - Shanghai
+    - city
+    - cityscape
+    - China
+- name: shanghai--oriental-pearl-tower
+  friendly_name: Shanghai Oriental Pearl Tower
+  aliases:
+    - Shanghai
+    - city
+    - cityscape
+    - tower
+    - pearl
+    - China
 - name: sharing-data
   friendly_name: Sharing data
   aliases:
@@ -5257,6 +6119,8 @@
     - bathing
     - water
     - plumbing
+    - workplace
+    - support
 - name: singapore
   friendly_name: Singapore
   aliases:
@@ -5289,6 +6153,12 @@
     - small components
     - larger whole
     - Cloud
+- name: small-to-medium-business-smb
+  friendly_name: Small to medium business (SMB)
+  aliases:
+    - small to medium business
+    - SMB
+    - cloud
 - name: sneaker
   friendly_name: Sneaker
   aliases:
@@ -5304,6 +6174,12 @@
     - precipitation
     - weather
     - forecast
+- name: snowflake
+  friendly_name: Snowflake
+  aliases:
+    - snow
+    - weather
+    - holiday
 - name: social--work--01
   friendly_name: Social work 01
   aliases:
@@ -5337,12 +6213,18 @@
     - soft ice cream
     - ice cream
     - food
+    - workplace
 - name: softlayer--enablement
   friendly_name: Softlayer enablement
   aliases:
     - softlayer enablement
     - enablement
     - softlayer
+    - cloud
+- name: software
+  friendly_name: Software
+  aliases:
+    - software
     - cloud
 - name: solar--field
   friendly_name: Solar field
@@ -5400,11 +6282,19 @@
     - active
     - running
     - runner
+    - workplace
+    - community
+    - fitness
 - name: sprout
   friendly_name: Sprout
   aliases:
     - sprout
     - compost
+- name: spss
+  friendly_name: SPSS
+  aliases:
+    - SPSS
+    - cloud
 - name: stack-limitation
   friendly_name: Stack limitation
   aliases:
@@ -5415,12 +6305,14 @@
   aliases:
     - stairs
     - stairwell
+    - workplace
 - name: stairs--down
   friendly_name: Stairs down
   aliases:
     - stairs
     - stairs down
     - stairwell
+    - workplace
 - name: stairs--plan--view
   friendly_name: Stairs plan view
   aliases:
@@ -5429,17 +6321,24 @@
     - plan
     - building structure
     - structure
+    - workplace
 - name: stairs--up
   friendly_name: Stairs up
   aliases:
     - stairs
     - stairs up
     - stairwell
+    - workplace
 - name: start-for-free
   friendly_name: Start for free
   aliases:
     - start for free
     - Cloud
+- name: start-ups
+  friendly_name: Start-ups
+  aliases:
+    - start-ups
+    - cloud
 - name: stationary--bicycle
   friendly_name: Stationary bicycle
   aliases:
@@ -5448,6 +6347,10 @@
     - gym
     - healthcare
     - exercise
+    - workplace
+    - community
+    - fitness
+    - bike
 - name: steel
   friendly_name: Steel
   aliases:
@@ -5487,6 +6390,11 @@
     - Sweden
     - city
     - cities
+- name: storage
+  friendly_name: Storage
+  aliases:
+    - cloud
+    - storage
 - name: storage--area-networks
   friendly_name: Storage area networks
   aliases:
@@ -5597,6 +6505,24 @@
     - optimization
     - optimize
     - blockchain
+- name: supply-chain--01
+  friendly_name: Supply chain 01
+  aliases:
+    - sustainability
+    - supply chain
+    - ESG
+    - square
+    - cycle
+    - arrow
+- name: supply-chain--02
+  friendly_name: Supply chain 02
+  aliases:
+    - sustainability
+    - supply chain
+    - ESG
+    - circle
+    - green
+    - leaf
 - name: support
   friendly_name: Support
   aliases:
@@ -5615,6 +6541,43 @@
   aliases:
     - sustainability
     - environmental
+- name: sustainability--02
+  friendly_name: Sustainability 02
+  aliases:
+    - sustainability
+    - ESG
+    - green
+    - leaf
+    - growth
+    - branch
+- name: sustainability--03
+  friendly_name: Sustainability 03
+  aliases:
+    - sustainability
+    - ESG
+    - green
+    - leaf
+    - globe
+- name: sustainability--04
+  friendly_name: Sustainability 04
+  aliases:
+    - sustainability
+    - ESG
+    - green
+    - leaf
+    - cycle
+    - circle
+    - arrow
+    - workplace
+    - compost
+- name: sustainability--strategy
+  friendly_name: Sustainability strategy
+  aliases:
+    - sustainability
+    - strategy
+    - green
+    - leaf
+    - cycle
 - name: swipe--left
   friendly_name: Swipe left
   aliases:
@@ -5784,6 +6747,14 @@
     - telecom
     - industry
     - cellular
+- name: telecommunications
+  friendly_name: Telecommunications
+  aliases:
+    - telecommunications
+    - telecom
+    - cellular
+    - industry
+    - cloud
 - name: telemedicine
   friendly_name: Telemedicine
   aliases:
@@ -5803,12 +6774,16 @@
     - web doctor visit
     - hospital visit
     - checkup
+    - workplace
+    - community
+    - wellness
 - name: telephone
   friendly_name: Telephone
   aliases:
     - telephone
     - electronics
     - communication
+    - workplace
 - name: television
   friendly_name: Television
   aliases:
@@ -6053,6 +7028,9 @@
   aliases:
     - training
     - Cloud
+    - workplace
+    - community
+    - learning
 - name: transactional--blockchain
   friendly_name: Transactional blockchain
   aliases:
@@ -6102,6 +7080,7 @@
     - rubbish
     - garbage
     - dustbin
+    - workplace
 - name: tree
   friendly_name: Tree
   aliases:
@@ -6128,6 +7107,13 @@
     - data
     - analytics
     - data analytics
+- name: trophy
+  friendly_name: Trophy
+  aliases:
+    - honor
+    - win
+    - award
+    - cup
 - name: troubleshooting
   friendly_name: Troubleshooting
   aliases:
@@ -6188,6 +7174,12 @@
     - endpoint
     - management
     - security
+- name: united-governance
+  friendly_name: United governance
+  aliases:
+    - united
+    - governance
+    - cloud
 - name: universal-experiences
   friendly_name: Universal experiences
   aliases:
@@ -6316,6 +7308,7 @@
     - covid
     - covid user
     - mask
+    - workplace
 - name: user--profile
   friendly_name: User profile
   aliases:
@@ -6377,6 +7370,11 @@
   aliases:
     - view graphs and dashboard
     - Cloud
+- name: virtual
+  friendly_name: Virtual
+  aliases:
+    - virtual
+    - cloud
 - name: virtual--server
   friendly_name: Virtual server
   aliases:
@@ -6572,12 +7570,19 @@
   aliases:
     - websites
     - Cloud
+- name: websphere
+  friendly_name: Websphere
+  aliases:
+    - websphere
+    - cloud
 - name: wedding--cake
   friendly_name: Wedding cake
   aliases:
     - wedding cake
     - cake
     - creative
+    - workplace
+    - food
 - name: wheat
   friendly_name: Wheat
   aliases:
@@ -6607,6 +7612,12 @@
     - design
     - development
     - design and development
+- name: windows-hosting
+  friendly_name: Windows hosting
+  aliases:
+    - windows
+    - hosting
+    - cloud
 - name: windy
   friendly_name: Windy
   aliases:
@@ -6685,6 +7696,9 @@
     - exercise
     - health
     - active
+    - workplace
+    - community
+    - wellness
 - name: yoga--02
   friendly_name: Yoga 02
   aliases:
@@ -6693,6 +7707,9 @@
     - exercise
     - health
     - active
+    - workplace
+    - community 
+    - wellness
 - name: yoga--03
   friendly_name: Yoga 03
   aliases:
@@ -6701,6 +7718,9 @@
     - exercise
     - health
     - active
+    - workplace
+    - community
+    - fitness
 - name: yoga--04
   friendly_name: Yoga 04
   aliases:

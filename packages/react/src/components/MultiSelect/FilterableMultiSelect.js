@@ -27,9 +27,9 @@ import { FormContext } from '../FluidForm';
 
 const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
   {
-    ['aria-label']: ariaLabel,
-    ariaLabel: deprecatedAriaLabel,
     className: containerClassName,
+    clearSelectionDescription,
+    clearSelectionText,
     compareItems,
     direction,
     disabled,
@@ -163,9 +163,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
       case stateChangeTypes.keyDownHome:
       case stateChangeTypes.keyDownEnd:
         setHighlightedIndex(
-          changes.highlightedIndex !== undefined
-            ? changes.highlightedIndex
-            : null
+          changes.highlightedIndex !== undefined ? changes.highlightedIndex : 0
         );
         if (stateChangeTypes.keyDownArrowDown === type && !isOpen) {
           handleOnMenuChange(true);
@@ -199,8 +197,11 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
     }
   }
 
-  function clearInputValue() {
-    setInputValue('');
+  function clearInputValue(event) {
+    textInput.current.value.length === 1 || match(event, keys.Escape)
+      ? setInputValue('')
+      : setInputValue(textInput.current.value);
+
     if (textInput.current) {
       textInput.current.focus();
     }
@@ -314,10 +315,10 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                   if (match(event, keys.Delete) || match(event, keys.Escape)) {
                     if (isOpen) {
                       handleOnMenuChange(true);
-                      clearInputValue();
+                      clearInputValue(event);
                       event.stopPropagation();
                     } else if (!isOpen) {
-                      clearInputValue();
+                      clearInputValue(event);
                       clearSelection();
                       event.stopPropagation();
                     }
@@ -348,14 +349,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
               },
             });
 
-            const menuProps = getMenuProps(
-              {
-                'aria-label': ariaLabel,
-              },
-              {
-                suppressRefError: true,
-              }
-            );
+            const menuProps = getMenuProps({}, { suppressRefError: true });
 
             const handleFocus = (evt) => {
               if (
@@ -368,15 +362,29 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
               }
             };
 
+            const clearSelectionContent =
+              selectedItems.length > 0 ? (
+                <span className={`${prefix}--visually-hidden`}>
+                  {clearSelectionDescription} {selectedItems.length},
+                  {clearSelectionText}
+                </span>
+              ) : (
+                <span className={`${prefix}--visually-hidden`}>
+                  {clearSelectionDescription}: 0
+                </span>
+              );
+
             return (
               <div className={wrapperClasses}>
                 {titleText ? (
                   <label className={titleClasses} {...labelProps}>
                     {titleText}
+                    <span className={`${prefix}--visually-hidden`}>
+                      {clearSelectionContent}
+                    </span>
                   </label>
                 ) : null}
                 <ListBox
-                  aria-label={deprecatedAriaLabel || ariaLabel}
                   onFocus={isFluid ? handleFocus : null}
                   onBlur={isFluid ? handleFocus : null}
                   className={className}
@@ -455,15 +463,17 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                           locale,
                         }
                       ).map((item, index) => {
-                        const itemProps = getItemProps({
-                          item,
-                          disabled: item.disabled,
-                        });
-                        const itemText = itemToString(item);
                         const isChecked =
                           selectedItem.filter((selected) =>
                             isEqual(selected, item)
                           ).length > 0;
+                        const itemProps = getItemProps({
+                          item,
+                          disabled: item.disabled,
+                          ['aria-selected']: isChecked,
+                        });
+                        const itemText = itemToString(item);
+
                         return (
                           <ListBox.MenuItem
                             key={itemProps.id}
@@ -503,9 +513,13 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
 
 FilterableMultiSelect.propTypes = {
   /**
+   * Deprecated, aria-label is no longer needed
    * Specify a label to be read by screen readers on the container node
    */
-  ['aria-label']: PropTypes.string,
+  ['aria-label']: deprecate(
+    PropTypes.string,
+    'ariaLabel / aria-label props are no longer required for FilterableMultiSelect'
+  ),
 
   /**
    * Deprecated, please use `aria-label` instead.
@@ -513,8 +527,18 @@ FilterableMultiSelect.propTypes = {
    */
   ariaLabel: deprecate(
     PropTypes.string,
-    'This prop syntax has been deprecated. Please use the new `aria-label`.'
+    'ariaLabel / aria-label props are no longer required for FilterableMultiSelect'
   ),
+
+  /**
+   * Specify the text that should be read for screen readers that describes total items selected
+   */
+  clearSelectionDescription: PropTypes.string,
+
+  /**
+   * Specify the text that should be read for screen readers to clear selection.
+   */
+  clearSelectionText: PropTypes.string,
 
   /**
    * Specify the direction of the multiselect dropdown. Can be either top or bottom.
@@ -657,7 +681,6 @@ FilterableMultiSelect.propTypes = {
 };
 
 FilterableMultiSelect.defaultProps = {
-  ['aria-label']: 'Choose an item',
   compareItems: defaultCompareItems,
   direction: 'bottom',
   disabled: false,
@@ -668,6 +691,8 @@ FilterableMultiSelect.defaultProps = {
   sortItems: defaultSortItems,
   open: false,
   selectionFeedback: 'top-after-reopen',
+  clearSelectionText: 'To clear selection, press Delete or Backspace,',
+  clearSelectionDescription: 'Total items selected: ',
 };
 
 export default FilterableMultiSelect;

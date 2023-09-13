@@ -81,7 +81,8 @@ export const Playground = (args) => (
       id="default"
       titleText="Dropdown label"
       helperText="This is some helper text"
-      label="Dropdown menu options"
+      initialSelectedItem={items[1]}
+      label="Option 1"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
       {...args}
@@ -163,7 +164,8 @@ export const Default = () => (
       id="default"
       titleText="Dropdown label"
       helperText="This is some helper text"
-      label="Dropdown menu options"
+      initialSelectedItem={items[1]}
+      label="Option 1"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
     />
@@ -175,7 +177,8 @@ export const Inline = () => (
     <Dropdown
       id="inline"
       titleText="Inline dropdown label"
-      label="Dropdown menu options"
+      initialSelectedItem={items[1]}
+      label="Option 1"
       type="inline"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
@@ -191,7 +194,8 @@ export const _WithLayer = () => (
           id={`default-${layer}`}
           titleText="Dropdown label"
           helperText="This is some helper text"
-          label="Dropdown menu options"
+          initialSelectedItem={items[1]}
+          label="Option 1"
           items={items}
           itemToString={(item) => (item ? item.text : '')}
         />
@@ -207,7 +211,8 @@ export const InlineWithLayer = () => (
         <Dropdown
           id={`inline-${layer}`}
           titleText="Inline dropdown label"
-          label="Dropdown menu options"
+          initialSelectedItem={items[1]}
+          label="Option 1"
           type="inline"
           items={items}
           itemToString={(item) => (item ? item.text : '')}

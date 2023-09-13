@@ -11,7 +11,7 @@
 @use '../../theme' as *;
 @use '../../type' as *;
 @use '../button/tokens' as button;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/visually-hidden' as *;
 @use '../../utilities/skeleton' as *;
@@ -29,8 +29,8 @@
     @include type-style('label-01');
 
     display: block;
-    margin-bottom: $spacing-05;
     color: $text-secondary;
+    margin-block-end: $spacing-05;
   }
 
   .#{$prefix}--toggle__button {
@@ -51,21 +51,21 @@
 
   .#{$prefix}--toggle__switch {
     position: relative;
-    width: rem(48px);
-    height: rem(24px);
     background-color: $toggle-off;
-    border-radius: rem(12px);
+    block-size: convert.to-rem(24px);
+    border-radius: convert.to-rem(12px);
+    inline-size: convert.to-rem(48px);
     transition: background-color $duration-fast-01 motion(exit, productive);
 
     &::before {
       position: absolute;
-      top: rem(3px);
-      left: rem(3px);
-      width: rem(18px);
-      height: rem(18px);
       background-color: $icon-on-color;
+      block-size: convert.to-rem(18px);
       border-radius: 50%;
       content: '';
+      inline-size: convert.to-rem(18px);
+      inset-block-start: convert.to-rem(3px);
+      inset-inline-start: convert.to-rem(3px);
       transition: transform $duration-fast-01 motion(exit, productive);
 
       @media screen and (prefers-reduced-motion: reduce) {
@@ -86,7 +86,7 @@
     background-color: $support-success;
 
     &::before {
-      transform: translateX(rem(24px));
+      transform: translateX(convert.to-rem(24px));
     }
   }
 
@@ -97,27 +97,27 @@
   }
 
   .#{$prefix}--toggle__appearance--sm .#{$prefix}--toggle__switch {
-    width: rem(32px);
-    height: rem(16px);
+    block-size: convert.to-rem(16px);
+    inline-size: convert.to-rem(32px);
 
     &::before {
-      width: rem(10px);
-      height: rem(10px);
+      block-size: convert.to-rem(10px);
+      inline-size: convert.to-rem(10px);
     }
   }
 
   .#{$prefix}--toggle__appearance--sm
     .#{$prefix}--toggle__switch--checked::before {
-    transform: translateX(rem(16px));
+    transform: translateX(convert.to-rem(16px));
   }
 
   .#{$prefix}--toggle__check {
     position: absolute;
-    top: rem(6px);
-    right: rem(5px);
-    width: rem(6px);
-    height: rem(5px);
+    block-size: convert.to-rem(5px);
     fill: $support-success;
+    inline-size: convert.to-rem(6px);
+    inset-block-start: convert.to-rem(6px);
+    inset-inline-end: convert.to-rem(5px);
     visibility: hidden;
   }
 
@@ -162,16 +162,16 @@
     background-color: transparent;
 
     &::before {
-      top: rem(2px);
-      left: rem(2px);
       background-color: $text-primary;
+      inset-block-start: convert.to-rem(2px);
+      inset-inline-start: convert.to-rem(2px);
     }
   }
 
   .#{$prefix}--toggle--readonly .#{$prefix}--toggle__check {
-    top: rem(5px);
-    right: rem(4px);
     fill: $background;
+    inset-block-start: convert.to-rem(5px);
+    inset-inline-end: convert.to-rem(4px);
   }
 
   .#{$prefix}--toggle--readonly .#{$prefix}--toggle__text {
@@ -204,16 +204,29 @@
   .#{$prefix}--toggle--skeleton .#{$prefix}--toggle__skeleton-circle {
     @include circular-skeleton;
 
-    width: rem(18px);
-    height: rem(18px);
+    block-size: convert.to-rem(18px);
     border-radius: 50%;
+
+    inline-size: convert.to-rem(18px);
   }
 
   .#{$prefix}--toggle--skeleton .#{$prefix}--toggle__skeleton-rectangle {
     @include skeleton;
 
-    width: rem(24px);
-    height: rem(8px);
-    margin-left: rem(8px);
+    block-size: convert.to-rem(8px);
+
+    inline-size: convert.to-rem(24px);
+    margin-inline-start: convert.to-rem(8px);
+  }
+
+  // RTL overrides
+  [dir='rtl'] .#{$prefix}--toggle__switch--checked::before {
+    transform: translateX(convert.to-rem(-24px));
+  }
+
+  [dir='rtl']
+    .#{$prefix}--toggle__appearance--sm
+    .#{$prefix}--toggle__switch--checked::before {
+    transform: translateX(convert.to-rem(-16px));
   }
 }

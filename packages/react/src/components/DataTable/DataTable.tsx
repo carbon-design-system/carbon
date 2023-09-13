@@ -75,9 +75,9 @@ const dataTableDefaultProps = {
 
 export type DataTableSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-export interface DataTableCell {
+export interface DataTableCell<T> {
   id: string;
-  value: unknown;
+  value: T;
   isEditable: boolean;
   isEditing: boolean;
   isValid: boolean;
@@ -87,9 +87,11 @@ export interface DataTableCell {
   };
 }
 
-export interface DataTableRow {
+type DataTableCells<T extends any[]> = { [K in keyof T]: DataTableCell<T[K]> };
+
+export interface DataTableRow<ColTypes extends any[]> {
   id: string;
-  cells: Array<DataTableCell>;
+  cells: DataTableCells<ColTypes>;
   disabled?: boolean;
   isExpanded?: boolean;
   isSelected?: boolean;
@@ -100,17 +102,17 @@ export interface DataTableHeader {
   header: React.ReactNode;
 }
 
-export interface DataTableRenderProps {
+export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
   headers: Array<DataTableHeader>;
-  rows: Array<DataTableRow>;
-  selectedRows: Array<DataTableRow>;
+  rows: Array<DataTableRow<ColTypes> & RowType>;
+  selectedRows: Array<DataTableRow<ColTypes> & RowType>;
 
   // Prop accessors/getters
   getHeaderProps: (getHeaderPropsArgs: {
     header: DataTableHeader;
     isSortable?: boolean;
     onClick?: (
-      e: MouseEvent,
+      e: React.MouseEvent,
       sortState: { sortHeaderKey: string; sortDirection: DataTableSortState }
     ) => void;
     [key: string]: unknown;
@@ -127,17 +129,19 @@ export interface DataTableRenderProps {
     onExpand?: (e: MouseEvent) => void;
     [key: string]: unknown;
   }) => {
-    ariaLabel: string;
+    ariaLabel: string; // TODO Remove in v12
+    ['aria-label']: string;
     isExpanded: boolean;
     onExpand: (e: MouseEvent) => void;
     [key: string]: unknown;
   };
   getRowProps: (getRowPropsArgs: {
     onClick?: (e: MouseEvent) => void;
-    row: DataTableRow;
+    row: DataTableRow<ColTypes>;
     [key: string]: unknown;
   }) => {
-    ariaLabel: string;
+    ariaLabel: string; // TODO Remove in v12
+    ['aria-label']: string;
     disabled: boolean | undefined;
     isExpanded?: boolean;
     isSelected?: boolean;
@@ -145,9 +149,16 @@ export interface DataTableRenderProps {
     onExpand: (e: MouseEvent) => void;
     [key: string]: unknown;
   };
+  getExpandedRowProps: (getExpandedRowPropsArgs: {
+    row: DataTableRow<ColTypes>;
+    [key: string]: unknown;
+  }) => {
+    ['id']: string;
+    [key: string]: unknown;
+  };
   getSelectionProps: (getSelectionPropsArgs: {
     onClick?: (e: MouseEvent) => void;
-    row: DataTableRow;
+    row: DataTableRow<ColTypes>;
     [key: string]: unknown;
   }) => {
     ariaLabel: string;
@@ -168,7 +179,9 @@ export interface DataTableRenderProps {
     [key: string]: unknown;
   }) => {
     onCancel: () => void;
+    onSelectAll?: () => void | undefined;
     shouldShowBatchActions: boolean;
+    totalCount: number;
     totalSelected: number;
     [key: string]: unknown;
   };
@@ -187,7 +200,10 @@ export interface DataTableRenderProps {
   };
 
   // Custom event handlers
-  onInputChange: (e: Event, defaultValue?: string) => void;
+  onInputChange: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    defaultValue?: string
+  ) => void;
 
   // Expose internal state change actions
   sortBy: (headerKey: string) => void;
@@ -198,11 +214,13 @@ export interface DataTableRenderProps {
   radio: boolean | undefined;
 }
 
-export interface DataTableProps {
-  children?: (renderProps: DataTableRenderProps) => React.ReactElement;
+export interface DataTableProps<RowType, ColTypes extends any[]> {
+  children?: (
+    renderProps: DataTableRenderProps<RowType, ColTypes>
+  ) => React.ReactElement;
   experimentalAutoAlign?: boolean;
   filterRows?: (filterRowsArgs: {
-    cellsById: Record<string, DataTableCell>;
+    cellsById: Record<string, DataTableCell<RowType>>;
     getCellId: (rowId: string, header: string) => string;
     headers: Array<DataTableHeader>;
     inputValue: string;
@@ -213,12 +231,14 @@ export interface DataTableProps {
   locale?: string;
   overflowMenuOnHover?: boolean;
   radio?: boolean;
-  render?: (renderProps: DataTableRenderProps) => React.ReactElement;
-  rows: Array<Omit<DataTableRow, 'cells'>>;
+  render?: (
+    renderProps: DataTableRenderProps<RowType, ColTypes>
+  ) => React.ReactElement;
+  rows: Array<Omit<DataTableRow<ColTypes>, 'cells'>>;
   size?: DataTableSize;
   sortRow?: (
-    cellA: DataTableCell,
-    cellB: DataTableCell,
+    cellA: DataTableCell<any>,
+    cellB: DataTableCell<any>,
     sortRowOptions: {
       sortDirection: DataTableSortState;
       sortStates: Record<DataTableSortState, DataTableSortState>;
@@ -231,13 +251,13 @@ export interface DataTableProps {
   useZebraStyles?: boolean;
 }
 
-interface DataTableState {
-  cellsById: Record<string, DataTableCell>;
+interface DataTableState<ColTypes extends any[]> {
+  cellsById: Record<string, DataTableCell<ColTypes>>;
   filterInputValue: string | null;
   initialRowOrder: Array<string>;
   isExpandedAll: boolean;
   rowIds: Array<string>;
-  rowsById: Record<string, DataTableRow>;
+  rowsById: Record<string, DataTableRow<ColTypes>>;
   shouldShowBatchActions: boolean;
   sortDirection: DataTableSortState;
   sortHeaderKey: string | null;
@@ -253,9 +273,9 @@ interface DataTableState {
  * and updating the state of the single entity will cascade updates to the
  * consumer.
  */
-class DataTable extends React.Component<
-  DataTableProps & typeof dataTableDefaultProps,
-  DataTableState
+class DataTable<RowType, ColTypes extends any[]> extends React.Component<
+  DataTableProps<RowType, ColTypes> & typeof dataTableDefaultProps,
+  DataTableState<ColTypes>
 > {
   instanceId: number;
 
@@ -432,7 +452,7 @@ class DataTable extends React.Component<
   }: {
     header: DataTableHeader;
     onClick?: (
-      e: MouseEvent,
+      e: React.MouseEvent,
       sortState: { sortHeaderKey: string; sortDirection: DataTableSortState }
     ) => void;
     isSortable?: boolean;
@@ -484,7 +504,10 @@ class DataTable extends React.Component<
       : translationKeys.expandAll;
     return {
       ...rest,
-      ariaLabel: t(translationKey),
+      ariaLabel: t(translationKey), // TODO: remove in v12
+      'aria-label': t(translationKey),
+      // Provide a string of all the expanded row id's, separated by a space.
+      'aria-controls': rowIds.map((id) => `expanded-row-${id}`).join(' '),
       isExpanded,
       // Compose the event handlers so we don't overwrite a consumer's `onClick`
       // handler
@@ -535,7 +558,7 @@ class DataTable extends React.Component<
     ...rest
   }: {
     onClick?: (e: MouseEvent) => void;
-    row: DataTableRow;
+    row: DataTableRow<ColTypes>;
     [key: string]: unknown;
   }) => {
     const { translateWithId: t } = this.props;
@@ -549,9 +572,31 @@ class DataTable extends React.Component<
       // handler
       onExpand: composeEventHandlers([this.handleOnExpandRow(row.id), onClick]),
       isExpanded: row.isExpanded,
-      ariaLabel: t(translationKey),
+      ariaLabel: t(translationKey), // TODO remove in v12
+      'aria-label': t(translationKey),
+      'aria-controls': `expanded-row-${row.id}`,
       isSelected: row.isSelected,
       disabled: row.disabled,
+    };
+  };
+
+  /**
+   * Get the props associated with an expanded row
+   *
+   * @param {object} config
+   * @param {object} config.row the parent row we want the props for
+   * @returns {object}
+   */
+  getExpandedRowProps = ({
+    row,
+    ...rest
+  }: {
+    row: DataTableRow<ColTypes>;
+    [key: string]: unknown;
+  }) => {
+    return {
+      ...rest,
+      id: `expanded-row-${row.id}`,
     };
   };
 
@@ -568,7 +613,7 @@ class DataTable extends React.Component<
   getSelectionProps = (
     { onClick, row, ...rest } = {} as {
       onClick?: (e: MouseEvent) => void;
-      row: DataTableRow;
+      row: DataTableRow<ColTypes>;
       [key: string]: unknown;
     }
   ) => {
@@ -635,6 +680,8 @@ class DataTable extends React.Component<
     const { shouldShowBatchActions } = this.state;
     const totalSelected = this.getSelectedRows().length;
     return {
+      onSelectAll: undefined,
+      totalCount: this.state.rowIds.length || 0,
       ...props,
       shouldShowBatchActions: shouldShowBatchActions && totalSelected > 0,
       totalSelected,
@@ -907,7 +954,7 @@ class DataTable extends React.Component<
             getCellId,
           })
         : rowIds;
-    const renderProps: DataTableRenderProps = {
+    const renderProps: DataTableRenderProps<RowType, ColTypes> = {
       // Data derived from state
       rows: denormalize(filteredRowIds, rowsById, cellsById),
       headers: this.props.headers,
@@ -917,6 +964,7 @@ class DataTable extends React.Component<
       getHeaderProps: this.getHeaderProps,
       getExpandHeaderProps: this.getExpandHeaderProps,
       getRowProps: this.getRowProps,
+      getExpandedRowProps: this.getExpandedRowProps,
       getSelectionProps: this.getSelectionProps,
       getToolbarProps: this.getToolbarProps,
       getBatchActionProps: this.getBatchActionProps,

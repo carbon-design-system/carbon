@@ -11,7 +11,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
-@use '../../utilities/convert' as *;
+@use '../../utilities/convert';
 @use '../../utilities/visually-hidden' as *;
 @use '../../utilities/layout';
 
@@ -27,10 +27,10 @@
     @include type-style('body-compact-01');
 
     display: flex;
-    min-width: rem(48px);
     justify-content: space-between;
     color: $text-primary;
     margin-block-end: $spacing-03;
+    min-inline-size: convert.to-rem(48px);
   }
 
   .#{$prefix}--progress-bar__label-text {
@@ -41,29 +41,33 @@
 
   .#{$prefix}--progress-bar__track {
     position: relative;
-    width: 100%;
-    min-width: rem(48px);
-    height: rem(8px);
     background-color: $layer;
+    block-size: convert.to-rem(8px);
+    inline-size: 100%;
+    min-inline-size: convert.to-rem(48px);
   }
 
   .#{$prefix}--progress-bar--big .#{$prefix}--progress-bar__track {
-    height: rem(8px);
+    block-size: convert.to-rem(8px);
   }
 
   .#{$prefix}--progress-bar--small .#{$prefix}--progress-bar__track {
-    height: rem(4px);
+    block-size: convert.to-rem(4px);
   }
 
   .#{$prefix}--progress-bar__bar {
     display: block;
-    width: 100%;
-    height: 100%;
     background-color: currentColor;
+    block-size: 100%;
     color: $interactive;
+    inline-size: 100%;
     transform: scaleX(0);
-    transform-origin: 0 center #{'/*rtl:100% center*/'};
+    transform-origin: 0 center;
     transition: transform $duration-fast-02 motion(standard, productive);
+  }
+
+  [dir='rtl'] .#{$prefix}--progress-bar__bar {
+    transform-origin: 100% center;
   }
 
   .#{$prefix}--progress-bar--indeterminate
@@ -84,11 +88,18 @@
     inset: 0;
   }
 
+  [dir='rtl']
+    .#{$prefix}--progress-bar--indeterminate
+    .#{$prefix}--progress-bar__track::after {
+    animation-name: progress-bar-indeterminate-rtl;
+  }
+
   .#{$prefix}--progress-bar__helper-text {
     @include type-style('helper-text-01');
 
-    margin-top: $spacing-03;
     color: $text-secondary;
+
+    margin-block-start: $spacing-03;
   }
 
   .#{$prefix}--progress-bar__status-icon {
@@ -139,6 +150,17 @@
     }
   }
 
+  @keyframes progress-bar-indeterminate-rtl {
+    0% {
+      background-position-x: -105%;
+    }
+
+    80%,
+    100% {
+      background-position-x: 25%;
+    }
+  }
+
   .#{$prefix}--progress-bar--inline {
     display: flex;
     align-items: center;
@@ -146,7 +168,7 @@
 
   .#{$prefix}--progress-bar--inline .#{$prefix}--progress-bar__label {
     flex-shrink: 0;
-    margin-bottom: 0;
+    margin-block-end: 0;
     margin-inline-end: layout.density('padding-inline');
   }
 

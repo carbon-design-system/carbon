@@ -9,14 +9,13 @@
 @use '../menu';
 @use '../../config' as *;
 @use '../../motion' as *;
-@use '../../utilities/convert' as *;
 
 /// Menu Button styles
 /// @access public
 /// @group menu-button
 @mixin menu-button {
   .#{$prefix}--menu-button__trigger:not(.#{$prefix}--btn--ghost) {
-    min-width: 10rem;
+    min-inline-size: 10rem;
   }
 
   .#{$prefix}--menu-button__trigger svg {

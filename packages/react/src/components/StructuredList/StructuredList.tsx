@@ -11,6 +11,7 @@ import React, {
   type ReactNode,
   type KeyboardEvent,
   type ChangeEvent,
+  type MouseEvent,
 } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -240,12 +241,17 @@ export interface StructuredListRowProps extends DivAttrs {
   head?: boolean;
 
   /**
+   * Provide a handler that is invoked on the click
+   */
+  onClick?(event: MouseEvent): void;
+
+  /**
    * Provide a handler that is invoked on the key down event for the control
    */
   onKeyDown?(event: KeyboardEvent): void;
 }
 export function StructuredListRow(props: StructuredListRowProps) {
-  const { onKeyDown, children, className, head, ...other } = props;
+  const { onKeyDown, children, className, head, onClick, ...other } = props;
   const [hasFocusWithin, setHasFocusWithin] = useState(false);
   const id = useId('grid-input');
   const selectedRow = React.useContext(GridSelectedRowStateContext);
@@ -263,16 +269,20 @@ export function StructuredListRow(props: StructuredListRowProps) {
   );
 
   return head ? (
-    <div role="row" {...other} className={classes}>
+    <div role="row" {...other} className={classes} aria-busy="true">
       {children}
     </div>
   ) : (
     // eslint-disable-next-line jsx-a11y/interactive-supports-focus
     <div
+      aria-busy="true"
       {...other}
       role="row"
       className={classes}
-      onClick={() => setSelectedRow?.(id)}
+      onClick={(event) => {
+        setSelectedRow?.(id);
+        onClick && onClick(event);
+      }}
       onFocus={() => {
         setHasFocusWithin(true);
       }}
@@ -309,6 +319,11 @@ StructuredListRow.propTypes = {
     PropTypes.bool,
     `\nThe \`label\` prop is no longer needed and will be removed in the next major version of Carbon.`
   ),
+
+  /**
+   * Provide a handler that is invoked on the click
+   */
+  onClick: PropTypes.func,
 
   /**
    * Provide a handler that is invoked on the key down event for the control,
@@ -371,7 +386,7 @@ export function StructuredListInput(props: StructuredListInputProps) {
       value={row?.id ?? ''}
       onChange={(event) => {
         setSelectedRow?.(event.target.value);
-        onChange?.(event);
+        onChange && onChange(event);
       }}
       id={id ?? defaultId}
       className={classes}

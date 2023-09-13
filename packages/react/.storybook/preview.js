@@ -29,7 +29,7 @@ const devTools = {
     description: "Set the layout context's size",
     defaultValue: false,
     toolbar: {
-      title: 'unstable__Layout size',
+      title: 'dev :: unstable__Layout size',
       items: [
         {
           value: false,
@@ -48,7 +48,7 @@ const devTools = {
     description: "Set the layout context's density",
     defaultValue: false,
     toolbar: {
-      title: 'unstable__Layout density',
+      title: 'dev :: unstable__Layout density',
       items: [
         {
           value: false,
@@ -68,6 +68,7 @@ const globalTypes = {
     defaultValue: 'en',
     toolbar: {
       icon: 'globe',
+      title: 'Locale',
       items: [
         {
           right: '🇺🇸',
@@ -82,12 +83,39 @@ const globalTypes = {
       ],
     },
   },
+  dir: {
+    name: 'Text direction',
+    description: 'Set the text direction for the story',
+    defaultValue: 'ltr',
+    toolbar: {
+      icon: 'transfer',
+      title: 'Text direction',
+      items: [
+        {
+          right: '🔄',
+          title: 'auto',
+          value: 'auto',
+        },
+        {
+          right: '➡️',
+          title: 'left-to-right (ltr)',
+          value: 'ltr',
+        },
+        {
+          right: '⬅️',
+          title: 'right-to-left (rtl)',
+          value: 'rtl',
+        },
+      ],
+    },
+  },
   theme: {
     name: 'Theme',
     description: 'Set the global theme for displaying components',
     defaultValue: 'white',
     toolbar: {
       icon: 'paintbrush',
+      title: 'Theme',
       items: ['white', 'g10', 'g90', 'g100'],
     },
   },
@@ -277,20 +305,24 @@ const parameters = {
 
 const decorators = [
   (Story, context) => {
-    const { layoutDensity, layoutSize, locale, theme } = context.globals;
+    const { layoutDensity, layoutSize, locale, dir, theme } = context.globals;
+    const [randomKey, setRandomKey] = React.useState(1);
 
     React.useEffect(() => {
       document.documentElement.setAttribute('data-carbon-theme', theme);
     }, [theme]);
 
-    React.useEffect(() => {
+    React.useLayoutEffect(() => {
       document.documentElement.lang = locale;
-    }, [locale]);
+      document.documentElement.dir = dir;
+      // Need to set random key to recalculate Popover coordinates
+      setRandomKey(Math.floor(Math.random() * 10));
+    }, [locale, dir]);
 
     return (
       <GlobalTheme theme={theme}>
         <Layout size={layoutSize || null} density={layoutDensity || null}>
-          <Story {...context} />
+          <Story key={randomKey} {...context} />
         </Layout>
       </GlobalTheme>
     );

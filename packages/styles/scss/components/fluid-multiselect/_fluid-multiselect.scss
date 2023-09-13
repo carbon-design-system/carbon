@@ -12,7 +12,6 @@
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
-@use '../../utilities/convert' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../multiselect';
 @use '../fluid-list-box';
@@ -28,7 +27,7 @@
 
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--tag.#{$prefix}--tag--filter {
-    margin-top: 1.25rem;
+    margin-block-start: 1.25rem;
   }
 
   // Filterable
@@ -42,7 +41,7 @@
     .#{$prefix}--multi-select--filterable
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input {
-    border-bottom: 1px solid transparent;
+    border-block-end: 1px solid transparent;
   }
 
   .#{$prefix}--list-box__wrapper--fluid

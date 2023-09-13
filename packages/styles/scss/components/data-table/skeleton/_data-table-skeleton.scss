@@ -8,7 +8,7 @@
 @use '../../../config' as *;
 @use '../../../spacing' as *;
 @use '../../../theme' as *;
-@use '../../../utilities/convert' as *;
+@use '../../../utilities/convert';
 @use '../../../utilities/skeleton' as *;
 
 /// Data table skeleton styles
@@ -16,7 +16,7 @@
 /// @group data-table
 @mixin data-table-skeleton {
   .#{$prefix}--data-table.#{$prefix}--skeleton th {
-    padding-left: 1rem;
+    padding-inline-start: 1rem;
     vertical-align: middle;
   }
 
@@ -25,9 +25,9 @@
     @include skeleton;
 
     display: block;
+    block-size: convert.to-rem(16px);
 
-    width: rem(64px);
-    height: rem(16px);
+    inline-size: convert.to-rem(64px);
   }
 
   .#{$prefix}--data-table.#{$prefix}--skeleton tr:hover td {
@@ -56,17 +56,19 @@
     .#{$prefix}--data-table-header__title {
     @include skeleton;
 
-    width: rem(120px);
-    height: rem(24px);
+    block-size: convert.to-rem(24px);
+
+    inline-size: convert.to-rem(120px);
   }
 
   .#{$prefix}--data-table-container.#{$prefix}--skeleton
     .#{$prefix}--data-table-header__description {
     @include skeleton;
 
-    width: rem(160px);
-    height: rem(16px);
+    block-size: convert.to-rem(16px);
 
-    margin-top: $spacing-03;
+    inline-size: convert.to-rem(160px);
+
+    margin-block-start: $spacing-03;
   }
 }
