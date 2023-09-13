@@ -192,7 +192,7 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
   const { 'aria-pressed': ariaPressed } = rest;
   let otherProps: Partial<ButtonBaseProps> = {
     disabled,
-    'aria-disabled': disabledFocusable,
+    'aria-disabled': disabledFocusable ? disabledFocusable : undefined,
     type,
     'aria-describedby': dangerButtonVariants.includes(kind)
       ? assistiveId
