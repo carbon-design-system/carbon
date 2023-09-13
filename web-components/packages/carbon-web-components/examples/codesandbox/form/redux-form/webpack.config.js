@@ -10,6 +10,10 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  // disable the host check on sandbox
+  devServer: {
+    disableHostCheck: true
+  },
   module: {
     rules: [
       {
