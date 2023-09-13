@@ -8,7 +8,7 @@
 import './Grid.stories.scss';
 
 import React from 'react';
-import { Grid, Column, ColumnHang } from '../Grid';
+import { Grid, Column, ColumnHang, GridSettings } from '../Grid';
 import mdx from './Grid.mdx';
 
 export default {
@@ -41,15 +41,17 @@ export const SubGridTestStory = () => {
   return (
     <Grid>
       <Column lg={8}>
-        <Grid subGrid={false}>
-          <Column lg={4} />
-          <Column lg={4}>
-            <Grid>
-              <Column lg={2} />
-              <Column lg={2} />
-            </Grid>
-          </Column>
-        </Grid>
+        <GridSettings subgrid={false}>
+          <Grid>
+            <Column lg={4} />
+            <Column lg={4}>
+              <Grid>
+                <Column lg={2} />
+                <Column lg={2} />
+              </Grid>
+            </Column>
+          </Grid>
+        </GridSettings>
       </Column>
       <Column lg={8}>
         <Grid>

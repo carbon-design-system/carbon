@@ -20,7 +20,6 @@ function CSSGrid<T extends React.ElementType>({
   condensed = false,
   fullWidth = false,
   narrow = false,
-  subGrid = true,
   ...rest
 }: GridProps<T>) {
   const prefix = usePrefix();
@@ -33,7 +32,7 @@ function CSSGrid<T extends React.ElementType>({
     mode = 'condensed';
   }
 
-  if (subgrid && subGrid) {
+  if (subgrid) {
     return (
       <GridSettings mode="css-grid" subgrid>
         <Subgrid
