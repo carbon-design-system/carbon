@@ -43,6 +43,11 @@ export interface FileUploaderItemProps extends ReactAttr<HTMLSpanElement> {
   name?: string;
 
   /**
+   * Event handler that is called after files are added to the uploader
+   */
+  onAddFiles?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+
+  /**
    * Event handler that is called after removing a file from the file uploader
    * The event handler signature looks like `onDelete(evt, { uuid })`
    */
@@ -78,6 +83,7 @@ function FileUploaderItem({
   name,
   status = 'uploading',
   iconDescription,
+  onAddFiles = () => {},
   onDelete = () => {},
   invalid,
   errorSubject,
@@ -95,8 +101,8 @@ function FileUploaderItem({
   });
 
   useLayoutEffect(() => {
-    console.log('criei');
-  }, []);
+    console.log('name', name);
+  }, [name]);
 
   return (
     <span className={classes} {...other}>
@@ -116,6 +122,7 @@ function FileUploaderItem({
             buttonKind="ghost"
             labelText="Replace"
             disabled={false}
+            onChange={onAddFiles}
             disableLabelChanges={singleUpload}
           />
         )}
@@ -186,6 +193,12 @@ FileUploaderItem.propTypes = {
    * Name of the uploaded file
    */
   name: PropTypes.string,
+
+  /**
+   * Provide an optional `onChange` hook that is called each time the `<input>`
+   * value changes
+   */
+  onChange: PropTypes.func,
 
   /**
    * Event handler that is called after removing a file from the file uploader
