@@ -113,6 +113,7 @@ const ExampleDropContainerApp = (props) => {
 
   const onAddFiles = useCallback(
     (evt, { addedFiles }) => {
+      console.log(`onAddFiles`);
       evt.stopPropagation();
       const newFiles = addedFiles.map((file) => ({
         uuid: uid(),

@@ -7,13 +7,14 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useRef } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import Filename from './Filename';
 import { keys, matches } from '../../internal/keyboard';
 import uid from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
 import FileUploaderButton from './FileUploaderButton';
+import { Tooltip } from '../Tooltip';
 
 export interface FileUploaderItemProps extends ReactAttr<HTMLSpanElement> {
   /**
@@ -93,11 +94,22 @@ function FileUploaderItem({
     [`${prefix}--file__selected-file--sm`]: size === 'sm',
   });
 
+  useLayoutEffect(() => {
+    console.log('criei');
+  }, []);
+
   return (
     <span className={classes} {...other}>
-      <p className={`${prefix}--file-filename`} title={name} id={name}>
-        {name}
-      </p>
+      <Tooltip
+        label={name}
+        align="bottom"
+        className={`${prefix}--file-filename-tooltip`}>
+        <button className={`${prefix}--file-filename-button`} type="button">
+          <p title={name} className={`${prefix}--file-filename`} id={name}>
+            {name}
+          </p>
+        </button>
+      </Tooltip>
       <div className={`${prefix}--file-container-item`}>
         {singleUpload && (
           <FileUploaderButton

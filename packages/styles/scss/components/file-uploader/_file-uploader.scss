@@ -171,6 +171,24 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+
+    .#{$prefix}--file-filename-tooltip {
+      // overflow: hidden;
+    }
+
+    .#{$prefix}--file-filename-button {
+      width: -webkit-fill-available;
+      padding: 0;
+      border: none;
+      background: none;
+      color: inherit;
+      cursor: pointer;
+      font: inherit;
+      outline: inherit;
+    }
+    .#{$prefix}--file-filename-button:focus {
+      outline: revert;
+    }
   }
 
   .#{$prefix}--file__selected-file--md {
