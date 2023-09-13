@@ -7369,9 +7369,6 @@ Map {
     },
   },
   "StructuredListSkeleton" => Object {
-    "defaultProps": Object {
-      "rowCount": 5,
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
