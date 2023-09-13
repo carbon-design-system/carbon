@@ -12,6 +12,7 @@ exports[`TableToolbarMenu renders as expected - Component API should render 1`] 
         class="cds--tooltip-trigger__wrapper"
       >
         <button
+          aria-disabled="false"
           aria-expanded="false"
           aria-haspopup="true"
           aria-labelledby="tooltip-:r0:"

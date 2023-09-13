@@ -7,6 +7,7 @@
 
 import { Search, Add } from '@carbon/icons-react';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import Button from '../../Button';
 
@@ -43,6 +44,30 @@ describe('Button', () => {
 
     rerender(<Button disabled>test</Button>);
     expect(screen.getByRole('button')).toBeDisabled();
+  });
+
+  it('should receive focus when given disabledFocusable', async () => {
+    const onClick = jest.fn();
+    render(
+      <Button disabledFocusable onClick={onClick}>
+        test
+      </Button>
+    );
+    // `toBeDisabled` does not take into account aria-disabled.
+    // this check ensures that the `disabled` attribute is not present
+    expect(screen.getByRole('button')).toBeEnabled();
+
+    expect(screen.getByRole('button')).not.toHaveFocus();
+    await userEvent.tab();
+    expect(screen.getByRole('button')).toHaveFocus();
+
+    await userEvent.click();
+
+    // To adhere to the spec, buttons with aria-disabled must also "implement
+    // the necessary scripting to functionally disable the button, rather than
+    // the use disabled attribute."
+    // https://www.w3.org/TR/html-aria/#docconformance-attr
+    expect(onClick).not.toHaveBeenCalled();
   });
 
   it('should render with a default button type of button', () => {

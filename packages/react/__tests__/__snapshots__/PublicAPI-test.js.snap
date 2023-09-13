@@ -288,6 +288,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "disabledFocusable": Object {
+        "type": "bool",
+      },
       "hasIconOnly": Object {
         "type": "bool",
       },

@@ -101,6 +101,14 @@
       color: $text-on-color-disabled;
       outline: none;
     }
+
+    &.#{$prefix}--btn--disabled-focusable,
+    &.#{$prefix}--btn--disabled-focusable:hover,
+    &.#{$prefix}--btn--disabled-focusable:focus {
+      background: transparent;
+      color: $text-on-color-disabled;
+      outline: none;
+    }
   }
 
   .#{$prefix}--btn--ghost {
@@ -144,6 +152,18 @@
     }
 
     &:not([disabled]) svg {
+      fill: $icon-primary;
+    }
+
+    &.#{$prefix}--btn--disabled-focusable,
+    &.#{$prefix}--btn--disabled-focusable:hover,
+    &.#{$prefix}--btn--disabled-focusable:focus {
+      background: transparent;
+      color: $text-on-color-disabled;
+      outline: none;
+    }
+
+    &:not(.#{$prefix}--btn--disabled-focusable) svg {
       fill: $icon-primary;
     }
   }
@@ -265,6 +285,14 @@
         color: $text-on-color-disabled;
         outline: none;
       }
+
+      &.#{$prefix}--btn--disabled-focusable,
+      &.#{$prefix}--btn--disabled-focusable:hover,
+      &.#{$prefix}--btn--disabled-focusable:focus {
+        background: transparent;
+        color: $text-on-color-disabled;
+        outline: none;
+      }
     }
 
     &--ghost {
@@ -298,6 +326,14 @@
       &.#{$prefix}--btn--disabled:hover,
       &.#{$prefix}--btn--disabled:focus {
         border-color: transparent;
+        background: transparent;
+        color: $text-disabled;
+        outline: none;
+      }
+
+      &.#{$prefix}--btn--disabled-focusable,
+      &.#{$prefix}--btn--disabled-focusable:hover,
+      &.#{$prefix}--btn--disabled-focusable:focus {
         background: transparent;
         color: $text-disabled;
         outline: none;
@@ -374,7 +410,8 @@
     box-shadow: inherit;
   }
 
-  .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--disabled {
+  .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--disabled,
+  .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--disabled-focusable {
     box-shadow: convert.to-rem(-1px) 0 0 0 $icon-on-color-disabled;
 
     &:first-of-type {
@@ -382,7 +419,9 @@
     }
   }
 
-  .#{$prefix}--btn-set--stacked .#{$prefix}--btn.#{$prefix}--btn--disabled {
+  .#{$prefix}--btn-set--stacked .#{$prefix}--btn.#{$prefix}--btn--disabled,
+  .#{$prefix}--btn-set--stacked
+    .#{$prefix}--btn.#{$prefix}--btn--disabled-focusable {
     box-shadow: 0 convert.to-rem(-1px) 0 0 $layer-selected-disabled;
 
     &:first-of-type {

@@ -375,6 +375,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
             |
           </span>
           <button
+            aria-disabled="false"
             class="cds--btn cds--btn--primary"
             tabindex="-1"
             type="button"
@@ -386,6 +387,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
           class="cds--action-list"
         >
           <button
+            aria-disabled="false"
             class="cds--btn cds--btn--primary"
             type="button"
           >
@@ -414,6 +416,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
             </svg>
           </button>
           <button
+            aria-disabled="false"
             class="cds--btn cds--btn--primary"
             type="button"
           >
@@ -442,6 +445,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
             </svg>
           </button>
           <button
+            aria-disabled="false"
             class="cds--btn cds--btn--primary"
             type="button"
           >
@@ -470,6 +474,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
             </svg>
           </button>
           <button
+            aria-disabled="false"
             class="cds--batch-summary__cancel cds--btn cds--btn--primary"
             tabindex="-1"
             type="button"
@@ -555,6 +560,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               class="cds--tooltip-trigger__wrapper"
             >
               <button
+                aria-disabled="false"
                 aria-expanded="false"
                 aria-haspopup="true"
                 aria-labelledby="tooltip-:r29:"
@@ -601,6 +607,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
           </span>
         </span>
         <button
+          aria-disabled="false"
           class="cds--btn cds--btn--sm cds--layout--size-sm cds--btn--primary"
           type="button"
         >
@@ -811,6 +818,7 @@ exports[`DataTable renders as expected - Component API should render and match s
           class="cds--action-list"
         >
           <button
+            aria-disabled="false"
             class="cds--btn cds--btn--primary"
             type="button"
           >
@@ -839,6 +847,7 @@ exports[`DataTable renders as expected - Component API should render and match s
             </svg>
           </button>
           <button
+            aria-disabled="false"
             class="cds--btn cds--btn--primary"
             type="button"
           >
@@ -867,6 +876,7 @@ exports[`DataTable renders as expected - Component API should render and match s
             </svg>
           </button>
           <button
+            aria-disabled="false"
             class="cds--btn cds--btn--primary"
             type="button"
           >
@@ -895,6 +905,7 @@ exports[`DataTable renders as expected - Component API should render and match s
             </svg>
           </button>
           <button
+            aria-disabled="false"
             class="cds--batch-summary__cancel cds--btn cds--btn--primary"
             tabindex="-1"
             type="button"
@@ -980,6 +991,7 @@ exports[`DataTable renders as expected - Component API should render and match s
               class="cds--tooltip-trigger__wrapper"
             >
               <button
+                aria-disabled="false"
                 aria-expanded="false"
                 aria-haspopup="true"
                 aria-labelledby="tooltip-:rh:"
@@ -1026,6 +1038,7 @@ exports[`DataTable renders as expected - Component API should render and match s
           </span>
         </span>
         <button
+          aria-disabled="false"
           class="cds--btn cds--btn--sm cds--layout--size-sm cds--btn--primary"
           type="button"
         >

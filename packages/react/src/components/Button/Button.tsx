@@ -121,6 +121,7 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
     className,
     dangerDescription = 'danger',
     disabled = false,
+    disabledFocusable = false,
     hasIconOnly = false,
     href,
     iconDescription,
@@ -147,7 +148,7 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
 
   const handleClick = (evt: React.MouseEvent) => {
     // Prevent clicks on the tooltip from triggering the button click event
-    if (evt.target === tooltipRef.current) {
+    if (evt.target === tooltipRef.current || disabledFocusable) {
       evt.preventDefault();
       return;
     }
@@ -162,6 +163,7 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
     [`${prefix}--layout--size-${size}`]: size,
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
+    [`${prefix}--btn--disabled-focusable`]: disabledFocusable,
     [`${prefix}--btn--expressive`]: isExpressive,
     [`${prefix}--btn--icon-only`]: hasIconOnly,
     [`${prefix}--btn--selected`]: hasIconOnly && isSelected && kind === 'ghost',
@@ -190,6 +192,7 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
   const { 'aria-pressed': ariaPressed } = rest;
   let otherProps: Partial<ButtonBaseProps> = {
     disabled,
+    'aria-disabled': disabledFocusable,
     type,
     'aria-describedby': dangerButtonVariants.includes(kind)
       ? assistiveId
@@ -216,7 +219,7 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
       ...otherProps,
       ...anchorProps,
     };
-  } else if (href && !disabled) {
+  } else if (href && !disabled && !disabledFocusable) {
     component = 'a';
     otherProps = anchorProps;
   }
@@ -268,7 +271,9 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
         onMouseLeave={onMouseLeave}
         onFocus={onFocus}
         onBlur={onBlur}
-        onClick={composeEventHandlers([onClick, handleClick])}
+        onClick={
+          !disabledFocusable && composeEventHandlers([onClick, handleClick])
+        }
         {...rest}
         {...commonProps}
         {...otherProps}>
@@ -309,6 +314,15 @@ Button.propTypes = {
    * Specify whether the Button should be disabled, or not
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Disable the button but still allow it to be focusable.
+   * A Button can only be disabled OR disabledFocusable, not both.
+   * This is useful for when the button needs to remain in the tab
+   * order. This is most commonly used to allow a tooltip to be
+   * rendered on a disabled button to convey the reason why the button is disabled.
+   */
+  disabledFocusable: PropTypes.bool,
 
   /**
    * Specify if the button is an icon-only button

@@ -89,6 +89,15 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
     cursor: not-allowed;
   }
 
+  &.#{$prefix}--btn--disabled-focusable,
+  &.#{$prefix}--btn--disabled-focusable:hover,
+  &.#{$prefix}--btn--disabled-focusable:focus {
+    background: $button-disabled;
+    box-shadow: none;
+    color: $text-on-color-disabled;
+    cursor: not-allowed;
+  }
+
   .#{$prefix}--btn__icon {
     position: absolute;
     flex-shrink: 0;
