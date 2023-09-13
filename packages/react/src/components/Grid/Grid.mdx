@@ -141,9 +141,26 @@ properly configured for the subgrid to inherit. Additionally, wrapping subgrids
 in a `Column` enables you to define responsive parameters for the column (`sm`,
 `md`, etc) that the subgrid will inherit and be bound to.
 
+
 <Canvas>
   <Story of={GridStories.Subgrid} />
 </Canvas>
+
+For more specialized grid implementations you may want to disable the
+automatic subgrid definition. To achieve this you can wrap your nested `Grid` 
+in `GridSettings` and set `subgrid={false}`.
+
+```jsx
+<Grid>
+  <Column>
+    <GridSettings subgrid={false}>
+      <Grid>
+        <Column />
+      </Grid>
+    </GridSettings>
+  </Column>
+</Grid>
+```
 
 ## Mixed gutter modes
 
