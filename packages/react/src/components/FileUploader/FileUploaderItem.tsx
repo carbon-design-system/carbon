@@ -100,22 +100,31 @@ function FileUploaderItem({
     [`${prefix}--file__selected-file--sm`]: size === 'sm',
   });
 
+  const isEllipsisActive = (element: HTMLElement | any) => {
+    console.log('element.currentStyle', element.currentStyle);
+    return false;
+  };
+
   useLayoutEffect(() => {
-    console.log('name', name);
-  }, [name]);
+    const element = document.querySelector(`.${prefix}--file-filename`);
+    const test = isEllipsisActive(element);
+    console.log('test', test);
+  }, [prefix, name]);
 
   return (
     <span className={classes} {...other}>
-      <Tooltip
-        label={name}
-        align="bottom"
-        className={`${prefix}--file-filename-tooltip`}>
-        <button className={`${prefix}--file-filename-button`} type="button">
-          <p title={name} className={`${prefix}--file-filename`} id={name}>
-            {name}
-          </p>
-        </button>
-      </Tooltip>
+      <div className={`${prefix}--file-filename-container-wrap`}>
+        <Tooltip
+          label={name}
+          align="bottom"
+          className={`${prefix}--file-filename-tooltip`}>
+          <button className={`${prefix}--file-filename-button`} type="button">
+            <p title={name} className={`${prefix}--file-filename`} id={name}>
+              {name}
+            </p>
+          </button>
+        </Tooltip>
+      </div>
       <div className={`${prefix}--file-container-item`}>
         {singleUpload && (
           <FileUploaderButton

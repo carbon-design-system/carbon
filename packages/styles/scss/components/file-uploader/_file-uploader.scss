@@ -172,8 +172,12 @@
       white-space: nowrap;
     }
 
+    .#{$prefix}--file-filename-container-wrap {
+      max-width: 11rem;
+    }
+
     .#{$prefix}--file-filename-tooltip {
-      // overflow: hidden;
+      width: -webkit-fill-available;
     }
 
     .#{$prefix}--file-filename-button {
