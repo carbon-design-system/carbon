@@ -52,13 +52,6 @@ Grid.propTypes = {
    * typographic alignment with and without containers.
    */
   narrow: PropTypes.bool,
-
-  /**
-   * Specify whether subgrid should be enabled for a nested grid
-   * component. True by default. Setting to false will remove all
-   * subgrid classnames and styles.
-   */
-  subGrid: PropTypes.bool,
 };
 
 const GridAsGridComponent = Grid as GridComponent;
