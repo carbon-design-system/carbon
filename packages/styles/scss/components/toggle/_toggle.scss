@@ -205,9 +205,7 @@
     @include circular-skeleton;
 
     border-radius: 50%;
-
     block-size: convert.to-rem(18px);
-
     inline-size: convert.to-rem(18px);
   }
 
@@ -215,7 +213,6 @@
     @include skeleton;
 
     block-size: convert.to-rem(8px);
-
     inline-size: convert.to-rem(24px);
     margin-inline-start: convert.to-rem(8px);
   }
