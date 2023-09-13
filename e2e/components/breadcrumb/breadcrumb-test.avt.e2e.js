@@ -11,7 +11,7 @@ import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
 test.describe('breadcrumb @avt', () => {
-  test('accessibility-checker', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Breadcrumb',
       id: 'components-breadcrumb--default',
@@ -22,7 +22,7 @@ test.describe('breadcrumb @avt', () => {
     await expect(page).toHaveNoACViolations('Breadcrumb');
   });
 
-  test('accessibility-checker with overflow menu', async ({ page }) => {
+  test('@avt-advanced-states with overflow menu', async ({ page }) => {
     await visitStory(page, {
       component: 'Breadcrumb',
       id: 'components-breadcrumb--breadcrumb-with-overflow-menu',
@@ -33,7 +33,7 @@ test.describe('breadcrumb @avt', () => {
     await expect(page).toHaveNoACViolations('Breadcrumb-with-overflow-menu');
   });
 
-  test('accessibility-checker skeleton', async ({ page }) => {
+  test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'Breadcrumb',
       id: 'components-breadcrumb--skeleton',
@@ -44,7 +44,7 @@ test.describe('breadcrumb @avt', () => {
     await expect(page).toHaveNoACViolations('Breadcrumb-skeleton');
   });
 
-  test('accessibility-checker keyboard navigation', async ({ page }) => {
+  test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'Breadcrumb',
       id: 'components-breadcrumb--default',
@@ -63,7 +63,7 @@ test.describe('breadcrumb @avt', () => {
     );
   });
 
-  test('accessibility-checker keyboard navigation - item without href prop', async ({
+  test('@avt-keyboard-nav - item without href prop', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -84,7 +84,7 @@ test.describe('breadcrumb @avt', () => {
     await expect(page.getByText('Breadcrumb 4')).not.toBeFocused();
   });
 
-  test('accessibility-checker with overflow menu keyboard navigation', async ({
+  test('@avt-keyboard-nav with overflow menu keyboard navigation', async ({
     page,
   }) => {
     await visitStory(page, {
