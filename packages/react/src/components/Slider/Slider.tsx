@@ -362,6 +362,7 @@ export default class Slider extends PureComponent<SliderProps> {
     left: 0,
     needsOnRelease: false,
     isValid: true,
+    isRtl: false,
   };
 
   thumbRef: React.RefObject<HTMLDivElement>;
@@ -384,7 +385,7 @@ export default class Slider extends PureComponent<SliderProps> {
       const { value, left } = this.calcValue({
         useRawValue: true,
       });
-      this.setState({ value, left });
+      this.setState({ value, left, isRtl: document?.dir === 'rtl' });
     }
   }
 
@@ -400,13 +401,24 @@ export default class Slider extends PureComponent<SliderProps> {
     // Fire onChange event handler if present, if there's a usable value, and
     // if the value is different from the last one
 
+    // Set alternative positioning if direction is 'rtl'
     if (this.thumbRef.current) {
-      this.thumbRef.current.style.left = `${this.state.left}%`;
+      if (this.state.isRtl) {
+        this.thumbRef.current.style.insetInlineStart = `calc(${this.state.left}% - 14px)`;
+      } else {
+        this.thumbRef.current.style.insetInlineStart = `${this.state.left}%`;
+      }
     }
     if (this.filledTrackRef.current) {
-      this.filledTrackRef.current.style.transform = `translate(0%, -50%) scaleX(${
-        this.state.left / 100
-      })`;
+      if (this.state.isRtl) {
+        this.filledTrackRef.current.style.transform = `translate(100%, -50%) scaleX(-${
+          this.state.left / 100
+        })`;
+      } else {
+        this.filledTrackRef.current.style.transform = `translate(0%, -50%) scaleX(${
+          this.state.left / 100
+        })`;
+      }
     }
     if (
       prevState.value !== this.state.value &&
@@ -699,7 +711,9 @@ export default class Slider extends PureComponent<SliderProps> {
     // use the provided value or state's value to calculate it instead.
     let leftPercent;
     if (clientX != null) {
-      const leftOffset = clientX - (boundingRect?.left ?? 0);
+      const leftOffset = this.state.isRtl
+        ? (boundingRect?.right ?? 0) - clientX
+        : clientX - (boundingRect?.left ?? 0);
       leftPercent = leftOffset / width;
     } else {
       if (value == null) {
