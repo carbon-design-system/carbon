@@ -65,27 +65,12 @@ export const SubGridTestStory = () => {
 
 export const Default = () => {
   return (
-    <>
-      {/* <Grid subgrid={false}>
-        <Column sm={4} />
-        <Column sm={4} />
-        <Column sm={4} />
-        <Column sm={4} />
-      </Grid> */}
-      <Grid>
-        <Column sm={4}>
-          <Grid subGrid={false}>
-            <Column sm={4} />
-            <Column sm={4} />
-            <Column sm={4} />
-            <Column sm={4} />
-          </Grid>
-        </Column>
-        <Column sm={4} />
-        <Column sm={4} />
-        <Column sm={4} />
-      </Grid>
-    </>
+    <Grid>
+      <Column sm={4} />
+      <Column sm={4} />
+      <Column sm={4} />
+      <Column sm={4} />
+    </Grid>
   );
 };
 
