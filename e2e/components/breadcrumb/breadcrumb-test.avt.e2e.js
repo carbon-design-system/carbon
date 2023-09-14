@@ -44,7 +44,7 @@ test.describe('breadcrumb @avt', () => {
     await expect(page).toHaveNoACViolations('Breadcrumb-skeleton');
   });
 
-  test('@avt-keyboard-nav', async ({ page }) => {
+  test('@avt-keyboard-nav default', async ({ page }) => {
     await visitStory(page, {
       component: 'Breadcrumb',
       id: 'components-breadcrumb--default',
@@ -63,9 +63,7 @@ test.describe('breadcrumb @avt', () => {
     );
   });
 
-  test('@avt-keyboard-nav - item without href prop', async ({
-    page,
-  }) => {
+  test('@avt-keyboard-nav - item without href prop', async ({ page }) => {
     await visitStory(page, {
       component: 'Breadcrumb',
       id: 'components-breadcrumb--default',
