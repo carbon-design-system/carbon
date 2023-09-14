@@ -630,6 +630,21 @@ Map {
       "wrapText": false,
     },
     "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "right",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "aria-label": Object {
         "type": "string",
       },
@@ -1731,6 +1746,21 @@ Map {
       "onClick": [Function],
     },
     "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "right",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "children": Object {
         "type": "node",
       },
@@ -1759,6 +1789,21 @@ Map {
       "onClick": [Function],
     },
     "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "right",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "className": Object {
         "type": "string",
       },
