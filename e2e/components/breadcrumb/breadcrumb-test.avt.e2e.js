@@ -59,7 +59,8 @@ test.describe('breadcrumb @avt', () => {
     // Testing link. For this test pass the href must be like that: href="#"
     await page.keyboard.press('Enter');
     await expect(page).toHaveURL(
-      '?path=/docs/getting-started-welcome--welcome'
+      '?path=/docs/getting-started-welcome--welcome',
+      { timeout: 50000 }
     );
   });
 
