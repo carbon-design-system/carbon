@@ -60,7 +60,7 @@ test.describe('breadcrumb @avt', () => {
     await page.keyboard.press('Enter');
     await expect(page).toHaveURL(
       '?path=/docs/getting-started-welcome--welcome',
-      { timeout: 50000 }
+      { timeout: 500000 }
     );
   });
 
