@@ -117,7 +117,6 @@
     "rimraf": "^5.0.0",
     "rollup": "^2.79.1",
     "rollup-plugin-strip-banner": "^3.0.0",
-    "rtlcss": "^4.0.0",
     "sass": "^1.51.0",
     "sass-loader": "^13.0.0",
     "storybook": "^7.1.0",
