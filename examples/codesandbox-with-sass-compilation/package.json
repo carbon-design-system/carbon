@@ -1,9 +1,9 @@
 {
   "name": "codesandbox-with-sass-compilation",
-  "version": "0.39.0-rc.0",
+  "version": "0.39.0",
   "private": true,
   "dependencies": {
-    "@carbon/react": "^1.38.0-rc.0",
+    "@carbon/react": "^1.38.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
