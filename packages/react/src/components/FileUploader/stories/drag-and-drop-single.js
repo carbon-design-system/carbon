@@ -46,9 +46,8 @@ const ExampleDropContainerApp = (props) => {
 
   const uploadFile = async (fileToUpload) => {
     console.log('fileToUpload', fileToUpload);
-
     // file size validation
-    if (fileToUpload.filesize > 512000) {
+    if (fileToUpload[0].filesize > 512000) {
       const updatedFile = {
         ...fileToUpload[0],
         status: 'edit',
@@ -97,31 +96,6 @@ const ExampleDropContainerApp = (props) => {
     }, rand + 1000);
   };
 
-  // const onAddFiles = useCallback(
-  //   (evt, { addedFiles }) => {
-  //     console.log(`onAddFiles`);
-  //     evt.stopPropagation();
-  //     const newFiles = addedFiles.map((file) => ({
-  //       uuid: uid(),
-  //       name: file.name,
-  //       filesize: file.size,
-  //       status: 'uploading',
-  //       iconDescription: 'Uploading',
-  //       invalidFileType: file.invalidFileType,
-  //     }));
-  //     // eslint-disable-next-line react/prop-types
-  //     if (props.multiple) {
-  //       setFiles([...files, ...newFiles]);
-  //       newFiles.forEach(uploadFile);
-  //     } else if (newFiles[0]) {
-  //       setFiles([newFiles[0]]);
-  //       uploadFile(newFiles[0]);
-  //     }
-  //   },
-  //   // eslint-disable-next-line react/prop-types
-  //   [files, props.multiple]
-  // );
-
   const onAddFilesButton = (event) => {
     const file = event.target.files;
 
@@ -136,8 +110,8 @@ const ExampleDropContainerApp = (props) => {
       },
     ];
     console.log('new file', newFile);
-    uploadFile([newFile[0]]);
     setFile(newFile[0]);
+    uploadFile([newFile[0]]);
   };
 
   console.log('file', file);
@@ -155,7 +129,7 @@ const ExampleDropContainerApp = (props) => {
     // eslint-disable-next-line react/prop-types
     [`${prefix}--label-description--disabled`]: props.disabled,
   });
-  // console.log('files', files);
+
   return (
     <FormItem>
       <p className={labelClasses}>Upload files</p>
@@ -181,6 +155,8 @@ const ExampleDropContainerApp = (props) => {
             uuid={file.uuid}
             name={file.name}
             filesize={file.filesize}
+            errorSubject="File size exceeds limit"
+            errorBody="500kb max file size. Select a new file and try again."
             singleUpload={true}
             // eslint-disable-next-line react/prop-types
             size={props.size}
@@ -189,35 +165,8 @@ const ExampleDropContainerApp = (props) => {
             invalid={file.invalid}
             onDelete={handleFileUploaderItemClick}
             onAddFiles={onAddFilesButton}
-            //  {...rest}
           />
         )}
-
-        {/* {files.map(
-          ({
-            uuid,
-            name,
-            filesize,
-            status,
-            iconDescription,
-            invalid,
-            ...rest
-          }) => (
-            <FileUploaderItem
-              key={uid()}
-              uuid={uuid}
-              name={name}
-              filesize={filesize}
-              // eslint-disable-next-line react/prop-types
-              size={props.size}
-              status={status}
-              iconDescription={iconDescription}
-              invalid={invalid}
-              onDelete={handleFileUploaderItemClick}
-              {...rest}
-            />
-          )
-        )} */}
       </div>
     </FormItem>
   );

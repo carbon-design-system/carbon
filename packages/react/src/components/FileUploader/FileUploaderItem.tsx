@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import Filename from './Filename';
 import { keys, matches } from '../../internal/keyboard';
 import uid from '../../tools/uniqueId';
@@ -92,6 +92,7 @@ function FileUploaderItem({
   singleUpload,
   ...other
 }: FileUploaderItemProps) {
+  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
   const prefix = usePrefix();
   const { current: id } = useRef(uuid || uid());
   const classes = cx(`${prefix}--file__selected-file`, {
@@ -100,31 +101,37 @@ function FileUploaderItem({
     [`${prefix}--file__selected-file--sm`]: size === 'sm',
   });
 
-  const isEllipsisActive = (element: HTMLElement | any) => {
-    console.log('element.currentStyle', element.currentStyle);
-    return false;
+  const isEllipsisActive = (element: any) => {
+    setIsEllipsisApplied(element.offsetWidth < element.scrollWidth);
+    return element.offsetWidth < element.scrollWidth;
   };
-
+  console.log('invalid', invalid);
   useLayoutEffect(() => {
     const element = document.querySelector(`.${prefix}--file-filename`);
-    const test = isEllipsisActive(element);
-    console.log('test', test);
+    isEllipsisActive(element);
   }, [prefix, name]);
 
   return (
     <span className={classes} {...other}>
-      <div className={`${prefix}--file-filename-container-wrap`}>
-        <Tooltip
-          label={name}
-          align="bottom"
-          className={`${prefix}--file-filename-tooltip`}>
-          <button className={`${prefix}--file-filename-button`} type="button">
-            <p title={name} className={`${prefix}--file-filename`} id={name}>
-              {name}
-            </p>
-          </button>
-        </Tooltip>
-      </div>
+      {isEllipsisApplied && singleUpload ? (
+        <div className={`${prefix}--file-filename-container-wrap`}>
+          <Tooltip
+            label={name}
+            align="bottom"
+            className={`${prefix}--file-filename-tooltip`}>
+            <button className={`${prefix}--file-filename-button`} type="button">
+              <p title={name} className={`${prefix}--file-filename`} id={name}>
+                {name}
+              </p>
+            </button>
+          </Tooltip>
+        </div>
+      ) : (
+        <p title={name} className={`${prefix}--file-filename`} id={name}>
+          {name}
+        </p>
+      )}
+
       <div className={`${prefix}--file-container-item`}>
         {singleUpload && (
           <FileUploaderButton
