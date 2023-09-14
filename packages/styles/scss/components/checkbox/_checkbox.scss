@@ -69,7 +69,7 @@
 
   .#{$prefix}--checkbox-label-text {
     // Add extra spacing when label is present
-    padding-inline-start: convert.to-rem(8px);
+    padding-inline-start: convert.to-rem(10px);
   }
 
   // Required because `$css--reset: true` cannot currently apply to this `::before` and `::after`

@@ -88,7 +88,7 @@ $radio-border-width: 1px !default;
     border-radius: 50%;
     inline-size: convert.to-rem(18px);
     margin-block: convert.to-rem(1px) convert.to-rem(2px);
-    margin-inline: convert.to-rem(2px) $spacing-03;
+    margin-inline: convert.to-rem(2px) convert.to-rem(10px);
   }
 
   .#{$prefix}--radio-button-group--vertical
@@ -245,20 +245,19 @@ $radio-border-width: 1px !default;
     margin: 0;
   }
 
-  .#{$prefix}--radio-button-group--vertical
-    .#{$prefix}--radio-button-wrapper
-    .#{$prefix}--radio-button__label {
-    margin-block-end: convert.to-rem(6px);
-    padding-block-start: convert.to-rem(2px);
-  }
-
   .#{$prefix}--radio-button-wrapper:not(:last-of-type) {
     margin-inline-end: $spacing-05;
   }
 
+  .#{$prefix}--radio-button-group--vertical .#{$prefix}--radio-button-wrapper {
+    margin-block-end: convert.to-rem(6px);
+    margin-inline-end: 0;
+  }
+
   .#{$prefix}--radio-button-group--vertical
-    .#{$prefix}--radio-button-wrapper:not(:last-of-type) {
-    margin: 0;
+    .#{$prefix}--radio-button-wrapper
+    .#{$prefix}--radio-button__label {
+    padding-block-start: convert.to-rem(2px);
   }
 
   .#{$prefix}--radio-button-group--label-right .#{$prefix}--radio-button__label,

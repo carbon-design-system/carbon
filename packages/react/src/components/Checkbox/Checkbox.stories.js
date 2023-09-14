@@ -79,7 +79,7 @@ export const Test = () => {
   };
 
   return (
-    <div style={{ overflow: 'hidden' }}>
+    <div>
       <Button onClick={handleClick}>Swap</Button>
       <br />
       <br />
