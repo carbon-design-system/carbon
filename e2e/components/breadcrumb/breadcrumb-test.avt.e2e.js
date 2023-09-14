@@ -45,7 +45,6 @@ test.describe('breadcrumb @avt', () => {
   });
 
   test('@avt-keyboard-nav default', async ({ page }) => {
-    test.setTimeout(120000);
     await visitStory(page, {
       component: 'Breadcrumb',
       id: 'components-breadcrumb--default',
@@ -59,9 +58,8 @@ test.describe('breadcrumb @avt', () => {
 
     // Testing link. For this test pass the href must be like that: href="#"
     await page.keyboard.press('Enter');
-    await expect(page).toHaveURL(
-      '?path=/docs/getting-started-welcome--welcome'
-    );
+    //Navigates to the welcome page
+    await expect(page.getByText('@carbon/reasct')).toBeVisible();
   });
 
   test('@avt-keyboard-nav - item without href prop', async ({ page }) => {
