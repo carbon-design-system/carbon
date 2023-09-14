@@ -367,7 +367,16 @@
   // Select
   //----------------------------------------------------------------------------
   .#{$prefix}--table-column-checkbox .#{$prefix}--checkbox-label {
+    min-block-size: $spacing-06;
     padding-inline-start: 0;
+  }
+
+  .#{$prefix}--table-column-checkbox .#{$prefix}--checkbox-label::before {
+    margin-block-start: convert.to-rem(2px);
+  }
+
+  .#{$prefix}--table-column-checkbox .#{$prefix}--checkbox-label::after {
+    inset-block-start: convert.to-rem(7.5px);
   }
 
   .#{$prefix}--data-table th.#{$prefix}--table-column-checkbox {
