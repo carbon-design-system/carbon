@@ -7,7 +7,7 @@
 
 import './story.scss';
 import { Checkbox as CheckboxIcon } from '@carbon/icons-react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Popover, PopoverContent } from '../Popover';
 import RadioButton from '../RadioButton';
 import RadioButtonGroup from '../RadioButtonGroup';
@@ -15,6 +15,7 @@ import { default as Checkbox } from '../Checkbox';
 import mdx from './Popover.mdx';
 import { Settings } from '@carbon/icons-react';
 import { keys, match } from '../../internal/keyboard';
+import { useFloating } from '@floating-ui/react';
 
 const prefix = 'cds';
 
@@ -321,6 +322,98 @@ export const AutoAlign = () => {
             <p className="popover-details">
               This server has 150 GB of block storage remaining.
             </p>
+          </PopoverContent>
+        </Popover>
+      </div>
+    </div>
+  );
+};
+
+export const Test = () => {
+  const { refs, floatingStyles } = useFloating();
+
+  return (
+    <>
+      <button ref={refs.setReference}>Button</button>
+      <div ref={refs.setFloating} style={floatingStyles}>
+        Tooltip
+      </div>
+    </>
+  );
+};
+
+export const AutoAlignFloatingUILocalTest = () => {
+  const [open, setOpen] = useState(true);
+
+  const { refs, floatingStyles } = useFloating();
+
+  useEffect(() => {
+    refs.floating.current.style.position = floatingStyles.position;
+    refs.floating.current.style.left = floatingStyles.left;
+    refs.floating.current.style.top = floatingStyles.top;
+    refs.floating.current.style.transform = floatingStyles.transform;
+  }, [floatingStyles, refs.floating]);
+
+  return (
+    <div>
+      <div
+        style={{
+          position: 'absolute',
+          insetBlockStart: 0,
+          insetInlineEnd: '50%',
+          // marginBlock: '3rem',
+          // marginInline: '3rem',
+        }}>
+        <Popover open={open} autoAlignFloatingUI ref={refs.setReference}>
+          <div className="playground-trigger">
+            <CheckboxIcon
+              onClick={() => {
+                setOpen(!open);
+              }}
+            />
+          </div>
+          <PopoverContent className="p-3" ref={refs.setFloating}>
+            <div>
+              <p className="popover-title">Available storage</p>
+              <p className="popover-details">
+                This server has 150 GB of block storage remaining.
+              </p>
+            </div>
+          </PopoverContent>
+        </Popover>
+      </div>
+    </div>
+  );
+};
+
+export const AutoAlignFloatingUI = () => {
+  const [open, setOpen] = useState(true);
+
+  return (
+    <div>
+      <div
+        style={{
+          position: 'absolute',
+          insetBlockStart: 0,
+          insetInlineEnd: '50%',
+          // marginBlock: '3rem',
+          // marginInline: '3rem',
+        }}>
+        <Popover open={open} align="left">
+          <div className="playground-trigger">
+            <CheckboxIcon
+              onClick={() => {
+                setOpen(!open);
+              }}
+            />
+          </div>
+          <PopoverContent className="p-3">
+            <div>
+              <p className="popover-title">Available storage</p>
+              <p className="popover-details">
+                This server has 150 GB of block storage remaining.
+              </p>
+            </div>
           </PopoverContent>
         </Popover>
       </div>

@@ -2157,6 +2157,7 @@ __metadata:
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.30.0
     "@carbon/themes": ^11.25.0-rc.0
+    "@floating-ui/react": ^0.25.4
     "@rollup/plugin-babel": ^6.0.0
     "@rollup/plugin-commonjs": ^25.0.0
     "@rollup/plugin-node-resolve": ^15.0.0
@@ -3510,12 +3511,64 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@floating-ui/core@npm:^1.4.2":
+  version: 1.4.2
+  resolution: "@floating-ui/core@npm:1.4.2"
+  dependencies:
+    "@floating-ui/utils": ^0.1.3
+  checksum: ee4de0abf57cb417b6011e05072b30d525783d79a03d2d11d28472f88e2b09b01ab40ea9cd48de0996f40c0391663a55176a9e50cfae8e8d0c71670e9384af97
+  languageName: node
+  linkType: hard
+
 "@floating-ui/dom@npm:^1.0.1":
   version: 1.2.9
   resolution: "@floating-ui/dom@npm:1.2.9"
   dependencies:
     "@floating-ui/core": ^1.2.6
   checksum: 16ae5e05a41c2ca16d51579d12729ca9d346241319f68ce5678f5fbeb9c4f9a16176c95089bbd7a0eb37c6ed90e5fd55a310ffc9948af7c841d5b8bfa0afe1b8
+  languageName: node
+  linkType: hard
+
+"@floating-ui/dom@npm:^1.5.1":
+  version: 1.5.3
+  resolution: "@floating-ui/dom@npm:1.5.3"
+  dependencies:
+    "@floating-ui/core": ^1.4.2
+    "@floating-ui/utils": ^0.1.3
+  checksum: 00053742064aac70957f0bd5c1542caafb3bfe9716588bfe1d409fef72a67ed5e60450d08eb492a77f78c22ed1ce4f7955873cc72bf9f9caf2b0f43ae3561c21
+  languageName: node
+  linkType: hard
+
+"@floating-ui/react-dom@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@floating-ui/react-dom@npm:2.0.2"
+  dependencies:
+    "@floating-ui/dom": ^1.5.1
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: 4797e1f7a19c1e531ed0d578ccdcbe58970743e5a480ba30424857fc953063f36d481f8c5d69248a8f1d521b739e94bf5e1ffb35506400dea3d914f166ed2f7f
+  languageName: node
+  linkType: hard
+
+"@floating-ui/react@npm:^0.25.4":
+  version: 0.25.4
+  resolution: "@floating-ui/react@npm:0.25.4"
+  dependencies:
+    "@floating-ui/react-dom": ^2.0.2
+    "@floating-ui/utils": ^0.1.1
+    tabbable: ^6.0.1
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: 816a0aa5bfc122c147e073563c0888333bdf58e79972757e37095c788323c8e87ace18d9196d95be8b8f4fe11d90cdeec36b23e5373a791a71a7873bf805590f
+  languageName: node
+  linkType: hard
+
+"@floating-ui/utils@npm:^0.1.1, @floating-ui/utils@npm:^0.1.3":
+  version: 0.1.3
+  resolution: "@floating-ui/utils@npm:0.1.3"
+  checksum: bc426ad84647e71a845ee6c7e44996ee91620d3d1df058fecc4d4041ec588dc6bc767106167277ee46e3a919e4e0722b9f67a7b1363efca62f8c4f7cbaca0bb1
   languageName: node
   linkType: hard
 
@@ -30026,6 +30079,13 @@ __metadata:
   version: 4.0.0
   resolution: "tabbable@npm:4.0.0"
   checksum: cbe1acbdabbe0744ae0088cf5133c3c36a9ebca0b670e00c1e117afaeb209d4f141368811973337b914ad1486a3b71a1ed781b698496cb4844e1804cb062baa9
+  languageName: node
+  linkType: hard
+
+"tabbable@npm:^6.0.1":
+  version: 6.2.0
+  resolution: "tabbable@npm:6.2.0"
+  checksum: f8440277d223949272c74bb627a3371be21735ca9ad34c2570f7e1752bd646ccfc23a9d8b1ee65d6561243f4134f5fbbf1ad6b39ac3c4b586554accaff4a1300
   languageName: node
   linkType: hard
 

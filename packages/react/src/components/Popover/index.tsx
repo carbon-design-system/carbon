@@ -11,6 +11,7 @@ import React, {
   useRef,
   useState,
   useMemo,
+  useEffect,
   type ForwardedRef,
   type WeakValidationMap,
   type ElementType,
@@ -20,6 +21,7 @@ import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 import { type PolymorphicProps } from '../../types/common';
 import { useWindowEvent } from '../../internal/useEvent';
+import { useFloating } from '@floating-ui/react';
 
 interface PopoverContext {
   floating: React.Ref<HTMLSpanElement>;
@@ -29,21 +31,33 @@ const PopoverContext = React.createContext<PopoverContext>({
   floating: {
     current: null,
   },
+  setFloating: {
+    current: null,
+  },
 });
 
 export type PopoverAlignment =
   | 'top'
-  | 'top-left'
-  | 'top-right'
+  | 'top-left' // deprecated
+  | 'top-right' // deprecated
   | 'bottom'
-  | 'bottom-left'
-  | 'bottom-right'
+  | 'bottom-left' // deprecated
+  | 'bottom-right' // deprecated
   | 'left'
-  | 'left-bottom'
-  | 'left-top'
+  | 'left-bottom' // deprecated
+  | 'left-top' // deprecated
   | 'right'
-  | 'right-bottom'
-  | 'right-top';
+  | 'right-bottom' // deprecated
+  | 'right-top' // deprecated
+  // new values to match floating-ui
+  | 'top-start'
+  | 'top-end'
+  | 'bottom-start'
+  | 'bottom-end'
+  | 'left-end'
+  | 'left-start'
+  | 'right-end'
+  | 'right-start';
 
 interface PopoverBaseProps {
   /**
@@ -107,7 +121,7 @@ export type PopoverProps<E extends ElementType> = PolymorphicProps<
 function PopoverRenderFunction<E extends ElementType = 'span'>(
   {
     isTabTip,
-    align = isTabTip ? 'bottom-left' : 'bottom',
+    align = isTabTip ? 'bottom-start' : 'bottom',
     as: BaseComponent = 'span' as E,
     autoAlign = false,
     caret = isTabTip ? false : true,
@@ -123,7 +137,29 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
 ) {
   const prefix = usePrefix();
   const floating = useRef<HTMLSpanElement>(null);
+  const setFloating = useRef<HTMLSpanElement>(null); // TODO could we consolidate this with `floating` if we rip out the old autoAlign functionality?
   const popover = useRef<Element>(null);
+
+  let shimmedAlign = (align) => {
+    switch (align) {
+      case 'top-left':
+        return 'top-start';
+      case 'top-right':
+        return 'top-end';
+      case 'bottom-left':
+        return 'bottom-start';
+      case 'bottom-right':
+        return 'bottom-end';
+      case 'left-bottom':
+        return 'left-end';
+      case 'left-top':
+        return 'left-start';
+      case 'right-bottom':
+        return 'right-end';
+      case 'right-top':
+        return 'right-start';
+    }
+  };
 
   // If the `Popover` is the last focusable item in the tab order, it should also close when the browser window loses focus  (#12922)
   useWindowEvent('blur', () => {
@@ -137,25 +173,32 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
       onRequestClose?.();
     }
   });
-
+  const { refs, floatingStyles } = useFloating({
+    placement: shimmedAlign,
+  });
   const value = useMemo(() => {
     return {
       floating,
+      setFloating: refs.setFloating,
     };
-  }, []);
+  }, [refs.setFloating]);
 
   if (isTabTip) {
-    const tabTipAlignments: PopoverAlignment[] = [
-      'bottom-left',
-      'bottom-right',
-    ];
+    const tabTipAlignments: PopoverAlignment[] = ['bottom-start', 'bottom-end'];
 
     if (!tabTipAlignments.includes(align)) {
-      align = 'bottom-left';
+      shimmedAlign = 'bottom-start';
     }
   }
 
-  const ref = useMergedRefs([forwardRef, popover]);
+  useEffect(() => {
+    refs.floating.current.style.position = floatingStyles.position;
+    refs.floating.current.style.left = floatingStyles.left;
+    refs.floating.current.style.top = floatingStyles.top;
+    refs.floating.current.style.transform = floatingStyles.transform;
+  }, [floatingStyles, refs.floating]);
+
+  const ref = useMergedRefs([forwardRef, popover, refs.setReference]);
   const [autoAligned, setAutoAligned] = useState(false);
   const [autoAlignment, setAutoAlignment] = useState(align);
   const className = cx(
@@ -339,23 +382,46 @@ if (__DEV__) {
 Popover.propTypes = {
   /**
    * Specify how the popover should align with the trigger element
-   */
+  //  */
+  // type Placement =
+  // | 'top'
+  // | 'top-start'
+  // | 'top-end'
+  // | 'right'
+  // | 'right-start'
+  // | 'right-end'
+  // | 'bottom'
+  // | 'bottom-start'
+  // | 'bottom-end'
+  // | 'left'
+  // | 'left-start'
+  // | 'left-end';
   align: PropTypes.oneOf([
     'top',
-    'top-left',
-    'top-right',
+    'top-left', // deprecated use top-start instead
+    'top-right', // deprecated use top-end instead
 
     'bottom',
-    'bottom-left',
-    'bottom-right',
+    'bottom-left', // deprecated use bottom-start instead
+    'bottom-right', // deprecated use bottom-end instead
 
     'left',
-    'left-bottom',
-    'left-top',
+    'left-bottom', // deprecated use left-end instead
+    'left-top', // deprecated use left-start instead
 
     'right',
-    'right-bottom',
-    'right-top',
+    'right-bottom', // deprecated use right-end instead
+    'right-top', // deprecated use right-start instead
+
+    // new values to match floating-ui
+    'top-start',
+    'top-end',
+    'bottom-start',
+    'bottom-end',
+    'left-end',
+    'left-start',
+    'right-end',
+    'right-start',
   ]),
 
   /**
@@ -420,8 +486,9 @@ function PopoverContentRenderFunction(
   forwardRef: React.ForwardedRef<HTMLSpanElement>
 ) {
   const prefix = usePrefix();
-  const { floating } = React.useContext(PopoverContext);
-  const ref = useMergedRefs([floating, forwardRef]);
+  const { floating, setFloating } = React.useContext(PopoverContext);
+
+  const ref = useMergedRefs([floating, forwardRef, setFloating]);
   return (
     <span {...rest} className={`${prefix}--popover`}>
       <span className={cx(`${prefix}--popover-content`, className)} ref={ref}>
