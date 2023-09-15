@@ -101,7 +101,7 @@ test.describe('Checkbox @avt', () => {
     await page.keyboard.press('Space');
     await expect(checkbox5).toBeChecked();
 
-    // Checking if the check is readonly
+    // Checking if the checkbox is readonly
     await expect(checkbox6).toBeVisible();
     await page.keyboard.press('Tab');
     await expect(checkbox6).toBeFocused();
