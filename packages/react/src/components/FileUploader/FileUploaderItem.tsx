@@ -100,12 +100,15 @@ function FileUploaderItem({
     [`${prefix}--file__selected-file--md`]: size === 'md',
     [`${prefix}--file__selected-file--sm`]: size === 'sm',
   });
+  const isInvalid = invalid
+    ? `${prefix}--file-filename-container-wrap-invalid`
+    : `${prefix}--file-filename-container-wrap`;
 
   const isEllipsisActive = (element: any) => {
     setIsEllipsisApplied(element.offsetWidth < element.scrollWidth);
     return element.offsetWidth < element.scrollWidth;
   };
-  console.log('invalid', invalid);
+
   useLayoutEffect(() => {
     const element = document.querySelector(`.${prefix}--file-filename`);
     isEllipsisActive(element);
@@ -114,7 +117,7 @@ function FileUploaderItem({
   return (
     <span className={classes} {...other}>
       {isEllipsisApplied && singleUpload ? (
-        <div className={`${prefix}--file-filename-container-wrap`}>
+        <div className={isInvalid}>
           <Tooltip
             label={name}
             align="bottom"

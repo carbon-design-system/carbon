@@ -176,8 +176,15 @@
       max-width: 11rem;
     }
 
+    .#{$prefix}--file-filename-container-wrap-invalid {
+      max-width: 10rem;
+      .#{$prefix}--file-filename-tooltip {
+        max-width: 11rem;
+      }
+    }
+
     .#{$prefix}--file-filename-tooltip {
-      width: -webkit-fill-available;
+      max-width: 12rem;
     }
 
     .#{$prefix}--file-filename-button {

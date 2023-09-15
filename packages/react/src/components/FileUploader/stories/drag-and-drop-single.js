@@ -45,7 +45,6 @@ const ExampleDropContainerApp = (props) => {
   }, []);
 
   const uploadFile = async (fileToUpload) => {
-    console.log('fileToUpload', fileToUpload);
     // file size validation
     if (fileToUpload[0].filesize > 512000) {
       const updatedFile = {
@@ -109,12 +108,10 @@ const ExampleDropContainerApp = (props) => {
         invalidFileType: file[0].invalidFileType,
       },
     ];
-    console.log('new file', newFile);
+
     setFile(newFile[0]);
     uploadFile([newFile[0]]);
   };
-
-  console.log('file', file);
 
   const handleFileUploaderItemClick = () => {
     setFile([]);
