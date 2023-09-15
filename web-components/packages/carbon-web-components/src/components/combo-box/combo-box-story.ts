@@ -74,7 +74,7 @@ export const Default = () => {
 export const WithLayer = () => {
   return html`
     <sb-template-layers>
-      <div style="width:400px">
+      <div style="width:300px">
         <cds-combo-box
           title-text="ComboBox label"
           helper-text="Combobox helper text"
@@ -178,7 +178,7 @@ export default {
   },
   decorators: [
     (story, { name }) => {
-      const width = !name.toLowerCase().includes('layer') ? `width:400px` : ``;
+      const width = !name.toLowerCase().includes('layer') ? `width:300px` : ``;
       return html` <div style="${width}">${story()}</div> `;
     },
   ],
