@@ -9,19 +9,23 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
   useRef,
-  useState,
   useMemo,
   useEffect,
   type ForwardedRef,
   type WeakValidationMap,
   type ElementType,
 } from 'react';
-import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 import { type PolymorphicProps } from '../../types/common';
 import { useWindowEvent } from '../../internal/useEvent';
-import { useFloating } from '@floating-ui/react';
+import {
+  useFloating,
+  flip,
+  autoUpdate,
+  arrow,
+  offset,
+} from '@floating-ui/react';
 
 interface PopoverContext {
   floating: React.Ref<HTMLSpanElement>;
@@ -34,6 +38,10 @@ const PopoverContext = React.createContext<PopoverContext>({
   setFloating: {
     current: null,
   },
+  caretRef: {
+    current: null,
+  },
+  autoAlign: null,
 });
 
 export type PopoverAlignment =
@@ -138,28 +146,39 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
   const prefix = usePrefix();
   const floating = useRef<HTMLSpanElement>(null);
   const setFloating = useRef<HTMLSpanElement>(null); // TODO could we consolidate this with `floating` if we rip out the old autoAlign functionality?
+  const caretRef = useRef<HTMLSpanElement>(null); // TODO could we consolidate this with `floating` if we rip out the old autoAlign functionality?
   const popover = useRef<Element>(null);
 
-  let shimmedAlign = (align) => {
-    switch (align) {
-      case 'top-left':
-        return 'top-start';
-      case 'top-right':
-        return 'top-end';
-      case 'bottom-left':
-        return 'bottom-start';
-      case 'bottom-right':
-        return 'bottom-end';
-      case 'left-bottom':
-        return 'left-end';
-      case 'left-top':
-        return 'left-start';
-      case 'right-bottom':
-        return 'right-end';
-      case 'right-top':
-        return 'right-start';
-    }
-  };
+  let shimmedAlign;
+  switch (align) {
+    case 'top-left':
+      shimmedAlign = 'top-start';
+      break;
+    case 'top-right':
+      shimmedAlign = 'top-end';
+      break;
+    case 'bottom-left':
+      shimmedAlign = 'bottom-start';
+      break;
+    case 'bottom-right':
+      shimmedAlign = 'bottom-end';
+      break;
+    case 'left-bottom':
+      shimmedAlign = 'left-end';
+      break;
+    case 'left-top':
+      shimmedAlign = 'left-start';
+      break;
+    case 'right-bottom':
+      shimmedAlign = 'right-end';
+      break;
+    case 'right-top':
+      shimmedAlign = 'right-start';
+      break;
+    default:
+      shimmedAlign = align;
+      break;
+  }
 
   // If the `Popover` is the last focusable item in the tab order, it should also close when the browser window loses focus  (#12922)
   useWindowEvent('blur', () => {
@@ -173,15 +192,35 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
       onRequestClose?.();
     }
   });
-  const { refs, floatingStyles } = useFloating({
-    placement: shimmedAlign,
-  });
+
+  const floatingUIConfig = autoAlign
+    ? {
+        placement: shimmedAlign,
+        // Middleware order matters, arrow should be last
+        middleware: [
+          offset(10),
+          flip(),
+          arrow({
+            element: caretRef,
+          }),
+        ],
+        whileElementsMounted: autoUpdate,
+      }
+    : {};
+
+  const { refs, floatingStyles, isPositioned, placement, middlewareData } =
+    useFloating(floatingUIConfig);
+
+  console.log(middlewareData);
+
   const value = useMemo(() => {
     return {
       floating,
       setFloating: refs.setFloating,
+      caretRef,
+      autoAlign: autoAlign,
     };
-  }, [refs.setFloating]);
+  }, [refs.setFloating, autoAlign]);
 
   if (isTabTip) {
     const tabTipAlignments: PopoverAlignment[] = ['bottom-start', 'bottom-end'];
@@ -192,15 +231,15 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
   }
 
   useEffect(() => {
-    refs.floating.current.style.position = floatingStyles.position;
-    refs.floating.current.style.left = floatingStyles.left;
-    refs.floating.current.style.top = floatingStyles.top;
-    refs.floating.current.style.transform = floatingStyles.transform;
-  }, [floatingStyles, refs.floating]);
+    if (autoAlign) {
+      Object.keys(floatingStyles).forEach((style) => {
+        refs.floating.current.style[style] = floatingStyles[style];
+      });
+    }
+  }, [floatingStyles, refs.floating, autoAlign]);
 
   const ref = useMergedRefs([forwardRef, popover, refs.setReference]);
-  const [autoAligned, setAutoAligned] = useState(false);
-  const [autoAlignment, setAutoAlignment] = useState(align);
+  const currentAlignment = autoAlign && placement !== align ? placement : align;
   const className = cx(
     {
       [`${prefix}--popover-container`]: true,
@@ -208,133 +247,12 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
       [`${prefix}--popover--drop-shadow`]: dropShadow,
       [`${prefix}--popover--high-contrast`]: highContrast,
       [`${prefix}--popover--open`]: open,
-      [`${prefix}--popover--${autoAlignment}`]: autoAligned && !isTabTip,
-      [`${prefix}--popover--${align}`]: !autoAligned,
+      // [`${prefix}--popover--auto-align`]: autoAlign,
+      [`${prefix}--popover--${currentAlignment}`]: true,
       [`${prefix}--popover--tab-tip`]: isTabTip,
     },
     customClassName
   );
-
-  useIsomorphicEffect(() => {
-    if (!open) {
-      return;
-    }
-
-    if (!autoAlign || isTabTip) {
-      setAutoAligned(false);
-      return;
-    }
-
-    if (!floating.current) {
-      return;
-    }
-
-    if (autoAligned === true) {
-      return;
-    }
-
-    const rect = floating.current.getBoundingClientRect();
-
-    // The conditions, per side, of when the popover is not visible, excluding the popover's internal padding(16)
-    const conditions = {
-      left: rect.x < -16,
-      top: rect.y < -16,
-      right: rect.x + (rect.width - 16) > document.documentElement.clientWidth,
-      bottom:
-        rect.y + (rect.height - 16) > document.documentElement.clientHeight,
-    };
-
-    if (
-      !conditions.left &&
-      !conditions.top &&
-      !conditions.right &&
-      !conditions.bottom
-    ) {
-      setAutoAligned(false);
-      return;
-    }
-
-    const alignments: PopoverAlignment[] = [
-      'top',
-      'top-left',
-      'right-bottom',
-      'right',
-      'right-top',
-      'bottom-left',
-      'bottom',
-      'bottom-right',
-      'left-top',
-      'left',
-      'left-bottom',
-      'top-right',
-    ];
-
-    // Creates the prioritized list of options depending on ideal alignment coming from `align`
-    const options = [align];
-    let option =
-      alignments[(alignments.indexOf(align) + 1) % alignments.length];
-
-    while (option) {
-      if (options.includes(option)) {
-        break;
-      }
-      options.push(option);
-      option = alignments[(alignments.indexOf(option) + 1) % alignments.length];
-    }
-
-    function isVisible(alignment: PopoverAlignment) {
-      if (!popover.current || !floating.current) {
-        return false;
-      }
-
-      popover.current.classList.add(`${prefix}--popover--${alignment}`);
-
-      const rect = floating.current.getBoundingClientRect();
-
-      // Check if popover is not visible to the left of the screen
-      if (rect.x < -16) {
-        popover.current.classList.remove(`${prefix}--popover--${alignment}`);
-        return false;
-      }
-
-      // Check if popover is not visible at the top of the screen
-      if (rect.y < -16) {
-        popover.current.classList.remove(`${prefix}--popover--${alignment}`);
-        return false;
-      }
-
-      // Check if popover is not visible to right of screen
-      if (rect.x + (rect.width - 16) > document.documentElement.clientWidth) {
-        popover.current.classList.remove(`${prefix}--popover--${alignment}`);
-        return false;
-      }
-
-      // Check if popover is not visible to bottom of screen
-      if (rect.y + (rect.height - 16) > document.documentElement.clientHeight) {
-        popover.current.classList.remove(`${prefix}--popover--${alignment}`);
-        return false;
-      }
-
-      popover.current.classList.remove(`${prefix}--popover--${alignment}`);
-      return true;
-    }
-
-    let alignment: PopoverAlignment | null = null;
-
-    for (let i = 0; i < options.length; i++) {
-      const option = options[i];
-
-      if (isVisible(option)) {
-        alignment = option;
-        break;
-      }
-    }
-
-    if (alignment) {
-      setAutoAligned(true);
-      setAutoAlignment(alignment);
-    }
-  }, [autoAligned, align, autoAlign, prefix, open, isTabTip]);
 
   const mappedChildren = React.Children.map(children, (child) => {
     const item = child as any;
@@ -356,11 +274,17 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
   const BaseComponentAsAny = BaseComponent as any;
 
   return (
-    <PopoverContext.Provider value={value}>
-      <BaseComponentAsAny {...rest} className={className} ref={ref}>
-        {isTabTip ? mappedChildren : children}
-      </BaseComponentAsAny>
-    </PopoverContext.Provider>
+    <>
+      <PopoverContext.Provider value={value}>
+        <BaseComponentAsAny {...rest} className={className} ref={ref}>
+          {isTabTip ? mappedChildren : children}
+        </BaseComponentAsAny>
+      </PopoverContext.Provider>
+      <div style={{ marginTop: '10rem', position: 'absolute' }}>
+        <p>isPositioned: {isPositioned ? 'yes' : 'no'}</p>
+        <p>placement: {placement}</p>
+      </div>
+    </>
   );
 }
 
@@ -486,15 +410,22 @@ function PopoverContentRenderFunction(
   forwardRef: React.ForwardedRef<HTMLSpanElement>
 ) {
   const prefix = usePrefix();
-  const { floating, setFloating } = React.useContext(PopoverContext);
-
+  const { floating, setFloating, caretRef, autoAlign } =
+    React.useContext(PopoverContext);
   const ref = useMergedRefs([floating, forwardRef, setFloating]);
+
   return (
     <span {...rest} className={`${prefix}--popover`}>
       <span className={cx(`${prefix}--popover-content`, className)} ref={ref}>
         {children}
       </span>
-      <span className={`${prefix}--popover-caret`} />
+      <span
+        className={cx({
+          [`${prefix}--popover-caret`]: true,
+          [`${prefix}--popover--auto-align`]: autoAlign,
+        })}
+        ref={caretRef}
+      />
     </span>
   );
 }
