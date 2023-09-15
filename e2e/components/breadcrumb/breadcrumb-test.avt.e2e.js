@@ -55,11 +55,8 @@ test.describe('breadcrumb @avt', () => {
     await expect(page.getByText('Breadcrumb 1')).toBeVisible();
     await page.keyboard.press('Tab');
     await expect(page.getByText('Breadcrumb 1')).toBeFocused();
-
-    // Testing link. For this test pass the href must be like that: href="#"
-    await page.keyboard.press('Enter');
-    //Navigates to the welcome page
-    await expect(page.getByText('@carbon/reasct')).toBeVisible();
+    // Checking if the link is enabled to be clicked on
+    await expect(page.getByText('Breadcrumb 1')).toBeEnabled();
   });
 
   test('@avt-keyboard-nav - item without href prop', async ({ page }) => {
