@@ -25,7 +25,7 @@ function uid(prefix = 'id') {
 // -- end copied
 
 const ExampleDropContainerApp = (props) => {
-  const [file, setFile] = useState([]);
+  const [file, setFile] = useState();
   const uploaderButton = useRef(null);
   const handleDrop = (e) => {
     e.preventDefault();
@@ -114,7 +114,7 @@ const ExampleDropContainerApp = (props) => {
   };
 
   const handleFileUploaderItemClick = () => {
-    setFile([]);
+    setFile();
   };
 
   const labelClasses = classnames(`${prefix}--file--label`, {
@@ -133,7 +133,7 @@ const ExampleDropContainerApp = (props) => {
       <p className={helperTextClasses}>
         Max file size is 500kb. Supported file types are .jpg and .png.
       </p>
-      {file.length === 0 && (
+      {file === undefined && (
         <FileUploaderDropContainer
           {...props}
           onAddFiles={onAddFilesButton}
@@ -146,7 +146,7 @@ const ExampleDropContainerApp = (props) => {
           `${prefix}--file-container`,
           `${prefix}--file-container--drop`
         )}>
-        {file.length !== 0 && (
+        {file !== undefined && (
           <FileUploaderItem
             key={uid()}
             uuid={file.uuid}
@@ -154,7 +154,7 @@ const ExampleDropContainerApp = (props) => {
             filesize={file.filesize}
             errorSubject="File size exceeds limit"
             errorBody="500kb max file size. Select a new file and try again."
-            singleUpload={true}
+            singleUpload
             // eslint-disable-next-line react/prop-types
             size={props.size}
             status={file.status}

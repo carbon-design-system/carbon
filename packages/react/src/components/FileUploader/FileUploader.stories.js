@@ -158,7 +158,7 @@ export const DragAndDropUploadSingleContainerExampleApplication = (args) =>
   require('./stories/drag-and-drop-single').default(args);
 
 DragAndDropUploadSingleContainerExampleApplication.args = {
-  labelText: 'Drag and drop files here or click to upload',
+  labelText: 'Drag and drop a file here or click to upload',
   name: '',
   multiple: false,
   accept: ['image/jpeg', 'image/png'],

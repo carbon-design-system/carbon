@@ -173,28 +173,28 @@
     }
 
     .#{$prefix}--file-filename-container-wrap {
-      max-width: 11rem;
+      max-inline-size: 11rem;
     }
 
     .#{$prefix}--file-filename-container-wrap-invalid {
-      max-width: 10rem;
+      max-inline-size: 10rem;
       .#{$prefix}--file-filename-tooltip {
-        max-width: 11rem;
+        max-inline-size: 11rem;
       }
     }
 
     .#{$prefix}--file-filename-tooltip {
-      max-width: 12rem;
+      max-inline-size: 12rem;
     }
 
     .#{$prefix}--file-filename-button {
-      width: -webkit-fill-available;
       padding: 0;
       border: none;
       background: none;
       color: inherit;
       cursor: pointer;
       font: inherit;
+      inline-size: -webkit-fill-available;
       outline: inherit;
     }
     .#{$prefix}--file-filename-button:focus {

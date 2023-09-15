@@ -214,12 +214,6 @@ FileUploaderItem.propTypes = {
   name: PropTypes.string,
 
   /**
-   * Provide an optional `onChange` hook that is called each time the `<input>`
-   * value changes
-   */
-  onChange: PropTypes.func,
-
-  /**
    * Event handler that is called after removing a file from the file uploader
    * The event handler signature looks like `onDelete(evt, { uuid })`
    */
