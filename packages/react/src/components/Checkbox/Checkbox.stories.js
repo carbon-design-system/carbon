@@ -5,13 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { default as Checkbox, CheckboxSkeleton } from './';
 import mdx from './Checkbox.mdx';
 import CheckboxGroup from '../CheckboxGroup';
-import RadioButton from '../RadioButton';
-import RadioButtonGroup from '../RadioButtonGroup';
-import Button from '../Button';
 
 const checkboxEvents = {
   className: 'some-class',
@@ -43,51 +40,6 @@ export const Default = () => {
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
     </CheckboxGroup>
-  );
-};
-
-export const Test = () => {
-  function Radio() {
-    return (
-      <RadioButtonGroup
-        name="radio-button-group"
-        defaultSelected="radio-1"
-        orientation="vertical">
-        <RadioButton labelText="Input label" value="radio-1" id="radio-1" />
-        <RadioButton labelText="Input label" value="radio-2" id="radio-2" />
-        <RadioButton labelText="Input label" value="radio-3" id="radio-3" />
-      </RadioButtonGroup>
-    );
-  }
-
-  function Check() {
-    return (
-      <div>
-        <Checkbox labelText={`Input label`} id="checkbox-label-1" />
-        <Checkbox labelText={`Input label`} id="checkbox-label-2" />
-        <Checkbox labelText={`Input label`} id="checkbox-label-3" />
-      </div>
-    );
-  }
-
-  const [isRadio, setRadio] = useState(true);
-  // setInterval(() => {
-  //   setRadio(!isRadio);
-  // }, 2000);
-  const handleClick = () => {
-    setRadio(!isRadio);
-  };
-
-  return (
-    <div>
-      <Button onClick={handleClick}>Swap</Button>
-      <br />
-      <br />
-      <p>There should be no alignment change when swapping</p>
-      <br />
-      {isRadio && <Radio></Radio>}
-      {!isRadio && <Check></Check>}
-    </div>
   );
 };
 
