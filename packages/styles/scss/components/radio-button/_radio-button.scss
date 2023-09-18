@@ -41,7 +41,7 @@ $radio-border-width: 1px !default;
 
   // Remove spacing above collection of radio buttons if label is present
   .#{$prefix}--label + .#{$prefix}--form-item .#{$prefix}--radio-button-group {
-    margin-top: 0;
+    margin-block-start: 0;
   }
 
   // vertical radio button
@@ -54,12 +54,12 @@ $radio-border-width: 1px !default;
     }
 
     .#{$prefix}--radio-button__label {
-      margin-right: 0;
       line-height: 1.25;
+      margin-inline-end: 0;
     }
 
     .#{$prefix}--radio-button__label:not(:last-of-type) {
-      margin-bottom: $spacing-03;
+      margin-block-end: $spacing-03;
     }
   }
 
@@ -74,21 +74,21 @@ $radio-border-width: 1px !default;
 
     display: flex;
     align-items: center;
-    margin-right: $spacing-05;
     cursor: pointer;
+    margin-inline-end: $spacing-05;
   }
 
   .#{$prefix}--radio-button__appearance {
     @include reset;
 
-    width: convert.to-rem(18px);
-    height: convert.to-rem(18px);
     flex-shrink: 0;
     border: $radio-border-width solid $icon-primary;
-    margin: convert.to-rem(1px) $spacing-03 convert.to-rem(2px)
-      convert.to-rem(2px);
     background-color: transparent;
+    block-size: convert.to-rem(18px);
     border-radius: 50%;
+    inline-size: convert.to-rem(18px);
+    margin-block: convert.to-rem(1px) convert.to-rem(2px);
+    margin-inline: convert.to-rem(2px) $spacing-03;
   }
 
   .#{$prefix}--radio-button:checked
@@ -102,11 +102,11 @@ $radio-border-width: 1px !default;
     &::before {
       position: relative;
       display: inline-block;
-      width: 100%;
-      height: 100%;
       background-color: $icon-primary;
+      block-size: 100%;
       border-radius: 50%;
       content: '';
+      inline-size: 100%;
       transform: scale(0.5);
 
       // Allow the selected button to be seen in Windows HCM for IE/Edge
@@ -164,12 +164,12 @@ $radio-border-width: 1px !default;
   .#{$prefix}--radio-button__validation-msg {
     display: none;
     align-items: flex-end;
-    margin-top: convert.to-rem(6px);
+    margin-block-start: convert.to-rem(6px);
   }
 
   .#{$prefix}--radio-button__invalid-icon {
-    margin: 0 convert.to-rem(1px) 0 convert.to-rem(3px);
     fill: $support-error;
+    margin-inline: convert.to-rem(3px) convert.to-rem(1px);
   }
 
   .#{$prefix}--radio-button__invalid-icon--warning {
@@ -195,9 +195,9 @@ $radio-border-width: 1px !default;
     .#{$prefix}--form-requirement {
     display: block;
     overflow: visible;
-    max-height: 100%;
-    margin-top: 0;
-    margin-left: $spacing-03;
+    margin-block-start: 0;
+    margin-inline-start: $spacing-03;
+    max-block-size: 100%;
   }
 
   .#{$prefix}--radio-button-group--invalid
@@ -207,7 +207,7 @@ $radio-border-width: 1px !default;
   }
 
   .#{$prefix}--radio-button-group ~ .#{$prefix}--form__helper-text {
-    margin-top: convert.to-rem(6px);
+    margin-block-start: convert.to-rem(6px);
   }
 
   // Focus
@@ -223,8 +223,9 @@ $radio-border-width: 1px !default;
   .#{$prefix}--radio-button__label.#{$prefix}--skeleton {
     @include skeleton;
 
-    width: convert.to-rem(100px);
-    height: convert.to-rem(18px);
+    block-size: convert.to-rem(18px);
+
+    inline-size: convert.to-rem(100px);
   }
 
   .#{$prefix}--radio-button__label.#{$prefix}--skeleton
@@ -240,13 +241,13 @@ $radio-border-width: 1px !default;
   }
 
   .#{$prefix}--radio-button-wrapper:not(:last-of-type) {
-    margin-right: $spacing-05;
+    margin-inline-end: $spacing-05;
   }
 
   .#{$prefix}--radio-button-group--vertical
     .#{$prefix}--radio-button-wrapper:not(:last-of-type) {
-    margin-right: 0;
-    margin-bottom: $spacing-03;
+    margin-block-end: $spacing-03;
+    margin-inline-end: 0;
   }
 
   .#{$prefix}--radio-button-group--label-right .#{$prefix}--radio-button__label,
@@ -265,7 +266,7 @@ $radio-border-width: 1px !default;
     .#{$prefix}--radio-button__appearance,
   .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-left
     .#{$prefix}--radio-button__appearance {
-    margin-right: 0;
-    margin-left: $spacing-03;
+    margin-inline-end: 0;
+    margin-inline-start: $spacing-03;
   }
 }

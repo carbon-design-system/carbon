@@ -30,29 +30,29 @@
   }
 
   .#{$prefix}--switcher__item {
-    width: 100%;
-    height: $spacing-07;
+    block-size: $spacing-07;
+    inline-size: 100%;
   }
 
   .#{$prefix}--switcher__item:nth-child(1) {
-    margin-top: $spacing-05;
+    margin-block-start: $spacing-05;
   }
 
   .#{$prefix}--switcher__item--divider {
     display: block;
-    width: convert.to-rem(224px);
-    height: 1px;
     border: none;
     margin: $spacing-03 $spacing-05;
     background: $border-subtle;
+    block-size: 1px;
+    inline-size: convert.to-rem(224px);
   }
 
   .#{$prefix}--switcher__item-link {
     @include type-style('heading-compact-01');
 
     display: block;
-    height: $spacing-07;
     padding: convert.to-rem(6px) $spacing-05;
+    block-size: $spacing-07;
     color: $text-secondary;
     text-decoration: none;
 

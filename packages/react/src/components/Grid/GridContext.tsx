@@ -12,7 +12,7 @@ export type GridMode = 'flexbox' | 'css-grid';
 
 export interface GridSettingContext {
   /**
-   * The grid mode for the GridContext
+   * The gutter mode for the GridContext
    */
   mode: GridMode;
 
@@ -39,7 +39,7 @@ export interface GridSettingsProps {
   children?: React.ReactNode;
 
   /**
-   * Specify the grid mode for the GridContext
+   * Specify the gutter mode for the GridContext
    */
   mode: GridMode;
 
@@ -77,7 +77,7 @@ GridSettings.propTypes = {
   children: PropTypes.node,
 
   /**
-   * Specify the grid mode for the GridContext
+   * Specify the gutter mode for the GridContext
    */
   mode: PropTypes.oneOf(gridModes).isRequired,
 

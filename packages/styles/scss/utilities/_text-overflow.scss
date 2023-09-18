@@ -18,6 +18,6 @@
 
   // apply a width if width parameter exists
   @if ($width) {
-    width: $width;
+    inline-size: $width;
   }
 }

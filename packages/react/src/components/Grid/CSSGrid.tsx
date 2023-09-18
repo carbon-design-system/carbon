@@ -111,7 +111,7 @@ interface SubgridBaseProps {
   className?: string;
 
   /**
-   * Specify the grid mode for the subgrid
+   * Specify the gutter mode for the subgrid
    */
   mode?: SubgridMode;
 }
@@ -156,7 +156,7 @@ Subgrid.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify the grid mode for the subgrid
+   * Specify the gutter mode for the subgrid
    */
   mode: PropTypes.oneOf(['wide', 'narrow', 'condensed'] as SubgridMode[]),
 };

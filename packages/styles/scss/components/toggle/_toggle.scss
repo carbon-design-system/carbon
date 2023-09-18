@@ -29,8 +29,8 @@
     @include type-style('label-01');
 
     display: block;
-    margin-bottom: $spacing-05;
     color: $text-secondary;
+    margin-block-end: $spacing-05;
   }
 
   .#{$prefix}--toggle__button {
@@ -51,21 +51,21 @@
 
   .#{$prefix}--toggle__switch {
     position: relative;
-    width: convert.to-rem(48px);
-    height: convert.to-rem(24px);
     background-color: $toggle-off;
+    block-size: convert.to-rem(24px);
     border-radius: convert.to-rem(12px);
+    inline-size: convert.to-rem(48px);
     transition: background-color $duration-fast-01 motion(exit, productive);
 
     &::before {
       position: absolute;
-      top: convert.to-rem(3px);
-      left: convert.to-rem(3px);
-      width: convert.to-rem(18px);
-      height: convert.to-rem(18px);
       background-color: $icon-on-color;
+      block-size: convert.to-rem(18px);
       border-radius: 50%;
       content: '';
+      inline-size: convert.to-rem(18px);
+      inset-block-start: convert.to-rem(3px);
+      inset-inline-start: convert.to-rem(3px);
       transition: transform $duration-fast-01 motion(exit, productive);
 
       @media screen and (prefers-reduced-motion: reduce) {
@@ -97,12 +97,12 @@
   }
 
   .#{$prefix}--toggle__appearance--sm .#{$prefix}--toggle__switch {
-    width: convert.to-rem(32px);
-    height: convert.to-rem(16px);
+    block-size: convert.to-rem(16px);
+    inline-size: convert.to-rem(32px);
 
     &::before {
-      width: convert.to-rem(10px);
-      height: convert.to-rem(10px);
+      block-size: convert.to-rem(10px);
+      inline-size: convert.to-rem(10px);
     }
   }
 
@@ -113,11 +113,11 @@
 
   .#{$prefix}--toggle__check {
     position: absolute;
-    top: convert.to-rem(6px);
-    right: convert.to-rem(5px);
-    width: convert.to-rem(6px);
-    height: convert.to-rem(5px);
+    block-size: convert.to-rem(5px);
     fill: $support-success;
+    inline-size: convert.to-rem(6px);
+    inset-block-start: convert.to-rem(6px);
+    inset-inline-end: convert.to-rem(5px);
     visibility: hidden;
   }
 
@@ -162,16 +162,16 @@
     background-color: transparent;
 
     &::before {
-      top: convert.to-rem(2px);
-      left: convert.to-rem(2px);
       background-color: $text-primary;
+      inset-block-start: convert.to-rem(2px);
+      inset-inline-start: convert.to-rem(2px);
     }
   }
 
   .#{$prefix}--toggle--readonly .#{$prefix}--toggle__check {
-    top: convert.to-rem(5px);
-    right: convert.to-rem(4px);
     fill: $background;
+    inset-block-start: convert.to-rem(5px);
+    inset-inline-end: convert.to-rem(4px);
   }
 
   .#{$prefix}--toggle--readonly .#{$prefix}--toggle__text {
@@ -204,16 +204,29 @@
   .#{$prefix}--toggle--skeleton .#{$prefix}--toggle__skeleton-circle {
     @include circular-skeleton;
 
-    width: convert.to-rem(18px);
-    height: convert.to-rem(18px);
+    block-size: convert.to-rem(18px);
     border-radius: 50%;
+
+    inline-size: convert.to-rem(18px);
   }
 
   .#{$prefix}--toggle--skeleton .#{$prefix}--toggle__skeleton-rectangle {
     @include skeleton;
 
-    width: convert.to-rem(24px);
-    height: convert.to-rem(8px);
-    margin-left: convert.to-rem(8px);
+    block-size: convert.to-rem(8px);
+
+    inline-size: convert.to-rem(24px);
+    margin-inline-start: convert.to-rem(8px);
+  }
+
+  // RTL overrides
+  [dir='rtl'] .#{$prefix}--toggle__switch--checked::before {
+    transform: translateX(convert.to-rem(-24px));
+  }
+
+  [dir='rtl']
+    .#{$prefix}--toggle__appearance--sm
+    .#{$prefix}--toggle__switch--checked::before {
+    transform: translateX(convert.to-rem(-16px));
   }
 }

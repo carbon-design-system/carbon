@@ -71,20 +71,19 @@ test.describe('Dropdown @avt', () => {
     await expect(menu).not.toBeVisible();
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Enter');
+    // Should focus on selected item by default
+    await expect(
+      page.getByRole('option', {
+        name: 'Option 1',
+      })
+    ).toHaveClass(
+      'cds--list-box__menu-item cds--list-box__menu-item--active cds--list-box__menu-item--highlighted'
+    );
     // Navigation inside the menu
     await page.keyboard.press('ArrowDown');
     await expect(
       page.getByRole('option', {
-        name: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-      })
-    ).toHaveClass(
-      'cds--list-box__menu-item cds--list-box__menu-item--highlighted'
-    );
-    // move to second option
-    await page.keyboard.press('ArrowDown');
-    await expect(
-      page.getByRole('option', {
-        name: 'Option 1',
+        name: 'Option 2',
       })
     ).toHaveClass(
       'cds--list-box__menu-item cds--list-box__menu-item--highlighted'

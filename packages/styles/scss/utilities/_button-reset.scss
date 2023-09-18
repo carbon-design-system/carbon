@@ -23,7 +23,7 @@
   text-align: start;
 
   @if ($width == true) {
-    width: 100%;
+    inline-size: 100%;
   }
 
   &::-moz-focus-inner {

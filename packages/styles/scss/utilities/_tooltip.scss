@@ -21,10 +21,10 @@
 @mixin tooltip--caret {
   position: absolute;
   z-index: z('floating');
-  width: 0;
-  height: 0;
   border-style: solid;
+  block-size: 0;
   content: '';
+  inline-size: 0;
 }
 
 // Tooltip
@@ -36,33 +36,33 @@
   @include box-shadow;
 
   z-index: z('floating');
-  width: max-content;
-  min-width: convert.to-rem(24px);
-  max-width: convert.to-rem(208px);
-  height: auto;
   padding: if(
     $tooltip-type == 'definition',
     convert.to-rem(8px) convert.to-rem(16px),
     convert.to-rem(3px) convert.to-rem(16px)
   );
   background-color: $background-inverse;
+  block-size: auto;
   border-radius: convert.to-rem(2px);
   color: $text-inverse;
   font-weight: 400;
-  text-align: left;
+  inline-size: max-content;
+  max-inline-size: convert.to-rem(208px);
+  min-inline-size: convert.to-rem(24px);
+  text-align: start;
   transform: translateX(-50%);
   @include type.type-style('body-compact-01');
 
   // IE media query
   @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-    width: auto;
+    inline-size: auto;
   }
   // Edge 12-15 and Edge 16 feature queries
   @supports (-ms-accelerator: true) {
-    width: auto;
+    inline-size: auto;
   }
   @supports (-ms-ime-align: auto) {
-    width: auto;
+    inline-size: auto;
   }
 
   // Windows, Firefox HCM Fix
@@ -140,10 +140,10 @@
 
   // caret
   &::before {
-    width: 0;
-    height: 0;
     border-style: solid;
+    block-size: 0;
     content: '';
+    inline-size: 0;
   }
 
   .#{$prefix}--assistive-text,
@@ -251,28 +251,28 @@
     // clip-path: polygon(50% 100%, 0 0, 100% 0);
 
     @if ($position == 'top' or $position == 'bottom') {
-      left: 0;
-      width: 100%;
-      height: convert.to-rem(12px);
+      block-size: convert.to-rem(12px);
+      inline-size: 100%;
+      inset-inline-start: 0;
     }
 
     @if ($position == 'left' or $position == 'right') {
-      top: 0;
-      width: convert.to-rem(12px);
-      height: 100%;
+      block-size: 100%;
+      inline-size: convert.to-rem(12px);
+      inset-block-start: 0;
     }
 
     @if ($position == 'top') {
-      bottom: convert.to-rem(-12px);
+      inset-block-end: convert.to-rem(-12px);
     }
     @if ($position == 'right') {
-      left: convert.to-rem(-12px);
+      inset-inline-start: convert.to-rem(-12px);
     }
     @if ($position == 'bottom') {
-      top: convert.to-rem(-12px);
+      inset-block-start: convert.to-rem(-12px);
     }
     @if ($position == 'left') {
-      right: convert.to-rem(-12px);
+      inset-inline-end: convert.to-rem(-12px);
     }
   }
 
@@ -282,58 +282,58 @@
   .#{$prefix}--assistive-text,
   + .#{$prefix}--assistive-text {
     @if ($position == 'top') {
-      top: 0;
-      left: 50%;
+      inset-block-start: 0;
+      inset-inline-start: 50%;
     }
     @if ($position == 'right') {
-      top: 50%;
-      right: 0;
+      inset-block-start: 50%;
+      inset-inline-end: 0;
     }
     @if ($position == 'bottom') {
-      bottom: 0;
-      left: 50%;
+      inset-block-end: 0;
+      inset-inline-start: 50%;
     }
     @if ($position == 'left') {
-      top: 50%;
-      left: 0;
+      inset-block-start: 50%;
+      inset-inline-start: 0;
     }
   }
 
   &::before {
     @if ($position == 'top') {
-      top: -$caret-spacing;
       border-width: convert.to-rem(5px)
         convert.to-rem(4px)
         0
         convert.to-rem(4px);
       border-color: $background-inverse transparent transparent transparent;
+      inset-block-start: -$caret-spacing;
       transform: translate(-50%, -100%);
     }
     @if ($position == 'right') {
-      right: -$caret-spacing;
       border-width: convert.to-rem(4px)
         convert.to-rem(5px)
         convert.to-rem(4px)
         0;
       border-color: transparent $background-inverse transparent transparent;
+      inset-inline-end: -$caret-spacing;
       transform: translate(100%, -50%);
     }
     @if ($position == 'bottom') {
-      bottom: -$caret-spacing;
       border-width: 0
         convert.to-rem(4px)
         convert.to-rem(5px)
         convert.to-rem(4px);
       border-color: transparent transparent $background-inverse transparent;
+      inset-block-end: -$caret-spacing;
       transform: translate(-50%, 100%);
     }
     @if ($position == 'left') {
-      left: -$caret-spacing;
       border-width: convert.to-rem(4px)
         0
         convert.to-rem(4px)
         convert.to-rem(5px);
       border-color: transparent transparent transparent $background-inverse;
+      inset-inline-start: -$caret-spacing;
       transform: translate(-100%, -50%);
     }
   }
@@ -344,38 +344,36 @@
   .#{$prefix}--assistive-text,
   + .#{$prefix}--assistive-text {
     @if ($position == 'top') {
-      top: -$body-spacing;
+      inset-block-start: -$body-spacing;
       @if ($align == 'start') {
-        left: 0;
+        inset-inline-start: 0;
         transform: translate(0, -100%);
       } @else if ($align == 'end') {
-        right: 0;
-        left: auto;
+        inset-inline: auto 0;
         transform: translate(0, -100%);
       } @else {
-        left: 50%;
+        inset-inline-start: 50%;
         transform: translate(-50%, -100%);
       }
     }
     @if ($position == 'right') {
-      right: -$body-spacing;
+      inset-inline-end: -$body-spacing;
       transform: translate(100%, -50%);
     }
     @if ($position == 'bottom') {
-      bottom: -$body-spacing;
+      inset-block-end: -$body-spacing;
       @if ($align == 'start') {
-        left: 0;
+        inset-inline-start: 0;
         transform: translate(0, 100%);
       } @else if ($align == 'end') {
-        right: 0;
-        left: auto;
+        inset-inline: auto 0;
         transform: translate(0, 100%);
       } @else {
         transform: translate(-50%, 100%);
       }
     }
     @if ($position == 'left') {
-      left: -$body-spacing;
+      inset-inline-start: -$body-spacing;
       transform: translate(-100%, -50%);
     }
   }
@@ -385,7 +383,7 @@
     &.#{$prefix}--tooltip--a11y + .#{$prefix}--assistive-text {
       @if ($position == 'bottom') {
         // carryover from https://github.com/carbon-design-system/carbon/pull/3151/files#diff-93734be0784e9530b6d14a7b03b0d352R261-R265
-        bottom: -($body-spacing - convert.to-rem(1px));
+        inset-block-end: -($body-spacing - convert.to-rem(1px));
         @if ($align == 'start' or $align == 'end') {
           transform: translate(0, 100%);
         } @else {
