@@ -307,8 +307,20 @@
     }
   }
 
+  .#{$prefix}--file__state-container .#{$prefix}--file-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-02;
+    border: none;
+    background-color: transparent;
+    block-size: $spacing-05;
+    inline-size: $spacing-06;
+  }
+
   .#{$prefix}--file__state-container .#{$prefix}--file-complete {
     fill: $interactive;
+    inline-size: $spacing-06;
 
     &:focus {
       @include focus-outline('border');
