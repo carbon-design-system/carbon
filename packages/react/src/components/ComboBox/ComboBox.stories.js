@@ -174,11 +174,6 @@ Playground.argTypes = {
       disable: true,
     },
   },
-  onStateChange: {
-    table: {
-      disable: true,
-    },
-  },
   onToggleClick: {
     table: {
       disable: true,
