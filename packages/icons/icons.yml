@@ -2141,7 +2141,7 @@
     - 32
 - name: business-processes
   friendly_name: Business processes
-  aliases: 
+  aliases:
     - briefcase
     - business
     - process
@@ -2522,7 +2522,7 @@
     - 32
 - name: carbon-for-mobile
   friendly_name: Carbon for mobile
-  aliases: 
+  aliases:
     - carbon
     - IBM
     - IBM Carbon
@@ -9288,7 +9288,7 @@
     - 32
 - name: ibm--ai-on-z
   friendly_name: AI on Z
-  aliases: 
+  aliases:
     - infrastructure
     - optimization
     - optimize
@@ -21718,8 +21718,8 @@
     - machine learing
     - ML
 - name: watsonx
-  friendly_name: IBM® watsonx™ 
-  aliases: 
+  friendly_name: IBM® watsonx™
+  aliases:
     - data
     - AI
     - platform
@@ -21730,8 +21730,8 @@
   sizes:
     - 32
 - name: watsonx-ai
-  friendly_name: IBM® watsonx.ai™ 
-  aliases: 
+  friendly_name: IBM® watsonx.ai™
+  aliases:
     - data
     - AI
     - studio
@@ -21744,8 +21744,8 @@
   sizes:
     - 32
 - name: watsonx-data
-  friendly_name: IBM® watsonx.data™ 
-  aliases: 
+  friendly_name: IBM® watsonx.data™
+  aliases:
     - data
     - AI
     - open
@@ -21762,8 +21762,8 @@
   sizes:
     - 32
 - name: watsonx-governance
-  friendly_name: IBM® watsonx.governance™ 
-  aliases: 
+  friendly_name: IBM® watsonx.governance™
+  aliases:
     - data
     - AI
     - ethical AI

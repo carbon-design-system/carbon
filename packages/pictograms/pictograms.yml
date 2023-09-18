@@ -333,6 +333,8 @@
     - storage
     - historical
     - history
+    - workplace
+    - support
 - name: argentina--obelisk
   friendly_name: Argentina Obelisk
   aliases:
@@ -439,6 +441,7 @@
     - vehicle
     - travel
     - transportation
+    - workplace
 - name: availability
   friendly_name: Availability
   aliases:
@@ -450,6 +453,9 @@
     - bottle
     - nursing
     - baby formula
+    - workplace
+    - wellness
+    - community
 - name: back-up--and-restore
   friendly_name: Back-up and restore
   aliases:
@@ -465,6 +471,8 @@
     - computer case
     - case
     - travel
+    - workplace
+    - locker
 - name: badge
   friendly_name: Badge
   aliases:
@@ -588,6 +596,7 @@
     - bike
     - travel
     - transportation
+    - workplace
 - name: big-data
   friendly_name: Big data
   aliases:
@@ -605,6 +614,9 @@
     - blender
     - smoothie
     - protein shake
+    - workplace
+    - community
+    - food
 - name: blockchain
   friendly_name: Blockchain
   aliases:
@@ -647,6 +659,7 @@
     - sweep
     - clean
     - facilities
+    - workplace
 - name: budapest
   friendly_name: Budapest
   aliases:
@@ -702,6 +715,7 @@
   aliases:
     - building
     - structure
+    - workplace
 - name: bulldozer
   friendly_name: Bulldozer
   aliases:
@@ -716,6 +730,7 @@
     - bus
     - transportation
     - travel
+    - workplace
 - name: business--analytics
   friendly_name: Business analytics
   aliases:
@@ -757,6 +772,8 @@
     - beverage
     - hospitality
     - food
+    - workplace
+    - community
 - name: cairo--giza-plateau
   friendly_name: Cairo Giza Plateau
   aliases:
@@ -1134,8 +1151,9 @@
   aliases:
     - cherries
     - food
-    - fruit
+    - fruits
     - snack
+    - workplace
 - name: chicago
   friendly_name: Chicago
   aliases:
@@ -1504,6 +1522,8 @@
     - garment hanger
     - clothes hanger
     - retail
+    - workplace
+    - changing
 - name: cobol--language
   friendly_name: COBOL
   aliases:
@@ -1531,12 +1551,15 @@
   aliases:
     - collaborate with teams
     - cloud
+    - workplace
+    - collaborate
 - name: collaboration
   friendly_name: Collaboration
   aliases:
     - collaboration
     - security
     - teamwork
+    - collaborate
 - name: college
   friendly_name: College
   aliases:
@@ -1580,6 +1603,7 @@
     - recycle
     - environment
     - process
+    - workplace
 - name: compute
   friendly_name: Compute
   aliases:
@@ -1673,6 +1697,8 @@
     - construction worker
     - hardhat
     - safety
+    - workplace
+    - helmet
 - name: construction-worker--mask
   friendly_name: Construction worker mask
   aliases:
@@ -1779,6 +1805,9 @@
     - cookie
     - cookies
     - cookies tracking
+    - workplace
+    - snack
+    - breadcrumb
 - name: copenhagen--planetarium
   friendly_name: Copenhagen planetarium
   aliases:
@@ -1826,6 +1855,9 @@
     - cupcake
     - cake
     - creative
+    - food
+    - snack
+    - workplace
 - name: curve--cubic
   friendly_name: Cubic curve
   aliases:
@@ -1917,10 +1949,11 @@
     - storage
     - data storage
 - name: data--centers
-  friendly_name: Data centers
+  friendly_name: Data center
   aliases:
-    - data centers
+    - data center
     - cloud
+    - workplace
 - name: data--insights
   friendly_name: Data insights
   aliases:
@@ -2057,6 +2090,7 @@
   aliases:
     - delivery
     - delivered
+    - workplace
 - name: delivery--truck
   friendly_name: Delivery truck
   aliases:
@@ -2064,6 +2098,7 @@
     - truck
     - delivery
     - manufacturing
+    - workplace
 - name: deploying-containers
   friendly_name: Deploying containers
   aliases:
@@ -2194,6 +2229,10 @@
     - silverware
     - knife
     - fork
+    - workplace
+    - community
+    - food
+    - cafeteria
 - name: directlink
   friendly_name: Directlink
   aliases:
@@ -2402,6 +2441,7 @@
     - power cord
     - power source
     - power
+    - workplace
 - name: electric--car
   friendly_name: Electric car
   aliases:
@@ -2412,6 +2452,7 @@
     - vehicle
     - travel
     - transportation
+    - workplace
 - name: electric--charge
   friendly_name: Electric charge
   aliases:
@@ -2421,6 +2462,7 @@
     - charger
     - charging station
     - charging
+    - workplace
 - name: elements-of-the-cloud
   friendly_name: Elements of the cloud
   aliases:
@@ -2430,6 +2472,7 @@
   friendly_name: Elevator
   aliases:
     - elevator
+    - workplace
 - name: embed
   friendly_name: Embed
   aliases:
@@ -2439,6 +2482,7 @@
   aliases:
     - emergency exit
     - emergency
+    - workplace
 - name: employee--insights
   friendly_name: Employee insights
   aliases:
@@ -2505,6 +2549,10 @@
     - email
     - stationery
     - message
+    - workplace
+    - communication
+    - communicate
+    - support
 - name: erlenmeyer--flask
   friendly_name: Erlenmeyer flask
   aliases:
@@ -2518,11 +2566,13 @@
   aliases:
     - escalator down
     - escalator
+    - workplace
 - name: escalator--up
   friendly_name: Escalator up
   aliases:
     - escalator up
     - escalator
+    - workplace
 - name: esg-reporting--01
   friendly_name: ESG reporting 01
   aliases:
@@ -2757,6 +2807,7 @@
     - water
     - spigot
     - plumbing
+    - workplace
 - name: fault-tolerant
   friendly_name: Fault tolerant
   aliases:
@@ -2782,6 +2833,8 @@
     - focus
     - survey
     - input
+    - workplace
+    - individual
 - name: file--backup
   friendly_name: File backup
   aliases:
@@ -2864,12 +2917,14 @@
     - fire alarm
     - fire
     - alarm
+    - workplace
 - name: fire--extinguisher
   friendly_name: Fire extinguisher
   aliases:
     - fire extinguisher
     - fire
     - extinguisher
+    - workplace
 - name: firecracker
   friendly_name: Firecracker
   aliases:
@@ -2897,6 +2952,9 @@
     - aid
     - medical
     - healthcare
+    - workplace
+    - community
+    - wellness
 - name: flag
   friendly_name: Flag
   aliases:
@@ -2963,6 +3021,8 @@
   friendly_name: Focus on code
   aliases:
     - alias
+    - workplace
+    - individual
 - name: fog
   friendly_name: Fog
   aliases:
@@ -3274,6 +3334,8 @@
     - group
     - people
     - team
+    - workplace
+    - individual
 - name: growth
   friendly_name: Growth
   aliases:
@@ -3332,6 +3394,7 @@
     - disabled user
     - people
     - wheelchair
+    - workplace
 - name: handicap--active
   friendly_name: Disabled user active
   aliases:
@@ -3339,6 +3402,7 @@
     - people
     - disabled user
     - wheelchair
+    - workplace
 - name: handshake
   friendly_name: Handshake
   aliases:
@@ -3368,6 +3432,7 @@
     - ice cream
     - food
     - lifestyle
+    - workplace
 - name: hazy
   friendly_name: Hazy
   aliases:
@@ -3382,6 +3447,8 @@
     - audio
     - listen
     - podcast
+    - hearing protection
+    - workplace
 - name: healthcare
   friendly_name: Healthcare
   aliases:
@@ -3398,6 +3465,9 @@
   aliases:
     - heart health
     - heart
+    - workplace
+    - community
+    - wellness
 - name: heat--map--01
   friendly_name: Heat map 01
   aliases:
@@ -3699,6 +3769,7 @@
     - employee
     - personnel
     - identity
+    - workplace
 - name: idea
   friendly_name: Idea
   aliases:
@@ -3881,6 +3952,9 @@
     - citrus
     - drink
     - fruit
+    - workplace
+    - community
+    - food
 - name: justice
   friendly_name: Justice
   aliases:
@@ -4096,6 +4170,7 @@
     - suitcase
     - travel
     - carry-on
+    - workplace
 - name: lungs
   friendly_name: Lungs
   aliases:
@@ -4380,6 +4455,7 @@
     - stream
     - record
     - podcast
+    - workplace
 - name: microscope
   friendly_name: Microscope
   aliases:
@@ -4457,6 +4533,7 @@
     - device interaction
     - device
     - phone
+    - workplace
 - name: modernize
   friendly_name: Modernize
   aliases:
@@ -4706,6 +4783,7 @@
   aliases:
     - no smoking
     - smoke-free area
+    - workplace
 - name: notifications
   friendly_name: Notifications
   aliases:
@@ -4777,6 +4855,7 @@
     - office
     - building structure
     - structure
+    - workplace
 - name: oil--pump
   friendly_name: Oil pump
   aliases:
@@ -4994,12 +5073,16 @@
     - person 03
     - people
     - human
+    - workplace
+    - restroom
 - name: person--04
   friendly_name: Person 04
   aliases:
     - person 04
     - people
     - human
+    - workplace
+    - restroom
 - name: person--05
   friendly_name: Person 05
   aliases:
@@ -5018,6 +5101,9 @@
     - person 07
     - people
     - human
+    - workplace
+    - restroom
+    - all gender
 - name: person--08
   friendly_name: Person 08
   aliases:
@@ -5207,6 +5293,8 @@
     - speaker
     - audience
     - presenter
+    - workplace
+    - collaborate
 - name: presenter
   friendly_name: Presenter
   aliases:
@@ -5229,6 +5317,8 @@
     - electronics
     - office equipment
     - office
+    - workplace
+    - support
 - name: private--network--01
   friendly_name: Private network 01
   aliases:
@@ -5455,6 +5545,7 @@
     - industry
     - environment
     - process
+    - workplace
 - name: recycle--bin
   friendly_name: Recycle bin
   aliases:
@@ -5463,6 +5554,7 @@
     - industry
     - environment
     - process
+    - workplace
 - name: red-hat--applications
   friendly_name: Red Hat applications
   aliases:
@@ -5950,6 +6042,7 @@
     - data
     - storage
     - backup
+    - workplace
 - name: serverless
   friendly_name: Serverless
   aliases:
@@ -6026,6 +6119,8 @@
     - bathing
     - water
     - plumbing
+    - workplace
+    - support
 - name: singapore
   friendly_name: Singapore
   aliases:
@@ -6118,6 +6213,7 @@
     - soft ice cream
     - ice cream
     - food
+    - workplace
 - name: softlayer--enablement
   friendly_name: Softlayer enablement
   aliases:
@@ -6186,6 +6282,9 @@
     - active
     - running
     - runner
+    - workplace
+    - community
+    - fitness
 - name: sprout
   friendly_name: Sprout
   aliases:
@@ -6206,12 +6305,14 @@
   aliases:
     - stairs
     - stairwell
+    - workplace
 - name: stairs--down
   friendly_name: Stairs down
   aliases:
     - stairs
     - stairs down
     - stairwell
+    - workplace
 - name: stairs--plan--view
   friendly_name: Stairs plan view
   aliases:
@@ -6220,12 +6321,14 @@
     - plan
     - building structure
     - structure
+    - workplace
 - name: stairs--up
   friendly_name: Stairs up
   aliases:
     - stairs
     - stairs up
     - stairwell
+    - workplace
 - name: start-for-free
   friendly_name: Start for free
   aliases:
@@ -6244,6 +6347,10 @@
     - gym
     - healthcare
     - exercise
+    - workplace
+    - community
+    - fitness
+    - bike
 - name: steel
   friendly_name: Steel
   aliases:
@@ -6461,6 +6568,8 @@
     - cycle
     - circle
     - arrow
+    - workplace
+    - compost
 - name: sustainability--strategy
   friendly_name: Sustainability strategy
   aliases:
@@ -6665,12 +6774,16 @@
     - web doctor visit
     - hospital visit
     - checkup
+    - workplace
+    - community
+    - wellness
 - name: telephone
   friendly_name: Telephone
   aliases:
     - telephone
     - electronics
     - communication
+    - workplace
 - name: television
   friendly_name: Television
   aliases:
@@ -6915,6 +7028,9 @@
   aliases:
     - training
     - Cloud
+    - workplace
+    - community
+    - learning
 - name: transactional--blockchain
   friendly_name: Transactional blockchain
   aliases:
@@ -6964,6 +7080,7 @@
     - rubbish
     - garbage
     - dustbin
+    - workplace
 - name: tree
   friendly_name: Tree
   aliases:
@@ -7191,6 +7308,7 @@
     - covid
     - covid user
     - mask
+    - workplace
 - name: user--profile
   friendly_name: User profile
   aliases:
@@ -7463,6 +7581,8 @@
     - wedding cake
     - cake
     - creative
+    - workplace
+    - food
 - name: wheat
   friendly_name: Wheat
   aliases:
@@ -7576,6 +7696,9 @@
     - exercise
     - health
     - active
+    - workplace
+    - community
+    - wellness
 - name: yoga--02
   friendly_name: Yoga 02
   aliases:
@@ -7584,6 +7707,9 @@
     - exercise
     - health
     - active
+    - workplace
+    - community 
+    - wellness
 - name: yoga--03
   friendly_name: Yoga 03
   aliases:
@@ -7592,6 +7718,9 @@
     - exercise
     - health
     - active
+    - workplace
+    - community
+    - fitness
 - name: yoga--04
   friendly_name: Yoga 04
   aliases:

@@ -1,11 +1,11 @@
 .form-wrapper {
-  padding-left: 10rem;
-  padding-top: 3rem;
+  padding-block-start: 3rem;
+  padding-inline-start: 10rem;
 }
 
 .notification {
-  margin-top: 7rem;
-  margin-left: 10rem;
+  margin-block-start: 7rem;
+  margin-inline-start: 10rem;
 }
 
 .notification .cds--actionable-notification__action-button {

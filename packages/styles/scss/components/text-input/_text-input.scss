@@ -36,14 +36,15 @@
     @include type-style('body-compact-01');
     @include focus-outline('reset');
 
-    width: 100%;
-    height: layout.size('height');
     padding: 0 layout.density('padding-inline');
     border: none;
-    border-bottom: 1px solid $border-strong;
     background-color: $field;
+    block-size: layout.size('height');
+    border-block-end: 1px solid $border-strong;
     color: $text-primary;
     font-family: inherit;
+
+    inline-size: 100%;
     transition: background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
 
@@ -58,15 +59,15 @@
   }
 
   .#{$prefix}--password-input {
-    padding-right: $spacing-08;
+    padding-inline-end: $spacing-08;
   }
 
   .#{$prefix}--text-input--sm.#{$prefix}--password-input {
-    padding-right: $spacing-07;
+    padding-inline-end: $spacing-07;
   }
 
   .#{$prefix}--text-input--lg.#{$prefix}--password-input {
-    padding-right: $spacing-09;
+    padding-inline-end: $spacing-09;
   }
 
   .#{$prefix}--text-input::placeholder {
@@ -84,15 +85,15 @@
   .#{$prefix}--text-input__field-wrapper {
     position: relative;
     display: flex;
-    width: 100%;
+    inline-size: 100%;
   }
 
   .#{$prefix}--text-input__invalid-icon {
     position: absolute;
-    // top/transform used to center invalid icon in IE11
-    top: 50%;
-    right: $spacing-05;
     fill: $support-error;
+    // top/transform used to center invalid icon in IE11
+    inset-block-start: 50%;
+    inset-inline-end: $spacing-05;
     transform: translateY(-50%);
   }
 
@@ -115,28 +116,28 @@
     @include focus-outline('reset');
 
     position: absolute;
-    right: 0;
     display: flex;
-    width: convert.to-rem(40px);
-    height: 100%;
-    min-height: auto;
     align-items: center;
     justify-content: center;
     padding: 0;
     border: 0;
     background: none;
+    block-size: 100%;
     cursor: pointer;
+    inline-size: convert.to-rem(40px);
+    inset-inline-end: 0;
+    min-block-size: auto;
     transition: outline $duration-fast-01 motion(standard, productive);
   }
 
   .#{$prefix}--text-input--sm
     + .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
-    width: convert.to-rem(32px);
+    inline-size: convert.to-rem(32px);
   }
 
   .#{$prefix}--text-input--lg
     + .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
-    width: convert.to-rem(48px);
+    inline-size: convert.to-rem(48px);
   }
 
   .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
@@ -165,20 +166,20 @@
 
   .#{$prefix}--text-input--invalid,
   .#{$prefix}--text-input--warning {
-    padding-right: $spacing-08;
+    padding-inline-end: $spacing-08;
   }
 
   .#{$prefix}--text-input--invalid.#{$prefix}--password-input {
-    padding-right: convert.to-rem(64px);
+    padding-inline-end: convert.to-rem(64px);
   }
 
   .#{$prefix}--text-input--invalid
     + .#{$prefix}--text-input--password__visibility__toggle {
-    right: $spacing-05;
+    inset-inline-end: $spacing-05;
   }
 
   .#{$prefix}--password-input-wrapper .#{$prefix}--text-input__invalid-icon {
-    right: $spacing-08;
+    inset-inline-end: $spacing-08;
   }
 
   .#{$prefix}--text-input:disabled
@@ -199,12 +200,12 @@
   .#{$prefix}--text-input__counter-alert {
     position: absolute;
     overflow: hidden;
-    width: 1px;
-    height: 1px;
     padding: 0;
     border: 0;
     margin: -1px;
+    block-size: 1px;
     clip: rect(0, 0, 0, 0);
+    inline-size: 1px;
   }
 
   //-----------------------------
@@ -213,8 +214,9 @@
   .#{$prefix}--text-input:disabled {
     @include focus-outline('reset');
 
-    border-bottom: 1px solid transparent;
     background-color: $field;
+
+    border-block-end: 1px solid transparent;
     color: $text-disabled;
     cursor: not-allowed;
     // Needed to fix disabled text in Safari #6673
@@ -240,7 +242,7 @@
     box-shadow: none;
 
     .#{$prefix}--text-input--password__visibility__toggle {
-      right: $spacing-08;
+      inset-inline-end: $spacing-08;
     }
   }
 
@@ -266,12 +268,12 @@
   .#{$prefix}--form--fluid .#{$prefix}--label {
     position: absolute;
     z-index: 1;
-    top: convert.to-rem(13px);
-    left: $spacing-05;
     display: flex;
-    height: convert.to-rem(16px);
     align-items: center;
     margin: 0;
+    block-size: convert.to-rem(16px);
+    inset-block-start: convert.to-rem(13px);
+    inset-inline-start: $spacing-05;
   }
 
   .#{$prefix}--form--fluid .#{$prefix}--form__helper-text {
@@ -279,8 +281,8 @@
   }
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input {
-    min-height: convert.to-rem(64px);
     padding: convert.to-rem(32px) $spacing-05 convert.to-rem(13px);
+    min-block-size: convert.to-rem(64px);
   }
 
   .#{$prefix}--text-input__divider,
@@ -290,7 +292,7 @@
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input--invalid,
   .#{$prefix}--form--fluid .#{$prefix}--text-input--warning {
-    border-bottom: none;
+    border-block-end: none;
   }
 
   .#{$prefix}--form--fluid
@@ -302,12 +304,12 @@
     display: block;
     border-style: solid;
     border-color: $border-subtle;
-    border-bottom: none;
     margin: 0 1rem;
+    border-block-end: none;
   }
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input__invalid-icon {
-    top: convert.to-rem(80px);
+    inset-block-start: convert.to-rem(80px);
   }
 
   .#{$prefix}--form--fluid
@@ -320,7 +322,7 @@
   }
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper--warning {
-    border-bottom: 1px solid $border-strong;
+    border-block-end: 1px solid $border-strong;
   }
 
   .#{$prefix}--form--fluid
@@ -359,31 +361,31 @@
   }
 
   .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline--sm {
-    margin-top: convert.to-rem(9px);
+    margin-block-start: convert.to-rem(9px);
   }
 
   .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline--lg {
-    margin-top: convert.to-rem(17px);
+    margin-block-start: convert.to-rem(17px);
   }
 
   .#{$prefix}--text-input__label-helper-wrapper {
-    max-width: convert.to-rem(128px);
     flex: 2;
     flex-direction: column;
-    margin-right: convert.to-rem(24px);
+    margin-inline-end: convert.to-rem(24px);
+    max-inline-size: convert.to-rem(128px);
     overflow-wrap: break-word;
   }
 
   .#{$prefix}--text-input-wrapper .#{$prefix}--form__helper-text--inline {
-    margin-top: convert.to-rem(2px);
+    margin-block-start: convert.to-rem(2px);
   }
 
   .#{$prefix}--text-input__field-outer-wrapper {
     display: flex;
-    width: 100%;
     flex: 1 1 auto;
     flex-direction: column;
     align-items: flex-start;
+    inline-size: 100%;
   }
 
   .#{$prefix}--text-input__field-outer-wrapper--inline {
@@ -394,8 +396,8 @@
   .#{$prefix}--text-input-wrapper--inline .cds--form-requirement {
     display: block;
     overflow: visible;
-    max-height: convert.to-rem(200px);
     font-weight: 400;
+    max-block-size: convert.to-rem(200px);
   }
 
   .#{$prefix}--text-input-wrapper--inline--invalid .cds--form-requirement {
@@ -408,8 +410,8 @@
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper--readonly,
   .#{$prefix}--text-input-wrapper--readonly .#{$prefix}--text-input {
-    border-bottom-color: $border-subtle;
     background: transparent;
+    border-block-end-color: $border-subtle;
   }
 
   // Windows HCM fix
@@ -422,8 +424,8 @@
 
   .#{$prefix}--text-input__label-wrapper {
     display: flex;
-    width: 100%;
     justify-content: space-between;
+    inline-size: 100%;
 
     .#{$prefix}--text-input__label-counter {
       align-self: end;

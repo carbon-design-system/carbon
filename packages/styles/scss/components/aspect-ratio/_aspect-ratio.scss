@@ -45,11 +45,14 @@ $aspect-ratios: (
   }
 
   .#{$prefix}--aspect-ratio::before {
-    width: 1px;
-    height: 0;
-    margin-left: -1px;
+    block-size: 0;
     content: '';
+    // float: inline-start is not supported yet
+    // https://caniuse.com/mdn-css_properties_float_flow_relative_values
+    // stylelint-disable-next-line csstools/use-logical
     float: left;
+    inline-size: 1px;
+    margin-inline-start: -1px;
   }
 
   .#{$prefix}--aspect-ratio::after {
@@ -63,7 +66,7 @@ $aspect-ratios: (
     $height: list.nth($aspect-ratio, 2);
 
     .#{$prefix}--aspect-ratio--#{$width}x#{$height}::before {
-      padding-top: math.percentage(math.div($height, $width));
+      padding-block-start: math.percentage(math.div($height, $width));
     }
   }
 }
