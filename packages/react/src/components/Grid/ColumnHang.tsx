@@ -37,7 +37,7 @@ export interface ColumnHangComponent {
 
 /**
  * Helper component for rendering content that hangs on the column. Useful when
- * trying to align content across different grid modes
+ * trying to align content across different gutter modes
  */
 function ColumnHang<T extends React.ElementType>({
   as: BaseComponent = 'div' as T,

@@ -61,11 +61,11 @@
     padding: $item-padding;
 
     &:first-child {
-      padding-left: 0;
+      padding-inline-start: 0;
     }
 
     &:last-child {
-      padding-right: 0;
+      padding-inline-end: 0;
     }
   }
 
@@ -75,12 +75,12 @@
 
     position: relative;
     display: block;
-    min-width: $button-min-width;
     padding: $button-padding;
     border-radius: 0;
     color: $text-primary;
     font-weight: $font-weight;
     line-height: 1;
+    min-inline-size: $button-min-width;
     outline: 0;
     text-align: center;
     text-decoration: none;
@@ -121,10 +121,10 @@
 
   .#{$prefix}--pagination-nav__page--direction {
     display: flex;
-    width: $button-direction-size;
-    height: $button-direction-size;
     align-items: center;
     justify-content: center;
+    block-size: $button-direction-size;
+    inline-size: $button-direction-size;
     line-height: 0;
   }
 
@@ -133,8 +133,8 @@
   }
 
   .#{$prefix}--pagination-nav__page--select {
-    max-height: $button-min-width;
     appearance: none;
+    max-block-size: $button-min-width;
     text-indent: calc(50% - 4.5px);
     // Override some Firefox user-agent styles
     @-moz-document url-prefix() {
@@ -144,9 +144,9 @@
 
   .#{$prefix}--pagination-nav__select-icon-wrapper {
     position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    block-size: 100%;
+    inline-size: 100%;
+    inset-block-start: 0;
     pointer-events: none;
 
     @include pseudo-underline();
@@ -160,12 +160,17 @@
 
   .#{$prefix}--pagination-nav__select-icon {
     position: absolute;
-    top: calc(50% - #{$select-icon-top-position * 0.5});
-    left: calc(50% - #{$select-icon-top-position * 0.5});
+    inset-block-start: calc(50% - #{$select-icon-top-position * 0.5});
+    inset-inline-start: calc(50% - #{$select-icon-top-position * 0.5});
     pointer-events: none;
   }
 
   .#{$prefix}--pagination-nav__accessibility-label {
     @include visually-hidden;
+  }
+
+  // RTL overrides
+  [dir='rtl'] .#{$prefix}--pagination-nav__list-item svg {
+    transform: rotate(0.5turn);
   }
 }

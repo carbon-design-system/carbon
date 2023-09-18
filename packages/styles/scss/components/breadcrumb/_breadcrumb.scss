@@ -34,7 +34,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    margin-right: $spacing-03;
+    margin-inline-end: $spacing-03;
   }
 
   .#{$prefix}--breadcrumb-item .#{$prefix}--link:visited {
@@ -46,9 +46,9 @@
   }
 
   .#{$prefix}--breadcrumb-item::after {
-    margin-left: $spacing-03;
     color: $text-primary;
     content: '/';
+    margin-inline-start: $spacing-03;
   }
 
   .#{$prefix}--breadcrumb--no-trailing-slash
@@ -58,7 +58,7 @@
 
   .#{$prefix}--breadcrumb-item:last-child,
   .#{$prefix}--breadcrumb-item:last-child::after {
-    margin-right: 0;
+    margin-inline-end: 0;
   }
 
   .#{$prefix}--breadcrumb .#{$prefix}--link {
@@ -79,8 +79,8 @@
   // Overflow Menu overrides
   .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu {
     position: relative;
-    width: convert.to-rem(20px);
-    height: convert.to-rem(18px);
+    block-size: convert.to-rem(18px);
+    inline-size: convert.to-rem(20px);
 
     &:focus {
       outline: 1px solid $focus;
@@ -93,11 +93,11 @@
     // Used to mimic link underline
     &::after {
       position: absolute;
-      bottom: 2px;
-      width: convert.to-rem(12px);
-      height: 1px;
       background: $link-primary-hover;
+      block-size: 1px;
       content: '';
+      inline-size: convert.to-rem(12px);
+      inset-block-end: 2px;
       opacity: 0;
       transition: opacity $duration-fast-01 motion(standard, productive);
 
@@ -135,29 +135,35 @@
 
   $caret-size: convert.to-rem(7px);
   .#{$prefix}--breadcrumb-menu-options.#{$prefix}--overflow-menu-options::after {
-    top: -$caret-size;
-    left: $caret-size * 2;
-    width: 0;
-    height: 0;
-    border-right: $caret-size solid transparent;
-    border-bottom: $caret-size solid $field;
-    border-left: $caret-size solid transparent;
     margin: 0 auto;
     background: transparent;
+    block-size: 0;
+    border-block-end: $caret-size solid $field;
+    border-inline-end: $caret-size solid transparent;
+    border-inline-start: $caret-size solid transparent;
+    inline-size: 0;
+    inset-block-start: -$caret-size;
+    inset-inline-start: $caret-size * 2;
+  }
+
+  [dir='rtl']
+    .#{$prefix}--breadcrumb-menu-options.#{$prefix}--overflow-menu-options::after {
+    inset-inline-end: $caret-size * 2;
+    inset-inline-start: initial;
   }
 
   // Skeleton State
   .#{$prefix}--breadcrumb.#{$prefix}--skeleton .#{$prefix}--link {
     @include skeleton;
 
-    width: convert.to-rem(100px);
-    height: 1rem;
+    block-size: 1rem;
+    inline-size: convert.to-rem(100px);
   }
 
   .#{$prefix}--breadcrumb
     .#{$prefix}--overflow-menu.#{$prefix}--btn--icon-only {
-    min-height: 1.125rem;
-    padding-right: 0;
-    padding-left: 0;
+    min-block-size: 1.125rem;
+    padding-inline-end: 0;
+    padding-inline-start: 0;
   }
 }
