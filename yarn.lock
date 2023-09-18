@@ -2342,7 +2342,7 @@ __metadata:
     lodash.clonedeep: ^4.5.0
     lodash.merge: ^4.6.2
     memfs: ^4.0.0
-    nanoid: ^3.1.30
+    nanoid: ^5.0.0
     npm-which: ^3.0.1
     rimraf: ^5.0.0
     semver: ^7.3.5
@@ -22848,6 +22848,15 @@ __metadata:
   bin:
     nanoid: bin/nanoid.cjs
   checksum: 7d0eda657002738aa5206107bd0580aead6c95c460ef1bdd0b1a87a9c7ae6277ac2e9b945306aaa5b32c6dcb7feaf462d0f552e7f8b5718abfc6ead5c94a71b3
+  languageName: node
+  linkType: hard
+
+"nanoid@npm:^5.0.0":
+  version: 5.0.1
+  resolution: "nanoid@npm:5.0.1"
+  bin:
+    nanoid: bin/nanoid.js
+  checksum: fb5a57ec0563f12f101129b2f11fe50505e5f1219760c43e6ae30fc0a0d2aa269985f6d07ddea15e3bd4b24751c9ef14fa8117cbc80d410726429e2b37a4b13f
   languageName: node
   linkType: hard
 
