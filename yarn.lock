@@ -1937,12 +1937,12 @@ __metadata:
   dependencies:
     "@carbon/cli": ^11.14.0
     "@carbon/colors": ^11.19.0
-    "@carbon/grid": ^11.19.0
-    "@carbon/icons": ^11.26.0
+    "@carbon/grid": ^11.20.0
+    "@carbon/icons": ^11.27.0
     "@carbon/layout": ^11.19.0
     "@carbon/motion": ^11.15.0
-    "@carbon/themes": ^11.24.0
-    "@carbon/type": ^11.23.0
+    "@carbon/themes": ^11.25.0
+    "@carbon/type": ^11.24.0
     fs-extra: ^11.0.0
     klaw-sync: ^6.0.0
     replace-in-file: ^7.0.0
@@ -1978,7 +1978,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/grid@^11.19.0, @carbon/grid@workspace:packages/grid":
+"@carbon/grid@^11.20.0, @carbon/grid@workspace:packages/grid":
   version: 0.0.0-use.local
   resolution: "@carbon/grid@workspace:packages/grid"
   dependencies:
@@ -2032,13 +2032,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/icons-react@^11.26.0, @carbon/icons-react@workspace:packages/icons-react":
+"@carbon/icons-react@^11.27.0, @carbon/icons-react@workspace:packages/icons-react":
   version: 0.0.0-use.local
   resolution: "@carbon/icons-react@workspace:packages/icons-react"
   dependencies:
     "@carbon/icon-build-helpers": ^1.18.0
     "@carbon/icon-helpers": ^10.44.0
-    "@carbon/icons": ^11.26.0
+    "@carbon/icons": ^11.27.0
     "@carbon/telemetry": 0.1.0
     prop-types: ^15.7.2
     rimraf: ^5.0.0
@@ -2066,7 +2066,7 @@ __metadata:
   dependencies:
     "@carbon/cli-reporter": ^10.7.0
     "@carbon/icon-helpers": ^10.44.0
-    "@carbon/icons": ^11.26.0
+    "@carbon/icons": ^11.27.0
     fs-extra: ^11.0.0
     prettier: ^2.8.8
     rimraf: ^5.0.0
@@ -2075,7 +2075,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/icons@^11.26.0, @carbon/icons@workspace:packages/icons":
+"@carbon/icons@^11.27.0, @carbon/icons@workspace:packages/icons":
   version: 0.0.0-use.local
   resolution: "@carbon/icons@workspace:packages/icons"
   dependencies:
@@ -2120,7 +2120,7 @@ __metadata:
   dependencies:
     "@carbon/icon-build-helpers": ^1.18.0
     "@carbon/icon-helpers": ^10.44.0
-    "@carbon/pictograms": ^12.22.0
+    "@carbon/pictograms": ^12.23.0
     "@carbon/telemetry": 0.1.0
     prop-types: ^15.7.2
   peerDependencies:
@@ -2128,7 +2128,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/pictograms@^12.22.0, @carbon/pictograms@workspace:packages/pictograms":
+"@carbon/pictograms@^12.23.0, @carbon/pictograms@workspace:packages/pictograms":
   version: 0.0.0-use.local
   resolution: "@carbon/pictograms@workspace:packages/pictograms"
   dependencies:
@@ -2137,7 +2137,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/react@^1.37.0, @carbon/react@workspace:packages/react":
+"@carbon/react@^1.38.0, @carbon/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@carbon/react@workspace:packages/react"
   dependencies:
@@ -2151,12 +2151,12 @@ __metadata:
     "@babel/preset-typescript": ^7.21.5
     "@babel/runtime": ^7.18.3
     "@carbon/feature-flags": ^0.16.0
-    "@carbon/icons-react": ^11.26.0
+    "@carbon/icons-react": ^11.27.0
     "@carbon/layout": ^11.19.0
-    "@carbon/styles": ^1.37.0
+    "@carbon/styles": ^1.38.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.30.0
-    "@carbon/themes": ^11.24.0
+    "@carbon/themes": ^11.25.0
     "@rollup/plugin-babel": ^6.0.0
     "@rollup/plugin-commonjs": ^25.0.0
     "@rollup/plugin-node-resolve": ^15.0.0
@@ -2207,7 +2207,6 @@ __metadata:
     rimraf: ^5.0.0
     rollup: ^2.79.1
     rollup-plugin-strip-banner: ^3.0.0
-    rtlcss: ^4.0.0
     sass: ^1.51.0
     sass-loader: ^13.0.0
     storybook: ^7.1.0
@@ -2235,18 +2234,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@^1.37.0, @carbon/styles@workspace:packages/styles":
+"@carbon/styles@^1.38.0, @carbon/styles@workspace:packages/styles":
   version: 0.0.0-use.local
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
     "@carbon/colors": ^11.19.0
     "@carbon/feature-flags": ^0.16.0
-    "@carbon/grid": ^11.19.0
+    "@carbon/grid": ^11.20.0
     "@carbon/layout": ^11.19.0
     "@carbon/motion": ^11.15.0
     "@carbon/test-utils": ^10.30.0
-    "@carbon/themes": ^11.24.0
-    "@carbon/type": ^11.23.0
+    "@carbon/themes": ^11.25.0
+    "@carbon/type": ^11.24.0
     "@ibm/plex": 6.0.0-next.6
     autoprefixer: ^10.4.7
     browserslist-config-carbon: ^11.2.0
@@ -2289,7 +2288,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/themes@^11.24.0, @carbon/themes@workspace:packages/themes":
+"@carbon/themes@^11.25.0, @carbon/themes@workspace:packages/themes":
   version: 0.0.0-use.local
   resolution: "@carbon/themes@workspace:packages/themes"
   dependencies:
@@ -2301,7 +2300,7 @@ __metadata:
     "@carbon/layout": ^11.19.0
     "@carbon/scss-generator": ^10.18.0
     "@carbon/test-utils": ^10.30.0
-    "@carbon/type": ^11.23.0
+    "@carbon/type": ^11.24.0
     change-case: ^4.1.1
     color: ^4.0.0
     core-js: ^3.16.0
@@ -2311,12 +2310,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/type@^11.23.0, @carbon/type@workspace:packages/type":
+"@carbon/type@^11.24.0, @carbon/type@workspace:packages/type":
   version: 0.0.0-use.local
   resolution: "@carbon/type@workspace:packages/type"
   dependencies:
     "@carbon/cli": ^11.14.0
-    "@carbon/grid": ^11.19.0
+    "@carbon/grid": ^11.20.0
     "@carbon/layout": ^11.19.0
     "@carbon/test-utils": ^10.30.0
     change-case: ^4.1.1
@@ -10748,8 +10747,8 @@ __metadata:
     "@babel/plugin-transform-react-constant-elements": ^7.17.12
     "@babel/preset-env": ^7.18.2
     "@babel/preset-react": ^7.17.12
-    "@carbon/react": ^1.37.0
-    "@carbon/styles": ^1.37.0
+    "@carbon/react": ^1.38.0
+    "@carbon/styles": ^1.38.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.30.0
     "@rollup/plugin-babel": ^6.0.0
@@ -10788,7 +10787,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/carbon-components"
   dependencies:
-    "@carbon/styles": ^1.37.0
+    "@carbon/styles": ^1.38.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.30.0
     chalk: 1.1.3
@@ -11152,7 +11151,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "class-prefix@workspace:examples/class-prefix"
   dependencies:
-    "@carbon/react": ^1.37.0
+    "@carbon/react": ^1.38.0
     "@vitejs/plugin-react": 4.0.0
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -11474,7 +11473,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox-styles@workspace:examples/codesandbox-styles"
   dependencies:
-    "@carbon/styles": ^1.37.0
+    "@carbon/styles": ^1.38.0
     sass: ^1.51.0
     vite: ^4.3.8
   languageName: unknown
@@ -11484,7 +11483,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox-with-sass-compilation@workspace:examples/codesandbox-with-sass-compilation"
   dependencies:
-    "@carbon/react": ^1.37.0
+    "@carbon/react": ^1.38.0
     react: ^18.2.0
     react-dom: ^18.2.0
     react-scripts: 5.0.0
@@ -11496,7 +11495,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox@workspace:examples/codesandbox"
   dependencies:
-    "@carbon/react": ^1.37.0
+    "@carbon/react": ^1.38.0
     react: ^18.2.0
     react-dom: ^18.2.0
     react-scripts: 5.0.0
@@ -12739,7 +12738,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "custom-theme@workspace:examples/custom-theme"
   dependencies:
-    "@carbon/react": ^1.37.0
+    "@carbon/react": ^1.38.0
     "@vitejs/plugin-react": 4.0.0
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -15192,7 +15191,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples-light-dark@workspace:examples/light-dark-mode"
   dependencies:
-    "@carbon/react": ^1.37.0
+    "@carbon/react": ^1.38.0
     eslint: 8.40.0
     next: 12.1.4
     react: 18.2.0
@@ -15205,7 +15204,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples-nextjs@workspace:examples/nextjs"
   dependencies:
-    "@carbon/react": ^1.37.0
+    "@carbon/react": ^1.38.0
     eslint: 8.40.0
     eslint-config-next: 13.4.7
     next: 13.4.7
@@ -17557,7 +17556,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "id-prefix@workspace:examples/id-prefix"
   dependencies:
-    "@carbon/react": ^1.37.0
+    "@carbon/react": ^1.38.0
     "@vitejs/plugin-react": 4.0.0
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -17694,7 +17693,7 @@ __metadata:
   resolution: "incremental-migration-vite@workspace:examples/incremental-migration-vite"
   dependencies:
     "@carbon/icons-react": ^10.49.0
-    "@carbon/react": ^1.37.0
+    "@carbon/react": ^1.38.0
     "@vitejs/plugin-react": 4.0.0
     carbon-components: ^10.57.0
     carbon-components-react: ^7.57.0
@@ -17711,7 +17710,7 @@ __metadata:
   resolution: "incremental-migration@workspace:examples/incremental-migration"
   dependencies:
     "@carbon/icons-react": ^10.49.0
-    "@carbon/react": ^1.37.0
+    "@carbon/react": ^1.38.0
     carbon-components: ^10.57.0
     carbon-components-react: ^7.57.0
     carbon-icons: ^7.0.7
@@ -25739,12 +25738,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-scss@npm:^4.0.2":
-  version: 4.0.4
-  resolution: "postcss-scss@npm:4.0.4"
+"postcss-scss@npm:^4.0.7":
+  version: 4.0.8
+  resolution: "postcss-scss@npm:4.0.8"
   peerDependencies:
-    postcss: ^8.3.3
-  checksum: b4f240dd5eeb0c21738b673d9caf9a06b9a6db665a5b1c815ee4ca10c4c74a67c54f11cd5a4970dea98475cbb9e6d846e05dd3e48924189c2ecbf1f50cd44aa4
+    postcss: ^8.4.29
+  checksum: 7d3fa94faa0b3987e5ee6e9fd0d8d4004ea5e6823ef740d7a1d5331c52c4f9a19584df16b3581561870ed70b9fc27222e098eafb3bb296ac355ad26fd22d16da
   languageName: node
   linkType: hard
 
@@ -27876,20 +27875,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rtlcss@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "rtlcss@npm:4.0.0"
-  dependencies:
-    escalade: ^3.1.1
-    picocolors: ^1.0.0
-    postcss: ^8.4.6
-    strip-json-comments: ^3.1.1
-  bin:
-    rtlcss: bin/rtlcss.js
-  checksum: cd8fe728489cc8a066a58ea518ac2089c245dede9bda376c1b33ae0c119fa9dbdb6808eee27697ecad3bfed8f338d10bfeb42c1efa60c262a9def0246233484c
-  languageName: node
-  linkType: hard
-
 "run-applescript@npm:^5.0.0":
   version: 5.0.0
   resolution: "run-applescript@npm:5.0.0"
@@ -29594,11 +29579,12 @@ __metadata:
     stylelint-config-idiomatic-order: ^8.1.0
     stylelint-config-prettier: ^9.0.3
     stylelint-config-standard: ^24.0.0
-    stylelint-config-standard-scss: ^3.0.0
+    stylelint-config-standard-scss: ^11.0.0
     stylelint-no-unsupported-browser-features: ^5.0.2
     stylelint-order: ^5.0.0
     stylelint-prettier: ^2.0.0
     stylelint-scss: ^4.1.0
+    stylelint-use-logical: ^2.1.0
   peerDependencies:
     stylelint: ^15.0.0
   languageName: unknown
@@ -29627,16 +29613,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-config-recommended-scss@npm:^5.0.2":
-  version: 5.0.2
-  resolution: "stylelint-config-recommended-scss@npm:5.0.2"
+"stylelint-config-recommended-scss@npm:^13.0.0":
+  version: 13.0.0
+  resolution: "stylelint-config-recommended-scss@npm:13.0.0"
   dependencies:
-    postcss-scss: ^4.0.2
-    stylelint-config-recommended: ^6.0.0
-    stylelint-scss: ^4.0.0
+    postcss-scss: ^4.0.7
+    stylelint-config-recommended: ^13.0.0
+    stylelint-scss: ^5.1.0
   peerDependencies:
-    stylelint: ^14.0.0
-  checksum: e882bde8a0846c421e2662f9e7a9c2646120c492528f7ad715d927db6954b8a2499476de0792b15f0044217f72c81edc97afc640c5b4d7618a9f96dc7045e4c1
+    postcss: ^8.3.3
+    stylelint: ^15.10.0
+  peerDependenciesMeta:
+    postcss:
+      optional: true
+  checksum: 5cbb771d756861ff11ee6fa85b8a58041798df9886a7621a9157caab308c965eeda75d7c532f01b620f632c282e0e32597d942cd6f18239dca949c6b78280ba8
+  languageName: node
+  linkType: hard
+
+"stylelint-config-recommended@npm:^13.0.0":
+  version: 13.0.0
+  resolution: "stylelint-config-recommended@npm:13.0.0"
+  peerDependencies:
+    stylelint: ^15.10.0
+  checksum: a56eb6d1a7c7f3a7a172b54bc34218859ba22a5a06816fb4d0964f66cb83cf372062f2c97830e994ad68243548e15fc49abf28887c3261ab1b471b3aa69f8e82
   languageName: node
   linkType: hard
 
@@ -29649,15 +29648,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-config-standard-scss@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "stylelint-config-standard-scss@npm:3.0.0"
+"stylelint-config-standard-scss@npm:^11.0.0":
+  version: 11.0.0
+  resolution: "stylelint-config-standard-scss@npm:11.0.0"
   dependencies:
-    stylelint-config-recommended-scss: ^5.0.2
-    stylelint-config-standard: ^24.0.0
+    stylelint-config-recommended-scss: ^13.0.0
+    stylelint-config-standard: ^34.0.0
   peerDependencies:
-    stylelint: ^14.0.0
-  checksum: b9be47e256e28e8f3e31ca51de53fc48d688b264f74d870b97c553cb3f799f3003a458d521644efc4feda0a1345da4e82d0595cfcba540dbb253f12c645234a0
+    postcss: ^8.3.3
+    stylelint: ^15.10.0
+  peerDependenciesMeta:
+    postcss:
+      optional: true
+  checksum: b51102419a470478b201d5a584cc0d26a8207050bde091d99f29e56d9d3623bb765dd56dcc2a6eddbb1c7cfb5e4ef12a60506d60dd2a74d5f68f8751a2fc33de
   languageName: node
   linkType: hard
 
@@ -29669,6 +29672,17 @@ __metadata:
   peerDependencies:
     stylelint: ^14.0.0
   checksum: 5993ede913d81410830639db054a7a3f5c87e56254368be45ce876321106fad1c11ee4cb77247049aaf22e283a393dd90d93dec8f796f8f139ed21eb86a9a168
+  languageName: node
+  linkType: hard
+
+"stylelint-config-standard@npm:^34.0.0":
+  version: 34.0.0
+  resolution: "stylelint-config-standard@npm:34.0.0"
+  dependencies:
+    stylelint-config-recommended: ^13.0.0
+  peerDependencies:
+    stylelint: ^15.10.0
+  checksum: 536249800c04b48a9c354067765f042713982e8222be17bb897a27d26546e50adfb87e6f1e4541807d720de3554345da99ab470e13e8d7ab0ab326c73ae3df61
   languageName: node
   linkType: hard
 
@@ -29722,7 +29736,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-scss@npm:^4.0.0, stylelint-scss@npm:^4.1.0":
+"stylelint-scss@npm:^4.1.0":
   version: 4.1.0
   resolution: "stylelint-scss@npm:4.1.0"
   dependencies:
@@ -29734,6 +29748,29 @@ __metadata:
   peerDependencies:
     stylelint: ^14.0.0
   checksum: 9dde9ecc6b1306530307a389f22b098df368bc6453eb09095b1f06a31d5395545d4171d842bc2c3996bb006c8977f5629076ff985c140548db4cbb794c15a780
+  languageName: node
+  linkType: hard
+
+"stylelint-scss@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "stylelint-scss@npm:5.1.0"
+  dependencies:
+    postcss-media-query-parser: ^0.2.3
+    postcss-resolve-nested-selector: ^0.1.1
+    postcss-selector-parser: ^6.0.13
+    postcss-value-parser: ^4.2.0
+  peerDependencies:
+    stylelint: ^14.5.1 || ^15.0.0
+  checksum: 9ddcb78cef194ff084890a96bcbb4ad056e5a9d795bf4d62f1244be89e1bdf8ff534b45a5fa77ca1a506ad5cd508f96749d77ff41df9d8846d2a10bd70ec96ca
+  languageName: node
+  linkType: hard
+
+"stylelint-use-logical@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "stylelint-use-logical@npm:2.1.0"
+  peerDependencies:
+    stylelint: ">= 11 < 16"
+  checksum: d8e0d2aea6e417479c7d3759f8ffa189111adbc3558f17f26f15459b4d863d7b25dcdc7cbdba2a361eb3f0950c224f35554c0be58253fd00b8dbe5ad0ab09450
   languageName: node
   linkType: hard
 
@@ -31623,7 +31660,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "v10-token-compat-in-v11@workspace:examples/v10-token-compat-in-v11"
   dependencies:
-    "@carbon/react": ^1.37.0
+    "@carbon/react": ^1.38.0
     "@vitejs/plugin-react": 4.0.0
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -31927,7 +31964,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "vite@workspace:examples/vite"
   dependencies:
-    "@carbon/react": ^1.37.0
+    "@carbon/react": ^1.38.0
     "@vitejs/plugin-react": 4.0.0
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -32851,7 +32888,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "www@workspace:www"
   dependencies:
-    "@carbon/react": ^1.37.0
+    "@carbon/react": ^1.38.0
     "@octokit/core": ^4.0.0
     "@octokit/plugin-retry": ^3.0.9
     "@octokit/plugin-throttling": ^4.0.0

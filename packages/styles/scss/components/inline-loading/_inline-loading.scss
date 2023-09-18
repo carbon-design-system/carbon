@@ -24,9 +24,9 @@ $-loading-gap-small: 110;
 @mixin inline-loading {
   .#{$prefix}--inline-loading {
     display: flex;
-    width: 100%;
-    min-height: 2rem;
     align-items: center;
+    inline-size: 100%;
+    min-block-size: 2rem;
   }
 
   .#{$prefix}--inline-loading__text {
@@ -40,7 +40,7 @@ $-loading-gap-small: 110;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: $spacing-03;
+    margin-inline-end: $spacing-03;
   }
 
   .#{$prefix}--inline-loading__checkmark-container {
@@ -49,8 +49,8 @@ $-loading-gap-small: 110;
     // For deprecated older markup
     &.#{$prefix}--inline-loading__svg {
       position: absolute;
-      top: 0.75rem;
-      width: 0.75rem;
+      inline-size: 0.75rem;
+      inset-block-start: 0.75rem;
     }
 
     &[hidden] {
@@ -71,9 +71,9 @@ $-loading-gap-small: 110;
   }
 
   .#{$prefix}--inline-loading--error {
-    width: convert.to-rem(16px);
-    height: convert.to-rem(16px);
+    block-size: convert.to-rem(16px);
     fill: $support-error;
+    inline-size: convert.to-rem(16px);
 
     &[hidden] {
       display: none;
@@ -87,8 +87,8 @@ $-loading-gap-small: 110;
   @media screen and (-ms-high-contrast: active),
     screen and (-ms-high-contrast: none) {
     .#{$prefix}--inline-loading__checkmark-container {
-      top: 1px;
-      right: 0.5rem;
+      inset-block-start: 1px;
+      inset-inline-end: 0.5rem;
     }
 
     .#{$prefix}--inline-loading__checkmark {

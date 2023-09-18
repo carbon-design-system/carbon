@@ -161,8 +161,8 @@ export default function TreeNode({
     };
 
     if (currentNodeLabel.current) {
-      currentNodeLabel.current.style.marginLeft = `-${calcOffset()}rem`;
-      currentNodeLabel.current.style.paddingLeft = `${calcOffset()}rem`;
+      currentNodeLabel.current.style.marginInlineStart = `-${calcOffset()}rem`;
+      currentNodeLabel.current.style.paddingInlineStart = `${calcOffset()}rem`;
     }
 
     // sync props and state

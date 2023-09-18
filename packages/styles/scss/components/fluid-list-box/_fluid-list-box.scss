@@ -19,27 +19,27 @@
 @mixin fluid-list-box {
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper {
     position: relative;
-    height: 100%;
     background: $field;
+    block-size: 100%;
     transition: background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
   }
 
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box {
-    min-height: convert.to-rem(64px);
     padding: 0;
+    min-block-size: convert.to-rem(64px);
   }
 
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--label {
     position: absolute;
     z-index: 1;
-    top: convert.to-rem(13px);
-    left: $spacing-05;
     display: flex;
-    width: calc(100% - 2rem);
-    height: convert.to-rem(16px);
     align-items: center;
     margin: 0;
+    block-size: convert.to-rem(16px);
+    inline-size: calc(100% - 2rem);
+    inset-block-start: convert.to-rem(13px);
+    inset-inline-start: $spacing-05;
   }
 
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--label::-webkit-scrollbar,
@@ -61,28 +61,28 @@
   }
 
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__field {
-    padding-top: convert.to-rem(33px);
-    padding-bottom: convert.to-rem(13px);
-    padding-left: $spacing-05;
+    padding-block-end: convert.to-rem(13px);
+    padding-block-start: convert.to-rem(33px);
+    padding-inline-start: $spacing-05;
   }
 
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__menu-icon {
-    width: 1rem;
-    height: 1rem;
+    block-size: 1rem;
+    inline-size: 1rem;
   }
 
   .#{$prefix}--list-box__wrapper--fluid:not(
       .#{$prefix}--list-box__wrapper--fluid--condensed
     )
     .#{$prefix}--list-box__menu-item {
-    height: $spacing-10;
+    block-size: $spacing-10;
   }
 
   .#{$prefix}--list-box__wrapper--fluid:not(
       .#{$prefix}--list-box__wrapper--fluid--condensed
     )
     .#{$prefix}--list-box__menu-item__selected-icon {
-    top: convert.to-rem(20px);
+    inset-block-start: convert.to-rem(20px);
   }
 
   // Disabled styles
@@ -122,7 +122,7 @@
   .#{$prefix}--list-box__wrapper--fluid
     :not(.#{$prefix}--list-box--up)
     .#{$prefix}--list-box__menu {
-    top: calc(100% + convert.to-rem(3px));
+    inset-block-start: calc(100% + convert.to-rem(3px));
   }
 
   // Invalid / Warning styles
@@ -146,7 +146,7 @@
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--combo-box.#{$prefix}--list-box--warning
     .#{$prefix}--text-input {
-    border-bottom: 1px solid transparent;
+    border-block-end: 1px solid transparent;
   }
 
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
@@ -167,7 +167,7 @@
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
     .#{$prefix}--list-box,
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box--warning {
-    border-bottom: 1px solid transparent;
+    border-block-end: 1px solid transparent;
   }
 
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
@@ -176,13 +176,13 @@
     .#{$prefix}--list-box--warning
     ~ .#{$prefix}--form-requirement {
     padding: convert.to-rem(8px) 4rem convert.to-rem(8px) $spacing-05;
-    margin-top: 0;
+    margin-block-start: 0;
   }
 
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--list-box--warning
     ~ .#{$prefix}--form-requirement {
-    border-bottom: 1px solid $border-strong;
+    border-block-end: 1px solid $border-strong;
   }
 
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
@@ -190,21 +190,21 @@
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--list-box--warning
     .#{$prefix}--list-box__invalid-icon {
-    top: convert.to-rem(81px);
-    right: $spacing-05;
+    inset-block-start: convert.to-rem(81px);
+    inset-inline-end: $spacing-05;
     pointer-events: none;
   }
 
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
     .#{$prefix}--list-box[data-invalid]:not(.#{$prefix}--combo-box)
     .#{$prefix}--list-box__field {
-    padding-right: $spacing-09;
+    padding-inline-end: $spacing-09;
   }
 
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
     .#{$prefix}--list-box[data-invalid].#{$prefix}--combo-box
     .#{$prefix}--text-input {
-    padding-right: $spacing-10;
+    padding-inline-end: $spacing-10;
   }
 
   // Error + Warning divider
@@ -221,8 +221,8 @@
     ~ .#{$prefix}--list-box__divider {
     display: block;
     border: none;
-    border-bottom: 1px solid $border-subtle;
     margin: 0 1rem;
+    border-block-end: 1px solid $border-subtle;
   }
 
   .#{$prefix}--list-box__wrapper--fluid
@@ -238,34 +238,34 @@
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--list-box--up
     .#{$prefix}--list-box__menu {
-    bottom: $spacing-10;
+    inset-block-end: $spacing-10;
   }
 
   // Skeleton styles
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--skeleton {
-    border-bottom: 1px solid $skeleton-element;
     background: $skeleton-background;
+    border-block-end: 1px solid $skeleton-element;
   }
 
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--skeleton
     .#{$prefix}--list-box__field {
     position: absolute;
-    top: convert.to-rem(36px);
-    left: $spacing-05;
-    width: 50%;
-    height: convert.to-rem(8px);
     padding: 0;
+    block-size: convert.to-rem(8px);
+    inline-size: 50%;
+    inset-block-start: convert.to-rem(36px);
+    inset-inline-start: $spacing-05;
   }
 
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--skeleton
     .#{$prefix}--list-box__label {
     position: absolute;
-    top: $spacing-05;
-    left: $spacing-05;
-    width: 25%;
-    height: convert.to-rem(8px);
+    block-size: convert.to-rem(8px);
+    inline-size: 25%;
+    inset-block-start: $spacing-05;
+    inset-inline-start: $spacing-05;
   }
 
   .#{$prefix}--list-box__wrapper--fluid

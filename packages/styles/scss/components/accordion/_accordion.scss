@@ -51,18 +51,18 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
     @include component-reset.reset;
 
-    width: 100%;
+    inline-size: 100%;
     list-style: none;
   }
 
   .#{$prefix}--accordion__item {
     display: list-item;
     overflow: visible;
-    border-top: 1px solid $border-subtle;
+    border-block-start: 1px solid $border-subtle;
     transition: all $duration-fast-02 motion(standard, productive);
 
     &:last-child {
-      border-bottom: 1px solid $border-subtle;
+      border-block-end: 1px solid $border-subtle;
     }
   }
 
@@ -71,24 +71,25 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
     position: relative;
     display: flex;
-    width: 100%;
-    min-height: layout.size('height');
     flex-direction: $flex-direction;
     align-items: center;
     justify-content: $justify-content;
     margin: 0;
     color: $text-primary;
     cursor: pointer;
+    inline-size: 100%;
+    min-block-size: layout.size('height');
+    padding-inline-end: layout.density('padding-inline');
     transition: background-color motion(standard, productive) $duration-fast-02;
 
     &:hover::before,
     &:focus::before {
       position: absolute;
-      top: -1px;
-      left: 0;
-      width: 100%;
-      height: calc(100% + 2px);
+      block-size: calc(100% + 2px);
       content: '';
+      inline-size: 100%;
+      inset-block-start: -1px;
+      inset-inline-start: 0;
     }
 
     &:hover::before {
@@ -122,25 +123,24 @@ $content-padding: 0 0 0 $spacing-05 !default;
   .#{$prefix}--accordion__item--disabled + .#{$prefix}--accordion__item {
     // v10 icon doesn't have 1:1 translation, keeping color same as enabled state
     // https://github.com/carbon-design-system/carbon/issues/10373#issuecomment-1021638147
-    border-top: 1px solid $border-subtle;
+    border-block-start: 1px solid $border-subtle;
   }
 
   li.#{$prefix}--accordion__item--disabled:last-of-type {
     // v10 icon doesn't have 1:1 translation, keeping color same as enabled state
     // https://github.com/carbon-design-system/carbon/issues/10373#issuecomment-1021638147
-    border-bottom: 1px solid $border-subtle;
+    border-block-end: 1px solid $border-subtle;
   }
 
   .#{$prefix}--accordion__arrow {
     @include focus-outline('reset');
 
-    width: 1rem;
-    height: 1rem;
+    flex: 0 0 1rem;
+    block-size: 1rem;
+    fill: $icon-primary;
+    inline-size: 1rem;
     // Without flex basis and flex shrink being set here, our icon width can go
     // <16px and cause the icon to render in the incorrect artboard size
-    flex: 0 0 1rem;
-    margin: $arrow-margin;
-    fill: $icon-primary;
     transform: rotate(-270deg) #{'/*rtl:ignore*/'};
     transition: all $duration-fast-02 motion(standard, productive);
   }
@@ -149,10 +149,9 @@ $content-padding: 0 0 0 $spacing-05 !default;
     @include type-style('body-01');
 
     z-index: 1;
-    width: 100%;
-    padding-right: $spacing-05;
-    margin: $title-margin;
-    text-align: left;
+    inline-size: 100%;
+    padding-inline-start: $spacing-05;
+    text-align: start;
   }
 
   .#{$prefix}--accordion__content {
@@ -163,11 +162,11 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
     // Custom breakpoints based on issue #4993
     @include breakpoint-up(480px) {
-      padding-right: $spacing-09;
+      padding-inline-end: $spacing-09;
     }
 
     @include breakpoint-up(640px) {
-      padding-right: 25%;
+      padding-inline-end: 25%;
     }
 
     > p {
@@ -186,11 +185,13 @@ $content-padding: 0 0 0 $spacing-05 !default;
   }
 
   .#{$prefix}--accordion--start .#{$prefix}--accordion__title {
-    margin-right: $spacing-05;
+    margin-inline-end: $spacing-05;
   }
 
   .#{$prefix}--accordion--start .#{$prefix}--accordion__content {
-    margin-left: calc(#{layout.density('padding-inline')} + #{$spacing-05});
+    margin-inline-start: calc(
+      #{layout.density('padding-inline')} + #{$spacing-05}
+    );
   }
 
   .#{$prefix}--accordion__item--collapsing .#{$prefix}--accordion__content,
@@ -231,8 +232,8 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
     .#{$prefix}--accordion__content {
       display: block;
-      padding-top: $spacing-03;
-      padding-bottom: $spacing-06;
+      padding-block: $spacing-03;
+      padding-block-end: $spacing-06;
       // Transition property for when the accordion opens
       transition: padding-top motion(entrance, productive) $duration-fast-02,
         padding-bottom motion(entrance, productive) $duration-fast-02;
@@ -271,7 +272,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
   .#{$prefix}--accordion--end.#{$prefix}--skeleton
     .#{$prefix}--accordion__arrow {
-    margin-left: $spacing-05;
+    margin-inline-start: $spacing-05;
   }
 
   .#{$prefix}--skeleton
@@ -283,7 +284,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
   }
 
   .#{$prefix}--accordion__title.#{$prefix}--skeleton__text {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 
   // Windows HCM fix
@@ -291,37 +292,48 @@ $content-padding: 0 0 0 $spacing-05 !default;
   .#{$prefix}--accordion__item--active .#{$prefix}--accordion__arrow {
     @include high-contrast-mode('icon-fill');
   }
+
+  // RTL overrides
+  [dir='rtl'] .#{$prefix}--accordion--start .#{$prefix}--accordion__heading {
+    padding-inline-end: 0;
+    padding-inline-start: layout.density('padding-inline');
+  }
+
+  [dir='rtl'] .#{$prefix}--accordion--start .#{$prefix}--accordion__title {
+    margin-inline-end: 0;
+    padding-inline-start: 0;
+  }
 }
 
 @mixin -content-visible {
-  height: 100%;
+  block-size: 100%;
   opacity: 1;
   visibility: inherit;
 }
 
 @mixin -content-hidden {
-  height: 0;
+  block-size: 0;
   opacity: 0;
   visibility: hidden;
 }
 
 // flush
 .#{$prefix}--accordion--flush .#{$prefix}--accordion__title {
-  margin-left: 0;
+  margin-inline-start: 0;
 }
 
 .#{$prefix}--accordion--flush .#{$prefix}--accordion__arrow {
-  margin-right: 0;
+  margin-inline-end: 0;
 }
 
 .#{$prefix}--accordion--flush .#{$prefix}--accordion__content {
-  padding-left: 0;
+  padding-inline-start: 0;
 }
 
 .#{$prefix}--accordion--flush:not(.#{$prefix}--skeleton)
   .#{$prefix}--accordion__heading:hover::before,
 .#{$prefix}--accordion--flush:not(.#{$prefix}--skeleton)
   .#{$prefix}--accordion__heading:focus::before {
-  left: -1rem;
-  width: calc(100% + 32px);
+  inline-size: calc(100% + 32px);
+  inset-inline-start: -1rem;
 }

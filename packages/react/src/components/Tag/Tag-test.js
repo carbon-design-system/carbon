@@ -30,16 +30,16 @@ describe('Tag', () => {
   it('should have an appropriate aria-label when (filterable)', () => {
     const children = 'tag-3';
     const { container } = render(
-      <Tag type="red" filter>
+      <Tag type="red" filter title="Close tag">
         {children}
       </Tag>
     );
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const button = container.querySelector('[aria-labelledby]');
-    const accessibilityLabel = button.getAttribute('aria-labelledby');
+    const button = container.querySelector('[aria-label]');
+    const accessibilityLabel = button.getAttribute('aria-label');
     // This check would mirror our "Accessibility label must contain at least all of visible label"
     // requirement
-    expect(accessibilityLabel).toEqual(expect.stringContaining(children));
+    expect(accessibilityLabel).toEqual(expect.stringContaining('Close tag'));
   });
 
   it('should allow for a custom label', () => {
