@@ -194,13 +194,6 @@ export interface ComboBoxProps
   onInputChange?: (inputText: string) => void;
 
   /**
-   * Helper function passed to Downshift that allows the user to observe internal
-   * state changes
-   * `(changes, stateAndHelpers) => void`
-   */
-  onStateChange?: (changes: object, stateAndHelpers: object) => void;
-
-  /**
    * Callback function that fires when the combobox menu toggle is clicked
    * `(evt) => void`
    * @param {MouseEvent} event
@@ -293,7 +286,6 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
     type: _type,
     warn,
     warnText,
-    onStateChange: _onStateChange,
     ...rest
   } = props;
   const prefix = usePrefix();
@@ -792,13 +784,6 @@ ComboBox.propTypes = {
    * @param {string} inputText
    */
   onInputChange: PropTypes.func,
-
-  /**
-   * Helper function passed to Downshift that allows the user to observe internal
-   * state changes
-   * `(changes, stateAndHelpers) => void`
-   */
-  onStateChange: PropTypes.func,
 
   /**
    * Callback function that fires when the combobox menu toggle is clicked
