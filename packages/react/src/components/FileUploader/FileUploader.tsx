@@ -230,7 +230,7 @@ export default class FileUploader extends React.Component<
     ) as string[];
     this.setState({
       filenames: this.props.multiple
-        ? this.state.filenames.concat(filenames)
+        ? [...new Set([...this.state.filenames, ...filenames])]
         : filenames,
     });
     if (this.props.onChange) {
