@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { usePrefix } from '../../internal/usePrefix';
 
-export interface HeaderNavigationProps extends ComponentProps<'nav'> {};
+export type HeaderNavigationProps = ComponentProps<'nav'>;
 
 export default function HeaderNavigation({
   'aria-label': ariaLabel,
