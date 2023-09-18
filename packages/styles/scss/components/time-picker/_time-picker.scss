@@ -27,7 +27,7 @@
 
   .#{$prefix}--time-picker__select {
     justify-content: center;
-    margin-left: $spacing-01;
+    margin-inline-start: $spacing-01;
   }
 
   .#{$prefix}--time-picker__input {
@@ -38,10 +38,10 @@
 
   .#{$prefix}--time-picker__error__icon {
     position: absolute;
-    top: 50%;
-    right: 1rem;
     display: flex;
-    height: 100%;
+    block-size: 100%;
+    inset-block-start: 50%;
+    inset-inline-end: 1rem;
     place-items: center;
     // top/transform used to center invalid icon in IE11
     transform: translateY(-50%);
@@ -52,11 +52,11 @@
   }
 
   .#{$prefix}--time-picker .#{$prefix}--select-input {
-    width: auto;
-    min-width: auto;
-    padding-right: convert.to-rem(48px);
     margin: 0;
+    inline-size: auto;
     line-height: 1;
+    min-inline-size: auto;
+    padding-inline-end: convert.to-rem(48px);
   }
 
   .#{$prefix}--time-picker__input-field {
@@ -64,9 +64,9 @@
     @include type-style('code-02');
 
     display: flex;
-    width: 4.875rem;
-    height: convert.to-rem(40px);
     align-items: center;
+    block-size: convert.to-rem(40px);
+    inline-size: 4.875rem;
     transition: outline $duration-fast-01 motion(standard, productive),
       background-color $duration-fast-01 motion(standard, productive);
 
@@ -76,7 +76,7 @@
   }
 
   .#{$prefix}--time-picker__input-field-error {
-    width: 6.175rem;
+    inline-size: 6.175rem;
   }
 
   // V11: Possibly deprecate
@@ -89,8 +89,8 @@
 
     &:disabled,
     &:hover:disabled {
-      border-bottom: 1px solid transparent;
       background-color: transparent;
+      border-block-end: 1px solid transparent;
       color: $text-disabled;
       cursor: not-allowed;
     }
@@ -98,25 +98,25 @@
 
   .#{$prefix}--time-picker--sm .#{$prefix}--select-input,
   .#{$prefix}--time-picker--sm .#{$prefix}--time-picker__input-field {
-    height: convert.to-rem(32px);
-    max-height: convert.to-rem(32px);
+    block-size: convert.to-rem(32px);
+    max-block-size: convert.to-rem(32px);
   }
 
   .#{$prefix}--time-picker--lg .#{$prefix}--select-input,
   .#{$prefix}--time-picker--lg .#{$prefix}--time-picker__input-field {
-    height: convert.to-rem(48px);
-    max-height: convert.to-rem(48px);
+    block-size: convert.to-rem(48px);
+    max-block-size: convert.to-rem(48px);
   }
 
   // readonly
   .#{$prefix}--time-picker--readonly .#{$prefix}--time-picker__input-field {
-    border-bottom-color: $border-subtle;
     background-color: transparent;
+    border-block-end-color: $border-subtle;
   }
 
   .#{$prefix}--time-picker--readonly .#{$prefix}--select-input {
-    border-bottom-color: $border-subtle;
     background-color: transparent;
+    border-block-end-color: $border-subtle;
     cursor: default;
   }
 

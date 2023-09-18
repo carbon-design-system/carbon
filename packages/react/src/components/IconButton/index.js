@@ -27,6 +27,7 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
     leaveDelayMs = 100,
     wrapperClasses,
     size,
+    isSelected,
     ...rest
   } = props;
   const prefix = usePrefix();
@@ -50,7 +51,13 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
         kind={kind}
         ref={ref}
         size={size}
-        className={cx(`${prefix}--btn--icon-only`, className)}>
+        className={cx(
+          `${prefix}--btn--icon-only`,
+          {
+            [`${prefix}--btn--selected`]: isSelected,
+          },
+          className
+        )}>
         {children}
       </Button>
     </Tooltip>
@@ -101,6 +108,12 @@ IconButton.propTypes = {
    * Specify the duration in milliseconds to delay before displaying the tooltip
    */
   enterDelayMs: PropTypes.number,
+
+  /**
+   * Specify whether the IconButton is currently selected
+   */
+
+  isSelected: PropTypes.bool,
 
   /**
    * Specify the type of button to be used as the base for the IconButton

@@ -28,26 +28,26 @@
 
     position: relative;
     display: flex;
-    width: 100%;
-    min-width: convert.to-rem(288px);
-    max-width: convert.to-rem(288px);
-    height: auto;
-    min-height: convert.to-rem(48px);
     flex-wrap: wrap;
+    block-size: auto;
 
     color: $text-inverse;
+    inline-size: 100%;
+    max-inline-size: convert.to-rem(288px);
+    min-block-size: convert.to-rem(48px);
+    min-inline-size: convert.to-rem(288px);
 
     @include breakpoint(md) {
-      max-width: convert.to-rem(608px);
       flex-wrap: nowrap;
+      max-inline-size: convert.to-rem(608px);
     }
 
     @include breakpoint(lg) {
-      max-width: convert.to-rem(736px);
+      max-inline-size: convert.to-rem(736px);
     }
 
     @include breakpoint(max) {
-      max-width: convert.to-rem(832px);
+      max-inline-size: convert.to-rem(832px);
     }
   }
 
@@ -80,15 +80,15 @@
 
     &::before {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
       box-sizing: border-box;
       border-width: 1px 1px 1px 0;
       border-style: solid;
+      block-size: 100%;
       content: '';
       filter: opacity(0.4);
+      inline-size: 100%;
+      inset-block-start: 0;
+      inset-inline-start: 0;
       pointer-events: none;
     }
   }
@@ -182,7 +182,7 @@
   .#{$prefix}--inline-notification__details {
     display: flex;
     flex-grow: 1;
-    margin: 0 $spacing-09 0 convert.to-rem(13px);
+    margin-inline: convert.to-rem(13px) $spacing-09;
 
     @include breakpoint(md) {
       margin: 0 convert.to-rem(13px);
@@ -191,8 +191,8 @@
 
   .#{$prefix}--inline-notification__icon {
     flex-shrink: 0;
-    margin-top: convert.to-rem(14px);
-    margin-right: $spacing-05;
+    margin-block-start: convert.to-rem(14px);
+    margin-inline-end: $spacing-05;
   }
 
   .#{$prefix}--inline-notification__text-wrapper {
@@ -204,7 +204,7 @@
   .#{$prefix}--inline-notification__title {
     @include type-style('heading-compact-01');
 
-    margin: 0 $spacing-02 0 0;
+    margin-inline-end: $spacing-02;
   }
 
   .#{$prefix}--inline-notification__subtitle {
@@ -214,9 +214,9 @@
   }
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
-    height: convert.to-rem(32px);
-    margin-bottom: $spacing-03;
-    margin-left: $spacing-08;
+    block-size: convert.to-rem(32px);
+    margin-block-end: $spacing-03;
+    margin-inline-start: $spacing-08;
 
     @include breakpoint(md) {
       margin: $spacing-03 0;
@@ -256,27 +256,27 @@
 
   .#{$prefix}--inline-notification--hide-close-button
     .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
-    margin-right: $spacing-03;
+    margin-inline-end: $spacing-03;
   }
 
   .#{$prefix}--inline-notification__close-button {
     @include focus-outline('reset');
 
     position: absolute;
-    top: 0;
-    right: 0;
     display: flex;
-    width: convert.to-rem(48px);
-    min-width: convert.to-rem(48px);
-    max-width: convert.to-rem(48px);
-    height: convert.to-rem(48px);
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 0;
     border: none;
     background: transparent;
+    block-size: convert.to-rem(48px);
     cursor: pointer;
+    inline-size: convert.to-rem(48px);
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    max-inline-size: convert.to-rem(48px);
+    min-inline-size: convert.to-rem(48px);
     transition: outline $duration-fast-02 motion(standard, productive),
       background-color $duration-fast-02 motion(standard, productive);
 
