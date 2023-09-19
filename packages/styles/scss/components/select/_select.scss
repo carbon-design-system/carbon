@@ -45,11 +45,11 @@
 
     display: block;
     border: none;
+    border-radius: 0;
     appearance: none;
     background-color: $field;
     block-size: convert.to-rem(40px);
     border-block-end: 1px solid $border-strong;
-    border-radius: 0;
     color: $text-primary;
     cursor: pointer;
     font-family: inherit;
