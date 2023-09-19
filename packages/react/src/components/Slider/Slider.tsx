@@ -477,17 +477,23 @@ export default class Slider extends PureComponent<SliderProps> {
     // Fire onChange event handler if present, if there's a usable value, and
     // if the value is different from the last one
     if (this.hasTwoHandles()) {
-      // @todo fix two handle slider for rtl
       if (this.thumbRef.current) {
-        this.thumbRef.current.style.left = `${this.state.left}%`;
+        this.thumbRef.current.style.insetInlineStart = `${this.state.left}%`;
+        if (this.state.isRtl) {
+          this.thumbRef.current.style.transform = `translate(100%, -50%)`;
+        }
       }
       if (this.thumbRefUpper.current) {
-        this.thumbRefUpper.current.style.left = `${this.state.leftUpper}%`;
+        this.thumbRefUpper.current.style.insetInlineStart = `${this.state.leftUpper}%`;
       }
       if (this.filledTrackRef.current) {
-        this.filledTrackRef.current.style.transform = `translate(${
-          this.state.left
-        }%, -50%) scaleX(${(this.state.leftUpper - this.state.left) / 100})`;
+        this.filledTrackRef.current.style.transform = this.state.isRtl
+          ? `translate(${100 - this.state.leftUpper}%, -50%) scaleX(${
+              (this.state.leftUpper - this.state.left) / 100
+            })`
+          : `translate(${this.state.left}%, -50%) scaleX(${
+              (this.state.leftUpper - this.state.left) / 100
+            })`;
       }
     } else {
       if (this.thumbRef.current) {
@@ -1005,11 +1011,9 @@ export default class Slider extends PureComponent<SliderProps> {
   };
 
   calcDistanceToHandle = (handle: HandlePosition, clientX) => {
-    // Left is a whole value between 0 and 100.
-    const left =
-      handle === HandlePosition.LOWER ? this.state.left : this.state.leftUpper;
-    const boundingRect = this.getSliderBoundingRect();
-    const handleX = boundingRect.left + (left / 100) * boundingRect.width;
+    const handleBoundingRect = this.getHandleBoundingRect(handle);
+    // x co-ordinate of the midpoint.
+    const handleX = handleBoundingRect.left + handleBoundingRect.width / 2;
     return Math.abs(handleX - clientX);
   };
 
@@ -1120,12 +1124,17 @@ export default class Slider extends PureComponent<SliderProps> {
   };
 
   /**
-   * Get the bounding rect for the slider DOM element.
+   * Get the bounding rect for the requested handles' DOM element.
    *
    * If the bounding rect is not available, a new, empty DOMRect is returned.
    */
-  getSliderBoundingRect = (): DOMRect => {
-    const boundingRect = this.element?.getBoundingClientRect();
+  getHandleBoundingRect = (handle: HandlePosition): DOMRect => {
+    let boundingRect;
+    if (handle === HandlePosition.LOWER) {
+      boundingRect = this?.thumbRef?.current?.getBoundingClientRect();
+    } else {
+      boundingRect = this?.thumbRefUpper?.current?.getBoundingClientRect();
+    }
     return boundingRect ?? new DOMRect();
   };
 
