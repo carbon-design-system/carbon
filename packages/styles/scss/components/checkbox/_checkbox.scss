@@ -23,12 +23,12 @@
   // Spacing between checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
     position: relative;
-    margin-block-end: $spacing-02;
+    margin-block-end: convert.to-rem(6px);
   }
 
   // Spacing above collection of checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:first-of-type {
-    margin-block-start: convert.to-rem(3px);
+    margin-block-start: 0;
   }
 
   // Shift collection of checkboxes up if label is present
@@ -61,15 +61,15 @@
     position: relative;
     display: flex;
     cursor: pointer;
-    min-block-size: convert.to-rem(24px);
-    padding-block-start: convert.to-rem(3px);
+    min-block-size: convert.to-rem(20px);
+    padding-block-start: convert.to-rem(2px);
     padding-inline-start: convert.to-rem(20px);
     user-select: none;
   }
 
   .#{$prefix}--checkbox-label-text {
     // Add extra spacing when label is present
-    padding-inline-start: convert.to-rem(6px);
+    padding-inline-start: convert.to-rem(10px);
   }
 
   // Required because `$css--reset: true` cannot currently apply to this `::before` and `::after`
@@ -86,9 +86,6 @@
     // text overflows.
     position: absolute;
     border: 1px solid $icon-primary;
-    // increase left margin for #6480
-    margin: convert.to-rem(2px) convert.to-rem(2px) convert.to-rem(2px)
-      convert.to-rem(3px);
 
     // Checkboxes with a background color look visually off against a parent container.
     background-color: transparent;
@@ -102,6 +99,10 @@
     inline-size: convert.to-rem(16px);
     inset-block-start: convert.to-rem(2px);
     inset-inline-start: 0;
+
+    // increase left margin for #6480
+    margin-block: convert.to-rem(1px) convert.to-rem(2px);
+    margin-inline: convert.to-rem(3px) 0;
   }
 
   // Create the appearance of the check in the `after` pseudo-element
@@ -113,7 +114,7 @@
     border-inline-start: 1.5px solid $icon-inverse;
     content: '';
     inline-size: convert.to-rem(9px);
-    inset-block-start: convert.to-rem(7.5px);
+    inset-block-start: convert.to-rem(6.5px);
     inset-inline-start: convert.to-rem(7px);
     margin-block-start: convert.to-rem(-3px);
     transform: scale(0) rotate(-45deg);
@@ -189,8 +190,8 @@
   //----------------------------------------------
   // Invalid + warn
   // ---------------------------------------------
-  .#{$prefix}--checkbox-group[data-invalid] .cds--checkbox-label::before,
-  .#{$prefix}--checkbox-wrapper--invalid .cds--checkbox-label::before,
+  .#{$prefix}--checkbox-group[data-invalid] .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-wrapper--invalid .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-wrapper--invalid
     .#{$prefix}--checkbox:checked
     + .#{$prefix}--checkbox-label::before {
@@ -212,7 +213,7 @@
 
   .#{$prefix}--checkbox-group:not(.#{$prefix}--checkbox-group[data-invalid])
     .#{$prefix}--checkbox-wrapper--invalid
-    .cds--checkbox-label::before,
+    .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-group:not(.#{$prefix}--checkbox-group[data-invalid])
     .#{$prefix}--checkbox-wrapper--invalid
     .#{$prefix}--checkbox:checked

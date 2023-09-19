@@ -32,7 +32,7 @@
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^24.0.0",
     "stylelint-config-standard-scss": "^11.0.0",
-    "stylelint-no-unsupported-browser-features": "^5.0.2",
+    "stylelint-no-unsupported-browser-features": "^7.0.0",
     "stylelint-order": "^5.0.0",
     "stylelint-prettier": "^2.0.0",
     "stylelint-scss": "^4.1.0",
