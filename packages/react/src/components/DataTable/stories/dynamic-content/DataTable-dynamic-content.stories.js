@@ -154,7 +154,8 @@ export const Default = () => {
                       Download
                     </TableBatchAction>
                   </TableBatchActions>
-                  <TableToolbarContent>
+                  <TableToolbarContent
+                    aria-hidden={batchActionProps.shouldShowBatchActions}>
                     <TableToolbarSearch
                       tabIndex={
                         batchActionProps.shouldShowBatchActions ? -1 : 0

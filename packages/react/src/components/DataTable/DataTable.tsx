@@ -632,7 +632,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
           onClick,
         ]),
         id: `${this.getTablePrefix()}__select-row-${row.id}`,
-        name: `select-row-${row.id}`,
+        name: `select-row`,
         ariaLabel: t(translationKey),
         disabled: row.disabled,
         radio: this.props.radio || null,

@@ -422,6 +422,7 @@ export default class Slider extends PureComponent<SliderProps> {
     isValidUpper: true,
     activeHandle: null,
     correctedValue: null,
+    isRtl: false,
   };
 
   thumbRef: React.RefObject<HTMLDivElement>;
@@ -443,6 +444,7 @@ export default class Slider extends PureComponent<SliderProps> {
    */
   componentDidMount() {
     if (this.element) {
+      const isRtl = document?.dir === 'rtl';
       if (this.hasTwoHandles()) {
         const { value, left } = this.calcValue({
           value: this.state.value,
@@ -452,13 +454,13 @@ export default class Slider extends PureComponent<SliderProps> {
           value: this.state.valueUpper,
           useRawValue: true,
         });
-        this.setState({ value, left, valueUpper, leftUpper });
+        this.setState({ isRtl, value, left, valueUpper, leftUpper });
       } else {
         const { value, left } = this.calcValue({
           value: this.state.value,
           useRawValue: true,
         });
-        this.setState({ value, left });
+        this.setState({ isRtl, value, left });
       }
     }
   }
@@ -475,6 +477,7 @@ export default class Slider extends PureComponent<SliderProps> {
     // Fire onChange event handler if present, if there's a usable value, and
     // if the value is different from the last one
     if (this.hasTwoHandles()) {
+      // @todo fix two handle slider for rtl
       if (this.thumbRef.current) {
         this.thumbRef.current.style.left = `${this.state.left}%`;
       }
@@ -488,12 +491,14 @@ export default class Slider extends PureComponent<SliderProps> {
       }
     } else {
       if (this.thumbRef.current) {
-        this.thumbRef.current.style.left = `${this.state.left}%`;
+        this.thumbRef.current.style.insetInlineStart = this.state.isRtl
+          ? `calc(${this.state.left}% - 14px)`
+          : `${this.state.left}%`;
       }
       if (this.filledTrackRef.current) {
-        this.filledTrackRef.current.style.transform = `translate(0%, -50%) scaleX(${
-          this.state.left / 100
-        })`;
+        this.filledTrackRef.current.style.transform = this.state.isRtl
+          ? `translate(100%, -50%) scaleX(-${this.state.left / 100})`
+          : `translate(0%, -50%) scaleX(${this.state.left / 100})`;
       }
     }
     if (
@@ -924,7 +929,9 @@ export default class Slider extends PureComponent<SliderProps> {
     // If a clientX is specified, use it to calculate the leftPercent. If not,
     // use the provided value to calculate it instead.
     if (clientX) {
-      const leftOffset = clientX - (boundingRect?.left ?? 0);
+      const leftOffset = this.state.isRtl
+        ? (boundingRect?.right ?? 0) - clientX
+        : clientX - (boundingRect?.left ?? 0);
       return leftOffset / width;
     } else if (value && range) {
       // Prevent NaN calculation if the range is 0.
@@ -974,6 +981,7 @@ export default class Slider extends PureComponent<SliderProps> {
   calcValue = ({ clientX, value, useRawValue = false }: CalcValueProps) => {
     const range = this.props.max - this.props.min;
 
+    // @todo solve for rtl.
     const leftPercent = this.calcLeftPercent({
       clientX,
       value,

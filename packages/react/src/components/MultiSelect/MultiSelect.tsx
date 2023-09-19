@@ -499,6 +499,12 @@ const MultiSelect = React.forwardRef(
             );
             props.scrollIntoView(itemArray[highlightedIndex]);
           }
+          if (highlightedIndex === -1) {
+            return {
+              ...changes,
+              highlightedIndex: 0,
+            };
+          }
           return changes;
         case ItemMouseMove:
           return { ...changes, highlightedIndex: state.highlightedIndex };

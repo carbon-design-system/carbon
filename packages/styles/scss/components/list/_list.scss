@@ -31,7 +31,7 @@
   }
 
   .#{$prefix}--list--unordered:not(.#{$prefix}--list--nested) {
-    margin-left: $spacing-05;
+    margin-inline-start: $spacing-05;
   }
 
   .#{$prefix}--list--expressive,
@@ -48,11 +48,11 @@
   }
 
   .#{$prefix}--list--nested {
-    margin-left: convert.to-rem(32px);
+    margin-inline-start: convert.to-rem(32px);
   }
 
   .#{$prefix}--list--nested .#{$prefix}--list__item {
-    padding-left: $spacing-02;
+    padding-inline-start: $spacing-02;
   }
 
   .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested) {
@@ -67,9 +67,9 @@
   .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested)
     > .#{$prefix}--list__item::before {
     position: absolute;
-    left: convert.to-rem(-24px);
     content: counter(item) '.';
     counter-increment: item;
+    inset-inline-start: convert.to-rem(-24px);
   }
 
   .#{$prefix}--list--ordered.#{$prefix}--list--nested,
@@ -82,17 +82,17 @@
 
     &::before {
       position: absolute;
-      left: calc(-1 * #{$spacing-05});
       // – en dash
       content: '\002013';
+      inset-inline-start: calc(-1 * #{$spacing-05});
     }
   }
 
   .#{$prefix}--list--unordered.#{$prefix}--list--nested
     > .#{$prefix}--list__item::before {
-    // offset to account for smaller ▪ vs –
-    left: calc(-1 * #{$spacing-04});
     // ▪ square
     content: '\0025AA';
+    // offset to account for smaller ▪ vs –
+    inset-inline-start: calc(-1 * #{$spacing-04});
   }
 }

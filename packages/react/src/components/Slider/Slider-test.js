@@ -139,7 +139,9 @@ describe('Slider', () => {
 
     it('should accurately position slider on mount', () => {
       renderSlider({ value: 50, max: 100, min: 0 });
-      expect(screen.getByRole('slider')).toHaveStyle({ left: '50%' });
+      expect(screen.getByRole('slider')).toHaveStyle({
+        insetInlineStart: '50%',
+      });
     });
 
     it('marks input field as hidden if hidden via props', () => {
@@ -165,7 +167,7 @@ describe('Slider', () => {
       const inputElement = screen.getByLabelText(inputAriaValue);
       const slider = screen.getByRole('slider');
 
-      userEvent.clear(inputElement);
+      await userEvent.clear(inputElement);
       await type(inputElement, '999');
       expect(parseInt(slider.getAttribute('aria-valuenow'))).toEqual(999);
       expect(onChange).toHaveBeenLastCalledWith({ value: 999 });
@@ -181,7 +183,7 @@ describe('Slider', () => {
       });
       const inputElement = screen.getByLabelText(inputAriaValue);
 
-      userEvent.clear(inputElement);
+      await userEvent.clear(inputElement);
       await type(inputElement, '12');
       expect(onChange).toHaveBeenLastCalledWith({ value: 12 });
     });
