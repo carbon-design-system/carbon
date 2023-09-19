@@ -54,7 +54,6 @@ $radio-border-width: 1px !default;
     }
 
     .#{$prefix}--radio-button__label {
-      line-height: 1.25;
       margin-inline-end: 0;
     }
 
@@ -70,12 +69,14 @@ $radio-border-width: 1px !default;
   }
 
   .#{$prefix}--radio-button__label {
-    @include type.type-style('body-compact-01');
-
     display: flex;
     align-items: center;
     cursor: pointer;
     margin-inline-end: $spacing-05;
+  }
+
+  .#{$prefix}--radio-button__label-text {
+    @include type.type-style('body-compact-01');
   }
 
   .#{$prefix}--radio-button__appearance {
@@ -88,7 +89,12 @@ $radio-border-width: 1px !default;
     border-radius: 50%;
     inline-size: convert.to-rem(18px);
     margin-block: convert.to-rem(1px) convert.to-rem(2px);
-    margin-inline: convert.to-rem(2px) $spacing-03;
+    margin-inline: convert.to-rem(2px) convert.to-rem(10px);
+  }
+
+  .#{$prefix}--radio-button-group--vertical
+    .#{$prefix}--radio-button__appearance {
+    margin-block: 0;
   }
 
   .#{$prefix}--radio-button:checked
@@ -244,10 +250,15 @@ $radio-border-width: 1px !default;
     margin-inline-end: $spacing-05;
   }
 
-  .#{$prefix}--radio-button-group--vertical
-    .#{$prefix}--radio-button-wrapper:not(:last-of-type) {
-    margin-block-end: $spacing-03;
+  .#{$prefix}--radio-button-group--vertical .#{$prefix}--radio-button-wrapper {
+    margin-block-end: convert.to-rem(6px);
     margin-inline-end: 0;
+  }
+
+  .#{$prefix}--radio-button-group--vertical
+    .#{$prefix}--radio-button-wrapper
+    .#{$prefix}--radio-button__label {
+    padding-block-start: convert.to-rem(2px);
   }
 
   .#{$prefix}--radio-button-group--label-right .#{$prefix}--radio-button__label,
