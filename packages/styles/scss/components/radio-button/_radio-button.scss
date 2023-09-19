@@ -84,9 +84,9 @@ $radio-border-width: 1px !default;
 
     flex-shrink: 0;
     border: $radio-border-width solid $icon-primary;
+    border-radius: 50%;
     background-color: transparent;
     block-size: convert.to-rem(18px);
-    border-radius: 50%;
     inline-size: convert.to-rem(18px);
     margin-block: convert.to-rem(1px) convert.to-rem(2px);
     margin-inline: convert.to-rem(2px) convert.to-rem(10px);
@@ -108,9 +108,9 @@ $radio-border-width: 1px !default;
     &::before {
       position: relative;
       display: inline-block;
+      border-radius: 50%;
       background-color: $icon-primary;
       block-size: 100%;
-      border-radius: 50%;
       content: '';
       inline-size: 100%;
       transform: scale(0.5);

@@ -130,8 +130,8 @@ $popover-caret-height: custom-property.get-var(
     position: absolute;
     z-index: z('floating');
     display: none;
-    background-color: $popover-background-color;
     border-radius: $popover-border-radius;
+    background-color: $popover-background-color;
     color: $popover-text-color;
     inline-size: max-content;
     max-inline-size: convert.to-rem(368px);

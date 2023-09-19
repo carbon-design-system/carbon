@@ -86,11 +86,11 @@
     // text overflows.
     position: absolute;
     border: 1px solid $icon-primary;
+    border-radius: 2px;
 
     // Checkboxes with a background color look visually off against a parent container.
     background-color: transparent;
     block-size: convert.to-rem(16px);
-    border-radius: 2px;
     content: '';
 
     // According to the spec, we'll want the bounding box for our checkbox to
