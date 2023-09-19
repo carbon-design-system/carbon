@@ -1267,7 +1267,7 @@ class Slider extends PureComponent<SliderProps> {
       readOnly,
       warn,
       warnText,
-      translateWithId,
+      translateWithId: t = translateWithId,
       ...other
     } = this.props;
 
@@ -1539,7 +1539,7 @@ class Slider extends PureComponent<SliderProps> {
                     `${prefix}--slider__status-msg`,
                     `${prefix}--form-requirement`
                   )}>
-                  {translateWithId(translationIds.autoCorrectAnnouncement, {
+                  {t(translationIds.autoCorrectAnnouncement, {
                     correctedValue,
                   })}
                 </div>
