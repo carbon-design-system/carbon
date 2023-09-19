@@ -11,11 +11,12 @@
   "main": "es/index.js",
   "module": "es/index.js",
   "exports": {
-    "./es/components-react/": {
-      "node": "./lib/components-react-node/",
-      "default": "./es/components-react/"
+    "./es/components-react/*": {
+      "node": "./lib/components-react-node/*",
+      "default": "./es/components-react/*"
     },
     "./es/components/*": {
+      "node": "./lib/components/*",
       "default": "./es/components/*"
     },
     "./es/globals/": {

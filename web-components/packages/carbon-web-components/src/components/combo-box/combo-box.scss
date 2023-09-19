@@ -11,13 +11,15 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities' as *;
-@use '@carbon/styles/scss/components/combo-box/combo-box';
+@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/components/combo-box' as *;
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/text-input/text-input';
 @use '../dropdown/dropdown.scss';
 
 :host(#{$prefix}-combo-box) {
   @extend :host(#{$prefix}-dropdown);
+  @include emit-layout-tokens();
 
   outline: none;
 
@@ -25,6 +27,10 @@ $css--plex: true !default;
     // Hides screen reader cursor
     left: -100%;
     top: -100%;
+  }
+
+  .#{$prefix}--list-box__field {
+    padding: 0;
   }
 
   .#{$prefix}--list-box__menu {
@@ -47,6 +53,12 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-combo-box[invalid]) {
+  .#{$prefix}--form__helper-text {
+    color: $text-error;
+  }
+}
+
 :host(#{$prefix}-combo-box[read-only]) {
   .#{$prefix}--list-box__selection svg {
     fill: $icon-disabled;
@@ -60,6 +72,10 @@ $css--plex: true !default;
 
   .#{$prefix}--list-box__menu-item__option {
     height: auto;
+  }
+
+  &:hover {
+    background-color: $layer-hover;
   }
 }
 
