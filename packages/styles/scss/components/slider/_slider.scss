@@ -122,10 +122,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: $background;
-    block-size: 24px;
     /* stylelint-disable-next-line declaration-property-value-disallowed-list */
     border-radius: unset;
+    background-color: $background;
+    block-size: 24px;
     box-shadow: none;
     inline-size: 12px;
     transform: translate(-100%, -50%);
