@@ -19,6 +19,7 @@ const devServer = {
   open: true,
   contentBase: path.resolve(__dirname, 'src'),
   publicPath: '/dist',
+  disableHostCheck: true,
   setup(app, server) {
     app.get('/', (req, res) => {
       const { fileSystem, waitUntilValid } = server.middleware;
