@@ -8,6 +8,7 @@
 import React from 'react';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { usePrefix } from './usePrefix';
+import { Text } from '../components/Text';
 
 /**
  * @typedef {object} InputProps
@@ -69,20 +70,22 @@ export function useNormalizedInputProps({
   if (normalizedProps.invalid) {
     normalizedProps.icon = WarningFilled;
     normalizedProps.validation = (
-      <div
+      <Text
+        as="div"
         className={`${prefix}--form-requirement`}
         id={normalizedProps.invalidId}>
         {invalidText}
-      </div>
+      </Text>
     );
   } else if (normalizedProps.warn) {
     normalizedProps.icon = WarningAltFilled;
     normalizedProps.validation = (
-      <div
+      <Text
+        as="div"
         className={`${prefix}--form-requirement`}
         id={normalizedProps.warnId}>
         {warnText}
-      </div>
+      </Text>
     );
   }
 
