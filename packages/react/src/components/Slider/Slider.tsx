@@ -18,6 +18,24 @@ import deprecate from '../../prop-types/deprecate';
 import { FeatureFlagContext } from '../FeatureFlags';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 
+const translationIds = {
+  autoCorrectAnnouncement: 'carbon.slider.auto-correct-announcement',
+};
+
+function translateWithId(
+  translationId,
+  translationState?: { correctedValue?: string }
+) {
+  if (
+    translationId === translationIds.autoCorrectAnnouncement &&
+    translationState?.correctedValue
+  ) {
+    const { correctedValue } = translationState;
+    return `The inputted value "${correctedValue}" was corrected to the nearest allowed digit.`;
+  }
+  return '';
+}
+
 const defaultFormatLabel = (value, label) => {
   return typeof label === 'function' ? label(value) : `${value}${label}`;
 };
@@ -201,6 +219,16 @@ export interface SliderProps
   stepMultiplier?: number;
 
   /**
+   * Supply a method to translate internal strings with your i18n tool of
+   * choice. Translation keys are available on the `translationIds` field for
+   * this component.
+   */
+  translateWithId?: (
+    translationId: string,
+    translationState: { correctedValue?: string }
+  ) => string;
+
+  /**
    * The value of the slider. When there are two handles, value is the lower
    * bound.
    */
@@ -234,7 +262,7 @@ interface CalcLeftPercentProps {
   range?: number;
 }
 
-export default class Slider extends PureComponent<SliderProps> {
+class Slider extends PureComponent<SliderProps> {
   static propTypes = {
     /**
      * The `ariaLabel` for the `<input>`.
@@ -368,6 +396,13 @@ export default class Slider extends PureComponent<SliderProps> {
     stepMultiplier: PropTypes.number,
 
     /**
+     * Supply a method to translate internal strings with your i18n tool of
+     * choice. Translation keys are available on the `translationIds` field for
+     * this component.
+     */
+    translateWithId: PropTypes.func,
+
+    /**
      * The `ariaLabel` for the upper bound `<input>` when there are two handles.
      */
     unstable_ariaLabelInputUpper: PropTypes.string,
@@ -408,6 +443,7 @@ export default class Slider extends PureComponent<SliderProps> {
     maxLabel: '',
     inputType: 'number',
     readOnly: false,
+    translateWithId,
   };
 
   static contextType = FeatureFlagContext;
@@ -1231,6 +1267,7 @@ export default class Slider extends PureComponent<SliderProps> {
       readOnly,
       warn,
       warnText,
+      translateWithId,
       ...other
     } = this.props;
 
@@ -1502,8 +1539,9 @@ export default class Slider extends PureComponent<SliderProps> {
                     `${prefix}--slider__status-msg`,
                     `${prefix}--form-requirement`
                   )}>
-                  The inputted value &quot;{correctedValue}&quot; was corrected
-                  to the nearest allowed digit.
+                  {translateWithId(translationIds.autoCorrectAnnouncement, {
+                    correctedValue,
+                  })}
                 </div>
               )}
             </div>
@@ -1513,3 +1551,7 @@ export default class Slider extends PureComponent<SliderProps> {
     );
   }
 }
+
+(Slider as any).translationIds = Object.values(translationIds);
+
+export default Slider;
