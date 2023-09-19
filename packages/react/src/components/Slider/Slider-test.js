@@ -702,8 +702,8 @@ describe('Slider', () => {
         max: 100,
       });
       const [lowerThumb, upperThumb] = screen.getAllByRole('slider');
-      expect(lowerThumb).toHaveStyle({ left: '50%' });
-      expect(upperThumb).toHaveStyle({ left: '50%' });
+      expect(lowerThumb).toHaveStyle({ insetInlineStart: '50%' });
+      expect(upperThumb).toHaveStyle({ insetInlineStart: '50%' });
     });
 
     it('marks input field as hidden if hidden via props', () => {
