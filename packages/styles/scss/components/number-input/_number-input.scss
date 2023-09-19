@@ -45,6 +45,7 @@
     display: inline-flex;
     box-sizing: border-box;
     border: 0;
+    border-radius: 0;
 
     // Firefox: Hide spinner (up and down buttons)
     -moz-appearance: textfield;
@@ -52,7 +53,6 @@
     background-color: $field;
     block-size: convert.to-rem(40px);
     border-block-end: convert.to-rem(1px) solid $border-strong;
-    border-radius: 0;
     color: $text-primary;
     font-family: font-family('sans');
     font-weight: 400;

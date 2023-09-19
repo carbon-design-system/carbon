@@ -33,7 +33,7 @@ You can also use a controlled checkbox component driven by state:
 ```jsx
 function ExampleComponent() {
   const [isChecked, setIsChecked] = useState(false);
-  return <Checkbox checked={isChecked} onChange={setIsChecked} />;
+  return <Checkbox id="checkbox" labelText="checkbox" checked={isChecked} onChange={(_, { checked }) => setIsChecked(checked)} />;
 }
 ```
 

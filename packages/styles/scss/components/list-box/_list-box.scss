@@ -464,9 +464,9 @@ $list-box-menu-width: convert.to-rem(300px);
     align-items: center;
     justify-content: space-between;
     padding: convert.to-rem(8px);
+    border-radius: convert.to-rem(12px);
     background-color: $background-inverse;
     block-size: convert.to-rem(24px);
-    border-radius: convert.to-rem(12px);
     color: $text-inverse;
     inline-size: auto;
     inset-block-start: auto;
@@ -485,8 +485,8 @@ $list-box-menu-width: convert.to-rem(300px);
     margin-inline-start: convert.to-rem(4px);
 
     &:hover {
-      background-color: $button-secondary-hover;
       border-radius: 50%;
+      background-color: $button-secondary-hover;
     }
   }
 

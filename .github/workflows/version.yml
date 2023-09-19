@@ -58,7 +58,7 @@ jobs:
         run: |
           yarn lerna version minor --no-git-tag-version --no-push --yes
       - name: Generate token
-        uses: tibdex/github-app-token@v1
+        uses: tibdex/github-app-token@0914d50df753bbc42180d982a6550f195390069f #v2.0.0
         id: generate_token
         with:
           app_id: ${{ secrets.APP_ID }}
