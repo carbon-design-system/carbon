@@ -6,9 +6,30 @@
  */
 
 import cx from 'classnames';
-import Downshift from 'downshift';
-import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import Downshift, {
+  ControllerStateAndHelpers,
+  StateChangeOptions,
+} from 'downshift';
+import PropTypes from 'prop-types';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+  useRef,
+  forwardRef,
+  type ComponentProps,
+  type ReactNode,
+  type ComponentType,
+  type ForwardedRef,
+  type ReactElement,
+  type RefAttributes,
+  type PropsWithChildren,
+  type PropsWithoutRef,
+  type InputHTMLAttributes,
+  type MouseEvent,
+  type KeyboardEvent,
+  type FocusEvent,
+} from 'react';
 import { Text } from '../Text';
 import {
   Checkmark,
@@ -37,21 +58,36 @@ const {
   changeInput,
 } = Downshift.stateChangeTypes;
 
-const defaultItemToString = (item) => {
+const defaultItemToString = <ItemType,>(item: ItemType | null) => {
   if (typeof item === 'string') {
     return item;
   }
-
-  return item && item.label;
+  if (typeof item === 'number') {
+    return `${item}`;
+  }
+  if (
+    item !== null &&
+    typeof item === 'object' &&
+    'label' in item &&
+    typeof item['label'] === 'string'
+  ) {
+    return item['label'];
+  }
+  return '';
 };
 
 const defaultShouldFilterItem = () => true;
 
-const getInputValue = ({
+const getInputValue = <ItemType,>({
   initialSelectedItem,
   inputValue,
   itemToString,
   selectedItem,
+}: {
+  initialSelectedItem?: ItemType | null;
+  inputValue: string;
+  itemToString: ItemToStringHandler<ItemType>;
+  selectedItem?: ItemType | null;
 }) => {
   if (selectedItem) {
     return itemToString(selectedItem);
@@ -64,9 +100,12 @@ const getInputValue = ({
   return inputValue || '';
 };
 
-const findHighlightedIndex = (
-  { items, itemToString = defaultItemToString },
-  inputValue
+const findHighlightedIndex = <ItemType,>(
+  {
+    items,
+    itemToString = defaultItemToString,
+  }: { items: ItemType[]; itemToString?: ItemToStringHandler<ItemType> },
+  inputValue?: string | null
 ) => {
   if (!inputValue) {
     return -1;
@@ -88,11 +127,14 @@ const getInstanceId = setupGetInstanceId();
 
 type ExcludedAttributes = 'id' | 'onChange' | 'onClick' | 'type' | 'size';
 
-export interface ComboBoxProps
-  extends Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    ExcludedAttributes
-  > {
+interface OnChangeData<ItemType> {
+  selectedItem: ItemType | null;
+}
+
+type ItemToStringHandler<ItemType> = (item: ItemType | null) => string;
+
+export interface ComboBoxProps<ItemType>
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes> {
   /**
    * Specify a label to be read by screen readers on the container node
    * 'aria-label' of the ListBox component.
@@ -123,13 +165,13 @@ export interface ComboBoxProps
   /**
    * Additional props passed to Downshift
    */
-  downshiftProps?: React.ComponentProps<typeof Downshift>;
+  downshiftProps?: ComponentProps<typeof Downshift<ItemType>>;
 
   /**
    * Provide helper text that is used alongside the control label for
    * additional help
    */
-  helperText?: string;
+  helperText?: ReactNode;
 
   /**
    * Specify a custom `id` for the input
@@ -140,7 +182,7 @@ export interface ComboBoxProps
    * Allow users to pass in an arbitrary item or a string (in case their items are an array of strings)
    * from their collection that are pre-selected
    */
-  initialSelectedItem?: object | string | number;
+  initialSelectedItem?: ItemType;
 
   /**
    * Specify if the currently selected value is invalid.
@@ -150,26 +192,26 @@ export interface ComboBoxProps
   /**
    * Message which is displayed if the value is invalid.
    */
-  invalidText?: ReactNodeLike;
+  invalidText?: ReactNode;
 
   /**
    * Optional function to render items as custom components instead of strings.
    * Defaults to null and is overridden by a getter
    */
-  itemToElement?: React.ComponentType | null;
+  itemToElement?: ComponentType<ItemType> | null;
 
   /**
    * Helper function passed to downshift that allows the library to render a
    * given item to a string label. By default, it extracts the `label` field
    * from a given item to serve as the item label in the list
    */
-  itemToString?: (item: unknown) => string;
+  itemToString?: ItemToStringHandler<ItemType>;
 
   /**
    * We try to stay as generic as possible here to allow individuals to pass
    * in a collection of whatever kind of data structure they prefer
    */
-  items: (object | string | number)[];
+  items: ItemType[];
 
   /**
    * @deprecated
@@ -183,7 +225,7 @@ export interface ComboBoxProps
    * `({ selectedItem }) => void`
   //  * @param {{ selectedItem }}
    */
-  onChange: (data: { selectedItem: any }) => void;
+  onChange: (data: OnChangeData<ItemType>) => void;
 
   /**
    * Callback function to notify consumer when the text input changes.
@@ -198,7 +240,7 @@ export interface ComboBoxProps
    * `(evt) => void`
    * @param {MouseEvent} event
    */
-  onToggleClick?: (evt: MouseEvent) => void;
+  onToggleClick?: (evt: MouseEvent<HTMLButtonElement>) => void;
 
   /**
    * Used to provide a placeholder text node before a user enters any input.
@@ -214,14 +256,18 @@ export interface ComboBoxProps
   /**
    * For full control of the selection
    */
-  selectedItem?: object | string | number;
+  selectedItem?: ItemType | null;
 
   /**
    * Specify your own filtering logic by passing in a `shouldFilterItem`
    * function that takes in the current input and an item and passes back
    * whether or not the item should be filtered.
    */
-  shouldFilterItem?: (input: any) => boolean;
+  shouldFilterItem?: (input: {
+    item: ItemType;
+    itemToString?: ItemToStringHandler<ItemType>;
+    inputValue: string | null;
+  }) => boolean;
 
   /**
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
@@ -232,13 +278,13 @@ export interface ComboBoxProps
    * Provide text to be used in a `<label>` element that is tied to the
    * combobox via ARIA attributes.
    */
-  titleText?: ReactNodeLike;
+  titleText?: ReactNode;
 
   /**
    * Specify a custom translation function that takes in a message identifier
    * and returns the localized string for the message
    */
-  translateWithId?: (id: any) => string;
+  translateWithId?: (id: string) => string;
 
   /**
    * Currently supports either the default type, or an inline variant
@@ -253,424 +299,455 @@ export interface ComboBoxProps
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText?: ReactNodeLike;
+  warnText?: ReactNode;
 }
 
-const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
-  const {
-    ['aria-label']: ariaLabel,
-    ariaLabel: deprecatedAriaLabel,
-    className: containerClassName,
-    direction,
-    disabled,
-    downshiftProps,
-    helperText,
-    id,
-    initialSelectedItem,
-    invalid,
-    invalidText,
-    items,
-    itemToElement,
-    itemToString,
-    light,
-    onChange,
-    onInputChange,
-    onToggleClick,
-    placeholder,
-    readOnly,
-    selectedItem,
-    shouldFilterItem,
-    size,
-    titleText,
-    translateWithId,
-    type: _type,
-    warn,
-    warnText,
-    ...rest
-  } = props;
-  const prefix = usePrefix();
-  const { isFluid } = useContext(FormContext);
-  const textInput = useRef<HTMLInputElement>(null);
-  const comboBoxInstanceId = getInstanceId();
-  const [inputValue, setInputValue] = useState(
-    getInputValue({
+const ComboBox = forwardRef(
+  <ItemType,>(
+    props: ComboBoxProps<ItemType>,
+    ref: ForwardedRef<HTMLInputElement>
+  ) => {
+    const {
+      ['aria-label']: ariaLabel = 'Choose an item',
+      ariaLabel: deprecatedAriaLabel,
+      className: containerClassName,
+      direction,
+      disabled,
+      downshiftProps,
+      helperText,
+      id,
       initialSelectedItem,
-      inputValue: '',
-      itemToString,
+      invalid,
+      invalidText,
+      items,
+      itemToElement,
+      itemToString = defaultItemToString,
+      light,
+      onChange,
+      onInputChange,
+      onToggleClick,
+      placeholder,
+      readOnly,
       selectedItem,
-    })
-  );
-  const [isFocused, setIsFocused] = useState(false);
-  const [prevSelectedItem, setPrevSelectedItem] = useState<any>();
-  const [doneInitialSelectedItem, setDoneInitialSelectedItem] = useState(false);
-  const [highlightedIndex, setHighlightedIndex] = useState<number>();
-  const savedOnInputChange = useRef(onInputChange);
-
-  if (!doneInitialSelectedItem || prevSelectedItem !== selectedItem) {
-    setDoneInitialSelectedItem(true);
-    setPrevSelectedItem(selectedItem);
-    setInputValue(
+      shouldFilterItem = defaultShouldFilterItem,
+      size,
+      titleText,
+      translateWithId,
+      type: _type,
+      warn,
+      warnText,
+      ...rest
+    } = props;
+    const prefix = usePrefix();
+    const { isFluid } = useContext(FormContext);
+    const textInput = useRef<HTMLInputElement>(null);
+    const comboBoxInstanceId = getInstanceId();
+    const [inputValue, setInputValue] = useState(
       getInputValue({
         initialSelectedItem,
-        inputValue,
+        inputValue: '',
         itemToString,
         selectedItem,
       })
     );
-  }
+    const [isFocused, setIsFocused] = useState(false);
+    const [prevSelectedItem, setPrevSelectedItem] = useState<ItemType | null>();
+    const [doneInitialSelectedItem, setDoneInitialSelectedItem] =
+      useState(false);
+    const [highlightedIndex, setHighlightedIndex] = useState<number | null>();
+    const savedOnInputChange = useRef(onInputChange);
 
-  const filterItems = (items, itemToString, inputValue) =>
-    items.filter((item) =>
-      shouldFilterItem
-        ? shouldFilterItem({
-            item,
-            itemToString,
-            inputValue,
-          })
-        : defaultShouldFilterItem()
-    );
-
-  const handleOnChange = (selectedItem) => {
-    if (onChange) {
-      onChange({ selectedItem });
-    }
-  };
-
-  const handleOnInputValueChange = (inputValue) => {
-    setInputValue(inputValue || '');
-  };
-
-  useEffect(() => {
-    savedOnInputChange.current = onInputChange;
-  }, [onInputChange]);
-
-  useEffect(() => {
-    if (savedOnInputChange.current) {
-      savedOnInputChange.current(inputValue);
-    }
-  }, [inputValue]);
-
-  const handleSelectionClear = () => {
-    if (textInput?.current) {
-      textInput.current.focus();
-    }
-  };
-
-  const getHighlightedIndex = (changes) => {
-    if (Object.prototype.hasOwnProperty.call(changes, 'inputValue')) {
-      const { inputValue } = changes;
-      const filteredItems = filterItems(items, itemToString, inputValue);
-      const indexToHighlight = findHighlightedIndex(
-        {
-          ...props,
-          items: filteredItems,
-        },
-        inputValue
+    if (!doneInitialSelectedItem || prevSelectedItem !== selectedItem) {
+      setDoneInitialSelectedItem(true);
+      setPrevSelectedItem(selectedItem);
+      setInputValue(
+        getInputValue({
+          initialSelectedItem,
+          inputValue,
+          itemToString,
+          selectedItem,
+        })
       );
-      setHighlightedIndex(indexToHighlight);
-      return indexToHighlight;
-    }
-    return highlightedIndex;
-  };
-
-  const handleOnStateChange = (
-    changes,
-    { setHighlightedIndex: updateHighlightedIndex }
-  ) => {
-    const { type } = changes;
-    switch (type) {
-      case keyDownArrowDown:
-      case keyDownArrowUp:
-        setHighlightedIndex(changes.highlightedIndex);
-        break;
-      case blurButton:
-      case keyDownEscape:
-        setHighlightedIndex(changes.highlightedIndex);
-        break;
-      case clickButton:
-        setHighlightedIndex(changes.highlightedIndex);
-        break;
-      case changeInput:
-        updateHighlightedIndex(getHighlightedIndex(changes));
-        break;
-    }
-  };
-
-  const handleToggleClick = (isOpen) => (event) => {
-    if (onToggleClick) {
-      onToggleClick(event);
     }
 
-    if (event.target === textInput.current && isOpen) {
-      event.preventDownshiftDefault = true;
-      event?.persist?.();
-    }
-  };
+    const filterItems = (
+      items: ItemType[],
+      itemToString: ItemToStringHandler<ItemType>,
+      inputValue: string | null
+    ) =>
+      items.filter((item) =>
+        shouldFilterItem
+          ? shouldFilterItem({
+              item,
+              itemToString,
+              inputValue,
+            })
+          : defaultShouldFilterItem()
+      );
 
-  const showWarning = !invalid && warn;
-  const className = cx(`${prefix}--combo-box`, {
-    [`${prefix}--list-box--up`]: direction === 'top',
-    [`${prefix}--combo-box--warning`]: showWarning,
-    [`${prefix}--combo-box--readonly`]: readOnly,
-  });
+    const handleOnChange = (selectedItem: ItemType | null) => {
+      if (onChange) {
+        onChange({ selectedItem });
+      }
+    };
 
-  const titleClasses = cx(`${prefix}--label`, {
-    [`${prefix}--label--disabled`]: disabled,
-  });
-  const comboBoxHelperId = !helperText
-    ? undefined
-    : `combobox-helper-text-${comboBoxInstanceId}`;
-  const helperClasses = cx(`${prefix}--form__helper-text`, {
-    [`${prefix}--form__helper-text--disabled`]: disabled,
-  });
-  const wrapperClasses = cx(`${prefix}--list-box__wrapper`, [
-    containerClassName,
-    {
-      [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
-      [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
-    },
-  ]);
+    const handleOnInputValueChange = (inputValue?: string) => {
+      setInputValue(inputValue || '');
+    };
 
-  const inputClasses = cx(`${prefix}--text-input`, {
-    [`${prefix}--text-input--empty`]: !inputValue,
-    [`${prefix}--combo-box--input--focus`]: isFocused && !isFluid,
-  });
+    useEffect(() => {
+      savedOnInputChange.current = onInputChange;
+    }, [onInputChange]);
 
-  // needs to be Capitalized for react to render it correctly
-  const ItemToElement = itemToElement;
+    useEffect(() => {
+      if (savedOnInputChange.current) {
+        savedOnInputChange.current(inputValue);
+      }
+    }, [inputValue]);
 
-  return (
-    <Downshift
-      {...downshiftProps}
-      onChange={handleOnChange}
-      onInputValueChange={handleOnInputValueChange}
-      onStateChange={(...args) => {
-        handleOnStateChange(...args);
-        downshiftProps?.onStateChange?.(...args);
-      }}
-      inputValue={inputValue || ''}
-      itemToString={itemToString}
-      initialSelectedItem={initialSelectedItem}
-      inputId={id}
-      selectedItem={selectedItem}>
-      {({
-        getInputProps,
-        getItemProps,
-        getLabelProps,
-        getMenuProps,
-        getRootProps,
-        getToggleButtonProps,
-        isOpen,
-        inputValue,
-        selectedItem,
-        clearSelection,
-        toggleMenu,
-      }) => {
-        const rootProps = getRootProps(
-          // @ts-ignore this is not supposed to be a required property
-          {},
+    const handleSelectionClear = () => {
+      if (textInput?.current) {
+        textInput.current.focus();
+      }
+    };
+
+    const getHighlightedIndex = (changes: StateChangeOptions<ItemType>) => {
+      if (Object.prototype.hasOwnProperty.call(changes, 'inputValue')) {
+        const { inputValue } = changes;
+        const filteredItems = filterItems(
+          items,
+          itemToString,
+          inputValue || null
+        );
+        const indexToHighlight = findHighlightedIndex(
           {
-            suppressRefError: true,
-          }
+            ...props,
+            items: filteredItems,
+          },
+          inputValue
         );
-        const labelProps = getLabelProps();
-        const buttonProps = getToggleButtonProps({
-          disabled: disabled || readOnly,
-          onClick: handleToggleClick(isOpen),
-          // When we moved the "root node" of Downshift to the <input> for
-          // ARIA 1.2 compliance, we unfortunately hit this branch for the
-          // "mouseup" event that downshift listens to:
-          // https://github.com/downshift-js/downshift/blob/v5.2.1/src/downshift.js#L1051-L1065
-          //
-          // As a result, it will reset the state of the component and so we
-          // stop the event from propagating to prevent this if the menu is already open.
-          // This allows the toggleMenu behavior for the toggleButton to correctly open and
-          // close the menu.
-          onMouseUp(event) {
-            if (isOpen) {
-              event.stopPropagation();
-            }
-          },
-        });
-        const inputProps: any = getInputProps({
-          disabled,
-          placeholder,
-          onClick() {
-            toggleMenu();
-          },
-          onKeyDown: (event) => {
-            if (match(event, keys.Space)) {
-              event.stopPropagation();
-            }
+        setHighlightedIndex(indexToHighlight);
+        return indexToHighlight;
+      }
+      return highlightedIndex || 0;
+    };
 
-            if (match(event, keys.Enter) && !inputValue) {
-              toggleMenu();
-            }
+    const handleOnStateChange = (
+      changes: StateChangeOptions<ItemType>,
+      {
+        setHighlightedIndex: updateHighlightedIndex,
+      }: ControllerStateAndHelpers<ItemType>
+    ) => {
+      const { type } = changes;
+      switch (type) {
+        case keyDownArrowDown:
+        case keyDownArrowUp:
+          setHighlightedIndex(changes.highlightedIndex);
+          break;
+        case blurButton:
+        case keyDownEscape:
+          setHighlightedIndex(changes.highlightedIndex);
+          break;
+        case clickButton:
+          setHighlightedIndex(changes.highlightedIndex);
+          break;
+        case changeInput:
+          updateHighlightedIndex(getHighlightedIndex(changes));
+          break;
+      }
+    };
 
-            if (match(event, keys.Escape) && inputValue) {
-              if (event.target === textInput.current && isOpen) {
-                toggleMenu();
-                event.preventDownshiftDefault = true;
-                event?.persist?.();
+    const handleToggleClick =
+      (isOpen: boolean) =>
+      (
+        event: MouseEvent<HTMLButtonElement> & {
+          preventDownshiftDefault: boolean;
+        }
+      ) => {
+        if (onToggleClick) {
+          onToggleClick(event);
+        }
+
+        if (event.target === textInput.current && isOpen) {
+          event.preventDownshiftDefault = true;
+          event?.persist?.();
+        }
+      };
+
+    const showWarning = !invalid && warn;
+    const className = cx(`${prefix}--combo-box`, {
+      [`${prefix}--list-box--up`]: direction === 'top',
+      [`${prefix}--combo-box--warning`]: showWarning,
+      [`${prefix}--combo-box--readonly`]: readOnly,
+    });
+
+    const titleClasses = cx(`${prefix}--label`, {
+      [`${prefix}--label--disabled`]: disabled,
+    });
+    const comboBoxHelperId = !helperText
+      ? undefined
+      : `combobox-helper-text-${comboBoxInstanceId}`;
+    const helperClasses = cx(`${prefix}--form__helper-text`, {
+      [`${prefix}--form__helper-text--disabled`]: disabled,
+    });
+    const wrapperClasses = cx(`${prefix}--list-box__wrapper`, [
+      containerClassName,
+      {
+        [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
+        [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
+      },
+    ]);
+
+    const inputClasses = cx(`${prefix}--text-input`, {
+      [`${prefix}--text-input--empty`]: !inputValue,
+      [`${prefix}--combo-box--input--focus`]: isFocused && !isFluid,
+    });
+
+    // needs to be Capitalized for react to render it correctly
+    const ItemToElement = itemToElement;
+
+    return (
+      <Downshift
+        {...downshiftProps}
+        onChange={handleOnChange}
+        onInputValueChange={handleOnInputValueChange}
+        onStateChange={(...args) => {
+          handleOnStateChange(...args);
+          downshiftProps?.onStateChange?.(...args);
+        }}
+        inputValue={inputValue || ''}
+        itemToString={itemToString}
+        initialSelectedItem={initialSelectedItem}
+        inputId={id}
+        selectedItem={selectedItem}>
+        {({
+          getInputProps,
+          getItemProps,
+          getLabelProps,
+          getMenuProps,
+          getRootProps,
+          getToggleButtonProps,
+          isOpen,
+          inputValue,
+          selectedItem,
+          clearSelection,
+          toggleMenu,
+        }) => {
+          const rootProps = getRootProps(
+            // @ts-ignore this is not supposed to be a required property
+            {},
+            {
+              suppressRefError: true,
+            }
+          );
+          const labelProps = getLabelProps();
+          const buttonProps = getToggleButtonProps({
+            disabled: disabled || readOnly,
+            onClick: handleToggleClick(isOpen),
+            // When we moved the "root node" of Downshift to the <input> for
+            // ARIA 1.2 compliance, we unfortunately hit this branch for the
+            // "mouseup" event that downshift listens to:
+            // https://github.com/downshift-js/downshift/blob/v5.2.1/src/downshift.js#L1051-L1065
+            //
+            // As a result, it will reset the state of the component and so we
+            // stop the event from propagating to prevent this if the menu is already open.
+            // This allows the toggleMenu behavior for the toggleButton to correctly open and
+            // close the menu.
+            onMouseUp(event) {
+              if (isOpen) {
+                event.stopPropagation();
               }
-            }
+            },
+          });
+          const inputProps: any = getInputProps({
+            disabled,
+            placeholder,
+            onClick(): void {
+              toggleMenu();
+            },
+            onKeyDown: (
+              event: KeyboardEvent<HTMLInputElement> & {
+                preventDownshiftDefault: boolean;
+                target: {
+                  value: string;
+                  setSelectionRange: (start: number, end: number) => void;
+                };
+              }
+            ): void => {
+              if (match(event, keys.Space)) {
+                event.stopPropagation();
+              }
 
-            if (match(event, keys.Home)) {
-              event.target.setSelectionRange(0, 0);
-            }
+              if (match(event, keys.Enter) && !inputValue) {
+                toggleMenu();
+              }
 
-            if (match(event, keys.End)) {
-              event.target.setSelectionRange(
-                event.target.value.length,
-                event.target.value.length
-              );
-            }
-          },
-        });
-
-        const handleFocus = (evt) => {
-          setIsFocused(evt.type === 'focus');
-        };
-
-        const readOnlyEventHandlers = readOnly
-          ? {
-              onKeyDown: (evt) => {
-                // This prevents the select from opening for the above keys
-                if (evt.key !== 'Tab') {
-                  evt.preventDefault();
+              if (match(event, keys.Escape) && inputValue) {
+                if (event.target === textInput.current && isOpen) {
+                  toggleMenu();
+                  event.preventDownshiftDefault = true;
+                  event?.persist?.();
                 }
-              },
-            }
-          : {};
+              }
 
-        return (
-          <div className={wrapperClasses}>
-            {titleText && (
-              <Text as="label" className={titleClasses} {...labelProps}>
-                {titleText}
-              </Text>
-            )}
-            <ListBox
-              onFocus={handleFocus}
-              onBlur={handleFocus}
-              className={className}
-              disabled={disabled}
-              invalid={invalid}
-              invalidText={invalidText}
-              isOpen={isOpen}
-              light={light}
-              size={size}
-              warn={warn}
-              warnText={warnText}>
-              <div className={`${prefix}--list-box__field`}>
-                <input
-                  role="combobox"
-                  disabled={disabled}
-                  className={inputClasses}
-                  type="text"
-                  tabIndex="0"
-                  aria-autocomplete="list"
-                  aria-expanded={rootProps['aria-expanded']}
-                  aria-haspopup="listbox"
-                  aria-controls={inputProps['aria-controls']}
-                  aria-owns={getMenuProps().id}
-                  title={textInput?.current?.value}
-                  {...inputProps}
-                  {...rest}
-                  {...readOnlyEventHandlers}
-                  readOnly={readOnly}
-                  ref={mergeRefs(textInput, ref)}
-                  aria-describedby={
-                    helperText && !invalid && !warn && !isFluid
-                      ? comboBoxHelperId
-                      : undefined
+              if (match(event, keys.Home)) {
+                event.target.setSelectionRange(0, 0);
+              }
+
+              if (match(event, keys.End)) {
+                event.target.setSelectionRange(
+                  event.target.value.length,
+                  event.target.value.length
+                );
+              }
+            },
+          });
+
+          const handleFocus = (evt: FocusEvent<HTMLDivElement>) => {
+            setIsFocused(evt.type === 'focus');
+          };
+
+          const readOnlyEventHandlers = readOnly
+            ? {
+                onKeyDown: (evt: KeyboardEvent<HTMLInputElement>) => {
+                  // This prevents the select from opening for the above keys
+                  if (evt.key !== 'Tab') {
+                    evt.preventDefault();
                   }
-                />
-                {invalid && (
-                  <WarningFilled
-                    className={`${prefix}--list-box__invalid-icon`}
+                },
+              }
+            : {};
+
+          return (
+            <div className={wrapperClasses}>
+              {titleText && (
+                <Text as="label" className={titleClasses} {...labelProps}>
+                  {titleText}
+                </Text>
+              )}
+              <ListBox
+                onFocus={handleFocus}
+                onBlur={handleFocus}
+                className={className}
+                disabled={disabled}
+                invalid={invalid}
+                invalidText={invalidText}
+                isOpen={isOpen}
+                light={light}
+                size={size}
+                warn={warn}
+                warnText={warnText}>
+                <div className={`${prefix}--list-box__field`}>
+                  <input
+                    role="combobox"
+                    disabled={disabled}
+                    className={inputClasses}
+                    type="text"
+                    tabIndex={0}
+                    aria-autocomplete="list"
+                    aria-expanded={rootProps['aria-expanded']}
+                    aria-haspopup="listbox"
+                    aria-controls={inputProps['aria-controls']}
+                    aria-owns={getMenuProps().id}
+                    title={textInput?.current?.value}
+                    {...inputProps}
+                    {...rest}
+                    {...readOnlyEventHandlers}
+                    readOnly={readOnly}
+                    ref={mergeRefs(textInput, ref)}
+                    aria-describedby={
+                      helperText && !invalid && !warn && !isFluid
+                        ? comboBoxHelperId
+                        : undefined
+                    }
                   />
-                )}
-                {showWarning && (
-                  <WarningAltFilled
-                    className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
-                  />
-                )}
-                {inputValue && (
-                  <ListBoxSelection
-                    clearSelection={clearSelection}
+                  {invalid && (
+                    <WarningFilled
+                      className={`${prefix}--list-box__invalid-icon`}
+                    />
+                  )}
+                  {showWarning && (
+                    <WarningAltFilled
+                      className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
+                    />
+                  )}
+                  {inputValue && (
+                    <ListBoxSelection
+                      clearSelection={clearSelection}
+                      translateWithId={translateWithId}
+                      disabled={disabled || readOnly}
+                      onClearSelection={handleSelectionClear}
+                      selectionCount={0}
+                    />
+                  )}
+                  <ListBoxTrigger
+                    {...buttonProps}
+                    isOpen={isOpen}
                     translateWithId={translateWithId}
-                    disabled={disabled || readOnly}
-                    onClearSelection={handleSelectionClear}
-                    selectionCount={0}
                   />
-                )}
-                <ListBoxTrigger
-                  {...buttonProps}
-                  isOpen={isOpen}
-                  translateWithId={translateWithId}
-                />
-              </div>
-              <ListBox.Menu
-                {...getMenuProps({
-                  'aria-label': deprecatedAriaLabel || ariaLabel,
-                })}>
-                {isOpen
-                  ? filterItems(items, itemToString, inputValue).map(
-                      (item, index) => {
-                        const itemProps = getItemProps({
-                          item,
-                          index,
-                          ['aria-current']:
-                            selectedItem === item ? 'true' : 'false',
-                          ['aria-selected']:
-                            highlightedIndex === index ? 'true' : 'false',
-                          disabled: item.disabled,
-                        });
-                        return (
-                          <ListBox.MenuItem
-                            key={itemProps.id}
-                            isActive={selectedItem === item}
-                            isHighlighted={highlightedIndex === index}
-                            title={
-                              itemToElement
-                                ? item.text
-                                : itemToString
-                                ? itemToString(item)
-                                : undefined
-                            }
-                            {...itemProps}>
-                            {itemToElement ? (
-                              // @ts-ignore
-                              <ItemToElement key={itemProps.id} {...item} />
-                            ) : itemToString ? (
-                              itemToString(item)
-                            ) : (
-                              defaultItemToString(item)
-                            )}
-                            {selectedItem === item && (
-                              <Checkmark
-                                className={`${prefix}--list-box__menu-item__selected-icon`}
-                              />
-                            )}
-                          </ListBox.MenuItem>
-                        );
-                      }
-                    )
-                  : null}
-              </ListBox.Menu>
-            </ListBox>
-            {helperText && !invalid && !warn && !isFluid && (
-              <Text as="div" id={comboBoxHelperId} className={helperClasses}>
-                {helperText}
-              </Text>
-            )}
-          </div>
-        );
-      }}
-    </Downshift>
-  );
-});
+                </div>
+                <ListBox.Menu
+                  {...getMenuProps({
+                    'aria-label': deprecatedAriaLabel || ariaLabel,
+                  })}>
+                  {isOpen
+                    ? filterItems(items, itemToString, inputValue).map(
+                        (item, index) => {
+                          const isObject =
+                            item !== null && typeof item === 'object';
+                          const title =
+                            isObject && 'text' in item && itemToElement
+                              ? item.text?.toString()
+                              : itemToString(item);
+                          const disabled =
+                            isObject && 'disabled' in item
+                              ? !!item.disabled
+                              : undefined;
+                          const itemProps = getItemProps({
+                            item,
+                            index,
+                            ['aria-current']:
+                              selectedItem === item ? 'true' : 'false',
+                            ['aria-selected']:
+                              highlightedIndex === index ? 'true' : 'false',
+                            disabled,
+                          });
+                          return (
+                            <ListBox.MenuItem
+                              key={itemProps.id}
+                              isActive={selectedItem === item}
+                              isHighlighted={highlightedIndex === index}
+                              title={title}
+                              {...itemProps}>
+                              {ItemToElement ? (
+                                <ItemToElement key={itemProps.id} {...item} />
+                              ) : (
+                                itemToString(item)
+                              )}
+                              {selectedItem === item && (
+                                <Checkmark
+                                  className={`${prefix}--list-box__menu-item__selected-icon`}
+                                />
+                              )}
+                            </ListBox.MenuItem>
+                          );
+                        }
+                      )
+                    : null}
+                </ListBox.Menu>
+              </ListBox>
+              {helperText && !invalid && !warn && !isFluid && (
+                <Text as="div" id={comboBoxHelperId} className={helperClasses}>
+                  {helperText}
+                </Text>
+              )}
+            </div>
+          );
+        }}
+      </Downshift>
+    );
+  }
+);
 
 ComboBox.displayName = 'ComboBox';
 ComboBox.propTypes = {
@@ -714,7 +791,7 @@ ComboBox.propTypes = {
    * Provide helper text that is used alongside the control label for
    * additional help
    */
-  helperText: PropTypes.string,
+  helperText: PropTypes.node,
 
   /**
    * Specify a custom `id` for the input
@@ -862,4 +939,12 @@ ComboBox.defaultProps = {
   direction: 'bottom',
 };
 
-export default ComboBox;
+type ComboboxComponentProps<ItemType> = PropsWithoutRef<
+  PropsWithChildren<ComboBoxProps<ItemType>> & RefAttributes<HTMLInputElement>
+>;
+
+interface ComboBoxComponent {
+  <ItemType>(props: ComboboxComponentProps<ItemType>): ReactElement | null;
+}
+
+export default ComboBox as ComboBoxComponent;
