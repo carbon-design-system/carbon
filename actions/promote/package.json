@@ -1,11 +1,12 @@
 {
   "name": "promote-packages-to-latest",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@actions/core": "^1.8.2",
     "execa": "^5.1.1",
     "fast-glob": "^3.2.11",
     "fs-extra": "^11.0.0",
-    "got": "^11.8.0"
+    "got": "^13.0.0"
   }
 }
