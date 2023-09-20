@@ -10,7 +10,7 @@ import React, { type ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
 
-interface HeaderSideNavItemsProps {
+export interface HeaderSideNavItemsProps {
   className?: string | undefined;
   children?: ReactNode;
   hasDivider?: boolean | undefined;
