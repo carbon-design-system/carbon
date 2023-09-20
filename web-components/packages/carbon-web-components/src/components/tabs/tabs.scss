@@ -134,7 +134,7 @@ $inset-transition: inset 110ms motion(standard, productive);
     height: $spacing-09;
     padding: $spacing-03 $spacing-05;
     // height - vertical padding
-    /* stylelint-disable declaration-property-unit-whitelist */
+    /* stylelint-disable declaration-property-unit-allowed-list */
     line-height: calc(#{$spacing-09} - (#{$spacing-03} * 2));
   }
 }
