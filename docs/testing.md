@@ -63,7 +63,7 @@ cd packages/react
 yarn storybook
 ```
 
-One the storybook is loaded, you can run tests against is using the storybook
+Once the storybook is loaded, you can run tests against it using the storybook
 test-utils found in `e2e/test-utils/storybook`. A common use-case for testing a
 component is to use Percy to take a snapshot of a component in a particular
 theme from a specific story in storybook.
@@ -122,7 +122,7 @@ against.
 #### Working with snapshots locally
 
 Sometimes you'll want to debug snapshots locally instead of relying on an
-externaly service to get feedback. To do so, you can use the
+external service to get feedback. To do so, you can use the
 `ENABLE_LOCAL_SNAPSHOTS` environment variable to store snapshots locally. Almost
 any playwright command you run can be prefixed with this value in order to store
 screenshots locally.
@@ -137,13 +137,13 @@ screenshots locally**
 The first time you'll run this command, it will need to generate the baseline
 snapshots for this component. The second time you run it, it will compare the
 snapshots for the current page with what is stored in the screenshot. If the two
-do not match, playwright will report a failure and will provide a link to the
+do not match, Playwright will report a failure and will provide a link to the
 diff image on your machine.
 
 ## FAQ
 
 ### Why am I seeing `browserType.launch: Executable doesn't exist at ../path`?
 
-The browser executables need to be installed so that playwright can run tests
-inside chromium, firefox, etc. They can be installed by running
+The browser executables need to be installed so that Playwright can run tests
+inside Chromium, Firefox, etc. They can be installed by running
 `yarn playwright install`
