@@ -51,17 +51,17 @@
 
   .#{$prefix}--toggle__switch {
     position: relative;
+    border-radius: convert.to-rem(12px);
     background-color: $toggle-off;
     block-size: convert.to-rem(24px);
-    border-radius: convert.to-rem(12px);
     inline-size: convert.to-rem(48px);
     transition: background-color $duration-fast-01 motion(exit, productive);
 
     &::before {
       position: absolute;
+      border-radius: 50%;
       background-color: $icon-on-color;
       block-size: convert.to-rem(18px);
-      border-radius: 50%;
       content: '';
       inline-size: convert.to-rem(18px);
       inset-block-start: convert.to-rem(3px);
@@ -204,9 +204,8 @@
   .#{$prefix}--toggle--skeleton .#{$prefix}--toggle__skeleton-circle {
     @include circular-skeleton;
 
-    block-size: convert.to-rem(18px);
     border-radius: 50%;
-
+    block-size: convert.to-rem(18px);
     inline-size: convert.to-rem(18px);
   }
 
@@ -214,7 +213,6 @@
     @include skeleton;
 
     block-size: convert.to-rem(8px);
-
     inline-size: convert.to-rem(24px);
     margin-inline-start: convert.to-rem(8px);
   }

@@ -50,8 +50,8 @@
 @mixin circular-skeleton {
   position: relative;
   overflow: hidden;
-  background: $skeleton-background;
   border-radius: 50%;
+  background: $skeleton-background;
 
   &::before {
     position: absolute;
