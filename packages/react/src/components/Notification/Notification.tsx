@@ -938,6 +938,7 @@ export function ActionableNotification({
   const [isOpen, setIsOpen] = useState(true);
   const prefix = usePrefix();
   const id = useId('actionable-notification');
+  const subtitleId = useId('actionable-notification-subtitle');
   const containerClassName = cx(className, {
     [`${prefix}--actionable-notification`]: true,
     [`${prefix}--actionable-notification--toast`]: !inline,
@@ -975,7 +976,7 @@ export function ActionableNotification({
       ref={ref}
       role={role}
       className={containerClassName}
-      aria-labelledby={title ? id : undefined}>
+      aria-labelledby={title ? id : subtitleId}>
       <div className={`${prefix}--actionable-notification__details`}>
         <NotificationIcon
           notificationType={inline ? 'inline' : 'toast'}
@@ -992,7 +993,9 @@ export function ActionableNotification({
               </div>
             )}
             {subtitle && (
-              <div className={`${prefix}--actionable-notification__subtitle`}>
+              <div
+                className={`${prefix}--actionable-notification__subtitle`}
+                id={subtitleId}>
                 {subtitle}
               </div>
             )}

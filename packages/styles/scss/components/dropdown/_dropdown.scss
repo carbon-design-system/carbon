@@ -50,13 +50,13 @@
 
     position: relative;
     display: block;
-    width: 100%;
-    height: convert.to-rem(40px);
     border: none;
-    border-bottom: 1px solid $border-strong;
     background-color: $field;
+    block-size: convert.to-rem(40px);
+    border-block-end: 1px solid $border-strong;
     color: $text-primary;
     cursor: pointer;
+    inline-size: 100%;
     list-style: none;
     outline: 2px solid transparent;
     transition: background-color $duration-fast-01 motion(standard, productive);
@@ -68,50 +68,50 @@
 
   // Menu's triggering element updated to button with Downshift v5 upgrade
   .#{$prefix}--dropdown .#{$prefix}--list-box__field {
-    text-align: left;
+    text-align: start;
   }
 
   .#{$prefix}--dropdown--lg {
-    height: convert.to-rem(48px);
-    max-height: convert.to-rem(48px);
+    block-size: convert.to-rem(48px);
+    max-block-size: convert.to-rem(48px);
   }
 
   .#{$prefix}--dropdown--lg .#{$prefix}--dropdown__arrow {
-    top: convert.to-rem(16px);
+    inset-block-start: convert.to-rem(16px);
   }
 
   .#{$prefix}--dropdown--sm {
-    height: convert.to-rem(32px);
-    max-height: convert.to-rem(32px);
+    block-size: convert.to-rem(32px);
+    max-block-size: convert.to-rem(32px);
   }
 
   .#{$prefix}--dropdown--sm .#{$prefix}--dropdown__arrow {
-    top: convert.to-rem(8px);
+    inset-block-start: convert.to-rem(8px);
   }
 
   .#{$prefix}--dropdown--open {
-    border-bottom-color: $border-subtle;
+    border-block-end-color: $border-subtle;
   }
 
   .#{$prefix}--dropdown--invalid {
     @include focus-outline('invalid');
 
     .#{$prefix}--dropdown-text {
-      padding-right: convert.to-rem(56px);
+      padding-inline-end: convert.to-rem(56px);
     }
 
     + .#{$prefix}--form-requirement {
       display: inline-block;
-      max-height: convert.to-rem(200px);
       color: $text-error;
+      max-block-size: convert.to-rem(200px);
     }
   }
 
   .#{$prefix}--dropdown__invalid-icon {
     position: absolute;
-    top: 50%;
-    right: $spacing-08;
     fill: $support-error;
+    inset-block-start: 50%;
+    inset-inline-end: $spacing-08;
     transform: translateY(-50%);
   }
 
@@ -127,7 +127,7 @@
     @include box-shadow;
 
     // 40px item height * 5.5 items shown
-    max-height: convert.to-rem(220px);
+    max-block-size: convert.to-rem(220px);
     transition: max-height $duration-fast-02 motion(entrance, productive);
   }
 
@@ -140,26 +140,26 @@
   }
 
   .#{$prefix}--dropdown--up .#{$prefix}--dropdown-list {
-    bottom: 2rem;
+    inset-block-end: 2rem;
   }
 
   .#{$prefix}--dropdown__arrow {
     position: absolute;
-    top: convert.to-rem(13px);
-    right: 1rem;
     fill: $icon-primary;
+    inset-block-start: convert.to-rem(13px);
+    inset-inline-end: 1rem;
     pointer-events: none;
     transform-origin: 50% 45%;
     transition: transform $duration-fast-02 motion(standard, productive);
   }
 
   button.#{$prefix}--dropdown-text {
-    width: 100%;
     border: none;
     // button-reset mixin contradicts with bx--dropdown-text styles
     background: none;
     color: $text-primary;
-    text-align: left;
+    inline-size: 100%;
+    text-align: start;
 
     &:focus {
       @include focus-outline('outline');
@@ -172,10 +172,10 @@
     display: block;
     overflow: hidden;
     // Account for the border in `.bx--dropdown`
-    height: calc(100% + 1px);
+    block-size: calc(100% + 1px);
     // 2rem + SVG width
-    padding-right: convert.to-rem(42px);
-    padding-left: $spacing-05;
+    padding-inline-end: convert.to-rem(42px);
+    padding-inline-start: $spacing-05;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -189,11 +189,11 @@
     position: absolute;
     z-index: z('dropdown');
     display: flex;
-    width: 100%;
-    max-height: 0;
     flex-direction: column;
     background-color: $layer;
+    inline-size: 100%;
     list-style: none;
+    max-block-size: 0;
     // NOTE: IE, Edge, and Safari do not support two value `overflow` shorthand.
     overflow-x: hidden;
     overflow-y: auto;
@@ -231,12 +231,12 @@
     }
 
     &:first-of-type .#{$prefix}--dropdown-link {
-      border-top-color: transparent;
+      border-block-start-color: transparent;
     }
   }
 
   .#{$prefix}--dropdown-item:last-of-type .#{$prefix}--dropdown-link {
-    border-bottom: none;
+    border-block-end: none;
   }
 
   .#{$prefix}--dropdown-link {
@@ -244,11 +244,11 @@
 
     display: block;
     overflow: hidden;
-    height: convert.to-rem(40px);
     padding: convert.to-rem(11px) 0;
     border: 1px solid transparent;
-    border-top-color: $border-subtle;
     margin: 0 $spacing-05;
+    block-size: convert.to-rem(40px);
+    border-block-start-color: $border-subtle;
     color: $text-secondary;
     font-weight: normal;
     line-height: 1rem;
@@ -264,13 +264,13 @@
 
   // V11: Possibly deprecate
   .#{$prefix}--dropdown--light .#{$prefix}--dropdown-link {
-    border-top-color: $border-subtle-02;
+    border-block-start-color: $border-subtle-02;
   }
 
   .#{$prefix}--dropdown--sm .#{$prefix}--dropdown-link {
-    height: convert.to-rem(32px);
-    padding-top: convert.to-rem(7px);
-    padding-bottom: convert.to-rem(7px);
+    block-size: convert.to-rem(32px);
+    padding-block-end: convert.to-rem(7px);
+    padding-block-start: convert.to-rem(7px);
   }
 
   .#{$prefix}--dropdown--focused,
@@ -312,7 +312,7 @@
   }
 
   .#{$prefix}--dropdown-item:hover .#{$prefix}--dropdown-link {
-    border-bottom-color: $layer-hover;
+    border-block-end-color: $layer-hover;
   }
 
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown__arrow {
@@ -322,7 +322,7 @@
   .#{$prefix}--dropdown--open.#{$prefix}--dropdown--sm
     .#{$prefix}--dropdown-list {
     // 32px item height * 5.5 items shown
-    max-height: convert.to-rem(176px);
+    max-block-size: convert.to-rem(176px);
   }
 
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown-item {
@@ -330,7 +330,7 @@
   }
 
   .#{$prefix}--dropdown--disabled {
-    border-bottom-color: transparent;
+    border-block-end-color: transparent;
 
     &:hover {
       background-color: $field;
@@ -364,15 +364,15 @@
   }
 
   .#{$prefix}--dropdown--auto-width {
-    width: auto;
-    max-width: convert.to-rem(400px);
+    inline-size: auto;
+    max-inline-size: convert.to-rem(400px);
   }
 
   .#{$prefix}--dropdown--inline {
     display: inline-block;
-    width: auto;
-    border-bottom-color: transparent;
     background-color: transparent;
+    border-block-end-color: transparent;
+    inline-size: auto;
     justify-self: start;
     transition: background $duration-fast-01 motion(entrance, productive);
 
@@ -385,8 +385,8 @@
     }
 
     .#{$prefix}--dropdown__arrow {
-      top: convert.to-rem(8px);
-      right: convert.to-rem(8px);
+      inset-block-start: convert.to-rem(8px);
+      inset-inline-end: convert.to-rem(8px);
     }
   }
 
@@ -397,8 +397,8 @@
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-text {
     display: inline-block;
     overflow: visible;
-    height: convert.to-rem(32px);
     padding: convert.to-rem(7px) $spacing-07 convert.to-rem(7px) $spacing-04;
+    block-size: convert.to-rem(32px);
     color: $text-primary;
   }
 
@@ -414,12 +414,12 @@
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid
     .#{$prefix}--dropdown__invalid-icon {
-    right: convert.to-rem(32px);
+    inset-inline-end: convert.to-rem(32px);
   }
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid
     .#{$prefix}--dropdown-text {
-    padding-right: convert.to-rem(56px);
+    padding-inline-end: convert.to-rem(56px);
   }
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--open:focus
@@ -441,11 +441,11 @@
     }
 
     .#{$prefix}--dropdown-link {
-      border-top-color: transparent;
+      border-block-start-color: transparent;
     }
 
     + .#{$prefix}--dropdown-item .#{$prefix}--dropdown-link {
-      border-top-color: transparent;
+      border-block-start-color: transparent;
     }
 
     .#{$prefix}--list-box__menu-item__selected-icon {
@@ -478,8 +478,8 @@
   // readonly
   .#{$prefix}--dropdown--readonly,
   .#{$prefix}--dropdown--readonly:hover {
-    border-bottom-color: $border-subtle;
     background-color: transparent;
+    border-block-end-color: $border-subtle;
   }
 
   .#{$prefix}--dropdown--readonly .#{$prefix}--list-box__field,

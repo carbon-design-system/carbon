@@ -59,7 +59,7 @@ const MenuButton = React.forwardRef(function MenuButton(
   }
 
   function handleOpen() {
-    menuRef.current.style.width = `${width}px`;
+    menuRef.current.style.inlineSize = `${width}px`;
   }
 
   const triggerClasses = classNames(`${prefix}--menu-button__trigger`, {

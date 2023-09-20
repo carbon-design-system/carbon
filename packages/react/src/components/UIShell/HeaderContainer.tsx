@@ -15,7 +15,7 @@ interface HeaderContainerRenderProps {
   onClickSideNavExpand: () => void;
 }
 
-interface HeaderContainerProps {
+export interface HeaderContainerProps {
   isSideNavExpanded?: boolean;
   render: React.ComponentType<HeaderContainerRenderProps>;
 }

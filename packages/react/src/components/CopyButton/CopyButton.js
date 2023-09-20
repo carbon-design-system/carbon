@@ -13,11 +13,17 @@ import Copy from '../Copy';
 import { LayoutConstraint } from '../Layout';
 import { usePrefix } from '../../internal/usePrefix';
 
-export default function CopyButton({ iconDescription, className, ...other }) {
+export default function CopyButton({
+  align = 'bottom',
+  iconDescription,
+  className,
+  ...other
+}) {
   const prefix = usePrefix();
   return (
     <LayoutConstraint size={{ default: 'md', max: 'lg' }}>
       <Copy
+        align={align}
         className={classnames(className, `${prefix}--copy-btn`)}
         aria-label={iconDescription}
         {...other}>
@@ -28,6 +34,20 @@ export default function CopyButton({ iconDescription, className, ...other }) {
 }
 
 CopyButton.propTypes = {
+  /**
+   * Specify how the trigger should align with the tooltip
+   */
+  align: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+    'left',
+    'right',
+  ]),
+
   /**
    * Specify an optional className to be applied to the underlying `<button>`
    */
