@@ -119,7 +119,9 @@ describe('Slider', () => {
 
     it('should accurately position slider on mount', () => {
       renderSlider({ value: 50, max: 100, min: 0 });
-      expect(screen.getByRole('slider')).toHaveStyle({ left: '50%' });
+      expect(screen.getByRole('slider')).toHaveStyle({
+        insetInlineStart: '50%',
+      });
     });
 
     it('marks input field as hidden if hidden via props', () => {

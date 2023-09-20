@@ -73,7 +73,7 @@
   }
 
   // Negative values for `stroke-dashoffset` are not supported in Safari
-  @media not all and (min-resolution: 0.001dpcm) {
+  @media not all and (resolution >= 0.001dpcm) {
     @supports (-webkit-appearance: none) and (stroke-color: transparent) {
       circle.#{$prefix}--loading__background {
         stroke-dasharray: 265;

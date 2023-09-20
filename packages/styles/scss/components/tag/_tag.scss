@@ -17,7 +17,7 @@
 @use '../../spacing' as *;
 @use './tokens' as *;
 @use './mixins' as *;
-@use '../../utilities/skeleton';
+@use '../../utilities/skeleton' as *;
 
 /// Tag styles
 /// @access public
@@ -44,8 +44,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin: $spacing-02;
     border-radius: convert.to-rem(15px);
+    margin: $spacing-02;
     cursor: default;
     // restricts size of contained elements
     max-inline-size: 100%;
@@ -186,10 +186,10 @@
     justify-content: center;
     padding: 0;
     border: 0;
+    border-radius: 50%;
     margin: 0 0 0 convert.to-rem(2px);
     background-color: transparent;
     block-size: layout.size('height');
-    border-radius: 50%;
     color: currentColor;
     cursor: pointer;
     inline-size: layout.size('height');
@@ -250,6 +250,8 @@
 
   // Skeleton state
   .#{$prefix}--tag.#{$prefix}--skeleton {
+    @include skeleton;
+
     @include tag-theme(
       $bg-color: $skeleton-background,
       $text-color: $text-primary
@@ -259,7 +261,7 @@
     inline-size: convert.to-rem(60px);
 
     // Safari specific bug (#7672)
-    @media not all and (min-resolution: 0.001dpcm) {
+    @media not all and (min-resolution >= 0.001dpcm) {
       @supports (-webkit-appearance: none) and (stroke-color: transparent) {
         transform: translateZ(0);
       }

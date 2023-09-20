@@ -48,9 +48,9 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
   display: inline-flex;
   flex-shrink: 0;
   justify-content: space-between;
+  border-radius: $button-border-radius;
   // Fix to remove added margins on buttons in safari (see #5155)
   margin: 0;
-  border-radius: $button-border-radius;
   cursor: pointer;
   inline-size: max-content;
   max-inline-size: convert.to-rem(320px);
