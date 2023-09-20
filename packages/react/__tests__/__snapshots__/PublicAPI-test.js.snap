@@ -1246,7 +1246,7 @@ Map {
         "type": "shape",
       },
       "helperText": Object {
-        "type": "string",
+        "type": "node",
       },
       "id": Object {
         "isRequired": true,
