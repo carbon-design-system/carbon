@@ -19,7 +19,7 @@ import Link, { LinkProps, LinkPropTypes } from './Link';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 
-type HeaderMenuItemProps<E extends ElementType> = LinkProps<E> & {
+export type HeaderMenuItemProps<E extends ElementType> = LinkProps<E> & {
   className?: string | undefined;
   isActive?: boolean | undefined;
   isCurrentPage?: boolean | undefined;
