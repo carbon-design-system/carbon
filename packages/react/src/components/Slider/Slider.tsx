@@ -176,8 +176,7 @@ export interface SliderProps
 
   /**
    * The callback to get notified of change in value.
-   * `({ value}) => void`
-  //  * @param {{ value }}
+   * `({ value: number, valueUpper?: number }) => void`
    */
   onChange?: (data: {
     value: SliderProps['value'];
