@@ -20,6 +20,9 @@ async function main() {
     url = url.replace('localhost', '172.17.0.1');
   }
 
+  // As of got v12, legacy Url instances are not supported anymore. You need to use WHATWG URL instead.
+  url = new URL(url);
+
   core.info(`Waiting for a 200 response from ${url}`);
 
   try {
@@ -29,7 +32,7 @@ async function main() {
         limit: 10,
         maxRetryAfter: 1000,
       },
-      timeout: 1000,
+      timeout: { request: 1000 },
     });
     core.info(`Received a 200 response from ${url}`);
   } catch (error) {
