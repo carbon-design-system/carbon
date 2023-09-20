@@ -14,6 +14,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { IconButton } from '../IconButton';
 
 export default function Copy({
+  align = 'bottom',
   children,
   className,
   feedback,
@@ -59,7 +60,7 @@ export default function Copy({
   return (
     <IconButton
       closeOnActivation={false}
-      align="bottom"
+      align={align}
       className={classNames}
       label={animation ? feedback : initialLabel}
       onClick={composeEventHandlers([onClick, handleClick])}
@@ -77,6 +78,20 @@ export default function Copy({
 }
 
 Copy.propTypes = {
+  /**
+   * Specify how the trigger should align with the tooltip
+   */
+  align: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+    'left',
+    'right',
+  ]),
+
   /**
    * Pass in content to be rendered in the underlying `<button>`
    */
