@@ -6,10 +6,12 @@
  */
 
 import * as FeatureFlags from '@carbon/feature-flags';
-import React from 'react';
+import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import debounce from 'lodash.debounce';
 import deprecate from '../../prop-types/deprecate.js';
+import { useWindowEvent } from '../../internal/useEvent';
 import { usePrefix } from '../../internal/usePrefix';
 
 export const Table = ({
@@ -25,6 +27,8 @@ export const Table = ({
   ...other
 }) => {
   const prefix = usePrefix();
+  const [isScrollable, setIsScrollable] = useState(true);
+  const tableRef = useRef(null);
   const componentClass = cx(`${prefix}--data-table`, className, {
     [`${prefix}--data-table--${size}`]: size,
     [`${prefix}--data-table--sort`]: isSortable,
@@ -34,9 +38,33 @@ export const Table = ({
     [`${prefix}--data-table--sticky-header`]: stickyHeader,
     [`${prefix}--data-table--visible-overflow-menu`]: !overflowMenuOnHover,
   });
+
+  // Used to set a tabIndex when the Table is horizontally scrollable
+  const setTabIndex = useCallback(() => {
+    const tableContainer = tableRef?.current?.parentNode;
+    const tableHeader = tableRef?.current?.firstChild;
+
+    if (tableHeader?.scrollWidth > tableContainer?.clientWidth) {
+      setIsScrollable(true);
+    } else {
+      setIsScrollable(false);
+    }
+  }, []);
+
+  const debouncedSetTabIndex = debounce(setTabIndex, 100);
+
+  useWindowEvent('resize', debouncedSetTabIndex);
+
+  useLayoutEffect(() => {
+    setTabIndex();
+  }, [setTabIndex]);
+
   const table = (
-    <div className={`${prefix}--data-table-content`}>
-      <table {...other} className={componentClass}>
+    <div
+      className={`${prefix}--data-table-content`}
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+      tabIndex={isScrollable ? 0 : undefined}>
+      <table {...other} className={componentClass} ref={tableRef}>
         {children}
       </table>
     </div>

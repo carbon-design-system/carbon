@@ -22,6 +22,7 @@ exports[`DataTable.Table should support enable sticky header 1`] = `
 >
   <div
     className="bx--data-table-content"
+    tabIndex={0}
   >
     <table
       className="bx--data-table bx--data-table--no-border bx--data-table--sticky-header"
