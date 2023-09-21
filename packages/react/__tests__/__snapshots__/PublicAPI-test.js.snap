@@ -3959,6 +3959,26 @@ Map {
       },
     },
   },
+  "GridSettings" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "mode": Object {
+        "args": Array [
+          Array [
+            "flexbox",
+            "css-grid",
+          ],
+        ],
+        "isRequired": true,
+        "type": "oneOf",
+      },
+      "subgrid": Object {
+        "type": "bool",
+      },
+    },
+  },
   "HStack" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
