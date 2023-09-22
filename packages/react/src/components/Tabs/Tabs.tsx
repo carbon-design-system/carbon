@@ -919,6 +919,7 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
       </div>
       {hasSecondaryLabel && secondaryLabel && (
         <Text
+          as="div"
           className={`${prefix}--tabs__nav-item-secondary-label`}
           title={secondaryLabel}>
           {secondaryLabel}
