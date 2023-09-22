@@ -15,7 +15,6 @@ import React, {
   PropsWithChildren,
 } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
-import { Text } from '../Text';
 
 export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
@@ -108,14 +107,14 @@ const Link = React.forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
     }
 
     return (
-      <Text as="a" ref={ref} {...linkProps} {...rest}>
+      <a ref={ref} {...linkProps} {...rest}>
         {children}
         {!inline && Icon && (
           <div className={`${prefix}--link__icon`}>
             <Icon />
           </div>
         )}
-      </Text>
+      </a>
     );
   }
 );
