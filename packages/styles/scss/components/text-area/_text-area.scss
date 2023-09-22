@@ -17,6 +17,7 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/placeholder-colors' as *;
 @use '../../utilities/skeleton' as *;
+@use '../../utilities/layout';
 
 /// Text area styles
 /// @access public
@@ -27,7 +28,7 @@
     @include type-style('body-01');
     @include focus-outline('reset');
 
-    padding: convert.to-rem(11px) $spacing-05;
+    padding: convert.to-rem(11px) layout.density('padding-inline');
     border: none;
     background-color: $field;
     block-size: 100%;
@@ -62,6 +63,8 @@
   }
 
   .#{$prefix}--text-area__wrapper {
+    @include layout.use('density', $default: 'normal');
+
     position: relative;
     display: flex;
     inline-size: 100%;
@@ -71,7 +74,7 @@
     position: absolute;
     fill: $support-error;
     inset-block-start: $spacing-04;
-    inset-inline-end: $spacing-05;
+    inset-inline-end: layout.density('padding-inline');
   }
 
   .#{$prefix}--text-area__invalid-icon--warning {
