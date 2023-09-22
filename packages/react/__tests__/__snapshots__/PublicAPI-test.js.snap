@@ -1246,7 +1246,7 @@ Map {
         "type": "shape",
       },
       "helperText": Object {
-        "type": "string",
+        "type": "node",
       },
       "id": Object {
         "isRequired": true,
@@ -3955,6 +3955,26 @@ Map {
         "type": "bool",
       },
       "narrow": Object {
+        "type": "bool",
+      },
+    },
+  },
+  "GridSettings" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "mode": Object {
+        "args": Array [
+          Array [
+            "flexbox",
+            "css-grid",
+          ],
+        ],
+        "isRequired": true,
+        "type": "oneOf",
+      },
+      "subgrid": Object {
         "type": "bool",
       },
     },
