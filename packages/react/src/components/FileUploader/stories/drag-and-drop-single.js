@@ -154,7 +154,6 @@ const ExampleDropContainerApp = (props) => {
             filesize={file.filesize}
             errorSubject="File size exceeds limit"
             errorBody="500kb max file size. Select a new file and try again."
-            singleUpload
             // eslint-disable-next-line react/prop-types
             size={props.size}
             status={file.status}

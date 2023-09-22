@@ -173,21 +173,27 @@
     }
 
     .#{$prefix}--file-filename-container-wrap {
-      max-inline-size: 11rem;
+      max-inline-size: 17rem;
+      padding-inline-start: $spacing-05;
     }
 
     .#{$prefix}--file-filename-container-wrap-invalid {
-      max-inline-size: 10rem;
+      max-inline-size: 15rem;
+
       .#{$prefix}--file-filename-tooltip {
-        max-inline-size: 11rem;
+        inline-size: -webkit-fill-available;
+        padding-inline-start: $spacing-05;
       }
     }
 
     .#{$prefix}--file-filename-tooltip {
-      max-inline-size: 12rem;
+      inline-size: -webkit-fill-available;
     }
 
     .#{$prefix}--file-filename-button {
+      @include type-style('body-compact-01');
+
+      overflow: hidden;
       padding: 0;
       border: none;
       background: none;
@@ -196,6 +202,8 @@
       font: inherit;
       inline-size: -webkit-fill-available;
       outline: inherit;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .#{$prefix}--file-filename-button:focus {
       outline: revert;
@@ -288,19 +296,12 @@
     color: $text-primary;
     padding-block-end: $spacing-03;
   }
-
-  .#{$prefix}--file-container-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
   .#{$prefix}--file__state-container {
     display: flex;
     align-items: center;
     justify-content: center;
     min-inline-size: 1.5rem;
-    padding-inline-end: $spacing-05;
+    padding-inline-end: $spacing-03;
 
     .#{$prefix}--loading__svg {
       stroke: $icon-primary;

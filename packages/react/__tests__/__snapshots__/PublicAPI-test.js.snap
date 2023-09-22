@@ -3461,9 +3461,6 @@ Map {
       "onDelete": Object {
         "type": "func",
       },
-      "singleUpload": Object {
-        "type": "bool",
-      },
       "size": Object {
         "args": Array [
           Array [

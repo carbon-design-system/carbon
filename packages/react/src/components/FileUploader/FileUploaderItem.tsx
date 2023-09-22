@@ -13,7 +13,6 @@ import { keys, matches } from '../../internal/keyboard';
 import uid from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
-import FileUploaderButton from './FileUploaderButton';
 import { Tooltip } from '../Tooltip';
 
 export interface FileUploaderItemProps extends ReactAttr<HTMLSpanElement> {
@@ -57,11 +56,6 @@ export interface FileUploaderItemProps extends ReactAttr<HTMLSpanElement> {
   ) => void;
 
   /**
-     Specify if the uploader will accept only one file
-    */
-  singleUpload?: boolean;
-
-  /**
    * Specify the size of the FileUploaderButton, from a list of available
    * sizes.
    */
@@ -83,13 +77,11 @@ function FileUploaderItem({
   name,
   status = 'uploading',
   iconDescription,
-  onAddFiles = () => {},
   onDelete = () => {},
   invalid,
   errorSubject,
   errorBody,
   size,
-  singleUpload,
   ...other
 }: FileUploaderItemProps) {
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
@@ -116,14 +108,17 @@ function FileUploaderItem({
 
   return (
     <span className={classes} {...other}>
-      {isEllipsisApplied && singleUpload ? (
+      {isEllipsisApplied ? (
         <div className={isInvalid}>
           <Tooltip
             label={name}
             align="bottom"
             className={`${prefix}--file-filename-tooltip`}>
             <button className={`${prefix}--file-filename-button`} type="button">
-              <p title={name} className={`${prefix}--file-filename`} id={name}>
+              <p
+                title={name}
+                className={`${prefix}--file-filename-button`}
+                id={name}>
                 {name}
               </p>
             </button>
@@ -136,15 +131,6 @@ function FileUploaderItem({
       )}
 
       <div className={`${prefix}--file-container-item`}>
-        {singleUpload && (
-          <FileUploaderButton
-            buttonKind="ghost"
-            labelText="Replace"
-            disabled={false}
-            onChange={onAddFiles}
-            disableLabelChanges={singleUpload}
-          />
-        )}
         <span className={`${prefix}--file__state-container`}>
           <Filename
             name={name}
@@ -218,11 +204,6 @@ FileUploaderItem.propTypes = {
    * The event handler signature looks like `onDelete(evt, { uuid })`
    */
   onDelete: PropTypes.func,
-
-  /**
-     Specify if the uploader will accept only one file
-    */
-  singleUpload: PropTypes.bool,
 
   /**
    * Specify the size of the FileUploaderButton, from a list of available

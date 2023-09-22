@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { getByLabel, getByText } from '@carbon/test-utils/dom';
 import React from 'react';
 import { Simulate } from 'react-dom/test-utils';
@@ -74,19 +74,5 @@ describe('FileUploaderItem', () => {
 
     Simulate.keyDown(removeFile, keys.Space);
     expect(onDelete).not.toHaveBeenCalled();
-  });
-
-  it('should enable the replace button when the singleUpload prop is true', () => {
-    render(
-      <FileUploaderItem
-        uuid="edit"
-        name="edit"
-        iconDescription="description"
-        status="edit"
-        singleUpload
-      />
-    );
-
-    expect(screen.getByLabelText('Replace')).toBeInTheDocument();
   });
 });
