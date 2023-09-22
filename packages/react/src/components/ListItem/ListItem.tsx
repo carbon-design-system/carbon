@@ -13,11 +13,15 @@ import { Text } from '../Text';
 
 type ListItemProps = ComponentProps<'li'>;
 
-export default function ListItem({ className, children }: ListItemProps) {
+export default function ListItem({
+  className,
+  children,
+  ...other
+}: ListItemProps) {
   const prefix = usePrefix();
   const classNames = classnames(`${prefix}--list__item`, className);
   return (
-    <Text as="li" className={classNames}>
+    <Text as="li" className={classNames} {...other}>
       {children}
     </Text>
   );

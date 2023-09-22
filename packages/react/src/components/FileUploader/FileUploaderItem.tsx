@@ -13,6 +13,7 @@ import { keys, matches } from '../../internal/keyboard';
 import uid from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
+import { Text } from '../Text';
 
 export interface FileUploaderItemProps extends ReactAttr<HTMLSpanElement> {
   /**
@@ -87,9 +88,13 @@ function FileUploaderItem({
   });
   return (
     <span className={classes} {...other}>
-      <p className={`${prefix}--file-filename`} title={name} id={name}>
+      <Text
+        as="p"
+        className={`${prefix}--file-filename`}
+        title={name}
+        id={name}>
         {name}
-      </p>
+      </Text>
       <span className={`${prefix}--file__state-container`}>
         <Filename
           name={name}
@@ -117,13 +122,13 @@ function FileUploaderItem({
           className={`${prefix}--form-requirement`}
           role="alert"
           id={`${name}-id-error`}>
-          <div className={`${prefix}--form-requirement__title`}>
+          <Text as="div" className={`${prefix}--form-requirement__title`}>
             {errorSubject}
-          </div>
+          </Text>
           {errorBody && (
-            <p className={`${prefix}--form-requirement__supplement`}>
+            <Text as="p" className={`${prefix}--form-requirement__supplement`}>
               {errorBody}
-            </p>
+            </Text>
           )}
         </div>
       )}
