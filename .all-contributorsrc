@@ -1259,6 +1259,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "misiekhardcore",
+      "name": "Michał Konopski",
+      "avatar_url": "https://avatars.githubusercontent.com/u/58469680?v=4",
+      "profile": "https://github.com/misiekhardcore",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

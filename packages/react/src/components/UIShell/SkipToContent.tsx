@@ -10,7 +10,7 @@ import React, { ComponentProps } from 'react';
 import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
 
-type SkipToContentProps = Omit<ComponentProps<'a'>, 'children'> & {
+export type SkipToContentProps = Omit<ComponentProps<'a'>, 'children'> & {
   children?: string | undefined;
 };
 
