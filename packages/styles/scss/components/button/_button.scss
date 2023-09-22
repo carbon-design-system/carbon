@@ -23,7 +23,7 @@
 
 @mixin button {
   .#{$prefix}--btn {
-    @include layout.use('size', $default: 'lg');
+    @include layout.use('size', $min: 'sm', $default: 'lg', $max: '2xl');
     @include layout.use('density', $default: 'normal');
 
     @include button-base;
