@@ -4,6 +4,7 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
+@use '../../breakpoint' as *;
 
 @use '../../config' as *;
 @use '../../motion' as *;
@@ -175,6 +176,9 @@
     .#{$prefix}--file-filename-container-wrap {
       max-inline-size: 17rem;
       padding-inline-start: $spacing-05;
+      @include breakpoint-down(410px) {
+        max-inline-size: 13.5rem;
+      }
     }
 
     .#{$prefix}--file-filename-container-wrap-invalid {
@@ -183,11 +187,17 @@
       .#{$prefix}--file-filename-tooltip {
         inline-size: -webkit-fill-available;
         padding-inline-start: $spacing-05;
+        @-moz-document url-prefix() {
+          inline-size: -moz-available;
+        }
       }
     }
 
     .#{$prefix}--file-filename-tooltip {
       inline-size: -webkit-fill-available;
+      @-moz-document url-prefix() {
+        inline-size: -moz-available;
+      }
     }
 
     .#{$prefix}--file-filename-button {
@@ -204,6 +214,10 @@
       outline: inherit;
       text-overflow: ellipsis;
       white-space: nowrap;
+
+      @-moz-document url-prefix() {
+        inline-size: -moz-available;
+      }
     }
     .#{$prefix}--file-filename-button:focus {
       outline: revert;
