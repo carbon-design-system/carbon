@@ -349,6 +349,10 @@
   // -----------------------------
   // Modal overflow
   // -----------------------------
+  .#{$prefix}--modal-scroll-content {
+    // Required to accommodate focus outline's negative offset when scrolling in Chrome
+    border-block-end: 2px solid transparent;
+  }
   // Required so overflow-indicator disappears at end of content
   .#{$prefix}--modal-scroll-content > *:last-child {
     padding-block-end: $spacing-06;
