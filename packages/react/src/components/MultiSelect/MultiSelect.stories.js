@@ -8,6 +8,7 @@
 import React from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import mdx from './MultiSelect.mdx';
 
 import MultiSelect from '.';
 import FilterableMultiSelect from './FilterableMultiSelect';
@@ -75,6 +76,11 @@ export default {
     },
     translateWithId: {
       table: { disable: true },
+    },
+  },
+  parameters: {
+    docs: {
+      page: mdx,
     },
   },
 };
