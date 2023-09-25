@@ -726,7 +726,7 @@ MultiSelect.propTypes = {
    * Provide a compare function that is used to determine the ordering of
    * options. See 'sortItems' for more control.
    */
-  compareItems: PropTypes.func,
+  compareItems: PropTypes.func.isRequired,
 
   /**
    * Specify the direction of the multiselect dropdown. Can be either top or bottom.
@@ -875,7 +875,7 @@ MultiSelect.propTypes = {
    *     locale: string,
    *   }) => Array<Item>
    */
-  sortItems: PropTypes.func,
+  sortItems: PropTypes.func.isRequired,
 
   /**
    * Provide text to be used in a `<label>` element that is tied to the
