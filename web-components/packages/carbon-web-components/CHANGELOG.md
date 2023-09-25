@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.32.1-rc.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.32.0...@carbon/web-components@1.32.1-rc.0) (2023-09-25)
+
+**Note:** Version bump only for package @carbon/web-components
+
+
+
+
+
 # [1.32.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.32.0-rc.0...@carbon/web-components@1.32.0) (2023-09-19)
 
 **Note:** Version bump only for package @carbon/web-components
