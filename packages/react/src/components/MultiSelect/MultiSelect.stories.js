@@ -256,7 +256,7 @@ export const WithInitialSelectedItems = () => {
   );
 };
 
-export const _Filterable = () => {
+export const Filterable = () => {
   return (
     <div style={{ width: 300 }}>
       <FilterableMultiSelect
@@ -271,7 +271,7 @@ export const _Filterable = () => {
   );
 };
 
-export const _WithLayer = () => (
+export const WithLayerMultiSelect = () => (
   <WithLayer>
     {(layer) => (
       <div style={{ width: 300 }}>
