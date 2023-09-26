@@ -213,49 +213,17 @@ export const WithScrollingContent = () => {
         domain, a shared subdomain, or a shared domain and host.
       </p>
       <p style={{ marginBottom: '1rem' }}>
-        Custom domains direct requests for your apps in this Cloud Foundry
-        organization to a URL that you own. A custom domain can be a shared
-        domain, a shared subdomain, or a shared domain and host.
-      </p>
-      <p style={{ marginBottom: '1rem' }}>
-        Custom domains direct requests for your apps in this Cloud Foundry
-        organization to a URL that you own. A custom domain can be a shared
-        domain, a shared subdomain, or a shared domain and host.
-      </p>
-      <p style={{ marginBottom: '1rem' }}>
-        Custom domains direct requests for your apps in this Cloud Foundry
-        organization to a URL that you own. A custom domain can be a shared
-        domain, a shared subdomain, or a shared domain and host.
-      </p>
-      <p style={{ marginBottom: '1rem' }}>
-        Custom domains direct requests for your apps in this Cloud Foundry
-        organization to a URL that you own. A custom domain can be a shared
-        domain, a shared subdomain, or a shared domain and host.
-      </p>
-      <p style={{ marginBottom: '1rem' }}>
-        Custom domains direct requests for your apps in this Cloud Foundry
-        organization to a URL that you own. A custom domain can be a shared
-        domain, a shared subdomain, or a shared domain and host.
-      </p>
-      <p style={{ marginBottom: '1rem' }}>
-        Custom domains direct requests for your apps in this Cloud Foundry
-        organization to a URL that you own. A custom domain can be a shared
-        domain, a shared subdomain, or a shared domain and host.
-      </p>
-      <p style={{ marginBottom: '1rem' }}>
-        Custom domains direct requests for your apps in this Cloud Foundry
-        organization to a URL that you own. A custom domain can be a shared
-        domain, a shared subdomain, or a shared domain and host.
-      </p>
-      <p style={{ marginBottom: '1rem' }}>
-        Custom domains direct requests for your apps in this Cloud Foundry
-        organization to a URL that you own. A custom domain can be a shared
-        domain, a shared subdomain, or a shared domain and host.
-      </p>
-      <p style={{ marginBottom: '1rem' }}>
-        Custom domains direct requests for your apps in this Cloud Foundry
-        organization to a URL that you own. A custom domain can be a shared
-        domain, a shared subdomain, or a shared domain and host.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu
+        nibh odio. Nunc a consequat est, id porttitor sapien. Proin vitae leo
+        vitae orci tincidunt auctor eget eget libero. Ut tincidunt ultricies
+        fringilla. Aliquam erat volutpat. Aenean arcu odio, elementum vel
+        vehicula vitae, porttitor ac lorem. Sed viverra elit ac risus tincidunt
+        fermentum. Ut sollicitudin nibh id risus ornare ornare. Etiam gravida
+        orci ut lectus dictum, quis ultricies felis mollis. Mauris nec commodo
+        est, nec faucibus nibh. Nunc commodo ante quis pretium consectetur. Ut
+        ac nisl vitae mi mattis vulputate a at elit. Nullam porttitor ex eget mi
+        feugiat mattis. Nunc non sodales magna. Proin ornare tellus quis
+        hendrerit egestas. Donec pharetra leo nec molestie sollicitudin.{' '}
       </p>
       <TextInput
         data-modal-primary-focus
@@ -264,7 +232,11 @@ export const WithScrollingContent = () => {
         placeholder="e.g. github.com"
         style={{ marginBottom: '1rem' }}
       />
-      <Select id="select-1" defaultValue="us-south" labelText="Region">
+      <Select
+        id="select-1"
+        defaultValue="us-south"
+        labelText="Region"
+        style={{ marginBottom: '1rem' }}>
         <SelectItem value="us-south" text="US South" />
         <SelectItem value="us-east" text="US East" />
       </Select>
@@ -276,6 +248,7 @@ export const WithScrollingContent = () => {
           { id: 'one', label: 'one', name: 'one' },
           { id: 'two', label: 'two', name: 'two' },
         ]}
+        style={{ marginBottom: '1rem' }}
       />
       <MultiSelect
         id="test"
