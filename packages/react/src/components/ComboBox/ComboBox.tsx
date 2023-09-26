@@ -38,7 +38,6 @@ import {
 } from '@carbon/icons-react';
 import ListBox, {
   PropTypes as ListBoxPropTypes,
-  ListBoxType,
   ListBoxSize,
 } from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
@@ -287,11 +286,6 @@ export interface ComboBoxProps<ItemType>
   translateWithId?: (id: string) => string;
 
   /**
-   * Currently supports either the default type, or an inline variant
-   */
-  type?: ListBoxType;
-
-  /**
    * Specify whether the control is currently in warning state
    */
   warn?: boolean;
@@ -311,8 +305,8 @@ const ComboBox = forwardRef(
       ['aria-label']: ariaLabel = 'Choose an item',
       ariaLabel: deprecatedAriaLabel,
       className: containerClassName,
-      direction,
-      disabled,
+      direction = 'bottom',
+      disabled = false,
       downshiftProps,
       helperText,
       id,
@@ -320,7 +314,7 @@ const ComboBox = forwardRef(
       invalid,
       invalidText,
       items,
-      itemToElement,
+      itemToElement = null,
       itemToString = defaultItemToString,
       light,
       onChange,
@@ -333,7 +327,6 @@ const ComboBox = forwardRef(
       size,
       titleText,
       translateWithId,
-      type: _type,
       warn,
       warnText,
       ...rest
@@ -914,11 +907,6 @@ ComboBox.propTypes = {
   translateWithId: PropTypes.func,
 
   /**
-   * Currently supports either the default type, or an inline variant
-   */
-  type: ListBoxPropTypes.ListBoxType,
-
-  /**
    * Specify whether the control is currently in warning state
    */
   warn: PropTypes.bool,
@@ -927,16 +915,6 @@ ComboBox.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
-};
-
-ComboBox.defaultProps = {
-  disabled: false,
-  itemToString: defaultItemToString,
-  itemToElement: null,
-  shouldFilterItem: defaultShouldFilterItem,
-  type: 'default',
-  ['aria-label']: 'Choose an item',
-  direction: 'bottom',
 };
 
 type ComboboxComponentProps<ItemType> = PropsWithoutRef<
