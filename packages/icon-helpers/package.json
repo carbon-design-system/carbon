@@ -30,7 +30,7 @@
     "provenance": true
   },
   "scripts": {
-    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonIconHelpers",
+    "build": "yarn clean && carbon-cli bundle src/index.ts --name CarbonIconHelpers",
     "clean": "rimraf es lib umd"
   },
   "devDependencies": {

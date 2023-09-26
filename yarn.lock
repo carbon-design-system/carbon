@@ -2094,6 +2094,7 @@ __metadata:
     "@carbon/pictograms": ^12.24.0
     "@carbon/telemetry": 0.1.0
     prop-types: ^15.7.2
+    rimraf: ^5.0.0
   peerDependencies:
     react: ">=16"
   languageName: unknown
