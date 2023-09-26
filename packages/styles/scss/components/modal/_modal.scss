@@ -198,8 +198,6 @@
     @include type-style('body-01');
 
     position: relative;
-    // Required to accommodate focus outline's negative offset when scrolling in Chrome
-    border-block-end: 2px solid transparent;
     color: $text-primary;
     font-weight: 400;
     grid-column: 1/-1;
