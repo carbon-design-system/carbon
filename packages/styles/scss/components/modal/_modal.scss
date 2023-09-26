@@ -362,7 +362,7 @@
     block-size: convert.to-rem(48px);
     grid-column: 1/-1;
     grid-row: 2/-2;
-    inline-size: calc(100% - $spacing-04);
+    inline-size: calc(100% - $spacing-05);
     inset-block-end: 0;
     inset-inline-start: 0;
     pointer-events: none;
@@ -392,7 +392,6 @@
   .#{$prefix}--modal-content:focus
     ~ .#{$prefix}--modal-content--overflow-indicator {
     margin: 0 2px 2px;
-    inline-size: calc(100% - 4px);
   }
 
   @media screen and (-ms-high-contrast: active) {
