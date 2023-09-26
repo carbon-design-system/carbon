@@ -90,11 +90,36 @@ interface SortItemsOptions<ItemType>
 }
 
 interface MultiSelectSortingProps<ItemType> {
+  /**
+   * Provide a compare function that is used to determine the ordering of
+   * options. See 'sortItems' for more control.
+   */
   compareItems?(
     item1: ItemType,
     item2: ItemType,
     options: SharedOptions
   ): number; // required but has default value
+
+  /**
+   * Provide a method that sorts all options in the control. Overriding this
+   * prop means that you also have to handle the sort logic for selected versus
+   * un-selected items. If you just want to control ordering, consider the
+   * `compareItems` prop instead.
+   *
+   * The return value should be a number whose sign indicates the relative order
+   * of the two elements: negative if a is less than b, positive if a is greater
+   * than b, and zero if they are equal.
+   *
+   * sortItems :
+   *   (items: Array<Item>, {
+   *     selectedItems: Array<Item>,
+   *     itemToString: Item => string,
+   *     compareItems: (itemA: string, itemB: string, {
+   *       locale: string
+   *     }) => number,
+   *     locale: string,
+   *   }) => Array<Item>
+   */
   sortItems?(
     items: ReadonlyArray<ItemType>,
     options: SortItemsOptions<ItemType>
@@ -698,6 +723,12 @@ MultiSelect.propTypes = {
   clearSelectionText: PropTypes.string,
 
   /**
+   * Provide a compare function that is used to determine the ordering of
+   * options. See 'sortItems' for more control.
+   */
+  compareItems: PropTypes.func.isRequired,
+
+  /**
    * Specify the direction of the multiselect dropdown. Can be either top or bottom.
    */
   direction: PropTypes.oneOf(['top', 'bottom']),
@@ -823,6 +854,28 @@ MultiSelect.propTypes = {
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
    */
   size: ListBoxPropTypes.ListBoxSize,
+
+  /**
+   * Provide a method that sorts all options in the control. Overriding this
+   * prop means that you also have to handle the sort logic for selected versus
+   * un-selected items. If you just want to control ordering, consider the
+   * `compareItems` prop instead.
+   *
+   * The return value should be a number whose sign indicates the relative order
+   * of the two elements: negative if a is less than b, positive if a is greater
+   * than b, and zero if they are equal.
+   *
+   * sortItems :
+   *   (items: Array<Item>, {
+   *     selectedItems: Array<Item>,
+   *     itemToString: Item => string,
+   *     compareItems: (itemA: string, itemB: string, {
+   *       locale: string
+   *     }) => number,
+   *     locale: string,
+   *   }) => Array<Item>
+   */
+  sortItems: PropTypes.func.isRequired,
 
   /**
    * Provide text to be used in a `<label>` element that is tied to the
