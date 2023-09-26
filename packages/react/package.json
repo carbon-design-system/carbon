@@ -53,7 +53,7 @@
     "@carbon/telemetry": "0.1.0",
     "classnames": "2.3.2",
     "copy-to-clipboard": "^3.3.1",
-    "downshift": "8.1.0",
+    "downshift": "8.2.0",
     "flatpickr": "4.6.9",
     "invariant": "^2.2.3",
     "lodash.debounce": "^4.0.8",
