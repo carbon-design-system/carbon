@@ -13,6 +13,7 @@ import { LayoutConstraint } from '../Layout';
 import { composeEventHandlers } from '../../tools/events';
 import { getNextIndex, matches, keys } from '../../internal/keyboard';
 import { PrefixContext } from '../../internal/usePrefix';
+import { noopFn } from '../../internal/noopFn';
 
 interface SwitchEventHandlersParams {
   index?: number;
@@ -126,12 +127,6 @@ export default class ContentSwitcher extends React.Component<
 
   static contextType = PrefixContext;
 
-  static defaultProps = {
-    selectedIndex: 0,
-    selectionMode: 'automatic',
-    onChange: () => {},
-  };
-
   static getDerivedStateFromProps({ selectedIndex }, state) {
     const { prevSelectedIndex } = state;
     return prevSelectedIndex === selectedIndex
@@ -202,10 +197,12 @@ export default class ContentSwitcher extends React.Component<
       className,
       light,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      selectedIndex, // eslint-disable-line no-unused-vars
+      selectedIndex = 0,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      selectionMode, // eslint-disable-line no-unused-vars
+      selectionMode = 'automatic',
       size,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      onChange = noopFn,
       ...other
     } = this.props;
 
