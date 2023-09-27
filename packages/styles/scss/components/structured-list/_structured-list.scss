@@ -32,7 +32,7 @@
 
     display: table;
 
-    background-color: transparent;
+    background-color: $layer transparent;
     border-collapse: collapse;
     border-spacing: 0;
     inline-size: 100%;
@@ -70,6 +70,10 @@
       padding-inline-end: 1rem;
       padding-inline-start: 0;
     }
+  }
+
+  .#{$prefix}--with-layer {
+    background-color: $layer;
   }
 
   .#{$prefix}--structured-list-row {

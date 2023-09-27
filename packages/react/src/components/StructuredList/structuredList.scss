@@ -1,0 +1,5 @@
+@use '@carbon/react/scss/theme' with (
+  $theme: (
+    layer: red,
+  )
+);
