@@ -8,7 +8,6 @@
 import React from 'react';
 import { CheckmarkFilled } from '@carbon/icons-react';
 import mdx from './StructuredList.mdx';
-import './structuredList.scss';
 
 import {
   StructuredListWrapper,
@@ -166,7 +165,7 @@ export const WithBackgroundLayer = (args) => (
   <StructuredListWrapper
     selection
     {...args}
-    className={`${prefix}--with-layer`}>
+    className={`${prefix}--with-background-layer`}>
     <StructuredListHead>
       <StructuredListRow head>
         <StructuredListCell head>ColumnA</StructuredListCell>

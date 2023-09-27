@@ -72,10 +72,6 @@
     }
   }
 
-  .#{$prefix}--with-layer {
-    background-color: $layer;
-  }
-
   .#{$prefix}--structured-list-row {
     display: table-row;
     border-block-start: 1px solid $border-subtle;
