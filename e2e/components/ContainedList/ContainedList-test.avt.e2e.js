@@ -250,7 +250,7 @@ test.describe('ContainedList @avt', () => {
     await expect(page.getByText('List title').first()).toBeVisible();
     await page.keyboard.press('Tab');
 
-    // Testing search input
+    // Testing tab navigation
     await expect(
       page.locator('button.cds--contained-list-item__content').first()
     ).toBeFocused();
@@ -259,5 +259,64 @@ test.describe('ContainedList @avt', () => {
     await expect(
       page.locator('button.cds--contained-list-item__content').last()
     ).toBeFocused();
+  });
+
+  test('@avt-keyboard-state ContainedList With interactive items and actions', async ({
+    page,
+  }) => {
+    await visitStory(page, {
+      component: 'ContainedList',
+      id: 'components-containedlist--with-interactive-items-and-action',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page.getByText('List title').first()).toBeVisible();
+    await page.keyboard.press('Tab');
+
+    // Testing tab navigation with interactive item dismiss
+    await expect(
+      page.locator('button.cds--contained-list-item__content').first()
+    ).toBeFocused();
+    await page.keyboard.press('Tab');
+    await expect(
+      page.locator('button.cds--btn--icon-only').first()
+    ).toBeFocused();
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await expect(
+      page.locator('button.cds--contained-list-item__content').last()
+    ).toBeFocused();
+    await page.keyboard.press('Tab');
+    await expect(
+      page.locator('button.cds--btn--icon-only').last()
+    ).toBeFocused();
+  });
+
+  test('@avt-keyboard-state ContainedList With persistent search', async ({
+    page,
+  }) => {
+    await visitStory(page, {
+      component: 'ContainedList',
+      id: 'components-containedlist--with-persistent-search',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page.getByText('List title').first()).toBeVisible();
+    await page.keyboard.press('Tab');
+
+    // Testing search input
+    await expect(page.getByRole('searchbox')).toBeFocused();
+    page.getByRole('searchbox').fill('List item 3');
+    await expect(page.getByText('List item 3')).toBeVisible();
+    await expect(page.getByText('List item 1')).not.toBeVisible();
+
+    // Close search
+    await page.keyboard.press('Escape');
+    await expect(page.getByText('List item 1')).toBeVisible();
   });
 });
