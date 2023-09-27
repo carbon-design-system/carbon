@@ -140,7 +140,6 @@
     display: grid;
     align-items: center;
     background-color: $layer;
-    gap: convert.to-rem(12px) $spacing-05;
     grid-auto-rows: auto;
     grid-template-columns: 1fr auto;
     margin-block-end: $spacing-03;
@@ -174,7 +173,7 @@
     }
 
     .#{$prefix}--file-filename-container-wrap {
-      max-inline-size: 17rem;
+      max-inline-size: 18rem;
       padding-inline-start: $spacing-05;
       @include breakpoint-down(410px) {
         max-inline-size: 13.5rem;
