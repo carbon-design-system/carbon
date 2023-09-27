@@ -67,11 +67,6 @@ Map {
     },
   },
   "AccordionSkeleton" => Object {
-    "defaultProps": Object {
-      "align": "end",
-      "count": 4,
-      "open": true,
-    },
     "propTypes": Object {
       "align": Object {
         "args": Array [
@@ -466,10 +461,6 @@ Map {
   },
   "Checkbox" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "indeterminate": false,
-      "onChange": [Function],
-    },
     "propTypes": Object {
       "checked": Object {
         "type": "bool",
@@ -622,13 +613,6 @@ Map {
     "render": [Function],
   },
   "CodeSnippet" => Object {
-    "defaultProps": Object {
-      "aria-label": "Copy to clipboard",
-      "showLessText": "Show less",
-      "showMoreText": "Show more",
-      "type": "single",
-      "wrapText": false,
-    },
     "propTypes": Object {
       "align": Object {
         "args": Array [
@@ -1079,15 +1063,6 @@ Map {
   },
   "ComboBox" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "aria-label": "Choose an item",
-      "direction": "bottom",
-      "disabled": false,
-      "itemToElement": null,
-      "itemToString": [Function],
-      "shouldFilterItem": [Function],
-      "type": "default",
-    },
     "propTypes": Object {
       "aria-label": Object {
         "type": "string",
@@ -1336,15 +1311,6 @@ Map {
       "translateWithId": Object {
         "type": "func",
       },
-      "type": Object {
-        "args": Array [
-          Array [
-            "default",
-            "inline",
-          ],
-        ],
-        "type": "oneOf",
-      },
       "warn": Object {
         "type": "bool",
       },
@@ -1407,9 +1373,6 @@ Map {
   },
   "ComposedModal" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "selectorPrimaryFocus": "[data-modal-primary-focus]",
-    },
     "propTypes": Object {
       "aria-label": Object {
         "type": "string",
@@ -1737,11 +1700,6 @@ Map {
     "render": [Function],
   },
   "Copy" => Object {
-    "defaultProps": Object {
-      "feedback": "Copied!",
-      "feedbackTimeout": 2000,
-      "onClick": [Function],
-    },
     "propTypes": Object {
       "align": Object {
         "args": Array [
@@ -1779,12 +1737,6 @@ Map {
     },
   },
   "CopyButton" => Object {
-    "defaultProps": Object {
-      "feedback": "Copied!",
-      "feedbackTimeout": 2000,
-      "iconDescription": "Copy to clipboard",
-      "onClick": [Function],
-    },
     "propTypes": Object {
       "align": Object {
         "args": Array [
@@ -4961,11 +4913,6 @@ Map {
   },
   "ModalFooter" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "closeModal": [Function],
-      "onRequestClose": [Function],
-      "onRequestSubmit": [Function],
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -5026,9 +4973,6 @@ Map {
   },
   "ModalHeader" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "iconDescription": "Close",
-    },
     "propTypes": Object {
       "buttonOnClick": Object {
         "type": "func",
