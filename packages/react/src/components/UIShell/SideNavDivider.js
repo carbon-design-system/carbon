@@ -13,7 +13,7 @@ import { usePrefix } from '../../internal/usePrefix';
 function SideNavDivider({ className }) {
   const prefix = usePrefix();
   const classNames = cx(`${prefix}--side-nav__divider`, className);
-  return <li role="separator" className={classNames} />;
+  return <hr className={classNames} />;
 }
 
 SideNavDivider.propTypes = {

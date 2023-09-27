@@ -187,10 +187,10 @@
   // Side-nav > Navigation > Divider
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav__divider {
+    border: none;
     margin: $spacing-03 $spacing-05;
     background-color: $border-subtle;
     block-size: 1px;
-    list-style-type: none;
   }
 
   //----------------------------------------------------------------------------
