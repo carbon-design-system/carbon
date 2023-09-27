@@ -232,14 +232,12 @@ export const WithScrollingContent = () => {
         placeholder="e.g. github.com"
         style={{ marginBottom: '1rem' }}
       />
-      <Select
-        id="select-1"
-        defaultValue="us-south"
-        labelText="Region"
-        style={{ marginBottom: '1rem' }}>
-        <SelectItem value="us-south" text="US South" />
-        <SelectItem value="us-east" text="US East" />
-      </Select>
+      <div style={{ marginBottom: '1rem' }}>
+        <Select id="select-1" defaultValue="us-south" labelText="Region">
+          <SelectItem value="us-south" text="US South" />
+          <SelectItem value="us-east" text="US East" />
+        </Select>
+      </div>
       <Dropdown
         id="drop"
         label="Dropdown"
