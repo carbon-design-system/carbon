@@ -6,4 +6,7 @@
  */
 
 export * from './StructuredList';
-export { default as StructuredListSkeleton } from './StructuredList.Skeleton';
+export {
+  default as StructuredListSkeleton,
+  type StructuredListSkeletonProps,
+} from './StructuredList.Skeleton';

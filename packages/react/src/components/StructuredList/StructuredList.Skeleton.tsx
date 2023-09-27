@@ -10,26 +10,40 @@ import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-const StructuredListSkeleton = ({ rowCount, className, ...rest }) => {
-  const prefix = usePrefix();
-  const StructuredListSkeletonClasses = cx(className, {
-    [`${prefix}--skeleton`]: true,
-    [`${prefix}--structured-list`]: true,
-  });
+export interface StructuredListSkeletonProps {
+  /**
+   * Specify an optional className to add.
+   */
+  className?: string;
 
-  const rows = [];
-  for (var i = 0; i < rowCount; i++) {
-    rows.push(
-      <div className={`${prefix}--structured-list-row`} key={i}>
-        <div className={`${prefix}--structured-list-td`} />
-        <div className={`${prefix}--structured-list-td`} />
-        <div className={`${prefix}--structured-list-td`} />
-      </div>
-    );
-  }
+  /**
+   * number of table rows
+   */
+  rowCount?: number;
+}
+
+export default function StructuredListSkeleton({
+  rowCount = 5,
+  className,
+  ...rest
+}: StructuredListSkeletonProps) {
+  const prefix = usePrefix();
+  const classNames = cx(
+    `${prefix}--skeleton`,
+    `${prefix}--structured-list`,
+    className
+  );
+
+  const rows = new Array(rowCount).fill(null).map((_, i) => (
+    <div className={`${prefix}--structured-list-row`} key={i}>
+      <div className={`${prefix}--structured-list-td`} />
+      <div className={`${prefix}--structured-list-td`} />
+      <div className={`${prefix}--structured-list-td`} />
+    </div>
+  ));
 
   return (
-    <div className={StructuredListSkeletonClasses} {...rest}>
+    <div className={classNames} {...rest}>
       <div className={`${prefix}--structured-list-thead`}>
         <div
           className={`${prefix}--structured-list-row ${prefix}--structured-list-row--header-row`}>
@@ -47,7 +61,7 @@ const StructuredListSkeleton = ({ rowCount, className, ...rest }) => {
       <div className={`${prefix}--structured-list-tbody`}>{rows}</div>
     </div>
   );
-};
+}
 
 StructuredListSkeleton.propTypes = {
   /**
@@ -60,9 +74,3 @@ StructuredListSkeleton.propTypes = {
    */
   rowCount: PropTypes.number,
 };
-
-StructuredListSkeleton.defaultProps = {
-  rowCount: 5,
-};
-
-export default StructuredListSkeleton;
