@@ -19,6 +19,7 @@ import React, {
 import Search from '../Search';
 import setupGetInstanceId from './tools/instanceId';
 import { usePrefix } from '../../internal/usePrefix';
+import { noopFn } from '../../internal/noopFn';
 
 const getInstanceId = setupGetInstanceId();
 const translationKeys = {
@@ -140,8 +141,8 @@ const TableToolbarSearch = ({
   className,
   searchContainerClass,
   onChange: onChangeProp,
-  onClear,
-  translateWithId: t,
+  onClear = noopFn,
+  translateWithId: t = translateWithId,
   placeholder,
   labelText,
   expanded: expandedProp,
@@ -149,12 +150,12 @@ const TableToolbarSearch = ({
   defaultValue,
   disabled,
   onExpand,
-  persistent,
+  persistent = false,
   id,
   onBlur,
   onFocus,
   size = 'lg',
-  tabIndex,
+  tabIndex = '0',
   ...rest
 }: TableToolbarSearchProps) => {
   const { current: controlled } = useRef(expandedProp !== undefined);
@@ -337,13 +338,6 @@ TableToolbarSearch.propTypes = {
    * Provide custom text for the component for each translation id
    */
   translateWithId: PropTypes.func.isRequired,
-};
-
-TableToolbarSearch.defaultProps = {
-  tabIndex: '0',
-  translateWithId,
-  persistent: false,
-  onClear: () => {},
 };
 
 export default TableToolbarSearch;

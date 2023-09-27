@@ -194,16 +194,6 @@ export default class FileUploader extends React.Component<
 
   static contextType = PrefixContext;
 
-  static defaultProps = {
-    disabled: false,
-    filenameStatus: 'uploading',
-    buttonLabel: '',
-    buttonKind: 'primary',
-    multiple: false,
-    onClick: () => {},
-    accept: [],
-  };
-
   state = {
     filenames: [] as string[],
   };
@@ -261,15 +251,15 @@ export default class FileUploader extends React.Component<
   render() {
     const {
       iconDescription,
-      buttonLabel,
-      buttonKind,
-      disabled,
-      filenameStatus,
+      buttonLabel = '',
+      buttonKind = 'primary',
+      disabled = false,
+      filenameStatus = 'uploading',
       labelDescription,
       labelTitle,
       className,
-      multiple,
-      accept,
+      multiple = false,
+      accept = [],
       name,
       size = 'md',
       onDelete, // eslint-disable-line
