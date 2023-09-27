@@ -127,7 +127,7 @@ export default class ContentSwitcher extends React.Component<
 
   static contextType = PrefixContext;
 
-  static getDerivedStateFromProps({ selectedIndex }, state) {
+  static getDerivedStateFromProps({ selectedIndex = 0 }, state) {
     const { prevSelectedIndex } = state;
     return prevSelectedIndex === selectedIndex
       ? null
@@ -142,7 +142,7 @@ export default class ContentSwitcher extends React.Component<
   };
 
   handleChildChange = (data) => {
-    const { selectionMode } = this.props;
+    const { selectionMode = 'automatic' } = this.props;
     // the currently selected child index
     const { selectedIndex } = this.state;
     // the newly selected child index
