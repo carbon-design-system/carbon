@@ -225,7 +225,6 @@ $copy-btn-feedback: $background-inverse !default;
 
   // collapsed pre
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
-    overflow-x: auto;
     padding-block-end: convert.to-rem(24px);
     padding-inline-end: $spacing-08;
   }
@@ -236,29 +235,18 @@ $copy-btn-feedback: $background-inverse !default;
     padding-inline-end: 0;
   }
 
-  // expanded pre
-  .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
-    .#{$prefix}--snippet-container
-    pre {
-    overflow-x: auto;
-  }
-
-  .#{$prefix}--snippet--multi.#{$prefix}--snippet--has-right-overflow
-    .#{$prefix}--snippet-container
-    pre::after {
+  .#{$prefix}--snippet--multi.#{$prefix}--snippet--has-right-overflow::after {
     position: absolute;
     background-image: linear-gradient(to right, transparent, $layer);
     block-size: 100%;
     content: '';
     inline-size: convert.to-rem(16px);
     inset-block-start: 0;
-    inset-inline-end: 0;
+    inset-inline-end: $spacing-05;
   }
 
   [dir='rtl']
-    .#{$prefix}--snippet--multi.#{$prefix}--snippet--has-right-overflow
-    .#{$prefix}--snippet-container
-    pre::after {
+    .#{$prefix}--snippet--multi.#{$prefix}--snippet--has-right-overflow::after {
     background-image: linear-gradient(to left, transparent, $layer);
   }
 
@@ -414,9 +402,7 @@ $copy-btn-feedback: $background-inverse !default;
   }
 
   .#{$prefix}--snippet--light.#{$prefix}--snippet--single::after,
-  .#{$prefix}--snippet--light.#{$prefix}--snippet--multi
-    .#{$prefix}--snippet-container
-    pre::after {
+  .#{$prefix}--snippet--light.#{$prefix}--snippet--multi::after {
     // Safari interprets `transparent` differently, so make color token value transparent instead:
     background-image: linear-gradient(to right, rgba($layer, 0), $layer);
   }
