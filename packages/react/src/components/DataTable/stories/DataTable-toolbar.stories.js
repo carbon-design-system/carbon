@@ -66,7 +66,7 @@ export const Default = () => (
         <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
           <TableToolbarContent>
             <TableToolbarSearch onChange={onInputChange} />
-            <TableToolbarMenu iconDescription="Settings">
+            <TableToolbarMenu>
               <TableToolbarAction onClick={action('Action 1 Click')}>
                 Action 1
               </TableToolbarAction>
@@ -124,7 +124,7 @@ export const PersistentToolbar = () => (
         <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
           <TableToolbarContent>
             <TableToolbarSearch onChange={onInputChange} persistent />
-            <TableToolbarMenu iconDescription="Settings">
+            <TableToolbarMenu>
               <TableToolbarAction onClick={action('Action 1 Click')}>
                 Action 1
               </TableToolbarAction>
@@ -185,7 +185,7 @@ export const SmallPersistentToolbar = () => (
           size="sm">
           <TableToolbarContent>
             <TableToolbarSearch onChange={onInputChange} persistent size="sm" />
-            <TableToolbarMenu iconDescription="Settings" size="sm">
+            <TableToolbarMenu size="sm">
               <TableToolbarAction onClick={action('Action 1 Click')}>
                 Action 1
               </TableToolbarAction>
@@ -239,7 +239,7 @@ export const WithOverflowMenu = () => (
         <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
           <TableToolbarContent>
             <TableToolbarSearch onChange={onInputChange} />
-            <TableToolbarMenu iconDescription="Settings">
+            <TableToolbarMenu>
               <TableToolbarAction onClick={action('Action 1 Click')}>
                 Action 1
               </TableToolbarAction>
@@ -306,7 +306,7 @@ export const Playground = (args) => (
                 onInputChange(evt);
               }}
             />
-            <TableToolbarMenu iconDescription="Settings">
+            <TableToolbarMenu>
               <TableToolbarAction onClick={action('Action 1 Click')}>
                 Action 1
               </TableToolbarAction>

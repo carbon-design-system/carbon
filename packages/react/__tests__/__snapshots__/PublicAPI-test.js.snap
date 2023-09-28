@@ -92,15 +92,6 @@ Map {
     },
   },
   "ActionableNotification" => Object {
-    "defaultProps": Object {
-      "closeOnEscape": true,
-      "hasFocus": true,
-      "hideCloseButton": false,
-      "inline": false,
-      "kind": "error",
-      "onCloseButtonClick": [Function],
-      "role": "alertdialog",
-    },
     "propTypes": Object {
       "actionButtonLabel": Object {
         "type": "string",
@@ -138,7 +129,6 @@ Map {
             "warning-alt",
           ],
         ],
-        "isRequired": true,
         "type": "oneOf",
       },
       "lowContrast": Object {
@@ -2203,7 +2193,6 @@ Map {
           "type": "string",
         },
         "iconDescription": Object {
-          "isRequired": true,
           "type": "string",
         },
         "renderIcon": Object {
@@ -3164,7 +3153,6 @@ Map {
         "type": "oneOf",
       },
       "iconDescription": Object {
-        "isRequired": true,
         "type": "string",
       },
       "labelDescription": Object {
@@ -3393,20 +3381,6 @@ Map {
   },
   "FilterableMultiSelect" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "clearSelectionDescription": "Total items selected: ",
-      "clearSelectionText": "To clear selection, press Delete or Backspace,",
-      "compareItems": [Function],
-      "direction": "bottom",
-      "disabled": false,
-      "filterItems": [Function],
-      "initialSelectedItems": Array [],
-      "itemToString": [Function],
-      "locale": "en",
-      "open": false,
-      "selectionFeedback": "top-after-reopen",
-      "sortItems": [Function],
-    },
     "propTypes": Object {
       "aria-label": [Function],
       "ariaLabel": [Function],
@@ -3417,7 +3391,6 @@ Map {
         "type": "string",
       },
       "compareItems": Object {
-        "isRequired": true,
         "type": "func",
       },
       "direction": Object {
@@ -3635,7 +3608,6 @@ Map {
         "type": "oneOf",
       },
       "sortItems": Object {
-        "isRequired": true,
         "type": "func",
       },
       "translateWithId": Object {
@@ -4251,12 +4223,6 @@ Map {
     },
   },
   "InlineNotification" => Object {
-    "defaultProps": Object {
-      "hideCloseButton": false,
-      "kind": "error",
-      "onCloseButtonClick": [Function],
-      "role": "status",
-    },
     "propTypes": Object {
       "aria-label": Object {
         "type": "string",
@@ -4997,20 +4963,6 @@ Map {
     "$$typeof": Symbol(react.forward_ref),
     "Filterable": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "clearSelectionDescription": "Total items selected: ",
-        "clearSelectionText": "To clear selection, press Delete or Backspace,",
-        "compareItems": [Function],
-        "direction": "bottom",
-        "disabled": false,
-        "filterItems": [Function],
-        "initialSelectedItems": Array [],
-        "itemToString": [Function],
-        "locale": "en",
-        "open": false,
-        "selectionFeedback": "top-after-reopen",
-        "sortItems": [Function],
-      },
       "propTypes": Object {
         "aria-label": [Function],
         "ariaLabel": [Function],
@@ -5021,7 +4973,6 @@ Map {
           "type": "string",
         },
         "compareItems": Object {
-          "isRequired": true,
           "type": "func",
         },
         "direction": Object {
@@ -5239,7 +5190,6 @@ Map {
           "type": "oneOf",
         },
         "sortItems": Object {
-          "isRequired": true,
           "type": "func",
         },
         "translateWithId": Object {
@@ -5257,22 +5207,6 @@ Map {
       },
       "render": [Function],
     },
-    "defaultProps": Object {
-      "clearSelectionDescription": "Total items selected: ",
-      "clearSelectionText": "To clear selection, press Delete or Backspace,",
-      "compareItems": [Function],
-      "direction": "bottom",
-      "disabled": false,
-      "initialSelectedItems": Array [],
-      "itemToString": [Function],
-      "locale": "en",
-      "open": false,
-      "selectedItems": undefined,
-      "selectionFeedback": "top-after-reopen",
-      "sortItems": [Function],
-      "titleText": false,
-      "type": "default",
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -5284,7 +5218,6 @@ Map {
         "type": "string",
       },
       "compareItems": Object {
-        "isRequired": true,
         "type": "func",
       },
       "direction": Object {
@@ -5375,7 +5308,6 @@ Map {
         "type": "oneOf",
       },
       "sortItems": Object {
-        "isRequired": true,
         "type": "func",
       },
       "titleText": Object {
@@ -5422,30 +5354,6 @@ Map {
     },
   },
   "NotificationButton" => Object {
-    "defaultProps": Object {
-      "aria-label": "close notification",
-      "notificationType": "toast",
-      "renderIcon": Object {
-        "$$typeof": Symbol(react.forward_ref),
-        "propTypes": Object {
-          "size": Object {
-            "args": Array [
-              Array [
-                Object {
-                  "type": "number",
-                },
-                Object {
-                  "type": "string",
-                },
-              ],
-            ],
-            "type": "oneOfType",
-          },
-        },
-        "render": [Function],
-      },
-      "type": "button",
-    },
     "propTypes": Object {
       "aria-label": Object {
         "type": "string",
@@ -7947,7 +7855,6 @@ Map {
         "type": "string",
       },
       "iconDescription": Object {
-        "isRequired": true,
         "type": "string",
       },
       "renderIcon": Object {
@@ -8792,13 +8699,6 @@ Map {
     "render": [Function],
   },
   "ToastNotification" => Object {
-    "defaultProps": Object {
-      "hideCloseButton": false,
-      "kind": "error",
-      "onCloseButtonClick": [Function],
-      "role": "status",
-      "timeout": 0,
-    },
     "propTypes": Object {
       "aria-label": Object {
         "type": "string",

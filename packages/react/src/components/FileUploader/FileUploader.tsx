@@ -58,7 +58,7 @@ export interface FileUploaderProps extends ReactAttr<HTMLSpanElement> {
   /**
    * Provide a description for the complete/close icon that can be read by screen readers
    */
-  iconDescription: string;
+  iconDescription?: string;
 
   /**
    * Specify the description text of this `<FileUploader>`
@@ -145,7 +145,7 @@ export default class FileUploader extends React.Component<
     /**
      * Provide a description for the complete/close icon that can be read by screen readers
      */
-    iconDescription: PropTypes.string.isRequired,
+    iconDescription: PropTypes.string,
 
     /**
      * Specify the description text of this `<FileUploader>`
