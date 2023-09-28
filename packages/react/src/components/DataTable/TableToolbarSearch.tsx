@@ -134,7 +134,7 @@ export interface TableToolbarSearchProps {
   /**
    * Provide custom text for the component for each translation id
    */
-  translateWithId: (id: string) => string;
+  translateWithId?: (id: string) => string;
 }
 
 const TableToolbarSearch = ({
@@ -337,7 +337,7 @@ TableToolbarSearch.propTypes = {
   /**
    * Provide custom text for the component for each translation id
    */
-  translateWithId: PropTypes.func.isRequired,
+  translateWithId: PropTypes.func,
 };
 
 export default TableToolbarSearch;

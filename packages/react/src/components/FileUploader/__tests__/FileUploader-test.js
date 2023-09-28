@@ -12,7 +12,7 @@ import FileUploader from '../';
 import { uploadFiles } from '../test-helpers';
 
 const iconDescription = 'test description';
-const requiredProps = { iconDescription };
+const requiredProps = { iconDescription, filenameStatus: 'uploading' };
 
 describe('FileUploader', () => {
   describe('automated accessibility tests', () => {

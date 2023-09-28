@@ -1773,10 +1773,6 @@ Map {
   "DangerButton" => Object {},
   "DataTable" => Object {
     "Table": Object {
-      "defaultProps": Object {
-        "isSortable": false,
-        "overflowMenuOnHover": true,
-      },
       "propTypes": Object {
         "children": Object {
           "type": "node",
@@ -1825,28 +1821,6 @@ Map {
       },
     },
     "TableBatchAction": Object {
-      "defaultProps": Object {
-        "iconDescription": "Add",
-        "renderIcon": Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "propTypes": Object {
-            "size": Object {
-              "args": Array [
-                Array [
-                  Object {
-                    "type": "number",
-                  },
-                  Object {
-                    "type": "string",
-                  },
-                ],
-              ],
-              "type": "oneOfType",
-            },
-          },
-          "render": [Function],
-        },
-      },
       "propTypes": Object {
         "hasIconOnly": Object {
           "type": "bool",
@@ -1868,9 +1842,6 @@ Map {
       },
     },
     "TableBatchActions": Object {
-      "defaultProps": Object {
-        "translateWithId": [Function],
-      },
       "propTypes": Object {
         "children": Object {
           "type": "node",
@@ -1907,9 +1878,6 @@ Map {
       ],
     },
     "TableBody": Object {
-      "defaultProps": Object {
-        "aria-live": "polite",
-      },
       "propTypes": Object {
         "aria-live": Object {
           "args": Array [
@@ -2058,11 +2026,6 @@ Map {
     },
     "TableHeader": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "isSortable": false,
-        "scope": "col",
-        "translateWithId": [Function],
-      },
       "propTypes": Object {
         "children": Object {
           "type": "node",
@@ -2086,7 +2049,6 @@ Map {
           "type": "func",
         },
         "scope": Object {
-          "isRequired": true,
           "type": "string",
         },
         "sortDirection": Object {
@@ -2119,9 +2081,6 @@ Map {
       },
     },
     "TableSelectAll": Object {
-      "defaultProps": Object {
-        "ariaLabel": "Select all rows in the table",
-      },
       "propTypes": Object {
         "ariaLabel": Object {
           "isRequired": true,
@@ -2191,12 +2150,11 @@ Map {
       },
     },
     "TableToolbar": Object {
-      "defaultProps": Object {
-        "aria-label": "data table toolbar",
-      },
       "propTypes": Object {
-        "aria-label": [Function],
-        "aria-labelledby": [Function],
+        "aria-label": Object {
+          "type": "string",
+        },
+        "ariaLabel": [Function],
         "children": Object {
           "type": "node",
         },
@@ -2236,28 +2194,6 @@ Map {
       },
     },
     "TableToolbarMenu": Object {
-      "defaultProps": Object {
-        "iconDescription": "Settings",
-        "renderIcon": Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "propTypes": Object {
-            "size": Object {
-              "args": Array [
-                Array [
-                  Object {
-                    "type": "number",
-                  },
-                  Object {
-                    "type": "string",
-                  },
-                ],
-              ],
-              "type": "oneOfType",
-            },
-          },
-          "render": [Function],
-        },
-      },
       "propTypes": Object {
         "children": Object {
           "isRequired": true,
@@ -2286,12 +2222,6 @@ Map {
       },
     },
     "TableToolbarSearch": Object {
-      "defaultProps": Object {
-        "onClear": [Function],
-        "persistent": false,
-        "tabIndex": "0",
-        "translateWithId": [Function],
-      },
       "propTypes": Object {
         "children": Object {
           "type": "node",
@@ -2365,7 +2295,6 @@ Map {
           "type": "oneOfType",
         },
         "translateWithId": Object {
-          "isRequired": true,
           "type": "func",
         },
       },
@@ -2863,15 +2792,6 @@ Map {
   },
   "Dropdown" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "direction": "bottom",
-      "disabled": false,
-      "helperText": "",
-      "itemToElement": null,
-      "itemToString": [Function],
-      "titleText": "",
-      "type": "default",
-    },
     "propTypes": Object {
       "aria-label": Object {
         "type": "string",
@@ -3179,15 +3099,6 @@ Map {
     "contextType": Object {
       "$$typeof": Symbol(react.context),
     },
-    "defaultProps": Object {
-      "accept": Array [],
-      "buttonKind": "primary",
-      "buttonLabel": "",
-      "disabled": false,
-      "filenameStatus": "uploading",
-      "multiple": false,
-      "onClick": [Function],
-    },
     "propTypes": Object {
       "accept": Object {
         "args": Array [
@@ -3443,11 +3354,6 @@ Map {
     },
   },
   "Filename" => Object {
-    "defaultProps": Object {
-      "iconDescription": "Uploading file",
-      "status": "uploading",
-      "tabIndex": "0",
-    },
     "propTypes": Object {
       "aria-describedby": Object {
         "type": "string",
@@ -3472,17 +3378,7 @@ Map {
         "type": "oneOf",
       },
       "tabIndex": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "number",
-            },
-            Object {
-              "type": "string",
-            },
-          ],
-        ],
-        "type": "oneOfType",
+        "type": "number",
       },
     },
   },
@@ -7640,10 +7536,6 @@ Map {
     },
   },
   "Table" => Object {
-    "defaultProps": Object {
-      "isSortable": false,
-      "overflowMenuOnHover": true,
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -7692,28 +7584,6 @@ Map {
     },
   },
   "TableBatchAction" => Object {
-    "defaultProps": Object {
-      "iconDescription": "Add",
-      "renderIcon": Object {
-        "$$typeof": Symbol(react.forward_ref),
-        "propTypes": Object {
-          "size": Object {
-            "args": Array [
-              Array [
-                Object {
-                  "type": "number",
-                },
-                Object {
-                  "type": "string",
-                },
-              ],
-            ],
-            "type": "oneOfType",
-          },
-        },
-        "render": [Function],
-      },
-    },
     "propTypes": Object {
       "hasIconOnly": Object {
         "type": "bool",
@@ -7735,9 +7605,6 @@ Map {
     },
   },
   "TableBatchActions" => Object {
-    "defaultProps": Object {
-      "translateWithId": [Function],
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -7774,9 +7641,6 @@ Map {
     ],
   },
   "TableBody" => Object {
-    "defaultProps": Object {
-      "aria-live": "polite",
-    },
     "propTypes": Object {
       "aria-live": Object {
         "args": Array [
@@ -7925,11 +7789,6 @@ Map {
   },
   "TableHeader" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "isSortable": false,
-      "scope": "col",
-      "translateWithId": [Function],
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -7953,7 +7812,6 @@ Map {
         "type": "func",
       },
       "scope": Object {
-        "isRequired": true,
         "type": "string",
       },
       "sortDirection": Object {
@@ -7986,9 +7844,6 @@ Map {
     },
   },
   "TableSelectAll" => Object {
-    "defaultProps": Object {
-      "ariaLabel": "Select all rows in the table",
-    },
     "propTypes": Object {
       "ariaLabel": Object {
         "isRequired": true,
@@ -8058,12 +7913,11 @@ Map {
     },
   },
   "TableToolbar" => Object {
-    "defaultProps": Object {
-      "aria-label": "data table toolbar",
-    },
     "propTypes": Object {
-      "aria-label": [Function],
-      "aria-labelledby": [Function],
+      "aria-label": Object {
+        "type": "string",
+      },
+      "ariaLabel": [Function],
       "children": Object {
         "type": "node",
       },
@@ -8103,28 +7957,6 @@ Map {
     },
   },
   "TableToolbarMenu" => Object {
-    "defaultProps": Object {
-      "iconDescription": "Settings",
-      "renderIcon": Object {
-        "$$typeof": Symbol(react.forward_ref),
-        "propTypes": Object {
-          "size": Object {
-            "args": Array [
-              Array [
-                Object {
-                  "type": "number",
-                },
-                Object {
-                  "type": "string",
-                },
-              ],
-            ],
-            "type": "oneOfType",
-          },
-        },
-        "render": [Function],
-      },
-    },
     "propTypes": Object {
       "children": Object {
         "isRequired": true,
@@ -8153,12 +7985,6 @@ Map {
     },
   },
   "TableToolbarSearch" => Object {
-    "defaultProps": Object {
-      "onClear": [Function],
-      "persistent": false,
-      "tabIndex": "0",
-      "translateWithId": [Function],
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -8232,7 +8058,6 @@ Map {
         "type": "oneOfType",
       },
       "translateWithId": Object {
-        "isRequired": true,
         "type": "func",
       },
     },
