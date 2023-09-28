@@ -2580,10 +2580,30 @@ Map {
         "type": "oneOfType",
       },
       "maxDate": Object {
-        "type": "string",
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "minDate": Object {
-        "type": "string",
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "onChange": Object {
         "type": "func",
@@ -3249,13 +3269,6 @@ Map {
     },
   },
   "FileUploaderDropContainer" => Object {
-    "defaultProps": Object {
-      "accept": Array [],
-      "labelText": "Add file",
-      "multiple": false,
-      "onAddFiles": [Function],
-      "pattern": ".[0-9a-z]+$",
-    },
     "propTypes": Object {
       "accept": Object {
         "args": Array [
@@ -3298,10 +3311,6 @@ Map {
     },
   },
   "FileUploaderItem" => Object {
-    "defaultProps": Object {
-      "onDelete": [Function],
-      "status": "uploading",
-    },
     "propTypes": Object {
       "errorBody": Object {
         "type": "string",
@@ -3702,11 +3711,6 @@ Map {
     "Provider": "React.Provider",
   },
   "FormGroup" => Object {
-    "defaultProps": Object {
-      "invalid": false,
-      "message": false,
-      "messageText": "",
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -4662,18 +4666,6 @@ Map {
   },
   "Modal" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "hasScrollingContent": false,
-      "modalHeading": "",
-      "modalLabel": "",
-      "onKeyDown": [Function],
-      "onRequestClose": [Function],
-      "onRequestSubmit": [Function],
-      "passiveModal": false,
-      "preventCloseOnClickOutside": false,
-      "primaryButtonDisabled": false,
-      "selectorPrimaryFocus": "[data-modal-primary-focus]",
-    },
     "propTypes": Object {
       "alert": Object {
         "type": "bool",
@@ -4907,17 +4899,6 @@ Map {
     "render": [Function],
   },
   "ModalWrapper" => Object {
-    "defaultProps": Object {
-      "disabled": false,
-      "onKeyDown": [Function],
-      "preventCloseOnClickOutside": false,
-      "primaryButtonText": "Save",
-      "secondaryButtonText": "Cancel",
-      "selectorPrimaryFocus": "[data-modal-primary-focus]",
-      "shouldCloseAfterSubmit": true,
-      "triggerButtonIconDescription": "Provide icon description if icon is used",
-      "triggerButtonKind": "primary",
-    },
     "propTypes": Object {
       "buttonTriggerClassName": Object {
         "type": "string",
