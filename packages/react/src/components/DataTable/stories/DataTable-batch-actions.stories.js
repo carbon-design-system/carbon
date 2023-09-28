@@ -132,6 +132,7 @@ export const Default = () => (
                 onChange={onInputChange}
               />
               <TableToolbarMenu
+                iconDescription="Settings"
                 tabIndex={batchActionProps.shouldShowBatchActions ? -1 : 0}>
                 <TableToolbarAction onClick={() => alert('Alert 1')}>
                   Action 1
@@ -232,6 +233,7 @@ export const Playground = (args) => (
                 }}
               />
               <TableToolbarMenu
+                iconDescription="Settings"
                 tabIndex={batchActionProps.shouldShowBatchActions ? -1 : 0}>
                 <TableToolbarAction onClick={() => alert('Alert 1')}>
                   Action 1
