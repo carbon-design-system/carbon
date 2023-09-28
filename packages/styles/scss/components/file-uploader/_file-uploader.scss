@@ -140,6 +140,7 @@
     display: grid;
     align-items: center;
     background-color: $layer;
+    gap: convert.to-rem(12px) 0;
     grid-auto-rows: auto;
     grid-template-columns: 1fr auto;
     margin-block-end: $spacing-03;
@@ -173,7 +174,8 @@
     }
 
     .#{$prefix}--file-filename-container-wrap {
-      max-inline-size: 18rem;
+      margin-block-start: 1px;
+      max-inline-size: 17.5rem;
       padding-inline-start: $spacing-05;
       @include breakpoint-down(410px) {
         max-inline-size: 13.5rem;
@@ -181,7 +183,7 @@
     }
 
     .#{$prefix}--file-filename-container-wrap-invalid {
-      max-inline-size: 16rem;
+      max-inline-size: 15.5rem;
 
       .#{$prefix}--file-filename-tooltip {
         inline-size: -webkit-fill-available;
@@ -224,12 +226,12 @@
   }
 
   .#{$prefix}--file__selected-file--md {
-    gap: $spacing-03 $spacing-05;
+    gap: $spacing-03 0;
     min-block-size: convert.to-rem(40px);
   }
 
   .#{$prefix}--file__selected-file--sm {
-    gap: $spacing-02 $spacing-05;
+    gap: $spacing-02 0;
     min-block-size: convert.to-rem(32px);
   }
 
@@ -314,7 +316,7 @@
     align-items: center;
     justify-content: center;
     min-inline-size: 1.5rem;
-    padding-inline-end: $spacing-03;
+    padding-inline-end: $spacing-05;
 
     .#{$prefix}--loading__svg {
       stroke: $icon-primary;
