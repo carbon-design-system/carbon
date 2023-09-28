@@ -39,11 +39,11 @@ export const Default = () => {
         labelDescription="Max file size is 500mb. Only .jpg files are supported."
         buttonLabel="Add file"
         buttonKind="primary"
-        // size="md"
+        size="md"
         filenameStatus="edit"
         accept={['.jpg', '.png']}
         multiple={true}
-        // disabled={false}
+        disabled={false}
         iconDescription="Delete file"
         name=""
       />
@@ -65,6 +65,7 @@ export const _FileUploaderItem = (args) => {
     />
   );
 };
+
 _FileUploaderItem.argTypes = {
   errorBody: {
     control: 'text',

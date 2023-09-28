@@ -71,7 +71,7 @@ TableToolbarMenu.propTypes = {
   /**
    * The description of the menu icon.
    */
-  iconDescription: PropTypes.string.isRequired,
+  iconDescription: PropTypes.string,
 
   /**
    * Optional prop to allow overriding the default menu icon
