@@ -64,7 +64,6 @@ export default {
 export const Default = () => (
   <div style={{ width: 300 }}>
     <ComboBox
-      type="inline"
       onChange={() => {}}
       id="carbon-combobox"
       items={items}

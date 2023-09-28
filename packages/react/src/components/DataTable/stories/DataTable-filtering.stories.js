@@ -77,7 +77,7 @@ export const Default = () => (
           <TableToolbarContent>
             {/* pass in `onInputChange` change here to make filtering work */}
             <TableToolbarSearch onChange={onInputChange} />
-            <TableToolbarMenu>
+            <TableToolbarMenu iconDescription="Settings">
               <TableToolbarAction onClick={action('Action 1 Click')}>
                 Action 1
               </TableToolbarAction>
@@ -136,7 +136,7 @@ export const Playground = (args) => (
                 onInputChange(evt);
               }}
             />
-            <TableToolbarMenu>
+            <TableToolbarMenu iconDescription="Settings">
               <TableToolbarAction onClick={action('Action 1 Click')}>
                 Action 1
               </TableToolbarAction>
