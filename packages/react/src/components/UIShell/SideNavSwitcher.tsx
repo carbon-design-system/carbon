@@ -8,7 +8,7 @@
 import { ChevronDown } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { ChangeEventHandler, forwardRef, useCallback } from 'react';
+import React, { ChangeEventHandler, forwardRef } from 'react';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -45,15 +45,6 @@ const SideNavSwitcher = forwardRef<HTMLSelectElement, SideNavSwitcherProps>(
     const { className: customClassName, labelText, onChange, options } = props;
     const className = cx(`${prefix}--side-nav__switcher`, customClassName);
 
-    const handleOnChange = useCallback<ChangeEventHandler<HTMLSelectElement>>(
-      (event) => {
-        if (onChange) {
-          onChange(event);
-        }
-      },
-      [onChange]
-    );
-
     // Note for usage around `onBlur`: https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-onchange.md
     return (
       <div className={className}>
@@ -64,8 +55,8 @@ const SideNavSwitcher = forwardRef<HTMLSelectElement, SideNavSwitcherProps>(
           id={id}
           className={`${prefix}--side-nav__select`}
           defaultValue=""
-          onBlur={handleOnChange}
-          onChange={handleOnChange}
+          onBlur={onChange}
+          onChange={onChange}
           ref={ref}>
           <option
             className={`${prefix}--side-nav__option`}
@@ -115,7 +106,8 @@ SideNavSwitcher.propTypes = {
    * `<option>`. The text value will be what is displayed to the user and is set
    * as the `value` prop for each `<option>`.
    */
-  options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  // @ts-expect-error
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default SideNavSwitcher;
