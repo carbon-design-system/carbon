@@ -316,7 +316,7 @@
     align-items: center;
     justify-content: center;
     min-inline-size: 1.5rem;
-    padding-inline-end: $spacing-05;
+    padding-inline-end: convert.to-rem(12px);
 
     .#{$prefix}--loading__svg {
       stroke: $icon-primary;
