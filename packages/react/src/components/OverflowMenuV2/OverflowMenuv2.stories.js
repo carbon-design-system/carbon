@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
+import LinkTo from '@storybook/addon-links/react';
 
 import { WithDeprecationNotice } from '../../../.storybook/templates/WithDeprecationNotice';
 
@@ -41,9 +42,9 @@ export const _OverflowMenuV2 = () => {
         <span>
           `OverflowMenuV2` is deprecated and will be removed in the next major
           version. Use `OverflowMenu` with the `enable-v12-overflowmenu`{' '}
-          <a href="/?path=/story/experimental-feature-flags--overview">
+          <LinkTo title="Experimental/Feature Flags" name="Overview">
             feature flag
-          </a>{' '}
+          </LinkTo>{' '}
           instead.
         </span>
       }>
