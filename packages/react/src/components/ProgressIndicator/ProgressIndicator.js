@@ -127,7 +127,7 @@ function ProgressStep({
   secondaryLabel,
   disabled,
   onClick,
-  translateWithId: t,
+  translateWithId: t = translateWithId,
   ...rest
 }) {
   const prefix = usePrefix();
@@ -290,10 +290,6 @@ ProgressStep.propTypes = {
    * internationalized string.
    */
   translateWithId: PropTypes.func,
-};
-
-ProgressStep.defaultProps = {
-  translateWithId,
 };
 
 export { ProgressIndicator, ProgressStep };

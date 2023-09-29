@@ -13,6 +13,7 @@ import { keys, matches } from '../../internal/keyboard';
 import { useFallbackId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
+import { noopFn } from '../../internal/noopFn';
 
 const RadioTile = React.forwardRef(function RadioTile(
   {
@@ -25,8 +26,8 @@ const RadioTile = React.forwardRef(function RadioTile(
     name,
     value,
     id,
-    onChange,
-    tabIndex,
+    onChange = noopFn,
+    tabIndex = 0,
     ...rest
   },
   ref
@@ -135,11 +136,6 @@ RadioTile.propTypes = {
    * The `value` of the `<input>`.
    */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-};
-
-RadioTile.defaultProps = {
-  onChange: () => {},
-  tabIndex: 0,
 };
 
 export default RadioTile;
