@@ -8,7 +8,7 @@
 import { ChevronDown } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { ChangeEventHandler, forwardRef, useCallback } from 'react';
+import React, { ChangeEventHandler, forwardRef, useCallback } from 'react';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 
