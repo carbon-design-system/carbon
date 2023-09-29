@@ -8,50 +8,88 @@
 import { ChevronDown } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
-import { usePrefix } from '../../internal/usePrefix';
+import { ChangeEventHandler, forwardRef, useCallback } from 'react';
 import { useId } from '../../internal/useId';
+import { usePrefix } from '../../internal/usePrefix';
 
-const SideNavSwitcher = React.forwardRef(function SideNavSwitcher(props, ref) {
-  const id = useId('side-nav-switcher');
-  const prefix = usePrefix();
-  const { className: customClassName, labelText, onChange, options } = props;
-  const className = cx(`${prefix}--side-nav__switcher`, customClassName);
-  // Note for usage around `onBlur`: https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-onchange.md
-  return (
-    <div className={className}>
-      <label htmlFor={id} className={`${prefix}--assistive-text`}>
-        {labelText}
-      </label>
-      <select
-        id={id}
-        className={`${prefix}--side-nav__select`}
-        defaultValue=""
-        onBlur={onChange}
-        onChange={onChange}
-        ref={ref}>
-        <option
-          className={`${prefix}--side-nav__option`}
-          disabled
-          hidden
-          value="">
+interface SideNavSwitcherProps {
+  /**
+   * Provide an optional class to be applied to the containing node
+   */
+  className?: string;
+
+  /**
+   * Provide the label for the switcher. This will be the first visible option
+   * when someone views this control
+   */
+  labelText: string;
+
+  /**
+   * Provide a callback function that is called whenever the switcher value is
+   * updated
+   */
+  onChange?: ChangeEventHandler<HTMLSelectElement>;
+
+  /**
+   * Provide an array of options to be rendered in the switcher as an
+   * `<option>`. The text value will be what is displayed to the user and is set
+   * as the `value` prop for each `<option>`.
+   */
+  options: string[];
+}
+
+const SideNavSwitcher = forwardRef<HTMLSelectElement, SideNavSwitcherProps>(
+  function SideNavSwitcher(props, ref) {
+    const id = useId('side-nav-switcher');
+    const prefix = usePrefix();
+    const { className: customClassName, labelText, onChange, options } = props;
+    const className = cx(`${prefix}--side-nav__switcher`, customClassName);
+
+    const handleOnChange = useCallback<ChangeEventHandler<HTMLSelectElement>>(
+      (event) => {
+        if (onChange) {
+          onChange(event);
+        }
+      },
+      [onChange]
+    );
+
+    // Note for usage around `onBlur`: https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-onchange.md
+    return (
+      <div className={className}>
+        <label htmlFor={id} className={`${prefix}--assistive-text`}>
           {labelText}
-        </option>
-        {options.map((option) => (
+        </label>
+        <select
+          id={id}
+          className={`${prefix}--side-nav__select`}
+          defaultValue=""
+          onBlur={handleOnChange}
+          onChange={handleOnChange}
+          ref={ref}>
           <option
-            key={option}
             className={`${prefix}--side-nav__option`}
-            value={option}>
-            {option}
+            disabled
+            hidden
+            value="">
+            {labelText}
           </option>
-        ))}
-      </select>
-      <div className={`${prefix}--side-nav__switcher-chevron`}>
-        <ChevronDown size={20} />
+          {options.map((option) => (
+            <option
+              key={option}
+              className={`${prefix}--side-nav__option`}
+              value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+        <div className={`${prefix}--side-nav__switcher-chevron`}>
+          <ChevronDown size={20} />
+        </div>
       </div>
-    </div>
-  );
-});
+    );
+  }
+);
 
 SideNavSwitcher.displayName = 'SideNavSwitcher';
 SideNavSwitcher.propTypes = {
@@ -77,7 +115,7 @@ SideNavSwitcher.propTypes = {
    * `<option>`. The text value will be what is displayed to the user and is set
    * as the `value` prop for each `<option>`.
    */
-  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
 export default SideNavSwitcher;
