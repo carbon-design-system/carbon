@@ -1,4 +1,6 @@
-import { ArgsTable } from '@storybook/blocks';
+import { ArgsTable, Canvas, Story } from '@storybook/blocks';
+
+import * as MultiSelect from './MultiSelect.stories';
 
 # MultiSelect
 
@@ -8,9 +10,52 @@ import { ArgsTable } from '@storybook/blocks';
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/dropdown/accessibility)
 
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> */}
+{/* <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 ## Table of Contents
 
+- [Overview](#overview)
+  - [With initial selected items](#with-initial-selected-items)
+  - [Filtering](#filtering)
+  - [With layer](#with-layer)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
 ## Overview
+
+The `MultiSelect` component is a variant of the `Dropdown` component that allows for
+multiple items to be selected. `MultiSelect` stays open while items are
+being selected.
+
+
+<Canvas>
+  <Story of={MultiSelect.Default} />
+</Canvas>
+
+### With initial selected items
+
+By passing items into the `initialSelectedItems` prop, they can be pre-selected.
+
+<Canvas>
+  <Story of={MultiSelect.WithInitialSelectedItems} />
+</Canvas>
+
+### Filtering
+
+The `FilterableMultiSelect` component allows for filtering the list of selectable
+items to a subset.
+
+<Canvas>
+  <Story of={MultiSelect.Filterable} />
+</Canvas>
+
+### With layer
+
+<Canvas>
+  <Story of={MultiSelect.WithLayerMultiSelect} />
+</Canvas>
 
 ## Component API
 
