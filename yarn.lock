@@ -29330,8 +29330,8 @@ __metadata:
     stylelint-config-standard: ^34.0.0
     stylelint-config-standard-scss: ^11.0.0
     stylelint-no-unsupported-browser-features: ^7.0.0
-    stylelint-order: ^6.0.0
-    stylelint-prettier: ^4.0.0
+    stylelint-order: ^6.0.3
+    stylelint-prettier: ^4.0.2
     stylelint-scss: ^5.2.1
     stylelint-stylistic: ^0.4.3
     stylelint-use-logical: ^2.1.0
@@ -29429,7 +29429,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-order@npm:^6.0.0":
+"stylelint-order@npm:^6.0.3":
   version: 6.0.3
   resolution: "stylelint-order@npm:6.0.3"
   dependencies:
@@ -29441,7 +29441,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-prettier@npm:^4.0.0":
+"stylelint-prettier@npm:^4.0.2":
   version: 4.0.2
   resolution: "stylelint-prettier@npm:4.0.2"
   dependencies:
