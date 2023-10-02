@@ -846,11 +846,10 @@ $tokens: (
     );
     $max-vw: map.get($next-fluid-breakpoint, width);
 
-    // prettier-ignore
     font-size: calc(
-#{$min-font-size} +
-      #{strip-unit($max-font-size - $min-font-size)} *
-      ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
+      #{$min-font-size} +
+        #{strip-unit($max-font-size - $min-font-size)} *
+        ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
     );
   } @else {
     // Otherwise, just default to setting the font size found from the type

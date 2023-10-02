@@ -18,14 +18,14 @@
 @use './serif';
 
 $-fonts: (
-  ibm-plex-mono: true,
-  ibm-plex-sans-arabic: false,
-  ibm-plex-sans-devanagari: false,
-  ibm-plex-sans-hebrew: false,
-  ibm-plex-sans-thai-looped: false,
-  ibm-plex-sans-thai: false,
-  ibm-plex-sans: true,
-  ibm-plex-serif: true,
+  IBM-Plex-Mono: true,
+  IBM-Plex-Sans-Arabic: false,
+  IBM-Plex-Sans-Devanagari: false,
+  IBM-Plex-Sans-Hebrew: false,
+  IBM-Plex-Sans-Thai-Looped: false,
+  IBM-Plex-Sans-Thai: false,
+  IBM-Plex-Sans: true,
+  IBM-Plex-Serif: true,
 );
 $fonts: () !default;
 $fonts: map.merge($-fonts, $fonts);

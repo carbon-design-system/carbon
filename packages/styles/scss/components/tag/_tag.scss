@@ -188,7 +188,7 @@
     margin: 0 0 0 convert.to-rem(2px);
     background-color: transparent;
     block-size: layout.size('height');
-    color: currentcolor;
+    color: currentColor;
     cursor: pointer;
     inline-size: layout.size('height');
     transition:
@@ -196,7 +196,7 @@
       box-shadow $duration-fast-01 motion(standard, productive);
 
     svg {
-      fill: currentcolor;
+      fill: currentColor;
     }
   }
 
@@ -206,13 +206,13 @@
     border: 0;
     background-color: transparent;
     block-size: convert.to-rem(16px);
-    color: currentcolor;
+    color: currentColor;
     inline-size: convert.to-rem(16px);
     margin-inline-end: $spacing-02;
     outline: none;
 
     svg {
-      fill: currentcolor;
+      fill: currentColor;
     }
   }
 

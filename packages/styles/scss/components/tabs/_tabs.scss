@@ -125,7 +125,11 @@
     .#{$prefix}--tab--overflow-nav-button--next::before {
       position: absolute;
       z-index: 1;
-      background: linear-gradient(to right, rgb(255 255 255 / 0%), $background);
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0),
+        $background
+      );
       block-size: 100%;
       content: '';
       inline-size: $spacing-03;
@@ -136,7 +140,7 @@
       .#{$prefix}--tab--overflow-nav-button--next::before {
       background-image: linear-gradient(
         to right,
-        rgb(255 255 255 / 0%),
+        rgba(255, 255, 255, 0),
         $layer-accent
       );
     }
@@ -151,7 +155,7 @@
     .#{$prefix}--tab--overflow-nav-button--previous::before {
       position: absolute;
       z-index: 1;
-      background: linear-gradient(to left, rgb(255 255 255 / 0%), $background);
+      background: linear-gradient(to left, rgba(255, 255, 255, 0), $background);
       block-size: 100%;
       content: '';
       inline-size: $spacing-03;
@@ -162,19 +166,23 @@
       .#{$prefix}--tab--overflow-nav-button--previous::before {
       background-image: linear-gradient(
         to left,
-        rgb(255 255 255 / 0%),
+        rgba(255, 255, 255, 0),
         $layer-accent
       );
     }
 
     .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--left {
-      background-image: linear-gradient(to left, rgb(255 255 255 / 0%), $layer);
+      background-image: linear-gradient(
+        to left,
+        rgba(255, 255, 255, 0),
+        $layer
+      );
     }
 
     .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--right {
       background-image: linear-gradient(
         to right,
-        rgb(255 255 255 / 0%),
+        rgba(255, 255, 255, 0),
         $layer
       );
     }
@@ -182,7 +190,7 @@
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__overflow-indicator--left {
       background-image: linear-gradient(
         to left,
-        rgb(255 255 255 / 0%),
+        rgba(255, 255, 255, 0),
         $layer-accent
       );
     }
@@ -190,7 +198,7 @@
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__overflow-indicator--right {
       background-image: linear-gradient(
         to right,
-        rgb(255 255 255 / 0%),
+        rgba(255, 255, 255, 0),
         $layer-accent
       );
     }
