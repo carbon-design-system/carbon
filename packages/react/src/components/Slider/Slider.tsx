@@ -457,6 +457,7 @@ class Slider extends PureComponent<SliderProps> {
     isValidUpper: true,
     activeHandle: null,
     correctedValue: null,
+    correctedPosition: null,
     isRtl: false,
   };
 
@@ -738,7 +739,7 @@ class Slider extends PureComponent<SliderProps> {
         isValid: true,
       });
     }
-    this.setState({ correctedValue: null });
+    this.setState({ correctedValue: null, correctedPosition: null });
   };
 
   /**
@@ -805,7 +806,7 @@ class Slider extends PureComponent<SliderProps> {
       });
     }
 
-    this.setState({ correctedValue: null });
+    this.setState({ correctedValue: null, correctedPosition: null });
   };
 
   /**
@@ -937,9 +938,12 @@ class Slider extends PureComponent<SliderProps> {
           });
 
       if (adjustedValue !== targetValue) {
-        this.setState({ correctedValue: targetValue });
+        this.setState({
+          correctedValue: targetValue,
+          correctedPosition: handlePosition,
+        });
       } else {
-        this.setState({ correctedValue: null });
+        this.setState({ correctedValue: null, correctedPosition: null });
       }
 
       const { value, left } = this.calcValue({
@@ -1269,18 +1273,34 @@ class Slider extends PureComponent<SliderProps> {
       translateWithId: t = translateWithId,
       ...other
     } = this.props;
+    const twoHandles = this.hasTwoHandles();
 
     delete other.onRelease;
     delete other.invalid;
     delete other.unstable_valueUpper;
 
-    const { value, valueUpper, isValid, isValidUpper, correctedValue } =
-      this.state;
+    const {
+      value,
+      valueUpper,
+      isValid,
+      isValidUpper,
+      correctedValue,
+      correctedPosition,
+    } = this.state;
+
+    const showWarning =
+      (!readOnly && warn && isValid) ||
+      (typeof correctedValue !== null &&
+        correctedPosition === HandlePosition.LOWER);
+    const showWarningUpper =
+      (!readOnly && warn && (twoHandles ? isValidUpper : isValid)) ||
+      (typeof correctedValue !== null &&
+        correctedPosition ===
+          (twoHandles ? HandlePosition.UPPER : HandlePosition.LOWER));
 
     return (
       <PrefixContext.Consumer>
         {(prefix) => {
-          const twoHandles = this.hasTwoHandles();
           const labelId = `${id}-label`;
           const labelClasses = classNames(`${prefix}--label`, {
             [`${prefix}--label--disabled`]: disabled,
@@ -1303,7 +1323,6 @@ class Slider extends PureComponent<SliderProps> {
           const conditionalInputClasses = {
             [`${prefix}--text-input--light`]: light,
             [`${prefix}--slider-text-input--hidden`]: hideTextInput,
-            [`${prefix}--slider-text-input--warn`]: !readOnly && warn,
           };
           const lowerInputClasses = classNames([
             ...fixedInputClasses,
@@ -1311,6 +1330,7 @@ class Slider extends PureComponent<SliderProps> {
             conditionalInputClasses,
             {
               [`${prefix}--text-input--invalid`]: !readOnly && !isValid,
+              [`${prefix}--slider-text-input--warn`]: showWarning,
             },
           ]);
           const upperInputClasses = classNames([
@@ -1320,6 +1340,7 @@ class Slider extends PureComponent<SliderProps> {
             {
               [`${prefix}--text-input--invalid`]:
                 !readOnly && (twoHandles ? !isValidUpper : !isValid),
+              [`${prefix}--slider-text-input--warn`]: showWarningUpper,
             },
           ]);
           const lowerInputWrapperClasses = classNames([
@@ -1383,7 +1404,7 @@ class Slider extends PureComponent<SliderProps> {
                       />
                     )}
 
-                    {!readOnly && warn && isValid && (
+                    {showWarning && (
                       <WarningAltFilled
                         className={`${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`}
                       />
@@ -1503,13 +1524,11 @@ class Slider extends PureComponent<SliderProps> {
                     />
                   )}
 
-                  {!readOnly &&
-                    warn &&
-                    (twoHandles ? isValidUpper : isValid) && (
-                      <WarningAltFilled
-                        className={`${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`}
-                      />
-                    )}
+                  {showWarningUpper && (
+                    <WarningAltFilled
+                      className={`${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`}
+                    />
+                  )}
                 </div>
               </div>
               {!readOnly && (!isValid || !isValidUpper) && (
