@@ -272,7 +272,8 @@
 @function -last-map-item($map) {
   $total-length: list.length($map);
 
-  @return map-get($map, _key-by-index($map, $total-length));
+  // prettier-ignore
+  @return map-get($map, -key-by-index($map, $total-length));
 }
 
 /// Provide a map and index, and get back the relevant key value
@@ -281,7 +282,7 @@
 /// @param {Integer} $index - Key chain
 /// @return {String} Desired value
 /// @group @carbon/layout
-@function _key-by-index($map, $index) {
+@function -key-by-index($map, $index) {
   $keys: map.keys($map);
 
   @return nth($keys, $index);
