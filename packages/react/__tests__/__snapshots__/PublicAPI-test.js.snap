@@ -2276,14 +2276,6 @@ Map {
         },
       },
     },
-    "defaultProps": Object {
-      "filterRows": [Function],
-      "locale": "en",
-      "overflowMenuOnHover": true,
-      "size": "lg",
-      "sortRow": [Function],
-      "translateWithId": [Function],
-    },
     "propTypes": Object {
       "experimentalAutoAlign": Object {
         "type": "bool",
