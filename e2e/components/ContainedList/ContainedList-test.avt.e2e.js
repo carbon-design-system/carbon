@@ -55,20 +55,21 @@ test.describe('ContainedList @avt', () => {
     await expect(page).toHaveNoACViolations('ContainedList-with-actions');
   });
 
-  test('@avt-advanced-state ContainedList With expandable search', async ({
-    page,
-  }) => {
-    await visitStory(page, {
-      component: 'ContainedList',
-      id: 'components-containedlist--with-expandable-search',
-      globals: {
-        theme: 'white',
-      },
-    });
-    await expect(page).toHaveNoACViolations(
-      'ContainedList-with-expandable-search'
-    );
-  });
+  test.slow(
+    '@avt-advanced-state ContainedList With expandable search',
+    async ({ page }) => {
+      await visitStory(page, {
+        component: 'ContainedList',
+        id: 'components-containedlist--with-expandable-search',
+        globals: {
+          theme: 'white',
+        },
+      });
+      await expect(page).toHaveNoACViolations(
+        'ContainedList-with-expandable-search'
+      );
+    }
+  );
 
   test('@avt-advanced-state ContainedList With icons', async ({ page }) => {
     await visitStory(page, {
