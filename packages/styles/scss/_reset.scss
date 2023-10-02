@@ -129,7 +129,7 @@
 
   body {
     @if config.$css--body == true {
-      background-color: custom-property.get-var('background', #fff);
+      background-color: custom-property.get-var('background', #ffffff);
       color: custom-property.get-var('text-primary', #161616);
     }
 

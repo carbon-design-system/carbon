@@ -27,7 +27,6 @@ module.exports = {
     'scss/at-extend-no-missing-placeholder': OFF,
 
     // @-function
-    'selector-class-pattern': OFF,
     // Require named parameters in SCSS function call rule.
     'scss/at-function-named-arguments': OFF,
     // Require or disallow a space before @function parentheses.

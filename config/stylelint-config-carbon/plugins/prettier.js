@@ -25,5 +25,6 @@ module.exports = {
     'at-rule-no-unknown': OFF,
     'media-query-no-invalid': OFF,
     'color-hex-length': 'long',
+    'selector-class-pattern': OFF,
   },
 };
