@@ -14,6 +14,10 @@ const typescript = require('@rollup/plugin-typescript');
 const path = require('path');
 const { rollup } = require('rollup');
 const stripBanner = require('rollup-plugin-strip-banner');
+const {
+  loadBaseTsCompilerOpts,
+  loadTsCompilerOpts,
+} = require('typescript-config-carbon');
 const packageJson = require('../package.json');
 
 async function build() {
@@ -117,6 +121,13 @@ const babelConfig = {
   extensions: ['.ts', '.tsx', '.js', '.jsx'],
 };
 
+function getTsCompilerOptions() {
+  const baseOpts = loadBaseTsCompilerOpts();
+  const projectTsConfigPath = path.resolve(__dirname, '../tsconfig.json');
+  const overrideOpts = loadTsCompilerOpts(projectTsConfigPath);
+  return { ...baseOpts, ...overrideOpts };
+}
+
 function getRollupConfig(input, rootDir, outDir) {
   return {
     input,
@@ -145,7 +156,7 @@ function getRollupConfig(input, rootDir, outDir) {
         noForceEmit: true,
         outputToFilesystem: false,
         compilerOptions: {
-          emitDeclarationOnly: true,
+          ...getTsCompilerOptions(),
           rootDir,
           outDir,
         },

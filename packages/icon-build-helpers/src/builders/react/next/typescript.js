@@ -11,36 +11,27 @@ const fs = require('fs-extra');
 const path = require('path');
 const templates = require('./templates');
 const ts = require('typescript');
-
-/**
- * TypeScript compiler options to use when producing definition files
- * @type ts.CompilerOptions
- */
-const tsConfig = {
-  target: ts.ScriptTarget.ES2015,
-  module: ts.ModuleKind.ESNext,
-  moduleResolution: ts.ModuleResolutionKind.NodeJs,
-  allowJs: true,
-  declaration: true,
-  emitDeclarationOnly: true,
-  esModuleInterop: true,
-  strict: true,
-  skipLibCheck: true,
-};
+const {
+  diagnosticToMessage,
+  loadBaseTsCompilerOpts,
+} = require('typescript-config-carbon');
 
 function emitIconComponent(compileOpts) {
-  const options = { ...tsConfig, ...compileOpts };
+  const baseOpts = loadBaseTsCompilerOpts();
+  const options = { ...baseOpts, ...compileOpts };
   const host = ts.createCompilerHost(options);
   const iconComponentPath = path.resolve(__dirname, '../components/Icon.tsx');
   const program = ts.createProgram([iconComponentPath], options, host);
   const emitResult = program.emit();
-  ts.getPreEmitDiagnostics(program)
-    .concat(emitResult.diagnostics)
-    .forEach((diagnostic) => {
-      console.log(
-        ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n')
-      );
+  const diagnostics = ts
+    .getPreEmitDiagnostics(program)
+    .concat(emitResult.diagnostics);
+  if (diagnostics.length > 0) {
+    diagnostics.forEach((diagnostic) => {
+      console.log(diagnosticToMessage(diagnostic));
     });
+    throw new Error('Icon.tsx compilation failed');
+  }
 }
 
 async function copyCarbonIconType(outDir) {

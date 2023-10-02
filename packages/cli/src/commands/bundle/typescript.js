@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2023
+ * Copyright IBM Corp. 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,10 +11,15 @@ const { babel } = require('@rollup/plugin-babel');
 const commonjs = require('@rollup/plugin-commonjs');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const typescript = require('@rollup/plugin-typescript');
-const { pascalCase } = require('change-case');
 const fs = require('fs-extra');
 const path = require('path');
 const { rollup } = require('rollup');
+const { loadBaseTsCompilerOpts } = require('typescript-config-carbon');
+const {
+  formatGlobals,
+  findPackageFolder,
+  formatDependenciesIntoGlobals,
+} = require('./utils');
 
 async function bundle(entrypoint, options) {
   const globals = options.globals ? formatGlobals(options.globals) : {};
@@ -48,6 +53,8 @@ async function bundle(entrypoint, options) {
   const packageJson = await fs.readJson(packageJsonPath);
   const { dependencies = {} } = packageJson;
 
+  const baseTsCompilerOpts = loadBaseTsCompilerOpts();
+
   await Promise.all(
     jsEntryPoints.map(async ({ outputDir, file, format }) => {
       const bundle = await rollup({
@@ -59,8 +66,8 @@ async function bundle(entrypoint, options) {
             noForceEmit: true,
             outputToFilesystem: false,
             compilerOptions: {
+              ...baseTsCompilerOpts,
               rootDir: 'src',
-              emitDeclarationOnly: true,
               outDir: outputDir,
             },
           }),
@@ -106,50 +113,6 @@ async function bundle(entrypoint, options) {
       return bundle.write(outputOptions);
     })
   );
-}
-
-function formatGlobals(string) {
-  const mappings = string.split(',').map((mapping) => {
-    return mapping.split('=');
-  });
-  return mappings.reduce(
-    (acc, [pkg, global]) => ({
-      ...acc,
-      [pkg]: global,
-    }),
-    {}
-  );
-}
-
-function formatDependenciesIntoGlobals(dependencies) {
-  return Object.keys(dependencies).reduce((acc, key) => {
-    const parts = key.split('/').map((identifier, i) => {
-      if (i === 0) {
-        return identifier.replace(/@/, '');
-      }
-      return identifier;
-    });
-
-    return {
-      ...acc,
-      [key]: pascalCase(parts.join(' ')),
-    };
-  }, {});
-}
-
-async function findPackageFolder(entrypoint) {
-  let packageFolder = entrypoint;
-
-  while (packageFolder !== '/' && path.dirname(packageFolder) !== '/') {
-    packageFolder = path.dirname(packageFolder);
-    const packageJsonPath = path.join(packageFolder, 'package.json');
-
-    if (await fs.pathExists(packageJsonPath)) {
-      break;
-    }
-  }
-
-  return packageFolder;
 }
 
 module.exports = bundle;
