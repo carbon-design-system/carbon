@@ -9,8 +9,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
-
-function SideNavIcon({ children, className: customClassName, small }) {
+function SideNavIcon({ children, className: customClassName, small = false }) {
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--side-nav__icon`]: true,
@@ -35,11 +34,7 @@ SideNavIcon.propTypes = {
   /**
    * Specify whether the icon should be placed in a smaller bounding box
    */
-  small: PropTypes.bool.isRequired,
-};
-
-SideNavIcon.defaultProps = {
-  small: false,
+  small: PropTypes.bool,
 };
 
 export default SideNavIcon;

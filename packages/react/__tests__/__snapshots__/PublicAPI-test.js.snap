@@ -1557,9 +1557,6 @@ Map {
     },
   },
   "Content" => Object {
-    "defaultProps": Object {
-      "tagName": "main",
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -1577,15 +1574,6 @@ Map {
   },
   "ControlledPasswordInput" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "disabled": false,
-      "helperText": "",
-      "invalid": false,
-      "invalidText": "",
-      "onChange": [Function],
-      "onClick": [Function],
-      "size": undefined,
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -6049,9 +6037,6 @@ Map {
     },
   },
   "ProgressStep" => Object {
-    "defaultProps": Object {
-      "translateWithId": [Function],
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -6250,10 +6235,6 @@ Map {
   },
   "RadioTile" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "onChange": [Function],
-      "tabIndex": 0,
-    },
     "propTypes": Object {
       "checked": Object {
         "type": "bool",
@@ -6426,9 +6407,6 @@ Map {
     "render": [Function],
   },
   "SearchSkeleton" => Object {
-    "defaultProps": Object {
-      "small": false,
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -6459,14 +6437,6 @@ Map {
   },
   "Select" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "disabled": false,
-      "helperText": "",
-      "inline": false,
-      "invalid": false,
-      "invalidText": "",
-      "labelText": "Select",
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -6532,12 +6502,6 @@ Map {
     "render": [Function],
   },
   "SelectItem" => Object {
-    "defaultProps": Object {
-      "disabled": false,
-      "hidden": false,
-      "text": "",
-      "value": "",
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -6559,9 +6523,6 @@ Map {
     },
   },
   "SelectItemGroup" => Object {
-    "defaultProps": Object {
-      "disabled": false,
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -6714,13 +6675,9 @@ Map {
     },
   },
   "SideNavFooter" => Object {
-    "defaultProps": Object {
-      "assistiveText": "Toggle opening or closing the side navigation",
-    },
     "displayName": "SideNavFooter",
     "propTypes": Object {
       "assistiveText": Object {
-        "isRequired": true,
         "type": "string",
       },
       "className": Object {
@@ -6765,9 +6722,6 @@ Map {
     },
   },
   "SideNavIcon" => Object {
-    "defaultProps": Object {
-      "small": false,
-    },
     "propTypes": Object {
       "children": Object {
         "isRequired": true,
@@ -6777,7 +6731,6 @@ Map {
         "type": "string",
       },
       "small": Object {
-        "isRequired": true,
         "type": "bool",
       },
     },
@@ -6966,12 +6919,6 @@ Map {
     },
   },
   "SkeletonText" => Object {
-    "defaultProps": Object {
-      "heading": false,
-      "lineCount": 3,
-      "paragraph": false,
-      "width": "100%",
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -7190,11 +7137,6 @@ Map {
   },
   "Switch" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "onClick": [Function],
-      "onKeyDown": [Function],
-      "selected": false,
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -8066,20 +8008,6 @@ Map {
   },
   "TextArea" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "disabled": false,
-      "enableCounter": false,
-      "helperText": "",
-      "invalid": false,
-      "invalidText": "",
-      "maxCount": undefined,
-      "onChange": [Function],
-      "onClick": [Function],
-      "placeholder": "",
-      "rows": 4,
-      "warn": false,
-      "warnText": "",
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -8180,15 +8108,6 @@ Map {
     "$$typeof": Symbol(react.forward_ref),
     "ControlledPasswordInput": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "disabled": false,
-        "helperText": "",
-        "invalid": false,
-        "invalidText": "",
-        "onChange": [Function],
-        "onClick": [Function],
-        "size": undefined,
-      },
       "propTypes": Object {
         "className": Object {
           "type": "string",
@@ -9329,11 +9248,6 @@ Map {
   },
   "unstable_OverflowMenuV2" => Object {},
   "unstable_PageSelector" => Object {
-    "defaultProps": Object {
-      "className": null,
-      "id": 1,
-      "labelText": "Current page number",
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -9365,24 +9279,6 @@ Map {
     },
   },
   "unstable_Pagination" => Object {
-    "defaultProps": Object {
-      "backwardText": "Previous page",
-      "children": undefined,
-      "className": null,
-      "disabled": false,
-      "forwardText": "Next page",
-      "id": 1,
-      "initialPage": 1,
-      "itemRangeText": [Function],
-      "itemText": [Function],
-      "itemsPerPageText": "Items per page:",
-      "pageRangeText": [Function],
-      "pageSize": 10,
-      "pageSizes": undefined,
-      "pageText": [Function],
-      "pagesUnknown": false,
-      "totalItems": undefined,
-    },
     "propTypes": Object {
       "backwardText": Object {
         "type": "string",
