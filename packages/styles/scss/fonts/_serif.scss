@@ -12,7 +12,7 @@
 $font-family: 'IBM Plex Serif';
 $name: 'IBM-Plex-Serif';
 $styles: (normal, italic);
-$unicode-ranges: (cyrillic, pi, latin3, latin2, latin1);
+$unicode-ranges: (Cyrillic, Pi, Latin3, Latin2, Latin1);
 $formats: (woff2, woff);
 
 @mixin thin($styles: $styles, $unicode-ranges: $unicode-ranges) {

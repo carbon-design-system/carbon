@@ -11,7 +11,7 @@
 /// value is the list of unicode ranges that are applicable
 /// @type {List}
 $ranges: (
-  cyrillic: (
+  Cyrillic: (
     'U+0400-045F',
     'U+0472-0473',
     'U+0490-049D',
@@ -26,13 +26,13 @@ $ranges: (
     'U+04EE-04F5',
     'U+04F8-04F9',
   ),
-  greek: (
+  Greek: (
     'U+0384-038A',
     'U+038C',
     'U+038E-03A1',
     'U+03A3-03CE',
   ),
-  latin1: (
+  Latin1: (
     'U+0000',
     'U+000D',
     'U+0020-007E',
@@ -57,7 +57,7 @@ $ranges: (
     'U+2212',
     'U+FB01-FB02',
   ),
-  latin2: (
+  Latin2: (
     'U+0100-024F',
     'U+0259',
     'U+1E00-1EFF',
@@ -67,12 +67,12 @@ $ranges: (
     'U+A720-A7FF',
     'U+FB01-FB02',
   ),
-  latin3: (
+  Latin3: (
     'U+0102-0103',
     'U+1EA0-1EF9',
     'U+20AB',
   ),
-  pi: (
+  Pi: (
     'U+0E3F',
     'U+2032-2033',
     'U+2070',

@@ -11,46 +11,46 @@
 @use 'sass:meta';
 
 $-filenames: (
-  ibm-plex-mono: 'IBMPlexMono',
-  ibm-plex-sans-arabic: 'IBMPlexSansArabic',
-  ibm-plex-sans-devanagari: 'IBMPlexSansDevanagari',
-  ibm-plex-sans-hebrew: 'IBMPlexSansHebrew',
-  ibm-plex-sans-thai-looped: 'IBMPlexSansThaiLooped',
-  ibm-plex-sans-thai: 'IBMPlexSansThai',
-  ibm-plex-sans: 'IBMPlexSans',
-  ibm-plex-serif: 'IBMPlexSerif',
+  IBM-Plex-Mono: 'IBMPlexMono',
+  IBM-Plex-Sans-Arabic: 'IBMPlexSansArabic',
+  IBM-Plex-Sans-Devanagari: 'IBMPlexSansDevanagari',
+  IBM-Plex-Sans-Hebrew: 'IBMPlexSansHebrew',
+  IBM-Plex-Sans-Thai-Looped: 'IBMPlexSansThaiLooped',
+  IBM-Plex-Sans-Thai: 'IBMPlexSansThai',
+  IBM-Plex-Sans: 'IBMPlexSans',
+  IBM-Plex-Serif: 'IBMPlexSerif',
 );
 
 $-akamai-filenames: (
-  ibm-plex-mono: (
+  IBM-Plex-Mono: (
     name: 'IBM-Plex-Mono',
     filename: 'IBMPlexMono',
   ),
-  ibm-plex-sans-arabic: (
+  IBM-Plex-Sans-Arabic: (
     name: 'IBM-Plex-Sans-Arabic',
     filename: 'IBMPlexSansArabic',
   ),
-  ibm-plex-sans-devanagari: (
+  IBM-Plex-Sans-Devanagari: (
     name: 'IBM-Plex-Sans-Devanagari',
     filename: 'IBMPlexSansDevanagari',
   ),
-  ibm-plex-sans-hebrew: (
+  IBM-Plex-Sans-Hebrew: (
     name: 'IBM-Plex-Sans-Hebrew',
     filename: 'IBMPlexSansHebrew',
   ),
-  ibm-plex-sans-thai-looped: (
+  IBM-Plex-Sans-Thai-Looped: (
     name: 'IBM-Plex-Sans-Thai-Looped',
     filename: 'IBMPlexSansThaiLooped',
   ),
-  ibm-plex-sans-thai: (
+  IBM-Plex-Sans-Thai: (
     name: 'IBM-Plex-Sans-Thai',
     filename: 'IBMPlexSansThai',
   ),
-  ibm-plex-sans: (
+  IBM-Plex-Sans: (
     name: 'IBM-Plex-Sans',
     filename: 'IBMPlexSans',
   ),
-  ibm-plex-serif: (
+  IBM-Plex-Serif: (
     name: 'IBM-Plex-Serif',
     filename: 'IBMPlexSerif',
   ),
