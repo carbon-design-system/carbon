@@ -6,11 +6,19 @@
  */
 
 import cx from 'classnames';
-import PropTypes from 'prop-types';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 
-function SideNavLinkText({ className: customClassName, children, ...rest }) {
+export interface SideNavLinkTextProps {
+  children: ReactNode;
+  className?: string;
+}
+
+function SideNavLinkText({
+  className: customClassName,
+  children,
+  ...rest
+}: SideNavLinkTextProps) {
   const prefix = usePrefix();
   const className = cx(`${prefix}--side-nav__link-text`, customClassName);
   return (
@@ -19,17 +27,5 @@ function SideNavLinkText({ className: customClassName, children, ...rest }) {
     </span>
   );
 }
-
-SideNavLinkText.propTypes = {
-  /**
-   * Provide the content for the link text
-   */
-  children: PropTypes.node.isRequired,
-
-  /**
-   * Provide an optional class to be applied to the containing node
-   */
-  className: PropTypes.string,
-};
 
 export default SideNavLinkText;
