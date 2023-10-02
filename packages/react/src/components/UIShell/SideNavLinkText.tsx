@@ -8,6 +8,7 @@
 import cx from 'classnames';
 import React, { ReactNode } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
+import PropTypes from 'prop-types';
 
 export interface SideNavLinkTextProps {
   children: ReactNode;
@@ -27,5 +28,17 @@ function SideNavLinkText({
     </span>
   );
 }
+
+SideNavLinkText.propTypes = {
+  /**
+   * Provide the content for the link text
+   */
+  children: PropTypes.node.isRequired,
+
+  /**
+   * Provide an optional class to be applied to the containing node
+   */
+  className: PropTypes.string,
+};
 
 export default SideNavLinkText;
