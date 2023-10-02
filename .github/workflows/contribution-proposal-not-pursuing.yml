@@ -15,6 +15,10 @@ jobs:
       ${{ contains(github.event.label.name, format('proposal{0} not pursuing',
       ':')) }}
     steps:
+      - name: Log github event
+        env:
+          $GITHUB_CONTEXT_LABELS: ${{ toJson(github.event.label) }}
+        run: echo "$GITHUB_CONTEXT_LABELS"
       - name: Add comment
         uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410 #v6.4.1
         with:

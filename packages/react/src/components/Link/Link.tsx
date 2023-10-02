@@ -16,7 +16,7 @@ import React, {
 } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 
-interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
    * @description Indicates the element that represents the
    *   current item within a container or set of related
