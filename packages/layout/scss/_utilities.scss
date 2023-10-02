@@ -16,6 +16,7 @@
   @each $key in $keys {
     $map: map.get($map, $key);
   }
+
   @return $map;
 }
 
@@ -27,6 +28,7 @@
 /// @group @carbon/layout
 @function key-by-index($map, $index) {
   $keys: map.keys($map);
+
   @return nth($keys, $index);
 }
 
@@ -37,5 +39,6 @@
 /// @group @carbon/layout
 @function last-map-item($map) {
   $total-length: list.length($map);
+
   @return map-get($map, carbon--key-by-index($map, $total-length));
 }

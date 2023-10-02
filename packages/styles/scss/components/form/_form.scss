@@ -81,6 +81,7 @@ $input-label-weight: 400 !default;
     display: flex;
     align-items: center;
     justify-content: center;
+
     @include type-style('label-01');
   }
 
@@ -112,7 +113,6 @@ $input-label-weight: 400 !default;
     @include skeleton;
 
     block-size: convert.to-rem(14px);
-
     inline-size: convert.to-rem(75px);
   }
 

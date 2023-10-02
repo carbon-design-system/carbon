@@ -6,6 +6,7 @@
 //
 
 @forward 'toggle';
+
 @use 'toggle';
 
 @include toggle.toggle;

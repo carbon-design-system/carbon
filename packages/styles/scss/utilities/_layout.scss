@@ -6,7 +6,6 @@
 //
 
 @use 'sass:map';
-
 @use '../config';
 @use '../layout' as *;
 @use './custom-property';
@@ -25,6 +24,7 @@
 
   @each $property, $steps in $properties {
     $minValue: custom-property.get-var('layout-#{$group}-#{$property}-min');
+
     @if $min {
       $minValue: max(
         $minValue,
@@ -33,6 +33,7 @@
     }
 
     $maxValue: custom-property.get-var('layout-#{$group}-#{$property}-max');
+
     @if $max {
       $maxValue: min(
         $maxValue,
@@ -75,6 +76,7 @@
           $token: custom-property.get-var(
             'layout-#{$group}-#{$property}-#{$step}'
           );
+
           @include custom-property.declaration(
             'layout-#{$group}-#{$property}',
             $token

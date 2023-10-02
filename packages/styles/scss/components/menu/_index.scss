@@ -6,6 +6,7 @@
 //
 
 @forward 'menu';
+
 @use 'menu';
 
 @include menu.menu;

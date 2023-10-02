@@ -6,6 +6,7 @@
 //
 
 @forward 'content-switcher';
+
 @use 'content-switcher';
 
 @include content-switcher.content-switcher;

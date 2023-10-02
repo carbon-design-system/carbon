@@ -84,7 +84,8 @@
     outline: 0;
     text-align: center;
     text-decoration: none;
-    transition: background-color $duration-fast-02 motion(standard, productive),
+    transition:
+      background-color $duration-fast-02 motion(standard, productive),
       color $duration-fast-02 motion(standard, productive);
     user-select: none;
 
@@ -114,7 +115,7 @@
     }
 
     .#{$prefix}--pagination-nav__icon {
-      fill: currentColor;
+      fill: currentcolor;
       pointer-events: none;
     }
   }

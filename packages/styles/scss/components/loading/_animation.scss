@@ -29,7 +29,8 @@
 
 @mixin stop {
   // Animate the container
-  animation: rotate-end-p1 700ms motion.$ease-out forwards,
+  animation:
+    rotate-end-p1 700ms motion.$ease-out forwards,
     rotate-end-p2 700ms motion.$ease-out 700ms forwards;
 
   // Animate the stroke

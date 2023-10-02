@@ -280,7 +280,8 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile-content__below-the-fold {
     display: block;
     opacity: 0;
-    transition: opacity $duration-fast-02 motion(standard, productive),
+    transition:
+      opacity $duration-fast-02 motion(standard, productive),
       visibility $duration-fast-02 motion(standard, productive);
     visibility: hidden;
   }
@@ -295,7 +296,8 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
     .#{$prefix}--tile-content__below-the-fold {
       opacity: 1;
-      transition: opacity $duration-fast-02 motion(standard, productive),
+      transition:
+        opacity $duration-fast-02 motion(standard, productive),
         visibility $duration-fast-02 motion(standard, productive);
       visibility: inherit;
 

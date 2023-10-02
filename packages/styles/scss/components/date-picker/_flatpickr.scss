@@ -13,7 +13,6 @@
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
-
 @use '../button/tokens' as *;
 
 @keyframes fp-fade-in-down {
@@ -104,6 +103,7 @@
     text-align: center;
     touch-action: manipulation;
     visibility: hidden;
+
     @include high-contrast-mode('outline');
   }
 
@@ -288,7 +288,7 @@
     border: none;
     margin: 0;
     // Added in when upgraded to Flatpickr 4.5.5 (#1977)
-    -moz-appearance: textfield; /* Firefox */
+    appearance: textfield; /* Firefox */
     background-color: $field-01;
     color: $text-primary;
     cursor: default;
@@ -301,7 +301,7 @@
     &::-webkit-inner-spin-button {
       margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
       // Added in when upgraded to Flatpickr 4.5.5 (#1977)
-      -webkit-appearance: none;
+      appearance: none;
     }
 
     &:focus {
@@ -407,7 +407,8 @@
   }
 
   .flatpickr-calendar.animate .dayContainer.slideLeft {
-    animation: fp-fade-out 400ms cubic-bezier(0.23, 1, 0.32, 1),
+    animation:
+      fp-fade-out 400ms cubic-bezier(0.23, 1, 0.32, 1),
       fp-slide-left 400ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
@@ -417,18 +418,21 @@
   }
 
   .flatpickr-calendar.animate .dayContainer.slideLeftNew {
-    animation: fp-fade-in 400ms cubic-bezier(0.23, 1, 0.32, 1),
+    animation:
+      fp-fade-in 400ms cubic-bezier(0.23, 1, 0.32, 1),
       fp-slide-left 400ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   .flatpickr-calendar.animate .dayContainer.slideRight {
-    animation: fp-fade-out 400ms cubic-bezier(0.23, 1, 0.32, 1),
+    animation:
+      fp-fade-out 400ms cubic-bezier(0.23, 1, 0.32, 1),
       fp-slide-right 400ms cubic-bezier(0.23, 1, 0.32, 1);
     transform: translate3d(100%, 0, 0);
   }
 
   .flatpickr-calendar.animate .dayContainer.slideRightNew {
-    animation: fp-fade-in 400ms cubic-bezier(0.23, 1, 0.32, 1),
+    animation:
+      fp-fade-in 400ms cubic-bezier(0.23, 1, 0.32, 1),
       fp-slide-right-new 400ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
@@ -498,6 +502,7 @@
   .flatpickr-day.selected {
     background-color: $button-primary;
     color: $text-on-color;
+
     @include high-contrast-mode('focus') {
       outline-style: dotted;
     }

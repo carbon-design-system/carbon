@@ -6,6 +6,7 @@
 //
 
 @forward 'link';
+
 @use 'link';
 
 @include link.link;

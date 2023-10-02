@@ -6,6 +6,7 @@
 //
 
 @forward 'list-box';
+
 @use 'list-box';
 
 @include list-box.list-box;

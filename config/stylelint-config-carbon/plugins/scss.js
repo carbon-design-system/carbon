@@ -27,6 +27,8 @@ module.exports = {
     'scss/at-extend-no-missing-placeholder': OFF,
 
     // @-function
+    'selector-class-pattern': OFF,
+    'function-no-unknown': null,
     // Require named parameters in SCSS function call rule.
     'scss/at-function-named-arguments': OFF,
     // Require or disallow a space before @function parentheses.
@@ -60,6 +62,7 @@ module.exports = {
 
     // @-rule
     // Disallow unknown at-rules. Should be used instead of stylelint's at-rule-no-unknown.
+    'at-rule-no-unknown': null,
     'scss/at-rule-no-unknown': true,
     // Disallow parentheses in conditional @ rules (if, elsif, while)
     'scss/at-rule-conditional-no-parentheses': OFF,
@@ -122,6 +125,9 @@ module.exports = {
 
     // CSS Logical properties
     'csstools/use-logical': true,
+
+    // Turn off for CSS, enable for SCSS
+    'media-query-no-invalid': OFF,
   },
   overrides: [
     {

@@ -35,9 +35,7 @@
         ),
       )
     );
-
     @include layout.use('size', $default: 'md', $min: 'sm', $max: 'md');
-
     @include type-style('label-01');
     @include tag-theme($tag-background-gray, $tag-color-gray, $tag-hover-gray);
 
@@ -190,14 +188,15 @@
     margin: 0 0 0 convert.to-rem(2px);
     background-color: transparent;
     block-size: layout.size('height');
-    color: currentColor;
+    color: currentcolor;
     cursor: pointer;
     inline-size: layout.size('height');
-    transition: background-color $duration-fast-01 motion(standard, productive),
+    transition:
+      background-color $duration-fast-01 motion(standard, productive),
       box-shadow $duration-fast-01 motion(standard, productive);
 
     svg {
-      fill: currentColor;
+      fill: currentcolor;
     }
   }
 
@@ -207,13 +206,13 @@
     border: 0;
     background-color: transparent;
     block-size: convert.to-rem(16px);
-    color: currentColor;
+    color: currentcolor;
     inline-size: convert.to-rem(16px);
     margin-inline-end: $spacing-02;
     outline: none;
 
     svg {
-      fill: currentColor;
+      fill: currentcolor;
     }
   }
 
@@ -251,7 +250,6 @@
   // Skeleton state
   .#{$prefix}--tag.#{$prefix}--skeleton {
     @include skeleton;
-
     @include tag-theme(
       $bg-color: $skeleton-background,
       $text-color: $text-primary

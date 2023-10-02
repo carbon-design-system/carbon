@@ -30,7 +30,6 @@
     display: flex;
     flex-wrap: wrap;
     block-size: auto;
-
     color: $text-inverse;
     inline-size: 100%;
     max-inline-size: convert.to-rem(288px);
@@ -277,7 +276,8 @@
     inset-inline-end: 0;
     max-inline-size: convert.to-rem(48px);
     min-inline-size: convert.to-rem(48px);
-    transition: outline $duration-fast-02 motion(standard, productive),
+    transition:
+      outline $duration-fast-02 motion(standard, productive),
       background-color $duration-fast-02 motion(standard, productive);
 
     &:focus {

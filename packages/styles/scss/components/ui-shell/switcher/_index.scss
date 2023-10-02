@@ -6,6 +6,7 @@
 //
 
 @forward 'switcher';
+
 @use 'switcher';
 
 @include switcher.switcher;

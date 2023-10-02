@@ -432,6 +432,7 @@ $list-box-menu-width: convert.to-rem(300px);
     cursor: pointer;
     inline-size: convert.to-rem(24px);
     inset-block-start: 50%;
+
     /* to preserve .5rem space between icons according to spec top/transform used to center the combobox clear selection icon in IE11 */
     inset-inline-end: convert.to-rem(36px);
     transform: translateY(-50%);
@@ -670,7 +671,8 @@ $list-box-menu-width: convert.to-rem(300px);
     padding-inline-end: $spacing-06;
     text-decoration: none;
     text-overflow: ellipsis;
-    transition: border-color $duration-fast-01 motion(standard, productive),
+    transition:
+      border-color $duration-fast-01 motion(standard, productive),
       color $duration-fast-01 motion(standard, productive);
     white-space: nowrap;
 

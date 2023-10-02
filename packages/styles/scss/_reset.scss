@@ -129,7 +129,7 @@
 
   body {
     @if config.$css--body == true {
-      background-color: custom-property.get-var('background', #ffffff);
+      background-color: custom-property.get-var('background', #fff);
       color: custom-property.get-var('text-primary', #161616);
     }
 
@@ -151,7 +151,6 @@
   q::before,
   q::after {
     content: '';
-    // stylelint-disable-next-line declaration-block-no-duplicate-properties
     content: none;
   }
 

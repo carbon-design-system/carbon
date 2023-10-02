@@ -6,6 +6,7 @@
 //
 
 @forward 'skeleton-styles';
+
 @use 'skeleton-styles';
 
 @include skeleton-styles.skeleton-styles;

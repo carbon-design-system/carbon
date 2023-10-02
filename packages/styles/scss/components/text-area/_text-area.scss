@@ -36,10 +36,10 @@
     color: $text-primary;
     font-family: inherit;
     min-block-size: convert.to-rem(40px);
-
     min-inline-size: 10rem;
     resize: vertical;
-    transition: background-color $duration-fast-01 motion(standard, productive),
+    transition:
+      background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
   }
 
@@ -131,7 +131,6 @@
     @include skeleton;
 
     block-size: convert.to-rem(100px);
-
     inline-size: 100%;
 
     &::placeholder {

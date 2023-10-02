@@ -91,11 +91,14 @@
     border-radius: 50%;
     background: $layer-selected-inverse;
     block-size: convert.to-rem(14px);
-    box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 2px transparent;
+    box-shadow:
+      inset 0 0 0 1px transparent,
+      inset 0 0 0 2px transparent;
     inline-size: convert.to-rem(14px);
     outline: none;
     transform: translate(-50%, -50%);
-    transition: transform $duration-fast-02 motion(standard, productive),
+    transition:
+      transform $duration-fast-02 motion(standard, productive),
       background $duration-fast-02 motion(standard, productive),
       box-shadow $duration-fast-02 motion(standard, productive);
 
@@ -106,7 +109,9 @@
 
     &:focus {
       background-color: $interactive;
-      box-shadow: inset 0 0 0 2px $interactive, inset 0 0 0 3px $layer;
+      box-shadow:
+        inset 0 0 0 2px $interactive,
+        inset 0 0 0 3px $layer;
       // 20px / 14px = 1.4286
       transform: translate(-50%, -50%) scale(1.4286);
     }
@@ -123,7 +128,6 @@
 
   .#{$prefix}--slider-text-input,
   .#{$prefix}-slider-text-input {
-    -moz-appearance: textfield;
     appearance: textfield;
     block-size: convert.to-rem(40px);
     inline-size: convert.to-rem(64px);

@@ -18,6 +18,7 @@ $feature-flags: map.merge(
   @if map.has-key($feature-flags, $name) == true {
     @return true;
   }
+
   @error 'Unable to find a feature flag named: #{$name}';
 }
 

@@ -6,7 +6,6 @@
 //
 
 @use 'sass:map';
-
 @use 'vars' as *;
 @use '../../config' as *;
 @use '../../motion' as *;
@@ -62,15 +61,17 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
     var(--temp-padding-block-max)
   );
   padding-inline-end: calc(
-    layout.density('padding-inline') * 3 + convert.to-rem(16px) -
-      convert.to-rem(1px)
+    layout.density('padding-inline') * 3 + convert.to-rem(16px) - convert.to-rem(
+        1px
+      )
   );
   padding-inline-start: calc(
     layout.density('padding-inline') - convert.to-rem(1px)
   );
   text-align: start;
   text-decoration: none;
-  transition: background $duration-fast-01 motion(entrance, productive),
+  transition:
+    background $duration-fast-01 motion(entrance, productive),
     box-shadow $duration-fast-01 motion(entrance, productive),
     border-color $duration-fast-01 motion(entrance, productive),
     outline $duration-fast-01 motion(entrance, productive);
@@ -129,7 +130,8 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
 
   &:focus {
     border-color: $button-focus-color;
-    box-shadow: inset 0 0 0 $button-outline-width $button-focus-color,
+    box-shadow:
+      inset 0 0 0 $button-outline-width $button-focus-color,
       inset 0 0 0 $button-border-width $background;
   }
 

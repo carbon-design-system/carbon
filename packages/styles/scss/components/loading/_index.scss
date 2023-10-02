@@ -6,6 +6,7 @@
 //
 
 @forward 'loading';
+
 @use 'loading';
 
 @include loading.loading;

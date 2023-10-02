@@ -6,6 +6,7 @@
 //
 
 @forward 'accordion';
+
 @use 'accordion';
 
 @include accordion.accordion;

@@ -20,7 +20,7 @@ $base-font-size: 16px !default;
 /// @group utilities
 @function to-rem($px) {
   @if unit($px) != 'px' {
-    @error "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
+    @error 'Expected argument $px to be of type `px`, instead received: `#{unit($px)}`';
   }
 
   @return math.div($px, $base-font-size) * 1rem;
@@ -35,7 +35,7 @@ $base-font-size: 16px !default;
 /// @group @carbon/layout
 @function rem($px) {
   @if unit($px) != 'px' {
-    @error "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
+    @error 'Expected argument $px to be of type `px`, instead received: `#{unit($px)}`';
   }
 
   @return math.div($px, $base-font-size) * 1rem;
@@ -48,7 +48,7 @@ $base-font-size: 16px !default;
 /// @group utilities
 @function em($px) {
   @if unit($px) != 'px' {
-    @error "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
+    @error 'Expected argument $px to be of type `px`, instead received: `#{unit($px)}`';
   }
 
   @return math.div($px, $base-font-size) * 1em;

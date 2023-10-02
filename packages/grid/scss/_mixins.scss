@@ -7,7 +7,6 @@
 
 @use 'sass:meta';
 @use 'sass:math';
-
 @use 'config' as *;
 @use 'breakpoint' as *;
 
@@ -74,6 +73,7 @@
 @mixin -make-col-offset($span, $columns) {
   $offset: 0;
   $offset: math.div($span, $columns);
+
   @if $offset == 0 {
     margin-inline-start: 0;
   } @else {
@@ -222,6 +222,7 @@
 
     @if $prev-breakpoint {
       $prev-margin: map.get($prev-breakpoint, margin);
+
       @if $prev-margin != $margin {
         @include breakpoint($name) {
           padding-inline: #{($grid-gutter * 0.5) + $margin};

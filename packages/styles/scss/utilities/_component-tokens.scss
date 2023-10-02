@@ -22,6 +22,7 @@
 
   @each $key, $descriptor in $tokens {
     $theme-values: map.get($descriptor, values);
+
     @each $theme-value in $theme-values {
       @if map.get($theme-value, theme) == $theme {
         $result: map.set($result, $key, map.get($theme-value, value));

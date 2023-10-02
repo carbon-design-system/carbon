@@ -6,6 +6,7 @@
 //
 
 @forward 'multiselect';
+
 @use 'multiselect';
 
 @include multiselect.multiselect;

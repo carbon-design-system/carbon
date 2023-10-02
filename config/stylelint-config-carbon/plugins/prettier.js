@@ -7,10 +7,19 @@
 
 'use strict';
 
+const OFF = null;
+
 module.exports = {
-  extends: ['stylelint-config-prettier'],
+  extends: ['stylelint-config-standard'],
   plugins: ['stylelint-prettier'],
   rules: {
     'prettier/prettier': true,
+
+    // Overrides that are expecting CSS, not SCSS
+    'annotation-no-unknown': OFF,
+    'alpha-value-notation': OFF,
+    'value-keyword-case': OFF,
+    'color-function-notation': OFF,
+    'at-rule-empty-line-before': OFF,
   },
 };

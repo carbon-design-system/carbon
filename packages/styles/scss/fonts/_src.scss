@@ -11,46 +11,46 @@
 @use 'sass:meta';
 
 $-filenames: (
-  IBM-Plex-Mono: 'IBMPlexMono',
-  IBM-Plex-Sans-Arabic: 'IBMPlexSansArabic',
-  IBM-Plex-Sans-Devanagari: 'IBMPlexSansDevanagari',
-  IBM-Plex-Sans-Hebrew: 'IBMPlexSansHebrew',
-  IBM-Plex-Sans-Thai-Looped: 'IBMPlexSansThaiLooped',
-  IBM-Plex-Sans-Thai: 'IBMPlexSansThai',
-  IBM-Plex-Sans: 'IBMPlexSans',
-  IBM-Plex-Serif: 'IBMPlexSerif',
+  ibm-plex-mono: 'IBMPlexMono',
+  ibm-plex-sans-arabic: 'IBMPlexSansArabic',
+  ibm-plex-sans-devanagari: 'IBMPlexSansDevanagari',
+  ibm-plex-sans-hebrew: 'IBMPlexSansHebrew',
+  ibm-plex-sans-thai-looped: 'IBMPlexSansThaiLooped',
+  ibm-plex-sans-thai: 'IBMPlexSansThai',
+  ibm-plex-sans: 'IBMPlexSans',
+  ibm-plex-serif: 'IBMPlexSerif',
 );
 
 $-akamai-filenames: (
-  IBM-Plex-Mono: (
+  ibm-plex-mono: (
     name: 'IBM-Plex-Mono',
     filename: 'IBMPlexMono',
   ),
-  IBM-Plex-Sans-Arabic: (
+  ibm-plex-sans-arabic: (
     name: 'IBM-Plex-Sans-Arabic',
     filename: 'IBMPlexSansArabic',
   ),
-  IBM-Plex-Sans-Devanagari: (
+  ibm-plex-sans-devanagari: (
     name: 'IBM-Plex-Sans-Devanagari',
     filename: 'IBMPlexSansDevanagari',
   ),
-  IBM-Plex-Sans-Hebrew: (
+  ibm-plex-sans-hebrew: (
     name: 'IBM-Plex-Sans-Hebrew',
     filename: 'IBMPlexSansHebrew',
   ),
-  IBM-Plex-Sans-Thai-Looped: (
+  ibm-plex-sans-thai-looped: (
     name: 'IBM-Plex-Sans-Thai-Looped',
     filename: 'IBMPlexSansThaiLooped',
   ),
-  IBM-Plex-Sans-Thai: (
+  ibm-plex-sans-thai: (
     name: 'IBM-Plex-Sans-Thai',
     filename: 'IBMPlexSansThai',
   ),
-  IBM-Plex-Sans: (
+  ibm-plex-sans: (
     name: 'IBM-Plex-Sans',
     filename: 'IBMPlexSans',
   ),
-  IBM-Plex-Serif: (
+  ibm-plex-serif: (
     name: 'IBM-Plex-Serif',
     filename: 'IBMPlexSerif',
   ),
@@ -94,6 +94,7 @@ $-akamai-filenames: (
     } @else {
       // Otherwise add weight + optional style (italic)
       $filename: '#{$filename}-#{$weight}';
+
       @if $style == italic {
         $filename: '#{$filename}Italic';
       }
@@ -103,6 +104,7 @@ $-akamai-filenames: (
 
     @each $format in $formats {
       $url: 'https://1.www.s81c.com/common/carbon/plex/fonts/#{$name}';
+
       @if $unicode-range {
         $url: 'https://1.www.s81c.com/common/carbon/plex/fonts/#{$name}/fonts/split/#{$format}/#{$filename}-#{$unicode-range}';
       } @else {
@@ -132,6 +134,7 @@ $-akamai-filenames: (
     } @else {
       // Otherwise add weight + optional style (italic)
       $filename: '#{$filename}-#{$weight}';
+
       @if $style == italic {
         $filename: '#{$filename}Italic';
       }
@@ -141,6 +144,7 @@ $-akamai-filenames: (
 
     @each $format in $formats {
       $url: $filename;
+
       @if $unicode-range {
         $url: '#{config.$font-path}/#{$name}/fonts/split/#{$format}/#{$filename}-#{$unicode-range}';
       } @else {

@@ -79,7 +79,7 @@
       &::-moz-focus-inner {
         background-image: none;
         color: transparent;
-        text-shadow: 0 0 0 #000000;
+        text-shadow: 0 0 0 #000;
       }
     }
 
@@ -270,7 +270,6 @@
     @include skeleton;
 
     block-size: 2.5rem;
-
     inline-size: 100%;
   }
 

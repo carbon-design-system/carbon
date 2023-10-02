@@ -6,6 +6,7 @@
 //
 
 @forward 'modal';
+
 @use 'modal';
 
 @include modal.modal;

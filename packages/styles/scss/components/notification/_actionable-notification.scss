@@ -266,6 +266,7 @@
     .#{$prefix}--actionable-notification__subtitle {
     color: $text-primary;
   }
+
   /* Ghost action button when inline */
   .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--ghost {
     block-size: convert.to-rem(32px);
@@ -360,7 +361,8 @@
     .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary:focus {
     border-color: $focus-inverse;
     background-color: $notification-action-tertiary-inverse;
-    box-shadow: inset 0 0 0 button-vars.$button-outline-width $focus-inverse,
+    box-shadow:
+      inset 0 0 0 button-vars.$button-outline-width $focus-inverse,
       inset 0 0 0 button-vars.$button-border-width $background-inverse;
     color: $notification-action-tertiary-inverse-text;
   }
@@ -426,7 +428,8 @@
     inset-inline-end: 0;
     max-inline-size: convert.to-rem(48px);
     min-inline-size: convert.to-rem(48px);
-    transition: outline $duration-fast-02 motion(standard, productive),
+    transition:
+      outline $duration-fast-02 motion(standard, productive),
       background-color $duration-fast-02 motion(standard, productive);
 
     &:focus {

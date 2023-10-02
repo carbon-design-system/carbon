@@ -35,13 +35,15 @@
     inset-block-start: 0;
     inset-inline-start: 0;
     opacity: 0;
-    transition: opacity $duration-moderate-02 motion(exit, expressive),
+    transition:
+      opacity $duration-moderate-02 motion(exit, expressive),
       visibility 0ms linear $duration-moderate-02;
     visibility: hidden;
 
     &.is-visible {
       opacity: 1;
-      transition: opacity $duration-moderate-02 motion(entrance, expressive),
+      transition:
+        opacity $duration-moderate-02 motion(entrance, expressive),
         visibility 0ms linear;
       visibility: inherit;
 

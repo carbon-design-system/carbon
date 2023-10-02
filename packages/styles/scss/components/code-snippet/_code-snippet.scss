@@ -93,7 +93,6 @@ $copy-btn-feedback: $background-inverse !default;
       @include tooltip--caret;
 
       display: none;
-
       border: none;
     }
 
@@ -329,7 +328,6 @@ $copy-btn-feedback: $background-inverse !default;
     z-index: 10;
     display: inline-flex;
     align-items: center;
-
     padding: $spacing-03 $spacing-05;
     border: 0;
     background-color: $layer;

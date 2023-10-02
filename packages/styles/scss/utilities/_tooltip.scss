@@ -51,6 +51,7 @@
   min-inline-size: convert.to-rem(24px);
   text-align: start;
   transform: translateX(-50%);
+
   @include type.type-style('body-compact-01');
 
   // IE media query
@@ -61,6 +62,7 @@
   @supports (-ms-accelerator: true) {
     inline-size: auto;
   }
+
   @supports (-ms-ime-align: auto) {
     inline-size: auto;
   }
@@ -265,12 +267,15 @@
     @if ($position == 'top') {
       inset-block-end: convert.to-rem(-12px);
     }
+
     @if ($position == 'right') {
       inset-inline-start: convert.to-rem(-12px);
     }
+
     @if ($position == 'bottom') {
       inset-block-start: convert.to-rem(-12px);
     }
+
     @if ($position == 'left') {
       inset-inline-end: convert.to-rem(-12px);
     }
@@ -285,14 +290,17 @@
       inset-block-start: 0;
       inset-inline-start: 50%;
     }
+
     @if ($position == 'right') {
       inset-block-start: 50%;
       inset-inline-end: 0;
     }
+
     @if ($position == 'bottom') {
       inset-block-end: 0;
       inset-inline-start: 50%;
     }
+
     @if ($position == 'left') {
       inset-block-start: 50%;
       inset-inline-start: 0;
@@ -309,6 +317,7 @@
       inset-block-start: -$caret-spacing;
       transform: translate(-50%, -100%);
     }
+
     @if ($position == 'right') {
       border-width: convert.to-rem(4px)
         convert.to-rem(5px)
@@ -318,6 +327,7 @@
       inset-inline-end: -$caret-spacing;
       transform: translate(100%, -50%);
     }
+
     @if ($position == 'bottom') {
       border-width: 0
         convert.to-rem(4px)
@@ -327,6 +337,7 @@
       inset-block-end: -$caret-spacing;
       transform: translate(-50%, 100%);
     }
+
     @if ($position == 'left') {
       border-width: convert.to-rem(4px)
         0
@@ -345,6 +356,7 @@
   + .#{$prefix}--assistive-text {
     @if ($position == 'top') {
       inset-block-start: -$body-spacing;
+
       @if ($align == 'start') {
         inset-inline-start: 0;
         transform: translate(0, -100%);
@@ -356,12 +368,15 @@
         transform: translate(-50%, -100%);
       }
     }
+
     @if ($position == 'right') {
       inset-inline-end: -$body-spacing;
       transform: translate(100%, -50%);
     }
+
     @if ($position == 'bottom') {
       inset-block-end: -$body-spacing;
+
       @if ($align == 'start') {
         inset-inline-start: 0;
         transform: translate(0, 100%);
@@ -372,6 +387,7 @@
         transform: translate(-50%, 100%);
       }
     }
+
     @if ($position == 'left') {
       inset-inline-start: -$body-spacing;
       transform: translate(-100%, -50%);
@@ -384,6 +400,7 @@
       @if ($position == 'bottom') {
         // carryover from https://github.com/carbon-design-system/carbon/pull/3151/files#diff-93734be0784e9530b6d14a7b03b0d352R261-R265
         inset-block-end: -($body-spacing - convert.to-rem(1px));
+
         @if ($align == 'start' or $align == 'end') {
           transform: translate(0, 100%);
         } @else {

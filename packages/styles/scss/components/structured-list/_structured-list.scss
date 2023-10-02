@@ -31,7 +31,6 @@
     @include component-reset.reset;
 
     display: table;
-
     background-color: transparent;
     border-collapse: collapse;
     border-spacing: 0;
@@ -171,7 +170,6 @@
     display: table-cell;
     color: $text-secondary;
     max-inline-size: 36rem;
-
     transition: color motion.$duration-fast-02
       motion.motion(standard, productive);
   }
@@ -221,7 +219,6 @@
 
       display: block;
       block-size: 1rem;
-
       inline-size: 75%;
     }
   }

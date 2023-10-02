@@ -39,7 +39,8 @@
     cursor: pointer;
     inline-size: convert.to-rem(40px);
     min-block-size: convert.to-rem(40px);
-    transition: outline $duration-fast-02 motion(entrance, productive),
+    transition:
+      outline $duration-fast-02 motion(entrance, productive),
       background-color $duration-fast-02 motion(entrance, productive);
 
     &:focus {
@@ -273,7 +274,8 @@
     inline-size: 100%;
     max-inline-size: 11.25rem;
     text-align: start;
-    transition: outline $duration-fast-02 motion(entrance, productive),
+    transition:
+      outline $duration-fast-02 motion(entrance, productive),
       background-color $duration-fast-02 motion(entrance, productive),
       color $duration-fast-02 motion(entrance, productive);
 

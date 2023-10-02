@@ -28,7 +28,6 @@
     @include skeleton;
 
     block-size: convert.to-rem(100px);
-
     inline-size: convert.to-rem(100px);
   }
 
@@ -37,9 +36,7 @@
     @include skeleton;
 
     block-size: 1rem;
-
     inline-size: 100%;
-
     margin-block-end: $spacing-03;
   }
 

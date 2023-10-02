@@ -26,7 +26,8 @@
     position: relative;
     block-size: 100%;
     inline-size: 100%;
-    transition: background-color $duration-fast-01 motion(standard, productive),
+    transition:
+      background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
   }
 

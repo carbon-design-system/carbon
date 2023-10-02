@@ -25,7 +25,6 @@
   .#{$prefix}--btn {
     @include layout.use('size', $min: 'sm', $default: 'lg', $max: '2xl');
     @include layout.use('density', $default: 'normal');
-
     @include button-base;
   }
 
@@ -311,8 +310,9 @@
 
     padding-block: min(
       calc(
-        (layout.size('height') - var(--temp-expressive-1lh)) / 2 -
-          convert.to-rem(1px)
+        (layout.size('height') - var(--temp-expressive-1lh)) / 2 - convert.to-rem(
+            1px
+          )
       ),
       var(--temp-padding-block-max)
     );

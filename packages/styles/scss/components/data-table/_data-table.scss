@@ -793,6 +793,7 @@
     }
 
     // Overflow fix
+
     /* When using sticky header, with a selection element in the first column, we need to set the last item to a fixed width to match the table body. We only want this to happen when the last table header does not have any text */
     th.#{$prefix}--table-column-checkbox ~ th:last-of-type:empty {
       max-inline-size: convert.to-rem(64px);

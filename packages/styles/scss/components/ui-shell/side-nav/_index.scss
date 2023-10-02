@@ -6,6 +6,7 @@
 //
 
 @forward 'side-nav';
+
 @use 'side-nav';
 
 @include side-nav.side-nav;

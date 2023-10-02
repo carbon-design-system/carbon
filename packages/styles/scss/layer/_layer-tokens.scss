@@ -15,6 +15,7 @@
 @mixin emit-layer-tokens($level) {
   @each $key, $layer-set in $layer-sets {
     $value: list.nth($layer-set, $level);
+
     @include custom-property.declaration($key, $value);
   }
 }

@@ -40,7 +40,8 @@
     block-size: $spacing-09;
     inline-size: 100%;
     transform: translate3d(0, 0, 0);
-    transition: transform $duration-fast-02 motion(standard, productive),
+    transition:
+      transform $duration-fast-02 motion(standard, productive),
       clip-path $duration-fast-02 motion(standard, productive);
   }
 
@@ -79,7 +80,8 @@
     box-shadow: none;
     cursor: pointer;
     inline-size: $spacing-09;
-    transition: width $transition-expansion $standard-easing,
+    transition:
+      width $transition-expansion $standard-easing,
       background-color $duration-fast-02 motion(entrance, productive);
 
     &:hover {
@@ -372,7 +374,8 @@
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-content {
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     transform: translate3d(0, 48px, 0);
-    transition: transform $duration-fast-02 motion(standard, productive),
+    transition:
+      transform $duration-fast-02 motion(standard, productive),
       clip-path $duration-fast-02 motion(standard, productive);
   }
 
@@ -392,7 +395,8 @@
     opacity: 0;
     pointer-events: none;
     transform: translate3d(0, 48px, 0);
-    transition: transform $duration-fast-02 motion(standard, productive),
+    transition:
+      transform $duration-fast-02 motion(standard, productive),
       clip-path $duration-fast-02 motion(standard, productive),
       opacity $duration-fast-02 motion(standard, productive);
     will-change: transform;
@@ -498,7 +502,6 @@
     align-items: center;
     padding: 0 $spacing-05;
     background-color: $background-brand;
-
     color: $text-on-color;
     inset-inline-start: 0;
     min-block-size: 3rem;

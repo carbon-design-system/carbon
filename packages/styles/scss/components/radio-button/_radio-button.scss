@@ -183,7 +183,7 @@ $radio-border-width: 1px !default;
   }
 
   .#{$prefix}--radio-button__invalid-icon--warning path:first-of-type {
-    fill: #000000;
+    fill: #000;
   }
 
   .#{$prefix}--radio-button-group--invalid
@@ -230,7 +230,6 @@ $radio-border-width: 1px !default;
     @include skeleton;
 
     block-size: convert.to-rem(18px);
-
     inline-size: convert.to-rem(100px);
   }
 

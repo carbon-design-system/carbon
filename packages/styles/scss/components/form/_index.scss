@@ -6,6 +6,7 @@
 //
 
 @forward 'form';
+
 @use 'form';
 
 @include form.form;

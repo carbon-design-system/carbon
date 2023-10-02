@@ -6,4 +6,5 @@
 //
 
 @use '../config';
+
 @forward '@carbon/grid' show css-grid, flex-grid;

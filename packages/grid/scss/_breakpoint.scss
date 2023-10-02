@@ -19,6 +19,7 @@
 /// @group @carbon/layout
 @function -key-by-index($map, $index) {
   $keys: map.keys($map);
+
   @return nth($keys, $index);
 }
 
@@ -35,9 +36,11 @@
   $breakpoint-names: map.keys($breakpoints)
 ) {
   $n: list.index($breakpoint-names, $name);
+
   @if $n != null and $n < list.length($breakpoint-names) {
     @return list.nth($breakpoint-names, $n + 1);
   }
+
   @return null;
 }
 
@@ -54,9 +57,11 @@
   $breakpoint-names: map.keys($breakpoints)
 ) {
   $n: list.index($breakpoint-names, $name);
+
   @if $n != null and $n > 1 {
     @return list.nth($breakpoint-names, $n - 1);
   }
+
   @return null;
 }
 
@@ -77,6 +82,7 @@
 /// @group @carbon/layout
 @function largest-breakpoint-name($breakpoints: $grid-breakpoints) {
   $total-breakpoints: list.length($breakpoints);
+
   @return -key-by-index($breakpoints, $total-breakpoints);
 }
 
@@ -103,6 +109,7 @@
   } @else if map.has-key($breakpoints, $name) {
     $breakpoint: map.get($breakpoints, $name);
     $width: map.get($breakpoint, width);
+
     @if is-smallest-breakpoint($name, $breakpoints) {
       @content;
     } @else {
@@ -134,6 +141,7 @@
     // https://github.com/twbs/bootstrap/blob/c5b1919deaf5393fcca9e9b9d7ce9c338160d99d/scss/mixins/_breakpoints.scss#L34-L46
     $breakpoint: map.get($breakpoints, $name);
     $width: map.get($breakpoint, width) - 0.02;
+
     @media (max-width: $width) {
       @content;
     }
@@ -158,6 +166,7 @@
   @if $min and $max {
     $min-width: if(not $is-number-lower and $min, map.get($min, width), $min);
     $max-width: if(not $is-number-upper and $max, map.get($max, width), $max);
+
     @media (min-width: $min-width) and (max-width: $max-width) {
       @content;
     }

@@ -26,7 +26,6 @@
 
     display: block;
     block-size: convert.to-rem(16px);
-
     inline-size: convert.to-rem(64px);
   }
 
@@ -57,7 +56,6 @@
     @include skeleton;
 
     block-size: convert.to-rem(24px);
-
     inline-size: convert.to-rem(120px);
   }
 
@@ -66,9 +64,7 @@
     @include skeleton;
 
     block-size: convert.to-rem(16px);
-
     inline-size: convert.to-rem(160px);
-
     margin-block-start: $spacing-03;
   }
 }

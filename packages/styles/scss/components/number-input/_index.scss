@@ -6,6 +6,7 @@
 //
 
 @forward 'number-input';
+
 @use 'number-input';
 
 @include number-input.number-input;

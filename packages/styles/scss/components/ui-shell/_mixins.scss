@@ -48,6 +48,7 @@
     @if $visibility == true {
       visibility: inherit;
     }
+
     @if $opacity == true {
       opacity: 1;
     }

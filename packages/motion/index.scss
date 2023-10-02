@@ -36,6 +36,7 @@ $easings: (
 @function motion($name, $mode: productive, $easings: $easings) {
   @if map.has-key($easings, $name) {
     $easing: map.get($easings, $name);
+
     @if map.has-key($easing, $mode) {
       @return map.get($easing, $mode);
     } @else {

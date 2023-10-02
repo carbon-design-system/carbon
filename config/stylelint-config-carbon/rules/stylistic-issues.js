@@ -10,10 +10,11 @@
 const OFF = null;
 
 module.exports = {
+  plugins: ['stylelint-stylistic'],
   rules: {
     // Color
     // Specify lowercase or uppercase for hex colors (Autofixable).
-    'color-hex-case': 'lower',
+    'stylistic/color-hex-case': 'lower',
     // Specify short or long notation for hex colors (Autofixable).
     'color-hex-length': 'long',
 
@@ -28,40 +29,40 @@ module.exports = {
 
     // Function
     // Require a newline or disallow whitespace after the commas of functions.
-    'function-comma-newline-after': 'always-multi-line',
+    'stylistic/function-comma-newline-after': 'always-multi-line',
     // Require a newline or disallow whitespace before the commas of functions.
-    'function-comma-newline-before': 'never-multi-line',
+    'stylistic/function-comma-newline-before': 'never-multi-line',
     // Require a single space or disallow whitespace after the commas of
     // functions.
-    'function-comma-space-after': 'always-single-line',
+    'stylistic/function-comma-space-after': 'always-single-line',
     // Require a single space or disallow whitespace before the commas of
     // functions.
-    'function-comma-space-before': 'never',
+    'stylistic/function-comma-space-before': 'never',
     // Limit the number of adjacent empty lines within functions.
-    'function-max-empty-lines': 0,
+    'stylistic/function-max-empty-lines': 0,
     // Specify lowercase or uppercase for function names.
     'function-name-case': 'lower',
     // Require a newline or disallow whitespace on the inside of the parentheses
     // of functions.
-    'function-parentheses-newline-inside': 'always-multi-line',
+    'stylistic/function-parentheses-newline-inside': 'always-multi-line',
     // Require a single space or disallow whitespace on the inside of the
     // parentheses of functions.
-    'function-parentheses-space-inside': 'never-single-line',
+    'stylistic/function-parentheses-space-inside': 'never-single-line',
     // Require or disallow quotes for urls.
     'function-url-quotes': OFF,
     // Require or disallow whitespace after functions.
-    'function-whitespace-after': 'always',
+    'stylistic/function-whitespace-after': 'always',
 
     // Number
     // Require or disallow a leading zero for fractional numbers less than 1
     // (Autofixable).
-    'number-leading-zero': 'always',
+    'stylistic/number-leading-zero': 'always',
     // Disallow trailing zeros in numbers (Autofixable).
-    'number-no-trailing-zeros': true,
+    'stylistic/number-no-trailing-zeros': true,
 
     // String
     // Specify single or double quotes around strings (Autofixable).
-    'string-quotes': 'single',
+    'stylistic/string-quotes': 'single',
 
     // Length
     // Disallow units for zero lengths (Autofixable).
@@ -69,26 +70,22 @@ module.exports = {
 
     // Unit
     // Specify lowercase or uppercase for units.
-    'unit-case': 'lower',
-
-    // Value
-    // Specify lowercase or uppercase for keywords values.
-    'value-keyword-case': OFF,
+    'stylistic/unit-case': 'lower',
 
     // Value list
     // Require a newline or disallow whitespace after the commas of value lists.
-    'value-list-comma-newline-after': 'always-multi-line',
+    'stylistic/value-list-comma-newline-after': 'always-multi-line',
     // Require a newline or disallow whitespace before the commas of value
     // lists.
-    'value-list-comma-newline-before': 'never-multi-line',
+    'stylistic/value-list-comma-newline-before': 'never-multi-line',
     // Require a single space or disallow whitespace after the commas of value
     // lists.
-    'value-list-comma-space-after': 'always-single-line',
+    'stylistic/value-list-comma-space-after': 'always-single-line',
     // Require a single space or disallow whitespace before the commas of value
     // lists.
-    'value-list-comma-space-before': 'never',
+    'stylistic/value-list-comma-space-before': 'never',
     // Limit the number of adjacent empty lines within value lists.
-    'value-list-max-empty-lines': 0,
+    'stylistic/value-list-max-empty-lines': 0,
 
     // Custom property
     // Require or disallow an empty line before custom properties (Autofixable).
@@ -96,23 +93,23 @@ module.exports = {
 
     // Property
     // Specify lowercase or uppercase for properties.
-    'property-case': 'lower',
+    'stylistic/property-case': 'lower',
 
     // Declaration
     // Require a single space or disallow whitespace after the bang of
     // declarations.
-    'declaration-bang-space-after': 'never',
+    'stylistic/declaration-bang-space-after': 'never',
     // Require a single space or disallow whitespace before the bang of
     // declarations.
-    'declaration-bang-space-before': OFF,
+    'stylistic/declaration-bang-space-before': OFF,
     // Require a newline or disallow whitespace after the colon of declarations.
-    'declaration-colon-newline-after': OFF,
+    'stylistic/declaration-colon-newline-after': OFF,
     // Require a single space or disallow whitespace after the colon of
     // declarations.
-    'declaration-colon-space-after': 'always',
+    'stylistic/declaration-colon-space-after': 'always-single-line',
     // Require a single space or disallow whitespace before the colon of
     // declarations.
-    'declaration-colon-space-before': 'never',
+    'stylistic/declaration-colon-space-before': 'never',
     // Require or disallow an empty line before declarations (Autofixable).
     'declaration-empty-line-before': [
       'always',
@@ -125,25 +122,25 @@ module.exports = {
     // Declaration block
     // Require a newline or disallow whitespace after the semicolons of
     // declaration blocks.
-    'declaration-block-semicolon-newline-after': 'always',
+    'stylistic/declaration-block-semicolon-newline-after': 'always',
     // Require a newline or disallow whitespace before the semicolons of
     // declaration blocks.
-    'declaration-block-semicolon-newline-before': 'never-multi-line',
+    'stylistic/declaration-block-semicolon-newline-before': 'never-multi-line',
     // Require a single space or disallow whitespace after the semicolons of
     // declaration blocks.
-    'declaration-block-semicolon-space-after': 'always-single-line',
+    'stylistic/declaration-block-semicolon-space-after': 'always-single-line',
     // Require a single space or disallow whitespace before the semicolons of
     // declaration blocks.
-    'declaration-block-semicolon-space-before': 'never',
+    'stylistic/declaration-block-semicolon-space-before': 'never',
     // Require or disallow a trailing semicolon within declaration blocks.
-    'declaration-block-trailing-semicolon': 'always',
+    'stylistic/declaration-block-trailing-semicolon': 'always',
 
     // Block
     // Require or disallow an empty line before the closing brace of blocks.
-    'block-closing-brace-empty-line-before': 'never',
+    'stylistic/block-closing-brace-empty-line-before': 'never',
     // Require a newline or disallow whitespace after the closing brace of
     // blocks.
-    'block-closing-brace-newline-after': [
+    'stylistic/block-closing-brace-newline-after': [
       'always',
       {
         ignoreAtRules: ['if', 'else'],
@@ -151,52 +148,52 @@ module.exports = {
     ],
     // Require a newline or disallow whitespace before the closing brace of
     // blocks.
-    'block-closing-brace-newline-before': 'always-multi-line',
+    'stylistic/block-closing-brace-newline-before': 'always-multi-line',
     // Require a single space or disallow whitespace after the closing brace of
     // blocks.
-    'block-closing-brace-space-after': 'always-single-line',
+    'stylistic/block-closing-brace-space-after': 'always-single-line',
     // Require a single space or disallow whitespace before the closing brace of
     // blocks.
-    'block-closing-brace-space-before': 'always-single-line',
+    'stylistic/block-closing-brace-space-before': 'always-single-line',
     // Require a newline after the opening brace of blocks.
-    'block-opening-brace-newline-after': 'always-multi-line',
+    'stylistic/block-opening-brace-newline-after': 'always-multi-line',
     // Require a newline or disallow whitespace before the opening brace of
     // blocks.
-    'block-opening-brace-newline-before': OFF,
+    'stylistic/block-opening-brace-newline-before': OFF,
     // Require a single space or disallow whitespace after the opening brace of
     // blocks.
-    'block-opening-brace-space-after': 'always-single-line',
+    'stylistic/block-opening-brace-space-after': 'always-single-line',
     // Require a single space or disallow whitespace before the opening brace of
     // blocks.
-    'block-opening-brace-space-before': 'always',
+    'stylistic/block-opening-brace-space-before': 'always-single-line',
 
     // Selector
     // Require a single space or disallow whitespace on the inside of the
     // brackets within attribute selectors.
-    'selector-attribute-brackets-space-inside': 'never',
+    'stylistic/selector-attribute-brackets-space-inside': 'never',
     // Require a single space or disallow whitespace after operators within
     // attribute selectors.
-    'selector-attribute-operator-space-after': 'never',
+    'stylistic/selector-attribute-operator-space-after': 'never',
     // Require a single space or disallow whitespace before operators within
     // attribute selectors.
-    'selector-attribute-operator-space-before': 'never',
+    'stylistic/selector-attribute-operator-space-before': 'never',
     // Require or disallow quotes for attribute values.
     'selector-attribute-quotes': 'always',
     // Require a single space or disallow whitespace after the combinators of
     // selectors.
-    'selector-combinator-space-after': 'always',
+    'stylistic/selector-combinator-space-after': 'always',
     // Require a single space or disallow whitespace before the combinators of
     // selectors.
-    'selector-combinator-space-before': 'always',
+    'stylistic/selector-combinator-space-before': 'always',
     // Disallow non-space characters for descendant combinators of selectors.
-    'selector-descendant-combinator-no-non-space': true,
+    'stylistic/selector-descendant-combinator-no-non-space': true,
     // Specify lowercase or uppercase for pseudo-class selectors.
-    'selector-pseudo-class-case': 'lower',
+    'stylistic/selector-pseudo-class-case': 'lower',
     // Require a single space or disallow whitespace on the inside of the
     // parentheses within pseudo-class selectors.
-    'selector-pseudo-class-parentheses-space-inside': 'never',
+    'stylistic/selector-pseudo-class-parentheses-space-inside': 'never',
     // Specify lowercase or uppercase for pseudo-element selectors.
-    'selector-pseudo-element-case': 'lower',
+    'stylistic/selector-pseudo-element-case': 'lower',
     // Specify single or double colon notation for applicable pseudo-elements.
     'selector-pseudo-element-colon-notation': 'double',
     // Specify lowercase or uppercase for type selector.
@@ -205,16 +202,16 @@ module.exports = {
     // Selector list
     // Require a newline or disallow whitespace after the commas of selector
     // lists.
-    'selector-list-comma-newline-after': 'always-multi-line',
+    'stylistic/selector-list-comma-newline-after': 'always-multi-line',
     // Require a newline or disallow whitespace before the commas of selector
     // lists.
-    'selector-list-comma-newline-before': 'never-multi-line',
+    'stylistic/selector-list-comma-newline-before': 'never-multi-line',
     // Require a single space or disallow whitespace after the commas of
     // selector lists.
-    'selector-list-comma-space-after': 'always-single-line',
+    'stylistic/selector-list-comma-space-after': 'always-single-line',
     // Require a single space or disallow whitespace before the commas of
     // selector lists.
-    'selector-list-comma-space-before': 'never',
+    'stylistic/selector-list-comma-space-before': 'never',
 
     // Rule
     // Require or disallow an empty line before rules (Autofixable).
@@ -228,50 +225,50 @@ module.exports = {
     // Media feature
     // Require a single space or disallow whitespace after the colon in media
     // features.
-    'media-feature-colon-space-after': 'always',
+    'stylistic/media-feature-colon-space-after': 'always',
     // Require a single space or disallow whitespace before the colon in media
     // features.
-    'media-feature-colon-space-before': 'never',
+    'stylistic/media-feature-colon-space-before': 'never',
     // Specify lowercase or uppercase for media feature names.
-    'media-feature-name-case': 'lower',
+    'stylistic/media-feature-name-case': 'lower',
     // Require a single space or disallow whitespace on the inside of the
     // parentheses within media features.
-    'media-feature-parentheses-space-inside': 'never',
+    'stylistic/media-feature-parentheses-space-inside': 'never',
     // Require a single space or disallow whitespace after the range operator in
     // media features.
-    'media-feature-range-operator-space-after': 'always',
+    'stylistic/media-feature-range-operator-space-after': 'always',
     // Require a single space or disallow whitespace before the range operator
     // in media features.
-    'media-feature-range-operator-space-before': 'always',
+    'stylistic/media-feature-range-operator-space-before': 'always',
 
     // Media query list
     // Require a newline or disallow whitespace after the commas of media query
     // lists.
-    'media-query-list-comma-newline-after': 'always-multi-line',
+    'stylistic/media-query-list-comma-newline-after': 'always-multi-line',
     // Require a newline or disallow whitespace before the commas of media query
     // lists.
-    'media-query-list-comma-newline-before': 'never-multi-line',
+    'stylistic/media-query-list-comma-newline-before': 'never-multi-line',
     // Require a single space or disallow whitespace after the commas of media
     // query lists.
-    'media-query-list-comma-space-after': 'always-single-line',
+    'stylistic/media-query-list-comma-space-after': 'always-single-line',
     // Require a single space or disallow whitespace before the commas of media
     // query lists.
-    'media-query-list-comma-space-before': 'never',
+    'stylistic/media-query-list-comma-space-before': 'never',
 
     // At-rule
     // Require or disallow an empty line before at-rules (Autofixable).
     'at-rule-empty-line-before': OFF,
     // Specify lowercase or uppercase for at-rules names (Autofixable).
-    'at-rule-name-case': 'lower',
+    'stylistic/at-rule-name-case': 'lower',
     // Require a newline after at-rule names.
     'at-rule-name-newline-after': OFF,
     // Require a single space after at-rule names.
-    'at-rule-name-space-after': 'always',
+    'stylistic/at-rule-name-space-after': 'always',
     // Require a newline after the semicolon of at-rules.
-    'at-rule-semicolon-newline-after': 'always',
+    'stylistic/at-rule-semicolon-newline-after': 'always',
     // Require a single space or disallow whitespace before the semicolons of at
     // rules.
-    'at-rule-semicolon-space-before': 'never',
+    'stylistic/at-rule-semicolon-space-before': 'never',
 
     // Comment
     // Require or disallow an empty line before comments (Autofixable).
@@ -283,12 +280,12 @@ module.exports = {
     // Specify indentation (Autofixable).
     indentation: OFF,
     // Limit the number of adjacent empty lines.
-    'max-empty-lines': 1,
+    'stylistic/max-empty-lines': 1,
     // Limit the length of a line.
     'max-line-length': OFF,
     // Disallow end-of-line whitespace.
-    'no-eol-whitespace': true,
+    'stylistic/no-eol-whitespace': true,
     // Disallow missing end-of-source newlines (Autofixable).
-    'no-missing-end-of-source-newline': true,
+    'stylistic/no-missing-end-of-source-newline': true,
   },
 };

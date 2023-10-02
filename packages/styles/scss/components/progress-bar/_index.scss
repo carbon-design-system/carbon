@@ -6,6 +6,7 @@
 //
 
 @forward 'progress-bar';
+
 @use 'progress-bar';
 
 @include progress-bar.progress-bar;

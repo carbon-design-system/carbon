@@ -48,7 +48,6 @@
     border-radius: 0;
 
     // Firefox: Hide spinner (up and down buttons)
-    -moz-appearance: textfield;
     appearance: textfield;
     background-color: $field;
     block-size: convert.to-rem(40px);
@@ -60,7 +59,8 @@
     min-inline-size: 9.375rem;
     padding-inline-end: convert.to-rem(96px);
     padding-inline-start: $spacing-05;
-    transition: background-color $duration-fast-01 motion(standard, productive),
+    transition:
+      background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
 
     &:focus {
@@ -180,7 +180,7 @@
     }
 
     svg {
-      fill: currentColor;
+      fill: currentcolor;
     }
 
     &:focus {

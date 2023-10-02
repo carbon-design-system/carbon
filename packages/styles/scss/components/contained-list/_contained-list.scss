@@ -6,7 +6,6 @@
 //
 
 @use 'sass:map';
-
 @use '../button';
 @use '../overflow-menu';
 @use '../../config' as *;
@@ -43,7 +42,6 @@
         ),
       )
     );
-
     @include layout.use('size', $default: 'md', $min: 'sm', $max: 'xl');
   }
 

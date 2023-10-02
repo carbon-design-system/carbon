@@ -82,7 +82,8 @@
     inset-block-start: convert.to-rem(48px);
     inset-inline-start: 0;
     opacity: 0;
-    transition: opacity $transition-expansion $standard-easing,
+    transition:
+      opacity $transition-expansion $standard-easing,
       background-color $transition-expansion $standard-easing;
   }
 
@@ -93,7 +94,8 @@
       block-size: 100vh;
       inline-size: 100vw;
       opacity: 1;
-      transition: opacity $transition-expansion $standard-easing,
+      transition:
+        opacity $transition-expansion $standard-easing,
         background-color $transition-expansion $standard-easing;
     }
   }
@@ -207,11 +209,12 @@
 
     display: flex;
     align-items: center;
-
     padding: 0 mini-units(2);
     block-size: mini-units(4);
     color: $text-secondary;
-    transition: color $duration-fast-02, background-color $duration-fast-02,
+    transition:
+      color $duration-fast-02,
+      background-color $duration-fast-02,
       outline $duration-fast-02;
     user-select: none;
   }
@@ -338,7 +341,9 @@
     padding: 0 mini-units(2);
     min-block-size: mini-units(4);
     text-decoration: none;
-    transition: color $duration-fast-02, background-color $duration-fast-02,
+    transition:
+      color $duration-fast-02,
+      background-color $duration-fast-02,
       outline $duration-fast-02;
   }
 

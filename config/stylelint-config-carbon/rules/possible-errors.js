@@ -10,6 +10,7 @@
 const OFF = null;
 
 module.exports = {
+  plugins: ['stylelint-stylistic'],
   rules: {
     // Color
     'color-no-invalid-hex': true,
@@ -65,7 +66,7 @@ module.exports = {
     'no-duplicate-at-import-rules': true,
     'no-duplicate-selectors': true,
     'no-empty-source': true,
-    'no-extra-semicolons': true,
+    'stylistic/no-extra-semicolons': true,
     // Doesn't trigger when using a preprocessor that allows double slash
     // comments
     'no-invalid-double-slash-comments': true,

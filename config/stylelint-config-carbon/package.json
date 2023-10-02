@@ -24,22 +24,22 @@
     "provenance": true
   },
   "peerDependencies": {
-    "stylelint": "^15.0.0"
+    "stylelint": "^15.10.3"
   },
   "dependencies": {
     "stylelint-a11y": "^1.2.3",
     "stylelint-config-idiomatic-order": "^9.0.0",
-    "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^34.0.0",
     "stylelint-config-standard-scss": "^11.0.0",
     "stylelint-no-unsupported-browser-features": "^7.0.0",
     "stylelint-order": "^6.0.0",
     "stylelint-prettier": "^4.0.0",
-    "stylelint-scss": "^4.1.0",
+    "stylelint-scss": "^5.2.1",
+    "stylelint-stylistic": "^0.4.3",
     "stylelint-use-logical": "^2.1.0"
   },
   "devDependencies": {
-    "prettier": "^2.8.8",
-    "stylelint": "^15.0.0"
+    "prettier": "^3.0.3",
+    "stylelint": "^15.10.3"
   }
 }

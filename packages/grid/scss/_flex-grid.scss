@@ -13,7 +13,6 @@
 @use 'sass:meta';
 @use 'sass:math';
 @use 'sass:map';
-
 @use 'config' as *;
 @use 'breakpoint' as *;
 
@@ -80,6 +79,7 @@
 @mixin -make-col-offset($span, $columns) {
   $offset: 0;
   $offset: math.div($span, $columns);
+
   @if $offset == 0 {
     margin-inline-start: 0;
   } @else {
@@ -228,6 +228,7 @@
 
     @if $prev-breakpoint {
       $prev-margin: map.get($prev-breakpoint, margin);
+
       @if $prev-margin != $margin {
         @include breakpoint($name) {
           padding-inline: #{($grid-gutter * 0.5) + $margin};
@@ -270,7 +271,8 @@
 /// @group @carbon/layout
 @function -last-map-item($map) {
   $total-length: list.length($map);
-  @return map-get($map, -key-by-index($map, $total-length));
+
+  @return map-get($map, - key-by-index($map, $total-length));
 }
 
 /// Provide a map and index, and get back the relevant key value
@@ -281,6 +283,7 @@
 /// @group @carbon/layout
 @function -key-by-index($map, $index) {
   $keys: map.keys($map);
+
   @return nth($keys, $index);
 }
 

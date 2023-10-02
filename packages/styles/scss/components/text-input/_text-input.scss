@@ -43,9 +43,9 @@
     border-block-end: 1px solid $border-strong;
     color: $text-primary;
     font-family: inherit;
-
     inline-size: 100%;
-    transition: background-color $duration-fast-01 motion(standard, productive),
+    transition:
+      background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
 
     &:focus,
@@ -215,7 +215,6 @@
     @include focus-outline('reset');
 
     background-color: $field;
-
     border-block-end: 1px solid transparent;
     color: $text-disabled;
     cursor: not-allowed;
@@ -261,7 +260,8 @@
   .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper {
     position: relative;
     background: $field;
-    transition: background-color $duration-fast-01 motion(standard, productive),
+    transition:
+      background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
   }
 

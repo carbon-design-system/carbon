@@ -6,6 +6,7 @@
 //
 
 @forward 'text-input';
+
 @use 'text-input';
 
 @include text-input.text-input;

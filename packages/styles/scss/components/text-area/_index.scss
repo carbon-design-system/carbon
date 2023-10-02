@@ -6,6 +6,7 @@
 //
 
 @forward 'text-area';
+
 @use 'text-area';
 
 @include text-area.text-area;

@@ -144,8 +144,10 @@
   // Condensed
   .#{$prefix}--css-grid--condensed {
     --cds-grid-gutter: #{$grid-gutter-condensed};
-    --cds-grid-column-hang: #{math.div($grid-gutter, 2) -
-      math.div($grid-gutter-condensed, 2)};
+    --cds-grid-column-hang: #{math.div($grid-gutter, 2) - math.div(
+        $grid-gutter-condensed,
+        2
+      )};
   }
 
   // -----------------------------------------------------------------------------
@@ -179,8 +181,10 @@
   .#{$prefix}--subgrid--condensed {
     --cds-grid-gutter-start: #{math.div($grid-gutter-condensed, 2)};
     --cds-grid-gutter-end: #{math.div($grid-gutter-condensed, 2)};
-    --cds-grid-column-hang: #{math.div($grid-gutter, 2) -
-      math.div($grid-gutter-condensed, 2)};
+    --cds-grid-column-hang: #{math.div($grid-gutter, 2) - math.div(
+        $grid-gutter-condensed,
+        2
+      )};
   }
 
   // -----------------------------------------------------------------------------
@@ -240,6 +244,7 @@
 
       .#{$prefix}--#{$name}\:col-span-75 {
         $span: $columns * 0.75;
+
         --cds-grid-columns: #{$span};
 
         grid-column: span list.slash($span, span) #{$span};
@@ -247,6 +252,7 @@
 
       .#{$prefix}--#{$name}\:col-span-50 {
         $span: $columns * 0.5;
+
         --cds-grid-columns: #{$span};
 
         grid-column: span list.slash($span, span) #{$span};
@@ -254,6 +260,7 @@
 
       .#{$prefix}--#{$name}\:col-span-25 {
         $span: $columns * 0.25;
+
         --cds-grid-columns: #{$span};
 
         grid-column: span list.slash($span, span) #{$span};
@@ -272,6 +279,7 @@
 
         .#{$prefix}--#{$name}\:col-span-75 {
           $span: $columns * 0.75;
+
           --cds-grid-columns: #{$span};
 
           grid-column: span list.slash($span, span) #{$span};
@@ -279,6 +287,7 @@
 
         .#{$prefix}--#{$name}\:col-span-50 {
           $span: $columns * 0.5;
+
           --cds-grid-columns: #{$span};
 
           grid-column: span list.slash($span, span) #{$span};
@@ -286,6 +295,7 @@
 
         .#{$prefix}--#{$name}\:col-span-25 {
           $span: $columns * 0.25;
+
           --cds-grid-columns: #{$span};
 
           grid-column: span list.slash($span, span) #{$span};
@@ -454,9 +464,11 @@
 /// Get the grid margin for a specific breakpoint name
 @function get-margin($breakpoints, $breakpoint) {
   $value: map.get(map.get($breakpoints, $breakpoint), margin);
+
   @if $value == 0 {
     @return 0;
   }
+
   @return $value;
 }
 

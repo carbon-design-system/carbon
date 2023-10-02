@@ -805,6 +805,7 @@ $tokens: (
   // Initialize our font-sizes to the default size for the type style
   $max-font-size: map.get($type-styles, font-size);
   $min-font-size: map.get($type-styles, font-size);
+
   @if map.has-key($fluid-breakpoint, font-size) {
     $min-font-size: map.get($fluid-breakpoint, font-size);
   }
@@ -846,7 +847,8 @@ $tokens: (
     $max-vw: map.get($next-fluid-breakpoint, width);
 
     // prettier-ignore
-    font-size: calc(#{$min-font-size} +
+    font-size: calc(
+#{$min-font-size} +
       #{strip-unit($max-font-size - $min-font-size)} *
       ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
     );

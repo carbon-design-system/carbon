@@ -91,7 +91,8 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     line-height: 1.45;
     max-inline-size: convert.to-rem(88px);
     text-overflow: ellipsis;
-    transition: box-shadow $duration-fast-02 motion(standard, productive),
+    transition:
+      box-shadow $duration-fast-02 motion(standard, productive),
       color $duration-fast-02 motion(standard, productive);
     white-space: nowrap;
 
@@ -155,7 +156,6 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     margin-block-start: convert.to-rem(40px);
     margin-inline-start: convert.to-rem(22px);
     min-block-size: $spacing-06;
-
     min-inline-size: convert.to-rem(115px);
     visibility: hidden;
   }
@@ -166,7 +166,6 @@ $progress-indicator-bar-width: 1px inset transparent !default;
 
     block-size: auto;
     color: $text-inverse;
-
     inline-size: convert.to-rem(150px);
   }
 
@@ -273,9 +272,7 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     @include skeleton;
 
     block-size: convert.to-rem(14px);
-
     inline-size: convert.to-rem(40px);
-
     margin-block-start: 0.625rem;
   }
 

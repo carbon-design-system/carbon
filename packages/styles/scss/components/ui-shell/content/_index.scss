@@ -6,6 +6,7 @@
 //
 
 @forward 'content';
+
 @use 'content';
 
 @include content.content;

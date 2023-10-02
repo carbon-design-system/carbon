@@ -46,8 +46,10 @@
     border: convert.to-rem(1px) solid transparent;
     block-size: mini-units(6);
     inline-size: mini-units(6);
-    transition: background-color $duration-fast-02,
+    transition:
+      background-color $duration-fast-02,
       border-color $duration-fast-02;
+
     @include breakpoint-down('md') {
       min-inline-size: $spacing-09;
     }
@@ -154,6 +156,7 @@
     text-decoration: none;
     transition: border-color $duration-fast-02;
     user-select: none;
+
     @include breakpoint-down('md') {
       padding: 0 $spacing-05;
     }
@@ -233,8 +236,10 @@
     line-height: 1.125rem;
     // Reset link styles and make sure the text isn't selectable
     text-decoration: none;
-    transition: background-color $duration-fast-02,
-      border-color $duration-fast-02, color $duration-fast-02;
+    transition:
+      background-color $duration-fast-02,
+      border-color $duration-fast-02,
+      color $duration-fast-02;
     user-select: none;
   }
 
@@ -388,7 +393,9 @@
   .#{$prefix}--header__menu-arrow {
     fill: $icon-secondary;
     margin-inline-start: mini-units(1);
-    transition: transform $duration-fast-02, fill $duration-fast-02;
+    transition:
+      transform $duration-fast-02,
+      fill $duration-fast-02;
   }
 
   //--------------------------------------------------------------------------

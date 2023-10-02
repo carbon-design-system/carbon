@@ -6,6 +6,7 @@
 //
 
 @forward 'copy-button';
+
 @use 'copy-button';
 
 @include copy-button.copy-button;

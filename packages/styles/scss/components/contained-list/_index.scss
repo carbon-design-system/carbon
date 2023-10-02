@@ -6,6 +6,7 @@
 //
 
 @forward 'contained-list';
+
 @use 'contained-list';
 
 @include contained-list.contained-list;

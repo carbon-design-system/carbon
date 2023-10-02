@@ -6,6 +6,7 @@
 //
 
 @forward 'pagination-nav';
+
 @use 'pagination-nav';
 
 @include pagination-nav.pagination-nav;
