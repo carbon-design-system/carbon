@@ -24,6 +24,6 @@
     "provenance": true
   },
   "dependencies": {
-    "prettier": "^3.0.3"
+    "prettier": "^2.8.8"
   }
 }

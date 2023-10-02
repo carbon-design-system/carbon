@@ -1887,7 +1887,7 @@ __metadata:
     klaw-sync: ^6.0.0
     lodash.template: ^4.5.0
     markdown-toc: ^1.2.0
-    prettier: ^3.0.3
+    prettier: ^2.8.8
     prettier-config-carbon: ^0.11.0
     progress-estimator: ^0.3.0
     remark: ^10.0.1
@@ -2058,7 +2058,7 @@ __metadata:
     "@carbon/icon-helpers": ^10.44.0
     "@carbon/icons": ^11.28.0
     fs-extra: ^11.0.0
-    prettier: ^3.0.3
+    prettier: ^2.8.8
     rimraf: ^5.0.0
     rollup: ^2.79.1
     vue: ^2.6.8
@@ -2220,7 +2220,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/scss-generator@workspace:packages/scss-generator"
   dependencies:
-    prettier: ^3.0.3
+    prettier: ^2.8.8
   languageName: unknown
   linkType: soft
 
@@ -2267,7 +2267,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/test-utils@workspace:packages/test-utils"
   dependencies:
-    prettier: ^3.0.3
+    prettier: ^2.8.8
     react: ^18.2.0
     react-dom: ^18.2.0
     resolve: ^1.12.0
@@ -25655,7 +25655,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.8.0":
+"prettier@npm:^2.8.0, prettier@npm:^2.8.8":
   version: 2.8.8
   resolution: "prettier@npm:2.8.8"
   bin:
