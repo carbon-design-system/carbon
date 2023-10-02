@@ -253,6 +253,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/haocheng6"><img src="https://avatars.githubusercontent.com/u/7645930?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Hao Cheng</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=haocheng6" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/cordesmj"><img src="https://avatars.githubusercontent.com/u/7409239?v=4?s=100" width="100px;" alt=""/><br /><sub><b>cordesmj</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=cordesmj" title="Code">💻</a></td>
     <td align="center"><a href="https://med-aziz-chebbi.web.app/"><img src="https://avatars.githubusercontent.com/u/60013060?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Aziz Chebbi</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=azizChebbi" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/misiekhardcore"><img src="https://avatars.githubusercontent.com/u/58469680?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Michał Konopski</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=misiekhardcore" title="Code">💻</a></td>
   </tr>
 </table>
 

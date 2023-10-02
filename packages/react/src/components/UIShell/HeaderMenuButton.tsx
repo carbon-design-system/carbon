@@ -18,7 +18,7 @@ type HeaderMenuButtonBaseProps = Omit<
   'title' | 'type'
 >;
 
-interface HeaderMenuButtonProps extends HeaderMenuButtonBaseProps {
+export interface HeaderMenuButtonProps extends HeaderMenuButtonBaseProps {
   'aria-label'?: string;
   'aria-labelledby'?: string;
   className?: string;

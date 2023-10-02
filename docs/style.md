@@ -439,10 +439,12 @@ function MyComponent({ translateWithId: t = translateWithId }) {
 
   return (
     <>
-      <span>The current count is:
-      {t('carbon.component-name.display-count'), translationState}</span>
+      <span>
+        The current count is:
+        {t('carbon.component-name.display-count', translationState)}
+      </span>
       <button onClick={() => updateCount(count + 1)}>
-        {t('carbon.component-name.increment-count')}</span>
+        {t('carbon.component-name.increment-count')}
       </button>
     </>
   );
