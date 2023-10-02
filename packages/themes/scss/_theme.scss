@@ -36,6 +36,7 @@ $-component-tokens: ();
     }
   }
 
+  // prettier-ignore
   @each $token, $value in $-component-tokens {
     @include -custom-property(
       $token,

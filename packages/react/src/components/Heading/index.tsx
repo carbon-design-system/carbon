@@ -23,7 +23,7 @@ type SectionProps<E extends ElementType> = PolymorphicProps<
 >;
 
 export const Section = React.forwardRef(function Section<
-  E extends ElementType = 'section'
+  E extends ElementType = 'section',
 >(
   {
     as: BaseComponent = 'section' as E,

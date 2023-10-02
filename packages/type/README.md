@@ -24,14 +24,14 @@ yarn add @carbon/type
 Design Language. You can use all of these features either in JavaScript or Sass.
 These features include:
 
-| Feature                       | Description                                                                                                  |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Feature                       | Description                                                                                                   |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | [Font face](#font-face)       | Include IBM Plex™ font faces in your application. Uses Akamai CDN                                            |
-| [Type classes](#type-classes) | Helpers to use type styles directly. Not included by default                                                 |
+| [Type classes](#type-classes) | Helpers to use type styles directly. Not included by default                                                  |
 | [Font family](#font-family)   | Defines the font stack for IBM Plex™ in your application, provides helpers for working with font definitions |
-| [Reset](#reset)               | Provides a high-level CSS Reset to use in your project                                                       |
-| [Scale](#type-scale)          | Provides the type scale. Can access the size at any given step (step 1, 2, 3, etc)                           |
-| [Styles](#type-styles)        | Provides type styles for your application (heading-01, body-long-01, etc)                                    |
+| [Reset](#reset)               | Provides a high-level CSS Reset to use in your project                                                        |
+| [Scale](#type-scale)          | Provides the type scale. Can access the size at any given step (step 1, 2, 3, etc)                            |
+| [Styles](#type-styles)        | Provides type styles for your application (heading-01, body-long-01, etc)                                     |
 
 To include `@carbon/type` in your project, you can write the following in your
 Sass file:

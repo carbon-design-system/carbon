@@ -21,7 +21,7 @@ export type PolymorphicProps<Element extends React.ElementType, Props> = Props &
 
 export interface InternationalProps<
   MID = string,
-  ARGS = Record<string, unknown>
+  ARGS = Record<string, unknown>,
 > {
   /**
    * Supply a method to translate internal strings with your i18n tool of
