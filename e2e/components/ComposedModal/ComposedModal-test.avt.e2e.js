@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('ComposedModal', () => {
+test.describe('ComposedModal @avt', () => {
   test('@avt-default-state ComposedModal', async ({ page }) => {
     await visitStory(page, {
       component: 'ComposedModal',
