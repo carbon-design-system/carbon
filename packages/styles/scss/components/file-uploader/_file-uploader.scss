@@ -4,6 +4,7 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
+@use '../../breakpoint' as *;
 
 @use '../../config' as *;
 @use '../../motion' as *;
@@ -139,7 +140,7 @@
     display: grid;
     align-items: center;
     background-color: $layer;
-    gap: convert.to-rem(12px) $spacing-05;
+    gap: convert.to-rem(12px) 0;
     grid-auto-rows: auto;
     grid-template-columns: 1fr auto;
     margin-block-end: $spacing-03;
@@ -171,15 +172,66 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+
+    .#{$prefix}--file-filename-container-wrap {
+      margin-block-start: 1px;
+      max-inline-size: 17.5rem;
+      padding-inline-start: $spacing-05;
+      @include breakpoint-down(410px) {
+        max-inline-size: 13.5rem;
+      }
+    }
+
+    .#{$prefix}--file-filename-container-wrap-invalid {
+      max-inline-size: 15.5rem;
+
+      .#{$prefix}--file-filename-tooltip {
+        inline-size: -webkit-fill-available;
+        padding-inline-start: $spacing-05;
+        @-moz-document url-prefix() {
+          inline-size: -moz-available;
+        }
+      }
+    }
+
+    .#{$prefix}--file-filename-tooltip {
+      inline-size: -webkit-fill-available;
+      @-moz-document url-prefix() {
+        inline-size: -moz-available;
+      }
+    }
+
+    .#{$prefix}--file-filename-button {
+      @include type-style('body-compact-01');
+
+      overflow: hidden;
+      padding: 0;
+      border: none;
+      background: none;
+      color: inherit;
+      cursor: pointer;
+      font: inherit;
+      inline-size: -webkit-fill-available;
+      outline: inherit;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      @-moz-document url-prefix() {
+        inline-size: -moz-available;
+      }
+    }
+    .#{$prefix}--file-filename-button:focus {
+      outline: revert;
+    }
   }
 
   .#{$prefix}--file__selected-file--md {
-    gap: $spacing-03 $spacing-05;
+    gap: $spacing-03 0;
     min-block-size: convert.to-rem(40px);
   }
 
   .#{$prefix}--file__selected-file--sm {
-    gap: $spacing-02 $spacing-05;
+    gap: $spacing-02 0;
     min-block-size: convert.to-rem(32px);
   }
 
@@ -259,21 +311,32 @@
     color: $text-primary;
     padding-block-end: $spacing-03;
   }
-
   .#{$prefix}--file__state-container {
     display: flex;
     align-items: center;
     justify-content: center;
     min-inline-size: 1.5rem;
-    padding-inline-end: $spacing-05;
+    padding-inline-end: convert.to-rem(12px);
 
     .#{$prefix}--loading__svg {
       stroke: $icon-primary;
     }
   }
 
+  .#{$prefix}--file__state-container .#{$prefix}--file-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-02;
+    border: none;
+    background-color: transparent;
+    block-size: $spacing-05;
+    inline-size: $spacing-06;
+  }
+
   .#{$prefix}--file__state-container .#{$prefix}--file-complete {
     fill: $interactive;
+    inline-size: $spacing-06;
 
     &:focus {
       @include focus-outline('border');
