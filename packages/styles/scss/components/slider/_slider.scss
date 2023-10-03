@@ -117,6 +117,10 @@
     }
   }
 
+  .#{$prefix}--slider__thumb-icon {
+    fill: $layer-selected-inverse;
+  }
+
   .#{$prefix}--slider__thumb-icon--focus {
     display: none;
     fill: $focus;
