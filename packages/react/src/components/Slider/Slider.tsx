@@ -1348,6 +1348,7 @@ class Slider extends PureComponent<SliderProps> {
       isValidUpper,
       correctedValue,
       correctedPosition,
+      isRtl,
     } = this.state;
 
     const showWarning =
@@ -1508,8 +1509,10 @@ class Slider extends PureComponent<SliderProps> {
                     onFocus={() =>
                       this.setState({ activeHandle: HandlePosition.LOWER })
                     }>
-                    {twoHandles ? <LowerHandle /> : undefined}
-                    {twoHandles ? <LowerHandleFocus /> : undefined}
+                    {twoHandles && !isRtl && <LowerHandle />}
+                    {twoHandles && !isRtl && <LowerHandleFocus />}
+                    {twoHandles && isRtl && <UpperHandle />}
+                    {twoHandles && isRtl && <UpperHandleFocus />}
                   </div>
                   {twoHandles ? (
                     <div
@@ -1524,8 +1527,10 @@ class Slider extends PureComponent<SliderProps> {
                       onFocus={() =>
                         this.setState({ activeHandle: HandlePosition.UPPER })
                       }>
-                      {twoHandles ? <UpperHandle /> : undefined}
-                      {twoHandles ? <UpperHandleFocus /> : undefined}
+                      {twoHandles && !isRtl && <UpperHandle />}
+                      {twoHandles && !isRtl && <UpperHandleFocus />}
+                      {twoHandles && isRtl && <LowerHandle />}
+                      {twoHandles && isRtl && <LowerHandleFocus />}
                     </div>
                   ) : null}
                   <div
