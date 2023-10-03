@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('DefinitionTooltip', () => {
+test.describe('DefinitionTooltip @avt', () => {
   test('@avt-default-state DefinitionTooltip', async ({ page }) => {
     await visitStory(page, {
       component: 'DefinitionTooltip',
