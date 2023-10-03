@@ -1268,6 +1268,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Cris-Chan",
+      "name": "Cristian Villanueva",
+      "avatar_url": "https://avatars.githubusercontent.com/u/44007130?v=4",
+      "profile": "https://cristianvillanueva.portfolio.site/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
