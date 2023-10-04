@@ -22,7 +22,7 @@ test.describe('CopyButton @avt', () => {
     await expect(page).toHaveNoACViolations('CopyButton @avt-default-state');
   });
 
-  test('@avt-keyboard-state default', async ({ page }) => {
+  test('@avt-keyboard-nav default', async ({ page }) => {
     await visitStory(page, {
       component: 'CopyButton',
       id: 'components-copybutton--default',
