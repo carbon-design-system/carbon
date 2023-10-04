@@ -27,5 +27,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'Thank you for submitting your proposal. Unfortunately, it doesn't align with our roadmap or philosophy at this time. We value your contribution and encourage you to keep engaging with the community. For more information about our triage workflow and philosophy, please visit [here](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/support.md#type-enhancement-).'
+              body: 'Thank you for submitting your proposal. Unfortunately, it doesn't align with our roadmap or philosophy at this time. 
+              
+              We value your contribution and encourage you to keep engaging with the community.'
             })
