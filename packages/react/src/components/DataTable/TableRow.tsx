@@ -41,7 +41,7 @@ const TableRow = (props: TableRowProps) => {
     ]),
     className: className || undefined,
   };
-  return <tr {...cleanProps} aria-live="off" />;
+  return <tr {...cleanProps} />;
 };
 
 TableRow.propTypes = {
