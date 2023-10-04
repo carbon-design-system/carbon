@@ -5,7 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, {
+  useState,
+  type HTMLAttributes,
+  type ReactNode,
+  type KeyboardEvent,
+  type ChangeEvent,
+  type MouseEvent,
+} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useId } from '../../internal/useId';
@@ -13,27 +20,71 @@ import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { Text } from '../Text';
 
-const GridSelectedRowStateContext = React.createContext(null);
-const GridSelectedRowDispatchContext = React.createContext(null);
+type DivAttrs = HTMLAttributes<HTMLDivElement>;
 
-export function StructuredListWrapper(props) {
+type GridSelectedRowState = null | string;
+type GridSelectedRowSetter = null | ((value: GridSelectedRowState) => void);
+const GridSelectedRowStateContext =
+  React.createContext<GridSelectedRowState>(null);
+const GridSelectedRowDispatchContext =
+  React.createContext<GridSelectedRowSetter>(null);
+
+export interface StructuredListWrapperProps extends DivAttrs {
+  /**
+   * Specify a label to be read by screen readers on the container node
+   */
+  'aria-label'?: string;
+
+  /**
+   * Provide the contents of your StructuredListWrapper
+   */
+  children?: ReactNode;
+
+  /**
+   * Specify an optional className to be applied to the container node
+   */
+  className?: string;
+
+  /**
+   * Specify if structured list is condensed, default is false
+   */
+  isCondensed?: boolean;
+
+  /**
+   * Specify if structured list is flush, default is false
+   */
+  isFlush?: boolean;
+
+  /**
+   * Specify whether your StructuredListWrapper should have selections
+   */
+  selection?: boolean;
+}
+export function StructuredListWrapper(props: StructuredListWrapperProps) {
   const {
     children,
     selection,
     className,
-    ['aria-label']: ariaLabel,
+    ['aria-label']: ariaLabel = 'Structured list section',
+    // @ts-expect-error: Deprecated prop
     ariaLabel: deprecatedAriaLabel,
     isCondensed,
     isFlush,
     ...other
   } = props;
+
   const prefix = usePrefix();
-  const classes = classNames(`${prefix}--structured-list`, className, {
-    [`${prefix}--structured-list--selection`]: selection,
-    [`${prefix}--structured-list--condensed`]: isCondensed,
-    [`${prefix}--structured-list--flush`]: isFlush && !selection,
-  });
-  const [selectedRow, setSelectedRow] = React.useState(null);
+  const classes = classNames(
+    `${prefix}--structured-list`,
+    {
+      [`${prefix}--structured-list--selection`]: selection,
+      [`${prefix}--structured-list--condensed`]: isCondensed,
+      [`${prefix}--structured-list--flush`]: isFlush && !selection,
+    },
+    className
+  );
+  const [selectedRow, setSelectedRow] =
+    React.useState<GridSelectedRowState>(null);
 
   return (
     <GridSelectedRowStateContext.Provider value={selectedRow}>
@@ -49,7 +100,6 @@ export function StructuredListWrapper(props) {
     </GridSelectedRowStateContext.Provider>
   );
 }
-
 StructuredListWrapper.propTypes = {
   /**
    * Specify a label to be read by screen readers on the container node
@@ -91,13 +141,17 @@ StructuredListWrapper.propTypes = {
   selection: PropTypes.bool,
 };
 
-StructuredListWrapper.defaultProps = {
-  selection: false,
-  isCondensed: false,
-  isFlush: false,
-  ['aria-label']: 'Structured list section',
-};
+export interface StructuredListHeadProps extends DivAttrs {
+  /**
+   * Provide the contents of your StructuredListHead
+   */
+  children?: ReactNode;
 
+  /**
+   * Specify an optional className to be applied to the node
+   */
+  className?: string;
+}
 export function StructuredListHead(props) {
   const { children, className, ...other } = props;
   const prefix = usePrefix();
@@ -109,7 +163,6 @@ export function StructuredListHead(props) {
     </div>
   );
 }
-
 StructuredListHead.propTypes = {
   /**
    * Provide the contents of your StructuredListHead
@@ -122,7 +175,25 @@ StructuredListHead.propTypes = {
   className: PropTypes.string,
 };
 
-export function StructuredListBody(props) {
+export interface StructuredListBodyProps extends DivAttrs {
+  /**
+   * Provide the contents of your StructuredListBody
+   */
+  children?: ReactNode;
+
+  /**
+   * Specify an optional className to be applied to the container node
+   */
+  className?: string;
+
+  head?: boolean;
+
+  /**
+   * Provide a handler that is invoked on the key down event for the control
+   */
+  onKeyDown?(event: KeyboardEvent): void;
+}
+export function StructuredListBody(props: StructuredListBodyProps) {
   const { children, className, ...other } = props;
   const prefix = usePrefix();
   const classes = classNames(`${prefix}--structured-list-tbody`, className);
@@ -133,7 +204,6 @@ export function StructuredListBody(props) {
     </div>
   );
 }
-
 StructuredListBody.propTypes = {
   /**
    * Provide the contents of your StructuredListBody
@@ -153,13 +223,35 @@ StructuredListBody.propTypes = {
   onKeyDown: PropTypes.func,
 };
 
-StructuredListBody.defaultProps = {
-  onKeyDown: () => {},
-};
+const GridRowContext = React.createContext<null | { id: string }>(null);
 
-const GridRowContext = React.createContext(null);
+export interface StructuredListRowProps extends DivAttrs {
+  /**
+   * Provide the contents of your StructuredListRow
+   */
+  children?: ReactNode;
 
-export function StructuredListRow(props) {
+  /**
+   * Specify an optional className to be applied to the container node
+   */
+  className?: string;
+
+  /**
+   * Specify whether your StructuredListRow should be used as a header row
+   */
+  head?: boolean;
+
+  /**
+   * Provide a handler that is invoked on the click
+   */
+  onClick?(event: MouseEvent): void;
+
+  /**
+   * Provide a handler that is invoked on the key down event for the control
+   */
+  onKeyDown?(event: KeyboardEvent): void;
+}
+export function StructuredListRow(props: StructuredListRowProps) {
   const { onKeyDown, children, className, head, onClick, ...other } = props;
   const [hasFocusWithin, setHasFocusWithin] = useState(false);
   const id = useId('grid-input');
@@ -167,11 +259,15 @@ export function StructuredListRow(props) {
   const setSelectedRow = React.useContext(GridSelectedRowDispatchContext);
   const prefix = usePrefix();
   const value = { id };
-  const classes = classNames(`${prefix}--structured-list-row`, className, {
-    [`${prefix}--structured-list-row--header-row`]: head,
-    [`${prefix}--structured-list-row--focused-within`]: hasFocusWithin,
-    [`${prefix}--structured-list-row--selected`]: selectedRow === id,
-  });
+  const classes = classNames(
+    `${prefix}--structured-list-row`,
+    {
+      [`${prefix}--structured-list-row--header-row`]: head,
+      [`${prefix}--structured-list-row--focused-within`]: hasFocusWithin,
+      [`${prefix}--structured-list-row--selected`]: selectedRow === id,
+    },
+    className
+  );
 
   return head ? (
     <div role="row" {...other} className={classes} aria-busy="true">
@@ -184,9 +280,9 @@ export function StructuredListRow(props) {
       {...other}
       role="row"
       className={classes}
-      onClick={() => {
-        setSelectedRow(id);
-        onClick && onClick();
+      onClick={(event) => {
+        setSelectedRow?.(id);
+        onClick && onClick(event);
       }}
       onFocus={() => {
         setHasFocusWithin(true);
@@ -201,7 +297,6 @@ export function StructuredListRow(props) {
     </div>
   );
 }
-
 StructuredListRow.propTypes = {
   /**
    * Provide the contents of your StructuredListRow
@@ -227,7 +322,7 @@ StructuredListRow.propTypes = {
   ),
 
   /**
-   * Provide a handler that is invoked on the click,
+   * Provide a handler that is invoked on the click
    */
   onClick: PropTypes.func,
 
@@ -237,12 +332,33 @@ StructuredListRow.propTypes = {
   onKeyDown: PropTypes.func,
 };
 
-StructuredListRow.defaultProps = {
-  head: false,
-  onKeyDown: () => {},
-};
+export interface StructuredListInputProps extends DivAttrs {
+  /**
+   * Specify an optional className to be applied to the input
+   */
+  className?: string;
 
-export function StructuredListInput(props) {
+  /**
+   * Specify a custom `id` for the input
+   */
+  id?: string;
+
+  /**
+   * Provide a `name` for the input
+   */
+  name?: string;
+
+  /**
+   * Provide an optional hook that is called each time the input is updated
+   */
+  onChange?(event: ChangeEvent<HTMLInputElement>): void;
+
+  /**
+   * Provide a `title` for the input
+   */
+  title?: string;
+}
+export function StructuredListInput(props: StructuredListInputProps) {
   const defaultId = useId('structureListInput');
   const {
     className,
@@ -267,10 +383,10 @@ export function StructuredListInput(props) {
       {...other}
       type="radio"
       tabIndex={0}
-      checked={row && row.id === selectedRow}
+      checked={!!row && row.id === selectedRow}
       value={row?.id ?? ''}
       onChange={(event) => {
-        setSelectedRow(event.target.value);
+        setSelectedRow?.(event.target.value);
         onChange && onChange(event);
       }}
       id={id ?? defaultId}
@@ -280,7 +396,6 @@ export function StructuredListInput(props) {
     />
   );
 }
-
 StructuredListInput.propTypes = {
   /**
    * Specify an optional className to be applied to the input
@@ -324,18 +439,38 @@ StructuredListInput.propTypes = {
   ),
 };
 
-StructuredListInput.defaultProps = {
-  title: 'title',
-};
+export interface StructuredListCellProps extends DivAttrs {
+  /**
+   * Provide the contents of your StructuredListCell
+   */
+  children?: ReactNode;
 
-export function StructuredListCell(props) {
+  /**
+   * Specify an optional className to be applied to the container node
+   */
+  className?: string;
+
+  /**
+   * Specify whether your StructuredListCell should be used as a header cell
+   */
+  head?: boolean;
+
+  /**
+   * Specify whether your StructuredListCell should have text wrapping
+   */
+  noWrap?: boolean;
+}
+export function StructuredListCell(props: StructuredListCellProps) {
   const { children, className, head, noWrap, ...other } = props;
   const prefix = usePrefix();
-  const classes = classNames(className, {
-    [`${prefix}--structured-list-th`]: head,
-    [`${prefix}--structured-list-td`]: !head,
-    [`${prefix}--structured-list-content--nowrap`]: noWrap,
-  });
+  const classes = classNames(
+    {
+      [`${prefix}--structured-list-th`]: head,
+      [`${prefix}--structured-list-td`]: !head,
+      [`${prefix}--structured-list-content--nowrap`]: noWrap,
+    },
+    className
+  );
 
   if (head) {
     return (
@@ -351,7 +486,6 @@ export function StructuredListCell(props) {
     </Text>
   );
 }
-
 StructuredListCell.propTypes = {
   /**
    * Provide the contents of your StructuredListCell
@@ -372,18 +506,4 @@ StructuredListCell.propTypes = {
    * Specify whether your StructuredListCell should have text wrapping
    */
   noWrap: PropTypes.bool,
-};
-
-StructuredListCell.defaultProps = {
-  head: false,
-  noWrap: false,
-};
-
-export default {
-  StructuredListWrapper,
-  StructuredListHead,
-  StructuredListBody,
-  StructuredListRow,
-  StructuredListInput,
-  StructuredListCell,
 };
