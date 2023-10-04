@@ -138,6 +138,18 @@
     transform: translate(-100%, -50%);
     transition: none;
 
+    &::before {
+      position: absolute;
+      z-index: -1;
+      display: block;
+      background: $background;
+      block-size: convert.to-rem(2px);
+      content: '';
+      inline-size: convert.to-rem(6px);
+      inset-block-start: calc(50% - #{convert.to-rem(2px) / 2});
+      inset-inline-end: 0;
+    }
+
     &:hover {
       transform: translate(-100%, -50%);
 
@@ -167,8 +179,18 @@
     }
   }
 
+  .#{$prefix}--slider__thumb--lower:focus::before,
+  .#{$prefix}--slider__thumb--upper:focus::before {
+    inline-size: 100%;
+  }
+
   .#{$prefix}--slider__thumb--upper {
     transform: translate(0, -50%);
+
+    &::before {
+      inset-inline-end: auto;
+      inset-inline-start: 0;
+    }
 
     &:hover {
       transform: translate(0, -50%);
