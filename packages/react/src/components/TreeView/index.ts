@@ -8,7 +8,5 @@
 import TreeView from './TreeView';
 import TreeNode from './TreeNode';
 
-TreeView.TreeNode = TreeNode;
-
 export { TreeNode, TreeView };
 export default TreeView;
