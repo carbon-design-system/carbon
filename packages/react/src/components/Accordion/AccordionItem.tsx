@@ -117,7 +117,6 @@ function AccordionItem({
   ...rest
 }: PropsWithChildren<AccordionItemProps>) {
   const [isOpen, setIsOpen] = useState(open);
-  const [prevIsOpen, setPrevIsOpen] = useState(open);
   const [animation, setAnimation] = useState('');
   const accordionState = useContext(AccordionContext);
 
@@ -138,17 +137,11 @@ function AccordionItem({
 
   const Toggle = renderToggle || renderExpando; // remove renderExpando in next major release
 
-  if (open !== prevIsOpen) {
-    setAnimation(isOpen ? 'collapsing' : 'expanding');
-    setIsOpen(open);
-    setPrevIsOpen(open);
-  }
-
   // When the AccordionItem heading is clicked, toggle the open state of the
   // panel
   function onClick(event) {
     const nextValue = !isOpen;
-    setAnimation(isOpen ? 'collapsing' : 'expanding');
+    setAnimation(isOpen ? '' : 'expanding');
     setIsOpen(nextValue);
     if (onHeadingClick) {
       // TODO: normalize signature, potentially:
@@ -168,7 +161,6 @@ function AccordionItem({
     if (handleAnimationEnd) {
       handleAnimationEnd(event);
     }
-    setAnimation('');
   }
 
   return (
