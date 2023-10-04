@@ -26,8 +26,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'Thank you for submitting a feature request. Here’s what to expect next. 
-              Your proposal is open and is now being [triaged](https://github.com/orgs/carbon-design-system/projects/51/views/1) by the Carbon team. 
-              If your proposal is accepted and the Carbon team has bandwidth they will take on the issue, or else request volunteers from the community. 
-              Read the full triaging workflow [here](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/support.md#type-enhancement-).'
+              body: 'Thank you for submitting a feature request. Here’s what to expect next.'
             })
