@@ -7021,7 +7021,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/theming@npm:7.1.0, @storybook/theming@npm:^7.1.0":
+"@storybook/theming@npm:7.1.0":
   version: 7.1.0
   resolution: "@storybook/theming@npm:7.1.0"
   dependencies:
@@ -7036,7 +7036,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/theming@npm:7.4.5":
+"@storybook/theming@npm:7.4.5, @storybook/theming@npm:^7.1.0":
   version: 7.4.5
   resolution: "@storybook/theming@npm:7.4.5"
   dependencies:
@@ -30023,16 +30023,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"telejson@npm:^7.0.3":
-  version: 7.1.0
-  resolution: "telejson@npm:7.1.0"
-  dependencies:
-    memoizerific: ^1.11.3
-  checksum: 8000e43dc862a87ab1ca342a2635641923d55c2585f85ea8c7c60293681d6f920e8b9570cc12d90ecef286f065c176da5f769f42f4828ba18a626627bed1ac07
-  languageName: node
-  linkType: hard
-
-"telejson@npm:^7.2.0":
+"telejson@npm:^7.0.3, telejson@npm:^7.2.0":
   version: 7.2.0
   resolution: "telejson@npm:7.2.0"
   dependencies:
