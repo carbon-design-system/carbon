@@ -29,5 +29,4 @@ jobs:
               body: 'Thank you for submitting a feature request. Your proposal is open and will soon be triaged by the Carbon team. 
               
               If your proposal is accepted and the Carbon team has bandwidth they will take on the issue, or else request you or other volunteers from the community to work on this issue.'
-              body: 'Thank you for submitting a feature request. Here’s what to expect next.'
             })
