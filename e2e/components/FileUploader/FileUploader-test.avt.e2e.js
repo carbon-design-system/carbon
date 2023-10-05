@@ -131,11 +131,25 @@ test.describe('FileUploader @avt', () => {
     await page.keyboard.press('Enter');
 
     // Uploading a file to the input
-    await page.setInputFiles('input[type="file"]', [
-      'test-file-for-uploading.png',
-      'test-file-for-uploading-copy.png',
-    ]);
+    await page
+      .getByLabel('Drag and drop files here or click to upload')
+      .setInputFiles([
+        path.join(__dirname, 'test-file-for-uploading.png'),
+        path.join(
+          __dirname,
+          'test-upload-file-long-text-for-tooltip-to-show-up.png'
+        ),
+      ]);
     await expect(page.getByText('test-file-for-uploading')).toBeVisible();
-    await expect(page.getByText('test-file-for-uploading-copy')).toBeVisible();
+    await expect(
+      page.getByText('test-upload-file-long-text-for-tooltip-to-show-up')
+    ).toBeVisible();
+
+    // Deleteing all files
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    // await page.keyboard.press('Tab');
+    await page.keyboard.press('Enter');
+    await expect(page.getByText('test-file-for-uploading')).not.toBeVisible();
   });
 });
