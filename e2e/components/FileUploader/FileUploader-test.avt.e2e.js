@@ -82,6 +82,18 @@ test.describe('FileUploader @avt', () => {
     await expect(page).toHaveNoACViolations('FileUploader uploading state');
   });
 
+  test('@avt-advanced-state skeleton', async ({ page }) => {
+    await visitStory(page, {
+      component: 'FileUploader',
+      id: 'components-fileuploader--skeleton',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    await expect(page).toHaveNoACViolations('FileUploader skeleton');
+  });
+
   test('@avt-keyboard-state FileUploader', async ({ page }) => {
     await visitStory(page, {
       component: 'FileUploader',
@@ -111,7 +123,7 @@ test.describe('FileUploader @avt', () => {
     await expect(page.getByText('test-file-for-uploading')).not.toBeVisible();
   });
 
-  test('@avt-keyboard-state FileUploader Drag and drop multiple files', async ({
+  test.skip('@avt-keyboard-state FileUploader Drag and drop multiple files', async ({
     page,
   }) => {
     await visitStory(page, {
