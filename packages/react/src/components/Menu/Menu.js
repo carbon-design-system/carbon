@@ -31,6 +31,7 @@ const Menu = React.forwardRef(function Menu(
     children,
     className,
     label,
+    mode = 'full',
     onClose,
     onOpen,
     open,
@@ -49,11 +50,19 @@ const Menu = React.forwardRef(function Menu(
   const context = useContext(MenuContext);
 
   const isRoot = context.state.isRoot;
+
+  if (context.state.mode === 'basic' && !isRoot) {
+    throw new Error(
+      'Nested menus are not supported when the menu is in "basic" mode.'
+    );
+  }
+
   const menuSize = isRoot ? size : context.state.size;
 
   const [childState, childDispatch] = useReducer(menuReducer, {
     ...context.state,
     isRoot: false,
+    mode,
     size,
     requestCloseRoot: isRoot ? handleClose : context.state.requestCloseRoot,
   });
@@ -295,6 +304,15 @@ Menu.propTypes = {
    * A label describing the Menu.
    */
   label: PropTypes.string,
+
+  /**
+   * The mode of this menu. Defaults to full.
+   * `full` supports nesting and selectable menu items, but no icons.
+   * `basic` supports icons but no nesting or selectable menu items.
+   *
+   * **This prop is not intended for use and will be set by the respective implementation (like useContextMenu, MenuButton, and ComboButton).**
+   */
+  mode: PropTypes.oneOf(['full', 'basic']),
 
   /**
    * Provide an optional function to be called when the Menu should be closed.

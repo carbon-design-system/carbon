@@ -73,7 +73,7 @@ const ComboButton = React.forwardRef(function ComboButton(
   }
 
   function handleOpen() {
-    menuRef.current.style.width = `${width}px`;
+    menuRef.current.style.inlineSize = `${width}px`;
   }
 
   const containerClasses = classNames(
@@ -121,6 +121,7 @@ const ComboButton = React.forwardRef(function ComboButton(
         ref={menuRef}
         id={id}
         label={t('carbon.combo-button.additional-actions')}
+        mode="basic"
         size={size}
         open={open}
         onClose={handleClose}
