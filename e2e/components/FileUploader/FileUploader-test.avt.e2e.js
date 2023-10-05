@@ -123,7 +123,7 @@ test.describe('FileUploader @avt', () => {
     await expect(page.getByText('test-file-for-uploading')).not.toBeVisible();
   });
 
-  test.skip('@avt-keyboard-state FileUploader Drag and drop multiple files', async ({
+  test('@avt-keyboard-state FileUploader Drag and drop multiple files', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -157,11 +157,57 @@ test.describe('FileUploader @avt', () => {
       page.getByText('test-upload-file-long-text-for-tooltip-to-show-up')
     ).toBeVisible();
 
-    // Deleteing all files
+    // Deleteing the long file
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
-    // await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
     await page.keyboard.press('Enter');
-    await expect(page.getByText('test-file-for-uploading')).not.toBeVisible();
+    await expect(
+      page.locator('#test-upload-file-long-text-for-tooltip-to-show-up.jpg')
+    ).not.toBeVisible();
+  });
+
+  test('@avt-keyboard-state FileUploader Drag and drop single file', async ({
+    page,
+  }) => {
+    await visitStory(page, {
+      component: 'FileUploader',
+      id: 'components-fileuploader--drag-and-drop-upload-single-container-example-application',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    const addFileButton = page.getByRole('button');
+
+    // Testing the button focus
+    await expect(addFileButton).toBeVisible();
+    await page.keyboard.press('Tab');
+    await expect(addFileButton).toBeFocused();
+    await page.keyboard.press('Enter');
+
+    // Uploading a file to the input
+    await page
+      .getByLabel('Drag and drop a file here or click to upload')
+      .setInputFiles(
+        path.join(
+          __dirname,
+          'test-upload-file-long-text-for-tooltip-to-show-up.png'
+        )
+      );
+    await expect(
+      page.getByTitle('test-upload-file-long-text-for-tooltip-to-show-up.png')
+    ).toBeVisible();
+
+    // Checking Tooltip
+    await page.keyboard.press('Tab');
+    await expect(page.locator('.cds--popover--open')).toBeVisible();
+    await page.keyboard.press('Tab');
+
+    // Deleteing all files
+    await page.keyboard.press('Enter');
+    await expect(
+      page.locator('#test-upload-file-long-text-for-tooltip-to-show-up.jpg')
+    ).not.toBeVisible();
   });
 });
