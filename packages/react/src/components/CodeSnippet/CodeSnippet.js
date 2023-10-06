@@ -303,14 +303,14 @@ CodeSnippet.propTypes = {
   ]),
 
   /**
-   * Specify a label to be read by screen readers on the containing <textbox>
+   * Specify a label to be read by screen readers on the containing textbox
    * node
    */
   ['aria-label']: PropTypes.string,
 
   /**
    * Deprecated, please use `aria-label` instead.
-   * Specify a label to be read by screen readers on the containing <textbox>
+   * Specify a label to be read by screen readers on the containing textbox
    * node
    */
   ariaLabel: deprecate(

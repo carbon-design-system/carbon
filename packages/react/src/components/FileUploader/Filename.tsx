@@ -59,7 +59,12 @@ function Filename({
   switch (status) {
     case 'uploading':
       return (
-        <Loading description={iconDescription} small withOverlay={false} />
+        <Loading
+          description={iconDescription}
+          small
+          withOverlay={false}
+          className={`${prefix}--file-loading`}
+        />
       );
     case 'edit':
       return (

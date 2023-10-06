@@ -8,7 +8,7 @@
 import './Grid.stories.scss';
 
 import React from 'react';
-import { Grid, Column, ColumnHang } from '../Grid';
+import { Grid, Column, ColumnHang, GridSettings } from '../Grid';
 import mdx from './Grid.mdx';
 
 export default {
@@ -34,6 +34,33 @@ export default {
       );
     },
   ],
+};
+
+// Remove before merging
+export const SubGridTestStory = () => {
+  return (
+    <Grid>
+      <Column lg={8}>
+        <GridSettings subgrid={false}>
+          <Grid>
+            <Column lg={4} />
+            <Column lg={4}>
+              <Grid>
+                <Column lg={2} />
+                <Column lg={2} />
+              </Grid>
+            </Column>
+          </Grid>
+        </GridSettings>
+      </Column>
+      <Column lg={8}>
+        <Grid>
+          <Column lg={4} />
+          <Column lg={4} />
+        </Grid>
+      </Column>
+    </Grid>
+  );
 };
 
 export const Default = () => {
