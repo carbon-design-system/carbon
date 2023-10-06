@@ -123,7 +123,7 @@
 
   .#{$prefix}--slider__thumb-icon--focus {
     display: none;
-    fill: $focus;
+    fill: $interactive;
   }
 
   .#{$prefix}--slider__thumb--lower,
@@ -170,7 +170,7 @@
 
       .#{$prefix}--slider__thumb-icon {
         display: none;
-        fill: $focus;
+        fill: $interactive;
       }
 
       .#{$prefix}--slider__thumb-icon--focus {
@@ -231,7 +231,7 @@
   }
 
   .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {
-    background-color: $focus;
+    background-color: $border-interactive;
   }
 
   // Invalid & warn state
