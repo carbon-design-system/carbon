@@ -22,7 +22,7 @@ test.describe('ErrorBoundary @avt', () => {
     await expect(page).toHaveNoACViolations('ErrorBoundary');
   });
 
-  test('accessibility-checker ErrorBoundary with Custom context @avt', async ({
+  test('@avt-advanced-states ErrorBoundary with Custom context', async ({
     page,
   }) => {
     await visitStory(page, {
