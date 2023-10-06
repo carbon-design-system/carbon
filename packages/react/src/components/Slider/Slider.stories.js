@@ -28,7 +28,7 @@ export default {
 
 export const Default = () => (
   <Slider
-    labelText="Slider Label"
+    labelText="Slider label"
     value={50}
     min={0}
     max={100}
@@ -99,7 +99,7 @@ export const TwoHandleSlider = () => (
   <Slider
     ariaLabelInput="Lower bound"
     unstable_ariaLabelInputUpper="Upper bound"
-    labelText="Slider Label"
+    labelText="Slider label"
     value={10}
     unstable_valueUpper={90}
     min={0}
