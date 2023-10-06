@@ -8,7 +8,13 @@
 import { ChevronDown } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { ReactNode, Ref, useContext, useState } from 'react';
+import React, {
+  ForwardedRef,
+  ReactNode,
+  Ref,
+  useContext,
+  useState,
+} from 'react';
 import SideNavIcon from './SideNavIcon';
 import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
@@ -58,86 +64,86 @@ interface SideNavMenuProps {
 
   // The title for the overall menu name.
 
-  title?: string;
+  title: string;
 }
 
-const SideNavMenu: React.ForwardRefRenderFunction<
-  HTMLElement,
-  SideNavMenuProps
-> = (props, ref) => {
-  const {
-    className: customClassName,
-    children,
-    defaultExpanded = false,
-    isActive = false,
-    large = false,
-    renderIcon: IconElement,
-    isSideNavExpanded,
-    tabIndex,
-    title,
-  } = props;
-  const isRail = useContext(SideNavContext);
-  const prefix = usePrefix();
-  const [isExpanded, setIsExpanded] = useState<boolean>(defaultExpanded);
-  const [prevExpanded, setPrevExpanded] = useState<boolean>(defaultExpanded);
-  const className = cx({
-    [`${prefix}--side-nav__item`]: true,
-    [`${prefix}--side-nav__item--active`]:
-      isActive || (hasActiveChild(children) && !isExpanded),
-    [`${prefix}--side-nav__item--icon`]: IconElement,
-    [`${prefix}--side-nav__item--large`]: large,
-    [customClassName as string]: !!customClassName,
-  });
+const SideNavMenu = React.forwardRef<HTMLElement, SideNavMenuProps>(
+  function SideNavMenu(
+    {
+      className: customClassName,
+      children,
+      defaultExpanded = false,
+      isActive = false,
+      large = false,
+      renderIcon: IconElement,
+      isSideNavExpanded,
+      tabIndex,
+      title,
+    },
+    ref: ForwardedRef<HTMLElement>
+  ) {
+    const isRail = useContext(SideNavContext);
+    const prefix = usePrefix();
+    const [isExpanded, setIsExpanded] = useState<boolean>(defaultExpanded);
+    const [prevExpanded, setPrevExpanded] = useState<boolean>(defaultExpanded);
+    const className = cx({
+      [`${prefix}--side-nav__item`]: true,
+      [`${prefix}--side-nav__item--active`]:
+        isActive || (hasActiveChild(children) && !isExpanded),
+      [`${prefix}--side-nav__item--icon`]: IconElement,
+      [`${prefix}--side-nav__item--large`]: large,
+      [customClassName as string]: !!customClassName,
+    });
 
-  if (isSideNavExpanded === false && isExpanded === true) {
-    setIsExpanded(false);
-    setPrevExpanded(true);
-  } else if (isSideNavExpanded === true && prevExpanded === true) {
-    setIsExpanded(true);
-    setPrevExpanded(false);
-  }
+    if (isSideNavExpanded === false && isExpanded === true) {
+      setIsExpanded(false);
+      setPrevExpanded(true);
+    } else if (isSideNavExpanded === true && prevExpanded === true) {
+      setIsExpanded(true);
+      setPrevExpanded(false);
+    }
 
-  return (
-    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-    <li
-      className={className}
-      onKeyDown={(event) => {
-        if (match(event, keys.Escape)) {
-          setIsExpanded(false);
-        }
-      }}>
-      <button
-        aria-expanded={isExpanded}
-        className={`${prefix}--side-nav__submenu`}
-        onClick={() => {
-          setIsExpanded(!isExpanded);
-        }}
-        ref={ref as Ref<HTMLButtonElement>}
-        type="button"
-        tabIndex={
-          tabIndex === undefined
-            ? !isSideNavExpanded && !isRail
-              ? -1
-              : 0
-            : tabIndex
-        }>
-        {IconElement && (
-          <SideNavIcon>
-            <IconElement />
+    return (
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+      <li
+        className={className}
+        onKeyDown={(event) => {
+          if (match(event, keys.Escape)) {
+            setIsExpanded(false);
+          }
+        }}>
+        <button
+          aria-expanded={isExpanded}
+          className={`${prefix}--side-nav__submenu`}
+          onClick={() => {
+            setIsExpanded(!isExpanded);
+          }}
+          ref={ref as Ref<HTMLButtonElement>}
+          type="button"
+          tabIndex={
+            tabIndex === undefined
+              ? !isSideNavExpanded && !isRail
+                ? -1
+                : 0
+              : tabIndex
+          }>
+          {IconElement && (
+            <SideNavIcon>
+              <IconElement />
+            </SideNavIcon>
+          )}
+          <span className={`${prefix}--side-nav__submenu-title`} title={title}>
+            {title}
+          </span>
+          <SideNavIcon className={`${prefix}--side-nav__submenu-chevron`} small>
+            <ChevronDown size={20} />
           </SideNavIcon>
-        )}
-        <span className={`${prefix}--side-nav__submenu-title`} title={title}>
-          {title}
-        </span>
-        <SideNavIcon className={`${prefix}--side-nav__submenu-chevron`} small>
-          <ChevronDown size={20} />
-        </SideNavIcon>
-      </button>
-      <ul className={`${prefix}--side-nav__menu`}>{children}</ul>
-    </li>
-  );
-};
-
+        </button>
+        <ul className={`${prefix}--side-nav__menu`}>{children}</ul>
+      </li>
+    );
+  }
+);
 SideNavMenu.displayName = 'SideNavMenu';
 
 SideNavMenu.propTypes = {
@@ -178,6 +184,7 @@ SideNavMenu.propTypes = {
   /**
    * Pass in a custom icon to render next to the `SideNavMenu` title
    */
+  // @ts-expect-error - PropTypes are unable to cover this case.
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
@@ -234,5 +241,5 @@ function hasActiveChild(children: ReactNode | ReactNode[]): boolean {
   return false;
 }
 
-export default React.forwardRef(SideNavMenu);
+export default SideNavMenu;
 export { SideNavMenu };
