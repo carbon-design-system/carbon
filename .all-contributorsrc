@@ -30,10 +30,7 @@
       "profile": "https://github.com/tw15egan",
       "contributions": [
         "code",
-        "doc",
-        "infra",
-        "review",
-        "a11y"
+        "doc"
       ]
     },
     {
@@ -1265,6 +1262,15 @@
       "name": "Michał Konopski",
       "avatar_url": "https://avatars.githubusercontent.com/u/58469680?v=4",
       "profile": "https://github.com/misiekhardcore",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Nirajsah",
+      "name": "Niraj Sah",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51414373?v=4",
+      "profile": "https://github.com/Nirajsah",
       "contributions": [
         "code"
       ]
