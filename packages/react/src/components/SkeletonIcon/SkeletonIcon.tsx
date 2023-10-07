@@ -25,8 +25,8 @@ const SkeletonIcon: React.FC<SkeletonIconProps> = ({ className, ...other }) => {
   const prefix = usePrefix();
 
   const skeletonIconClasses = classNames({
+    className,
     [`${prefix}--icon--skeleton`]: true,
-    [className!]: className,
   });
 
   return <div className={skeletonIconClasses} {...other} />;
