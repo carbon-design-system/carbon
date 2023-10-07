@@ -53,14 +53,6 @@ const SideNavItems: React.FC<SideNavItemsProps> = ({
           return child;
         }
       }
-
-      // return React.cloneElement(child, {
-      //   ...(CARBON_SIDENAV_ITEMS.includes(child.type?.displayName)
-      //     ? {
-      //       isSideNavExpanded,
-      //     }
-      //     : {}),
-      // });
     }
   });
   return <ul className={className}>{childrenWithExpandedState}</ul>;
