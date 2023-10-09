@@ -22,7 +22,7 @@ test.describe('FileUploader @avt', () => {
     });
     await expect(page).toHaveNoACViolations('FileUploader default state');
   });
-  test('@avt-advanced-state with upload', async ({ page }) => {
+  test('@avt-advanced-states with upload', async ({ page }) => {
     await visitStory(page, {
       component: 'FileUploader',
       id: 'components-fileuploader--playground',
@@ -37,7 +37,7 @@ test.describe('FileUploader @avt', () => {
       'FileUploader default state with upload'
     );
   });
-  test('@avt-advanced-state invalid state', async ({ page }) => {
+  test('@avt-advanced-states invalid state', async ({ page }) => {
     await visitStory(page, {
       component: 'FileUploader',
       id: 'components-fileuploader--file-uploader-item',
@@ -52,7 +52,7 @@ test.describe('FileUploader @avt', () => {
     await expect(page).toHaveNoACViolations('FileUploader invalid state');
   });
 
-  test('@avt-advanced-state complete state', async ({ page }) => {
+  test('@avt-advanced-states complete state', async ({ page }) => {
     await visitStory(page, {
       component: 'FileUploader',
       id: 'components-fileuploader--file-uploader-item',
@@ -67,7 +67,7 @@ test.describe('FileUploader @avt', () => {
     await expect(page).toHaveNoACViolations('FileUploader complete state');
   });
 
-  test('@avt-advanced-state uploading state', async ({ page }) => {
+  test('@avt-advanced-states uploading state', async ({ page }) => {
     await visitStory(page, {
       component: 'FileUploader',
       id: 'components-fileuploader--file-uploader-item',
@@ -82,7 +82,7 @@ test.describe('FileUploader @avt', () => {
     await expect(page).toHaveNoACViolations('FileUploader uploading state');
   });
 
-  test('@avt-advanced-state skeleton', async ({ page }) => {
+  test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'FileUploader',
       id: 'components-fileuploader--skeleton',
