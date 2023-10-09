@@ -124,7 +124,7 @@ test.describe('FileUploader @avt', () => {
   });
 
   test.slow(
-    '@avt-keyboard-state FileUploader Drag and drop multiple files',
+    '@avt-keyboard-nav FileUploader Drag and drop multiple files',
     async ({ page }) => {
       await visitStory(page, {
         component: 'FileUploader',
