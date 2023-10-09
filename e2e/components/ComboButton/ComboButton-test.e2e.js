@@ -11,16 +11,19 @@ const { test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
 const { snapshotStory } = require('../../test-utils/storybook');
 
-test.describe('ComboButton', () => {
-  themes.forEach((theme) => {
-    test.describe(theme, () => {
-      test('combo-button @vrt', async ({ page }) => {
-        await snapshotStory(page, {
-          component: 'ComboButton',
-          id: 'components-combobutton--default',
-          theme,
-        });
-      });
+test.describe('ComboButton Visual Regression Tests', () => {
+  for (const theme of themes) {
+    test(`Theme: ${theme}`, async ({ page }) => {
+      const componentId = 'components-combobutton--default';
+      await takeVisualSnapshot(page, componentId, theme);
     });
-  });
+  }
+
+  async function takeVisualSnapshot(page, componentId, theme) {
+    await snapshotStory(page, {
+      component: 'ComboButton',
+      id: componentId,
+      theme,
+    });
+  }
 });
