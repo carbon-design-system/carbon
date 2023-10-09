@@ -34,7 +34,7 @@
     "@rollup/plugin-babel": "^6.0.0",
     "@rollup/plugin-replace": "^5.0.0",
     "browserslist-config-carbon": "^11.2.0",
-    "change-case": "^4.1.1",
+    "change-case": "^5.0.0",
     "core-js": "^3.16.0",
     "fs-extra": "^11.0.0",
     "joi": "^14.3.1",
