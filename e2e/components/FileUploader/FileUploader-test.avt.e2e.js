@@ -94,7 +94,7 @@ test.describe('FileUploader @avt', () => {
     await expect(page).toHaveNoACViolations('FileUploader skeleton');
   });
 
-  test('@avt-keyboard-state FileUploader', async ({ page }) => {
+  test('@avt-keyboard-nav FileUploader', async ({ page }) => {
     await visitStory(page, {
       component: 'FileUploader',
       id: 'components-fileuploader--default',
