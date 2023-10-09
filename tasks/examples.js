@@ -34,7 +34,7 @@ const IGNORE_EXAMPLE_DIRS = new Set([
 
 /**
  * The goal here is to create a top-level `build` folder with content to be
- * displayed in the `gh-pages` branch. Specifically we want packages available
+ * displayed in the `gh-pages` branch. Specifically, we want packages available
  * at: `packages/<package-name>/examples/<example-name>` to be mirrored over in
  * the `build` folder at: `build/<package-name>/examples/<example-name>`.
  */
@@ -50,9 +50,6 @@ async function main() {
     packageNames
       .filter((name) => PACKAGES_TO_BUILD.has(name))
       .map(async (name) => {
-        // Verify that each file that we read from the packages directory is
-        // actually a folder. Typically used to catch `.DS_store` files that
-        // accidentally appear when opening with MacOS Finder
         const filepath = path.join(PACKAGES_DIR, name);
         const stat = await fs.lstat(filepath);
         const descriptor = {
@@ -63,8 +60,6 @@ async function main() {
           throw new Error(`Unexpected file: ${name} at ${filepath}`);
         }
 
-        // Try and figure out if the package has an examples directory, if not
-        // then we can skip it
         const examplesDir = path.join(filepath, 'examples');
         if (!(await fs.pathExists(examplesDir))) {
           return descriptor;
@@ -145,13 +140,7 @@ async function main() {
           await fs.copy(example.filepath, exampleDir, {
             filter(src) {
               const relativePath = path.relative(example.filepath, src);
-              if (relativePath.includes('node_modules')) {
-                return false;
-              }
-              if (relativePath[0] === '.') {
-                return false;
-              }
-              return true;
+              return !relativePath.includes('node_modules') && relativePath[0] !== '.';
             },
           });
           reporter.success(
@@ -199,7 +188,6 @@ async function main() {
 
   await fs.writeFile(path.join(BUILD_DIR, 'index.html'), indexFile);
 
-  // Copy icons over, useful for adding download links
   await fs.copy(
     path.resolve(__dirname, '../packages/icons/svg'),
     path.join(BUILD_DIR, 'icons/svg')
