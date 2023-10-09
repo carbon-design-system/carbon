@@ -168,7 +168,7 @@ test.describe('FileUploader @avt', () => {
     }
   );
 
-  test('@avt-keyboard-state FileUploader Drag and drop single file', async ({
+  test('@avt-keyboard-nav FileUploader Drag and drop single file', async ({
     page,
   }) => {
     await visitStory(page, {
