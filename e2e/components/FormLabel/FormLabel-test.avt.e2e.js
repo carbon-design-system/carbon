@@ -22,7 +22,7 @@ test.describe('FormLabel @avt', () => {
     await expect(page).toHaveNoACViolations('FormLabel');
   });
 
-  test('@avt-advanced-state FormLabel with tooltip', async ({ page }) => {
+  test('@avt-advanced-states FormLabel with tooltip', async ({ page }) => {
     await visitStory(page, {
       component: 'FormLabel',
       id: 'components-formlabel--with-tooltip',
