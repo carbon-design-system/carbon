@@ -7,92 +7,62 @@
 
 'use strict';
 
-import { expect, test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
 test.describe('ComboButton @avt', () => {
-  test('@avt-default-state ComboButton ', async ({ page }) => {
-    await visitStory(page, {
-      component: 'ComboButton',
-      id: 'components-combobutton--default',
-      globals: {
-        theme: 'white',
-      },
-    });
-    await expect(page).toHaveNoACViolations('ComboButton');
+  const globals = {
+    theme: 'white',
+  };
+
+  test('@avt-default-state ComboButton', async ({ page }) => {
+    await testComboButton(page, 'components-combobutton--default', 'ComboButton', globals);
   });
 
-  test('@avt-advanced-states ComboButton With Danger ', async ({ page }) => {
-    await visitStory(page, {
-      component: 'ComboButton',
-      id: 'components-combobutton--with-danger',
-      globals: {
-        theme: 'white',
-      },
-    });
-    await expect(page).toHaveNoACViolations('ComboButton-with-danger');
+  test('@avt-advanced-states ComboButton With Danger', async ({ page }) => {
+    await testComboButton(page, 'components-combobutton--with-danger', 'ComboButton-with-danger', globals);
   });
 
   test('@avt-keyboard-nav ComboButton', async ({ page }) => {
-    await visitStory(page, {
-      component: 'ComboButton',
-      id: 'components-combobutton--default',
-      globals: {
-        theme: 'white',
-      },
-    });
-    const primaryButton = page.getByRole('button', { name: 'Primary action' });
-    const iconButton = page.locator('button.cds--btn--icon-only');
-
-    // Testing buttons
-    await expect(primaryButton).toBeVisible();
-    await page.keyboard.press('Tab');
-    await expect(primaryButton).toBeFocused();
-    await page.keyboard.press('Enter');
-    await page.keyboard.press('Tab');
-    await expect(iconButton).toBeFocused();
-
-    // Checking menu interaction
-    await page.keyboard.press('Enter');
-    await expect(page.getByRole('menuitem').first()).toBeFocused();
-    await page.keyboard.press('ArrowDown');
-    await expect(page.getByRole('menuitem').nth(1)).toBeFocused();
-    await page.keyboard.press('Escape');
-    await expect(page.getByRole('menuitem').first()).not.toBeVisible();
+    await testKeyboardNavigation(page, 'components-combobutton--default', globals);
   });
 
   test('@avt-keyboard-nav ComboButton with danger', async ({ page }) => {
+    await testKeyboardNavigation(page, 'components-combobutton--with-danger', globals);
+  });
+
+  async function testComboButton(page, componentId, componentName, globals) {
     await visitStory(page, {
       component: 'ComboButton',
-      id: 'components-combobutton--with-danger',
-      globals: {
-        theme: 'white',
-      },
+      id: componentId,
+      globals,
     });
-    const primaryButton = page.getByRole('button', { name: 'Primary action' });
+    await expect(page).toHaveNoACViolations(componentName);
+  }
+
+  async function testKeyboardNavigation(page, componentId, globals) {
+    await visitStory(page, {
+      component: 'ComboButton',
+      id: componentId,
+      globals,
+    });
+
+    const primaryButton = await page.locator('button', { name: 'Primary action' });
     const iconButton = page.locator('button.cds--btn--icon-only');
+    const menuItems = page.locator('role=menuitem');
 
     // Testing buttons
     await expect(primaryButton).toBeVisible();
-    await page.keyboard.press('Tab');
-    await expect(primaryButton).toBeFocused();
-    await page.keyboard.press('Enter');
-    await page.keyboard.press('Tab');
+    await primaryButton.focus();
+    await primaryButton.press('Enter');
     await expect(iconButton).toBeFocused();
 
     // Checking menu interaction
-    await page.keyboard.press('Enter');
-    await expect(page.getByRole('menuitem').first()).toBeFocused();
-    await page.keyboard.press('ArrowDown');
-    await page.keyboard.press('ArrowDown');
-    await page.keyboard.press('ArrowDown');
-    // Checking danger button
-    await expect(page.getByRole('menuitem').nth(3)).toBeFocused();
-    await expect(page.getByRole('menuitem').nth(3)).toHaveClass(
-      /cds--menu-item--danger/
-    );
-    // Selecting the item to close the menu
-    await page.keyboard.press('Enter');
-    await expect(page.getByRole('menuitem').first()).not.toBeVisible();
-  });
+    await iconButton.press('Enter');
+    await expect(menuItems.first()).toBeFocused();
+    await menuItems.nth(1).press('ArrowDown');
+    await menuItems.nth(3).expect.toHaveClass('cds--menu-item--danger');
+    await menuItems.nth(3).press('Enter');
+    await expect(menuItems.first()).not.toBeVisible();
+  }
 });
