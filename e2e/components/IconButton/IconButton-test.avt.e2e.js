@@ -21,7 +21,7 @@ test.describe('IconButton @avt', () => {
     await expect(page).toHaveNoACViolations('IconButton');
   });
 
-  test('@avt-keyboard-state IconButton', async ({ page }) => {
+  test('@avt-keyboard-nav IconButton', async ({ page }) => {
     await visitStory(page, {
       component: 'IconButton',
       id: 'components-iconbutton--default',
