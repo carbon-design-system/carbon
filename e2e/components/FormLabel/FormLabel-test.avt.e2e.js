@@ -33,7 +33,7 @@ test.describe('FormLabel @avt', () => {
     await expect(page).toHaveNoACViolations('FormLabel-with-tooltip');
   });
 
-  test('@avt-keyboard-state FormLabel with tooltip', async ({ page }) => {
+  test('@avt-keyboard-nav FormLabel with tooltip', async ({ page }) => {
     await visitStory(page, {
       component: 'FormLabel',
       id: 'components-formlabel--with-tooltip',
