@@ -10,13 +10,11 @@ jobs:
   add-comment:
     name: Add comment to issues with proposal accepted and community contribution
     runs-on: ubuntu-latest
-
     steps:
       - name: Log github event
         env:
-          GITHUB_CONTEXT_LABELS: ${{ toJson(github.event.label) }}
+          $GITHUB_CONTEXT_LABELS: ${{ toJson(github.event.label) }}
         run: echo "$GITHUB_CONTEXT_LABELS"
-
       - name: Conditional Check and Add Comment
         id: conditional-comment
         run: |
@@ -34,7 +32,6 @@ jobs:
           } else {
             console.log('No comment added because the conditions are not met.');
           }
-
       - name: Set Output
         if: steps.conditional-comment.outcome == 'success'
         run: echo "Comment added successfully."
