@@ -2173,7 +2173,7 @@ __metadata:
     clipboardy: ^2.1.0
     copy-to-clipboard: ^3.3.1
     css-loader: ^6.5.1
-    downshift: 8.2.0
+    downshift: 8.2.1
     enquirer: ^2.3.6
     fast-glob: ^3.2.7
     flatpickr: 4.6.9
@@ -13666,9 +13666,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"downshift@npm:8.2.0":
-  version: 8.2.0
-  resolution: "downshift@npm:8.2.0"
+"downshift@npm:8.2.1":
+  version: 8.2.1
+  resolution: "downshift@npm:8.2.1"
   dependencies:
     "@babel/runtime": ^7.22.15
     compute-scroll-into-view: ^3.0.3
@@ -13677,7 +13677,7 @@ __metadata:
     tslib: ^2.6.2
   peerDependencies:
     react: ">=16.12.0"
-  checksum: 3bc832dcf604cfda13561afa55a7d9dfb8fca1c33b7083ac3df4b2be6a13360a3c6b594b8f3af35e886d22c8e494d4a8b93f83ab50cf494ca55652bc981e0906
+  checksum: f6cf5e18d7958ea924bda0b13b46045cbd64a419e4e3079460e6edce8a25b0d99972b0ff607971016a09568cb46dfd53c924a2c86be8f4a5825ef2f2d703f0da
   languageName: node
   linkType: hard
 
