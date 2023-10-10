@@ -630,6 +630,21 @@ Map {
       "wrapText": false,
     },
     "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "right",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "aria-label": Object {
         "type": "string",
       },
@@ -1231,7 +1246,7 @@ Map {
         "type": "shape",
       },
       "helperText": Object {
-        "type": "string",
+        "type": "node",
       },
       "id": Object {
         "isRequired": true,
@@ -1275,9 +1290,6 @@ Map {
         "type": "func",
       },
       "onInputChange": Object {
-        "type": "func",
-      },
-      "onStateChange": Object {
         "type": "func",
       },
       "onToggleClick": Object {
@@ -1731,6 +1743,21 @@ Map {
       "onClick": [Function],
     },
     "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "right",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "children": Object {
         "type": "node",
       },
@@ -1759,6 +1786,21 @@ Map {
       "onClick": [Function],
     },
     "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "right",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "className": Object {
         "type": "string",
       },
@@ -3866,6 +3908,7 @@ Map {
     },
   },
   "GlobalTheme" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -3882,6 +3925,7 @@ Map {
         "type": "oneOf",
       },
     },
+    "render": [Function],
   },
   "Grid" => Object {
     "propTypes": Object {
@@ -3911,6 +3955,26 @@ Map {
         "type": "bool",
       },
       "narrow": Object {
+        "type": "bool",
+      },
+    },
+  },
+  "GridSettings" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "mode": Object {
+        "args": Array [
+          Array [
+            "flexbox",
+            "css-grid",
+          ],
+        ],
+        "isRequired": true,
+        "type": "oneOf",
+      },
+      "subgrid": Object {
         "type": "bool",
       },
     },
@@ -4104,6 +4168,7 @@ Map {
     },
   },
   "Heading" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -4112,6 +4177,7 @@ Map {
         "type": "string",
       },
     },
+    "render": [Function],
   },
   "IconButton" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -4148,6 +4214,9 @@ Map {
       },
       "enterDelayMs": Object {
         "type": "number",
+      },
+      "isSelected": Object {
+        "type": "bool",
       },
       "kind": Object {
         "args": Array [
@@ -4393,6 +4462,7 @@ Map {
     },
   },
   "Layer" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "as": Object {
         "args": Array [
@@ -4427,6 +4497,7 @@ Map {
         "type": "oneOf",
       },
     },
+    "render": [Function],
   },
   "Link" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -6640,6 +6711,7 @@ Map {
   },
   "SecondaryButton" => Object {},
   "Section" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "as": Object {
         "type": "elementType",
@@ -6654,6 +6726,7 @@ Map {
         "type": "number",
       },
     },
+    "render": [Function],
   },
   "Select" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -7271,9 +7344,6 @@ Map {
     "render": [Function],
   },
   "StructuredListBody" => Object {
-    "defaultProps": Object {
-      "onKeyDown": [Function],
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -7290,10 +7360,6 @@ Map {
     },
   },
   "StructuredListCell" => Object {
-    "defaultProps": Object {
-      "head": false,
-      "noWrap": false,
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -7320,9 +7386,6 @@ Map {
     },
   },
   "StructuredListInput" => Object {
-    "defaultProps": Object {
-      "title": "title",
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -7344,10 +7407,6 @@ Map {
     },
   },
   "StructuredListRow" => Object {
-    "defaultProps": Object {
-      "head": false,
-      "onKeyDown": [Function],
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -7368,9 +7427,6 @@ Map {
     },
   },
   "StructuredListSkeleton" => Object {
-    "defaultProps": Object {
-      "rowCount": 5,
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -7381,12 +7437,6 @@ Map {
     },
   },
   "StructuredListWrapper" => Object {
-    "defaultProps": Object {
-      "aria-label": "Structured list section",
-      "isCondensed": false,
-      "isFlush": false,
-      "selection": false,
-    },
     "propTypes": Object {
       "aria-label": Object {
         "type": "string",

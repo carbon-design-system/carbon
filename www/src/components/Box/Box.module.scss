@@ -16,29 +16,27 @@ $index: 1;
 }
 
 .px-0 {
-  padding-right: 0;
-  padding-left: 0;
+  padding-inline: 0;
 }
 
 .py-0 {
-  padding-top: 0;
-  padding-bottom: 0;
+  padding-block: 0;
 }
 
 .pl-0 {
-  padding-left: 0;
+  padding-inline-start: 0;
 }
 
 .pr-0 {
-  padding-right: 0;
+  padding-inline-end: 0;
 }
 
 .pt-0 {
-  padding-top: 0;
+  padding-block-start: 0;
 }
 
 .pb-0 {
-  padding-bottom: 0;
+  padding-block-end: 0;
 }
 
 @each $key, $value in spacing.$spacing {
@@ -47,29 +45,27 @@ $index: 1;
   }
 
   .px-#{$index} {
-    padding-right: $value;
-    padding-left: $value;
+    padding-inline: $value;
   }
 
   .py-#{$index} {
-    padding-top: $value;
-    padding-bottom: $value;
+    padding-block: $value;
   }
 
   .pl-#{$index} {
-    padding-left: $value;
+    padding-inline-start: $value;
   }
 
   .pr-#{$index} {
-    padding-right: $value;
+    padding-inline-end: $value;
   }
 
   .pt-#{$index} {
-    padding-top: $value;
+    padding-block-start: $value;
   }
 
   .pb-#{$index} {
-    padding-bottom: $value;
+    padding-block-end: $value;
   }
   $index: $index + 1;
 }
@@ -82,29 +78,27 @@ $index: 1;
 }
 
 .mx-0 {
-  margin-right: 0;
-  margin-left: 0;
+  margin-inline: 0;
 }
 
 .my-0 {
-  margin-top: 0;
-  margin-bottom: 0;
+  margin-block: 0;
 }
 
 .ml-0 {
-  margin-left: 0;
+  margin-inline-start: 0;
 }
 
 .mr-0 {
-  margin-right: 0;
+  margin-inline-end: 0;
 }
 
 .mt-0 {
-  margin-top: 0;
+  margin-block-start: 0;
 }
 
 .mb-0 {
-  margin-bottom: 0;
+  margin-block-end: 0;
 }
 
 @each $key, $value in spacing.$spacing {
@@ -113,29 +107,27 @@ $index: 1;
   }
 
   .mx-#{$index} {
-    margin-right: $value;
-    margin-left: $value;
+    margin-inline: $value;
   }
 
   .my-#{$index} {
-    margin-top: $value;
-    margin-bottom: $value;
+    margin-block: $value;
   }
 
   .ml-#{$index} {
-    margin-left: $value;
+    margin-inline-start: $value;
   }
 
   .mr-#{$index} {
-    margin-right: $value;
+    margin-inline-end: $value;
   }
 
   .mt-#{$index} {
-    margin-top: $value;
+    margin-block-start: $value;
   }
 
   .mb-#{$index} {
-    margin-bottom: $value;
+    margin-block-end: $value;
   }
   $index: $index + 1;
 }

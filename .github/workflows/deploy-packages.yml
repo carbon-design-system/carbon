@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 #v4.1.0
         with:
           repository: carbon-design-system/design-language-website
           ref: master
@@ -33,7 +33,7 @@ jobs:
             @carbon/icons@next \
             @carbon/icons-react@next \
       - name: Generate token
-        uses: tibdex/github-app-token@v1
+        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a #v2.1.0
         id: generate_token
         with:
           app_id: ${{ secrets.APP_ID }}
@@ -58,7 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 #v4.1.0
         with:
           repository: carbon-design-system/gatsby-theme-carbon
           ref: main
@@ -76,7 +76,7 @@ jobs:
             @carbon/pictograms-react \
             @carbon/react
       - name: Generate token
-        uses: tibdex/github-app-token@v1
+        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a #v2.1.0
         id: generate_token
         with:
           app_id: ${{ secrets.APP_ID }}
@@ -97,4 +97,3 @@ jobs:
             - [ ] Verify package version bumps are accurate
             - [ ] Verify CI passes as expected
             - [ ] Verify no regressions on the website in the deploy preview
-

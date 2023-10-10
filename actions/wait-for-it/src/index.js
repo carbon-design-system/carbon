@@ -4,11 +4,8 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-'use strict';
-
-const core = require('@actions/core');
-const got = require('got');
+import core from '@actions/core';
+import got from 'got';
 
 async function main() {
   let url = core.getInput('URL', {
@@ -23,6 +20,9 @@ async function main() {
     url = url.replace('localhost', '172.17.0.1');
   }
 
+  // As of got v12, legacy Url instances are not supported anymore. You need to use WHATWG URL instead.
+  url = new URL(url);
+
   core.info(`Waiting for a 200 response from ${url}`);
 
   try {
@@ -32,7 +32,7 @@ async function main() {
         limit: 10,
         maxRetryAfter: 1000,
       },
-      timeout: 1000,
+      timeout: { request: 1000 },
     });
     core.info(`Received a 200 response from ${url}`);
   } catch (error) {

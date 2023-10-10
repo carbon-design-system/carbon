@@ -25,6 +25,7 @@ const defaultMinCollapsedNumberOfRows = 3;
 const defaultMinExpandedNumberOfRows = 16;
 
 function CodeSnippet({
+  align = 'bottom',
   className,
   type,
   children,
@@ -185,6 +186,7 @@ function CodeSnippet({
     return (
       <Copy
         {...rest}
+        align={align}
         onClick={handleCopyClick}
         aria-label={deprecatedAriaLabel || ariaLabel}
         aria-describedby={uid}
@@ -255,6 +257,7 @@ function CodeSnippet({
       )}
       {!hideCopyButton && (
         <CopyButton
+          align={align}
           size={type === 'multi' ? 'sm' : 'md'}
           disabled={disabled}
           onClick={handleCopyClick}
@@ -286,14 +289,28 @@ function CodeSnippet({
 
 CodeSnippet.propTypes = {
   /**
-   * Specify a label to be read by screen readers on the containing <textbox>
+   * Specify how the trigger should align with the tooltip
+   */
+  align: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+    'left',
+    'right',
+  ]),
+
+  /**
+   * Specify a label to be read by screen readers on the containing textbox
    * node
    */
   ['aria-label']: PropTypes.string,
 
   /**
    * Deprecated, please use `aria-label` instead.
-   * Specify a label to be read by screen readers on the containing <textbox>
+   * Specify a label to be read by screen readers on the containing textbox
    * node
    */
   ariaLabel: deprecate(

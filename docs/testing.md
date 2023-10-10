@@ -37,6 +37,21 @@ in our elements site.
 These tests are authored within the `e2e` directory and match the file pattern:
 `*-test.e2e.js`.
 
+#### Tags
+
+Playwright tests are divided into different tag categories for reporting
+purposes. `@avt` test tags are used to populate accessibility test statuses
+within component pages on https://carbondesignsystem.com
+
+For avt tests, the test title should always include one of the following:
+
+| Tag                    | Description                                                                                                                    |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `@avt`                 | High level/root tag that should wrap all avt tests. This is usually placed in a `describe` block title.                        |
+| `@avt-default-state`   | Sub-tag of `@avt`, used to tag individual tests covering the default state of a component.                                     |
+| `@avt-advanced-states` | Sub-tag of `@avt`, used to tag individual tests covering advanced states of a component (open/close, invalid, expanded, etc.). |
+| `@avt-keyboard-nav`    | Sub-tag of `@avt`, used to tag individual tests covering keyboard navigation flows.                                            |
+
 #### Developing
 
 When working with Playwright locally, it's important to start up the service
@@ -48,7 +63,7 @@ cd packages/react
 yarn storybook
 ```
 
-One the storybook is loaded, you can run tests against is using the storybook
+Once the storybook is loaded, you can run tests against it using the storybook
 test-utils found in `e2e/test-utils/storybook`. A common use-case for testing a
 component is to use Percy to take a snapshot of a component in a particular
 theme from a specific story in storybook.
@@ -107,7 +122,7 @@ against.
 #### Working with snapshots locally
 
 Sometimes you'll want to debug snapshots locally instead of relying on an
-externaly service to get feedback. To do so, you can use the
+external service to get feedback. To do so, you can use the
 `ENABLE_LOCAL_SNAPSHOTS` environment variable to store snapshots locally. Almost
 any playwright command you run can be prefixed with this value in order to store
 screenshots locally.
@@ -122,13 +137,13 @@ screenshots locally**
 The first time you'll run this command, it will need to generate the baseline
 snapshots for this component. The second time you run it, it will compare the
 snapshots for the current page with what is stored in the screenshot. If the two
-do not match, playwright will report a failure and will provide a link to the
+do not match, Playwright will report a failure and will provide a link to the
 diff image on your machine.
 
 ## FAQ
 
 ### Why am I seeing `browserType.launch: Executable doesn't exist at ../path`?
 
-The browser executables need to be installed so that playwright can run tests
-inside chromium, firefox, etc. They can be installed by running
+The browser executables need to be installed so that Playwright can run tests
+inside Chromium, Firefox, etc. They can be installed by running
 `yarn playwright install`

@@ -250,7 +250,7 @@ export const FullWidth = () => (
   </FlexGrid>
 );
 
-export const MixedGridModes = () => (
+export const MixedGutterModes = () => (
   <FlexGrid>
     <Row>
       <Column>
