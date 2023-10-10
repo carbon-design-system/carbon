@@ -37,10 +37,19 @@ test.describe('ComposedModal', () => {
           theme,
         });
       });
+
       test('full width modal @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'ComposedModal',
           id: 'components-composedmodal--full-width',
+          theme,
+        });
+      });
+
+      test('with scrolling content @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'ComposedModal',
+          id: 'components-composedmodal--with-scrolling-content',
           theme,
         });
       });
