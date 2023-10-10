@@ -20,9 +20,10 @@ jobs:
         uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410 #v6.4.1
         with:
           script: |
-            console.log('what is here', github.issues.listLabelsOnIssue());
-            const proposalAccepted = github.issues.listLabelsOnIssue().includes('proposal: accepted');
-            const communityContribution = github.issues.listLabelsOnIssue().map(label => label.name).includes('community contribution');
+            console.log('what is here fist', github.rest.issues)
+            console.log('what is here', github.rest.issues.listLabelsOnIssue());
+            const proposalAccepted = github.rest.issues.listLabelsOnIssue().includes('proposal: accepted');
+            const communityContribution = github.rest.issues.listLabelsOnIssue().map(label => label.name).includes('community contribution');
 
             if ((proposalAccepted && communityContribution) || (communityContribution && proposalAccepted)) {
               console.log('Adding comment to the issue...');
