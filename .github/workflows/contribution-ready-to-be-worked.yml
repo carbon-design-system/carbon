@@ -12,9 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     if:
       ${{ ( 
-        contains(github.event.label.name, format('needs{0} code contribution', ':')) && (!contains(github.event.issue.labels.*.name, format('needs{0} design contribution', ':')))
+        contains(github.event.label.name, format('needs{0} code contribution',':')) && (!contains(github.event.issue.labels.*.name, format('needs{0} design contribution',
+      ':')))
       ) || ( 
-        contains(github.event.label.name, format('needs{0} design contribution', ':')) && (!contains(github.event.issue.labels.*.name, format('needs{0} code contribution', ':')))
+        contains(github.event.label.name, format('needs{0} code contribution')) && (!contains(github.event.issue.labels.*.name,
+        format('needs{0} design contribution', ':')))
       )}}
     steps:
       - name: Log github event

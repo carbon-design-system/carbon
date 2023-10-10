@@ -8,26 +8,36 @@ permissions:
 
 jobs:
   add-comment:
-    name: Add comment to with proposal accepted and community contribution
+    name: Add comment to issues with proposal accepted and community contribution
     runs-on: ubuntu-latest
-    if:
-      ${{ ( contains(github.event.label.name, format('proposal{0} accepted',
-      ':')) && contains(github.event.issue.labels.*.name, format('community
-      contribution')) ) || ( contains(github.event.label.name, format('community
-      contribution')) && contains(github.event.issue.labels.*.name,
-      format('proposal{0} accepted', ':')) )}}
 
     steps:
       - name: Log github event
         env:
-          $GITHUB_CONTEXT_LABELS: ${{ toJson(github.event.label) }}
+          GITHUB_CONTEXT_LABELS: ${{ toJson(github.event.label) }}
         run: echo "$GITHUB_CONTEXT_LABELS"
-      - name: Add comment
-        uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410 #v6.4.1
-        with:
-          script: |
+
+      - name: Conditional Check and Add Comment
+        id: conditional-comment
+        run: |
+          const proposalAccepted = github.event.label.name.includes('proposal: accepted');
+          const communityContribution = github.event.issue.labels.map(label => label.name).includes('community contribution');
+
+          if ((proposalAccepted && communityContribution) || (communityContribution && proposalAccepted)) {
+            console.log('Adding comment to the issue...');
             github.rest.issues.createComment({
-              issue_number: context.issue.number,
+              issue_number: github.context.issue.number,
+              owner: github.context.repo.owner,
+              repo: github.context.repo.repo,
+              body: 'The Carbon team has accepted this proposal! Our team doesn’t have the capacity to work on this now, so we are requesting community contributors. Please see the labels for roles that are needed. If you are willing to help out, comment below and we will get in touch!'
+            });
+          } else {
+            console.log('No comment added because the conditions are not met.');
+          }
+
+      - name: Set Output
+        if: steps.conditional-comment.outcome == 'success'
+        run: echo "Comment added successfully."
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: 'The Carbon team has accepted this proposal! Our team doesn’t have the capacity to work on this now, so we are requesting community contributors. Please see the labels for roles that are needed. If you are willing to help out, comment below and we will get in touch!'
