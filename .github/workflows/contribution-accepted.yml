@@ -21,6 +21,7 @@ jobs:
         with:
           script: |
             const proposalAccepted = github.event.label.name.includes('proposal: accepted');
+            console.log(github.event)
             const communityContribution = github.event.issue.labels.map(label => label.name).includes('community contribution');
 
             if ((proposalAccepted && communityContribution) || (communityContribution && proposalAccepted)) {
