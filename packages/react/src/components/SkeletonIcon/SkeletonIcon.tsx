@@ -24,8 +24,7 @@ interface SkeletonIconProps {
 const SkeletonIcon: React.FC<SkeletonIconProps> = ({ className, ...other }) => {
   const prefix = usePrefix();
 
-  const skeletonIconClasses = classNames({
-    className,
+  const skeletonIconClasses = classNames(className, {
     [`${prefix}--icon--skeleton`]: true,
   });
 
