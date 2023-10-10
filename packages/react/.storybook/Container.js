@@ -25,8 +25,26 @@ function Container({ story, id }) {
     };
   }, []);
 
+  // Does not include LTS message in UIShell elements to avoid overlaying
+  const url = window.location.href.includes('ui-shell');
+
   return (
     <React.StrictMode>
+      {!url && (
+        <div
+          style={{
+            backgroundColor: 'black',
+            width: 'auto',
+            padding: '1rem',
+            margin: '-1rem -1rem 0px -1rem',
+          }}>
+          <p style={{ color: 'white' }}>
+            Carbon v10 is currently in maintenance mode, support is scheduled to
+            end on September 30, 2024.
+          </p>
+        </div>
+      )}
+
       <div
         className={id.toLowerCase()}
         data-floating-menu-container
