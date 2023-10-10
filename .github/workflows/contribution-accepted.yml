@@ -38,7 +38,3 @@ jobs:
       - name: Set Output
         if: steps.conditional-comment.outcome == 'success'
         run: echo "Comment added successfully."
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: 'The Carbon team has accepted this proposal! Our team doesn’t have the capacity to work on this now, so we are requesting community contributors. Please see the labels for roles that are needed. If you are willing to help out, comment below and we will get in touch!'
-            })
