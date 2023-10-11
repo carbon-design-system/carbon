@@ -42,7 +42,7 @@ function Container({ story, id }) {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            g1p: '2rem',
+            gap: '2rem',
           }}>
           <p style={{ color: 'white' }}>
             carbon-components-react@7.x is in maintenance mode, support is
