@@ -66,6 +66,7 @@ const TableSelectAll = ({
   const prefix = usePrefix();
   return (
     <th
+      aria-live="off"
       scope="col"
       className={cx(`${prefix}--table-column-checkbox`, className)}>
       <InlineCheckbox

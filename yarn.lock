@@ -2110,7 +2110,7 @@ __metadata:
   dependencies:
     "@carbon/icon-build-helpers": ^1.18.0
     "@carbon/icon-helpers": ^10.44.0
-    "@carbon/pictograms": ^12.23.0
+    "@carbon/pictograms": ^12.24.0-rc.0
     "@carbon/telemetry": 0.1.0
     prop-types: ^15.7.2
   peerDependencies:
@@ -2118,7 +2118,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/pictograms@^12.23.0, @carbon/pictograms@workspace:packages/pictograms":
+"@carbon/pictograms@^12.24.0-rc.0, @carbon/pictograms@workspace:packages/pictograms":
   version: 0.0.0-use.local
   resolution: "@carbon/pictograms@workspace:packages/pictograms"
   dependencies:
@@ -2127,7 +2127,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/react@^1.39.0, @carbon/react@workspace:packages/react":
+"@carbon/react@^1.40.0-rc.0, @carbon/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@carbon/react@workspace:packages/react"
   dependencies:
@@ -2143,7 +2143,7 @@ __metadata:
     "@carbon/feature-flags": ^0.16.0
     "@carbon/icons-react": ^11.28.0
     "@carbon/layout": ^11.19.0
-    "@carbon/styles": ^1.39.0
+    "@carbon/styles": ^1.40.0-rc.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.30.0
     "@carbon/themes": ^11.25.0
@@ -2156,6 +2156,7 @@ __metadata:
     "@storybook/addon-docs": ^7.1.0
     "@storybook/addon-essentials": ^7.1.0
     "@storybook/addon-knobs": ^7.0.2
+    "@storybook/addon-links": ^7.4.5
     "@storybook/addon-notes": ^5.3.21
     "@storybook/addon-storysource": ^7.1.0
     "@storybook/react": ^7.1.0
@@ -2172,7 +2173,7 @@ __metadata:
     clipboardy: ^2.1.0
     copy-to-clipboard: ^3.3.1
     css-loader: ^6.5.1
-    downshift: 8.2.0
+    downshift: 8.2.1
     enquirer: ^2.3.6
     fast-glob: ^3.2.7
     flatpickr: 4.6.9
@@ -2224,7 +2225,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@^1.39.0, @carbon/styles@workspace:packages/styles":
+"@carbon/styles@^1.40.0-rc.0, @carbon/styles@workspace:packages/styles":
   version: 0.0.0-use.local
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
@@ -2272,7 +2273,6 @@ __metadata:
     react-dom: ^18.2.0
     resolve: ^1.12.0
     sass: ^1.51.0
-    tabbable: ^4.0.0
   peerDependencies:
     react-dom: ^16.9.0 || ^17.0.1
   languageName: unknown
@@ -5809,6 +5809,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/addon-links@npm:^7.4.5":
+  version: 7.4.5
+  resolution: "@storybook/addon-links@npm:7.4.5"
+  dependencies:
+    "@storybook/client-logger": 7.4.5
+    "@storybook/core-events": 7.4.5
+    "@storybook/csf": ^0.1.0
+    "@storybook/global": ^5.0.0
+    "@storybook/manager-api": 7.4.5
+    "@storybook/preview-api": 7.4.5
+    "@storybook/router": 7.4.5
+    "@storybook/types": 7.4.5
+    prop-types: ^15.7.2
+    ts-dedent: ^2.0.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: c91f6eac61f661587ae40fec42646d7ce0697aab6a54ed98ed159a0299c8538d031cafaad3b5ad696a5204296d42cde035c87d8200dd4b7cfe285869df7e24e8
+  languageName: node
+  linkType: hard
+
 "@storybook/addon-measure@npm:7.1.0":
   version: 7.1.0
   resolution: "@storybook/addon-measure@npm:7.1.0"
@@ -6182,6 +6208,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/channels@npm:7.4.5":
+  version: 7.4.5
+  resolution: "@storybook/channels@npm:7.4.5"
+  dependencies:
+    "@storybook/client-logger": 7.4.5
+    "@storybook/core-events": 7.4.5
+    "@storybook/global": ^5.0.0
+    qs: ^6.10.0
+    telejson: ^7.2.0
+    tiny-invariant: ^1.3.1
+  checksum: a0781c6148940296191626bb16ea580d7406a435aa446ad1ba9eef9e8576ebd5b7247676b06a1e864d7b4fc616fc12f9cf38179a88ec55f537ca2d521bdcb592
+  languageName: node
+  linkType: hard
+
 "@storybook/cli@npm:7.1.0":
   version: 7.1.0
   resolution: "@storybook/cli@npm:7.1.0"
@@ -6266,6 +6306,15 @@ __metadata:
   dependencies:
     "@storybook/global": ^5.0.0
   checksum: 7b6a29b5019c199577a5a0374d6593d878c576e1b512f318881500abc561d19c97c674a05cc66aa78fc078925fcd2625dff3ae6d31bb4b6e2c1a311c612bf5f0
+  languageName: node
+  linkType: hard
+
+"@storybook/client-logger@npm:7.4.5":
+  version: 7.4.5
+  resolution: "@storybook/client-logger@npm:7.4.5"
+  dependencies:
+    "@storybook/global": ^5.0.0
+  checksum: 044ef572d858a575670cef88d86f1bc85c0ebc77b5cf89ff858f1651c931f90bb9009c11bb627e2e4827aaad28bedd069494727abd6dc622669cea73efe2085b
   languageName: node
   linkType: hard
 
@@ -6427,6 +6476,15 @@ __metadata:
   version: 7.1.0
   resolution: "@storybook/core-events@npm:7.1.0"
   checksum: a4bacb2d46191b98d00a37f0ee09311410e7c7c58f35953258c5b44235fa47b4cd3a360c0865732f2c8c6a1f442153733c036c94ef445c19bce6a21ffd9c5762
+  languageName: node
+  linkType: hard
+
+"@storybook/core-events@npm:7.4.5":
+  version: 7.4.5
+  resolution: "@storybook/core-events@npm:7.4.5"
+  dependencies:
+    ts-dedent: ^2.0.0
+  checksum: b13a5c415e63dcbd2edf569601b30f3f80f8d1c03440fe869371da88bb1f9fb87e3da18670b62aa4acb87bec21433e2dba112d93a8293ab798be3e11f850217e
   languageName: node
   linkType: hard
 
@@ -6601,6 +6659,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/manager-api@npm:7.4.5":
+  version: 7.4.5
+  resolution: "@storybook/manager-api@npm:7.4.5"
+  dependencies:
+    "@storybook/channels": 7.4.5
+    "@storybook/client-logger": 7.4.5
+    "@storybook/core-events": 7.4.5
+    "@storybook/csf": ^0.1.0
+    "@storybook/global": ^5.0.0
+    "@storybook/router": 7.4.5
+    "@storybook/theming": 7.4.5
+    "@storybook/types": 7.4.5
+    dequal: ^2.0.2
+    lodash: ^4.17.21
+    memoizerific: ^1.11.3
+    semver: ^7.3.7
+    store2: ^2.14.2
+    telejson: ^7.2.0
+    ts-dedent: ^2.0.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 5b324ea7bcde44defa4a97e18ca8bd48257d9637a2a277f9f07b7f513392fe7e27502dc4677b2806352779668384d174b316ddaad4a757d6eddaaf4a2ef4e2ca
+  languageName: node
+  linkType: hard
+
 "@storybook/manager@npm:7.1.0":
   version: 7.1.0
   resolution: "@storybook/manager@npm:7.1.0"
@@ -6682,6 +6766,28 @@ __metadata:
     ts-dedent: ^2.0.0
     util-deprecate: ^1.0.2
   checksum: 43682ead532bcf3ad4c0a79c8beeb9b13fb213b5a93b8f4130bd80a0ba7fb8aee48f28a978b7bb99cfe7843fa0e78b9a69c4d21b855ec7cf0e3a6b938f79b7da
+  languageName: node
+  linkType: hard
+
+"@storybook/preview-api@npm:7.4.5":
+  version: 7.4.5
+  resolution: "@storybook/preview-api@npm:7.4.5"
+  dependencies:
+    "@storybook/channels": 7.4.5
+    "@storybook/client-logger": 7.4.5
+    "@storybook/core-events": 7.4.5
+    "@storybook/csf": ^0.1.0
+    "@storybook/global": ^5.0.0
+    "@storybook/types": 7.4.5
+    "@types/qs": ^6.9.5
+    dequal: ^2.0.2
+    lodash: ^4.17.21
+    memoizerific: ^1.11.3
+    qs: ^6.10.0
+    synchronous-promise: ^2.0.15
+    ts-dedent: ^2.0.0
+    util-deprecate: ^1.0.2
+  checksum: c664fd9e961d8826d6321882622f8b79288e93b781dc3f9e4024c8f0189e231e571c823aff0c4c09602c700dc6ac233b04578783b85baef98ede060474b1ec40
   languageName: node
   linkType: hard
 
@@ -6812,6 +6918,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/router@npm:7.4.5":
+  version: 7.4.5
+  resolution: "@storybook/router@npm:7.4.5"
+  dependencies:
+    "@storybook/client-logger": 7.4.5
+    memoizerific: ^1.11.3
+    qs: ^6.10.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: bbbbc0b4e39fe07c5ec9cdb7153ac177361b08131b027e3e7e6f5d0911f7f5323e25b0835c6e85204b66de598b038058612f4888f441fd8b9ff8935a987391ba
+  languageName: node
+  linkType: hard
+
 "@storybook/source-loader@npm:7.1.0":
   version: 7.1.0
   resolution: "@storybook/source-loader@npm:7.1.0"
@@ -6900,7 +7020,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/theming@npm:7.1.0, @storybook/theming@npm:^7.1.0":
+"@storybook/theming@npm:7.1.0":
   version: 7.1.0
   resolution: "@storybook/theming@npm:7.1.0"
   dependencies:
@@ -6915,6 +7035,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/theming@npm:7.4.5, @storybook/theming@npm:^7.1.0":
+  version: 7.4.5
+  resolution: "@storybook/theming@npm:7.4.5"
+  dependencies:
+    "@emotion/use-insertion-effect-with-fallbacks": ^1.0.0
+    "@storybook/client-logger": 7.4.5
+    "@storybook/global": ^5.0.0
+    memoizerific: ^1.11.3
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: e2cfacbec35e11fcc7d0b66b85044abbde9d0f97e3150729c480a6b33bf4739ca46f501e6356cf9c961ba6268c0750a6da46bb97d857b1e35f3b123b1b22c9e8
+  languageName: node
+  linkType: hard
+
 "@storybook/types@npm:7.1.0":
   version: 7.1.0
   resolution: "@storybook/types@npm:7.1.0"
@@ -6924,6 +7059,18 @@ __metadata:
     "@types/express": ^4.7.0
     file-system-cache: 2.3.0
   checksum: 5b05a27171ac2245e8e5ff056d6c4d05d23be001ab655e21cfc3bd4568d123b6e72954d626bcce6d3be7adeb3f8346a846a5bc974e4273f6b077fc2d786a856e
+  languageName: node
+  linkType: hard
+
+"@storybook/types@npm:7.4.5":
+  version: 7.4.5
+  resolution: "@storybook/types@npm:7.4.5"
+  dependencies:
+    "@storybook/channels": 7.4.5
+    "@types/babel__core": ^7.0.0
+    "@types/express": ^4.7.0
+    file-system-cache: 2.3.0
+  checksum: 4739a619bfa74484011574ba3ddfd43fd6b587a35cc2d4c0e24bc5ab5b6202269806ce354be1e2549ee7a19dcc334c439c70a3614d7514ab73ac7588d262e3b3
   languageName: node
   linkType: hard
 
@@ -10623,8 +10770,8 @@ __metadata:
     "@babel/plugin-transform-react-constant-elements": ^7.17.12
     "@babel/preset-env": ^7.18.2
     "@babel/preset-react": ^7.17.12
-    "@carbon/react": ^1.39.0
-    "@carbon/styles": ^1.39.0
+    "@carbon/react": ^1.40.0-rc.0
+    "@carbon/styles": ^1.40.0-rc.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.30.0
     "@rollup/plugin-babel": ^6.0.0
@@ -10663,7 +10810,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/carbon-components"
   dependencies:
-    "@carbon/styles": ^1.39.0
+    "@carbon/styles": ^1.40.0-rc.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.30.0
     chalk: 1.1.3
@@ -11027,7 +11174,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "class-prefix@workspace:examples/class-prefix"
   dependencies:
-    "@carbon/react": ^1.39.0
+    "@carbon/react": ^1.40.0-rc.0
     "@vitejs/plugin-react": 4.0.0
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -11349,7 +11496,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox-styles@workspace:examples/codesandbox-styles"
   dependencies:
-    "@carbon/styles": ^1.39.0
+    "@carbon/styles": ^1.40.0-rc.0
     sass: ^1.51.0
     vite: ^4.3.8
   languageName: unknown
@@ -11359,7 +11506,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox-with-sass-compilation@workspace:examples/codesandbox-with-sass-compilation"
   dependencies:
-    "@carbon/react": ^1.39.0
+    "@carbon/react": ^1.40.0-rc.0
     react: ^18.2.0
     react-dom: ^18.2.0
     react-scripts: 5.0.0
@@ -11371,7 +11518,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox@workspace:examples/codesandbox"
   dependencies:
-    "@carbon/react": ^1.39.0
+    "@carbon/react": ^1.40.0-rc.0
     react: ^18.2.0
     react-dom: ^18.2.0
     react-scripts: 5.0.0
@@ -12590,7 +12737,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "custom-theme@workspace:examples/custom-theme"
   dependencies:
-    "@carbon/react": ^1.39.0
+    "@carbon/react": ^1.40.0-rc.0
     "@vitejs/plugin-react": 4.0.0
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -13519,9 +13666,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"downshift@npm:8.2.0":
-  version: 8.2.0
-  resolution: "downshift@npm:8.2.0"
+"downshift@npm:8.2.1":
+  version: 8.2.1
+  resolution: "downshift@npm:8.2.1"
   dependencies:
     "@babel/runtime": ^7.22.15
     compute-scroll-into-view: ^3.0.3
@@ -13530,7 +13677,7 @@ __metadata:
     tslib: ^2.6.2
   peerDependencies:
     react: ">=16.12.0"
-  checksum: 3bc832dcf604cfda13561afa55a7d9dfb8fca1c33b7083ac3df4b2be6a13360a3c6b594b8f3af35e886d22c8e494d4a8b93f83ab50cf494ca55652bc981e0906
+  checksum: f6cf5e18d7958ea924bda0b13b46045cbd64a419e4e3079460e6edce8a25b0d99972b0ff607971016a09568cb46dfd53c924a2c86be8f4a5825ef2f2d703f0da
   languageName: node
   linkType: hard
 
@@ -14917,7 +15064,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples-light-dark@workspace:examples/light-dark-mode"
   dependencies:
-    "@carbon/react": ^1.39.0
+    "@carbon/react": ^1.40.0-rc.0
     eslint: 8.40.0
     next: 12.1.4
     react: 18.2.0
@@ -14930,7 +15077,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples-nextjs@workspace:examples/nextjs"
   dependencies:
-    "@carbon/react": ^1.39.0
+    "@carbon/react": ^1.40.0-rc.0
     eslint: 8.40.0
     eslint-config-next: 13.4.7
     next: 13.4.7
@@ -17289,7 +17436,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "id-prefix@workspace:examples/id-prefix"
   dependencies:
-    "@carbon/react": ^1.39.0
+    "@carbon/react": ^1.40.0-rc.0
     "@vitejs/plugin-react": 4.0.0
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -17426,7 +17573,7 @@ __metadata:
   resolution: "incremental-migration-vite@workspace:examples/incremental-migration-vite"
   dependencies:
     "@carbon/icons-react": ^10.49.0
-    "@carbon/react": ^1.39.0
+    "@carbon/react": ^1.40.0-rc.0
     "@vitejs/plugin-react": 4.0.0
     carbon-components: ^10.57.0
     carbon-components-react: ^7.57.0
@@ -25607,13 +25754,13 @@ __metadata:
   linkType: hard
 
 "postcss@npm:^8.3.11, postcss@npm:^8.3.5, postcss@npm:^8.4.14, postcss@npm:^8.4.16, postcss@npm:^8.4.21, postcss@npm:^8.4.23, postcss@npm:^8.4.24, postcss@npm:^8.4.4, postcss@npm:^8.4.5, postcss@npm:^8.4.6":
-  version: 8.4.29
-  resolution: "postcss@npm:8.4.29"
+  version: 8.4.31
+  resolution: "postcss@npm:8.4.31"
   dependencies:
     nanoid: ^3.3.6
     picocolors: ^1.0.0
     source-map-js: ^1.0.2
-  checksum: dd6daa25e781db9ae5b651d9b7bfde0ec6e60e86a37da69a18eb4773d5ddd51e28fc4ff054fbdc04636a31462e6bf09a1e50986f69ac52b10d46b7457cd36d12
+  checksum: 1d8611341b073143ad90486fcdfeab49edd243377b1f51834dc4f6d028e82ce5190e4f11bb2633276864503654fb7cab28e67abdc0fbf9d1f88cad4a0ff0beea
   languageName: node
   linkType: hard
 
@@ -29727,13 +29874,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tabbable@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "tabbable@npm:4.0.0"
-  checksum: cbe1acbdabbe0744ae0088cf5133c3c36a9ebca0b670e00c1e117afaeb209d4f141368811973337b914ad1486a3b71a1ed781b698496cb4844e1804cb062baa9
-  languageName: node
-  linkType: hard
-
 "table@npm:^6.8.1":
   version: 6.8.1
   resolution: "table@npm:6.8.1"
@@ -29875,12 +30015,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"telejson@npm:^7.0.3":
-  version: 7.1.0
-  resolution: "telejson@npm:7.1.0"
+"telejson@npm:^7.0.3, telejson@npm:^7.2.0":
+  version: 7.2.0
+  resolution: "telejson@npm:7.2.0"
   dependencies:
     memoizerific: ^1.11.3
-  checksum: 8000e43dc862a87ab1ca342a2635641923d55c2585f85ea8c7c60293681d6f920e8b9570cc12d90ecef286f065c176da5f769f42f4828ba18a626627bed1ac07
+  checksum: 55a3380c9ff3c5ad84581bb6bda28fc33c6b7c4a0c466894637da687639b8db0d21b0ff4c1bc1a7a92ae6b70662549d09e7b9e8b1ec334b2ef93078762ecdfb9
   languageName: node
   linkType: hard
 
@@ -31380,7 +31520,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "v10-token-compat-in-v11@workspace:examples/v10-token-compat-in-v11"
   dependencies:
-    "@carbon/react": ^1.39.0
+    "@carbon/react": ^1.40.0-rc.0
     "@vitejs/plugin-react": 4.0.0
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -31684,7 +31824,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "vite@workspace:examples/vite"
   dependencies:
-    "@carbon/react": ^1.39.0
+    "@carbon/react": ^1.40.0-rc.0
     "@vitejs/plugin-react": 4.0.0
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -32608,7 +32748,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "www@workspace:www"
   dependencies:
-    "@carbon/react": ^1.39.0
+    "@carbon/react": ^1.40.0-rc.0
     "@octokit/core": ^4.0.0
     "@octokit/plugin-retry": ^3.0.9
     "@octokit/plugin-throttling": ^4.0.0

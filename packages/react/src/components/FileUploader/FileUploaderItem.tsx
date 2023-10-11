@@ -102,7 +102,7 @@ function FileUploaderItem({
   };
 
   useLayoutEffect(() => {
-    const element = document.querySelector(`.${prefix}--file-filename`);
+    const element = document.querySelector(`[title="${name}"]`);
     isEllipsisActive(element);
   }, [prefix, name]);
 
