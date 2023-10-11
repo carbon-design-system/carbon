@@ -38,7 +38,7 @@ jobs:
 
             console.log('what is our comments array', commentsArray)
 
-            if ((labelArray.includes('proposal: accepted') && labelArray.includes('needs: community contribution')) {
+            if (labelArray.includes('proposal: accepted') && labelArray.includes('needs: community contribution')) {
               github.rest.issues.createComment({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
