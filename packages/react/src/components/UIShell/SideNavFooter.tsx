@@ -12,6 +12,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
 
+export interface SideNavFooterProps {
+  assistiveText: string;
+  className?: string;
+  expanded: boolean;
+  onToggle: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
 /**
  * SideNavFooter is used for rendering the button at the bottom of the side
  * navigation that is a part of the UI Shell. It is responsible for handling the
@@ -22,7 +29,7 @@ function SideNavFooter({
   className: customClassName,
   expanded,
   onToggle,
-}) {
+}: SideNavFooterProps) {
   const prefix = usePrefix();
   const className = cx(`${prefix}--side-nav__footer`, customClassName);
   return (
