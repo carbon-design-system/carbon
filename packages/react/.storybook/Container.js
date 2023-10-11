@@ -44,8 +44,8 @@ function Container({ story, id }) {
             fontSize: '1rem',
           }}>
           <p style={{ color: 'white' }}>
-            carbon-components-react {`v${PackageInfo.version}`} is in
-            maintenance mode, support is scheduled to end on September 30, 2024.
+            carbon-components-react@7.x is in maintenance mode, support is
+            scheduled to end on September 30, 2024.
           </p>
           <a
             href="https://github.com/carbon-design-system/carbon/blob/main/docs/release-schedule.md"
