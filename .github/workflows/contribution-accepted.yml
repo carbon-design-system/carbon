@@ -30,9 +30,12 @@ jobs:
 
             if ((labelArray.includes('proposal: accepted') && labelArray.includes('needs: community contribution')) || (labelArray.includes('needs: community contribution') && labelArray.includes('proposal: accepted'))) {
               console.log('continue here');
-              await github.rest.issues.createComment({ ...params, 
-                body: 'The Carbon team has accepted this proposal! Our team doesn't have the capacity to work on this now, so we are requesting community contributors. Please see the labels for roles that are needed. If you are willing to help out, comment below and we will get in touch!'
-              });
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: '👋 Thanks for reporting!'
+              })
             } else {
               console.log('No comment added because the conditions are not met.');
             }
