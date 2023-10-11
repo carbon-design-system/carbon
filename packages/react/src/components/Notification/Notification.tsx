@@ -35,6 +35,7 @@ import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildre
 import { keys, matches } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
+import wrapFocus from '../../internal/wrapFocus';
 
 /**
  * Conditionally call a callback when the escape key is pressed
@@ -946,13 +947,34 @@ export function ActionableNotification({
     [`${prefix}--actionable-notification--${kind}`]: kind,
     [`${prefix}--actionable-notification--hide-close-button`]: hideCloseButton,
   });
-
+  const innerModal = useRef<any>();
+  const startTrap = useRef<any>();
+  const endTrap = useRef<any>();
   const ref = useRef<HTMLDivElement>(null);
+
   useIsomorphicEffect(() => {
     if (ref.current && hasFocus) {
       ref.current.focus();
     }
   });
+
+  function handleBlur({
+    target: oldActiveNode,
+    relatedTarget: currentActiveNode,
+  }) {
+    if (isOpen && currentActiveNode && oldActiveNode) {
+      const { current: bodyNode } = innerModal;
+      const { current: startTrapNode } = startTrap;
+      const { current: endTrapNode } = endTrap;
+      wrapFocus({
+        bodyNode,
+        startTrapNode,
+        endTrapNode,
+        currentActiveNode,
+        oldActiveNode,
+      });
+    }
+  }
 
   const handleClose = (evt: MouseEvent) => {
     if (!onClose || onClose(evt) !== false) {
@@ -976,7 +998,17 @@ export function ActionableNotification({
       ref={ref}
       role={role}
       className={containerClassName}
-      aria-labelledby={title ? id : subtitleId}>
+      aria-labelledby={title ? id : subtitleId}
+      onBlur={handleBlur}
+      tabIndex={hasFocus ? 0 : -1}>
+      <span
+        ref={startTrap}
+        tabIndex={0}
+        role="link"
+        className={`${prefix}--visually-hidden`}>
+        Focus sentinel
+      </span>
+
       <div className={`${prefix}--actionable-notification__details`}>
         <NotificationIcon
           notificationType={inline ? 'inline' : 'toast'}
@@ -1003,20 +1035,30 @@ export function ActionableNotification({
           </div>
         </div>
       </div>
+      <div ref={innerModal} tabIndex={-1}>
+        {actionButtonLabel && (
+          <NotificationActionButton
+            onClick={onActionButtonClick}
+            inline={inline}>
+            {actionButtonLabel}
+          </NotificationActionButton>
+        )}
 
-      {actionButtonLabel && (
-        <NotificationActionButton onClick={onActionButtonClick} inline={inline}>
-          {actionButtonLabel}
-        </NotificationActionButton>
-      )}
-
-      {!hideCloseButton && (
-        <NotificationButton
-          aria-label={deprecatedAriaLabel || ariaLabel}
-          notificationType="actionable"
-          onClick={handleCloseButtonClick}
-        />
-      )}
+        {!hideCloseButton && (
+          <NotificationButton
+            aria-label={deprecatedAriaLabel || ariaLabel}
+            notificationType="actionable"
+            onClick={handleCloseButtonClick}
+          />
+        )}
+      </div>
+      <span
+        ref={endTrap}
+        tabIndex={0}
+        role="link"
+        className={`${prefix}--visually-hidden`}>
+        Focus sentinel
+      </span>
     </div>
   );
 }

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { ActionableNotification } from '../../Notification';
 import { action } from '@storybook/addon-actions';
 import mdx from '../Notification.mdx';
@@ -39,6 +39,27 @@ export const Default = () => (
     actionButtonLabel="Action"
   />
 );
+
+export const TestFocus = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <button type="button" onClick={() => setOpen(true)}>
+        Focus notification
+      </button>
+      {open && (
+        <ActionableNotification
+          title="Notification title"
+          subtitle="Subtitle text goes here"
+          closeOnEscape
+          inline={false}
+          actionButtonLabel="Action"
+        />
+      )}
+    </>
+  );
+};
 
 export const Playground = (args) => <ActionableNotification {...args} />;
 
