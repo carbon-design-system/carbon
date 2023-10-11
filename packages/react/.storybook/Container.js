@@ -35,19 +35,21 @@ function Container({ story, id }) {
         <div
           style={{
             backgroundColor: 'black',
+            fontSize: '1rem',
             width: 'auto',
             padding: '1rem',
             margin: '-1rem -1rem 0px -1rem',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            fontSize: '1rem',
+            g1p: '2rem',
           }}>
           <p style={{ color: 'white' }}>
             carbon-components-react@7.x is in maintenance mode, support is
             scheduled to end on September 30, 2024.
           </p>
           <a
+            style={{ textDecoration: 'none' }}
             href="https://github.com/carbon-design-system/carbon/blob/main/docs/release-schedule.md"
             target="_blank">
             Release schedule
