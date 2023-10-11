@@ -57,20 +57,18 @@ SideNavItems.displayName = 'SideNavItems';
 
 SideNavItems.propTypes = {
   /**
-//    * Provide a single icon as the child to `SideNavIcon` to render in the
-//    * container
-//    */
+   * Provide a single icon as the child to `SideNavIcon` to render in the
+   * container
+   */
   children: PropTypes.node.isRequired,
-  //
-  //   /**
-  //    * Provide an optional class to be applied to the containing node
-  //    */
+  /**
+   * Provide an optional class to be applied to the containing node
+   */
   className: PropTypes.string,
-
-  //   /**
-  //    * Property to indicate if the side nav container is open (or not). Use to
-  //    * keep local state and styling in step with the SideNav expansion state.
-  //    */
+  /**
+   * Property to indicate if the side nav container is open (or not). Use to
+   * keep local state and styling in step with the SideNav expansion state.
+   */
   isSideNavExpanded: PropTypes.bool,
 };
 
