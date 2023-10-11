@@ -28,10 +28,13 @@ jobs:
 
             const labelArray = response.data.map((label) => label.name)
 
-            console.log('label array here', labelArray)
+             const labelArray = response.data.map((label) => label.name)
 
-            if ((labelArray.includes('proposal: accepted') && labelArray.includes('needs: community contribution')) || (labelArray.includes('needs: community contribution') && labelArray.includes('proposal: accepted'))) {
-              console.log('we are adding a comment to the issue...');
+            if ((labelArray.includes('proposal: accepted') && labelArray.includes('community contribution')) || (labelArray.includes('community contribution') && labelArray.includes('proposal: accepted'))) {
+              console.log(typing comment)
+              await github.rest.issues.createComment({ ...params, 
+                body: 'The Carbon team has accepted this proposal! Our team doesn't have the capacity to work on this now, so we are requesting community contributors. Please see the labels for roles that are needed. If you are willing to help out, comment below and we will get in touch!'
+              });
             } else {
               console.log('No comment added because the conditions are not met.');
             }
