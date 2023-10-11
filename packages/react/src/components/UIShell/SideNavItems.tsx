@@ -16,11 +16,13 @@ interface SideNavItemsProps {
    * Provide an optional class to be applied to the containing node
    */
   className?: string;
+  
   /**
    * Provide a single icon as the child to `SideNavIcon` to render in the
    * container, and it is required
    */
   children: React.ReactNode;
+  
   /**
    * Property to indicate if the side nav container is open (or not). Use to
    * keep local state and styling in step with the SideNav expansion state.
@@ -61,10 +63,12 @@ SideNavItems.propTypes = {
    * container
    */
   children: PropTypes.node.isRequired,
+  
   /**
    * Provide an optional class to be applied to the containing node
    */
   className: PropTypes.string,
+  
   /**
    * Property to indicate if the side nav container is open (or not). Use to
    * keep local state and styling in step with the SideNav expansion state.
