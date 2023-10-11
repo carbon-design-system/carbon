@@ -11,7 +11,26 @@ import React from 'react';
 import { CARBON_SIDENAV_ITEMS } from './_utils';
 import { usePrefix } from '../../internal/usePrefix';
 
-const SideNavItems = ({
+interface SideNavItemsProps {
+  /**
+   * Provide an optional class to be applied to the containing node
+   */
+  className?: string;
+
+  /**
+   * Provide a single icon as the child to `SideNavIcon` to render in the
+   * container, and it is required
+   */
+  children: React.ReactNode;
+
+  /**
+   * Property to indicate if the side nav container is open (or not). Use to
+   * keep local state and styling in step with the SideNav expansion state.
+   */
+  isSideNavExpanded?: boolean;
+}
+
+const SideNavItems: React.FC<SideNavItemsProps> = ({
   className: customClassName,
   children,
   isSideNavExpanded,
@@ -19,21 +38,25 @@ const SideNavItems = ({
   const prefix = usePrefix();
   const className = cx([`${prefix}--side-nav__items`], customClassName);
   const childrenWithExpandedState = React.Children.map(children, (child) => {
+    // avoid spreading `isSideNavExpanded` to non-Carbon UI Shell children
     if (React.isValidElement(child)) {
-      // avoid spreading `isSideNavExpanded` to non-Carbon UI Shell children
-      return React.cloneElement(child, {
-        ...(CARBON_SIDENAV_ITEMS.includes(child.type?.displayName)
-          ? {
-              isSideNavExpanded,
-            }
-          : {}),
-      });
+      const childType = child.type as React.ComponentType<any>;
+      if (childType && childType.displayName) {
+        return React.cloneElement(child, {
+          ...(CARBON_SIDENAV_ITEMS.includes(childType.displayName)
+            ? {
+                isSideNavExpanded,
+              }
+            : {}),
+        });
+      }
     }
   });
   return <ul className={className}>{childrenWithExpandedState}</ul>;
 };
 
 SideNavItems.displayName = 'SideNavItems';
+
 SideNavItems.propTypes = {
   /**
    * Provide a single icon as the child to `SideNavIcon` to render in the
