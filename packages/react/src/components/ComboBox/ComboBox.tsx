@@ -600,6 +600,19 @@ const ComboBox = forwardRef(
                   event.target.value.length
                 );
               }
+
+              if (event.altKey && event.key == 'ArrowDown') {
+                event.preventDownshiftDefault = true;
+                if (!isOpen) {
+                  toggleMenu();
+                }
+              }
+              if (event.altKey && event.key == 'ArrowUp') {
+                event.preventDownshiftDefault = true;
+                if (isOpen) {
+                  toggleMenu();
+                }
+              }
             },
           });
 
