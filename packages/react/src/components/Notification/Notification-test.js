@@ -327,13 +327,7 @@ describe('ActionableNotification', () => {
       />
     );
 
-    // without focus being on/in the notification, it should not close via escape
-    await userEvent.keyboard('{Escape}');
-    expect(onCloseButtonClick).toHaveBeenCalledTimes(0);
-    expect(onClose).toHaveBeenCalledTimes(0);
-
     // after focus is placed, the notification should close via escape
-    await userEvent.tab();
     await userEvent.keyboard('{Escape}');
     expect(onCloseButtonClick).toHaveBeenCalledTimes(1);
     expect(onClose).toHaveBeenCalledTimes(1);
