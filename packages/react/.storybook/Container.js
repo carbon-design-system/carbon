@@ -7,7 +7,7 @@
 
 import './styles.scss';
 import './polyfills';
-import PackageInfo from './../package.json';
+// import ArrowRight from '../../icons/src/svg/32/arrow--down-right.svg';
 
 import React, { useEffect } from 'react';
 
@@ -34,8 +34,7 @@ function Container({ story, id }) {
       {!url && (
         <div
           style={{
-            backgroundColor: 'black',
-            fontSize: '1rem',
+            backgroundColor: '#0043CE',
             width: 'auto',
             padding: '1rem',
             margin: '-1rem -1rem 0px -1rem',
@@ -44,12 +43,14 @@ function Container({ story, id }) {
             alignItems: 'center',
             gap: '2rem',
           }}>
-          <p style={{ color: 'white' }}>
+          <p
+            style={{ color: 'white', fontWeight: 'bold', fontSize: '.875rem' }}>
             carbon-components-react@7.x is in maintenance mode, support is
             scheduled to end on September 30, 2024.
+            <span style={{ fontWeight: '400' }}> Start using v11 now!</span>
           </p>
           <a
-            style={{ textDecoration: 'none' }}
+            style={{ textDecoration: 'none', color: 'white' }}
             href="https://github.com/carbon-design-system/carbon/blob/main/docs/release-schedule.md"
             target="_blank">
             Release schedule
