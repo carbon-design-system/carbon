@@ -7,7 +7,6 @@
 
 import './styles.scss';
 import './polyfills';
-// import ArrowRight from '../../icons/src/svg/32/arrow--down-right.svg';
 
 import React, { useEffect } from 'react';
 
