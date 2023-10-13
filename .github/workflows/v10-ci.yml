@@ -15,10 +15,10 @@ jobs:
     steps:
       - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 #v4.1.0
 
-      - name: Use Node.js 18.x
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '20.x'
       - name: Run yarn dedupe
         run: yarn dedupe --check
 
@@ -28,10 +28,10 @@ jobs:
       - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 #v4.1.0
         with:
           ref: v10
-      - name: Use Node.js 18.x
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '20.x'
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Check formatting of project files
@@ -43,10 +43,10 @@ jobs:
       - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 #v4.1.0
         with:
           ref: v10
-      - name: Use Node.js 18.x
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '20.x'
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Lint JavaScript files
@@ -60,10 +60,10 @@ jobs:
       - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 #v4.1.0
         with:
           ref: v10
-      - name: Use Node.js 18.x
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '20.x'
       - uses: actions/cache@v3
         id: cache
         with:
@@ -88,10 +88,10 @@ jobs:
       - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 #v4.1.0
         with:
           ref: v10
-      - name: Use Node.js 18.x
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '20.x'
       - uses: actions/cache@v3
         id: cache
         with:
