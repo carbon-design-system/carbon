@@ -7,9 +7,9 @@
 
 'use strict';
 
-const { test } = require('@playwright/test');
-const { themes } = require('../../test-utils/env');
-const { snapshotStory } = require('../../test-utils/storybook');
+import { test } from '@playwright/test';
+import { themes } from '../../test-utils/env';
+import { snapshotStory } from '../../test-utils/storybook';
 
 test.describe('TimePicker', () => {
   themes.forEach((theme) => {
