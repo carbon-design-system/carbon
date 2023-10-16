@@ -212,20 +212,12 @@
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
     padding-right: $carbon--spacing-08;
     padding-bottom: to-rem(24px);
-    overflow-x: auto;
   }
 
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--no-copy
     .#{$prefix}--snippet-container
     pre {
     padding-right: 0;
-  }
-
-  // expanded pre
-  .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
-    .#{$prefix}--snippet-container
-    pre {
-    overflow-x: auto;
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre::after {
