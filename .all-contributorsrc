@@ -1268,6 +1268,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "amanlajpal",
+      "name": "Aman Lajpal",
+      "avatar_url": "https://avatars.githubusercontent.com/u/42869088?v=4",
+      "profile": "https://github.com/amanlajpal",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "commitConvention": "none"
