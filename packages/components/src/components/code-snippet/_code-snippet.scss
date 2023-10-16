@@ -220,17 +220,6 @@
     padding-right: 0;
   }
 
-  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre::after {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: to-rem(16px);
-    height: 100%;
-    // Safari interprets `transparent` differently, so make color token value transparent instead:
-    background-image: linear-gradient(to right, rgba($field-01, 0), $field-01);
-    content: '';
-  }
-
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre code {
     overflow: hidden;
   }
