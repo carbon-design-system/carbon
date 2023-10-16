@@ -57,29 +57,33 @@ test.describe('Accordion @avt', () => {
       },
     });
 
-    const accordin_btn1 = page.getByRole('button', { name: 'Section 1 title' });
-    const accordin_btn2 = page.getByRole('button', { name: 'Section 2 title' });
+    const accordion_btn1 = page.getByRole('button', {
+      name: 'Section 1 title',
+    });
+    const accordion_btn2 = page.getByRole('button', {
+      name: 'Section 2 title',
+    });
 
-    await expect(accordin_btn1).toBeVisible();
+    await expect(accordion_btn1).toBeVisible();
     await page.keyboard.press('Tab');
 
     // Check the focus on Accordion 1
-    await expect(accordin_btn1).toBeFocused();
+    await expect(accordion_btn1).toBeFocused();
     await page.keyboard.press('Enter');
 
     // Open the Accordion 1
-    await expect(accordin_btn1).toHaveAttribute('aria-expanded', 'true');
+    await expect(accordion_btn1).toHaveAttribute('aria-expanded', 'true');
     await page.keyboard.press('Enter');
-    await expect(accordin_btn1).toHaveAttribute('aria-expanded', 'false');
+    await expect(accordion_btn1).toHaveAttribute('aria-expanded', 'false');
 
     await page.keyboard.press('Tab');
 
     // Check the focus and open state on Accordion 2
-    await expect(accordin_btn2).toBeFocused();
+    await expect(accordion_btn2).toBeFocused();
     await page.keyboard.press('Space');
-    await expect(accordin_btn2).toHaveAttribute('aria-expanded', 'true');
+    await expect(accordion_btn2).toHaveAttribute('aria-expanded', 'true');
     await page.keyboard.press('Escape');
-    await expect(accordin_btn2).toHaveAttribute('aria-expanded', 'false');
+    await expect(accordion_btn2).toHaveAttribute('aria-expanded', 'false');
   });
 
   test('@avt-advanced-states mouse click', async ({ page }) => {
@@ -90,16 +94,18 @@ test.describe('Accordion @avt', () => {
         theme: 'white',
       },
     });
-    const accordin_btn1 = page.getByRole('button', { name: 'Section 1 title' });
-    await accordin_btn1.click();
-    await expect(accordin_btn1).toHaveAttribute('aria-expanded', 'true');
+    const accordion_btn1 = page.getByRole('button', {
+      name: 'Section 1 title',
+    });
+    await accordion_btn1.click();
+    await expect(accordion_btn1).toHaveAttribute('aria-expanded', 'true');
 
     // Checking for ACViolation
     await expect(page).toHaveNoACViolations(
       'Accordion @avt-advanced-states mouse click'
     );
-    await accordin_btn1.click();
-    await expect(accordin_btn1).toHaveAttribute('aria-expanded', 'false');
+    await accordion_btn1.click();
+    await expect(accordion_btn1).toHaveAttribute('aria-expanded', 'false');
   });
 
   test('@avt-advanced-states mouse hover', async ({ page }) => {
@@ -110,8 +116,10 @@ test.describe('Accordion @avt', () => {
         theme: 'white',
       },
     });
-    const accordin_btn1 = page.getByRole('button', { name: 'Section 1 title' });
-    await accordin_btn1.hover();
+    const accordion_btn1 = page.getByRole('button', {
+      name: 'Section 1 title',
+    });
+    await accordion_btn1.hover();
     await expect(page).toHaveNoACViolations(
       'Accordion @avt-advanced-states mouse hover'
     );
@@ -128,8 +136,10 @@ test.describe('Accordion @avt', () => {
         disabled: true,
       },
     });
-    const accordin_btn1 = page.getByRole('button', { name: 'Section 1 title' });
-    await expect(accordin_btn1).toBeDisabled();
+    const accordion_btn1 = page.getByRole('button', {
+      name: 'Section 1 title',
+    });
+    await expect(accordion_btn1).toBeDisabled();
     await expect(page).toHaveNoACViolations(
       'Accordion @avt-advanced-states disabled'
     );

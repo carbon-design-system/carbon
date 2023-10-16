@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('StructuredList @avt', () => {
-  test('accessibility-checker', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'StructuredList',
       id: 'components-structuredlist--default',
@@ -22,7 +22,7 @@ test.describe('StructuredList @avt', () => {
     await expect(page).toHaveNoACViolations('StructuredList');
   });
 
-  test('accessibility-checker selection', async ({ page }) => {
+  test('@avt-advanced-states selection', async ({ page }) => {
     await visitStory(page, {
       component: 'StructuredList',
       id: 'components-structuredlist--selection',
@@ -33,7 +33,7 @@ test.describe('StructuredList @avt', () => {
     await expect(page).toHaveNoACViolations('StructuredList-selection');
   });
 
-  test('accessibility-checker skeleton', async ({ page }) => {
+  test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'StructuredList',
       id: 'components-structuredlist--skeleton',
@@ -44,7 +44,7 @@ test.describe('StructuredList @avt', () => {
     await expect(page).toHaveNoACViolations('StructuredList-skeleton');
   });
 
-  test('accessibility-checker keyboard nav', async ({ page }) => {
+  test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'StructuredList',
       id: 'components-structuredlist--selection',
@@ -67,7 +67,7 @@ test.describe('StructuredList @avt', () => {
     await expect(page).toHaveNoACViolations('StructuredList-keyboardnav');
   });
 
-  test('accessibility-checker mouse interaction', async ({ page }) => {
+  test('@avt-keyboard-nav mouse interaction', async ({ page }) => {
     await visitStory(page, {
       component: 'StructuredList',
       id: 'components-structuredlist--selection',

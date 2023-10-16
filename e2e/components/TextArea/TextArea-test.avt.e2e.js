@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('TextArea @avt', () => {
-  test('accessibility-checker TextArea', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'TextArea',
       id: 'components-textarea--default',
@@ -22,7 +22,7 @@ test.describe('TextArea @avt', () => {
     await expect(page).toHaveNoACViolations('TextArea');
   });
 
-  test('accessibility-checker TextArea invalid', async ({ page }) => {
+  test('@avt-advanced-states invalid', async ({ page }) => {
     await visitStory(page, {
       component: 'TextArea',
       id: 'components-textarea--playground',
@@ -36,7 +36,7 @@ test.describe('TextArea @avt', () => {
     await expect(page).toHaveNoACViolations('TextArea invalid');
   });
 
-  test('accessibility-checker TextArea warn', async ({ page }) => {
+  test('@avt-advanced-states warn', async ({ page }) => {
     await visitStory(page, {
       component: 'TextArea',
       id: 'components-textarea--playground',
@@ -50,7 +50,7 @@ test.describe('TextArea @avt', () => {
     await expect(page).toHaveNoACViolations('TextArea warn');
   });
 
-  test('accessibility-checker TextArea skeleton', async ({ page }) => {
+  test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'TextArea',
       id: 'components-textarea--skeleton',
@@ -61,7 +61,7 @@ test.describe('TextArea @avt', () => {
     await expect(page).toHaveNoACViolations('TextArea skeleton');
   });
 
-  test('accessibility-checker TextArea keyboard counter', async ({ page }) => {
+  test('@avt-keyboard-nav TextArea keyboard counter', async ({ page }) => {
     await visitStory(page, {
       component: 'TextArea',
       id: 'components-textarea--playground',

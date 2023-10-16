@@ -11,9 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('Slider @avt', () => {
-  test('accessibility-checker @avt - Slider default state', async ({
-    page,
-  }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Slider',
       id: 'components-slider--default',
@@ -24,7 +22,7 @@ test.describe('Slider @avt', () => {
     await expect(page).toHaveNoACViolations('Slider');
   });
 
-  test('accessibility-checker controlled slider', async ({ page }) => {
+  test('@avt-advanced-states controlled slider', async ({ page }) => {
     await visitStory(page, {
       component: 'Slider',
       id: 'components-slider--controlled-slider',
@@ -35,7 +33,7 @@ test.describe('Slider @avt', () => {
     await expect(page).toHaveNoACViolations('Slider-controlled');
   });
 
-  test('accessibility-checker controlled slider with layer', async ({
+  test('@avt-advanced-states controlled slider with layer', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -50,7 +48,7 @@ test.describe('Slider @avt', () => {
     );
   });
 
-  test('accessibility-checker skeleton', async ({ page }) => {
+  test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'Slider',
       id: 'components-slider--skeleton',
@@ -61,7 +59,7 @@ test.describe('Slider @avt', () => {
     await expect(page).toHaveNoACViolations('Slider-skeleton');
   });
 
-  test('accessibility-checker slider with layer', async ({ page }) => {
+  test('@avt-advanced-states slider with layer', async ({ page }) => {
     await visitStory(page, {
       component: 'Slider',
       id: 'components-slider--with-layer',
@@ -73,7 +71,7 @@ test.describe('Slider @avt', () => {
   });
 
   // Prevent timeout
-  test.slow('default state - keyboard nav', async ({ page }) => {
+  test.slow('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'Slider',
       id: 'components-slider--default',

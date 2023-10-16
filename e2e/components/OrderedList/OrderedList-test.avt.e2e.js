@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('OrderedList @avt', () => {
-  test('accessibility-checker default', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'OrderedList',
       id: 'components-orderedlist--default',
@@ -22,7 +22,7 @@ test.describe('OrderedList @avt', () => {
     await expect(page).toHaveNoACViolations('components-orderedlist--default');
   });
 
-  test('accessibility-checker nested', async ({ page }) => {
+  test('@avt-advanced-states nested', async ({ page }) => {
     await visitStory(page, {
       component: 'OrderedList',
       id: 'components-orderedlist--nested',

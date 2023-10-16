@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('UIShell @avt', () => {
-  test('header', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'UIShell',
       id: 'components-ui-shell-header--header-w-navigation',
@@ -22,7 +22,7 @@ test.describe('UIShell @avt', () => {
     await expect(page).toHaveNoACViolations('UIShell');
   });
 
-  test('sidenav rail w/header', async ({ page }) => {
+  test('@avt-advanced-states sidenav rail w/header', async ({ page }) => {
     await visitStory(page, {
       component: 'UIShell',
       id: 'components-ui-shell-sidenav--side-nav-rail-w-header',
@@ -33,7 +33,7 @@ test.describe('UIShell @avt', () => {
     await expect(page).toHaveNoACViolations('UIShell-side-nav-rail-w-header');
   });
 
-  test('sidenav rail w/header - expanded state open category sidenav', async ({
+  test('@avt-advanced-states sidenav rail w/header - expanded state open category sidenav', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -59,7 +59,7 @@ test.describe('UIShell @avt', () => {
     );
   });
 
-  test('sidenav rail w/header - expanded state header link', async ({
+  test('@avt-advanced-states sidenav rail w/header - expanded state header link', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -80,7 +80,7 @@ test.describe('UIShell @avt', () => {
     );
   });
 
-  test('sidenav rail w/header - keyboard nav', async ({ page }) => {
+  test('@avt-keyboard-nav sidenav rail w/header', async ({ page }) => {
     await visitStory(page, {
       component: 'UIShell',
       id: 'components-ui-shell-sidenav--side-nav-rail-w-header',

@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('OverflowMenu @avt', () => {
-  test('accessibility-checker', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'OverflowMenu',
       id: 'components-overflowmenu--default',
@@ -22,7 +22,7 @@ test.describe('OverflowMenu @avt', () => {
     await expect(page).toHaveNoACViolations('OverflowMenu');
   });
 
-  test('accessibility-checker render custom icon', async ({ page }) => {
+  test('@avt-advanced-states render custom icon', async ({ page }) => {
     await visitStory(page, {
       component: 'OverflowMenu',
       id: 'components-overflowmenu--render-custom-icon',
@@ -33,7 +33,7 @@ test.describe('OverflowMenu @avt', () => {
     await expect(page).toHaveNoACViolations('OverflowMenu-custom-icon');
   });
 
-  test('accessibility-checker open menu', async ({ page }) => {
+  test('@avt-advanced-states open menu', async ({ page }) => {
     await visitStory(page, {
       component: 'OverflowMenu',
       id: 'components-overflowmenu--default',
@@ -53,7 +53,7 @@ test.describe('OverflowMenu @avt', () => {
     await expect(page).toHaveNoACViolations('OverflowMenu-open');
   });
 
-  test('accessibility-checker render custom icon open', async ({ page }) => {
+  test('@avt-advanced-states render custom icon open', async ({ page }) => {
     await visitStory(page, {
       component: 'OverflowMenu',
       id: 'components-overflowmenu--render-custom-icon',
@@ -73,7 +73,7 @@ test.describe('OverflowMenu @avt', () => {
     await expect(page).toHaveNoACViolations('OverflowMenu-custom-icon-open');
   });
 
-  test('overflow-menu - keyboard nav', async ({ page }) => {
+  test('@avt-keyboard-nav overflow-menu', async ({ page }) => {
     await visitStory(page, {
       component: 'OverflowMenu',
       id: 'components-overflowmenu--default',
