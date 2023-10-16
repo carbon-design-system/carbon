@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('Link @avt', () => {
-  test('accessibility-checker default', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Link',
       id: 'components-link--default',
@@ -22,7 +22,7 @@ test.describe('Link @avt', () => {
     await expect(page).toHaveNoACViolations('components-link--default');
   });
 
-  test('accessibility-checker inline', async ({ page }) => {
+  test('@avt-advanced-states inline', async ({ page }) => {
     await visitStory(page, {
       component: 'Link',
       id: 'components-link--inline',
@@ -33,7 +33,7 @@ test.describe('Link @avt', () => {
     await expect(page).toHaveNoACViolations('components-link--inline');
   });
 
-  test('accessibility-checker paired with icon', async ({ page }) => {
+  test('@avt-advanced-states paired with icon', async ({ page }) => {
     await visitStory(page, {
       component: 'Link',
       id: 'components-link--paired-with-icon',
@@ -47,7 +47,7 @@ test.describe('Link @avt', () => {
   });
 
   // Prevent timeout
-  test.slow('accessibility-checker keyboard nav', async ({ page }) => {
+  test.slow('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'Link',
       id: 'components-link--default',

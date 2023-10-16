@@ -12,7 +12,7 @@ const { visitStory } = require('../../test-utils/storybook');
 const path = require('path');
 
 test.describe('FileUploader @avt', () => {
-  test('@avt-default-state FileUploader', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FileUploader',
       id: 'components-fileuploader--default',
@@ -94,7 +94,7 @@ test.describe('FileUploader @avt', () => {
     await expect(page).toHaveNoACViolations('FileUploader skeleton');
   });
 
-  test('@avt-keyboard-nav FileUploader', async ({ page }) => {
+  test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'FileUploader',
       id: 'components-fileuploader--default',
@@ -124,7 +124,7 @@ test.describe('FileUploader @avt', () => {
   });
 
   test.slow(
-    '@avt-keyboard-nav FileUploader Drag and drop multiple files',
+    '@avt-keyboard-nav Drag and drop multiple files',
     async ({ page }) => {
       await visitStory(page, {
         component: 'FileUploader',
@@ -168,9 +168,7 @@ test.describe('FileUploader @avt', () => {
     }
   );
 
-  test('@avt-keyboard-nav FileUploader Drag and drop single file', async ({
-    page,
-  }) => {
+  test('@avt-keyboard-nav Drag and drop single file', async ({ page }) => {
     await visitStory(page, {
       component: 'FileUploader',
       id: 'components-fileuploader--drag-and-drop-upload-single-container-example-application',

@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('ComboBox @avt', () => {
-  test('accessibility-checker combobox', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ComboBox',
       id: 'components-combobox--default',
@@ -23,7 +23,7 @@ test.describe('ComboBox @avt', () => {
   });
 
   // Skipping now due to AVT violation, possible false positive
-  test.skip('accessibility-checker open combobox', async ({ page }) => {
+  test.skip('@avt-advanced-states open', async ({ page }) => {
     await visitStory(page, {
       component: 'ComboBox',
       id: 'components-combobox--default',
@@ -44,7 +44,7 @@ test.describe('ComboBox @avt', () => {
     await expect(page).toHaveNoACViolations('ComboBox-open');
   });
 
-  test('combobox - keyboard nav', async ({ page }) => {
+  test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'ComboBox',
       id: 'components-combobox--default',

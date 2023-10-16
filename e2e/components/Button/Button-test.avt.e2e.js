@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('Button @avt', () => {
-  test('accessibility-checker', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Button',
       id: 'components-button--default',
@@ -22,7 +22,7 @@ test.describe('Button @avt', () => {
     await expect(page).toHaveNoACViolations('Button');
   });
 
-  test('accessibility-checker button danger', async ({ page }) => {
+  test('@avt-advanced-states danger', async ({ page }) => {
     await visitStory(page, {
       component: 'Button',
       id: 'components-button--danger',
@@ -33,7 +33,7 @@ test.describe('Button @avt', () => {
     await expect(page).toHaveNoACViolations('Button-danger');
   });
 
-  test('accessibility-checker button ghost', async ({ page }) => {
+  test('@avt-advanced-states ghost', async ({ page }) => {
     await visitStory(page, {
       component: 'Button',
       id: 'components-button--ghost',
@@ -44,7 +44,7 @@ test.describe('Button @avt', () => {
     await expect(page).toHaveNoACViolations('Button-ghost');
   });
 
-  test('accessibility-checker button icon-button', async ({ page }) => {
+  test('@avt-advanced-states icon-button', async ({ page }) => {
     await visitStory(page, {
       component: 'Button',
       id: 'components-button--icon-button',
@@ -55,7 +55,7 @@ test.describe('Button @avt', () => {
     await expect(page).toHaveNoACViolations('Button-icon-button');
   });
 
-  test('accessibility-checker button secondary', async ({ page }) => {
+  test('@avt-advanced-states secondary', async ({ page }) => {
     await visitStory(page, {
       component: 'Button',
       id: 'components-button--secondary',
@@ -66,7 +66,7 @@ test.describe('Button @avt', () => {
     await expect(page).toHaveNoACViolations('Button-secondary');
   });
 
-  test('accessibility-checker button set-of-buttons', async ({ page }) => {
+  test('@avt-advanced-states set-of-buttons', async ({ page }) => {
     await visitStory(page, {
       component: 'Button',
       id: 'components-button--set-of-buttons',
@@ -77,7 +77,7 @@ test.describe('Button @avt', () => {
     await expect(page).toHaveNoACViolations('Button-set-of-buttons');
   });
 
-  test('accessibility-checker button skeleton', async ({ page }) => {
+  test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'Button',
       id: 'components-button--skeleton',
@@ -88,7 +88,7 @@ test.describe('Button @avt', () => {
     await expect(page).toHaveNoACViolations('Button-skeleton');
   });
 
-  test('accessibility-checker button tertiary', async ({ page }) => {
+  test('@avt-advanced-states tertiary', async ({ page }) => {
     await visitStory(page, {
       component: 'Button',
       id: 'components-button--tertiary',
@@ -99,7 +99,7 @@ test.describe('Button @avt', () => {
     await expect(page).toHaveNoACViolations('Button-tertiary');
   });
 
-  test('accessibility-checker disabled button', async ({ page }) => {
+  test('@avt-advanced-states disabled', async ({ page }) => {
     await visitStory(page, {
       component: 'Button',
       id: 'components-button--default',
@@ -115,7 +115,7 @@ test.describe('Button @avt', () => {
     await expect(page).toHaveNoACViolations('Button-disabled');
   });
 
-  test('accessibility-checker keyboard interaction', async ({ page }) => {
+  test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'Button',
       id: 'components-button--default',
@@ -128,7 +128,7 @@ test.describe('Button @avt', () => {
     await expect(page.getByRole('button')).toBeFocused();
   });
 
-  test('accessibility-checker mouse interaction', async ({ page }) => {
+  test('@avt-advanced-states mouse interaction', async ({ page }) => {
     await visitStory(page, {
       component: 'Button',
       id: 'components-button--default',
@@ -141,7 +141,7 @@ test.describe('Button @avt', () => {
     await expect(page.getByRole('button')).toBeFocused();
   });
 
-  test('accessibility-checker hover state', async ({ page }) => {
+  test('@avt-advanced-states hover state', async ({ page }) => {
     await visitStory(page, {
       component: 'Button',
       id: 'components-button--default',

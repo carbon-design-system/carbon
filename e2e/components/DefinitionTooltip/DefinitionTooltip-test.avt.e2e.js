@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('DefinitionTooltip @avt', () => {
-  test('@avt-default-state DefinitionTooltip', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'DefinitionTooltip',
       id: 'components-definitiontooltip--default',
@@ -19,7 +19,9 @@ test.describe('DefinitionTooltip @avt', () => {
         theme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('DefinitionTooltip');
+    await expect(page).toHaveNoACViolations(
+      'DefinitionTooltip @avt-default-state'
+    );
   });
 
   test('@avt-keyboard-state default', async ({ page }) => {

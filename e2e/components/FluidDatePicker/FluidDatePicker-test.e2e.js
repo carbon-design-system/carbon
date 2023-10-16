@@ -7,9 +7,9 @@
 
 'use strict';
 
-const { expect, test } = require('@playwright/test');
+const { test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
-const { snapshotStory, visitStory } = require('../../test-utils/storybook');
+const { snapshotStory } = require('../../test-utils/storybook');
 
 test.describe('FluidDatePicker', () => {
   themes.forEach((theme) => {
@@ -38,30 +38,5 @@ test.describe('FluidDatePicker', () => {
         });
       });
     });
-  });
-
-  test('accessibility-checker @avt', async ({ page }) => {
-    await visitStory(page, {
-      component: 'FluidDatePicker',
-      id: 'experimental-unstable-fluiddatepicker--range-with-calendar',
-      globals: {
-        theme: 'white',
-      },
-    });
-    await visitStory(page, {
-      component: 'FluidDatePicker',
-      id: 'experimental-unstable-fluiddatepicker--single',
-      globals: {
-        theme: 'white',
-      },
-    });
-    await visitStory(page, {
-      component: 'FluidDatePicker',
-      id: 'experimental-unstable-fluiddatepicker--simple',
-      globals: {
-        theme: 'white',
-      },
-    });
-    await expect(page).toHaveNoACViolations('FluidDatePicker');
   });
 });

@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('DatePicker @avt', () => {
-  test('simple state @avt', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'DatePicker',
       id: 'components-datepicker--simple',
@@ -22,7 +22,7 @@ test.describe('DatePicker @avt', () => {
     await expect(page).toHaveNoACViolations('DatePicker');
   });
 
-  test('range @avt', async ({ page }) => {
+  test('range @avt-advanced-states', async ({ page }) => {
     await visitStory(page, {
       component: 'DatePicker',
       id: 'components-datepicker--range',
@@ -33,7 +33,7 @@ test.describe('DatePicker @avt', () => {
     await expect(page).toHaveNoACViolations('DatePicker-Range');
   });
 
-  test('disabled state @avt', async ({ page }) => {
+  test('disabled @avt-advanced-states', async ({ page }) => {
     await visitStory(page, {
       component: 'DatePicker',
       id: 'components-datepicker--playground',
@@ -50,7 +50,7 @@ test.describe('DatePicker @avt', () => {
   });
 
   // skipping for now due to accessibility violation
-  test('skeleton state @avt', async ({ page }) => {
+  test('skeleton @avt-advanced-states', async ({ page }) => {
     await visitStory(page, {
       component: 'DatePicker',
       id: 'components-datepicker--skeleton',
@@ -63,7 +63,7 @@ test.describe('DatePicker @avt', () => {
   });
 
   // skipping for now due to accessibility violation
-  test('open state @avt', async ({ page }) => {
+  test('open @avt-advanced-states', async ({ page }) => {
     await visitStory(page, {
       component: 'DatePicker',
       id: 'components-datepicker--playground',
@@ -78,7 +78,7 @@ test.describe('DatePicker @avt', () => {
     await expect(page).toHaveNoACViolations('DatePicker-Open');
   });
 
-  test('simple state - keyboard nav', async ({ page }) => {
+  test('simple state @avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'DatePicker',
       id: 'components-datepicker--single-with-calendar',
@@ -104,7 +104,7 @@ test.describe('DatePicker @avt', () => {
     );
   });
 
-  test('range - keyboard nav', async ({ page }) => {
+  test('range state @avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'DatePicker',
       id: 'components-datepicker--range-with-calendar',

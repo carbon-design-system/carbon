@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('MultiSelect @avt', () => {
-  test('accessibility-checker multiselect', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'MultiSelect',
       id: 'components-multiselect--default',
@@ -22,7 +22,7 @@ test.describe('MultiSelect @avt', () => {
     await expect(page).toHaveNoACViolations('MultiSelect');
   });
 
-  test('accessibility-checker filterable multiselect', async ({ page }) => {
+  test('@avt-default-state filterable multiselect', async ({ page }) => {
     await visitStory(page, {
       component: 'FilterableMultiSelect',
       id: 'components-multiselect--filterable',
@@ -34,7 +34,7 @@ test.describe('MultiSelect @avt', () => {
   });
 
   // Skipping now due to AVT violation, possible false positive
-  test.skip('accessibility-checker open filterable multiselect', async ({
+  test.skip('@avt-advanced-states open filterable multiselect', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -57,7 +57,7 @@ test.describe('MultiSelect @avt', () => {
   });
 
   // Skipping now due to AVT violation, possible false positive
-  test.skip('accessibility-checker open multiselect', async ({ page }) => {
+  test.skip('@avt-advanced-states open multiselect', async ({ page }) => {
     await visitStory(page, {
       component: 'MultiSelect',
       id: 'components-multiselect--default',
@@ -77,7 +77,7 @@ test.describe('MultiSelect @avt', () => {
     await expect(page).toHaveNoACViolations('MultiSelect-open');
   });
 
-  test('multiselect - keyboard nav', async ({ page }) => {
+  test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'MultiSelect',
       id: 'components-multiselect--default',
@@ -172,7 +172,7 @@ test.describe('MultiSelect @avt', () => {
     await expect(selection).not.toBeVisible();
   });
 
-  test.slow('filterable multiselect - keyboard nav', async ({ page }) => {
+  test.slow('@avt-keyboard-nav filterable multiselect', async ({ page }) => {
     await visitStory(page, {
       component: 'FilterableMultiSelect',
       id: 'components-multiselect--filterable',

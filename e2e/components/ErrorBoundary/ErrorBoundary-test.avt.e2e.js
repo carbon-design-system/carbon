@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('ErrorBoundary @avt', () => {
-  test('@avt-default-state ErrorBoundary', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ErrorBoundary',
       id: 'components-errorboundary--default',
@@ -22,9 +22,7 @@ test.describe('ErrorBoundary @avt', () => {
     await expect(page).toHaveNoACViolations('ErrorBoundary');
   });
 
-  test('@avt-advanced-states ErrorBoundary with Custom context', async ({
-    page,
-  }) => {
+  test('@avt-advanced-states with Custom context', async ({ page }) => {
     await visitStory(page, {
       component: 'ErrorBoundary',
       id: 'components-errorboundary--skeleton',
@@ -37,7 +35,7 @@ test.describe('ErrorBoundary @avt', () => {
     );
   });
 
-  test('@avt-keyboard-state default', async ({ page }) => {
+  test('@avt-keyboard-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ErrorBoundary',
       id: 'components-errorboundary--default',

@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('Dropdown @avt', () => {
-  test('accessibility-checker', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Dropdown',
       id: 'components-dropdown--default',
@@ -23,7 +23,7 @@ test.describe('Dropdown @avt', () => {
   });
 
   // Skipping now due to AVT violation, possible false positive
-  test.skip('accessibility-checker open dropdown', async ({ page }) => {
+  test.skip('@avt-advanced-states open state', async ({ page }) => {
     await visitStory(page, {
       component: 'Dropdown',
       id: 'components-dropdown--default',
@@ -45,7 +45,7 @@ test.describe('Dropdown @avt', () => {
     await expect(page).toHaveNoACViolations('Dropdown-open');
   });
 
-  test('dropdown - keyboard nav', async ({ page }) => {
+  test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'Dropdown',
       id: 'components-dropdown--default',

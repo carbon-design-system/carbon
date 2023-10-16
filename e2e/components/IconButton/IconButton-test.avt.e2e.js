@@ -10,7 +10,7 @@ import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
 test.describe('IconButton @avt', () => {
-  test('@avt-default-state IconButton', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'IconButton',
       id: 'components-iconbutton--default',
@@ -21,7 +21,7 @@ test.describe('IconButton @avt', () => {
     await expect(page).toHaveNoACViolations('IconButton');
   });
 
-  test('@avt-keyboard-nav IconButton', async ({ page }) => {
+  test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'IconButton',
       id: 'components-iconbutton--default',

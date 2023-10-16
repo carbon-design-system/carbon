@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('MenuButton @avt', () => {
-  test('@avt-default-state MenuButton', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'MenuButton',
       id: 'components-menubutton--default',
@@ -22,7 +22,7 @@ test.describe('MenuButton @avt', () => {
     await expect(page).toHaveNoACViolations('MenuButton');
   });
 
-  test('@avt-advanced-states MenuButton with danger', async ({ page }) => {
+  test('@avt-advanced-states with danger', async ({ page }) => {
     await visitStory(page, {
       component: 'MenuButton',
       id: 'components-menubutton--with-danger',
@@ -33,7 +33,7 @@ test.describe('MenuButton @avt', () => {
     await expect(page).toHaveNoACViolations('MenuButton-with-danger');
   });
 
-  test('@avt-advanced-states MenuButton with dividers', async ({ page }) => {
+  test('@avt-advanced-states with dividers', async ({ page }) => {
     await visitStory(page, {
       component: 'MenuButton',
       id: 'components-menubutton--with-dividers',
@@ -44,7 +44,7 @@ test.describe('MenuButton @avt', () => {
     await expect(page).toHaveNoACViolations('MenuButton-with-dividers');
   });
 
-  test('@avt-keyboard-nav MenuButton', async ({ page }) => {
+  test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'MenuButton',
       id: 'components-menubutton--default',
@@ -73,7 +73,7 @@ test.describe('MenuButton @avt', () => {
     await expect(actionButton).toBeFocused();
   });
 
-  test('@avt-keyboard-nav MenuButton with danger', async ({ page }) => {
+  test('@avt-keyboard-nav with danger', async ({ page }) => {
     await visitStory(page, {
       component: 'MenuButton',
       id: 'components-menubutton--with-danger',
@@ -104,7 +104,7 @@ test.describe('MenuButton @avt', () => {
     await expect(actionButton).toBeFocused();
   });
 
-  test('@avt-keyboard-nav MenuButton with dividers', async ({ page }) => {
+  test('@avt-keyboard-nav with dividers', async ({ page }) => {
     await visitStory(page, {
       component: 'MenuButton',
       id: 'components-menubutton--with-dividers',
