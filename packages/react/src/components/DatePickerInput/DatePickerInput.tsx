@@ -216,13 +216,15 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
         </label>
       )}
       <div className={wrapperClasses}>
-        {input}
-        {isFluid && <DatePickerIcon datePickerType={datePickerType} />}
-        <DatePickerIcon
-          datePickerType={datePickerType}
-          invalid={invalid}
-          warn={warn}
-        />
+        <span>
+          {input}
+          {isFluid && <DatePickerIcon datePickerType={datePickerType} />}
+          <DatePickerIcon
+            datePickerType={datePickerType}
+            invalid={invalid}
+            warn={warn}
+          />
+        </span>
       </div>
       {invalid && (
         <>
