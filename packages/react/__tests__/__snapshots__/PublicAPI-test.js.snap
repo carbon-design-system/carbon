@@ -1054,6 +1054,9 @@ Map {
   "ComboBox" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "allowCustomValue": Object {
+        "type": "bool",
+      },
       "aria-label": Object {
         "type": "string",
       },
