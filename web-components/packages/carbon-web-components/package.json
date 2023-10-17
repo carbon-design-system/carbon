@@ -89,7 +89,7 @@
     "@babel/preset-env": "~7.12.0",
     "@babel/preset-modules": "^0.1.5",
     "@babel/template": "~7.12.0",
-    "@babel/traverse": "~7.12.0",
+    "@babel/traverse": "~7.23.0",
     "@carbon/icon-helpers": "^10.28.0",
     "@carbon/icons": "^10.48.0",
     "@open-wc/semantic-dom-diff": "~0.18.0",
