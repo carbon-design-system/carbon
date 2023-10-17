@@ -87,7 +87,13 @@ const config = {
       },
     },
     '@storybook/addon-storysource',
-    '@storybook/addon-a11y',
+    /**
+     * For now, the storybook-addon-accessibility-checker fork replaces the @storybook/addon-a11y.
+     * Eventually they plan to attempt to get this back into the root addon with the storybook team.
+     * See more: https://ibm-studios.slack.com/archives/G01GCBCGTPV/p1697230798817659
+     */
+    // '@storybook/addon-a11y',
+    'storybook-addon-accessibility-checker',
     {
       name: '@storybook/addon-docs',
       options: {
