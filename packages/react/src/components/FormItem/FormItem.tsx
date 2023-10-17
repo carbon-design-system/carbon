@@ -14,7 +14,7 @@ type FormItemProps = {
   /**
    * Provide content to be rendered in the form item
    */
-  children: React.ReactNode;
+  children?: React.ReactNode;
 
   /**
    * Provide a custom className to be applied to the containing node
