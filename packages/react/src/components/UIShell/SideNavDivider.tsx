@@ -10,7 +10,13 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 
-function SideNavDivider({ className }) {
+interface SideNavDividerProps {
+  /**
+   * Provide an optional class to be applied to the containing node
+   */
+  className?: string;
+}
+const SideNavDivider: React.FC<SideNavDividerProps> = ({ className }) => {
   const prefix = usePrefix();
   const classNames = cx(`${prefix}--side-nav__divider`, className);
   return (
@@ -18,7 +24,7 @@ function SideNavDivider({ className }) {
       <hr />
     </li>
   );
-}
+};
 
 SideNavDivider.propTypes = {
   /**

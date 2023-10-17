@@ -53,6 +53,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
         >
           <tr>
             <td
+              aria-live="off"
               class="cds--table-column-checkbox cds--table-column-radio"
             >
               <div
@@ -89,6 +90,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
           </tr>
           <tr>
             <td
+              aria-live="off"
               class="cds--table-column-checkbox cds--table-column-radio"
             >
               <div
@@ -125,6 +127,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
           </tr>
           <tr>
             <td
+              aria-live="off"
               class="cds--table-column-checkbox cds--table-column-radio"
             >
               <div
@@ -219,6 +222,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
         >
           <tr>
             <td
+              aria-live="off"
               class="cds--table-column-checkbox cds--table-column-radio"
             >
               <div
@@ -255,6 +259,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
           </tr>
           <tr>
             <td
+              aria-live="off"
               class="cds--table-column-checkbox cds--table-column-radio"
             >
               <div
@@ -291,6 +296,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
           </tr>
           <tr>
             <td
+              aria-live="off"
               class="cds--table-column-checkbox cds--table-column-radio"
             >
               <div
@@ -618,6 +624,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
         <thead>
           <tr>
             <th
+              aria-live="off"
               class="cds--table-column-checkbox"
               scope="col"
             >
@@ -667,6 +674,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
         >
           <tr>
             <td
+              aria-live="off"
               class="cds--table-column-checkbox"
             >
               <div
@@ -699,6 +707,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
           </tr>
           <tr>
             <td
+              aria-live="off"
               class="cds--table-column-checkbox"
             >
               <div
@@ -731,6 +740,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
           </tr>
           <tr>
             <td
+              aria-live="off"
               class="cds--table-column-checkbox"
             >
               <div
