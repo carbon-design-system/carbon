@@ -13,6 +13,7 @@ import { keys, matches } from '../../internal/keyboard';
 import { useFallbackId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
+import { Text } from '../Text';
 
 const RadioTile = React.forwardRef(function RadioTile(
   {
@@ -74,7 +75,7 @@ const RadioTile = React.forwardRef(function RadioTile(
         <span className={`${prefix}--tile__checkmark`}>
           <CheckmarkFilled />
         </span>
-        <span className={`${prefix}--tile-content`}>{children}</span>
+        <Text className={`${prefix}--tile-content`}>{children}</Text>
       </label>
     </div>
   );

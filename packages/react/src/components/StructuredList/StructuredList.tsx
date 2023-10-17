@@ -18,6 +18,7 @@ import classNames from 'classnames';
 import { useId } from '../../internal/useId';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
+import { Text } from '../Text';
 
 type DivAttrs = HTMLAttributes<HTMLDivElement>;
 
@@ -473,16 +474,16 @@ export function StructuredListCell(props: StructuredListCellProps) {
 
   if (head) {
     return (
-      <span className={classes} role="columnheader" {...other}>
+      <Text className={classes} role="columnheader" {...other}>
         {children}
-      </span>
+      </Text>
     );
   }
 
   return (
-    <div className={classes} role="cell" {...other}>
+    <Text as="div" className={classes} role="cell" {...other}>
       {children}
-    </div>
+    </Text>
   );
 }
 StructuredListCell.propTypes = {

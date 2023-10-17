@@ -13,6 +13,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { ReactAttr } from '../../types/common';
+import { Text } from '../Text';
 
 const getInstanceId = setupGetInstanceId();
 type ExcludedAttributes = 'value' | 'onChange' | 'locale' | 'children';
@@ -211,9 +212,9 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
   return (
     <div className={containerClasses}>
       {labelText && (
-        <label htmlFor={id} className={labelClasses}>
+        <Text as="label" htmlFor={id} className={labelClasses}>
           {labelText}
-        </label>
+        </Text>
       )}
       <div className={wrapperClasses}>
         {input}
@@ -227,19 +228,26 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
       {invalid && (
         <>
           {isFluid && <hr className={`${prefix}--date-picker__divider`} />}
-          <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+          <Text as="div" className={`${prefix}--form-requirement`}>
+            {invalidText}
+          </Text>
         </>
       )}
       {warn && (
         <>
           {isFluid && <hr className={`${prefix}--date-picker__divider`} />}
-          <div className={`${prefix}--form-requirement`}>{warnText}</div>
+          <Text as="div" className={`${prefix}--form-requirement`}>
+            {warnText}
+          </Text>
         </>
       )}
-      {helperText && (
-        <div id={datePickerInputHelperId} className={helperTextClasses}>
+      {helperText && !invalid && (
+        <Text
+          as="div"
+          id={datePickerInputHelperId}
+          className={helperTextClasses}>
           {helperText}
-        </div>
+        </Text>
       )}
     </div>
   );

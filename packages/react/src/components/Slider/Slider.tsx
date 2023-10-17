@@ -17,6 +17,7 @@ import { PrefixContext } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { FeatureFlagContext } from '../FeatureFlags';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
+import { Text } from '../Text';
 
 const defaultFormatLabel = (value, label) => {
   return typeof label === 'function' ? label(value) : `${value}${label}`;
@@ -825,13 +826,17 @@ export default class Slider extends PureComponent<SliderProps> {
 
           return (
             <div className={classNames(`${prefix}--form-item`, className)}>
-              <label htmlFor={id} className={labelClasses} id={labelId}>
+              <Text
+                as="label"
+                htmlFor={id}
+                className={labelClasses}
+                id={labelId}>
                 {labelText}
-              </label>
+              </Text>
               <div className={`${prefix}--slider-container`}>
-                <span className={`${prefix}--slider__range-label`}>
+                <Text className={`${prefix}--slider__range-label`}>
                   {formatLabel(min, minLabel)}
-                </span>
+                </Text>
                 {/* @ts-ignore onBlur + onChange types are incompatible*/}
                 <div
                   className={sliderClasses}
@@ -867,9 +872,9 @@ export default class Slider extends PureComponent<SliderProps> {
                     ref={this.filledTrackRef}
                   />
                 </div>
-                <span className={`${prefix}--slider__range-label`}>
+                <Text className={`${prefix}--slider__range-label`}>
                   {formatLabel(max, maxLabel)}
-                </span>
+                </Text>
                 <input
                   type={hideTextInput ? 'hidden' : inputType}
                   id={`${id}-input-for-slider`}
@@ -903,23 +908,25 @@ export default class Slider extends PureComponent<SliderProps> {
                 )}
               </div>
               {!readOnly && isValid === false && (
-                <div
+                <Text
+                  as="div"
                   className={classNames(
                     `${prefix}--slider__validation-msg`,
                     `${prefix}--slider__validation-msg--invalid`,
                     `${prefix}--form-requirement`
                   )}>
                   {invalidText}
-                </div>
+                </Text>
               )}
               {!readOnly && warn && isValid && (
-                <div
+                <Text
+                  as="div"
                   className={classNames(
                     `${prefix}--slider__validation-msg`,
                     `${prefix}--form-requirement`
                   )}>
                   {warnText}
-                </div>
+                </Text>
               )}
             </div>
           );

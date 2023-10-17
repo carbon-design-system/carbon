@@ -12,21 +12,13 @@ import FileUploader from '../';
 import { uploadFiles } from '../test-helpers';
 
 const iconDescription = 'test description';
-const requiredProps = { iconDescription };
+const requiredProps = {
+  iconDescription,
+  labelTitle: 'Upload files',
+  labelDescription: 'Max file size is 500mb. Only .jpg files are supported.',
+};
 
 describe('FileUploader', () => {
-  describe('automated accessibility tests', () => {
-    it.skip('should have no axe violations', async () => {
-      const { container } = render(<FileUploader {...requiredProps} />);
-      await expect(container).toHaveNoAxeViolations();
-    });
-
-    it.skip('should have no AC violations', async () => {
-      const { container } = render(<FileUploader {...requiredProps} />);
-      await expect(container).toHaveNoACViolations('FileUploader');
-    });
-  });
-
   it('should support a custom class name on the root element', () => {
     const { container } = render(
       <FileUploader {...requiredProps} className="test" />

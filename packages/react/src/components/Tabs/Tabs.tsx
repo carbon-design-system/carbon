@@ -41,6 +41,7 @@ import deprecate from '../../prop-types/deprecate';
 import { Close } from '@carbon/icons-react';
 import { useEvent } from '../../internal/useEvent';
 import { useMatchMedia } from '../../internal/useMatchMedia';
+import { Text } from '../Text';
 
 // Used to manage the overall state of the Tabs
 type TabsContextType = {
@@ -902,11 +903,11 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
             {<Icon size={16} />}
           </div>
         )}
-        <span
+        <Text
           className={`${prefix}--tabs__nav-item-label`}
           title={children as string}>
           {children}
-        </span>
+        </Text>
         {/* always rendering dismissIcon so we don't lose reference to it, otherwise events do not work when switching from/to dismissable state */}
         <div
           className={cx(`${prefix}--tabs__nav-item--icon`, {
@@ -916,12 +917,13 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
           {!dismissable && Icon && <Icon size={16} />}
         </div>
       </div>
-      {hasSecondaryLabel && (
-        <div
+      {hasSecondaryLabel && secondaryLabel && (
+        <Text
+          as="div"
           className={`${prefix}--tabs__nav-item-secondary-label`}
           title={secondaryLabel}>
           {secondaryLabel}
-        </div>
+        </Text>
       )}
     </BaseComponent>
   );

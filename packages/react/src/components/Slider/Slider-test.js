@@ -27,7 +27,18 @@ const renderSlider = ({
   step = 1,
   ...rest
 } = {}) =>
-  render(<Slider value={value} min={min} max={max} step={step} {...rest} />);
+  render(
+    <Slider
+      labelText="Slider"
+      value={value}
+      min={min}
+      max={max}
+      step={step}
+      invalidText="Invalid"
+      warnText="Warning"
+      {...rest}
+    />
+  );
 
 describe('Slider', () => {
   beforeEach(() => {

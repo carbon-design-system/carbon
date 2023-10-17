@@ -21,6 +21,7 @@ import React from 'react';
 import { breakpoints } from '@carbon/layout';
 import { GlobalTheme } from '../src/components/Theme';
 import { Layout } from '../src/components/Layout';
+import { TextDirection } from '../src/components/Text';
 
 import theme from './theme';
 
@@ -322,7 +323,12 @@ const decorators = [
     return (
       <GlobalTheme theme={theme}>
         <Layout size={layoutSize || null} density={layoutDensity || null}>
-          <Story key={randomKey} {...context} />
+          <TextDirection
+            getTextDirection={(text) => {
+              return dir;
+            }}>
+            <Story key={randomKey} {...context} />
+          </TextDirection>
         </Layout>
       </GlobalTheme>
     );
