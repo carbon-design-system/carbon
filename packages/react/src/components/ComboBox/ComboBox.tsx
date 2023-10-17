@@ -129,6 +129,7 @@ type ExcludedAttributes = 'id' | 'onChange' | 'onClick' | 'type' | 'size';
 
 interface OnChangeData<ItemType> {
   selectedItem: ItemType | null | undefined;
+  inputValue?: string | null;
 }
 
 type ItemToStringHandler<ItemType> = (item: ItemType | null) => string;
@@ -459,7 +460,7 @@ const ComboBox = forwardRef(
           if (allowCustomValue) {
             setInputValue(inputValue);
             if (onChange) {
-              onChange({ selectedItem });
+              onChange({ selectedItem, inputValue });
             }
           }
           break;
@@ -592,6 +593,13 @@ const ComboBox = forwardRef(
                 (!inputValue || allowCustomValue)
               ) {
                 toggleMenu();
+
+                // Since `onChange` does not normally fire when the menu is closed, we should
+                // manually fire it when `allowCustomValue` is provided, the menu is closing,
+                // and there is a value.
+                if (allowCustomValue && isOpen && inputValue) {
+                  onChange({ selectedItem, inputValue });
+                }
               }
 
               if (match(event, keys.Escape) && inputValue) {
