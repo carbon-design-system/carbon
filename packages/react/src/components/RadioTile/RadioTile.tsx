@@ -15,17 +15,59 @@ import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 
 interface RadioTileProps {
+  /**
+   * `true` if this tile should be selected.
+   */
   checked: boolean;
+
+  /**
+   * The tile content.
+   */
   children: ReactNode;
+
+  /**
+   * The CSS class names.
+   */
   className?: string;
+
+  /**
+   * Specify whether the RadioTile should be disabled
+   */
   disabled: boolean;
+
+  /**
+   * The ID of the `<input>`.
+   */
   id?: string;
-  light: boolean; // You may update this to match the actual type
+
+  /**
+ * `true` to use the light version. For use on $ui-01 backgrounds only.
+ * Don't use this to make tile background color the same as the container background color.
+ * @deprecated This prop is no longer needed and has been deprecated in v11 in favor of the new Layer component. It will be moved in the next major release.
+ */
+  light: boolean; // Deprecated: This prop is no longer needed and has been deprecated in v11 in favor of the new Layer component. It will be moved in the next major release.
+
+  /**
+   * The `name` of the `<input>`.
+   */
   name: string;
-  value: string | number;
+
+  /**
+   * The handler of the massaged `change` event on the `<input>`.
+   */
   onChange: (value: string | number, name: string, event: ChangeEvent<HTMLInputElement>) => void;
+
+  /**
+   * Specify the tab index of the wrapper element.
+   */
   tabIndex: number | null;
+
+  /**
+   * The `value` of the `<input>`.
+   */
+  value: string | number;
 }
+
 
 const RadioTile = forwardRef(function RadioTile(
   {
@@ -93,19 +135,59 @@ const RadioTile = forwardRef(function RadioTile(
 });
 
 RadioTile.propTypes = {
+  /**
+   * `true` if this tile should be selected.
+   */
   checked: PropTypes.bool,
+
+  /**
+   * The tile content.
+   */
   children: PropTypes.node,
+
+  /**
+   * The CSS class names.
+   */
   className: PropTypes.string,
+
+  /**
+   * Specify whether the RadioTile should be disabled
+   */
   disabled: PropTypes.bool,
+
+  /**
+   * The ID of the `<input>`.
+   */
   id: PropTypes.string,
+
+  /**
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
+   */
   light: deprecate(
     PropTypes.bool,
     'The `light` prop for `RadioTile` is no longer needed and has ' +
       'been deprecated in v11 in favor of the new `Layer` component. It will be moved in the next major release.'
   ),
+
+  /**
+   * The `name` of the `<input>`.
+   */
   name: PropTypes.string,
+
+  /**
+   * The handler of the massaged `change` event on the `<input>`.
+   */
   onChange: PropTypes.func,
+
+  /**
+   * Specify the tab index of the wrapper element
+   */
   tabIndex: PropTypes.number,
+
+  /**
+   * The `value` of the `<input>`.
+   */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
