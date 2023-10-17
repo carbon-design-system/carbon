@@ -19,7 +19,7 @@ type FormItemProps = {
   /**
    * Provide a custom className to be applied to the containing node
    */
-  className: string;
+  className?: string;
 };
 
 function FormItem({ className, children, ...rest }: FormItemProps) {
