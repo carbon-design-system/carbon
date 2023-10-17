@@ -40,14 +40,14 @@
     "@babel/template": "^7.16.7",
     "@babel/types": "^7.18.4",
     "@carbon/scss-generator": "^10.18.0",
-    "@rollup/plugin-babel": "^6.0.0",
-    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-node-resolve": "^15.2.3",
     "change-case": "^4.1.2",
     "fs-extra": "^11.0.0",
     "js-yaml": "^3.14.0",
     "rimraf": "^5.0.0",
-    "rollup": "^4.0.0",
-    "rollup-plugin-strip-banner": "^3.0.0"
+    "rollup": "^4.1.4",
+    "rollup-plugin-strip-banner": "^3.1.0"
   },
   "sideEffects": false,
   "babel": {

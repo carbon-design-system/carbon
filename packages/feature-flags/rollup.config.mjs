@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import path from 'path';
+import { fileURLToPath } from 'node:url';
 import resolve from '@rollup/plugin-node-resolve';
 import babel from '@rollup/plugin-babel';
 import stripBanner from 'rollup-plugin-strip-banner';
@@ -35,7 +35,7 @@ const baseConfig = {
 export default [
   {
     ...baseConfig,
-    input: path.join(__dirname, './src/index.js'),
+    input: fileURLToPath(new URL('src/index.js', import.meta.url)),
     output: {
       file: 'es/index.js',
       format: 'esm',
@@ -43,7 +43,7 @@ export default [
   },
   {
     ...baseConfig,
-    input: path.join(__dirname, './src/index.js'),
+    input: fileURLToPath(new URL('src/index.js', import.meta.url)),
     output: {
       file: 'lib/index.js',
       format: 'commonjs',
