@@ -1268,6 +1268,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "omkarajagunde",
+      "name": "Omkar Ajagunde",
+      "avatar_url": "https://avatars.githubusercontent.com/u/50138744?v=4",
+      "profile": "https://omkarajagunde.web.app/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

@@ -742,6 +742,12 @@ const DatePicker = React.forwardRef(function DatePicker(
       calendarRef.current.set('minDate', minDate);
     }
   }, [minDate]);
+    
+  useEffect(() => {
+      if (calendarRef?.current?.set) {        
+      calendarRef.current.set('allowInput', allowInput);
+    }
+  }, [allowInput]);
 
   useEffect(() => {
     if (calendarRef?.current?.set) {
