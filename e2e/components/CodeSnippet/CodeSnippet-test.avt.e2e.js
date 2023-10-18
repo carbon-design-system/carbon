@@ -55,9 +55,7 @@ test.describe('CodeSnippet @avt', () => {
   });
 
   // Skipping due to a11y violation issue #14237
-  test.skip('accessibility-checker CodeSnippet multiline @avt', async ({
-    page,
-  }) => {
+  test('accessibility-checker CodeSnippet multiline @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'CodeSnippet',
       id: 'components-codesnippet--multiline',
