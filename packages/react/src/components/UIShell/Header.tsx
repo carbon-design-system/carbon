@@ -38,5 +38,15 @@ const Header: React.FC<HeaderProps> = ({
     </header>
   );
 };
+Header.propTypes = {
+  /**
+   * Required props for the accessibility label of the header
+   */
+  ...AriaLabelPropType,
 
+  /**
+   * Optionally provide a custom class name that is applied to the underlying <header>
+   */
+  className: PropTypes.string,
+};
 export default Header;
