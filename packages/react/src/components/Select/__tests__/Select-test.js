@@ -215,7 +215,7 @@ describe('Select', () => {
 
     it('should respect warn prop', () => {
       const { container } = render(
-        <Select id="select" labelText="Select" warn />
+        <Select id="select" labelText="Select" warn warnText="Warning" />
       );
 
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
