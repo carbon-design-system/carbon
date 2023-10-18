@@ -17,6 +17,7 @@ import { PrefixContext } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { FeatureFlagContext } from '../FeatureFlags';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
+import { Text } from '../Text';
 
 const LowerHandle = () => (
   <PrefixContext.Consumer>
@@ -1431,12 +1432,13 @@ class Slider extends PureComponent<SliderProps> {
 
           return (
             <div className={classNames(`${prefix}--form-item`, className)}>
-              <label
+              <Text
+                as="label"
                 htmlFor={twoHandles ? undefined : id}
                 className={labelClasses}
                 id={labelId}>
                 {labelText}
-              </label>
+              </Text>
               <div className={containerClasses}>
                 {twoHandles ? (
                   <div className={lowerInputWrapperClasses}>
@@ -1474,9 +1476,9 @@ class Slider extends PureComponent<SliderProps> {
                     )}
                   </div>
                 ) : null}
-                <span className={`${prefix}--slider__range-label`}>
+                <Text className={`${prefix}--slider__range-label`}>
                   {formatLabel(min, minLabel)}
-                </span>
+                </Text>
                 {/* @ts-ignore onBlur + onChange types are incompatible*/}
                 <div
                   className={sliderClasses}
@@ -1544,9 +1546,9 @@ class Slider extends PureComponent<SliderProps> {
                     ref={this.filledTrackRef}
                   />
                 </div>
-                <span className={`${prefix}--slider__range-label`}>
+                <Text className={`${prefix}--slider__range-label`}>
                   {formatLabel(max, maxLabel)}
-                </span>
+                </Text>
 
                 <div className={upperInputWrapperClasses}>
                   <input
@@ -1603,26 +1605,29 @@ class Slider extends PureComponent<SliderProps> {
                 </div>
               </div>
               {!readOnly && (!isValid || !isValidUpper) && (
-                <div
+                <Text
+                  as="div"
                   className={classNames(
                     `${prefix}--slider__validation-msg`,
                     `${prefix}--slider__validation-msg--invalid`,
                     `${prefix}--form-requirement`
                   )}>
                   {invalidText}
-                </div>
+                </Text>
               )}
               {!readOnly && warn && isValid && isValidUpper && (
-                <div
+                <Text
+                  as="div"
                   className={classNames(
                     `${prefix}--slider__validation-msg`,
                     `${prefix}--form-requirement`
                   )}>
                   {warnText}
-                </div>
+                </Text>
               )}
               {correctedValue && (
-                <div
+                <Text
+                  as="div"
                   role="alert"
                   className={classNames(
                     `${prefix}--slider__status-msg`,
@@ -1631,7 +1636,7 @@ class Slider extends PureComponent<SliderProps> {
                   {t(translationIds.autoCorrectAnnouncement, {
                     correctedValue,
                   })}
-                </div>
+                </Text>
               )}
             </div>
           );

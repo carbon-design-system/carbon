@@ -10,7 +10,19 @@ import React from 'react';
 import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-function FormItem({ className, children, ...rest }) {
+type FormItemProps = {
+  /**
+   * Provide content to be rendered in the form item
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Provide a custom className to be applied to the containing node
+   */
+  className?: string;
+};
+
+function FormItem({ className, children, ...rest }: FormItemProps) {
   const prefix = usePrefix();
   const classNames = classnames(`${prefix}--form-item`, className);
 

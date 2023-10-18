@@ -35,7 +35,18 @@ const renderSlider = ({
   step = defaultStep,
   ...rest
 } = {}) =>
-  render(<Slider value={value} min={min} max={max} step={step} {...rest} />);
+  render(
+    <Slider
+      labelText="Slider"
+      value={value}
+      min={min}
+      max={max}
+      step={step}
+      invalidText="Invalid"
+      warnText="Warning"
+      {...rest}
+    />
+  );
 
 const renderTwoHandleSlider = ({
   unstable_valueUpper = defaultSliderValueUpper,
