@@ -202,8 +202,8 @@
     font-weight: 400;
     grid-column: 1/-1;
     grid-row: 2/-2;
-    margin-block-end: $spacing-09;
     overflow-y: auto;
+    padding-block-end: $spacing-09;
     // Required to accommodate focus outline's negative offset:
     padding-block-start: $spacing-03;
     // anything besides text/p spans full width, with just 16px padding
@@ -347,22 +347,35 @@
   // -----------------------------
   // Modal overflow
   // -----------------------------
+  .#{$prefix}--modal-scroll-content {
+    // Required to accommodate focus outline's negative offset when scrolling in Chrome
+    border-block-end: 2px solid transparent;
+  }
   // Required so overflow-indicator disappears at end of content
   .#{$prefix}--modal-scroll-content > *:last-child {
-    padding-block-end: $spacing-07;
+    padding-block-end: $spacing-06;
   }
 
   .#{$prefix}--modal-content--overflow-indicator {
     position: absolute;
-    background-image: linear-gradient(to bottom, transparent, $layer);
-    block-size: convert.to-rem(32px);
-    content: '';
+    background: $layer;
+    block-size: convert.to-rem(48px);
     grid-column: 1/-1;
     grid-row: 2/-2;
-    inline-size: 100%;
-    inset-block-end: $spacing-09;
+    inline-size: calc(100% - $spacing-05);
+    inset-block-end: 0;
     inset-inline-start: 0;
     pointer-events: none;
+
+    &::before {
+      position: absolute;
+      background-image: linear-gradient(to bottom, transparent, $layer);
+      block-size: convert.to-rem(32px);
+      content: '';
+      inline-size: 100%;
+      inset-block-start: -32px;
+      pointer-events: none;
+    }
   }
 
   // Safari-only media query
@@ -379,7 +392,6 @@
   .#{$prefix}--modal-content:focus
     ~ .#{$prefix}--modal-content--overflow-indicator {
     margin: 0 2px 2px;
-    inline-size: calc(100% - 4px);
   }
 
   @media screen and (-ms-high-contrast: active) {

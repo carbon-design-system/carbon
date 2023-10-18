@@ -31,6 +31,7 @@ import {
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useFeatureFlag } from '../FeatureFlags';
 import { useId } from '../../internal/useId';
+import { Text } from '../Text';
 
 export interface TileProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
@@ -406,9 +407,9 @@ export const SelectableTile = React.forwardRef<
         className={`${prefix}--tile__checkmark ${prefix}--tile__checkmark--persistent`}>
         {isSelected ? <CheckboxCheckedFilled /> : <Checkbox />}
       </span>
-      <label htmlFor={id} className={`${prefix}--tile-content`}>
+      <Text as="label" htmlFor={id} className={`${prefix}--tile-content`}>
         {children}
-      </label>
+      </Text>
     </div>
   );
 });
