@@ -1,4 +1,3 @@
-/* eslint-disable jest/no-test-return-statement */
 /**
  * Copyright IBM Corp. 2016, 2023
  *
@@ -9,7 +8,6 @@
 import React from 'react';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { ArrowDown, ArrowUp } from '../../internal/keyboard/keys';
 import {
   findListBoxNode,
   assertMenuOpen,
@@ -18,6 +16,7 @@ import {
   generateGenericItem,
 } from '../ListBox/test-helpers';
 import ComboBox from '../ComboBox';
+import { act } from 'react-dom/test-utils';
 
 const findInputNode = () => screen.getByRole('combobox');
 const openMenu = async () => {
@@ -238,33 +237,18 @@ describe('ComboBox', () => {
     });
     it('should open menu without moving focus on pressing Alt+ DownArrow', async () => {
       render(<ComboBox {...mockProps} />);
-      const AltkeyEvent = new KeyboardEvent('keydown', {
-        keyCode: 18,
+      act(() => {
+        screen.getByRole('combobox').focus();
       });
-      const DownArrowkeyEvent = new KeyboardEvent('keydown', {
-        keyCode: ArrowDown.code,
-      });
-      window.dispatchEvent(DownArrowkeyEvent);
-      window.dispatchEvent(AltkeyEvent);
-      return Promise.resolve().then(() => {
-        assertMenuOpen(mockProps);
-      });
+      await userEvent.keyboard('{Alt>}{ArrowDown}');
+      assertMenuOpen(mockProps);
     });
 
     it('should close menu and return focus to combobox on pressing Alt+ UpArrow', async () => {
       render(<ComboBox {...mockProps} />);
-      const AltkeyEvent = new KeyboardEvent('keydown', {
-        keyCode: 18,
-      });
-      const ArrowUpkeyEvent = new KeyboardEvent('keydown', {
-        keyCode: ArrowUp.code,
-      });
-      window.dispatchEvent(ArrowUpkeyEvent);
-      window.dispatchEvent(AltkeyEvent);
       await openMenu();
-      return Promise.resolve().then(() => {
-        assertMenuClosed(mockProps);
-      });
+      await userEvent.keyboard('{Alt>}{ArrowUp}');
+      assertMenuClosed(mockProps);
     });
   });
 });
