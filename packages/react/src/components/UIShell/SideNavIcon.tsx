@@ -10,15 +10,38 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 
-function SideNavIcon({ children, className: customClassName, small }) {
+interface SideNavIconProps {
+  /**
+   * Provide a single icon as the child to `SideNavIcon` to render in the
+   * container
+   */
+  children: React.ReactNode;
+
+  /**
+   * Provide an optional class to be applied to the containing node
+   */
+  className?: string;
+
+  /**
+   * Specify whether the icon should be placed in a smaller bounding box
+   * Since the 'small' prop is not provided, we make it optional and set a default value to `false`.
+   */
+  small?: boolean;
+}
+
+const SideNavIcon: React.FC<SideNavIconProps> = ({
+  children,
+  className: customClassName,
+  small,
+}) => {
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--side-nav__icon`]: true,
     [`${prefix}--side-nav__icon--small`]: small,
-    [customClassName]: !!customClassName,
+    [customClassName as string]: !!customClassName,
   });
   return <div className={className}>{children}</div>;
-}
+};
 
 SideNavIcon.propTypes = {
   /**
