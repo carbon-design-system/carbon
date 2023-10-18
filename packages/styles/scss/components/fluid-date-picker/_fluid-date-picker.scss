@@ -62,6 +62,12 @@
 
   .#{$prefix}--date-picker--fluid
     .#{$prefix}--date-picker-input__wrapper
+    > span {
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker-input__wrapper
     .#{$prefix}--date-picker__input {
     padding: convert.to-rem(32px) $spacing-05 convert.to-rem(13px);
     background: transparent;
