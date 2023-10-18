@@ -11,7 +11,7 @@ import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
 test.describe('ComboButton @avt', () => {
-  test('@avt-default-state ComboButton ', async ({ page }) => {
+  test('@avt-default-state ComboButton', async ({ page }) => {
     await visitStory(page, {
       component: 'ComboButton',
       id: 'components-combobutton--default',
@@ -22,7 +22,7 @@ test.describe('ComboButton @avt', () => {
     await expect(page).toHaveNoACViolations('ComboButton');
   });
 
-  test('@avt-advanced-states ComboButton With Danger ', async ({ page }) => {
+  test('@avt-advanced-states ComboButton With Danger', async ({ page }) => {
     await visitStory(page, {
       component: 'ComboButton',
       id: 'components-combobutton--with-danger',
