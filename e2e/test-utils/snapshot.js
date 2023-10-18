@@ -17,10 +17,21 @@ const { expect } = require('@playwright/test');
 async function snapshot(page, context) {
   const id = getSnapshotId(context);
 
+  /**
+   * Restrict mobile snapshots to only the white theme. There's not really a strong
+   * reason for snapshotting components across 4 themes in mobile as components don't
+   * really have different visual states per breakpoint, per theme.
+   * The overall thinking is that if a bug appears in white, it'll be the same bug
+   * present in all other themes.
+   * This configuration overrides any global setting for `widths` in .percy.yml or otherwise.
+   * See https://github.com/carbon-design-system/carbon/issues/14779
+   */
+  const widths = context.themes === 'white' ? [1366, 360] : [1366];
+
   if (process.env.ENABLE_LOCAL_SNAPSHOTS) {
     expect(await page.screenshot()).toMatchSnapshot(`${id}.png`);
   } else {
-    await percySnapshot(page, id);
+    await percySnapshot(page, id, { widths: widths });
   }
 }
 
