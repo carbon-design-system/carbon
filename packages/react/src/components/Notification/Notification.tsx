@@ -951,10 +951,14 @@ export function ActionableNotification({
   const startTrap = useRef<any>();
   const endTrap = useRef<any>();
   const ref = useRef<HTMLDivElement>(null);
+  const actionableButton = useRef<HTMLButtonElement | any>();
 
   useIsomorphicEffect(() => {
-    if (ref.current && hasFocus) {
-      ref.current.focus();
+    if (hasFocus) {
+      const button = document.querySelector(
+        'button.cds--actionable-notification__action-button'
+      ) as HTMLButtonElement;
+      button?.focus();
     }
   });
 
@@ -999,8 +1003,7 @@ export function ActionableNotification({
       role={role}
       className={containerClassName}
       aria-labelledby={title ? id : subtitleId}
-      onBlur={handleBlur}
-      tabIndex={hasFocus ? 0 : -1}>
+      onBlur={handleBlur}>
       <span
         ref={startTrap}
         tabIndex={0}
@@ -1035,11 +1038,12 @@ export function ActionableNotification({
           </div>
         </div>
       </div>
-      <div ref={innerModal} tabIndex={-1}>
+      <div ref={innerModal}>
         {actionButtonLabel && (
           <NotificationActionButton
             onClick={onActionButtonClick}
-            inline={inline}>
+            inline={inline}
+            ref={actionableButton}>
             {actionButtonLabel}
           </NotificationActionButton>
         )}
