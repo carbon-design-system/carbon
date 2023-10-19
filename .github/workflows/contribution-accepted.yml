@@ -20,20 +20,34 @@ jobs:
         uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410 #v6.4.1
         with:
           script: |
-            const proposalAccepted = github.event.label.name.includes('proposal: accepted');
-            const communityContribution = github.event.issue.labels.map(label => label.name).includes('community contribution');
+            response = await github.rest.issues.listLabelsOnIssue({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
 
-            if ((proposalAccepted && communityContribution) || (communityContribution && proposalAccepted)) {
-              console.log('Adding comment to the issue...');
+            comments = await github.rest.issues.listComments({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+
+            const labelArray = response.data.map((label) => label.name)
+
+            const commentsArray = comments.data.map(comment => comment.body)
+
+            console.log('what is our comments array', commentsArray)
+
+            if (labelArray.includes('proposal: accepted') && labelArray.includes('needs: community contribution')) {
               github.rest.issues.createComment({
-                issue_number: github.context.issue.number,
-                owner: github.context.repo.owner,
-                repo: github.context.repo.repo,
-                body: 'The Carbon team has accepted this proposal! Our team doesn’t have the capacity to work on this now, so we are requesting community contributors. Please see the labels for roles that are needed. If you are willing to help out, comment below and we will get in touch!'
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: '👋 Thanks for reporting!'
               });
             } else {
               console.log('No comment added because the conditions are not met.');
             }
       - name: Set Output
         if: steps.conditional-comment.outcome == 'success'
-        run: echo "Comment added successfully."
+        run: echo "Comment added successfully."            
