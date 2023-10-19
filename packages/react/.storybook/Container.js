@@ -25,8 +25,38 @@ function Container({ story, id }) {
     };
   }, []);
 
+  // Does not include LTS message in UIShell elements to avoid overlaying
+  const url = window.location.href.includes('ui-shell');
+
   return (
     <React.StrictMode>
+      {!url && (
+        <div
+          style={{
+            backgroundColor: '#0043CE',
+            width: 'auto',
+            padding: '1rem',
+            margin: '-1rem -1rem 0px -1rem',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            gap: '2rem',
+          }}>
+          <p
+            style={{ color: 'white', fontWeight: 'bold', fontSize: '.875rem' }}>
+            carbon-components-react@7.x is in maintenance mode, support is
+            scheduled to end on September 30, 2024.
+            <span style={{ fontWeight: '400' }}> Start using v11 now!</span>
+          </p>
+          <a
+            style={{ textDecoration: 'none', color: 'white' }}
+            href="https://github.com/carbon-design-system/carbon/blob/main/docs/release-schedule.md"
+            target="_blank">
+            Release schedule
+          </a>
+        </div>
+      )}
+
       <div
         className={id.toLowerCase()}
         data-floating-menu-container
