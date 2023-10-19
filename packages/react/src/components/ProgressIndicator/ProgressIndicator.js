@@ -16,6 +16,7 @@ import {
   Incomplete,
 } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
+import { Text } from '../Text';
 
 const defaultTranslations = {
   'carbon.progress-step.complete': 'Complete',
@@ -212,9 +213,13 @@ function ProgressStep({
           prefix={prefix}
         />
         <div className={`${prefix}--progress-text`}>
-          <p className={`${prefix}--progress-label`}>{label}</p>
+          <Text as="p" className={`${prefix}--progress-label`}>
+            {label}
+          </Text>
           {secondaryLabel !== null && secondaryLabel !== undefined ? (
-            <p className={`${prefix}--progress-optional`}>{secondaryLabel}</p>
+            <Text as="p" className={`${prefix}--progress-optional`}>
+              {secondaryLabel}
+            </Text>
           ) : null}
         </div>
         <span className={`${prefix}--assistive-text`}>{message}</span>

@@ -329,11 +329,11 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                   handleOnMenuChange(false);
                 }
 
-                if (match(event, keys.Home)) {
+                if (match(event, keys.Home) && event.code !== 'Numpad7') {
                   event.target.setSelectionRange(0, 0);
                 }
 
-                if (match(event, keys.End)) {
+                if (match(event, keys.End) && event.code !== 'Numpad1') {
                   event.target.setSelectionRange(
                     event.target.value.length,
                     event.target.value.length

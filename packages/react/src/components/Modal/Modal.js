@@ -20,6 +20,7 @@ import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { noopFn } from '../../internal/noopFn';
+import { Text } from '../Text';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -241,13 +242,19 @@ const Modal = React.forwardRef(function Modal(
       <div className={`${prefix}--modal-header`}>
         {passiveModal && modalButton}
         {modalLabel && (
-          <h2 id={modalLabelId} className={`${prefix}--modal-header__label`}>
+          <Text
+            as="h2"
+            id={modalLabelId}
+            className={`${prefix}--modal-header__label`}>
             {modalLabel}
-          </h2>
+          </Text>
         )}
-        <h3 id={modalHeadingId} className={`${prefix}--modal-header__heading`}>
+        <Text
+          as="h3"
+          id={modalHeadingId}
+          className={`${prefix}--modal-header__heading`}>
           {modalHeading}
-        </h3>
+        </Text>
         {!passiveModal && modalButton}
       </div>
       <div

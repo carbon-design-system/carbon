@@ -25,7 +25,7 @@ export default {
 };
 
 export const Default = () => (
-  <OverflowMenu aria-label="overflow-menu">
+  <OverflowMenu flipped={document?.dir === 'rtl'} aria-label="overflow-menu">
     <OverflowMenuItem itemText="Stop app" />
     <OverflowMenuItem itemText="Restart app" />
     <OverflowMenuItem itemText="Rename app" />
@@ -36,7 +36,7 @@ export const Default = () => (
 );
 
 export const RenderCustomIcon = () => (
-  <OverflowMenu renderIcon={Filter}>
+  <OverflowMenu flipped={document?.dir === 'rtl'} renderIcon={Filter}>
     <OverflowMenuItem itemText="Filter A" />
     <OverflowMenuItem itemText="Filter B" />
   </OverflowMenu>
@@ -54,7 +54,7 @@ export const Playground = (args) => (
 );
 
 Playground.args = {
-  flipped: false,
+  flipped: document?.dir === 'rtl',
   focusTrap: false,
   open: false,
 };

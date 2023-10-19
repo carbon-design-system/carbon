@@ -101,7 +101,12 @@ describe('TextInput', () => {
 
     it('should respect invalid prop', () => {
       const { container } = render(
-        <TextInput id="input-1" labelText="TextInput" invalid />
+        <TextInput
+          id="input-1"
+          labelText="TextInput"
+          invalid
+          invalidText="Invalid"
+        />
       );
 
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
@@ -185,7 +190,12 @@ describe('TextInput', () => {
 
     it('should respect warn prop', () => {
       const { container } = render(
-        <TextInput id="input-1" labelText="TextInput label" warn />
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          warn
+          warnText="Warning"
+        />
       );
 
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access

@@ -29,6 +29,7 @@ import {
   InformationSquareFilled,
 } from '@carbon/icons-react';
 
+import { Text } from '../Text';
 import Button, { type ButtonProps } from '../Button';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
@@ -463,17 +464,19 @@ export function ToastNotification({
         ref={contentRef}
         className={`${prefix}--toast-notification__details`}>
         {title && (
-          <div className={`${prefix}--toast-notification__title`}>{title}</div>
+          <Text as="div" className={`${prefix}--toast-notification__title`}>
+            {title}
+          </Text>
         )}
         {subtitle && (
-          <div className={`${prefix}--toast-notification__subtitle`}>
+          <Text as="div" className={`${prefix}--toast-notification__subtitle`}>
             {subtitle}
-          </div>
+          </Text>
         )}
         {caption && (
-          <div className={`${prefix}--toast-notification__caption`}>
+          <Text as="div" className={`${prefix}--toast-notification__caption`}>
             {caption}
-          </div>
+          </Text>
         )}
         {children}
       </div>
@@ -709,14 +712,16 @@ export function InlineNotification({
           ref={contentRef}
           className={`${prefix}--inline-notification__text-wrapper`}>
           {title && (
-            <div className={`${prefix}--inline-notification__title`}>
+            <Text as="div" className={`${prefix}--inline-notification__title`}>
               {title}
-            </div>
+            </Text>
           )}
           {subtitle && (
-            <div className={`${prefix}--inline-notification__subtitle`}>
+            <Text
+              as="div"
+              className={`${prefix}--inline-notification__subtitle`}>
               {subtitle}
-            </div>
+            </Text>
           )}
           {children}
         </div>
@@ -978,18 +983,20 @@ export function ActionableNotification({
         <div className={`${prefix}--actionable-notification__text-wrapper`}>
           <div className={`${prefix}--actionable-notification__content`}>
             {title && (
-              <div
+              <Text
+                as="div"
                 className={`${prefix}--actionable-notification__title`}
                 id={id}>
                 {title}
-              </div>
+              </Text>
             )}
             {subtitle && (
-              <div
+              <Text
+                as="div"
                 className={`${prefix}--actionable-notification__subtitle`}
                 id={subtitleId}>
                 {subtitle}
-              </div>
+              </Text>
             )}
             {children}
           </div>

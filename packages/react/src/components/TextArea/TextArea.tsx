@@ -17,6 +17,7 @@ import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { noopFn } from '../../internal/noopFn';
+import { Text } from '../Text';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -204,9 +205,9 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   });
 
   const label = labelText ? (
-    <label htmlFor={id} className={labelClasses}>
+    <Text as="label" htmlFor={id} className={labelClasses}>
       {labelText}
-    </label>
+    </Text>
   ) : null;
 
   const counterClasses = classNames(`${prefix}--label`, {
@@ -215,7 +216,9 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
 
   const counter =
     enableCounter && maxCount ? (
-      <div className={counterClasses}>{`${textCount}/${maxCount}`}</div>
+      <Text
+        as="div"
+        className={counterClasses}>{`${textCount}/${maxCount}`}</Text>
     ) : null;
 
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
@@ -227,31 +230,35 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     : `text-area-helper-text-${textAreaInstanceId}`;
 
   const helper = helperText ? (
-    <div id={helperId} className={helperTextClasses}>
+    <Text as="div" id={helperId} className={helperTextClasses}>
       {helperText}
-    </div>
+    </Text>
   ) : null;
 
   const errorId = id + '-error-msg';
 
   const error = invalid ? (
-    <div role="alert" className={`${prefix}--form-requirement`} id={errorId}>
+    <Text
+      as="div"
+      role="alert"
+      className={`${prefix}--form-requirement`}
+      id={errorId}>
       {invalidText}
       {isFluid && (
         <WarningFilled className={`${prefix}--text-area__invalid-icon`} />
       )}
-    </div>
+    </Text>
   ) : null;
 
   const warning = warn ? (
-    <div role="alert" className={`${prefix}--form-requirement`}>
+    <Text as="div" role="alert" className={`${prefix}--form-requirement`}>
       {warnText}
       {isFluid && (
         <WarningAltFilled
           className={`${prefix}--text-area__invalid-icon ${prefix}--text-area__invalid-icon--warning`}
         />
       )}
-    </div>
+    </Text>
   ) : null;
 
   const textareaClasses = classNames(`${prefix}--text-area`, {
