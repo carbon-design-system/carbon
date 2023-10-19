@@ -12,15 +12,16 @@ import classnames from 'classnames';
 import { composeEventHandlers } from '../../tools/events';
 import { usePrefix } from '../../internal/usePrefix';
 import { IconButton } from '../IconButton';
+import { noopFn } from '../../internal/noopFn';
 
 export default function Copy({
   align = 'bottom',
   children,
   className,
-  feedback,
-  feedbackTimeout,
+  feedback = 'Copied!',
+  feedbackTimeout = 2000,
   onAnimationEnd,
-  onClick,
+  onClick = noopFn,
   ...other
 }) {
   const [animation, setAnimation] = useState('');
@@ -124,10 +125,4 @@ Copy.propTypes = {
    * `<button>` is clicked
    */
   onClick: PropTypes.func,
-};
-
-Copy.defaultProps = {
-  feedback: 'Copied!',
-  feedbackTimeout: 2000,
-  onClick: () => {},
 };

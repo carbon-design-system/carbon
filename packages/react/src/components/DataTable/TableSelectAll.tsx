@@ -54,7 +54,7 @@ interface TableSelectAllProps {
 }
 
 const TableSelectAll = ({
-  ariaLabel,
+  ariaLabel = 'Select all rows in the table',
   checked,
   id,
   indeterminate,
@@ -122,10 +122,6 @@ TableSelectAll.propTypes = {
    * Provide a handler to listen to when a user initiates a selection request
    */
   onSelect: PropTypes.func.isRequired,
-};
-
-TableSelectAll.defaultProps = {
-  ariaLabel: 'Select all rows in the table',
 };
 
 export default TableSelectAll;

@@ -12,15 +12,19 @@ import { Simulate } from 'react-dom/test-utils';
 import { FileUploaderDropContainer } from '../';
 import { uploadFiles } from '../test-helpers';
 
+const requiredProps = { labelText: 'Add file' };
+
 describe('FileUploaderDropContainer', () => {
   it('should not have axe violations', async () => {
-    const { container } = render(<FileUploaderDropContainer />);
+    const { container } = render(
+      <FileUploaderDropContainer {...requiredProps} />
+    );
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('should support a custom class name on the drop area', () => {
     const { container } = render(
-      <FileUploaderDropContainer className="test" />
+      <FileUploaderDropContainer className="test" {...requiredProps} />
     );
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const dropArea = container.querySelector('button');
@@ -30,8 +34,8 @@ describe('FileUploaderDropContainer', () => {
   it('should have a unique id each time it is used', () => {
     const { container } = render(
       <>
-        <FileUploaderDropContainer />
-        <FileUploaderDropContainer />
+        <FileUploaderDropContainer {...requiredProps} />
+        <FileUploaderDropContainer {...requiredProps} />
       </>
     );
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
@@ -40,14 +44,18 @@ describe('FileUploaderDropContainer', () => {
   });
 
   it('should render with the default labelText prop', () => {
-    const { container } = render(<FileUploaderDropContainer />);
+    const { container } = render(
+      <FileUploaderDropContainer {...requiredProps} />
+    );
     // eslint-disable-next-line testing-library/prefer-screen-queries
     const label = getByText(container, 'Add file');
     expect(label).toBeInstanceOf(HTMLElement);
   });
 
   it('should render with multiple set to false by default', () => {
-    const { container } = render(<FileUploaderDropContainer />);
+    const { container } = render(
+      <FileUploaderDropContainer {...requiredProps} />
+    );
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const input = container.querySelector('input');
     expect(input.getAttribute('multiple')).toBeFalsy();
@@ -71,7 +79,7 @@ describe('FileUploaderDropContainer', () => {
   it('should call `onAddFiles` when a file is selected', () => {
     const onAddFiles = jest.fn();
     const { container } = render(
-      <FileUploaderDropContainer onAddFiles={onAddFiles} />
+      <FileUploaderDropContainer onAddFiles={onAddFiles} {...requiredProps} />
     );
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const input = container.querySelector('input');
@@ -95,7 +103,11 @@ describe('FileUploaderDropContainer', () => {
   it('should mark invalid files using default pattern', () => {
     const onAddFiles = jest.fn();
     const { container } = render(
-      <FileUploaderDropContainer onAddFiles={onAddFiles} accept={['.txt']} />
+      <FileUploaderDropContainer
+        onAddFiles={onAddFiles}
+        accept={['.txt']}
+        {...requiredProps}
+      />
     );
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const input = container.querySelector('input');
@@ -138,7 +150,11 @@ describe('FileUploaderDropContainer', () => {
   it('should be case insensitive when marking files invalid', () => {
     const onAddFiles = jest.fn();
     const { container } = render(
-      <FileUploaderDropContainer onAddFiles={onAddFiles} accept={['.jpeg']} />
+      <FileUploaderDropContainer
+        onAddFiles={onAddFiles}
+        accept={['.jpeg']}
+        {...requiredProps}
+      />
     );
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const input = container.querySelector('input');
@@ -181,6 +197,7 @@ describe('FileUploaderDropContainer', () => {
         onAddFiles={onAddFiles}
         accept={['.txt', '.a_a', '.b-b', '.a-b_c']}
         pattern=".[0-9a-z-_]+$"
+        {...requiredProps}
       />
     );
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access

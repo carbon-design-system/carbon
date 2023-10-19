@@ -14,12 +14,11 @@ import SelectItem from '../../SelectItem';
 import { usePrefix } from '../../../internal/usePrefix';
 
 const getInstanceId = setupGetInstanceId();
-
 function PageSelector({
-  className,
+  className = null,
   currentPage,
-  id,
-  labelText,
+  id = 1,
+  labelText = 'Current page number',
   totalPages,
   ...other
 }) {
@@ -69,12 +68,6 @@ PageSelector.propTypes = {
    * This value is calculated using a valid `totalItems` prop passed to the parent `Unstable_Pagination`.
    */
   totalPages: PropTypes.number.isRequired,
-};
-
-PageSelector.defaultProps = {
-  className: null,
-  id: 1,
-  labelText: 'Current page number',
 };
 
 export default PageSelector;
