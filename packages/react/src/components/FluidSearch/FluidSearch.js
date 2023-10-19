@@ -26,13 +26,6 @@ const FluidSearch = React.forwardRef(function FluidSearch(
   );
 });
 
-FluidSearch.defaultProps = {
-  autoComplete: 'off',
-  closeButtonLabelText: 'Clear search input',
-  role: 'searchbox',
-  type: 'text',
-};
-
 FluidSearch.propTypes = {
   /**
    * Specify an optional value for the `autocomplete` property on the underlying

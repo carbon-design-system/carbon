@@ -9,8 +9,8 @@
  * Use the local `localCompare` with the `numeric` option to sort two,
  * potentially alpha-numeric, strings in a list of items.
  *
- * @param {string} itemA
- * @param {string} itemB
+ * @param {ItemType} itemA
+ * @param {ItemType} itemB
  * @param {object} options
  * @param {string} options.locale
  * @returns {number}
