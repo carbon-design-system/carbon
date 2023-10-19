@@ -204,9 +204,9 @@ interface DatePickerProps
   extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes> {
   /**
    * flatpickr prop passthrough. Allows the user to enter a date directly
-   * into the input field, Note: If we set this flag to false and a user picks a date, 
-   * they won't be able to remove it by just pressing Delete/Backspace key. 
-   * Instead, you'll need to set the value to an empty string yourself if you want to clear the date. 
+   * into the input field, Note: If we set this flag to false and a user picks a date,
+   * they won't be able to remove it by just pressing Delete/Backspace key.
+   * Instead, you'll need to set the value to an empty string yourself if you want to clear the date.
    * This will make the input behave like a controlled form element.
    */
   allowInput?: boolean;
@@ -745,9 +745,9 @@ const DatePicker = React.forwardRef(function DatePicker(
       calendarRef.current.set('minDate', minDate);
     }
   }, [minDate]);
-    
+
   useEffect(() => {
-      if (calendarRef?.current?.set) {        
+    if (calendarRef?.current?.set) {
       calendarRef.current.set('allowInput', allowInput);
     }
   }, [allowInput]);
@@ -826,9 +826,9 @@ const DatePicker = React.forwardRef(function DatePicker(
 DatePicker.propTypes = {
   /**
    * flatpickr prop passthrough. Allows the user to enter a date directly
-   * into the input field, Note: If we set this flag to false and a user picks a date, 
-   * they won't be able to remove it by just clicking on it. 
-   * Instead, you'll need to set the value to an empty string yourself if you want to clear the date. 
+   * into the input field, Note: If we set this flag to false and a user picks a date,
+   * they won't be able to remove it by just clicking on it.
+   * Instead, you'll need to set the value to an empty string yourself if you want to clear the date.
    * This will make the input behave like a controlled form element.
    */
   allowInput: PropTypes.bool,
