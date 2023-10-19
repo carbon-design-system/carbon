@@ -201,10 +201,10 @@ export const ModalFooter = React.forwardRef<HTMLElement, ModalFooterProps>(
       secondaryButtonText,
       secondaryButtons,
       secondaryClassName,
-      loadingStatus,
+      loadingStatus = 'inactive',
       loadingDescription,
       loadingIconDescription,
-      onLoadingSuccess,
+      onLoadingSuccess = noopFn,
       ...rest
     },
     ref

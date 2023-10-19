@@ -85,7 +85,7 @@ $-loading-gap-small: 110;
   }
 
   .#{$prefix}--btn .#{$prefix}--inline-loading--btn {
-    min-height: 0;
+    min-block-size: 0;
   }
 
   /* If IE11 Don't show check animation */

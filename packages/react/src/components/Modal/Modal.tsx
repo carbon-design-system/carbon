@@ -213,11 +213,10 @@ const Modal = React.forwardRef(function Modal(
     preventCloseOnClickOutside = false,
     isFullWidth,
     launcherButtonRef,
-    // new props
-    loadingStatus,
+    loadingStatus = 'inactive',
     loadingDescription,
     loadingIconDescription,
-    onLoadingSuccess,
+    onLoadingSuccess = noopFn,
     ...rest
   }: ModalProps,
   ref: React.LegacyRef<HTMLDivElement>
