@@ -208,7 +208,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     onKeyDown: (evt) => {
       if (!disabled && enableCounter && counterMode === 'word') {
         const key = evt.which;
-        console.log(key);
+
         if (maxCount && textCount >= maxCount && key === 32) {
           evt.preventDefault();
         }
