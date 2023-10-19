@@ -54,66 +54,73 @@ interface TableExpandRowProps extends PropsWithChildren<TableRowProps> {
   onExpand: MouseEventHandler<HTMLButtonElement>;
 }
 
-const TableExpandRow = ({
-  ['aria-controls']: ariaControls,
-  ['aria-label']: ariaLabel,
-  ariaLabel: deprecatedAriaLabel,
-  className: rowClassName,
-  children,
-  isExpanded,
-  onExpand,
-  expandIconDescription,
-  isSelected,
-  expandHeader = 'expand',
-  ...rest
-}: TableExpandRowProps) => {
-  const prefix = usePrefix();
-  const className = cx(
+const TableExpandRow = React.forwardRef(
+  (
     {
-      [`${prefix}--parent-row`]: true,
-      [`${prefix}--expandable-row`]: isExpanded,
-      [`${prefix}--data-table--selected`]: isSelected,
-    },
-    rowClassName
-  );
-  const previousValue = isExpanded ? 'collapsed' : undefined;
+      ['aria-controls']: ariaControls,
+      ['aria-label']: ariaLabel,
+      ariaLabel: deprecatedAriaLabel,
+      className: rowClassName,
+      children,
+      isExpanded,
+      onExpand,
+      expandIconDescription,
+      isSelected,
+      expandHeader = 'expand',
+      ...rest
+    }: TableExpandRowProps,
+    ref: React.Ref<HTMLTableCellElement>
+  ) => {
+    const prefix = usePrefix();
+    const className = cx(
+      {
+        [`${prefix}--parent-row`]: true,
+        [`${prefix}--expandable-row`]: isExpanded,
+        [`${prefix}--data-table--selected`]: isSelected,
+      },
+      rowClassName
+    );
+    const previousValue = isExpanded ? 'collapsed' : undefined;
 
-  return (
-    <tr {...rest} className={className} data-parent-row>
-      <TableCell
-        className={`${prefix}--table-expand`}
-        data-previous-value={previousValue}
-        headers={expandHeader}>
-        <button
-          type="button"
-          className={`${prefix}--table-expand__button`}
-          onClick={onExpand}
-          title={expandIconDescription}
-          aria-label={deprecatedAriaLabel || ariaLabel}
-          aria-expanded={isExpanded}
-          aria-controls={ariaControls}>
-          <ChevronRight
-            className={`${prefix}--table-expand__svg`}
-            aria-label={expandIconDescription}
-          />
-        </button>
-      </TableCell>
-      {children}
-    </tr>
-  );
-};
+    return (
+      <tr {...rest} ref={ref as never} className={className} data-parent-row>
+        <TableCell
+          className={`${prefix}--table-expand`}
+          data-previous-value={previousValue}
+          headers={expandHeader}>
+          <button
+            type="button"
+            className={`${prefix}--table-expand__button`}
+            onClick={onExpand}
+            title={expandIconDescription}
+            aria-label={deprecatedAriaLabel || ariaLabel}
+            aria-expanded={isExpanded}
+            aria-controls={ariaControls}>
+            <ChevronRight
+              className={`${prefix}--table-expand__svg`}
+              aria-label={expandIconDescription}
+            />
+          </button>
+        </TableCell>
+        {children}
+      </tr>
+    );
+  }
+);
 
 TableExpandRow.propTypes = {
   /**
    * Space separated list of one or more ID values referencing the TableExpandedRow(s) being controlled by the TableExpandRow
    * TODO: make this required in v12
    */
+  /**@ts-ignore*/
   ['aria-controls']: PropTypes.string,
 
   /**
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */
+  /**@ts-ignore*/
   ['aria-label']: PropTypes.string,
 
   /**
@@ -152,4 +159,5 @@ TableExpandRow.propTypes = {
   onExpand: PropTypes.func.isRequired,
 };
 
+TableExpandRow.displayName = 'TableExpandRow';
 export default TableExpandRow;
