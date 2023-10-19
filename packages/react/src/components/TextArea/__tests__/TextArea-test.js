@@ -404,7 +404,6 @@ describe('TextArea', () => {
           enableCounter={true}
           maxCount={5}
           counterMode="word"
-          // defaultValue="one two three four five"
         />
       );
 
