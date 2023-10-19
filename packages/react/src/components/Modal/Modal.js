@@ -19,6 +19,7 @@ import wrapFocus, {
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
+import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
 
 const getInstanceId = setupGetInstanceId();
@@ -28,27 +29,27 @@ const Modal = React.forwardRef(function Modal(
     'aria-label': ariaLabelProp,
     children,
     className,
-    modalHeading,
-    modalLabel,
+    modalHeading = '',
+    modalLabel = '',
     modalAriaLabel,
-    passiveModal,
+    passiveModal = false,
     secondaryButtonText,
     primaryButtonText,
     open,
-    onRequestClose,
-    onRequestSubmit,
+    onRequestClose = noopFn,
+    onRequestSubmit = noopFn,
     onSecondarySubmit,
-    primaryButtonDisabled,
+    primaryButtonDisabled = false,
     danger,
     alert,
     secondaryButtons,
-    selectorPrimaryFocus, // eslint-disable-line
-    selectorsFloatingMenus, // eslint-disable-line
-    shouldSubmitOnEnter, // eslint-disable-line
+    selectorPrimaryFocus = '[data-modal-primary-focus]',
+    selectorsFloatingMenus,
+    shouldSubmitOnEnter,
     size,
-    hasScrollingContent,
+    hasScrollingContent = false,
     closeButtonLabel,
-    preventCloseOnClickOutside, // eslint-disable-line
+    preventCloseOnClickOutside = false,
     isFullWidth,
     launcherButtonRef,
     ...rest
@@ -513,19 +514,6 @@ Modal.propTypes = {
    * Specify the size variant.
    */
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
-};
-
-Modal.defaultProps = {
-  onRequestClose: () => {},
-  onRequestSubmit: () => {},
-  primaryButtonDisabled: false,
-  onKeyDown: () => {},
-  passiveModal: false,
-  modalHeading: '',
-  modalLabel: '',
-  preventCloseOnClickOutside: false,
-  selectorPrimaryFocus: '[data-modal-primary-focus]',
-  hasScrollingContent: false,
 };
 
 export default Modal;

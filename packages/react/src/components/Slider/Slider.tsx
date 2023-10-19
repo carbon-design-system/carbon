@@ -496,18 +496,6 @@ class Slider extends PureComponent<SliderProps> {
     warnText: PropTypes.node,
   };
 
-  static defaultProps = {
-    hideTextInput: false,
-    step: 1,
-    stepMultiplier: 4,
-    disabled: false,
-    minLabel: '',
-    maxLabel: '',
-    inputType: 'number',
-    readOnly: false,
-    translateWithId,
-  };
-
   static contextType = FeatureFlagContext;
 
   state = {
@@ -826,11 +814,13 @@ class Slider extends PureComponent<SliderProps> {
       return;
     }
 
+    const { step = 1, stepMultiplier = 4 } = this.props;
+
     let delta = 0;
     if (matches(evt, [keys.ArrowDown, keys.ArrowLeft])) {
-      delta = -(this.props.step ?? Slider.defaultProps.step);
+      delta = -step;
     } else if (matches(evt, [keys.ArrowUp, keys.ArrowRight])) {
-      delta = this.props.step ?? Slider.defaultProps.step;
+      delta = step;
     } else {
       // Ignore keys we don't want to handle
       return;
@@ -838,8 +828,7 @@ class Slider extends PureComponent<SliderProps> {
 
     // If shift was held, account for the stepMultiplier
     if (evt.shiftKey) {
-      const stepMultiplier = this.props.stepMultiplier;
-      delta *= stepMultiplier ?? Slider.defaultProps.stepMultiplier;
+      delta *= stepMultiplier;
     }
 
     if (this.hasTwoHandles() && this.state.activeHandle) {
@@ -1051,11 +1040,10 @@ class Slider extends PureComponent<SliderProps> {
   };
 
   calcSteppedValuePercent = ({ leftPercent, range }) => {
-    const totalSteps = range / (this.props.step ?? Slider.defaultProps.step);
+    const { step = 1 } = this.props;
+    const totalSteps = range / step;
 
-    let steppedValue =
-      Math.round(leftPercent * totalSteps) *
-      (this.props.step ?? Slider.defaultProps.step);
+    let steppedValue = Math.round(leftPercent * totalSteps) * step;
     const steppedPercent = this.clamp(steppedValue / range, 0, 1);
 
     steppedValue = this.clamp(
@@ -1130,11 +1118,7 @@ class Slider extends PureComponent<SliderProps> {
    *   A value determining how much the value should increase/decrease by moving
    *   the thumb by mouse.
    */
-  calcValueForDelta = (
-    currentValue,
-    delta,
-    step = Slider.defaultProps.step
-  ) => {
+  calcValueForDelta = (currentValue, delta, step = 1) => {
     return (
       (delta > 0 ? Math.floor(currentValue / step) * step : currentValue) +
       delta
@@ -1311,26 +1295,26 @@ class Slider extends PureComponent<SliderProps> {
       ariaLabelInput,
       unstable_ariaLabelInputUpper: ariaLabelInputUpper,
       className,
-      hideTextInput,
+      hideTextInput = false,
       id = (this.inputId =
         this.inputId ||
         `__carbon-slider_${Math.random().toString(36).substr(2)}`),
       min,
-      minLabel,
+      minLabel = '',
       max,
-      maxLabel,
+      maxLabel = '',
       formatLabel = defaultFormatLabel,
       labelText,
-      step,
+      step = 1,
       stepMultiplier: _stepMultiplier,
-      inputType,
+      inputType = 'number',
       invalidText,
       required,
-      disabled,
+      disabled = false,
       name,
       unstable_nameUpper: nameUpper,
       light,
-      readOnly,
+      readOnly = false,
       warn,
       warnText,
       translateWithId: t = translateWithId,

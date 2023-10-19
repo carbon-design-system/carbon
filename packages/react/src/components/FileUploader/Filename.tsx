@@ -44,14 +44,15 @@ export interface FilenameProps
   /**
    * Provide a custom tabIndex value for the `<Filename>`
    */
-  tabIndex?: number | string;
+  tabIndex?: number;
 }
 
 function Filename({
-  iconDescription,
-  status,
+  iconDescription = 'Uploading file',
+  status = 'uploading',
   invalid,
   name,
+  tabIndex = 0,
   ['aria-describedby']: ariaDescribedBy,
   ...rest
 }: FilenameProps) {
@@ -74,12 +75,8 @@ function Filename({
             aria-label={`${iconDescription} - ${name}`}
             className={`${prefix}--file-close`}
             type="button"
+            tabIndex={tabIndex}
             {...rest}
-            tabIndex={
-              rest.tabIndex !== undefined
-                ? parseInt(rest.tabIndex as string, 10)
-                : undefined
-            }
             aria-describedby={invalid ? ariaDescribedBy : undefined}>
             <Close />
           </button>
@@ -129,13 +126,7 @@ Filename.propTypes = {
   /**
    * Provide a custom tabIndex value for the `<Filename>`
    */
-  tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-};
-
-Filename.defaultProps = {
-  iconDescription: 'Uploading file',
-  status: 'uploading',
-  tabIndex: '0',
+  tabIndex: PropTypes.number,
 };
 
 export default Filename;

@@ -9,10 +9,22 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
-import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
+import deprecate from '../../prop-types/deprecate';
 
 export interface TableToolbarProps
   extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Specify a label to be read by screen readers on the container node
+   * 'aria-label' of the TableToolbar component.
+   */
+  ['aria-label']?: string;
+
+  /**
+   * @deprecated please use `aria-label` instead.
+   * 'aria-label' of the TableToolbar component.
+   */
+  ariaLabel?: string;
+
   /**
    * Pass in the children that will be rendered inside the TableToolbar
    */
@@ -25,6 +37,8 @@ export interface TableToolbarProps
 }
 
 const TableToolbar: React.FC<TableToolbarProps> = ({
+  ['aria-label']: ariaLabel = 'data table toolbar',
+  ariaLabel: deprecatedAriaLabel,
   children,
   size,
   ...rest
@@ -35,7 +49,10 @@ const TableToolbar: React.FC<TableToolbarProps> = ({
     [`${prefix}--table-toolbar--${size}`]: size,
   });
   return (
-    <section {...rest} className={className}>
+    <section
+      aria-label={deprecatedAriaLabel || ariaLabel}
+      {...rest}
+      className={className}>
       {children}
     </section>
   );
@@ -43,9 +60,20 @@ const TableToolbar: React.FC<TableToolbarProps> = ({
 
 TableToolbar.propTypes = {
   /**
-   * Required props for the accessibility label of the TableToolbar
+   * 'aria-label' of the TableToolbar component.
+   * Specify a label to be read by screen readers on the container node
    */
-  ...AriaLabelPropType,
+  ['aria-label']: PropTypes.string,
+
+  /**
+   * Deprecated, please use `aria-label` instead.
+   * Specify a label to be read by screen readers on the container node.
+   * 'aria-label' of the TableToolbar component.
+   */
+  ariaLabel: deprecate(
+    PropTypes.string,
+    'This prop syntax has been deprecated. Please use the new `aria-label`.'
+  ),
 
   /**
    * Pass in the children that will be rendered inside the TableToolbar
@@ -56,10 +84,6 @@ TableToolbar.propTypes = {
    * `lg` Change the row height of table
    */
   size: PropTypes.oneOf(['sm', 'lg']),
-};
-
-TableToolbar.defaultProps = {
-  'aria-label': 'data table toolbar',
 };
 
 export default TableToolbar;

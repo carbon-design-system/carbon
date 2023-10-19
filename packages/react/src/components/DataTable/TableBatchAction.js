@@ -10,7 +10,17 @@ import React from 'react';
 import { AddFilled as iconAddSolid } from '@carbon/icons-react';
 import Button from '../Button';
 
-const TableBatchAction = (props) => <Button {...props} />;
+const TableBatchAction = ({
+  renderIcon = iconAddSolid,
+  iconDescription = 'Add',
+  ...props
+}) => (
+  <Button
+    renderIcon={renderIcon}
+    iconDescription={iconDescription}
+    {...props}
+  />
+);
 
 TableBatchAction.propTypes = {
   /**
@@ -35,11 +45,6 @@ TableBatchAction.propTypes = {
    * Optional function to render your own icon in the underlying button
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-};
-
-TableBatchAction.defaultProps = {
-  renderIcon: iconAddSolid,
-  iconDescription: 'Add',
 };
 
 export default TableBatchAction;
