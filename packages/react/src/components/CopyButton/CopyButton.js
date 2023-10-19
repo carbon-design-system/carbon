@@ -12,12 +12,24 @@ import { Copy as CopyIcon } from '@carbon/icons-react';
 import Copy from '../Copy';
 import { LayoutConstraint } from '../Layout';
 import { usePrefix } from '../../internal/usePrefix';
-
-export default function CopyButton({ iconDescription, className, ...other }) {
+import { noopFn } from '../../internal/noopFn';
+export default function CopyButton({
+  align = 'bottom',
+  feedback = 'Copied!',
+  feedbackTimeout = 2000,
+  iconDescription = 'Copy to clipboard',
+  className,
+  onClick = noopFn,
+  ...other
+}) {
   const prefix = usePrefix();
   return (
     <LayoutConstraint size={{ default: 'md', max: 'lg' }}>
       <Copy
+        feedback={feedback}
+        feedbackTimeout={feedbackTimeout}
+        onClick={onClick}
+        align={align}
         className={classnames(className, `${prefix}--copy-btn`)}
         aria-label={iconDescription}
         {...other}>
@@ -28,6 +40,20 @@ export default function CopyButton({ iconDescription, className, ...other }) {
 }
 
 CopyButton.propTypes = {
+  /**
+   * Specify how the trigger should align with the tooltip
+   */
+  align: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+    'left',
+    'right',
+  ]),
+
   /**
    * Specify an optional className to be applied to the underlying `<button>`
    */
@@ -55,11 +81,4 @@ CopyButton.propTypes = {
    * `<button>` is clicked
    */
   onClick: PropTypes.func,
-};
-
-CopyButton.defaultProps = {
-  iconDescription: 'Copy to clipboard',
-  feedback: 'Copied!',
-  feedbackTimeout: 2000,
-  onClick: () => {},
 };

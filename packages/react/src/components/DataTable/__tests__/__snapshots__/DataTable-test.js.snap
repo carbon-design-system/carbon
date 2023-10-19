@@ -53,6 +53,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
         >
           <tr>
             <td
+              aria-live="off"
               class="cds--table-column-checkbox cds--table-column-radio"
             >
               <div
@@ -61,7 +62,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
                 <input
                   class="cds--radio-button"
                   id="data-table-17__select-row-b"
-                  name="select-row-b"
+                  name="select-row"
                   type="radio"
                   value=""
                 />
@@ -90,6 +91,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
           </tr>
           <tr>
             <td
+              aria-live="off"
               class="cds--table-column-checkbox cds--table-column-radio"
             >
               <div
@@ -98,7 +100,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
                 <input
                   class="cds--radio-button"
                   id="data-table-17__select-row-a"
-                  name="select-row-a"
+                  name="select-row"
                   type="radio"
                   value=""
                 />
@@ -127,6 +129,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
           </tr>
           <tr>
             <td
+              aria-live="off"
               class="cds--table-column-checkbox cds--table-column-radio"
             >
               <div
@@ -135,7 +138,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
                 <input
                   class="cds--radio-button"
                   id="data-table-17__select-row-c"
-                  name="select-row-c"
+                  name="select-row"
                   type="radio"
                   value=""
                 />
@@ -222,6 +225,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
         >
           <tr>
             <td
+              aria-live="off"
               class="cds--table-column-checkbox cds--table-column-radio"
             >
               <div
@@ -230,7 +234,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
                 <input
                   class="cds--radio-button"
                   id="data-table-16__select-row-b"
-                  name="select-row-b"
+                  name="select-row"
                   type="radio"
                   value=""
                 />
@@ -259,6 +263,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
           </tr>
           <tr>
             <td
+              aria-live="off"
               class="cds--table-column-checkbox cds--table-column-radio"
             >
               <div
@@ -267,7 +272,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
                 <input
                   class="cds--radio-button"
                   id="data-table-16__select-row-a"
-                  name="select-row-a"
+                  name="select-row"
                   type="radio"
                   value=""
                 />
@@ -296,6 +301,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
           </tr>
           <tr>
             <td
+              aria-live="off"
               class="cds--table-column-checkbox cds--table-column-radio"
             >
               <div
@@ -304,7 +310,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
                 <input
                   class="cds--radio-button"
                   id="data-table-16__select-row-c"
-                  name="select-row-c"
+                  name="select-row"
                   type="radio"
                   value=""
                 />
@@ -626,6 +632,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
         <thead>
           <tr>
             <th
+              aria-live="off"
               class="cds--table-column-checkbox"
               scope="col"
             >
@@ -675,6 +682,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
         >
           <tr>
             <td
+              aria-live="off"
               class="cds--table-column-checkbox"
             >
               <div
@@ -683,7 +691,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 <input
                   class="cds--checkbox"
                   id="data-table-7__select-row-b"
-                  name="select-row-b"
+                  name="select-row"
                   type="checkbox"
                 />
                 <label
@@ -707,6 +715,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
           </tr>
           <tr>
             <td
+              aria-live="off"
               class="cds--table-column-checkbox"
             >
               <div
@@ -715,7 +724,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 <input
                   class="cds--checkbox"
                   id="data-table-7__select-row-a"
-                  name="select-row-a"
+                  name="select-row"
                   type="checkbox"
                 />
                 <label
@@ -739,6 +748,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
           </tr>
           <tr>
             <td
+              aria-live="off"
               class="cds--table-column-checkbox"
             >
               <div
@@ -747,7 +757,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 <input
                   class="cds--checkbox"
                   id="data-table-7__select-row-c"
-                  name="select-row-c"
+                  name="select-row"
                   type="checkbox"
                 />
                 <label

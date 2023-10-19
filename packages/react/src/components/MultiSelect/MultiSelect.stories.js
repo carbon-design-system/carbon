@@ -8,6 +8,7 @@
 import React from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import mdx from './MultiSelect.mdx';
 
 import MultiSelect from '.';
 import FilterableMultiSelect from './FilterableMultiSelect';
@@ -77,6 +78,11 @@ export default {
       table: { disable: true },
     },
   },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 const items = [
@@ -136,7 +142,7 @@ Playground.args = {
   invalidText: 'whoopsie!',
   label: 'This is a label',
   clearSelectionDescription: 'Total items selected: ',
-  useTitleInItem: 'this is the item title',
+  useTitleInItem: false,
   clearSelectionText: 'To clear selection, press Delete or Backspace,',
 };
 
@@ -250,7 +256,7 @@ export const WithInitialSelectedItems = () => {
   );
 };
 
-export const _Filterable = () => {
+export const Filterable = () => {
   return (
     <div style={{ width: 300 }}>
       <FilterableMultiSelect
@@ -265,7 +271,7 @@ export const _Filterable = () => {
   );
 };
 
-export const _WithLayer = () => (
+export const WithLayerMultiSelect = () => (
   <WithLayer>
     {(layer) => (
       <div style={{ width: 300 }}>

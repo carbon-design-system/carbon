@@ -7,9 +7,9 @@
 
 'use strict';
 
-const { expect, test } = require('@playwright/test');
+const { test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
-const { snapshotStory, visitStory } = require('../../test-utils/storybook');
+const { snapshotStory } = require('../../test-utils/storybook');
 
 test.describe('ComposedModal', () => {
   themes.forEach((theme) => {
@@ -37,6 +37,7 @@ test.describe('ComposedModal', () => {
           theme,
         });
       });
+
       test('full width modal @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'ComposedModal',
@@ -44,17 +45,14 @@ test.describe('ComposedModal', () => {
           theme,
         });
       });
-    });
-  });
 
-  test('accessibility-checker @avt', async ({ page }) => {
-    await visitStory(page, {
-      component: 'ComposedModal',
-      id: 'components-composedmodal--default',
-      globals: {
-        theme: 'white',
-      },
+      test('with scrolling content @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'ComposedModal',
+          id: 'components-composedmodal--with-scrolling-content',
+          theme,
+        });
+      });
     });
-    await expect(page).toHaveNoACViolations('ComposedModal');
   });
 });

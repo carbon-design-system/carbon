@@ -238,7 +238,7 @@ describe('TextArea', () => {
         );
       });
 
-      it('should not call `onClick` when the `<input>` is clicked but disabled', () => {
+      it('should not call `onClick` when the `<input>` is clicked but disabled', async () => {
         const onClick = jest.fn();
         render(
           <TextArea
@@ -249,7 +249,7 @@ describe('TextArea', () => {
           />
         );
 
-        userEvent.click(screen.getByRole('textbox'));
+        await userEvent.click(screen.getByRole('textbox'));
         expect(onClick).not.toHaveBeenCalled();
       });
 
@@ -269,7 +269,7 @@ describe('TextArea', () => {
         await userEvent.click(screen.getByRole('textbox'));
         expect(onClick).toHaveBeenCalledTimes(1);
 
-        userEvent.type(screen.getByRole('textbox'), 'x');
+        await userEvent.type(screen.getByRole('textbox'), 'x');
         expect(screen.getByRole('textbox')).not.toHaveValue('x');
         expect(onChange).toHaveBeenCalledTimes(0);
       });

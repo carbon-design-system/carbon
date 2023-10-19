@@ -84,7 +84,7 @@ export const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
       closeClassName,
       closeIconClassName,
       closeModal,
-      iconDescription,
+      iconDescription = 'Close',
       label,
       labelClassName,
       title,
@@ -197,8 +197,4 @@ ModalHeader.propTypes = {
    * Specify an optional className to be applied to the modal heading
    */
   titleClassName: PropTypes.string,
-};
-
-ModalHeader.defaultProps = {
-  iconDescription: 'Close',
 };

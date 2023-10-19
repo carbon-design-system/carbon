@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
   assertMenuOpen,
@@ -29,6 +29,7 @@ describe('FluidDropdown', () => {
       label: 'input',
       placeholder: 'Filter...',
       type: 'default',
+      titleText: 'Dropdown label',
     };
   });
 
@@ -104,12 +105,12 @@ describe('FluidDropdown', () => {
 
   describe('title', () => {
     it('renders a title', () => {
-      render(<FluidDropdown titleText="Email Input" {...mockProps} />);
+      render(<FluidDropdown {...mockProps} titleText="Email Input" />);
       expect(screen.getByText('Email Input')).toBeInTheDocument();
     });
 
     it('has the expected classes', () => {
-      render(<FluidDropdown titleText="Email Input" {...mockProps} />);
+      render(<FluidDropdown {...mockProps} titleText="Email Input" />);
       expect(screen.getByText('Email Input')).toHaveClass(`${prefix}--label`);
     });
   });
@@ -167,8 +168,6 @@ describe('FluidDropdown', () => {
   });
 
   describe('Component API', () => {
-    afterEach(cleanup);
-
     it('should accept a `ref` for the underlying button element', () => {
       const ref = React.createRef();
       render(<FluidDropdown {...mockProps} ref={ref} />);

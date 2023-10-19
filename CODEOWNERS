@@ -15,5 +15,5 @@
 **/PublicAPI-test.js @carbon-design-system/release @carbon-design-system/developers-system
 **/PublicAPI-test.js.snap @carbon-design-system/release @carbon-design-system/developers-system
 
-# Admins should be notified of changes to CI/CD workflows
-/.github/workflows @tay1orjones
+# Admins and team should be notified of changes to CI/CD workflows
+/.github/workflows @tay1orjones @carbon-design-system/developers-system

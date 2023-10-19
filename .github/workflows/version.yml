@@ -28,13 +28,13 @@ jobs:
     if: github.repository == 'carbon-design-system/carbon'
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
         with:
           fetch-depth: '0'
-      - name: Use Node.js 18.x
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
       - uses: actions/cache@v3
         id: cache
@@ -58,7 +58,7 @@ jobs:
         run: |
           yarn lerna version minor --no-git-tag-version --no-push --yes
       - name: Generate token
-        uses: tibdex/github-app-token@v1
+        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a #v2.1.0
         id: generate_token
         with:
           app_id: ${{ secrets.APP_ID }}

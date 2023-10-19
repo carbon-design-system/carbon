@@ -29,6 +29,14 @@ test.describe('Slider', () => {
           theme,
         });
       });
+
+      test('two handle slider @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Slider',
+          id: 'components-slider--two-handle-slider',
+          theme,
+        });
+      });
     });
   });
 });

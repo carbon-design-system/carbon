@@ -30,17 +30,21 @@
     position: relative;
     display: flex;
     align-items: center;
+    gap: 1rem;
     user-select: none;
   }
 
   .#{$prefix}--slider {
     position: relative;
-    width: 100%;
-    min-width: convert.to-rem(200px);
-    max-width: convert.to-rem(640px);
     padding: $spacing-05 0;
-    margin: 0 $spacing-05;
     cursor: pointer;
+    inline-size: 100%;
+    max-inline-size: convert.to-rem(640px);
+    min-inline-size: convert.to-rem(200px);
+
+    .#{$prefix}--slider-container--two-handles & {
+      margin-inline: rem(4px);
+    }
   }
 
   .#{$prefix}--slider__range-label {
@@ -48,37 +52,33 @@
 
     color: $text-primary;
     white-space: nowrap;
-
-    &:last-of-type {
-      margin-right: $spacing-05;
-    }
   }
 
   .#{$prefix}--slider__track {
     position: absolute;
-    width: 100%;
-    height: convert.to-rem(2px);
     background: $border-subtle;
+    block-size: convert.to-rem(2px);
+    inline-size: 100%;
     transform: translate(0%, -50%);
   }
 
   .#{$prefix}--slider__track:before {
     position: absolute;
-    top: convert.to-rem(-5px);
-    left: 50%;
     display: inline-block;
-    width: convert.to-rem(2px);
-    height: convert.to-rem(4px);
     background: $border-subtle;
+    block-size: convert.to-rem(4px);
     content: '';
+    inline-size: convert.to-rem(2px);
+    inset-block-start: convert.to-rem(-5px);
+    inset-inline-start: 50%;
     transform: translate(-50%, 0);
   }
 
   .#{$prefix}--slider__filled-track {
     position: absolute;
-    width: 100%;
-    height: convert.to-rem(2px);
     background: $layer-selected-inverse;
+    block-size: convert.to-rem(2px);
+    inline-size: 100%;
     pointer-events: none;
     transform: translate(0%, -50%);
     transform-origin: left;
@@ -88,11 +88,11 @@
   .#{$prefix}--slider__thumb {
     position: absolute;
     z-index: 3;
-    width: convert.to-rem(14px);
-    height: convert.to-rem(14px);
-    background: $layer-selected-inverse;
     border-radius: 50%;
+    background: $layer-selected-inverse;
+    block-size: convert.to-rem(14px);
     box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 2px transparent;
+    inline-size: convert.to-rem(14px);
     outline: none;
     transform: translate(-50%, -50%);
     transition: transform $duration-fast-02 motion(standard, productive),
@@ -117,16 +117,108 @@
     }
   }
 
+  .#{$prefix}--slider__thumb-icon {
+    fill: $layer-selected-inverse;
+  }
+
+  .#{$prefix}--slider__thumb-icon--focus {
+    display: none;
+    fill: $interactive;
+  }
+
+  .#{$prefix}--slider__thumb--lower,
+  .#{$prefix}--slider__thumb--upper {
+    display: block;
+    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+    border-radius: unset;
+    background-color: transparent;
+    block-size: 24px;
+    box-shadow: none;
+    inline-size: 16px;
+    transform: translate(-100%, -50%);
+    transition: none;
+
+    &::before {
+      position: absolute;
+      z-index: -1;
+      display: block;
+      background: $background;
+      block-size: convert.to-rem(2px);
+      content: '';
+      inline-size: convert.to-rem(6px);
+      inset-block-start: calc(50% - #{convert.to-rem(2px) / 2});
+      inset-inline-end: 0;
+    }
+
+    &:hover {
+      transform: translate(-100%, -50%);
+
+      .#{$prefix}--slider__thumb-icon {
+        fill: $text-secondary;
+      }
+    }
+
+    &:active {
+      box-shadow: none;
+      transform: translate(-100%, -50%);
+    }
+
+    &:focus {
+      background-color: transparent;
+      box-shadow: none;
+      transform: translate(-100%, -50%);
+
+      .#{$prefix}--slider__thumb-icon {
+        display: none;
+        fill: $interactive;
+      }
+
+      .#{$prefix}--slider__thumb-icon--focus {
+        display: block;
+      }
+    }
+  }
+
+  .#{$prefix}--slider__thumb--lower:focus::before,
+  .#{$prefix}--slider__thumb--upper:focus::before {
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--slider__thumb--upper {
+    transform: translate(0, -50%);
+
+    &::before {
+      inset-inline-end: auto;
+      inset-inline-start: 0;
+    }
+
+    &:hover {
+      transform: translate(0, -50%);
+    }
+
+    &:active {
+      transform: translate(0, -50%);
+    }
+
+    &:focus {
+      transform: translate(0, -50%);
+    }
+  }
+
   .#{$prefix}--slider__input {
     display: none;
   }
 
+  .#{$prefix}--slider-text-input-wrapper {
+    position: relative;
+  }
+
   .#{$prefix}--slider-text-input,
   .#{$prefix}-slider-text-input {
-    width: convert.to-rem(64px);
-    height: convert.to-rem(40px);
     -moz-appearance: textfield;
     appearance: textfield;
+    block-size: convert.to-rem(40px);
+    inline-size: convert.to-rem(64px);
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -139,30 +231,29 @@
   }
 
   .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {
-    background-color: $interactive;
+    background-color: $border-interactive;
   }
 
   // Invalid & warn state
   .#{$prefix}--slider-text-input.#{$prefix}--text-input--invalid,
   .#{$prefix}--slider-text-input--warn {
-    width: 6rem;
-    padding-right: $spacing-09;
+    inline-size: 6rem;
+    padding-inline-end: $spacing-09;
   }
 
   .#{$prefix}--slider__invalid-icon {
     position: absolute;
-    // top/transform used to center invalid icon in IE11
-    top: 50%;
-    right: $spacing-05;
     fill: $support-error;
+    // top/transform used to center invalid icon in IE11
+    inset-block-start: 50%;
+    inset-inline-end: $spacing-05;
     transform: translateY(-50%);
   }
 
   .#{$prefix}--slider__validation-msg.#{$prefix}--form-requirement {
     display: block;
     overflow: visible;
-    max-height: 100%;
-    margin-top: 0;
+    max-block-size: 100%;
   }
 
   .#{$prefix}--slider__validation-msg--invalid {
@@ -241,13 +332,24 @@
     cursor: default;
   }
 
-  .#{$prefix}--slider--readonly .#{$prefix}--slider__thumb {
-    width: 0;
-    height: 0;
+  .#{$prefix}--slider-container--readonly .#{$prefix}--slider__thumb {
+    block-size: 0;
+    inline-size: 0;
+
+    &::before,
+    &::after {
+      display: none;
+    }
   }
 
-  .#{$prefix}--slider--readonly ~ .#{$prefix}--slider-text-input {
+  .#{$prefix}--slider-container--readonly .#{$prefix}--slider-text-input {
     background-color: transparent;
+  }
+
+  .#{$prefix}--slider__status-msg.#{$prefix}--form-requirement {
+    display: block;
+    overflow: visible;
+    max-block-size: 100%;
   }
 
   // Skeleton state
@@ -255,8 +357,8 @@
     .#{$prefix}--slider__range-label {
     @include skeleton;
 
-    width: convert.to-rem(20px);
-    height: convert.to-rem(12px);
+    block-size: convert.to-rem(12px);
+    inline-size: convert.to-rem(20px);
   }
 
   .#{$prefix}--slider-container.#{$prefix}--skeleton
@@ -265,11 +367,20 @@
     pointer-events: none;
   }
 
-  .#{$prefix}--slider-container.#{$prefix}--skeleton
+  .#{$prefix}--slider-container.#{$prefix}--skeleton {
     .#{$prefix}--slider__thumb {
-    left: 50%;
-    cursor: default;
-    pointer-events: none;
+      cursor: default;
+      inset-inline-start: 50%;
+      pointer-events: none;
+    }
+
+    .#{$prefix}--slider__thumb--lower {
+      inset-inline-start: 0;
+    }
+
+    .#{$prefix}--slider__thumb--upper {
+      inset-inline-start: 100%;
+    }
   }
 
   // Windows HCM fix

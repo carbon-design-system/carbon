@@ -16,6 +16,8 @@ import { useAnnouncer } from '../../internal/useAnnouncer';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { noopFn } from '../../internal/noopFn';
+import { Text } from '../Text';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -141,26 +143,28 @@ export interface TextAreaProps
 const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const {
     className,
+    disabled = false,
     id,
     labelText,
     hideLabel,
-    onChange,
-    onClick,
-    invalid,
-    invalidText,
-    helperText,
+    onChange = noopFn,
+    onClick = noopFn,
+    invalid = false,
+    invalidText = '',
+    helperText = '',
     light,
-    placeholder,
-    enableCounter,
-    counterMode,
-    maxCount,
+    placeholder = '',
+    enableCounter = false,
+    maxCount = undefined,
+    counterMode = 'character',
     warn = false,
-    warnText,
+    warnText = '',
+    rows = 4,
     ...other
   } = props;
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
-  const { defaultValue, value, disabled } = other;
+  const { defaultValue, value } = other;
 
   function getInitialTextCount(
     value: string | number | undefined,
@@ -202,7 +206,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   } = {
     id,
     onKeyDown: (evt) => {
-      if (!other.disabled && enableCounter && counterMode === 'word') {
+      if (!disabled && enableCounter && counterMode === 'word') {
         const key = evt.which;
         console.log(key);
         if (maxCount && textCount >= maxCount && key === 32) {
@@ -211,7 +215,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
       }
     },
     onPaste: (evt) => {
-      if (!other.disabled) {
+      if (!disabled) {
         if (
           counterMode === 'word' &&
           enableCounter &&
@@ -239,7 +243,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
       }
     },
     onChange: (evt) => {
-      if (!other.disabled) {
+      if (!disabled) {
         if (counterMode == 'character') {
           evt?.persist?.();
           // delay textCount assignation to give the textarea element value time to catch up if is a controlled input
@@ -280,7 +284,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
       }
     },
     onClick: (evt) => {
-      if (!other.disabled && onClick) {
+      if (!disabled && onClick) {
         onClick(evt);
       }
     },
@@ -304,9 +308,9 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   });
 
   const label = labelText ? (
-    <label htmlFor={id} className={labelClasses}>
+    <Text as="label" htmlFor={id} className={labelClasses}>
       {labelText}
-    </label>
+    </Text>
   ) : null;
 
   const counterClasses = classNames(`${prefix}--label`, {
@@ -317,11 +321,13 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     enableCounter &&
     maxCount &&
     (counterMode === 'character' || counterMode === 'word') ? (
-      <div className={counterClasses}>{`${textCount}/${maxCount}`}</div>
+      <Text
+        as="div"
+        className={counterClasses}>{`${textCount}/${maxCount}`}</Text>
     ) : null;
 
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
-    [`${prefix}--form__helper-text--disabled`]: other.disabled,
+    [`${prefix}--form__helper-text--disabled`]: disabled,
   });
 
   const helperId = !helperText
@@ -329,31 +335,35 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     : `text-area-helper-text-${textAreaInstanceId}`;
 
   const helper = helperText ? (
-    <div id={helperId} className={helperTextClasses}>
+    <Text as="div" id={helperId} className={helperTextClasses}>
       {helperText}
-    </div>
+    </Text>
   ) : null;
 
   const errorId = id + '-error-msg';
 
   const error = invalid ? (
-    <div role="alert" className={`${prefix}--form-requirement`} id={errorId}>
+    <Text
+      as="div"
+      role="alert"
+      className={`${prefix}--form-requirement`}
+      id={errorId}>
       {invalidText}
       {isFluid && (
         <WarningFilled className={`${prefix}--text-area__invalid-icon`} />
       )}
-    </div>
+    </Text>
   ) : null;
 
   const warning = warn ? (
-    <div role="alert" className={`${prefix}--form-requirement`}>
+    <Text as="div" role="alert" className={`${prefix}--form-requirement`}>
       {warnText}
       {isFluid && (
         <WarningAltFilled
           className={`${prefix}--text-area__invalid-icon ${prefix}--text-area__invalid-icon--warning`}
         />
       )}
-    </div>
+    </Text>
   ) : null;
 
   const textareaClasses = classNames(`${prefix}--text-area`, {
@@ -392,7 +402,8 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
       className={textareaClasses}
       aria-invalid={invalid}
       aria-describedby={ariaDescribedBy}
-      disabled={other.disabled}
+      disabled={disabled}
+      rows={rows}
       readOnly={other.readOnly}
       ref={ref}
     />
@@ -553,22 +564,6 @@ TextArea.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
-};
-
-TextArea.defaultProps = {
-  disabled: false,
-  onChange: () => {},
-  onClick: () => {},
-  placeholder: '',
-  rows: 4,
-  invalid: false,
-  invalidText: '',
-  helperText: '',
-  enableCounter: false,
-  maxCount: undefined,
-  counterMode: 'character',
-  warn: false,
-  warnText: '',
 };
 
 export default TextArea;

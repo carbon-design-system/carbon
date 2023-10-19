@@ -25,22 +25,23 @@ const defaultMinCollapsedNumberOfRows = 3;
 const defaultMinExpandedNumberOfRows = 16;
 
 function CodeSnippet({
+  align = 'bottom',
   className,
-  type,
+  type = 'single',
   children,
   disabled,
   feedback,
   feedbackTimeout,
   onClick,
-  ['aria-label']: ariaLabel,
+  ['aria-label']: ariaLabel = 'Copy to clipboard',
   ariaLabel: deprecatedAriaLabel,
   copyText,
   copyButtonDescription,
   light,
-  showMoreText,
-  showLessText,
+  showMoreText = 'Show more',
+  showLessText = 'Show less',
   hideCopyButton,
-  wrapText,
+  wrapText = false,
   maxCollapsedNumberOfRows = defaultMaxCollapsedNumberOfRows,
   maxExpandedNumberOfRows = defaultMaxExpandedNumberOfRows,
   minCollapsedNumberOfRows = defaultMinCollapsedNumberOfRows,
@@ -185,6 +186,7 @@ function CodeSnippet({
     return (
       <Copy
         {...rest}
+        align={align}
         onClick={handleCopyClick}
         aria-label={deprecatedAriaLabel || ariaLabel}
         aria-describedby={uid}
@@ -255,6 +257,7 @@ function CodeSnippet({
       )}
       {!hideCopyButton && (
         <CopyButton
+          align={align}
           size={type === 'multi' ? 'sm' : 'md'}
           disabled={disabled}
           onClick={handleCopyClick}
@@ -286,14 +289,28 @@ function CodeSnippet({
 
 CodeSnippet.propTypes = {
   /**
-   * Specify a label to be read by screen readers on the containing <textbox>
+   * Specify how the trigger should align with the tooltip
+   */
+  align: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+    'left',
+    'right',
+  ]),
+
+  /**
+   * Specify a label to be read by screen readers on the containing textbox
    * node
    */
   ['aria-label']: PropTypes.string,
 
   /**
    * Deprecated, please use `aria-label` instead.
-   * Specify a label to be read by screen readers on the containing <textbox>
+   * Specify a label to be read by screen readers on the containing textbox
    * node
    */
   ariaLabel: deprecate(
@@ -400,14 +417,6 @@ CodeSnippet.propTypes = {
    * Specify whether or not to wrap the text.
    */
   wrapText: PropTypes.bool,
-};
-
-CodeSnippet.defaultProps = {
-  ['aria-label']: 'Copy to clipboard',
-  type: 'single',
-  showMoreText: 'Show more',
-  showLessText: 'Show less',
-  wrapText: false,
 };
 
 export default CodeSnippet;

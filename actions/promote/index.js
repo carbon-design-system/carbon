@@ -4,15 +4,12 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-'use strict';
-
-const core = require('@actions/core');
-const execa = require('execa');
-const glob = require('fast-glob');
-const fs = require('fs-extra');
-const got = require('got');
-const path = require('path');
+import core from '@actions/core';
+import execa from 'execa';
+import glob from 'fast-glob';
+import fs from 'fs-extra';
+import got from 'got';
+import path from 'path';
 
 const denylist = new Set(['carbon-components', '@carbon/icons-vue']);
 

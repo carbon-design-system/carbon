@@ -1268,6 +1268,43 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "cordesmj",
+      "name": "cordesmj",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7409239?v=4",
+      "profile": "https://github.com/cordesmj",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "azizChebbi",
+      "name": "Aziz Chebbi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60013060?v=4",
+      "profile": "https://med-aziz-chebbi.web.app/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "misiekhardcore",
+      "name": "Michał Konopski",
+      "avatar_url": "https://avatars.githubusercontent.com/u/58469680?v=4",
+      "profile": "https://github.com/misiekhardcore",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "amanlajpal",
+      "name": "Aman Lajpal",
+      "avatar_url": "https://avatars.githubusercontent.com/u/42869088?v=4",
+      "profile": "https://github.com/amanlajpal",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "commitConvention": "none"

@@ -28,34 +28,34 @@ import { FormContext } from '../FluidForm';
 const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
   {
     className: containerClassName,
-    clearSelectionDescription,
-    clearSelectionText,
-    compareItems,
-    direction,
-    disabled,
+    clearSelectionDescription = 'Total items selected: ',
+    clearSelectionText = 'To clear selection, press Delete or Backspace',
+    compareItems = defaultCompareItems,
+    direction = 'bottom',
+    disabled = false,
     downshiftProps,
-    filterItems,
+    filterItems = defaultFilterItems,
     helperText,
     hideLabel,
     id,
-    initialSelectedItems,
+    initialSelectedItems = [],
     invalid,
     invalidText,
     items,
     itemToElement: ItemToElement, // needs to be capitalized for react to render it correctly
-    itemToString,
+    itemToString = defaultItemToString,
     light,
-    locale,
+    locale = 'en',
     onInputValueChange,
-    open,
+    open = false,
     onChange,
     onMenuChange,
     placeholder,
     titleText,
     type,
-    selectionFeedback,
+    selectionFeedback = 'top-after-reopen',
     size,
-    sortItems,
+    sortItems = defaultSortItems,
     translateWithId,
     useTitleInItem,
     warn,
@@ -163,9 +163,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
       case stateChangeTypes.keyDownHome:
       case stateChangeTypes.keyDownEnd:
         setHighlightedIndex(
-          changes.highlightedIndex !== undefined
-            ? changes.highlightedIndex
-            : null
+          changes.highlightedIndex !== undefined ? changes.highlightedIndex : 0
         );
         if (stateChangeTypes.keyDownArrowDown === type && !isOpen) {
           handleOnMenuChange(true);
@@ -199,8 +197,11 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
     }
   }
 
-  function clearInputValue() {
-    setInputValue('');
+  function clearInputValue(event) {
+    textInput.current.value.length === 1 || match(event, keys.Escape)
+      ? setInputValue('')
+      : setInputValue(textInput.current.value);
+
     if (textInput.current) {
       textInput.current.focus();
     }
@@ -314,10 +315,10 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                   if (match(event, keys.Delete) || match(event, keys.Escape)) {
                     if (isOpen) {
                       handleOnMenuChange(true);
-                      clearInputValue();
+                      clearInputValue(event);
                       event.stopPropagation();
                     } else if (!isOpen) {
-                      clearInputValue();
+                      clearInputValue(event);
                       clearSelection();
                       event.stopPropagation();
                     }
@@ -328,11 +329,11 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                   handleOnMenuChange(false);
                 }
 
-                if (match(event, keys.Home)) {
+                if (match(event, keys.Home) && event.code !== 'Numpad7') {
                   event.target.setSelectionRange(0, 0);
                 }
 
-                if (match(event, keys.End)) {
+                if (match(event, keys.End) && event.code !== 'Numpad1') {
                   event.target.setSelectionRange(
                     event.target.value.length,
                     event.target.value.length
@@ -677,21 +678,6 @@ FilterableMultiSelect.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
-};
-
-FilterableMultiSelect.defaultProps = {
-  compareItems: defaultCompareItems,
-  direction: 'bottom',
-  disabled: false,
-  filterItems: defaultFilterItems,
-  initialSelectedItems: [],
-  itemToString: defaultItemToString,
-  locale: 'en',
-  sortItems: defaultSortItems,
-  open: false,
-  selectionFeedback: 'top-after-reopen',
-  clearSelectionText: 'To clear selection, press Delete or Backspace,',
-  clearSelectionDescription: 'Total items selected: ',
 };
 
 export default FilterableMultiSelect;
