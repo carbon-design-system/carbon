@@ -344,12 +344,12 @@ interface DatePickerProps
   /**
    * The maximum date that a user can pick to.
    */
-  maxDate?: string;
+  maxDate?: string | number;
 
   /**
    * The minimum date that a user can start picking from.
    */
-  minDate?: string;
+  minDate?: string | number;
 
   /**
    * The `change` event handler.
@@ -961,12 +961,12 @@ DatePicker.propTypes = {
   /**
    * The maximum date that a user can pick to.
    */
-  maxDate: PropTypes.string,
+  maxDate: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /**
    * The minimum date that a user can start picking from.
    */
-  minDate: PropTypes.string,
+  minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /**
    * The `change` event handler.

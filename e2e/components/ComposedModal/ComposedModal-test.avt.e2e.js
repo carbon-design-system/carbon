@@ -33,6 +33,7 @@ test.describe('ComposedModal @avt', () => {
     await expect(page).toHaveNoACViolations('ComposedModal-full-width');
   });
 
+  // Skipping now due to AVT violation, possible false positive
   test.skip('@avt-advanced-states ComposedModal Passive Modal', async ({
     page,
   }) => {
