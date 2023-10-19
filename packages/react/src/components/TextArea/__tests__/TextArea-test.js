@@ -426,16 +426,6 @@ describe('TextArea', () => {
         />
       );
 
-      const clipboardEvent = new Event('paste', {
-        bubbles: true,
-        cancelable: true,
-        composed: true,
-      });
-
-      clipboardEvent.clipboardData = {
-        getData: () => 'one two three four five six seven eight nine ten',
-      };
-
       const paste = createEvent.paste(screen.getByRole('textbox'), {
         clipboardData: {
           getData: () =>
