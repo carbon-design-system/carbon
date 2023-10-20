@@ -32,8 +32,7 @@ jobs:
               repo: context.repo.repo,
             });
 
-            console.log('here', github.event)
-            console.log('there', github)
+            console.log('context', context)
             
       - name: Set Output
         if: steps.conditional-comment.outcome == 'success'
