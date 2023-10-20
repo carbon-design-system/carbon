@@ -32,11 +32,7 @@ jobs:
               repo: context.repo.repo,
             });
 
-            console.log('response', response)
-
-            const labelArray = response.data.map((label) => console.log('label', label))
-
-            console.log('label array', labelArray)
+            console.log('here', github.event.label)
             
       - name: Set Output
         if: steps.conditional-comment.outcome == 'success'
