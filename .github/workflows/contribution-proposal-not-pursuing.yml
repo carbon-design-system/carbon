@@ -23,12 +23,14 @@ jobs:
             response = await github.rest.issues.listLabelsOnIssue({
               issue_number: context.issue.number,
               owner: context.repo.owner,
-              repo: context.repo.repo,});
+              repo: context.repo.repo,
+            });
 
             comments = await github.rest.issues.listComments({
               issue_number: context.issue.number,
               owner: context.repo.owner,
-              repo: context.repo.repo, });
+              repo: context.repo.repo, 
+            });
 
             const labelArray = response.data.map((label) => label.name)
 
