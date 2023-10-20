@@ -4,8 +4,16 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+import React from 'react';
 
-export const defaultAttributes = {
+interface IconAttributes
+  extends Omit<React.SVGProps<React.ReactSVGElement>, 'tabIndex'> {
+  tabindex?: string | number | undefined;
+
+  title?: string | undefined;
+}
+
+export const defaultAttributes: IconAttributes = {
   // Reference:
   // https://github.com/IBM/carbon-components-react/issues/1392
   // https://github.com/PolymerElements/iron-iconset-svg/pull/47
@@ -23,9 +31,9 @@ export default function getAttributes({
   height,
   viewBox = `0 0 ${width} ${height}`,
   ...attributes
-} = {}) {
+}: IconAttributes = {}): IconAttributes {
   const { tabindex, ...rest } = attributes;
-  const iconAttributes = {
+  const iconAttributes: IconAttributes = {
     ...defaultAttributes,
     ...rest,
     width,
