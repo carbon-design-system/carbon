@@ -99,7 +99,7 @@ interface SelectProps
   light?: boolean;
 
   /**
-   * Reserved for use with <Pagination> component. Will not render a label for the
+   * Reserved for use with Pagination component. Will not render a label for the
    * select since Pagination renders one for us.
    */
   noLabel?: boolean;
@@ -135,16 +135,16 @@ const Select = React.forwardRef(function Select(
     className,
     id,
     inline = false,
-    labelText,
+    labelText = 'Select',
     disabled = false,
     children,
-    // reserved for use with <Pagination> component
+    // reserved for use with Pagination component
     noLabel = false,
     // eslint-disable-next-line no-unused-vars
     hideLabel = false,
     invalid = false,
-    invalidText,
-    helperText,
+    invalidText = '',
+    helperText = '',
     light = false,
     readOnly,
     size,
@@ -375,7 +375,7 @@ Select.propTypes = {
   ),
 
   /**
-   * Reserved for use with <Pagination> component. Will not render a label for the
+   * Reserved for use with Pagination component. Will not render a label for the
    * select since Pagination renders one for us.
    */
   noLabel: PropTypes.bool,
@@ -405,15 +405,6 @@ Select.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
-};
-
-Select.defaultProps = {
-  disabled: false,
-  labelText: 'Select',
-  inline: false,
-  invalid: false,
-  invalidText: '',
-  helperText: '',
 };
 
 export default Select;

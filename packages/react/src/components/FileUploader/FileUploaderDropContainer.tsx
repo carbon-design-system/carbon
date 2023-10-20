@@ -14,6 +14,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { composeEventHandlers } from '../../tools/events';
 import deprecate from '../../prop-types/deprecate';
 import { ReactAttr } from '../../types/common';
+import { noopFn } from '../../internal/noopFn';
 
 export interface FileUploaderDropContainerProps
   extends Omit<ReactAttr<HTMLButtonElement>, 'tabIndex'> {
@@ -100,7 +101,7 @@ function FileUploaderDropContainer({
   labelText = 'Add file',
   multiple = false,
   name,
-  onAddFiles = () => {},
+  onAddFiles = noopFn,
   onClick,
   pattern = '.[0-9a-z]+$',
   // eslint-disable-next-line react/prop-types
@@ -303,14 +304,6 @@ FileUploaderDropContainer.propTypes = {
     'The `tabIndex` prop for `FileUploaderButton` has ' +
       'been deprecated since it now renders a button element by default.'
   ),
-};
-
-FileUploaderDropContainer.defaultProps = {
-  labelText: 'Add file',
-  multiple: false,
-  onAddFiles: () => {},
-  accept: [],
-  pattern: '.[0-9a-z]+$',
 };
 
 export default FileUploaderDropContainer;

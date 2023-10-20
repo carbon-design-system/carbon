@@ -32,7 +32,7 @@ interface SideNavIconProps {
 const SideNavIcon: React.FC<SideNavIconProps> = ({
   children,
   className: customClassName,
-  small,
+  small = false,
 }) => {
   const prefix = usePrefix();
   const className = cx({
@@ -58,11 +58,7 @@ SideNavIcon.propTypes = {
   /**
    * Specify whether the icon should be placed in a smaller bounding box
    */
-  small: PropTypes.bool.isRequired,
-};
-
-SideNavIcon.defaultProps = {
-  small: false,
+  small: PropTypes.bool,
 };
 
 export default SideNavIcon;
