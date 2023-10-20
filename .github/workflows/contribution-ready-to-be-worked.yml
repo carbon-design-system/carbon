@@ -21,7 +21,7 @@ jobs:
         with:
           script: |
             
-            console.log('HEY', github.event)
+            console.log('HEY', github)
           
             comments = await github.rest.issues.listComments({
               issue_number: context.issue.number,
