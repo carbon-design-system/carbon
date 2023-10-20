@@ -32,6 +32,8 @@ jobs:
               repo: context.repo.repo,
             });
 
+            console.log('response', response)
+
             const labelArray = response.data.map((label) => console.log('label', label))
 
             console.log('label array', labelArray)
