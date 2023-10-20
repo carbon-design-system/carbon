@@ -32,40 +32,19 @@ jobs:
               repo: context.repo.repo,
             });
 
-            events = await github.rest.issues.listEvents({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            });
-
-            const eventsArray = events.data.map((label) => label)
-
-
             const labelArray = response.data.map((label) => label.name)
 
             const commentsArray = comments.data.map(comment => comment.body)
 
             const commentText = "The Carbon team has accepted this proposal! Our team doesn't have the capacity to work on this now, so we are requesting community contributors. Please see the labels for roles that are needed. If you are willing to help out, comment below and we will get in touch!"
 
-            const secondToLastEventTimestamp = new Date(eventsArray[eventsArray.length - 2].created_at)
-            
-            const lastEventTimestamp = new Date(eventsArray[eventsArray.length - 1].created_at)
-
-            const differenceInSeconds = Math.abs((lastEventTimestamp - secondToLastEventTimestamp)/1000)
-
-            console.log('seconds', differenceInSeconds)
-            
             if (labelArray.includes('proposal: accepted') && labelArray.includes('needs: community contribution') && !commentsArray.includes(commentText)) {
-              setTimeout(() => {
-                if(!commentsArray.includes(commentText)) {
-                  github.rest.issues.createComment({
-                    issue_number: context.issue.number,
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    body: commentText
-                  });
-                }
-              }, 2000)
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: commentText
+              });
             } else {
               console.log('No comment added because the conditions are not met.');
             }
