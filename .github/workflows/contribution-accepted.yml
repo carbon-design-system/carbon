@@ -53,15 +53,19 @@ jobs:
 
             const differenceInSeconds = Math.abs((lastEventTimestamp - secondToLastEventTimestamp)/1000)
 
-            console.log('seconds',differenceInSeconds)
+            console.log('seconds', differenceInSeconds)
             
-            if (labelArray.includes('proposal: accepted') && labelArray.includes('needs: community contribution') && !commentsArray.includes(commentText) && (differenceInSeconds > 2)) {
-              github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: commentText
-              });
+            if (labelArray.includes('proposal: accepted') && labelArray.includes('needs: community contribution') && !commentsArray.includes(commentText)) {
+              setTimeOut(() => {
+                if(!commentsArray.includes(commentText)) {
+                  github.rest.issues.createComment({
+                    issue_number: context.issue.number,
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    body: commentText
+                  });
+                }
+              }, 2000)
             } else {
               console.log('No comment added because the conditions are not met.');
             }
