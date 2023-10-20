@@ -8,15 +8,15 @@ permissions:
 
 jobs:
   add-comment:
-    name: Add comment to issue ready to be worked on
+    name: Add comment to issues with proposal accepted and community contribution
     runs-on: ubuntu-latest
     steps:
       - name: Log github event
         env:
           $GITHUB_CONTEXT_LABELS: ${{ toJson(github.event.label) }}
         run: echo "$GITHUB_CONTEXT_LABELS"
-      - name: Conditional Comment Proposal Not Pursuing
-        id: conditional-comment-proposal-not-pursuing
+      - name: Conditional Check and Add Comment
+        id: conditional-comment
         uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410 #v6.4.1
         with:
           script: |
@@ -29,13 +29,13 @@ jobs:
             comments = await github.rest.issues.listComments({
               issue_number: context.issue.number,
               owner: context.repo.owner,
-              repo: context.repo.repo, 
+              repo: context.repo.repo,
             });
 
             const labelArray = response.data.map((label) => console.log('label', label))
 
             console.log('label array', labelArray)
-
+            
       - name: Set Output
         if: steps.conditional-comment.outcome == 'success'
-        run: echo "Comment added successfully." 
+        run: echo "Comment added successfully."
