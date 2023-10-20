@@ -40,11 +40,12 @@ jobs:
 
             const eventsArray = events.data.map((label) => label)
 
-            console.log('EVENTS ARRAY', eventsArray)
 
             const labelArray = response.data.map((label) => label.name)
 
             const commentsArray = comments.data.map(comment => comment.body)
+
+            const commentText = "The Carbon team has accepted this proposal! Our team doesn't have the capacity to work on this now, so we are requesting community contributors. Please see the labels for roles that are needed. If you are willing to help out, comment below and we will get in touch!"
 
             const secondToLastEventTimestamp = new Date(eventsArray[eventsArray.length - 2].created_at)
             
@@ -52,6 +53,8 @@ jobs:
 
             const differenceInSeconds = Math.abs((lastEventTimestamp - secondToLastEventTimestamp)/1000)
 
+            console.log('seconds',differenceInSeconds)
+            
             if (labelArray.includes('proposal: accepted') && labelArray.includes('needs: community contribution') && !commentsArray.includes(commentText) && (differenceInSeconds > 2)) {
               github.rest.issues.createComment({
                 issue_number: context.issue.number,
