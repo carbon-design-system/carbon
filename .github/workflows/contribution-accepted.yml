@@ -38,7 +38,9 @@ jobs:
               repo: context.repo.repo,
             });
 
-            console.log('EVENTS', events)
+            const eventsArray = events.data.map((label) => label)
+
+            console.log('EVENTS ARRAY', eventsArray)
 
             const labelArray = response.data.map((label) => label.name)
 
