@@ -9321,6 +9321,7 @@ Map {
     },
   },
   "TreeNode" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "active": Object {
         "args": Array [
@@ -9400,9 +9401,11 @@ Map {
         "type": "string",
       },
     },
+    "render": [Function],
   },
   "TreeView" => Object {
     "TreeNode": Object {
+      "$$typeof": Symbol(react.forward_ref),
       "propTypes": Object {
         "active": Object {
           "args": Array [
@@ -9482,6 +9485,7 @@ Map {
           "type": "string",
         },
       },
+      "render": [Function],
     },
     "propTypes": Object {
       "active": Object {
