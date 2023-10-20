@@ -32,7 +32,7 @@ jobs:
               repo: context.repo.repo,
             });
 
-            console.log('context', context)
+            console.log('context', context.payload.label.name)
             
       - name: Set Output
         if: steps.conditional-comment.outcome == 'success'
