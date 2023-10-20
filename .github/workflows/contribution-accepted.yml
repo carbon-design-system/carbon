@@ -32,6 +32,14 @@ jobs:
               repo: context.repo.repo,
             });
 
+            events = await github.rest.issues.listEvents({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+
+            console.log('EVENTS', events)
+
             const labelArray = response.data.map((label) => label.name)
 
             const commentsArray = comments.data.map(comment => comment.body)
