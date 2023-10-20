@@ -32,16 +32,16 @@ jobs:
               repo: context.repo.repo,
             });
 
-            const labelArray = response.data.map((label) => label.name);
+            const labelArray = response.data.map((label) => label.name)
 
-            const commentsArray = comments.data.map(comment => comment.body);
+            const commentsArray = comments.data.map(comment => comment.body)
 
             if (labelArray.includes('proposal: accepted') && labelArray.includes('needs: community contribution') && !commentsArray.includes('The Carbon team has accepted this proposal! Our team doesn't have the capacity to work on this now, so we are requesting community contributors. Please see the labels for roles that are needed. If you are willing to help out, comment below and we will get in touch!')) {
               github.rest.issues.createComment({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: 'The Carbon team has accepted this proposal! Our team doesn't have the capacity to work on this now, so we are requesting community contributors. Please see the labels for roles that are needed. If you are willing to help out, comment below and we will get in touch!'
+                body: 'The Carbon team has accepted this proposal! Our team doesn't have the capacity to work on this now, so we are requesting community contributors. Please see the labels for roles that are needed. If you are willing to help out, comment below and we will get in touch!',
               });
             } else {
               console.log('No comment added because the conditions are not met.');
