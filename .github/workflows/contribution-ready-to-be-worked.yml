@@ -1,4 +1,4 @@
-name: Contribution triage - Ready to be worked
+name: Contribution triage - ready to be worked
 on:
   issues:
     types: [unlabeled]
