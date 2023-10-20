@@ -27,21 +27,21 @@ const defaultMinExpandedNumberOfRows = 16;
 function CodeSnippet({
   align = 'bottom',
   className,
-  type,
+  type = 'single',
   children,
   disabled,
   feedback,
   feedbackTimeout,
   onClick,
-  ['aria-label']: ariaLabel,
+  ['aria-label']: ariaLabel = 'Copy to clipboard',
   ariaLabel: deprecatedAriaLabel,
   copyText,
   copyButtonDescription,
   light,
-  showMoreText,
-  showLessText,
+  showMoreText = 'Show more',
+  showLessText = 'Show less',
   hideCopyButton,
-  wrapText,
+  wrapText = false,
   maxCollapsedNumberOfRows = defaultMaxCollapsedNumberOfRows,
   maxExpandedNumberOfRows = defaultMaxExpandedNumberOfRows,
   minCollapsedNumberOfRows = defaultMinCollapsedNumberOfRows,
@@ -417,14 +417,6 @@ CodeSnippet.propTypes = {
    * Specify whether or not to wrap the text.
    */
   wrapText: PropTypes.bool,
-};
-
-CodeSnippet.defaultProps = {
-  ['aria-label']: 'Copy to clipboard',
-  type: 'single',
-  showMoreText: 'Show more',
-  showLessText: 'Show less',
-  wrapText: false,
 };
 
 export default CodeSnippet;

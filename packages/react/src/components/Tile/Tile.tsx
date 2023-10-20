@@ -163,7 +163,6 @@ export const ClickableTile = React.forwardRef<
   function handleOnKeyDown(evt: KeyboardEvent) {
     evt?.persist?.();
     if (matches(evt, [keys.Enter, keys.Space])) {
-      evt.preventDefault();
       setIsSelected(!isSelected);
       onKeyDown(evt);
     }

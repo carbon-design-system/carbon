@@ -197,7 +197,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       onKeyDown,
       open,
       preventCloseOnClickOutside,
-      selectorPrimaryFocus,
+      selectorPrimaryFocus = '[data-modal-primary-focus]',
       selectorsFloatingMenus,
       size,
       launcherButtonRef,
@@ -467,9 +467,6 @@ ComposedModal.propTypes = {
    * Specify the size variant.
    */
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
-};
-ComposedModal.defaultProps = {
-  selectorPrimaryFocus: '[data-modal-primary-focus]',
 };
 
 export default ComposedModal;

@@ -36,6 +36,7 @@ import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildre
 import { keys, matches } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
+import { noopFn } from '../../internal/noopFn';
 
 /**
  * Conditionally call a callback when the escape key is pressed
@@ -137,6 +138,18 @@ NotificationActionButton.propTypes = {
 export interface NotificationButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
+   * Specify a label to be read by screen readers on the container node
+   * 'aria-label' of the NotificationButton component.
+   */
+  ['aria-label']?: string;
+
+  /**
+   * @deprecated please use `aria-label` instead.
+   * 'aria-label' of the NotificationButton component.
+   */
+  ariaLabel?: string;
+
+  /**
    * Specify an optional icon for the Button through a string,
    * if provided. However, regular "close" icon is preferred.
    */
@@ -157,14 +170,13 @@ export interface NotificationButtonProps
 }
 
 export function NotificationButton({
-  'aria-label': ariaLabel,
-  // @ts-expect-error: deprecated prop
+  'aria-label': ariaLabel = 'close notification',
   ariaLabel: deprecatedAriaLabel,
   className,
-  type,
-  renderIcon: IconTag,
+  type = 'button',
+  renderIcon: IconTag = Close,
   name,
-  notificationType,
+  notificationType = 'toast',
   ...rest
 }: NotificationButtonProps) {
   const prefix = usePrefix();
@@ -231,12 +243,6 @@ NotificationButton.propTypes = {
    * Optional prop to specify the type of the Button
    */
   type: PropTypes.string,
-};
-NotificationButton.defaultProps = {
-  ['aria-label']: 'close notification',
-  notificationType: 'toast',
-  type: 'button',
-  renderIcon: Close,
 };
 
 /**
@@ -379,21 +385,20 @@ export interface ToastNotificationProps extends HTMLAttributes<HTMLDivElement> {
    */
   title?: string;
 }
-
 export function ToastNotification({
   ['aria-label']: ariaLabel,
   // @ts-expect-error: deprecated prop
   ariaLabel: deprecatedAriaLabel,
-  role,
+  role = 'status',
   onClose,
-  onCloseButtonClick,
+  onCloseButtonClick = noopFn,
   statusIconDescription,
   className,
   children,
-  kind,
+  kind = 'error',
   lowContrast,
-  hideCloseButton,
-  timeout,
+  hideCloseButton = false,
+  timeout = 0,
   title,
   caption,
   subtitle,
@@ -576,13 +581,6 @@ ToastNotification.propTypes = {
    */
   title: PropTypes.string,
 };
-ToastNotification.defaultProps = {
-  kind: 'error',
-  role: 'status',
-  onCloseButtonClick: () => {},
-  hideCloseButton: false,
-  timeout: 0,
-};
 
 /**
  * InlineNotification
@@ -664,14 +662,14 @@ export function InlineNotification({
   children,
   title,
   subtitle,
-  role,
+  role = 'status',
   onClose,
-  onCloseButtonClick,
+  onCloseButtonClick = noopFn,
   statusIconDescription,
   className,
-  kind,
+  kind = 'error',
   lowContrast,
-  hideCloseButton,
+  hideCloseButton = false,
   ...rest
 }: InlineNotificationProps) {
   const [isOpen, setIsOpen] = useState(true);
@@ -810,12 +808,6 @@ InlineNotification.propTypes = {
    */
   title: PropTypes.string,
 };
-InlineNotification.defaultProps = {
-  kind: 'error',
-  role: 'status',
-  onCloseButtonClick: () => {},
-  hideCloseButton: false,
-};
 
 /**
  * ActionableNotification
@@ -924,18 +916,18 @@ export function ActionableNotification({
   // @ts-expect-error: deprecated prop
   ariaLabel: deprecatedAriaLabel,
   children,
-  role,
+  role = 'alertdialog',
   onActionButtonClick,
   onClose,
-  onCloseButtonClick,
+  onCloseButtonClick = noopFn,
   statusIconDescription,
   className,
-  inline,
-  kind,
+  inline = false,
+  kind = 'error',
   lowContrast,
-  hideCloseButton,
-  hasFocus,
-  closeOnEscape,
+  hideCloseButton = false,
+  hasFocus = true,
+  closeOnEscape = true,
   title,
   subtitle,
   ...rest
@@ -1088,7 +1080,7 @@ ActionableNotification.propTypes = {
     'success',
     'warning',
     'warning-alt',
-  ]).isRequired,
+  ]),
 
   /**
    * Specify whether you are using the low contrast variant of the ActionableNotification.
@@ -1130,13 +1122,4 @@ ActionableNotification.propTypes = {
    * Specify the title
    */
   title: PropTypes.string,
-};
-ActionableNotification.defaultProps = {
-  kind: 'error',
-  role: 'alertdialog',
-  onCloseButtonClick: () => {},
-  hideCloseButton: false,
-  hasFocus: true,
-  closeOnEscape: true,
-  inline: false,
 };

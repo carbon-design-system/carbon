@@ -36,7 +36,7 @@ export interface TableToolbarMenuProps
 
 const TableToolbarMenu: React.FC<TableToolbarMenuProps> = ({
   className,
-  renderIcon,
+  renderIcon = Settings,
   iconDescription = defaultIconDescription,
   children,
   ...rest
@@ -60,11 +60,6 @@ const TableToolbarMenu: React.FC<TableToolbarMenuProps> = ({
   );
 };
 
-TableToolbarMenu.defaultProps = {
-  renderIcon: Settings,
-  iconDescription: defaultIconDescription,
-};
-
 TableToolbarMenu.propTypes = {
   children: PropTypes.node.isRequired,
 
@@ -76,7 +71,7 @@ TableToolbarMenu.propTypes = {
   /**
    * The description of the menu icon.
    */
-  iconDescription: PropTypes.string.isRequired,
+  iconDescription: PropTypes.string,
 
   /**
    * Optional prop to allow overriding the default menu icon

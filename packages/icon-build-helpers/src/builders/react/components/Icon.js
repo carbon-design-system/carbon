@@ -9,7 +9,14 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const Icon = React.forwardRef(function Icon(
-  { className, children, tabIndex, ...rest },
+  {
+    className,
+    children,
+    tabIndex,
+    xmlns = 'http://www.w3.org/2000/svg',
+    preserveAspectRatio = 'xMidYMid meet',
+    ...rest
+  },
   ref
 ) {
   const { tabindex, ...props } = getAttributes({
@@ -29,6 +36,14 @@ const Icon = React.forwardRef(function Icon(
     props.ref = ref;
   }
 
+  if (xmlns) {
+    props.xmlns = xmlns;
+  }
+
+  if (preserveAspectRatio) {
+    props.preserveAspectRatio = preserveAspectRatio;
+  }
+
   return React.createElement('svg', props, children);
 });
 
@@ -45,10 +60,6 @@ Icon.propTypes = {
   viewBox: PropTypes.string,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   xmlns: PropTypes.string,
-};
-Icon.defaultProps = {
-  xmlns: 'http://www.w3.org/2000/svg',
-  preserveAspectRatio: 'xMidYMid meet',
 };
 
 export default Icon;
