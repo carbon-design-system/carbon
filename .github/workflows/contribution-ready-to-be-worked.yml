@@ -20,12 +20,10 @@ jobs:
         uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410 #v6.4.1
         with:
           script: |
-            response = await github.rest.issues.listLabelsOnIssue({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            });
-
+            console.log('event here', event)
+            
+            console.log('eventS here', events)
+          
             comments = await github.rest.issues.listComments({
               issue_number: context.issue.number,
               owner: context.repo.owner,
