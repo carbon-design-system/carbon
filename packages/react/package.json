@@ -1,7 +1,7 @@
 {
   "name": "@carbon/react",
   "description": "React components for the Carbon Design System",
-  "version": "1.39.0",
+  "version": "1.40.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -34,7 +34,7 @@
   },
   "scripts": {
     "build": "yarn clean && node tasks/build-styles.js && node tasks/build.js",
-    "clean": "rimraf es lib icons/index.js icons/index.esm.js storybook-static",
+    "clean": "rimraf es lib icons/index.js icons/index.d.ts icons/index.esm.js storybook-static",
     "postinstall": "carbon-telemetry collect --install",
     "storybook": "storybook dev -p 3000",
     "storybook:build": "storybook build"
@@ -49,11 +49,11 @@
     "@carbon/feature-flags": "^0.16.0",
     "@carbon/icons-react": "^11.28.0",
     "@carbon/layout": "^11.19.0",
-    "@carbon/styles": "^1.39.0",
+    "@carbon/styles": "^1.40.0",
     "@carbon/telemetry": "0.1.0",
     "classnames": "2.3.2",
     "copy-to-clipboard": "^3.3.1",
-    "downshift": "8.2.1",
+    "downshift": "8.2.2",
     "flatpickr": "4.6.9",
     "invariant": "^2.2.3",
     "lodash.debounce": "^4.0.8",
@@ -124,7 +124,7 @@
     "storybook-readme": "^5.0.9",
     "stream-browserify": "^3.0.0",
     "style-loader": "^3.3.1",
-    "typescript": "^4.8.4",
+    "typescript-config-carbon": "^0.1.0",
     "webpack": "^5.65.0",
     "webpack-dev-server": "^4.7.4"
   },
