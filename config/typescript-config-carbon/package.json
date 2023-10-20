@@ -1,0 +1,35 @@
+{
+  "name": "typescript-config-carbon",
+  "description": "TypeScript configuration for Carbon",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "config/typescript-config-carbon"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react",
+    "typescript"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "clean": "rimraf index.js index.d.ts",
+    "build": "yarn clean && tsc"
+  },
+  "dependencies": {
+    "typescript": "^4.8.4"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.0"
+  }
+}

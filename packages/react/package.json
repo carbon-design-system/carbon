@@ -34,7 +34,7 @@
   },
   "scripts": {
     "build": "yarn clean && node tasks/build-styles.js && node tasks/build.js",
-    "clean": "rimraf es lib icons/index.js icons/index.esm.js storybook-static",
+    "clean": "rimraf es lib icons/index.js icons/index.d.ts icons/index.esm.js storybook-static",
     "postinstall": "carbon-telemetry collect --install",
     "storybook": "storybook dev -p 3000",
     "storybook:build": "storybook build"
@@ -124,7 +124,7 @@
     "storybook-readme": "^5.0.9",
     "stream-browserify": "^3.0.0",
     "style-loader": "^3.3.1",
-    "typescript": "^4.8.4",
+    "typescript-config-carbon": "^0.1.0",
     "webpack": "^5.65.0",
     "webpack-dev-server": "^4.7.4"
   },
