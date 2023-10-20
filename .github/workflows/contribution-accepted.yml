@@ -56,7 +56,7 @@ jobs:
             console.log('seconds', differenceInSeconds)
             
             if (labelArray.includes('proposal: accepted') && labelArray.includes('needs: community contribution') && !commentsArray.includes(commentText)) {
-              setTimeOut(() => {
+              setTimeout(() => {
                 if(!commentsArray.includes(commentText)) {
                   github.rest.issues.createComment({
                     issue_number: context.issue.number,
