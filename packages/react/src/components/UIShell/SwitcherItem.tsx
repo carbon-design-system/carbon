@@ -6,18 +6,40 @@ import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 
 export type SwitcherItemProps<E extends ElementType> = LinkProps<E> & {
+  /**
+   * Required props for accessibility label on the underlying item
+   */
   'aria-label'?: string;
+  /**
+   * Required props for accessibility labelledby on the underlying item
+   */
   'aria-labelledby'?: string;
+  /**
+   * Optionally provide a custom class to apply to the underlying `<li>` node
+   */
   className?: string;
+  /**
+   * Specify the text content for the link
+   */
   children: React.ReactNode;
-  isSelected: boolean;
-  expanded: boolean;
+  /**
+   * Specify the tab index of the Link
+   */
   tabIndex?: number;
-  index: number;
+  /**
+   * Specify the index of the SwitcherItem
+   */
+  index?: number;
+  /**
+   * event handlers
+   */
   handleSwitcherItemFocus?: (event: {
     currentIndex: number;
     direction: number;
   }) => void;
+  /**
+   * event handlers
+   */
   onKeyDown?: (event: KeyboardEvent) => void;
 };
 
@@ -64,14 +86,14 @@ const SwitcherItem: SwitcherItemComponent = React.forwardRef(
       if (match(evt, keys.ArrowDown)) {
         evt.preventDefault();
         handleSwitcherItemFocus?.({
-          currentIndex: index,
+          currentIndex: index || -1,
           direction: 1,
         });
       }
       if (match(evt, keys.ArrowUp)) {
         evt.preventDefault();
         handleSwitcherItemFocus?.({
-          currentIndex: index,
+          currentIndex: index || -1,
           direction: -1,
         });
       }
@@ -98,15 +120,37 @@ const SwitcherItem: SwitcherItemComponent = React.forwardRef(
 
 SwitcherItem.displayName = 'SwitcherItem';
 SwitcherItem.propTypes = {
+  /**
+   * Required props for accessibility label on the underlying item
+   */
   'aria-label': PropTypes.string,
+  /**
+   * Required props for accessibility labelledby on the underlying item
+   */
   'aria-labelledby': PropTypes.string,
+  /**
+   * Specify the text content for the link
+   */
   children: PropTypes.node.isRequired,
+  /**
+   * Optionally provide a custom class to apply to the underlying `<li>` node
+   */
   className: PropTypes.string,
-  expanded: PropTypes.bool.isRequired,
+  /**
+   * event handlers
+   */
   handleSwitcherItemFocus: PropTypes.func,
-  index: PropTypes.number.isRequired,
-  isSelected: PropTypes.bool.isRequired,
+  /**
+   * Specify the index of the SwitcherItem
+   */
+  index: PropTypes.number,
+  /**
+   * event handlers
+   */
   onKeyDown: PropTypes.func,
+  /**
+   * Specify the tab index of the Link
+   */
   tabIndex: PropTypes.number,
 };
 

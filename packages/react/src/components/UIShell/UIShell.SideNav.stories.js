@@ -587,13 +587,19 @@ export const SwitcherItems = () => (
       aria-label="dummy-aria-label"
       role="separator"
       className="custom-class">
-      <SwitcherItem role="separator" aria-label="test-aria-label-switcheritem">
+      <SwitcherItem
+        role="separator"
+        aria-label="test-aria-label-switcheritem"
+        aria-valuenow={'100'}>
         Dummy child
       </SwitcherItem>
     </Switcher>
     <SwitcherDivider role="separator" className="custom-class" />
     <Switcher role="separator" aria-label="dummy-aria-label">
-      <SwitcherItem role="separator" aria-label="test-aria-label-switcheritem1">
+      <SwitcherItem
+        role="separator"
+        aria-label="test-aria-label-switcheritem1"
+        aria-valuenow={'100'}>
         Dummy child1
       </SwitcherItem>
     </Switcher>

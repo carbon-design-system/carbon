@@ -15,12 +15,26 @@ import React, { useRef, forwardRef, ReactNode } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { useMergedRefs } from '../../internal/useMergedRefs';
+import PropTypes from 'prop-types';
+import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
 interface SwitcherProps {
+  /**
+   * Required props for accessibility label on the underlying menu
+   */
   'aria-label'?: string;
   'aria-labelledby'?: string;
+  /**
+   * Optionally provide a custom class to apply to the underlying `<ul>` node
+   */
   className?: string;
+  /**
+   * expects to receive <SwitcherItem />
+   */
   children: ReactNode;
+  /**
+   * Specify whether the panel is expanded
+   */
   expanded?: boolean;
 }
 
@@ -119,5 +133,27 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(function Switcher(
 });
 
 Switcher.displayName = 'Switcher';
+
+Switcher.propTypes = {
+  /**
+   * Required props for accessibility label on the underlying menu
+   */
+  ...AriaLabelPropType,
+
+  /**
+   * expects to receive <SwitcherItem />
+   */
+  children: PropTypes.node.isRequired,
+
+  /**
+   * Optionally provide a custom class to apply to the underlying `<ul>` node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify whether the panel is expanded
+   */
+  expanded: PropTypes.bool,
+};
 
 export default Switcher;

@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
 
 interface SwitcherDividerProps {
+  /**
+   * Optionally provide a custom class to apply to the underlying `<li>` node
+   */
   className?: string;
 }
 
