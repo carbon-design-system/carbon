@@ -70,7 +70,7 @@ const SwitcherItem: SwitcherItemComponent = React.forwardRef(
   ) {
     const prefix = usePrefix();
     const classNames = cx(`${prefix}--switcher__item`, {
-      [customClassName!]: !!customClassName,
+      [customClassName || '']: !!customClassName,
     });
 
     const accessibilityLabel = {

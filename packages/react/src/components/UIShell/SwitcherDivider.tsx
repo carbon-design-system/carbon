@@ -16,7 +16,7 @@ const SwitcherDivider: React.FC<SwitcherDividerProps> = ({
 }) => {
   const prefix = usePrefix();
   const classNames = cx(`${prefix}--switcher__item--divider`, {
-    [customClassName!]: !!customClassName,
+    [customClassName || '']: !!customClassName,
   });
 
   return <hr {...other} className={classNames} />;
