@@ -574,3 +574,32 @@ export const SideNavWLargeSideNavItems = () => (
 );
 
 SideNavWLargeSideNavItems.storyName = 'SideNav w/ large side nav items';
+
+export const SwitcherItems = () => (
+  <>
+    <Header aria-label="IBM Platform Name">
+      <SkipToContent />
+      <HeaderName href="#" prefix="IBM">
+        Switcher
+      </HeaderName>
+    </Header>
+    <Switcher
+      aria-label="dummy-aria-label"
+      role="separator"
+      className="custom-class">
+      <SwitcherItem role="separator" aria-label="test-aria-label-switcheritem">
+        Dummy child
+      </SwitcherItem>
+    </Switcher>
+    <SwitcherDivider role="separator" className="custom-class" />
+    <Switcher role="separator" aria-label="dummy-aria-label">
+      <SwitcherItem role="separator" aria-label="test-aria-label-switcheritem1">
+        Dummy child1
+      </SwitcherItem>
+    </Switcher>
+    <SwitcherDivider role="separator" data-testid="test-id" />
+    <StoryContent />
+  </>
+);
+
+SwitcherItems.storyName = 'Switcher';
