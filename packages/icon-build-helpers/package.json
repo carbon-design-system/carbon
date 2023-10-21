@@ -50,6 +50,7 @@
     "rollup-plugin-strip-banner": "^3.0.0",
     "svg-parser": "^2.0.4",
     "svgo": "^1.1.1",
-    "svgson": "^5.2.1"
+    "svgson": "^5.2.1",
+    "typescript-config-carbon": "^0.1.0"
   }
 }
