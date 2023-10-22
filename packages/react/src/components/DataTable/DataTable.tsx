@@ -250,7 +250,7 @@ export interface DataTableProps<RowType, ColTypes extends any[]> {
   useStaticWidth?: boolean;
   useZebraStyles?: boolean;
   initialSortDirection?: DataTableSortState;
-  initialSortColumn?: string | null;
+  initialSortColumn?: string;
 }
 
 interface DataTableState<ColTypes extends any[]> {
