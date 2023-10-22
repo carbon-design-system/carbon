@@ -18,7 +18,7 @@ import { usePrefix } from '../../internal/usePrefix';
  * user interaction to expand or collapse the side navigation.
  */
 function SideNavFooter({
-  assistiveText,
+  assistiveText = 'Toggle opening or closing the side navigation',
   className: customClassName,
   expanded,
   onToggle,
@@ -47,7 +47,7 @@ SideNavFooter.propTypes = {
    * Provide text to be read to screen readers and shown as a tooltip when
    * interacting with the toggle button in the footer
    */
-  assistiveText: PropTypes.string.isRequired,
+  assistiveText: PropTypes.string,
 
   className: PropTypes.string,
 
@@ -61,10 +61,6 @@ SideNavFooter.propTypes = {
    * with. Useful for controlling the expansion state of the side navigation.
    */
   onToggle: PropTypes.func.isRequired,
-};
-
-SideNavFooter.defaultProps = {
-  assistiveText: 'Toggle opening or closing the side navigation',
 };
 
 export default SideNavFooter;

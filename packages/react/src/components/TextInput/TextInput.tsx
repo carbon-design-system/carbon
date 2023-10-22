@@ -16,6 +16,7 @@ import { textInputProps } from './util';
 import { FormContext } from '../FluidForm';
 import { usePrefix } from '../../internal/usePrefix';
 import { useAnnouncer } from '../../internal/useAnnouncer';
+import { Text } from '../Text';
 
 type ExcludedAttributes = 'defaultValue' | 'id' | 'size' | 'value';
 
@@ -265,13 +266,15 @@ const TextInput = React.forwardRef(function TextInput(
 
   const counter =
     enableCounter && maxCount ? (
-      <div className={counterClasses}>{`${textCount}/${maxCount}`}</div>
+      <Text
+        as="div"
+        className={counterClasses}>{`${textCount}/${maxCount}`}</Text>
     ) : null;
 
   const label = labelText ? (
-    <label htmlFor={id} className={labelClasses}>
+    <Text as="label" htmlFor={id} className={labelClasses}>
       {labelText}
-    </label>
+    </Text>
   ) : null;
 
   const labelWrapper = (
@@ -282,9 +285,9 @@ const TextInput = React.forwardRef(function TextInput(
   );
 
   const helper = helperText ? (
-    <div id={normalizedProps.helperId} className={helperTextClasses}>
+    <Text as="div" id={normalizedProps.helperId} className={helperTextClasses}>
       {helperText}
-    </div>
+    </Text>
   ) : null;
 
   const input = (

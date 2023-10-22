@@ -98,7 +98,7 @@ describe('DataTable', () => {
                   onChange={onInputChange}
                   id="custom-id"
                 />
-                <TableToolbarMenu>
+                <TableToolbarMenu iconDescription="Settings">
                   <TableToolbarAction onClick={jest.fn()}>
                     Action 1
                   </TableToolbarAction>
@@ -383,7 +383,7 @@ describe('DataTable', () => {
                       onChange={onInputChange}
                       id="custom-id"
                     />
-                    <TableToolbarMenu>
+                    <TableToolbarMenu iconDescription="Settings">
                       <TableToolbarAction onClick={jest.fn()}>
                         Action 1
                       </TableToolbarAction>
@@ -547,7 +547,7 @@ describe('DataTable', () => {
                       onChange={onInputChange}
                       id="custom-id"
                     />
-                    <TableToolbarMenu>
+                    <TableToolbarMenu iconDescription="Settings">
                       <TableToolbarAction onClick={jest.fn()}>
                         Action 1
                       </TableToolbarAction>
