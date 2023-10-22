@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { initialSortState, getSortedState } from './sorting';
+import { getSortedState, initialSortState } from './sorting';
 import normalize from '../tools/normalize';
 
 /**
@@ -25,8 +25,9 @@ const getDerivedStateFromProps = (props, prevState) => {
     rowIds,
     rowsById,
     cellsById,
-    sortDirection: prevState.sortDirection || initialSortState,
-    sortHeaderKey: prevState.sortHeaderKey || null,
+    sortDirection:
+      prevState.sortDirection || props.initialSortDirection || initialSortState,
+    sortHeaderKey: prevState.sortHeaderKey || props.initialSortColumn || null,
     // Copy over rowIds so the reference doesn't mutate the stored
     // `initialRowOrder`
     initialRowOrder: rowIds.slice(),
@@ -37,12 +38,12 @@ const getDerivedStateFromProps = (props, prevState) => {
     shouldShowBatchActions: prevState.shouldShowBatchActions || false,
   };
 
-  if (prevState.sortDirection && prevState.sortHeaderKey) {
+  if (state.sortDirection && state.sortHeaderKey) {
     const { rowIds } = getSortedState(
       props,
       state,
-      prevState.sortHeaderKey,
-      prevState.sortDirection
+      state.sortHeaderKey,
+      state.sortDirection
     );
     state.rowIds = rowIds;
   }

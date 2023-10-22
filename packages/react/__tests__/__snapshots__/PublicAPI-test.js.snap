@@ -2454,6 +2454,12 @@ Map {
         "isRequired": true,
         "type": "arrayOf",
       },
+      "initialSortColumn": Object {
+        "type": "string",
+      },
+      "initialSortDirection": Object {
+        "type": "string",
+      },
       "isSortable": Object {
         "type": "bool",
       },

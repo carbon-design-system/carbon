@@ -208,6 +208,31 @@ describe('DataTable', () => {
           'Field 3:B',
         ]);
       });
+      it('should works correctly with `initialSortColumn` and ` initialSortDirection` props', () => {
+        render(
+          <DataTable
+            intialSortColumn="fieldA"
+            intialSortDirection="ASC"
+            {...mockProps}
+          />
+        );
+
+        const cells = () => {
+          return screen.getAllByRole('cell').map((cell) => {
+            return cell.textContent;
+          });
+        };
+
+        //rows should be sorted by Field A in ascending order
+        expect(cells()).toEqual([
+          'Field 1:A',
+          'Field 1:B',
+          'Field 2:A',
+          'Field 2:B',
+          'Field 3:A',
+          'Field 3:B',
+        ]);
+      });
 
       it('should re-sort new row props by the current sort state', async () => {
         const { rerender } = render(

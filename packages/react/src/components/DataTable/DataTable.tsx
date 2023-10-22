@@ -249,6 +249,8 @@ export interface DataTableProps<RowType, ColTypes extends any[]> {
   translateWithId?: (id: string) => string;
   useStaticWidth?: boolean;
   useZebraStyles?: boolean;
+  initialSortDirection?: DataTableSortState;
+  initialSortColumn?: string | null;
 }
 
 interface DataTableState<ColTypes extends any[]> {
@@ -304,6 +306,12 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
         header: PropTypes.node.isRequired,
       })
     ).isRequired,
+
+    /**headerkey that we are sorting by */
+    initialSortColumn: PropTypes.string,
+
+    /**Sorting Order of Rows. It can be 'NONE' , 'DESC' , 'ASC' */
+    initialSortDirection: PropTypes.string,
 
     /**
      * Specify whether the table should be able to be sorted by its headers
@@ -362,12 +370,10 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
      * available message ids.
      */
     translateWithId: PropTypes.func,
-
     /**
      * `false` If true, will use a width of 'auto' instead of 100%
      */
     useStaticWidth: PropTypes.bool,
-
     /**
      * `true` to add useZebraStyles striping.
      */
