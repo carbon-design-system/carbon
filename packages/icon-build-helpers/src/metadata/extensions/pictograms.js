@@ -7,7 +7,7 @@
 
 'use strict';
 
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 
 /**
  * The default pictograms extension for the metadata. This validates a pictogram

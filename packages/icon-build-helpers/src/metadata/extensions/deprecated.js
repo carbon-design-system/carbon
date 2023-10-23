@@ -7,7 +7,7 @@
 
 'use strict';
 
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 
 // Supports a list of deprecated assets
 //
