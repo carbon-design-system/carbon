@@ -19,6 +19,6 @@ test.describe('ClassPrefix @avt', () => {
         theme: 'white',
       },
     });
-    await expect(page).toHaaveNoACViolations('ClassPrefix @avt-default-state');
+    await expect(page).toHaveNoACViolations('ClassPrefix @avt-default-state');
   });
 });
