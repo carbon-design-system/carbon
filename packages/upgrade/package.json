@@ -56,6 +56,6 @@
     "yargs": "^17.0.1"
   },
   "dependencies": {
-    "jscodeshift": "^0.13.1"
+    "jscodeshift": "^0.15.0"
   }
 }
