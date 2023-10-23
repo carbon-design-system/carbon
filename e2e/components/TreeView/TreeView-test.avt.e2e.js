@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('TreeView @avt', () => {
-  test.skip('@avt-default-state', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'TreeView',
       id: 'components-treeview--default',
@@ -22,9 +22,7 @@ test.describe('TreeView @avt', () => {
     await expect(page).toHaveNoACViolations('components-treeview--default');
   });
 
-  test.skip('@avt-advanced-states accessibility-checker with-icons', async ({
-    page,
-  }) => {
+  test('@avt-advanced-states with-icons', async ({ page }) => {
     await visitStory(page, {
       component: 'TreeView',
       id: 'components-treeview--with-icons',

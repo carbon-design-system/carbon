@@ -14,7 +14,9 @@ const prefix = 'cds';
 describe('SelectItem', () => {
   describe('renders as expected - Component API', () => {
     it('should spread extra props onto outermost element', () => {
-      render(<SelectItem data-testid="test-id" text={'testText'} />);
+      render(
+        <SelectItem data-testid="test-id" text={'testText'} value="testValue" />
+      );
       expect(screen.getByText('testText')).toHaveAttribute(
         'data-testid',
         'test-id'
@@ -22,29 +24,35 @@ describe('SelectItem', () => {
     });
 
     it('Has the expected classes', () => {
-      render(<SelectItem text={'testText'} />);
+      render(<SelectItem text={'testText'} value="testValue" />);
       expect(screen.getByText('testText')).toHaveClass(
         `${prefix}--select-option`
       );
     });
 
     it('should support a custom `className` prop on the outermost element', () => {
-      render(<SelectItem className="custom-class" text={'testText'} />);
+      render(
+        <SelectItem
+          className="custom-class"
+          text={'testText'}
+          value="testValue"
+        />
+      );
       expect(screen.getByText('testText')).toHaveClass('custom-class');
     });
 
     it('should respect disabled prop', () => {
-      render(<SelectItem disabled text={'testText'} />);
+      render(<SelectItem disabled text={'testText'} value="testValue" />);
       expect(screen.getByText('testText')).toBeDisabled();
     });
 
     it('Should not be disabled by default', () => {
-      render(<SelectItem text={'testText'} />);
+      render(<SelectItem text={'testText'} value="testValue" />);
       expect(screen.getByText('testText')).toBeEnabled();
     });
 
     it('should respect hidden prop', () => {
-      render(<SelectItem hidden text={'testText'} />);
+      render(<SelectItem hidden text={'testText'} value="testValue" />);
       expect(screen.getByText('testText')).toHaveAttribute('hidden');
     });
 

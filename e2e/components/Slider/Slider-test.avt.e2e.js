@@ -48,6 +48,17 @@ test.describe('Slider @avt', () => {
     );
   });
 
+  test('@avt-advanced-states two handle slider', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Slider',
+      id: 'components-slider--two-handle-slider',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('Slider-two-handle-slider');
+  });
+
   test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'Slider',
@@ -57,6 +68,17 @@ test.describe('Slider @avt', () => {
       },
     });
     await expect(page).toHaveNoACViolations('Slider-skeleton');
+  });
+
+  test('@avt-advanced-states two handle skeleton', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Slider',
+      id: 'components-slider--two-handle-skeleton',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('Slider-two-handle-skeleton');
   });
 
   test('@avt-advanced-states slider with layer', async ({ page }) => {

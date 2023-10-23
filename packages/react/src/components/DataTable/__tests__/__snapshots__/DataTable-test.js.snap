@@ -75,6 +75,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
                   />
                   <span
                     class="cds--radio-button__label-text cds--visually-hidden"
+                    dir="auto"
                   >
                     Select row
                   </span>
@@ -112,6 +113,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
                   />
                   <span
                     class="cds--radio-button__label-text cds--visually-hidden"
+                    dir="auto"
                   >
                     Select row
                   </span>
@@ -149,6 +151,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
                   />
                   <span
                     class="cds--radio-button__label-text cds--visually-hidden"
+                    dir="auto"
                   >
                     Select row
                   </span>
@@ -244,6 +247,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
                   />
                   <span
                     class="cds--radio-button__label-text cds--visually-hidden"
+                    dir="auto"
                   >
                     Select row
                   </span>
@@ -281,6 +285,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
                   />
                   <span
                     class="cds--radio-button__label-text cds--visually-hidden"
+                    dir="auto"
                   >
                     Select row
                   </span>
@@ -318,6 +323,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
                   />
                   <span
                     class="cds--radio-button__label-text cds--visually-hidden"
+                    dir="auto"
                   >
                     Select row
                   </span>
@@ -371,7 +377,9 @@ exports[`DataTable behaves as expected selection should render and match snapsho
           <p
             class="cds--batch-summary__para"
           >
-            <span>
+            <span
+              dir="auto"
+            >
               0 items selected
             </span>
           </p>
@@ -812,7 +820,9 @@ exports[`DataTable renders as expected - Component API should render and match s
           <p
             class="cds--batch-summary__para"
           >
-            <span>
+            <span
+              dir="auto"
+            >
               0 items selected
             </span>
           </p>
