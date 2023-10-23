@@ -86,6 +86,10 @@ $-loading-gap-small: 110;
 
   .#{$prefix}--btn .#{$prefix}--inline-loading--btn {
     min-block-size: 0;
+
+    .#{$prefix}--inline-loading__text {
+      @include type-style('body-short-01');
+    }
   }
 
   /* If IE11 Don't show check animation */

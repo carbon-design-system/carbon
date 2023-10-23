@@ -391,7 +391,7 @@
   }
 
   .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--loading {
-    border: none;
+    border-color: transparent;
     background-color: transparent;
     box-shadow: none;
   }
