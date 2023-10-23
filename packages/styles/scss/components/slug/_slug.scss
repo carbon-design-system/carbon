@@ -1,0 +1,89 @@
+@use '../../config' as *;
+@use '../../colors' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/convert';
+
+$gradient-background: $gray-100
+  linear-gradient(
+    135deg,
+    rgba(168, 168, 168, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+
+$solid-background: $gray-70;
+
+$sizes: (
+  xxs: (
+    height: convert.to-rem(16px),
+    width: convert.to-rem(16px),
+    font-size: convert.to-rem(9px),
+    line-height: convert.to-rem(12px),
+    background: $solid-background,
+  ),
+  xs: (
+    height: convert.to-rem(20px),
+    width: convert.to-rem(20px),
+    font-size: convert.to-rem(12px),
+    line-height: convert.to-rem(16px),
+    background: $solid-background,
+  ),
+  sm: (
+    height: convert.to-rem(24px),
+    width: convert.to-rem(24px),
+    font-size: convert.to-rem(12px),
+    line-height: convert.to-rem(16px),
+    background: $gradient-background,
+  ),
+  md: (
+    height: convert.to-rem(32px),
+    width: convert.to-rem(32px),
+    font-size: convert.to-rem(16px),
+    line-height: convert.to-rem(21px),
+    background: $gradient-background,
+  ),
+  lg: (
+    height: convert.to-rem(40px),
+    width: convert.to-rem(40px),
+    font-size: convert.to-rem(16px),
+    line-height: convert.to-rem(21px),
+    background: $gradient-background,
+  ),
+  xl: (
+    height: convert.to-rem(48px),
+    width: convert.to-rem(48px),
+    font-size: convert.to-rem(16px),
+    line-height: convert.to-rem(21px),
+    background: $gradient-background,
+  ),
+  2xl: (
+    height: convert.to-rem(64px),
+    width: convert.to-rem(64px),
+    font-size: convert.to-rem(20px),
+    line-height: convert.to-rem(26px),
+    background: $gradient-background,
+  ),
+);
+
+/// Slug styles
+/// @access public
+/// @group slider
+@mixin slug {
+  .#{$prefix}--ai-slug .#{$prefix}--ai-slug__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-inverse;
+    font-weight: 600;
+
+    @each $group, $size in $sizes {
+      // Create a class for each size slug
+      &--#{$group} {
+        @each $property, $value in $size {
+          // Set correct properties for each size
+          #{$property}: $value;
+        }
+      }
+    }
+  }
+}
