@@ -1278,6 +1278,15 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "allisonishida",
+      "name": "Allison Ishida",
+      "avatar_url": "https://avatars.githubusercontent.com/u/22247062?v=4",
+      "profile": "https://github.com/allisonishida",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
