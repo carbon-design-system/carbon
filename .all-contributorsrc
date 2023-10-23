@@ -1278,6 +1278,15 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "Nirajsah",
+      "name": "Niraj Sah",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51414373?v=4",
+      "profile": "https://github.com/Nirajsah",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
