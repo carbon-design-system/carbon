@@ -1876,6 +1876,7 @@ __metadata:
     rollup: ^2.79.1
     sass: ^1.51.0
     sassdoc: ^2.7.3
+    typescript-config-carbon: ^0.1.0
     yargs: ^17.0.1
   bin:
     carbon-cli: ./bin/carbon-cli.js
@@ -1991,6 +1992,7 @@ __metadata:
     svg-parser: ^2.0.4
     svgo: ^1.1.1
     svgson: ^5.2.1
+    typescript-config-carbon: ^0.1.0
   languageName: unknown
   linkType: soft
 
@@ -2000,6 +2002,7 @@ __metadata:
   dependencies:
     "@carbon/cli": ^11.14.0
     rimraf: ^5.0.0
+    typescript-config-carbon: ^0.1.0
   languageName: unknown
   linkType: soft
 
@@ -2094,6 +2097,7 @@ __metadata:
     "@carbon/pictograms": ^12.24.0
     "@carbon/telemetry": 0.1.0
     prop-types: ^15.7.2
+    rimraf: ^5.0.0
   peerDependencies:
     react: ">=16"
   languageName: unknown
@@ -2185,7 +2189,7 @@ __metadata:
     storybook-readme: ^5.0.9
     stream-browserify: ^3.0.0
     style-loader: ^3.3.1
-    typescript: ^4.8.4
+    typescript-config-carbon: ^0.1.0
     use-resize-observer: ^6.0.0
     webpack: ^5.65.0
     webpack-dev-server: ^4.7.4
@@ -30660,6 +30664,15 @@ __metadata:
   checksum: 33b39f3d0e8463985eeaeeacc3cb2e28bc3dfaf2a5ed219628c0b629d5d7b810b0eb2165f9f607c34871d5daa92ba1dc69f49051cf7d578b4cbd26c340b9d1b1
   languageName: node
   linkType: hard
+
+"typescript-config-carbon@^0.1.0, typescript-config-carbon@workspace:config/typescript-config-carbon":
+  version: 0.0.0-use.local
+  resolution: "typescript-config-carbon@workspace:config/typescript-config-carbon"
+  dependencies:
+    rimraf: ^5.0.0
+    typescript: ^4.8.4
+  languageName: unknown
+  linkType: soft
 
 "typescript@npm:>=3 < 6":
   version: 5.1.3
