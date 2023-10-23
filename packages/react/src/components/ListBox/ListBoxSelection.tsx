@@ -50,10 +50,22 @@ export interface ListBoxSelectionProps {
    * icon. This function takes in an id defined in `translationIds` and should
    * return a string message for that given message id.
    */
-  translateWithId(messageId: string, args?: Record<string, unknown>): string;
+  translateWithId?(messageId: string, args?: Record<string, unknown>): string;
 }
 
 export type ListBoxSelectionComponent = React.FC<ListBoxSelectionProps>;
+
+export const translationIds = {
+  'clear.all': 'clear.all',
+  'clear.selection': 'clear.selection',
+};
+
+const defaultTranslations = {
+  [translationIds['clear.all']]: 'Clear all selected items',
+  [translationIds['clear.selection']]: 'Clear selected item',
+};
+
+const defaultTranslateWithId = (id: string) => defaultTranslations[id];
 
 /**
  * `ListBoxSelection` is used to provide controls for clearing a selection, in
@@ -63,7 +75,7 @@ export type ListBoxSelectionComponent = React.FC<ListBoxSelectionProps>;
 const ListBoxSelection: ListBoxSelectionComponent = ({
   clearSelection,
   selectionCount,
-  translateWithId: t,
+  translateWithId: t = defaultTranslateWithId,
   disabled,
   onClearSelection,
   readOnly,
@@ -124,16 +136,6 @@ const ListBoxSelection: ListBoxSelectionComponent = ({
   );
 };
 
-export const translationIds = {
-  'clear.all': 'clear.all',
-  'clear.selection': 'clear.selection',
-};
-
-const defaultTranslations = {
-  [translationIds['clear.all']]: 'Clear all selected items',
-  [translationIds['clear.selection']]: 'Clear selected item',
-};
-
 ListBoxSelection.propTypes = {
   /**
    * Specify a function to be invoked when a user interacts with the clear
@@ -168,11 +170,7 @@ ListBoxSelection.propTypes = {
    * icon. This function takes in an id defined in `translationIds` and should
    * return a string message for that given message id.
    */
-  translateWithId: PropTypes.func.isRequired,
-};
-
-ListBoxSelection.defaultProps = {
-  translateWithId: (id: string) => defaultTranslations[id],
+  translateWithId: PropTypes.func,
 };
 
 export default ListBoxSelection;

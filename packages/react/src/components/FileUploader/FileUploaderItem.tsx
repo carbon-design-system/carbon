@@ -13,6 +13,8 @@ import { keys, matches } from '../../internal/keyboard';
 import uid from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
+import { noopFn } from '../../internal/noopFn';
+import { Text } from '../Text';
 import { Tooltip } from '../Tooltip';
 
 export interface FileUploaderItemProps extends ReactAttr<HTMLSpanElement> {
@@ -71,13 +73,12 @@ export interface FileUploaderItemProps extends ReactAttr<HTMLSpanElement> {
    */
   uuid?: string;
 }
-
 function FileUploaderItem({
   uuid,
   name,
   status = 'uploading',
   iconDescription,
-  onDelete = () => {},
+  onDelete = noopFn,
   invalid,
   errorSubject,
   errorBody,
@@ -115,19 +116,24 @@ function FileUploaderItem({
             align="bottom"
             className={`${prefix}--file-filename-tooltip`}>
             <button className={`${prefix}--file-filename-button`} type="button">
-              <p
+              <Text
+                as="p"
                 title={name}
                 className={`${prefix}--file-filename-button`}
                 id={name}>
                 {name}
-              </p>
+              </Text>
             </button>
           </Tooltip>
         </div>
       ) : (
-        <p title={name} className={`${prefix}--file-filename`} id={name}>
+        <Text
+          as="p"
+          title={name}
+          className={`${prefix}--file-filename`}
+          id={name}>
           {name}
-        </p>
+        </Text>
       )}
 
       <div className={`${prefix}--file-container-item`}>
@@ -159,13 +165,13 @@ function FileUploaderItem({
           className={`${prefix}--form-requirement`}
           role="alert"
           id={`${name}-id-error`}>
-          <div className={`${prefix}--form-requirement__title`}>
+          <Text as="div" className={`${prefix}--form-requirement__title`}>
             {errorSubject}
-          </div>
+          </Text>
           {errorBody && (
-            <p className={`${prefix}--form-requirement__supplement`}>
+            <Text as="p" className={`${prefix}--form-requirement__supplement`}>
               {errorBody}
-            </p>
+            </Text>
           )}
         </div>
       )}
@@ -220,11 +226,6 @@ FileUploaderItem.propTypes = {
    * Unique identifier for the file object
    */
   uuid: PropTypes.string,
-};
-
-FileUploaderItem.defaultProps = {
-  status: 'uploading',
-  onDelete: () => {},
 };
 
 export default FileUploaderItem;

@@ -86,6 +86,7 @@ to the top of the screen. To do this, specify `direction="top"`
   label="Select an option..."
   direction="top"
   id="direction"
+  titleText="Dropdown label"
 />
 
 ```jsx
@@ -136,6 +137,7 @@ the text of the item in the input on selection.
   }
   label="Select an option..."
   id="item-to-element"
+  titleText="Dropdown label"
 />
 
 ```jsx
@@ -155,6 +157,7 @@ the text of the item in the input on selection.
     )
   }
   label="Select an option..."
+  titleText="Dropdown label"
 />
 ```
 
@@ -181,6 +184,7 @@ If the `items` array is not an array of strings, you'll need to use
   }
   label="Select an option..."
   id="item-to-element"
+  titleText="Dropdown label"
 />
 
 ```jsx
@@ -202,6 +206,7 @@ If the `items` array is not an array of strings, you'll need to use
   }
   label="Select an option..."
   id="item-to-element"
+  titleText="Dropdown label"
 />
 ```
 
@@ -265,6 +270,7 @@ There are three sizes of `Dropdown` available: `sm`, `lg` (the default), and
   size="sm"
   label="Small [sm]"
   id="sm"
+  titleText="Dropdown label"
 />
 <br />
 <Dropdown
@@ -272,6 +278,7 @@ There are three sizes of `Dropdown` available: `sm`, `lg` (the default), and
   label="Medium [md]"
   id="md"
   size="md"
+  titleText="Dropdown label"
 />
 <br />
 <Dropdown
@@ -279,6 +286,7 @@ There are three sizes of `Dropdown` available: `sm`, `lg` (the default), and
   size="lg"
   label="Large [lg]"
   id="lg"
+  titleText="Dropdown label"
 />
 
 ```jsx
@@ -286,16 +294,19 @@ There are three sizes of `Dropdown` available: `sm`, `lg` (the default), and
   items={['Option 1', 'Option 2', 'Option 3']}
   size="sm"
   label="Small [sm]"
+  titleText="Dropdown label"
 />
 <Dropdown
   items={['Option 1', 'Option 2', 'Option 3']}
   label="Medium [md]"
   size="md"
+  titleText="Dropdown label"
 />
 <Dropdown
   items={['Option 1', 'Option 2', 'Option 3']}
   size="lg"
   label="Large [lg]"
+  titleText="Dropdown label"
 />
 ```
 
@@ -317,6 +328,7 @@ that, pass in `type="inline"` to the `Dropdown`
   label="Inline"
   type="inline"
   id="inline"
+  titleText="Dropdown label"
 />
 
 ```jsx
@@ -324,6 +336,8 @@ that, pass in `type="inline"` to the `Dropdown`
   items={['Option 1', 'Option 2', 'Option 3']}
   label="Inline"
   type="inline"
+  is="inline"
+  titleText="Dropdown label"
 />
 ```
 
