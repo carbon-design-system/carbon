@@ -2161,7 +2161,7 @@ __metadata:
     downshift: 8.2.2
     enquirer: ^2.3.6
     fast-glob: ^3.2.7
-    flatpickr: 4.6.9
+    flatpickr: 4.6.13
     fs-extra: ^11.0.0
     html-webpack-plugin: ^5.5.0
     invariant: ^2.2.3
@@ -15669,6 +15669,13 @@ __metadata:
   version: 4.6.1
   resolution: "flatpickr@npm:4.6.1"
   checksum: 66ea82084a70570a0dcf5a46a3b7e6a6551ec06fd1238f544226540feae69d2c3fd7af69f77c73023059e1a0d50e2f6ed0a6c4d4c390794cc4c8dd3c50002338
+  languageName: node
+  linkType: hard
+
+"flatpickr@npm:4.6.13":
+  version: 4.6.13
+  resolution: "flatpickr@npm:4.6.13"
+  checksum: 2cca1b8dc974e7673b51174ee3f0679ae3a6b79525a0c53bf49b87455ef358354e64acfd60b312e44cef208aab9750a1a48df32a0914046a53de6d9403742304
   languageName: node
   linkType: hard
 
