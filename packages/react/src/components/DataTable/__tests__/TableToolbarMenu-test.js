@@ -27,7 +27,7 @@ describe('TableToolbarMenu', () => {
 
     it('should support a custom `className` prop on the outermost element', () => {
       render(
-        <TableToolbarMenu className="custom-class">
+        <TableToolbarMenu iconDescription="Add" className="custom-class">
           <span>test</span>
         </TableToolbarMenu>
       );

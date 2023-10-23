@@ -30,17 +30,21 @@
     position: relative;
     display: flex;
     align-items: center;
+    gap: 1rem;
     user-select: none;
   }
 
   .#{$prefix}--slider {
     position: relative;
     padding: $spacing-05 0;
-    margin: 0 $spacing-05;
     cursor: pointer;
     inline-size: 100%;
     max-inline-size: convert.to-rem(640px);
     min-inline-size: convert.to-rem(200px);
+
+    .#{$prefix}--slider-container--two-handles & {
+      margin-inline: rem(4px);
+    }
   }
 
   .#{$prefix}--slider__range-label {
@@ -48,10 +52,6 @@
 
     color: $text-primary;
     white-space: nowrap;
-
-    &:last-of-type {
-      margin-inline-end: $spacing-05;
-    }
   }
 
   .#{$prefix}--slider__track {
@@ -117,8 +117,100 @@
     }
   }
 
+  .#{$prefix}--slider__thumb-icon {
+    fill: $layer-selected-inverse;
+  }
+
+  .#{$prefix}--slider__thumb-icon--focus {
+    display: none;
+    fill: $interactive;
+  }
+
+  .#{$prefix}--slider__thumb--lower,
+  .#{$prefix}--slider__thumb--upper {
+    display: block;
+    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+    border-radius: unset;
+    background-color: transparent;
+    block-size: 24px;
+    box-shadow: none;
+    inline-size: 16px;
+    transform: translate(-100%, -50%);
+    transition: none;
+
+    &::before {
+      position: absolute;
+      z-index: -1;
+      display: block;
+      background: $background;
+      block-size: convert.to-rem(2px);
+      content: '';
+      inline-size: convert.to-rem(6px);
+      inset-block-start: calc(50% - #{convert.to-rem(2px) / 2});
+      inset-inline-end: 0;
+    }
+
+    &:hover {
+      transform: translate(-100%, -50%);
+
+      .#{$prefix}--slider__thumb-icon {
+        fill: $text-secondary;
+      }
+    }
+
+    &:active {
+      box-shadow: none;
+      transform: translate(-100%, -50%);
+    }
+
+    &:focus {
+      background-color: transparent;
+      box-shadow: none;
+      transform: translate(-100%, -50%);
+
+      .#{$prefix}--slider__thumb-icon {
+        display: none;
+        fill: $interactive;
+      }
+
+      .#{$prefix}--slider__thumb-icon--focus {
+        display: block;
+      }
+    }
+  }
+
+  .#{$prefix}--slider__thumb--lower:focus::before,
+  .#{$prefix}--slider__thumb--upper:focus::before {
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--slider__thumb--upper {
+    transform: translate(0, -50%);
+
+    &::before {
+      inset-inline-end: auto;
+      inset-inline-start: 0;
+    }
+
+    &:hover {
+      transform: translate(0, -50%);
+    }
+
+    &:active {
+      transform: translate(0, -50%);
+    }
+
+    &:focus {
+      transform: translate(0, -50%);
+    }
+  }
+
   .#{$prefix}--slider__input {
     display: none;
+  }
+
+  .#{$prefix}--slider-text-input-wrapper {
+    position: relative;
   }
 
   .#{$prefix}--slider-text-input,
@@ -139,7 +231,7 @@
   }
 
   .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {
-    background-color: $interactive;
+    background-color: $border-interactive;
   }
 
   // Invalid & warn state
@@ -161,7 +253,6 @@
   .#{$prefix}--slider__validation-msg.#{$prefix}--form-requirement {
     display: block;
     overflow: visible;
-    margin-block-start: 0;
     max-block-size: 100%;
   }
 
@@ -241,13 +332,24 @@
     cursor: default;
   }
 
-  .#{$prefix}--slider--readonly .#{$prefix}--slider__thumb {
+  .#{$prefix}--slider-container--readonly .#{$prefix}--slider__thumb {
     block-size: 0;
     inline-size: 0;
+
+    &::before,
+    &::after {
+      display: none;
+    }
   }
 
-  .#{$prefix}--slider--readonly ~ .#{$prefix}--slider-text-input {
+  .#{$prefix}--slider-container--readonly .#{$prefix}--slider-text-input {
     background-color: transparent;
+  }
+
+  .#{$prefix}--slider__status-msg.#{$prefix}--form-requirement {
+    display: block;
+    overflow: visible;
+    max-block-size: 100%;
   }
 
   // Skeleton state
@@ -265,11 +367,20 @@
     pointer-events: none;
   }
 
-  .#{$prefix}--slider-container.#{$prefix}--skeleton
+  .#{$prefix}--slider-container.#{$prefix}--skeleton {
     .#{$prefix}--slider__thumb {
-    cursor: default;
-    inset-inline-start: 50%;
-    pointer-events: none;
+      cursor: default;
+      inset-inline-start: 50%;
+      pointer-events: none;
+    }
+
+    .#{$prefix}--slider__thumb--lower {
+      inset-inline-start: 0;
+    }
+
+    .#{$prefix}--slider__thumb--upper {
+      inset-inline-start: 100%;
+    }
   }
 
   // Windows HCM fix

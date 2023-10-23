@@ -10,6 +10,7 @@ import React from 'react';
 import RadioTile from '../RadioTile';
 import { warning } from '../../internal/warning';
 import { PrefixContext } from '../../internal/usePrefix';
+import { noopFn } from '../../internal/noopFn';
 
 export default class TileGroup extends React.Component {
   state = {
@@ -62,10 +63,6 @@ export default class TileGroup extends React.Component {
     valueSelected: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   };
 
-  static defaultProps = {
-    onChange: /* istanbul ignore next */ () => {},
-  };
-
   static getDerivedStateFromProps({ valueSelected, defaultSelected }, state) {
     const { prevValueSelected } = state;
     return prevValueSelected === valueSelected
@@ -105,9 +102,10 @@ export default class TileGroup extends React.Component {
   };
 
   handleChange = (newSelection, value, evt) => {
+    const { onChange = noopFn } = this.props;
     if (newSelection !== this.state.selected) {
       this.setState({ selected: newSelection });
-      this.props.onChange(newSelection, this.props.name, evt);
+      onChange(newSelection, this.props.name, evt);
     }
   };
 

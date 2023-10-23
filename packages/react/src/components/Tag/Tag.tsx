@@ -12,6 +12,7 @@ import { Close } from '@carbon/icons-react';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
+import { Text } from '../Text';
 
 const getInstanceId = setupGetInstanceId();
 const TYPES = {
@@ -127,11 +128,11 @@ const Tag = <T extends React.ElementType>({
     const ComponentTag = BaseComponent ?? 'div';
     return (
       <ComponentTag className={tagClasses} id={tagId} {...other}>
-        <span
+        <Text
           className={`${prefix}--tag__label`}
           title={typeof children === 'string' ? children : undefined}>
           {children !== null && children !== undefined ? children : typeText}
-        </span>
+        </Text>
         <button
           type="button"
           className={`${prefix}--tag__close-icon`}
@@ -160,9 +161,9 @@ const Tag = <T extends React.ElementType>({
       ) : (
         ''
       )}
-      <span title={typeof children === 'string' ? children : undefined}>
+      <Text title={typeof children === 'string' ? children : undefined}>
         {children !== null && children !== undefined ? children : typeText}
-      </span>
+      </Text>
     </ComponentTag>
   );
 };
