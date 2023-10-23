@@ -31,6 +31,7 @@ import {
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useFeatureFlag } from '../FeatureFlags';
 import { useId } from '../../internal/useId';
+import { Text } from '../Text';
 
 export interface TileProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
@@ -162,7 +163,6 @@ export const ClickableTile = React.forwardRef<
   function handleOnKeyDown(evt: KeyboardEvent) {
     evt?.persist?.();
     if (matches(evt, [keys.Enter, keys.Space])) {
-      evt.preventDefault();
       setIsSelected(!isSelected);
       onKeyDown(evt);
     }
@@ -406,9 +406,9 @@ export const SelectableTile = React.forwardRef<
         className={`${prefix}--tile__checkmark ${prefix}--tile__checkmark--persistent`}>
         {isSelected ? <CheckboxCheckedFilled /> : <Checkbox />}
       </span>
-      <label htmlFor={id} className={`${prefix}--tile-content`}>
+      <Text as="label" htmlFor={id} className={`${prefix}--tile-content`}>
         {children}
-      </label>
+      </Text>
     </div>
   );
 });

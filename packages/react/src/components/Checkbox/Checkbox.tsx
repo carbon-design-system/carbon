@@ -12,6 +12,7 @@ import { Text } from '../Text';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { noopFn } from '../../internal/noopFn';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -101,9 +102,9 @@ const Checkbox = React.forwardRef(
       helperText,
       id,
       labelText,
-      onChange,
+      onChange = noopFn,
       onClick,
-      indeterminate,
+      indeterminate = false,
       invalid,
       invalidText,
       hideLabel,
@@ -294,11 +295,6 @@ Checkbox.propTypes = {
    * Provide the text that is displayed when the Checkbox is in warning state
    */
   warnText: PropTypes.node,
-};
-
-Checkbox.defaultProps = {
-  onChange: () => {},
-  indeterminate: false,
 };
 
 Checkbox.displayName = 'Checkbox';
