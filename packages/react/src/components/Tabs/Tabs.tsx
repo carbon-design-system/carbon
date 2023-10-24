@@ -905,7 +905,7 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
         )}
         <Text
           className={`${prefix}--tabs__nav-item-label`}
-          title={children as string}>
+        >
           {children}
         </Text>
         {/* always rendering dismissIcon so we don't lose reference to it, otherwise events do not work when switching from/to dismissable state */}
