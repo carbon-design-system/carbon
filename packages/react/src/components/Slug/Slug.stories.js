@@ -94,6 +94,30 @@ export const Default = () => (
             do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
       />
     </div>
+    <div className="slug-container">
+      <Slug
+        kind="inline"
+        autoAlign
+        size="sm"
+        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua. Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
+      />
+      <Slug
+        kind="inline"
+        autoAlign
+        size="md"
+        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
+      />
+      <Slug
+        kind="inline"
+        autoAlign
+        size="lg"
+        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
+      />
+    </div>
   </>
 );
 

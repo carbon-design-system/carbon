@@ -33,17 +33,27 @@ const Slug = React.forwardRef(function Slug(
     [`${prefix}--ai-slug__button--${kind}`]: kind,
   });
 
+  const isInline = kind === 'inline';
+
   return (
     <div className={slugClasses} ref={ref}>
-      <Toggletip align={align} autoAlign={autoAlign}>
-        <ToggletipButton className={slugButtonClasses} label="Show information">
+      {isInline ? (
+        <div className={slugButtonClasses}>
           <span className={`${prefix}--ai-slug__text`}>{aiText}</span>
-        </ToggletipButton>
-        <ToggletipContent>
-          {slugContent}
-          <ToggletipActions></ToggletipActions>
-        </ToggletipContent>
-      </Toggletip>
+        </div>
+      ) : (
+        <Toggletip align={align} autoAlign={autoAlign}>
+          <ToggletipButton
+            className={slugButtonClasses}
+            label="Show information">
+            <span className={`${prefix}--ai-slug__text`}>{aiText}</span>
+          </ToggletipButton>
+          <ToggletipContent>
+            {slugContent}
+            <ToggletipActions></ToggletipActions>
+          </ToggletipContent>
+        </Toggletip>
+      )}
     </div>
   );
 });

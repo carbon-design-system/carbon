@@ -165,4 +165,31 @@ $sizes: (
     border-color: $focus;
     box-shadow: inset 0 0 0 1px $focus;
   }
+
+  // Inline slug
+  .#{$prefix}--ai-slug .#{$prefix}--ai-slug__button--inline {
+    background: transparent;
+    block-size: initial;
+    color: $text-primary;
+    font-size: convert.to-rem(14px);
+    inline-size: initial;
+    line-height: initial;
+  }
+
+  .#{$prefix}--ai-slug__button--inline::before {
+    display: none;
+  }
+
+  // Only allow sm, md, and lg sizes
+  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--mini,
+  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--2xs,
+  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--xs,
+  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--sm {
+    font-size: convert.to-rem(12px);
+  }
+
+  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--lg,
+  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--xl {
+    font-size: convert.to-rem(16px);
+  }
 }
