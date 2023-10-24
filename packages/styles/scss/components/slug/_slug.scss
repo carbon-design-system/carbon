@@ -68,6 +68,7 @@ $sizes: (
     justify-content: center;
     color: $text-inverse;
     font-weight: 600;
+    transition: box-shadow $duration-fast-01 motion(entrance, productive);
 
     @each $group, $size in $sizes {
       // Create a class for each size slug
@@ -80,10 +81,16 @@ $sizes: (
     }
   }
 
+  .#{$prefix}--ai-slug .#{$prefix}--ai-slug__button:focus {
+    box-shadow: inset 0 0 0 2px $focus, inset 0 0 0 3px $focus-inset;
+    outline: none;
+  }
+
   .#{$prefix}--ai-slug__text {
     z-index: 1;
   }
 
+  // pseudo element to animate the hover transition
   .#{$prefix}--ai-slug__button::before {
     position: absolute;
     background: $slug-gradient-hover;
@@ -91,7 +98,16 @@ $sizes: (
     content: '';
     inline-size: 100%;
     opacity: 0;
-    transition: opacity $duration-fast-02 motion(standard, productive);
+    transition: opacity $duration-fast-01 motion(entrance, productive);
+  }
+
+  .#{$prefix}--ai-slug__button:hover::before {
+    opacity: 1;
+  }
+
+  .#{$prefix}--ai-slug .#{$prefix}--ai-slug__button:focus::before {
+    block-size: calc(100% - 6px);
+    inline-size: calc(100% - 6px);
   }
 
   .#{$prefix}--ai-slug__button.#{$prefix}--ai-slug__button--3xs::before,
@@ -99,7 +115,14 @@ $sizes: (
     background: $slug-background-hover;
   }
 
-  .#{$prefix}--ai-slug__button:hover::before {
-    opacity: 1;
+  .#{$prefix}--ai-slug__button.#{$prefix}--ai-slug__button--3xs:focus,
+  .#{$prefix}--ai-slug__button.#{$prefix}--ai-slug__button--2xs:focus {
+    box-shadow: inset 0 0 0 1px $focus, inset 0 0 0 2px $focus-inset;
+  }
+
+  .#{$prefix}--ai-slug__button.#{$prefix}--ai-slug__button--3xs:focus::before,
+  .#{$prefix}--ai-slug__button.#{$prefix}--ai-slug__button--2xs:focus::before {
+    block-size: calc(100% - 4px);
+    inline-size: calc(100% - 4px);
   }
 }
