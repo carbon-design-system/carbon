@@ -19,7 +19,7 @@ test.describe('breadcrumb @avt', () => {
         theme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('Breadcrumb');
+    await expect(page).toHaveNoACViolations('Breadcrumb-default-state');
   });
 
   test('@avt-advanced-states with overflow menu', async ({ page }) => {
