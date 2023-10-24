@@ -349,6 +349,7 @@ export const ai = TokenGroup.create({
     'slug-gradient',
     'slug-background-hover',
     'slug-gradient-hover',
+    'slug-hollow-hover',
   ],
 });
 

@@ -16,6 +16,7 @@ import {
   gray10Hover,
   gray20,
   gray30,
+  gray30Hover,
   gray40,
   gray50,
   gray50Hover,
@@ -213,6 +214,7 @@ export const slugBackground = gray30;
 export const slugGradient = `${gray50} linear-gradient(135deg, ${gray10} 0%, rgba(${white}, 0) 100%)`;
 export const slugBackgroundHover = gray20;
 export const slugGradientHover = `${gray40} linear-gradient(135deg, ${white} 0%, rgba(${white}, 0) 100%)`;
+export const slugHollowHover = gray30Hover;
 
 export {
   // Type

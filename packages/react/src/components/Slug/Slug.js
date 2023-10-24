@@ -18,7 +18,7 @@ import {
 } from '../Toggletip';
 
 const Slug = React.forwardRef(function Slug(
-  { aiText = 'AI', align, autoAlign = false, size = 'sm', slugContent },
+  { aiText = 'AI', align, autoAlign = false, kind, size = 'xs', slugContent },
   ref
 ) {
   const prefix = usePrefix();
@@ -30,6 +30,7 @@ const Slug = React.forwardRef(function Slug(
   const slugButtonClasses = cx({
     [`${prefix}--ai-slug__button`]: true,
     [`${prefix}--ai-slug__button--${size}`]: size,
+    [`${prefix}--ai-slug__button--${kind}`]: kind,
   });
 
   return (
@@ -80,9 +81,14 @@ Slug.propTypes = {
   autoAlign: PropTypes.bool,
 
   /**
+   * Specify the type of Slug, from the following list of types:
+   */
+  kind: PropTypes.oneOf(['default', 'hollow', 'inline']),
+
+  /**
    * Specify the size of the button, from the following list of sizes:
    */
-  size: PropTypes.oneOf(['3xs', '2xs', 'xs', 'sm', 'md', 'lg', 'xl']),
+  size: PropTypes.oneOf(['mini', '2xs', 'xs', 'sm', 'md', 'lg', 'xl']),
 
   /**
    * Specify the content you want rendered inside the slug ToggleTip

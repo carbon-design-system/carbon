@@ -1,4 +1,9 @@
 .slug-container {
   display: flex;
-  justify-content: space-between;
+  margin-bottom: 6rem;
+  align-items: flex-start;
+
+  & > * {
+    padding-left: 2rem;
+  }
 }

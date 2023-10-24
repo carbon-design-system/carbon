@@ -6,7 +6,7 @@
 @use '../../utilities/convert';
 
 $sizes: (
-  3xs: (
+  mini: (
     height: convert.to-rem(16px),
     width: convert.to-rem(16px),
     font-size: convert.to-rem(9px),
@@ -61,6 +61,10 @@ $sizes: (
 /// @access public
 /// @group slider
 @mixin slug {
+  .#{$prefix}--ai-slug {
+    display: flex;
+  }
+
   .#{$prefix}--ai-slug .#{$prefix}--ai-slug__button {
     position: relative;
     display: flex;
@@ -105,24 +109,60 @@ $sizes: (
     opacity: 1;
   }
 
+  // Focus styles
   .#{$prefix}--ai-slug .#{$prefix}--ai-slug__button:focus::before {
     block-size: calc(100% - 6px);
     inline-size: calc(100% - 6px);
   }
 
-  .#{$prefix}--ai-slug__button.#{$prefix}--ai-slug__button--3xs::before,
+  .#{$prefix}--ai-slug__button.#{$prefix}--ai-slug__button--mini::before,
   .#{$prefix}--ai-slug__button.#{$prefix}--ai-slug__button--2xs::before {
     background: $slug-background-hover;
   }
 
-  .#{$prefix}--ai-slug__button.#{$prefix}--ai-slug__button--3xs:focus,
+  .#{$prefix}--ai-slug__button.#{$prefix}--ai-slug__button--mini:focus,
   .#{$prefix}--ai-slug__button.#{$prefix}--ai-slug__button--2xs:focus {
     box-shadow: inset 0 0 0 1px $focus, inset 0 0 0 2px $focus-inset;
   }
 
-  .#{$prefix}--ai-slug__button.#{$prefix}--ai-slug__button--3xs:focus::before,
+  .#{$prefix}--ai-slug__button.#{$prefix}--ai-slug__button--mini:focus::before,
   .#{$prefix}--ai-slug__button.#{$prefix}--ai-slug__button--2xs:focus::before {
     block-size: calc(100% - 4px);
     inline-size: calc(100% - 4px);
+  }
+
+  // Hollow slug
+  // Only allow mini, 2xs, and xs sizes
+  .#{$prefix}--ai-slug__button--hollow.#{$prefix}--ai-slug__button--sm,
+  .#{$prefix}--ai-slug__button--hollow.#{$prefix}--ai-slug__button--md,
+  .#{$prefix}--ai-slug__button--hollow.#{$prefix}--ai-slug__button--lg,
+  .#{$prefix}--ai-slug__button--hollow.#{$prefix}--ai-slug__button--xl {
+    block-size: convert.to-rem(24px);
+    font-size: convert.to-rem(12px);
+    inline-size: convert.to-rem(24px);
+    line-height: convert.to-rem(16px);
+  }
+
+  .#{$prefix}--ai-slug__button--hollow::before {
+    display: none;
+  }
+
+  .#{$prefix}--ai-slug .#{$prefix}--ai-slug__button--hollow {
+    border: 1px solid $border-inverse;
+    background: transparent;
+    color: $text-primary;
+    transition: color $duration-fast-01 motion(entrance, productive),
+      border-color $duration-fast-01 motion(entrance, productive),
+      box-shadow $duration-fast-01 motion(entrance, productive);
+  }
+
+  .#{$prefix}--ai-slug__button--hollow:hover {
+    border-color: $slug-hollow-hover;
+    color: $slug-hollow-hover;
+  }
+
+  .#{$prefix}--ai-slug__button--hollow:focus {
+    border-color: $focus;
+    box-shadow: inset 0 0 0 1px $focus;
   }
 }

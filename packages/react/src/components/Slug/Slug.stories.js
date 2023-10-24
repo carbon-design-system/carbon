@@ -24,51 +24,77 @@ export default {
 };
 
 export const Default = () => (
-  <div className="slug-container">
-    <Slug
-      autoAlign
-      size="3xs"
-      slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+  <>
+    <div className="slug-container">
+      <Slug
+        autoAlign
+        size="mini"
+        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
             do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua. Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
             do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
-    />
-    <Slug
-      autoAlign
-      size="2xs"
-      slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+      />
+      <Slug
+        autoAlign
+        size="2xs"
+        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
             do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
-    />
-    <Slug
-      autoAlign
-      size="xs"
-      slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+      />
+      <Slug
+        autoAlign
+        size="xs"
+        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
             do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
-    />
-    <Slug
-      autoAlign
-      size="sm"
-      slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+      />
+      <Slug
+        autoAlign
+        size="sm"
+        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
             do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
-    />
-    <Slug
-      autoAlign
-      size="md"
-      slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+      />
+      <Slug
+        autoAlign
+        size="md"
+        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
             do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
-    />
-    <Slug
-      autoAlign
-      size="lg"
-      slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+      />
+      <Slug
+        autoAlign
+        size="lg"
+        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
             do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
-    />
-    <Slug
-      autoAlign
-      size="xl"
-      slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+      />
+      <Slug
+        autoAlign
+        size="xl"
+        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
             do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
-    />
-  </div>
+      />
+    </div>
+    <div className="slug-container">
+      <Slug
+        kind="hollow"
+        autoAlign
+        size="mini"
+        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua. Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
+      />
+      <Slug
+        kind="hollow"
+        autoAlign
+        size="2xs"
+        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
+      />
+      <Slug
+        kind="hollow"
+        autoAlign
+        size="xs"
+        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
+      />
+    </div>
+  </>
 );
 
 export const Playground = (args) => (
