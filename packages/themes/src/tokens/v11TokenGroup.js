@@ -341,6 +341,17 @@ export const contextual = TokenGroup.create({
   ],
 });
 
+export const ai = TokenGroup.create({
+  name: 'AI',
+  properties: ['background'],
+  tokens: [
+    'slug-background',
+    'slug-gradient',
+    'slug-background-hover',
+    'slug-gradient-hover',
+  ],
+});
+
 export const group = TokenGroup.create({
   name: 'All',
   tokens: [
@@ -359,6 +370,7 @@ export const group = TokenGroup.create({
     link,
     icon,
     support,
+    ai,
 
     // Misc
     {

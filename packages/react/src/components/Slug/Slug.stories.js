@@ -11,6 +11,7 @@ import React from 'react';
 
 import Slug from '.';
 import mdx from './Slug.mdx';
+import './slug-story.scss';
 
 export default {
   title: 'Experimental/unstable__Slug',
@@ -23,7 +24,10 @@ export default {
 };
 
 export const Default = () => (
-  <Slug slugContent="A brief description of this AI interaction" />
+  <Slug
+    align="right"
+    slugContent="A brief description of this AI interaction"
+  />
 );
 
 export const Playground = (args) => (

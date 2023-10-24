@@ -18,7 +18,7 @@ import {
 } from '../Toggletip';
 
 const Slug = React.forwardRef(function Slug(
-  { aiText = 'AI', size = 'xxs', slugContent },
+  { aiText = 'AI', align, autoAlign = false, size = 'sm', slugContent },
   ref
 ) {
   const prefix = usePrefix();
@@ -34,9 +34,9 @@ const Slug = React.forwardRef(function Slug(
 
   return (
     <div className={slugClasses} ref={ref}>
-      <Toggletip>
+      <Toggletip align={align} autoAlign={autoAlign}>
         <ToggletipButton className={slugButtonClasses} label="Show information">
-          <span>{aiText}</span>
+          <span className={`${prefix}--ai-slug__text`}>{aiText}</span>
         </ToggletipButton>
         <ToggletipContent>
           {slugContent}
@@ -54,9 +54,35 @@ Slug.propTypes = {
   aiText: PropTypes.string,
 
   /**
+   * Specify how the popover should align with the button
+   */
+  align: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+
+    'left',
+    'left-bottom',
+    'left-top',
+
+    'right',
+    'right-bottom',
+    'right-top',
+  ]),
+
+  /**
+   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   */
+  autoAlign: PropTypes.bool,
+
+  /**
    * Specify the size of the button, from the following list of sizes:
    */
-  size: PropTypes.oneOf(['xxs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl']),
+  size: PropTypes.oneOf(['3xs', '2xs', 'xs', 'sm', 'md', 'lg', 'xl']),
 
   /**
    * Specify the content you want rendered inside the slug ToggleTip

@@ -207,6 +207,12 @@ export const overlay = rgba(black, 0.65);
 export const toggleOff = gray50;
 export const shadow = rgba(black, 0.8);
 
+// AI
+export const slugBackground = gray30;
+export const slugGradient = `${gray50} linear-gradient(135deg, ${gray10} 0%, rgba(${white}, 0) 100%)`;
+export const slugBackgroundHover = gray10Hover;
+export const slugGradientHover = `${gray40} linear-gradient(135deg, ${white} 0%, rgba(${white}, 0) 100%)`;
+
 export {
   // Type
   caption01,

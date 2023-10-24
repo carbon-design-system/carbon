@@ -1,67 +1,59 @@
 @use '../../config' as *;
 @use '../../colors' as *;
+@use '../../motion' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
 @use '../../utilities/convert';
 
-$gradient-background: $gray-100
-  linear-gradient(
-    135deg,
-    rgba(168, 168, 168, 1) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
-
-$solid-background: $gray-70;
-
 $sizes: (
-  xxs: (
+  3xs: (
     height: convert.to-rem(16px),
     width: convert.to-rem(16px),
     font-size: convert.to-rem(9px),
     line-height: convert.to-rem(12px),
-    background: $solid-background,
+    background: $slug-background,
   ),
-  xs: (
+  2xs: (
     height: convert.to-rem(20px),
     width: convert.to-rem(20px),
     font-size: convert.to-rem(12px),
     line-height: convert.to-rem(16px),
-    background: $solid-background,
+    background: $slug-background,
   ),
-  sm: (
+  xs: (
     height: convert.to-rem(24px),
     width: convert.to-rem(24px),
     font-size: convert.to-rem(12px),
     line-height: convert.to-rem(16px),
-    background: $gradient-background,
+    background: $slug-gradient,
   ),
-  md: (
+  sm: (
     height: convert.to-rem(32px),
     width: convert.to-rem(32px),
     font-size: convert.to-rem(16px),
     line-height: convert.to-rem(21px),
-    background: $gradient-background,
+    background: $slug-gradient,
   ),
-  lg: (
+  md: (
     height: convert.to-rem(40px),
     width: convert.to-rem(40px),
     font-size: convert.to-rem(16px),
     line-height: convert.to-rem(21px),
-    background: $gradient-background,
+    background: $slug-gradient,
   ),
-  xl: (
+  lg: (
     height: convert.to-rem(48px),
     width: convert.to-rem(48px),
     font-size: convert.to-rem(16px),
     line-height: convert.to-rem(21px),
-    background: $gradient-background,
+    background: $slug-gradient,
   ),
-  2xl: (
+  xl: (
     height: convert.to-rem(64px),
     width: convert.to-rem(64px),
     font-size: convert.to-rem(20px),
     line-height: convert.to-rem(26px),
-    background: $gradient-background,
+    background: $slug-gradient,
   ),
 );
 
@@ -70,6 +62,7 @@ $sizes: (
 /// @group slider
 @mixin slug {
   .#{$prefix}--ai-slug .#{$prefix}--ai-slug__button {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -85,5 +78,28 @@ $sizes: (
         }
       }
     }
+  }
+
+  .#{$prefix}--ai-slug__text {
+    z-index: 1;
+  }
+
+  .#{$prefix}--ai-slug__button::before {
+    position: absolute;
+    background: $slug-gradient-hover;
+    block-size: 100%;
+    content: '';
+    inline-size: 100%;
+    opacity: 0;
+    transition: opacity $duration-fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--ai-slug__button.#{$prefix}--ai-slug__button--3xs::before,
+  .#{$prefix}--ai-slug__button.#{$prefix}--ai-slug__button--2xs::before {
+    background: $slug-background-hover;
+  }
+
+  .#{$prefix}--ai-slug__button:hover::before {
+    opacity: 1;
   }
 }
