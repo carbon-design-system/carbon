@@ -132,9 +132,7 @@ const SideNavMenu = React.forwardRef<HTMLElement, SideNavMenuProps>(
               <IconElement />
             </SideNavIcon>
           )}
-          <span className={`${prefix}--side-nav__submenu-title`} title={title}>
-            {title}
-          </span>
+          <span className={`${prefix}--side-nav__submenu-title`}>{title}</span>
           <SideNavIcon className={`${prefix}--side-nav__submenu-chevron`} small>
             <ChevronDown size={20} />
           </SideNavIcon>
