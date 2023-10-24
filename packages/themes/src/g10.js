@@ -203,7 +203,7 @@ export const shadow = 'rgba(0, 0, 0, 0.3)';
 // AI
 export const slugBackground = gray70;
 export const slugGradient = `${gray100} linear-gradient(135deg, ${gray40} 0%, rgba(${white}, 0) 100%)`;
-export const slugBackgroundHover = gray70;
+export const slugBackgroundHover = gray60;
 export const slugGradientHover = `${gray100} linear-gradient(135deg, ${gray20Hover} 0%, rgba(${white}, 0) 100%)`;
 
 export {

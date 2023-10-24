@@ -14,6 +14,8 @@ import {
 
   // Gray
   gray10,
+  gray10Hover,
+  gray20,
   gray30,
   gray40,
   gray50,
@@ -46,7 +48,6 @@ import {
 
   // Tools
   rgba,
-  gray10Hover,
 } from '@carbon/colors';
 import { adjustLightness, adjustAlpha } from './tools';
 
@@ -210,7 +211,7 @@ export const shadow = rgba(black, 0.8);
 // AI
 export const slugBackground = gray30;
 export const slugGradient = `${gray50} linear-gradient(135deg, ${gray10} 0%, rgba(${white}, 0) 100%)`;
-export const slugBackgroundHover = gray10Hover;
+export const slugBackgroundHover = gray20;
 export const slugGradientHover = `${gray40} linear-gradient(135deg, ${white} 0%, rgba(${white}, 0) 100%)`;
 
 export {
