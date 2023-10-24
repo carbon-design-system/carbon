@@ -174,22 +174,80 @@ $sizes: (
     font-size: convert.to-rem(14px);
     inline-size: initial;
     line-height: initial;
+    padding-inline-start: convert.to-rem(8px);
   }
 
   .#{$prefix}--ai-slug__button--inline::before {
     display: none;
   }
 
+  .#{$prefix}--ai-slug__button--inline .#{$prefix}--ai-slug__text::before {
+    position: absolute;
+    display: inline-block;
+    background: $icon-primary;
+    block-size: convert.to-rem(4px);
+    content: '';
+    inline-size: convert.to-rem(4px);
+    inset-block-start: 50%;
+    inset-inline-start: 0;
+    opacity: 1;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--lg {
+    padding-inline-start: convert.to-rem(12px);
+  }
+
+  // Inline slug hollow dot
+  .#{$prefix}--ai-slug__text.#{$prefix}--ai-slug__text--dot-hollow::before {
+    background: transparent;
+    block-size: convert.to-rem(6px);
+    box-shadow: inset 0 0 0 1px $text-primary;
+    inline-size: convert.to-rem(6px);
+  }
+
+  .#{$prefix}--ai-slug__button--lg .#{$prefix}--ai-slug__text::before,
+  .#{$prefix}--ai-slug__button--lg
+    .#{$prefix}--ai-slug__text--dot-hollow::before {
+    block-size: convert.to-rem(8px);
+    inline-size: convert.to-rem(8px);
+  }
+
   // Only allow sm, md, and lg sizes
   .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--mini,
+  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--mini
+    .#{$prefix}--ai-slug__content,
   .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--2xs,
+  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--2xs
+    .#{$prefix}--ai-slug__content,
   .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--xs,
-  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--sm {
+  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--xs
+    .#{$prefix}--ai-slug__content,
+  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--sm,
+  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--sm
+    .#{$prefix}--ai-slug__content {
     font-size: convert.to-rem(12px);
   }
 
   .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--lg,
   .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--xl {
     font-size: convert.to-rem(16px);
+  }
+
+  // Inline slug with text
+  .#{$prefix}--ai-slug.#{$prefix}--ai-slug--inline-with-content {
+    padding: convert.to-rem(8px);
+    border: 1px solid $text-primary;
+  }
+
+  .#{$prefix}--ai-slug__content {
+    @include type-style('body-compact-02');
+
+    padding-inline-start: convert.to-rem(8px);
+  }
+
+  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--md
+    .#{$prefix}--ai-slug__content {
+    font-size: convert.to-rem(14px);
   }
 }

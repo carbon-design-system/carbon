@@ -18,13 +18,23 @@ import {
 } from '../Toggletip';
 
 const Slug = React.forwardRef(function Slug(
-  { aiText = 'AI', align, autoAlign = false, kind, size = 'xs', slugContent },
+  {
+    aiText = 'AI',
+    align,
+    autoAlign = false,
+    dotType,
+    kind,
+    size = 'xs',
+    slugContent,
+  },
   ref
 ) {
   const prefix = usePrefix();
 
   const slugClasses = cx({
     [`${prefix}--ai-slug`]: true,
+    [`${prefix}--ai-slug--inline-with-content`]:
+      kind === 'inline' && slugContent,
   });
 
   const slugButtonClasses = cx({
@@ -33,13 +43,21 @@ const Slug = React.forwardRef(function Slug(
     [`${prefix}--ai-slug__button--${kind}`]: kind,
   });
 
+  const aiTextClasses = cx({
+    [`${prefix}--ai-slug__text`]: true,
+    [`${prefix}--ai-slug__text--dot-${dotType}`]: dotType,
+  });
+
   const isInline = kind === 'inline';
 
   return (
     <div className={slugClasses} ref={ref}>
       {isInline ? (
         <div className={slugButtonClasses}>
-          <span className={`${prefix}--ai-slug__text`}>{aiText}</span>
+          <span className={aiTextClasses}>{aiText}</span>
+          {slugContent && (
+            <span className={`${prefix}--ai-slug__content`}>{slugContent}</span>
+          )}
         </div>
       ) : (
         <Toggletip align={align} autoAlign={autoAlign}>
@@ -89,6 +107,11 @@ Slug.propTypes = {
    * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
    */
   autoAlign: PropTypes.bool,
+
+  /**
+   * Specify the type of dot that should be rendered in front of the inline variant
+   */
+  dotType: PropTypes.oneOf(['default', 'hollow']),
 
   /**
    * Specify the type of Slug, from the following list of types:
