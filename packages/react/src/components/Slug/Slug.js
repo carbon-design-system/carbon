@@ -35,6 +35,7 @@ const Slug = React.forwardRef(function Slug(
 
   const slugClasses = cx(className, {
     [`${prefix}--ai-slug`]: true,
+    [`${prefix}--ai-slug--hollow`]: kind === 'hollow' || dotType === 'hollow',
   });
 
   const slugButtonClasses = cx({
@@ -43,8 +44,6 @@ const Slug = React.forwardRef(function Slug(
     [`${prefix}--ai-slug__button--${kind}`]: kind,
     [`${prefix}--ai-slug__button--inline-with-content`]:
       kind === 'inline' && aiTextLabel,
-    [`${prefix}--ai-slug__button--dot-${dotType}`]:
-      kind === 'inline' && dotType,
   });
 
   return (

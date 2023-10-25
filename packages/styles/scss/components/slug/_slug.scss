@@ -72,8 +72,9 @@ $sizes: (
     justify-content: center;
     color: $text-inverse;
     font-weight: 600;
-    transition: box-shadow $duration-fast-01 motion(entrance, productive),
-      border $duration-fast-01 motion(entrance, productive);
+    transition: color $duration-fast-01 motion(entrance, productive),
+      border-color $duration-fast-01 motion(entrance, productive),
+      box-shadow $duration-fast-01 motion(entrance, productive);
 
     @each $group, $size in $sizes {
       // Create a class for each size slug
@@ -153,9 +154,6 @@ $sizes: (
     border: 1px solid $border-inverse;
     background: transparent;
     color: $text-primary;
-    transition: color $duration-fast-01 motion(entrance, productive),
-      border-color $duration-fast-01 motion(entrance, productive),
-      box-shadow $duration-fast-01 motion(entrance, productive);
   }
 
   .#{$prefix}--ai-slug__button--hollow:hover {
@@ -190,6 +188,24 @@ $sizes: (
     box-shadow: none;
   }
 
+  .#{$prefix}--ai-slug .#{$prefix}--ai-slug__button--inline:hover {
+    border-color: $icon-secondary;
+    color: $text-secondary;
+  }
+
+  .#{$prefix}--ai-slug
+    .#{$prefix}--ai-slug__button--inline:hover
+    .#{$prefix}--ai-slug__text::before {
+    background: $icon-secondary;
+  }
+
+  .#{$prefix}--ai-slug--hollow
+    .#{$prefix}--ai-slug__button--inline:hover
+    .#{$prefix}--ai-slug__text::before {
+    background: transparent;
+    box-shadow: inset 0 0 0 1px $icon-secondary;
+  }
+
   .#{$prefix}--ai-slug__button--inline .#{$prefix}--ai-slug__text {
     padding-inline-start: convert.to-rem(8px);
   }
@@ -210,10 +226,12 @@ $sizes: (
     inset-inline-start: 0;
     opacity: 1;
     transform: translateY(-50%);
+    transition: background $duration-fast-01 motion(entrance, productive),
+      box-shadow $duration-fast-01 motion(entrance, productive);
   }
 
   // Inline slug hollow dot
-  .#{$prefix}--ai-slug__button--dot-hollow .#{$prefix}--ai-slug__text::before {
+  .#{$prefix}--ai-slug--hollow .#{$prefix}--ai-slug__text::before {
     background: transparent;
     block-size: convert.to-rem(6px);
     box-shadow: inset 0 0 0 1px $icon-primary;
@@ -221,7 +239,8 @@ $sizes: (
   }
 
   .#{$prefix}--ai-slug__button--lg .#{$prefix}--ai-slug__text::before,
-  .#{$prefix}--ai-slug__button--lg.#{$prefix}--ai-slug__button--dot-hollow
+  .#{$prefix}--ai-slug--hollow
+    .#{$prefix}--ai-slug__button--lg
     .#{$prefix}--ai-slug__text::before {
     block-size: convert.to-rem(8px);
     inline-size: convert.to-rem(8px);
