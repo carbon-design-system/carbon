@@ -1,7 +1,7 @@
 {
   "name": "@carbon/styles",
   "description": "Styles for the Carbon Design System",
-  "version": "1.40.0",
+  "version": "1.41.0-rc.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -38,13 +38,13 @@
     }
   },
   "dependencies": {
-    "@carbon/colors": "^11.19.0",
+    "@carbon/colors": "^11.20.0-rc.0",
     "@carbon/feature-flags": "^0.16.0",
-    "@carbon/grid": "^11.20.0",
-    "@carbon/layout": "^11.19.0",
-    "@carbon/motion": "^11.15.0",
-    "@carbon/themes": "^11.25.0",
-    "@carbon/type": "^11.24.0",
+    "@carbon/grid": "^11.21.0-rc.0",
+    "@carbon/layout": "^11.20.0-rc.0",
+    "@carbon/motion": "^11.16.0-rc.0",
+    "@carbon/themes": "^11.26.0-rc.0",
+    "@carbon/type": "^11.25.0-rc.0",
     "@ibm/plex": "6.0.0-next.6"
   },
   "devDependencies": {
