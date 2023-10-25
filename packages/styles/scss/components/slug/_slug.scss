@@ -270,7 +270,7 @@ $sizes: (
   // Inline slug with text
   .#{$prefix}--ai-slug .#{$prefix}--ai-slug__button--inline-with-content {
     border: 1px solid $border-inverse;
-    padding-block: convert.to-rem(4px);
+    padding-block: convert.to-rem(2px);
     padding-inline: convert.to-rem(8px);
   }
 
@@ -278,7 +278,7 @@ $sizes: (
     .#{$prefix}--ai-slug__additional-text {
     @include type-style('body-compact-02');
 
-    padding-inline-start: convert.to-rem(8px);
+    padding-inline-start: convert.to-rem(4px);
   }
 
   .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--md
