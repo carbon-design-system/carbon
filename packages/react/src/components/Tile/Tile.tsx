@@ -137,7 +137,7 @@ export const ClickableTile = React.forwardRef<
     href,
     light,
     onClick = () => {},
-    onKeyDown = () => {},
+    onKeyDown,
     renderIcon: Icon,
     ...rest
   },
@@ -164,9 +164,13 @@ export const ClickableTile = React.forwardRef<
     evt?.persist?.();
     if (matches(evt, [keys.Enter, keys.Space])) {
       setIsSelected(!isSelected);
+      if (onKeyDown) {
+        evt.preventDefault();
+        onKeyDown(evt);
+      }
+    } else if (onKeyDown) {
       onKeyDown(evt);
     }
-    onKeyDown(evt);
   }
 
   const v12DefaultIcons = useFeatureFlag('enable-v12-tile-default-icons');
