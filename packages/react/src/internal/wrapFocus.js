@@ -32,11 +32,11 @@ function elementOrParentIsFloatingMenu(node, selectorsFloatingMenus = []) {
 /**
  * Ensures the focus is kept in the given `modalNode`, implementing "focus-wrap" behavior.
  * @param {object} options The options.
- * @param {HTMLElement|null} options.bodyNode
- * @param {HTMLElement|null} options.startTrapNode The DOM node of the focus sentinel the is placed earlier next to `modalNode`.
- * @param {HTMLElement|null} options.endTrapNode The DOM node of the focus sentinel the is placed next to `modalNode`.
- * @param {HTMLElement} options.currentActiveNode The DOM node that has focus.
- * @param {HTMLElement} options.oldActiveNode The DOM node that previously had focus.
+ * @param {Node|null} options.bodyNode
+ * @param {Node|null} options.startTrapNode The DOM node of the focus sentinel the is placed earlier next to `modalNode`.
+ * @param {Node|null} options.endTrapNode The DOM node of the focus sentinel the is placed next to `modalNode`.
+ * @param {Node} options.currentActiveNode The DOM node that has focus.
+ * @param {Node} options.oldActiveNode The DOM node that previously had focus.
  * @param {string[]} [options.selectorsFloatingMenus] The CSS selectors that matches floating menus.
  */
 function wrapFocus({
