@@ -238,6 +238,15 @@ $sizes: (
     inline-size: convert.to-rem(6px);
   }
 
+  .#{$prefix}--ai-slug--hollow
+    .#{$prefix}--ai-slug__button--sm
+    .#{$prefix}--ai-slug__text,
+  .#{$prefix}--ai-slug--hollow
+    .#{$prefix}--ai-slug__button--md
+    .#{$prefix}--ai-slug__text {
+    padding-inline-start: convert.to-rem(9px);
+  }
+
   .#{$prefix}--ai-slug__button--lg .#{$prefix}--ai-slug__text::before,
   .#{$prefix}--ai-slug--hollow
     .#{$prefix}--ai-slug__button--lg
@@ -302,7 +311,6 @@ $sizes: (
     border: 1px solid $border-subtle;
     border-radius: 16px;
     // 84px seems to make this fully opaque?
-    // If we want slight transparency, maybe 2px or 3px
     backdrop-filter: blur(25px);
     background: linear-gradient(
         0deg,
