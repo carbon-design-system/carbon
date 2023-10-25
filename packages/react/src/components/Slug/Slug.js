@@ -36,6 +36,10 @@ const Slug = React.forwardRef(function Slug(
   const slugClasses = cx(className, {
     [`${prefix}--ai-slug`]: true,
     [`${prefix}--ai-slug--hollow`]: kind === 'hollow' || dotType === 'hollow',
+    // Need to come up with a better name; explainable?
+    //Need to be able to target the non-hollow variant another way
+    // other than using `:not` all over the styles
+    [`${prefix}--ai-slug--enabled`]: kind !== 'hollow' && dotType !== 'hollow',
   });
 
   const slugButtonClasses = cx({

@@ -10,6 +10,7 @@
 import React from 'react';
 
 import Slug from '.';
+import Button from '../Button';
 import mdx from './Slug.mdx';
 import './slug-story.scss';
 
@@ -23,99 +24,43 @@ export default {
   },
 };
 
+const aiContent = (
+  <div>
+    <p>AI Explained</p>
+    <h1>84%</h1>
+    <p className="bold">Confidence score</p>
+    <p>
+      Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+      eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+    </p>
+    <hr />
+    <p>Model type</p>
+    <p className="bold">Foundation model</p>
+  </div>
+);
+
+const content = <span>AI was used to generate this content</span>;
+
 export const Default = () => (
   <>
     <div className="slug-container">
-      <Slug
-        autoAlign
-        size="mini"
-        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua. Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
-      />
-      <Slug
-        autoAlign
-        size="2xs"
-        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
-      />
-      <Slug
-        autoAlign
-        size="xs"
-        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
-      />
-      <Slug
-        autoAlign
-        size="sm"
-        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
-      />
-      <Slug
-        autoAlign
-        size="md"
-        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
-      />
-      <Slug
-        autoAlign
-        size="lg"
-        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
-      />
-      <Slug
-        autoAlign
-        size="xl"
-        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
-      />
+      <Slug autoAlign size="mini" slugContent={aiContent} />
+      <Slug autoAlign size="2xs" slugContent={aiContent} />
+      <Slug autoAlign size="xs" slugContent={aiContent} />
+      <Slug autoAlign size="sm" slugContent={aiContent} />
+      <Slug autoAlign size="md" slugContent={aiContent} />
+      <Slug autoAlign size="lg" slugContent={aiContent} />
+      <Slug autoAlign size="xl" slugContent={aiContent} />
     </div>
     <div className="slug-container">
-      <Slug
-        kind="hollow"
-        autoAlign
-        size="mini"
-        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua. Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
-      />
-      <Slug
-        kind="hollow"
-        autoAlign
-        size="2xs"
-        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
-      />
-      <Slug
-        kind="hollow"
-        autoAlign
-        size="xs"
-        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
-      />
+      <Slug kind="hollow" autoAlign size="mini" slugContent={content} />
+      <Slug kind="hollow" autoAlign size="2xs" slugContent={content} />
+      <Slug kind="hollow" autoAlign size="xs" slugContent={content} />
     </div>
     <div className="slug-container">
-      <Slug
-        autoAlign
-        kind="inline"
-        size="sm"
-        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
-      />
-      <Slug
-        autoAlign
-        kind="inline"
-        size="md"
-        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
-      />
-      <Slug
-        autoAlign
-        kind="inline"
-        size="lg"
-        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
-      />
+      <Slug autoAlign kind="inline" size="sm" slugContent={aiContent} />
+      <Slug autoAlign kind="inline" size="md" slugContent={aiContent} />
+      <Slug autoAlign kind="inline" size="lg" slugContent={aiContent} />
     </div>
     <div className="slug-container">
       <Slug
@@ -123,24 +68,21 @@ export const Default = () => (
         kind="inline"
         size="sm"
         aiTextLabel="Text goes here"
-        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
+        slugContent={aiContent}
       />
       <Slug
         autoAlign
         kind="inline"
         size="md"
         aiTextLabel="Text goes here"
-        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
+        slugContent={aiContent}
       />
       <Slug
         autoAlign
         kind="inline"
         size="lg"
         aiTextLabel="Text goes here"
-        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
+        slugContent={aiContent}
       />
     </div>
     <div className="slug-container">
@@ -149,24 +91,21 @@ export const Default = () => (
         kind="inline"
         dotType="hollow"
         size="sm"
-        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
+        slugContent={content}
       />
       <Slug
         autoAlign
         kind="inline"
         dotType="hollow"
         size="md"
-        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
+        slugContent={content}
       />
       <Slug
         autoAlign
         kind="inline"
         dotType="hollow"
         size="lg"
-        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
+        slugContent={content}
       />
     </div>
     <div className="slug-container">
@@ -176,8 +115,7 @@ export const Default = () => (
         dotType="hollow"
         size="sm"
         aiTextLabel="Text goes here"
-        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
+        slugContent={content}
       />
       <Slug
         autoAlign
@@ -185,8 +123,7 @@ export const Default = () => (
         dotType="hollow"
         size="md"
         aiTextLabel="Text goes here"
-        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
+        slugContent={content}
       />
       <Slug
         autoAlign
@@ -194,19 +131,18 @@ export const Default = () => (
         dotType="hollow"
         size="lg"
         aiTextLabel="Text goes here"
-        slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
+        slugContent={content}
       />
     </div>
   </>
 );
 
 export const Playground = (args) => (
-  <Slug
-    autoAlign
-    slugContent="Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua. Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua."
-    {...args}
-  />
+  <>
+    <div className="slug-container">
+      <Slug autoAlign slugContent={aiContent} {...args} />
+    </div>
+    <Button>Test</Button>
+    <Button kind="danger">Test</Button>
+  </>
 );

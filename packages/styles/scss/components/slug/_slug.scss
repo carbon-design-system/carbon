@@ -289,4 +289,50 @@ $sizes: (
   .#{$prefix}--ai-slug .#{$prefix}--ai-slug__button--inline-with-content:focus {
     box-shadow: inset 0 0 0 1px $focus;
   }
+
+  // Default callout styles
+  .#{$prefix}--ai-slug.#{$prefix}--ai-slug--hollow
+    .#{$prefix}--toggletip-content {
+    row-gap: 0;
+  }
+
+  // Slug Callout styles
+  .#{$prefix}--ai-slug.#{$prefix}--ai-slug--enabled
+    .#{$prefix}--popover-content {
+    border: 1px solid $border-subtle;
+    border-radius: 16px;
+    // 84px seems to make this fully opaque?
+    // If we want slight transparency, maybe 2px or 3px
+    backdrop-filter: blur(25px);
+    background: linear-gradient(
+        0deg,
+        rgba($blue-10, 0.6) 0%,
+        rgba($white, 0) 33%,
+        transparent 100%
+      ),
+      linear-gradient(
+          180deg,
+          rgba($gray-10, 0.85) 0%,
+          rgba($gray-20, 0.85) 100%
+        )
+        rgba(0, 0, 0, 0.01);
+    // box-shadow seems to match the spec better
+    // than the same values plugged into `drop-shadow`
+    // filter: drop-shadow(-45px 45px 100px rgba(0, 0, 0, 0.2));
+    box-shadow: -45px 45px 100px rgba(0, 0, 0, 0.2);
+
+    color: $text-primary;
+    min-inline-size: convert.to-rem(280px);
+  }
+
+  .#{$prefix}--ai-slug.#{$prefix}--ai-slug--enabled .#{$prefix}--popover-caret {
+    background: $border-subtle;
+  }
+
+  .#{$prefix}--ai-slug.#{$prefix}--ai-slug--enabled
+    .#{$prefix}--toggletip-content {
+    padding-block-end: convert.to-rem(80px);
+    padding-block-start: convert.to-rem(32px);
+    padding-inline: convert.to-rem(32px);
+  }
 }
