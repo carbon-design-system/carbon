@@ -203,8 +203,8 @@ export type CalRef = {
 interface DatePickerProps
   extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes> {
   /**
-   * flatpickr prop passthrough. Allows the user to enter a date directly
-   * into the input field
+   * Flatpickr prop passthrough enables direct date input, and when set to false,
+   * we must clear dates manually by resetting the value prop to empty string making it a controlled input.
    */
   allowInput?: boolean;
 
@@ -745,6 +745,12 @@ const DatePicker = React.forwardRef(function DatePicker(
 
   useEffect(() => {
     if (calendarRef?.current?.set) {
+      calendarRef.current.set('allowInput', allowInput);
+    }
+  }, [allowInput]);
+
+  useEffect(() => {
+    if (calendarRef?.current?.set) {
       calendarRef.current.set('maxDate', maxDate);
     }
   }, [maxDate]);
@@ -816,8 +822,8 @@ const DatePicker = React.forwardRef(function DatePicker(
 
 DatePicker.propTypes = {
   /**
-   * flatpickr prop passthrough. Allows the user to enter a date directly
-   * into the input field
+   * Flatpickr prop passthrough enables direct date input, and when set to false,
+   * we must clear dates manually by resetting the value prop to empty string making it a controlled input.
    */
   allowInput: PropTypes.bool,
 
