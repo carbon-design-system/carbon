@@ -83,7 +83,6 @@ ModalBody.propTypes = {
   /**
    * Required props for the accessibility label of the header
    */
-  // @ts-expect-error: Built-in prop-types > TS logic doesn't jive well with custom validators
   ['aria-label']: requiredIfGivenPropIsTruthy(
     'hasScrollingContent',
     PropTypes.string

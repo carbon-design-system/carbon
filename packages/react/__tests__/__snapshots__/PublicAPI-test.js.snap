@@ -4704,6 +4704,7 @@ Map {
       "selectorsFloatingMenus": Object {
         "args": Array [
           Object {
+            "isRequired": true,
             "type": "string",
           },
         ],
