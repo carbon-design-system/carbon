@@ -20,8 +20,10 @@ import {
 const Slug = React.forwardRef(function Slug(
   {
     aiText = 'AI',
+    aiTextLabel,
     align,
     autoAlign = false,
+    className,
     dotType,
     kind,
     size = 'xs',
@@ -31,47 +33,36 @@ const Slug = React.forwardRef(function Slug(
 ) {
   const prefix = usePrefix();
 
-  const slugClasses = cx({
+  const slugClasses = cx(className, {
     [`${prefix}--ai-slug`]: true,
-    [`${prefix}--ai-slug--inline-with-content`]:
-      kind === 'inline' && slugContent,
   });
 
   const slugButtonClasses = cx({
     [`${prefix}--ai-slug__button`]: true,
     [`${prefix}--ai-slug__button--${size}`]: size,
     [`${prefix}--ai-slug__button--${kind}`]: kind,
+    [`${prefix}--ai-slug__button--inline-with-content`]:
+      kind === 'inline' && aiTextLabel,
+    [`${prefix}--ai-slug__button--dot-${dotType}`]:
+      kind === 'inline' && dotType,
   });
-
-  const aiTextClasses = cx({
-    [`${prefix}--ai-slug__text`]: true,
-    [`${prefix}--ai-slug__text--dot-${dotType}`]: dotType,
-  });
-
-  const isInline = kind === 'inline';
 
   return (
     <div className={slugClasses} ref={ref}>
-      {isInline ? (
-        <div className={slugButtonClasses}>
-          <span className={aiTextClasses}>{aiText}</span>
-          {slugContent && (
-            <span className={`${prefix}--ai-slug__content`}>{slugContent}</span>
+      <Toggletip align={align} autoAlign={autoAlign}>
+        <ToggletipButton className={slugButtonClasses} label="Show information">
+          <span className={`${prefix}--ai-slug__text`}>{aiText}</span>
+          {aiTextLabel && (
+            <span className={`${prefix}--ai-slug__additional-text`}>
+              {aiTextLabel}
+            </span>
           )}
-        </div>
-      ) : (
-        <Toggletip align={align} autoAlign={autoAlign}>
-          <ToggletipButton
-            className={slugButtonClasses}
-            label="Show information">
-            <span className={`${prefix}--ai-slug__text`}>{aiText}</span>
-          </ToggletipButton>
-          <ToggletipContent>
-            {slugContent}
-            <ToggletipActions></ToggletipActions>
-          </ToggletipContent>
-        </Toggletip>
-      )}
+        </ToggletipButton>
+        <ToggletipContent>
+          {slugContent}
+          <ToggletipActions></ToggletipActions>
+        </ToggletipContent>
+      </Toggletip>
     </div>
   );
 });
@@ -81,6 +72,11 @@ Slug.propTypes = {
    * Specify the correct translation of the AI text
    */
   aiText: PropTypes.string,
+
+  /**
+   * Specify additional text to be rendered next to the AI label in the inline variant
+   */
+  aiTextLabel: PropTypes.string,
 
   /**
    * Specify how the popover should align with the button
@@ -107,6 +103,11 @@ Slug.propTypes = {
    * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
    */
   autoAlign: PropTypes.bool,
+
+  /**
+   * Specify an optional className to be added to the AI slug
+   */
+  className: PropTypes.string,
 
   /**
    * Specify the type of dot that should be rendered in front of the inline variant
