@@ -173,7 +173,7 @@ export const Popover: PopoverComponent = React.forwardRef(
         [`${prefix}--popover--caret`]: caret,
         [`${prefix}--popover--drop-shadow`]: dropShadow,
         [`${prefix}--popover--high-contrast`]: highContrast,
-        [`${prefix}--popover--open`]: open,
+        [`${prefix}--popover--open`]: true,
         [`${prefix}--popover--${autoAlignment}`]: autoAligned && !isTabTip,
         [`${prefix}--popover--${align}`]: !autoAligned,
         [`${prefix}--popover--tab-tip`]: isTabTip,

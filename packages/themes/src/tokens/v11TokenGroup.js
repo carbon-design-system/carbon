@@ -350,6 +350,10 @@ export const ai = TokenGroup.create({
     'slug-background-hover',
     'slug-gradient-hover',
     'slug-hollow-hover',
+    'slug-callout-gradient-top',
+    'slug-callout-gradient-bottom',
+    'slug-callout-aura-start',
+    'slug-callout-aura-end',
   ],
 });
 

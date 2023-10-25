@@ -7,6 +7,7 @@
 
 import {
   // Blue
+  blue20,
   blue40,
   blue60,
   blue70,
@@ -215,6 +216,10 @@ export const slugGradient = `${gray50} linear-gradient(135deg, ${gray10} 0%, rgb
 export const slugBackgroundHover = gray20;
 export const slugGradientHover = `${gray40} linear-gradient(135deg, ${white} 0%, rgba(${white}, 0) 100%)`;
 export const slugHollowHover = gray30Hover;
+export const slugCalloutGradientTop = rgba(gray100, 0.85);
+export const slugCalloutGradientBottom = rgba(gray90, 0.85);
+export const slugCalloutAuraStart = rgba(blue20, 0.2);
+export const slugCalloutAuraEnd = rgba(gray100, 0);
 
 export {
   // Type

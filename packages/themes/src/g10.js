@@ -7,6 +7,7 @@
 
 import {
   // Blue
+  blue10,
   blue20,
   blue30,
   blue40,
@@ -40,6 +41,7 @@ import {
   // Constants
   white,
   whiteHover,
+  rgba,
 } from '@carbon/colors';
 import { adjustAlpha } from './tools';
 
@@ -206,6 +208,10 @@ export const slugGradient = `${gray100} linear-gradient(135deg, ${gray40} 0%, rg
 export const slugBackgroundHover = gray60;
 export const slugGradientHover = `${gray100} linear-gradient(135deg, ${gray20Hover} 0%, rgba(${white}, 0) 100%)`;
 export const slugHollowHover = gray80Hover;
+export const slugCalloutGradientTop = rgba(gray10, 0.85);
+export const slugCalloutGradientBottom = rgba(gray20, 0.85);
+export const slugCalloutAuraStart = rgba(blue10, 0.6);
+export const slugCalloutAuraEnd = rgba(white, 0);
 
 export {
   // Type

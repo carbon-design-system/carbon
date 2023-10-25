@@ -296,7 +296,7 @@ $sizes: (
     row-gap: 0;
   }
 
-  // Slug Callout styles
+  // Slug callout styles
   .#{$prefix}--ai-slug.#{$prefix}--ai-slug--enabled
     .#{$prefix}--popover-content {
     border: 1px solid $border-subtle;
@@ -306,21 +306,20 @@ $sizes: (
     backdrop-filter: blur(25px);
     background: linear-gradient(
         0deg,
-        rgba($blue-10, 0.6) 0%,
-        rgba($white, 0) 33%,
+        $slug-callout-aura-start 0%,
+        $slug-callout-aura-end 33%,
         transparent 100%
       ),
       linear-gradient(
           180deg,
-          rgba($gray-10, 0.85) 0%,
-          rgba($gray-20, 0.85) 100%
+          $slug-callout-gradient-top 0%,
+          $slug-callout-gradient-bottom 100%
         )
         rgba(0, 0, 0, 0.01);
     // box-shadow seems to match the spec better
     // than the same values plugged into `drop-shadow`
     // filter: drop-shadow(-45px 45px 100px rgba(0, 0, 0, 0.2));
     box-shadow: -45px 45px 100px rgba(0, 0, 0, 0.2);
-
     color: $text-primary;
     min-inline-size: convert.to-rem(280px);
   }
