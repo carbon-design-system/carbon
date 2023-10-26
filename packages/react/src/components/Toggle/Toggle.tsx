@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
+import { Text } from '../Text';
 
 type ExcludedAttributes =
   | 'aria-labelledby'
@@ -191,7 +192,7 @@ export function Toggle({
       <LabelComponent
         htmlFor={ariaLabelledby ? undefined : id}
         className={`${prefix}--toggle__label`}>
-        {labelText && <span className={labelTextClasses}>{labelText}</span>}
+        {labelText && <Text className={labelTextClasses}>{labelText}</Text>}
         <div className={appearanceClasses}>
           <div className={switchClasses}>
             {isSm && (
@@ -205,9 +206,9 @@ export function Toggle({
             )}
           </div>
           {renderSideLabel && (
-            <span className={`${prefix}--toggle__text`} aria-hidden="true">
+            <Text className={`${prefix}--toggle__text`} aria-hidden="true">
               {sideLabel}
-            </span>
+            </Text>
           )}
         </div>
       </LabelComponent>

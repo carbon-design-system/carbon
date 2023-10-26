@@ -289,9 +289,4 @@ Table.propTypes = {
   useZebraStyles: PropTypes.bool,
 };
 
-Table.defaultProps = {
-  isSortable: false,
-  overflowMenuOnHover: true,
-};
-
 export default Table;
