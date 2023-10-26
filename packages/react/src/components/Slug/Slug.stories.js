@@ -297,7 +297,7 @@ export const Default = () => (
 
 export const Playground = (args) => {
   const { kind, dotType } = args;
-  console.log(kind, dotType);
+
   let renderedContent;
   if (kind === 'hollow' || dotType === 'hollow') {
     renderedContent = content;
