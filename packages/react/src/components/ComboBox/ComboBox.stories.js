@@ -98,7 +98,6 @@ export const AllowCustomValue = () => {
             console.log('the state has changed');
           },
         }}
-        // itemToString={(item) => (item ? item.text : '')}
         titleText="ComboBox title"
         helperText="Combobox helper text"
       />
