@@ -21,11 +21,17 @@ const defaultTranslations = {
   [translationIds['open.menu']]: 'Open',
 };
 
+const defaultTranslateWithId = (id) => defaultTranslations[id];
+
 /**
  * `ListBoxTrigger` is used to orient the icon up or down depending on the
  * state of the menu for a given `ListBox`
  */
-const ListBoxTrigger = ({ isOpen, translateWithId: t, ...rest }) => {
+const ListBoxTrigger = ({
+  isOpen,
+  translateWithId: t = defaultTranslateWithId,
+  ...rest
+}) => {
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--list-box__menu-icon`]: true,
@@ -57,11 +63,7 @@ ListBoxTrigger.propTypes = {
    * icon. This function takes in an id defined in `translationIds` and should
    * return a string message for that given message id.
    */
-  translateWithId: PropTypes.func.isRequired,
-};
-
-ListBoxTrigger.defaultProps = {
-  translateWithId: (id) => defaultTranslations[id],
+  translateWithId: PropTypes.func,
 };
 
 export default ListBoxTrigger;
