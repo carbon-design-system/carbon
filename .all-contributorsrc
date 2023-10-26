@@ -1277,7 +1277,7 @@
       "contributions": [
         "code",
         "doc"
-       ]
+      ]
     },
     {
       "login": "amanlajpal",
@@ -1294,6 +1294,15 @@
       "name": "Allison Ishida",
       "avatar_url": "https://avatars.githubusercontent.com/u/22247062?v=4",
       "profile": "https://github.com/allisonishida",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "alewitt2",
+      "name": "Alex Lewitt",
+      "avatar_url": "https://avatars.githubusercontent.com/u/48691328?v=4",
+      "profile": "https://github.com/alewitt2",
       "contributions": [
         "code"
       ]
