@@ -9,8 +9,10 @@
 
 import React from 'react';
 
-import Slug from '.';
+import { Slug, SlugContent, SlugToolbar } from '.';
+import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import Button from '../Button';
+import { IconButton } from '../IconButton';
 import mdx from './Slug.mdx';
 import './slug-story.scss';
 
@@ -44,7 +46,10 @@ const content = <span>AI was used to generate this content</span>;
 export const Default = () => (
   <>
     <div className="slug-container">
-      <Slug autoAlign size="mini" slugContent={aiContent} />
+      <Slug autoAlign size="mini">
+        <SlugContent>{aiContent}</SlugContent>
+        <SlugToolbar>test</SlugToolbar>
+      </Slug>
       <Slug autoAlign size="2xs" slugContent={aiContent} />
       <Slug autoAlign size="xs" slugContent={aiContent} />
       <Slug autoAlign size="sm" slugContent={aiContent} />
@@ -140,7 +145,23 @@ export const Default = () => (
 export const Playground = (args) => (
   <>
     <div className="slug-container">
-      <Slug autoAlign slugContent={aiContent} {...args} />
+      <Slug autoAlign slugContent={aiContent} {...args}>
+        <SlugContent>
+          {aiContent}
+          <SlugToolbar>
+            <IconButton kind="ghost" label="View">
+              <View />
+            </IconButton>
+            <IconButton kind="ghost" label="Open Folder">
+              <FolderOpen />
+            </IconButton>
+            <IconButton kind="ghost" label="Folders">
+              <Folders />
+            </IconButton>
+            <Button>View literature</Button>
+          </SlugToolbar>
+        </SlugContent>
+      </Slug>
     </div>
     <Button>Test</Button>
     <Button kind="danger">Test</Button>
