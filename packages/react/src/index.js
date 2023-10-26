@@ -301,4 +301,5 @@ export { useIdPrefix } from './internal/useIdPrefix';
 export {
   Slug as unstable__Slug,
   SlugContent as unstable__SlugContent,
+  SlugActions as unstable__SlugActions,
 } from './components/Slug';

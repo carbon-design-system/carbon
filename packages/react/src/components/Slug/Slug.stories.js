@@ -9,7 +9,7 @@
 
 import React from 'react';
 
-import { Slug, SlugContent, SlugToolbar } from '.';
+import { Slug, SlugContent, SlugActions } from '.';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import Button from '../Button';
 import { IconButton } from '../IconButton';
@@ -55,7 +55,7 @@ export const Default = () => (
       <Slug autoAlign size="xs">
         <SlugContent>
           {aiContent}
-          <SlugToolbar>
+          <SlugActions>
             <IconButton kind="ghost" label="View">
               <View />
             </IconButton>
@@ -66,13 +66,13 @@ export const Default = () => (
               <Folders />
             </IconButton>
             <Button>View literature</Button>
-          </SlugToolbar>
+          </SlugActions>
         </SlugContent>
       </Slug>
       <Slug autoAlign size="sm">
         <SlugContent>
           {aiContent}
-          <SlugToolbar>
+          <SlugActions>
             <IconButton kind="ghost" label="View">
               <View />
             </IconButton>
@@ -83,13 +83,13 @@ export const Default = () => (
               <Folders />
             </IconButton>
             <Button>View literature</Button>
-          </SlugToolbar>
+          </SlugActions>
         </SlugContent>
       </Slug>
       <Slug autoAlign size="md">
         <SlugContent>
           {aiContent}
-          <SlugToolbar>
+          <SlugActions>
             <IconButton kind="ghost" label="View">
               <View />
             </IconButton>
@@ -100,13 +100,13 @@ export const Default = () => (
               <Folders />
             </IconButton>
             <Button>View literature</Button>
-          </SlugToolbar>
+          </SlugActions>
         </SlugContent>
       </Slug>
       <Slug autoAlign size="lg">
         <SlugContent>
           {aiContent}
-          <SlugToolbar>
+          <SlugActions>
             <IconButton kind="ghost" label="View">
               <View />
             </IconButton>
@@ -117,13 +117,13 @@ export const Default = () => (
               <Folders />
             </IconButton>
             <Button>View literature</Button>
-          </SlugToolbar>
+          </SlugActions>
         </SlugContent>
       </Slug>
       <Slug autoAlign size="xl">
         <SlugContent>
           {aiContent}
-          <SlugToolbar>
+          <SlugActions>
             <IconButton kind="ghost" label="View">
               <View />
             </IconButton>
@@ -134,7 +134,7 @@ export const Default = () => (
               <Folders />
             </IconButton>
             <Button>View literature</Button>
-          </SlugToolbar>
+          </SlugActions>
         </SlugContent>
       </Slug>
     </div>
@@ -153,7 +153,7 @@ export const Default = () => (
       <Slug autoAlign kind="inline" size="sm">
         <SlugContent>
           {aiContent}
-          <SlugToolbar>
+          <SlugActions>
             <IconButton kind="ghost" label="View">
               <View />
             </IconButton>
@@ -164,13 +164,13 @@ export const Default = () => (
               <Folders />
             </IconButton>
             <Button>View literature</Button>
-          </SlugToolbar>
+          </SlugActions>
         </SlugContent>
       </Slug>
       <Slug autoAlign kind="inline" size="md">
         <SlugContent>
           {aiContent}
-          <SlugToolbar>
+          <SlugActions>
             <IconButton kind="ghost" label="View">
               <View />
             </IconButton>
@@ -181,13 +181,13 @@ export const Default = () => (
               <Folders />
             </IconButton>
             <Button>View literature</Button>
-          </SlugToolbar>
+          </SlugActions>
         </SlugContent>
       </Slug>
       <Slug autoAlign kind="inline" size="lg">
         <SlugContent>
           {aiContent}
-          <SlugToolbar>
+          <SlugActions>
             <IconButton kind="ghost" label="View">
               <View />
             </IconButton>
@@ -198,7 +198,7 @@ export const Default = () => (
               <Folders />
             </IconButton>
             <Button>View literature</Button>
-          </SlugToolbar>
+          </SlugActions>
         </SlugContent>
       </Slug>
     </div>
@@ -206,7 +206,7 @@ export const Default = () => (
       <Slug autoAlign kind="inline" size="sm" aiTextLabel="Text goes here">
         <SlugContent>
           {aiContent}
-          <SlugToolbar>
+          <SlugActions>
             <IconButton kind="ghost" label="View">
               <View />
             </IconButton>
@@ -217,13 +217,13 @@ export const Default = () => (
               <Folders />
             </IconButton>
             <Button>View literature</Button>
-          </SlugToolbar>
+          </SlugActions>
         </SlugContent>
       </Slug>
       <Slug autoAlign kind="inline" size="md" aiTextLabel="Text goes here">
         <SlugContent>
           {aiContent}
-          <SlugToolbar>
+          <SlugActions>
             <IconButton kind="ghost" label="View">
               <View />
             </IconButton>
@@ -234,13 +234,13 @@ export const Default = () => (
               <Folders />
             </IconButton>
             <Button>View literature</Button>
-          </SlugToolbar>
+          </SlugActions>
         </SlugContent>
       </Slug>
       <Slug autoAlign kind="inline" size="lg" aiTextLabel="Text goes here">
         <SlugContent>
           {aiContent}
-          <SlugToolbar>
+          <SlugActions>
             <IconButton kind="ghost" label="View">
               <View />
             </IconButton>
@@ -251,7 +251,7 @@ export const Default = () => (
               <Folders />
             </IconButton>
             <Button>View literature</Button>
-          </SlugToolbar>
+          </SlugActions>
         </SlugContent>
       </Slug>
     </div>
@@ -316,7 +316,7 @@ export const Playground = (args) => {
           <p className="secondary">Model type</p>
           <p className="bold">Foundation model</p>
         </div>
-        <SlugToolbar>
+        <SlugActions>
           <IconButton kind="ghost" label="View">
             <View />
           </IconButton>
@@ -327,7 +327,7 @@ export const Playground = (args) => {
             <Folders />
           </IconButton>
           <Button>View literature</Button>
-        </SlugToolbar>
+        </SlugActions>
       </>
     );
   }

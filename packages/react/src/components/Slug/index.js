@@ -46,7 +46,7 @@ SlugContent.propTypes = {
   className: PropTypes.string,
 };
 
-export const SlugToolbar = React.forwardRef(function SlugContent(
+export const SlugActions = React.forwardRef(function SlugActions(
   { children, className },
   ref
 ) {
@@ -63,7 +63,7 @@ export const SlugToolbar = React.forwardRef(function SlugContent(
   );
 });
 
-SlugToolbar.propTypes = {
+SlugActions.propTypes = {
   /**
    * Specify the content you want rendered inside the slug callout toolbar
    */
