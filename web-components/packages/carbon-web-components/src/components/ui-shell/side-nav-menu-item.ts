@@ -64,6 +64,13 @@ class BXSideNavMenuItem extends FocusMixin(LitElement) {
     return true;
   }
 
+  connectedCallback() {
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'button');
+    }
+    super.connectedCallback();
+  }
+
   render() {
     const { active, href, title } = this;
     const classes = classMap({
