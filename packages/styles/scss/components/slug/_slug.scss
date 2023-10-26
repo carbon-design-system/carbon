@@ -193,6 +193,10 @@ $sizes: (
     color: $text-secondary;
   }
 
+  .#{$prefix}--ai-slug .#{$prefix}--ai-slug__button--inline:focus:hover {
+    border-color: $focus;
+  }
+
   .#{$prefix}--ai-slug
     .#{$prefix}--ai-slug__button--inline:hover
     .#{$prefix}--ai-slug__text::before {
