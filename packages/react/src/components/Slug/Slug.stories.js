@@ -48,104 +48,79 @@ export const Default = () => (
     <div className="slug-container">
       <Slug autoAlign size="mini">
         <SlugContent>{aiContent}</SlugContent>
-        <SlugToolbar>test</SlugToolbar>
       </Slug>
-      <Slug autoAlign size="2xs" slugContent={aiContent} />
-      <Slug autoAlign size="xs" slugContent={aiContent} />
-      <Slug autoAlign size="sm" slugContent={aiContent} />
-      <Slug autoAlign size="md" slugContent={aiContent} />
-      <Slug autoAlign size="lg" slugContent={aiContent} />
-      <Slug autoAlign size="xl" slugContent={aiContent} />
-    </div>
-    <div className="slug-container">
-      <Slug kind="hollow" autoAlign size="mini" slugContent={content} />
-      <Slug kind="hollow" autoAlign size="2xs" slugContent={content} />
-      <Slug kind="hollow" autoAlign size="xs" slugContent={content} />
-    </div>
-    <div className="slug-container">
-      <Slug autoAlign kind="inline" size="sm" slugContent={aiContent} />
-      <Slug autoAlign kind="inline" size="md" slugContent={aiContent} />
-      <Slug autoAlign kind="inline" size="lg" slugContent={aiContent} />
-    </div>
-    <div className="slug-container">
-      <Slug
-        autoAlign
-        kind="inline"
-        size="sm"
-        aiTextLabel="Text goes here"
-        slugContent={aiContent}
-      />
-      <Slug
-        autoAlign
-        kind="inline"
-        size="md"
-        aiTextLabel="Text goes here"
-        slugContent={aiContent}
-      />
-      <Slug
-        autoAlign
-        kind="inline"
-        size="lg"
-        aiTextLabel="Text goes here"
-        slugContent={aiContent}
-      />
-    </div>
-    <div className="slug-container">
-      <Slug
-        autoAlign
-        kind="inline"
-        dotType="hollow"
-        size="sm"
-        slugContent={content}
-      />
-      <Slug
-        autoAlign
-        kind="inline"
-        dotType="hollow"
-        size="md"
-        slugContent={content}
-      />
-      <Slug
-        autoAlign
-        kind="inline"
-        dotType="hollow"
-        size="lg"
-        slugContent={content}
-      />
-    </div>
-    <div className="slug-container">
-      <Slug
-        autoAlign
-        kind="inline"
-        dotType="hollow"
-        size="sm"
-        aiTextLabel="Text goes here"
-        slugContent={content}
-      />
-      <Slug
-        autoAlign
-        kind="inline"
-        dotType="hollow"
-        size="md"
-        aiTextLabel="Text goes here"
-        slugContent={content}
-      />
-      <Slug
-        autoAlign
-        kind="inline"
-        dotType="hollow"
-        size="lg"
-        aiTextLabel="Text goes here"
-        slugContent={content}
-      />
-    </div>
-  </>
-);
-
-export const Playground = (args) => (
-  <>
-    <div className="slug-container">
-      <Slug autoAlign slugContent={aiContent} {...args}>
+      <Slug autoAlign size="2xs">
+        <SlugContent>{aiContent}</SlugContent>
+      </Slug>
+      <Slug autoAlign size="xs">
+        <SlugContent>
+          {aiContent}
+          <SlugToolbar>
+            <IconButton kind="ghost" label="View">
+              <View />
+            </IconButton>
+            <IconButton kind="ghost" label="Open Folder">
+              <FolderOpen />
+            </IconButton>
+            <IconButton kind="ghost" label="Folders">
+              <Folders />
+            </IconButton>
+            <Button>View literature</Button>
+          </SlugToolbar>
+        </SlugContent>
+      </Slug>
+      <Slug autoAlign size="sm">
+        <SlugContent>
+          {aiContent}
+          <SlugToolbar>
+            <IconButton kind="ghost" label="View">
+              <View />
+            </IconButton>
+            <IconButton kind="ghost" label="Open Folder">
+              <FolderOpen />
+            </IconButton>
+            <IconButton kind="ghost" label="Folders">
+              <Folders />
+            </IconButton>
+            <Button>View literature</Button>
+          </SlugToolbar>
+        </SlugContent>
+      </Slug>
+      <Slug autoAlign size="md">
+        <SlugContent>
+          {aiContent}
+          <SlugToolbar>
+            <IconButton kind="ghost" label="View">
+              <View />
+            </IconButton>
+            <IconButton kind="ghost" label="Open Folder">
+              <FolderOpen />
+            </IconButton>
+            <IconButton kind="ghost" label="Folders">
+              <Folders />
+            </IconButton>
+            <Button>View literature</Button>
+          </SlugToolbar>
+        </SlugContent>
+      </Slug>
+      <Slug autoAlign size="lg">
+        <SlugContent>
+          {aiContent}
+          <SlugToolbar>
+            <IconButton kind="ghost" label="View">
+              <View />
+            </IconButton>
+            <IconButton kind="ghost" label="Open Folder">
+              <FolderOpen />
+            </IconButton>
+            <IconButton kind="ghost" label="Folders">
+              <Folders />
+            </IconButton>
+            <Button>View literature</Button>
+          </SlugToolbar>
+        </SlugContent>
+      </Slug>
+      <Slug autoAlign size="xl">
         <SlugContent>
           {aiContent}
           <SlugToolbar>
@@ -163,7 +138,209 @@ export const Playground = (args) => (
         </SlugContent>
       </Slug>
     </div>
-    <Button>Test</Button>
-    <Button kind="danger">Test</Button>
+    <div className="slug-container">
+      <Slug kind="hollow" autoAlign size="mini">
+        <SlugContent>{content}</SlugContent>
+      </Slug>
+      <Slug kind="hollow" autoAlign size="2xs">
+        <SlugContent>{content}</SlugContent>
+      </Slug>
+      <Slug kind="hollow" autoAlign size="xs">
+        <SlugContent>{content}</SlugContent>
+      </Slug>
+    </div>
+    <div className="slug-container">
+      <Slug autoAlign kind="inline" size="sm">
+        <SlugContent>
+          {aiContent}
+          <SlugToolbar>
+            <IconButton kind="ghost" label="View">
+              <View />
+            </IconButton>
+            <IconButton kind="ghost" label="Open Folder">
+              <FolderOpen />
+            </IconButton>
+            <IconButton kind="ghost" label="Folders">
+              <Folders />
+            </IconButton>
+            <Button>View literature</Button>
+          </SlugToolbar>
+        </SlugContent>
+      </Slug>
+      <Slug autoAlign kind="inline" size="md">
+        <SlugContent>
+          {aiContent}
+          <SlugToolbar>
+            <IconButton kind="ghost" label="View">
+              <View />
+            </IconButton>
+            <IconButton kind="ghost" label="Open Folder">
+              <FolderOpen />
+            </IconButton>
+            <IconButton kind="ghost" label="Folders">
+              <Folders />
+            </IconButton>
+            <Button>View literature</Button>
+          </SlugToolbar>
+        </SlugContent>
+      </Slug>
+      <Slug autoAlign kind="inline" size="lg">
+        <SlugContent>
+          {aiContent}
+          <SlugToolbar>
+            <IconButton kind="ghost" label="View">
+              <View />
+            </IconButton>
+            <IconButton kind="ghost" label="Open Folder">
+              <FolderOpen />
+            </IconButton>
+            <IconButton kind="ghost" label="Folders">
+              <Folders />
+            </IconButton>
+            <Button>View literature</Button>
+          </SlugToolbar>
+        </SlugContent>
+      </Slug>
+    </div>
+    <div className="slug-container">
+      <Slug autoAlign kind="inline" size="sm" aiTextLabel="Text goes here">
+        <SlugContent>
+          {aiContent}
+          <SlugToolbar>
+            <IconButton kind="ghost" label="View">
+              <View />
+            </IconButton>
+            <IconButton kind="ghost" label="Open Folder">
+              <FolderOpen />
+            </IconButton>
+            <IconButton kind="ghost" label="Folders">
+              <Folders />
+            </IconButton>
+            <Button>View literature</Button>
+          </SlugToolbar>
+        </SlugContent>
+      </Slug>
+      <Slug autoAlign kind="inline" size="md" aiTextLabel="Text goes here">
+        <SlugContent>
+          {aiContent}
+          <SlugToolbar>
+            <IconButton kind="ghost" label="View">
+              <View />
+            </IconButton>
+            <IconButton kind="ghost" label="Open Folder">
+              <FolderOpen />
+            </IconButton>
+            <IconButton kind="ghost" label="Folders">
+              <Folders />
+            </IconButton>
+            <Button>View literature</Button>
+          </SlugToolbar>
+        </SlugContent>
+      </Slug>
+      <Slug autoAlign kind="inline" size="lg" aiTextLabel="Text goes here">
+        <SlugContent>
+          {aiContent}
+          <SlugToolbar>
+            <IconButton kind="ghost" label="View">
+              <View />
+            </IconButton>
+            <IconButton kind="ghost" label="Open Folder">
+              <FolderOpen />
+            </IconButton>
+            <IconButton kind="ghost" label="Folders">
+              <Folders />
+            </IconButton>
+            <Button>View literature</Button>
+          </SlugToolbar>
+        </SlugContent>
+      </Slug>
+    </div>
+    <div className="slug-container">
+      <Slug autoAlign kind="inline" dotType="hollow" size="sm">
+        <SlugContent>{content}</SlugContent>
+      </Slug>
+      <Slug autoAlign kind="inline" dotType="hollow" size="md">
+        <SlugContent>{content}</SlugContent>
+      </Slug>
+      <Slug autoAlign kind="inline" dotType="hollow" size="lg">
+        <SlugContent>{content}</SlugContent>
+      </Slug>
+    </div>
+    <div className="slug-container">
+      <Slug
+        autoAlign
+        kind="inline"
+        dotType="hollow"
+        size="sm"
+        aiTextLabel="Text goes here">
+        <SlugContent>{content}</SlugContent>
+      </Slug>
+      <Slug
+        autoAlign
+        kind="inline"
+        dotType="hollow"
+        size="md"
+        aiTextLabel="Text goes here">
+        <SlugContent>{content}</SlugContent>
+      </Slug>
+      <Slug
+        autoAlign
+        kind="inline"
+        dotType="hollow"
+        size="lg"
+        aiTextLabel="Text goes here">
+        <SlugContent>{content}</SlugContent>
+      </Slug>
+    </div>
   </>
 );
+
+export const Playground = (args) => {
+  const { kind, dotType } = args;
+  console.log(kind, dotType);
+  let renderedContent;
+  if (kind === 'hollow' || dotType === 'hollow') {
+    renderedContent = content;
+  } else {
+    renderedContent = (
+      <>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h1>84%</h1>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+        <SlugToolbar>
+          <IconButton kind="ghost" label="View">
+            <View />
+          </IconButton>
+          <IconButton kind="ghost" label="Open Folder">
+            <FolderOpen />
+          </IconButton>
+          <IconButton kind="ghost" label="Folders">
+            <Folders />
+          </IconButton>
+          <Button>View literature</Button>
+        </SlugToolbar>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <div className="slug-container">
+        <Slug autoAlign {...args}>
+          <SlugContent>{renderedContent}</SlugContent>
+        </Slug>
+      </div>
+      <Button>Test</Button>
+      <Button kind="danger">Test</Button>
+    </>
+  );
+};
