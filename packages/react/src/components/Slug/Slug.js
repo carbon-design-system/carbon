@@ -34,19 +34,19 @@ const Slug = React.forwardRef(function Slug(
   const prefix = usePrefix();
 
   const slugClasses = cx(className, {
-    [`${prefix}--ai-slug`]: true,
-    [`${prefix}--ai-slug--hollow`]: kind === 'hollow' || dotType === 'hollow',
+    [`${prefix}--slug`]: true,
+    [`${prefix}--slug--hollow`]: kind === 'hollow' || dotType === 'hollow',
     // Need to come up with a better name; explainable?
     // Need to be able to target the non-hollow variant another way
     // other than using `:not` all over the styles
-    [`${prefix}--ai-slug--enabled`]: kind !== 'hollow' && dotType !== 'hollow',
+    [`${prefix}--slug--enabled`]: kind !== 'hollow' && dotType !== 'hollow',
   });
 
   const slugButtonClasses = cx({
-    [`${prefix}--ai-slug__button`]: true,
-    [`${prefix}--ai-slug__button--${size}`]: size,
-    [`${prefix}--ai-slug__button--${kind}`]: kind,
-    [`${prefix}--ai-slug__button--inline-with-content`]:
+    [`${prefix}--slug__button`]: true,
+    [`${prefix}--slug__button--${size}`]: size,
+    [`${prefix}--slug__button--${kind}`]: kind,
+    [`${prefix}--slug__button--inline-with-content`]:
       kind === 'inline' && aiTextLabel,
   });
 
@@ -54,9 +54,9 @@ const Slug = React.forwardRef(function Slug(
     <div className={slugClasses} ref={ref}>
       <Toggletip align={align} autoAlign={autoAlign}>
         <ToggletipButton className={slugButtonClasses} label="Show information">
-          <span className={`${prefix}--ai-slug__text`}>{aiText}</span>
+          <span className={`${prefix}--slug__text`}>{aiText}</span>
           {aiTextLabel && (
-            <span className={`${prefix}--ai-slug__additional-text`}>
+            <span className={`${prefix}--slug__additional-text`}>
               {aiTextLabel}
             </span>
           )}

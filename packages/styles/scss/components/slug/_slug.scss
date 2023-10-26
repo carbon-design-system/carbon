@@ -61,11 +61,11 @@ $sizes: (
 /// @access public
 /// @group slider
 @mixin slug {
-  .#{$prefix}--ai-slug {
+  .#{$prefix}--slug {
     display: flex;
   }
 
-  .#{$prefix}--ai-slug .#{$prefix}--ai-slug__button {
+  .#{$prefix}--slug .#{$prefix}--slug__button {
     position: relative;
     display: flex;
     align-items: center;
@@ -87,18 +87,18 @@ $sizes: (
     }
   }
 
-  .#{$prefix}--ai-slug .#{$prefix}--ai-slug__button:focus {
+  .#{$prefix}--slug .#{$prefix}--slug__button:focus {
     box-shadow: inset 0 0 0 2px $focus, inset 0 0 0 3px $focus-inset;
     outline: none;
   }
 
-  .#{$prefix}--ai-slug__text {
+  .#{$prefix}--slug__text {
     position: relative;
     z-index: 1;
   }
 
   // pseudo element to animate the hover transition
-  .#{$prefix}--ai-slug__button::before {
+  .#{$prefix}--slug__button::before {
     position: absolute;
     background: $slug-gradient-hover;
     block-size: 100%;
@@ -108,66 +108,66 @@ $sizes: (
     transition: opacity $duration-fast-01 motion(entrance, productive);
   }
 
-  .#{$prefix}--ai-slug__button:hover::before {
+  .#{$prefix}--slug__button:hover::before {
     opacity: 1;
   }
 
   // Focus styles
-  .#{$prefix}--ai-slug .#{$prefix}--ai-slug__button:focus::before {
+  .#{$prefix}--slug .#{$prefix}--slug__button:focus::before {
     block-size: calc(100% - 6px);
     inline-size: calc(100% - 6px);
   }
 
-  .#{$prefix}--ai-slug__button.#{$prefix}--ai-slug__button--mini::before,
-  .#{$prefix}--ai-slug__button.#{$prefix}--ai-slug__button--2xs::before {
+  .#{$prefix}--slug__button.#{$prefix}--slug__button--mini::before,
+  .#{$prefix}--slug__button.#{$prefix}--slug__button--2xs::before {
     background: $slug-background-hover;
   }
 
-  .#{$prefix}--ai-slug__button.#{$prefix}--ai-slug__button--mini:focus,
-  .#{$prefix}--ai-slug__button.#{$prefix}--ai-slug__button--2xs:focus {
+  .#{$prefix}--slug__button.#{$prefix}--slug__button--mini:focus,
+  .#{$prefix}--slug__button.#{$prefix}--slug__button--2xs:focus {
     box-shadow: inset 0 0 0 1px $focus, inset 0 0 0 2px $focus-inset;
   }
 
-  .#{$prefix}--ai-slug__button.#{$prefix}--ai-slug__button--mini:focus::before,
-  .#{$prefix}--ai-slug__button.#{$prefix}--ai-slug__button--2xs:focus::before {
+  .#{$prefix}--slug__button.#{$prefix}--slug__button--mini:focus::before,
+  .#{$prefix}--slug__button.#{$prefix}--slug__button--2xs:focus::before {
     block-size: calc(100% - 4px);
     inline-size: calc(100% - 4px);
   }
 
   // Hollow slug
   // Only allow mini, 2xs, and xs sizes
-  .#{$prefix}--ai-slug__button--hollow.#{$prefix}--ai-slug__button--sm,
-  .#{$prefix}--ai-slug__button--hollow.#{$prefix}--ai-slug__button--md,
-  .#{$prefix}--ai-slug__button--hollow.#{$prefix}--ai-slug__button--lg,
-  .#{$prefix}--ai-slug__button--hollow.#{$prefix}--ai-slug__button--xl {
+  .#{$prefix}--slug__button--hollow.#{$prefix}--slug__button--sm,
+  .#{$prefix}--slug__button--hollow.#{$prefix}--slug__button--md,
+  .#{$prefix}--slug__button--hollow.#{$prefix}--slug__button--lg,
+  .#{$prefix}--slug__button--hollow.#{$prefix}--slug__button--xl {
     block-size: convert.to-rem(24px);
     font-size: convert.to-rem(12px);
     inline-size: convert.to-rem(24px);
     line-height: convert.to-rem(16px);
   }
 
-  .#{$prefix}--ai-slug__button--hollow::before {
+  .#{$prefix}--slug__button--hollow::before {
     display: none;
   }
 
-  .#{$prefix}--ai-slug .#{$prefix}--ai-slug__button--hollow {
+  .#{$prefix}--slug .#{$prefix}--slug__button--hollow {
     border: 1px solid $border-inverse;
     background: transparent;
     color: $text-primary;
   }
 
-  .#{$prefix}--ai-slug__button--hollow:hover {
+  .#{$prefix}--slug__button--hollow:hover {
     border-color: $slug-hollow-hover;
     color: $slug-hollow-hover;
   }
 
-  .#{$prefix}--ai-slug__button--hollow:focus {
+  .#{$prefix}--slug__button--hollow:focus {
     border-color: $focus;
     box-shadow: inset 0 0 0 1px $focus;
   }
 
   // Inline slug
-  .#{$prefix}--ai-slug .#{$prefix}--ai-slug__button--inline {
+  .#{$prefix}--slug .#{$prefix}--slug__button--inline {
     border: 1px solid transparent;
     border-radius: convert.to-rem(1px);
     background: transparent;
@@ -179,47 +179,47 @@ $sizes: (
     padding-inline: convert.to-rem(4px);
   }
 
-  .#{$prefix}--ai-slug__button--inline::before {
+  .#{$prefix}--slug__button--inline::before {
     display: none;
   }
 
-  .#{$prefix}--ai-slug .#{$prefix}--ai-slug__button--inline:focus {
+  .#{$prefix}--slug .#{$prefix}--slug__button--inline:focus {
     border-color: $focus;
     box-shadow: none;
   }
 
-  .#{$prefix}--ai-slug .#{$prefix}--ai-slug__button--inline:hover {
+  .#{$prefix}--slug .#{$prefix}--slug__button--inline:hover {
     border-color: $icon-secondary;
     color: $text-secondary;
   }
 
-  .#{$prefix}--ai-slug .#{$prefix}--ai-slug__button--inline:focus:hover {
+  .#{$prefix}--slug .#{$prefix}--slug__button--inline:focus:hover {
     border-color: $focus;
   }
 
-  .#{$prefix}--ai-slug
-    .#{$prefix}--ai-slug__button--inline:hover
-    .#{$prefix}--ai-slug__text::before {
+  .#{$prefix}--slug
+    .#{$prefix}--slug__button--inline:hover
+    .#{$prefix}--slug__text::before {
     background: $icon-secondary;
   }
 
-  .#{$prefix}--ai-slug--hollow
-    .#{$prefix}--ai-slug__button--inline:hover
-    .#{$prefix}--ai-slug__text::before {
+  .#{$prefix}--slug--hollow
+    .#{$prefix}--slug__button--inline:hover
+    .#{$prefix}--slug__text::before {
     background: transparent;
     box-shadow: inset 0 0 0 1px $icon-secondary;
   }
 
-  .#{$prefix}--ai-slug__button--inline .#{$prefix}--ai-slug__text {
+  .#{$prefix}--slug__button--inline .#{$prefix}--slug__text {
     padding-inline-start: convert.to-rem(8px);
   }
 
-  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--lg
-    .#{$prefix}--ai-slug__text {
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--lg
+    .#{$prefix}--slug__text {
     padding-inline-start: convert.to-rem(12px);
   }
 
-  .#{$prefix}--ai-slug__button--inline .#{$prefix}--ai-slug__text::before {
+  .#{$prefix}--slug__button--inline .#{$prefix}--slug__text::before {
     position: absolute;
     display: inline-block;
     background: $icon-primary;
@@ -235,83 +235,81 @@ $sizes: (
   }
 
   // Inline slug hollow dot
-  .#{$prefix}--ai-slug--hollow .#{$prefix}--ai-slug__text::before {
+  .#{$prefix}--slug--hollow .#{$prefix}--slug__text::before {
     background: transparent;
     block-size: convert.to-rem(6px);
     box-shadow: inset 0 0 0 1px $icon-primary;
     inline-size: convert.to-rem(6px);
   }
 
-  .#{$prefix}--ai-slug--hollow
-    .#{$prefix}--ai-slug__button--sm
-    .#{$prefix}--ai-slug__text,
-  .#{$prefix}--ai-slug--hollow
-    .#{$prefix}--ai-slug__button--md
-    .#{$prefix}--ai-slug__text {
+  .#{$prefix}--slug--hollow
+    .#{$prefix}--slug__button--sm
+    .#{$prefix}--slug__text,
+  .#{$prefix}--slug--hollow
+    .#{$prefix}--slug__button--md
+    .#{$prefix}--slug__text {
     padding-inline-start: convert.to-rem(9px);
   }
 
-  .#{$prefix}--ai-slug__button--lg .#{$prefix}--ai-slug__text::before,
-  .#{$prefix}--ai-slug--hollow
-    .#{$prefix}--ai-slug__button--lg
-    .#{$prefix}--ai-slug__text::before {
+  .#{$prefix}--slug__button--lg .#{$prefix}--slug__text::before,
+  .#{$prefix}--slug--hollow
+    .#{$prefix}--slug__button--lg
+    .#{$prefix}--slug__text::before {
     block-size: convert.to-rem(8px);
     inline-size: convert.to-rem(8px);
   }
 
   // Only allow sm, md, and lg sizes
-  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--mini,
-  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--mini
-    .#{$prefix}--ai-slug__additional-text,
-  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--2xs,
-  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--2xs
-    .#{$prefix}--ai-slug__additional-text,
-  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--xs,
-  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--xs
-    .#{$prefix}--ai-slug__additional-text,
-  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--sm,
-  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--sm
-    .#{$prefix}--ai-slug__additional-text {
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--mini,
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--mini
+    .#{$prefix}--slug__additional-text,
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--2xs,
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--2xs
+    .#{$prefix}--slug__additional-text,
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--xs,
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--xs
+    .#{$prefix}--slug__additional-text,
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--sm,
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--sm
+    .#{$prefix}--slug__additional-text {
     font-size: convert.to-rem(12px);
   }
 
-  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--lg,
-  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--xl {
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--lg,
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--xl {
     font-size: convert.to-rem(16px);
   }
 
   // Inline slug with text
-  .#{$prefix}--ai-slug .#{$prefix}--ai-slug__button--inline-with-content {
+  .#{$prefix}--slug .#{$prefix}--slug__button--inline-with-content {
     border: 1px solid $border-inverse;
     padding-block: convert.to-rem(2px);
     padding-inline: convert.to-rem(8px);
   }
 
-  .#{$prefix}--ai-slug__button--inline-with-content
-    .#{$prefix}--ai-slug__additional-text {
+  .#{$prefix}--slug__button--inline-with-content
+    .#{$prefix}--slug__additional-text {
     @include type-style('body-compact-02');
 
     padding-inline-start: convert.to-rem(4px);
   }
 
-  .#{$prefix}--ai-slug__button--inline.#{$prefix}--ai-slug__button--md
-    .#{$prefix}--ai-slug__additional-text {
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--md
+    .#{$prefix}--slug__additional-text {
     font-size: convert.to-rem(14px);
   }
 
-  .#{$prefix}--ai-slug .#{$prefix}--ai-slug__button--inline-with-content:focus {
+  .#{$prefix}--slug .#{$prefix}--slug__button--inline-with-content:focus {
     box-shadow: inset 0 0 0 1px $focus;
   }
 
   // Default callout styles
-  .#{$prefix}--ai-slug.#{$prefix}--ai-slug--hollow
-    .#{$prefix}--toggletip-content {
+  .#{$prefix}--slug.#{$prefix}--slug--hollow .#{$prefix}--toggletip-content {
     row-gap: 0;
   }
 
   // Slug callout styles
-  .#{$prefix}--ai-slug.#{$prefix}--ai-slug--enabled
-    .#{$prefix}--popover-content {
+  .#{$prefix}--slug.#{$prefix}--slug--enabled .#{$prefix}--popover-content {
     border: 1px solid $border-subtle;
     border-radius: 16px;
     // 84px seems to make this fully opaque?
@@ -336,12 +334,11 @@ $sizes: (
     min-inline-size: convert.to-rem(280px);
   }
 
-  .#{$prefix}--ai-slug.#{$prefix}--ai-slug--enabled .#{$prefix}--popover-caret {
+  .#{$prefix}--slug.#{$prefix}--slug--enabled .#{$prefix}--popover-caret {
     background: $border-subtle;
   }
 
-  .#{$prefix}--ai-slug.#{$prefix}--ai-slug--enabled
-    .#{$prefix}--toggletip-content {
+  .#{$prefix}--slug.#{$prefix}--slug--enabled .#{$prefix}--toggletip-content {
     padding-block-end: convert.to-rem(80px);
     padding-block-start: convert.to-rem(32px);
     padding-inline: convert.to-rem(32px);
