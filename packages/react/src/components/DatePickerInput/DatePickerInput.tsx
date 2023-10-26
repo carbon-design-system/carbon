@@ -29,7 +29,7 @@ export type ReactNodeLike =
 export type func = (...args: any[]) => any;
 
 interface DatePickerInputProps
-  extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes> {
+  extends Omit<ReactAttr<HTMLInputElement>, ExcludedAttributes> {
   /**
    * The type of the date picker:
    *

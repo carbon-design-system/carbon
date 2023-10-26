@@ -8785,6 +8785,9 @@ Map {
       "as": Object {
         "type": "elementType",
       },
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
