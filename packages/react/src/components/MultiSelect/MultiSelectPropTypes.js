@@ -15,7 +15,7 @@ export const sortingPropTypes = {
    * compareFunction :
    *  (itemA: string, itemB: string, { locale: string }) => number
    */
-  compareItems: PropTypes.func.isRequired,
+  compareItems: PropTypes.func,
 
   /**
    * Provide a method that sorts all options in the control. Overriding this
@@ -35,5 +35,5 @@ export const sortingPropTypes = {
    *     locale: string,
    *   }) => Array<Item>
    */
-  sortItems: PropTypes.func.isRequired,
+  sortItems: PropTypes.func,
 };

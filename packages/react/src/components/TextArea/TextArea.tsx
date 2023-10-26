@@ -16,6 +16,7 @@ import { useAnnouncer } from '../../internal/useAnnouncer';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
 
 const getInstanceId = setupGetInstanceId();
@@ -137,25 +138,27 @@ export interface TextAreaProps
 const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const {
     className,
+    disabled = false,
     id,
     labelText,
     hideLabel,
-    onChange,
-    onClick,
-    invalid,
-    invalidText,
-    helperText,
+    onChange = noopFn,
+    onClick = noopFn,
+    invalid = false,
+    invalidText = '',
+    helperText = '',
     light,
-    placeholder,
-    enableCounter,
-    maxCount,
+    placeholder = '',
+    enableCounter = false,
+    maxCount = undefined,
     warn = false,
-    warnText,
+    warnText = '',
+    rows = 4,
     ...other
   } = props;
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
-  const { defaultValue, value, disabled } = other;
+  const { defaultValue, value } = other;
   const [textCount, setTextCount] = useState(
     defaultValue?.toString()?.length || value?.toString()?.length || 0
   );
@@ -175,7 +178,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   } = {
     id,
     onChange: (evt) => {
-      if (!other.disabled && onChange) {
+      if (!disabled && onChange) {
         evt?.persist?.();
         // delay textCount assignation to give the textarea element value time to catch up if is a controlled input
         setTimeout(() => {
@@ -185,7 +188,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
       }
     },
     onClick: (evt) => {
-      if (!other.disabled && onClick) {
+      if (!disabled && onClick) {
         onClick(evt);
       }
     },
@@ -219,7 +222,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     ) : null;
 
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
-    [`${prefix}--form__helper-text--disabled`]: other.disabled,
+    [`${prefix}--form__helper-text--disabled`]: disabled,
   });
 
   const helperId = !helperText
@@ -294,7 +297,8 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
       className={textareaClasses}
       aria-invalid={invalid}
       aria-describedby={ariaDescribedBy}
-      disabled={other.disabled}
+      disabled={disabled}
+      rows={rows}
       readOnly={other.readOnly}
       ref={ref}
     />
@@ -450,21 +454,6 @@ TextArea.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
-};
-
-TextArea.defaultProps = {
-  disabled: false,
-  onChange: () => {},
-  onClick: () => {},
-  placeholder: '',
-  rows: 4,
-  invalid: false,
-  invalidText: '',
-  helperText: '',
-  enableCounter: false,
-  maxCount: undefined,
-  warn: false,
-  warnText: '',
 };
 
 export default TextArea;

@@ -14,6 +14,7 @@ import React, {
 } from 'react';
 import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import { noopFn } from '../../internal/noopFn';
 
 interface SwitchEventHandlersParams {
   index?: number;
@@ -86,8 +87,8 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(function Switch(
     disabled,
     index,
     name,
-    onClick,
-    onKeyDown,
+    onClick = noopFn,
+    onKeyDown = noopFn,
     selected = false,
     text,
     ...other
@@ -182,12 +183,6 @@ Switch.propTypes = {
    * Provide the contents of your Switch
    */
   text: PropTypes.string,
-};
-
-Switch.defaultProps = {
-  selected: false,
-  onClick: () => {},
-  onKeyDown: () => {},
 };
 
 export default Switch;

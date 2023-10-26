@@ -163,9 +163,7 @@ export const ClickableTile = React.forwardRef<
   function handleOnKeyDown(evt: KeyboardEvent) {
     evt?.persist?.();
     if (matches(evt, [keys.Enter, keys.Space])) {
-      evt.preventDefault();
       setIsSelected(!isSelected);
-      onKeyDown(evt);
     }
     onKeyDown(evt);
   }
@@ -191,6 +189,7 @@ export const ClickableTile = React.forwardRef<
     <Link
       className={classes}
       href={href}
+      tabIndex={!href && !disabled ? 0 : undefined}
       onClick={!disabled ? handleOnClick : undefined}
       onKeyDown={handleOnKeyDown}
       ref={ref}
