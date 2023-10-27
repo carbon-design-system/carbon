@@ -82,26 +82,16 @@ $content-padding: 0 0 0 $spacing-05 !default;
     padding-inline-end: layout.density('padding-inline');
     transition: background-color motion(standard, productive) $duration-fast-02;
 
-    &:hover::before,
-    &:focus::before {
-      position: absolute;
-      block-size: calc(100% + 2px);
-      content: '';
-      inline-size: 100%;
-      inset-block-start: -1px;
-      inset-inline-start: 0;
-    }
-
-    &:hover::before {
+    &:hover {
       background-color: $layer-hover;
     }
 
     &:focus {
+      box-shadow: /* Border top */ 0 -1px 0 0 $focus, inset 0 1px 0 0 $focus,
+        /* Border right */ inset 2px 0 0 0 $focus,
+        /* Border bottom */ 0 1px 0 0 $focus, inset 0 -1px 0 0 $focus,
+        /* Border left */ inset -2px 0 0 0 $focus;
       outline: none;
-    }
-
-    &:focus::before {
-      @include focus-outline('outline-compat');
     }
   }
 

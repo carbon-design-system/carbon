@@ -36,7 +36,7 @@ export interface SelectItemGroupProps
 const SelectItemGroup = ({
   children,
   className,
-  disabled,
+  disabled = false,
   label,
   ...other
 }: SelectItemGroupProps) => {
@@ -73,10 +73,6 @@ SelectItemGroup.propTypes = {
    * Specify the label to be displayed
    */
   label: PropTypes.string.isRequired,
-};
-
-SelectItemGroup.defaultProps = {
-  disabled: false,
 };
 
 export default SelectItemGroup;
