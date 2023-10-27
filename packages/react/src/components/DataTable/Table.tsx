@@ -10,7 +10,6 @@ import React, {
   PropsWithChildren,
   useRef,
   useCallback,
-  useLayoutEffect,
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
@@ -19,6 +18,7 @@ import debounce from 'lodash.debounce';
 import { usePrefix } from '../../internal/usePrefix';
 import { TableContext } from './TableContext';
 import { useWindowEvent } from '../../internal/useEvent';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 interface TableProps {
   experimentalAutoAlign?: boolean;
@@ -203,7 +203,7 @@ export const Table = ({
 
   useWindowEvent('resize', debouncedSetTabIndex);
 
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     setTabIndex();
   }, [setTabIndex]);
 
@@ -218,7 +218,7 @@ export const Table = ({
     });
   }
 
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     setTableAlignment();
   }, [setTableAlignment, size]);
 
