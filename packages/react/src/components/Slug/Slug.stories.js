@@ -296,7 +296,7 @@ export const Default = () => (
 );
 
 export const Playground = (args) => {
-  const { kind, dotType } = args;
+  const { kind, dotType, showSlugActions = true } = args;
 
   let renderedContent;
   if (kind === 'hollow' || dotType === 'hollow') {
@@ -316,18 +316,20 @@ export const Playground = (args) => {
           <p className="secondary">Model type</p>
           <p className="bold">Foundation model</p>
         </div>
-        <SlugActions>
-          <IconButton kind="ghost" label="View">
-            <View />
-          </IconButton>
-          <IconButton kind="ghost" label="Open Folder">
-            <FolderOpen />
-          </IconButton>
-          <IconButton kind="ghost" label="Folders">
-            <Folders />
-          </IconButton>
-          <Button>View literature</Button>
-        </SlugActions>
+        {showSlugActions && (
+          <SlugActions>
+            <IconButton kind="ghost" label="View">
+              <View />
+            </IconButton>
+            <IconButton kind="ghost" label="Open Folder">
+              <FolderOpen />
+            </IconButton>
+            <IconButton kind="ghost" label="Folders">
+              <Folders />
+            </IconButton>
+            <Button>View literature</Button>
+          </SlugActions>
+        )}
       </>
     );
   }
@@ -343,4 +345,13 @@ export const Playground = (args) => {
       <Button kind="danger">Test</Button>
     </>
   );
+};
+
+Playground.argTypes = {
+  showSlugActions: {
+    control: {
+      type: 'boolean',
+    },
+    description: 'Playground only - toggle to show the callout toolbar',
+  },
 };
