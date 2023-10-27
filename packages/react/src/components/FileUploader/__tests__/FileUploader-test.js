@@ -14,6 +14,7 @@ import { uploadFiles } from '../test-helpers';
 const iconDescription = 'test description';
 const requiredProps = {
   iconDescription,
+  filenameStatus: 'uploading',
   labelTitle: 'Upload files',
   labelDescription: 'Max file size is 500mb. Only .jpg files are supported.',
 };

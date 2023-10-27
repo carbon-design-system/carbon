@@ -13,7 +13,7 @@ import { usePrefix } from '../../internal/usePrefix';
 const Content = ({
   className: customClassName,
   children,
-  tagName,
+  tagName = 'main',
   ...rest
 }) => {
   const prefix = usePrefix();
@@ -43,10 +43,6 @@ Content.propTypes = {
    * Optionally specify the tag of the content node. Defaults to `main`
    */
   tagName: PropTypes.string,
-};
-
-Content.defaultProps = {
-  tagName: 'main',
 };
 
 export default Content;

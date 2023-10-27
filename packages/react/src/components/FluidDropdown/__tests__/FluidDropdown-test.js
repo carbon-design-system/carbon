@@ -29,6 +29,7 @@ describe('FluidDropdown', () => {
       label: 'input',
       placeholder: 'Filter...',
       type: 'default',
+      titleText: 'Dropdown label',
     };
   });
 
@@ -104,12 +105,12 @@ describe('FluidDropdown', () => {
 
   describe('title', () => {
     it('renders a title', () => {
-      render(<FluidDropdown titleText="Email Input" {...mockProps} />);
+      render(<FluidDropdown {...mockProps} titleText="Email Input" />);
       expect(screen.getByText('Email Input')).toBeInTheDocument();
     });
 
     it('has the expected classes', () => {
-      render(<FluidDropdown titleText="Email Input" {...mockProps} />);
+      render(<FluidDropdown {...mockProps} titleText="Email Input" />);
       expect(screen.getByText('Email Input')).toHaveClass(`${prefix}--label`);
     });
   });
