@@ -9,7 +9,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import { MenuItem } from '../Menu';
+import { MenuItem, MenuItemSelectable, MenuItemRadioGroup } from '../Menu';
 
 import { MenuButton } from './';
 
@@ -114,6 +114,56 @@ describe('MenuButton', () => {
 
       expect(screen.getByRole('menu')).toBeInTheDocument();
       expect(screen.getByRole('menuitem')).toHaveTextContent(/^Action$/);
+    });
+
+    it('warns when MenuItemSelectable is used in children', async () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+      render(
+        <MenuButton label="Primary action">
+          <MenuItemSelectable label="Option" />
+        </MenuButton>
+      );
+
+      await userEvent.click(screen.getByRole('button'));
+
+      expect(spy).toHaveBeenCalled();
+      spy.mockRestore();
+    });
+
+    it('warns when MenuItemRadioGoup is used in children', async () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+      render(
+        <MenuButton label="Primary action">
+          <MenuItemRadioGroup
+            label="Options"
+            items={['Option 1', 'Option 2']}
+          />
+        </MenuButton>
+      );
+
+      await userEvent.click(screen.getByRole('button'));
+
+      expect(spy).toHaveBeenCalled();
+      spy.mockRestore();
+    });
+
+    it('warns when a nested Menu is used in children', async () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+      render(
+        <MenuButton label="Primary action">
+          <MenuItem label="Submenu">
+            <MenuItem label="Action" />
+          </MenuItem>
+        </MenuButton>
+      );
+
+      await userEvent.click(screen.getByRole('button'));
+
+      expect(spy).toHaveBeenCalled();
+      spy.mockRestore();
     });
   });
 });

@@ -20,6 +20,7 @@ import { createPortal } from 'react-dom';
 import { keys, match } from '../../internal/keyboard';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
+import { warning } from '../../internal/warning.js';
 
 import { MenuContext, menuReducer } from './MenuContext';
 import { useLayoutDirection } from '../LayoutDirection';
@@ -52,7 +53,8 @@ const Menu = React.forwardRef(function Menu(
   const isRoot = context.state.isRoot;
 
   if (context.state.mode === 'basic' && !isRoot) {
-    throw new Error(
+    warning(
+      false,
       'Nested menus are not supported when the menu is in "basic" mode.'
     );
   }

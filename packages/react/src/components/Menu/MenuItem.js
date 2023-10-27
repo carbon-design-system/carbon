@@ -14,6 +14,7 @@ import { keys, match } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
+import { warning } from '../../internal/warning.js';
 
 import { Menu } from './Menu';
 import { MenuContext } from './MenuContext';
@@ -249,7 +250,8 @@ const MenuItemSelectable = React.forwardRef(function MenuItemSelectable(
   const context = useContext(MenuContext);
 
   if (context.state.mode === 'basic') {
-    throw new Error(
+    warning(
+      false,
       'MenuItemSelectable is not supported when the menu is in "basic" mode.'
     );
   }
@@ -284,7 +286,7 @@ const MenuItemSelectable = React.forwardRef(function MenuItemSelectable(
       className={classNames}
       role="menuitemcheckbox"
       aria-checked={checked}
-      renderIcon={checked && Checkmark}
+      renderIcon={checked ? Checkmark : undefined}
       onClick={handleClick}
     />
   );
@@ -370,7 +372,8 @@ const MenuItemRadioGroup = React.forwardRef(function MenuItemRadioGroup(
   const context = useContext(MenuContext);
 
   if (context.state.mode === 'basic') {
-    throw new Error(
+    warning(
+      false,
       'MenuItemRadioGroup is not supported when the menu is in "basic" mode.'
     );
   }
@@ -406,7 +409,7 @@ const MenuItemRadioGroup = React.forwardRef(function MenuItemRadioGroup(
             label={itemToString(item)}
             role="menuitemradio"
             aria-checked={item === selection}
-            renderIcon={item === selection && Checkmark}
+            renderIcon={item === selection ? Checkmark : undefined}
             onClick={(e) => {
               handleClick(item, e);
             }}

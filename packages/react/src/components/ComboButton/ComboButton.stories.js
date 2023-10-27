@@ -9,6 +9,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { MenuItem, MenuItemDivider } from '../Menu';
+import { Copy, Export } from '@carbon/icons-react';
 
 import { ComboButton } from './';
 import mdx from './ComboButton.mdx';
@@ -42,6 +43,13 @@ export const WithDanger = () => (
     <MenuItem label="Fourth action" />
     <MenuItemDivider />
     <MenuItem label="Danger action" kind="danger" />
+  </ComboButton>
+);
+
+export const WithIcons = () => (
+  <ComboButton label="Save record">
+    <MenuItem label="Save as a copy" renderIcon={Copy} />
+    <MenuItem label="Export" renderIcon={Export} />
   </ComboButton>
 );
 
