@@ -1,7 +1,7 @@
 {
   "name": "typescript-config-carbon",
   "description": "TypeScript configuration for Carbon",
-  "version": "0.2.0-rc.0",
+  "version": "0.2.0",
   "license": "Apache-2.0",
   "main": "index.js",
   "types": "index.d.ts",
