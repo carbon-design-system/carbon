@@ -69,7 +69,7 @@ const PlaygroundStory = (props) => {
         <CheckboxIcon />
       </div>
       <PopoverContent className="p-3">
-        <p className="popover-title">Available storage</p>
+        <h2 className="popover-title">Available storage</h2>
         <p className="popover-details">
           This server has 150 GB of block storage remaining.
         </p>
@@ -246,7 +246,7 @@ export const AutoAlign = () => {
             />
           </div>
           <PopoverContent className="p-3">
-            <p className="popover-title">Available storage</p>
+            <h2 className="popover-title">Available storage</h2>
             <p className="popover-details">
               This server has 150 GB of block storage remaining.
             </p>
@@ -258,7 +258,7 @@ export const AutoAlign = () => {
           <CheckboxIcon />
         </div>
         <PopoverContent className="p-3">
-          <p className="popover-title">Available storage</p>
+          <h2 className="popover-title">Available storage</h2>
           <p className="popover-details">
             This server has 150 GB of block storage remaining.
           </p>
@@ -277,7 +277,7 @@ export const AutoAlign = () => {
             <CheckboxIcon />
           </div>
           <PopoverContent className="p-3">
-            <p className="popover-title">Available storage</p>
+            <h2 className="popover-title">Available storage</h2>
             <p className="popover-details">
               This server has 350 GB of block storage remaining.
             </p>
@@ -297,7 +297,7 @@ export const AutoAlign = () => {
             <CheckboxIcon />
           </div>
           <PopoverContent className="p-3">
-            <p className="popover-title">Available storage</p>
+            <h2 className="popover-title">Available storage</h2>
             <p className="popover-details">
               This server has 150 GB of block storage remaining.
             </p>
@@ -317,7 +317,7 @@ export const AutoAlign = () => {
             <CheckboxIcon />
           </div>
           <PopoverContent className="p-3">
-            <p className="popover-title">Available storage</p>
+            <h2 className="popover-title">Available storage</h2>
             <p className="popover-details">
               This server has 150 GB of block storage remaining.
             </p>
