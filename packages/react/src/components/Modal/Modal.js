@@ -19,6 +19,7 @@ import wrapFocus, {
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
+import { IconButton } from '../IconButton';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -147,6 +148,7 @@ const Modal = React.forwardRef(function Modal(
     modalLabel || ariaLabelProp || modalAriaLabel || modalHeading;
   const getAriaLabelledBy = modalLabel ? modalLabelId : modalHeadingId;
 
+  const closeButtonText = closeButtonLabel ? closeButtonLabel : 'close';
   const hasScrollingContentProps = hasScrollingContent
     ? {
         tabIndex: 0,
@@ -212,20 +214,22 @@ const Modal = React.forwardRef(function Modal(
   }, [open, selectorPrimaryFocus, danger, prefix]);
 
   const modalButton = (
-    <button
-      className={modalCloseButtonClass}
-      type="button"
-      onClick={onRequestClose}
-      title={ariaLabel}
-      aria-label={closeButtonLabel ? closeButtonLabel : 'close'}
-      ref={button}>
-      <Close
-        size={20}
-        aria-hidden="true"
-        tabIndex="-1"
-        className={`${modalCloseButtonClass}__icon`}
-      />
-    </button>
+    <div className={`${prefix}--modal-close-button`}>
+      <IconButton
+        className={modalCloseButtonClass}
+        label={closeButtonText}
+        onClick={onRequestClose}
+        title={closeButtonText}
+        aria-label={closeButtonText}
+        ref={button}>
+        <Close
+          size={20}
+          aria-hidden="true"
+          tabIndex="-1"
+          className={`${modalCloseButtonClass}__icon`}
+        />
+      </IconButton>
+    </div>
   );
 
   const modalBody = (
