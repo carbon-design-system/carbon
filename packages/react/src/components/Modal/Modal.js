@@ -149,6 +149,7 @@ const Modal = React.forwardRef(function Modal(
   const getAriaLabelledBy = modalLabel ? modalLabelId : modalHeadingId;
 
   const closeButtonText = closeButtonLabel ? closeButtonLabel : 'close';
+
   const hasScrollingContentProps = hasScrollingContent
     ? {
         tabIndex: 0,
