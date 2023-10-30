@@ -43,7 +43,7 @@
     min-inline-size: convert.to-rem(200px);
 
     .#{$prefix}--slider-container--two-handles & {
-      margin-inline: rem(4px);
+      margin-inline: convert.to-rem(4px);
     }
   }
 
