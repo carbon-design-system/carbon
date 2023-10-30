@@ -46,7 +46,7 @@ async function writeModuleTypes(modules, outDir) {
       templates.banner +
       '\n' +
       "import type { CarbonIconType } from './CarbonIcon';\n" +
-      `const ${m.name}: CarbonIconType;\n` +
+      `declare const ${m.name}: CarbonIconType;\n` +
       `export default ${m.name}\n`;
     const filename = path.resolve(outDir, m.filepath.replace(/\.js$/, '.d.ts'));
     await fs.writeFile(filename, content);
