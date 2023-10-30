@@ -90,8 +90,8 @@ const ListBox: ListBoxComponent = React.forwardRef(function ListBox(
   {
     children,
     className: containerClassName,
-    disabled,
-    type,
+    disabled = false,
+    type = 'default',
     size,
     invalid,
     invalidText,
@@ -156,7 +156,7 @@ ListBox.propTypes = {
   /**
    * Specify whether the ListBox is currently disabled
    */
-  disabled: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
 
   /**
    * Specify whether the control is currently invalid
@@ -192,7 +192,7 @@ ListBox.propTypes = {
    * Specify the "type" of the ListBox. Currently supports either `default` or
    * `inline` as an option.
    */
-  type: ListBoxType.isRequired,
+  type: ListBoxType,
 
   /**
    * Specify whether the control is currently in warning state
@@ -203,11 +203,6 @@ ListBox.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
-};
-
-ListBox.defaultProps = {
-  disabled: false,
-  type: 'default',
 };
 
 export default ListBox;

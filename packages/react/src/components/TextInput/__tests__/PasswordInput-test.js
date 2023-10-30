@@ -121,7 +121,12 @@ describe('PasswordInput', () => {
 
     it('should respect invalid prop', () => {
       const { container } = render(
-        <PasswordInput id="input-1" labelText="PasswordInput label" invalid />
+        <PasswordInput
+          id="input-1"
+          labelText="PasswordInput label"
+          invalid
+          invalidText="Error"
+        />
       );
 
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
@@ -230,7 +235,12 @@ describe('PasswordInput', () => {
 
     it('should respect warn prop', () => {
       const { container } = render(
-        <PasswordInput id="input-1" labelText="PasswordInput label" warn />
+        <PasswordInput
+          id="input-1"
+          labelText="PasswordInput label"
+          warn
+          warnText="Warning"
+        />
       );
 
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access

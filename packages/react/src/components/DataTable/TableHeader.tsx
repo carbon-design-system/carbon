@@ -127,12 +127,12 @@ const TableHeader = React.forwardRef(function TableHeader(
     className: headerClassName,
     children,
     colSpan,
-    isSortable,
+    isSortable = false,
     isSortHeader,
     onClick,
     scope = defaultScope,
     sortDirection,
-    translateWithId: t,
+    translateWithId: t = translateWithId,
     id,
     ...rest
   }: TableHeaderProps,
@@ -250,7 +250,7 @@ TableHeader.propTypes = {
    * attribute at the following URL:
    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th#attr-scope
    */
-  scope: PropTypes.string.isRequired,
+  scope: PropTypes.string,
 
   /**
    * Specify which direction we are currently sorting by, should be one of DESC,
@@ -264,12 +264,6 @@ TableHeader.propTypes = {
    * this component.
    */
   translateWithId: PropTypes.func,
-};
-
-TableHeader.defaultProps = {
-  isSortable: false,
-  scope: defaultScope,
-  translateWithId,
 };
 
 (TableHeader as any).translationKeys = Object.values(translationKeys);

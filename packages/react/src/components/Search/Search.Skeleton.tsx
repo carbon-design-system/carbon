@@ -23,7 +23,11 @@ export interface SearchSkeletonProps
   small?: boolean;
 }
 
-const SearchSkeleton = ({ small, className, ...rest }: SearchSkeletonProps) => {
+const SearchSkeleton = ({
+  small = false,
+  className,
+  ...rest
+}: SearchSkeletonProps) => {
   const prefix = usePrefix();
   const searchClasses = cx(className, {
     [`${prefix}--skeleton`]: true,
@@ -49,10 +53,6 @@ SearchSkeleton.propTypes = {
    * Specify whether the Search should be a small variant
    */
   small: PropTypes.bool,
-};
-
-SearchSkeleton.defaultProps = {
-  small: false,
 };
 
 export default SearchSkeleton;
