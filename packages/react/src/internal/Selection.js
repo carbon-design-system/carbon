@@ -120,10 +120,6 @@ export default class Selection extends React.Component {
     render: PropTypes.func,
   };
 
-  static defaultProps = {
-    initialSelectedItems: [],
-  };
-
   constructor(props) {
     super(props);
     this.state = {

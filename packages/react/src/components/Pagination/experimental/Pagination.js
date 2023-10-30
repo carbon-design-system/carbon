@@ -15,23 +15,23 @@ import { IconButton } from '../../IconButton';
 import { usePrefix } from '../../../internal/usePrefix';
 
 function Pagination({
-  backwardText,
-  children,
-  className,
-  disabled,
-  forwardText,
-  id,
-  initialPage,
-  itemsPerPageText,
-  itemRangeText,
-  itemText,
+  backwardText = 'Previous page',
+  children = undefined,
+  className = null,
+  disabled = false,
+  forwardText = 'Next page',
+  id = 1,
+  initialPage = 1,
+  itemsPerPageText = 'Items per page:',
+  itemRangeText = (min, max, total) => `${min}–${max} of ${total} items`,
+  itemText = (min, max) => `${min}–${max} items`,
   onChange,
-  pageRangeText,
-  pageSize,
-  pageSizes,
-  pageText,
-  pagesUnknown,
-  totalItems,
+  pageRangeText = (current, total) => `${current} of ${total} pages`,
+  pageSize = 10,
+  pageSizes = undefined,
+  pageText = (page) => `page ${page}`,
+  pagesUnknown = false,
+  totalItems = undefined,
   ...other
 }) {
   const [currentPage, setCurrentPage] = useState(initialPage);
@@ -268,25 +268,6 @@ Pagination.propTypes = {
    * to know how many pages to display.
    */
   totalItems: PropTypes.number,
-};
-
-Pagination.defaultProps = {
-  backwardText: 'Previous page',
-  className: null,
-  children: undefined,
-  disabled: false,
-  forwardText: 'Next page',
-  id: 1,
-  itemsPerPageText: 'Items per page:',
-  itemRangeText: (min, max, total) => `${min}–${max} of ${total} items`,
-  itemText: (min, max) => `${min}–${max} items`,
-  initialPage: 1,
-  pageRangeText: (current, total) => `${current} of ${total} pages`,
-  pageSize: 10,
-  pageSizes: undefined,
-  pageText: (page) => `page ${page}`,
-  pagesUnknown: false,
-  totalItems: undefined,
 };
 
 export default Pagination;

@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React, { ReactNode, useEffect, useMemo, useRef } from 'react';
 import { TextDirectionContext } from './TextDirectionContext';
 
-export type TextDir = 'ltr' | 'rtl' | 'auto';
+export type TextDir = 'ltr' | 'rtl' | 'auto' | string;
 export type GetTextDirection = (text: string | string[] | undefined) => TextDir;
 
 export interface TextDirectionProps {
