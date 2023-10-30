@@ -54,10 +54,7 @@ test.describe('CodeSnippet @avt', () => {
     await expect(page).toHaveNoACViolations('CodeSnippet inline focused');
   });
 
-  // Skipping due to a11y violation issue #14237
-  test.skip('accessibility-checker CodeSnippet multiline @avt', async ({
-    page,
-  }) => {
+  test('accessibility-checker CodeSnippet multiline @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'CodeSnippet',
       id: 'components-codesnippet--multiline',

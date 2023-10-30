@@ -16,10 +16,23 @@ import { usePrefix } from '../../../internal/usePrefix';
  * addition to conditionally rendering a badge if the control has more than one
  * selection.
  */
+
+export const translationIds = {
+  'clear.all': 'clear.all',
+  'clear.selection': 'clear.selection',
+};
+
+const defaultTranslations = {
+  [translationIds['clear.all']]: 'Clear all selected items',
+  [translationIds['clear.selection']]: 'Clear selected item',
+};
+
+const defaultTranslateWithId = (id) => defaultTranslations[id];
+
 function ListBoxSelection({
   clearSelection,
   selectionCount,
-  translateWithId: t,
+  translateWithId: t = defaultTranslateWithId,
   disabled,
   onClearSelection,
   ...rest
@@ -85,16 +98,6 @@ function ListBoxSelection({
   );
 }
 
-export const translationIds = {
-  'clear.all': 'clear.all',
-  'clear.selection': 'clear.selection',
-};
-
-const defaultTranslations = {
-  [translationIds['clear.all']]: 'Clear all selected items',
-  [translationIds['clear.selection']]: 'Clear selected item',
-};
-
 ListBoxSelection.propTypes = {
   /**
    * Specify a function to be invoked when a user interacts with the clear
@@ -136,11 +139,7 @@ ListBoxSelection.propTypes = {
    * icon. This function takes in an id defined in `translationIds` and should
    * return a string message for that given message id.
    */
-  translateWithId: PropTypes.func.isRequired,
-};
-
-ListBoxSelection.defaultProps = {
-  translateWithId: (id) => defaultTranslations[id],
+  translateWithId: PropTypes.func,
 };
 
 export default ListBoxSelection;

@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('ComposedModal', () => {
+test.describe('ComposedModal @avt', () => {
   test('@avt-default-state ComposedModal', async ({ page }) => {
     await visitStory(page, {
       component: 'ComposedModal',
@@ -22,7 +22,7 @@ test.describe('ComposedModal', () => {
     await expect(page).toHaveNoACViolations('ComposedModal');
   });
 
-  test('@avt-advanced-state ComposedModal Full Width', async ({ page }) => {
+  test('@avt-advanced-states ComposedModal Full Width', async ({ page }) => {
     await visitStory(page, {
       component: 'ComposedModal',
       id: 'components-composedmodal--full-width',
@@ -33,7 +33,8 @@ test.describe('ComposedModal', () => {
     await expect(page).toHaveNoACViolations('ComposedModal-full-width');
   });
 
-  test.skip('@avt-advanced-state ComposedModal Passive Modal', async ({
+  // Skipping now due to AVT violation, possible false positive
+  test.skip('@avt-advanced-states ComposedModal Passive Modal', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -46,7 +47,7 @@ test.describe('ComposedModal', () => {
     await expect(page).toHaveNoACViolations('ComposedModal-passive-modal');
   });
 
-  test('@avt-advanced-state ComposedModal With state manager', async ({
+  test('@avt-advanced-states ComposedModal With state manager', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -59,7 +60,7 @@ test.describe('ComposedModal', () => {
     await expect(page).toHaveNoACViolations('ComposedModal-with-state-manager');
   });
 
-  test('@avt-keyboard-state ComposedModal', async ({ page }) => {
+  test('@avt-keyboard-nav ComposedModal', async ({ page }) => {
     await visitStory(page, {
       component: 'ComposedModal',
       id: 'components-composedmodal--default',
@@ -86,7 +87,7 @@ test.describe('ComposedModal', () => {
     await expect(page.getByText('Account resource')).not.toBeVisible();
   });
 
-  test('@avt-keyboard-state ComposedModal Full width', async ({ page }) => {
+  test('@avt-keyboard-nav ComposedModal Full width', async ({ page }) => {
     await visitStory(page, {
       component: 'ComposedModal',
       id: 'components-composedmodal--full-width',
@@ -109,7 +110,7 @@ test.describe('ComposedModal', () => {
     await expect(page.getByText('Full Width Modal')).not.toBeVisible();
   });
 
-  test('@avt-keyboard-state ComposedModal Passive modal', async ({ page }) => {
+  test('@avt-keyboard-nav ComposedModal Passive modal', async ({ page }) => {
     await visitStory(page, {
       component: 'ComposedModal',
       id: 'components-composedmodal--passive-modal',
@@ -129,7 +130,7 @@ test.describe('ComposedModal', () => {
     ).not.toBeVisible();
   });
 
-  test('@avt-keyboard-state ComposedModal With state manager', async ({
+  test('@avt-keyboard-nav ComposedModal With state manager', async ({
     page,
   }) => {
     await visitStory(page, {
