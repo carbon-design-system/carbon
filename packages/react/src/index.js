@@ -298,3 +298,4 @@ export { DefinitionTooltip } from './components/Tooltip/DefinitionTooltip';
 export { GlobalTheme, Theme, useTheme } from './components/Theme';
 export { usePrefix } from './internal/usePrefix';
 export { useIdPrefix } from './internal/useIdPrefix';
+export { Slug as unstable__Slug } from './components/Slug';

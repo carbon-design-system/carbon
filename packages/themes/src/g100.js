@@ -7,6 +7,7 @@
 
 import {
   // Blue
+  blue20,
   blue40,
   blue60,
   blue70,
@@ -14,7 +15,10 @@ import {
 
   // Gray
   gray10,
+  gray10Hover,
+  gray20,
   gray30,
+  gray30Hover,
   gray40,
   gray50,
   gray60,
@@ -46,7 +50,6 @@ import {
 
   // Tools
   rgba,
-  gray10Hover,
 } from '@carbon/colors';
 import { adjustLightness, adjustAlpha } from './tools';
 
@@ -206,6 +209,17 @@ export const highlight = blue80;
 export const overlay = rgba(black, 0.65);
 export const toggleOff = gray60;
 export const shadow = rgba(black, 0.8);
+
+// AI
+export const slugBackground = gray30;
+export const slugGradient = `${gray50} linear-gradient(135deg, ${gray10} 0%, rgba(${white}, 0) 100%)`;
+export const slugBackgroundHover = gray20;
+export const slugGradientHover = `${gray40} linear-gradient(135deg, ${white} 0%, rgba(${white}, 0) 100%)`;
+export const slugHollowHover = gray30Hover;
+export const slugCalloutGradientTop = rgba(gray100, 0.85);
+export const slugCalloutGradientBottom = rgba(gray90, 0.85);
+export const slugCalloutAuraStart = rgba(blue20, 0.2);
+export const slugCalloutAuraEnd = rgba(gray100, 0);
 
 export {
   // Type
