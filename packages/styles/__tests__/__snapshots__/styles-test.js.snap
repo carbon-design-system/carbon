@@ -618,6 +618,16 @@ Array [
     "relativePath": "scss/components/slider/slider",
   },
   Object {
+    "filepath": "scss/components/slug/_index.scss",
+    "importPath": "@carbon/styles/scss/components/slug",
+    "relativePath": "scss/components/slug",
+  },
+  Object {
+    "filepath": "scss/components/slug/_slug.scss",
+    "importPath": "@carbon/styles/scss/components/slug/slug",
+    "relativePath": "scss/components/slug/slug",
+  },
+  Object {
     "filepath": "scss/components/stack/_index.scss",
     "importPath": "@carbon/styles/scss/components/stack",
     "relativePath": "scss/components/stack",
