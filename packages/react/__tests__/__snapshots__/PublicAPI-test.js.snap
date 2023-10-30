@@ -4704,6 +4704,7 @@ Map {
       "selectorsFloatingMenus": Object {
         "args": Array [
           Object {
+            "isRequired": true,
             "type": "string",
           },
         ],
@@ -8779,6 +8780,9 @@ Map {
       },
       "as": Object {
         "type": "elementType",
+      },
+      "autoAlign": Object {
+        "type": "bool",
       },
       "children": Object {
         "type": "node",
