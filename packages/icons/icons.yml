@@ -1367,7 +1367,7 @@
   sizes:
     - 32
 - name: automatic
-  friendly_name: automatic
+  friendly_name: Automatic
   aliases:
     - auto
     - automatic
@@ -1509,7 +1509,7 @@
   sizes:
     - 32
 - name: bat
-  friendly_name: bat
+  friendly_name: Bat
   aliases:
     - bat
     - mammal
@@ -1774,7 +1774,7 @@
   sizes:
     - 32
 - name: boolean
-  friendly_name: boolean
+  friendly_name: Boolean
   aliases:
     - boolean
     - search
@@ -4879,7 +4879,7 @@
   sizes:
     - 32
 - name: continuous-deployment
-  friendly_name: continuous-deployment
+  friendly_name: Continuous deployment
   aliases:
     - continuous
     - circle
@@ -5207,7 +5207,7 @@
   sizes:
     - 32
 - name: currency
-  friendly_name: currency
+  friendly_name: Currency
   aliases:
     - currency
     - money
@@ -6736,7 +6736,7 @@
   sizes:
     - 32
 - name: document--pdf
-  friendly_name: Document pdf
+  friendly_name: Document PDF
   aliases:
     - document pdf
     - pdf
@@ -9499,7 +9499,7 @@
   sizes:
     - 32
 - name: ibm--power-vs
-  friendly_name: IBM Power® Virtual Server
+  friendly_name: IBM® Power® Virtual Server
   aliases:
     - virtual server
     - workloads
@@ -10368,10 +10368,12 @@
   sizes:
     - 32
 - name: ibm-cloud-pak--watson-aiops
-  friendly_name: IBM Cloud Pak® Watson AIOps
+  friendly_name: IBM Cloud Pak® AIOps
   aliases:
     - cloud
     - Watson
+    - watsonx
+    - AI
     - AIOps
     - app
   sizes:
@@ -10432,10 +10434,11 @@
   sizes:
     - 32
 - name: ibm-watson--discovery
-  friendly_name: IBM Watson® Discovery
+  friendly_name: IBM® watsonx™ Discovery
   aliases:
     - Watson
     - IBM Watson
+    - watsonx
     - natural language
     - AI
     - artificial intelligence
@@ -10449,10 +10452,11 @@
   sizes:
     - 32
 - name: ibm-watson--knowledge-catalog
-  friendly_name: IBM Watson® Knowledge Catalog
+  friendly_name: IBM® Knowledge Catalog
   aliases:
     - Watson
     - IBM Watson
+    - watsonx
     - catalog
     - knowledge catalog
     - intelligent cataloging
@@ -10471,10 +10475,12 @@
   sizes:
     - 32
 - name: ibm-watson--knowledge-studio
-  friendly_name: IBM Watson® Knowledge Studio
+  friendly_name: IBM® Knowledge Studio
   aliases:
     - Watson
     - IBM Watson
+    - watsonx
+    - AI
     - language domain
     - unstructured text
     - natural language understanding
@@ -10506,10 +10512,12 @@
   sizes:
     - 32
 - name: ibm-watson--machine-learning
-  friendly_name: IBM Watson® Machine Learning
+  friendly_name: IBM® Machine Learning
   aliases:
     - Watson
     - IBM Watson
+    - AI
+    - watsonx
     - machine learning
     - ML
     - ML management
@@ -10555,10 +10563,12 @@
   sizes:
     - 32
 - name: ibm-watson--openscale
-  friendly_name: IBM Watson® OpenScale
+  friendly_name: IBM® OpenScale
   aliases:
     - Watson
     - IBM Watson
+    - watsonx
+    - AI
     - OpenScale
     - AI analysis
     - analysis
@@ -10573,9 +10583,14 @@
   sizes:
     - 32
 - name: ibm-watson--orders
-  friendly_name: IBM Watson® Orders
+  friendly_name: IBM® watsonx™ Orders
   aliases:
-    - IBM Watson®
+    - IBM Watson
+    - watsonx
+    - AI
+    - restaurant
+    - fast food
+    - retail
     - enterprise
     - app
     - orders
@@ -10638,6 +10653,8 @@
   aliases:
     - Watson
     - IBM Watson
+    - watsonx
+    - AI
     - cloud
     - AI on cloud building
     - AI on cloud scaling
@@ -10699,6 +10716,7 @@
   friendly_name: IBM® watsonx™ Assistant
   aliases:
     - AI
+    - watsonx
     - chatbot
     - virtual agent
     - conversational AI
@@ -10710,6 +10728,7 @@
   friendly_name: IBM® watsonx™ Code Assistant
   aliases:
     - AI
+    - watsonx
     - developer
     - code
     - code generation
@@ -10727,6 +10746,7 @@
   friendly_name: IBM® watsonx™ Code Assistant for Z
   aliases:
     - AI
+    - watsonx
     - developer
     - code
     - code generation
@@ -10755,6 +10775,7 @@
     - efficiency
     - complex
     - natural language processing
+    - watsonx
     - AI
   sizes:
     - 32
@@ -12039,7 +12060,7 @@
   sizes:
     - 32
 - name: lifesaver
-  friendly_name: lifesaver
+  friendly_name: Lifesaver
   aliases:
     - life preserver
     - help
@@ -14126,7 +14147,7 @@
   sizes:
     - 32
 - name: need
-  friendly_name: need
+  friendly_name: Need
   aliases:
     - need
     - charity
@@ -18937,7 +18958,7 @@
   sizes:
     - 32
 - name: summary--KPI--mirror
-  friendly_name: summary--KPI--mirror
+  friendly_name: Summary KPI mirror
   aliases:
     - summary KPI
     - data
@@ -20909,7 +20930,7 @@
     - account
     - my account
 - name: user--military
-  friendly_name: user--military
+  friendly_name: User military
   aliases:
     - person
     - avatar
@@ -21018,7 +21039,7 @@
   sizes:
     - 32
 - name: user--sponsor
-  friendly_name: user--sponsor
+  friendly_name: User sponsor
   aliases:
     - sponsor
     - asterisk
@@ -21175,21 +21196,21 @@
   sizes:
     - 32
 - name: version--major
-  friendly_name: version--major
+  friendly_name: Version major
   aliases:
     - major
     - version
   sizes:
     - 32
 - name: version--minor
-  friendly_name: version--minor
+  friendly_name: Version minor
   aliases:
     - version
     - minor
   sizes:
     - 32
 - name: version--patch
-  friendly_name: version--patch
+  friendly_name: Version patch
   aliases:
     - version
     - patch
@@ -21706,15 +21727,16 @@
 - name: watson
   friendly_name: Watson™
   aliases:
-    - ai
+    - AI
   sizes:
     - 32
 - name: watson--machine-learning
-  friendly_name: IBM Watson® Machine Learning
+  friendly_name: IBM® Machine Learning
   sizes:
     - 32
   aliases:
-    - ai
+    - AI
+    - watsonx
     - machine learing
     - ML
 - name: watsonx
@@ -21722,6 +21744,7 @@
   aliases:
     - data
     - AI
+    - watsonx
     - platform
     - generative AI
     - foundation models
@@ -21734,6 +21757,7 @@
   aliases:
     - data
     - AI
+    - watsonx
     - studio
     - generative AI
     - foundation models
@@ -21748,6 +21772,7 @@
   aliases:
     - data
     - AI
+    - watsonx
     - open
     - data store
     - data architecture
@@ -21766,6 +21791,7 @@
   aliases:
     - data
     - AI
+    - watsonx
     - ethical AI
     - risk mitigation
     - secure
