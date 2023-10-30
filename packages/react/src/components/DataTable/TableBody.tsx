@@ -17,7 +17,10 @@ export interface TableBodyProps extends ReactAttr<HTMLTableSectionElement> {
 }
 
 const TableBody = ({ children, className, ...rest }: TableBodyProps) => (
-  <tbody className={className} {...rest}>
+  <tbody
+    aria-live={'polite' || rest['aria-live']}
+    className={className}
+    {...rest}>
     {children}
   </tbody>
 );
@@ -30,10 +33,6 @@ TableBody.propTypes = {
   children: PropTypes.node,
 
   className: PropTypes.string,
-};
-
-TableBody.defaultProps = {
-  'aria-live': 'polite',
 };
 
 export default TableBody;
