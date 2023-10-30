@@ -10,6 +10,25 @@ import React from 'react';
 import { AddFilled as iconAddSolid } from '@carbon/icons-react';
 import Button from '../Button';
 
+export interface TableBatchActionProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * Specify if the button is an icon-only button
+   */
+  hasIconOnly?: boolean;
+
+  /**
+   * If specifying the `renderIcon` prop, provide a description for that icon that can
+   * be read by screen readers
+   */
+  iconDescription?: string;
+
+  /**
+   * Optional function to render your own icon in the underlying button
+   */
+  renderIcon?: React.ElementType;
+}
+
 const TableBatchAction = ({
   renderIcon = iconAddSolid,
   iconDescription = 'Add',
