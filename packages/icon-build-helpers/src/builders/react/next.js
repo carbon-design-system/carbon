@@ -14,10 +14,12 @@ const { babel } = require('@rollup/plugin-babel');
 const fs = require('fs-extra');
 const path = require('path');
 const { rollup } = require('rollup');
+const ts = require('typescript');
 const virtual = require('../plugins/virtual');
 const { babelConfig } = require('./next/babel');
 const { svgToJSX, jsToAST } = require('./next/convert');
 const templates = require('./next/templates');
+const { writeTsDefinitions } = require('./next/typescript');
 
 // This builder outputs a collection of CommonJS modules representing our icon
 // components. It does not generate an `index.js` entrypoint file due to the
@@ -84,13 +86,14 @@ async function builder(metadata, { output }) {
   // `input` object to files that we're generating for each icon component in
   // the `files` object
   const files = {
-    'index.js': template.ast(`
-      import Icon from './Icon.js';
+    'index.ts': template.ast(`
+      import Icon from './Icon.tsx';
       export { Icon };
     `),
   };
   const input = {
-    'index.js': 'index.js',
+    'index.js': 'index.ts',
+    'Icon.js': './Icon.tsx',
   };
   const BUCKET_SIZE = 125;
   const buckets = [
@@ -126,7 +129,7 @@ async function builder(metadata, { output }) {
     input[filename] = filename;
     files[filename] = template.ast(`
       import React from 'react';
-      import Icon from './Icon.js';
+      import Icon from './Icon.tsx';
       import { iconPropTypes } from './iconPropTypes.js';
       const didWarnAboutDeprecation = {};
     `);
@@ -137,16 +140,16 @@ async function builder(metadata, { output }) {
 
     files[filename] = t.file(t.program(files[filename]));
     files[filename] = generate(files[filename]).code;
-    files['index.js'].push(template.ast(`export * from '${filename}';`));
+    files['index.ts'].push(template.ast(`export * from '${filename}';`));
   }
 
-  files['index.js'] = generate(t.file(t.program(files['index.js']))).code;
+  files['index.ts'] = generate(t.file(t.program(files['index.ts']))).code;
 
   const defaultVirtualOptions = {
-    // Each of our Icon modules use the "./Icon.js" path to import this base
-    // componnet
-    './Icon.js': await fs.readFile(
-      path.resolve(__dirname, './components/Icon.js'),
+    // Each Icon module uses the "./Icon.tsx" path to import this base component
+    // Babel transforms the .tsx extension to .js
+    './Icon.tsx': await fs.readFile(
+      path.resolve(__dirname, './components/Icon.tsx'),
       'utf8'
     ),
     './iconPropTypes.js': `
@@ -179,10 +182,12 @@ async function builder(metadata, { output }) {
     {
       directory: path.join(output, 'es'),
       format: 'esm',
+      tsModuleKind: ts.ModuleKind.ESNext,
     },
     {
       directory: path.join(output, 'lib'),
       format: 'commonjs',
+      tsModuleKind: ts.ModuleKind.CommonJS,
     },
   ];
 
@@ -194,6 +199,9 @@ async function builder(metadata, { output }) {
       banner: templates.banner,
       exports: 'auto',
     });
+
+    // write TypeScript definition files
+    writeTsDefinitions(modules, buckets, target.tsModuleKind, target.directory);
   }
 }
 
@@ -206,7 +214,7 @@ async function builder(metadata, { output }) {
  *
  * ```jsx
  * import React from 'react';
- * import Icon from './Icon.js';
+ * import Icon from './Icon.tsx';
  *
  * const ComponentName = React.forwardRef(
  *   function ComponentName({ children, size = 32, ... rest}, ref) {
@@ -230,7 +238,7 @@ function createIconEntrypoint(moduleName, source, isDeprecated = false) {
   const statements = [
     // Import statements
     template.ast(`import React from 'react';`),
-    template.ast(`import Icon from './Icon.js';`),
+    template.ast(`import Icon from './Icon.tsx';`),
     template.ast(`import { iconPropTypes } from './iconPropTypes.js';`),
   ];
 

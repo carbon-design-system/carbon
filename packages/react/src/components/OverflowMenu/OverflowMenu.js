@@ -21,6 +21,7 @@ import { PrefixContext } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { IconButton } from '../IconButton';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { noopFn } from '../../internal/noopFn';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -147,7 +148,7 @@ class OverflowMenu extends Component {
     /**
      * The icon description.
      */
-    iconDescription: PropTypes.string.isRequired,
+    iconDescription: PropTypes.string,
 
     /**
      * The element ID.
@@ -239,23 +240,6 @@ class OverflowMenu extends Component {
 
   static contextType = PrefixContext;
 
-  static defaultProps = {
-    ['aria-label']: null,
-    iconDescription: 'Options',
-    open: false,
-    direction: DIRECTION_BOTTOM,
-    flipped: false,
-    focusTrap: true,
-    renderIcon: OverflowMenuVertical,
-    onClick: () => {},
-    onKeyDown: () => {},
-    onClose: () => {},
-    onOpen: () => {},
-    menuOffset: getMenuOffset,
-    menuOffsetFlip: getMenuOffset,
-    selectorPrimaryFocus: '[data-overflow-menu-primary-focus]',
-  };
-
   /**
    * The handle of `onfocusin` or `focus` event handler.
    * @private
@@ -276,7 +260,7 @@ class OverflowMenu extends Component {
   _triggerRef = React.createRef();
 
   componentDidUpdate(_, prevState) {
-    const { onClose } = this.props;
+    const { onClose = noopFn } = this.props;
     if (!this.state.open && prevState.open) {
       onClose();
     }
@@ -308,10 +292,11 @@ class OverflowMenu extends Component {
   }
 
   handleClick = (evt) => {
+    const { onClick = noopFn } = this.props;
     evt.stopPropagation();
     if (!this._menuBody || !this._menuBody.contains(evt.target)) {
       this.setState({ open: !this.state.open });
-      this.props.onClick(evt);
+      onClick(evt);
     }
   };
 
@@ -356,12 +341,13 @@ class OverflowMenu extends Component {
   };
 
   closeMenu = (onCloseMenu) => {
+    const { onClose = noopFn } = this.props;
     this.setState({ open: false }, () => {
       // Optional callback to be executed after the state as been set to close
       if (onCloseMenu) {
         onCloseMenu();
       }
-      this.props.onClose();
+      onClose();
     });
   };
 
@@ -428,6 +414,7 @@ class OverflowMenu extends Component {
    * @private
    */
   _handlePlace = (menuBody) => {
+    const { onOpen = noopFn } = this.props;
     if (menuBody) {
       this._menuBody = menuBody;
       const hasFocusin = 'onfocusin' in window;
@@ -452,7 +439,7 @@ class OverflowMenu extends Component {
         },
         !hasFocusin
       );
-      this.props.onOpen();
+      onOpen();
     }
   };
 
@@ -471,20 +458,20 @@ class OverflowMenu extends Component {
     const prefix = this.context;
     const {
       id,
-      ['aria-label']: ariaLabel,
+      ['aria-label']: ariaLabel = null,
       ariaLabel: deprecatedAriaLabel,
       children,
-      iconDescription,
-      direction,
-      flipped,
-      focusTrap,
-      menuOffset,
-      menuOffsetFlip,
+      iconDescription = 'Options',
+      direction = DIRECTION_BOTTOM,
+      flipped = false,
+      focusTrap = true,
+      menuOffset = getMenuOffset,
+      menuOffsetFlip = getMenuOffset,
       iconClass,
-      onClick, // eslint-disable-line
-      onOpen, // eslint-disable-line
+      onClick = noopFn, // eslint-disable-line
+      onOpen = noopFn, // eslint-disable-line
       selectorPrimaryFocus = '[data-floating-menu-primary-focus]', // eslint-disable-line
-      renderIcon: IconElement,
+      renderIcon: IconElement = OverflowMenuVertical,
       // eslint-disable-next-line react/prop-types
       innerRef: ref,
       menuOptionsClass,
@@ -493,7 +480,7 @@ class OverflowMenu extends Component {
       ...other
     } = this.props;
 
-    const { open } = this.state;
+    const { open = false } = this.state;
 
     const overflowMenuClasses = classNames(
       this.props.className,
@@ -578,7 +565,7 @@ class OverflowMenu extends Component {
             {...other}
             type="button"
             aria-haspopup
-            aria-expanded={this.state.open}
+            aria-expanded={open}
             aria-controls={open ? menuBodyId : null}
             className={overflowMenuClasses}
             onClick={this.handleClick}
