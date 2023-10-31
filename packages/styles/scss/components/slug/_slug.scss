@@ -1,0 +1,346 @@
+@use '../../config' as *;
+@use '../../colors' as *;
+@use '../../motion' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/convert';
+
+$sizes: (
+  mini: (
+    height: convert.to-rem(16px),
+    width: convert.to-rem(16px),
+    font-size: convert.to-rem(9px),
+    line-height: convert.to-rem(12px),
+    background: $slug-background,
+  ),
+  2xs: (
+    height: convert.to-rem(20px),
+    width: convert.to-rem(20px),
+    font-size: convert.to-rem(12px),
+    line-height: convert.to-rem(16px),
+    background: $slug-background,
+  ),
+  xs: (
+    height: convert.to-rem(24px),
+    width: convert.to-rem(24px),
+    font-size: convert.to-rem(12px),
+    line-height: convert.to-rem(16px),
+    background: $slug-gradient,
+  ),
+  sm: (
+    height: convert.to-rem(32px),
+    width: convert.to-rem(32px),
+    font-size: convert.to-rem(16px),
+    line-height: convert.to-rem(21px),
+    background: $slug-gradient,
+  ),
+  md: (
+    height: convert.to-rem(40px),
+    width: convert.to-rem(40px),
+    font-size: convert.to-rem(16px),
+    line-height: convert.to-rem(21px),
+    background: $slug-gradient,
+  ),
+  lg: (
+    height: convert.to-rem(48px),
+    width: convert.to-rem(48px),
+    font-size: convert.to-rem(16px),
+    line-height: convert.to-rem(21px),
+    background: $slug-gradient,
+  ),
+  xl: (
+    height: convert.to-rem(64px),
+    width: convert.to-rem(64px),
+    font-size: convert.to-rem(20px),
+    line-height: convert.to-rem(26px),
+    background: $slug-gradient,
+  ),
+);
+
+/// Slug styles
+/// @access public
+/// @group slider
+@mixin slug {
+  .#{$prefix}--slug {
+    display: flex;
+  }
+
+  .#{$prefix}--slug .#{$prefix}--slug__button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-inverse;
+    font-weight: 600;
+    transition: color $duration-fast-01 motion(entrance, productive),
+      border-color $duration-fast-01 motion(entrance, productive),
+      box-shadow $duration-fast-01 motion(entrance, productive);
+
+    @each $group, $size in $sizes {
+      // Create a class for each size slug
+      &--#{$group} {
+        @each $property, $value in $size {
+          // Set correct properties for each size
+          #{$property}: $value;
+        }
+      }
+    }
+  }
+
+  .#{$prefix}--slug .#{$prefix}--slug__button:focus {
+    box-shadow: inset 0 0 0 2px $focus, inset 0 0 0 3px $focus-inset;
+    outline: none;
+  }
+
+  .#{$prefix}--slug__text {
+    position: relative;
+    z-index: 1;
+  }
+
+  // pseudo element to animate the hover transition
+  .#{$prefix}--slug__button::before {
+    position: absolute;
+    background: $slug-gradient-hover;
+    block-size: 100%;
+    content: '';
+    inline-size: 100%;
+    opacity: 0;
+    transition: opacity $duration-fast-01 motion(entrance, productive);
+  }
+
+  .#{$prefix}--slug__button:hover::before {
+    opacity: 1;
+  }
+
+  // Focus styles
+  .#{$prefix}--slug .#{$prefix}--slug__button:focus::before {
+    block-size: calc(100% - 6px);
+    inline-size: calc(100% - 6px);
+  }
+
+  .#{$prefix}--slug__button.#{$prefix}--slug__button--mini::before,
+  .#{$prefix}--slug__button.#{$prefix}--slug__button--2xs::before {
+    background: $slug-background-hover;
+  }
+
+  .#{$prefix}--slug__button.#{$prefix}--slug__button--mini:focus,
+  .#{$prefix}--slug__button.#{$prefix}--slug__button--2xs:focus {
+    box-shadow: inset 0 0 0 1px $focus, inset 0 0 0 2px $focus-inset;
+  }
+
+  .#{$prefix}--slug__button.#{$prefix}--slug__button--mini:focus::before,
+  .#{$prefix}--slug__button.#{$prefix}--slug__button--2xs:focus::before {
+    block-size: calc(100% - 4px);
+    inline-size: calc(100% - 4px);
+  }
+
+  // Hollow slug
+  // Only allow mini, 2xs, and xs sizes
+  .#{$prefix}--slug__button--hollow.#{$prefix}--slug__button--sm,
+  .#{$prefix}--slug__button--hollow.#{$prefix}--slug__button--md,
+  .#{$prefix}--slug__button--hollow.#{$prefix}--slug__button--lg,
+  .#{$prefix}--slug__button--hollow.#{$prefix}--slug__button--xl {
+    block-size: convert.to-rem(24px);
+    font-size: convert.to-rem(12px);
+    inline-size: convert.to-rem(24px);
+    line-height: convert.to-rem(16px);
+  }
+
+  .#{$prefix}--slug__button--hollow::before {
+    display: none;
+  }
+
+  .#{$prefix}--slug .#{$prefix}--slug__button--hollow {
+    border: 1px solid $border-inverse;
+    background: transparent;
+    color: $text-primary;
+  }
+
+  .#{$prefix}--slug__button--hollow:hover {
+    border-color: $slug-hollow-hover;
+    color: $slug-hollow-hover;
+  }
+
+  .#{$prefix}--slug__button--hollow:focus {
+    border-color: $focus;
+    box-shadow: inset 0 0 0 1px $focus;
+  }
+
+  // Inline slug
+  .#{$prefix}--slug .#{$prefix}--slug__button--inline {
+    border: 1px solid transparent;
+    border-radius: convert.to-rem(1px);
+    background: transparent;
+    block-size: initial;
+    color: $text-primary;
+    font-size: convert.to-rem(14px);
+    inline-size: initial;
+    line-height: initial;
+    padding-inline: convert.to-rem(4px);
+  }
+
+  .#{$prefix}--slug__button--inline::before {
+    display: none;
+  }
+
+  .#{$prefix}--slug .#{$prefix}--slug__button--inline:focus {
+    border-color: $focus;
+    box-shadow: none;
+  }
+
+  .#{$prefix}--slug .#{$prefix}--slug__button--inline:hover {
+    border-color: $icon-secondary;
+    color: $text-secondary;
+  }
+
+  .#{$prefix}--slug .#{$prefix}--slug__button--inline:focus:hover {
+    border-color: $focus;
+  }
+
+  .#{$prefix}--slug
+    .#{$prefix}--slug__button--inline:hover
+    .#{$prefix}--slug__text::before {
+    background: $icon-secondary;
+  }
+
+  .#{$prefix}--slug--hollow
+    .#{$prefix}--slug__button--inline:hover
+    .#{$prefix}--slug__text::before {
+    background: transparent;
+    box-shadow: inset 0 0 0 1px $icon-secondary;
+  }
+
+  .#{$prefix}--slug__button--inline .#{$prefix}--slug__text {
+    padding-inline-start: convert.to-rem(8px);
+  }
+
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--lg
+    .#{$prefix}--slug__text {
+    padding-inline-start: convert.to-rem(12px);
+  }
+
+  .#{$prefix}--slug__button--inline .#{$prefix}--slug__text::before {
+    position: absolute;
+    display: inline-block;
+    background: $icon-primary;
+    block-size: convert.to-rem(4px);
+    content: '';
+    inline-size: convert.to-rem(4px);
+    inset-block-start: 50%;
+    inset-inline-start: 0;
+    opacity: 1;
+    transform: translateY(-50%);
+    transition: background $duration-fast-01 motion(entrance, productive),
+      box-shadow $duration-fast-01 motion(entrance, productive);
+  }
+
+  // Inline slug hollow dot
+  .#{$prefix}--slug--hollow .#{$prefix}--slug__text::before {
+    background: transparent;
+    block-size: convert.to-rem(6px);
+    box-shadow: inset 0 0 0 1px $icon-primary;
+    inline-size: convert.to-rem(6px);
+  }
+
+  .#{$prefix}--slug--hollow
+    .#{$prefix}--slug__button--sm
+    .#{$prefix}--slug__text,
+  .#{$prefix}--slug--hollow
+    .#{$prefix}--slug__button--md
+    .#{$prefix}--slug__text {
+    padding-inline-start: convert.to-rem(9px);
+  }
+
+  .#{$prefix}--slug__button--lg .#{$prefix}--slug__text::before,
+  .#{$prefix}--slug--hollow
+    .#{$prefix}--slug__button--lg
+    .#{$prefix}--slug__text::before {
+    block-size: convert.to-rem(8px);
+    inline-size: convert.to-rem(8px);
+  }
+
+  // Only allow sm, md, and lg sizes
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--mini,
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--mini
+    .#{$prefix}--slug__additional-text,
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--2xs,
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--2xs
+    .#{$prefix}--slug__additional-text,
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--xs,
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--xs
+    .#{$prefix}--slug__additional-text,
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--sm,
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--sm
+    .#{$prefix}--slug__additional-text {
+    font-size: convert.to-rem(12px);
+  }
+
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--lg,
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--xl {
+    font-size: convert.to-rem(16px);
+  }
+
+  // Inline slug with text
+  .#{$prefix}--slug .#{$prefix}--slug__button--inline-with-content {
+    border: 1px solid $border-inverse;
+    padding-block: convert.to-rem(2px);
+    padding-inline: convert.to-rem(8px);
+  }
+
+  .#{$prefix}--slug__button--inline-with-content
+    .#{$prefix}--slug__additional-text {
+    @include type-style('body-compact-02');
+
+    padding-inline-start: convert.to-rem(4px);
+  }
+
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--md
+    .#{$prefix}--slug__additional-text {
+    font-size: convert.to-rem(14px);
+  }
+
+  .#{$prefix}--slug .#{$prefix}--slug__button--inline-with-content:focus {
+    box-shadow: inset 0 0 0 1px $focus;
+  }
+
+  // Default callout styles
+  .#{$prefix}--slug.#{$prefix}--slug--hollow .#{$prefix}--toggletip-content {
+    row-gap: 0;
+  }
+
+  // Slug callout styles
+  .#{$prefix}--slug.#{$prefix}--slug--enabled .#{$prefix}--popover-content {
+    border: 1px solid $border-subtle;
+    border-radius: 16px;
+    // 84px seems to make this fully opaque?
+    backdrop-filter: blur(25px);
+    background: linear-gradient(
+        0deg,
+        $slug-callout-aura-start 0%,
+        $slug-callout-aura-end 33%,
+        transparent 100%
+      ),
+      linear-gradient(
+          180deg,
+          $slug-callout-gradient-top 0%,
+          $slug-callout-gradient-bottom 100%
+        )
+        rgba(0, 0, 0, 0.01);
+    // box-shadow seems to match the spec better
+    // than the same values plugged into `drop-shadow`
+    // filter: drop-shadow(-45px 45px 100px rgba(0, 0, 0, 0.2));
+    box-shadow: -45px 45px 100px rgba(0, 0, 0, 0.2);
+    color: $text-primary;
+    min-inline-size: convert.to-rem(280px);
+  }
+
+  .#{$prefix}--slug.#{$prefix}--slug--enabled .#{$prefix}--popover-caret {
+    background: $border-subtle;
+  }
+
+  .#{$prefix}--slug.#{$prefix}--slug--enabled .#{$prefix}--toggletip-content {
+    padding-block-end: convert.to-rem(80px);
+    padding-block-start: convert.to-rem(32px);
+    padding-inline: convert.to-rem(32px);
+  }
+}
