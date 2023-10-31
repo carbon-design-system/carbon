@@ -21,8 +21,168 @@ import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
+import { ReactAttr } from '../../types/common';
 
 const getInstanceId = setupGetInstanceId();
+
+export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
+
+export type ModalSize = (typeof ModalSizes)[number];
+
+export interface ModalSecondaryButton {
+  buttonText?: string;
+
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+export interface ModalProps extends ReactAttr<HTMLDivElement> {
+  /**
+   * Specify whether the Modal is displaying an alert, error or warning
+   * Should go hand in hand with the danger prop.
+   */
+  alert?: boolean;
+
+  /**
+   * Required props for the accessibility label of the header
+   */
+  'aria-label'?: string;
+
+  /**
+   * Provide the contents of your Modal
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Specify an optional className to be applied to the modal root node
+   */
+  className?: string;
+
+  /**
+   * Specify an label for the close button of the modal; defaults to close
+   */
+  closeButtonLabel?: string;
+
+  /**
+   * Specify whether the Modal is for dangerous actions
+   */
+  danger?: boolean;
+
+  /**
+   * Specify whether the modal contains scrolling content
+   */
+  hasScrollingContent?: boolean;
+
+  /**
+   * Specify the DOM element ID of the top-level node.
+   */
+  id?: string;
+
+  /**
+   * Specify whether or not the Modal content should have any inner padding.
+   */
+  isFullWidth?: boolean;
+
+  /**
+   * Provide a ref to return focus to once the modal is closed.
+   */
+  launcherButtonRef?: any; // TODO FIXME
+
+  /**
+   * Specify a label to be read by screen readers on the modal root node
+   */
+  modalAriaLabel?: string;
+
+  /**
+   * Specify the content of the modal header title.
+   */
+  modalHeading?: React.ReactNode;
+
+  /**
+   * Specify the content of the modal header label.
+   */
+  modalLabel?: React.ReactNode;
+
+  /**
+   * Specify a handler for keypresses.
+   * @deprecated this property is unused
+   */
+  onKeyDown?: React.KeyboardEventHandler<HTMLElement>;
+
+  /**
+   * Specify a handler for closing modal.
+   * The handler should care of closing modal, e.g. changing `open` prop.
+   */
+  onRequestClose?: React.ReactEventHandler<HTMLElement>;
+
+  /**
+   * Specify a handler for "submitting" modal.
+   * The handler should care of closing modal, e.g. changing `open` prop, if necessary.
+   */
+  onRequestSubmit?: React.ReactEventHandler<HTMLElement>;
+
+  /**
+   * Specify a handler for the secondary button.
+   * Useful if separate handler from `onRequestClose` is desirable
+   */
+  onSecondarySubmit?: React.ReactEventHandler<HTMLElement>;
+
+  /**
+   * Specify whether the Modal is currently open
+   */
+  open?: boolean;
+
+  /**
+   * Specify whether the modal should be button-less
+   */
+  passiveModal?: boolean;
+
+  /**
+   * Prevent closing on click outside of modal
+   */
+  preventCloseOnClickOutside?: boolean;
+
+  /**
+   * Specify whether the Button should be disabled, or not
+   */
+  primaryButtonDisabled?: boolean;
+
+  /**
+   * Specify the text for the primary button
+   */
+  primaryButtonText?: React.ReactNode;
+
+  /**
+   * Specify the text for the secondary button
+   */
+  secondaryButtonText?: React.ReactNode;
+
+  /**
+   * Specify an array of config objects for secondary buttons
+   */
+  secondaryButtons?: ModalSecondaryButton[];
+
+  /**
+   * Specify a CSS selector that matches the DOM element that should
+   * be focused when the Modal opens
+   */
+  selectorPrimaryFocus?: string;
+
+  /**
+   * Specify CSS selectors that match DOM elements working as floating menus.
+   * Focusing on those elements won't trigger "focus-wrap" behavior
+   */
+  selectorsFloatingMenus?: string[];
+
+  /**
+   * Specify if Enter key should be used as "submit" action
+   */
+  shouldSubmitOnEnter?: boolean;
+
+  /**
+   * Specify the size variant.
+   */
+  size?: ModalSize;
+}
 
 const Modal = React.forwardRef(function Modal(
   {
@@ -53,29 +213,29 @@ const Modal = React.forwardRef(function Modal(
     isFullWidth,
     launcherButtonRef,
     ...rest
-  },
-  ref
+  }: ModalProps,
+  ref: React.LegacyRef<HTMLDivElement>
 ) {
   const prefix = usePrefix();
-  const button = useRef();
+  const button = useRef<HTMLButtonElement>(null);
   const secondaryButton = useRef();
-  const innerModal = useRef();
-  const startTrap = useRef();
-  const endTrap = useRef();
+  const innerModal = useRef<HTMLDivElement>(null);
+  const startTrap = useRef<HTMLSpanElement>(null);
+  const endTrap = useRef<HTMLSpanElement>(null);
   const modalInstanceId = `modal-${getInstanceId()}`;
   const modalLabelId = `${prefix}--modal-header__label--${modalInstanceId}`;
   const modalHeadingId = `${prefix}--modal-header__heading--${modalInstanceId}`;
   const modalBodyId = `${prefix}--modal-body--${modalInstanceId}`;
   const modalCloseButtonClass = `${prefix}--modal-close`;
 
-  function isCloseButton(element) {
+  function isCloseButton(element: Element) {
     return (
       (!onSecondarySubmit && element === secondaryButton.current) ||
       element.classList.contains(modalCloseButtonClass)
     );
   }
 
-  function handleKeyDown(evt) {
+  function handleKeyDown(evt: React.KeyboardEvent<HTMLDivElement>) {
     if (open) {
       if (match(evt, keys.Escape)) {
         onRequestClose(evt);
@@ -83,18 +243,19 @@ const Modal = React.forwardRef(function Modal(
       if (
         match(evt, keys.Enter) &&
         shouldSubmitOnEnter &&
-        !isCloseButton(evt.target)
+        !isCloseButton(evt.target as Element)
       ) {
         onRequestSubmit(evt);
       }
     }
   }
 
-  function handleMousedown(evt) {
+  function handleMousedown(evt: React.MouseEvent<HTMLDivElement>) {
+    const target = evt.target as Node;
     if (
       innerModal.current &&
-      !innerModal.current.contains(evt.target) &&
-      !elementOrParentIsFloatingMenu(evt.target, selectorsFloatingMenus) &&
+      !innerModal.current.contains(target) &&
+      !elementOrParentIsFloatingMenu(target, selectorsFloatingMenus) &&
       !preventCloseOnClickOutside
     ) {
       onRequestClose(evt);
@@ -104,7 +265,7 @@ const Modal = React.forwardRef(function Modal(
   function handleBlur({
     target: oldActiveNode,
     relatedTarget: currentActiveNode,
-  }) {
+  }: React.FocusEvent<HTMLDivElement>) {
     if (open && currentActiveNode && oldActiveNode) {
       const { current: bodyNode } = innerModal;
       const { current: startTrapNode } = startTrap;
@@ -124,12 +285,15 @@ const Modal = React.forwardRef(function Modal(
     ? onSecondarySubmit
     : onRequestClose;
 
-  const modalClasses = classNames(`${prefix}--modal`, {
-    [`${prefix}--modal-tall`]: !passiveModal,
-    'is-visible': open,
-    [`${prefix}--modal--danger`]: danger,
-    [className]: className,
-  });
+  const modalClasses = classNames(
+    `${prefix}--modal`,
+    {
+      [`${prefix}--modal-tall`]: !passiveModal,
+      'is-visible': open,
+      [`${prefix}--modal--danger`]: danger,
+    },
+    className
+  );
 
   const containerClasses = classNames(`${prefix}--modal-container`, {
     [`${prefix}--modal-container--${size}`]: size,
@@ -145,8 +309,13 @@ const Modal = React.forwardRef(function Modal(
       Array.isArray(secondaryButtons) && secondaryButtons.length === 2,
   });
 
+  const asStringOrUndefined = (node: React.ReactNode): string | undefined => {
+    return typeof node === 'string' ? node : undefined;
+  };
+  const modalLabelStr = asStringOrUndefined(modalLabel);
+  const modalHeadingStr = asStringOrUndefined(modalHeading);
   const ariaLabel =
-    modalLabel || ariaLabelProp || modalAriaLabel || modalHeading;
+    modalLabelStr || ariaLabelProp || modalAriaLabel || modalHeadingStr;
   const getAriaLabelledBy = modalLabel ? modalLabelId : modalHeadingId;
 
   const hasScrollingContentProps = hasScrollingContent
@@ -158,7 +327,7 @@ const Modal = React.forwardRef(function Modal(
       }
     : {};
 
-  const alertDialogProps = {};
+  const alertDialogProps: ReactAttr<HTMLDivElement> = {};
   if (alert && passiveModal) {
     alertDialogProps.role = 'alert';
   }
@@ -174,7 +343,11 @@ const Modal = React.forwardRef(function Modal(
   }, [prefix]);
 
   useEffect(() => {
-    toggleClass(document.body, `${prefix}--body--with-modal-open`, open);
+    toggleClass(
+      document.body,
+      `${prefix}--body--with-modal-open`,
+      open ?? false
+    );
   }, [open, prefix]);
 
   useEffect(() => {
@@ -186,10 +359,10 @@ const Modal = React.forwardRef(function Modal(
   }, [open, launcherButtonRef]);
 
   useEffect(() => {
-    const initialFocus = (focusContainerElement) => {
+    const initialFocus = (focusContainerElement: HTMLElement | null) => {
       const containerElement = focusContainerElement || innerModal.current;
       const primaryFocusElement = containerElement
-        ? containerElement.querySelector(
+        ? containerElement.querySelector<HTMLElement | SVGElement>(
             danger ? `.${prefix}--btn--secondary` : selectorPrimaryFocus
           )
         : null;
@@ -201,9 +374,9 @@ const Modal = React.forwardRef(function Modal(
       return button && button.current;
     };
 
-    const focusButton = (focusContainerElement) => {
+    const focusButton = (focusContainerElement: HTMLElement | null) => {
       const target = initialFocus(focusContainerElement);
-      if (target) {
+      if (target !== null) {
         target.focus();
       }
     };
@@ -238,7 +411,7 @@ const Modal = React.forwardRef(function Modal(
       className={containerClasses}
       aria-label={ariaLabel}
       aria-modal="true"
-      tabIndex="-1">
+      tabIndex={-1}>
       <div className={`${prefix}--modal-header`}>
         {passiveModal && modalButton}
         {modalLabel && (
@@ -311,7 +484,7 @@ const Modal = React.forwardRef(function Modal(
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
       <span
         ref={startTrap}
-        tabIndex="0"
+        tabIndex={0}
         role="link"
         className={`${prefix}--visually-hidden`}>
         Focus sentinel
@@ -320,7 +493,7 @@ const Modal = React.forwardRef(function Modal(
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
       <span
         ref={endTrap}
-        tabIndex="0"
+        tabIndex={0}
         role="link"
         className={`${prefix}--visually-hidden`}>
         Focus sentinel
@@ -503,7 +676,7 @@ Modal.propTypes = {
    * Specify CSS selectors that match DOM elements working as floating menus.
    * Focusing on those elements won't trigger "focus-wrap" behavior
    */
-  selectorsFloatingMenus: PropTypes.arrayOf(PropTypes.string),
+  selectorsFloatingMenus: PropTypes.arrayOf(PropTypes.string.isRequired),
 
   /**
    * Specify if Enter key should be used as "submit" action
@@ -513,7 +686,7 @@ Modal.propTypes = {
   /**
    * Specify the size variant.
    */
-  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
+  size: PropTypes.oneOf(ModalSizes),
 };
 
 export default Modal;

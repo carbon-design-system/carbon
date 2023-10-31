@@ -82,6 +82,7 @@ function useToggletip() {
 interface ToggletipProps<E extends ElementType> {
   align?: PopoverAlignment | undefined;
   as?: E | undefined;
+  autoAlign?: boolean | undefined;
   className?: string | undefined;
   children?: ReactNode;
   defaultOpen?: boolean | undefined;
@@ -95,6 +96,7 @@ interface ToggletipProps<E extends ElementType> {
 export function Toggletip<E extends ElementType = 'span'>({
   align,
   as,
+  autoAlign,
   className: customClassName,
   children,
   defaultOpen = false,
@@ -173,7 +175,8 @@ export function Toggletip<E extends ElementType = 'span'>({
         open={open}
         onKeyDown={onKeyDown}
         onBlur={handleBlur}
-        ref={ref}>
+        ref={ref}
+        autoAlign={autoAlign}>
         {children}
       </Popover>
     </ToggletipContext.Provider>
@@ -207,6 +210,11 @@ Toggletip.propTypes = {
    * component.
    */
   as: PropTypes.elementType,
+
+  /**
+   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   */
+  autoAlign: PropTypes.bool,
 
   /**
    * Custom children to be rendered as the content of the label
