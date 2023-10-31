@@ -155,6 +155,7 @@
   .#{$prefix}--modal-container {
     position: fixed;
     display: grid;
+    overflow: hidden;
     background-color: $layer;
     block-size: 100%;
     grid-template-columns: 100%;

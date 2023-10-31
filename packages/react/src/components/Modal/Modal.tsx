@@ -397,6 +397,7 @@ const Modal = React.forwardRef(function Modal(
         onClick={onRequestClose}
         title={closeButtonText}
         aria-label={closeButtonText}
+        align="left"
         ref={button}>
         <Close
           size={20}
