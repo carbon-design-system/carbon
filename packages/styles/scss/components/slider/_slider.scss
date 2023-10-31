@@ -146,7 +146,7 @@
       block-size: convert.to-rem(2px);
       content: '';
       inline-size: convert.to-rem(6px);
-      inset-block-start: calc(50% - #{convert.to-rem(2px) / 2});
+      inset-block-start: calc(50% - #{convert.to-rem(2px) * 0.5});
       inset-inline-end: 0;
     }
 
