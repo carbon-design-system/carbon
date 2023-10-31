@@ -1948,6 +1948,7 @@ Map {
       },
     },
     "TableExpandRow": Object {
+      "$$typeof": Symbol(react.forward_ref),
       "propTypes": Object {
         "aria-controls": Object {
           "type": "string",
@@ -1982,6 +1983,7 @@ Map {
           "type": "func",
         },
       },
+      "render": [Function],
     },
     "TableExpandedRow": Object {
       "propTypes": Object {
@@ -7560,6 +7562,7 @@ Map {
     },
   },
   "TableExpandRow" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "aria-controls": Object {
         "type": "string",
@@ -7594,6 +7597,7 @@ Map {
         "type": "func",
       },
     },
+    "render": [Function],
   },
   "TableExpandedRow" => Object {
     "propTypes": Object {
