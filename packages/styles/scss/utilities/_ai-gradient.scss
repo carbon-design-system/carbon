@@ -1,0 +1,29 @@
+//
+// Copyright IBM Corp. 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../theme';
+
+/// Adds AI gradient styles to a component
+/// @access public
+/// @param {String} $direction  - Direction of gradient from: `left`, `right`, `top`, and `bottom`
+/// @param {Number} $width - Percentage width of gradient with regards to parent component
+/// @example @include focus-outline('outline');
+/// @group utilities
+
+@mixin ai-gradient($direction: 'left', $width: 33%) {
+  // background-image: linear-gradient(90deg, rgba(#262626, 0.2), 80%, rgba(#d0e2ff, 0.2));
+  background-image: linear-gradient(
+    to #{$direction},
+    rgba(#d0e2ff, 0.5) 0%,
+    rgba(#ffffff, 0) $width,
+    transparent 100%
+  );
+}
+
+// $slug-callout-aura-start 0%,
+// $slug-callout-aura-end 33%,
+// transparent 100%

@@ -1,0 +1,21 @@
+@use '../../../../styles/scss/utilities/ai-gradient' as *;
+
+.gradient-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.gradient-container > * {
+  @include ai-gradient('left');
+  margin: 0 0.5rem;
+}
+
+.gradient-container > .cds--tile {
+  min-height: 250px;
+  min-width: 150px;
+}
+
+.gradient-container .cds--text-input {
+  @include ai-gradient('left');
+}
