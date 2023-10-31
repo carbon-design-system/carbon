@@ -1314,6 +1314,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Tresau-IBM",
+      "name": "Tresau-IBM",
+      "avatar_url": "https://avatars.githubusercontent.com/u/148357638?v=4",
+      "profile": "https://github.com/Tresau-IBM",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

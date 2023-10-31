@@ -261,6 +261,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/Nirajsah"><img src="https://avatars.githubusercontent.com/u/51414373?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Niraj Sah</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Nirajsah" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/allisonishida"><img src="https://avatars.githubusercontent.com/u/22247062?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Allison Ishida</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=allisonishida" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/alewitt2"><img src="https://avatars.githubusercontent.com/u/48691328?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alex Lewitt</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=alewitt2" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/Tresau-IBM"><img src="https://avatars.githubusercontent.com/u/148357638?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tresau-IBM</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Tresau-IBM" title="Code">💻</a></td>
   </tr>
 </table>
 
