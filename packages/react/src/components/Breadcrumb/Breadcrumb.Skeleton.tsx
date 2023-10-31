@@ -10,6 +10,14 @@ import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
+export interface BreadcrumbSkeletonProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Specify an optional className to add.
+   */
+  className?: string;
+}
+
 function Item() {
   const prefix = usePrefix();
 
@@ -20,7 +28,7 @@ function Item() {
   );
 }
 
-function BreadcrumbSkeleton({ className, ...rest }) {
+function BreadcrumbSkeleton({ className, ...rest }: BreadcrumbSkeletonProps) {
   const prefix = usePrefix();
   const classes = cx(`${prefix}--breadcrumb`, `${prefix}--skeleton`, className);
 
