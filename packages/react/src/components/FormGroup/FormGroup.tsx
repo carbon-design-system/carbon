@@ -47,11 +47,11 @@ export interface FormGroupProps extends ReactAttr<HTMLFieldSetElement> {
 const FormGroup = ({
   legendId,
   legendText,
-  invalid,
+  invalid = false,
   children,
   className,
-  message,
-  messageText,
+  message = false,
+  messageText = '',
   ...rest
 }: FormGroupProps) => {
   const prefix = usePrefix();
@@ -113,12 +113,6 @@ FormGroup.propTypes = {
    * Provide the text for the message in the <FormGroup>
    */
   messageText: PropTypes.string,
-};
-
-FormGroup.defaultProps = {
-  invalid: false,
-  message: false,
-  messageText: '',
 };
 
 export default FormGroup;
