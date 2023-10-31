@@ -89,6 +89,21 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   launcherButtonRef?: any; // TODO FIXME
 
   /**
+   * Specify the description for the loading text
+   */
+  loadingDescription?: string;
+
+  /**
+   * Specify the description for the loading text
+   */
+  loadingIconDescription?: string;
+
+  /**
+   * Specify loading status
+   */
+  loadingStatus?: string;
+
+  /**
    * Specify a label to be read by screen readers on the modal root node
    */
   modalAriaLabel?: string;
@@ -108,6 +123,12 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
    * @deprecated this property is unused
    */
   onKeyDown?: React.KeyboardEventHandler<HTMLElement>;
+
+  /**
+   * Specify an optional handler to be invoked when loading is
+   * successful
+   */
+  onLoadingSuccess?: React.ReactEventHandler<HTMLElement>;
 
   /**
    * Specify a handler for closing modal.
