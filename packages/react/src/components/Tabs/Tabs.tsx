@@ -903,11 +903,7 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
             {<Icon size={16} />}
           </div>
         )}
-        <Text
-          className={`${prefix}--tabs__nav-item-label`}
-          title={children as string}>
-          {children}
-        </Text>
+        <Text className={`${prefix}--tabs__nav-item-label`}>{children}</Text>
         {/* always rendering dismissIcon so we don't lose reference to it, otherwise events do not work when switching from/to dismissable state */}
         <div
           className={cx(`${prefix}--tabs__nav-item--icon`, {
