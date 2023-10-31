@@ -1054,6 +1054,9 @@ Map {
   "ComboBox" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "allowCustomValue": Object {
+        "type": "bool",
+      },
       "aria-label": Object {
         "type": "string",
       },
@@ -1945,6 +1948,7 @@ Map {
       },
     },
     "TableExpandRow": Object {
+      "$$typeof": Symbol(react.forward_ref),
       "propTypes": Object {
         "aria-controls": Object {
           "type": "string",
@@ -1979,6 +1983,7 @@ Map {
           "type": "func",
         },
       },
+      "render": [Function],
     },
     "TableExpandedRow": Object {
       "propTypes": Object {
@@ -7563,6 +7568,7 @@ Map {
     },
   },
   "TableExpandRow" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "aria-controls": Object {
         "type": "string",
@@ -7597,6 +7603,7 @@ Map {
         "type": "func",
       },
     },
+    "render": [Function],
   },
   "TableExpandedRow" => Object {
     "propTypes": Object {
@@ -8787,6 +8794,9 @@ Map {
       "as": Object {
         "type": "elementType",
       },
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
@@ -8892,6 +8902,7 @@ Map {
     },
   },
   "TreeNode" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "active": Object {
         "args": Array [
@@ -8971,9 +8982,11 @@ Map {
         "type": "string",
       },
     },
+    "render": [Function],
   },
   "TreeView" => Object {
     "TreeNode": Object {
+      "$$typeof": Symbol(react.forward_ref),
       "propTypes": Object {
         "active": Object {
           "args": Array [
@@ -9053,6 +9066,7 @@ Map {
           "type": "string",
         },
       },
+      "render": [Function],
     },
     "propTypes": Object {
       "active": Object {
