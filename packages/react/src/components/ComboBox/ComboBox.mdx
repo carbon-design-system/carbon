@@ -21,6 +21,7 @@ import ComboBox from '../ComboBox';
 - [itemToElement](#itemtoelement)
 - [itemToString](#itemtostring)
 - [shouldFilterItem](#shouldfilteritem)
+- [allowCustomValue](#allowcustomvalue)
 - [With Layer](#with-layer)
 - [Feedback](#feedback)
 
@@ -145,6 +146,19 @@ const filterItems = (menu) => {
   items={['Apple', 'Orange', 'Banana']}
   shouldFilterItem={filterItems}
 />;
+```
+
+## `allowCustomValue`
+
+By default, if text is entered into the `Combobox` and it does not match an
+item, it will be cleared on blur. However, you can change this behavior by
+passing in the `allowCustomValue` prop. This will allow a user to close the menu
+and accept a custom value by pressing `Enter` as well as retain the value on
+blur. The `inputValue` is provided as a second argument to the `onChange`
+callback.
+
+```js
+{selectedItem: undefined, inputValue: 'Apple'}
 ```
 
 ## With Layer
