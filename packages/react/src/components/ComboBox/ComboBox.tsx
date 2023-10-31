@@ -55,6 +55,7 @@ const {
   clickButton,
   blurButton,
   changeInput,
+  blurInput,
 } = Downshift.stateChangeTypes;
 
 const defaultItemToString = <ItemType,>(item: ItemType | null) => {
@@ -127,13 +128,20 @@ const getInstanceId = setupGetInstanceId();
 type ExcludedAttributes = 'id' | 'onChange' | 'onClick' | 'type' | 'size';
 
 interface OnChangeData<ItemType> {
-  selectedItem: ItemType | null;
+  selectedItem: ItemType | null | undefined;
+  inputValue?: string | null;
 }
 
 type ItemToStringHandler<ItemType> = (item: ItemType | null) => string;
 
 export interface ComboBoxProps<ItemType>
   extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes> {
+  /**
+   * Specify whether or not the ComboBox should allow a value that is
+   * not in the list to be entered in the input
+   */
+  allowCustomValue?: boolean;
+
   /**
    * Specify a label to be read by screen readers on the container node
    * 'aria-label' of the ListBox component.
@@ -329,6 +337,7 @@ const ComboBox = forwardRef(
       translateWithId,
       warn,
       warnText,
+      allowCustomValue = false,
       ...rest
     } = props;
     const prefix = usePrefix();
@@ -446,6 +455,14 @@ const ComboBox = forwardRef(
           break;
         case changeInput:
           updateHighlightedIndex(getHighlightedIndex(changes));
+          break;
+        case blurInput:
+          if (allowCustomValue) {
+            setInputValue(inputValue);
+            if (onChange) {
+              onChange({ selectedItem, inputValue });
+            }
+          }
           break;
       }
     };
@@ -571,8 +588,18 @@ const ComboBox = forwardRef(
                 event.stopPropagation();
               }
 
-              if (match(event, keys.Enter) && !inputValue) {
+              if (
+                match(event, keys.Enter) &&
+                (!inputValue || allowCustomValue)
+              ) {
                 toggleMenu();
+
+                // Since `onChange` does not normally fire when the menu is closed, we should
+                // manually fire it when `allowCustomValue` is provided, the menu is closing,
+                // and there is a value.
+                if (allowCustomValue && isOpen && inputValue) {
+                  onChange({ selectedItem, inputValue });
+                }
               }
 
               if (match(event, keys.Escape) && inputValue) {
@@ -744,6 +771,12 @@ const ComboBox = forwardRef(
 
 ComboBox.displayName = 'ComboBox';
 ComboBox.propTypes = {
+  /**
+   * Specify whether or not the ComboBox should allow a value that is
+   * not in the list to be entered in the input
+   */
+  allowCustomValue: PropTypes.bool,
+
   /**
    * 'aria-label' of the ListBox component.
    * Specify a label to be read by screen readers on the container node

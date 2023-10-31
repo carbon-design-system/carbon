@@ -56,7 +56,7 @@ export interface ContentSwitcherProps
   /**
    * Choose whether or not to automatically change selection on focus
    */
-  selectionMode: 'automatic' | 'manual';
+  selectionMode?: 'automatic' | 'manual';
 
   /**
    * Specify the size of the Content Switcher. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
