@@ -309,7 +309,7 @@ $sizes: (
   }
 
   // Slug callout styles
-  .#{$prefix}--slug.#{$prefix}--slug--enabled .#{$prefix}--popover-content {
+  .#{$prefix}--slug.#{$prefix}--slug--enabled .#{$prefix}--slug-content {
     border: 1px solid $border-subtle;
     border-radius: 16px;
     // 84px seems to make this fully opaque?
@@ -334,13 +334,44 @@ $sizes: (
     min-inline-size: convert.to-rem(280px);
   }
 
-  .#{$prefix}--slug.#{$prefix}--slug--enabled .#{$prefix}--popover-caret {
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
     background: $border-subtle;
   }
 
   .#{$prefix}--slug.#{$prefix}--slug--enabled .#{$prefix}--toggletip-content {
+    // This sets the max size to the size of the action bar with 3 buttons
+    max-inline-size: convert.to-rem(334px);
     padding-block-end: convert.to-rem(80px);
     padding-block-start: convert.to-rem(32px);
     padding-inline: convert.to-rem(32px);
+  }
+
+  .#{$prefix}--slug.#{$prefix}--slug--enabled .#{$prefix}--slug-actions {
+    position: absolute;
+    justify-content: flex-end;
+    background: $layer-accent;
+    border-end-end-radius: convert.to-rem(15px);
+    border-end-start-radius: convert.to-rem(15px);
+    column-gap: 0;
+    inline-size: 100%;
+    inset-block-end: 0;
+    inset-inline-end: 0;
+  }
+
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    .#{$prefix}--slug-actions
+    .#{$prefix}--btn:focus {
+    border-color: $focus;
+    box-shadow: inset 0 0 0 1px $focus, inset 0 0 0 2px $background;
+  }
+
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    .#{$prefix}--slug-actions
+    .#{$prefix}--btn--primary {
+    order: 1;
+    border-end-end-radius: convert.to-rem(16px);
   }
 }

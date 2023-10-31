@@ -101,6 +101,21 @@ describe('ComboBox', () => {
     });
   });
 
+  it('should retain value if custom value is entered and `allowCustomValue` is set', async () => {
+    render(<ComboBox {...mockProps} allowCustomValue />);
+
+    expect(findInputNode()).toHaveDisplayValue('');
+
+    await userEvent.type(findInputNode(), 'Apple');
+    // Should close menu and keep value in input, even though it is not in the item list
+    await userEvent.keyboard('[Enter]');
+    assertMenuClosed();
+    expect(findInputNode()).toHaveDisplayValue('Apple');
+    // Should retain value on blur
+    await userEvent.keyboard('[Tab]');
+    expect(findInputNode()).toHaveDisplayValue('Apple');
+  });
+
   describe('should display initially selected item found in `initialSelectedItem`', () => {
     it('using an object type for the `initialSelectedItem` prop', () => {
       render(
