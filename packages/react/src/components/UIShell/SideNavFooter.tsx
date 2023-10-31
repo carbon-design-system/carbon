@@ -13,9 +13,23 @@ import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
 
 export interface SideNavFooterProps {
+  /**
+   * Provide text to be read to screen readers and shown as a tooltip when
+   * interacting with the toggle button in the footer
+   */
   assistiveText: string;
+
   className?: string;
+
+  /**
+   * Specify whether the side navigation is expanded or collapsed
+   */
   expanded: boolean;
+
+  /**
+   * Provide a function that is called when the toggle button is interacted
+   * with. Useful for controlling the expansion state of the side navigation.
+   */
   onToggle: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
