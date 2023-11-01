@@ -14,7 +14,7 @@
 /// @example @include focus-outline('outline');
 /// @group utilities
 
-@mixin ai-gradient($direction: 'left', $width: 50%) {
+@mixin ai-gradient($direction: 'right', $width: 50%) {
   $deg: 0;
   @if $direction == 'bottom' {
     $deg: 0deg;
