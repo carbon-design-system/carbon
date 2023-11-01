@@ -354,6 +354,9 @@ export const ai = TokenGroup.create({
     'slug-callout-gradient-bottom',
     'slug-callout-aura-start',
     'slug-callout-aura-end',
+    'ai-gradient-start-layer-one',
+    'ai-gradient-start-layer-two',
+    'ai-gradient-end',
   ],
 });
 

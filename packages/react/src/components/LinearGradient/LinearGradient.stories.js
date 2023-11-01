@@ -18,18 +18,18 @@ export default {
 export const Demo = () => (
   <>
     <div className="gradient-container">
-      <Tile>Default tile</Tile>
-      <Tile>Default tile</Tile>
-      <Tile>Default tile</Tile>
-      <Tile>Default tile</Tile>
+      <Tile className="top">Top</Tile>
+      <Tile className="right">Right</Tile>
+      <Tile className="bottom">Bottom</Tile>
+      <Tile className="left">Left</Tile>
     </div>
     <br />
     <br />
     <div className="gradient-container">
-      <TextInput />
-      <TextInput />
-      <TextInput />
-      <TextInput />
+      <TextInput labelText="Full width" className="full-width" />
+      <TextInput labelText="Half width" className="half-width" />
+      <TextInput labelText="Third width" className="third-width" />
+      <TextInput labelText="Quarter width" className="quarter-width" />
     </div>
   </>
 );

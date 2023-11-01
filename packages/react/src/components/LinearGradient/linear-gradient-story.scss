@@ -7,7 +7,6 @@
 }
 
 .gradient-container > * {
-  @include ai-gradient('left');
   margin: 0 0.5rem;
 }
 
@@ -16,6 +15,34 @@
   min-width: 150px;
 }
 
-.gradient-container .cds--text-input {
+.top {
+  @include ai-gradient('top');
+}
+
+.right {
+  @include ai-gradient('right');
+}
+
+.bottom {
+  @include ai-gradient('bottom');
+}
+
+.left {
   @include ai-gradient('left');
+}
+
+.full-width .cds--text-input {
+  @include ai-gradient('right', 100%);
+}
+
+.half-width .cds--text-input {
+  @include ai-gradient('right', 50%);
+}
+
+.third-width .cds--text-input {
+  @include ai-gradient('right', 33%);
+}
+
+.quarter-width .cds--text-input {
+  @include ai-gradient('right', 25%);
 }

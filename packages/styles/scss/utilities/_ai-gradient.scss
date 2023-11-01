@@ -14,16 +14,28 @@
 /// @example @include focus-outline('outline');
 /// @group utilities
 
-@mixin ai-gradient($direction: 'left', $width: 33%) {
-  // background-image: linear-gradient(90deg, rgba(#262626, 0.2), 80%, rgba(#d0e2ff, 0.2));
-  background-image: linear-gradient(
-    to #{$direction},
-    rgba(#d0e2ff, 0.5) 0%,
-    rgba(#ffffff, 0) $width,
-    transparent 100%
-  );
-}
+@mixin ai-gradient($direction: 'left', $width: 50%) {
+  $deg: 0;
+  @if $direction == 'bottom' {
+    $deg: 0deg;
+  } @else if $direction == 'left' {
+    $deg: 90deg;
+  } @else if $direction == 'top' {
+    $deg: 180deg;
+  } @else if $direction == 'right' {
+    $deg: 270deg;
+  }
 
-// $slug-callout-aura-start 0%,
-// $slug-callout-aura-end 33%,
-// transparent 100%
+  background-image: linear-gradient(
+      $deg,
+      theme.$ai-gradient-start-layer-one 0%,
+      theme.$ai-gradient-end $width,
+      transparent 100%
+    ),
+    linear-gradient(
+      $deg,
+      theme.$ai-gradient-start-layer-two 0%,
+      theme.$ai-gradient-end $width,
+      transparent 100%
+    );
+}
