@@ -1,7 +1,7 @@
 {
   "name": "@carbon/elements",
   "description": "A collection of design elements in code for the IBM Design Language",
-  "version": "11.32.1",
+  "version": "11.32.2",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -38,7 +38,7 @@
   "dependencies": {
     "@carbon/colors": "^11.20.1",
     "@carbon/grid": "^11.21.1",
-    "@carbon/icons": "^11.29.1",
+    "@carbon/icons": "^11.29.2",
     "@carbon/layout": "^11.20.1",
     "@carbon/motion": "^11.16.1",
     "@carbon/themes": "^11.26.1",
