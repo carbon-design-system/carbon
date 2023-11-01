@@ -1973,13 +1973,13 @@ __metadata:
     "@babel/types": ^7.18.4
     "@carbon/cli-reporter": ^10.7.0
     "@carbon/icon-helpers": ^10.45.0
+    "@hapi/joi": ^14.4.0
     "@rollup/plugin-babel": ^6.0.0
     "@rollup/plugin-replace": ^5.0.0
     browserslist-config-carbon: ^11.2.0
     change-case: ^4.1.1
     core-js: ^3.16.0
     fs-extra: ^11.0.0
-    joi: ^14.3.1
     js-yaml: ^3.12.1
     klaw-sync: ^6.0.0
     memfs: ^4.0.0
@@ -3505,6 +3505,48 @@ __metadata:
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
   checksum: 4059f790e2d07bf3c3ff3e0fec0daa8144fe35c1f6e0111c9921bd32106adaa97a4ab096ad7dab1e28ee6a9060083c4d1a4ada42a7f5f3f7a96b8812e2b757c1
+  languageName: node
+  linkType: hard
+
+"@hapi/hoek@npm:6.x.x":
+  version: 6.2.4
+  resolution: "@hapi/hoek@npm:6.2.4"
+  checksum: 17e6e687509c20d3730dfb14b05536024d50253e96fcd0c7a4df8247e3a30568a8028b59208173f3e63dbab3eb6b71f07eff06b234dd5c2bd773d254af769e37
+  languageName: node
+  linkType: hard
+
+"@hapi/hoek@npm:^8.3.0":
+  version: 8.5.1
+  resolution: "@hapi/hoek@npm:8.5.1"
+  checksum: 8f8ce36be4f5e5d7a712072d4a028a4a95beec7a7da3a7a6e9a0c07d697f04c19b37d93751db352c314ea831f7e2120569a035dc6a351ed8c0444f1d3b275621
+  languageName: node
+  linkType: hard
+
+"@hapi/joi@npm:^14.4.0":
+  version: 14.5.0
+  resolution: "@hapi/joi@npm:14.5.0"
+  dependencies:
+    "@hapi/hoek": 6.x.x
+    "@hapi/marker": 1.x.x
+    "@hapi/topo": 3.x.x
+    isemail: 3.x.x
+  checksum: b8dca70268c4ae228f7e2c12b7e2057c51163e582e43c55a12ef7d7d9bf34616a2232ddfac488f8a99710501c93fce59cdbf3508d137f4d5f6c1441aa9597bab
+  languageName: node
+  linkType: hard
+
+"@hapi/marker@npm:1.x.x":
+  version: 1.0.0
+  resolution: "@hapi/marker@npm:1.0.0"
+  checksum: 33c8e1ce6a14486d8880d828ef4f43629327199f7d384f79b24a11bb9916700e41ed2bf932111bf4238efbe4c8b322bab87f54f8c957c1ac4aaab89713dbda8d
+  languageName: node
+  linkType: hard
+
+"@hapi/topo@npm:3.x.x":
+  version: 3.1.6
+  resolution: "@hapi/topo@npm:3.1.6"
+  dependencies:
+    "@hapi/hoek": ^8.3.0
+  checksum: 34278bc13b4023d6d0d7c913605a254b2d728dc6489cd465269eebaa7d8d2d81cda3f2157398dca87d3cb9e1a8aa8a1158ce2564c71a8e289b807c144e3b4c1e
   languageName: node
   linkType: hard
 
@@ -16876,13 +16918,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hoek@npm:6.x.x":
-  version: 6.1.3
-  resolution: "hoek@npm:6.1.3"
-  checksum: d0af183df1b710290de440142d3650268ab2402c0f6cc28de044fc806a78ea5b91ed763ccffc2306204c1191724e80610c11dc4d7c259af55ad87ff9613abfec
-  languageName: node
-  linkType: hard
-
 "hoist-non-react-statics@npm:^3.3.0, hoist-non-react-statics@npm:^3.3.1":
   version: 3.3.2
   resolution: "hoist-non-react-statics@npm:3.3.2"
@@ -19718,17 +19753,6 @@ __metadata:
   bin:
     jest: bin/jest.js
   checksum: f025164c408cf5ddb6e74dac1e8cbaf94c1c31dd1c67aba4ceee5989b2d8a77886db8ed1fb88853b45cf194b14cd802b454bbbe6b278a1e2140250297dc100d3
-  languageName: node
-  linkType: hard
-
-"joi@npm:^14.3.1":
-  version: 14.3.1
-  resolution: "joi@npm:14.3.1"
-  dependencies:
-    hoek: 6.x.x
-    isemail: 3.x.x
-    topo: 3.x.x
-  checksum: 2ae5b54c4f425ed26e1ac937940fb21e8d71a4c3cbaf99d895319d3f99b119fddabc663a4b32926c3911a5c017c1dc5953adc7b43db4d0410d522d717bd80c8d
   languageName: node
   linkType: hard
 
@@ -30119,15 +30143,6 @@ __metadata:
   version: 2.3.6
   resolution: "toml@npm:2.3.6"
   checksum: e1be1ec9dad3049459d0c81e5b7b40ce8356ca5fc27d23cab101551447e22af7fe6d903d19162389ffd50cb3ff4e986374992d4c293da84166fa6307c7c1b5cf
-  languageName: node
-  linkType: hard
-
-"topo@npm:3.x.x":
-  version: 3.0.3
-  resolution: "topo@npm:3.0.3"
-  dependencies:
-    hoek: 6.x.x
-  checksum: 13e874d5dfa16ad94d1a714830dfa34e8cd1a3769ecdf7c0b2b10ec42d636f1d910dd37df546ee2f1990cd4b0083611a4dad59596a5a7ddc20960a9b95839d8d
   languageName: node
   linkType: hard
 
