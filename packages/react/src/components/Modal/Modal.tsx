@@ -209,7 +209,7 @@ const Modal = React.forwardRef(function Modal(
     shouldSubmitOnEnter,
     size,
     hasScrollingContent = false,
-    closeButtonLabel,
+    closeButtonLabel = 'Close',
     preventCloseOnClickOutside = false,
     isFullWidth,
     launcherButtonRef,
@@ -319,8 +319,6 @@ const Modal = React.forwardRef(function Modal(
     modalLabelStr || ariaLabelProp || modalAriaLabel || modalHeadingStr;
   const getAriaLabelledBy = modalLabel ? modalLabelId : modalHeadingId;
 
-  const closeButtonText = closeButtonLabel ? closeButtonLabel : 'close';
-
   const hasScrollingContentProps = hasScrollingContent
     ? {
         tabIndex: 0,
@@ -393,10 +391,10 @@ const Modal = React.forwardRef(function Modal(
     <div className={`${prefix}--modal-close-button`}>
       <IconButton
         className={modalCloseButtonClass}
-        label={closeButtonText}
+        label={closeButtonLabel}
         onClick={onRequestClose}
-        title={closeButtonText}
-        aria-label={closeButtonText}
+        title={closeButtonLabel}
+        aria-label={closeButtonLabel}
         align="left"
         ref={button}>
         <Close
