@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.34.0-rc.1](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.33.0-rc.1...@carbon/web-components@1.34.0-rc.1) (2023-11-02)
+
+
+### Bug Fixes
+
+* **language-selector:** remove internal decorator ([#11069](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11069)) ([d61199d](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/d61199d5c9e03671aa08f9a0b774f470900dfd0c)), closes [#10885](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10885)
+* **link-with-icon:** refactor LINK_SIZE enum ([#11071](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11071)) ([cf570e1](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/cf570e15079f8fc58c8b2600848d0c1a87e9b065))
+* **ui-shell:** a11y issue with side nav item ([#11044](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11044)) ([9eb94ea](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/9eb94ea097dcf9610a72900468008373cfec3bbe)), closes [#10918](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10918)
+
+
+
+
+
 # [1.34.0-rc.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.33.0-rc.1...@carbon/web-components@1.34.0-rc.0) (2023-10-30)
 
 
