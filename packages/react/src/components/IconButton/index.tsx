@@ -7,7 +7,7 @@
 
 import PropTypes, { ReactNodeLike } from 'prop-types';
 import React, { ForwardedRef } from 'react';
-import Button from '../Button';
+import Button, { ButtonSize, ButtonKind } from '../Button';
 import classNames from 'classnames';
 import { Tooltip } from '../Tooltip';
 import { usePrefix } from '../../internal/usePrefix';
@@ -67,7 +67,10 @@ interface IconButtonProps
   /**
    * Specify the type of button to be used as the base for the IconButton
    */
-  kind?: 'primary' | 'secondary' | 'ghost' | 'tertiary';
+  kind?: Omit<
+    ButtonKind,
+    'danger' | 'danger--primary' | 'danger--ghost' | 'danger--tertiary'
+  >;
 
   /**
    * Provide the label to be rendered inside of the Tooltip. The label will use
@@ -85,7 +88,7 @@ interface IconButtonProps
   /**
    * Specify the size of the Button. Defaults to `md`.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: ButtonSize;
 
   /**
    * Specify an optional className to be added to your Tooltip wrapper
