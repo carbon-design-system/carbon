@@ -18,6 +18,7 @@ import deprecate from '../../prop-types/deprecate';
 import { FeatureFlagContext } from '../FeatureFlags';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { Text } from '../Text';
+import { Tooltip } from '../Tooltip';
 
 const LowerHandle = () => (
   <PrefixContext.Consumer>
@@ -565,13 +566,9 @@ class Slider extends PureComponent<SliderProps> {
     // if the value is different from the last one
     if (this.hasTwoHandles()) {
       if (this.thumbRef.current) {
-        this.thumbRef.current.style.insetInlineStart = `${this.state.left}%`;
         if (this.state.isRtl) {
           this.thumbRef.current.style.transform = `translate(100%, -50%)`;
         }
-      }
-      if (this.thumbRefUpper.current) {
-        this.thumbRefUpper.current.style.insetInlineStart = `${this.state.leftUpper}%`;
       }
       if (this.filledTrackRef.current) {
         this.filledTrackRef.current.style.transform = this.state.isRtl
@@ -1413,6 +1410,24 @@ class Slider extends PureComponent<SliderProps> {
           const upperThumbClasses = classNames(`${prefix}--slider__thumb`, {
             [`${prefix}--slider__thumb--upper`]: twoHandles,
           });
+          const lowerThumbWrapperClasses = classNames(
+            `${prefix}--slider__thumb-wrapper`,
+            {
+              [`${prefix}--slider__thumb-wrapper--lower`]: twoHandles,
+            }
+          );
+          const upperThumbWrapperClasses = classNames(
+            `${prefix}--slider__thumb-wrapper`,
+            {
+              [`${prefix}--slider__thumb-wrapper--upper`]: twoHandles,
+            }
+          );
+          const lowerThumbWrapperProps = {
+            style: { insetInlineStart: `${this.state.left}%` },
+          };
+          const upperThumbWrapperProps = {
+            style: { insetInlineStart: `${this.state.leftUpper}%` },
+          };
 
           return (
             <div className={classNames(`${prefix}--form-item`, className)}>
@@ -1481,43 +1496,68 @@ class Slider extends PureComponent<SliderProps> {
                       : null
                   }
                   {...other}>
-                  <div
-                    className={lowerThumbClasses}
-                    role="slider"
-                    id={twoHandles ? undefined : id}
-                    tabIndex={!readOnly ? 0 : -1}
-                    aria-valuemax={twoHandles ? valueUpper : max}
-                    aria-valuemin={min}
-                    aria-valuenow={value}
-                    aria-labelledby={twoHandles ? undefined : labelId}
-                    aria-label={twoHandles ? ariaLabelInput : undefined}
-                    ref={this.thumbRef}
-                    onFocus={() =>
-                      this.setState({ activeHandle: HandlePosition.LOWER })
-                    }>
-                    {twoHandles && !isRtl && <LowerHandle />}
-                    {twoHandles && !isRtl && <LowerHandleFocus />}
-                    {twoHandles && isRtl && <UpperHandle />}
-                    {twoHandles && isRtl && <UpperHandleFocus />}
-                  </div>
-                  {twoHandles ? (
+                  <Tooltip
+                    className={lowerThumbWrapperClasses}
+                    label={`${value}`}
+                    align="top"
+                    defaultOpen={true}
+                    {...lowerThumbWrapperProps}>
                     <div
-                      className={upperThumbClasses}
+                      className={lowerThumbClasses}
                       role="slider"
+                      id={twoHandles ? undefined : id}
                       tabIndex={!readOnly ? 0 : -1}
-                      aria-valuemax={max}
-                      aria-valuemin={value}
-                      aria-valuenow={valueUpper}
-                      aria-label={ariaLabelInputUpper}
-                      ref={this.thumbRefUpper}
-                      onFocus={() =>
-                        this.setState({ activeHandle: HandlePosition.UPPER })
-                      }>
-                      {twoHandles && !isRtl && <UpperHandle />}
-                      {twoHandles && !isRtl && <UpperHandleFocus />}
-                      {twoHandles && isRtl && <LowerHandle />}
-                      {twoHandles && isRtl && <LowerHandleFocus />}
+                      aria-valuemax={twoHandles ? valueUpper : max}
+                      aria-valuemin={min}
+                      aria-valuenow={value}
+                      aria-labelledby={twoHandles ? undefined : labelId}
+                      aria-label={twoHandles ? ariaLabelInput : undefined}
+                      ref={this.thumbRef}>
+                      {twoHandles && !isRtl ? (
+                        <>
+                          <LowerHandle />
+                          <LowerHandleFocus />
+                        </>
+                      ) : twoHandles && isRtl ? (
+                        <>
+                          <UpperHandle />
+                          <UpperHandleFocus />
+                        </>
+                      ) : undefined}
                     </div>
+                  </Tooltip>
+                  {twoHandles ? (
+                    <Tooltip
+                      className={upperThumbWrapperClasses}
+                      label={`${valueUpper}`}
+                      align="top"
+                      defaultOpen={true}
+                      {...upperThumbWrapperProps}>
+                      <div
+                        className={upperThumbClasses}
+                        role="slider"
+                        tabIndex={!readOnly ? 0 : -1}
+                        aria-valuemax={max}
+                        aria-valuemin={value}
+                        aria-valuenow={valueUpper}
+                        aria-label={ariaLabelInputUpper}
+                        ref={this.thumbRefUpper}
+                        onFocus={() =>
+                          this.setState({ activeHandle: HandlePosition.UPPER })
+                        }>
+                        {twoHandles && !isRtl ? (
+                          <>
+                            <UpperHandle />
+                            <UpperHandleFocus />
+                          </>
+                        ) : twoHandles && isRtl ? (
+                          <>
+                            <LowerHandle />
+                            <LowerHandleFocus />
+                          </>
+                        ) : undefined}
+                      </div>
+                    </Tooltip>
                   ) : null}
                   <div
                     className={`${prefix}--slider__track`}
