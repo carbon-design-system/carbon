@@ -89,7 +89,7 @@ const SideNavMenu = React.forwardRef<HTMLElement, SideNavMenuProps>(
     const className = cx({
       [`${prefix}--side-nav__item`]: true,
       [`${prefix}--side-nav__item--active`]:
-        isActive || (hasActiveChild(children) && !isExpanded),
+        isActive || (hasActiveDescendant(children) && !isExpanded),
       [`${prefix}--side-nav__item--icon`]: IconElement,
       [`${prefix}--side-nav__item--large`]: large,
       [customClassName as string]: !!customClassName,
@@ -200,7 +200,7 @@ SideNavMenu.propTypes = {
 Defining the children parameter with the type ReactNode | ReactNode[]. This allows for various possibilities:
 a single element, an array of elements, or null or undefined.
 **/
-function hasActiveChild(children: ReactNode | ReactNode[]): boolean {
+function hasActiveDescendant(children: ReactNode | ReactNode[]): boolean {
   if (Array.isArray(children)) {
     return children.some((child) => {
       if (!React.isValidElement(child)) {
@@ -213,9 +213,14 @@ function hasActiveChild(children: ReactNode | ReactNode[]): boolean {
       const props = child.props as {
         isActive?: boolean;
         'aria-current'?: string;
+        children: ReactNode | ReactNode[];
       };
 
-      if (props.isActive === true || props['aria-current']) {
+      if (
+        props.isActive === true ||
+        props['aria-current'] ||
+        (props.children instanceof Array && hasActiveDescendant(props.children))
+      ) {
         return true;
       }
 
