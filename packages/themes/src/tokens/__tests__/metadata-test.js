@@ -962,6 +962,18 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "ai-gradient-start-layer-one",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-gradient-start-layer-two",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-gradient-end",
+          "type": "color",
+        },
+        Object {
           "name": "highlight",
           "type": "color",
         },
