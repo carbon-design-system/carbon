@@ -414,6 +414,29 @@
     border-block-end-color: $border-subtle;
   }
 
+  // Styles for Slug rendered inside TextInput
+  .#{$prefix}--text-input__field-wrapper .#{$prefix}--slug {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: convert.to-rem(8px);
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--text-input__field-wrapper--slug .#{$prefix}--text-input {
+    background-image: linear-gradient(
+        to left,
+        rgba(242, 244, 248, 0.5) 0%,
+        rgba(#ffffff, 0) 33%,
+        transparent 100%
+      ),
+      linear-gradient(
+        to left,
+        rgba(237, 245, 255, 0.5) 0%,
+        rgba(#ffffff, 0) 33%,
+        transparent 100%
+      );
+  }
+
   // Windows HCM fix
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
     svg,

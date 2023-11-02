@@ -164,6 +164,7 @@ const TextInput = React.forwardRef(function TextInput(
     warnText,
     enableCounter = false,
     maxCount,
+    slug,
     ...rest
   }: TextInputProps,
   ref
@@ -251,6 +252,7 @@ const TextInput = React.forwardRef(function TextInput(
     `${prefix}--text-input__field-wrapper`,
     {
       [`${prefix}--text-input__field-wrapper--warning`]: normalizedProps.warn,
+      [`${prefix}--text-input__field-wrapper--slug`]: slug,
     }
   );
   const iconClasses = classNames({
@@ -322,6 +324,7 @@ const TextInput = React.forwardRef(function TextInput(
           data-invalid={normalizedProps.invalid || null}>
           {Icon && <Icon className={iconClasses} />}
           {input}
+          {slug}
           <span className={`${prefix}--text-input__counter-alert`} role="alert">
             {ariaAnnouncement}
           </span>
