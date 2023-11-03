@@ -337,7 +337,7 @@ export interface ToastNotificationProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Specify what state the notification represents
    */
-  kind:
+  kind?:
     | 'error'
     | 'info'
     | 'info-square'
@@ -358,13 +358,13 @@ export interface ToastNotificationProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Provide a function that is called when the close button is clicked
    */
-  onCloseButtonClick(event: MouseEvent): void;
+  onCloseButtonClick?(event: MouseEvent): void;
 
   /**
    * By default, this value is "status". You can also provide an alternate
    * role if it makes sense from the accessibility-side
    */
-  role: 'alert' | 'log' | 'status';
+  role?: 'alert' | 'log' | 'status';
 
   /**
    * Provide a description for "status" icon that can be read by screen readers
@@ -613,7 +613,7 @@ export interface InlineNotificationProps
   /**
    * Specify what state the notification represents
    */
-  kind:
+  kind?:
     | 'error'
     | 'info'
     | 'info-square'
@@ -634,13 +634,13 @@ export interface InlineNotificationProps
   /**
    * Provide a function that is called when the close button is clicked
    */
-  onCloseButtonClick(event: MouseEvent): void;
+  onCloseButtonClick?(event: MouseEvent): void;
 
   /**
    * By default, this value is "status". You can also provide an alternate
    * role if it makes sense from the accessibility-side.
    */
-  role: 'alert' | 'log' | 'status';
+  role?: 'alert' | 'log' | 'status';
 
   /**
    * Provide a description for "status" icon that can be read by screen readers
@@ -860,7 +860,7 @@ export interface ActionableNotificationProps
   /**
    * Specify what state the notification represents
    */
-  kind:
+  kind?:
     | 'error'
     | 'info'
     | 'info-square'
@@ -887,7 +887,7 @@ export interface ActionableNotificationProps
   /**
    * Provide a function that is called when the close button is clicked
    */
-  onCloseButtonClick(event: MouseEvent): void;
+  onCloseButtonClick?(event: MouseEvent): void;
 
   /**
    * By default, this value is "alertdialog". You can also provide an alternate
