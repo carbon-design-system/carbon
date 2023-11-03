@@ -122,6 +122,11 @@ export interface TextInputProps
   size?: 'sm' | 'md' | 'lg' | 'xl';
 
   /**
+   * Provide a `Slug` component to be rendered inside the `TextInput` component
+   */
+  slug: ReactNode;
+
+  /**
    * Specify the type of the `<input>`
    */
   type?: string;
@@ -438,6 +443,11 @@ TextInput.propTypes = {
    * Specify the size of the Text Input. Currently supports the following:
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * Provide a `Slug` component to be rendered inside the `TextInput` component
+   */
+  slug: PropTypes.node,
 
   /**
    * Specify the type of the `<input>`
