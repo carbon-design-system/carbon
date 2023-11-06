@@ -14,6 +14,9 @@ import {
   blue60,
   blue70,
 
+  // CoolGray
+  coolGray10,
+
   // Gray
   gray10,
   gray10Hover,
@@ -214,8 +217,8 @@ export const slugCalloutGradientBottom = rgba(gray20, 0.85);
 export const slugCalloutAuraStart = rgba(blue10, 0.6);
 export const slugCalloutAuraEnd = rgba(white, 0);
 // Linear gradient tokens
-export const aiGradientStartLayerOne = 'rgba(242, 244, 248, 0.5)';
-export const aiGradientStartLayerTwo = 'rgba(237, 245, 255, 0.5)';
+export const aiGradientStart01 = rgba(coolGray10, 0.5);
+export const aiGradientStart02 = rgba(blue10, 0.5);
 export const aiGradientEnd = rgba(white, 0);
 
 export {

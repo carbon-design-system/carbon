@@ -28,13 +28,13 @@
 
   background-image: linear-gradient(
       $deg,
-      theme.$ai-gradient-start-layer-one 0%,
+      theme.$ai-gradient-start-01 0%,
       theme.$ai-gradient-end $width,
       transparent 100%
     ),
     linear-gradient(
       $deg,
-      theme.$ai-gradient-start-layer-two 0%,
+      theme.$ai-gradient-start-02 0%,
       theme.$ai-gradient-end $width,
       transparent 100%
     );

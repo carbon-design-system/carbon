@@ -222,8 +222,8 @@ export const slugCalloutGradientBottom = rgba(gray90, 0.85);
 export const slugCalloutAuraStart = rgba(blue20, 0.2);
 export const slugCalloutAuraEnd = rgba(gray100, 0);
 // Linear gradient tokens
-export const aiGradientStartLayerOne = 'rgba(208, 226, 255, 0.2)';
-export const aiGradientStartLayerTwo = 'transparent';
+export const aiGradientStart01 = rgba(blue20, 0.2);
+export const aiGradientStart02 = 'transparent';
 export const aiGradientEnd = 'rgba(38, 38, 38, 0)';
 
 export {
