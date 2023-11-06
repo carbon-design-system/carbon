@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -45,8 +45,8 @@ const buildModulesReact = ({ banner, targetEnv = 'browser' }) => {
         plugins: [
           ['@babel/plugin-syntax-decorators', { decoratorsBeforeExport: true }],
           '@babel/plugin-syntax-typescript',
-          '@babel/plugin-proposal-nullish-coalescing-operator',
-          '@babel/plugin-proposal-optional-chaining',
+          '@babel/plugin-transform-nullish-coalescing-operator',
+          '@babel/plugin-transform-optional-chaining',
           [babelPluginCreateReactCustomElementType, { nonUpgradable: targetEnv === 'node' }],
         ],
       })

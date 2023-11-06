@@ -23,7 +23,7 @@ $css--plex: true !default;
 
   .#{$prefix}-ce--pagination__divider {
     height: 100%;
-    width: rem(1px);
+    width: to-rem(1px);
     background-color: $layer-accent-01;
   }
 

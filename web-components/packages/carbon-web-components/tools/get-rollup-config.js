@@ -137,14 +137,14 @@ function getRollupConfig({
         presets: ['@babel/preset-modules'],
         plugins: [
           '@babel/plugin-transform-typescript',
-          '@babel/plugin-proposal-class-properties',
+          '@babel/plugin-transform-class-properties',
           [
             '@babel/plugin-proposal-decorators',
             { decoratorsBeforeExport: true },
           ],
-          '@babel/plugin-proposal-nullish-coalescing-operator',
-          ['@babel/plugin-proposal-object-rest-spread', { useBuiltIns: true }],
-          '@babel/plugin-proposal-optional-chaining',
+          '@babel/plugin-transform-nullish-coalescing-operator',
+          ['@babel/plugin-transform-object-rest-spread', { useBuiltIns: true }],
+          '@babel/plugin-transform-optional-chaining',
           ...(mode === 'development'
             ? []
             : [

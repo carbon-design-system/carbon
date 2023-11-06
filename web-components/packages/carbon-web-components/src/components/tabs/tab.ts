@@ -37,6 +37,21 @@ export default class CDSTab extends CDSContentSwitcherItem {
   @property({ reflect: true })
   type = TABS_TYPE.REGULAR;
 
+  /**
+   * The tab text content.
+   */
+  @property()
+  tabTitle;
+
+  /**
+   * Handles `slotchange` event.
+   */
+  protected _handleSlotChange({ target }: Event) {
+    // Retrieve content of the slot to use for aria-label.
+    let content = (target as HTMLSlotElement).assignedNodes();
+    this.tabTitle = content[0].textContent;
+  }
+
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'listitem');
@@ -45,16 +60,22 @@ export default class CDSTab extends CDSContentSwitcherItem {
   }
 
   render() {
-    const { disabled, selected } = this;
+    const {
+      disabled,
+      selected,
+      tabTitle,
+      _handleSlotChange: handleSlotChange,
+    } = this;
     // No `href`/`tabindex` to not to make this `<a>` click-focusable
     return html`
       <a
         class="${prefix}--tabs__nav-link"
         role="tab"
+        aria-label="${tabTitle}"
         tabindex="${selected ? 0 : -1}"
         ?disabled="${disabled}"
         aria-selected="${Boolean(selected)}">
-        <slot></slot>
+        <slot @slotchange="${handleSlotChange}"></slot>
       </a>
     `;
   }
