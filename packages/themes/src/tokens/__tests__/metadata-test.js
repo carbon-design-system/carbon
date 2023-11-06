@@ -962,11 +962,11 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
-          "name": "ai-gradient-start-layer-one",
+          "name": "ai-gradient-start-01",
           "type": "color",
         },
         Object {
-          "name": "ai-gradient-start-layer-two",
+          "name": "ai-gradient-start-02",
           "type": "color",
         },
         Object {
