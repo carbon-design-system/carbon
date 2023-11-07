@@ -20,10 +20,10 @@ import { useWindowEvent } from '../../internal/useEvent';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 
 interface HeaderPanelProps {
-  addFocusListeners: boolean;
-  children: ReactNode;
-  expanded: boolean;
-  href: string;
+  addFocusListeners?: boolean;
+  children?: ReactNode;
+  expanded?: boolean;
+  href?: string;
   'aria-label'?: string;
   'aria-labelledby'?: string;
   className?: string;
