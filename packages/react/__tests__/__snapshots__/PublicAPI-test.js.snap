@@ -7207,12 +7207,8 @@ Map {
   "SwitcherItem" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
-      "aria-label": Object {
-        "type": "string",
-      },
-      "aria-labelledby": Object {
-        "type": "string",
-      },
+      "aria-label": [Function],
+      "aria-labelledby": [Function],
       "children": Object {
         "isRequired": true,
         "type": "node",

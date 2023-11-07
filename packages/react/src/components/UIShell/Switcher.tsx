@@ -17,26 +17,34 @@ import { usePrefix } from '../../internal/usePrefix';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
+import getDisplayName from '../../prop-types/tools/getDisplayName';
 
-interface SwitcherProps {
-  /**
-   * Required props for accessibility label on the underlying menu
-   */
-  'aria-label'?: string;
-  'aria-labelledby'?: string;
-  /**
-   * Optionally provide a custom class to apply to the underlying `<ul>` node
-   */
-  className?: string;
+interface BaseSwitcherProps {
   /**
    * expects to receive <SwitcherItem />
    */
   children: ReactNode;
   /**
+   * Optionally provide a custom class to apply to the underlying `<ul>` node
+   */
+  className?: string;
+  /**
    * Specify whether the panel is expanded
    */
   expanded?: boolean;
 }
+
+interface SwitcherWithAriaLabel extends BaseSwitcherProps {
+  'aria-label': string;
+  'aria-labelledby'?: never;
+}
+
+interface SwitcherWithAriaLabelledBy extends BaseSwitcherProps {
+  'aria-label'?: never;
+  'aria-labelledby': string;
+}
+
+type SwitcherProps = SwitcherWithAriaLabel | SwitcherWithAriaLabelledBy;
 
 const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(function Switcher(
   props,
@@ -105,7 +113,8 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(function Switcher(
     // only setup click handlers if onChange event is passed
     if (
       React.isValidElement(child) &&
-      child.type?.toString() === 'SwitcherItem'
+      child.type &&
+      getDisplayName(child.type) === 'Switcher'
     ) {
       return React.cloneElement(child as React.ReactElement<any>, {
         handleSwitcherItemFocus,
@@ -133,7 +142,6 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(function Switcher(
 });
 
 Switcher.displayName = 'Switcher';
-
 Switcher.propTypes = {
   /**
    * Required props for accessibility label on the underlying menu

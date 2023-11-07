@@ -1,35 +1,20 @@
-import React, { ForwardedRef, ElementType, WeakValidationMap } from 'react';
+import React, { ElementType, forwardRef } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import Link, { LinkProps } from './Link';
+import Link from './Link';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
+import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
-export type SwitcherItemProps<E extends ElementType> = LinkProps<E> & {
-  /**
-   * Required props for accessibility label on the underlying item
-   */
-  'aria-label'?: string;
-  /**
-   * Required props for accessibility labelledby on the underlying item
-   */
-  'aria-labelledby'?: string;
-  /**
-   * Optionally provide a custom class to apply to the underlying `<li>` node
-   */
-  className?: string;
+interface BaseSwitcherItemProps {
   /**
    * Specify the text content for the link
    */
   children: React.ReactNode;
   /**
-   * Specify the tab index of the Link
+   * Optionally provide a custom class to apply to the underlying `<li>` node
    */
-  tabIndex?: number;
-  /**
-   * Specify the index of the SwitcherItem
-   */
-  index?: number;
+  className?: string;
   /**
    * event handlers
    */
@@ -38,22 +23,44 @@ export type SwitcherItemProps<E extends ElementType> = LinkProps<E> & {
     direction: number;
   }) => void;
   /**
+   * Specify the index of the SwitcherItem
+   */
+  index?: number;
+  /**
    * event handlers
    */
   onKeyDown?: (event: KeyboardEvent) => void;
-};
-
-export interface SwitcherItemComponent {
-  <E extends ElementType = 'a'>(
-    props: SwitcherItemProps<E> & { ref?: ForwardedRef<ElementType> }
-  ): JSX.Element | null;
-  displayName?: string;
-  propTypes?: WeakValidationMap<SwitcherItemProps<any>>;
+  /**
+   * Specify the tab index of the Link
+   */
+  tabIndex?: number;
+  /**
+   * Specify whether the panel is expanded
+   */
+  expanded?: boolean;
+  /**
+   * Specify whether the panel is selected
+   */
+  isSelected?: boolean;
 }
 
-const SwitcherItem: SwitcherItemComponent = React.forwardRef(
-  function SwitcherItemRenderFunction<E extends ElementType = 'a'>(
-    {
+interface SwitcherItemWithAriaLabel extends BaseSwitcherItemProps {
+  'aria-label': string;
+  'aria-labelledby'?: never;
+}
+
+interface SwitcherItemWithAriaLabelledBy extends BaseSwitcherItemProps {
+  'aria-label'?: never;
+  'aria-labelledby': string;
+}
+
+type SwitcherItemProps =
+  | SwitcherItemWithAriaLabel
+  | SwitcherItemWithAriaLabelledBy;
+
+const SwitcherItem = forwardRef<ElementType, SwitcherItemProps>(
+  function SwitcherItem(props, forwardRef) {
+    const {
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
       className: customClassName,
@@ -65,9 +72,8 @@ const SwitcherItem: SwitcherItemComponent = React.forwardRef(
       handleSwitcherItemFocus,
       onKeyDown = () => {},
       ...rest
-    }: SwitcherItemProps<E>,
-    ref: ForwardedRef<ElementType>
-  ) {
+    } = props;
+
     const prefix = usePrefix();
     const classNames = cx(`${prefix}--switcher__item`, {
       [customClassName || '']: !!customClassName,
@@ -106,7 +112,7 @@ const SwitcherItem: SwitcherItemComponent = React.forwardRef(
             setTabFocus(evt);
             onKeyDown(evt);
           }}
-          ref={ref}
+          ref={forwardRef}
           {...rest}
           className={linkClassName}
           tabIndex={tabIndex}
@@ -120,14 +126,7 @@ const SwitcherItem: SwitcherItemComponent = React.forwardRef(
 
 SwitcherItem.displayName = 'SwitcherItem';
 SwitcherItem.propTypes = {
-  /**
-   * Required props for accessibility label on the underlying item
-   */
-  'aria-label': PropTypes.string,
-  /**
-   * Required props for accessibility labelledby on the underlying item
-   */
-  'aria-labelledby': PropTypes.string,
+  ...AriaLabelPropType,
   /**
    * Specify the text content for the link
    */
