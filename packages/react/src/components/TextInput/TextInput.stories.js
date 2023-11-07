@@ -6,12 +6,8 @@
  */
 
 import React from 'react';
-import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import FluidForm from '../FluidForm';
-import { Button } from '../Button';
-import { IconButton } from '../IconButton';
-import { Slug, SlugContent, SlugActions } from '../Slug';
 import { default as TextInput, TextInputSkeleton } from '../TextInput';
 
 export default {
@@ -29,47 +25,6 @@ export default {
     },
   },
 };
-
-const slug = (
-  <Slug autoAlign size="xs">
-    <SlugContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-      <SlugActions>
-        <IconButton kind="ghost" label="View">
-          <View />
-        </IconButton>
-        <IconButton kind="ghost" label="Open Folder">
-          <FolderOpen />
-        </IconButton>
-        <IconButton kind="ghost" label="Folders">
-          <Folders />
-        </IconButton>
-        <Button>View literature</Button>
-      </SlugActions>
-    </SlugContent>
-  </Slug>
-);
-
-export const WithSlug = () => (
-  <TextInput
-    id="text-input-1"
-    type="text"
-    labelText="Text input label"
-    helperText="Optional help text"
-    slug={slug}
-  />
-);
 
 export const Default = () => (
   <TextInput

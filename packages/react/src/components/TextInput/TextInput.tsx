@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
+import PropTypes, { ReactNodeLike } from 'prop-types';
 import React, { ReactNode, useContext, useState } from 'react';
 import classNames from 'classnames';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
@@ -124,7 +124,7 @@ export interface TextInputProps
   /**
    * Provide a `Slug` component to be rendered inside the `TextInput` component
    */
-  slug: ReactNode;
+  slug?: ReactNodeLike;
 
   /**
    * Specify the type of the `<input>`
@@ -313,6 +313,14 @@ const TextInput = React.forwardRef(function TextInput(
   const ariaAnnouncement = useAnnouncer(textCount, maxCount);
   const Icon = normalizedProps.icon as any;
 
+  // Slug is always size `mini`
+  let normalizedSlug;
+  if (slug) {
+    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+      size: 'mini',
+    });
+  }
+
   return (
     <div className={inputWrapperClasses}>
       {!inline ? (
@@ -329,7 +337,7 @@ const TextInput = React.forwardRef(function TextInput(
           data-invalid={normalizedProps.invalid || null}>
           {Icon && <Icon className={iconClasses} />}
           {input}
-          {slug}
+          {normalizedSlug}
           <span className={`${prefix}--text-input__counter-alert`} role="alert">
             {ariaAnnouncement}
           </span>

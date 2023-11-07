@@ -80,7 +80,7 @@ export const Slug = React.forwardRef(function Slug(
     aiText = 'AI',
     aiTextLabel,
     align,
-    autoAlign = false,
+    autoAlign = true,
     className,
     dotType,
     kind,

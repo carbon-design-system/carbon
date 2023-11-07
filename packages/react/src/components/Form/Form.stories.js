@@ -20,6 +20,9 @@ import SelectItem from '../SelectItem';
 import TextArea from '../TextArea';
 import TextInput from '../TextInput';
 import { Stack } from '../Stack';
+import { IconButton } from '../IconButton';
+import { View, FolderOpen, Folders } from '@carbon/icons-react';
+import { Slug, SlugContent, SlugActions } from '../Slug';
 import mdx from './Form.mdx';
 
 const checkboxEvents = {
@@ -219,4 +222,45 @@ export const Default = () => (
       </Button>
     </Stack>
   </Form>
+);
+
+const slug = (
+  <Slug>
+    <SlugContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+      <SlugActions>
+        <IconButton kind="ghost" label="View">
+          <View />
+        </IconButton>
+        <IconButton kind="ghost" label="Open Folder">
+          <FolderOpen />
+        </IconButton>
+        <IconButton kind="ghost" label="Folders">
+          <Folders />
+        </IconButton>
+        <Button>View literature</Button>
+      </SlugActions>
+    </SlugContent>
+  </Slug>
+);
+
+export const _AIForm = () => (
+  <TextInput
+    id="text-input-1"
+    type="text"
+    labelText="Text input label"
+    helperText="Optional help text"
+    slug={slug}
+  />
 );

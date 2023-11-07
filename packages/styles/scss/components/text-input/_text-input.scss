@@ -15,6 +15,7 @@
 @use '../../type' as *;
 @use '../../spacing' as *;
 @use '../../motion' as *;
+@use '../../utilities/ai-gradient' as *;
 @use '../../utilities/component-reset';
 @use '../../utilities/placeholder-colors' as *;
 @use '../../utilities/tooltip' as *;
@@ -423,18 +424,7 @@
   }
 
   .#{$prefix}--text-input__field-wrapper--slug .#{$prefix}--text-input {
-    background-image: linear-gradient(
-        to left,
-        rgba(242, 244, 248, 0.5) 0%,
-        rgba(#ffffff, 0) 33%,
-        transparent 100%
-      ),
-      linear-gradient(
-        to left,
-        rgba(237, 245, 255, 0.5) 0%,
-        rgba(#ffffff, 0) 33%,
-        transparent 100%
-      );
+    @include ai-gradient;
   }
 
   // Windows HCM fix
