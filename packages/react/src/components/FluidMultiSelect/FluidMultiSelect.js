@@ -42,7 +42,23 @@ FluidMultiSelect.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify the direction of the dropdown. Can be either top or bottom.
+   * Specify the text that should be read for screen readers that describes total items selected
+   */
+  clearSelectionDescription: PropTypes.string,
+
+  /**
+   * Specify the text that should be read for screen readers to clear selection.
+   */
+  clearSelectionText: PropTypes.string,
+
+  /**
+   * Provide a compare function that is used to determine the ordering of
+   * options. See 'sortItems' for more control.
+   */
+  compareItems: PropTypes.func,
+
+  /**
+   * Specify the direction of the multiselect dropdown. Can be either top or bottom.
    */
   direction: PropTypes.oneOf(['top', 'bottom']),
 
@@ -52,19 +68,20 @@ FluidMultiSelect.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * Additional props passed to Downshift
+   */
+  downshiftProps: PropTypes.object,
+
+  /**
    * Specify a custom `id` for the `<input>`
    */
   id: PropTypes.string.isRequired,
 
   /**
-   * Allow users to pass in an arbitrary item or a string (in case their items are an array of strings)
-   * from their collection that are pre-selected
+   * Allow users to pass in arbitrary items from their collection that are
+   * pre-selected
    */
-  initialSelectedItem: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  initialSelectedItems: PropTypes.array,
 
   /**
    * Specify if the currently selected value is invalid.
@@ -112,25 +129,68 @@ FluidMultiSelect.propTypes = {
   label: PropTypes.node.isRequired,
 
   /**
+   * Specify the locale of the control. Used for the default `compareItems`
+   * used for sorting the list of items in the control.
+   */
+  locale: PropTypes.string,
+
+  /**
    * `onChange` is a utility for this controlled component to communicate to a
    * consuming component what kind of internal state changes are occurring.
    */
   onChange: PropTypes.func,
 
   /**
-   * An optional callback to render the currently selected item as a react element instead of only
-   * as a string.
+   * **Filterable variant only** - `onInputValueChange` is a utility for this controlled component to communicate to
+   * the currently typed input.
    */
-  renderSelectedItem: PropTypes.func,
+  onInputValueChange: PropTypes.func,
 
   /**
-   * In the case you want to control the dropdown selection entirely.
+   * `onMenuChange` is a utility for this controlled component to communicate to a
+   * consuming component that the menu was open(`true`)/closed(`false`).
    */
-  selectedItem: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  onMenuChange: PropTypes.func,
+
+  /**
+   * Whether or not the Multiselect is readonly
+   */
+  readOnly: PropTypes.bool,
+
+  /**
+   * For full control of the selected items
+   */
+  selectedItems: PropTypes.array,
+
+  /**
+   * Specify feedback (mode) of the selection.
+   * `top`: selected item jumps to top
+   * `fixed`: selected item stays at it's position
+   * `top-after-reopen`: selected item jump to top after reopen dropdown
+   */
+  selectionFeedback: PropTypes.oneOf(['top', 'fixed', 'top-after-reopen']),
+
+  /**
+   * Provide a method that sorts all options in the control. Overriding this
+   * prop means that you also have to handle the sort logic for selected versus
+   * un-selected items. If you just want to control ordering, consider the
+   * `compareItems` prop instead.
+   *
+   * The return value should be a number whose sign indicates the relative order
+   * of the two elements: negative if a is less than b, positive if a is greater
+   * than b, and zero if they are equal.
+   *
+   * sortItems :
+   *   (items: Array<Item>, {
+   *     selectedItems: Array<Item>,
+   *     itemToString: Item => string,
+   *     compareItems: (itemA: string, itemB: string, {
+   *       locale: string
+   *     }) => number,
+   *     locale: string,
+   *   }) => Array<Item>
+   */
+  sortItems: PropTypes.func,
 
   /**
    * Provide the title text that will be read by a screen reader when
@@ -142,6 +202,11 @@ FluidMultiSelect.propTypes = {
    * Callback function for translating ListBoxMenuIcon SVG title
    */
   translateWithId: PropTypes.func,
+
+  /**
+   * Specify title to show title on hover
+   */
+  useTitleInItem: PropTypes.bool,
 
   /**
    * Specify whether the control is currently in warning state
