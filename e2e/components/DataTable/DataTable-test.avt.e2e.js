@@ -63,7 +63,7 @@ test.describe('DataTable @avt', () => {
         },
       });
       await expect(page).toHaveNoACViolations(
-        'components-datatable-dynamic--default'
+        'components-datatable-dynamic--default-avt'
       );
     });
 

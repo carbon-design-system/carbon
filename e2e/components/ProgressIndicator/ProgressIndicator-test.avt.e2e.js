@@ -117,7 +117,6 @@ test.describe('ProgressIndicator @avt', () => {
     // Testing the first element interaction
     await page.keyboard.press('Tab');
     await expect(page.getByRole('button', { name: 'Click me' })).toBeVisible();
-    await page.keyboard.press('Tab');
     await expect(page.getByRole('button', { name: 'Click me' })).toBeFocused();
 
     await page.keyboard.press('Enter');
