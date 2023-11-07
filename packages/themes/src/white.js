@@ -205,7 +205,7 @@ export const overlay = 'rgba(22, 22, 22, 0.5)';
 export const toggleOff = gray50;
 export const shadow = 'rgba(0, 0, 0, 0.3)';
 
-//// AI
+//// AI - Experimental (Use at your own risk)
 // Slug tokens
 export const slugBackground = gray70;
 export const slugGradient = `${gray100} linear-gradient(135deg, ${gray40} 0%, rgba(${white}, 0) 100%)`;
