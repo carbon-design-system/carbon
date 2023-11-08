@@ -180,7 +180,10 @@ jobs:
         if: ${{ needs.vrt-runner.result != 'success' }}
         run: exit 1
 
-  avt:
+  avt-runner:
+    strategy:
+      matrix:
+        shard: [1, 2, 3, 4]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
@@ -210,7 +213,7 @@ jobs:
         run: |
           npx serve -l 3000 packages/react/storybook-static &
           pid=$!
-          echo ::set-output name=pid::"$pid"
+          echo "pid=$pid" >> $GITHUB_OUTPUT
       - uses: ./actions/wait-for-it
         with:
           URL: 'http://localhost:3000'
@@ -218,7 +221,7 @@ jobs:
       - name: Run AVT
         if: github.repository == 'carbon-design-system/carbon'
         run: |
-          yarn playwright test --project chromium --grep @avt
+          yarn playwright test --project chromium --grep @avt --shard="${{ matrix.shard }}/4"
       - name: Stop storybook
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload test results
@@ -227,3 +230,12 @@ jobs:
         with:
           name: playwright-avt-report
           path: .playwright
+
+  avt:
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    needs: avt-runner
+    steps:
+      - name: Check AVT Runner job status
+        if: ${{ needs.avt-runner.result != 'success' }}
+        run: exit 1
