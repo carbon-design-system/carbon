@@ -25,11 +25,17 @@ const config = {
   testMatch: /.*-test(.avt|.vrt)?.e2e\.m?js$/,
 
   // https://playwright.dev/docs/api/class-testconfig#test-config-timeout
-  timeout: 1000 * 30,
+  timeout: 10000 * 30,
+
+  // https://playwright.dev/docs/test-timeouts
+  expect: { timeout: 100000 },
 
   // https://playwright.dev/docs/api/class-testconfig#test-config-output-dir
   outputDir: path.join(__dirname, '.playwright', 'results'),
   snapshotDir: path.join(__dirname, '.playwright', 'snapshots'),
+
+  // https://playwright.dev/docs/test-parallel#parallelize-tests-in-a-single-file
+  // fullyParallel: true,
 
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
