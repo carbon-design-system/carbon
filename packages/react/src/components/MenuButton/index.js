@@ -30,6 +30,7 @@ const MenuButton = React.forwardRef(function MenuButton(
     kind = defaultButtonKind,
     label,
     size = 'lg',
+    tabIndex = 0,
     ...rest
   },
   forwardRef
@@ -73,6 +74,7 @@ const MenuButton = React.forwardRef(function MenuButton(
       <Button
         className={triggerClasses}
         size={size}
+        tabIndex={tabIndex}
         kind={buttonKind}
         renderIcon={ChevronDown}
         disabled={disabled}
