@@ -253,8 +253,9 @@ const Modal = React.forwardRef(function Modal(
   const modalHeadingId = `${prefix}--modal-header__heading--${modalInstanceId}`;
   const modalBodyId = `${prefix}--modal-body--${modalInstanceId}`;
   const modalCloseButtonClass = `${prefix}--modal-close`;
-  const primaryButtonClass =
-    loadingStatus !== 'inactive' ? `${prefix}--btn--loading` : null;
+  const primaryButtonClass = classNames({
+    [`${prefix}--btn--loading`]: loadingStatus !== 'inactive',
+  });
 
   const loadingActive = loadingStatus !== 'inactive';
 
