@@ -22,7 +22,7 @@ test.describe('ContentSwitcher @avt', () => {
     await expect(page).toHaveNoACViolations('ContentSwitcher');
   });
 
-  test('@avt-advanced-states ComboButton Icon Only', async ({ page }) => {
+  test('@avt-advanced-states icon only', async ({ page }) => {
     await visitStory(page, {
       component: 'ContentSwitcher',
       id: 'components-contentswitcher--icon-only',
