@@ -1898,12 +1898,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/cra-template@workspace:packages/cra-template":
-  version: 0.0.0-use.local
-  resolution: "@carbon/cra-template@workspace:packages/cra-template"
-  languageName: unknown
-  linkType: soft
-
 "@carbon/elements@workspace:packages/elements":
   version: 0.0.0-use.local
   resolution: "@carbon/elements@workspace:packages/elements"
