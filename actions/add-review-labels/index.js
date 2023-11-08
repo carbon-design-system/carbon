@@ -16,7 +16,7 @@ async function run() {
     required: true,
   });
   const autoLabelUsers = core.getInput('AUTO_LABEL_USERS').split(',');
-  const octokit = new github.GitHub(token);
+  const octokit = new github.getOctokit(token);
   const { pull_request: pullRequest, repository, review } = context.payload;
   const { state, draft } = pullRequest;
 
