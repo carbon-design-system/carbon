@@ -944,11 +944,10 @@ export function ActionableNotification({
     [`${prefix}--actionable-notification--${kind}`]: kind,
     [`${prefix}--actionable-notification--hide-close-button`]: hideCloseButton,
   });
-  const innerModal = useRef<any>();
-  const startTrap = useRef<any>();
-  const endTrap = useRef<any>();
+  const innerModal = useRef<HTMLDivElement>(null);
+  const startTrap = useRef<HTMLElement>(null);
+  const endTrap = useRef<HTMLElement>(null);
   const ref = useRef<HTMLDivElement>(null);
-  const actionableButton = useRef<HTMLButtonElement | any>();
 
   useIsomorphicEffect(() => {
     if (hasFocus) {
@@ -1041,8 +1040,7 @@ export function ActionableNotification({
         {actionButtonLabel && (
           <NotificationActionButton
             onClick={onActionButtonClick}
-            inline={inline}
-            ref={actionableButton}>
+            inline={inline}>
             {actionButtonLabel}
           </NotificationActionButton>
         )}
