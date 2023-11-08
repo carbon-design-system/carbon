@@ -12,6 +12,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../../utilities/ai-gradient' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/button-reset';
 @use '../../utilities/high-contrast-mode' as *;
@@ -516,19 +517,36 @@
     }
   }
 
-  // // Windows HCM fix
-  // /* stylelint-disable */
-  // .#{$prefix}--number__control-btn:hover,
-  // .#{$prefix}--number__control-btn:focus {
-  //   @include high-contrast-mode('focus');
-  // }
+  .cds--number__control-btn::before,
+  .cds--number__control-btn::after {
+    display: none;
+  }
 
-  // .#{$prefix}--number__control-btn {
-  //   @include high-contrast-mode('outline');
-  // }
+  // Styles for Slug rendered inside TextInput
+  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: convert.to-rem(88px);
+    transform: translateY(-50%);
+  }
 
-  // .#{$prefix}--number__control-btn svg {
-  //   @include high-contrast-mode('icon-fill');
-  // }
-  // /* stylelint-enable */
+  .#{$prefix}--number__input-wrapper--slug input[type='number'] {
+    @include ai-gradient;
+  }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--number__control-btn:hover,
+  .#{$prefix}--number__control-btn:focus {
+    @include high-contrast-mode('focus');
+  }
+
+  .#{$prefix}--number__control-btn {
+    @include high-contrast-mode('outline');
+  }
+
+  .#{$prefix}--number__control-btn svg {
+    @include high-contrast-mode('icon-fill');
+  }
+  /* stylelint-enable */
 }

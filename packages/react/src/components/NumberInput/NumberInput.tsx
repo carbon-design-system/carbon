@@ -7,7 +7,7 @@
 
 import { Add, Subtract } from '@carbon/icons-react';
 import cx from 'classnames';
-import PropTypes from 'prop-types';
+import PropTypes, { ReactNodeLike } from 'prop-types';
 import React, { ReactNode, useContext, useRef, useState } from 'react';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useNormalizedInputProps as normalize } from '../../internal/useNormalizedInputProps';
@@ -160,6 +160,11 @@ export interface NumberInputProps
   size?: 'sm' | 'md' | 'lg';
 
   /**
+   * Provide a `Slug` component to be rendered inside the `TextInput` component
+   */
+  slug?: ReactNodeLike;
+
+  /**
    * Specify how much the values should increase/decrease upon clicking on up/down button
    */
   step?: number;
@@ -209,6 +214,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       onKeyUp,
       readOnly,
       size = 'md',
+      slug,
       step = 1,
       translateWithId: t = (id) => defaultTranslations[id],
       warn = false,
@@ -263,6 +269,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     ];
     const wrapperClasses = cx(`${prefix}--number__input-wrapper`, {
       [`${prefix}--number__input-wrapper--warning`]: normalizedProps.warn,
+      [`${prefix}--number__input-wrapper--slug`]: slug,
     });
     const iconClasses = cx({
       [`${prefix}--number__invalid`]:
@@ -346,6 +353,14 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       }
     }
 
+    // Slug is always size `mini`
+    let normalizedSlug;
+    if (slug) {
+      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+        size: 'mini',
+      });
+    }
+
     return (
       <div
         className={outerElementClasses}
@@ -398,6 +413,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               type="number"
               value={value}
             />
+            {normalizedSlug}
             {Icon ? <Icon className={iconClasses} /> : null}
             {!hideSteppers && (
               <div className={`${prefix}--number__controls`}>
@@ -554,6 +570,11 @@ NumberInput.propTypes = {
    * Specify the size of the Number Input.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * Provide a `Slug` component to be rendered inside the `NumberInput` component
+   */
+  slug: PropTypes.node,
 
   /**
    * Specify how much the values should increase/decrease upon clicking on up/down button
