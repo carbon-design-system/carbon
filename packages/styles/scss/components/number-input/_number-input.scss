@@ -160,26 +160,6 @@
     border-block-end: convert.to-rem(1px) solid $border-strong;
     color: $icon-primary;
 
-    &::before,
-    &::after {
-      position: absolute;
-      display: none;
-      background-color: $field;
-      // block-size: calc(100% - 4px) is calculated differently in Safari
-      block-size: convert.to-rem(36px);
-      content: '';
-      inline-size: convert.to-rem(2px);
-      inset-block-start: convert.to-rem(2px);
-    }
-
-    &::before {
-      inset-inline-start: 0;
-    }
-
-    &::after {
-      inset-inline-end: 0;
-    }
-
     svg {
       fill: currentColor;
     }
@@ -196,18 +176,6 @@
       background-color: $field-hover;
       color: $icon-primary;
       cursor: pointer;
-
-      &::before,
-      &::after {
-        background-color: $field-hover;
-      }
-    }
-
-    &:focus::before,
-    &:focus::after,
-    &:hover:focus::before,
-    &:hover:focus::after {
-      background-color: transparent;
     }
 
     &:disabled {
@@ -270,31 +238,6 @@
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:focus:hover {
     @include focus-outline('outline');
-  }
-
-  .#{$prefix}--number
-    input[type='number']:focus
-    ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn.up-icon::after {
-    background-color: transparent;
-  }
-
-  .#{$prefix}--number
-    input[type='number'][data-invalid]
-    ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn.up-icon::after {
-    background-color: $support-error;
-  }
-
-  .#{$prefix}--number
-    input[type='number'][data-invalid]:focus
-    ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn.up-icon::after,
-  .#{$prefix}--number
-    input[type='number'][data-invalid]
-    ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn.up-icon:focus::after {
-    background-color: $focus;
   }
 
   .#{$prefix}--number__rule-divider {
@@ -400,38 +343,6 @@
     opacity: 1;
   }
 
-  // V11: Possibly deprecate
-  .#{$prefix}--number--light input[type='number'] {
-    background-color: $field-02;
-  }
-
-  // V11: Possibly deprecate
-  .#{$prefix}--number--light input[type='number']:disabled {
-    background-color: $field-02;
-  }
-
-  // V11: Possibly deprecate
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn::before,
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn::after {
-    background-color: $field-02;
-  }
-
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::before,
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::after {
-    background-color: transparent;
-  }
-
-  // V11: Possibly deprecate
-  // We include `:not(:focus)` here because the pseudo elements will overlap the
-  // focus outline on the button if we set their background-color on focus
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover,
-  .#{$prefix}--number--light
-    .#{$prefix}--number__control-btn:not(:focus):hover::before,
-  .#{$prefix}--number--light
-    .#{$prefix}--number__control-btn:not(:focus):hover::after {
-    background-color: $layer-hover-02;
-  }
-
   // Size Variant styles
   .#{$prefix}--number--lg input[type='number'] {
     block-size: convert.to-rem(48px);
@@ -443,12 +354,6 @@
 
   .#{$prefix}--number--lg .#{$prefix}--number__control-btn {
     inline-size: convert.to-rem(48px);
-
-    &::before,
-    &::after {
-      // block-size: calc(100% - 4px) is calculated differently in Safari
-      block-size: convert.to-rem(44px);
-    }
   }
 
   .#{$prefix}--number--sm input[type='number'] {
@@ -461,12 +366,6 @@
 
   .#{$prefix}--number--sm .#{$prefix}--number__control-btn {
     inline-size: convert.to-rem(32px);
-
-    &::before,
-    &::after {
-      // block-size: calc(100% - 4px) is calculated differently in Safari
-      block-size: convert.to-rem(28px);
-    }
   }
 
   //No label positioning adjustment
@@ -498,11 +397,6 @@
     &:hover {
       background-color: transparent;
       cursor: pointer;
-
-      &::before,
-      &::after {
-        background-color: transparent;
-      }
     }
   }
 
@@ -513,15 +407,39 @@
     outline: none;
   }
 
-  .#{$prefix}--number--readonly .#{$prefix}--number__control-btn::before,
-  .#{$prefix}--number--readonly .#{$prefix}--number__control-btn::after {
-    background: transparent;
-  }
-
   .#{$prefix}--number--readonly
     .#{$prefix}--number__controls:hover
     .#{$prefix}--number__rule-divider:not(:first-of-type) {
     background-color: $border-subtle;
+  }
+
+  // Styles for Slug rendered inside TextInput
+  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: convert.to-rem(88px);
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--number__input-wrapper--slug
+    input[data-invalid]
+    ~ .#{$prefix}--slug,
+  .#{$prefix}--number__input-wrapper--slug.#{$prefix}--number__input-wrapper--warning
+    .#{$prefix}--slug {
+    inset-inline-end: convert.to-rem(120px);
+  }
+
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--slug
+    input[data-invalid],
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--slug.#{$prefix}--number__input-wrapper--warning
+    input {
+    padding-inline-end: convert.to-rem(144px);
+  }
+
+  .#{$prefix}--number__input-wrapper--slug input[type='number'] {
+    @include ai-gradient;
   }
 
   // Skeleton State
@@ -534,18 +452,6 @@
     input[type='number'] {
       display: none;
     }
-  }
-
-  // Styles for Slug rendered inside TextInput
-  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug {
-    position: absolute;
-    inset-block-start: 50%;
-    inset-inline-end: convert.to-rem(88px);
-    transform: translateY(-50%);
-  }
-
-  .#{$prefix}--number__input-wrapper--slug input[type='number'] {
-    @include ai-gradient;
   }
 
   // Windows HCM fix

@@ -65,6 +65,10 @@ $sizes: (
     display: flex;
   }
 
+  .#{$prefix}--slug:has(> .#{$prefix}--popover--open) {
+    z-index: 2;
+  }
+
   .#{$prefix}--slug .#{$prefix}--slug__button {
     position: relative;
     display: flex;

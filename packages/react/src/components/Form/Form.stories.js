@@ -262,6 +262,7 @@ export const _AIForm = () => (
     <Stack gap={7}>
       <NumberInput {...numberInputProps} slug={slug} />
       <NumberInput {...numberInputProps} slug={slug} invalid />
+      <NumberInput {...numberInputProps} slug={slug} warn />
 
       <DatePicker datePickerType="single">
         <DatePickerInput

@@ -130,39 +130,6 @@
     @include focus-outline('outline');
   }
 
-  // Weird overrides (needed to override focus borders on stepper buttons when hovered while input has focus)
-  .#{$prefix}--number-input--fluid:not(
-      .#{$prefix}--number-input--fluid--invalid
-    )
-    .#{$prefix}--number
-    .#{$prefix}--number__input-wrapper:not(
-      .#{$prefix}--number__input-wrapper--warning
-    )
-    input[type='number']:focus
-    ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn:hover {
-    outline: 2px solid transparent;
-  }
-
-  .#{$prefix}--number-input--fluid:not(
-      .#{$prefix}--number-input--fluid--invalid
-    )
-    .#{$prefix}--number
-    .#{$prefix}--number__input-wrapper:not(
-      .#{$prefix}--number__input-wrapper--warning
-    )
-    input[type='number']:focus
-    ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn:hover::before {
-    background: $focus;
-    block-size: 1px;
-    inline-size: 100%;
-    inset-block-end: 0;
-    inset-block-start: auto;
-    inset-inline-start: 0;
-  }
-  // End weirdness
-
   .#{$prefix}--number-input--fluid:not(
       .#{$prefix}--number-input--fluid--invalid
     )
@@ -174,36 +141,6 @@
     .#{$prefix}--number__control-btn:hover {
     border-block-end: 1px solid $focus;
     outline: none;
-  }
-
-  .#{$prefix}--number-input--fluid
-    input[type='number']
-    ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn::after {
-    block-size: calc(100% - convert.to-rem(1px));
-    inset-block-start: 0;
-  }
-
-  .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--focus
-    input[type='number']
-    ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn.up-icon::after {
-    background: $focus;
-  }
-
-  .#{$prefix}--number-input--fluid
-    input[type='number']
-    ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn.up-icon::after {
-    block-size: calc(100%);
-  }
-
-  .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--focus
-    input[type='number']
-    ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn.up-icon:hover::after {
-    background-color: $focus;
-    block-size: calc(100%);
   }
 
   .#{$prefix}--number-input--fluid--invalid
