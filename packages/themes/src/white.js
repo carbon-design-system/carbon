@@ -14,6 +14,9 @@ import {
   blue60,
   blue70,
 
+  // CoolGray
+  coolGray10,
+
   // Gray
   gray10,
   gray10Hover,
@@ -202,7 +205,8 @@ export const overlay = 'rgba(22, 22, 22, 0.5)';
 export const toggleOff = gray50;
 export const shadow = 'rgba(0, 0, 0, 0.3)';
 
-// AI
+//// AI - Experimental (Use at your own risk)
+// Slug tokens
 export const slugBackground = gray70;
 export const slugGradient = `${gray100} linear-gradient(135deg, ${gray40} 0%, rgba(${white}, 0) 100%)`;
 export const slugBackgroundHover = gray60;
@@ -212,6 +216,10 @@ export const slugCalloutGradientTop = rgba(gray10, 0.85);
 export const slugCalloutGradientBottom = rgba(gray20, 0.85);
 export const slugCalloutAuraStart = rgba(blue10, 0.6);
 export const slugCalloutAuraEnd = rgba(white, 0);
+// Linear gradient tokens
+export const aiGradientStart01 = rgba(coolGray10, 0.5);
+export const aiGradientStart02 = rgba(blue10, 0.5);
+export const aiGradientEnd = rgba(white, 0);
 
 // Type
 export {
