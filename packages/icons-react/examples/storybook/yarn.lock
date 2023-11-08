@@ -6970,6 +6970,9 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+<<<<<<< HEAD
+"lodash@npm:^4.17.11, lodash@npm:^4.17.19":
+=======
 "lodash@npm:^4.17.11":
   version: 4.17.11
   resolution: "lodash@npm:4.17.11"
@@ -6978,6 +6981,7 @@ fsevents@^1.2.7:
   linkType: hard
 
 "lodash@npm:^4.17.19":
+>>>>>>> main
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7

@@ -9686,6 +9686,15 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "clearSelectionDescription": Object {
+        "type": "string",
+      },
+      "clearSelectionText": Object {
+        "type": "string",
+      },
+      "compareItems": Object {
+        "type": "func",
+      },
       "direction": Object {
         "args": Array [
           Array [
@@ -9698,25 +9707,15 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "downshiftProps": Object {
+        "type": "object",
+      },
       "id": Object {
         "isRequired": true,
         "type": "string",
       },
-      "initialSelectedItem": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "object",
-            },
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
-          ],
-        ],
-        "type": "oneOfType",
+      "initialSelectedItems": Object {
+        "type": "array",
       },
       "invalid": Object {
         "type": "bool",
@@ -9744,33 +9743,45 @@ Map {
         "isRequired": true,
         "type": "node",
       },
+      "locale": Object {
+        "type": "string",
+      },
       "onChange": Object {
         "type": "func",
       },
-      "renderSelectedItem": Object {
+      "onInputValueChange": Object {
         "type": "func",
       },
-      "selectedItem": Object {
+      "onMenuChange": Object {
+        "type": "func",
+      },
+      "readOnly": Object {
+        "type": "bool",
+      },
+      "selectedItems": Object {
+        "type": "array",
+      },
+      "selectionFeedback": Object {
         "args": Array [
           Array [
-            Object {
-              "type": "object",
-            },
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
+            "top",
+            "fixed",
+            "top-after-reopen",
           ],
         ],
-        "type": "oneOfType",
+        "type": "oneOf",
+      },
+      "sortItems": Object {
+        "type": "func",
       },
       "titleText": Object {
         "type": "node",
       },
       "translateWithId": Object {
         "type": "func",
+      },
+      "useTitleInItem": Object {
+        "type": "bool",
       },
       "warn": Object {
         "type": "bool",
