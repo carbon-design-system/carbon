@@ -1418,7 +1418,12 @@ class Slider extends PureComponent<SliderProps> {
             }
           );
           const lowerThumbWrapperProps = {
-            style: { insetInlineStart: `${this.state.left}%` },
+            style: {
+              insetInlineStart:
+                twoHandles || !isRtl
+                  ? `${this.state.left}%`
+                  : `calc(${this.state.left}% - 14px)`,
+            },
           };
           const upperThumbWrapperProps = {
             style: { insetInlineStart: `${this.state.leftUpper}%` },
