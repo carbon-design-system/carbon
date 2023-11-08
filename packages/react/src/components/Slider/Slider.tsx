@@ -1511,7 +1511,10 @@ class Slider extends PureComponent<SliderProps> {
                       aria-valuenow={value}
                       aria-labelledby={twoHandles ? undefined : labelId}
                       aria-label={twoHandles ? ariaLabelInput : undefined}
-                      ref={this.thumbRef}>
+                      ref={this.thumbRef}
+                      onFocus={() =>
+                        this.setState({ activeHandle: HandlePosition.LOWER })
+                      }>
                       {twoHandles && !isRtl ? (
                         <>
                           <LowerHandle />
