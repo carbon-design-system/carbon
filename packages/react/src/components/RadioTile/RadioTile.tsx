@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, ChangeEvent, KeyboardEvent, ReactNode, Ref } from 'react';
+import React, {
+  forwardRef,
+  ChangeEvent,
+  KeyboardEvent,
+  ReactNode,
+  Ref,
+} from 'react';
 import { CheckmarkFilled } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -41,10 +47,10 @@ interface RadioTileProps {
   id?: string;
 
   /**
- * `true` to use the light version. For use on $ui-01 backgrounds only.
- * Don't use this to make tile background color the same as the container background color.
- * @deprecated This prop is no longer needed and has been deprecated in v11 in favor of the new Layer component. It will be moved in the next major release.
- */
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color the same as the container background color.
+   * @deprecated This prop is no longer needed and has been deprecated in v11 in favor of the new Layer component. It will be moved in the next major release.
+   */
   light: boolean; // Deprecated: This prop is no longer needed and has been deprecated in v11 in favor of the new Layer component. It will be moved in the next major release.
 
   /**
@@ -55,7 +61,11 @@ interface RadioTileProps {
   /**
    * The handler of the massaged `change` event on the `<input>`.
    */
-  onChange: (value: string | number, name: string, event: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (
+    value: string | number,
+    name: string,
+    event: ChangeEvent<HTMLInputElement>
+  ) => void;
 
   /**
    * Specify the tab index of the wrapper element.
@@ -67,7 +77,6 @@ interface RadioTileProps {
    */
   value: string | number;
 }
-
 
 const RadioTile = forwardRef(function RadioTile(
   {
