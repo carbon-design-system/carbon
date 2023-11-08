@@ -11,7 +11,7 @@ import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
 test.describe('ContainedList @avt', () => {
-  test('@avt-default-state ContainedList', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ContainedList',
       id: 'components-containedlist--default',
@@ -22,9 +22,7 @@ test.describe('ContainedList @avt', () => {
     await expect(page).toHaveNoACViolations('ContainedList');
   });
 
-  test('@avt-advanced-states ContainedList Usage examples', async ({
-    page,
-  }) => {
+  test('@avt-advanced-states Usage examples', async ({ page }) => {
     await visitStory(page, {
       component: 'ContainedList',
       id: 'components-containedlist--usage-examples',
@@ -35,7 +33,7 @@ test.describe('ContainedList @avt', () => {
     await expect(page).toHaveNoACViolations('ContainedList-usage-examples');
   });
 
-  test('@avt-advanced-states ContainedList Disclosed', async ({ page }) => {
+  test('@avt-advanced-states Disclosed', async ({ page }) => {
     await visitStory(page, {
       component: 'ContainedList',
       id: 'components-containedlist--disclosed',
@@ -46,7 +44,7 @@ test.describe('ContainedList @avt', () => {
     await expect(page).toHaveNoACViolations('ContainedList-disclosed');
   });
 
-  test('@avt-advanced-states ContainedList With actions', async ({ page }) => {
+  test('@avt-advanced-states With actions', async ({ page }) => {
     await visitStory(page, {
       component: 'ContainedList',
       id: 'components-containedlist--with-actions',
@@ -57,23 +55,20 @@ test.describe('ContainedList @avt', () => {
     await expect(page).toHaveNoACViolations('ContainedList-with-actions');
   });
 
-  test.slow(
-    '@avt-advanced-states ContainedList With expandable search',
-    async ({ page }) => {
-      await visitStory(page, {
-        component: 'ContainedList',
-        id: 'components-containedlist--with-expandable-search',
-        globals: {
-          theme: 'white',
-        },
-      });
-      await expect(page).toHaveNoACViolations(
-        'ContainedList-with-expandable-search'
-      );
-    }
-  );
+  test.slow('@avt-advanced-states With expandable search', async ({ page }) => {
+    await visitStory(page, {
+      component: 'ContainedList',
+      id: 'components-containedlist--with-expandable-search',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations(
+      'ContainedList-with-expandable-search'
+    );
+  });
 
-  test('@avt-advanced-states ContainedList With icons', async ({ page }) => {
+  test('@avt-advanced-states With icons', async ({ page }) => {
     await visitStory(page, {
       component: 'ContainedList',
       id: 'components-containedlist--with-icons',
@@ -84,9 +79,7 @@ test.describe('ContainedList @avt', () => {
     await expect(page).toHaveNoACViolations('ContainedList-with-icons');
   });
 
-  test('@avt-advanced-states ContainedList With interactive items', async ({
-    page,
-  }) => {
+  test('@avt-advanced-states With interactive items', async ({ page }) => {
     await visitStory(page, {
       component: 'ContainedList',
       id: 'components-containedlist--with-interactive-items',
@@ -99,7 +92,7 @@ test.describe('ContainedList @avt', () => {
     );
   });
 
-  test('@avt-advanced-states ContainedList With interactive items and actions', async ({
+  test('@avt-advanced-states With interactive items and actions', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -114,7 +107,7 @@ test.describe('ContainedList @avt', () => {
     );
   });
 
-  test('@avt-advanced-states ContainedList With Layer', async ({ page }) => {
+  test('@avt-advanced-states With Layer', async ({ page }) => {
     await visitStory(page, {
       component: 'ContainedList',
       id: 'components-containedlist--with-layer',
@@ -125,9 +118,7 @@ test.describe('ContainedList @avt', () => {
     await expect(page).toHaveNoACViolations('ContainedList-with-layer');
   });
 
-  test('@avt-advanced-states ContainedList With list title decorators', async ({
-    page,
-  }) => {
+  test('@avt-advanced-states With list title decorators', async ({ page }) => {
     await visitStory(page, {
       component: 'ContainedList',
       id: 'components-containedlist--with-list-title-decorators',
@@ -140,9 +131,7 @@ test.describe('ContainedList @avt', () => {
     );
   });
 
-  test('@avt-advanced-states ContainedList With persistent search', async ({
-    page,
-  }) => {
+  test('@avt-advanced-states With persistent search', async ({ page }) => {
     await visitStory(page, {
       component: 'ContainedList',
       id: 'components-containedlist--with-persistent-search',
@@ -155,7 +144,7 @@ test.describe('ContainedList @avt', () => {
     );
   });
 
-  test('@avt-keyboard-nav ContainedList Usage examples', async ({ page }) => {
+  test('@avt-keyboard-nav Usage examples', async ({ page }) => {
     await visitStory(page, {
       component: 'ContainedList',
       id: 'components-containedlist--usage-examples',
@@ -186,7 +175,7 @@ test.describe('ContainedList @avt', () => {
     await expect(page.getByText('Remove')).not.toBeVisible();
   });
 
-  test('@avt-keyboard-nav ContainedList With actions', async ({ page }) => {
+  test('@avt-keyboard-nav With actions', async ({ page }) => {
     await visitStory(page, {
       component: 'ContainedList',
       id: 'components-containedlist--with-actions',
@@ -214,9 +203,7 @@ test.describe('ContainedList @avt', () => {
     ).toBeFocused();
   });
 
-  test('@avt-keyboard-nav ContainedList With expandable search', async ({
-    page,
-  }) => {
+  test('@avt-keyboard-nav With expandable search', async ({ page }) => {
     await visitStory(page, {
       component: 'ContainedList',
       id: 'components-containedlist--with-expandable-search',
@@ -240,9 +227,7 @@ test.describe('ContainedList @avt', () => {
     await expect(page.getByText('List item 1')).toBeVisible();
   });
 
-  test('@avt-keyboard-nav ContainedList With interactive items', async ({
-    page,
-  }) => {
+  test('@avt-keyboard-nav With interactive items', async ({ page }) => {
     await visitStory(page, {
       component: 'ContainedList',
       id: 'components-containedlist--with-interactive-items',
@@ -264,7 +249,7 @@ test.describe('ContainedList @avt', () => {
     ).toBeFocused();
   });
 
-  test('@avt-keyboard-nav ContainedList With interactive items and actions', async ({
+  test('@avt-keyboard-nav With interactive items and actions', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -299,9 +284,7 @@ test.describe('ContainedList @avt', () => {
     ).toBeFocused();
   });
 
-  test('@avt-keyboard-nav ContainedList With persistent search', async ({
-    page,
-  }) => {
+  test('@avt-keyboard-nav With persistent search', async ({ page }) => {
     await visitStory(page, {
       component: 'ContainedList',
       id: 'components-containedlist--with-persistent-search',
