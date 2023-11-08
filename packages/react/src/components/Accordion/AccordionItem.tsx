@@ -16,6 +16,7 @@ import React, {
   ReactElement,
   ReactNode,
   useContext,
+  useRef,
   useState,
 } from 'react';
 import { Text } from '../Text';
@@ -135,24 +136,23 @@ function AccordionItem({
 
   const Toggle = renderToggle || renderExpando; // remove renderExpando in next major release
 
+  const content = useRef<HTMLDivElement>(null);
+
   // When the AccordionItem heading is clicked, toggle the open state of the
   // panel
   function onClick(event) {
-    const toggleElement = event.target;
-
-    let content = toggleElement.nextElementSibling;
-
-    // when toggle element is not the button
-    if (toggleElement.nodeName !== 'BUTTON') {
-      content = toggleElement.parentElement.nextElementSibling;
+    // type guard for ref
+    if (!content.current) {
+      return;
     }
 
-    if (content.style.maxBlockSize) {
+    if (isOpen) {
       // accordion closes
-      content.style.maxBlockSize = null;
+      content.current.style.maxBlockSize = '';
     } else {
       // accordion opens
-      content.style.maxBlockSize = content.scrollHeight + 15 + 'px';
+      content.current.style.maxBlockSize =
+        content.current.scrollHeight + 15 + 'px';
     }
 
     const nextValue = !isOpen;
@@ -193,6 +193,7 @@ function AccordionItem({
         </Text>
       </Toggle>
       <div
+        ref={content}
         className={`${prefix}--accordion__wrapper`}
         onTransitionEnd={onAnimationEnd}>
         <div id={id} className={`${prefix}--accordion__content`}>
