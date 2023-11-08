@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('FormLabel @avt', () => {
-  test('@avt-default-state FormLabel', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FormLabel',
       id: 'components-formlabel--default',
