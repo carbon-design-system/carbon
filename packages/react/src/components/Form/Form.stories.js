@@ -7,6 +7,8 @@
 
 import React from 'react';
 import Checkbox from '../Checkbox';
+import DatePicker from '../DatePicker';
+import DatePickerInput from '../DatePickerInput';
 import Form from './Form';
 import FormGroup from '../FormGroup';
 import FileUploader from '../FileUploader';
@@ -256,11 +258,27 @@ const slug = (
 );
 
 export const _AIForm = () => (
-  <TextInput
-    id="text-input-1"
-    type="text"
-    labelText="Text input label"
-    helperText="Optional help text"
-    slug={slug}
-  />
+  <Form aria-label="sample form" style={{ width: '50%' }}>
+    <Stack gap={7}>
+      <NumberInput {...numberInputProps} slug={slug} />
+
+      <DatePicker datePickerType="single">
+        <DatePickerInput
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          size="md"
+          id="date-picker"
+          slug={slug}
+        />
+      </DatePicker>
+
+      <TextInput {...TextInputProps} slug={slug} />
+
+      <TextArea {...textareaProps} slug={slug} />
+
+      <Button type="submit" className="some-class" {...buttonEvents}>
+        Submit
+      </Button>
+    </Stack>
+  </Form>
 );
