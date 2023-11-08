@@ -261,6 +261,7 @@ export const _AIForm = () => (
   <Form aria-label="sample form" style={{ width: '50%' }}>
     <Stack gap={7}>
       <NumberInput {...numberInputProps} slug={slug} />
+      <NumberInput {...numberInputProps} slug={slug} invalid />
 
       <DatePicker datePickerType="single">
         <DatePickerInput

@@ -163,7 +163,7 @@
     &::before,
     &::after {
       position: absolute;
-      display: block;
+      display: none;
       background-color: $field;
       // block-size: calc(100% - 4px) is calculated differently in Safari
       block-size: convert.to-rem(36px);
@@ -226,31 +226,50 @@
     order: 2;
   }
 
+  .#{$prefix}--number
+    input[type='number'][data-invalid]
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn {
+    border-block-end-color: $support-error;
+  }
+
   // add top and bottom outlines to number controls when input is focused
   .#{$prefix}--number
     input[type='number']:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
-    border-block-end-color: transparent;
-
-    &:hover {
-      @include focus-outline('outline');
-    }
+    border-block-end-color: $focus;
+    box-shadow: inset 0 2px $focus, inset 0 -1px $focus;
   }
 
   .#{$prefix}--number
-    input[type='number'][data-invalid]
+    input[type='number']:focus
     ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn {
-    border-block-end-color: transparent;
+    .#{$prefix}--number__control-btn:last-of-type {
+    box-shadow: inset 0 2px $focus, inset 0 -1px $focus, inset -2px 0 $focus;
   }
 
-  // add invalid outline to number controls only when invalid input is not focused
+  // add invalid box-shadow to number controls only when invalid input is not focused
+  .#{$prefix}--number
+    input[type='number'][data-invalid]:not(:focus)
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:last-of-type:hover {
+    box-shadow: inset 0 2px $support-error, inset 0 -1px $support-error,
+      inset -2px 0 $support-error;
+  }
+
   .#{$prefix}--number
     input[type='number'][data-invalid]:not(:focus)
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:hover {
-    @include focus-outline('invalid');
+    box-shadow: inset 0 2px $support-error, inset 0 -1px $support-error;
+  }
+
+  .#{$prefix}--number
+    input[type='number'][data-invalid]:not(:focus)
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:focus:hover {
+    @include focus-outline('outline');
   }
 
   .#{$prefix}--number
@@ -515,11 +534,6 @@
     input[type='number'] {
       display: none;
     }
-  }
-
-  .cds--number__control-btn::before,
-  .cds--number__control-btn::after {
-    display: none;
   }
 
   // Styles for Slug rendered inside TextInput
