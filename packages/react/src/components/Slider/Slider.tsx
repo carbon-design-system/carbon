@@ -565,11 +565,6 @@ class Slider extends PureComponent<SliderProps> {
     // Fire onChange event handler if present, if there's a usable value, and
     // if the value is different from the last one
     if (this.hasTwoHandles()) {
-      if (this.thumbRef.current) {
-        if (this.state.isRtl) {
-          this.thumbRef.current.style.transform = `translate(100%, -50%)`;
-        }
-      }
       if (this.filledTrackRef.current) {
         this.filledTrackRef.current.style.transform = this.state.isRtl
           ? `translate(${100 - this.state.leftUpper}%, -50%) scaleX(${
@@ -1425,6 +1420,11 @@ class Slider extends PureComponent<SliderProps> {
                   : `calc(${this.state.left}% - 14px)`,
             },
           };
+          if (isRtl) {
+            lowerThumbWrapperProps['style'][
+              'transform'
+            ] = `translate(100%, -50%)`;
+          }
           const upperThumbWrapperProps = {
             style: { insetInlineStart: `${this.state.leftUpper}%` },
           };
