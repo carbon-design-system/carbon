@@ -1,6 +1,7 @@
 deprecated:
   - name: kubernetes
-    reason: The current kubernetes icon has been replaced by logo--kubernetes
+    reason: 
+    The current kubernetes icon has been replaced by logo--kubernetes
   - name: direct-link
     reason:
       The current icon has been replaced with the correct version of the App
@@ -17,3 +18,10 @@ deprecated:
     reason:
       Icon renamed and replaced by ibm-watsonx--assistant to correspond with the
       new watsonx platform and product suite
+  - name: watson--machine-learning
+    reason: 
+      Icon design is defunct, replaced with the existing icon ibm-watson--machine-learning  
+  - name: watson
+    reason: 
+      Icon represents the old avatar for the Watson brand, which is retired since
+      the watsonx brand launch. Replaced by the icon watsonx
