@@ -81,7 +81,12 @@ describe('FluidTextInput', () => {
 
     it('should respect invalid prop', () => {
       const { container } = render(
-        <FluidTextInput id="input-1" labelText="FluidTextInput" invalid />
+        <FluidTextInput
+          id="input-1"
+          labelText="FluidTextInput"
+          invalid
+          invalidText="Invalid"
+        />
       );
 
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
@@ -172,7 +177,12 @@ describe('FluidTextInput', () => {
 
     it('should respect warn prop', () => {
       const { container } = render(
-        <FluidTextInput id="input-1" labelText="FluidTextInput label" warn />
+        <FluidTextInput
+          id="input-1"
+          labelText="FluidTextInput label"
+          warn
+          warnText="Warning"
+        />
       );
 
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access

@@ -51,9 +51,12 @@
   }
 
   .#{$prefix}--date-picker-input__wrapper {
-    position: relative;
     display: flex;
     align-items: center;
+  }
+
+  .#{$prefix}--date-picker-input__wrapper span {
+    position: relative;
   }
 
   .#{$prefix}--date-picker.#{$prefix}--date-picker--simple

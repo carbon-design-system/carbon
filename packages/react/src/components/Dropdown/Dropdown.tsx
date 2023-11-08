@@ -184,7 +184,9 @@ export interface DropdownProps<ItemType>
    * An optional callback to render the currently selected item as a react element instead of only
    * as a string.
    */
-  renderSelectedItem?(item: ItemType): string;
+  renderSelectedItem?(
+    item: ItemType
+  ): React.JSXElementConstructor<ItemType> | null;
 
   /**
    * In the case you want to control the dropdown selection entirely.
@@ -227,22 +229,22 @@ const Dropdown = React.forwardRef(
   <ItemType,>(
     {
       className: containerClassName,
-      disabled,
-      direction,
+      disabled = false,
+      direction = 'bottom',
       items,
       label,
       ['aria-label']: ariaLabel,
       ariaLabel: deprecatedAriaLabel,
       itemToString = defaultItemToString,
-      itemToElement,
+      itemToElement = null,
       renderSelectedItem,
-      type,
+      type = 'default',
       size,
       onChange,
       id,
-      titleText,
+      titleText = '',
       hideLabel,
-      helperText,
+      helperText = '',
       translateWithId,
       light,
       invalid,
@@ -708,15 +710,5 @@ Dropdown.propTypes = {
    */
   warnText: PropTypes.node,
 };
-
-Dropdown.defaultProps = {
-  disabled: false,
-  type: 'default',
-  itemToString: defaultItemToString,
-  itemToElement: null,
-  titleText: '',
-  helperText: '',
-  direction: 'bottom',
-} as DropdownProps<unknown>;
 
 export default Dropdown as DropdownComponent;

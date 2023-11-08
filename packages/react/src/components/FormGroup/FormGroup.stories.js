@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import FormGroup from '../FormGroup';
+import { FormGroup } from '../FormGroup';
 import TextInput from '../TextInput';
 import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButton from '../RadioButton';

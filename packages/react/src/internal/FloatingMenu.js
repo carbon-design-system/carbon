@@ -217,12 +217,6 @@ class FloatingMenu extends React.Component {
     updateOrientation: PropTypes.func,
   };
 
-  static defaultProps = {
-    menuOffset: {},
-    menuDirection: DIRECTION_BOTTOM,
-    updateOrientation: null,
-  };
-
   // `true` if the menu body is mounted and calculation of the position is in progress.
   _placeInProgress = false;
 
@@ -279,14 +273,14 @@ class FloatingMenu extends React.Component {
 
     const { menuOffset: oldMenuOffset = {}, menuDirection: oldMenuDirection } =
       prevProps;
-    const { menuOffset = {}, menuDirection } = this.props;
+    const { menuOffset = {}, menuDirection = DIRECTION_BOTTOM } = this.props;
 
     if (
       hasChangeInOffset(oldMenuOffset, menuOffset) ||
       oldMenuDirection !== menuDirection ||
       isAdjustment
     ) {
-      const { flipped, triggerRef, updateOrientation } = this.props;
+      const { flipped, triggerRef, updateOrientation = null } = this.props;
 
       const { current: triggerEl } = triggerRef;
       const menuSize = menuBody.getBoundingClientRect();

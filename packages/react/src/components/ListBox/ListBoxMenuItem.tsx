@@ -59,7 +59,13 @@ export type ListBoxMenuItemComponent = ForwardRefReturn<
  */
 const ListBoxMenuItem = React.forwardRef<HTMLLIElement, ListBoxMenuItemProps>(
   function ListBoxMenuItem(
-    { children, isActive, isHighlighted, title, ...rest }: ListBoxMenuItemProps,
+    {
+      children,
+      isActive = false,
+      isHighlighted = false,
+      title,
+      ...rest
+    }: ListBoxMenuItemProps,
     forwardedRef: ListBoxMenuItemForwardedRef
   ) {
     const prefix = usePrefix();
@@ -101,22 +107,17 @@ ListBoxMenuItem.propTypes = {
   /**
    * Specify whether the current menu item is "active".
    */
-  isActive: PropTypes.bool.isRequired,
+  isActive: PropTypes.bool,
 
   /**
    * Specify whether the current menu item is "highlighted".
    */
-  isHighlighted: PropTypes.bool.isRequired,
+  isHighlighted: PropTypes.bool,
 
   /**
    * Provide an optional tooltip for the ListBoxMenuItem
    */
   title: PropTypes.string,
-};
-
-ListBoxMenuItem.defaultProps = {
-  isActive: false,
-  isHighlighted: false,
 };
 
 export default ListBoxMenuItem as ListBoxMenuItemComponent;

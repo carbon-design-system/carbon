@@ -59,14 +59,14 @@ import {
  */
 const CustomDataTable = ({
   id,
-  collator,
+  collator =  new Intl.Collator(),
   columns,
-  hasSelection,
-  pageSize: propPageSize,
+  hasSelection = false,
+  pageSize: propPageSize = 5,
   rows: propRows,
-  size,
+  size = TABLE_SIZE.REGULAR,
   sortInfo: propSortInfo,
-  start: propStart,
+  start: propStart = 0,
   zebra,
 }) => {
   const [rows, setRows] = useState(propRows);
@@ -339,14 +339,6 @@ CustomDataTable.propTypes = {
    * `true` if the zebra stripe should be shown.
    */
   zebra: PropTypes.bool,
-};
-
-CustomDataTable.defaultProps = {
-  collator: new Intl.Collator(),
-  hasSelection: false,
-  pageSize: 5,
-  size: TABLE_SIZE.REGULAR,
-  start: 0,
 };
 
 export default CustomDataTable;

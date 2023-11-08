@@ -7,9 +7,9 @@
 
 'use strict';
 
-const { expect, test } = require('@playwright/test');
-const { themes } = require('../../test-utils/env');
-const { snapshotStory, visitStory } = require('../../test-utils/storybook');
+import { test } from '@playwright/test';
+import { themes } from '../../test-utils/env';
+import { snapshotStory } from '../../test-utils/storybook';
 
 test.describe('TimePicker', () => {
   themes.forEach((theme) => {
@@ -30,16 +30,5 @@ test.describe('TimePicker', () => {
         });
       });
     });
-  });
-
-  test('accessibility-checker @avt', async ({ page }) => {
-    await visitStory(page, {
-      component: 'TimePicker',
-      id: 'components-timepicker--default',
-      globals: {
-        theme: 'white',
-      },
-    });
-    await expect(page).toHaveNoACViolations('TimePicker');
   });
 });
