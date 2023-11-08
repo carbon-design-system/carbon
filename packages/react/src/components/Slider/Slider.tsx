@@ -580,11 +580,6 @@ class Slider extends PureComponent<SliderProps> {
             })`;
       }
     } else {
-      if (this.thumbRef.current) {
-        this.thumbRef.current.style.insetInlineStart = this.state.isRtl
-          ? `calc(${this.state.left}% - 14px)`
-          : `${this.state.left}%`;
-      }
       if (this.filledTrackRef.current) {
         this.filledTrackRef.current.style.transform = this.state.isRtl
           ? `translate(100%, -50%) scaleX(-${this.state.left / 100})`
@@ -1500,7 +1495,6 @@ class Slider extends PureComponent<SliderProps> {
                     className={lowerThumbWrapperClasses}
                     label={`${value}`}
                     align="top"
-                    defaultOpen={true}
                     {...lowerThumbWrapperProps}>
                     <div
                       className={lowerThumbClasses}
@@ -1531,7 +1525,6 @@ class Slider extends PureComponent<SliderProps> {
                       className={upperThumbWrapperClasses}
                       label={`${valueUpper}`}
                       align="top"
-                      defaultOpen={true}
                       {...upperThumbWrapperProps}>
                       <div
                         className={upperThumbClasses}

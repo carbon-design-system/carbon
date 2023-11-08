@@ -88,25 +88,20 @@
   .#{$prefix}--slider__thumb-wrapper {
     position: absolute;
     z-index: 3;
+    block-size: convert.to-rem(14px);
+    inline-size: convert.to-rem(14px);
+    transform: translate(-50%, -50%);
+  }
+
+  .#{$prefix}--slider__thumb-wrapper--lower,
+  .#{$prefix}--slider__thumb-wrapper--upper {
     block-size: 24px;
     inline-size: 16px;
     transform: translate(-100%, -50%);
-
-    &:hover,
-    &:active,
-    &:focus {
-      transform: translate(-100%, -50%);
-    }
   }
 
   .#{$prefix}--slider__thumb-wrapper--upper {
     transform: translate(0, -50%);
-
-    &:hover,
-    &:active,
-    &:focus {
-      transform: translate(0, -50%);
-    }
   }
 
   .#{$prefix}--slider__thumb {
@@ -116,26 +111,25 @@
     box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 2px transparent;
     inset: 0;
     outline: none;
-    transform: translate(-50%, -50%);
     transition: transform $duration-fast-02 motion(standard, productive),
       background $duration-fast-02 motion(standard, productive),
       box-shadow $duration-fast-02 motion(standard, productive);
 
     &:hover {
       // 20px / 14px = 1.4286
-      transform: translate(-50%, -50%) scale(1.4286);
+      transform: scale(1.4286);
     }
 
     &:focus {
       background-color: $interactive;
       box-shadow: inset 0 0 0 2px $interactive, inset 0 0 0 3px $layer;
       // 20px / 14px = 1.4286
-      transform: translate(-50%, -50%) scale(1.4286);
+      transform: scale(1.4286);
     }
 
     &:active {
       box-shadow: inset 0 0 0 2px $interactive;
-      transform: translate(-50%, -50%) scale(1.4286);
+      transform: scale(1.4286);
     }
   }
 
@@ -150,14 +144,12 @@
 
   .#{$prefix}--slider__thumb--lower,
   .#{$prefix}--slider__thumb--upper {
-    display: block;
+    position: absolute;
     /* stylelint-disable-next-line declaration-property-value-disallowed-list */
     border-radius: unset;
     background-color: transparent;
-    block-size: 24px;
     box-shadow: none;
-    inline-size: 16px;
-    transform: none;
+    inset: 0;
     transition: none;
 
     &::before {
