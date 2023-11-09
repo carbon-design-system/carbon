@@ -12,6 +12,12 @@ import DatePickerInput from '../DatePickerInput';
 import Form from './Form';
 import FormGroup from '../FormGroup';
 import FileUploader from '../FileUploader';
+import FluidForm from '../FluidForm';
+import FluidNumberInput from '../FluidNumberInput';
+import FluidDatePicker from '../FluidDatePicker';
+import FluidDatePickerInput from '../FluidDatePickerInput';
+import FluidTextArea from '../FluidTextArea';
+import FluidTextInput from '../FluidTextInput';
 import { NumberInput } from '../NumberInput';
 import RadioButton from '../RadioButton';
 import RadioButtonGroup from '../RadioButtonGroup';
@@ -26,6 +32,7 @@ import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import { Slug, SlugContent, SlugActions } from '../Slug';
 import mdx from './Form.mdx';
+import './form-story.scss';
 
 const checkboxEvents = {
   className: 'some-class',
@@ -258,27 +265,52 @@ const slug = (
 );
 
 export const _AIForm = () => (
-  <Form aria-label="sample form" style={{ width: '50%' }}>
-    <Stack gap={7}>
-      <NumberInput {...numberInputProps} slug={slug} />
+  <Stack gap={7} className="form-example">
+    <Form aria-label="sample form" className="slug-form">
+      <Stack gap={7}>
+        <NumberInput {...numberInputProps} slug={slug} />
+        <DatePicker datePickerType="single">
+          <DatePickerInput
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+            size="md"
+            id="date-picker"
+            slug={slug}
+          />
+        </DatePicker>
+        <TextInput {...TextInputProps} slug={slug} />
+        <TextArea {...textareaProps} slug={slug} />
+        <Button type="submit" className="some-class" {...buttonEvents}>
+          Submit
+        </Button>
+      </Stack>
+    </Form>
 
-      <DatePicker datePickerType="single">
-        <DatePickerInput
-          placeholder="mm/dd/yyyy"
-          labelText="Date Picker label"
-          size="md"
-          id="date-picker"
-          slug={slug}
-        />
-      </DatePicker>
+    <FluidForm aria-label="sample form" className="fluid-slug-form">
+      <div style={{ display: 'flex' }}>
+        <FluidDatePicker datePickerType="single" style={{ width: '100%' }}>
+          <FluidDatePickerInput
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+            size="md"
+            id="date-picker"
+            slug={slug}
+          />
+        </FluidDatePicker>
+      </div>
 
-      <TextInput {...TextInputProps} slug={slug} />
-
-      <TextArea {...textareaProps} slug={slug} />
-
+      <div style={{ display: 'flex' }}>
+        <FluidNumberInput {...numberInputProps} slug={slug} />
+      </div>
+      <div style={{ display: 'flex' }}>
+        <FluidTextInput {...TextInputProps} slug={slug} />
+      </div>
+      <div style={{ display: 'flex' }}>
+        <FluidTextArea {...textareaProps} slug={slug} />
+      </div>
       <Button type="submit" className="some-class" {...buttonEvents}>
         Submit
       </Button>
-    </Stack>
-  </Form>
+    </FluidForm>
+  </Stack>
 );
