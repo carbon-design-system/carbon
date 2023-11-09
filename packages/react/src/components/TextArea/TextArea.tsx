@@ -318,7 +318,6 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   );
 
   // Slug is always size `mini`
-  console.log(slug);
   let normalizedSlug;
   if (slug) {
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
