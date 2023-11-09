@@ -13,6 +13,7 @@ import { keys, matches } from '../../internal/keyboard';
 import uid from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
+import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
 import { Tooltip } from '../Tooltip';
 
@@ -72,13 +73,12 @@ export interface FileUploaderItemProps extends ReactAttr<HTMLSpanElement> {
    */
   uuid?: string;
 }
-
 function FileUploaderItem({
   uuid,
   name,
   status = 'uploading',
   iconDescription,
-  onDelete = () => {},
+  onDelete = noopFn,
   invalid,
   errorSubject,
   errorBody,
@@ -226,11 +226,6 @@ FileUploaderItem.propTypes = {
    * Unique identifier for the file object
    */
   uuid: PropTypes.string,
-};
-
-FileUploaderItem.defaultProps = {
-  status: 'uploading',
-  onDelete: () => {},
 };
 
 export default FileUploaderItem;

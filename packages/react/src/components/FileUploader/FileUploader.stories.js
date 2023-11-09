@@ -65,6 +65,7 @@ export const _FileUploaderItem = (args) => {
     />
   );
 };
+
 _FileUploaderItem.argTypes = {
   errorBody: {
     control: 'text',

@@ -209,8 +209,4 @@ TableBatchActions.propTypes = {
   translateWithId: PropTypes.func,
 };
 
-TableBatchActions.defaultProps = {
-  translateWithId,
-};
-
 export default TableBatchActions;

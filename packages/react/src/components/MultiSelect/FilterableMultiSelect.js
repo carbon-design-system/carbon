@@ -28,34 +28,34 @@ import { FormContext } from '../FluidForm';
 const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
   {
     className: containerClassName,
-    clearSelectionDescription,
-    clearSelectionText,
-    compareItems,
-    direction,
-    disabled,
+    clearSelectionDescription = 'Total items selected: ',
+    clearSelectionText = 'To clear selection, press Delete or Backspace',
+    compareItems = defaultCompareItems,
+    direction = 'bottom',
+    disabled = false,
     downshiftProps,
-    filterItems,
+    filterItems = defaultFilterItems,
     helperText,
     hideLabel,
     id,
-    initialSelectedItems,
+    initialSelectedItems = [],
     invalid,
     invalidText,
     items,
     itemToElement: ItemToElement, // needs to be capitalized for react to render it correctly
-    itemToString,
+    itemToString = defaultItemToString,
     light,
-    locale,
+    locale = 'en',
     onInputValueChange,
-    open,
+    open = false,
     onChange,
     onMenuChange,
     placeholder,
     titleText,
     type,
-    selectionFeedback,
+    selectionFeedback = 'top-after-reopen',
     size,
-    sortItems,
+    sortItems = defaultSortItems,
     translateWithId,
     useTitleInItem,
     warn,
@@ -678,21 +678,6 @@ FilterableMultiSelect.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
-};
-
-FilterableMultiSelect.defaultProps = {
-  compareItems: defaultCompareItems,
-  direction: 'bottom',
-  disabled: false,
-  filterItems: defaultFilterItems,
-  initialSelectedItems: [],
-  itemToString: defaultItemToString,
-  locale: 'en',
-  sortItems: defaultSortItems,
-  open: false,
-  selectionFeedback: 'top-after-reopen',
-  clearSelectionText: 'To clear selection, press Delete or Backspace,',
-  clearSelectionDescription: 'Total items selected: ',
 };
 
 export default FilterableMultiSelect;

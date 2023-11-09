@@ -203,8 +203,8 @@ export type CalRef = {
 interface DatePickerProps
   extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes> {
   /**
-   * flatpickr prop passthrough. Allows the user to enter a date directly
-   * into the input field
+   * Flatpickr prop passthrough enables direct date input, and when set to false,
+   * we must clear dates manually by resetting the value prop to empty string making it a controlled input.
    */
   allowInput?: boolean;
 
@@ -344,12 +344,12 @@ interface DatePickerProps
   /**
    * The maximum date that a user can pick to.
    */
-  maxDate?: string;
+  maxDate?: string | number;
 
   /**
    * The minimum date that a user can start picking from.
    */
-  minDate?: string;
+  minDate?: string | number;
 
   /**
    * The `change` event handler.
@@ -745,6 +745,12 @@ const DatePicker = React.forwardRef(function DatePicker(
 
   useEffect(() => {
     if (calendarRef?.current?.set) {
+      calendarRef.current.set('allowInput', allowInput);
+    }
+  }, [allowInput]);
+
+  useEffect(() => {
+    if (calendarRef?.current?.set) {
       calendarRef.current.set('maxDate', maxDate);
     }
   }, [maxDate]);
@@ -816,8 +822,8 @@ const DatePicker = React.forwardRef(function DatePicker(
 
 DatePicker.propTypes = {
   /**
-   * flatpickr prop passthrough. Allows the user to enter a date directly
-   * into the input field
+   * Flatpickr prop passthrough enables direct date input, and when set to false,
+   * we must clear dates manually by resetting the value prop to empty string making it a controlled input.
    */
   allowInput: PropTypes.bool,
 
@@ -961,12 +967,12 @@ DatePicker.propTypes = {
   /**
    * The maximum date that a user can pick to.
    */
-  maxDate: PropTypes.string,
+  maxDate: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /**
    * The minimum date that a user can start picking from.
    */
-  minDate: PropTypes.string,
+  minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /**
    * The `change` event handler.

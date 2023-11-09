@@ -36,12 +36,14 @@ const babelConfig = {
       },
     ],
     '@babel/preset-react',
+    '@babel/preset-typescript',
   ],
   plugins: [
     '@babel/plugin-transform-react-constant-elements',
     'babel-plugin-dev-expression',
   ],
   babelHelpers: 'bundled',
+  extensions: ['.ts', '.tsx', '.js', '.jsx'],
 };
 
 async function builder(metadata, { output }) {
@@ -97,10 +99,11 @@ async function builder(metadata, { output }) {
   }
 
   const files = {
-    'index.js': `${BANNER}\n\nexport { default as Icon } from './Icon.js';`,
+    'index.ts': `${BANNER}\n\nexport { default as Icon } from './Icon.tsx';`,
   };
   const input = {
-    'index.js': 'index.js',
+    'index.js': 'index.ts',
+    'Icon.js': './Icon.tsx',
   };
   for (const m of modules) {
     files[m.filepath] = m.entrypoint;
@@ -115,23 +118,23 @@ async function builder(metadata, { output }) {
     files[filename] = `${BANNER}
 
 import React from 'react';
-import Icon from './Icon.js';
+import Icon from './Icon.tsx';
 
 const didWarnAboutDeprecation = {};`;
 
     for (const m of bucket) {
       files[filename] += `export ${m.source}`;
-      files['index.js'] += `export { ${m.moduleName} } from '${filename}';`;
+      files['index.ts'] += `export { ${m.moduleName} } from '${filename}';`;
     }
   }
 
   const bundle = await rollup({
-    input: input,
+    input,
     external,
     plugins: [
       virtual({
-        './Icon.js': await fs.readFile(
-          path.resolve(__dirname, './components/Icon.js'),
+        './Icon.tsx': await fs.readFile(
+          path.resolve(__dirname, './components/Icon.tsx'),
           'utf8'
         ),
         ...files,
@@ -164,12 +167,12 @@ const didWarnAboutDeprecation = {};`;
   }
 
   const umd = await rollup({
-    input: 'index.js',
+    input: 'index.ts',
     external,
     plugins: [
       virtual({
-        './Icon.js': await fs.readFile(
-          path.resolve(__dirname, './components/Icon.js'),
+        './Icon.tsx': await fs.readFile(
+          path.resolve(__dirname, './components/Icon.tsx'),
           'utf8'
         ),
         ...files,
@@ -267,7 +270,7 @@ function createIconEntrypoint(moduleName, descriptor, isDeprecated = false) {
   const source = createIconSource(moduleName, descriptor, deprecatedBlock);
   return `${BANNER}
 import React from 'react';
-import Icon from './Icon.js';
+import Icon from './Icon.tsx';
 ${deprecatedPreamble}
 ${source}
 export default ${moduleName};

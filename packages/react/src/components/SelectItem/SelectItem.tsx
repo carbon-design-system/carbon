@@ -39,10 +39,10 @@ export interface SelectItemProps extends HTMLAttributes<HTMLOptionElement> {
 
 const SelectItem = ({
   className,
-  value,
-  disabled,
-  hidden,
-  text,
+  value = '',
+  disabled = false,
+  hidden = false,
+  text = '',
   ...other
 }: SelectItemProps) => {
   const prefix = usePrefix();
@@ -88,13 +88,6 @@ SelectItem.propTypes = {
    * Specify the value of the <SelectItem>
    */
   value: PropTypes.any.isRequired,
-};
-
-SelectItem.defaultProps = {
-  disabled: false,
-  hidden: false,
-  value: '',
-  text: '',
 };
 
 export default SelectItem;

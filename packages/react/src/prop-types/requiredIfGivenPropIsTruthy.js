@@ -8,8 +8,8 @@
 /**
  * @param {string} name The name of the prop that must exist to validate
  * the current prop.
- * @param {Function} propType The original prop type checker.
- * @returns {Function} The new prop type checker for the current prop that
+ * @param {React.Validator} propType The original prop type checker.
+ * @returns {React.Validator} The new prop type checker for the current prop that
  * becomes required if the prop corresponding to the provided prop name exists.
  */
 export default function requiredIfGivenPropIsTruthy(name, propType) {
