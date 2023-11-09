@@ -293,20 +293,25 @@ export const _AIForm = () => (
             placeholder="mm/dd/yyyy"
             labelText="Date Picker label"
             size="md"
-            id="date-picker"
+            id="fluid-date-picker"
             slug={slug}
           />
         </FluidDatePicker>
       </div>
 
       <div style={{ display: 'flex' }}>
-        <FluidNumberInput {...numberInputProps} slug={slug} />
+        <FluidNumberInput
+          {...numberInputProps}
+          id="fluid-number-input"
+          slug={slug}
+          invalidText="Oh no!"
+        />
       </div>
       <div style={{ display: 'flex' }}>
-        <FluidTextInput {...TextInputProps} slug={slug} />
+        <FluidTextInput {...TextInputProps} id="fluid-text-input" slug={slug} />
       </div>
       <div style={{ display: 'flex' }}>
-        <FluidTextArea {...textareaProps} slug={slug} />
+        <FluidTextArea {...textareaProps} id="fluid-text-area" slug={slug} />
       </div>
       <Button type="submit" className="some-class" {...buttonEvents}>
         Submit
