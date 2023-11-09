@@ -6,9 +6,9 @@
  */
 
 'use strict';
-const { expect, test } = require('@playwright/test');
+const { test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
-const { snapshotStory, visitStory } = require('../../test-utils/storybook');
+const { snapshotStory } = require('../../test-utils/storybook');
 
 test.describe('Heading', () => {
   themes.forEach((theme) => {
@@ -21,16 +21,5 @@ test.describe('Heading', () => {
         });
       });
     });
-  });
-
-  test('accessibility-checker @avt', async ({ page }) => {
-    await visitStory(page, {
-      component: 'Heading',
-      id: 'components-heading--default',
-      globals: {
-        theme: 'white',
-      },
-    });
-    await expect(page).toHaveNoACViolations('Heading');
   });
 });

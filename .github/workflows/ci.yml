@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
       - name: Use Node.js 20.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65 #v4.0.0
         with:
           node-version: '20.x'
       - name: Run yarn dedupe
@@ -30,7 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
       - name: Use Node.js 20.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65 #v4.0.0
         with:
           node-version: '20.x'
       - name: Install dependencies
@@ -43,7 +43,7 @@ jobs:
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
       - name: Use Node.js 20.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65 #v4.0.0
         with:
           node-version: '20.x'
       - name: Install dependencies
@@ -58,10 +58,11 @@ jobs:
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
       - name: Use Node.js 20.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65 #v4.0.0
         with:
           node-version: '20.x'
       - uses: actions/cache@v3
+        if: github.event_name != 'merge_group'
         id: cache
         with:
           path: |
@@ -84,10 +85,11 @@ jobs:
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
       - name: Use Node.js 20.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65 #v4.0.0
         with:
           node-version: '20.x'
       - uses: actions/cache@v3
+        if: github.event_name != 'merge_group'
         id: cache
         with:
           path: |
@@ -123,10 +125,11 @@ jobs:
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
       - name: Use Node.js 20.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65 #v4.0.0
         with:
           node-version: '20.x'
       - uses: actions/cache@v3
+        if: github.event_name != 'merge_group'
         id: cache
         with:
           path: |
@@ -177,15 +180,19 @@ jobs:
         if: ${{ needs.vrt-runner.result != 'success' }}
         run: exit 1
 
-  avt:
+  avt-runner:
+    strategy:
+      matrix:
+        shard: [1, 2, 3, 4]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
       - name: Use Node.js 20.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65 #v4.0.0
         with:
           node-version: '20.x'
       - uses: actions/cache@v3
+        if: github.event_name != 'merge_group'
         id: cache
         with:
           path: |
@@ -206,7 +213,7 @@ jobs:
         run: |
           npx serve -l 3000 packages/react/storybook-static &
           pid=$!
-          echo ::set-output name=pid::"$pid"
+          echo "pid=$pid" >> $GITHUB_OUTPUT
       - uses: ./actions/wait-for-it
         with:
           URL: 'http://localhost:3000'
@@ -214,7 +221,7 @@ jobs:
       - name: Run AVT
         if: github.repository == 'carbon-design-system/carbon'
         run: |
-          yarn playwright test --project chromium --grep @avt
+          yarn playwright test --project chromium --grep @avt --shard="${{ matrix.shard }}/4"
       - name: Stop storybook
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload test results
@@ -223,3 +230,12 @@ jobs:
         with:
           name: playwright-avt-report
           path: .playwright
+
+  avt:
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    needs: avt-runner
+    steps:
+      - name: Check AVT Runner job status
+        if: ${{ needs.avt-runner.result != 'success' }}
+        run: exit 1

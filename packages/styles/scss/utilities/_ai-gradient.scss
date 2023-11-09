@@ -1,0 +1,42 @@
+//
+// Copyright IBM Corp. 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../theme';
+
+/// Experimental - name and structure subject to change. Use at your own risk!
+/// Adds AI gradient styles to a component
+/// @access public
+/// @param {String} $direction  - Direction of gradient from: `left`, `right`, `top`, and `bottom`
+/// @param {Number} $width - Percentage width of gradient with regards to parent component
+/// @example @include focus-outline('outline');
+/// @group utilities
+
+@mixin ai-gradient($direction: 'right', $width: 50%) {
+  $deg: 0;
+  @if $direction == 'bottom' {
+    $deg: 0deg;
+  } @else if $direction == 'left' {
+    $deg: 90deg;
+  } @else if $direction == 'top' {
+    $deg: 180deg;
+  } @else if $direction == 'right' {
+    $deg: 270deg;
+  }
+
+  background-image: linear-gradient(
+      $deg,
+      theme.$ai-gradient-start-01 0%,
+      theme.$ai-gradient-end $width,
+      transparent 100%
+    ),
+    linear-gradient(
+      $deg,
+      theme.$ai-gradient-start-02 0%,
+      theme.$ai-gradient-end $width,
+      transparent 100%
+    );
+}

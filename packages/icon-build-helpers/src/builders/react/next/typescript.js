@@ -46,9 +46,8 @@ async function writeModuleTypes(modules, outDir) {
       templates.banner +
       '\n' +
       "import type { CarbonIconType } from './CarbonIcon';\n" +
-      'export const ' +
-      m.name +
-      ': CarbonIconType;\n';
+      `declare const ${m.name}: CarbonIconType;\n` +
+      `export default ${m.name}\n`;
     const filename = path.resolve(outDir, m.filepath.replace(/\.js$/, '.d.ts'));
     await fs.writeFile(filename, content);
   }
@@ -58,16 +57,17 @@ async function writeBucketTypes(buckets, outDir) {
   for (const bucket of buckets) {
     const iconLines = [];
     for (const m of bucket.modules) {
-      iconLines.push('export const ' + m.name + ': CarbonIconType;');
+      iconLines.push('declare const _' + m.name + ': CarbonIconType;');
     }
     const bucketModule = `generated/${bucket.id}`;
     const filepath = path.resolve(outDir, `${bucketModule}.d.ts`);
+    const exports = bucket.modules.map((m) => `_${m.name} as ${m.name}`);
     const content =
       templates.banner +
       '\n' +
       "import type { CarbonIconType } from '../CarbonIcon';\n" +
       iconLines.join('\n') +
-      '\n';
+      `\nexport { ${exports.join(', ')} };\n`;
     await fs.writeFile(filepath, content);
   }
 }
