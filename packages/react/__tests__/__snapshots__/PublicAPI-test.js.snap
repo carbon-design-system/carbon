@@ -211,10 +211,21 @@ Map {
         "args": Array [
           Array [
             Object {
-              "type": "string",
+              "type": "bool",
             },
             Object {
-              "type": "bool",
+              "args": Array [
+                Array [
+                  "false",
+                  "true",
+                  "page",
+                  "step",
+                  "location",
+                  "date",
+                  "time",
+                ],
+              ],
+              "type": "oneOf",
             },
           ],
         ],
