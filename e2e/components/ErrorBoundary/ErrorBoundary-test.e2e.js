@@ -31,6 +31,6 @@ test.describe('ErrorBoundary', () => {
         theme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('ErrorBoundary');
+    await expect(page).toHaveNoACViolations('ErrorBoundary default');
   });
 });
