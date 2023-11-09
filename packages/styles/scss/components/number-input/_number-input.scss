@@ -413,7 +413,7 @@
     background-color: $border-subtle;
   }
 
-  // Styles for Slug rendered inside TextInput
+  // Styles for `Slug` rendered inside `NumberInput`
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug {
     position: absolute;
     inset-block-start: 50%;

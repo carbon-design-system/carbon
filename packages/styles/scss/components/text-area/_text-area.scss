@@ -12,6 +12,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../../utilities/ai-gradient' as *;
 @use '../../utilities/component-reset';
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
@@ -121,9 +122,15 @@
     border-block-end-color: $border-subtle;
   }
 
-  // V11: Possibly deprecate
-  .#{$prefix}--text-area.#{$prefix}--text-area--light:disabled {
-    background-color: $field-02;
+  // Styles for `Slug` rendered inside `TextArea`
+  .#{$prefix}--text-area__wrapper--slug .#{$prefix}--slug {
+    position: absolute;
+    inset-block-start: convert.to-rem(8px);
+    inset-inline-end: convert.to-rem(8px);
+  }
+
+  .#{$prefix}--text-area__wrapper--slug .#{$prefix}--text-area {
+    @include ai-gradient;
   }
 
   // Skeleton State

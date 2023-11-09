@@ -190,7 +190,7 @@
     inline-size: convert.to-rem(143.5px);
   }
 
-  // Styles for Slug rendered inside TextInput
+  // Styles for `Slug` rendered inside `DatePickerInput`
   .#{$prefix}--date-picker-input__wrapper--slug .#{$prefix}--slug {
     position: absolute;
     inset-block-start: 50%;
@@ -202,23 +202,6 @@
     .#{$prefix}--date-picker__input {
     @include ai-gradient;
   }
-
-  // .#{$prefix}--number__input-wrapper--slug
-  //   input[data-invalid]
-  //   ~ .#{$prefix}--slug,
-  // .#{$prefix}--number__input-wrapper--slug.#{$prefix}--number__input-wrapper--warning
-  //   .#{$prefix}--slug {
-  //   inset-inline-end: convert.to-rem(120px);
-  // }
-
-  // .#{$prefix}--number
-  //   .#{$prefix}--number__input-wrapper--slug
-  //   input[data-invalid],
-  // .#{$prefix}--number
-  //   .#{$prefix}--number__input-wrapper--slug.#{$prefix}--number__input-wrapper--warning
-  //   input {
-  //   padding-inline-end: convert.to-rem(144px);
-  // }
 
   // Read-only State
   .#{$prefix}--date-picker__input[readonly] {
