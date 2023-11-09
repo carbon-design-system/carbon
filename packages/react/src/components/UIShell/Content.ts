@@ -7,15 +7,20 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { HTMLAttributes, ReactNode } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
+
+export type ContentProps = HTMLAttributes<HTMLElement> & {
+  children: ReactNode;
+  tagName?: string;
+};
 
 const Content = ({
   className: customClassName,
   children,
   tagName = 'main',
   ...rest
-}) => {
+}: ContentProps) => {
   const prefix = usePrefix();
   const className = cx(`${prefix}--content`, customClassName);
   return React.createElement(
