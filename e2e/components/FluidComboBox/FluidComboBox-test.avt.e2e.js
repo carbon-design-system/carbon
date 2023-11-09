@@ -10,22 +10,22 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('ComboBox @avt', () => {
+test.describe('FluidComboBox @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
-      component: 'ComboBox',
+      component: 'FluidComboBox',
       id: 'experimental-unstable-fluidcombobox--default',
       globals: {
         theme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('ComboBox');
+    await expect(page).toHaveNoACViolations('FluidComboBox');
   });
 
   // Skipping now due to AVT violation, possible false positive
   test.skip('@avt-advanced-states open', async ({ page }) => {
     await visitStory(page, {
-      component: 'ComboBox',
+      component: 'FluidComboBox',
       id: 'experimental-unstable-fluidcombobox--default',
       globals: {
         theme: 'white',
@@ -41,12 +41,12 @@ test.describe('ComboBox @avt', () => {
     await expect(page.getByRole('combobox', { expanded: true })).toBeVisible;
     await expect(combobox).toBeFocused();
 
-    await expect(page).toHaveNoACViolations('ComboBox-open');
+    await expect(page).toHaveNoACViolations('FluidComboBox-open');
   });
 
   test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
-      component: 'ComboBox',
+      component: 'FluidComboBox',
       id: 'experimental-unstable-fluidcombobox--default',
       globals: {
         theme: 'white',
