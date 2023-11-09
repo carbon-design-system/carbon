@@ -105,37 +105,6 @@
     - AI
     - cloud
     - artificial intelligence
-- name: ai-governance--model-tuned
-  friendly_name: AI governance model tuned
-  aliases:
-    - governance
-    - model
-    - tuned
-    - modified
-    - changed
-    - edited
-    - artificial intelligence
-- name: ai-governance--model
-  friendly_name: AI governance model
-  aliases:
-    - governance
-    - model
-    - artificial intelligence
-- name: ai-governance--prompt
-  friendly_name: AI governance prompt
-  aliases:
-    - governance
-    - prompt
-    - code
-    - snippet
-    - artificial intelligence
-- name: ai-governance--lifecycle-factsheet
-  friendly_name: AI governance lifecycle factsheet
-  aliases:
-    - governance
-    - model
-    - factsheet
-    - artificial intelligence
 - name: ai--ethics
   friendly_name: AI ethics
   aliases:
@@ -172,6 +141,37 @@
   aliases:
     - AI trust
     - trust
+- name: ai-governance--lifecycle-factsheet
+  friendly_name: AI governance lifecycle factsheet
+  aliases:
+    - governance
+    - model
+    - factsheet
+    - artificial intelligence
+- name: ai-governance--model
+  friendly_name: AI governance model
+  aliases:
+    - governance
+    - model
+    - artificial intelligence
+- name: ai-governance--model-tuned
+  friendly_name: AI governance model tuned
+  aliases:
+    - governance
+    - model
+    - tuned
+    - modified
+    - changed
+    - edited
+    - artificial intelligence
+- name: ai-governance--prompt
+  friendly_name: AI governance prompt
+  aliases:
+    - governance
+    - prompt
+    - code
+    - snippet
+    - artificial intelligence
 - name: air--conditioner
   friendly_name: Air conditioner
   aliases:
@@ -3046,12 +3046,6 @@
   friendly_name: Flashing content
   aliases:
     - flashing content
-- name: flexible
-  friendly_name: Flexible
-  aliases:
-    - flexible
-    - pliable
-    - moldable
 - name: flexibility
   friendly_name: Flexibility
   aliases:
@@ -3061,6 +3055,12 @@
   aliases:
     - flexibility
     - cloud
+- name: flexible
+  friendly_name: Flexible
+  aliases:
+    - flexible
+    - pliable
+    - moldable
 - name: flexible--compute
   friendly_name: Flexible compute
   aliases:
@@ -7877,7 +7877,7 @@
     - health
     - active
     - workplace
-    - community 
+    - community
     - wellness
 - name: yoga--03
   friendly_name: Yoga 03
