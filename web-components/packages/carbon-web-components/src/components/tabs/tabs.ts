@@ -7,8 +7,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit';
+import { TemplateResult, html } from 'lit';
 import { property, state, query } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
@@ -413,51 +414,59 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   /**
    * Render the previous button if tablist is wider than container.
    */
-  protected renderPreviousButton() {
+  protected renderPreviousButton(): TemplateResult | null {
     const {
       _isIntersectionLeftTrackerInContent: isIntersectionLeftTrackerInContent,
     } = this;
-
-    return isIntersectionLeftTrackerInContent
-      ? html`
-          <button
-            part="prev-button"
-            tabindex="-1"
-            aria-hidden="true"
-            class="${prefix}--tab--overflow-nav-button ${prefix}--tabs__nav-caret-left ${prefix}--tab--overflow-nav-button--previous"
-            @click=${(_) =>
-              this._handleScrollButtonClick(_, {
-                direction: NAVIGATION_DIRECTION.Left,
-              })}>
-            ${ChevronLeft16()}
-          </button>
-        `
-      : null;
+    const previousButtonClasses = classMap({
+      [`${prefix}--tab--overflow-nav-button`]: true,
+      [`${prefix}--tabs__nav-caret-left`]: true,
+      [`${prefix}--tab--overflow-nav-button--previous`]: true,
+      [`${prefix}--tab--overflow-nav-button--hidden`]:
+        isIntersectionLeftTrackerInContent,
+    });
+    return html`
+      <button
+        part="prev-button"
+        tabindex="-1"
+        aria-hidden="true"
+        class="${previousButtonClasses}"
+        @click=${(_) =>
+          this._handleScrollButtonClick(_, {
+            direction: NAVIGATION_DIRECTION.Left,
+          })}>
+        ${ChevronLeft16()}
+      </button>
+    `;
   }
 
   /**
    * Render the next button if tablist is wider than container.
    */
-  protected renderNextButton() {
+  protected renderNextButton(): TemplateResult | null {
     const {
       _isIntersectionRightTrackerInContent: isIntersectionRightTrackerInContent,
     } = this;
-
-    return isIntersectionRightTrackerInContent
-      ? html`
-          <button
-            part="next-button"
-            tabindex="-1"
-            aria-hidden="true"
-            class="${prefix}--tab--overflow-nav-button ${prefix}--tabs__nav-caret-right ${prefix}--tab--overflow-nav-button--next"
-            @click=${(_) =>
-              this._handleScrollButtonClick(_, {
-                direction: NAVIGATION_DIRECTION.Right,
-              })}>
-            ${ChevronRight16()}
-          </button>
-        `
-      : null;
+    const nextButtonClasses = classMap({
+      [`${prefix}--tab--overflow-nav-button`]: true,
+      [`${prefix}--tabs__nav-caret-right`]: true,
+      [`${prefix}--tab--overflow-nav-button--next`]: true,
+      [`${prefix}--tab--overflow-nav-button--hidden`]:
+        isIntersectionRightTrackerInContent,
+    });
+    return html`
+      <button
+        part="next-button"
+        tabindex="-1"
+        aria-hidden="true"
+        class="${nextButtonClasses}"
+        @click=${(_) =>
+          this._handleScrollButtonClick(_, {
+            direction: NAVIGATION_DIRECTION.Right,
+          })}>
+        ${ChevronRight16()}
+      </button>
+    `;
   }
 
   render() {
