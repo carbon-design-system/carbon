@@ -149,8 +149,12 @@ describe('Slider', () => {
     });
 
     it('should accurately position slider on mount', () => {
-      renderSlider({ value: 50, max: 100, min: 0 });
-      expect(screen.getByRole('slider')).toHaveStyle({
+      const { container } = renderSlider({ value: 50, max: 100, min: 0 });
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const sliderWrapper = container.querySelector(
+        `.${prefix}--slider__thumb-wrapper`
+      );
+      expect(sliderWrapper).toHaveStyle({
         insetInlineStart: '50%',
       });
     });
@@ -706,15 +710,22 @@ describe('Slider', () => {
     });
 
     it('should accurately position handles on mount', () => {
-      renderTwoHandleSlider({
+      const { container } = renderTwoHandleSlider({
         value: 50,
         unstable_valueUpper: 50,
         min: 0,
         max: 100,
       });
-      const [lowerThumb, upperThumb] = screen.getAllByRole('slider');
-      expect(lowerThumb).toHaveStyle({ insetInlineStart: '50%' });
-      expect(upperThumb).toHaveStyle({ insetInlineStart: '50%' });
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const sliderWrapperLower = container.querySelector(
+        `.${prefix}--slider__thumb-wrapper--lower`
+      );
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const sliderWrapperUpper = container.querySelector(
+        `.${prefix}--slider__thumb-wrapper--upper`
+      );
+      expect(sliderWrapperLower).toHaveStyle({ insetInlineStart: '50%' });
+      expect(sliderWrapperUpper).toHaveStyle({ insetInlineStart: '50%' });
     });
 
     it('marks input field as hidden if hidden via props', () => {
