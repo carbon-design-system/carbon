@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('Modal @avt', () => {
-  test('default state', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Modal',
       id: 'components-modal--default',
@@ -22,7 +22,7 @@ test.describe('Modal @avt', () => {
     await expect(page).toHaveNoACViolations('Modal');
   });
 
-  test('default state - keyboard nav', async ({ page }) => {
+  test('@avt-keyboard-nav default state', async ({ page }) => {
     await visitStory(page, {
       component: 'Modal',
       id: 'components-modal--with-state-manager',
@@ -71,7 +71,7 @@ test.describe('Modal @avt', () => {
     await expect(button).toBeFocused();
   });
 
-  test('danger modal - keyboard nav', async ({ page }) => {
+  test('@avt-keyboard-nav danger modal', async ({ page }) => {
     await visitStory(page, {
       component: 'Modal',
       id: 'components-modal--danger-modal',
@@ -84,7 +84,7 @@ test.describe('Modal @avt', () => {
     await expect(page.getByRole('button', { name: 'Cancel' })).toBeFocused();
   });
 
-  test('default state, no interactive elements in body - keyboard nav', async ({
+  test('@avt-keyboard-nav default state, no interactive elements in body', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -99,7 +99,7 @@ test.describe('Modal @avt', () => {
     await expect(page.getByRole('button', { name: 'Add' })).toBeFocused();
   });
 
-  test('passive modal - keyboard nav', async ({ page }) => {
+  test('@avt-keyboard-nav passive modal', async ({ page }) => {
     await visitStory(page, {
       component: 'Modal',
       id: 'components-modal--passive-modal',
