@@ -93,6 +93,7 @@ describe('Carbon Components React', () => {
         "HeaderSideNavItems",
         "Heading",
         "IconButton",
+        "IconButtonKinds",
         "IconSkeleton",
         "IconSwitch",
         "IconTab",
