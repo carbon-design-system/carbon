@@ -131,6 +131,11 @@ MenuButton.propTypes = {
    * Specify the size of the button and menu.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * Specify the tabIndex of the button.
+   */
+  tabIndex: PropTypes.number,
 };
 
 export { MenuButton };
