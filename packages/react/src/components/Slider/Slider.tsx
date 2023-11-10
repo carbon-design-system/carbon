@@ -82,6 +82,52 @@ const UpperHandleFocus = () => (
   </PrefixContext.Consumer>
 );
 
+const ThumbWrapper = ({
+  hasTooltip = false,
+  className,
+  style,
+  children,
+  ...rest
+}) => {
+  if (hasTooltip) {
+    return (
+      // eslint-disable-next-line react/forbid-component-props
+      <Tooltip className={className} style={style} {...rest}>
+        {children}
+      </Tooltip>
+    );
+  } else {
+    return (
+      // eslint-disable-next-line react/forbid-dom-props
+      <div className={className} style={style}>
+        {children}
+      </div>
+    );
+  }
+};
+
+ThumbWrapper.propTypes = {
+  /**
+   * The thumb node itself.
+   */
+  children: PropTypes.node,
+
+  /**
+   * CSS wrapper class names.
+   */
+  className: PropTypes.string,
+
+  /**
+   * Should the thumb show a tooltip with the current value?
+   */
+  hasTooltip: PropTypes.bool.isRequired,
+
+  /**
+   * Percentage offset for the select thumb value.
+   */
+  style: PropTypes.object,
+};
+
 const translationIds = {
   autoCorrectAnnouncement: 'carbon.slider.auto-correct-announcement',
 };
@@ -1499,7 +1545,8 @@ class Slider extends PureComponent<SliderProps> {
                       : null
                   }
                   {...other}>
-                  <Tooltip
+                  <ThumbWrapper
+                    hasTooltip={hideTextInput}
                     className={lowerThumbWrapperClasses}
                     label={`${value}`}
                     align={twoHandles ? 'top-right' : 'top'}
@@ -1530,9 +1577,10 @@ class Slider extends PureComponent<SliderProps> {
                         </>
                       ) : undefined}
                     </div>
-                  </Tooltip>
+                  </ThumbWrapper>
                   {twoHandles ? (
-                    <Tooltip
+                    <ThumbWrapper
+                      hasTooltip={hideTextInput}
                       className={upperThumbWrapperClasses}
                       label={`${valueUpper}`}
                       align="top-left"
@@ -1561,7 +1609,7 @@ class Slider extends PureComponent<SliderProps> {
                           </>
                         ) : undefined}
                       </div>
-                    </Tooltip>
+                    </ThumbWrapper>
                   ) : null}
                   <div
                     className={`${prefix}--slider__track`}
