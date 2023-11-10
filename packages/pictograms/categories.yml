@@ -748,9 +748,9 @@ categories:
     members:
       - bee
       - carbon
+      - carbon--for-cloud
       - carbon--for-ibm-dotcom
       - carbon--for-ibm-product
-      - cloud--pal
       - enterprise--design--thinking--01
       - enterprise--design--thinking--02
       - eye
@@ -1221,4 +1221,3 @@ categories:
       - trash--burnable
       - trash--non-burnable
       - waste--electronic
-      

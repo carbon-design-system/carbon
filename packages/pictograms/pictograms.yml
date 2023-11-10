@@ -897,6 +897,19 @@
     - vue
     - angular
     - web components
+- name: carbon--for-cloud
+  friendly_name: Carbon for cloud
+  aliases:
+    - cloud
+    - PAL
+    - component asset library
+    - carbon
+    - kit
+    - development
+    - pattern asset library
+    - product
+    - product design
+    - software design
 - name: carbon--for-ibm-dotcom
   friendly_name: Carbon for IBM dotcom
   aliases:
@@ -1407,19 +1420,6 @@
     - cloud oracle
     - cloud
     - oracle
-- name: cloud--pal
-  friendly_name: Cloud PAL
-  aliases:
-    - cloud
-    - PAL
-    - component asset library
-    - carbon
-    - kit
-    - development
-    - pattern asset library
-    - product
-    - product design
-    - software design
 - name: cloud--partners
   friendly_name: Cloud partners
   aliases:
