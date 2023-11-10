@@ -221,6 +221,10 @@
     position: relative;
   }
 
+  .#{$prefix}--slider-text-input-wrapper--hidden {
+    display: none;
+  }
+
   .#{$prefix}--slider-text-input,
   .#{$prefix}-slider-text-input {
     -moz-appearance: textfield;
@@ -232,10 +236,6 @@
     &::-webkit-inner-spin-button {
       display: none;
     }
-  }
-
-  .#{$prefix}--slider-text-input--hidden {
-    display: none;
   }
 
   .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {

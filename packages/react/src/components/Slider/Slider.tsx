@@ -1357,7 +1357,6 @@ class Slider extends PureComponent<SliderProps> {
           ];
           const conditionalInputClasses = {
             [`${prefix}--text-input--light`]: light,
-            [`${prefix}--slider-text-input--hidden`]: hideTextInput,
           };
           const lowerInputClasses = classNames([
             ...fixedInputClasses,
@@ -1378,12 +1377,14 @@ class Slider extends PureComponent<SliderProps> {
               [`${prefix}--slider-text-input--warn`]: showWarningUpper,
             },
           ]);
+          console.log('hideTextInput', hideTextInput);
           const lowerInputWrapperClasses = classNames([
             `${prefix}--text-input-wrapper`,
             `${prefix}--slider-text-input-wrapper`,
             `${prefix}--slider-text-input-wrapper--lower`,
             {
               [`${prefix}--text-input-wrapper--readonly`]: readOnly,
+              [`${prefix}--slider-text-input-wrapper--hidden`]: hideTextInput,
             },
           ]);
           const upperInputWrapperClasses = classNames([
@@ -1392,6 +1393,7 @@ class Slider extends PureComponent<SliderProps> {
             `${prefix}--slider-text-input-wrapper--upper`,
             {
               [`${prefix}--text-input-wrapper--readonly`]: readOnly,
+              [`${prefix}--slider-text-input-wrapper--hidden`]: hideTextInput,
             },
           ]);
           const lowerThumbClasses = classNames(`${prefix}--slider__thumb`, {
