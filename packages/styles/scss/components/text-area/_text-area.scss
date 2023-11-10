@@ -125,8 +125,8 @@
   // Styles for `Slug` rendered inside `TextArea`
   .#{$prefix}--text-area__wrapper--slug .#{$prefix}--slug {
     position: absolute;
-    inset-block-start: convert.to-rem(8px);
-    inset-inline-end: convert.to-rem(8px);
+    inset-block-start: $spacing-04;
+    inset-inline-end: $spacing-05;
   }
 
   .#{$prefix}--text-area__wrapper--slug .#{$prefix}--text-area {

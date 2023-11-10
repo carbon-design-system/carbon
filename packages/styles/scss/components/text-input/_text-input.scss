@@ -419,7 +419,7 @@
   .#{$prefix}--text-input__field-wrapper .#{$prefix}--slug {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: convert.to-rem(8px);
+    inset-inline-end: $spacing-05;
     transform: translateY(-50%);
   }
 

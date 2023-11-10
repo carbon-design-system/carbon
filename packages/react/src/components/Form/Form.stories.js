@@ -264,11 +264,11 @@ const slug = (
   </Slug>
 );
 
-export const _AIForm = () => (
+export const _AIForm = (args) => (
   <Stack gap={7} className="form-example">
     <Form aria-label="sample form" className="slug-form">
       <Stack gap={7}>
-        <NumberInput {...numberInputProps} slug={slug} />
+        <NumberInput {...numberInputProps} slug={slug} {...args} />
         <DatePicker datePickerType="single">
           <DatePickerInput
             placeholder="mm/dd/yyyy"
@@ -276,10 +276,11 @@ export const _AIForm = () => (
             size="md"
             id="date-picker"
             slug={slug}
+            {...args}
           />
         </DatePicker>
-        <TextInput {...TextInputProps} slug={slug} />
-        <TextArea {...textareaProps} slug={slug} />
+        <TextInput {...TextInputProps} slug={slug} {...args} />
+        <TextArea {...textareaProps} slug={slug} {...args} />
         <Button type="submit" className="some-class" {...buttonEvents}>
           Submit
         </Button>
@@ -319,3 +320,51 @@ export const _AIForm = () => (
     </FluidForm>
   </Stack>
 );
+
+_AIForm.args = {
+  invalid: false,
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  disabled: false,
+  warn: false,
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+};
+
+_AIForm.argTypes = {
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  invalid: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  invalidText: {
+    control: {
+      type: 'text',
+    },
+  },
+  warn: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  warnText: {
+    control: {
+      type: 'text',
+    },
+  },
+};
