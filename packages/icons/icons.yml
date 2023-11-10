@@ -10099,12 +10099,23 @@
   sizes:
     - 32
 - name: ibm-cloud--pal
-  friendly_name: IBM Cloud® Pattern and Asset Library
+  friendly_name: Carbon for Cloud
   aliases:
+    - IT Infrastructure
+    - public cloud
+    - cloud PAL
+    - software
+    - product
+    - assets
+    - patterns
+    - library
+    - code
+    - guidance
+    - UI
+    - UX
+    - design system
+    - hexagon
     - cloud
-    - cloud
-    - pattern library
-    - asset library
   sizes:
     - 32
 - name: ibm-cloud--privileged-access-gateway
