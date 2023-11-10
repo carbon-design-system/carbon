@@ -22,7 +22,7 @@ test.describe('MultiSelect @avt', () => {
     await expect(page).toHaveNoACViolations('MultiSelect');
   });
 
-  test('@avt-default-state filterable multiselect', async ({ page }) => {
+  test('@avt-advanced-states filterable multiselect', async ({ page }) => {
     await visitStory(page, {
       component: 'FilterableMultiSelect',
       id: 'components-multiselect--filterable',
