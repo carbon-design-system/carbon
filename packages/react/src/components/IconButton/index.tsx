@@ -7,11 +7,19 @@
 
 import PropTypes, { ReactNodeLike } from 'prop-types';
 import React, { ForwardedRef } from 'react';
-import Button, { ButtonSize, ButtonKind } from '../Button';
+import Button, { ButtonSize } from '../Button';
 import classNames from 'classnames';
 import { Tooltip } from '../Tooltip';
 import { usePrefix } from '../../internal/usePrefix';
-import cx from 'classnames';
+
+export const IconButtonKinds = [
+  'primary',
+  'secondary',
+  'ghost',
+  'tertiary',
+] as const;
+
+export type IconButtonKind = (typeof IconButtonKinds)[number];
 
 interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -67,10 +75,7 @@ interface IconButtonProps
   /**
    * Specify the type of button to be used as the base for the IconButton
    */
-  kind?: Omit<
-    ButtonKind,
-    'danger' | 'danger--primary' | 'danger--ghost' | 'danger--tertiary'
-  >;
+  kind?: IconButtonKind;
 
   /**
    * Provide the label to be rendered inside of the Tooltip. The label will use
@@ -113,7 +118,7 @@ const IconButton = React.forwardRef(function IconButton(
     isSelected,
     ...rest
   }: IconButtonProps,
-  ref: ForwardedRef<HTMLButtonElement>
+  ref: ForwardedRef<unknown> // TODO: this is unknown on Button, so should it be here as well?
 ) {
   const prefix = usePrefix();
 
@@ -136,7 +141,7 @@ const IconButton = React.forwardRef(function IconButton(
         kind={kind}
         ref={ref}
         size={size}
-        className={cx(
+        className={classNames(
           `${prefix}--btn--icon-only`,
           {
             [`${prefix}--btn--selected`]: isSelected,
@@ -203,7 +208,7 @@ IconButton.propTypes = {
   /**
    * Specify the type of button to be used as the base for the IconButton
    */
-  kind: PropTypes.oneOf(['primary', 'secondary', 'ghost', 'tertiary']),
+  kind: PropTypes.oneOf(IconButtonKinds),
 
   /**
    * Provide the label to be rendered inside of the Tooltip. The label will use
