@@ -18,7 +18,6 @@ packages/components/demo/js/prism.js
 packages/components/demo/hot
 !packages/components/demo/index.js
 packages/components/dist
-packages/components/examples/codesandbox
 packages/components/tests/a11y-results
 packages/components/tests/coverage
 packages/components/es
