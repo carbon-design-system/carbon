@@ -238,7 +238,9 @@
     }
   }
 
-  .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {
+  .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track,
+  .#{$prefix}--slider__thumb-wrapper:focus-within
+    ~ .#{$prefix}--slider__filled-track {
     background-color: $border-interactive;
   }
 
