@@ -1377,7 +1377,6 @@ class Slider extends PureComponent<SliderProps> {
               [`${prefix}--slider-text-input--warn`]: showWarningUpper,
             },
           ]);
-          console.log('hideTextInput', hideTextInput);
           const lowerInputWrapperClasses = classNames([
             `${prefix}--text-input-wrapper`,
             `${prefix}--slider-text-input-wrapper`,
@@ -1402,18 +1401,20 @@ class Slider extends PureComponent<SliderProps> {
           const upperThumbClasses = classNames(`${prefix}--slider__thumb`, {
             [`${prefix}--slider__thumb--upper`]: twoHandles,
           });
-          const lowerThumbWrapperClasses = classNames(
+          const lowerThumbWrapperClasses = classNames([
+            `${prefix}--icon-tooltip`,
             `${prefix}--slider__thumb-wrapper`,
             {
               [`${prefix}--slider__thumb-wrapper--lower`]: twoHandles,
-            }
-          );
-          const upperThumbWrapperClasses = classNames(
+            },
+          ]);
+          const upperThumbWrapperClasses = classNames([
+            `${prefix}--icon-tooltip`,
             `${prefix}--slider__thumb-wrapper`,
             {
               [`${prefix}--slider__thumb-wrapper--upper`]: twoHandles,
-            }
-          );
+            },
+          ]);
           const lowerThumbWrapperProps = {
             style: {
               insetInlineStart:
@@ -1501,7 +1502,7 @@ class Slider extends PureComponent<SliderProps> {
                   <Tooltip
                     className={lowerThumbWrapperClasses}
                     label={`${value}`}
-                    align="top"
+                    align={twoHandles ? 'top-right' : 'top'}
                     {...lowerThumbWrapperProps}>
                     <div
                       className={lowerThumbClasses}
@@ -1534,7 +1535,7 @@ class Slider extends PureComponent<SliderProps> {
                     <Tooltip
                       className={upperThumbWrapperClasses}
                       label={`${valueUpper}`}
-                      align="top"
+                      align="top-left"
                       {...upperThumbWrapperProps}>
                       <div
                         className={upperThumbClasses}

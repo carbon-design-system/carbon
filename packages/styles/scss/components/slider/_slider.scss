@@ -21,6 +21,7 @@
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/convert';
+@use '../../utilities/custom-property';
 
 /// Slider styles
 /// @access public
@@ -91,6 +92,8 @@
     block-size: convert.to-rem(14px);
     inline-size: convert.to-rem(14px);
     transform: translate(-50%, -50%);
+    @include custom-property.declaration('tooltip-padding-inline', $spacing-03);
+    @include custom-property.declaration('popover-offset', $spacing-03);
   }
 
   .#{$prefix}--slider__thumb-wrapper--lower,
@@ -98,10 +101,47 @@
     block-size: 24px;
     inline-size: 16px;
     transform: translate(-100%, -50%);
+    @include custom-property.declaration(
+      'popover-offset',
+      custom-property.get-var('popover-caret-height', $spacing-03)
+    );
+  }
+
+  .#{$prefix}--slider__thumb-wrapper--lower {
+    > .#{$prefix}--popover > .#{$prefix}--popover-content {
+      transform: translate(
+        50%,
+        calc(-100% - custom-property.get-var('popover-offset', 0rem))
+      );
+    }
+
+    > .#{$prefix}--popover > .#{$prefix}--popover-caret {
+      inset-inline-end: 0;
+      inset-inline-start: revert;
+      transform: translate(
+        50%,
+        calc(-1 * custom-property.get-var('popover-offset', 0rem))
+      );
+    }
   }
 
   .#{$prefix}--slider__thumb-wrapper--upper {
     transform: translate(0, -50%);
+
+    > .#{$prefix}--popover > .#{$prefix}--popover-content {
+      transform: translate(
+        -50%,
+        calc(-100% - custom-property.get-var('popover-offset', 0rem))
+      );
+    }
+
+    > .#{$prefix}--popover > .#{$prefix}--popover-caret {
+      inset-inline-start: 0;
+      transform: translate(
+        -50%,
+        calc(-1 * custom-property.get-var('popover-offset', 0rem))
+      );
+    }
   }
 
   .#{$prefix}--slider__thumb {
