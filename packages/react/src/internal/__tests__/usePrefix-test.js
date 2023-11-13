@@ -5,13 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { usePrefix, PrefixContext } from '../usePrefix';
 
 describe('usePrefix', () => {
-  afterEach(cleanup);
-
   it('should emit the default prefix without context', () => {
     let value = null;
 

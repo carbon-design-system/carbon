@@ -4,7 +4,6 @@
 **/vendor/**
 **/_inlined/**
 **/coverage/**
-**/cra-template/**
 
 # Generated SCSS directories and files
 **/packages/colors/**/*.scss

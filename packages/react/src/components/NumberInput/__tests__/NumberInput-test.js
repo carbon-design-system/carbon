@@ -69,7 +69,14 @@ describe('NumberInput', () => {
   });
 
   it('should allow an empty string as input to the underlying <input>', () => {
-    render(<NumberInput label="test-label" id="test" value="" />);
+    render(
+      <NumberInput
+        label="test-label"
+        id="test"
+        value=""
+        invalidText="test-invalid-text"
+      />
+    );
     expect(screen.getByLabelText('test-label')).toHaveValue(null);
   });
 

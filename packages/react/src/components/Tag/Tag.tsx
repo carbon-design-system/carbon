@@ -12,6 +12,7 @@ import { Close } from '@carbon/icons-react';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
+import { Text } from '../Text';
 
 const getInstanceId = setupGetInstanceId();
 const TYPES = {
@@ -95,7 +96,7 @@ const Tag = <T extends React.ElementType>({
   type,
   filter,
   renderIcon: CustomIconElement,
-  title,
+  title = 'Clear filter',
   disabled,
   onClose,
   size,
@@ -127,17 +128,17 @@ const Tag = <T extends React.ElementType>({
     const ComponentTag = BaseComponent ?? 'div';
     return (
       <ComponentTag className={tagClasses} id={tagId} {...other}>
-        <span
+        <Text
           className={`${prefix}--tag__label`}
           title={typeof children === 'string' ? children : undefined}>
           {children !== null && children !== undefined ? children : typeText}
-        </span>
+        </Text>
         <button
           type="button"
           className={`${prefix}--tag__close-icon`}
           onClick={handleClose}
           disabled={disabled}
-          aria-labelledby={tagId}
+          aria-label={title}
           title={title}>
           <Close />
         </button>
@@ -160,9 +161,9 @@ const Tag = <T extends React.ElementType>({
       ) : (
         ''
       )}
-      <span title={typeof children === 'string' ? children : undefined}>
+      <Text title={typeof children === 'string' ? children : undefined}>
         {children !== null && children !== undefined ? children : typeText}
-      </span>
+      </Text>
     </ComponentTag>
   );
 };

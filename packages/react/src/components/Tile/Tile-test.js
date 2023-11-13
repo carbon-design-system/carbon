@@ -57,7 +57,7 @@ describe('Tile', () => {
       );
       expect(screen.getByRole('link')).toBeInTheDocument();
     });
-    it('does not invoke the click handler if ClickableTile is disabled', () => {
+    it('does not invoke the click handler if ClickableTile is disabled', async () => {
       const onClick = jest.fn();
       render(
         <ClickableTile
@@ -67,7 +67,7 @@ describe('Tile', () => {
           🚦
         </ClickableTile>
       );
-      userEvent.click(screen.getByText('🚦'));
+      await userEvent.click(screen.getByText('🚦'));
       expect(onClick).not.toHaveBeenCalled();
     });
     it('should allow for a custom icon', () => {

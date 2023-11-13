@@ -29,12 +29,12 @@
   @each $size, $trigger in $triggerSizes {
     .#{$prefix}--combo-button__container--#{$size}
       .#{$prefix}--combo-button__primary-action {
-      min-width: 10rem - convert.to-rem(1px) - $trigger;
+      min-inline-size: 10rem - convert.to-rem(1px) - $trigger;
     }
   }
 
   .#{$prefix}--combo-button__primary-action .#{$prefix}--btn {
-    width: 100%;
+    inline-size: 100%;
   }
 
   .#{$prefix}--combo-button__trigger svg {

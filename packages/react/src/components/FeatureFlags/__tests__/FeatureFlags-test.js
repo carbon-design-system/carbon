@@ -6,13 +6,11 @@
  */
 
 import * as GlobalFeatureFlags from '@carbon/feature-flags';
-import { cleanup, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import React from 'react';
 import { FeatureFlags, useFeatureFlags, useFeatureFlag } from '../';
 
 describe('FeatureFlags', () => {
-  afterEach(cleanup);
-
   it('should default to the global feature flag scope', () => {
     GlobalFeatureFlags.add('enable-feature-flags-test', true);
 

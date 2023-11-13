@@ -11,7 +11,7 @@
 @mixin text-truncate-end {
   display: inline-block;
   overflow: hidden;
-  width: 100%;
+  inline-size: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -22,8 +22,8 @@
 @mixin text-truncate-front {
   display: inline-block;
   overflow: hidden;
-  width: 100%;
   direction: rtl;
+  inline-size: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
 }

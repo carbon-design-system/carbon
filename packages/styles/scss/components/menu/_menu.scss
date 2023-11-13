@@ -30,16 +30,16 @@
 
     position: fixed;
     z-index: z('modal');
-    min-width: 10rem;
-    max-width: 18rem;
     padding: $spacing-02 0;
     background-color: $layer;
+    max-inline-size: 18rem;
+    min-inline-size: 10rem;
     opacity: 0;
     visibility: hidden;
   }
 
   .#{$prefix}--menu--with-icons {
-    min-width: 12rem;
+    min-inline-size: 12rem;
   }
 
   .#{$prefix}--menu--open {
@@ -64,8 +64,8 @@
     @include type-style('body-short-01');
 
     display: grid;
-    height: 2rem;
     align-items: center;
+    block-size: 2rem;
     color: $text-primary;
     column-gap: $spacing-03;
     cursor: pointer;
@@ -91,7 +91,7 @@
 
   @each $size, $value in $supported-sizes {
     .#{$prefix}--menu--#{$size} .#{$prefix}--menu-item {
-      height: $value;
+      block-size: $value;
     }
   }
 
@@ -151,9 +151,9 @@
 
   .#{$prefix}--menu-item-divider {
     display: block;
-    width: 100%;
-    height: convert.to-rem(1px);
     background-color: $border-subtle;
+    block-size: convert.to-rem(1px);
+    inline-size: 100%;
     margin-block: $spacing-02;
   }
 }

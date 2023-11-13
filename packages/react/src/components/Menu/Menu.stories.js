@@ -43,7 +43,7 @@ export const Playground = (args) => {
   const target = document.getElementById('storybook-root');
 
   return (
-    <Menu {...args} target={target}>
+    <Menu {...args} target={target} x={document?.dir === 'rtl' ? 250 : 0}>
       <MenuItem label="Share with">
         <MenuItemRadioGroup
           label="Share with"

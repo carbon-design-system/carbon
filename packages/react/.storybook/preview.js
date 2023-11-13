@@ -21,6 +21,7 @@ import React from 'react';
 import { breakpoints } from '@carbon/layout';
 import { GlobalTheme } from '../src/components/Theme';
 import { Layout } from '../src/components/Layout';
+import { TextDirection } from '../src/components/Text';
 
 import theme from './theme';
 
@@ -306,20 +307,28 @@ const parameters = {
 const decorators = [
   (Story, context) => {
     const { layoutDensity, layoutSize, locale, dir, theme } = context.globals;
+    const [randomKey, setRandomKey] = React.useState(1);
 
     React.useEffect(() => {
       document.documentElement.setAttribute('data-carbon-theme', theme);
     }, [theme]);
 
-    React.useEffect(() => {
+    React.useLayoutEffect(() => {
       document.documentElement.lang = locale;
       document.documentElement.dir = dir;
+      // Need to set random key to recalculate Popover coordinates
+      setRandomKey(Math.floor(Math.random() * 10));
     }, [locale, dir]);
 
     return (
       <GlobalTheme theme={theme}>
         <Layout size={layoutSize || null} density={layoutDensity || null}>
-          <Story {...context} />
+          <TextDirection
+            getTextDirection={(text) => {
+              return dir;
+            }}>
+            <Story key={randomKey} {...context} />
+          </TextDirection>
         </Layout>
       </GlobalTheme>
     );

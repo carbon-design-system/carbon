@@ -102,13 +102,13 @@ describe('AccordionItem', () => {
       );
     });
 
-    it('should not close an open AccordionItem panel if the Esc key is pressed in the panel', () => {
+    it('should not close an open AccordionItem panel if the Esc key is pressed in the panel', async () => {
       render(
         <AccordionItem title="A heading" open>
           <input type="text" />
         </AccordionItem>
       );
-      userEvent.type(screen.getByRole('textbox'), '{Escape}');
+      await userEvent.type(screen.getByRole('textbox'), '{Escape}');
       expect(screen.getByRole('button')).toHaveAttribute(
         'aria-expanded',
         'true'

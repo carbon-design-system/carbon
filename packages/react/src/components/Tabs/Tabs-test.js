@@ -264,7 +264,7 @@ describe('Tab', () => {
 
     expect(
       // eslint-disable-next-line testing-library/no-node-access
-      screen.getAllByLabelText('Close tab')[0].parentElement
+      screen.getAllByLabelText('Press delete to close tab')[0].parentElement
     ).not.toHaveClass(`${prefix}--visually-hidden`);
   });
 
@@ -284,9 +284,10 @@ describe('Tab', () => {
       </Tabs>
     );
 
-    expect(screen.queryAllByLabelText('Close tab')[0]).toHaveClass(
-      `${prefix}--visually-hidden`
-    );
+    expect(
+      // eslint-disable-next-line testing-library/no-node-access
+      screen.queryAllByLabelText('Press delete to close tab')[0].parentElement
+    ).toHaveClass(`${prefix}--visually-hidden`);
   });
 
   it('should call onCloseTabRequest when dismissable and close icon clicked', async () => {
@@ -305,7 +306,9 @@ describe('Tab', () => {
         </TabPanels>
       </Tabs>
     );
-    await userEvent.click(screen.getAllByLabelText('Close tab')[0]);
+    await userEvent.click(
+      screen.getAllByLabelText('Press delete to close tab')[0]
+    );
     expect(onTabCloseRequest).toHaveBeenCalledTimes(1);
   });
 
@@ -325,7 +328,9 @@ describe('Tab', () => {
         </TabPanels>
       </Tabs>
     );
-    await userEvent.click(screen.getAllByLabelText('Close tab')[0]);
+    await userEvent.click(
+      screen.getAllByLabelText('Press delete to close tab')[0]
+    );
     expect(onTabCloseRequest).not.toHaveBeenCalled();
   });
 
@@ -415,9 +420,9 @@ describe('Tab', () => {
       </Tabs>
     );
 
-    expect(screen.getAllByLabelText('Close tab')[0]).not.toHaveClass(
-      `${prefix}--visaully-hidden`
-    );
+    expect(
+      screen.getAllByLabelText('Press delete to close tab')[0]
+    ).not.toHaveClass(`${prefix}--visaully-hidden`);
   });
 
   it('should render close icon and renderIcon when dismissable and icon supplied', () => {
@@ -436,9 +441,9 @@ describe('Tab', () => {
       </Tabs>
     );
 
-    expect(screen.getAllByLabelText('Close tab')[0]).not.toHaveClass(
-      `${prefix}--visaully-hidden`
-    );
+    expect(
+      screen.getAllByLabelText('Press delete to close tab')[0]
+    ).not.toHaveClass(`${prefix}--visaully-hidden`);
     expect(screen.getByTestId('svg')).toBeInTheDocument();
     // eslint-disable-next-line testing-library/no-node-access
     expect(screen.getByTestId('svg').parentElement).toHaveClass(

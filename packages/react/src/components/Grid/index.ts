@@ -10,3 +10,4 @@ export { Grid } from './Grid';
 export { default as Row } from './Row';
 export { default as Column } from './Column';
 export { ColumnHang } from './ColumnHang';
+export { GridSettings } from './GridContext';

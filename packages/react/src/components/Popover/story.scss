@@ -56,15 +56,15 @@
 }
 
 .mb-3 {
-  margin-bottom: 1rem;
+  margin-block-end: 1rem;
 }
 
 .mt-9 {
-  padding-top: 3rem;
+  padding-block-start: 3rem;
 }
 
 .mt-10 {
-  padding-top: 4rem;
+  padding-block-start: 4rem;
 }
 
 .p-3 {
@@ -75,9 +75,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
   border: 1px solid theme.$border-subtle;
+  block-size: 2rem;
+  inline-size: 2rem;
 }
 
 .playground-trigger svg {
@@ -87,7 +87,8 @@
 .popover-title {
   @include component-reset.reset;
   @include type.type-style('heading-compact-01');
-  margin-bottom: spacing.$spacing-01;
+
+  margin-block-end: spacing.$spacing-01;
 }
 
 .popover-details {
@@ -96,27 +97,27 @@
 }
 
 .popover-story {
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
+  block-size: 100%;
+  inline-size: 100%;
 }
 
 .popover-tabtip-story .cds--popover-content.p-3 {
-  width: 16rem;
+  inline-size: 16rem;
 }
 
 .popover-tabtip-story .cds--radio-button-wrapper {
-  margin-bottom: 0.5rem;
+  margin-block-end: 0.5rem;
 }
 
 .popover-tabtip-story hr {
   border: none;
-  background: theme.$border-subtle;
-  height: 1px;
   margin: 8px 0 16px;
+  background: theme.$border-subtle;
+  block-size: 1px;
 }
 
 .popover-tabtip-story .cds--popover-container:last-of-type {
-  margin-left: 15rem;
+  margin-inline-start: 15rem;
 }

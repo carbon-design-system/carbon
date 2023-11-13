@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import Link from './Link';
+import Link, { type LinkProps } from './Link';
 
 export default Link;
-export { Link };
+export { Link, type LinkProps };

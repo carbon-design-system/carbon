@@ -74,11 +74,7 @@ ListBoxMenuIcon.propTypes = {
    * icon. This function takes in an id defined in `translationIds` and should
    * return a string message for that given message id.
    */
-  translateWithId: PropTypes.func.isRequired,
-};
-
-ListBoxMenuIcon.defaultProps = {
-  translateWithId: defaultTranslateWithId,
+  translateWithId: PropTypes.func,
 };
 
 export default ListBoxMenuIcon;

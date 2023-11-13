@@ -7,9 +7,9 @@
 
 'use strict';
 
-const { expect, test } = require('@playwright/test');
+const { test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
-const { snapshotStory, visitStory } = require('../../test-utils/storybook');
+const { snapshotStory } = require('../../test-utils/storybook');
 
 test.describe('FlexGrid', () => {
   themes.forEach((theme) => {
@@ -78,24 +78,13 @@ test.describe('FlexGrid', () => {
         });
       });
 
-      test('mixed grid modes @vrt', async ({ page }) => {
+      test('mixed gutter modes @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FlexGrid',
-          id: 'elements-flexgrid--mixed-grid-modes',
+          id: 'elements-flexgrid--mixed-gutter-modes',
           theme,
         });
       });
     });
-  });
-
-  test('accessibility-checker @avt', async ({ page }) => {
-    await visitStory(page, {
-      component: 'FlexGrid',
-      id: 'elements-flexgrid--auto-columns',
-      globals: {
-        theme: 'white',
-      },
-    });
-    await expect(page).toHaveNoACViolations('FlexGrid');
   });
 });

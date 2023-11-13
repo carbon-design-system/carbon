@@ -10,7 +10,7 @@
 const OFF = null;
 
 module.exports = {
-  plugins: ['stylelint-scss'],
+  plugins: ['stylelint-scss', 'stylelint-use-logical'],
   rules: {
     // @-else
     // Require or disallow a newline after the closing brace of @else statements.
@@ -119,6 +119,9 @@ module.exports = {
     // Selector
     // Disallow redundant nesting selectors (&).
     'scss/selector-no-redundant-nesting-selector': true,
+
+    // CSS Logical properties
+    'csstools/use-logical': true,
   },
   overrides: [
     {

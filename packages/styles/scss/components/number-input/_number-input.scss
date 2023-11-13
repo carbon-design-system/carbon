@@ -28,14 +28,14 @@
 
     position: relative;
     display: flex;
-    width: 100%;
     flex-direction: column;
+    inline-size: 100%;
   }
 
   .#{$prefix}--number
     .#{$prefix}--number__input-wrapper--warning
     input[type='number'] {
-    padding-right: convert.to-rem(128px);
+    padding-inline-end: convert.to-rem(128px);
   }
 
   .#{$prefix}--number input[type='number'] {
@@ -43,23 +43,23 @@
     @include focus-outline('reset');
 
     display: inline-flex;
-    width: 100%;
-    min-width: 9.375rem;
-    height: convert.to-rem(40px);
     box-sizing: border-box;
-    padding-right: convert.to-rem(96px);
-    padding-left: $spacing-05;
     border: 0;
-    border-bottom: convert.to-rem(1px) solid $border-strong;
+    border-radius: 0;
 
     // Firefox: Hide spinner (up and down buttons)
     -moz-appearance: textfield;
     appearance: textfield;
     background-color: $field;
-    border-radius: 0;
+    block-size: convert.to-rem(40px);
+    border-block-end: convert.to-rem(1px) solid $border-strong;
     color: $text-primary;
     font-family: font-family('sans');
     font-weight: 400;
+    inline-size: 100%;
+    min-inline-size: 9.375rem;
+    padding-inline-end: convert.to-rem(96px);
+    padding-inline-start: $spacing-05;
     transition: background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
 
@@ -87,41 +87,41 @@
     }
 
     &[data-invalid] {
-      padding-right: convert.to-rem(128px);
+      padding-inline-end: convert.to-rem(128px);
     }
   }
 
   .#{$prefix}--number--lg.#{$prefix}--number {
     input[type='number'] {
-      padding-right: convert.to-rem(112px);
+      padding-inline-end: convert.to-rem(112px);
 
       &[data-invalid] {
-        padding-right: convert.to-rem(144px);
+        padding-inline-end: convert.to-rem(144px);
       }
     }
 
     .#{$prefix}--number__input-wrapper--warning input[type='number'] {
-      padding-right: convert.to-rem(144px);
+      padding-inline-end: convert.to-rem(144px);
     }
   }
 
   .#{$prefix}--number--sm.#{$prefix}--number {
     input[type='number'] {
-      padding-right: convert.to-rem(80px);
+      padding-inline-end: convert.to-rem(80px);
 
       &[data-invalid] {
-        padding-right: convert.to-rem(112px);
+        padding-inline-end: convert.to-rem(112px);
       }
     }
 
     .#{$prefix}--number__input-wrapper--warning input[type='number'] {
-      padding-right: convert.to-rem(112px);
+      padding-inline-end: convert.to-rem(112px);
     }
   }
 
   .#{$prefix}--number input[type='number']:disabled {
-    border-bottom-color: transparent;
     background-color: $field;
+    border-block-end-color: transparent;
     color: $text-disabled;
     cursor: not-allowed;
   }
@@ -136,15 +136,15 @@
     @include reset;
 
     position: absolute;
-    // vertically center controls within parent container on IE11
-    top: 50%;
-    right: 0;
     display: flex;
-    width: convert.to-rem(80px);
-    height: 100%;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    block-size: 100%;
+    inline-size: convert.to-rem(80px);
+    // vertically center controls within parent container on IE11
+    inset-block-start: 50%;
+    inset-inline-end: 0;
     transform: translateY(-50%);
   }
 
@@ -153,31 +153,11 @@
 
     position: relative;
     display: inline-flex;
-    height: 100%;
     align-items: center;
     justify-content: center;
-    border-bottom: convert.to-rem(1px) solid $border-strong;
+    block-size: 100%;
+    border-block-end: convert.to-rem(1px) solid $border-strong;
     color: $icon-primary;
-
-    &::before,
-    &::after {
-      position: absolute;
-      top: convert.to-rem(2px);
-      display: block;
-      width: convert.to-rem(2px);
-      // height: calc(100% - 4px) is calculated differently in Safari
-      height: convert.to-rem(36px);
-      background-color: $field;
-      content: '';
-    }
-
-    &::before {
-      left: 0;
-    }
-
-    &::after {
-      right: 0;
-    }
 
     svg {
       fill: currentColor;
@@ -195,22 +175,10 @@
       background-color: $field-hover;
       color: $icon-primary;
       cursor: pointer;
-
-      &::before,
-      &::after {
-        background-color: $field-hover;
-      }
-    }
-
-    &:focus::before,
-    &:focus::after,
-    &:hover:focus::before,
-    &:hover:focus::after {
-      background-color: transparent;
     }
 
     &:disabled {
-      border-bottom-color: transparent;
+      border-block-end-color: transparent;
       color: $text-disabled;
       cursor: not-allowed;
     }
@@ -225,64 +193,58 @@
     order: 2;
   }
 
+  .#{$prefix}--number
+    input[type='number'][data-invalid]
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn {
+    border-block-end-color: $support-error;
+  }
+
   // add top and bottom outlines to number controls when input is focused
   .#{$prefix}--number
     input[type='number']:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
-    border-bottom-color: transparent;
-
-    &:hover {
-      @include focus-outline('outline');
-    }
-  }
-
-  .#{$prefix}--number
-    input[type='number'][data-invalid]
-    ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn {
-    border-bottom-color: transparent;
-  }
-
-  // add invalid outline to number controls only when invalid input is not focused
-  .#{$prefix}--number
-    input[type='number'][data-invalid]:not(:focus)
-    ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn:hover {
-    @include focus-outline('invalid');
+    border-block-end-color: $focus;
+    box-shadow: inset 0 2px $focus, inset 0 -1px $focus;
   }
 
   .#{$prefix}--number
     input[type='number']:focus
     ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn.up-icon::after {
-    background-color: transparent;
+    .#{$prefix}--number__control-btn:last-of-type {
+    box-shadow: inset 0 2px $focus, inset 0 -1px $focus, inset -2px 0 $focus;
+  }
+
+  // add invalid box-shadow to number controls only when invalid input is not focused
+  .#{$prefix}--number
+    input[type='number'][data-invalid]:not(:focus)
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:last-of-type:hover {
+    box-shadow: inset 0 2px $support-error, inset 0 -1px $support-error,
+      inset -2px 0 $support-error;
   }
 
   .#{$prefix}--number
-    input[type='number'][data-invalid]
+    input[type='number'][data-invalid]:not(:focus)
     ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn.up-icon::after {
-    background-color: $support-error;
+    .#{$prefix}--number__control-btn:hover {
+    box-shadow: inset 0 2px $support-error, inset 0 -1px $support-error;
   }
 
   .#{$prefix}--number
-    input[type='number'][data-invalid]:focus
+    input[type='number'][data-invalid]:not(:focus)
     ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn.up-icon::after,
-  .#{$prefix}--number
-    input[type='number'][data-invalid]
-    ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn.up-icon:focus::after {
-    background-color: $focus;
+    .#{$prefix}--number__control-btn:focus:hover {
+    @include focus-outline('outline');
   }
 
   .#{$prefix}--number__rule-divider {
     position: absolute;
     z-index: z('overlay');
-    width: convert.to-rem(1px);
-    height: convert.to-rem(16px);
     background-color: $border-subtle;
+    block-size: convert.to-rem(16px);
+    inline-size: convert.to-rem(1px);
 
     &:first-of-type {
       order: 0;
@@ -292,8 +254,8 @@
   // rule divider styles
   .#{$prefix}--number__controls
     .#{$prefix}--number__rule-divider:first-of-type {
-    left: 0;
     background-color: transparent;
+    inset-inline-start: 0;
   }
 
   .#{$prefix}--number__invalid
@@ -331,33 +293,33 @@
 
   .#{$prefix}--number__invalid {
     position: absolute;
-    right: convert.to-rem(96px);
     fill: $support-error;
+    inset-inline-end: convert.to-rem(96px);
   }
 
   .#{$prefix}--number--lg .#{$prefix}--number__invalid {
-    right: convert.to-rem(112px);
+    inset-inline-end: convert.to-rem(112px);
   }
 
   .#{$prefix}--number--sm .#{$prefix}--number__invalid {
-    right: convert.to-rem(80px);
+    inset-inline-end: convert.to-rem(80px);
   }
 
   .#{$prefix}--number__invalid + .#{$prefix}--number__rule-divider {
     position: absolute;
-    right: convert.to-rem(80px);
+    inset-inline-end: convert.to-rem(80px);
   }
 
   .#{$prefix}--number--lg
     .#{$prefix}--number__invalid
     + .#{$prefix}--number__rule-divider {
-    right: convert.to-rem(96px);
+    inset-inline-end: convert.to-rem(96px);
   }
 
   .#{$prefix}--number--sm
     .#{$prefix}--number__invalid
     + .#{$prefix}--number__rule-divider {
-    right: convert.to-rem(64px);
+    inset-inline-end: convert.to-rem(64px);
   }
 
   .#{$prefix}--number__control-btn.down-icon:hover
@@ -380,95 +342,51 @@
     opacity: 1;
   }
 
-  // V11: Possibly deprecate
-  .#{$prefix}--number--light input[type='number'] {
-    background-color: $field-02;
-  }
-
-  // V11: Possibly deprecate
-  .#{$prefix}--number--light input[type='number']:disabled {
-    background-color: $field-02;
-  }
-
-  // V11: Possibly deprecate
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn::before,
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn::after {
-    background-color: $field-02;
-  }
-
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::before,
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::after {
-    background-color: transparent;
-  }
-
-  // V11: Possibly deprecate
-  // We include `:not(:focus)` here because the pseudo elements will overlap the
-  // focus outline on the button if we set their background-color on focus
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover,
-  .#{$prefix}--number--light
-    .#{$prefix}--number__control-btn:not(:focus):hover::before,
-  .#{$prefix}--number--light
-    .#{$prefix}--number__control-btn:not(:focus):hover::after {
-    background-color: $layer-hover-02;
-  }
-
   // Size Variant styles
   .#{$prefix}--number--lg input[type='number'] {
-    height: convert.to-rem(48px);
+    block-size: convert.to-rem(48px);
   }
 
   .#{$prefix}--number--lg .#{$prefix}--number__controls {
-    width: convert.to-rem(96px);
+    inline-size: convert.to-rem(96px);
   }
 
   .#{$prefix}--number--lg .#{$prefix}--number__control-btn {
-    width: convert.to-rem(48px);
-
-    &::before,
-    &::after {
-      // height: calc(100% - 4px) is calculated differently in Safari
-      height: convert.to-rem(44px);
-    }
+    inline-size: convert.to-rem(48px);
   }
 
   .#{$prefix}--number--sm input[type='number'] {
-    height: convert.to-rem(32px);
+    block-size: convert.to-rem(32px);
   }
 
   .#{$prefix}--number--sm .#{$prefix}--number__controls {
-    width: convert.to-rem(64px);
+    inline-size: convert.to-rem(64px);
   }
 
   .#{$prefix}--number--sm .#{$prefix}--number__control-btn {
-    width: convert.to-rem(32px);
-
-    &::before,
-    &::after {
-      // height: calc(100% - 4px) is calculated differently in Safari
-      height: convert.to-rem(28px);
-    }
+    inline-size: convert.to-rem(32px);
   }
 
   //No label positioning adjustment
   .#{$prefix}--number--nolabel
     .#{$prefix}--label
     + .#{$prefix}--form__helper-text {
-    margin-top: 0;
+    margin-block-start: 0;
   }
 
   // No steppers
   .#{$prefix}--number--nosteppers input[type='number'] {
-    padding-right: convert.to-rem(48px);
+    padding-inline-end: convert.to-rem(48px);
   }
 
   .#{$prefix}--number--nosteppers .#{$prefix}--number__invalid {
-    right: convert.to-rem(16px);
+    inset-inline-end: convert.to-rem(16px);
   }
 
   // Readonly
   .#{$prefix}--number--readonly input[type='number'] {
-    border-bottom-color: $border-subtle;
     background: transparent;
+    border-block-end-color: $border-subtle;
   }
 
   .#{$prefix}--number--readonly .#{$prefix}--number__control-btn {
@@ -478,11 +396,6 @@
     &:hover {
       background-color: transparent;
       cursor: pointer;
-
-      &::before,
-      &::after {
-        background-color: transparent;
-      }
     }
   }
 
@@ -491,11 +404,6 @@
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:hover {
     outline: none;
-  }
-
-  .#{$prefix}--number--readonly .#{$prefix}--number__control-btn::before,
-  .#{$prefix}--number--readonly .#{$prefix}--number__control-btn::after {
-    background: transparent;
   }
 
   .#{$prefix}--number--readonly
@@ -508,8 +416,8 @@
   .#{$prefix}--number.#{$prefix}--skeleton {
     @include skeleton;
 
-    width: 100%;
-    height: 2.5rem;
+    block-size: 2.5rem;
+    inline-size: 100%;
 
     input[type='number'] {
       display: none;

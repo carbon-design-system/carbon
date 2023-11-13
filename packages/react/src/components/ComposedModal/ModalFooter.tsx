@@ -4,6 +4,7 @@ import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import { noopFn } from '../../internal/noopFn';
 
 interface SecondaryButtonProps {
   buttonText: ReactNode;
@@ -163,11 +164,11 @@ export const ModalFooter = React.forwardRef<HTMLElement, ModalFooterProps>(
     {
       children,
       className: customClassName,
-      closeModal,
+      closeModal = noopFn,
       danger,
       inputref,
-      onRequestClose,
-      onRequestSubmit,
+      onRequestClose = noopFn,
+      onRequestSubmit = noopFn,
       primaryButtonDisabled,
       primaryButtonText,
       primaryClassName,
@@ -323,11 +324,4 @@ ModalFooter.propTypes = {
    * Specify a custom className to be applied to the secondary button
    */
   secondaryClassName: PropTypes.string,
-};
-
-const noop = () => {};
-ModalFooter.defaultProps = {
-  onRequestClose: noop,
-  onRequestSubmit: noop,
-  closeModal: noop,
 };

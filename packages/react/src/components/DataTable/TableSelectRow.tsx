@@ -89,7 +89,7 @@ const TableSelectRow = ({
     [`${prefix}--table-column-radio`]: radio,
   });
   return (
-    <td className={tableSelectRowClasses}>
+    <td className={tableSelectRowClasses} aria-live="off">
       <InlineInputComponent
         {...selectionInputProps}
         {...(radio && {

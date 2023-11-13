@@ -5,13 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { cleanup, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import React, { useRef } from 'react';
 import { useNoInteractiveChildren } from '../useNoInteractiveChildren';
 
 describe('useNoInteractiveChildren', () => {
-  afterEach(cleanup);
-
   it('should render without errors if no interactive content is found', () => {
     function TestComponent() {
       const ref = useRef(null);

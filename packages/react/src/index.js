@@ -73,7 +73,14 @@ export FluidForm from './components/FluidForm';
 export FormGroup from './components/FormGroup';
 export FormItem from './components/FormItem';
 export FormLabel from './components/FormLabel';
-export { Grid, Row, Column, ColumnHang, FlexGrid } from './components/Grid';
+export {
+  Grid,
+  Row,
+  Column,
+  ColumnHang,
+  FlexGrid,
+  GridSettings,
+} from './components/Grid';
 export { IdPrefix } from './components/IdPrefix';
 export InlineLoading from './components/InlineLoading';
 export Link from './components/Link';
@@ -291,3 +298,8 @@ export { DefinitionTooltip } from './components/Tooltip/DefinitionTooltip';
 export { GlobalTheme, Theme, useTheme } from './components/Theme';
 export { usePrefix } from './internal/usePrefix';
 export { useIdPrefix } from './internal/useIdPrefix';
+export {
+  Slug as unstable__Slug,
+  SlugContent as unstable__SlugContent,
+  SlugActions as unstable__SlugActions,
+} from './components/Slug';

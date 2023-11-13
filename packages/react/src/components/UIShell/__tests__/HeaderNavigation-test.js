@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import HeaderNavigation from '../HeaderNavigation';
 
@@ -27,8 +27,9 @@ describe('HeaderNavigation', () => {
     );
 
     expect(screen.getByLabelText('navigation')).toBeVisible();
+  });
 
-    cleanup();
+  it('should add an accessibility label to the <nav> when rendered with a label', () => {
     render(
       <>
         <span id="label">navigation</span>

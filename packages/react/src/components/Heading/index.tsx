@@ -22,21 +22,26 @@ type SectionProps<E extends ElementType> = PolymorphicProps<
   SectionBaseProps
 >;
 
-export function Section<E extends ElementType = 'section'>({
-  as: BaseComponent = 'section' as E,
-  level: levelOverride,
-  ...rest
-}: SectionProps<E>) {
+export const Section = React.forwardRef(function Section<
+  E extends ElementType = 'section'
+>(
+  {
+    as: BaseComponent = 'section' as E,
+    level: levelOverride,
+    ...rest
+  }: SectionProps<E>,
+  ref: React.Ref<unknown>
+) {
   const parentLevel = React.useContext(HeadingContext);
   const level = levelOverride ?? parentLevel + 1;
   const BaseComponentAsAny = BaseComponent as any;
 
   return (
     <HeadingContext.Provider value={Math.min(level, 6) as HeadingLevel}>
-      <BaseComponentAsAny {...rest} />
+      <BaseComponentAsAny ref={ref} {...rest} />
     </HeadingContext.Provider>
   );
-}
+});
 
 Section.propTypes = {
   /**
@@ -63,10 +68,13 @@ Section.propTypes = {
 
 type HeadingProps = JSX.IntrinsicElements[`h${HeadingLevel}`];
 
-export function Heading(props: HeadingProps) {
+export const Heading = React.forwardRef(function Heading(
+  props: HeadingProps,
+  ref: React.Ref<HTMLHeadingElement>
+) {
   const HeadingIntrinsic = `h${React.useContext(HeadingContext)}` as const;
-  return <HeadingIntrinsic {...props} />;
-}
+  return <HeadingIntrinsic ref={ref} {...props} />;
+});
 
 Heading.propTypes = {
   /**

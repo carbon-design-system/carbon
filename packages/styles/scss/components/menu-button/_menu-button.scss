@@ -15,7 +15,7 @@
 /// @group menu-button
 @mixin menu-button {
   .#{$prefix}--menu-button__trigger:not(.#{$prefix}--btn--ghost) {
-    min-width: 10rem;
+    min-inline-size: 10rem;
   }
 
   .#{$prefix}--menu-button__trigger svg {

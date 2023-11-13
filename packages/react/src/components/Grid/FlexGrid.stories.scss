@@ -2,23 +2,23 @@
 
 // base of project work area
 #root > #templates > div:first-child {
-  width: 100%;
+  inline-size: 100%;
 }
 
 // grid styles
 .cds--grid .outside {
-  min-height: 80px;
-  height: 100%;
+  block-size: 100%;
+  min-block-size: 80px;
 }
 
 .cds--grid .inside {
-  min-height: 80px;
-  height: 100%;
+  block-size: 100%;
+  min-block-size: 80px;
 }
 
 // hack to enable zoom feature to trigger
 .cds--grid--full-width {
-  max-width: 100%;
+  max-inline-size: 100%;
 }
 
 .default .cds--col code {
@@ -82,6 +82,6 @@
 
 #templates .cds--css-grid [class*='col'] {
   background-color: #edf4ff;
+  min-block-size: 80px;
   outline: 1px solid #a6c8ff;
-  min-height: 80px;
 }

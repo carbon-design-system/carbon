@@ -1,0 +1,36 @@
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/theme';
+
+.slug-container {
+  display: flex;
+  margin-bottom: 6rem;
+  align-items: flex-start;
+
+  & > * {
+    margin-left: 2rem;
+  }
+}
+
+.slug-container .cds--toggletip-content p {
+  @include type.type-style('body-compact-01');
+}
+
+.slug-container .cds--toggletip-content .bold {
+  font-weight: 600;
+}
+
+.slug-container .cds--toggletip-content .secondary {
+  color: theme.$text-secondary;
+}
+
+.slug-container .cds--toggletip-content h1 {
+  margin-bottom: 1rem;
+}
+
+.slug-container .cds--toggletip-content hr {
+  border: 0;
+  height: 1px;
+  background: theme.$border-subtle;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}

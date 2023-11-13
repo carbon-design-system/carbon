@@ -14,6 +14,7 @@ import { ButtonKinds } from '../../prop-types/types';
 import { keys, matches } from '../../internal/keyboard';
 import { PrefixContext } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
+import { Text } from '../Text';
 
 export interface FileUploaderProps extends ReactAttr<HTMLSpanElement> {
   /**
@@ -58,7 +59,7 @@ export interface FileUploaderProps extends ReactAttr<HTMLSpanElement> {
   /**
    * Provide a description for the complete/close icon that can be read by screen readers
    */
-  iconDescription: string;
+  iconDescription?: string;
 
   /**
    * Specify the description text of this `<FileUploader>`
@@ -145,7 +146,7 @@ export default class FileUploader extends React.Component<
     /**
      * Provide a description for the complete/close icon that can be read by screen readers
      */
-    iconDescription: PropTypes.string.isRequired,
+    iconDescription: PropTypes.string,
 
     /**
      * Specify the description text of this `<FileUploader>`
@@ -194,16 +195,6 @@ export default class FileUploader extends React.Component<
 
   static contextType = PrefixContext;
 
-  static defaultProps = {
-    disabled: false,
-    filenameStatus: 'uploading',
-    buttonLabel: '',
-    buttonKind: 'primary',
-    multiple: false,
-    onClick: () => {},
-    accept: [],
-  };
-
   state = {
     filenames: [] as string[],
   };
@@ -230,7 +221,7 @@ export default class FileUploader extends React.Component<
     ) as string[];
     this.setState({
       filenames: this.props.multiple
-        ? this.state.filenames.concat(filenames)
+        ? [...new Set([...this.state.filenames, ...filenames])]
         : filenames,
     });
     if (this.props.onChange) {
@@ -261,15 +252,15 @@ export default class FileUploader extends React.Component<
   render() {
     const {
       iconDescription,
-      buttonLabel,
-      buttonKind,
-      disabled,
-      filenameStatus,
+      buttonLabel = '',
+      buttonKind = 'primary',
+      disabled = false,
+      filenameStatus = 'uploading',
       labelDescription,
       labelTitle,
       className,
-      multiple,
-      accept,
+      multiple = false,
+      accept = [],
       name,
       size = 'md',
       onDelete, // eslint-disable-line
@@ -296,13 +287,17 @@ export default class FileUploader extends React.Component<
     return (
       <div className={classes} {...other}>
         {!labelTitle ? null : (
-          <p className={getHelperLabelClasses(`${prefix}--file--label`)}>
+          <Text
+            as="p"
+            className={getHelperLabelClasses(`${prefix}--file--label`)}>
             {labelTitle}
-          </p>
+          </Text>
         )}
-        <p className={getHelperLabelClasses(`${prefix}--label-description`)}>
+        <Text
+          as="p"
+          className={getHelperLabelClasses(`${prefix}--label-description`)}>
           {labelDescription}
-        </p>
+        </Text>
         <FileUploaderButton
           innerRef={this.uploaderButton}
           disabled={disabled}
@@ -324,9 +319,9 @@ export default class FileUploader extends React.Component<
                   className={selectedFileClasses}
                   ref={(node) => (this.nodes[index] = node as HTMLSpanElement)} // eslint-disable-line
                   {...other}>
-                  <p className={`${prefix}--file-filename`} id={name}>
+                  <Text as="p" className={`${prefix}--file-filename`} id={name}>
                     {name}
-                  </p>
+                  </Text>
                   <span className={`${prefix}--file__state-container`}>
                     <Filename
                       name={name}

@@ -6,7 +6,7 @@
  */
 
 import { getByText, isElementVisible } from '@carbon/test-utils/dom';
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import MultiSelect from '../';
 import { generateItems, generateGenericItem } from '../../ListBox/test-helpers';
@@ -16,7 +16,6 @@ describe('MultiSelect', () => {
   beforeEach(() => {
     jest.mock('../../../internal/deprecateFieldOnObject');
   });
-  afterEach(cleanup);
 
   describe.skip('automated accessibility tests', () => {
     it('should have no axe violations', async () => {

@@ -51,7 +51,7 @@ below.
 | `cds--{sm,md,lg,xlg,max}:col-end-{2,17}`   | Responsive column end                  |
 | `cds--grid-column-hang`                    | Hang content on a grid column          |
 | `cds--subgrid`                             | Specify an element as a subgrid        |
-| `cds--subgrid--{wide,narrow,condensed}`    | Specify the grid mode of subgrid       |
+| `cds--subgrid--{wide,narrow,condensed}`    | Specify the gutter mode of subgrid     |
 
 ## API
 

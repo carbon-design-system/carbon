@@ -22,9 +22,9 @@
     @include layout.use('density', $default: 'normal');
 
     display: flex;
-    width: 100%;
-    height: layout.size('height');
     justify-content: space-evenly;
+    block-size: layout.size('height');
+    inline-size: 100%;
   }
 
   .#{$prefix}--content-switcher-btn {
@@ -37,25 +37,25 @@
     display: inline-flex;
     overflow: hidden;
     border: none;
-    border-top: convert.to-rem(1px) solid $border-inverse;
-    border-bottom: convert.to-rem(1px) solid $border-inverse;
     margin: 0;
     background-color: transparent;
+    border-block-end: convert.to-rem(1px) solid $border-inverse;
+    border-block-start: convert.to-rem(1px) solid $border-inverse;
     color: $text-secondary;
-    text-align: left;
+    text-align: start;
     text-decoration: none;
     transition: all $duration-moderate-01 motion(standard, productive);
     white-space: nowrap;
 
     &::after {
       position: absolute;
-      top: 0;
-      left: 0;
       display: block;
-      width: 100%;
-      height: 100%;
       background-color: $layer-selected-inverse;
+      block-size: 100%;
       content: '';
+      inline-size: 100%;
+      inset-block-start: 0;
+      inset-inline-start: 0;
       transform: scaleY(0);
       transform-origin: bottom;
       transition: all $duration-moderate-01 motion(standard, productive);
@@ -109,16 +109,16 @@
 
   .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
     .#{$prefix}--content-switcher-btn {
-    width: 100%;
     align-items: center;
     padding: $spacing-03 layout.density('padding-inline');
+    inline-size: 100%;
   }
 
   .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
     .#{$prefix}--content-switcher-btn:first-child {
-    border-left: convert.to-rem(1px) solid $border-inverse;
-    border-bottom-left-radius: convert.to-rem(4px);
-    border-top-left-radius: convert.to-rem(4px);
+    border-end-start-radius: convert.to-rem(4px);
+    border-inline-start: convert.to-rem(1px) solid $border-inverse;
+    border-start-start-radius: convert.to-rem(4px);
 
     &:disabled {
       border-color: $border-disabled;
@@ -128,9 +128,9 @@
 
   .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
     .#{$prefix}--content-switcher-btn:last-child {
-    border-right: convert.to-rem(1px) solid $border-inverse;
-    border-bottom-right-radius: convert.to-rem(4px);
-    border-top-right-radius: convert.to-rem(4px);
+    border-end-end-radius: convert.to-rem(4px);
+    border-inline-end: convert.to-rem(1px) solid $border-inverse;
+    border-start-end-radius: convert.to-rem(4px);
 
     &:disabled {
       border-color: $border-disabled;
@@ -150,12 +150,12 @@
   .#{$prefix}--content-switcher-btn::before {
     position: absolute;
     z-index: 2;
-    left: 0;
     display: block;
-    width: convert.to-rem(1px);
-    height: convert.to-rem(16px);
     background-color: $border-subtle;
+    block-size: convert.to-rem(16px);
     content: '';
+    inline-size: convert.to-rem(1px);
+    inset-inline-start: 0;
   }
 
   .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
@@ -194,13 +194,13 @@
   }
 
   .#{$prefix}--content-switcher__icon + span {
-    margin-left: $spacing-03;
+    margin-inline-start: $spacing-03;
   }
 
   .#{$prefix}--content-switcher__label {
     z-index: 1;
     overflow: hidden;
-    max-width: 100%;
+    max-inline-size: 100%;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -244,9 +244,9 @@
   .#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-popover__wrapper:first-child
     .#{$prefix}--content-switcher-btn {
-    border-left: convert.to-rem(1px) solid $border-inverse;
-    border-bottom-left-radius: convert.to-rem(4px);
-    border-top-left-radius: convert.to-rem(4px);
+    border-end-start-radius: convert.to-rem(4px);
+    border-inline-start: convert.to-rem(1px) solid $border-inverse;
+    border-start-start-radius: convert.to-rem(4px);
   }
 
   .#{$prefix}--content-switcher--icon-only
@@ -261,9 +261,9 @@
   .#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-popover__wrapper:last-child
     .#{$prefix}--content-switcher-btn {
-    border-right: convert.to-rem(1px) solid $border-inverse;
-    border-bottom-right-radius: convert.to-rem(4px);
-    border-top-right-radius: convert.to-rem(4px);
+    border-end-end-radius: convert.to-rem(4px);
+    border-inline-end: convert.to-rem(1px) solid $border-inverse;
+    border-start-end-radius: convert.to-rem(4px);
   }
 
   .#{$prefix}--content-switcher--icon-only
@@ -277,13 +277,13 @@
 
   .#{$prefix}--content-switcher--lg .#{$prefix}--content-switcher-btn {
     // accounts for the larger icon sizes to keep the switcher at 48px
-    padding-right: convert.to-rem(14px);
-    padding-left: convert.to-rem(14px);
+    padding-inline-end: convert.to-rem(14px);
+    padding-inline-start: convert.to-rem(14px);
   }
 
   .#{$prefix}--content-switcher--lg .#{$prefix}--content-switcher-btn svg {
-    width: 20px;
-    height: 20px;
+    block-size: 20px;
+    inline-size: 20px;
   }
 
   .#{$prefix}--content-switcher--icon-only
@@ -301,7 +301,7 @@
 
   .#{$prefix}--content-switcher--icon-only.#{$prefix}--content-switcher--sm
     .#{$prefix}--btn--sm {
-    height: 2rem;
+    block-size: 2rem;
   }
 
   // Subtle border overrides

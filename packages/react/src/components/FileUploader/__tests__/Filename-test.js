@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { getByText, render, cleanup } from '@testing-library/react';
+import { getByText, render } from '@testing-library/react';
 import React from 'react';
 import { Simulate } from 'react-dom/test-utils';
 import { Filename } from '../';
@@ -13,8 +13,6 @@ import { Filename } from '../';
 const statuses = ['uploading', 'edit', 'complete'];
 
 describe('Filename', () => {
-  afterEach(cleanup);
-
   describe.skip('automated accessibility tests', () => {
     it.each(statuses)(
       'should have no axe violations with status %s',

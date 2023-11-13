@@ -201,6 +201,7 @@ export const WithPersistentSearch = () => {
         onChange={handleChange}
         closeButtonLabelText="Clear search input"
         size="lg"
+        labelText="Filter search"
       />
       {searchResults.map((listItem, key) => (
         <ContainedListItem key={key}>{listItem}</ContainedListItem>

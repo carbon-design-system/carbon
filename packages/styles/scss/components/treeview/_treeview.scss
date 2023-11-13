@@ -27,9 +27,9 @@
   }
 
   .#{$prefix}--tree-node {
-    padding-left: $spacing-05;
     background-color: $layer-01;
     color: $text-secondary;
+    padding-inline-start: $spacing-05;
 
     &:focus {
       outline: none;
@@ -47,7 +47,7 @@
   }
 
   .#{$prefix}--tree-node--with-icon .#{$prefix}--tree-node {
-    margin-left: $spacing-03;
+    margin-inline-start: $spacing-03;
   }
 
   .#{$prefix}--tree-node:focus > .#{$prefix}--tree-node__label {
@@ -88,9 +88,9 @@
     @include type-style('body-compact-01');
 
     display: flex;
-    min-height: convert.to-rem(32px);
     flex: 1;
     align-items: center;
+    min-block-size: convert.to-rem(32px);
 
     &:hover {
       background-color: $layer-hover-01;
@@ -100,9 +100,9 @@
 
   .#{$prefix}--tree-node:not(.#{$prefix}--tree-parent-node)
     .#{$prefix}--tree-node__label {
+    padding-block-end: convert.to-rem(7px);
     // (min-height 32px - single line text height 18px) / 2 = 7px
-    padding-top: convert.to-rem(7px);
-    padding-bottom: convert.to-rem(7px);
+    padding-block-start: convert.to-rem(7px);
   }
 
   .#{$prefix}--tree-node__label:hover .#{$prefix}--tree-node__label__details {
@@ -117,16 +117,16 @@
 
   .#{$prefix}--tree-leaf-node {
     display: flex;
-    padding-left: $spacing-08;
+    padding-inline-start: $spacing-08;
   }
 
   .#{$prefix}--tree-leaf-node.#{$prefix}--tree-node--with-icon {
-    padding-left: $spacing-07;
+    padding-inline-start: $spacing-07;
   }
 
   .#{$prefix}--tree-leaf-node.#{$prefix}--tree-node--with-icon
     .#{$prefix}--tree-leaf-node {
-    padding-left: $spacing-06;
+    padding-inline-start: $spacing-06;
   }
 
   .#{$prefix}--tree-node__label__details {
@@ -135,20 +135,20 @@
   }
 
   .#{$prefix}--tree-node--with-icon .#{$prefix}--tree-parent-node__toggle {
-    margin-right: 0;
+    margin-inline-end: 0;
   }
 
   .#{$prefix}--tree-parent-node__toggle {
     display: flex;
-    width: convert.to-rem(24px);
-    height: convert.to-rem(24px);
     align-items: center;
     align-self: flex-start;
-    padding-left: $spacing-02;
     border: 0;
-    margin-top: $spacing-02;
-    margin-right: $spacing-02;
-    margin-left: -$spacing-02;
+    block-size: convert.to-rem(24px);
+    inline-size: convert.to-rem(24px);
+    margin-block-start: $spacing-02;
+    margin-inline-end: $spacing-02;
+    margin-inline-start: -$spacing-02;
+    padding-inline-start: $spacing-02;
 
     &:hover {
       cursor: pointer;
@@ -170,19 +170,19 @@
   }
 
   .#{$prefix}--tree-node__icon {
-    min-width: 1rem;
-    min-height: 1rem;
     align-self: flex-start;
-    margin-top: convert.to-rem(1px);
-    margin-right: $spacing-03;
-    margin-left: $spacing-03;
     fill: $icon-secondary;
+    margin-block-start: convert.to-rem(1px);
+    margin-inline-end: $spacing-03;
+    margin-inline-start: $spacing-03;
+    min-block-size: 1rem;
+    min-inline-size: 1rem;
   }
 
   .#{$prefix}--tree-parent-node__toggle
     + .#{$prefix}--tree-node__label__details
     .#{$prefix}--tree-node__icon {
-    margin-left: $spacing-02;
+    margin-inline-start: $spacing-02;
   }
 
   .#{$prefix}--tree-node--selected > .#{$prefix}--tree-node__label {
@@ -208,18 +208,18 @@
 
     &::before {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: convert.to-rem(4px);
-      height: 100%;
       background-color: $interactive;
+      block-size: 100%;
       content: '';
+      inline-size: convert.to-rem(4px);
+      inset-block-start: 0;
+      inset-inline-start: 0;
     }
   }
 
   // xs size variant
   .#{$prefix}--tree--xs .#{$prefix}--tree-node__label {
-    min-height: convert.to-rem(24px);
+    min-block-size: convert.to-rem(24px);
   }
 
   .#{$prefix}--tree--xs
@@ -229,6 +229,6 @@
   }
 
   .#{$prefix}--tree--xs .#{$prefix}--tree-parent-node__toggle {
-    margin-top: 0;
+    margin-block-start: 0;
   }
 }

@@ -5,15 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { useDisclosure } from '../index.js';
 import '@testing-library/jest-dom';
 
 describe('useDisclosure', () => {
-  afterEach(cleanup);
-
   // https://www.w3.org/TR/wai-aria-practices-1.1/#keyboard-interaction-8
   it('should toggle visibility when the button is clicked', async () => {
     function TestComponent() {

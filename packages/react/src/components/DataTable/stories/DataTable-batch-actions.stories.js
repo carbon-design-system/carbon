@@ -146,7 +146,6 @@ export const Default = () => (
               <Button
                 tabIndex={batchActionProps.shouldShowBatchActions ? -1 : 0}
                 onClick={action('Add new row')}
-                size="sm"
                 kind="primary">
                 Add new
               </Button>
@@ -247,7 +246,6 @@ export const Playground = (args) => (
               <Button
                 tabIndex={batchActionProps.shouldShowBatchActions ? -1 : 0}
                 onClick={action('Add new row')}
-                size="sm"
                 kind="primary">
                 Add new
               </Button>

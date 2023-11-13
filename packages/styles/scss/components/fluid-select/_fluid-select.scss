@@ -19,8 +19,8 @@
 @mixin fluid-select {
   .#{$prefix}--select--fluid .#{$prefix}--select {
     position: relative;
-    height: 100%;
     background: $field;
+    block-size: 100%;
     transition: background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
   }
@@ -28,13 +28,13 @@
   .#{$prefix}--select--fluid .#{$prefix}--label {
     position: absolute;
     z-index: 1;
-    top: convert.to-rem(13px);
-    left: $spacing-05;
     display: flex;
-    width: calc(100% - 2rem);
-    height: convert.to-rem(16px);
     align-items: center;
     margin: 0;
+    block-size: convert.to-rem(16px);
+    inline-size: calc(100% - 2rem);
+    inset-block-start: convert.to-rem(13px);
+    inset-inline-start: $spacing-05;
   }
 
   .#{$prefix}--select--fluid .#{$prefix}--label::-webkit-scrollbar,
@@ -54,16 +54,16 @@
   }
 
   .#{$prefix}--select--fluid .#{$prefix}--select-input {
-    min-height: convert.to-rem(64px);
     padding: convert.to-rem(32px) convert.to-rem(32px) convert.to-rem(13px)
       $spacing-05;
+    min-block-size: convert.to-rem(64px);
     outline: none;
     text-overflow: ellipsis;
   }
 
   .#{$prefix}--select--fluid .#{$prefix}--select__arrow {
-    top: $spacing-07;
-    height: 1rem;
+    block-size: 1rem;
+    inset-block-start: $spacing-07;
   }
 
   .#{$prefix}--select--fluid .#{$prefix}--select__divider {
@@ -85,10 +85,10 @@
     .#{$prefix}--select--warning
     .#{$prefix}--select__divider {
     display: block;
-    width: calc(100% - 2rem);
     border: none;
-    border-bottom: 1px solid $border-subtle;
     margin: 0 1rem;
+    border-block-end: 1px solid $border-subtle;
+    inline-size: calc(100% - 2rem);
   }
 
   .#{$prefix}--select--fluid
@@ -97,12 +97,12 @@
   .#{$prefix}--select--fluid
     .#{$prefix}--select--warning
     .#{$prefix}--select-input {
-    padding-right: convert.to-rem(32px);
-    border-bottom: 1px solid transparent;
+    border-block-end: 1px solid transparent;
+    padding-inline-end: convert.to-rem(32px);
   }
 
   .#{$prefix}--select--fluid .#{$prefix}--select--warning {
-    border-bottom: 1px solid $border-strong;
+    border-block-end: 1px solid $border-strong;
   }
 
   .#{$prefix}--select--fluid .#{$prefix}--select-input__wrapper {
@@ -126,7 +126,7 @@
     .#{$prefix}--form-requirement {
     display: block;
     overflow: visible;
-    max-height: 100%;
+    max-block-size: 100%;
   }
 
   .#{$prefix}--select--fluid
@@ -156,8 +156,8 @@
   .#{$prefix}--select--fluid
     .#{$prefix}--select--warning
     .#{$prefix}--select__invalid-icon {
-    top: convert.to-rem(73px);
-    right: $spacing-05;
+    inset-block-start: convert.to-rem(73px);
+    inset-inline-end: $spacing-05;
     pointer-events: none;
   }
 
@@ -173,7 +173,7 @@
     .#{$prefix}--select-input,
   .#{$prefix}--select--fluid
     .#{$prefix}--select--fluid--focus.#{$prefix}--select--warning {
-    border-bottom: 1px solid transparent;
+    border-block-end: 1px solid transparent;
   }
 
   // Disabled state

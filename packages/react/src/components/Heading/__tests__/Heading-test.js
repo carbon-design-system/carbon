@@ -5,13 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Section, Heading } from '../';
 
 describe('Heading', () => {
-  afterEach(cleanup);
-
   it('should begin with an <h1> tag', () => {
     render(<Heading data-testid="h1">test</Heading>);
     const element = screen.getByTestId('h1');

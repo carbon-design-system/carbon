@@ -28,7 +28,7 @@ import { useMatchMedia } from '../../internal/useMatchMedia';
 // TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
 
-interface SideNavProps extends ComponentProps<'nav'> {
+export interface SideNavProps extends ComponentProps<'nav'> {
   expanded?: boolean | undefined;
   defaultExpanded?: boolean | undefined;
   isChildOfHeader?: boolean | undefined;

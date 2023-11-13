@@ -140,11 +140,4 @@ SkeletonText.propTypes = {
   width: PropTypes.string,
 };
 
-SkeletonText.defaultProps = {
-  paragraph: false,
-  width: '100%',
-  heading: false,
-  lineCount: 3,
-};
-
 export default SkeletonText;

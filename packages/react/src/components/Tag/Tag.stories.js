@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { default as Tag } from '../Tag';
+import TagSkeleton from '../Tag/Tag.Skeleton';
 
 export default {
   title: 'Components/Tag',
@@ -116,6 +117,76 @@ Playground.argTypes = {
       'high-contrast',
       'outline',
     ],
+    control: {
+      type: 'select',
+    },
+  },
+};
+
+export const Skeleton = (args) => (
+  <div>
+    <TagSkeleton {...args} />
+  </div>
+);
+
+Skeleton.args = {
+  size: 'md',
+};
+
+Skeleton.argTypes = {
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+  as: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  disabled: {
+    table: {
+      disable: true,
+    },
+  },
+
+  filter: {
+    table: {
+      disable: true,
+    },
+  },
+  id: {
+    table: {
+      disable: true,
+    },
+  },
+  onClose: {
+    table: {
+      disable: true,
+    },
+  },
+  renderIcon: {
+    table: {
+      disable: true,
+    },
+  },
+  title: {
+    table: {
+      disable: true,
+    },
+  },
+  type: {
+    table: {
+      disable: true,
+    },
+  },
+  size: {
+    options: ['sm', 'md'],
     control: {
       type: 'select',
     },

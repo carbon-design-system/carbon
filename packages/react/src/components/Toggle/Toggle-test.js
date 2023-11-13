@@ -24,7 +24,7 @@ describe('Toggle', () => {
   let wrapper;
 
   beforeEach(() => {
-    // eslint-disable-next-line testing-library/no-render-in-setup
+    // eslint-disable-next-line testing-library/no-render-in-lifecycle
     wrapper = render(<Toggle {...props} />);
   });
 
@@ -145,7 +145,7 @@ describe('Toggle', () => {
       expect(wrapper.getByRole('switch')).toBeChecked();
     });
 
-    it('does not change value when disabled', () => {
+    it('does not change value when disabled', async () => {
       const onClick = jest.fn();
       const onToggle = jest.fn();
       wrapper.rerender(
@@ -153,7 +153,7 @@ describe('Toggle', () => {
       );
 
       expect(onClick).not.toHaveBeenCalled();
-      userEvent.click(screen.getByRole('switch'));
+      await userEvent.click(screen.getByRole('switch'));
       expect(onClick).not.toHaveBeenCalled();
       expect(onToggle).not.toHaveBeenCalled();
     });

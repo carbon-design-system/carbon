@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('CodeSnippet @avt', () => {
-  test('accessibility-checker CodeSnippet inline', async ({ page }) => {
+  test('@avt-default-state inline', async ({ page }) => {
     await visitStory(page, {
       component: 'CodeSnippet',
       id: 'components-codesnippet--inline',
@@ -22,9 +22,7 @@ test.describe('CodeSnippet @avt', () => {
     await expect(page).toHaveNoACViolations('CodeSnippet inline');
   });
 
-  test('accessibility-checker CodeSnippet inline hover @avt', async ({
-    page,
-  }) => {
+  test('@avt-advanced-states inline hover', async ({ page }) => {
     await visitStory(page, {
       component: 'CodeSnippet',
       id: 'components-codesnippet--inline',
@@ -38,9 +36,7 @@ test.describe('CodeSnippet @avt', () => {
     await expect(page).toHaveNoACViolations('CodeSnippet inline hover');
   });
 
-  test('accessibility-checker CodeSnippet inline focused @avt', async ({
-    page,
-  }) => {
+  test('@avt-advanced-states inline focused', async ({ page }) => {
     await visitStory(page, {
       component: 'CodeSnippet',
       id: 'components-codesnippet--inline',
@@ -55,9 +51,7 @@ test.describe('CodeSnippet @avt', () => {
   });
 
   // Skipping due to a11y violation issue #14237
-  test.skip('accessibility-checker CodeSnippet multiline @avt', async ({
-    page,
-  }) => {
+  test.skip('@avt-default-state multiline', async ({ page }) => {
     await visitStory(page, {
       component: 'CodeSnippet',
       id: 'components-codesnippet--multiline',
@@ -68,9 +62,7 @@ test.describe('CodeSnippet @avt', () => {
     await expect(page).toHaveNoACViolations('CodeSnippet multiline');
   });
 
-  test('accessibility-checker CodeSnippet singleline @avt', async ({
-    page,
-  }) => {
+  test('@avt-default-state singleline', async ({ page }) => {
     await visitStory(page, {
       component: 'CodeSnippet',
       id: 'components-codesnippet--singleline',
@@ -81,7 +73,7 @@ test.describe('CodeSnippet @avt', () => {
     await expect(page).toHaveNoACViolations('CodeSnippet singleline');
   });
 
-  test('accessibility-checker CodeSnippet skeleton @avt', async ({ page }) => {
+  test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'CodeSnippet',
       id: 'components-codesnippet--skeleton',
@@ -90,5 +82,81 @@ test.describe('CodeSnippet @avt', () => {
       },
     });
     await expect(page).toHaveNoACViolations('CodeSnippet skeleton');
+  });
+
+  test('inline @avt-keyboard-nav', async ({ page }) => {
+    await visitStory(page, {
+      component: 'CodeSnippet',
+      id: 'components-codesnippet--inline',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    // Checking the code button
+    await expect(page.getByRole('button')).toBeVisible();
+    await page.keyboard.press('Tab');
+    await expect(page.getByRole('button')).toBeFocused();
+
+    // Checking the copy button
+    await page.keyboard.press('Enter');
+    await expect(page.getByRole('tooltip')).toHaveText('Copied to clipboard');
+  });
+
+  test('multiline @avt-keyboard-nav', async ({ page }) => {
+    await visitStory(page, {
+      component: 'CodeSnippet',
+      id: 'components-codesnippet--multiline',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    // Checking the code button
+    await expect(page.getByRole('textbox')).toBeVisible();
+    await page.keyboard.press('Tab');
+    await expect(page.getByRole('textbox')).toBeFocused();
+
+    // Checking the copy button
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Enter');
+    await expect(page.getByRole('tooltip')).toHaveText('Copied to clipboard');
+
+    // Checking show more toggle
+    await expect(page.getByText('Show more')).toBeVisible();
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Enter');
+    await expect(page.getByText('Show less')).toBeVisible();
+    await expect(page.getByText('Show more')).not.toBeVisible();
+  });
+
+  test('singleline @avt-keyboard-nav', async ({ page }) => {
+    await visitStory(page, {
+      component: 'CodeSnippet',
+      id: 'components-codesnippet--singleline',
+      globals: {
+        theme: 'white',
+      },
+    });
+    // Checking the code button
+    await expect(page.getByRole('textbox')).toBeVisible();
+    await page.keyboard.press('Tab');
+    await expect(page.getByRole('textbox')).toBeFocused();
+
+    // Checking the copy button
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Enter');
+    await expect(page.getByRole('tooltip')).toHaveText('Copied to clipboard');
+
+    // Checking the Arrow navigation
+    await page.keyboard.press('Shift+Tab');
+
+    await expect(
+      page.locator('div.cds--snippet__overflow-indicator--right')
+    ).toBeVisible();
+    await page.keyboard.press('ArrowRight');
+    await expect(
+      page.locator('div.cds--snippet__overflow-indicator--left')
+    ).toBeVisible();
   });
 });

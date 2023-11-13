@@ -14,7 +14,17 @@ import { Grid, Column } from '../Grid';
 import mdx from './Tabs.mdx';
 
 import TabsSkeleton from './Tabs.Skeleton';
-import { Monster, Corn, Bat, Bee, Home } from '@carbon/icons-react';
+import {
+  Dashboard,
+  Activity,
+  CloudMonitoring,
+  Settings,
+  Search,
+  Notification,
+  Chat,
+  Task,
+  Restart,
+} from '@carbon/icons-react';
 
 export default {
   title: 'Components/Tabs',
@@ -42,10 +52,10 @@ export default {
 export const Default = () => (
   <Tabs>
     <TabList aria-label="List of tabs">
-      <Tab>Tab label 1</Tab>
-      <Tab>Tab label 2</Tab>
-      <Tab disabled>Tab label 3</Tab>
-      <Tab>Tab label 4</Tab>
+      <Tab>Dashboard</Tab>
+      <Tab>Monitoring</Tab>
+      <Tab>Activity</Tab>
+      <Tab disabled>Settings</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
@@ -75,21 +85,21 @@ export const Default = () => (
 export const Dismissable = () => {
   const tabs = [
     {
-      label: 'Tab label 1',
-      panel: <TabPanel>Tab Panel 1</TabPanel>,
+      label: 'Dashboard',
+      panel: <TabPanel>Dashboard</TabPanel>,
     },
     {
-      label: 'Tab label 2',
-      panel: <TabPanel>Tab Panel 2</TabPanel>,
+      label: 'Monitoring',
+      panel: <TabPanel>Monitoring</TabPanel>,
     },
     {
-      label: 'Tab label 3',
-      panel: <TabPanel>Tab Panel 3</TabPanel>,
+      label: 'Activity',
+      panel: <TabPanel>Activity</TabPanel>,
+    },
+    {
+      label: 'Settings',
+      panel: <TabPanel>Settings</TabPanel>,
       disabled: true,
-    },
-    {
-      label: 'Tab label 4',
-      panel: <TabPanel>Tab Panel 4</TabPanel>,
     },
   ];
   const [renderedTabs, setRenderedTabs] = useState(tabs);
@@ -146,21 +156,21 @@ export const Dismissable = () => {
 export const DismissableWithIcons = ({ contained }) => {
   const tabs = [
     {
-      label: 'Tab label 1',
-      panel: <TabPanel>Tab Panel 1</TabPanel>,
+      label: 'Dashboard',
+      panel: <TabPanel>Dashboard</TabPanel>,
     },
     {
-      label: 'Tab label 2',
-      panel: <TabPanel>Tab Panel 2</TabPanel>,
+      label: 'Monitoring',
+      panel: <TabPanel>Monitoring</TabPanel>,
     },
     {
-      label: 'Tab label 3',
-      panel: <TabPanel>Tab Panel 3</TabPanel>,
+      label: 'Activity',
+      panel: <TabPanel>Activity</TabPanel>,
+    },
+    {
+      label: 'Settings',
+      panel: <TabPanel>Settings</TabPanel>,
       disabled: true,
-    },
-    {
-      label: 'Tab label 4',
-      panel: <TabPanel>Tab Panel 4</TabPanel>,
     },
   ];
   const [renderedTabs, setRenderedTabs] = useState(tabs);
@@ -191,7 +201,7 @@ export const DismissableWithIcons = ({ contained }) => {
     setRenderedTabs(tabs);
   };
 
-  const icons = [Bat, Bee, Corn, Monster];
+  const icons = [Dashboard, CloudMonitoring, Settings, Activity];
 
   return (
     <>
@@ -219,15 +229,13 @@ export const DismissableWithIcons = ({ contained }) => {
 export const WithIcons = () => (
   <Tabs>
     <TabList activation="manual" aria-label="List of tabs">
-      <Tab renderIcon={Bee}>Tab label 1</Tab>
-      <Tab renderIcon={Monster}>Tab label 2</Tab>
-      <Tab disabled renderIcon={Corn}>
-        Tab label 3
+      <Tab renderIcon={Dashboard}>Dashboard</Tab>
+      <Tab renderIcon={CloudMonitoring}>Monitoring</Tab>
+      <Tab renderIcon={Activity}>Activity</Tab>
+      <Tab renderIcon={Search}>Analyze</Tab>
+      <Tab disabled renderIcon={Settings}>
+        Settings
       </Tab>
-      <Tab title="Tab label 4" renderIcon={Bat}>
-        Tab label 4
-      </Tab>
-      <Tab renderIcon={Home}>Tab label 5</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
@@ -258,11 +266,11 @@ export const WithIcons = () => (
 export const Manual = () => (
   <Tabs>
     <TabList activation="manual" aria-label="List of tabs">
-      <Tab>Tab label 1</Tab>
-      <Tab>Tab label 2</Tab>
-      <Tab disabled>Tab label 3</Tab>
-      <Tab title="Tab label 4">Tab label 4</Tab>
-      <Tab>Tab label 5</Tab>
+      <Tab>Dashboard</Tab>
+      <Tab>Monitoring</Tab>
+      <Tab title="Tab label 4">Activity</Tab>
+      <Tab>Analyze</Tab>
+      <Tab disabled>Settings</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
@@ -293,20 +301,24 @@ export const Manual = () => (
 export const Icon20Only = () => (
   <Tabs>
     <TabList iconSize="lg" aria-label="List of tabs">
-      <IconTab label="Monster" disabled>
-        <Monster size={20} aria-label="Monster" />
+      <IconTab label="Analyze" disabled>
+        <Search size={20} aria-label="Analyze" />
       </IconTab>
-      <IconTab label="Corn">
-        <Corn size={20} aria-label="Corn" />
+      <IconTab label="Activity">
+        <Activity size={20} aria-label="Activity" />
       </IconTab>
-      <IconTab label="Bat">
-        <Bat size={20} aria-label="Bat" />
+      <IconTab label="Notification">
+        <Notification size={20} aria-label="Notification" />
+      </IconTab>
+      <IconTab label="Chat">
+        <Chat size={20} aria-label="Chat" />
       </IconTab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
       <TabPanel>Tab Panel 2</TabPanel>
       <TabPanel>Tab Panel 3</TabPanel>
+      <TabPanel>Tab Panel 4</TabPanel>
     </TabPanels>
   </Tabs>
 );
@@ -314,20 +326,24 @@ export const Icon20Only = () => (
 export const IconOnly = () => (
   <Tabs>
     <TabList aria-label="List of tabs">
-      <IconTab label="Monster" disabled>
-        <Monster aria-label="Monster" />
+      <IconTab label="Analyze" disabled>
+        <Search aria-label="Analyze" />
       </IconTab>
-      <IconTab label="Corn">
-        <Corn aria-label="Corn" />
+      <IconTab label="Activity">
+        <Activity aria-label="Activity" />
       </IconTab>
-      <IconTab label="Bat">
-        <Bat aria-label="Bat" />
+      <IconTab label="Notification">
+        <Notification aria-label="Notification" />
+      </IconTab>
+      <IconTab label="Chat">
+        <Chat aria-label="Chat" />
       </IconTab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
       <TabPanel>Tab Panel 2</TabPanel>
       <TabPanel>Tab Panel 3</TabPanel>
+      <TabPanel>Tab Panel 4</TabPanel>
     </TabPanels>
   </Tabs>
 );
@@ -335,11 +351,11 @@ export const IconOnly = () => (
 export const Contained = () => (
   <Tabs>
     <TabList aria-label="List of tabs" contained>
-      <Tab>Tab label 1</Tab>
-      <Tab>Tab label 2</Tab>
-      <Tab disabled>Tab label 3</Tab>
-      <Tab title="Tab label 4">Tab label 4</Tab>
-      <Tab>Tab label 5</Tab>
+      <Tab>Dashboard</Tab>
+      <Tab>Monitoring</Tab>
+      <Tab>Activity</Tab>
+      <Tab>Analyze</Tab>
+      <Tab disabled>Settings</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
@@ -369,15 +385,13 @@ export const Contained = () => (
 export const ContainedWithIcons = () => (
   <Tabs>
     <TabList aria-label="List of tabs" contained>
-      <Tab renderIcon={Bee}>Tab label 1</Tab>
-      <Tab renderIcon={Monster}>Tab label 2</Tab>
-      <Tab disabled renderIcon={Bat}>
-        Tab label 3
+      <Tab renderIcon={Dashboard}>Dashboard</Tab>
+      <Tab renderIcon={CloudMonitoring}>Monitoring</Tab>
+      <Tab renderIcon={Activity}>Activity</Tab>
+      <Tab renderIcon={Search}>Analyze</Tab>
+      <Tab disabled renderIcon={Settings}>
+        Settings
       </Tab>
-      <Tab title="Tab label 4" renderIcon={Corn}>
-        Tab label 4
-      </Tab>
-      <Tab renderIcon={Home}>Tab label 5</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
@@ -407,15 +421,13 @@ export const ContainedWithIcons = () => (
 export const ContainedWithSecondaryLabels = () => (
   <Tabs>
     <TabList aria-label="List of tabs" contained>
-      <Tab secondaryLabel="367">Tab label 1</Tab>
-      <Tab secondaryLabel="367">Tab label 2</Tab>
-      <Tab disabled secondaryLabel="367">
-        Tab label 3
+      <Tab secondaryLabel="(21/25)">Engage</Tab>
+      <Tab secondaryLabel="(12/16)">Analyze</Tab>
+      <Tab secondaryLabel="(0/7)">Remediate</Tab>
+      <Tab secondaryLabel="(4/12)">Assets</Tab>
+      <Tab disabled secondaryLabel="(0/10)">
+        Monitoring
       </Tab>
-      <Tab title="Tab label 4" secondaryLabel="367">
-        Tab label 4
-      </Tab>
-      <Tab secondaryLabel="367">Tab label 5</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
@@ -445,20 +457,20 @@ export const ContainedWithSecondaryLabels = () => (
 export const ContainedWithSecondaryLabelsAndIcons = () => (
   <Tabs>
     <TabList aria-label="List of tabs" contained>
-      <Tab renderIcon={Bee} secondaryLabel="367">
-        Tab label 1
+      <Tab renderIcon={Task} secondaryLabel="(21/25">
+        Engage
       </Tab>
-      <Tab renderIcon={Monster} secondaryLabel="367">
-        Tab label 2
+      <Tab renderIcon={Search} secondaryLabel="(12/16)">
+        Analyze
       </Tab>
-      <Tab renderIcon={Bat} disabled secondaryLabel="367">
-        Tab label 3
+      <Tab renderIcon={Restart} disabled secondaryLabel="(0/7)">
+        Remediate
       </Tab>
-      <Tab renderIcon={Corn} title="Tab label 4" secondaryLabel="367">
-        Tab label 4
+      <Tab renderIcon={Dashboard} secondaryLabel="(4/12)">
+        Assets
       </Tab>
-      <Tab renderIcon={Home} secondaryLabel="367">
-        Tab label 5
+      <Tab renderIcon={CloudMonitoring} secondaryLabel="(1/23)">
+        Monitoring
       </Tab>
     </TabList>
     <TabPanels>
@@ -491,14 +503,14 @@ export const ContainedFullWidth = () => (
     <Column lg={16} md={8} sm={4}>
       <Tabs>
         <TabList aria-label="List of tabs" contained fullWidth>
-          <Tab>Tab Label 1</Tab>
-          <Tab>Tab Label 2</Tab>
-          <Tab disabled>Tab Label 3</Tab>
-          <Tab>Tab Label 4 with a very long long title</Tab>
-          <Tab>Tab Label 5</Tab>
-          <Tab>Tab Label 6</Tab>
-          <Tab>Tab Label 7</Tab>
-          <Tab>Tab Label 8</Tab>
+          <Tab>TLS</Tab>
+          <Tab>Origin</Tab>
+          <Tab disabled>Rate limiting</Tab>
+          <Tab>WAF</Tab>
+          <Tab>IP Firewall</Tab>
+          <Tab>Firewall rules</Tab>
+          <Tab>Range</Tab>
+          <Tab>Mutual TLS</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>Tab Panel 1</TabPanel>
@@ -541,10 +553,10 @@ export const Skeleton = () => {
 export const Playground = ({ dismissable, ...args }) => (
   <Tabs dismissable={dismissable} onTabCloseRequest={() => {}}>
     <TabList aria-label="List of tabs" {...args}>
-      <Tab>Tab label 1</Tab>
-      <Tab>Tab label 2</Tab>
-      <Tab>Tab label 3</Tab>
-      <Tab>Tab label 4</Tab>
+      <Tab>Dashboard</Tab>
+      <Tab>Monitoring</Tab>
+      <Tab>Activity</Tab>
+      <Tab>Settings</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>

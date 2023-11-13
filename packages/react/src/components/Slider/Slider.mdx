@@ -36,6 +36,14 @@ input must adhere to the step value. For example, if the `step` is `5`, with a
 range of values from `0-100`, `40` would be valid, and `42` would be considered
 `invalid`.
 
+### `unstable_valueUpper` Prop
+
+The Slider component can support two handles to specify a range. To enable this
+behavior pass a value for the `unstable_valueUpper` prop. This sets the upper
+bound of the range in addition to the `value` prop, which specifies the lower
+bound. When in two handle mode, both `value` and `valueUpper` are provided as
+keys to `onChange` function prop that is passed to the component.
+
 <Canvas>
   <Story of={SliderStories.Playground} />
 </Canvas>

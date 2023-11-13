@@ -6,14 +6,12 @@
  */
 
 import React from 'react';
-import { render, cleanup } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { ModalHeader } from './ModalHeader';
 
 const prefix = 'cds';
 
 describe('ModalHeader', () => {
-  afterEach(cleanup);
-
   it('should render title if has title text', () => {
     const { container } = render(<ModalHeader title="Carbon" />);
 

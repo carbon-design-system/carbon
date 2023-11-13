@@ -24,7 +24,7 @@
   //----------------------------------------------------------------------------
   //first row top border
   .#{$prefix}--data-table tr.#{$prefix}--parent-row:first-of-type td {
-    border-top: 1px solid $border-subtle;
+    border-block-start: 1px solid $border-subtle;
   }
 
   //----------------------------------------------------------------------------
@@ -32,25 +32,25 @@
   //----------------------------------------------------------------------------
   // default styles
   .#{$prefix}--expandable-row--hidden td {
-    width: auto;
     padding: $spacing-05;
-    border-top: 0;
+    border-block-start: 0;
+    inline-size: auto;
   }
 
   //child row hidden
   tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row)
     + tr[data-child-row] {
-    height: 0;
+    block-size: 0;
     transition: height $duration-moderate-01 motion(standard, productive);
   }
 
   tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row)
     + tr[data-child-row]
     td {
-    padding-top: 0;
-    padding-bottom: 0;
     border: 0;
     background-color: $layer-hover;
+    padding-block-end: 0;
+    padding-block-start: 0;
     transition: padding $duration-moderate-01 motion(standard, productive),
       background-color $duration-moderate-01 motion(standard, productive);
   }
@@ -60,7 +60,7 @@
     td
     .#{$prefix}--child-row-inner-container {
     overflow: hidden;
-    max-height: 0;
+    max-block-size: 0;
   }
 
   //child row visible
@@ -69,8 +69,8 @@
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
-    padding-left: 3.5rem;
-    border-bottom: 1px solid $border-subtle;
+    border-block-end: 1px solid $border-subtle;
+    padding-inline-start: 3.5rem;
     transition: padding-bottom $duration-fast-02 motion(standard, productive),
       transform $duration-fast-02 motion(standard, productive),
       background-color $duration-fast-02 motion(standard, productive);
@@ -80,13 +80,13 @@
     + tr[data-child-row]
     td
     .#{$prefix}--child-row-inner-container {
-    max-height: 100%;
+    max-block-size: 100%;
   }
 
   // bottom border overrides
   .#{$prefix}--parent-row.#{$prefix}--expandable-row > td,
   .#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] > td {
-    border-bottom: 1px solid $border-subtle;
+    border-block-end: 1px solid $border-subtle;
     box-shadow: 0 1px $border-subtle;
   }
 
@@ -114,35 +114,35 @@
   // hovering on collapsed parent
   tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row):first-of-type:hover
     td {
-    border-top: 1px solid $border-subtle;
-    border-bottom: 1px solid $border-subtle;
+    border-block-end: 1px solid $border-subtle;
+    border-block-start: 1px solid $border-subtle;
   }
 
   // hovering on expanded parent
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td {
-    border-top: 1px solid $border-subtle;
-    border-bottom: 1px solid $border-subtle;
     background-color: $layer-hover;
+    border-block-end: 1px solid $border-subtle;
+    border-block-start: 1px solid $border-subtle;
     color: $text-primary;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td:first-of-type {
     // First td doesn't have a visible border
-    border-bottom: 1px solid $layer-hover;
+    border-block-end: 1px solid $layer-hover;
   }
 
   // Child row when hovering on expanded parent
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
     + tr[data-child-row]
     td {
-    border-bottom: 1px solid $border-subtle;
     background-color: $layer-hover;
+    border-block-end: 1px solid $border-subtle;
     color: $text-primary;
   }
 
   //hovering on expanded child row
   tr.#{$prefix}--expandable-row--hover + tr[data-child-row] td {
-    border-bottom: 1px solid $border-subtle;
+    border-block-end: 1px solid $border-subtle;
   }
 
   //hovering on expanded child row (class added to parent)
@@ -151,23 +151,23 @@
   }
 
   tr.#{$prefix}--expandable-row--hover td {
-    border-top: 1px solid $border-subtle;
-    border-bottom: 1px solid $border-subtle;
     background-color: $layer-hover;
+    border-block-end: 1px solid $border-subtle;
+    border-block-start: 1px solid $border-subtle;
     color: $text-primary;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
     td:first-of-type {
     // First parent td doesn't have visible bottom border
-    border-bottom: 1px solid transparent;
+    border-block-end: 1px solid transparent;
   }
 
   //----------------------------------------------------------------------------
   // Expand icon column
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table td.#{$prefix}--table-expand {
-    border-bottom: 1px solid $border-subtle;
+    border-block-end: 1px solid $border-subtle;
   }
 
   .#{$prefix}--data-table
@@ -176,8 +176,8 @@
   .#{$prefix}--data-table
     td.#{$prefix}--table-expand
     + .#{$prefix}--table-column-checkbox {
-    padding-right: convert.to-rem(6px);
-    padding-left: convert.to-rem(6px);
+    padding-inline-end: convert.to-rem(6px);
+    padding-inline-start: convert.to-rem(6px);
   }
 
   .#{$prefix}--data-table
@@ -188,18 +188,18 @@
     td.#{$prefix}--table-expand
     + .#{$prefix}--table-column-checkbox
     + td {
-    padding-left: convert.to-rem(8px);
+    padding-inline-start: convert.to-rem(8px);
   }
 
   .#{$prefix}--data-table td.#{$prefix}--table-expand,
   .#{$prefix}--data-table th.#{$prefix}--table-expand {
     padding: 0.5rem;
-    padding-right: 0;
+    padding-inline-end: 0;
   }
 
   .#{$prefix}--data-table
     td.#{$prefix}--table-expand[data-previous-value='collapsed'] {
-    border-bottom: 1px solid transparent;
+    border-block-end: 1px solid transparent;
   }
 
   .#{$prefix}--table-expand[data-previous-value='collapsed']
@@ -212,12 +212,12 @@
     @include button-reset.reset('false');
 
     display: inline-flex;
-    width: 100%;
-    // Account for the border in `.bx--table-expand`
-    height: calc(100% + 1px);
     align-items: center;
     justify-content: center;
     padding: 0 $spacing-03;
+    // Account for the border in `.bx--table-expand`
+    block-size: calc(100% + 1px);
+    inline-size: 100%;
     vertical-align: inherit;
   }
 
@@ -227,9 +227,9 @@
   .#{$prefix}--data-table--top-aligned-header
     th
     .#{$prefix}--table-expand__button {
-    height: convert.to-rem(32px);
     align-items: start;
-    padding-top: $spacing-03;
+    block-size: convert.to-rem(32px);
+    padding-block-start: $spacing-03;
   }
 
   .#{$prefix}--data-table--top-aligned-body.#{$prefix}--data-table--xs
@@ -238,8 +238,8 @@
   .#{$prefix}--data-table--top-aligned-header.#{$prefix}--data-table--xs
     th
     .#{$prefix}--table-expand__button {
-    height: convert.to-rem(24px);
-    padding-top: $spacing-02;
+    block-size: convert.to-rem(24px);
+    padding-block-start: $spacing-02;
   }
 
   .#{$prefix}--data-table--top-aligned-body.#{$prefix}--data-table--md
@@ -248,8 +248,8 @@
   .#{$prefix}--data-table--top-aligned-header.#{$prefix}--data-table--md
     th
     .#{$prefix}--table-expand__button {
-    padding-top: $spacing-03;
-    margin-top: -$spacing-02;
+    margin-block-start: -$spacing-02;
+    padding-block-start: $spacing-03;
   }
 
   .#{$prefix}--table-expand__button:focus {
@@ -264,7 +264,7 @@
   }
 
   .#{$prefix}--data-table--xl .#{$prefix}--table-expand__button {
-    width: convert.to-rem(32px);
+    inline-size: convert.to-rem(32px);
   }
 
   // fix expanded parent separating border length
@@ -272,12 +272,12 @@
     td.#{$prefix}--table-expand
     + td::after {
     position: absolute;
-    bottom: convert.to-rem(-1px);
-    left: 0;
-    width: convert.to-rem(8px);
-    height: convert.to-rem(1px);
     background: $layer-accent;
+    block-size: convert.to-rem(1px);
     content: '';
+    inline-size: convert.to-rem(8px);
+    inset-block-end: convert.to-rem(-1px);
+    inset-inline-start: 0;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
@@ -300,14 +300,14 @@
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table--zebra tbody tr[data-parent-row]:nth-child(4n + 3) td,
   .#{$prefix}--data-table--zebra tbody tr[data-child-row]:nth-child(4n + 4) td {
-    border-bottom: 1px solid $layer;
+    border-block-end: 1px solid $layer;
   }
 
   .#{$prefix}--data-table--zebra tbody tr[data-parent-row]:nth-child(4n + 1) td,
   .#{$prefix}--data-table--zebra tbody tr[data-child-row]:nth-child(4n + 2) td {
-    border-top: 1px solid $layer-accent;
-    border-bottom: 1px solid $layer-accent;
     background-color: $layer-accent;
+    border-block-end: 1px solid $layer-accent;
+    border-block-start: 1px solid $layer-accent;
   }
 
   .#{$prefix}--data-table--zebra tr.#{$prefix}--parent-row td,
@@ -327,17 +327,17 @@
     + tr[data-child-row]
     td,
   .#{$prefix}--data-table--zebra tbody tr[data-child-row]:hover td {
-    border-top: 1px solid $layer-hover;
-    border-bottom: 1px solid $layer-hover;
     background-color: $layer-hover;
+    border-block-end: 1px solid $layer-hover;
+    border-block-start: 1px solid $layer-hover;
   }
 
   .#{$prefix}--data-table--zebra
     tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
     td {
-    border-top: 1px solid $layer-hover;
-    border-bottom: 1px solid $layer-hover;
     background: $layer-hover;
+    border-block-end: 1px solid $layer-hover;
+    border-block-start: 1px solid $layer-hover;
   }
 
   //----------------------------------------------------------------------------
@@ -345,22 +345,22 @@
   //----------------------------------------------------------------------------
   // Parent collapsed
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:first-of-type td {
-    border-top: 1px solid $layer-active;
-    border-bottom: 1px solid $border-subtle;
     background: $layer-selected;
+    border-block-end: 1px solid $border-subtle;
+    border-block-start: 1px solid $layer-active;
     box-shadow: 0 1px $layer-active;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected td {
-    border-bottom: 1px solid transparent;
     background: $layer-selected;
+    border-block-end: 1px solid transparent;
     box-shadow: 0 1px $layer-active;
     color: $text-primary;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:last-of-type td {
-    border-bottom: 1px solid transparent;
     background: $layer-selected;
+    border-block-end: 1px solid transparent;
     box-shadow: 0 1px $border-subtle;
   }
 
@@ -369,9 +369,9 @@
       .#{$prefix}--expandable-row
     ):hover
     td {
-    border-top: 1px solid $layer-selected-hover;
-    border-bottom: 1px solid $border-subtle;
     background: $layer-selected-hover;
+    border-block-end: 1px solid $border-subtle;
+    border-block-start: 1px solid $layer-selected-hover;
     box-shadow: 0 1px $layer-selected-hover;
   }
 
@@ -380,7 +380,7 @@
     td,
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
     td:first-of-type {
-    border-bottom: 1px solid transparent;
+    border-block-end: 1px solid transparent;
     // No visible border when expanded
     box-shadow: 0 1px $layer-selected;
   }
@@ -394,9 +394,9 @@
     td,
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
     td:first-of-type {
-    border-top: 1px solid $layer-selected-hover;
-    border-bottom: 1px solid transparent;
     background: $layer-selected-hover;
+    border-block-end: 1px solid transparent;
+    border-block-start: 1px solid $layer-selected-hover;
     box-shadow: 0 1px $layer-selected-hover;
   }
 
@@ -404,9 +404,9 @@
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
     + tr[data-child-row]
     td {
-    border-top: 1px solid $layer-active;
-    border-bottom: 1px solid $border-subtle;
     background-color: $layer-hover;
+    border-block-end: 1px solid $border-subtle;
+    border-block-start: 1px solid $layer-active;
     box-shadow: 0 1px $layer-active;
     color: $text-primary;
   }
@@ -414,8 +414,8 @@
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
     + tr[data-child-row]:last-of-type
     td {
-    padding-bottom: convert.to-rem(24px);
     box-shadow: inset 0 -1px $layer-active;
+    padding-block-end: convert.to-rem(24px);
   }
 
   // Child row expanded hover

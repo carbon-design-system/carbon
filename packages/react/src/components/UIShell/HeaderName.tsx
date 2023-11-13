@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import Link, { type LinkProps, LinkPropTypes } from './Link';
 import { usePrefix } from '../../internal/usePrefix';
 
-type HeaderNameProps<E extends ElementType> = LinkProps<E> & {
+export type HeaderNameProps<E extends ElementType> = LinkProps<E> & {
   prefix?: string | undefined;
 };
 
