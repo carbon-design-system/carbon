@@ -76,7 +76,7 @@ test.describe('FluidTextArea @avt', () => {
 
     // Writting a word to check functionality
     await textArea.fill('test');
-    await expect(page.getByText('test')).toBeVisible();
+    await expect(textArea).toHaveValue('test');
     await expect(page).toHaveNoACViolations('FluidTextArea default');
   });
 
@@ -105,7 +105,7 @@ test.describe('FluidTextArea @avt', () => {
 
     // Writting a word to check functionality
     await textArea.fill('test');
-    await expect(page.getByText('test')).toBeVisible();
+    await expect(textArea).toHaveValue('test');
     await expect(page).toHaveNoACViolations('FluidTextArea with tooltip');
   });
 });
