@@ -234,7 +234,7 @@ export const Default = () => (
 );
 
 const slug = (
-  <Slug>
+  <Slug className="slug-container">
     <SlugContent>
       <div>
         <p className="secondary">AI Explained</p>
