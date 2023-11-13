@@ -42,7 +42,7 @@ Being new on the maintainer team can be overwhelming and can often lead to feeli
 ### What does "ongoing support" mean?
 
 - Incoming pull requests (code review, initial communication, ongoing
-  discussion, rejection or merge) from the community from the maintainer team and the community (in that order).
+  discussion, rejection or merge) from the maintainer team and the community (in that order).
 - Triage [new issues](https://github.com/orgs/carbon-design-system/projects/39/views/6) on your support day.
 - Designers triage design issues and developers triage dev issues.
 - Does not include feature enhancements or new feature requests
