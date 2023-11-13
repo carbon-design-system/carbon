@@ -37,7 +37,7 @@ Whether you are new or a seasoned veteran, being a maintainer of the Carbon
 Design System can be overwhelming and can often lead to feelings of imposter
 syndrome. Whether you are triaging new issues in Github or responding to Slack
 threads in our support channels, here are some responses that can help get the
-conversation moving for you in case you get stuck.
+conversation started in case you get stuck.
 
 - “Could you share more about you’ve already tried?”
 - “Can you share more about your use-case?”
@@ -116,7 +116,7 @@ to define the issue their having._
 
 Using these templates also helps Project-Bot automatically move issues and new
 pull requests to the right workstreams by auto labeling the issues according to
-the template type. There are three types of issues the maintainer team is
+the template type. There are three types of issues the maintainer team are
 concerned with:
 
 - type: question ❓
@@ -141,7 +141,7 @@ quickly it should be addressed.
 For the different types of issues, we have created the process to triaging each
 one so that they can be moved into our Backlog.
 
-#### type: bug 🐛, type: a11y ♿, type: docs 📖, type: infrastructure 🤖
+#### type: bug 🐛
 
 _Process to triaged_
 
@@ -191,8 +191,7 @@ browser or version info.
 
 </details>
 
-After all that, move the issue to the backlog pipeline in zenhub and then you're
-done! 🎉
+After all that, move the issue to the backlog and then you're done! 🎉
 
 #### type: question ❓
 
@@ -349,7 +348,7 @@ business impact that the feature will bring with future research done.
 
 ### Severity
 
-There are 4 levels of severity for issues in the Carbon core repositories:
+There are 4 levels of severity for bugs in the Carbon core repositories:
 
 - https://github.com/carbon-design-system/carbon/labels/severity%3A%201 - _"Must
   be fixed ASAP"_
