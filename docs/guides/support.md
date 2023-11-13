@@ -7,6 +7,7 @@
 
 - [Overview](#overview)
   - [What does "ongoing support" mean?](#what-does-ongoing-support-mean)
+  - [What does "ongoing support" mean regarding Slack?](what-does-ongoing-support-mean-regarding-slack)
   - [What repositories do we support?](#what-repositories-do-we-support)
 - [Issues](#issues)
   - [Types of issues](#types-of-issues)
@@ -29,22 +30,42 @@
 
 ## Overview
 
-Ongoing support for Carbon and previous version (which will be prioritized in
+Ongoing support for the latest version Carbon and the previous version (which will be prioritized in
 that order)
+
+Being new on the maintainer team can be overwhelming and can often lead to feelings of imposter syndrome. Whether you are triaging new issues in Github or responding to Slack threads in our support channels, here are some responses that can help get the conversation moving for you.
+
+- “Could you share more about you’ve already tried”
+- “Can you share more about your use-case?”
+- “After searching through FILL IN RESOURCE HERE, I was able to find this and thought it might be helpful... Let me know if that works.”
 
 ### What does "ongoing support" mean?
 
 - Incoming pull requests (code review, initial communication, ongoing
-  discussion, rejection or merge) from the community (i.e. not from the core
-  team)
-- Triage and shepherd issues to close. Answer questions and help our users find
-  solutions to their problems
+  discussion, rejection or merge) from the community from the maintainer team and the community (in that order).
+- Triage [new issues](https://github.com/orgs/carbon-design-system/projects/39/views/6) on your support day.
+- Designers triage design issues and developers triage dev issues.
 - Does not include feature enhancements or new feature requests
+
+### What does "ongoing support" mean regarding Slack?
+
+- A minimum of twice per day that maintainers monitor #carbon-design-system and #carbon-react Slack support channels and respond to questions. Help our users find solutions to their problems.
+- The goal is to _respond_ to every thread on your day.
+- Go into threads where members of the community answer a question and validate the person in the community that answered it by adding an emojii or response reiterating the answer and acknowledging the community member.
+- If a question is Carbon-related, but not necessarily related to the core components, route the person to the correct Slack channel where they might receive support. [ibmproducts-pal-dev](https://ibm.enterprise.slack.com/archives/C013ZTX0N6B), [ibmproducts-pal](https://ibm.enterprise.slack.com/archives/CQGR0HC05), [carbon-angulur](https://ibm.enterprise.slack.com/archives/CBZC0LM2N)
+- Use discretion to respond to applicable threads. Lean on the maintainer team's private #carbon-support channel to look for subject matter experts when a question goes beyond your skillset. When you ask in this channel, take a leap of faith in your skills and propose a response, such as, "This is how I want to respond ... YOUR REPLY HERE". Follow the question by practicing humility, "How far off am I"? What am I missing? Remember, you're acting as an advocate for the person who originally asked the question. Respresent their needs to the best of your ability.
+
+### Configuring the Github Slack integration
+
+`/github subscribe carbon-design-system/carbon`
+
+For additional guidance checkout their [docs](https://github.com/integrations/slack).
 
 ### What repositories do we support?
 
 - carbon-design-system/carbon
 - carbon-design-system/carbon-website
+- carbon-design-system/carbon-design-kit
 
 ## Issues
 
@@ -64,13 +85,17 @@ to define the issue their having._
 
 Using these templates also helps Project-Bot automatically move issues and new
 pull requests to the right workstreams by auto labeling the issues according to
-the template type. There are three types of issues The Support and Maintenance
-team are concerned with:
+the template type. There are three types of issues the maintainer team is concerned with:
 
-- type: a11y ♿
 - type: question ❓
 - type: bug 🐛
 - type: enhancement 💡
+
+In addition to the types above, the issue may also fit one or more of the following types of issues based on the work being performed.
+
+- type: a11y ♿
+- type: docs 📖
+- type: infrastructure 🤖
 
 ### Triaging a new issue
 
@@ -81,11 +106,9 @@ quickly it should be addressed.
 ### Triage Process
 
 For the different types of issues, we have created the process to triaging each
-one so that they can be moved into our Backlog. For all types of issues, assign
-yourself to the issue until it's moved to the Backlog pipeline so that others
-know the issue is being addressed.
+one so that they can be moved into our Backlog.
 
-#### type: bug 🐛 & type: a11y ♿
+#### type: bug 🐛, type: a11y ♿, type: docs 📖, type: infrastructure 🤖
 
 _Process to triaged_
 
@@ -111,7 +134,7 @@ Sometimes people mark their issues as a bug when in reality, they are an
 enhancement request or a question.
 
 If you find this to be the case, remove the bug label, add the
-`type: question ❓` or `type: enhancement 💡` label, and then follow the
+appropriate label, and then follow the
 directions in that section.
 
 </details>
