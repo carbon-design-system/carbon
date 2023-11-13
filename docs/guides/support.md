@@ -17,7 +17,7 @@
     - [type: question ❓](#type-question-)
     - [type: enhancement 💡](#type-enhancement-)
   - [Severity](#severity)
-  - [Impact](#impact)
+  - [Project](#project)
   - [Other labels](#other-labels)
   - [Alerting a team or subject matter expert](#alerting-a-team-or-subject-matter-expert)
 - [Pull requests](#pull-requests)
@@ -426,6 +426,28 @@ For the vast majority of bugs that have invalid and blocking behavior with no
 workaround, a
 https://github.com/carbon-design-system/carbon/labels/severity%3A%202 or lower
 is more appropriate.
+
+After applying the severity label, be sure to also apply the appropriate role to
+the issue. Either `role: dev 🤖` or `role: design :pencil2:`, depending on which
+discipline should be working on it.
+
+### Project
+
+After assigning the role and serverity, be sure to apply the correct categories
+in the Github Project:
+
+- Status
+  - Triage - Issues that need triaging
+  - Needs Refined - Issues that will be worked on in future sprints, but need to
+    be broken down into smaller chunks and discussed.
+  - Needs a11y review - Issues that need to be brough the Carbon Accessibility
+    Guild for further refinement and clarity.
+  - Backlog - Issues that have been refined move into the Backlog, where they
+    will be sized and assigned for a future sprint.
+  - In progress - Issues that are being actively worked on in a given sprint.
+  - Area - The part of the system that the issue effects.
+  - Role - The discipline that will take the lead and deliver the issue to
+    completion.
 
 ### Other labels
 
