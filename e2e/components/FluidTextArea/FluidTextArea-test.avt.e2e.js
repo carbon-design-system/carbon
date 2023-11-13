@@ -75,12 +75,12 @@ test.describe('FluidTextArea @avt', () => {
     await expect(textArea).toBeFocused();
 
     // Writting a word to check functionality
-    await textArea.fill('Peter');
-    await expect(page.getByText('Peter')).toBeVisible();
-    await expect(page).toHaveNoACViolations('FluidTextArea keyboard counter');
+    await textArea.fill('test');
+    await expect(page.getByText('test')).toBeVisible();
+    await expect(page).toHaveNoACViolations('FluidTextArea default');
   });
 
-  test('@avt-keyboard-nav FluidTextArea default', async ({ page }) => {
+  test('@avt-keyboard-nav FluidTextArea with tooltip', async ({ page }) => {
     await visitStory(page, {
       component: 'TextArea',
       id: 'experimental-unstable-fluidtextarea--default-with-tooltip',
@@ -88,7 +88,6 @@ test.describe('FluidTextArea @avt', () => {
         theme: 'white',
       },
     });
-    const textArea = page.getByRole('textbox');
     await expect(page.getByText('Text Area label')).toBeVisible();
 
     // Checking tooltip
@@ -100,12 +99,13 @@ test.describe('FluidTextArea @avt', () => {
     ).toBeVisible();
 
     // Checking focus on textarea
+    const textArea = page.getByRole('textbox');
     await page.keyboard.press('Tab');
     await expect(textArea).toBeFocused();
 
     // Writting a word to check functionality
-    await textArea.fill('Peter');
-    await expect(page.getByText('Peter')).toBeVisible();
-    await expect(page).toHaveNoACViolations('FluidTextArea keyboard counter');
+    await textArea.fill('test');
+    await expect(page.getByText('test')).toBeVisible();
+    await expect(page).toHaveNoACViolations('FluidTextArea with tooltip');
   });
 });
