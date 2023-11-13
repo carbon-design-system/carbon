@@ -46,7 +46,7 @@ test.describe('FluidMultiSelect @avt', () => {
     await expect(page).toHaveNoACViolations('FluidMultiSelect-skeleton');
   });
 
-  test('@avt-keyboard-nav', async ({ page }) => {
+  test('@avt-keyboard-nav FluidMultiSelect', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidMultiSelect',
       id: 'experimental-unstable-fluidmultiselect--default',
@@ -141,7 +141,7 @@ test.describe('FluidMultiSelect @avt', () => {
     await expect(selection).not.toBeVisible();
   });
 
-  test('@avt-keyboard-nav condensed', async ({ page }) => {
+  test('@avt-keyboard-nav FluidMultiSelect condensed', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidMultiSelect',
       id: 'experimental-unstable-fluidmultiselect--condensed',
