@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import Checkbox from '../Checkbox';
 import DatePicker from '../DatePicker';
 import DatePickerInput from '../DatePickerInput';
@@ -232,6 +232,116 @@ export const Default = () => (
     </Stack>
   </Form>
 );
+
+export const RevertTest = () => {
+  const textInputRef = useRef();
+  const numberInputRef = useRef();
+  const [isTextInputEdited, setIsTextInputEdited] = useState(false);
+  const [isNumberInputEdited, setIsNumberInputEdited] = useState(false);
+  const aiTextValue = 'Generated AI content';
+  const aiNumberValue = 11;
+
+  const handleRevertClick = (evt) => {
+    evt.stopPropagation();
+    if (textInputRef.current.nextElementSibling.contains(evt.target)) {
+      setIsTextInputEdited(false);
+      textInputRef.current.focus();
+      textInputRef.current.value = aiTextValue;
+    }
+
+    if (numberInputRef.current.nextElementSibling.contains(evt.target)) {
+      setIsNumberInputEdited(false);
+      numberInputRef.current.value = aiNumberValue;
+    }
+  };
+
+  const handleChange = (evt, numberInputState) => {
+    if (textInputRef.current.contains(evt.target)) {
+      setIsTextInputEdited(true);
+    }
+
+    if (numberInputRef.current.contains(evt.target) || numberInputState) {
+      setIsNumberInputEdited(true);
+    }
+  };
+
+  const textInputSlug = (
+    <Slug
+      revertActive={isTextInputEdited}
+      onRevertClick={handleRevertClick}
+      className="slug-container">
+      <SlugContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h1>84%</h1>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+      </SlugContent>
+    </Slug>
+  );
+
+  const numberInputSlug = (
+    <Slug
+      revertActive={isNumberInputEdited}
+      onRevertClick={handleRevertClick}
+      className="slug-container">
+      <SlugContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h1>84%</h1>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+      </SlugContent>
+    </Slug>
+  );
+
+  return (
+    <Stack gap={7} className="form-example">
+      <Form aria-label="sample form" className="slug-form">
+        <Stack gap={7}>
+          <TextInput
+            ref={textInputRef}
+            id="text-input-edit"
+            labelText="Sample AI Input"
+            slug={textInputSlug}
+            defaultValue={aiTextValue}
+            onChange={handleChange}
+          />
+          <NumberInput
+            ref={numberInputRef}
+            id="number-input-edit"
+            label="Sample AI Input"
+            slug={numberInputSlug}
+            defaultValue={aiNumberValue}
+            step={1}
+            min={0}
+            max={100}
+            onChange={handleChange}
+          />
+          <button
+            type="button"
+            onClick={() => (numberInputRef.current.value = 44)}>
+            Test
+          </button>
+        </Stack>
+      </Form>
+    </Stack>
+  );
+};
 
 const slug = (
   <Slug className="slug-container">

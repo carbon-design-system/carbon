@@ -387,4 +387,10 @@ $sizes: (
     order: 1;
     border-end-end-radius: convert.to-rem(16px);
   }
+
+  // Revert styles
+  .#{$prefix}--slug--revert .#{$prefix}--btn--icon-only {
+    align-items: center;
+    padding-block-start: 0;
+  }
 }

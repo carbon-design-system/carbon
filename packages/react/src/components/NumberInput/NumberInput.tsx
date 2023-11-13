@@ -8,7 +8,13 @@
 import { Add, Subtract } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { ReactNode, useContext, useRef, useState } from 'react';
+import React, {
+  ReactNode,
+  useContext,
+  useRef,
+  useState,
+  useEffect,
+} from 'react';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useNormalizedInputProps as normalize } from '../../internal/useNormalizedInputProps';
 import { usePrefix } from '../../internal/usePrefix';
@@ -197,7 +203,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       className: customClassName,
       disabled = false,
       disableWheel: disableWheelProp = false,
-      defaultValue,
+      defaultValue = 0,
       helperText = '',
       hideLabel = false,
       hideSteppers,
@@ -360,6 +366,18 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         size: 'mini',
       });
     }
+
+    // Need to update the internal value when the revert button is clicked
+    let isRevertActive;
+    if (slug) {
+      isRevertActive = slug.props.revertActive;
+    }
+
+    useEffect(() => {
+      if (!isRevertActive && slug) {
+        setValue(defaultValue);
+      }
+    }, [defaultValue, isRevertActive, slug]);
 
     return (
       <div
