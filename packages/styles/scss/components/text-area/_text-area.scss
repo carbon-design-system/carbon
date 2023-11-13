@@ -131,6 +131,8 @@
 
   .#{$prefix}--text-area__wrapper--slug .#{$prefix}--text-area {
     @include ai-gradient;
+
+    padding-inline-end: $spacing-08;
   }
 
   .#{$prefix}--text-area--invalid:has(~ .#{$prefix}--slug),

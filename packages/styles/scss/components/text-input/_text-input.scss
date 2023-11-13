@@ -425,6 +425,8 @@
 
   .#{$prefix}--text-input__field-wrapper--slug .#{$prefix}--text-input {
     @include ai-gradient;
+
+    padding-inline-end: $spacing-08;
   }
 
   .#{$prefix}--text-input--invalid:has(~ .#{$prefix}--slug),

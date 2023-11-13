@@ -440,6 +440,8 @@
 
   .#{$prefix}--number__input-wrapper--slug input[type='number'] {
     @include ai-gradient;
+
+    padding-inline-end: convert.to-rem(112px);
   }
 
   // Skeleton State

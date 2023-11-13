@@ -201,6 +201,8 @@
   .#{$prefix}--date-picker-input__wrapper--slug
     .#{$prefix}--date-picker__input {
     @include ai-gradient;
+
+    padding-inline-end: $spacing-10;
   }
 
   // Read-only State
