@@ -55,3 +55,21 @@ deprecated:
     reason: glyph--square-fill has been replaced by square-fill
   - name: glyph--undefined
     reason: glyph--undefined has been replaced by undefined
+      Icon name was requested by the product team to be renamed to and replaced
+      by database--enterprisedb
+  - name: virtual-private-cloud--alt
+    reason:
+      Icon name was requested by the product team to be renamed to and replaced
+      by ibm-cloud--vpc
+  - name: ibm-watson--assistant
+    reason:
+      Icon renamed and replaced by ibm-watsonx--assistant to correspond with the
+      new watsonx platform and product suite
+  - name: watson--machine-learning
+    reason:
+      Icon design is defunct, replaced with the existing icon
+      ibm-watson--machine-learning
+  - name: watson
+    reason:
+      Icon represents the old avatar for the Watson brand, which is retired
+      since the watsonx brand launch. Replaced by the icon watsonx
