@@ -133,6 +133,16 @@
     @include ai-gradient;
   }
 
+  .#{$prefix}--text-area--invalid:has(~ .#{$prefix}--slug),
+  .#{$prefix}--text-area--warn:has(~ .#{$prefix}--slug) {
+    padding-inline-end: $spacing-10;
+  }
+
+  .#{$prefix}--text-area--invalid ~ .#{$prefix}--slug,
+  .#{$prefix}--text-area--warn ~ .#{$prefix}--slug {
+    inset-inline-end: $spacing-08;
+  }
+
   // Skeleton State
   .#{$prefix}--text-area.#{$prefix}--skeleton {
     @include skeleton;

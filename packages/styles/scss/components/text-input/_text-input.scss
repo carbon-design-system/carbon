@@ -427,6 +427,16 @@
     @include ai-gradient;
   }
 
+  .#{$prefix}--text-input--invalid:has(~ .#{$prefix}--slug),
+  .#{$prefix}--text-input--warning:has(~ .#{$prefix}--slug) {
+    padding-inline-end: $spacing-10;
+  }
+
+  .#{$prefix}--text-input--invalid ~ .#{$prefix}--slug,
+  .#{$prefix}--text-input--warning ~ .#{$prefix}--slug {
+    inset-inline-end: $spacing-08;
+  }
+
   // Windows HCM fix
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
     svg,
