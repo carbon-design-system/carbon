@@ -441,7 +441,7 @@ in the GitHub Project:
   - Triage - Issues that need triaging
   - Needs Refined - Issues that will be worked on in future sprints, but need to
     be broken down into smaller chunks and discussed.
-  - Needs a11y review - Issues that need to be brough the Carbon Accessibility
+  - Needs a11y review - Issues that need to be brought to the Carbon Accessibility
     Guild for further refinement and clarity.
   - Backlog - Issues that have been refined move into the Backlog, where they
     will be sized and assigned for a future sprint.
