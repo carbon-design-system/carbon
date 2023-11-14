@@ -8,6 +8,7 @@
 import React from 'react';
 import { CheckmarkFilled } from '@carbon/icons-react';
 import mdx from './StructuredList.mdx';
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
 import {
   StructuredListWrapper,
@@ -160,6 +161,23 @@ Selection.argTypes = {
     },
   },
 };
+
+export const WithBackgroundLayer = () => (
+  <WithLayer>
+    <StructuredListWrapper selection>
+      <StructuredListHead>
+        <StructuredListRow head>
+          <StructuredListCell head>ColumnA</StructuredListCell>
+          <StructuredListCell head>ColumnB</StructuredListCell>
+          <StructuredListCell head>ColumnC</StructuredListCell>
+        </StructuredListRow>
+      </StructuredListHead>
+      <StructuredListBody>
+        {structuredListBodyRowGenerator(4)}
+      </StructuredListBody>
+    </StructuredListWrapper>
+  </WithLayer>
+);
 
 export const Skeleton = (args) => (
   <div style={{ width: '800px' }}>
