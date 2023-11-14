@@ -6,7 +6,7 @@
 ## Table of Contents
 
 - [Overview](#overview)
-  - [What does "ongoing support" mean?](#what-does-ongoing-support-mean)
+  - [What does "ongoing support" mean regarding GitHub?](#what-does-ongoing-support-mean-regarding-github)
   - [What does "ongoing support" mean regarding Slack?](what-does-ongoing-support-mean-regarding-slack)
   - [What repositories do we support?](#what-repositories-do-we-support)
 - [Issues](#issues)
@@ -33,11 +33,9 @@
 Ongoing support for the latest version Carbon and the previous version (which
 will be prioritized in that order)
 
-Whether you are new or a seasoned veteran, being a maintainer of the Carbon
-Design System can be overwhelming and can often lead to feelings of imposter
-syndrome. Whether you are triaging new issues in GitHub or responding to Slack
-threads in our support channels, here are some responses that can help get the
-conversation started in case you get stuck.
+Whether you are triaging new issues in GitHub or responding to Slack threads in
+our support channels, here are some responses that can help get the conversation
+started in case you get stuck.
 
 - “Could you share more about what you’ve already tried?”
 - “Can you share more about your usecase?”
@@ -45,7 +43,7 @@ conversation started in case you get stuck.
 - “After searching through FILL IN RESOURCE HERE, I was able to find this and
   thought it might be helpful... Let me know if that works.”
 
-### What does "ongoing support" mean?
+### What does "ongoing support" mean regarding GitHub?
 
 - Incoming pull requests (code review, initial communication, ongoing
   discussion, rejection or merge) from the maintainer team and the community (in
@@ -70,9 +68,9 @@ conversation started in case you get stuck.
   question goes beyond your skillset. When you ask in this channel, take a leap
   of faith in your skills and propose a response, such as, "This is how I want
   to respond ... YOUR REPLY HERE". Follow the question by practicing humility,
-  "How far off am I"? "What am I missing"? Remember, you're acting as an advocate
-  for the person who originally asked the question. Respresent their needs to
-  the best of your ability.
+  "How far off am I"? "What am I missing"? Remember, you're acting as an
+  advocate for the person who originally asked the question. Respresent their
+  needs to the best of your ability.
 - If a question is Carbon-related, but not necessarily related to the core
   components, route the person to the correct Slack channel where they might
   receive support.
@@ -441,8 +439,8 @@ in the GitHub Project:
   - Triage - Issues that need triaging
   - Needs Refined - Issues that will be worked on in future sprints, but need to
     be broken down into smaller chunks and discussed.
-  - Needs a11y review - Issues that need to be brought to the Carbon Accessibility
-    Guild for further refinement and clarity.
+  - Needs a11y review - Issues that need to be brought to the Carbon
+    Accessibility Guild for further refinement and clarity.
   - Backlog - Issues that have been refined move into the Backlog, where they
     will be sized and assigned for a future sprint.
   - In progress - Issues that are being actively worked on in a given sprint.
