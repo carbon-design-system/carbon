@@ -435,7 +435,7 @@ discipline should be working on it.
 ### Project
 
 After assigning the role and severity, be sure to apply the correct categories
-in the Github Project:
+in the GitHub Project:
 
 - Status
   - Triage - Issues that need triaging
