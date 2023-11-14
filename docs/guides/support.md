@@ -39,7 +39,7 @@ syndrome. Whether you are triaging new issues in GitHub or responding to Slack
 threads in our support channels, here are some responses that can help get the
 conversation started in case you get stuck.
 
-- “Could you share more about you’ve already tried?”
+- “Could you share more about what you’ve already tried?”
 - “Can you share more about your use-case?”
 - “Can you add a repro (reproduction) using Stackblitz?”
 - “After searching through FILL IN RESOURCE HERE, I was able to find this and
