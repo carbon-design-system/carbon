@@ -30,6 +30,9 @@ interface SideNavItemsProps {
   isSideNavExpanded?: boolean;
 }
 
+const dogName = (adventurer as any)?.dog;
+console.log(dogName);
+
 const SideNavItems: React.FC<SideNavItemsProps> = ({
   className: customClassName,
   children,
@@ -40,16 +43,14 @@ const SideNavItems: React.FC<SideNavItemsProps> = ({
   const childrenWithExpandedState = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
       // avoid spreading `isSideNavExpanded` to non-Carbon UI Shell children
-      const childType = child.type as React.ComponentType;
-      if (childType && childType.displayName) {
-        return React.cloneElement(child, {
-          ...(CARBON_SIDENAV_ITEMS.includes(childType.displayName)
-            ? {
-                isSideNavExpanded,
-              }
-            : {}),
-        });
-      }
+      const childDisplayName = (child.type as any)?.displayName;
+      return React.cloneElement(child, {
+        ...(CARBON_SIDENAV_ITEMS.includes(childDisplayName)
+          ? {
+              isSideNavExpanded,
+            }
+          : {}),
+      });
     }
   });
   return <ul className={className}>{childrenWithExpandedState}</ul>;
