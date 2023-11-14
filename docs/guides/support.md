@@ -35,7 +35,7 @@ will be prioritized in that order)
 
 Whether you are new or a seasoned veteran, being a maintainer of the Carbon
 Design System can be overwhelming and can often lead to feelings of imposter
-syndrome. Whether you are triaging new issues in Github or responding to Slack
+syndrome. Whether you are triaging new issues in GitHub or responding to Slack
 threads in our support channels, here are some responses that can help get the
 conversation started in case you get stuck.
 
