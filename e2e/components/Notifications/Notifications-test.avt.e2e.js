@@ -41,7 +41,6 @@ test.describe('Notifications @avt', () => {
 
     await expect(actionButton).toBeVisible();
 
-    await page.keyboard.press('Tab');
     await expect(actionButton).toBeFocused();
 
     await page.keyboard.press('Tab');
