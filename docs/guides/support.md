@@ -7,7 +7,7 @@
 
 - [Overview](#overview)
   - [What does "ongoing support" mean regarding GitHub?](#what-does-ongoing-support-mean-regarding-github)
-  - [What does "ongoing support" mean regarding Slack?](what-does-ongoing-support-mean-regarding-slack)
+  - [What does "ongoing support" mean regarding Slack?](#what-does-ongoing-support-mean-regarding-slack)
   - [What repositories do we support?](#what-repositories-do-we-support)
 - [Issues](#issues)
   - [Types of issues](#types-of-issues)
