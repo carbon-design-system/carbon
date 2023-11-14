@@ -374,7 +374,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     }
 
     useEffect(() => {
-      if (!isRevertActive && slug) {
+      if (!isRevertActive && slug && defaultValue) {
         setValue(defaultValue);
       }
     }, [defaultValue, isRevertActive, slug]);

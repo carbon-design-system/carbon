@@ -7,11 +7,14 @@
 
 import React, { useState, useRef } from 'react';
 import Checkbox from '../Checkbox';
+import ComboBox from '../ComboBox';
+import Dropdown from '../Dropdown';
 import DatePicker from '../DatePicker';
 import DatePickerInput from '../DatePickerInput';
 import Form from './Form';
 import FormGroup from '../FormGroup';
 import FileUploader from '../FileUploader';
+import { MultiSelect, FilterableMultiSelect } from '../MultiSelect';
 import FluidForm from '../FluidForm';
 import FluidNumberInput from '../FluidNumberInput';
 import FluidDatePicker from '../FluidDatePicker';
@@ -116,6 +119,34 @@ const textareaProps = {
 const buttonEvents = {
   className: 'some-class',
 };
+
+const items = [
+  {
+    id: 'option-0',
+    text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+  },
+  {
+    id: 'option-1',
+    text: 'Option 1',
+  },
+  {
+    id: 'option-2',
+    text: 'Option 2',
+  },
+  {
+    id: 'option-3',
+    text: 'Option 3 - a disabled item',
+    disabled: true,
+  },
+  {
+    id: 'option-4',
+    text: 'Option 4',
+  },
+  {
+    id: 'option-5',
+    text: 'Option 5',
+  },
+];
 
 export default {
   title: 'Components/Form',
@@ -338,93 +369,141 @@ export const RevertTest = () => {
   );
 };
 
-const slug = (
-  <Slug className="slug-container">
-    <SlugContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-      <SlugActions>
-        <IconButton kind="ghost" label="View">
-          <View />
-        </IconButton>
-        <IconButton kind="ghost" label="Open Folder">
-          <FolderOpen />
-        </IconButton>
-        <IconButton kind="ghost" label="Folders">
-          <Folders />
-        </IconButton>
-        <Button>View literature</Button>
-      </SlugActions>
-    </SlugContent>
-  </Slug>
-);
+export const _AIForm = (args) => {
+  const slug = (
+    <Slug className="slug-container" revertActive={args.revertActive}>
+      <SlugContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h1>84%</h1>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+        <SlugActions>
+          <IconButton kind="ghost" label="View">
+            <View />
+          </IconButton>
+          <IconButton kind="ghost" label="Open Folder">
+            <FolderOpen />
+          </IconButton>
+          <IconButton kind="ghost" label="Folders">
+            <Folders />
+          </IconButton>
+          <Button>View literature</Button>
+        </SlugActions>
+      </SlugContent>
+    </Slug>
+  );
 
-export const _AIForm = (args) => (
-  <Stack gap={7} className="form-example">
-    <Form aria-label="sample form" className="slug-form">
-      <Stack gap={7}>
-        <NumberInput {...numberInputProps} slug={slug} {...args} />
-        <DatePicker datePickerType="single">
-          <DatePickerInput
-            placeholder="mm/dd/yyyy"
-            labelText="Date Picker label"
-            size="md"
-            id="date-picker"
+  return (
+    <Stack gap={7} className="form-example">
+      <Form aria-label="sample form" className="slug-form">
+        <Stack gap={7}>
+          <Dropdown
+            id="default"
+            titleText="Dropdown title"
+            helperText="This is some helper text"
+            initialSelectedItem={items[1]}
+            label="Option 1"
+            items={items}
+            itemToString={(item) => (item ? item.text : '')}
             slug={slug}
             {...args}
           />
-        </DatePicker>
-        <TextInput {...TextInputProps} slug={slug} {...args} />
-        <TextArea {...textareaProps} slug={slug} {...args} />
+          <MultiSelect
+            label="Multiselect Label"
+            id="carbon-multiselect-example"
+            titleText="Multiselect title"
+            helperText="This is helper text"
+            items={items}
+            itemToString={(item) => (item ? item.text : '')}
+            selectionFeedback="top-after-reopen"
+            slug={slug}
+            {...args}
+          />
+          <FilterableMultiSelect
+            id="carbon-multiselect-example-3"
+            titleText="FilterableMultiselect title"
+            helperText="This is helper text"
+            items={items}
+            itemToString={(item) => (item ? item.text : '')}
+            selectionFeedback="top-after-reopen"
+            slug={slug}
+            {...args}
+          />
+          <ComboBox
+            onChange={() => {}}
+            id="carbon-combobox"
+            items={items}
+            itemToString={(item) => (item ? item.text : '')}
+            titleText="ComboBox title"
+            helperText="Combobox helper text"
+            slug={slug}
+            {...args}
+          />
+          <NumberInput {...numberInputProps} slug={slug} {...args} />
+          <DatePicker datePickerType="single">
+            <DatePickerInput
+              placeholder="mm/dd/yyyy"
+              labelText="Date Picker label"
+              size="md"
+              id="date-picker"
+              slug={slug}
+              {...args}
+            />
+          </DatePicker>
+          <TextInput {...TextInputProps} slug={slug} {...args} />
+          <TextArea {...textareaProps} slug={slug} {...args} />
+          <Button type="submit" className="some-class" {...buttonEvents}>
+            Submit
+          </Button>
+        </Stack>
+      </Form>
+
+      <FluidForm aria-label="sample ai form" className="fluid-slug-form">
+        <div style={{ display: 'flex' }}>
+          <FluidDatePicker datePickerType="single" style={{ width: '100%' }}>
+            <FluidDatePickerInput
+              placeholder="mm/dd/yyyy"
+              labelText="Date Picker label"
+              size="md"
+              id="fluid-date-picker"
+              slug={slug}
+            />
+          </FluidDatePicker>
+        </div>
+
+        <div style={{ display: 'flex' }}>
+          <FluidNumberInput
+            {...numberInputProps}
+            id="fluid-number-input"
+            slug={slug}
+            invalidText="Oh no!"
+          />
+        </div>
+        <div style={{ display: 'flex' }}>
+          <FluidTextInput
+            {...TextInputProps}
+            id="fluid-text-input"
+            slug={slug}
+          />
+        </div>
+        <div style={{ display: 'flex' }}>
+          <FluidTextArea {...textareaProps} id="fluid-text-area" slug={slug} />
+        </div>
         <Button type="submit" className="some-class" {...buttonEvents}>
           Submit
         </Button>
-      </Stack>
-    </Form>
-
-    <FluidForm aria-label="sample form" className="fluid-slug-form">
-      <div style={{ display: 'flex' }}>
-        <FluidDatePicker datePickerType="single" style={{ width: '100%' }}>
-          <FluidDatePickerInput
-            placeholder="mm/dd/yyyy"
-            labelText="Date Picker label"
-            size="md"
-            id="fluid-date-picker"
-            slug={slug}
-          />
-        </FluidDatePicker>
-      </div>
-
-      <div style={{ display: 'flex' }}>
-        <FluidNumberInput
-          {...numberInputProps}
-          id="fluid-number-input"
-          slug={slug}
-          invalidText="Oh no!"
-        />
-      </div>
-      <div style={{ display: 'flex' }}>
-        <FluidTextInput {...TextInputProps} id="fluid-text-input" slug={slug} />
-      </div>
-      <div style={{ display: 'flex' }}>
-        <FluidTextArea {...textareaProps} id="fluid-text-area" slug={slug} />
-      </div>
-      <Button type="submit" className="some-class" {...buttonEvents}>
-        Submit
-      </Button>
-    </FluidForm>
-  </Stack>
-);
+      </FluidForm>
+    </Stack>
+  );
+};
 
 _AIForm.args = {
   invalid: false,
@@ -470,6 +549,14 @@ _AIForm.argTypes = {
   warnText: {
     control: {
       type: 'text',
+    },
+  },
+  revertActive: {
+    control: {
+      type: 'boolean',
+    },
+    table: {
+      category: 'Slug',
     },
   },
 };
