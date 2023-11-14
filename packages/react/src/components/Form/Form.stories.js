@@ -242,16 +242,16 @@ export const RevertTest = () => {
   const aiNumberValue = 11;
 
   const handleRevertClick = (evt) => {
-    evt.stopPropagation();
     if (textInputRef.current.nextElementSibling.contains(evt.target)) {
-      setIsTextInputEdited(false);
-      textInputRef.current.focus();
       textInputRef.current.value = aiTextValue;
+      textInputRef.current.focus();
+      setIsTextInputEdited(false);
     }
 
     if (numberInputRef.current.nextElementSibling.contains(evt.target)) {
-      setIsNumberInputEdited(false);
       numberInputRef.current.value = aiNumberValue;
+      numberInputRef.current.focus();
+      setIsNumberInputEdited(false);
     }
   };
 
