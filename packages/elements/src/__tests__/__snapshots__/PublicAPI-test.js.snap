@@ -2,6 +2,9 @@
 
 exports[`Public API should only change with a semver change 1`] = `
 Array [
+  "aiGradientEnd",
+  "aiGradientStart01",
+  "aiGradientStart02",
   "background",
   "backgroundActive",
   "backgroundBrand",

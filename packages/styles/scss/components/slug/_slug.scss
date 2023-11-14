@@ -108,6 +108,15 @@ $sizes: (
     transition: opacity $duration-fast-01 motion(entrance, productive);
   }
 
+  .#{$prefix}--slug__button.#{$prefix}--slug__button--mini::after,
+  .#{$prefix}--slug__button.#{$prefix}--slug__button--2xs::after {
+    position: absolute;
+    block-size: convert.to-rem(24px);
+    content: '';
+    inline-size: convert.to-rem(24px);
+    opacity: 0;
+  }
+
   .#{$prefix}--slug__button:hover::before {
     opacity: 1;
   }
