@@ -70,7 +70,7 @@ conversation started in case you get stuck.
   question goes beyond your skillset. When you ask in this channel, take a leap
   of faith in your skills and propose a response, such as, "This is how I want
   to respond ... YOUR REPLY HERE". Follow the question by practicing humility,
-  "How far off am I"? What am I missing? Remember, you're acting as an advocate
+  "How far off am I"? "What am I missing"? Remember, you're acting as an advocate
   for the person who originally asked the question. Respresent their needs to
   the best of your ability.
 - If a question is Carbon-related, but not necessarily related to the core
