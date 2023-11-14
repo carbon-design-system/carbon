@@ -11,9 +11,32 @@ import React from 'react';
 import SideNavIcon from './SideNavIcon';
 import { usePrefix } from '../../internal/usePrefix';
 
-const SideNavHeader = ({
-  className: customClassName,
+interface SideNavHeaderProps {
+  /**
+   * The child nodes to be rendered
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Provide an optional class to be applied to the containing node
+   */
+  className?: string;
+
+  /**
+   * Property to indicate if the side nav container is open (or not). Use to
+   * keep local state and styling in step with the SideNav expansion state.
+   */
+  isSideNavExpanded?: boolean;
+
+  /**
+   * Provide an icon to render in the header of the side navigation. Should be
+   * a React class.
+   */
+  renderIcon: React.ComponentType;
+}
+const SideNavHeader: React.FC<SideNavHeaderProps> = ({
   children,
+  className: customClassName,
   renderIcon: IconElement,
 }) => {
   const prefix = usePrefix();
@@ -49,6 +72,7 @@ SideNavHeader.propTypes = {
    * Provide an icon to render in the header of the side navigation. Should be
    * a React class.
    */
+  // @ts-expect-error - PropTypes are unable to cover this case.
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
     .isRequired,
 };
