@@ -63,7 +63,7 @@ conversation started in case you get stuck.
   find solutions to their problems.
 - The goal is to _respond_ to every thread on your day.
 - Go into threads where members of the community answer a question and validate
-  the person in the community that answered it by adding an emojii or response
+  the person in the community that answered it by adding an emoji or response
   reiterating the answer and acknowledging the community member.
 - Use discretion to respond to applicable threads. Lean on the maintainer team's
   private #carbon-support channel to look for subject matter experts when a
