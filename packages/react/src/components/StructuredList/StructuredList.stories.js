@@ -161,22 +161,6 @@ Selection.argTypes = {
   },
 };
 
-export const WithBackgroundLayer = (args) => (
-  <StructuredListWrapper
-    selection
-    {...args}
-    className={`${prefix}--with-background-layer`}>
-    <StructuredListHead>
-      <StructuredListRow head>
-        <StructuredListCell head>ColumnA</StructuredListCell>
-        <StructuredListCell head>ColumnB</StructuredListCell>
-        <StructuredListCell head>ColumnC</StructuredListCell>
-      </StructuredListRow>
-    </StructuredListHead>
-    <StructuredListBody>{structuredListBodyRowGenerator(4)}</StructuredListBody>
-  </StructuredListWrapper>
-);
-
 export const Skeleton = (args) => (
   <div style={{ width: '800px' }}>
     <StructuredListSkeleton {...args} />
