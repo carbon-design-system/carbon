@@ -90,6 +90,7 @@ export const Slug = React.forwardRef(function Slug(
     kind,
     onRevertClick,
     revertActive,
+    revertLabel = 'Revert to AI input',
     size = 'xs',
   },
   ref
@@ -129,7 +130,7 @@ export const Slug = React.forwardRef(function Slug(
           onClick={handleOnRevertClick}
           kind="ghost"
           size="sm"
-          label="Revert to AI input">
+          label={revertLabel}>
           <Undo />
         </IconButton>
       ) : (
@@ -217,6 +218,11 @@ Slug.propTypes = {
    * Specify whether the revert button should be visible
    */
   revertActive: PropTypes.bool,
+
+  /**
+   * Specify the text that should be shown when the revert button is hovered
+   */
+  revertLabel: PropTypes.string,
 
   /**
    * Specify the size of the button, from the following list of sizes:
