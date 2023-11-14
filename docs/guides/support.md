@@ -83,7 +83,7 @@ started in case you get stuck.
   - [carbon-web-components](https://ibm.enterprise.slack.com/archives/CL83LMKSA)
   - [carbon-wg-typescript](https://ibm.enterprise.slack.com/archives/C03C8VASVED)
 
-### Configuring the Github Slack integration
+### Configuring the GitHub Slack integration
 
 `/github subscribe carbon-design-system/carbon`
 
