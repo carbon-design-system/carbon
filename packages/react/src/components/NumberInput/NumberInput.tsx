@@ -370,7 +370,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     // Need to update the internal value when the revert button is clicked
     let isRevertActive;
     if (slug) {
-      isRevertActive = slug.props.revertActive;
+      isRevertActive = normalizedSlug.props.revertActive;
     }
 
     useEffect(() => {

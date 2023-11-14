@@ -332,11 +332,6 @@ export const RevertTest = () => {
             max={100}
             onChange={handleChange}
           />
-          <button
-            type="button"
-            onClick={() => (numberInputRef.current.value = 44)}>
-            Test
-          </button>
         </Stack>
       </Form>
     </Stack>
