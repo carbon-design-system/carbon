@@ -30,9 +30,6 @@ interface SideNavItemsProps {
   isSideNavExpanded?: boolean;
 }
 
-const dogName = (adventurer as any)?.dog;
-console.log(dogName);
-
 const SideNavItems: React.FC<SideNavItemsProps> = ({
   className: customClassName,
   children,
