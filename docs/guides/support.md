@@ -116,7 +116,7 @@ to define the issue their having._
 
 Using these templates also helps Project-Bot automatically move issues and new
 pull requests to the right workstreams by auto labeling the issues according to
-the template type. There are three types of issues the maintainer team are
+the template type. There are three types of issues the maintainer team is
 concerned with:
 
 - type: question ❓
