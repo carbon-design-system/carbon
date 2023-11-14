@@ -108,7 +108,6 @@ export const Skeleton = () => (
       labelText="Label"
       placeholder="Placeholder text"
       id="input-3"
-      s
     />
   </div>
 );
