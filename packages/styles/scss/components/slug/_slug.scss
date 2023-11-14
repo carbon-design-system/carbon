@@ -1,6 +1,7 @@
 @use '../../config' as *;
 @use '../../colors' as *;
 @use '../../motion' as *;
+@use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
 @use '../../utilities/convert';
@@ -389,8 +390,16 @@ $sizes: (
   }
 
   // Revert styles
+  .#{$prefix}--slug.#{$prefix}--slug--revert {
+    transform: translate($spacing-03, -50%);
+  }
+
   .#{$prefix}--slug--revert .#{$prefix}--btn--icon-only {
     align-items: center;
     padding-block-start: 0;
+  }
+
+  .#{$prefix}--slug--revert .#{$prefix}--btn--icon-only svg {
+    margin: 0;
   }
 }

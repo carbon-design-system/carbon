@@ -120,6 +120,9 @@ const buttonEvents = {
 export default {
   title: 'Components/Form',
   component: Form,
+  subcomponents: {
+    Slug,
+  },
   parameters: {
     docs: {
       page: mdx,
@@ -338,95 +341,104 @@ export const RevertTest = () => {
   );
 };
 
-const slug = (
-  <Slug className="slug-container">
-    <SlugContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-      <SlugActions>
-        <IconButton kind="ghost" label="View">
-          <View />
-        </IconButton>
-        <IconButton kind="ghost" label="Open Folder">
-          <FolderOpen />
-        </IconButton>
-        <IconButton kind="ghost" label="Folders">
-          <Folders />
-        </IconButton>
-        <Button>View literature</Button>
-      </SlugActions>
-    </SlugContent>
-  </Slug>
-);
+export const _AIForm = (args) => {
+  const { revertActive, ...rest } = args;
+  const slug = (
+    <Slug className="slug-container" revertActive={revertActive}>
+      <SlugContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h1>84%</h1>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+        <SlugActions>
+          <IconButton kind="ghost" label="View">
+            <View />
+          </IconButton>
+          <IconButton kind="ghost" label="Open Folder">
+            <FolderOpen />
+          </IconButton>
+          <IconButton kind="ghost" label="Folders">
+            <Folders />
+          </IconButton>
+          <Button>View literature</Button>
+        </SlugActions>
+      </SlugContent>
+    </Slug>
+  );
 
-export const _AIForm = (args) => (
-  <Stack gap={7} className="form-example">
-    <Form aria-label="sample form" className="slug-form">
-      <Stack gap={7}>
-        <NumberInput {...numberInputProps} slug={slug} {...args} />
-        <DatePicker datePickerType="single">
-          <DatePickerInput
-            placeholder="mm/dd/yyyy"
-            labelText="Date Picker label"
-            size="md"
-            id="date-picker"
+  console.log(args);
+  return (
+    <Stack gap={7} className="form-example">
+      <Form aria-label="sample form" className="slug-form">
+        <Stack gap={7}>
+          <NumberInput {...numberInputProps} slug={slug} {...rest} />
+          <DatePicker datePickerType="single">
+            <DatePickerInput
+              placeholder="mm/dd/yyyy"
+              labelText="Date Picker label"
+              size="md"
+              id="date-picker"
+              slug={slug}
+              {...rest}
+            />
+          </DatePicker>
+          <TextInput {...TextInputProps} slug={slug} {...rest} />
+          <TextArea {...textareaProps} slug={slug} {...rest} />
+          <Button type="submit" className="some-class" {...buttonEvents}>
+            Submit
+          </Button>
+        </Stack>
+      </Form>
+
+      <FluidForm aria-label="sample form" className="fluid-slug-form">
+        <div style={{ display: 'flex' }}>
+          <FluidDatePicker datePickerType="single" style={{ width: '100%' }}>
+            <FluidDatePickerInput
+              placeholder="mm/dd/yyyy"
+              labelText="Date Picker label"
+              size="md"
+              id="fluid-date-picker"
+              slug={slug}
+            />
+          </FluidDatePicker>
+        </div>
+
+        <div style={{ display: 'flex' }}>
+          <FluidNumberInput
+            {...numberInputProps}
+            id="fluid-number-input"
             slug={slug}
-            {...args}
+            invalidText="Oh no!"
           />
-        </DatePicker>
-        <TextInput {...TextInputProps} slug={slug} {...args} />
-        <TextArea {...textareaProps} slug={slug} {...args} />
+        </div>
+        <div style={{ display: 'flex' }}>
+          <FluidTextInput
+            {...TextInputProps}
+            id="fluid-text-input"
+            slug={slug}
+          />
+        </div>
+        <div style={{ display: 'flex' }}>
+          <FluidTextArea {...textareaProps} id="fluid-text-area" slug={slug} />
+        </div>
         <Button type="submit" className="some-class" {...buttonEvents}>
           Submit
         </Button>
-      </Stack>
-    </Form>
-
-    <FluidForm aria-label="sample form" className="fluid-slug-form">
-      <div style={{ display: 'flex' }}>
-        <FluidDatePicker datePickerType="single" style={{ width: '100%' }}>
-          <FluidDatePickerInput
-            placeholder="mm/dd/yyyy"
-            labelText="Date Picker label"
-            size="md"
-            id="fluid-date-picker"
-            slug={slug}
-          />
-        </FluidDatePicker>
-      </div>
-
-      <div style={{ display: 'flex' }}>
-        <FluidNumberInput
-          {...numberInputProps}
-          id="fluid-number-input"
-          slug={slug}
-          invalidText="Oh no!"
-        />
-      </div>
-      <div style={{ display: 'flex' }}>
-        <FluidTextInput {...TextInputProps} id="fluid-text-input" slug={slug} />
-      </div>
-      <div style={{ display: 'flex' }}>
-        <FluidTextArea {...textareaProps} id="fluid-text-area" slug={slug} />
-      </div>
-      <Button type="submit" className="some-class" {...buttonEvents}>
-        Submit
-      </Button>
-    </FluidForm>
-  </Stack>
-);
+      </FluidForm>
+    </Stack>
+  );
+};
 
 _AIForm.args = {
+  revertActive: false,
   invalid: false,
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long.',
@@ -470,6 +482,14 @@ _AIForm.argTypes = {
   warnText: {
     control: {
       type: 'text',
+    },
+  },
+  revertActive: {
+    control: {
+      type: 'boolean',
+    },
+    table: {
+      category: 'Slug',
     },
   },
 };

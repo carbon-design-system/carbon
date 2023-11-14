@@ -129,6 +129,13 @@
     inset-inline-end: $spacing-05;
   }
 
+  .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--slug.#{$prefix}--slug--revert {
+    inset-block-start: $spacing-02;
+    inset-inline-end: $spacing-03;
+    transform: translate(0);
+  }
+
   .#{$prefix}--text-area__wrapper--slug .#{$prefix}--text-area {
     @include ai-gradient;
 
@@ -145,12 +152,16 @@
     inset-inline-end: $spacing-08;
   }
 
+  .#{$prefix}--text-area--invalid ~ .#{$prefix}--slug.#{$prefix}--slug--revert,
+  .#{$prefix}--text-area--warn ~ .#{$prefix}--slug.#{$prefix}--slug--revert {
+    inset-inline-end: $spacing-07;
+  }
+
   // Skeleton State
   .#{$prefix}--text-area.#{$prefix}--skeleton {
     @include skeleton;
 
     block-size: convert.to-rem(100px);
-
     inline-size: 100%;
 
     &::placeholder {
