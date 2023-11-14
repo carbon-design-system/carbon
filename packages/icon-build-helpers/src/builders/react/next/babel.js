@@ -20,12 +20,14 @@ const babelConfig = {
       },
     ],
     '@babel/preset-react',
+    '@babel/preset-typescript',
   ],
   plugins: [
     '@babel/plugin-transform-react-constant-elements',
     'babel-plugin-dev-expression',
   ],
   babelHelpers: 'bundled',
+  extensions: ['.ts', '.tsx', '.js', '.jsx'],
 };
 
 module.exports = {

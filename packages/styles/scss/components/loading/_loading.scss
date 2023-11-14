@@ -58,6 +58,9 @@
     block-size: convert.to-rem(16px);
     inline-size: convert.to-rem(16px);
 
+    //See https://github.com/carbon-design-system/carbon/issues/13121
+    line-height: 1rem;
+
     circle {
       stroke-width: 16;
     }

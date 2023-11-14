@@ -11,7 +11,7 @@
     "@carbon/grid": "^10.43.1",
     "@carbon/themes": "^10.55.1",
     "classnames": "^2.2.6",
-    "next": "^13.4.7",
+    "next": "^13.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.36.0"

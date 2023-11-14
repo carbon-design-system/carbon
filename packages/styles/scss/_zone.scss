@@ -36,8 +36,8 @@ $-components: (
 
 @each $name, $theme in $zones {
   .#{config.$prefix}--#{'' + $name} {
-    background: var(--cds-background);
-    color: var(--cds-text-primary);
+    background-color: custom-property.get-var('background');
+    color: custom-property.get-var('text-primary');
 
     @each $key, $value in $theme {
       @if type-of($value) == color {

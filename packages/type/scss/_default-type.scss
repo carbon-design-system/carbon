@@ -6,6 +6,7 @@
 //
 @use 'sass:meta';
 @use 'styles' as *;
+@use 'prefix' as *;
 
 /// Include default type styles
 /// @access public
@@ -40,7 +41,7 @@
   }
 
   a {
-    color: var(--cds-link-primary, #0062fe);
+    color: var(--#{$prefix}-link-primary, #0062fe);
   }
 
   em {

@@ -28,13 +28,14 @@ export default {
 
 export const Default = () => (
   <Slider
-    labelText="Slider Label"
+    labelText="Slider label"
     value={50}
     min={0}
     max={100}
     step={1}
     stepMultiplier={10}
     noValidate
+    invalidText="Invalid message goes here"
   />
 );
 
@@ -94,7 +95,24 @@ export const ControlledSliderWithLayer = () => {
   );
 };
 
+export const TwoHandleSlider = () => (
+  <Slider
+    ariaLabelInput="Lower bound"
+    unstable_ariaLabelInputUpper="Upper bound"
+    labelText="Slider label"
+    value={10}
+    unstable_valueUpper={90}
+    min={0}
+    max={100}
+    step={1}
+    stepMultiplier={10}
+    invalidText="Invalid message goes here"
+  />
+);
+
 export const Skeleton = () => <SliderSkeleton />;
+
+export const TwoHandleSkeleton = () => <SliderSkeleton twoHandles={true} />;
 
 export const Playground = (args) => (
   <Slider
@@ -104,6 +122,12 @@ export const Playground = (args) => (
 );
 
 Playground.argTypes = {
+  ariaLabelInput: {
+    control: { type: 'text' },
+  },
+  unstable_ariaLabelInputUpper: {
+    control: { type: 'text' },
+  },
   light: {
     table: {
       disable: true,
@@ -157,6 +181,12 @@ Playground.argTypes = {
   max: {
     control: { type: 'number' },
   },
+  name: {
+    control: { type: 'text' },
+  },
+  unstable_nameUpper: {
+    control: { type: 'text' },
+  },
   readOnly: {
     control: {
       type: 'boolean',
@@ -174,6 +204,9 @@ Playground.argTypes = {
     control: { type: 'number' },
   },
   value: {
+    control: { type: 'number' },
+  },
+  unstable_valueUpper: {
     control: { type: 'number' },
   },
   onBlur: {
@@ -209,6 +242,8 @@ Playground.argTypes = {
 };
 
 Playground.args = {
+  ariaLabelInput: 'Lower bound',
+  unstable_ariaLabelInputUpper: 'Upper bound',
   disabled: false,
   hideTextInput: false,
   invalid: false,
@@ -220,6 +255,7 @@ Playground.args = {
   step: 5,
   stepMultiplier: 5,
   value: 50,
+  unstable_valueUpper: undefined,
   warn: false,
   warnText: 'Warning message goes here',
 };

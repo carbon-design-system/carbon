@@ -14,6 +14,7 @@ import { useNormalizedInputProps as normalize } from '../../internal/useNormaliz
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
+import { Text } from '../Text';
 
 export const translationIds = {
   'increment.number': 'increment.number',
@@ -596,9 +597,9 @@ function Label({ disabled, id, hideLabel, label }: Label) {
 
   if (label) {
     return (
-      <label htmlFor={id} className={className}>
+      <Text as="label" htmlFor={id} className={className}>
         {label}
-      </label>
+      </Text>
     );
   }
   return null;
@@ -624,9 +625,9 @@ function HelperText({ disabled, description, id }: HelperTextProps) {
 
   if (description) {
     return (
-      <div id={id} className={className}>
+      <Text as="div" id={id} className={className}>
         {description}
-      </div>
+      </Text>
     );
   }
   return null;

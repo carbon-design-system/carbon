@@ -10,10 +10,14 @@
 const { babel } = require('@rollup/plugin-babel');
 const commonjs = require('@rollup/plugin-commonjs');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
-const { pascalCase } = require('change-case');
 const fs = require('fs-extra');
 const path = require('path');
 const { rollup } = require('rollup');
+const {
+  formatGlobals,
+  findPackageFolder,
+  formatDependenciesIntoGlobals,
+} = require('./utils');
 
 async function bundle(entrypoint, options) {
   const globals = options.globals ? formatGlobals(options.globals) : {};
@@ -93,50 +97,6 @@ async function bundle(entrypoint, options) {
       return bundle.write(outputOptions);
     })
   );
-}
-
-function formatGlobals(string) {
-  const mappings = string.split(',').map((mapping) => {
-    return mapping.split('=');
-  });
-  return mappings.reduce(
-    (acc, [pkg, global]) => ({
-      ...acc,
-      [pkg]: global,
-    }),
-    {}
-  );
-}
-
-function formatDependenciesIntoGlobals(dependencies) {
-  return Object.keys(dependencies).reduce((acc, key) => {
-    const parts = key.split('/').map((identifier, i) => {
-      if (i === 0) {
-        return identifier.replace(/@/, '');
-      }
-      return identifier;
-    });
-
-    return {
-      ...acc,
-      [key]: pascalCase(parts.join(' ')),
-    };
-  }, {});
-}
-
-async function findPackageFolder(entrypoint) {
-  let packageFolder = entrypoint;
-
-  while (packageFolder !== '/' && path.dirname(packageFolder) !== '/') {
-    packageFolder = path.dirname(packageFolder);
-    const packageJsonPath = path.join(packageFolder, 'package.json');
-
-    if (await fs.pathExists(packageJsonPath)) {
-      break;
-    }
-  }
-
-  return packageFolder;
 }
 
 module.exports = bundle;

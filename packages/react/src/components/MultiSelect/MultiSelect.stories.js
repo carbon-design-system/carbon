@@ -142,7 +142,7 @@ Playground.args = {
   invalidText: 'whoopsie!',
   label: 'This is a label',
   clearSelectionDescription: 'Total items selected: ',
-  useTitleInItem: 'this is the item title',
+  useTitleInItem: false,
   clearSelectionText: 'To clear selection, press Delete or Backspace,',
 };
 

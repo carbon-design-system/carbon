@@ -12,6 +12,7 @@ import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { warning } from '../../internal/warning';
 import { ForwardRefReturn } from '../../types/common';
+import { Text } from '../Text';
 
 export interface OverflowMenuItemProps
   extends React.HTMLAttributes<HTMLElement> {
@@ -160,7 +161,7 @@ const OverflowMenuItem: OverflowMenuItemComponent = React.forwardRef(
     })();
 
     return (
-      <li className={overflowMenuItemClasses} role="none">
+      <Text as="li" className={overflowMenuItemClasses} role="none">
         <TagToUse
           className={overflowMenuBtnClasses}
           disabled={disabled}
@@ -183,7 +184,7 @@ const OverflowMenuItem: OverflowMenuItemComponent = React.forwardRef(
           {...rest}>
           {OverflowMenuItemContent}
         </TagToUse>
-      </li>
+      </Text>
     );
   }
 );

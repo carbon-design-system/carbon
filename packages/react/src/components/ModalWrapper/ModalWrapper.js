@@ -11,6 +11,7 @@ import Modal from '../Modal';
 import Button from '../Button';
 import { ButtonKinds } from '../../prop-types/types';
 import { warning } from '../../internal/warning';
+import { noopFn } from '../../internal/noopFn';
 
 let didWarnAboutDeprecation = false;
 
@@ -50,18 +51,6 @@ export default class ModalWrapper extends React.Component {
     triggerButtonIconDescription: PropTypes.string,
     triggerButtonKind: PropTypes.oneOf(ButtonKinds),
     withHeader: PropTypes.bool,
-  };
-
-  static defaultProps = {
-    shouldCloseAfterSubmit: true,
-    primaryButtonText: 'Save',
-    secondaryButtonText: 'Cancel',
-    triggerButtonIconDescription: 'Provide icon description if icon is used',
-    triggerButtonKind: 'primary',
-    disabled: false,
-    preventCloseOnClickOutside: false,
-    selectorPrimaryFocus: '[data-modal-primary-focus]',
-    onKeyDown: () => {},
   };
 
   triggerButton = React.createRef();
@@ -107,17 +96,19 @@ export default class ModalWrapper extends React.Component {
   render() {
     const {
       children,
-      onKeyDown,
+      onKeyDown = noopFn,
       buttonTriggerText,
       buttonTriggerClassName,
       renderTriggerButtonIcon,
-      triggerButtonIconDescription,
-      triggerButtonKind,
-      disabled,
+      primaryButtonText = 'Save',
+      secondaryButtonText = 'Cancel',
+      triggerButtonIconDescription = 'Provide icon description if icon is used',
+      triggerButtonKind = 'primary',
+      disabled = false,
       handleSubmit, // eslint-disable-line no-unused-vars
-      shouldCloseAfterSubmit, // eslint-disable-line no-unused-vars
-      selectorPrimaryFocus,
-      preventCloseOnClickOutside, // eslint-disable-line no-unused-vars
+      shouldCloseAfterSubmit = true, // eslint-disable-line no-unused-vars
+      selectorPrimaryFocus = '[data-modal-primary-focus]',
+      preventCloseOnClickOutside = false, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
 
@@ -148,7 +139,11 @@ export default class ModalWrapper extends React.Component {
           ref={this.triggerButton}>
           {buttonTriggerText}
         </Button>
-        <Modal ref={this.modal} {...props}>
+        <Modal
+          ref={this.modal}
+          primaryButtonText={primaryButtonText}
+          secondaryButtonText={secondaryButtonText}
+          {...props}>
           {children}
         </Modal>
       </div>
