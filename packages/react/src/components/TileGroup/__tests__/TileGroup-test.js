@@ -16,8 +16,12 @@ describe('PasswordInput', () => {
     it('should render `legend` in a <legend>', () => {
       render(
         <TileGroup defaultSelected="test-1" legend="TestGroup" name="test">
-          <RadioTile id="test-1" value="test-1" />
-          <RadioTile id="test-2" value="test-2" />
+          <RadioTile id="test-1" value="test-1">
+            Option 1
+          </RadioTile>
+          <RadioTile id="test-2" value="test-2">
+            Option 2
+          </RadioTile>
         </TileGroup>
       );
 
@@ -30,8 +34,12 @@ describe('PasswordInput', () => {
     it('should render <RadioTile> as children', () => {
       render(
         <TileGroup defaultSelected="test-1" legend="TestGroup" name="test">
-          <RadioTile id="test-1" value="test-1" />
-          <RadioTile id="test-2" value="test-2" />
+          <RadioTile id="test-1" value="test-1">
+            Option 1
+          </RadioTile>
+          <RadioTile id="test-2" value="test-2">
+            Option 2
+          </RadioTile>
         </TileGroup>
       );
 
@@ -52,8 +60,12 @@ describe('PasswordInput', () => {
           defaultSelected="test-1"
           legend="TestGroup"
           name="test">
-          <RadioTile id="test-1" value="test-1" />
-          <RadioTile id="test-2" value="test-2" />
+          <RadioTile id="test-1" value="test-1">
+            Option 1
+          </RadioTile>
+          <RadioTile id="test-2" value="test-2">
+            Option 2
+          </RadioTile>
         </TileGroup>
       );
 
@@ -67,8 +79,12 @@ describe('PasswordInput', () => {
           legend="TestGroup"
           name="test"
           disabled>
-          <RadioTile id="test-1" value="test-1" />
-          <RadioTile id="test-2" value="test-2" />
+          <RadioTile id="test-1" value="test-1">
+            Option 1
+          </RadioTile>
+          <RadioTile id="test-2" value="test-2">
+            Option 2
+          </RadioTile>
         </TileGroup>
       );
 
@@ -88,8 +104,12 @@ describe('PasswordInput', () => {
           legend="TestGroup"
           name="test"
           disabled>
-          <RadioTile id="test-1" value="test-1" />
-          <RadioTile id="test-2" value="test-2" />
+          <RadioTile id="test-1" value="test-1">
+            Option 1
+          </RadioTile>
+          <RadioTile id="test-2" value="test-2">
+            Option 2
+          </RadioTile>
         </TileGroup>
       );
 
@@ -107,8 +127,12 @@ describe('PasswordInput', () => {
           legend="TestGroup"
           name="test"
           disabled>
-          <RadioTile id="test-1" value="test-1" />
-          <RadioTile id="test-2" value="test-2" />
+          <RadioTile id="test-1" value="test-1">
+            Option 1
+          </RadioTile>
+          <RadioTile id="test-2" value="test-2">
+            Option 2
+          </RadioTile>
         </TileGroup>
       );
 
@@ -124,8 +148,12 @@ describe('PasswordInput', () => {
           legend="TestGroup"
           name="test"
           disabled>
-          <RadioTile id="test-1" value="test-1" />
-          <RadioTile id="test-2" value="test-2" />
+          <RadioTile id="test-1" value="test-1">
+            Option 1
+          </RadioTile>
+          <RadioTile id="test-2" value="test-2">
+            Option 2
+          </RadioTile>
         </TileGroup>
       );
 
@@ -139,8 +167,12 @@ describe('PasswordInput', () => {
     it('should set expected props on children', () => {
       render(
         <TileGroup defaultSelected="test-1" legend="TestGroup" name="test">
-          <RadioTile id="test-1" value="test-1" />
-          <RadioTile id="test-2" value="test-2" />
+          <RadioTile id="test-1" value="test-1">
+            Option 1
+          </RadioTile>
+          <RadioTile id="test-2" value="test-2">
+            Option 2
+          </RadioTile>
         </TileGroup>
       );
 
@@ -156,8 +188,12 @@ describe('PasswordInput', () => {
       const onChange = jest.fn();
       render(
         <TileGroup legend="TestGroup" name="test" onChange={onChange}>
-          <RadioTile id="test-1" value="test-1" />
-          <RadioTile id="test-2" value="test-2" />
+          <RadioTile id="test-1" value="test-1">
+            Option 1
+          </RadioTile>
+          <RadioTile id="test-2" value="test-2">
+            Option 2
+          </RadioTile>
         </TileGroup>
       );
 
@@ -182,8 +218,12 @@ describe('PasswordInput', () => {
     it('should change the current selection upon change in props', () => {
       const { rerender } = render(
         <TileGroup valueSelected="test-1" legend="TestGroup" name="test">
-          <RadioTile id="test-1" value="test-1" />
-          <RadioTile id="test-2" value="test-2" />
+          <RadioTile id="test-1" value="test-1">
+            Option 1
+          </RadioTile>
+          <RadioTile id="test-2" value="test-2">
+            Option 2
+          </RadioTile>
         </TileGroup>
       );
 
@@ -191,8 +231,12 @@ describe('PasswordInput', () => {
 
       rerender(
         <TileGroup valueSelected="test-2" legend="TestGroup" name="test">
-          <RadioTile id="test-1" value="test-1" />
-          <RadioTile id="test-2" value="test-2" />
+          <RadioTile id="test-1" value="test-1">
+            Option 1
+          </RadioTile>
+          <RadioTile id="test-2" value="test-2">
+            Option 2
+          </RadioTile>
         </TileGroup>
       );
 

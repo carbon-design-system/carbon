@@ -33,8 +33,8 @@ import { FormContext } from '../FluidForm';
 import { ListBoxProps } from '../ListBox/ListBox';
 import { OnChangeData } from '../Dropdown';
 import type { InternationalProps } from '../../types/common';
+import { noopFn } from '../../internal/noopFn';
 
-const noop = () => {};
 const getInstanceId = setupGetInstanceId();
 const {
   ItemClick,
@@ -98,7 +98,7 @@ interface MultiSelectSortingProps<ItemType> {
     item1: ItemType,
     item2: ItemType,
     options: SharedOptions
-  ): number; // required but has default value
+  ): number;
 
   /**
    * Provide a method that sorts all options in the control. Overriding this
@@ -123,7 +123,7 @@ interface MultiSelectSortingProps<ItemType> {
   sortItems?(
     items: ReadonlyArray<ItemType>,
     options: SortItemsOptions<ItemType>
-  ): ItemType[]; // required but has default value
+  ): ItemType[];
 }
 
 export interface MultiSelectProps<ItemType>
@@ -304,18 +304,18 @@ const MultiSelect = React.forwardRef(
       items,
       itemToElement,
       itemToString = defaultItemToString,
-      titleText,
+      titleText = false,
       hideLabel,
       helperText,
       label,
-      type,
+      type = 'default',
       size,
-      disabled,
-      initialSelectedItems,
-      sortItems,
-      compareItems,
-      clearSelectionText,
-      clearSelectionDescription,
+      disabled = false,
+      initialSelectedItems = [],
+      sortItems = defaultSortItems as MultiSelectProps<ItemType>['sortItems'],
+      compareItems = defaultCompareItems,
+      clearSelectionText = 'To clear selection, press Delete or Backspace',
+      clearSelectionDescription = 'Total items selected: ',
       light,
       invalid,
       invalidText,
@@ -324,14 +324,14 @@ const MultiSelect = React.forwardRef(
       useTitleInItem,
       translateWithId,
       downshiftProps,
-      open,
-      selectionFeedback,
+      open = false,
+      selectionFeedback = 'top-after-reopen',
       onChange,
       onMenuChange,
-      direction,
+      direction = 'bottom',
       selectedItems: selected,
       readOnly,
-      locale,
+      locale = 'en',
     }: MultiSelectProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
@@ -607,7 +607,9 @@ const MultiSelect = React.forwardRef(
             {selectedItems.length > 0 && (
               <ListBox.Selection
                 readOnly={readOnly}
-                clearSelection={!disabled && !readOnly ? clearSelection : noop}
+                clearSelection={
+                  !disabled && !readOnly ? clearSelection : noopFn
+                }
                 selectionCount={selectedItems.length}
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 translateWithId={translateWithId!}
@@ -726,7 +728,7 @@ MultiSelect.propTypes = {
    * Provide a compare function that is used to determine the ordering of
    * options. See 'sortItems' for more control.
    */
-  compareItems: PropTypes.func.isRequired,
+  compareItems: PropTypes.func,
 
   /**
    * Specify the direction of the multiselect dropdown. Can be either top or bottom.
@@ -875,7 +877,7 @@ MultiSelect.propTypes = {
    *     locale: string,
    *   }) => Array<Item>
    */
-  sortItems: PropTypes.func.isRequired,
+  sortItems: PropTypes.func,
 
   /**
    * Provide text to be used in a `<label>` element that is tied to the
@@ -907,23 +909,6 @@ MultiSelect.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
-};
-
-MultiSelect.defaultProps = {
-  compareItems: defaultCompareItems,
-  disabled: false,
-  locale: 'en',
-  itemToString: defaultItemToString,
-  initialSelectedItems: [],
-  sortItems: defaultSortItems as MultiSelectProps<unknown>['sortItems'],
-  type: 'default',
-  titleText: false,
-  open: false,
-  selectionFeedback: 'top-after-reopen',
-  direction: 'bottom',
-  clearSelectionText: 'To clear selection, press Delete or Backspace,',
-  clearSelectionDescription: 'Total items selected: ',
-  selectedItems: undefined,
 };
 
 export default MultiSelect as MultiSelectComponent;

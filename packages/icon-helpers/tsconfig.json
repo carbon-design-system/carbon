@@ -1,0 +1,4 @@
+{
+  "extends": "typescript-config-carbon/tsconfig.base.json",
+  "include": ["src/**/*"]
+}

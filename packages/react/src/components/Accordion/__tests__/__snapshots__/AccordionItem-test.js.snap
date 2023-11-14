@@ -28,6 +28,7 @@ exports[`AccordionItem renders as expected - Component API should render and mat
       </svg>
       <div
         class="cds--accordion__title"
+        dir="auto"
       >
         Test title
       </div>

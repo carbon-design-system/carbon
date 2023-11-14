@@ -26,6 +26,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { composeEventHandlers } from '../../tools/events';
+import { Text } from '../Text';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -98,7 +99,7 @@ interface SelectProps
   light?: boolean;
 
   /**
-   * Reserved for use with <Pagination> component. Will not render a label for the
+   * Reserved for use with Pagination component. Will not render a label for the
    * select since Pagination renders one for us.
    */
   noLabel?: boolean;
@@ -134,16 +135,16 @@ const Select = React.forwardRef(function Select(
     className,
     id,
     inline = false,
-    labelText,
+    labelText = 'Select',
     disabled = false,
     children,
-    // reserved for use with <Pagination> component
+    // reserved for use with Pagination component
     noLabel = false,
     // eslint-disable-next-line no-unused-vars
     hideLabel = false,
     invalid = false,
-    invalidText,
-    helperText,
+    invalidText = '',
+    helperText = '',
     light = false,
     readOnly,
     size,
@@ -190,9 +191,9 @@ const Select = React.forwardRef(function Select(
   })();
   const error =
     invalid || warn ? (
-      <div className={`${prefix}--form-requirement`} id={errorId}>
+      <Text as="div" className={`${prefix}--form-requirement`} id={errorId}>
         {errorText}
-      </div>
+      </Text>
     ) : null;
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
@@ -203,9 +204,9 @@ const Select = React.forwardRef(function Select(
     : `select-helper-text-${selectInstanceId}`;
 
   const helper = helperText ? (
-    <div id={helperId} className={helperTextClasses}>
+    <Text as="div" id={helperId} className={helperTextClasses}>
       {helperText}
-    </div>
+    </Text>
   ) : null;
   const ariaProps = {};
   if (invalid) {
@@ -273,9 +274,9 @@ const Select = React.forwardRef(function Select(
     <div className={classNames(`${prefix}--form-item`, className)}>
       <div className={selectClasses}>
         {!noLabel && (
-          <label htmlFor={id} className={labelClasses}>
+          <Text as="label" htmlFor={id} className={labelClasses}>
             {labelText}
-          </label>
+          </Text>
         )}
         {inline && (
           <div className={`${prefix}--select-input--inline__wrapper`}>
@@ -374,7 +375,7 @@ Select.propTypes = {
   ),
 
   /**
-   * Reserved for use with <Pagination> component. Will not render a label for the
+   * Reserved for use with Pagination component. Will not render a label for the
    * select since Pagination renders one for us.
    */
   noLabel: PropTypes.bool,
@@ -404,15 +405,6 @@ Select.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
-};
-
-Select.defaultProps = {
-  disabled: false,
-  labelText: 'Select',
-  inline: false,
-  invalid: false,
-  invalidText: '',
-  helperText: '',
 };
 
 export default Select;

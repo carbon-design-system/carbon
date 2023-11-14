@@ -15,7 +15,6 @@ import { getCellId } from './tools/cells';
 import denormalize from './tools/denormalize';
 import { composeEventHandlers } from '../../tools/events';
 import { defaultFilterRows } from './tools/filter';
-import { defaultSortRow } from './tools/sorting';
 import setupGetInstanceId from './tools/instanceId';
 import Table from './Table';
 import TableActionList from './TableActionList';
@@ -63,15 +62,6 @@ const defaultTranslations = {
 };
 
 const translateWithId = (id) => defaultTranslations[id];
-
-const dataTableDefaultProps = {
-  filterRows: defaultFilterRows,
-  locale: 'en',
-  overflowMenuOnHover: true,
-  size: 'lg',
-  sortRow: defaultSortRow,
-  translateWithId,
-};
 
 export type DataTableSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
@@ -220,7 +210,7 @@ export interface DataTableProps<RowType, ColTypes extends any[]> {
   ) => React.ReactElement;
   experimentalAutoAlign?: boolean;
   filterRows?: (filterRowsArgs: {
-    cellsById: Record<string, DataTableCell<RowType>>;
+    cellsById: Record<string, DataTableCell<ColTypes>>;
     getCellId: (rowId: string, header: string) => string;
     headers: Array<DataTableHeader>;
     inputValue: string;
@@ -274,12 +264,11 @@ interface DataTableState<ColTypes extends any[]> {
  * consumer.
  */
 class DataTable<RowType, ColTypes extends any[]> extends React.Component<
-  DataTableProps<RowType, ColTypes> & typeof dataTableDefaultProps,
+  DataTableProps<RowType, ColTypes>,
   DataTableState<ColTypes>
 > {
   instanceId: number;
 
-  static defaultProps = dataTableDefaultProps;
   static propTypes = {
     /**
      * Experimental property. Allows table to align cell contents to the top if there is text wrapping in the content. Might have performance issues, intended for smaller tables
@@ -495,7 +484,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
       [key: string]: unknown;
     }
   ) => {
-    const { translateWithId: t } = this.props;
+    const { translateWithId: t = translateWithId } = this.props;
     const { isExpandedAll, rowIds, rowsById } = this.state;
     const isExpanded =
       isExpandedAll || rowIds.every((id) => rowsById[id].isExpanded);
@@ -561,7 +550,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
     row: DataTableRow<ColTypes>;
     [key: string]: unknown;
   }) => {
-    const { translateWithId: t } = this.props;
+    const { translateWithId: t = translateWithId } = this.props;
     const translationKey = row.isExpanded
       ? translationKeys.collapseRow
       : translationKeys.expandRow;
@@ -617,7 +606,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
       [key: string]: unknown;
     }
   ) => {
-    const { translateWithId: t } = this.props;
+    const { translateWithId: t = translateWithId } = this.props;
 
     // If we're given a row, return the selection state values for that row
     if (row) {
@@ -694,11 +683,11 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
   getTableProps = () => {
     const {
       useZebraStyles,
-      size,
+      size = 'lg',
       isSortable,
       useStaticWidth,
       stickyHeader,
-      overflowMenuOnHover,
+      overflowMenuOnHover = true,
       experimentalAutoAlign,
     } = this.props;
     return {
@@ -739,9 +728,10 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
    * @returns {Array<string>} the array of rowIds that are currently included through the filter
    *  */
   getFilteredRowIds = () => {
+    const { filterRows = defaultFilterRows } = this.props;
     const filteredRowIds =
       typeof this.state.filterInputValue === 'string'
-        ? this.props.filterRows({
+        ? filterRows({
             rowIds: this.state.rowIds,
             headers: this.props.headers,
             cellsById: this.state.cellsById,
@@ -941,8 +931,12 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
   };
 
   render() {
-    // eslint-disable-next-line react/prop-types
-    const { children, filterRows, headers, render } = this.props;
+    const {
+      children,
+      filterRows = defaultFilterRows,
+      headers,
+      render,
+    } = this.props;
     const { filterInputValue, rowIds, rowsById, cellsById } = this.state;
     const filteredRowIds =
       typeof filterInputValue === 'string'

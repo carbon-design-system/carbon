@@ -78,8 +78,6 @@ Playground.argTypes = {
   },
 };
 Playground.args = {
-  actionButtonLabel: 'Action',
-  inline: false,
   title: 'Notification title',
   subtitle: 'Subtitle text goes here',
 };

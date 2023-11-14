@@ -18,6 +18,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { Menu } from './Menu';
 import { MenuContext } from './MenuContext';
 import { useLayoutDirection } from '../LayoutDirection';
+import { Text } from '../Text';
 
 const hoverIntentDelay = 150; // in ms
 
@@ -162,7 +163,9 @@ const MenuItem = React.forwardRef(function MenuItem(
       <div className={`${prefix}--menu-item__icon`}>
         {IconElement && <IconElement />}
       </div>
-      <div className={`${prefix}--menu-item__label`}>{label}</div>
+      <Text as="div" className={`${prefix}--menu-item__label`}>
+        {label}
+      </Text>
       {shortcut && !hasChildren && (
         <div className={`${prefix}--menu-item__shortcut`}>{shortcut}</div>
       )}

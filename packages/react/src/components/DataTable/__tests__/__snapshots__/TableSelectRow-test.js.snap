@@ -11,6 +11,7 @@ exports[`DataTable.TableSelectRow renders as expected - Component API should ren
       <thead>
         <tr>
           <td
+            aria-live="off"
             class="cds--table-column-checkbox custom-class-name"
           >
             <div

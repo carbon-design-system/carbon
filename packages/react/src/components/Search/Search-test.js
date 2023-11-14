@@ -147,7 +147,7 @@ describe('Search', () => {
         />
       );
 
-      expect(screen.getAllByRole('button')[0]).toHaveAttribute('tabIndex', '1');
+      expect(screen.getAllByRole('button')[0]).toHaveAttribute('tabIndex', '0');
       expect(screen.getByRole('searchbox')).toHaveAttribute('tabIndex', '-1');
     });
 
