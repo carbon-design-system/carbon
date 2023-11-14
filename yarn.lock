@@ -6667,10 +6667,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testim/chrome-version@npm:^1.0.7":
-  version: 1.0.7
-  resolution: "@testim/chrome-version@npm:1.0.7"
-  checksum: e9d88791f2cd2d2458904ece92542e0df433b5b624bea3e80a7fb2d5f239cb60b7837c80190c95d626a2ce1485c117a9cc2890e187856b5823d0731f48ca763c
+"@testim/chrome-version@npm:^1.1.4":
+  version: 1.1.4
+  resolution: "@testim/chrome-version@npm:1.1.4"
+  checksum: faaed16b6b2384a4b0c1d2265e52e66db6c48601ceb9bd895b3b7d12df4e62916ed2b30653321fbc1239388ecdeaaa46c50c802c3f7287171b7d93d392a8014a
   languageName: node
   linkType: hard
 
@@ -8729,15 +8729,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^0.21.1":
-  version: 0.21.1
-  resolution: "axios@npm:0.21.1"
-  dependencies:
-    follow-redirects: "npm:^1.10.0"
-  checksum: 271afc61381d285c688f0579eec170b66dc4177219a3f31e67d1fe485be7a2dae4af2c366fdee703a8ec887c52778fdc7f5fec30650a97f61f68c1a7696648b0
-  languageName: node
-  linkType: hard
-
 "axios@npm:^0.27.2":
   version: 0.27.2
   resolution: "axios@npm:0.27.2"
@@ -8748,14 +8739,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.0.0":
-  version: 1.2.2
-  resolution: "axios@npm:1.2.2"
+"axios@npm:^1.0.0, axios@npm:^1.6.0":
+  version: 1.6.1
+  resolution: "axios@npm:1.6.1"
   dependencies:
     follow-redirects: "npm:^1.15.0"
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
-  checksum: b1886797879166e2e6ee31864587e944e877b7036e16880ed83a1031dc5cb656f51ccea7d57640bb0123b7d08103d0412bcfbed997146a8f6d24a89665d9a66a
+  checksum: fb091af3ad47d70fdcba5e71654b9e3c56947d93d8b2375dd0b4db63de9982adab6235aebc514488aa289c7faf103b09e8911280e6f6b1112d1604fe5f111f71
   languageName: node
   linkType: hard
 
@@ -10103,19 +10094,19 @@ __metadata:
   linkType: hard
 
 "chromedriver@npm:*":
-  version: 91.0.1
-  resolution: "chromedriver@npm:91.0.1"
+  version: 119.0.1
+  resolution: "chromedriver@npm:119.0.1"
   dependencies:
-    "@testim/chrome-version": "npm:^1.0.7"
-    axios: "npm:^0.21.1"
-    del: "npm:^6.0.0"
+    "@testim/chrome-version": "npm:^1.1.4"
+    axios: "npm:^1.6.0"
+    compare-versions: "npm:^6.1.0"
     extract-zip: "npm:^2.0.1"
-    https-proxy-agent: "npm:^5.0.0"
+    https-proxy-agent: "npm:^5.0.1"
     proxy-from-env: "npm:^1.1.0"
-    tcp-port-used: "npm:^1.0.1"
+    tcp-port-used: "npm:^1.0.2"
   bin:
     chromedriver: bin/chromedriver
-  checksum: 600e1fafe2da24a77cef5c43f287f81e896b1564087f6481b59c73369a2eaf7c4e940054ea7fefb16cdbb6e57568f308fed72852b1fcf15490b9894e3c357a42
+  checksum: 27261cac94f3ffb908e3b356427d903f8cbafac031f96d93da941d21502e3bdef229d30556bd6311df3d0cc834c9d837b946b54e1538d7448264e92a98ccc6f4
   languageName: node
   linkType: hard
 
@@ -10698,6 +10689,13 @@ __metadata:
     array-ify: "npm:^1.0.0"
     dot-prop: "npm:^5.1.0"
   checksum: fb71d70632baa1e93283cf9d80f30ac97f003aabee026e0b4426c9716678079ef5fea7519b84d012cbed938c476493866a38a79760564a9e21ae9433e40e6f0d
+  languageName: node
+  linkType: hard
+
+"compare-versions@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "compare-versions@npm:6.1.0"
+  checksum: 20f349e7f8ad784704c68265f4e660e2abbe2c3d5c75793184fccb85f0c5c0263260e01fdd4488376f6b74b0f069e16c9684463f7316b075716fb1581eb36b77
   languageName: node
   linkType: hard
 
@@ -11611,12 +11609,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4.1.0":
-  version: 4.1.0
-  resolution: "debug@npm:4.1.0"
+"debug@npm:4.3.1":
+  version: 4.3.1
+  resolution: "debug@npm:4.3.1"
   dependencies:
-    ms: "npm:^2.1.1"
-  checksum: 41be7dbe92b204b3d73b203edc301eefa75365129771330d4a87f0dd0f552c9ab17e6778733c2bee3db2d25dc92748952f21ef7e7e38415c4dbbdf028233b989
+    ms: "npm:2.1.2"
+  peerDependenciesMeta:
+    supports-color:
+      optional: true
+  checksum: 37b9f90428b65e59eb47f74435a9fc73dcb46b3550e838c0037ac05910f689bd59fd1d4a51154c1df3471a2f3e5926af8880cbe9f9f3b68beb7b2f8197a26f4a
   languageName: node
   linkType: hard
 
@@ -14346,7 +14347,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.10.0, follow-redirects@npm:^1.14.9, follow-redirects@npm:^1.15.0":
+"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.9, follow-redirects@npm:^1.15.0":
   version: 1.15.2
   resolution: "follow-redirects@npm:1.15.2"
   peerDependenciesMeta:
@@ -16182,10 +16183,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ip-regex@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "ip-regex@npm:2.1.0"
-  checksum: 331d95052aa53ce245745ea0fc3a6a1e2e3c8d6da65fa8ea52bf73768c1b22a9ac50629d1d2b08c04e7b3ac4c21b536693c149ce2c2615ee4796030e5b3e3cba
+"ip-regex@npm:^4.1.0":
+  version: 4.3.0
+  resolution: "ip-regex@npm:4.3.0"
+  checksum: 7ff904b891221b1847f3fdf3dbb3e6a8660dc39bc283f79eb7ed88f5338e1a3d1104b779bc83759159be266249c59c2160e779ee39446d79d4ed0890dfd06f08
   languageName: node
   linkType: hard
 
@@ -16934,7 +16935,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-url@npm:^1.2.2":
+"is-url@npm:^1.2.4":
   version: 1.2.4
   resolution: "is-url@npm:1.2.4"
   checksum: 100e74b3b1feab87a43ef7653736e88d997eb7bd32e71fd3ebc413e58c1cbe56269699c776aaea84244b0567f2a7d68dfaa512a062293ed2f9fdecb394148432
@@ -17018,14 +17019,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is2@npm:2.0.1":
-  version: 2.0.1
-  resolution: "is2@npm:2.0.1"
+"is2@npm:^2.0.6":
+  version: 2.0.9
+  resolution: "is2@npm:2.0.9"
   dependencies:
     deep-is: "npm:^0.1.3"
-    ip-regex: "npm:^2.1.0"
-    is-url: "npm:^1.2.2"
-  checksum: b91c1eb740188549874128736a81f95b40b866df30f98db608a57b0c9218cc6567067b33bddf2730d554ebcd0675c833cb09f52dd019b914ba8e41e8d73d9900
+    ip-regex: "npm:^4.1.0"
+    is-url: "npm:^1.2.4"
+  checksum: ac229ce8fc1a6c1218af84c4168567ade917362efbb3400f35c7d20c3f7f0e44e350df2855a03f1480d9bb4575928efb6a66f9c98aafabcadc83aa5a3f7e48d6
   languageName: node
   linkType: hard
 
@@ -26623,13 +26624,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tcp-port-used@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "tcp-port-used@npm:1.0.1"
+"tcp-port-used@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "tcp-port-used@npm:1.0.2"
   dependencies:
-    debug: "npm:4.1.0"
-    is2: "npm:2.0.1"
-  checksum: 7e7be88a5b2c06d7358dfbb1804a49535eaffc3e0823dcb67ce63b73fb581165df852284d44090ff4d6bcbdb448fe0f32956dc5d9f9e29514e13818a2fba2ec2
+    debug: "npm:4.3.1"
+    is2: "npm:^2.0.6"
+  checksum: bbacbcbe15504a274e3da7bdba0973f16f6950ee68c7a71238ff6fd5d55a113518757df98c5842177a3ad6ded7dd38bd822bd6494a0a2728aa8d7f4776c1ba22
   languageName: node
   linkType: hard
 
