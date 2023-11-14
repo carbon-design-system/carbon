@@ -76,7 +76,7 @@ started in case you get stuck.
   receive support.
   - [ibmproducts-pal-dev](https://ibm.enterprise.slack.com/archives/C013ZTX0N6B)
   - [ibmproducts-pal](https://ibm.enterprise.slack.com/archives/CQGR0HC05)
-  - [carbon-angulur](https://ibm.enterprise.slack.com/archives/CBZC0LM2N)
+  - [carbon-ng](https://ibm.enterprise.slack.com/archives/CBZC0LM2N)
   - [carbon-for-cloud](https://ibm.enterprise.slack.com/archives/C0603NZDXRD)
   - [carbon-charts](https://ibm.enterprise.slack.com/archives/CCA7L4MS9)
   - [carbon-for-ibm-dotcom](https://ibm.enterprise.slack.com/archives/C2PLX8GQ6)
