@@ -141,9 +141,7 @@ export const Slug = React.forwardRef(function Slug(
       ) : (
         <Toggletip align={align} autoAlign={autoAlign} {...rest}>
           <ToggletipButton className={slugButtonClasses} label={ariaLabel}>
-            <span aria-hidden={true} className={`${prefix}--slug__text`}>
-              {aiText}
-            </span>
+            <span className={`${prefix}--slug__text`}>{aiText}</span>
             {aiTextLabel && (
               <span className={`${prefix}--slug__additional-text`}>
                 {aiTextLabel}
