@@ -63,6 +63,7 @@ exports[`Dropdown should render 1`] = `
         onKeyDown={[Function]}
       >
         <button
+          aria-controls="downshift-0-menu"
           aria-disabled={false}
           aria-expanded={false}
           aria-haspopup="listbox"
@@ -72,6 +73,7 @@ exports[`Dropdown should render 1`] = `
           id="downshift-0-toggle-button"
           onClick={[Function]}
           onKeyDown={[Function]}
+          role="combobox"
           title="input"
           type="button"
         >
@@ -214,6 +216,7 @@ exports[`Dropdown should render custom item components 1`] = `
         onKeyDown={[Function]}
       >
         <button
+          aria-controls="downshift-6-menu"
           aria-disabled={false}
           aria-expanded={true}
           aria-haspopup="listbox"
@@ -223,6 +226,7 @@ exports[`Dropdown should render custom item components 1`] = `
           id="downshift-6-toggle-button"
           onClick={[Function]}
           onKeyDown={[Function]}
+          role="combobox"
           title="input"
           type="button"
         >
@@ -528,6 +532,7 @@ exports[`Dropdown should render with strings as items 1`] = `
         onKeyDown={[Function]}
       >
         <button
+          aria-controls="downshift-4-menu"
           aria-disabled={false}
           aria-expanded={true}
           aria-haspopup="listbox"
@@ -537,6 +542,7 @@ exports[`Dropdown should render with strings as items 1`] = `
           id="downshift-4-toggle-button"
           onClick={[Function]}
           onKeyDown={[Function]}
+          role="combobox"
           title="input"
           type="button"
         >
