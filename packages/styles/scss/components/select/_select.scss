@@ -6,12 +6,14 @@
 //
 
 @use '../form';
+@use '../../colors' as *;
 @use '../../config' as *;
 @use '../../spacing' as *;
 @use '../../motion' as *;
 @use '../../type' as *;
 @use '../../breakpoint' as *;
 @use '../../theme' as *;
+@use '../../utilities/ai-gradient' as *;
 @use '../../utilities/component-reset';
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
@@ -171,7 +173,7 @@
   }
 
   .#{$prefix}--select__invalid-icon--warning path[fill] {
-    fill: $icon-primary;
+    fill: $black-100;
     opacity: 1;
   }
 
@@ -265,7 +267,7 @@
     fill: $icon-disabled;
   }
 
-  //Skeleton State
+  // Skeleton State
   .#{$prefix}--select.#{$prefix}--skeleton {
     @include skeleton;
 
@@ -276,6 +278,32 @@
 
   .#{$prefix}--select.#{$prefix}--skeleton .#{$prefix}--select-input {
     display: none;
+  }
+
+  // Slug styles
+  .#{$prefix}--select--slug .#{$prefix}--slug {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: $spacing-08;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--select--slug .#{$prefix}--select-input {
+    @include ai-gradient;
+
+    padding-inline-end: $spacing-10;
+  }
+
+  .#{$prefix}--select--slug.#{$prefix}--select--invalid
+    .#{$prefix}--select-input,
+  .#{$prefix}--select--slug.#{$prefix}--select--warning
+    .#{$prefix}--select-input {
+    padding-inline-end: $spacing-12;
+  }
+
+  .#{$prefix}--select--slug.#{$prefix}--select--invalid .#{$prefix}--slug,
+  .#{$prefix}--select--slug.#{$prefix}--select--warning .#{$prefix}--slug {
+    inset-inline-end: $spacing-10;
   }
 
   // Windows HCM fix

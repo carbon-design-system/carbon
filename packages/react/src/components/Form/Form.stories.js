@@ -464,6 +464,21 @@ export const _AIForm = (args) => {
             slug={slug}
             {...rest}
           />
+          <Select
+            id="select-1"
+            labelText="Select an option"
+            helperText="Optional helper text"
+            slug={slug}
+            {...rest}>
+            <SelectItem value="" text="" />
+            <SelectItem
+              value="An example option that is really long to show what should be done to handle long text"
+              text="An example option that is really long to show what should be done to handle long text"
+            />
+            <SelectItem value="Option 2" text="Option 2" />
+            <SelectItem value="Option 3" text="Option 3" />
+            <SelectItem value="Option 4" text="Option 4" />
+          </Select>
           <Button type="submit" className="some-class" {...buttonEvents}>
             Submit
           </Button>
