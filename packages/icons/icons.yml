@@ -16280,9 +16280,6 @@
     - revert
     - undo
   sizes:
-    - 16
-    - 20
-    - 24
     - 32
 - name: ref-evapotranspiration
   friendly_name: Ref evapotranspiration
@@ -20634,9 +20631,6 @@
     - revert
     - back
   sizes:
-    - 16
-    - 20
-    - 24
     - 32
 - name: ungroup-objects
   friendly_name: Ungroup objects
