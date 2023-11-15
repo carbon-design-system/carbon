@@ -12,6 +12,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../../utilities/ai-gradient' as *;
 @use '../../utilities/component-reset';
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
@@ -121,9 +122,39 @@
     border-block-end-color: $border-subtle;
   }
 
-  // V11: Possibly deprecate
-  .#{$prefix}--text-area.#{$prefix}--text-area--light:disabled {
-    background-color: $field-02;
+  // Styles for `Slug` rendered inside `TextArea`
+  .#{$prefix}--text-area__wrapper--slug .#{$prefix}--slug {
+    position: absolute;
+    inset-block-start: $spacing-04;
+    inset-inline-end: $spacing-05;
+  }
+
+  .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--slug.#{$prefix}--slug--revert {
+    inset-block-start: $spacing-02;
+    inset-inline-end: $spacing-03;
+    transform: translate(0);
+  }
+
+  .#{$prefix}--text-area__wrapper--slug .#{$prefix}--text-area {
+    @include ai-gradient;
+
+    padding-inline-end: $spacing-08;
+  }
+
+  .#{$prefix}--text-area--invalid:has(~ .#{$prefix}--slug),
+  .#{$prefix}--text-area--warn:has(~ .#{$prefix}--slug) {
+    padding-inline-end: $spacing-10;
+  }
+
+  .#{$prefix}--text-area--invalid ~ .#{$prefix}--slug,
+  .#{$prefix}--text-area--warn ~ .#{$prefix}--slug {
+    inset-inline-end: $spacing-08;
+  }
+
+  .#{$prefix}--text-area--invalid ~ .#{$prefix}--slug.#{$prefix}--slug--revert,
+  .#{$prefix}--text-area--warn ~ .#{$prefix}--slug.#{$prefix}--slug--revert {
+    inset-inline-end: $spacing-07;
   }
 
   // Skeleton State
@@ -131,7 +162,6 @@
     @include skeleton;
 
     block-size: convert.to-rem(100px);
-
     inline-size: 100%;
 
     &::placeholder {

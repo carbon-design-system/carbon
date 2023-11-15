@@ -185,4 +185,11 @@
     inset-block-start: convert.to-rem(36px);
     inset-inline-start: $spacing-05;
   }
+
+  // Slug styles
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--slug
+    .#{$prefix}--slug {
+    inset-block-start: convert.to-rem(43px);
+  }
 }

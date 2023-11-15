@@ -112,6 +112,11 @@ interface DatePickerInputProps
   size?: 'sm' | 'md' | 'lg';
 
   /**
+   * Provide a `Slug` component to be rendered inside the `DatePickerInput` component
+   */
+  slug?: ReactNodeLike;
+
+  /**
    * Specify the type of the `<input>`
    */
   type?: string;
@@ -145,6 +150,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
     pattern = '\\d{1,2}\\/\\d{1,2}\\/\\d{4}',
     placeholder,
     size = 'md',
+    slug,
     type = 'text',
     warn,
     warnText,
@@ -172,6 +178,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
   const wrapperClasses = cx(`${prefix}--date-picker-input__wrapper`, {
     [`${prefix}--date-picker-input__wrapper--invalid`]: invalid,
     [`${prefix}--date-picker-input__wrapper--warn`]: warn,
+    [`${prefix}--date-picker-input__wrapper--slug`]: slug,
   });
   const labelClasses = cx(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
@@ -209,6 +216,14 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
   }
   const input = <input {...inputProps} />;
 
+  // Slug is always size `mini`
+  let normalizedSlug;
+  if (slug) {
+    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+      size: 'mini',
+    });
+  }
+
   return (
     <div className={containerClasses}>
       {labelText && (
@@ -219,6 +234,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
       <div className={wrapperClasses}>
         <span>
           {input}
+          {normalizedSlug}
           {isFluid && <DatePickerIcon datePickerType={datePickerType} />}
           <DatePickerIcon
             datePickerType={datePickerType}
@@ -342,6 +358,11 @@ DatePickerInput.propTypes = {
    * Specify the size of the Date Picker Input. Currently supports either `sm`, `md`, or `lg` as an option.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * Provide a `Slug` component to be rendered inside the `DatePickerInput` component
+   */
+  slug: PropTypes.node,
 
   /**
    * Specify the type of the `<input>`
