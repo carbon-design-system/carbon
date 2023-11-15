@@ -374,7 +374,6 @@ export const _AIForm = (args) => {
     </Slug>
   );
 
-  console.log(args);
   return (
     <Stack gap={7} className="form-example">
       <Form aria-label="sample form" className="slug-form">
