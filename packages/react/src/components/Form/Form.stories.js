@@ -370,8 +370,9 @@ export const RevertTest = () => {
 };
 
 export const _AIForm = (args) => {
+  const { revertActive, ...rest } = args;
   const slug = (
-    <Slug className="slug-container" revertActive={args.revertActive}>
+    <Slug className="slug-container" revertActive={revertActive}>
       <SlugContent>
         <div>
           <p className="secondary">AI Explained</p>
@@ -405,6 +406,19 @@ export const _AIForm = (args) => {
     <Stack gap={7} className="form-example">
       <Form aria-label="sample form" className="slug-form">
         <Stack gap={7}>
+          <NumberInput {...numberInputProps} slug={slug} {...rest} />
+          <DatePicker datePickerType="single">
+            <DatePickerInput
+              placeholder="mm/dd/yyyy"
+              labelText="Date Picker label"
+              size="md"
+              id="date-picker"
+              slug={slug}
+              {...rest}
+            />
+          </DatePicker>
+          <TextInput {...TextInputProps} slug={slug} {...rest} />
+          <TextArea {...textareaProps} slug={slug} {...rest} />
           <Dropdown
             id="default"
             titleText="Dropdown title"
@@ -414,7 +428,7 @@ export const _AIForm = (args) => {
             items={items}
             itemToString={(item) => (item ? item.text : '')}
             slug={slug}
-            {...args}
+            {...rest}
           />
           <MultiSelect
             label="Multiselect Label"
@@ -425,7 +439,7 @@ export const _AIForm = (args) => {
             itemToString={(item) => (item ? item.text : '')}
             selectionFeedback="top-after-reopen"
             slug={slug}
-            {...args}
+            {...rest}
           />
           <FilterableMultiSelect
             id="carbon-multiselect-example-3"
@@ -435,7 +449,7 @@ export const _AIForm = (args) => {
             itemToString={(item) => (item ? item.text : '')}
             selectionFeedback="top-after-reopen"
             slug={slug}
-            {...args}
+            {...rest}
           />
           <ComboBox
             onChange={() => {}}
@@ -445,21 +459,8 @@ export const _AIForm = (args) => {
             titleText="ComboBox title"
             helperText="Combobox helper text"
             slug={slug}
-            {...args}
+            {...rest}
           />
-          <NumberInput {...numberInputProps} slug={slug} {...args} />
-          <DatePicker datePickerType="single">
-            <DatePickerInput
-              placeholder="mm/dd/yyyy"
-              labelText="Date Picker label"
-              size="md"
-              id="date-picker"
-              slug={slug}
-              {...args}
-            />
-          </DatePicker>
-          <TextInput {...TextInputProps} slug={slug} {...args} />
-          <TextArea {...textareaProps} slug={slug} {...args} />
           <Button type="submit" className="some-class" {...buttonEvents}>
             Submit
           </Button>
