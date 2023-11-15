@@ -151,6 +151,9 @@ const items = [
 export default {
   title: 'Components/Form',
   component: Form,
+  subcomponents: {
+    Slug,
+  },
   parameters: {
     docs: {
       page: mdx,
@@ -507,6 +510,7 @@ export const _AIForm = (args) => {
 };
 
 _AIForm.args = {
+  revertActive: false,
   invalid: false,
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long.',
