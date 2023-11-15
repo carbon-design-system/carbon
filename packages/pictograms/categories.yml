@@ -13,6 +13,7 @@ categories:
       - embed
       - export--01
       - export--02
+      - flexible
       - launch
       - link
       - love
@@ -25,9 +26,16 @@ categories:
       - renew
       - repeat
       - reset
+      - scalable
       - trash
       - upload--01
       - upload--02
+  - name: AI
+    members:
+      - ai-governance--lifecycle-factsheet
+      - ai-governance--model
+      - ai-governance--model-tuned
+      - ai-governance--prompt
   - name: Blockchain
     members:
       - connected--ecosystem
@@ -555,6 +563,8 @@ categories:
       - server--rack
       - servers
       - storage--area-networks
+      - storage--for-data-and-ai
+      - storage--for-resiliency
       - storage--product
       - tape--storage
       - virtualization
@@ -737,6 +747,8 @@ categories:
   - name: IBM
     members:
       - bee
+      - carbon
+      - carbon--for-cloud
       - carbon--for-ibm-dotcom
       - carbon--for-ibm-product
       - enterprise--design--thinking--01
@@ -1197,3 +1209,15 @@ categories:
       - tornado
       - weather
       - windy
+  - name: Workplace
+    members:
+      - cardboard
+      - fountain--drinking
+      - library
+      - literature
+      - loop--hearing
+      - silence
+      - station--hydration
+      - trash--burnable
+      - trash--non-burnable
+      - waste--electronic
