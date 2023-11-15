@@ -13,6 +13,7 @@
 @use '../../theme' as *;
 @use '../../spacing' as *;
 @use '../../type' as *;
+@use '../../utilities/ai-gradient' as *;
 @use '../../utilities/component-reset';
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
@@ -55,7 +56,7 @@
     align-items: center;
   }
 
-  .#{$prefix}--date-picker-input__wrapper span {
+  .#{$prefix}--date-picker-input__wrapper > span {
     position: relative;
   }
 
@@ -189,6 +190,32 @@
     inline-size: convert.to-rem(143.5px);
   }
 
+  // Styles for `Slug` rendered inside `DatePickerInput`
+  .#{$prefix}--date-picker-input__wrapper--slug .#{$prefix}--slug {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: convert.to-rem(40px);
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--date-picker-input__wrapper--slug
+    .#{$prefix}--date-picker__input {
+    @include ai-gradient;
+
+    padding-inline-end: $spacing-10;
+  }
+
+  // Read-only State
+  .#{$prefix}--date-picker__input[readonly] {
+    background: transparent;
+    border-block-end-color: $border-subtle;
+    cursor: text;
+  }
+
+  .#{$prefix}--date-picker__input[readonly] + .#{$prefix}--date-picker__icon {
+    fill: $icon-disabled;
+  }
+
   // Skeleton State
   .#{$prefix}--date-picker.#{$prefix}--skeleton input,
   .#{$prefix}--date-picker__input.#{$prefix}--skeleton {
@@ -205,7 +232,6 @@
     @include skeleton;
 
     block-size: convert.to-rem(14px);
-
     inline-size: convert.to-rem(75px);
   }
 
@@ -213,16 +239,5 @@
   // stylelint-disable-next-line no-duplicate-selectors
   .#{$prefix}--date-picker__icon {
     @include high-contrast-mode('icon-fill');
-  }
-
-  // readonly
-  .#{$prefix}--date-picker__input[readonly] {
-    background: transparent;
-    border-block-end-color: $border-subtle;
-    cursor: text;
-  }
-
-  .#{$prefix}--date-picker__input[readonly] + .#{$prefix}--date-picker__icon {
-    fill: $icon-disabled;
   }
 }
