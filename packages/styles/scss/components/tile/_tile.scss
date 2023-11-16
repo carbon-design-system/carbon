@@ -13,6 +13,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../../utilities/ai-gradient' as *;
 @use '../../utilities/button-reset';
 @use '../../utilities/component-reset';
 @use '../../utilities/focus-outline' as *;
@@ -366,6 +367,30 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
   .#{$prefix}--tile--disabled .#{$prefix}--tile__checkmark svg {
     fill: $icon-disabled;
+  }
+
+  // Slug styles
+  .#{$prefix}--tile > .#{$prefix}--slug,
+  .#{$prefix}--tile--expandable > div > .#{$prefix}--slug {
+    position: absolute;
+    inset-block-start: $spacing-05;
+    inset-inline-end: $spacing-05;
+  }
+
+  .#{$prefix}--tile.#{$prefix}--tile--selectable > .#{$prefix}--slug {
+    inset-inline-end: $spacing-08;
+  }
+
+  .#{$prefix}--tile--slug.#{$prefix}--tile {
+    @include callout-gradient();
+
+    border: 1px solid $border-tile;
+  }
+
+  .#{$prefix}--tile--expandable:has(
+      .#{$prefix}--slug > .#{$prefix}--popover--open
+    ) {
+    overflow: visible;
   }
 
   // Windows HCM fix

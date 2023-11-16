@@ -9,7 +9,7 @@ import React, {
   type ChangeEvent,
   type ComponentType,
 } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { ReactNodeLike } from 'prop-types';
 import cx from 'classnames';
 import {
   Checkbox,
@@ -147,8 +147,10 @@ export const ClickableTile = React.forwardRef<
   const classes = cx(
     `${prefix}--tile`,
     `${prefix}--tile--clickable`,
-    clicked && `${prefix}--tile--is-clicked`,
-    light && `${prefix}--tile--light`,
+    {
+      [`${prefix}--tile--is-clicked`]: clicked,
+      [`${prefix}--tile--light`]: light,
+    },
     className
   );
 
@@ -304,6 +306,11 @@ export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
   selected?: boolean;
 
   /**
+   * Provide a `Slug` component to be rendered inside the `SelectableTile` component
+   */
+  slug?: ReactNodeLike;
+
+  /**
    * Specify the tab index of the wrapper element
    */
   tabIndex?: number;
@@ -336,6 +343,7 @@ export const SelectableTile = React.forwardRef<
     selected = false,
     tabIndex = 0,
     title = 'title',
+    slug,
     ...rest
   },
   ref
@@ -351,9 +359,12 @@ export const SelectableTile = React.forwardRef<
   const classes = cx(
     `${prefix}--tile`,
     `${prefix}--tile--selectable`,
-    isSelected && `${prefix}--tile--is-selected`,
-    light && `${prefix}--tile--light`,
-    disabled && `${prefix}--tile--disabled`,
+    {
+      [`${prefix}--tile--is-selected`]: isSelected,
+      [`${prefix}--tile--light`]: light,
+      [`${prefix}--tile--disabled`]: disabled,
+      [`${prefix}--tile--slug`]: slug,
+    },
     className
   );
 
@@ -361,6 +372,9 @@ export const SelectableTile = React.forwardRef<
   function handleOnClick(evt) {
     evt.preventDefault();
     evt?.persist?.();
+    if (slug && slugRef.current && slugRef.current.contains(evt.target)) {
+      return;
+    }
     setIsSelected(!isSelected);
     clickHandler(evt);
     onChange(evt);
@@ -387,6 +401,16 @@ export const SelectableTile = React.forwardRef<
     setPrevSelected(selected);
   }
 
+  // Slug is always size `xs`
+  const slugRef = useRef<HTMLInputElement>(null);
+  let normalizedSlug;
+  if (slug) {
+    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+      size: 'xs',
+      ref: slugRef,
+    });
+  }
+
   return (
     // eslint-disable-next-line jsx-a11y/interactive-supports-focus
     <div
@@ -409,11 +433,11 @@ export const SelectableTile = React.forwardRef<
       <Text as="label" htmlFor={id} className={`${prefix}--tile-content`}>
         {children}
       </Text>
+      {normalizedSlug}
     </div>
   );
 });
 
-SelectableTile.displayName = 'SelectableTile';
 SelectableTile.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
@@ -464,6 +488,11 @@ SelectableTile.propTypes = {
   selected: PropTypes.bool,
 
   /**
+   * Provide a `Slug` component to be rendered inside the `SelectableTile` component
+   */
+  slug: PropTypes.node,
+
+  /**
    * Specify the tab index of the wrapper element
    */
   tabIndex: PropTypes.number,
@@ -506,6 +535,11 @@ export interface ExpandableTileProps extends HTMLAttributes<HTMLDivElement> {
    * optional handler to trigger a function when a key is pressed
    */
   onKeyUp?(event: KeyboardEvent): void;
+
+  /**
+   * Provide a `Slug` component to be rendered inside the `ExpandableTile` component
+   */
+  slug?: ReactNodeLike;
 
   /**
    * The `tabindex` attribute.
@@ -555,6 +589,7 @@ export const ExpandableTile = React.forwardRef<
     tileCollapsedLabel,
     tileExpandedLabel,
     light,
+    slug,
     ...rest
   },
   forwardRef
@@ -632,8 +667,11 @@ export const ExpandableTile = React.forwardRef<
     `${prefix}--tile`,
     `${prefix}--tile--expandable`,
     `${prefix}--tile--expandable--interactive`,
-    isExpanded && `${prefix}--tile--is-expanded`,
-    light && `${prefix}--tile--light`,
+    {
+      [`${prefix}--tile--is-expanded`]: isExpanded,
+      [`${prefix}--tile--light`]: light,
+      [`${prefix}--tile--slug`]: slug,
+    },
     className
   );
 
@@ -673,11 +711,12 @@ export const ExpandableTile = React.forwardRef<
       !getInteractiveContent(belowTheFold.current) &&
       !getRoleContent(belowTheFold.current) &&
       !getInteractiveContent(aboveTheFold.current) &&
-      !getRoleContent(aboveTheFold.current)
+      !getRoleContent(aboveTheFold.current) &&
+      !slug
     ) {
       setInteractive(false);
     }
-  }, []);
+  }, [slug]);
 
   useIsomorphicEffect(() => {
     if (!tile.current) {
@@ -707,6 +746,14 @@ export const ExpandableTile = React.forwardRef<
 
   const belowTheFoldId = useId('expandable-tile-interactive');
 
+  // Slug is always size `xs`
+  let normalizedSlug;
+  if (slug) {
+    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+      size: 'xs',
+    });
+  }
+
   return interactive ? (
     <div
       // @ts-expect-error: Needlesly strict & deep typing for the element type
@@ -714,6 +761,7 @@ export const ExpandableTile = React.forwardRef<
       className={interactiveClassNames}
       {...rest}>
       <div ref={tileContent}>
+        {normalizedSlug}
         <div ref={aboveTheFold} className={`${prefix}--tile-content`}>
           {childrenAsArray[0]}
         </div>

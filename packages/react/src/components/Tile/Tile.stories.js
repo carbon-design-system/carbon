@@ -23,7 +23,9 @@ import {
   TileBelowTheFoldContent,
 } from './';
 import TileGroup from '../TileGroup/TileGroup';
-import { Download, ArrowRight } from '@carbon/icons-react';
+import { IconButton } from '../IconButton';
+import { Slug, SlugContent, SlugActions } from '../Slug';
+import { Download, View, FolderOpen, Folders } from '@carbon/icons-react';
 
 export default {
   title: 'Components/Tile',
@@ -58,29 +60,44 @@ export const Default = () => {
 };
 
 export const SlugTest = () => {
+  const slug = (
+    <Slug className="slug-container">
+      <SlugContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h1>84%</h1>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+        <SlugActions>
+          <IconButton kind="ghost" label="View">
+            <View />
+          </IconButton>
+          <IconButton kind="ghost" label="Open Folder">
+            <FolderOpen />
+          </IconButton>
+          <IconButton kind="ghost" label="Folders">
+            <Folders />
+          </IconButton>
+          <Button>View literature</Button>
+        </SlugActions>
+      </SlugContent>
+    </Slug>
+  );
+
   return (
     <div className="slug-tile-container">
-      <ClickableTile
-        id="clickable-tile-1"
-        href="https://www.carbondesignsystem.com/">
-        <h4>Title</h4>
-        <p>
-          Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit at
-          consectetur turpis mauris gravida penatibus.
-        </p>
-        <div className="ai-data">
-          <div className="data-container">
-            <p>Data Quality</p>
-            <h3>85%</h3>
-          </div>
-          <div className="data-container">
-            <p>Label text</p>
-            <h3>16%</h3>
-          </div>
-        </div>
-        <ArrowRight className="arrow-right" />
-      </ClickableTile>
-      <SelectableTile id="selectable-tile-1" name="tiles" value="selectable">
+      <SelectableTile
+        id="selectable-tile-1"
+        name="tiles"
+        value="selectable"
+        slug={slug}>
         <h4>Title</h4>
         <p>
           Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit at
@@ -100,7 +117,8 @@ export const SlugTest = () => {
       <ExpandableTile
         id="expandable-tile-1"
         tileCollapsedIconText="Interact to Expand tile"
-        tileExpandedIconText="Interact to Collapse tile">
+        tileExpandedIconText="Interact to Collapse tile"
+        slug={slug}>
         <TileAboveTheFoldContent>
           <h4>Title</h4>
           <p>

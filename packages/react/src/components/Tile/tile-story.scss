@@ -12,13 +12,14 @@ div .bx--tile--selectable:not(:last-child) {
 .slug-tile-container {
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
 }
 
 .slug-tile-container .cds--tile {
-  height: 320px;
   max-width: 320px;
   margin-right: 3rem;
   margin-bottom: 3rem;
+  padding-bottom: 90px;
 }
 
 .slug-tile-container h4 {
