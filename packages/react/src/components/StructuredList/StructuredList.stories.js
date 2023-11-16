@@ -8,6 +8,7 @@
 import React from 'react';
 import { CheckmarkFilled } from '@carbon/icons-react';
 import mdx from './StructuredList.mdx';
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
 import {
   StructuredListWrapper,
@@ -102,35 +103,36 @@ Default.argTypes = {
   },
 };
 
+const structuredListBodyRowGenerator = (numRows) => {
+  return Array.apply(null, Array(numRows)).map((n, i) => (
+    <StructuredListRow key={`row-${i}`}>
+      <StructuredListCell>Row {i}</StructuredListCell>
+      <StructuredListCell>Row {i}</StructuredListCell>
+      <StructuredListCell>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna,
+        finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel
+        euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a
+        porttitor interdum.
+      </StructuredListCell>
+      <StructuredListInput
+        id={`row-${i}`}
+        value={`row-${i}`}
+        title={`row-${i}`}
+        name="row-0"
+        aria-label={`row-${i}`}
+      />
+      <StructuredListCell>
+        <CheckmarkFilled
+          className={`${prefix}--structured-list-svg`}
+          aria-label="select an option">
+          <title>select an option</title>
+        </CheckmarkFilled>
+      </StructuredListCell>
+    </StructuredListRow>
+  ));
+};
+
 export const Selection = (args) => {
-  const structuredListBodyRowGenerator = (numRows) => {
-    return Array.apply(null, Array(numRows)).map((n, i) => (
-      <StructuredListRow key={`row-${i}`}>
-        <StructuredListCell>Row {i}</StructuredListCell>
-        <StructuredListCell>Row {i}</StructuredListCell>
-        <StructuredListCell>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-          magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
-          sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
-          vulputate nisl a porttitor interdum.
-        </StructuredListCell>
-        <StructuredListInput
-          id={`row-${i}`}
-          value={`row-${i}`}
-          title={`row-${i}`}
-          name="row-0"
-          aria-label={`row-${i}`}
-        />
-        <StructuredListCell>
-          <CheckmarkFilled
-            className={`${prefix}--structured-list-svg`}
-            aria-label="select an option">
-            <title>select an option</title>
-          </CheckmarkFilled>
-        </StructuredListCell>
-      </StructuredListRow>
-    ));
-  };
   return (
     <StructuredListWrapper selection {...args}>
       <StructuredListHead>
@@ -159,6 +161,23 @@ Selection.argTypes = {
     },
   },
 };
+
+export const WithBackgroundLayer = () => (
+  <WithLayer>
+    <StructuredListWrapper selection>
+      <StructuredListHead>
+        <StructuredListRow head>
+          <StructuredListCell head>ColumnA</StructuredListCell>
+          <StructuredListCell head>ColumnB</StructuredListCell>
+          <StructuredListCell head>ColumnC</StructuredListCell>
+        </StructuredListRow>
+      </StructuredListHead>
+      <StructuredListBody>
+        {structuredListBodyRowGenerator(4)}
+      </StructuredListBody>
+    </StructuredListWrapper>
+  </WithLayer>
+);
 
 export const Skeleton = (args) => (
   <div style={{ width: '800px' }}>

@@ -1,6 +1,7 @@
 @use '../../config' as *;
 @use '../../colors' as *;
 @use '../../motion' as *;
+@use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
 @use '../../utilities/convert';
@@ -65,6 +66,10 @@ $sizes: (
     display: flex;
   }
 
+  .#{$prefix}--slug:has(> .#{$prefix}--popover--open) {
+    z-index: 2;
+  }
+
   .#{$prefix}--slug .#{$prefix}--slug__button {
     position: relative;
     display: flex;
@@ -106,6 +111,15 @@ $sizes: (
     inline-size: 100%;
     opacity: 0;
     transition: opacity $duration-fast-01 motion(entrance, productive);
+  }
+
+  .#{$prefix}--slug__button.#{$prefix}--slug__button--mini::after,
+  .#{$prefix}--slug__button.#{$prefix}--slug__button--2xs::after {
+    position: absolute;
+    block-size: convert.to-rem(24px);
+    content: '';
+    inline-size: convert.to-rem(24px);
+    opacity: 0;
   }
 
   .#{$prefix}--slug__button:hover::before {
@@ -373,5 +387,19 @@ $sizes: (
     .#{$prefix}--btn--primary {
     order: 1;
     border-end-end-radius: convert.to-rem(16px);
+  }
+
+  // Revert styles
+  .#{$prefix}--slug.#{$prefix}--slug--revert {
+    transform: translate($spacing-03, -50%);
+  }
+
+  .#{$prefix}--slug--revert .#{$prefix}--btn--icon-only {
+    align-items: center;
+    padding-block-start: 0;
+  }
+
+  .#{$prefix}--slug--revert .#{$prefix}--btn--icon-only svg {
+    margin: 0;
   }
 }

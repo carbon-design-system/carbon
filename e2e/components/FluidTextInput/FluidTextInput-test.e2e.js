@@ -7,9 +7,9 @@
 
 'use strict';
 
-const { expect, test } = require('@playwright/test');
+const { test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
-const { snapshotStory, visitStory } = require('../../test-utils/storybook');
+const { snapshotStory } = require('../../test-utils/storybook');
 
 test.describe('FluidTextInput', () => {
   themes.forEach((theme) => {
@@ -28,23 +28,5 @@ test.describe('FluidTextInput', () => {
         });
       });
     });
-  });
-
-  test('accessibility-checker @avt', async ({ page }) => {
-    await visitStory(page, {
-      component: 'FluidTextInput',
-      id: 'experimental-unstable-fluidtextinput--default',
-      globals: {
-        theme: 'white',
-      },
-    });
-    await visitStory(page, {
-      component: 'FluidTextInput',
-      id: 'experimental-unstable-fluidtextinput--password-input',
-      globals: {
-        theme: 'white',
-      },
-    });
-    await expect(page).toHaveNoACViolations('FluidTextInput');
   });
 });

@@ -37,6 +37,7 @@ import { keys, matches } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
+import wrapFocus from '../../internal/wrapFocus';
 
 /**
  * Conditionally call a callback when the escape key is pressed
@@ -336,7 +337,7 @@ export interface ToastNotificationProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Specify what state the notification represents
    */
-  kind:
+  kind?:
     | 'error'
     | 'info'
     | 'info-square'
@@ -357,13 +358,13 @@ export interface ToastNotificationProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Provide a function that is called when the close button is clicked
    */
-  onCloseButtonClick(event: MouseEvent): void;
+  onCloseButtonClick?(event: MouseEvent): void;
 
   /**
    * By default, this value is "status". You can also provide an alternate
    * role if it makes sense from the accessibility-side
    */
-  role: 'alert' | 'log' | 'status';
+  role?: 'alert' | 'log' | 'status';
 
   /**
    * Provide a description for "status" icon that can be read by screen readers
@@ -612,7 +613,7 @@ export interface InlineNotificationProps
   /**
    * Specify what state the notification represents
    */
-  kind:
+  kind?:
     | 'error'
     | 'info'
     | 'info-square'
@@ -633,13 +634,13 @@ export interface InlineNotificationProps
   /**
    * Provide a function that is called when the close button is clicked
    */
-  onCloseButtonClick(event: MouseEvent): void;
+  onCloseButtonClick?(event: MouseEvent): void;
 
   /**
    * By default, this value is "status". You can also provide an alternate
    * role if it makes sense from the accessibility-side.
    */
-  role: 'alert' | 'log' | 'status';
+  role?: 'alert' | 'log' | 'status';
 
   /**
    * Provide a description for "status" icon that can be read by screen readers
@@ -859,7 +860,7 @@ export interface ActionableNotificationProps
   /**
    * Specify what state the notification represents
    */
-  kind:
+  kind?:
     | 'error'
     | 'info'
     | 'info-square'
@@ -886,7 +887,7 @@ export interface ActionableNotificationProps
   /**
    * Provide a function that is called when the close button is clicked
    */
-  onCloseButtonClick(event: MouseEvent): void;
+  onCloseButtonClick?(event: MouseEvent): void;
 
   /**
    * By default, this value is "alertdialog". You can also provide an alternate
@@ -943,13 +944,37 @@ export function ActionableNotification({
     [`${prefix}--actionable-notification--${kind}`]: kind,
     [`${prefix}--actionable-notification--hide-close-button`]: hideCloseButton,
   });
-
+  const innerModal = useRef<HTMLDivElement>(null);
+  const startTrap = useRef<HTMLElement>(null);
+  const endTrap = useRef<HTMLElement>(null);
   const ref = useRef<HTMLDivElement>(null);
+
   useIsomorphicEffect(() => {
-    if (ref.current && hasFocus) {
-      ref.current.focus();
+    if (hasFocus) {
+      const button = document.querySelector(
+        'button.cds--actionable-notification__action-button'
+      ) as HTMLButtonElement;
+      button?.focus();
     }
   });
+
+  function handleBlur({
+    target: oldActiveNode,
+    relatedTarget: currentActiveNode,
+  }) {
+    if (isOpen && currentActiveNode && oldActiveNode) {
+      const { current: bodyNode } = innerModal;
+      const { current: startTrapNode } = startTrap;
+      const { current: endTrapNode } = endTrap;
+      wrapFocus({
+        bodyNode,
+        startTrapNode,
+        endTrapNode,
+        currentActiveNode,
+        oldActiveNode,
+      });
+    }
+  }
 
   const handleClose = (evt: MouseEvent) => {
     if (!onClose || onClose(evt) !== false) {
@@ -973,7 +998,16 @@ export function ActionableNotification({
       ref={ref}
       role={role}
       className={containerClassName}
-      aria-labelledby={title ? id : subtitleId}>
+      aria-labelledby={title ? id : subtitleId}
+      onBlur={handleBlur}>
+      <span
+        ref={startTrap}
+        tabIndex={0}
+        role="link"
+        className={`${prefix}--visually-hidden`}>
+        Focus sentinel
+      </span>
+
       <div className={`${prefix}--actionable-notification__details`}>
         <NotificationIcon
           notificationType={inline ? 'inline' : 'toast'}
@@ -1002,20 +1036,30 @@ export function ActionableNotification({
           </div>
         </div>
       </div>
+      <div ref={innerModal}>
+        {actionButtonLabel && (
+          <NotificationActionButton
+            onClick={onActionButtonClick}
+            inline={inline}>
+            {actionButtonLabel}
+          </NotificationActionButton>
+        )}
 
-      {actionButtonLabel && (
-        <NotificationActionButton onClick={onActionButtonClick} inline={inline}>
-          {actionButtonLabel}
-        </NotificationActionButton>
-      )}
-
-      {!hideCloseButton && (
-        <NotificationButton
-          aria-label={deprecatedAriaLabel || ariaLabel}
-          notificationType="actionable"
-          onClick={handleCloseButtonClick}
-        />
-      )}
+        {!hideCloseButton && (
+          <NotificationButton
+            aria-label={deprecatedAriaLabel || ariaLabel}
+            notificationType="actionable"
+            onClick={handleCloseButtonClick}
+          />
+        )}
+      </div>
+      <span
+        ref={endTrap}
+        tabIndex={0}
+        role="link"
+        className={`${prefix}--visually-hidden`}>
+        Focus sentinel
+      </span>
     </div>
   );
 }
