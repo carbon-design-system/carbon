@@ -1298,6 +1298,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "titleText": Object {
         "type": "node",
       },
@@ -2894,6 +2897,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "titleText": Object {
         "isRequired": true,
         "type": "node",
@@ -3594,6 +3600,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "sortItems": Object {
         "type": "func",
@@ -5178,6 +5187,9 @@ Map {
           ],
           "type": "oneOf",
         },
+        "slug": Object {
+          "type": "node",
+        },
         "sortItems": Object {
           "type": "func",
         },
@@ -5295,6 +5307,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "sortItems": Object {
         "type": "func",
@@ -6495,6 +6510,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "warn": Object {
         "type": "bool",
