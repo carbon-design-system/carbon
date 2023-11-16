@@ -2720,6 +2720,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "type": Object {
         "type": "string",
       },
@@ -5475,6 +5478,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "step": Object {
         "type": "number",
       },
@@ -8089,6 +8095,9 @@ Map {
       "rows": Object {
         "type": "number",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "value": Object {
         "args": Array [
           Array [
@@ -8425,6 +8434,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "type": Object {
         "type": "string",
