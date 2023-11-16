@@ -99,7 +99,7 @@ export const Skeleton = () => (
       datePickerType="single"
       labelText="Label"
       placeholder="Placeholder text"
-      id="input-1"
+      id="input-2"
     />
     <br />
     <br />
@@ -107,7 +107,7 @@ export const Skeleton = () => (
       datePickerType="range"
       labelText="Label"
       placeholder="Placeholder text"
-      id="input-1"
+      id="input-3"
     />
   </div>
 );
