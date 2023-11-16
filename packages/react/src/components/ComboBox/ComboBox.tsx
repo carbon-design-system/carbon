@@ -10,7 +10,7 @@ import Downshift, {
   ControllerStateAndHelpers,
   StateChangeOptions,
 } from 'downshift';
-import PropTypes from 'prop-types';
+import PropTypes, { ReactNodeLike } from 'prop-types';
 import React, {
   useContext,
   useEffect,
@@ -282,6 +282,11 @@ export interface ComboBoxProps<ItemType>
   size?: ListBoxSize;
 
   /**
+   * Provide a `Slug` component to be rendered inside the `ComboBox` component
+   */
+  slug?: ReactNodeLike;
+
+  /**
    * Provide text to be used in a `<label>` element that is tied to the
    * combobox via ARIA attributes.
    */
@@ -338,6 +343,7 @@ const ComboBox = forwardRef(
       warn,
       warnText,
       allowCustomValue = false,
+      slug,
       ...rest
     } = props;
     const prefix = usePrefix();
@@ -505,6 +511,7 @@ const ComboBox = forwardRef(
       {
         [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
         [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
+        [`${prefix}--list-box__wrapper--slug`]: slug,
       },
     ]);
 
@@ -515,6 +522,14 @@ const ComboBox = forwardRef(
 
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
+
+    // Slug is always size `mini`
+    let normalizedSlug;
+    if (slug) {
+      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+        size: 'mini',
+      });
+    }
 
     return (
       <Downshift
@@ -706,6 +721,7 @@ const ComboBox = forwardRef(
                     translateWithId={translateWithId}
                   />
                 </div>
+                {normalizedSlug}
                 <ListBox.Menu
                   {...getMenuProps({
                     'aria-label': deprecatedAriaLabel || ariaLabel,
@@ -926,6 +942,11 @@ ComboBox.propTypes = {
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
    */
   size: ListBoxPropTypes.ListBoxSize,
+
+  /**
+   * Provide a `Slug` component to be rendered inside the `ComboBox` component
+   */
+  slug: PropTypes.node,
 
   /**
    * Provide text to be used in a `<label>` element that is tied to the

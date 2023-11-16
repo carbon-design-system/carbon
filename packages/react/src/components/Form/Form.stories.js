@@ -7,11 +7,14 @@
 
 import React, { useState, useRef } from 'react';
 import Checkbox from '../Checkbox';
+import ComboBox from '../ComboBox';
+import Dropdown from '../Dropdown';
 import DatePicker from '../DatePicker';
 import DatePickerInput from '../DatePickerInput';
 import Form from './Form';
 import FormGroup from '../FormGroup';
 import FileUploader from '../FileUploader';
+import { MultiSelect, FilterableMultiSelect } from '../MultiSelect';
 import FluidForm from '../FluidForm';
 import FluidNumberInput from '../FluidNumberInput';
 import FluidDatePicker from '../FluidDatePicker';
@@ -116,6 +119,34 @@ const textareaProps = {
 const buttonEvents = {
   className: 'some-class',
 };
+
+const items = [
+  {
+    id: 'option-0',
+    text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+  },
+  {
+    id: 'option-1',
+    text: 'Option 1',
+  },
+  {
+    id: 'option-2',
+    text: 'Option 2',
+  },
+  {
+    id: 'option-3',
+    text: 'Option 3 - a disabled item',
+    disabled: true,
+  },
+  {
+    id: 'option-4',
+    text: 'Option 4',
+  },
+  {
+    id: 'option-5',
+    text: 'Option 5',
+  },
+];
 
 export default {
   title: 'Components/Form',
@@ -391,13 +422,70 @@ export const _AIForm = (args) => {
           </DatePicker>
           <TextInput {...TextInputProps} slug={slug} {...rest} />
           <TextArea {...textareaProps} slug={slug} {...rest} />
+          <Dropdown
+            id="default"
+            titleText="Dropdown title"
+            helperText="This is some helper text"
+            initialSelectedItem={items[1]}
+            label="Option 1"
+            items={items}
+            itemToString={(item) => (item ? item.text : '')}
+            slug={slug}
+            {...rest}
+          />
+          <MultiSelect
+            label="Multiselect Label"
+            id="carbon-multiselect-example"
+            titleText="Multiselect title"
+            helperText="This is helper text"
+            items={items}
+            itemToString={(item) => (item ? item.text : '')}
+            selectionFeedback="top-after-reopen"
+            slug={slug}
+            {...rest}
+          />
+          <FilterableMultiSelect
+            id="carbon-multiselect-example-3"
+            titleText="FilterableMultiselect title"
+            helperText="This is helper text"
+            items={items}
+            itemToString={(item) => (item ? item.text : '')}
+            selectionFeedback="top-after-reopen"
+            slug={slug}
+            {...rest}
+          />
+          <ComboBox
+            onChange={() => {}}
+            id="carbon-combobox"
+            items={items}
+            itemToString={(item) => (item ? item.text : '')}
+            titleText="ComboBox title"
+            helperText="Combobox helper text"
+            slug={slug}
+            {...rest}
+          />
+          <Select
+            id="select-1"
+            labelText="Select an option"
+            helperText="Optional helper text"
+            slug={slug}
+            {...rest}>
+            <SelectItem value="" text="" />
+            <SelectItem
+              value="An example option that is really long to show what should be done to handle long text"
+              text="An example option that is really long to show what should be done to handle long text"
+            />
+            <SelectItem value="Option 2" text="Option 2" />
+            <SelectItem value="Option 3" text="Option 3" />
+            <SelectItem value="Option 4" text="Option 4" />
+          </Select>
           <Button type="submit" className="some-class" {...buttonEvents}>
             Submit
           </Button>
         </Stack>
       </Form>
 
-      <FluidForm aria-label="sample form" className="fluid-slug-form">
+      <FluidForm aria-label="sample ai form" className="fluid-slug-form">
         <div style={{ display: 'flex' }}>
           <FluidDatePicker datePickerType="single" style={{ width: '100%' }}>
             <FluidDatePickerInput
