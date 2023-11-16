@@ -119,7 +119,7 @@ Playground.args = {
   disabled: false,
   enableCounter: false,
   labelText: 'Text Area label',
-  maxCount: '500',
+  maxCount: 500,
   warn: false,
   warnText: 'This is a warning message.',
 };
