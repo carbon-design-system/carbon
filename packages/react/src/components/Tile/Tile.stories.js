@@ -23,7 +23,7 @@ import {
   TileBelowTheFoldContent,
 } from './';
 import TileGroup from '../TileGroup/TileGroup';
-import { Download } from '@carbon/icons-react';
+import { Download, ArrowRight } from '@carbon/icons-react';
 
 export default {
   title: 'Components/Tile',
@@ -54,6 +54,79 @@ export const Default = () => {
       <br />
       <Link href="https://www.carbondesignsystem.com">Link</Link>
     </Tile>
+  );
+};
+
+export const SlugTest = () => {
+  return (
+    <div className="slug-tile-container">
+      <ClickableTile
+        id="clickable-tile-1"
+        href="https://www.carbondesignsystem.com/">
+        <h4>Title</h4>
+        <p>
+          Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit at
+          consectetur turpis mauris gravida penatibus.
+        </p>
+        <div className="ai-data">
+          <div className="data-container">
+            <p>Data Quality</p>
+            <h3>85%</h3>
+          </div>
+          <div className="data-container">
+            <p>Label text</p>
+            <h3>16%</h3>
+          </div>
+        </div>
+        <ArrowRight className="arrow-right" />
+      </ClickableTile>
+      <SelectableTile id="selectable-tile-1" name="tiles" value="selectable">
+        <h4>Title</h4>
+        <p>
+          Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit at
+          consectetur turpis mauris gravida penatibus.
+        </p>
+        <div className="ai-data">
+          <div className="data-container">
+            <p>Data Quality</p>
+            <h3>85%</h3>
+          </div>
+          <div className="data-container">
+            <p>Label text</p>
+            <h3>16%</h3>
+          </div>
+        </div>
+      </SelectableTile>
+      <ExpandableTile
+        id="expandable-tile-1"
+        tileCollapsedIconText="Interact to Expand tile"
+        tileExpandedIconText="Interact to Collapse tile">
+        <TileAboveTheFoldContent>
+          <h4>Title</h4>
+          <p>
+            Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
+            at consectetur turpis mauris gravida penatibus.
+          </p>
+          <div className="ai-data">
+            <div className="data-container">
+              <p>Data Quality</p>
+              <h3>85%</h3>
+            </div>
+            <div className="data-container">
+              <p>Label text</p>
+              <h3>16%</h3>
+            </div>
+          </div>
+        </TileAboveTheFoldContent>
+        <TileBelowTheFoldContent>
+          <h6>Expanded Section</h6>
+          <p>
+            Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
+            at consectetur turpis mauris.
+          </p>
+        </TileBelowTheFoldContent>
+      </ExpandableTile>
+    </div>
   );
 };
 
