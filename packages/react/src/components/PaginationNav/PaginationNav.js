@@ -134,13 +134,7 @@ function PaginationOverflow({
           <select
             className={`${prefix}--pagination-nav__page ${prefix}--pagination-nav__page--select`}
             aria-label={`Select ${t('carbon.pagination-nav.item')} number`}
-            onChange={(e) => {
-              const index = Number(e.target.value);
-              onSelect(index);
-            }}>
-            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-            <option value="" hidden />
-          </select>
+            disabled></select>
           <div className={`${prefix}--pagination-nav__select-icon-wrapper`}>
             <OverflowMenuHorizontal
               className={`${prefix}--pagination-nav__select-icon`}
