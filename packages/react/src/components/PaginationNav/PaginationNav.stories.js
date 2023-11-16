@@ -27,11 +27,18 @@ export const Playground = (args) => (
   </div>
 );
 
+export const OverflowDisabled = () => (
+  <div style={{ width: '800px' }}>
+    <PaginationNav itemsShown={10} totalItems={10000} disableOverflow={true} />
+  </div>
+);
+
 Playground.args = {
   loop: false,
   itemsShown: 10,
   page: 0,
   totalItems: 25,
+  disableOverflow: false,
 };
 
 Playground.argTypes = {
@@ -53,6 +60,11 @@ Playground.argTypes = {
   totalItems: {
     control: {
       type: 'number',
+    },
+  },
+  disableOverflow: {
+    control: {
+      type: 'boolean',
     },
   },
 };
