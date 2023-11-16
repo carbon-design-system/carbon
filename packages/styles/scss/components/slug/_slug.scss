@@ -1,6 +1,7 @@
 @use '../../config' as *;
 @use '../../colors' as *;
 @use '../../motion' as *;
+@use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
 @use '../../utilities/convert';
@@ -63,6 +64,10 @@ $sizes: (
 @mixin slug {
   .#{$prefix}--slug {
     display: flex;
+  }
+
+  .#{$prefix}--slug:has(> .#{$prefix}--popover--open) {
+    z-index: 2;
   }
 
   .#{$prefix}--slug .#{$prefix}--slug__button {
@@ -382,5 +387,19 @@ $sizes: (
     .#{$prefix}--btn--primary {
     order: 1;
     border-end-end-radius: convert.to-rem(16px);
+  }
+
+  // Revert styles
+  .#{$prefix}--slug.#{$prefix}--slug--revert {
+    transform: translate($spacing-03, -50%);
+  }
+
+  .#{$prefix}--slug--revert .#{$prefix}--btn--icon-only {
+    align-items: center;
+    padding-block-start: 0;
+  }
+
+  .#{$prefix}--slug--revert .#{$prefix}--btn--icon-only svg {
+    margin: 0;
   }
 }
