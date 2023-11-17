@@ -38,22 +38,31 @@ export interface TileProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   /** @deprecated */
   light?: boolean;
+
+  /**
+   * Provide a `Slug` component to be rendered inside the `SelectableTile` component
+   */
+  slug?: ReactNodeLike;
 }
 
 export const Tile = React.forwardRef<HTMLDivElement, TileProps>(function Tile(
-  { children, className, light = false, ...rest },
+  { children, className, light = false, slug, ...rest },
   ref
 ) {
   const prefix = usePrefix();
 
   const tileClasses = cx(
     `${prefix}--tile`,
-    light && `${prefix}--tile--light`,
+    {
+      [`${prefix}--tile--light`]: light,
+      [`${prefix}--tile--slug`]: slug,
+    },
     className
   );
   return (
     <div className={tileClasses} ref={ref} {...rest}>
       {children}
+      {slug}
     </div>
   );
 });
@@ -80,6 +89,11 @@ Tile.propTypes = {
     PropTypes.bool,
     'The `light` prop for `Tile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
   ),
+
+  /**
+   * Provide a `Slug` component to be rendered inside the `Tile` component
+   */
+  slug: PropTypes.node,
 };
 
 export interface ClickableTileProps extends HTMLAttributes<HTMLAnchorElement> {

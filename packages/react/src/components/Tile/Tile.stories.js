@@ -93,6 +93,23 @@ export const SlugTest = () => {
 
   return (
     <div className="slug-tile-container">
+      <Tile slug={slug} id="tile-1">
+        <h4>Title</h4>
+        <p>
+          Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit at
+          consectetur turpis mauris gravida penatibus.
+        </p>
+        <div className="ai-data">
+          <div className="data-container">
+            <p>Data Quality</p>
+            <h3>85%</h3>
+          </div>
+          <div className="data-container">
+            <p>Label text</p>
+            <h3>16%</h3>
+          </div>
+        </div>
+      </Tile>
       <SelectableTile
         id="selectable-tile-1"
         name="tiles"
