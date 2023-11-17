@@ -177,7 +177,6 @@
 
   .#{$prefix}--date-picker__input:disabled ~ .#{$prefix}--date-picker__icon {
     cursor: not-allowed;
-    fill: $icon-disabled;
   }
 
   .#{$prefix}--date-picker--range
@@ -194,7 +193,7 @@
   .#{$prefix}--date-picker-input__wrapper--slug .#{$prefix}--slug {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: convert.to-rem(40px);
+    inset-inline-end: $spacing-08;
     transform: translateY(-50%);
   }
 

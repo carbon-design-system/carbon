@@ -91,7 +91,9 @@ export const Slug = React.forwardRef(function Slug(
     onRevertClick,
     revertActive,
     revertLabel = 'Revert to AI input',
+    slugLabel = 'Show information',
     size = 'xs',
+    ...rest
   },
   ref
 ) {
@@ -123,6 +125,8 @@ export const Slug = React.forwardRef(function Slug(
     }
   };
 
+  const ariaLabel = `${aiText} - ${slugLabel}`;
+
   return (
     <div className={slugClasses} ref={ref} id={id}>
       {revertActive ? (
@@ -130,14 +134,13 @@ export const Slug = React.forwardRef(function Slug(
           onClick={handleOnRevertClick}
           kind="ghost"
           size="sm"
-          label={revertLabel}>
+          label={revertLabel}
+          {...rest}>
           <Undo />
         </IconButton>
       ) : (
-        <Toggletip align={align} autoAlign={autoAlign}>
-          <ToggletipButton
-            className={slugButtonClasses}
-            label="Show information">
+        <Toggletip align={align} autoAlign={autoAlign} {...rest}>
+          <ToggletipButton className={slugButtonClasses} label={ariaLabel}>
             <span className={`${prefix}--slug__text`}>{aiText}</span>
             {aiTextLabel && (
               <span className={`${prefix}--slug__additional-text`}>
@@ -233,4 +236,9 @@ Slug.propTypes = {
    * Specify the content you want rendered inside the slug ToggleTip
    */
   slugContent: PropTypes.node,
+
+  /**
+   * Specify the text that will be provided to the aria-label of the `Slug` button
+   */
+  slugLabel: PropTypes.string,
 };
