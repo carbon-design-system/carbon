@@ -6595,6 +6595,9 @@ Map {
       "selected": Object {
         "type": "bool",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "tabIndex": Object {
         "type": "number",
       },
