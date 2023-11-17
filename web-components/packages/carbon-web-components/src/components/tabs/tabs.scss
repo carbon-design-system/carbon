@@ -27,7 +27,7 @@ $inset-transition: inset 110ms motion(standard, productive);
     flex: 1 1 0%;
     position: relative;
     overflow: scroll;
-    height: 42px; // for some reason, overflow: hidden shrinks the content
+    height: $spacing-09; // for some reason, overflow: hidden shrinks the content
     scrollbar-width: none;
 
     &::-webkit-scrollbar {
@@ -35,7 +35,7 @@ $inset-transition: inset 110ms motion(standard, productive);
     }
   }
 
-  /* Set to zero-slecificity so it can be overridden by dynamic stylesheet */
+  /* Set to zero-specificity so it can be overridden by dynamic stylesheet */
   /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
   :where(.#{$prefix}--tabs-nav-content) {
     position: absolute;
@@ -80,11 +80,9 @@ $inset-transition: inset 110ms motion(standard, productive);
     @include focus-outline('reset');
     @include type-style('body-compact-01');
 
-    display: flex;
     align-items: center;
     width: 100%;
     overflow: hidden;
-    max-width: $spacing-13;
     padding: $spacing-04 $spacing-05 $spacing-03;
     border-bottom: $tab-underline-color;
     color: $text-secondary;
