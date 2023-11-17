@@ -12,6 +12,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../../utilities/ai-gradient' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/button-reset';
 @use '../../utilities/high-contrast-mode' as *;
@@ -410,6 +411,37 @@
     .#{$prefix}--number__controls:hover
     .#{$prefix}--number__rule-divider:not(:first-of-type) {
     background-color: $border-subtle;
+  }
+
+  // Styles for `Slug` rendered inside `NumberInput`
+  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: convert.to-rem(88px);
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--number__input-wrapper--slug
+    input[data-invalid]
+    ~ .#{$prefix}--slug,
+  .#{$prefix}--number__input-wrapper--slug.#{$prefix}--number__input-wrapper--warning
+    .#{$prefix}--slug {
+    inset-inline-end: convert.to-rem(120px);
+  }
+
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--slug
+    input[data-invalid],
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--slug.#{$prefix}--number__input-wrapper--warning
+    input {
+    padding-inline-end: convert.to-rem(144px);
+  }
+
+  .#{$prefix}--number__input-wrapper--slug input[type='number'] {
+    @include ai-gradient;
+
+    padding-inline-end: convert.to-rem(112px);
   }
 
   // Skeleton State
