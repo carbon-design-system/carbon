@@ -10206,6 +10206,9 @@ Map {
       "slugContent": Object {
         "type": "node",
       },
+      "slugLabel": Object {
+        "type": "string",
+      },
     },
     "render": [Function],
   },
