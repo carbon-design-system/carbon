@@ -8525,6 +8525,9 @@ Map {
         "type": "string",
       },
       "light": [Function],
+      "slug": Object {
+        "type": "node",
+      },
     },
     "render": [Function],
   },
