@@ -172,6 +172,13 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const { isFluid } = useContext(FormContext);
   const { defaultValue, value } = other;
 
+  const { current: textAreaInstanceId } = useRef(getInstanceId());
+
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const ref = useMergedRefs([forwardRef, textareaRef]) as
+    | React.LegacyRef<HTMLTextAreaElement>
+    | undefined;
+
   function getInitialTextCount(): number {
     const targetValue =
       defaultValue || value || textareaRef.current?.value || '';
@@ -185,12 +192,6 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   }
 
   const [textCount, setTextCount] = useState(getInitialTextCount());
-  const { current: textAreaInstanceId } = useRef(getInstanceId());
-
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const ref = useMergedRefs([forwardRef, textareaRef]) as
-    | React.LegacyRef<HTMLTextAreaElement>
-    | undefined;
 
   useEffect(() => {
     setTextCount(getInitialTextCount());
@@ -242,7 +243,9 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
           if (totalWords > maxCount) {
             evt.preventDefault();
 
-            const allowedWords = existingWords.concat(pastedWords);
+            const allowedWords = existingWords
+              .concat(pastedWords)
+              .slice(0, maxCount);
 
             setTimeout(() => {
               setTextCount(maxCount);
