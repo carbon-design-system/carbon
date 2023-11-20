@@ -12,6 +12,7 @@ import { Close } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
+import InlineLoading from '../InlineLoading';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import wrapFocus, {
   elementOrParentIsFloatingMenu,
@@ -88,6 +89,21 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   launcherButtonRef?: any; // TODO FIXME
 
   /**
+   * Specify the description for the loading text
+   */
+  loadingDescription?: string;
+
+  /**
+   * Specify the description for the loading text
+   */
+  loadingIconDescription?: string;
+
+  /**
+   * Specify loading status
+   */
+  loadingStatus?: string;
+
+  /**
    * Specify a label to be read by screen readers on the modal root node
    */
   modalAriaLabel?: string;
@@ -107,6 +123,12 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
    * @deprecated this property is unused
    */
   onKeyDown?: React.KeyboardEventHandler<HTMLElement>;
+
+  /**
+   * Specify an optional handler to be invoked when loading is
+   * successful
+   */
+  onLoadingSuccess?: React.ReactEventHandler<HTMLElement>;
 
   /**
    * Specify a handler for closing modal.
@@ -212,6 +234,10 @@ const Modal = React.forwardRef(function Modal(
     preventCloseOnClickOutside = false,
     isFullWidth,
     launcherButtonRef,
+    loadingStatus = 'inactive',
+    loadingDescription,
+    loadingIconDescription,
+    onLoadingSuccess = noopFn,
     ...rest
   }: ModalProps,
   ref: React.LegacyRef<HTMLDivElement>
@@ -227,6 +253,11 @@ const Modal = React.forwardRef(function Modal(
   const modalHeadingId = `${prefix}--modal-header__heading--${modalInstanceId}`;
   const modalBodyId = `${prefix}--modal-body--${modalInstanceId}`;
   const modalCloseButtonClass = `${prefix}--modal-close`;
+  const primaryButtonClass = classNames({
+    [`${prefix}--btn--loading`]: loadingStatus !== 'inactive',
+  });
+
+  const loadingActive = loadingStatus !== 'inactive';
 
   function isCloseButton(element: Element) {
     return (
@@ -440,7 +471,7 @@ const Modal = React.forwardRef(function Modal(
         <div className={`${prefix}--modal-content--overflow-indicator`} />
       )}
       {!passiveModal && (
-        <ButtonSet className={footerClasses}>
+        <ButtonSet className={footerClasses} aria-busy={loadingActive}>
           {Array.isArray(secondaryButtons) && secondaryButtons.length <= 2
             ? secondaryButtons.map(
                 ({ buttonText, onClick: onButtonClick }, i) => (
@@ -454,6 +485,7 @@ const Modal = React.forwardRef(function Modal(
               )
             : secondaryButtonText && (
                 <Button
+                  disabled={loadingActive}
                   kind="secondary"
                   onClick={onSecondaryButtonClick}
                   ref={secondaryButton}>
@@ -461,11 +493,22 @@ const Modal = React.forwardRef(function Modal(
                 </Button>
               )}
           <Button
+            className={primaryButtonClass}
             kind={danger ? 'danger' : 'primary'}
-            disabled={primaryButtonDisabled}
+            disabled={loadingActive || primaryButtonDisabled}
             onClick={onRequestSubmit}
             ref={button}>
-            {primaryButtonText}
+            {loadingStatus === 'inactive' ? (
+              primaryButtonText
+            ) : (
+              <InlineLoading
+                status={loadingStatus}
+                description={loadingDescription}
+                iconDescription={loadingIconDescription}
+                className={`${prefix}--inline-loading--btn`}
+                onSuccess={onLoadingSuccess}
+              />
+            )}
           </Button>
         </ButtonSet>
       )}
@@ -563,6 +606,21 @@ Modal.propTypes = {
   ]),
 
   /**
+   * Specify the description for the loading text
+   */
+  loadingDescription: PropTypes.string,
+
+  /**
+   * Specify the description for the loading text
+   */
+  loadingIconDescription: PropTypes.string,
+
+  /**
+   * loading status
+   */
+  loadingStatus: PropTypes.oneOf(['inactive', 'active', 'finished', 'error']),
+
+  /**
    * Specify a label to be read by screen readers on the modal root node
    */
   modalAriaLabel: PropTypes.string,
@@ -581,6 +639,12 @@ Modal.propTypes = {
    * Specify a handler for keypresses.
    */
   onKeyDown: PropTypes.func,
+
+  /**
+   * Provide an optional handler to be invoked when loading is
+   * successful
+   */
+  onLoadingSuccess: PropTypes.func,
 
   /**
    * Specify a handler for closing modal.

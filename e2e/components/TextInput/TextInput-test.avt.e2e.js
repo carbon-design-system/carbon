@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('TextInput @avt', () => {
-  test('default state', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'TextInput',
       id: 'components-textinput--default',
@@ -22,7 +22,7 @@ test.describe('TextInput @avt', () => {
     await expect(page).toHaveNoACViolations('TextInput');
   });
 
-  test('disabled state', async ({ page }) => {
+  test('@avt-advanced-states - disabled', async ({ page }) => {
     await visitStory(page, {
       component: 'TextInput',
       id: 'components-textinput--playground',
@@ -38,7 +38,7 @@ test.describe('TextInput @avt', () => {
     await expect(page).toHaveNoACViolations('TextInput-Disabled');
   });
 
-  test('accessibility-checker keyboard nav', async ({ page }) => {
+  test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'TextInput',
       id: 'components-textinput--default',
@@ -60,7 +60,7 @@ test.describe('TextInput @avt', () => {
     await expect(input).toHaveValue('Tex');
   });
 
-  test('accessibility-checker keyboard nav for password', async ({ page }) => {
+  test('@avt-keyboard-nav for password', async ({ page }) => {
     await visitStory(page, {
       component: 'TextInput',
       id: 'components-textinput--toggle-password-visibility',
