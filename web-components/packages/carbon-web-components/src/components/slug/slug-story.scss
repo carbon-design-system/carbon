@@ -1,0 +1,48 @@
+/**
+ * @license
+ *
+ * Copyright IBM Corp. 2019, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type' as *;
+
+.slug-container {
+  display: flex;
+  margin-bottom: $spacing-12;
+  align-items: flex-start;
+
+  > * {
+    margin-left: $spacing-07;
+  }
+}
+
+p {
+  @include type-style('body-compact-01');
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.secondary {
+  color: $text-secondary;
+}
+
+h1 {
+  margin-bottom: $spacing-05;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: $border-subtle;
+  margin-top: $spacing-07;
+  margin-bottom: $spacing-07;
+}

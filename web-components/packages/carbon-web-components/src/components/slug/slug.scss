@@ -1,0 +1,129 @@
+/**
+ * @license
+ *
+ * Copyright IBM Corp. 2019, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/components/slug/index' as *;
+@use '../toggle-tip/toggletip.scss';
+
+:host(#{$prefix}-slug) {
+  @extend .#{$prefix}--slug;
+
+  .#{$prefix}--slug__text {
+    @include font-family('sans');
+  }
+}
+
+:host(#{$prefix}-slug[enabled]) {
+  .#{$prefix}--popover-content {
+    border: 1px solid $border-subtle;
+    border-radius: $spacing-05;
+    // 84px seems to make this fully opaque?
+    backdrop-filter: blur(25px);
+    background: linear-gradient(
+        0deg,
+        $slug-callout-aura-start 0%,
+        $slug-callout-aura-end 33%,
+        transparent 100%
+      ),
+      linear-gradient(
+          180deg,
+          $slug-callout-gradient-top 0%,
+          $slug-callout-gradient-bottom 100%
+        )
+        rgba(0, 0, 0, 0.01);
+    // box-shadow seems to match the spec better
+    // than the same values plugged into `drop-shadow`
+    // filter: drop-shadow(-45px 45px 100px rgba(0, 0, 0, 0.2));
+    box-shadow: -45px 45px 100px rgba(0, 0, 0, 0.2);
+    color: $text-primary;
+    min-inline-size: to-rem(280px);
+  }
+
+  .#{$prefix}--toggletip-actions {
+    position: absolute;
+    justify-content: flex-end;
+    background: $layer-accent;
+    border-end-end-radius: to-rem(15px);
+    border-end-start-radius: to-rem(15px);
+    column-gap: 0;
+    inline-size: 100%;
+    inset-block-end: 0;
+    inset-inline-end: 0;
+  }
+
+  .#{$prefix}--toggletip-content {
+    // This sets the max size to the size of the action bar with 3 buttons
+    max-inline-size: to-rem(334px);
+    padding-block-end: $spacing-11;
+    padding-block-start: $spacing-07;
+    padding-inline: $spacing-07;
+
+    --cds-button-focus-color: var(--cds-focus);
+  }
+}
+
+:host(#{$prefix}-slug-action-button) {
+  .#{$prefix}--btn--primary {
+    order: 1;
+    border-end-end-radius: 1rem;
+  }
+}
+
+:host(
+    #{$prefix}-slug[kind='inline']:not([size='md']):not([size='lg']):not(
+        [size='xl']
+      )
+  ) {
+  .#{$prefix}--slug__button {
+    font-size: $spacing-04;
+  }
+}
+
+:host(#{$prefix}-slug[kind='inline'][size='lg']),
+:host(#{$prefix}-slug[kind='inline'][size='xl']) {
+  .#{$prefix}--slug__button {
+    font-size: $spacing-05;
+  }
+}
+
+:host(#{$prefix}-slug[dot-type='hollow']),
+:host(#{$prefix}-slug[kind='hollow']) {
+  @extend .#{$prefix}--slug--hollow;
+
+  .#{$prefix}--slug__button--hollow:hover {
+    border-color: $slug-hollow-hover;
+    color: $slug-hollow-hover;
+  }
+
+  .#{$prefix}--toggletip-content {
+    row-gap: 0;
+  }
+
+  .#{$prefix}--slug__button--lg .#{$prefix}--slug__text::before {
+    block-size: $spacing-03;
+    inline-size: $spacing-03;
+  }
+}
+
+:host(#{$prefix}-slug:not([kind='inline'])) {
+  .#{$prefix}--slug__button:focus {
+    border: $background;
+  }
+}
+
+:host(#{$prefix}-slug:not([kind='hollow']):not([dot-type='hollow'])) {
+  .#{$prefix}--popover-caret {
+    background: $border-subtle;
+  }
+}

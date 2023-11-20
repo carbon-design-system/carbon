@@ -14,10 +14,11 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/components/toggletip/index' as *;
 @use '@carbon/styles/scss/components/tooltip/index' as *;
-@use '@carbon/styles/scss/components/popover/index' as *;
 @use '@carbon/styles/scss/utilities/button-reset';
+@use '../popover/popover.scss' as *;
 
-:host(#{$prefix}-toggletip) {
+:host(#{$prefix}-toggletip),
+:host(#{$prefix}-slug) {
   // TODO: audit
   @extend .#{$prefix}--toggletip;
 

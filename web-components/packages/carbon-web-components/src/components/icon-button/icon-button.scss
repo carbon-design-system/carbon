@@ -11,9 +11,14 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '../tooltip/tooltip';
 @use '../button/button';
 
 :host(#{$prefix}-icon-button) {
   @include emit-layout-tokens();
+}
+
+:host(#{$prefix}-icon-button[kind='ghost']) ::slotted([slot='icon']) {
+  color: $icon-primary;
 }
