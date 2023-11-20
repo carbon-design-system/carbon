@@ -4686,6 +4686,23 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "loadingDescription": Object {
+        "type": "string",
+      },
+      "loadingIconDescription": Object {
+        "type": "string",
+      },
+      "loadingStatus": Object {
+        "args": Array [
+          Array [
+            "inactive",
+            "active",
+            "finished",
+            "error",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "modalAriaLabel": Object {
         "type": "string",
       },
@@ -4696,6 +4713,9 @@ Map {
         "type": "node",
       },
       "onKeyDown": Object {
+        "type": "func",
+      },
+      "onLoadingSuccess": Object {
         "type": "func",
       },
       "onRequestClose": Object {
@@ -4808,6 +4828,26 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "loadingDescription": Object {
+        "type": "string",
+      },
+      "loadingIconDescription": Object {
+        "type": "string",
+      },
+      "loadingStatus": Object {
+        "args": Array [
+          Array [
+            "inactive",
+            "active",
+            "finished",
+            "error",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "onLoadingSuccess": Object {
+        "type": "func",
       },
       "onRequestClose": Object {
         "type": "func",
