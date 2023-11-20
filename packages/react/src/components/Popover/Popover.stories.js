@@ -68,7 +68,7 @@ const PlaygroundStory = (props) => {
       <div className="playground-trigger">
         <CheckboxIcon />
       </div>
-      <PopoverContent className="p-3">
+      <PopoverContent className="p-3" caret={caret}>
         <h2 className="popover-title">Available storage</h2>
         <p className="popover-details">
           This server has 150 GB of block storage remaining.

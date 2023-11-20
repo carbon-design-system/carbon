@@ -184,6 +184,12 @@ $popover-caret-height: custom-property.get-var(
     display: none;
   }
 
+  .#{$prefix}--popover--open
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret-close {
+    display: none;
+  }
+
   //-----------------------------------------------------------------------------
   // Bottom
   //-----------------------------------------------------------------------------

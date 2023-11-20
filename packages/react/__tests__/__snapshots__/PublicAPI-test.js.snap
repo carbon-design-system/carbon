@@ -5952,6 +5952,9 @@ Map {
   "PopoverContent" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "caret": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
