@@ -22,7 +22,7 @@ import {
   UseSelectStateChangeTypes,
 } from 'downshift';
 import cx from 'classnames';
-import PropTypes from 'prop-types';
+import PropTypes, { ReactNodeLike } from 'prop-types';
 import {
   Checkmark,
   WarningAltFilled,
@@ -199,6 +199,11 @@ export interface DropdownProps<ItemType>
   size?: ListBoxSize;
 
   /**
+   * Provide a `Slug` component to be rendered inside the `Dropdown` component
+   */
+  slug?: ReactNodeLike;
+
+  /**
    * Provide the title text that will be read by a screen reader when
    * visiting this control
    */
@@ -255,6 +260,7 @@ const Dropdown = React.forwardRef(
       selectedItem: controlledSelectedItem,
       downshiftProps,
       readOnly,
+      slug,
       ...other
     }: DropdownProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
@@ -351,6 +357,7 @@ const Dropdown = React.forwardRef(
         [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
         [`${prefix}--list-box__wrapper--fluid--focus`]:
           isFluid && isFocused && !isOpen,
+        [`${prefix}--list-box__wrapper--slug`]: slug,
       }
     );
 
@@ -435,6 +442,14 @@ const Dropdown = React.forwardRef(
 
     const menuProps = getMenuProps();
 
+    // Slug is always size `mini`
+    let normalizedSlug;
+    if (slug) {
+      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+        size: 'mini',
+      });
+    }
+
     return (
       <div className={wrapperClasses} {...other}>
         {titleText && (
@@ -492,6 +507,7 @@ const Dropdown = React.forwardRef(
               translateWithId={translateWithId}
             />
           </button>
+          {normalizedSlug}
           <ListBox.Menu {...menuProps}>
             {isOpen &&
               items.map((item, index) => {
@@ -683,6 +699,11 @@ Dropdown.propTypes = {
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
    */
   size: ListBoxPropTypes.ListBoxSize,
+
+  /**
+   * Provide a `Slug` component to be rendered inside the `Dropdown` component
+   */
+  slug: PropTypes.node,
 
   /**
    * Provide the title text that will be read by a screen reader when
