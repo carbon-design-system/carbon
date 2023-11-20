@@ -172,30 +172,19 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const { isFluid } = useContext(FormContext);
   const { defaultValue, value } = other;
 
-  function getInitialTextCount(
-    value: string | number | undefined,
-    defaultValue: string | number | undefined,
-    counterMode: 'character' | 'word' | undefined
-  ): number {
-    if (defaultValue) {
-      if (counterMode === 'character') {
-        return defaultValue.toString().length;
-      } else {
-        return defaultValue.toString().match(/\w+/g)?.length || 0;
-      }
-    } else if (value) {
-      if (counterMode === 'character') {
-        return value.toString().length;
-      } else {
-        return value.toString().match(/\w+/g)?.length || 0;
-      }
+  function getInitialTextCount(): number {
+    const targetValue =
+      defaultValue || value || textareaRef.current?.value || '';
+    const strValue = targetValue.toString();
+
+    if (counterMode === 'character') {
+      return strValue.length;
+    } else {
+      return strValue.match(/\w+/g)?.length || 0;
     }
-    return 0;
   }
 
-  const [textCount, setTextCount] = useState(
-    getInitialTextCount(defaultValue, value, counterMode)
-  );
+  const [textCount, setTextCount] = useState(getInitialTextCount());
   const { current: textAreaInstanceId } = useRef(getInstanceId());
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -204,7 +193,8 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     | undefined;
 
   useEffect(() => {
-    setTextCount(getInitialTextCount(defaultValue, value, counterMode));
+    setTextCount(getInitialTextCount());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value, defaultValue, counterMode]);
 
   useIsomorphicEffect(() => {
@@ -242,22 +232,23 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
           typeof maxCount !== 'undefined' &&
           textareaRef.current !== null
         ) {
-          const matchedWords = evt.clipboardData.getData('Text').match(/\w+/g);
+          const existingWords: string[] =
+            textareaRef.current.value.match(/\w+/g) || [];
+          const pastedWords: string[] =
+            evt.clipboardData.getData('Text').match(/\w+/g) || [];
 
-          if (matchedWords && matchedWords.length > maxCount) {
+          const totalWords = existingWords.length + pastedWords.length;
+
+          if (totalWords > maxCount) {
             evt.preventDefault();
 
-            const first_max = evt.clipboardData
-              .getData('Text')
-              .split(/\s+/)
-              .slice(0, maxCount)
-              .join(' ');
+            const allowedWords = existingWords.concat(pastedWords);
 
             setTimeout(() => {
               setTextCount(maxCount);
             }, 0);
 
-            textareaRef.current.value = first_max;
+            textareaRef.current.value = allowedWords.join(' ');
           }
         }
       }
