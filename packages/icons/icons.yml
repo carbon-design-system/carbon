@@ -365,7 +365,7 @@
 - name: AI
   friendly_name: AI
   aliases:
-    - - automation
+    - automation
     - artificial intelligence
     - governance
     - assistant
@@ -375,34 +375,34 @@
     - 32
 - name: ai-governance--lifecycle
   friendly_name: AI governance lifecycle
-  aliases:   
+  aliases:
     - automation
     - artificial intelligence
     - governance
     - lifecycle
     - enterprise
     - cycle
-    - security    
+    - security
     - control
   sizes:
     - 32
 - name: ai-governance--tracked
   friendly_name: AI governance tracked
-  aliases: 
+  aliases:
     - automation
     - artificial intelligence
     - governance
     - tracked
     - enterprise
     - checkmark
-    - security    
-    - secure   
+    - security
+    - secure
     - control
   sizes:
     - 32
 - name: ai-governance--untracked
   friendly_name: AI governance untracked
-  aliases:     
+  aliases:
     - automation
     - artificial intelligence
     - governance
@@ -410,8 +410,8 @@
     - enterprise
     - x
     - security
-    - unsecure   
-    - secure   
+    - unsecure
+    - secure
     - uncontrolled
   sizes:
     - 32
@@ -1107,7 +1107,7 @@
     - 32
 - name: arithmetic-mean
   friendly_name: Arithmetic mean
-  aliases:     
+  aliases:
     - arithmetic
     - mean
     - operation
@@ -1386,7 +1386,7 @@
     - 32
 - name: async
   friendly_name: async
-  aliases: 
+  aliases:
     - asynchrononous
     - arrows
     - status
@@ -2475,7 +2475,7 @@
     - 32
 - name: calls
   friendly_name: Calls
-  aliases: 
+  aliases:
     - arrow
     - circle
     - operations
@@ -2484,7 +2484,7 @@
     - 32
 - name: calls--all
   friendly_name: Calls all
-  aliases: 
+  aliases:
     - arrows
     - circle
     - operations
@@ -2494,7 +2494,7 @@
     - 32
 - name: calls--incoming
   friendly_name: Calls incoming
-  aliases:    
+  aliases:
     - arrows
     - circles
     - operations
@@ -3490,7 +3490,7 @@
     - pie chart
 - name: chart--planning-waterfall
   friendly_name: Chart planning waterfall
-  aliases:     
+  aliases:
     - chart
     - bar
     - planning
@@ -3966,7 +3966,7 @@
     - navigation
 - name: chevron--down--outline
   friendly_name: Chevron down outline
-  aliases: 
+  aliases:
     - chevron
     - navigation
     - down
@@ -4080,7 +4080,7 @@
     - navigation
 - name: chevron--up--outline
   friendly_name: Chevron up outline
-  aliases: 
+  aliases:
     - chevron
     - navigation
     - up
@@ -5485,7 +5485,7 @@
     - pointer
 - name: customer
   friendly_name: Customer
-  aliases:     
+  aliases:
     - customer
     - person
     - human
@@ -5494,7 +5494,6 @@
     - cart
     - basket
     - consumer
-
   sizes:
     - 32
 - name: customer-service
@@ -5782,7 +5781,7 @@
     - 32
 - name: data-analytics
   friendly_name: Data analytics
-  aliases:     
+  aliases:
     - data
     - analytics
     - analysis
@@ -6063,7 +6062,7 @@
     - 32
 - name: database--messaging
   friendly_name: Database messaging
-  aliases:     
+  aliases:
     - data
     - database
     - server
@@ -6233,7 +6232,7 @@
     - 32
 - name: demo
   friendly_name: Demo
-  aliases:     
+  aliases:
     - demo
     - demonstration
     - tutorial
@@ -6402,7 +6401,7 @@
     - 32
 - name: devices--apps
   friendly_name: Devices apps
-  aliases:     
+  aliases:
     - device
     - mobile
     - applications
@@ -7148,7 +7147,7 @@
     - 32
 - name: downstream
   friendly_name: Downstream
-  aliases:     
+  aliases:
     - arrows
     - circles
     - workflow
@@ -7577,7 +7576,7 @@
     - 32
 - name: equal--approximately
   friendly_name: Equal approximately
-  aliases:     
+  aliases:
     - circle
     - tilde
     - approximate
@@ -7663,19 +7662,18 @@
     - 32
 - name: event--change
   friendly_name: Event change
-  aliases:     
+  aliases:
     - event
     - change
     - exclamation point
     - bang
     - triangle
     - dashed triangle
-
   sizes:
     - 32
 - name: event--incident
   friendly_name: Event incident
-  aliases: 
+  aliases:
     - event
     - incident
     - exclamation point
@@ -7697,7 +7695,7 @@
     - schedule
 - name: event--warning
   friendly_name: Event warning
-  aliases:     
+  aliases:
     - event
     - incident
     - exclamation point
@@ -8716,8 +8714,6 @@
     - fast
     - forward 5
     - forward
-  sizes:
-    - 32
 - name: fragile
   friendly_name: Fragile
   aliases:
@@ -9611,7 +9607,7 @@
     - 32
 - name: ibm--data-product-exchange
   friendly_name: IBM® Data Product Exchange
-  aliases:  
+  aliases:
     - circle
     - arrows
     - box
@@ -9675,7 +9671,7 @@
     - 32
 - name: ibm--dynamic-route-server
   friendly_name: IBM® Dynamic Route Server
-  aliases:     
+  aliases:
     - data
     - routing
     - process
@@ -9684,7 +9680,7 @@
     - 32
 - name: ibm--engineering-systems-design-rhapsody-model-manager
   friendly_name: IBM® Engineering Systems Design Rhapsody Model Manager
-  aliases: 
+  aliases:
     - data
     - model
     - manager
@@ -9696,7 +9692,7 @@
     - 32
 - name: ibm--engineering-systems-design-rhapsody-sn1
   friendly_name: IBM® Engineering Systems Design Rhapsody sn1
-  aliases:     
+  aliases:
     - data
     - model
     - manager
@@ -9709,7 +9705,7 @@
     - 32
 - name: ibm--engineering-systems-design-rhapsody-sn2
   friendly_name: IBM® Engineering Systems Design Rhapsody sn2
-  aliases:     
+  aliases:
     - data
     - model
     - manager
@@ -9782,7 +9778,7 @@
     - 32
 - name: ibm--ibv
   friendly_name: IBM® Institute for Business Value
-  aliases: 
+  aliases:
     - app
     - business
     - analysis
@@ -9793,7 +9789,7 @@
     - 32
 - name: ibm--instana
   friendly_name: IBM® Instana®
-  aliases: 
+  aliases:
     - app
     - business
     - automated
@@ -11122,7 +11118,7 @@
     - 32
 - name: ibm-watsonx--code-assistant-for-z--refactor
   friendly_name: IBM® watsonx™ Code Assistant for Z Refactor
-  aliases:     
+  aliases:
     - app
     - development
     - developer
@@ -11175,7 +11171,7 @@
     - 32
 - name: ibm-z--processor-capacity-reference
   friendly_name: IBM Z® Processor Capacity Reference
-  aliases:     
+  aliases:
     - app
     - development
     - developer
@@ -11565,7 +11561,7 @@
     - 32
 - name: infinity
   friendly_name: Infinity
-  aliases:     
+  aliases:
     - operations
     - loop
     - infinity
@@ -11910,7 +11906,7 @@
     - ML
 - name: IP
   friendly_name: IP
-  aliases: 
+  aliases:
     - intellectual property
     - file
     - IP
@@ -12010,7 +12006,7 @@
     - 32
 - name: js-error
   friendly_name: JS error
-  aliases:     
+  aliases:
     - status
     - JS
     - error
@@ -12104,7 +12100,7 @@
     - 32
 - name: kubernetes--ip-address
   friendly_name: Kubernetes IP address
-  aliases: 
+  aliases:
     - data
     - Kubernetes
     - IP address
@@ -12113,7 +12109,7 @@
     - 32
 - name: kubernetes--pod
   friendly_name: Kubernetes pod
-  aliases:     
+  aliases:
     - data
     - Kubernetes
     - pod
@@ -13521,7 +13517,7 @@
     - 32
 - name: logo--x
   friendly_name: Logo X
-  aliases: 
+  aliases:
     - logo
     - Twitter
     - X
@@ -13601,7 +13597,7 @@
     - glyph
 - name: MAC
   friendly_name: MAC
-  aliases: 
+  aliases:
     - file
     - MAC
     - media
@@ -14180,7 +14176,7 @@
     - device
 - name: mobile--crash
   friendly_name: Mobile crash
-  aliases: 
+  aliases:
     - technology
     - mobile
     - phone
@@ -14204,7 +14200,7 @@
     - device
 - name: mobile--event
   friendly_name: Mobile event
-  aliases: 
+  aliases:
     - technology
     - mobile
     - phone
@@ -14228,7 +14224,7 @@
     - device
 - name: mobile--request
   friendly_name: Mobile request
-  aliases: 
+  aliases:
     - technology
     - mobile
     - phone
@@ -14239,7 +14235,7 @@
     - 32
 - name: mobile--session
   friendly_name: Mobile session
-  aliases:     
+  aliases:
     - technology
     - mobile
     - phone
@@ -14250,7 +14246,7 @@
     - 32
 - name: mobile--view
   friendly_name: Mobile view
-  aliases:     
+  aliases:
     - technology
     - mobile
     - phone
@@ -14260,7 +14256,7 @@
     - 32
 - name: mobile--view-orientation
   friendly_name: Mobile view orientation
-  aliases:   
+  aliases:
     - technology
     - mobile
     - phone
@@ -14289,7 +14285,7 @@
     - fabricate
     - manufacture
     - construct
-    - foundation 
+    - foundation
     - foundation model
   sizes:
     - 32
@@ -14528,7 +14524,7 @@
     - 32
 - name: mysql
   friendly_name: MySQL
-  aliases:     
+  aliases:
     - enterprise
     - app
     - software
@@ -14775,7 +14771,7 @@
     - 32
 - name: network-interface
   friendly_name: Network interface
-  aliases: 
+  aliases:
     - technology
     - systems
     - network
@@ -16265,7 +16261,7 @@
     - 32
 - name: platforms
   friendly_name: Platforms
-  aliases:     
+  aliases:
     - technology
     - platforms
   sizes:
@@ -16522,7 +16518,7 @@
     - 32
 - name: process
   friendly_name: Process
-  aliases: 
+  aliases:
     - operations
     - process
     - automate
@@ -16533,7 +16529,7 @@
     - 32
 - name: process-automate
   friendly_name: Process automate
-  aliases: 
+  aliases:
     - operations
     - process
     - automate
@@ -16582,7 +16578,7 @@
     - 32
 - name: prompt-template
   friendly_name: Prompt template
-  aliases:     
+  aliases:
     - operations
     - process
     - automate
@@ -17537,7 +17533,7 @@
     - 32
 - name: running
   friendly_name: Running
-  aliases:     
+  aliases:
     - person
     - running
     - user
@@ -17579,11 +17575,11 @@
     - 32
 - name: sales-ops
   friendly_name: Sales ops
-  aliases:     
+  aliases:
     - operations
     - sales
     - person
-    - user 
+    - user
     - human
     - currency
     - dollar
@@ -18142,7 +18138,7 @@
     - 32
 - name: service-levels
   friendly_name: Service levels
-  aliases:     
+  aliases:
     - service
     - levels
     - meter
@@ -19478,7 +19474,7 @@
     - 32
 - name: subdirectory
   friendly_name: Subdirectory
-  aliases:     
+  aliases:
     - file
     - arrow
     - subdirectory
@@ -19543,7 +19539,7 @@
     - delete
 - name: subtract--filled
   friendly_name: Subtract filled
-  aliases:     
+  aliases:
     - navigation
     - filled
     - circle
@@ -20684,7 +20680,7 @@
     - 32
 - name: time--filled
   friendly_name: Time filled
-  aliases:     
+  aliases:
     - time
     - filled
     - clock
@@ -20835,7 +20831,7 @@
     - 32
 - name: tour
   friendly_name: Tour
-  aliases:     
+  aliases:
     - tour
     - computer
     - location
@@ -21356,7 +21352,7 @@
     - 32
 - name: upstream
   friendly_name: Upstream
-  aliases:     
+  aliases:
     - data
     - upstream
     - circle
@@ -21366,7 +21362,7 @@
     - 32
 - name: URL
   friendly_name: URL
-  aliases:     
+  aliases:
     - URL
     - internet address
     - hyperlink
@@ -21928,7 +21924,7 @@
     - movie
 - name: video-player
   friendly_name: Video player
-  aliases: 
+  aliases:
     - rectangle
     - triange
     - video
@@ -22318,7 +22314,7 @@
     - notification
 - name: warning--diamond
   friendly_name: Warning diamond
-  aliases: 
+  aliases:
     - diamond
     - exclamation point
     - warning
@@ -22366,7 +22362,7 @@
     - 32
 - name: warning--multiple
   friendly_name: Warning multiple
-  aliases: 
+  aliases:
     - triangle
     - exclamation point
     - warning
@@ -22545,7 +22541,7 @@
     - 32
 - name: web-services--cluster
   friendly_name: Web services cluster
-  aliases: 
+  aliases:
     - diamonds
     - hexagon
     - web services
@@ -22554,7 +22550,7 @@
     - 32
 - name: web-services--container
   friendly_name: Web services container
-  aliases: 
+  aliases:
     - hexagon
     - web services
     - container
@@ -22563,7 +22559,7 @@
     - 32
 - name: web-services--definition
   friendly_name: Web services definition
-  aliases: 
+  aliases:
     - definition
     - hexagon
     - web services
@@ -22581,7 +22577,7 @@
     - 32
 - name: web-services--task
   friendly_name: Web services task
-  aliases: 
+  aliases:
     - document
     - hexagon
     - web services
@@ -22591,7 +22587,7 @@
     - 32
 - name: web-services--task-definition-version
   friendly_name: Web services task definition version
-  aliases: 
+  aliases:
     - definition
     - hexagon
     - web services
