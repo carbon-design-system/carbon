@@ -152,6 +152,11 @@ export {
 } from './components/Pagination/experimental';
 export * from './components/Popover';
 export * from './components/ProgressBar';
+export {
+  Slug as unstable__Slug,
+  SlugContent as unstable__SlugContent,
+  SlugActions as unstable__SlugActions,
+} from './components/Slug';
 export * from './components/Stack';
 export * from './components/Tooltip';
 export {

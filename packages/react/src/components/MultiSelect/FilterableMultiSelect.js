@@ -60,6 +60,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
     useTitleInItem,
     warn,
     warnText,
+    slug,
   },
   ref
 ) {
@@ -100,6 +101,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
       [`${prefix}--list-box--up`]: direction === 'top',
       [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
       [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
+      [`${prefix}--list-box__wrapper--slug`]: slug,
     }
   );
   const helperId = !helperText
@@ -205,6 +207,14 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
     if (textInput.current) {
       textInput.current.focus();
     }
+  }
+
+  // Slug is always size `mini`
+  let normalizedSlug;
+  if (slug) {
+    normalizedSlug = React.cloneElement(slug, {
+      size: 'mini',
+    });
   }
 
   return (
@@ -448,6 +458,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                       translateWithId={translateWithId}
                     />
                   </div>
+                  {normalizedSlug}
                   {isOpen ? (
                     <ListBox.Menu {...menuProps}>
                       {sortItems(
@@ -656,6 +667,11 @@ FilterableMultiSelect.propTypes = {
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
    */
   size: ListBoxPropTypes.ListBoxSize,
+
+  /**
+   * Provide a `Slug` component to be rendered inside the `FilterableMultiSelect` component
+   */
+  slug: PropTypes.node,
 
   ...sortingPropTypes,
 

@@ -141,6 +141,37 @@
   aliases:
     - AI trust
     - trust
+- name: ai-governance--lifecycle-factsheet
+  friendly_name: AI governance lifecycle factsheet
+  aliases:
+    - governance
+    - model
+    - factsheet
+    - artificial intelligence
+- name: ai-governance--model
+  friendly_name: AI governance model
+  aliases:
+    - governance
+    - model
+    - artificial intelligence
+- name: ai-governance--model-tuned
+  friendly_name: AI governance model tuned
+  aliases:
+    - governance
+    - model
+    - tuned
+    - modified
+    - changed
+    - edited
+    - artificial intelligence
+- name: ai-governance--prompt
+  friendly_name: AI governance prompt
+  aliases:
+    - governance
+    - prompt
+    - code
+    - snippet
+    - artificial intelligence
 - name: air--conditioner
   friendly_name: Air conditioner
   aliases:
@@ -841,6 +872,45 @@
     - government
     - municipal
     - legislature
+- name: carbon
+  friendly_name: Carbon
+  aliases:
+    - product
+    - web
+    - software
+    - digital
+    - carbon
+    - carbon logo
+    - pictogram
+    - icon
+    - components
+    - patterns
+    - code
+    - ui
+    - interface
+    - system
+    - design system
+    - library
+    - reusable
+    - component library
+    - react
+    - vue
+    - angular
+    - web components
+- name: carbon--for-cloud
+  friendly_name: Carbon for cloud
+  aliases:
+    - cloud
+    - PAL
+    - cloud PAL
+    - component asset library
+    - carbon
+    - kit
+    - development
+    - pattern asset library
+    - product
+    - product design
+    - software design
 - name: carbon--for-ibm-dotcom
   friendly_name: Carbon for IBM dotcom
   aliases:
@@ -863,6 +933,13 @@
     - product
     - product design
     - software design
+- name: cardboard
+  friendly_name: Cardboard
+  aliases:
+    - cardboard
+    - box
+    - recycle
+    - recyclable
 - name: care
   friendly_name: Care
   aliases:
@@ -2979,6 +3056,12 @@
   aliases:
     - flexibility
     - cloud
+- name: flexible
+  friendly_name: Flexible
+  aliases:
+    - flexible
+    - pliable
+    - moldable
 - name: flexible--compute
   friendly_name: Flexible compute
   aliases:
@@ -3048,6 +3131,12 @@
     - forklift
     - machinery
     - warehouse
+- name: fountain--drinking
+  friendly_name: Drinking fountain
+  aliases:
+    - water
+    - potable water
+    - hydration
 - name: fragile
   friendly_name: Fragile
   aliases:
@@ -4070,6 +4159,13 @@
   aliases:
     - leader
     - Cloud
+- name: library
+  friendly_name: Library
+  aliases:
+    - literature
+    - book
+    - read
+    - research
 - name: lift-and-shift
   friendly_name: Lift and shift
   aliases:
@@ -4102,6 +4198,15 @@
     - list
     - checkbox
     - cloud
+- name: literature
+  friendly_name: Literature
+  aliases:
+    - literature
+    - book
+    - document
+    - manual
+    - read
+    - library
 - name: load-balancer
   friendly_name: Load balancer
   aliases:
@@ -4153,6 +4258,15 @@
     - big ben
     - cities
     - city
+- name: loop--hearing
+  friendly_name: Hearing loop
+  aliases:
+    - assistive listening device
+    - hearing
+    - ear
+    - listen
+    - ADA
+    - deaf
 - name: love
   friendly_name: Love
   aliases:
@@ -5852,6 +5966,13 @@
   aliases:
     - save time
     - Cloud
+- name: scalable
+  friendly_name: Scalable
+  aliases:
+    - expandable
+    - expansible
+    - modular
+    - adaptable
 - name: scale
   friendly_name: Scale
   aliases:
@@ -6121,6 +6242,12 @@
     - plumbing
     - workplace
     - support
+- name: silence
+  friendly_name: Silence
+  aliases:
+    - sound
+    - quiet area
+    - mouth
 - name: singapore
   friendly_name: Singapore
   aliases:
@@ -6339,6 +6466,14 @@
   aliases:
     - start-ups
     - cloud
+- name: station--hydration
+  friendly_name: Hydration station
+  aliases:
+    - drinking fountain
+    - water
+    - hydration
+    - bottle refill
+    - water fountain
 - name: stationary--bicycle
   friendly_name: Stationary bicycle
   aliases:
@@ -6404,6 +6539,20 @@
     - servers
     - infrastructure
     - it infrastructure
+- name: storage--for-data-and-ai
+  friendly_name: Storage for data and AI
+  aliases:
+    - AI
+    - data
+    - resilience
+    - protection
+- name: storage--for-resiliency
+  friendly_name: Storage for resiliency
+  aliases:
+    - AI
+    - data
+    - resilience
+    - protection
 - name: storage--product
   friendly_name: Storage product
   aliases:
@@ -7081,6 +7230,21 @@
     - garbage
     - dustbin
     - workplace
+- name: trash--burnable
+  friendly_name: Burnable trash
+  aliases:
+    - burnable
+    - flammable
+    - fire
+    - flame
+    - hot
+    - trash
+- name: trash--non-burnable
+  friendly_name: Non-burnable trash
+  aliases:
+    - non-burnable
+    - non-flammable
+    - trash
 - name: tree
   friendly_name: Tree
   aliases:
@@ -7488,6 +7652,12 @@
     - monument
     - cities
     - city
+- name: waste--electronic
+  friendly_name: Electronic waste
+  aliases:
+    - electronic waste
+    - electronics
+    - e-waste
 - name: watson--logo
   friendly_name: IBM Watson
   aliases:
@@ -7708,7 +7878,7 @@
     - health
     - active
     - workplace
-    - community 
+    - community
     - wellness
 - name: yoga--03
   friendly_name: Yoga 03

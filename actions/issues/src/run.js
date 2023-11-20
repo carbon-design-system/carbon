@@ -22,7 +22,7 @@ async function run() {
   const token = core.getInput('GITHUB_TOKEN', {
     required: true,
   });
-  const octokit = new github.GitHub(token);
+  const octokit = new github.getOctokit(token);
   const { issue } = context.payload;
 
   if (issue.pull_request) {

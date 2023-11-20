@@ -11,11 +11,12 @@ import React from 'react';
 import Loading from '../Loading';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
-
 export type FilenameStatus = 'edit' | 'complete' | 'uploading';
 
+type SVGAttr = React.SVGAttributes<React.ReactSVGElement>;
+
 export interface FilenameProps
-  extends Omit<ReactAttr<HTMLElement>, 'tabIndex'> {
+  extends Omit<ReactAttr & SVGAttr, 'tabIndex' | 'type'> {
   /**
    * Specify an id that describes the error to be read by screen readers when the filename is invalid
    */
@@ -88,7 +89,7 @@ function Filename({
           aria-label={iconDescription}
           className={`${prefix}--file-complete`}
           {...rest}
-          tabIndex={null}>
+          tabIndex={-1}>
           {iconDescription && <title>{iconDescription}</title>}
         </CheckmarkFilled>
       );
