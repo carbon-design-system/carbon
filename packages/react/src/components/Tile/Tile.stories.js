@@ -25,7 +25,13 @@ import {
 import TileGroup from '../TileGroup/TileGroup';
 import { IconButton } from '../IconButton';
 import { Slug, SlugContent, SlugActions } from '../Slug';
-import { Download, View, FolderOpen, Folders } from '@carbon/icons-react';
+import {
+  Download,
+  View,
+  FolderOpen,
+  Folders,
+  ArrowRight,
+} from '@carbon/icons-react';
 
 export default {
   title: 'Components/Tile',
@@ -110,6 +116,27 @@ export const SlugTest = () => {
           </div>
         </div>
       </Tile>
+      <ClickableTile
+        href="https://www.carbondesignsystem.com/"
+        slug
+        id="tile-click"
+        renderIcon={ArrowRight}>
+        <h4>Title</h4>
+        <p>
+          Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit at
+          consectetur turpis mauris gravida penatibus.
+        </p>
+        <div className="ai-data">
+          <div className="data-container">
+            <p>Data Quality</p>
+            <h3>85%</h3>
+          </div>
+          <div className="data-container">
+            <p>Label text</p>
+            <h3>16%</h3>
+          </div>
+        </div>
+      </ClickableTile>
       <SelectableTile
         id="selectable-tile-1"
         name="tiles"

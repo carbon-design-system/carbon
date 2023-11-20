@@ -137,6 +137,11 @@ export interface ClickableTileProps extends HTMLAttributes<HTMLAnchorElement> {
    * The rel property for the link.
    */
   rel?: string;
+
+  /**
+   * Specify if a `Slug` icon should be rendered inside the `ClickableTile`
+   */
+  slug?: boolean;
 }
 
 export const ClickableTile = React.forwardRef<
@@ -153,6 +158,7 @@ export const ClickableTile = React.forwardRef<
     onClick = () => {},
     onKeyDown = () => {},
     renderIcon: Icon,
+    slug,
     ...rest
   },
   ref
@@ -164,6 +170,7 @@ export const ClickableTile = React.forwardRef<
     {
       [`${prefix}--tile--is-clicked`]: clicked,
       [`${prefix}--tile--light`]: light,
+      [`${prefix}--tile--slug`]: slug,
     },
     className
   );
@@ -183,6 +190,24 @@ export const ClickableTile = React.forwardRef<
     }
     onKeyDown(evt);
   }
+
+  // To Do: Replace with an an icon from `@carbon/react`
+  // since the hollow slug in `ClickableTile` is not interactive
+  const hollowSlugIcon = (
+    <svg
+      className={`${prefix}--tile--slug-icon`}
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <rect x="0.5" y="0.5" width="23" height="23" />
+      <path
+        d="M13.2436 16H11.5996L10.9276 13.864H7.95164L7.29164 16H5.68364L8.49164 7.624H10.4596L13.2436 16ZM10.5436 12.508L9.46364 9.064H9.40364L8.33564 12.508H10.5436ZM17.9341 16H14.1301V14.728H15.2341V8.896H14.1301V7.624H17.9341V8.896H16.8181V14.728H17.9341V16Z"
+        fill="#161616"
+      />
+    </svg>
+  );
 
   const v12DefaultIcons = useFeatureFlag('enable-v12-tile-default-icons');
   if (v12DefaultIcons) {
@@ -211,7 +236,12 @@ export const ClickableTile = React.forwardRef<
       ref={ref}
       disabled={disabled}
       {...rest}>
-      {children}
+      {slug ? (
+        <div className={`${prefix}--tile-content`}>{children}</div>
+      ) : (
+        children
+      )}
+      {slug && hollowSlugIcon}
       {Icon && <Icon className={iconClasses} aria-hidden="true" />}
     </Link>
   );
