@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
+import PropTypes, { ReactNodeLike } from 'prop-types';
 import React, {
   ChangeEventHandler,
   ComponentPropsWithRef,
@@ -120,6 +120,11 @@ interface SelectProps
   size?: 'sm' | 'md' | 'lg';
 
   /**
+   * Provide a `Slug` component to be rendered inside the `Dropdown` component
+   */
+  slug?: ReactNodeLike;
+
+  /**
    * Specify whether the control is currently in warning state
    */
   warn?: boolean;
@@ -151,6 +156,7 @@ const Select = React.forwardRef(function Select(
     warn = false,
     warnText,
     onChange,
+    slug,
     ...other
   }: SelectProps,
   ref: ForwardedRef<HTMLSelectElement>
@@ -171,6 +177,7 @@ const Select = React.forwardRef(function Select(
     [`${prefix}--select--warning`]: warn,
     [`${prefix}--select--fluid--invalid`]: isFluid && invalid,
     [`${prefix}--select--fluid--focus`]: isFluid && isFocused,
+    [`${prefix}--select--slug`]: slug,
   });
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
@@ -241,6 +248,14 @@ const Select = React.forwardRef(function Select(
     },
   };
 
+  // Slug is always size `mini`
+  let normalizedSlug;
+  if (slug) {
+    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+      size: 'mini',
+    });
+  }
+
   const input = (() => {
     return (
       <>
@@ -295,6 +310,7 @@ const Select = React.forwardRef(function Select(
             onFocus={handleFocus}
             onBlur={handleFocus}>
             {input}
+            {normalizedSlug}
             {isFluid && <hr className={`${prefix}--select__divider`} />}
             {isFluid && error ? error : null}
           </div>
@@ -395,6 +411,11 @@ Select.propTypes = {
    * Specify the size of the Select Input.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * Provide a `Slug` component to be rendered inside the `Select` component
+   */
+  slug: PropTypes.node,
 
   /**
    * Specify whether the control is currently in warning state

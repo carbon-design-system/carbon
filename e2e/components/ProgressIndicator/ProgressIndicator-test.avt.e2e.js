@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('ProgressIndicator @avt', () => {
+test.describe('ProgressIndicator', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ProgressIndicator',
@@ -22,9 +22,7 @@ test.describe('ProgressIndicator @avt', () => {
     await expect(page).toHaveNoACViolations('ProgressIndicator');
   });
 
-  test('@avt-advanced-states interactive progressindicator', async ({
-    page,
-  }) => {
+  test('@avt-advanced-states interactive', async ({ page }) => {
     await visitStory(page, {
       component: 'ProgressIndicator',
       id: 'components-progressindicator--interactive',
@@ -35,7 +33,7 @@ test.describe('ProgressIndicator @avt', () => {
     await expect(page).toHaveNoACViolations('ProgressIndicator-interactive');
   });
 
-  test('@avt-advanced-states skeleton progressindicator', async ({ page }) => {
+  test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'ProgressIndicator',
       id: 'components-progressindicator--skeleton',
@@ -46,7 +44,7 @@ test.describe('ProgressIndicator @avt', () => {
     await expect(page).toHaveNoACViolations('ProgressIndicator-skeleton');
   });
 
-  test('@avt-advanced-states onHover', async ({ page }) => {
+  test('@avt-advanced-states - onHover', async ({ page }) => {
     await visitStory(page, {
       component: 'ProgressIndicator',
       id: 'components-progressindicator--default',
@@ -62,7 +60,7 @@ test.describe('ProgressIndicator @avt', () => {
     await expect(page).toHaveNoACViolations('ProgressIndicator-onhover');
   });
 
-  test('@avt-advanced-states complete', async ({ page }) => {
+  test('@avt-advanced-states - complete', async ({ page }) => {
     await visitStory(page, {
       component: 'ProgressIndicator',
       id: 'components-progressindicator--default',
@@ -75,7 +73,7 @@ test.describe('ProgressIndicator @avt', () => {
     expect(page.locator('.cds--progress-step--complete')).toBeTruthy();
   });
 
-  test('@avt-advanced-states current', async ({ page }) => {
+  test('@avt-advanced-states', async ({ page }) => {
     await visitStory(page, {
       component: 'ProgressIndicator',
       id: 'components-progressindicator--default',
@@ -88,7 +86,7 @@ test.describe('ProgressIndicator @avt', () => {
     expect(page.locator('.cds--progress-step--current')).toBeTruthy();
   });
 
-  test('@avt-advanced-states interactive onHover', async ({ page }) => {
+  test('@avt-advanced-states - interactive onHover', async ({ page }) => {
     await visitStory(page, {
       component: 'ProgressIndicator',
       id: 'components-progressindicator--interactive',
@@ -106,7 +104,7 @@ test.describe('ProgressIndicator @avt', () => {
     );
   });
 
-  test('@avt-keyboard-nav', async ({ page }) => {
+  test('@avt-keyboard-nav progress indicator', async ({ page }) => {
     await visitStory(page, {
       component: 'ProgressIndicator',
       id: 'components-progressindicator--interactive',
