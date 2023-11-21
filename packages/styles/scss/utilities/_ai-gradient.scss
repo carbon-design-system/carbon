@@ -12,10 +12,10 @@
 /// @access public
 /// @param {String} $direction  - Direction of gradient from: `left`, `right`, `top`, and `bottom`
 /// @param {Number} $width - Percentage width of gradient with regards to parent component
-/// @example @include focus-outline('outline');
+/// @example @include ai-gradient('right', '33%');
 /// @group utilities
 
-@mixin ai-gradient($direction: 'right', $width: 50%) {
+@mixin ai-gradient($direction: 'right', $width: 33%) {
   $deg: 0;
   @if $direction == 'bottom' {
     $deg: 0deg;

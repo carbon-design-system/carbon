@@ -12,6 +12,7 @@
 @use '../../config' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
+@use '../../utilities/ai-gradient' as *;
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 
@@ -215,5 +216,10 @@
     .#{$prefix}--text-area.#{$prefix}--skeleton {
     block-size: 4rem;
     inline-size: 80%;
+  }
+
+  // Slug styles
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area__wrapper--slug {
+    @include ai-gradient;
   }
 }

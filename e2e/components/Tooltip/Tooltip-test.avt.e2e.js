@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('Tooltip @avt', () => {
-  test('accessibility-checker - tooltip default', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Tooltip',
       id: 'components-tooltip--default',
@@ -22,7 +22,7 @@ test.describe('Tooltip @avt', () => {
     await expect(page).toHaveNoACViolations('Tooltip');
   });
 
-  test('accessibility-checker - tooltip alignment', async ({ page }) => {
+  test('@avt-advanced-states - tooltip alignment', async ({ page }) => {
     await visitStory(page, {
       component: 'Tooltip',
       id: 'components-tooltip--alignment',
@@ -33,7 +33,7 @@ test.describe('Tooltip @avt', () => {
     await expect(page).toHaveNoACViolations('Tooltip - alignment');
   });
 
-  test('accessibility-checker - tooltip duration', async ({ page }) => {
+  test('@avt-advanced-states - tooltip duration', async ({ page }) => {
     await visitStory(page, {
       component: 'Tooltip',
       id: 'components-tooltip--duration',
@@ -45,7 +45,7 @@ test.describe('Tooltip @avt', () => {
   });
 
   // Prevent timeout
-  test.slow('tooltip default - keyboard nav', async ({ page }) => {
+  test.slow('tooltip default - @avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'Tooltip',
       id: 'components-tooltip--default',
