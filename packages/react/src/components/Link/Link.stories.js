@@ -37,7 +37,11 @@ export default {
   },
 };
 
-export const Default = () => <Link href="#">Link</Link>;
+export const Default = () => (
+  <Link href="#" as="button">
+    Link
+  </Link>
+);
 
 export const Inline = () => (
   <>
