@@ -36,4 +36,15 @@ test.describe('Slug @avt', () => {
     await page.keyboard.press('Enter');
     await expect(page).toHaveNoACViolations('Slug-open');
   });
+
+  test('@avt-advanced-states ai form', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Slug',
+      id: 'components-form--ai-form',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('Slug-form');
+  });
 });
