@@ -89,6 +89,7 @@ export const SlugTest = () => {
 
   return (
     <RadioButtonGroup
+      orientation="vertical"
       legendText="Group label"
       name="radio-button-group"
       defaultSelected="radio-1"
@@ -97,6 +98,7 @@ export const SlugTest = () => {
         labelText="Radio button label"
         value="radio-1"
         id="radio-1"
+        slug={slug}
       />
       <RadioButton
         labelText="Radio button label"
@@ -107,7 +109,6 @@ export const SlugTest = () => {
         labelText="Radio button label"
         value="radio-3"
         id="radio-3"
-        disabled
       />
     </RadioButtonGroup>
   );

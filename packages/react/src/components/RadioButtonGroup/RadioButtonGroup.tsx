@@ -219,6 +219,7 @@ const RadioButtonGroup = React.forwardRef(
     if (slug) {
       normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
         size: 'mini',
+        kind: 'default',
       });
     }
 
