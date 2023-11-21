@@ -280,4 +280,15 @@ $radio-border-width: 1px !default;
     margin-inline-end: 0;
     margin-inline-start: $spacing-03;
   }
+
+  // Slug styles
+  .#{$prefix}--radio-button-group--slug legend.#{$prefix}--label {
+    display: flex;
+  }
+
+  .#{$prefix}--radio-button-group--slug
+    legend.#{$prefix}--label
+    .#{$prefix}--slug {
+    margin-inline-start: $spacing-03;
+  }
 }

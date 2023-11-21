@@ -10,6 +10,10 @@ import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButtonSkeleton from './RadioButton.Skeleton';
 import React from 'react';
 import mdx from './RadioButton.mdx';
+import { View, FolderOpen, Folders } from '@carbon/icons-react';
+import { Slug, SlugContent, SlugActions } from '../Slug';
+import { IconButton } from '../IconButton';
+import { Button } from '../Button';
 
 export default {
   title: 'Components/RadioButton',
@@ -31,6 +35,64 @@ export const Default = () => {
       legendText="Group label"
       name="radio-button-group"
       defaultSelected="radio-1">
+      <RadioButton
+        labelText="Radio button label"
+        value="radio-1"
+        id="radio-1"
+      />
+      <RadioButton
+        labelText="Radio button label"
+        value="radio-2"
+        id="radio-2"
+      />
+      <RadioButton
+        labelText="Radio button label"
+        value="radio-3"
+        id="radio-3"
+        disabled
+      />
+    </RadioButtonGroup>
+  );
+};
+
+export const SlugTest = () => {
+  const slug = (
+    <Slug className="slug-container">
+      <SlugContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h1>84%</h1>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+        <SlugActions>
+          <IconButton kind="ghost" label="View">
+            <View />
+          </IconButton>
+          <IconButton kind="ghost" label="Open Folder">
+            <FolderOpen />
+          </IconButton>
+          <IconButton kind="ghost" label="Folders">
+            <Folders />
+          </IconButton>
+          <Button>View literature</Button>
+        </SlugActions>
+      </SlugContent>
+    </Slug>
+  );
+
+  return (
+    <RadioButtonGroup
+      legendText="Group label"
+      name="radio-button-group"
+      defaultSelected="radio-1"
+      slug={slug}>
       <RadioButton
         labelText="Radio button label"
         value="radio-1"
