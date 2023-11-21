@@ -17,7 +17,7 @@ import React, {
 import { usePrefix } from '../../internal/usePrefix';
 
 export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  as?: string | undefined;
+  as?: string;
 
   /**
    * @description Indicates the element that represents the
