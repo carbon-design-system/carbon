@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('Notifications @avt', () => {
-  test('accessibility-checker Notifications actionable', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Notifications',
       id: 'components-notifications-actionable--default',
@@ -51,9 +51,7 @@ test.describe('Notifications @avt', () => {
     );
   });
 
-  test('accessibility-checker Notifications actionable low contrast', async ({
-    page,
-  }) => {
+  test('@avt-advanced-states actionable low contrast', async ({ page }) => {
     await visitStory(page, {
       component: 'Notifications',
       id: 'components-notifications-actionable--default',
@@ -69,9 +67,7 @@ test.describe('Notifications @avt', () => {
     );
   });
 
-  test('accessibility-checker Notifications actionable info', async ({
-    page,
-  }) => {
+  test('@avt-advanced-states actionable info', async ({ page }) => {
     await visitStory(page, {
       component: 'Notifications',
       id: 'components-notifications-actionable--playground',
@@ -85,9 +81,7 @@ test.describe('Notifications @avt', () => {
     await expect(page).toHaveNoACViolations('Notifications actionable info');
   });
 
-  test('accessibility-checker Notifications actionable info-square', async ({
-    page,
-  }) => {
+  test('@avt-advanced-states actionable info-square', async ({ page }) => {
     await visitStory(page, {
       component: 'Notifications',
       id: 'components-notifications-actionable--playground',
@@ -103,9 +97,7 @@ test.describe('Notifications @avt', () => {
     );
   });
 
-  test('accessibility-checker Notifications actionable success', async ({
-    page,
-  }) => {
+  test('@avt-advanced-states actionable success', async ({ page }) => {
     await visitStory(page, {
       component: 'Notifications',
       id: 'components-notifications-actionable--playground',
@@ -119,9 +111,7 @@ test.describe('Notifications @avt', () => {
     await expect(page).toHaveNoACViolations('Notifications actionable success');
   });
 
-  test('accessibility-checker Notifications actionable warning', async ({
-    page,
-  }) => {
+  test('@avt-advanced-states actionable warning', async ({ page }) => {
     await visitStory(page, {
       component: 'Notifications',
       id: 'components-notifications-actionable--playground',
@@ -135,9 +125,7 @@ test.describe('Notifications @avt', () => {
     await expect(page).toHaveNoACViolations('Notifications actionable warning');
   });
 
-  test('accessibility-checker Notifications actionable warning-alt', async ({
-    page,
-  }) => {
+  test('@avt-advanced-states actionable warning-alt', async ({ page }) => {
     await visitStory(page, {
       component: 'Notifications',
       id: 'components-notifications-actionable--playground',
@@ -153,7 +141,7 @@ test.describe('Notifications @avt', () => {
     );
   });
 
-  test('accessibility-checker Notifications actionable info low contrast', async ({
+  test('@avt-advanced-states actionable info low contrast', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -172,7 +160,7 @@ test.describe('Notifications @avt', () => {
     );
   });
 
-  test('accessibility-checker Notifications actionable info-squar low contraste', async ({
+  test('@avt-advanced-states actionable info-square low contrast', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -191,7 +179,7 @@ test.describe('Notifications @avt', () => {
     );
   });
 
-  test('accessibility-checker Notifications actionable success low contrast', async ({
+  test('@avt-advanced-states actionable success low contrast', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -210,7 +198,7 @@ test.describe('Notifications @avt', () => {
     );
   });
 
-  test('accessibility-checker Notifications actionable warning low contrast', async ({
+  test('@avt-advanced-states actionable warning low contrast', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -229,7 +217,7 @@ test.describe('Notifications @avt', () => {
     );
   });
 
-  test('accessibility-checker Notifications actionable warning-alt low contrast', async ({
+  test('@avt-advanced-states actionable warning-alt low contrast', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -248,7 +236,7 @@ test.describe('Notifications @avt', () => {
     );
   });
 
-  test('accessibility-checker Notifications inline', async ({ page }) => {
+  test('@avt-advanced-states inline', async ({ page }) => {
     await visitStory(page, {
       component: 'Notifications',
       id: 'components-notifications-inline--default',
@@ -259,7 +247,7 @@ test.describe('Notifications @avt', () => {
     await expect(page).toHaveNoACViolations('Notifications inline');
   });
 
-  test('accessibility-checker Notifications toast', async ({ page }) => {
+  test('@avt-advanced-states toast', async ({ page }) => {
     await visitStory(page, {
       component: 'Notifications',
       id: 'components-notifications-toast--default',

@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('Pagination @avt', () => {
-  test('accessibility-checker default', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Pagination',
       id: 'components-pagination--default',
@@ -22,7 +22,7 @@ test.describe('Pagination @avt', () => {
     await expect(page).toHaveNoACViolations('components-pagination--default');
   });
 
-  test('accessibility-checker multiple-pagination-components', async ({
+  test('@avt-advanced-states multiple-pagination-components', async ({
     page,
   }) => {
     await visitStory(page, {
@@ -37,7 +37,7 @@ test.describe('Pagination @avt', () => {
     );
   });
 
-  test('pagination - keyboard nav', async ({ page }) => {
+  test('@avt-keyboard-nav - pagination', async ({ page }) => {
     await visitStory(page, {
       component: 'Pagination',
       id: 'components-pagination--default',

@@ -15,6 +15,7 @@
 @use '../../type' as *;
 @use '../../spacing' as *;
 @use '../../motion' as *;
+@use '../../utilities/ai-gradient' as *;
 @use '../../utilities/component-reset';
 @use '../../utilities/placeholder-colors' as *;
 @use '../../utilities/tooltip' as *;
@@ -412,6 +413,30 @@
   .#{$prefix}--text-input-wrapper--readonly .#{$prefix}--text-input {
     background: transparent;
     border-block-end-color: $border-subtle;
+  }
+
+  // Styles for Slug rendered inside TextInput
+  .#{$prefix}--text-input__field-wrapper .#{$prefix}--slug {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: $spacing-05;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--text-input__field-wrapper--slug .#{$prefix}--text-input {
+    @include ai-gradient;
+
+    padding-inline-end: $spacing-08;
+  }
+
+  .#{$prefix}--text-input--invalid:has(~ .#{$prefix}--slug),
+  .#{$prefix}--text-input--warning:has(~ .#{$prefix}--slug) {
+    padding-inline-end: $spacing-10;
+  }
+
+  .#{$prefix}--text-input--invalid ~ .#{$prefix}--slug,
+  .#{$prefix}--text-input--warning ~ .#{$prefix}--slug {
+    inset-inline-end: $spacing-08;
   }
 
   // Windows HCM fix
