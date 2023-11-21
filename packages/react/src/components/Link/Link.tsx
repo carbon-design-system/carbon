@@ -17,6 +17,10 @@ import React, {
 import { usePrefix } from '../../internal/usePrefix';
 
 export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+  /**
+   * Provide a custom element or component to render the top-level node for the
+   * component.
+   */
   as?: string | undefined;
 
   /**
@@ -127,6 +131,12 @@ const Link = React.forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
 Link.displayName = 'Link';
 
 Link.propTypes = {
+  /**
+   * Provide a custom element or component to render the top-level node for the
+   * component.
+   */
+  as: PropTypes.string,
+
   /**
    * Provide the content for the Link
    */
