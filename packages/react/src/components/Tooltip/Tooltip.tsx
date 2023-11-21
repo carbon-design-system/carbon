@@ -118,6 +118,7 @@ function Tooltip<T extends React.ElementType>({
     onMouseEnter,
     onMouseLeave,
     onMouseDown: onDragStart,
+    onMouseMove: onMouseMove,
     onTouchStart: onDragStart,
   };
 
@@ -171,6 +172,14 @@ function Tooltip<T extends React.ElementType>({
       return;
     }
     setOpen(false, leaveDelayMs);
+  }
+
+  function onMouseMove(evt) {
+    if (evt.buttons === 1) {
+      setIsDragging(true);
+    } else {
+      setIsDragging(false);
+    }
   }
 
   function onDragStart() {

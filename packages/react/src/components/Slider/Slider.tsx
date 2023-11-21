@@ -668,6 +668,12 @@ class Slider extends PureComponent<SliderProps> {
       return;
     }
 
+    // We're going to force focus on one of the handles later on here, b/c we're
+    // firing on a mousedown event, we need to call event.preventDefault() to
+    // keep the focus from leaving the HTMLElement.
+    // @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus#notes
+    evt.preventDefault();
+
     // Register drag stop handlers
     DRAG_STOP_EVENT_TYPES.forEach((element) => {
       this.element?.ownerDocument.addEventListener(element, this.onDragStop);
@@ -695,6 +701,25 @@ class Slider extends PureComponent<SliderProps> {
       } else {
         activeHandle = HandlePosition.UPPER;
       }
+    }
+
+    // Force focus to the appropriate handle.
+    if (this.hasTwoHandles()) {
+      if (this.thumbRef.current && activeHandle === HandlePosition.LOWER) {
+        this.thumbRef.current.focus();
+      } else if (
+        this.thumbRefUpper.current &&
+        activeHandle === HandlePosition.UPPER
+      ) {
+        this.thumbRefUpper.current.focus({
+          preventScroll: true,
+        });
+      }
+    } else if (this.thumbRef.current) {
+      this.thumbRef.current.focus({
+        preventScroll: true,
+      });
+      evt.preventDefault();
     }
     this.setState({ activeHandle });
 
