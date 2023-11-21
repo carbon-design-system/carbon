@@ -6193,6 +6193,9 @@ Map {
       "onClick": Object {
         "type": "func",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "value": Object {
         "args": Array [
           Array [
@@ -6273,6 +6276,9 @@ Map {
       },
       "readOnly": Object {
         "type": "bool",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "valueSelected": Object {
         "args": Array [
