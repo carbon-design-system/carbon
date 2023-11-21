@@ -17,7 +17,7 @@ import React, {
 import { usePrefix } from '../../internal/usePrefix';
 
 export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  as?: string;
+  as?: string | undefined;
 
   /**
    * @description Indicates the element that represents the
@@ -95,7 +95,7 @@ const Link = React.forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
     });
     const rel = target === '_blank' ? 'noopener' : undefined;
     const linkProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
-      className: BaseComponent ? '' : className,
+      className: BaseComponent ? undefined : className,
       rel,
       target,
     };
