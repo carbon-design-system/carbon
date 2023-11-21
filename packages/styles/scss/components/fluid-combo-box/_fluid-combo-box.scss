@@ -30,7 +30,8 @@
     .#{$prefix}--combo-box
     .#{$prefix}--text-input {
     overflow: hidden;
-    padding: convert.to-rem(33px) $spacing-10 convert.to-rem(13px) $spacing-05;
+    padding-block: convert.to-rem(33px) convert.to-rem(13px);
+    padding-inline: $spacing-05 $spacing-10;
     text-overflow: ellipsis;
     transition: none;
     white-space: nowrap;
