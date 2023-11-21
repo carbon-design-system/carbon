@@ -418,17 +418,20 @@
   }
 
   .#{$prefix}--slider-container.#{$prefix}--skeleton {
+    .#{$prefix}--slider__thumb-wrapper {
+      inset-inline-start: 50%;
+    }
+
     .#{$prefix}--slider__thumb {
       cursor: default;
-      inset-inline-start: 50%;
       pointer-events: none;
     }
 
-    .#{$prefix}--slider__thumb--lower {
+    .#{$prefix}--slider__thumb-wrapper--lower {
       inset-inline-start: 0;
     }
 
-    .#{$prefix}--slider__thumb--upper {
+    .#{$prefix}--slider__thumb-wrapper--upper {
       inset-inline-start: 100%;
     }
   }

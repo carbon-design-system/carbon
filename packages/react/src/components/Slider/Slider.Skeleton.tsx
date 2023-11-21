@@ -10,6 +10,7 @@ import React, { HTMLAttributes } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import classNames from 'classnames';
+import { LowerHandle, UpperHandle } from './SliderHandles';
 
 export interface SliderSkeletonProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -48,6 +49,18 @@ const SliderSkeleton = ({
   const upperThumbClasses = classNames(`${prefix}--slider__thumb`, {
     [`${prefix}--slider__thumb--upper`]: twoHandles,
   });
+  const lowerThumbWrapperClasses = classNames(
+    `${prefix}--slider__thumb-wrapper`,
+    {
+      [`${prefix}--slider__thumb-wrapper--lower`]: twoHandles,
+    }
+  );
+  const upperThumbWrapperClasses = classNames(
+    `${prefix}--slider__thumb-wrapper`,
+    {
+      [`${prefix}--slider__thumb-wrapper--upper`]: twoHandles,
+    }
+  );
   return (
     <div className={cx(`${prefix}--form-item`, className)} {...rest}>
       {!hideLabel && (
@@ -58,8 +71,18 @@ const SliderSkeleton = ({
         <div className={`${prefix}--slider`}>
           <div className={`${prefix}--slider__track`} />
           <div className={`${prefix}--slider__filled-track`} />
-          <div className={lowerThumbClasses} />
-          {twoHandles ? <div className={upperThumbClasses} /> : undefined}
+          <div className={lowerThumbWrapperClasses}>
+            <div className={lowerThumbClasses}>
+              {twoHandles ? <LowerHandle /> : undefined}
+            </div>
+          </div>
+          {twoHandles ? (
+            <div className={upperThumbWrapperClasses}>
+              <div className={upperThumbClasses}>
+                {twoHandles ? <UpperHandle /> : undefined}
+              </div>
+            </div>
+          ) : undefined}
         </div>
         <span className={`${prefix}--slider__range-label`} />
       </div>
