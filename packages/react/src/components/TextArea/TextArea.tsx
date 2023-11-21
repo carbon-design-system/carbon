@@ -120,6 +120,11 @@ export interface TextAreaProps
   rows?: number;
 
   /**
+   * Provide a `Slug` component to be rendered inside the `TextArea` component
+   */
+  slug?: ReactNodeLike;
+
+  /**
    * Provide the current value of the `<textarea>`
    */
   value?: string | number;
@@ -154,6 +159,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     warn = false,
     warnText = '',
     rows = 4,
+    slug,
     ...other
   } = props;
   const prefix = usePrefix();
@@ -164,11 +170,25 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   );
   const { current: textAreaInstanceId } = useRef(getInstanceId());
 
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const ref = useMergedRefs([forwardRef, textareaRef]) as
+    | React.LegacyRef<HTMLTextAreaElement>
+    | undefined;
+
   useEffect(() => {
     setTextCount(
       defaultValue?.toString()?.length || value?.toString()?.length || 0
     );
   }, [value, defaultValue]);
+
+  useIsomorphicEffect(() => {
+    if (other.cols && textareaRef.current) {
+      textareaRef.current.style.width = '';
+      textareaRef.current.style.resize = 'none';
+    } else if (textareaRef.current) {
+      textareaRef.current.style.width = `100%`;
+    }
+  }, [other.cols]);
 
   const textareaProps: {
     id: TextAreaProps['id'];
@@ -194,14 +214,31 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     },
   };
 
-  if (enableCounter) {
-    textareaProps.maxLength = maxCount;
-  }
-  const ariaAnnouncement = useAnnouncer(textCount, maxCount);
+  const formItemClasses = classNames(`${prefix}--form-item`, className);
+
+  const textAreaWrapperClasses = classNames(`${prefix}--text-area__wrapper`, {
+    [`${prefix}--text-area__wrapper--readonly`]: other.readOnly,
+    [`${prefix}--text-area__wrapper--warn`]: warn,
+    [`${prefix}--text-area__wrapper--slug`]: slug,
+  });
 
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel && !isFluid,
     [`${prefix}--label--disabled`]: disabled,
+  });
+
+  const textareaClasses = classNames(`${prefix}--text-area`, {
+    [`${prefix}--text-area--light`]: light,
+    [`${prefix}--text-area--invalid`]: invalid,
+    [`${prefix}--text-area--warn`]: warn,
+  });
+
+  const counterClasses = classNames(`${prefix}--label`, {
+    [`${prefix}--label--disabled`]: disabled,
+  });
+
+  const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
+    [`${prefix}--form__helper-text--disabled`]: disabled,
   });
 
   const label = labelText ? (
@@ -210,20 +247,12 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     </Text>
   ) : null;
 
-  const counterClasses = classNames(`${prefix}--label`, {
-    [`${prefix}--label--disabled`]: disabled,
-  });
-
   const counter =
     enableCounter && maxCount ? (
       <Text
         as="div"
         className={counterClasses}>{`${textCount}/${maxCount}`}</Text>
     ) : null;
-
-  const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
-    [`${prefix}--form__helper-text--disabled`]: disabled,
-  });
 
   const helperId = !helperText
     ? undefined
@@ -261,33 +290,17 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     </Text>
   ) : null;
 
-  const textareaClasses = classNames(`${prefix}--text-area`, {
-    [`${prefix}--text-area--light`]: light,
-    [`${prefix}--text-area--invalid`]: invalid,
-    [`${prefix}--text-area--warn`]: warn,
-  });
-
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const ref = useMergedRefs([forwardRef, textareaRef]) as
-    | React.LegacyRef<HTMLTextAreaElement>
-    | undefined;
-
-  useIsomorphicEffect(() => {
-    if (other.cols && textareaRef.current) {
-      textareaRef.current.style.width = '';
-      textareaRef.current.style.resize = 'none';
-    } else if (textareaRef.current) {
-      textareaRef.current.style.width = `100%`;
-    }
-  }, [other.cols]);
-
   let ariaDescribedBy;
-
   if (invalid) {
     ariaDescribedBy = errorId;
   } else if (!invalid && !warn && !isFluid && helperText) {
     ariaDescribedBy = helperId;
   }
+
+  if (enableCounter) {
+    textareaProps.maxLength = maxCount;
+  }
+  const ariaAnnouncement = useAnnouncer(textCount, maxCount);
 
   const input = (
     <textarea
@@ -304,18 +317,21 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     />
   );
 
+  // Slug is always size `mini`
+  let normalizedSlug;
+  if (slug) {
+    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+      size: 'mini',
+    });
+  }
+
   return (
-    <div className={classNames(`${prefix}--form-item`, className)}>
+    <div className={formItemClasses}>
       <div className={`${prefix}--text-area__label-wrapper`}>
         {label}
         {counter}
       </div>
-      <div
-        className={classNames(`${prefix}--text-area__wrapper`, {
-          [`${prefix}--text-area__wrapper--readonly`]: other.readOnly,
-          [`${prefix}--text-area__wrapper--warn`]: warn,
-        })}
-        data-invalid={invalid || null}>
+      <div className={textAreaWrapperClasses} data-invalid={invalid || null}>
         {invalid && !isFluid && (
           <WarningFilled className={`${prefix}--text-area__invalid-icon`} />
         )}
@@ -325,6 +341,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
           />
         )}
         {input}
+        {normalizedSlug}
         <span className={`${prefix}--text-area__counter-alert`} role="alert">
           {ariaAnnouncement}
         </span>
@@ -439,6 +456,11 @@ TextArea.propTypes = {
    * Specify the rows attribute for the `<textarea>`
    */
   rows: PropTypes.number,
+
+  /**
+   * Provide a `Slug` component to be rendered inside the `TextArea` component
+   */
+  slug: PropTypes.node,
 
   /**
    * Provide the current value of the `<textarea>`

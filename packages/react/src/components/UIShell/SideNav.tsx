@@ -239,7 +239,7 @@ function SideNavRenderFunction(
         tabIndex={-1}
         ref={navRef}
         className={`${prefix}--side-nav__navigation ${className}`}
-        inert={!isRail && (expanded || isLg ? undefined : -1)}
+        inert={!isRail ? (expanded || isLg ? undefined : -1) : undefined}
         {...accessibilityLabel}
         {...eventHandlers}
         {...other}>

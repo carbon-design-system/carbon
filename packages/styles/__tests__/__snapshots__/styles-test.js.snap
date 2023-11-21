@@ -893,6 +893,11 @@ Array [
     "relativePath": "scss/type/reset",
   },
   Object {
+    "filepath": "scss/utilities/_ai-gradient.scss",
+    "importPath": "@carbon/styles/scss/utilities/ai-gradient",
+    "relativePath": "scss/utilities/ai-gradient",
+  },
+  Object {
     "filepath": "scss/utilities/_box-shadow.scss",
     "importPath": "@carbon/styles/scss/utilities/box-shadow",
     "relativePath": "scss/utilities/box-shadow",

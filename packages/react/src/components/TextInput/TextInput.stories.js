@@ -6,9 +6,7 @@
  */
 
 import React from 'react';
-
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
-
 import FluidForm from '../FluidForm';
 import { default as TextInput, TextInputSkeleton } from '../TextInput';
 

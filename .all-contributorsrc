@@ -1298,6 +1298,14 @@
       ]
     },
     {
+      "login": "Nirajsah",
+      "name": "Niraj Sah",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51414373?v=4",
+      "profile": "https://github.com/Nirajsah",
+      "contributions": [
+        "code"
+      ]
+    },
       "login": "allisonishida",
       "name": "Allison Ishida",
       "avatar_url": "https://avatars.githubusercontent.com/u/22247062?v=4",
@@ -1311,6 +1319,24 @@
       "name": "Alex Lewitt",
       "avatar_url": "https://avatars.githubusercontent.com/u/48691328?v=4",
       "profile": "https://github.com/alewitt2",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Tresau-IBM",
+      "name": "Tresau-IBM",
+      "avatar_url": "https://avatars.githubusercontent.com/u/148357638?v=4",
+      "profile": "https://github.com/Tresau-IBM",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "kuri-sun",
+      "name": "Ruki",
+      "avatar_url": "https://avatars.githubusercontent.com/u/62743644?v=4",
+      "profile": "https://haruki-kuriwada.netlify.app/",
       "contributions": [
         "code"
       ]

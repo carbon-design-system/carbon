@@ -10,8 +10,8 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('Select  @avt', () => {
-  test('accessibility-checker default', async ({ page }) => {
+test.describe('Select @avt', () => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Select',
       id: 'components-select--default',
@@ -22,7 +22,7 @@ test.describe('Select  @avt', () => {
     await expect(page).toHaveNoACViolations('components-select--default');
   });
 
-  test('accessibility-checker inline', async ({ page }) => {
+  test('@avt-advanced-states inline', async ({ page }) => {
     await visitStory(page, {
       component: 'Select',
       id: 'components-select--inline',
@@ -33,7 +33,7 @@ test.describe('Select  @avt', () => {
     await expect(page).toHaveNoACViolations('components-select--inline');
   });
 
-  test('accessibility-checker skeleton', async ({ page }) => {
+  test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'Select',
       id: 'components-select--skeleton',
@@ -44,7 +44,7 @@ test.describe('Select  @avt', () => {
     await expect(page).toHaveNoACViolations('components-select--skeleton');
   });
 
-  test('select - keyboard nav', async ({ page }) => {
+  test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'Select',
       id: 'components-select--default',

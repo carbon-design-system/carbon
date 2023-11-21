@@ -42,7 +42,7 @@ export interface FileUploaderDropContainerProps
    * Provide the label text to be read by screen readers when interacting with
    * this control
    */
-  labelText: string;
+  labelText?: string;
 
   /**
    * Specify if the component should accept multiple files to upload
