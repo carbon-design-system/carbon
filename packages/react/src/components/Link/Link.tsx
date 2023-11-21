@@ -95,6 +95,7 @@ const Link = React.forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
     });
     const rel = target === '_blank' ? 'noopener' : undefined;
     const linkProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
+      className: BaseComponent ? '' : className,
       rel,
       target,
     };
@@ -111,11 +112,7 @@ const Link = React.forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
     const BaseComponentAsAny = (BaseComponent ?? 'a') as any;
 
     return (
-      <BaseComponentAsAny
-        ref={ref}
-        {...linkProps}
-        {...rest}
-        className={BaseComponent ? '' : className}>
+      <BaseComponentAsAny ref={ref} {...linkProps} {...rest}>
         {children}
         {!inline && Icon && (
           <div className={`${prefix}--link__icon`}>
