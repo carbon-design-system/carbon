@@ -1,8 +1,23 @@
-# React + Vite
+# Getting Started with drag and drop file uploader
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+First, run `yarn build` in the root of the `carbon` repository.
 
-Currently, two official plugins are available:
+```sh
+yarn install && yarn build
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Now, all you need to do is `cd` into the directory and run:
+
+```sh
+yarn install
+# or
+npm install
+
+
+yarn start
+# or
+npm run start
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the
+result.
