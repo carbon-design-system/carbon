@@ -719,7 +719,6 @@ class Slider extends PureComponent<SliderProps> {
       this.thumbRef.current.focus({
         preventScroll: true,
       });
-      evt.preventDefault();
     }
     this.setState({ activeHandle });
 
