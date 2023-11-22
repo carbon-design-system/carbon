@@ -688,37 +688,42 @@ class Slider extends PureComponent<SliderProps> {
 
     let activeHandle;
     if (this.hasTwoHandles()) {
-      const distanceToLower = this.calcDistanceToHandle(
-        HandlePosition.LOWER,
-        clientX
-      );
-      const distanceToUpper = this.calcDistanceToHandle(
-        HandlePosition.UPPER,
-        clientX
-      );
-      if (distanceToLower <= distanceToUpper) {
+      if (evt.target == this.thumbRef.current) {
         activeHandle = HandlePosition.LOWER;
-      } else {
+      } else if (evt.target == this.thumbRefUpper.current) {
         activeHandle = HandlePosition.UPPER;
+      } else {
+        const distanceToLower = this.calcDistanceToHandle(
+          HandlePosition.LOWER,
+          clientX
+        );
+        const distanceToUpper = this.calcDistanceToHandle(
+          HandlePosition.UPPER,
+          clientX
+        );
+        if (distanceToLower <= distanceToUpper) {
+          activeHandle = HandlePosition.LOWER;
+        } else {
+          activeHandle = HandlePosition.UPPER;
+        }
       }
     }
 
     // Force focus to the appropriate handle.
+    const focusOptions = {
+      preventScroll: true,
+    };
     if (this.hasTwoHandles()) {
       if (this.thumbRef.current && activeHandle === HandlePosition.LOWER) {
-        this.thumbRef.current.focus();
+        this.thumbRef.current.focus(focusOptions);
       } else if (
         this.thumbRefUpper.current &&
         activeHandle === HandlePosition.UPPER
       ) {
-        this.thumbRefUpper.current.focus({
-          preventScroll: true,
-        });
+        this.thumbRefUpper.current.focus(focusOptions);
       }
     } else if (this.thumbRef.current) {
-      this.thumbRef.current.focus({
-        preventScroll: true,
-      });
+      this.thumbRef.current.focus(focusOptions);
     }
     this.setState({ activeHandle });
 
