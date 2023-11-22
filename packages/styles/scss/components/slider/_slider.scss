@@ -128,9 +128,23 @@
         calc(-1 * custom-property.get-var('popover-offset', 0rem))
       );
     }
+  }
 
-    .#{$prefix}--slider-container--rtl & {
-      transform: translate(100%, -50%);
+  .#{$prefix}--slider-container--rtl .#{$prefix}--slider__thumb-wrapper--lower {
+    transform: translate(100%, -50%);
+
+    > .#{$prefix}--popover > .#{$prefix}--popover-content {
+      transform: translate(
+        0,
+        calc(-100% - custom-property.get-var('popover-offset', 0rem))
+      );
+    }
+
+    > .#{$prefix}--popover > .#{$prefix}--popover-caret {
+      transform: translate(
+        -50%,
+        calc(-1 * custom-property.get-var('popover-offset', 0rem))
+      );
     }
   }
 
@@ -151,9 +165,23 @@
         calc(-1 * custom-property.get-var('popover-offset', 0rem))
       );
     }
+  }
 
-    .#{$prefix}--slider-container--rtl & {
-      transform: translate(0, -50%);
+  .#{$prefix}--slider-container--rtl .#{$prefix}--slider__thumb-wrapper--upper {
+    transform: translate(0, -50%);
+
+    > .#{$prefix}--popover > .#{$prefix}--popover-content {
+      transform: translate(
+        0,
+        calc(-100% - custom-property.get-var('popover-offset', 0rem))
+      );
+    }
+
+    > .#{$prefix}--popover > .#{$prefix}--popover-caret {
+      transform: translate(
+        50%,
+        calc(-1 * custom-property.get-var('popover-offset', 0rem))
+      );
     }
   }
 
