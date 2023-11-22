@@ -36,11 +36,13 @@ const SliderSkeleton = ({
   ...rest
 }: SliderSkeletonProps) => {
   const prefix = usePrefix();
+  const isRtl = document?.dir === 'rtl';
   const containerClasses = classNames(
     `${prefix}--slider-container`,
     `${prefix}--skeleton`,
     {
       [`${prefix}--slider-container--two-handles`]: twoHandles,
+      [`${prefix}--slider-container--rtl`]: isRtl,
     }
   );
   const lowerThumbClasses = classNames(`${prefix}--slider__thumb`, {
@@ -73,13 +75,21 @@ const SliderSkeleton = ({
           <div className={`${prefix}--slider__filled-track`} />
           <div className={lowerThumbWrapperClasses}>
             <div className={lowerThumbClasses}>
-              {twoHandles ? <LowerHandle /> : undefined}
+              {twoHandles && !isRtl ? (
+                <LowerHandle />
+              ) : twoHandles && isRtl ? (
+                <UpperHandle />
+              ) : undefined}
             </div>
           </div>
           {twoHandles ? (
             <div className={upperThumbWrapperClasses}>
               <div className={upperThumbClasses}>
-                {twoHandles ? <UpperHandle /> : undefined}
+                {twoHandles && !isRtl ? (
+                  <UpperHandle />
+                ) : twoHandles && isRtl ? (
+                  <LowerHandle />
+                ) : undefined}
               </div>
             </div>
           ) : undefined}

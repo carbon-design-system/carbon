@@ -1364,6 +1364,7 @@ class Slider extends PureComponent<SliderProps> {
             [`${prefix}--slider-container--two-handles`]: twoHandles,
             [`${prefix}--slider-container--disabled`]: disabled,
             [`${prefix}--slider-container--readonly`]: readOnly,
+            [`${prefix}--slider-container--rtl`]: isRtl,
           });
           const sliderClasses = classNames(`${prefix}--slider`, {
             [`${prefix}--slider--disabled`]: disabled,
@@ -1436,17 +1437,9 @@ class Slider extends PureComponent<SliderProps> {
           ]);
           const lowerThumbWrapperProps = {
             style: {
-              insetInlineStart:
-                twoHandles || !isRtl
-                  ? `${this.state.left}%`
-                  : `calc(${this.state.left}% - 14px)`,
+              insetInlineStart: `${this.state.left}%`,
             },
           };
-          if (isRtl) {
-            lowerThumbWrapperProps['style'][
-              'transform'
-            ] = `translate(100%, -50%)`;
-          }
           const upperThumbWrapperProps = {
             style: { insetInlineStart: `${this.state.leftUpper}%` },
           };
