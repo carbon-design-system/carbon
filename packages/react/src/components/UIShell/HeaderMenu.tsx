@@ -7,7 +7,7 @@
 
 import { ChevronDown } from '@carbon/icons-react';
 import cx from 'classnames';
-import React from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { keys, matches } from '../../internal/keyboard';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
@@ -15,13 +15,34 @@ import { PrefixContext } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { composeEventHandlers } from '../../tools/events';
 
+interface HeaderMenuProps {
+  menuLinkName: string;
+  'aria-label'?: string;
+  'aria-labelledby'?: string;
+  children?: ReactNode;
+  className?: string;
+  focusRef?: (node) => void;
+  isActive?: boolean;
+  isCurrentPage?: boolean;
+  onBlur?: () => void;
+  onClick?: () => void;
+  onKeyDown?: () => void;
+  renderMenuContent?: () => ReactElement<any, any>;
+  tabIndex?: number;
+}
+
+interface HeaderMenuState {
+  expanded: boolean;
+  selectedIndex: number | null;
+}
+
 /**
  * `HeaderMenu` is used to render submenu's in the `Header`. Most often children
  * will be a `HeaderMenuItem`. It handles certain keyboard events to help
  * with managing focus. It also passes along refs to each child so that it can
  * help manage focus state of its children.
  */
-class HeaderMenu extends React.Component {
+class HeaderMenu extends React.Component<HeaderMenuProps, HeaderMenuState> {
   static propTypes = {
     /**
      * Required props for the accessibility label of the menu
@@ -89,7 +110,9 @@ class HeaderMenu extends React.Component {
 
   static contextType = PrefixContext;
 
-  _subMenus = React.createRef();
+  items: HTMLElement[];
+  menuButtonRef: HTMLElement | undefined;
+  _subMenus = React.createRef<HTMLUListElement>();
 
   constructor(props) {
     super(props);
@@ -162,7 +185,7 @@ class HeaderMenu extends React.Component {
    * menu or menubar as it will allow the parent to explicitly focus the menu
    * button node when that child should receive focus.
    */
-  handleMenuButtonRef = (node) => {
+  handleMenuButtonRef = (node: HTMLElement): void => {
     if (this.props.focusRef) {
       this.props.focusRef(node);
     }
@@ -173,7 +196,7 @@ class HeaderMenu extends React.Component {
    * Handles individual menuitem refs. We assign them to a class instance
    * property so that we can properly manage focus of our children.
    */
-  handleItemRef = (index) => (node) => {
+  handleItemRef = (index: number) => (node) => {
     this.items[index] = node;
   };
 
@@ -189,7 +212,7 @@ class HeaderMenu extends React.Component {
       }));
 
       // Return focus to menu button when the user hits ESC.
-      this.menuButtonRef.focus();
+      this.menuButtonRef?.focus();
       return;
     }
   };
@@ -201,20 +224,23 @@ class HeaderMenu extends React.Component {
       isCurrentPage,
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
-      className: customClassName,
+      className: customClassName = '',
       children,
       renderMenuContent: MenuContent,
       menuLinkName,
-      focusRef, // eslint-disable-line no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      focusRef,
       onBlur,
       onClick,
       onKeyDown,
       ...rest
     } = this.props;
 
-    const hasActiveChildren = React.Children.toArray(children).some(
-      (child) => child.props.isActive || child.props.isCurrentPage
-    );
+    const hasActiveChildren = React.Children.toArray(children).some((child) => {
+      if (React.isValidElement(child)) {
+        child.props.isActive || child.props.isCurrentPage;
+      }
+    });
 
     const accessibilityLabel = {
       'aria-label': ariaLabel,
@@ -224,7 +250,7 @@ class HeaderMenu extends React.Component {
       [`${prefix}--header__submenu`]: true,
       [customClassName]: !!customClassName,
     });
-    let isActivePage = isActive ? isActive : isCurrentPage;
+    const isActivePage = isActive ? isActive : isCurrentPage;
     const linkClassName = cx({
       [`${prefix}--header__menu-item`]: true,
       [`${prefix}--header__menu-title`]: true,
@@ -254,6 +280,7 @@ class HeaderMenu extends React.Component {
           className={linkClassName}
           href="#"
           onKeyDown={this.handleOnKeyDown}
+          // @ts-ignore type mismatch - calls a functions whose return type is `void`
           ref={this.handleMenuButtonRef}
           tabIndex={0}
           {...accessibilityLabel}>
@@ -282,16 +309,18 @@ class HeaderMenu extends React.Component {
    */
   _renderMenuItem = (item, index) => {
     if (React.isValidElement(item)) {
-      return React.cloneElement(item, {
+      return React.cloneElement(item as React.ReactElement<any>, {
         ref: this.handleItemRef(index),
       });
     }
   };
 }
 
-const HeaderMenuForwardRef = React.forwardRef((props, ref) => {
-  return <HeaderMenu {...props} focusRef={ref} />;
-});
+const HeaderMenuForwardRef: React.FC<HeaderMenuProps> = React.forwardRef(
+  function HeaderMenu(props, _ref) {
+    return <HeaderMenu {...props} />;
+  }
+);
 
 HeaderMenuForwardRef.displayName = 'HeaderMenu';
 

@@ -6,11 +6,21 @@
  */
 
 import cx from 'classnames';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import Button from '../Button';
 import { usePrefix } from '../../internal/usePrefix';
+
+interface HeaderGlobalActionProps {
+  'aria-label'?: string;
+  'aria-labelledby'?: string;
+  children?: ReactNode;
+  className?: string;
+  isActive?: boolean;
+  onClick?: () => void;
+  tooltipAlignment?: 'start' | 'center' | 'end';
+}
 
 /**
  * HeaderGlobalAction is used as a part of the `HeaderGlobalBar`. It is
@@ -20,45 +30,47 @@ import { usePrefix } from '../../internal/usePrefix';
  *
  * Note: children passed to this component should be an Icon.
  */
-const HeaderGlobalAction = React.forwardRef(function HeaderGlobalAction(
-  {
-    'aria-label': ariaLabel,
-    'aria-labelledby': ariaLabelledBy,
-    children,
-    className: customClassName,
-    onClick,
-    isActive,
-    tooltipAlignment,
-    ...rest
-  },
-  ref
-) {
-  const prefix = usePrefix();
-  const className = cx({
-    [customClassName]: !!customClassName,
-    [`${prefix}--header__action`]: true,
-    [`${prefix}--header__action--active`]: isActive,
-  });
-  const accessibilityLabel = {
-    'aria-label': ariaLabel,
-    'aria-labelledby': ariaLabelledBy,
-  };
-  return (
-    <Button
-      {...rest}
-      {...accessibilityLabel}
-      className={className}
-      onClick={onClick}
-      type="button"
-      hasIconOnly
-      iconDescription={ariaLabel}
-      tooltipPosition="bottom"
-      tooltipAlignment={tooltipAlignment}
-      ref={ref}>
-      {children}
-    </Button>
-  );
-});
+const HeaderGlobalAction: React.FC<HeaderGlobalActionProps> = React.forwardRef(
+  function HeaderGlobalAction(
+    {
+      'aria-label': ariaLabel,
+      'aria-labelledby': ariaLabelledBy,
+      children,
+      className: customClassName = '',
+      onClick,
+      isActive,
+      tooltipAlignment,
+      ...rest
+    },
+    ref
+  ) {
+    const prefix = usePrefix();
+    const className = cx({
+      [customClassName]: !!customClassName,
+      [`${prefix}--header__action`]: true,
+      [`${prefix}--header__action--active`]: isActive,
+    });
+    const accessibilityLabel = {
+      'aria-label': ariaLabel,
+      'aria-labelledby': ariaLabelledBy,
+    };
+    return (
+      <Button
+        {...rest}
+        {...accessibilityLabel}
+        className={className}
+        onClick={onClick}
+        type="button"
+        hasIconOnly
+        iconDescription={ariaLabel}
+        tooltipPosition="bottom"
+        tooltipAlignment={tooltipAlignment}
+        ref={ref}>
+        {children}
+      </Button>
+    );
+  }
+);
 
 HeaderGlobalAction.propTypes = {
   /**

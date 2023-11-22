@@ -7,11 +7,22 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { usePrefix } from '../../internal/usePrefix';
 
-const Header = ({ className: customClassName, children, ...rest }) => {
+interface HeaderProps {
+  children?: ReactNode;
+  'aria-label'?: string;
+  'aria-labelledby'?: string;
+  className?: string;
+}
+
+const Header: React.FC<HeaderProps> = ({
+  className: customClassName,
+  children,
+  ...rest
+}) => {
   const prefix = usePrefix();
   const className = cx(`${prefix}--header`, customClassName);
 
