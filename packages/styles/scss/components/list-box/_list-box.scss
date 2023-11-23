@@ -16,6 +16,7 @@
 @use '../../spacing' as *;
 @use '../../motion' as *;
 @use '../../layer' as *;
+@use '../../utilities/ai-gradient' as *;
 @use '../../utilities/box-shadow' as *;
 @use '../../utilities/button-reset';
 @use '../../utilities/component-reset';
@@ -886,6 +887,58 @@ $list-box-menu-width: convert.to-rem(300px);
     background-color: inherit;
     min-inline-size: 0;
     text-overflow: ellipsis;
+  }
+
+  // Slug styles
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: $spacing-08;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--list-box {
+    @include ai-gradient;
+  }
+
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--text-input {
+    padding-inline-end: $spacing-10;
+  }
+
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field {
+    padding-inline-end: $spacing-12;
+  }
+
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--slug,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--slug {
+    inset-inline-end: $spacing-10;
+  }
+
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    ~ .#{$prefix}--slug {
+    inset-inline-end: $spacing-10;
+  }
+
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    ~ .#{$prefix}--slug,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    ~ .#{$prefix}--slug {
+    inset-inline-end: convert.to-rem(88px);
   }
 
   // Windows HCM fix
