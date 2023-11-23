@@ -390,6 +390,12 @@
     }
   }
 
+  .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--loading {
+    border-color: transparent;
+    background-color: transparent;
+    box-shadow: none;
+  }
+
   // Windows HCM fix
   .#{$prefix}--btn:focus {
     @include high-contrast-mode('focus');
