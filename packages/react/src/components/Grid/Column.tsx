@@ -462,8 +462,10 @@ function getClassNameForSpan(
 ): string {
   const classNames: string[] = [];
 
-  if (typeof value === 'number' || typeof value === 'string') {
+  if (typeof value === 'number') {
     classNames.push(`${prefix}--col-span-${value}`);
+  } else if (typeof value === 'string') {
+    classNames.push(`${prefix}--col-span-${value.slice(0, -1)}`);
   } else if (typeof value === 'object') {
     const { span, start, end } = value;
 
