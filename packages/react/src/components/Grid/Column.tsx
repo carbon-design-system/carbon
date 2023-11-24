@@ -464,7 +464,10 @@ function getClassNameForSpan(
 
   if (typeof value === 'number') {
     classNames.push(`${prefix}--col-span-${value}`);
-  } else if (typeof value === 'string') {
+  }
+  // If value is a string, the user has specified a percent
+  // they'd like this column to span.
+  else if (typeof value === 'string') {
     classNames.push(`${prefix}--col-span-${value.slice(0, -1)}`);
   } else if (typeof value === 'object') {
     const { span, start, end } = value;
