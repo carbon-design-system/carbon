@@ -6,13 +6,12 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { LayerContext } from './LayerContext';
+import { LayerLevel, MAX_LEVEL, MIN_LEVEL, levels } from './LayerLevel';
 
-const levels = ['one', 'two', 'three'];
-const MAX_LEVEL = levels.length - 1;
+type func = (...args: unknown[]) => unknown;
 
 /**
  * A custom hook that will return information about the current layer. A common
@@ -26,6 +25,30 @@ export function useLayer() {
   };
 }
 
+interface LayerProps {
+  /**
+   * Specify a custom component or element to be rendered as the top-level
+   * element in the component
+   */
+  as?: func | string | React.ElementType;
+
+  /**
+   * Provide child elements to be rendered inside of `Theme`
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Provide a custom class name to be used on the outermost element rendered by
+   * the component
+   */
+  className?: string;
+
+  /**
+   * Specify the layer level and override any existing levels based on hierarchy
+   */
+  level?: LayerLevel;
+}
+
 export const Layer = React.forwardRef(function Layer(
   {
     as: BaseComponent = 'div',
@@ -33,15 +56,18 @@ export const Layer = React.forwardRef(function Layer(
     children,
     level: overrideLevel,
     ...rest
-  },
+  }: LayerProps,
   ref
 ) {
   const contextLevel = React.useContext(LayerContext);
   const level = overrideLevel ?? contextLevel;
   const prefix = usePrefix();
   const className = cx(`${prefix}--layer-${levels[level]}`, customClassName);
-  // The level should be between 0 and MAX_LEVEL
-  const value = Math.max(0, Math.min(level + 1, MAX_LEVEL));
+  // The level should be between MIN_LEVEL and MAX_LEVEL
+  const value = Math.max(
+    MIN_LEVEL,
+    Math.min(level + 1, MAX_LEVEL)
+  ) as LayerLevel;
 
   return (
     <LayerContext.Provider value={value}>
@@ -51,31 +77,3 @@ export const Layer = React.forwardRef(function Layer(
     </LayerContext.Provider>
   );
 });
-
-Layer.propTypes = {
-  /**
-   * Specify a custom component or element to be rendered as the top-level
-   * element in the component
-   */
-  as: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.string,
-    PropTypes.elementType,
-  ]),
-
-  /**
-   * Provide child elements to be rendered inside of `Theme`
-   */
-  children: PropTypes.node,
-
-  /**
-   * Provide a custom class name to be used on the outermost element rendered by
-   * the component
-   */
-  className: PropTypes.string,
-
-  /**
-   * Specify the layer level and override any existing levels based on hierarchy
-   */
-  level: PropTypes.oneOf([0, 1, 2]),
-};
