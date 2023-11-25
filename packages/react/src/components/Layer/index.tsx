@@ -9,7 +9,6 @@ import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { LayerContext } from './LayerContext';
-import { LayerLevel, MAX_LEVEL, MIN_LEVEL, levels } from './LayerLevel';
 
 type func = (...args: unknown[]) => unknown;
 
@@ -46,8 +45,12 @@ interface LayerProps {
   /**
    * Specify the layer level and override any existing levels based on hierarchy
    */
-  level?: LayerLevel;
+  level?: 0 | 1 | 2;
 }
+
+const levels = ['one', 'two', 'three'];
+
+const MAX_LEVEL = levels.length - 1;
 
 export const Layer = React.forwardRef(function Layer(
   {
@@ -63,11 +66,8 @@ export const Layer = React.forwardRef(function Layer(
   const level = overrideLevel ?? contextLevel;
   const prefix = usePrefix();
   const className = cx(`${prefix}--layer-${levels[level]}`, customClassName);
-  // The level should be between MIN_LEVEL and MAX_LEVEL
-  const value = Math.max(
-    MIN_LEVEL,
-    Math.min(level + 1, MAX_LEVEL)
-  ) as LayerLevel;
+  // The level should be between 0 and MAX_LEVEL
+  const value = Math.max(0, Math.min(level + 1, MAX_LEVEL));
 
   return (
     <LayerContext.Provider value={value}>
