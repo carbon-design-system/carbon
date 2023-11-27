@@ -70,6 +70,11 @@ export interface CheckboxProps
   invalidText?: React.ReactNode;
 
   /**
+   * Provide a `Slug` component to be rendered inside the `Checkbox` component
+   */
+  slug?: ReactNodeLike;
+
+  /**
    * Specify whether the Checkbox is currently invalid
    */
   warn?: boolean;
@@ -112,6 +117,7 @@ const Checkbox = React.forwardRef(
       title = '',
       warn,
       warnText,
+      slug,
       ...other
     }: CheckboxProps,
     ref
@@ -141,11 +147,20 @@ const Checkbox = React.forwardRef(
         [`${prefix}--checkbox-wrapper--readonly`]: readOnly,
         [`${prefix}--checkbox-wrapper--invalid`]: !readOnly && invalid,
         [`${prefix}--checkbox-wrapper--warning`]: showWarning,
+        [`${prefix}--checkbox-wrapper--slug`]: slug,
       }
     );
     const innerLabelClasses = classNames(`${prefix}--checkbox-label-text`, {
       [`${prefix}--visually-hidden`]: hideLabel,
     });
+
+    // Slug is always size `mini`
+    let normalizedSlug;
+    if (slug) {
+      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+        size: 'mini',
+      });
+    }
 
     return (
       <div className={wrapperClasses}>
@@ -188,7 +203,9 @@ const Checkbox = React.forwardRef(
           htmlFor={id}
           className={`${prefix}--checkbox-label`}
           title={title}>
-          <Text className={innerLabelClasses}>{labelText}</Text>
+          <Text className={innerLabelClasses}>
+            {labelText} {normalizedSlug}
+          </Text>
         </label>
         <div className={`${prefix}--checkbox__validation-msg`}>
           {!readOnly && invalid && (
@@ -280,6 +297,11 @@ Checkbox.propTypes = {
    * Specify whether the Checkbox is read-only
    */
   readOnly: PropTypes.bool,
+
+  /**
+   * Provide a `Slug` component to be rendered inside the `Checkbox` component
+   */
+  slug: PropTypes.node,
 
   /**
    * Specify a title for the <label> node for the Checkbox

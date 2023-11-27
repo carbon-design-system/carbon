@@ -56,44 +56,39 @@ export const Default = () => {
 };
 
 export const SlugTest = () => {
-  const slug = (kind) => {
-    console.log(kind);
-
-    return (
-      <Slug kind={kind} className="slug-container">
-        <SlugContent>
-          <div>
-            <p className="secondary">AI Explained</p>
-            <h1>84%</h1>
-            <p className="secondary bold">Confidence score</p>
-            <p className="secondary">
-              Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-              do eiusmod tempor incididunt ut fsil labore et dolore magna
-              aliqua.
-            </p>
-            <hr />
-            <p className="secondary">Model type</p>
-            <p className="bold">Foundation model</p>
-          </div>
-          <SlugActions>
-            <IconButton kind="ghost" label="View">
-              <View />
-            </IconButton>
-            <IconButton kind="ghost" label="Open Folder">
-              <FolderOpen />
-            </IconButton>
-            <IconButton kind="ghost" label="Folders">
-              <Folders />
-            </IconButton>
-            <Button>View literature</Button>
-          </SlugActions>
-        </SlugContent>
-      </Slug>
-    );
-  };
+  const slug = (kind) => (
+    <Slug kind={kind} className="slug-container">
+      <SlugContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h1>84%</h1>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+        <SlugActions>
+          <IconButton kind="ghost" label="View">
+            <View />
+          </IconButton>
+          <IconButton kind="ghost" label="Open Folder">
+            <FolderOpen />
+          </IconButton>
+          <IconButton kind="ghost" label="Folders">
+            <Folders />
+          </IconButton>
+          <Button>View literature</Button>
+        </SlugActions>
+      </SlugContent>
+    </Slug>
+  );
 
   return (
-    <div style={{ display: 'flex' }}>
+    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
       <RadioButtonGroup
         slug={slug('default')}
         orientation="vertical"
@@ -168,9 +163,7 @@ export const SlugTest = () => {
   );
 };
 
-export const Skeleton = () => {
-  return <RadioButtonSkeleton />;
-};
+export const Skeleton = () => {};
 
 export const Playground = (args) => {
   return (

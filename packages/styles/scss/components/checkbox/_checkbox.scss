@@ -361,4 +361,17 @@
     .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::after {
     transform: scale(1.2) rotate3d(0.5, 1, 0, 158deg);
   }
+
+  // Slug styles
+  .#{$prefix}--checkbox-group--slug legend.#{$prefix}--label,
+  .#{$prefix}--checkbox-wrapper--slug .#{$prefix}--checkbox-label-text {
+    display: flex;
+  }
+
+  .#{$prefix}--checkbox-group--slug legend.#{$prefix}--label .#{$prefix}--slug,
+  .#{$prefix}--checkbox-wrapper--slug
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--slug {
+    margin-inline-start: $spacing-03;
+  }
 }
