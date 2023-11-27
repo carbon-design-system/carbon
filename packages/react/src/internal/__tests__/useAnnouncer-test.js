@@ -1,10 +1,8 @@
-import { cleanup, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import React from 'react';
 import { useAnnouncer } from '../useAnnouncer';
 
 describe('useAnnouncer', () => {
-  afterEach(cleanup);
-
   it('should emit announcement for characters', () => {
     let value = null;
 

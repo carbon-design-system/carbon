@@ -421,7 +421,7 @@ describe('TextArea', () => {
           enableCounter={true}
           maxCount={5}
           counterMode="word"
-          defaultValue="one two three four five"
+          defaultValue=""
         />
       );
 
@@ -437,6 +437,34 @@ describe('TextArea', () => {
       await waitFor(() => {
         expect(screen.getByRole('textbox')).toHaveValue(
           'test pasted content that should'
+        );
+      });
+    });
+
+    it('should trim words when text larger than max limit is pasted and there is text already present', async () => {
+      render(
+        <TextArea
+          id="input-1"
+          labelText="TextArea label"
+          enableCounter={true}
+          maxCount={5}
+          counterMode="word"
+          defaultValue="one"
+        />
+      );
+
+      const paste = createEvent.paste(screen.getByRole('textbox'), {
+        clipboardData: {
+          getData: () =>
+            'test pasted content that should be trimmed to match max limit',
+        },
+      });
+
+      fireEvent(screen.getByRole('textbox'), paste);
+
+      await waitFor(() => {
+        expect(screen.getByRole('textbox')).toHaveValue(
+          'one test pasted content that'
         );
       });
     });
