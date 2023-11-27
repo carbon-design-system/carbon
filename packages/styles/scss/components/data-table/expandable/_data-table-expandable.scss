@@ -76,6 +76,20 @@
       background-color $duration-fast-02 motion(standard, productive);
   }
 
+  tbody:has(> tr.#{$prefix}--parent-row--slug)
+    > tr.#{$prefix}--expandable-row[data-child-row]
+    td {
+    padding-inline-start: convert.to-rem(88px);
+  }
+
+  tbody:has(> tr.#{$prefix}--parent-row--slug):has(
+      td.#{$prefix}--table-column-checkbox
+    )
+    > tr.#{$prefix}--expandable-row[data-child-row]
+    td {
+    padding-inline-start: convert.to-rem(120px);
+  }
+
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
     + tr[data-child-row]
     td
