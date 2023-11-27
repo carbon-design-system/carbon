@@ -204,7 +204,8 @@ const Checkbox = React.forwardRef(
           className={`${prefix}--checkbox-label`}
           title={title}>
           <Text className={innerLabelClasses}>
-            {labelText} {normalizedSlug}
+            {labelText}
+            {normalizedSlug}
           </Text>
         </label>
         <div className={`${prefix}--checkbox__validation-msg`}>

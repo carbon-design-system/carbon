@@ -72,7 +72,8 @@ function CheckboxGroup({
       <legend
         className={`${prefix}--label`}
         id={legendId || rest['aria-labelledby']}>
-        {legendText} {normalizedSlug}
+        {legendText}
+        {normalizedSlug}
       </legend>
       {children}
       <div className={`${prefix}--checkbox-group__validation-msg`}>

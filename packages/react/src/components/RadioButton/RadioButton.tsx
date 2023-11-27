@@ -156,7 +156,8 @@ const RadioButton = React.forwardRef((props: RadioButtonProps, ref) => {
         <span className={`${prefix}--radio-button__appearance`} />
         {labelText && (
           <Text className={innerLabelClasses}>
-            {labelText} {normalizedSlug}
+            {labelText}
+            {normalizedSlug}
           </Text>
         )}
       </label>

@@ -78,7 +78,6 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
                     dir="auto"
                   >
                     Select row
-                     
                   </span>
                 </label>
               </div>
@@ -117,7 +116,6 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
                     dir="auto"
                   >
                     Select row
-                     
                   </span>
                 </label>
               </div>
@@ -156,7 +154,6 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
                     dir="auto"
                   >
                     Select row
-                     
                   </span>
                 </label>
               </div>
@@ -253,7 +250,6 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
                     dir="auto"
                   >
                     Select row
-                     
                   </span>
                 </label>
               </div>
@@ -292,7 +288,6 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
                     dir="auto"
                   >
                     Select row
-                     
                   </span>
                 </label>
               </div>
@@ -331,7 +326,6 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
                     dir="auto"
                   >
                     Select row
-                     
                   </span>
                 </label>
               </div>

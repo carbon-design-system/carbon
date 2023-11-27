@@ -233,7 +233,8 @@ const RadioButtonGroup = React.forwardRef(
           {...rest}>
           {legendText && (
             <Legend className={`${prefix}--label`}>
-              {legendText} {normalizedSlug}
+              {legendText}
+              {normalizedSlug}
             </Legend>
           )}
           {getRadioButtons()}
