@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('Toggle @avt', () => {
-  test('accessibility-checker', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Toggle',
       id: 'components-toggle--default',
@@ -22,7 +22,7 @@ test.describe('Toggle @avt', () => {
     await expect(page).toHaveNoACViolations('Toggle');
   });
 
-  test('accessibility-checker skeleton', async ({ page }) => {
+  test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'Tabs',
       id: 'components-toggle--skeleton',
@@ -33,7 +33,7 @@ test.describe('Toggle @avt', () => {
     await expect(page).toHaveNoACViolations('Toggle-skeleton');
   });
 
-  test('accessibility-checker small toggle', async ({ page }) => {
+  test('@avt-advanced-states small toggle', async ({ page }) => {
     await visitStory(page, {
       component: 'Tabs',
       id: 'components-toggle--small-toggle',
@@ -44,7 +44,7 @@ test.describe('Toggle @avt', () => {
     await expect(page).toHaveNoACViolations('Toggle-small');
   });
 
-  test('accessibility-checker with accessible labels', async ({ page }) => {
+  test('@avt-advanced-states with accessible labels', async ({ page }) => {
     await visitStory(page, {
       component: 'Tabs',
       id: 'components-toggle--with-accessible-labels',
@@ -55,7 +55,7 @@ test.describe('Toggle @avt', () => {
     await expect(page).toHaveNoACViolations('Toggle-accessible-labels');
   });
 
-  test('default Toggle state - keyboard nav', async ({ page }) => {
+  test('@avt-keyboard-nav - keyboard nav', async ({ page }) => {
     await visitStory(page, {
       component: 'Tabs',
       id: 'components-toggle--default',
