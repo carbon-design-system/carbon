@@ -6,11 +6,12 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { LayerContext } from './LayerContext';
-
-type func = (...args: unknown[]) => unknown;
+import { LayerLevel, MAX_LEVEL, MIN_LEVEL, levels } from './LayerLevel';
+import { PolymorphicProps } from '../../types/common';
 
 /**
  * A custom hook that will return information about the current layer. A common
@@ -24,13 +25,7 @@ export function useLayer() {
   };
 }
 
-interface LayerProps {
-  /**
-   * Specify a custom component or element to be rendered as the top-level
-   * element in the component
-   */
-  as?: func | string | React.ElementType;
-
+interface LayerBaseProps {
   /**
    * Provide child elements to be rendered inside of `Theme`
    */
@@ -45,35 +40,90 @@ interface LayerProps {
   /**
    * Specify the layer level and override any existing levels based on hierarchy
    */
-  level?: 0 | 1 | 2;
+  level?: LayerLevel;
 }
 
-const levels = ['one', 'two', 'three'];
+export type LayerProps<T extends React.ElementType> = PolymorphicProps<
+  T,
+  LayerBaseProps
+>;
 
-const MAX_LEVEL = levels.length - 1;
+export interface LayerComponent {
+  <T extends React.ElementType>(
+    props: LayerProps<T>,
+    context?: any
+  ): React.ReactElement<any, any> | null;
+}
 
-export const Layer = React.forwardRef(function Layer(
+const LayerRenderFunction = React.forwardRef(function Layer<
+  T extends React.ElementType
+>(
   {
-    as: BaseComponent = 'div',
+    as,
     className: customClassName,
     children,
     level: overrideLevel,
     ...rest
-  }: LayerProps,
-  ref
+  }: LayerProps<T>,
+  ref: React.Ref<unknown>
 ) {
   const contextLevel = React.useContext(LayerContext);
   const level = overrideLevel ?? contextLevel;
   const prefix = usePrefix();
   const className = cx(`${prefix}--layer-${levels[level]}`, customClassName);
-  // The level should be between 0 and MAX_LEVEL
-  const value = Math.max(0, Math.min(level + 1, MAX_LEVEL));
+  // The level should be between MIN_LEVEL and MAX_LEVEL
+  const value = Math.max(
+    MIN_LEVEL,
+    Math.min(level + 1, MAX_LEVEL)
+  ) as LayerLevel;
+
+  let component: React.ElementType = 'div';
+  if (as) {
+    component = as;
+  }
 
   return (
     <LayerContext.Provider value={value}>
-      <BaseComponent ref={ref} {...rest} className={className}>
-        {children}
-      </BaseComponent>
+      {React.createElement(
+        component,
+        {
+          ref,
+          ...rest,
+          className,
+        },
+        children
+      )}
     </LayerContext.Provider>
   );
 });
+
+LayerRenderFunction.displayName = 'Layer';
+LayerRenderFunction.propTypes = {
+  /**
+   * Specify a custom component or element to be rendered as the top-level
+   * element in the component
+   */
+  as: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.string,
+    PropTypes.elementType,
+  ]),
+
+  /**
+   * Provide child elements to be rendered inside of `Theme`
+   */
+  children: PropTypes.node,
+
+  /**
+   * Provide a custom class name to be used on the outermost element rendered by
+   * the component
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify the layer level and override any existing levels based on hierarchy
+   */
+  level: PropTypes.oneOf([0, 1, 2]),
+};
+
+export const Layer = LayerRenderFunction as LayerComponent;
