@@ -11,7 +11,8 @@ import React, { HTMLAttributes, ReactNode } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 
 export type ContentProps = HTMLAttributes<HTMLElement> & {
-  children: ReactNode;
+  children?: ReactNode;
+  className?: string 
   tagName?: string;
 };
 
