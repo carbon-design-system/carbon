@@ -16,6 +16,7 @@
 @use '../../theme' as *;
 @use '../../type' as *;
 @use '../../layer' as *;
+@use '../../utilities/ai-gradient' as *;
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
@@ -917,6 +918,17 @@
   .#{$prefix}--data-table--sm
     .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type {
     margin: convert.to-rem(-3px) 0;
+  }
+
+  // Slug styles
+  .#{$prefix}--data-table .#{$prefix}--table-column-slug {
+    inline-size: $spacing-05;
+    padding-inline-end: 0;
+  }
+
+  .#{$prefix}--data-table tbody tr:has(.#{$prefix}--table-column-slug) {
+    @include ai-gradient('left');
+    // background: red;
   }
 
   // Windows HCM fix
