@@ -87,6 +87,11 @@
 
   .#{$prefix}--menu-item:hover {
     background-color: $layer-hover;
+    color: $text-primary;
+
+    svg {
+      color: $icon-primary;
+    }
   }
 
   $supported-sizes: (
