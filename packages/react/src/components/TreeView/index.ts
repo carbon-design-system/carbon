@@ -8,5 +8,13 @@
 import TreeView from './TreeView';
 import TreeNode from './TreeNode';
 
-export { TreeNode, TreeView };
+type ExtendedTreeView = typeof TreeView & {
+  TreeNode: typeof TreeNode;
+};
+
+const ExtendedTreeView = TreeView as ExtendedTreeView;
+
+ExtendedTreeView.TreeNode = TreeNode;
+
+export { TreeNode, ExtendedTreeView as TreeView };
 export default TreeView;
