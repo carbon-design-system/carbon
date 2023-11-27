@@ -32,6 +32,6 @@ test.describe('DefinitionTooltip', () => {
         theme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('DefinitionTooltip');
+    await expect(page).toHaveNoACViolations('DefinitionTooltip default');
   });
 });
