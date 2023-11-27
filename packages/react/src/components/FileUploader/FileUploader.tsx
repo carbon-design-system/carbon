@@ -288,14 +288,15 @@ export default class FileUploader extends React.Component<
       <div className={classes} {...other}>
         {!labelTitle ? null : (
           <Text
-            as="p"
+            as="h3"
             className={getHelperLabelClasses(`${prefix}--file--label`)}>
             {labelTitle}
           </Text>
         )}
         <Text
           as="p"
-          className={getHelperLabelClasses(`${prefix}--label-description`)}>
+          className={getHelperLabelClasses(`${prefix}--label-description`)}
+          id="description">
           {labelDescription}
         </Text>
         <FileUploaderButton
@@ -309,6 +310,7 @@ export default class FileUploader extends React.Component<
           accept={accept}
           name={name}
           size={size}
+          aria-describedby="description"
         />
         <div className={`${prefix}--file-container`}>
           {this.state.filenames.length === 0
