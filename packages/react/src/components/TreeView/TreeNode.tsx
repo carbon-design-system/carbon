@@ -151,7 +151,7 @@ interface TreeNodeProps {
   'aria-disabled'?: boolean;
 
   /**
-   * Name of a role in the ARIA specificatio
+   * Name of a role in the ARIA specification
    */
   role?: string;
 
