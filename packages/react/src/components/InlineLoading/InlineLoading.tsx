@@ -6,15 +6,28 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { CheckmarkFilled, ErrorFilled } from '@carbon/icons-react';
 import Loading from '../Loading';
 import { usePrefix } from '../../internal/usePrefix';
 
+export const InlineLoadingStatuses = [
+  'inactive',
+  'active',
+  'finished',
+  'error',
+] as const;
+
+export type InlineLoadingStatus = (typeof InlineLoadingStatuses)[number];
+
 export interface InlineLoadingProps
-  extends React.DetailedHTMLProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    HTMLDivElement
+  extends Omit<
+    React.DetailedHTMLProps<
+      React.HTMLAttributes<HTMLDivElement>,
+      HTMLDivElement
+    >,
+    'children'
   > {
   /**
    * Specify a custom className to be applied to the container node
@@ -35,12 +48,12 @@ export interface InlineLoadingProps
    * Provide an optional handler to be invoked when <InlineLoading> is
    * successful
    */
-  onSuccess?: (...args: unknown[]) => unknown;
+  onSuccess?: () => void;
 
   /**
    * Specify the loading status
    */
-  status?: 'inactive' | 'active' | 'finished' | 'error';
+  status?: InlineLoadingStatus;
 
   /**
    * Provide a delay for the `setTimeout` for success
@@ -112,6 +125,39 @@ const InlineLoading = ({
       {description && loadingText}
     </div>
   );
+};
+
+InlineLoading.propTypes = {
+  /**
+   * Specify a custom className to be applied to the container node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify the description for the inline loading text
+   */
+  description: PropTypes.node,
+
+  /**
+   * Specify the description for the inline loading text
+   */
+  iconDescription: PropTypes.string,
+
+  /**
+   * Provide an optional handler to be invoked when <InlineLoading> is
+   * successful
+   */
+  onSuccess: PropTypes.func,
+
+  /**
+   * Specify the loading status
+   */
+  status: PropTypes.oneOf(['inactive', 'active', 'finished', 'error']),
+
+  /**
+   * Provide a delay for the `setTimeout` for success
+   */
+  successDelay: PropTypes.number,
 };
 
 export default InlineLoading;
