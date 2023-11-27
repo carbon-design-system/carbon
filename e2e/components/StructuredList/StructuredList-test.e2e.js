@@ -22,6 +22,14 @@ test.describe('StructuredList', () => {
         });
       });
 
+      test('with layer @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'StructuredList',
+          id: 'components-structuredlist--with-background-layer',
+          theme,
+        });
+      });
+
       test('selection @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'StructuredList',

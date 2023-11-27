@@ -103,8 +103,18 @@ const BreadcrumbItem: ForwardRefReturn<HTMLLIElement, BreadcrumbItemProps> =
 BreadcrumbItem.displayName = 'BreadcrumbItem';
 
 BreadcrumbItem.propTypes = {
-  // @ts-expect-error - v12 TODO: BREAKING: This should match AriaAttributes['aria-current']
-  'aria-current': PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  'aria-current': PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.oneOf([
+      'false',
+      'true',
+      'page',
+      'step',
+      'location',
+      'date',
+      'time',
+    ] as const),
+  ]),
 
   /**
    * Pass in content that will be inside of the BreadcrumbItem
