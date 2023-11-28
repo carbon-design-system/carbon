@@ -111,7 +111,9 @@ export const SlugWithSelection = () => (
           <TableBody>
             {rows.map((row, i) => (
               <TableRow key={i} {...getRowProps({ row })}>
-                <TableSlugRow slug={i === 3 || i === 2 ? slug : null} />
+                <TableSlugRow
+                  slug={i === 3 || i === 4 || i === 1 ? slug : null}
+                />
                 <TableSelectRow {...getSelectionProps({ row })} />
                 {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
@@ -155,7 +157,9 @@ export const SlugWithRadioSelection = () => (
           <TableBody>
             {rows.map((row, i) => (
               <TableRow key={i} {...getRowProps({ row })}>
-                <TableSlugRow slug={i === 3 || i === 2 ? slug : null} />
+                <TableSlugRow
+                  slug={i === 3 || i === 4 || i === 1 ? slug : null}
+                />
                 <TableSelectRow {...getSelectionProps({ row })} />
                 {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
@@ -169,7 +173,7 @@ export const SlugWithRadioSelection = () => (
   </DataTable>
 );
 
-export const SlugWithExpansion = () => (
+export const SlugWithSelectionAndExpansion = () => (
   <DataTable rows={rows} headers={headers}>
     {({
       rows,
@@ -206,7 +210,9 @@ export const SlugWithExpansion = () => (
             {rows.map((row, i) => (
               <React.Fragment key={row.id}>
                 <TableExpandRow {...getRowProps({ row })}>
-                  <TableSlugRow slug={i === 3 || i === 2 ? slug : null} />
+                  <TableSlugRow
+                    slug={i === 3 || i === 4 || i === 1 ? slug : null}
+                  />
                   <TableSelectRow {...getSelectionProps({ row })} />
                   {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
@@ -214,6 +220,64 @@ export const SlugWithExpansion = () => (
                 </TableExpandRow>
                 <TableExpandedRow
                   colSpan={headers.length + 3}
+                  className="demo-expanded-td"
+                  {...getExpandedRowProps({ row })}>
+                  <h6>Expandable row content</h6>
+                  <div>Description here</div>
+                </TableExpandedRow>
+              </React.Fragment>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )}
+  </DataTable>
+);
+
+export const SlugWithExpansion = () => (
+  <DataTable rows={rows} headers={headers}>
+    {({
+      rows,
+      headers,
+      getHeaderProps,
+      getRowProps,
+      getExpandedRowProps,
+      getExpandHeaderProps,
+      getTableProps,
+      getTableContainerProps,
+    }) => (
+      <TableContainer
+        title="DataTable"
+        description="With expansion"
+        {...getTableContainerProps()}>
+        <Table {...getTableProps()} aria-label="sample table">
+          <TableHead>
+            <TableRow>
+              <th scope="col" />
+              <TableExpandHeader
+                enableToggle={true}
+                {...getExpandHeaderProps()}
+              />
+              {headers.map((header, i) => (
+                <TableHeader key={i} {...getHeaderProps({ header })}>
+                  {header.header}
+                </TableHeader>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row, i) => (
+              <React.Fragment key={row.id}>
+                <TableExpandRow {...getRowProps({ row })}>
+                  <TableSlugRow
+                    slug={i === 3 || i === 4 || i === 1 ? slug : null}
+                  />
+                  {row.cells.map((cell) => (
+                    <TableCell key={cell.id}>{cell.value}</TableCell>
+                  ))}
+                </TableExpandRow>
+                <TableExpandedRow
+                  colSpan={headers.length + 2}
                   className="demo-expanded-td"
                   {...getExpandedRowProps({ row })}>
                   <h6>Expandable row content</h6>

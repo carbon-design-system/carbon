@@ -26,7 +26,8 @@ const TableSlugRow = ({ className, slug }: TableSlugRowProps) => {
   const prefix = usePrefix();
   const TableSlugRowClasses = classNames({
     ...(className && { [className]: true }),
-    [`${prefix}--table-column-slug`]: slug,
+    [`${prefix}--table-column-slug`]: true,
+    [`${prefix}--table-column-slug--active`]: slug,
   });
 
   // Slug is always size `mini`

@@ -951,7 +951,9 @@
     padding-inline-end: 0;
   }
 
-  .#{$prefix}--data-table tbody tr:has(> .#{$prefix}--table-column-slug) {
+  .#{$prefix}--data-table
+    tbody
+    tr:has(> .#{$prefix}--table-column-slug--active) {
     @include ai-gradient('left', 50%);
 
     background-attachment: fixed;

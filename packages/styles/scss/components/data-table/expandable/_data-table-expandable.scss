@@ -442,6 +442,22 @@
     background: $layer-selected;
   }
 
+  // Slug styles
+  .#{$prefix}--parent-row--slug.#{$prefix}--parent-row.cds--expandable-row
+    > td:first-of-type,
+  .#{$prefix}--parent-row--slug
+    td.cds--table-expand[data-previous-value='collapsed'] {
+    border: none;
+    box-shadow: none;
+  }
+
+  .#{$prefix}--data-table
+    tbody:has(> .#{$prefix}--parent-row--slug)
+    .#{$prefix}--parent-row
+    td:has(+ td[data-previous-value='collapsed']) {
+    border-block-end: 0;
+  }
+
   // Windows HCM fix
   .#{$prefix}--table-expand__button:focus .#{$prefix}--table-expand__svg {
     @include high-contrast-mode('focus');
