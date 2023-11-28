@@ -33,6 +33,11 @@ export default {
       page: mdx,
     },
   },
+  argTypes: {
+    mode: {
+      control: false,
+    },
+  },
 };
 
 export const Playground = (args) => {
