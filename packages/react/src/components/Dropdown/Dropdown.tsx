@@ -587,7 +587,7 @@ Dropdown.propTypes = {
   ),
 
   /**
-   * Provide a custom className to be applied on the bx--dropdown node
+   * Provide a custom className to be applied on the cds--dropdown node
    */
   className: PropTypes.string,
 
