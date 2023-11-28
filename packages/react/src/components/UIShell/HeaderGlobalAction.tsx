@@ -13,12 +13,36 @@ import Button from '../Button';
 import { usePrefix } from '../../internal/usePrefix';
 
 interface HeaderGlobalActionProps {
+  /**
+   * Required props for the accessibility label of the button
+   */
   'aria-label'?: string;
+  /**
+   * Required props for the accessibility label of the button
+   */
   'aria-labelledby'?: string;
+  /**
+   * Provide a custom icon for this global action
+   */
   children?: ReactNode;
+  /**
+   * Optionally provide a custom class name that is applied to the underlying
+   * button
+   */
   className?: string;
+  /**
+   * Specify whether the action is currently active
+   */
   isActive?: boolean;
+  /**
+   * Optionally provide an onClick handler that is called when the underlying
+   * button fires it's onclick event
+   */
   onClick?: () => void;
+  /**
+   * Specify the alignment of the tooltip to the icon-only button.
+   * Can be one of: start, center, or end.
+   */
   tooltipAlignment?: 'start' | 'center' | 'end';
 }
 

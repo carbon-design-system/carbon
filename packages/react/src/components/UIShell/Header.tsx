@@ -13,8 +13,17 @@ import { usePrefix } from '../../internal/usePrefix';
 
 interface HeaderProps {
   children?: ReactNode;
+  /**
+   * Required props for the accessibility label of the header
+   */
   'aria-label'?: string;
+  /**
+   * Required props for the accessibility label of the header
+   */
   'aria-labelledby'?: string;
+  /**
+   * Optionally provide a custom class name that is applied to the underlying <header>
+   */
   className?: string;
 }
 
