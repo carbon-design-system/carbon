@@ -7,3 +7,7 @@ deprecated:
     reason: This icon should no longer be used
   - name: ibm--z--partition
     reason: This icon should no longer be used
+  - name: watson--logo
+    reason:
+      This pictogram should no longer be used, as it represents the old avatar
+      for the Watson brand, which is retired since the watsonx brand launch.

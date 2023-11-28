@@ -16,6 +16,7 @@ import {
   generateGenericItem,
 } from '../ListBox/test-helpers';
 import ComboBox from '../ComboBox';
+import { act } from 'react-dom/test-utils';
 
 const findInputNode = () => screen.getByRole('combobox');
 const openMenu = async () => {
@@ -99,6 +100,21 @@ describe('ComboBox', () => {
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[1],
     });
+  });
+
+  it('should retain value if custom value is entered and `allowCustomValue` is set', async () => {
+    render(<ComboBox {...mockProps} allowCustomValue />);
+
+    expect(findInputNode()).toHaveDisplayValue('');
+
+    await userEvent.type(findInputNode(), 'Apple');
+    // Should close menu and keep value in input, even though it is not in the item list
+    await userEvent.keyboard('[Enter]');
+    assertMenuClosed();
+    expect(findInputNode()).toHaveDisplayValue('Apple');
+    // Should retain value on blur
+    await userEvent.keyboard('[Tab]');
+    expect(findInputNode()).toHaveDisplayValue('Apple');
   });
 
   describe('should display initially selected item found in `initialSelectedItem`', () => {
@@ -233,6 +249,21 @@ describe('ComboBox', () => {
 
       expect(firstListBox()).toBeEmptyDOMElement();
       expect(secondListBox()).toBeEmptyDOMElement();
+    });
+    it('should open menu without moving focus on pressing Alt+ DownArrow', async () => {
+      render(<ComboBox {...mockProps} />);
+      act(() => {
+        screen.getByRole('combobox').focus();
+      });
+      await userEvent.keyboard('{Alt>}{ArrowDown}');
+      assertMenuOpen(mockProps);
+    });
+
+    it('should close menu and return focus to combobox on pressing Alt+ UpArrow', async () => {
+      render(<ComboBox {...mockProps} />);
+      await openMenu();
+      await userEvent.keyboard('{Alt>}{ArrowUp}');
+      assertMenuClosed(mockProps);
     });
   });
 });

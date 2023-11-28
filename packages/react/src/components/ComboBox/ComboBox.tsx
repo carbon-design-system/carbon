@@ -10,7 +10,7 @@ import Downshift, {
   ControllerStateAndHelpers,
   StateChangeOptions,
 } from 'downshift';
-import PropTypes from 'prop-types';
+import PropTypes, { ReactNodeLike } from 'prop-types';
 import React, {
   useContext,
   useEffect,
@@ -55,6 +55,7 @@ const {
   clickButton,
   blurButton,
   changeInput,
+  blurInput,
 } = Downshift.stateChangeTypes;
 
 const defaultItemToString = <ItemType,>(item: ItemType | null) => {
@@ -127,13 +128,20 @@ const getInstanceId = setupGetInstanceId();
 type ExcludedAttributes = 'id' | 'onChange' | 'onClick' | 'type' | 'size';
 
 interface OnChangeData<ItemType> {
-  selectedItem: ItemType | null;
+  selectedItem: ItemType | null | undefined;
+  inputValue?: string | null;
 }
 
 type ItemToStringHandler<ItemType> = (item: ItemType | null) => string;
 
 export interface ComboBoxProps<ItemType>
   extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes> {
+  /**
+   * Specify whether or not the ComboBox should allow a value that is
+   * not in the list to be entered in the input
+   */
+  allowCustomValue?: boolean;
+
   /**
    * Specify a label to be read by screen readers on the container node
    * 'aria-label' of the ListBox component.
@@ -274,6 +282,11 @@ export interface ComboBoxProps<ItemType>
   size?: ListBoxSize;
 
   /**
+   * Provide a `Slug` component to be rendered inside the `ComboBox` component
+   */
+  slug?: ReactNodeLike;
+
+  /**
    * Provide text to be used in a `<label>` element that is tied to the
    * combobox via ARIA attributes.
    */
@@ -329,6 +342,8 @@ const ComboBox = forwardRef(
       translateWithId,
       warn,
       warnText,
+      allowCustomValue = false,
+      slug,
       ...rest
     } = props;
     const prefix = usePrefix();
@@ -447,6 +462,14 @@ const ComboBox = forwardRef(
         case changeInput:
           updateHighlightedIndex(getHighlightedIndex(changes));
           break;
+        case blurInput:
+          if (allowCustomValue) {
+            setInputValue(inputValue);
+            if (onChange) {
+              onChange({ selectedItem, inputValue });
+            }
+          }
+          break;
       }
     };
 
@@ -488,6 +511,7 @@ const ComboBox = forwardRef(
       {
         [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
         [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
+        [`${prefix}--list-box__wrapper--slug`]: slug,
       },
     ]);
 
@@ -498,6 +522,14 @@ const ComboBox = forwardRef(
 
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
+
+    // Slug is always size `mini`
+    let normalizedSlug;
+    if (slug) {
+      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+        size: 'mini',
+      });
+    }
 
     return (
       <Downshift
@@ -571,8 +603,18 @@ const ComboBox = forwardRef(
                 event.stopPropagation();
               }
 
-              if (match(event, keys.Enter) && !inputValue) {
+              if (
+                match(event, keys.Enter) &&
+                (!inputValue || allowCustomValue)
+              ) {
                 toggleMenu();
+
+                // Since `onChange` does not normally fire when the menu is closed, we should
+                // manually fire it when `allowCustomValue` is provided, the menu is closing,
+                // and there is a value.
+                if (allowCustomValue && isOpen && inputValue) {
+                  onChange({ selectedItem, inputValue });
+                }
               }
 
               if (match(event, keys.Escape) && inputValue) {
@@ -592,6 +634,19 @@ const ComboBox = forwardRef(
                   event.target.value.length,
                   event.target.value.length
                 );
+              }
+
+              if (event.altKey && event.key == 'ArrowDown') {
+                event.preventDownshiftDefault = true;
+                if (!isOpen) {
+                  toggleMenu();
+                }
+              }
+              if (event.altKey && event.key == 'ArrowUp') {
+                event.preventDownshiftDefault = true;
+                if (isOpen) {
+                  toggleMenu();
+                }
               }
             },
           });
@@ -679,6 +734,7 @@ const ComboBox = forwardRef(
                     translateWithId={translateWithId}
                   />
                 </div>
+                {normalizedSlug}
                 <ListBox.Menu
                   {...getMenuProps({
                     'aria-label': deprecatedAriaLabel || ariaLabel,
@@ -744,6 +800,12 @@ const ComboBox = forwardRef(
 
 ComboBox.displayName = 'ComboBox';
 ComboBox.propTypes = {
+  /**
+   * Specify whether or not the ComboBox should allow a value that is
+   * not in the list to be entered in the input
+   */
+  allowCustomValue: PropTypes.bool,
+
   /**
    * 'aria-label' of the ListBox component.
    * Specify a label to be read by screen readers on the container node
@@ -893,6 +955,11 @@ ComboBox.propTypes = {
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
    */
   size: ListBoxPropTypes.ListBoxSize,
+
+  /**
+   * Provide a `Slug` component to be rendered inside the `ComboBox` component
+   */
+  slug: PropTypes.node,
 
   /**
    * Provide text to be used in a `<label>` element that is tied to the

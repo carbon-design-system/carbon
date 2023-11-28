@@ -1,0 +1,45 @@
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/theme';
+
+.form-example {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.fluid-slug-form,
+.slug-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  max-width: 450px;
+  margin-left: 4rem;
+}
+
+.fluid-slug-form .cds--date-picker-container {
+  width: 100%;
+}
+
+.slug-container .cds--toggletip-content p {
+  @include type.type-style('body-compact-01');
+}
+
+.slug-container .cds--toggletip-content .bold {
+  font-weight: 600;
+}
+
+.slug-container .cds--toggletip-content .secondary {
+  color: theme.$text-secondary;
+}
+
+.slug-container .cds--toggletip-content h1 {
+  margin-bottom: 1rem;
+}
+
+.slug-container .cds--toggletip-content hr {
+  border: 0;
+  height: 1px;
+  background: theme.$border-subtle;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}

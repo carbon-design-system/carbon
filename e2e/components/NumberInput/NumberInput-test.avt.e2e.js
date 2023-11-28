@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('NumberInput @avt', () => {
-  test('accessibility-checker default', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'NumberInput',
       id: 'components-numberinput--default',
@@ -22,7 +22,7 @@ test.describe('NumberInput @avt', () => {
     await expect(page).toHaveNoACViolations('components-numberinput--default');
   });
 
-  test('accessibility-checker skeleton', async ({ page }) => {
+  test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'NumberInput',
       id: 'components-numberinput--skeleton',
@@ -33,7 +33,7 @@ test.describe('NumberInput @avt', () => {
     await expect(page).toHaveNoACViolations('components-numberinput--skeleton');
   });
 
-  test('number input - keyboard nav', async ({ page }) => {
+  test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'NumberInput',
       id: 'components-numberinput--default',
