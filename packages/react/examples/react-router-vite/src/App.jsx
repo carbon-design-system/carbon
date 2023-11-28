@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Breadcrumb, BreadcrumbItem, Tabs, Tab, TabList} from '@carbon/react';
-import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { Breadcrumb, BreadcrumbItem, Button} from '@carbon/react';
+import { Routes, Route, Link } from 'react-router-dom';
 import './App.scss';
 
 const LandingPage = ({ children }) => (
@@ -18,54 +18,14 @@ const LandingPage = ({ children }) => (
       </ul>
     </section>
     <section>
-      <h2>With tabs</h2>
       {children}
     </section>
   </div>
 );
 
-const TabOne = () => {
-  let navigate = useNavigate();
-  return (
-  <Tabs selected={0}>
-    <TabList aria-label='tab list one'>
-      <Tab onClick={() => navigate('/')} label="Tab 1">
-        <div>Tab 1 content.</div>
-      </Tab>
-      <Tab onClick={() => navigate('/tab-two')} label="Tab 2 label">
-          <div>Tab 2 content.</div>
-      </Tab>
-    </TabList>
-  </Tabs>
-)};
-
-const TabTwo = () => {
-  let navigate = useNavigate();
-  
-  return (
-    <Tabs selected={1}>
-      <TabList aria-label='tab list two'>
-        <Tab onClick={() => navigate('/')} label="Tab 1">
-          <div>Tab 1 content.</div>
-        </Tab>
-        <Tab onClick={() => navigate('/tab-two')} label="Tab 2 label">
-          <div>Tab 2 content.</div>
-        </Tab>
-      </TabList>
-    </Tabs>
-)};
-
-const TabOneContent = () => (
+const ButtonExample = () => (
   <LandingPage>
-    <TabOne />
-    <p>Page one</p>
-  </LandingPage>
-);
-
-const TabTwoContent = () => (
-  <LandingPage>
-    <TabTwo />
-    <p>Page two</p>
+    <Button>Button example</Button>
   </LandingPage>
 );
 
@@ -104,10 +64,9 @@ class App extends Component {
     return (
       <div className="page-content">
         <Routes>
-          <Route exact={true} path="/" element={<TabOneContent />} />
+          <Route exact={true} path="/" element={<ButtonExample />} />
           <Route exact={true} path="/page-one" element={<PageOne />} />
           <Route exact={true} path="/page-two" element={<PageTwo />} />
-          <Route exact={true} path="/tab-two" element={<TabTwoContent />} />
           </Routes>
       </div>
     );
