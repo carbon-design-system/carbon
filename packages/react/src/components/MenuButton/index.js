@@ -62,6 +62,11 @@ const MenuButton = React.forwardRef(function MenuButton(
     menuRef.current.style.inlineSize = `${width}px`;
   }
 
+  const containerClasses = classNames(
+    `${prefix}--menu-button__container`,
+    className
+  );
+
   const triggerClasses = classNames(`${prefix}--menu-button__trigger`, {
     [`${prefix}--menu-button__trigger--open`]: open,
   });
@@ -69,7 +74,11 @@ const MenuButton = React.forwardRef(function MenuButton(
   const buttonKind = validButtonKinds.includes(kind) ? kind : defaultButtonKind;
 
   return (
-    <div {...rest} ref={ref} aria-owns={open ? id : null} className={className}>
+    <div
+      {...rest}
+      ref={ref}
+      aria-owns={open ? id : null}
+      className={containerClasses}>
       <Button
         className={triggerClasses}
         size={size}
@@ -87,6 +96,7 @@ const MenuButton = React.forwardRef(function MenuButton(
         ref={menuRef}
         id={id}
         label={label}
+        mode="basic"
         size={size}
         open={open}
         onClose={handleClose}
