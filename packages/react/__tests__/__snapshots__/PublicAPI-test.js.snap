@@ -4546,6 +4546,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "tabIndex": Object {
+        "type": "number",
+      },
     },
     "render": [Function],
   },
