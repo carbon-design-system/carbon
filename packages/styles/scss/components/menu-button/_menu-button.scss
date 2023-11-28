@@ -14,8 +14,12 @@
 /// @access public
 /// @group menu-button
 @mixin menu-button {
+  .#{$prefix}--menu-button__container {
+    display: inline-block;
+  }
+
   .#{$prefix}--menu-button__trigger:not(.#{$prefix}--btn--ghost) {
-    min-inline-size: 10rem;
+    min-inline-size: 12rem;
   }
 
   .#{$prefix}--menu-button__trigger svg {
