@@ -215,7 +215,7 @@
     align-items: center;
     justify-content: center;
     padding: 0 $spacing-03;
-    // Account for the border in `.bx--table-expand`
+    // Account for the border in `.cds--table-expand`
     block-size: calc(100% + 1px);
     inline-size: 100%;
     vertical-align: inherit;
