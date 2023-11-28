@@ -15,12 +15,12 @@ export type ContentProps = HTMLAttributes<HTMLElement> & {
    * Provide children nodes to be rendered in the content container
    */
   children?: ReactNode;
-  
+
   /**
    * Optionally provide a custom class name that is applied to the container
    */
   className?: string;
-  
+
   /**
    * Optionally specify the tag of the content node. Defaults to `main`
    */
