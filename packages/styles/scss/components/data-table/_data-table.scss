@@ -48,7 +48,7 @@
   // Table title text
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table-header {
-    background: $layer;
+    background-color: $layer;
     padding-block-end: $spacing-06;
     padding-block-start: $spacing-05;
     padding-inline: $spacing-05;
@@ -110,7 +110,7 @@
 
   .#{$prefix}--data-table tbody tr:not([data-child-row]):hover,
   .#{$prefix}--data-table tbody tr[data-child-row]:hover > td {
-    background: $layer-hover;
+    background-color: $layer-hover;
   }
 
   .#{$prefix}--data-table tbody tr:hover td,
@@ -396,7 +396,7 @@
   .#{$prefix}--data-table th.#{$prefix}--table-column-checkbox {
     // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
     position: static;
-    background: $layer-accent;
+    background-color: $layer-accent;
     inline-size: convert.to-rem(32px);
     transition: background-color $duration-fast-01 motion(entrance, productive);
   }
@@ -544,7 +544,7 @@
     tbody
     tr:nth-child(odd).#{$prefix}--data-table--selected:hover,
   .#{$prefix}--data-table tbody .#{$prefix}--data-table--selected:hover {
-    background: $data-table-column-hover;
+    background-color: $data-table-column-hover;
   }
 
   // selected overflow menu

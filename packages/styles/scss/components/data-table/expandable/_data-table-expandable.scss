@@ -288,7 +288,7 @@
     td.#{$prefix}--table-expand
     + td::after {
     position: absolute;
-    background: $layer-accent;
+    background-color: $layer-accent;
     block-size: convert.to-rem(1px);
     content: '';
     inline-size: convert.to-rem(8px);
@@ -302,7 +302,7 @@
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
     td.#{$prefix}--table-expand
     + td::after {
-    background: $layer-hover;
+    background-color: $layer-hover;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected
@@ -351,7 +351,7 @@
   .#{$prefix}--data-table--zebra
     tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
     td {
-    background: $layer-hover;
+    background-color: $layer-hover;
     border-block-end: 1px solid $layer-hover;
     border-block-start: 1px solid $layer-hover;
   }
@@ -360,22 +360,23 @@
   // Selected
   //----------------------------------------------------------------------------
   // Parent collapsed
+
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected {
+    background-color: $layer-selected;
+  }
+
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:first-of-type td {
-    background: $layer-selected;
-    border-block-end: 1px solid $border-subtle;
     border-block-start: 1px solid $layer-active;
     box-shadow: 0 1px $layer-active;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected td {
-    background: $layer-selected;
-    border-block-end: 1px solid transparent;
+    border-block-end: 1px solid $layer-active;
     box-shadow: 0 1px $layer-active;
     color: $text-primary;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:last-of-type td {
-    background: $layer-selected;
     border-block-end: 1px solid transparent;
     box-shadow: 0 1px $border-subtle;
   }
@@ -385,7 +386,7 @@
       .#{$prefix}--expandable-row
     ):hover
     td {
-    background: $layer-selected-hover;
+    background-color: $layer-selected-hover;
     border-block-end: 1px solid $border-subtle;
     border-block-start: 1px solid $layer-selected-hover;
     box-shadow: 0 1px $layer-selected-hover;
@@ -410,7 +411,7 @@
     td,
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
     td:first-of-type {
-    background: $layer-selected-hover;
+    background-color: $layer-selected-hover;
     border-block-end: 1px solid transparent;
     border-block-start: 1px solid $layer-selected-hover;
     box-shadow: 0 1px $layer-selected-hover;
@@ -441,7 +442,7 @@
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
     + tr[data-child-row]
     td {
-    background: $layer-selected;
+    background-color: $layer-selected;
   }
 
   // Slug styles
