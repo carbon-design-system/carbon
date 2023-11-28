@@ -14,6 +14,7 @@ import { keys, match } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
+import { warning } from '../../internal/warning.js';
 
 import { Menu } from './Menu';
 import { MenuContext } from './MenuContext';
@@ -146,6 +147,17 @@ const MenuItem = React.forwardRef(function MenuItem(
     }
   }, [direction]);
 
+  const iconsAllowed =
+    context.state.mode === 'basic' ||
+    rest.role === 'menuitemcheckbox' ||
+    rest.role === 'menuitemradio';
+
+  useEffect(() => {
+    if (iconsAllowed && IconElement && !context.state.hasIcons) {
+      context.dispatch({ type: 'enableIcons' });
+    }
+  }, [iconsAllowed, IconElement, context.state.hasIcons, context]);
+
   return (
     <li
       role="menuitem"
@@ -161,7 +173,7 @@ const MenuItem = React.forwardRef(function MenuItem(
       onMouseLeave={hasChildren ? handleMouseLeave : null}
       onKeyDown={handleKeyDown}>
       <div className={`${prefix}--menu-item__icon`}>
-        {IconElement && <IconElement />}
+        {iconsAllowed && IconElement && <IconElement />}
       </div>
       <Text as="div" className={`${prefix}--menu-item__label`}>
         {label}
@@ -223,7 +235,7 @@ MenuItem.propTypes = {
   onClick: PropTypes.func,
 
   /**
-   * This prop is not intended for use. The only supported icons are Checkmarks to depict single- and multi-selects. This prop is used by MenuItemSelectable and MenuItemRadioGroup automatically.
+   * Only applicable if the parent menu is in `basic` mode. Sets the menu item's icon.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
@@ -239,6 +251,13 @@ const MenuItemSelectable = React.forwardRef(function MenuItemSelectable(
 ) {
   const prefix = usePrefix();
   const context = useContext(MenuContext);
+
+  if (context.state.mode === 'basic') {
+    warning(
+      false,
+      'MenuItemSelectable is not supported when the menu is in "basic" mode.'
+    );
+  }
 
   const [checked, setChecked] = useControllableState({
     value: selected,
@@ -270,7 +289,7 @@ const MenuItemSelectable = React.forwardRef(function MenuItemSelectable(
       className={classNames}
       role="menuitemcheckbox"
       aria-checked={checked}
-      renderIcon={checked && Checkmark}
+      renderIcon={checked ? Checkmark : undefined}
       onClick={handleClick}
     />
   );
@@ -355,6 +374,13 @@ const MenuItemRadioGroup = React.forwardRef(function MenuItemRadioGroup(
   const prefix = usePrefix();
   const context = useContext(MenuContext);
 
+  if (context.state.mode === 'basic') {
+    warning(
+      false,
+      'MenuItemRadioGroup is not supported when the menu is in "basic" mode.'
+    );
+  }
+
   const [selection, setSelection] = useControllableState({
     value: selectedItem,
     onChange,
@@ -386,7 +412,7 @@ const MenuItemRadioGroup = React.forwardRef(function MenuItemRadioGroup(
             label={itemToString(item)}
             role="menuitemradio"
             aria-checked={item === selection}
-            renderIcon={item === selection && Checkmark}
+            renderIcon={item === selection ? Checkmark : undefined}
             onClick={(e) => {
               handleClick(item, e);
             }}

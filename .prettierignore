@@ -17,7 +17,6 @@ packages/components/demo/hot
 !packages/components/demo/index.js
 
 packages/components/docs/api/sass.md
-packages/components/examples/codesandbox
 packages/components/src/globals/fonts/LICENSE.md
 packages/components/tests/a11y-results
 packages/components/tests/coverage
