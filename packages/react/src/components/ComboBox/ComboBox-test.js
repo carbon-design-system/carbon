@@ -16,6 +16,7 @@ import {
   generateGenericItem,
 } from '../ListBox/test-helpers';
 import ComboBox from '../ComboBox';
+import { act } from 'react-dom/test-utils';
 
 const findInputNode = () => screen.getByRole('combobox');
 const openMenu = async () => {
@@ -248,6 +249,21 @@ describe('ComboBox', () => {
 
       expect(firstListBox()).toBeEmptyDOMElement();
       expect(secondListBox()).toBeEmptyDOMElement();
+    });
+    it('should open menu without moving focus on pressing Alt+ DownArrow', async () => {
+      render(<ComboBox {...mockProps} />);
+      act(() => {
+        screen.getByRole('combobox').focus();
+      });
+      await userEvent.keyboard('{Alt>}{ArrowDown}');
+      assertMenuOpen(mockProps);
+    });
+
+    it('should close menu and return focus to combobox on pressing Alt+ UpArrow', async () => {
+      render(<ComboBox {...mockProps} />);
+      await openMenu();
+      await userEvent.keyboard('{Alt>}{ArrowUp}');
+      assertMenuClosed(mockProps);
     });
   });
 });
