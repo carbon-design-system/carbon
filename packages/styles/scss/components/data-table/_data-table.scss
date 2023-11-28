@@ -108,7 +108,8 @@
     transition: background-color $duration-fast-01 motion(entrance, productive);
   }
 
-  .#{$prefix}--data-table tbody tr:hover {
+  .#{$prefix}--data-table tbody tr:not([data-child-row]):hover,
+  .#{$prefix}--data-table tbody tr[data-child-row]:hover > td {
     background: $layer-hover;
   }
 
@@ -202,7 +203,6 @@
 
   .#{$prefix}--data-table td,
   .#{$prefix}--data-table tbody th {
-    // background: $layer;
     border-block-end: 1px solid $border-subtle;
     border-block-start: 1px solid $layer;
     color: $text-secondary;

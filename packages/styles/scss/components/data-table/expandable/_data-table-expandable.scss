@@ -52,7 +52,7 @@
     padding-block-end: 0;
     padding-block-start: 0;
     transition: padding $duration-moderate-01 motion(standard, productive),
-      background-color $duration-moderate-01 motion(standard, productive);
+      background-color $duration-fast-01 motion(standard, productive);
   }
 
   tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row)
@@ -65,15 +65,16 @@
 
   //child row visible
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] {
-    transition: height $duration-moderate-01 motion(standard, productive);
+    transition: height $duration-moderate-01 motion(standard, productive),
+      background-color $duration-fast-01 motion(standard, productive);
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
     border-block-end: 1px solid $border-subtle;
     padding-inline-start: 3.5rem;
-    transition: padding-bottom $duration-fast-02 motion(standard, productive),
-      transform $duration-fast-02 motion(standard, productive),
-      background-color $duration-fast-02 motion(standard, productive);
+    transition: padding-bottom $duration-moderate-01
+        motion(standard, productive),
+      transform $duration-moderate-01 motion(standard, productive);
   }
 
   tbody:has(> tr.#{$prefix}--parent-row--slug)
@@ -121,9 +122,9 @@
   tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row) td,
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row td,
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row {
-    transition: height $duration-moderate-02 motion(standard, productive),
-      background-color $duration-fast-02 motion(standard, productive),
-      border-color $duration-moderate-01 motion(standard, productive);
+    transition: height $duration-moderate-01 motion(standard, productive),
+      background-color $duration-fast-01 motion(standard, productive),
+      border-color $duration-fast-01 motion(standard, productive);
   }
 
   // hovering on collapsed parent
@@ -331,8 +332,8 @@
     + tr[data-child-row]
     td {
     transition: transform $duration-moderate-01 motion(standard, productive),
-      border-bottom $duration-moderate-01 motion(standard, productive),
-      border-top $duration-moderate-01 motion(standard, productive);
+      border-bottom $duration-fast-01 motion(standard, productive),
+      border-top $duration-fast-01 motion(standard, productive);
   }
 
   .#{$prefix}--data-table--zebra tbody tr[data-parent-row]:hover td,
@@ -459,12 +460,10 @@
     border-block-end: 1px solid transparent;
   }
 
-  // .#{$prefix}--data-table
-  //   tbody:has(> .#{$prefix}--parent-row--slug)
-  //   .#{$prefix}--parent-row
-  //   td:has(+ td[data-previous-value='collapsed']) {
-  //   border-block-end: 0;
-  // }
+  .#{$prefix}--parent-row--slug td,
+  .#{$prefix}--data-table tr.#{$prefix}--parent-row--slug:hover td {
+    border-block-start: 1px solid transparent;
+  }
 
   // Windows HCM fix
   .#{$prefix}--table-expand__button:focus .#{$prefix}--table-expand__svg {
