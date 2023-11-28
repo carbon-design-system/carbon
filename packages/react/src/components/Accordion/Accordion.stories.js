@@ -7,7 +7,7 @@
 
 /* eslint-disable no-console */
 
-import React, { useState } from 'react';
+import React from 'react';
 import {
   default as Accordion,
   AccordionItem,
@@ -107,49 +107,6 @@ export const _WithLayer = () => (
     </Accordion>
   </WithLayer>
 );
-
-export const Controlled = () => {
-  const [open, setOpen] = useState(false);
-  return (
-    <Accordion>
-      <AccordionItem
-        title="Section 1 title"
-        open={open}
-        onHeadingClick={({ isOpen }) => setOpen(isOpen)}>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-        </p>
-      </AccordionItem>
-    </Accordion>
-  );
-};
 
 export const Skeleton = (args) => (
   <AccordionSkeleton open count={4} {...args} />
