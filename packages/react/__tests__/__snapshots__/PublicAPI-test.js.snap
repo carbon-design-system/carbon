@@ -4328,6 +4328,9 @@ Map {
   "Link" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "as": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },

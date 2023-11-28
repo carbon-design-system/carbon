@@ -29,6 +29,9 @@ export default {
         disable: true,
       },
     },
+    as: {
+      control: false,
+    },
     renderIcon: {
       table: {
         disable: true,
