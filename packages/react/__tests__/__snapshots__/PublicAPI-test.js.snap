@@ -4414,6 +4414,15 @@ Map {
       "label": Object {
         "type": "string",
       },
+      "mode": Object {
+        "args": Array [
+          Array [
+            "full",
+            "basic",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "onClose": Object {
         "type": "func",
       },
