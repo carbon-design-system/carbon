@@ -516,6 +516,13 @@ const Dropdown = React.forwardRef(
                   item,
                   index,
                 });
+                if (
+                  item !== null &&
+                  typeof item === 'object' &&
+                  Object.prototype.hasOwnProperty.call(item, 'id')
+                ) {
+                  itemProps.id = item['id'];
+                }
                 const title =
                   isObject && 'text' in item && itemToElement
                     ? item.text
