@@ -65,7 +65,7 @@ export const Default = () => {
   );
 };
 
-export const SlugTest = () => {
+export const SlugTest = (args) => {
   const slug = (
     <Slug className="slug-container">
       <SlugContent>
@@ -99,7 +99,7 @@ export const SlugTest = () => {
 
   return (
     <div className="slug-tile-container">
-      <Tile slug={slug} id="tile-1">
+      <Tile slug={slug} id="tile-1" {...args}>
         <h4>Title</h4>
         <p>
           Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit at
@@ -120,7 +120,8 @@ export const SlugTest = () => {
         href="https://www.carbondesignsystem.com/"
         slug
         id="tile-click"
-        renderIcon={ArrowRight}>
+        renderIcon={ArrowRight}
+        {...args}>
         <h4>Title</h4>
         <p>
           Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit at
@@ -141,7 +142,8 @@ export const SlugTest = () => {
         id="selectable-tile-1"
         name="tiles"
         value="selectable"
-        slug={slug}>
+        slug={slug}
+        {...args}>
         <h4>Title</h4>
         <p>
           Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit at
@@ -162,7 +164,8 @@ export const SlugTest = () => {
         id="expandable-tile-1"
         tileCollapsedIconText="Interact to Expand tile"
         tileExpandedIconText="Interact to Collapse tile"
-        slug={slug}>
+        slug={slug}
+        {...args}>
         <TileAboveTheFoldContent>
           <h4>Title</h4>
           <p>
@@ -190,6 +193,29 @@ export const SlugTest = () => {
       </ExpandableTile>
     </div>
   );
+};
+
+SlugTest.argTypes = {
+  hasRoundedCorners: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  slug: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 export const DefaultWithLayer = () => (

@@ -462,6 +462,11 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     fill: $icon-primary;
   }
 
+  // Tile with slug and rounded corners
+  .#{$prefix}--tile--slug-rounded {
+    border-radius: $spacing-05;
+  }
+
   // Windows HCM fix
   .#{$prefix}--tile__chevron svg,
   .#{$prefix}--tile__checkmark svg,

@@ -584,6 +584,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "hasRoundedCorners": Object {
+        "type": "bool",
+      },
       "href": Object {
         "type": "string",
       },
@@ -3079,6 +3082,9 @@ Map {
         "type": "string",
       },
       "expanded": Object {
+        "type": "bool",
+      },
+      "hasRoundedCorners": Object {
         "type": "bool",
       },
       "id": Object {
@@ -6646,6 +6652,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "hasRoundedCorners": Object {
+        "type": "bool",
+      },
       "id": Object {
         "type": "string",
       },
@@ -8593,6 +8602,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "hasRoundedCorners": Object {
+        "type": "bool",
       },
       "light": [Function],
       "slug": Object {

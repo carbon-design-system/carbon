@@ -40,13 +40,26 @@ export interface TileProps extends HTMLAttributes<HTMLDivElement> {
   light?: boolean;
 
   /**
+   * Specify if the `Tile` component should be rendered with rounded corners. Only valid
+   * when `slug` prop is present
+   */
+  hasRoundedCorners?: boolean;
+
+  /**
    * Provide a `Slug` component to be rendered inside the `SelectableTile` component
    */
   slug?: ReactNodeLike;
 }
 
 export const Tile = React.forwardRef<HTMLDivElement, TileProps>(function Tile(
-  { children, className, light = false, slug, ...rest },
+  {
+    children,
+    className,
+    light = false,
+    slug,
+    hasRoundedCorners = false,
+    ...rest
+  },
   ref
 ) {
   const prefix = usePrefix();
@@ -56,6 +69,7 @@ export const Tile = React.forwardRef<HTMLDivElement, TileProps>(function Tile(
     {
       [`${prefix}--tile--light`]: light,
       [`${prefix}--tile--slug`]: slug,
+      [`${prefix}--tile--slug-rounded`]: slug && hasRoundedCorners,
     },
     className
   );
@@ -78,6 +92,12 @@ Tile.propTypes = {
    * The CSS class names.
    */
   className: PropTypes.string,
+
+  /**
+   * Specify if the `Tile` component should be rendered with rounded corners. Only valid
+   * when `slug` prop is present
+   */
+  hasRoundedCorners: PropTypes.bool,
 
   /**
    * `true` to use the light version. For use on $ui-01 backgrounds only.
@@ -112,6 +132,12 @@ export interface ClickableTileProps extends HTMLAttributes<HTMLAnchorElement> {
    * Specify whether the ClickableTile should be disabled
    */
   disabled?: boolean;
+
+  /**
+   * Specify if the `ClickableTile` component should be rendered with rounded corners.
+   * Only valid when `slug` prop is present
+   */
+  hasRoundedCorners?: boolean;
 
   /**
    * The href for the link.
@@ -158,6 +184,7 @@ export const ClickableTile = React.forwardRef<
     onClick = () => {},
     onKeyDown = () => {},
     renderIcon: Icon,
+    hasRoundedCorners,
     slug,
     ...rest
   },
@@ -171,6 +198,7 @@ export const ClickableTile = React.forwardRef<
       [`${prefix}--tile--is-clicked`]: clicked,
       [`${prefix}--tile--light`]: light,
       [`${prefix}--tile--slug`]: slug,
+      [`${prefix}--tile--slug-rounded`]: slug && hasRoundedCorners,
     },
     className
   );
@@ -270,6 +298,12 @@ ClickableTile.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * Specify if the `ClickableTile` component should be rendered with rounded corners.
+   * Only valid when `slug` prop is present
+   */
+  hasRoundedCorners: PropTypes.bool,
+
+  /**
    * The href for the link.
    */
   href: PropTypes.string,
@@ -317,6 +351,12 @@ export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
    * Specify whether the SelectableTile should be disabled
    */
   disabled?: boolean;
+
+  /**
+   * Specify if the `SelectableTile` component should be rendered with rounded corners.
+   * Only valid when `slug` prop is present
+   */
+  hasRoundedCorners?: boolean;
 
   /**
    * The ID of the `<input>`.
@@ -388,6 +428,7 @@ export const SelectableTile = React.forwardRef<
     tabIndex = 0,
     title = 'title',
     slug,
+    hasRoundedCorners,
     ...rest
   },
   ref
@@ -408,6 +449,7 @@ export const SelectableTile = React.forwardRef<
       [`${prefix}--tile--light`]: light,
       [`${prefix}--tile--disabled`]: disabled,
       [`${prefix}--tile--slug`]: slug,
+      [`${prefix}--tile--slug-rounded`]: slug && hasRoundedCorners,
     },
     className
   );
@@ -492,6 +534,12 @@ SelectableTile.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * Specify if the `SelectableTile` component should be rendered with rounded corners.
+   * Only valid when `slug` prop is present
+   */
+  hasRoundedCorners: PropTypes.bool,
+
+  /**
    * The ID of the `<input>`.
    */
   id: PropTypes.string,
@@ -566,6 +614,12 @@ export interface ExpandableTileProps extends HTMLAttributes<HTMLDivElement> {
   expanded?: boolean;
 
   /**
+   * Specify if the `ExpandableTile` component should be rendered with rounded corners.
+   * Only valid when `slug` prop is present
+   */
+  hasRoundedCorners?: boolean;
+
+  /**
    * An ID that can be provided to aria-labelledby
    */
   id?: string;
@@ -634,6 +688,7 @@ export const ExpandableTile = React.forwardRef<
     tileExpandedLabel,
     light,
     slug,
+    hasRoundedCorners,
     ...rest
   },
   forwardRef
@@ -715,6 +770,7 @@ export const ExpandableTile = React.forwardRef<
       [`${prefix}--tile--is-expanded`]: isExpanded,
       [`${prefix}--tile--light`]: light,
       [`${prefix}--tile--slug`]: slug,
+      [`${prefix}--tile--slug-rounded`]: slug && hasRoundedCorners,
     },
     className
   );
@@ -863,6 +919,12 @@ ExpandableTile.propTypes = {
    * `true` if the tile is expanded.
    */
   expanded: PropTypes.bool,
+
+  /**
+   * Specify if the `ExpandableTile` component should be rendered with rounded corners.
+   * Only valid when `slug` prop is present
+   */
+  hasRoundedCorners: PropTypes.bool,
 
   /**
    * An ID that can be provided to aria-labelledby
