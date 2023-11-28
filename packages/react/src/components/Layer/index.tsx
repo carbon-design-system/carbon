@@ -77,22 +77,13 @@ const LayerRenderFunction = React.forwardRef(function Layer<
     Math.min(level + 1, MAX_LEVEL)
   ) as LayerLevel;
 
-  let component: React.ElementType = 'div';
-  if (as) {
-    component = as;
-  }
+  const BaseComponent = (as ?? 'div') as React.ElementType;
 
   return (
     <LayerContext.Provider value={value}>
-      {React.createElement(
-        component,
-        {
-          ref,
-          ...rest,
-          className,
-        },
-        children
-      )}
+      <BaseComponent ref={ref} {...rest} className={className}>
+        {children}
+      </BaseComponent>
     </LayerContext.Provider>
   );
 });
