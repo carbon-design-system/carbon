@@ -59,7 +59,7 @@ const LayerRenderFunction = React.forwardRef(function Layer<
   T extends React.ElementType
 >(
   {
-    as,
+    as = 'div' as T,
     className: customClassName,
     children,
     level: overrideLevel,
@@ -77,7 +77,7 @@ const LayerRenderFunction = React.forwardRef(function Layer<
     Math.min(level + 1, MAX_LEVEL)
   ) as LayerLevel;
 
-  const BaseComponent = (as ?? 'div') as React.ElementType;
+  const BaseComponent = as as React.ElementType;
 
   return (
     <LayerContext.Provider value={value}>
