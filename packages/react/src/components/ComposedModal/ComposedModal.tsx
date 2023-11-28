@@ -29,7 +29,7 @@ export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
 
   /**
    * Provide whether the modal content has a form element.
-   * If `true` is used here, non-form child content should have `bx--modal-content__regular-content` class.
+   * If `true` is used here, non-form child content should have `cds--modal-content__regular-content` class.
    */
   hasForm?: boolean;
 
@@ -100,7 +100,7 @@ ModalBody.propTypes = {
 
   /**
    * Provide whether the modal content has a form element.
-   * If `true` is used here, non-form child content should have `bx--modal-content__regular-content` class.
+   * If `true` is used here, non-form child content should have `cds--modal-content__regular-content` class.
    */
   hasForm: PropTypes.bool,
 
@@ -112,12 +112,12 @@ ModalBody.propTypes = {
 
 export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * Specify the aria-label for bx--modal-container
+   * Specify the aria-label for cds--modal-container
    */
   'aria-label'?: string;
 
   /**
-   * Specify the aria-labelledby for bx--modal-container
+   * Specify the aria-labelledby for cds--modal-container
    */
   'aria-labelledby'?: string;
 
@@ -386,12 +386,12 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
 
 ComposedModal.propTypes = {
   /**
-   * Specify the aria-label for bx--modal-container
+   * Specify the aria-label for cds--modal-container
    */
   ['aria-label']: PropTypes.string,
 
   /**
-   * Specify the aria-labelledby for bx--modal-container
+   * Specify the aria-labelledby for cds--modal-container
    */
   ['aria-labelledby']: PropTypes.string,
 
