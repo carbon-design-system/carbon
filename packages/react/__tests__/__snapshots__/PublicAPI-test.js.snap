@@ -976,6 +976,27 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "span": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
+            },
+            Object {
+              "args": Array [
+                Array [
+                  "25%",
+                  "50%",
+                  "75%",
+                  "100%",
+                ],
+              ],
+              "type": "oneOf",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "xlg": Object {
         "args": Array [
           Array [
@@ -4328,6 +4349,9 @@ Map {
   "Link" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "as": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },
@@ -4413,6 +4437,15 @@ Map {
       },
       "label": Object {
         "type": "string",
+      },
+      "mode": Object {
+        "args": Array [
+          Array [
+            "full",
+            "basic",
+          ],
+        ],
+        "type": "oneOf",
       },
       "onClose": Object {
         "type": "func",
@@ -4512,6 +4545,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "tabIndex": Object {
+        "type": "number",
       },
     },
     "render": [Function],
