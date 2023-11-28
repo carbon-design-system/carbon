@@ -122,7 +122,8 @@
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row td,
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row {
     transition: height $duration-moderate-02 motion(standard, productive),
-      background-color $duration-fast-02 motion(standard, productive);
+      background-color $duration-fast-02 motion(standard, productive),
+      border-color $duration-moderate-01 motion(standard, productive);
   }
 
   // hovering on collapsed parent
@@ -443,20 +444,27 @@
   }
 
   // Slug styles
-  .#{$prefix}--parent-row--slug.#{$prefix}--parent-row.cds--expandable-row
-    > td:first-of-type,
-  .#{$prefix}--parent-row--slug
-    td.cds--table-expand[data-previous-value='collapsed'] {
-    border: none;
+  .#{$prefix}--parent-row .#{$prefix}--table-column-slug,
+  .#{$prefix}--parent-row
+    .#{$prefix}--table-column-slug
+    + td.cds--table-expand[data-previous-value='collapsed'] {
     box-shadow: none;
   }
 
-  .#{$prefix}--data-table
-    tbody:has(> .#{$prefix}--parent-row--slug)
-    .#{$prefix}--parent-row
-    td:has(+ td[data-previous-value='collapsed']) {
-    border-block-end: 0;
+  .#{$prefix}--parent-row.#{$prefix}--expandable-row
+    .#{$prefix}--table-column-slug,
+  .#{$prefix}--parent-row.#{$prefix}--expandable-row
+    .#{$prefix}--table-column-slug
+    + td.cds--table-expand[data-previous-value='collapsed'] {
+    border-block-end: 1px solid transparent;
   }
+
+  // .#{$prefix}--data-table
+  //   tbody:has(> .#{$prefix}--parent-row--slug)
+  //   .#{$prefix}--parent-row
+  //   td:has(+ td[data-previous-value='collapsed']) {
+  //   border-block-end: 0;
+  // }
 
   // Windows HCM fix
   .#{$prefix}--table-expand__button:focus .#{$prefix}--table-expand__svg {
