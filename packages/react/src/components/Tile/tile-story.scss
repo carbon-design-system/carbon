@@ -4,6 +4,6 @@
   @include tile.tile($enable-experimental-tile-contrast: true);
 }
 
-div .bx--tile--selectable:not(:last-child) {
+div .cds--tile--selectable:not(:last-child) {
   margin-block-end: 1rem;
 }

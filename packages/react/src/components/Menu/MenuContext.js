@@ -9,6 +9,7 @@ import React from 'react';
 
 const menuDefaultState = {
   isRoot: true,
+  mode: 'full',
   hasIcons: false,
   size: null,
   items: [],

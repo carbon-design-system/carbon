@@ -127,9 +127,9 @@ $css--plex: true;
 
 Style selectors that are a part of the sass files for Carbon are built using a
 global `$prefix` variable that allows us to dynamically change the prefix of
-selectors that we ship. By default, `$prefix` is set to `bx`. `bx` comes from
-Carbon's origins in Bluemix. If you look at our source files, you'll see that we
-use `$prefix` in our selectors in the following way:
+selectors that we ship. By default, `$prefix` is set to `cds`. If you look at
+our source files, you'll see that we use `$prefix` in our selectors in the
+following way:
 
 ```scss
 // Input
@@ -138,7 +138,7 @@ use `$prefix` in our selectors in the following way:
 }
 
 // Output
-.bx--my-component {
+.cds--my-component {
   // ...
 }
 ```
@@ -154,7 +154,7 @@ In order to override `$prefix` to your own custom prefix, you will need to set
 
 ```scss
 // Custom prefix
-$prefix: 'cds';
+$prefix: 'ibm';
 
 // Import Carbon
 @import 'path-to-carbon';
