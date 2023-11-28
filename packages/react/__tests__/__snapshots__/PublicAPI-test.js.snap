@@ -976,6 +976,27 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "span": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
+            },
+            Object {
+              "args": Array [
+                Array [
+                  "25%",
+                  "50%",
+                  "75%",
+                  "100%",
+                ],
+              ],
+              "type": "oneOf",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "xlg": Object {
         "args": Array [
           Array [
