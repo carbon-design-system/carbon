@@ -296,4 +296,11 @@ $radio-border-width: 1px !default;
     .#{$prefix}--slug {
     margin-inline-start: $spacing-03;
   }
+
+  .#{$prefix}--radio-button-wrapper--slug
+    .#{$prefix}--radio-button__label-text
+    .#{$prefix}--slug__button--inline {
+    line-height: inherit;
+    margin-block-start: convert.to-rem(-1px);
+  }
 }

@@ -133,9 +133,10 @@ const RadioButton = React.forwardRef((props: RadioButtonProps, ref) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   let normalizedSlug;
-  if (slug) {
+  if (slug && React.isValidElement(slug)) {
+    const size = slug.props?.['kind'] === 'inline' ? 'md' : 'mini';
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-      size: 'mini',
+      size,
     });
   }
 

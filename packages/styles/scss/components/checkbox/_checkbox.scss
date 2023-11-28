@@ -374,4 +374,11 @@
     .#{$prefix}--slug {
     margin-inline-start: $spacing-03;
   }
+
+  .#{$prefix}--checkbox-wrapper--slug
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--slug__button--inline {
+    line-height: inherit;
+    margin-block-start: convert.to-rem(-1px);
+  }
 }
