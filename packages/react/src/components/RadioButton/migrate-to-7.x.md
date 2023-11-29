@@ -12,4 +12,4 @@
 `<RadioButtonSkeleton>`
 
 No longer adds `radioButtonWrapper` class to the top-level element. Please use
-`bx--radio-button-wrapper` for style overrides.
+`cds--radio-button-wrapper` for style overrides.
