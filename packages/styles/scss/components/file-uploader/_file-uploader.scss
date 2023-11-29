@@ -53,7 +53,7 @@
   }
 
   // This class is of old markup with "select file" button
-  // New code should use link-style "select file" UI (`.bx--file-browse-btn`)
+  // New code should use link-style "select file" UI (`.cds--file-browse-btn`)
   // TODO: deprecate this block
   .#{$prefix}--file-btn {
     display: inline-flex;
@@ -160,7 +160,7 @@
     }
 
     .#{$prefix}--inline-loading__animation .#{$prefix}--loading {
-      // Vanilla markup has `.bx--inline-loading__animation` which is used for `margin-right` adjustment
+      // Vanilla markup has `.cds--inline-loading__animation` which is used for `margin-right` adjustment
       margin-inline-end: 0;
     }
 
