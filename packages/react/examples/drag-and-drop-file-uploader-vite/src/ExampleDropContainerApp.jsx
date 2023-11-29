@@ -5,14 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useCallback, useEffect } from 'react';
-import { render } from 'react-dom';
-import { settings } from 'carbon-components';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
+import classnames from 'classnames';
 import {
   FileUploaderItem,
   FileUploaderDropContainer,
   FormItem,
-} from 'carbon-components-react';
+} from '@carbon/react';
 
 let lastId = 0;
 
@@ -20,10 +19,11 @@ function uid(prefix = 'id') {
   lastId++;
   return `${prefix}${lastId}`;
 }
-const { prefix } = settings;
+const  prefix  = 'cds';
 
-function ExampleDropContainerApp(props) {
+export const ExampleDropContainerApp = (props) => {
   const [files, setFiles] = useState([]);
+  const uploaderButton = useRef(null);
   const handleDrop = (e) => {
     e.preventDefault();
   };
@@ -59,6 +59,7 @@ function ExampleDropContainerApp(props) {
       );
       return;
     }
+
     // file type validation
     if (fileToUpload.invalidFileType) {
       const updatedFile = {
@@ -76,18 +77,10 @@ function ExampleDropContainerApp(props) {
       );
       return;
     }
-    try {
-      const response = await fetch(
-        'https://www.mocky.io/v2/5185415ba171ea3a00704eed?mocky-delay=1000ms',
-        {
-          method: 'POST',
-          mode: 'cors',
-          body: fileToUpload,
-        }
-      );
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
+
+    // simulate network request time
+    const rand = Math.random() * 1000;
+    setTimeout(() => {
       const updatedFile = {
         ...fileToUpload,
         status: 'complete',
@@ -98,34 +91,21 @@ function ExampleDropContainerApp(props) {
           file.uuid === fileToUpload.uuid ? updatedFile : file
         )
       );
+    }, rand);
 
-      // show x icon after 1 second
-      setTimeout(() => {
-        const updatedFile = {
-          ...fileToUpload,
-          status: 'edit',
-          iconDescription: 'Remove file',
-        };
-        setFiles((files) =>
-          files.map((file) =>
-            file.uuid === fileToUpload.uuid ? updatedFile : file
-          )
-        );
-      }, 1000);
-    } catch (error) {
+    // show x icon after 1 second
+    setTimeout(() => {
       const updatedFile = {
         ...fileToUpload,
         status: 'edit',
-        iconDescription: 'Upload failed',
-        invalid: true,
+        iconDescription: 'Delete file',
       };
       setFiles((files) =>
         files.map((file) =>
           file.uuid === fileToUpload.uuid ? updatedFile : file
         )
       );
-      console.log(error);
-    }
+    }, rand + 1000);
   };
 
   const onAddFiles = useCallback(
@@ -137,7 +117,9 @@ function ExampleDropContainerApp(props) {
         filesize: file.size,
         status: 'uploading',
         iconDescription: 'Uploading',
+        invalidFileType: file.invalidFileType,
       }));
+      // eslint-disable-next-line react/prop-types
       if (props.multiple) {
         setFiles([...files, ...newFiles]);
         newFiles.forEach(uploadFile);
@@ -146,23 +128,44 @@ function ExampleDropContainerApp(props) {
         uploadFile(newFiles[0]);
       }
     },
+    // eslint-disable-next-line react/prop-types
     [files, props.multiple]
   );
 
   const handleFileUploaderItemClick = useCallback(
-    (_, { uuid: clickedUuid }) =>
-      setFiles(files.filter(({ uuid }) => clickedUuid !== uuid)),
+    (_, { uuid: clickedUuid }) => {
+      uploaderButton.current.focus();
+      return setFiles(files.filter(({ uuid }) => clickedUuid !== uuid));
+    },
     [files]
   );
 
+  const labelClasses = classnames(`${prefix}--file--label`, {
+    // eslint-disable-next-line react/prop-types
+    [`${prefix}--file--label--disabled`]: props.disabled,
+  });
+
+  const helperTextClasses = classnames(`${prefix}--label-description`, {
+    // eslint-disable-next-line react/prop-types
+    [`${prefix}--label-description--disabled`]: props.disabled,
+  });
+
   return (
     <FormItem>
-      <p className={`${prefix}--file--label`}>Upload files</p>
-      <p className={`${prefix}--label-description`}>
+      <p className={labelClasses}>Upload files</p>
+      <p className={helperTextClasses}>
         Max file size is 500kb. Supported file types are .jpg and .png.
       </p>
-      <FileUploaderDropContainer {...props} onAddFiles={onAddFiles} />
-      <div className="uploaded-files" style={{ width: '100%' }}>
+      <FileUploaderDropContainer
+        {...props}
+        onAddFiles={onAddFiles}
+        innerRef={uploaderButton}
+      />
+      <div
+        className={classnames(
+          `${prefix}--file-container`,
+          `${prefix}--file-container--drop`
+        )}>
         {files.map(
           ({
             uuid,
@@ -178,7 +181,8 @@ function ExampleDropContainerApp(props) {
               uuid={uuid}
               name={name}
               filesize={filesize}
-              size="default"
+              // eslint-disable-next-line react/prop-types
+              size={props.size}
               status={status}
               iconDescription={iconDescription}
               invalid={invalid}
@@ -190,9 +194,4 @@ function ExampleDropContainerApp(props) {
       </div>
     </FormItem>
   );
-}
-
-render(
-  <ExampleDropContainerApp accept={['image/jpeg', 'image/png']} />,
-  document.getElementById('root')
-);
+};
