@@ -25,6 +25,7 @@ function CheckboxGroup({
   readOnly,
   warn,
   warnText,
+  slug,
   ...rest
 }) {
   const prefix = usePrefix();
@@ -48,7 +49,17 @@ function CheckboxGroup({
     [`${prefix}--checkbox-group--readonly`]: readOnly,
     [`${prefix}--checkbox-group--invalid`]: !readOnly && invalid,
     [`${prefix}--checkbox-group--warning`]: showWarning,
+    [`${prefix}--checkbox-group--slug`]: slug,
   });
+
+  // Slug is always size `mini`
+  let normalizedSlug;
+  if (slug) {
+    normalizedSlug = React.cloneElement(slug, {
+      size: 'mini',
+      kind: 'default',
+    });
+  }
 
   return (
     <fieldset
@@ -62,6 +73,7 @@ function CheckboxGroup({
         className={`${prefix}--label`}
         id={legendId || rest['aria-labelledby']}>
         {legendText}
+        {normalizedSlug}
       </legend>
       {children}
       <div className={`${prefix}--checkbox-group__validation-msg`}>
@@ -126,6 +138,11 @@ CheckboxGroup.propTypes = {
    * Whether the CheckboxGroup should be read-only
    */
   readOnly: PropTypes.bool,
+
+  /**
+   * Provide a `Slug` component to be rendered inside the `CheckboxGroup` component
+   */
+  slug: PropTypes.node,
 
   /**
    * Specify whether the form group is currently in warning state
