@@ -9,12 +9,11 @@
 
 /// Experimental - name and structure subject to change. Use at your own risk!
 /// Adds AI gradient styles to a component
-/// @access public
+/// @access private
 /// @param {String} $direction  - Direction of gradient from: `left`, `right`, `top`, and `bottom`
 /// @param {Number} $width - Percentage width of gradient with regards to parent component
 /// @example @include ai-gradient('right', '33%');
 /// @group utilities
-
 @mixin ai-gradient($direction: 'right', $width: 33%) {
   $deg: 0;
   @if $direction == 'bottom' {
@@ -39,4 +38,59 @@
       theme.$ai-gradient-end $width,
       transparent 100%
     );
+}
+
+/// Experimental - name and structure subject to change. Use at your own risk!
+/// Adds callout gradient styles to a component
+/// @access private
+/// @example @include callout-gradient();
+/// @param {String} $type  - Type of gradient, either 'default', 'selected' or 'hover'
+/// @group utilities
+@mixin callout-gradient($type: 'default') {
+  @if $type == 'hover' {
+    background: linear-gradient(
+        0deg,
+        theme.$slug-callout-aura-start-hover-01 0%,
+        theme.$slug-callout-aura-end-hover-01 50%,
+        transparent 50%
+      ),
+      linear-gradient(
+        0deg,
+        theme.$slug-callout-aura-start-hover-02 0%,
+        theme.$slug-callout-aura-end-hover-02 50%,
+        transparent 50%
+      ),
+      linear-gradient(
+          180deg,
+          theme.$slug-callout-gradient-top-hover 0%,
+          theme.$slug-callout-gradient-bottom-hover 100%
+        )
+        rgba(0, 0, 0, 0.01);
+  } @else if $type == 'selected' {
+    background: linear-gradient(
+        0deg,
+        theme.$slug-callout-aura-start-selected 0%,
+        theme.$slug-callout-aura-end-selected 50%,
+        transparent 50%
+      ),
+      linear-gradient(
+          180deg,
+          theme.$slug-callout-gradient-top-selected 0%,
+          theme.$slug-callout-gradient-bottom-selected 100%
+        )
+        rgba(0, 0, 0, 0.01);
+  } @else {
+    background: linear-gradient(
+        0deg,
+        theme.$slug-callout-aura-start 0%,
+        theme.$slug-callout-aura-end 50%,
+        transparent 50%
+      ),
+      linear-gradient(
+          180deg,
+          theme.$slug-callout-gradient-top 0%,
+          theme.$slug-callout-gradient-bottom 100%
+        )
+        rgba(0, 0, 0, 0.01);
+  }
 }

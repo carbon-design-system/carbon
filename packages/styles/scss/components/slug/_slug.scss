@@ -4,6 +4,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../../utilities/ai-gradient' as *;
 @use '../../utilities/convert';
 
 $sizes: (
@@ -324,22 +325,12 @@ $sizes: (
 
   // Slug callout styles
   .#{$prefix}--slug.#{$prefix}--slug--enabled .#{$prefix}--slug-content {
+    @include callout-gradient();
+
     border: 1px solid $border-subtle;
     border-radius: 16px;
     // 84px seems to make this fully opaque?
     backdrop-filter: blur(25px);
-    background: linear-gradient(
-        0deg,
-        $slug-callout-aura-start 0%,
-        $slug-callout-aura-end 33%,
-        transparent 100%
-      ),
-      linear-gradient(
-          180deg,
-          $slug-callout-gradient-top 0%,
-          $slug-callout-gradient-bottom 100%
-        )
-        rgba(0, 0, 0, 0.01);
     // box-shadow seems to match the spec better
     // than the same values plugged into `drop-shadow`
     // filter: drop-shadow(-45px 45px 100px rgba(0, 0, 0, 0.2));

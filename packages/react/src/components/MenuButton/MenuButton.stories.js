@@ -10,6 +10,8 @@ import { action } from '@storybook/addon-actions';
 
 import { MenuItem, MenuItemDivider } from '../Menu';
 
+import { Asset, User, Group } from '@carbon/react/icons';
+
 import { MenuButton } from './';
 import mdx from './MenuButton.mdx';
 
@@ -55,6 +57,14 @@ export const WithDividers = () => (
     <MenuItemDivider />
     <MenuItem label="Edit source location" />
     <MenuItem label="Recalculate source" />
+  </MenuButton>
+);
+
+export const WithIcons = () => (
+  <MenuButton label="Add">
+    <MenuItem label="Asset" renderIcon={Asset} />
+    <MenuItem label="User" renderIcon={User} />
+    <MenuItem label="User group" renderIcon={Group} />
   </MenuButton>
 );
 
