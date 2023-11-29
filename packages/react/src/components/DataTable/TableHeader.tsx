@@ -7,13 +7,12 @@
 
 import cx from 'classnames';
 import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { MouseEventHandler } from 'react';
+import React, { MouseEventHandler, useRef } from 'react';
 import {
   ArrowUp as Arrow,
   ArrowsVertical as Arrows,
 } from '@carbon/icons-react';
 import classNames from 'classnames';
-import { composeEventHandlers } from '../../tools/events';
 import { sortStates } from './state/sorting';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
@@ -150,10 +149,12 @@ const TableHeader = React.forwardRef(function TableHeader(
   const uniqueId = useId('table-sort');
 
   // Slug is always size `mini`
+  const slugRef = useRef<HTMLInputElement>(null);
   let normalizedSlug;
   if (slug) {
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
       size: 'mini',
+      ref: slugRef,
     });
   }
 
@@ -199,10 +200,16 @@ const TableHeader = React.forwardRef(function TableHeader(
       sortStates,
     });
 
-  const headerClasses = cx(headerClassName, `${prefix}--table-sort__header`);
+  const headerClasses = cx(headerClassName, `${prefix}--table-sort__header`, {
+    [`${prefix}--table-sort__header--slug`]: slug,
+  });
 
   const handleClick = (evt) => {
-    console.log(evt);
+    if (slug && slugRef.current && slugRef.current.contains(evt.target)) {
+      return;
+    } else if (onClick) {
+      return onClick(evt);
+    }
   };
 
   return (
@@ -220,7 +227,7 @@ const TableHeader = React.forwardRef(function TableHeader(
         type="button"
         aria-describedby={uniqueId}
         className={className}
-        onClick={composeEventHandlers([handleClick, onClick])}
+        onClick={handleClick}
         {...rest}>
         <span className={`${prefix}--table-sort__flex`}>
           <div className={`${prefix}--table-header-label`}>{children}</div>
