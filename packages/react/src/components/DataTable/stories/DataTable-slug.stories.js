@@ -291,3 +291,98 @@ export const SlugWithExpansion = () => (
     )}
   </DataTable>
 );
+
+export const ColumnSlugWithSelectionAndExpansion = () => (
+  <DataTable rows={rows} headers={headers}>
+    {({
+      rows,
+      headers,
+      getHeaderProps,
+      getRowProps,
+      getExpandedRowProps,
+      getExpandHeaderProps,
+      getSelectionProps,
+      getTableProps,
+      getTableContainerProps,
+    }) => (
+      <TableContainer
+        title="DataTable"
+        description="With expansion"
+        {...getTableContainerProps()}>
+        <Table {...getTableProps()} aria-label="sample table">
+          <TableHead>
+            <TableRow>
+              <TableExpandHeader
+                enableToggle={true}
+                {...getExpandHeaderProps()}
+              />
+              <TableSelectAll {...getSelectionProps()} />
+              {headers.map((header, i) => (
+                <TableHeader
+                  slug={i === 2 ? slug : null}
+                  key={i}
+                  {...getHeaderProps({ header })}>
+                  {header.header}
+                </TableHeader>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => {
+              return (
+                <React.Fragment key={row.id}>
+                  <TableExpandRow {...getRowProps({ row })}>
+                    <TableSelectRow {...getSelectionProps({ row })} />
+                    {row.cells.map((cell) => {
+                      console.log(cell);
+                      return <TableCell key={cell.id}>{cell.value}</TableCell>;
+                    })}
+                  </TableExpandRow>
+                  <TableExpandedRow
+                    colSpan={headers.length + 2}
+                    className="demo-expanded-td"
+                    {...getExpandedRowProps({ row })}>
+                    <h6>Expandable row content</h6>
+                    <div>Description here</div>
+                  </TableExpandedRow>
+                </React.Fragment>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )}
+  </DataTable>
+);
+
+export const ColumnSlugSort = () => (
+  <DataTable rows={rows} headers={headers}>
+    {({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
+      <TableContainer title="DataTable" description="With sorting">
+        <Table {...getTableProps()} aria-label="sample table">
+          <TableHead>
+            <TableRow>
+              {headers.map((header, i) => (
+                <TableHeader
+                  key={header.key}
+                  slug={i === 2 ? slug : null}
+                  {...getHeaderProps({ header, isSortable: true })}>
+                  {header.header}
+                </TableHeader>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id} {...getRowProps({ row })}>
+                {row.cells.map((cell) => (
+                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )}
+  </DataTable>
+);

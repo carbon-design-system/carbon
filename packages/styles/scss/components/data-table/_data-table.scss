@@ -968,6 +968,18 @@
     transform: translateY(1px);
   }
 
+  // Slug inside header styles
+  th .#{$prefix}--table-header-label.#{$prefix}--table-header-label--slug {
+    display: flex;
+    align-items: center;
+  }
+
+  th
+    .#{$prefix}--table-header-label.#{$prefix}--table-header-label--slug
+    .#{$prefix}--slug {
+    margin-inline-start: $spacing-03;
+  }
+
   // Windows HCM fix
   // stylelint-disable-next-line no-duplicate-selectors
   .#{$prefix}--data-table-content {

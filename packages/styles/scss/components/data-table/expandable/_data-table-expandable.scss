@@ -77,12 +77,17 @@
       transform $duration-moderate-01 motion(standard, productive);
   }
 
+  // Increase padding inside expandable row when only a slug OR checkbox is present in row
   tbody:has(> tr.#{$prefix}--parent-row--slug)
+    > tr.#{$prefix}--expandable-row[data-child-row]
+    td,
+  tbody:has(td.#{$prefix}--table-column-checkbox)
     > tr.#{$prefix}--expandable-row[data-child-row]
     td {
     padding-inline-start: convert.to-rem(88px);
   }
 
+  // Increase padding inside expandable row when slug AND checkbox is present in row
   tbody:has(> tr.#{$prefix}--parent-row--slug):has(
       td.#{$prefix}--table-column-checkbox
     )
@@ -194,6 +199,14 @@
     + .#{$prefix}--table-column-checkbox {
     padding-inline-end: convert.to-rem(6px);
     padding-inline-start: convert.to-rem(6px);
+  }
+
+  // Hide bottom border of checkbox column when expanded
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-expand[data-previous-value='collapsed']
+    + .#{$prefix}--table-column-checkbox {
+    border-block-end: 1px solid transparent;
+    box-shadow: none;
   }
 
   .#{$prefix}--data-table
