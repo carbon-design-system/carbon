@@ -15,7 +15,7 @@ export const TABLE_SIZE = {
   /**
    * Regular size.
    */
-  REGULAR: 'normal',
+  REGULAR: 'lg',
 
   /**
    * Tall size.
