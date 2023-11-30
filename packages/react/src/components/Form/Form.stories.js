@@ -21,7 +21,6 @@ import TextArea from '../TextArea';
 import TextInput from '../TextInput';
 import { Stack } from '../Stack';
 import mdx from './Form.mdx';
-import './form-story.scss';
 
 const checkboxEvents = {
   className: 'some-class',

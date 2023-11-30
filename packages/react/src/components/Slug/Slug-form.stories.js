@@ -3,7 +3,7 @@ import ComboBox from '../ComboBox';
 import Dropdown from '../Dropdown';
 import DatePicker from '../DatePicker';
 import DatePickerInput from '../DatePickerInput';
-import Form from './Form';
+import Form from '../Form/Form';
 import { MultiSelect, FilterableMultiSelect } from '../MultiSelect';
 import FluidForm from '../FluidForm';
 import FluidNumberInput from '../FluidNumberInput';
@@ -20,8 +20,8 @@ import TextInput from '../TextInput';
 import { Stack } from '../Stack';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
-import { Slug, SlugContent, SlugActions } from '../Slug';
-import './form-story.scss';
+import { Slug, SlugContent, SlugActions } from '.';
+import './slug-story.scss';
 
 export default {
   title: 'Experimental/unstable__Slug/Form',
@@ -194,7 +194,7 @@ export const RevertTest = () => {
   );
 };
 
-export const _FluidForm = (args) => {
+export const _FormExample = (args) => {
   const { revertActive, ...rest } = args;
   const slug = (
     <Slug className="slug-container" revertActive={revertActive}>
@@ -346,7 +346,7 @@ export const _FluidForm = (args) => {
   );
 };
 
-_FluidForm.args = {
+_FormExample.args = {
   revertActive: false,
   invalid: false,
   invalidText:
@@ -357,7 +357,7 @@ _FluidForm.args = {
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
 };
 
-_FluidForm.argTypes = {
+_FormExample.argTypes = {
   children: {
     table: {
       disable: true,

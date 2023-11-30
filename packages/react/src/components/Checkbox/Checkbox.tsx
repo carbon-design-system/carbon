@@ -70,7 +70,7 @@ export interface CheckboxProps
   invalidText?: React.ReactNode;
 
   /**
-   * Provide a `Slug` component to be rendered inside the `Checkbox` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `Checkbox` component
    */
   slug?: ReactNodeLike;
 
@@ -300,7 +300,7 @@ Checkbox.propTypes = {
   readOnly: PropTypes.bool,
 
   /**
-   * Provide a `Slug` component to be rendered inside the `Checkbox` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `Checkbox` component
    */
   slug: PropTypes.node,
 
