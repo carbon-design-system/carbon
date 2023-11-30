@@ -83,6 +83,11 @@ export interface RadioButtonProps
   onClick?: (evt: React.MouseEvent<HTMLInputElement>) => void;
 
   /**
+   * Provide a `Slug` component to be rendered inside the `RadioButton` component
+   */
+  slug?: ReactNodeLike;
+
+  /**
    * Specify the value of the `<RadioButton>`
    */
   value?: string | number;
@@ -99,6 +104,7 @@ const RadioButton = React.forwardRef((props: RadioButtonProps, ref) => {
     name,
     onChange = () => {},
     value = '',
+    slug,
     ...rest
   } = props;
 
@@ -120,10 +126,19 @@ const RadioButton = React.forwardRef((props: RadioButtonProps, ref) => {
     {
       [`${prefix}--radio-button-wrapper--label-${labelPosition}`]:
         labelPosition !== 'right',
+      [`${prefix}--radio-button-wrapper--slug`]: slug,
     }
   );
 
   const inputRef = useRef<HTMLInputElement>(null);
+
+  let normalizedSlug;
+  if (slug && React.isValidElement(slug)) {
+    const size = slug.props?.['kind'] === 'inline' ? 'md' : 'mini';
+    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+      size,
+    });
+  }
 
   return (
     <div className={wrapperClasses}>
@@ -140,7 +155,12 @@ const RadioButton = React.forwardRef((props: RadioButtonProps, ref) => {
       />
       <label htmlFor={uniqueId} className={`${prefix}--radio-button__label`}>
         <span className={`${prefix}--radio-button__appearance`} />
-        {labelText && <Text className={innerLabelClasses}>{labelText}</Text>}
+        {labelText && (
+          <Text className={innerLabelClasses}>
+            {labelText}
+            {normalizedSlug}
+          </Text>
+        )}
       </label>
     </div>
   );
@@ -206,6 +226,11 @@ RadioButton.propTypes = {
    * Provide a handler that is invoked when a user clicks on the control
    */
   onClick: PropTypes.func,
+
+  /**
+   * Provide a `Slug` component to be rendered inside the `RadioButton` component
+   */
+  slug: PropTypes.node,
 
   /**
    * Specify the value of the `<RadioButton>`
