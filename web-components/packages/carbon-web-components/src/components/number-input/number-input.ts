@@ -69,6 +69,13 @@ class CDSNumberInput extends CDSTextInput {
         },
       })
     );
+
+    this.dispatchEvent(
+      new Event('input', {
+        bubbles: true,
+        cancelable: true,
+      })
+    );
   }
 
   /**
@@ -86,6 +93,13 @@ class CDSNumberInput extends CDSTextInput {
         detail: {
           value: input.value,
         },
+      })
+    );
+
+    this.dispatchEvent(
+      new Event('input', {
+        bubbles: true,
+        cancelable: true,
       })
     );
   }
@@ -240,6 +254,7 @@ class CDSNumberInput extends CDSTextInput {
     const inputWrapperClasses = classMap({
       [`${prefix}--number__input-wrapper`]: true,
       [`${prefix}--number__input-wrapper--warning`]: normalizedProps.warn,
+      [`${prefix}--number__input-wrapper--slug`]: this._hasSlug,
     });
 
     const labelClasses = classMap({
@@ -318,6 +333,7 @@ class CDSNumberInput extends CDSTextInput {
         </label>
         <div class="${inputWrapperClasses}">
           ${normalizedProps.icon} ${input}
+          <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
           <div class="${prefix}--number__controls">
             ${!this.hideSteppers
               ? html`${decrementButton} ${incrementButton}`

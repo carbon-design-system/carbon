@@ -13,6 +13,7 @@
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/layout' as *;
 @use '@carbon/styles/scss/components/slug/index' as *;
 @use '../toggle-tip/toggletip.scss';
 
@@ -73,7 +74,16 @@
   }
 }
 
+:host(#{$prefix}-slug[revert-active]) {
+  transform: translate($spacing-03, -50%);
+}
+
+:host(#{$prefix}-slug[open]) {
+  z-index: 1;
+}
+
 :host(#{$prefix}-slug-action-button) {
+  @include emit-layout-tokens();
   .#{$prefix}--btn--primary {
     order: 1;
     border-end-end-radius: 1rem;

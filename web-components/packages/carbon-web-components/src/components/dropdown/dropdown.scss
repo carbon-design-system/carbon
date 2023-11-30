@@ -11,14 +11,11 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities' as *;
-@use '@carbon/styles/scss/components/list-box/list-box' as *;
+@use '@carbon/styles/scss/components/list-box/list-box';
 @use '@carbon/styles/scss/components/dropdown' as *;
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/checkbox';
 @use '@carbon/styles/scss/components/tag';
-
-// https://github.com/carbon-design-system/carbon/issues/11408
-@include list-box;
 
 :host(#{$prefix}-dropdown) {
   outline: none;
@@ -150,5 +147,32 @@ $css--plex: true !default;
 :host(#{$prefix}-dropdown-skeleton) {
   .#{$prefix}--skeleton {
     @include skeleton;
+  }
+}
+
+:host(#{$prefix}-dropdown[slug]) {
+  @extend .#{$prefix}--list-box__wrapper--slug;
+
+  ::slotted(#{$prefix}-slug) {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: $spacing-08;
+  }
+
+  ::slotted(#{$prefix}-slug:not([revert-active])) {
+    transform: translateY(-50%);
+  }
+}
+
+:host(#{$prefix}-dropdown[slug][warn]),
+:host(#{$prefix}-dropdown[slug][invalid]) {
+  .#{$prefix}--list-box {
+    .#{$prefix}--list-box__field {
+      padding-inline-end: $spacing-12;
+    }
+  }
+
+  ::slotted(#{$prefix}-slug) {
+    inset-inline-end: $spacing-10;
   }
 }

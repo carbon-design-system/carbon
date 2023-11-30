@@ -13,6 +13,7 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSToggleTip from '../toggle-tip/toggletip';
 import styles from './slug.scss';
+import Undo16 from '@carbon/icons/lib/undo/16';
 import { SLUG_SIZE, SLUG_KIND, SLUG_DOT_TYPE } from './defs';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -23,24 +24,8 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  */
 @customElement(`${prefix}-slug`)
 export default class CDSSlug extends CDSToggleTip {
-  /**
-   * Slug size should be mini, 2xs, xs, sm, md, lg, xl.
-   */
   @property({ reflect: true })
-  size = SLUG_SIZE.MEDIUM;
-
-  /**
-   * Specify the type of Slug, from the following list of types: (default, hollow, inline)
-   */
-  @property({ reflect: true })
-  kind = SLUG_KIND.DEFAULT;
-
-  /**
-   * Specify the type of dot that should be rendered in front of the inline variant: (default, hollow)
-   */
-  @property({ reflect: true, attribute: 'dot-type' })
-  dotType = SLUG_DOT_TYPE.DEFAULT;
-
+  slot = 'slug';
   /**
    * Specify the correct translation of the AI text
    */
@@ -53,12 +38,61 @@ export default class CDSSlug extends CDSToggleTip {
   @property({ attribute: 'ai-text-label' })
   aiTextLabel = '';
 
+  /**
+   * Specify the type of dot that should be rendered in front of the inline variant: (default, hollow)
+   */
+  @property({ reflect: true, attribute: 'dot-type' })
+  dotType = SLUG_DOT_TYPE.DEFAULT;
+
+  /**
+   * Specify the type of Slug, from the following list of types: (default, hollow, inline)
+   */
+  @property({ reflect: true })
+  kind = SLUG_KIND.DEFAULT;
+
+  /**
+   * Specify whether the revert button should be visible
+   */
+  @property({ type: Boolean, attribute: 'revert-active' })
+  revertActive = false;
+
+  /**
+   * Specify whether the revert button should be visible
+   */
+  @property({ attribute: 'revert-label' })
+  revertLabel = 'Revert to AI input';
+
+  /**
+   * Slug size should be mini, 2xs, xs, sm, md, lg, xl.
+   */
+  @property({ reflect: true })
+  size = SLUG_SIZE.MEDIUM;
+
+  /**
+   * Specify the text that will be provided to the aria-label of the `Slug` button
+   */
+  @property({ attribute: 'slug-label' })
+  slugLabel = 'Show information';
+
+  @property()
+  previousValue;
+
+  protected _handleClick = () => {
+    if (this.revertActive) {
+      this.revertActive = false;
+      this.removeAttribute('revert-active');
+    } else {
+      this.open = !this.open;
+    }
+  };
+
   protected _renderToggleTipLabel = () => {
     return html``;
   };
 
   protected _renderTooltipButton = () => {
-    const { size, kind, aiText, aiTextLabel } = this;
+    const { size, kind, aiText, aiTextLabel, slugLabel } = this;
+    const ariaLabel = `${aiText} - ${slugLabel}`;
     const classes = classMap({
       [`${prefix}--toggletip-button`]: true,
       [`${prefix}--slug__button`]: true,
@@ -70,9 +104,9 @@ export default class CDSSlug extends CDSToggleTip {
     return html`
       <button
         aria-controls="${this.id}"
-        @click=${this._handleClick}
+        @click="${this._handleClick}"
         class=${classes}
-        aria-label="Show information">
+        aria-label="${ariaLabel}">
         <span class="${prefix}--slug__text">${aiText}</span>
         ${aiTextLabel && kind === SLUG_KIND.INLINE
           ? html`
@@ -82,6 +116,25 @@ export default class CDSSlug extends CDSToggleTip {
             `
           : ``}
       </button>
+    `;
+  };
+
+  protected _renderInnerContent = () => {
+    const { revertActive, revertLabel } = this;
+    return html`
+      ${revertActive
+        ? html`
+            <cds-icon-button
+              kind="ghost"
+              size="sm"
+              @click="${this._handleClick}">
+              <span slot="tooltip-content"> ${revertLabel} </span>
+              ${Undo16({ slot: 'icon' })}
+            </cds-icon-button>
+          `
+        : html`
+            ${this._renderTooltipButton()} ${this._renderTooltipContent()}
+          `}
     `;
   };
 

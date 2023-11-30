@@ -292,6 +292,7 @@ class CDSComboBox extends CDSDropdown {
   }
 
   updated() {
+    super.updated();
     const { _listBoxNode: listBoxNode } = this;
     if (listBoxNode) {
       listBoxNode.classList.add(`${prefix}--combo-box`);

@@ -9,6 +9,7 @@ $css--plex: true !default;
 
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/utilities';
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/number-input/index';
@@ -33,4 +34,22 @@ $css--plex: true !default;
   + .#{$prefix}--number__controls
   .#{$prefix}--number__rule-divider:first-of-type {
   background-color: $border-subtle;
+}
+
+:host(#{$prefix}-number-input) {
+  ::slotted(#{$prefix}-slug) {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: 5.5rem;
+  }
+  ::slotted(#{$prefix}-slug:not([revert-active])) {
+    transform: translateY(-50%);
+  }
+}
+:host(#{$prefix}-number-input) .#{$prefix}--number[data-invalid],
+:host(#{$prefix}-number-input[warn]),
+:host(#{$prefix}-number-input[invalid]) {
+  ::slotted(#{$prefix}-slug) {
+    inset-inline-end: to-rem(120px);
+  }
 }

@@ -46,6 +46,29 @@ export {
 @customElement(`${prefix}-text-input`)
 class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
   /**
+   * `true` if there is a slug.
+   */
+  protected _hasSlug = false;
+
+  /**
+   * Handles `slotchange` event.
+   */
+  protected _handleSlotChange({ target }: Event) {
+    const hasContent = (target as HTMLSlotElement)
+      .assignedNodes()
+      .filter((elem) =>
+        (elem as HTMLElement).matches !== undefined
+          ? (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSTextInput).slugItem
+            )
+          : false
+      );
+
+    this._hasSlug = Boolean(hasContent);
+    (hasContent[0] as HTMLElement).setAttribute('size', 'mini');
+    this.requestUpdate();
+  }
+  /**
    * The underlying input element
    */
   @query('input')
@@ -294,6 +317,8 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       warnText,
       value,
       _handleInput: handleInput,
+      _hasSlug: hasSlug,
+      _handleSlotChange: handleSlotChange,
     } = this;
 
     const invalidIcon = WarningFilled16({
@@ -355,6 +380,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
     const fieldWrapperClasses = classMap({
       [`${prefix}--text-input__field-wrapper`]: true,
       [`${prefix}--text-input__field-wrapper--warning`]: normalizedProps.warn,
+      [`${prefix}--text-input__field-wrapper--slug`]: hasSlug,
     });
 
     const labelClasses = classMap({
@@ -456,6 +482,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
               .value="${this._value}"
               maxlength="${ifNonEmpty(maxCount)}"
               @input="${handleInput}" />
+            <slot name="slug" @slotchange="${handleSlotChange}"></slot>
             ${this.showPasswordVisibilityToggle &&
             (type === INPUT_TYPE.PASSWORD || type === INPUT_TYPE.TEXT)
               ? passwordVisibilityButton()
@@ -472,6 +499,13 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
         </div>
       </div>
     `;
+  }
+
+  /**
+   * A selector that will return the slug item.
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
   }
 
   static shadowRootOptions = {
