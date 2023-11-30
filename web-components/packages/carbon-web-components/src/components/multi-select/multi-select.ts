@@ -569,9 +569,9 @@ class CDSMultiSelect extends CDSDropdown {
     return true;
   }
 
-  updated() {
-    super.updated();
-    if (this.open && !this.filterable) {
+  updated(changedProperties) {
+    super.updated(changedProperties)
+    if (changedProperties.has('open') && this.open && !this.filterable) {
       // move focus to menu body when open for non-filterable mulit-select
       this._menuBodyNode.focus();
     }
