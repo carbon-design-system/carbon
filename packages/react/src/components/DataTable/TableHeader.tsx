@@ -107,7 +107,7 @@ interface TableHeaderProps
   scope?: string;
 
   /**
-   * Provide a `Slug` component to be rendered inside the `TableSlugRow` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `TableSlugRow` component
    */
   slug?: ReactNodeLike;
 

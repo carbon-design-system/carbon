@@ -30,7 +30,7 @@ import { Slug, SlugContent, SlugActions } from '../../Slug';
 import './datatable-story.scss';
 
 export default {
-  title: 'Components/DataTable/Slug',
+  title: 'Experimental/unstable__Slug/DataTable',
   component: DataTable,
   subcomponents: {
     TableSelectAll,
