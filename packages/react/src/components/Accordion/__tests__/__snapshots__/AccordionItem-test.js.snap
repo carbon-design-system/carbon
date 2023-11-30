@@ -34,10 +34,14 @@ exports[`AccordionItem renders as expected - Component API should render and mat
       </div>
     </button>
     <div
-      class="cds--accordion__content"
-      id="accordion-item-:r1:"
+      class="cds--accordion__wrapper"
     >
-      Lorem ipsum.
+      <div
+        class="cds--accordion__content"
+        id="accordion-item-:r1:"
+      >
+        Lorem ipsum.
+      </div>
     </div>
   </li>
 </div>
