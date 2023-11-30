@@ -13,6 +13,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../../utilities/ai-gradient' as *;
 @use '../../utilities/button-reset';
 @use '../../utilities/component-reset';
 @use '../../utilities/focus-outline' as *;
@@ -366,6 +367,107 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
   .#{$prefix}--tile--disabled .#{$prefix}--tile__checkmark svg {
     fill: $icon-disabled;
+  }
+
+  // Slug styles
+  .#{$prefix}--tile > .#{$prefix}--slug,
+  .#{$prefix}--tile--expandable > div > .#{$prefix}--slug,
+  .#{$prefix}--tile--clickable .#{$prefix}--tile--slug-icon {
+    position: absolute;
+    inset-block-start: $spacing-05;
+    inset-inline-end: $spacing-05;
+  }
+
+  .#{$prefix}--tile.#{$prefix}--tile--selectable > .#{$prefix}--slug {
+    inset-inline-end: $spacing-08;
+  }
+
+  .#{$prefix}--tile.#{$prefix}--tile--clickable > .#{$prefix}--slug {
+    pointer-events: none;
+  }
+
+  .#{$prefix}--tile--slug.#{$prefix}--tile {
+    @include callout-gradient();
+
+    border: 1px solid $border-tile;
+  }
+
+  .#{$prefix}--tile--slug.#{$prefix}--tile--expandable:hover {
+    @include callout-gradient();
+  }
+
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable::before,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable::after,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--clickable::before {
+    position: absolute;
+    display: block;
+    block-size: 100%;
+    content: '';
+    inline-size: 100%;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    opacity: 0;
+    transition: opacity $duration-fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable::before,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--clickable::before {
+    @include callout-gradient('hover');
+  }
+
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable:hover::before,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--clickable:hover::before {
+    opacity: 1;
+  }
+
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable::after {
+    @include callout-gradient('selected');
+  }
+
+  .#{$prefix}--tile--slug.#{$prefix}--tile--is-selected::after {
+    opacity: 1;
+  }
+
+  .#{$prefix}--tile--slug.#{$prefix}--tile--is-selected {
+    border-color: $border-inverse;
+  }
+
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
+    .#{$prefix}--tile-content,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--clickable
+    .#{$prefix}--tile-content {
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+  }
+
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable > .#{$prefix}--slug,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
+    > .#{$prefix}--tile__checkmark {
+    z-index: 1;
+  }
+
+  .#{$prefix}--tile--expandable:has(
+      .#{$prefix}--slug > .#{$prefix}--popover--open
+    ) {
+    overflow: visible;
+  }
+
+  // To Do: Replace svg overrides with actual AI icon
+  .#{$prefix}--tile--clickable .#{$prefix}--tile--slug-icon rect {
+    stroke: $icon-primary;
+  }
+
+  .#{$prefix}--tile--clickable .#{$prefix}--tile--slug-icon path {
+    fill: $icon-primary;
+  }
+
+  // Tile with slug and rounded corners
+  .#{$prefix}--tile--slug-rounded,
+  .#{$prefix}--tile--slug-rounded.#{$prefix}--tile--selectable::before,
+  .#{$prefix}--tile--slug-rounded.#{$prefix}--tile--selectable::after,
+  .#{$prefix}--tile--slug-rounded.#{$prefix}--tile--clickable::before {
+    border-radius: $spacing-05;
   }
 
   // Windows HCM fix

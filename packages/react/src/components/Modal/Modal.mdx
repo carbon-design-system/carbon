@@ -122,7 +122,7 @@ There are four responsive
 <ComposedModal size="lg">
   <ModalHeader />
   <ModalBody>
-    <p className="bx--modal-content__text">
+    <p className="cds--modal-content__text">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
       cursus fermentum risus, sit amet fringilla nunc pellentesque quis. Duis
       quis odio ultrices, cursus lacus ac, posuere felis. Donec dignissim libero
@@ -139,15 +139,15 @@ Depending on the size prop of your modal and the viewport,
 `<Modal>`/`<ComposedModal>` adds 20% padding at the right of the modal body
 content. Carbon design specifies that such 20% padding shouldn't be applied to
 form elements. You can set `hasForm` prop to `<Modal>`/`<ModalBody>` to remove
-the padding, and use `bx--modal-content__regular-content` class to apply the 20%
-padding to non-form contents, as shown below.
+the padding, and use `cds--modal-content__regular-content` class to apply the
+20% padding to non-form contents, as shown below.
 
 ```jsx
 <ComposedModal>
   <ModalHeader />
   <ModalBody hasForm>
     <TextInput data-modal-primary-focus labelText="Enter something" />
-    <p className="bx--modal-content__text bx--modal-content__regular-content">
+    <p className="cds--modal-content__text cds--modal-content__regular-content">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
       cursus fermentum risus, sit amet fringilla nunc pellentesque quis. Duis
       quis odio ultrices, cursus lacus ac, posuere felis. Donec dignissim libero
@@ -170,7 +170,7 @@ below.
 <ComposedModal size="large">
   <ModalHeader />
   <ModalBody hasScrollingContent>
-    <p className=".bx--modal-content__text">Some very large contents...</p>
+    <p className=".cds--modal-content__text">Some very large contents...</p>
   </ModalBody>
 </ComposedModal>
 ```
@@ -190,19 +190,19 @@ table shows the supported patterns.
 ```jsx
 <Modal danger>
   <ModalHeader />
-  <p className="bx--modal-content__text">The modal body content</p>
+  <p className="cds--modal-content__text">The modal body content</p>
 </Modal>
 ```
 
 With `<ComposedModal>`, you can control the buttons with the following code.
 
-| Button group variant                                                                                 | Usage                                                                                                                                                                                                                                                          |
-| ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| No button ([passive modal](https://www.carbondesignsystem.com/components/modal/usage#passive-modal)) | Use `<ComposedModal>` without `<ModalFooter>`                                                                                                                                                                                                                  |
-| One button                                                                                           | Use `primaryButtonText` in `<ModalFooter>`                                                                                                                                                                                                                     |
-| Two buttons                                                                                          | Use `primaryButtonText` and `secondaryButtonText` in `<ModalFooter>`                                                                                                                                                                                           |
-| Three buttons                                                                                        | Put three buttons as children of `<ModalFooter>`, instead of using `primaryButtonText` or `secondaryButtonText`. Using this option requires style adjustment defined in application-level CSS for `<ModalFooter>`, e.g. `.bx--modal-footer { padding: 25%; }`. |
-| Two buttons with danger button                                                                       | Set `danger` prop in `<ModalFooter>` (like below)                                                                                                                                                                                                              |
+| Button group variant                                                                                 | Usage                                                                                                                                                                                                                                                           |
+| ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| No button ([passive modal](https://www.carbondesignsystem.com/components/modal/usage#passive-modal)) | Use `<ComposedModal>` without `<ModalFooter>`                                                                                                                                                                                                                   |
+| One button                                                                                           | Use `primaryButtonText` in `<ModalFooter>`                                                                                                                                                                                                                      |
+| Two buttons                                                                                          | Use `primaryButtonText` and `secondaryButtonText` in `<ModalFooter>`                                                                                                                                                                                            |
+| Three buttons                                                                                        | Put three buttons as children of `<ModalFooter>`, instead of using `primaryButtonText` or `secondaryButtonText`. Using this option requires style adjustment defined in application-level CSS for `<ModalFooter>`, e.g. `.cds--modal-footer { padding: 25%; }`. |
+| Two buttons with danger button                                                                       | Set `danger` prop in `<ModalFooter>` (like below)                                                                                                                                                                                                               |
 
 ```jsx
 <ComposedModal>
@@ -220,7 +220,7 @@ With `<ComposedModal>`, you can control the buttons with the following code.
     className="sb-notification">
     As the instruction for the three buttons implies,{' '}
     <CodeSnippet type="inline" hideCopyButton>{'<ModalFooter>'}</CodeSnippet>
-    is flexible on the buttons as you render 
+    is flexible on the buttons as you render
     <CodeSnippet type="inline" hideCopyButton>{'<Button>'}</CodeSnippet>
     s by yourself, as shown below. In this case, the application code
     needs to take care of running actions upon clicking those buttons, e.g. closing
@@ -298,7 +298,7 @@ restricted inside the modal. This means:
 We take an extra step here to ensure such behavior works with floating menus,
 given floating menu is placed outside of modal in DOM. If you use any non-Carbon
 floating menus in your application, set
-`selectorsFloatingMenus={['.bx--overflow-menu-options', '.bx--tooltip', '.flatpickr-calendar', '.your-floating-menu-foo', '.your-floating-menu-bar']}`
+`selectorsFloatingMenus={['.cds--overflow-menu-options', '.cds--tooltip', '.flatpickr-calendar', '.your-floating-menu-foo', '.your-floating-menu-bar']}`
 to `<Modal>`/`<ComposedModal>`.
 
 Also for both modal variants, you can set the DOM element that gets focus when
@@ -322,9 +322,9 @@ the modal gets open, by either of the following ways:
 
 ```jsx
 {
-  /* `.bx--text-input` selects the `<input>` in `<TextInput>` */
+  /* `.cds--text-input` selects the `<input>` in `<TextInput>` */
 }
-<ComposedModal selectorPrimaryFocus=".bx--text-input">
+<ComposedModal selectorPrimaryFocus=".cds--text-input">
   <ModalBody hasForm>
     <TextInput labelText="Enter something" />
   </ModalBody>
