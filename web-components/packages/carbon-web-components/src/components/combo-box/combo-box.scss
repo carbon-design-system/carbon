@@ -11,6 +11,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/layout' as *;
 @use '@carbon/styles/scss/components/combo-box' as *;
 @use '@carbon/styles/scss/components/form';
@@ -139,9 +140,28 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-combo-box[slug][isclosable]) {
+  ::slotted(#{$prefix}-slug) {
+    inset-inline-end: $spacing-10;
+  }
+}
+
 :host(#{$prefix}-combo-box[warn]),
 :host(#{$prefix}-combo-box[invalid]) {
   ::slotted(#{$prefix}-slug) {
     inset-inline-end: $spacing-10;
+  }
+}
+
+:host(#{$prefix}-combo-box[slug][isclosable]) {
+  ::slotted(#{$prefix}-slug) {
+    inset-inline-end: $spacing-10;
+  }
+}
+
+:host(#{$prefix}-combo-box[warn][isclosable]),
+:host(#{$prefix}-combo-box[invalid][isclosable]) {
+  ::slotted(#{$prefix}-slug) {
+    inset-inline-end: to-rem(88px);
   }
 }
