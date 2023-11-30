@@ -27,6 +27,7 @@ import Button from '../../Button';
 import { IconButton } from '../../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import { Slug, SlugContent, SlugActions } from '../../Slug';
+import './datatable-story.scss';
 
 export default {
   title: 'Components/DataTable/Slug',
@@ -82,7 +83,7 @@ const slug = (
 );
 
 const columnSlug = (
-  <Slug className="slug-container" autoAlign={false} align="right-top">
+  <Slug className="slug-container" autoAlign={false} align="bottom-right">
     <SlugContent>
       <div>
         <p className="secondary">AI Explained</p>
@@ -339,6 +340,7 @@ export const ColumnSlugWithSelectionAndExpansion = () => (
       <TableContainer
         title="DataTable"
         description="With expansion"
+        className="slug-column-table"
         {...getTableContainerProps()}>
         <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
@@ -389,7 +391,10 @@ export const ColumnSlugWithSelectionAndExpansion = () => (
 export const ColumnSlugSort = () => (
   <DataTable rows={rows} headers={headers}>
     {({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
-      <TableContainer title="DataTable" description="With sorting">
+      <TableContainer
+        title="DataTable"
+        description="With sorting"
+        className="slug-column-table">
         <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
             <TableRow>
