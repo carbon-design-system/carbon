@@ -29,7 +29,7 @@ component-specific documentation to `carbon-components-react`:
 1. Create a `README.md` file using [this file structure](#file-structure), and
    add it to the component's story using [these steps](#storybook-readme)
 2. Ensure props of components are covered by
-   [Storybook knobs](https://github.com/storybooks/storybook/tree/master/addons/knobs)
+   [Storybook controls](https://github.com/storybookjs/storybook/tree/master/addons/controls)
 3. Ensure event handlers of components are covered by
    [Storybook action logger](https://github.com/storybooks/storybook/tree/master/addons/actions)
 
