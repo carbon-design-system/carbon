@@ -7,30 +7,30 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, property, LitElement } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
-import on from 'carbon-components/es/globals/js/misc/on';
+import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
+import on from '../../globals/mixins/on';
+import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import { forEach } from '../../globals/internal/collection-helpers';
 import Handle from '../../globals/internal/handle';
 import { SIDE_NAV_COLLAPSE_MODE, SIDE_NAV_USAGE_MODE } from './defs';
-import BXHeaderMenuButton from './header-menu-button';
-import BXSideNavMenu from './side-nav-menu';
+import CDSHeaderMenuButton from './header-menu-button';
+import CDSSideNavMenu from './side-nav-menu';
 import styles from './side-nav.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { SIDE_NAV_COLLAPSE_MODE, SIDE_NAV_USAGE_MODE };
 
-const { prefix } = settings;
-
 /**
  * Side nav.
  *
- * @element bx-side-nav
+ * @element cds-side-nav
  */
 @customElement(`${prefix}-side-nav`)
-class BXSideNav extends HostListenerMixin(LitElement) {
+class CDSSideNav extends HostListenerMixin(LitElement) {
   /**
    * `true` if this side nav is hovered.
    */
@@ -75,7 +75,7 @@ class BXSideNav extends HostListenerMixin(LitElement) {
       if (this.expanded) {
         (
           this.querySelector(
-            (this.constructor as typeof BXSideNav).selectorNavItems
+            (this.constructor as typeof CDSSideNav).selectorNavItems
           ) as HTMLElement
         )?.focus();
       }
@@ -89,32 +89,12 @@ class BXSideNav extends HostListenerMixin(LitElement) {
     const { expanded, _hovered: hovered } = this;
     forEach(
       this.querySelectorAll(
-        (this.constructor as typeof BXSideNav).selectorMenu
+        (this.constructor as typeof CDSSideNav).selectorMenu
       ),
       (item) => {
-        (item as BXSideNavMenu).forceCollapsed = !expanded && !hovered;
+        (item as CDSSideNavMenu).forceCollapsed = !expanded && !hovered;
       }
     );
-  }
-
-  /**
-   * Handles `mouseover` event handler.
-   */
-  @HostListener('mouseover')
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleMouseover() {
-    this._hovered = true;
-    this._updatedSideNavMenuForceCollapsedState();
-  }
-
-  /**
-   * Handles `mouseout` event handler.
-   */
-  @HostListener('mouseout')
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleMouseout() {
-    this._hovered = false;
-    this._updatedSideNavMenuForceCollapsedState();
   }
 
   /**
@@ -130,10 +110,19 @@ class BXSideNav extends HostListenerMixin(LitElement) {
   expanded = false;
 
   /**
-   * Usage mode of the side nav.
+   * If `true` will style the side nav to sit below the header
    */
-  @property({ reflect: true, attribute: 'usage-mode' })
-  usageMode = SIDE_NAV_USAGE_MODE.REGULAR;
+  @property({
+    type: Boolean,
+    attribute: 'is-not-child-of-header',
+  })
+  isNotChildOfHeader = false;
+
+  /**
+   * Specify if the side-nav will be persistent above the lg breakpoint
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'is-not-persistent' })
+  isNotPersistent = false;
 
   connectedCallback() {
     if (!this.hasAttribute('role')) {
@@ -161,57 +150,146 @@ class BXSideNav extends HostListenerMixin(LitElement) {
   }
 
   updated(changedProperties) {
-    if (
-      changedProperties.has('collapseMode') ||
-      changedProperties.has('usageMode')
-    ) {
-      const { collapseMode, usageMode } = this;
-      if (
-        (collapseMode === SIDE_NAV_COLLAPSE_MODE.FIXED ||
-          collapseMode === SIDE_NAV_COLLAPSE_MODE.RAIL) &&
-        usageMode === SIDE_NAV_USAGE_MODE.HEADER_NAV
-      ) {
-        console.warn(
-          'Fixed/rail modes of side nav cannot be used with header nav mode.'
-        ); // eslint-disable-line no-console
-      }
-    }
     const doc = this.getRootNode() as Document;
     if (changedProperties.has('collapseMode')) {
       forEach(
         doc.querySelectorAll(
-          (this.constructor as typeof BXSideNav).selectorButtonToggle
+          (this.constructor as typeof CDSSideNav).selectorButtonToggle
         ),
         (item) => {
-          (item as BXHeaderMenuButton).collapseMode = this.collapseMode;
+          (item as CDSHeaderMenuButton).collapseMode = this.collapseMode;
         }
       );
     }
     if (changedProperties.has('expanded')) {
-      this._updatedSideNavMenuForceCollapsedState();
+      const headerItems = doc.querySelectorAll(
+        (this.constructor as typeof CDSSideNav).selectorHeaderItems
+      );
       forEach(
         doc.querySelectorAll(
-          (this.constructor as typeof BXSideNav).selectorButtonToggle
+          (this.constructor as typeof CDSSideNav).selectorButtonToggle
         ),
         (item) => {
-          (item as BXHeaderMenuButton).active = this.expanded;
+          (item as CDSHeaderMenuButton).active = this.expanded;
         }
       );
+      if (this.expanded) {
+        forEach(headerItems, (item) => {
+          item.setAttribute('tabindex', '-1');
+        });
+      } else {
+        forEach(headerItems, (item) => {
+          item.removeAttribute('tabindex');
+        });
+      }
     }
-    if (changedProperties.has('usageMode')) {
+    if (changedProperties.has('isNotChildOfHeader')) {
       forEach(
         doc.querySelectorAll(
-          (this.constructor as typeof BXSideNav).selectorButtonToggle
+          (this.constructor as typeof CDSSideNav).selectorButtonToggle
         ),
         (item) => {
-          (item as BXHeaderMenuButton).usageMode = this.usageMode;
+          (item as CDSHeaderMenuButton).isNotChildOfHeader =
+            this.isNotChildOfHeader;
         }
       );
     }
   }
 
+  /**
+   * Handles `blur` event handler on this element.
+   *
+   * @param event The event.
+   */
+  @HostListener('focusout')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleFocusOut({ relatedTarget }: FocusEvent) {
+    const { collapseMode } = this;
+    if (collapseMode !== SIDE_NAV_COLLAPSE_MODE.FIXED) {
+      if (!this.contains(relatedTarget as Node)) {
+        this.expanded = false;
+      }
+    }
+  }
+
+  /**
+   * Handles `focus` event handler on this element.
+   *
+   * @param event The event.
+   */
+  @HostListener('focusin')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleFocusIn() {
+    const { collapseMode } = this;
+    if (collapseMode !== SIDE_NAV_COLLAPSE_MODE.FIXED) {
+      this.expanded = true;
+    }
+  }
+
+  /**
+   * Handles the `mouseover` event for the side nav in rail mode.
+   *
+   */
+  private _handleNavMouseOver() {
+    const { collapseMode } = this;
+    if (collapseMode === SIDE_NAV_COLLAPSE_MODE.RAIL) {
+      this.expanded = true;
+      this._hovered = true;
+      this._updatedSideNavMenuForceCollapsedState();
+    }
+  }
+
+  /**
+   * Handles the `mouseout` event for the side nav in rail mode.
+   *
+   */
+  private _handleNavMouseOut() {
+    const { collapseMode } = this;
+    if (collapseMode === SIDE_NAV_COLLAPSE_MODE.RAIL) {
+      this.expanded = false;
+      this._hovered = false;
+      this._updatedSideNavMenuForceCollapsedState();
+    }
+  }
+
+  /**
+   * Handles the `click` event for the side nav overlay.
+   *
+   */
+  private _onOverlayClick() {
+    this.expanded = false;
+  }
+
   render() {
-    return html` <slot></slot> `;
+    const { collapseMode, expanded, isNotChildOfHeader, isNotPersistent } =
+      this;
+    const classes = classMap({
+      [`${prefix}--side-nav__navigation`]: true,
+      [`${prefix}--side-nav`]: true,
+      [`${prefix}--side-nav--expanded`]: expanded,
+      [`${prefix}--side-nav--collapsed`]:
+        !expanded && collapseMode === SIDE_NAV_COLLAPSE_MODE.FIXED,
+      [`${prefix}--side-nav--rail`]:
+        collapseMode === SIDE_NAV_COLLAPSE_MODE.RAIL,
+      [`${prefix}--side-nav--ux`]: !isNotChildOfHeader,
+      [`${prefix}--side-nav--hidden`]: isNotPersistent,
+    });
+
+    const overlayClasses = classMap({
+      [`${prefix}--side-nav__overlay`]: true,
+      [`${prefix}--side-nav__overlay-active`]: expanded,
+    });
+    return html`${this.collapseMode === SIDE_NAV_COLLAPSE_MODE.FIXED
+        ? null
+        : html`<div
+            class="${overlayClasses}"
+            @click=${this._onOverlayClick}></div>`}
+      <div
+        class="${classes}"
+        @mouseover="${this._handleNavMouseOver}"
+        @mouseout="${this._handleNavMouseOut}">
+        <slot></slot>
+      </div>`;
   }
 
   /**
@@ -219,6 +297,13 @@ class BXSideNav extends HostListenerMixin(LitElement) {
    */
   static get selectorButtonToggle() {
     return `${prefix}-header-menu-button`;
+  }
+
+  /**
+   * A selector that will return the header name + global action elements.
+   */
+  static get selectorHeaderItems() {
+    return `${prefix}-header-name, ${prefix}-header-global-action`;
   }
 
   /**
@@ -245,4 +330,4 @@ class BXSideNav extends HostListenerMixin(LitElement) {
   static styles = styles; // `styles` here is a `CSSResult` generated by custom WebPack loader
 }
 
-export default BXSideNav;
+export default CDSSideNav;

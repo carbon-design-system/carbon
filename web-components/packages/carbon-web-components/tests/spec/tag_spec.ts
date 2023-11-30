@@ -1,29 +1,31 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render } from 'lit-html';
+import { render } from 'lit';
 import EventManager from '../utils/event-manager';
-import { filter } from '../../src/components/tag/tag-story';
+import { Default, Playground } from '../../src/components/tag/tag-story';
 
-const filterTemplate = (props?) =>
-  filter({
-    'bx-filter-tag': props,
+const tagTemplate = () => Default();
+
+const playgroundTemplate = (props?) =>
+  Playground({
+    'cds-tag': props,
   });
 
-describe('bx-filter-tag', function () {
+describe('cds-tag', function () {
   describe('Enabling/disabling', function () {
     const events = new EventManager();
 
     it('should allow firing click event for normal condition', async function () {
-      render(filterTemplate(), document.body);
+      render(tagTemplate(), document.body);
       await Promise.resolve();
-      const elem = document.querySelector('bx-filter-tag');
+      const elem = document.querySelector('cds-tag');
       const spyClick = jasmine.createSpy('click');
       events.on(elem!, 'click', spyClick);
       elem!.shadowRoot!.querySelector('button')!.click();
@@ -31,9 +33,9 @@ describe('bx-filter-tag', function () {
     });
 
     it('should disallow firing click event if disabled', async function () {
-      render(filterTemplate({ disabled: true }), document.body);
+      render(playgroundTemplate({ disabled: true }), document.body);
       await Promise.resolve();
-      const elem = document.querySelector('bx-filter-tag');
+      const elem = document.querySelector('cds-tag');
       const spyClick = jasmine.createSpy('click');
       events.on(elem!, 'click', spyClick);
       elem!.shadowRoot!.querySelector('button')!.click();

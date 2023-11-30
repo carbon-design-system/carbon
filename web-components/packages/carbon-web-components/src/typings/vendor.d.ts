@@ -7,7 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-declare module 'carbon-components/es/globals/js/settings' {
+declare module 'carbon-components/es/globals/js/settings.js' {
   const settings: {
     /**
      * The brand prefix.
@@ -17,9 +17,10 @@ declare module 'carbon-components/es/globals/js/settings' {
   export default settings;
 }
 
-declare module 'carbon-components/es/globals/js/misc/on' {
+declare module 'carbon-components/es/globals/js/misc/on.js' {
   /**
    * Adds an event listener function to the list of event listeners for the given event type on the given event target.
+   *
    * @param target The target to add event listener on.
    * @param type A case-sensitive string representing the event type to listen for.
    * @param listener The event listener callback.

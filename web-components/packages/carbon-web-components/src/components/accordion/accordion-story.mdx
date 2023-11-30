@@ -4,10 +4,10 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Accordion
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/accordion)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/accordion)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/accordion)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/accordion)
 
 The accordion component delivers large amounts of content in a small space
 through progressive disclosure. That is, the user gets key details about the
@@ -39,38 +39,52 @@ import '@carbon/web-components/es/components/accordion/index.js';
 ### HTML
 
 ```html
-<bx-accordion>
-  <bx-accordion-item title-text="Lorem Ipsum">
+<cds-accordion>
+  <cds-accordion-item title="Section 1 title">
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
       veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
       commodo consequat.
     </p>
-  </bx-accordion-item>
-  <bx-accordion-item title-text="Lorem Ipsum">
+  </cds-accordion-item>
+  <cds-accordion-item title="Section 2 title">
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
       veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
       commodo consequat.
     </p>
-  </bx-accordion-item>
-  <bx-accordion-item title-text="Lorem Ipsum">
+  </cds-accordion-item>
+  <cds-accordion-item title="Section 3 title">
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
       veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
       commodo consequat.
     </p>
-  </bx-accordion-item>
-</bx-accordion>
+  </cds-accordion-item>
+  <cds-accordion-item title="Section 4 title">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat.
+    </p>
+  </cds-accordion-item>
+</cds-accordion>
 ```
 
-## `<bx-accordion-item>` attributes, properties and events
+### HTML (skeleton)
+
+```html
+<cds-accordion-skeleton></cds-accordion-skeleton>
+```
+
+## `<cds-accordion-item>` attributes, properties and events
 
 Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<bx-accordion-item open>`) and `false` means not setting the attribute (e.g.
-`<bx-accordion-item>` without `open` attribute).
+`<cds-accordion-item open>`) and `false` means not setting the attribute (e.g.
+`<cds-accordion-item>` without `open` attribute).
 
-<Props of="bx-accordion-item" />
+<Props of="cds-accordion-item" />

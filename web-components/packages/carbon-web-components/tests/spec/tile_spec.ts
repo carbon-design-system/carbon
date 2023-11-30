@@ -1,55 +1,49 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render } from 'lit-html';
+import { render } from 'lit';
 import EventManager from '../utils/event-manager';
 import { TILE_COLOR_SCHEME } from '../../src/components/tile/tile';
-import BXExpandableTile from '../../src/components/tile/expandable-tile';
-import BXSelectableTile from '../../src/components/tile/selectable-tile';
-import BXRadioTile from '../../src/components/tile/radio-tile';
+import CDSExpandableTile from '../../src/components/tile/expandable-tile';
+import CDSSelectableTile from '../../src/components/tile/selectable-tile';
+import CDSRadioTile from '../../src/components/tile/radio-tile';
 import {
   clickable,
   expandable,
   multiSelectable,
-  singleSelectable,
 } from '../../src/components/tile/tile-story';
 
 const clickableTemplate = (props?) =>
   clickable({
-    'bx-clickable-tile': props,
+    'cds-clickable-tile': props,
   });
 
 const expandableTemplate = (props?) =>
   expandable({
-    'bx-expandable-tile': props,
+    'cds-expandable-tile': props,
   });
 
 const multiSelectableTemplate = (props?) =>
   multiSelectable({
-    'bx-selectable-tile': props,
+    'cds-selectable-tile': props,
   });
 
-const singleSelectableTemplate = (props?) =>
-  singleSelectable({
-    'bx-radio-tile': props,
-  });
-
-describe('bx-tile', function () {
+describe('cds-tile', function () {
   const events = new EventManager();
 
-  describe('bx-clickable-tile', function () {
+  describe('cds-clickable-tile', function () {
     describe('Misc attributes', function () {
       it('should render with minimum attributes', async function () {
         render(clickableTemplate(), document.body);
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-clickable-tile' as any)
+          document.body.querySelector('cds-clickable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -69,7 +63,7 @@ describe('bx-tile', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-clickable-tile' as any)
+          document.body.querySelector('cds-clickable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -90,19 +84,19 @@ describe('bx-tile', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-clickable-tile' as any)
+          document.body.querySelector('cds-clickable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
   });
 
-  describe('bx-expandable-tile', function () {
+  describe('cds-expandable-tile', function () {
     describe('Misc attributes', function () {
       it('should render with minimum attributes', async function () {
         render(expandableTemplate(), document.body);
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-expandable-tile' as any)
+          document.body.querySelector('cds-expandable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -116,38 +110,38 @@ describe('bx-tile', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-expandable-tile' as any)
+          document.body.querySelector('cds-expandable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
 
     describe('Toggling', function () {
-      it('Should fire bx-expandable-tile-beingtoggled/bx-expandable-tile-toggled events upon expanding', async function () {
+      it('Should fire cds-expandable-tile-beingtoggled/cds-expandable-tile-toggled events upon expanding', async function () {
         render(expandableTemplate(), document.body);
         await Promise.resolve();
-        const tile = document.querySelector('bx-expandable-tile');
+        const tile = document.querySelector('cds-expandable-tile');
         const spyBeforeToggle = jasmine.createSpy('before toggle');
         const spyAfterToggle = jasmine.createSpy('after toggle');
-        events.on(tile!, 'bx-expandable-tile-beingtoggled', spyBeforeToggle);
-        events.on(tile!, 'bx-expandable-tile-toggled', spyAfterToggle);
+        events.on(tile!, 'cds-expandable-tile-beingtoggled', spyBeforeToggle);
+        events.on(tile!, 'cds-expandable-tile-toggled', spyAfterToggle);
         tile!.shadowRoot!.querySelector('button')!.click();
-        expect((tile as BXExpandableTile).expanded).toBe(true);
+        expect((tile as CDSExpandableTile).expanded).toBe(true);
         expect(spyBeforeToggle).toHaveBeenCalled();
         expect(spyBeforeToggle.calls.argsFor(0)[0].detail.expanded).toBe(true);
         expect(spyAfterToggle).toHaveBeenCalled();
         expect(spyAfterToggle.calls.argsFor(0)[0].detail.expanded).toBe(true);
       });
 
-      it('Should fire bx-expandable-tile-beingtoggled/bx-expandable-tile-toggled events upon collapsing', async function () {
+      it('Should fire cds-expandable-tile-beingtoggled/cds-expandable-tile-toggled events upon collapsing', async function () {
         render(expandableTemplate({ expanded: true }), document.body);
         await Promise.resolve();
-        const tile = document.querySelector('bx-expandable-tile');
+        const tile = document.querySelector('cds-expandable-tile');
         const spyBeforeToggle = jasmine.createSpy('before toggle');
         const spyAfterToggle = jasmine.createSpy('after toggle');
-        events.on(tile!, 'bx-expandable-tile-beingtoggled', spyBeforeToggle);
-        events.on(tile!, 'bx-expandable-tile-toggled', spyAfterToggle);
+        events.on(tile!, 'cds-expandable-tile-beingtoggled', spyBeforeToggle);
+        events.on(tile!, 'cds-expandable-tile-toggled', spyAfterToggle);
         tile!.shadowRoot!.querySelector('button')!.click();
-        expect((tile as BXExpandableTile).expanded).toBe(false);
+        expect((tile as CDSExpandableTile).expanded).toBe(false);
         expect(spyBeforeToggle).toHaveBeenCalled();
         expect(spyBeforeToggle.calls.argsFor(0)[0].detail.expanded).toBe(false);
         expect(spyAfterToggle).toHaveBeenCalled();
@@ -157,40 +151,40 @@ describe('bx-tile', function () {
       it('Should support preventing tile from being expanded upon user gesture', async function () {
         render(expandableTemplate(), document.body);
         await Promise.resolve();
-        const tile = document.querySelector('bx-expandable-tile');
+        const tile = document.querySelector('cds-expandable-tile');
         const spyAfterToggle = jasmine.createSpy('after toggle');
-        events.on(tile!, 'bx-expandable-tile-beingtoggled', (event) => {
+        events.on(tile!, 'cds-expandable-tile-beingtoggled', (event) => {
           event.preventDefault();
         });
-        events.on(tile!, 'bx-expandable-tile-toggled', spyAfterToggle);
+        events.on(tile!, 'cds-expandable-tile-toggled', spyAfterToggle);
         tile!.shadowRoot!.querySelector('button')!.click();
-        expect((tile as BXExpandableTile).expanded).toBe(false);
+        expect((tile as CDSExpandableTile).expanded).toBe(false);
         expect(spyAfterToggle).not.toHaveBeenCalled();
       });
 
       it('Should support preventing tile from being collapsed upon user gesture', async function () {
         render(expandableTemplate({ expanded: true }), document.body);
         await Promise.resolve();
-        const tile = document.querySelector('bx-expandable-tile');
+        const tile = document.querySelector('cds-expandable-tile');
         const spyAfterToggle = jasmine.createSpy('after toggle');
-        events.on(tile!, 'bx-expandable-tile-beingtoggled', (event) => {
+        events.on(tile!, 'cds-expandable-tile-beingtoggled', (event) => {
           event.preventDefault();
         });
-        events.on(tile!, 'bx-expandable-tile-toggled', spyAfterToggle);
+        events.on(tile!, 'cds-expandable-tile-toggled', spyAfterToggle);
         tile!.shadowRoot!.querySelector('button')!.click();
-        expect((tile as BXExpandableTile).expanded).toBe(true);
+        expect((tile as CDSExpandableTile).expanded).toBe(true);
         expect(spyAfterToggle).not.toHaveBeenCalled();
       });
     });
   });
 
-  describe('bx-radio-tile', function () {
+  describe('cds-radio-tile', function () {
     describe('Misc attributes', function () {
       it('should render with minimum attributes', async function () {
-        render(singleSelectableTemplate(), document.body);
+        render(clickableTemplate(), document.body);
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-radio-tile' as any)
+          document.body.querySelector('cds-radio-tile' as any)
         ).toMatchSnapshot({
           mode: 'shadow',
         });
@@ -198,7 +192,7 @@ describe('bx-tile', function () {
 
       it('should render with various attributes', async function () {
         render(
-          singleSelectableTemplate({
+          clickableTemplate({
             checkmarkLabel: 'checkmark-label-foo',
             colorScheme: TILE_COLOR_SCHEME.LIGHT,
             name: 'name-foo',
@@ -208,7 +202,7 @@ describe('bx-tile', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-radio-tile' as any)
+          document.body.querySelector('cds-radio-tile' as any)
         ).toMatchSnapshot({
           mode: 'shadow',
         });
@@ -217,28 +211,28 @@ describe('bx-tile', function () {
 
     describe('Selection', function () {
       it('should reflect the selection', async function () {
-        render(singleSelectableTemplate({ name: 'name-foo' }), document.body);
+        render(clickableTemplate({ name: 'name-foo' }), document.body);
         await Promise.resolve();
-        const tiles = document.body.querySelectorAll('bx-radio-tile');
+        const tiles = document.body.querySelectorAll('cds-radio-tile');
         const input1 = tiles[1]!.shadowRoot!.querySelector('input');
         input1!.click();
         expect(
           Array.prototype.map.call(
             tiles,
-            (item) => (item as BXRadioTile).selected
+            (item) => (item as CDSRadioTile).selected
           )
         ).toEqual([false, true, false]);
       });
     });
   });
 
-  describe('bx-selectable-tile', function () {
+  describe('cds-selectable-tile', function () {
     describe('Misc attributes', function () {
       it('should render with minimum attributes', async function () {
         render(multiSelectableTemplate(), document.body);
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-selectable-tile' as any)
+          document.body.querySelector('cds-selectable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -255,7 +249,7 @@ describe('bx-tile', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-selectable-tile' as any)
+          document.body.querySelector('cds-selectable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
@@ -264,12 +258,12 @@ describe('bx-tile', function () {
       it('should reflect the selection', async function () {
         render(multiSelectableTemplate(), document.body);
         await Promise.resolve();
-        const tile = document.body.querySelector('bx-selectable-tile');
+        const tile = document.body.querySelector('cds-selectable-tile');
         const input = tile!.shadowRoot!.querySelector('input');
         input!.click();
-        expect((tile as BXSelectableTile).selected).toBe(true);
+        expect((tile as CDSSelectableTile).selected).toBe(true);
         input!.click();
-        expect((tile as BXSelectableTile).selected).toBe(false);
+        expect((tile as CDSSelectableTile).selected).toBe(false);
       });
     });
   });

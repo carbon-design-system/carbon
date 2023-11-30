@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -159,17 +159,18 @@ class RadioGroupManager {
    * Selects or focuses on a radio button.
    *
    * @param radio The radio button to select.
+   * @param readOnly optional if radio button has readOnly.
    */
-  select(radio: ManagedRadioButton) {
+  select(radio: ManagedRadioButton, readOnly?: boolean) {
     const group = this._groups[radio.name];
     if (group) {
       // Updates the state of the one being selected up-front to avoid the state of no radio button is selected
-      radio.checked = true;
+      radio.checked = !readOnly || true;
       radio.tabIndex = 0;
       radio.focus();
       group.forEach((item) => {
         if (radio !== item) {
-          item.checked = false;
+          item.checked = readOnly || false;
           item.tabIndex = -1;
         }
       });

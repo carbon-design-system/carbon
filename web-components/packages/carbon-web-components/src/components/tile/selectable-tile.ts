@@ -7,26 +7,28 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
-import { classMap } from 'lit-html/directives/class-map';
-import { html, svg, property, query, LitElement } from 'lit-element';
-import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { classMap } from 'lit/directives/class-map.js';
+import { LitElement, html, svg } from 'lit';
+import { property, query } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import Checkbox16 from '@carbon/icons/lib/checkbox/16';
+import CheckboxCheckedFilled16 from '@carbon/icons/lib/checkbox--checked--filled/16';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
+import HostListenerMixin from '../../globals/mixins/host-listener';
 import { TILE_COLOR_SCHEME } from './defs';
 import styles from './tile.scss';
+import HostListener from '../../globals/decorators/host-listener';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * Multi-selectable tile.
  *
- * @element bx-selectable-tile
- * @fires bx-selectable-tile-changed - The custom event fired after this selectable tile changes its selected state.
+ * @element cds-selectable-tile
+ * @fires cds-selectable-tile-changed - The custom event fired after this selectable tile changes its selected state.
  */
 @customElement(`${prefix}-selectable-tile`)
-class BXSelectableTile extends FocusMixin(LitElement) {
+class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   @query('input')
   protected _inputNode!: HTMLInputElement;
 
@@ -42,7 +44,7 @@ class BXSelectableTile extends FocusMixin(LitElement) {
     this.selected = this._inputNode.checked;
 
     const selected = this.selected;
-    const { eventChange } = this.constructor as typeof BXSelectableTile;
+    const { eventChange } = this.constructor as typeof CDSSelectableTile;
     this.dispatchEvent(
       new CustomEvent(eventChange, {
         bubbles: true,
@@ -53,6 +55,40 @@ class BXSelectableTile extends FocusMixin(LitElement) {
       })
     );
   }
+
+  /**
+   * Handles the rendering of the icon.
+   */
+  protected _renderIcon() {
+    const { selected, checkmarkLabel } = this;
+
+    return html` ${selected
+      ? CheckboxCheckedFilled16({
+          children: !checkmarkLabel
+            ? undefined
+            : svg`<title>${checkmarkLabel}</title>`,
+        })
+      : Checkbox16({
+          children: !checkmarkLabel
+            ? undefined
+            : svg`<title>${checkmarkLabel}</title>`,
+        })}`;
+  }
+
+  /**
+   * Listener function for keyboard interaction.
+   *
+   * @param event to get the key pressed
+   */
+  @HostListener('keydown')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleKeydown = (event: KeyboardEvent) => {
+    const { key } = event;
+
+    if (key === ' ' || key === 'Enter') {
+      this.selected = !this.selected;
+    }
+  };
 
   /**
    * The a11y text for the checkmark icon of the selected state.
@@ -84,18 +120,8 @@ class BXSelectableTile extends FocusMixin(LitElement) {
   @property()
   value!: string;
 
-  createRenderRoot() {
-    return this.attachShadow({
-      mode: 'open',
-      delegatesFocus:
-        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
-        537,
-    });
-  }
-
   render() {
     const {
-      checkmarkLabel,
       colorScheme,
       name,
       selected,
@@ -106,6 +132,7 @@ class BXSelectableTile extends FocusMixin(LitElement) {
     const classes = classMap({
       [`${prefix}--tile`]: true,
       [`${prefix}--tile--selectable`]: true,
+      [`${prefix}--tile--is-selected`]: selected,
       [`${prefix}--tile--${colorScheme}`]: colorScheme,
     });
     return html`
@@ -114,17 +141,14 @@ class BXSelectableTile extends FocusMixin(LitElement) {
         id="input"
         class="${prefix}--tile-input"
         tabindex="-1"
-        name="${ifNonNull(name)}"
-        value="${ifNonNull(value)}"
+        name="${ifDefined(name)}"
+        value="${ifDefined(value)}"
         .checked=${selected}
         @change=${handleChange} />
       <label for="input" class="${classes}" tabindex="0">
-        <div class="${prefix}--tile__checkmark">
-          ${CheckmarkFilled16({
-            children: !checkmarkLabel
-              ? undefined
-              : svg`<title>${checkmarkLabel}</title>`,
-          })}
+        <div
+          class="${prefix}--tile__checkmark ${prefix}--tile__checkmark--persistent">
+          ${this._renderIcon()}
         </div>
         <div class="${prefix}--tile-content"><slot></slot></div>
       </label>
@@ -138,7 +162,12 @@ class BXSelectableTile extends FocusMixin(LitElement) {
     return `${prefix}-selectable-tile-changed`;
   }
 
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
+
   static styles = styles;
 }
 
-export default BXSelectableTile;
+export default CDSSelectableTile;

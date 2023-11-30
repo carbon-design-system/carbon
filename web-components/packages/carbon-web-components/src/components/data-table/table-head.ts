@@ -7,20 +7,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
-import { html, LitElement } from 'lit-element';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { LitElement, html } from 'lit';
+import { prefix } from '../../globals/settings';
 import styles from './data-table.scss';
-
-const { prefix } = settings;
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Data table header.
  *
- * @element bx-table-head
+ * @element cds-table-head
  */
 @customElement(`${prefix}-table-head`)
-class BXTableHead extends LitElement {
+class CDSTableHead extends LitElement {
+  /**
+   * TODO: Uncomment when Carbon fully implements sticky header
+   * Specify whether the header should be sticky.
+   * Still experimental: may not work with every combination of table props
+   */
+  //@property({ type: Boolean, reflect: true, attribute: 'sticky-header' })
+  // stickyHeader = false;
+
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'rowgroup');
@@ -35,4 +41,4 @@ class BXTableHead extends LitElement {
   static styles = styles;
 }
 
-export default BXTableHead;
+export default CDSTableHead;

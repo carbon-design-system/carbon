@@ -7,35 +7,30 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ifDefined } from 'lit-html/directives/if-defined';
-import { html, property, query, LitElement } from 'lit-element';
-import { classMap } from 'lit-html/directives/class-map';
-import settings from 'carbon-components/es/globals/js/settings';
+import { LitElement, html } from 'lit';
+import { property, query } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import ChevronDown16 from '@carbon/icons/lib/chevron--down/16';
 import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
-import { FORM_ELEMENT_COLOR_SCHEME } from '../../globals/shared-enums';
-import ifNonNull from '../../globals/directives/if-non-null';
+import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16';
+import { prefix } from '../../globals/settings';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import FormMixin from '../../globals/mixins/form';
-import ValidityMixin from '../../globals/mixins/validity';
 import { filter } from '../../globals/internal/collection-helpers';
-import { INPUT_SIZE } from '../input/input';
+import { INPUT_SIZE } from '../text-input/text-input';
 import styles from './select.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-export { FORM_ELEMENT_COLOR_SCHEME as SELECT_COLOR_SCHEME } from '../../globals/shared-enums';
-
-const { prefix } = settings;
 
 /**
  * Select box.
  *
- * @element bx-select
+ * @element cds-select
  * @slot helper-text - The helper text.
  * @slot label-text - The label text.
  * @slot validity-message - The validity message. If present and non-empty, this input shows the UI of its invalid state.
  */
 @customElement(`${prefix}-select`)
-class BXSelect extends ValidityMixin(FormMixin(LitElement)) {
+class CDSSelect extends FormMixin(LitElement) {
   /**
    * The mutation observer DOM mutation.
    */
@@ -62,7 +57,7 @@ class BXSelect extends ValidityMixin(FormMixin(LitElement)) {
   private _handleInput({ target }: Event) {
     const { value } = target as HTMLSelectElement;
     this.value = value;
-    const { eventSelect } = this.constructor as typeof BXSelect;
+    const { eventSelect } = this.constructor as typeof CDSSelect;
     this.dispatchEvent(
       new CustomEvent(eventSelect, {
         bubbles: true,
@@ -75,10 +70,10 @@ class BXSelect extends ValidityMixin(FormMixin(LitElement)) {
   }
 
   /**
-   * Handles DOM mutation of `<bx-select-item>` or `<bx-select-item-group>` put in `<bx-select>`, or their changes.
-   * In such event, `<bx-select>` creates the corresponding `<option>` and `<optgroup>`, respectively, into shadow DOM,
+   * Handles DOM mutation of `<cds-select-item>` or `<cds-select-item-group>` put in `<cds-select>`, or their changes.
+   * In such event, `<cds-select>` creates the corresponding `<option>` and `<optgroup>`, respectively, into shadow DOM,
    * with `._renderItems()`.
-   * Doing so allows the shadow DOM style of `<bx-select>` to control the style of the `<option>` and `<optgroup>`,
+   * Doing so allows the shadow DOM style of `<cds-select>` to control the style of the `<option>` and `<optgroup>`,
    * notably the disabled ones.
    */
   private _handleMutation = () => {
@@ -89,10 +84,10 @@ class BXSelect extends ValidityMixin(FormMixin(LitElement)) {
    * @param element The parent element containing pseudo `<optgroup>`/`<option>`.
    * @returns The template containing child `<optgroup>`/`<option>` that will be rendered to shadow DOM.
    */
-  private _renderItems(element: BXSelect | HTMLOptGroupElement) {
+  private _renderItems(element: CDSSelect | HTMLOptGroupElement) {
     const { selectorItem, selectorLeafItem } = this
-      .constructor as typeof BXSelect;
-    // Harvests attributes from `<bx-select-item>` and `<bx-select-item-group>`.
+      .constructor as typeof CDSSelect;
+    // Harvests attributes from `<cds-select-item>` and `<cds-select-item-group>`.
     // Does not use properties to avoid delay in attribute to property mapping, which runs in custom element reaction cycle:
     // https://html.spec.whatwg.org/multipage/custom-elements.html#custom-element-reactions
     return html`
@@ -112,9 +107,9 @@ class BXSelect extends ValidityMixin(FormMixin(LitElement)) {
               <option
                 class="${prefix}--select-option"
                 ?disabled="${disabled}"
-                label="${ifNonNull(label ?? textContent)}"
+                label="${ifDefined(label ?? textContent)}"
                 ?selected="${selected}"
-                value="${ifNonNull(value)}">
+                value="${ifDefined(value)}">
                 ${textContent}
               </option>
             `
@@ -122,7 +117,7 @@ class BXSelect extends ValidityMixin(FormMixin(LitElement)) {
               <optgroup
                 class="${prefix}--select-optgroup"
                 ?disabled="${disabled}"
-                label="${ifNonNull(label)}">
+                label="${ifDefined(label)}">
                 ${this._renderItems(item)}
               </optgroup>
             `;
@@ -167,12 +162,6 @@ class BXSelect extends ValidityMixin(FormMixin(LitElement)) {
   autofocus = false;
 
   /**
-   * The color scheme.
-   */
-  @property({ attribute: 'color-scheme', reflect: true })
-  colorScheme = FORM_ELEMENT_COLOR_SCHEME.REGULAR;
-
-  /**
    * Controls the disabled state of the select
    */
   @property({ type: Boolean, reflect: true })
@@ -185,22 +174,52 @@ class BXSelect extends ValidityMixin(FormMixin(LitElement)) {
   helperText = '';
 
   /**
+   * Specify whether the label should be hidden, or not
+   */
+  @property({ type: Boolean, attribute: 'hide-label' })
+  hideLabel = false;
+
+  /**
    * ID to link the `label` and `select`
    */
   @property()
   id = '';
 
   /**
-   * Controls the invalid state and visibility of the `validityMessage`
+   * Specify if the currently value is invalid.
    */
   @property({ type: Boolean, reflect: true })
   invalid = false;
+
+  /**
+   * Message which is displayed if the value is invalid.
+   */
+  @property({ attribute: 'invalid-text' })
+  invalidText = '';
+
+  /**
+   * Specify if the currently value is warn.
+   */
+  @property({ type: Boolean, reflect: true })
+  warn = false;
+
+  /**
+   * Message which is displayed if the value is warn.
+   */
+  @property({ attribute: 'warn-text' })
+  warnText = '';
 
   /**
    * The label text.
    */
   @property({ attribute: 'label-text' })
   labelText = '';
+
+  /**
+   * Specify whether you want the inline version of this control
+   */
+  @property({ type: Boolean, reflect: true })
+  inline = false;
 
   /**
    * `true` to enable multiple selection.
@@ -264,23 +283,13 @@ class BXSelect extends ValidityMixin(FormMixin(LitElement)) {
    * The input box size.
    */
   @property({ reflect: true })
-  size = INPUT_SIZE.REGULAR;
-
-  /**
-   * The validity message.
-   */
-  @property({ attribute: 'validity-message' })
-  validityMessage = '';
+  size = INPUT_SIZE.MEDIUM;
 
   /**
    * The value of the text area.
    */
-  @property()
+  @property({ reflect: true })
   value = '';
-
-  createRenderRoot() {
-    return this.attachShadow({ mode: 'open', delegatesFocus: true });
-  }
 
   connectedCallback() {
     super.connectedCallback();
@@ -313,15 +322,29 @@ class BXSelect extends ValidityMixin(FormMixin(LitElement)) {
     const {
       disabled,
       helperText,
+      hideLabel,
+      inline,
       invalid,
+      invalidText,
       labelText,
       placeholder,
+      readonly,
       size,
-      validityMessage,
+      warn,
+      warnText,
       value,
       _placeholderItemValue: placeholderItemValue,
       _handleInput: handleInput,
     } = this;
+
+    const selectClasses = classMap({
+      [`${prefix}--select`]: true,
+      [`${prefix}--select--inline`]: inline,
+      [`${prefix}--select--invalid`]: invalid,
+      [`${prefix}--select--warning`]: warn,
+      [`${prefix}--select--disabled`]: disabled,
+      [`${prefix}--select--readonly`]: readonly,
+    });
 
     const inputClasses = classMap({
       [`${prefix}--select-input`]: true,
@@ -338,52 +361,78 @@ class BXSelect extends ValidityMixin(FormMixin(LitElement)) {
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
 
-    const supplementalText = !invalid
+    const supplementalText = helperText
       ? html`
           <div class="${helperTextClasses}">
             <slot name="helper-text"> ${helperText} </slot>
           </div>
         `
-      : html`
-          <div class="${prefix}--form-requirement" id="validity-message">
-            <slot name="validity-message"> ${validityMessage} </slot>
-          </div>
-        `;
+      : null;
+
+    const errorText =
+      invalid || warn
+        ? html` <div class="${prefix}--form-requirement">
+            ${invalid ? invalidText : warnText}
+          </div>`
+        : null;
+
+    const input = html`
+      <select
+        id="input"
+        class="${inputClasses}"
+        ?disabled="${disabled}"
+        aria-readonly="${String(Boolean(readonly))}"
+        aria-invalid="${String(Boolean(invalid))}"
+        aria-describedby="${ifDefined(!invalid ? undefined : 'invalid-text')}"
+        @input="${handleInput}">
+        ${!placeholder || value
+          ? undefined
+          : html`
+              <option
+                disabled
+                hidden
+                class="${prefix}--select-option"
+                value="${placeholderItemValue}"
+                selected>
+                ${placeholder}
+              </option>
+            `}
+        ${this._renderItems(this)}
+      </select>
+      ${ChevronDown16({ class: `${prefix}--select__arrow` })}
+      ${!invalid
+        ? undefined
+        : WarningFilled16({ class: `${prefix}--select__invalid-icon` })}
+      ${!invalid && warn
+        ? WarningAltFilled16({
+            class: `${prefix}--select__invalid-icon ${prefix}--select__invalid-icon--warning`,
+          })
+        : null}
+    `;
 
     return html`
-      <label class="${labelClasses}" for="input">
-        <slot name="label-text"> ${labelText} </slot>
-      </label>
-      <div class="${prefix}--select-input__wrapper" ?data-invalid="${invalid}">
-        <select
-          id="input"
-          class="${inputClasses}"
-          ?disabled="${disabled}"
-          aria-invalid="${String(Boolean(invalid))}"
-          aria-describedby="${ifDefined(
-            !invalid ? undefined : 'validity-message'
-          )}"
-          @input="${handleInput}">
-          ${!placeholder || value
-            ? undefined
-            : html`
-                <option
-                  disabled
-                  hidden
-                  class="${prefix}--select-option"
-                  value="${placeholderItemValue}"
-                  selected>
-                  ${placeholder}
-                </option>
-              `}
-          ${this._renderItems(this)}
-        </select>
-        ${ChevronDown16({ class: `${prefix}--select__arrow` })}
-        ${!invalid
-          ? undefined
-          : WarningFilled16({ class: `${prefix}--select__invalid-icon` })}
+      <div class="${selectClasses}">
+        ${!hideLabel
+          ? html`<label class="${labelClasses}" for="input">
+              <slot name="label-text"> ${labelText} </slot>
+            </label>`
+          : null}
+        ${inline
+          ? html`<div class="${prefix}--select-input--inline__wrapper">
+              <div
+                class="${prefix}--select-input__wrapper"
+                ?data-invalid="${invalid}">
+                ${input}
+              </div>
+              ${errorText}
+            </div>`
+          : html`<div
+              class="${prefix}--select-input__wrapper"
+              ?data-invalid="${invalid}">
+              ${input}
+            </div> `}
+        ${!inline && errorText ? errorText : supplementalText}
       </div>
-      ${supplementalText}
     `;
   }
 
@@ -408,7 +457,11 @@ class BXSelect extends ValidityMixin(FormMixin(LitElement)) {
     return `${prefix}-select-selected`;
   }
 
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
   static styles = styles; // `styles` here is a `CSSResult` generated by custom WebPack loader
 }
 
-export default BXSelect;
+export default CDSSelect;

@@ -4,10 +4,10 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Tag
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/tag)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/tag)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/tag)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/tag)
 
 Tags are used for items that need to be labeled, categorized, or organized using
 keywords that describe them.
@@ -33,44 +33,57 @@ import '@carbon/web-components/es/components/tag/index.js';
 ### HTML
 
 ```html
-<bx-tag type="gray" title="Clear selection"> This is a tag </bx-tag>
+<cds-tag type="gray" title="tag-example"> This is a tag </cds-tag>
 ```
 
 ## Filter tag
 
+Use the `filter` attribute to turn the tag into a filterable element.
+
 ```html
-<bx-filter-tag open type="gray" title="Clear selection">
-  This is a tag
-</bx-filter-tag>
+<cds-tag filter type="gray" title="Clear selection"> This is a tag </cds-tag>
 ```
 
-## Themeing
+You can use the events to catch the closing of the tag.
 
-In order to get the correct token value for the tag background, you will need to apply the following in you `scss` to your themed class. For example:
+```js
+document.addEventListener('cds-tag-closed', (event) => {
+  // use values here
+});
+```
 
-```css
-@import 'carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/themes/mixins';
-@import 'carbon-components/scss/globals/scss/component-tokens';
-@import 'carbon-components/src/components/tag/tag';
-.dds-theme-zone-g90 {
-  @include carbon--theme($carbon--theme--g90, true) {
-    @include emit-component-tokens($tag-colors);
-  }
+## Custom icon
+
+If you'd like to use a custom icon other than the `Close` button, import another
+icon and insert it within the tag element as such:
+
+```html
+<cds-tag filter type="gray" title="Clear selection"> This is a tag </cds-tag>
+```
+
+```javascript
+import Download16 from '@carbon/web-components/es/icons/download/16';
+
+function App() {
+  return (
+    html`  <cds-tag filter type="gray" title="Clear selection">This is a tag ${Download16({ slot: 'icon' })}</cds-tag>`
+  );
 }
+
+
+## `<cds-tag>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-tag disabled>`) and `false` means not setting the attribute (e.g.
+`<cds-tag>` without `disabled` attribute).
+
+<Props of="cds-tag" />
+
+## `<cds-filter-tag>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-filter-tag disabled>`) and `false` means not setting the attribute (e.g.
+`<cds-filter-tag>` without `disabled` attribute).
+
+<Props of="cds-filter-tag" />
 ```
-
-## `<bx-tag>` attributes and properties
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<bx-tag disabled>`) and `false` means not setting the attribute (e.g.
-`<bx-tag>` without `disabled` attribute).
-
-<Props of="bx-tag" />
-
-## `<bx-filter-tag>` attributes and properties
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<bx-filter-tag disabled>`) and `false` means not setting the attribute (e.g.
-`<bx-filter-tag>` without `disabled` attribute).
-
-<Props of="bx-filter-tag" />

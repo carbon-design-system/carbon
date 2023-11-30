@@ -1,32 +1,18 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-@import 'carbon-components/scss/globals/scss/typography';
-@import 'carbon-components/scss/components/loading/loading';
-@import 'carbon-components/scss/components/inline-loading/inline-loading';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/components/loading';
+@use '@carbon/styles/scss/components/inline-loading/inline-loading' as *;
+
+@include inline-loading;
 
 :host(#{$prefix}-inline-loading) {
   @extend .#{$prefix}--inline-loading;
-
-  min-height: 2rem;
-
-  // This rule should be covered by next release of Carbon
-  .#{$prefix}--inline-loading__checkmark-container {
-    fill: $interactive-04;
-    width: rem(16px);
-    height: rem(16px);
-    top: auto;
-    position: relative;
-  }
-
-  // This rule should be covered by next release of Carbon
-  .#{$prefix}--inline-loading--error {
-    fill: $support-01;
-    width: rem(16px);
-    height: rem(16px);
-  }
 }

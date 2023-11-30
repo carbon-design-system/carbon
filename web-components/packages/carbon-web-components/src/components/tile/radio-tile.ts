@@ -7,121 +7,90 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
-import HostListener from '../../globals/decorators/host-listener';
-import HostListenerMixin from '../../globals/mixins/host-listener';
-import RadioGroupManager, {
-  NAVIGATION_DIRECTION,
-} from '../../globals/internal/radio-group-manager';
+import { html, svg } from 'lit';
+import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { prefix } from '../../globals/settings';
 import SelectableTile from './selectable-tile';
+import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
-
-/**
- * Map of navigation direction by key.
- */
-const navigationDirectionForKey = {
-  ArrowUp: NAVIGATION_DIRECTION.BACKWARD,
-  Up: NAVIGATION_DIRECTION.BACKWARD, // IE
-  ArrowDown: NAVIGATION_DIRECTION.FORWARD,
-  Down: NAVIGATION_DIRECTION.FORWARD, // IE
-};
 
 /**
  * Single-selectable tile.
  *
- * @element bx-radio-tile
+ * @element cds-radio-tile
  */
 @customElement(`${prefix}-radio-tile`)
-class BXRadioTile extends HostListenerMixin(SelectableTile) {
-  /**
-   * The radio group manager associated with the radio button.
-   */
-  private _manager!: RadioGroupManager;
-
+class CDSRadioTile extends SelectableTile {
   /**
    * The `type` attribute of the `<input>`.
    */
   protected _inputType = 'radio';
 
   /**
-   * Attaches the radio button to the radio group manager.
-   */
-  private _attachManager() {
-    if (!this._manager) {
-      this._manager = RadioGroupManager.get(
-        this.getRootNode({ composed: true }) as Document
-      );
-    }
-    const { name, _inputNode: inputNode, _manager: manager } = this;
-    if (inputNode && name) {
-      manager!.add(inputNode);
-    }
-  }
-
-  /**
-   * Detaches the radio button to the radio group manager.
-   */
-  private _detachManager() {
-    const { _inputNode: inputNode, _manager: manager } = this;
-    if (inputNode && manager) {
-      manager.delete(inputNode);
-    }
-  }
-
-  /**
-   * Handles `keydown` event on this element.
-   */
-  @HostListener('keydown')
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleKeydown = (event: KeyboardEvent) => {
-    const { _inputNode: inputNode } = this;
-    const manager = this._manager;
-    if (inputNode && manager) {
-      const navigationDirection = navigationDirectionForKey[event.key];
-      if (navigationDirection) {
-        manager.select(manager.navigate(inputNode, navigationDirection));
-        event.preventDefault(); // Prevent default (scrolling) behavior
-      }
-      if (event.key === ' ' || event.key === 'Enter') {
-        manager.select(inputNode);
-      }
-    }
-  };
-
-  /**
    * Handles `change` event on the `<input>` in the shadow DOM.
    */
   protected _handleChange() {
-    super._handleChange();
-    if (this._manager) {
-      this._manager.select(this._inputNode);
-    }
+    this.selected = true;
+    const { selected, name } = this;
+    const { eventRadioChange } = this.constructor as typeof CDSRadioTile;
+    this.dispatchEvent(
+      new CustomEvent(eventRadioChange, {
+        bubbles: true,
+        composed: true,
+        detail: {
+          selected,
+          name,
+        },
+      })
+    );
   }
 
-  connectedCallback() {
-    super.connectedCallback();
-    this._attachManager();
+  render() {
+    const {
+      colorScheme,
+      checkmarkLabel,
+      name,
+      selected,
+      value,
+      _inputType: inputType,
+      _handleChange: handleChange,
+    } = this;
+    const classes = classMap({
+      [`${prefix}--tile`]: true,
+      [`${prefix}--tile--selectable`]: true,
+      [`${prefix}--tile--is-selected`]: selected,
+      [`${prefix}--tile--${colorScheme}`]: colorScheme,
+    });
+    return html`
+      <input
+        type="${inputType}"
+        id="input"
+        class="${prefix}--tile-input"
+        tabindex="-1"
+        name="${ifDefined(name)}"
+        value="${ifDefined(value)}"
+        .checked=${selected}
+        @change=${handleChange} />
+      <label for="input" class="${classes}" tabindex="0">
+        <div class="${prefix}--tile__checkmark">
+          ${CheckmarkFilled16({
+            children: !checkmarkLabel
+              ? undefined
+              : svg`<title>${checkmarkLabel}</title>`,
+          })}
+        </div>
+        <div class="${prefix}--tile-content"><slot></slot></div>
+      </label>
+    `;
   }
 
-  disconnectedCallback() {
-    this._detachManager();
-    super.disconnectedCallback();
-  }
-
-  shouldUpdate(changedProperties) {
-    if (changedProperties.has('name')) {
-      this._detachManager();
-    }
-    return true;
-  }
-
-  updated(changedProperties) {
-    if (changedProperties.has('name')) {
-      this._attachManager();
-    }
+  /**
+   * The name of the custom event fired after this selectable tile changes its selected state.
+   */
+  static get eventRadioChange() {
+    return `${prefix}-radio-tile-selected`;
   }
 }
 
-export default BXRadioTile;
+export default CDSRadioTile;

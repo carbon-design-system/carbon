@@ -1,294 +1,171 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, property, LitElement } from 'lit-element';
-import { delay } from 'bluebird';
+import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
-import ifNonNull from '../../globals/directives/if-non-null';
-import './file-uploader';
-import './drop-container';
-import {
-  FILE_UPLOADER_ITEM_SIZE,
-  FILE_UPLOADER_ITEM_STATE,
-} from './file-uploader-item';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { prefix } from '../../globals/settings';
+import './index';
+import './demo-file-uploader';
+import { FILE_UPLOADER_ITEM_STATE } from './file-uploader-item';
+import { BUTTON_KIND, BUTTON_SIZE } from '../button/button';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import { FileData } from './stories/types';
 import storyDocs from './file-uploader-story.mdx';
 
-const sizes = {
-  'Regular size': null,
-  [`Small size (${FILE_UPLOADER_ITEM_SIZE.SMALL})`]:
-    FILE_UPLOADER_ITEM_SIZE.SMALL,
-  [`Size for form field (${FILE_UPLOADER_ITEM_SIZE.FIELD})`]:
-    FILE_UPLOADER_ITEM_SIZE.FIELD,
+const kind = {
+  [`Primary button (${BUTTON_KIND.PRIMARY})`]: BUTTON_KIND.PRIMARY,
+  [`Secondary button (${BUTTON_KIND.SECONDARY})`]: BUTTON_KIND.SECONDARY,
+  [`Tertiary button (${BUTTON_KIND.TERTIARY})`]: BUTTON_KIND.TERTIARY,
+  [`Danger primary button (${BUTTON_KIND.DANGER_PRIMARY})`]:
+    BUTTON_KIND.DANGER_PRIMARY,
+  [`Danger button (${BUTTON_KIND.DANGER})`]: BUTTON_KIND.DANGER,
+  [`Ghost button (${BUTTON_KIND.GHOST})`]: BUTTON_KIND.GHOST,
 };
 
-/**
- * A class to manage file uploading states, like sending file contents to server.
- * DEMONSTRATION-PURPOSE ONLY.
- * Data/state handling in file uploading tends to involve lots of application-specific logics
- * and thus abstracting everything in a library won't be a good return on investment
- * vs. letting users copy code here and implement features that fit their needs.
- */
-class BXCEDemoFileUploader extends LitElement {
-  /**
-   * The files being uploaded.
-   */
-  private _files: FileData[] = [];
+const states = {
+  [`Upload in progress (${FILE_UPLOADER_ITEM_STATE.UPLOADING})`]:
+    FILE_UPLOADER_ITEM_STATE.UPLOADING,
+  [`Upload complete (${FILE_UPLOADER_ITEM_STATE.COMPLETE})`]:
+    FILE_UPLOADER_ITEM_STATE.COMPLETE,
+  [`Edit upload (${FILE_UPLOADER_ITEM_STATE.EDIT})`]:
+    FILE_UPLOADER_ITEM_STATE.EDIT,
+};
 
-  /**
-   * Handles `bx-drop-container-changed` on `<bx-file-drop-container>`.
-   *
-   * @param event The event.
-   */
-  private _handleChange(event: CustomEvent) {
-    const { addedFiles } = event.detail;
-    const newFiles: FileData[] = addedFiles.map(
-      (item) =>
-        ({
-          id: Math.random().toString(36).slice(2),
-          file: item,
-          state: FILE_UPLOADER_ITEM_STATE.UPLOADING,
-        } as FileData)
-    );
-    const { multiple, _files: files, _simulateUpload: simulateUpload } = this;
-    if (multiple) {
-      this._files = files.concat(newFiles);
-      this.requestUpdate();
-      newFiles.forEach(simulateUpload, this);
-    } else if (addedFiles.length > 0) {
-      this._files = files.concat(newFiles[0]);
-      this.requestUpdate();
-      this._simulateUpload(newFiles[0]);
-    }
-  }
+const sizes = {
+  [`sm (${BUTTON_SIZE.SMALL})`]: BUTTON_SIZE.SMALL,
+  [`md (${BUTTON_SIZE.MEDIUM})`]: BUTTON_SIZE.MEDIUM,
+  [`lg (${BUTTON_SIZE.LARGE})`]: BUTTON_SIZE.LARGE,
+};
 
-  /**
-   * Handles `bx-file-uploader-item-deleted` on `<bx-file-uploader-item>`.
-   *
-   * @param event The event.
-   */
-  private _handleDelete(event: CustomEvent) {
-    const { fileId: idToDelete } = (event.target as HTMLElement).dataset;
-    this._files = this._files.filter(({ id }) => idToDelete !== id);
-    this.requestUpdate();
-  }
-
-  /**
-   * Simulates updating file.
-   *
-   * @param data The data of the file being uploaded.
-   */
-  private async _simulateUpload(data: FileData) {
-    const { id, file } = data;
-    if (file.size > 524288) {
-      this._files = this._files.map((item) =>
-        id !== item.id
-          ? item
-          : {
-              ...item,
-              state: FILE_UPLOADER_ITEM_STATE.EDITING,
-              invalid: true,
-              validityMessage: 'File size exceeds limit',
-              supplementalValidityMessage:
-                '500kb max file size. Select a new file and try again.',
-            }
-      );
-      this.requestUpdate();
-    } else {
-      // Simulates network request time
-      const rand = Math.random() * 1000;
-      await delay(rand);
-      this._files = this._files.map((item) =>
-        id !== item.id
-          ? item
-          : {
-              ...item,
-              state: FILE_UPLOADER_ITEM_STATE.UPLOADED,
-            }
-      );
-      this.requestUpdate();
-      // Shows x icon after 1 second
-      await delay(1000);
-      this._files = this._files.map((item) =>
-        id !== item.id
-          ? item
-          : {
-              ...item,
-              state: FILE_UPLOADER_ITEM_STATE.EDITING,
-            }
-      );
-      this.requestUpdate();
-    }
-  }
-
-  /**
-   * The file types the file input should accept, separated by space.
-   */
-  @property()
-  accept = '';
-
-  /**
-   * `true` if the drop container should be disabled.
-   */
-  @property({ type: Boolean, reflect: true })
-  disabled = false;
-
-  /**
-   * The helper text.
-   */
-  @property({ attribute: 'helper-text' })
-  helperText = '';
-
-  /**
-   * The label text.
-   */
-  @property({ attribute: 'label-text' })
-  labelText = '';
-
-  /**
-   * `true` if the drop container should accept more than one files at once.
-   * Note that even with `false` set here, user _can_ select multiple files one by one.
-   */
-  @property({ type: Boolean, reflect: true })
-  multiple = false;
-
-  /**
-   * The size of the file uploader items.
-   */
-  @property({ reflect: true })
-  size = FILE_UPLOADER_ITEM_SIZE.REGULAR;
-
-  render() {
-    const {
-      accept,
-      disabled,
-      helperText,
-      labelText,
-      multiple,
-      size,
-      _files: files,
-      _handleChange: handleChange,
-      _handleDelete: handleDelete,
-    } = this;
-    return html`
-      <bx-file-uploader
-        helper-text="${ifNonNull(helperText)}"
-        label-text="${ifNonNull(labelText)}">
-        <bx-file-drop-container
-          accept="${ifNonNull(accept)}"
-          ?disabled="${disabled}"
-          ?multiple="${multiple}"
-          @bx-file-drop-container-changed="${handleChange}">
-          Drag and drop files here or click to upload
-        </bx-file-drop-container>
-        ${files.map(
-          ({
-            id,
-            invalid,
-            file,
-            state,
-            supplementalValidityMessage,
-            validityMessage,
-          }) => html`
-            <bx-file-uploader-item
-              data-file-id="${id}"
-              ?invalid="${invalid}"
-              size="${ifNonNull(size)}"
-              state="${ifNonNull(state)}"
-              validity-message="${ifNonNull(validityMessage)}"
-              @bx-file-uploader-item-deleted="${handleDelete}">
-              ${file.name}
-              <span slot="validity-message-supplement"
-                >${supplementalValidityMessage}</span
-              >
-            </bx-file-uploader-item>
-          `
-        )}
-      </bx-file-uploader>
-    `;
-  }
-}
-
-const defineDemoFileUploader = (() => {
-  let hasDemoFileUploaderDefined;
-  return () => {
-    if (!hasDemoFileUploaderDefined) {
-      hasDemoFileUploaderDefined = true;
-      const ce = customElements;
-      // Prevents `web-component-analyzer` from harvesting `<bx-ce-demo-data-table>`
-      ce.define('bx-ce-demo-file-uploader', BXCEDemoFileUploader);
-    }
-  };
-})();
-
-export const Default = (args) => {
-  const { helperText, labelText } = args?.['bx-file-uploader'] ?? {};
-  const { accept, disabled, multiple } = args?.['bx-file-drop-container'] ?? {};
-  const { size, disableDelete, onBeforeDelete, onDelete } =
-    args?.['bx-file-uploader-item'] ?? {};
-  const handleBeforeDelete = (event: CustomEvent) => {
-    onBeforeDelete(event);
-    if (disableDelete) {
-      event.preventDefault();
-    }
-  };
-  defineDemoFileUploader();
+export const Default = () => {
   return html`
-    <bx-ce-demo-file-uploader
-      accept="${ifNonNull(accept)}"
-      ?disabled="${disabled}"
-      helper-text="${ifNonNull(helperText)}"
-      label-text="${ifNonNull(labelText)}"
-      ?multiple="${multiple}"
-      size="${ifNonNull(size)}"
-      @bx-file-uploader-item-beingdeleted="${handleBeforeDelete}"
-      @bx-file-uploader-item-deleted="${onDelete}">
-    </bx-ce-demo-file-uploader>
+    <cds-ce-demo-file-uploader
+      accept="image/jpeg"
+      button
+      label-description="Max file size is 500mb. Only .jpg files are supported."
+      label-title="Upload files">
+    </cds-ce-demo-file-uploader>
   `;
 };
 
 Default.storyName = 'Default';
 
+export const DragAndDropUploadContainerExampleApplication = () => {
+  return html`
+    <cds-ce-demo-file-uploader
+      accept="image/jpeg image/png"
+      label-description="Max file size is 500kb. Supported file types are .jpg and .png."
+      label-title="Upload files">
+    </cds-ce-demo-file-uploader>
+  `;
+};
+
+DragAndDropUploadContainerExampleApplication.storyName =
+  'Drag And Drop Upload Container Example Application';
+
+export const FileUploaderDropContainer = () => {
+  return html`
+    <cds-file-uploader-drop-container accept="image/jpeg image/png">
+      Drag and drop files here or click to upload
+    </cds-file-uploader-drop-container>
+  `;
+};
+
+FileUploaderDropContainer.storyName = 'File Uploader Drop Container';
+
+export const FileUploaderItem = () => {
+  return html`
+    <cds-file-uploader-item state="${FILE_UPLOADER_ITEM_STATE.EDIT}">
+      README.md
+    </cds-file-uploader-item>
+  `;
+};
+
+FileUploaderItem.storyName = 'File Uploader Item';
+
+export const Skeleton = () => {
+  return html` <cds-file-uploader-skeleton></cds-file-uploader-skeleton> `;
+};
+
+export const Playground = (args) => {
+  const {
+    buttonKind,
+    buttonLabel,
+    disabled,
+    state,
+    iconDescription,
+    labelDescription,
+    labelTitle,
+    multiple,
+    onDelete,
+    onChange,
+    name,
+    size,
+  } = args?.[`${prefix}-file-uploader`] ?? {};
+
+  return html`
+    <cds-ce-demo-file-uploader
+      button-kind="${buttonKind}"
+      button-label="${buttonLabel}"
+      input-state="${state}"
+      icon-description="${iconDescription}"
+      accept="image/jpeg"
+      button
+      ?disabled="${disabled}"
+      label-description="${ifDefined(labelDescription)}"
+      label-title="${ifDefined(labelTitle)}"
+      ?multiple="${multiple}"
+      size="${ifDefined(size)}"
+      input-name="${ifDefined(name)}"
+      @cds-file-uploader-item-deleted="${onDelete}"
+      @cds-file-uploader-drop-container-changed="${onChange}">
+    </cds-ce-demo-file-uploader>
+  `;
+};
+
+Playground.parameters = {
+  knobs: {
+    [`${prefix}-file-uploader`]: () => ({
+      buttonKind: select(
+        'Button kind (button-kind)',
+        kind,
+        BUTTON_KIND.PRIMARY
+      ),
+      buttonLabel: textNullable('Button Label', 'Add file'),
+      disabled: boolean('Disabled (disabled)', false),
+      state: select(
+        'File uploader item state (state)',
+        states,
+        FILE_UPLOADER_ITEM_STATE.UPLOADING
+      ),
+      iconDescription: textNullable(
+        'Icon description (icon-description)',
+        'Delete file'
+      ),
+      labelDescription: textNullable(
+        'Label description (label-description)',
+        'Max file size is 500mb. Only .jpg files are supported.'
+      ),
+      labelTitle: textNullable('Label title (label-title)', 'Upload files'),
+      name: textNullable('Input name (name)', ''),
+      onDelete: action('cds-file-uploader-item-deleted'),
+      onChange: action('cds-drop-container-changed'),
+      multiple: boolean('Multiple (multiple)', false),
+      size: select('Size (size)', sizes, BUTTON_SIZE.MEDIUM),
+    }),
+  },
+};
+
 export default {
   title: 'Components/File uploader',
   parameters: {
     ...storyDocs.parameters,
-    knobs: {
-      'bx-file-uploader': () => ({
-        helperText: textNullable(
-          'Helper text (helper-text)',
-          'Only .jpg and .png files. 500kb max file size'
-        ),
-        labelText: textNullable('Label text (label-text)', 'Account photo'),
-      }),
-      'bx-file-drop-container': () => ({
-        accept: textNullable(
-          'Accepted MIME types or file extensions (accept)',
-          'image/jpeg image/png'
-        ),
-        disabled: boolean('Disabled (disabled)', false),
-        multiple: boolean(
-          'Supports uploading multiple files at once (multiple)',
-          true
-        ),
-      }),
-      'bx-file-uploader-item': () => ({
-        size: select('Filename height (size)', sizes, null),
-        disableDelete: boolean(
-          'Disable user-initiated delete action (Call event.preventDefault() in bx-file-uploader-item-beingdeleted event)',
-          false
-        ),
-        onBeforeDelete: action('bx-file-uploader-item-beingdeleted'),
-        onDelete: action('bx-file-uploader-item-deleted'),
-      }),
-    },
   },
 };

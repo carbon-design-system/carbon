@@ -1,64 +1,56 @@
 //
-// Copyright IBM Corp. 2020, 2022
+// Copyright IBM Corp. 2020, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-:host(#{$prefix}-table-expand-row),
-:host(#{$prefix}-table-header-expand-row) {
-  .#{$prefix}--table-expand {
-    display: table-cell;
-    width: 2.5rem;
-    height: 3rem;
-    vertical-align: middle;
-    padding: 0;
-    border-bottom: 1px solid $ui-03;
-    transition: transform $duration--moderate-01 motion(standard, productive);
-  }
-
-  &[expanded] .#{$prefix}--table-expand {
-    border-bottom: 1px solid transparent;
-
-    .#{$prefix}--table-expand__svg {
-      transform: rotate(270deg);
-    }
-  }
-}
-
 :host(#{$prefix}-table-expanded-row) {
   display: table-row;
-  transition: height $duration--moderate-02 motion(standard),
-    background-color $duration--fast-02 motion(standard);
+  height: 0;
+  transition: height $duration-moderate-01 motion(standard);
 
-  &[expanded] {
-    height: auto;
+  ::slotted(*) {
+    color: $text-secondary;
   }
 
   td {
-    padding: 0 $spacing-05;
+    border-bottom-color: $border-subtle;
     vertical-align: middle;
-    height: 0;
-    transition: all $duration--fast-02 motion(standard, productive);
+    transition: all $duration-fast-02 motion(standard, productive);
+    padding: 0;
+    padding-left: $spacing-10;
 
     .#{$prefix}--child-row-inner-container {
       overflow: hidden;
       height: 0;
     }
   }
+}
 
-  &[expanded] td {
-    border-bottom: 1px solid $ui-03;
-    padding-top: rem(14px);
-    padding-bottom: rem(13px);
+:host(#{$prefix}-table-expanded-row[expanded]) {
+  height: $spacing-09;
+
+  td {
+    border-bottom: 1px solid $border-subtle;
     height: auto;
 
     .#{$prefix}--child-row-inner-container {
       height: auto;
     }
   }
+}
 
-  &[highlighted] {
-    background-color: $hover-ui;
+:host(#{$prefix}-table-expanded-row:hover),
+:host(#{$prefix}-table-expanded-row[selected]),
+:host(#{$prefix}-table-expanded-row[highlighted]) {
+  background-color: $background-hover;
+
+  ::slotted(*) {
+    color: $text-primary;
   }
+}
+
+:host(#{$prefix}-table-expanded-row[selected][highlighted]) {
+  background-color: $layer-selected;
 }

@@ -7,24 +7,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
-import { classMap } from 'lit-html/directives/class-map';
-import { html, property, LitElement } from 'lit-element';
+import { classMap } from 'lit/directives/class-map.js';
+import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import { forEach } from '../../globals/internal/collection-helpers';
 import FocusMixin from '../../globals/mixins/focus';
-import BXStructuredListRow from './structured-list-row';
+import CDSStructuredListRow from './structured-list-row';
 import styles from './structured-list.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * Structured list wrapper.
  *
- * @element bx-structured-list
+ * @element cds-structured-list
  */
 @customElement(`${prefix}-structured-list`)
-class BXStructuredList extends FocusMixin(LitElement) {
+class CDSStructuredList extends FocusMixin(LitElement) {
   /**
    * The `name` attribute for the `<input>` for selection.
    * If present, this structured list will be a selectable one.
@@ -32,14 +31,17 @@ class BXStructuredList extends FocusMixin(LitElement) {
   @property({ attribute: 'selection-name' })
   selectionName = '';
 
-  createRenderRoot() {
-    return this.attachShadow({
-      mode: 'open',
-      delegatesFocus:
-        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
-        537,
-    });
-  }
+  /**
+   * Specify if structured list is condensed, default is false
+   */
+  @property({ type: Boolean, reflect: true })
+  condensed = false;
+
+  /**
+   * Specify if structured list is flush, default is false
+   */
+  @property({ type: Boolean, reflect: true })
+  flush = false;
 
   connectedCallback() {
     if (!this.hasAttribute('role')) {
@@ -53,21 +55,43 @@ class BXStructuredList extends FocusMixin(LitElement) {
       // Propagate `selectionName` attribute to descendants until `:host-context()` gets supported in all major browsers
       forEach(
         this.querySelectorAll(
-          (this.constructor as typeof BXStructuredList).selectorRowsWithHeader
+          (this.constructor as typeof CDSStructuredList).selectorRowsWithHeader
         ),
         (elem) => {
-          (elem as BXStructuredListRow).selectionName = this.selectionName;
+          (elem as CDSStructuredListRow).selectionName = this.selectionName;
         }
       );
     }
     return true;
   }
 
+  updated(changedProperties) {
+    const attributes = ['condensed', 'flush'];
+    attributes.forEach((attr) => {
+      if (changedProperties.has(attr)) {
+        // Propagate watched attribute to descendants until `:host-context()` gets supported in all major browsers
+        forEach(
+          this.querySelectorAll(
+            (this.constructor as typeof CDSStructuredList)
+              .selectorRowsWithHeader
+          ),
+          (elem) => {
+            this[`${attr}`]
+              ? elem.setAttribute(attr, '')
+              : elem.removeAttribute(attr);
+          }
+        );
+      }
+    });
+  }
+
   render() {
-    const { selectionName } = this;
+    const { condensed, flush, selectionName } = this;
     const classes = classMap({
       [`${prefix}--structured-list`]: true,
       [`${prefix}--structured-list--selection`]: Boolean(selectionName),
+      [`${prefix}--structured-list--condensed`]: condensed,
+      [`${prefix}--structured-list--flush`]: flush,
     });
     return html`
       <section id="section" class=${classes}><slot></slot></section>
@@ -78,8 +102,11 @@ class BXStructuredList extends FocusMixin(LitElement) {
    * The CSS selector to find the rows, including header rows.
    */
   static selectorRowsWithHeader = `${prefix}-structured-list-row,${prefix}-structured-list-header-row`;
-
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
   static styles = styles;
 }
 
-export default BXStructuredList;
+export default CDSStructuredList;

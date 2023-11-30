@@ -7,26 +7,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { classMap } from 'lit-html/directives/class-map';
-import { html, property, query } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
+import { classMap } from 'lit/directives/class-map.js';
+import { LitElement, html } from 'lit';
+import { property, query } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
-import { INPUT_SIZE } from '../input/input';
-import BXSearch from '../search/search';
+import { INPUT_SIZE } from '../text-input/text-input';
+import CDSSearch from '../search/search';
 import styles from './data-table.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * Table toolbar search.
  *
- * @element bx-table-toolbar-search
- * @fires bx-search-input - The custom event fired after the search content is changed upon a user gesture.
+ * @element cds-table-toolbar-search
+ * @fires cds-search-input - The custom event fired after the search content is changed upon a user gesture.
  */
 @customElement(`${prefix}-table-toolbar-search`)
-class BXTableToolbarSearch extends HostListenerMixin(BXSearch) {
+class CDSTableToolbarSearch extends HostListenerMixin(CDSSearch) {
   @query('input')
   private _inputNode!: HTMLInputElement;
 
@@ -57,7 +56,11 @@ class BXTableToolbarSearch extends HostListenerMixin(BXSearch) {
   @HostListener('focusout')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleFocusOut(event: FocusEvent) {
-    if (!this.contains(event.relatedTarget as Node) && !this.value) {
+    if (
+      !this.contains(event.relatedTarget as Node) &&
+      !this.value &&
+      !this.persistent
+    ) {
       this.expanded = false;
     }
   }
@@ -76,19 +79,16 @@ class BXTableToolbarSearch extends HostListenerMixin(BXSearch) {
   expanded = false;
 
   /**
+   * `true` if the search box should be always be open.
+   */
+  @property({ type: Boolean, reflect: true })
+  persistent = false;
+
+  /**
    * The search box size.
    */
   @property({ reflect: true })
-  size = INPUT_SIZE.SMALL;
-
-  createRenderRoot() {
-    return this.attachShadow({
-      mode: 'open',
-      delegatesFocus:
-        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
-        537,
-    });
-  }
+  size = INPUT_SIZE.LARGE;
 
   connectedCallback() {
     if (!this.hasAttribute('role')) {
@@ -99,11 +99,19 @@ class BXTableToolbarSearch extends HostListenerMixin(BXSearch) {
 
   render() {
     const result = super.render();
-    const { expanded, size, _handleSearchClick: handleSearchClick } = this;
+    const {
+      persistent,
+      expanded,
+      size,
+      _handleSearchClick: handleSearchClick,
+    } = this;
     const classes = classMap({
       [`${prefix}--search`]: true,
       [`${prefix}--search--${size}`]: size,
     });
+    if (persistent) {
+      this.expanded = true;
+    }
     return html`
       <div
         class="${classes}"
@@ -118,11 +126,15 @@ class BXTableToolbarSearch extends HostListenerMixin(BXSearch) {
    * The name of the custom event fired after the search content is changed upon a user gesture.
    */
   static get eventInput() {
-    // The code uses on in `<bx-search>`, but definition is done also here for React event generation
+    // The code uses on in `<cds-search>`, but definition is done also here for React event generation
     return `${prefix}-search-input`;
   }
 
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
   static styles = styles;
 }
 
-export default BXTableToolbarSearch;
+export default CDSTableToolbarSearch;

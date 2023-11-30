@@ -7,19 +7,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
+import CDSTableRow from './table-row';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import BXTableRow from './table-row';
-
-const { prefix } = settings;
 
 /**
  * Data table header row.
  *
- * @element bx-table-header-row
+ * @element cds-table-header-row
  */
 @customElement(`${prefix}-table-header-row`)
-class BXTableHeaderRow extends BXTableRow {
+class CDSTableHeaderRow extends CDSTableRow {
   /**
    * The name of the custom event fired before this row is selected/unselected upon a user gesture.
    * Cancellation of this event stops the user-initiated change in selection.
@@ -29,4 +27,4 @@ class BXTableHeaderRow extends BXTableRow {
   }
 }
 
-export default BXTableHeaderRow;
+export default CDSTableHeaderRow;

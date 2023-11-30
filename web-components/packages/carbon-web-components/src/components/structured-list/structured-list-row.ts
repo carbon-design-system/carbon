@@ -7,10 +7,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
-import { ifDefined } from 'lit-html/directives/if-defined';
-import { html, property, query, LitElement } from 'lit-element';
+import { LitElement, html } from 'lit';
+import { property, query } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16';
+import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import RadioGroupManager, {
@@ -19,8 +20,6 @@ import RadioGroupManager, {
 } from '../../globals/internal/radio-group-manager';
 import styles from './structured-list.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * Map of navigation direction by key.
@@ -41,9 +40,9 @@ class StructuredListRowRadioButtonDelegate
   /**
    * The structured list row to target.
    */
-  private _row: BXStructuredListRow;
+  private _row: CDSStructuredListRow;
 
-  constructor(row: BXStructuredListRow) {
+  constructor(row: CDSStructuredListRow) {
     this._row = row;
   }
 
@@ -80,10 +79,10 @@ class StructuredListRowRadioButtonDelegate
 /**
  * Structured list row.
  *
- * @element bx-structured-list-row
+ * @element cds-structured-list-row
  */
 @customElement(`${prefix}-structured-list-row`)
-class BXStructuredListRow extends HostListenerMixin(LitElement) {
+class CDSStructuredListRow extends HostListenerMixin(LitElement) {
   /**
    * The radio group manager associated with the radio button.
    */
@@ -211,13 +210,13 @@ class BXStructuredListRow extends HostListenerMixin(LitElement) {
     const { selected, selectionName, selectionValue, selectionIconTitle } =
       this;
     if (selectionName) {
-      // "Selected" style with `.bx--structured-list-td` does not work somehow - Need investigation
+      // "Selected" style with `.${prefix}--structured-list-td` does not work somehow - Need investigation
       return html`
         <slot></slot>
         <input
           id="input"
           type="radio"
-          class="${prefix}--structured-list-input"
+          class="${prefix}--structured-list-input ${prefix}--visually-hidden"
           .checked=${selected}
           name=${selectionName}
           value=${ifDefined(selectionValue)} />
@@ -236,4 +235,4 @@ class BXStructuredListRow extends HostListenerMixin(LitElement) {
   static styles = styles;
 }
 
-export default BXStructuredListRow;
+export default CDSStructuredListRow;

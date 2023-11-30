@@ -7,25 +7,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, property } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
-import BXContentSwitcherItem from '../content-switcher/content-switcher-item';
+import { html } from 'lit';
+import { property } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
+import CDSContentSwitcherItem from '../content-switcher/content-switcher-item';
 import { TABS_TYPE } from './tabs';
 import styles from './tabs.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
-const { prefix } = settings;
-
 /**
  * Basic tab.
  *
- * @element bx-tab
+ * @element cds-tab
  */
 @customElement(`${prefix}-tab`)
-class BXTab extends BXContentSwitcherItem {
+export default class CDSTab extends CDSContentSwitcherItem {
   /**
    * `true` if this tab should be highlighted.
-   * If `true`, parent `<bx-tabs>` selects/deselects this tab upon keyboard interaction.
+   * If `true`, parent `<cds-tabs>` selects/deselects this tab upon keyboard interaction.
    *
    * @private
    */
@@ -73,7 +72,7 @@ class BXTab extends BXContentSwitcherItem {
         class="${prefix}--tabs__nav-link"
         role="tab"
         aria-label="${tabTitle}"
-        tabindex="${disabled ? -1 : 0}"
+        tabindex="${selected ? 0 : -1}"
         ?disabled="${disabled}"
         aria-selected="${Boolean(selected)}">
         <slot @slotchange="${handleSlotChange}"></slot>
@@ -83,5 +82,3 @@ class BXTab extends BXContentSwitcherItem {
 
   static styles = styles;
 }
-
-export default BXTab;

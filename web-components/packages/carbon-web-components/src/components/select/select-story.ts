@@ -1,102 +1,186 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
 // Below path will be there when an application installs `carbon-web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
-import ifNonNull from '../../globals/directives/if-non-null';
-import { INPUT_COLOR_SCHEME, INPUT_SIZE } from '../input/input';
+import { prefix } from '../../globals/settings';
+import { INPUT_SIZE } from '../text-input/text-input';
 import './select';
+import './select-item-group';
+import './select-item';
+import './select-skeleton';
+import '../form/form-item';
+import '../layer';
+import '../../../.storybook/templates/with-layer';
+
 import storyDocs from './select-story.mdx';
 
-const colorSchemes = {
-  [`Regular`]: null,
-  [`Light (${INPUT_COLOR_SCHEME.LIGHT})`]: INPUT_COLOR_SCHEME.LIGHT,
-};
-
 const sizes = {
-  'Regular size': null,
   [`Small size (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,
-  [`Extra large size (${INPUT_SIZE.EXTRA_LARGE})`]: INPUT_SIZE.EXTRA_LARGE,
+  [`Medium size (${INPUT_SIZE.MEDIUM})`]: INPUT_SIZE.MEDIUM,
+  [`Large size (${INPUT_SIZE.LARGE})`]: INPUT_SIZE.LARGE,
 };
 
-export const Default = (args) => {
+export const Default = () => {
+  return html`
+    <cds-form-item>
+      <cds-select
+        helper-text="Optional helper text"
+        label-text="Select an option"
+        placeholder="Choose an option">
+        <cds-select-item-group label="Category 1">
+          <cds-select-item value="all">Option 1</cds-select-item>
+          <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
+        </cds-select-item-group>
+        <cds-select-item-group label="Category 2">
+          <cds-select-item value="staging">Option 3</cds-select-item>
+          <cds-select-item value="dea">Option 4</cds-select-item>
+          <cds-select-item value="router">Option 5</cds-select-item>
+        </cds-select-item-group>
+      </cds-select>
+    </cds-form-item>
+  `;
+};
+
+export const Inline = () => {
+  return html`
+    <cds-form-item>
+      <cds-select
+        inline
+        helper-text="Optional helper text"
+        label-text="Select an option"
+        placeholder="Choose an option">
+        <cds-select-item-group label="Category 1">
+          <cds-select-item value="all">Option 1</cds-select-item>
+          <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
+        </cds-select-item-group>
+        <cds-select-item-group label="Category 2">
+          <cds-select-item value="staging">Option 3</cds-select-item>
+          <cds-select-item value="dea">Option 4</cds-select-item>
+          <cds-select-item value="router">Option 5</cds-select-item>
+        </cds-select-item-group>
+      </cds-select>
+    </cds-form-item>
+  `;
+};
+
+export const skeleton = () =>
+  html` <cds-select-skeleton></cds-select-skeleton> `;
+
+skeleton.parameters = {
+  percy: {
+    skip: true,
+  },
+};
+
+export const WithLayer = () => {
+  return html`
+    <sb-template-layers>
+      <cds-select
+        helper-text="Optional helper text"
+        placeholder="Choose an option">
+        <cds-select-item-group label="Category 1">
+          <cds-select-item value="all">Option 1</cds-select-item>
+          <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
+        </cds-select-item-group>
+        <cds-select-item-group label="Category 2">
+          <cds-select-item value="staging">Option 3</cds-select-item>
+          <cds-select-item value="dea">Option 4</cds-select-item>
+          <cds-select-item value="router">Option 5</cds-select-item>
+        </cds-select-item-group>
+      </cds-select>
+    </sb-template-layers>
+  `;
+};
+
+export const Playground = (args) => {
   const {
-    autofocus,
-    colorScheme,
     disabled,
     helperText,
+    hideLabel,
+    inline,
     invalid,
+    invalidText,
     labelText,
     name,
     placeholder,
     size,
-    validityMessage,
+    readonly,
+    warn,
+    warnText,
     value,
     children = html`
-      <bx-select-item-group label="Category 1">
-        <bx-select-item value="all">Option 1</bx-select-item>
-        <bx-select-item value="cloudFoundry">Option 2</bx-select-item>
-      </bx-select-item-group>
-      <bx-select-item-group label="Category 2">
-        <bx-select-item value="staging">Option 3</bx-select-item>
-        <bx-select-item value="dea">Option 4</bx-select-item>
-        <bx-select-item value="router">Option 5</bx-select-item>
-      </bx-select-item-group>
+      <cds-select-item-group label="Category 1">
+        <cds-select-item value="all">Option 1</cds-select-item>
+        <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
+      </cds-select-item-group>
+      <cds-select-item-group label="Category 2">
+        <cds-select-item value="staging">Option 3</cds-select-item>
+        <cds-select-item value="dea">Option 4</cds-select-item>
+        <cds-select-item value="router">Option 5</cds-select-item>
+      </cds-select-item-group>
     `,
     onInput,
-  } = args?.['bx-select'] ?? {};
+  } = args?.[`${prefix}-select`] ?? {};
   return html`
-    <bx-select
-      ?autofocus="${autofocus}"
-      color-scheme="${ifNonNull(colorScheme)}"
-      ?disabled="${disabled}"
-      helper-text="${ifNonNull(helperText)}"
-      ?invalid="${invalid}"
-      label-text="${ifNonNull(labelText)}"
-      name="${ifNonNull(name)}"
-      placeholder="${ifNonNull(placeholder)}"
-      size="${ifNonNull(size)}"
-      validity-message="${ifNonNull(validityMessage)}"
-      value="${ifNonNull(value)}"
-      @bx-select-selected="${ifNonNull(onInput)}">
-      ${children}
-    </bx-select>
+    <cds-form-item>
+      <cds-select
+        ?inline="${inline}"
+        ?disabled="${disabled}"
+        helper-text="${ifDefined(helperText)}"
+        ?hide-label="${hideLabel}"
+        ?invalid="${invalid}"
+        invalid-text="${ifDefined(invalidText)}"
+        label-text="${ifDefined(labelText)}"
+        name="${ifDefined(name)}"
+        placeholder="${ifDefined(placeholder)}"
+        size="${ifDefined(size)}"
+        ?readonly="${readonly}"
+        ?warn="${warn}"
+        warn-text="${ifDefined(warnText)}"
+        value="${ifDefined(value)}"
+        @cds-select-selected="${ifDefined(onInput)}">
+        ${children}
+      </cds-select>
+    </cds-form-item>
   `;
 };
 
-Default.parameters = {
+Playground.parameters = {
   knobs: {
-    'bx-select': () => ({
-      colorScheme: select('Color scheme (color-scheme)', colorSchemes, null),
+    [`${prefix}-select`]: () => ({
       disabled: boolean('Disabled (disabled)', false),
       helperText: textNullable(
         'Helper text (helper-text)',
         'Optional helper text'
       ),
+      hideLabel: boolean('Hide label (hide-label)', false),
+      inline: boolean('Inline (inline)', false),
       invalid: boolean('Invalid (invalid)', false),
-      labelText: textNullable('Label text (label-text)', 'Select'),
+      invalidText: textNullable('Invalid text (invalid-text)', 'Error message'),
+      labelText: textNullable('Label text (label-text)', 'Select an option'),
       placeholder: textNullable(
-        'Placeholder text (placeholder)',
-        'Optional placeholder text'
+        'Placeholder (placeholder)',
+        'Choose an option'
       ),
-      size: select('Dropdown size (size)', sizes, null),
-      validityMessage: textNullable(
-        'The validity message (validity-message)',
-        ''
-      ),
+      size: select('size (size)', sizes, INPUT_SIZE.MEDIUM),
+      readonly: boolean('Read only (readonly)', false),
+      warn: boolean('Warn (warn)', false),
+      warnText: textNullable('Warn text (warn-text)', 'Warning message'),
       value: textNullable('The value of the selected item (value)', ''),
-      onInput: action('bx-select-selected'),
+      onInput: action(`${prefix}-select-selected`),
     }),
   },
 };
@@ -106,4 +190,9 @@ export default {
   parameters: {
     ...storyDocs.parameters,
   },
+  decorators: [
+    (story) => {
+      return html`<div style="width: 400px">${story()}</div>`;
+    },
+  ],
 };

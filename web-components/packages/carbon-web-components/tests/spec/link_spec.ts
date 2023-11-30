@@ -1,27 +1,27 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render } from 'lit-html';
+import { render } from 'lit';
 import '../../src/components/link/link';
-import { Default } from '../../src/components/link/link-story';
+import { pairedWithIcon } from '../../src/components/link/link-story';
 
 const template = (props?) =>
-  Default({
-    'bx-link': props,
+  pairedWithIcon({
+    'cds-link': props,
   });
 
-describe('bx-link', function () {
+describe('cds-link', function () {
   describe('Misc attributes', function () {
     it('should render with minimum attributes', async function () {
       render(template({ href: 'about:blank' }), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-link' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-link' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -41,7 +41,7 @@ describe('bx-link', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-link' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-link' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -62,7 +62,7 @@ describe('bx-link', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-link' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-link' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });

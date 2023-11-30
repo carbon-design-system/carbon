@@ -1,30 +1,30 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render } from 'lit-html';
-import BXInlineNotification, {
+import { render } from 'lit';
+import CDSInlineNotification, {
   NOTIFICATION_KIND,
 } from '../../src/components/notification/inline-notification';
-import { inline } from '../../src/components/notification/notification-story';
+import { Playground } from '../../src/components/notification/inline-notification-story';
 
 const inlineTemplate = (props?) =>
-  inline({
-    'bx-inline-notification': props,
+  Playground({
+    'cds-inline-notification': props,
   });
 
-describe('bx-inline-notification', function () {
+describe('cds-inline-notification', function () {
   describe('Rendering titles', function () {
     it('Should render with minimum attributes', async function () {
       render(inlineTemplate(), document.body);
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-inline-notification' as any)
+        document.body.querySelector('cds-inline-notification' as any)
       ).toMatchSnapshot({ mode: 'shadow' });
     });
 
@@ -43,18 +43,18 @@ describe('bx-inline-notification', function () {
       );
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-inline-notification' as any)
+        document.body.querySelector('cds-inline-notification' as any)
       ).toMatchSnapshot({ mode: 'shadow' });
     });
   });
 
   describe('Closing', function () {
-    let notification: BXInlineNotification | null;
+    let notification: CDSInlineNotification | null;
 
     beforeEach(async function () {
       render(inlineTemplate(), document.body);
       await Promise.resolve();
-      notification = document.body.querySelector('bx-inline-notification');
+      notification = document.body.querySelector('cds-inline-notification');
     });
 
     it('Should support closing', async function () {
@@ -71,10 +71,10 @@ describe('bx-inline-notification', function () {
     let notification;
 
     beforeEach(async function () {
-      const initializeTimerCloseEvent = (BXInlineNotification.prototype as any)
+      const initializeTimerCloseEvent = (CDSInlineNotification.prototype as any)
         ._handleUserOrTimerInitiatedClose;
       spyOn(
-        BXInlineNotification.prototype as any,
+        CDSInlineNotification.prototype as any,
         '_initializeTimeout'
       ).and.callFake(function () {
         // TODO: See if we can get around TS2683
@@ -89,7 +89,7 @@ describe('bx-inline-notification', function () {
         document.body
       );
       await Promise.resolve();
-      notification = document.body.querySelector('bx-inline-notification');
+      notification = document.body.querySelector('cds-inline-notification');
     });
 
     it('Should support closing after the timeout', async function () {

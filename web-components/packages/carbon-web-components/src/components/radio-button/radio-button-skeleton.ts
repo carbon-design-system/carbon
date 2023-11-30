@@ -7,18 +7,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, LitElement } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
+import { LitElement, html } from 'lit';
+import { prefix } from '../../globals/settings';
 import styles from './radio-button.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * Skeleton of radio button.
  */
 @customElement(`${prefix}-radio-button-skeleton`)
-class BXRadioButtonSkeleton extends LitElement {
+class CDSRadioButtonSkeleton extends LitElement {
   render() {
     return html`
       <div class="${prefix}--radio-button ${prefix}--skeleton"></div>
@@ -29,4 +27,4 @@ class BXRadioButtonSkeleton extends LitElement {
   static styles = styles;
 }
 
-export default BXRadioButtonSkeleton;
+export default CDSRadioButtonSkeleton;

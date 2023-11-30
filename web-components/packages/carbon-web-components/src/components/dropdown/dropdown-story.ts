@@ -1,139 +1,232 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
-import { action } from '@storybook/addon-actions';
+import { html } from 'lit';
 import { boolean, select } from '@storybook/addon-knobs';
+import { prefix } from '../../globals/settings';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import ifNonNull from '../../globals/directives/if-non-null';
-import {
-  DROPDOWN_COLOR_SCHEME,
-  DROPDOWN_SIZE,
-  DROPDOWN_TYPE,
-} from './dropdown';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { DROPDOWN_DIRECTION, DROPDOWN_SIZE, DROPDOWN_TYPE } from './dropdown';
 import './dropdown-item';
 import './dropdown-skeleton';
 import storyDocs from './dropdown-story.mdx';
 
-const colorSchemes = {
-  [`Regular`]: null,
-  [`Light (${DROPDOWN_COLOR_SCHEME.LIGHT})`]: DROPDOWN_COLOR_SCHEME.LIGHT,
+const directionOptions = {
+  [`Top`]: DROPDOWN_DIRECTION.TOP,
+  [`Bottom`]: DROPDOWN_DIRECTION.BOTTOM,
 };
 
 const sizes = {
-  'Regular size': null,
   [`Small size (${DROPDOWN_SIZE.SMALL})`]: DROPDOWN_SIZE.SMALL,
-  [`Extra large size (${DROPDOWN_SIZE.EXTRA_LARGE})`]:
-    DROPDOWN_SIZE.EXTRA_LARGE,
+  [`Medium size (${DROPDOWN_SIZE.MEDIUM})`]: DROPDOWN_SIZE.MEDIUM,
+  [`Large size (${DROPDOWN_SIZE.LARGE})`]: DROPDOWN_SIZE.LARGE,
 };
 
 const types = {
-  Regular: null,
+  Default: null,
   [`Inline (${DROPDOWN_TYPE.INLINE})`]: DROPDOWN_TYPE.INLINE,
 };
 
-export const Default = (args) => {
-  const {
-    open,
-    colorScheme,
-    disabled,
-    helperText,
-    labelText,
-    size,
-    type,
-    value,
-    triggerContent,
-    disableSelection,
-    disableToggle,
-    onBeforeSelect,
-    onBeforeToggle,
-    onSelect,
-    onToggle,
-  } = args?.['bx-dropdown'] ?? {};
-  const handleBeforeSelect = (event: CustomEvent) => {
-    if (onBeforeSelect) {
-      onBeforeSelect(event);
-    }
-    if (disableSelection) {
-      event.preventDefault();
-    }
-  };
-  const handleBeforeToggle = (event: CustomEvent) => {
-    if (onBeforeToggle) {
-      onBeforeToggle(event);
-    }
-    if (disableToggle) {
-      event.preventDefault();
-    }
-  };
+const items = [
+  {
+    value: 'option-0',
+    text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+  },
+  {
+    value: 'option-1',
+    text: 'Option 1',
+  },
+  {
+    value: 'option-2',
+    text: 'Option 2',
+  },
+  {
+    value: 'option-3',
+    text: 'Option 3 - a disabled item',
+    disabled: true,
+  },
+  {
+    value: 'option-4',
+    text: 'Option 4',
+  },
+  {
+    value: 'option-5',
+    text: 'Option 5',
+  },
+];
+
+export const Default = () => {
   return html`
-    <bx-dropdown
-      ?open=${open}
-      color-scheme="${ifNonNull(colorScheme)}"
-      ?disabled=${disabled}
-      helper-text=${ifNonNull(helperText)}
-      label-text=${ifNonNull(labelText)}
-      size="${ifNonNull(size)}"
-      type="${ifNonNull(type)}"
-      value=${ifNonNull(value)}
-      trigger-content=${ifNonNull(triggerContent)}
-      @bx-dropdown-beingselected=${handleBeforeSelect}
-      @bx-dropdown-beingtoggled=${handleBeforeToggle}
-      @bx-dropdown-selected=${onSelect}
-      @bx-dropdown-toggled=${onToggle}>
-      <bx-dropdown-item value="all">Option 1</bx-dropdown-item>
-      <bx-dropdown-item value="cloudFoundry">Option 2</bx-dropdown-item>
-      <bx-dropdown-item value="staging">Option 3</bx-dropdown-item>
-      <bx-dropdown-item value="dea">Option 4</bx-dropdown-item>
-      <bx-dropdown-item value="router">Option 5</bx-dropdown-item>
-    </bx-dropdown>
+    <cds-dropdown
+      helper-text="This is some helper text"
+      title-text="Dropdown label"
+      label="Dropdown menu options">
+      ${items.map(
+        (elem) => html`
+          <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
+            >${elem.text}</cds-dropdown-item
+          >
+        `
+      )}
+    </cds-dropdown>
   `;
 };
 
-Default.storyName = 'Default';
+export const Inline = () => {
+  return html`
+    <cds-dropdown
+      type="inline"
+      title-text="Inline dropdown label"
+      label="Dropdown menu options">
+      ${items.map(
+        (elem) => html`
+          <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
+            >${elem.text}</cds-dropdown-item
+          >
+        `
+      )}
+    </cds-dropdown>
+  `;
+};
 
-Default.parameters = {
+export const InlineWithLayer = () => {
+  return html`
+    <sb-template-layers>
+      <div style="width:400px">
+        <cds-dropdown
+          type="inline"
+          title-text="Inline dropdown label"
+          label="Dropdown menu options">
+          ${items.map(
+            (elem) => html`
+              <cds-dropdown-item
+                ?disabled=${elem.disabled}
+                value="${elem.value}"
+                >${elem.text}</cds-dropdown-item
+              >
+            `
+          )}
+        </cds-dropdown>
+      </div>
+    </sb-template-layers>
+  `;
+};
+
+export const WithLayer = () => {
+  return html`
+    <sb-template-layers>
+      <div style="width:400px">
+        <cds-dropdown
+          title-text="Dropdown label"
+          helper-text="This is some helper text"
+          label="Dropdown menu options">
+          ${items.map(
+            (elem) => html`
+              <cds-dropdown-item
+                ?disabled=${elem.disabled}
+                value="${elem.value}"
+                >${elem.text}</cds-dropdown-item
+              >
+            `
+          )}
+        </cds-dropdown>
+      </div>
+    </sb-template-layers>
+  `;
+};
+
+export const Playground = (args) => {
+  const {
+    open,
+    direction,
+    disabled,
+    helperText,
+    hideLabel,
+    invalid,
+    invalidText,
+    titleText,
+    readOnly,
+    size,
+    type,
+    value,
+    label,
+    warn,
+    warnText,
+  } = args?.[`${prefix}-dropdown`] ?? {};
+
+  return html`
+    <cds-dropdown
+      ?open=${open}
+      ?disabled="${disabled}"
+      ?hide-label=${hideLabel}
+      helper-text=${ifDefined(helperText)}
+      ?invalid=${invalid}
+      ?read-only=${readOnly}
+      invalid-text=${invalidText}
+      direction="${direction}"
+      title-text=${ifDefined(titleText)}
+      size="${ifDefined(size)}"
+      type="${ifDefined(type)}"
+      value=${ifDefined(value)}
+      label=${ifDefined(label)}
+      ?warn=${warn}
+      warn-text=${warnText}>
+      ${items.map(
+        (elem) => html`
+          <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
+            >${elem.text}</cds-dropdown-item
+          >
+        `
+      )}
+    </cds-dropdown>
+  `;
+};
+
+Playground.parameters = {
   knobs: {
-    'bx-dropdown': () => ({
+    [`${prefix}-dropdown`]: () => ({
       open: boolean('Open (open)', false),
-      colorScheme: select('Color scheme (color-scheme)', colorSchemes, null),
+      direction: select('Direction', directionOptions, null),
       disabled: boolean('Disabled (disabled)', false),
       helperText: textNullable(
         'Helper text (helper-text)',
-        'Optional helper text'
+        'This is some helper text'
       ),
-      labelText: textNullable('Label text (label-text)', 'Dropdown title'),
+      hideLabel: boolean('Hide label (hide-label)', false),
+      invalid: boolean('Invalid (invalid)', false),
+      invalidText: textNullable(
+        'Invalid text (invalid-text)',
+        'invalid selection'
+      ),
+      readOnly: boolean('Read only (read-only)', false),
+      label: textNullable(
+        'The default content of the trigger button (label)',
+        'This is an example label'
+      ),
+      titleText: textNullable(
+        'Title text (title-text)',
+        'This is an example title'
+      ),
       size: select('Dropdown size (size)', sizes, null),
       type: select('Dropdown type (type)', types, null),
-      value: textNullable('The value of the selected item (value)', ''),
-      triggerContent: textNullable(
-        'The default content of the trigger button (trigger-content)',
-        'Select an item'
+      value: textNullable('Selected value (value)', ''),
+      warn: boolean('Warn (warn)', false),
+      warnText: textNullable(
+        'Warn text (warn-text)',
+        'please notice the warning'
       ),
-      disableSelection: boolean(
-        'Disable user-initiated selection change (Call event.preventDefault() in bx-dropdown-beingselected event)',
-        false
-      ),
-      disableToggle: boolean(
-        'Disable user-initiated toggle of open state (Call event.preventDefault() in bx-dropdown-beingtoggled event)',
-        false
-      ),
-      onBeforeSelect: action('bx-dropdown-beingselected'),
-      onBeforeToggle: action('bx-dropdown-beingtoggled'),
-      onSelect: action('bx-dropdown-selected'),
-      onToggle: action('bx-dropdown-toggled'),
     }),
   },
 };
 
 export const skeleton = () =>
-  html` <bx-dropdown-skeleton></bx-dropdown-skeleton> `;
+  html` <cds-dropdown-skeleton></cds-dropdown-skeleton> `;
 
 skeleton.parameters = {
   percy: {
@@ -146,4 +239,10 @@ export default {
   parameters: {
     ...storyDocs.parameters,
   },
+  decorators: [
+    (story, { name }) => {
+      const width = !name.toLowerCase().includes('layer') ? `width:400px` : ``;
+      return html` <div style="${width}">${story()}</div> `;
+    },
+  ],
 };

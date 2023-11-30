@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,10 +7,18 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/components/list-box/list-box';
-@import 'carbon-components/scss/components/form/form';
-@import 'carbon-components/scss/components/checkbox/checkbox';
-@import 'carbon-components/scss/components/tag/tag';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/components/list-box/list-box' as *;
+@use '@carbon/styles/scss/components/dropdown' as *;
+@use '@carbon/styles/scss/components/form';
+@use '@carbon/styles/scss/components/checkbox';
+@use '@carbon/styles/scss/components/tag';
+
+// https://github.com/carbon-design-system/carbon/issues/11408
+@include list-box;
 
 :host(#{$prefix}-dropdown) {
   outline: none;
@@ -28,11 +36,60 @@ $css--plex: true !default;
   .#{$prefix}--list-box__menu {
     top: 100%;
     margin-top: 1px;
+    outline: 1px solid $focus;
+  }
+}
+
+:host(#{$prefix}-dropdown[open]) {
+  .#{$prefix}--list-box__field {
+    outline: none;
+  }
+}
+
+:host(#{$prefix}-dropdown[invalid]) {
+  .#{$prefix}--list-box__field {
+    outline: none;
+  }
+
+  .#{$prefix}--form__helper-text {
+    color: $text-error;
+  }
+}
+
+:host(#{$prefix}-dropdown[read-only]) {
+  @extend .#{$prefix}--dropdown--readonly;
+
+  .#{$prefix}--list-box {
+    background-color: transparent;
+    border-bottom-color: $border-subtle;
+  }
+}
+
+:host(#{$prefix}-combo-box[direction='top']),
+:host(#{$prefix}-dropdown[direction='top']) {
+  @extend .#{$prefix}--list-box--up;
+
+  .#{$prefix}--list-box__menu {
+    top: auto;
   }
 }
 
 :host(#{$prefix}-dropdown[type='inline']) {
   @extend .#{$prefix}--list-box__wrapper--inline;
+
+  grid-gap: 0 $spacing-06;
+}
+
+:host(#{$prefix}-dropdown[type='inline'][warn]) .#{$prefix}--list-box__field {
+  padding-left: $spacing-05;
+  padding-right: calc(#{$spacing-08} + #{$spacing-05});
+}
+
+:host(#{$prefix}-dropdown[warn]),
+:host(#{$prefix}-dropdown[invalid]) {
+  .#{$prefix}--form__helper-text {
+    grid-column: 2;
+  }
 }
 
 :host(#{$prefix}-dropdown-item) {
@@ -41,36 +98,22 @@ $css--plex: true !default;
   display: block;
 
   .#{$prefix}--list-box__menu-item__option {
-    height: 100%;
+    height: auto;
   }
 }
 
-:host(#{$prefix}-dropdown-item[size='sm']) {
-  height: rem(32px);
-
-  .#{$prefix}--list-box__menu-item__option {
-    padding-top: rem(7px);
-    padding-bottom: rem(7px);
-  }
-}
-
-:host(#{$prefix}-dropdown-item[size='xl']) {
-  height: rem(48px);
-
-  .#{$prefix}--list-box__menu-item__option {
-    padding-top: rem(15px);
-    padding-bottom: rem(15px);
-  }
-}
-
-:host(#{$prefix}-dropdown-item[disabled])
-  .#{$prefix}--list-box__menu-item__option {
-  color: $disabled-02;
-  text-decoration: none;
+:host(#{$prefix}-dropdown-item:hover) {
+  background-color: $layer-hover;
 }
 
 :host(#{$prefix}-dropdown-item[highlighted]) {
   @extend .#{$prefix}--list-box__menu-item--highlighted;
+}
+
+:host(#{$prefix}-dropdown-item[disabled])
+  .#{$prefix}--list-box__menu-item__option {
+  color: $text-disabled;
+  text-decoration: none;
 }
 
 :host(#{$prefix}-dropdown-item[selected]) {
@@ -78,11 +121,29 @@ $css--plex: true !default;
   @extend .#{$prefix}--list-box__menu-item--highlighted;
 
   .#{$prefix}--list-box__menu-item__option {
-    color: $text-01;
+    color: $text-primary;
   }
 
   .#{$prefix}--list-box__menu-item__selected-icon {
     display: block;
+  }
+}
+
+:host(#{$prefix}-dropdown-item[size='sm']) {
+  height: $spacing-07;
+
+  .#{$prefix}--list-box__menu-item__option {
+    padding-top: rem(7px);
+    padding-bottom: rem(7px);
+  }
+}
+
+:host(#{$prefix}-dropdown-item[size='lg']) {
+  height: $spacing-09;
+
+  .#{$prefix}--list-box__menu-item__option {
+    padding-top: rem(15px);
+    padding-bottom: rem(15px);
   }
 }
 

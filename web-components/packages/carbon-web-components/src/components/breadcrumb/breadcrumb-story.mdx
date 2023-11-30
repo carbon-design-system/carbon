@@ -4,10 +4,10 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Breadcrumb
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/breadcrumb)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/breadcrumb)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/breadcrumb)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/breadcrumb)
 
 ## Getting started
 
@@ -25,47 +25,99 @@ import '@carbon/web-components/es/components/breadcrumb/index.js';
 ### HTML
 
 ```html
-<bx-breadcrumb>
-  <bx-breadcrumb-item>
-    <bx-breadcrumb-link href="/#">Breadcrumb 1</bx-breadcrumb-link>
-  </bx-breadcrumb-item>
-  <bx-breadcrumb-item>
-    <bx-breadcrumb-link href="/#">Breadcrumb 2</bx-breadcrumb-link>
-  </bx-breadcrumb-item>
-  <bx-breadcrumb-item>
-    <bx-breadcrumb-link href="/#" aria-current="page"
-      >Breadcrumb 3</bx-breadcrumb-link
-    >
-  </bx-breadcrumb-item>
-</bx-breadcrumb>
+<cds-breadcrumb>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="/#">Breadcrumb 1</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="#">Breadcrumb 3</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link>Breadcrumb 4</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+</cds-breadcrumb>
 ```
 
 ### HTML (with overflow-menu)
 
 ```html
-<bx-breadcrumb>
-  <bx-breadcrumb-item>
-    <bx-breadcrumb-link href="/#">Breadcrumb 1</bx-breadcrumb-link>
-  </bx-breadcrumb-item>
-  <bx-breadcrumb-item>
-    <bx-breadcrumb-link href="/#">Breadcrumb 2</bx-breadcrumb-link>
-  </bx-breadcrumb-item>
-  <bx-breadcrumb-item>
-    <bx-breadcrumb-overflow-menu>
-      <bx-overflow-menu-body>
-        <bx-overflow-menu-item>Option 1</bx-overflow-menu-item>
-        <bx-overflow-menu-item>Option 2</bx-overflow-menu-item>
-      </bx-overflow-menu-body>
-    </bx-breadcrumb-overflow-menu>
-  </bx-breadcrumb-item>
-  <bx-breadcrumb-item>
-    <bx-breadcrumb-link href="/#" aria-current="page"
-      >Breadcrumb 3</bx-breadcrumb-link
-    >
-  </bx-breadcrumb-item>
-</bx-breadcrumb>
+<cds-breadcrumb>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="/#">Breadcrumb 1</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="/#">Breadcrumb 2</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-overflow-menu>
+      <cds-overflow-menu-body>
+        <cds-overflow-menu-item>Breadcrumb 3</cds-overflow-menu-item>
+        <cds-overflow-menu-item>Breadcrumb 4</cds-overflow-menu-item>
+      </cds-overflow-menu-body>
+    </cds-breadcrumb-overflow-menu>
+  </cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="/#">Breadcrumb 5</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link>Breadcrumb 6</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+</cds-breadcrumb>
 ```
 
-## `<bx-breadcrumb-link>` attributes, properties and events
+### HTML (skeleton)
 
-<Props of="bx-breadcrumb-link" />
+```html
+<cds-breadcrumb-skeleton> </cds-breadcrumb-skeleton>
+```
+
+### HTML (no-trailing-slash)
+
+```html
+<cds-breadcrumb no-trailing-slash>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="/#">Breadcrumb 1</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="#">Breadcrumb 3</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link>Breadcrumb 4</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+</cds-breadcrumb>
+```
+
+### HTML (aria-current="page")
+
+```html
+<cds-breadcrumb no-trailing-slash>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="/#">Breadcrumb 1</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="#">Breadcrumb 3</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="/#" aria-current="page"
+      >Breadcrumb 4</cds-breadcrumb-link
+    >
+  </cds-breadcrumb-item>
+</cds-breadcrumb>
+```
+
+## `<cds-breadcrumb>` attributes, properties and events
+
+<Props of="cds-breadcrumb" />
+
+## `<cds-breadcrumb-link>` attributes, properties and events
+
+<Props of="cds-breadcrumb-link" />

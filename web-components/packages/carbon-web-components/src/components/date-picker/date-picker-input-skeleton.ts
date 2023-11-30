@@ -7,19 +7,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, property, LitElement } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
+import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import { DATE_PICKER_INPUT_KIND } from './date-picker-input';
 import styles from './date-picker.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * Skeleton version of the input box for date picker.
  */
 @customElement(`${prefix}-date-picker-input-skeleton`)
-class BXDatePickerInputSkeleton extends LitElement {
+class CDSDatePickerInputSkeleton extends LitElement {
   /**
    * Date picker input kind. Corresponds to the attribute with the same name.
    */
@@ -36,4 +35,4 @@ class BXDatePickerInputSkeleton extends LitElement {
   static styles = styles;
 }
 
-export default BXDatePickerInputSkeleton;
+export default CDSDatePickerInputSkeleton;

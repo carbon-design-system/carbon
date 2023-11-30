@@ -48,6 +48,7 @@ const cloptions = { browsers: [], specs: [], ...program.opts() };
 module.exports = {
   ENV_PRODUCTION: 'production',
   cloptions,
+  bundleDestDir: 'dist',
   srcDir: 'src',
   iconsDir: path.dirname(require.resolve('@carbon/icons/lib')),
   cjsDestDir: 'lib',

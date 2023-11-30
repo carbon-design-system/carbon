@@ -16,7 +16,7 @@ module: {
     {
       test: /\.js$/,
       include: [
-        path.dirname(require.resolve('carbon-web-components/es')),
+        path.dirname(require.resolve('@carbon/web-components/es')),
       ],
       use: [
         {

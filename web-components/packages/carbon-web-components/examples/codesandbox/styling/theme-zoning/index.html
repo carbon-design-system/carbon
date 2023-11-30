@@ -1,7 +1,7 @@
 <!--
 @license
 
-Copyright IBM Corp. 2019
+Copyright IBM Corp. 2020
 
 This source code is licensed under the Apache-2.0 license found in the
 LICENSE file in the root directory of this source tree.
@@ -11,45 +11,69 @@ LICENSE file in the root directory of this source tree.
   <head>
     <title>carbon-web-components example</title>
     <meta charset="UTF-8" />
-    <!-- Production application should limit the CSS import here to @carbon/grid CSS and `carbon-components/scss/components/ui-shell/_content.scss` -->
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/carbon-components@10.17.0/css/carbon-components.min.css">
+    <link
+      rel="stylesheet"
+      href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"
+    />
+    <link rel="stylesheet" href="src/styles.scss" />
+    <style>
+      /* Suppress custom element until styles are loaded */
+      cds-header:not(:defined) {
+        display: none;
+      }
+    </style>
     <script type="module" src="src/index.js"></script>
   </head>
   <body>
-    <bx-header aria-label="IBM Platform Name">
-      <bx-header-name href="javascript:void 0" prefix="IBM">[Platform]</bx-header-name>
-      <bx-header-nav menu-bar-label="IBM [Platform]">
-        <bx-header-nav-item href="javascript:void 0">Link 1</bx-header-nav-item>
-        <bx-header-nav-item href="javascript:void 0">Link 2</bx-header-nav-item>
-        <bx-header-nav-item href="javascript:void 0">Link 3</bx-header-nav-item>
-        <bx-header-menu menu-label="Link 4" trigger-content="Link 4">
-          <bx-header-menu-item href="javascript:void 0">Sub-link 1</bx-header-menu-item>
-          <bx-header-menu-item href="javascript:void 0">Sub-link 2</bx-header-menu-item>
-          <bx-header-menu-item href="javascript:void 0">Sub-link 3</bx-header-menu-item>
-        </bx-header-menu>
-      </bx-header-nav>
-    </bx-header>
-    <main class="bx--content bx-ce-demo-theme-zoning--ui-shell-content">
-      <div class="bx--grid">
-        <div class="bx--row">
-          <div class="bx--col-lg-13">
-            <h2>
-              Theming and CSS scoping
-            </h2>
+    <cds-header aria-label="IBM Platform Name">
+      <cds-header-name href="javascript:void 0" prefix="IBM"
+        >[Platform]</cds-header-name
+      >
+      <cds-header-nav menu-bar-label="IBM [Platform]">
+        <cds-header-nav-item href="javascript:void 0">Link 1</cds-header-nav-item>
+        <cds-header-nav-item href="javascript:void 0">Link 2</cds-header-nav-item>
+        <cds-header-nav-item href="javascript:void 0">Link 3</cds-header-nav-item>
+        <cds-header-menu menu-label="Link 4" trigger-content="Link 4">
+          <cds-header-menu-item href="javascript:void 0"
+            >Sub-link 1</cds-header-menu-item
+          >
+          <cds-header-menu-item href="javascript:void 0"
+            >Sub-link 2</cds-header-menu-item
+          >
+          <cds-header-menu-item href="javascript:void 0"
+            >Sub-link 3</cds-header-menu-item
+          >
+        </cds-header-menu>
+      </cds-header-nav>
+    </cds-header>
+    <main class="cds--content cds-ce-demo-theme-zoning--ui-shell-content">
+      <div class="cds--grid">
+        <div class="cds--row">
+          <div class="cds--col-lg-13">
+            <h2>Theming and CSS scoping</h2>
             <p>
-              The color scheme of <code>carbon-web-components</code> components can be changed either by CSS custom properties (this
-              example) or by
-              <a target="_blank" href="https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/styling/custom-style">
-              creating inherited components with the static <code>styles</code> property changed</a>.
+              The color scheme of <code>carbon-web-components</code> components
+              can be changed either by CSS custom properties (this example) or
+              by
+              <a
+                target="_blank"
+                href="https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/styling/custom-style">
+                creating inherited components with the static
+                <code>styles</code> property changed</a
+              >.
               <br />
               <br />
-              If you inspect the style of <code>&lt;footer&gt;</code> in this example, you'll find some Carbon theme custom
-              properties there are changed to ones of <code>g100</code> theme, and see the background color as well as the color
-              of <code>&lt;bx-btn&gt;</code> reflect such change.
+              If you inspect the style of <code>&lt;footer&gt;</code> in this
+              example, you'll find some Carbon theme custom properties there are
+              changed to ones of <code>g100</code> theme, and see the background
+              color as well as the color of <code>&lt;cds-button&gt;</code> reflect
+              such change.
               <br />
               <br />
-              As Shadow DOM (one of the Web Components specs that <code>carbon-web-components</code> uses) promises, styles that
-              <code>carbon-web-components</code> defines do not affect styles in your application.
+              As Shadow DOM (one of the Web Components specs that
+              <code>carbon-web-components</code> uses) promises, styles that
+              <code>carbon-web-components</code> defines do not affect styles in
+              your application.
             </p>
           </div>
         </div>
@@ -58,8 +82,12 @@ LICENSE file in the root directory of this source tree.
     <footer>
       <p>
         <span>Have questions?</span>
-        <bx-btn kind="secondary">Nope!</bx-btn>
-        <bx-btn href="https://github.com/carbon-design-system/carbon-web-components/issues/new" target="_blank">Enter an issue</bx-btn>
+        <cds-button kind="tertiary">Nope!</cds-button>
+        <cds-button
+          href="https://github.com/carbon-design-system/carbon-web-components/issues/new"
+          target="_blank"
+          >Enter an issue</cds-button
+        >
       </p>
     </footer>
   </body>

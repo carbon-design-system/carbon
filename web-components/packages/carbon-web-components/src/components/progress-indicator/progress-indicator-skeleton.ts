@@ -7,20 +7,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, property, LitElement } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
+import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import { forEach } from '../../globals/internal/collection-helpers';
-import BXProgressStepSkeleton from './progress-step-skeleton';
+import CDSProgressStepSkeleton from './progress-step-skeleton';
 import styles from './progress-indicator.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * Skeleton of progress indicator.
  */
 @customElement(`${prefix}-progress-indicator-skeleton`)
-class BXProgressIndicatorSkeleton extends LitElement {
+export default class CDSProgressIndicatorSkeleton extends LitElement {
   /**
    * `true` if the progress indicator should be vertical. Corresponds to the attribute with the same name.
    */
@@ -32,17 +31,17 @@ class BXProgressIndicatorSkeleton extends LitElement {
       // Propagate `vertical` attribute to descendants until `:host-context()` gets supported in all major browsers
       forEach(
         this.querySelectorAll(
-          (this.constructor as typeof BXProgressIndicatorSkeleton).selectorStep
+          (this.constructor as typeof CDSProgressIndicatorSkeleton).selectorStep
         ),
         (item) => {
-          (item as BXProgressStepSkeleton).vertical = this.vertical;
+          (item as CDSProgressStepSkeleton).vertical = this.vertical;
         }
       );
     }
   }
 
   render() {
-    return html` <slot></slot> `;
+    return html`<slot></slot>`;
   }
 
   /**
@@ -54,5 +53,3 @@ class BXProgressIndicatorSkeleton extends LitElement {
 
   static styles = styles;
 }
-
-export default BXProgressIndicatorSkeleton;

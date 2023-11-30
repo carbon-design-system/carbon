@@ -1,14 +1,14 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, render } from 'lit-html';
-import { Default } from '../../src/components/slider/slider-story';
+import { html, render } from 'lit';
+import { Playground } from '../../src/components/slider/slider-story';
 
 /**
  * @param formData A `FormData` instance.
@@ -24,16 +24,16 @@ const getValues = (formData: FormData) => {
 };
 
 const template = (props?) =>
-  Default({
-    'bx-slider': props,
+  Playground({
+    'cds-slider': props,
   });
 
-describe('bx-slider', function () {
+describe('cds-slider', function () {
   describe('Rendering', function () {
     it('Should render with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-slider' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-slider' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -52,7 +52,7 @@ describe('bx-slider', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-slider' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-slider' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });

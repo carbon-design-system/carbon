@@ -7,19 +7,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { property, LitElement } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
+import { LitElement } from 'lit';
+import { property } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * An option group in select box.
  *
- * @element bx-select-item-group
+ * @element cds-select-item-group
  */
 @customElement(`${prefix}-select-item-group`)
-class BXSelectItemGroup extends LitElement {
+class CDSSelectItemGroup extends LitElement {
   /**
    * `true` to disable this option.
    */
@@ -33,4 +32,4 @@ class BXSelectItemGroup extends LitElement {
   label = '';
 }
 
-export default BXSelectItemGroup;
+export default CDSSelectItemGroup;

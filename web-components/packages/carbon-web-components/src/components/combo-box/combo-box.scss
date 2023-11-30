@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,11 +7,20 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/components/combo-box/combo-box';
-@import 'carbon-components/scss/components/form/form';
-@import 'carbon-components/scss/components/text-input/text-input';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/components/combo-box' as *;
+@use '@carbon/styles/scss/components/form';
+@use '@carbon/styles/scss/components/text-input/text-input';
+@use '../dropdown/dropdown.scss';
 
 :host(#{$prefix}-combo-box) {
+  @extend :host(#{$prefix}-dropdown);
+  @include emit-layout-tokens();
+
   outline: none;
 
   .#{$prefix}--assistive-text {
@@ -20,32 +29,39 @@ $css--plex: true !default;
     top: -100%;
   }
 
-  .#{$prefix}--label[hidden] {
-    display: none;
-  }
-
-  .#{$prefix}--list-box__field,
-  // To get more specifity than:
-  // https://github.com/carbon-design-system/carbon/blob/v10.16.0/packages/components/src/components/list-box/_list-box.scss#L126
-  .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field {
+  .#{$prefix}--list-box__field {
     padding: 0;
   }
 
   .#{$prefix}--list-box__menu {
+    outline: none;
     top: 100%;
     margin-top: 1px;
   }
 }
 
-:host(#{$prefix}-combo-box[type='inline']) {
-  @extend .#{$prefix}--list-box__wrapper--inline;
-
-  .#{$prefix}--list-box__field {
-    padding-left: 0;
+:host(#{$prefix}-combo-box[isClosable]) {
+  .#{$prefix}--list-box__invalid-icon {
+    right: rem(66px) !important;
   }
+}
 
-  .#{$prefix}--text-input {
-    border-bottom: none;
+:host(#{$prefix}-combo-box[disabled]),
+:host(#{$prefix}-combo-box[read-only]) {
+  .#{$prefix}--list-box__selection {
+    pointer-events: none;
+  }
+}
+
+:host(#{$prefix}-combo-box[invalid]) {
+  .#{$prefix}--form__helper-text {
+    color: $text-error;
+  }
+}
+
+:host(#{$prefix}-combo-box[read-only]) {
+  .#{$prefix}--list-box__selection svg {
+    fill: $icon-disabled;
   }
 }
 
@@ -55,32 +71,19 @@ $css--plex: true !default;
   display: block;
 
   .#{$prefix}--list-box__menu-item__option {
-    height: 100%;
+    height: auto;
+  }
+
+  &:hover {
+    background-color: $layer-hover;
   }
 }
 
-:host(#{$prefix}-combo-box-item[size='sm']) {
-  height: rem(32px);
-
+:host(#{$prefix}-combo-box-item[disabled]) {
   .#{$prefix}--list-box__menu-item__option {
-    padding-top: rem(7px);
-    padding-bottom: rem(7px);
+    color: $text-disabled;
+    text-decoration: none;
   }
-}
-
-:host(#{$prefix}-combo-box-item[size='xl']) {
-  height: rem(48px);
-
-  .#{$prefix}--list-box__menu-item__option {
-    padding-top: rem(15px);
-    padding-bottom: rem(15px);
-  }
-}
-
-:host(#{$prefix}-combo-box-item[disabled])
-  .#{$prefix}--list-box__menu-item__option {
-  color: $disabled-02;
-  text-decoration: none;
 }
 
 :host(#{$prefix}-combo-box-item[highlighted]) {
@@ -92,10 +95,28 @@ $css--plex: true !default;
   @extend .#{$prefix}--list-box__menu-item--highlighted;
 
   .#{$prefix}--list-box__menu-item__option {
-    color: $text-01;
+    color: $text-primary;
   }
 
   .#{$prefix}--list-box__menu-item__selected-icon {
     display: block;
+  }
+}
+
+:host(#{$prefix}-combo-box-item[size='sm']) {
+  height: $spacing-07;
+
+  .#{$prefix}--list-box__menu-item__option {
+    padding-top: rem(7px);
+    padding-bottom: rem(7px);
+  }
+}
+
+:host(#{$prefix}-combo-box-item[size='lg']) {
+  height: $spacing-09;
+
+  .#{$prefix}--list-box__menu-item__option {
+    padding-top: rem(15px);
+    padding-bottom: rem(15px);
   }
 }

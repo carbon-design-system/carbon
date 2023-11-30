@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,9 +12,9 @@
  */
 export enum PROGRESS_STEP_STAT {
   /**
-   * One for future execution.
+   * Complete one.
    */
-  QUEUED = 'queued',
+  COMPLETE = 'complete',
 
   /**
    * One that is being executed now.
@@ -22,9 +22,9 @@ export enum PROGRESS_STEP_STAT {
   CURRENT = 'current',
 
   /**
-   * Complete one.
+   * One for future execution.
    */
-  COMPLETE = 'complete',
+  INCOMPLETE = 'incomplete',
 
   /**
    * Invalid one.

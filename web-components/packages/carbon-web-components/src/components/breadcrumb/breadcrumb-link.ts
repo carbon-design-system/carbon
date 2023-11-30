@@ -7,21 +7,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
-import BXLink from '../link/link';
+import { html } from 'lit';
+import { prefix } from '../../globals/settings';
+import CDSLink from '../link/link';
 import styles from './breadcrumb.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * Link in breadcrumb.
  *
- * @element bx-breadcrumb-link
+ * @element cds-breadcrumb-link
  */
 @customElement(`${prefix}-breadcrumb-link`)
-class BXBreadcrumbLink extends BXLink {
+class CDSBreadcrumbLink extends CDSLink {
+  render() {
+    return html`
+      ${this.href
+        ? super.render()
+        : html`<span class="${prefix}--link"><slot></slot></span>`}
+    `;
+  }
   static styles = styles;
 }
 
-export default BXBreadcrumbLink;
+export default CDSBreadcrumbLink;

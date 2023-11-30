@@ -4,13 +4,13 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Link
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/link)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/link)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/link)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/link)
 
 Represents a link. Provided for convenience purpose, you can alternatively use
-`<a class="bx--link">` with Carbon style in place in light DOM.
+`<a class="cds--link">` with Carbon style in place in light DOM.
 
 ## Getting started
 
@@ -28,26 +28,28 @@ import '@carbon/web-components/es/components/list/index.js';
 ### HTML
 
 ```html
-<bx-link href="https://www.ibm.com"> Link </bx-link>
+<cds-link href="https://www.ibm.com"> Link </cds-link>
 ```
 
 ## Paired with icon
 
 Import the desired icon and incorporate with the link text:
 
-````javascript
+```javascript
 import Download16 from '@carbon/web-components/es/icons/download/16';
 
 function App() {
-  return (
-    html`<bx-link href="https://www.ibm.com"> Download ${Download16({ slot: 'icon' })}</bx-link>`
-  );
+  return html`<cds-link href="https://www.ibm.com">
+    Download ${Download16({ slot: 'icon' })}</cds-link
+  >`;
+}
+```
 
-```## `<bx-link>` attributes and properties
+## `<cds-link>` attributes and properties
 
 Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<bx-link disabled>`) and `false` means not setting the attribute (e.g.
-`<bx-link>` without `disabled` attribute).
+`<cds-link disabled>`) and `false` means not setting the attribute (e.g.
+`<cds-link>` without `disabled` attribute).
 
-<Props of="bx-link" />
+<Props of="cds-link" />
 ````

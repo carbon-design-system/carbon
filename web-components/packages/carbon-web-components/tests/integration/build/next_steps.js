@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -36,10 +36,10 @@ describe('Next example', () => {
   });
 
   it('should have dropdown interactive', async () => {
-    await expect(page).toClick('bx-dropdown');
-    await expect(page).toMatchElement('bx-dropdown[open]');
-    await expect(page).toClick('bx-dropdown');
-    await expect(page).toMatchElement('bx-dropdown:not([open])');
+    await expect(page).toClick('cds-dropdown');
+    await expect(page).toMatchElement('cds-dropdown[open]');
+    await expect(page).toClick('cds-dropdown');
+    await expect(page).toMatchElement('cds-dropdown:not([open])');
   });
 
   afterAll(async () => {

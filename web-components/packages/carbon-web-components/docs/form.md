@@ -1,6 +1,6 @@
 # Having components participate in form
 
-Though form elements in `carbon-web-components` (e.g. `<bx-input>`) are not native form elements like `<input>`, form elements in `carbon-web-components` have some extra APIs that align well to web/framework standards that allow those form elements to participate in form.
+Though form elements in `@carbon/web-components` (e.g. `<cds-text-input>`) are not native form elements like `<input>`, they have some extra APIs that align well with web/framework standards.
 
 ## `formdata` event
 
@@ -20,12 +20,12 @@ button.addEventListener('click', () => {
   });
   event.formData = formData;
   form.dispatchEvent(event);
-  // Now `formData` is populated with the data in `<bx-input>`, etc. in the `<form>`.
+  // `formData` is populated with the data in components such as `<cds-text-input>` or `<cds-dropdown>`, etc. in the `<form>`.
   // You can use `formData` with `fetch()`/XHR instead of letting `<form>` submit the data
 });
 ```
 
-[![Edit carbon-web-components with formdata event](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/form/basic)
+[![Edit carbon-web-components with formdata event](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/form/basic)
 
 ## Redux Form
 
@@ -33,8 +33,8 @@ You can use our form components with Redux Form by creating a React component th
 
 ```javascript
 import { Field } from 'redux-form';
-import BXFormItem from '@carbon/web-components/es/components-react/form/form-item';
-import BXInput from '@carbon/web-components/es/components-react/input/input';
+import CDSFormItem from '@carbon/web-components/es/components-react/form/form-item';
+import CDSTextInput from '@carbon/web-components/es/components-react/text-input/text-input';
 
 ...
 
@@ -42,8 +42,8 @@ import BXInput from '@carbon/web-components/es/components-react/input/input';
 const FieldImpl = ({ input, label, type, meta: { touched, error } }) => {
   const validityMessage = !touched ? undefined : error;
   return (
-    <BXFormItem>
-      <BXInput
+    <CDSFormItem>
+      <CDSTextInput
         {...input}
         invalid={Boolean(validityMessage)}
         label-text={label}
@@ -51,7 +51,7 @@ const FieldImpl = ({ input, label, type, meta: { touched, error } }) => {
         placeholder={label}
         validityMessage={validityMessage}
       />
-    </BXFormItem>
+    </CDSFormItem>
   );
 };
 
@@ -60,4 +60,4 @@ const FieldImpl = ({ input, label, type, meta: { touched, error } }) => {
 <Field name="username" type="text" component={FieldImpl} label="Username" />
 ```
 
-[![Edit carbon-web-components with Redux Form](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/form/redux-form)
+[![Edit carbon-web-components with Redux Form](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/feat/cwc-v2/examples/codesandbox/form/redux-form)

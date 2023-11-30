@@ -1,85 +1,217 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { boolean, number, text } from '@storybook/addon-knobs';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import './slider';
 import './slider-input';
 import './slider-skeleton';
+import '../form/form-item';
+import '../layer';
 import storyDocs from './slider-story.mdx';
+import { prefix } from '../../globals/settings';
+import '../../../.storybook/templates/with-layer';
 
-export const Default = (args) => {
-  const { disabled, labelText, max, min, name, step, value, onChange } =
-    args?.['bx-slider'] || {};
+export const Default = () => {
   return html`
-    <bx-slider
-      ?disabled="${disabled}"
-      label-text="${ifNonNull(labelText)}"
-      max="${ifNonNull(max)}"
-      min="${ifNonNull(min)}"
-      name="${ifNonNull(name)}"
-      step="${ifNonNull(step)}"
-      value="${ifNonNull(value)}"
-      @bx-slider-changed="${onChange}"></bx-slider>
+    <cds-form-item>
+      <cds-slider
+        label-text="Slider Label"
+        max="100"
+        min="0"
+        step="1"
+        value="50">
+        <cds-slider-input
+          aria-label="Slider value"
+          type="number"></cds-slider-input>
+      </cds-slider>
+    </cds-form-item>
   `;
 };
 
-Default.storyName = 'Default';
+export const ControlledSlider = () => {
+  let value = 87;
+  function onClick() {
+    value = Math.round(Math.random() * 100);
+    const sliders = document.getElementsByTagName('cds-slider');
+    for (const slider of sliders) {
+      slider.setAttribute('value', `${value}`);
+    }
 
-Default.parameters = {
-  knobs: {
-    'bx-slider': () => ({
-      disabled: boolean('Disabled (disabled)', false),
-      labelText: text('Label text (label-text)', 'Slider'),
-      name: text('Name (name)', ''),
-      max: number('The maximum value (max)', 100),
-      min: number('The minimum value (min)', 0),
-      step: number('The step (step)', 1),
-      value: number('Value (value)', 50),
-      onAfterChange: action('bx-slider-changed'),
-    }),
-  },
-};
-
-export const withInputBox = (args) => {
-  const { disabled, labelText, max, min, name, step, value, onChange } =
-    args?.['bx-slider'] || {};
+    const headers = document.getElementsByClassName('slider-headers');
+    for (const header of headers) {
+      header.innerHTML = `${value}`;
+    }
+  }
   return html`
-    <bx-slider
-      ?disabled="${disabled}"
-      label-text="${labelText}"
-      max="${ifNonNull(max)}"
-      min="${ifNonNull(min)}"
-      name="${ifNonNull(name)}"
-      step="${ifNonNull(step)}"
-      value="${ifNonNull(value)}"
-      @bx-slider-changed="${onChange}">
-      <bx-slider-input
-        aria-label="Slider value"
-        type="number"></bx-slider-input>
-    </bx-slider>
+    <button type="button" @click="${onClick}">randomize value</button>
+    <cds-form-item>
+      <cds-slider max="100" min="0" step="1" value="${ifDefined(value)}">
+        <cds-slider-input
+          aria-label="Slider value"
+          type="number"></cds-slider-input>
+      </cds-slider>
+    </cds-form-item>
+    <h1 class="slider-headers">${value}</h1>
   `;
 };
 
-withInputBox.storyName = 'With input box';
+export const ControlledSliderWithLayer = () => {
+  let value = 87;
+  function onClick() {
+    value = Math.round(Math.random() * 100);
+    const sliders = document.getElementsByTagName('cds-slider');
+    for (const slider of sliders) {
+      slider.setAttribute('value', `${value}`);
+    }
 
-withInputBox.parameters = {
-  knobs: Default.parameters.knobs,
+    const headers = document.getElementsByClassName('slider-headers');
+    for (const header of headers) {
+      header.innerHTML = `${value}`;
+    }
+  }
+
+  return html`
+    <sb-template-layers>
+      <div>
+        <button type="button" @click="${onClick}">randomize value</button>
+        <cds-form-item>
+          <cds-slider max="100" min="0" step="1" value="${ifDefined(value)}">
+            <cds-slider-input
+              aria-label="Slider value"
+              type="number"></cds-slider-input>
+          </cds-slider>
+        </cds-form-item>
+        <h1 class="slider-headers">${value}</h1>
+      </div>
+    </sb-template-layers>
+  `;
 };
 
-export const skeleton = () => html` <bx-slider-skeleton></bx-slider-skeleton> `;
+export const WithLayer = () => {
+  return html`
+    <sb-template-layers>
+      <cds-form-item>
+        <cds-slider
+          label-text="Slider label"
+          max="100"
+          min="0"
+          step="1"
+          value="50">
+          <cds-slider-input
+            aria-label="Slider value"
+            type="number"></cds-slider-input>
+        </cds-slider>
+      </cds-form-item>
+    </sb-template-layers>
+  `;
+};
+
+export const skeleton = () =>
+  html`
+    <cds-form-item><cds-slider-skeleton></cds-slider-skeleton></cds-form-item>
+  `;
 
 skeleton.parameters = {
   percy: {
     skip: true,
+  },
+};
+
+export const Playground = (args) => {
+  const {
+    ariaLabelInput,
+    disabled,
+    hideTextInput,
+    invalid,
+    invalidText,
+    inputType,
+    labelText,
+    max,
+    min,
+    maxLabel,
+    minLabel,
+    name,
+    readonly,
+    required,
+    step,
+    stepMultiplier,
+    warn,
+    warnText,
+    value,
+    onChange,
+  } = args?.[`${prefix}-slider`] || {};
+  return html`
+    <cds-form-item>
+      <cds-slider
+        ?disabled="${disabled}"
+        ?hide-text-input="${hideTextInput}"
+        ?invalid="${invalid}"
+        invalid-text="${ifDefined(invalidText)}"
+        label-text="${labelText}"
+        max="${ifDefined(max)}"
+        min="${ifDefined(min)}"
+        max-label="${ifDefined(maxLabel)}"
+        min-label="${ifDefined(minLabel)}"
+        ?readonly="${ifDefined(readonly)}"
+        step="${ifDefined(step)}"
+        step-multiplier="${ifDefined(stepMultiplier)}"
+        ?warn="${warn}"
+        warn-text="${warnText}"
+        value="${ifDefined(value)}"
+        @cds-slider-changed="${onChange}">
+        ${!hideTextInput
+          ? html`<cds-slider-input
+              aria-label="${ifDefined(ariaLabelInput)}"
+              type="${ifDefined(inputType)}"
+              ?required="${ifDefined(required)}"
+              ?name="${ifDefined(name)}"></cds-slider-input>`
+          : null}
+      </cds-slider>
+    </cds-form-item>
+  `;
+};
+
+Playground.storyName = 'Playground';
+
+Playground.parameters = {
+  knobs: {
+    [`${prefix}-slider`]: () => ({
+      ariaLabelInput: text('Aria label for input (aria-label-input)', ''),
+      disabled: boolean('Disabled (disabled)', false),
+      hideTextInput: boolean('Hide text input (hide-text-input)', false),
+      labelText: text(
+        'Label text (label-text)',
+        'Slider (must be an increment of 5)'
+      ),
+      inputType: text('Input type (type)', 'number'),
+      invalid: boolean('Invalid (invalid)', false),
+      invalidText: text(
+        'Invalid text (invalid-text)',
+        'Invalid message goes here'
+      ),
+      name: text('Name (name)', ''),
+      max: number('Maximum value (max)', 100),
+      min: number('Minimum value (min)', 0),
+      maxLabel: text('Maximum value label (max-label)', ''),
+      minLabel: text('Minimum value label (min-label)', ''),
+      readonly: boolean('Readonly (readonly)', false),
+      required: boolean('Required (required)', false),
+      step: number('Step (step)', 5),
+      stepMultiplier: number('Step multiplier (step-multiplier)', 5),
+      warn: boolean('Warn (warn)', false),
+      warnText: text('Warn text (warn-text)', 'Warning message goes here'),
+      value: number('Value (value)', 50),
+      onAfterChange: action(`${prefix}-slider-changed`),
+    }),
   },
 };
 

@@ -1,31 +1,25 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement } from 'lit-element';
+import { LitElement } from 'lit';
 import HostListener from '../../globals/decorators/host-listener';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import Handle from '../../globals/internal/handle';
 import {
-  FLOATING_MENU_ALIGNMENT,
   FLOATING_MENU_DIRECTION,
-  FLOATING_MENU_DIRECTION_GROUP,
   FLOATING_MENU_POSITION_DIRECTION,
 } from './defs';
-import BXFloatingMenuTrigger from './floating-menu-trigger';
+import CDSFloatingMenuTrigger from './floating-menu-trigger';
+import { prefix } from '../../globals/settings';
 
-export {
-  FLOATING_MENU_ALIGNMENT,
-  FLOATING_MENU_DIRECTION,
-  FLOATING_MENU_DIRECTION_GROUP,
-  FLOATING_MENU_POSITION_DIRECTION,
-};
+export { FLOATING_MENU_DIRECTION, FLOATING_MENU_POSITION_DIRECTION };
 
 /**
  * Position of floating menu, or trigger button of floating menu.
@@ -84,7 +78,7 @@ const closestComposed = (elem: Element, selector: string) => {
 /**
  * Floating menu.
  */
-abstract class BXFloatingMenu extends HostListenerMixin(
+abstract class CDSFloatingMenu extends HostListenerMixin(
   FocusMixin(LitElement)
 ) {
   /**
@@ -118,9 +112,31 @@ abstract class BXFloatingMenu extends HostListenerMixin(
   private _handleBlur = ({ relatedTarget }: FocusEvent) => {
     if (!this.contains(relatedTarget as Node)) {
       const { parent } = this;
-      if (parent) {
+      if (parent && parent !== relatedTarget) {
         parent.open = false;
         HTMLElement.prototype.focus.call(this.parent); // SVGElement in IE11 does not have `.focus()` method
+      }
+    }
+  };
+
+  @HostListener('click')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _click = () => {
+    const { parent } = this;
+    if (parent) {
+      parent.open = false;
+    }
+  };
+
+  @HostListener('keydown')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Tab') {
+      if (event.shiftKey) {
+        const { parent } = this;
+        if (parent) {
+          parent.open = false;
+        }
       }
     }
   };
@@ -128,12 +144,7 @@ abstract class BXFloatingMenu extends HostListenerMixin(
   /**
    * The DOM element, typically a custom element in this library, launching this floating menu.
    */
-  protected parent: BXFloatingMenuTrigger | null = null;
-
-  /**
-   * How the menu is aligned to the trigger button.
-   */
-  abstract alignment: FLOATING_MENU_ALIGNMENT;
+  protected parent: CDSFloatingMenuTrigger | null = null;
 
   /**
    * The menu direction.
@@ -146,17 +157,9 @@ abstract class BXFloatingMenu extends HostListenerMixin(
   abstract open: boolean;
 
   /**
-   * The horizontal/vertical direction with regard to how the menu is aligned to the trigger button.
+   * `true` if the menu alignment should be flipped.
    */
-  get alignmentDirection() {
-    return {
-      [FLOATING_MENU_DIRECTION.LEFT]: FLOATING_MENU_DIRECTION_GROUP.VERTICAL,
-      [FLOATING_MENU_DIRECTION.TOP]: FLOATING_MENU_DIRECTION_GROUP.HORIZONTAL,
-      [FLOATING_MENU_DIRECTION.RIGHT]: FLOATING_MENU_DIRECTION_GROUP.VERTICAL,
-      [FLOATING_MENU_DIRECTION.BOTTOM]:
-        FLOATING_MENU_DIRECTION_GROUP.HORIZONTAL,
-    }[this.direction];
-  }
+  abstract flipped: boolean;
 
   /**
    * The DOM element to put this menu into.
@@ -165,7 +168,7 @@ abstract class BXFloatingMenu extends HostListenerMixin(
     return (
       closestComposed(
         this,
-        (this.constructor as typeof BXFloatingMenu).selectorContainer
+        (this.constructor as typeof CDSFloatingMenu).selectorContainer
       ) || this.ownerDocument!.body
     );
   }
@@ -192,8 +195,6 @@ abstract class BXFloatingMenu extends HostListenerMixin(
       right: containerRight = 0,
       top: containerTop = 0,
     } = container.getBoundingClientRect();
-    const refCenterHorizontal = (refLeft + refRight) / 2;
-    const refCenterVertical = (refTop + refBottom) / 2;
 
     const containerComputedStyle =
       container.ownerDocument!.defaultView!.getComputedStyle(container);
@@ -210,11 +211,7 @@ abstract class BXFloatingMenu extends HostListenerMixin(
     const refEndFromContainer = !isRtl
       ? refRight - containerLeft
       : containerRight - refLeft;
-    const refCenterHorizontalFromContainer = !isRtl
-      ? refCenterHorizontal - containerLeft
-      : containerRight - refCenterHorizontal;
     const refTopFromContainer = refTop - containerTop;
-    const refCenterVerticalFromContainer = refCenterVertical - containerTop;
 
     if (
       (container !== this.ownerDocument!.body ||
@@ -227,41 +224,19 @@ abstract class BXFloatingMenu extends HostListenerMixin(
       );
     }
 
-    const { alignment, alignmentDirection, direction } = this;
-    if (Object.values(FLOATING_MENU_ALIGNMENT).indexOf(alignment) < 0) {
-      throw new Error(`Wrong menu alignment: ${alignment}`);
-    }
+    const { flipped, direction } = this;
     if (Object.values(FLOATING_MENU_DIRECTION).indexOf(direction) < 0) {
       throw new Error(`Wrong menu position direction: ${direction}`);
     }
 
-    const alignmentStart = {
-      [FLOATING_MENU_DIRECTION_GROUP.HORIZONTAL]: {
-        [FLOATING_MENU_ALIGNMENT.START]: () => refStartFromContainer,
-        [FLOATING_MENU_ALIGNMENT.CENTER]: () =>
-          refCenterHorizontalFromContainer - width / 2,
-        [FLOATING_MENU_ALIGNMENT.END]: () => refEndFromContainer - width,
-      },
-      [FLOATING_MENU_DIRECTION_GROUP.VERTICAL]: {
-        [FLOATING_MENU_ALIGNMENT.START]: () => refTopFromContainer,
-        [FLOATING_MENU_ALIGNMENT.CENTER]: () =>
-          refCenterVerticalFromContainer - height / 2,
-        [FLOATING_MENU_ALIGNMENT.END]: () => refBottom - height,
-      },
-    }[alignmentDirection][alignment]();
+    const alignmentStart = flipped
+      ? refEndFromContainer - width
+      : refStartFromContainer;
 
     const { start, top } = {
-      [FLOATING_MENU_DIRECTION.LEFT]: () => ({
-        start: refStartFromContainer - width,
-        top: alignmentStart,
-      }),
       [FLOATING_MENU_DIRECTION.TOP]: () => ({
         start: alignmentStart,
         top: refTopFromContainer - height,
-      }),
-      [FLOATING_MENU_DIRECTION.RIGHT]: () => ({
-        start: refEndFromContainer,
-        top: alignmentStart,
       }),
       [FLOATING_MENU_DIRECTION.BOTTOM]: () => ({
         start: alignmentStart,
@@ -276,15 +251,6 @@ abstract class BXFloatingMenu extends HostListenerMixin(
     };
   }
 
-  createRenderRoot() {
-    return this.attachShadow({
-      mode: 'open',
-      delegatesFocus:
-        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
-        537,
-    });
-  }
-
   disconnectedCallback() {
     if (this._hObserveResizeContainer) {
       this._hObserveResizeContainer = this._hObserveResizeContainer.release();
@@ -297,13 +263,13 @@ abstract class BXFloatingMenu extends HostListenerMixin(
   updated(changedProperties) {
     const { container, open, parent } = this;
     if (
-      (changedProperties.has('alignment') ||
+      (changedProperties.has('flipped') ||
         changedProperties.has('direction') ||
         changedProperties.has('open')) &&
       open
     ) {
       if (!parent) {
-        this.parent = this.parentElement as BXFloatingMenuTrigger;
+        this.parent = this.parentElement as CDSFloatingMenuTrigger;
         container.appendChild(this);
       }
       // Note: `this.position` cannot be referenced until `this.parent` is set
@@ -345,8 +311,12 @@ abstract class BXFloatingMenu extends HostListenerMixin(
    * The CSS selector to find the element to put this floating menu in.
    */
   static get selectorContainer() {
-    return '[data-floating-menu-container],bx-modal';
+    return `[data-floating-menu-container],${prefix}-modal`;
   }
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
 }
 
-export default BXFloatingMenu;
+export default CDSFloatingMenu;

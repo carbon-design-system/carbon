@@ -4,14 +4,14 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Copy button
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/copy-button)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/copy-button)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/copy-button)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/copy-button)
 
 Copy button provides the interface of copy button and its feedback tooltip. No
 actual copy is performed, but application can listen to `click` event of
-`<bx-copy-button>` and interact with the clipboard.
+`<cds-copy-button>` and interact with the clipboard.
 
 ## Getting started
 
@@ -29,12 +29,11 @@ import '@carbon/web-components/es/components/copy-button/index.js';
 ### HTML
 
 ```html
-<bx-copy-button
-  button-assistive-text="Copy to clipboard"
-  feedback-text="Copied!"
-></bx-copy-button>
+<cds-copy-button feedback="Copied!" feedback-timeout="2000">
+  Copy to Clipboard
+</cds-copy-button>
 ```
 
-## `<bx-copy-button>` attributes and properties
+## `<cds-copy-button>` attributes and properties
 
-<Props of="bx-copy-button" />
+<Props of="cds-copy-button" />

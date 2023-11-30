@@ -7,27 +7,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { classMap } from 'lit-html/directives/class-map';
-import { html, property, LitElement } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { classMap } from 'lit/directives/class-map.js';
+import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { prefix } from '../../globals/settings';
+import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
+import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16';
 import FocusMixin from '../../globals/mixins/focus';
-import { SLIDER_INPUT_COLOR_SCHEME } from './defs';
 import styles from './slider.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-export { SLIDER_INPUT_COLOR_SCHEME };
-
-const { prefix } = settings;
 
 /**
  * The `<input>` box for slider.
  *
- * @element bx-slider-input
- * @fires bx-slider-input-changed - The custom event fired after the value is changed by user gesture.
+ * @element cds-slider-input
+ * @fires cds-slider-input-changed - The custom event fired after the value is changed by user gesture.
  */
 @customElement(`${prefix}-slider-input`)
-class BXSliderInput extends FocusMixin(LitElement) {
+class CDSSliderInput extends FocusMixin(LitElement) {
   /**
    * The internal value of `max` property.
    */
@@ -48,7 +46,7 @@ class BXSliderInput extends FocusMixin(LitElement) {
    */
   private _handleChange({ target }: Event) {
     this.dispatchEvent(
-      new CustomEvent((this.constructor as typeof BXSliderInput).eventChange, {
+      new CustomEvent((this.constructor as typeof CDSSliderInput).eventChange, {
         bubbles: true,
         composed: true,
         detail: {
@@ -63,7 +61,7 @@ class BXSliderInput extends FocusMixin(LitElement) {
    */
   private _handleInput({ target }: Event) {
     this.dispatchEvent(
-      new CustomEvent((this.constructor as typeof BXSliderInput).eventChange, {
+      new CustomEvent((this.constructor as typeof CDSSliderInput).eventChange, {
         bubbles: true,
         composed: true,
         detail: {
@@ -75,16 +73,22 @@ class BXSliderInput extends FocusMixin(LitElement) {
   }
 
   /**
-   * The color scheme.
-   */
-  @property({ attribute: 'color-scheme', reflect: true })
-  colorScheme = SLIDER_INPUT_COLOR_SCHEME.REGULAR;
-
-  /**
-   * `true` if the check box should be disabled.
+   * `true` if the input should be disabled.
    */
   @property({ type: Boolean, reflect: true })
   disabled = false;
+
+  /**
+   * true to specify if the control is invalid.
+   */
+  @property({ type: Boolean, reflect: true })
+  invalid = false;
+
+  /**
+   * true to specify if the control should display warn icon and text.
+   */
+  @property({ type: Boolean, reflect: true })
+  warn = false;
 
   /**
    * The maximum value.
@@ -140,47 +144,57 @@ class BXSliderInput extends FocusMixin(LitElement) {
   @property({ type: Number })
   value!: number;
 
-  createRenderRoot() {
-    return this.attachShadow({
-      mode: 'open',
-      delegatesFocus:
-        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
-        537,
-    });
-  }
+  /**
+   * true` if the input should be readonly.
+   */
+  @property({ type: Boolean, reflect: true })
+  readonly = false;
 
   render() {
     const {
-      colorScheme,
       disabled,
       max,
       min,
+      readonly,
       step,
       type,
       value,
+      invalid,
+      warn,
       _handleChange: handleChange,
       _handleInput: handleInput,
     } = this;
-    // NOTE: Our React variant has an option to add `invalid` option here,
-    // but there doesn't seem a corresponding style to the thumb.
-    // Because of that, in addition to the mininum/maximum constraint enforced,
-    // the code here start without `invalid` styling option for now.
+
     const classes = classMap({
       [`${prefix}--text-input`]: true,
       [`${prefix}--slider-text-input`]: true,
-      [`${prefix}--text-input--${colorScheme}`]: colorScheme,
+      [`${prefix}--text-input--invalid`]: invalid,
+      [`${prefix}--slider-text-input--warn`]: warn,
     });
+
+    const invalidIcon = WarningFilled16({
+      class: `${prefix}--slider__invalid-icon`,
+    });
+
+    const warnIcon = WarningAltFilled16({
+      class: `${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`,
+    });
+
     return html`
       <input
         ?disabled="${disabled}"
-        type="${ifNonNull(type)}"
+        ?data-invalid="${invalid}"
+        type="${ifDefined(type)}"
         class="${classes}"
         max="${max}"
         min="${min}"
+        ?readonly="${ifDefined(readonly)}"
         step="${step}"
         .value="${value}"
         @change="${handleChange}"
         @input="${handleInput}" />
+      ${invalid ? html`${invalidIcon}` : null}
+      ${warn ? html`${warnIcon}` : null}
     `;
   }
 
@@ -198,7 +212,11 @@ class BXSliderInput extends FocusMixin(LitElement) {
     return `${prefix}-slider-input-changed`;
   }
 
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
   static styles = styles;
 }
 
-export default BXSliderInput;
+export default CDSSliderInput;

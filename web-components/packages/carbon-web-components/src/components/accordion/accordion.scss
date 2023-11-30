@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,51 +7,92 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/components/accordion/accordion';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/components/accordion';
+@use '@carbon/styles/scss/layout' as *;
 
-:host(#{$prefix}-accordion) {
+:host(#{$prefix}-accordion),
+:host(#{$prefix}-accordion-skeleton) {
   @extend .#{$prefix}--accordion;
+  @include emit-layout-tokens();
 }
 
-:host(#{$prefix}-accordion-item) {
+:host(#{$prefix}-accordion-item),
+:host(#{$prefix}-accordion-item-skeleton) {
   @extend .#{$prefix}--accordion__item;
 
   display: block;
   outline: none;
+  .#{$prefix}--accordion__content {
+    @extend .#{$prefix}--accordion__content;
 
-  .#{$prefix}--accordion__heading {
-    padding-top: calc(
-      (#{$container-03} - #{map-get($body-long-01, 'line-height')}rem) / 2
-    );
-    min-height: $container-03;
-  }
+    ::slotted(p) {
+      @include type-style('body-01');
 
-  &[size='sm'] {
-    .#{$prefix}--accordion__heading {
-      min-height: rem(32px);
-      padding: rem(5px) 0;
+      margin: 0;
     }
   }
+}
 
-  &[size='xl'] {
-    .#{$prefix}--accordion__heading {
-      min-height: rem(48px);
-    }
+:host(#{$prefix}-accordion-item[size='sm']),
+:host(#{$prefix}-accordion-item-skeleton[size='sm']) {
+  button {
+    @extend .#{$prefix}--layout--size-sm;
+    min-height: var(--cds-layout-size-height-context);
   }
+}
+
+:host(#{$prefix}-accordion-item[size='lg']),
+:host(#{$prefix}-accordion-item-skeleton[size='lg']) {
+  button {
+    @extend .#{$prefix}--layout--size-lg;
+    min-height: var(--cds-layout-size-height-context);
+  }
+}
+
+:host(#{$prefix}-accordion-item[alignment='start']),
+:host(#{$prefix}-accordion-item-skeleton[alignment='start']) {
+  @extend .#{$prefix}--accordion--start;
+}
+
+:host(#{$prefix}-accordion-item[isFlush]),
+:host(#{$prefix}-accordion-item-skeleton[isFlush]) {
+  @extend .#{$prefix}--accordion--flush;
+}
+
+:host(#{$prefix}-accordion-item[expanding]) {
+  @extend .#{$prefix}--accordion__item--expanding;
+}
+
+:host(#{$prefix}-accordion-item[collapsing]) {
+  @extend .#{$prefix}--accordion__item--collapsing;
 }
 
 :host(#{$prefix}-accordion-item[open]:not([disabled])) {
   @extend .#{$prefix}--accordion__item--active;
 
   .#{$prefix}--accordion__content {
-    padding-right: $carbon--spacing-05;
+    padding-right: $spacing-05;
   }
 
   .#{$prefix}-ce--accordion__content--sm {
-    padding-right: $carbon--spacing-09;
+    padding-right: $spacing-09;
   }
 
   .#{$prefix}-ce--accordion__content--md {
     padding-right: 25%;
+  }
+}
+
+:host(#{$prefix}-accordion-skeleton),
+:host(#{$prefix}-accordion-item-skeleton) {
+  .#{$prefix}--accordion__heading {
+    cursor: default;
+    &:hover::before {
+      background: transparent;
+    }
   }
 }

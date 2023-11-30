@@ -7,18 +7,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, LitElement } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
+import { LitElement, html } from 'lit';
+import { prefix } from '../../globals/settings';
 import styles from './slider.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * Skeleton of slider.
  */
 @customElement(`${prefix}-slider-skeleton`)
-class BXSliderSkeleton extends LitElement {
+class CDSSliderSkeleton extends LitElement {
   render() {
     return html`
       <span class="${prefix}--label ${prefix}--skeleton"></span>
@@ -37,4 +35,4 @@ class BXSliderSkeleton extends LitElement {
   static styles = styles;
 }
 
-export default BXSliderSkeleton;
+export default CDSSliderSkeleton;

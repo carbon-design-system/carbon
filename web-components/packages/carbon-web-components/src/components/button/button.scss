@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,53 +7,111 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/components/button/button';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/button' as *;
+@use '@carbon/styles/scss/components/popover/index';
+@use '@carbon/styles/scss/components/code-snippet/code-snippet' as *;
+@use '@carbon/styles/scss/components/tooltip';
+@use '@carbon/styles/scss/layout' as *;
 
-:host(#{$prefix}-btn),
+@include code-snippet;
+
+:host(#{$prefix}-button),
 :host(#{$prefix}-modal-footer-button) {
+  @include emit-layout-tokens();
+
   display: inline-flex;
-  max-width: rem(320px);
-  outline: none;
+
+  ::slotted([slot='icon']) {
+    @extend .#{$prefix}--btn__icon;
+  }
 
   .#{$prefix}--btn {
     flex-grow: 1;
     max-width: 100%;
   }
+}
 
-  ::slotted([slot='icon']) {
-    fill: currentColor;
-    position: absolute;
-    right: rem(16px);
-    flex-shrink: 0;
-  }
+:host(#{$prefix}-button-skeleton) {
+  @include emit-layout-tokens();
+}
 
-  &[isExpressive] ::slotted([slot='icon']) {
-    width: rem(20px);
-    height: rem(20px);
-  }
+:host(#{$prefix}-button[isExpressive]) ::slotted([slot='icon']),
+:host(#{$prefix}-modal-footer-button[isExpressive]) ::slotted([slot='icon']) {
+  width: rem(20px);
+  height: rem(20px);
+}
 
-  &[icon-layout='condensed'] .#{$prefix}--btn {
-    padding-right: rem(39px);
-  }
+:host(#{$prefix}-button[pagination]),
+:host(#{$prefix}-modal-footer-button[pagination]) {
+  .#{$prefix}--btn {
+    border: none;
+    border-left: 1px solid $border-subtle;
+    transition: none;
 
-  .#{$prefix}--btn--icon-only ::slotted([slot='icon']) {
-    position: static;
-  }
-
-  &[kind='ghost'],
-  &[kind='danger-ghost'] {
-    ::slotted([slot='icon']) {
-      position: static;
-      margin-left: rem(8px);
-    }
-
-    &[icon-layout='condensed'] .#{$prefix}--btn {
-      padding-right: rem(16px);
+    &:focus {
+      outline: $spacing-01 solid $focus;
+      outline-offset: -#{$spacing-01};
+      box-shadow: none;
+      border-left: 1px solid transparent;
     }
   }
 }
 
-:host(#{$prefix}-btn[kind='ghost']:hover) .#{$prefix}--btn--ghost,
-:host(#{$prefix}-btn[kind='ghost']) .#{$prefix}--btn--ghost:active {
+:host(#{$prefix}-button[pagination]:not([disabled])),
+:host(#{$prefix}-modal-footer-button[pagination]:not([disabled])) {
+  .#{$prefix}--btn {
+    color: $icon-primary;
+    &:active {
+      background-color: $layer-hover;
+    }
+  }
+}
+
+:host(#{$prefix}-button[pagination][batch-action]:not([disabled])),
+:host(
+    #{$prefix}-modal-footer-button[pagination][batch-action]:not([disabled])
+  ) {
+  .#{$prefix}--btn {
+    padding: $button-padding-ghost;
+
+    &:focus {
+      outline: $spacing-01 solid $layer;
+      outline-offset: -#{$spacing-01};
+    }
+  }
+
+  :host(#{$prefix}-button[pagination][has-main-content]:not([disabled])),
+  :host(
+      #{$prefix}-modal-footer-button[pagination][has-main-content]:not(
+          [disabled]
+        )
+    ) {
+    ::slotted([slot='icon']) {
+      position: static;
+      margin-left: $spacing-02;
+    }
+  }
+}
+
+:host(#{$prefix}-button[kind='ghost']:hover) .#{$prefix}--btn--ghost,
+:host(#{$prefix}-button[kind='ghost']) .#{$prefix}--btn--ghost:active {
   outline: none;
+}
+
+:host(#{$prefix}-button-set) {
+  @extend .#{$prefix}--btn-set;
+
+  ::slotted(#{$prefix}-button) {
+    width: 100%;
+    // 196px from design kit
+    max-width: rem(196px);
+  }
+}
+
+:host(#{$prefix}-button-set[stacked]) {
+  @extend .#{$prefix}--btn-set--stacked;
 }

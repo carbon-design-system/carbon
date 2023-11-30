@@ -11,6 +11,7 @@ const gulp = require('gulp');
 require('./build/dist');
 require('./build/modules');
 require('./build/sass');
+require('./build/sass-cdn');
 
 gulp.task(
   'build',

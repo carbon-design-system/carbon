@@ -1,32 +1,32 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render } from 'lit-html';
+import { render } from 'lit';
 import { BUTTON_KIND } from '../../src/components/button/button';
 import { Default } from '../../src/components/button/button-story';
 
 const template = (props?) =>
   Default({
-    'bx-btn': props,
+    'cds-button': props,
   });
 
-describe('bx-btn', function () {
+describe('cds-button', function () {
   describe('Changing button type', function () {
     let elem: HTMLElement | null;
 
     beforeEach(async function () {
-      elem = document.body.appendChild(document.createElement('bx-btn'));
+      elem = document.body.appendChild(document.createElement('cds-button'));
       await Promise.resolve();
     });
 
     it('should choose the right template for default type', function () {
-      expect(elem!.shadowRoot!.querySelectorAll('button.bx--btn').length).toBe(
+      expect(elem!.shadowRoot!.querySelectorAll('button.cds--btn').length).toBe(
         1
       );
     });
@@ -34,7 +34,7 @@ describe('bx-btn', function () {
     it('should choose the right template for link type', async function () {
       elem!.setAttribute('href', 'about:blank');
       await Promise.resolve();
-      expect(elem!.shadowRoot!.querySelectorAll('a.bx--btn').length).toBe(1);
+      expect(elem!.shadowRoot!.querySelectorAll('a.cds--btn').length).toBe(1);
     });
 
     afterEach(function () {
@@ -49,29 +49,31 @@ describe('bx-btn', function () {
     let elem: HTMLElement | null;
 
     beforeAll(function () {
-      elem = document.body.appendChild(document.createElement('bx-btn'));
+      elem = document.body.appendChild(document.createElement('cds-button'));
     });
 
     it('should deactivate when disabled attribute is set', async function () {
       elem!.setAttribute('disabled', '');
       await Promise.resolve();
       expect(
-        elem!.shadowRoot!.querySelectorAll('.bx--btn--disabled').length
+        elem!.shadowRoot!.querySelectorAll('.cds--btn--disabled').length
       ).toBe(1);
     });
 
     it('should make it small when small attribute is set', async function () {
       elem!.setAttribute('size', 'sm');
       await Promise.resolve();
-      expect(elem!.shadowRoot!.querySelectorAll('.bx--btn--sm').length).toBe(1);
+      expect(elem!.shadowRoot!.querySelectorAll('.cds--btn--sm').length).toBe(
+        1
+      );
     });
 
     it('should allow user to select button type', async function () {
       elem!.setAttribute('kind', BUTTON_KIND.GHOST);
       await Promise.resolve();
-      expect(elem!.shadowRoot!.querySelectorAll('.bx--btn--ghost').length).toBe(
-        1
-      );
+      expect(
+        elem!.shadowRoot!.querySelectorAll('.cds--btn--ghost').length
+      ).toBe(1);
     });
 
     afterAll(function () {
@@ -86,7 +88,7 @@ describe('bx-btn', function () {
     it('should render with minimum attributes for <button>', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-btn' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-button' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -103,7 +105,7 @@ describe('bx-btn', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-btn' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-button' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -111,7 +113,7 @@ describe('bx-btn', function () {
     it('should render with minimum attributes for <a>', async function () {
       render(template({ href: 'about:blank' }), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-btn' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-button' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -133,7 +135,7 @@ describe('bx-btn', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-btn' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-button' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -156,7 +158,7 @@ describe('bx-btn', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-btn' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-button' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });

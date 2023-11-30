@@ -5,282 +5,274 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
+import { prefix } from '../../globals/settings';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import ifNonNull from '../../globals/directives/if-non-null';
-import { INPUT_SIZE } from '../input/input';
+import { INPUT_SIZE } from '../text-input/text-input';
 import './date-picker';
-import {
-  DATE_PICKER_INPUT_COLOR_SCHEME,
-  DATE_PICKER_INPUT_SIZE_HORIZONTAL,
-} from './date-picker-input';
 import storyDocs from './date-picker-story.mdx';
 import './date-picker-input-skeleton';
-
-const colorSchemes = {
-  [`Regular`]: null,
-  [`Light (${DATE_PICKER_INPUT_COLOR_SCHEME.LIGHT})`]:
-    DATE_PICKER_INPUT_COLOR_SCHEME.LIGHT,
-};
+import '../layer/index';
 
 const sizes = {
-  Regular: null,
-  [`Small size (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,
-  [`Extra large size (${INPUT_SIZE.EXTRA_LARGE})`]: INPUT_SIZE.EXTRA_LARGE,
+  [`Small (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,
+  [`Medium (${INPUT_SIZE.MEDIUM})`]: INPUT_SIZE.MEDIUM,
+  [`Large (${INPUT_SIZE.LARGE})`]: INPUT_SIZE.LARGE,
 };
 
 const knobs = {
-  'bx-date-picker': () => ({
-    dateFormat: textNullable('The date format (date-format)', 'm/d/Y'),
-    disabled: boolean('Disabled (disabled in <bx-date-picker-input>)', false),
-    enabledRange: textNullable(
-      'Minimum/maximum dates in expected date-format, separated by `/` (ie. 3-02-2023/3-21-2023 if date-format is m/d/Y) (enabled-range)',
-      ''
-    ),
-    open: boolean('Open (open)', false),
-    value: textNullable(
-      'Value in ISO8601 date format, separated by `/` (value)',
-      ''
-    ),
-    onAfterChanged: action('bx-date-picker-changed'),
-    onFlatpickrError: action('bx-date-picker-flatpickr-error'),
+  [`${prefix}-date-picker`]: () => ({
+    dateFormat: textNullable('Date format (date-format)', 'm/d/Y'),
+    disabled: boolean('Disabled (disabled)', false),
+    allowInput: boolean('Allow input (allow-input)', true),
+    closeOnSelect: boolean('Close on select (close-on-select)', true),
+    minDate: textNullable('Minimum date in ISO8601 date format (min-date)', ''),
+    maxDate: textNullable('Maximum date in ISO8601 date format (max-date)', ''),
+    onChange: action(`${prefix}-date-picker-changed`),
   }),
-  'bx-date-picker-input': () => ({
-    colorScheme: select(
-      'Color scheme (color-scheme in <bx-date-picker-input>)',
-      colorSchemes,
-      null
+  [`${prefix}-date-picker-input`]: () => ({
+    datePickerType: select(
+      'Date picker type (date-picker-type)',
+      { Single: 'single', Simple: 'simple', Range: 'range' },
+      'single'
     ),
-    hideLabel: boolean(
-      'Hide label (hide-label in <bx-date-picker-input>)',
-      false
-    ),
-    invalid: boolean('Show invalid state  (invalid)', false),
-    labelText: textNullable(
-      'Label text (label-text in <bx-date-picker-input>)',
-      'Date Picker label'
-    ),
-    placeholder: textNullable(
-      'Placeholder text (placeholder in <bx-date-picker-input>)',
-      'mm/dd/yyyy'
-    ),
-    size: select('Input size (size)', sizes, INPUT_SIZE.REGULAR),
-    validityMessage: textNullable(
-      'The validity message (validity-message)',
-      ''
-    ),
+    readonly: boolean('ReadOnly (readonly)', false),
+    short: boolean('Short (short)', false),
+    helperText: textNullable('Helper text (helper-text)', ''),
+    warning: boolean('Warning  (warning)', false),
+    warningText: textNullable('Warning text (warning-text)', ''),
+    invalid: boolean('Invalid  (invalid)', false),
+    invalidText: textNullable('Invalid text (invalid-text)', ''),
+    placeholder: textNullable('Placeholder text (placeholder)', 'mm/dd/yyyy'),
+    size: select('Size (size)', sizes, INPUT_SIZE.MEDIUM),
     onInput: action('input'),
   }),
 };
-
-const sizesHorizontal = {
-  'Regular size': null,
-  [`Short size (${DATE_PICKER_INPUT_SIZE_HORIZONTAL.SHORT})`]:
-    DATE_PICKER_INPUT_SIZE_HORIZONTAL.SHORT,
-};
-
-export const Default = (args) => {
-  const { disabled, name, value } = args?.['bx-date-picker'] ?? {};
-  const {
-    colorScheme,
-    hideLabel,
-    invalid,
-    labelText,
-    placeholder,
-    size,
-    sizeHorizontal,
-    validityMessage,
-  } = args?.['bx-date-picker-input'] ?? {};
+export const Simple = () => {
   return html`
-    <bx-date-picker
-      ?disabled="${disabled}"
-      name="${ifNonNull(name)}"
-      value="${ifNonNull(value)}">
-      <bx-date-picker-input
-        color-scheme="${ifNonNull(colorScheme)}"
-        ?hide-label="${hideLabel}"
-        ?invalid="${invalid}"
-        label-text="${ifNonNull(labelText)}"
-        placeholder="${ifNonNull(placeholder)}"
-        size="${ifNonNull(size)}"
-        size-horizontal="${ifNonNull(sizeHorizontal)}"
-        validity-message="${ifNonNull(validityMessage)}">
-      </bx-date-picker-input>
-    </bx-date-picker>
+    <cds-date-picker>
+      <cds-date-picker-input
+        label-text="Date Picker label"
+        placeholder="mm/dd/yyyy">
+      </cds-date-picker-input>
+    </cds-date-picker>
   `;
 };
 
-Default.storyName = 'Default';
-
-Default.parameters = {
-  knobs: {
-    'bx-date-picker-input': () => ({
-      ...knobs['bx-date-picker-input'](),
-      sizeHorizontal: select(
-        'Horizontal size (size-horizontal)',
-        sizesHorizontal,
-        null
-      ),
-    }),
-  },
+export const SimpleWithLayer = () => {
+  return html`
+  <sb-template-layers>
+    <cds-date-picker>
+    <cds-date-picker-input
+      label-text="Date Picker label"
+      placeholder="mm/dd/yyyy">
+    </cds-date-picker-input>
+  </sb-template-layers>
+  `;
 };
 
-export const singleWithCalendar = (args) => {
-  const {
-    dateFormat,
-    disabled,
-    enabledRange,
-    name,
-    open,
-    value,
-    onChanged,
-    onFlatpickrError,
-  } = args?.['bx-date-picker'] ?? {};
-  const {
-    colorScheme,
-    hideLabel,
-    invalid,
-    labelText,
-    placeholder,
-    size,
-    validityMessage,
-    onInput,
-  } = args?.['bx-date-picker-input'] ?? {};
+export const singleWithCalendar = () => {
   return html`
-    <bx-date-picker
-      date-format="${ifNonNull(dateFormat)}"
-      ?disabled="${disabled}"
-      enabled-range="${ifNonNull(enabledRange)}"
-      name="${ifNonNull(name)}"
-      ?open="${open}"
-      value="${ifNonNull(value)}"
-      @bx-date-picker-changed="${onChanged}"
-      @bx-date-picker-flatpickr-error="${onFlatpickrError}">
-      <bx-date-picker-input
-        color-scheme="${ifNonNull(colorScheme)}"
-        ?hide-label="${hideLabel}"
-        ?invalid="${invalid}"
+    <cds-date-picker>
+      <cds-date-picker-input
         kind="single"
-        label-text="${ifNonNull(labelText)}"
-        placeholder="${ifNonNull(placeholder)}"
-        size="${ifNonNull(size)}"
-        validity-message="${ifNonNull(validityMessage)}"
-        @input="${onInput}">
-      </bx-date-picker-input>
-    </bx-date-picker>
+        label-text="Date Picker label"
+        placeholder="mm/dd/yyyy">
+      </cds-date-picker-input>
+    </cds-date-picker>
   `;
 };
 
 singleWithCalendar.storyName = 'Single with calendar';
 
-singleWithCalendar.parameters = {
-  knobs,
+export const singleWithCalendarWithLayer = () => {
+  return html`
+    <sb-template-layers>
+      <cds-date-picker>
+        <cds-date-picker-input
+          kind="single"
+          label-text="Date Picker label"
+          placeholder="mm/dd/yyyy">
+        </cds-date-picker-input>
+      </cds-date-picker>
+    </sb-template-layers>
+  `;
 };
 
-export const rangeWithCalendar = (args) => {
-  const {
-    dateFormat,
-    disabled,
-    enabledRange,
-    name,
-    open,
-    value,
-    onChanged,
-    onFlatpickrError,
-  } = args?.['bx-date-picker'] ?? {};
-  const {
-    colorScheme,
-    hideLabel,
-    invalid,
-    labelText,
-    placeholder,
-    size,
-    validityMessage,
-    onInput,
-  } = args?.['bx-date-picker-input'] ?? {};
+singleWithCalendarWithLayer.storyName = 'Single with calendar with layer';
+
+export const rangeWithCalendar = () => {
   return html`
-    <bx-date-picker
-      date-format="${ifNonNull(dateFormat)}"
-      ?disabled="${disabled}"
-      enabled-range="${ifNonNull(enabledRange)}"
-      name="${ifNonNull(name)}"
-      ?open="${open}"
-      value="${ifNonNull(value)}"
-      @bx-date-picker-changed="${onChanged}"
-      @bx-date-picker-flatpickr-error="${onFlatpickrError}">
-      <bx-date-picker-input
-        color-scheme="${ifNonNull(colorScheme)}"
-        ?hide-label="${hideLabel}"
-        ?invalid="${invalid}"
+    <cds-date-picker>
+      <cds-date-picker-input
         kind="from"
-        label-text="${ifNonNull(labelText)}"
-        placeholder="${ifNonNull(placeholder)}"
-        size="${ifNonNull(size)}"
-        validity-message="${ifNonNull(validityMessage)}"
-        @input="${onInput}">
-      </bx-date-picker-input>
-      <bx-date-picker-input
-        color-scheme="${ifNonNull(colorScheme)}"
-        ?hide-label="${hideLabel}"
-        ?invalid="${invalid}"
+        label-text="Start date"
+        placeholder="mm/dd/yyyy">
+      </cds-date-picker-input>
+      <cds-date-picker-input
         kind="to"
-        label-text="${ifNonNull(labelText)}"
-        placeholder="${ifNonNull(placeholder)}"
-        size="${ifNonNull(size)}"
-        validity-message="${ifNonNull(validityMessage)}"
-        @input="${onInput}">
-      </bx-date-picker-input>
-    </bx-date-picker>
+        label-text="End date"
+        placeholder="mm/dd/yyyy">
+      </cds-date-picker-input>
+    </cds-date-picker>
   `;
 };
 
 rangeWithCalendar.storyName = 'Range with calendar';
 
-rangeWithCalendar.parameters = {
+export const rangeWithCalendarWithLayer = () => {
+  return html`
+    <cds-layer>
+      <cds-date-picker>
+        <cds-date-picker-input
+          kind="from"
+          label-text="Start date"
+          placeholder="mm/dd/yyyy">
+        </cds-date-picker-input>
+        <cds-date-picker-input
+          kind="to"
+          label-text="End date"
+          placeholder="mm/dd/yyyy">
+        </cds-date-picker-input>
+      </cds-date-picker>
+      <cds-layer>
+        <cds-date-picker>
+          <cds-date-picker-input
+            kind="from"
+            label-text="Start date"
+            placeholder="mm/dd/yyyy">
+          </cds-date-picker-input>
+          <cds-date-picker-input
+            kind="to"
+            label-text="End date"
+            placeholder="mm/dd/yyyy">
+          </cds-date-picker-input>
+        </cds-date-picker>
+        <cds-layer>
+          <cds-date-picker>
+            <cds-date-picker-input
+              kind="from"
+              label-text="Start date"
+              placeholder="mm/dd/yyyy">
+            </cds-date-picker-input>
+            <cds-date-picker-input
+              kind="to"
+              label-text="End date"
+              placeholder="mm/dd/yyyy">
+            </cds-date-picker-input>
+          </cds-date-picker>
+        </cds-layer>
+      </cds-layer>
+    </cds-layer>
+  `;
+};
+
+rangeWithCalendarWithLayer.storyName = 'Range with calendar with layer';
+
+export const Skeleton = () =>
+  html`
+    <cds-date-picker-input-skeleton
+      kind="from"></cds-date-picker-input-skeleton>
+    <cds-date-picker-input-skeleton kind="to"></cds-date-picker-input-skeleton>
+  `;
+
+Skeleton.storyName = 'Skeleton';
+
+Skeleton.decorators = [(story) => html` <div>${story()}</div> `];
+
+Skeleton.parameters = {
+  percy: {
+    skip: true,
+  },
+};
+
+export const Playground = (args) => {
+  const { disabled, dateFormat, onChange, minDate, maxDate } =
+    args?.['cds-date-picker'] || {};
+  const {
+    size,
+    helperText,
+    placeholder,
+    invalid,
+    invalidText,
+    warning,
+    warningText,
+    short,
+    datePickerType,
+    readonly,
+    onInput,
+  } = args?.['cds-date-picker-input'] || {};
+
+  return html`
+    <cds-date-picker
+      ?disabled="${disabled}"
+      date-format="${dateFormat}"
+      ?readonly="${readonly}"
+      min-date="${minDate}"
+      max-date="${maxDate}"
+      @cds-date-picker-changed="${onChange}">
+      ${datePickerType === 'range'
+        ? html`
+            <cds-date-picker-input
+              kind="from"
+              label-text="Date Picker label"
+              size="${size}"
+              placeholder="${placeholder}"
+              ?invalid="${invalid}"
+              invalid-text="${invalidText}"
+              ?short="${short}"
+              ?warn="${warning}"
+              warn-text="${warningText}"
+              @input="${onInput}">
+              ${helperText
+                ? html`<span slot="helper-text">${helperText}</span>`
+                : html``}
+            </cds-date-picker-input>
+            <cds-date-picker-input
+              kind="to"
+              label-text="Date Picker label"
+              size="${size}"
+              placeholder="${placeholder}"
+              ?invalid="${invalid}"
+              invalid-text="${invalidText}"
+              ?short="${short}"
+              ?warn="${warning}"
+              warn-text="${warningText}"
+              @input="${onInput}">
+              ${helperText
+                ? html`<span slot="helper-text">${helperText}</span>`
+                : html``}
+            </cds-date-picker-input>
+          `
+        : html`
+            <cds-date-picker-input
+              kind="${datePickerType}"
+              label-text="Date Picker label"
+              size="${size}"
+              placeholder="${placeholder}"
+              ?invalid="${invalid}"
+              invalid-text="${invalidText}"
+              ?short="${short}"
+              ?warn="${warning}"
+              warn-text="${warningText}"
+              @input="${onInput}">
+              ${helperText
+                ? html`<span slot="helper-text">${helperText}</span>`
+                : html``}
+            </cds-date-picker-input>
+          `}
+    </cds-date-picker>
+  `;
+};
+
+Playground.storyName = 'Playground';
+
+Playground.decorators = [(story) => html` <div>${story()}</div> `];
+
+Playground.parameters = {
   knobs,
-};
-
-export const skeletonSimple = () =>
-  html` <bx-date-picker-input-skeleton></bx-date-picker-input-skeleton> `;
-
-skeletonSimple.storyName = 'Skeleton simple';
-
-skeletonSimple.parameters = {
-  percy: {
-    skip: true,
-  },
-};
-
-export const skeletonSingle = () =>
-  html`
-    <bx-date-picker-input-skeleton
-      kind="single"></bx-date-picker-input-skeleton>
-  `;
-
-skeletonSingle.storyName = 'Skeleton single';
-
-skeletonSingle.parameters = {
-  percy: {
-    skip: true,
-  },
-};
-
-export const skeletonRange = () =>
-  html`
-    <bx-date-picker-input-skeleton kind="from"></bx-date-picker-input-skeleton>
-    <bx-date-picker-input-skeleton kind="to"></bx-date-picker-input-skeleton>
-  `;
-
-skeletonRange.storyName = 'Skeleton range';
-
-skeletonRange.decorators = [(story) => html` <div>${story()}</div> `];
-
-skeletonRange.parameters = {
-  percy: {
-    skip: true,
-  },
 };
 
 export default {

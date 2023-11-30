@@ -7,10 +7,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
-import { html, property, LitElement } from 'lit-element';
-import Arrows16 from '@carbon/icons/lib/arrows/16';
-import ArrowDown16 from '@carbon/icons/lib/arrow--down/16';
+import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators.js';
+import ArrowsVertical32 from '@carbon/icons/lib/arrows--vertical/32';
+import ArrowDown32 from '@carbon/icons/lib/arrow--down/32';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import {
   TABLE_SORT_CYCLE,
@@ -22,18 +23,16 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 
 export { TABLE_SORT_CYCLE, TABLE_SORT_CYCLES, TABLE_SORT_DIRECTION };
 
-const { prefix } = settings;
-
 /**
  * Data table header cell.
  *
- * @element bx-table-header-cell
- * @fires bx-table-header-cell-sort
+ * @element cds-table-header-cell
+ * @fires cds-table-header-cell-sort
  *   The custom event fired before a new sort direction is set upon a user gesture.
  *   Cancellation of this event stops the user-initiated change in sort direction.
  */
 @customElement(`${prefix}-table-header-cell`)
-class BXTableHeaderCell extends FocusMixin(LitElement) {
+class CDSTableHeaderCell extends FocusMixin(LitElement) {
   /**
    * Handles `click` event on the sort button.
    *
@@ -49,7 +48,7 @@ class BXTableHeaderCell extends FocusMixin(LitElement) {
         sortDirection: nextSortDirection,
       },
     };
-    const constructor = this.constructor as typeof BXTableHeaderCell;
+    const constructor = this.constructor as typeof CDSTableHeaderCell;
     if (
       this.dispatchEvent(new CustomEvent(constructor.eventBeforeSort, init))
     ) {
@@ -80,7 +79,7 @@ class BXTableHeaderCell extends FocusMixin(LitElement) {
           'Likely that `_getNextSort()` is called with non-sorted table column, which should not happen in regular condition.'
       );
     }
-    const directions = (this.constructor as typeof BXTableHeaderCell)
+    const directions = (this.constructor as typeof CDSTableHeaderCell)
       .TABLE_SORT_CYCLES[sortCycle];
     const index = directions.indexOf(sortDirection as TABLE_SORT_DIRECTION);
     if (index < 0) {
@@ -94,6 +93,23 @@ class BXTableHeaderCell extends FocusMixin(LitElement) {
     }
     return directions[(index + 1) % directions.length];
   }
+
+  /**
+   * `true` if the table has expandable rows
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'is-sortable' })
+  isExpandable = false;
+
+  /**
+   * `true` if this table has selectable rows
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'is-sortable' })
+  isSelectable = false;
+  /**
+   * `true` if this table header column should be sortable
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'is-sortable' })
+  isSortable = false;
 
   /**
    * `true` if this table header cell is of a primary sorting column.
@@ -114,14 +130,13 @@ class BXTableHeaderCell extends FocusMixin(LitElement) {
   @property({ reflect: true, attribute: 'sort-direction' })
   sortDirection?: TABLE_SORT_DIRECTION;
 
-  createRenderRoot() {
-    return this.attachShadow({
-      mode: 'open',
-      delegatesFocus:
-        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
-        537,
-    });
-  }
+  /**
+   * TODO: Uncomment when Carbon fully implements sticky header
+   * Specify whether the header should be sticky.
+   * Still experimental: may not work with every combination of table props
+   */
+  // @property({ type: Boolean, reflect: true, attribute: 'sticky-header' })
+  // stickyHeader = false;
 
   connectedCallback() {
     if (!this.hasAttribute('role')) {
@@ -130,16 +145,22 @@ class BXTableHeaderCell extends FocusMixin(LitElement) {
     super.connectedCallback();
   }
 
+  updated(changedProperties) {
+    if (this.isSortable && !changedProperties.has('sortDirection')) {
+      this.sortDirection = TABLE_SORT_DIRECTION.NONE;
+    }
+  }
+
   render() {
     const { sortDirection } = this;
     if (sortDirection) {
       const sortIcon =
         sortDirection === TABLE_SORT_DIRECTION.NONE
-          ? Arrows16({
+          ? ArrowsVertical32({
               part: 'sort-icon',
               class: `${prefix}--table-sort__icon-unsorted`,
             })
-          : ArrowDown16({
+          : ArrowDown32({
               part: 'sort-icon',
               class: `${prefix}--table-sort__icon`,
             });
@@ -167,6 +188,10 @@ class BXTableHeaderCell extends FocusMixin(LitElement) {
     return `${prefix}-table-header-cell-sort`;
   }
 
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
   static styles = styles;
 
   /**
@@ -175,4 +200,4 @@ class BXTableHeaderCell extends FocusMixin(LitElement) {
   static TABLE_SORT_CYCLES = TABLE_SORT_CYCLES;
 }
 
-export default BXTableHeaderCell;
+export default CDSTableHeaderCell;

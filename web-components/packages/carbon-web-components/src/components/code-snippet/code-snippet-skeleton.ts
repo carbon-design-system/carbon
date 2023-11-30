@@ -7,19 +7,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, property, LitElement } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
+import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import { CODE_SNIPPET_TYPE } from './code-snippet';
 import styles from './code-snippet.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * Skeleton of code snippet.
  */
 @customElement(`${prefix}-code-snippet-skeleton`)
-class BXCodeSnippetSkeleton extends LitElement {
+class CDSCodeSnippetSkeleton extends LitElement {
   /**
    * The type of code snippet. Corresponds to the attribute with the same name.
    */
@@ -39,4 +38,4 @@ class BXCodeSnippetSkeleton extends LitElement {
   static styles = styles;
 }
 
-export default BXCodeSnippetSkeleton;
+export default CDSCodeSnippetSkeleton;

@@ -7,11 +7,21 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/components/notification/inline-notification';
-@import 'carbon-components/scss/components/button/button';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities/focus-outline' as *;
+@use '@carbon/styles/scss/components/notification/index' as *;
+@use '@carbon/styles/scss/components/notification/mixins' as *;
+@use '@carbon/styles/scss/components/button';
+@use '@carbon/styles/scss/layout' as *;
+
+// https://github.com/carbon-design-system/carbon/issues/11408
+@include inline-notification;
 
 :host(#{$prefix}-inline-notification) {
   @extend .#{$prefix}--inline-notification;
+  @include emit-layout-tokens();
 
   display: none;
   outline: none;
@@ -19,6 +29,20 @@ $css--plex: true !default;
   .#{$prefix}--inline-notification__close-button:focus {
     @include focus-outline('outline');
   }
+}
+
+:host(#{$prefix}-inline-notification[low-contrast])::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border-width: 1px 1px 1px 0;
+  border-style: solid;
+  content: '';
+  filter: opacity(0.4);
+  pointer-events: none;
 }
 
 :host(#{$prefix}-inline-notification[open]) {
@@ -30,52 +54,96 @@ $css--plex: true !default;
   display: none;
 }
 
-:host(#{$prefix}-inline-notification[low-contrast]) {
-  &[low-contrast] {
-    @extend .#{$prefix}--inline-notification--low-contrast;
-  }
-}
-
 :host(#{$prefix}-inline-notification[kind='success']) {
   @extend .#{$prefix}--inline-notification--success;
+}
 
-  &[low-contrast] {
-    @include notification--experimental(
-      $support-success,
-      get-token-value($notification-colors, 'notification-background-success')
-    );
+:host(#{$prefix}-inline-notification[kind='success'][low-contrast]) {
+  @extend .#{$prefix}--inline-notification--low-contrast,
+    .#{$prefix}--inline-notification--success;
+
+  @include notification--experimental(
+    $support-success,
+    $notification-background-success
+  );
+
+  &::before {
+    border-color: $support-success;
   }
 }
 
 :host(#{$prefix}-inline-notification[kind='info']) {
   @extend .#{$prefix}--inline-notification--info;
+}
 
-  &[low-contrast] {
-    @include notification--experimental(
-      $support-info,
-      get-token-value($notification-colors, 'notification-background-info')
-    );
+:host(#{$prefix}-inline-notification[kind='info-square']) {
+  @extend .#{$prefix}--inline-notification--info-square;
+}
+
+:host(#{$prefix}-inline-notification[kind='info'][low-contrast]),
+:host(#{$prefix}-inline-notification[kind='info-square'][low-contrast]) {
+  @extend .#{$prefix}--inline-notification--low-contrast,
+    .#{$prefix}--inline-notification--info;
+
+  @include notification--experimental(
+    $support-info,
+    $notification-background-info
+  );
+
+  &::before {
+    border-color: $support-info;
   }
 }
 
 :host(#{$prefix}-inline-notification[kind='warning']) {
   @extend .#{$prefix}--inline-notification--warning;
+}
+
+:host(#{$prefix}-inline-notification[kind='warning-alt']) {
+  @extend .#{$prefix}--inline-notification--warning-alt;
 
   &[low-contrast] {
-    @include notification--experimental(
-      $support-warning,
-      get-token-value($notification-colors, 'notification-background-warning')
-    );
+    @extend .#{$prefix}--inline-notification--low-contrast,
+      .#{$prefix}--inline-notification--warning-alt;
+  }
+
+  /* TODO: Remove this once the following issue with icon fill is resolved: 
+  ** https://github.com/carbon-design-system/carbon/issues/13616
+  */
+  .#{$prefix}--inline-notification__icon path[data-icon-path='inner-path'] {
+    fill: $black-100;
+  }
+}
+
+:host(#{$prefix}-inline-notification[kind='warning'][low-contrast]),
+:host(#{$prefix}-inline-notification[kind='warning-alt'][low-contrast]) {
+  @extend .#{$prefix}--inline-notification--low-contrast,
+    .#{$prefix}--inline-notification--warning;
+
+  @include notification--experimental(
+    $support-warning,
+    $notification-background-warning
+  );
+
+  &::before {
+    border-color: $support-warning;
   }
 }
 
 :host(#{$prefix}-inline-notification[kind='error']) {
   @extend .#{$prefix}--inline-notification--error;
+}
 
-  &[low-contrast] {
-    @include notification--experimental(
-      $support-error,
-      get-token-value($notification-colors, 'notification-background-error')
-    );
+:host(#{$prefix}-inline-notification[kind='error'][low-contrast]) {
+  @extend .#{$prefix}--inline-notification--low-contrast,
+    .#{$prefix}--inline-notification--error;
+
+  @include notification--experimental(
+    $support-error,
+    $notification-background-error
+  );
+
+  &::before {
+    border-color: $support-error;
   }
 }

@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -34,12 +34,12 @@ export interface FileData {
   state: FILE_UPLOADER_ITEM_STATE;
 
   /**
-   * The error message.
+   * The subject error message.
    */
-  validityMessage?: string;
+  errorSubject?: string;
 
   /**
-   * The supplemental error message.
+   * The body error message.
    */
-  supplementalValidityMessage?: string;
+  errorBody?: string;
 }

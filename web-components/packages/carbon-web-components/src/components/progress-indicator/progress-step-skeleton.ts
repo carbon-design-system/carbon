@@ -7,18 +7,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, property, LitElement } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
+import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import styles from './progress-indicator.scss';
+import CircleDash from '@carbon/icons/lib/circle-dash/16';
+import '../skeleton-text';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * Skeleton of progress step.
  */
 @customElement(`${prefix}-progress-step-skeleton`)
-class BXProgressStepSkeleton extends LitElement {
+export default class CDSProgressStepSkeleton extends LitElement {
   /**
    * `true` if the progress indicator should be vertical. Corresponds to the attribute with the same name.
    */
@@ -29,10 +30,10 @@ class BXProgressStepSkeleton extends LitElement {
     return html`
       <div
         class="${prefix}--progress-step-button ${prefix}--progress-step-button--unclickable">
-        <svg>
-          <path d="M 7, 7 m -7, 0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
-        </svg>
-        <p class="${prefix}--progress-label"></p>
+        ${CircleDash()}
+        <p class="${prefix}--progress-label">
+          <cds-skeleton-text width="40px" linecount="1"></cds-skeleton-text>
+        </p>
         <span class="${prefix}--progress-line"></span>
       </div>
     `;
@@ -40,5 +41,3 @@ class BXProgressStepSkeleton extends LitElement {
 
   static styles = styles;
 }
-
-export default BXProgressStepSkeleton;

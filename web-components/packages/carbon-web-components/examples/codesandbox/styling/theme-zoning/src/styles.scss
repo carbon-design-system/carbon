@@ -1,0 +1,73 @@
+@use "@carbon/styles/scss/reset";
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/themes";
+@use '@carbon/styles/scss/components/button/tokens' as button-tokens;
+@include theme.add-component-tokens(button-tokens.$button-tokens);
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr $spacing-11;
+}
+
+footer {
+   @include theme.theme(themes.$g100);
+
+  > p {
+    background-color: var(--cds-background);
+    color: var(--cds-text-primary);
+    height: $spacing-11;
+    padding: 0 $spacing-05;
+    display: flex;
+    align-items: center;
+
+    > span {
+      flex: 1;
+    }
+  }
+
+  cds-button + cds-button {
+    margin-left: $spacing-05;
+  }
+}
+
+cds-button,
+cds-header,
+cds-header-nav,
+cds-header-nav-item,
+cds-header-menu,
+cds-header-menu-item,
+cds-header-menu-button,
+cds-header-name {
+  visibility: hidden;
+
+  &:defined {
+    visibility: inherit;
+  }
+}
+
+cds-header {
+  position: relative;
+}
+
+.cds--content.cds-ce-demo-theme-zoning--ui-shell-content {
+  background-color: var(--cds-layer-01, #f4f4f4);
+  margin: 0;
+  width: 100%;
+
+  h2 {
+    font-weight: 800;
+    margin: 30px 0;
+    font-size: 20px;
+  }
+
+  p {
+    line-height: 20px;
+  }
+}
+

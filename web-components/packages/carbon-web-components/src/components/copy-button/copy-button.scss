@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,15 +7,51 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/components/code-snippet/code-snippet';
-@import 'carbon-components/scss/components/copy-button/copy-button';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/utilities/keyframes' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/components/button';
+@use '@carbon/styles/scss/components/tooltip';
+@use '@carbon/styles/scss/components/code-snippet/code-snippet' as *;
+@use '@carbon/styles/scss/components/copy-button/index';
+@use '@carbon/styles/scss/layout' as *;
+
+@include code-snippet;
 
 :host(#{$prefix}-copy-button) {
+  @include emit-layout-tokens();
+
   display: inline-flex;
   outline: none;
+}
 
-  .#{$prefix}--snippet-button .#{$prefix}--btn--copy__feedback {
-    left: 50%;
-    right: auto;
+.#{$prefix}--snippet__icon {
+  width: $spacing-05;
+  height: $spacing-05;
+  fill: $icon-primary;
+  transition: all $duration-fast-01 motion(standard, productive);
+}
+
+.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out {
+  // https://github.com/stylelint/stylelint/issues/2363
+  animation: $duration-fast-02 motion(standard, productive) hide-feedback;
+}
+
+.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in {
+  animation: $duration-fast-02 motion(standard, productive) show-feedback;
+}
+
+// code snippet disabled overrides
+.#{$prefix}--snippet--disabled,
+.#{$prefix}--snippet--disabled
+  .#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
+  background-color: $layer !important; /* stylelint-disable-line declaration-no-important */
+  color: $text-disabled !important; /* stylelint-disable-line declaration-no-important */
+
+  ::slotted([slot='icon']) {
+    fill: $text-disabled !important; /* stylelint-disable-line declaration-no-important */
   }
 }

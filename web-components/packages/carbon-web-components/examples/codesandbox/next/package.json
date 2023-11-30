@@ -8,7 +8,7 @@
     "start": "echo 'Running Next in Node 18.15.0+. If you have such Node version in your system just `next` here will work.' && NODE_OPTIONS=--openssl-legacy-provider ./node_modules/node/node_modules/.bin/node ./node_modules/.bin/next"
   },
   "dependencies": {
-    "@carbon/web-components": "v1-latest",
+    "@carbon/web-components": "latest",
     "next": "^10.0.0",
     "node": "^18.15.0",
     "react": "^17.0.0",

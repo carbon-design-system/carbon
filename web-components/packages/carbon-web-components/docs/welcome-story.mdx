@@ -46,10 +46,10 @@ yarn add @carbon/web-components
 
 ### Basic usage
 
-Our example at [CodeSandbox](https://codesandbox.io) shows the most basic usage:
+Our example at [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic) shows the most basic usage:
 
 <iframe
-  src="https://codesandbox.io/embed/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic?fontsize=14&hidenavigation=1&theme=light"
+  src="https://stackblitz.com/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic?embed=1&file=src%2Findex.js&hideExplorer=1&hideNavigation=1&theme=light&terminalHeight=0&hidedevtools=1"
   style={{ width: '100%', height: '500px', border: 'solid rgba(0,0,0,0.1) 1px', boxShadow: 'rgba(0,0,0,0.1) 0 1px 3px 0' }}
   title="carbon-web-components-getting-started"
   sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
@@ -67,25 +67,22 @@ import '@carbon/web-components/es/components/dropdown/dropdown-item';
 Once you've imported the component modules, you can use our components in the same manner as native HTML tags, for example:
 
 ```html
-<bx-dropdown trigger-content="Select an item">
-  <bx-dropdown-item value="all">Option 1</bx-dropdown-item>
-  <bx-dropdown-item value="cloudFoundry">Option 2</bx-dropdown-item>
-  <bx-dropdown-item value="staging">Option 3</bx-dropdown-item>
-  <bx-dropdown-item value="dea">Option 4</bx-dropdown-item>
-  <bx-dropdown-item value="router">Option 5</bx-dropdown-item>
-</bx-dropdown>
+<cds-dropdown trigger-content="Select an item">
+  <cds-dropdown-item value="all">Option 1</cds-dropdown-item>
+  <cds-dropdown-item value="cloudFoundry">Option 2</cds-dropdown-item>
+  <cds-dropdown-item value="staging">Option 3</cds-dropdown-item>
+  <cds-dropdown-item value="dea">Option 4</cds-dropdown-item>
+  <cds-dropdown-item value="router">Option 5</cds-dropdown-item>
+</cds-dropdown>
 ```
 
-If you just want to try our components for demnstrations and so on, you can use CDNs that support module mapping (for example, [JSPM](https://jspm.org)). With CDNs, you can import just our modules in `<script type="module">`:
+An alternative to using a bundler are CDN artifacts which can be added client side in your html files. With CDNs, you can import the components in `<script type="module">`:
 
 ```html
 <!DOCTYPE html>
 <html>
   <head>
-    <script type="module">
-      import 'https://jspm.dev/@carbon/web-components/es/components/dropdown/dropdown.js';
-      import 'https://jspm.dev/@carbon/web-components/es/components/dropdown/dropdown-item.js';
-    </script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/dropdown.min.js"></script>
     <style type="text/css">
       #app {
         font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -93,28 +90,28 @@ If you just want to try our components for demnstrations and so on, you can use 
         margin: 2rem;
       }
 
-      bx-dropdown:not(:defined),
-      bx-dropdown-item:not(:defined) {
+      cds-dropdown:not(:defined),
+      cds-dropdown-item:not(:defined) {
         visibility: hidden;
       }
     </style>
   </head>
   <body>
     <div id="app">
-      <bx-dropdown trigger-content="Select an item">
-        <bx-dropdown-item value="all">Option 1</bx-dropdown-item>
-        <bx-dropdown-item value="cloudFoundry">Option 2</bx-dropdown-item>
-        <bx-dropdown-item value="staging">Option 3</bx-dropdown-item>
-        <bx-dropdown-item value="dea">Option 4</bx-dropdown-item>
-        <bx-dropdown-item value="router">Option 5</bx-dropdown-item>
-      </bx-dropdown>
+      <cds-dropdown trigger-content="Select an item">
+        <cds-dropdown-item value="all">Option 1</cds-dropdown-item>
+        <cds-dropdown-item value="cloudFoundry">Option 2</cds-dropdown-item>
+        <cds-dropdown-item value="staging">Option 3</cds-dropdown-item>
+        <cds-dropdown-item value="dea">Option 4</cds-dropdown-item>
+        <cds-dropdown-item value="router">Option 5</cds-dropdown-item>
+      </cds-dropdown>
     </div>
   </body>
 </html>
 ```
 
 <iframe
-  className="bx-ce-doc--demo-iframe"
+  className="cds-ce-doc--demo-iframe"
   src={basicExampleCDN}
   title="carbon-web-components-basic-example-cdn"
   sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
@@ -132,11 +129,7 @@ with your React application.
 
 This is achievable since Web Components is the modern browser standard, and
 works well with other front-end frameworks that exist in the application. In
-turn, this also comes with the benefits of encapsulation within the Shadow DOM:
-
-- [Carbon Web Components with Angular](https://web-components.carbondesignsystem.com/angular/index.html)
-- [Carbon Web Components with React](https://web-components.carbondesignsystem.com/react/index.html)
-- [Carbon Web Components with Vue](https://web-components.carbondesignsystem.com/vue/index.html)
+turn, this also comes with the benefits of encapsulation within the Shadow DOM.
 
 ### Other usage guides
 

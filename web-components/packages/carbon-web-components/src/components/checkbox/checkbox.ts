@@ -7,27 +7,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { classMap } from 'lit-html/directives/class-map';
-import { html, property, query, LitElement } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { LitElement, html } from 'lit';
+import { property, query } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import FormMixin from '../../globals/mixins/form';
 import styles from './checkbox.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
-const { prefix } = settings;
-
 /**
  * Check box.
  *
- * @element bx-checkbox
- * @fires bx-checkbox-changed - The custom event fired after this changebox changes its checked state.
+ * @element cds-checkbox
+ * @fires cds-checkbox-changed - The custom event fired after this changebox changes its checked state.
  * @csspart input The checkbox.
  * @csspart label The label.
  */
 @customElement(`${prefix}-checkbox`)
-class BXCheckbox extends FocusMixin(FormMixin(LitElement)) {
+class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
   @query('input')
   protected _checkboxNode!: HTMLInputElement;
 
@@ -38,16 +37,26 @@ class BXCheckbox extends FocusMixin(FormMixin(LitElement)) {
     const { checked, indeterminate } = this._checkboxNode;
     this.checked = checked;
     this.indeterminate = indeterminate;
-    const { eventChange } = this.constructor as typeof BXCheckbox;
+    const { eventChange } = this.constructor as typeof CDSCheckbox;
     this.dispatchEvent(
       new CustomEvent(eventChange, {
         bubbles: true,
         composed: true,
         detail: {
+          checked,
           indeterminate,
         },
       })
     );
+  }
+
+  /**
+   * Prevent checkbox state from updating when readonly
+   */
+  private _handleClick(event: MouseEvent) {
+    if (this.readonly) {
+      event.preventDefault();
+    }
   }
 
   _handleFormdata(event: Event) {
@@ -59,31 +68,45 @@ class BXCheckbox extends FocusMixin(FormMixin(LitElement)) {
   }
 
   /**
-   * `true` if the check box should be checked.
+   * Specify whether the underlying input should be checked
    */
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean, reflect: true, attribute: 'checked' })
   checked = false;
 
   /**
-   * `true` if the check box should be disabled.
+   * Specify if checkbox is being used in a data table
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'data-table' })
+  dataTable = false;
+
+  /**
+   * Specify whether the Checkbox should be disabled
    */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
   /**
-   * `true` if the label should be hidden.
+   * Specify whether the checkbox should be present in the DOM,
+   * but invisible and uninteractable. Used for data-table purposes.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'hide-checkbox' })
+  hideCheckbox = false;
+
+  /**
+   * Specify whether the label should be hidden, or not
    */
   @property({ type: Boolean, reflect: true, attribute: 'hide-label' })
   hideLabel = false;
 
   /**
-   * `true` if the check box should show its UI of the indeterminate state.
+   * Specify whether the Checkbox is in an indeterminate state
    */
   @property({ type: Boolean, reflect: true })
   indeterminate = false;
 
   /**
-   * The label text.
+   * Provide a label to provide a description of the Checkbox input that you are
+   * exposing to the user
    */
   @property({ attribute: 'label-text' })
   labelText = '';
@@ -95,19 +118,22 @@ class BXCheckbox extends FocusMixin(FormMixin(LitElement)) {
   name!: string;
 
   /**
+   * Specify whether the Checkbox is read-only
+   */
+  @property({ type: Boolean, reflect: true })
+  readonly = false;
+
+  /**
+   * Specify a title for the node for the Checkbox
+   */
+  @property({ attribute: 'title' })
+  title = '';
+
+  /**
    * The value.
    */
   @property()
   value!: string;
-
-  createRenderRoot() {
-    return this.attachShadow({
-      mode: 'open',
-      delegatesFocus:
-        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
-        537,
-    });
-  }
 
   render() {
     const {
@@ -117,11 +143,17 @@ class BXCheckbox extends FocusMixin(FormMixin(LitElement)) {
       indeterminate,
       labelText,
       name,
+      readonly,
+      title,
       value,
       _handleChange: handleChange,
+      _handleClick: handleClick,
     } = this;
     const labelClasses = classMap({
       [`${prefix}--checkbox-label`]: true,
+    });
+    const labelTextClasses = classMap({
+      [`${prefix}--checkbox-label-text`]: true,
       [`${prefix}--visually-hidden`]: hideLabel,
     });
     return html`
@@ -131,16 +163,20 @@ class BXCheckbox extends FocusMixin(FormMixin(LitElement)) {
         part="input"
         class="${`${prefix}--checkbox`}"
         aria-checked="${indeterminate ? 'mixed' : String(Boolean(checked))}"
+        aria-readonly="${String(Boolean(readonly))}"
         .checked="${checked}"
         ?disabled="${disabled}"
         .indeterminate="${indeterminate}"
-        name="${ifNonNull(name)}"
-        value="${ifNonNull(value)}"
-        @change="${handleChange}" />
-      <label for="checkbox" part="label" class="${labelClasses}">
-        <span class="${prefix}--checkbox-label-text"
-          ><slot>${labelText}</slot></span
-        >
+        name="${ifDefined(name)}"
+        value="${ifDefined(value)}"
+        @change="${handleChange}"
+        @click="${handleClick}" />
+      <label
+        for="checkbox"
+        part="label"
+        class="${labelClasses}"
+        title="${ifDefined(title)}">
+        <span class="${labelTextClasses}"><slot>${labelText}</slot></span>
       </label>
     `;
   }
@@ -152,7 +188,11 @@ class BXCheckbox extends FocusMixin(FormMixin(LitElement)) {
     return `${prefix}-checkbox-changed`;
   }
 
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
   static styles = styles; // `styles` here is a `CSSResult` generated by custom WebPack loader
 }
 
-export default BXCheckbox;
+export default CDSCheckbox;

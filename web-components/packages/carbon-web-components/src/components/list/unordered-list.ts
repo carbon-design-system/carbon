@@ -7,19 +7,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { classMap } from 'lit-html/directives/class-map';
-import { html, LitElement, property } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
+import { classMap } from 'lit/directives/class-map.js';
+import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import styles from './list.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * Ordered list.
  */
 @customElement(`${prefix}-unordered-list`)
-class BXUnorderedList extends LitElement {
+class CDSUnorderedList extends LitElement {
   /**
    * `true` if expressive theme enabled.
    */
@@ -30,7 +29,7 @@ class BXUnorderedList extends LitElement {
     // Uses attribute for lookup from child
     if (
       this.closest(
-        (this.constructor as typeof BXUnorderedList).selectorListItem
+        (this.constructor as typeof CDSUnorderedList).selectorListItem
       )
     ) {
       this.setAttribute('slot', 'nested');
@@ -63,4 +62,4 @@ class BXUnorderedList extends LitElement {
   static styles = styles;
 }
 
-export default BXUnorderedList;
+export default CDSUnorderedList;

@@ -8,7 +8,7 @@
  */
 
 declare namespace jasmine {
-  interface Matchers<T> {
+  interface Matchers {
     toMatchSnapshot(options?: { mode: string }): boolean;
   }
 }

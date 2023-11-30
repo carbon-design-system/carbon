@@ -7,59 +7,34 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { classMap } from 'lit-html/directives/class-map';
-import { html, property, query, LitElement } from 'lit-element';
+import { classMap } from 'lit/directives/class-map.js';
+import { LitElement, html } from 'lit';
+import { property, query, state } from 'lit/decorators.js';
 import Calendar16 from '@carbon/icons/lib/calendar/16';
-import settings from 'carbon-components/es/globals/js/settings';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
-import ValidityMixin from '../../globals/mixins/validity';
-import { INPUT_SIZE } from '../input/input';
-import {
-  DATE_PICKER_INPUT_COLOR_SCHEME,
-  DATE_PICKER_INPUT_KIND,
-  DATE_PICKER_INPUT_SIZE_HORIZONTAL,
-} from './defs';
+import { INPUT_SIZE } from '../text-input/text-input';
+import { DATE_PICKER_INPUT_COLOR_SCHEME, DATE_PICKER_INPUT_KIND } from './defs';
+import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
+import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16';
 import styles from './date-picker.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
-export {
-  DATE_PICKER_INPUT_COLOR_SCHEME,
-  DATE_PICKER_INPUT_KIND,
-  DATE_PICKER_INPUT_SIZE_HORIZONTAL,
-};
-
-const { prefix } = settings;
+export { DATE_PICKER_INPUT_COLOR_SCHEME, DATE_PICKER_INPUT_KIND };
 
 /**
  * The input box for date picker.
  *
- * @element bx-date-picker-input
+ * @element cds-date-picker-input
  */
 @customElement(`${prefix}-date-picker-input`)
-class BXDatePickerInput extends ValidityMixin(FocusMixin(LitElement)) {
+class CDSDatePickerInput extends FocusMixin(LitElement) {
   /**
    * The calendar icon.
    */
   @query(`.${prefix}--date-picker__icon`)
   private _iconNode!: SVGElement;
-
-  /**
-   * The `<slot>` for the validity message.
-   */
-  @query('slot[name="validity-message"]')
-  private _slotValidityMessage!: HTMLSlotElement;
-
-  /**
-   * `true` if validity message is given via `validityMessage` property or via `<slot name="validity-message">`.
-   */
-  private get _hasValidityMessage() {
-    const { validityMessage, _slotValidityMessage: slotValidityMessage } = this;
-    return (
-      validityMessage ||
-      (slotValidityMessage && slotValidityMessage.assignedNodes.length > 0)
-    );
-  }
 
   /**
    * Handles `click` event on the calendar icon.
@@ -70,13 +45,6 @@ class BXDatePickerInput extends ValidityMixin(FocusMixin(LitElement)) {
     if (event.target === this._iconNode) {
       this.input.focus();
     }
-  }
-
-  /**
-   * Handles `slotchange` event on `<slot name="validity-message">`.
-   */
-  private _handleSlotChangeValidityMessage() {
-    this.requestUpdate();
   }
 
   /**
@@ -103,23 +71,24 @@ class BXDatePickerInput extends ValidityMixin(FocusMixin(LitElement)) {
   }
 
   /**
-   * @returns The template for the the validity message.
+   * `true` if there is helper text content.
    */
-  private _renderValidityMessage() {
-    const {
-      validityMessage,
-      _hasValidityMessage: hasValidityMessage,
-      _handleSlotChangeValidityMessage: handleSlotChangeValidityMessage,
-    } = this;
-    return html`
-      <div ?hidden="${!hasValidityMessage}" class="${prefix}--form-requirement">
-        <slot
-          name="validity-message"
-          @slotchange="${handleSlotChangeValidityMessage}"
-          >${validityMessage}</slot
-        >
-      </div>
-    `;
+  @state()
+  protected _hasHelperText = false;
+
+  /**
+   * Handles `slotchange` event on the default `<slot>`.
+   */
+  protected _handleSlotChange({ target }: Event) {
+    if (!(target as HTMLSlotElement).name) {
+      const hasContent = (target as HTMLSlotElement)
+        .assignedNodes()
+        .some(
+          (node) =>
+            node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
+        );
+      this._hasHelperText = hasContent;
+    }
   }
 
   /**
@@ -145,6 +114,24 @@ class BXDatePickerInput extends ValidityMixin(FocusMixin(LitElement)) {
    */
   @property({ type: Boolean, reflect: true, attribute: 'hide-label' })
   hideLabel = false;
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  @property({ type: Boolean, reflect: true })
+  warn = false;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  @property({ attribute: 'warn-text' })
+  warnText = '';
+
+  /**
+   * Message which is displayed if the value is invalid.
+   */
+  @property({ attribute: 'invalid-text' })
+  invalidText = '';
 
   /**
    * Controls the invalid state and visibility of the `validityMessage`.
@@ -177,29 +164,28 @@ class BXDatePickerInput extends ValidityMixin(FocusMixin(LitElement)) {
   placeholder!: string;
 
   /**
+   * Specify if the component should be read-only
+   */
+  @property({ type: Boolean, reflect: true })
+  readonly = false;
+
+  /**
    * `true` if the value is required.
    */
   @property({ type: Boolean, reflect: true })
   required = false;
 
   /**
-   * The special validity message for `required`.
-   */
-  @property({ attribute: 'required-validity-message' })
-  requiredValidityMessage = 'Please fill out this field.';
-
-  /**
    * Vertical size of this date picker input.
    */
   @property({ attribute: 'size', reflect: true })
-  size = INPUT_SIZE.REGULAR;
+  size = INPUT_SIZE.MEDIUM;
 
   /**
-   * Horizontal size of this date picker input.
-   * Effective only when `kind` property is `DATE_PICKER_INPUT_KIND.SIMPLE`.
+   * true to use the short version.
    */
-  @property({ attribute: 'size-horizontal', reflect: true })
-  sizeHorizontal = DATE_PICKER_INPUT_SIZE_HORIZONTAL.REGULAR;
+  @property({ type: Boolean, reflect: true })
+  short = false;
 
   /**
    * The `type` attribute for the `<input>` in the shadow DOM.
@@ -208,42 +194,59 @@ class BXDatePickerInput extends ValidityMixin(FocusMixin(LitElement)) {
   type!: string;
 
   /**
-   * The validity message.
-   * If present and non-empty, this date picker input shows the UI of its invalid state.
-   */
-  @property({ attribute: 'validity-message' })
-  validityMessage = '';
-
-  /**
    * The value.
    */
   @property()
   value!: string;
 
-  createRenderRoot() {
-    return this.attachShadow({
-      mode: 'open',
-      delegatesFocus:
-        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
-        537,
-    });
-  }
-
   render() {
-    const constructor = this.constructor as typeof BXDatePickerInput;
+    const constructor = this.constructor as typeof CDSDatePickerInput;
     const {
       disabled,
+      _hasHelperText: hasHelperText,
       hideLabel,
       invalid,
+      invalidText,
       labelText,
       pattern = constructor.defaultPattern,
       placeholder,
+      readonly,
       size,
       type = constructor.defaultType,
       value,
+      warn,
+      warnText,
       _handleClickWrapper: handleClickWrapper,
       _handleInput: handleInput,
     } = this;
+
+    const invalidIcon = WarningFilled16({
+      class: `${prefix}--date-picker__icon ${prefix}--date-picker__icon--invalid`,
+    });
+
+    const warnIcon = WarningAltFilled16({
+      class: `${prefix}--date-picker__icon ${prefix}--date-picker__icon--warn`,
+    });
+
+    let normalizedProps = {
+      disabled: !readonly && disabled,
+      invalid: !readonly && invalid,
+      warn: !readonly && !invalid && warn,
+      'slot-name': '',
+      'slot-text': '',
+      icon: null,
+    };
+
+    if (normalizedProps.invalid) {
+      normalizedProps.icon = invalidIcon;
+      normalizedProps['slot-name'] = 'invalid-text';
+      normalizedProps['slot-text'] = invalidText;
+    } else if (normalizedProps.warn) {
+      normalizedProps.icon = warnIcon;
+      normalizedProps['slot-name'] = 'warn-text';
+      normalizedProps['slot-text'] = warnText;
+    }
+
     const labelClasses = classMap({
       [`${prefix}--label`]: true,
       [`${prefix}--visually-hidden`]: hideLabel,
@@ -251,28 +254,51 @@ class BXDatePickerInput extends ValidityMixin(FocusMixin(LitElement)) {
     });
     const inputClasses = classMap({
       [`${prefix}--date-picker__input`]: true,
+      [`${prefix}--date-picker__input--invalid`]: normalizedProps.invalid,
+      [`${prefix}--date-picker__input--warn`]: normalizedProps.warn,
       [`${prefix}--date-picker__input--${size}`]: size,
     });
+
+    const inputWrapperClasses = classMap({
+      [`${prefix}--date-picker-input__wrapper`]: true,
+      [`${prefix}--date-picker-input__wrapper--invalid`]:
+        normalizedProps.invalid,
+      [`${prefix}--date-picker-input__wrapper--warn`]: normalizedProps.warn,
+    });
+
+    const helperTextClasses = classMap({
+      [`${prefix}--form__helper-text`]: true,
+      [`${prefix}--form__helper-text--disabled`]: disabled,
+    });
+
     return html`
       <label for="input" class="${labelClasses}">
         <slot name="label-text">${labelText}</slot>
       </label>
-      <div
-        class="${prefix}--date-picker-input__wrapper"
-        @click="${handleClickWrapper}">
+      <div class="${inputWrapperClasses}" @click="${handleClickWrapper}">
         <input
           id="input"
           type="${type}"
           class="${inputClasses}"
           ?disabled="${disabled}"
           pattern="${pattern}"
-          placeholder="${ifNonNull(placeholder)}"
-          .value="${ifNonNull(value)}"
+          placeholder="${ifDefined(placeholder)}"
+          .value="${ifDefined(value)}"
           ?data-invalid="${invalid}"
-          @input="${handleInput}" />
-        ${this._renderIcon()}
+          @input="${handleInput}"
+          ?readonly="${readonly}" />
+        ${normalizedProps.icon || this._renderIcon()}
       </div>
-      ${this._renderValidityMessage()}
+      <div
+        class="${prefix}--form-requirement"
+        ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
+        <slot name="${normalizedProps['slot-name']}">
+          ${normalizedProps['slot-text']}
+        </slot>
+      </div>
+      <div ?hidden="${hasHelperText}" class="${helperTextClasses}">
+        <slot name="helper-text" @slotchange="${this._handleSlotChange}"></slot>
+      </div>
     `;
   }
 
@@ -293,7 +319,11 @@ class BXDatePickerInput extends ValidityMixin(FocusMixin(LitElement)) {
     return `${prefix}-date-picker`;
   }
 
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
   static styles = styles;
 }
 
-export default BXDatePickerInput;
+export default CDSDatePickerInput;

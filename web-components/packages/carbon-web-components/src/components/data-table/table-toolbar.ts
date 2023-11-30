@@ -7,20 +7,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, LitElement } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
+import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import styles from './data-table.scss';
+import { CDSTableToolbarContent } from '../..';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * Table toolbar.
  *
- * @element bx-table-toolbar
+ * @element cds-table-toolbar
  */
 @customElement(`${prefix}-table-toolbar`)
-class BXTableToolbar extends LitElement {
+class CDSTableToolbar extends LitElement {
+  /**
+   * Toolbar size
+   */
+  @property({ reflect: true })
+  size;
+
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'section');
@@ -28,11 +34,28 @@ class BXTableToolbar extends LitElement {
     super.connectedCallback();
   }
 
+  updated(changedProperties) {
+    if (changedProperties.has('size')) {
+      (
+        this.querySelector(
+          (this.constructor as typeof CDSTableToolbar).selectorToolbarContent
+        ) as CDSTableToolbarContent
+      ).size = this.size;
+    }
+  }
+
   render() {
     return html` <slot></slot> `;
+  }
+
+  /**
+   * The CSS selector to find the toolbar contents
+   */
+  static get selectorToolbarContent() {
+    return `${prefix}-table-toolbar-content`;
   }
 
   static styles = styles;
 }
 
-export default BXTableToolbar;
+export default CDSTableToolbar;

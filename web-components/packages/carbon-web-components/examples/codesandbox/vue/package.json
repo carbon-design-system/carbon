@@ -7,7 +7,7 @@
     "serve": "vue-cli-service serve"
   },
   "dependencies": {
-    "@carbon/web-components": "v1-latest",
+    "@carbon/web-components": "latest",
     "vue": "^2.5.0"
   },
   "devDependencies": {

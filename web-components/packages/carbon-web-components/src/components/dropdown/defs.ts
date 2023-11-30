@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -49,19 +49,19 @@ export enum DROPDOWN_KEYBOARD_ACTION {
  */
 export enum DROPDOWN_SIZE {
   /**
-   * Regular size.
-   */
-  REGULAR = '',
-
-  /**
    * Small size.
    */
   SMALL = 'sm',
 
   /**
-   * Extra large size.
+   * Medium size.
    */
-  EXTRA_LARGE = 'xl',
+  MEDIUM = 'md',
+
+  /**
+   * Large size.
+   */
+  LARGE = 'lg',
 }
 
 /**
@@ -69,12 +69,27 @@ export enum DROPDOWN_SIZE {
  */
 export enum DROPDOWN_TYPE {
   /**
-   * Regular type.
+   * Default type.
    */
-  REGULAR = '',
+  DEFAULT = '',
 
   /**
    * Inline type.
    */
   INLINE = 'inline',
+}
+
+/**
+ * Dropdown direction.
+ */
+export enum DROPDOWN_DIRECTION {
+  /**
+   * Top.
+   */
+  TOP = 'top',
+
+  /**
+   * Bottom.
+   */
+  BOTTOM = 'bottom',
 }

@@ -149,7 +149,7 @@ function getRollupConfig({
             ? []
             : [
                 [
-                  'template-html-minifier',
+                  'template-html-minifier', // TODO: verify this is actually needed, doesn't seem to be doing anything
                   {
                     modules: {
                       'lit-html': ['html'],

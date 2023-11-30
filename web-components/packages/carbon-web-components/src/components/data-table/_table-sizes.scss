@@ -1,59 +1,233 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
 //
-// "Compact" table size variant
+// "xs" table size variant
 //
 
-:host(#{$prefix}-table-head)
-  ::slotted(#{$prefix}-table-header-row[size='compact']),
-:host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='compact']) {
-  height: rem(24px);
+:host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-row[size='xs']),
+:host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='xs']) {
+  height: $spacing-06;
 }
 
-:host(#{$prefix}-table-row[size='compact']) {
-  ::slotted(#{$prefix}-table-cell),
-  ::slotted(#{$prefix}-table-cell-skeleton) {
-    padding-top: rem(2px);
-    padding-bottom: rem(2px);
+:host(#{$prefix}-table-header-row[size='xs']),
+:host(#{$prefix}-table-row[size='xs']) {
+  ::slotted(#{$prefix}-table-header-cell) {
+    height: $spacing-06;
+  }
+
+  ::slotted(#{$prefix}-table-cell) {
+    padding-top: $spacing-01;
+    padding-bottom: $spacing-01;
+    padding-left: $spacing-05;
+  }
+
+  .#{$prefix}--table-expand {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: $spacing-06;
   }
 }
 
 //
-// "Short" table size variant
+// "sm" table size variant
 //
 
-:host(#{$prefix}-table-head)
-  ::slotted(#{$prefix}-table-header-row[size='short']),
-:host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='short']) {
-  height: rem(32px);
+:host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-row[size='sm']),
+:host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='sm']) {
+  height: $spacing-07;
 }
 
-:host(#{$prefix}-table-row[size='short']) {
-  ::slotted(#{$prefix}-table-cell),
-  ::slotted(#{$prefix}-table-cell-skeleton) {
+:host(#{$prefix}-table-header-row[size='sm']),
+:host(#{$prefix}-table-row[size='sm']) {
+  ::slotted(#{$prefix}-table-header-cell) {
+    height: $spacing-07;
+  }
+
+  ::slotted(#{$prefix}-table-cell) {
     padding-top: rem(7px);
     padding-bottom: rem(6px);
+    padding-left: $spacing-05;
+  }
+
+  .#{$prefix}--table-expand {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  ::slotted(#{$prefix}-overflow-menu) {
+    height: $spacing-07;
   }
 }
 
 //
-// "Tall" table size variant
+// "md" table size variant
 //
 
-:host(#{$prefix}-table-head)
-  ::slotted(#{$prefix}-table-header-row[size='tall']),
-:host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='tall']) {
-  height: rem(64px);
+:host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-row[size='md']),
+:host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='md']) {
+  height: $spacing-08;
 }
 
-:host(#{$prefix}-table-row[size='tall']) {
-  ::slotted(#{$prefix}-table-cell),
-  ::slotted(#{$prefix}-table-cell-skeleton) {
-    padding-top: rem(16px);
+:host(#{$prefix}-table-row[size='md']),
+:host(#{$prefix}-table-header-row[size='md']) {
+  ::slotted(#{$prefix}-table-header-cell) {
+    height: $spacing-08;
+  }
+  ::slotted(#{$prefix}-table-cell) {
+    padding-top: rem(7px);
+    padding-left: $spacing-05;
+    padding-bottom: rem(6px);
+  }
+
+  .#{$prefix}--table-expand {
+    padding-top: $spacing-02;
+    padding-bottom: $spacing-02;
+  }
+
+  ::slotted(#{$prefix}-overflow-menu) {
+    height: $spacing-08;
+  }
+}
+
+//
+// "lg" table size variant - default
+//
+
+:host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-row[size='lg']),
+:host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='lg']) {
+  height: $spacing-09;
+}
+
+//
+// "xl" table size variant
+//
+
+:host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-row[size='xl']),
+:host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='xl']) {
+  height: $spacing-10;
+}
+
+:host(#{$prefix}-table-header-row[size='xl']) {
+  ::slotted(#{$prefix}-table-header-cell) {
+    vertical-align: top;
+    padding-top: $spacing-05;
+  }
+}
+
+:host(#{$prefix}-table-header-row[size='xl']),
+:host(#{$prefix}-table-row[size='xl']) {
+  ::slotted(#{$prefix}-table-cell) {
+    padding-top: $spacing-05;
+  }
+
+  .#{$prefix}--table-expand {
+    padding-bottom: 1.375rem;
+  }
+
+  .#{$prefix}--table-expand,
+  .#{$prefix}--table-column-checkbox {
+    vertical-align: top;
+    padding-top: rem(10px);
+  }
+
+  &[radio] {
+    .#{$prefix}--table-column-checkbox {
+      padding-top: $spacing-05;
+    }
+  }
+}
+
+:host(#{$prefix}-table-expanded-row[size='xl'][expanded]) {
+  td {
+    padding-top: $spacing-05;
+    padding-right: $spacing-05;
+    padding-bottom: $spacing-03;
+  }
+}
+
+// Small persistent toolbar
+:host(#{$prefix}-table-toolbar[size='xs']),
+:host(#{$prefix}-table-toolbar-content[size='xs']) {
+  &,
+  ::slotted(#{$prefix}-table-toolbar-search),
+  ::slotted(#{$prefix}-overflow-menu),
+  ::slotted(#{$prefix}-button) {
+    min-height: $spacing-07;
+    height: $spacing-07;
+  }
+  ::slotted(#{$prefix}-table-toolbar-search),
+  ::slotted(#{$prefix}-overflow-menu) {
+    width: $spacing-07;
+  }
+}
+
+:host(#{$prefix}-table-toolbar[size='sm']),
+:host(#{$prefix}-table-toolbar-content[size='sm']) {
+  &,
+  ::slotted(#{$prefix}-table-toolbar-search),
+  ::slotted(#{$prefix}-overflow-menu),
+  ::slotted(#{$prefix}-button) {
+    min-height: $spacing-07;
+    height: $spacing-07;
+  }
+
+  ::slotted(#{$prefix}-table-toolbar-search),
+  ::slotted(#{$prefix}-overflow-menu) {
+    width: $spacing-07;
+  }
+}
+
+//
+// "selection" and "expandable" sizes
+//
+:host(#{$prefix}-table-header-row[selection-name][expandable]),
+:host(#{$prefix}-table-row[selection-name][expandable]) {
+  ::slotted(#{$prefix}-table-header-cell),
+  ::slotted(#{$prefix}-table-cell) {
+    padding-left: $spacing-03;
+  }
+}
+
+:host(#{$prefix}-table-header-row[selection-name][expandable][size='xs']),
+:host(#{$prefix}-table-row[selection-name][expandable][size='xs']) {
+  .#{$prefix}--table-column-checkbox {
+    padding: 0 rem(6px);
+  }
+}
+
+:host(#{$prefix}-table-header-row[selection-name][expandable][size='sm']),
+:host(#{$prefix}-table-row[selection-name][expandable][size='sm']),
+:host(#{$prefix}-table-header-row[selection-name][expandable][size='md']),
+:host(#{$prefix}-table-row[selection-name][expandable][size='md']) {
+  .#{$prefix}--table-column-checkbox {
+    padding: rem(3px) rem(6px);
+  }
+}
+
+:host(#{$prefix}-table-header-row[selection-name][expandable][size='xl']) {
+  .#{$prefix}--table-column-checkbox {
+    padding-left: rem(6px);
+    padding-right: rem(6px);
+  }
+}
+
+//
+// table cell size for overflow menu
+//
+:host(#{$prefix}-table-cell[size='xs']),
+:host(#{$prefix}-table-cell[size='sm']) {
+  ::slotted(#{$prefix}-overflow-menu) {
+    height: calc(100% + 1px);
+  }
+}
+
+:host(#{$prefix}-table-cell[size='md']) {
+  ::slotted(#{$prefix}-overflow-menu) {
+    height: $spacing-08;
   }
 }

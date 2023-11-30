@@ -1,0 +1,66 @@
+import { Props, Description } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+
+# Stack
+
+> 💡 Check our
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/stack)
+> example implementation.
+
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/stack)
+
+The Stack component is a useful layout utility in a component-based model. This
+allows components to not use margin and instead delegate the responsibility of
+positioning and layout to parent components.
+
+In the case of the Stack component, it uses the spacing scale from the Design
+Language in order to determine how much space there should be between items
+rendered by the Stack component. It also supports a custom gap prop which will
+allow a user to provide a custom value for the gap of the layout.
+
+This component supports both horizontal and vertical orientations.
+
+Inspiration for this component:
+
+- https://paste.twilio.design/layout/stack/
+- https://github.com/Workday/canvas-kit/blob/f2f599654876700f483a1d8c5de82a41315c76f1/modules/labs-react/layout/lib/Stack.tsx
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/stack/index.js';
+```
+
+<Description markdown={`${cdnJs({ components: ['stack'] })}`} />
+<Description markdown={`${cdnCss()}`} />
+
+### HTML
+
+```html
+<cds-stack gap="6" orientation="vertical">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</cds-stack>
+```
+
+## Passing in custom gap value
+
+You can set a custom gap value by passing in the custom value to the `gap`
+attribute AND setting the `custom-gap-value` attribute to true.
+
+```html
+<cds-stack gap="2rem" orientation="vertical" custom-gap-value>
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</cds-stack>
+```
+
+## `<cds-stack>` attributes, properties and events
+
+<Props of="cds-stack" />

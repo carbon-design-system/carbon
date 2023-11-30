@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -17,17 +17,72 @@
   ::slotted(#{$prefix}-table-head) {
     @include type-style('heading-01');
 
-    background-color: $ui-03;
+    background-color: $layer-accent-01;
     display: table-header-group;
   }
 
   ::slotted(#{$prefix}-table-body) {
     @include type-style('body-short-01');
 
-    background-color: $ui-01;
+    background-color: $layer-01;
     width: 100%;
     display: table-row-group;
   }
+}
+
+:host(#{$prefix}-table[use-static-width]) {
+  width: auto;
+}
+
+:host(#{$prefix}-table[sticky-header]) {
+  ::slotted(#{$prefix}-table-head),
+  ::slotted(#{$prefix}-table-body) {
+    display: flex;
+    flex-direction: column;
+    will-change: transform;
+  }
+
+  .#{$prefix}--data-table-content {
+    display: block;
+    overflow-y: scroll;
+  }
+}
+
+:host(#{$prefix}-table[with-header]) {
+  .#{$prefix}--data-table-header {
+    display: table-caption;
+  }
+}
+
+:host(#{$prefix}-table-head[sticky-header]) {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  width: 100%;
+  will-change: transform;
+
+  ::slotted(#{$prefix}-table-header-row) {
+    display: flex;
+    width: 100%;
+  }
+}
+
+:host(#{$prefix}-table-header-cell[sort-direction]) {
+  height: $spacing-09;
+  position: relative;
+}
+
+:host(#{$prefix}-table-header-cell[sticky-header]) {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  border-bottom: 1px solid $layer-active;
+}
+
+:host(#{$prefix}-table-header-cell[sticky-header]:not([is-sortable])) {
+  padding-top: rem(14px);
 }
 
 //
@@ -35,13 +90,9 @@
 //
 
 :host(#{$prefix}-table-header-row) ::slotted(#{$prefix}-table-header-cell),
-:host(#{$prefix}-table-header-row)
-  ::slotted(#{$prefix}-table-header-cell-skeleton),
 :host(#{$prefix}-table-header-row) .#{$prefix}--table-column-checkbox,
 :host(#{$prefix}-table-header-expand-row)
   ::slotted(#{$prefix}-table-header-cell),
-:host(#{$prefix}-table-header-expand-row)
-  ::slotted(#{$prefix}-table-header-cell-skeleton),
 :host(#{$prefix}-table-header-expand-row) .#{$prefix}--table-expand,
 :host(#{$prefix}-table-header-expand-row) .#{$prefix}--table-column-checkbox,
 :host(#{$prefix}-table-row) ::slotted(#{$prefix}-table-cell),
@@ -60,47 +111,78 @@
 
 :host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-row),
 :host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-expand-row) {
-  height: $layout-04;
+  height: $spacing-09;
   display: table-row;
 }
 
 //
 // Table header cell
 //
-
-:host(#{$prefix}-table-header-row),
-:host(#{$prefix}-table-header-expand-row) {
+:host(#{$prefix}-table-header-row) {
   outline: none;
 
   ::slotted(#{$prefix}-table-header-cell),
   ::slotted(#{$prefix}-table-header-cell-skeleton) {
-    color: $text-01;
-    background-color: $ui-03;
+    color: $text-primary;
+    background-color: $layer-accent-01;
     text-align: left;
     display: table-cell;
     outline: none;
   }
 
-  ::slotted(#{$prefix}-table-header-cell:last-of-type),
-  ::slotted(#{$prefix}-table-header-cell-skeleton:last-of-type) {
-    position: relative;
-    width: auto;
-  }
-
   ::slotted(#{$prefix}-table-header-cell),
-  ::slotted(#{$prefix}-table-header-cell-skeleton),
   .#{$prefix}--table-expand,
   .#{$prefix}--table-column-checkbox {
-    padding-left: $spacing-04;
-    padding-right: $spacing-04;
+    padding-left: $spacing-05;
+    padding-right: $spacing-05;
+    text-align: left;
     vertical-align: middle;
   }
-}
 
-:host(#{$prefix}-table-header-row) {
   ::slotted(#{$prefix}-table-header-cell:first-of-type),
   ::slotted(#{$prefix}-table-header-cell-skeleton:first-of-type) {
     padding-left: $spacing-05;
+  }
+}
+
+:host(#{$prefix}-table-header-row:not([batch-expansion])) {
+  .#{$prefix}--table-expand__button {
+    display: none;
+  }
+}
+
+:host(#{$prefix}-table-header-row[selection-name]) {
+  .#{$prefix}--table-expand {
+    display: table-cell;
+  }
+}
+
+:host(#{$prefix}-table-header-row[sticky-header]) {
+  #{$prefix}-checkbox {
+    margin: 0;
+    padding-top: $spacing-04;
+    border-bottom: 1px solid $layer-active;
+  }
+}
+
+:host(#{$prefix}-table-header-row[expandable]),
+:host(#{$prefix}-table-row[expandable]),
+:host(#{$prefix}-table-header-row[selection-name]),
+:host(#{$prefix}-table-row[selection-name]) {
+  .#{$prefix}--table-expand {
+    height: $spacing-07;
+    width: $spacing-07;
+
+    padding: $spacing-03;
+    padding-right: 0;
+  }
+}
+
+:host(#{$prefix}-table-header-row[expanded]),
+:host(#{$prefix}-table-row[expanded]) {
+  transition: transform $duration-moderate-01 motion(standard, productive);
+  .#{$prefix}--table-expand__svg {
+    transform: rotate(270deg);
   }
 }
 
@@ -112,10 +194,17 @@
   ::slotted(#{$prefix}-table-row),
   ::slotted(#{$prefix}-table-expand-row) {
     border: none;
-    height: $layout-04;
+    height: $spacing-09;
     width: 100%;
     display: table-row;
     outline: none;
+  }
+}
+
+:host(#{$prefix}-table-body[sticky-header]) {
+  ::slotted(#{$prefix}-table-row),
+  ::slotted(#{$prefix}-table-expand-row) {
+    display: flex;
   }
 }
 
@@ -123,17 +212,51 @@
 // Table cell
 //
 
+:host(#{$prefix}-table-cell) {
+  border-top: 1px solid $layer-01;
+  border-bottom: 1px solid $border-subtle;
+  padding: 0 $spacing-05;
+
+  ::slotted(#{$prefix}-overflow-menu:hover) {
+    background-color: none;
+  }
+}
+
+:host(#{$prefix}-table-cell[overflow-menu-on-hover]) {
+  ::slotted(*) {
+    opacity: 0;
+  }
+}
+
+:host(#{$prefix}-table-cell-content) {
+  @include type-style('label-01');
+  display: block;
+}
+
+:host(#{$prefix}-table-row[sticky-header]),
+:host(#{$prefix}-table-expand-row[sticky-header]) {
+  ::slotted(#{$prefix}-table-cell),
+  ::slotted(#{$prefix}-table-cell-skeleton) {
+    width: 100%;
+    padding-top: rem(14px);
+  }
+}
+
+:host(#{$prefix}-table-row[size='xl']),
+:host(#{$prefix}-table-expand-row[size='xl']) {
+  ::slotted(#{$prefix}-table-cell),
+  ::slotted(#{$prefix}-table-cell-skeleton) {
+    vertical-align: top;
+  }
+}
+
 :host(#{$prefix}-table-row),
 :host(#{$prefix}-table-expand-row) {
   ::slotted(#{$prefix}-table-cell),
   ::slotted(#{$prefix}-table-cell-skeleton),
   .#{$prefix}--table-expand,
   .#{$prefix}--table-column-checkbox {
-    color: $text-02;
-    border-top: 1px solid $ui-01;
-    border-bottom: 1px solid $ui-03;
-    padding: rem(14px) $spacing-04;
-    padding-bottom: rem(13px);
+    color: $text-secondary;
     vertical-align: middle;
   }
 }
@@ -150,41 +273,145 @@
   }
 }
 
-:host(#{$prefix}-table-row[even]) {
+:host(#{$prefix}-table-row[expandable]),
+:host(#{$prefix}-table-row[selection-name]) {
+  .#{$prefix}--table-expand {
+    display: table-cell;
+    border-top: 1px solid $layer-01;
+    border-bottom: 1px solid $border-subtle;
+    padding-right: 0;
+    transition: transform $duration-moderate-01 motion(standard, productive);
+  }
+}
+
+:host(#{$prefix}-table-row[expandable][expanded]),
+:host(#{$prefix}-table-row[selection-name][expanded]) {
+  .#{$prefix}--table-expand__svg {
+    transform: rotate(270deg);
+  }
+}
+
+:host(#{$prefix}-table-row[expandable][expanded]),
+:host(#{$prefix}-table-row[selection-name][expandable][expanded]),
+:host(#{$prefix}-table-row[expandable][expanded][highlighted]),
+:host(#{$prefix}-table-row[selection-name][expandable][expanded][highlighted])
+  :host(#{$prefix}-table-row[expandable][expanded]:hover),
+:host(#{$prefix}-table-row[selection-name][expandable][expanded]:hover) {
+  .#{$prefix}--table-expand {
+    border-bottom-color: transparent;
+  }
+}
+
+:host(#{$prefix}-table-row[expandable][expanded][selected]),
+:host(#{$prefix}-table-row[selection-name][expandable][expanded][selected]) {
   ::slotted(#{$prefix}-table-cell),
-  ::slotted(#{$prefix}-table-cell-skeleton) {
-    border-bottom: 1px solid $ui-01;
+  .#{$prefix}--table-expand,
+  .#{$prefix}--table-column-checkbox {
+    background-color: $layer-selected;
+
+    border-top-color: $layer-active;
+    border-bottom-color: $border-subtle;
+  }
+}
+
+:host(#{$prefix}-table-row[expandable][expanded][selected][highlighted]),
+:host(
+    #{$prefix}-table-row[selection-name][expandable][expanded][selected][highlighted]
+  ),
+:host(#{$prefix}-table-row[expandable][expanded][selected]:hover),
+:host(
+    #{$prefix}-table-row[selection-name][expandable][expanded][selected]:hover
+  ) {
+  ::slotted(#{$prefix}-table-cell),
+  .#{$prefix}--table-expand,
+  .#{$prefix}--table-column-checkbox {
+    background-color: $layer-selected-hover;
+  }
+}
+
+:host(#{$prefix}-table-row[expandable][selected]),
+:host(#{$prefix}-table-row[selection-name][expandable][selected]) {
+  ::slotted(#{$prefix}-table-cell),
+  .#{$prefix}--table-expand,
+  .#{$prefix}--table-column-checkbox {
+    border-bottom-color: $border-subtle;
+  }
+}
+
+:host(#{$prefix}-table-row[expandable][highlighted]),
+:host(#{$prefix}-table-row[selection-name][expandable][highlighted]),
+:host(#{$prefix}-table-row[expandable]:hover),
+:host(#{$prefix}-table-row[selection-name][expandable]:hover) {
+  ::slotted(#{$prefix}-table-cell),
+  .#{$prefix}--table-expand,
+  .#{$prefix}--table-column-checkbox {
+    border-bottom-color: $border-subtle;
   }
 }
 
 :host(#{$prefix}-table-row[odd]) {
+  .#{$prefix}--table-expand,
+  .#{$prefix}--table-column-checkbox,
   ::slotted(#{$prefix}-table-cell),
   ::slotted(#{$prefix}-table-cell-skeleton) {
-    background-color: $data-table-zebra-color;
-    border-bottom: 1px solid $data-table-zebra-color;
-    border-top: 1px solid $data-table-zebra-color;
+    border-bottom: 1px solid $layer-01;
   }
 }
 
+:host(#{$prefix}-table-row[even]) {
+  .#{$prefix}--table-expand,
+  .#{$prefix}--table-column-checkbox,
+  ::slotted(#{$prefix}-table-cell),
+  ::slotted(#{$prefix}-table-cell-skeleton) {
+    background-color: $layer-accent-01;
+    border-bottom: 1px solid $layer-accent-01;
+    border-top: 1px solid $layer-accent-01;
+  }
+}
+
+:host(#{$prefix}-table-row[highlighted]),
 :host(#{$prefix}-table-row:hover),
 :host(#{$prefix}-table-expand-row:hover) {
   ::slotted(#{$prefix}-table-cell),
   ::slotted(#{$prefix}-table-cell-skeleton),
   .#{$prefix}--table-expand,
   .#{$prefix}--table-column-checkbox {
-    color: $text-01;
-    background-color: $hover-field;
-    border-bottom-color: $hover-field;
-    border-top-color: $hover-field;
+    color: $text-primary;
+    background-color: $background-hover;
+    border-bottom-color: $layer-hover-01;
+    border-top-color: $layer-hover-01;
   }
 }
 
+:host(#{$prefix}-table-row[highlighted]),
 :host(#{$prefix}-table-row[even]:hover),
 :host(#{$prefix}-table-row[odd]:hover) {
+  .#{$prefix}--table-expand,
+  .#{$prefix}--table-column-checkbox,
   ::slotted(#{$prefix}-table-cell),
   ::slotted(#{$prefix}-table-cell-skeleton) {
-    background-color: $hover-field;
-    border-bottom: 1px solid $hover-field;
-    border-top: 1px solid $hover-field;
+    background-color: $background-hover;
+    border-bottom: 1px solid $layer-hover-01;
+    border-top: 1px solid $layer-hover-01;
+  }
+}
+
+:host(#{$prefix}-table-header-title) {
+  @extend .#{$prefix}--data-table-header__title;
+
+  display: block;
+}
+
+:host(#{$prefix}-table-header-description) {
+  @extend .#{$prefix}--data-table-header__description;
+
+  display: block;
+
+  @include breakpoint(md) {
+    max-width: 50ch;
+  }
+
+  @include breakpoint(lg) {
+    max-width: 80ch;
   }
 }

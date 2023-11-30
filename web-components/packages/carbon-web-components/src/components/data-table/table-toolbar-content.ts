@@ -7,29 +7,46 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, property, LitElement } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
+import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import styles from './data-table.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * Table toolbar content.
  *
- * @element bx-table-toolbar-content
+ * @element cds-table-toolbar-content
  */
 @customElement(`${prefix}-table-toolbar-content`)
-class BXTableToolbarContent extends LitElement {
+class CDSTableToolbarContent extends LitElement {
   /**
    * `true` if this batch actions bar is active.
    */
   @property({ type: Boolean, reflect: true, attribute: 'has-batch-actions' })
   hasBatchActions = false;
 
+  /**
+   * Table toolbar contents size
+   */
+  @property({ reflect: true })
+  size;
+
   updated(changedProperties) {
     if (changedProperties.has('hasBatchActions')) {
       this.setAttribute('tabindex', `${this.hasBatchActions ? '-1' : ''}`);
+    }
+
+    if (changedProperties.has('size')) {
+      [...this.children].forEach((e) => {
+        const size =
+          this.size === 'xs'
+            ? 'sm'
+            : this.size === 'md' || this.size === 'xl'
+            ? 'lg'
+            : this.size;
+        e.setAttribute('size', size);
+      });
     }
   }
 
@@ -40,4 +57,4 @@ class BXTableToolbarContent extends LitElement {
   static styles = styles;
 }
 
-export default BXTableToolbarContent;
+export default CDSTableToolbarContent;

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,26 +7,42 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/components/content-switcher/content-switcher';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/components/content-switcher/content-switcher' as *;
+@use '@carbon/styles/scss/layout' as *;
+
+// https://github.com/carbon-design-system/carbon/issues/11408
+@include content-switcher;
 
 :host(#{$prefix}-content-switcher) {
   @extend .#{$prefix}--content-switcher;
+  @include emit-layout-tokens();
+}
+
+:host(#{$prefix}-content-switcher[icon]) {
+  @extend .#{$prefix}--content-switcher--icon-only;
 }
 
 :host(#{$prefix}-content-switcher[size='sm']) {
-  @extend .#{$prefix}--content-switcher--sm;
+  @extend .#{$prefix}--layout--size-sm;
 }
 
-:host(#{$prefix}-content-switcher[size='xl']) {
-  @extend .#{$prefix}--content-switcher--xl;
+:host(#{$prefix}-content-switcher[size='lg']) {
+  @extend .#{$prefix}--layout--size-lg;
 }
 
 :host(#{$prefix}-content-switcher-item) {
-  width: 100%;
   outline: none;
+  width: 100%;
 
   .#{$prefix}--content-switcher-btn {
     height: 100%;
+    width: 100%;
+    align-items: center;
+    padding: $spacing-03 var(--cds-layout-density-padding-inline-local);
 
     &:first-child,
     &:last-child {
@@ -38,9 +54,9 @@ $css--plex: true !default;
     &::before {
       content: '';
       display: block;
-      height: rem(16px);
+      height: $spacing-05;
       width: rem(1px);
-      background-color: $content-switcher-divider;
+      background-color: $border-subtle;
       position: absolute;
       z-index: 2;
       left: 0;
@@ -55,9 +71,24 @@ $css--plex: true !default;
     }
 
     &:disabled {
-      border-top-color: $ui-05;
-      border-bottom-color: $ui-05;
+      border-top-color: $border-inverse;
+      border-bottom-color: $border-inverse;
     }
+  }
+}
+
+:host(#{$prefix}-content-switcher-item)[icon] {
+  width: initial;
+
+  .#{$prefix}--content-switcher-btn {
+    padding-left: rem(11px);
+    padding-right: rem(11px);
+    height: $spacing-08;
+  }
+
+  .#{$prefix}--content-switcher__label {
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -68,26 +99,18 @@ $css--plex: true !default;
 
 :host(#{$prefix}-content-switcher-item:first-of-type)
   .#{$prefix}--content-switcher-btn {
-  border-top-left-radius: rem(4px);
-  border-bottom-left-radius: rem(4px);
-  border-left: rem(1px) solid $ui-05;
+  border-top-left-radius: $spacing-02;
+  border-bottom-left-radius: $spacing-02;
+  border-left: rem(1px) solid $border-inverse;
 
   &::before {
     content: none;
-  }
-
-  &.#{$prefix}--content-switcher--selected {
-    border-left: none;
   }
 }
 
 :host(#{$prefix}-content-switcher-item:last-of-type)
   .#{$prefix}--content-switcher-btn {
-  border-top-right-radius: rem(4px);
-  border-bottom-right-radius: rem(4px);
-  border-right: rem(1px) solid $ui-05;
-
-  &.#{$prefix}--content-switcher--selected {
-    border-right: none;
-  }
+  border-top-right-radius: $spacing-02;
+  border-bottom-right-radius: $spacing-02;
+  border-right: rem(1px) solid $border-inverse;
 }

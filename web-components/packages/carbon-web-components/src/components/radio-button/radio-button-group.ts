@@ -7,29 +7,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, property, LitElement } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
+import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
+import { prefix } from '../../globals/settings';
 import FormMixin from '../../globals/mixins/form';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import { find, forEach } from '../../globals/internal/collection-helpers';
 import { RADIO_BUTTON_LABEL_POSITION, RADIO_BUTTON_ORIENTATION } from './defs';
-import BXRadioButton from './radio-button';
+import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
+import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16';
+import CDSRadioButton from './radio-button';
 import styles from './radio-button.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { RADIO_BUTTON_ORIENTATION };
 
-const { prefix } = settings;
-
 /**
  * Radio button group.
  *
- * @element bx-radio-button-group
- * @fires bx-radio-button-group-changed - The custom event fired after this radio button group changes its selected item.
+ * @element cds-radio-button-group
+ * @fires cds-radio-button-group-changed - The custom event fired after this radio button group changes its selected item.
  */
 @customElement(`${prefix}-radio-button-group`)
-class BXRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
+class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
   /**
    * Handles user-initiated change in selected radio button.
    */
@@ -37,15 +39,15 @@ class BXRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleAfterChangeRadioButton = () => {
     const { selectorRadioButton } = this
-      .constructor as typeof BXRadioButtonGroup;
+      .constructor as typeof CDSRadioButtonGroup;
     const selected = find(
       this.querySelectorAll(selectorRadioButton),
-      (elem) => (elem as BXRadioButton).checked
+      (elem) => (elem as CDSRadioButton).checked
     );
     const oldValue = this.value;
     this.value = selected && selected.value;
     if (oldValue !== this.value) {
-      const { eventChange } = this.constructor as typeof BXRadioButtonGroup;
+      const { eventChange } = this.constructor as typeof CDSRadioButtonGroup;
       this.dispatchEvent(
         new CustomEvent(eventChange, {
           bubbles: true,
@@ -71,7 +73,13 @@ class BXRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
   }
 
   /**
-   * `true` if the check box should be disabled.
+   * The `value` attribute for the `<input>` for selection.
+   */
+  @property()
+  defaultSelected!: string;
+
+  /**
+   * `true` if the radio button group should be disabled.
    */
   @property({ type: Boolean, reflect: true })
   disabled = false;
@@ -81,6 +89,42 @@ class BXRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
    */
   @property({ reflect: true, attribute: 'label-position' })
   labelPosition = RADIO_BUTTON_LABEL_POSITION.RIGHT;
+
+  /**
+   * The label position.
+   */
+  @property({ reflect: true, attribute: 'legend-text' })
+  legendText = '';
+
+  /**
+   * The helper text.
+   */
+  @property({ attribute: 'helper-text' })
+  helperText;
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  @property({ type: Boolean, reflect: true })
+  warn = false;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  @property({ attribute: 'warn-text' })
+  warnText = '';
+
+  /**
+   * Specify if the currently value is invalid.
+   */
+  @property({ type: Boolean, reflect: true })
+  invalid = false;
+
+  /**
+   * Message which is displayed if the value is invalid.
+   */
+  @property({ attribute: 'invalid-text' })
+  invalidText = '';
 
   /**
    * The `name` attribute for the `<input>` for selection.
@@ -95,6 +139,12 @@ class BXRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
   orientation = RADIO_BUTTON_ORIENTATION.HORIZONTAL;
 
   /**
+   * Controls the readonly state of the radio button group.
+   */
+  @property({ type: Boolean, reflect: true })
+  readOnly = false;
+
+  /**
    * The `value` attribute for the `<input>` for selection.
    */
   @property()
@@ -102,27 +152,89 @@ class BXRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
 
   updated(changedProperties) {
     const { selectorRadioButton } = this
-      .constructor as typeof BXRadioButtonGroup;
-    ['disabled', 'labelPosition', 'orientation', 'name'].forEach((name) => {
-      if (changedProperties.has(name)) {
-        const { [name as keyof BXRadioButtonGroup]: value } = this;
-        // Propagate the property to descendants until `:host-context()` gets supported in all major browsers
-        forEach(this.querySelectorAll(selectorRadioButton), (elem) => {
-          (elem as BXRadioButton)[name] = value;
-        });
+      .constructor as typeof CDSRadioButtonGroup;
+    ['disabled', 'labelPosition', 'orientation', 'readOnly', 'name'].forEach(
+      (name) => {
+        if (changedProperties.has(name)) {
+          const { [name as keyof CDSRadioButtonGroup]: value } = this;
+          // Propagate the property to descendants until `:host-context()` gets supported in all major browsers
+          forEach(this.querySelectorAll(selectorRadioButton), (elem) => {
+            (elem as CDSRadioButton)[name] = value;
+          });
+        }
       }
-    });
+    );
     if (changedProperties.has('value')) {
       const { value } = this;
       forEach(this.querySelectorAll(selectorRadioButton), (elem) => {
-        (elem as BXRadioButton).checked =
-          value === (elem as BXRadioButton).value;
+        (elem as CDSRadioButton).checked =
+          value === (elem as CDSRadioButton).value;
+      });
+    }
+    if (changedProperties.has('invalid')) {
+      forEach(this.querySelectorAll(selectorRadioButton), (elem) => {
+        (elem as CDSRadioButton).invalid = this.invalid;
       });
     }
   }
 
   render() {
-    return html` <slot></slot> `;
+    const {
+      readOnly,
+      invalid,
+      invalidText,
+      warn,
+      warnText,
+      disabled,
+      orientation,
+      legendText,
+      helperText,
+    } = this;
+
+    const showWarning = !readOnly && !invalid && warn;
+    const showHelper = !invalid && !disabled && !warn;
+
+    const invalidIcon = WarningFilled16({
+      class: `${prefix}--radio-button__invalid-icon`,
+    });
+
+    const warnIcon = WarningAltFilled16({
+      class: `${prefix}--radio-button__invalid-icon ${prefix}--radio-button__invalid-icon--warning`,
+    });
+
+    const helper = helperText
+      ? html`<div class="${prefix}--form__helper-text">${helperText}</div>`
+      : null;
+
+    const fieldsetClasses = classMap({
+      [`${prefix}--radio-button-group`]: true,
+      [`${prefix}--radio-button-group--readonly`]: readOnly,
+      [`${prefix}--radio-button-group--${orientation}`]:
+        orientation === 'vertical',
+    });
+
+    return html` <fieldset
+        class="${fieldsetClasses}"
+        ?disabled="${disabled}"
+        aria-readonly="${readOnly}">
+        ${legendText
+          ? html` <legend class="${prefix}--label">${legendText}</legend>`
+          : ``}
+        <slot></slot>
+      </fieldset>
+      <div class="${prefix}--radio-button__validation-msg">
+        ${!readOnly && invalid
+          ? html`
+              ${invalidIcon}
+              <div class="${prefix}--form-requirement">${invalidText}</div>
+            `
+          : null}
+        ${showWarning
+          ? html`${warnIcon}
+              <div class="${prefix}--form-requirement">${warnText}</div>`
+          : null}
+      </div>
+      ${showHelper ? helper : null}`;
   }
 
   /**
@@ -149,4 +261,4 @@ class BXRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
   static styles = styles;
 }
 
-export default BXRadioButtonGroup;
+export default CDSRadioButtonGroup;

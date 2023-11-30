@@ -7,18 +7,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, LitElement } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
+import { LitElement, html } from 'lit';
+import { prefix } from '../../globals/settings';
 import styles from './structured-list.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * Skeleton of structured list header cell.
  */
 @customElement(`${prefix}-structured-list-header-cell-skeleton`)
-class BXStructuredListHeaderCellSkeleton extends LitElement {
+class CDSStructuredListHeaderCellSkeleton extends LitElement {
   render() {
     return html` <span></span> `;
   }
@@ -26,4 +24,4 @@ class BXStructuredListHeaderCellSkeleton extends LitElement {
   static styles = styles;
 }
 
-export default BXStructuredListHeaderCellSkeleton;
+export default CDSStructuredListHeaderCellSkeleton;

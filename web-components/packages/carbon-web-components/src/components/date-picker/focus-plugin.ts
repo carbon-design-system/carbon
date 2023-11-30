@@ -9,9 +9,9 @@
 
 import { Instance as FlatpickrInstance } from 'flatpickr/dist/types/instance';
 import { Plugin } from 'flatpickr/dist/types/options';
-import on from 'carbon-components/es/globals/js/misc/on';
+import on from '../../globals/mixins/on';
 import Handle from '../../globals/internal/handle';
-import BXDatePickerInput from './date-picker-input';
+import CDSDatePickerInput from './date-picker-input';
 
 /**
  * The configuration for the Flatpickr plugin to set CSS classes specific to this design system.
@@ -20,12 +20,12 @@ export interface DatePickerFocusPluginConfig {
   /**
    * The input box to enter starting date.
    */
-  inputFrom: BXDatePickerInput;
+  inputFrom: CDSDatePickerInput;
 
   /**
    * The input box to enter end date.
    */
-  inputTo?: BXDatePickerInput;
+  inputTo?: CDSDatePickerInput;
 }
 
 /**
@@ -36,27 +36,27 @@ export interface ExtendedFlatpickrInstanceFocusPlugin
   /**
    * The handle for `blur` event handler in calendar dropdown.
    */
-  _hBXCEDatePickerFocusPluginBlur?: Handle | null;
+  _hCDSCEDatePickerFocusPluginBlur?: Handle | null;
 
   /**
    * The handle for `keydown` event handler in the `<input>` for the starting date.
    */
-  _hBXCEDatePickerFocusPluginKeydownFrom?: Handle | null;
+  _hCDSCEDatePickerFocusPluginKeydownFrom?: Handle | null;
 
   /**
    * The handle for `keydown` event handler in the `<input>` for the end date.
    */
-  _hBXCEDatePickerFocusPluginKeydownTo?: Handle | null;
+  _hCDSCEDatePickerFocusPluginKeydownTo?: Handle | null;
 
   /**
    * The handle for `focus` event handler in the `<input>` for the starting date.
    */
-  _hBXCEDatePickerFocusPluginFocusFrom?: Handle | null;
+  _hCDSCEDatePickerFocusPluginFocusFrom?: Handle | null;
 
   /**
    * The handle for `focus` event handler in the `<input>` for the end date.
    */
-  _hBXCEDatePickerFocusPluginFocusTo?: Handle | null;
+  _hCDSCEDatePickerFocusPluginFocusTo?: Handle | null;
 
   /**
    * Lastly focused `<input>` for starting/end date.
@@ -141,25 +141,25 @@ export default (config: DatePickerFocusPluginConfig): Plugin =>
      * Releases event listeners used in this Flatpickr plugin.
      */
     const release = () => {
-      if (fp._hBXCEDatePickerFocusPluginBlur) {
-        fp._hBXCEDatePickerFocusPluginBlur =
-          fp._hBXCEDatePickerFocusPluginBlur.release();
+      if (fp._hCDSCEDatePickerFocusPluginBlur) {
+        fp._hCDSCEDatePickerFocusPluginBlur =
+          fp._hCDSCEDatePickerFocusPluginBlur.release();
       }
-      if (fp._hBXCEDatePickerFocusPluginFocusTo) {
-        fp._hBXCEDatePickerFocusPluginFocusTo =
-          fp._hBXCEDatePickerFocusPluginFocusTo.release();
+      if (fp._hCDSCEDatePickerFocusPluginFocusTo) {
+        fp._hCDSCEDatePickerFocusPluginFocusTo =
+          fp._hCDSCEDatePickerFocusPluginFocusTo.release();
       }
-      if (fp._hBXCEDatePickerFocusPluginFocusFrom) {
-        fp._hBXCEDatePickerFocusPluginFocusFrom =
-          fp._hBXCEDatePickerFocusPluginFocusFrom.release();
+      if (fp._hCDSCEDatePickerFocusPluginFocusFrom) {
+        fp._hCDSCEDatePickerFocusPluginFocusFrom =
+          fp._hCDSCEDatePickerFocusPluginFocusFrom.release();
       }
-      if (fp._hBXCEDatePickerFocusPluginKeydownTo) {
-        fp._hBXCEDatePickerFocusPluginKeydownTo =
-          fp._hBXCEDatePickerFocusPluginKeydownTo.release();
+      if (fp._hCDSCEDatePickerFocusPluginKeydownTo) {
+        fp._hCDSCEDatePickerFocusPluginKeydownTo =
+          fp._hCDSCEDatePickerFocusPluginKeydownTo.release();
       }
-      if (fp._hBXCEDatePickerFocusPluginKeydownFrom) {
-        fp._hBXCEDatePickerFocusPluginKeydownFrom =
-          fp._hBXCEDatePickerFocusPluginKeydownFrom.release();
+      if (fp._hCDSCEDatePickerFocusPluginKeydownFrom) {
+        fp._hCDSCEDatePickerFocusPluginKeydownFrom =
+          fp._hCDSCEDatePickerFocusPluginKeydownFrom.release();
       }
     };
 
@@ -169,31 +169,31 @@ export default (config: DatePickerFocusPluginConfig): Plugin =>
     const init = () => {
       release();
       const { inputFrom, inputTo } = config;
-      fp._hBXCEDatePickerFocusPluginBlur = on(
+      fp._hCDSCEDatePickerFocusPluginBlur = on(
         fp.calendarContainer,
         'blur',
         handleBlur,
         true
       );
-      fp._hBXCEDatePickerFocusPluginKeydownFrom = on(
+      fp._hCDSCEDatePickerFocusPluginKeydownFrom = on(
         inputFrom,
         'keydown',
         handleInputKeydown
       );
       if (inputTo) {
-        fp._hBXCEDatePickerFocusPluginKeydownTo = on(
+        fp._hCDSCEDatePickerFocusPluginKeydownTo = on(
           inputTo,
           'keydown',
           handleInputKeydown
         );
       }
-      fp._hBXCEDatePickerFocusPluginFocusFrom = on(
+      fp._hCDSCEDatePickerFocusPluginFocusFrom = on(
         inputFrom,
         'focus',
         handleInputFocus
       );
       if (inputTo) {
-        fp._hBXCEDatePickerFocusPluginFocusTo = on(
+        fp._hCDSCEDatePickerFocusPluginFocusTo = on(
           inputTo,
           'focus',
           handleInputFocus

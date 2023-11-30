@@ -4,10 +4,10 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Notification
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/notification)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/notification)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/notification)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/notification)
 
 Notifications are messages that communicate information to the user.
 
@@ -21,18 +21,44 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/notification/index.js';
 ```
 
+### SCSS (must include with JS import)
+
+```css
+@use '@carbon/styles/scss/components/notification';
+```
+
 <Description markdown={`${cdnJs({ components: ['notification'] })}`} />
 <Description markdown={`${cdnCss()}`} />
 
 ### HTML
 
 ```html
-<bx-inline-notification
+<cds-inline-notification
   style="min-width: 30rem; margin-bottom: .5rem"
   title="Notification title"
-  subtitle="Subtitle text goes here."
->
-</bx-inline-notification>
+  subtitle="Subtitle text goes here.">
+</cds-inline-notification>
+```
+
+## Actionable notification
+
+Actionable notifications allow for interactive elements within a notification
+styled like an inline or toast notification. Actionable notifications, since
+they require user interaction, take focus when triggered and can be highly
+disruptive to screen readers and keyboard users. With actionable notifications,
+only one action is allowed per notification. This action frequently takes users
+to a flow or page related to the message, where they can resolve the
+notification.
+
+```html
+<cds-actionable-notification
+  kind="error"
+  title="Notification title"
+  subtitle="Subtitle text goes here">
+  <cds-actionable-notification-button slot="action"
+    >Action</cds-actionable-notification-button
+  >
+</cds-actionable-notification>
 ```
 
 ## Inline notification
@@ -41,12 +67,11 @@ Inline notifications show up in task flows, to notify users of the status of an
 action. They usually appear at the top of the primary content area.
 
 ```html
-<bx-inline-notification
+<cds-inline-notification
   style="min-width: 30rem; margin-bottom: .5rem"
   title="Notification title"
-  subtitle="Subtitle text goes here."
->
-</bx-inline-notification>
+  subtitle="Subtitle text goes here.">
+</cds-inline-notification>
 ```
 
 ## Toast notification
@@ -56,42 +81,33 @@ messages; they usually appear at the bottom of the screen and disappear after a
 few seconds.
 
 ```html
-<bx-toast-notification
+<cds-toast-notification
   style="min-width: 30rem; margin-bottom: 0.5rem;"
   title="Notification title"
-  subtitle="Subtitle text goes here."
->
-</bx-toast-notification>
+  subtitle="Subtitle text goes here.">
+</cds-toast-notification>
 ```
 
-## Themeing
-
-In order to get the correct token value for the notification background, you will need to apply the following in you `scss` to your themed class. For example:
-
-```css
-@import 'carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/themes/mixins';
-@import 'carbon-components/scss/globals/scss/component-tokens';
-@import 'carbon-components/src/components/notification/inline-notification';
-@import 'carbon-components/src/components/notification/toast-notification';
-.dds-theme-zone-g90 {
-  @include carbon--theme($carbon--theme--g90, true) {
-    @include emit-component-tokens($notification-colors);
-  }
-}
-```
-
-## `<bx-inline-notification>` attributes, properties and events
+## `<cds-actionable-notification>` attributes, properties and events
 
 Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<bx-inline-notification open>`) and `false` means not setting the attribute
-(e.g. `<bx-inline-notification>` without `open` attribute).
+`<cds-actionable-notification open>`) and `false` means not setting the
+attribute (e.g. `<cds-actionable-notification>` without `open` attribute).
 
-<Props of="bx-inline-notification" />
+<Props of="cds-actionable-notification" />
 
-## `<bx-toast-notification>` attributes, properties and events
+## `<cds-inline-notification>` attributes, properties and events
 
 Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<bx-toast-notification open>`) and `false` means not setting the attribute
-(e.g. `<bx-toast-notification>` without `open` attribute).
+`<cds-inline-notification open>`) and `false` means not setting the attribute
+(e.g. `<cds-inline-notification>` without `open` attribute).
 
-<Props of="bx-toast-notification" />
+<Props of="cds-inline-notification" />
+
+## `<cds-toast-notification>` attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-toast-notification open>`) and `false` means not setting the attribute
+(e.g. `<cds-toast-notification>` without `open` attribute).
+
+<Props of="cds-toast-notification" />

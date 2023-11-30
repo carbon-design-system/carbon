@@ -1,23 +1,23 @@
 # `file-uploader`
 
-## `bx-file-uploader`
+## `cds-file-uploader`
 
 ##   `Misc attributes`
 
 ####     `should render with minimum attributes`
 
 ```
-<strong class="bx--file--label">
-  <slot name="label-text">
+<p class="cds--file--label">
+  <slot name="label-title">
   </slot>
-</strong>
-<p class="bx--label-description">
-  <slot name="helperText-text">
+</p>
+<p class="cds--label-description">
+  <slot name="label-description">
   </slot>
 </p>
 <slot name="drop-container">
 </slot>
-<div class="bx--file-container">
+<div class="cds--file-container">
   <slot>
   </slot>
 </div>
@@ -27,136 +27,51 @@
 ####     `should render with various attributes`
 
 ```
-<strong class="bx--file--label">
-  <slot name="label-text">
-    label-text-foo
+<p class="cds--file--label">
+  <slot name="label-title">
   </slot>
-</strong>
-<p class="bx--label-description">
-  <slot name="helperText-text">
-    helper-text-foo
+</p>
+<p class="cds--label-description">
+  <slot name="label-description">
   </slot>
 </p>
 <slot name="drop-container">
 </slot>
-<div class="bx--file-container">
+<div class="cds--file-container">
   <slot>
   </slot>
 </div>
 
 ```
 
-## `bx-file-drop-container`
+## `cds-file-uploader-item`
 
 ##   `Misc attributes`
 
 ####     `should render with minimum attributes`
 
 ```
-<label
-  class="bx--file-browse-btn"
-  for="file"
-  tabindex="0"
->
-  <div
-    class="bx--file__drop-container"
-    role="button"
-  >
-    <slot>
-    </slot>
-    <input
-      class="bx--file-input"
-      id="file"
-      tabindex="-1"
-      type="file"
-    >
-  </div>
-</label>
-
-```
-
-####     `should render with various attributes`
-
-```
-<label
-  class="bx--file-browse-btn bx--file-browse-btn--disabled"
-  for="file"
-  tabindex="0"
->
-  <div
-    class="bx--file__drop-container"
-    role="button"
-  >
-    <slot>
-    </slot>
-    <input
-      accept="image/png"
-      class="bx--file-input"
-      disabled=""
-      id="file"
-      multiple=""
-      tabindex="-1"
-      type="file"
-    >
-  </div>
-</label>
-
-```
-
-##   `Handling events`
-
-####     `Should handle drag-over`
-
-```
-<label
-  class="bx--file-browse-btn"
-  for="file"
-  tabindex="0"
->
-  <div
-    class="bx--file__drop-container bx--file__drop-container--drag-over"
-    role="button"
-  >
-    <slot>
-    </slot>
-    <input
-      accept="image/png"
-      class="bx--file-input"
-      id="file"
-      tabindex="-1"
-      type="file"
-    >
-  </div>
-</label>
-
-```
-
-## `bx-file-uploader-item`
-
-##   `Misc attributes`
-
-####     `should render with minimum attributes`
-
-```
-<p class="bx--file-filename">
+<p class="cds--file-filename">
   <slot>
   </slot>
 </p>
-<span class="bx--file__state-container">
-  <bx-loading
-    assistive-text="Uploading"
+<span class="cds--file__state-container">
+  <cds-loading
+    assistive-text="Delete this file"
     type="small"
   >
-  </bx-loading>
+  </cds-loading>
 </span>
-<div class="bx--form-requirement">
-  <div class="bx--form-requirement__title">
-    <slot name="validity-message">
-    </slot>
+<div
+  class="cds--form-requirement"
+  hidden=""
+>
+  <div class="cds--form-requirement__title">
   </div>
-  <p class="bx--form-requirement__supplement">
-    <slot name="validity-message-supplement">
-    </slot>
+  <p
+    class="cds--form-requirement__supplement"
+    hidden=""
+  >
   </p>
 </div>
 
@@ -165,26 +80,24 @@
 ####     `should render with various attributes`
 
 ```
-<p class="bx--file-filename">
+<p class="cds--file-filename">
   <slot>
   </slot>
 </p>
-<span class="bx--file__state-container">
-  <bx-loading
-    assistive-text="uploading-assistive-text-foo"
+<span class="cds--file__state-container">
+  <cds-loading
+    assistive-text="Delete this file"
     type="small"
   >
-  </bx-loading>
+  </cds-loading>
 </span>
-<div class="bx--form-requirement">
-  <div class="bx--form-requirement__title">
-    <slot name="validity-message">
-      validity-message-foo
-    </slot>
+<div class="cds--form-requirement">
+  <div class="cds--form-requirement__title">
   </div>
-  <p class="bx--form-requirement__supplement">
-    <slot name="validity-message-supplement">
-    </slot>
+  <p
+    class="cds--form-requirement__supplement"
+    hidden=""
+  >
   </p>
 </div>
 
@@ -193,20 +106,22 @@
 ####     `should render uploaded state`
 
 ```
-<p class="bx--file-filename">
+<p class="cds--file-filename">
   <slot>
   </slot>
 </p>
-<span class="bx--file__state-container">
+<span class="cds--file__state-container">
 </span>
-<div class="bx--form-requirement">
-  <div class="bx--form-requirement__title">
-    <slot name="validity-message">
-    </slot>
+<div
+  class="cds--form-requirement"
+  hidden=""
+>
+  <div class="cds--form-requirement__title">
   </div>
-  <p class="bx--form-requirement__supplement">
-    <slot name="validity-message-supplement">
-    </slot>
+  <p
+    class="cds--form-requirement__supplement"
+    hidden=""
+  >
   </p>
 </div>
 
@@ -215,26 +130,28 @@
 ####     `should render editing state`
 
 ```
-<p class="bx--file-filename">
+<p class="cds--file-filename">
   <slot>
   </slot>
 </p>
-<span class="bx--file__state-container">
+<span class="cds--file__state-container">
   <button
     aria-label="Delete this file"
-    class="bx--file-close"
+    class="cds--file-close"
     type="button"
   >
   </button>
 </span>
-<div class="bx--form-requirement">
-  <div class="bx--form-requirement__title">
-    <slot name="validity-message">
-    </slot>
+<div
+  class="cds--form-requirement"
+  hidden=""
+>
+  <div class="cds--form-requirement__title">
   </div>
-  <p class="bx--form-requirement__supplement">
-    <slot name="validity-message-supplement">
-    </slot>
+  <p
+    class="cds--form-requirement__supplement"
+    hidden=""
+  >
   </p>
 </div>
 
@@ -243,48 +160,130 @@
 ####     `should render editing state with various attributes`
 
 ```
-<p class="bx--file-filename">
+<p class="cds--file-filename">
   <slot>
   </slot>
 </p>
-<span class="bx--file__state-container">
+<span class="cds--file__state-container">
   <button
-    aria-label="delete-assistive-text-foo"
-    class="bx--file-close"
+    aria-label="Delete this file"
+    class="cds--file-close"
     type="button"
   >
   </button>
 </span>
-<div class="bx--form-requirement">
-  <div class="bx--form-requirement__title">
-    <slot name="validity-message">
-      validity-message-foo
-    </slot>
+<div class="cds--form-requirement">
+  <div class="cds--form-requirement__title">
   </div>
-  <p class="bx--form-requirement__supplement">
-    <slot name="validity-message-supplement">
-    </slot>
+  <p
+    class="cds--form-requirement__supplement"
+    hidden=""
+  >
   </p>
 </div>
 
 ```
+
+## `cds-file-drop-container`
+
+##   `Misc attributes`
+
+####     `should render with minimum attributes`
+
+```
+<label
+  class="cds--file-browse-btn"
+  for="file"
+  tabindex="0"
+>
+  <div
+    class="cds--file__drop-container"
+    role="button"
+  >
+    <slot>
+    </slot>
+    <input
+      class="cds--file-input"
+      id="file"
+      tabindex="-1"
+      type="file"
+    >
+  </div>
+</label>
+```
+
+####     `should render with various attributes`
+
+```
+<label
+  class="cds--file-browse-btn cds--file-browse-btn--disabled"
+  for="file"
+  tabindex="0"
+>
+  <div
+    class="cds--file__drop-container"
+    role="button"
+  >
+    <slot>
+    </slot>
+    <input
+      accept="image/png"
+      class="cds--file-input"
+      disabled=""
+      id="file"
+      multiple=""
+      tabindex="-1"
+      type="file"
+    >
+  </div>
+</label>
+```
+
+##   `Handling events`
+
+####     `Should handle drag-over`
+
+```
+<label
+  class="cds--file-browse-btn"
+  for="file"
+  tabindex="0"
+>
+  <div
+    class="cds--file__drop-container cds--file__drop-container--drag-over"
+    role="button"
+  >
+    <slot>
+    </slot>
+    <input
+      accept="image/png"
+      class="cds--file-input"
+      id="file"
+      tabindex="-1"
+      type="file"
+    >
+  </div>
+</label>
+```
+
+## `cds-file-uploader-shell`
 
 ## `Misc attributes`
 
 ####   `should render with minimum attributes`
 
 ```
-<strong class="bx--file--label">
+<strong class="cds--file--label">
   <slot name="label-text">
   </slot>
 </strong>
-<p class="bx--label-description">
+<p class="cds--label-description">
   <slot name="helperText-text">
   </slot>
 </p>
 <slot name="drop-container">
 </slot>
-<div class="bx--file-container">
+<div class="cds--file-container">
   <slot>
   </slot>
 </div>
@@ -293,25 +292,25 @@
 ####   `should render with various attributes`
 
 ```
-<strong class="bx--file--label">
+<strong class="cds--file--label">
   <slot name="label-text">
     label-text-foo
   </slot>
 </strong>
-<p class="bx--label-description">
+<p class="cds--label-description">
   <slot name="helperText-text">
     helper-text-foo
   </slot>
 </p>
 <slot name="drop-container">
 </slot>
-<div class="bx--file-container">
+<div class="cds--file-container">
   <slot>
   </slot>
 </div>
 ```
 
-## `Handling events`
+##   `Handling events`
 
 ####   `Should handle drag-over`
 

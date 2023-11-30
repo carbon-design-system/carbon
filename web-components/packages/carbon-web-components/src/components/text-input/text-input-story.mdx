@@ -1,0 +1,66 @@
+import { Props, Description } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+
+# Text Input
+
+> 💡 Check our
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/input)
+> example implementation.
+
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/input)
+
+Text fields enable the user to interact with and input data. A single line field
+is used when the input anticipated by the user is a single line of text as
+opposed to a paragraph.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/text-input/index.js';
+```
+
+<Description markdown={`${cdnJs({ components: ['text-input'] })}`} />
+<Description markdown={`${cdnCss()}`} />
+
+### HTML
+
+```html
+<cds-text-input
+  label="Text input label"
+  helper-text="Optional help text"
+  invalid-text="Error message">
+</cds-text-input>
+```
+
+## Form item
+
+If the input is part of a form, make sure to import and wrap the input with
+`<cds-form-item>`
+
+```javascript
+import '@carbon/web-components/es/components/form/index.js';
+```
+
+<Description markdown={`${cdnJs({ components: ['form'] })}`} />
+
+```html
+<cds-form-item>
+  <cds-text-input
+    label="Text input label"
+    helper-text="Optional help text"
+    invalid-text="Error message">
+  </cds-text-input>
+</cds-form-item>
+```
+
+## `<cds-text-input>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-text-input required>`) and `false` means not setting the attribute (e.g.
+`<cds-text-input>` without `required` attribute).
+
+<Props of="cds-text-input" />

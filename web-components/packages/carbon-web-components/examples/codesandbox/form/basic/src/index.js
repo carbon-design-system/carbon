@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,7 +9,7 @@
 
 import '@carbon/web-components/es/components/button/button.js';
 import '@carbon/web-components/es/components/form/form-item.js';
-import '@carbon/web-components/es/components/input/input.js';
+import '@carbon/web-components/es/components/text-input/text-input.js';
 import '@carbon/web-components/es/components/notification/inline-notification.js';
 
 const submit = async (formData) => {

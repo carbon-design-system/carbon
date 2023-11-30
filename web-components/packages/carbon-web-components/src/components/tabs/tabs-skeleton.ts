@@ -7,18 +7,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, LitElement } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
+import { LitElement, html } from 'lit';
+import { prefix } from '../../globals/settings';
 import styles from './tabs.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * Skeleton of tabs.
  */
 @customElement(`${prefix}-tabs-skeleton`)
-class BXTabsSkeleton extends LitElement {
+export default class CDSTabsSkeleton extends LitElement {
   render() {
     return html`
       <div class="${prefix}--tabs-trigger">
@@ -32,5 +30,3 @@ class BXTabsSkeleton extends LitElement {
 
   static styles = styles;
 }
-
-export default BXTabsSkeleton;

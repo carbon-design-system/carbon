@@ -1,29 +1,31 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { number } from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import './copy-button';
 import storyDocs from './copy-button-story.mdx';
+import { prefix } from '../../globals/settings';
 
 export const Default = (args) => {
-  const { buttonAssistiveText, feedbackText, feedbackTimeout, onClick } =
-    args?.['bx-copy-button'] ?? {};
+  const { iconDescription, feedbackText, feedbackTimeout, onClick } =
+    args?.[`${prefix}-copy-button`] ?? {};
   return html`
-    <bx-copy-button
-      button-assistive-text="${ifNonNull(buttonAssistiveText)}"
-      feedback-text="${ifNonNull(feedbackText)}"
-      feedback-timeout="${ifNonNull(feedbackTimeout)}"
-      @click="${onClick}"></bx-copy-button>
+    <cds-copy-button
+      feedback="${ifDefined(feedbackText)}"
+      feedback-timeout="${ifDefined(feedbackTimeout)}"
+      @click="${onClick}">
+      ${iconDescription}
+    </cds-copy-button>
   `;
 };
 
@@ -34,12 +36,12 @@ export default {
   parameters: {
     ...storyDocs.parameters,
     knobs: {
-      'bx-copy-button': () => ({
-        buttonAssistiveText: textNullable(
-          'Assistive text for the button (button-assistive-text)',
-          ''
+      [`${prefix}-copy-button`]: () => ({
+        iconDescription: textNullable(
+          'Icon description (slotted)',
+          'Copy to clipboard'
         ),
-        feedbackText: textNullable('Feedback text (feedback-text)', ''),
+        feedbackText: textNullable('Feedback text (feedback)', 'Copied!'),
         feedbackTimeout: number('Feedback timeout (feedback-timeout)', 2000),
         onClick: action('click'),
       }),

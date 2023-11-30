@@ -7,22 +7,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
+import { html } from 'lit';
+import { prefix } from '../../globals/settings';
 import OverflowMenuHorizontal16 from '@carbon/icons/lib/overflow-menu--horizontal/16';
-import BXOverflowMenu from '../overflow-menu/overflow-menu';
+import CDSOverflowMenu from '../overflow-menu/overflow-menu';
 import styles from './breadcrumb.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * Overflow menu in breadcrumb.
  *
- * @element bx-breadcrumb-overflow-menu
+ * @element cds-breadcrumb-overflow-menu
  */
 @customElement(`${prefix}-breadcrumb-overflow-menu`)
-class BXBreadcrumbOverflowMenu extends BXOverflowMenu {
+class CDSBreadcrumbOverflowMenu extends CDSOverflowMenu {
   render() {
     return html`
       <slot name="icon">
@@ -36,4 +34,4 @@ class BXBreadcrumbOverflowMenu extends BXOverflowMenu {
   static styles = styles;
 }
 
-export default BXBreadcrumbOverflowMenu;
+export default CDSBreadcrumbOverflowMenu;

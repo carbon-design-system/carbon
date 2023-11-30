@@ -7,23 +7,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
-import { classMap } from 'lit-html/directives/class-map';
-import { property } from 'lit-element';
-import BXLink from '../link/link';
+import { classMap } from 'lit/directives/class-map.js';
+import { property } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
+import CDSLink from '../link/link';
 import { TILE_COLOR_SCHEME } from './defs';
 import styles from './tile.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
-const { prefix } = settings;
-
 /**
  * Clickable tile.
  *
- * @element bx-clickable-tile
+ * @element cds-clickable-tile
  */
 @customElement(`${prefix}-clickable-tile`)
-class BXClickableTile extends BXLink {
+class CDSClickableTile extends CDSLink {
   protected get _classes() {
     const { colorScheme, disabled } = this;
     return classMap({
@@ -50,4 +48,4 @@ class BXClickableTile extends BXLink {
   static styles = styles;
 }
 
-export default BXClickableTile;
+export default CDSClickableTile;

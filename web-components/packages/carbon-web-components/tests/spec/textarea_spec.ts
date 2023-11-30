@@ -1,19 +1,17 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, render } from 'lit-html';
+import { html, render } from 'lit';
 import EventManager from '../utils/event-manager';
 
-import BXTextarea, {
-  TEXTAREA_COLOR_SCHEME,
-} from '../../src/components/textarea/textarea';
-import { Default } from '../../src/components/textarea/textarea-story';
+import CDSTextarea from '../../src/components/textarea/textarea';
+import { Playground } from '../../src/components/textarea/textarea-story';
 
 /**
  * @param formData A `FormData` instance.
@@ -29,11 +27,11 @@ const getValues = (formData: FormData) => {
 };
 
 const template = (props?) =>
-  Default({
-    'bx-textarea': props,
+  Playground({
+    'cds-textarea': props,
   });
 
-describe('bx-textarea', function () {
+describe('cds-textarea', function () {
   const events = new EventManager();
 
   describe('Rendering', function () {
@@ -42,7 +40,6 @@ describe('bx-textarea', function () {
         template({
           autocomplete: 'on',
           autofocus: true,
-          colorScheme: TEXTAREA_COLOR_SCHEME.LIGHT,
           disabled: true,
           helperText: 'helper-text-foo',
           labelText: 'label-text-foo',
@@ -51,17 +48,17 @@ describe('bx-textarea', function () {
           placeholder: 'placeholder-foo',
           readonly: true,
           required: true,
-          validityMessage: 'validity-message-foo',
+          invalidText: 'validity-message-foo',
           value: 'value-foo',
         }),
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-textarea' as any)).toMatchSnapshot(
-        {
-          mode: 'shadow',
-        }
-      );
+      expect(
+        document.body.querySelector('cds-textarea' as any)
+      ).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('Should reflect value in DOM', async function () {
@@ -73,7 +70,7 @@ describe('bx-textarea', function () {
       );
       await Promise.resolve();
       expect(
-        (document.body.querySelector('bx-textarea') as BXTextarea).value
+        (document.body.querySelector('cds-textarea') as CDSTextarea).value
       ).toBe('value-foo');
     });
   });
@@ -88,7 +85,7 @@ describe('bx-textarea', function () {
       );
       await Promise.resolve();
       const textareaNode = document.body
-        .querySelector('bx-textarea')!
+        .querySelector('cds-textarea')!
         .shadowRoot!.querySelector('textarea');
       expect(textareaNode!.value).toBe('');
       textareaNode!.value = 'value-foo';
@@ -158,47 +155,47 @@ describe('bx-textarea', function () {
     beforeEach(async function () {
       render(template(), document.body);
       await Promise.resolve();
-      elem = document.body.querySelector('bx-textarea')!;
+      elem = document.body.querySelector('cds-textarea')!;
     });
 
     it('should support checking if required value exists', async function () {
-      const textarea = elem as BXTextarea;
+      const textarea = elem as CDSTextarea;
       textarea.required = true;
       const spyInvalid = jasmine.createSpy('invalid');
       events.on(textarea, 'invalid', spyInvalid);
       expect(textarea.checkValidity()).toBe(false);
       expect(spyInvalid).toHaveBeenCalled();
       expect(textarea.invalid).toBe(true);
-      expect(textarea.validityMessage).toBe('Please fill out this field.');
+      expect(textarea.invalidText).toBe('Please fill out this field.');
       textarea.value = 'value-foo';
       expect(textarea.checkValidity()).toBe(true);
       expect(textarea.invalid).toBe(false);
-      expect(textarea.validityMessage).toBe('');
+      expect(textarea.invalidText).toBe('');
     });
 
     it('should support canceling required check', async function () {
-      const textarea = elem as BXTextarea;
+      const textarea = elem as CDSTextarea;
       textarea.required = true;
       events.on(textarea, 'invalid', (event) => {
         event.preventDefault();
       });
       expect(textarea.checkValidity()).toBe(false);
       expect(textarea.invalid).toBe(false);
-      expect(textarea.validityMessage).toBe('');
+      expect(textarea.invalidText).toBe('');
     });
 
     it('should treat empty custom validity message as not invalid', async function () {
-      const textarea = elem as BXTextarea;
+      const textarea = elem as CDSTextarea;
       textarea.setCustomValidity('');
       expect(textarea.invalid).toBe(false);
-      expect(textarea.validityMessage).toBe('');
+      expect(textarea.invalidText).toBe('');
     });
 
     it('should treat non-empty custom validity message as invalid', async function () {
-      const textarea = elem as BXTextarea;
+      const textarea = elem as CDSTextarea;
       textarea.setCustomValidity('validity-message-foo');
       expect(textarea.invalid).toBe(true);
-      expect(textarea.validityMessage).toBe('validity-message-foo');
+      expect(textarea.invalidText).toBe('validity-message-foo');
     });
   });
 

@@ -1,22 +1,22 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render } from 'lit-html';
+import { render } from 'lit';
 import BXStructuredListRow from '../../src/components/structured-list/structured-list-row';
-import { Default } from '../../src/components/structured-list/structured-list-story';
+import { Playground } from '../../src/components/structured-list/structured-list-story';
 
 const template = (props?) =>
-  Default({
-    'bx-structured-list': props,
+  Playground({
+    'cds-structured-list': props,
   });
 
-describe('bx-structured-list', function () {
+describe('cds-structured-list', function () {
   describe('Selection', function () {
     let list;
     let rows;
@@ -24,8 +24,8 @@ describe('bx-structured-list', function () {
     beforeEach(async function () {
       render(template({ hasSelection: true }), document.body);
       await Promise.resolve();
-      list = document.body.querySelector('bx-structured-list');
-      rows = document.body.querySelectorAll('bx-structured-list-row');
+      list = document.body.querySelector('cds-structured-list');
+      rows = document.body.querySelectorAll('cds-structured-list-row');
     });
 
     it('should reflect the selection settings', async function () {
@@ -34,7 +34,7 @@ describe('bx-structured-list', function () {
       expect(
         list
           .shadowRoot!.querySelector('section')!
-          .classList.contains('bx--structured-list--selection')
+          .classList.contains('cds--structured-list--selection')
       ).toBe(true);
       expect(
         Array.prototype.every.call(

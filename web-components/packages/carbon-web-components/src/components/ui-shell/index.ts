@@ -7,16 +7,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './side-nav-menu-item';
 import './header';
-import './side-nav';
-import './side-nav-divider';
+import './header-global-action';
+import './header-menu';
+import './header-menu-button';
+import './header-menu-item';
 import './header-name';
 import './header-nav';
-import './side-nav-link';
-import './header-menu';
-import './header-menu-item';
-import './side-nav-items';
-import './header-menu-button';
 import './header-nav-item';
+import './header-panel';
+import './header-side-nav-items';
+import './side-nav';
+import './side-nav-divider';
+import './side-nav-items';
+import './side-nav-link';
 import './side-nav-menu';
+import './side-nav-menu-item';
+import './switcher';
+import './switcher-divider';
+import './switcher-item';

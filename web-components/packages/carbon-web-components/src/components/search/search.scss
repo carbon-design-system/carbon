@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,14 +7,15 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/globals/scss/helper-mixins';
-@import 'carbon-components/scss/components/form/form';
-@import 'carbon-components/scss/components/search/search';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/components/form';
+@use '@carbon/styles/scss/components/search' as *;
 
-:host(#{$prefix}-search),
-:host(#{$prefix}-search-skeleton) {
-  @extend .#{$prefix}--search--lg;
-}
+// https://github.com/carbon-design-system/carbon/issues/11408
+@include search;
 
 :host(#{$prefix}-search) {
   @extend .#{$prefix}--search;
@@ -22,23 +23,78 @@ $css--plex: true !default;
   outline: none;
 }
 
-:host(#{$prefix}-search[size='sm']),
-:host(#{$prefix}-search-skeleton[size='sm']) {
-  @extend .#{$prefix}--search--sm;
+:host(#{$prefix}-search[expandable]) {
+  @extend .#{$prefix}--search--expandable;
 }
 
-:host(#{$prefix}-search[size='lg']),
-:host(#{$prefix}-search-skeleton[size='lg']) {
-  @extend .#{$prefix}--search--lg;
+:host(#{$prefix}-search[expandable][size='sm']) {
+  .#{$prefix}--search-magnifier {
+    width: $spacing-07;
+    height: $spacing-07;
+  }
 }
 
-:host(#{$prefix}-search[size='xl']),
-:host(#{$prefix}-search-skeleton[size='xl']) {
-  @extend .#{$prefix}--search--xl;
+:host(#{$prefix}-search[expandable][size='md']) {
+  .#{$prefix}--search-magnifier {
+    width: $spacing-08;
+    height: $spacing-08;
+  }
 }
 
-:host(#{$prefix}-search[color-scheme='light']) {
-  @extend .#{$prefix}--search--light;
+:host(#{$prefix}-search[expandable][size='lg']) {
+  .#{$prefix}--search-magnifier {
+    width: $spacing-09;
+    height: $spacing-09;
+  }
+}
+
+:host(#{$prefix}-search[expandable][expanded]) {
+  @extend .#{$prefix}--search--expanded;
+
+  .#{$prefix}--search-input {
+    width: 100%;
+  }
+  .#{$prefix}--search-magnifier {
+    pointer-events: none;
+  }
+}
+
+:host(#{$prefix}-search[expandable][expanded][size='sm']) {
+  .#{$prefix}--search-input {
+    padding: 0 $spacing-07;
+  }
+}
+
+:host(#{$prefix}-search[expandable][expanded][size='md']) {
+  .#{$prefix}--search-input {
+    padding: 0 $spacing-08;
+  }
+}
+
+:host(#{$prefix}-search[expandable][expanded][size='lg']) {
+  .#{$prefix}--search-input {
+    padding: 0 $spacing-09;
+  }
+
+  ::slotted(.#{$prefix}--search-magnifier) {
+    width: rem(48px);
+    height: rem(48px);
+  }
+}
+
+:host(#{$prefix}-search[disabled]) {
+  svg {
+    fill: $icon-on-color-disabled;
+  }
+
+  .#{$prefix}--search-close {
+    pointer-events: none;
+    outline: none;
+
+    &::before {
+      background: none;
+    }
+  }
 }
 
 :host(#{$prefix}-search-skeleton) {
@@ -53,4 +109,19 @@ $css--plex: true !default;
       color: transparent;
     }
   }
+}
+
+:host(#{$prefix}-search[size='sm']),
+:host(#{$prefix}-search-skeleton[size='sm']) {
+  @extend .#{$prefix}--search--sm;
+}
+
+:host(#{$prefix}-search[size='md']),
+:host(#{$prefix}-search-skeleton[size='md']) {
+  @extend .#{$prefix}--search--md;
+}
+
+:host(#{$prefix}-search[size='lg']),
+:host(#{$prefix}-search-skeleton[size='lg']) {
+  @extend .#{$prefix}--search--lg;
 }

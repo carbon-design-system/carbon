@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,7 +7,13 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/components/pagination/pagination';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/components/pagination' as *;
+@use '@carbon/styles/scss/utilities/visually-hidden' as *;
 
 :host(#{$prefix}-pagination) {
   @extend .#{$prefix}--pagination;
@@ -15,14 +21,10 @@ $css--plex: true !default;
   position: relative;
   outline: none;
 
-  .#{$prefix}--pagination__left {
-    flex: 1;
-  }
-
   .#{$prefix}-ce--pagination__divider {
     height: 100%;
-    width: $spacing-4xs;
-    background-color: $ui-03;
+    width: to-rem(1px);
+    background-color: $layer-accent-01;
   }
 
   .#{$prefix}--pagination__control-buttons {
@@ -34,62 +36,10 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-pages-select) {
-  @extend .#{$prefix}--select__page-number;
-
-  outline: none;
+:host(#{$prefix}-pagination[size='sm']) {
+  @extend .#{$prefix}--pagination--sm;
 }
 
-:host(#{$prefix}-page-sizes-select) {
-  @extend .#{$prefix}--select__item-count;
-
-  outline: none;
-}
-
-:host(#{$prefix}-pages-select),
-:host(#{$prefix}-page-sizes-select) {
-  display: flex;
-  align-items: center;
-  height: 100%;
-
-  .#{$prefix}--select-input {
-    @include type-style('body-short-01');
-
-    width: auto;
-    min-width: auto;
-    height: 100%;
-    padding: 0 2.5rem 0 $spacing-md;
-    margin-right: 0;
-    border: none;
-
-    @include carbon--breakpoint('md') {
-      padding-right: carbon--mini-units(4.5);
-    }
-
-    &:hover {
-      background: $hover-ui;
-    }
-  }
-
-  .#{$prefix}--select__arrow {
-    top: auto;
-    bottom: auto;
-
-    @include carbon--breakpoint('md') {
-      right: $carbon--spacing-05;
-    }
-  }
-}
-
-:host(#{$prefix}-pages-select) .#{$prefix}--select__page-number,
-:host(#{$prefix}-page-sizes-select) .#{$prefix}--select__item-count {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  position: relative;
-}
-
-:host(#{$prefix}-pages-select) .#{$prefix}--pagination__text {
-  margin-right: 1rem;
-  margin-left: rem(1px);
+:host(#{$prefix}-pagination[size='lg']) {
+  @extend .#{$prefix}--pagination--lg;
 }

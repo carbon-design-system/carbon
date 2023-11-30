@@ -7,10 +7,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
-import { classMap } from 'lit-html/directives/class-map';
-import { html, property, LitElement } from 'lit-element';
+import { classMap } from 'lit/directives/class-map.js';
+import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators.js';
 import ChevronRight16 from '@carbon/icons/lib/chevron--right/16';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import Handle from '../../globals/internal/handle';
 import { ACCORDION_ITEM_BREAKPOINT } from './defs';
@@ -18,8 +19,6 @@ import styles from './accordion.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { ACCORDION_ITEM_BREAKPOINT };
-
-const { prefix } = settings;
 
 /**
  * Observes resize of the given element with the given resize observer.
@@ -43,18 +42,18 @@ const observeResize = (observer: ResizeObserver, elem: Element) => {
 /**
  * Accordion item.
  *
- * @element bx-accordion-item
- * @fires bx-accordion-item-beingtoggled
+ * @element cds-accordion-item
+ * @fires cds-accordion-item-beingtoggled
  *   The custom event fired before this accordion item is being toggled upon a user gesture.
  *   Cancellation of this event stops the user-initiated action of toggling this accordion item.
- * @fires bx-accordion-item-toggled - The custom event fired after this accordion item is toggled upon a user gesture.
+ * @fires cds-accordion-item-toggled - The custom event fired after this accordion item is toggled upon a user gesture.
  * @csspart expando The expando button.
  * @csspart expando-icon The expando icon.
  * @csspart title The title.
  * @csspart content The content.
  */
 @customElement(`${prefix}-accordion-item`)
-class BXAccordionItem extends FocusMixin(LitElement) {
+class CDSAccordionItem extends FocusMixin(LitElement) {
   /**
    * The current breakpoint.
    */
@@ -82,15 +81,28 @@ class BXAccordionItem extends FocusMixin(LitElement) {
     if (
       this.dispatchEvent(
         new CustomEvent(
-          (this.constructor as typeof BXAccordionItem).eventBeforeToggle,
+          (this.constructor as typeof CDSAccordionItem).eventBeforeToggle,
           init
         )
       )
     ) {
+      const { selectorAccordionContent } = this
+        .constructor as typeof CDSAccordionItem;
+
+      !this.open
+        ? this.setAttribute('expanding', '')
+        : this.setAttribute('collapsing', '');
+      this.shadowRoot!.querySelector(
+        selectorAccordionContent
+      )!.addEventListener('animationend', () => {
+        this.removeAttribute('expanding');
+        this.removeAttribute('collapsing');
+      });
+
       this.open = open;
       this.dispatchEvent(
         new CustomEvent(
-          (this.constructor as typeof BXAccordionItem).eventToggle,
+          (this.constructor as typeof CDSAccordionItem).eventToggle,
           init
         )
       );
@@ -122,7 +134,7 @@ class BXAccordionItem extends FocusMixin(LitElement) {
     (records: ResizeObserverEntry[]) => {
       const { width } = records[records.length - 1].contentRect;
       const { _sizesBreakpoints: sizesBreakpoints } = this
-        .constructor as typeof BXAccordionItem;
+        .constructor as typeof CDSAccordionItem;
       this._currentBreakpoint = Object.keys(sizesBreakpoints)
         .sort((lhs, rhs) => sizesBreakpoints[rhs] - sizesBreakpoints[lhs])
         .find(
@@ -147,8 +159,8 @@ class BXAccordionItem extends FocusMixin(LitElement) {
   /**
    * The title text.
    */
-  @property({ attribute: 'title-text' })
-  titleText = '';
+  @property({ attribute: 'title' })
+  title = '';
 
   connectedCallback() {
     if (!this.hasAttribute('role')) {
@@ -170,14 +182,14 @@ class BXAccordionItem extends FocusMixin(LitElement) {
   render() {
     const {
       disabled,
-      titleText,
+      title,
       open,
       _currentBreakpoint: currentBreakpoint,
       _handleClickExpando: handleClickExpando,
       _handleKeydownExpando: handleKeydownExpando,
     } = this;
     const { _classesBreakpoints: classesBreakpoints } = this
-      .constructor as typeof BXAccordionItem;
+      .constructor as typeof CDSAccordionItem;
     const { [currentBreakpoint!]: classBreakpoint } = classesBreakpoints;
     const contentClasses = classMap({
       [classBreakpoint]: classBreakpoint,
@@ -198,7 +210,7 @@ class BXAccordionItem extends FocusMixin(LitElement) {
           class: `${prefix}--accordion__arrow`,
         })}
         <div part="title" class="${prefix}--accordion__title">
-          <slot name="title">${titleText}</slot>
+          <slot name="title">${title}</slot>
         </div>
       </button>
       <div id="content" part="content" class="${contentClasses}">
@@ -246,7 +258,11 @@ class BXAccordionItem extends FocusMixin(LitElement) {
     return `${prefix}-accordion-item-toggled`;
   }
 
+  static get selectorAccordionContent() {
+    return `.${prefix}--accordion__content`;
+  }
+
   static styles = styles;
 }
 
-export default BXAccordionItem;
+export default CDSAccordionItem;

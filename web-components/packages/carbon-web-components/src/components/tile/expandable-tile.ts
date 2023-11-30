@@ -7,30 +7,30 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, property, LitElement } from 'lit-element';
-import { ifDefined } from 'lit-html/directives/if-defined';
+import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import ChevronDown16 from '@carbon/icons/lib/chevron--down/16';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { TILE_COLOR_SCHEME } from './defs';
 import styles from './tile.scss';
+import { classMap } from 'lit/directives/class-map.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * Expandable tile.
  *
- * @element bx-expandable-tile
- * @fires bx-expandable-tile-beingtoggled
+ * @element cds-expandable-tile
+ * @fires cds-expandable-tile-beingtoggled
  *   The custom event fired before the expanded state is changed upon a user gesture.
  *   Cancellation of this event stops changing the user-initiated change in expanded state.
- * @fires bx-expandable-tile-toggled - The custom event fired after a the expanded state is changed upon a user gesture.
+ * @fires cds-expandable-tile-toggled - The custom event fired after a the expanded state is changed upon a user gesture.
  */
 @customElement(`${prefix}-expandable-tile`)
-class BXExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
+class CDSExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   /**
    * The computed height of the below-the-fold content.
    */
@@ -48,13 +48,19 @@ class BXExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
         (acc, item) => acc + ((item as HTMLElement).offsetHeight ?? 0),
         0
       );
+
+    if (!this._belowTheContentHeight) {
+      const element = getComputedStyle(
+        this.querySelector('cds-tile-below-the-fold-content') as any
+      );
+      this._belowTheContentHeight = parseInt(element.height, 10);
+    }
     this.requestUpdate();
   }
 
-  @HostListener('click')
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleClick = () => {
+  private _handleExpand() {
     const expanded = !this.expanded;
+    this.focus();
     const init = {
       bubbles: true,
       composed: true,
@@ -62,7 +68,7 @@ class BXExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
         expanded,
       },
     };
-    const constructor = this.constructor as typeof BXExpandableTile;
+    const constructor = this.constructor as typeof CDSExpandableTile;
     const beforeChangeEvent = new CustomEvent(constructor.eventBeforeToggle, {
       ...init,
       cancelable: true,
@@ -71,6 +77,14 @@ class BXExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
       this.expanded = expanded;
       const afterChangeEvent = new CustomEvent(constructor.eventToggle, init);
       this.dispatchEvent(afterChangeEvent);
+    }
+  }
+
+  @HostListener('click')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleClick = () => {
+    if (!this.withInteractive) {
+      this._handleExpand();
     }
   };
 
@@ -86,26 +100,31 @@ class BXExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   @property({ type: Boolean, reflect: true })
   expanded = false;
 
-  createRenderRoot() {
-    return this.attachShadow({
-      mode: 'open',
-      delegatesFocus:
-        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
-        537,
-    });
-  }
+  /**
+   * `true` to expand this expandable tile.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'with-interactive' })
+  withInteractive = false;
 
   render() {
     const {
       expanded,
+      withInteractive,
       _belowTheContentHeight: belowTheContentHeight,
       _handleSlotChangeBelowTheFoldContent: handleSlotChangeBelowTheFoldContent,
     } = this;
+
+    const classes = classMap({
+      [`${prefix}--tile__chevron`]: true,
+      [`${prefix}--tile__chevron--interactive`]: withInteractive,
+    });
     return html`
       <button
-        class="${prefix}--tile__chevron"
+        class="${classes}"
         aria-labelledby="above-the-fold-content"
         aria-controls="below-the-fold-content"
+        tabindex="0"
+        @click="${withInteractive ? this._handleExpand : ''}"
         aria-expanded="${String(Boolean(expanded))}">
         ${ChevronDown16({
           id: 'icon',
@@ -142,4 +161,4 @@ class BXExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   static styles = styles; // `styles` here is a `CSSResult` generated by custom WebPack loader
 }
 
-export default BXExpandableTile;
+export default CDSExpandableTile;

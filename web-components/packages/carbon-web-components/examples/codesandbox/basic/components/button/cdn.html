@@ -13,17 +13,19 @@ LICENSE file in the root directory of this source tree.
   <meta charset="UTF-8"/>
   <link rel="stylesheet"
         href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"/>
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/grid.css" />
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/themes.css" /> 
   <style>
     /* Suppress custom element until styles are loaded */
-    bx-button:not(:defined) {
+    cds-button:not(:defined) {
       display: none;
     }
   </style>
-  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/button.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/button.min.js"></script>
 </head>
-<body>
-  <bx-btn href="https://www.ibm.com">
+<body class="cds-theme-zone-white">
+  <cds-button href="https://www.ibm.com">
     Button
-  </bx-btn>
+  </cds-button>
 </body>
 </html>

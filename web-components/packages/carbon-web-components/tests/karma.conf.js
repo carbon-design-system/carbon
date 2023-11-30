@@ -117,8 +117,7 @@ module.exports = function setupKarma(config) {
             test: /\.js$/,
             include: [
               __dirname,
-              path.dirname(require.resolve('lit-html')),
-              path.dirname(require.resolve('lit-element')),
+              path.dirname(require.resolve('lit')),
               path.dirname(require.resolve('@webcomponents/custom-elements')),
               // `ShadyCSS` NPM package is missing its entry point file
               path.dirname(
@@ -163,6 +162,7 @@ module.exports = function setupKarma(config) {
                   sassOptions: {
                     includePaths: [
                       path.resolve(__dirname, '..', 'node_modules'),
+                      path.resolve(__dirname, '../../../', 'node_modules'),
                     ],
                   },
                 },

@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,10 +12,10 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import { Field, SubmissionError, reduxForm, reducer as reduxFormReducer } from 'redux-form';
-import BXBtn from '@carbon/web-components/es/components-react/button/button.js';
-import BXFormItem from '@carbon/web-components/es/components-react/form/form-item.js';
-import BXInput from '@carbon/web-components/es/components-react/input/input.js';
-import BXInlineNotification from '@carbon/web-components/es/components-react/notification/inline-notification.js';
+import CDSButton from '@carbon/web-components/es/components-react/button/button.js';
+import CDSFormItem from '@carbon/web-components/es/components-react/form/form-item.js';
+import CDSTextInput from '@carbon/web-components/es/components-react/text-input/text-input.js';
+import CDSInlineNotification from '@carbon/web-components/es/components-react/notification/inline-notification.js';
 import './index.css';
 
 const reducer = combineReducers({
@@ -52,8 +52,8 @@ const submit = async (values) => {
 const FieldImpl = ({ input, label, type, meta: { touched, error } }) => {
   const validityMessage = !touched ? undefined : error;
   return (
-    <BXFormItem>
-      <BXInput
+    <CDSFormItem>
+      <CDSTextInput
         {...input}
         invalid={Boolean(validityMessage)}
         label-text={label}
@@ -61,7 +61,7 @@ const FieldImpl = ({ input, label, type, meta: { touched, error } }) => {
         placeholder={label}
         validityMessage={validityMessage}
       />
-    </BXFormItem>
+    </CDSFormItem>
   );
 };
 
@@ -70,21 +70,21 @@ const SubmitValidationForm = reduxForm({
 })(({ error, handleSubmit, pristine, reset, submitting }) => (
   <form>
     {error && (
-      <BXInlineNotification kind="error" title="Login failed" subtitle="Please correct below errors." hideCloseButton={true} />
+      <CDSInlineNotification kind="error" title="Login failed" subtitle="Please correct below errors." hideCloseButton={true} />
     )}
     <Field name="username" type="text" component={FieldImpl} label="Username" />
     <Field name="password" type="password" component={FieldImpl} label="Password" />
-    <div className="bx-ce-demo-redux-form--btn-container">
+    <div className="cds-ce-demo-redux-form--btn-container">
       {/*
           NOTE: `onsubmit` event (with `type="submit"`) does not work across shadow DOM boundary
           (does not have `composed` flag, etc.) and thus we handle `onclick` directly here
         */}
-      <BXBtn disabled={submitting} onClick={handleSubmit(submit)}>
+      <CDSButton disabled={submitting} onClick={handleSubmit(submit)}>
         Log in
-      </BXBtn>
-      <BXBtn kind="secondary" disabled={pristine || submitting} onClick={reset}>
+      </CDSButton>
+      <CDSButton kind="secondary" disabled={pristine || submitting} onClick={reset}>
         Clear Values
-      </BXBtn>
+      </CDSButton>
     </div>
   </form>
 ));

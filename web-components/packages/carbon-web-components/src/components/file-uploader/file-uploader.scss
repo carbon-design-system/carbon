@@ -1,11 +1,19 @@
 //
-// Copyright IBM Corp. 2020, 2022
+// Copyright IBM Corp. 2020, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-@import 'carbon-components/scss/components/file-uploader/file-uploader';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/file-uploader/file-uploader' as *;
+@use '@carbon/styles/scss/layout' as *;
+
+// https://github.com/carbon-design-system/carbon/issues/11408
+@include file-uploader;
 
 :host(#{$prefix}-file-uploader-shell) {
   @extend .#{$prefix}--form-item;
@@ -20,31 +28,41 @@
 :host(#{$prefix}-file-uploader-item) {
   @extend .#{$prefix}--file__selected-file;
 
-  &[invalid] {
-    @extend .#{$prefix}--file__selected-file--invalid;
-
-    .#{$prefix}--form-requirement__title,
-    .#{$prefix}--form-requirement__supplement {
-      @include type-style('label-01');
-
-      padding: 0 $carbon--spacing-05;
-    }
-
-    .#{$prefix}--form-requirement {
-      color: $text-error;
-      display: block;
-    }
-
-    .#{$prefix}--form-requirement__supplement {
-      color: $text-01;
-    }
+  .#{$prefix}--file-filename {
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
-  &[size='field'] {
-    min-height: $container-03;
+  .#{$prefix}--form-requirement[hidden] {
+    display: none;
+  }
+}
+
+:host(#{$prefix}-file-uploader-item[invalid]) {
+  @extend .#{$prefix}--file__selected-file--invalid;
+
+  .#{$prefix}--form-requirement__supplement {
+    margin: 0;
+  }
+}
+
+:host(#{$prefix}-file-uploader-item[size='md']) {
+  @extend .#{$prefix}--file__selected-file--md;
+}
+
+:host(#{$prefix}-file-uploader-item[size='sm']) {
+  @extend .#{$prefix}--file__selected-file--sm;
+}
+
+:host(#{$prefix}-file-uploader) {
+  @include emit-layout-tokens();
+
+  .#{$prefix}--label-description,
+  .#{$prefix}--file--label {
+    margin-top: 0;
   }
 
-  &[size='sm'] {
-    min-height: $container-02;
+  .#{$prefix}--file-container {
+    margin-top: $spacing-03;
   }
 }

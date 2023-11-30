@@ -7,18 +7,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, property, LitElement } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
+import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import styles from './number-input.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * Skeleton of number input.
  */
 @customElement(`${prefix}-number-input-skeleton`)
-class BXNumberInputSkeleton extends LitElement {
+class CDSNumberInputSkeleton extends LitElement {
   /**
    * `true` if the label should be hidden. Corresponds to the attribute with the same name.
    */
@@ -37,4 +36,4 @@ class BXNumberInputSkeleton extends LitElement {
   static styles = styles;
 }
 
-export default BXNumberInputSkeleton;
+export default CDSNumberInputSkeleton;

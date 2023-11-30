@@ -545,8 +545,7 @@ module.exports = function generateCreateReactCustomElementType(
             buildCreateReactCustomElementTypeImport(declaredProps),
             ...template.ast`
                import PropTypes from "prop-types";
-               import settings from "carbon-components/es/globals/js/settings.js";
-               var prefix = settings.prefix;
+               import { prefix } from '../../globals/settings.js';
                export var descriptor = ${descriptorsWithParent};
                export var propTypes = ${propTypesWithParent};
                const Component = createReactCustomElementType(${context.customElementName}, descriptor);

@@ -7,24 +7,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, property, LitElement } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
-import { INPUT_SIZE } from '../input/input';
+import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
+import { INPUT_SIZE } from '../text-input/text-input';
 import styles from './search.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * Skeleton of search.
  */
 @customElement(`${prefix}-search-skeleton`)
-class BXSearchSkeleton extends LitElement {
+class CDSSearchSkeleton extends LitElement {
   /**
    * The search box size. Corresponds to the attribute with the same name.
    */
   @property({ reflect: true })
-  size = INPUT_SIZE.REGULAR;
+  size = INPUT_SIZE.MEDIUM;
 
   render() {
     return html`
@@ -36,4 +35,4 @@ class BXSearchSkeleton extends LitElement {
   static styles = styles;
 }
 
-export default BXSearchSkeleton;
+export default CDSSearchSkeleton;

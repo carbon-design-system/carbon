@@ -7,24 +7,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, render, TemplateResult } from 'lit-html';
+import { html, render, TemplateResult } from 'lit';
 import ResizeObserver from 'resize-observer-polyfill';
-import BXTooltip from '../../src/components/tooltip/tooltip';
-import BXTooltipBody from '../../src/components/tooltip/tooltip-body';
-import {
-  TOOLTIP_ALIGNMENT,
-  TOOLTIP_DIRECTION,
-} from '../../src/components/tooltip/tooltip-definition';
-import { definition, icon } from '../../src/components/tooltip/tooltip-story';
+import CDSTooltip from '../../src/components/tooltip/tooltip';
+import CDSTooltipContent from '../../src/components/tooltip/tooltip-content';
+import { POPOVER_ALIGNMENT } from '../../src/components/popover/defs';
+import { Playground } from '../../src/components/tooltip/tooltip-story';
 
-const bodyTemplate = () => html` <bx-tooltip-body></bx-tooltip-body> `;
+const bodyTemplate = () => html` <cds-tooltip-content></cds-tooltip-content> `;
 const contentTemplate = ({
   hasBody = true,
 }: { hasBody?: boolean } = {}) => html`
   <div data-floating-menu-container style="position:relative">
-    <!-- <div> for resize testing, distinguishing the parent node of <bx-tooltip> vs. the floating menu container -->
+    <!-- <div> for resize testing, distinguishing the parent node of <cds-tooltip> vs. the floating menu container -->
     <div>
-      <bx-tooltip> ${!hasBody ? undefined : bodyTemplate()} </bx-tooltip>
+      <cds-tooltip> ${!hasBody ? undefined : bodyTemplate()} </cds-tooltip>
     </div>
   </div>
 `;
@@ -34,24 +31,19 @@ const template = ({
 }: { hasContent?: boolean; hasBody?: boolean } = {}) =>
   !hasContent ? (undefined! as TemplateResult) : contentTemplate({ hasBody });
 
-const definitionTemplate = (props?) =>
-  definition({
-    'bx-tooltip-definition': props,
-  });
-
 const iconTemplate = (props?) =>
-  icon({
-    'bx-tooltip-icon': props,
+  Playground({
+    'cds-tooltip-icon': props,
   });
 
-describe('bx-tooltip', function () {
+describe('cds-tooltip', function () {
   describe('Missing menu body', function () {
-    let trigger: BXTooltip | null;
+    let trigger: CDSTooltip | null;
 
     beforeEach(async function () {
       render(template({ hasBody: false }), document.body);
       await Promise.resolve();
-      trigger = document.body.querySelector('bx-tooltip');
+      trigger = document.body.querySelector('cds-tooltip');
     });
 
     it('Should be tolerant of missing menu body', async function () {
@@ -64,14 +56,14 @@ describe('bx-tooltip', function () {
   });
 
   describe('Toggling', function () {
-    let trigger: BXTooltip | null;
-    let body: BXTooltipBody | null;
+    let trigger: CDSTooltip | null;
+    let content: CDSTooltipContent | null;
 
     beforeEach(async function () {
       render(template(), document.body);
       await Promise.resolve();
-      trigger = document.body.querySelector('bx-tooltip');
-      body = document.body.querySelector('bx-tooltip-body');
+      trigger = document.body.querySelector('cds-tooltip');
+      content = document.body.querySelector('cds-tooltip-content');
     });
 
     it('Should open and close the menu', async function () {
@@ -80,7 +72,7 @@ describe('bx-tooltip', function () {
       );
       await Promise.resolve();
       expect(trigger!.open).toBe(true);
-      expect(body!.open).toBe(true);
+      expect(content!.open).toBe(true);
       expect(trigger?.getAttribute('aria-expanded')).toBe('true');
     });
 
@@ -90,8 +82,8 @@ describe('bx-tooltip', function () {
       trigger!.shadowRoot!.firstElementChild!.dispatchEvent(
         new CustomEvent('click', { bubbles: true, composed: true })
       );
-      await Promise.resolve(); // Calls `update()` of `<bx-tooltip>`
-      await Promise.resolve(); // Calls `update()` of `<bx-tooltip-body>`
+      await Promise.resolve(); // Calls `update()` of `<cds-tooltip>`
+      await Promise.resolve(); // Calls `update()` of `<cds-tooltip-content>`
       const floatingMenuContainer = document.body.querySelector(
         'div[data-floating-menu-container]'
       );
@@ -104,8 +96,8 @@ describe('bx-tooltip', function () {
       trigger!.shadowRoot!.firstElementChild!.dispatchEvent(
         new CustomEvent('click', { bubbles: true, composed: true })
       );
-      await Promise.resolve(); // Calls `update()` of `<bx-tooltip>`
-      await Promise.resolve(); // Calls `update()` of `<bx-tooltip-body>`
+      await Promise.resolve(); // Calls `update()` of `<cds-tooltip>`
+      await Promise.resolve(); // Calls `update()` of `<cds-tooltip-content>`
       expect(ResizeObserver.prototype.unobserve).toHaveBeenCalledWith(
         trigger!.parentElement!
       );
@@ -116,14 +108,14 @@ describe('bx-tooltip', function () {
   });
 
   describe('Placing', function () {
-    let trigger: BXTooltip | null;
-    let body: BXTooltipBody | null;
+    let trigger: CDSTooltip | null;
+    let content: CDSTooltipContent | null;
 
     beforeEach(async function () {
       render(template(), document.body);
       await Promise.resolve();
-      trigger = document.body.querySelector('bx-tooltip');
-      body = document.body.querySelector('bx-tooltip-body');
+      trigger = document.body.querySelector('cds-tooltip');
+      content = document.body.querySelector('cds-tooltip-content');
     });
 
     it('Should place and position', async function () {
@@ -136,15 +128,15 @@ describe('bx-tooltip', function () {
       trigger!.shadowRoot!.firstElementChild!.dispatchEvent(
         new CustomEvent('click', { bubbles: true, composed: true })
       );
-      await Promise.resolve(); // Calls `update()` of `<bx-tooltip>`
-      await Promise.resolve(); // Calls `update()` of `<bx-tooltip-body>`
-      expect(body!.parentElement).toBe(
+      await Promise.resolve(); // Calls `update()` of `<cds-tooltip>`
+      await Promise.resolve(); // Calls `update()` of `<cds-tooltip-body>`
+      expect(content!.parentElement).toBe(
         document.body.querySelector(
           'div[data-floating-menu-container]'
         ) as HTMLElement
       );
-      expect(body!.style.left).toBe('1px');
-      expect(body!.style.top).toBe('2px');
+      expect(content!.style.left).toBe('1px');
+      expect(content!.style.top).toBe('2px');
     });
   });
 
@@ -153,44 +145,13 @@ describe('bx-tooltip', function () {
   });
 });
 
-describe('bx-tooltip-definition', function () {
-  describe('Rendering', function () {
-    it('Should render with minimum attributes', async function () {
-      render(definitionTemplate(), document.body);
-      await Promise.resolve();
-      expect(
-        document.body.querySelector('bx-tooltip-definition' as any)
-      ).toMatchSnapshot({ mode: 'shadow' });
-    });
-
-    it('Should render with various attributes', async function () {
-      render(
-        definitionTemplate({
-          alignment: TOOLTIP_ALIGNMENT.START,
-          bodyText: 'body-text-foo',
-          direction: TOOLTIP_DIRECTION.TOP,
-        }),
-        document.body
-      );
-      await Promise.resolve();
-      expect(
-        document.body.querySelector('bx-tooltip-definition' as any)
-      ).toMatchSnapshot({ mode: 'shadow' });
-    });
-  });
-
-  afterEach(async function () {
-    await render(definitionTemplate({ hasContent: false }), document.body);
-  });
-});
-
-describe('bx-tooltip-icon', function () {
+describe('cds-tooltip-icon', function () {
   describe('Rendering', function () {
     it('Should render with minimum attributes', async function () {
       render(iconTemplate(), document.body);
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-tooltip-icon' as any)
+        document.body.querySelector('cds-tooltip-icon' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
@@ -199,15 +160,14 @@ describe('bx-tooltip-icon', function () {
     it('Should render with various attributes', async function () {
       render(
         iconTemplate({
-          alignment: TOOLTIP_ALIGNMENT.START,
+          alignment: POPOVER_ALIGNMENT.TOP,
           bodyText: 'body-text-foo',
-          direction: TOOLTIP_DIRECTION.TOP,
         }),
         document.body
       );
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-tooltip-icon' as any)
+        document.body.querySelector('cds-tooltip-icon' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });

@@ -4,10 +4,10 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Date picker
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/date-picker)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/date-picker)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/date-picker)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/date-picker)
 
 Date and time pickers allow users to select a single or a range of dates and
 times.
@@ -28,10 +28,12 @@ import '@carbon/web-components/es/components/date-picker/index.js';
 ### HTML
 
 ```html
-<bx-date-picker>
-  <bx-date-picker-input label-text="Date Picker label" placeholder="mm/dd/yyyy">
-  </bx-date-picker-input>
-</bx-date-picker>
+<cds-date-picker>
+  <cds-date-picker-input
+    label-text="Date Picker label"
+    placeholder="mm/dd/yyyy">
+  </cds-date-picker-input>
+</cds-date-picker>
 ```
 
 ## Single date picker
@@ -39,14 +41,13 @@ import '@carbon/web-components/es/components/date-picker/index.js';
 A single Date Picker consists of an input field and a calendar.
 
 ```html
-<bx-date-picker>
-  <bx-date-picker-input
+<cds-date-picker>
+  <cds-date-picker-input
     kind="single"
     label-text="Date Picker label"
-    placeholder="mm/dd/yyyy"
-  >
-  </bx-date-picker-input>
-</bx-date-picker>
+    placeholder="mm/dd/yyyy">
+  </cds-date-picker-input>
+</cds-date-picker>
 ```
 
 ## Range date picker
@@ -54,61 +55,59 @@ A single Date Picker consists of an input field and a calendar.
 A range Date Picker consists of two input fields and a calendar.
 
 ```html
-<bx-date-picker>
-  <bx-date-picker-input
+<cds-date-picker>
+  <cds-date-picker-input
     kind="from"
     label-text="Date Picker label"
     placeholder="mm/dd/yyyy"
-    size="lg"
-  >
-  </bx-date-picker-input>
-  <bx-date-picker-input
+    size="lg">
+  </cds-date-picker-input>
+  <cds-date-picker-input
     kind="to"
     label-text="Date Picker label"
     placeholder="mm/dd/yyyy"
-    size="lg"
-  >
-  </bx-date-picker-input>
-</bx-date-picker>
+    size="lg">
+  </cds-date-picker-input>
+</cds-date-picker>
 ```
 
 ## Skeleton
 
-For the skeleton variation, utilize `<bx-date-picker-input-skeleton>`.
+For the skeleton variation, utilize `<cds-date-picker-input-skeleton>`.
 
 ### Simple
 
 ```html
-<bx-date-picker-input-skeleton kind="simple"></bx-date-picker-input-skeleton>
+<cds-date-picker-input-skeleton kind="simple"></cds-date-picker-input-skeleton>
 ```
 
 ### Single
 
 ```html
-<bx-date-picker-input-skeleton kind="single"></bx-date-picker-input-skeleton>
+<cds-date-picker-input-skeleton kind="single"></cds-date-picker-input-skeleton>
 ```
 
 ### Range
 
 ```html
 <div>
-  <bx-date-picker-input-skeleton kind="from"></bx-date-picker-input-skeleton>
-  <bx-date-picker-input-skeleton kind="to"></bx-date-picker-input-skeleton>
+  <cds-date-picker-input-skeleton kind="from"></cds-date-picker-input-skeleton>
+  <cds-date-picker-input-skeleton kind="to"></cds-date-picker-input-skeleton>
 </div>
 ```
 
-## `<bx-date-picker>` attributes, properties and events
+## `<cds-date-picker>` attributes, properties and events
 
 Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<bx-date-picker open>`) and `false` means not setting the attribute (e.g.
-`<bx-date-picker>` without `open` attribute).
+`<cds-date-picker open>`) and `false` means not setting the attribute (e.g.
+`<cds-date-picker>` without `open` attribute).
 
-<Props of="bx-date-picker" />
+<Props of="cds-date-picker" />
 
-## `<bx-date-picker-input>` attributes and properties
+## `<cds-date-picker-input>` attributes and properties
 
 Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<bx-date-picker-input light>`) and `false` means not setting the attribute
-(e.g. `<bx-date-picker-input>` without `light` attribute).
+`<cds-date-picker-input light>`) and `false` means not setting the attribute
+(e.g. `<cds-date-picker-input>` without `light` attribute).
 
-<Props of="bx-date-picker-input" />
+<Props of="cds-date-picker-input" />

@@ -4,10 +4,10 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Content switcher
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/content-switcher)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/content-switcher)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/content-switcher)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/content-switcher)
 
 Content switcher manipulates the content shown following an exclusive or
 “either/or” pattern. It is used to toggle between two or more content sections
@@ -29,21 +29,23 @@ import '@carbon/web-components/es/components/content-switcher/index.js';
 ### HTML
 
 ```html
-<bx-content-switcher>
-  <bx-content-switcher-item value="all">Option 1</bx-content-switcher-item>
-  <bx-content-switcher-item value="cloudFoundry" disabled
-    >Option 2</bx-content-switcher-item
+<cds-content-switcher>
+  <cds-content-switcher-item value="all">Option 1</cds-content-switcher-item>
+  <cds-content-switcher-item value="cloudFoundry" disabled
+    >Option 2</cds-content-switcher-item
   >
-  <bx-content-switcher-item value="staging">Option 3</bx-content-switcher-item>
-  <bx-content-switcher-item value="dea">Option 4</bx-content-switcher-item>
-  <bx-content-switcher-item value="router">Option 5</bx-content-switcher-item>
-</bx-content-switcher>
+  <cds-content-switcher-item value="staging"
+    >Option 3</cds-content-switcher-item
+  >
+  <cds-content-switcher-item value="dea">Option 4</cds-content-switcher-item>
+  <cds-content-switcher-item value="router">Option 5</cds-content-switcher-item>
+</cds-content-switcher>
 ```
 
-## `<bx-content-switcher>` attributes, properties and events
+## `<cds-content-switcher>` attributes, properties and events
 
-<Props of="bx-content-switcher" />
+<Props of="cds-content-switcher" />
 
-## `<bx-content-switcher-item>` attributes and properties
+## `<cds-content-switcher-item>` attributes and properties
 
-<Props of="bx-content-switcher-item" />
+<Props of="cds-content-switcher-item" />

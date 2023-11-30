@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2022
+// Copyright IBM Corp. 2020, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,22 +7,66 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/components/select/select';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/select';
 
 :host(#{$prefix}-select) {
   @extend .#{$prefix}--select;
 
   outline: none;
+}
 
-  &[color-scheme='light'] {
-    @extend .#{$prefix}--select--light;
+:host(#{$prefix}-select[disabled]) {
+  @extend .#{$prefix}--select--disabled;
+}
+
+:host(#{$prefix}-select[invalid]) {
+  @extend .#{$prefix}--select--invalid;
+}
+
+:host(#{$prefix}-select[readonly]) select {
+  pointer-events: none;
+}
+
+:host(#{$prefix}-select[inline][warn]) {
+  .#{$prefix}--form__helper-text,
+  .#{$prefix}--label {
+    align-self: flex-start;
+    margin-top: 0.8125rem;
   }
 
-  &[disabled] {
-    @extend .#{$prefix}--select--disabled;
+  select {
+    padding-right: 3.5rem;
   }
 
-  &[invalid] {
-    @extend .#{$prefix}--select--invalid;
+  .#{$prefix}--select__invalid-icon--warning {
+    right: $spacing-07;
+  }
+}
+
+:host(#{$prefix}-select[pagination]) {
+  .#{$prefix}--label {
+    margin: 0;
+  }
+
+  .#{$prefix}--select-input {
+    padding: 0 2.25rem 0 $spacing-05;
+
+    &:focus {
+      background-color: transparent;
+    }
+  }
+
+  .#{$prefix}--select__arrow {
+    top: 50%;
+    transform: translate(-#{$spacing-03}, -50%);
+  }
+}
+
+:host(#{$prefix}-select[pagination][left-select]) {
+  .#{$prefix}--select-input {
+    border-right: 1px solid $border-subtle;
   }
 }

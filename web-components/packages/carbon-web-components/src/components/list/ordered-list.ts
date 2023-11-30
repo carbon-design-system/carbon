@@ -7,22 +7,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { classMap } from 'lit-html/directives/class-map';
-import { html } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
-import BXUnorderedList from './unordered-list';
+import { classMap } from 'lit/directives/class-map.js';
+import { html } from 'lit';
+import { property } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
+import CDSUnorderedList from './unordered-list';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * Ordered list.
  */
 @customElement(`${prefix}-ordered-list`)
-class BXOrderedList extends BXUnorderedList {
+class CDSOrderedList extends CDSUnorderedList {
+  /**
+   * Specify whether the ordered list should use native list styles instead of
+   * custom counter
+   */
+  @property({ type: Boolean, reflect: true })
+  native = false;
+
   render() {
     const classes = classMap({
-      [`${prefix}--list--ordered`]: true,
+      [`${prefix}--list--ordered`]: !this.native,
+      [`${prefix}--list--ordered--native`]: this.native,
       [`${prefix}--list--nested`]: this.getAttribute('slot') === 'nested',
       [`${prefix}--list--expressive`]: this.isExpressive,
     });
@@ -34,4 +41,4 @@ class BXOrderedList extends BXUnorderedList {
   }
 }
 
-export default BXOrderedList;
+export default CDSOrderedList;

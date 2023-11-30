@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,12 +7,18 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/globals/scss/css--helpers';
-@import 'carbon-components/scss/components/form/form';
-@import 'carbon-components/scss/components/radio-button/radio-button';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/components/form';
+@use '@carbon/styles/scss/components/radio-button/radio-button' as *;
+
+// https://github.com/carbon-design-system/carbon/issues/11408
+@include radio-button;
 
 :host(#{$prefix}-radio-button-group) {
-  @extend .#{$prefix}--radio-button-group;
+  @extend .#{$prefix}--form-item;
 }
 
 :host(#{$prefix}-radio-button-group[label-position='left']) {
@@ -23,9 +29,23 @@ $css--plex: true !default;
   @extend .#{$prefix}--radio-button-group--vertical;
 }
 
-:host(#{$prefix}-radio-button),
-:host(#{$prefix}-radio-button-skeleton) {
-  @extend .#{$prefix}--form-item;
+:host(#{$prefix}-radio-button-group[invalid]),
+:host(#{$prefix}-radio-button-group[warn]) {
+  .#{$prefix}--radio-button__validation-msg {
+    display: flex;
+
+    .#{$prefix}--form-requirement {
+      display: block;
+      overflow: visible;
+      max-height: 100%;
+      margin-top: 0;
+      margin-left: $spacing-03;
+    }
+  }
+}
+
+:host(#{$prefix}-radio-button-group[invalid]) .#{$prefix}--form-requirement {
+  color: $text-error;
 }
 
 :host(#{$prefix}-radio-button) {
@@ -38,17 +58,36 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-radio-button[disabled]) {
+:host(#{$prefix}-radio-button[invalid]) .#{$prefix}--radio-button__appearance {
+  border-color: $support-error;
+}
+
+:host(#{$prefix}-radio-button[data-table]) {
   .#{$prefix}--radio-button__label {
-    color: $disabled;
+    width: rem(28px);
+  }
+
+  .#{$prefix}--radio-button__appearance {
+    margin-right: -#{$spacing-01};
+  }
+}
+
+:host(#{$prefix}-radio-button[readOnly]) {
+  @extend .#{$prefix}--radio-button-group--readonly;
+}
+
+:host(#{$prefix}-radio-button[disabled]),
+:host(#{$prefix}-radio-button[disabledItem]) {
+  .#{$prefix}--radio-button__label {
+    color: $text-disabled;
     cursor: not-allowed;
   }
 
   .#{$prefix}--radio-button__appearance {
-    border-color: $disabled;
+    border-color: $border-disabled;
 
     &::before {
-      background-color: $disabled;
+      background-color: $border-disabled;
     }
   }
 }
@@ -60,6 +99,6 @@ $css--plex: true !default;
 
   .#{$prefix}--radio-button__appearance {
     margin-right: 0;
-    margin-left: $carbon--spacing-03;
+    margin-left: $spacing-03;
   }
 }

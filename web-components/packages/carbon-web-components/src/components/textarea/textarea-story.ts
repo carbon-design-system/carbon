@@ -1,151 +1,38 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import * as knobs from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import ifNonNull from '../../globals/directives/if-non-null';
 import './textarea';
 import './textarea-skeleton';
 import '../form/form-item';
+import '../layer';
 import createProps from './stories/helpers';
 import storyDocs from './textarea-story.mdx';
+import { prefix } from '../../globals/settings';
+import '../../../.storybook/templates/with-layer';
 
-export const Default = (args) => {
-  const {
-    autocomplete,
-    autofocus,
-    colorScheme,
-    disabled,
-    helperText,
-    labelText,
-    name,
-    value,
-    pattern,
-    placeholder,
-    readonly,
-    required,
-    invalid,
-    validityMessage,
-    onInput,
-    rows,
-    cols,
-  } = args?.['bx-textarea'] ?? {};
+export const Default = () => {
   return html`
-    <bx-textarea
-      autocomplete="${ifNonNull(autocomplete)}"
-      ?autofocus="${autofocus}"
-      color-scheme="${ifNonNull(colorScheme)}"
-      ?disabled="${disabled}"
-      helper-text="${ifNonNull(helperText)}"
-      label-text="${ifNonNull(labelText)}"
-      name="${ifNonNull(name)}"
-      value="${ifNonNull(value)}"
-      pattern="${ifNonNull(pattern)}"
-      placeholder="${ifNonNull(placeholder)}"
-      ?readonly="${readonly}"
-      ?required="${required}"
-      ?invalid="${invalid}"
-      validity-message="${ifNonNull(validityMessage)}"
-      @input="${onInput}"
-      rows="${ifNonNull(rows)}"
-      cols="${ifNonNull(cols)}">
-    </bx-textarea>
+    <cds-form-item>
+      <cds-textarea label="Textarea label" helper-text="Optional helper text">
+      </cds-textarea>
+    </cds-form-item>
   `;
 };
 
 Default.storyName = 'Default';
 
-Default.parameters = {
-  knobs: {
-    'bx-textarea': () => createProps({ ...knobs, textNullable }),
-  },
-};
-
-export const formItem = (args) => {
-  const {
-    colorScheme,
-    disabled,
-    value,
-    placeholder,
-    invalid,
-    onInput,
-    rows,
-    cols,
-  } = args?.['bx-textarea'] ?? {};
-  return html`
-    <bx-form-item>
-      <bx-textarea
-        color-scheme="${ifNonNull(colorScheme)}"
-        placeholder="${ifNonNull(placeholder)}"
-        @input="${onInput}"
-        ?invalid="${invalid}"
-        ?disabled="${disabled}"
-        value="${ifNonNull(value)}"
-        rows="${ifNonNull(rows)}"
-        cols="${ifNonNull(cols)}">
-        <span slot="label-text">Label text</span>
-        <span slot="helper-text">Optional helper text</span>
-        <span slot="validity-message">Something isn't right</span>
-        ${value}
-      </bx-textarea>
-    </bx-form-item>
-  `;
-};
-
-formItem.storyName = 'Form item';
-
-formItem.parameters = {
-  knobs: {
-    'bx-textarea': () => createProps({ ...knobs, textNullable }),
-  },
-};
-
-export const withoutFormItemWrapper = (args) => {
-  const {
-    colorScheme,
-    disabled,
-    value,
-    placeholder,
-    invalid,
-    onInput,
-    rows,
-    cols,
-  } = args?.['bx-textarea'] ?? {};
-  return html`
-    <bx-textarea
-      color-scheme="${ifNonNull(colorScheme)}"
-      placeholder="${ifNonNull(placeholder)}"
-      @input="${onInput}"
-      ?invalid="${invalid}"
-      ?disabled="${disabled}"
-      value="${ifNonNull(value)}"
-      rows="${ifNonNull(rows)}"
-      cols="${ifNonNull(cols)}">
-      <span slot="label-text">Label text</span>
-      <span slot="helper-text">Optional helper text</span>
-      <span slot="validity-message">Something isn't right</span>
-      <span>${value}</span>
-    </bx-textarea>
-  `;
-};
-
-withoutFormItemWrapper.storyName = 'Without form item wrapper';
-
-withoutFormItemWrapper.parameters = {
-  knobs: {
-    'bx-textarea': () => createProps({ ...knobs, textNullable }),
-  },
-};
-
 export const skeleton = () =>
-  html` <bx-textarea-skeleton></bx-textarea-skeleton> `;
+  html` <cds-textarea-skeleton></cds-textarea-skeleton> `;
 
 skeleton.parameters = {
   percy: {
@@ -153,8 +40,71 @@ skeleton.parameters = {
   },
 };
 
+export const WithLayer = () => {
+  return html`
+    <sb-template-layers>
+      <cds-textarea label="Text Area label" helper-text="Optional helper text">
+      </cds-textarea>
+    </sb-template-layers>
+  `;
+};
+
+WithLayer.storyName = 'With Layer';
+
+export const Playground = (args) => {
+  const {
+    cols,
+    disabled,
+    enableCounter,
+    helperText,
+    hideLabel,
+    invalid,
+    invalidText,
+    label,
+    maxCount,
+    onInput,
+    placeholder,
+    readonly,
+    rows,
+    value,
+    warn,
+    warnText,
+  } = args?.[`${prefix}-textarea`] ?? {};
+  return html`
+    <cds-form-item>
+      <cds-textarea
+        ?enable-counter="${enableCounter}"
+        helper-text="${ifDefined(helperText)}"
+        ?hide-label="${hideLabel}"
+        ?invalid="${invalid}"
+        invalid-text="${ifDefined(invalidText)}"
+        label="${ifDefined(label)}"
+        ?readonly="${readonly}"
+        value="${ifDefined(value)}"
+        ?warn="${warn}"
+        warn-text="${ifDefined(warnText)}"
+        ?disabled="${disabled}"
+        max-count="${ifDefined(maxCount)}"
+        placeholder="${ifDefined(placeholder)}"
+        @input="${onInput}"
+        rows="${ifDefined(rows)}"
+        cols="${ifDefined(cols)}">
+        ${value}
+      </cds-textarea>
+    </cds-form-item>
+  `;
+};
+
+Playground.storyName = 'Playground';
+
+Playground.parameters = {
+  knobs: {
+    [`${prefix}-textarea`]: () => createProps({ ...knobs, textNullable }),
+  },
+};
+
 export default {
-  title: 'Components/Textarea',
+  title: 'Components/Text Area',
   parameters: {
     ...storyDocs.parameters,
   },

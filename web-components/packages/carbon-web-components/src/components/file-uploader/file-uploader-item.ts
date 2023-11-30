@@ -7,11 +7,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, property, LitElement } from 'lit-element';
+import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators.js';
 import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16';
 import Close16 from '@carbon/icons/lib/close/16';
 import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import { LOADING_TYPE } from '../loading/loading';
 import { FILE_UPLOADER_ITEM_SIZE, FILE_UPLOADER_ITEM_STATE } from './defs';
 import styles from './file-uploader.scss';
@@ -19,21 +20,19 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 
 export { FILE_UPLOADER_ITEM_SIZE, FILE_UPLOADER_ITEM_STATE };
 
-const { prefix } = settings;
-
 /**
  * File uploader item.
  *
- * @element bx-file-uploader-item
+ * @element cds-file-uploader-item
  * @slot validity-message The validity message.
  * @slot validity-message-supplement The supplemental validity message.
- * @fires bx-file-uploader-item-beingdeleted
+ * @fires cds-file-uploader-item-beingdeleted
  *   The custom event fired before this file uploader item is being deleted upon a user gesture.
  *   Cancellation of this event stops the user-initiated action of deleting this file uploader item.
- * @fires bx-file-uploader-item-deleted - The custom event fired after this file uploader item is deleted upon a user gesture.
+ * @fires cds-file-uploader-item-deleted - The custom event fired after this file uploader item is deleted upon a user gesture.
  */
 @customElement(`${prefix}-file-uploader-item`)
-class BXFileUploaderItem extends LitElement {
+class CDSFileUploaderItem extends LitElement {
   /**
    * Handles `click` event on the delete button.
    */
@@ -44,7 +43,7 @@ class BXFileUploaderItem extends LitElement {
       composed: true,
     };
     const { eventBeforeDelete, eventDelete } = this
-      .constructor as typeof BXFileUploaderItem;
+      .constructor as typeof CDSFileUploaderItem;
     if (this.dispatchEvent(new CustomEvent(eventBeforeDelete, init))) {
       this.dispatchEvent(new CustomEvent(eventDelete, init));
     }
@@ -55,7 +54,7 @@ class BXFileUploaderItem extends LitElement {
    */
   private _renderEditing() {
     const {
-      deleteAssistiveText,
+      iconDescription,
       invalid,
       _handleClickDeleteButton: handleClickDeleteButton,
     } = this;
@@ -65,7 +64,7 @@ class BXFileUploaderItem extends LitElement {
         : WarningFilled16({ class: `${prefix}--file-invalid` })}
       <button
         type="button"
-        aria-label="${deleteAssistiveText}"
+        aria-label="${iconDescription}"
         class="${prefix}--file-close"
         @click="${handleClickDeleteButton}">
         ${Close16()}
@@ -77,11 +76,11 @@ class BXFileUploaderItem extends LitElement {
    * @returns The content showing this file uploader's file uploading status as in progress.
    */
   private _renderUploading() {
-    const { uploadingAssistiveText } = this;
+    const { iconDescription } = this;
     return html`
-      <bx-loading
-        assistive-text="${uploadingAssistiveText}"
-        type="${LOADING_TYPE.SMALL}"></bx-loading>
+      <cds-loading
+        assistive-text="${iconDescription}"
+        type="${LOADING_TYPE.SMALL}"></cds-loading>
     `;
   }
 
@@ -89,10 +88,10 @@ class BXFileUploaderItem extends LitElement {
    * @returns The content showing this file uploader's file uploading status as complete.
    */
   private _renderUploaded() {
-    const { uploadedAssistiveText } = this;
+    const { iconDescription } = this;
     return CheckmarkFilled16({
       class: `${prefix}--file-complete`,
-      'aria-label': uploadedAssistiveText,
+      'aria-label': iconDescription,
     });
   }
 
@@ -102,11 +101,11 @@ class BXFileUploaderItem extends LitElement {
   private _renderStatus() {
     const { state } = this;
     switch (state) {
-      case FILE_UPLOADER_ITEM_STATE.EDITING:
+      case FILE_UPLOADER_ITEM_STATE.EDIT:
         return this._renderEditing();
       case FILE_UPLOADER_ITEM_STATE.UPLOADING:
         return this._renderUploading();
-      case FILE_UPLOADER_ITEM_STATE.UPLOADED:
+      case FILE_UPLOADER_ITEM_STATE.COMPLETE:
         return this._renderUploaded();
       default:
         return undefined;
@@ -116,8 +115,8 @@ class BXFileUploaderItem extends LitElement {
   /**
    * The `aria-label` attribute for the icon to delete this file uploader item.
    */
-  @property({ attribute: 'delete-assistive-text' })
-  deleteAssistiveText = 'Delete this file';
+  @property({ attribute: 'icon-description' })
+  iconDescription = 'Delete this file';
 
   /**
    * Controls the invalid state and visibility of the `validityMessage`.
@@ -129,7 +128,7 @@ class BXFileUploaderItem extends LitElement {
    * The size of this file uploader item.
    */
   @property({ reflect: true })
-  size = FILE_UPLOADER_ITEM_SIZE.REGULAR;
+  size = FILE_UPLOADER_ITEM_SIZE.MEDIUM;
 
   /**
    * The state of this file uploader item.
@@ -138,39 +137,33 @@ class BXFileUploaderItem extends LitElement {
   state = FILE_UPLOADER_ITEM_STATE.UPLOADING;
 
   /**
-   * The `aria-label` attribute for the icon to indicate file uploading is in progress.
+   * The error subject text.
    */
-  @property({ attribute: 'uploading-assistive-text' })
-  uploadingAssistiveText = 'Uploading';
+  @property({ attribute: 'error-subject' })
+  errorSubject = '';
 
   /**
-   * The `aria-label` attribute for the icon to indicate file uploading is complete.
+   * The error body text
    */
-  @property({ attribute: 'uploaded-assistive-text' })
-  uploadedAssistiveText = 'Uploaded';
-
-  /**
-   * The validity message.
-   */
-  @property({ attribute: 'validity-message' })
-  validityMessage = '';
+  @property({ attribute: 'error-body' })
+  errorBody = '';
 
   render() {
-    const { validityMessage } = this;
-    return html`
-      <p class="${prefix}--file-filename"><slot></slot></p>
+    const { invalid, errorSubject, errorBody } = this;
+    return html` <p class="${prefix}--file-filename"><slot></slot></p>
       <span class="${prefix}--file__state-container"
         >${this._renderStatus()}</span
       >
-      <div class="${prefix}--form-requirement">
-        <div class="${prefix}--form-requirement__title">
-          <slot name="validity-message">${validityMessage}</slot>
-        </div>
-        <p class="${prefix}--form-requirement__supplement">
-          <slot name="validity-message-supplement"></slot>
+      <div
+        class="${prefix}--form-requirement"
+        ?hidden="${!invalid && !errorSubject}">
+        <div class="${prefix}--form-requirement__title">${errorSubject}</div>
+        <p
+          class="${prefix}--form-requirement__supplement"
+          ?hidden="${!errorBody}">
+          ${errorBody}
         </p>
-      </div>
-    `;
+      </div>`;
   }
 
   /**
@@ -191,4 +184,4 @@ class BXFileUploaderItem extends LitElement {
   static styles = styles;
 }
 
-export default BXFileUploaderItem;
+export default CDSFileUploaderItem;

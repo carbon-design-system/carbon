@@ -7,21 +7,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, property, LitElement } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
+import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import styles from './list.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * List item.
  *
- * @element bx-list-item
+ * @element cds-list-item
  * @slot nested - The nested child list.
  */
 @customElement(`${prefix}-list-item`)
-class BXListItem extends LitElement {
+class CDSListItem extends LitElement {
   /**
    * `true` if there is slotted nested child list.
    */
@@ -40,7 +39,7 @@ class BXListItem extends LitElement {
 
   /**
    * `true` if this list item is a child of a nested list.
-   * `<bx-ordered-list>` or `<bx-unordered-list>` automatically sets this property.
+   * `<cds-ordered-list>` or `<cds-unordered-list>` automatically sets this property.
    */
   @property({ type: Boolean, reflect: true })
   nested = false;
@@ -50,7 +49,9 @@ class BXListItem extends LitElement {
     this.toggleAttribute(
       'nested',
       Boolean(
-        this.closest((this.constructor as typeof BXListItem).selectorNestedList)
+        this.closest(
+          (this.constructor as typeof CDSListItem).selectorNestedList
+        )
       )
     );
     if (!this.hasAttribute('role')) {
@@ -84,4 +85,4 @@ class BXListItem extends LitElement {
   static styles = styles;
 }
 
-export default BXListItem;
+export default CDSListItem;

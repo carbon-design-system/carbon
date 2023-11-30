@@ -1,21 +1,19 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, render } from 'lit-html';
+import { html, render } from 'lit';
 import EventManager from '../utils/event-manager';
-import { INPUT_SIZE } from '../../src/components/input/input';
-import BXSelect, {
-  SELECT_COLOR_SCHEME,
-} from '../../src/components/select/select';
-import BXSelectItem from '../../src/components/select/select-item';
-import BXSelectItemGroup from '../../src/components/select/select-item-group';
-import { Default } from '../../src/components/select/select-story';
+import { INPUT_SIZE } from '../../src/components/text-input/text-input';
+import CDSSelect from '../../src/components/select/select';
+import CDSSelectItem from '../../src/components/select/select-item';
+import CDSSelectItemGroup from '../../src/components/select/select-item-group';
+import { Playground } from '../../src/components/select/select-story';
 
 /**
  * @param formData A `FormData` instance.
@@ -31,18 +29,18 @@ const getValues = (formData: FormData) => {
 };
 
 const template = (props?) =>
-  Default({
-    'bx-select': props,
+  Playground({
+    'cds-select': props,
   });
 
-describe('bx-select', function () {
+describe('cds-select', function () {
   const events = new EventManager();
 
   describe('Misc attributes', function () {
     it('should render with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-select' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-select' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -51,7 +49,6 @@ describe('bx-select', function () {
       render(
         template({
           autofocus: true,
-          colorScheme: SELECT_COLOR_SCHEME.LIGHT,
           disabled: true,
           helperText: 'helper-text-foo',
           labelText: 'label-text-foo',
@@ -63,7 +60,7 @@ describe('bx-select', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-select' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-select' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -71,14 +68,14 @@ describe('bx-select', function () {
     it('should render invalid state', async function () {
       render(
         template({
-          helperText: 'helper-text-foo', // `validityMessage` should take precedence
+          helperText: 'helper-text-foo', // `invalidText` should take precedence
           invalid: true,
-          validityMessage: 'validity-message-foo',
+          invalidText: 'validity-message-foo',
         }),
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-select' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-select' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -88,8 +85,8 @@ describe('bx-select', function () {
     it('should support adding an option', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      const elem = document.body.querySelector('bx-select');
-      const item = document.createElement('bx-select-item') as BXSelectItem;
+      const elem = document.body.querySelector('cds-select');
+      const item = document.createElement('cds-select-item') as CDSSelectItem;
       item.disabled = true;
       item.label = 'label-foo';
       item.selected = true;
@@ -109,12 +106,12 @@ describe('bx-select', function () {
       render(template(), document.body);
       await Promise.resolve();
       const item = document.body.querySelector(
-        'bx-select-item[value="staging"]'
+        'cds-select-item[value="staging"]'
       );
-      (item as BXSelectItem).disabled = true;
+      (item as CDSSelectItem).disabled = true;
       await Promise.resolve(); // Let `MutationObserver` run
       await Promise.resolve(); // Update cycle of rendering new child `<option>`s
-      const elem = document.body.querySelector('bx-select');
+      const elem = document.body.querySelector('cds-select');
       const option = elem!.shadowRoot!.querySelector(
         'option[value="staging"]'
       ) as HTMLOptionElement;
@@ -125,12 +122,12 @@ describe('bx-select', function () {
       render(template(), document.body);
       await Promise.resolve();
       const item = document.body.querySelector(
-        'bx-select-item[value="staging"]'
+        'cds-select-item[value="staging"]'
       );
       item!.parentNode!.removeChild(item!);
       await Promise.resolve(); // Let `MutationObserver` run
       await Promise.resolve(); // Update cycle of rendering new child `<option>`s
-      const elem = document.body.querySelector('bx-select');
+      const elem = document.body.querySelector('cds-select');
       expect(
         elem!.shadowRoot!.querySelector('option[value="staging"]')
       ).toBeNull();
@@ -139,10 +136,10 @@ describe('bx-select', function () {
     it('should support adding an option group', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      const elem = document.body.querySelector('bx-select');
+      const elem = document.body.querySelector('cds-select');
       const item = document.createElement(
-        'bx-select-item-group'
-      ) as BXSelectItem;
+        'cds-select-item-group'
+      ) as CDSSelectItem;
       item.disabled = true;
       item.label = 'label-foo';
       elem!.appendChild(item);
@@ -159,12 +156,12 @@ describe('bx-select', function () {
       render(template(), document.body);
       await Promise.resolve();
       const itemGroup = document.body.querySelector(
-        'bx-select-item-group[label="Category 2"]'
+        'cds-select-item-group[label="Category 2"]'
       );
-      (itemGroup as BXSelectItemGroup).disabled = true;
+      (itemGroup as CDSSelectItemGroup).disabled = true;
       await Promise.resolve(); // Let `MutationObserver` run
       await Promise.resolve(); // Update cycle of rendering new child `<optgroup>`s
-      const elem = document.body.querySelector('bx-select');
+      const elem = document.body.querySelector('cds-select');
       const option = elem!.shadowRoot!.querySelector(
         'optgroup[label="Category 2"]'
       ) as HTMLOptGroupElement;
@@ -175,12 +172,12 @@ describe('bx-select', function () {
       render(template(), document.body);
       await Promise.resolve();
       const itemGroup = document.body.querySelector(
-        'bx-select-item-group[label="Category 2"]'
+        'cds-select-item-group[label="Category 2"]'
       );
       itemGroup!.parentNode!.removeChild(itemGroup!);
       await Promise.resolve(); // Let `MutationObserver` run
       await Promise.resolve(); // Update cycle of rendering new child `<optgroup>`s
-      const elem = document.body.querySelector('bx-select');
+      const elem = document.body.querySelector('cds-select');
       expect(
         elem!.shadowRoot!.querySelector('optgroup[label="Category 2"]')
       ).toBeNull();
@@ -192,14 +189,16 @@ describe('bx-select', function () {
       render(
         template({
           children: html`
-            <bx-select-item value="all">Option 1</bx-select-item>
-            <bx-select-item value="cloudFoundry">Option 2</bx-select-item>
+            <cds-select-item value="all">Option 1</cds-select-item>
+            <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
           `,
         }),
         document.body
       );
       await Promise.resolve();
-      const { options } = document.body.querySelector('bx-select') as BXSelect;
+      const { options } = document.body.querySelector(
+        'cds-select'
+      ) as CDSSelect;
       expect(
         Array.prototype.map.call(options, (option) => option.value)
       ).toEqual(['all', 'cloudFoundry']);
@@ -209,34 +208,34 @@ describe('bx-select', function () {
       render(
         template({
           children: html`
-            <bx-select-item value="all">Option 1</bx-select-item>
-            <bx-select-item value="cloudFoundry">Option 2</bx-select-item>
+            <cds-select-item value="all">Option 1</cds-select-item>
+            <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
           `,
         }),
         document.body
       );
       await Promise.resolve();
       expect(
-        (document.body.querySelector('bx-select') as BXSelect).length
+        (document.body.querySelector('cds-select') as CDSSelect).length
       ).toBe(2);
     });
 
     it('should support querying the type', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect((document.body.querySelector('bx-select') as BXSelect).type).toBe(
-        'select-one'
-      );
+      expect(
+        (document.body.querySelector('cds-select') as CDSSelect).type
+      ).toBe('select-one');
     });
 
     it('should unsupport multiple selection', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      const elem = document.body.querySelector('bx-select');
+      const elem = document.body.querySelector('cds-select');
       const { _attributeToProperty: origAttributeToProperty } = elem as any;
       let caught;
       await new Promise<void>((resolve) => {
-        spyOn(BXSelect.prototype as any, '_attributeToProperty').and.callFake(
+        spyOn(CDSSelect.prototype as any, '_attributeToProperty').and.callFake(
           function () {
             try {
               // TODO: See if we can get around TS2683
@@ -251,21 +250,21 @@ describe('bx-select', function () {
         elem!.setAttribute('multiple', '');
       });
       expect(caught).toBeDefined();
-      expect((elem as BXSelect).multiple).toBe(false);
+      expect((elem as CDSSelect).multiple).toBe(false);
     });
 
     it('should support querying the selected index', async function () {
       render(template({ value: 'staging' }), document.body);
       await Promise.resolve();
       expect(
-        (document.body.querySelector('bx-select') as BXSelect).selectedIndex
+        (document.body.querySelector('cds-select') as CDSSelect).selectedIndex
       ).toBe(2);
     });
 
     it('should support setting the selected index', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      const select = document.body.querySelector('bx-select') as BXSelect;
+      const select = document.body.querySelector('cds-select') as CDSSelect;
       select.selectedIndex = 2;
       expect(select.value).toBe('staging');
     });
@@ -330,47 +329,36 @@ describe('bx-select', function () {
     beforeEach(async function () {
       render(template(), document.body);
       await Promise.resolve();
-      elem = document.body.querySelector('bx-select')!;
+      elem = document.body.querySelector('cds-select')!;
     });
 
     it('should support checking if required value exists', async function () {
-      const select = elem as BXSelect;
+      const select = elem as CDSSelect;
       select.required = true;
       const spyInvalid = jasmine.createSpy('invalid');
       events.on(select, 'invalid', spyInvalid);
-      expect(select.checkValidity()).toBe(false);
       expect(spyInvalid).toHaveBeenCalled();
       expect(select.invalid).toBe(true);
-      expect(select.validityMessage).toBe('Please fill out this field.');
+      expect(select.invalidText).toBe('Please fill out this field.');
       select.value = 'staging';
-      expect(select.checkValidity()).toBe(true);
       expect(select.invalid).toBe(false);
-      expect(select.validityMessage).toBe('');
+      expect(select.invalidText).toBe('');
     });
 
     it('should support canceling required check', async function () {
-      const select = elem as BXSelect;
+      const select = elem as CDSSelect;
       select.required = true;
       events.on(select, 'invalid', (event) => {
         event.preventDefault();
       });
-      expect(select.checkValidity()).toBe(false);
       expect(select.invalid).toBe(false);
-      expect(select.validityMessage).toBe('');
+      expect(select.invalidText).toBe('');
     });
 
     it('should treat empty custom validity message as not invalid', async function () {
-      const select = elem as BXSelect;
-      select.setCustomValidity('');
+      const select = elem as CDSSelect;
       expect(select.invalid).toBe(false);
-      expect(select.validityMessage).toBe('');
-    });
-
-    it('should treat non-empty custom validity message as invalid', async function () {
-      const select = elem as BXSelect;
-      select.setCustomValidity('validity-message-foo');
-      expect(select.invalid).toBe(true);
-      expect(select.validityMessage).toBe('validity-message-foo');
+      expect(select.invalidText).toBe('');
     });
   });
 

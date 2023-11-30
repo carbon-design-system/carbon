@@ -7,7 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, svg } from 'lit-html';
+import { html, svg } from 'lit';
 
 // Below path will be there when an application installs `@carbon/web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
@@ -49,18 +49,22 @@ withAriaLabel.storyName = 'With aria-label';
 export const withTitle = () => html`
   ${Add16({
     'aria-describedby': 'id-title-1',
+    // @ts-ignore
     children: svg`<title id="id-title-1">add</title>`,
   })}
   ${Add20({
     'aria-describedby': 'id-title-2',
+    // @ts-ignore
     children: svg`<title id="id-title-2">add</title>`,
   })}
   ${Add24({
     'aria-describedby': 'id-title-3',
+    // @ts-ignore
     children: svg`<title id="id-title-3">add</title>`,
   })}
   ${Add32({
     'aria-describedby': 'id-title-4',
+    // @ts-ignore
     children: svg`<title id="id-title-4">add</title>`,
   })}
 `;

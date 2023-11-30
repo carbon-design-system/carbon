@@ -1,14 +1,14 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React, { Component, createElement, forwardRef } from 'react';
-import on from 'carbon-components/es/globals/js/misc/on';
+import on from '../mixins/on';
 import Handle from '../internal/handle';
 
 /**
@@ -183,7 +183,7 @@ const attachEventListeners = (
  * import { render } from 'react-dom';
  * import createCustomElementType, { booleanSerializer } from '/path/to/createCustomElementType';
  *
- * const BXDropdown = createCustomElementType('bx-dropdown', {
+ * const CDSDropdown = createCustomElementType(`${prefix}-dropdown`, {
  *   disabled: {
  *     // Sets `disabled` attribute when the React prop value is truthy, unsets otherwise
  *     serialize: booleanSerializer,
@@ -193,21 +193,21 @@ const attachEventListeners = (
  *     attribute: 'helper-text',
  *   },
  *   onBeforeSelect: {
- *     // Sets `onBeforeSelect` React prop value as a listener of `bx-dropdown-beingselected` custom event
- *     event: 'bx-dropdown-beingselected',
+ *     // Sets `onBeforeSelect` React prop value as a listener of `cds-dropdown-beingselected` custom event
+ *     event: `${prefix}-dropdown-beingselected`,
  *   },
  * });
  *
  * render(
  *   (
- *     <BXDropdown
+ *     <CDSDropdown
  *       disabled={true}
  *       helperText="some-helper-text"
- *       onBeforeSelect={event => { console.log('bx-dropdown-beingselected is fired!', event); }}>
- *       <bx-dropdown-item value="all">Option 1</bx-dropdown-item>
- *       <bx-dropdown-item value="cloudFoundry">Option 2</bx-dropdown-item>
- *       <bx-dropdown-item value="staging">Option 3</bx-dropdown-item>
- *     </BXDropdown>
+ *       onBeforeSelect={event => { console.log(`${prefix}-dropdown-beingselected is fired!`, event); }}>
+ *       <cds-dropdown-item value="all">Option 1</cds-dropdown-item>
+ *       <cds-dropdown-item value="cloudFoundry">Option 2</cds-dropdown-item>
+ *       <cds-dropdown-item value="staging">Option 3</cds-dropdown-item>
+ *     </CDSDropdown>
  *   )
  *   document.body
  * );

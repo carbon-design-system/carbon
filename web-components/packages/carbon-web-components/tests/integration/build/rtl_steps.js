@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -40,9 +40,9 @@ describe('RTL example', () => {
 
   it('should have RTL style applied', async () => {
     const transformValue = await page.evaluate((slider) => {
-      const filledTrackContainer = slider.shadowRoot.querySelector('.bx-ce--slider__filled-track-container');
+      const filledTrackContainer = slider.shadowRoot.querySelector('.cds-ce--slider__filled-track-container');
       return filledTrackContainer.ownerDocument.defaultView.getComputedStyle(filledTrackContainer).getPropertyValue('transform');
-    }, await expect(page).toMatchElement('bx-slider'));
+    }, await expect(page).toMatchElement('cds-slider'));
     expect(transformValue).toEqual(expect.stringMatching(/matrix\( *-1/));
   });
 

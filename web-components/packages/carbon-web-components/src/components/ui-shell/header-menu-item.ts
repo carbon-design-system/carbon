@@ -7,18 +7,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
+import CDSHeaderNavItem from './header-nav-item';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import BXHeaderNavItem from './header-nav-item';
-
-const { prefix } = settings;
 
 /**
  * Header submenu item.
  *
- * @element bx-header-menu-item
+ * @element cds-header-menu-item
  */
 @customElement(`${prefix}-header-menu-item`)
-class BXHeaderMenuItem extends BXHeaderNavItem {}
+class CDSHeaderMenuItem extends CDSHeaderNavItem {}
 
-export default BXHeaderMenuItem;
+export default CDSHeaderMenuItem;

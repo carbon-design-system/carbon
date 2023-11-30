@@ -7,20 +7,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, LitElement } from 'lit-element';
-import settings from 'carbon-components/es/globals/js/settings';
+import { LitElement, html } from 'lit';
+import { prefix } from '../../globals/settings';
 import styles from './structured-list.scss';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
-const { prefix } = settings;
 
 /**
  * Structured list cell.
  *
- * @element bx-structured-list-cell
+ * @element cds-structured-list-cell
  */
 @customElement(`${prefix}-structured-list-cell`)
-class BXStructuredListCell extends LitElement {
+class CDSStructuredListCell extends LitElement {
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'cell');
@@ -35,4 +33,4 @@ class BXStructuredListCell extends LitElement {
   static styles = styles;
 }
 
-export default BXStructuredListCell;
+export default CDSStructuredListCell;

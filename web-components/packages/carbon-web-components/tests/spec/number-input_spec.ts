@@ -1,17 +1,17 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, render } from 'lit-html';
+import { html, render } from 'lit';
 import EventManager from '../utils/event-manager';
 
-import BXNumberInput from '../../src/components/number-input/number-input';
-import { Default } from '../../src/components/number-input/number-input-story';
+import CDSNumberInput from '../../src/components/number-input/number-input';
+import { Playground } from '../../src/components/number-input/number-input-story';
 
 /**
  * @param formData A `FormData` instance.
@@ -27,11 +27,11 @@ const getValues = (formData: FormData) => {
 };
 
 const template = (props?) =>
-  Default({
-    'bx-number-input': props,
+  Playground({
+    'cds-number-input': props,
   });
 
-describe('bx-number-input', function () {
+describe('cds-number-input', function () {
   const events = new EventManager();
 
   describe('Rendering', function () {
@@ -58,7 +58,7 @@ describe('bx-number-input', function () {
       );
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-number-input' as any)
+        document.body.querySelector('cds-number-input' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
@@ -126,7 +126,7 @@ describe('bx-number-input', function () {
     beforeEach(async function () {
       render(template(), document.body);
       await Promise.resolve();
-      elem = document.body.querySelector('bx-number-input')!;
+      elem = document.body.querySelector('cds-number-input')!;
     });
 
     // This test is skipped for now since there seems to be a bug somewhere in the test stack.
@@ -135,7 +135,7 @@ describe('bx-number-input', function () {
     // with this specific test case
     // eslint-disable-next-line
     xit('should support checking if required value exists', async function () {
-      const input = elem as BXNumberInput;
+      const input = elem as CDSNumberInput;
       input.value = null as any;
       input.required = true;
       const spyInvalid = jasmine.createSpy('invalid');
@@ -152,7 +152,7 @@ describe('bx-number-input', function () {
     });
 
     it('should support canceling required check', async function () {
-      const input = elem as BXNumberInput;
+      const input = elem as CDSNumberInput;
       input.required = true;
       events.on(input, 'invalid', (event) => {
         event.preventDefault();
@@ -163,21 +163,21 @@ describe('bx-number-input', function () {
     });
 
     it('should treat empty custom validity message as not invalid', async function () {
-      const input = elem as BXNumberInput;
+      const input = elem as CDSNumberInput;
       input.setCustomValidity('');
       expect(input.invalid).toBe(false);
       expect(input.validityMessage).toBe('');
     });
 
     it('should treat non-empty custom validity message as invalid', async function () {
-      const input = elem as BXNumberInput;
+      const input = elem as CDSNumberInput;
       input.setCustomValidity('validity-message-foo');
       expect(input.invalid).toBe(true);
       expect(input.validityMessage).toBe('validity-message-foo');
     });
 
     it('should warn if a value less than the min', async function () {
-      const input = elem as BXNumberInput;
+      const input = elem as CDSNumberInput;
       input.min = '50';
       input.value = '0';
       await Promise.resolve();
@@ -185,7 +185,7 @@ describe('bx-number-input', function () {
     });
 
     it('should warn if a value is greater than the max', async function () {
-      const input = elem as BXNumberInput;
+      const input = elem as CDSNumberInput;
       input.max = '50';
       input.value = '51';
       await Promise.resolve();
@@ -199,11 +199,11 @@ describe('bx-number-input', function () {
     beforeEach(async function () {
       render(template(), document.body);
       await Promise.resolve();
-      elem = document.body.querySelector('bx-number-input')!;
+      elem = document.body.querySelector('cds-number-input')!;
     });
 
     it('should increment values', async function () {
-      const input = elem as BXNumberInput;
+      const input = elem as CDSNumberInput;
       const initialValue = Number(input.value);
       const stepSize = Number(input.step);
       input.stepUp();
@@ -211,7 +211,7 @@ describe('bx-number-input', function () {
     });
 
     it('should decrement values', async function () {
-      const input = elem as BXNumberInput;
+      const input = elem as CDSNumberInput;
       const initialValue = Number(input.value);
       const stepSize = Number(input.step);
       input.stepDown();
@@ -219,11 +219,11 @@ describe('bx-number-input', function () {
     });
 
     it('should increment values upon user gesture', async function () {
-      const input = elem as BXNumberInput;
+      const input = elem as CDSNumberInput;
       const initialValue = Number(input.value);
       const stepSize = Number(input.step);
       const spyInput = jasmine.createSpy('input');
-      events.on(elem, 'bx-number-input', spyInput);
+      events.on(elem, 'cds-number-input', spyInput);
       (elem.shadowRoot!.querySelector('button.up-icon') as HTMLElement).click();
       expect(Number(input.value)).toEqual(initialValue + stepSize);
       expect(Number(spyInput.calls.argsFor(0)[0].detail.value)).toBe(
@@ -232,11 +232,11 @@ describe('bx-number-input', function () {
     });
 
     it('should decrement values upon user gesture', async function () {
-      const input = elem as BXNumberInput;
+      const input = elem as CDSNumberInput;
       const initialValue = Number(input.value);
       const stepSize = Number(input.step);
       const spyInput = jasmine.createSpy('input');
-      events.on(elem, 'bx-number-input', spyInput);
+      events.on(elem, 'cds-number-input', spyInput);
       (
         elem.shadowRoot!.querySelector('button.down-icon') as HTMLElement
       ).click();
@@ -247,7 +247,7 @@ describe('bx-number-input', function () {
     });
 
     it('should increment values by the step amount', async function () {
-      const input = elem as BXNumberInput;
+      const input = elem as CDSNumberInput;
       const initialValue = Number(input.value);
       input.step = '50';
       await Promise.resolve(); // wait for the value to apply
@@ -258,7 +258,7 @@ describe('bx-number-input', function () {
     });
 
     it('should decrement values by the step amount', async function () {
-      const input = elem as BXNumberInput;
+      const input = elem as CDSNumberInput;
       const initialValue = Number(input.value);
       input.step = '50';
       await Promise.resolve(); // wait for the value to apply
@@ -269,7 +269,7 @@ describe('bx-number-input', function () {
     });
 
     it('should not step past the max value', async function () {
-      const input = elem as BXNumberInput;
+      const input = elem as CDSNumberInput;
       input.max = '50';
       input.value = '50';
       await Promise.resolve();
@@ -279,7 +279,7 @@ describe('bx-number-input', function () {
     });
 
     it('should not step below the min value', async function () {
-      const input = elem as BXNumberInput;
+      const input = elem as CDSNumberInput;
       input.min = '50';
       input.value = '50';
       await Promise.resolve();

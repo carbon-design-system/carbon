@@ -1,6 +1,6 @@
 # `ui-shell`
 
-## `bx-header-menu-button`
+## `cds-header-menu-button`
 
 ##   `Misc attributes`
 
@@ -9,7 +9,7 @@
 ```
 <button
   aria-label="Open navigation menu"
-  class="bx--header__action bx--header__menu-toggle bx--header__menu-trigger"
+  class="cds--header__action cds--header__menu-toggle cds--header__menu-trigger"
   part="button"
 >
 </button>
@@ -21,7 +21,7 @@
 ```
 <button
   aria-label="button-label-inactive"
-  class="bx--header__action bx--header__menu-toggle bx--header__menu-trigger"
+  class="cds--header__action cds--header__menu-toggle cds--header__menu-trigger"
   disabled=""
   part="button"
 >
@@ -34,7 +34,7 @@
 ```
 <button
   aria-label="button-label-active"
-  class="bx--header__action bx--header__action--active bx--header__menu-toggle bx--header__menu-trigger"
+  class="cds--header__action cds--header__action--active cds--header__menu-toggle cds--header__menu-trigger"
   disabled=""
   part="button"
 >
@@ -42,7 +42,7 @@
 
 ```
 
-## `bx-header-menu`
+## `cds-header-menu`
 
 ##   `Misc attributes`
 
@@ -52,7 +52,7 @@
 <a
   aria-expanded="false"
   aria-haspopup="menu"
-  class="bx--header__menu-item bx--header__menu-title"
+  class="cds--header__menu-item cds--header__menu-title"
   href="javascript:void 0"
   part="trigger"
   role="button"
@@ -60,7 +60,7 @@
 >
 </a>
 <ul
-  class="bx--header__menu"
+  class="cds--header__menu"
   part="menu-body"
 >
   <slot>
@@ -75,7 +75,7 @@
 <a
   aria-expanded="true"
   aria-haspopup="menu"
-  class="bx--header__menu-item bx--header__menu-title"
+  class="cds--header__menu-item cds--header__menu-title"
   href="javascript:void 0"
   part="trigger"
   role="button"
@@ -85,7 +85,7 @@
 </a>
 <ul
   aria-label="menu-label-foo"
-  class="bx--header__menu"
+  class="cds--header__menu"
   part="menu-body"
 >
   <slot>
@@ -94,7 +94,7 @@
 
 ```
 
-## `bx-header-name`
+## `cds-header-name`
 
 ##   `Misc attributes`
 
@@ -102,7 +102,7 @@
 
 ```
 <a
-  class="bx--header__name"
+  class="cds--header__name"
   part="link"
 >
   <slot>
@@ -115,12 +115,12 @@
 
 ```
 <a
-  class="bx--header__name"
+  class="cds--header__name"
   href="about:blank"
   part="link"
 >
   <span
-    class="bx--header__name--prefix"
+    class="cds--header__name--prefix"
     part="prefix"
   >
     prefix-foo
@@ -131,7 +131,7 @@
 
 ```
 
-## `bx-header-nav`
+## `cds-header-nav`
 
 ##   `Misc attributes`
 
@@ -139,13 +139,13 @@
 
 ```
 <div
-  class="bx-ce--header__divider"
+  class="cds-ce--header__divider"
   part="divider"
 >
 </div>
 <ul
-  aria-label="undefined"
-  class="bx--header__menu-bar"
+  aria-label=""
+  class="cds--header__menu-bar"
   part="menu-body"
 >
   <slot>
@@ -158,13 +158,13 @@
 
 ```
 <div
-  class="bx-ce--header__divider"
+  class="cds-ce--header__divider"
   part="divider"
 >
 </div>
 <ul
   aria-label="menu-bar-label-foo"
-  class="bx--header__menu-bar"
+  class="cds--header__menu-bar"
   part="menu-body"
 >
   <slot>
@@ -173,7 +173,7 @@
 
 ```
 
-## `bx-header-nav-item`
+## `cds-header-nav-item`
 
 ##   `Misc attributes`
 
@@ -181,12 +181,12 @@
 
 ```
 <a
-  class="bx--header__menu-item"
+  class="cds--header__menu-item"
   part="link"
   tabindex="0"
 >
   <span
-    class="bx--text-truncate--end"
+    class="cds--text-truncate--end"
     part="title"
   >
     <slot>
@@ -200,13 +200,13 @@
 
 ```
 <a
-  class="bx--header__menu-item"
+  class="cds--header__menu-item"
   href="about:blank"
   part="link"
   tabindex="0"
 >
   <span
-    class="bx--text-truncate--end"
+    class="cds--text-truncate--end"
     part="title"
   >
     <slot>
@@ -216,7 +216,7 @@
 
 ```
 
-## `bx-side-nav-link`
+## `cds-side-nav-link`
 
 ##   `Misc attributes`
 
@@ -224,12 +224,12 @@
 
 ```
 <a
-  class="bx--side-nav__link"
+  class="cds--side-nav__link"
   href=""
   part="link"
 >
   <div
-    class="bx--side-nav__icon"
+    class="cds--side-nav__icon"
     hidden=""
     id="title-icon-container"
     part="title-icon-container"
@@ -238,7 +238,7 @@
     </slot>
   </div>
   <span
-    class="bx--side-nav__link-text"
+    class="cds--side-nav__link-text"
     part="title"
   >
     <slot>
@@ -252,12 +252,12 @@
 
 ```
 <a
-  class="bx--side-nav__link bx--side-nav__link--current"
+  class="cds--side-nav__link cds--side-nav__link--current"
   href="about:blank"
   part="link"
 >
   <div
-    class="bx--side-nav__icon"
+    class="cds--side-nav__icon"
     id="title-icon-container"
     part="title-icon-container"
   >
@@ -265,7 +265,7 @@
     </slot>
   </div>
   <span
-    class="bx--side-nav__link-text"
+    class="cds--side-nav__link-text"
     part="title"
   >
     <slot>
@@ -275,7 +275,7 @@
 
 ```
 
-## `bx-side-nav-menu`
+## `cds-side-nav-menu`
 
 ##   `Misc attributes`
 
@@ -285,12 +285,12 @@
 <button
   aria-expanded="false"
   aria-haspopup="true"
-  class="bx--side-nav__submenu"
+  class="cds--side-nav__submenu"
   part="expando"
   type="button"
 >
   <div
-    class="bx--side-nav__icon"
+    class="cds--side-nav__icon"
     hidden=""
     id="title-icon-container"
     part="title-icon-container"
@@ -299,18 +299,18 @@
     </slot>
   </div>
   <span
-    class="bx--side-nav__submenu-title"
+    class="cds--side-nav__submenu-title"
     part="title"
   >
   </span>
   <div
-    class="bx--side-nav__icon bx--side-nav__icon--small bx--side-nav__submenu-chevron"
+    class="cds--side-nav__icon cds--side-nav__icon--small cds--side-nav__submenu-chevron"
     part="expando-icon-container"
   >
   </div>
 </button>
 <ul
-  class="bx--side-nav__menu"
+  class="cds--side-nav__menu"
   part="menu-body"
 >
   <slot>
@@ -325,12 +325,12 @@
 <button
   aria-expanded="true"
   aria-haspopup="true"
-  class="bx--side-nav__submenu"
+  class="cds--side-nav__submenu"
   part="expando"
   type="button"
 >
   <div
-    class="bx--side-nav__icon"
+    class="cds--side-nav__icon"
     hidden=""
     id="title-icon-container"
     part="title-icon-container"
@@ -339,19 +339,19 @@
     </slot>
   </div>
   <span
-    class="bx--side-nav__submenu-title"
+    class="cds--side-nav__submenu-title"
     part="title"
   >
     title-foo
   </span>
   <div
-    class="bx--side-nav__icon bx--side-nav__icon--small bx--side-nav__submenu-chevron"
+    class="cds--side-nav__icon cds--side-nav__icon--small cds--side-nav__submenu-chevron"
     part="expando-icon-container"
   >
   </div>
 </button>
 <ul
-  class="bx--side-nav__menu"
+  class="cds--side-nav__menu"
   part="menu-body"
 >
   <slot>
@@ -366,12 +366,12 @@
 <button
   aria-expanded="false"
   aria-haspopup="true"
-  class="bx--side-nav__submenu"
+  class="cds--side-nav__submenu"
   part="expando"
   type="button"
 >
   <div
-    class="bx--side-nav__icon"
+    class="cds--side-nav__icon"
     hidden=""
     id="title-icon-container"
     part="title-icon-container"
@@ -380,18 +380,18 @@
     </slot>
   </div>
   <span
-    class="bx--side-nav__submenu-title"
+    class="cds--side-nav__submenu-title"
     part="title"
   >
   </span>
   <div
-    class="bx--side-nav__icon bx--side-nav__icon--small bx--side-nav__submenu-chevron"
+    class="cds--side-nav__icon cds--side-nav__icon--small cds--side-nav__submenu-chevron"
     part="expando-icon-container"
   >
   </div>
 </button>
 <ul
-  class="bx--side-nav__menu"
+  class="cds--side-nav__menu"
   part="menu-body"
 >
   <slot>
@@ -400,7 +400,7 @@
 
 ```
 
-## `bx-side-nav-menu-item`
+## `cds-side-nav-menu-item`
 
 ##   `Misc attributes`
 
@@ -408,12 +408,12 @@
 
 ```
 <a
-  class="bx--side-nav__link"
+  class="cds--side-nav__link"
   href=""
   part="link"
 >
   <span
-    class="bx--side-nav__link-text"
+    class="cds--side-nav__link-text"
     part="title"
   >
     <slot>
@@ -427,12 +427,12 @@
 
 ```
 <a
-  class="bx--side-nav__link bx--side-nav__link--current"
+  class="cds--side-nav__link cds--side-nav__link--current"
   href="about:blank"
   part="link"
 >
   <span
-    class="bx--side-nav__link-text"
+    class="cds--side-nav__link-text"
     part="title"
   >
     <slot>
@@ -442,7 +442,7 @@
 
 ```
 
-## `Misc attributes`
+##   `Misc attributes`
 
 ####   `should render with minimum attributes`
 

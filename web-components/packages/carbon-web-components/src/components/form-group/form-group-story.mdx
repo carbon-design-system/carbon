@@ -1,0 +1,60 @@
+import { Props, Description } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+
+# Form Group
+
+> 💡 Check our
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/form-group)
+> example implementation.
+
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/form-group)
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/form-group/index.js';
+```
+
+<Description markdown={`${cdnJs({ components: ['form-group'] })}`} />
+<Description markdown={`${cdnCss()}`} />
+
+### HTML
+
+```html
+<cds-form-group legend-text="FormGroup Legend">
+  <cds-stack gap="7">
+    <cds-text-input label="First Name"> </cds-text-input>
+    <cds-text-input label="Last Name"> </cds-text-input>
+    <cds-radio-button-group
+      legend-text="Radio button heading"
+      name="radio-button-group"
+      value="radio-1">
+      <cds-radio-button
+        label-text="Option 1"
+        value="radio-1"
+        id="radio-1"></cds-radio-button>
+      <cds-radio-button
+        label-text="Option 2"
+        value="radio-2"
+        id="radio-2"></cds-radio-button>
+      <cds-radio-button
+        label-text="Option 3"
+        value="radio-3"
+        id="radio-3"></cds-radio-button>
+    </cds-radio-button-group>
+    <cds-button>Submit</cds-button>
+  </cds-stack>
+</cds-form-group>
+```
+
+## `<cds-form-group>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-form-group message>`) and `false` means not setting the attribute (e.g.
+`<cds-form-group>` without `message` attribute).
+
+<Props of="cds-form-group" />

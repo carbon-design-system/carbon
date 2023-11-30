@@ -13,22 +13,24 @@ LICENSE file in the root directory of this source tree.
   <meta charset="UTF-8" />
   <link rel="stylesheet"
         href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"/>
+  
+  <link rel="stylesheet" href="src/styles.scss" />
   <style>
     /* Suppress custom element until styles are loaded */
-    bx-file-uploader:not(:defined) {
+    cds-file-uploader:not(:defined) {
       display: none;
     }
   </style>
   <script type="module" src="src/index.js"></script>
 </head>
 <body>
-  <bx-file-uploader helper-text="Only .jpg and .png files. 500kb max file size" label-text="Account photo">
-    <bx-file-drop-container
-      accept="image/jpeg image/png"
-      multiple="true"
-    >
+  <cds-file-uploader
+    label-description="Only .jpg and .png files. 500kb max file size"
+    label-title="Account photo"
+  >
+    <cds-file-uploader-button accept="image/jpeg image/png" multiple>
       Drag and drop files here or click to upload
-    </bx-file-drop-container>
-  </bx-file-uploader>
+    </cds-file-drop-container>
+  </cds-file-uploader>
 </body>
 </html>

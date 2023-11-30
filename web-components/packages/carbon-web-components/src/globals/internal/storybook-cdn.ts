@@ -44,7 +44,7 @@ export const cdnJs = ({ components }) => {
  ${_renderScript(components, `version/v${packageJson.version}`)}
 
  // LATEST tag
- ${_renderScript(components, 'tag/latest')}
+ ${_renderScript(components, 'tag/v2/latest')}
  \`\`\`
 
  > NOTE: The latest tag is a moving version. While beneficial to
@@ -59,7 +59,7 @@ export const cdnJs = ({ components }) => {
  ${_renderScript(components, `version/v${packageJson.version}`, true)}
 
  // LATEST tag
- ${_renderScript(components, 'tag/latest', true)}
+ ${_renderScript(components, 'tag/v2/latest', true)}
  \`\`\`
    `;
 };

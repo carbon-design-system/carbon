@@ -1,70 +1,69 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render } from 'lit-html';
+import { render } from 'lit';
 import EventManager from '../utils/event-manager';
-import BXPagination from '../../src/components/pagination/pagination';
-import BXPageSizesSelect from '../../src/components/pagination/page-sizes-select';
-import BXPagesSelect from '../../src/components/pagination/pages-select';
-import { Default } from '../../src/components/pagination/pagination-story';
+import CDSPagination from '../../src/components/pagination/pagination';
+import { Playground } from '../../src/components/pagination/pagination-story';
+import CDSSelect from '../../src/components/select/select';
 
 const template = (props?) =>
-  Default({
-    'bx-pagination': props,
+  Playground({
+    'cds-pagination': props,
   });
 
-describe('bx-pagination', function () {
+describe('cds-pagination', function () {
   const events = new EventManager();
 
   describe('Misc attributes', function () {
-    it('should render <bx-pagination> with minimum attributes', async function () {
+    it('should render <cds-pagination> with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-pagination' as any)
+        document.body.querySelector('cds-pagination' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
 
-    it('should render <bx-pagination> with various attributes', async function () {
+    it('should render <cds-pagination> with various attributes', async function () {
       render(
         template({
           pageSize: 20,
           start: 10,
-          total: 200,
+          totalItems: 200,
         }),
         document.body
       );
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-pagination' as any)
+        document.body.querySelector('cds-pagination' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
 
-    it('should render <bx-page-sizes-select> with minimum attributes', async function () {
+    it('should render <cds-page-sizes-select> with minimum attributes', async function () {
       render(template(), document.body);
-      await Promise.resolve(); // Update cycle for `<bx-pagination>`
-      await Promise.resolve(); // Update cycle for `<bx-page-sizes-select>`
+      await Promise.resolve(); // Update cycle for `<cds-pagination>`
+      await Promise.resolve(); // Update cycle for `<cds-page-sizes-select>`
       expect(
-        document.body.querySelector('bx-page-sizes-select' as any)
+        document.body.querySelector('cds-page-sizes-select' as any)
       ).toMatchSnapshot({ mode: 'shadow' });
     });
 
-    it('should render <bx-pages-select> with minimum attributes', async function () {
-      render(template({ total: 100 }), document.body);
-      await Promise.resolve(); // Update cycle for `<bx-pagination>`
-      await Promise.resolve(); // Update cycle for `<bx-pages-select>`
+    it('should render <cds-pages-select> with minimum attributes', async function () {
+      render(template({ totalItems: 100 }), document.body);
+      await Promise.resolve(); // Update cycle for `<cds-pagination>`
+      await Promise.resolve(); // Update cycle for `<cds-pages-select>`
       expect(
-        document.body.querySelector('bx-pages-select' as any)
+        document.body.querySelector('cds-pages-select' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
@@ -77,14 +76,14 @@ describe('bx-pagination', function () {
         template({
           pageSize: 1,
           start: 0,
-          total: 1,
+          totalItems: 1,
         }),
         document.body
       );
       await Promise.resolve();
       const textContentNode = document.body
-        .querySelector('bx-pagination')!
-        .shadowRoot!.querySelector('.bx--pagination__text');
+        .querySelector('cds-pagination')!
+        .shadowRoot!.querySelector('.cds--pagination__text');
       expect(textContentNode!.textContent!.trim()).toBe('1–1 of 1 item');
     });
 
@@ -93,14 +92,14 @@ describe('bx-pagination', function () {
         template({
           pageSize: 20,
           start: 10,
-          total: null,
+          totalItems: null,
         }),
         document.body
       );
       await Promise.resolve();
       const textContentNode = document.body
-        .querySelector('bx-pagination')!
-        .shadowRoot!.querySelector('.bx--pagination__text');
+        .querySelector('cds-pagination')!
+        .shadowRoot!.querySelector('.cds--pagination__text');
       expect(textContentNode!.textContent!.trim()).toBe('Item 11–30');
     });
 
@@ -110,61 +109,58 @@ describe('bx-pagination', function () {
           atLastPage: true,
           pageSize: 20,
           start: 30,
-          total: null,
+          totalItems: null,
         }),
         document.body
       );
       await Promise.resolve();
       const textContentNode = document.body
-        .querySelector('bx-pagination')!
-        .shadowRoot!.querySelector('.bx--pagination__text');
+        .querySelector('cds-pagination')!
+        .shadowRoot!.querySelector('.cds--pagination__text');
       expect(textContentNode!.textContent!.trim()).toBe('Item 31–');
     });
   });
 
   describe('Propagating changes', function () {
-    it('should propagate `pageSize` property to `<bx-page-sizes-select>`', async function () {
+    it('should propagate `pageSize` property to `<cds-select>`', async function () {
       render(template(), document.body);
       await Promise.resolve();
       const paginationNode = document.body.querySelector(
-        'bx-pagination'
-      ) as BXPagination;
+        'cds-pagination'
+      ) as CDSPagination;
       paginationNode.pageSize = 20;
       await Promise.resolve();
-      const pageSizesSelectNode = document.body.querySelector(
-        'bx-page-sizes-select'
-      ) as BXPageSizesSelect;
-      expect(pageSizesSelectNode.value).toBe(20);
+      const pageSizesSelectNode = paginationNode.shadowRoot?.querySelector(
+        'cds-select'
+      ) as CDSSelect;
+      expect(pageSizesSelectNode.value).toBe('20');
     });
 
-    it('should propagate the current page to `<bx-pages-select>`', async function () {
-      render(template({ total: 100 }), document.body);
+    it('should propagate the current page to `<cds-select>`', async function () {
+      render(template({ totalItems: 100 }), document.body);
       await Promise.resolve();
       const paginationNode = document.body.querySelector(
-        'bx-pagination'
-      ) as BXPagination;
+        'cds-pagination'
+      ) as CDSPagination;
       paginationNode.pageSize = 5;
       paginationNode.start = 21;
       await Promise.resolve();
-      const pagesSelectNode = document.body.querySelector(
-        'bx-pages-select'
-      ) as BXPagesSelect;
-      expect(pagesSelectNode.value).toBe(4);
+      const pagesSelectNode = paginationNode.shadowRoot?.querySelector(
+        '#pages-select'
+      ) as CDSSelect;
+      expect(pagesSelectNode.value).toBe('4');
     });
 
-    it('should propagate the total pages to `<bx-pages-select>`', async function () {
-      render(template({ total: 100 }), document.body);
+    it('should propagate the total pages to `<cds-pages-select>`', async function () {
+      render(template({ totalItems: 100 }), document.body);
       await Promise.resolve();
       const paginationNode = document.body.querySelector(
-        'bx-pagination'
-      ) as BXPagination;
+        'cds-pagination'
+      ) as CDSPagination;
       paginationNode.pageSize = 5;
-      paginationNode.total = 21;
+      paginationNode.totalItems = 21;
       await Promise.resolve();
-      const pagesSelectNode = document.body.querySelector(
-        'bx-pages-select'
-      ) as BXPagesSelect;
-      expect(pagesSelectNode.total).toBe(5);
+      expect(paginationNode.totalItems).toBe(5);
     });
 
     it('should handle change in page size at non-first page', async function () {
@@ -174,20 +170,20 @@ describe('bx-pagination', function () {
         template({
           pageSize: 10,
           start: 190,
-          total: 200,
+          totalItems: 200,
         }),
         document.body
       );
       await Promise.resolve();
       const paginationNode = document.body.querySelector(
-        'bx-pagination'
-      ) as BXPagination;
+        'cds-pagination'
+      ) as CDSPagination;
       paginationNode.pageSize = 5;
-      await Promise.resolve(); // Update in `<bx-pagination>`
-      await Promise.resolve(); // Update in `<bx-pages-select>`
-      const pagesSelectNode = document.body.querySelector(
-        'bx-pages-select'
-      ) as BXPagesSelect;
+      await Promise.resolve(); // Update in `<cds-pagination>`
+      await Promise.resolve(); // Update in `<cds-pages-select>`
+      const pagesSelectNode = paginationNode.shadowRoot?.querySelector(
+        '#pages-select'
+      ) as CDSSelect;
       expect(pagesSelectNode.shadowRoot!.querySelector('select')!.value).toBe(
         '38'
       );
@@ -206,11 +202,11 @@ describe('bx-pagination', function () {
       );
       await Promise.resolve();
       const paginationNode = document.body.querySelector(
-        'bx-pagination'
-      ) as BXPagination;
+        'cds-pagination'
+      ) as CDSPagination;
       events.on(
         paginationNode,
-        'bx-pagination-changed-current',
+        'cds-pagination-changed-current',
         (event: CustomEvent) => {
           newStart = event.detail.start;
         }
@@ -231,11 +227,11 @@ describe('bx-pagination', function () {
       );
       await Promise.resolve();
       const paginationNode = document.body.querySelector(
-        'bx-pagination'
-      ) as BXPagination;
+        'cds-pagination'
+      ) as CDSPagination;
       events.on(
         paginationNode,
-        'bx-pagination-changed-current',
+        'cds-pagination-changed-current',
         (event: CustomEvent) => {
           newStart = event.detail.start;
         }
@@ -255,10 +251,10 @@ describe('bx-pagination', function () {
       );
       await Promise.resolve();
       const paginationNode = document.body.querySelector(
-        'bx-pagination'
-      ) as BXPagination;
+        'cds-pagination'
+      ) as CDSPagination;
       const spyChanged = jasmine.createSpy('changed');
-      events.on(paginationNode, 'bx-pagination-changed-current', spyChanged);
+      events.on(paginationNode, 'cds-pagination-changed-current', spyChanged);
       // Prev button should be disabled when `start` indicates that we are at the first page,
       // but we ensure nothing happens even if the button is enabled
       paginationNode.shadowRoot!.querySelectorAll('button')[0].disabled = false;
@@ -278,11 +274,11 @@ describe('bx-pagination', function () {
       );
       await Promise.resolve();
       const paginationNode = document.body.querySelector(
-        'bx-pagination'
-      ) as BXPagination;
+        'cds-pagination'
+      ) as CDSPagination;
       events.on(
         paginationNode,
-        'bx-pagination-changed-current',
+        'cds-pagination-changed-current',
         (event: CustomEvent) => {
           newStart = event.detail.start;
         }
@@ -297,16 +293,16 @@ describe('bx-pagination', function () {
         template({
           pageSize: 10,
           start: 20,
-          total: 30,
+          totalItems: 30,
         }),
         document.body
       );
       await Promise.resolve();
       const paginationNode = document.body.querySelector(
-        'bx-pagination'
-      ) as BXPagination;
+        'cds-pagination'
+      ) as CDSPagination;
       const spyChanged = jasmine.createSpy('changed');
-      events.on(paginationNode, 'bx-pagination-changed-current', spyChanged);
+      events.on(paginationNode, 'cds-pagination-changed-current', spyChanged);
       // Next button should be disabled when `start` indicates that we are at the last page,
       // but we ensure nothing happens even if the button is enabled
       paginationNode.shadowRoot!.querySelectorAll('button')[1].disabled = false;
@@ -320,16 +316,16 @@ describe('bx-pagination', function () {
         template({
           pageSize: 10,
           start: 25,
-          total: 30,
+          totalItems: 30,
         }),
         document.body
       );
       await Promise.resolve();
       const paginationNode = document.body.querySelector(
-        'bx-pagination'
-      ) as BXPagination;
+        'cds-pagination'
+      ) as CDSPagination;
       const spyChanged = jasmine.createSpy('changed');
-      events.on(paginationNode, 'bx-pagination-changed-current', spyChanged);
+      events.on(paginationNode, 'cds-pagination-changed-current', spyChanged);
       // Next button should be disabled when `start` indicates that we are at the last page,
       // but we ensure nothing happens even if the button is enabled
       paginationNode.shadowRoot!.querySelectorAll('button')[1].disabled = false;
@@ -344,17 +340,17 @@ describe('bx-pagination', function () {
         template({
           pageSize: 10,
           start: 25,
-          total: null,
+          totalItems: null,
         }),
         document.body
       );
       await Promise.resolve();
       const paginationNode = document.body.querySelector(
-        'bx-pagination'
-      ) as BXPagination;
+        'cds-pagination'
+      ) as CDSPagination;
       events.on(
         paginationNode,
-        'bx-pagination-changed-current',
+        'cds-pagination-changed-current',
         (event: CustomEvent) => {
           newStart = event.detail.start;
         }
@@ -365,42 +361,42 @@ describe('bx-pagination', function () {
     });
 
     it('should support user-initiated change in page size', async function () {
-      render(template({ total: 100 }), document.body);
+      render(template({ totalItems: 100 }), document.body);
       await Promise.resolve();
-      const pagesSelectNode = document.body.querySelector(
-        'bx-pages-select'
-      ) as BXPagesSelect;
+      const paginationNode = document.body.querySelector(
+        'cds-pagination'
+      ) as CDSPagination;
+      const pagesSelectNode = paginationNode.shadowRoot?.querySelector(
+        '#pages-select'
+      ) as CDSSelect;
       pagesSelectNode.dispatchEvent(
-        new CustomEvent('bx-page-sizes-select-changed', {
+        new CustomEvent('cds-select-selected', {
           bubbles: true,
           detail: { value: 5 },
         })
       );
-      const paginationNode = document.body.querySelector(
-        'bx-pagination'
-      ) as BXPagination;
       expect(paginationNode.pageSize).toBe(5);
     });
 
     it('should support user-initiated change in current page', async function () {
       let newStart;
-      render(template({ pageSize: 10, total: 100 }), document.body);
+      render(template({ pageSize: 10, totalItems: 100 }), document.body);
       await Promise.resolve();
       const paginationNode = document.body.querySelector(
-        'bx-pagination'
-      ) as BXPagination;
+        'cds-pagination'
+      ) as CDSPagination;
       events.on(
         paginationNode,
-        'bx-pagination-changed-current',
+        'cds-pagination-changed-current',
         (event: CustomEvent) => {
           newStart = event.detail.start;
         }
       );
-      const pagesSelectNode = document.body.querySelector(
-        'bx-pages-select'
-      ) as BXPagesSelect;
+      const pagesSelectNode = paginationNode.shadowRoot?.querySelector(
+        '#pages-select'
+      ) as CDSSelect;
       pagesSelectNode.dispatchEvent(
-        new CustomEvent('bx-pages-select-changed', {
+        new CustomEvent('cds-select-selected', {
           bubbles: true,
           detail: { value: 3 },
         })
