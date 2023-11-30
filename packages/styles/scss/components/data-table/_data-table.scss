@@ -959,6 +959,16 @@
     background-attachment: fixed;
   }
 
+  .#{$prefix}--data-table
+    thead
+    th.#{$prefix}--table-sort__header--slug
+    .#{$prefix}--table-sort,
+  .#{$prefix}--data-table
+    thead
+    th:has(> .#{$prefix}--table-header-label--slug) {
+    @include ai-gradient('top', 100%);
+  }
+
   .#{$prefix}--table-column-slug .#{$prefix}--slug {
     position: absolute;
     transform: translateY(-50%);
