@@ -280,4 +280,27 @@ $radio-border-width: 1px !default;
     margin-inline-end: 0;
     margin-inline-start: $spacing-03;
   }
+
+  // Slug styles
+  .#{$prefix}--radio-button-group--slug legend.#{$prefix}--label,
+  .#{$prefix}--radio-button-wrapper--slug
+    .#{$prefix}--radio-button__label-text {
+    display: flex;
+  }
+
+  .#{$prefix}--radio-button-group--slug
+    legend.#{$prefix}--label
+    .#{$prefix}--slug,
+  .#{$prefix}--radio-button-wrapper--slug
+    .#{$prefix}--radio-button__label-text
+    .#{$prefix}--slug {
+    margin-inline-start: $spacing-03;
+  }
+
+  .#{$prefix}--radio-button-wrapper--slug
+    .#{$prefix}--radio-button__label-text
+    .#{$prefix}--slug__button--inline {
+    line-height: inherit;
+    margin-block-start: convert.to-rem(-1px);
+  }
 }

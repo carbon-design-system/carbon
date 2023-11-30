@@ -87,7 +87,7 @@ export const Slug = React.forwardRef(function Slug(
     children,
     className,
     dotType,
-    kind,
+    kind = 'default',
     onRevertClick,
     revertActive,
     revertLabel = 'Revert to AI input',
@@ -125,7 +125,9 @@ export const Slug = React.forwardRef(function Slug(
     }
   };
 
-  const ariaLabel = `${aiText} - ${slugLabel}`;
+  const ariaLabel = !aiTextLabel
+    ? `${aiText} - ${slugLabel}`
+    : `${aiText} - ${aiTextLabel}`;
 
   return (
     <div className={slugClasses} ref={ref} id={id}>

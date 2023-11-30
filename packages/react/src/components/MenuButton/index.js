@@ -30,6 +30,7 @@ const MenuButton = React.forwardRef(function MenuButton(
     kind = defaultButtonKind,
     label,
     size = 'lg',
+    tabIndex = 0,
     ...rest
   },
   forwardRef
@@ -62,6 +63,11 @@ const MenuButton = React.forwardRef(function MenuButton(
     menuRef.current.style.inlineSize = `${width}px`;
   }
 
+  const containerClasses = classNames(
+    `${prefix}--menu-button__container`,
+    className
+  );
+
   const triggerClasses = classNames(`${prefix}--menu-button__trigger`, {
     [`${prefix}--menu-button__trigger--open`]: open,
   });
@@ -69,10 +75,15 @@ const MenuButton = React.forwardRef(function MenuButton(
   const buttonKind = validButtonKinds.includes(kind) ? kind : defaultButtonKind;
 
   return (
-    <div {...rest} ref={ref} aria-owns={open ? id : null} className={className}>
+    <div
+      {...rest}
+      ref={ref}
+      aria-owns={open ? id : null}
+      className={containerClasses}>
       <Button
         className={triggerClasses}
         size={size}
+        tabIndex={tabIndex}
         kind={buttonKind}
         renderIcon={ChevronDown}
         disabled={disabled}
@@ -87,6 +98,7 @@ const MenuButton = React.forwardRef(function MenuButton(
         ref={menuRef}
         id={id}
         label={label}
+        mode="basic"
         size={size}
         open={open}
         onClose={handleClose}
@@ -129,6 +141,11 @@ MenuButton.propTypes = {
    * Specify the size of the button and menu.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * Specify the tabIndex of the button.
+   */
+  tabIndex: PropTypes.number,
 };
 
 export { MenuButton };
