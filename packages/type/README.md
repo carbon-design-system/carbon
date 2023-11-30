@@ -155,16 +155,16 @@ Sass file:
 @import '@carbon/type/scss/classes';
 ```
 
-| Selector                 | Description                               |
-| ------------------------ | ----------------------------------------- |
-| `.bx--type-mono`         | Specify the font face as IBM Plex Mono    |
-| `.bx--type-sans`         | Specify the font face as IBM Plex Sans    |
-| `.bx--type-serif`        | Specify the font face as IBM Plex Serif   |
-| `.bx--type-light`        | Specify the font weight as light (300)    |
-| `.bx--type-regular`      | Specify the font weight as regular (400)  |
-| `.bx--type-semibold`     | Specify the font weight as semibold (600) |
-| `.bx--type-italic`       | Specify the font style as italic          |
-| `.bx--type-<type-style>` | Set styles for the given type style       |
+| Selector                  | Description                               |
+| ------------------------- | ----------------------------------------- |
+| `.cds--type-mono`         | Specify the font face as IBM Plex Mono    |
+| `.cds--type-sans`         | Specify the font face as IBM Plex Sans    |
+| `.cds--type-serif`        | Specify the font face as IBM Plex Serif   |
+| `.cds--type-light`        | Specify the font weight as light (300)    |
+| `.cds--type-regular`      | Specify the font weight as regular (400)  |
+| `.cds--type-semibold`     | Specify the font weight as semibold (600) |
+| `.cds--type-italic`       | Specify the font style as italic          |
+| `.cds--type-<type-style>` | Set styles for the given type style       |
 
 ### Font family
 

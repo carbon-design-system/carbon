@@ -11,9 +11,6 @@ import FileUploaderItem from '../FileUploaderItem';
 import FileUploaderDropContainer from '../FileUploaderDropContainer';
 import FormItem from '../../FormItem';
 
-// import uid from '../../../tools/uniqueId';
-import '../FileUploader-story.scss';
-
 const prefix = 'cds';
 
 // -- copied from internal/tools/uniqueId.js
