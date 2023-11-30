@@ -59,7 +59,6 @@ $content-padding: 0 0 0 $spacing-05 !default;
     display: list-item;
     overflow: visible;
     border-block-start: 1px solid $border-subtle;
-    transition: all $duration-fast-02 motion(standard, productive);
 
     &:last-child {
       border-block-end: 1px solid $border-subtle;
@@ -144,11 +143,18 @@ $content-padding: 0 0 0 $spacing-05 !default;
     text-align: start;
   }
 
+  .#{$prefix}--accordion__wrapper {
+    // Properties for when the accordion closes
+    padding: 0;
+    max-block-size: 0;
+    opacity: 0;
+    transition: all $duration-fast-02 motion(entrance, productive);
+    writing-mode: horizontal-tb;
+  }
+
   .#{$prefix}--accordion__content {
-    display: none;
+    overflow: hidden;
     padding-inline: layout.density('padding-inline');
-    // Transition property for when the accordion closes
-    transition: padding motion(standard, productive) $duration-fast-02;
 
     // Custom breakpoints based on issue #4993
     @include breakpoint-up(480px) {
@@ -189,44 +195,14 @@ $content-padding: 0 0 0 $spacing-05 !default;
     display: block;
   }
 
-  @keyframes collapse-accordion {
-    0% {
-      @include -content-visible;
-    }
-
-    100% {
-      @include -content-hidden;
-    }
-  }
-
-  @keyframes expand-accordion {
-    0% {
-      @include -content-hidden;
-    }
-
-    100% {
-      @include -content-visible;
-    }
-  }
-
-  .#{$prefix}--accordion__item--collapsing .#{$prefix}--accordion__content {
-    animation: $duration-fast-02 motion(standard, productive) collapse-accordion;
-  }
-
-  .#{$prefix}--accordion__item--expanding .#{$prefix}--accordion__content {
-    animation: $duration-fast-02 motion(standard, productive) expand-accordion;
-  }
-
   .#{$prefix}--accordion__item--active {
     overflow: visible;
 
-    .#{$prefix}--accordion__content {
-      display: block;
+    .#{$prefix}--accordion__wrapper {
+      // Properties for when the accordion opens
+      opacity: 1;
       padding-block: $spacing-03;
       padding-block-end: $spacing-06;
-      // Transition property for when the accordion opens
-      transition: padding-top motion(entrance, productive) $duration-fast-02,
-        padding-bottom motion(entrance, productive) $duration-fast-02;
     }
 
     .#{$prefix}--accordion__arrow {
