@@ -532,7 +532,7 @@ export const _AIForm = (args) => {
           <FluidDropdown
             isCondensed
             initialSelectedItem={items[2]}
-            id="default"
+            id="fluid-dropdown"
             titleText="Label"
             label="Choose an option"
             items={items}
@@ -545,7 +545,7 @@ export const _AIForm = (args) => {
           <FluidComboBox
             isCondensed
             onChange={() => {}}
-            id="default"
+            id="fluid-combobox"
             titleText="Label"
             label="Choose an option"
             items={items}
@@ -559,7 +559,7 @@ export const _AIForm = (args) => {
             isCondensed
             onChange={() => {}}
             initialSelectedItem={items[2]}
-            id="default"
+            id="fluid-multi-select"
             titleText="Label"
             label="Choose an option"
             items={items}
@@ -574,7 +574,7 @@ export const _AIForm = (args) => {
             isCondensed
             onChange={() => {}}
             initialSelectedItem={items[2]}
-            id="default"
+            id="fluid-multi-select-2"
             titleText="Label"
             label="Choose an option"
             items={items}
@@ -584,7 +584,7 @@ export const _AIForm = (args) => {
           />
         </div>
         <div style={{ display: 'flex' }}>
-          <FluidSelect slug={slug} {...rest} id="select-1">
+          <FluidSelect slug={slug} {...rest} id="select-2">
             <SelectItem value="" text="" />
             <SelectItem value="option-1" text="Option 1" />
             <SelectItem value="option-2" text="Option 2" />
