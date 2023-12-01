@@ -131,3 +131,9 @@
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
+
+.slug-check-radio-container
+  .cds--form-item:not(:first-of-type):not(.cds--checkbox-wrapper),
+.slug-check-radio-container fieldset.cds--checkbox-group:not(:first-of-type) {
+  margin-top: 2rem;
+}
