@@ -239,7 +239,7 @@ Playground.parameters = {
         kind,
         dotType,
         aiTextLabel: textNullable('Ai text label', ''),
-        revertActive: boolean('Revert active', false)
+        revertActive: boolean('Revert active', false),
       };
     },
   },

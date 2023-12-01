@@ -671,7 +671,6 @@ class CDSDropdown extends ValidityMixin(
     return true;
   }
 
-  
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   updated(_changedProperties) {
     this._hasSlug
