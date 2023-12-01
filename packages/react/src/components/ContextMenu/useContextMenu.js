@@ -49,6 +49,7 @@ function useContextMenu(trigger = document) {
     x: position[0],
     y: position[1],
     onClose,
+    mode: 'full',
   };
 }
 

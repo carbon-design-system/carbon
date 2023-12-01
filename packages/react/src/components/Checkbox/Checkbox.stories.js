@@ -9,6 +9,10 @@ import React from 'react';
 import { default as Checkbox, CheckboxSkeleton } from './';
 import mdx from './Checkbox.mdx';
 import CheckboxGroup from '../CheckboxGroup';
+import { View, FolderOpen, Folders } from '@carbon/icons-react';
+import { Slug, SlugContent, SlugActions } from '../Slug';
+import { IconButton } from '../IconButton';
+import { Button } from '../Button';
 
 const checkboxEvents = {
   className: 'some-class',
@@ -68,6 +72,80 @@ export const Single = () => {
       <br /> <br />
       <Checkbox {...checkboxEvents} id="checkbox-6" readOnly />
     </>
+  );
+};
+
+export const SlugTest = () => {
+  const slug = (kind) => (
+    <Slug kind={kind} className="slug-container">
+      <SlugContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h1>84%</h1>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+        <SlugActions>
+          <IconButton kind="ghost" label="View">
+            <View />
+          </IconButton>
+          <IconButton kind="ghost" label="Open Folder">
+            <FolderOpen />
+          </IconButton>
+          <IconButton kind="ghost" label="Folders">
+            <Folders />
+          </IconButton>
+          <Button>View literature</Button>
+        </SlugActions>
+      </SlugContent>
+    </Slug>
+  );
+
+  return (
+    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <CheckboxGroup
+        legendText="Group Label"
+        slug={slug()}
+        style={{ flex: '1 1 auto' }}>
+        <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
+        <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
+        <Checkbox labelText={`Checkbox label`} id="checkbox-label-3" />
+      </CheckboxGroup>
+
+      <CheckboxGroup legendText="Group Label" style={{ flex: '1 1 auto' }}>
+        <Checkbox
+          labelText={`Checkbox label`}
+          id="checkbox-label-4"
+          slug={slug()}
+        />
+        <Checkbox
+          labelText={`Checkbox label`}
+          id="checkbox-label-5"
+          slug={slug()}
+        />
+        <Checkbox labelText={`Checkbox label`} id="checkbox-label-6" />
+      </CheckboxGroup>
+
+      <CheckboxGroup legendText="Group Label" style={{ flex: '1 1 auto' }}>
+        <Checkbox
+          labelText={`Checkbox label`}
+          id="checkbox-label-7"
+          slug={slug('inline')}
+        />
+        <Checkbox
+          labelText={`Checkbox label`}
+          id="checkbox-label-8"
+          slug={slug('inline')}
+        />
+        <Checkbox labelText={`Checkbox label`} id="checkbox-label-9" />
+      </CheckboxGroup>
+    </div>
   );
 };
 

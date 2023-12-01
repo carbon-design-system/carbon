@@ -211,10 +211,21 @@ Map {
         "args": Array [
           Array [
             Object {
-              "type": "string",
+              "type": "bool",
             },
             Object {
-              "type": "bool",
+              "args": Array [
+                Array [
+                  "false",
+                  "true",
+                  "page",
+                  "step",
+                  "location",
+                  "date",
+                  "time",
+                ],
+              ],
+              "type": "oneOf",
             },
           ],
         ],
@@ -493,6 +504,9 @@ Map {
       "readOnly": Object {
         "type": "bool",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "title": Object {
         "type": "string",
       },
@@ -531,6 +545,9 @@ Map {
       },
       "readOnly": Object {
         "type": "bool",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "warn": Object {
         "type": "bool",
@@ -571,6 +588,9 @@ Map {
         "type": "bool",
       },
       "disabled": Object {
+        "type": "bool",
+      },
+      "hasRoundedCorners": Object {
         "type": "bool",
       },
       "href": Object {
@@ -965,6 +985,27 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "span": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
+            },
+            Object {
+              "args": Array [
+                Array [
+                  "25%",
+                  "50%",
+                  "75%",
+                  "100%",
+                ],
+              ],
+              "type": "oneOf",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "xlg": Object {
         "args": Array [
           Array [
@@ -1297,6 +1338,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "titleText": Object {
         "type": "node",
@@ -2709,6 +2753,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "type": Object {
         "type": "string",
       },
@@ -2891,6 +2938,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "titleText": Object {
         "isRequired": true,
         "type": "node",
@@ -3059,6 +3109,9 @@ Map {
         "type": "string",
       },
       "expanded": Object {
+        "type": "bool",
+      },
+      "hasRoundedCorners": Object {
         "type": "bool",
       },
       "id": Object {
@@ -3591,6 +3644,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "sortItems": Object {
         "type": "func",
@@ -4305,6 +4361,9 @@ Map {
   "Link" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "as": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },
@@ -4390,6 +4449,15 @@ Map {
       },
       "label": Object {
         "type": "string",
+      },
+      "mode": Object {
+        "args": Array [
+          Array [
+            "full",
+            "basic",
+          ],
+        ],
+        "type": "oneOf",
       },
       "onClose": Object {
         "type": "func",
@@ -4489,6 +4557,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "tabIndex": Object {
+        "type": "number",
       },
     },
     "render": [Function],
@@ -4663,6 +4734,23 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "loadingDescription": Object {
+        "type": "string",
+      },
+      "loadingIconDescription": Object {
+        "type": "string",
+      },
+      "loadingStatus": Object {
+        "args": Array [
+          Array [
+            "inactive",
+            "active",
+            "finished",
+            "error",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "modalAriaLabel": Object {
         "type": "string",
       },
@@ -4673,6 +4761,9 @@ Map {
         "type": "node",
       },
       "onKeyDown": Object {
+        "type": "func",
+      },
+      "onLoadingSuccess": Object {
         "type": "func",
       },
       "onRequestClose": Object {
@@ -4785,6 +4876,26 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "loadingDescription": Object {
+        "type": "string",
+      },
+      "loadingIconDescription": Object {
+        "type": "string",
+      },
+      "loadingStatus": Object {
+        "args": Array [
+          Array [
+            "inactive",
+            "active",
+            "finished",
+            "error",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "onLoadingSuccess": Object {
+        "type": "func",
       },
       "onRequestClose": Object {
         "type": "func",
@@ -5175,6 +5286,9 @@ Map {
           ],
           "type": "oneOf",
         },
+        "slug": Object {
+          "type": "node",
+        },
         "sortItems": Object {
           "type": "func",
         },
@@ -5292,6 +5406,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "sortItems": Object {
         "type": "func",
@@ -5460,6 +5577,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "step": Object {
         "type": "number",
@@ -6121,6 +6241,9 @@ Map {
       "onClick": Object {
         "type": "func",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "value": Object {
         "args": Array [
           Array [
@@ -6201,6 +6324,9 @@ Map {
       },
       "readOnly": Object {
         "type": "bool",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "valueSelected": Object {
         "args": Array [
@@ -6490,6 +6616,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "warn": Object {
         "type": "bool",
       },
@@ -6559,6 +6688,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "hasRoundedCorners": Object {
+        "type": "bool",
+      },
       "id": Object {
         "type": "string",
       },
@@ -6577,6 +6709,9 @@ Map {
       },
       "selected": Object {
         "type": "bool",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "tabIndex": Object {
         "type": "number",
@@ -8075,6 +8210,9 @@ Map {
       "rows": Object {
         "type": "number",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "value": Object {
         "args": Array [
           Array [
@@ -8412,6 +8550,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "type": Object {
         "type": "string",
       },
@@ -8498,7 +8639,13 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "hasRoundedCorners": Object {
+        "type": "bool",
+      },
       "light": [Function],
+      "slug": Object {
+        "type": "node",
+      },
     },
     "render": [Function],
   },
@@ -10079,6 +10226,118 @@ Map {
         "type": "bool",
       },
     },
+  },
+  "unstable__Slug" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "aiText": Object {
+        "type": "string",
+      },
+      "aiTextLabel": Object {
+        "type": "string",
+      },
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "left-bottom",
+            "left-top",
+            "right",
+            "right-bottom",
+            "right-top",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "autoAlign": Object {
+        "type": "bool",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "dotType": Object {
+        "args": Array [
+          Array [
+            "default",
+            "hollow",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "default",
+            "hollow",
+            "inline",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "onRevertClick": Object {
+        "type": "func",
+      },
+      "revertActive": Object {
+        "type": "bool",
+      },
+      "revertLabel": Object {
+        "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "mini",
+            "2xs",
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "slugContent": Object {
+        "type": "node",
+      },
+      "slugLabel": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable__SlugActions" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable__SlugContent" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
   },
   "unstable_useFeatureFlag" => Object {},
   "unstable_useFeatureFlags" => Object {},

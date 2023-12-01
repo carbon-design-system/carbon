@@ -498,3 +498,45 @@ export const PassiveModal = () => {
       modalHeading="You have been successfully signed out"></Modal>
   );
 };
+
+export const WithInlineLoading = () => {
+  const [status, setStatus] = useState('inactive');
+  const [description, setDescription] = useState('Deleting...');
+
+  const fakePromise = () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 2000);
+    });
+  };
+
+  const submit = async () => {
+    setStatus('active');
+
+    await fakePromise();
+
+    setDescription('Deleted!');
+    setStatus('finished');
+  };
+
+  const resetStatus = () => {
+    setStatus('inactive');
+    setDescription('Deleting...');
+  };
+
+  return (
+    <Modal
+      open
+      danger
+      modalHeading="Are you sure you want to delete this custom domain?"
+      modalLabel="Account resources"
+      primaryButtonText="Delete"
+      secondaryButtonText="Cancel"
+      onRequestSubmit={submit}
+      loadingStatus={status}
+      loadingDescription={description}
+      onLoadingSuccess={resetStatus}
+    />
+  );
+};
