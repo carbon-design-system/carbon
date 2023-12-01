@@ -38,9 +38,9 @@ __metadata:
   linkType: hard
 
 "@adobe/css-tools@npm:^4.0.1":
-  version: 4.2.0
-  resolution: "@adobe/css-tools@npm:4.2.0"
-  checksum: d6d2b48963bef725a0043b7d39c5fb12d6e42b52b8bebd746e80e1732f5160529f00fb184c0d3eb9446765727ccc8997ea8f121c54c7d33d1eb577d0feb54b6c
+  version: 4.3.2
+  resolution: "@adobe/css-tools@npm:4.3.2"
+  checksum: 973dcb7ba5141f57ec726ddec2e94e8947361bb0c5f0e8ebd1e8aa3a84b28e66db4ad843908825f99730d59784ff3c43868b014a7268676a65950cdb850c42cc
   languageName: node
   linkType: hard
 
