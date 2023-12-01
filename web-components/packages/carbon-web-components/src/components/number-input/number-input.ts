@@ -69,13 +69,6 @@ class CDSNumberInput extends CDSTextInput {
         },
       })
     );
-
-    this.dispatchEvent(
-      new Event('input', {
-        bubbles: true,
-        cancelable: true,
-      })
-    );
   }
 
   /**
@@ -93,13 +86,6 @@ class CDSNumberInput extends CDSTextInput {
         detail: {
           value: input.value,
         },
-      })
-    );
-
-    this.dispatchEvent(
-      new Event('input', {
-        bubbles: true,
-        cancelable: true,
       })
     );
   }

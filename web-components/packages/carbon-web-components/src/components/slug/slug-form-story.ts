@@ -352,7 +352,7 @@ export const _RevertTest = () => {
               max="100"
               step="1"
               label="Sample AI Input"
-              @input="${handleInput}">
+              @cds-number-input="${handleInput}">
               <cds-slug alignment="bottom-left" @click="${handleRevert('11')}"
                 >${content}</cds-slug
               >
