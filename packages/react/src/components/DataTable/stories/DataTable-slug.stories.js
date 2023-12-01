@@ -352,7 +352,7 @@ export const ColumnSlugWithSelectionAndExpansion = () => (
               <TableSelectAll {...getSelectionProps()} />
               {headers.map((header, i) => (
                 <TableHeader
-                  slug={i === 2 ? columnSlug : null}
+                  slug={i === 1 ? columnSlug : null}
                   key={i}
                   {...getHeaderProps({ header })}>
                   {header.header}
@@ -401,7 +401,7 @@ export const ColumnSlugSort = () => (
               {headers.map((header, i) => (
                 <TableHeader
                   key={header.key}
-                  slug={i === 2 ? columnSlug : null}
+                  slug={i === 4 ? columnSlug : null}
                   {...getHeaderProps({ header, isSortable: true })}>
                   {header.header}
                 </TableHeader>
