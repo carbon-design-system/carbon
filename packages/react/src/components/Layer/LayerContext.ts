@@ -6,5 +6,6 @@
  */
 
 import React from 'react';
+import { LayerLevel } from './LayerLevel';
 
-export const LayerContext = React.createContext(1);
+export const LayerContext = React.createContext<LayerLevel>(1);
