@@ -78,14 +78,10 @@ const argTypes = {
       type: 'text',
     },
   },
-  // revertActive: {
-  //   control: {
-  //     type: 'boolean',
-  //   },
-  //   table: {
-  //     category: 'Slug',
-  //   },
-  // },
+  slug: {
+    description:
+      '**Experimental**: Provide a `Slug` component to be rendered inside the component',
+  },
 };
 
 const textareaProps = {
