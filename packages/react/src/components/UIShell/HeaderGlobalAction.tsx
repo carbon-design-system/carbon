@@ -24,7 +24,7 @@ interface HeaderGlobalActionProps {
   /**
    * Provide a custom icon for this global action
    */
-  children?: ReactNode;
+  children: ReactNode;
   /**
    * Optionally provide a custom class name that is applied to the underlying
    * button
