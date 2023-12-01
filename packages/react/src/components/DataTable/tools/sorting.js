@@ -35,8 +35,8 @@ export const compare = (a, b, locale = 'en') => {
   // if column has React elements, this should sort by the child string if there is one
   if (typeof a === 'object' && typeof b === 'object') {
     if (
-      typeof a.props.children === 'string' &&
-      typeof b.props.children === 'string'
+      typeof a.props?.children === 'string' &&
+      typeof b.props?.children === 'string'
     ) {
       return compareStrings(a.props.children, b.props.children, locale);
     }

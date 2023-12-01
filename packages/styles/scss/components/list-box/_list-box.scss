@@ -308,7 +308,7 @@ $list-box-menu-width: convert.to-rem(300px);
     display: inline-flex;
     overflow: hidden;
     align-items: center;
-    // Account for the border in `.bx--list-box`
+    // Account for the border in `.cds--list-box`
     block-size: calc(100% + 1px);
     cursor: pointer;
     outline: none;
