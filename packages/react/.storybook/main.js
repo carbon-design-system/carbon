@@ -87,7 +87,7 @@ const config = {
         viewport: true,
       },
     },
-    // getAbsolutePath("@storybook/addon-storysource"),
+    // getAbsolutePath("@storybook/addon-storysource"), TODO: https://github.com/storybookjs/storybook/issues/24089
     getAbsolutePath('@storybook/addon-a11y'),
     {
       name: '@storybook/addon-docs',
