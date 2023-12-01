@@ -6,6 +6,7 @@
  */
 
 'use strict';
+import { dirname, join } from 'path';
 
 import remarkGfm from 'remark-gfm';
 const fs = require('fs');
@@ -86,8 +87,8 @@ const config = {
         viewport: true,
       },
     },
-    '@storybook/addon-storysource',
-    '@storybook/addon-a11y',
+    // getAbsolutePath("@storybook/addon-storysource"),
+    getAbsolutePath('@storybook/addon-a11y'),
     {
       name: '@storybook/addon-docs',
       options: {
@@ -105,7 +106,7 @@ const config = {
     storyStoreV7: process.env.STORYBOOK_STORE_7 !== 'false',
   },
   framework: {
-    name: '@storybook/react-webpack5',
+    name: getAbsolutePath('@storybook/react-webpack5'),
     options: {},
   },
   stories,
@@ -197,3 +198,7 @@ const config = {
 };
 
 export default config;
+
+function getAbsolutePath(value) {
+  return dirname(require.resolve(join(value, 'package.json')));
+}
