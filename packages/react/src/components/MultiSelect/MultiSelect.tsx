@@ -512,6 +512,9 @@ const MultiSelect = React.forwardRef(
           if (changes.selectedItem === undefined) {
             break;
           }
+          if (Array.isArray(changes.selectedItem)) {
+            break;
+          }
           onItemChange(changes.selectedItem);
           return { ...changes, highlightedIndex: state.highlightedIndex };
         case ToggleButtonBlur:
