@@ -504,6 +504,9 @@ Map {
       "readOnly": Object {
         "type": "bool",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "title": Object {
         "type": "string",
       },
@@ -542,6 +545,9 @@ Map {
       },
       "readOnly": Object {
         "type": "bool",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "warn": Object {
         "type": "bool",
@@ -582,6 +588,9 @@ Map {
         "type": "bool",
       },
       "disabled": Object {
+        "type": "bool",
+      },
+      "hasRoundedCorners": Object {
         "type": "bool",
       },
       "href": Object {
@@ -960,6 +969,27 @@ Map {
                 },
               ],
               "type": "shape",
+            },
+            Object {
+              "args": Array [
+                Array [
+                  "25%",
+                  "50%",
+                  "75%",
+                  "100%",
+                ],
+              ],
+              "type": "oneOf",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "span": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
             },
             Object {
               "args": Array [
@@ -3081,6 +3111,9 @@ Map {
       "expanded": Object {
         "type": "bool",
       },
+      "hasRoundedCorners": Object {
+        "type": "bool",
+      },
       "id": Object {
         "type": "string",
       },
@@ -4328,6 +4361,9 @@ Map {
   "Link" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "as": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },
@@ -4521,6 +4557,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "tabIndex": Object {
+        "type": "number",
       },
     },
     "render": [Function],
@@ -6202,6 +6241,9 @@ Map {
       "onClick": Object {
         "type": "func",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "value": Object {
         "args": Array [
           Array [
@@ -6282,6 +6324,9 @@ Map {
       },
       "readOnly": Object {
         "type": "bool",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "valueSelected": Object {
         "args": Array [
@@ -6643,6 +6688,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "hasRoundedCorners": Object {
+        "type": "bool",
+      },
       "id": Object {
         "type": "string",
       },
@@ -6661,6 +6709,9 @@ Map {
       },
       "selected": Object {
         "type": "bool",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "tabIndex": Object {
         "type": "number",
@@ -8597,7 +8648,13 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "hasRoundedCorners": Object {
+        "type": "bool",
+      },
       "light": [Function],
+      "slug": Object {
+        "type": "node",
+      },
     },
     "render": [Function],
   },

@@ -30,6 +30,7 @@ const MenuButton = React.forwardRef(function MenuButton(
     kind = defaultButtonKind,
     label,
     size = 'lg',
+    tabIndex = 0,
     ...rest
   },
   forwardRef
@@ -82,6 +83,7 @@ const MenuButton = React.forwardRef(function MenuButton(
       <Button
         className={triggerClasses}
         size={size}
+        tabIndex={tabIndex}
         kind={buttonKind}
         renderIcon={ChevronDown}
         disabled={disabled}
@@ -139,6 +141,11 @@ MenuButton.propTypes = {
    * Specify the size of the button and menu.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * Specify the tabIndex of the button.
+   */
+  tabIndex: PropTypes.number,
 };
 
 export { MenuButton };

@@ -18,6 +18,12 @@ import { usePrefix } from '../../internal/usePrefix';
 
 export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
+   * Provide a custom element or component to render the top-level node for the
+   * component.
+   */
+  as?: string | undefined;
+
+  /**
    * @description Indicates the element that represents the
    *   current item within a container or set of related
    *   elements.
@@ -70,6 +76,7 @@ export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 const Link = React.forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
   function Link(
     {
+      as: BaseComponent,
       children,
       className: customClassName,
       href,
@@ -92,7 +99,7 @@ const Link = React.forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
     });
     const rel = target === '_blank' ? 'noopener' : undefined;
     const linkProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
-      className,
+      className: BaseComponent ? undefined : className,
       rel,
       target,
     };
@@ -106,15 +113,17 @@ const Link = React.forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
       linkProps['aria-disabled'] = true;
     }
 
+    const BaseComponentAsAny = (BaseComponent ?? 'a') as any;
+
     return (
-      <a ref={ref} {...linkProps} {...rest}>
+      <BaseComponentAsAny ref={ref} {...linkProps} {...rest}>
         {children}
         {!inline && Icon && (
           <div className={`${prefix}--link__icon`}>
             <Icon />
           </div>
         )}
-      </a>
+      </BaseComponentAsAny>
     );
   }
 );
@@ -122,6 +131,12 @@ const Link = React.forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
 Link.displayName = 'Link';
 
 Link.propTypes = {
+  /**
+   * Provide a custom element or component to render the top-level node for the
+   * component.
+   */
+  as: PropTypes.string,
+
   /**
    * Provide the content for the Link
    */
