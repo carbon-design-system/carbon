@@ -172,7 +172,7 @@ $popover-caret-height: custom-property.get-var(
     will-change: transform;
   }
 
-  .#{$prefix}--popover--open
+  .#{$prefix}--popover--caret.#{$prefix}--popover--open
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret {
     display: block;
@@ -181,12 +181,6 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--tab-tip
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret {
-    display: none;
-  }
-
-  .#{$prefix}--popover--open
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret-close {
     display: none;
   }
 

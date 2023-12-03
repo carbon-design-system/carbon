@@ -418,13 +418,11 @@ Popover.propTypes = {
   open: PropTypes.bool.isRequired,
 };
 
-export type PopoverContentProps = {
-  caret?: boolean | null | undefined;
-} & React.HTMLAttributes<HTMLSpanElement>;
+export type PopoverContentProps = React.HTMLAttributes<HTMLSpanElement>;
 
 function PopoverContentRenderFunction(
   // eslint-disable-next-line react/prop-types
-  { className, children, caret = true, ...rest }: PopoverContentProps,
+  { className, children, ...rest }: PopoverContentProps,
   forwardRef: React.ForwardedRef<HTMLSpanElement>
 ) {
   const prefix = usePrefix();
@@ -435,11 +433,7 @@ function PopoverContentRenderFunction(
       <span className={cx(`${prefix}--popover-content`, className)} ref={ref}>
         {children}
       </span>
-      <span
-        className={`${prefix}--popover-caret${
-          !caret ? ` ${prefix}--popover-caret-close` : ''
-        }`}
-      />
+      <span className={`${prefix}--popover-caret`} />
     </span>
   );
 }
@@ -447,10 +441,6 @@ function PopoverContentRenderFunction(
 export const PopoverContent = React.forwardRef(PopoverContentRenderFunction);
 
 PopoverContent.propTypes = {
-  /**
-   * Provide whether caret should be visible or not.
-   */
-  caret: PropTypes.bool,
   /**
    * Provide elements to be rendered inside of the component
    */
