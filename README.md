@@ -85,6 +85,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+
 <table>
   <tr>
     <td align="center"><a href="https://github.com/tay1orjones"><img src="https://avatars0.githubusercontent.com/u/3360588?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Taylor Jones</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=tay1orjones" title="Code">💻</a> <a href="https://github.com/carbon-design-system/carbon/commits?author=tay1orjones" title="Documentation">📖</a> <a href="#a11y-tay1orjones" title="Accessibility">️️️️♿️</a></td>
@@ -261,10 +262,8 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/Nirajsah"><img src="https://avatars.githubusercontent.com/u/51414373?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Niraj Sah</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Nirajsah" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/allisonishida"><img src="https://avatars.githubusercontent.com/u/22247062?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Allison Ishida</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=allisonishida" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/alewitt2"><img src="https://avatars.githubusercontent.com/u/48691328?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alex Lewitt</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=alewitt2" title="Code">💻</a></td>
-    <td align="center"><a href="https://haruki-kuriwada.netlify.app/"><img src="https://avatars.githubusercontent.com/u/62743644?v=4?s=100" width="100px;" alt=""/><br /><sub><b>HaRuki</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=kuri-sun" title="Code">💻</a> <a href="https://github.com/carbon-design-system/carbon/commits?author=kuri-sun" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/allisonishida"><img src="https://avatars.githubusercontent.com/u/22247062?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Allison Ishida</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=allisonishida" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/kuri-sun"><img src="https://avatars.githubusercontent.com/u/62743644?v=4?s=100" width="100px;" alt=""/><br /><sub><b>HaRuki</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=kuri-sun" title="Code">💻</a> <a href="https://github.com/carbon-design-system/carbon/commits?author=kuri-sun" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/Tresau-IBM"><img src="https://avatars.githubusercontent.com/u/148357638?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tresau-IBM</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Tresau-IBM" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/alewitt2"><img src="https://avatars.githubusercontent.com/u/48691328?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alex Lewitt</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=alewitt2" title="Code">💻</a></td>
   </tr>
 </table>
 

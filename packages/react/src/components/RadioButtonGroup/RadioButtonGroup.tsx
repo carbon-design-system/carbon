@@ -93,6 +93,11 @@ export interface RadioButtonGroupProps
   readOnly?: boolean;
 
   /**
+   * Provide a `Slug` component to be rendered inside the `RadioButtonGroup` component
+   */
+  slug?: ReactNodeLike;
+
+  /**
    * Specify whether the control is currently in warning state
    */
   warn?: boolean;
@@ -127,6 +132,7 @@ const RadioButtonGroup = React.forwardRef(
       valueSelected,
       warn = false,
       warnText,
+      slug,
       ...rest
     } = props;
     const prefix = usePrefix();
@@ -189,6 +195,7 @@ const RadioButtonGroup = React.forwardRef(
       [`${prefix}--radio-button-group--readonly`]: readOnly,
       [`${prefix}--radio-button-group--invalid`]: !readOnly && invalid,
       [`${prefix}--radio-button-group--warning`]: showWarning,
+      [`${prefix}--radio-button-group--slug`]: slug,
     });
 
     const helperClasses = classNames(`${prefix}--form__helper-text`, {
@@ -207,6 +214,15 @@ const RadioButtonGroup = React.forwardRef(
 
     const divRef = useRef<HTMLDivElement>(null);
 
+    // Slug is always size `mini`
+    let normalizedSlug;
+    if (slug) {
+      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+        size: 'mini',
+        kind: 'default',
+      });
+    }
+
     return (
       <div className={wrapperClasses} ref={mergeRefs(divRef, ref)}>
         <fieldset
@@ -216,7 +232,10 @@ const RadioButtonGroup = React.forwardRef(
           aria-describedby={showHelper && helperText ? helperId : undefined}
           {...rest}>
           {legendText && (
-            <Legend className={`${prefix}--label`}>{legendText}</Legend>
+            <Legend className={`${prefix}--label`}>
+              {legendText}
+              {normalizedSlug}
+            </Legend>
           )}
           {getRadioButtons()}
         </fieldset>
@@ -311,6 +330,11 @@ RadioButtonGroup.propTypes = {
    * Whether the RadioButtonGroup should be read-only
    */
   readOnly: PropTypes.bool,
+
+  /**
+   * Provide a `Slug` component to be rendered inside the `RadioButtonGroup` component
+   */
+  slug: PropTypes.node,
 
   /**
    * Specify the value that is currently selected in the group
