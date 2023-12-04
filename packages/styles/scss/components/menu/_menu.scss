@@ -35,6 +35,7 @@
     max-inline-size: 18rem;
     min-inline-size: 10rem;
     opacity: 0;
+    overflow-y: auto;
     visibility: hidden;
   }
 
@@ -66,7 +67,7 @@
     display: grid;
     align-items: center;
     block-size: 2rem;
-    color: $text-primary;
+    color: $text-secondary;
     column-gap: $spacing-03;
     cursor: pointer;
     grid-template-columns: 1fr max-content;
@@ -76,10 +77,19 @@
     &:focus {
       @include focus-outline('outline');
     }
+
+    svg {
+      color: $icon-secondary;
+    }
   }
 
   .#{$prefix}--menu-item:hover {
     background-color: $layer-hover;
+    color: $text-primary;
+
+    svg {
+      color: $icon-primary;
+    }
   }
 
   $supported-sizes: (
