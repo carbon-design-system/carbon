@@ -613,19 +613,3 @@ Playground.argTypes = {
     },
   },
 };
-
-export const TestingDeleteBeforeMerge = () => {
-  const showFirstTab = false;
-  return (
-    <Tabs>
-      <TabList>
-        {showFirstTab && <Tab>Tab 1</Tab>}
-        <Tab>Tab 2</Tab>
-      </TabList>
-      <TabPanels>
-        <TabPanel>Tab panel 1</TabPanel>
-        <TabPanel>Tab panel 2</TabPanel>
-      </TabPanels>
-    </Tabs>
-  );
-};
