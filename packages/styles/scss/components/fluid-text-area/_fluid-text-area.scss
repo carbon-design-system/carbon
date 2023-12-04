@@ -42,7 +42,7 @@
     align-items: center;
     margin: 0;
     block-size: convert.to-rem(16px);
-    inline-size: calc(100% - 2rem);
+    inline-size: auto;
     inset-block-start: convert.to-rem(13px);
     inset-inline-start: $spacing-05;
   }
