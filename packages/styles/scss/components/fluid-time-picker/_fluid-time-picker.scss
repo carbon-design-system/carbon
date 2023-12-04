@@ -112,7 +112,9 @@
     padding-block-start: convert.to-rem(30px);
   }
 
-  .#{$prefix}--select--fluid:last-of-type .#{$prefix}--select-input {
+  .#{$prefix}--time-picker--fluid
+    .#{$prefix}--select--fluid:last-of-type
+    .#{$prefix}--select-input {
     border-inline-end: 2px solid transparent;
   }
 
