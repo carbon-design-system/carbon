@@ -8173,6 +8173,15 @@ Map {
       "cols": Object {
         "type": "number",
       },
+      "counterMode": Object {
+        "args": Array [
+          Array [
+            "character",
+            "word",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "defaultValue": Object {
         "args": Array [
           Array [
