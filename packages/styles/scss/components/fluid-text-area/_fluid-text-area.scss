@@ -222,4 +222,15 @@
   .#{$prefix}--text-area--fluid .#{$prefix}--text-area__wrapper--slug {
     @include ai-gradient;
   }
+
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--text-area--invalid
+    ~ .#{$prefix}--slug,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--text-area--warn
+    ~ .#{$prefix}--slug {
+    inset-inline-end: $spacing-05;
+  }
 }
