@@ -271,6 +271,7 @@
   // Slug styles
   .#{$prefix}--tag .#{$prefix}--slug .#{$prefix}--slug__button--inline {
     color: currentColor;
+    margin-inline-start: convert.to-rem(1px);
   }
 
   .#{$prefix}--tag
