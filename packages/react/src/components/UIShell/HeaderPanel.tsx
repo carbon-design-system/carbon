@@ -20,13 +20,35 @@ import { useWindowEvent } from '../../internal/useEvent';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 
 interface HeaderPanelProps {
+  /**
+   * Specify whether focus and blur listeners are added. They are by default.
+   */
   addFocusListeners?: boolean;
+
+  /**
+   * The content that will render inside of the `HeaderPanel`
+   */
   children?: ReactNode;
-  expanded?: boolean;
-  href?: string;
-  'aria-label'?: string;
-  'aria-labelledby'?: string;
+
+  /**
+   * Optionally provide a custom class to apply to the underlying `<li>` node
+   */
   className?: string;
+
+  /**
+   * Specify whether the panel is expanded
+   */
+  expanded?: boolean;
+
+  /**
+   * Provide the `href` to the id of the element on your package that could
+   * be target.
+   */
+  href?: string;
+
+  /**
+   * An optional listener that is called a callback to collapse the HeaderPanel
+   */
   onHeaderPanelFocus?: () => void;
 }
 
@@ -42,21 +64,22 @@ const HeaderPanel: React.FC<HeaderPanelProps> = React.forwardRef(
       href,
       ...rest
     },
-    ref: ForwardedRef<HTMLElement>
+    ref: ForwardedRef<HTMLDivElement>
   ) {
     const prefix = usePrefix();
-    const headerPanelReference = useRef(null);
+    const headerPanelReference = useRef<HTMLDivElement>(null);
     const headerPanelRef = useMergedRefs([headerPanelReference, ref]);
 
     const controlled = useRef(expanded !== undefined).current;
     const [expandedState, setExpandedState] = useState(expanded);
     const expandedProp = controlled ? expanded : expandedState;
 
-    const [lastClickedElement, setLastClickedElement] = useState(null);
+    const [lastClickedElement, setLastClickedElement] =
+      useState<HTMLElement | null>(null);
 
     const className = cx(`${prefix}--header-panel`, {
       [`${prefix}--header-panel--expanded`]: expandedProp,
-      [customClassName]: !!customClassName,
+      [customClassName as string]: !!customClassName,
     });
 
     const eventHandlers: Partial<
@@ -88,7 +111,7 @@ const HeaderPanel: React.FC<HeaderPanelProps> = React.forwardRef(
     }
 
     useWindowEvent('click', () => {
-      const focusedElement = document.activeElement;
+      const focusedElement = document.activeElement as HTMLElement;
       setLastClickedElement(focusedElement);
 
       const childJsxElement = children as JSX.Element;
