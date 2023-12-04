@@ -132,7 +132,7 @@ const Tag = <T extends React.ElementType>({
 
   // Slug is always size `md` and `inline`
   let normalizedSlug;
-  if (slug) {
+  if (slug && slug['type']?.displayName === 'Slug') {
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
       size: 'sm',
       kind: 'inline',

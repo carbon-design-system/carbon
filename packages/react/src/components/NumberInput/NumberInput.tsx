@@ -361,7 +361,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 
     // Slug is always size `mini`
     let normalizedSlug;
-    if (slug) {
+    if (slug && slug['type']?.displayName === 'Slug') {
       normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
         size: 'mini',
       });
@@ -369,7 +369,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 
     // Need to update the internal value when the revert button is clicked
     let isRevertActive;
-    if (slug) {
+    if (slug && slug['type']?.displayName === 'Slug') {
       isRevertActive = normalizedSlug.props.revertActive;
     }
 
