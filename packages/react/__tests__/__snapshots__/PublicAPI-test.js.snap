@@ -9114,9 +9114,6 @@ Map {
             Object {
               "type": "func",
             },
-            Object {
-              "type": "object",
-            },
           ],
         ],
         "type": "oneOfType",
@@ -9197,9 +9194,6 @@ Map {
             Array [
               Object {
                 "type": "func",
-              },
-              Object {
-                "type": "object",
               },
             ],
           ],
