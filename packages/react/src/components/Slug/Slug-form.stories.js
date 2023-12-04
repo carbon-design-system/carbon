@@ -5,10 +5,14 @@ import DatePicker from '../DatePicker';
 import DatePickerInput from '../DatePickerInput';
 import Form from '../Form/Form';
 import { MultiSelect, FilterableMultiSelect } from '../MultiSelect';
+import FluidComboBox from '../FluidComboBox';
 import FluidForm from '../FluidForm';
 import FluidNumberInput from '../FluidNumberInput';
 import FluidDatePicker from '../FluidDatePicker';
 import FluidDatePickerInput from '../FluidDatePickerInput';
+import FluidDropdown from '../FluidDropdown';
+import FluidMultiSelect from '../FluidMultiSelect';
+import FluidSelect from '../FluidSelect';
 import FluidTextArea from '../FluidTextArea';
 import FluidTextInput from '../FluidTextInput';
 import { NumberInput } from '../NumberInput';
@@ -316,6 +320,7 @@ export const _FormExample = (args) => {
               size="md"
               id="fluid-date-picker"
               slug={slug}
+              {...rest}
             />
           </FluidDatePicker>
         </div>
@@ -325,7 +330,7 @@ export const _FormExample = (args) => {
             {...numberInputProps}
             id="fluid-number-input"
             slug={slug}
-            invalidText="Oh no!"
+            {...rest}
           />
         </div>
         <div style={{ display: 'flex' }}>
@@ -333,10 +338,80 @@ export const _FormExample = (args) => {
             {...TextInputProps}
             id="fluid-text-input"
             slug={slug}
+            {...rest}
           />
         </div>
         <div style={{ display: 'flex' }}>
-          <FluidTextArea {...textareaProps} id="fluid-text-area" slug={slug} />
+          <FluidTextArea
+            {...textareaProps}
+            id="fluid-text-area"
+            slug={slug}
+            {...rest}
+          />
+        </div>
+        <div style={{ display: 'flex' }}>
+          <FluidDropdown
+            isCondensed
+            initialSelectedItem={items[2]}
+            id="fluid-dropdown"
+            titleText="Label"
+            label="Choose an option"
+            items={items}
+            itemToString={(item) => (item ? item.text : '')}
+            slug={slug}
+            {...rest}
+          />
+        </div>
+        <div style={{ display: 'flex' }}>
+          <FluidComboBox
+            isCondensed
+            onChange={() => {}}
+            id="fluid-combobox"
+            titleText="Label"
+            label="Choose an option"
+            items={items}
+            itemToString={(item) => (item ? item.text : '')}
+            slug={slug}
+            {...rest}
+          />
+        </div>
+        <div style={{ display: 'flex' }}>
+          <FluidMultiSelect
+            isCondensed
+            onChange={() => {}}
+            initialSelectedItem={items[2]}
+            id="fluid-multi-select"
+            titleText="Label"
+            label="Choose an option"
+            items={items}
+            itemToString={(item) => (item ? item.text : '')}
+            slug={slug}
+            {...rest}
+          />
+        </div>
+        <div style={{ display: 'flex' }}>
+          <FluidMultiSelect
+            isFilterable
+            isCondensed
+            onChange={() => {}}
+            initialSelectedItem={items[2]}
+            id="fluid-multi-select-2"
+            titleText="Label"
+            label="Choose an option"
+            items={items}
+            itemToString={(item) => (item ? item.text : '')}
+            slug={slug}
+            {...rest}
+          />
+        </div>
+        <div style={{ display: 'flex' }}>
+          <FluidSelect slug={slug} {...rest} id="select-2">
+            <SelectItem value="" text="" />
+            <SelectItem value="option-1" text="Option 1" />
+            <SelectItem value="option-2" text="Option 2" />
+            <SelectItem value="option-3" text="Option 3" />
+            <SelectItem value="option-4" text="Option 4" />
+          </FluidSelect>
         </div>
         <Button type="submit" className="some-class" {...buttonEvents}>
           Submit
