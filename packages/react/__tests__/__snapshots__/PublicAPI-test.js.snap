@@ -2176,6 +2176,16 @@ Map {
         },
       },
     },
+    "TableSlugRow": Object {
+      "propTypes": Object {
+        "className": Object {
+          "type": "string",
+        },
+        "slug": Object {
+          "type": "node",
+        },
+      },
+    },
     "TableToolbar": Object {
       "propTypes": Object {
         "aria-label": Object {
@@ -7878,6 +7888,16 @@ Map {
       },
       "radio": Object {
         "type": "bool",
+      },
+    },
+  },
+  "TableSlugRow" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "slug": Object {
+        "type": "node",
       },
     },
   },

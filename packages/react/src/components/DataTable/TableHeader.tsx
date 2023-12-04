@@ -6,12 +6,13 @@
  */
 
 import cx from 'classnames';
-import PropTypes from 'prop-types';
-import React, { MouseEventHandler } from 'react';
+import PropTypes, { ReactNodeLike } from 'prop-types';
+import React, { MouseEventHandler, useRef } from 'react';
 import {
   ArrowUp as Arrow,
   ArrowsVertical as Arrows,
 } from '@carbon/icons-react';
+import classNames from 'classnames';
 import { sortStates } from './state/sorting';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
@@ -106,6 +107,11 @@ interface TableHeaderProps
   scope?: string;
 
   /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `TableSlugRow` component
+   */
+  slug?: ReactNodeLike;
+
+  /**
    * Specify which direction we are currently sorting by, should be one of DESC,
    * NONE, or ASC.
    */
@@ -133,6 +139,7 @@ const TableHeader = React.forwardRef(function TableHeader(
     scope = defaultScope,
     sortDirection,
     translateWithId: t = translateWithId,
+    slug,
     id,
     ...rest
   }: TableHeaderProps,
@@ -140,6 +147,21 @@ const TableHeader = React.forwardRef(function TableHeader(
 ) {
   const prefix = usePrefix();
   const uniqueId = useId('table-sort');
+
+  // Slug is always size `mini`
+  const slugRef = useRef<HTMLInputElement>(null);
+  let normalizedSlug;
+  if (slug) {
+    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+      size: 'mini',
+      ref: slugRef,
+    });
+  }
+
+  const headerLabelClassNames = classNames({
+    [`${prefix}--table-header-label`]: true,
+    [`${prefix}--table-header-label--slug`]: slug,
+  });
 
   if (!isSortable) {
     return (
@@ -151,7 +173,10 @@ const TableHeader = React.forwardRef(function TableHeader(
         colSpan={colSpan}
         ref={ref}>
         {children ? (
-          <div className={`${prefix}--table-header-label`}>{children}</div>
+          <div className={headerLabelClassNames}>
+            {children}
+            {normalizedSlug}
+          </div>
         ) : null}
       </th>
     );
@@ -175,7 +200,17 @@ const TableHeader = React.forwardRef(function TableHeader(
       sortStates,
     });
 
-  const headerClasses = cx(headerClassName, `${prefix}--table-sort__header`);
+  const headerClasses = cx(headerClassName, `${prefix}--table-sort__header`, {
+    [`${prefix}--table-sort__header--slug`]: slug,
+  });
+
+  const handleClick = (evt) => {
+    if (slug && slugRef.current && slugRef.current.contains(evt.target)) {
+      return;
+    } else if (onClick) {
+      return onClick(evt);
+    }
+  };
 
   return (
     <th
@@ -192,10 +227,11 @@ const TableHeader = React.forwardRef(function TableHeader(
         type="button"
         aria-describedby={uniqueId}
         className={className}
-        onClick={onClick}
+        onClick={handleClick}
         {...rest}>
         <span className={`${prefix}--table-sort__flex`}>
           <div className={`${prefix}--table-header-label`}>{children}</div>
+          {normalizedSlug}
           <Arrow size={20} className={`${prefix}--table-sort__icon`} />
           <Arrows
             size={20}
