@@ -175,7 +175,7 @@ const MenuItem = React.forwardRef(function MenuItem(
       <div className={`${prefix}--menu-item__icon`}>
         {iconsAllowed && IconElement && <IconElement />}
       </div>
-      <Text as="div" className={`${prefix}--menu-item__label`}>
+      <Text as="div" className={`${prefix}--menu-item__label`} title={label}>
         {label}
       </Text>
       {shortcut && !hasChildren && (
