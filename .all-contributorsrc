@@ -1299,6 +1299,15 @@
       ]
     },
     {
+      "login": "cesardlinx",
+      "name": "David Padilla",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25573926?v=4",
+      "profile": "https://www.davidpadilla.dev/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "allisonishida",
       "name": "Allison Ishida",
       "avatar_url": "https://avatars.githubusercontent.com/u/22247062?v=4",
@@ -1333,6 +1342,33 @@
       "contributions": [
         "code",
         "doc"
+      ]
+    },
+    {
+      "login": "matejoslav",
+      "name": "Matej Ocovsky",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8973672?v=4",
+      "profile": "https://github.com/matejoslav",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "SamChinellato",
+      "name": "SamChinellato",
+      "avatar_url": "https://avatars.githubusercontent.com/u/49278203?v=4",
+      "profile": "https://samuelechinellato.com/#/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "stevenpatrick009",
+      "name": "stevenpatrick009",
+      "avatar_url": "https://avatars.githubusercontent.com/u/106097350?v=4",
+      "profile": "https://github.com/stevenpatrick009",
+      "contributions": [
+        "code"
       ]
     }
   ],

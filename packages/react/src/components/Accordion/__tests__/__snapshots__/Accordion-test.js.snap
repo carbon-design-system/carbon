@@ -37,10 +37,14 @@ exports[`Accordion should render 1`] = `
         </div>
       </button>
       <div
-        class="cds--accordion__content"
-        id="accordion-item-:r0:"
+        class="cds--accordion__wrapper"
       >
-        Panel A
+        <div
+          class="cds--accordion__content"
+          id="accordion-item-:r0:"
+        >
+          Panel A
+        </div>
       </div>
     </li>
     <li
@@ -75,10 +79,14 @@ exports[`Accordion should render 1`] = `
         </div>
       </button>
       <div
-        class="cds--accordion__content"
-        id="accordion-item-:r1:"
+        class="cds--accordion__wrapper"
       >
-        Panel B
+        <div
+          class="cds--accordion__content"
+          id="accordion-item-:r1:"
+        >
+          Panel B
+        </div>
       </div>
     </li>
     <li
@@ -113,10 +121,14 @@ exports[`Accordion should render 1`] = `
         </div>
       </button>
       <div
-        class="cds--accordion__content"
-        id="accordion-item-:r2:"
+        class="cds--accordion__wrapper"
       >
-        Panel C
+        <div
+          class="cds--accordion__content"
+          id="accordion-item-:r2:"
+        >
+          Panel C
+        </div>
       </div>
     </li>
   </ul>

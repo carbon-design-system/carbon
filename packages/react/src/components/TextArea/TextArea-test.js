@@ -214,22 +214,69 @@ describe('TextArea', () => {
       ).toEqual(1);
     });
 
-    it('should have label and counter disabled', () => {
+    describe('word counter', () => {
+      it('should not render element with only counterMode prop passed in', () => {
+        render(
+          <TextArea
+            id="wordCounterTestWrapper1"
+            labelText="testLabel"
+            counterMode={'word'}
+          />
+        );
+        expect(
+          // eslint-disable-next-line testing-library/no-node-access
+          screen.getByText('testLabel').closest(`${prefix}--text-area__counter`)
+        ).toEqual(null);
+      });
+    });
+  });
+
+  it('should have label and counter disabled', () => {
+    render(
+      <TextArea
+        disabled
+        enableCounter
+        id="testing"
+        labelText="testLabel"
+        maxCount={100}
+      />
+    );
+    expect(screen.getByText('testLabel')).toHaveClass(
+      `${prefix}--label--disabled`
+    );
+    expect(screen.getByText('0/100')).toHaveClass(`${prefix}--label--disabled`);
+  });
+});
+
+describe('events', () => {
+  describe('disabled textarea', () => {
+    it('should not invoke onClick when textarea is clicked', async () => {
+      const onClick = jest.fn();
       render(
         <TextArea
           disabled
-          enableCounter
           id="testing"
           labelText="testLabel"
-          maxCount={100}
+          onClick={onClick}
         />
       );
-      expect(screen.getByText('testLabel')).toHaveClass(
-        `${prefix}--label--disabled`
+      await userEvent.click(screen.getByLabelText('testLabel'));
+      expect(onClick).not.toHaveBeenCalled();
+    });
+
+    it('should not invoke onChange', async () => {
+      const onChange = jest.fn();
+      render(
+        <TextArea
+          disabled
+          id="testing"
+          labelText="testLabel"
+          onChange={onChange}
+        />
       );
-      expect(screen.getByText('0/100')).toHaveClass(
-        `${prefix}--label--disabled`
-      );
+      await userEvent.click(screen.getByLabelText('testLabel'));
+      await userEvent.keyboard('big blue');
+      expect(onChange).not.toHaveBeenCalled();
     });
   });
 

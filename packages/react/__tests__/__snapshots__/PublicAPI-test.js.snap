@@ -504,6 +504,9 @@ Map {
       "readOnly": Object {
         "type": "bool",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "title": Object {
         "type": "string",
       },
@@ -542,6 +545,9 @@ Map {
       },
       "readOnly": Object {
         "type": "bool",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "warn": Object {
         "type": "bool",
@@ -2167,6 +2173,16 @@ Map {
         },
         "radio": Object {
           "type": "bool",
+        },
+      },
+    },
+    "TableSlugRow": Object {
+      "propTypes": Object {
+        "className": Object {
+          "type": "string",
+        },
+        "slug": Object {
+          "type": "node",
         },
       },
     },
@@ -6235,6 +6251,9 @@ Map {
       "onClick": Object {
         "type": "func",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "value": Object {
         "args": Array [
           Array [
@@ -6315,6 +6334,9 @@ Map {
       },
       "readOnly": Object {
         "type": "bool",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "valueSelected": Object {
         "args": Array [
@@ -7869,6 +7891,16 @@ Map {
       },
     },
   },
+  "TableSlugRow" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "slug": Object {
+        "type": "node",
+      },
+    },
+  },
   "TableToolbar" => Object {
     "propTypes": Object {
       "aria-label": Object {
@@ -8140,6 +8172,15 @@ Map {
       },
       "cols": Object {
         "type": "number",
+      },
+      "counterMode": Object {
+        "args": Array [
+          Array [
+            "character",
+            "word",
+          ],
+        ],
+        "type": "oneOf",
       },
       "defaultValue": Object {
         "args": Array [
