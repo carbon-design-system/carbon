@@ -68,7 +68,7 @@ const InlineLoading = ({
   description,
   onSuccess,
   successDelay = 1500,
-  ...divProps
+  ...rest
 }: InlineLoadingProps) => {
   const prefix = usePrefix();
   const loadingClasses = classNames(`${prefix}--inline-loading`, className);
@@ -119,8 +119,8 @@ const InlineLoading = ({
   return (
     <div
       className={loadingClasses}
-      {...divProps}
-      aria-live={'assertive' || divProps['aria-live']}>
+      {...rest}
+      aria-live={'assertive' || rest['aria-live']}>
       {loadingAnimation}
       {description && loadingText}
     </div>
