@@ -39,6 +39,20 @@ export const Default = () => (
   />
 );
 
+export const SliderWithHiddenInputs = () => (
+  <Slider
+    labelText="Slider label"
+    value={50}
+    min={0}
+    max={100}
+    step={1}
+    stepMultiplier={10}
+    noValidate
+    invalidText="Invalid message goes here"
+    hideTextInput={true}
+  />
+);
+
 export const ControlledSlider = () => {
   const [val, setVal] = useState(87);
   return (
@@ -107,6 +121,22 @@ export const TwoHandleSlider = () => (
     step={1}
     stepMultiplier={10}
     invalidText="Invalid message goes here"
+  />
+);
+
+export const TwoHandleSliderWithHiddenInputs = () => (
+  <Slider
+    ariaLabelInput="Lower bound"
+    unstable_ariaLabelInputUpper="Upper bound"
+    labelText="Slider label"
+    value={10}
+    unstable_valueUpper={90}
+    min={0}
+    max={100}
+    step={1}
+    stepMultiplier={10}
+    invalidText="Invalid message goes here"
+    hideTextInput={true}
   />
 );
 
