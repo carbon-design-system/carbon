@@ -107,14 +107,14 @@ class CDSAccordionItem extends FocusMixin(LitElement) {
         )
       );
     }
-    const content = this.shadowRoot.querySelector(`.${prefix}--accordion__wrapper`);
-    
+    const content = this.shadowRoot!.querySelector(`.${prefix}--accordion__wrapper`) as HTMLElement;
+
     if (this.open) {
       // accordion opens
-      content.style.maxBlockSize = content.scrollHeight + 15 + 'px';
+      content!.style.maxBlockSize = content!.scrollHeight + 15 + 'px';
     } else {
       // accordion closes
-      content.style.maxBlockSize = '';
+      content!.style.maxBlockSize = '';
     }
   }
 
