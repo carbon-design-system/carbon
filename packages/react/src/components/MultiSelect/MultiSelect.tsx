@@ -270,7 +270,7 @@ export interface MultiSelectProps<ItemType>
   size?: ListBoxSize;
 
   /**
-   * Provide a `Slug` component to be rendered inside the `MultiSelect` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `MultiSelect` component
    */
   slug?: ReactNodeLike;
 
@@ -877,7 +877,7 @@ MultiSelect.propTypes = {
   size: ListBoxPropTypes.ListBoxSize,
 
   /**
-   * Provide a `Slug` component to be rendered inside the `MultiSelect` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `MultiSelect` component
    */
   slug: PropTypes.node,
 

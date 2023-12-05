@@ -282,7 +282,7 @@ export interface ComboBoxProps<ItemType>
   size?: ListBoxSize;
 
   /**
-   * Provide a `Slug` component to be rendered inside the `ComboBox` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `ComboBox` component
    */
   slug?: ReactNodeLike;
 
@@ -957,7 +957,7 @@ ComboBox.propTypes = {
   size: ListBoxPropTypes.ListBoxSize,
 
   /**
-   * Provide a `Slug` component to be rendered inside the `ComboBox` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `ComboBox` component
    */
   slug: PropTypes.node,
 
