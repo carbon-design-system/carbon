@@ -29,6 +29,11 @@ $css--plex: true !default;
   .#{$prefix}--inline-notification__close-button:focus {
     @include focus-outline('outline');
   }
+
+  .#{$prefix}--inline-notification__title {
+    margin-block-start: 0;
+    margin-block-end: 0;
+  }
 }
 
 :host(#{$prefix}-inline-notification[low-contrast])::before {
