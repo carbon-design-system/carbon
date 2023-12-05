@@ -1,7 +1,7 @@
 {
   "name": "custom-theme",
   "private": true,
-  "version": "0.42.0",
+  "version": "0.43.0-rc.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/react": "^1.44.0",
+    "@carbon/react": "^1.45.0-rc.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
