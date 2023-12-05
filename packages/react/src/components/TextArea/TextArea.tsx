@@ -120,7 +120,7 @@ export interface TextAreaProps
   rows?: number;
 
   /**
-   * Provide a `Slug` component to be rendered inside the `TextArea` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `TextArea` component
    */
   slug?: ReactNodeLike;
 
@@ -562,7 +562,7 @@ TextArea.propTypes = {
   rows: PropTypes.number,
 
   /**
-   * Provide a `Slug` component to be rendered inside the `TextArea` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `TextArea` component
    */
   slug: PropTypes.node,
 
