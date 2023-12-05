@@ -40,13 +40,13 @@ export interface TileProps extends HTMLAttributes<HTMLDivElement> {
   light?: boolean;
 
   /**
-   * Specify if the `Tile` component should be rendered with rounded corners. Only valid
+   * **Experimental**: Specify if the `Tile` component should be rendered with rounded corners. Only valid
    * when `slug` prop is present
    */
   hasRoundedCorners?: boolean;
 
   /**
-   * Provide a `Slug` component to be rendered inside the `SelectableTile` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `SelectableTile` component
    */
   slug?: ReactNodeLike;
 }
@@ -94,7 +94,7 @@ Tile.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify if the `Tile` component should be rendered with rounded corners. Only valid
+   * **Experimental**: Specify if the `Tile` component should be rendered with rounded corners. Only valid
    * when `slug` prop is present
    */
   hasRoundedCorners: PropTypes.bool,
@@ -111,7 +111,7 @@ Tile.propTypes = {
   ),
 
   /**
-   * Provide a `Slug` component to be rendered inside the `Tile` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `Tile` component
    */
   slug: PropTypes.node,
 };
@@ -134,7 +134,7 @@ export interface ClickableTileProps extends HTMLAttributes<HTMLAnchorElement> {
   disabled?: boolean;
 
   /**
-   * Specify if the `ClickableTile` component should be rendered with rounded corners.
+   * **Experimental**: Specify if the `ClickableTile` component should be rendered with rounded corners.
    * Only valid when `slug` prop is present
    */
   hasRoundedCorners?: boolean;
@@ -165,7 +165,7 @@ export interface ClickableTileProps extends HTMLAttributes<HTMLAnchorElement> {
   rel?: string;
 
   /**
-   * Specify if a `Slug` icon should be rendered inside the `ClickableTile`
+   * **Experimental**: Specify if a `Slug` icon should be rendered inside the `ClickableTile`
    */
   slug?: boolean;
 }
@@ -298,7 +298,7 @@ ClickableTile.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Specify if the `ClickableTile` component should be rendered with rounded corners.
+   * **Experimental**: Specify if the `ClickableTile` component should be rendered with rounded corners.
    * Only valid when `slug` prop is present
    */
   hasRoundedCorners: PropTypes.bool,
@@ -353,7 +353,7 @@ export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
 
   /**
-   * Specify if the `SelectableTile` component should be rendered with rounded corners.
+   * **Experimental**: Specify if the `SelectableTile` component should be rendered with rounded corners.
    * Only valid when `slug` prop is present
    */
   hasRoundedCorners?: boolean;
@@ -390,7 +390,7 @@ export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
   selected?: boolean;
 
   /**
-   * Provide a `Slug` component to be rendered inside the `SelectableTile` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `SelectableTile` component
    */
   slug?: ReactNodeLike;
 
@@ -534,7 +534,7 @@ SelectableTile.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Specify if the `SelectableTile` component should be rendered with rounded corners.
+   * **Experimental**: Specify if the `SelectableTile` component should be rendered with rounded corners.
    * Only valid when `slug` prop is present
    */
   hasRoundedCorners: PropTypes.bool,
@@ -580,7 +580,7 @@ SelectableTile.propTypes = {
   selected: PropTypes.bool,
 
   /**
-   * Provide a `Slug` component to be rendered inside the `SelectableTile` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `SelectableTile` component
    */
   slug: PropTypes.node,
 
@@ -614,7 +614,7 @@ export interface ExpandableTileProps extends HTMLAttributes<HTMLDivElement> {
   expanded?: boolean;
 
   /**
-   * Specify if the `ExpandableTile` component should be rendered with rounded corners.
+   * **Experimental**: Specify if the `ExpandableTile` component should be rendered with rounded corners.
    * Only valid when `slug` prop is present
    */
   hasRoundedCorners?: boolean;
@@ -635,7 +635,7 @@ export interface ExpandableTileProps extends HTMLAttributes<HTMLDivElement> {
   onKeyUp?(event: KeyboardEvent): void;
 
   /**
-   * Provide a `Slug` component to be rendered inside the `ExpandableTile` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `ExpandableTile` component
    */
   slug?: ReactNodeLike;
 
@@ -949,6 +949,11 @@ ExpandableTile.propTypes = {
    * optional handler to trigger a function when a key is pressed
    */
   onKeyUp: PropTypes.func,
+
+  /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `ExpandableTile` component
+   */
+  slug: PropTypes.node,
 
   /**
    * The `tabindex` attribute.

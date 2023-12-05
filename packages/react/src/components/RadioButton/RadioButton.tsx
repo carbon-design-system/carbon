@@ -83,7 +83,7 @@ export interface RadioButtonProps
   onClick?: (evt: React.MouseEvent<HTMLInputElement>) => void;
 
   /**
-   * Provide a `Slug` component to be rendered inside the `RadioButton` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `RadioButton` component
    */
   slug?: ReactNodeLike;
 
@@ -228,7 +228,7 @@ RadioButton.propTypes = {
   onClick: PropTypes.func,
 
   /**
-   * Provide a `Slug` component to be rendered inside the `RadioButton` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `RadioButton` component
    */
   slug: PropTypes.node,
 

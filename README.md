@@ -265,6 +265,11 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/alewitt2"><img src="https://avatars.githubusercontent.com/u/48691328?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alex Lewitt</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=alewitt2" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/Tresau-IBM"><img src="https://avatars.githubusercontent.com/u/148357638?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tresau-IBM</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Tresau-IBM" title="Code">💻</a></td>
     <td align="center"><a href="https://haruki-kuriwada.netlify.app/"><img src="https://avatars.githubusercontent.com/u/62743644?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ruki</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=kuri-sun" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/matejoslav"><img src="https://avatars.githubusercontent.com/u/8973672?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Matej Ocovsky</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=matejoslav" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://samuelechinellato.com/#/"><img src="https://avatars.githubusercontent.com/u/49278203?v=4?s=100" width="100px;" alt=""/><br /><sub><b>SamChinellato</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=SamChinellato" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/stevenpatrick009"><img src="https://avatars.githubusercontent.com/u/106097350?v=4?s=100" width="100px;" alt=""/><br /><sub><b>stevenpatrick009</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=stevenpatrick009" title="Code">💻</a></td>
   </tr>
 </table>
 

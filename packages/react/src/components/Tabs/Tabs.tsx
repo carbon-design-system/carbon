@@ -451,7 +451,7 @@ function TabList({
   }, [scrollLeft, children, dismissable]);
 
   useEffectOnce(() => {
-    if (tabs.current[selectedIndex].disabled) {
+    if (tabs.current[selectedIndex]?.disabled) {
       const activeTabs = tabs.current.filter((tab) => {
         return !tab.disabled;
       });
