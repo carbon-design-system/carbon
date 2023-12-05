@@ -29,7 +29,7 @@ const plugin = {
     });
 
     if (!hasTriageLabel) {
-      await octokit.issues.addLabels({
+      await octokit.issues?.addLabels({
         owner: repository.owner.login,
         repo: repository.name,
         issue_number: issue.number,

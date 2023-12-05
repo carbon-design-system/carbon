@@ -34,3 +34,110 @@
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
+
+.slug-tile-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.slug-tile-container .cds--tile {
+  max-width: 320px;
+  margin-right: 3rem;
+  margin-bottom: 3rem;
+  padding-bottom: 90px;
+}
+
+.slug-tile-container h4 {
+  margin-bottom: 1rem;
+}
+
+.slug-tile-container .ai-data {
+  margin-top: 16px;
+  padding: 16px 0;
+  display: flex;
+}
+
+.slug-tile-container .data-container {
+  width: 126px;
+}
+
+.slug-tile-container .data-container:first-of-type {
+  margin-right: 16px;
+}
+
+.slug-tile-container p {
+  @include type.type-style('body-01');
+}
+
+.slug-tile-container .data-container p {
+  @include type.type-style('label-02');
+}
+
+.slug-tile-container .arrow-right {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+}
+
+.slug-tile-container .cds--tile-content__below-the-fold {
+  padding-top: 16px;
+}
+
+.slug-tile-container .cds--tile-content__below-the-fold p {
+  @include type.type-style('label-01');
+  margin: 8px 0 50px;
+}
+
+.form-example {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.fluid-slug-form,
+.slug-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  max-width: 450px;
+  margin-left: 4rem;
+}
+
+.fluid-slug-form .cds--date-picker-container {
+  width: 100%;
+}
+
+.fluid-slug-form .cds--list-box__wrapper {
+  width: 100%;
+}
+
+.slug-container .cds--toggletip-content p {
+  @include type.type-style('body-compact-01');
+}
+
+.slug-container .cds--toggletip-content .bold {
+  font-weight: 600;
+}
+
+.slug-container .cds--toggletip-content .secondary {
+  color: theme.$text-secondary;
+}
+
+.slug-container .cds--toggletip-content h1 {
+  margin-bottom: 1rem;
+}
+
+.slug-container .cds--toggletip-content hr {
+  border: 0;
+  height: 1px;
+  background: theme.$border-subtle;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.slug-check-radio-container
+  .cds--form-item:not(:first-of-type):not(.cds--checkbox-wrapper),
+.slug-check-radio-container fieldset.cds--checkbox-group:not(:first-of-type) {
+  margin-top: 2rem;
+}

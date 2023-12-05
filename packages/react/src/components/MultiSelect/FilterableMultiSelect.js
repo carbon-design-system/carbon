@@ -669,7 +669,7 @@ FilterableMultiSelect.propTypes = {
   size: ListBoxPropTypes.ListBoxSize,
 
   /**
-   * Provide a `Slug` component to be rendered inside the `FilterableMultiSelect` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `FilterableMultiSelect` component
    */
   slug: PropTypes.node,
 

@@ -2176,6 +2176,16 @@ Map {
         },
       },
     },
+    "TableSlugRow": Object {
+      "propTypes": Object {
+        "className": Object {
+          "type": "string",
+        },
+        "slug": Object {
+          "type": "node",
+        },
+      },
+    },
     "TableToolbar": Object {
       "propTypes": Object {
         "aria-label": Object {
@@ -3123,6 +3133,9 @@ Map {
       },
       "onKeyUp": Object {
         "type": "func",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "tabIndex": Object {
         "type": "number",
@@ -7884,6 +7897,16 @@ Map {
       },
     },
   },
+  "TableSlugRow" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "slug": Object {
+        "type": "node",
+      },
+    },
+  },
   "TableToolbar" => Object {
     "propTypes": Object {
       "aria-label": Object {
@@ -8155,6 +8178,15 @@ Map {
       },
       "cols": Object {
         "type": "number",
+      },
+      "counterMode": Object {
+        "args": Array [
+          Array [
+            "character",
+            "word",
+          ],
+        ],
+        "type": "oneOf",
       },
       "defaultValue": Object {
         "args": Array [

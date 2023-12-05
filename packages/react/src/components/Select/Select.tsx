@@ -120,7 +120,7 @@ interface SelectProps
   size?: 'sm' | 'md' | 'lg';
 
   /**
-   * Provide a `Slug` component to be rendered inside the `Dropdown` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `Dropdown` component
    */
   slug?: ReactNodeLike;
 
@@ -413,7 +413,7 @@ Select.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
-   * Provide a `Slug` component to be rendered inside the `Select` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `Select` component
    */
   slug: PropTypes.node,
 

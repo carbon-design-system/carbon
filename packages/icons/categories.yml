@@ -600,7 +600,6 @@ categories:
           - ai-governance--lifecycle
           - ai-governance--tracked
           - ai-governance--untracked
-          - foundation-model
           - machine-learning
           - machine-learning-model
           - model--tuned
