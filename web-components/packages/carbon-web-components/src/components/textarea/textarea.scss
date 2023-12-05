@@ -7,9 +7,13 @@
 
 $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/components/text-area/index';
 
 :host(#{$prefix}-textarea) {
+  @include emit-layout-tokens();
+
   outline: none;
 }
 
@@ -18,4 +22,35 @@ $css--plex: true !default;
 :host(#{$prefix}-textarea) textarea[cols='0'],
 :host(#{$prefix}-textarea) textarea:not([cols]) {
   width: 100%;
+}
+
+:host(#{$prefix}-textarea) {
+  ::slotted(#{$prefix}-slug) {
+    position: absolute;
+    inset-block-start: $spacing-04;
+    inset-inline-end: $spacing-05;
+  }
+
+  ::slotted(#{$prefix}-slug[revert-active]) {
+    inset-block-start: $spacing-02;
+    inset-inline-end: $spacing-03;
+    transform: translate(0);
+  }
+}
+
+:host(#{$prefix}-textarea[warn]),
+:host(#{$prefix}-textarea[invalid]) {
+  .#{$prefix}--text-area__wrapper--slug {
+    .#{$prefix}--text-area {
+      padding-inline-end: $spacing-10;
+    }
+  }
+
+  ::slotted(#{$prefix}-slug) {
+    inset-inline-end: $spacing-08;
+  }
+
+  ::slotted(#{$prefix}-slug[revert-active]) {
+    inset-inline-end: $spacing-07;
+  }
 }

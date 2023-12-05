@@ -9,6 +9,7 @@ $css--plex: true !default;
 
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/components/text-input/index';
 @use '@carbon/styles/scss/layout' as *;
@@ -27,18 +28,51 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-text-input[show-password-visibility-toggle][size='sm'])
-  .#{$prefix}--text-input__invalid-icon {
-  right: $spacing-07;
+:host(#{$prefix}-text-input[show-password-visibility-toggle]) {
+  &[size='sm'] {
+    .#{$prefix}--text-input__invalid-icon {
+      right: $spacing-07;
+    }
+  }
 }
 
-:host(#{$prefix}-text-input[show-password-visibility-toggle][size='md'])
-  .#{$prefix}--text-input__invalid-icon,
-.#{$prefix}--text-input__invalid-icon {
-  right: $spacing-08;
+:host(#{$prefix}-text-input[show-password-visibility-toggle]) {
+  &[size='md'] {
+    .#{$prefix}--text-input__invalid-icon {
+      right: $spacing-07;
+    }
+  }
 }
 
-:host(#{$prefix}-text-input[show-password-visibility-toggle][size='lg'])
-  .#{$prefix}--text-input__invalid-icon {
-  right: $spacing-09;
+:host(#{$prefix}-text-input[show-password-visibility-toggle]) {
+  &[size='lg'] {
+    .#{$prefix}--text-input__invalid-icon {
+      right: $spacing-07;
+    }
+  }
+}
+
+:host(#{$prefix}-text-input) {
+  ::slotted(#{$prefix}-slug) {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: $spacing-05;
+  }
+
+  ::slotted(#{$prefix}-slug:not([revert-active])) {
+    transform: translateY(-50%);
+  }
+}
+
+:host(#{$prefix}-text-input[warn]),
+:host(#{$prefix}-text-input[invalid]) {
+  .#{$prefix}--text-input__field-wrapper--slug {
+    .#{$prefix}--text-input {
+      padding-inline-end: $spacing-10;
+    }
+  }
+
+  ::slotted(#{$prefix}-slug) {
+    inset-inline-end: $spacing-08;
+  }
 }

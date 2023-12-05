@@ -10,7 +10,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/utilities/custom-property';
-@use '@carbon/styles/scss/components/stack/index';
+@use '@carbon/styles/scss/components/stack/index' as *;
 
 :host(#{$prefix}-stack) {
   $index: 1;
@@ -24,10 +24,10 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-stack[orientation='vertical']) {
+:host(#{$prefix}-stack[orientation='vertical']) div {
   @extend .#{$prefix}--stack-vertical;
 }
 
-:host(#{$prefix}-stack[orientation='horizontal']) {
+:host(#{$prefix}-stack[orientation='horizontal']) div {
   @extend .#{$prefix}--stack-horizontal;
 }

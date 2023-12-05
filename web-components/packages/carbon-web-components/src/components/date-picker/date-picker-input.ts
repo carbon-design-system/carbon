@@ -31,6 +31,30 @@ export { DATE_PICKER_INPUT_COLOR_SCHEME, DATE_PICKER_INPUT_KIND };
 @customElement(`${prefix}-date-picker-input`)
 class CDSDatePickerInput extends FocusMixin(LitElement) {
   /**
+   * `true` if there is a slug.
+   */
+  private _hasSlug = false;
+
+  /**
+   * Handles `slotchange` event.
+   */
+  protected _handleSlugSlotChange({ target }: Event) {
+    const hasContent = (target as HTMLSlotElement)
+      .assignedNodes()
+      .filter((elem) =>
+        (elem as HTMLElement).matches !== undefined
+          ? (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSDatePickerInput).slugItem
+            )
+          : false
+      );
+
+    this._hasSlug = Boolean(hasContent);
+    (hasContent[0] as HTMLElement).setAttribute('size', 'mini');
+    this.requestUpdate();
+  }
+
+  /**
    * The calendar icon.
    */
   @query(`.${prefix}--date-picker__icon`)
@@ -218,6 +242,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
       warnText,
       _handleClickWrapper: handleClickWrapper,
       _handleInput: handleInput,
+      _hasSlug: hasSlug,
     } = this;
 
     const invalidIcon = WarningFilled16({
@@ -264,6 +289,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
       [`${prefix}--date-picker-input__wrapper--invalid`]:
         normalizedProps.invalid,
       [`${prefix}--date-picker-input__wrapper--warn`]: normalizedProps.warn,
+      [`${prefix}--date-picker-input__wrapper--slug`]: hasSlug,
     });
 
     const helperTextClasses = classMap({
@@ -276,18 +302,21 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
         <slot name="label-text">${labelText}</slot>
       </label>
       <div class="${inputWrapperClasses}" @click="${handleClickWrapper}">
-        <input
-          id="input"
-          type="${type}"
-          class="${inputClasses}"
-          ?disabled="${disabled}"
-          pattern="${pattern}"
-          placeholder="${ifDefined(placeholder)}"
-          .value="${ifDefined(value)}"
-          ?data-invalid="${invalid}"
-          @input="${handleInput}"
-          ?readonly="${readonly}" />
-        ${normalizedProps.icon || this._renderIcon()}
+        <span>
+          <input
+            id="input"
+            type="${type}"
+            class="${inputClasses}"
+            ?disabled="${disabled}"
+            pattern="${pattern}"
+            placeholder="${ifDefined(placeholder)}"
+            .value="${ifDefined(value)}"
+            ?data-invalid="${invalid}"
+            @input="${handleInput}"
+            ?readonly="${readonly}" />
+          ${normalizedProps.icon || this._renderIcon()}
+          <slot name="slug" @slotchange="${this._handleSlugSlotChange}"></slot>
+        </span>
       </div>
       <div
         class="${prefix}--form-requirement"
@@ -317,6 +346,13 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
    */
   static get selectorParent() {
     return `${prefix}-date-picker`;
+  }
+
+  /**
+   * A selector that will return the slug item.
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
   }
 
   static shadowRootOptions = {

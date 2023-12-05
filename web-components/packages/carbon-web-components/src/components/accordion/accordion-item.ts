@@ -107,6 +107,15 @@ class CDSAccordionItem extends FocusMixin(LitElement) {
         )
       );
     }
+    const content = this.shadowRoot!.querySelector(`.${prefix}--accordion__wrapper`) as HTMLElement;
+
+    if (this.open) {
+      // accordion opens
+      content!.style.maxBlockSize = content!.scrollHeight + 15 + 'px';
+    } else {
+      // accordion closes
+      content!.style.maxBlockSize = '';
+    }
   }
 
   /**
@@ -213,8 +222,10 @@ class CDSAccordionItem extends FocusMixin(LitElement) {
           <slot name="title">${title}</slot>
         </div>
       </button>
-      <div id="content" part="content" class="${contentClasses}">
-        <slot></slot>
+      <div class="${prefix}--accordion__wrapper">
+        <div id="content" part="content" class="${contentClasses}">
+          <slot></slot>
+        </div>
       </div>
     `;
   }

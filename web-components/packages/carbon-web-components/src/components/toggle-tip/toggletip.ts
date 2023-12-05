@@ -97,6 +97,12 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
     `;
   };
 
+  protected _renderInnerContent = () => {
+    return html`
+      ${this._renderTooltipButton()} ${this._renderTooltipContent()}
+    `;
+  };
+
   render() {
     const { alignment, open } = this;
     const classes = classMap({
@@ -111,9 +117,7 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
     return html`
       ${this._renderToggleTipLabel()}
       <span class="${classes}">
-        ${this._renderTooltipButton()}
-        ${this._renderTooltipContent()}
-
+        ${this._renderInnerContent()}
       </span>
     </span>
     `;

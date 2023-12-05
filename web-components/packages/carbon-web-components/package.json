@@ -72,7 +72,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.16.3",
-    "@carbon/styles": "^1.42.0",
+    "@carbon/styles": "1.44.0",
     "flatpickr": "4.6.1",
     "lit": "^2.7.6",
     "lodash-es": "^4.17.21"
@@ -93,7 +93,7 @@
     "@babel/template": "~7.12.0",
     "@babel/traverse": "~7.23.0",
     "@carbon/icon-helpers": "^10.28.0",
-    "@carbon/icons": "^10.48.0",
+    "@carbon/icons": "^11.31.0",
     "@open-wc/semantic-dom-diff": "~0.18.0",
     "@percy-io/in-percy": "^0.1.11",
     "@percy/cli": "^1.8.1",

@@ -13,6 +13,8 @@
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/components/slug/index' as *;
 @use '../toggle-tip/toggletip.scss';
 
@@ -26,22 +28,12 @@
 
 :host(#{$prefix}-slug[enabled]) {
   .#{$prefix}--popover-content {
+    @include callout-gradient();
+
     border: 1px solid $border-subtle;
     border-radius: $spacing-05;
     // 84px seems to make this fully opaque?
     backdrop-filter: blur(25px);
-    background: linear-gradient(
-        0deg,
-        $slug-callout-aura-start 0%,
-        $slug-callout-aura-end 33%,
-        transparent 100%
-      ),
-      linear-gradient(
-          180deg,
-          $slug-callout-gradient-top 0%,
-          $slug-callout-gradient-bottom 100%
-        )
-        rgba(0, 0, 0, 0.01);
     // box-shadow seems to match the spec better
     // than the same values plugged into `drop-shadow`
     // filter: drop-shadow(-45px 45px 100px rgba(0, 0, 0, 0.2));
@@ -73,7 +65,16 @@
   }
 }
 
+:host(#{$prefix}-slug[revert-active]) {
+  transform: translate($spacing-03, -50%);
+}
+
+:host(#{$prefix}-slug[open]) {
+  z-index: 1;
+}
+
 :host(#{$prefix}-slug-action-button) {
+  @include emit-layout-tokens();
   .#{$prefix}--btn--primary {
     order: 1;
     border-end-end-radius: 1rem;
@@ -125,5 +126,10 @@
 :host(#{$prefix}-slug:not([kind='hollow']):not([dot-type='hollow'])) {
   .#{$prefix}--popover-caret {
     background: $border-subtle;
+  }
+  
+  .#{$prefix}--slug__button.#{$prefix}--slug__button--mini:focus,
+  .#{$prefix}--slug__button.#{$prefix}--slug__button--2xs:focus {
+    box-shadow: inset 0 0 0 1px $focus, inset 0 0 0 2px $focus-inset;
   }
 }

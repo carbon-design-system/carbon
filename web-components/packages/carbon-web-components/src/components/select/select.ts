@@ -32,6 +32,11 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 @customElement(`${prefix}-select`)
 class CDSSelect extends FormMixin(LitElement) {
   /**
+   * `true` if there is a slug.
+   */
+  protected _hasSlug = false;
+
+  /**
    * The mutation observer DOM mutation.
    */
   private _observerMutation: MutationObserver | null = null;
@@ -131,6 +136,25 @@ class CDSSelect extends FormMixin(LitElement) {
     if (!disabled) {
       formData.append(name, value);
     }
+  }
+
+  /**
+   * Handles `slotchange` event.
+   */
+  protected _handleSlugSlotChange({ target }: Event) {
+    const hasContent = (target as HTMLSlotElement)
+      .assignedNodes()
+      .filter((elem) =>
+        (elem as HTMLElement).matches !== undefined
+          ? (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSSelect).slugItem
+            )
+          : false
+      );
+
+    this._hasSlug = Boolean(hasContent);
+    (hasContent[0] as HTMLElement).setAttribute('size', 'mini');
+    this.requestUpdate();
   }
 
   /**
@@ -335,6 +359,8 @@ class CDSSelect extends FormMixin(LitElement) {
       value,
       _placeholderItemValue: placeholderItemValue,
       _handleInput: handleInput,
+      _handleSlugSlotChange: handleSlugSlotChange,
+      _hasSlug: hasSlug,
     } = this;
 
     const selectClasses = classMap({
@@ -344,6 +370,7 @@ class CDSSelect extends FormMixin(LitElement) {
       [`${prefix}--select--warning`]: warn,
       [`${prefix}--select--disabled`]: disabled,
       [`${prefix}--select--readonly`]: readonly,
+      [`${prefix}--select--slug`]: hasSlug,
     });
 
     const inputClasses = classMap({
@@ -400,6 +427,7 @@ class CDSSelect extends FormMixin(LitElement) {
         ${this._renderItems(this)}
       </select>
       ${ChevronDown16({ class: `${prefix}--select__arrow` })}
+      <slot name="slug" @slotchange=${handleSlugSlotChange}></slot>
       ${!invalid
         ? undefined
         : WarningFilled16({ class: `${prefix}--select__invalid-icon` })}
@@ -448,6 +476,13 @@ class CDSSelect extends FormMixin(LitElement) {
    */
   static get selectorLeafItem() {
     return `${prefix}-select-item`;
+  }
+
+  /**
+   * A selector that will return the slug item.
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
   }
 
   /**
