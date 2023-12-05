@@ -156,11 +156,6 @@ Playground.argTypes = {
       disable: true,
     },
   },
-  disabled: {
-    table: {
-      disable: true,
-    },
-  },
   hideLabel: {
     table: {
       disable: true,

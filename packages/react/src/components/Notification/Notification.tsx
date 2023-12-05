@@ -1036,7 +1036,9 @@ export function ActionableNotification({
           </div>
         </div>
       </div>
-      <div ref={innerModal}>
+      <div
+        className={`${prefix}--actionable-notification__button-wrapper`}
+        ref={innerModal}>
         {actionButtonLabel && (
           <NotificationActionButton
             onClick={onActionButtonClick}

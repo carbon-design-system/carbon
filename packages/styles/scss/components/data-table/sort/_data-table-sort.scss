@@ -248,6 +248,12 @@
     margin-block-start: convert.to-rem(13px);
   }
 
+  // Slug styles
+  .#{$prefix}--table-sort__header--slug .#{$prefix}--slug {
+    margin-inline-end: auto;
+    margin-inline-start: convert.to-rem(8px);
+  }
+
   // Windows HCM fix
   .#{$prefix}--table-sort__icon,
   .#{$prefix}--table-sort__icon-unsorted {

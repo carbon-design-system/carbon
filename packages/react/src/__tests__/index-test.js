@@ -201,6 +201,7 @@ describe('Carbon Components React', () => {
         "TableRow",
         "TableSelectAll",
         "TableSelectRow",
+        "TableSlugRow",
         "TableToolbar",
         "TableToolbarAction",
         "TableToolbarContent",

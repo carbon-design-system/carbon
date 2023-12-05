@@ -282,7 +282,7 @@ export interface ComboBoxProps<ItemType>
   size?: ListBoxSize;
 
   /**
-   * Provide a `Slug` component to be rendered inside the `ComboBox` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `ComboBox` component
    */
   slug?: ReactNodeLike;
 
@@ -635,6 +635,19 @@ const ComboBox = forwardRef(
                   event.target.value.length
                 );
               }
+
+              if (event.altKey && event.key == 'ArrowDown') {
+                event.preventDownshiftDefault = true;
+                if (!isOpen) {
+                  toggleMenu();
+                }
+              }
+              if (event.altKey && event.key == 'ArrowUp') {
+                event.preventDownshiftDefault = true;
+                if (isOpen) {
+                  toggleMenu();
+                }
+              }
             },
           });
 
@@ -944,7 +957,7 @@ ComboBox.propTypes = {
   size: ListBoxPropTypes.ListBoxSize,
 
   /**
-   * Provide a `Slug` component to be rendered inside the `ComboBox` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `ComboBox` component
    */
   slug: PropTypes.node,
 

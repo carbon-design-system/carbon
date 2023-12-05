@@ -14,3 +14,7 @@
 .sb-two-lines p:last-child {
   @include type.type-style('label-01');
 }
+
+#storybook-root .slug-column-table .cds--data-table-content {
+  overflow: initial;
+}

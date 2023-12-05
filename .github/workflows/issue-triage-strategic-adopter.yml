@@ -27,7 +27,7 @@ jobs:
             Cloud|Sterling Data Exchange SaaS|TRIRIGA|Sterling Order and
             Inventory Management|Supply Chain Intelligence Suite\b'
           flags: g
-      - uses: actions/github-script@v6
+      - uses: actions/github-script@v7
         if: ${{ steps.regex-match.outputs.match != '' }}
         with:
           script: |
