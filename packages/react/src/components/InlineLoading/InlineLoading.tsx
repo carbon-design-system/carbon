@@ -12,15 +12,64 @@ import { CheckmarkFilled, ErrorFilled } from '@carbon/icons-react';
 import Loading from '../Loading';
 import { usePrefix } from '../../internal/usePrefix';
 
-export default function InlineLoading({
+export const InlineLoadingStatuses = [
+  'inactive',
+  'active',
+  'finished',
+  'error',
+] as const;
+
+export type InlineLoadingStatus = (typeof InlineLoadingStatuses)[number];
+
+export interface InlineLoadingProps
+  extends Omit<
+    React.DetailedHTMLProps<
+      React.HTMLAttributes<HTMLDivElement>,
+      HTMLDivElement
+    >,
+    'children'
+  > {
+  /**
+   * Specify a custom className to be applied to the container node
+   */
+  className?: string;
+
+  /**
+   * Specify the description for the inline loading text
+   */
+  description?: React.ReactNode;
+
+  /**
+   * Specify the description for the inline loading text
+   */
+  iconDescription?: string;
+
+  /**
+   * Provide an optional handler to be invoked when <InlineLoading> is
+   * successful
+   */
+  onSuccess?: () => void;
+
+  /**
+   * Specify the loading status
+   */
+  status?: InlineLoadingStatus;
+
+  /**
+   * Provide a delay for the `setTimeout` for success
+   */
+  successDelay?: number;
+}
+
+const InlineLoading = ({
   className,
   status = 'active',
   iconDescription,
   description,
   onSuccess,
   successDelay = 1500,
-  ...other
-}) {
+  ...rest
+}: InlineLoadingProps) => {
   const prefix = usePrefix();
   const loadingClasses = classNames(`${prefix}--inline-loading`, className);
   const getLoading = () => {
@@ -70,13 +119,13 @@ export default function InlineLoading({
   return (
     <div
       className={loadingClasses}
-      {...other}
-      aria-live={'assertive' || other['aria-live']}>
+      {...rest}
+      aria-live={'assertive' || rest['aria-live']}>
       {loadingAnimation}
       {description && loadingText}
     </div>
   );
-}
+};
 
 InlineLoading.propTypes = {
   /**
@@ -110,3 +159,5 @@ InlineLoading.propTypes = {
    */
   successDelay: PropTypes.number,
 };
+
+export default InlineLoading;
