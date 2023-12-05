@@ -25,7 +25,7 @@ test.describe('Slug', () => {
       test('slug inside form @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Slug',
-          id: 'components-form--ai-form',
+          id: 'experimental-unstable-slug-form--form-example',
           theme,
         });
       });
