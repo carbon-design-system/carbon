@@ -216,6 +216,16 @@ export const slugCalloutGradientTop = rgba(gray10, 0.85);
 export const slugCalloutGradientBottom = rgba(gray20, 0.85);
 export const slugCalloutAuraStart = rgba(blue10, 0.6);
 export const slugCalloutAuraEnd = rgba(white, 0);
+export const slugCalloutGradientTopHover = rgba(gray20, 0.55);
+export const slugCalloutGradientBottomHover = rgba(gray20Hover, 0.55);
+export const slugCalloutAuraStartHover01 = rgba(white, 0.5);
+export const slugCalloutAuraEndHover01 = rgba(white, 0);
+export const slugCalloutAuraStartHover02 = rgba(blue20, 0.5);
+export const slugCalloutAuraEndHover02 = rgba(white, 0);
+export const slugCalloutGradientTopSelected = rgba(gray20, 0.85);
+export const slugCalloutGradientBottomSelected = rgba(gray20Hover, 0.85);
+export const slugCalloutAuraStartSelected = rgba(blue10, 0.6);
+export const slugCalloutAuraEndSelected = rgba(white, 0);
 // Linear gradient tokens
 export const aiGradientStart01 = rgba(coolGray10, 0.5);
 export const aiGradientStart02 = rgba(blue10, 0.5);

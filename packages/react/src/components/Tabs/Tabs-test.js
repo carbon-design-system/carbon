@@ -492,7 +492,7 @@ describe('TabPanel', () => {
       </Tabs>
     );
 
-    expect(screen.getByText('Tab Panel 1')).toHaveAttribute('tabIndex', '0');
+    expect(screen.getByText('Tab Panel 1')).toHaveAttribute('tabIndex', '-1');
   });
 
   it('should not recieve focus if there is interactive content', () => {

@@ -199,7 +199,7 @@ export interface DropdownProps<ItemType>
   size?: ListBoxSize;
 
   /**
-   * Provide a `Slug` component to be rendered inside the `Dropdown` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `Dropdown` component
    */
   slug?: ReactNodeLike;
 
@@ -516,6 +516,13 @@ const Dropdown = React.forwardRef(
                   item,
                   index,
                 });
+                if (
+                  item !== null &&
+                  typeof item === 'object' &&
+                  Object.prototype.hasOwnProperty.call(item, 'id')
+                ) {
+                  itemProps.id = item['id'];
+                }
                 const title =
                   isObject && 'text' in item && itemToElement
                     ? item.text
@@ -580,7 +587,7 @@ Dropdown.propTypes = {
   ),
 
   /**
-   * Provide a custom className to be applied on the bx--dropdown node
+   * Provide a custom className to be applied on the cds--dropdown node
    */
   className: PropTypes.string,
 
@@ -701,7 +708,7 @@ Dropdown.propTypes = {
   size: ListBoxPropTypes.ListBoxSize,
 
   /**
-   * Provide a `Slug` component to be rendered inside the `Dropdown` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `Dropdown` component
    */
   slug: PropTypes.node,
 

@@ -282,6 +282,27 @@
     inset-block-start: convert.to-rem(43px);
   }
 
+  .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--invalid
+    .#{$prefix}--number__input-wrapper--slug
+    .#{$prefix}--slug,
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--slug.#{$prefix}--number__input-wrapper--warning
+    .#{$prefix}--slug {
+    inset-inline-end: convert.to-rem(88px);
+  }
+
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--slug
+    input,
+  .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--invalid
+    .#{$prefix}--number__input-wrapper--slug
+    input[data-invalid],
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--slug.#{$prefix}--number__input-wrapper--warning
+    input {
+    padding-inline-end: convert.to-rem(120px);
+  }
+
   .#{$prefix}--number-input--fluid .#{$prefix}--number__input-wrapper--slug {
     @include ai-gradient;
   }

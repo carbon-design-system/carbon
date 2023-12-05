@@ -48,6 +48,7 @@ export {
   TableRow,
   TableSelectAll,
   TableSelectRow,
+  TableSlugRow,
   TableToolbar,
   TableToolbarAction,
   TableToolbarContent,

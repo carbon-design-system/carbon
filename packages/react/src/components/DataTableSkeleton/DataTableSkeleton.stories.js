@@ -8,20 +8,18 @@
 /* eslint-disable no-console */
 
 import React from 'react';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
 import DataTableSkeleton from './DataTableSkeleton';
 import { headers } from '../DataTable/stories/shared';
 
 const props = () => ({
-  zebra: boolean('Use zebra stripe (zebra)', false),
-  compact: boolean('Compact variant (compact)', false),
-  showHeader: boolean('Show the Table Header (showHeader)', true),
-  showToolbar: boolean('Show the Table Toolbar (showToolbar)', true),
+  zebra: false,
+  compact: false,
+  showHeader: true,
+  showToolbar: true,
 });
 
 export default {
   title: 'Components/DataTable/Skeleton',
-  decorators: [withKnobs],
   component: DataTableSkeleton,
 };
 
