@@ -16,6 +16,7 @@
 @use '../../theme' as *;
 @use '../../type' as *;
 @use '../../layer' as *;
+@use '../../utilities/ai-gradient' as *;
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
@@ -47,7 +48,7 @@
   // Table title text
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table-header {
-    background: $layer;
+    background-color: $layer;
     padding-block-end: $spacing-06;
     padding-block-start: $spacing-05;
     padding-inline: $spacing-05;
@@ -107,13 +108,13 @@
     transition: background-color $duration-fast-01 motion(entrance, productive);
   }
 
-  .#{$prefix}--data-table tbody tr:hover {
-    background: $layer-hover;
+  .#{$prefix}--data-table tbody tr:not([data-child-row]):hover,
+  .#{$prefix}--data-table tbody tr[data-child-row]:hover > td {
+    background-color: $layer-hover;
   }
 
   .#{$prefix}--data-table tbody tr:hover td,
   .#{$prefix}--data-table tbody tr:hover th {
-    background: $layer-hover;
     border-block-end: 1px solid $layer-hover;
     border-block-start: 1px solid $layer-hover;
     color: $text-primary;
@@ -202,7 +203,6 @@
 
   .#{$prefix}--data-table td,
   .#{$prefix}--data-table tbody th {
-    background: $layer;
     border-block-end: 1px solid $border-subtle;
     border-block-start: 1px solid $layer;
     color: $text-secondary;
@@ -349,18 +349,32 @@
     tbody
     tr:not(.#{$prefix}--parent-row):nth-child(even)
     td {
-    background-color: $layer-accent;
     border-block-end: 1px solid $layer-accent;
     border-block-start: 1px solid $layer-accent;
   }
 
   .#{$prefix}--data-table--zebra
     tbody
+    tr:not(.#{$prefix}--parent-row):not(
+      .#{$prefix}--data-table--selected
+    ):nth-child(even) {
+    background-color: $layer-accent;
+  }
+
+  .#{$prefix}--data-table--zebra
+    tbody
     tr:not(.#{$prefix}--parent-row):hover
     td {
-    background-color: $layer-hover;
     border-block-end: 1px solid $layer-hover;
     border-block-start: 1px solid $layer-hover;
+  }
+
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:not(.#{$prefix}--parent-row):not(
+      .#{$prefix}--data-table--selected
+    ):hover {
+    background-color: $layer-hover;
   }
 
   //----------------------------------------------------------------------------
@@ -382,7 +396,7 @@
   .#{$prefix}--data-table th.#{$prefix}--table-column-checkbox {
     // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
     position: static;
-    background: $layer-accent;
+    background-color: $layer-accent;
     inline-size: convert.to-rem(32px);
     transition: background-color $duration-fast-01 motion(entrance, productive);
   }
@@ -462,11 +476,17 @@
     tr:nth-child(odd).#{$prefix}--data-table--selected
     td,
   tr.#{$prefix}--data-table--selected td {
-    background-color: $layer-selected;
     // Bottom border acts as separator from other rows
     border-block-end: 1px solid $layer-active;
     border-block-start: 1px solid $layer-selected;
     color: $text-primary;
+  }
+
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:nth-child(odd).#{$prefix}--data-table--selected,
+  tr.#{$prefix}--data-table--selected {
+    background-color: $layer-selected;
   }
 
   // First row
@@ -515,10 +535,16 @@
     tr:nth-child(odd).#{$prefix}--data-table--selected:hover
     td,
   .#{$prefix}--data-table tbody .#{$prefix}--data-table--selected:hover td {
-    background: $data-table-column-hover;
     border-block-end: 1px solid $data-table-column-hover;
     border-block-start: 1px solid $data-table-column-hover;
     color: $text-primary;
+  }
+
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:nth-child(odd).#{$prefix}--data-table--selected:hover,
+  .#{$prefix}--data-table tbody .#{$prefix}--data-table--selected:hover {
+    background-color: $data-table-column-hover;
   }
 
   // selected overflow menu
@@ -917,6 +943,51 @@
   .#{$prefix}--data-table--sm
     .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type {
     margin: convert.to-rem(-3px) 0;
+  }
+
+  // Slug styles
+  .#{$prefix}--data-table .#{$prefix}--table-column-slug {
+    inline-size: $spacing-05;
+    padding-inline-end: 0;
+  }
+
+  .#{$prefix}--data-table
+    tbody
+    tr:has(> .#{$prefix}--table-column-slug--active) {
+    @include ai-gradient('left', 50%);
+
+    background-attachment: fixed;
+  }
+
+  .#{$prefix}--data-table
+    thead
+    th.#{$prefix}--table-sort__header--slug
+    .#{$prefix}--table-sort,
+  .#{$prefix}--data-table
+    thead
+    th:has(> .#{$prefix}--table-header-label--slug) {
+    @include ai-gradient('top', 100%);
+  }
+
+  .#{$prefix}--table-column-slug .#{$prefix}--slug {
+    position: absolute;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--data-table--xl .#{$prefix}--table-column-slug .#{$prefix}--slug {
+    transform: translateY(1px);
+  }
+
+  // Slug inside header styles
+  th .#{$prefix}--table-header-label.#{$prefix}--table-header-label--slug {
+    display: flex;
+    align-items: center;
+  }
+
+  th
+    .#{$prefix}--table-header-label.#{$prefix}--table-header-label--slug
+    .#{$prefix}--slug {
+    margin-inline-start: $spacing-03;
   }
 
   // Windows HCM fix

@@ -9,12 +9,11 @@ import React from 'react';
 
 import ListItem from '../ListItem';
 import UnorderedList from '../UnorderedList';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 const props = {
   regular: () => {
     return {
-      isExpressive: boolean('Expressive', false),
+      isExpressive: false,
     };
   },
 };
@@ -25,7 +24,6 @@ export default {
   subcomponents: {
     ListItem,
   },
-  decorators: [withKnobs],
 };
 
 export const Default = () => (
