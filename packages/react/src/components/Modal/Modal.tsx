@@ -23,6 +23,7 @@ import { keys, match } from '../../internal/keyboard';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
 import { ReactAttr } from '../../types/common';
+import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -101,7 +102,7 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   /**
    * Specify loading status
    */
-  loadingStatus?: string;
+  loadingStatus?: InlineLoadingStatus;
 
   /**
    * Specify a label to be read by screen readers on the modal root node
@@ -128,7 +129,7 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
    * Specify an optional handler to be invoked when loading is
    * successful
    */
-  onLoadingSuccess?: React.ReactEventHandler<HTMLElement>;
+  onLoadingSuccess?: () => void;
 
   /**
    * Specify a handler for closing modal.

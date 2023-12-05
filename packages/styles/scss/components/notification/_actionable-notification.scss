@@ -223,6 +223,10 @@
     padding: convert.to-rem(15px) 0;
   }
 
+  .#{$prefix}--actionable-notification__button-wrapper {
+    display: flex;
+  }
+
   .#{$prefix}--actionable-notification--toast
     .#{$prefix}--actionable-notification__text-wrapper {
     padding: convert.to-rem(15px) 0 convert.to-rem(23px) 0;

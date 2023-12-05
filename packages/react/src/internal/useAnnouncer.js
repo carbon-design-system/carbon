@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export function useAnnouncer(textCount, maxCount) {
+export function useAnnouncer(textCount, maxCount, entityName = 'characters') {
   const lastTen = maxCount - 10;
   if (textCount >= lastTen) {
-    return `${maxCount - textCount} characters left.`;
+    return `${maxCount - textCount} ${entityName} left.`;
   }
 }
