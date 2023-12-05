@@ -3134,6 +3134,9 @@ Map {
       "onKeyUp": Object {
         "type": "func",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "tabIndex": Object {
         "type": "number",
       },
