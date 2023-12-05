@@ -18,7 +18,7 @@ import { useId } from '../../internal/useId';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 
-const spacing = 4; // top and bottom spacing between the button and the menu. in px
+const spacing = 0; // top and bottom spacing between the button and the menu. in px
 const validButtonKinds = ['primary', 'tertiary', 'ghost'];
 const defaultButtonKind = 'primary';
 
@@ -30,6 +30,7 @@ const MenuButton = React.forwardRef(function MenuButton(
     kind = defaultButtonKind,
     label,
     size = 'lg',
+    tabIndex = 0,
     ...rest
   },
   forwardRef
@@ -82,6 +83,7 @@ const MenuButton = React.forwardRef(function MenuButton(
       <Button
         className={triggerClasses}
         size={size}
+        tabIndex={tabIndex}
         kind={buttonKind}
         renderIcon={ChevronDown}
         disabled={disabled}
@@ -139,6 +141,11 @@ MenuButton.propTypes = {
    * Specify the size of the button and menu.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * Specify the tabIndex of the button.
+   */
+  tabIndex: PropTypes.number,
 };
 
 export { MenuButton };

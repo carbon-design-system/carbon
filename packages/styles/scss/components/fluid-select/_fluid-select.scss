@@ -63,7 +63,8 @@
 
   .#{$prefix}--select--fluid .#{$prefix}--select__arrow {
     block-size: 1rem;
-    inset-block-start: $spacing-07;
+    inset-block-start: convert.to-rem(34px);
+    inset-inline-end: $spacing-04;
   }
 
   .#{$prefix}--select--fluid .#{$prefix}--select__divider {
@@ -194,5 +195,17 @@
     .#{$prefix}--toggletip-button
     svg {
     fill: $icon-disabled;
+  }
+
+  // Slug styles
+  .#{$prefix}--select--fluid .#{$prefix}--select--slug .#{$prefix}--slug {
+    inset-block-start: convert.to-rem(42px);
+    inset-inline-end: $spacing-08;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--slug
+    .#{$prefix}--select-input {
+    padding-inline-end: $spacing-10;
   }
 }

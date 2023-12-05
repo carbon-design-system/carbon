@@ -962,6 +962,46 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "slug-callout-gradient-top-hover",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-gradient-bottom-hover",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-aura-start-hover-01",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-aura-start-hover-02",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-aura-end-hover-01",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-aura-end-hover-02",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-gradient-top-selected",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-gradient-bottom-selected",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-aura-start-selected",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-aura-end-selected",
+          "type": "color",
+        },
+        Object {
           "name": "ai-gradient-start-01",
           "type": "color",
         },
