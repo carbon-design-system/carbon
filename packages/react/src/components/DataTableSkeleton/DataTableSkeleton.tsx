@@ -124,7 +124,7 @@ const DataTableSkeleton: FunctionComponent<DataTableSkeletonProps> = ({
             {columnsArray.map((i) => (
               <th key={i}>
                 {headers ? (
-                  <div className="bx--table-header-label">
+                  <div className="cds--table-header-label">
                     {headers[i]?.header}
                   </div>
                 ) : (

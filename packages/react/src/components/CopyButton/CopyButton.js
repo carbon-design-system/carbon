@@ -12,17 +12,23 @@ import { Copy as CopyIcon } from '@carbon/icons-react';
 import Copy from '../Copy';
 import { LayoutConstraint } from '../Layout';
 import { usePrefix } from '../../internal/usePrefix';
-
+import { noopFn } from '../../internal/noopFn';
 export default function CopyButton({
   align = 'bottom',
-  iconDescription,
+  feedback = 'Copied!',
+  feedbackTimeout = 2000,
+  iconDescription = 'Copy to clipboard',
   className,
+  onClick = noopFn,
   ...other
 }) {
   const prefix = usePrefix();
   return (
     <LayoutConstraint size={{ default: 'md', max: 'lg' }}>
       <Copy
+        feedback={feedback}
+        feedbackTimeout={feedbackTimeout}
+        onClick={onClick}
         align={align}
         className={classnames(className, `${prefix}--copy-btn`)}
         aria-label={iconDescription}
@@ -75,11 +81,4 @@ CopyButton.propTypes = {
    * `<button>` is clicked
    */
   onClick: PropTypes.func,
-};
-
-CopyButton.defaultProps = {
-  iconDescription: 'Copy to clipboard',
-  feedback: 'Copied!',
-  feedbackTimeout: 2000,
-  onClick: () => {},
 };

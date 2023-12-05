@@ -12,6 +12,7 @@
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
+@use '../../utilities/ai-gradient' as *;
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../date-picker';
@@ -58,6 +59,12 @@
     overflow-x: scroll;
     scrollbar-width: none;
     white-space: nowrap;
+  }
+
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker-input__wrapper
+    > span {
+    inline-size: 100%;
   }
 
   .#{$prefix}--date-picker--fluid
@@ -390,5 +397,29 @@
     > .#{$prefix}--date-picker-container:last-child
     .#{$prefix}--date-picker__input {
     border-inline-start-color: $border-subtle;
+  }
+
+  // Slug styles
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker-input__wrapper--slug
+    .#{$prefix}--slug {
+    inset-block-start: convert.to-rem(43px);
+  }
+
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker-input__wrapper--slug {
+    @include ai-gradient;
+  }
+
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker-input__wrapper--slug
+    .#{$prefix}--date-picker__input,
+  .#{$prefix}--date-picker--fluid--invalid
+    .#{$prefix}--date-picker-input__wrapper--slug
+    .#{$prefix}--date-picker__input,
+  .#{$prefix}--date-picker--fluid--warn
+    .#{$prefix}--date-picker-input__wrapper--slug
+    .#{$prefix}--date-picker__input {
+    padding-inline-end: $spacing-10;
   }
 }

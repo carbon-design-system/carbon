@@ -14,8 +14,7 @@ import uid from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { ReactAttr } from '../../types/common';
-
-function noop() {}
+import { noopFn } from '../../internal/noopFn';
 
 export interface FileUploaderButtonProps
   extends Omit<ReactAttr<HTMLButtonElement>, 'onChange' | 'tabIndex'> {
@@ -114,7 +113,7 @@ function FileUploaderButton({
   id,
   labelText: ownerLabelText = 'Add file',
   multiple = false,
-  onChange = noop,
+  onChange = noopFn,
   name,
   size = 'md',
   // eslint-disable-next-line react/prop-types

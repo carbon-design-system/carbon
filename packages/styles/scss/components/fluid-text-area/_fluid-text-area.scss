@@ -12,6 +12,7 @@
 @use '../../config' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
+@use '../../utilities/ai-gradient' as *;
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 
@@ -41,7 +42,7 @@
     align-items: center;
     margin: 0;
     block-size: convert.to-rem(16px);
-    inline-size: calc(100% - 2rem);
+    inline-size: auto;
     inset-block-start: convert.to-rem(13px);
     inset-inline-start: $spacing-05;
   }
@@ -215,5 +216,21 @@
     .#{$prefix}--text-area.#{$prefix}--skeleton {
     block-size: 4rem;
     inline-size: 80%;
+  }
+
+  // Slug styles
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area__wrapper--slug {
+    @include ai-gradient;
+  }
+
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--text-area--invalid
+    ~ .#{$prefix}--slug,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--text-area--warn
+    ~ .#{$prefix}--slug {
+    inset-inline-end: $spacing-05;
   }
 }

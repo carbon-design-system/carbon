@@ -7,13 +7,18 @@
 
 import {
   // Blue
+  blue20,
+  blue20Hover,
   blue40,
   blue60,
   blue70,
 
   // Gray
   gray10,
+  gray10Hover,
+  gray20,
   gray30,
+  gray30Hover,
   gray40,
   gray50,
   gray50Hover,
@@ -22,7 +27,9 @@ import {
   gray70,
   gray70Hover,
   gray80,
+  gray80Hover,
   gray90,
+  gray90Hover,
   gray100,
 
   // Support
@@ -44,9 +51,6 @@ import {
 
   // Tools
   rgba,
-  gray90Hover,
-  gray10Hover,
-  gray80Hover,
 } from '@carbon/colors';
 import { adjustAlpha } from './tools';
 
@@ -206,6 +210,32 @@ export const highlight = blue70;
 export const overlay = rgba(black, 0.65);
 export const toggleOff = gray50;
 export const shadow = rgba(black, 0.8);
+
+//// AI - Experimental (Use at your own risk)
+// Slug tokens
+export const slugBackground = gray30;
+export const slugGradient = `${gray50} linear-gradient(135deg, ${gray10} 0%, rgba(${white}, 0) 100%)`;
+export const slugBackgroundHover = gray20;
+export const slugGradientHover = `${gray40} linear-gradient(135deg, ${white} 0%, rgba(${white}, 0) 100%)`;
+export const slugHollowHover = gray30Hover;
+export const slugCalloutGradientTop = rgba(gray100, 0.85);
+export const slugCalloutGradientBottom = rgba(gray90, 0.85);
+export const slugCalloutAuraStart = rgba(blue20, 0.2);
+export const slugCalloutAuraEnd = rgba(gray100, 0);
+export const slugCalloutGradientTopHover = rgba(gray80, 0.55);
+export const slugCalloutGradientBottomHover = rgba(gray80Hover, 0.55);
+export const slugCalloutAuraStartHover01 = rgba(blue20Hover, 0.3);
+export const slugCalloutAuraEndHover01 = rgba(gray100, 0);
+export const slugCalloutAuraStartHover02 = 'transparent';
+export const slugCalloutAuraEndHover02 = 'transparent';
+export const slugCalloutGradientTopSelected = rgba(gray80, 0.85);
+export const slugCalloutGradientBottomSelected = rgba(gray80Hover, 0.85);
+export const slugCalloutAuraStartSelected = rgba(blue20, 0.2);
+export const slugCalloutAuraEndSelected = rgba(gray100, 0);
+// Linear gradient tokens
+export const aiGradientStart01 = rgba(blue20, 0.2);
+export const aiGradientStart02 = 'transparent';
+export const aiGradientEnd = 'rgba(38, 38, 38, 0)';
 
 export {
   // Type

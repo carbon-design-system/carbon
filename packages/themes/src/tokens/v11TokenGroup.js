@@ -341,6 +341,35 @@ export const contextual = TokenGroup.create({
   ],
 });
 
+export const ai = TokenGroup.create({
+  name: 'AI',
+  properties: ['background'],
+  tokens: [
+    'slug-background',
+    'slug-gradient',
+    'slug-background-hover',
+    'slug-gradient-hover',
+    'slug-hollow-hover',
+    'slug-callout-gradient-top',
+    'slug-callout-gradient-bottom',
+    'slug-callout-aura-start',
+    'slug-callout-aura-end',
+    'slug-callout-gradient-top-hover',
+    'slug-callout-gradient-bottom-hover',
+    'slug-callout-aura-start-hover-01',
+    'slug-callout-aura-start-hover-02',
+    'slug-callout-aura-end-hover-01',
+    'slug-callout-aura-end-hover-02',
+    'slug-callout-gradient-top-selected',
+    'slug-callout-gradient-bottom-selected',
+    'slug-callout-aura-start-selected',
+    'slug-callout-aura-end-selected',
+    'ai-gradient-start-01',
+    'ai-gradient-start-02',
+    'ai-gradient-end',
+  ],
+});
+
 export const group = TokenGroup.create({
   name: 'All',
   tokens: [
@@ -359,6 +388,7 @@ export const group = TokenGroup.create({
     link,
     icon,
     support,
+    ai,
 
     // Misc
     {

@@ -53,7 +53,7 @@ export const _WithLayer = () => (
 );
 
 export const IconOnly = (args) => (
-  <ContentSwitcher {...args}>
+  <ContentSwitcher onChange={() => {}} {...args}>
     <IconSwitch name="one" text="Table of Contents">
       <TableOfContents />
     </IconSwitch>
@@ -68,7 +68,7 @@ export const IconOnly = (args) => (
 
 export const IconOnlyWithLayer = (args) => (
   <WithLayer>
-    <ContentSwitcher {...args}>
+    <ContentSwitcher onChange={() => {}} {...args}>
       <IconSwitch name="one" text="Table of Contents">
         <TableOfContents />
       </IconSwitch>

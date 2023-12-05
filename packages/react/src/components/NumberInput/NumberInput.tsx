@@ -7,13 +7,20 @@
 
 import { Add, Subtract } from '@carbon/icons-react';
 import cx from 'classnames';
-import PropTypes from 'prop-types';
-import React, { ReactNode, useContext, useRef, useState } from 'react';
+import PropTypes, { ReactNodeLike } from 'prop-types';
+import React, {
+  ReactNode,
+  useContext,
+  useRef,
+  useState,
+  useEffect,
+} from 'react';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useNormalizedInputProps as normalize } from '../../internal/useNormalizedInputProps';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
+import { Text } from '../Text';
 
 export const translationIds = {
   'increment.number': 'increment.number',
@@ -159,6 +166,11 @@ export interface NumberInputProps
   size?: 'sm' | 'md' | 'lg';
 
   /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `TextInput` component
+   */
+  slug?: ReactNodeLike;
+
+  /**
    * Specify how much the values should increase/decrease upon clicking on up/down button
    */
   step?: number;
@@ -191,7 +203,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       className: customClassName,
       disabled = false,
       disableWheel: disableWheelProp = false,
-      defaultValue,
+      defaultValue = 0,
       helperText = '',
       hideLabel = false,
       hideSteppers,
@@ -208,6 +220,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       onKeyUp,
       readOnly,
       size = 'md',
+      slug,
       step = 1,
       translateWithId: t = (id) => defaultTranslations[id],
       warn = false,
@@ -262,6 +275,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     ];
     const wrapperClasses = cx(`${prefix}--number__input-wrapper`, {
       [`${prefix}--number__input-wrapper--warning`]: normalizedProps.warn,
+      [`${prefix}--number__input-wrapper--slug`]: slug,
     });
     const iconClasses = cx({
       [`${prefix}--number__invalid`]:
@@ -345,6 +359,26 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       }
     }
 
+    // Slug is always size `mini`
+    let normalizedSlug;
+    if (slug) {
+      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+        size: 'mini',
+      });
+    }
+
+    // Need to update the internal value when the revert button is clicked
+    let isRevertActive;
+    if (slug) {
+      isRevertActive = normalizedSlug.props.revertActive;
+    }
+
+    useEffect(() => {
+      if (!isRevertActive && slug && defaultValue) {
+        setValue(defaultValue);
+      }
+    }, [defaultValue, isRevertActive, slug]);
+
     return (
       <div
         className={outerElementClasses}
@@ -397,6 +431,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               type="number"
               value={value}
             />
+            {normalizedSlug}
             {Icon ? <Icon className={iconClasses} /> : null}
             {!hideSteppers && (
               <div className={`${prefix}--number__controls`}>
@@ -555,6 +590,11 @@ NumberInput.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `NumberInput` component
+   */
+  slug: PropTypes.node,
+
+  /**
    * Specify how much the values should increase/decrease upon clicking on up/down button
    */
   step: PropTypes.number,
@@ -596,9 +636,9 @@ function Label({ disabled, id, hideLabel, label }: Label) {
 
   if (label) {
     return (
-      <label htmlFor={id} className={className}>
+      <Text as="label" htmlFor={id} className={className}>
         {label}
-      </label>
+      </Text>
     );
   }
   return null;
@@ -624,9 +664,9 @@ function HelperText({ disabled, description, id }: HelperTextProps) {
 
   if (description) {
     return (
-      <div id={id} className={className}>
+      <Text as="div" id={id} className={className}>
         {description}
-      </div>
+      </Text>
     );
   }
   return null;

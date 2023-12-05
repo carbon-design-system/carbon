@@ -12,9 +12,7 @@ const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('DataTable @avt', () => {
   test.describe('basic', () => {
-    test('default has no accessibility-checker violations', async ({
-      page,
-    }) => {
+    test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
         id: 'components-datatable-basic--default',
@@ -26,9 +24,7 @@ test.describe('DataTable @avt', () => {
         'components-datatable-basic--default'
       );
     });
-    test('xl with two lines has no accessibility-checker violations', async ({
-      page,
-    }) => {
+    test('@avt-advanced-states xl with two lines', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
         id: 'components-datatable-basic--xl-with-two-lines',
@@ -43,9 +39,7 @@ test.describe('DataTable @avt', () => {
   });
 
   test.describe('batch actions', () => {
-    test('default has no accessibility-checker violations', async ({
-      page,
-    }) => {
+    test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
         id: 'components-datatable-batch-actions--default',
@@ -60,9 +54,7 @@ test.describe('DataTable @avt', () => {
   });
 
   test.describe('dynamic', () => {
-    test('default has no accessibility-checker violations', async ({
-      page,
-    }) => {
+    test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
         id: 'components-datatable-dynamic--default',
@@ -71,11 +63,11 @@ test.describe('DataTable @avt', () => {
         },
       });
       await expect(page).toHaveNoACViolations(
-        'components-datatable-dynamic--default'
+        'components-datatable-dynamic--default-avt'
       );
     });
 
-    test('default keyboard navigation sequence', async ({ page }) => {
+    test('@avt-keyboard-nav', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
         id: 'components-datatable-dynamic--default',
@@ -85,7 +77,7 @@ test.describe('DataTable @avt', () => {
       });
 
       await expect(page).toHaveNoACViolations(
-        'components-datatable-dynamic--default'
+        'components-datatable-dynamic--default-keyboard-nav'
       );
 
       // Start off by manually focusing the search input
@@ -184,9 +176,7 @@ test.describe('DataTable @avt', () => {
   });
 
   test.describe('expansion', () => {
-    test('default has no accessibility-checker violations', async ({
-      page,
-    }) => {
+    test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
         id: 'components-datatable-expansion--default',
@@ -198,9 +188,7 @@ test.describe('DataTable @avt', () => {
         'components-datatable-expansion--default'
       );
     });
-    test('batch expansion has no accessibility-checker violations', async ({
-      page,
-    }) => {
+    test('@avt-advanced-states batch expansion', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
         id: 'components-datatable-expansion--batch-expansion',
@@ -215,9 +203,7 @@ test.describe('DataTable @avt', () => {
   });
 
   test.describe('filtering', () => {
-    test('default has no accessibility-checker violations', async ({
-      page,
-    }) => {
+    test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
         id: 'components-datatable-filtering--default',
@@ -232,9 +218,7 @@ test.describe('DataTable @avt', () => {
   });
 
   test.describe('selection', () => {
-    test('default has no accessibility-checker violations', async ({
-      page,
-    }) => {
+    test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
         id: 'components-datatable-selection--default',
@@ -246,9 +230,7 @@ test.describe('DataTable @avt', () => {
         'components-datatable-selection--default'
       );
     });
-    test('with-radio-expansion has no accessibility-checker violations', async ({
-      page,
-    }) => {
+    test('@avt-advanced-states with-radio-expansion', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
         id: 'components-datatable-selection--with-radio-expansion',
@@ -260,7 +242,7 @@ test.describe('DataTable @avt', () => {
         'components-datatable-selection--with-radio-expansion'
       );
     });
-    test('with-selection-and-sorting has no accessibility-checker violations', async ({
+    test('@avt-advanced-states with-selection-and-sorting', async ({
       page,
     }) => {
       await visitStory(page, {
@@ -277,9 +259,7 @@ test.describe('DataTable @avt', () => {
   });
 
   test.describe('skeleton', () => {
-    test('skeleton has no accessibility-checker violations', async ({
-      page,
-    }) => {
+    test('@avt-default-state skeleton', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
         id: 'components-datatable-skeleton--skeleton',
@@ -294,9 +274,7 @@ test.describe('DataTable @avt', () => {
   });
 
   test.describe('sorting', () => {
-    test('default has no accessibility-checker violations', async ({
-      page,
-    }) => {
+    test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
         id: 'components-datatable-sorting--default',
@@ -311,9 +289,7 @@ test.describe('DataTable @avt', () => {
   });
 
   test.describe('toolbar', () => {
-    test('default has no accessibility-checker violations', async ({
-      page,
-    }) => {
+    test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
         id: 'components-datatable-toolbar--default',
@@ -325,9 +301,7 @@ test.describe('DataTable @avt', () => {
         'components-datatable-toolbar--default'
       );
     });
-    test('persistent-toolbar has no accessibility-checker violations', async ({
-      page,
-    }) => {
+    test('@avt-advanced-states persistent-toolbar', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
         id: 'components-datatable-toolbar--persistent-toolbar',
@@ -339,9 +313,7 @@ test.describe('DataTable @avt', () => {
         'components-datatable-toolbar--persistent-toolbar'
       );
     });
-    test('small-persistent-toolbar has no accessibility-checker violations', async ({
-      page,
-    }) => {
+    test('@avt-advanced-states small-persistent-toolbar', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
         id: 'components-datatable-toolbar--small-persistent-toolbar',
@@ -353,9 +325,7 @@ test.describe('DataTable @avt', () => {
         'components-datatable-toolbar--small-persistent-toolbar'
       );
     });
-    test('with-overflow-menu has no accessibility-checker violations', async ({
-      page,
-    }) => {
+    test('@avt-advanced-states with-overflow-menu', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
         id: 'components-datatable-toolbar--with-overflow-menu',

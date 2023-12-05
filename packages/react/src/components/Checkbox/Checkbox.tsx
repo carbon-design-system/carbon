@@ -12,6 +12,7 @@ import { Text } from '../Text';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { noopFn } from '../../internal/noopFn';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -69,6 +70,11 @@ export interface CheckboxProps
   invalidText?: React.ReactNode;
 
   /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `Checkbox` component
+   */
+  slug?: ReactNodeLike;
+
+  /**
    * Specify whether the Checkbox is currently invalid
    */
   warn?: boolean;
@@ -101,9 +107,9 @@ const Checkbox = React.forwardRef(
       helperText,
       id,
       labelText,
-      onChange,
+      onChange = noopFn,
       onClick,
-      indeterminate,
+      indeterminate = false,
       invalid,
       invalidText,
       hideLabel,
@@ -111,6 +117,7 @@ const Checkbox = React.forwardRef(
       title = '',
       warn,
       warnText,
+      slug,
       ...other
     }: CheckboxProps,
     ref
@@ -140,11 +147,20 @@ const Checkbox = React.forwardRef(
         [`${prefix}--checkbox-wrapper--readonly`]: readOnly,
         [`${prefix}--checkbox-wrapper--invalid`]: !readOnly && invalid,
         [`${prefix}--checkbox-wrapper--warning`]: showWarning,
+        [`${prefix}--checkbox-wrapper--slug`]: slug,
       }
     );
     const innerLabelClasses = classNames(`${prefix}--checkbox-label-text`, {
       [`${prefix}--visually-hidden`]: hideLabel,
     });
+
+    let normalizedSlug;
+    if (slug && React.isValidElement(slug)) {
+      const size = slug.props?.['kind'] === 'inline' ? 'md' : 'mini';
+      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+        size,
+      });
+    }
 
     return (
       <div className={wrapperClasses}>
@@ -187,7 +203,10 @@ const Checkbox = React.forwardRef(
           htmlFor={id}
           className={`${prefix}--checkbox-label`}
           title={title}>
-          <Text className={innerLabelClasses}>{labelText}</Text>
+          <Text className={innerLabelClasses}>
+            {labelText}
+            {normalizedSlug}
+          </Text>
         </label>
         <div className={`${prefix}--checkbox__validation-msg`}>
           {!readOnly && invalid && (
@@ -281,6 +300,11 @@ Checkbox.propTypes = {
   readOnly: PropTypes.bool,
 
   /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `Checkbox` component
+   */
+  slug: PropTypes.node,
+
+  /**
    * Specify a title for the <label> node for the Checkbox
    */
   title: PropTypes.string,
@@ -294,11 +318,6 @@ Checkbox.propTypes = {
    * Provide the text that is displayed when the Checkbox is in warning state
    */
   warnText: PropTypes.node,
-};
-
-Checkbox.defaultProps = {
-  onChange: () => {},
-  indeterminate: false,
 };
 
 Checkbox.displayName = 'Checkbox';

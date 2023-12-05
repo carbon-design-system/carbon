@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import { Text } from '../Text';
 
 export interface FormLabelProps
   extends Omit<React.LabelHTMLAttributes<HTMLLabelElement>, 'htmlFor'> {
@@ -42,9 +43,9 @@ function FormLabel({
   );
 
   return (
-    <label htmlFor={id} className={className} {...rest}>
+    <Text as="label" htmlFor={id} className={className} {...rest}>
       {children}
-    </label>
+    </Text>
   );
 }
 

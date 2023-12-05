@@ -48,6 +48,7 @@ export {
   TableRow,
   TableSelectAll,
   TableSelectRow,
+  TableSlugRow,
   TableToolbar,
   TableToolbarAction,
   TableToolbarContent,
@@ -298,3 +299,8 @@ export { DefinitionTooltip } from './components/Tooltip/DefinitionTooltip';
 export { GlobalTheme, Theme, useTheme } from './components/Theme';
 export { usePrefix } from './internal/usePrefix';
 export { useIdPrefix } from './internal/useIdPrefix';
+export {
+  Slug as unstable__Slug,
+  SlugContent as unstable__SlugContent,
+  SlugActions as unstable__SlugActions,
+} from './components/Slug';

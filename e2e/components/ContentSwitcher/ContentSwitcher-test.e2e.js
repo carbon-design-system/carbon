@@ -7,9 +7,9 @@
 
 'use strict';
 
-const { expect, test } = require('@playwright/test');
+const { test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
-const { snapshotStory, visitStory } = require('../../test-utils/storybook');
+const { snapshotStory } = require('../../test-utils/storybook');
 
 test.describe('ContentSwitcher', () => {
   themes.forEach((theme) => {
@@ -38,25 +38,5 @@ test.describe('ContentSwitcher', () => {
         });
       });
     });
-  });
-
-  test('accessibility-checker @avt', async ({ page }) => {
-    await visitStory(page, {
-      component: 'ContentSwitcher',
-      id: 'components-contentswitcher--default',
-      globals: {
-        theme: 'white',
-      },
-    });
-    await expect(page).toHaveNoACViolations('ContentSwitcher');
-
-    await visitStory(page, {
-      component: 'ContentSwitcher',
-      id: 'components-contentswitcher--icon-only',
-      globals: {
-        theme: 'white',
-      },
-    });
-    await expect(page).toHaveNoACViolations('ContentSwitcher-IconOnly');
   });
 });

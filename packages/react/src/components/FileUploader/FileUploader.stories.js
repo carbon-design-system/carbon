@@ -16,7 +16,6 @@ import {
   FileUploaderItem,
   FileUploaderSkeleton,
 } from './';
-import './FileUploader-story.scss';
 
 const filenameStatuses = ['edit', 'complete', 'uploading'];
 
@@ -65,6 +64,7 @@ export const _FileUploaderItem = (args) => {
     />
   );
 };
+
 _FileUploaderItem.argTypes = {
   errorBody: {
     control: 'text',

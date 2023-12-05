@@ -53,7 +53,8 @@ export const WithTooltip = (controls) => {
         inline
         className="notification"
         aria-label="Accessibility note on form labels"
-        actionButtonLabel="Accessibility button note on form labels">
+        actionButtonLabel="Accessibility button note on form labels"
+        title="Accessibility note">
         <p>
           <strong>Note:</strong>
           &nbsp; It is not recommended to include interactive items, such as
