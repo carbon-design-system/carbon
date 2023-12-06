@@ -145,6 +145,7 @@ function SideNavRenderFunction(
         )
           ? {
               isSideNavExpanded: currentExpansionState,
+              isFixedNav,
             }
           : {}),
       });
