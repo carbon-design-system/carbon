@@ -228,7 +228,7 @@ export default class ContentSwitcher extends React.Component<
         role="tablist"
         onChange={undefined}>
         {children &&
-          React.Children.map(children, (child: ReactElement, index) =>
+          React.Children.toArray(children).map((child: ReactElement, index) =>
             React.cloneElement(child, {
               index,
               onClick: composeEventHandlers([
