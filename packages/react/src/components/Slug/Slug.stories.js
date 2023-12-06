@@ -45,7 +45,7 @@ const content = <span>AI was used to generate this content</span>;
 
 export const Default = () => (
   <>
-    <div className="slug-container">
+    <div className="slug-container-example">
       <Slug autoAlign size="mini">
         <SlugContent>{aiContent}</SlugContent>
       </Slug>
@@ -138,7 +138,7 @@ export const Default = () => (
         </SlugContent>
       </Slug>
     </div>
-    <div className="slug-container">
+    <div className="slug-container-example">
       <Slug kind="hollow" autoAlign size="mini">
         <SlugContent>{content}</SlugContent>
       </Slug>
@@ -149,7 +149,7 @@ export const Default = () => (
         <SlugContent>{content}</SlugContent>
       </Slug>
     </div>
-    <div className="slug-container">
+    <div className="slug-container-example">
       <Slug autoAlign kind="inline" size="sm">
         <SlugContent>
           {aiContent}
@@ -202,7 +202,7 @@ export const Default = () => (
         </SlugContent>
       </Slug>
     </div>
-    <div className="slug-container">
+    <div className="slug-container-example">
       <Slug autoAlign kind="inline" size="sm" aiTextLabel="Text goes here">
         <SlugContent>
           {aiContent}
@@ -255,7 +255,7 @@ export const Default = () => (
         </SlugContent>
       </Slug>
     </div>
-    <div className="slug-container">
+    <div className="slug-container-example">
       <Slug autoAlign kind="inline" dotType="hollow" size="sm">
         <SlugContent>{content}</SlugContent>
       </Slug>
@@ -266,7 +266,7 @@ export const Default = () => (
         <SlugContent>{content}</SlugContent>
       </Slug>
     </div>
-    <div className="slug-container">
+    <div className="slug-container-example">
       <Slug
         autoAlign
         kind="inline"
@@ -336,7 +336,7 @@ export const Playground = (args) => {
 
   return (
     <>
-      <div className="slug-container">
+      <div className="slug-container-example">
         <Slug autoAlign {...args}>
           <SlugContent>{renderedContent}</SlugContent>
         </Slug>
