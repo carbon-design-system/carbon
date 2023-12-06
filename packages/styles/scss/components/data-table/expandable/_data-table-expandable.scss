@@ -226,6 +226,12 @@
     padding-inline-end: 0;
   }
 
+  .#{$prefix}--data-table td.#{$prefix}--table-expand:last-child,
+  .#{$prefix}--data-table th.#{$prefix}--table-expand:last-child {
+    padding-inline-end: 0.5rem;
+    padding-inline-start: 0;
+  }
+
   .#{$prefix}--data-table
     td.#{$prefix}--table-expand[data-previous-value='collapsed'] {
     border-block-end: 1px solid transparent;

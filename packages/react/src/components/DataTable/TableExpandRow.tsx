@@ -15,7 +15,7 @@ import { TableRowProps } from './TableRow';
 
 interface TableExpandRowProps extends PropsWithChildren<TableRowProps> {
   /**
-   * Space separated list of one or more ID values referencing the TableExpandedRow(s) being controlled by the TableExpandRow
+   * Space separated list of one or more ID values referencing the TableExpandedRow(s) being controlled by the TableExpandRow.
    */
   ['aria-controls']: string;
 
@@ -28,7 +28,7 @@ interface TableExpandRowProps extends PropsWithChildren<TableRowProps> {
 
   /**
    * Specify the string read by a voice reader when the expand trigger is
-   * focused
+   * focused.
    */
   ['aria-label']: string;
 
@@ -44,14 +44,19 @@ interface TableExpandRowProps extends PropsWithChildren<TableRowProps> {
 
   /**
    * Specify whether this row is expanded or not. This helps coordinate data
-   * attributes so that `TableExpandRow` and `TableExpandedRow` work together
+   * attributes so that `TableExpandRow` and `TableExpandedRow` work together.
    */
   isExpanded: boolean;
 
   /**
-   * Hook for when a listener initiates a request to expand the given row
+   * Hook for when a listener initiates a request to expand the given row.
    */
   onExpand: MouseEventHandler<HTMLButtonElement>;
+
+  /**
+   * Specify side of expand button. Can be `left` or `right`.
+   */
+  expandButtonSide: 'left' | 'right';
 }
 
 const TableExpandRow = React.forwardRef(
@@ -67,6 +72,7 @@ const TableExpandRow = React.forwardRef(
       expandIconDescription,
       isSelected,
       expandHeader = 'expand',
+      expandButtonSide = 'left',
       ...rest
     }: TableExpandRowProps,
     ref: React.Ref<HTMLTableCellElement>
@@ -104,28 +110,44 @@ const TableExpandRow = React.forwardRef(
     );
     const previousValue = isExpanded ? 'collapsed' : undefined;
 
+    const expandCell = (
+      <TableCell
+        className={`${prefix}--table-expand`}
+        data-previous-value={previousValue}
+        headers={expandHeader}>
+        <button
+          type="button"
+          className={`${prefix}--table-expand__button`}
+          onClick={onExpand}
+          title={expandIconDescription}
+          aria-label={deprecatedAriaLabel || ariaLabel}
+          aria-expanded={isExpanded}
+          aria-controls={ariaControls}>
+          <ChevronRight
+            className={`${prefix}--table-expand__svg`}
+            aria-label={expandIconDescription}
+          />
+        </button>
+      </TableCell>
+    );
+
+    const cells =
+      expandButtonSide === 'left' ? (
+        <>
+          {expandCell}
+          {normalizedChildren}
+        </>
+      ) : (
+        <>
+          {normalizedChildren}
+          {expandCell}
+        </>
+      );
+
     return (
       <tr {...rest} ref={ref as never} className={className} data-parent-row>
         {slug}
-        <TableCell
-          className={`${prefix}--table-expand`}
-          data-previous-value={previousValue}
-          headers={expandHeader}>
-          <button
-            type="button"
-            className={`${prefix}--table-expand__button`}
-            onClick={onExpand}
-            title={expandIconDescription}
-            aria-label={deprecatedAriaLabel || ariaLabel}
-            aria-expanded={isExpanded}
-            aria-controls={ariaControls}>
-            <ChevronRight
-              className={`${prefix}--table-expand__svg`}
-              aria-label={expandIconDescription}
-            />
-          </button>
-        </TableCell>
-        {normalizedChildren}
+        {cells}
       </tr>
     );
   }
