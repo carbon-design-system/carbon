@@ -132,4 +132,41 @@ test.describe('UIShell @avt', () => {
     // focus should then be within the main content of the page
     await expect(page.getByRole('link', { name: 'Carbon' })).toBeFocused();
   });
+
+  test('@avt-keyboard-nav header w/ navigation actions and siddenav', async ({
+    page,
+  }) => {
+    await visitStory(page, {
+      component: 'UIShell',
+      id: 'components-ui-shell-header--header-w-navigation-actions-and-side-nav',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    await page.getByRole('button', { name: 'Category title' }).first().focus();
+    await expect(
+      page.getByRole('button', { name: 'Category title' }).first()
+    ).toBeFocused();
+    await page.keyboard.press('Enter');
+    await page.keyboard.press('Tab');
+    await expect(page.getByRole('link', { name: 'Link 5' })).toBeFocused();
+  });
+
+  test('@avt-keyboard-nav header w/ navigation actions and siddenav mobile size', async ({
+    page,
+  }) => {
+    await visitStory(page, {
+      component: 'UIShell',
+      id: 'components-ui-shell-header--header-w-navigation-actions-and-side-nav',
+      globals: {
+        theme: 'white',
+      },
+    });
+    page.setViewportSize({ width: 600, height: 600 });
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+
+    await expect(page.getByLabel('Open menu')).toBeVisible();
+  });
 });
