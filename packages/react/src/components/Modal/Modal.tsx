@@ -268,6 +268,7 @@ const Modal = React.forwardRef(function Modal(
   }
 
   function handleKeyDown(evt: React.KeyboardEvent<HTMLDivElement>) {
+    evt.stopPropagation();
     if (open) {
       if (match(evt, keys.Escape)) {
         onRequestClose(evt);
@@ -284,6 +285,7 @@ const Modal = React.forwardRef(function Modal(
 
   function handleMousedown(evt: React.MouseEvent<HTMLDivElement>) {
     const target = evt.target as Node;
+    evt.stopPropagation();
     if (
       innerModal.current &&
       !innerModal.current.contains(target) &&
@@ -522,13 +524,9 @@ const Modal = React.forwardRef(function Modal(
       className={modalClasses}
       ref={ref}
       role="presentation"
-      onKeyDown={handleKeyDown}>
-      <div
-        className={`${prefix}--modal-background`}
-        onMouseDown={handleMousedown}
-        onBlur={handleBlur}
-        aria-hidden
-      />
+      onKeyDown={handleKeyDown}
+      onMouseDown={handleMousedown}
+      onBlur={handleBlur}>
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
       <span
         ref={startTrap}

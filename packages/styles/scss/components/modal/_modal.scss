@@ -28,7 +28,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    inset: 0;
+    background-color: $overlay;
+    block-size: 100vh;
+    content: '';
+    inline-size: 100vw;
+    inset-block-start: 0;
+    inset-inline-start: 0;
     opacity: 0;
     transition: opacity $duration-moderate-02 motion(exit, expressive),
       visibility 0ms linear $duration-moderate-02;
@@ -43,13 +48,6 @@
       @media screen and (prefers-reduced-motion: reduce) {
         transition: none;
       }
-    }
-
-    .#{$prefix}--modal-background {
-      position: fixed;
-      z-index: -1;
-      background-color: $overlay;
-      inset: 0;
     }
 
     // V11: Question for design: do we have an updated tokens for fields that exist on `layer`?
