@@ -112,7 +112,7 @@ interface DatePickerInputProps
   size?: 'sm' | 'md' | 'lg';
 
   /**
-   * Provide a `Slug` component to be rendered inside the `DatePickerInput` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `DatePickerInput` component
    */
   slug?: ReactNodeLike;
 
@@ -360,7 +360,7 @@ DatePickerInput.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
-   * Provide a `Slug` component to be rendered inside the `DatePickerInput` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `DatePickerInput` component
    */
   slug: PropTypes.node,
 

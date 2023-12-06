@@ -140,7 +140,7 @@ CheckboxGroup.propTypes = {
   readOnly: PropTypes.bool,
 
   /**
-   * Provide a `Slug` component to be rendered inside the `CheckboxGroup` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `CheckboxGroup` component
    */
   slug: PropTypes.node,
 

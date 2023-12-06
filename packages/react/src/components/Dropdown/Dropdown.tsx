@@ -199,7 +199,7 @@ export interface DropdownProps<ItemType>
   size?: ListBoxSize;
 
   /**
-   * Provide a `Slug` component to be rendered inside the `Dropdown` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `Dropdown` component
    */
   slug?: ReactNodeLike;
 
@@ -708,7 +708,7 @@ Dropdown.propTypes = {
   size: ListBoxPropTypes.ListBoxSize,
 
   /**
-   * Provide a `Slug` component to be rendered inside the `Dropdown` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `Dropdown` component
    */
   slug: PropTypes.node,
 

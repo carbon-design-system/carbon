@@ -149,8 +149,12 @@ describe('Slider', () => {
     });
 
     it('should accurately position slider on mount', () => {
-      renderSlider({ value: 50, max: 100, min: 0 });
-      expect(screen.getByRole('slider')).toHaveStyle({
+      const { container } = renderSlider({ value: 50, max: 100, min: 0 });
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const sliderWrapper = container.querySelector(
+        `.${prefix}--slider__thumb-wrapper`
+      );
+      expect(sliderWrapper).toHaveStyle({
         insetInlineStart: '50%',
       });
     });
@@ -681,40 +685,51 @@ describe('Slider', () => {
 
       // Keyboard interactions on the upper thumb, lets mix it up and do the up
       // and down arrow keys this time.
+      // Note: Somewhat unintuitively, a click on the upperThumb in the moves it
+      // as close to the lowerThumb as possible. This is because the elements
+      // in Jest don't exist in a specific position, layer and size.
+      // @see https://testing-library.com/docs/user-event/pointer
       await click(upperThumb);
       expect(upperThumb).toHaveFocus();
       await keyboard('{ArrowUp}');
-      expect(onChange).toHaveBeenLastCalledWith({ value: 10, valueUpper: 91 });
-      expect(upperThumb).toHaveAttribute('aria-valuenow', '91');
-      expect(lowerThumb).toHaveAttribute('aria-valuemax', '91');
-      expect(upperInput).toHaveValue(91);
+      expect(onChange).toHaveBeenLastCalledWith({ value: 10, valueUpper: 11 });
+      expect(upperThumb).toHaveAttribute('aria-valuenow', '11');
+      expect(lowerThumb).toHaveAttribute('aria-valuemax', '11');
+      expect(upperInput).toHaveValue(11);
       await keyboard('{ArrowDown}');
-      expect(onChange).toHaveBeenLastCalledWith({ value: 10, valueUpper: 90 });
-      expect(upperThumb).toHaveAttribute('aria-valuenow', '90');
-      expect(lowerThumb).toHaveAttribute('aria-valuemax', '90');
-      expect(upperInput).toHaveValue(90);
+      expect(onChange).toHaveBeenLastCalledWith({ value: 10, valueUpper: 10 });
+      expect(upperThumb).toHaveAttribute('aria-valuenow', '10');
+      expect(lowerThumb).toHaveAttribute('aria-valuemax', '10');
+      expect(upperInput).toHaveValue(10);
       await keyboard('{Shift>}{ArrowUp}{/Shift}');
-      expect(onChange).toHaveBeenLastCalledWith({ value: 10, valueUpper: 94 });
-      expect(upperThumb).toHaveAttribute('aria-valuenow', '94');
-      expect(lowerThumb).toHaveAttribute('aria-valuemax', '94');
-      expect(upperInput).toHaveValue(94);
+      expect(onChange).toHaveBeenLastCalledWith({ value: 10, valueUpper: 14 });
+      expect(upperThumb).toHaveAttribute('aria-valuenow', '14');
+      expect(lowerThumb).toHaveAttribute('aria-valuemax', '14');
+      expect(upperInput).toHaveValue(14);
       await keyboard('{Shift>}{ArrowDown}{/Shift}');
-      expect(onChange).toHaveBeenLastCalledWith({ value: 10, valueUpper: 90 });
-      expect(upperThumb).toHaveAttribute('aria-valuenow', '90');
-      expect(lowerThumb).toHaveAttribute('aria-valuemax', '90');
-      expect(upperInput).toHaveValue(90);
+      expect(onChange).toHaveBeenLastCalledWith({ value: 10, valueUpper: 10 });
+      expect(upperThumb).toHaveAttribute('aria-valuenow', '10');
+      expect(lowerThumb).toHaveAttribute('aria-valuemax', '10');
+      expect(upperInput).toHaveValue(10);
     });
 
     it('should accurately position handles on mount', () => {
-      renderTwoHandleSlider({
+      const { container } = renderTwoHandleSlider({
         value: 50,
         unstable_valueUpper: 50,
         min: 0,
         max: 100,
       });
-      const [lowerThumb, upperThumb] = screen.getAllByRole('slider');
-      expect(lowerThumb).toHaveStyle({ insetInlineStart: '50%' });
-      expect(upperThumb).toHaveStyle({ insetInlineStart: '50%' });
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const sliderWrapperLower = container.querySelector(
+        `.${prefix}--slider__thumb-wrapper--lower`
+      );
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const sliderWrapperUpper = container.querySelector(
+        `.${prefix}--slider__thumb-wrapper--upper`
+      );
+      expect(sliderWrapperLower).toHaveStyle({ insetInlineStart: '50%' });
+      expect(sliderWrapperUpper).toHaveStyle({ insetInlineStart: '50%' });
     });
 
     it('marks input field as hidden if hidden via props', () => {

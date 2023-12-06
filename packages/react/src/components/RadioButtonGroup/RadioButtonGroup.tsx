@@ -93,7 +93,7 @@ export interface RadioButtonGroupProps
   readOnly?: boolean;
 
   /**
-   * Provide a `Slug` component to be rendered inside the `RadioButtonGroup` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `RadioButtonGroup` component
    */
   slug?: ReactNodeLike;
 
@@ -332,7 +332,7 @@ RadioButtonGroup.propTypes = {
   readOnly: PropTypes.bool,
 
   /**
-   * Provide a `Slug` component to be rendered inside the `RadioButtonGroup` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `RadioButtonGroup` component
    */
   slug: PropTypes.node,
 

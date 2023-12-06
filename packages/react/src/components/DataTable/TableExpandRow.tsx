@@ -72,11 +72,33 @@ const TableExpandRow = React.forwardRef(
     ref: React.Ref<HTMLTableCellElement>
   ) => {
     const prefix = usePrefix();
+
+    // We need to put the slug before the expansion arrow and all other table cells after the arrow.
+    let rowHasSlug;
+    const slug = React.Children.toArray(children).map((child: any) => {
+      if (child.type?.displayName === 'TableSlugRow') {
+        if (child.props.slug) {
+          rowHasSlug = true;
+        }
+
+        return child;
+      }
+    });
+
+    const normalizedChildren = React.Children.toArray(children).map(
+      (child: any) => {
+        if (child.type?.displayName !== 'TableSlugRow') {
+          return child;
+        }
+      }
+    );
+
     const className = cx(
       {
         [`${prefix}--parent-row`]: true,
         [`${prefix}--expandable-row`]: isExpanded,
         [`${prefix}--data-table--selected`]: isSelected,
+        [`${prefix}--parent-row--slug`]: rowHasSlug,
       },
       rowClassName
     );
@@ -84,6 +106,7 @@ const TableExpandRow = React.forwardRef(
 
     return (
       <tr {...rest} ref={ref as never} className={className} data-parent-row>
+        {slug}
         <TableCell
           className={`${prefix}--table-expand`}
           data-previous-value={previousValue}
@@ -102,7 +125,7 @@ const TableExpandRow = React.forwardRef(
             />
           </button>
         </TableCell>
-        {children}
+        {normalizedChildren}
       </tr>
     );
   }

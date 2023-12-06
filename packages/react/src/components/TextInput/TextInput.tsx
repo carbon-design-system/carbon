@@ -122,7 +122,7 @@ export interface TextInputProps
   size?: 'sm' | 'md' | 'lg' | 'xl';
 
   /**
-   * Provide a `Slug` component to be rendered inside the `TextInput` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `TextInput` component
    */
   slug?: ReactNodeLike;
 
@@ -453,7 +453,7 @@ TextInput.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
-   * Provide a `Slug` component to be rendered inside the `TextInput` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `TextInput` component
    */
   slug: PropTypes.node,
 
