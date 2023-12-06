@@ -521,12 +521,12 @@ const Modal = React.forwardRef(function Modal(
   return (
     <div
       {...rest}
-      className={modalClasses}
-      ref={ref}
-      role="presentation"
       onKeyDown={handleKeyDown}
       onMouseDown={handleMousedown}
-      onBlur={handleBlur}>
+      onBlur={handleBlur}
+      className={modalClasses}
+      role="presentation"
+      ref={ref}>
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
       <span
         ref={startTrap}
