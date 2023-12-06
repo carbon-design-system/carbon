@@ -109,7 +109,7 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(function Switcher(
     }
   };
 
-  const childrenWithProps = React.Children.map(children, (child, index) => {
+  const childrenWithProps = React.Children.toArray(children).map((child, index) => {
     // only setup click handlers if onChange event is passed
     if (
       React.isValidElement(child) &&
