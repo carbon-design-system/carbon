@@ -582,7 +582,7 @@ const MultiSelect = React.forwardRef(
 
     // Slug is always size `mini`
     let normalizedSlug;
-    if (slug) {
+    if (slug && slug['type']?.displayName === 'Slug') {
       normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
         size: 'mini',
       });

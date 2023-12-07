@@ -157,6 +157,7 @@ export const Slug = React.forwardRef(function Slug(
   );
 });
 
+Slug.displayName = 'Slug';
 Slug.propTypes = {
   /**
    * Specify the correct translation of the AI text
