@@ -149,6 +149,7 @@ describe('@carbon/styles/scss/theme', () => {
         "ai-gradient-start-01",
         "ai-gradient-start-02",
         "ai-gradient-end",
+        "slug-overlay",
         "highlight",
         "overlay",
         "toggle-off",

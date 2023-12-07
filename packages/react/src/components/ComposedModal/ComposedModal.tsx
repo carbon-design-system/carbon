@@ -484,6 +484,11 @@ ComposedModal.propTypes = {
    * Specify the size variant.
    */
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
+
+  /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `ComposedModal` component
+   */
+  slug: PropTypes.node,
 };
 
 export default ComposedModal;

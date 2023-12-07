@@ -1014,6 +1014,10 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "slug-overlay",
+          "type": "color",
+        },
+        Object {
           "name": "highlight",
           "type": "color",
         },
