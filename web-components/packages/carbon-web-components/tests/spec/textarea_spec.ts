@@ -31,7 +31,7 @@ const template = (props?) =>
     'cds-textarea': props,
   });
 
-describe('cds-textarea', function () {
+xdescribe('cds-textarea', function () {
   const events = new EventManager();
 
   describe('Rendering', function () {

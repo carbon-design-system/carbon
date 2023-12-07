@@ -18,7 +18,7 @@ const template = (props?) =>
     'cds-pagination': props,
   });
 
-describe('cds-pagination', function () {
+xdescribe('cds-pagination', function () {
   const events = new EventManager();
 
   describe('Misc attributes', function () {

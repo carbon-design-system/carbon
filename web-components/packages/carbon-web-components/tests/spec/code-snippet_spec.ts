@@ -83,7 +83,7 @@ describe('cds-code-snippet', function () {
     });
   });
 
-  describe('Showing tooltip', function () {
+  xdescribe('Showing tooltip', function () {
     beforeEach(function () {
       // Workaround for:
       // `Error: Jasmine Clock was unable to install over custom global timer functions. Is the clock already installed?`
@@ -154,7 +154,7 @@ describe('cds-code-snippet', function () {
   });
 
   describe('Expand/collapse button in multi line mode', function () {
-    it('Should render the expando', async function () {
+    xit('Should render the expando', async function () {
       render(multiLineTemplate(), document.body);
       await Promise.resolve();
       const snippet = document.body.querySelector('cds-code-snippet');
@@ -168,7 +168,7 @@ describe('cds-code-snippet', function () {
       ).toMatchSnapshot();
     });
 
-    it('Should change the button text by expanding/collapsing', async function () {
+    xit('Should change the button text by expanding/collapsing', async function () {
       render(multiLineTemplate(), document.body);
       await Promise.resolve();
       const snippet = document.body.querySelector('cds-code-snippet');

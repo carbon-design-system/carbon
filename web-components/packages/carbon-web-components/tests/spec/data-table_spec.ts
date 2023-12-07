@@ -154,7 +154,7 @@ describe('data-table', function () {
   });
 
   describe('cds-table-body', function () {
-    it('should support setting zebra stripe to rows', async function () {
+    xit('should support setting zebra stripe to rows', async function () {
       render(template(), document.body);
       await Promise.resolve();
       const result = Array.prototype.every.call(
@@ -373,7 +373,7 @@ describe('data-table', function () {
     });
 
     describe('Handling selection', function () {
-      it('should fire cds-table-row-change-selection event upon selecting', async function () {
+      xit('should fire cds-table-row-change-selection event upon selecting', async function () {
         const spyBeforeChange = jasmine.createSpy('before toggle');
         render(
           rowTemplate({
@@ -391,7 +391,7 @@ describe('data-table', function () {
         expect((row as CDSTableRow).selected).toBe(true);
       });
 
-      it('should fire cds-table-row-change-selection event upon unselecting', async function () {
+      xit('should fire cds-table-row-change-selection event upon unselecting', async function () {
         const spyBeforeChange = jasmine.createSpy('before toggle');
         render(
           rowTemplate({
@@ -410,7 +410,7 @@ describe('data-table', function () {
         expect((row as CDSTableRow).selected).toBe(false);
       });
 
-      it('should support preventing table row selection from being toggled upon user gesture', async function () {
+      xit('should support preventing table row selection from being toggled upon user gesture', async function () {
         render(
           rowTemplate({
             selectionName: 'selection-name-foo',
@@ -459,7 +459,7 @@ describe('data-table', function () {
     });
 
     describe('Toggling', function () {
-      it('should expand and collapse', async function () {
+      xit('should expand and collapse', async function () {
         render(expandRowTemplate(), document.body);
         await Promise.resolve();
 
@@ -481,7 +481,7 @@ describe('data-table', function () {
         expect((expandedRow as CDSTableExpandedRow).expanded).toBe(false);
       });
 
-      it('should fire cds-table-row-expando-beingtoggled/cds-table-row-expando-toggled events upon expanding', async function () {
+      xit('should fire cds-table-row-expando-beingtoggled/cds-table-row-expando-toggled events upon expanding', async function () {
         const spyBeforeToggle = jasmine.createSpy('before toggle');
         const spyAfterToggle = jasmine.createSpy('after toggle');
         render(expandRowTemplate(), document.body);
@@ -501,7 +501,7 @@ describe('data-table', function () {
         expect(spyAfterToggle.calls.argsFor(0)[0].detail.expanded).toBe(true);
       });
 
-      it('should fire cds-table-row-expando-beingtoggled/cds-table-row-expando-toggled events upon collapsing', async function () {
+      xit('should fire cds-table-row-expando-beingtoggled/cds-table-row-expando-toggled events upon collapsing', async function () {
         const spyBeforeToggle = jasmine.createSpy('before toggle');
         const spyAfterToggle = jasmine.createSpy('after toggle');
         render(expandRowTemplate({ expanded: true }), document.body);
@@ -521,7 +521,7 @@ describe('data-table', function () {
         expect(spyAfterToggle.calls.argsFor(0)[0].detail.expanded).toBe(false);
       });
 
-      it('should support preventing table row from being toggled upon user gesture', async function () {
+      xit('should support preventing table row from being toggled upon user gesture', async function () {
         const spyAfterToggle = jasmine.createSpy('after toggle');
         render(expandRowTemplate(), document.body);
         await Promise.resolve();

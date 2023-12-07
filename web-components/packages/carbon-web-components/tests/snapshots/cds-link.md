@@ -6,7 +6,7 @@
 
 ```
 <a
-  class="cds--link cds--link--md"
+  class="cds--link"
   href="about:blank"
   id="link"
   part="link"
@@ -29,7 +29,7 @@
 
 ```
 <a
-  class="cds--link cds--link--md"
+  class="cds--link"
   download="file-name-foo"
   href="about:blank"
   hreflang="en"
@@ -59,7 +59,7 @@
 
 ```
 <p
-  class="cds--link cds--link--disabled cds--link--md"
+  class="cds--link cds--link--disabled"
   id="link"
   part="link"
 >

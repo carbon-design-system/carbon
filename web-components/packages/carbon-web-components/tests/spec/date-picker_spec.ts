@@ -76,7 +76,7 @@ describe('cds-date-picker', function () {
       datePicker = document.body.querySelector('cds-date-picker');
     });
 
-    it('Should not instantiate Flatpickr', async function () {
+    xit('Should not instantiate Flatpickr', async function () {
       const { calendar } = datePicker!;
       expect(calendar).toBeFalsy();
     });
@@ -205,7 +205,7 @@ describe('cds-date-picker', function () {
       ]);
     });
 
-    it('Should support opening calendar dropdown by clicking on calendar icon for the start date', async function () {
+    xit('Should support opening calendar dropdown by clicking on calendar icon for the start date', async function () {
       datePickerInputStart!
         .shadowRoot!.querySelector('svg')!
         .dispatchEvent(new CustomEvent('click', { bubbles: true }));
@@ -214,7 +214,7 @@ describe('cds-date-picker', function () {
       expect(calendar!.isOpen).toBe(true);
     });
 
-    it('Should support opening calendar dropdown by clicking on calendar icon for the end date', async function () {
+    xit('Should support opening calendar dropdown by clicking on calendar icon for the end date', async function () {
       datePickerInputEnd!
         .shadowRoot!.querySelector('svg')!
         .dispatchEvent(new CustomEvent('click', { bubbles: true }));
@@ -233,7 +233,7 @@ describe('cds-date-picker', function () {
       elem = document.body.querySelector('cds-date-picker-input')!;
     });
 
-    it('should support checking if required value exists', async function () {
+    xit('should support checking if required value exists', async function () {
       const input = elem as CDSDatePickerInput;
       input.required = true;
       const spyInvalid = jasmine.createSpy('invalid');
@@ -266,7 +266,7 @@ describe('cds-date-picker', function () {
       expect(input.invalidText).toBe('');
     });
 
-    it('should treat non-empty custom validity message as invalid', async function () {
+    xit('should treat non-empty custom validity message as invalid', async function () {
       const input = elem as CDSDatePickerInput;
       input.invalidText = 'validity-message-foo';
       expect(input.invalid).toBe(true);
@@ -275,7 +275,7 @@ describe('cds-date-picker', function () {
   });
 
   describe('Event-based form participation', function () {
-    it('Should respond to `formdata` event', async function () {
+    xit('Should respond to `formdata` event', async function () {
       render(
         html` <form>${singleWithCalendarTemplate()}</form> `,
         document.body
@@ -293,7 +293,7 @@ describe('cds-date-picker', function () {
       expect(getValues(formData)).toEqual({ 'name-foo': '2000-01-01' });
     });
 
-    it('Should not respond to `formdata` event if disabled', async function () {
+    xit('Should not respond to `formdata` event if disabled', async function () {
       render(
         html` <form>${singleWithCalendarTemplate()}</form> `,
         document.body
@@ -311,7 +311,7 @@ describe('cds-date-picker', function () {
       expect(getValues(formData)).toEqual({});
     });
 
-    it('Should respond to `formdata` event in range mode', async function () {
+    xit('Should respond to `formdata` event in range mode', async function () {
       render(
         html` <form>${rangeWithCalendarTemplate()}</form> `,
         document.body

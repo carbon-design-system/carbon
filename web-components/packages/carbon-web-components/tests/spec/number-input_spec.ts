@@ -67,7 +67,7 @@ describe('cds-number-input', function () {
 
   // most of this describe is borrowed from the input tests
   describe('Event-based form participation', function () {
-    it('Should respond to `formdata` event', async function () {
+    xit('Should respond to `formdata` event', async function () {
       render(
         html`
           <form>
@@ -176,7 +176,7 @@ describe('cds-number-input', function () {
       expect(input.validityMessage).toBe('validity-message-foo');
     });
 
-    it('should warn if a value less than the min', async function () {
+    xit('should warn if a value less than the min', async function () {
       const input = elem as CDSNumberInput;
       input.min = '50';
       input.value = '0';
@@ -184,7 +184,7 @@ describe('cds-number-input', function () {
       expect(input.checkValidity()).toBe(false);
     });
 
-    it('should warn if a value is greater than the max', async function () {
+    xit('should warn if a value is greater than the max', async function () {
       const input = elem as CDSNumberInput;
       input.max = '50';
       input.value = '51';

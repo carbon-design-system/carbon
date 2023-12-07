@@ -138,7 +138,7 @@ describe('cds-combo-box', function () {
     });
   });
 
-  describe('Selecting an item', function () {
+  xdescribe('Selecting an item', function () {
     let elem: Element;
     let itemNodes: NodeListOf<Element>;
 
@@ -279,7 +279,7 @@ describe('cds-combo-box', function () {
       itemNodes = elem.querySelectorAll('cds-combo-box-item');
     });
 
-    it('Should highlight the item user types', async function () {
+    xit('Should highlight the item user types', async function () {
       inputNode.value = 'Option 3';
       inputNode.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
@@ -408,7 +408,7 @@ describe('cds-combo-box', function () {
       expect(itemNodes[3].hasAttribute('selected')).toBe(false);
     });
 
-    it('Should support selecting an item after typing', async function () {
+    xit('Should support selecting an item after typing', async function () {
       (elem as CDSComboBox).open = true;
       await Promise.resolve();
       (

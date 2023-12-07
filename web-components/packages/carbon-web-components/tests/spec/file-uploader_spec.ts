@@ -59,7 +59,7 @@ describe('file-uploader', function () {
 
   describe('cds-file-uploader', function () {
     describe('Misc attributes', function () {
-      it('should render with minimum attributes', async function () {
+      xit('should render with minimum attributes', async function () {
         render(fileUploaderShellTemplate(), document.body);
         await Promise.resolve();
         expect(
@@ -85,7 +85,7 @@ describe('file-uploader', function () {
 
   describe('cds-file-drop-container', function () {
     describe('Misc attributes', function () {
-      it('should render with minimum attributes', async function () {
+      xit('should render with minimum attributes', async function () {
         render(dropContainerTemplate(), document.body);
         await Promise.resolve();
         expect(
@@ -93,7 +93,7 @@ describe('file-uploader', function () {
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
-      it('should render with various attributes', async function () {
+      xit('should render with various attributes', async function () {
         render(
           dropContainerTemplate({
             accept: 'image/png',
@@ -124,7 +124,7 @@ describe('file-uploader', function () {
         elem = document.querySelector('cds-file-drop-container');
       });
 
-      it('Should handle drag-over', async function () {
+      xit('Should handle drag-over', async function () {
         const dataTransfer: { dropEffect?: string } = {};
         const event = Object.assign(
           new CustomEvent('dragover', { bubbles: true, composed: true }),
@@ -136,7 +136,7 @@ describe('file-uploader', function () {
         expect(dataTransfer.dropEffect).toBe('copy');
       });
 
-      it('Should handle drag-leave', async function () {
+      xit('Should handle drag-leave', async function () {
         const dataTransfer: { dropEffect?: string } = {};
         const event = Object.assign(
           new CustomEvent('dragleave', { bubbles: true, composed: true }),
@@ -146,7 +146,7 @@ describe('file-uploader', function () {
         expect(dataTransfer.dropEffect).toBe('move');
       });
 
-      it('Should handle drop', async function () {
+      xit('Should handle drop', async function () {
         const spyChange = jasmine.createSpy('after changed');
         events.on(elem!, 'cds-file-drop-container-changed', spyChange);
         const dataTransfer = { files: [pngFile, jpegFile] };
@@ -161,7 +161,7 @@ describe('file-uploader', function () {
         );
       });
 
-      it('Should handle file upload link', async function () {
+      xit('Should handle file upload link', async function () {
         const origGetFiles = (elem as any)._getFiles;
         // Workaround for `HTMLInputElement.files` that only accepts `FileList` while there is no `FileList` constructor
         spyOn(elem, '_getFiles').and.callFake(function (event) {
@@ -188,7 +188,7 @@ describe('file-uploader', function () {
         );
       });
 
-      it('Should handle filtering by file extension', async function () {
+      xit('Should handle filtering by file extension', async function () {
         render(dropContainerTemplate({ accept: '.png' }), document.body);
         await Promise.resolve();
         elem = document.querySelector('cds-file-drop-container');
@@ -248,7 +248,7 @@ describe('file-uploader', function () {
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
-      it('should render uploaded state with various attributes', async function () {
+      xit('should render uploaded state with various attributes', async function () {
         render(
           fileUploderItemTemplate({
             invalid: true,

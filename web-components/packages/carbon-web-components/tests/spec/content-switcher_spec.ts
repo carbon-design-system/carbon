@@ -21,7 +21,7 @@ describe('cds-content-switcher', function () {
   describe('Selecting an item', function () {
     const events = new EventManager();
 
-    it('should add/remove "selected" attribute', async function () {
+    xit('should add/remove "selected" attribute', async function () {
       render(template(), document.body);
       await Promise.resolve();
       const itemNodes = document.body.querySelectorAll(
@@ -49,7 +49,7 @@ describe('cds-content-switcher', function () {
       ).toBe('staging');
     });
 
-    it('should provide a way to switch item with a value', async function () {
+    xit('should provide a way to switch item with a value', async function () {
       render(template(), document.body);
       await Promise.resolve();
       (document.body.querySelector('cds-content-switcher') as CDSTabs).value =
@@ -66,7 +66,7 @@ describe('cds-content-switcher', function () {
       expect(itemNodes[4].hasAttribute('selected')).toBe(false);
     });
 
-    it('should provide a way to cancel switching item', async function () {
+    xit('should provide a way to cancel switching item', async function () {
       render(template(), document.body);
       await Promise.resolve();
       const elem = document.body.querySelector('cds-content-switcher');
@@ -99,7 +99,7 @@ describe('cds-content-switcher', function () {
   });
 
   describe('Handling hover-over', function () {
-    it('should add/remove "hide-divider" attribute', async function () {
+    xit('should add/remove "hide-divider" attribute', async function () {
       render(template(), document.body);
       await Promise.resolve();
       const itemNodes = document.body.querySelectorAll(

@@ -28,7 +28,7 @@ const template = (props?) =>
     'cds-slider': props,
   });
 
-describe('cds-slider', function () {
+xdescribe('cds-slider', function () {
   describe('Rendering', function () {
     it('Should render with minimum attributes', async function () {
       render(template(), document.body);

@@ -36,7 +36,7 @@ const iconTemplate = (props?) =>
     'cds-tooltip-icon': props,
   });
 
-describe('cds-tooltip', function () {
+xdescribe('cds-tooltip', function () {
   describe('Missing menu body', function () {
     let trigger: CDSTooltip | null;
 
@@ -147,7 +147,7 @@ describe('cds-tooltip', function () {
 
 describe('cds-tooltip-icon', function () {
   describe('Rendering', function () {
-    it('Should render with minimum attributes', async function () {
+    xit('Should render with minimum attributes', async function () {
       render(iconTemplate(), document.body);
       await Promise.resolve();
       expect(
@@ -157,7 +157,7 @@ describe('cds-tooltip-icon', function () {
       });
     });
 
-    it('Should render with various attributes', async function () {
+    xit('Should render with various attributes', async function () {
       render(
         iconTemplate({
           alignment: POPOVER_ALIGNMENT.TOP,

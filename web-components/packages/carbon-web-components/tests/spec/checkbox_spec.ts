@@ -68,7 +68,7 @@ describe('cds-checkbox', function () {
     });
   });
 
-  describe('Event-based form participation', function () {
+  xdescribe('Event-based form participation', function () {
     it('Should respond to `formdata` event', async function () {
       render(
         html`

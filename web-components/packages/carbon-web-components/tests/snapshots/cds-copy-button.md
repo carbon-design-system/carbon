@@ -6,13 +6,12 @@
 
 ```
 <cds-copy
+  button-class-name="cds--copy-btn"
   feedback="Copied!"
   feedback-timeout="2000"
 >
-  <span slot="tooltip-content">
-    <slot>
-    </slot>
-  </span>
+  <slot slot="tooltip-content">
+  </slot>
 </cds-copy>
 
 ```
@@ -21,13 +20,12 @@
 
 ```
 <cds-copy
+  button-class-name="cds--copy-btn"
   feedback="feedback-text-foo"
   feedback-timeout="16"
 >
-  <span slot="tooltip-content">
-    <slot>
-    </slot>
-  </span>
+  <slot slot="tooltip-content">
+  </slot>
 </cds-copy>
 
 ```

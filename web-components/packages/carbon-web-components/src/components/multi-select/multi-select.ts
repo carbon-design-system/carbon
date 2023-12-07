@@ -475,7 +475,6 @@ class CDSMultiSelect extends CDSDropdown {
       [`${prefix}--multi-select--invalid`]: invalid,
       [`${prefix}--multi-select--warn`]: warn,
       [`${prefix}--multi-select--inline`]: inline,
-      [`${prefix}--list-box--inline`]: inline,
       [`${prefix}--multi-select--readonly`]: readOnly,
       [`${prefix}--multi-select--selected`]: selectedItemsCount > 0,
     });

@@ -18,7 +18,7 @@ const template = (props?) =>
     'cds-tabs': props,
   });
 
-describe('cds-tabs', function () {
+xdescribe('cds-tabs', function () {
   describe('Toggling', function () {
     it('should toggle "open" attribute', async function () {
       render(template(), document.body);

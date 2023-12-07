@@ -39,6 +39,8 @@
     >
     </div>
   </div>
+  <slot name="slug">
+  </slot>
 </div>
 <div
   class="cds--form__helper-text"
@@ -96,6 +98,8 @@
     >
     </div>
   </div>
+  <slot name="slug">
+  </slot>
 </div>
 <div
   class="cds--form__helper-text cds--form__helper-text--disabled"

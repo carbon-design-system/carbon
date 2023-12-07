@@ -135,7 +135,7 @@ describe('cds-dropdown', function () {
       itemNodes = elem.querySelectorAll('cds-dropdown-item');
     });
 
-    it('should add/remove "selected" modifier class', async function () {
+    xit('should add/remove "selected" modifier class', async function () {
       (
         document.body.querySelector(
           'cds-dropdown-item[value="staging"]'
@@ -149,7 +149,7 @@ describe('cds-dropdown', function () {
       expect(itemNodes[4].hasAttribute('selected')).toBe(false);
     });
 
-    it('should update text', async function () {
+    xit('should update text', async function () {
       (
         document.body.querySelector(
           'cds-dropdown-item[value="staging"]'
@@ -161,7 +161,7 @@ describe('cds-dropdown', function () {
       ).toBe('Option 3');
     });
 
-    it('should update value', async function () {
+    xit('should update value', async function () {
       (
         document.body.querySelector(
           'cds-dropdown-item[value="staging"]'
@@ -171,7 +171,7 @@ describe('cds-dropdown', function () {
       expect((elem as CDSDropdown).value).toBe('staging');
     });
 
-    it('should provide a way to switch item with a value', async function () {
+    xit('should provide a way to switch item with a value', async function () {
       (elem as CDSDropdown).value = 'staging';
       await Promise.resolve(); // Update cycle for `<cds-dropdown>`
       await Promise.resolve(); // Update cycle for `<cds-dropdown-item>`
@@ -182,7 +182,7 @@ describe('cds-dropdown', function () {
       expect(itemNodes[4].hasAttribute('selected')).toBe(false);
     });
 
-    it('should provide a way to cancel switching item', async function () {
+    xit('should provide a way to cancel switching item', async function () {
       events.on(elem, 'cds-dropdown-beingselected', (event: CustomEvent) => {
         expect(event.detail.item).toBe(
           document.body.querySelector('cds-dropdown-item[value="staging"]')

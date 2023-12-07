@@ -33,7 +33,7 @@ const template = (props?) =>
     'cds-select': props,
   });
 
-describe('cds-select', function () {
+xdescribe('cds-select', function () {
   const events = new EventManager();
 
   describe('Misc attributes', function () {

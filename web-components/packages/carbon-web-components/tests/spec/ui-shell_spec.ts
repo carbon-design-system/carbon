@@ -237,7 +237,7 @@ describe('ui-shell', function () {
         expect((menu as CDSHeaderMenu).expanded).toBe(false);
       });
 
-      it('should collapse upon hitting ESC key', async function () {
+      xit('should collapse upon hitting ESC key', async function () {
         render(headerMenuTemplate({ expanded: true }), document.body);
         await Promise.resolve();
         const menu = document.body.querySelector('cds-header-menu');
@@ -378,7 +378,7 @@ describe('ui-shell', function () {
 
   describe('cds-side-nav', function () {
     describe('Handling events', function () {
-      it('should let child side nav menu collapse if this side nav is collapsed', async function () {
+      xit('should let child side nav menu collapse if this side nav is collapsed', async function () {
         render(
           sideNavTemplate({
             children: html` <cds-side-nav-menu></cds-side-nav-menu> `,

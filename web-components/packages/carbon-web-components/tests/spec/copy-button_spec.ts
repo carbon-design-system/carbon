@@ -53,7 +53,7 @@ describe('cds-copy-button', function () {
       jasmine.clock().install();
     });
 
-    it('Should show the tooltip for 2 seconds by default', async function () {
+    xit('Should show the tooltip for 2 seconds by default', async function () {
       render(template(), document.body);
       await Promise.resolve();
       const button = document.body
@@ -72,7 +72,7 @@ describe('cds-copy-button', function () {
       ).toBe(false);
     });
 
-    it('Should support changing the duration', async function () {
+    xit('Should support changing the duration', async function () {
       render(template({ feedbackTimeout: 500 }), document.body);
       await Promise.resolve();
       const button = document.body

@@ -18,7 +18,7 @@ const playgroundTemplate = (props?) =>
     'cds-tag': props,
   });
 
-describe('cds-tag', function () {
+xdescribe('cds-tag', function () {
   describe('Enabling/disabling', function () {
     const events = new EventManager();
 

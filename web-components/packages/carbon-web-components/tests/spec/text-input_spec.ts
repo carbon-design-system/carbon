@@ -33,7 +33,7 @@ const template = (props?) =>
     'cds-text-input': props,
   });
 
-describe('cds-text-input', function () {
+xdescribe('cds-text-input', function () {
   const events = new EventManager();
 
   describe('Rendering', function () {

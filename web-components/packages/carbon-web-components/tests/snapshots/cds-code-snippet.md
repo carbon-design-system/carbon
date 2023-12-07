@@ -7,19 +7,28 @@
 ```
 <div
   aria-label="code-snippet"
+  aria-multiline=""
+  aria-readonly="true"
   class="cds--snippet-container"
   role="textbox"
+  style=""
   tabindex="0"
 >
-  <code>
-    <pre>
+  <pre>
+    <code>
       <slot>
       </slot>
-    </pre>
-  </code>
+    </code>
+  </pre>
 </div>
-<cds-copy-button feedback="Copied!">
-  Copy to clipboard
+<div class="cds--snippet__overflow-indicator--right">
+</div>
+<cds-copy-button
+  button-class-name=""
+  feedback="Copied!"
+  feedback-timeout="2000"
+>
+  Copy to Clipboard
 </cds-copy-button>
 
 ```
@@ -29,19 +38,26 @@
 ```
 <div
   aria-label="code-snippet"
+  aria-multiline="true"
+  aria-readonly="true"
   class="cds--snippet-container"
   role="textbox"
+  style="max-height:240px;min-height:48px;"
   tabindex="0"
 >
-  <code>
-    <pre>
+  <pre>
+    <code>
       <slot>
       </slot>
-    </pre>
-  </code>
+    </code>
+  </pre>
 </div>
-<cds-copy-button feedback="Copied!">
-  Copy to clipboard
+<cds-copy-button
+  button-class-name=""
+  feedback="Copied!"
+  feedback-timeout="2000"
+>
+  Copy to Clipboard
 </cds-copy-button>
 
 ```
@@ -49,9 +65,15 @@
 ####   `Should render with minimum attributes for inline mode`
 
 ```
-<cds-copy-button feedback="Copied!">
-  Copy to clipboard
-</cds-copy-button>
+<cds-copy button-class-name="cds--snippet cds--snippet--inline">
+  <code slot="icon">
+    <slot>
+    </slot>
+  </code>
+  <span slot="tooltip-content">
+    Copy to Clipboard
+  </span>
+</cds-copy>
 
 ```
 
@@ -59,20 +81,29 @@
 
 ```
 <div
-  aria-label="code-assistive-text-foo"
+  aria-label="code-snippet"
+  aria-multiline=""
+  aria-readonly="true"
   class="cds--snippet-container"
   role="textbox"
+  style=""
   tabindex="0"
 >
-  <code>
-    <pre>
+  <pre>
+    <code>
       <slot>
       </slot>
-    </pre>
-  </code>
+    </code>
+  </pre>
 </div>
-<cds-copy-button feedback="copy-button-feedback-text-foo">
-  copy-button-assistive-text-foo
+<div class="cds--snippet__overflow-indicator--right">
+</div>
+<cds-copy-button
+  button-class-name=""
+  feedback="Copied!"
+  feedback-timeout="2000"
+>
+  Copy to Clipboard
 </cds-copy-button>
 
 ```
@@ -81,20 +112,27 @@
 
 ```
 <div
-  aria-label="code-assistive-text-foo"
+  aria-label="code-snippet"
+  aria-multiline="true"
+  aria-readonly="true"
   class="cds--snippet-container"
   role="textbox"
+  style="max-height:240px;min-height:48px;"
   tabindex="0"
 >
-  <code>
-    <pre>
+  <pre>
+    <code>
       <slot>
       </slot>
-    </pre>
-  </code>
+    </code>
+  </pre>
 </div>
-<cds-copy-button feedback="copy-button-feedback-text-foo">
-  copy-button-assistive-text-foo
+<cds-copy-button
+  button-class-name=""
+  feedback="Copied!"
+  feedback-timeout="2000"
+>
+  Copy to Clipboard
 </cds-copy-button>
 
 ```
@@ -102,9 +140,15 @@
 ####   `Should render with various attributes for inline mode`
 
 ```
-<cds-copy-button feedback="copy-button-feedback-text-foo">
-  copy-button-assistive-text-foo
-</cds-copy-button>
+<cds-copy button-class-name="cds--snippet cds--snippet--inline">
+  <code slot="icon">
+    <slot>
+    </slot>
+  </code>
+  <span slot="tooltip-content">
+    Copy to Clipboard
+  </span>
+</cds-copy>
 
 ```
 
@@ -126,6 +170,9 @@
     </slot>
   </span>
 </button>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6575f00934 (fix(web-components): updated web-components tests)
 ```
 

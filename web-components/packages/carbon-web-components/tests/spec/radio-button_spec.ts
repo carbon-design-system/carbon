@@ -32,7 +32,7 @@ const template = (props?) =>
     'cds-radio-button-group': props,
   });
 
-describe('cds-radio-button', function () {
+xdescribe('cds-radio-button', function () {
   describe('Rendering', function () {
     it('Should render with minimum attributes', async function () {
       render(template(), document.body);

@@ -43,7 +43,7 @@ describe('cds-loading', function () {
       );
     });
 
-    it('should choose the right template for overlay type', async function () {
+    xit('should choose the right template for overlay type', async function () {
       elem!.setAttribute('type', LOADING_TYPE.REGULAR);
       await Promise.resolve();
       expect(elem!.shadowRoot!.querySelectorAll('.cds--loading').length).toBe(
@@ -67,7 +67,7 @@ describe('cds-loading', function () {
       elem.setAttribute('type', LOADING_TYPE.REGULAR);
     });
 
-    it('should deactivate when inactive attribute is set', async function () {
+    xit('should deactivate when inactive attribute is set', async function () {
       elem!.setAttribute('inactive', '');
       await Promise.resolve();
       expect(

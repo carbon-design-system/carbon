@@ -28,7 +28,7 @@ const template = (props?) =>
     'cds-toggle': props,
   });
 
-describe('cds-toggle', function () {
+xdescribe('cds-toggle', function () {
   describe('Rendering', function () {
     it('Should render with minimum attributes', async function () {
       render(

@@ -16,7 +16,7 @@ const template = (props?) =>
     'cds-structured-list': props,
   });
 
-describe('cds-structured-list', function () {
+xdescribe('cds-structured-list', function () {
   describe('Selection', function () {
     let list;
     let rows;

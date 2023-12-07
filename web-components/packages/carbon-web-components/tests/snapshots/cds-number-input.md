@@ -16,6 +16,7 @@
   <div class="cds--number__input-wrapper">
     <input
       aria-atomic="true"
+      autocomplete=""
       id="input"
       max="200"
       min="-100"
@@ -24,6 +25,8 @@
       step="1"
       type="number"
     >
+    <slot name="slug">
+    </slot>
     <div class="cds--number__controls">
       <button
         aria-atomic="true"

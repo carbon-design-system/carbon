@@ -6,7 +6,7 @@
 
 ```
 <button
-  class="cds--btn cds--btn--lg cds--btn--primary"
+  class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
   id="button"
   part="button"
   type="button"
@@ -23,7 +23,7 @@
 
 ```
 <button
-  class="cds--btn cds--btn--lg cds--btn--primary"
+  class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
   id="button"
   part="button"
   type="button"
@@ -40,7 +40,7 @@
 
 ```
 <button
-  class="cds--btn cds--btn--lg cds--btn--primary"
+  class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
   id="button"
   part="button"
   type="button"
@@ -57,7 +57,7 @@
 
 ```
 <button
-  class="cds--btn cds--btn--lg cds--btn--primary"
+  class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
   id="button"
   part="button"
   type="button"
@@ -74,7 +74,7 @@
 
 ```
 <button
-  class="cds--btn cds--btn--lg cds--btn--primary"
+  class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
   id="button"
   part="button"
   type="button"

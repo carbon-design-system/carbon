@@ -112,7 +112,7 @@ $css--plex: true !default;
       .#{$prefix}--inline-notification--warning-alt;
   }
 
-  /* TODO: Remove this once the following issue with icon fill is resolved: 
+  /* TODO: Remove this once the following issue with icon fill is resolved:
   ** https://github.com/carbon-design-system/carbon/issues/13616
   */
   .#{$prefix}--inline-notification__icon path[data-icon-path='inner-path'] {

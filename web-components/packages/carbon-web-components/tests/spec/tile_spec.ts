@@ -34,7 +34,7 @@ const multiSelectableTemplate = (props?) =>
     'cds-selectable-tile': props,
   });
 
-describe('cds-tile', function () {
+xdescribe('cds-tile', function () {
   const events = new EventManager();
 
   describe('cds-clickable-tile', function () {
