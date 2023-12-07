@@ -276,8 +276,12 @@ export const _Combobox = {
 };
 
 export const _ComposedModal = {
-  args: args,
-  argTypes: argTypes,
+  argTypes: {
+    slug: {
+      description:
+        '**Experimental**: Provide a `Slug` component to be rendered inside the component',
+    },
+  },
   render: () => (
     <div className="slug-modal">
       <ComposedModal slug={slug} open>
@@ -372,8 +376,12 @@ export const _FilterableMultiselect = {
 };
 
 export const _Modal = {
-  args: args,
-  argTypes: argTypes,
+  argTypes: {
+    slug: {
+      description:
+        '**Experimental**: Provide a `Slug` component to be rendered inside the component',
+    },
+  },
   render: () => (
     <div className="slug-modal">
       <Modal
