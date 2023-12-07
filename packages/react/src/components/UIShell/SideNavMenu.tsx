@@ -85,7 +85,6 @@ const SideNavMenu = React.forwardRef<HTMLElement, SideNavMenuProps>(
     const isRail = useContext(SideNavContext);
     const prefix = usePrefix();
     const [isExpanded, setIsExpanded] = useState<boolean>(defaultExpanded);
-    // const [prevExpanded, setPrevExpanded] = useState<boolean>(defaultExpanded);
     const className = cx({
       [`${prefix}--side-nav__item`]: true,
       [`${prefix}--side-nav__item--active`]:
