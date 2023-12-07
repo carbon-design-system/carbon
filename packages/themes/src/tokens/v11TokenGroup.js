@@ -367,6 +367,7 @@ export const ai = TokenGroup.create({
     'ai-gradient-start-01',
     'ai-gradient-start-02',
     'ai-gradient-end',
+    'slug-overlay',
   ],
 });
 

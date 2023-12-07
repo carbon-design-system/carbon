@@ -236,6 +236,8 @@ export const slugCalloutAuraEndSelected = rgba(gray100, 0);
 export const aiGradientStart01 = rgba(blue20, 0.2);
 export const aiGradientStart02 = 'transparent';
 export const aiGradientEnd = 'rgba(38, 38, 38, 0)';
+// Slug modal overlay
+export const slugOverlay = overlay;
 
 export {
   // Type
