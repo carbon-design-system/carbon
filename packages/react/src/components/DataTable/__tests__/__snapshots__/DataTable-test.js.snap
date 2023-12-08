@@ -501,6 +501,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
           role="search"
         >
           <div
+            aria-expanded="false"
             class="cds--search-magnifier"
             tabindex="-1"
           >
@@ -932,6 +933,7 @@ exports[`DataTable renders as expected - Component API should render and match s
           role="search"
         >
           <div
+            aria-expanded="false"
             class="cds--search-magnifier"
             tabindex="-1"
           >
