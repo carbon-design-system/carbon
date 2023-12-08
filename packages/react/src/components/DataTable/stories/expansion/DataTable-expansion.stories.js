@@ -124,9 +124,7 @@ export const ExpandButtonRight = () => (
           <TableBody>
             {rows.map((row) => (
               <React.Fragment key={row.id}>
-                <TableExpandRow
-                  {...getRowProps({ row })}
-                  expandButtonSide="right">
+                <TableExpandRow {...getRowProps({ row })} expandAlign="end">
                   {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}

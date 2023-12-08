@@ -54,9 +54,9 @@ interface TableExpandRowProps extends PropsWithChildren<TableRowProps> {
   onExpand: MouseEventHandler<HTMLButtonElement>;
 
   /**
-   * Specify side of expand button. Can be `left` or `right`.
+   * Specify side of expand button. Can be `start` or `end`.
    */
-  expandButtonSide: 'left' | 'right';
+  expandAlign: 'start' | 'end';
 }
 
 const TableExpandRow = React.forwardRef(
@@ -72,7 +72,7 @@ const TableExpandRow = React.forwardRef(
       expandIconDescription,
       isSelected,
       expandHeader = 'expand',
-      expandButtonSide = 'left',
+      expandAlign = 'start',
       ...rest
     }: TableExpandRowProps,
     ref: React.Ref<HTMLTableCellElement>
@@ -132,7 +132,7 @@ const TableExpandRow = React.forwardRef(
     );
 
     const cells =
-      expandButtonSide === 'left' ? (
+      expandAlign === 'start' ? (
         <>
           {expandCell}
           {normalizedChildren}
