@@ -95,56 +95,6 @@ export const Default = () => (
   </DataTable>
 );
 
-export const ExpandButtonRight = () => (
-  <DataTable rows={rows} headers={headers}>
-    {({
-      rows,
-      headers,
-      getHeaderProps,
-      getRowProps,
-      getExpandedRowProps,
-      getTableProps,
-      getTableContainerProps,
-    }) => (
-      <TableContainer
-        title="DataTable"
-        description="With expansion"
-        {...getTableContainerProps()}>
-        <Table {...getTableProps()} aria-label="sample table">
-          <TableHead>
-            <TableRow>
-              {headers.map((header, i) => (
-                <TableHeader key={i} {...getHeaderProps({ header })}>
-                  {header.header}
-                </TableHeader>
-              ))}
-              <TableExpandHeader aria-label="expand row" />
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <React.Fragment key={row.id}>
-                <TableExpandRow {...getRowProps({ row })} expandAlign="end">
-                  {row.cells.map((cell) => (
-                    <TableCell key={cell.id}>{cell.value}</TableCell>
-                  ))}
-                </TableExpandRow>
-                <TableExpandedRow
-                  colSpan={headers.length + 1}
-                  className="demo-expanded-td"
-                  {...getExpandedRowProps({ row })}>
-                  <h6>Expandable row content</h6>
-                  <div>Description here</div>
-                </TableExpandedRow>
-              </React.Fragment>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    )}
-  </DataTable>
-);
-
 export const BatchExpansion = () => (
   <DataTable
     rows={rows}
