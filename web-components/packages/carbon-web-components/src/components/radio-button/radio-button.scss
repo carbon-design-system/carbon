@@ -11,6 +11,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/radio-button/radio-button' as *;
 
@@ -58,8 +59,13 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-radio-button[orientation='vertical']) {
+  margin-block-end: to-rem(6px);
+  margin-inline-end: 0;
+}
+
 :host(#{$prefix}-radio-button[invalid]) .#{$prefix}--radio-button__appearance {
-  border-color: $support-error;
+  border-color: $support-error !important; /* stylelint-disable-line declaration-no-important */
 }
 
 :host(#{$prefix}-radio-button[data-table]) {
@@ -100,5 +106,25 @@ $css--plex: true !default;
   .#{$prefix}--radio-button__appearance {
     margin-right: 0;
     margin-left: $spacing-03;
+  }
+}
+
+:host(#{$prefix}-radio-button[slug]) {
+  .#{$prefix}--radio-button__label-text {
+    display: flex;
+  }
+}
+
+:host(#{$prefix}-radio-button-group) .#{$prefix}--radio-button-group--slug,
+:host(#{$prefix}-radio-button[slug]) {
+  ::slotted(#{$prefix}-slug) {
+    margin-inline-start: $spacing-03;
+  }
+}
+
+:host(#{$prefix}-radio-button[slug]) {
+  ::slotted(#{$prefix}-slug[inline]) {
+    line-height: inherit;
+    margin-block-start: to-rem(-1px);
   }
 }

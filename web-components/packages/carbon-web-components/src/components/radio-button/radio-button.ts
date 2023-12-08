@@ -120,7 +120,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
   /**
    * The hidden radio button.
    */
-  @query('#input')
+  @query('input')
   private _inputNode!: HTMLInputElement;
 
   /**
@@ -128,25 +128,31 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
    */
   @HostListener('click')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleClick = () => {
-    const { disabled, _radioButtonDelegate: radioButtonDelegate } = this;
-    if (radioButtonDelegate && !disabled && !this.disabledItem) {
-      this.checked = true;
-      if (this._manager) {
-        this._manager.select(radioButtonDelegate, this.readOnly);
+  private _handleClick = (event) => {
+    if (
+      !(event.target as HTMLElement).matches(
+        (this.constructor as typeof CDSRadioButton)?.slugItem
+      )
+    ) {
+      const { disabled, _radioButtonDelegate: radioButtonDelegate } = this;
+      if (radioButtonDelegate && !disabled && !this.disabledItem) {
+        this.checked = true;
+        if (this._manager) {
+          this._manager.select(radioButtonDelegate, this.readOnly);
+        }
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSRadioButton).eventChange,
+            {
+              bubbles: true,
+              composed: true,
+              detail: {
+                checked: this.checked,
+              },
+            }
+          )
+        );
       }
-      this.dispatchEvent(
-        new CustomEvent(
-          (this.constructor as typeof CDSRadioButton).eventChange,
-          {
-            bubbles: true,
-            composed: true,
-            detail: {
-              checked: this.checked,
-            },
-          }
-        )
-      );
     }
   };
 
@@ -156,25 +162,59 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
   @HostListener('keydown')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydown = (event: KeyboardEvent) => {
-    const { orientation, _radioButtonDelegate: radioButtonDelegate } = this;
-    const manager = this._manager;
-    if (radioButtonDelegate && manager) {
-      const navigationDirectionForKey =
-        orientation === RADIO_BUTTON_ORIENTATION.HORIZONTAL
-          ? navigationDirectionForKeyHorizontal
-          : navigationDirectionForKeyVertical;
-      const navigationDirection = navigationDirectionForKey[event.key];
-      if (navigationDirection) {
-        manager.select(
-          manager.navigate(radioButtonDelegate, navigationDirection),
-          this.readOnly
-        );
-      }
-      if (event.key === ' ' || event.key === 'Enter') {
-        manager.select(radioButtonDelegate, this.readOnly);
+    if (
+      !(event.target as HTMLElement).matches(
+        (this.constructor as typeof CDSRadioButton)?.slugItem
+      )
+    ) {
+      const { orientation, _radioButtonDelegate: radioButtonDelegate } = this;
+      const manager = this._manager;
+      if (radioButtonDelegate && manager) {
+        const navigationDirectionForKey =
+          orientation === RADIO_BUTTON_ORIENTATION.HORIZONTAL
+            ? navigationDirectionForKeyHorizontal
+            : navigationDirectionForKeyVertical;
+        const navigationDirection = navigationDirectionForKey[event.key];
+        if (navigationDirection) {
+          manager.select(
+            manager.navigate(radioButtonDelegate, navigationDirection),
+            this.readOnly
+          );
+        }
+        if (event.key === ' ' || event.key === 'Enter') {
+          manager.select(radioButtonDelegate, this.readOnly);
+        }
       }
     }
   };
+
+  /**
+   * Handles `slotchange` event.
+   */
+  protected _handleSlotChange({ target }: Event) {
+    const hasContent = (target as HTMLSlotElement)
+      .assignedNodes()
+      .filter((elem) =>
+        (elem as HTMLElement).matches !== undefined
+          ? (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSRadioButton).slugItem
+            )
+          : false
+      );
+
+    this._hasSlug = Boolean(hasContent);
+    const type = (hasContent[0] as HTMLElement).getAttribute('kind');
+    (hasContent[0] as HTMLElement).setAttribute(
+      'size',
+      type === 'inline' ? 'md' : 'mini'
+    );
+    this.requestUpdate();
+  }
+
+  /**
+   * `true` if there is a slug.
+   */
+  protected _hasSlug = false;
 
   /**
    * `true` if this radio button should be checked.
@@ -261,10 +301,12 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
 
   updated(changedProperties) {
     const {
+      _hasSlug: hasSlug,
       _inputNode: inputNode,
       _radioButtonDelegate: radioButtonDelegate,
       name,
     } = this;
+
     if (changedProperties.has('checked') || changedProperties.has('name')) {
       if (this.readOnly) {
         this.checked = false;
@@ -288,6 +330,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
           : '0'
       );
     }
+    hasSlug ? this.setAttribute('slug', '') : this.removeAttribute('slug');
   }
 
   render() {
@@ -301,11 +344,12 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
       disabledItem,
     } = this;
     const innerLabelClasses = classMap({
+      [`${prefix}--radio-button__label-text`]: true,
       [`${prefix}--visually-hidden`]: hideLabel,
     });
     return html`
       <input
-        id="input"
+        id="radio"
         type="radio"
         class="${prefix}--radio-button"
         .checked=${checked}
@@ -314,9 +358,19 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         value=${ifDefined(value)} />
       <label for="input" class="${prefix}--radio-button__label">
         <span class="${prefix}--radio-button__appearance"></span>
-        <span class="${innerLabelClasses}"><slot>${labelText}</slot></span>
+        <span class="${innerLabelClasses}"
+          >${labelText}
+          <slot name="slug" @slotchange="${this._handleSlotChange}"></slot
+        ></span>
       </label>
     `;
+  }
+
+  /**
+   * A selector that will return the slug item.
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
   }
 
   /**

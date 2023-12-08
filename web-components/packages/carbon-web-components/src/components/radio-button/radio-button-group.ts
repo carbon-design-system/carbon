@@ -73,6 +73,30 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
   }
 
   /**
+   * Handles `slotchange` event.
+   */
+  protected _handleSlotChange({ target }: Event) {
+    const hasContent = (target as HTMLSlotElement)
+      .assignedNodes()
+      .filter((elem) =>
+        (elem as HTMLElement).matches !== undefined
+          ? (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSRadioButtonGroup).slugItem
+            )
+          : false
+      );
+
+    this._hasSlug = Boolean(hasContent);
+    (hasContent[0] as HTMLElement).setAttribute('size', 'mini');
+    this.requestUpdate();
+  }
+
+  /**
+   * `true` if there is a slug.
+   */
+  protected _hasSlug = false;
+
+  /**
    * The `value` attribute for the `<input>` for selection.
    */
   @property()
@@ -189,6 +213,8 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
       orientation,
       legendText,
       helperText,
+      _hasSlug: hasSlug,
+      _handleSlotChange: handleSlotChange,
     } = this;
 
     const showWarning = !readOnly && !invalid && warn;
@@ -211,6 +237,7 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
       [`${prefix}--radio-button-group--readonly`]: readOnly,
       [`${prefix}--radio-button-group--${orientation}`]:
         orientation === 'vertical',
+      [`${prefix}--radio-button-group--slug`]: hasSlug,
     });
 
     return html` <fieldset
@@ -218,7 +245,10 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
         ?disabled="${disabled}"
         aria-readonly="${readOnly}">
         ${legendText
-          ? html` <legend class="${prefix}--label">${legendText}</legend>`
+          ? html` <legend class="${prefix}--label">
+              ${legendText}
+              <slot name="slug" @slotchange="${handleSlotChange}"></slot>
+            </legend>`
           : ``}
         <slot></slot>
       </fieldset>
@@ -242,6 +272,13 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
    */
   static get selectorRadioButton() {
     return `${prefix}-radio-button`;
+  }
+
+  /**
+   * A selector that will return the slug item.
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
   }
 
   /**

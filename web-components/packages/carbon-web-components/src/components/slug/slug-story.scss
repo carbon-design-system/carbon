@@ -47,7 +47,7 @@ hr {
 }
 
 div #{$prefix}-selectable-tile::-moz-list-bullet {
-  margin-block-end: 1rem;
+  margin-block-end: $spacing-05;
 }
 
 .slug-tile-container {
@@ -60,8 +60,8 @@ div #{$prefix}-selectable-tile::-moz-list-bullet {
   #{$prefix}-clickable-tile,
   #{$prefix}-tile {
     max-width: 320px;
-    margin-right: 3rem;
-    margin-bottom: 3rem;
+    margin-right: $spacing-09;
+    margin-bottom: $spacing-09;
   }
 
   #{$prefix}-expandable-tile,
@@ -73,12 +73,12 @@ div #{$prefix}-selectable-tile::-moz-list-bullet {
 }
 
 .slug-tile-container h4 {
-  margin-bottom: 1rem;
+  margin-bottom: $spacing-05;
 }
 
 .slug-tile-container .ai-data {
-  margin-top: 16px;
-  padding: 16px 0;
+  margin-top: $spacing-05;
+  padding: $spacing-05 0;
   display: flex;
 }
 
@@ -87,7 +87,7 @@ div #{$prefix}-selectable-tile::-moz-list-bullet {
 }
 
 .slug-tile-container .data-container:first-of-type {
-  margin-right: 16px;
+  margin-right: $spacing-05;
 }
 
 .slug-tile-container p {
@@ -98,17 +98,15 @@ div #{$prefix}-selectable-tile::-moz-list-bullet {
   @include type-style('label-02');
 }
 
-.slug-tile-container .arrow-right {
-  position: absolute;
-  bottom: 16px;
-  right: 16px;
-}
-
 .slug-tile-container #{$prefix}-tile-below-the-fold-content {
-  padding-top: 16px;
+  padding-top: $spacing-05;
 }
 
 .slug-tile-container #{$prefix}-tile-below-the-fold-content p {
   @include type-style('label-01');
-  margin: 8px 0 50px;
+  margin: $spacing-03 0 50px;
+}
+
+#{$prefix}-radio-button-group:not(:first-of-type) {
+  margin-top: $spacing-07;
 }

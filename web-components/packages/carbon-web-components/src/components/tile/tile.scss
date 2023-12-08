@@ -251,6 +251,6 @@ $css--plex: true !default;
   @extend .#{$prefix}--tile--slug-rounded;
 
   .#{$prefix}--tile__chevron {
-    border-bottom-right-radius: 1rem;
+    border-bottom-right-radius: $spacing-05;
   }
 }
