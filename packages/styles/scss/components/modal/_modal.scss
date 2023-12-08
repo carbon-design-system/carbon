@@ -499,6 +499,8 @@
         > button:not(:only-child)
     ) {
     @include callout-gradient('default', 64px);
+
+    background-color: $layer;
   }
 
   .#{$prefix}--modal--slug .#{$prefix}--slug {

@@ -277,7 +277,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     const modalClass = cx(
       `${prefix}--modal`,
       {
-        'is-visible': open,
+        'is-visible': isOpen,
         [`${prefix}--modal--danger`]: danger,
         [`${prefix}--modal--slug`]: slug,
       },
