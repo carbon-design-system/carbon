@@ -77,6 +77,15 @@
       transform $duration-moderate-01 motion(standard, productive);
   }
 
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:has(
+      td:last-child.#{$prefix}--table-expand
+    )
+    + tr[data-child-row]
+    td {
+    padding-inline-end: 3.5rem;
+    padding-inline-start: 1rem;
+  }
+
   // Increase padding inside expandable row when only a slug OR checkbox is present in row
   tbody:has(> tr.#{$prefix}--parent-row--slug)
     > tr.#{$prefix}--expandable-row[data-child-row]
