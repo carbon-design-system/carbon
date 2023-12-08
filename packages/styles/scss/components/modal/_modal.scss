@@ -486,15 +486,10 @@
   }
 
   // Slug styles
-  .#{$prefix}--modal.#{$prefix}--modal--slug {
-    background: $slug-overlay;
-  }
-
   .#{$prefix}--modal--slug .#{$prefix}--modal-container {
-    @include ai-gradient('bottom', 50%);
+    @include callout-gradient('default');
 
-    box-shadow: 0 -45px 100px 0 rgba(0, 0, 0, 0.25),
-      0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    background-color: $layer;
   }
 
   // Start the gradient 64px from bottom only when two buttons are present
@@ -503,7 +498,7 @@
       .#{$prefix}--btn-set:not(.#{$prefix}--modal-footer--three-button)
         > button:not(:only-child)
     ) {
-    @include ai-gradient('bottom', 50%, 64px);
+    @include callout-gradient('default', 64px);
   }
 
   .#{$prefix}--modal--slug .#{$prefix}--slug {
