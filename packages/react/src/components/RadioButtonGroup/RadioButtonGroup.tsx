@@ -93,7 +93,7 @@ export interface RadioButtonGroupProps
   readOnly?: boolean;
 
   /**
-   * Provide a `Slug` component to be rendered inside the `RadioButtonGroup` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `RadioButtonGroup` component
    */
   slug?: ReactNodeLike;
 
@@ -216,7 +216,7 @@ const RadioButtonGroup = React.forwardRef(
 
     // Slug is always size `mini`
     let normalizedSlug;
-    if (slug) {
+    if (slug && slug['type']?.displayName === 'Slug') {
       normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
         size: 'mini',
         kind: 'default',
@@ -332,7 +332,7 @@ RadioButtonGroup.propTypes = {
   readOnly: PropTypes.bool,
 
   /**
-   * Provide a `Slug` component to be rendered inside the `RadioButtonGroup` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `RadioButtonGroup` component
    */
   slug: PropTypes.node,
 

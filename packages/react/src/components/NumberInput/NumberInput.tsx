@@ -166,7 +166,7 @@ export interface NumberInputProps
   size?: 'sm' | 'md' | 'lg';
 
   /**
-   * Provide a `Slug` component to be rendered inside the `TextInput` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `TextInput` component
    */
   slug?: ReactNodeLike;
 
@@ -361,7 +361,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 
     // Slug is always size `mini`
     let normalizedSlug;
-    if (slug) {
+    if (slug && slug['type']?.displayName === 'Slug') {
       normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
         size: 'mini',
       });
@@ -369,7 +369,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 
     // Need to update the internal value when the revert button is clicked
     let isRevertActive;
-    if (slug) {
+    if (slug && slug['type']?.displayName === 'Slug') {
       isRevertActive = normalizedSlug.props.revertActive;
     }
 
@@ -590,7 +590,7 @@ NumberInput.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
-   * Provide a `Slug` component to be rendered inside the `NumberInput` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `NumberInput` component
    */
   slug: PropTypes.node,
 
