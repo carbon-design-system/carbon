@@ -14,6 +14,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/tile/index' as *;
 @use '@carbon/styles/scss/components/link/index' as *;
 @use '@carbon/styles/scss/components/form/index' as *;
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/layout' as *;
 
@@ -55,6 +56,7 @@ $css--plex: true !default;
   .#{$prefix}--tile--clickable {
     @extend .#{$prefix}--tile--clickable;
     // Overrides what `.#{$prefix}--link` defines
+    display: block;
     transition: $duration-moderate-01 motion(standard, productive);
 
     &:focus {
@@ -82,6 +84,7 @@ $css--plex: true !default;
   @include emit-layout-tokens();
 
   display: content;
+  position: relative;
   outline: none;
 
   .#{$prefix}--tile__chevron {
@@ -96,6 +99,13 @@ $css--plex: true !default;
     .#{$prefix}--tile__checkmark {
     opacity: 1;
   }
+}
+
+:host(#{$prefix}-clickable-tile) ::slotted(*),
+:host(#{$prefix}-selectable-tile) ::slotted(*) {
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
 }
 
 :host(#{$prefix}-expandable-tile) {
@@ -152,4 +162,95 @@ $css--plex: true !default;
 :host(#{$prefix}-tile[color-scheme='light']),
 :host(#{$prefix}-expandable-tile[color-scheme='light']) {
   @extend .#{$prefix}--tile--light;
+}
+
+// Slug styles
+:host(#{$prefix}-tile[slug]),
+:host(#{$prefix}-expandable-tile[slug]),
+:host(#{$prefix}-clickable-tile[slug]) .#{$prefix}--tile,
+:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile {
+  @include callout-gradient();
+
+  border: 1px solid $border-tile;
+}
+
+:host(#{$prefix}-tile),
+:host(#{$prefix}-expandable-tile),
+:host(#{$prefix}-clickable-tile),
+:host(#{$prefix}-selectable-tile) {
+  ::slotted(#{$prefix}-slug) {
+    position: absolute;
+    inset-block-start: $spacing-05;
+    inset-inline-end: $spacing-05;
+  }
+}
+
+:host(#{$prefix}-expandable-tile[slug]):hover {
+  @include callout-gradient();
+}
+
+:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile::before,
+:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile::after,
+:host(#{$prefix}-clickable-tile[slug]) .#{$prefix}--tile::before {
+  position: absolute;
+  display: block;
+  block-size: 100%;
+  content: '';
+  inline-size: 100%;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  opacity: 0;
+  transition: opacity $duration-fast-02 motion(standard, productive);
+}
+
+:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile::before,
+:host(#{$prefix}-clickable-tile[slug]) .#{$prefix}--tile::before {
+  @include callout-gradient('hover');
+}
+
+:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile:hover::before,
+:host(#{$prefix}-clickable-tile[slug]) .#{$prefix}--tile:hover::before {
+  opacity: 1;
+}
+
+:host(#{$prefix}-selectable-tile) {
+  ::slotted(#{$prefix}-slug) {
+    inset-inline-end: $spacing-08;
+  }
+}
+
+:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile--is-selected {
+  border: 1px solid $layer-selected-inverse;
+  .#{$prefix}--tile__checkmark {
+    z-index: 1;
+  }
+}
+
+:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile--is-selected::after {
+  @include callout-gradient('selected');
+}
+
+:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile--is-selected::after {
+  opacity: 1;
+}
+
+:host(#{$prefix}-clickable-tile) {
+  ::slotted(#{$prefix}-slug) {
+    pointer-events: none;
+  }
+}
+
+:host(#{$prefix}-expandable-tile[slug]) {
+  overflow: visible;
+}
+
+:host(#{$prefix}-tile[slug][has-rounded-corners]),
+:host(#{$prefix}-expandable-tile[slug][has-rounded-corners]),
+:host(#{$prefix}-clickable-tile[slug][has-rounded-corners]),
+:host(#{$prefix}-selectable-tile[slug][has-rounded-corners]) {
+  @extend .#{$prefix}--tile--slug-rounded;
+
+  .#{$prefix}--tile__chevron {
+    border-bottom-right-radius: 1rem;
+  }
 }

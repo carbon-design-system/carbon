@@ -66,7 +66,7 @@ export default class CDSSlug extends CDSToggleTip {
    * Slug size should be mini, 2xs, xs, sm, md, lg, xl.
    */
   @property({ reflect: true })
-  size = SLUG_SIZE.MEDIUM;
+  size = SLUG_SIZE.EXTRA_SMALL;
 
   /**
    * Specify the text that will be provided to the aria-label of the `Slug` button

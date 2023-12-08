@@ -70,7 +70,7 @@
 }
 
 :host(#{$prefix}-slug[open]) {
-  z-index: 1;
+  z-index: 2;
 }
 
 :host(#{$prefix}-slug-action-button) {

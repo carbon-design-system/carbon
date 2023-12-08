@@ -8,11 +8,14 @@
  */
 
 import { html } from 'lit';
+import { boolean } from '@storybook/addon-knobs';
 import View16 from '@carbon/icons/lib/view/16';
 import FolderOpen16 from '@carbon/icons/lib/folder--open/16';
 import Folders16 from '@carbon/icons/lib/folders/16';
+import { prefix } from '../../globals/settings';
 import './index';
 import '../icon-button/index';
+import styles from './slug-story.scss';
 
 const items = [
   {
@@ -78,106 +81,123 @@ export default {
 };
 
 export const _Combobox = () => {
-  return html` <div style="width: 400px">
-    <cds-combo-box
-      helper-text="This is some helper text"
-      title-text="Combo box title"
-      label="Filter...">
-      <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+  return html` <style>
+      ${styles}
+    </style>
+    <div style="width: 400px">
+      <cds-combo-box
+        helper-text="This is some helper text"
+        title-text="Combo box title"
+        label="Filter...">
+        <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
 
-      <cds-combo-box-item value="all">Option 1</cds-combo-box-item>
-      <cds-combo-box-item value="cloudFoundry">Option 2</cds-combo-box-item>
-      <cds-combo-box-item value="staging">Option 3</cds-combo-box-item>
-      <cds-combo-box-item value="dea">Option 4</cds-combo-box-item>
-      <cds-combo-box-item value="router">Option 5</cds-combo-box-item>
-      <cds-combo-box-item value="support">Option 6</cds-combo-box-item>
-      <cds-combo-box-item value="services">Option 7</cds-combo-box-item>
-      <cds-combo-box-item value="products">Option 8</cds-combo-box-item>
-    </cds-combo-box>
-  </div>`;
+        <cds-combo-box-item value="all">Option 1</cds-combo-box-item>
+        <cds-combo-box-item value="cloudFoundry">Option 2</cds-combo-box-item>
+        <cds-combo-box-item value="staging">Option 3</cds-combo-box-item>
+        <cds-combo-box-item value="dea">Option 4</cds-combo-box-item>
+        <cds-combo-box-item value="router">Option 5</cds-combo-box-item>
+        <cds-combo-box-item value="support">Option 6</cds-combo-box-item>
+        <cds-combo-box-item value="services">Option 7</cds-combo-box-item>
+        <cds-combo-box-item value="products">Option 8</cds-combo-box-item>
+      </cds-combo-box>
+    </div>`;
 };
 
 export const _DatePicker = () => {
-  return html` <div style="width: 400px">
-    <cds-date-picker>
-      <cds-date-picker-input
-        kind="single"
-        label-text="Date Picker label"
-        placeholder="mm/dd/yyyy">
-        <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
-      </cds-date-picker-input>
-    </cds-date-picker>
-  </div>`;
+  return html` <style>
+      ${styles}
+    </style>
+    <div style="width: 400px">
+      <cds-date-picker>
+        <cds-date-picker-input
+          kind="single"
+          label-text="Date Picker label"
+          placeholder="mm/dd/yyyy">
+          <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+        </cds-date-picker-input>
+      </cds-date-picker>
+    </div>`;
 };
 
 export const _Dropdown = () => {
-  return html` <div style="width: 400px">
-    <cds-dropdown
-      helper-text="This is some helper text"
-      title-text="Dropdown label"
-      label="Dropdown menu options">
-      <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
-      ${items.map(
-        (elem) => html`
-          <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
-            >${elem.text}</cds-dropdown-item
-          >
-        `
-      )}
-    </cds-dropdown>
-  </div>`;
+  return html` <style>
+      ${styles}
+    </style>
+    <div style="width: 400px">
+      <cds-dropdown
+        helper-text="This is some helper text"
+        title-text="Dropdown label"
+        label="Dropdown menu options">
+        <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+        ${items.map(
+          (elem) => html`
+            <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
+              >${elem.text}</cds-dropdown-item
+            >
+          `
+        )}
+      </cds-dropdown>
+    </div>`;
 };
 
 export const _Multiselect = () => {
-  return html` <div style="width: 400px">
-    <cds-multi-select
-      title-text="Multiselect title"
-      label="Multiselect label"
-      helper-text="This is helper text">
-      <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
-      <cds-multi-select-item value="example">
-        An example option that is really long to show what should be done to
-        handle long text</cds-multi-select-item
-      >
-      <cds-multi-select-item value="all">Option 1</cds-multi-select-item>
-      <cds-multi-select-item value="cloudFoundry"
-        >Option 2</cds-multi-select-item
-      >
-      <cds-multi-select-item disabled value="staging"
-        >Option 3 - a disabled item</cds-multi-select-item
-      >
-      <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
-      <cds-multi-select-item value="router">Option 5</cds-multi-select-item>
-    </cds-multi-select>
-  </div>`;
+  return html` <style>
+      ${styles}
+    </style>
+    <div style="width: 400px">
+      <cds-multi-select
+        title-text="Multiselect title"
+        label="Multiselect label"
+        helper-text="This is helper text">
+        <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+        <cds-multi-select-item value="example">
+          An example option that is really long to show what should be done to
+          handle long text</cds-multi-select-item
+        >
+        <cds-multi-select-item value="all">Option 1</cds-multi-select-item>
+        <cds-multi-select-item value="cloudFoundry"
+          >Option 2</cds-multi-select-item
+        >
+        <cds-multi-select-item disabled value="staging"
+          >Option 3 - a disabled item</cds-multi-select-item
+        >
+        <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
+        <cds-multi-select-item value="router">Option 5</cds-multi-select-item>
+      </cds-multi-select>
+    </div>`;
 };
 
 export const _FilterableMultiselect = () => {
-  return html` <div style="width: 400px">
-    <cds-multi-select
-      filterable="true"
-      title-text="FilterableMultiselect title"
-      helper-text="This is helper text">
-      <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
-      <cds-multi-select-item value="example"
-        >An example option that is really long to show what should be done to
-        handle long text</cds-multi-select-item
-      >
-      <cds-multi-select-item value="all">Option 1</cds-multi-select-item>
-      <cds-multi-select-item value="cloudFoundry"
-        >Option 2</cds-multi-select-item
-      >
-      <cds-multi-select-item disabled value="staging"
-        >Option 3 - a disabled item</cds-multi-select-item
-      >
-      <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
-      <cds-multi-select-item value="router">Option 5</cds-multi-select-item>
-    </cds-multi-select>
-  </div>`;
+  return html` <style>
+      ${styles}
+    </style>
+    <div style="width: 400px">
+      <cds-multi-select
+        filterable="true"
+        title-text="FilterableMultiselect title"
+        helper-text="This is helper text">
+        <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+        <cds-multi-select-item value="example"
+          >An example option that is really long to show what should be done to
+          handle long text</cds-multi-select-item
+        >
+        <cds-multi-select-item value="all">Option 1</cds-multi-select-item>
+        <cds-multi-select-item value="cloudFoundry"
+          >Option 2</cds-multi-select-item
+        >
+        <cds-multi-select-item disabled value="staging"
+          >Option 3 - a disabled item</cds-multi-select-item
+        >
+        <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
+        <cds-multi-select-item value="router">Option 5</cds-multi-select-item>
+      </cds-multi-select>
+    </div>`;
 };
 
 export const _NumberItem = () => {
-  return html`
+  return html`<style>
+      ${styles}
+    </style>
     <div style="width: 400px">
       <cds-number-input
         value="50"
@@ -187,12 +207,13 @@ export const _NumberItem = () => {
         label="Number input">
         <cds-slug alignment="bottom-left"> ${content}${actions} </cds-slug>
       </cds-number-input>
-    </div>
-  `;
+    </div> `;
 };
 
 export const _Select = () => {
-  return html`
+  return html`<style>
+      ${styles}
+    </style>
     <div style="width: 400px">
       <cds-select
         helper-text="Optional helper text"
@@ -209,26 +230,143 @@ export const _Select = () => {
           <cds-select-item value="router">Option 5</cds-select-item>
         </cds-select-item-group>
       </cds-select>
-    </div>
-  `;
+    </div> `;
 };
 
 export const _TextInput = () => {
-  return html`
+  return html`<style>
+      ${styles}
+    </style>
     <div style="width: 400px">
       <cds-text-input label="Text input label" placeholder="Placeholder text">
         <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
       </cds-text-input>
-    </div>
-  `;
+    </div> `;
 };
 
 export const _TextArea = () => {
-  return html`
+  return html`<style>
+      ${styles}
+    </style>
     <div style="width: 400px">
       <cds-textarea label="Text input label" placeholder="Placeholder text">
         <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
       </cds-textarea>
-    </div>
-  `;
+    </div> `;
+};
+
+export const _Tile = (args) => {
+  const { hasRoundedCorners } = args?.['cds-tile'] ?? {};
+  return html`<style>
+      ${styles}
+    </style>
+    <div class="slug-tile-container">
+      <cds-tile ?has-rounded-corners="${hasRoundedCorners}">
+        <div class="tile-container">
+          <h4>Title</h4>
+          <p>
+            Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
+            at consectetur turpis mauris gravida penatibus.
+          </p>
+          <div class="ai-data">
+            <div class="data-container">
+              <p>Data Quality</p>
+              <h3>85%</h3>
+            </div>
+            <div class="data-container">
+              <p>Label text</p>
+              <h3>16%</h3>
+            </div>
+          </div>
+        </div>
+        <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+      </cds-tile>
+
+      <cds-clickable-tile
+        href="https://example.com"
+        slug
+        ?has-rounded-corners="${hasRoundedCorners}">
+        <div class="tile-container">
+          <h4>Title</h4>
+          <p>
+            Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
+            at consectetur turpis mauris gravida penatibus.
+          </p>
+          <div class="ai-data">
+            <div class="data-container">
+              <p>Data Quality</p>
+              <h3>85%</h3>
+            </div>
+            <div class="data-container">
+              <p>Label text</p>
+              <h3>16%</h3>
+            </div>
+          </div>
+        </div>
+      </cds-clickable-tile>
+
+      <cds-selectable-tile ?has-rounded-corners="${hasRoundedCorners}">
+        <div class="tile-container">
+          <h4>Title</h4>
+          <p>
+            Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
+            at consectetur turpis mauris gravida penatibus.
+          </p>
+          <div class="ai-data">
+            <div class="data-container">
+              <p>Data Quality</p>
+              <h3>85%</h3>
+            </div>
+            <div class="data-container">
+              <p>Label text</p>
+              <h3>16%</h3>
+            </div>
+          </div>
+        </div>
+        <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+      </cds-selectable-tile>
+
+      <cds-expandable-tile
+        with-interactive
+        ?has-rounded-corners="${hasRoundedCorners}">
+        <cds-tile-above-the-fold-content slot="above-the-fold-content">
+          <div class="tile-container">
+            <h4>Title</h4>
+            <p>
+              Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
+              at consectetur turpis mauris gravida penatibus.
+            </p>
+            <div class="ai-data">
+              <div class="data-container">
+                <p>Data Quality</p>
+                <h3>85%</h3>
+              </div>
+              <div class="data-container">
+                <p>Label text</p>
+                <h3>16%</h3>
+              </div>
+            </div>
+          </div>
+        </cds-tile-above-the-fold-content>
+        <cds-tile-below-the-fold-content>
+          <h6>Expanded Section</h6>
+          <p>
+            Lorem ipsum dolor sit amet consectetur. Posuere duis fermentum sit
+            at consectetur turpis mauris.
+          </p>
+        </cds-tile-below-the-fold-content>
+        <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+      </cds-expandable-tile>
+    </div> `;
+};
+
+_Tile.parameters = {
+  knobs: {
+    [`${prefix}-tile`]: () => ({
+      hasRoundedCorners: boolean(
+        'hasRoundedCorners (has-rounded-corners)',
+        false
+      ),
+    }),
+  },
 };

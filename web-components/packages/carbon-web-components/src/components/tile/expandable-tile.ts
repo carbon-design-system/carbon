@@ -37,6 +37,32 @@ class CDSExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   private _belowTheContentHeight = 0;
 
   /**
+   * `true` if there is a slug.
+   */
+  protected _hasSlug = false;
+
+  /**
+   * Handles `slotchange` event.
+   */
+  protected _handleSlotChange({ target }: Event) {
+    const hasContent = (target as HTMLSlotElement)
+      .assignedNodes()
+      .filter((elem) =>
+        (elem as HTMLElement).matches !== undefined
+          ? (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSExpandableTile)?.slugItem
+            )
+          : false
+      );
+
+    if (hasContent.length > 0) {
+      this._hasSlug = Boolean(hasContent);
+      (hasContent[0] as HTMLElement).setAttribute('size', 'xs');
+    }
+    this.requestUpdate();
+  }
+
+  /**
    * Handles `slotchange` event on the below-the-fold content.
    *
    * @param event The event.
@@ -101,10 +127,25 @@ class CDSExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   expanded = false;
 
   /**
+   * Specify if the `ExpandableTile` component should be rendered with rounded corners.
+   * Only valid when `slug` prop is present
+   */
+  @property({ type: Boolean, attribute: 'has-rounded-corners' })
+  hasRoundedCorners = false;
+
+  /**
    * `true` to expand this expandable tile.
    */
   @property({ type: Boolean, reflect: true, attribute: 'with-interactive' })
   withInteractive = false;
+
+  updated() {
+    if (this._hasSlug) {
+      this.setAttribute('slug', '');
+    } else {
+      this.removeAttribute('slug');
+    }
+  }
 
   render() {
     const {
@@ -130,6 +171,7 @@ class CDSExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
           id: 'icon',
         })}
       </button>
+      <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
       <div id="content" class="${prefix}--tile-content">
         <div><slot name="above-the-fold-content"></slot></div>
         <div
@@ -141,6 +183,13 @@ class CDSExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
         </div>
       </div>
     `;
+  }
+
+  /**
+   * A selector that will return the slug item.
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
   }
 
   /**

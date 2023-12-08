@@ -10,6 +10,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/config' as *;
 
 .slug-container {
   display: flex;
@@ -43,4 +44,71 @@ hr {
   background: $border-subtle;
   margin-top: $spacing-07;
   margin-bottom: $spacing-07;
+}
+
+div #{$prefix}-selectable-tile::-moz-list-bullet {
+  margin-block-end: 1rem;
+}
+
+.slug-tile-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+
+  #{$prefix}-expandable-tile,
+  #{$prefix}-selectable-tile,
+  #{$prefix}-clickable-tile,
+  #{$prefix}-tile {
+    max-width: 320px;
+    margin-right: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  #{$prefix}-expandable-tile,
+  #{$prefix}-selectable-tile .tile-container,
+  #{$prefix}-clickable-tile .tile-container,
+  #{$prefix}-tile {
+    padding-bottom: 90px;
+  }
+}
+
+.slug-tile-container h4 {
+  margin-bottom: 1rem;
+}
+
+.slug-tile-container .ai-data {
+  margin-top: 16px;
+  padding: 16px 0;
+  display: flex;
+}
+
+.slug-tile-container .data-container {
+  width: 126px;
+}
+
+.slug-tile-container .data-container:first-of-type {
+  margin-right: 16px;
+}
+
+.slug-tile-container p {
+  @include type-style('body-01');
+}
+
+.slug-tile-container .data-container p {
+  @include type-style('label-02');
+}
+
+.slug-tile-container .arrow-right {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+}
+
+.slug-tile-container #{$prefix}-tile-below-the-fold-content {
+  padding-top: 16px;
+}
+
+.slug-tile-container #{$prefix}-tile-below-the-fold-content p {
+  @include type-style('label-01');
+  margin: 8px 0 50px;
 }

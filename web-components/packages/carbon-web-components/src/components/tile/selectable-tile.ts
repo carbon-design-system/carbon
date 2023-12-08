@@ -38,6 +38,31 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   protected _inputType = 'checkbox';
 
   /**
+   * `true` if there is a slug.
+   */
+  protected _hasSlug = false;
+
+  /**
+   * Handles `slotchange` event.
+   */
+  protected _handleSlotChange({ target }: Event) {
+    const hasContent = (target as HTMLSlotElement)
+      .assignedNodes()
+      .filter((elem) =>
+        (elem as HTMLElement).matches !== undefined
+          ? (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSSelectableTile)?.slugItem
+            )
+          : false
+      );
+    if (hasContent.length > 0) {
+      this._hasSlug = Boolean(hasContent);
+      (hasContent[0] as HTMLElement).setAttribute('size', 'xs');
+    }
+    this.requestUpdate();
+  }
+
+  /**
    * Handles `change` event on the `<input>` in the shadow DOM.
    */
   protected _handleChange() {
@@ -85,7 +110,13 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   private _handleKeydown = (event: KeyboardEvent) => {
     const { key } = event;
 
-    if (key === ' ' || key === 'Enter') {
+    if (
+      key === ' ' ||
+      (key === 'Enter' &&
+        !(event.target as HTMLElement)?.matches(
+          (this.constructor as typeof CDSSelectableTile).slugItem
+        ))
+    ) {
       this.selected = !this.selected;
     }
   };
@@ -101,6 +132,13 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
    */
   @property({ attribute: 'color-scheme', reflect: true })
   colorScheme = TILE_COLOR_SCHEME.REGULAR;
+
+  /**
+   * Specify if the `SeletableTile` component should be rendered with rounded corners.
+   * Only valid when `slug` prop is present
+   */
+  @property({ type: Boolean, attribute: 'has-rounded-corners' })
+  hasRoundedCorners = false;
 
   /**
    * The form name.
@@ -120,20 +158,31 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   @property()
   value!: string;
 
+  updated() {
+    if (this._hasSlug) {
+      this.setAttribute('slug', '');
+    } else {
+      this.removeAttribute('slug');
+    }
+  }
+
   render() {
     const {
       colorScheme,
+      hasRoundedCorners: hasRoundedCorners,
       name,
       selected,
       value,
       _inputType: inputType,
       _handleChange: handleChange,
+      _hasSlug: hasSlug,
     } = this;
     const classes = classMap({
       [`${prefix}--tile`]: true,
       [`${prefix}--tile--selectable`]: true,
       [`${prefix}--tile--is-selected`]: selected,
       [`${prefix}--tile--${colorScheme}`]: colorScheme,
+      [`${prefix}--tile--slug-rounded`]: hasSlug && hasRoundedCorners,
     });
     return html`
       <input
@@ -152,7 +201,15 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
         </div>
         <div class="${prefix}--tile-content"><slot></slot></div>
       </label>
+      <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
     `;
+  }
+
+  /**
+   * A selector that will return the slug item.
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
   }
 
   /**
