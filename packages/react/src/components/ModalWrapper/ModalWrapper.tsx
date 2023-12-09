@@ -6,16 +6,50 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Modal from '../Modal';
 import Button from '../Button';
-import { ButtonKinds } from '../../prop-types/types';
 import { warning } from '../../internal/warning';
+import { ButtonKinds } from '../Button';
 import { noopFn } from '../../internal/noopFn';
+import { keys, match } from '../../internal/keyboard';
+
+interface ModalWrapperProps {
+  buttonTriggerClassName?: string;
+  buttonTriggerText?: ReactNode;
+  children?: ReactNode;
+  disabled?: boolean;
+  handleOpen?: React.MouseEventHandler<HTMLButtonElement>;
+  handleSubmit?: React.ReactEventHandler<HTMLElement>;
+  id?: string;
+  modalBeforeContent?: boolean;
+  modalHeading?: string;
+  modalLabel?: string;
+  modalText?: string;
+  onKeyDown?: React.KeyboardEventHandler<HTMLDivElement>;
+  passiveModal?: boolean;
+  preventCloseOnClickOutside?: boolean;
+  primaryButtonText?: string;
+  renderTriggerButtonIcon: React.ElementType;
+  secondaryButtonText?: string;
+  selectorPrimaryFocus?: string;
+  shouldCloseAfterSubmit?: boolean;
+  status?: string;
+  triggerButtonIconDescription?: string;
+  triggerButtonKind: (typeof ButtonKinds)[number];
+  withHeader?: boolean;
+}
+
+interface ModelWrapperState {
+  isOpen: boolean;
+}
 
 let didWarnAboutDeprecation = false;
 
-export default class ModalWrapper extends React.Component {
+export default class ModalWrapper extends React.Component<
+  ModalWrapperProps,
+  ModelWrapperState
+> {
   if(__DEV__) {
     warning(
       didWarnAboutDeprecation,
@@ -53,8 +87,8 @@ export default class ModalWrapper extends React.Component {
     withHeader: PropTypes.bool,
   };
 
-  triggerButton = React.createRef();
-  modal = React.createRef();
+  triggerButton = React.createRef<HTMLButtonElement>();
+  modal = React.createRef<HTMLDivElement>();
 
   state = {
     isOpen: false,
@@ -66,31 +100,31 @@ export default class ModalWrapper extends React.Component {
     });
   };
 
-  handleClose = (evt) => {
-    const innerModal = this.modal.current.querySelector('div');
+  handleClose = (evt: React.KeyboardEvent<HTMLDivElement>) => {
+    const innerModal = this.modal.current?.querySelector('div');
     if (
       this.modal.current &&
       evt &&
-      !innerModal.contains(evt.target) &&
+      !innerModal?.contains(evt.target as Node) &&
       this.props.preventCloseOnClickOutside
     ) {
       return;
     } else {
       this.setState({ isOpen: false }, () =>
-        this.triggerButton.current.focus()
+        this.triggerButton.current?.focus()
       );
     }
   };
 
-  handleOnRequestSubmit = () => {
+  handleOnRequestSubmit = (evt: React.KeyboardEvent<HTMLDivElement>) => {
     const { handleSubmit, shouldCloseAfterSubmit } = this.props;
 
     if (handleSubmit && shouldCloseAfterSubmit) {
-      handleSubmit();
-      this.handleClose();
+      handleSubmit(evt);
+      this.handleClose(evt);
     }
 
-    handleSubmit();
+    handleSubmit?.(evt);
   };
 
   render() {
@@ -105,10 +139,10 @@ export default class ModalWrapper extends React.Component {
       triggerButtonIconDescription = 'Provide icon description if icon is used',
       triggerButtonKind = 'primary',
       disabled = false,
-      handleSubmit, // eslint-disable-line no-unused-vars
-      shouldCloseAfterSubmit = true, // eslint-disable-line no-unused-vars
+      handleSubmit, // eslint-disable-line @typescript-eslint/no-unused-vars
+      shouldCloseAfterSubmit = true, // eslint-disable-line @typescript-eslint/no-unused-vars
       selectorPrimaryFocus = '[data-modal-primary-focus]',
-      preventCloseOnClickOutside = false, // eslint-disable-line no-unused-vars
+      preventCloseOnClickOutside = false, // eslint-disable-line @typescript-eslint/no-unused-vars
       ...other
     } = this.props;
 
@@ -124,8 +158,8 @@ export default class ModalWrapper extends React.Component {
       <div
         role="presentation"
         onKeyDown={(evt) => {
-          if (evt.which === 27) {
-            this.handleClose();
+          if (match(evt, keys.Escape)) {
+            this.handleClose(evt);
             onKeyDown(evt);
           }
         }}>
