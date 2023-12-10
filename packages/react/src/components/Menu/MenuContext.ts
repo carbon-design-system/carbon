@@ -7,7 +7,23 @@
 
 import React from 'react';
 
-const menuDefaultState = {
+type ActionType = {
+  type: 'enableIcons' | 'registerItem';
+  payload: any;
+};
+
+type StateType = {
+  isRoot: boolean;
+  mode: 'full' | 'basic';
+  hasIcons: boolean;
+  size: 'xs' | 'sm' | 'md' | 'lg' | null;
+  items: any[];
+  requestCloseRoot: (
+    e: Pick<React.KeyboardEvent<HTMLUListElement>, 'type'>
+  ) => void;
+};
+
+const menuDefaultState: StateType = {
   isRoot: true,
   mode: 'full',
   hasIcons: false,
@@ -16,7 +32,7 @@ const menuDefaultState = {
   requestCloseRoot: () => {},
 };
 
-function menuReducer(state, action) {
+function menuReducer(state: StateType, action: ActionType) {
   switch (action.type) {
     case 'enableIcons':
       return {
@@ -33,9 +49,11 @@ function menuReducer(state, action) {
   }
 }
 
-const MenuContext = React.createContext({
+const MenuContext = React.createContext<{
+  state: StateType;
+  dispatch: React.Dispatch<any>;
+}>({
   state: menuDefaultState,
-
   // 'dispatch' is populated by the root menu
   dispatch: () => {},
 });
