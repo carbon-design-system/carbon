@@ -5845,6 +5845,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "disableOverflow": Object {
+        "type": "bool",
+      },
       "itemsShown": Object {
         "type": "number",
       },
@@ -8127,6 +8130,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "title": Object {
         "type": "string",
