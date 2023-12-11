@@ -334,7 +334,7 @@ cases, follow these steps below to ensure a proper patch release:
 - [ ] for each package (replace <kbd>carbon-components-react</kbd> with the
       package name):
   ```bash
-  npm dist tag add carbon-components-react@vX.Y.Z latest
+  npm dist-tag add carbon-components-react@vX.Y.Z latest
   ```
 - [ ] Verify the packages have been promoted to latest on
       [NPM](https://www.npmjs.com)
