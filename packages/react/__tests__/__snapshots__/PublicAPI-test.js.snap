@@ -8131,6 +8131,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "title": Object {
         "type": "string",
       },
