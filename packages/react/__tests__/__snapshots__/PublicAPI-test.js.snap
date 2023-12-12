@@ -5845,6 +5845,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "disableOverflow": Object {
+        "type": "bool",
+      },
       "itemsShown": Object {
         "type": "number",
       },
