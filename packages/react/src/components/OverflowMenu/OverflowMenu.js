@@ -485,7 +485,6 @@ class OverflowMenu extends Component {
     const overflowMenuClasses = classNames(
       this.props.className,
       `${prefix}--overflow-menu`,
-      `${prefix}--overflow-menu-${id}`,
       {
         [`${prefix}--overflow-menu--open`]: open,
         [`${prefix}--overflow-menu--light`]: light,
@@ -496,7 +495,6 @@ class OverflowMenu extends Component {
     const overflowMenuOptionsClasses = classNames(
       menuOptionsClass,
       `${prefix}--overflow-menu-options`,
-      `${prefix}--overflow-menu-options-${id}`,
       {
         [`${prefix}--overflow-menu--flip`]: this.props.flipped,
         [`${prefix}--overflow-menu-options--open`]: open,
