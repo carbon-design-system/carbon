@@ -50,7 +50,7 @@
     "test:unit": "cross-env NODE_OPTIONS=--openssl-legacy-provider gulp test:unit",
     "test:unit:updateSnapshot": "NODE_OPTIONS=--openssl-legacy-provider gulp test:unit --update-snapshot",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "visual-snapshot": "yarn build-storybook && percy storybook ./storybook-static",
+    "visual-snapshot": "yarn build-storybook && percy storybook:start ./storybook-static",
     "wca": "web-component-analyzer analyze src --outFile custom-elements.json"
   },
   "files": [
@@ -96,9 +96,9 @@
     "@carbon/icons": "^11.31.0",
     "@open-wc/semantic-dom-diff": "~0.18.0",
     "@percy-io/in-percy": "^0.1.11",
-    "@percy/cli": "^1.8.1",
-    "@percy/cypress": "^3.1.1",
-    "@percy/dom": "^1.0.5",
+    "@percy/cli": "^1.27.4",
+    "@percy/cypress": "^3.1.2",
+    "@percy/dom": "^1.27.5",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^21.0.3",
     "@rollup/plugin-node-resolve": "^8.4.0",
