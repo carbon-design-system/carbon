@@ -26,10 +26,7 @@ export default {
 
 export const Default = () => (
   <div>
-    <OverflowMenu
-      flipped={document?.dir === 'rtl'}
-      aria-label="overflow-menu"
-      id={1}>
+    <OverflowMenu flipped={document?.dir === 'rtl'} aria-label="overflow-menu">
       <OverflowMenuItem itemText="Stop app" />
       <OverflowMenuItem itemText="Restart app" />
       <OverflowMenuItem itemText="Rename app" />
@@ -38,10 +35,7 @@ export const Default = () => (
       <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
     </OverflowMenu>
     <div style={{ marginTop: '17rem' }}></div>
-    <OverflowMenu
-      flipped={document?.dir === 'rtl'}
-      aria-label="overflow-menu"
-      id={2}>
+    <OverflowMenu flipped={document?.dir === 'rtl'} aria-label="overflow-menu">
       <OverflowMenuItem disabled itemText="Stop app" />
       <OverflowMenuItem disabled itemText="Restart app" />
       <OverflowMenuItem disabled itemText="Rename app" />

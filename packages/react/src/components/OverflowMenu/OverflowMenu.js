@@ -430,8 +430,7 @@ class OverflowMenu extends Component {
               !menuBody.contains(target) &&
               triggerEl &&
               !target.matches(
-                `.${this.context}--overflow-menu-${this.props.id},.${this.context}--overflow-menu-options-${this.props.id}` ||
-                  `.${this.context}--overflow-menu,.${this.context}--overflow-menu-options`
+                `.${this.context}--overflow-menu:first-child,.${this.context}--overflow-menu-options:first-child`
               )
             ) {
               this.closeMenuAndFocus();
@@ -480,7 +479,6 @@ class OverflowMenu extends Component {
       size = 'md',
       ...other
     } = this.props;
-    console.log('_newId', this._newId);
 
     const { open = false } = this.state;
 
