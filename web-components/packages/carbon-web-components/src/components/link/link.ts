@@ -20,7 +20,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * Link size.
  */
 export const LINK_SIZE = {
-  REGULAR: '',
+  MEDIUM: '',
   SMALL: 'sm',
   LARGE: 'lg',
 };
@@ -191,7 +191,7 @@ class CDSLink extends FocusMixin(LitElement) {
    * Link size.
    */
   @property({ reflect: true })
-  size: LINK_SIZE_TYPE = LINK_SIZE.REGULAR;
+  size: LINK_SIZE_TYPE = LINK_SIZE.MEDIUM;
 
   /**
    * The link target.
