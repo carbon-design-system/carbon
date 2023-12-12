@@ -5,9 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { ComponentClass } from 'react';
 import { createClassWrapper } from '../../internal/createClassWrapper';
-import ContentSwitcherCarbon from './ContentSwitcher';
+import ContentSwitcherCarbon, { ContentSwitcherProps } from './ContentSwitcher';
 
-const ContentSwitcher = createClassWrapper(ContentSwitcherCarbon);
+const ContentSwitcher = createClassWrapper(
+  ContentSwitcherCarbon as ComponentClass<ContentSwitcherProps>
+);
 export default ContentSwitcher;
 export { ContentSwitcher };
