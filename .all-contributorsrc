@@ -1343,11 +1343,11 @@
         "code"
       ]
     },
-    { 
+    {
       "login": "kuri-sun",
-      "name": "Ruki",
+      "name": "HaRuki",
       "avatar_url": "https://avatars.githubusercontent.com/u/62743644?v=4",
-      "profile": "https://haruki-kuriwada.netlify.app/",
+      "profile": "https://github.com/kuri-sun",
       "contributions": [
         "code",
         "doc"
@@ -1376,6 +1376,15 @@
       "name": "stevenpatrick009",
       "avatar_url": "https://avatars.githubusercontent.com/u/106097350?v=4",
       "profile": "https://github.com/stevenpatrick009",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "xalc",
+      "name": "HunterXalc",
+      "avatar_url": "https://avatars.githubusercontent.com/u/18441947?v=4",
+      "profile": "https://github.com/xalc",
       "contributions": [
         "code"
       ]

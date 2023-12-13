@@ -6,6 +6,7 @@ import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
 import InlineLoading from '../InlineLoading';
+import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 
 interface SecondaryButtonProps {
   buttonText: ReactNode;
@@ -166,7 +167,7 @@ export interface ModalFooterProps {
   /**
    * loading status
    */
-  loadingStatus?: string;
+  loadingStatus?: InlineLoadingStatus;
 
   /**
    * Specify the description for the loading text

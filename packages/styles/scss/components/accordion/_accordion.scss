@@ -200,6 +200,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
     .#{$prefix}--accordion__wrapper {
       // Properties for when the accordion opens
+      max-block-size: fit-content;
       opacity: 1;
       padding-block: $spacing-03;
       padding-block-end: $spacing-06;

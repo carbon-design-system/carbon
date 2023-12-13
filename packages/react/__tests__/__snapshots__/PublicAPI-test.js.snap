@@ -3134,6 +3134,9 @@ Map {
       "onKeyUp": Object {
         "type": "func",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "tabIndex": Object {
         "type": "number",
       },
@@ -5842,6 +5845,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "disableOverflow": Object {
+        "type": "bool",
+      },
       "itemsShown": Object {
         "type": "number",
       },
@@ -8124,6 +8130,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "title": Object {
         "type": "string",

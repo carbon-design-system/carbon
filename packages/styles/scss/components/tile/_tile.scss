@@ -470,6 +470,10 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     border-radius: $spacing-05;
   }
 
+  .#{$prefix}--tile--slug-rounded .#{$prefix}--tile__chevron {
+    border-end-end-radius: $spacing-05;
+  }
+
   // Windows HCM fix
   .#{$prefix}--tile__chevron svg,
   .#{$prefix}--tile__checkmark svg,

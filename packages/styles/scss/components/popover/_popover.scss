@@ -172,7 +172,7 @@ $popover-caret-height: custom-property.get-var(
     will-change: transform;
   }
 
-  .#{$prefix}--popover--open
+  .#{$prefix}--popover--caret.#{$prefix}--popover--open
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret {
     display: block;

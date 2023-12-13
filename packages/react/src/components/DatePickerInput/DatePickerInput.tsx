@@ -112,7 +112,7 @@ interface DatePickerInputProps
   size?: 'sm' | 'md' | 'lg';
 
   /**
-   * Provide a `Slug` component to be rendered inside the `DatePickerInput` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `DatePickerInput` component
    */
   slug?: ReactNodeLike;
 
@@ -218,7 +218,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
 
   // Slug is always size `mini`
   let normalizedSlug;
-  if (slug) {
+  if (slug && slug['type']?.displayName === 'Slug') {
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
       size: 'mini',
     });
@@ -360,7 +360,7 @@ DatePickerInput.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
-   * Provide a `Slug` component to be rendered inside the `DatePickerInput` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `DatePickerInput` component
    */
   slug: PropTypes.node,
 

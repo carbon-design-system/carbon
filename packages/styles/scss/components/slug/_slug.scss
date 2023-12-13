@@ -6,6 +6,7 @@
 @use '../../type' as *;
 @use '../../utilities/ai-gradient' as *;
 @use '../../utilities/convert';
+@use '../toggletip';
 
 $sizes: (
   mini: (
