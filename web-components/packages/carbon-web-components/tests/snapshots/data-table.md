@@ -238,20 +238,31 @@
   <input
     class="cds--checkbox"
     disabled=""
-    hide-label=""
-    label-text="selection-label-foo"
+    id="selection"
     name="selection-name-foo"
+    part="selection"
+    type="checkbox"
     value="selection-value-foo"
   >
-</div>
-<slot>
-</slot>
   <label
     aria-label="selection-label-foo"
     class="cds--checkbox-label"
     for="selection"
   >
   </label>
+=======
+<div class="cds--table-column-checkbox">
+  <cds-checkbox
+    checked=""
+    data-table=""
+    disabled=""
+    hide-label=""
+    label-text="selection-label-foo"
+    name="selection-name-foo"
+    value="selection-value-foo"
+  >
+  </cds-checkbox>
+>>>>>>> 6575f00934 (fix(web-components): updated web-components tests)
 </div>
 <slot>
 </slot>

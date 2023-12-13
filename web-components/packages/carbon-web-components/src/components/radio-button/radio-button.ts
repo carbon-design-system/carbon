@@ -153,18 +153,6 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
           )
         );
       }
-      this.dispatchEvent(
-        new CustomEvent(
-          (this.constructor as typeof CDSRadioButton).eventChange,
-          {
-            bubbles: true,
-            composed: true,
-            detail: {
-              checked: this.checked,
-            },
-          }
-        )
-      );
     }
   };
 
