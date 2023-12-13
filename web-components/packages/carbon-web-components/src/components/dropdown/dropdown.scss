@@ -11,11 +11,14 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities' as *;
-@use '@carbon/styles/scss/components/list-box/list-box';
+@use '@carbon/styles/scss/components/list-box/list-box' as *;
 @use '@carbon/styles/scss/components/dropdown' as *;
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/checkbox';
 @use '@carbon/styles/scss/components/tag';
+
+// https://github.com/carbon-design-system/carbon/issues/11408
+@include list-box;
 
 :host(#{$prefix}-dropdown) {
   outline: none;
