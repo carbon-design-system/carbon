@@ -14,7 +14,8 @@
   "files": [
     "lib/**/*",
     "es/**/*",
-    "umd/**/*"
+    "umd/**/*",
+    "telemetry.yml"
   ],
   "keywords": [
     "react",
@@ -31,7 +32,7 @@
     "build": "yarn clean && node scripts/build.js && rollup -c",
     "build-storybook": "cross-env NODE_ENV=production build-storybook",
     "clean": "rimraf es lib umd storybook-static build react-docgen.json",
-    "postinstall": "carbon-telemetry collect --install",
+    "postinstall": "npx -y @ibm/telemetry-js --config=telemetry.yml",
     "prepublish": "yarn build",
     "start": "yarn storybook",
     "storybook": "rimraf node_modules/.cache/storybook && start-storybook -p 9000",
@@ -49,7 +50,6 @@
     "@carbon/feature-flags": "^0.7.0",
     "@carbon/icons-react": "^10.49.2",
     "@carbon/layout": "^10.37.2",
-    "@carbon/telemetry": "0.1.0",
     "classnames": "2.3.1",
     "copy-to-clipboard": "^3.3.1",
     "downshift": "5.2.1",
