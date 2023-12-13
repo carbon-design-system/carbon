@@ -20,7 +20,8 @@
     "icons/index.esm.js",
     "icons/index.d.ts",
     "icons/package.json",
-    ".playwright/INTERNAL_AVT_REPORT_DO_NOT_USE.json"
+    ".playwright/INTERNAL_AVT_REPORT_DO_NOT_USE.json",
+    "telemetry.yml"
   ],
   "keywords": [
     "ibm",
