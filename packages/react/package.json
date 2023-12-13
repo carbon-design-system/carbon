@@ -37,7 +37,7 @@
   "scripts": {
     "build": "yarn clean && node tasks/build-styles.js && node tasks/build.js",
     "clean": "rimraf es lib icons/index.js icons/index.d.ts icons/index.esm.js storybook-static",
-    "postinstall": "npx -y @ibm/telemetry-js --config=path/to/your/telemetry.yml",
+    "postinstall": "npx -y @ibm/telemetry-js --config=telemetry.yml",
     "storybook": "storybook dev -p 3000",
     "storybook:build": "storybook build"
   },
