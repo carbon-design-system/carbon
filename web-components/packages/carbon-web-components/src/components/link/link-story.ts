@@ -22,7 +22,7 @@ import storyDocs from './link-story.mdx';
 
 const sizes = {
   [`Small size (${LINK_SIZE.SMALL})`]: LINK_SIZE.SMALL,
-  [`Regular size (${LINK_SIZE.REGULAR})`]: LINK_SIZE.REGULAR,
+  [`Medium size (${LINK_SIZE.MEDIUM})`]: LINK_SIZE.MEDIUM,
   [`Large size (${LINK_SIZE.LARGE})`]: LINK_SIZE.LARGE,
 };
 
@@ -109,7 +109,7 @@ Playground.story = {
         disabled: boolean('Disabled (disabled)', false),
         href: textNullable('Link href (href)', 'https://example.com/'),
         inline: boolean('Inline (inline)', false),
-        size: select('Link size (size)', sizes, LINK_SIZE.REGULAR),
+        size: select('Link size (size)', sizes, LINK_SIZE.MEDIUM),
         visited: boolean('Visited (visited)', false),
         onClick: action('click'),
       }),
