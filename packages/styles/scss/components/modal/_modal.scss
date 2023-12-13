@@ -12,6 +12,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../../utilities/ai-gradient' as *;
 @use '../../utilities/convert';
 @use '../../utilities/component-reset';
 @use '../../utilities/focus-outline' as *;
@@ -155,7 +156,6 @@
   .#{$prefix}--modal-container {
     position: fixed;
     display: grid;
-    overflow: hidden;
     background-color: $layer;
     block-size: 100%;
     grid-template-columns: 100%;
@@ -483,6 +483,38 @@
   .#{$prefix}--modal-container--full-width .#{$prefix}--modal-content {
     padding: 0;
     margin: 0;
+  }
+
+  // Slug styles
+  .#{$prefix}--modal--slug .#{$prefix}--modal-container {
+    @include callout-gradient('default');
+
+    background-color: $layer;
+  }
+
+  // Start the gradient 64px from bottom only when two buttons are present
+  .#{$prefix}--modal--slug
+    .#{$prefix}--modal-container:has(
+      .#{$prefix}--btn-set:not(.#{$prefix}--modal-footer--three-button)
+        > button:not(:only-child)
+    ) {
+    @include callout-gradient('default', 64px);
+
+    background-color: $layer;
+  }
+
+  .#{$prefix}--modal--slug .#{$prefix}--slug {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+  }
+
+  .#{$prefix}--modal-header > .#{$prefix}--slug:has(+ .#{$prefix}--modal-close),
+  .#{$prefix}--modal-header > .#{$prefix}--modal-close ~ .#{$prefix}--slug,
+  .#{$prefix}--modal--slug
+    .#{$prefix}--modal-container-body
+    > .#{$prefix}--slug {
+    inset-inline-end: convert.to-rem(48px);
   }
 
   // Windows HCM fix
