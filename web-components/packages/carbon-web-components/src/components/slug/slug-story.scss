@@ -111,3 +111,7 @@ div #{$prefix}-selectable-tile::-moz-list-bullet {
 #{$prefix}-checkbox-group:not(:first-of-type) {
   margin-top: $spacing-07;
 }
+
+.slug-tag-container {
+  margin-bottom: $spacing-10;
+}
