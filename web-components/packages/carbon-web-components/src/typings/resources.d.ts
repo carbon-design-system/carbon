@@ -8,6 +8,7 @@
  */
 
 declare module '*.scss';
+declare module '*.scss?lit';
 
 declare module '*.mdx' {
   let MDXComponent: (props: any) => JSX.Element;

@@ -10,7 +10,7 @@
 import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { number } from '@storybook/addon-knobs';
-import textNullable from '../../../.storybook/knob-text-nullable';
+import textNullable from '../../../.storybook-backup/knob-text-nullable';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './copy-button';
 import storyDocs from './copy-button-story.mdx';

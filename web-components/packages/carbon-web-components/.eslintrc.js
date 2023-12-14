@@ -17,7 +17,7 @@ module.exports = {
     ecmaVersion: 6,
     sourceType: 'script',
   },
-  extends: ['../eslint-config-ibmdotcom'],
+  extends: ['../eslint-config-ibmdotcom', 'plugin:storybook/recommended'],
   env: {
     node: true,
     es6: true,

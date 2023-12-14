@@ -8,8 +8,7 @@
  */
 
 import { html, TemplateResult } from 'lit';
-import containerStyles from './_container.scss?lit'; // eslint-disable-line import/first
-import '../src/components/skip-to-content/skip-to-content';
+import containerStyles from './_container.scss'; // eslint-disable-line import/first
 
 /**
  * @param options The rendering options.
@@ -30,7 +29,6 @@ const container = ({
   <cds-skip-to-content href="#main-content"></cds-skip-to-content>
   <div
     id="main-content"
-    style="background: red;"
     name="main-content"
     data-floating-menu-container
     role="${hasMainTag ? 'none' : 'main'}">

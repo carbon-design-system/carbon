@@ -10,7 +10,7 @@
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { boolean, number, select } from '@storybook/addon-knobs';
-import textNullable from '../../../.storybook/knob-text-nullable';
+import textNullable from '../../../.storybook-backup/knob-text-nullable';
 import { OVERFLOW_MENU_SIZE } from './overflow-menu';
 import './overflow-menu-body';
 import './overflow-menu-item';
