@@ -1,7 +1,7 @@
 {
   "name": "carbon-components",
   "description": "The Carbon Design System is IBM’s open-source design system for products and experiences.",
-  "version": "11.45.0",
+  "version": "11.46.0-rc.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -42,7 +42,7 @@
     "sass": "^1.33.0"
   },
   "dependencies": {
-    "@carbon/styles": "^1.45.0",
+    "@carbon/styles": "^1.46.0-rc.0",
     "@carbon/telemetry": "0.1.0",
     "chalk": "1.1.3"
   },
