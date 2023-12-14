@@ -69,7 +69,6 @@
     "jest-junit": "^16.0.0",
     "lerna": "^8.0.0",
     "lint-staged": "^15.0.0",
-    "node-gyp": "^7.1.2",
     "prettier": "^2.8.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
