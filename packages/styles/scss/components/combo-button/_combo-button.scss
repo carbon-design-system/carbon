@@ -10,12 +10,14 @@
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../utilities/convert';
+@use '../../utilities/custom-property';
 
 /// Combo Button styles
 /// @access public
 /// @group combo-button
 @mixin combo-button {
   .#{$prefix}--combo-button__container {
+    position: relative;
     display: inline-flex;
     column-gap: convert.to-rem(1px);
   }
@@ -34,7 +36,8 @@
   }
 
   .#{$prefix}--combo-button__primary-action .#{$prefix}--btn {
-    inline-size: 100%;
+    max-inline-size: convert.to-rem(230px);
+    min-inline-size: convert.to-rem(160px);
   }
 
   .#{$prefix}--combo-button__trigger svg {
@@ -46,4 +49,22 @@
     svg {
     transform: rotate(180deg);
   }
+}
+// ==================test==========================================
+
+// $popover-offset: custom-property.get-var('popover-offset', 3rem);
+.popover-top {
+  $popover-offset: custom-property.get-var('popover-offset', 3rem);
+
+  inset-block-start: 0;
+  inset-inline-start: 50%;
+  transform: translate(0%, calc(-100% - $popover-offset));
+}
+
+.popover-bottom {
+  $popover-offset: custom-property.get-var('popover-offset', 0);
+
+  inset-block-start: 0;
+  inset-inline-start: 0%;
+  transform: translate(0%, calc(0% + $popover-offset));
 }
