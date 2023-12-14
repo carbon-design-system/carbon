@@ -8,4 +8,5 @@
  */
 
 import './checkbox';
+import './checkbox-group';
 import './checkbox-skeleton';

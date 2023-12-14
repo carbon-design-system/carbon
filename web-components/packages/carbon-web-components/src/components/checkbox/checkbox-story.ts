@@ -20,11 +20,10 @@ const checkboxLabel = 'Checkbox label';
 
 export const Default = () => {
   return html`
-    <fieldset class="${prefix}--fieldset">
-      <legend class="${prefix}--label">Group label</legend>
+    <cds-checkbox-group legend-text="Group label">
       <cds-checkbox label-text="${checkboxLabel}"></cds-checkbox>
       <cds-checkbox label-text="${checkboxLabel}"></cds-checkbox>
-    </fieldset>
+    </cds-checkbox-group>
   `;
 };
 
@@ -39,52 +38,81 @@ export const Skeleton = () => {
   `;
 };
 
+export const Single = () => {
+  return html`
+    <cds-checkbox
+      label-text="${checkboxLabel}"
+      helper-text="Helper text goes here"></cds-checkbox>
+    <br /><br />
+    <cds-checkbox
+      label-text="${checkboxLabel}"
+      invalid
+      invalid-text="Invalid test goes here"></cds-checkbox>
+    <br /><br />
+    <cds-checkbox
+      label-text="${checkboxLabel}"
+      warn
+      warn-text="Warning test goes here"></cds-checkbox>
+    <br /><br />
+    <cds-checkbox label-text="${checkboxLabel}" readonly></cds-checkbox>
+  `;
+};
+
 export const Playground = (args) => {
   const {
-    checked,
     disabled,
-    hideLabel,
-    indeterminate,
-    labelText = checkboxLabel,
     readonly,
-    title,
     onChange,
+    helperText,
+    invalid,
+    invalidText,
+    legendText,
+    warn,
+    warnText,
   } = args?.[`${prefix}-checkbox`] ?? {};
   return html`
-    <fieldset class="${prefix}--fieldset">
-      <legend class="${prefix}--label">Group label</legend>
+    <cds-checkbox-group
+      helper-text="${helperText}"
+      ?disabled="${disabled}"
+      ?invalid="${invalid}"
+      invalid-text="${invalidText}"
+      legend-text="${legendText}"
+      ?readonly="${readonly}"
+      ?warn="${warn}"
+      warn-text="${warnText}">
       <cds-checkbox
-        ?checked="${checked}"
-        ?disabled="${disabled}"
-        ?hide-label="${hideLabel}"
-        ?indeterminate="${indeterminate}"
-        label-text="${ifDefined(labelText)}"
-        ?readonly="${readonly}"
-        title="${ifDefined(title)}"
+        checked
+        label-text="Checkbox label"
         @cds-checkbox-changed="${onChange}"></cds-checkbox>
       <cds-checkbox
-        ?checked="${checked}"
-        ?disabled="${disabled}"
-        ?hide-label="${hideLabel}"
-        ?indeterminate="${indeterminate}"
-        label-text="${ifDefined(labelText)}"
-        ?readonly="${readonly}"
-        title="${ifDefined(title)}"
+        label-text="Checkbox label"
         @cds-checkbox-changed="${onChange}"></cds-checkbox>
-    </fieldset>
+      <cds-checkbox
+        disabled
+        label-text="Checkbox label"
+        @cds-checkbox-changed="${onChange}"></cds-checkbox>
+    </cds-checkbox-group>
   `;
 };
 
 Playground.parameters = {
   knobs: {
     [`${prefix}-checkbox`]: () => ({
-      checked: boolean('Checked (checked)', false),
-      disabled: boolean('Disabled (disabled)', false),
-      hideLabel: boolean('Hide label (hide-label)', false),
-      indeterminate: boolean('Indeterminate (indeterminate)', false),
-      readonly: boolean('Read only (readonly)', false),
-      title: textNullable('Title (title)', ''),
       onChange: action(`${prefix}-checkbox-changed`),
+      disabled: boolean('Disabled (disabled)', false),
+      helperText: textNullable(
+        'Helper text (helper-text)',
+        'Helper text goes here'
+      ),
+      invalid: boolean('Invalid (invalid)', false),
+      invalidText: textNullable(
+        'Invalid text (invalid-text)',
+        'Invalid message goes here'
+      ),
+      legendText: textNullable('Legend text (legend-text)', 'Group label'),
+      readonly: boolean('Read only (readonly)', false),
+      warn: boolean('Warn (warn)', false),
+      warnText: textNullable('Warn text (warn-text)', 'Warn message goes here'),
     }),
   },
 };
