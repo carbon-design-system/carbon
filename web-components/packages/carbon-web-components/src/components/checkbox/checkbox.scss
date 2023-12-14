@@ -23,6 +23,18 @@ $css--plex: true !default;
   @extend .#{$prefix}--checkbox-wrapper--readonly;
 }
 
+:host(#{$prefix}-checkbox:not([readonly])[invalid]) {
+  @extend .#{$prefix}--checkbox-wrapper--invalid;
+}
+
+:host(#{$prefix}-checkbox[invalid-group]) .#{$prefix}--checkbox-label::before {
+  border-color: $support-error;
+}
+
+:host(#{$prefix}-checkbox:not([readonly]):not([invalid])[warn]) {
+  @extend .#{$prefix}--checkbox-wrapper--warning;
+}
+
 :host(#{$prefix}-checkbox[data-table]) {
   margin: 0;
 }
@@ -40,5 +52,30 @@ $css--plex: true !default;
 :host(#{$prefix}-checkbox-skeleton) {
   .#{$prefix}--checkbox-label {
     cursor: default;
+  }
+}
+
+:host(#{$prefix}-checkbox-group) {
+  display: flex;
+}
+
+:host(#{$prefix}-checkbox-group) .#{$prefix}--checkbox-group--slug,
+:host(#{$prefix}-checkbox[slug]) {
+  ::slotted(#{$prefix}-slug) {
+    margin-inline-start: $spacing-03;
+  }
+}
+
+:host(#{$prefix}-checkbox[slug]) {
+  flex-direction: row;
+}
+
+:host(#{$prefix}-checkbox[slug]) ::slotted(#{$prefix}-slug) {
+  align-self: center;
+}
+
+:host(#{$prefix}-checkbox[slug]) {
+  .#{$prefix}--checkbox-label-text {
+    display: flex;
   }
 }

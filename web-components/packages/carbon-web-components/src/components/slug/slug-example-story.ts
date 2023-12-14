@@ -81,6 +81,85 @@ export default {
   title: 'Experimental/Slug/Examples',
 };
 
+export const _Checkbox = (args) => {
+  const { disabled, invalid, invalidText, warn, warnText } =
+    args?.['cds-checkbox'] ?? {};
+
+  return html`
+    <style>
+      ${styles}
+    </style>
+    <div style="width: 400px">
+      <cds-checkbox-group
+        legend-text="Group label"
+        ?disabled="${disabled}"
+        ?invalid="${invalid}"
+        invalid-text="${invalidText}"
+        ?warn="${warn}"
+        warn-text="${warnText}">
+        <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+        <cds-checkbox label-text="Checkbox label"></cds-checkbox>
+        <cds-checkbox label-text="Checkbox label"></cds-checkbox>
+        <cds-checkbox label-text="Checkbox label"></cds-checkbox>
+      </cds-checkbox-group>
+
+      <cds-checkbox-group
+        legend-text="Group label"
+        ?disabled="${disabled}"
+        ?invalid="${invalid}"
+        invalid-text="${invalidText}"
+        ?warn="${warn}"
+        warn-text="${warnText}">
+        <cds-checkbox label-text="Checkbox label">
+          <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+        </cds-checkbox>
+        <cds-checkbox label-text="Checkbox label">
+          <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+        </cds-checkbox>
+        <cds-checkbox label-text="Checkbox label"></cds-checkbox>
+      </cds-checkbox-group>
+
+      <cds-checkbox-group
+        legend-text="Group label"
+        ?disabled="${disabled}"
+        ?invalid="${invalid}"
+        invalid-text="${invalidText}"
+        ?warn="${warn}"
+        warn-text="${warnText}">
+        <cds-checkbox label-text="Checkbox label">
+          <cds-slug alignment="bottom-left" kind="inline">
+            ${content}${actions}
+          </cds-slug>
+        </cds-checkbox>
+        <cds-checkbox label-text="Checkbox label">
+          <cds-slug alignment="bottom-left" kind="inline">
+            ${content}${actions}
+          </cds-slug>
+        </cds-checkbox>
+        <cds-checkbox label-text="Checkbox label"></cds-checkbox>
+      </cds-checkbox-group>
+    </div>
+  `;
+};
+
+_Checkbox.parameters = {
+  knobs: {
+    [`${prefix}-checkbox`]: () => ({
+      disabled: boolean('Disabled (disabled)', false),
+      invalid: boolean('Invalid (invalid)', false),
+      invalidText: textNullable(
+        'Invalid text (invalid-text)',
+        'Error message goes here'
+      ),
+      warn: boolean('Warn (warn)', false),
+      warnText: textNullable(
+        'Warn text (warn-text)',
+        'Warning message that is really long can wrap to more lines but should not be excessively long.'
+      ),
+    }),
+  },
+};
+
 export const _Combobox = () => {
   return html` <style>
       ${styles}
