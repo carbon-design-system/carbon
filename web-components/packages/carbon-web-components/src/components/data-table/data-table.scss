@@ -14,6 +14,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/components/checkbox';
 
 @use '@carbon/styles/scss/components/data-table' as *;

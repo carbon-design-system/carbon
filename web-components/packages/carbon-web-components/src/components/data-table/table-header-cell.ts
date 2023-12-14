@@ -9,6 +9,7 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import ArrowsVertical32 from '@carbon/icons/lib/arrows--vertical/32';
 import ArrowDown32 from '@carbon/icons/lib/arrow--down/32';
 import { prefix } from '../../globals/settings';
@@ -37,23 +38,29 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
    * Handles `click` event on the sort button.
    *
    */
-  private _handleClickSortButton() {
-    const nextSortDirection = this._getNextSort();
-    const init = {
-      bubbles: true,
-      cancelable: true,
-      composed: true,
-      detail: {
-        oldSortDirection: this.sortDirection,
-        sortDirection: nextSortDirection,
-      },
-    };
-    const constructor = this.constructor as typeof CDSTableHeaderCell;
+  private _handleClickSortButton(event) {
     if (
-      this.dispatchEvent(new CustomEvent(constructor.eventBeforeSort, init))
+      !(event.target as HTMLElement).matches(
+        (this.constructor as typeof CDSTableHeaderCell).slugItem
+      )
     ) {
-      this.sortActive = true;
-      this.sortDirection = nextSortDirection;
+      const nextSortDirection = this._getNextSort();
+      const init = {
+        bubbles: true,
+        cancelable: true,
+        composed: true,
+        detail: {
+          oldSortDirection: this.sortDirection,
+          sortDirection: nextSortDirection,
+        },
+      };
+      const constructor = this.constructor as typeof CDSTableHeaderCell;
+      if (
+        this.dispatchEvent(new CustomEvent(constructor.eventBeforeSort, init))
+      ) {
+        this.sortActive = true;
+        this.sortDirection = nextSortDirection;
+      }
     }
   }
 
@@ -62,6 +69,26 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
    *
    */
   private _handleSlotChange() {
+    this.requestUpdate();
+  }
+
+  /**
+   * Handles `slotchange` event.
+   */
+  protected _handleSlugSlotChange({ target }: Event) {
+    const hasContent = (target as HTMLSlotElement)
+      .assignedNodes()
+      .filter((elem) =>
+        (elem as HTMLElement).matches !== undefined
+          ? (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSTableHeaderCell).slugItem
+            )
+          : false
+      );
+    if (hasContent.length > 0) {
+      this._hasSlug = Boolean(hasContent);
+      (hasContent[0] as HTMLElement).setAttribute('size', 'mini');
+    }
     this.requestUpdate();
   }
 
@@ -93,6 +120,11 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
     }
     return directions[(index + 1) % directions.length];
   }
+
+  /**
+   * `true` if there is a slug.
+   */
+  protected _hasSlug = false;
 
   /**
    * `true` if the table has expandable rows
@@ -149,10 +181,19 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
     if (this.isSortable && !changedProperties.has('sortDirection')) {
       this.sortDirection = TABLE_SORT_DIRECTION.NONE;
     }
+    if (this._hasSlug) {
+      this.setAttribute('slug', '');
+    } else {
+      this.removeAttribute('slug');
+    }
   }
 
   render() {
     const { sortDirection } = this;
+    const labelClasses = classMap({
+      [`${prefix}--table-header-label`]: true,
+      [`${prefix}--table-header-label--slug`]: this._hasSlug,
+    });
     if (sortDirection) {
       const sortIcon =
         sortDirection === TABLE_SORT_DIRECTION.NONE
@@ -170,14 +211,29 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
           class="${prefix}--table-sort"
           title="${this.textContent}"
           @click=${this._handleClickSortButton}>
-          <span part="label-text" class="${prefix}--table-header-label"
-            ><slot @slotchange=${this._handleSlotChange}></slot
-          ></span>
-          ${sortIcon}
+          <span class="${prefix}--table-sort__flex">
+            <span part="label-text" class="${prefix}--table-header-label"
+              ><slot @slotchange=${this._handleSlotChange}></slot
+            ></span>
+            <slot
+              name="slug"
+              @slotchange="${this._handleSlugSlotChange}"></slot>
+            ${sortIcon}
+          </span>
         </button>
       `;
     }
-    return html` <slot></slot> `;
+    return html`<span part="label-text" class="${labelClasses}">
+      <slot></slot
+      ><slot name="slug" @slotchange="${this._handleSlugSlotChange}"></slot
+    ></span> `;
+  }
+
+  /**
+   * A selector that will return the slug item.
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
   }
 
   /**
