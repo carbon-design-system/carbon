@@ -20,7 +20,8 @@
     "icons/index.esm.js",
     "icons/index.d.ts",
     "icons/package.json",
-    ".playwright/INTERNAL_AVT_REPORT_DO_NOT_USE.json"
+    ".playwright/INTERNAL_AVT_REPORT_DO_NOT_USE.json",
+    "telemetry.yml"
   ],
   "keywords": [
     "ibm",
@@ -36,7 +37,7 @@
   "scripts": {
     "build": "yarn clean && node tasks/build-styles.js && node tasks/build.js",
     "clean": "rimraf es lib icons/index.js icons/index.d.ts icons/index.esm.js storybook-static",
-    "postinstall": "carbon-telemetry collect --install",
+    "postinstall": "npx -y @ibm/telemetry-js --config=telemetry.yml",
     "storybook": "storybook dev -p 3000",
     "storybook:build": "storybook build"
   },
@@ -51,7 +52,6 @@
     "@carbon/icons-react": "^11.32.0",
     "@carbon/layout": "^11.20.0",
     "@carbon/styles": "^1.45.0",
-    "@carbon/telemetry": "0.1.0",
     "classnames": "2.3.2",
     "copy-to-clipboard": "^3.3.1",
     "downshift": "8.2.3",

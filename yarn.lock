@@ -2047,7 +2047,6 @@ __metadata:
     "@carbon/icons-react": "npm:^11.32.0"
     "@carbon/layout": "npm:^11.20.0"
     "@carbon/styles": "npm:^1.45.0"
-    "@carbon/telemetry": "npm:0.1.0"
     "@carbon/test-utils": "npm:^10.30.0"
     "@carbon/themes": "npm:^11.28.0"
     "@rollup/plugin-babel": "npm:^6.0.0"
