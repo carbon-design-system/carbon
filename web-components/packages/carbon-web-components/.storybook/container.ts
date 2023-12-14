@@ -30,7 +30,6 @@ const container = ({
   <cds-skip-to-content href="#main-content"></cds-skip-to-content>
   <div
     id="main-content"
-    style="background: red;"
     name="main-content"
     data-floating-menu-container
     role="${hasMainTag ? 'none' : 'main'}">
