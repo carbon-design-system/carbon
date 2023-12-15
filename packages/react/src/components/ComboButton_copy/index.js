@@ -33,6 +33,7 @@ const ComboButton = React.forwardRef(function ComboButton(
     children,
     className,
     disabled,
+    isFullWidth = true,
     label,
     onClick,
     size = 'lg',
@@ -44,6 +45,7 @@ const ComboButton = React.forwardRef(function ComboButton(
 ) {
   const id = useId('combobutton');
   const prefix = usePrefix();
+  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
   const containerRef = useRef(null);
   const menuRef = useRef(null);
@@ -85,12 +87,44 @@ const ComboButton = React.forwardRef(function ComboButton(
     className
   );
 
+  let positionTest = 'top';
+
+  const fullWidthClasses = classNames(`popover-${positionTest}`, {
+    [`${prefix}--combo-button--full-width`]: isFullWidth,
+    [`test-class`]: isEllipsisApplied,
+  });
+
   const primaryActionClasses = classNames(
     `${prefix}--combo-button__primary-action`
   );
   const triggerClasses = classNames(`${prefix}--combo-button__trigger`);
 
-  let positionTest = 'top';
+  console.log('children', children);
+
+  const isEllipsisActive = (element) => {
+    if (element === null) {
+      return;
+    }
+    console.log(
+      'element.offsetWidth < element.scrollWidth',
+      element.offsetWidth < element.scrollWidth
+    );
+    const isTrue = element.offsetWidth < element.scrollWidth;
+
+    if (isTrue) {
+      return setIsEllipsisApplied(true);
+    }
+  };
+
+  children.forEach((element) => {
+    const label = element.props.label;
+    if (label === undefined || isEllipsisApplied === true) {
+      return;
+    }
+    const selectedLabel = document.querySelector(`[title="${label}"]`);
+    console.log('selectedLabel', selectedLabel);
+    isEllipsisActive(selectedLabel);
+  });
 
   return (
     <div
@@ -120,7 +154,7 @@ const ComboButton = React.forwardRef(function ComboButton(
         <ChevronDown />
       </IconButton>
       <Menu
-        className={`popover-${positionTest}`}
+        className={fullWidthClasses}
         ref={menuRef}
         id={id}
         label={t('carbon.combo-button.additional-actions')}
@@ -152,6 +186,11 @@ ComboButton.propTypes = {
    * Specify whether the ComboButton should be disabled, or not.
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Specify whether the ComboButton and the menu dropdown should be full width.
+   */
+  isFullWidth: PropTypes.bool,
 
   /**
    * Provide the label to be renderd on the primary action button.

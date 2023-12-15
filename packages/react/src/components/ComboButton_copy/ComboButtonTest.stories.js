@@ -41,7 +41,10 @@ export const Playground = (args) => {
   return (
     <div style={{ marginTop: '15rem' }}>
       <ComboButton {...args}>
-        <MenuItem label="Second action" onClick={onClick} />
+        <MenuItem
+          label="Second actionactionac actionactionac tion"
+          onClick={onClick}
+        />
         <MenuItem label="Third action" onClick={onClick} />
         <MenuItem label="Fourth action" disabled onClick={onClick} />
         <MenuItemDivider />

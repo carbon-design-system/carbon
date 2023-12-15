@@ -17,7 +17,6 @@
 /// @group combo-button
 @mixin combo-button {
   .#{$prefix}--combo-button__container {
-    position: relative;
     display: inline-flex;
     column-gap: convert.to-rem(1px);
   }
@@ -50,7 +49,14 @@
     transform: rotate(180deg);
   }
 }
+
 // ==================test==========================================
+// .#{$prefix}--combo-button--full-width {
+
+// }
+.test-class {
+  background-color: #492389;
+}
 
 // $popover-offset: custom-property.get-var('popover-offset', 3rem);
 .popover-top {
