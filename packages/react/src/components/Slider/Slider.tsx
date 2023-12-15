@@ -18,68 +18,59 @@ import deprecate from '../../prop-types/deprecate';
 import { FeatureFlagContext } from '../FeatureFlags';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { Text } from '../Text';
+import { Tooltip } from '../Tooltip';
+import {
+  LowerHandle,
+  LowerHandleFocus,
+  UpperHandle,
+  UpperHandleFocus,
+} from './SliderHandles';
 
-const LowerHandle = () => (
-  <PrefixContext.Consumer>
-    {(prefix) => (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 16 24"
-        className={`${prefix}--slider__thumb-icon ${prefix}--slider__thumb-icon--lower`}>
-        <path d="M15.08 6.46H16v11.08h-.92zM4.46 17.54c-.25 0-.46-.21-.46-.46V6.92a.465.465 0 0 1 .69-.4l8.77 5.08a.46.46 0 0 1 0 .8l-8.77 5.08c-.07.04-.15.06-.23.06Z" />
-        <path fill="none" d="M-4 0h24v24H-4z" />
-      </svg>
-    )}
-  </PrefixContext.Consumer>
-);
+const ThumbWrapper = ({
+  hasTooltip = false,
+  className,
+  style,
+  children,
+  ...rest
+}) => {
+  if (hasTooltip) {
+    return (
+      // eslint-disable-next-line react/forbid-component-props
+      <Tooltip className={className} style={style} {...rest}>
+        {children}
+      </Tooltip>
+    );
+  } else {
+    return (
+      // eslint-disable-next-line react/forbid-dom-props
+      <div className={className} style={style}>
+        {children}
+      </div>
+    );
+  }
+};
 
-const LowerHandleFocus = () => (
-  <PrefixContext.Consumer>
-    {(prefix) => (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 16 24"
-        className={`${prefix}--slider__thumb-icon ${prefix}--slider__thumb-icon--lower ${prefix}--slider__thumb-icon--focus`}>
-        <path d="M15.08 6.46H16v11.08h-.92zM4.46 17.54c-.25 0-.46-.21-.46-.46V6.92a.465.465 0 0 1 .69-.4l8.77 5.08a.46.46 0 0 1 0 .8l-8.77 5.08c-.07.04-.15.06-.23.06Z" />
-        <path fill="none" d="M-4 0h24v24H-4z" />
-        <path d="M15.08 0H16v6.46h-.92z" />
-        <path d="M0 0h.92v24H0zM15.08 0H16v24h-.92z" />
-        <path d="M0 .92V0h16v.92zM0 24v-.92h16V24z" />
-      </svg>
-    )}
-  </PrefixContext.Consumer>
-);
+ThumbWrapper.propTypes = {
+  /**
+   * The thumb node itself.
+   */
+  children: PropTypes.node,
 
-const UpperHandle = () => (
-  <PrefixContext.Consumer>
-    {(prefix) => (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 16 24"
-        className={`${prefix}--slider__thumb-icon ${prefix}--slider__thumb-icon--upper`}>
-        <path d="M0 6.46h.92v11.08H0zM11.54 6.46c.25 0 .46.21.46.46v10.15a.465.465 0 0 1-.69.4L2.54 12.4a.46.46 0 0 1 0-.8l8.77-5.08c.07-.04.15-.06.23-.06Z" />
-        <path fill="none" d="M-4 0h24v24H-4z" />
-      </svg>
-    )}
-  </PrefixContext.Consumer>
-);
+  /**
+   * CSS wrapper class names.
+   */
+  className: PropTypes.string,
 
-const UpperHandleFocus = () => (
-  <PrefixContext.Consumer>
-    {(prefix) => (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 16 24"
-        className={`${prefix}--slider__thumb-icon ${prefix}--slider__thumb-icon--upper ${prefix}--slider__thumb-icon--focus`}>
-        <path d="M0 6.46h.92v11.08H0zM11.54 6.46c.25 0 .46.21.46.46v10.15a.465.465 0 0 1-.69.4L2.54 12.4a.46.46 0 0 1 0-.8l8.77-5.08c.07-.04.15-.06.23-.06Z" />
-        <path fill="none" d="M-4 0h24v24H-4z" />
-        <path d="M.92 24H0v-6.46h.92z" />
-        <path d="M16 24h-.92V0H16zM.92 24H0V0h.92z" />
-        <path d="M16 23.08V24H0v-.92zM16 0v.92H0V0z" />
-      </svg>
-    )}
-  </PrefixContext.Consumer>
-);
+  /**
+   * Should the thumb show a tooltip with the current value?
+   */
+  hasTooltip: PropTypes.bool.isRequired,
+
+  /**
+   * Percentage offset for the select thumb value.
+   */
+  style: PropTypes.object,
+};
 
 const translationIds = {
   autoCorrectAnnouncement: 'carbon.slider.auto-correct-announcement',
@@ -564,15 +555,6 @@ class Slider extends PureComponent<SliderProps> {
     // Fire onChange event handler if present, if there's a usable value, and
     // if the value is different from the last one
     if (this.hasTwoHandles()) {
-      if (this.thumbRef.current) {
-        this.thumbRef.current.style.insetInlineStart = `${this.state.left}%`;
-        if (this.state.isRtl) {
-          this.thumbRef.current.style.transform = `translate(100%, -50%)`;
-        }
-      }
-      if (this.thumbRefUpper.current) {
-        this.thumbRefUpper.current.style.insetInlineStart = `${this.state.leftUpper}%`;
-      }
       if (this.filledTrackRef.current) {
         this.filledTrackRef.current.style.transform = this.state.isRtl
           ? `translate(${100 - this.state.leftUpper}%, -50%) scaleX(${
@@ -583,11 +565,6 @@ class Slider extends PureComponent<SliderProps> {
             })`;
       }
     } else {
-      if (this.thumbRef.current) {
-        this.thumbRef.current.style.insetInlineStart = this.state.isRtl
-          ? `calc(${this.state.left}% - 14px)`
-          : `${this.state.left}%`;
-      }
       if (this.filledTrackRef.current) {
         this.filledTrackRef.current.style.transform = this.state.isRtl
           ? `translate(100%, -50%) scaleX(-${this.state.left / 100})`
@@ -691,6 +668,12 @@ class Slider extends PureComponent<SliderProps> {
       return;
     }
 
+    // We're going to force focus on one of the handles later on here, b/c we're
+    // firing on a mousedown event, we need to call event.preventDefault() to
+    // keep the focus from leaving the HTMLElement.
+    // @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus#notes
+    evt.preventDefault();
+
     // Register drag stop handlers
     DRAG_STOP_EVENT_TYPES.forEach((element) => {
       this.element?.ownerDocument.addEventListener(element, this.onDragStop);
@@ -705,19 +688,42 @@ class Slider extends PureComponent<SliderProps> {
 
     let activeHandle;
     if (this.hasTwoHandles()) {
-      const distanceToLower = this.calcDistanceToHandle(
-        HandlePosition.LOWER,
-        clientX
-      );
-      const distanceToUpper = this.calcDistanceToHandle(
-        HandlePosition.UPPER,
-        clientX
-      );
-      if (distanceToLower <= distanceToUpper) {
+      if (evt.target == this.thumbRef.current) {
         activeHandle = HandlePosition.LOWER;
-      } else {
+      } else if (evt.target == this.thumbRefUpper.current) {
         activeHandle = HandlePosition.UPPER;
+      } else {
+        const distanceToLower = this.calcDistanceToHandle(
+          HandlePosition.LOWER,
+          clientX
+        );
+        const distanceToUpper = this.calcDistanceToHandle(
+          HandlePosition.UPPER,
+          clientX
+        );
+        if (distanceToLower <= distanceToUpper) {
+          activeHandle = HandlePosition.LOWER;
+        } else {
+          activeHandle = HandlePosition.UPPER;
+        }
       }
+    }
+
+    // Force focus to the appropriate handle.
+    const focusOptions = {
+      preventScroll: true,
+    };
+    if (this.hasTwoHandles()) {
+      if (this.thumbRef.current && activeHandle === HandlePosition.LOWER) {
+        this.thumbRef.current.focus(focusOptions);
+      } else if (
+        this.thumbRefUpper.current &&
+        activeHandle === HandlePosition.UPPER
+      ) {
+        this.thumbRefUpper.current.focus(focusOptions);
+      }
+    } else if (this.thumbRef.current) {
+      this.thumbRef.current.focus(focusOptions);
     }
     this.setState({ activeHandle });
 
@@ -1358,6 +1364,7 @@ class Slider extends PureComponent<SliderProps> {
             [`${prefix}--slider-container--two-handles`]: twoHandles,
             [`${prefix}--slider-container--disabled`]: disabled,
             [`${prefix}--slider-container--readonly`]: readOnly,
+            [`${prefix}--slider-container--rtl`]: isRtl,
           });
           const sliderClasses = classNames(`${prefix}--slider`, {
             [`${prefix}--slider--disabled`]: disabled,
@@ -1370,7 +1377,6 @@ class Slider extends PureComponent<SliderProps> {
           ];
           const conditionalInputClasses = {
             [`${prefix}--text-input--light`]: light,
-            [`${prefix}--slider-text-input--hidden`]: hideTextInput,
           };
           const lowerInputClasses = classNames([
             ...fixedInputClasses,
@@ -1397,6 +1403,7 @@ class Slider extends PureComponent<SliderProps> {
             `${prefix}--slider-text-input-wrapper--lower`,
             {
               [`${prefix}--text-input-wrapper--readonly`]: readOnly,
+              [`${prefix}--slider-text-input-wrapper--hidden`]: hideTextInput,
             },
           ]);
           const upperInputWrapperClasses = classNames([
@@ -1405,6 +1412,7 @@ class Slider extends PureComponent<SliderProps> {
             `${prefix}--slider-text-input-wrapper--upper`,
             {
               [`${prefix}--text-input-wrapper--readonly`]: readOnly,
+              [`${prefix}--slider-text-input-wrapper--hidden`]: hideTextInput,
             },
           ]);
           const lowerThumbClasses = classNames(`${prefix}--slider__thumb`, {
@@ -1413,6 +1421,28 @@ class Slider extends PureComponent<SliderProps> {
           const upperThumbClasses = classNames(`${prefix}--slider__thumb`, {
             [`${prefix}--slider__thumb--upper`]: twoHandles,
           });
+          const lowerThumbWrapperClasses = classNames([
+            `${prefix}--icon-tooltip`,
+            `${prefix}--slider__thumb-wrapper`,
+            {
+              [`${prefix}--slider__thumb-wrapper--lower`]: twoHandles,
+            },
+          ]);
+          const upperThumbWrapperClasses = classNames([
+            `${prefix}--icon-tooltip`,
+            `${prefix}--slider__thumb-wrapper`,
+            {
+              [`${prefix}--slider__thumb-wrapper--upper`]: twoHandles,
+            },
+          ]);
+          const lowerThumbWrapperProps = {
+            style: {
+              insetInlineStart: `${this.state.left}%`,
+            },
+          };
+          const upperThumbWrapperProps = {
+            style: { insetInlineStart: `${this.state.leftUpper}%` },
+          };
 
           return (
             <div className={classNames(`${prefix}--form-item`, className)}>
@@ -1481,43 +1511,71 @@ class Slider extends PureComponent<SliderProps> {
                       : null
                   }
                   {...other}>
-                  <div
-                    className={lowerThumbClasses}
-                    role="slider"
-                    id={twoHandles ? undefined : id}
-                    tabIndex={!readOnly ? 0 : -1}
-                    aria-valuemax={twoHandles ? valueUpper : max}
-                    aria-valuemin={min}
-                    aria-valuenow={value}
-                    aria-labelledby={twoHandles ? undefined : labelId}
-                    aria-label={twoHandles ? ariaLabelInput : undefined}
-                    ref={this.thumbRef}
-                    onFocus={() =>
-                      this.setState({ activeHandle: HandlePosition.LOWER })
-                    }>
-                    {twoHandles && !isRtl && <LowerHandle />}
-                    {twoHandles && !isRtl && <LowerHandleFocus />}
-                    {twoHandles && isRtl && <UpperHandle />}
-                    {twoHandles && isRtl && <UpperHandleFocus />}
-                  </div>
-                  {twoHandles ? (
+                  <ThumbWrapper
+                    hasTooltip={hideTextInput}
+                    className={lowerThumbWrapperClasses}
+                    label={`${value}`}
+                    align={twoHandles ? 'top-right' : 'top'}
+                    {...lowerThumbWrapperProps}>
                     <div
-                      className={upperThumbClasses}
+                      className={lowerThumbClasses}
                       role="slider"
+                      id={twoHandles ? undefined : id}
                       tabIndex={!readOnly ? 0 : -1}
-                      aria-valuemax={max}
-                      aria-valuemin={value}
-                      aria-valuenow={valueUpper}
-                      aria-label={ariaLabelInputUpper}
-                      ref={this.thumbRefUpper}
+                      aria-valuemax={twoHandles ? valueUpper : max}
+                      aria-valuemin={min}
+                      aria-valuenow={value}
+                      aria-labelledby={twoHandles ? undefined : labelId}
+                      aria-label={twoHandles ? ariaLabelInput : undefined}
+                      ref={this.thumbRef}
                       onFocus={() =>
-                        this.setState({ activeHandle: HandlePosition.UPPER })
+                        this.setState({ activeHandle: HandlePosition.LOWER })
                       }>
-                      {twoHandles && !isRtl && <UpperHandle />}
-                      {twoHandles && !isRtl && <UpperHandleFocus />}
-                      {twoHandles && isRtl && <LowerHandle />}
-                      {twoHandles && isRtl && <LowerHandleFocus />}
+                      {twoHandles && !isRtl ? (
+                        <>
+                          <LowerHandle />
+                          <LowerHandleFocus />
+                        </>
+                      ) : twoHandles && isRtl ? (
+                        <>
+                          <UpperHandle />
+                          <UpperHandleFocus />
+                        </>
+                      ) : undefined}
                     </div>
+                  </ThumbWrapper>
+                  {twoHandles ? (
+                    <ThumbWrapper
+                      hasTooltip={hideTextInput}
+                      className={upperThumbWrapperClasses}
+                      label={`${valueUpper}`}
+                      align="top-left"
+                      {...upperThumbWrapperProps}>
+                      <div
+                        className={upperThumbClasses}
+                        role="slider"
+                        tabIndex={!readOnly ? 0 : -1}
+                        aria-valuemax={max}
+                        aria-valuemin={value}
+                        aria-valuenow={valueUpper}
+                        aria-label={ariaLabelInputUpper}
+                        ref={this.thumbRefUpper}
+                        onFocus={() =>
+                          this.setState({ activeHandle: HandlePosition.UPPER })
+                        }>
+                        {twoHandles && !isRtl ? (
+                          <>
+                            <UpperHandle />
+                            <UpperHandleFocus />
+                          </>
+                        ) : twoHandles && isRtl ? (
+                          <>
+                            <LowerHandle />
+                            <LowerHandleFocus />
+                          </>
+                        ) : undefined}
+                      </div>
+                    </ThumbWrapper>
                   ) : null}
                   <div
                     className={`${prefix}--slider__track`}

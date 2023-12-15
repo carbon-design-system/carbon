@@ -199,7 +199,7 @@ export interface DropdownProps<ItemType>
   size?: ListBoxSize;
 
   /**
-   * Provide a `Slug` component to be rendered inside the `Dropdown` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `Dropdown` component
    */
   slug?: ReactNodeLike;
 
@@ -444,7 +444,7 @@ const Dropdown = React.forwardRef(
 
     // Slug is always size `mini`
     let normalizedSlug;
-    if (slug) {
+    if (slug && slug['type']?.displayName === 'Slug') {
       normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
         size: 'mini',
       });
@@ -708,7 +708,7 @@ Dropdown.propTypes = {
   size: ListBoxPropTypes.ListBoxSize,
 
   /**
-   * Provide a `Slug` component to be rendered inside the `Dropdown` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `Dropdown` component
    */
   slug: PropTypes.node,
 

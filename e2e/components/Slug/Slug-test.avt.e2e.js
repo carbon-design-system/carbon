@@ -40,7 +40,7 @@ test.describe('Slug @avt', () => {
   test('@avt-advanced-states ai form', async ({ page }) => {
     await visitStory(page, {
       component: 'Slug',
-      id: 'components-form--ai-form',
+      id: 'experimental-unstable-slug-form--form-example',
       globals: {
         theme: 'white',
       },

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
+import PropTypes, { ReactNodeLike } from 'prop-types';
 import React, { useRef, useEffect } from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
@@ -23,6 +23,7 @@ import { keys, match } from '../../internal/keyboard';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
 import { ReactAttr } from '../../types/common';
+import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -101,7 +102,7 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   /**
    * Specify loading status
    */
-  loadingStatus?: string;
+  loadingStatus?: InlineLoadingStatus;
 
   /**
    * Specify a label to be read by screen readers on the modal root node
@@ -128,7 +129,7 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
    * Specify an optional handler to be invoked when loading is
    * successful
    */
-  onLoadingSuccess?: React.ReactEventHandler<HTMLElement>;
+  onLoadingSuccess?: () => void;
 
   /**
    * Specify a handler for closing modal.
@@ -204,6 +205,11 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
    * Specify the size variant.
    */
   size?: ModalSize;
+
+  /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `Modal` component
+   */
+  slug?: ReactNodeLike;
 }
 
 const Modal = React.forwardRef(function Modal(
@@ -238,6 +244,7 @@ const Modal = React.forwardRef(function Modal(
     loadingDescription,
     loadingIconDescription,
     onLoadingSuccess = noopFn,
+    slug,
     ...rest
   }: ModalProps,
   ref: React.LegacyRef<HTMLDivElement>
@@ -322,6 +329,7 @@ const Modal = React.forwardRef(function Modal(
       [`${prefix}--modal-tall`]: !passiveModal,
       'is-visible': open,
       [`${prefix}--modal--danger`]: danger,
+      [`${prefix}--modal--slug`]: slug,
     },
     className
   );
@@ -417,6 +425,14 @@ const Modal = React.forwardRef(function Modal(
     }
   }, [open, selectorPrimaryFocus, danger, prefix]);
 
+  // Slug is always size `lg`
+  let normalizedSlug;
+  if (slug && slug['type']?.displayName === 'Slug') {
+    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+      size: 'lg',
+    });
+  }
+
   const modalButton = (
     <button
       className={modalCloseButtonClass}
@@ -459,6 +475,7 @@ const Modal = React.forwardRef(function Modal(
           className={`${prefix}--modal-header__heading`}>
           {modalHeading}
         </Text>
+        {normalizedSlug}
         {!passiveModal && modalButton}
       </div>
       <div
@@ -751,6 +768,11 @@ Modal.propTypes = {
    * Specify the size variant.
    */
   size: PropTypes.oneOf(ModalSizes),
+
+  /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `Modal` component
+   */
+  slug: PropTypes.node,
 };
 
 export default Modal;

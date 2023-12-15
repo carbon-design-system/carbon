@@ -54,7 +54,7 @@ function CheckboxGroup({
 
   // Slug is always size `mini`
   let normalizedSlug;
-  if (slug) {
+  if (slug && slug['type']?.displayName === 'Slug') {
     normalizedSlug = React.cloneElement(slug, {
       size: 'mini',
       kind: 'default',
@@ -140,7 +140,7 @@ CheckboxGroup.propTypes = {
   readOnly: PropTypes.bool,
 
   /**
-   * Provide a `Slug` component to be rendered inside the `CheckboxGroup` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `CheckboxGroup` component
    */
   slug: PropTypes.node,
 

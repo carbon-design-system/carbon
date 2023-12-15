@@ -32,7 +32,7 @@ export default {
 export const Default = () => (
   <MenuButton label="Actions">
     <MenuItem label="First action" />
-    <MenuItem label="Second action" />
+    <MenuItem label="Second action that is a longer item to test overflow and title." />
     <MenuItem label="Third action" disabled />
   </MenuButton>
 );
