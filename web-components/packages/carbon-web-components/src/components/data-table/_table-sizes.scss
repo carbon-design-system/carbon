@@ -185,13 +185,6 @@
 //
 // "selection" and "expandable" sizes
 //
-:host(#{$prefix}-table-header-row[selection-name][expandable]),
-:host(#{$prefix}-table-row[selection-name][expandable]) {
-  ::slotted(#{$prefix}-table-header-cell),
-  ::slotted(#{$prefix}-table-cell) {
-    padding-left: $spacing-03;
-  }
-}
 
 :host(#{$prefix}-table-header-row[selection-name][expandable][size='xs']),
 :host(#{$prefix}-table-row[selection-name][expandable][size='xs']) {

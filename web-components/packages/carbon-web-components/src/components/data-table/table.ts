@@ -218,6 +218,12 @@ class CDSTable extends HostListenerMixin(LitElement) {
   @property({ type: Boolean, attribute: 'with-header', reflect: true })
   withHeader;
 
+  /**
+   *  true if slugs are added in the rows
+   */
+  @property({ type: Boolean, attribute: 'with-row-slugs' })
+  withRowSlugs = false;
+
   private _handleSlotChange({ target }: Event) {
     const hasContent = (target as HTMLSlotElement)
       .assignedNodes()
@@ -723,6 +729,18 @@ class CDSTable extends HostListenerMixin(LitElement) {
         (this.constructor as typeof CDSTable).selectorTableBody
       );
       (tableBody as any).useZebraStyles = this.useZebraStyles;
+    }
+
+    if (this.withRowSlugs) {
+      this._tableHeaderRow.setAttribute('rows-with-slug', '');
+      this._tableRows.forEach((row) => {
+        row.setAttribute('rows-with-slug', '');
+      });
+    } else {
+      this._tableHeaderRow.removeAttribute('rows-with-slug');
+      this._tableRows.forEach((row) => {
+        row.removeAttribute('rows-with-slug');
+      });
     }
   }
 

@@ -32,12 +32,24 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
   protected _buttonNode!: HTMLButtonElement;
 
   /**
-   * Handler for @slotchange, will only be ran if user sets an element under the "icon" slot.
-   *
-   * @private
+   * Handles `slotchange` event.
    */
-  private _handleSlotChange() {
-    this.hasCustomIcon = true;
+  protected _handleSlugSlotChange({ target }: Event) {
+    const hasContent = (target as HTMLSlotElement)
+      .assignedNodes()
+      .filter((elem) =>
+        (elem as HTMLElement).matches !== undefined
+          ? (elem as HTMLElement).matches(
+              (this.constructor as typeof CDSTag).slugItem
+            )
+          : false
+      );
+    if (hasContent.length > 0) {
+      (hasContent[0] as HTMLElement).setAttribute('tag', `${this.type}`);
+      (hasContent[0] as HTMLElement).setAttribute('size', 'sm');
+      (hasContent[0] as HTMLElement).setAttribute('kind', 'inline');
+    }
+    this.requestUpdate();
   }
 
   /**
@@ -122,29 +134,29 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
   render() {
     const {
       disabled,
-      _handleSlotChange: handleSlotChange,
-      hasCustomIcon,
       filter,
+      _handleSlugSlotChange: handleSlugSlotChange,
       title,
     } = this;
     return html`
+      <slot name="icon"></slot>
       <slot></slot>
-
+      <slot name="slug" @slotchange="${handleSlugSlotChange}"></slot>
       ${filter
         ? html`
             <button class="${prefix}--tag__close-icon" ?disabled=${disabled}>
-              <slot
-                name="icon"
-                aria-label="${title}"
-                @slotchange=${handleSlotChange}>
-                ${hasCustomIcon
-                  ? html``
-                  : html`${Close16({ 'aria-label': title })}`}
-              </slot>
+              ${Close16({ 'aria-label': title })}
             </button>
           `
         : ``}
     `;
+  }
+
+  /**
+   * A selector that will return the slug item.
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
   }
 
   /**
