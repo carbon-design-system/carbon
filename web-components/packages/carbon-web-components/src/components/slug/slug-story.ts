@@ -18,7 +18,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import './index';
 import '../icon-button/index';
-import styles from './slug-story.scss';
+import styles from './slug-story.scss?lit';
 
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import { SLUG_SIZE } from './defs';

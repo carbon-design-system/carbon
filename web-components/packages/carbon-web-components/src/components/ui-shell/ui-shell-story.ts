@@ -22,7 +22,7 @@ import './index';
 import '../skip-to-content';
 import '../modal/modal';
 import '../button/button';
-import styles from './ui-shell-story.scss';
+import styles from './ui-shell-story.scss?lit';
 import storyDocs from './ui-shell-story.mdx';
 import { prefix } from '../../globals/settings';
 

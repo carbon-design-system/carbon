@@ -15,7 +15,7 @@ import { prefix } from '../../globals/settings';
 import { findIndex, forEach } from '../../globals/internal/collection-helpers';
 import CDSDropdown, { DROPDOWN_KEYBOARD_ACTION } from '../dropdown/dropdown';
 import CDSComboBoxItem from './combo-box-item';
-import styles from './combo-box.scss';
+import styles from './combo-box.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { DROPDOWN_DIRECTION, DROPDOWN_SIZE } from '../dropdown/dropdown';

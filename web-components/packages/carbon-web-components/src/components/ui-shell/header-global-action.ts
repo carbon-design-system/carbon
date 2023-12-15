@@ -12,7 +12,7 @@ import { property, customElement, query } from 'lit/decorators.js';
 import { BUTTON_TOOLTIP_POSITION } from '../button/button';
 import CDSButton from '../button/button';
 import HostListener from '../../globals/decorators/host-listener';
-import styles from './header.scss';
+import styles from './header.scss?lit';
 import { prefix } from '../../globals/settings';
 
 /**

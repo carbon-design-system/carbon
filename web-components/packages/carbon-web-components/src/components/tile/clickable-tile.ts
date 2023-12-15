@@ -13,7 +13,7 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSLink from '../link/link';
 import { TILE_COLOR_SCHEME } from './defs';
-import styles from './tile.scss';
+import styles from './tile.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 // To Do: Replace with an an icon from `@carbon/icons`

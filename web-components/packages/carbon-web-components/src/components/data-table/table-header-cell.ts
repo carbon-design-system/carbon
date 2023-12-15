@@ -18,7 +18,7 @@ import {
   TABLE_SORT_CYCLES,
   TABLE_SORT_DIRECTION,
 } from './defs';
-import styles from './data-table.scss';
+import styles from './data-table.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { TABLE_SORT_CYCLE, TABLE_SORT_CYCLES, TABLE_SORT_DIRECTION };

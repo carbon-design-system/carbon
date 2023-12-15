@@ -16,7 +16,7 @@ import { forEach } from '../../globals/internal/collection-helpers';
 import ChevronRight16 from '@carbon/icons/lib/chevron--right/16';
 import './accordion-item-skeleton';
 import '../skeleton-text/index';
-import styles from './accordion.scss';
+import styles from './accordion.scss?lit';
 
 /**
  * Skeleton of code snippet.

@@ -15,7 +15,7 @@ import { prefix } from '../../globals/settings';
 import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
 import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16';
 import FocusMixin from '../../globals/mixins/focus';
-import styles from './slider.scss';
+import styles from './slider.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**

@@ -9,7 +9,7 @@
 
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
-import styles from './breadcrumb.scss';
+import styles from './breadcrumb.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**

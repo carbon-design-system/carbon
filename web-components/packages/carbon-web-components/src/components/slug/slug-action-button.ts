@@ -10,7 +10,7 @@
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSButton from '../button/button';
-import styles from './slug.scss';
+import styles from './slug.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**

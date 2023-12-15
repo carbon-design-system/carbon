@@ -13,7 +13,7 @@ import { prefix } from '../../globals/settings';
 import { NAVIGATION_DIRECTION } from '../../globals/internal/radio-group-manager';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import styles from './tile.scss';
+import styles from './tile.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**

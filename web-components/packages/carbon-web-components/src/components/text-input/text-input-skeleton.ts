@@ -10,7 +10,7 @@
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import styles from './text-input.scss';
+import styles from './text-input.scss?lit';
 
 /**
  * Skeleton of number input.

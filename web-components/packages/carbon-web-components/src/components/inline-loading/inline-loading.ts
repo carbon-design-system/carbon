@@ -16,7 +16,7 @@ import { prefix } from '../../globals/settings';
 import LOADING_TYPE from '../loading/types';
 import getLoadingIcon from '../loading/loading-icon';
 import { INLINE_LOADING_STATE } from './defs';
-import styles from './inline-loading.scss';
+import styles from './inline-loading.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { INLINE_LOADING_STATE };

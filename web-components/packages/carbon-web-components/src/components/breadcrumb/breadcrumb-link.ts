@@ -10,7 +10,7 @@
 import { html } from 'lit';
 import { prefix } from '../../globals/settings';
 import CDSLink from '../link/link';
-import styles from './breadcrumb.scss';
+import styles from './breadcrumb.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**

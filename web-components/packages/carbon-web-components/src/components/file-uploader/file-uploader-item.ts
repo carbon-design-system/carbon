@@ -15,7 +15,7 @@ import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
 import { prefix } from '../../globals/settings';
 import { LOADING_TYPE } from '../loading/loading';
 import { FILE_UPLOADER_ITEM_SIZE, FILE_UPLOADER_ITEM_STATE } from './defs';
-import styles from './file-uploader.scss';
+import styles from './file-uploader.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { FILE_UPLOADER_ITEM_SIZE, FILE_UPLOADER_ITEM_STATE };

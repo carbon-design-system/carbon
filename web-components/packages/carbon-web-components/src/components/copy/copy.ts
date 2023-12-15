@@ -10,7 +10,7 @@
 import { html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import styles from '../copy-button/copy-button.scss';
+import styles from '../copy-button/copy-button.scss?lit';
 import CDSIconButton from '../icon-button/icon-button';
 
 /**

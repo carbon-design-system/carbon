@@ -18,7 +18,7 @@ import RadioGroupManager, {
   NAVIGATION_DIRECTION,
   ManagedRadioButtonDelegate,
 } from '../../globals/internal/radio-group-manager';
-import styles from './structured-list.scss';
+import styles from './structured-list.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**

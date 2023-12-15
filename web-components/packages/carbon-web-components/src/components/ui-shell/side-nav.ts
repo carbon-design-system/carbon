@@ -19,7 +19,7 @@ import Handle from '../../globals/internal/handle';
 import { SIDE_NAV_COLLAPSE_MODE, SIDE_NAV_USAGE_MODE } from './defs';
 import CDSHeaderMenuButton from './header-menu-button';
 import CDSSideNavMenu from './side-nav-menu';
-import styles from './side-nav.scss';
+import styles from './side-nav.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { SIDE_NAV_COLLAPSE_MODE, SIDE_NAV_USAGE_MODE };

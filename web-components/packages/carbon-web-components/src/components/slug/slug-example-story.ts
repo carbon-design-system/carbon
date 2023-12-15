@@ -16,7 +16,7 @@ import textNullable from '../../../.storybook/knob-text-nullable';
 import { prefix } from '../../globals/settings';
 import './index';
 import '../icon-button/index';
-import styles from './slug-story.scss';
+import styles from './slug-story.scss?lit';
 
 const items = [
   {

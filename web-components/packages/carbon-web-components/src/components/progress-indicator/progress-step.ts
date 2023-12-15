@@ -16,7 +16,7 @@ import Warning16 from '@carbon/icons/lib/warning/16';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import { PROGRESS_STEP_STAT } from './defs';
-import styles from './progress-indicator.scss';
+import styles from './progress-indicator.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { PROGRESS_STEP_STAT };

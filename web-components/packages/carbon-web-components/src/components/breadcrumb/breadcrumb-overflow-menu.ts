@@ -11,7 +11,7 @@ import { html } from 'lit';
 import { prefix } from '../../globals/settings';
 import OverflowMenuHorizontal16 from '@carbon/icons/lib/overflow-menu--horizontal/16';
 import CDSOverflowMenu from '../overflow-menu/overflow-menu';
-import styles from './breadcrumb.scss';
+import styles from './breadcrumb.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**

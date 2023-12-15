@@ -15,7 +15,7 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import { INPUT_SIZE } from '../text-input/text-input';
 import CDSSearch from '../search/search';
-import styles from './data-table.scss';
+import styles from './data-table.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**

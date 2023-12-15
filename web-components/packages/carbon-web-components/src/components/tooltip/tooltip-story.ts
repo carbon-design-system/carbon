@@ -16,7 +16,7 @@ import './tooltip';
 import './tooltip-content';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import { prefix } from '../../globals/settings';
-import styles from './tooltip-story.scss';
+import styles from './tooltip-story.scss?lit';
 import storyDocs from './tooltip-story.mdx';
 import Information16 from '@carbon/icons/lib/information/16';
 

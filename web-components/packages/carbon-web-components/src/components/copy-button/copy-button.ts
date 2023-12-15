@@ -12,7 +12,7 @@ import { property, customElement } from 'lit/decorators.js';
 import Copy16 from '@carbon/icons/lib/copy/16';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
-import styles from './copy-button.scss';
+import styles from './copy-button.scss?lit';
 import '../copy/copy';
 
 /**

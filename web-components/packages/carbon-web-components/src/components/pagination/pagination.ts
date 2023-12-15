@@ -15,7 +15,7 @@ import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
-import styles from './pagination.scss';
+import styles from './pagination.scss?lit';
 import { PAGINATION_SIZE } from './defs';
 import CDSSelect from '../select/select';
 import '../button/index';

@@ -19,7 +19,7 @@ import { RADIO_BUTTON_LABEL_POSITION, RADIO_BUTTON_ORIENTATION } from './defs';
 import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
 import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16';
 import CDSRadioButton from './radio-button';
-import styles from './radio-button.scss';
+import styles from './radio-button.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { RADIO_BUTTON_ORIENTATION };

@@ -18,7 +18,7 @@ import CDSOverflowMenuItem from './overflow-menu-item';
 import HostListener from '../../globals/decorators/host-listener';
 import { indexOf } from '../../globals/internal/collection-helpers';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import styles from './overflow-menu.scss';
+import styles from './overflow-menu.scss?lit';
 
 /**
  * @param index The index

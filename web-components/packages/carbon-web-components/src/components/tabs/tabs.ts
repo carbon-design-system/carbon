@@ -21,7 +21,7 @@ import CDSContentSwitcher, {
 } from '../content-switcher/content-switcher';
 import { TABS_KEYBOARD_ACTION, TABS_TYPE } from './defs';
 import CDSTab from './tab';
-import styles from './tabs.scss';
+import styles from './tabs.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { NAVIGATION_DIRECTION, TABS_KEYBOARD_ACTION, TABS_TYPE };

@@ -17,7 +17,7 @@ import { property, customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { NOTIFICATION_TYPE, NOTIFICATION_KIND } from './defs';
 import CDSInlineNotification from './inline-notification';
-import styles from './actionable-notification.scss';
+import styles from './actionable-notification.scss?lit';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 

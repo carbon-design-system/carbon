@@ -14,7 +14,7 @@ import ChevronDown16 from '@carbon/icons/lib/chevron--down/16';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import { CODE_SNIPPET_COLOR_SCHEME, CODE_SNIPPET_TYPE } from './defs';
-import styles from './code-snippet.scss';
+import styles from './code-snippet.scss?lit';
 import Handle from '../../globals/internal/handle';
 import '../copy-button/index';
 import '../copy/copy';

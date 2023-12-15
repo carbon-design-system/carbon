@@ -16,7 +16,7 @@ import { TABS_TYPE } from './tabs';
 import './tab';
 import './tabs-skeleton';
 import './tab-skeleton';
-import styles from './tabs-story.scss';
+import styles from './tabs-story.scss?lit';
 import storyDocs from './tabs-story.mdx';
 import { prefix } from '../../globals/settings';
 

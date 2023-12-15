@@ -13,7 +13,7 @@ import { property, customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
-import styles from './file-uploader.scss';
+import styles from './file-uploader.scss?lit';
 import { BUTTON_KIND, BUTTON_SIZE } from '../button/defs';
 
 export { FORM_ELEMENT_COLOR_SCHEME as TILE_COLOR_SCHEME } from '../../globals/shared-enums';

@@ -10,7 +10,7 @@
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import styles from './checkbox.scss';
+import styles from './checkbox.scss?lit';
 
 /**
  * Skeleton of number input.

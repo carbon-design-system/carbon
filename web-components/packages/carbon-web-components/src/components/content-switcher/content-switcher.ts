@@ -13,7 +13,7 @@ import { prefix } from '../../globals/settings';
 import { forEach, indexOf } from '../../globals/internal/collection-helpers';
 import { NAVIGATION_DIRECTION, CONTENT_SWITCHER_SIZE } from './defs';
 import CDSContentSwitcherItem from './content-switcher-item';
-import styles from './content-switcher.scss';
+import styles from './content-switcher.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { NAVIGATION_DIRECTION, CONTENT_SWITCHER_SIZE };

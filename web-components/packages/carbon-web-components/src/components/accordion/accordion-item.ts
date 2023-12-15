@@ -15,7 +15,7 @@ import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import Handle from '../../globals/internal/handle';
 import { ACCORDION_ITEM_BREAKPOINT } from './defs';
-import styles from './accordion.scss';
+import styles from './accordion.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { ACCORDION_ITEM_BREAKPOINT };

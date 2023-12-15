@@ -10,7 +10,7 @@
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { BUTTON_KIND } from './defs';
-import styles from './button.scss';
+import styles from './button.scss?lit';
 import { prefix } from '../../globals/settings';
 
 /**

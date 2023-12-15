@@ -12,7 +12,7 @@ import { html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSToggleTip from '../toggle-tip/toggletip';
-import styles from './slug.scss';
+import styles from './slug.scss?lit';
 import Undo16 from '@carbon/icons/lib/undo/16';
 import { SLUG_SIZE, SLUG_KIND, SLUG_DOT_TYPE } from './defs';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';

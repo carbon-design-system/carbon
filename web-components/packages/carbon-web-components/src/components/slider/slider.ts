@@ -17,7 +17,7 @@ import FormMixin from '../../globals/mixins/form';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import CDSSliderInput from './slider-input';
-import styles from './slider.scss';
+import styles from './slider.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 interface Cancelable {

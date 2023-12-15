@@ -299,7 +299,6 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
             </p>
           `
         : html`
-        <p>sss</p>
             <a
               id="button"
               part="button"

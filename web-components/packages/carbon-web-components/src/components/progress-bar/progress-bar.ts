@@ -18,7 +18,7 @@ import {
   PROGRESS_BAR_TYPE,
 } from './defs';
 import { prefix } from '../../globals/settings';
-import styles from './progress-bar.scss';
+import styles from './progress-bar.scss?lit';
 
 export { PROGRESS_BAR_SIZE, PROGRESS_BAR_STATUS, PROGRESS_BAR_TYPE };
 

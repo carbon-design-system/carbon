@@ -9,7 +9,7 @@
 
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
-import styles from './skeleton-placeholder.scss';
+import styles from './skeleton-placeholder.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**

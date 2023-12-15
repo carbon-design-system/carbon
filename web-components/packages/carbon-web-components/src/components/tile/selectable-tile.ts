@@ -17,7 +17,7 @@ import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { TILE_COLOR_SCHEME } from './defs';
-import styles from './tile.scss';
+import styles from './tile.scss?lit';
 import HostListener from '../../globals/decorators/host-listener';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 

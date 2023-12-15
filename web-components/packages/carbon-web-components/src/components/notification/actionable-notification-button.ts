@@ -10,7 +10,7 @@
 import { customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSButton from '../button/button';
-import styles from './actionable-notification.scss';
+import styles from './actionable-notification.scss?lit';
 
 /**
  * Actionable notification action button.

@@ -13,7 +13,7 @@ import { prefix } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { NOTIFICATION_TYPE } from './defs';
 import CDSInlineNotification from './inline-notification';
-import styles from './toast-notification.scss';
+import styles from './toast-notification.scss?lit';
 
 /**
  * Toast notification.

@@ -11,7 +11,7 @@ import { html } from 'lit';
 import { radios } from '@storybook/addon-knobs';
 import { prefix } from '../../globals/settings';
 import storyDocs from './layer-story.mdx';
-import styles from './layer-story.scss';
+import styles from './layer-story.scss?lit';
 import './index.ts';
 
 const levels = {

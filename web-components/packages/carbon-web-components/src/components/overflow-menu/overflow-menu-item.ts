@@ -13,7 +13,7 @@ import { prefix } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import FocusMixin from '../../globals/mixins/focus';
 import { OVERFLOW_MENU_SIZE } from './defs';
-import styles from './overflow-menu.scss';
+import styles from './overflow-menu.scss?lit';
 
 /**
  * Overflow menu item.

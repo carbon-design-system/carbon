@@ -10,7 +10,7 @@
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import styles from './breadcrumb.scss';
+import styles from './breadcrumb.scss?lit';
 
 const renderItem = () => {
   return html`

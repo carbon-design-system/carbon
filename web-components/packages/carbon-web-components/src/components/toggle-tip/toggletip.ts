@@ -16,7 +16,7 @@ import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import FocusMixin from '../../globals/mixins/focus';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
-import styles from './toggletip.scss';
+import styles from './toggletip.scss?lit';
 
 /**
  * Definition tooltip.

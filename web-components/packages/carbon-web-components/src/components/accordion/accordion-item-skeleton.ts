@@ -12,7 +12,7 @@ import ChevronRight16 from '@carbon/icons/lib/chevron--right/16';
 import { customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import '../skeleton-text/index';
-import styles from './accordion.scss';
+import styles from './accordion.scss?lit';
 
 /**
  * Skeleton of accordion item.

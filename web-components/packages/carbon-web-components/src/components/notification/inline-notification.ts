@@ -21,7 +21,7 @@ import { prefix } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import FocusMixin from '../../globals/mixins/focus';
 import { NOTIFICATION_KIND, NOTIFICATION_TYPE } from './defs';
-import styles from './inline-notification.scss';
+import styles from './inline-notification.scss?lit';
 
 export { NOTIFICATION_KIND, NOTIFICATION_TYPE };
 

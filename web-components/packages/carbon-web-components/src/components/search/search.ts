@@ -19,7 +19,7 @@ import FormMixin from '../../globals/mixins/form';
 import { INPUT_SIZE } from '../text-input/text-input';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import styles from './search.scss';
+import styles from './search.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**

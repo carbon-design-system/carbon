@@ -9,7 +9,7 @@
 
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
-import styles from './header.scss';
+import styles from './header.scss?lit';
 import { prefix } from '../../globals/settings';
 
 /**

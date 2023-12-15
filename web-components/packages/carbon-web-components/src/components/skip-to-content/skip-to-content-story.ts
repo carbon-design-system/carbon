@@ -9,7 +9,7 @@
 
 import { html } from 'lit';
 import './skip-to-content';
-import styles from './skip-to-content-story.scss';
+import styles from './skip-to-content-story.scss?lit';
 import storyDocs from './skip-to-content-story.mdx';
 import { prefix } from '../../globals/settings';
 

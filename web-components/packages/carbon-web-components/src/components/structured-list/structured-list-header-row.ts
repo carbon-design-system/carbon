@@ -11,7 +11,7 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import styles from './structured-list.scss';
+import styles from './structured-list.scss?lit';
 
 /**
  * Structured list header row.

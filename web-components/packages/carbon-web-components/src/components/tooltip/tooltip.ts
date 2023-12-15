@@ -14,7 +14,7 @@ import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import CDSPopover from '../popover/popover';
 import '../popover/popover-content';
-import styles from './tooltip.scss';
+import styles from './tooltip.scss?lit';
 import CDSTooltipContent from './tooltip-content';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 

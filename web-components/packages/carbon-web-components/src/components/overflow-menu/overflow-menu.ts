@@ -17,7 +17,7 @@ import { find } from '../../globals/internal/collection-helpers';
 import CDSFloatingMenuTrigger from '../floating-menu/floating-menu-trigger';
 import { OVERFLOW_MENU_SIZE } from './defs';
 import CDSOverflowMenuBody from './overflow-menu-body';
-import styles from './overflow-menu.scss';
+import styles from './overflow-menu.scss?lit';
 import CDSIconButton from '../icon-button/icon-button';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 

@@ -18,7 +18,7 @@ import { prefix } from '../../globals/settings';
 import Checkbox16 from '@carbon/icons/lib/checkbox/16';
 import Settings16 from '@carbon/icons/lib/settings/16';
 
-import styles from './popover-story.scss';
+import styles from './popover-story.scss?lit';
 
 const popoverAlignments = {
   [`top`]: POPOVER_ALIGNMENT.TOP,

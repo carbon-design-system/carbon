@@ -10,7 +10,7 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import styles from './progress-indicator.scss';
+import styles from './progress-indicator.scss?lit';
 import CircleDash from '@carbon/icons/lib/circle-dash/16';
 import '../skeleton-text';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';

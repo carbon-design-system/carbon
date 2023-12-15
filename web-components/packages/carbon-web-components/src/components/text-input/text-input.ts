@@ -25,7 +25,7 @@ import {
   INPUT_TOOLTIP_DIRECTION,
   INPUT_TYPE,
 } from './defs';
-import styles from './text-input.scss';
+import styles from './text-input.scss?lit';
 
 export {
   INPUT_COLOR_SCHEME,

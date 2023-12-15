@@ -10,7 +10,7 @@
 import { customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSPopoverContent from '../popover/popover-content';
-import styles from './tooltip.scss';
+import styles from './tooltip.scss?lit';
 
 /**
  * Tooltip content.

@@ -18,7 +18,7 @@ import { INPUT_SIZE } from '../text-input/text-input';
 import { DATE_PICKER_INPUT_COLOR_SCHEME, DATE_PICKER_INPUT_KIND } from './defs';
 import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
 import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16';
-import styles from './date-picker.scss';
+import styles from './date-picker.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { DATE_PICKER_INPUT_COLOR_SCHEME, DATE_PICKER_INPUT_KIND };

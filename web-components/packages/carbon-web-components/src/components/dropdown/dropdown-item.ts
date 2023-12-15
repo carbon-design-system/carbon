@@ -12,7 +12,7 @@ import { property } from 'lit/decorators.js';
 import Checkmark16 from '@carbon/icons/lib/checkmark/16';
 import { prefix } from '../../globals/settings';
 import { DROPDOWN_SIZE } from './dropdown';
-import styles from './dropdown.scss';
+import styles from './dropdown.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**

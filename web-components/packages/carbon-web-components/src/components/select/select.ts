@@ -18,7 +18,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import FormMixin from '../../globals/mixins/form';
 import { filter } from '../../globals/internal/collection-helpers';
 import { INPUT_SIZE } from '../text-input/text-input';
-import styles from './select.scss';
+import styles from './select.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**

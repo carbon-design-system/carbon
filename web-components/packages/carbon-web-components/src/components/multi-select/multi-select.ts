@@ -23,7 +23,7 @@ import CDSDropdown, {
 } from '../dropdown/dropdown';
 import { SELECTION_FEEDBACK_OPTION } from './defs';
 import CDSMultiSelectItem from './multi-select-item';
-import styles from './multi-select.scss';
+import styles from './multi-select.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export {
