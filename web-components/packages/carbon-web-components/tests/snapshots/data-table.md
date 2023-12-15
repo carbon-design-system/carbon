@@ -71,8 +71,15 @@
 ####     `should render with minimum attributes`
 
 ```
-<slot>
-</slot>
+<span
+  class="cds--table-header-label"
+  part="label-text"
+>
+  <slot>
+  </slot>
+  <slot name="slug">
+  </slot>
+</span>
 
 ```
 
@@ -86,11 +93,15 @@
       Name
     "
 >
-  <span
-    class="cds--table-header-label"
-    part="label-text"
-  >
-    <slot>
+  <span class="cds--table-sort__flex">
+    <span
+      class="cds--table-header-label"
+      part="label-text"
+    >
+      <slot>
+      </slot>
+    </span>
+    <slot name="slug">
     </slot>
   </span>
 </button>
@@ -113,16 +124,20 @@
 
 ```
 <div class="cds--table-column-checkbox">
-  <cds-checkbox
-    checked=""
-    data-table=""
-    disabled=""
-    hide-label=""
-    label-text="selection-label-foo"
-    name="selection-name-foo"
-    value="selection-value-foo"
-  >
-  </cds-checkbox>
+  <div>
+    <slot name="slug">
+    </slot>
+    <cds-checkbox
+      checked=""
+      data-table=""
+      disabled=""
+      hide-label=""
+      label-text="selection-label-foo"
+      name="selection-name-foo"
+      value="selection-value-foo"
+    >
+    </cds-checkbox>
+  </div>
 </div>
 <slot>
 </slot>
