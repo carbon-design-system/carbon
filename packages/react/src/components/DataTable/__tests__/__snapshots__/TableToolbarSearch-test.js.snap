@@ -9,7 +9,9 @@ exports[`TableToolbarSearch renders as expected - Component API should render 1`
   >
     <div
       aria-expanded="false"
+      aria-label="button"
       class="cds--search-magnifier"
+      role="button"
       tabindex="-1"
     >
       <svg

@@ -502,7 +502,9 @@ exports[`DataTable behaves as expected selection should render and match snapsho
         >
           <div
             aria-expanded="false"
+            aria-label="button"
             class="cds--search-magnifier"
+            role="button"
             tabindex="-1"
           >
             <svg
@@ -934,7 +936,9 @@ exports[`DataTable renders as expected - Component API should render and match s
         >
           <div
             aria-expanded="false"
+            aria-label="button"
             class="cds--search-magnifier"
+            role="button"
             tabindex="-1"
           >
             <svg
