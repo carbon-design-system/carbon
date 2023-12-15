@@ -32,6 +32,7 @@ Playground.args = {
   itemsShown: 10,
   page: 0,
   totalItems: 25,
+  disableOverflow: false,
 };
 
 Playground.argTypes = {
@@ -53,6 +54,11 @@ Playground.argTypes = {
   totalItems: {
     control: {
       type: 'number',
+    },
+  },
+  disableOverflow: {
+    control: {
+      type: 'boolean',
     },
   },
 };
