@@ -161,32 +161,8 @@ git push upstream v11.2.0
 
 - [ ] Verify that this triggers a run of the
       [Release Workflow](https://github.com/carbon-design-system/carbon/actions/workflows/release.yml)
-- [ ] Review and approve the Pull Request generated from this action in
-      [gatsby-theme-carbon](https://github.com/carbon-design-system/gatsby-theme-carbon/pulls)
-      to verify no breaking changes have occurred in this release. If the PR
-      from the previous release was not merged, the existing PR will be updated.
 
 **Friday**
-
-After the PR to the Carbon Gatsby theme is merged it will trigger an automated
-release of the theme. To then update the Carbon website to the latest version of
-Carbon and gatsby-theme-carbon you will need to:
-
-- [ ] Check that the
-      [chore(release): update carbon deps](https://github.com/carbon-design-system/gatsby-theme-carbon/pulls)
-      PR has been merged in the gatsby-theme-carbon repo.
-- [ ] Check that
-      [gatsby-theme-carbon](https://github.com/carbon-design-system/gatsby-theme-carbon)
-      has been released and is on the
-      [latest version](https://github.com/carbon-design-system/gatsby-theme-carbon/blob/main/packages/gatsby-theme-carbon/package.json)
-      of Carbon
-- [ ] Run the
-      [Update Carbon and gatsby-theme-carbon deps workflow](https://github.com/carbon-design-system/carbon-website/actions/workflows/update-carbon-gatsby-deps.yml)
-      to automatically open a PR in the Carbon website to update to latest
-      Carbon and gatsby-theme-carbon versions.
-- [ ] Review and approve the
-      [pull request](https://github.com/carbon-design-system/carbon-website/pulls)
-      generate by the workflow.
 
 The packages that have been published will be switched to latest on the first
 Friday of a sprint. To make the switch, you will need to:
@@ -209,6 +185,30 @@ Friday of a sprint. To make the switch, you will need to:
   - [ ] #carbon-components
   - [ ] #carbon-design-system
   - [ ] #carbon-react
+
+### Update gatsby-theme-carbon and carbon-website
+
+After the promotion workflow is completed this will trigger the
+`deploy-packages` workflow to update both `design-language-website` and
+`gatsby-theme-carbon` to the latest version of the Carbon packages.
+
+- [ ] Review, approve and merge the Pull Request generated from this action in
+      [gatsby-theme-carbon](https://github.com/carbon-design-system/gatsby-theme-carbon/pulls)
+      to verify no breaking changes have occurred in this release. If the PR
+      from the previous release was not merged, the existing PR will be updated.
+      This should trigger an automatic release of `gatsby-theme-carbon`.
+- [ ] Check that
+      [gatsby-theme-carbon](https://github.com/carbon-design-system/gatsby-theme-carbon)
+      has been released and is on the
+      [latest version](https://github.com/carbon-design-system/gatsby-theme-carbon/blob/main/packages/gatsby-theme-carbon/package.json)
+      of Carbon
+- [ ] Run the
+      [Update Carbon and gatsby-theme-carbon deps workflow](https://github.com/carbon-design-system/carbon-website/actions/workflows/update-carbon-gatsby-deps.yml)
+      to automatically open a PR in the Carbon website to update to latest
+      Carbon and gatsby-theme-carbon versions.
+- [ ] Review and approve the
+      [pull request](https://github.com/carbon-design-system/carbon-website/pulls)
+      generate by the workflow.
 
 <details>
   <summary>Click to view slack announcement template</summary>
@@ -334,7 +334,7 @@ cases, follow these steps below to ensure a proper patch release:
 - [ ] for each package (replace <kbd>carbon-components-react</kbd> with the
       package name):
   ```bash
-  npm dist tag add carbon-components-react@vX.Y.Z latest
+  npm dist-tag add carbon-components-react@vX.Y.Z latest
   ```
 - [ ] Verify the packages have been promoted to latest on
       [NPM](https://www.npmjs.com)

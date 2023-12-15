@@ -45,50 +45,56 @@
 /// @access private
 /// @example @include callout-gradient();
 /// @param {String} $type  - Type of gradient, either 'default', 'selected' or 'hover'
+/// @param {Number} $type  - specify a pixel offset the callout should start from the bottom
 /// @group utilities
-@mixin callout-gradient($type: 'default') {
+@mixin callout-gradient($type: 'default', $offset: 0) {
+  $start: 0%;
+  @if $offset != 0 {
+    $start: calc(0% + #{$offset});
+  }
+
   @if $type == 'hover' {
     background: linear-gradient(
         0deg,
-        theme.$slug-callout-aura-start-hover-01 0%,
+        theme.$slug-callout-aura-start-hover-01 $start,
         theme.$slug-callout-aura-end-hover-01 50%,
         transparent 50%
       ),
       linear-gradient(
         0deg,
-        theme.$slug-callout-aura-start-hover-02 0%,
+        theme.$slug-callout-aura-start-hover-02 $start,
         theme.$slug-callout-aura-end-hover-02 50%,
         transparent 50%
       ),
       linear-gradient(
           180deg,
-          theme.$slug-callout-gradient-top-hover 0%,
+          theme.$slug-callout-gradient-top-hover $start,
           theme.$slug-callout-gradient-bottom-hover 100%
         )
         rgba(0, 0, 0, 0.01);
   } @else if $type == 'selected' {
     background: linear-gradient(
         0deg,
-        theme.$slug-callout-aura-start-selected 0%,
+        theme.$slug-callout-aura-start-selected $start,
         theme.$slug-callout-aura-end-selected 50%,
         transparent 50%
       ),
       linear-gradient(
           180deg,
-          theme.$slug-callout-gradient-top-selected 0%,
+          theme.$slug-callout-gradient-top-selected $start,
           theme.$slug-callout-gradient-bottom-selected 100%
         )
         rgba(0, 0, 0, 0.01);
   } @else {
     background: linear-gradient(
         0deg,
-        theme.$slug-callout-aura-start 0%,
+        theme.$slug-callout-aura-start $start,
         theme.$slug-callout-aura-end 50%,
         transparent 50%
       ),
       linear-gradient(
           180deg,
-          theme.$slug-callout-gradient-top 0%,
+          theme.$slug-callout-gradient-top $start,
           theme.$slug-callout-gradient-bottom 100%
         )
         rgba(0, 0, 0, 0.01);
