@@ -12,6 +12,8 @@ import classNames from 'classnames';
 import { keys, match, matches } from '../../internal/keyboard';
 import uniqueId from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
+import { useControllableState } from '../../internal/useControllableState';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const TreeNode = React.forwardRef(
   (
@@ -22,6 +24,7 @@ const TreeNode = React.forwardRef(
       depth,
       disabled,
       isExpanded,
+      defaultIsExpanded,
       label,
       onNodeFocusEvent,
       onSelect: onNodeSelect,
@@ -34,8 +37,22 @@ const TreeNode = React.forwardRef(
     },
     ref
   ) => {
+    const enableTreeviewControllable = useFeatureFlag(
+      'enable-treeview-controllable'
+    );
+
     const { current: id } = useRef(rest.id || uniqueId());
-    const [expanded, setExpanded] = useState(isExpanded);
+
+    const controllableExpandedState = useControllableState({
+      value: isExpanded,
+      onChange: onToggle,
+      defaultValue: defaultIsExpanded,
+    });
+    const uncontrollableExpandedState = useState(isExpanded);
+    const [expanded, setExpanded] = enableTreeviewControllable
+      ? controllableExpandedState
+      : uncontrollableExpandedState;
+
     const currentNode = useRef(null);
     const currentNodeLabel = useRef(null);
     const prefix = usePrefix();
@@ -71,7 +88,9 @@ const TreeNode = React.forwardRef(
       if (disabled) {
         return;
       }
-      onToggle?.(event, { id, isExpanded: !expanded, label, value });
+      if (!enableTreeviewControllable) {
+        onToggle?.(event, { id, isExpanded: !expanded, label, value });
+      }
       setExpanded(!expanded);
     }
     function handleClick(event) {
@@ -100,7 +119,9 @@ const TreeNode = React.forwardRef(
           return findParentTreeNode(node.parentNode);
         };
         if (children && expanded) {
-          onToggle?.(event, { id, isExpanded: false, label, value });
+          if (!enableTreeviewControllable) {
+            onToggle?.(event, { id, isExpanded: false, label, value });
+          }
           setExpanded(false);
         } else {
           /**
@@ -118,7 +139,9 @@ const TreeNode = React.forwardRef(
            */
           currentNode.current.lastChild.firstChild.focus();
         } else {
-          onToggle?.(event, { id, isExpanded: true, label, value });
+          if (!enableTreeviewControllable) {
+            onToggle?.(event, { id, isExpanded: true, label, value });
+          }
           setExpanded(true);
         }
       }
@@ -172,9 +195,18 @@ const TreeNode = React.forwardRef(
         currentNodeLabel.current.style.paddingInlineStart = `${calcOffset()}rem`;
       }
 
-      // sync props and state
-      setExpanded(isExpanded);
-    }, [children, depth, Icon, isExpanded]);
+      if (!enableTreeviewControllable) {
+        // sync props and state
+        setExpanded(isExpanded);
+      }
+    }, [
+      children,
+      depth,
+      Icon,
+      isExpanded,
+      enableTreeviewControllable,
+      setExpanded,
+    ]);
 
     const treeNodeProps = {
       ...rest,
@@ -243,6 +275,12 @@ TreeNode.propTypes = {
    * Specify an optional className to be applied to the TreeNode
    */
   className: PropTypes.string,
+
+  /**
+   * **[Experimental]** The default expansion state of the node.
+   * *This is only supported with the `enable-treeview-controllable` feature flag!*
+   */
+  defaultIsExpanded: PropTypes.bool,
 
   /**
    * TreeNode depth to determine spacing, automatically calculated by default
