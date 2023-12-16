@@ -20,8 +20,8 @@ const checkboxLabel = 'Checkbox label';
 export const Default = () => {
   return html`
     <cds-checkbox-group legend-text="Group label">
-      <cds-checkbox label-text="${checkboxLabel}"></cds-checkbox>
-      <cds-checkbox label-text="${checkboxLabel}"></cds-checkbox>
+      <cds-checkbox>${checkboxLabel}</cds-checkbox>
+      <cds-checkbox>${checkboxLabel}</cds-checkbox>
     </cds-checkbox-group>
   `;
 };
@@ -31,29 +31,26 @@ Default.storyName = 'Default';
 export const Skeleton = () => {
   return html`
     <fieldset class="${prefix}--fieldset">
-      <cds-checkbox-skeleton
-        label-text="${checkboxLabel}"></cds-checkbox-skeleton>
+      <cds-checkbox-skeleton>${checkboxLabel}</cds-checkbox-skeleton>
     </fieldset>
   `;
 };
 
 export const Single = () => {
   return html`
-    <cds-checkbox
-      label-text="${checkboxLabel}"
-      helper-text="Helper text goes here"></cds-checkbox>
+    <cds-checkbox helper-text="Helper text goes here"
+      >${checkboxLabel}</cds-checkbox
+    >
     <br /><br />
-    <cds-checkbox
-      label-text="${checkboxLabel}"
-      invalid
-      invalid-text="Invalid test goes here"></cds-checkbox>
+    <cds-checkbox invalid invalid-text="Invalid test goes here"
+      >${checkboxLabel}</cds-checkbox
+    >
     <br /><br />
-    <cds-checkbox
-      label-text="${checkboxLabel}"
-      warn
-      warn-text="Warning test goes here"></cds-checkbox>
+    <cds-checkbox warn warn-text="Warning test goes here"
+      >${checkboxLabel}</cds-checkbox
+    >
     <br /><br />
-    <cds-checkbox label-text="${checkboxLabel}" readonly></cds-checkbox>
+    <cds-checkbox readonly>${checkboxLabel}</cds-checkbox>
   `;
 };
 
@@ -79,17 +76,15 @@ export const Playground = (args) => {
       ?readonly="${readonly}"
       ?warn="${warn}"
       warn-text="${warnText}">
-      <cds-checkbox
-        checked
-        label-text="Checkbox label"
-        @cds-checkbox-changed="${onChange}"></cds-checkbox>
-      <cds-checkbox
-        label-text="Checkbox label"
-        @cds-checkbox-changed="${onChange}"></cds-checkbox>
-      <cds-checkbox
-        disabled
-        label-text="Checkbox label"
-        @cds-checkbox-changed="${onChange}"></cds-checkbox>
+      <cds-checkbox checked @cds-checkbox-changed="${onChange}"
+        >Checkbox label</cds-checkbox
+      >
+      <cds-checkbox @cds-checkbox-changed="${onChange}"
+        >Checkbox label</cds-checkbox
+      >
+      <cds-checkbox disabled @cds-checkbox-changed="${onChange}"
+        >Checkbox label</cds-checkbox
+      >
     </cds-checkbox-group>
   `;
 };

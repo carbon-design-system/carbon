@@ -99,9 +99,9 @@ export const _Checkbox = (args) => {
         ?warn="${warn}"
         warn-text="${warnText}">
         <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
-        <cds-checkbox label-text="Checkbox label"></cds-checkbox>
-        <cds-checkbox label-text="Checkbox label"></cds-checkbox>
-        <cds-checkbox label-text="Checkbox label"></cds-checkbox>
+        <cds-checkbox>Checkbox label</cds-checkbox>
+        <cds-checkbox>Checkbox label</cds-checkbox>
+        <cds-checkbox>Checkbox label</cds-checkbox>
       </cds-checkbox-group>
 
       <cds-checkbox-group
@@ -111,13 +111,15 @@ export const _Checkbox = (args) => {
         invalid-text="${invalidText}"
         ?warn="${warn}"
         warn-text="${warnText}">
-        <cds-checkbox label-text="Checkbox label">
+        <cds-checkbox>
+          Checkbox label
           <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
         </cds-checkbox>
-        <cds-checkbox label-text="Checkbox label">
+        <cds-checkbox>
+          Checkbox label
           <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
         </cds-checkbox>
-        <cds-checkbox label-text="Checkbox label"></cds-checkbox>
+        <cds-checkbox>Checkbox label</cds-checkbox>
       </cds-checkbox-group>
 
       <cds-checkbox-group
@@ -127,17 +129,19 @@ export const _Checkbox = (args) => {
         invalid-text="${invalidText}"
         ?warn="${warn}"
         warn-text="${warnText}">
-        <cds-checkbox label-text="Checkbox label">
+        <cds-checkbox>
+          Checkbox label
           <cds-slug alignment="bottom-left" kind="inline">
             ${content}${actions}
           </cds-slug>
         </cds-checkbox>
-        <cds-checkbox label-text="Checkbox label">
+        <cds-checkbox>
+          Checkbox label
           <cds-slug alignment="bottom-left" kind="inline">
             ${content}${actions}
           </cds-slug>
         </cds-checkbox>
-        <cds-checkbox label-text="Checkbox label"></cds-checkbox>
+        <cds-checkbox>Checkbox label</cds-checkbox>
       </cds-checkbox-group>
     </div>
   `;

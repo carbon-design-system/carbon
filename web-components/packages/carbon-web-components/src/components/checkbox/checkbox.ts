@@ -254,7 +254,9 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
         part="label"
         class="${labelClasses}"
         title="${ifDefined(title)}">
-        <span class="${labelTextClasses}">${labelText}</span>
+        <span class="${labelTextClasses}"
+          >${labelText ? labelText : html`<slot></slot>`}</span
+        >
       </label>
       <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
       <div class="${prefix}--checkbox__validation-msg">

@@ -19,6 +19,7 @@ import { prefix } from '../../globals/settings';
 import './index';
 import '../icon-button/index';
 import styles from './slug-story.scss';
+import storyDocs from './slug-story.mdx';
 
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import { SLUG_SIZE } from './defs';
@@ -247,4 +248,7 @@ Playground.parameters = {
 
 export default {
   title: 'Experimental/Slug',
+  parameters: {
+    ...storyDocs.parameters,
+  },
 };
