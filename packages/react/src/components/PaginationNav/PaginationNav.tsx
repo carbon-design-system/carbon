@@ -187,6 +187,12 @@ interface PaginationOverflowProps {
   onSelect?: (id: number) => void;
 
   /**
+   * If true, the '...' pagination overflow will not render page links between the first and last rendered buttons.
+   * Set this to true if you are having performance problems with large data sets.
+   */
+  disableOverflow?: boolean;
+
+  /**
    * Specify a custom translation function that takes in a message identifier
    * and returns the localized string for the message
    */
