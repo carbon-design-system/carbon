@@ -29,8 +29,8 @@ function translateWithId(messageId) {
 }
 
 // https://reactjs.org/docs/hooks-faq.html#how-to-get-the-previous-props-or-state
-function usePrevious(value) {
-  const ref = useRef();
+function usePrevious(value: number) {
+  const ref = useRef<number | null>(null);
 
   useEffect(() => {
     ref.current = value;
@@ -39,7 +39,12 @@ function usePrevious(value) {
   return ref.current;
 }
 
-function getCuts(page, totalItems, itemsThatFit, splitPoint = null) {
+function getCuts(
+  page: number,
+  totalItems: number,
+  itemsThatFit: number,
+  splitPoint: number | null = null
+) {
   if (itemsThatFit >= totalItems) {
     return {
       front: 0,
@@ -68,7 +73,34 @@ function getCuts(page, totalItems, itemsThatFit, splitPoint = null) {
   };
 }
 
-function DirectionButton({ direction, label, disabled, onClick }) {
+interface DirectionButtonProps {
+  /**
+   * The direction this button represents ("forward" or "backward").
+   */
+  direction?: 'forward' | 'backward';
+
+  /**
+   * Whether or not the button should be disabled.
+   */
+  disabled?: boolean;
+
+  /**
+   * The label shown in the button's tooltip.
+   */
+  label?: string;
+
+  /**
+   * The callback function called when the button is clicked.
+   */
+  onClick?: React.MouseEventHandler;
+}
+
+function DirectionButton({
+  direction,
+  label,
+  disabled,
+  onClick,
+}: DirectionButtonProps) {
   const prefix = usePrefix();
 
   return (
@@ -85,12 +117,35 @@ function DirectionButton({ direction, label, disabled, onClick }) {
   );
 }
 
+interface PaginationItemProps {
+  /**
+   * Whether or not this is the currently active page.
+   */
+  isActive?: boolean;
+
+  /**
+   * The callback function called when the item is clicked.
+   */
+  onClick?: React.MouseEventHandler;
+
+  /**
+   * The page number this item represents.
+   */
+  page?: number;
+
+  /**
+   * Specify a custom translation function that takes in a message identifier
+   * and returns the localized string for the message
+   */
+  translateWithId?: (id: string) => string;
+}
+
 function PaginationItem({
   page,
   isActive,
   onClick,
   translateWithId: t = translateWithId,
-}) {
+}: PaginationItemProps) {
   const prefix = usePrefix();
   const itemLabel = t('carbon.pagination-nav.item');
 
@@ -103,7 +158,7 @@ function PaginationItem({
         })}
         onClick={onClick}
         data-page={page}
-        aria-current={isActive ? 'page' : null}>
+        aria-current={isActive ? 'page' : undefined}>
         <span className={`${prefix}--pagination-nav__accessibility-label`}>
           {isActive
             ? `${t('carbon.pagination-nav.active')}, ${itemLabel}`
@@ -115,12 +170,35 @@ function PaginationItem({
   );
 }
 
+interface PaginationOverflowProps {
+  /**
+   * How many items to display in this overflow.
+   */
+  count?: number;
+
+  /**
+   * From which index on this overflow should start displaying pages.
+   */
+  fromIndex?: number;
+
+  /**
+   * The callback function called when the user selects a page from the overflow.
+   */
+  onSelect?: (id: number) => void;
+
+  /**
+   * Specify a custom translation function that takes in a message identifier
+   * and returns the localized string for the message
+   */
+  translateWithId?: (id: string) => string;
+}
+
 function PaginationOverflow({
-  fromIndex,
-  count,
+  fromIndex = NaN,
+  count = NaN,
   onSelect,
   translateWithId: t = translateWithId,
-}) {
+}: PaginationOverflowProps) {
   const prefix = usePrefix();
   if (count > 1) {
     return (
@@ -132,7 +210,7 @@ function PaginationOverflow({
             aria-label={`Select ${t('carbon.pagination-nav.item')} number`}
             onChange={(e) => {
               const index = Number(e.target.value);
-              onSelect(index);
+              onSelect?.(index);
             }}>
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <option value="" hidden />
@@ -161,7 +239,7 @@ function PaginationOverflow({
         page={fromIndex + 1}
         translateWithId={t}
         onClick={() => {
-          onSelect(fromIndex);
+          onSelect?.(fromIndex);
         }}
       />
     );
@@ -170,192 +248,233 @@ function PaginationOverflow({
   return null;
 }
 
-const PaginationNav = React.forwardRef(function PaginationNav(
-  {
-    className,
-    onChange = () => {},
-    totalItems,
-    itemsShown = 10,
-    page = 0,
-    loop = false,
-    translateWithId: t = translateWithId,
-    ...rest
-  },
-  ref
-) {
-  const [currentPage, setCurrentPage] = useState(page);
-  const [itemsThatFit, setItemsThatFit] = useState(
-    itemsShown >= 4 ? itemsShown : 4
-  );
-  const [cuts, setCuts] = useState(
-    getCuts(currentPage, totalItems, itemsThatFit)
-  );
-  const prevPage = usePrevious(currentPage);
-  const prefix = usePrefix();
+interface PaginationNavProps
+  extends Omit<React.HTMLAttributes<HTMLElement>, 'onChange'> {
+  /**
+   * Additional CSS class names.
+   */
+  className?: string;
 
-  function jumpToItem(index) {
-    if (index >= 0 && index < totalItems) {
-      setCurrentPage(index);
-      onChange(index);
-    }
-  }
+  /**
+   * The number of items to be shown.
+   */
+  itemsShown?: number;
 
-  function jumpToNext() {
-    const nextIndex = currentPage + 1;
+  /**
+   * Whether user should be able to loop through the items when reaching first / last.
+   */
+  loop?: boolean;
 
-    if (nextIndex >= totalItems) {
-      if (loop) {
-        jumpToItem(0);
-      }
-    } else {
-      jumpToItem(nextIndex);
-    }
-  }
+  /**
+   * The callback function called when the current page changes.
+   */
+  onChange?: (data: number) => void;
 
-  function jumpToPrevious() {
-    const previousIndex = currentPage - 1;
+  /**
+   * The index of current page.
+   */
+  page?: number;
 
-    if (previousIndex < 0) {
-      if (loop) {
-        jumpToItem(totalItems - 1);
-      }
-    } else {
-      jumpToItem(previousIndex);
-    }
-  }
+  /**
+   * The total number of items.
+   */
+  totalItems?: number;
 
-  function pageWouldBeHidden(page) {
-    const startOffset = itemsThatFit <= 4 && page > 1 ? 0 : 1;
+  /**
+   * Specify a custom translation function that takes in a message identifier
+   * and returns the localized string for the message
+   */
+  translateWithId?: (id: string) => string;
+}
 
-    const wouldBeHiddenInFront = page >= startOffset && page <= cuts.front;
-    const wouldBeHiddenInBack =
-      page >= totalItems - cuts.back - 1 && page <= totalItems - 2;
+const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
+  function PaginationNav(
+    {
+      className,
+      onChange = () => {},
+      totalItems = NaN,
+      itemsShown = 10,
+      page = 0,
+      loop = false,
+      translateWithId: t = translateWithId,
+      ...rest
+    },
+    ref
+  ) {
+    const [currentPage, setCurrentPage] = useState(page);
+    const [itemsThatFit, setItemsThatFit] = useState(
+      itemsShown >= 4 ? itemsShown : 4
+    );
+    const [cuts, setCuts] = useState(
+      getCuts(currentPage, totalItems, itemsThatFit)
+    );
+    const prevPage = usePrevious(currentPage);
+    const prefix = usePrefix();
 
-    return wouldBeHiddenInFront || wouldBeHiddenInBack;
-  }
-
-  // jump to new page if props.page is updated
-  useEffect(() => {
-    setCurrentPage(page);
-  }, [page]);
-
-  // re-calculate cuts if props.totalItems or props.itemsShown change
-  useEffect(() => {
-    setItemsThatFit(itemsShown >= 4 ? itemsShown : 4);
-    setCuts(getCuts(currentPage, totalItems, itemsShown));
-  }, [totalItems, itemsShown]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // update cuts if necessary whenever currentPage changes
-  useEffect(() => {
-    if (pageWouldBeHidden(currentPage)) {
-      const delta = currentPage - prevPage || 0;
-
-      if (delta > 0) {
-        const splitPoint = itemsThatFit - 3;
-        setCuts(getCuts(currentPage, totalItems, itemsThatFit, splitPoint));
-      } else {
-        const splitPoint = itemsThatFit > 4 ? 2 : 1;
-        setCuts(getCuts(currentPage, totalItems, itemsThatFit, splitPoint));
+    function jumpToItem(index: number) {
+      if (index >= 0 && index < totalItems) {
+        setCurrentPage(index);
+        onChange(index);
       }
     }
-  }, [currentPage]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const classNames = classnames(`${prefix}--pagination-nav`, className);
+    function jumpToNext() {
+      const nextIndex = currentPage + 1;
 
-  const backwardButtonDisabled = !loop && currentPage === 0;
-  const forwardButtonDisabled = !loop && currentPage === totalItems - 1;
-
-  const startOffset = itemsThatFit <= 4 && currentPage > 1 ? 0 : 1;
-
-  return (
-    <nav className={classNames} ref={ref} {...rest} aria-label="pagination">
-      <ul className={`${prefix}--pagination-nav__list`}>
-        <DirectionButton
-          direction="backward"
-          label={t('carbon.pagination-nav.previous')}
-          disabled={backwardButtonDisabled}
-          onClick={jumpToPrevious}
-        />
-
-        {
-          // render first item if at least 5 items can be displayed or
-          // 4 items can be displayed and the current page is either 0 or 1
-          (itemsThatFit >= 5 || (itemsThatFit <= 4 && currentPage <= 1)) && (
-            <PaginationItem
-              page={1}
-              translateWithId={t}
-              isActive={currentPage === 0}
-              onClick={() => {
-                jumpToItem(0);
-              }}
-            />
-          )
+      if (nextIndex >= totalItems) {
+        if (loop) {
+          jumpToItem(0);
         }
+      } else {
+        jumpToItem(nextIndex);
+      }
+    }
 
-        {/* render first overflow */}
-        <PaginationOverflow
-          fromIndex={startOffset}
-          count={cuts.front}
-          onSelect={jumpToItem}
-        />
+    function jumpToPrevious() {
+      const previousIndex = currentPage - 1;
 
-        {
-          // render items between overflows
-          [...Array(totalItems)]
-            .map((e, i) => i)
-            .slice(startOffset + cuts.front, (1 + cuts.back) * -1)
-            .map((item) => (
+      if (previousIndex < 0) {
+        if (loop) {
+          jumpToItem(totalItems - 1);
+        }
+      } else {
+        jumpToItem(previousIndex);
+      }
+    }
+
+    function pageWouldBeHidden(page: number) {
+      const startOffset = itemsThatFit <= 4 && page > 1 ? 0 : 1;
+
+      const wouldBeHiddenInFront = page >= startOffset && page <= cuts.front;
+      const wouldBeHiddenInBack =
+        page >= totalItems - cuts.back - 1 && page <= totalItems - 2;
+
+      return wouldBeHiddenInFront || wouldBeHiddenInBack;
+    }
+
+    // jump to new page if props.page is updated
+    useEffect(() => {
+      setCurrentPage(page);
+    }, [page]);
+
+    // re-calculate cuts if props.totalItems or props.itemsShown change
+    useEffect(() => {
+      setItemsThatFit(itemsShown >= 4 ? itemsShown : 4);
+      setCuts(getCuts(currentPage, totalItems, itemsShown));
+    }, [totalItems, itemsShown]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    // update cuts if necessary whenever currentPage changes
+    useEffect(() => {
+      if (pageWouldBeHidden(currentPage)) {
+        const delta = currentPage - (prevPage || 0);
+
+        if (delta > 0) {
+          const splitPoint = itemsThatFit - 3;
+          setCuts(getCuts(currentPage, totalItems, itemsThatFit, splitPoint));
+        } else {
+          const splitPoint = itemsThatFit > 4 ? 2 : 1;
+          setCuts(getCuts(currentPage, totalItems, itemsThatFit, splitPoint));
+        }
+      }
+    }, [currentPage]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const classNames = classnames(`${prefix}--pagination-nav`, className);
+
+    const backwardButtonDisabled = !loop && currentPage === 0;
+    const forwardButtonDisabled = !loop && currentPage === totalItems - 1;
+
+    const startOffset = itemsThatFit <= 4 && currentPage > 1 ? 0 : 1;
+
+    return (
+      <nav className={classNames} ref={ref} {...rest} aria-label="pagination">
+        <ul className={`${prefix}--pagination-nav__list`}>
+          <DirectionButton
+            direction="backward"
+            label={t('carbon.pagination-nav.previous')}
+            disabled={backwardButtonDisabled}
+            onClick={jumpToPrevious}
+          />
+
+          {
+            // render first item if at least 5 items can be displayed or
+            // 4 items can be displayed and the current page is either 0 or 1
+            (itemsThatFit >= 5 || (itemsThatFit <= 4 && currentPage <= 1)) && (
               <PaginationItem
-                key={`item-${item}`}
-                page={item + 1}
+                page={1}
                 translateWithId={t}
-                isActive={currentPage === item}
+                isActive={currentPage === 0}
                 onClick={() => {
-                  jumpToItem(item);
+                  jumpToItem(0);
                 }}
               />
-            ))
-        }
+            )
+          }
 
-        {/* render second overflow */}
-        <PaginationOverflow
-          fromIndex={totalItems - cuts.back - 1}
-          count={cuts.back}
-          onSelect={jumpToItem}
-        />
+          {/* render first overflow */}
+          <PaginationOverflow
+            fromIndex={startOffset}
+            count={cuts.front}
+            onSelect={jumpToItem}
+          />
 
-        {
-          // render last item unless there is only one in total
-          totalItems > 1 && (
-            <PaginationItem
-              page={totalItems}
-              translateWithId={t}
-              isActive={currentPage === totalItems - 1}
-              onClick={() => {
-                jumpToItem(totalItems - 1);
-              }}
-            />
-          )
-        }
+          {
+            // render items between overflows
+            [...Array(totalItems)]
+              .map((e, i) => i)
+              .slice(startOffset + cuts.front, (1 + cuts.back) * -1)
+              .map((item) => (
+                <PaginationItem
+                  key={`item-${item}`}
+                  page={item + 1}
+                  translateWithId={t}
+                  isActive={currentPage === item}
+                  onClick={() => {
+                    jumpToItem(item);
+                  }}
+                />
+              ))
+          }
 
-        <DirectionButton
-          direction="forward"
-          label={t('carbon.pagination-nav.next')}
-          disabled={forwardButtonDisabled}
-          onClick={jumpToNext}
-        />
-      </ul>
-      <div
-        aria-live="polite"
-        aria-atomic="true"
-        className={`${prefix}--pagination-nav__accessibility-label`}>
-        {`${t('carbon.pagination-nav.item')} ${currentPage + 1} ${t(
-          'carbon.pagination-nav.of'
-        )} ${totalItems}`}
-      </div>
-    </nav>
-  );
-});
+          {/* render second overflow */}
+          <PaginationOverflow
+            fromIndex={totalItems - cuts.back - 1}
+            count={cuts.back}
+            onSelect={jumpToItem}
+          />
+
+          {
+            // render last item unless there is only one in total
+            totalItems > 1 && (
+              <PaginationItem
+                page={totalItems}
+                translateWithId={t}
+                isActive={currentPage === totalItems - 1}
+                onClick={() => {
+                  jumpToItem(totalItems - 1);
+                }}
+              />
+            )
+          }
+
+          <DirectionButton
+            direction="forward"
+            label={t('carbon.pagination-nav.next')}
+            disabled={forwardButtonDisabled}
+            onClick={jumpToNext}
+          />
+        </ul>
+        <div
+          aria-live="polite"
+          aria-atomic="true"
+          className={`${prefix}--pagination-nav__accessibility-label`}>
+          {`${t('carbon.pagination-nav.item')} ${currentPage + 1} ${t(
+            'carbon.pagination-nav.of'
+          )} ${totalItems}`}
+        </div>
+      </nav>
+    );
+  }
+);
 
 DirectionButton.propTypes = {
   /**
