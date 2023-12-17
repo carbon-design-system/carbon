@@ -197,9 +197,32 @@ function PaginationOverflow({
   fromIndex = NaN,
   count = NaN,
   onSelect,
+  // eslint-disable-next-line react/prop-types
+  disableOverflow,
   translateWithId: t = translateWithId,
 }: PaginationOverflowProps) {
   const prefix = usePrefix();
+
+  //If overflow is disabled, return a select tag with no select options
+  if (disableOverflow === true && count > 1) {
+    return (
+      <li className={`${prefix}--pagination-nav__list-item`}>
+        <div className={`${prefix}--pagination-nav__select`}>
+          {/* eslint-disable-next-line jsx-a11y/no-onchange */}
+          <select
+            className={`${prefix}--pagination-nav__page ${prefix}--pagination-nav__page--select`}
+            aria-label={`Select ${t('carbon.pagination-nav.item')} number`}
+            disabled></select>
+          <div className={`${prefix}--pagination-nav__select-icon-wrapper`}>
+            <OverflowMenuHorizontal
+              className={`${prefix}--pagination-nav__select-icon`}
+            />
+          </div>
+        </div>
+      </li>
+    );
+  }
+
   if (count > 1) {
     return (
       <li className={`${prefix}--pagination-nav__list-item`}>
@@ -256,6 +279,12 @@ interface PaginationNavProps
   className?: string;
 
   /**
+   * If true, the '...' pagination overflow will not render page links between the first and last rendered buttons.
+   * Set this to true if you are having performance problems with large data sets.
+   */
+  disableOverflow?: boolean;
+
+  /**
    * The number of items to be shown.
    */
   itemsShown?: number;
@@ -293,6 +322,7 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
       className,
       onChange = () => {},
       totalItems = NaN,
+      disableOverflow,
       itemsShown = 10,
       page = 0,
       loop = false,
@@ -310,7 +340,8 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
     );
     const prevPage = usePrevious(currentPage);
     const prefix = usePrefix();
-
+    const [isOverflowDisabled, setIsOverFlowDisabled] =
+      useState(disableOverflow);
     function jumpToItem(index: number) {
       if (index >= 0 && index < totalItems) {
         setCurrentPage(index);
@@ -378,6 +409,10 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
       }
     }, [currentPage]); // eslint-disable-line react-hooks/exhaustive-deps
 
+    useEffect(() => {
+      setIsOverFlowDisabled(disableOverflow);
+    }, [disableOverflow]);
+
     const classNames = classnames(`${prefix}--pagination-nav`, className);
 
     const backwardButtonDisabled = !loop && currentPage === 0;
@@ -415,6 +450,7 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
             fromIndex={startOffset}
             count={cuts.front}
             onSelect={jumpToItem}
+            disableOverflow={isOverflowDisabled}
           />
 
           {
@@ -440,6 +476,7 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
             fromIndex={totalItems - cuts.back - 1}
             count={cuts.back}
             onSelect={jumpToItem}
+            disableOverflow={isOverflowDisabled}
           />
 
           {
@@ -550,6 +587,12 @@ PaginationNav.propTypes = {
    * Additional CSS class names.
    */
   className: PropTypes.string,
+
+  /**
+   * If true, the '...' pagination overflow will not render page links between the first and last rendered buttons.
+   * Set this to true if you are having performance problems with large data sets.
+   */
+  disableOverflow: PropTypes.bool, // eslint-disable-line react/prop-types
 
   /**
    * The number of items to be shown.
