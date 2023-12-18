@@ -11464,9 +11464,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30001109, caniuse-lite@npm:^1.0.30001125, caniuse-lite@npm:^1.0.30001179, caniuse-lite@npm:^1.0.30001202, caniuse-lite@npm:^1.0.30001219, caniuse-lite@npm:^1.0.30001228, caniuse-lite@npm:^1.0.30001272, caniuse-lite@npm:^1.0.30001286, caniuse-lite@npm:^1.0.30001287":
-  version: 1.0.30001506
-  resolution: "caniuse-lite@npm:1.0.30001506"
-  checksum: 0a090745824622df146e2f6dde79c7f7920a899dec1b3a599d2ef9acf41cef5e179fd133bb59f2030286a4ea935f4230e05438d7394694c414e8ada345eb5268
+  version: 1.0.30001570
+  resolution: "caniuse-lite@npm:1.0.30001570"
+  checksum: 460be2c7a9b1c8a83b6aae4226661c276d9dada6c84209dee547699cf4b28030b9d1fc29ddd7626acee77412b6401993878ea0ef3eadbf3a63ded9034896ae20
   languageName: node
   linkType: hard
 
@@ -11516,7 +11516,6 @@ __metadata:
     "@carbon/feature-flags": ^0.7.0
     "@carbon/icons-react": ^10.49.2
     "@carbon/layout": ^10.37.2
-    "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.21.1
     "@cypress/react": ^5.11.0
     "@cypress/webpack-dev-server": ^1.7.0
