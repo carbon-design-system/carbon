@@ -2,9 +2,17 @@ import type { StorybookConfig } from '@storybook/web-components-vite';
 import { mergeConfig } from 'vite';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
 import viteSVGResultCarbonIconLoader from '../tools/vite-svg-result-carbon-icon-loader';
+const glob = require('fast-glob');
 
-const config: StorybookConfig = {
-  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+
+const stories = glob
+  .sync(['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'], {
+    ignore: ['../src/**/docs/*.mdx'],
+    cwd: __dirname,
+  })
+
+  const config: StorybookConfig = {
+  stories: stories,
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
@@ -35,7 +43,9 @@ const config: StorybookConfig = {
     return x;
   },
   docs: {
-    autodocs: 'tag',
+    autodocs: true,
+    defaultName: 'Overview',
   },
+
 };
 export default config;

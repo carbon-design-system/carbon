@@ -21,7 +21,7 @@ export default function svgResultCarbonIconLoader() {
   const paths = new Map<string, string>()
 
   return {
-      name: 'svg-loader',
+      name: 'svg-result-carbon-icon-loader',
       enforce: 'pre',
 
       resolveId(id: string): string | null {
