@@ -24,7 +24,10 @@ import TableExpandHeader from './TableExpandHeader';
 import TableExpandRow from './TableExpandRow';
 import TableExpandedRow from './TableExpandedRow';
 import TableHead from './TableHead';
-import TableHeader from './TableHeader';
+import TableHeader, {
+  TableHeaderTranslationKey,
+  TableHeaderTranslationArgs,
+} from './TableHeader';
 import TableRow from './TableRow';
 import TableSelectAll from './TableSelectAll';
 import TableSelectRow from './TableSelectRow';
@@ -79,6 +82,8 @@ export {
   TableExpandedRow,
   TableHead,
   TableHeader,
+  type TableHeaderTranslationKey,
+  type TableHeaderTranslationArgs,
   TableRow,
   TableSelectAll,
   TableSelectRow,
