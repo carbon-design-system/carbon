@@ -57,7 +57,7 @@ const ComboButton = React.forwardRef(function ComboButton(
     y,
     handleClick: hookOnClick,
     handleMousedown: handleTriggerMousedown,
-    // handleClose,
+    handleClose,
   } = useAttachedMenu(containerRef);
 
   function handleTriggerClick() {
@@ -76,37 +76,23 @@ const ComboButton = React.forwardRef(function ComboButton(
 
   function handleOpen() {
     menuRef.current.style.inlineSize = `${width}px`;
+    if (menuAlignment !== 'bottom' && menuAlignment !== 'top') {
+      menuRef.current.style.inlineSize = `fit-content`;
+    }
     // checkEllipsis();
   }
-
-  // const menuAlignmentOptions = [
-  //   'bottom',
-  //   'top',
-  //   'top-left',
-  //   'top-right',
-  //   'bottom-left',
-  //   'bottom-right',
-  // ];
 
   const containerClasses = classNames(
     `${prefix}--combo-button__container`,
     `${prefix}--combo-button__container--${size}`,
-    // `${prefix}--combo-button__alignment`,
     {
       [`${prefix}--combo-button__container--open`]: open,
     },
     className
   );
 
-  // let positionTest = 'top';
-
   const menuClasses = classNames(
-    // `popover-${positionTest}`,
-    `${prefix}--combo-button__menu-${menuAlignment}`,
-    {
-      [`${prefix}--menu-alignment`]:
-        menuAlignment !== 'bottom' && menuAlignment !== 'top',
-    }
+    `${prefix}--combo-button__menu-${menuAlignment}`
   );
 
   const primaryActionClasses = classNames(
@@ -168,6 +154,7 @@ const ComboButton = React.forwardRef(function ComboButton(
         </IconButton>
       </div>
       <Menu
+        menuAlignment={menuAlignment}
         className={menuClasses}
         ref={menuRef}
         id={id}
@@ -175,7 +162,7 @@ const ComboButton = React.forwardRef(function ComboButton(
         mode="basic"
         size={size}
         open={open}
-        // onClose={handleClose}
+        onClose={handleClose}
         onOpen={handleOpen}
         x={x}
         y={[y[0] - spacing, y[1] + spacing]}>

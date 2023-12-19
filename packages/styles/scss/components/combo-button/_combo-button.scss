@@ -58,14 +58,6 @@
 
 // ==================test==========================================
 
-// .#{$prefix}--combo-button__alignment {
-// }
-
-.#{$prefix}--menu-alignment {
-  // max-inline-size: convert.to-rem(288px) !important;
-  inline-size: fit-content;
-}
-
 .#{$prefix}--combo-button__menu-top {
   $popover-offset: custom-property.get-var('popover-offset', 3rem);
 
@@ -79,16 +71,19 @@
 
   inset-block-start: 0;
   inset-inline-end: 0;
-  transform: translate($popover-offset, calc(-100% - $popover-offset));
+  transform: translate(
+    calc(0 * $popover-offset),
+    calc(-100% - $popover-offset)
+  );
 }
 
 .#{$prefix}--combo-button__menu-top-right {
   $popover-offset: custom-property.get-var('popover-offset', 3rem);
 
   inset-block-start: 0;
-  inset-inline-start: 0;
+  inset-inline-start: initial;
   transform: translate(
-    calc(-1 * $popover-offset),
+    calc(0 * $popover-offset),
     calc(-100% - $popover-offset)
   );
 }
@@ -98,21 +93,4 @@
 
   inset-inline-end: 0;
   inset-inline-start: initial;
-  // transform: translate($popover-offset, calc(-100% + $popover-offset));
-}
-
-.#{$prefix}--combo-button__menu-bottom-right {
-  $popover-offset: custom-property.get-var('popover-offset', 3rem);
-
-  inset-inline-end: 0;
-  inset-inline-start: 0;
-  transform: translate($popover-offset, calc(-100% + $popover-offset));
-}
-
-.popover-bottom {
-  $popover-offset: custom-property.get-var('popover-offset', 0);
-
-  inset-block-start: 0;
-  inset-inline-start: 0%;
-  transform: translate(0%, calc(0% + $popover-offset));
 }

@@ -32,6 +32,7 @@ const Menu = React.forwardRef(function Menu(
     children,
     className,
     label,
+    menuAlignment,
     mode = 'full',
     onClose,
     onOpen,
@@ -207,6 +208,14 @@ const Menu = React.forwardRef(function Menu(
       },
     };
 
+    if (menuAlignment === 'bottom-right') {
+      axes.x.anchor = axes.x.anchor + axes.x.size;
+    }
+
+    if (menuAlignment === 'top-right') {
+      axes.x.anchor = axes.x.anchor + axes.x.size;
+    }
+
     const { max, size, anchor, reversedAnchor, offset } = axes[axis];
 
     // get values for different scenarios, set to false if they don't work
@@ -230,10 +239,8 @@ const Menu = React.forwardRef(function Menu(
     if (menu.current) {
       const ranges = {
         x: typeof x === 'object' && x.length === 2 ? x : [x, x],
-        // x: [0, 234],
         y: typeof y === 'object' && y.length === 2 ? y : [y, y],
       };
-      console.log('x', x);
       return [fitValue(ranges.x, 'x'), fitValue(ranges.y, 'y')];
     }
 
@@ -307,6 +314,11 @@ Menu.propTypes = {
    * A label describing the Menu.
    */
   label: PropTypes.string,
+
+  /**
+   * Specify how the menu should align with the button element
+   */
+  menuAlignment: PropTypes.string,
 
   /**
    * The mode of this menu. Defaults to full.
