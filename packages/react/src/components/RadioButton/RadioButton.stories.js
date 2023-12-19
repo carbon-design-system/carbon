@@ -10,10 +10,6 @@ import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButtonSkeleton from './RadioButton.Skeleton';
 import React from 'react';
 import mdx from './RadioButton.mdx';
-import { View, FolderOpen, Folders } from '@carbon/icons-react';
-import { Slug, SlugContent, SlugActions } from '../Slug';
-import { IconButton } from '../IconButton';
-import { Button } from '../Button';
 
 export default {
   title: 'Components/RadioButton',
@@ -52,114 +48,6 @@ export const Default = () => {
         disabled
       />
     </RadioButtonGroup>
-  );
-};
-
-export const SlugTest = () => {
-  const slug = (kind) => (
-    <Slug kind={kind} className="slug-container">
-      <SlugContent>
-        <div>
-          <p className="secondary">AI Explained</p>
-          <h1>84%</h1>
-          <p className="secondary bold">Confidence score</p>
-          <p className="secondary">
-            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-          </p>
-          <hr />
-          <p className="secondary">Model type</p>
-          <p className="bold">Foundation model</p>
-        </div>
-        <SlugActions>
-          <IconButton kind="ghost" label="View">
-            <View />
-          </IconButton>
-          <IconButton kind="ghost" label="Open Folder">
-            <FolderOpen />
-          </IconButton>
-          <IconButton kind="ghost" label="Folders">
-            <Folders />
-          </IconButton>
-          <Button>View literature</Button>
-        </SlugActions>
-      </SlugContent>
-    </Slug>
-  );
-
-  return (
-    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-      <RadioButtonGroup
-        slug={slug('default')}
-        orientation="vertical"
-        legendText="Group label"
-        name="radio-button-group"
-        defaultSelected="radio-1">
-        <RadioButton
-          labelText="Radio button label"
-          value="radio-1"
-          id="radio-1"
-        />
-        <RadioButton
-          labelText="Radio button label"
-          value="radio-2"
-          id="radio-2"
-        />
-        <RadioButton
-          labelText="Radio button label"
-          value="radio-3"
-          id="radio-3"
-        />
-      </RadioButtonGroup>
-
-      <RadioButtonGroup
-        orientation="vertical"
-        legendText="Group label"
-        name="radio-button-group-2"
-        defaultSelected="radio-4">
-        <RadioButton
-          labelText="Radio button label"
-          value="radio-4"
-          id="radio-4"
-          slug={slug()}
-        />
-        <RadioButton
-          labelText="Radio button label"
-          value="radio-5"
-          id="radio-5"
-          slug={slug()}
-        />
-        <RadioButton
-          labelText="Radio button label"
-          value="radio-6"
-          id="radio-6"
-        />
-      </RadioButtonGroup>
-
-      <RadioButtonGroup
-        orientation="vertical"
-        legendText="Group label"
-        name="radio-button-group-3"
-        defaultSelected="radio-7">
-        <RadioButton
-          labelText="Radio button label"
-          value="radio-7"
-          id="radio-7"
-          slug={slug('inline')}
-        />
-        <RadioButton
-          labelText="Radio button label"
-          value="radio-8"
-          id="radio-8"
-          slug={slug('inline')}
-        />
-        <RadioButton
-          labelText="Radio button label"
-          value="radio-9"
-          id="radio-9"
-        />
-      </RadioButtonGroup>
-    </div>
   );
 };
 

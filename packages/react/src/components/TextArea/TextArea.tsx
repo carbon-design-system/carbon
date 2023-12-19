@@ -120,7 +120,7 @@ export interface TextAreaProps
   rows?: number;
 
   /**
-   * Provide a `Slug` component to be rendered inside the `TextArea` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `TextArea` component
    */
   slug?: ReactNodeLike;
 
@@ -418,7 +418,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
 
   // Slug is always size `mini`
   let normalizedSlug;
-  if (slug) {
+  if (slug && slug['type']?.displayName === 'Slug') {
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
       size: 'mini',
     });
@@ -562,7 +562,7 @@ TextArea.propTypes = {
   rows: PropTypes.number,
 
   /**
-   * Provide a `Slug` component to be rendered inside the `TextArea` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `TextArea` component
    */
   slug: PropTypes.node,
 

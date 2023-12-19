@@ -71,6 +71,10 @@ const TreeNode = React.forwardRef(
       if (disabled) {
         return;
       }
+
+      // Prevent the node from being selected
+      event.stopPropagation();
+
       onToggle?.(event, { id, isExpanded: !expanded, label, value });
       setExpanded(!expanded);
     }

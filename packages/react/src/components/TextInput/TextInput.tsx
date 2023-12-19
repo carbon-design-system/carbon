@@ -122,7 +122,7 @@ export interface TextInputProps
   size?: 'sm' | 'md' | 'lg' | 'xl';
 
   /**
-   * Provide a `Slug` component to be rendered inside the `TextInput` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `TextInput` component
    */
   slug?: ReactNodeLike;
 
@@ -315,7 +315,7 @@ const TextInput = React.forwardRef(function TextInput(
 
   // Slug is always size `mini`
   let normalizedSlug;
-  if (slug) {
+  if (slug && slug['type']?.displayName === 'Slug') {
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
       size: 'mini',
     });
@@ -453,7 +453,7 @@ TextInput.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
-   * Provide a `Slug` component to be rendered inside the `TextInput` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `TextInput` component
    */
   slug: PropTypes.node,
 
