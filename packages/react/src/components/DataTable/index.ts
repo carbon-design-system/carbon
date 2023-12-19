@@ -34,6 +34,7 @@ import TableToolbarAction from './TableToolbarAction';
 import TableToolbarContent from './TableToolbarContent';
 import TableToolbarSearch from './TableToolbarSearch';
 import TableToolbarMenu from './TableToolbarMenu';
+import type { DataTableSortState } from './state/sortStates';
 
 DataTable.Table = Table;
 DataTable.TableActionList = TableActionList;
@@ -63,6 +64,7 @@ export {
   type DataTableHeader,
   type DataTableProps,
   type DataTableRenderProps,
+  type DataTableSortState,
   type DataTableRow,
   type DataTableSize,
   Table,
