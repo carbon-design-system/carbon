@@ -25,29 +25,14 @@ export default {
 };
 
 export const Default = () => (
-  <div>
-    <OverflowMenu flipped={document?.dir === 'rtl'} aria-label="overflow-menu">
-      <OverflowMenuItem itemText="Stop app" />
-      <OverflowMenuItem itemText="Restart app" />
-      <OverflowMenuItem itemText="Rename app" />
-      <OverflowMenuItem itemText="Clone and move app" disabled requireTitle />
-      <OverflowMenuItem itemText="Edit routes and access" requireTitle />
-      <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
-    </OverflowMenu>
-    {/* I'll delete the duplicate Overflow once the PR has been approved */}
-    <div style={{ marginTop: '17rem' }}></div>
-    <OverflowMenu flipped={document?.dir === 'rtl'} aria-label="overflow-menu">
-      <OverflowMenuItem disabled itemText="Stop app" />
-      <OverflowMenuItem disabled itemText="Restart app" />
-      <OverflowMenuItem disabled itemText="Rename app" />
-      <OverflowMenuItem disabled itemText="Clone and move app" requireTitle />
-      <OverflowMenuItem
-        disabled
-        itemText="Edit routes and access"
-        requireTitle
-      />
-    </OverflowMenu>
-  </div>
+  <OverflowMenu flipped={document?.dir === 'rtl'} aria-label="overflow-menu">
+    <OverflowMenuItem itemText="Stop app" />
+    <OverflowMenuItem itemText="Restart app" />
+    <OverflowMenuItem itemText="Rename app" />
+    <OverflowMenuItem itemText="Clone and move app" disabled requireTitle />
+    <OverflowMenuItem itemText="Edit routes and access" requireTitle />
+    <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
+  </OverflowMenu>
 );
 
 export const RenderCustomIcon = () => (
