@@ -1486,6 +1486,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "slug": Object {
+        "type": "node",
+      },
     },
     "render": [Function],
   },
@@ -4832,6 +4835,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "slug": Object {
+        "type": "node",
       },
     },
     "render": [Function],

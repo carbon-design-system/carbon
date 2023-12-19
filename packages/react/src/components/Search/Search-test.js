@@ -154,8 +154,8 @@ describe('Search', () => {
     it('should have tabbable input and untabbable button if not expandable', async () => {
       render(<Search labelText="test-search" />);
 
-      // will only have 1 button which is the close button
-      expect(screen.getAllByRole('button').length).toBe(1);
+      // will have 2 buttons which is the close button and div with a role button
+      expect(screen.getAllByRole('button').length).toBe(2);
       expect(screen.getByRole('searchbox')).not.toHaveAttribute(
         'tabIndex',
         '-1'
