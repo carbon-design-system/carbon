@@ -1,10 +1,9 @@
-import {  setCustomElementsManifest } from '@storybook/web-components';
+import { setCustomElementsManifest } from '@storybook/web-components';
 import customElements from '../custom-elements.json';
 import container from './container';
 import { white, g10, g90, g100 } from '@carbon/themes';
 import { breakpoints } from '@carbon/layout';
 import theme from './theme';
-
 
 setCustomElementsManifest(customElements);
 
@@ -64,10 +63,11 @@ export const globalTypes = {
       title: 'Theme',
       items: ['white', 'g10', 'g90', 'g100'],
     },
-  }
+  },
 };
 
 export const parameters = {
+  actions: { argTypesRegex: '^on.*' },
   backgrounds: {
     // https://storybook.js.org/docs/react/essentials/backgrounds#grid
     grid: {
@@ -96,7 +96,6 @@ export const parameters = {
   controls: {
     expanded: true,
     sort: 'alpha',
-
     hideNoControlsWarning: true,
   },
   docs: {
@@ -156,14 +155,13 @@ export const parameters = {
       ],
     },
   },
-}
+};
 
 export const decorators = [
   function decoratorContainer(story, context) {
     const result = story();
     const { hasMainTag } = result;
     const { locale, dir, theme } = context.globals;
-
 
     document.documentElement.setAttribute('storybook-carbon-theme', theme);
 
@@ -177,5 +175,5 @@ export const decorators = [
 export const Preview = {
   parameters,
   globalTypes,
-  decorators
+  decorators,
 };

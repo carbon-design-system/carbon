@@ -13,6 +13,27 @@ import type { Meta } from '@storybook/web-components';
 import storyDocs from './copy-button.mdx';
 import './copy-button';
 
+const defaultArgs = {
+  feedback: 'Copied!',
+  feedbackTimeout: 2000,
+  iconDescription: 'Copy to clipboard',
+};
+
+const controls = {
+  feedback: {
+    control: 'text',
+    description: `Provide a description for the icon representing the copy action that can be read by screen readers`,
+  },
+  feedbackTimeout: {
+    control: { type: 'number', min: 1, step: 1 },
+    description: `Specify the time it takes for the feedback message to timeout`,
+  },
+  iconDescription: {
+    control: 'text',
+    description: `Provide a description for the icon representing the copy action that can be read by screen readers`,
+  },
+};
+
 const meta: Meta = {
   title: 'Components/Copy button',
   parameters: {
@@ -20,7 +41,7 @@ const meta: Meta = {
       page: storyDocs,
     },
   },
-  render: ({feedbackText, feedbackTimeout, onClick, iconDescription}) => html`
+  render: ({ feedbackText, feedbackTimeout, onClick, iconDescription }) => html`
     <cds-copy-button
       feedback="${ifDefined(feedbackText)}"
       feedback-timeout="${ifDefined(feedbackTimeout)}"
@@ -28,20 +49,18 @@ const meta: Meta = {
       ${iconDescription}
     </cds-copy-button>
   `,
-  argTypes: {
-    feedback: { control: 'text' },
-    feedbackTimeout: { control: { type: 'number', min:1, step: 1 } },
-    iconDescription: { control: 'text' },
-  },
-  args: {
-    feedback: 'Copied!',
-    feedbackTimeout: 2000,
-    iconDescription: 'Copy to clipboard'
-  }
+  args: defaultArgs,
 };
-
-export default meta;
 
 export const Default = {
   name: 'Default',
+  parameters: {
+    controls: { exclude: /(.*?)/ },
+  },
 };
+
+export const Playground = {
+  argTypes: controls,
+};
+
+export default meta;

@@ -5,12 +5,17 @@ import viteSVGResultCarbonIconLoader from '../tools/vite-svg-result-carbon-icon-
 const glob = require('fast-glob');
 import remarkGfm from 'remark-gfm';
 
-
-const stories = glob
-  .sync(['../src/**/*.mdx', '../docs/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'], {
+const stories = glob.sync(
+  [
+    '../src/**/*.mdx',
+    '../docs/**/*.mdx',
+    '../src/**/*.stories.@(js|jsx|ts|tsx)',
+  ],
+  {
     ignore: ['../src/**/docs/*.mdx'],
     cwd: __dirname,
-  })
+  }
+);
 
 const config: StorybookConfig = {
   stories: stories,
@@ -31,14 +36,18 @@ const config: StorybookConfig = {
       //   alias: [{ find: "@", replacement: resolve(__dirname, "node_modules") }]
       // },
       // resolve: {
-      //   alias: { 
+      //   alias: {
       //     '@carbon/web-components/es/icons': path.resolve(__dirname, '@carbon/icons/lib') },
       // },
       assetsInclude: ['**/*.html'],
-      plugins: [litStyleLoader(), litTemplateLoader(), viteSVGResultCarbonIconLoader()],
+      plugins: [
+        litStyleLoader(),
+        litTemplateLoader(),
+        viteSVGResultCarbonIconLoader(),
+      ],
       optimizeDeps: {
         include: ['@storybook/web-components'],
-        exclude: ['lit', 'lit-html']
+        exclude: ['lit', 'lit-html'],
       },
     });
 
@@ -49,6 +58,5 @@ const config: StorybookConfig = {
     autodocs: true,
     defaultName: 'Overview',
   },
-
 };
 export default config;

@@ -16,52 +16,53 @@ const createSVGResultFromCarbonIcon = require('./svg-result-carbon-icon');
  * @returns {string} The massaged module content.
  */
 export default function svgResultCarbonIconLoader() {
-  const svgRegex = /@carbon[\\/]icons[\\/]/i
+  const svgRegex = /@carbon[\\/]icons[\\/]/i;
 
-  const paths = new Map<string, string>()
+  const paths = new Map<string, string>();
 
   return {
-      name: 'svg-result-carbon-icon-loader',
-      enforce: 'pre',
+    name: 'svg-result-carbon-icon-loader',
+    enforce: 'pre',
 
-      resolveId(id: string): string | null {
+    resolveId(id: string): string | null {
       if (id.match(svgRegex)) {
-          paths.set(id, id)
-          return id
+        paths.set(id, id);
+        return id;
       } else {
-          return null
+        return null;
       }
-      },
+    },
 
-      async load(id: string): Promise<string | undefined> {
-      let outcome: string | undefined
+    async load(id: string): Promise<string | undefined> {
+      let outcome: string | undefined;
       if (!id.match(svgRegex)) {
-          return outcome
+        return outcome;
       }
-      return ``
-      },
+      return ``;
+    },
 
-      async transform(src: string, id: string) {
-
+    async transform(src: string, id: string) {
       if (!paths.has(id)) {
-          return null
+        return null;
       }
 
-      let outcome: string | undefined = src
+      let outcome: string | undefined = src;
       if (!id.match(svgRegex)) {
-          return outcome
+        return outcome;
       }
 
       const descriptor = require(id);
       return `
           import { svg } from 'lit';
           import spread from '${path.resolve(
-          __dirname,
-          '../src/globals/directives/spread'
+            __dirname,
+            '../src/globals/directives/spread'
           )}';
-          const svgResultCarbonIcon = ${createSVGResultFromCarbonIcon(descriptor)};
+          const svgResultCarbonIcon = ${createSVGResultFromCarbonIcon(
+            descriptor
+          )};
           export default svgResultCarbonIcon;
-      `
-      },
-  }
+      `;
+    },
+  };
 }
