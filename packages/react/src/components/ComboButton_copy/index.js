@@ -33,10 +33,10 @@ const ComboButton = React.forwardRef(function ComboButton(
     children,
     className,
     disabled,
-    isFullWidth = true,
     label,
     onClick,
     size = 'lg',
+    menuAlignment = 'bottom',
     tooltipAlignment,
     translateWithId: t = defaultTranslateWithId,
     ...rest
@@ -45,7 +45,7 @@ const ComboButton = React.forwardRef(function ComboButton(
 ) {
   const id = useId('combobutton');
   const prefix = usePrefix();
-  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
+  // const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
   const containerRef = useRef(null);
   const menuRef = useRef(null);
@@ -57,7 +57,7 @@ const ComboButton = React.forwardRef(function ComboButton(
     y,
     handleClick: hookOnClick,
     handleMousedown: handleTriggerMousedown,
-    handleClose,
+    // handleClose,
   } = useAttachedMenu(containerRef);
 
   function handleTriggerClick() {
@@ -76,55 +76,67 @@ const ComboButton = React.forwardRef(function ComboButton(
 
   function handleOpen() {
     menuRef.current.style.inlineSize = `${width}px`;
+    // checkEllipsis();
   }
+
+  // const menuAlignmentOptions = [
+  //   'bottom',
+  //   'top',
+  //   'top-left',
+  //   'top-right',
+  //   'bottom-left',
+  //   'bottom-right',
+  // ];
 
   const containerClasses = classNames(
     `${prefix}--combo-button__container`,
     `${prefix}--combo-button__container--${size}`,
+    // `${prefix}--combo-button__alignment`,
     {
       [`${prefix}--combo-button__container--open`]: open,
     },
     className
   );
 
-  let positionTest = 'top';
+  // let positionTest = 'top';
 
-  const fullWidthClasses = classNames(`popover-${positionTest}`, {
-    [`${prefix}--combo-button--full-width`]: isFullWidth,
-    [`test-class`]: isEllipsisApplied,
-  });
+  const menuClasses = classNames(
+    // `popover-${positionTest}`,
+    `${prefix}--combo-button__menu-${menuAlignment}`,
+    {
+      [`${prefix}--menu-alignment`]:
+        menuAlignment !== 'bottom' && menuAlignment !== 'top',
+    }
+  );
 
   const primaryActionClasses = classNames(
     `${prefix}--combo-button__primary-action`
   );
   const triggerClasses = classNames(`${prefix}--combo-button__trigger`);
 
-  console.log('children', children);
+  // const isEllipsisActive = (element) => {
+  //   if (element === null) {
+  //     return;
+  //   }
+  //   console.log('isEllipsisActive', element.offsetWidth < element.scrollWidth);
+  //   const isTrue = element.offsetWidth < element.scrollWidth;
 
-  const isEllipsisActive = (element) => {
-    if (element === null) {
-      return;
-    }
-    console.log(
-      'element.offsetWidth < element.scrollWidth',
-      element.offsetWidth < element.scrollWidth
-    );
-    const isTrue = element.offsetWidth < element.scrollWidth;
+  //   if (isTrue) {
+  //     return setIsEllipsisApplied(true);
+  //   }
+  // };
 
-    if (isTrue) {
-      return setIsEllipsisApplied(true);
-    }
-  };
-
-  children.forEach((element) => {
-    const label = element.props.label;
-    if (label === undefined || isEllipsisApplied === true) {
-      return;
-    }
-    const selectedLabel = document.querySelector(`[title="${label}"]`);
-    console.log('selectedLabel', selectedLabel);
-    isEllipsisActive(selectedLabel);
-  });
+  // const checkEllipsis = () => {
+  //   children.forEach((element) => {
+  //     const label = element.props.label;
+  //     if (label === undefined || isEllipsisApplied === true) {
+  //       return;
+  //     }
+  //     const selectedLabel = document.querySelector(`[title="${label}"]`);
+  //     console.log(selectedLabel.title);
+  //     isEllipsisActive(selectedLabel);
+  //   });
+  // };
 
   return (
     <div
@@ -140,28 +152,30 @@ const ComboButton = React.forwardRef(function ComboButton(
           {label}
         </Button>
       </div>
-      <IconButton
-        className={triggerClasses}
-        label={t('carbon.combo-button.additional-actions')}
-        size={size}
-        disabled={disabled}
-        align={tooltipAlignment}
-        aria-haspopup
-        aria-expanded={open}
-        onClick={handleTriggerClick}
-        onMouseDown={handleTriggerMousedown}
-        aria-controls={open ? id : null}>
-        <ChevronDown />
-      </IconButton>
+      <div className="test-div">
+        <IconButton
+          className={triggerClasses}
+          label={t('carbon.combo-button.additional-actions')}
+          size={size}
+          disabled={disabled}
+          align={tooltipAlignment}
+          aria-haspopup
+          aria-expanded={open}
+          onClick={handleTriggerClick}
+          onMouseDown={handleTriggerMousedown}
+          aria-controls={open ? id : null}>
+          <ChevronDown />
+        </IconButton>
+      </div>
       <Menu
-        className={fullWidthClasses}
+        className={menuClasses}
         ref={menuRef}
         id={id}
         label={t('carbon.combo-button.additional-actions')}
         mode="basic"
         size={size}
         open={open}
-        onClose={handleClose}
+        // onClose={handleClose}
         onOpen={handleOpen}
         x={x}
         y={[y[0] - spacing, y[1] + spacing]}>
@@ -188,14 +202,22 @@ ComboButton.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Specify whether the ComboButton and the menu dropdown should be full width.
-   */
-  isFullWidth: PropTypes.bool,
-
-  /**
    * Provide the label to be renderd on the primary action button.
    */
   label: PropTypes.string.isRequired,
+
+  /**
+   * Specify how the menu should align with the button element
+   */
+  menuAlignment: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+  ]),
 
   /**
    * Provide an optional function to be called when the primary action element is clicked.

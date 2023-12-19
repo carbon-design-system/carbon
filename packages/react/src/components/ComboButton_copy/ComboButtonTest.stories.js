@@ -39,10 +39,11 @@ export const Playground = (args) => {
   const onClick = action('onClick (MenuItem)');
 
   return (
-    <div style={{ marginTop: '15rem' }}>
+    <div
+      style={{ marginTop: '15rem', display: 'flex', justifyContent: 'center' }}>
       <ComboButton {...args}>
         <MenuItem
-          label="Second actionactionac actionactionac tion"
+          label="SecondSecondSecond actionactionac ssdssd"
           onClick={onClick}
         />
         <MenuItem label="Third action" onClick={onClick} />

@@ -35,8 +35,14 @@
   }
 
   .#{$prefix}--combo-button__primary-action .#{$prefix}--btn {
-    max-inline-size: convert.to-rem(230px);
-    min-inline-size: convert.to-rem(160px);
+    // max-inline-size: convert.to-rem(240px);
+    // min-inline-size: convert.to-rem(160px);
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--combo-button__ellipsis {
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
   }
 
   .#{$prefix}--combo-button__trigger svg {
@@ -51,20 +57,56 @@
 }
 
 // ==================test==========================================
-// .#{$prefix}--combo-button--full-width {
 
+// .#{$prefix}--combo-button__alignment {
 // }
-.test-class {
-  background-color: #492389;
+
+.#{$prefix}--menu-alignment {
+  // max-inline-size: convert.to-rem(288px) !important;
+  inline-size: fit-content;
 }
 
-// $popover-offset: custom-property.get-var('popover-offset', 3rem);
-.popover-top {
+.#{$prefix}--combo-button__menu-top {
   $popover-offset: custom-property.get-var('popover-offset', 3rem);
 
   inset-block-start: 0;
   inset-inline-start: 50%;
   transform: translate(0%, calc(-100% - $popover-offset));
+}
+
+.#{$prefix}--combo-button__menu-top-left {
+  $popover-offset: custom-property.get-var('popover-offset', 3rem);
+
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  transform: translate($popover-offset, calc(-100% - $popover-offset));
+}
+
+.#{$prefix}--combo-button__menu-top-right {
+  $popover-offset: custom-property.get-var('popover-offset', 3rem);
+
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  transform: translate(
+    calc(-1 * $popover-offset),
+    calc(-100% - $popover-offset)
+  );
+}
+
+.#{$prefix}--combo-button__menu-bottom-left {
+  $popover-offset: custom-property.get-var('popover-offset', 3rem);
+
+  inset-inline-end: 0;
+  inset-inline-start: initial;
+  // transform: translate($popover-offset, calc(-100% + $popover-offset));
+}
+
+.#{$prefix}--combo-button__menu-bottom-right {
+  $popover-offset: custom-property.get-var('popover-offset', 3rem);
+
+  inset-inline-end: 0;
+  inset-inline-start: 0;
+  transform: translate($popover-offset, calc(-100% + $popover-offset));
 }
 
 .popover-bottom {

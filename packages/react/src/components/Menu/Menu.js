@@ -230,9 +230,10 @@ const Menu = React.forwardRef(function Menu(
     if (menu.current) {
       const ranges = {
         x: typeof x === 'object' && x.length === 2 ? x : [x, x],
+        // x: [0, 234],
         y: typeof y === 'object' && y.length === 2 ? y : [y, y],
       };
-
+      console.log('x', x);
       return [fitValue(ranges.x, 'x'), fitValue(ranges.y, 'y')];
     }
 
