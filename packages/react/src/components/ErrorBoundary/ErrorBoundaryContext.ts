@@ -5,9 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { createContext } from 'react';
+import { ErrorInfo, createContext } from 'react';
 
-export const ErrorBoundaryContext = createContext({
+export interface ErrorBoundaryContextType {
+  log: (error: Error, errorInfo: ErrorInfo) => void;
+}
+
+export const ErrorBoundaryContext = createContext<ErrorBoundaryContextType>({
   log(error, info) {
     console.log(info.componentStack);
   },

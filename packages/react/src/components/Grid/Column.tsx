@@ -366,10 +366,12 @@ function getClassNameForBreakpoints(
       continue;
     }
 
-    // If our breakpoint is a string, the user has specified a percent
+    // If our breakpoint is a string, the user might have specified a percent
     // they'd like this column to span.
     if (typeof breakpoint === 'string') {
-      classNames.push(`${prefix}--${name}:col-span-${breakpoint.slice(0, -1)}`);
+      classNames.push(
+        `${prefix}--${name}:col-span-${breakpoint.replace('%', '')}`
+      );
       continue;
     }
 
