@@ -45,8 +45,6 @@ const ComboButton = React.forwardRef(function ComboButton(
 ) {
   const id = useId('combobutton');
   const prefix = usePrefix();
-  // const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
-
   const containerRef = useRef(null);
   const menuRef = useRef(null);
   const ref = useMergedRefs([forwardRef, containerRef]);
@@ -79,7 +77,6 @@ const ComboButton = React.forwardRef(function ComboButton(
     if (menuAlignment !== 'bottom' && menuAlignment !== 'top') {
       menuRef.current.style.inlineSize = `fit-content`;
     }
-    // checkEllipsis();
   }
 
   const containerClasses = classNames(
@@ -100,30 +97,6 @@ const ComboButton = React.forwardRef(function ComboButton(
   );
   const triggerClasses = classNames(`${prefix}--combo-button__trigger`);
 
-  // const isEllipsisActive = (element) => {
-  //   if (element === null) {
-  //     return;
-  //   }
-  //   console.log('isEllipsisActive', element.offsetWidth < element.scrollWidth);
-  //   const isTrue = element.offsetWidth < element.scrollWidth;
-
-  //   if (isTrue) {
-  //     return setIsEllipsisApplied(true);
-  //   }
-  // };
-
-  // const checkEllipsis = () => {
-  //   children.forEach((element) => {
-  //     const label = element.props.label;
-  //     if (label === undefined || isEllipsisApplied === true) {
-  //       return;
-  //     }
-  //     const selectedLabel = document.querySelector(`[title="${label}"]`);
-  //     console.log(selectedLabel.title);
-  //     isEllipsisActive(selectedLabel);
-  //   });
-  // };
-
   return (
     <div
       {...rest}
@@ -132,10 +105,11 @@ const ComboButton = React.forwardRef(function ComboButton(
       aria-owns={open ? id : null}>
       <div className={primaryActionClasses}>
         <Button
+          title={label}
           size={size}
           disabled={disabled}
           onClick={handlePrimaryActionClick}>
-          {label}
+          <span>{label}</span>
         </Button>
       </div>
       <div className="test-div">

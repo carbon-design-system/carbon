@@ -35,9 +35,16 @@
   }
 
   .#{$prefix}--combo-button__primary-action .#{$prefix}--btn {
-    // max-inline-size: convert.to-rem(240px);
-    // min-inline-size: convert.to-rem(160px);
     inline-size: 100%;
+    max-inline-size: convert.to-rem(240px);
+    min-inline-size: convert.to-rem(160px);
+  }
+
+  .#{$prefix}--combo-button__primary-action span {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .#{$prefix}--combo-button__ellipsis {
