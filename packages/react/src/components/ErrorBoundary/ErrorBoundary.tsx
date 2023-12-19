@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { ErrorInfo, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { ErrorBoundaryContext } from './ErrorBoundaryContext';
 
@@ -26,29 +26,39 @@ import { ErrorBoundaryContext } from './ErrorBoundaryContext';
  * Reference:
  * https://reactjs.org/docs/error-boundaries.html#introducing-error-boundaries
  */
-export default class ErrorBoundary extends React.Component {
+interface ErrorBoundaryProps {
+  children?: ReactNode;
+  fallback?: ReactNode;
+}
+
+interface ErrorBoundaryState {
+  hasError: boolean;
+}
+
+export default class ErrorBoundary extends React.Component<ErrorBoundaryProps> {
   static propTypes = {
     children: PropTypes.node,
     fallback: PropTypes.node,
   };
 
   static contextType = ErrorBoundaryContext;
+  context!: React.ContextType<typeof ErrorBoundaryContext>;
 
-  static getDerivedStateFromError() {
+  static getDerivedStateFromError(): ErrorBoundaryState {
     return {
       hasError: true,
     };
   }
 
-  state = {
+  state: ErrorBoundaryState = {
     hasError: false,
   };
 
-  componentDidCatch(error, info) {
+  componentDidCatch(error: Error, info: ErrorInfo) {
     this.context.log(error, info);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: ErrorBoundaryProps) {
     if (prevProps.children !== this.props.children) {
       this.setState({ hasError: false });
     }
