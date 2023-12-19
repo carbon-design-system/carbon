@@ -2974,6 +2974,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ibm/telemetry-js@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@ibm/telemetry-js@npm:1.1.0"
+  bin:
+    ibmtelemetry: dist/collect.js
+  checksum: aeec7caec4acb044c09e738571a4fbeb70aef93f9a00233006bcc3b4b25248fa4017c6e70a8578faa028edb614fe19a66a9e6f32d0bf1fcdeb61c61839b324bc
+  languageName: node
+  linkType: hard
+
 "@istanbuljs/load-nyc-config@npm:^1.0.0":
   version: 1.0.0
   resolution: "@istanbuljs/load-nyc-config@npm:1.0.0"
@@ -11520,6 +11529,7 @@ __metadata:
     "@cypress/react": ^5.11.0
     "@cypress/webpack-dev-server": ^1.7.0
     "@cypress/webpack-preprocessor": ^5.11.0
+    "@ibm/telemetry-js": ^1.1.0
     "@percy/cypress": ^3.1.1
     "@percy/storybook": ^4.1.0
     "@rollup/plugin-babel": ^5.3.0
