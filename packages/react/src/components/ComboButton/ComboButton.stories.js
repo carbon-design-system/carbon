@@ -57,13 +57,19 @@ export const Playground = (args) => {
   const onClick = action('onClick (MenuItem)');
 
   return (
-    <ComboButton {...args}>
-      <MenuItem label="Second action" onClick={onClick} />
-      <MenuItem label="Third action" onClick={onClick} />
-      <MenuItem label="Fourth action" disabled onClick={onClick} />
-      <MenuItemDivider />
-      <MenuItem label="Danger action" kind="danger" onClick={onClick} />
-    </ComboButton>
+    <div
+      style={{ marginTop: '15rem', display: 'flex', justifyContent: 'center' }}>
+      <ComboButton {...args}>
+        <MenuItem
+          label="SecondSecondSecond actionactionac ssdssd"
+          onClick={onClick}
+        />
+        <MenuItem label="Third action" onClick={onClick} />
+        <MenuItem label="Fourth action" disabled onClick={onClick} />
+        <MenuItemDivider />
+        <MenuItem label="Danger action" kind="danger" onClick={onClick} />
+      </ComboButton>
+    </div>
   );
 };
 

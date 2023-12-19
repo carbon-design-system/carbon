@@ -36,6 +36,7 @@ const ComboButton = React.forwardRef(function ComboButton(
     label,
     onClick,
     size = 'lg',
+    menuAlignment = 'bottom',
     tooltipAlignment,
     translateWithId: t = defaultTranslateWithId,
     ...rest
@@ -44,7 +45,6 @@ const ComboButton = React.forwardRef(function ComboButton(
 ) {
   const id = useId('combobutton');
   const prefix = usePrefix();
-
   const containerRef = useRef(null);
   const menuRef = useRef(null);
   const ref = useMergedRefs([forwardRef, containerRef]);
@@ -74,6 +74,9 @@ const ComboButton = React.forwardRef(function ComboButton(
 
   function handleOpen() {
     menuRef.current.style.inlineSize = `${width}px`;
+    if (menuAlignment !== 'bottom' && menuAlignment !== 'top') {
+      menuRef.current.style.inlineSize = `fit-content`;
+    }
   }
 
   const containerClasses = classNames(
@@ -83,6 +86,10 @@ const ComboButton = React.forwardRef(function ComboButton(
       [`${prefix}--combo-button__container--open`]: open,
     },
     className
+  );
+
+  const menuClasses = classNames(
+    `${prefix}--combo-button__menu-${menuAlignment}`
   );
 
   const primaryActionClasses = classNames(
@@ -98,26 +105,31 @@ const ComboButton = React.forwardRef(function ComboButton(
       aria-owns={open ? id : null}>
       <div className={primaryActionClasses}>
         <Button
+          title={label}
           size={size}
           disabled={disabled}
           onClick={handlePrimaryActionClick}>
-          {label}
+          <span>{label}</span>
         </Button>
       </div>
-      <IconButton
-        className={triggerClasses}
-        label={t('carbon.combo-button.additional-actions')}
-        size={size}
-        disabled={disabled}
-        align={tooltipAlignment}
-        aria-haspopup
-        aria-expanded={open}
-        onClick={handleTriggerClick}
-        onMouseDown={handleTriggerMousedown}
-        aria-controls={open ? id : null}>
-        <ChevronDown />
-      </IconButton>
+      <div className="test-div">
+        <IconButton
+          className={triggerClasses}
+          label={t('carbon.combo-button.additional-actions')}
+          size={size}
+          disabled={disabled}
+          align={tooltipAlignment}
+          aria-haspopup
+          aria-expanded={open}
+          onClick={handleTriggerClick}
+          onMouseDown={handleTriggerMousedown}
+          aria-controls={open ? id : null}>
+          <ChevronDown />
+        </IconButton>
+      </div>
       <Menu
+        menuAlignment={menuAlignment}
+        className={menuClasses}
         ref={menuRef}
         id={id}
         label={t('carbon.combo-button.additional-actions')}
@@ -154,6 +166,19 @@ ComboButton.propTypes = {
    * Provide the label to be renderd on the primary action button.
    */
   label: PropTypes.string.isRequired,
+
+  /**
+   * Specify how the menu should align with the button element
+   */
+  menuAlignment: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+  ]),
 
   /**
    * Provide an optional function to be called when the primary action element is clicked.
