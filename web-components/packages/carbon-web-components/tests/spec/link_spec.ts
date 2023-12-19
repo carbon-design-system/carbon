@@ -9,7 +9,7 @@
 
 import { render } from 'lit';
 import '../../src/components/link/link';
-import { pairedWithIcon } from '../../src/components/link/link-story';
+import { pairedWithIcon } from '../../src/components/link/link.stories';
 
 const template = (props?) =>
   pairedWithIcon({
