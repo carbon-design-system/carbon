@@ -201,6 +201,7 @@
     "sass": "~1.69.0",
     "sass-loader": "^10.0.0",
     "storybook": "^7.6.4",
+    "storybook-addon-accessibility-checker": "^3.1.61-rc.2",
     "strip-comments": "^1.0.0",
     "style-loader": "^2.0.0",
     "temp": "^0.9.0",

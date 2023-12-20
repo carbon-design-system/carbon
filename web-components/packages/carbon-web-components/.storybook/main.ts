@@ -23,6 +23,7 @@ const config: StorybookConfig = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-mdx-gfm',
+    'storybook-addon-accessibility-checker',
   ],
   framework: {
     name: '@storybook/web-components-vite',
