@@ -31,6 +31,7 @@ const Menu = React.forwardRef(function Menu(
   {
     children,
     className,
+    comboButtonWidth,
     label,
     menuAlignment,
     mode = 'full',
@@ -208,12 +209,23 @@ const Menu = React.forwardRef(function Menu(
       },
     };
 
-    if (menuAlignment === 'bottom-right') {
-      axes.x.anchor = axes.x.anchor + axes.x.size;
+    // Avoid that the Menu render incorrectly when the postion is set in the right side of the screen
+    if (
+      comboButtonWidth < axes.x.size &&
+      (menuAlignment === 'bottom' || menuAlignment === 'top')
+    ) {
+      axes.x.size = comboButtonWidth;
     }
 
-    if (menuAlignment === 'top-right') {
-      axes.x.anchor = axes.x.anchor + axes.x.size;
+    // if 'axes.x.anchor' is lower than 87 render 'bottom-left
+    if (menuAlignment === 'bottom-right' && axes.x.anchor >= 87) {
+      const diff = axes.x.anchor + axes.x.reversedAnchor;
+      axes.x.anchor = axes.x.anchor + diff;
+    }
+    // if 'axes.x.anchor' is lower than 87 render 'top-left
+    if (menuAlignment === 'top-right' && axes.x.anchor >= 87) {
+      const diff = axes.x.anchor + axes.x.reversedAnchor;
+      axes.x.anchor = axes.x.anchor + diff;
     }
 
     const { max, size, anchor, reversedAnchor, offset } = axes[axis];
@@ -310,6 +322,10 @@ Menu.propTypes = {
    */
   className: PropTypes.string,
 
+  /**
+   * Accepts the width of the button is being passed
+   */
+  comboButtonWidth: PropTypes.number,
   /**
    * A label describing the Menu.
    */

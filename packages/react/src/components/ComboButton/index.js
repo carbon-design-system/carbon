@@ -128,6 +128,7 @@ const ComboButton = React.forwardRef(function ComboButton(
         </IconButton>
       </div>
       <Menu
+        comboButtonWidth={width}
         menuAlignment={menuAlignment}
         className={menuClasses}
         ref={menuRef}
