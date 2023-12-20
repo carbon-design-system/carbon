@@ -17,7 +17,7 @@ const defaultArgs = {
   disabled: false,
   href: 'https://example.com',
   inline: false,
-  size: LINK_SIZE.REGULAR,
+  size: LINK_SIZE.MEDIUM,
   visited: false,
 }
 
