@@ -13,6 +13,7 @@
 @use '@carbon/styles/scss/layer' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/components/modal' as *;
 @use '@carbon/styles/scss/components/button' as *;
 
@@ -134,4 +135,28 @@
   width: 50%;
   height: $spacing-10;
   margin: 0;
+}
+
+// Slug
+
+:host(#{$prefix}-modal) .#{$prefix}--modal-container {
+  @include callout-gradient('default');
+
+  background-color: $layer;
+}
+
+:host(#{$prefix}-modal[has-two-buttons]) .#{$prefix}--modal-container {
+  @include callout-gradient('default', 64px);
+
+  background-color: $layer;
+}
+
+:host(#{$prefix}-modal-header) ::slotted(#{$prefix}-slug) {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+}
+
+:host(#{$prefix}-modal-header[close-button]) ::slotted(#{$prefix}-slug) {
+  inset-inline-end: $spacing-09;
 }
