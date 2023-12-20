@@ -21,6 +21,38 @@ const SPACING_STEPS = Array.from({ length: spacing.length - 1 }).map(
   }
 );
 
+interface StackProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Provide a custom element type to render as the outermost element in
+   * the Stack component. By default, this component will render a `div`.
+   */
+  as?: (() => React.ReactNode) | string | React.ElementType;
+
+  /**
+   * Provide the elements that will be rendered as children inside of the Stack
+   * component. These elements will have having spacing between them according
+   * to the `step` and `orientation` prop
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Provide a custom class name to be used by the outermost element rendered by
+   * Stack
+   */
+  className?: string;
+
+  /**
+   * Provide either a custom value or a step from the spacing scale to be used
+   * as the gap in the layout
+   */
+  gap?: string | (typeof SPACING_STEPS)[number];
+
+  /**
+   * Specify the orientation of them items in the Stack
+   */
+  orientation?: 'horizontal' | 'vertical';
+}
+
 /**
  * The Stack component is a useful layout utility in a component-based model.
  * This allows components to not use margin and instead delegate the
@@ -38,7 +70,10 @@ const SPACING_STEPS = Array.from({ length: spacing.length - 1 }).map(
  * - https://paste.twilio.design/layout/stack/
  * - https://github.com/Workday/canvas-kit/blob/f2f599654876700f483a1d8c5de82a41315c76f1/modules/labs-react/layout/lib/Stack.tsx
  */
-const Stack = React.forwardRef(function Stack(props, ref) {
+const Stack = React.forwardRef<React.ReactNode, StackProps>(function Stack(
+  props,
+  ref
+) {
   const {
     as: BaseComponent = 'div',
     children,
