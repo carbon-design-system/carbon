@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Description, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as CopyButtonStories from './copy-button.stories';
+
+<Meta of={CopyButtonStories} /> 
 
 # Copy button
 
@@ -36,4 +39,5 @@ import '@carbon/web-components/es/components/copy-button/index.js';
 
 ## `<cds-copy-button>` attributes and properties
 
-<Props of="cds-copy-button" />
+<ArgsTable of="cds-copy-button" />
+
