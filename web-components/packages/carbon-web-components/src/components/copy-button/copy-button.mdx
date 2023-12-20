@@ -1,13 +1,16 @@
-import { ArgsTable, Description, Story, Canvas } from '@storybook/blocks';
+import { ArgsTable, Description, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as CopyButtonStories from './copy-button.stories';
+
+<Meta of={CopyButtonStories} /> 
 
 # Copy button
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/copy-button)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/main/packages/carbon-web-components/examples/codesandbox/basic/components/copy-button)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/basic/components/copy-button)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/main/packages/carbon-web-components/examples/codesandbox/basic/components/copy-button)
 
 Copy button provides the interface of copy button and its feedback tooltip. No
 actual copy is performed, but application can listen to `click` event of

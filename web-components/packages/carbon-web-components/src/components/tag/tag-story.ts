@@ -39,9 +39,7 @@ const types = [
 
 export const Default = () => {
   return html`
-    ${types.map(
-      (e) => html`<cds-tag size="sm" type="${e}">Tag content</cds-tag>`
-    )}
+    ${types.map((e) => html`<cds-tag type="${e}">Tag content</cds-tag>`)}
   `;
 };
 
@@ -67,7 +65,7 @@ Playground.parameters = {
     [`${prefix}-tag`]: () => ({
       disabled: boolean('Disabled (disabled)', false),
       title: textNullable('Title (title)', 'Clear Selection'),
-      size: select('Tag size (size)', sizes, null),
+      size: select('Tag size (size)', sizes, TAG_SIZE.MEDIUM),
       type: select(
         'Tag type (type)',
         Object.values(TAG_TYPE).reduce(

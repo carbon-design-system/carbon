@@ -12,6 +12,7 @@ import { boolean } from '@storybook/addon-knobs';
 import View16 from '@carbon/icons/lib/view/16';
 import FolderOpen16 from '@carbon/icons/lib/folder--open/16';
 import Folders16 from '@carbon/icons/lib/folders/16';
+import Asleep16 from '@carbon/icons/lib/asleep/16';
 import textNullable from '../../../.storybook/knob-text-nullable';
 import { prefix } from '../../globals/settings';
 import './index';
@@ -79,6 +80,89 @@ const actions = html`
 
 export default {
   title: 'Experimental/Slug/Examples',
+};
+
+export const _Checkbox = (args) => {
+  const { disabled, invalid, invalidText, warn, warnText } =
+    args?.['cds-checkbox'] ?? {};
+
+  return html`
+    <style>
+      ${styles}
+    </style>
+    <div style="width: 400px">
+      <cds-checkbox-group
+        legend-text="Group label"
+        ?disabled="${disabled}"
+        ?invalid="${invalid}"
+        invalid-text="${invalidText}"
+        ?warn="${warn}"
+        warn-text="${warnText}">
+        <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+        <cds-checkbox>Checkbox label</cds-checkbox>
+        <cds-checkbox>Checkbox label</cds-checkbox>
+        <cds-checkbox>Checkbox label</cds-checkbox>
+      </cds-checkbox-group>
+
+      <cds-checkbox-group
+        legend-text="Group label"
+        ?disabled="${disabled}"
+        ?invalid="${invalid}"
+        invalid-text="${invalidText}"
+        ?warn="${warn}"
+        warn-text="${warnText}">
+        <cds-checkbox>
+          Checkbox label
+          <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+        </cds-checkbox>
+        <cds-checkbox>
+          Checkbox label
+          <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+        </cds-checkbox>
+        <cds-checkbox>Checkbox label</cds-checkbox>
+      </cds-checkbox-group>
+
+      <cds-checkbox-group
+        legend-text="Group label"
+        ?disabled="${disabled}"
+        ?invalid="${invalid}"
+        invalid-text="${invalidText}"
+        ?warn="${warn}"
+        warn-text="${warnText}">
+        <cds-checkbox>
+          Checkbox label
+          <cds-slug alignment="bottom-left" kind="inline">
+            ${content}${actions}
+          </cds-slug>
+        </cds-checkbox>
+        <cds-checkbox>
+          Checkbox label
+          <cds-slug alignment="bottom-left" kind="inline">
+            ${content}${actions}
+          </cds-slug>
+        </cds-checkbox>
+        <cds-checkbox>Checkbox label</cds-checkbox>
+      </cds-checkbox-group>
+    </div>
+  `;
+};
+
+_Checkbox.parameters = {
+  knobs: {
+    [`${prefix}-checkbox`]: () => ({
+      disabled: boolean('Disabled (disabled)', false),
+      invalid: boolean('Invalid (invalid)', false),
+      invalidText: textNullable(
+        'Invalid text (invalid-text)',
+        'Error message goes here'
+      ),
+      warn: boolean('Warn (warn)', false),
+      warnText: textNullable(
+        'Warn text (warn-text)',
+        'Warning message that is really long can wrap to more lines but should not be excessively long.'
+      ),
+    }),
+  },
 };
 
 export const _Combobox = () => {
@@ -328,6 +412,67 @@ export const _Select = () => {
         </cds-select-item-group>
       </cds-select>
     </div> `;
+};
+
+const tagTypes = [
+  'red',
+  'magenta',
+  'purple',
+  'blue',
+  'cyan',
+  'teal',
+  'green',
+  'gray',
+  'cool-gray',
+  'warm-gray',
+  'high-contrast',
+  'outline',
+];
+
+export const _Tag = () => {
+  return html`
+    <style>
+      ${styles}
+    </style>
+    <div class="slug-tag-container">
+      ${tagTypes.map(
+        (e) => html`<cds-tag type="${e}"
+          >Tag
+          <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+        </cds-tag>`
+      )}
+    </div>
+
+    <div class="slug-tag-container">
+      ${tagTypes.map(
+        (e) =>
+          html`<cds-tag filter type="${e}">
+            Tag
+            <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+          </cds-tag>`
+      )}
+    </div>
+
+    <div class="slug-tag-container">
+      ${tagTypes.map(
+        (e) =>
+          html`<cds-tag type="${e}">
+            ${Asleep16({ slot: 'icon' })} Tag
+            <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+          </cds-tag>`
+      )}
+    </div>
+
+    <div class="slug-tag-container">
+      ${tagTypes.map(
+        (e) =>
+          html`<cds-tag filter type="${e}">
+            ${Asleep16({ slot: 'icon' })} Tag
+            <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+          </cds-tag>`
+      )}
+    </div>
+  `;
 };
 
 export const _TextInput = () => {

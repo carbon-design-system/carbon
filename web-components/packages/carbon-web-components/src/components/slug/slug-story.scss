@@ -107,6 +107,11 @@ div #{$prefix}-selectable-tile::-moz-list-bullet {
   margin: $spacing-03 0 50px;
 }
 
-#{$prefix}-radio-button-group:not(:first-of-type) {
+#{$prefix}-radio-button-group:not(:first-of-type),
+#{$prefix}-checkbox-group:not(:first-of-type) {
   margin-top: $spacing-07;
+}
+
+.slug-tag-container {
+  margin-bottom: $spacing-10;
 }

@@ -8,54 +8,53 @@
  */
 
 import { html } from 'lit';
-import { boolean, select, text } from '@storybook/addon-knobs';
-import { prefix } from '../../../globals/settings';
-import { TABLE_SIZE } from '../table';
-import Settings16 from '@carbon/web-components/es/icons/settings/16';
-import OverflowMenuVertical16 from '@carbon/icons/lib/overflow-menu--vertical/16';
-import '../index';
-import storyDocs from './data-table-story.mdx';
+import View16 from '@carbon/icons/lib/view/16';
+import FolderOpen16 from '@carbon/icons/lib/folder--open/16';
+import Folders16 from '@carbon/icons/lib/folders/16';
+import '../data-table/index';
 
-const sizes = {
-  [`xs (${TABLE_SIZE.XS})`]: TABLE_SIZE.XS,
-  [`sm (${TABLE_SIZE.SM})`]: TABLE_SIZE.SM,
-  [`md (${TABLE_SIZE.MD})`]: TABLE_SIZE.MD,
-  [`lg (${TABLE_SIZE.LG} - default)`]: TABLE_SIZE.LG,
-  [`xl (${TABLE_SIZE.XL})`]: TABLE_SIZE.XL,
+const content = html`
+  <div slot="body-text">
+    <p class="secondary">AI Explained</p>
+    <h1>84%</h1>
+    <p class="secondary bold">Confidence score</p>
+    <p class="secondary">
+      Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+      eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+    </p>
+    <hr />
+    <p class="secondary">Model type</p>
+    <p class="bold">Foundation model</p>
+  </div>
+`;
+
+const actions = html`
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${View16({ slot: 'icon' })}
+    <span slot="tooltip-content"> View </span>
+  </cds-icon-button>
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${FolderOpen16({ slot: 'icon' })}
+    <span slot="tooltip-content"> Open folder</span>
+  </cds-icon-button>
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${Folders16({ slot: 'icon' })}
+    <span slot="tooltip-content"> Folders </span>
+  </cds-icon-button>
+  <cds-slug-action-button>View Literature</cds-slug-action-button>
+`;
+
+export default {
+  title: 'Experimental/Slug/DataTable',
 };
 
-export const Default = () => {
+export const _ColumnSlugSort = () => {
   return html`
-    <cds-table>
+    <cds-table is-sortable>
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
-        >With toolbar</cds-table-header-description
+        >With expansion</cds-table-header-description
       >
-
-      <cds-table-toolbar slot="toolbar">
-        <cds-table-toolbar-content>
-          <cds-table-toolbar-search
-            placeholder="Filter table"></cds-table-toolbar-search>
-          <cds-overflow-menu toolbar-action>
-            ${Settings16({
-              slot: 'icon',
-              class: `${prefix}--overflow-menu__icon`,
-            })}
-            <cds-overflow-menu-body>
-              <cds-overflow-menu-item @click=${() => alert('Alert 1')}>
-                Action 1
-              </cds-overflow-menu-item>
-              <cds-overflow-menu-item @click=${() => alert('Alert 2')}>
-                Action 2
-              </cds-overflow-menu-item>
-              <cds-overflow-menu-item @click=${() => alert('Alert 3')}>
-                Action 3
-              </cds-overflow-menu-item>
-            </cds-overflow-menu-body>
-          </cds-overflow-menu>
-          <cds-button>Primary button</cds-button>
-        </cds-table-toolbar-content>
-      </cds-table-toolbar>
 
       <cds-table-head>
         <cds-table-header-row>
@@ -63,7 +62,12 @@ export const Default = () => {
           <cds-table-header-cell>Protocol</cds-table-header-cell>
           <cds-table-header-cell>Port</cds-table-header-cell>
           <cds-table-header-cell>Rule</cds-table-header-cell>
-          <cds-table-header-cell>Attached groups</cds-table-header-cell>
+          <cds-table-header-cell
+            >Attached groups
+            <cds-slug alignment="bottom-left"
+              >${content}${actions}</cds-slug
+            ></cds-table-header-cell
+          >
           <cds-table-header-cell>Status</cds-table-header-cell>
         </cds-table-header-row>
       </cds-table-head>
@@ -125,430 +129,25 @@ export const Default = () => {
   `;
 };
 
-export const PersistentToolbar = () => {
+export const _ColumnSlugWithSelectionAndExpansion = () => {
   return html`
-    <cds-table>
+    <cds-table expandable batch-expansion>
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
-        >With toolbar</cds-table-header-description
+        >With sorting</cds-table-header-description
       >
-
-      <cds-table-toolbar slot="toolbar">
-        <cds-table-toolbar-content>
-          <cds-table-toolbar-search
-            persistent
-            placeholder="Filter table"></cds-table-toolbar-search>
-          <cds-overflow-menu toolbar-action>
-            ${Settings16({
-              slot: 'icon',
-              class: `${prefix}--overflow-menu__icon`,
-            })}
-            <cds-overflow-menu-body>
-              <cds-overflow-menu-item @click=${() => alert('Alert 1')}>
-                Action 1
-              </cds-overflow-menu-item>
-              <cds-overflow-menu-item @click=${() => alert('Alert 2')}>
-                Action 2
-              </cds-overflow-menu-item>
-              <cds-overflow-menu-item @click=${() => alert('Alert 3')}>
-                Action 3
-              </cds-overflow-menu-item>
-            </cds-overflow-menu-body>
-          </cds-overflow-menu>
-          <cds-button>Primary button</cds-button>
-        </cds-table-toolbar-content>
-      </cds-table-toolbar>
-
-      <cds-table-head>
-        <cds-table-header-row>
-          <cds-table-header-cell>Name</cds-table-header-cell>
-          <cds-table-header-cell>Protocol</cds-table-header-cell>
-          <cds-table-header-cell>Port</cds-table-header-cell>
-          <cds-table-header-cell>Rule</cds-table-header-cell>
-          <cds-table-header-cell>Attached groups</cds-table-header-cell>
-          <cds-table-header-cell>Status</cds-table-header-cell>
-        </cds-table-header-row>
-      </cds-table-head>
-      <cds-table-body>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 3</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>3000</cds-table-cell>
-          <cds-table-cell>Round robin</cds-table-cell>
-          <cds-table-cell>Kevin's VM Groups</cds-table-cell>
-          <cds-table-cell
-            ><cds-link disabled>Disabled</cds-link></cds-table-cell
-          >
-        </cds-table-row>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 1</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>443</cds-table-cell>
-          <cds-table-cell>Round robin</cds-table-cell>
-          <cds-table-cell>Maureen's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
-        </cds-table-row>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 2</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>80</cds-table-cell>
-          <cds-table-cell>DNS delegation</cds-table-cell>
-          <cds-table-cell>Andrew's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
-        </cds-table-row>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 6</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>3000</cds-table-cell>
-          <cds-table-cell>Round robin</cds-table-cell>
-          <cds-table-cell>Marc's VM Groups</cds-table-cell>
-          <cds-table-cell
-            ><cds-link disabled>Disabled</cds-link></cds-table-cell
-          >
-        </cds-table-row>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 4</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>443</cds-table-cell>
-          <cds-table-cell>Round robin</cds-table-cell>
-          <cds-table-cell>Mel's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
-        </cds-table-row>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 5</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>80</cds-table-cell>
-          <cds-table-cell>DNS delegation</cds-table-cell>
-          <cds-table-cell>Ronja's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
-        </cds-table-row>
-      </cds-table-body>
-    </cds-table>
-  `;
-};
-
-export const SmallPersistentToolbar = () => {
-  return html`
-    <cds-table size="sm">
-      <cds-table-header-title slot="title">DataTable</cds-table-header-title>
-      <cds-table-header-description slot="description"
-        >With toolbar</cds-table-header-description
-      >
-
-      <cds-table-toolbar slot="toolbar">
-        <cds-table-toolbar-content>
-          <cds-table-toolbar-search
-            persistent
-            placeholder="Filter table"></cds-table-toolbar-search>
-          <cds-overflow-menu toolbar-action>
-            ${Settings16({
-              slot: 'icon',
-              class: `${prefix}--overflow-menu__icon`,
-            })}
-            <cds-overflow-menu-body>
-              <cds-overflow-menu-item> Action 1 </cds-overflow-menu-item>
-              <cds-overflow-menu-item> Action 2 </cds-overflow-menu-item>
-              <cds-overflow-menu-item> Action 3 </cds-overflow-menu-item>
-            </cds-overflow-menu-body>
-          </cds-overflow-menu>
-          <cds-button>Primary Button</cds-button>
-        </cds-table-toolbar-content>
-      </cds-table-toolbar>
-
-      <cds-table-head>
-        <cds-table-header-row>
-          <cds-table-header-cell>Name</cds-table-header-cell>
-          <cds-table-header-cell>Protocol</cds-table-header-cell>
-          <cds-table-header-cell>Port</cds-table-header-cell>
-          <cds-table-header-cell>Rule</cds-table-header-cell>
-          <cds-table-header-cell>Attached groups</cds-table-header-cell>
-          <cds-table-header-cell>Status</cds-table-header-cell>
-        </cds-table-header-row>
-      </cds-table-head>
-      <cds-table-body>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 3</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>3000</cds-table-cell>
-          <cds-table-cell>Round robin</cds-table-cell>
-          <cds-table-cell>Kevin's VM Groups</cds-table-cell>
-          <cds-table-cell
-            ><cds-link disabled>Disabled</cds-link></cds-table-cell
-          >
-        </cds-table-row>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 1</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>443</cds-table-cell>
-          <cds-table-cell>Round robin</cds-table-cell>
-          <cds-table-cell>Maureen's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
-        </cds-table-row>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 2</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>80</cds-table-cell>
-          <cds-table-cell>DNS delegation</cds-table-cell>
-          <cds-table-cell>Andrew's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
-        </cds-table-row>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 6</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>3000</cds-table-cell>
-          <cds-table-cell>Round robin</cds-table-cell>
-          <cds-table-cell>Marc's VM Groups</cds-table-cell>
-          <cds-table-cell
-            ><cds-link disabled>Disabled</cds-link></cds-table-cell
-          >
-        </cds-table-row>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 4</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>443</cds-table-cell>
-          <cds-table-cell>Round robin</cds-table-cell>
-          <cds-table-cell>Mel's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
-        </cds-table-row>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 5</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>80</cds-table-cell>
-          <cds-table-cell>DNS delegation</cds-table-cell>
-          <cds-table-cell>Ronja's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
-        </cds-table-row>
-      </cds-table-body>
-    </cds-table>
-  `;
-};
-
-export const WithOverflowMenu = () => {
-  return html`
-    <cds-table overflow-menu-on-hover>
-      <cds-table-header-title slot="title">DataTable</cds-table-header-title>
-      <cds-table-header-description slot="description"
-        >With toolbar</cds-table-header-description
-      >
-
-      <cds-table-toolbar slot="toolbar">
-        <cds-table-toolbar-content>
-          <cds-table-toolbar-search
-            placeholder="Filter table"></cds-table-toolbar-search>
-          <cds-overflow-menu toolbar-action>
-            ${Settings16({
-              slot: 'icon',
-              class: `${prefix}--overflow-menu__icon`,
-            })}
-            <cds-overflow-menu-body>
-              <cds-overflow-menu-item @click=${() => alert('Alert 1')}>
-                Action 1
-              </cds-overflow-menu-item>
-              <cds-overflow-menu-item @click=${() => alert('Alert 2')}>
-                Action 2
-              </cds-overflow-menu-item>
-              <cds-overflow-menu-item @click=${() => alert('Alert 3')}>
-                Action 3
-              </cds-overflow-menu-item>
-            </cds-overflow-menu-body>
-          </cds-overflow-menu>
-          <cds-button>Primary button</cds-button>
-        </cds-table-toolbar-content>
-      </cds-table-toolbar>
-
-      <cds-table-head>
-        <cds-table-header-row>
-          <cds-table-header-cell>Name</cds-table-header-cell>
-          <cds-table-header-cell>Protocol</cds-table-header-cell>
-          <cds-table-header-cell>Port</cds-table-header-cell>
-          <cds-table-header-cell>Rule</cds-table-header-cell>
-          <cds-table-header-cell>Attached groups</cds-table-header-cell>
-          <cds-table-header-cell>Status</cds-table-header-cell>
-          <cds-table-header-cell></cds-table-header-cell>
-        </cds-table-header-row>
-      </cds-table-head>
-      <cds-table-body>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 3</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>3000</cds-table-cell>
-          <cds-table-cell>Round robin</cds-table-cell>
-          <cds-table-cell>Kevin's VM Groups</cds-table-cell>
-          <cds-table-cell
-            ><cds-link disabled>Disabled</cds-link></cds-table-cell
-          >
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
-              <span slot="tooltip-content"> Options </span>
-
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
-        </cds-table-row>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 1</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>443</cds-table-cell>
-          <cds-table-cell>Round robin</cds-table-cell>
-          <cds-table-cell>Maureen's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
-              <span slot="tooltip-content"> Options </span>
-
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
-        </cds-table-row>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 2</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>80</cds-table-cell>
-          <cds-table-cell>DNS delegation</cds-table-cell>
-          <cds-table-cell>Andrew's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
-              <span slot="tooltip-content"> Options </span>
-
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
-        </cds-table-row>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 6</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>3000</cds-table-cell>
-          <cds-table-cell>Round robin</cds-table-cell>
-          <cds-table-cell>Marc's VM Groups</cds-table-cell>
-          <cds-table-cell
-            ><cds-link disabled>Disabled</cds-link></cds-table-cell
-          >
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
-              <span slot="tooltip-content"> Options </span>
-
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
-        </cds-table-row>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 4</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>443</cds-table-cell>
-          <cds-table-cell>Round robin</cds-table-cell>
-          <cds-table-cell>Mel's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
-              <span slot="tooltip-content"> Options </span>
-
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
-        </cds-table-row>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 5</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>80</cds-table-cell>
-          <cds-table-cell>DNS delegation</cds-table-cell>
-          <cds-table-cell>Ronja's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
-              <span slot="tooltip-content"> Options </span>
-
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
-        </cds-table-row>
-      </cds-table-body>
-    </cds-table>
-  `;
-};
-
-export const Playground = (args) => {
-  const {
-    isSortable,
-    locale,
-    radio,
-    overflowMenuOnHover,
-    size,
-    useStaticWidth,
-    useZebraStyles,
-  } = args?.[`${prefix}-table`] ?? {};
-  return html`
-    <cds-table
-      ?is-sortable=${isSortable}
-      locale="${locale}"
-      ?overflow-menu-on-hover=${overflowMenuOnHover}
-      ?radio=${radio}
-      size="${size}"
-      ?use-static-width="${useStaticWidth}"
-      ?use-zebra-styles="${useZebraStyles}">
-      <cds-table-header-title slot="title">DataTable</cds-table-header-title>
-      <cds-table-header-description slot="description"
-        >With batch actions.</cds-table-header-description
-      >
-
-      <cds-table-toolbar slot="toolbar">
-        <cds-table-toolbar-content ?has-batch-actions="true">
-          <cds-table-toolbar-search
-            placeholder="Filter table"></cds-table-toolbar-search>
-          <cds-overflow-menu toolbar-action>
-            ${Settings16({
-              slot: 'icon',
-              class: `${prefix}--overflow-menu__icon`,
-            })}
-            <cds-overflow-menu-body>
-              <cds-overflow-menu-item> Action 1 </cds-overflow-menu-item>
-              <cds-overflow-menu-item> Action 2 </cds-overflow-menu-item>
-              <cds-overflow-menu-item> Action 3 </cds-overflow-menu-item>
-            </cds-overflow-menu-body>
-          </cds-overflow-menu>
-          <cds-button>Primary button</cds-button>
-        </cds-table-toolbar-content>
-      </cds-table-toolbar>
 
       <cds-table-head>
         <cds-table-header-row selection-name="header">
           <cds-table-header-cell>Name</cds-table-header-cell>
-          <cds-table-header-cell>Protocol</cds-table-header-cell>
+          <cds-table-header-cell
+            >Protocol
+            <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+          </cds-table-header-cell>
           <cds-table-header-cell>Port</cds-table-header-cell>
           <cds-table-header-cell>Rule</cds-table-header-cell>
           <cds-table-header-cell>Attached groups</cds-table-header-cell>
           <cds-table-header-cell>Status</cds-table-header-cell>
-          <cds-table-header-cell></cds-table-header-cell>
         </cds-table-header-row>
       </cds-table-head>
       <cds-table-body>
@@ -561,19 +160,11 @@ export const Playground = (args) => {
           <cds-table-cell
             ><cds-link disabled>Disabled</cds-link></cds-table-cell
           >
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
-              <span slot="tooltip-content"> Options </span>
-
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
         </cds-table-row>
+        <cds-table-expanded-row>
+          <h6>Expandable row content</h6>
+          <div>Description here</div>
+        </cds-table-expanded-row>
         <cds-table-row selection-name="1">
           <cds-table-cell>Load Balancer 1</cds-table-cell>
           <cds-table-cell>HTTP</cds-table-cell>
@@ -581,19 +172,11 @@ export const Playground = (args) => {
           <cds-table-cell>Round robin</cds-table-cell>
           <cds-table-cell>Maureen's VM Groups</cds-table-cell>
           <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
-              <span slot="tooltip-content"> Options </span>
-
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
         </cds-table-row>
+        <cds-table-expanded-row>
+          <h6>Expandable row content</h6>
+          <div>Description here</div>
+        </cds-table-expanded-row>
         <cds-table-row selection-name="2">
           <cds-table-cell>Load Balancer 2</cds-table-cell>
           <cds-table-cell>HTTP</cds-table-cell>
@@ -601,19 +184,11 @@ export const Playground = (args) => {
           <cds-table-cell>DNS delegation</cds-table-cell>
           <cds-table-cell>Andrew's VM Groups</cds-table-cell>
           <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
-              <span slot="tooltip-content"> Options </span>
-
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
         </cds-table-row>
+        <cds-table-expanded-row>
+          <h6>Expandable row content</h6>
+          <div>Description here</div>
+        </cds-table-expanded-row>
         <cds-table-row selection-name="3">
           <cds-table-cell>Load Balancer 6</cds-table-cell>
           <cds-table-cell>HTTP</cds-table-cell>
@@ -623,19 +198,11 @@ export const Playground = (args) => {
           <cds-table-cell
             ><cds-link disabled>Disabled</cds-link></cds-table-cell
           >
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
-              <span slot="tooltip-content"> Options </span>
-
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
         </cds-table-row>
+        <cds-table-expanded-row>
+          <h6>Expandable row content</h6>
+          <div>Description here</div>
+        </cds-table-expanded-row>
         <cds-table-row selection-name="4">
           <cds-table-cell>Load Balancer 4</cds-table-cell>
           <cds-table-cell>HTTP</cds-table-cell>
@@ -643,18 +210,199 @@ export const Playground = (args) => {
           <cds-table-cell>Round robin</cds-table-cell>
           <cds-table-cell>Mel's VM Groups</cds-table-cell>
           <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
-              <span slot="tooltip-content"> Options </span>
+        </cds-table-row>
+        <cds-table-expanded-row>
+          <h6>Expandable row content</h6>
+          <div>Description here</div>
+        </cds-table-expanded-row>
+        <cds-table-row selection-name="5">
+          <cds-table-cell>Load Balancer 5</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>80</cds-table-cell>
+          <cds-table-cell>DNS delegation</cds-table-cell>
+          <cds-table-cell>Ronja's VM Groups</cds-table-cell>
+          <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
+        </cds-table-row>
+        <cds-table-expanded-row>
+          <h6>Expandable row content</h6>
+          <div>Description here</div>
+        </cds-table-expanded-row>
+      </cds-table-body>
+    </cds-table>
+  `;
+};
 
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
+export const _SlugWithExpansion = () => {
+  return html`
+    <cds-table with-row-slugs expandable batch-expansion>
+      <cds-table-header-title slot="title">DataTable</cds-table-header-title>
+      <cds-table-header-description slot="description"
+        >With sorting</cds-table-header-description
+      >
+
+      <cds-table-head>
+        <cds-table-header-row>
+          <cds-table-header-cell>Name</cds-table-header-cell>
+          <cds-table-header-cell>Protocol</cds-table-header-cell>
+          <cds-table-header-cell>Port</cds-table-header-cell>
+          <cds-table-header-cell>Rule</cds-table-header-cell>
+          <cds-table-header-cell>Attached groups</cds-table-header-cell>
+          <cds-table-header-cell>Status</cds-table-header-cell>
+        </cds-table-header-row>
+      </cds-table-head>
+      <cds-table-body>
+        <cds-table-row>
+          <cds-table-cell>Load Balancer 3</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>3000</cds-table-cell>
+          <cds-table-cell>Round robin</cds-table-cell>
+          <cds-table-cell>Kevin's VM Groups</cds-table-cell>
+          <cds-table-cell
+            ><cds-link disabled>Disabled</cds-link></cds-table-cell
+          >
+        </cds-table-row>
+        <cds-table-expanded-row>
+          <h6>Expandable row content</h6>
+          <div>Description here</div>
+        </cds-table-expanded-row>
+        <cds-table-row>
+          <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+          <cds-table-cell>Load Balancer 1</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>443</cds-table-cell>
+          <cds-table-cell>Round robin</cds-table-cell>
+          <cds-table-cell>Maureen's VM Groups</cds-table-cell>
+          <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
+        </cds-table-row>
+        <cds-table-expanded-row>
+          <h6>Expandable row content</h6>
+          <div>Description here</div>
+        </cds-table-expanded-row>
+        <cds-table-row>
+          <cds-table-cell>Load Balancer 2</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>80</cds-table-cell>
+          <cds-table-cell>DNS delegation</cds-table-cell>
+          <cds-table-cell>Andrew's VM Groups</cds-table-cell>
+          <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
+        </cds-table-row>
+        <cds-table-expanded-row>
+          <h6>Expandable row content</h6>
+          <div>Description here</div>
+        </cds-table-expanded-row>
+        <cds-table-row>
+          <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+          <cds-table-cell>Load Balancer 6</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>3000</cds-table-cell>
+          <cds-table-cell>Round robin</cds-table-cell>
+          <cds-table-cell>Marc's VM Groups</cds-table-cell>
+          <cds-table-cell
+            ><cds-link disabled>Disabled</cds-link></cds-table-cell
+          >
+        </cds-table-row>
+        <cds-table-expanded-row>
+          <h6>Expandable row content</h6>
+          <div>Description here</div>
+        </cds-table-expanded-row>
+        <cds-table-row>
+          <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+          <cds-table-cell>Load Balancer 4</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>443</cds-table-cell>
+          <cds-table-cell>Round robin</cds-table-cell>
+          <cds-table-cell>Mel's VM Groups</cds-table-cell>
+          <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
+        </cds-table-row>
+        <cds-table-expanded-row>
+          <h6>Expandable row content</h6>
+          <div>Description here</div>
+        </cds-table-expanded-row>
+        <cds-table-row>
+          <cds-table-cell>Load Balancer 5</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>80</cds-table-cell>
+          <cds-table-cell>DNS delegation</cds-table-cell>
+          <cds-table-cell>Ronja's VM Groups</cds-table-cell>
+          <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
+        </cds-table-row>
+        <cds-table-expanded-row>
+          <h6>Expandable row content</h6>
+          <div>Description here</div>
+        </cds-table-expanded-row>
+      </cds-table-body>
+    </cds-table>
+  `;
+};
+
+export const _SlugWithRadioSelection = () => {
+  return html`
+    <cds-table radio with-row-slugs>
+      <cds-table-header-title slot="title">DataTable</cds-table-header-title>
+      <cds-table-header-description slot="description"
+        >With selection</cds-table-header-description
+      >
+
+      <cds-table-head>
+        <cds-table-header-row selection-name="header" hide-checkbox>
+          <cds-table-header-cell>Name</cds-table-header-cell>
+          <cds-table-header-cell>Protocol</cds-table-header-cell>
+          <cds-table-header-cell>Port</cds-table-header-cell>
+          <cds-table-header-cell>Rule</cds-table-header-cell>
+          <cds-table-header-cell>Attached groups</cds-table-header-cell>
+          <cds-table-header-cell>Status</cds-table-header-cell>
+        </cds-table-header-row>
+      </cds-table-head>
+      <cds-table-body>
+        <cds-table-row selection-name="0">
+          <cds-table-cell>Load Balancer 3</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>3000</cds-table-cell>
+          <cds-table-cell>Round robin</cds-table-cell>
+          <cds-table-cell>Kevin's VM Groups</cds-table-cell>
+          <cds-table-cell
+            ><cds-link disabled>Disabled</cds-link></cds-table-cell
+          >
+        </cds-table-row>
+        <cds-table-row selection-name="1">
+          <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+
+          <cds-table-cell>Load Balancer 1</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>443</cds-table-cell>
+          <cds-table-cell>Round robin</cds-table-cell>
+          <cds-table-cell>Maureen's VM Groups</cds-table-cell>
+          <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
+        </cds-table-row>
+        <cds-table-row selection-name="2">
+          <cds-table-cell>Load Balancer 2</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>80</cds-table-cell>
+          <cds-table-cell>DNS delegation</cds-table-cell>
+          <cds-table-cell>Andrew's VM Groups</cds-table-cell>
+          <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
+        </cds-table-row>
+        <cds-table-row selection-name="3">
+          <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+
+          <cds-table-cell>Load Balancer 6</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>3000</cds-table-cell>
+          <cds-table-cell>Round robin</cds-table-cell>
+          <cds-table-cell>Marc's VM Groups</cds-table-cell>
+          <cds-table-cell
+            ><cds-link disabled>Disabled</cds-link></cds-table-cell
+          >
+        </cds-table-row>
+        <cds-table-row selection-name="4">
+          <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+
+          <cds-table-cell>Load Balancer 4</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>443</cds-table-cell>
+          <cds-table-cell>Round robin</cds-table-cell>
+          <cds-table-cell>Mel's VM Groups</cds-table-cell>
+          <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
         </cds-table-row>
         <cds-table-row selection-name="5">
           <cds-table-cell>Load Balancer 5</cds-table-cell>
@@ -663,41 +411,190 @@ export const Playground = (args) => {
           <cds-table-cell>DNS delegation</cds-table-cell>
           <cds-table-cell>Ronja's VM Groups</cds-table-cell>
           <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${OverflowMenuVertical16({ slot: 'icon' })}
-              <span slot="tooltip-content"> Options </span>
-
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
         </cds-table-row>
       </cds-table-body>
     </cds-table>
   `;
 };
 
-Playground.parameters = {
-  knobs: {
-    [`${prefix}-table`]: () => ({
-      isSortable: boolean('Is sortable', false),
-      locale: text('Locale', 'en'),
-      overflowMenuOnHover: boolean('Overflow menu on hover', false),
-      radio: boolean('Radio', false),
-      size: select('Size', sizes, TABLE_SIZE.LG),
-      useStaticWidth: boolean('Use static width', false),
-      useZebraStyles: boolean('Use zebra styles', false),
-    }),
-  },
+export const SlugWithSelection = () => {
+  return html`
+    <cds-table with-row-slugs>
+      <cds-table-header-title slot="title">DataTable</cds-table-header-title>
+      <cds-table-header-description slot="description"
+        >With selection</cds-table-header-description
+      >
+
+      <cds-table-head>
+        <cds-table-header-row selection-name="header">
+          <cds-table-header-cell>Name</cds-table-header-cell>
+          <cds-table-header-cell>Protocol</cds-table-header-cell>
+          <cds-table-header-cell>Port</cds-table-header-cell>
+          <cds-table-header-cell>Rule</cds-table-header-cell>
+          <cds-table-header-cell>Attached groups</cds-table-header-cell>
+          <cds-table-header-cell>Status</cds-table-header-cell>
+        </cds-table-header-row>
+      </cds-table-head>
+      <cds-table-body>
+        <cds-table-row selection-name="0">
+          <cds-table-cell>Load Balancer 3</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>3000</cds-table-cell>
+          <cds-table-cell>Round robin</cds-table-cell>
+          <cds-table-cell>Kevin's VM Groups</cds-table-cell>
+          <cds-table-cell
+            ><cds-link disabled>Disabled</cds-link></cds-table-cell
+          >
+        </cds-table-row>
+        <cds-table-row selection-name="1">
+          <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+          <cds-table-cell>Load Balancer 1</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>443</cds-table-cell>
+          <cds-table-cell>Round robin</cds-table-cell>
+          <cds-table-cell>Maureen's VM Groups</cds-table-cell>
+          <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
+        </cds-table-row>
+        <cds-table-row selection-name="2">
+          <cds-table-cell>Load Balancer 2</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>80</cds-table-cell>
+          <cds-table-cell>DNS delegation</cds-table-cell>
+          <cds-table-cell>Andrew's VM Groups</cds-table-cell>
+          <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
+        </cds-table-row>
+        <cds-table-row selection-name="3">
+          <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+          <cds-table-cell>Load Balancer 6</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>3000</cds-table-cell>
+          <cds-table-cell>Round robin</cds-table-cell>
+          <cds-table-cell>Marc's VM Groups</cds-table-cell>
+          <cds-table-cell
+            ><cds-link disabled>Disabled</cds-link></cds-table-cell
+          >
+        </cds-table-row>
+        <cds-table-row selection-name="4">
+          <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+          <cds-table-cell>Load Balancer 4</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>443</cds-table-cell>
+          <cds-table-cell>Round robin</cds-table-cell>
+          <cds-table-cell>Mel's VM Groups</cds-table-cell>
+          <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
+        </cds-table-row>
+        <cds-table-row selection-name="5">
+          <cds-table-cell>Load Balancer 5</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>80</cds-table-cell>
+          <cds-table-cell>DNS delegation</cds-table-cell>
+          <cds-table-cell>Ronja's VM Groups</cds-table-cell>
+          <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
+        </cds-table-row>
+      </cds-table-body>
+    </cds-table>
+  `;
 };
 
-export default {
-  title: 'Components/DataTable/Toolbar',
-  parameters: {
-    ...storyDocs.parameters,
-  },
+export const SlugWithSelectionAndExpansion = () => {
+  return html`
+    <cds-table expandable batch-expansion with-row-slugs>
+      <cds-table-header-title slot="title">DataTable</cds-table-header-title>
+      <cds-table-header-description slot="description"
+        >With selection</cds-table-header-description
+      >
+
+      <cds-table-head>
+        <cds-table-header-row selection-name="header">
+          <cds-table-header-cell>Name</cds-table-header-cell>
+          <cds-table-header-cell>Protocol</cds-table-header-cell>
+          <cds-table-header-cell>Port</cds-table-header-cell>
+          <cds-table-header-cell>Rule</cds-table-header-cell>
+          <cds-table-header-cell>Attached groups</cds-table-header-cell>
+          <cds-table-header-cell>Status</cds-table-header-cell>
+        </cds-table-header-row>
+      </cds-table-head>
+      <cds-table-body>
+        <cds-table-row selection-name="0">
+          <cds-table-cell>Load Balancer 3</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>3000</cds-table-cell>
+          <cds-table-cell>Round robin</cds-table-cell>
+          <cds-table-cell>Kevin's VM Groups</cds-table-cell>
+          <cds-table-cell
+            ><cds-link disabled>Disabled</cds-link></cds-table-cell
+          >
+        </cds-table-row>
+        <cds-table-expanded-row>
+          <h6>Expandable row content</h6>
+          <div>Description here</div>
+        </cds-table-expanded-row>
+        <cds-table-row selection-name="1">
+          <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+          <cds-table-cell>Load Balancer 1</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>443</cds-table-cell>
+          <cds-table-cell>Round robin</cds-table-cell>
+          <cds-table-cell>Maureen's VM Groups</cds-table-cell>
+          <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
+        </cds-table-row>
+        <cds-table-expanded-row>
+          <h6>Expandable row content</h6>
+          <div>Description here</div>
+        </cds-table-expanded-row>
+        <cds-table-row selection-name="2">
+          <cds-table-cell>Load Balancer 2</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>80</cds-table-cell>
+          <cds-table-cell>DNS delegation</cds-table-cell>
+          <cds-table-cell>Andrew's VM Groups</cds-table-cell>
+          <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
+        </cds-table-row>
+        <cds-table-expanded-row>
+          <h6>Expandable row content</h6>
+          <div>Description here</div>
+        </cds-table-expanded-row>
+        <cds-table-row selection-name="3">
+          <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+          <cds-table-cell>Load Balancer 6</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>3000</cds-table-cell>
+          <cds-table-cell>Round robin</cds-table-cell>
+          <cds-table-cell>Marc's VM Groups</cds-table-cell>
+          <cds-table-cell
+            ><cds-link disabled>Disabled</cds-link></cds-table-cell
+          >
+        </cds-table-row>
+        <cds-table-expanded-row>
+          <h6>Expandable row content</h6>
+          <div>Description here</div>
+        </cds-table-expanded-row>
+        <cds-table-row selection-name="4">
+          <cds-slug alignment="bottom-left">${content}${actions}</cds-slug>
+          <cds-table-cell>Load Balancer 4</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>443</cds-table-cell>
+          <cds-table-cell>Round robin</cds-table-cell>
+          <cds-table-cell>Mel's VM Groups</cds-table-cell>
+          <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
+        </cds-table-row>
+        <cds-table-expanded-row>
+          <h6>Expandable row content</h6>
+          <div>Description here</div>
+        </cds-table-expanded-row>
+        <cds-table-row selection-name="5">
+          <cds-table-cell>Load Balancer 5</cds-table-cell>
+          <cds-table-cell>HTTP</cds-table-cell>
+          <cds-table-cell>80</cds-table-cell>
+          <cds-table-cell>DNS delegation</cds-table-cell>
+          <cds-table-cell>Ronja's VM Groups</cds-table-cell>
+          <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
+        </cds-table-row>
+        <cds-table-expanded-row>
+          <h6>Expandable row content</h6>
+          <div>Description here</div>
+        </cds-table-expanded-row>
+      </cds-table-body>
+    </cds-table>
+  `;
 };

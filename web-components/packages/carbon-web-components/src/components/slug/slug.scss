@@ -18,6 +18,9 @@
 @use '@carbon/styles/scss/components/slug/index' as *;
 @use '../toggle-tip/toggletip.scss';
 
+// importing tag color tokens for the styling slug in tag component
+@use '@carbon/styles/scss/components/tag/index' as *;
+
 :host(#{$prefix}-slug) {
   @extend .#{$prefix}--slug;
 
@@ -131,5 +134,203 @@
   .#{$prefix}--slug__button.#{$prefix}--slug__button--mini:focus,
   .#{$prefix}--slug__button.#{$prefix}--slug__button--2xs:focus {
     box-shadow: inset 0 0 0 1px $focus, inset 0 0 0 2px $focus-inset;
+  }
+}
+
+:host(#{$prefix}-slug[tag='red']) {
+  .#{$prefix}--slug__text {
+    color: $tag-color-red;
+  }
+
+  .#{$prefix}--slug__text::before {
+    background: $tag-color-red;
+  }
+
+  button:hover {
+    border-color: $tag-color-red;
+
+    .#{$prefix}--slug__text::before {
+      background-color: $tag-color-red;
+    }
+  }
+}
+
+:host(#{$prefix}-slug[tag='magenta']) {
+  .#{$prefix}--slug__text {
+    color: $tag-color-magenta;
+  }
+
+  .#{$prefix}--slug__text::before {
+    background: $tag-color-magenta;
+  }
+
+  button:hover {
+    border-color: $tag-color-magenta;
+
+    .#{$prefix}--slug__text::before {
+      background-color: $tag-color-magenta;
+    }
+  }
+}
+
+:host(#{$prefix}-slug[tag='purple']) {
+  .#{$prefix}--slug__text {
+    color: $tag-color-purple;
+  }
+
+  .#{$prefix}--slug__text::before {
+    background: $tag-color-purple;
+  }
+
+  button:hover {
+    border-color: $tag-color-purple;
+
+    .#{$prefix}--slug__text::before {
+      background-color: $tag-color-purple;
+    }
+  }
+}
+
+:host(#{$prefix}-slug[tag='blue']) {
+  .#{$prefix}--slug__text {
+    color: $tag-color-blue;
+  }
+
+  .#{$prefix}--slug__text::before {
+    background: $tag-color-blue;
+  }
+
+  button:hover {
+    border-color: $tag-color-blue;
+
+    .#{$prefix}--slug__text::before {
+      background-color: $tag-color-blue;
+    }
+  }
+}
+
+:host(#{$prefix}-slug[tag='cyan']) {
+  .#{$prefix}--slug__text {
+    color: $tag-color-cyan;
+  }
+
+  .#{$prefix}--slug__text::before {
+    background: $tag-color-cyan;
+  }
+
+  button:hover {
+    border-color: $tag-color-cyan;
+
+    .#{$prefix}--slug__text::before {
+      background-color: $tag-color-cyan;
+    }
+  }
+}
+
+:host(#{$prefix}-slug[tag='teal']) {
+  .#{$prefix}--slug__text {
+    color: $tag-color-teal;
+  }
+
+  .#{$prefix}--slug__text::before {
+    background: $tag-color-teal;
+  }
+
+  button:hover {
+    border-color: $tag-color-teal;
+
+    .#{$prefix}--slug__text::before {
+      background-color: $tag-color-teal;
+    }
+  }
+}
+
+:host(#{$prefix}-slug[tag='green']) {
+  .#{$prefix}--slug__text {
+    color: $tag-color-green;
+  }
+
+  .#{$prefix}--slug__text::before {
+    background: $tag-color-green;
+  }
+
+  button:hover {
+    border-color: $tag-color-green;
+
+    .#{$prefix}--slug__text::before {
+      background-color: $tag-color-green;
+    }
+  }
+}
+
+:host(#{$prefix}-slug[tag='gray']) {
+  .#{$prefix}--slug__text {
+    color: $tag-color-gray;
+  }
+
+  .#{$prefix}--slug__text::before {
+    background: $tag-color-gray;
+  }
+
+  button:hover {
+    border-color: $tag-color-gray;
+
+    .#{$prefix}--slug__text::before {
+      background-color: $tag-color-gray;
+    }
+  }
+}
+
+:host(#{$prefix}-slug[tag='cool-gray']) {
+  .#{$prefix}--slug__text {
+    color: $tag-color-cool-gray;
+  }
+
+  .#{$prefix}--slug__text::before {
+    background: $tag-color-cool-gray;
+  }
+
+  button:hover {
+    border-color: $tag-color-cool-gray;
+
+    .#{$prefix}--slug__text::before {
+      background-color: $tag-color-cool-gray;
+    }
+  }
+}
+
+:host(#{$prefix}-slug[tag='warm-gray']) {
+  .#{$prefix}--slug__text {
+    color: $tag-color-warm-gray;
+  }
+
+  .#{$prefix}--slug__text::before {
+    background: $tag-color-warm-gray;
+  }
+
+  button:hover {
+    border-color: $tag-color-warm-gray;
+
+    .#{$prefix}--slug__text::before {
+      background-color: $tag-color-warm-gray;
+    }
+  }
+}
+
+:host(#{$prefix}-slug[tag='high-contrast']) {
+  .#{$prefix}--slug__text {
+    color: $text-inverse;
+  }
+
+  .#{$prefix}--slug__text::before {
+    background: $text-inverse;
+  }
+
+  button:hover {
+    border-color: $text-inverse;
+
+    .#{$prefix}--slug__text::before {
+      background-color: $text-inverse;
+    }
   }
 }

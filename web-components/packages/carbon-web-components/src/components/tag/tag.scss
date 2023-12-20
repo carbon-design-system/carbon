@@ -101,6 +101,10 @@ $css--plex: true !default;
   display: inline-flex;
 }
 
+:host(#{$prefix}-tag) ::slotted([slot='icon']) {
+  @extend .#{$prefix}--tag__custom-icon;
+}
+
 :host(#{$prefix}-tag[filter][disabled]) {
   .#{$prefix}--tag__close-icon {
     cursor: not-allowed;
