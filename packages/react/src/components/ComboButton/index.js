@@ -109,24 +109,22 @@ const ComboButton = React.forwardRef(function ComboButton(
           size={size}
           disabled={disabled}
           onClick={handlePrimaryActionClick}>
-          <span>{label}</span>
+          {label}
         </Button>
       </div>
-      <div className="test-div">
-        <IconButton
-          className={triggerClasses}
-          label={t('carbon.combo-button.additional-actions')}
-          size={size}
-          disabled={disabled}
-          align={tooltipAlignment}
-          aria-haspopup
-          aria-expanded={open}
-          onClick={handleTriggerClick}
-          onMouseDown={handleTriggerMousedown}
-          aria-controls={open ? id : null}>
-          <ChevronDown />
-        </IconButton>
-      </div>
+      <IconButton
+        className={triggerClasses}
+        label={t('carbon.combo-button.additional-actions')}
+        size={size}
+        disabled={disabled}
+        align={tooltipAlignment}
+        aria-haspopup
+        aria-expanded={open}
+        onClick={handleTriggerClick}
+        onMouseDown={handleTriggerMousedown}
+        aria-controls={open ? id : null}>
+        <ChevronDown />
+      </IconButton>
       <Menu
         actionButtonWidth={width}
         menuAlignment={menuAlignment}

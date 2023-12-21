@@ -40,16 +40,11 @@
     min-inline-size: convert.to-rem(160px);
   }
 
-  .#{$prefix}--combo-button__primary-action span {
+  .#{$prefix}--combo-button__primary-action button {
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-  }
-
-  .#{$prefix}--combo-button__ellipsis {
-    text-overflow: ellipsis;
-    text-wrap: nowrap;
   }
 
   .#{$prefix}--combo-button__trigger svg {
