@@ -3,13 +3,16 @@ import { mergeConfig } from 'vite';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
 import viteSVGResultCarbonIconLoader from '../tools/vite-svg-result-carbon-icon-loader';
 const glob = require('fast-glob');
-import remarkGfm from 'remark-gfm';
 
 const stories = glob.sync(
   [
-    '../src/**/*.mdx',
     '../docs/**/*.mdx',
-    '../src/**/*.stories.@(js|jsx|ts|tsx)',
+    // go back to wildcard globs once all stories are written
+    // '../src/**/*.mdx',
+    // '../src/**/*.stories.@(js|jsx|ts|tsx)',
+    // add mdx/story files as they are being worked on
+    '../src/**/link.mdx',
+    '../src/**/link.stories.ts',
   ],
   {
     ignore: ['../src/**/docs/*.mdx'],
