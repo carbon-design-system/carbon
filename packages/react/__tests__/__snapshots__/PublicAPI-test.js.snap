@@ -1374,6 +1374,19 @@ Map {
         "isRequired": true,
         "type": "string",
       },
+      "menuAlignment": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "onClick": Object {
         "type": "func",
       },
@@ -4457,6 +4470,9 @@ Map {
   "Menu" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "actionButtonWidth": Object {
+        "type": "number",
+      },
       "children": Object {
         "type": "node",
       },
@@ -4464,6 +4480,9 @@ Map {
         "type": "string",
       },
       "label": Object {
+        "type": "string",
+      },
+      "menuAlignment": Object {
         "type": "string",
       },
       "mode": Object {
