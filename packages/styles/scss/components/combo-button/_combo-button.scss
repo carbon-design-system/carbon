@@ -10,7 +10,6 @@
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../utilities/convert';
-@use '../../utilities/custom-property';
 
 /// Combo Button styles
 /// @access public
@@ -56,20 +55,4 @@
     svg {
     transform: rotate(180deg);
   }
-}
-
-// ==================test==========================================
-
-$popover-offset: custom-property.get-var('popover-offset', 3rem);
-
-.#{$prefix}--combo-button__menu-top {
-  transform: translate(0, calc(-100% - $popover-offset));
-}
-
-.#{$prefix}--combo-button__menu-top-left {
-  transform: translate(0, calc(-100% - $popover-offset));
-}
-
-.#{$prefix}--combo-button__menu-top-right {
-  transform: translate(0, calc(-100% - $popover-offset));
 }
