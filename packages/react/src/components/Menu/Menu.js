@@ -217,13 +217,11 @@ const Menu = React.forwardRef(function Menu(
       axes.x.size = actionButtonWidth;
     }
 
-    // if 'axes.x.anchor' is lower than 87 render 'bottom-left
-    if (menuAlignment === 'bottom-right' && axes.x.anchor >= 87) {
-      const diff = axes.x.anchor + axes.x.reversedAnchor;
-      axes.x.anchor = axes.x.anchor + diff;
-    }
-    // if 'axes.x.anchor' is lower than 87 render 'top-left
-    if (menuAlignment === 'top-right' && axes.x.anchor >= 87) {
+    // if 'axes.x.anchor' is lower than 87 switch render side
+    if (
+      (menuAlignment === 'bottom-right' || menuAlignment === 'top-right') &&
+      axes.x.anchor >= 87
+    ) {
       const diff = axes.x.anchor + axes.x.reversedAnchor;
       axes.x.anchor = axes.x.anchor + diff;
     }
@@ -241,6 +239,17 @@ const Menu = React.forwardRef(function Menu(
       // align at max (second fallback)
       max - spacing - size,
     ];
+
+    const topAlignment =
+      menuAlignment === 'top' ||
+      menuAlignment === 'top-right' ||
+      menuAlignment === 'top-left';
+
+    if (topAlignment && options[0] >= 0 && !options[1] && axis === 'y') {
+      menu.current.style.transform = 'translate(0)';
+    } else if (topAlignment && !options[0] && axis === 'y') {
+      options[0] = anchor - offset;
+    }
 
     const bestOption = options.find((option) => option !== false);
 
