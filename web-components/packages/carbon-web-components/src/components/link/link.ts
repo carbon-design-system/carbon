@@ -20,7 +20,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * Link size.
  */
 export const LINK_SIZE = {
-  MEDIUM: '',
+  MEDIUM: 'md',
   SMALL: 'sm',
   LARGE: 'lg',
 };
