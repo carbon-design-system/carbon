@@ -31,7 +31,7 @@ const controls = {
     description: `Provide the href attribute for the <a> node`,
   },
   size: {
-    control: 'radio', options: [LINK_SIZE.SMALL, LINK_SIZE.REGULAR, LINK_SIZE.LARGE],
+    control: 'radio', options: [LINK_SIZE.SMALL, LINK_SIZE.MEDIUM, LINK_SIZE.LARGE],
     description: `Specify the size of the Link. Currently supports either sm, 'md' (default) or 'lg' as an option.`
   },
   visited: {
@@ -67,7 +67,7 @@ export const Inline = {
   `
 };
 
-export const pairedWithIcon = {
+export const PairedWithIcon = {
   args: defaultArgs,
   parameters: {
     controls: { exclude: /(.*?)/ },
