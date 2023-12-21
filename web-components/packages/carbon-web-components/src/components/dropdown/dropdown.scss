@@ -24,9 +24,9 @@ $css--plex: true !default;
   outline: none;
 
   .#{$prefix}--assistive-text {
+    inset-block-start: -100%;
     // Hides screen reader cursor
-    left: -100%;
-    top: -100%;
+    inset-inline-start: -100%;
   }
 
   .#{$prefix}--label[hidden] {
@@ -34,8 +34,8 @@ $css--plex: true !default;
   }
 
   .#{$prefix}--list-box__menu {
-    top: 100%;
-    margin-top: 1px;
+    inset-block-start: 100%;
+    margin-block-start: 1px;
     outline: 1px solid $focus;
   }
 }
@@ -61,7 +61,7 @@ $css--plex: true !default;
 
   .#{$prefix}--list-box {
     background-color: transparent;
-    border-bottom-color: $border-subtle;
+    border-block-end-color: $border-subtle;
   }
 }
 
@@ -70,7 +70,7 @@ $css--plex: true !default;
   @extend .#{$prefix}--list-box--up;
 
   .#{$prefix}--list-box__menu {
-    top: auto;
+    inset-block-start: auto;
   }
 }
 
@@ -81,8 +81,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-dropdown[type='inline'][warn]) .#{$prefix}--list-box__field {
-  padding-left: $spacing-05;
-  padding-right: calc(#{$spacing-08} + #{$spacing-05});
+  padding-inline: $spacing-05 calc(#{$spacing-08} + #{$spacing-05});
 }
 
 :host(#{$prefix}-dropdown[warn]),
@@ -98,7 +97,7 @@ $css--plex: true !default;
   display: block;
 
   .#{$prefix}--list-box__menu-item__option {
-    height: auto;
+    block-size: auto;
   }
 }
 
@@ -130,20 +129,18 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-dropdown-item[size='sm']) {
-  height: $spacing-07;
+  block-size: $spacing-07;
 
   .#{$prefix}--list-box__menu-item__option {
-    padding-top: rem(7px);
-    padding-bottom: rem(7px);
+    padding-block: rem(7px);
   }
 }
 
 :host(#{$prefix}-dropdown-item[size='lg']) {
-  height: $spacing-09;
+  block-size: $spacing-09;
 
   .#{$prefix}--list-box__menu-item__option {
-    padding-top: rem(15px);
-    padding-bottom: rem(15px);
+    padding-block: rem(15px);
   }
 }
 

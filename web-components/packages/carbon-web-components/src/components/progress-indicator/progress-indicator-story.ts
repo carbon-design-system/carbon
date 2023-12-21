@@ -113,7 +113,7 @@ Playground.parameters = {
 };
 
 export const skeleton = (args) => {
-  const { vertical } = args?.[`${prefix}-progress-indicator-skeleton`];
+  const { vertical } = args?.[`${prefix}-progress-indicator-skeleton`] || '';
   return html`
     <cds-progress-indicator-skeleton ?vertical="${vertical}">
       <cds-progress-step-skeleton></cds-progress-step-skeleton>

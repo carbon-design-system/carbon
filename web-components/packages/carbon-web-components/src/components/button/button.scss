@@ -31,7 +31,7 @@ $css--plex: true !default;
 
   .#{$prefix}--btn {
     flex-grow: 1;
-    max-width: 100%;
+    max-inline-size: 100%;
   }
 }
 
@@ -41,22 +41,22 @@ $css--plex: true !default;
 
 :host(#{$prefix}-button[isExpressive]) ::slotted([slot='icon']),
 :host(#{$prefix}-modal-footer-button[isExpressive]) ::slotted([slot='icon']) {
-  width: rem(20px);
-  height: rem(20px);
+  block-size: rem(20px);
+  inline-size: rem(20px);
 }
 
 :host(#{$prefix}-button[pagination]),
 :host(#{$prefix}-modal-footer-button[pagination]) {
   .#{$prefix}--btn {
     border: none;
-    border-left: 1px solid $border-subtle;
+    border-inline-start: 1px solid $border-subtle;
     transition: none;
 
     &:focus {
+      border-inline-start: 1px solid transparent;
+      box-shadow: none;
       outline: $spacing-01 solid $focus;
       outline-offset: -#{$spacing-01};
-      box-shadow: none;
-      border-left: 1px solid transparent;
     }
   }
 }
@@ -65,6 +65,7 @@ $css--plex: true !default;
 :host(#{$prefix}-modal-footer-button[pagination]:not([disabled])) {
   .#{$prefix}--btn {
     color: $icon-primary;
+
     &:active {
       background-color: $layer-hover;
     }
@@ -92,7 +93,7 @@ $css--plex: true !default;
     ) {
     ::slotted([slot='icon']) {
       position: static;
-      margin-left: $spacing-02;
+      margin-inline-start: $spacing-02;
     }
   }
 }
@@ -106,9 +107,9 @@ $css--plex: true !default;
   @extend .#{$prefix}--btn-set;
 
   ::slotted(#{$prefix}-button) {
-    width: 100%;
+    inline-size: 100%;
     // 196px from design kit
-    max-width: rem(196px);
+    max-inline-size: rem(196px);
   }
 }
 

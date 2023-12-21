@@ -16,11 +16,11 @@ $css--plex: true !default;
 :host(#{$prefix}-ordered-list),
 :host(#{$prefix}-unordered-list) {
   .#{$prefix}--list--nested {
-    margin-left: $spacing-07;
+    margin-inline-start: $spacing-07;
   }
 
   .#{$prefix}--list--nested ::slotted(#{$prefix}-list-item) {
-    padding-left: $spacing-02;
+    padding-inline-start: $spacing-02;
   }
 }
 
@@ -41,9 +41,9 @@ $css--plex: true !default;
   .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested)
     ::slotted(#{$prefix}-list-item)::before {
     position: absolute;
-    left: rem(-24px);
     content: counter(item) '.';
     counter-increment: item;
+    inset-inline-start: rem(-24px);
   }
 }
 
@@ -63,18 +63,18 @@ $css--plex: true !default;
 
   &::before {
     position: absolute;
-    left: calc(-1 * #{$spacing-05});
     // – en dash
     content: '\002013';
+    inset-inline-start: calc(-1 * #{$spacing-05});
   }
 }
 
 :host(#{$prefix}-unordered-list[slot='nested'])
   ::slotted(#{$prefix}-list-item)::before {
-  // offset to account for smaller ▪ vs –
-  left: calc(-1 * #{$spacing-04});
   // ▪ square
   content: '\0025AA';
+  // offset to account for smaller ▪ vs –
+  inset-inline-start: calc(-1 * #{$spacing-04});
 }
 
 :host(#{$prefix}-list-item) {
@@ -85,16 +85,15 @@ $css--plex: true !default;
     // Workaround for https://bugs.webkit.org/show_bug.cgi?id=178237.
     // For non-WebKit browsers, `:host(#{$prefix}-unordered-list) ::slotted(#{$prefix}-list-item)` takes this over.
     position: absolute;
-    left: -$spacing-05;
     content: var(--#{$prefix}-ce--list-marker, none);
+    inset-inline-start: -$spacing-05;
   }
 }
 
 :host(#{$prefix}-list-item[nested]) {
-  margin-top: 0;
-  margin-bottom: 0;
+  margin-block: 0;
 
   .#{$prefix}-ce--list__item__nested-child {
-    padding-top: 0;
+    padding-block-start: 0;
   }
 }

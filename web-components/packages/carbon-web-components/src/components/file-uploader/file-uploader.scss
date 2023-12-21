@@ -29,8 +29,7 @@
   @extend .#{$prefix}--file__selected-file;
 
   .#{$prefix}--file-filename {
-    margin-top: 0;
-    margin-bottom: 0;
+    margin-block: 0;
   }
 
   .#{$prefix}--form-requirement[hidden] {
@@ -59,10 +58,10 @@
 
   .#{$prefix}--label-description,
   .#{$prefix}--file--label {
-    margin-top: 0;
+    margin-block-start: 0;
   }
 
   .#{$prefix}--file-container {
-    margin-top: $spacing-03;
+    margin-block-start: $spacing-03;
   }
 }

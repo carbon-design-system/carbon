@@ -22,13 +22,13 @@ $css--plex: true !default;
   outline: none;
 
   .#{$prefix}-ce--pagination__divider {
-    height: 100%;
-    width: to-rem(1px);
     background-color: $layer-accent-01;
+    block-size: 100%;
+    inline-size: to-rem(1px);
   }
 
   .#{$prefix}--pagination__control-buttons {
-    height: 100%;
+    block-size: 100%;
   }
 
   .#{$prefix}--pagination__button svg {

@@ -31,36 +31,21 @@ $css--plex: true !default;
   }
 
   .#{$prefix}--inline-notification__title {
-    margin-block-start: 0;
-    margin-block-end: 0;
+    margin-block: 0 0;
   }
 }
 
 :host(#{$prefix}-inline-notification[low-contrast])::before {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   box-sizing: border-box;
   border-width: 1px 1px 1px 0;
   border-style: solid;
+  block-size: 100%;
   content: '';
   filter: opacity(0.4);
-  pointer-events: none;
-}
-
-:host(#{$prefix}-inline-notification[low-contrast])::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  border-width: 1px 1px 1px 0;
-  border-style: solid;
-  content: '';
-  filter: opacity(0.4);
+  inline-size: 100%;
+  inset-block-start: 0;
+  inset-inline-start: 0;
   pointer-events: none;
 }
 

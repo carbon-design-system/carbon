@@ -172,7 +172,7 @@ class CDSTileGroup extends HostListenerMixin(LitElement) {
     const { radioTiles, selectableTiles } = this;
     const navigationDirection = navigationDirectionForKey[key];
 
-    let tiles = radioTiles.length ? radioTiles : selectableTiles;
+    const tiles = radioTiles.length ? radioTiles : selectableTiles;
     const currentIndex = [...tiles].findIndex((e) => e == target);
     const nextIndex = currentIndex + navigationDirection;
     const nextSibling =

@@ -14,11 +14,11 @@
 
 .slug-container {
   display: flex;
-  margin-bottom: $spacing-12;
   align-items: flex-start;
+  margin-block-end: $spacing-12;
 
   > * {
-    margin-left: $spacing-07;
+    margin-inline-start: $spacing-07;
   }
 }
 
@@ -35,15 +35,14 @@ p {
 }
 
 h1 {
-  margin-bottom: $spacing-05;
+  margin-block-end: $spacing-05;
 }
 
 hr {
   border: 0;
-  height: 1px;
   background: $border-subtle;
-  margin-top: $spacing-07;
-  margin-bottom: $spacing-07;
+  block-size: 1px;
+  margin-block: $spacing-07;
 }
 
 div #{$prefix}-selectable-tile::-moz-list-bullet {
@@ -59,35 +58,35 @@ div #{$prefix}-selectable-tile::-moz-list-bullet {
   #{$prefix}-selectable-tile,
   #{$prefix}-clickable-tile,
   #{$prefix}-tile {
-    max-width: 320px;
-    margin-right: $spacing-09;
-    margin-bottom: $spacing-09;
+    margin-block-end: $spacing-09;
+    margin-inline-end: $spacing-09;
+    max-inline-size: 320px;
   }
 
   #{$prefix}-expandable-tile,
   #{$prefix}-selectable-tile .tile-container,
   #{$prefix}-clickable-tile .tile-container,
   #{$prefix}-tile {
-    padding-bottom: 90px;
+    padding-block-end: 90px;
   }
 }
 
 .slug-tile-container h4 {
-  margin-bottom: $spacing-05;
+  margin-block-end: $spacing-05;
 }
 
 .slug-tile-container .ai-data {
-  margin-top: $spacing-05;
-  padding: $spacing-05 0;
   display: flex;
+  padding: $spacing-05 0;
+  margin-block-start: $spacing-05;
 }
 
 .slug-tile-container .data-container {
-  width: 126px;
+  inline-size: 126px;
 }
 
 .slug-tile-container .data-container:first-of-type {
-  margin-right: $spacing-05;
+  margin-inline-end: $spacing-05;
 }
 
 .slug-tile-container p {
@@ -99,19 +98,20 @@ div #{$prefix}-selectable-tile::-moz-list-bullet {
 }
 
 .slug-tile-container #{$prefix}-tile-below-the-fold-content {
-  padding-top: $spacing-05;
+  padding-block-start: $spacing-05;
 }
 
 .slug-tile-container #{$prefix}-tile-below-the-fold-content p {
   @include type-style('label-01');
+
   margin: $spacing-03 0 50px;
 }
 
 #{$prefix}-radio-button-group:not(:first-of-type),
 #{$prefix}-checkbox-group:not(:first-of-type) {
-  margin-top: $spacing-07;
+  margin-block-start: $spacing-07;
 }
 
 .slug-tag-container {
-  margin-bottom: $spacing-10;
+  margin-block-end: $spacing-10;
 }

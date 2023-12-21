@@ -10,9 +10,9 @@
 
 :host(#{$prefix}-skeleton-text) {
   display: block;
-  width: 100%;
+  inline-size: 100%;
 
   .#{$prefix}--skeleton__text {
-    margin-top: 0;
+    margin-block-start: 0;
   }
 }

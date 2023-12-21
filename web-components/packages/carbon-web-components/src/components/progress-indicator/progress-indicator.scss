@@ -37,7 +37,7 @@ $css--plex: true !default;
   // We override it so changing width of `<#{$prefix}-progress-step>` automatically changes the width here.
   // https://github.com/carbon-design-system/carbon-web-components/issues/325
   .#{$prefix}--progress-line {
-    width: 100%;
+    inline-size: 100%;
   }
 }
 
@@ -48,9 +48,9 @@ $css--plex: true !default;
 :host(#{$prefix}-progress-step[vertical]),
 :host(#{$prefix}-progress-step-skeleton[vertical]) {
   display: list-item;
-  min-height: 3.625rem;
-  width: initial;
-  min-width: initial;
+  inline-size: initial;
+  min-block-size: 3.625rem;
+  min-inline-size: initial;
 
   svg {
     display: inline-block;
@@ -59,28 +59,28 @@ $css--plex: true !default;
 
   .#{$prefix}--progress-label {
     display: inline-block;
-    max-width: none;
-    vertical-align: top;
     margin: 0;
+    max-inline-size: none;
+    vertical-align: top;
   }
 
   .#{$prefix}--progress-line {
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 1px;
+    block-size: 100%;
+    inline-size: 1px;
+    inset-block-start: 0;
+    inset-inline-start: 0;
   }
 }
 
 :host(#{$prefix}-progress-step[vertical]) {
   .#{$prefix}--progress-label {
-    width: initial;
+    inline-size: initial;
   }
 
   .#{$prefix}--progress-optional {
-    margin-top: auto;
     position: initial;
-    margin-left: $spacing-07;
+    margin-block-start: auto;
+    margin-inline-start: $spacing-07;
   }
 
   .#{$prefix}--progress-step-button {
@@ -89,7 +89,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-progress-step[vertical][state='current']) svg {
-  margin-left: 0.563rem;
+  margin-inline-start: 0.563rem;
 }
 
 :host(#{$prefix}-progress-step[state='current']) {

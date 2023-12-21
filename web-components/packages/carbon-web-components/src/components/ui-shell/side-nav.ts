@@ -200,6 +200,7 @@ class CDSSideNav extends HostListenerMixin(LitElement) {
    * Handles `blur` event handler on this element.
    *
    * @param event The event.
+   * @param event.relatedTarget The event relatedTarget.
    */
   @HostListener('focusout')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
@@ -215,7 +216,6 @@ class CDSSideNav extends HostListenerMixin(LitElement) {
   /**
    * Handles `focus` event handler on this element.
    *
-   * @param event The event.
    */
   @HostListener('focusin')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to

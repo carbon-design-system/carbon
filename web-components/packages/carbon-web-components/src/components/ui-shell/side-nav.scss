@@ -25,9 +25,9 @@ $css--plex: true !default;
   @extend .#{$prefix}--side-nav__item;
 
   display: block;
+  block-size: auto;
+  inline-size: auto;
   outline: none;
-  width: auto;
-  height: auto;
 
   .#{$prefix}--side-nav__icon {
     // TODO: audit
@@ -59,33 +59,33 @@ $css--plex: true !default;
   }
 
   .#{$prefix}--side-nav__menu {
-    margin: 0;
     padding: 0;
+    margin: 0;
   }
 }
 
 :host(#{$prefix}-side-nav-menu[active]) {
   @extend .#{$prefix}--side-nav__item--active;
 
-  // TODO: audit
-  color: $text-primary;
   position: relative;
 
+  // TODO: audit
+  color: $text-primary;
+
   &::before {
-    content: '';
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: $spacing-02;
     background-color: $border-interactive;
+    content: '';
+    inline-size: $spacing-02;
+    inset-block: 0;
+    inset-inline-start: 0;
   }
 }
 
 :host(#{$prefix}-side-nav-menu[active][expanded]) {
+  position: inherit;
   background-color: inherit;
   color: inherit;
-  position: inherit;
 
   &::before {
     content: none;
@@ -104,21 +104,21 @@ $css--plex: true !default;
   @extend .#{$prefix}--side-nav__menu-item;
 
   display: block;
+  block-size: auto;
+  inline-size: auto;
   outline: none;
-  width: auto;
-  height: auto;
 
   a.#{$prefix}--side-nav__link {
-    height: $spacing-07;
-    min-height: $spacing-07;
-    padding-left: $spacing-07;
+    block-size: $spacing-07;
     font-weight: 400;
+    min-block-size: $spacing-07;
+    padding-inline-start: $spacing-07;
   }
 }
 
 :host(#{$prefix}-side-nav-menu-item[parent-has-icon])
   a.#{$prefix}--side-nav__link {
-  padding-left: 4.5rem;
+  padding-inline-start: 4.5rem;
 }
 
 :host(#{$prefix}-side-nav-item) .#{$prefix}--side-nav__link:hover,

@@ -65,7 +65,7 @@ class CDSHeaderMenu extends HostListenerMixin(FocusMixin(LitElement)) {
    *
    * @param [force] If specified, forces the open state to the given one.
    */
-  private _handleUserInitiatedToggle(force: boolean = !this.expanded) {
+  private _handleUserInitiatedToggle(force = !this.expanded) {
     this.expanded = force;
     if (!force) {
       this._topMenuItem.focus();

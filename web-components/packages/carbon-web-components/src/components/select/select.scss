@@ -16,6 +16,16 @@ $css--plex: true !default;
   @extend .#{$prefix}--select;
 
   outline: none;
+
+  ::slotted(#{$prefix}-slug) {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: $spacing-08;
+  }
+
+  ::slotted(#{$prefix}-slug:not([revert-active])) {
+    transform: translateY(-50%);
+  }
 }
 
 :host(#{$prefix}-select[disabled]) {
@@ -34,15 +44,15 @@ $css--plex: true !default;
   .#{$prefix}--form__helper-text,
   .#{$prefix}--label {
     align-self: flex-start;
-    margin-top: 0.8125rem;
+    margin-block-start: 0.8125rem;
   }
 
   select {
-    padding-right: 3.5rem;
+    padding-inline-end: 3.5rem;
   }
 
   .#{$prefix}--select__invalid-icon--warning {
-    right: $spacing-07;
+    inset-inline-end: $spacing-07;
   }
 }
 
@@ -60,26 +70,14 @@ $css--plex: true !default;
   }
 
   .#{$prefix}--select__arrow {
-    top: 50%;
+    inset-block-start: 50%;
     transform: translate(-#{$spacing-03}, -50%);
   }
 }
 
 :host(#{$prefix}-select[pagination][left-select]) {
   .#{$prefix}--select-input {
-    border-right: 1px solid $border-subtle;
-  }
-}
-
-:host(#{$prefix}-select) {
-  ::slotted(#{$prefix}-slug) {
-    position: absolute;
-    inset-block-start: 50%;
-    inset-inline-end: $spacing-08;
-  }
-
-  ::slotted(#{$prefix}-slug:not([revert-active])) {
-    transform: translateY(-50%);
+    border-inline-end: 1px solid $border-subtle;
   }
 }
 

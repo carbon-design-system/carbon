@@ -32,12 +32,12 @@ $css--plex: true !default;
 
   .#{$prefix}-ce--header__divider {
     position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    height: $spacing-06;
-    width: rem(1px);
     background-color: $border-subtle;
+    block-size: $spacing-06;
+    inline-size: rem(1px);
+    inset-block-start: 50%;
+    inset-inline-start: 0;
+    transform: translateY(-50%);
   }
 }
 
@@ -55,8 +55,8 @@ $css--plex: true !default;
   outline: none;
 
   a.#{$prefix}--header__menu-item {
-    height: $spacing-09;
     background-color: $layer;
+    block-size: $spacing-09;
 
     &:hover {
       background-color: $background-hover;
@@ -77,13 +77,12 @@ $css--plex: true !default;
 
     &::after {
       position: absolute;
-      top: -#{$spacing-01};
-      left: -#{$spacing-01};
-      bottom: -#{$spacing-01};
-      width: 3px;
-      height: 100%;
       background-color: $border-interactive;
+      block-size: 100%;
       content: '';
+      inline-size: 3px;
+      inset-block: -#{$spacing-01};
+      inset-inline-start: -#{$spacing-01};
     }
   }
 }
@@ -92,6 +91,7 @@ $css--plex: true !default;
   ::slotted(svg) {
     fill: $icon-secondary;
   }
+
   &:hover ::slotted(svg) {
     fill: $icon-primary;
   }
@@ -129,7 +129,7 @@ $css--plex: true !default;
 
 :host(#{$prefix}-header-name) {
   display: content;
-  height: 100%;
+  block-size: 100%;
 
   a {
     box-sizing: border-box;
@@ -157,7 +157,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-switcher-item:nth-child(1)) {
-  margin-top: $spacing-05;
+  margin-block-start: $spacing-05;
 }
 
 :host(#{$prefix}-switcher-divider) {

@@ -24,10 +24,11 @@ $inset-transition: inset 110ms motion(standard, productive);
   @extend .#{$prefix}--tabs;
 
   .#{$prefix}--tabs-nav-content-container {
-    flex: 1 1 0%;
     position: relative;
     overflow: scroll;
-    height: $spacing-09; // for some reason, overflow: hidden shrinks the content
+    flex: 1 1 0%;
+    // for some reason, overflow: hidden shrinks the content
+    block-size: $spacing-09;
     scrollbar-width: none;
 
     &::-webkit-scrollbar {
@@ -39,14 +40,14 @@ $inset-transition: inset 110ms motion(standard, productive);
   /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
   :where(.#{$prefix}--tabs-nav-content) {
     position: absolute;
-    height: 100%;
+    block-size: 100%;
     inset-inline-start: 0;
     transition: $inset-transition;
   }
 
   .#{$prefix}--tabs-nav {
-    display: block;
     position: absolute;
+    display: block;
   }
 
   .#{$prefix}--tab--overflow-nav-button {
@@ -58,8 +59,8 @@ $inset-transition: inset 110ms motion(standard, productive);
   @include focus-outline('reset');
 
   .#{$prefix}--tabs-trigger svg {
-    width: auto;
-    height: auto;
+    block-size: auto;
+    inline-size: auto;
   }
 }
 
@@ -73,20 +74,23 @@ $inset-transition: inset 110ms motion(standard, productive);
 :host(#{$prefix}-tab) {
   display: flex;
   background: transparent;
-  width: 100%;
+  inline-size: 100%;
+
+  outline: none;
 
   .#{$prefix}--tabs__nav-link {
     @include button-reset.reset($width: false);
     @include focus-outline('reset');
     @include type-style('body-compact-01');
 
-    align-items: center;
-    width: 100%;
     overflow: hidden;
+
+    align-items: center;
     padding: $spacing-04 $spacing-05 $spacing-03;
-    border-bottom: $tab-underline-color;
+    border-block-end: $tab-underline-color;
     color: $text-secondary;
-    text-align: left;
+    inline-size: 100%;
+    text-align: start;
     text-decoration: none;
     text-overflow: ellipsis;
     transition: border $duration-fast-01 motion(standard, productive),
@@ -103,11 +107,9 @@ $inset-transition: inset 110ms motion(standard, productive);
     .#{$prefix}--tabs__nav-link {
       @include type-style('heading-compact-01');
 
-      border-bottom: $spacing-01 solid $border-interactive;
+      border-block-end: $spacing-01 solid $border-interactive;
     }
   }
-
-  outline: none;
 }
 
 :host(#{$prefix}-tab:hover) {
@@ -115,22 +117,22 @@ $inset-transition: inset 110ms motion(standard, productive);
   box-shadow: 0 -1px 0 $background-hover;
 
   a.#{$prefix}--tabs__nav-link {
-    border-bottom: $tab-underline-color-hover;
+    border-block-end: $tab-underline-color-hover;
     color: $text-primary;
   }
 }
 
 :host(#{$prefix}-tabs[type='contained'])
   .#{$prefix}--tabs-nav-content-container {
-  height: $spacing-09;
+  block-size: $spacing-09;
 }
 
 :host(#{$prefix}-tab[type='contained']) {
   background-color: $layer-accent-01;
 
   a.#{$prefix}--tabs__nav-link {
-    height: $spacing-09;
     padding: $spacing-03 $spacing-05;
+    block-size: $spacing-09;
     // height - vertical padding
     /* stylelint-disable declaration-property-unit-allowed-list */
     line-height: calc(#{$spacing-09} - (#{$spacing-03} * 2));
@@ -140,7 +142,7 @@ $inset-transition: inset 110ms motion(standard, productive);
 :host(#{$prefix}-tab[type='contained']),
 :host(#{$prefix}-tab[type='contained']:hover) {
   a.#{$prefix}--tabs__nav-link {
-    border-bottom: none;
+    border-block-end: none;
     // Draws the border without affecting the inner-content
     box-shadow: rem(-1px) 0 0 0 $border-strong;
   }
@@ -162,27 +164,23 @@ $inset-transition: inset 110ms motion(standard, productive);
   outline: none;
 
   .#{$prefix}--tabs__nav-link {
+    border-block-end: $tab-underline-disabled;
     color: $tab-text-disabled;
-    pointer-events: none;
     outline: none;
-    border-bottom: $tab-underline-disabled;
+    pointer-events: none;
   }
 }
 
 :host(#{$prefix}-tab[type='contained'][disabled][role])
   .#{$prefix}--tabs__nav-link {
   background-color: $button-disabled;
-  border-bottom: none;
+  border-block-end: none;
   color: $text-on-color-disabled;
 }
 
 :host(#{$prefix}-tab[selected]) {
   display: flex;
   background-color: transparent;
-
-  .#{$prefix}--tabs__nav-link {
-    @include type-style('heading-01');
-  }
   transition: color $duration-fast-01 motion(standard, productive);
 
   &:hover {
@@ -190,6 +188,8 @@ $inset-transition: inset 110ms motion(standard, productive);
   }
 
   .#{$prefix}--tabs__nav-link {
+    @include type-style('heading-01');
+
     &,
     // Need to override Carbon core's non-selected focus color
     &:focus,
@@ -204,11 +204,11 @@ $inset-transition: inset 110ms motion(standard, productive);
   background-color: $layer-01;
 
   .#{$prefix}--tabs__nav-link {
-    // height - vertical padding
-    line-height: calc(#{$spacing-09} - (#{$spacing-03} * 2));
+    border-block-end: none;
     // Draws the border without affecting the inner-content
     box-shadow: inset 0 $spacing-01 0 0 $interactive;
-    border-bottom: none;
+    // height - vertical padding
+    line-height: calc(#{$spacing-09} - (#{$spacing-03} * 2));
   }
 
   .#{$prefix}--tabs__nav-link:focus,
@@ -235,12 +235,13 @@ $inset-transition: inset 110ms motion(standard, productive);
   .#{$prefix}--tabs__nav-link {
     @include type-style('body-short-01');
 
+    border-block-end: $tab-underline-disabled;
+
     color: $tab-text-disabled;
-    border-bottom: $tab-underline-disabled;
 
     &:focus,
     &:active {
-      border-bottom-width: 3px;
+      border-block-end-width: 3px;
     }
   }
 }
@@ -248,20 +249,21 @@ $inset-transition: inset 110ms motion(standard, productive);
 :host(#{$prefix}-tabs-skeleton) .#{$prefix}--tabs-trigger {
   @include skeleton;
 
-  width: rem(100px);
+  inline-size: rem(100px);
 }
 
 :host(#{$prefix}-tab-skeleton) {
-  margin-left: $spacing-01;
+  margin-inline-start: $spacing-01;
 
   .#{$prefix}--tabs__nav-link {
     @include skeleton;
 
-    width: rem(75px);
-    height: $spacing-04;
+    block-size: $spacing-04;
+
+    inline-size: rem(75px);
   }
 }
 
 :host(#{$prefix}-tab-skeleton:first-of-type) {
-  margin-left: 0;
+  margin-inline-start: 0;
 }

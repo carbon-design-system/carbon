@@ -33,6 +33,7 @@ class CDSTextarea extends CDSTextInput {
    * Handles `oninput` event on the `<input>`.
    *
    * @param event The event.
+   * @param event.target The event target.
    */
   protected _handleInput({ target }: Event) {
     this.value = (target as HTMLTextAreaElement).value;

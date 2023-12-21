@@ -17,7 +17,7 @@ $css--plex: true !default;
 :host(#{$prefix}-number-input),
 :host(#{$prefix}-number-input-skeleton) {
   // the base text-input class has a 100% so we need to propagate it up to the host element
-  width: 100%;
+  inline-size: 100%;
   outline: none;
 
   .#{$prefix}--form-requirement[hidden] {

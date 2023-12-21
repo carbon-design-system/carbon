@@ -41,8 +41,8 @@
 
 :host(#{$prefix}-modal[full-width]) {
   ::slotted(#{$prefix}-modal-body) {
-    margin: 0;
     padding: 0;
+    margin: 0;
   }
 }
 
@@ -72,15 +72,15 @@
   @extend .#{$prefix}--layer-two;
 
   ::slotted(#{$prefix}-form-item) {
-    margin-bottom: $spacing-05;
+    margin-block-end: $spacing-05;
   }
 
   ::slotted(#{$prefix}-select:last-of-type) {
-    padding-bottom: 0;
+    padding-block-end: 0;
   }
 
   ::slotted(*:last-child) {
-    padding-bottom: $spacing-07;
+    padding-block-end: $spacing-07;
   }
 }
 
@@ -88,11 +88,11 @@
   @include type-style('body-01');
 
   display: block;
-  padding-right: calc(20% - #{$spacing-07});
+  padding-inline-end: calc(20% - #{$spacing-07});
 }
 
 :host(#{$prefix}-modal-body-content[description]) {
-  margin-bottom: $spacing-05;
+  margin-block-end: $spacing-05;
 }
 
 :host(#{$prefix}-modal-footer) {
@@ -113,13 +113,12 @@
 
 :host(#{$prefix}-modal-footer-button) {
   .#{$prefix}--btn {
-    height: 100%;
-    width: 100%;
-    max-width: none;
-
-    padding-top: $spacing-05;
-    padding-bottom: $spacing-07;
+    block-size: 100%;
     box-shadow: rem(-1px) 0 0 0 $button-separator;
+    inline-size: 100%;
+    max-inline-size: none;
+
+    padding-block: $spacing-05 $spacing-07;
 
     &:focus {
       box-shadow: inset 0 0 0 $button-outline-width $focus,
@@ -131,10 +130,10 @@
 :host(#{$prefix}-modal-footer) ::slotted(#{$prefix}-button),
 :host(#{$prefix}-modal-footer-button) {
   flex: 0 1 50%;
-  max-width: none;
-  width: 50%;
-  height: $spacing-10;
   margin: 0;
+  block-size: $spacing-10;
+  inline-size: 50%;
+  max-inline-size: none;
 }
 
 // Slug

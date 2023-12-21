@@ -141,7 +141,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
    * The method used when filtering the table with the search bar.
    * Can be replaced with custom method.
    *
-   * @param row A table row.
+   * @param rowText A table row.
    * @param searchString A search string.
    * @returns `false` if the given table row matches the given search string.
    */

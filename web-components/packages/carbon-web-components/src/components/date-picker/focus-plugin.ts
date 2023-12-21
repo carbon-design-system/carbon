@@ -204,7 +204,6 @@ export default (config: DatePickerFocusPluginConfig): Plugin =>
     /**
      * Registers this Flatpickr plugin.
      *
-     * @param calendar The Flatpickr instance.
      */
     const register = () => {
       fp.loadedPlugins.push('carbonFlatpickrFocusPlugin');

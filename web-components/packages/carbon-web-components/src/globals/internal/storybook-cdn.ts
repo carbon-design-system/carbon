@@ -34,6 +34,7 @@ function _renderScript(components, tag, isRTL = false) {
  * This is the markdown block for JS via CDN
  *
  * @param {Array} components array of components to render
+ * @param components.components components to render
  */
 export const cdnJs = ({ components }) => {
   return `

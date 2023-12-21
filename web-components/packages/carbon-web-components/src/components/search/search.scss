@@ -29,22 +29,22 @@ $css--plex: true !default;
 
 :host(#{$prefix}-search[expandable][size='sm']) {
   .#{$prefix}--search-magnifier {
-    width: $spacing-07;
-    height: $spacing-07;
+    block-size: $spacing-07;
+    inline-size: $spacing-07;
   }
 }
 
 :host(#{$prefix}-search[expandable][size='md']) {
   .#{$prefix}--search-magnifier {
-    width: $spacing-08;
-    height: $spacing-08;
+    block-size: $spacing-08;
+    inline-size: $spacing-08;
   }
 }
 
 :host(#{$prefix}-search[expandable][size='lg']) {
   .#{$prefix}--search-magnifier {
-    width: $spacing-09;
-    height: $spacing-09;
+    block-size: $spacing-09;
+    inline-size: $spacing-09;
   }
 }
 
@@ -52,7 +52,7 @@ $css--plex: true !default;
   @extend .#{$prefix}--search--expanded;
 
   .#{$prefix}--search-input {
-    width: 100%;
+    inline-size: 100%;
   }
   .#{$prefix}--search-magnifier {
     pointer-events: none;
@@ -77,8 +77,8 @@ $css--plex: true !default;
   }
 
   ::slotted(.#{$prefix}--search-magnifier) {
-    width: rem(48px);
-    height: rem(48px);
+    block-size: rem(48px);
+    inline-size: rem(48px);
   }
 }
 
@@ -88,8 +88,8 @@ $css--plex: true !default;
   }
 
   .#{$prefix}--search-close {
-    pointer-events: none;
     outline: none;
+    pointer-events: none;
 
     &::before {
       background: none;
@@ -98,12 +98,12 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-search-skeleton) {
-  width: 100%;
+  inline-size: 100%;
 
   .#{$prefix}--search-input {
     @include skeleton;
 
-    width: 100%;
+    inline-size: 100%;
 
     &::placeholder {
       color: transparent;

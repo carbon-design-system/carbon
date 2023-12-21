@@ -12,16 +12,16 @@
 
 /* stylelint-disable selector-type-no-unknown */
 #{$prefix}-header ~ #{$prefix}-side-nav {
-  margin-top: $spacing-09;
-  height: calc(100% - $spacing-09);
+  block-size: calc(100% - $spacing-09);
+  margin-block-start: $spacing-09;
 }
 
 .#{$prefix}-ce-demo-devenv--container {
+  transition: margin-left 0.11s cubic-bezier(0.2, 0, 1, 0.9);
   // Ref: https://github.com/carbon-design-system/carbon/blob/v10.10.0/packages/components/src/components/ui-shell/_side-nav.scss#L82
   will-change: margin-left;
-  transition: margin-left 0.11s cubic-bezier(0.2, 0, 1, 0.9);
 
   @include breakpoint('lg') {
-    margin-left: 16rem;
+    margin-inline-start: 16rem;
   }
 }

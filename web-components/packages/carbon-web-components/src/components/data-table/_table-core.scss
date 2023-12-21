@@ -17,21 +17,23 @@
   ::slotted(#{$prefix}-table-head) {
     @include type-style('heading-01');
 
-    background-color: $layer-accent-01;
     display: table-header-group;
+
+    background-color: $layer-accent-01;
   }
 
   ::slotted(#{$prefix}-table-body) {
     @include type-style('body-short-01');
 
-    background-color: $layer-01;
-    width: 100%;
     display: table-row-group;
+
+    background-color: $layer-01;
+    inline-size: 100%;
   }
 }
 
 :host(#{$prefix}-table[use-static-width]) {
-  width: auto;
+  inline-size: auto;
 }
 
 :host(#{$prefix}-table[sticky-header]) {
@@ -57,19 +59,19 @@
 :host(#{$prefix}-table-head[sticky-header]) {
   position: sticky;
   z-index: 1;
-  top: 0;
-  width: 100%;
+  inline-size: 100%;
+  inset-block-start: 0;
   will-change: transform;
 
   ::slotted(#{$prefix}-table-header-row) {
     display: flex;
-    width: 100%;
+    inline-size: 100%;
   }
 }
 
 :host(#{$prefix}-table-header-cell[sort-direction]) {
-  height: $spacing-09;
   position: relative;
+  block-size: $spacing-09;
 
   .#{$prefix}--table-sort__flex {
     display: flex;
@@ -87,16 +89,16 @@
 }
 
 :host(#{$prefix}-table-header-cell[sticky-header]) {
-  width: 100%;
   overflow: hidden;
+
+  border-block-end: 1px solid $layer-active;
+  inline-size: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
-
-  border-bottom: 1px solid $layer-active;
 }
 
 :host(#{$prefix}-table-header-cell[sticky-header]:not([is-sortable])) {
-  padding-top: rem(14px);
+  padding-block-start: rem(14px);
 }
 
 :host(#{$prefix}-table-header-cell[slug]) {
@@ -136,8 +138,8 @@
 
 :host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-row),
 :host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-expand-row) {
-  height: $spacing-09;
   display: table-row;
+  block-size: $spacing-09;
 }
 
 //
@@ -148,25 +150,24 @@
 
   ::slotted(#{$prefix}-table-header-cell),
   ::slotted(#{$prefix}-table-header-cell-skeleton) {
-    color: $text-primary;
-    background-color: $layer-accent-01;
-    text-align: left;
     display: table-cell;
+    background-color: $layer-accent-01;
+    color: $text-primary;
     outline: none;
+    text-align: start;
   }
 
   ::slotted(#{$prefix}-table-header-cell),
   .#{$prefix}--table-expand,
   .#{$prefix}--table-column-checkbox {
-    padding-left: $spacing-05;
-    padding-right: $spacing-05;
-    text-align: left;
+    padding-inline: $spacing-05;
+    text-align: start;
     vertical-align: middle;
   }
 
   ::slotted(#{$prefix}-table-header-cell:first-of-type),
   ::slotted(#{$prefix}-table-header-cell-skeleton:first-of-type) {
-    padding-left: $spacing-05;
+    padding-inline-start: $spacing-05;
   }
 }
 
@@ -185,8 +186,8 @@
 :host(#{$prefix}-table-header-row[sticky-header]) {
   #{$prefix}-checkbox {
     margin: 0;
-    padding-top: $spacing-04;
-    border-bottom: 1px solid $layer-active;
+    border-block-end: 1px solid $layer-active;
+    padding-block-start: $spacing-04;
   }
 }
 
@@ -195,11 +196,10 @@
 :host(#{$prefix}-table-header-row[selection-name]),
 :host(#{$prefix}-table-row[selection-name]) {
   .#{$prefix}--table-expand {
-    height: $spacing-07;
-    width: $spacing-07;
-
     padding: $spacing-03;
-    padding-right: 0;
+    block-size: $spacing-07;
+    inline-size: $spacing-07;
+    padding-inline-end: 0;
   }
 }
 
@@ -216,27 +216,27 @@
   .#{$prefix}--table-column-checkbox div,
   .#{$prefix}--table-expand div {
     display: flex;
-    height: 100%;
+    block-size: 100%;
   }
 }
 
 :host(#{$prefix}-table-header-row[rows-with-slug]) {
   .#{$prefix}--table-column-checkbox,
   .#{$prefix}--table-expand {
-    padding-left: $spacing-08;
+    padding-inline-start: $spacing-08;
   }
 }
 :host(#{$prefix}-table-header-row[rows-with-slug]),
 :host(#{$prefix}-table-row[rows-with-slug]) {
   #{$prefix}-checkbox {
-    padding-left: $spacing-03;
+    padding-inline-start: $spacing-03;
   }
 }
 
 :host(#{$prefix}-table-header-row[rows-with-slug][selection-name][expandable]),
 :host(#{$prefix}-table-row[rows-with-slug][selection-name][expandable]) {
   .#{$prefix}--table-column-checkbox {
-    padding-left: 0;
+    padding-inline-start: 0;
   }
 }
 
@@ -247,10 +247,10 @@
 :host(#{$prefix}-table-body) {
   ::slotted(#{$prefix}-table-row),
   ::slotted(#{$prefix}-table-expand-row) {
-    border: none;
-    height: $spacing-09;
-    width: 100%;
     display: table-row;
+    border: none;
+    block-size: $spacing-09;
+    inline-size: 100%;
     outline: none;
   }
 }
@@ -267,9 +267,9 @@
 //
 
 :host(#{$prefix}-table-cell) {
-  border-top: 1px solid $layer-01;
-  border-bottom: 1px solid $border-subtle;
   padding: 0 $spacing-05;
+  border-block-end: 1px solid $border-subtle;
+  border-block-start: 1px solid $layer-01;
 
   ::slotted(#{$prefix}-overflow-menu:hover) {
     background-color: none;
@@ -284,6 +284,7 @@
 
 :host(#{$prefix}-table-cell-content) {
   @include type-style('label-01');
+
   display: block;
 }
 
@@ -291,8 +292,8 @@
 :host(#{$prefix}-table-expand-row[sticky-header]) {
   ::slotted(#{$prefix}-table-cell),
   ::slotted(#{$prefix}-table-cell-skeleton) {
-    width: 100%;
-    padding-top: rem(14px);
+    inline-size: 100%;
+    padding-block-start: rem(14px);
   }
 }
 
@@ -318,12 +319,12 @@
 :host(#{$prefix}-table-row) {
   ::slotted(#{$prefix}-table-cell:first-of-type),
   ::slotted(#{$prefix}-table-cell-skeleton:first-of-type) {
-    padding-left: $spacing-05;
+    padding-inline-start: $spacing-05;
   }
 
   ::slotted(#{$prefix}-table-cell:last-of-type),
   ::slotted(#{$prefix}-table-cell-skeleton:last-of-type) {
-    padding-right: $spacing-05;
+    padding-inline-end: $spacing-05;
   }
 }
 
@@ -331,9 +332,9 @@
 :host(#{$prefix}-table-row[selection-name]) {
   .#{$prefix}--table-expand {
     display: table-cell;
-    border-top: 1px solid $layer-01;
-    border-bottom: 1px solid $border-subtle;
-    padding-right: 0;
+    border-block-end: 1px solid $border-subtle;
+    border-block-start: 1px solid $layer-01;
+    padding-inline-end: 0;
     transition: transform $duration-moderate-01 motion(standard, productive);
   }
 }
@@ -352,7 +353,7 @@
   :host(#{$prefix}-table-row[expandable][expanded]:hover),
 :host(#{$prefix}-table-row[selection-name][expandable][expanded]:hover) {
   .#{$prefix}--table-expand {
-    border-bottom-color: transparent;
+    border-block-end-color: transparent;
   }
 }
 
@@ -362,9 +363,8 @@
   .#{$prefix}--table-expand,
   .#{$prefix}--table-column-checkbox {
     background-color: $layer-selected;
-
-    border-top-color: $layer-active;
-    border-bottom-color: $border-subtle;
+    border-block-end-color: $border-subtle;
+    border-block-start-color: $layer-active;
   }
 }
 
@@ -388,7 +388,7 @@
   ::slotted(#{$prefix}-table-cell),
   .#{$prefix}--table-expand,
   .#{$prefix}--table-column-checkbox {
-    border-bottom-color: $border-subtle;
+    border-block-end-color: $border-subtle;
   }
 }
 
@@ -399,7 +399,7 @@
   ::slotted(#{$prefix}-table-cell),
   .#{$prefix}--table-expand,
   .#{$prefix}--table-column-checkbox {
-    border-bottom-color: $border-subtle;
+    border-block-end-color: $border-subtle;
   }
 }
 
@@ -408,7 +408,7 @@
   .#{$prefix}--table-column-checkbox,
   ::slotted(#{$prefix}-table-cell),
   ::slotted(#{$prefix}-table-cell-skeleton) {
-    border-bottom: 1px solid $layer-01;
+    border-block-end: 1px solid $layer-01;
   }
 }
 
@@ -418,8 +418,8 @@
   ::slotted(#{$prefix}-table-cell),
   ::slotted(#{$prefix}-table-cell-skeleton) {
     background-color: $layer-accent-01;
-    border-bottom: 1px solid $layer-accent-01;
-    border-top: 1px solid $layer-accent-01;
+    border-block-end: 1px solid $layer-accent-01;
+    border-block-start: 1px solid $layer-accent-01;
   }
 }
 
@@ -430,10 +430,10 @@
   ::slotted(#{$prefix}-table-cell-skeleton),
   .#{$prefix}--table-expand,
   .#{$prefix}--table-column-checkbox {
-    color: $text-primary;
     background-color: $background-hover;
-    border-bottom-color: $layer-hover-01;
-    border-top-color: $layer-hover-01;
+    border-block-end-color: $layer-hover-01;
+    border-block-start-color: $layer-hover-01;
+    color: $text-primary;
   }
 }
 
@@ -445,22 +445,20 @@
   ::slotted(#{$prefix}-table-cell),
   ::slotted(#{$prefix}-table-cell-skeleton) {
     background-color: $background-hover;
-    border-bottom: 1px solid $layer-hover-01;
-    border-top: 1px solid $layer-hover-01;
-  }
-}
-
-:host(#{$prefix}-table-row[rows-with-slug]) {
-  ::slotted(#{$prefix}-slug) {
-    padding: 0 $spacing-03;
-    margin-left: -$spacing-07;
+    border-block-end: 1px solid $layer-hover-01;
+    border-block-start: 1px solid $layer-hover-01;
   }
 }
 
 :host(#{$prefix}-table-row[rows-with-slug]) {
   .#{$prefix}--table-column-checkbox,
   .#{$prefix}--table-expand {
-    padding-left: $spacing-08;
+    padding-inline-start: $spacing-08;
+  }
+
+  ::slotted(#{$prefix}-slug) {
+    padding: 0 $spacing-03;
+    margin-inline-start: -$spacing-07;
   }
 }
 
@@ -482,10 +480,10 @@
   display: block;
 
   @include breakpoint(md) {
-    max-width: 50ch;
+    max-inline-size: 50ch;
   }
 
   @include breakpoint(lg) {
-    max-width: 80ch;
+    max-inline-size: 80ch;
   }
 }

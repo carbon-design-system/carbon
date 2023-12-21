@@ -360,7 +360,7 @@ module.exports = function generateCreateReactCustomElementType(
 
   /**
    *
-   * @param {object<string, PropertyMetadata>} declaredProps The list of metadata harvested from `@property()` decorator calls.
+   * @param {object} declaredProps The list of metadata harvested from `@property()` decorator calls.
    * @returns {string} The `import` statement for `src/globals/wrappers/createReactCustomElementType`.
    */
   const buildCreateReactCustomElementTypeImport = (declaredProps) => {
@@ -380,7 +380,7 @@ module.exports = function generateCreateReactCustomElementType(
   };
 
   /**
-   * @param {object<string, PropertyMetadata>} declaredProps The list of metadata harvested from `@property()` decorator calls.
+   * @param {object} declaredProps The list of metadata harvested from `@property()` decorator calls.
    * @returns {object}
    *   The list of `{ attribute: 'attribute-name', serialize: typeSerializer }` generated from `@property()` decorators.
    */
@@ -433,8 +433,8 @@ module.exports = function generateCreateReactCustomElementType(
     );
 
   /**
-   * @param {object<string, PropertyMetadata>} declaredProps The list of metadata harvested from `@property()` decorator calls.
-   * @returns {object} The list of `PropTypes.someType` generated from `@property()` decorators.
+   * @param {object} declaredProps The list of metadata harvested from `@property()` decorator calls.
+   * @returns {string} The list of `PropTypes.someType` generated from `@property()` decorators.
    */
   const buildPropTypes = (declaredProps) =>
     Object.keys(declaredProps).map((name) => {

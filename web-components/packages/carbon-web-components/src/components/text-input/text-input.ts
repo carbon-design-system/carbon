@@ -83,6 +83,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
    * Handles `oninput` event on the `<input>`.
    *
    * @param event The event.
+   * @param event.target The event target.
    */
   protected _handleInput({ target }: Event) {
     this.value = (target as HTMLInputElement).value;
@@ -329,7 +330,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       class: `${prefix}--text-input__invalid-icon ${prefix}--text-input__invalid-icon--warning`,
     });
 
-    let normalizedProps = {
+    const normalizedProps = {
       disabled: !readonly && disabled,
       invalid: !readonly && invalid,
       warn: !readonly && !invalid && warn,

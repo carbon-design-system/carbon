@@ -58,6 +58,7 @@ class CDSSelect extends FormMixin(LitElement) {
    * Handles `oninput` event on the `<input>`.
    *
    * @param event The event.
+   * @param event.target The event target.
    */
   private _handleInput({ target }: Event) {
     const { value } = target as HTMLSelectElement;

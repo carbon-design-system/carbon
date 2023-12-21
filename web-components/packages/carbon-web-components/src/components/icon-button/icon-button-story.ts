@@ -42,7 +42,7 @@ export const Playground = (args) => {
     enterDelay,
     leaveDelay,
     size,
-  } = args?.['cds-icon-button'];
+  } = args?.['cds-icon-button'] || '';
   return html`
     <cds-icon-button
       align=${alignment}

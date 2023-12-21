@@ -29,7 +29,7 @@ $css--plex: true !default;
 
 :host(#{$prefix}-structured-list-header-row) {
   ::slotted(#{$prefix}-structured-list-header-cell:first-of-type) {
-    padding-left: $spacing-05;
+    padding-inline-start: $spacing-05;
   }
 
   ::slotted(#{$prefix}-structured-list-header-cell),
@@ -53,7 +53,7 @@ $css--plex: true !default;
   }
 
   ::slotted(#{$prefix}-structured-list-row:last-child) {
-    border-bottom: 1px solid $border-subtle;
+    border-block-end: 1px solid $border-subtle;
   }
 }
 
@@ -63,7 +63,7 @@ $css--plex: true !default;
   }
 
   ::slotted(#{$prefix}-structured-list-cell:first-of-type) {
-    padding-left: $spacing-05;
+    padding-inline-start: $spacing-05;
   }
 
   ::slotted(#{$prefix}-structured-list-cell[nowrap]) {
@@ -73,8 +73,8 @@ $css--plex: true !default;
 
 // selection
 :host(#{$prefix}-structured-list-row[selection-value]:hover) {
-  border-bottom: 1px solid $layer-hover;
   background-color: $layer-hover;
+  border-block-end: 1px solid $layer-hover;
   cursor: pointer;
 
   ::slotted(#{$prefix}-structured-list-cell) {
@@ -99,23 +99,24 @@ $css--plex: true !default;
 // skeleton
 :host(#{$prefix}-structured-list-header-cell-skeleton) {
   &:first-of-type {
-    width: 8%;
+    inline-size: 8%;
   }
 
   &:nth-of-type(3n + 2) {
-    width: 30%;
+    inline-size: 30%;
   }
 
   &:nth-of-type(3n + 3) {
-    width: 15%;
+    inline-size: 15%;
   }
 
   span {
     @include skeleton;
 
-    width: 75%;
-    height: $spacing-05;
     display: block;
+    block-size: $spacing-05;
+
+    inline-size: 75%;
   }
 }
 
@@ -131,7 +132,7 @@ $css--plex: true !default;
   ::slotted(#{$prefix}-structured-list-cell:first-of-type),
 :host(#{$prefix}-structured-list-header-row[condensed])
   ::slotted(#{$prefix}-structured-list-header-cell:first-of-type) {
-  padding-left: $spacing-05;
+  padding-inline-start: $spacing-05;
 }
 
 // flush
@@ -143,6 +144,5 @@ $css--plex: true !default;
   ::slotted(#{$prefix}-structured-list-header-cell),
 :host(#{$prefix}-structured-list-header-row[condensed][flush])
   ::slotted(#{$prefix}-structured-list-header-cell) {
-  padding-right: $spacing-05;
-  padding-left: 0;
+  padding-inline: 0 $spacing-05;
 }

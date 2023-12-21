@@ -23,11 +23,11 @@ $css--plex: true !default;
 
   #floating-menu-container {
     position: absolute;
-    width: 100%;
+    inline-size: 100%;
   }
 
   .#{$prefix}--date-picker__calendar.open {
-    margin-top: 0;
+    margin-block-start: 0;
   }
 
   .flatpickr-next-month,
@@ -40,9 +40,9 @@ $css--plex: true !default;
   // _date-picker.scss#L351-L360 in `v10.6.0` tree, coping with the CSS class that latest Flatpickr has
   .#{$prefix}--date-picker__day.flatpickr-disabled,
   .flatpickr-day.flatpickr-disabled {
+    color: $layer-selected-inverse;
     cursor: not-allowed;
     opacity: 0.5;
-    color: $layer-selected-inverse;
 
     &:hover {
       background: transparent;
@@ -53,9 +53,9 @@ $css--plex: true !default;
   .flatpickr-next-month.flatpickr-disabled,
   .flatpickr-prev-month.flatpickr-disabled {
     svg {
+      cursor: not-allowed;
       fill: $layer-selected-inverse;
       opacity: 0.5;
-      cursor: not-allowed;
     }
 
     &:hover {
@@ -85,12 +85,12 @@ $css--plex: true !default;
 :host(#{$prefix}-date-picker-input[kind='simple']),
 :host(#{$prefix}-date-picker-input-skeleton[kind='simple']) {
   .#{$prefix}--date-picker__input {
-    width: rem(120px);
+    inline-size: rem(120px);
   }
 
   .#{$prefix}--date-picker__input--invalid,
   .#{$prefix}--date-picker__input--warn {
-    width: rem(152px);
+    inline-size: rem(152px);
   }
 }
 
@@ -98,33 +98,33 @@ $css--plex: true !default;
 :host(#{$prefix}-date-picker-input[kind='simple'][short]),
 :host(#{$prefix}-date-picker-input-skeleton[kind='simple'][short]) {
   .#{$prefix}--date-picker__input {
-    width: rem(90px);
+    inline-size: rem(90px);
   }
 }
 /* stylelint-enable selector-pseudo-class-parentheses-space-inside */
 
 :host(#{$prefix}-date-picker-input[kind='single']),
 :host(#{$prefix}-date-picker-input-skeleton[kind='single']) {
-  max-width: rem(288px);
+  max-inline-size: rem(288px);
 
   .#{$prefix}--date-picker__input {
-    width: rem(288px);
+    inline-size: rem(288px);
   }
 }
 
 :host(#{$prefix}-date-picker-input[kind='from']),
 :host(#{$prefix}-date-picker-input-skeleton[kind='from']) {
-  margin-right: rem(1px);
+  margin-inline-end: rem(1px);
 }
 
 :host(#{$prefix}-date-picker-input[kind='from']),
 :host(#{$prefix}-date-picker-input[kind='to']),
 :host(#{$prefix}-date-picker-input-skeleton[kind='from']),
 :host(#{$prefix}-date-picker-input-skeleton[kind='to']) {
-  width: rem(143.5px);
+  inline-size: rem(143.5px);
 
   .#{$prefix}--date-picker__input {
-    width: rem(143.5px);
+    inline-size: rem(143.5px);
   }
 }
 
@@ -140,20 +140,7 @@ $css--plex: true !default;
   .#{$prefix}--date-picker__icon--invalid {
     @extend .#{$prefix}--date-picker__icon--invalid;
   }
-}
 
-:host(#{$prefix}-date-picker-input-skeleton) {
-  display: inline-block;
-
-  .#{$prefix}--label {
-    @include skeleton;
-
-    width: rem(75px);
-    height: rem(14px);
-  }
-}
-
-:host(#{$prefix}-date-picker-input) {
   ::slotted(#{$prefix}-slug) {
     position: absolute;
     inset-block-start: 50%;
@@ -162,5 +149,17 @@ $css--plex: true !default;
 
   ::slotted(#{$prefix}-slug:not([revert-active])) {
     transform: translateY(-50%);
+  }
+}
+
+:host(#{$prefix}-date-picker-input-skeleton) {
+  display: inline-block;
+
+  .#{$prefix}--label {
+    @include skeleton;
+
+    block-size: rem(14px);
+
+    inline-size: rem(75px);
   }
 }

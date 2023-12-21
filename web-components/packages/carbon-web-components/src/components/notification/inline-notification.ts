@@ -89,6 +89,7 @@ class CDSInlineNotification extends FocusMixin(LitElement) {
    * Handles `click` event on the close button.
    *
    * @param event The event.
+   * @param event.target The event target.
    */
   protected _handleClickCloseButton({ target }: MouseEvent) {
     this._handleUserOrTimerInitiatedClose(target);

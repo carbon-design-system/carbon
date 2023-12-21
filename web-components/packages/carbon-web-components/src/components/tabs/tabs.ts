@@ -46,18 +46,18 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
    * The currently selected index
    */
   // @ts-ignore: TS thinks this method is not referred to
-  private _currentIndex: number = 0;
+  private _currentIndex = 0;
 
   /**
    * Total number of tabs in the component
    */
-  private _totalTabs: number = 0;
+  private _totalTabs = 0;
 
   /**
    * `true` if the tablist is scrollable
    */
   // @ts-ignore: TS thinks this method is not referred to
-  private _isScrollable: boolean = false;
+  private _isScrollable = false;
 
   /**
    * The DOM element for the tablist.

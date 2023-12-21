@@ -12,7 +12,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 /**
  * A variant of `if-non-null` which stops rendering if the given value is an emptry string in addition to `null`/`undefined`.
  *
- * @param The value.
+ * @param value The value.
  */
 export default (value) =>
   ifDefined(value === '' ? undefined : value ?? undefined);

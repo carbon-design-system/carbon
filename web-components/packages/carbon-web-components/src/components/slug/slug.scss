@@ -60,10 +60,8 @@
   .#{$prefix}--toggletip-content {
     // This sets the max size to the size of the action bar with 3 buttons
     max-inline-size: to-rem(334px);
-    padding-block-end: $spacing-11;
-    padding-block-start: $spacing-07;
+    padding-block: $spacing-07 $spacing-11;
     padding-inline: $spacing-07;
-
     --cds-button-focus-color: var(--cds-focus);
   }
 }

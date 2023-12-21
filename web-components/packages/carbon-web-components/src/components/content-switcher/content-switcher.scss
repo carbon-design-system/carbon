@@ -35,31 +35,31 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-content-switcher-item) {
+  inline-size: 100%;
   outline: none;
-  width: 100%;
 
   .#{$prefix}--content-switcher-btn {
-    height: 100%;
-    width: 100%;
     align-items: center;
     padding: $spacing-03 var(--cds-layout-density-padding-inline-local);
+    block-size: 100%;
+    inline-size: 100%;
 
     &:first-child,
     &:last-child {
       border-radius: 0;
-      border-left: none;
-      border-right: none;
+      border-inline-end: none;
+      border-inline-start: none;
     }
 
     &::before {
-      content: '';
-      display: block;
-      height: $spacing-05;
-      width: rem(1px);
-      background-color: $border-subtle;
       position: absolute;
       z-index: 2;
-      left: 0;
+      display: block;
+      background-color: $border-subtle;
+      block-size: $spacing-05;
+      content: '';
+      inline-size: rem(1px);
+      inset-inline-start: 0;
     }
 
     &.#{$prefix}--content-switcher--selected,
@@ -71,19 +71,18 @@ $css--plex: true !default;
     }
 
     &:disabled {
-      border-top-color: $border-inverse;
-      border-bottom-color: $border-inverse;
+      border-block-end-color: $border-inverse;
+      border-block-start-color: $border-inverse;
     }
   }
 }
 
 :host(#{$prefix}-content-switcher-item)[icon] {
-  width: initial;
+  inline-size: initial;
 
   .#{$prefix}--content-switcher-btn {
-    padding-left: rem(11px);
-    padding-right: rem(11px);
-    height: $spacing-08;
+    block-size: $spacing-08;
+    padding-inline: rem(11px);
   }
 
   .#{$prefix}--content-switcher__label {
@@ -99,9 +98,9 @@ $css--plex: true !default;
 
 :host(#{$prefix}-content-switcher-item:first-of-type)
   .#{$prefix}--content-switcher-btn {
-  border-top-left-radius: $spacing-02;
-  border-bottom-left-radius: $spacing-02;
-  border-left: rem(1px) solid $border-inverse;
+  border-end-start-radius: $spacing-02;
+  border-inline-start: rem(1px) solid $border-inverse;
+  border-start-start-radius: $spacing-02;
 
   &::before {
     content: none;
@@ -110,7 +109,7 @@ $css--plex: true !default;
 
 :host(#{$prefix}-content-switcher-item:last-of-type)
   .#{$prefix}--content-switcher-btn {
-  border-top-right-radius: $spacing-02;
-  border-bottom-right-radius: $spacing-02;
-  border-right: rem(1px) solid $border-inverse;
+  border-end-end-radius: $spacing-02;
+  border-inline-end: rem(1px) solid $border-inverse;
+  border-start-end-radius: $spacing-02;
 }

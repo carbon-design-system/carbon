@@ -48,7 +48,7 @@ export default class CDSTab extends CDSContentSwitcherItem {
    */
   protected _handleSlotChange({ target }: Event) {
     // Retrieve content of the slot to use for aria-label.
-    let content = (target as HTMLSlotElement).assignedNodes();
+    const content = (target as HTMLSlotElement).assignedNodes();
     this.tabTitle = content[0].textContent;
   }
 

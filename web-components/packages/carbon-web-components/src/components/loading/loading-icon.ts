@@ -13,8 +13,8 @@ import LOADING_TYPE from './types';
 
 /**
  * @param Object options The options.
- * @param [options.assistiveText] The assistive text for the spinner icon.
- * @param [options.type] The spinner type.
+ * @param [Object.assistiveText] The assistive text for the spinner icon.
+ * @param [Object.type] The spinner type.
  * @returns The spinner icon.
  */
 export default ({

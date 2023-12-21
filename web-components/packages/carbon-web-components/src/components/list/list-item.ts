@@ -30,6 +30,7 @@ class CDSListItem extends LitElement {
    * Handles `slotchange` event for the `<slot>` for the nested child list.
    *
    * @param event The event.
+   * @param event.target The event target.
    */
   private _handleSlotChangeNested({ target }: Event) {
     this._hasNestedChild =

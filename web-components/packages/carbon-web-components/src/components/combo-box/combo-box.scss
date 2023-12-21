@@ -25,9 +25,9 @@ $css--plex: true !default;
   outline: none;
 
   .#{$prefix}--assistive-text {
+    inset-block-start: -100%;
     // Hides screen reader cursor
-    left: -100%;
-    top: -100%;
+    inset-inline-start: -100%;
   }
 
   .#{$prefix}--list-box__field {
@@ -35,15 +35,17 @@ $css--plex: true !default;
   }
 
   .#{$prefix}--list-box__menu {
+    inset-block-start: 100%;
+    margin-block-start: 1px;
     outline: none;
-    top: 100%;
-    margin-top: 1px;
   }
 }
 
 :host(#{$prefix}-combo-box[isClosable]) {
   .#{$prefix}--list-box__invalid-icon {
-    right: rem(66px) !important;
+    /* stylelint-disable declaration-no-important */
+    inset-inline-end: to-rem(66px) !important;
+    /* stylelint-enable declaration-no-important */
   }
 }
 
@@ -72,7 +74,7 @@ $css--plex: true !default;
   display: block;
 
   .#{$prefix}--list-box__menu-item__option {
-    height: auto;
+    block-size: auto;
   }
 
   &:hover {
@@ -105,20 +107,18 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-combo-box-item[size='sm']) {
-  height: $spacing-07;
+  block-size: $spacing-07;
 
   .#{$prefix}--list-box__menu-item__option {
-    padding-top: rem(7px);
-    padding-bottom: rem(7px);
+    padding-block: to-rem(7px);
   }
 }
 
 :host(#{$prefix}-combo-box-item[size='lg']) {
-  height: $spacing-09;
+  block-size: $spacing-09;
 
   .#{$prefix}--list-box__menu-item__option {
-    padding-top: rem(15px);
-    padding-bottom: rem(15px);
+    padding-block: to-rem(15px);
   }
 }
 
@@ -148,12 +148,6 @@ $css--plex: true !default;
 
 :host(#{$prefix}-combo-box[warn]),
 :host(#{$prefix}-combo-box[invalid]) {
-  ::slotted(#{$prefix}-slug) {
-    inset-inline-end: $spacing-10;
-  }
-}
-
-:host(#{$prefix}-combo-box[slug][isclosable]) {
   ::slotted(#{$prefix}-slug) {
     inset-inline-end: $spacing-10;
   }

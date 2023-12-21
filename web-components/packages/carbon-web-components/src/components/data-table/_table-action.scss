@@ -21,8 +21,9 @@
 :host(#{$prefix}-table-toolbar) {
   @extend .#{$prefix}--table-toolbar;
 
-  display: table-caption;
   z-index: 1;
+
+  display: table-caption;
 }
 
 :host(#{$prefix}-table-toolbar-content) {
@@ -32,9 +33,9 @@
 
   ::slotted(#{$prefix}-overflow-menu) {
     display: flex;
+    block-size: $spacing-09;
     cursor: pointer;
-    height: $spacing-09;
-    width: $spacing-09;
+    inline-size: $spacing-09;
     transition: background-color $duration-fast-02 motion(entrance, productive);
   }
 }
@@ -58,29 +59,29 @@
   transition: flex 175ms $standard-easing;
 
   .#{$prefix}--search {
-    width: 100%;
-    height: 100%;
+    block-size: 100%;
+    inline-size: 100%;
 
     .#{$prefix}--search-magnifier {
-      left: 0;
       cursor: pointer;
+      inset-inline-start: 0;
       pointer-events: all;
       transition: background $duration-fast-02 motion(entrance, productive);
 
       &-icon {
-        height: auto;
-        width: auto;
+        block-size: auto;
+        inline-size: auto;
       }
     }
 
     .#{$prefix}--search-input {
-      border-bottom: 0;
+      border-block-end: 0;
     }
 
     .#{$prefix}--search-close {
       &::before {
-        width: 0;
         background-color: $background-hover;
+        inline-size: 0;
       }
 
       :hover {
@@ -94,15 +95,15 @@
   }
 
   svg {
-    left: 0;
+    inset-inline-start: 0;
   }
 }
 
 :host(#{$prefix}-table-toolbar-search[size='xs']),
 :host(#{$prefix}-table-toolbar-search[size='sm']) {
   svg {
-    left: $spacing-03;
     padding: 0;
+    inset-inline-start: $spacing-03;
   }
 }
 
@@ -115,11 +116,10 @@
 :host(#{$prefix}-table-toolbar-search[size='xs'][expanded]),
 :host(#{$prefix}-table-toolbar-search[size='sm'][expanded]) {
   svg {
-    left: $spacing-05;
+    inset-inline-start: $spacing-05;
   }
 }
 
-:host(#{$prefix}-table-toolbar-search[persistent]:hover),
 :host(#{$prefix}-table-toolbar-search[persistent]:hover) {
   .#{$prefix}--search-input {
     background-color: $field-hover;
@@ -128,6 +128,7 @@
 
 :host(#{$prefix}-table-batch-actions) {
   @extend .#{$prefix}--batch-actions;
+
   box-sizing: border-box;
 
   &[active] {

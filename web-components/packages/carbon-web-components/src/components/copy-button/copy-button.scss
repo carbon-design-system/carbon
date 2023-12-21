@@ -29,9 +29,9 @@ $css--plex: true !default;
 }
 
 .#{$prefix}--snippet__icon {
-  width: $spacing-05;
-  height: $spacing-05;
+  block-size: $spacing-05;
   fill: $icon-primary;
+  inline-size: $spacing-05;
   transition: all $duration-fast-01 motion(standard, productive);
 }
 

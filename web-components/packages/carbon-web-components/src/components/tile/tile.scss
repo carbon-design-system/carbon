@@ -69,26 +69,35 @@ $css--plex: true !default;
       color: inherit;
     }
   }
+
+  ::slotted(#{$prefix}-slug) {
+    pointer-events: none;
+  }
 }
 
 :host(#{$prefix}-radio-tile) {
   @include emit-layout-tokens();
 
   display: block;
-  outline: none;
 
-  margin-bottom: $spacing-03;
+  margin-block-end: $spacing-03;
+  outline: none;
 }
 
 :host(#{$prefix}-selectable-tile) {
   @include emit-layout-tokens();
 
-  display: content;
   position: relative;
+
+  display: content;
   outline: none;
 
   .#{$prefix}--tile__chevron {
     @extend .#{$prefix}--tile__chevron;
+  }
+
+  ::slotted(#{$prefix}-slug) {
+    inset-inline-end: $spacing-08;
   }
 }
 
@@ -122,7 +131,7 @@ $css--plex: true !default;
   }
 
   .#{$prefix}-ce--expandable-tile--below-the-fold-content {
-    max-height: 0;
+    max-block-size: 0;
     transition: max-height $duration-fast-02 motion(standard, productive);
   }
 }
@@ -152,10 +161,10 @@ $css--plex: true !default;
 
 :host(#{$prefix}-expandable-tile:not([with-interactive])) {
   .#{$prefix}--tile__chevron {
-    background: none;
     border: none;
-    outline: none;
+    background: none;
     cursor: pointer;
+    outline: none;
   }
 }
 
@@ -213,12 +222,6 @@ $css--plex: true !default;
   opacity: 1;
 }
 
-:host(#{$prefix}-selectable-tile) {
-  ::slotted(#{$prefix}-slug) {
-    inset-inline-end: $spacing-08;
-  }
-}
-
 :host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile--is-selected {
   border: 1px solid $layer-selected-inverse;
   .#{$prefix}--tile__checkmark {
@@ -228,16 +231,8 @@ $css--plex: true !default;
 
 :host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile--is-selected::after {
   @include callout-gradient('selected');
-}
 
-:host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile--is-selected::after {
   opacity: 1;
-}
-
-:host(#{$prefix}-clickable-tile) {
-  ::slotted(#{$prefix}-slug) {
-    pointer-events: none;
-  }
 }
 
 :host(#{$prefix}-expandable-tile[slug]) {
@@ -251,6 +246,6 @@ $css--plex: true !default;
   @extend .#{$prefix}--tile--slug-rounded;
 
   .#{$prefix}--tile__chevron {
-    border-bottom-right-radius: $spacing-05;
+    border-end-end-radius: $spacing-05;
   }
 }

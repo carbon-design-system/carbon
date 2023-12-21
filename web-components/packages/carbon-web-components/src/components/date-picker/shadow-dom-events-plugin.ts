@@ -84,7 +84,6 @@ const adjustDate = (
 };
 
 /**
- * @param config Plugin configuration.
  * @returns
  *   A Flatpickr plugin to handle events.
  *   Some event handlers in Flatpickr won't work is the calendar dropdown is put in shadow DOM, due to event retargetting.

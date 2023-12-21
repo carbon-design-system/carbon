@@ -21,9 +21,9 @@ $css--plex: true !default;
   outline: none;
 
   .#{$prefix}--assistive-text {
+    inset-block-start: -100%;
     // Hides screen reader cursor
-    left: -100%;
-    top: -100%;
+    inset-inline-start: -100%;
   }
 
   .#{$prefix}--label[hidden] {
@@ -31,13 +31,13 @@ $css--plex: true !default;
   }
 
   .#{$prefix}--list-box__menu {
-    top: 100%;
-    margin-top: 1px;
+    inset-block-start: 100%;
+    margin-block-start: 1px;
   }
 
   .#{$prefix}--text-input {
     border: none;
-    padding-left: 0;
+    padding-inline-start: 0;
 
     &:focus {
       outline: none;
@@ -63,7 +63,7 @@ $css--plex: true !default;
   @extend .#{$prefix}--list-box--up;
 
   .#{$prefix}--list-box__menu {
-    top: auto;
+    inset-block-start: auto;
   }
 }
 
@@ -87,7 +87,7 @@ $css--plex: true !default;
 
 :host(#{$prefix}-multi-select[type='inline'][warn])
   .#{$prefix}--list-box__field {
-  padding-right: rem(56px);
+  padding-inline-end: rem(56px);
 }
 
 :host(#{$prefix}-multi-select-item) {
@@ -98,8 +98,8 @@ $css--plex: true !default;
   .#{$prefix}--checkbox-label {
     display: inline-block;
     overflow: hidden;
-    width: 100%;
-    padding-left: rem(28px);
+    inline-size: 100%;
+    padding-inline-start: rem(28px);
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -108,10 +108,10 @@ $css--plex: true !default;
     box-sizing: border-box;
 
     .#{$prefix}--checkbox-wrapper {
-      width: 100%;
-      height: 100%;
       display: flex;
       align-items: center;
+      block-size: 100%;
+      inline-size: 100%;
     }
 
     > .#{$prefix}--form-item {
@@ -129,20 +129,18 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-multi-select-item[size='sm']) {
-  height: fit-content;
+  block-size: fit-content;
   .#{$prefix}--list-box__menu-item__option {
-    height: $spacing-07;
-    padding-top: rem(7px);
-    padding-bottom: rem(7px);
+    block-size: $spacing-07;
+    padding-block: rem(7px);
   }
 }
 
 :host(#{$prefix}-multi-select-item[size='lg']) {
-  height: fit-content;
+  block-size: fit-content;
   .#{$prefix}--list-box__menu-item__option {
-    height: $spacing-09;
-    padding-top: rem(15px);
-    padding-bottom: rem(15px);
+    block-size: $spacing-09;
+    padding-block: rem(15px);
   }
 }
 

@@ -176,7 +176,7 @@ const attachEventListeners = (
 };
 
 /**
- * @param name The tag name of the custom element.
+ * @param displayName The tag name of the custom element.
  * @param descriptor A descriptor for a set of React props for attributes of a custom element.
  * @returns A React component working as a wrapper for the given custom element.
  * @example
@@ -213,7 +213,7 @@ const attachEventListeners = (
  * );
  */
 const createReactCustomElementType = (
-  name: string,
+  displayName: string,
   descriptor: CustomElementPropsDescriptor
 ) => {
   /**
@@ -301,13 +301,14 @@ const createReactCustomElementType = (
       const { children, innerRef, ...props } = this.props;
       const mergedRef = mergeRefs<HTMLElement>(innerRef, this._handleElemRef);
       return createElement(
-        name,
+        displayName,
         { ref: mergedRef, ...convertProps(props, descriptor) },
         children
       );
     }
   }
 
+  // eslint-disable-next-line react/display-name
   return forwardRef<HTMLElement, CustomElementTypeProps>((props, ref) =>
     createElement(CustomElementType, { ...props, innerRef: ref })
   );

@@ -59,15 +59,15 @@
 }
 
 .mb-3 {
-  margin-bottom: $spacing-05;
+  margin-block-end: $spacing-05;
 }
 
 .mt-9 {
-  padding-top: $spacing-09;
+  padding-block-start: $spacing-09;
 }
 
 .mt-10 {
-  padding-top: $spacing-10;
+  padding-block-start: $spacing-10;
 }
 
 .p-3 {
@@ -78,9 +78,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: $spacing-07;
-  height: $spacing-07;
   border: 1px solid theme.$border-subtle;
+  block-size: $spacing-07;
+  inline-size: $spacing-07;
 }
 
 #{$prefix}-popover .playground-trigger svg {
@@ -89,7 +89,8 @@
 
 #{$prefix}-popover .popover-title {
   @include type.type-style('heading-compact-01');
-  margin-bottom: $spacing-01;
+
+  margin-block-end: $spacing-01;
 }
 
 #{$prefix}-popover .popover-details {
@@ -97,27 +98,27 @@
 }
 
 #{$prefix}-popover .popover-story {
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
+  block-size: 100%;
+  inline-size: 100%;
 }
 
 .popover-tabtip-story .p-3 {
-  width: 16rem;
+  inline-size: 16rem;
 }
 
 .popover-tabtip-story #{$prefix}-popover .#{$prefix}--radio-button-wrapper {
-  margin-bottom: $spacing-03;
+  margin-block-end: $spacing-03;
 }
 
 .popover-tabtip-story hr {
   border: none;
-  background: theme.$border-subtle;
-  height: 1px;
   margin: $spacing-03 0 $spacing-05;
+  background: theme.$border-subtle;
+  block-size: 1px;
 }
 
 .popover-tabtip-story #{$prefix}-popover:last-of-type {
-  margin-left: 15rem;
+  margin-inline-start: 15rem;
 }

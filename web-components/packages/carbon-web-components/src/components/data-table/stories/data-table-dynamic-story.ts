@@ -49,7 +49,7 @@ const addRow = () => {
     status: 'Starting',
   };
 
-  for (let key in templateRow) {
+  for (const key in templateRow) {
     if (Object.prototype.hasOwnProperty.call(templateRow, key)) {
       const cell = document.createElement('cds-table-cell');
       cell.textContent = templateRow[key];

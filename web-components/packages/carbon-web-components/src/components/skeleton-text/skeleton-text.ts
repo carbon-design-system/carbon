@@ -63,7 +63,7 @@ class CDSSkeletonText extends LitElement {
       const widthNum = parseInt(this.width, 10);
       const widthPx = this.width.includes('px');
       const widthPercent = this.width.includes('%');
-      const lines = Array.apply(null, Array(lineCount));
+      const lines = Array.apply(Array(lineCount));
       return html`${lines.map((_, i) => {
         const randomWidth =
           (widthPercent && `${getRandomInt(0, 75, i)}px`) ||

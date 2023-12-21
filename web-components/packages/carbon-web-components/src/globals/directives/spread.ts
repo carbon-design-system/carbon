@@ -36,7 +36,6 @@ class SpreadDirective extends Directive {
    * The update function that handles the attribute setting.
    *
    * @param part an object with an API to manage the element's DOM
-   * @param attributesInfo The key-value pair to be set as the attribute name/value pairs.
    * @returns the render function
    */
   update(part: AttributePart, [attributesInfo]: DirectiveParameters<this>) {

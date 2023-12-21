@@ -85,7 +85,7 @@ $css--plex: true !default;
     #{$prefix}-actionable-notification-button[hide-close-button][kind='ghost']
   )
   button {
-  margin-right: $spacing-03;
+  margin-inline-end: $spacing-03;
 }
 
 :host(#{$prefix}-actionable-notification:not([inline])) {
@@ -94,15 +94,15 @@ $css--plex: true !default;
 
 :host(#{$prefix}-actionable-notification[inline][low-contrast])::before {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   box-sizing: border-box;
   border-width: 1px 1px 1px 0;
   border-style: solid;
+  block-size: 100%;
   content: '';
   filter: opacity(0.4);
+  inline-size: 100%;
+  inset-block-start: 0;
+  inset-inline-start: 0;
   pointer-events: none;
 }
 

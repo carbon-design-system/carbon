@@ -12,7 +12,7 @@ import { Plugin } from 'flatpickr/dist/types/options';
 import CDSDatePicker from './date-picker';
 
 /**
- * @param config Plugin configuration.
+ * @param datePicker Plugin configuration.
  * @returns A Flatpickr plugin to handshake states with `<cds-date-picker>`.
  */
 export default (datePicker: CDSDatePicker): Plugin =>
@@ -53,6 +53,8 @@ export default (datePicker: CDSDatePicker): Plugin =>
     /**
      * Registers this Flatpickr plugin.
      *
+     * @param _selectedDates The selected dates.
+     * @param _value The value.
      * @param calendar The Flatpickr instance.
      */
     const register = (_selectedDates, _value, calendar: FlatpickrInstance) => {

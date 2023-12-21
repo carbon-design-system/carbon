@@ -29,9 +29,9 @@ $css--plex: true !default;
   @extend .#{$prefix}--layout--size-sm;
 
   .#{$prefix}--tag__close-icon {
-    width: rem(18px);
-    height: rem(18px);
-    margin-left: rem(5px);
+    block-size: rem(18px);
+    inline-size: rem(18px);
+    margin-inline-start: rem(5px);
   }
 }
 
@@ -94,7 +94,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-tag[filter][size='sm']) {
-  padding-right: 0;
+  padding-inline-end: 0;
 }
 
 :host(#{$prefix}-tag[filter][open]) {
@@ -120,6 +120,7 @@ $css--plex: true !default;
 :host(#{$prefix}-tag.#{$prefix}--skeleton) {
   @include skeleton;
 
-  width: rem(60px);
   overflow: hidden;
+
+  inline-size: rem(60px);
 }

@@ -78,7 +78,9 @@ export default (config: DatePickerMonthSelectPluginConfig): Plugin =>
         classFlatpickrCurrentMonth,
       } = config;
       monthElements.forEach((elem) => {
-        if (!elem.parentNode) return;
+        if (!elem.parentNode) {
+          return;
+        }
         elem.parentNode.removeChild(elem);
       });
       monthElements.splice(

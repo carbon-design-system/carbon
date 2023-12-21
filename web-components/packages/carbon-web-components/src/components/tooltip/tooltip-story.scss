@@ -17,8 +17,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 250px;
   margin: auto;
+  min-block-size: 250px;
 }
 
 .sb-tooltip-trigger {
@@ -27,9 +27,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: $spacing-07;
-  height: $spacing-07;
   border: 1px solid theme.$border-subtle;
+  block-size: $spacing-07;
+  inline-size: $spacing-07;
 }
 
 .sb-tooltip-trigger svg {

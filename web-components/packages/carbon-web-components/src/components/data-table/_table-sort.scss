@@ -16,19 +16,18 @@
 
 :host(#{$prefix}-table-header-row)
   ::slotted(#{$prefix}-table-header-cell[sort-direction]) {
-  height: $spacing-09;
-  padding-left: 0;
-  padding-right: 0;
+  block-size: $spacing-09;
+  padding-inline: 0;
 }
 
 :host(#{$prefix}-table-header-cell[sort-direction]:first-of-type)
   .#{$prefix}--table-sort {
-  padding-left: $spacing-05;
+  padding-inline-start: $spacing-05;
 }
 
 :host(#{$prefix}-table-header-cell[sort-direction][expandable][selection-name])
   .#{$prefix}--table-sort {
-  padding-left: 0;
+  padding-inline-start: 0;
 }
 
 //
@@ -60,7 +59,6 @@
 
 :host(#{$prefix}-table-header-cell[sort-direction]) {
   ::slotted(#{$prefix}-slug) {
-    margin-inline-end: auto;
-    margin-inline-start: $spacing-03;
+    margin-inline: $spacing-03 auto;
   }
 }

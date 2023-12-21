@@ -7,36 +7,50 @@
 
 :host(#{$prefix}-table-expanded-row) {
   display: table-row;
-  height: 0;
+  block-size: 0;
   transition: height $duration-moderate-01 motion(standard);
 
   ::slotted(*) {
     color: $text-secondary;
   }
+  @media screen and (prefers-reduced-motion: reduce) {
+    td {
+      padding: 0;
+      border-block-end-color: $border-subtle;
+      padding-inline-start: $spacing-10;
+      transition: none;
+      vertical-align: middle;
+
+      .#{$prefix}--child-row-inner-container {
+        overflow: hidden;
+        block-size: 0;
+      }
+    }
+  }
 
   td {
-    border-bottom-color: $border-subtle;
-    vertical-align: middle;
-    transition: all $duration-fast-02 motion(standard, productive);
     padding: 0;
-    padding-left: $spacing-10;
+    border-block-end-color: $border-subtle;
+    padding-inline-start: $spacing-10;
+    transition: all $duration-fast-02 motion(standard, productive);
+    vertical-align: middle;
 
     .#{$prefix}--child-row-inner-container {
       overflow: hidden;
-      height: 0;
+      block-size: 0;
     }
   }
 }
 
 :host(#{$prefix}-table-expanded-row[expanded]) {
-  height: $spacing-09;
+  block-size: $spacing-09;
 
   td {
-    border-bottom: 1px solid $border-subtle;
-    height: auto;
+    block-size: auto;
+    border-block-end: 1px solid $border-subtle;
 
     .#{$prefix}--child-row-inner-container {
-      height: auto;
+      block-size: auto;
     }
   }
 }

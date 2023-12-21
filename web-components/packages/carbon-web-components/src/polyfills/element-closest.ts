@@ -11,6 +11,8 @@ if (typeof Element.prototype.closest !== 'function') {
   Element.prototype.closest = function closestElement(selector: string) {
     const doc = this.ownerDocument;
     for (
+      // @ts-ignore
+      // eslint-disable-next-line @typescript-eslint/no-this-alias
       let traverse: Node | null = this;
       traverse && traverse !== doc;
       traverse = traverse.parentNode

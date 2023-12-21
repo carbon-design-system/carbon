@@ -108,7 +108,7 @@ export default (config: Config): Plugin => {
 
     return Object.assign(origRangePlugin, {
       onReady() {
-        (origOnReady as Function).call(this);
+        origOnReady.call(this);
         const { ignoredFocusElements } = fp.config;
         ignoredFocusElements.push(
           ...ignoredFocusElements

@@ -65,7 +65,7 @@ class CDSHeaderNavItem extends FocusMixin(LitElement) {
    * As child of <ul>, this element must have role of listitem
    */
   @property({ reflect: true })
-  role: string = 'listitem';
+  role = 'listitem';
 
   render() {
     const { ariaCurrent, href, isActive, title, rel, target } = this;

@@ -38,9 +38,9 @@ $css--plex: true !default;
     .#{$prefix}--form-requirement {
       display: block;
       overflow: visible;
-      max-height: 100%;
-      margin-top: 0;
-      margin-left: $spacing-03;
+      margin-block-start: 0;
+      margin-inline-start: $spacing-03;
+      max-block-size: 100%;
     }
   }
 }
@@ -70,11 +70,11 @@ $css--plex: true !default;
 
 :host(#{$prefix}-radio-button[data-table]) {
   .#{$prefix}--radio-button__label {
-    width: rem(28px);
+    inline-size: rem(28px);
   }
 
   .#{$prefix}--radio-button__appearance {
-    margin-right: -#{$spacing-01};
+    margin-inline-end: -#{$spacing-01};
   }
 }
 
@@ -104,8 +104,7 @@ $css--plex: true !default;
   }
 
   .#{$prefix}--radio-button__appearance {
-    margin-right: 0;
-    margin-left: $spacing-03;
+    margin-inline: $spacing-03 0;
   }
 }
 
@@ -113,18 +112,16 @@ $css--plex: true !default;
   .#{$prefix}--radio-button__label-text {
     display: flex;
   }
+
+  ::slotted(#{$prefix}-slug[inline]) {
+    line-height: inherit;
+    margin-block-start: to-rem(-1px);
+  }
 }
 
 :host(#{$prefix}-radio-button-group) .#{$prefix}--radio-button-group--slug,
 :host(#{$prefix}-radio-button[slug]) {
   ::slotted(#{$prefix}-slug) {
     margin-inline-start: $spacing-03;
-  }
-}
-
-:host(#{$prefix}-radio-button[slug]) {
-  ::slotted(#{$prefix}-slug[inline]) {
-    line-height: inherit;
-    margin-block-start: to-rem(-1px);
   }
 }

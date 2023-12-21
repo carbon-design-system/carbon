@@ -48,6 +48,8 @@ export default class CDSContentSwitcher extends LitElement {
    * Handles `mouseover`/`mouseout` events on `<slot>`.
    *
    * @param event The event.
+   * @param event.target The event target.
+   * @param event.type The event type.
    */
   private _handleHover({ target, type }: MouseEvent) {
     const { selectorItem } = this.constructor as typeof CDSContentSwitcher;
@@ -94,6 +96,7 @@ export default class CDSContentSwitcher extends LitElement {
    * Handles `click` event on the top-level element in the shadow DOM.
    *
    * @param event The event.
+   * @param event.target The event target.
    */
   protected _handleClick({ target }: MouseEvent) {
     this._handleUserInitiatedSelectItem(target as CDSContentSwitcherItem);
@@ -103,6 +106,7 @@ export default class CDSContentSwitcher extends LitElement {
    * Handles `keydown` event on the top-level element in the shadow DOM.
    *
    * @param event The event.
+   * @param event.key The event key.
    */
   protected _handleKeydown({ key }: KeyboardEvent) {
     if (key in NAVIGATION_DIRECTION) {

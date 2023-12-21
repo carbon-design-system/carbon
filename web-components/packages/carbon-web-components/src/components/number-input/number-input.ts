@@ -221,7 +221,7 @@ class CDSNumberInput extends CDSTextInput {
       class: `${prefix}--number__invalid ${prefix}--number__invalid--warning`,
     });
 
-    let normalizedProps = {
+    const normalizedProps = {
       disabled: !this.readonly && this.disabled,
       invalid: !this.readonly && !isValid,
       warn: !this.readonly && isValid && this.warn,

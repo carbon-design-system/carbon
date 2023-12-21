@@ -51,7 +51,6 @@ export default (config: DatePickerAppendToPluginConfig): Plugin =>
     /**
      * Registers this Flatpickr plugin.
      *
-     * @param calendar The Flatpickr instance.
      */
     const register = () => {
       fp.loadedPlugins.push('carbonFlatpickrAppendToPlugin');

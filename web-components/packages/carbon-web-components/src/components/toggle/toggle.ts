@@ -40,7 +40,9 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
    */
   protected _handleChange() {
     const { checked, indeterminate } = this._checkboxNode;
-    if (this.disabled || this.readOnly) return;
+    if (this.disabled || this.readOnly) {
+      return;
+    }
     this.checked = !checked;
     this.indeterminate = indeterminate;
     const { eventChange } = this.constructor as typeof CDSCheckbox;

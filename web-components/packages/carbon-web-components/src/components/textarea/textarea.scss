@@ -15,16 +15,6 @@ $css--plex: true !default;
   @include emit-layout-tokens();
 
   outline: none;
-}
-
-:host(#{$prefix}-textarea[cols='0']),
-:host(#{$prefix}-textarea:not([cols])),
-:host(#{$prefix}-textarea) textarea[cols='0'],
-:host(#{$prefix}-textarea) textarea:not([cols]) {
-  width: 100%;
-}
-
-:host(#{$prefix}-textarea) {
   ::slotted(#{$prefix}-slug) {
     position: absolute;
     inset-block-start: $spacing-04;
@@ -36,6 +26,13 @@ $css--plex: true !default;
     inset-inline-end: $spacing-03;
     transform: translate(0);
   }
+}
+
+:host(#{$prefix}-textarea[cols='0']),
+:host(#{$prefix}-textarea:not([cols])),
+:host(#{$prefix}-textarea) textarea[cols='0'],
+:host(#{$prefix}-textarea) textarea:not([cols]) {
+  inline-size: 100%;
 }
 
 :host(#{$prefix}-textarea[warn]),

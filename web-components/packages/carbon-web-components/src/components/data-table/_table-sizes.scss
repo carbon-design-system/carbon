@@ -11,25 +11,23 @@
 
 :host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-row[size='xs']),
 :host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='xs']) {
-  height: $spacing-06;
+  block-size: $spacing-06;
 }
 
 :host(#{$prefix}-table-header-row[size='xs']),
 :host(#{$prefix}-table-row[size='xs']) {
   ::slotted(#{$prefix}-table-header-cell) {
-    height: $spacing-06;
+    block-size: $spacing-06;
   }
 
   ::slotted(#{$prefix}-table-cell) {
-    padding-top: $spacing-01;
-    padding-bottom: $spacing-01;
-    padding-left: $spacing-05;
+    padding-block: $spacing-01;
+    padding-inline-start: $spacing-05;
   }
 
   .#{$prefix}--table-expand {
-    padding-top: 0;
-    padding-bottom: 0;
-    height: $spacing-06;
+    block-size: $spacing-06;
+    padding-block: 0;
   }
 }
 
@@ -39,28 +37,26 @@
 
 :host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-row[size='sm']),
 :host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='sm']) {
-  height: $spacing-07;
+  block-size: $spacing-07;
 }
 
 :host(#{$prefix}-table-header-row[size='sm']),
 :host(#{$prefix}-table-row[size='sm']) {
   ::slotted(#{$prefix}-table-header-cell) {
-    height: $spacing-07;
+    block-size: $spacing-07;
   }
 
   ::slotted(#{$prefix}-table-cell) {
-    padding-top: rem(7px);
-    padding-bottom: rem(6px);
-    padding-left: $spacing-05;
+    padding-block: rem(7px) rem(6px);
+    padding-inline-start: $spacing-05;
   }
 
   .#{$prefix}--table-expand {
-    padding-top: 0;
-    padding-bottom: 0;
+    padding-block: 0;
   }
 
   ::slotted(#{$prefix}-overflow-menu) {
-    height: $spacing-07;
+    block-size: $spacing-07;
   }
 }
 
@@ -70,27 +66,25 @@
 
 :host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-row[size='md']),
 :host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='md']) {
-  height: $spacing-08;
+  block-size: $spacing-08;
 }
 
 :host(#{$prefix}-table-row[size='md']),
 :host(#{$prefix}-table-header-row[size='md']) {
   ::slotted(#{$prefix}-table-header-cell) {
-    height: $spacing-08;
+    block-size: $spacing-08;
   }
   ::slotted(#{$prefix}-table-cell) {
-    padding-top: rem(7px);
-    padding-left: $spacing-05;
-    padding-bottom: rem(6px);
+    padding-block: rem(7px) rem(6px);
+    padding-inline-start: $spacing-05;
   }
 
   .#{$prefix}--table-expand {
-    padding-top: $spacing-02;
-    padding-bottom: $spacing-02;
+    padding-block: $spacing-02;
   }
 
   ::slotted(#{$prefix}-overflow-menu) {
-    height: $spacing-08;
+    block-size: $spacing-08;
   }
 }
 
@@ -100,7 +94,7 @@
 
 :host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-row[size='lg']),
 :host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='lg']) {
-  height: $spacing-09;
+  block-size: $spacing-09;
 }
 
 //
@@ -109,44 +103,43 @@
 
 :host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-row[size='xl']),
 :host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='xl']) {
-  height: $spacing-10;
+  block-size: $spacing-10;
 }
 
 :host(#{$prefix}-table-header-row[size='xl']) {
   ::slotted(#{$prefix}-table-header-cell) {
+    padding-block-start: $spacing-05;
     vertical-align: top;
-    padding-top: $spacing-05;
   }
 }
 
 :host(#{$prefix}-table-header-row[size='xl']),
 :host(#{$prefix}-table-row[size='xl']) {
   ::slotted(#{$prefix}-table-cell) {
-    padding-top: $spacing-05;
+    padding-block-start: $spacing-05;
   }
 
   .#{$prefix}--table-expand {
-    padding-bottom: 1.375rem;
+    padding-block-end: 1.375rem;
   }
 
   .#{$prefix}--table-expand,
   .#{$prefix}--table-column-checkbox {
+    padding-block-start: rem(10px);
     vertical-align: top;
-    padding-top: rem(10px);
   }
 
   &[radio] {
     .#{$prefix}--table-column-checkbox {
-      padding-top: $spacing-05;
+      padding-block-start: $spacing-05;
     }
   }
 }
 
 :host(#{$prefix}-table-expanded-row[size='xl'][expanded]) {
   td {
-    padding-top: $spacing-05;
-    padding-right: $spacing-05;
-    padding-bottom: $spacing-03;
+    padding-block: $spacing-05 $spacing-03;
+    padding-inline-end: $spacing-05;
   }
 }
 
@@ -157,12 +150,12 @@
   ::slotted(#{$prefix}-table-toolbar-search),
   ::slotted(#{$prefix}-overflow-menu),
   ::slotted(#{$prefix}-button) {
-    min-height: $spacing-07;
-    height: $spacing-07;
+    block-size: $spacing-07;
+    min-block-size: $spacing-07;
   }
   ::slotted(#{$prefix}-table-toolbar-search),
   ::slotted(#{$prefix}-overflow-menu) {
-    width: $spacing-07;
+    inline-size: $spacing-07;
   }
 }
 
@@ -172,13 +165,13 @@
   ::slotted(#{$prefix}-table-toolbar-search),
   ::slotted(#{$prefix}-overflow-menu),
   ::slotted(#{$prefix}-button) {
-    min-height: $spacing-07;
-    height: $spacing-07;
+    block-size: $spacing-07;
+    min-block-size: $spacing-07;
   }
 
   ::slotted(#{$prefix}-table-toolbar-search),
   ::slotted(#{$prefix}-overflow-menu) {
-    width: $spacing-07;
+    inline-size: $spacing-07;
   }
 }
 
@@ -204,8 +197,7 @@
 
 :host(#{$prefix}-table-header-row[selection-name][expandable][size='xl']) {
   .#{$prefix}--table-column-checkbox {
-    padding-left: rem(6px);
-    padding-right: rem(6px);
+    padding-inline: rem(6px);
   }
 }
 
@@ -215,12 +207,12 @@
 :host(#{$prefix}-table-cell[size='xs']),
 :host(#{$prefix}-table-cell[size='sm']) {
   ::slotted(#{$prefix}-overflow-menu) {
-    height: calc(100% + 1px);
+    block-size: calc(100% + 1px);
   }
 }
 
 :host(#{$prefix}-table-cell[size='md']) {
   ::slotted(#{$prefix}-overflow-menu) {
-    height: $spacing-08;
+    block-size: $spacing-08;
   }
 }
