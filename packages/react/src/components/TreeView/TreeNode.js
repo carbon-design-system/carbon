@@ -234,7 +234,8 @@ const TreeNode = React.forwardRef(
 
 TreeNode.propTypes = {
   /**
-   * The value of the active node in the tree
+   * **Note:** this is controlled by the parent TreeView component, do not set manually.
+   * The ID of the active node in the tree
    */
   active: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
@@ -249,7 +250,8 @@ TreeNode.propTypes = {
   className: PropTypes.string,
 
   /**
-   * TreeNode depth to determine spacing, automatically calculated by default
+   * * **Note:** this is controlled by the parent TreeView component, do not set manually.
+   * TreeNode depth to determine spacing
    */
   depth: PropTypes.number,
 
@@ -295,6 +297,7 @@ TreeNode.propTypes = {
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
+   * **Note:** this is controlled by the parent TreeView component, do not set manually.
    * Array containing all selected node IDs in the tree
    */
   selected: PropTypes.arrayOf(
