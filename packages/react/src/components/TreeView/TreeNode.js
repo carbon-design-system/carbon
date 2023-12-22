@@ -21,6 +21,7 @@ const TreeNode = React.forwardRef(
       className,
       depth,
       disabled,
+      id: nodeId,
       isExpanded,
       label,
       onNodeFocusEvent,
@@ -34,7 +35,7 @@ const TreeNode = React.forwardRef(
     },
     ref
   ) => {
-    const { current: id } = useRef(rest.id || uniqueId());
+    const { current: id } = useRef(nodeId || uniqueId());
     const [expanded, setExpanded] = useState(isExpanded);
     const currentNode = useRef(null);
     const currentNodeLabel = useRef(null);
@@ -259,6 +260,11 @@ TreeNode.propTypes = {
    * Specify if the TreeNode is disabled
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Specify the TreeNode's ID. Must be unique in the DOM and is used for props.active and props.selected
+   */
+  id: PropTypes.string,
 
   /**
    * Specify if the TreeNode is expanded (only applicable to parent nodes)
