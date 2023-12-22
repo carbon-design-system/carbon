@@ -220,7 +220,8 @@ const Menu = React.forwardRef(function Menu(
     // if 'axes.x.anchor' is lower than 87 switch render side
     if (
       (menuAlignment === 'bottom-right' || menuAlignment === 'top-right') &&
-      axes.x.anchor >= 87
+      axes.x.anchor >= 87 &&
+      actionButtonWidth < axes.x.size
     ) {
       const diff = axes.x.anchor + axes.x.reversedAnchor;
       axes.x.anchor = axes.x.anchor + diff;

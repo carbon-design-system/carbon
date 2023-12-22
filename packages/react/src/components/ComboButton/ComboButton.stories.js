@@ -30,7 +30,7 @@ export default {
 
 export const Default = () => (
   <ComboButton label="Primary action">
-    <MenuItem label="Second action" />
+    <MenuItem label="Second action with a long label description" />
     <MenuItem label="Third action" />
     <MenuItem label="Fourth action" disabled />
   </ComboButton>
@@ -38,7 +38,7 @@ export const Default = () => (
 
 export const WithDanger = () => (
   <ComboButton label="Primary action">
-    <MenuItem label="Second action" />
+    <MenuItem label="Second action with a long label description" />
     <MenuItem label="Third action" />
     <MenuItem label="Fourth action" />
     <MenuItemDivider />
@@ -51,6 +51,61 @@ export const WithIcons = () => (
     <MenuItem label="Save as a copy" renderIcon={Copy} />
     <MenuItem label="Export" renderIcon={Export} />
   </ComboButton>
+);
+
+export const WithMenuAlignment = () => (
+  <>
+    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <ComboButton label="Bottom" menuAlignment="bottom">
+        <MenuItem label="Second action with a long label description" />
+        <MenuItem label="Third action" />
+        <MenuItem label="Fourth action" disabled />
+      </ComboButton>
+
+      <ComboButton label="Bottom left" menuAlignment="bottom-left">
+        <MenuItem label="Second action with a long label description" />
+        <MenuItem label="Third action" />
+        <MenuItem label="Fourth action" disabled />
+      </ComboButton>
+
+      <ComboButton label="Bottom right" menuAlignment="bottom-right">
+        <MenuItem label="Second action with a long label description" />
+        <MenuItem label="Third action" />
+        <MenuItem label="Fourth action" disabled />
+      </ComboButton>
+    </div>
+
+    <div
+      style={{
+        display: 'flex',
+        marginTop: '15rem',
+        justifyContent: 'space-between',
+      }}>
+      <ComboButton label="Top" menuAlignment="top" tooltipAlignment="bottom">
+        <MenuItem label="Second action with a long label description" />
+        <MenuItem label="Third action" />
+        <MenuItem label="Fourth action" disabled />
+      </ComboButton>
+
+      <ComboButton
+        label="Top left"
+        menuAlignment="top-left"
+        tooltipAlignment="bottom">
+        <MenuItem label="Second action with a long label description" />
+        <MenuItem label="Third action" />
+        <MenuItem label="Fourth action" disabled />
+      </ComboButton>
+
+      <ComboButton
+        label="Top right"
+        menuAlignment="top-right"
+        tooltipAlignment="bottom">
+        <MenuItem label="Second action with a long label description" />
+        <MenuItem label="Third action" />
+        <MenuItem label="Fourth action" disabled />
+      </ComboButton>
+    </div>
+  </>
 );
 
 export const Playground = (args) => {

@@ -74,6 +74,8 @@ const ComboButton = React.forwardRef(function ComboButton(
 
   function handleOpen() {
     menuRef.current.style.inlineSize = `${width}px`;
+    menuRef.current.style.minInlineSize = `${width}px`;
+
     if (menuAlignment !== 'bottom' && menuAlignment !== 'top') {
       menuRef.current.style.inlineSize = `fit-content`;
     }
