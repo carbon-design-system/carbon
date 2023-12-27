@@ -246,6 +246,7 @@ const Menu = React.forwardRef(function Menu(
       menuAlignment === 'top-right' ||
       menuAlignment === 'top-left';
 
+    // If the tooltip is not visible in the top, switch to the bototm
     if (topAlignment && options[0] >= 0 && !options[1] && axis === 'y') {
       menu.current.style.transform = 'translate(0)';
     } else if (topAlignment && !options[0] && axis === 'y') {
