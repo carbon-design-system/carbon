@@ -360,24 +360,24 @@ export const HeaderWNavigationActionsAndSideNav = () => (
               </HeaderSideNavItems>
               <SideNavMenu renderIcon={Fade} title="Category title">
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Link
+                  Link 5
                 </SideNavMenuItem>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Link
+                  Link 6
                 </SideNavMenuItem>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Link
+                  Link 7
                 </SideNavMenuItem>
               </SideNavMenu>
               <SideNavMenu renderIcon={Fade} title="Category title">
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Link
+                  Link 8
                 </SideNavMenuItem>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Link
+                  Link 9
                 </SideNavMenuItem>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Link
+                  Link 10
                 </SideNavMenuItem>
               </SideNavMenu>
               <SideNavMenu
@@ -385,15 +385,15 @@ export const HeaderWNavigationActionsAndSideNav = () => (
                 title="Category title"
                 isActive={true}>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Link
+                  Link 11
                 </SideNavMenuItem>
                 <SideNavMenuItem
                   aria-current="page"
                   href="https://www.carbondesignsystem.com/">
-                  Link
+                  Link 12
                 </SideNavMenuItem>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Link
+                  Link 13
                 </SideNavMenuItem>
               </SideNavMenu>
               <SideNavLink
