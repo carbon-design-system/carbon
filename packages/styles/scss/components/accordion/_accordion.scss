@@ -144,7 +144,8 @@ $content-padding: 0 0 0 $spacing-05 !default;
   }
 
   .#{$prefix}--accordion__wrapper {
-    // Properties for when the accordion closes
+    // Properties for when the accordion is closed
+    overflow: hidden;
     padding: 0;
     max-block-size: 0;
     opacity: 0;
@@ -153,7 +154,6 @@ $content-padding: 0 0 0 $spacing-05 !default;
   }
 
   .#{$prefix}--accordion__content {
-    overflow: hidden;
     padding-inline: layout.density('padding-inline');
 
     // Custom breakpoints based on issue #4993
@@ -199,7 +199,8 @@ $content-padding: 0 0 0 $spacing-05 !default;
     overflow: visible;
 
     .#{$prefix}--accordion__wrapper {
-      // Properties for when the accordion opens
+      // Properties for when the accordion is open
+      overflow: visible;
       max-block-size: fit-content;
       opacity: 1;
       padding-block: $spacing-03;
