@@ -211,6 +211,7 @@ describe('Simple date picker', () => {
           default: module.DatePickerInput,
         }))
       );
+
       render(
         <React.Suspense fallback="Loading">
           <LazyDatePicker datePickerType="single">
@@ -222,6 +223,7 @@ describe('Simple date picker', () => {
           </LazyDatePicker>
         </React.Suspense>
       );
+
       const labeledElement = await screen.findByLabelText('Date Picker label');
       expect(labeledElement).toBeInTheDocument();
 
