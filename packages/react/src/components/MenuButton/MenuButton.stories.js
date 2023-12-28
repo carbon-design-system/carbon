@@ -76,7 +76,7 @@ export const Playground = (args) => {
       style={{ display: 'flex', justifyContent: 'center', marginTop: '12rem' }}>
       <MenuButton {...args}>
         <MenuItem
-          label="First actionactionactionactionactionaction"
+          label="First action with a long label description"
           onClick={onClick}
         />
         <MenuItem label="Second action" onClick={onClick} />
