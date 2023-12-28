@@ -4583,6 +4583,19 @@ Map {
         "isRequired": true,
         "type": "string",
       },
+      "menuAlignment": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "size": Object {
         "args": Array [
           Array [
