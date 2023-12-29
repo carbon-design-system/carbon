@@ -6,8 +6,10 @@
  */
 
 import React from 'react';
-import Button from '../Button';
+import { Button, ButtonProps } from '../Button';
 
-const SecondaryButton = (props) => <Button kind="secondary" {...props} />;
+const PrimaryButton = <T extends React.ElementType>(props: ButtonProps<T>) => (
+  <Button kind="primary" {...props} />
+);
 
-export default SecondaryButton;
+export default PrimaryButton;
