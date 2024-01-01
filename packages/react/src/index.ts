@@ -76,6 +76,7 @@ export * from './components/SkeletonIcon';
 export * from './components/SkeletonPlaceholder';
 export * from './components/SkeletonText';
 export * from './components/Slider';
+export * from './components/Stack';
 export * from './components/StructuredList';
 export * from './components/Switch';
 export * from './components/Tab';
@@ -157,7 +158,6 @@ export {
   SlugContent as unstable__SlugContent,
   SlugActions as unstable__SlugActions,
 } from './components/Slug';
-export * from './components/Stack';
 export * from './components/Tooltip';
 export {
   Text as unstable_Text,

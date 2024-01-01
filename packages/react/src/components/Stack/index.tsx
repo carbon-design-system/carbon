@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Stack } from './Stack';
+import Stack from './Stack';
 
 const HStack = React.forwardRef(function HStack(props, ref) {
   return <Stack {...props} ref={ref} orientation="horizontal" />;
@@ -16,4 +16,6 @@ const VStack = React.forwardRef(function VStack(props, ref) {
   return <Stack {...props} ref={ref} orientation="vertical" />;
 });
 
-export { HStack, Stack, VStack };
+export type { StackProps } from './types';
+
+export { HStack, VStack, Stack };

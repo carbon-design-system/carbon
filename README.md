@@ -271,6 +271,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://samuelechinellato.com/#/"><img src="https://avatars.githubusercontent.com/u/49278203?v=4?s=100" width="100px;" alt=""/><br /><sub><b>SamChinellato</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=SamChinellato" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/stevenpatrick009"><img src="https://avatars.githubusercontent.com/u/106097350?v=4?s=100" width="100px;" alt=""/><br /><sub><b>stevenpatrick009</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=stevenpatrick009" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/xalc"><img src="https://avatars.githubusercontent.com/u/18441947?v=4?s=100" width="100px;" alt=""/><br /><sub><b>HunterXalc</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=xalc" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/onurozkardes"><img src="https://avatars.githubusercontent.com/u/38096930?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Onur Özkardeş</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=onurozkardes" title="Code">💻</a></td>
   </tr>
 </table>
 
