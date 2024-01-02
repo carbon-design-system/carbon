@@ -122,7 +122,7 @@
   .#{$prefix}--list-box__wrapper--fluid
     :not(.#{$prefix}--list-box--up)
     .#{$prefix}--list-box__menu {
-    inset-block-start: calc(100% + convert.to-rem(3px));
+    inset-block-start: calc(100% + convert.to-rem(1px));
   }
 
   // Invalid / Warning styles
@@ -276,5 +276,58 @@
     .#{$prefix}--list-box__label {
     animation: 3000ms ease-in-out skeleton infinite;
     background: $skeleton-element;
+  }
+
+  // Slug styles
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--slug {
+    inset-block-start: convert.to-rem(42px);
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--slug,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--slug {
+    inset-inline-end: $spacing-08;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    button.#{$prefix}--list-box__field,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid[data-invalid]
+    button.#{$prefix}--list-box__field {
+    padding-inline-end: $spacing-10;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty),
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty) {
+    padding-inline-end: convert.to-rem(88px);
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field:has(
+      .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty)
+    )
+    ~ .#{$prefix}--slug,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--list-box__field:has(
+      .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty)
+    )
+    ~ .#{$prefix}--slug {
+    inset-inline-end: $spacing-10;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty) {
+    padding-inline-end: $spacing-12;
   }
 }

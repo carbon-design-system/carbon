@@ -270,7 +270,7 @@ export interface MultiSelectProps<ItemType>
   size?: ListBoxSize;
 
   /**
-   * Provide a `Slug` component to be rendered inside the `MultiSelect` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `MultiSelect` component
    */
   slug?: ReactNodeLike;
 
@@ -512,6 +512,9 @@ const MultiSelect = React.forwardRef(
           if (changes.selectedItem === undefined) {
             break;
           }
+          if (Array.isArray(changes.selectedItem)) {
+            break;
+          }
           onItemChange(changes.selectedItem);
           return { ...changes, highlightedIndex: state.highlightedIndex };
         case ToggleButtonBlur:
@@ -579,7 +582,7 @@ const MultiSelect = React.forwardRef(
 
     // Slug is always size `mini`
     let normalizedSlug;
-    if (slug) {
+    if (slug && slug['type']?.displayName === 'Slug') {
       normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
         size: 'mini',
       });
@@ -874,7 +877,7 @@ MultiSelect.propTypes = {
   size: ListBoxPropTypes.ListBoxSize,
 
   /**
-   * Provide a `Slug` component to be rendered inside the `MultiSelect` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `MultiSelect` component
    */
   slug: PropTypes.node,
 

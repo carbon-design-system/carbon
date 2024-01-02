@@ -51,9 +51,7 @@ export const Default = () => {
   );
 };
 
-export const Skeleton = () => {
-  return <RadioButtonSkeleton />;
-};
+export const Skeleton = () => {};
 
 export const Playground = (args) => {
   return (

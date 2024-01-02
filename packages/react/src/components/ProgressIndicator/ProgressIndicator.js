@@ -56,6 +56,10 @@ function ProgressIndicator({
   return (
     <ul className={className} {...rest}>
       {React.Children.map(children, (child, index) => {
+        if (!React.isValidElement(child)) {
+          return null;
+        }
+
         // only setup click handlers if onChange event is passed
         const onClick = onChange ? () => onChange(index) : undefined;
         if (index === currentIndex) {

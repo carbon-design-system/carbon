@@ -19,7 +19,7 @@ import { useId } from '../../internal/useId';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 
-const spacing = 4; // top and bottom spacing between the button and the menu. in px
+const spacing = 0; // top and bottom spacing between the button and the menu. in px
 const defaultTranslations = {
   'carbon.combo-button.additional-actions': 'Additional actions',
 };
@@ -73,7 +73,7 @@ const ComboButton = React.forwardRef(function ComboButton(
   }
 
   function handleOpen() {
-    menuRef.current.style.width = `${width}px`;
+    menuRef.current.style.inlineSize = `${width}px`;
   }
 
   const containerClasses = classNames(
@@ -121,6 +121,7 @@ const ComboButton = React.forwardRef(function ComboButton(
         ref={menuRef}
         id={id}
         label={t('carbon.combo-button.additional-actions')}
+        mode="basic"
         size={size}
         open={open}
         onClose={handleClose}

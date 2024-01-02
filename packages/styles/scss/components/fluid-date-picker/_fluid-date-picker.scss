@@ -410,4 +410,16 @@
     .#{$prefix}--date-picker-input__wrapper--slug {
     @include ai-gradient;
   }
+
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker-input__wrapper--slug
+    .#{$prefix}--date-picker__input,
+  .#{$prefix}--date-picker--fluid--invalid
+    .#{$prefix}--date-picker-input__wrapper--slug
+    .#{$prefix}--date-picker__input,
+  .#{$prefix}--date-picker--fluid--warn
+    .#{$prefix}--date-picker-input__wrapper--slug
+    .#{$prefix}--date-picker__input {
+    padding-inline-end: $spacing-10;
+  }
 }

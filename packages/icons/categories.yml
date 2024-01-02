@@ -361,7 +361,7 @@ categories:
           - function-math
           - image--search
           - image--search--alt
-          - infinity
+          - infinity-symbol
           - insert
           - insert--page
           - insert-syntax
@@ -600,7 +600,6 @@ categories:
           - ai-governance--lifecycle
           - ai-governance--tracked
           - ai-governance--untracked
-          - foundation-model
           - machine-learning
           - machine-learning-model
           - model--tuned

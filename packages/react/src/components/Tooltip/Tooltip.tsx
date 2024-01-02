@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { Popover, PopoverAlignment, PopoverContent } from '../Popover';
 import { keys, match } from '../../internal/keyboard';
 import { useDelayedState } from '../../internal/useDelayedState';
@@ -18,6 +18,11 @@ import {
 } from '../../internal/useNoInteractiveChildren';
 import { usePrefix } from '../../internal/usePrefix';
 import { type PolymorphicProps } from '../../types/common';
+
+/**
+ * Event types that trigger a "drag" to stop.
+ */
+const DRAG_STOP_EVENT_TYPES = new Set(['mouseup', 'touchend', 'touchcancel']);
 
 interface TooltipBaseProps {
   /**
@@ -99,6 +104,8 @@ function Tooltip<T extends React.ElementType>({
   const containerRef = useRef<HTMLElement>(null);
   const tooltipRef = useRef<HTMLSpanElement>(null);
   const [open, setOpen] = useDelayedState(defaultOpen);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isPointerIntersecting, setIsPointerIntersecting] = useState(false);
   const id = useId('tooltip');
   const prefix = usePrefix();
   const child = React.Children.only(children);
@@ -109,6 +116,10 @@ function Tooltip<T extends React.ElementType>({
     onClick: () => closeOnActivation && setOpen(false),
     // This should be placed on the trigger in case the element is disabled
     onMouseEnter,
+    onMouseLeave,
+    onMouseDown: onDragStart,
+    onMouseMove: onMouseMove,
+    onTouchStart: onDragStart,
   };
 
   function getChildEventHandlers(childProps: any) {
@@ -151,12 +162,38 @@ function Tooltip<T extends React.ElementType>({
   }
 
   function onMouseEnter() {
+    setIsPointerIntersecting(true);
     setOpen(true, enterDelayMs);
   }
 
   function onMouseLeave() {
+    setIsPointerIntersecting(false);
+    if (isDragging) {
+      return;
+    }
     setOpen(false, leaveDelayMs);
   }
+
+  function onMouseMove(evt) {
+    if (evt.buttons === 1) {
+      setIsDragging(true);
+    } else {
+      setIsDragging(false);
+    }
+  }
+
+  function onDragStart() {
+    setIsDragging(true);
+  }
+
+  const onDragStop = useCallback(() => {
+    setIsDragging(false);
+    // Close the tooltip, unless the mouse pointer is within the bounds of the
+    // trigger.
+    if (!isPointerIntersecting) {
+      setOpen(false, leaveDelayMs);
+    }
+  }, [isPointerIntersecting, leaveDelayMs, setOpen]);
 
   useNoInteractiveChildren(
     tooltipRef,
@@ -174,6 +211,20 @@ function Tooltip<T extends React.ElementType>({
       }
     }
   });
+
+  useEffect(() => {
+    if (isDragging) {
+      // Register drag stop handlers.
+      DRAG_STOP_EVENT_TYPES.forEach((eventType) => {
+        document.addEventListener(eventType, onDragStop);
+      });
+    }
+    return () => {
+      DRAG_STOP_EVENT_TYPES.forEach((eventType) => {
+        document.removeEventListener(eventType, onDragStop);
+      });
+    };
+  }, [isDragging, onDragStop]);
 
   return (
     <Popover
