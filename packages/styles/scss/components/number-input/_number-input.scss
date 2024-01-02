@@ -377,6 +377,13 @@
 
   // No steppers
   .#{$prefix}--number--nosteppers input[type='number'] {
+    padding-inline-end: 0;
+  }
+
+  .#{$prefix}--number--nosteppers input[type='number'][data-invalid],
+  .#{$prefix}--number--nosteppers
+    .#{$prefix}--number__input-wrapper--warning
+    input[type='number'] {
     padding-inline-end: convert.to-rem(48px);
   }
 
