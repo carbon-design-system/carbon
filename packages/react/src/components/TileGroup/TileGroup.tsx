@@ -58,84 +58,82 @@ export interface TileGroupProps
   valueSelected?: string | number;
 }
 
-const TileGroup =
-  (props) => {
-    const {
-      children,
-      className,
-      defaultSelected,
-      disabled,
-      legend,
-      name,
-      onChange = noopFn,
-      valueSelected,
-    } = props;
-    const prefix = usePrefix();
+const TileGroup = (props) => {
+  const {
+    children,
+    className,
+    defaultSelected,
+    disabled,
+    legend,
+    name,
+    onChange = noopFn,
+    valueSelected,
+  } = props;
+  const prefix = usePrefix();
 
-    const [selected, setSelected] = useState(valueSelected ?? defaultSelected);
-    const [prevValueSelected, setPrevValueSelected] = useState(valueSelected);
+  const [selected, setSelected] = useState(valueSelected ?? defaultSelected);
+  const [prevValueSelected, setPrevValueSelected] = useState(valueSelected);
 
-    /**
-     * prop + state alignment - getDerivedStateFromProps
-     * only update if selected prop changes
-     */
-    if (valueSelected !== prevValueSelected) {
-      setSelected(valueSelected);
-      setPrevValueSelected(valueSelected);
-    }
+  /**
+   * prop + state alignment - getDerivedStateFromProps
+   * only update if selected prop changes
+   */
+  if (valueSelected !== prevValueSelected) {
+    setSelected(valueSelected);
+    setPrevValueSelected(valueSelected);
+  }
 
-    const getRadioTiles = () => {
-      const childrenArray = React.Children.toArray(children);
-      const radioTiles = childrenArray.map((tileRadio) => {
-        const tileRadioProps =
-          (tileRadio as ReactElementLike).props ?? undefined;
-        const { value, ...other } = tileRadioProps;
-        /* istanbul ignore if */
-        if (typeof tileRadioProps.checked !== 'undefined') {
-          warning(
-            false,
-            `Instead of using the checked property on the RadioTile, set
+  const getRadioTiles = () => {
+    const childrenArray = React.Children.toArray(children);
+    const radioTiles = childrenArray.map((tileRadio) => {
+      const tileRadioProps = (tileRadio as ReactElementLike).props ?? undefined;
+      const { value, ...other } = tileRadioProps;
+      /* istanbul ignore if */
+      if (typeof tileRadioProps.checked !== 'undefined') {
+        warning(
+          false,
+          `Instead of using the checked property on the RadioTile, set
             the defaultSelected property or valueSelected property on the TileGroup.`
-          );
-        }
-
-        return (
-          <RadioTile
-            {...other}
-            name={name}
-            key={value}
-            value={value}
-            onChange={handleChange}
-            checked={value === selected}
-          />
         );
-      });
-
-      return radioTiles;
-    };
-
-    const handleChange = (newSelection, value, evt) => {
-      if (newSelection !== selected) {
-        setSelected(newSelection);
-        onChange(newSelection, name, evt);
       }
-    };
 
-    const renderLegend = (legend) => {
-      if (legend) {
-        return <legend className={`${prefix}--label`}>{legend}</legend>;
-      }
-    };
+      return (
+        <RadioTile
+          {...other}
+          name={name}
+          key={value}
+          value={value}
+          onChange={handleChange}
+          checked={value === selected}
+        />
+      );
+    });
 
-    return (
-      <fieldset
-        className={className ?? `${prefix}--tile-group`}
-        disabled={disabled}>
-        {renderLegend(legend)}
-        <div>{getRadioTiles()}</div>
-      </fieldset>
-    );
+    return radioTiles;
   };
+
+  const handleChange = (newSelection, value, evt) => {
+    if (newSelection !== selected) {
+      setSelected(newSelection);
+      onChange(newSelection, name, evt);
+    }
+  };
+
+  const renderLegend = (legend) => {
+    if (legend) {
+      return <legend className={`${prefix}--label`}>{legend}</legend>;
+    }
+  };
+
+  return (
+    <fieldset
+      className={className ?? `${prefix}--tile-group`}
+      disabled={disabled}>
+      {renderLegend(legend)}
+      <div>{getRadioTiles()}</div>
+    </fieldset>
+  );
+};
 
 TileGroup.propTypes = {
   /**
