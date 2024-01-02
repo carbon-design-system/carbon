@@ -40,7 +40,7 @@ interface ProgressBarProps {
   max?: number;
 
   /**
-   * Specify the size of the ProgressBar.
+   * Specify the size of the progress bar.
    */
   size?: 'small' | 'big';
 
