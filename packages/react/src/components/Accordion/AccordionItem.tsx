@@ -152,7 +152,8 @@ function AccordionItem({
     } else {
       // accordion opens
       content.current.style.maxBlockSize =
-        content.current.scrollHeight + 15 + 'px';
+        // Scroll height plus top/bottom padding
+        content.current.scrollHeight + 32 + 'px';
     }
 
     const nextValue = !isOpen;
