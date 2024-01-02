@@ -182,7 +182,6 @@ Friday of a sprint. To make the switch, you will need to:
 
 - [ ] Post the release announcement in slack
   - [ ] #carbon-announcements
-  - [ ] #carbon-components
   - [ ] #carbon-design-system
   - [ ] #carbon-react
 

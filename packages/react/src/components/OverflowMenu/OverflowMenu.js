@@ -430,7 +430,7 @@ class OverflowMenu extends Component {
               !menuBody.contains(target) &&
               triggerEl &&
               !target.matches(
-                `.${this.context}--overflow-menu,.${this.context}--overflow-menu-options`
+                `.${this.context}--overflow-menu:first-child,.${this.context}--overflow-menu-options:first-child`
               )
             ) {
               this.closeMenuAndFocus();

@@ -42,7 +42,9 @@ test.describe('Search @avt', () => {
       },
     });
     const search = page.getByRole('searchbox');
-    const clearButton = page.getByRole('button');
+    const clearButton = page.getByRole('button', {
+      name: 'Clear search input',
+    });
     await expect(search).toBeVisible();
     await expect(clearButton).not.toBeVisible();
 
