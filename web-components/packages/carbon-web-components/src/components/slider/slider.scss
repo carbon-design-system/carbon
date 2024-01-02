@@ -26,6 +26,12 @@ $css--plex: true !default;
 
   .#{$prefix}--slider__thumb {
     transform: translate(-50%, -50%) #{'/*rtl:ignore*/'};
+
+    // TODO when updating to core carbon's #15129
+    z-index: 3;
+    width: 0.875rem;
+    height: 0.875rem;
+    inset: inherit;
   }
 
   .#{$prefix}--slider__thumb:focus
