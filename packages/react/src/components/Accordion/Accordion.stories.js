@@ -15,6 +15,13 @@ import {
 } from '../Accordion';
 import Button from '../Button';
 import mdx from './Accordion.mdx';
+import { Information } from '@carbon/icons-react';
+import {
+  ToggletipLabel,
+  Toggletip,
+  ToggletipButton,
+  ToggletipContent,
+} from '../Toggletip';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
@@ -65,6 +72,398 @@ export const Default = () => (
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
         commodo consequat.
       </p>
+    </AccordionItem>
+  </Accordion>
+);
+
+export const Test = () => (
+  <Accordion>
+    <AccordionItem title="Item 1">
+      <ToggletipLabel>Toggletip label</ToggletipLabel>
+      <Toggletip align="top">
+        <ToggletipButton label="Show information">
+          <Information />
+        </ToggletipButton>
+        <ToggletipContent>
+          <p>
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+        </ToggletipContent>
+      </Toggletip>
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>{' '}
+      <div>content is still rendered when accordion is collapsed</div>
+    </AccordionItem>
+    <AccordionItem title="Item 2" open>
+      <p>HELLO</p>
     </AccordionItem>
   </Accordion>
 );
