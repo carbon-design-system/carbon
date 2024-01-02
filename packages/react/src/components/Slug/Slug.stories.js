@@ -45,7 +45,7 @@ const content = <span>AI was used to generate this content</span>;
 
 export const Default = () => (
   <>
-    <div className="slug-container-example">
+    <div className="slug-container slug-container-example">
       <Slug autoAlign size="mini">
         <SlugContent>{aiContent}</SlugContent>
       </Slug>
