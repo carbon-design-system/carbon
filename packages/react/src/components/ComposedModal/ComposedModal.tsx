@@ -10,7 +10,7 @@ import React, {
   type RefObject,
 } from 'react';
 import { isElement } from 'react-is';
-import PropTypes from 'prop-types';
+import PropTypes, { ReactNodeLike } from 'prop-types';
 import { ModalHeader, type ModalHeaderProps } from './ModalHeader';
 import { ModalFooter, type ModalFooterProps } from './ModalFooter';
 
@@ -180,6 +180,11 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   selectorsFloatingMenus?: Array<string | null | undefined>;
 
   size?: 'xs' | 'sm' | 'md' | 'lg';
+
+  /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `ComposedModal` component
+   */
+  slug?: ReactNodeLike;
 }
 
 const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
@@ -200,6 +205,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       selectorsFloatingMenus,
       size,
       launcherButtonRef,
+      slug,
       ...rest
     },
     ref
@@ -270,8 +276,11 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
 
     const modalClass = cx(
       `${prefix}--modal`,
-      isOpen && 'is-visible',
-      danger && `${prefix}--modal--danger`,
+      {
+        'is-visible': isOpen,
+        [`${prefix}--modal--danger`]: danger,
+        [`${prefix}--modal--slug`]: slug,
+      },
       customClassName
     );
 
@@ -344,6 +353,14 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       }
     }, [open, selectorPrimaryFocus, isOpen]);
 
+    // Slug is always size `lg`
+    let normalizedSlug;
+    if (slug && slug['type']?.displayName === 'Slug') {
+      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+        size: 'lg',
+      });
+    }
+
     return (
       <div
         {...rest}
@@ -369,6 +386,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
             Focus sentinel
           </button>
           <div ref={innerModal} className={`${prefix}--modal-container-body`}>
+            {normalizedSlug}
             {childrenWithProps}
           </div>
           {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
@@ -466,6 +484,11 @@ ComposedModal.propTypes = {
    * Specify the size variant.
    */
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
+
+  /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `ComposedModal` component
+   */
+  slug: PropTypes.node,
 };
 
 export default ComposedModal;

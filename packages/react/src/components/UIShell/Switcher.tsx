@@ -109,27 +109,29 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(function Switcher(
     }
   };
 
-  const childrenWithProps = React.Children.map(children, (child, index) => {
-    // only setup click handlers if onChange event is passed
-    if (
-      React.isValidElement(child) &&
-      child.type &&
-      getDisplayName(child.type) === 'Switcher'
-    ) {
+  const childrenWithProps = React.Children.toArray(children).map(
+    (child, index) => {
+      // only setup click handlers if onChange event is passed
+      if (
+        React.isValidElement(child) &&
+        child.type &&
+        getDisplayName(child.type) === 'Switcher'
+      ) {
+        return React.cloneElement(child as React.ReactElement<any>, {
+          handleSwitcherItemFocus,
+          index,
+          key: index,
+          expanded,
+        });
+      }
+
       return React.cloneElement(child as React.ReactElement<any>, {
-        handleSwitcherItemFocus,
         index,
         key: index,
         expanded,
       });
     }
-
-    return React.cloneElement(child as React.ReactElement<any>, {
-      index,
-      key: index,
-      expanded,
-    });
-  });
+  );
 
   return (
     <ul
