@@ -286,7 +286,9 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
       max - spacing - size,
     ];
 
-    // cast to number since we have the fallback value.
+    // Previous array `options`, has at least one item that is a number (the last one - second fallback).
+    // That guarantees that the return of `find()` will always be a number
+    // and we can safely add the numeric casting `as number`.
     const bestOption = options.find((option) => option !== false) as number;
 
     return bestOption >= spacing ? bestOption : spacing;
