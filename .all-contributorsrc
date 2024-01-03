@@ -1388,6 +1388,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "mattborghi",
+      "name": "Matias Borghi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11933424?v=4",
+      "profile": "https://mattborghi.github.io/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
