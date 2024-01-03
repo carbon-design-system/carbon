@@ -11563,10 +11563,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:^2.25.0":
-  version: 2.25.0
-  resolution: "date-fns@npm:2.25.0"
-  checksum: 186a3aa239974a424626a0adf2e93c0d29848d8f6b32cc01f4b5812697705626544ed657de485cebfcee44f611731cb7a7048b7e55681390e8d1e93eb7809cc2
+"date-fns@npm:^3.0.0":
+  version: 3.0.6
+  resolution: "date-fns@npm:3.0.6"
+  checksum: 4eb4c1f15257026593bd62ea366347be3940a83133fc84aa32e03bc9a19d6f8a919ef0475211200b16de7980e1d797c993713ed092a6f5c941474bce516f7d96
   languageName: node
   linkType: hard
 
@@ -28415,7 +28415,7 @@ __metadata:
     "@octokit/plugin-throttling": "npm:^4.0.0"
     "@octokit/rest": "npm:^19.0.0"
     clsx: "npm:^2.0.0"
-    date-fns: "npm:^2.25.0"
+    date-fns: "npm:^3.0.0"
     fast-glob: "npm:^3.2.7"
     fs-extra: "npm:^11.0.0"
     lodash.merge: "npm:^4.6.2"
