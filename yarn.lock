@@ -2070,7 +2070,7 @@ __metadata:
     babel-preset-carbon: "npm:^0.5.0"
     browserify-zlib: "npm:^0.2.0"
     browserslist-config-carbon: "npm:^11.2.0"
-    classnames: "npm:2.3.2"
+    classnames: "npm:2.5.0"
     clipboardy: "npm:^2.1.0"
     copy-to-clipboard: "npm:^3.3.1"
     css-loader: "npm:^6.5.1"
@@ -10201,10 +10201,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:2.3.2":
-  version: 2.3.2
-  resolution: "classnames@npm:2.3.2"
-  checksum: ba3151c12e8b6a84c64b340ab4259ad0408947652009314462d828e94631505989c6a7d7e796bec1d309be9295d3111b498ad18a9d533fe3e6f859e51e574cbb
+"classnames@npm:2.5.0":
+  version: 2.5.0
+  resolution: "classnames@npm:2.5.0"
+  checksum: 729436ac76dffd1307c554a8092b89d137481795b1aedc47d2557b11b7ff45c933a4ec209c3f9e5fbc43e05c5426cf23f52e189aa2ac2681cca84fa92abe1c36
   languageName: node
   linkType: hard
 

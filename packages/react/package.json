@@ -53,7 +53,7 @@
     "@carbon/layout": "^11.20.0",
     "@carbon/styles": "^1.46.0",
     "@ibm/telemetry-js": "^1.1.0",
-    "classnames": "2.3.2",
+    "classnames": "2.5.0",
     "copy-to-clipboard": "^3.3.1",
     "downshift": "8.2.4",
     "flatpickr": "4.6.9",
