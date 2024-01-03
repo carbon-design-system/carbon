@@ -29,14 +29,14 @@
   @each $size, $trigger in $triggerSizes {
     .#{$prefix}--combo-button__container--#{$size}
       .#{$prefix}--combo-button__primary-action {
-      min-inline-size: 12rem - convert.to-rem(1px) - $trigger;
+      min-inline-size: 10rem - convert.to-rem(1px) - $trigger;
     }
   }
 
   .#{$prefix}--combo-button__primary-action .#{$prefix}--btn {
     inline-size: 100%;
-    max-inline-size: convert.to-rem(240px);
-    min-inline-size: convert.to-rem(160px);
+    max-inline-size: convert.to-rem(239px);
+    min-inline-size: convert.to-rem(111px);
   }
 
   .#{$prefix}--combo-button__primary-action button {
