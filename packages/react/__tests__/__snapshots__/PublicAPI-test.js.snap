@@ -8277,6 +8277,9 @@ Map {
       "onClick": Object {
         "type": "func",
       },
+      "onKeyDown": Object {
+        "type": "func",
+      },
       "placeholder": Object {
         "type": "string",
       },
