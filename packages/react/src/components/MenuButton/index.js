@@ -18,7 +18,7 @@ import { useId } from '../../internal/useId';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 
-const spacing = 4; // top and bottom spacing between the button and the menu. in px
+const spacing = 0; // top and bottom spacing between the button and the menu. in px
 const validButtonKinds = ['primary', 'tertiary', 'ghost'];
 const defaultButtonKind = 'primary';
 

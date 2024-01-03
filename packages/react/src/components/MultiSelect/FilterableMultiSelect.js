@@ -211,7 +211,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
 
   // Slug is always size `mini`
   let normalizedSlug;
-  if (slug) {
+  if (slug && slug['type']?.displayName === 'Slug') {
     normalizedSlug = React.cloneElement(slug, {
       size: 'mini',
     });
@@ -669,7 +669,7 @@ FilterableMultiSelect.propTypes = {
   size: ListBoxPropTypes.ListBoxSize,
 
   /**
-   * Provide a `Slug` component to be rendered inside the `FilterableMultiSelect` component
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `FilterableMultiSelect` component
    */
   slug: PropTypes.node,
 

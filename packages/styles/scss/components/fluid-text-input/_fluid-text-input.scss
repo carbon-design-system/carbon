@@ -92,10 +92,10 @@
 
   .#{$prefix}--text-input--fluid
     .#{$prefix}--text-input--invalid
-    + .#{$prefix}--text-input__divider,
+    ~ .#{$prefix}--text-input__divider,
   .#{$prefix}--text-input--fluid
     .#{$prefix}--text-input--warning
-    + .#{$prefix}--text-input__divider {
+    ~ .#{$prefix}--text-input__divider {
     display: block;
     border-style: solid;
     border-color: $border-subtle;
@@ -190,6 +190,27 @@
   .#{$prefix}--text-input--fluid
     .#{$prefix}--text-input__field-wrapper--slug
     .#{$prefix}--slug {
-    inset-block-start: convert.to-rem(43px);
+    inset-block-start: convert.to-rem(42px);
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input--invalid
+    ~ .#{$prefix}--slug,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input--warning
+    ~ .#{$prefix}--slug {
+    inset-inline-end: $spacing-05;
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--slug
+    .#{$prefix}--text-input,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--slug
+    .#{$prefix}--text-input--invalid,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--slug
+    .#{$prefix}--text-input--warning {
+    padding-inline-end: $spacing-08;
   }
 }

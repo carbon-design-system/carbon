@@ -87,7 +87,7 @@ export const Slug = React.forwardRef(function Slug(
     children,
     className,
     dotType,
-    kind,
+    kind = 'default',
     onRevertClick,
     revertActive,
     revertLabel = 'Revert to AI input',
@@ -157,6 +157,7 @@ export const Slug = React.forwardRef(function Slug(
   );
 });
 
+Slug.displayName = 'Slug';
 Slug.propTypes = {
   /**
    * Specify the correct translation of the AI text
