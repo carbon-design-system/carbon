@@ -277,10 +277,6 @@
         $button-danger-active
       );
 
-      padding-inline-end: calc(
-        layout.density('padding-inline') - convert.to-rem(1px)
-      );
-
       .#{$prefix}--btn__icon {
         position: static;
         margin-inline-start: $spacing-03;
