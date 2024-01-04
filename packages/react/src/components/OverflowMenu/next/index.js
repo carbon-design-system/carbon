@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { OverflowMenuVertical } from '@carbon/icons-react';
@@ -26,6 +26,7 @@ const OverflowMenu = React.forwardRef(function OverflowMenu(
     label = 'Options',
     renderIcon: IconElement = OverflowMenuVertical,
     size = defaultSize,
+    menuAlignment = 'top-right',
     tooltipAlignment,
     ...rest
   },
@@ -33,14 +34,33 @@ const OverflowMenu = React.forwardRef(function OverflowMenu(
 ) {
   const id = useId('overflowmenu');
   const prefix = usePrefix();
+  const [width, setWidth] = useState(0);
 
   const triggerRef = useRef(null);
-  const { open, x, y, handleClick, handleMousedown, handleClose } =
-    useAttachedMenu(triggerRef);
+  const {
+    open,
+    x,
+    y,
+    handleClick: hookOnClick,
+    handleMousedown,
+    handleClose,
+  } = useAttachedMenu(triggerRef);
+
+  function handleTriggerClick() {
+    if (triggerRef.current) {
+      const { width: w } = triggerRef.current.getBoundingClientRect();
+      setWidth(w);
+      hookOnClick();
+    }
+  }
 
   const containerClasses = classNames(
     className,
     `${prefix}--overflow-menu__container`
+  );
+
+  const menuClasses = classNames(
+    `${prefix}--combo-button__menu-${menuAlignment}`
   );
 
   const triggerClasses = classNames(
@@ -62,7 +82,7 @@ const OverflowMenu = React.forwardRef(function OverflowMenu(
         aria-haspopup
         aria-expanded={open}
         className={triggerClasses}
-        onClick={handleClick}
+        onClick={handleTriggerClick}
         onMouseDown={handleMousedown}
         ref={triggerRef}
         label={label}
@@ -70,6 +90,9 @@ const OverflowMenu = React.forwardRef(function OverflowMenu(
         <IconElement className={`${prefix}--overflow-menu__icon`} />
       </IconButton>
       <Menu
+        actionButtonWidth={width}
+        menuAlignment={menuAlignment}
+        className={menuClasses}
         id={id}
         size={size}
         open={open}
@@ -98,6 +121,17 @@ OverflowMenu.propTypes = {
    * A label describing the options available. Is used in the trigger tooltip and as the menu's accessible label.
    */
   label: PropTypes.string,
+
+  /**
+   * Specify how the menu should align with the button element
+   */
+  menuAlignment: PropTypes.oneOf([
+    'top-left',
+    'top-right',
+
+    'bottom-left',
+    'bottom-right',
+  ]),
 
   /**
    * Otionally provide a custom icon to be rendered on the trigger button.
