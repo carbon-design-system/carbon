@@ -28,6 +28,40 @@ const defaultTranslations = {
 function translateWithId(messageId) {
   return defaultTranslations[messageId];
 }
+
+interface ProgressIndicatorProps
+  extends Omit<React.HTMLAttributes<HTMLUListElement>, 'onChange'> {
+  /**
+   * Provide `<ProgressStep>` components to be rendered in the
+   * `<ProgressIndicator>`
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Provide an optional className to be applied to the containing node
+   */
+  className?: string;
+
+  /**
+   * Optionally specify the current step array index
+   */
+  currentIndex?: number;
+
+  /**
+   * Optional callback called if a ProgressStep is clicked on.  Returns the index of the step.
+   */
+  onChange?: (data: number) => void;
+
+  /**
+   * Specify whether the progress steps should be split equally in size in the div
+   */
+  spaceEqually?: boolean;
+  /**
+   * Determines whether or not the ProgressIndicator should be rendered vertically.
+   */
+  vertical?: boolean;
+}
+
 function ProgressIndicator({
   children,
   className: customClassName,
@@ -36,7 +70,7 @@ function ProgressIndicator({
   spaceEqually,
   vertical,
   ...rest
-}) {
+}: ProgressIndicatorProps) {
   const prefix = usePrefix();
   const [currentIndex, setCurrentIndex] = useState(controlledIndex);
   const [prevControlledIndex, setPrevControlledIndex] =
@@ -45,7 +79,7 @@ function ProgressIndicator({
     [`${prefix}--progress`]: true,
     [`${prefix}--progress--vertical`]: vertical,
     [`${prefix}--progress--space-equal`]: spaceEqually && !vertical,
-    [customClassName]: customClassName,
+    [customClassName ?? '']: customClassName,
   });
 
   if (controlledIndex !== prevControlledIndex) {
@@ -56,7 +90,7 @@ function ProgressIndicator({
   return (
     <ul className={className} {...rest}>
       {React.Children.map(children, (child, index) => {
-        if (!React.isValidElement(child)) {
+        if (!React.isValidElement<ProgressStepProps>(child)) {
           return null;
         }
 
@@ -122,6 +156,78 @@ ProgressIndicator.propTypes = {
   vertical: PropTypes.bool,
 };
 
+interface ProgressStepProps {
+  /**
+   * Provide an optional className to be applied to the containing `<li>` node
+   */
+  className?: string;
+
+  /**
+   * Specify whether the step has been completed
+   */
+  complete?: boolean;
+
+  /**
+   * Specify whether the step is the current step
+   */
+  current?: boolean;
+
+  /**
+   * Provide a description for the `<ProgressStep>`
+   */
+  description?: string;
+
+  /**
+   * Specify whether the step is disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Index of the current step within the ProgressIndicator
+   */
+  index?: number;
+
+  /**
+   * Specify whether the step is invalid
+   */
+  invalid?: boolean;
+
+  /**
+   * Provide the label for the `<ProgressStep>`
+   */
+  label: string;
+
+  /**
+   * A callback called if the step is clicked or the enter key is pressed
+   */
+  onClick?: (
+    event:
+      | React.KeyboardEvent<HTMLButtonElement>
+      | React.MouseEvent<HTMLButtonElement>
+  ) => void;
+
+  /**
+   * Provide the props that describe a progress step tooltip
+   */
+  overflowTooltipProps?: object;
+
+  /**
+   * Provide an optional secondary label
+   */
+  secondaryLabel?: string;
+
+  /**
+   * The ID of the tooltip content.
+   */
+  tooltipId?: string;
+
+  /**
+   * Optional method that takes in a message id and returns an
+   * internationalized string.
+   */
+  translateWithId?: (id: string) => string;
+}
+
 function ProgressStep({
   label,
   description,
@@ -134,7 +240,7 @@ function ProgressStep({
   onClick,
   translateWithId: t = translateWithId,
   ...rest
-}) {
+}: ProgressStepProps) {
   const prefix = usePrefix();
   const classes = cx({
     [`${prefix}--progress-step`]: true,
@@ -142,17 +248,30 @@ function ProgressStep({
     [`${prefix}--progress-step--complete`]: complete,
     [`${prefix}--progress-step--incomplete`]: !complete && !current,
     [`${prefix}--progress-step--disabled`]: disabled,
-    [className]: className,
+    [className ?? '']: className,
   });
 
-  const handleKeyDown = (e) => {
-    if (matches(e, [keys.Enter, keys.Space])) {
-      onClick();
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (matches(e, [keys.Enter, keys.Space]) && onClick) {
+      onClick(e);
     }
   };
 
-  // eslint-disable-next-line react/prop-types
-  const SVGIcon = ({ complete, current, description, invalid, prefix }) => {
+  interface SVGIconProps {
+    complete?: boolean;
+    current?: boolean;
+    description?: string;
+    invalid?: boolean;
+    prefix: string;
+  }
+
+  const SVGIcon = ({
+    complete,
+    current,
+    description,
+    invalid,
+    prefix,
+  }: SVGIconProps) => {
     if (invalid) {
       return (
         <Warning className={`${prefix}--progress__warning`}>

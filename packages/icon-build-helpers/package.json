@@ -31,7 +31,7 @@
     "@babel/types": "^7.18.4",
     "@carbon/cli-reporter": "^10.7.0",
     "@carbon/icon-helpers": "^10.45.0",
-    "@hapi/joi": "^14.4.0",
+    "@hapi/joi": "^17.1.1",
     "@rollup/plugin-babel": "^6.0.0",
     "@rollup/plugin-replace": "^5.0.0",
     "browserslist-config-carbon": "^11.2.0",
