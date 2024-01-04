@@ -329,7 +329,7 @@ $progress-indicator-bar-width: 1px inset transparent !default;
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-optional {
     position: static;
-    margin: auto 0;
+    margin: 0 0 auto;
     inline-size: 100%;
   }
 
