@@ -6,7 +6,7 @@
  */
 
 import cx from 'classnames';
-import React, { KeyboardEvent, MouseEvent, useContext } from 'react';
+import React, { type KeyboardEvent, type MouseEvent, useContext } from 'react';
 import PropTypes from 'prop-types';
 import deprecate from '../../prop-types/deprecate';
 import { ListBoxType, ListBoxSize } from './ListBoxPropTypes';

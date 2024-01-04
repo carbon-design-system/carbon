@@ -5,7 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { KeyboardEventHandler, MouseEventHandler, useRef } from 'react';
+import React, {
+  type KeyboardEventHandler,
+  type MouseEventHandler,
+  useRef,
+} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useControllableState } from '../../internal/useControllableState';
