@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { KeyboardEventHandler, PureComponent } from 'react';
+import React, { type KeyboardEventHandler, PureComponent } from 'react';
 import PropTypes, { ReactNodeLike } from 'prop-types';
 
 import classNames from 'classnames';

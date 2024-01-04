@@ -12,14 +12,14 @@ import { usePrefix } from '../../internal/usePrefix';
 
 const FluidDropdownSkeleton = ({ className, ...rest }) => {
   const prefix = usePrefix();
-  const wrapperClasses = cx(
+  const wrapperContainerClasses = cx(
     className,
-    `${prefix}--skeleton`,
-    `${prefix}--list-box`
+    `${prefix}--list-box__wrapper--fluid`
   );
+  const wrapperClasses = cx(`${prefix}--skeleton`, `${prefix}--list-box`);
 
   return (
-    <div className={`${prefix}--list-box__wrapper--fluid`}>
+    <div className={wrapperContainerClasses}>
       <div className={wrapperClasses} {...rest}>
         <span className={`${prefix}--list-box__label`} />
         <div className={`${prefix}--list-box__field`} />

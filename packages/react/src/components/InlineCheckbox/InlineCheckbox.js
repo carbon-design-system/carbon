@@ -38,7 +38,7 @@ const InlineCheckbox = React.forwardRef(function InlineCheckbox(
     disabled,
     id,
     name,
-    onClick,
+    onClick: onClick ? onClickCheckBoxInput : onClick,
     onChange: (evt) => {
       onChange(evt.target.checked, id, evt);
     },
@@ -56,6 +56,14 @@ const InlineCheckbox = React.forwardRef(function InlineCheckbox(
       inputRef.current.indeterminate = indeterminate;
     }
   }, [indeterminate]);
+
+  function onClickCheckBoxInput(evt) {
+    // If the previous "indeterminate" is true, change "checked" to false. If it is not undefined, we're working on `TableSelectAll`
+    if (indeterminate) {
+      evt.target.checked = false;
+    }
+    onClick(evt);
+  }
 
   return (
     <div className={`${prefix}--checkbox--inline`}>
