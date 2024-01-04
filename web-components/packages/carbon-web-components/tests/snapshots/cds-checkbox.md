@@ -51,6 +51,7 @@
 >
   <span class="cds--checkbox-label-text">
     <slot>
+      Checkbox label
     </slot>
   </span>
 </label>
