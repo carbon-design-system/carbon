@@ -2030,7 +2030,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/react@npm:^1.47.0-rc.0, @carbon/react@workspace:packages/react":
+"@carbon/react@npm:^1.47.0, @carbon/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@carbon/react@workspace:packages/react"
   dependencies:
@@ -2046,7 +2046,7 @@ __metadata:
     "@carbon/feature-flags": "npm:^0.16.0"
     "@carbon/icons-react": "npm:^11.33.0"
     "@carbon/layout": "npm:^11.20.0"
-    "@carbon/styles": "npm:^1.47.0-rc.0"
+    "@carbon/styles": "npm:^1.47.0"
     "@carbon/test-utils": "npm:^10.30.0"
     "@carbon/themes": "npm:^11.28.0"
     "@ibm/telemetry-js": "npm:^1.1.0"
@@ -2126,7 +2126,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@npm:^1.47.0-rc.0, @carbon/styles@workspace:packages/styles":
+"@carbon/styles@npm:^1.47.0, @carbon/styles@workspace:packages/styles":
   version: 0.0.0-use.local
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
@@ -9784,8 +9784,8 @@ __metadata:
     "@babel/plugin-transform-react-constant-elements": "npm:^7.17.12"
     "@babel/preset-env": "npm:^7.18.2"
     "@babel/preset-react": "npm:^7.17.12"
-    "@carbon/react": "npm:^1.47.0-rc.0"
-    "@carbon/styles": "npm:^1.47.0-rc.0"
+    "@carbon/react": "npm:^1.47.0"
+    "@carbon/styles": "npm:^1.47.0"
     "@carbon/telemetry": "npm:0.1.0"
     "@carbon/test-utils": "npm:^10.30.0"
     "@rollup/plugin-babel": "npm:^6.0.0"
@@ -9824,7 +9824,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/carbon-components"
   dependencies:
-    "@carbon/styles": "npm:^1.47.0-rc.0"
+    "@carbon/styles": "npm:^1.47.0"
     "@carbon/telemetry": "npm:0.1.0"
     "@carbon/test-utils": "npm:^10.30.0"
     chalk: "npm:1.1.3"
@@ -10173,7 +10173,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "class-prefix@workspace:examples/class-prefix"
   dependencies:
-    "@carbon/react": "npm:^1.47.0-rc.0"
+    "@carbon/react": "npm:^1.47.0"
     "@vitejs/plugin-react": "npm:4.0.0"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
@@ -10484,7 +10484,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox-styles@workspace:examples/codesandbox-styles"
   dependencies:
-    "@carbon/styles": "npm:^1.47.0-rc.0"
+    "@carbon/styles": "npm:^1.47.0"
     sass: "npm:^1.51.0"
     vite: "npm:^4.3.8"
   languageName: unknown
@@ -11511,7 +11511,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "custom-theme@workspace:examples/custom-theme"
   dependencies:
-    "@carbon/react": "npm:^1.47.0-rc.0"
+    "@carbon/react": "npm:^1.47.0"
     "@vitejs/plugin-react": "npm:4.0.0"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
@@ -13578,7 +13578,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples-light-dark@workspace:examples/light-dark-mode"
   dependencies:
-    "@carbon/react": "npm:^1.47.0-rc.0"
+    "@carbon/react": "npm:^1.47.0"
     eslint: "npm:8.40.0"
     next: "npm:12.1.4"
     react: "npm:18.2.0"
@@ -13591,7 +13591,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples-nextjs@workspace:examples/nextjs"
   dependencies:
-    "@carbon/react": "npm:^1.47.0-rc.0"
+    "@carbon/react": "npm:^1.47.0"
     eslint: "npm:8.40.0"
     eslint-config-next: "npm:13.4.7"
     next: "npm:13.5.6"
@@ -15740,7 +15740,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "id-prefix@workspace:examples/id-prefix"
   dependencies:
-    "@carbon/react": "npm:^1.47.0-rc.0"
+    "@carbon/react": "npm:^1.47.0"
     "@vitejs/plugin-react": "npm:4.0.0"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
@@ -15854,7 +15854,7 @@ __metadata:
   resolution: "incremental-migration-vite@workspace:examples/incremental-migration-vite"
   dependencies:
     "@carbon/icons-react": "npm:^10.49.0"
-    "@carbon/react": "npm:^1.47.0-rc.0"
+    "@carbon/react": "npm:^1.47.0"
     "@vitejs/plugin-react": "npm:4.0.0"
     carbon-components: "npm:^10.57.0"
     carbon-components-react: "npm:^7.57.0"
@@ -27553,7 +27553,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "v10-token-compat-in-v11@workspace:examples/v10-token-compat-in-v11"
   dependencies:
-    "@carbon/react": "npm:^1.47.0-rc.0"
+    "@carbon/react": "npm:^1.47.0"
     "@vitejs/plugin-react": "npm:4.0.0"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
@@ -27839,7 +27839,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "vite@workspace:examples/vite"
   dependencies:
-    "@carbon/react": "npm:^1.47.0-rc.0"
+    "@carbon/react": "npm:^1.47.0"
     "@vitejs/plugin-react": "npm:4.0.0"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
@@ -28409,7 +28409,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "www@workspace:www"
   dependencies:
-    "@carbon/react": "npm:^1.47.0-rc.0"
+    "@carbon/react": "npm:^1.47.0"
     "@octokit/core": "npm:^4.0.0"
     "@octokit/plugin-retry": "npm:^3.0.9"
     "@octokit/plugin-throttling": "npm:^4.0.0"
