@@ -2070,11 +2070,11 @@ __metadata:
     babel-preset-carbon: "npm:^0.5.0"
     browserify-zlib: "npm:^0.2.0"
     browserslist-config-carbon: "npm:^11.2.0"
-    classnames: "npm:2.3.2"
+    classnames: "npm:2.5.0"
     clipboardy: "npm:^2.1.0"
     copy-to-clipboard: "npm:^3.3.1"
     css-loader: "npm:^6.5.1"
-    downshift: "npm:8.2.3"
+    downshift: "npm:8.2.4"
     enquirer: "npm:^2.3.6"
     fast-glob: "npm:^3.2.7"
     flatpickr: "npm:4.6.13"
@@ -10201,10 +10201,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:2.3.2":
-  version: 2.3.2
-  resolution: "classnames@npm:2.3.2"
-  checksum: ba3151c12e8b6a84c64b340ab4259ad0408947652009314462d828e94631505989c6a7d7e796bec1d309be9295d3111b498ad18a9d533fe3e6f859e51e574cbb
+"classnames@npm:2.5.0":
+  version: 2.5.0
+  resolution: "classnames@npm:2.5.0"
+  checksum: 729436ac76dffd1307c554a8092b89d137481795b1aedc47d2557b11b7ff45c933a4ec209c3f9e5fbc43e05c5426cf23f52e189aa2ac2681cca84fa92abe1c36
   languageName: node
   linkType: hard
 
@@ -11563,10 +11563,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:^2.25.0":
-  version: 2.25.0
-  resolution: "date-fns@npm:2.25.0"
-  checksum: 186a3aa239974a424626a0adf2e93c0d29848d8f6b32cc01f4b5812697705626544ed657de485cebfcee44f611731cb7a7048b7e55681390e8d1e93eb7809cc2
+"date-fns@npm:^3.0.0":
+  version: 3.0.6
+  resolution: "date-fns@npm:3.0.6"
+  checksum: 4eb4c1f15257026593bd62ea366347be3940a83133fc84aa32e03bc9a19d6f8a919ef0475211200b16de7980e1d797c993713ed092a6f5c941474bce516f7d96
   languageName: node
   linkType: hard
 
@@ -12321,9 +12321,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"downshift@npm:8.2.3":
-  version: 8.2.3
-  resolution: "downshift@npm:8.2.3"
+"downshift@npm:8.2.4":
+  version: 8.2.4
+  resolution: "downshift@npm:8.2.4"
   dependencies:
     "@babel/runtime": "npm:^7.22.15"
     compute-scroll-into-view: "npm:^3.0.3"
@@ -12332,7 +12332,7 @@ __metadata:
     tslib: "npm:^2.6.2"
   peerDependencies:
     react: ">=16.12.0"
-  checksum: 08c15b9e880088062993f5f76c6c20f77890e62213dd6d4d3486def28ac7f0129d225c37fa9986745700a9d9a0f745c377eeab2789e1b89e61e9a985bc356bc0
+  checksum: c6ce78312bea509dc7de519bcd05309a0e04f04df17d387ca92c7a4bb049e09cfb139826db1741ba1b357cb02e302a6953c7603f4ae9f177a3d853d2f06e078e
   languageName: node
   linkType: hard
 
@@ -28422,7 +28422,7 @@ __metadata:
     "@octokit/plugin-throttling": "npm:^4.0.0"
     "@octokit/rest": "npm:^19.0.0"
     clsx: "npm:^2.0.0"
-    date-fns: "npm:^2.25.0"
+    date-fns: "npm:^3.0.0"
     fast-glob: "npm:^3.2.7"
     fs-extra: "npm:^11.0.0"
     lodash.merge: "npm:^4.6.2"

@@ -28,7 +28,7 @@
     "@octokit/plugin-throttling": "^4.0.0",
     "@octokit/rest": "^19.0.0",
     "clsx": "^2.0.0",
-    "date-fns": "^2.25.0",
+    "date-fns": "^3.0.0",
     "fs-extra": "^11.0.0",
     "next": "^13.0.0",
     "prop-types": "^15.7.2",
