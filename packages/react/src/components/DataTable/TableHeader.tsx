@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { MouseEventHandler, useRef } from 'react';
+import React, { type MouseEventHandler, useRef } from 'react';
 import {
   ArrowUp as Arrow,
   ArrowsVertical as Arrows,

@@ -26,7 +26,22 @@ function Step() {
   );
 }
 
-function ProgressIndicatorSkeleton({ className, vertical, ...rest }) {
+interface ProgressIndicatorSkeletonProps {
+  /**
+   * Specify an optional className to add.
+   */
+  className?: string;
+  /**
+   * Determines whether or not the ProgressIndicator should be rendered vertically.
+   */
+  vertical?: boolean;
+}
+
+function ProgressIndicatorSkeleton({
+  className,
+  vertical,
+  ...rest
+}: ProgressIndicatorSkeletonProps) {
   const prefix = usePrefix();
   return (
     <ul

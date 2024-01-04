@@ -5,13 +5,60 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
+import React, { ReactSVGElement, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { CheckmarkFilled, ErrorFilled } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+
+interface ProgressBarProps {
+  /**
+   * Additional CSS class names.
+   */
+  className?: string;
+
+  /**
+   * The current progress as a textual representation.
+   */
+  helperText?: string;
+
+  /**
+   * Whether the label should be visually hidden.
+   */
+  hideLabel?: boolean;
+
+  /**
+   * A label describing the progress bar.
+   */
+  label: string;
+
+  /**
+   * The maximum value.
+   */
+  max?: number;
+
+  /**
+   * Specify the size of the progress bar.
+   */
+  size?: 'small' | 'big';
+
+  /**
+   * Specify the status.
+   */
+  status?: 'active' | 'finished' | 'error';
+
+  /**
+   * Defines the alignment variant of the progress bar.
+   */
+  type?: 'default' | 'inline' | 'indented';
+
+  /**
+   * The current value.
+   */
+  value?: number;
+}
 
 function ProgressBar({
   className,
@@ -23,7 +70,7 @@ function ProgressBar({
   status = 'active',
   type = 'default',
   value,
-}) {
+}: ProgressBarProps) {
   const labelId = useId('progress-bar');
   const helperId = useId('progress-bar-helper');
   const helperTextId = useId('progress-bar-helper-text');
@@ -36,10 +83,10 @@ function ProgressBar({
     !isFinished && !isError && (value === null || value === undefined);
 
   let cappedValue = value;
-  if (cappedValue > max) {
+  if (cappedValue && cappedValue > max) {
     cappedValue = max;
   }
-  if (cappedValue < 0) {
+  if (cappedValue && cappedValue < 0) {
     cappedValue = 0;
   }
   if (isError) {
@@ -48,7 +95,7 @@ function ProgressBar({
     cappedValue = max;
   }
 
-  const percentage = cappedValue / max;
+  const percentage = (cappedValue ?? NaN) / max;
 
   const wrapperClasses = classNames(
     `${prefix}--progress-bar`,
@@ -66,24 +113,34 @@ function ProgressBar({
     [`${prefix}--visually-hidden`]: hideLabel,
   });
 
-  let StatusIcon = null;
+  let StatusIcon: React.ForwardRefExoticComponent<
+    React.RefAttributes<ReactSVGElement> & { className?: string }
+  > | null = null;
 
   if (isError) {
-    StatusIcon = React.forwardRef(function ErrorFilled16(props, ref) {
+    StatusIcon = React.forwardRef(function ErrorFilled16(
+      props,
+      ref: React.Ref<ReactSVGElement>
+    ) {
       return <ErrorFilled ref={ref} size={16} {...props} />;
     });
   } else if (isFinished) {
-    StatusIcon = React.forwardRef(function CheckmarkFilled16(props, ref) {
+    StatusIcon = React.forwardRef(function CheckmarkFilled16(
+      props,
+      ref: React.Ref<ReactSVGElement>
+    ) {
       return <CheckmarkFilled ref={ref} size={16} {...props} />;
     });
   }
 
-  const ref = useRef();
+  const ref = useRef<HTMLDivElement>(null);
   useIsomorphicEffect(() => {
-    if (!isFinished && !isError) {
-      ref.current.style.transform = `scaleX(${percentage})`;
-    } else {
-      ref.current.style.transform = null;
+    if (ref.current) {
+      if (!isFinished && !isError) {
+        ref.current.style.transform = `scaleX(${percentage})`;
+      } else {
+        ref.current.style.transform = '';
+      }
     }
   }, [percentage, isFinished, isError]);
 
@@ -103,9 +160,9 @@ function ProgressBar({
         aria-invalid={isError}
         aria-labelledby={labelId}
         aria-describedby={helperText ? helperTextId : undefined}
-        aria-valuemin={!indeterminate ? 0 : null}
-        aria-valuemax={!indeterminate ? max : null}
-        aria-valuenow={!indeterminate ? cappedValue : null}>
+        aria-valuemin={!indeterminate ? 0 : undefined}
+        aria-valuemax={!indeterminate ? max : undefined}
+        aria-valuenow={!indeterminate ? cappedValue : undefined}>
         <div className={`${prefix}--progress-bar__bar`} ref={ref} />
       </div>
       {helperText && (
