@@ -7,7 +7,6 @@
 
 'use strict';
 
-const Joi = require('@hapi/joi');
 const { reporter } = require('@carbon/cli-reporter');
 
 /**
@@ -22,7 +21,7 @@ const { reporter } = require('@carbon/cli-reporter');
 function validate(registry, extensions = []) {
   for (const extension of extensions) {
     if (extension.schema) {
-      const { error, value } = Joi.validate(extension.data, extension.schema);
+      const { error, value } = extension.schema.validate(extension.data);
       if (error) {
         const failedAssets = error.details.map(({ path, message }) => ({
           index: path[0],
