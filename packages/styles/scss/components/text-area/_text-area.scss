@@ -49,6 +49,11 @@
     @include focus-outline('outline');
   }
 
+  .#{$prefix}--text-area--counter {
+    position: absolute;
+    opacity: 0;
+  }
+
   .#{$prefix}--text-area::placeholder {
     @include placeholder-colors;
     @include type-style('body-01');

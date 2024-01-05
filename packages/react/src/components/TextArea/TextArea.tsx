@@ -18,6 +18,7 @@ import { useMergedRefs } from '../../internal/useMergedRefs';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
+import shortAndSweetMin from '../../internal/short-and-sweet.min';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -178,6 +179,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
   const { defaultValue, value } = other;
+  const [isComponentLoaded, setIsComponentLoaded] = useState(false);
 
   const { current: textAreaInstanceId } = useRef(getInstanceId());
 
@@ -412,10 +414,21 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     counterMode === 'word' ? 'words' : undefined
   );
 
+  useEffect(() => {
+    setIsComponentLoaded(true);
+    // "isComponentLoaded" avoids that the createElement function from the shortAndSweetMin is created multiple times
+    if (shortAndSweetMin !== undefined && !isComponentLoaded && enableCounter) {
+      shortAndSweetMin('textarea', {
+        counterClassName: `${prefix}--text-area--counter`,
+      });
+    }
+  }, [isComponentLoaded, prefix, enableCounter]);
+
   const input = (
     <textarea
       {...other}
       {...textareaProps}
+      data-counter-label="Still {remaining} characters left to type"
       placeholder={placeholder}
       className={textareaClasses}
       aria-invalid={invalid}

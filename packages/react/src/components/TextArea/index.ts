@@ -6,6 +6,7 @@
  */
 
 import TextArea from './TextArea';
+import './short-and-sweet.min.js';
 
 export { default as TextAreaSkeleton } from './TextArea.Skeleton';
 export default TextArea;
