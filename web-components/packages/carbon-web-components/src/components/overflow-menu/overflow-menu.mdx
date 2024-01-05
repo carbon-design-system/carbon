@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Meta, Markdown } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as OverflowMenuStories from './overflow-menu.stories';
+
+<Meta of={OverflowMenuStories} />
 
 # Overflow menu
 
@@ -24,8 +27,8 @@ import '@carbon/web-components/es/components/overflow-menu/index.js';
 import OverflowMenuVertical16 from '@carbon/icons/lib/overflow-menu--vertical/16';
 ```
 
-<Description markdown={`${cdnJs({ components: ['overflow-menu'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['overflow-menu'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -50,11 +53,11 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-overflow-menu open>`) and `false` means not setting the attribute (e.g.
 `<cds-overflow-menu>` without `open` attribute).
 
-<Props of="cds-overflow-menu" />
+<ArgsTable of="cds-overflow-menu" />
 
 ## `<cds-overflow-menu-body>` attributes and properties
 
-<Props of="cds-overflow-menu-body" />
+<ArgsTable of="cds-overflow-menu-body" />
 
 ## `<cds-overflow-menu-item>` attributes and properties
 
@@ -62,4 +65,4 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-overflow-menu-item disabled>`) and `false` means not setting the attribute
 (e.g. `<cds-overflow-menu-item>` without `disabled` attribute).
 
-<Props of="cds-overflow-menu-item" />
+<ArgsTable of="cds-overflow-menu-item" />
