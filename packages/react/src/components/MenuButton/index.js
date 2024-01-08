@@ -77,9 +77,7 @@ const MenuButton = React.forwardRef(function MenuButton(
     [`${prefix}--menu-button__trigger--open`]: open,
   });
 
-  const menuClasses = classNames(
-    `${prefix}--combo-button__menu-${menuAlignment}`
-  );
+  const menuClasses = classNames(`${prefix}--menu-button__${menuAlignment}`);
 
   const buttonKind = validButtonKinds.includes(kind) ? kind : defaultButtonKind;
 

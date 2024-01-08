@@ -135,7 +135,7 @@ describe('ComboButton', () => {
           await userEvent.click(screen.getAllByRole('button')[1]);
 
           expect(screen.getByRole('menu')).toHaveClass(
-            `${prefix}--combo-button__menu-${alignment}`
+            `${prefix}--combo-button__${alignment}`
           );
         });
       });

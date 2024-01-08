@@ -90,9 +90,7 @@ const ComboButton = React.forwardRef(function ComboButton(
     className
   );
 
-  const menuClasses = classNames(
-    `${prefix}--combo-button__menu-${menuAlignment}`
-  );
+  const menuClasses = classNames(`${prefix}--combo-button__${menuAlignment}`);
 
   const primaryActionClasses = classNames(
     `${prefix}--combo-button__primary-action`

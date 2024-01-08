@@ -59,9 +59,7 @@ const OverflowMenu = React.forwardRef(function OverflowMenu(
     `${prefix}--overflow-menu__container`
   );
 
-  const menuClasses = classNames(
-    `${prefix}--combo-button__menu-${menuAlignment}`
-  );
+  const menuClasses = classNames(`${prefix}--overflow-menu__${menuAlignment}`);
 
   const triggerClasses = classNames(
     `${prefix}--overflow-menu`,
