@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,7 +20,7 @@ const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const rtlcss = require('rtlcss');
 const { promisify } = require('util');
 const { terser } = require('rollup-plugin-terser');
-
+const alias = require('@rollup/plugin-alias');
 const carbonIcons = require('./rollup-plugin-icons');
 const fixHostPseudo = require('./postcss-fix-host-pseudo');
 const license = require('./rollup-plugin-license');
@@ -118,6 +118,9 @@ function getRollupConfig({
   return {
     input: _generateInputs(mode, dir, folders),
     plugins: [
+      alias({
+        entries: [{ find: /^(.*)\.scss\?lit$/, replacement: '$1.scss' }],
+      }),
       multiInput(),
       nodeResolve({
         browser: true,

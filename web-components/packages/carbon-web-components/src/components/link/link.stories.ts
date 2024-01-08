@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,7 +19,7 @@ const defaultArgs = {
   inline: false,
   size: LINK_SIZE.MEDIUM,
   visited: false,
-}
+};
 
 const controls = {
   disabled: {
@@ -31,19 +31,19 @@ const controls = {
     description: `Provide the href attribute for the <a> node`,
   },
   size: {
-    control: 'radio', options: [LINK_SIZE.SMALL, LINK_SIZE.MEDIUM, LINK_SIZE.LARGE],
-    description: `Specify the size of the Link. Currently supports either sm, 'md' (default) or 'lg' as an option.`
+    control: 'radio',
+    options: [LINK_SIZE.SMALL, LINK_SIZE.MEDIUM, LINK_SIZE.LARGE],
+    description: `Specify the size of the Link. Currently supports either sm, 'md' (default) or 'lg' as an option.`,
   },
   visited: {
     control: 'boolean',
     description: `Specify whether you want the link to receive visited styles after the link has been clicked`,
   },
-}
-
-export const Default = {
-  render: () => html` <cds-link href="#"> Link </cds-link> `
 };
 
+export const Default = {
+  render: () => html` <cds-link href="#"> Link </cds-link> `,
+};
 
 export const Inline = {
   render: () => html`
@@ -64,7 +64,7 @@ export const Inline = {
       Duis at tincidunt orci. Ut velit ipsum, lacinia at ex quis, aliquet
       rhoncus purus. Praesent et scelerisque ligula.
     </p>
-  `
+  `,
 };
 
 export const PairedWithIcon = {
@@ -72,12 +72,7 @@ export const PairedWithIcon = {
   parameters: {
     controls: { exclude: /(.*?)/ },
   },
-  render: ({ 
-    disabled,
-    href,
-    size,
-    onClick
-   }) => html`
+  render: ({ disabled, href, size, onClick }) => html`
     <cds-link
       ?disabled="${disabled}"
       href="${ifDefined(href)}"
@@ -91,14 +86,7 @@ export const PairedWithIcon = {
 export const Playground = {
   argTypes: controls,
   args: defaultArgs,
-  render: ({ 
-    disabled,
-    href,
-    inline,
-    size,
-    visited,
-    onClick
-   }) => html`
+  render: ({ disabled, href, inline, size, visited, onClick }) => html`
     <cds-link
       ?disabled="${disabled}"
       href="${ifDefined(href)}"

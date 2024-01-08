@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,7 +15,7 @@ import Fade16 from '@carbon/web-components/es/icons/fade/16';
 import Search20 from '@carbon/web-components/es/icons/search/20';
 import Notification20 from '@carbon/web-components/es/icons/notification/20';
 import SwitcherIcon20 from '@carbon/web-components/es/icons/switcher/20';
-import contentStyles from '@carbon/styles/scss/components/ui-shell/content/_content.scss';
+import contentStyles from '@carbon/styles/scss/components/ui-shell/content/_content.scss?lit';
 import { SIDE_NAV_COLLAPSE_MODE, SIDE_NAV_USAGE_MODE } from './side-nav';
 import { classMap } from 'lit/directives/class-map.js';
 import './index';
