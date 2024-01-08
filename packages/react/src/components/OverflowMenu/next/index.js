@@ -26,7 +26,7 @@ const OverflowMenu = React.forwardRef(function OverflowMenu(
     label = 'Options',
     renderIcon: IconElement = OverflowMenuVertical,
     size = defaultSize,
-    menuAlignment = 'top-right',
+    menuAlignment = 'bottom-left',
     tooltipAlignment,
     ...rest
   },
