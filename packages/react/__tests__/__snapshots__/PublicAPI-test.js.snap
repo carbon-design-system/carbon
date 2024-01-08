@@ -7379,6 +7379,9 @@ Map {
       "index": Object {
         "type": "number",
       },
+      "onClick": Object {
+        "type": "func",
+      },
       "onKeyDown": Object {
         "type": "func",
       },
