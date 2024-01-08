@@ -18,7 +18,7 @@ import { useMergedRefs } from '../../internal/useMergedRefs';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
-import shortAndSweetMin from '../../internal/short-and-sweet.min';
+import shortAndSweetMin from '../../internal/shortAndSweet';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -417,12 +417,17 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   useEffect(() => {
     setIsComponentLoaded(true);
     // "isComponentLoaded" avoids that the createElement function from the shortAndSweetMin is created multiple times
-    if (shortAndSweetMin !== undefined && !isComponentLoaded && enableCounter) {
+    if (
+      shortAndSweetMin !== undefined &&
+      !isComponentLoaded &&
+      enableCounter &&
+      counterMode === 'character'
+    ) {
       shortAndSweetMin('textarea', {
         counterClassName: `${prefix}--text-area--counter`,
       });
     }
-  }, [isComponentLoaded, prefix, enableCounter]);
+  }, [isComponentLoaded, prefix, enableCounter, counterMode]);
 
   const input = (
     <textarea

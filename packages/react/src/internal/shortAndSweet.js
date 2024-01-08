@@ -3,6 +3,7 @@
 /**
  * short-and-sweet v1.0.4 - Accessible character counter for input elements
  * Copyright (c) 2021 Rik Schennink <rik@pqina.nl> (https://pqina.nl/)
+ * https://github.com/rikschennink/short-and-sweet/tree/master
  */
 
 !(function (t, e) {
