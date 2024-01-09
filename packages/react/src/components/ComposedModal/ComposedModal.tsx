@@ -13,7 +13,9 @@ import { isElement } from 'react-is';
 import PropTypes, { ReactNodeLike } from 'prop-types';
 import { ModalHeader, type ModalHeaderProps } from './ModalHeader';
 import { ModalFooter, type ModalFooterProps } from './ModalFooter';
-
+import debounce from 'lodash.debounce';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+import mergeRefs from '../../tools/mergeRefs';
 import cx from 'classnames';
 
 import toggleClass from '../../tools/toggleClass';
@@ -51,6 +53,8 @@ export const ModalBody = React.forwardRef<HTMLDivElement, ModalBodyProps>(
     ref
   ) {
     const prefix = usePrefix();
+    const contentRef = useRef<HTMLDivElement>(null);
+    const [isScrollable, setIsScrollable] = useState(false);
     const contentClass = cx(
       `${prefix}--modal-content`,
       hasForm && `${prefix}--modal-content--with-form`,
@@ -58,9 +62,33 @@ export const ModalBody = React.forwardRef<HTMLDivElement, ModalBodyProps>(
       customClassName
     );
 
-    const hasScrollingContentProps = hasScrollingContent
-      ? { tabIndex: 0, role: 'region' }
-      : {};
+    useIsomorphicEffect(() => {
+      if (contentRef.current) {
+        setIsScrollable(
+          contentRef.current.scrollHeight > contentRef.current.clientHeight
+        );
+      }
+
+      function handler() {
+        if (contentRef.current) {
+          setIsScrollable(
+            contentRef.current.scrollHeight > contentRef.current.clientHeight
+          );
+        }
+      }
+
+      const debouncedHandler = debounce(handler, 200);
+      window.addEventListener('resize', debouncedHandler);
+      return () => {
+        debouncedHandler.cancel();
+        window.removeEventListener('resize', debouncedHandler);
+      };
+    }, []);
+
+    const hasScrollingContentProps =
+      hasScrollingContent || isScrollable
+        ? { tabIndex: 0, role: 'region' }
+        : {};
 
     return (
       <>
@@ -68,7 +96,7 @@ export const ModalBody = React.forwardRef<HTMLDivElement, ModalBodyProps>(
           className={contentClass}
           {...hasScrollingContentProps}
           {...rest}
-          ref={ref}>
+          ref={mergeRefs(contentRef, ref)}>
           {children}
         </div>
         {hasScrollingContent && (
