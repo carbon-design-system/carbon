@@ -17,8 +17,8 @@ import debounce from 'lodash.debounce';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import mergeRefs from '../../tools/mergeRefs';
 import cx from 'classnames';
-
 import toggleClass from '../../tools/toggleClass';
+import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import wrapFocus from '../../internal/wrapFocus';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
@@ -104,6 +104,37 @@ export const ModalBody = React.forwardRef<HTMLDivElement, ModalBodyProps>(
     );
   }
 );
+
+ModalBody.propTypes = {
+  /**
+   * Required props for the accessibility label of the header
+   */
+  ['aria-label']: requiredIfGivenPropIsTruthy(
+    'hasScrollingContent',
+    PropTypes.string
+  ),
+
+  /**
+   * Specify the content to be placed in the ModalBody
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be added to the Modal Body node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Provide whether the modal content has a form element.
+   * If `true` is used here, non-form child content should have `cds--modal-content__regular-content` class.
+   */
+  hasForm: PropTypes.bool,
+
+  /**
+   * Specify whether the modal contains scrolling content
+   */
+  hasScrollingContent: PropTypes.bool,
+};
 
 export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   /**

@@ -4844,6 +4844,21 @@ Map {
   },
   "ModalBody" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "aria-label": [Function],
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "hasForm": Object {
+        "type": "bool",
+      },
+      "hasScrollingContent": Object {
+        "type": "bool",
+      },
+    },
     "render": [Function],
   },
   "ModalFooter" => Object {
