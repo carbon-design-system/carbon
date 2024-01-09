@@ -240,7 +240,7 @@ $radio-border-width: 1px !default;
   }
 
   .#{$prefix}--radio-button-wrapper .#{$prefix}--radio-button__label {
-    display: flex;
+    display: inline-flex;
     align-items: flex-start;
     justify-content: center;
     margin: 0;
