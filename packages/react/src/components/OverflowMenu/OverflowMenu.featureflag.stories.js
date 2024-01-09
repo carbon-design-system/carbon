@@ -124,7 +124,10 @@ export const WithMenuAlignment = (args) => {
           marginTop: '15rem',
           justifyContent: 'space-between',
         }}>
-        <OverflowMenu {...args} menuAlignment="top-left">
+        <OverflowMenu
+          {...args}
+          menuAlignment="top-left"
+          tooltipAlignment="bottom">
           <MenuItem label="Stop app" />
           <MenuItem label="Restart app" />
           <MenuItem label="Rename app" />
@@ -133,7 +136,10 @@ export const WithMenuAlignment = (args) => {
           <MenuItem label="Delete app" kind="danger" />
         </OverflowMenu>
 
-        <OverflowMenu {...args} menuAlignment="top-right">
+        <OverflowMenu
+          {...args}
+          menuAlignment="top-right"
+          tooltipAlignment="bottom">
           <MenuItem label="Stop app" />
           <MenuItem label="Restart app" />
           <MenuItem label="Rename app" />

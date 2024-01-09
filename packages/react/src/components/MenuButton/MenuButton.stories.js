@@ -68,6 +68,55 @@ export const WithIcons = () => (
   </MenuButton>
 );
 
+export const WithMenuAlignment = () => (
+  <>
+    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <MenuButton label="Bottom" menuAlignment="bottom">
+        <MenuItem label="First action" />
+        <MenuItem label="Second action that is a longer item to test overflow and title." />
+        <MenuItem label="Third action" disabled />
+      </MenuButton>
+
+      <MenuButton label="Bottom left" menuAlignment="bottom-left">
+        <MenuItem label="First action" />
+        <MenuItem label="Second action that is a longer item to test overflow and title." />
+        <MenuItem label="Third action" disabled />
+      </MenuButton>
+
+      <MenuButton label="Bottom right" menuAlignment="bottom-right">
+        <MenuItem label="First action" />
+        <MenuItem label="Second action that is a longer item to test overflow and title." />
+        <MenuItem label="Third action" disabled />
+      </MenuButton>
+    </div>
+
+    <div
+      style={{
+        display: 'flex',
+        marginTop: '15rem',
+        justifyContent: 'space-between',
+      }}>
+      <MenuButton label="Top" menuAlignment="top">
+        <MenuItem label="First action" />
+        <MenuItem label="Second action that is a longer item to test overflow and title." />
+        <MenuItem label="Third action" disabled />
+      </MenuButton>
+
+      <MenuButton label="Top left" menuAlignment="top-left">
+        <MenuItem label="First action" />
+        <MenuItem label="Second action that is a longer item to test overflow and title." />
+        <MenuItem label="Third action" disabled />
+      </MenuButton>
+
+      <MenuButton label="Top right" menuAlignment="top-right">
+        <MenuItem label="First action" />
+        <MenuItem label="Second action that is a longer item to test overflow and title." />
+        <MenuItem label="Third action" disabled />
+      </MenuButton>
+    </div>
+  </>
+);
+
 export const Playground = (args) => {
   const onClick = action('onClick (MenuItem)');
 
