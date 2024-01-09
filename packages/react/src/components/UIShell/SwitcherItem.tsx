@@ -31,6 +31,10 @@ interface BaseSwitcherItemProps {
    */
   onKeyDown?: (event: KeyboardEvent) => void;
   /**
+   * event handlers
+   */
+  onClick?: (event: MouseEvent) => void;
+  /**
    * Specify the tab index of the Link
    */
   tabIndex?: number;
@@ -143,6 +147,10 @@ SwitcherItem.propTypes = {
    * Specify the index of the SwitcherItem
    */
   index: PropTypes.number,
+  /**
+   * event handlers
+   */
+  onClick: PropTypes.func,
   /**
    * event handlers
    */

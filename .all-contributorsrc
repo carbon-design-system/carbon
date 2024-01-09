@@ -1397,6 +1397,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "amercury",
+      "name": "Alexandr Ovchinnikov",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17834588?v=4",
+      "profile": "https://github.com/amercury",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
