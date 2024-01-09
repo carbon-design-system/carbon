@@ -344,7 +344,7 @@ const Modal = React.forwardRef(function Modal(
   });
 
   const contentClasses = classNames(`${prefix}--modal-content`, {
-    [`${prefix}--modal-scroll-content`]: hasScrollingContent,
+    [`${prefix}--modal-scroll-content`]: hasScrollingContent || isScrollable,
   });
 
   const footerClasses = classNames(`${prefix}--modal-footer`, {
@@ -513,7 +513,7 @@ const Modal = React.forwardRef(function Modal(
         {...hasScrollingContentProps}>
         {children}
       </div>
-      {hasScrollingContent && (
+      {(hasScrollingContent || isScrollable) && (
         <div className={`${prefix}--modal-content--overflow-indicator`} />
       )}
       {!passiveModal && (

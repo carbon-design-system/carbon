@@ -19,8 +19,6 @@ import mergeRefs from '../../tools/mergeRefs';
 import cx from 'classnames';
 
 import toggleClass from '../../tools/toggleClass';
-import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
-
 import wrapFocus from '../../internal/wrapFocus';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
@@ -55,12 +53,12 @@ export const ModalBody = React.forwardRef<HTMLDivElement, ModalBodyProps>(
     const prefix = usePrefix();
     const contentRef = useRef<HTMLDivElement>(null);
     const [isScrollable, setIsScrollable] = useState(false);
-    const contentClass = cx(
-      `${prefix}--modal-content`,
-      hasForm && `${prefix}--modal-content--with-form`,
-      hasScrollingContent && `${prefix}--modal-scroll-content`,
-      customClassName
-    );
+    const contentClass = cx({
+      [`${prefix}--modal-content`]: true,
+      [`${prefix}--modal-content--with-form`]: hasForm,
+      [`${prefix}--modal-scroll-content`]: hasScrollingContent || isScrollable,
+      customClassName,
+    });
 
     useIsomorphicEffect(() => {
       if (contentRef.current) {
@@ -99,44 +97,13 @@ export const ModalBody = React.forwardRef<HTMLDivElement, ModalBodyProps>(
           ref={mergeRefs(contentRef, ref)}>
           {children}
         </div>
-        {hasScrollingContent && (
+        {(hasScrollingContent || isScrollable) && (
           <div className={`${prefix}--modal-content--overflow-indicator`} />
         )}
       </>
     );
   }
 );
-
-ModalBody.propTypes = {
-  /**
-   * Required props for the accessibility label of the header
-   */
-  ['aria-label']: requiredIfGivenPropIsTruthy(
-    'hasScrollingContent',
-    PropTypes.string
-  ),
-
-  /**
-   * Specify the content to be placed in the ModalBody
-   */
-  children: PropTypes.node,
-
-  /**
-   * Specify an optional className to be added to the Modal Body node
-   */
-  className: PropTypes.string,
-
-  /**
-   * Provide whether the modal content has a form element.
-   * If `true` is used here, non-form child content should have `cds--modal-content__regular-content` class.
-   */
-  hasForm: PropTypes.bool,
-
-  /**
-   * Specify whether the modal contains scrolling content
-   */
-  hasScrollingContent: PropTypes.bool,
-};
 
 export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   /**
