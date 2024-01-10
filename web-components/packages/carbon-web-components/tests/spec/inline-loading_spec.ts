@@ -12,7 +12,7 @@ import { render } from 'lit';
 import CDSInlineLoading, {
   INLINE_LOADING_STATE,
 } from '../../src/components/inline-loading/inline-loading';
-import { Playground } from '../../src/components/inline-loading/inline-loading-story';
+import { Playground } from '../../src/components/inline-loading/inline-loading.stories';
 
 const template = (props?) =>
   Playground({

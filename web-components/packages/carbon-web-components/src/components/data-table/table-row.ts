@@ -19,6 +19,8 @@ import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import CDSTableExpandedRow from './table-expanded-row';
 import CDSTableCell from './table-cell';
+import '../checkbox';
+import '../radio-button';
 
 /**
  * Data table row.

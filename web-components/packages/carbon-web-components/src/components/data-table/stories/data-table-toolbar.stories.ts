@@ -8,13 +8,12 @@
  */
 
 import { html } from 'lit';
-import { boolean, select, text } from '@storybook/addon-knobs';
 import { prefix } from '../../../globals/settings';
 import { TABLE_SIZE } from '../table';
 import Settings16 from '@carbon/web-components/es/icons/settings/16';
 import OverflowMenuVertical16 from '@carbon/icons/lib/overflow-menu--vertical/16';
+import storyDocs from './data-table.mdx';
 import '../index';
-import storyDocs from './data-table-story.mdx';
 
 const sizes = {
   [`xs (${TABLE_SIZE.XS})`]: TABLE_SIZE.XS,
@@ -24,109 +23,153 @@ const sizes = {
   [`xl (${TABLE_SIZE.XL})`]: TABLE_SIZE.XL,
 };
 
-export const Default = () => {
-  return html`
-    <cds-table>
-      <cds-table-header-title slot="title">DataTable</cds-table-header-title>
-      <cds-table-header-description slot="description"
-        >With toolbar</cds-table-header-description
-      >
-
-      <cds-table-toolbar slot="toolbar">
-        <cds-table-toolbar-content>
-          <cds-table-toolbar-search
-            placeholder="Filter table"></cds-table-toolbar-search>
-          <cds-overflow-menu toolbar-action>
-            ${Settings16({
-              slot: 'icon',
-              class: `${prefix}--overflow-menu__icon`,
-            })}
-            <cds-overflow-menu-body>
-              <cds-overflow-menu-item @click=${() => alert('Alert 1')}>
-                Action 1
-              </cds-overflow-menu-item>
-              <cds-overflow-menu-item @click=${() => alert('Alert 2')}>
-                Action 2
-              </cds-overflow-menu-item>
-              <cds-overflow-menu-item @click=${() => alert('Alert 3')}>
-                Action 3
-              </cds-overflow-menu-item>
-            </cds-overflow-menu-body>
-          </cds-overflow-menu>
-          <cds-button>Primary button</cds-button>
-        </cds-table-toolbar-content>
-      </cds-table-toolbar>
-
-      <cds-table-head>
-        <cds-table-header-row>
-          <cds-table-header-cell>Name</cds-table-header-cell>
-          <cds-table-header-cell>Protocol</cds-table-header-cell>
-          <cds-table-header-cell>Port</cds-table-header-cell>
-          <cds-table-header-cell>Rule</cds-table-header-cell>
-          <cds-table-header-cell>Attached groups</cds-table-header-cell>
-          <cds-table-header-cell>Status</cds-table-header-cell>
-        </cds-table-header-row>
-      </cds-table-head>
-      <cds-table-body>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 3</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>3000</cds-table-cell>
-          <cds-table-cell>Round robin</cds-table-cell>
-          <cds-table-cell>Kevin's VM Groups</cds-table-cell>
-          <cds-table-cell
-            ><cds-link disabled>Disabled</cds-link></cds-table-cell
-          >
-        </cds-table-row>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 1</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>443</cds-table-cell>
-          <cds-table-cell>Round robin</cds-table-cell>
-          <cds-table-cell>Maureen's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
-        </cds-table-row>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 2</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>80</cds-table-cell>
-          <cds-table-cell>DNS delegation</cds-table-cell>
-          <cds-table-cell>Andrew's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
-        </cds-table-row>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 6</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>3000</cds-table-cell>
-          <cds-table-cell>Round robin</cds-table-cell>
-          <cds-table-cell>Marc's VM Groups</cds-table-cell>
-          <cds-table-cell
-            ><cds-link disabled>Disabled</cds-link></cds-table-cell
-          >
-        </cds-table-row>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 4</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>443</cds-table-cell>
-          <cds-table-cell>Round robin</cds-table-cell>
-          <cds-table-cell>Mel's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
-        </cds-table-row>
-        <cds-table-row>
-          <cds-table-cell>Load Balancer 5</cds-table-cell>
-          <cds-table-cell>HTTP</cds-table-cell>
-          <cds-table-cell>80</cds-table-cell>
-          <cds-table-cell>DNS delegation</cds-table-cell>
-          <cds-table-cell>Ronja's VM Groups</cds-table-cell>
-          <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
-        </cds-table-row>
-      </cds-table-body>
-    </cds-table>
-  `;
+const defaultArgs = {
+  isSortable: false,
+  locale: 'en',
+  overflowMenuOnHover: false,
+  radio: false,
+  size: TABLE_SIZE.LG,
+  useStaticWidth: false,
+  useZebraStyles: false,
 };
 
-export const PersistentToolbar = () => {
-  return html`
+const controls = {
+  isSortable: {
+    control: 'boolean',
+    description: 'Is sortable',
+  },
+  locale: {
+    control: 'text',
+    description: 'Locale',
+  },
+  overflowMenuOnHover: {
+    control: 'boolean',
+    description: 'Overflow menu on hover',
+  },
+  radio: {
+    control: 'boolean',
+    description: 'Radio',
+  },
+  size: {
+    control: 'select',
+    description: 'Size',
+    options: sizes,
+  },
+  useStaticWidth: {
+    control: 'boolean',
+    description: 'Use static width',
+  },
+  useZebraStyles: {
+    control: 'boolean',
+    description: 'Use zebra styles',
+  },
+};
+
+export const Default = {
+  render: () => {
+    return html`
+      <cds-table>
+        <cds-table-header-title slot="title">DataTable</cds-table-header-title>
+        <cds-table-header-description slot="description"
+          >With toolbar</cds-table-header-description
+        >
+
+        <cds-table-toolbar slot="toolbar">
+          <cds-table-toolbar-content>
+            <cds-table-toolbar-search
+              placeholder="Filter table"></cds-table-toolbar-search>
+            <cds-overflow-menu toolbar-action>
+              ${Settings16({
+                slot: 'icon',
+                class: `${prefix}--overflow-menu__icon`,
+              })}
+              <cds-overflow-menu-body>
+                <cds-overflow-menu-item @click=${() => alert('Alert 1')}>
+                  Action 1
+                </cds-overflow-menu-item>
+                <cds-overflow-menu-item @click=${() => alert('Alert 2')}>
+                  Action 2
+                </cds-overflow-menu-item>
+                <cds-overflow-menu-item @click=${() => alert('Alert 3')}>
+                  Action 3
+                </cds-overflow-menu-item>
+              </cds-overflow-menu-body>
+            </cds-overflow-menu>
+            <cds-button>Primary button</cds-button>
+          </cds-table-toolbar-content>
+        </cds-table-toolbar>
+
+        <cds-table-head>
+          <cds-table-header-row>
+            <cds-table-header-cell>Name</cds-table-header-cell>
+            <cds-table-header-cell>Protocol</cds-table-header-cell>
+            <cds-table-header-cell>Port</cds-table-header-cell>
+            <cds-table-header-cell>Rule</cds-table-header-cell>
+            <cds-table-header-cell>Attached groups</cds-table-header-cell>
+            <cds-table-header-cell>Status</cds-table-header-cell>
+          </cds-table-header-row>
+        </cds-table-head>
+        <cds-table-body>
+          <cds-table-row>
+            <cds-table-cell>Load Balancer 3</cds-table-cell>
+            <cds-table-cell>HTTP</cds-table-cell>
+            <cds-table-cell>3000</cds-table-cell>
+            <cds-table-cell>Round robin</cds-table-cell>
+            <cds-table-cell>Kevin's VM Groups</cds-table-cell>
+            <cds-table-cell
+              ><cds-link disabled>Disabled</cds-link></cds-table-cell
+            >
+          </cds-table-row>
+          <cds-table-row>
+            <cds-table-cell>Load Balancer 1</cds-table-cell>
+            <cds-table-cell>HTTP</cds-table-cell>
+            <cds-table-cell>443</cds-table-cell>
+            <cds-table-cell>Round robin</cds-table-cell>
+            <cds-table-cell>Maureen's VM Groups</cds-table-cell>
+            <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
+          </cds-table-row>
+          <cds-table-row>
+            <cds-table-cell>Load Balancer 2</cds-table-cell>
+            <cds-table-cell>HTTP</cds-table-cell>
+            <cds-table-cell>80</cds-table-cell>
+            <cds-table-cell>DNS delegation</cds-table-cell>
+            <cds-table-cell>Andrew's VM Groups</cds-table-cell>
+            <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
+          </cds-table-row>
+          <cds-table-row>
+            <cds-table-cell>Load Balancer 6</cds-table-cell>
+            <cds-table-cell>HTTP</cds-table-cell>
+            <cds-table-cell>3000</cds-table-cell>
+            <cds-table-cell>Round robin</cds-table-cell>
+            <cds-table-cell>Marc's VM Groups</cds-table-cell>
+            <cds-table-cell
+              ><cds-link disabled>Disabled</cds-link></cds-table-cell
+            >
+          </cds-table-row>
+          <cds-table-row>
+            <cds-table-cell>Load Balancer 4</cds-table-cell>
+            <cds-table-cell>HTTP</cds-table-cell>
+            <cds-table-cell>443</cds-table-cell>
+            <cds-table-cell>Round robin</cds-table-cell>
+            <cds-table-cell>Mel's VM Groups</cds-table-cell>
+            <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
+          </cds-table-row>
+          <cds-table-row>
+            <cds-table-cell>Load Balancer 5</cds-table-cell>
+            <cds-table-cell>HTTP</cds-table-cell>
+            <cds-table-cell>80</cds-table-cell>
+            <cds-table-cell>DNS delegation</cds-table-cell>
+            <cds-table-cell>Ronja's VM Groups</cds-table-cell>
+            <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
+          </cds-table-row>
+        </cds-table-body>
+      </cds-table>
+    `;
+  },
+};
+
+export const PersistentToolbar = {
+  render: () => html`
     <cds-table>
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
@@ -224,11 +267,11 @@ export const PersistentToolbar = () => {
         </cds-table-row>
       </cds-table-body>
     </cds-table>
-  `;
+  `,
 };
 
-export const SmallPersistentToolbar = () => {
-  return html`
+export const SmallPersistentToolbar = {
+  render: () => html`
     <cds-table size="sm">
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
@@ -320,11 +363,11 @@ export const SmallPersistentToolbar = () => {
         </cds-table-row>
       </cds-table-body>
     </cds-table>
-  `;
+  `,
 };
 
-export const WithOverflowMenu = () => {
-  return html`
+export const WithOverflowMenu = {
+  render: () => html`
     <cds-table overflow-menu-on-hover>
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
@@ -494,11 +537,14 @@ export const WithOverflowMenu = () => {
         </cds-table-row>
       </cds-table-body>
     </cds-table>
-  `;
+  `,
 };
 
-export const Playground = (args) => {
-  const {
+export const Playground = {
+  args: defaultArgs,
+  argTypes: controls,
+
+  render: ({
     isSortable,
     locale,
     radio,
@@ -506,8 +552,7 @@ export const Playground = (args) => {
     size,
     useStaticWidth,
     useZebraStyles,
-  } = args?.[`${prefix}-table`] ?? {};
-  return html`
+  }) => html`
     <cds-table
       ?is-sortable=${isSortable}
       locale="${locale}"
@@ -678,26 +723,16 @@ export const Playground = (args) => {
         </cds-table-row>
       </cds-table-body>
     </cds-table>
-  `;
+  `,
 };
 
-Playground.parameters = {
-  knobs: {
-    [`${prefix}-table`]: () => ({
-      isSortable: boolean('Is sortable', false),
-      locale: text('Locale', 'en'),
-      overflowMenuOnHover: boolean('Overflow menu on hover', false),
-      radio: boolean('Radio', false),
-      size: select('Size', sizes, TABLE_SIZE.LG),
-      useStaticWidth: boolean('Use static width', false),
-      useZebraStyles: boolean('Use zebra styles', false),
-    }),
-  },
-};
-
-export default {
+const meta = {
   title: 'Components/DataTable/Toolbar',
   parameters: {
-    ...storyDocs.parameters,
+    docs: {
+      page: storyDocs,
+    },
   },
 };
+
+export default meta;

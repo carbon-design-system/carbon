@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Markdown, Meta } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as InlineLoadingStories from './inline-loading.stories';
+
+<Meta of={InlineLoadingStories} /> 
 
 # Inline loading
 
@@ -30,8 +33,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/inline-loading/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['inline-loading'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['inline-loading'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -41,4 +44,4 @@ import '@carbon/web-components/es/components/inline-loading/index.js';
 
 ## `<cds-inline-loading>` attributes and properties
 
-<Props of="cds-inline-loading" />
+<ArgsTable of="cds-inline-loading" />

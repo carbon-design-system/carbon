@@ -1,4 +1,4 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Markdown } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../../globals/internal/storybook-cdn';
 
 # Data table
@@ -51,8 +51,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/data-table/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['data-table'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['data-table'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -562,48 +562,48 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 
 ### `<cds-table>`
 
-<Props of="cds-table" />
+<ArgsTable of="cds-table" />
 
 ### `<cds-table-header-row>`
 
-<Props of="cds-table-header-row" />
+<ArgsTable of="cds-table-header-row" />
 
 ### `<cds-table-header-cell>`
 
-<Props of="cds-table-header-cell" />
+<ArgsTable of="cds-table-header-cell" />
 
 ### `<cds-table-body>`
 
-<Props of="cds-table-body" />
+<ArgsTable of="cds-table-body" />
 
 ### `<cds-table-row>`
 
-<Props of="cds-table-row" />
+<ArgsTable of="cds-table-row" />
 
 ### `<cds-table-expanded-row>`
 
-<Props of="cds-table-expanded-row" />
+<ArgsTable of="cds-table-expanded-row" />
 
 ### `<cds-table-cell`
 
-<Props of="cds-table-cell" />
+<ArgsTable of="cds-table-cell" />
 
 ### `<cds-table-batch-actions>`
 
-<Props of="cds-table-batch-actions" />
+<ArgsTable of="cds-table-batch-actions" />
 
 ### `<cds-table-toolbar>`
 
-<Props of="cds-table-toolbar" />
+<ArgsTable of="cds-table-toolbar" />
 
 ### `<cds-table-toolbar-content>`
 
-<Props of="cds-table-toolbar-content" />
+<ArgsTable of="cds-table-toolbar-content" />
 
 ### `<cds-table-toolbar-search>`
 
-<Props of="cds-table-toolbar-search" />
+<ArgsTable of="cds-table-toolbar-search" />
 
 ### `cds-table-skeleton`
 
-<Props of="cds-table-skeleton" />
+<ArgsTable of="cds-table-skeleton" />

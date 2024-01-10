@@ -8,11 +8,9 @@
  */
 
 import { html } from 'lit';
-import { boolean, select, text } from '@storybook/addon-knobs';
-import { prefix } from '../../../globals/settings';
 import { TABLE_SIZE } from '../table';
 import '../index';
-import storyDocs from './data-table-story.mdx';
+import storyDocs from './data-table.mdx';
 
 const sizes = {
   [`xs (${TABLE_SIZE.XS})`]: TABLE_SIZE.XS,
@@ -22,8 +20,35 @@ const sizes = {
   [`xl (${TABLE_SIZE.XL})`]: TABLE_SIZE.XL,
 };
 
-export const Default = () => {
-  return html`
+const defaultArgs = {
+  locale: 'en',
+  size: TABLE_SIZE.LG,
+  useStaticWidth: false,
+  useZebraStyles: false,
+};
+
+const controls = {
+  locale: {
+    control: 'text',
+    description: 'Provide a string for the current locale.',
+  },
+  size: {
+    control: 'radio',
+    description: 'Change the row height of table.',
+    options: sizes,
+  },
+  useStaticWidth: {
+    control: 'boolean',
+    description: 'Use static width.',
+  },
+  useZebraStyles: {
+    control: 'boolean',
+    description: 'Use zebra styles.',
+  },
+};
+
+export const Default = {
+  render: () => html`
     <cds-table>
       <cds-table-head>
         <cds-table-header-row>
@@ -86,11 +111,11 @@ export const Default = () => {
         </cds-table-row>
       </cds-table-body>
     </cds-table>
-  `;
+  `,
 };
 
-export const XLWithTwoLines = () => {
-  return html`
+export const XLWithTwoLines = {
+  render: () => html`
     <cds-table size="xl">
       <cds-table-head>
         <cds-table-header-row>
@@ -113,8 +138,8 @@ export const XLWithTwoLines = () => {
           <cds-table-cell>22</cds-table-cell>
         </cds-table-row>
         <cds-table-row>
-          <cds-table-cell
-            >Load Balancer 2
+          <cds-table-cell>
+            Load Balancer 2
             <cds-table-cell-content>Austin, Tx</cds-table-cell-content>
           </cds-table-cell>
           <cds-table-cell>DNS delegation</cds-table-cell>
@@ -123,8 +148,8 @@ export const XLWithTwoLines = () => {
           <cds-table-cell>22</cds-table-cell>
         </cds-table-row>
         <cds-table-row>
-          <cds-table-cell
-            >Load Balancer 3
+          <cds-table-cell>
+            Load Balancer 3
             <cds-table-cell-content>Austin, Tx</cds-table-cell-content>
           </cds-table-cell>
           <cds-table-cell>Round robin</cds-table-cell>
@@ -133,8 +158,8 @@ export const XLWithTwoLines = () => {
           <cds-table-cell>22</cds-table-cell>
         </cds-table-row>
         <cds-table-row>
-          <cds-table-cell
-            >Load Balancer 4
+          <cds-table-cell>
+            Load Balancer 4
             <cds-table-cell-content>Austin, Tx</cds-table-cell-content>
           </cds-table-cell>
           <cds-table-cell>Round robin</cds-table-cell>
@@ -143,8 +168,8 @@ export const XLWithTwoLines = () => {
           <cds-table-cell>22</cds-table-cell>
         </cds-table-row>
         <cds-table-row>
-          <cds-table-cell
-            >Load Balancer 5
+          <cds-table-cell>
+            Load Balancer 5
             <cds-table-cell-content>Austin, Tx</cds-table-cell-content>
           </cds-table-cell>
           <cds-table-cell>Round robin</cds-table-cell>
@@ -153,8 +178,8 @@ export const XLWithTwoLines = () => {
           <cds-table-cell>22</cds-table-cell>
         </cds-table-row>
         <cds-table-row>
-          <cds-table-cell
-            >Load Balancer 6
+          <cds-table-cell>
+            Load Balancer 6
             <cds-table-cell-content>Austin, Tx</cds-table-cell-content>
           </cds-table-cell>
           <cds-table-cell>Round robin</cds-table-cell>
@@ -163,8 +188,8 @@ export const XLWithTwoLines = () => {
           <cds-table-cell>22</cds-table-cell>
         </cds-table-row>
         <cds-table-row>
-          <cds-table-cell
-            >Load Balancer 7
+          <cds-table-cell>
+            Load Balancer 7
             <cds-table-cell-content>Austin, Tx</cds-table-cell-content>
           </cds-table-cell>
           <cds-table-cell>Round robin</cds-table-cell>
@@ -174,13 +199,13 @@ export const XLWithTwoLines = () => {
         </cds-table-row>
       </cds-table-body>
     </cds-table>
-  `;
+  `,
 };
 
-export const Playground = (args) => {
-  const { locale, size, useStaticWidth, useZebraStyles } =
-    args?.[`${prefix}-table`] ?? {};
-  return html`
+export const Playground = {
+  args: defaultArgs,
+  argTypes: controls,
+  render: ({ locale, size, useStaticWidth, useZebraStyles }) => html`
     <cds-table
       locale="${locale}"
       size="${size}"
@@ -247,23 +272,16 @@ export const Playground = (args) => {
         </cds-table-row>
       </cds-table-body>
     </cds-table>
-  `;
+  `,
 };
 
-Playground.parameters = {
-  knobs: {
-    [`${prefix}-table`]: () => ({
-      locale: text('Locale', 'en'),
-      size: select('Size', sizes, TABLE_SIZE.LG),
-      useStaticWidth: boolean('Use static width', false),
-      useZebraStyles: boolean('Use zebra styles', false),
-    }),
-  },
-};
-
-export default {
+const meta = {
   title: 'Components/DataTable/Basic',
   parameters: {
-    ...storyDocs.parameters,
+    docs: {
+      page: storyDocs,
+    },
   },
 };
+
+export default meta;

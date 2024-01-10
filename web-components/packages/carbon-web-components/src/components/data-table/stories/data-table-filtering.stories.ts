@@ -8,11 +8,12 @@
  */
 
 import { html } from 'lit';
-import { boolean, select, text } from '@storybook/addon-knobs';
 import { prefix } from '../../../globals/settings';
 import { TABLE_SIZE } from '../table';
+// @ts-ignore
+import Settings16 from '@carbon/web-components/es/icons/settings/16';
 import '../index';
-import storyDocs from './data-table-story.mdx';
+import storyDocs from './data-table.mdx';
 
 const sizes = {
   [`xs (${TABLE_SIZE.XS})`]: TABLE_SIZE.XS,
@@ -22,13 +23,64 @@ const sizes = {
   [`xl (${TABLE_SIZE.XL})`]: TABLE_SIZE.XL,
 };
 
-export const Default = () => {
-  return html`
-    <cds-table is-sortable>
+const defaultArgs = {
+  isSortable: false,
+  locale: 'en',
+  size: TABLE_SIZE.LG,
+  useStaticWidth: false,
+  useZebraStyles: false,
+};
+
+const controls = {
+  isSortable: {
+    control: 'boolean',
+    description: 'Is sortable',
+  },
+  locale: {
+    control: 'text',
+    description: 'Locale',
+  },
+  size: {
+    control: 'radio',
+    description: 'Size',
+    options: sizes,
+  },
+  useStaticWidth: {
+    control: 'boolean',
+    description: 'Use static width',
+  },
+  useZebraStyles: {
+    control: 'boolean',
+    description: 'Use zebra styles',
+  },
+};
+
+export const Default = {
+  render: () => html`
+    <cds-table>
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
         >With filtering</cds-table-header-description
       >
+
+      <cds-table-toolbar slot="toolbar">
+        <cds-table-toolbar-content ?has-batch-actions="true">
+          <cds-table-toolbar-search
+            placeholder="Filter table"></cds-table-toolbar-search>
+          <cds-overflow-menu toolbar-action>
+            ${Settings16({
+              slot: 'icon',
+              class: `${prefix}--overflow-menu__icon`,
+            })}
+            <cds-overflow-menu-body>
+              <cds-overflow-menu-item> Action 1 </cds-overflow-menu-item>
+              <cds-overflow-menu-item> Action 2 </cds-overflow-menu-item>
+              <cds-overflow-menu-item> Action 3 </cds-overflow-menu-item>
+            </cds-overflow-menu-body>
+          </cds-overflow-menu>
+          <cds-button>Primary Button</cds-button>
+        </cds-table-toolbar-content>
+      </cds-table-toolbar>
 
       <cds-table-head>
         <cds-table-header-row>
@@ -95,16 +147,24 @@ export const Default = () => {
         </cds-table-row>
       </cds-table-body>
     </cds-table>
-  `;
+  `,
 };
 
-export const Playground = (args) => {
-  const { isSortable, locale, size, useStaticWidth, useZebraStyles } =
-    args?.[`${prefix}-table`] ?? {};
-  return html`
+export const Playground = {
+  args: defaultArgs,
+  argTypes: controls,
+  render: ({
+    isSortable,
+    locale,
+    radio,
+    size,
+    useStaticWidth,
+    useZebraStyles,
+  }) => html`
     <cds-table
       ?is-sortable=${isSortable}
       locale="${locale}"
+      ?radio=${radio}
       size="${size}"
       ?use-static-width="${useStaticWidth}"
       ?use-zebra-styles="${useZebraStyles}">
@@ -113,6 +173,25 @@ export const Playground = (args) => {
         >With filtering</cds-table-header-description
       >
 
+      <cds-table-toolbar slot="toolbar">
+        <cds-table-toolbar-content ?has-batch-actions="true">
+          <cds-table-toolbar-search
+            placeholder="Filter table"></cds-table-toolbar-search>
+          <cds-overflow-menu toolbar-action>
+            ${Settings16({
+              slot: 'icon',
+              class: `${prefix}--overflow-menu__icon`,
+            })}
+            <cds-overflow-menu-body>
+              <cds-overflow-menu-item> Action 1 </cds-overflow-menu-item>
+              <cds-overflow-menu-item> Action 2 </cds-overflow-menu-item>
+              <cds-overflow-menu-item> Action 3 </cds-overflow-menu-item>
+            </cds-overflow-menu-body>
+          </cds-overflow-menu>
+          <cds-button>Primary Button</cds-button>
+        </cds-table-toolbar-content>
+      </cds-table-toolbar>
+
       <cds-table-head>
         <cds-table-header-row>
           <cds-table-header-cell>Name</cds-table-header-cell>
@@ -178,24 +257,16 @@ export const Playground = (args) => {
         </cds-table-row>
       </cds-table-body>
     </cds-table>
-  `;
+  `,
 };
 
-Playground.parameters = {
-  knobs: {
-    [`${prefix}-table`]: () => ({
-      isSortable: boolean('Is sortable', true),
-      locale: text('Locale', 'en'),
-      size: select('Size', sizes, TABLE_SIZE.LG),
-      useStaticWidth: boolean('Use static width', false),
-      useZebraStyles: boolean('Use zebra styles', false),
-    }),
-  },
-};
-
-export default {
-  title: 'Components/DataTable/Sorting',
+const meta = {
+  title: 'Components/DataTable/Filtering',
   parameters: {
-    ...storyDocs.parameters,
+    docs: {
+      page: storyDocs,
+    },
   },
 };
+
+export default meta;

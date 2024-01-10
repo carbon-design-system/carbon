@@ -18,7 +18,7 @@ import CDSTableHeaderCell, {
 import CDSTableRow from '../../src/components/data-table/table-row';
 import CDSTableExpandedRow from '../../src/components/data-table/table-expanded-row';
 import CDSTableToolbarSearch from '../../src/components/data-table/table-toolbar-search';
-import { Playground } from '../../src/components/data-table/stories/data-table-basic-story';
+import { Playground } from '../../src/components/data-table/stories/data-table-basic.stories';
 
 const template = ({ ...rest } = {}) =>
   Playground({

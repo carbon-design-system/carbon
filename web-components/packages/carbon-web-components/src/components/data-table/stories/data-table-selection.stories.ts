@@ -8,11 +8,9 @@
  */
 
 import { html } from 'lit';
-import { boolean, select, text } from '@storybook/addon-knobs';
-import { prefix } from '../../../globals/settings';
 import { TABLE_SIZE } from '../table';
 import '../index';
-import storyDocs from './data-table-story.mdx';
+import storyDocs from './data-table.mdx';
 
 const sizes = {
   [`xs (${TABLE_SIZE.XS})`]: TABLE_SIZE.XS,
@@ -22,8 +20,45 @@ const sizes = {
   [`xl (${TABLE_SIZE.XL})`]: TABLE_SIZE.XL,
 };
 
-export const Default = () => {
-  return html`
+const defaultArgs = {
+  isSortable: false,
+  locale: 'en',
+  radio: false,
+  size: TABLE_SIZE.LG,
+  useStaticWidth: false,
+  useZebraStyles: false,
+};
+
+const controls = {
+  isSortable: {
+    control: 'boolean',
+    description: 'Is sortable',
+  },
+  locale: {
+    control: 'text',
+    description: 'Locale',
+  },
+  radio: {
+    control: 'boolean',
+    description: 'Radio',
+  },
+  size: {
+    control: 'radio',
+    description: 'Size',
+    options: sizes,
+  },
+  useStaticWidth: {
+    control: 'boolean',
+    description: 'Use static width',
+  },
+  useZebraStyles: {
+    control: 'boolean',
+    description: 'Use zebra styles',
+  },
+};
+
+export const Default = {
+  render: () => html`
     <cds-table>
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
@@ -95,12 +130,12 @@ export const Default = () => {
         </cds-table-row>
       </cds-table-body>
     </cds-table>
-  `;
+  `,
 };
 
-export const WithRadioSelection = () => {
-  return html`
-    <cds-table radio>
+export const WithRadioSelection = {
+  render: () => html`
+    <cds-table is-selectable with-header radio>
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
         >With selection</cds-table-header-description
@@ -171,11 +206,11 @@ export const WithRadioSelection = () => {
         </cds-table-row>
       </cds-table-body>
     </cds-table>
-  `;
+  `,
 };
 
-export const WithSelectionAndSorting = () => {
-  return html`
+export const WithSelectionAndSorting = {
+  render: () => html`
     <cds-table is-sortable>
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
@@ -247,13 +282,20 @@ export const WithSelectionAndSorting = () => {
         </cds-table-row>
       </cds-table-body>
     </cds-table>
-  `;
+  `,
 };
 
-export const Playground = (args) => {
-  const { isSortable, locale, radio, size, useStaticWidth, useZebraStyles } =
-    args?.[`${prefix}-table`] ?? {};
-  return html`
+export const Playground = {
+  args: defaultArgs,
+  argTypes: controls,
+  render: ({
+    isSortable,
+    locale,
+    radio,
+    size,
+    useStaticWidth,
+    useZebraStyles,
+  }) => html`
     <cds-table
       ?is-sortable=${isSortable}
       locale="${locale}"
@@ -331,25 +373,16 @@ export const Playground = (args) => {
         </cds-table-row>
       </cds-table-body>
     </cds-table>
-  `;
+  `,
 };
 
-Playground.parameters = {
-  knobs: {
-    [`${prefix}-table`]: () => ({
-      isSortable: boolean('Is sortable', false),
-      locale: text('Locale', 'en'),
-      radio: boolean('Radio', false),
-      size: select('Size', sizes, TABLE_SIZE.LG),
-      useStaticWidth: boolean('Use static width', false),
-      useZebraStyles: boolean('Use zebra styles', false),
-    }),
-  },
-};
-
-export default {
+const meta = {
   title: 'Components/DataTable/Selection',
   parameters: {
-    ...storyDocs.parameters,
+    docs: {
+      page: storyDocs,
+    },
   },
 };
+
+export default meta;

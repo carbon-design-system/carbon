@@ -1,5 +1,9 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Markdown, Meta } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+
+import * as ModalStories from './modal.stories';
+
+<Meta of={ModalStories} />
 
 # Modal
 
@@ -36,8 +40,8 @@ import '@carbon/web-components/es/components/modal/index.js';
 import '@carbon/web-components/es/components/button/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['modal', 'button'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['modal', 'button'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -74,7 +78,7 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-modal open>`) and `false` means not setting the attribute (e.g.
 `<cds-modal>` without `open` attribute).
 
-<Props of="cds-modal" />
+<ArgsTable of="cds-modal" />
 
 ## `<cds-modal-footer-button>` attributes and properties
 
@@ -82,7 +86,7 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-modal-footer-button disabled>`) and `false` means not setting the
 attribute (e.g. `<cds-modal-footer-button>` without `disabled` attribute).
 
-<Props of="cds-modal-footer-button" />
+<ArgsTable of="cds-modal-footer-button" />
 
 ## Opening/closing modal
 

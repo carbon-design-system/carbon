@@ -1,5 +1,9 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Markdown, Meta } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+
+import * as CheckboxStories from './checkbox.stories';
+
+<Meta of={CheckboxStories} /> 
 
 # Check box
 
@@ -22,8 +26,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/checkbox/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['checkbox'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['checkbox'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -49,4 +53,4 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-checkbox checked>`) and `false` means not setting the attribute (e.g.
 `<cds-checkbox>` without `checked` attribute).
 
-<Props of="cds-checkbox" />
+<ArgsTable of="cds-checkbox" />

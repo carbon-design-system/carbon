@@ -1,4 +1,4 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Markdown, Meta } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 
 # List
@@ -21,8 +21,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/list/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['list'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['list'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -74,4 +74,4 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-list nested>`) and `false` means not setting the attribute (e.g.
 `<cds-list>` without `nested` attribute).
 
-<Props of="cds-list-item" />
+<ArgsTable of="cds-list-item" />

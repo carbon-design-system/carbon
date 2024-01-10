@@ -1,4 +1,4 @@
-import { ArgsTable, Description, Meta } from '@storybook/blocks';
+import { ArgsTable, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as LinkStories from './link.stories';
 
@@ -25,8 +25,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/list/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['list'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['list'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
