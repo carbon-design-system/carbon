@@ -36,3 +36,5 @@ const ListBox: ListBoxComponent = Object.assign(ListBoxInternal, {
 });
 
 export default ListBox;
+
+export type { ListBoxMenuIconTranslationKey } from './ListBoxMenuIcon';
