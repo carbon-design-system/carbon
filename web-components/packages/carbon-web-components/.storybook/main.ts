@@ -20,6 +20,8 @@ const stories = glob.sync(
     // '../src/**/*.mdx',
     // '../src/**/*.stories.@(js|jsx|ts|tsx)',
     // add mdx/story files as they are being worked on
+    '../src/**/breadcrumb.mdx',
+    '../src/**/breadcrumb.stories.ts',
     '../src/**/combo-box.stories.ts',
     '../src/**/combo-box.mdx',
     '../src/**/content-switcher.mdx',

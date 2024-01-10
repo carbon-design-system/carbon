@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Meta, Description } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as BreadcrumbStories from './breadcrumb.stories';
+
+<Meta of={BreadcrumbStories} />
 
 # Breadcrumb
 
@@ -116,8 +119,8 @@ import '@carbon/web-components/es/components/breadcrumb/index.js';
 
 ## `<cds-breadcrumb>` attributes, properties and events
 
-<Props of="cds-breadcrumb" />
+<ArgsTable of="cds-breadcrumb" />
 
 ## `<cds-breadcrumb-link>` attributes, properties and events
 
-<Props of="cds-breadcrumb-link" />
+<ArgsTable of="cds-breadcrumb-link" />
