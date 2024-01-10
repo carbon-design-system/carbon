@@ -9,7 +9,7 @@
 
 import { render } from 'lit';
 import { BUTTON_KIND } from '../../src/components/button/button';
-import { Default } from '../../src/components/button/button-story';
+import { Default } from '../../src/components/button/button.stories';
 
 const template = (props?) =>
   Default({
