@@ -1,4 +1,8 @@
-import { Props } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Meta, Markdown } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as SkipToContentStories from './skip-to-content.stories';
+
+<Meta of={SkipToContentStories} />
 
 # Skip to content
 
@@ -21,8 +25,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/skip-to-content/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['skip-to-content'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['skip-to-content'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -32,4 +36,4 @@ import '@carbon/web-components/es/components/skip-to-content/index.js';
 
 ## `<cds-skip-to-content>` attributes and properties
 
-<Props of="cds-skip-to-content" />
+<ArgsTable of="cds-skip-to-content" />
