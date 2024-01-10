@@ -1,12 +1,12 @@
 {
   "name": "codesandbox",
   "private": true,
-  "version": "0.6.18",
+  "version": "0.6.19",
   "scripts": {
     "develop": "vite"
   },
   "dependencies": {
-    "@carbon/react": "^0.20.18",
+    "@carbon/react": "^0.20.19",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
