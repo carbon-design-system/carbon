@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Meta, Description } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as ContentSwitcherStories from './content-switcher.stories';
+
+<Meta of={ContentSwitcherStories} />
 
 # Content switcher
 
@@ -44,8 +47,8 @@ import '@carbon/web-components/es/components/content-switcher/index.js';
 
 ## `<cds-content-switcher>` attributes, properties and events
 
-<Props of="cds-content-switcher" />
+<ArgsTable of="cds-content-switcher" />
 
 ## `<cds-content-switcher-item>` attributes and properties
 
-<Props of="cds-content-switcher-item" />
+<ArgsTable of="cds-content-switcher-item" />
