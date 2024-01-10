@@ -7,6 +7,7 @@
 @use '../../utilities/ai-gradient' as *;
 @use '../../utilities/convert';
 @use '../toggletip';
+@use '../popover';
 
 $sizes: (
   mini: (
@@ -338,6 +339,7 @@ $sizes: (
     min-inline-size: convert.to-rem(280px);
   }
 
+  // Slug callout caret styles
   .#{$prefix}--slug.#{$prefix}--slug--enabled
     > .#{$prefix}--toggletip
     > .#{$prefix}--popover
@@ -346,6 +348,7 @@ $sizes: (
     clip-path: none;
   }
 
+  // Top
   .#{$prefix}--slug.#{$prefix}--slug--enabled
     > .#{$prefix}--toggletip
     > .#{$prefix}--popover
@@ -355,10 +358,87 @@ $sizes: (
     border: 1px solid $slug-callout-border-01;
     background: $background;
     block-size: convert.to-rem(12px);
-    clip-path: polygon(100% 0, 0 0, -50% 150%) border-box;
+    clip-path: polygon(98% 0, 0 0, -52% 150%) border-box;
     content: '';
     inline-size: convert.to-rem(12px);
-    transform: rotate(45deg) translate(0.5px, 1px);
+    transform: rotate(45deg);
+  }
+
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret::after {
+    position: absolute;
+    display: block;
+    background: $background;
+    block-size: convert.to-rem(14px);
+    content: '';
+    inline-size: 2px;
+  }
+
+  // Right
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--right,
+      .#{$prefix}--popover--right-bottom,
+      .#{$prefix}--popover--right-top
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    &::before {
+      transform: rotate(-45deg);
+    }
+
+    &::after {
+      border-end-end-radius: 50%;
+      border-start-end-radius: 50%;
+      inset-block-start: -1px;
+      inset-inline-start: -2px;
+    }
+  }
+
+  // Bottom
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--bottom,
+      .#{$prefix}--popover--bottom-left,
+      .#{$prefix}--popover--bottom-right
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret::before {
+    transform: rotate(45deg);
+  }
+
+  // Left
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--left,
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--left-top
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    &::before {
+      inset-inline-end: 1px;
+      transform: rotate(135deg);
+    }
+
+    &::after {
+      border-end-end-radius: 50%;
+      border-start-end-radius: 50%;
+      inset-block-start: -1px;
+      inset-inline-start: -2px;
+    }
+  }
+
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--right-bottom
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret::after {
+    background: transparent;
   }
 
   .#{$prefix}--slug.#{$prefix}--slug--enabled .#{$prefix}--toggletip-content {

@@ -98,6 +98,8 @@
           theme.$slug-callout-border-01,
           theme.$slug-callout-border-02
         )
+        border-box,
+      linear-gradient(to bottom, theme.$background, theme.$background)
         border-box;
   }
 }
