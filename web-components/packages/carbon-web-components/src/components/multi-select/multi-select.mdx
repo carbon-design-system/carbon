@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Meta, Description } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as MultiSelectStories from './multi-select.stories';
+
+<Meta of={MultiSelectStories} />
 
 # Multi select
 
@@ -103,7 +106,7 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-multi-select open>`) and `false` means not setting the attribute (e.g.
 `<cds-multi-select>` without `open` attribute).
 
-<Props of="cds-multi-select" />
+<ArgsTable of="cds-multi-select" />
 
 ## `<cds-multi-select-item>` attributes and properties
 
@@ -111,4 +114,4 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-multi-select-item disabled>`) and `false` means not setting the attribute
 (e.g. `<cds-multi-select-item>` without `disabled` attribute).
 
-<Props of="cds-multi-select-item" />
+<ArgsTable of="cds-multi-select-item" />
