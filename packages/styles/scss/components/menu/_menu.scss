@@ -40,6 +40,10 @@
     visibility: hidden;
   }
 
+  .#{$prefix}--menu--box-shadow-top {
+    @include box-shadow-top;
+  }
+
   .#{$prefix}--menu--with-icons {
     min-inline-size: 12rem;
   }

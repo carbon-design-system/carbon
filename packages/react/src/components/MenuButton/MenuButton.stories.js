@@ -121,17 +121,14 @@ export const Playground = (args) => {
   const onClick = action('onClick (MenuItem)');
 
   return (
-    <div
-      style={{ display: 'flex', justifyContent: 'center', marginTop: '12rem' }}>
-      <MenuButton {...args}>
-        <MenuItem
-          label="First action with a long label description"
-          onClick={onClick}
-        />
-        <MenuItem label="Second action" onClick={onClick} />
-        <MenuItem label="Third action" onClick={onClick} disabled />
-      </MenuButton>
-    </div>
+    <MenuButton {...args}>
+      <MenuItem
+        label="First action with a long label description"
+        onClick={onClick}
+      />
+      <MenuItem label="Second action" onClick={onClick} />
+      <MenuItem label="Third action" onClick={onClick} disabled />
+    </MenuButton>
   );
 };
 

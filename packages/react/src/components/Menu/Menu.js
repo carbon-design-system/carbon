@@ -297,6 +297,7 @@ const Menu = React.forwardRef(function Menu(
       // visibility is needed for focusing elements.
       // opacity is only set once the position has been set correctly
       // to avoid a flicker effect when opening.
+      [`${prefix}--menu--box-shadow-top`]: menuAlignment?.slice(0, 3) === 'top',
       [`${prefix}--menu--open`]: open,
       [`${prefix}--menu--shown`]: position[0] >= 0 && position[1] >= 0,
       [`${prefix}--menu--with-icons`]: childContext.state.hasIcons,

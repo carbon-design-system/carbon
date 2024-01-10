@@ -154,22 +154,14 @@ export const WithMenuAlignment = (args) => {
 
 export const Playground = (args) => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        marginTop: '15rem',
-        marginBottom: '15rem',
-      }}>
-      <OverflowMenu {...args}>
-        <MenuItem label="Stop app" />
-        <MenuItem label="Restart app" />
-        <MenuItem label="Rename app" />
-        <MenuItem label="Edit routes and access" />
-        <MenuItemDivider />
-        <MenuItem label="Delete app" kind="danger" />
-      </OverflowMenu>
-    </div>
+    <OverflowMenu {...args}>
+      <MenuItem label="Stop app" />
+      <MenuItem label="Restart app" />
+      <MenuItem label="Rename app" />
+      <MenuItem label="Edit routes and access" />
+      <MenuItemDivider />
+      <MenuItem label="Delete app" kind="danger" />
+    </OverflowMenu>
   );
 };
 
