@@ -9,7 +9,7 @@
 
 import { render } from 'lit';
 import EventManager from '../utils/event-manager';
-import { Default, Playground } from '../../src/components/tag/tag-story';
+import { Default, Playground } from '../../src/components/tag/tag.stories';
 
 const tagTemplate = () => Default();
 

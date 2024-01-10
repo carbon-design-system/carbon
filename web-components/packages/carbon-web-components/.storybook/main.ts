@@ -44,6 +44,10 @@ const stories = glob.sync(
     '../src/**/skip-to-content.stories.ts',
     '../src/**/slider.mdx',
     '../src/**/slider.stories.ts',
+    '../src/**/tag.mdx',
+    '../src/**/tag.stories.ts',
+    '../src/**/tooltip.mdx',
+    '../src/**/tooltip.stories.ts',
   ],
   {
     ignore: ['../src/**/docs/*.mdx'],

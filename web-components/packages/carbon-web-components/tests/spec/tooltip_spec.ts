@@ -12,7 +12,7 @@ import ResizeObserver from 'resize-observer-polyfill';
 import CDSTooltip from '../../src/components/tooltip/tooltip';
 import CDSTooltipContent from '../../src/components/tooltip/tooltip-content';
 import { POPOVER_ALIGNMENT } from '../../src/components/popover/defs';
-import { Playground } from '../../src/components/tooltip/tooltip-story';
+import { Playground } from '../../src/components/tooltip/tooltip.stories';
 
 const bodyTemplate = () => html` <cds-tooltip-content></cds-tooltip-content> `;
 const contentTemplate = ({

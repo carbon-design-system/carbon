@@ -8,16 +8,13 @@
  */
 
 import { html } from 'lit';
-import { boolean, number, select, text } from '@storybook/addon-knobs';
 // Below path will be there when an application installs `@carbon/web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
-import './tooltip';
-import './tooltip-content';
+import './index';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
-import { prefix } from '../../globals/settings';
 import styles from './tooltip-story.scss?lit';
-import storyDocs from './tooltip-story.mdx';
+import storyDocs from './tooltip.mdx';
 import Information16 from '@carbon/icons/lib/information/16';
 
 const tooltipAlignments = {
@@ -35,11 +32,49 @@ const tooltipAlignments = {
   [`right-top`]: POPOVER_ALIGNMENT.RIGHT_TOP,
 };
 
-export const Default = () => {
-  return html`
-    <style>
-      ${styles}
-    </style>
+const defaultArgs = {
+  align: POPOVER_ALIGNMENT.BOTTOM,
+  closeOnActivation: false,
+  defaultOpen: true,
+  enterDelayMs: 100,
+  label: 'Custom label',
+  leaveDelayMs: 300,
+};
+
+const controls = {
+  align: {
+    control: 'select',
+    description: 'Specify how the trigger should align with the tooltip',
+    options: tooltipAlignments,
+  },
+  closeOnActivation: {
+    control: 'boolean',
+    description:
+      'Determines wether the tooltip should close when inner content is activated (click, Enter or Space)',
+  },
+  defaultOpen: {
+    control: 'boolean',
+    description:
+      'Specify whether the tooltip should be open when it first renders',
+  },
+  enterDelayMs: {
+    control: 'number',
+    description:
+      'Specify the duration in milliseconds to delay before displaying the tooltip',
+  },
+  label: {
+    control: 'text',
+    description: 'Provide the label to be rendered inside of the Tooltip.',
+  },
+  leaveDelayMs: {
+    control: 'number',
+    description:
+      'Specify the duration in milliseconds to delay before hiding the tooltip',
+  },
+};
+
+export const Default = {
+  render: () => html`
     <cds-tooltip align="bottom">
       <button
         class="sb-tooltip-trigger"
@@ -52,14 +87,11 @@ export const Default = () => {
         no down time for customers.
       </cds-tooltip-content>
     </cds-tooltip>
-  `;
+  `,
 };
 
-export const Alignment = () => {
-  return html`
-    <style>
-      ${styles}
-    </style>
+export const Alignment = {
+  render: () => html`
     <cds-tooltip align="bottom-left">
       <button
         class="sb-tooltip-trigger"
@@ -71,14 +103,11 @@ export const Alignment = () => {
         Tooltip alignment
       </cds-tooltip-content>
     </cds-tooltip>
-  `;
+  `,
 };
 
-export const Duration = () => {
-  return html`
-    <style>
-      ${styles}
-    </style>
+export const Duration = {
+  render: () => html`
     <cds-tooltip enter-delay-ms=${0} leave-delay-ms=${300}>
       <button
         class="sb-tooltip-trigger"
@@ -88,27 +117,25 @@ export const Duration = () => {
       </button>
       <cds-tooltip-content id="content"> Label one </cds-tooltip-content>
     </cds-tooltip>
-  `;
+  `,
 };
 
-export const Playground = (args) => {
-  const {
-    alignment,
-    defaultOpen,
-    label,
-    enterDelay,
-    leaveDelay,
+export const Playground = {
+  argTypes: controls,
+  args: defaultArgs,
+  render: ({
+    align,
     closeOnActivation,
-  } = args?.['cds-tooltip'] ?? {};
-  return html`
-    <style>
-      ${styles}
-    </style>
+    defaultOpen,
+    enterDelayMs,
+    label,
+    leaveDelayMs,
+  }) => html`
     <cds-tooltip
       ?defaultOpen=${defaultOpen}
-      align=${alignment}
-      enter-delay-ms=${enterDelay}
-      leave-delay-ms=${leaveDelay}
+      align=${align}
+      enter-delay-ms=${enterDelayMs}
+      leave-delay-ms=${leaveDelayMs}
       ?closeOnActivation=${closeOnActivation}>
       <button
         class="sb-tooltip-trigger"
@@ -118,35 +145,23 @@ export const Playground = (args) => {
       </button>
       <cds-tooltip-content id="content"> ${label} </cds-tooltip-content>
     </cds-tooltip>
-  `;
+  `,
 };
 
-Playground.parameters = {
-  knobs: {
-    [`${prefix}-tooltip`]: () => ({
-      defaultOpen: boolean('Default open (defaultOpen)', false),
-      alignment: select(
-        'Tooltip alignment to trigger button (alignment)',
-        tooltipAlignments,
-        POPOVER_ALIGNMENT.TOP
-      ),
-      label: text('Label (label)', 'Custom label'),
-      enterDelay: number('Enter delay (in ms)', 100),
-      leaveDelay: number('Leave delay (in ms)', 300),
-      closeOnActivation: boolean(
-        'Close on activation (closeOnActivation)',
-        false
-      ),
-    }),
-  },
-};
-
-Default.storyName = 'Default';
-
-export default {
+const meta = {
   title: 'Components/Tooltip',
   parameters: {
-    ...storyDocs.parameters,
+    docs: {
+      page: storyDocs,
+    },
   },
-  decorators: [(story) => html`<div class="sb-tooltip-story">${story()}</div>`],
+  decorators: [
+    (story) => html`<div class="sb-tooltip-story">
+      <style>
+        ${styles}</style
+      >${story()}
+    </div>`,
+  ],
 };
+
+export default meta;
