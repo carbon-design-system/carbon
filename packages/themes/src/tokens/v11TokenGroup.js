@@ -367,6 +367,12 @@ export const ai = TokenGroup.create({
     'ai-gradient-start-01',
     'ai-gradient-start-02',
     'ai-gradient-end',
+    // Phase 2
+    'slug-callout-shadow-inner',
+    'slug-callout-shadow-outer-01',
+    'slug-callout-shadow-outer-02',
+    'slug-callout-border-01',
+    'slug-callout-border-02',
   ],
 });
 

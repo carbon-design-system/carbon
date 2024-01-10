@@ -35,6 +35,7 @@ import {
   // Support
   blue30,
   blue50,
+  blue80,
   green40,
   green50,
   yellow30,
@@ -220,8 +221,6 @@ export const slugGradientHover = `${gray40} linear-gradient(135deg, ${white} 0%,
 export const slugHollowHover = gray30Hover;
 export const slugCalloutGradientTop = rgba(gray100, 0.85);
 export const slugCalloutGradientBottom = rgba(gray90, 0.85);
-export const slugCalloutAuraStart = rgba(blue20, 0.2);
-export const slugCalloutAuraEnd = rgba(gray100, 0);
 export const slugCalloutGradientTopHover = rgba(gray80, 0.55);
 export const slugCalloutGradientBottomHover = rgba(gray80Hover, 0.55);
 export const slugCalloutAuraStartHover01 = rgba(blue20Hover, 0.3);
@@ -236,6 +235,18 @@ export const slugCalloutAuraEndSelected = rgba(gray100, 0);
 export const aiGradientStart01 = rgba(blue20, 0.2);
 export const aiGradientStart02 = 'transparent';
 export const aiGradientEnd = 'rgba(38, 38, 38, 0)';
+
+// Phase 2 - new
+export const slugCalloutShadowInner = rgba(blue50, 0.2);
+export const slugCalloutShadowOuter01 = rgba(blue80, 0.25);
+export const slugCalloutShadowOuter02 = rgba(black, 0.65);
+
+export const slugCalloutBorder01 = blue50;
+export const slugCalloutBorder02 = rgba(blue30, 0.25);
+
+// Changed
+export const slugCalloutAuraStart = rgba(blue50, 0.1);
+export const slugCalloutAuraEnd = rgba(white, 0);
 
 export {
   // Type
