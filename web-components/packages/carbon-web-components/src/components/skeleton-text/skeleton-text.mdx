@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Meta, Markdown } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as SkeletonTextStories from './skeleton-text.stories';
+
+<Meta of={SkeletonTextStories} />
 
 # Skeleton text
 
@@ -19,8 +22,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/skeleton-text/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['skeleton-text'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['skeleton-text'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -41,4 +44,4 @@ multiple instances of `<cds-skeleton-text>`.
 
 ## `<cds-skeleton-text>` attributes and properties
 
-<Props of="cds-skeleton-text" />
+<ArgsTable of="cds-skeleton-text" />

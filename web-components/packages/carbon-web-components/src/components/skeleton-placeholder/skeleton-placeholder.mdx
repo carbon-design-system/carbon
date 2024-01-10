@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Meta, Markdown } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as SkeletonPlaceholderStories from './skeleton-placeholder.stories';
+
+<Meta of={SkeletonPlaceholderStories} />
 
 # Skeleton placeholder
 
@@ -19,8 +22,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/skeleton-placeholder/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['skeleton-placeholder'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['skeleton-placeholder'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -30,4 +33,4 @@ import '@carbon/web-components/es/components/skeleton-placeholder/index.js';
 
 ## `<cds-skeleton-placeholder>` attributes, properties and events
 
-<Props of="cds-skeleton-placeholder" />
+<ArgsTable of="cds-skeleton-placeholder" />
