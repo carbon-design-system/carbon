@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Meta, Markdown } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as ProgressBarStories from './progress-bar.stories';
+
+<Meta of={ProgressBarStories} />
 
 # Progress bar
 
@@ -24,8 +27,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/progress-bar/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['progress-bar'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['progress-bar'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -58,4 +61,4 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-progress-bar hide-label>`) and `false` means not setting the attribute
 (e.g. `<cds-progress-bar>` without `hide-label` attribute).
 
-<Props of="cds-progress-bar" />
+<ArgsTable of="cds-progress-bar" />
