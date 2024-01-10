@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Markdown, Meta } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as ComboBoxStories from './combo-box.stories';
+
+<Meta of={ComboBoxStories} /> 
 
 # Combo box
 
@@ -22,8 +25,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/combo-box/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['combo-box'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['combo-box'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -94,7 +97,7 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-combo-box open>`) and `false` means not setting the attribute (e.g.
 `<cds-combo-box>` without `open` attribute).
 
-<Props of="cds-combo-box" />
+<ArgsTable of="cds-combo-box" />
 
 ## `<cds-combo-box-item>` attributes and properties
 
@@ -102,4 +105,4 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-combo-box-item disabled>`) and `false` means not setting the attribute
 (e.g. `<cds-combo-box-item>` without `disabled` attribute).
 
-<Props of="cds-combo-box-item" />
+<ArgsTable of="cds-combo-box-item" />

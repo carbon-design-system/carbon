@@ -8,11 +8,10 @@
  */
 
 import { html } from 'lit';
-import { radios } from '@storybook/addon-knobs';
 import { prefix } from '../../globals/settings';
-import storyDocs from './layer-story.mdx';
 import styles from './layer-story.scss?lit';
-import './index.ts';
+import storyDocs from './layer.mdx';
+import './index';
 
 const levels = {
   'First layer': '0',
@@ -20,8 +19,19 @@ const levels = {
   'Third layer': '2',
 };
 
-export const Default = () => {
-  return html`
+const defaultArgs = {
+  level: '0'
+}
+
+const controls = {
+  level: {
+    control: 'radio', options: levels,
+    description: `Specify the layer level.`
+  },
+}
+
+export const Default = {
+  render: () => html`
     <cds-layer>
       <div class="example-layer-test-component">Test component</div>
       <cds-layer>
@@ -34,33 +44,32 @@ export const Default = () => {
     <style>
       ${styles}
     </style>
-  `;
+  `
 };
 
-Default.storyName = 'Default';
-
-export const CustomLevel = () => {
-  return html`
+export const CustomLevel = {
+  name: 'Custom level',
+  render: () => html`
     <cds-layer level="0">
       <div class="example-layer-test-component">Test component</div>
     </cds-layer>
     <style>
       ${styles}
     </style>
-  `;
+  `
 };
 
-CustomLevel.storyName = 'Custom level';
+export const UseLayer = {
+  name: 'useLayer',
+  render: () => {
+    document.addEventListener(`${prefix}-use-layer`, (e) => {
+      const { layer, level } = (e as any).detail;
+      layer.querySelector(
+        '.example-layer-test-component.use-layer'
+      ).innerText = `The current layer level is: ${level + 1}`;
+    });
 
-export const UseLayer = () => {
-  document.addEventListener(`${prefix}-use-layer`, (e) => {
-    const { layer, level } = (e as any).detail;
-    layer.querySelector(
-      '.example-layer-test-component.use-layer'
-    ).innerText = `The current layer level is: ${level + 1}`;
-  });
-
-  return html`
+    return html`
     <cds-layer>
       <div class="example-layer-test-component use-layer"></div>
       <cds-layer>
@@ -70,37 +79,35 @@ export const UseLayer = () => {
     <style>
       ${styles}
     </style>
-  `;
+  `
+  }
 };
 
-UseLayer.storyName = 'useLayer';
-
-export const Playground = (args) => {
-  const { level } = args?.[`${prefix}-layer-playground`] ?? {};
-  return html`
+export const Playground = {
+  args: defaultArgs,
+  argTypes: controls,
+  parameters: {
+    percy: {
+      skip: true,
+    },
+  },
+  render: ({level}) => html`
     <cds-layer level="${level}">
       <div class="example-layer-test-component">Test component</div>
     </cds-layer>
     <style>
       ${styles}
     </style>
-  `;
+  `,
 };
 
-Playground.parameters = {
-  percy: {
-    skip: true,
-  },
-  knobs: {
-    [`${prefix}-layer-playground`]: () => ({
-      level: radios('Specify the layer level', levels, '0'),
-    }),
-  },
-};
-
-export default {
+const meta = {
   title: 'Components/Layer',
   parameters: {
-    ...storyDocs.parameters,
+    docs: {
+      page: storyDocs,
+    },
   },
 };
+
+export default meta;

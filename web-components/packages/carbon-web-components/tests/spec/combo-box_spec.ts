@@ -13,7 +13,7 @@ import EventManager from '../utils/event-manager';
 
 import CDSComboBox from '../../src/components/combo-box/combo-box';
 import CDSComboBoxItem from '../../src/components/combo-box/combo-box-item';
-import { Playground } from '../../src/components/combo-box/combo-box-story';
+import { Playground } from '../../src/components/combo-box/combo-box.stories';
 
 const template = (props?) =>
   Playground({

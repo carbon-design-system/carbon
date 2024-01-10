@@ -8,14 +8,11 @@
  */
 
 import { html } from 'lit';
-import { boolean, select } from '@storybook/addon-knobs';
-import { prefix } from '../../globals/settings';
-import textNullable from '../../../.storybook/knob-text-nullable';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { DROPDOWN_DIRECTION, DROPDOWN_SIZE, DROPDOWN_TYPE } from './dropdown';
 import './dropdown-item';
 import './dropdown-skeleton';
-import storyDocs from './dropdown-story.mdx';
+import storyDocs from './dropdown.mdx';
 
 const directionOptions = {
   [`Top`]: DROPDOWN_DIRECTION.TOP,
@@ -61,8 +58,89 @@ const items = [
   },
 ];
 
-export const Default = () => {
-  return html`
+const defaultArgs = {
+  direction: DROPDOWN_DIRECTION.BOTTOM,
+  disabled: false,
+  hideLabel: false,
+  helperText: 'This is some helper text',
+  invalid: false,
+  invalidText: 'invalid selection',
+  label: 'This is an example label',
+  open: false,
+  readOnly: false,
+  size: null,
+  titleText: 'This is an example title',
+  type: null,
+  value: '',
+  warn: false,
+  warnText: 'please notice the warning',  
+}
+
+const controls = {
+  disabled: {
+    control: 'boolean',
+    description: `Specify if the dropdown should be disabled, or not.`,
+  },
+  direction: {
+    control: 'select', options: directionOptions,
+    description: `Dropdown direction.`
+  },
+  hideLabel: {
+    control: 'boolean',
+    description: `Specify if the title text should be hidden, or not.`,
+  },
+  helperText: {
+    control: 'text',
+    description: `The helper text for the dropdown.`,
+  },
+  invalid: {
+    control: 'boolean',
+    description: `Specify if the dropdown should display an invalid icon, or not.`,
+  },
+  invalidText: {
+    control: 'text',
+    description: `Message which is displayed if the value is invalid.`,
+  },
+  label: {
+    control: 'text',
+    description: `The default content of the trigger button.`,
+  },
+  open: {
+    control: 'boolean',
+    description: `Specify if the dropdown should be open, or not.`,
+  },
+  readOnly: {
+    control: 'boolean',
+    description: `Specify if the dropdown should be read only, or not.`,
+  },
+  size: {
+    control: 'select', options: sizes,
+    description: `Dropdown size.`
+  },
+  titleText: {
+    control: 'text',
+    description: `Text that will be read by a screen reader when visiting this control.`,
+  },
+  type: {
+    control: 'select', options: types,
+    description: `Dropdown size.`
+  },
+  value: {
+    control: 'text',
+    description: `The value of the selected item.`,
+  },
+  warn: {
+    control: 'boolean',
+    description: `Specify whether the control is currently in warning state.`,
+  },
+  warnText: {
+    control: 'text',
+    description: `Text that is displayed when the control is in warning state.`,
+  },
+};
+
+export const Default = {
+  render: () => html`
     <cds-dropdown
       helper-text="This is some helper text"
       title-text="Dropdown label"
@@ -75,11 +153,11 @@ export const Default = () => {
         `
       )}
     </cds-dropdown>
-  `;
+  `
 };
 
-export const Inline = () => {
-  return html`
+export const Inline = {
+  render: () => html`
     <cds-dropdown
       type="inline"
       title-text="Inline dropdown label"
@@ -92,11 +170,11 @@ export const Inline = () => {
         `
       )}
     </cds-dropdown>
-  `;
+  `
 };
 
-export const InlineWithLayer = () => {
-  return html`
+export const InlineWithLayer = {
+  render: () => html`
     <sb-template-layers>
       <div style="width:400px">
         <cds-dropdown
@@ -115,11 +193,11 @@ export const InlineWithLayer = () => {
         </cds-dropdown>
       </div>
     </sb-template-layers>
-  `;
+  `
 };
 
-export const WithLayer = () => {
-  return html`
+export const WithLayer = {
+  render: () => html`
     <sb-template-layers>
       <div style="width:400px">
         <cds-dropdown
@@ -138,11 +216,13 @@ export const WithLayer = () => {
         </cds-dropdown>
       </div>
     </sb-template-layers>
-  `;
+  `
 };
 
-export const Playground = (args) => {
-  const {
+export const Playground = {
+  argTypes: controls,
+  args: defaultArgs,
+  render: ({
     open,
     direction,
     disabled,
@@ -158,9 +238,8 @@ export const Playground = (args) => {
     label,
     warn,
     warnText,
-  } = args?.[`${prefix}-dropdown`] ?? {};
-
-  return html`
+  }) =>
+   html`
     <cds-dropdown
       ?open=${open}
       ?disabled="${disabled}"
@@ -185,64 +264,31 @@ export const Playground = (args) => {
         `
       )}
     </cds-dropdown>
-  `;
+  `
 };
 
-Playground.parameters = {
-  knobs: {
-    [`${prefix}-dropdown`]: () => ({
-      open: boolean('Open (open)', false),
-      direction: select('Direction', directionOptions, null),
-      disabled: boolean('Disabled (disabled)', false),
-      helperText: textNullable(
-        'Helper text (helper-text)',
-        'This is some helper text'
-      ),
-      hideLabel: boolean('Hide label (hide-label)', false),
-      invalid: boolean('Invalid (invalid)', false),
-      invalidText: textNullable(
-        'Invalid text (invalid-text)',
-        'invalid selection'
-      ),
-      readOnly: boolean('Read only (read-only)', false),
-      label: textNullable(
-        'The default content of the trigger button (label)',
-        'This is an example label'
-      ),
-      titleText: textNullable(
-        'Title text (title-text)',
-        'This is an example title'
-      ),
-      size: select('Dropdown size (size)', sizes, null),
-      type: select('Dropdown type (type)', types, null),
-      value: textNullable('Selected value (value)', ''),
-      warn: boolean('Warn (warn)', false),
-      warnText: textNullable(
-        'Warn text (warn-text)',
-        'please notice the warning'
-      ),
-    }),
-  },
-};
-
-export const skeleton = () =>
-  html` <cds-dropdown-skeleton></cds-dropdown-skeleton> `;
-
-skeleton.parameters = {
-  percy: {
-    skip: true,
-  },
-};
-
-export default {
-  title: 'Components/Dropdown',
+export const Skeleton = {
   parameters: {
-    ...storyDocs.parameters,
+    percy: {
+      skip: true,
+    },
   },
+  render: () => html` <cds-dropdown-skeleton></cds-dropdown-skeleton> `
+}
+
+const meta = {
+  title: 'Components/Dropdown',
   decorators: [
     (story, { name }) => {
       const width = !name.toLowerCase().includes('layer') ? `width:400px` : ``;
       return html` <div style="${width}">${story()}</div> `;
     },
   ],
+  parameters: {
+    docs: {
+      page: storyDocs,
+    },
+  },
 };
+
+export default meta;

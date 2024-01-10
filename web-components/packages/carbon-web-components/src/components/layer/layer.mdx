@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Markdown, Meta } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as LayerStories from './layer.stories';
+
+<Meta of={LayerStories} /> 
 
 # Layer
 
@@ -28,8 +31,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/layer/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['layer'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['layer'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -108,4 +111,4 @@ like the Layer component to be seen as a section you could write the following:
 
 ## `<cds-layer>` attributes, properties and events
 
-<Props of="cds-layer" />
+<ArgsTable of="cds-layer" />

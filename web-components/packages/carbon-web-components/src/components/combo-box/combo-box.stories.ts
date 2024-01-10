@@ -9,12 +9,9 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { boolean, select } from '@storybook/addon-knobs';
 import { DROPDOWN_DIRECTION, DROPDOWN_SIZE } from './combo-box';
 import './combo-box-item';
-import storyDocs from './combo-box-story.mdx';
-import { prefix } from '../../globals/settings';
-import textNullable from '../../../.storybook/knob-text-nullable';
+import storyDocs from './combo-box.mdx';
 
 const items = [
   {
@@ -55,8 +52,79 @@ const sizes = {
   [`Large size (${DROPDOWN_SIZE.LARGE})`]: DROPDOWN_SIZE.LARGE,
 };
 
-export const Default = () => {
-  return html`
+const defaultArgs = {
+  direction: DROPDOWN_DIRECTION.BOTTOM,
+  disabled: false,
+  hideLabel: false,
+  helperText: 'This is some helper text',
+  invalid: false,
+  invalidText: 'invalid selection',
+  label: 'This is an example label',
+  readOnly: false,
+  size: null,
+  titleText: 'This is an example title',
+  value: '',
+  warn: false,
+  warnText: 'please notice the warning',  
+}
+
+const controls = {
+  disabled: {
+    control: 'boolean',
+    description: `Specify if the dropdown should be disabled, or not.`,
+  },
+  direction: {
+    control: 'select', options: directionOptions,
+    description: `Dropdown direction`
+  },
+  hideLabel: {
+    control: 'boolean',
+    description: `Specify if the title text should be hidden, or not.`,
+  },
+  helperText: {
+    control: 'text',
+    description: `The helper text for the dropdown.`,
+  },
+  invalid: {
+    control: 'boolean',
+    description: `Specify if the dropdown should display an invalid icon, or not.`,
+  },
+  invalidText: {
+    control: 'text',
+    description: `Message which is displayed if the value is invalid.`,
+  },
+  label: {
+    control: 'text',
+    description: `The default content of the trigger button.`,
+  },
+  readOnly: {
+    control: 'boolean',
+    description: `Specify if the dropdown should be read only, or not.`,
+  },
+  size: {
+    control: 'select', options: sizes,
+    description: `Dropdown size.`
+  },
+  titleText: {
+    control: 'text',
+    description: `Text that will be read by a screen reader when visiting this control.`,
+  },
+  value: {
+    control: 'text',
+    description: `The value of the selected item.`,
+  },
+  warn: {
+    control: 'boolean',
+    description: `Specify whether the control is currently in warning state.`,
+  },
+  warnText: {
+    control: 'text',
+    description: `Text that is displayed when the control is in warning state.`,
+  },
+};
+
+export const Default = {
+  render: () => html`
     <cds-combo-box
       helper-text="Combobox helper text"
       title-text="ComboBox title">
@@ -68,11 +136,11 @@ export const Default = () => {
         `
       )}
     </cds-combo-box>
-  `;
+  `
 };
 
-export const WithLayer = () => {
-  return html`
+export const WithLayer = {
+  render: () => html`
     <sb-template-layers>
       <div style="width:300px">
         <cds-combo-box
@@ -91,11 +159,13 @@ export const WithLayer = () => {
         </cds-combo-box>
       </div>
     </sb-template-layers>
-  `;
+  `
 };
 
-export const Playground = (args) => {
-  const {
+export const Playground = {
+  argTypes: controls,
+  args: defaultArgs,
+  render: ({
     disabled,
     helperText,
     invalid,
@@ -110,8 +180,7 @@ export const Playground = (args) => {
     type,
     invalidText,
     value,
-  } = args?.[`${prefix}-combo-box`] ?? {};
-  return html`
+  }) => html`
     <cds-combo-box
       ?disabled="${disabled}"
       ?hide-label=${hideLabel}
@@ -135,51 +204,22 @@ export const Playground = (args) => {
         `
       )}
     </cds-combo-box>
-  `;
-};
+  `
+}
 
-Playground.parameters = {
-  knobs: {
-    [`${prefix}-combo-box`]: () => ({
-      direction: select(
-        'Direction',
-        directionOptions,
-        DROPDOWN_DIRECTION.BOTTOM
-      ),
-      disabled: boolean('Disabled (disabled)', false),
-      helperText: textNullable(
-        'Helper text (helper-text)',
-        'Optional helper text'
-      ),
-      hideLabel: boolean('Hide label (hide-label)', false),
-      invalid: boolean('Invalid (invalid)', false),
-      invalidText: textNullable(
-        'Invalid text (invalid-text)',
-        'invalid selection'
-      ),
-      readOnly: boolean('Read only (read-only)', false),
-      titleText: textNullable('Title text (title-text)', 'ComboBox title'),
-      size: select('Size (size)', sizes, null),
-      value: textNullable('Selected value (value)', ''),
-      label: textNullable('Placeholder (label)', ''),
-      warn: boolean('Warn (warn)', false),
-      warnText: textNullable(
-        'Warn text (warn-text)',
-        'please notice the warning'
-      ),
-    }),
-  },
-};
-
-export default {
+const meta = {
   title: 'Components/Combo box',
-  parameters: {
-    ...storyDocs.parameters,
-  },
   decorators: [
     (story, { name }) => {
       const width = !name.toLowerCase().includes('layer') ? `width:300px` : ``;
       return html` <div style="${width}">${story()}</div> `;
     },
   ],
+  parameters: {
+    docs: {
+      page: storyDocs,
+    },
+  },
 };
+
+export default meta;

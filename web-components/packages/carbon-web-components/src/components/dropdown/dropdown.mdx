@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Markdown, Meta } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as DropdownStories from './dropdown.stories';
+
+<Meta of={DropdownStories} /> 
 
 # Dropdown
 
@@ -22,8 +25,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/dropdown/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['dropdown'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['dropdown'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -75,7 +78,7 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-dropdown open>`) and `false` means not setting the attribute (e.g.
 `<cds-dropdown>` without `open` attribute).
 
-<Props of="cds-dropdown" />
+<ArgsTable of="cds-dropdown" />
 
 ## `<cds-dropdown-item>` attributes and properties
 
@@ -83,4 +86,4 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-dropdown-item disabled>`) and `false` means not setting the attribute
 (e.g. `<cds-dropdown-item>` without `disabled` attribute).
 
-<Props of="cds-dropdown-item" />
+<ArgsTable of="cds-dropdown-item" />
