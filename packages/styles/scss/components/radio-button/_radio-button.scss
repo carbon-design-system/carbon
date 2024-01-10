@@ -239,8 +239,12 @@ $radio-border-width: 1px !default;
     display: none;
   }
 
+  .#{$prefix}--radio-button-wrapper {
+    display: flex;
+  }
+
   .#{$prefix}--radio-button-wrapper .#{$prefix}--radio-button__label {
-    display: inline-flex;
+    display: flex;
     align-items: flex-start;
     justify-content: center;
     margin: 0;
