@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Meta, Description } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as AccordionStories from './accordion.stories';
+
+<Meta of={AccordionStories} />
 
 # Accordion
 
@@ -87,4 +90,4 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-accordion-item open>`) and `false` means not setting the attribute (e.g.
 `<cds-accordion-item>` without `open` attribute).
 
-<Props of="cds-accordion-item" />
+<ArgsTable of="cds-accordion-item" />
