@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2021, 2023
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -37,31 +37,31 @@ function _renderScript(components, tag, isRTL = false) {
  */
 export const cdnJs = ({ components }) => {
   return `
- ### JS (via CDN)
+### JS (via CDN)
 
  \`\`\`html
- // SPECIFIC VERSION (available starting v1.6.0)
- ${_renderScript(components, `version/v${packageJson.version}`)}
+// SPECIFIC VERSION (available starting v1.6.0)
+${_renderScript(components, `version/v${packageJson.version}`)}
 
- // LATEST tag
- ${_renderScript(components, 'tag/v2/latest')}
- \`\`\`
+// LATEST tag
+${_renderScript(components, 'tag/v2/latest')}
+\`\`\`
 
- > NOTE: The latest tag is a moving version. While beneficial to
- > always stay on the most recent version, it is recommended to choose a specific
- > version and properly test your application when upgrading to a newer version.
+> NOTE: The latest tag is a moving version. While beneficial to
+> always stay on the most recent version, it is recommended to choose a specific
+> version and properly test your application when upgrading to a newer version.
 
 
- #### Right-to-left (RTL) versions
+#### Right-to-left (RTL) versions
 
- \`\`\`html
- // SPECIFIC VERSION (available starting v1.6.0)
- ${_renderScript(components, `version/v${packageJson.version}`, true)}
+\`\`\`html
+// SPECIFIC VERSION (available starting v1.6.0)
+${_renderScript(components, `version/v${packageJson.version}`, true)}
 
- // LATEST tag
- ${_renderScript(components, 'tag/v2/latest', true)}
- \`\`\`
-   `;
+// LATEST tag
+${_renderScript(components, 'tag/v2/latest', true)}
+\`\`\`
+  `;
 };
 
 /**

@@ -1,4 +1,7 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import {
+  ArgsTable,
+  Markdown
+} from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 
 # Notification
@@ -27,8 +30,8 @@ import '@carbon/web-components/es/components/notification/index.js';
 @use '@carbon/styles/scss/components/notification';
 ```
 
-<Description markdown={`${cdnJs({ components: ['notification'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['notification'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -94,7 +97,7 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-actionable-notification open>`) and `false` means not setting the
 attribute (e.g. `<cds-actionable-notification>` without `open` attribute).
 
-<Props of="cds-actionable-notification" />
+<ArgsTable of="cds-actionable-notification" />
 
 ## `<cds-inline-notification>` attributes, properties and events
 
@@ -102,7 +105,7 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-inline-notification open>`) and `false` means not setting the attribute
 (e.g. `<cds-inline-notification>` without `open` attribute).
 
-<Props of="cds-inline-notification" />
+<ArgsTable of="cds-inline-notification" />
 
 ## `<cds-toast-notification>` attributes, properties and events
 
@@ -110,4 +113,4 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-toast-notification open>`) and `false` means not setting the attribute
 (e.g. `<cds-toast-notification>` without `open` attribute).
 
-<Props of="cds-toast-notification" />
+<ArgsTable of="cds-toast-notification" />
