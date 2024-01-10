@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Meta, Description, Markdown } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as ProgressIndicatorStories from './progress-indicator.stories';
+
+<Meta of={ProgressIndicatorStories} />
 
 # Progress indicator
 
@@ -27,8 +30,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/progress-indicator/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['progress-indicator'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['progress-indicator'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -75,7 +78,7 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-progress-indicator vertical>`) and `false` means not setting the attribute
 (e.g. `<cds-progress-indicator>` without `vertical` attribute).
 
-<Props of="cds-progress-indicator" />
+<ArgsTable of="cds-progress-indicator" />
 
 ## `<cds-progress-step>` attributes and properties
 
@@ -83,4 +86,4 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-progress-step disabled>`) and `false` means not setting the attribute
 (e.g. `<cds-progress-step>` without `disabled` attribute).
 
-<Props of="cds-progress-step" />
+<ArgsTable of="cds-progress-step" />
