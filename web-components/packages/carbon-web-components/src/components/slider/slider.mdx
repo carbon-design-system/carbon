@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Meta, Markdown } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as SliderStories from './slider.stories';
+
+<Meta of={SliderStories} />
 
 # Slider
 
@@ -22,8 +25,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/slider/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['slider'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['slider'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -60,7 +63,7 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-slider disabled>`) and `false` means not setting the attribute (e.g.
 `<cds-slider>` without `disabled` attribute).
 
-<Props of="cds-slider" />
+<ArgsTable of="cds-slider" />
 
 ## `<cds-slider-input>` attributes, properties and events
 
@@ -68,4 +71,4 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-slider-input invalid>`) and `false` means not setting the attribute (e.g.
 `<cds-slider-input>` without `invalid` attribute).
 
-<Props of="cds-slider-input" />
+<ArgsTable of="cds-slider-input" />

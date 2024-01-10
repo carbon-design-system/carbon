@@ -26,6 +26,8 @@ const stories = glob.sync(
     '../src/**/file-uploader.stories.ts',
     '../src/**/overflow-menu.mdx',
     '../src/**/overflow-menu.stories.ts',
+    '../src/**/slider.mdx',
+    '../src/**/slider.stories.ts',
   ],
   {
     ignore: ['../src/**/docs/*.mdx'],
