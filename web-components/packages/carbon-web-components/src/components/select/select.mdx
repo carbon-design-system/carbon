@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Meta, Markdown } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as SelectStories from './select.stories';
+
+<Meta of={SelectStories} />
 
 # Select
 
@@ -22,8 +25,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/select/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['select'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['select'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -50,7 +53,7 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-select autofocus>`) and `false` means not setting the attribute (e.g.
 `<cds-select>` without `autofocus` attribute).
 
-<Props of="cds-select" />
+<ArgsTable of="cds-select" />
 
 ## `<cds-select-item-group>` attributes, properties and events
 
@@ -58,7 +61,7 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-select-item-group disabled>`) and `false` means not setting the attribute
 (e.g. `<cds-select-item-group>` without `disabled` attribute).
 
-<Props of="cds-select-item-group" />
+<ArgsTable of="cds-select-item-group" />
 
 ## `<cds-select-item>` attributes, properties and events
 
@@ -66,4 +69,4 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-select-item disabled>`) and `false` means not setting the attribute (e.g.
 `<cds-select-item>` without `disabled` attribute).
 
-<Props of="cds-select-item" />
+<ArgsTable of="cds-select-item" />

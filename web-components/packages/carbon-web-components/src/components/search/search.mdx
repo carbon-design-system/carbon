@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Meta, Markdown } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as SearchStories from './search.stories';
+
+<Meta of={SearchStories} />
 
 # Search
 
@@ -24,8 +27,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/search/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['search'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['search'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -47,4 +50,4 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-search light>`) and `false` means not setting the attribute (e.g.
 `<cds-search>` without `light` attribute).
 
-<Props of="cds-search" />
+<ArgsTable of="cds-search" />
