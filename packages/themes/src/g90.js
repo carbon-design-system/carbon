@@ -12,6 +12,7 @@ import {
   blue40,
   blue60,
   blue70,
+  blue80,
 
   // Gray
   gray10,
@@ -35,7 +36,6 @@ import {
   // Support
   blue30,
   blue50,
-  blue80,
   green40,
   green50,
   yellow30,
