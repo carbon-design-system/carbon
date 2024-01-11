@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Meta, Markdown } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as NumberInputStories from './number-input.stories';
+
+<Meta of={NumberInputStories} />
 
 # Number input
 
@@ -22,8 +25,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/number-input/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['number-input'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['number-input'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -72,4 +75,4 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-number-input invalid>`) and `false` means not setting the attribute (e.g.
 `<cds-number-input>` without `invalid` attribute).
 
-<Props of="cds-number-input" />
+<ArgsTable of="cds-number-input" />

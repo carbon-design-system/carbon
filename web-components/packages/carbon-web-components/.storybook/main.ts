@@ -55,6 +55,8 @@ const stories = glob.sync(
     '../src/**/modal.stories.ts',
     '../src/**/modal.mdx',
     '../src/**/file-uploader.stories.ts',
+    '../src/**/number-input.mdx',
+    '../src/**/number-input.stories.ts',
     '../src/**/multi-select.mdx',
     '../src/**/multi-select.stories.ts',
     '../src/**/notification.mdx',
