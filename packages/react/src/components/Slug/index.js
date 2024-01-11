@@ -26,13 +26,8 @@ export const SlugContent = React.forwardRef(function SlugContent(
 ) {
   const prefix = usePrefix();
 
-  const hasSlugActions = React.Children.toArray(children).some(
-    (child) => child.type?.displayName === 'SlugActions'
-  );
-
   const slugContentClasses = cx(className, {
     [`${prefix}--slug-content`]: true,
-    [`${prefix}--slug-content--with-actions`]: hasSlugActions,
   });
 
   return (
@@ -42,7 +37,6 @@ export const SlugContent = React.forwardRef(function SlugContent(
   );
 });
 
-SlugContent.displayName = 'SlugContent';
 SlugContent.propTypes = {
   /**
    * Specify the content you want rendered inside the slug ToggleTip
@@ -72,7 +66,6 @@ export const SlugActions = React.forwardRef(function SlugActions(
   );
 });
 
-SlugActions.displayName = 'SlugActions';
 SlugActions.propTypes = {
   /**
    * Specify the content you want rendered inside the slug callout toolbar
