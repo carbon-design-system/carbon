@@ -153,7 +153,7 @@ const items = [
 ];
 
 const slug = (
-  <Slug className="slug-container" align="bottom">
+  <Slug className="slug-container">
     <SlugContent>
       <div>
         <p className="secondary">AI Explained</p>

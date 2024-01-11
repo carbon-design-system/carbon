@@ -348,7 +348,7 @@ $sizes: (
     clip-path: none;
   }
 
-  // Top
+  // Caret pseudo element base styles
   .#{$prefix}--slug.#{$prefix}--slug--enabled
     > .#{$prefix}--toggletip
     > .#{$prefix}--popover
@@ -373,7 +373,26 @@ $sizes: (
     background: $background;
     block-size: convert.to-rem(14px);
     content: '';
-    inline-size: 2px;
+    inline-size: convert.to-rem(2px);
+  }
+
+  // Top
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    &::before {
+      inset-block-end: convert.to-rem(1px);
+      transform: rotate(-135deg);
+    }
+
+    &::after {
+      display: none;
+    }
   }
 
   // Right
@@ -386,14 +405,15 @@ $sizes: (
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret {
     &::before {
+      inset-inline-start: convert.to-rem(1px);
       transform: rotate(-45deg);
     }
 
     &::after {
-      border-end-end-radius: 50%;
-      border-start-end-radius: 50%;
-      inset-block-start: -1px;
-      inset-inline-start: -2px;
+      border-end-start-radius: 50%;
+      border-start-start-radius: 50%;
+      inset-block-start: convert.to-rem(-1px);
+      inset-inline-start: convert.to-rem(6px);
     }
   }
 
@@ -405,8 +425,20 @@ $sizes: (
       .#{$prefix}--popover--bottom-right
     )
     > .#{$prefix}--popover
-    > .#{$prefix}--popover-caret::before {
-    transform: rotate(45deg);
+    > .#{$prefix}--popover-caret {
+    &::before {
+      inset-block-start: convert.to-rem(1px);
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      block-size: convert.to-rem(2px);
+      border-start-end-radius: 50%;
+      border-start-start-radius: 50%;
+      inline-size: convert.to-rem(14px);
+      inset-block-end: convert.to-rem(-2px);
+      inset-inline-start: convert.to-rem(-1px);
+    }
   }
 
   // Left
@@ -419,18 +451,19 @@ $sizes: (
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret {
     &::before {
-      inset-inline-end: 1px;
+      inset-inline-end: convert.to-rem(1px);
       transform: rotate(135deg);
     }
 
     &::after {
       border-end-end-radius: 50%;
       border-start-end-radius: 50%;
-      inset-block-start: -1px;
-      inset-inline-start: -2px;
+      inset-block-start: convert.to-rem(-1px);
+      inset-inline-start: convert.to-rem(-2px);
     }
   }
 
+  // Override for these two alignments
   .#{$prefix}--slug.#{$prefix}--slug--enabled
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--left-bottom,
