@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Meta, Description } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as DatePickerStories from './date-picker.stories';
+
+<Meta of={DatePickerStories} />
 
 # Date picker
 
@@ -102,7 +105,7 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-date-picker open>`) and `false` means not setting the attribute (e.g.
 `<cds-date-picker>` without `open` attribute).
 
-<Props of="cds-date-picker" />
+<ArgsTable of="cds-date-picker" />
 
 ## `<cds-date-picker-input>` attributes and properties
 
@@ -110,4 +113,4 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-date-picker-input light>`) and `false` means not setting the attribute
 (e.g. `<cds-date-picker-input>` without `light` attribute).
 
-<Props of="cds-date-picker-input" />
+<ArgsTable of="cds-date-picker-input" />

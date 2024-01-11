@@ -26,6 +26,8 @@ const stories = glob.sync(
     '../src/**/breadcrumb.stories.ts',
     '../src/**/combo-box.stories.ts',
     '../src/**/combo-box.mdx',
+    '../src/**/date-picker.mdx',
+    '../src/**/date-picker.stories.ts',
     '../src/**/content-switcher.mdx',
     '../src/**/content-switcher.stories.ts',
     '../src/**/dropdown.stories.ts',
