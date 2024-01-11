@@ -185,4 +185,11 @@ Playground.argTypes = {
       disable: true,
     },
   },
+  menuAlignment: {
+    options: ['bottom-left', 'bottom-right', 'top-left', 'top-right'],
+    control: { type: 'select' },
+    description:
+      'Specify how the menu should align with the button element `bottom-left` `bottom-right` `top-left` `top-right`',
+    default: 'bottom-left',
+  },
 };
