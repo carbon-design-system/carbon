@@ -218,8 +218,6 @@ export const slugGradient = `${gray50} linear-gradient(135deg, ${gray10} 0%, rgb
 export const slugBackgroundHover = gray20;
 export const slugGradientHover = `${gray40} linear-gradient(135deg, ${white} 0%, rgba(${white}, 0) 100%)`;
 export const slugHollowHover = gray30Hover;
-export const slugCalloutGradientTop = rgba(gray100, 0.85);
-export const slugCalloutGradientBottom = rgba(gray90, 0.85);
 export const slugCalloutGradientTopHover = rgba(gray80, 0.55);
 export const slugCalloutGradientBottomHover = rgba(gray80Hover, 0.55);
 export const slugCalloutAuraStartHover01 = rgba(blue20Hover, 0.3);
@@ -246,6 +244,10 @@ export const slugCalloutBorder02 = rgba(blue30, 0.25);
 // Changed
 export const slugCalloutAuraStart = rgba(blue50, 0.1);
 export const slugCalloutAuraEnd = rgba(white, 0);
+
+// Not used in phase 2 / possibly remove?
+export const slugCalloutGradientTop = rgba(gray100, 0.85);
+export const slugCalloutGradientBottom = rgba(gray90, 0.85);
 
 export {
   // Type
