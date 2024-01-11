@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Meta, Markdown } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as IconButtonStories from './icon-button.stories';
+
+<Meta of={IconButtonStories} />
 
 # Icon Button
 
@@ -24,8 +27,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/icon-button/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['icon-button'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['icon-button'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ```javascript
 import '@carbon/web-components/es/components/icon-button/index.js';
@@ -41,5 +44,4 @@ function App() {
 
 ## `<cds-icon-button>` attributes and properties
 
-<Props of="cds-icon-button" />
-````
+<ArgsTable of="cds-icon-button" />
