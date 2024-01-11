@@ -644,7 +644,7 @@ const DatePicker = React.forwardRef(function DatePicker(
     }
 
     function handleOnChange(event) {
-      if (datePickerType == 'single') {
+      if (datePickerType == 'single' && closeOnSelect) {
         calendar.calendarContainer.classList.remove('open');
       }
 
@@ -720,7 +720,15 @@ const DatePicker = React.forwardRef(function DatePicker(
         end.removeEventListener('change', handleOnChange);
       }
     };
-  }, [savedOnChange, savedOnClose, savedOnOpen, readOnly, hasInput]); //eslint-disable-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    savedOnChange,
+    savedOnClose,
+    savedOnOpen,
+    readOnly,
+    closeOnSelect,
+    hasInput,
+  ]);
 
   // this hook allows consumers to access the flatpickr calendar
   // instance for cases where functions like open() or close()
