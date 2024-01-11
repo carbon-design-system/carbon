@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Meta, Markdown } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as FormGroupStories from './form-group.stories';
+
+<Meta of={FormGroupStories} />
 
 # Form Group
 
@@ -19,8 +22,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/form-group/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['form-group'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['form-group'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -57,4 +60,4 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-form-group message>`) and `false` means not setting the attribute (e.g.
 `<cds-form-group>` without `message` attribute).
 
-<Props of="cds-form-group" />
+<ArgsTable of="cds-form-group" />
