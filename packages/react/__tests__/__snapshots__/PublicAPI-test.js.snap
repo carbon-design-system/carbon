@@ -4133,6 +4133,12 @@ Map {
     },
     "render": [Function],
   },
+  "IconButtonKinds" => Object {
+    "0": "primary",
+    "1": "secondary",
+    "2": "ghost",
+    "3": "tertiary",
+  },
   "IconSkeleton" => Object {
     "propTypes": Object {
       "className": Object {
