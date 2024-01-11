@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Meta, Description } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as CodeSnippetStories from './code-snippet.stories';
+
+<Meta of={CodeSnippetStories} />
 
 # Code snippet
 
@@ -80,4 +83,4 @@ For the skeleton variation, utilize `<cds-code-snippet-skeleton>`.
 
 ## `<cds-code-snippet>` attributes and properties
 
-<Props of="cds-code-snippet" />
+<ArgsTable of="cds-code-snippet" />
