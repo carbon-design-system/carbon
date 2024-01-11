@@ -452,6 +452,10 @@
     padding-inline-end: convert.to-rem(112px);
   }
 
+  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--number__control-btn {
+    border-block-end-color: $ai-border-strong;
+  }
+
   // Skeleton State
   .#{$prefix}--number.#{$prefix}--skeleton {
     @include skeleton;

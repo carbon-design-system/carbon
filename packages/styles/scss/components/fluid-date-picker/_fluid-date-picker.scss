@@ -413,6 +413,12 @@
 
   .#{$prefix}--date-picker--fluid
     .#{$prefix}--date-picker-input__wrapper--slug
+    .#{$prefix}--date-picker__input:not(.cds--date-picker__input--invalid) {
+    border-block-end-color: $ai-border-strong;
+  }
+
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker-input__wrapper--slug
     .#{$prefix}--date-picker__input,
   .#{$prefix}--date-picker--fluid--invalid
     .#{$prefix}--date-picker-input__wrapper--slug

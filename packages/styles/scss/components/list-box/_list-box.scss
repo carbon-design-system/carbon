@@ -901,6 +901,12 @@ $list-box-menu-width: convert.to-rem(300px);
     @include ai-gradient;
   }
 
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box
+    input[role='combobox'] {
+    border-block-end-color: transparent;
+  }
+
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--list-box__field,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--text-input--empty {
     padding-inline-end: $spacing-10;
