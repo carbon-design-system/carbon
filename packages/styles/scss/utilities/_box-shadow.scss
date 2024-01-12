@@ -12,9 +12,9 @@
 /// @example @include box-shadow;
 /// @group utilities
 @mixin box-shadow {
-  box-shadow: 0 2px 16px theme.$shadow;
+  box-shadow: 0 2px 6px theme.$shadow;
 }
 
 @mixin box-shadow-top {
-  box-shadow: 0 -2px 16px theme.$shadow;
+  box-shadow: 0 -2px 6px theme.$shadow;
 }
