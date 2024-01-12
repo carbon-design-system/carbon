@@ -1034,6 +1034,22 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "slug-callout-caret-center",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-caret-bottom",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-caret-bottom-background",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-caret-bottom-background-actions",
+          "type": "color",
+        },
+        Object {
           "name": "highlight",
           "type": "color",
         },

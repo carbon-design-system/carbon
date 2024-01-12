@@ -138,7 +138,7 @@ export const Default = () => (
         </SlugContent>
       </Slug>
     </div>
-    <div className="slug-container-example">
+    <div className="slug-container-example slug-container">
       <Slug kind="hollow" autoAlign size="mini">
         <SlugContent>{content}</SlugContent>
       </Slug>
@@ -149,7 +149,7 @@ export const Default = () => (
         <SlugContent>{content}</SlugContent>
       </Slug>
     </div>
-    <div className="slug-container-example">
+    <div className="slug-container-example slug-container">
       <Slug autoAlign kind="inline" size="sm">
         <SlugContent>
           {aiContent}
@@ -202,7 +202,7 @@ export const Default = () => (
         </SlugContent>
       </Slug>
     </div>
-    <div className="slug-container-example">
+    <div className="slug-container-example slug-container">
       <Slug autoAlign kind="inline" size="sm" aiTextLabel="Text goes here">
         <SlugContent>
           {aiContent}
@@ -255,7 +255,7 @@ export const Default = () => (
         </SlugContent>
       </Slug>
     </div>
-    <div className="slug-container-example">
+    <div className="slug-container-example slug-container">
       <Slug autoAlign kind="inline" dotType="hollow" size="sm">
         <SlugContent>{content}</SlugContent>
       </Slug>
@@ -266,7 +266,7 @@ export const Default = () => (
         <SlugContent>{content}</SlugContent>
       </Slug>
     </div>
-    <div className="slug-container-example">
+    <div className="slug-container-example slug-container">
       <Slug
         autoAlign
         kind="inline"
@@ -299,7 +299,7 @@ export const Test = (args) => {
   const { showSlugActions = true } = args;
 
   return (
-    <div className="slug-container-example centered">
+    <div className="slug-container-example slug-container centered">
       <Slug autoAlign={false} defaultOpen {...args}>
         <SlugContent>
           {' '}
