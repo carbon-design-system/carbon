@@ -20,6 +20,7 @@ import wrapFocus, {
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
+import { IconButton } from '../IconButton';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
 import { ReactAttr } from '../../types/common';
@@ -236,7 +237,7 @@ const Modal = React.forwardRef(function Modal(
     shouldSubmitOnEnter,
     size,
     hasScrollingContent = false,
-    closeButtonLabel,
+    closeButtonLabel = 'Close',
     preventCloseOnClickOutside = false,
     isFullWidth,
     launcherButtonRef,
@@ -434,20 +435,23 @@ const Modal = React.forwardRef(function Modal(
   }
 
   const modalButton = (
-    <button
-      className={modalCloseButtonClass}
-      type="button"
-      onClick={onRequestClose}
-      title={ariaLabel}
-      aria-label={closeButtonLabel ? closeButtonLabel : 'close'}
-      ref={button}>
-      <Close
-        size={20}
-        aria-hidden="true"
-        tabIndex="-1"
-        className={`${modalCloseButtonClass}__icon`}
-      />
-    </button>
+    <div className={`${prefix}--modal-close-button`}>
+      <IconButton
+        className={modalCloseButtonClass}
+        label={closeButtonLabel}
+        onClick={onRequestClose}
+        title={closeButtonLabel}
+        aria-label={closeButtonLabel}
+        align="left"
+        ref={button}>
+        <Close
+          size={20}
+          aria-hidden="true"
+          tabIndex="-1"
+          className={`${modalCloseButtonClass}__icon`}
+        />
+      </IconButton>
+    </div>
   );
 
   const modalBody = (

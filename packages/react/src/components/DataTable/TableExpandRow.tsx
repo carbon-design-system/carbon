@@ -17,7 +17,7 @@ interface TableExpandRowProps extends PropsWithChildren<TableRowProps> {
   /**
    * Space separated list of one or more ID values referencing the TableExpandedRow(s) being controlled by the TableExpandRow
    */
-  ['aria-controls']: string;
+  ['aria-controls']?: string;
 
   /**
    * @deprecated This prop has been deprecated and will be
@@ -136,7 +136,6 @@ TableExpandRow.propTypes = {
    * Space separated list of one or more ID values referencing the TableExpandedRow(s) being controlled by the TableExpandRow
    * TODO: make this required in v12
    */
-  /**@ts-ignore*/
   ['aria-controls']: PropTypes.string,
 
   /**
