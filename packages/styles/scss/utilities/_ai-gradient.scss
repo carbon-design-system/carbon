@@ -29,8 +29,9 @@
   background-image: linear-gradient(
     $deg,
     theme.$ai-inner-shadow 0%,
+    15%,
     theme.$ai-aura-end $span,
-    transparent 50%
+    theme.$ai-aura-end 100%
   );
 
   border-block-end-color: theme.$ai-border-strong;
