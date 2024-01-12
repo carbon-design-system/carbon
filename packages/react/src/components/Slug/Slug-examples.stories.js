@@ -271,6 +271,47 @@ export const _Combobox = {
         slug={slug}
         {...args}
       />
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut leo
+      et nisl vehicula rhoncus ultricies eget ipsum. Curabitur mattis vehicula
+      neque. Vestibulum ut convallis massa, ac commodo lacus. Duis augue dolor,
+      eleifend sed leo tincidunt, iaculis euismod risus. Etiam sed tincidunt
+      nulla. Pellentesque sem ante, euismod id varius et, dictum quis mauris.
+      Nullam nec augue tempor, placerat augue a, tempus sem. Proin eleifend
+      semper libero, dapibus accumsan tellus eleifend quis. In pharetra magna
+      sed feugiat sagittis. Suspendisse potenti. In libero odio, tincidunt a
+      urna quis, viverra bibendum enim. Orci varius natoque penatibus et magnis
+      dis parturient montes, nascetur ridiculus mus. Integer sollicitudin
+      vehicula turpis, non suscipit nulla tempus ac. Nullam facilisis ex in
+      nulla auctor maximus. Donec lacus tellus, pulvinar et lorem non, consequat
+      blandit elit. Curabitur fringilla malesuada libero. Mauris nisi tortor,
+      imperdiet quis velit interdum, molestie convallis justo. Sed mattis ligula
+      nunc, eget porta mauris imperdiet eget. Vivamus sollicitudin lectus a eros
+      fringilla, ut laoreet massa luctus. Duis eget euismod quam, id auctor
+      nulla. Morbi ac sem posuere leo ultricies dignissim. Maecenas id felis
+      vulputate, ornare magna sed, lacinia velit. Cras aliquam ac mauris nec
+      eleifend. Donec a faucibus ipsum. Morbi consectetur metus porttitor,
+      sodales eros non, auctor nisi. Praesent eget sollicitudin libero. Donec
+      vulputate nunc in quam facilisis sodales. Phasellus dapibus purus ut
+      sapien dapibus, quis pretium dui fringilla. Mauris bibendum mattis felis,
+      eu vulputate neque porta in. Proin laoreet et sapien sed feugiat. Etiam
+      hendrerit felis auctor, vulputate augue sit amet, finibus ligula.
+      Suspendisse placerat venenatis sollicitudin. Sed volutpat dictum tortor eu
+      sodales. Etiam non erat id odio semper viverra. Maecenas pulvinar dictum
+      justo eu rhoncus. Ut eget posuere diam, quis finibus nulla. Praesent at
+      posuere lacus, quis ultricies nibh. Duis in pharetra tortor. Nam odio
+      orci, feugiat eget erat sed, consectetur egestas quam. Sed eget tempor
+      leo. Donec molestie blandit pharetra. Sed et felis non enim gravida
+      euismod in sed dui. Vestibulum ac orci et enim dignissim eleifend.
+      Pellentesque ornare ligula sed scelerisque blandit. Duis interdum maximus
+      condimentum. In faucibus auctor nulla a ullamcorper. Nulla nibh lorem,
+      mattis non ipsum sit amet, commodo porttitor libero. Pellentesque placerat
+      semper felis vitae scelerisque. In ut ipsum iaculis, faucibus urna et,
+      tincidunt erat. Aliquam in semper est. Suspendisse vitae posuere ex. Sed
+      gravida accumsan neque a auctor. Sed quis nisi eget orci aliquam
+      efficitur. Sed vulputate augue nec libero mollis porttitor. Praesent ac
+      feugiat tortor. Sed sed ex erat. Nullam in viverra turpis. Nullam euismod
+      nunc eu neque porttitor sagittis. Pellentesque sodales dui accumsan tempus
+      viverra. Duis et diam lacus.
     </div>
   ),
 };

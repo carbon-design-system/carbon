@@ -87,19 +87,20 @@
         rgba(0, 0, 0, 0.01);
   } @else {
     background: linear-gradient(
-          0deg,
+          to top,
           theme.$slug-callout-aura-start $start,
           theme.$slug-callout-aura-end 50%
         )
         padding-box,
-      linear-gradient(theme.$background, theme.$background) padding-box,
+      linear-gradient(to top, theme.$background, theme.$background) padding-box,
       linear-gradient(
           to bottom,
           theme.$slug-callout-border-01,
           theme.$slug-callout-border-02
         )
         border-box,
-      linear-gradient(to bottom, theme.$background, theme.$background)
+      // Needed to underlay the transparent border
+      linear-gradient(to top, theme.$background, theme.$background)
         border-box;
   }
 }
