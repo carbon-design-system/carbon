@@ -463,7 +463,7 @@ $sizes: (
     }
   }
 
-  // Override for these two alignments
+  // Override for specific alignments
   .#{$prefix}--slug.#{$prefix}--slug--enabled
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--left-bottom,
@@ -472,6 +472,52 @@ $sizes: (
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret::after {
     background: transparent;
+  }
+
+  // Change caret color / border when it is near the bottom of the callout
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--right-bottom,
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    &::before {
+      border-color: $slug-callout-caret-bottom;
+      background: $slug-callout-caret-bottom-background;
+    }
+  }
+
+  // Adjust background if actions are present
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--right-bottom,
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left
+    )
+    > .#{$prefix}--popover:has(.#{$prefix}--slug-content--with-actions)
+    > .#{$prefix}--popover-caret {
+    &::before {
+      background: $slug-callout-caret-bottom-background-actions;
+    }
+  }
+
+  // Change the caret border when it is near the middle of the callout
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--left,
+      .#{$prefix}--popover--right
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    &::before {
+      border-color: $slug-callout-caret-center;
+    }
   }
 
   .#{$prefix}--slug.#{$prefix}--slug--enabled .#{$prefix}--toggletip-content {

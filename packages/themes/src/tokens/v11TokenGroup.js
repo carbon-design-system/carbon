@@ -373,6 +373,11 @@ export const ai = TokenGroup.create({
     'slug-callout-shadow-outer-02',
     'slug-callout-border-01',
     'slug-callout-border-02',
+    // Caret tokens
+    'slug-callout-caret-center',
+    'slug-callout-caret-bottom',
+    'slug-callout-caret-bottom-background',
+    'slug-callout-caret-bottom-background-actions',
   ],
 });
 

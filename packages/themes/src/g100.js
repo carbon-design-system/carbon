@@ -252,7 +252,7 @@ export const slugCalloutGradientBottom = rgba(gray90, 0.85);
 // One off tokens for caret
 export const slugCalloutCaretCenter = '#4069AF';
 export const slugCalloutCaretBottom = '#3D4655';
-export const slugCalloutCaretBottomBackgroundActions = '#232E44';
+export const slugCalloutCaretBottomBackgroundActions = '#202838';
 export const slugCalloutCaretBottomBackground = '#223456';
 
 export {
