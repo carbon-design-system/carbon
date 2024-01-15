@@ -9126,6 +9126,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "id": Object {
+        "type": "string",
+      },
       "isExpanded": Object {
         "type": "bool",
       },
@@ -9209,6 +9212,9 @@ Map {
         },
         "disabled": Object {
           "type": "bool",
+        },
+        "id": Object {
+          "type": "string",
         },
         "isExpanded": Object {
           "type": "bool",
