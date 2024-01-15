@@ -317,6 +317,46 @@ describe('Single date picker', () => {
     await userEvent.click(screen.getByText('clear'));
     expect(screen.getByLabelText('Date Picker label')).toHaveValue('');
   });
+
+  it('should respect closeOnSelect prop', async () => {
+    const DatePickerExample = () => {
+      const [date, setDate] = useState();
+      return (
+        <DatePicker
+          datePickerType="single"
+          value={date}
+          closeOnSelect={false}
+          minDate="11/25/2023"
+          maxDate="11/28/2023"
+          onChange={(value) => {
+            setDate(value);
+          }}>
+          <DatePickerInput
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+            id="date-picker-simple"
+          />
+        </DatePicker>
+      );
+    };
+    render(<DatePickerExample />);
+    const input = screen.getByLabelText('Date Picker label');
+    expect(screen.getByRole('application')).not.toHaveClass('open');
+
+    await userEvent.click(input);
+    expect(screen.getByRole('application')).toHaveClass('open');
+
+    // eslint-disable-next-line testing-library/no-node-access
+    const belowMinDate = document.querySelector(
+      '[aria-label="November 26, 2023"]'
+    );
+    await userEvent.click(belowMinDate);
+
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue(
+      '11/26/2023'
+    );
+    expect(screen.getByRole('application')).toHaveClass('open');
+  });
 });
 
 describe('Date picker with locale', () => {

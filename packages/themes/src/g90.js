@@ -123,12 +123,12 @@ export const fieldHover03 = gray60Hover;
 export const borderSubtle00 = gray70;
 
 // border-subtle-01
-export const borderSubtle01 = gray70;
-export const borderSubtleSelected01 = gray60;
+export const borderSubtle01 = gray60;
+export const borderSubtleSelected01 = gray50;
 
 // border-subtle-02
-export const borderSubtle02 = gray60;
-export const borderSubtleSelected02 = gray50;
+export const borderSubtle02 = gray50;
+export const borderSubtleSelected02 = gray40;
 
 // border-subtle-03
 export const borderSubtle03 = gray50;
