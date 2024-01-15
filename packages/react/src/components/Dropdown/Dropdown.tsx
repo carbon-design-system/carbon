@@ -29,6 +29,7 @@ import {
   WarningFilled,
 } from '@carbon/icons-react';
 import ListBox, {
+  type ListBoxMenuIconTranslationKey,
   ListBoxSize,
   ListBoxType,
   PropTypes as ListBoxPropTypes,
@@ -212,7 +213,10 @@ export interface DropdownProps<ItemType>
   /**
    * Callback function for translating ListBoxMenuIcon SVG title
    */
-  translateWithId?(messageId: string, args?: Record<string, unknown>): string;
+  translateWithId?(
+    messageId: ListBoxMenuIconTranslationKey,
+    args?: Record<string, unknown>
+  ): string;
 
   /**
    * The dropdown type, `default` or `inline`
@@ -229,6 +233,8 @@ export interface DropdownProps<ItemType>
    */
   warnText?: React.ReactNode;
 }
+
+export type DropdownTranslationKey = ListBoxMenuIconTranslationKey;
 
 const Dropdown = React.forwardRef(
   <ItemType,>(
