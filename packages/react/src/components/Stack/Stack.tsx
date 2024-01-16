@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
-import { TextLineSpacing } from '@carbon/icons-react';
+import { spacing } from '@carbon/layout';
 
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -16,11 +16,11 @@ import { usePrefix } from '../../internal/usePrefix';
  * The steps in the spacing scale
  * @type {Array<number>}
  */
-export const SPACING_STEPS = Array.from({
-  length: TextLineSpacing.length - 1,
-}).map((_, step) => {
-  return step + 1;
-});
+const SPACING_STEPS = Array.from({ length: spacing.length - 1 }).map(
+  (_, step) => {
+    return step + 1;
+  }
+);
 
 export interface StackProps extends React.HTMLAttributes<HTMLElement> {
   /**
