@@ -12,6 +12,11 @@ jobs:
     name: Add to queue when automerge labels are present
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/create-github-app-token@f04aa94d10cf56334d1c580e077ce2e3569e805d #1.6.3
+        id: app-token
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
       - name: Log github event
         env:
           $GITHUB_CONTEXT_LABELS:
@@ -25,6 +30,6 @@ jobs:
           enable automerge 🟠', ':'))}}
         run: gh pr merge "$PR_URL"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           PR_URL: ${{github.event.pull_request.html_url}}
           GH_DEBUG: api
