@@ -96,7 +96,7 @@ async function run() {
       return label.name === readyForReviewLabel;
     });
     if (hasReadyLabel) {
-      await octokit.issues.removeLabel({
+      await octokit.rest.issues.removeLabel({
         owner: repository.owner.login,
         repo: repository.name,
         issue_number: pullRequest.number,
@@ -110,7 +110,7 @@ async function run() {
       return label.name === additionalReviewLabel;
     });
     if (!hasAdditionalReviewLabel) {
-      await octokit.issues.addLabels({
+      await octokit.rest.issues.addLabels({
         owner: repository.owner.login,
         repo: repository.name,
         issue_number: pullRequest.number,
@@ -125,7 +125,7 @@ async function run() {
       return label.name === additionalReviewLabel;
     });
     if (hasAdditionalReviewLabel) {
-      await octokit.issues.removeLabel({
+      await octokit.rest.issues.removeLabel({
         owner: repository.owner.login,
         repo: repository.name,
         issue_number: pullRequest.number,
@@ -144,7 +144,7 @@ async function run() {
       return user === pullRequest.user.login;
     });
     if (shouldAutoLabel) {
-      await octokit.issues.addLabels({
+      await octokit.rest.issues.addLabels({
         owner: repository.owner.login,
         repo: repository.name,
         issue_number: pullRequest.number,
