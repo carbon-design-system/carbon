@@ -27,3 +27,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{github.event.pull_request.html_url}}
+          GH_DEBUG: api

@@ -341,6 +341,20 @@ describe('events', () => {
         await userEvent.keyboard('big blue');
         expect(onChange).toHaveBeenCalled();
       });
+
+      it('should invoke onKeyDown when textarea is keyed', async () => {
+        const onKeyDown = jest.fn();
+        render(
+          <TextArea
+            disabled={false}
+            id="testing"
+            labelText="testLabel"
+            onKeyDown={onKeyDown}
+          />
+        );
+        await userEvent.type(screen.getByLabelText('testLabel'), 'test');
+        expect(onKeyDown).toHaveBeenCalled();
+      });
     });
   });
 });
