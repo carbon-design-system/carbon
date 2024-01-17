@@ -540,10 +540,21 @@ $sizes: (
 
   .#{$prefix}--slug.#{$prefix}--slug--enabled .#{$prefix}--toggletip-content {
     // This sets the max size to the size of the action bar with 3 buttons
-    max-inline-size: convert.to-rem(334px);
     padding-block-end: convert.to-rem(80px);
     padding-block-start: convert.to-rem(24px);
     padding-inline: convert.to-rem(24px);
+  }
+
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    .#{$prefix}--slug-content--with-actions
+    .#{$prefix}--toggletip-content {
+    max-inline-size: convert.to-rem(334px);
+  }
+
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    .#{$prefix}--slug-content:not(.#{$prefix}--slug-content--with-actions)
+    .#{$prefix}--toggletip-content {
+    max-inline-size: convert.to-rem(320px);
   }
 
   .#{$prefix}--slug.#{$prefix}--slug--enabled .#{$prefix}--slug-actions {
