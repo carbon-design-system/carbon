@@ -11,7 +11,7 @@
 import rangePlugin, { Config } from 'flatpickr/dist/plugins/rangePlugin';
 import { Instance as FlatpickrInstance } from 'flatpickr/dist/types/instance';
 import { Plugin } from 'flatpickr/dist/types/options';
-import on from 'carbon-components/es/globals/js/misc/on';
+import on from '../../globals/mixins/on';
 import Handle from '../../globals/internal/handle';
 
 /**
