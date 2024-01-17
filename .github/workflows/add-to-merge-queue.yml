@@ -25,6 +25,6 @@ jobs:
           enable automerge 🟠', ':'))}}
         run: gh pr merge "$PR_URL"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           PR_URL: ${{github.event.pull_request.html_url}}
           GH_DEBUG: api
