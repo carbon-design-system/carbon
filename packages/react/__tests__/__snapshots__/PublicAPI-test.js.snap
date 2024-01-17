@@ -1486,6 +1486,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "slug": Object {
+        "type": "node",
+      },
     },
     "render": [Function],
   },
@@ -4130,6 +4133,12 @@ Map {
     },
     "render": [Function],
   },
+  "IconButtonKinds" => Object {
+    "0": "primary",
+    "1": "secondary",
+    "2": "ghost",
+    "3": "tertiary",
+  },
   "IconSkeleton" => Object {
     "propTypes": Object {
       "className": Object {
@@ -4832,6 +4841,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "slug": Object {
+        "type": "node",
       },
     },
     "render": [Function],
@@ -5844,6 +5856,9 @@ Map {
     "propTypes": Object {
       "className": Object {
         "type": "string",
+      },
+      "disableOverflow": Object {
+        "type": "bool",
       },
       "itemsShown": Object {
         "type": "number",
@@ -7370,6 +7385,9 @@ Map {
       "index": Object {
         "type": "number",
       },
+      "onClick": Object {
+        "type": "func",
+      },
       "onKeyDown": Object {
         "type": "func",
       },
@@ -8234,6 +8252,9 @@ Map {
         "type": "func",
       },
       "onClick": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
         "type": "func",
       },
       "placeholder": Object {
@@ -9105,6 +9126,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "id": Object {
+        "type": "string",
+      },
       "isExpanded": Object {
         "type": "bool",
       },
@@ -9188,6 +9212,9 @@ Map {
         },
         "disabled": Object {
           "type": "bool",
+        },
+        "id": Object {
+          "type": "string",
         },
         "isExpanded": Object {
           "type": "bool",

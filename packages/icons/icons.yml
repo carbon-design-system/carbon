@@ -11559,7 +11559,7 @@
     - industry
   sizes:
     - 32
-- name: infinity
+- name: infinity-symbol
   friendly_name: Infinity
   aliases:
     - operations
