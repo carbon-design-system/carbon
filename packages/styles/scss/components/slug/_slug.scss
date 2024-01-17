@@ -391,8 +391,26 @@ $sizes: (
     }
 
     &::after {
-      display: none;
+      background: $slug-callout-caret-bottom-background;
+      block-size: convert.to-rem(2px);
+      border-end-end-radius: 50%;
+      border-end-start-radius: 50%;
+      inline-size: convert.to-rem(14px);
+      inset-block-start: convert.to-rem(-2px);
+      inset-inline-start: convert.to-rem(-1px);
     }
+  }
+
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--slug-content--with-actions
+    + .#{$prefix}--popover-caret::after {
+    display: none;
   }
 
   // Right
@@ -524,8 +542,8 @@ $sizes: (
     // This sets the max size to the size of the action bar with 3 buttons
     max-inline-size: convert.to-rem(334px);
     padding-block-end: convert.to-rem(80px);
-    padding-block-start: convert.to-rem(32px);
-    padding-inline: convert.to-rem(32px);
+    padding-block-start: convert.to-rem(24px);
+    padding-inline: convert.to-rem(24px);
   }
 
   .#{$prefix}--slug.#{$prefix}--slug--enabled .#{$prefix}--slug-actions {

@@ -250,10 +250,10 @@ export const slugCalloutGradientTop = rgba(gray100, 0.85);
 export const slugCalloutGradientBottom = rgba(gray90, 0.85);
 
 // One off tokens for caret
-export const slugCalloutCaretCenter = '#4069AF';
+export const slugCalloutCaretCenter = '#3F68AF';
 export const slugCalloutCaretBottom = '#3D4655';
-export const slugCalloutCaretBottomBackgroundActions = '#202838';
-export const slugCalloutCaretBottomBackground = '#223456';
+export const slugCalloutCaretBottomBackgroundActions = '#192436';
+export const slugCalloutCaretBottomBackground = '#213250';
 
 export {
   // Type
