@@ -4146,6 +4146,12 @@ Map {
     },
     "render": [Function],
   },
+  "IconButtonKinds" => Object {
+    "0": "primary",
+    "1": "secondary",
+    "2": "ghost",
+    "3": "tertiary",
+  },
   "IconSkeleton" => Object {
     "propTypes": Object {
       "className": Object {
@@ -9152,6 +9158,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "id": Object {
+        "type": "string",
+      },
       "isExpanded": Object {
         "type": "bool",
       },
@@ -9235,6 +9244,9 @@ Map {
         },
         "disabled": Object {
           "type": "bool",
+        },
+        "id": Object {
+          "type": "string",
         },
         "isExpanded": Object {
           "type": "bool",

@@ -434,18 +434,20 @@
   // -----------------------------
   // Modal close btn
   // -----------------------------
-  .#{$prefix}--modal-close {
+
+  .#{$prefix}--modal-close-button {
     position: absolute;
-    z-index: 2;
-    overflow: hidden;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+  }
+
+  .#{$prefix}--modal-close {
     padding: convert.to-rem(12px);
     border: 2px solid transparent;
     background-color: transparent;
     block-size: 3rem;
     cursor: pointer;
     inline-size: 3rem;
-    inset-block-start: 0;
-    inset-inline-end: 0;
     transition: background-color $duration-fast-02 motion(standard, productive);
 
     &:hover {
