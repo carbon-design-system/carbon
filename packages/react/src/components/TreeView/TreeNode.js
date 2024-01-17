@@ -21,6 +21,7 @@ const TreeNode = React.forwardRef(
       className,
       depth,
       disabled,
+      id: nodeId,
       isExpanded,
       label,
       onNodeFocusEvent,
@@ -34,7 +35,7 @@ const TreeNode = React.forwardRef(
     },
     ref
   ) => {
-    const { current: id } = useRef(rest.id || uniqueId());
+    const { current: id } = useRef(nodeId || uniqueId());
     const [expanded, setExpanded] = useState(isExpanded);
     const currentNode = useRef(null);
     const currentNodeLabel = useRef(null);
@@ -234,7 +235,8 @@ const TreeNode = React.forwardRef(
 
 TreeNode.propTypes = {
   /**
-   * The value of the active node in the tree
+   * **Note:** this is controlled by the parent TreeView component, do not set manually.
+   * The ID of the active node in the tree
    */
   active: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
@@ -249,7 +251,8 @@ TreeNode.propTypes = {
   className: PropTypes.string,
 
   /**
-   * TreeNode depth to determine spacing, automatically calculated by default
+   * * **Note:** this is controlled by the parent TreeView component, do not set manually.
+   * TreeNode depth to determine spacing
    */
   depth: PropTypes.number,
 
@@ -257,6 +260,11 @@ TreeNode.propTypes = {
    * Specify if the TreeNode is disabled
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Specify the TreeNode's ID. Must be unique in the DOM and is used for props.active and props.selected
+   */
+  id: PropTypes.string,
 
   /**
    * Specify if the TreeNode is expanded (only applicable to parent nodes)
@@ -295,6 +303,7 @@ TreeNode.propTypes = {
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
+   * **Note:** this is controlled by the parent TreeView component, do not set manually.
    * Array containing all selected node IDs in the tree
    */
   selected: PropTypes.arrayOf(

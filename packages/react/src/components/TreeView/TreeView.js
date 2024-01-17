@@ -223,7 +223,7 @@ export default function TreeView({
 
 TreeView.propTypes = {
   /**
-   * Mark the active node in the tree, represented by its value
+   * Mark the active node in the tree, represented by its ID
    */
   active: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
