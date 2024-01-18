@@ -350,7 +350,20 @@ $sizes: (
 
   // Caret pseudo element base styles
   .#{$prefix}--slug.#{$prefix}--slug--enabled
-    > .#{$prefix}--toggletip
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left,
+      .#{$prefix}--popover--bottom,
+      .#{$prefix}--popover--bottom-right,
+      .#{$prefix}--popover--bottom-left,
+      .#{$prefix}--popover--left,
+      .#{$prefix}--popover--left-top,
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--right,
+      .#{$prefix}--popover--right-top,
+      .#{$prefix}--popover--right-bottom
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret::before {
     position: absolute;
@@ -365,7 +378,20 @@ $sizes: (
   }
 
   .#{$prefix}--slug.#{$prefix}--slug--enabled
-    > .#{$prefix}--toggletip
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left,
+      .#{$prefix}--popover--bottom,
+      .#{$prefix}--popover--bottom-right,
+      .#{$prefix}--popover--bottom-left,
+      .#{$prefix}--popover--left,
+      .#{$prefix}--popover--left-top,
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--right,
+      .#{$prefix}--popover--right-top,
+      .#{$prefix}--popover--right-bottom
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret::after {
     position: absolute;
