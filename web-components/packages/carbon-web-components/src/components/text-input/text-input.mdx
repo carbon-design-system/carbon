@@ -1,4 +1,4 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Markdown } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 
 # Text Input
@@ -23,8 +23,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/text-input/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['text-input'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['text-input'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -45,7 +45,7 @@ If the input is part of a form, make sure to import and wrap the input with
 import '@carbon/web-components/es/components/form/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['form'] })}`} />
+<Markdown>{`${cdnJs({ components: ['form'] })}`}</Markdown>
 
 ```html
 <cds-form-item>
@@ -63,4 +63,4 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-text-input required>`) and `false` means not setting the attribute (e.g.
 `<cds-text-input>` without `required` attribute).
 
-<Props of="cds-text-input" />
+<ArgTypes of="cds-text-input" />

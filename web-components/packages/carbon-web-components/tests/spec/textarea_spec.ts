@@ -11,7 +11,7 @@ import { html, render } from 'lit';
 import EventManager from '../utils/event-manager';
 
 import CDSTextarea from '../../src/components/textarea/textarea';
-import { Playground } from '../../src/components/textarea/textarea-story';
+import { Playground } from '../../src/components/textarea/textarea.stories';
 
 /**
  * @param formData A `FormData` instance.

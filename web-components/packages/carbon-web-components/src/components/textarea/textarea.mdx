@@ -1,4 +1,4 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Markdown } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 
 # Textarea
@@ -24,8 +24,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/textarea/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['textarea'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['textarea'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -70,4 +70,4 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-textarea autofocus>`) and `false` means not setting the attribute (e.g.
 `<cds-textarea>` without `autofocus` attribute).
 
-<Props of="cds-textarea" />
+<ArgTypes of="cds-textarea" />

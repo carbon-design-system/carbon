@@ -1,4 +1,4 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Markdown } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 
 # UI Shell
@@ -21,8 +21,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/ui-shell/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['ui-shell'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['ui-shell'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -181,7 +181,7 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-side-nav expanded>`) and `false` means not setting the attribute (e.g.
 `<cds-side-nav>` without `expanded` attribute).
 
-<Props of="cds-side-nav" />
+<ArgTypes of="cds-side-nav" />
 
 ### `<cds-side-nav-link>` attributes and properties
 
@@ -189,7 +189,7 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-side-nav-link active>`) and `false` means not setting the attribute (e.g.
 `<cds-side-nav-link>` without `active` attribute).
 
-<Props of="cds-side-nav-link" />
+<ArgTypes of="cds-side-nav-link" />
 
 ### `<cds-side-nav-menu>` attributes and properties
 
@@ -197,7 +197,7 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-side-nav-menu active>`) and `false` means not setting the attribute (e.g.
 `<cds-side-nav-menu>` without `active` attribute).
 
-<Props of="cds-side-nav-menu" />
+<ArgTypes of="cds-side-nav-menu" />
 
 ### `<cds-side-nav-menu-item>` attributes and properties
 
@@ -205,7 +205,7 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-side-nav-menu-item active>`) and `false` means not setting the attribute
 (e.g. `<cds-side-nav-menu-item>` without `active` attribute).
 
-<Props of="cds-side-nav-menu-item" />
+<ArgTypes of="cds-side-nav-menu-item" />
 
 ## Header nav
 
@@ -221,17 +221,13 @@ Header nav in UI Shell consists of the following components:
 | `<cds-header-menu-button>` | The expando button for side nav               |
 | `<cds-header-name>`        | The UI to show product name                   |
 
-<Preview withToolbar>
-  <Story id="components-ui-shell--header" />
-</Preview>
-
 ### `<cds-header-nav>` attributes and properties
 
-<Props of="cds-header-nav" />
+<ArgTypes of="cds-header-nav" />
 
 ### `<cds-header-nav-item>` attributes and properties
 
-<Props of="cds-header-nav-item" />
+<ArgTypes of="cds-header-nav-item" />
 
 ### `<cds-header-menu>` attributes and properties
 
@@ -239,7 +235,7 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-header-menu expanded>`) and `false` means not setting the attribute (e.g.
 `<cds-header-menu>` without `expanded` attribute).
 
-<Props of="cds-header-menu" />
+<ArgTypes of="cds-header-menu" />
 
 ### `<cds-header-menu-button>` attributes and properties
 
@@ -247,12 +243,12 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-header-menu-button active>`) and `false` means not setting the attribute
 (e.g. `<cds-header-menu-button>` without `active` attribute).
 
-<Props of="cds-header-menu-button" />
+<ArgTypes of="cds-header-menu-button" />
 
 ### `<cds-header-menu-item>` attributes and properties
 
-<Props of="cds-header-menu-item" />
+<ArgTypes of="cds-header-menu-item" />
 
 ### `<cds-header-name>` attributes and properties
 
-<Props of="cds-header-name" />
+<ArgTypes of="cds-header-name" />

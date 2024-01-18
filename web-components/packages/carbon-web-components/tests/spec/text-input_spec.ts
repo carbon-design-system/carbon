@@ -13,7 +13,7 @@ import EventManager from '../utils/event-manager';
 import CDSTextInput, {
   INPUT_TYPE,
 } from '../../src/components/text-input/text-input';
-import { Playground } from '../../src/components/text-input/text-input-story';
+import { Playground } from '../../src/components/text-input/text-input.stories';
 
 /**
  * @param formData A `FormData` instance.

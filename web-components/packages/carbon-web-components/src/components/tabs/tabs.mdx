@@ -1,4 +1,4 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Markdown } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 
 # Tabs
@@ -27,8 +27,8 @@ import '@carbon/web-components/es/components/tabs/index.js';
 @use '@carbon/styles/scss/components/tabs';
 ```
 
-<Description markdown={`${cdnJs({ components: ['tabs'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['tabs'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -122,7 +122,7 @@ For the skeleton variation, utilize `<cds-tabs-skeleton>` and
 
 Note: `cds-content-switcher-*` events are not fired from `<cds-tabs>`.
 
-<Props of="cds-tabs" />
+<ArgTypes of="cds-tabs" />
 
 ## `<cds-tab>` attributes, properties and events
 
@@ -130,4 +130,4 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-tab disabled>`) and `false` means not setting the attribute (e.g.
 `<cds-tab>` without `disabled` attribute).
 
-<Props of="cds-tab" />
+<ArgTypes of="cds-tab" />

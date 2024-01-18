@@ -9,7 +9,7 @@
 
 import { render } from 'lit';
 import BXStructuredListRow from '../../src/components/structured-list/structured-list-row';
-import { Playground } from '../../src/components/structured-list/structured-list-story';
+import { Playground } from '../../src/components/structured-list/structured-list.stories';
 
 const template = (props?) =>
   Playground({

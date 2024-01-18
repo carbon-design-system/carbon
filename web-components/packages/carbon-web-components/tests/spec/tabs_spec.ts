@@ -11,7 +11,7 @@ import { render } from 'lit';
 import EventManager from '../utils/event-manager';
 import CDSTabs from '../../src/components/tabs/tabs';
 import CDSTab from '../../src/components/tabs/tab';
-import { Playground } from '../../src/components/tabs/tabs-story';
+import { Playground } from '../../src/components/tabs/tabs.stories';
 
 const template = (props?) =>
   Playground({
