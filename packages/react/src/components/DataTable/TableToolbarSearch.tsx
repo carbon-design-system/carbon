@@ -143,7 +143,6 @@ const TableToolbarSearch = ({
 }: TableToolbarSearchProps) => {
   const { current: controlled } = useRef(expandedProp !== undefined);
 
-  // TODO: Why does defaultValue affect the initial expandedState?  This is from #5089.
   const [expandedState, setExpandedState] = useState<boolean>(
     Boolean(defaultExpanded || defaultValue)
   );
