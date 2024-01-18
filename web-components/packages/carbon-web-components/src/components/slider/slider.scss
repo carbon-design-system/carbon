@@ -26,8 +26,6 @@ $css--plex: true !default;
 
   .#{$prefix}--slider__thumb {
     // TODO when updating to core carbon's #15129
-
-    // TODO when updating to core carbon's #15129
     z-index: 3;
     block-size: 0.875rem;
     inline-size: 0.875rem;
