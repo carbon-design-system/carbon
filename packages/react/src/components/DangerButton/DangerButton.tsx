@@ -10,6 +10,9 @@ import Button, { ButtonComponent, ButtonProps } from '../Button';
 
 const DangerButton: ButtonComponent = <T extends React.ElementType>(
   props: ButtonProps<T>
-) => <Button kind="danger" {...props} />;
+  // TODO: I got a SonarCloud warning here saying that kind would always be overridden. Is the
+  // expected behavior here to spread the props and then force "kind" to be "danger"? If so,
+  // swapping these props is likely the way to go.
+) => <Button {...props} kind="danger" />;
 
 export default DangerButton;
