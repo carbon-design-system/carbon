@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2023
+// Copyright IBM Corp. 2019, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -73,9 +73,9 @@
 }
 
 :host(#{$prefix}-table-row[selected][slug]) {
-  .#{$prefix}--table-column-checkbox,
   ::slotted(#{$prefix}-table-cell),
-  .#{$prefix}--table-expand {
+  .#{$prefix}--table-expand,
+  .#{$prefix}--table-column-checkbox {
     background-color: transparent;
   }
 }
