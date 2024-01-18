@@ -177,7 +177,7 @@ const slug = (
         <IconButton kind="ghost" label="Folders">
           <Folders />
         </IconButton>
-        <Button>View literature</Button>
+        <Button>View details</Button>
       </SlugActions>
     </SlugContent>
   </Slug>
@@ -208,7 +208,7 @@ const slugFunc = (kind) => (
         <IconButton kind="ghost" label="Folders">
           <Folders />
         </IconButton>
-        <Button>View literature</Button>
+        <Button>View details</Button>
       </SlugActions>
     </SlugContent>
   </Slug>
@@ -556,396 +556,39 @@ export const _Tag = {
     },
   },
   render: () => (
-    <>
-      <div style={{ marginBottom: '4rem' }}>
-        <Tag slug={slug} className="some-class" type="red" title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          slug={slug}
-          className="some-class"
-          type="magenta"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          slug={slug}
-          className="some-class"
-          type="purple"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          slug={slug}
-          className="some-class"
-          type="blue"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          slug={slug}
-          className="some-class"
-          type="cyan"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          slug={slug}
-          className="some-class"
-          type="teal"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          slug={slug}
-          className="some-class"
-          type="green"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          slug={slug}
-          className="some-class"
-          type="gray"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          slug={slug}
-          className="some-class"
-          type="cool-gray"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          slug={slug}
-          className="some-class"
-          type="warm-gray"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          slug={slug}
-          className="some-class"
-          type="high-contrast"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          slug={slug}
-          className="some-class"
-          type="outline"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-      </div>
-      <div style={{ marginBottom: '4rem' }}>
-        <Tag
-          filter
-          slug={slug}
-          className="some-class"
-          type="red"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          filter
-          slug={slug}
-          className="some-class"
-          type="magenta"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          filter
-          slug={slug}
-          className="some-class"
-          type="purple"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          filter
-          slug={slug}
-          className="some-class"
-          type="blue"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          filter
-          slug={slug}
-          className="some-class"
-          type="cyan"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          filter
-          slug={slug}
-          className="some-class"
-          type="teal"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          filter
-          slug={slug}
-          className="some-class"
-          type="green"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          filter
-          slug={slug}
-          className="some-class"
-          type="gray"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          filter
-          slug={slug}
-          className="some-class"
-          type="cool-gray"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          filter
-          slug={slug}
-          className="some-class"
-          type="warm-gray"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          filter
-          slug={slug}
-          className="some-class"
-          type="high-contrast"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          filter
-          slug={slug}
-          className="some-class"
-          type="outline"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-      </div>
-      <div style={{ marginBottom: '4rem' }}>
-        <Tag
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="red"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="magenta"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="purple"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="blue"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="cyan"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="teal"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="green"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="gray"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="cool-gray"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="warm-gray"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="high-contrast"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="outline"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-      </div>
-      <div style={{ marginBottom: '4rem' }}>
-        <Tag
-          filter
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="red"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          filter
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="magenta"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          filter
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="purple"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="blue"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
+    <div style={{ marginBottom: '4rem' }}>
+      <Tag slug={slug} className="some-class" type="red" title="Clear Filter">
+        {'Tag'}
+      </Tag>
 
-        <Tag
-          filter
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="cyan"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          filter
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="teal"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          filter
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="green"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          filter
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="gray"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          filter
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="cool-gray"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          filter
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="warm-gray"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          filter
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="high-contrast"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-        <Tag
-          filter
-          renderIcon={Asleep}
-          slug={slug}
-          className="some-class"
-          type="outline"
-          title="Clear Filter">
-          {'Tag'}
-        </Tag>
-      </div>
-    </>
+      <Tag
+        filter
+        slug={slug}
+        className="some-class"
+        type="purple"
+        title="Clear Filter">
+        {'Tag'}
+      </Tag>
+
+      <Tag
+        renderIcon={Asleep}
+        slug={slug}
+        className="some-class"
+        type="blue"
+        title="Clear Filter">
+        {'Tag'}
+      </Tag>
+
+      <Tag
+        filter
+        renderIcon={Asleep}
+        slug={slug}
+        className="some-class"
+        type="green"
+        title="Clear Filter">
+        {'Tag'}
+      </Tag>
+    </div>
   ),
 };
 

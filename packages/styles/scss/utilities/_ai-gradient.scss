@@ -87,16 +87,20 @@
         rgba(0, 0, 0, 0.01);
   } @else {
     background: linear-gradient(
-        0deg,
-        theme.$slug-callout-aura-start $start,
-        theme.$slug-callout-aura-end 50%,
-        transparent 50%
-      ),
-      linear-gradient(
-          180deg,
-          theme.$slug-callout-gradient-top $start,
-          theme.$slug-callout-gradient-bottom 100%
+          to top,
+          theme.$slug-callout-aura-start $start,
+          theme.$slug-callout-aura-end 50%
         )
-        rgba(0, 0, 0, 0.01);
+        padding-box,
+      linear-gradient(to top, theme.$background, theme.$background) padding-box,
+      linear-gradient(
+          to bottom,
+          theme.$slug-callout-border-01,
+          theme.$slug-callout-border-02
+        )
+        border-box,
+      // Needed to underlay the transparent border
+      linear-gradient(to top, theme.$background, theme.$background)
+        border-box;
   }
 }
