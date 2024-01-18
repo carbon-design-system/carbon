@@ -20,15 +20,16 @@ const levels = {
 };
 
 const defaultArgs = {
-  level: '0'
-}
+  level: '0',
+};
 
 const controls = {
   level: {
-    control: 'radio', options: levels,
-    description: `Specify the layer level.`
+    control: 'radio',
+    options: levels,
+    description: `Specify the layer level.`,
   },
-}
+};
 
 export const Default = {
   render: () => html`
@@ -44,7 +45,7 @@ export const Default = {
     <style>
       ${styles}
     </style>
-  `
+  `,
 };
 
 export const CustomLevel = {
@@ -56,7 +57,7 @@ export const CustomLevel = {
     <style>
       ${styles}
     </style>
-  `
+  `,
 };
 
 export const UseLayer = {
@@ -70,17 +71,17 @@ export const UseLayer = {
     });
 
     return html`
-    <cds-layer>
-      <div class="example-layer-test-component use-layer"></div>
       <cds-layer>
         <div class="example-layer-test-component use-layer"></div>
+        <cds-layer>
+          <div class="example-layer-test-component use-layer"></div>
+        </cds-layer>
       </cds-layer>
-    </cds-layer>
-    <style>
-      ${styles}
-    </style>
-  `
-  }
+      <style>
+        ${styles}
+      </style>
+    `;
+  },
 };
 
 export const Playground = {
@@ -91,7 +92,7 @@ export const Playground = {
       skip: true,
     },
   },
-  render: ({level}) => html`
+  render: ({ level }) => html`
     <cds-layer level="${level}">
       <div class="example-layer-test-component">Test component</div>
     </cds-layer>

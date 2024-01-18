@@ -65,8 +65,8 @@ const defaultArgs = {
   titleText: 'This is an example title',
   value: '',
   warn: false,
-  warnText: 'please notice the warning',  
-}
+  warnText: 'please notice the warning',
+};
 
 const controls = {
   disabled: {
@@ -74,8 +74,9 @@ const controls = {
     description: `Specify if the dropdown should be disabled, or not.`,
   },
   direction: {
-    control: 'select', options: directionOptions,
-    description: `Dropdown direction`
+    control: 'select',
+    options: directionOptions,
+    description: `Dropdown direction`,
   },
   hideLabel: {
     control: 'boolean',
@@ -102,8 +103,9 @@ const controls = {
     description: `Specify if the dropdown should be read only, or not.`,
   },
   size: {
-    control: 'select', options: sizes,
-    description: `Dropdown size.`
+    control: 'select',
+    options: sizes,
+    description: `Dropdown size.`,
   },
   titleText: {
     control: 'text',
@@ -136,7 +138,7 @@ export const Default = {
         `
       )}
     </cds-combo-box>
-  `
+  `,
 };
 
 export const WithLayer = {
@@ -159,7 +161,7 @@ export const WithLayer = {
         </cds-combo-box>
       </div>
     </sb-template-layers>
-  `
+  `,
 };
 
 export const Playground = {
@@ -204,8 +206,8 @@ export const Playground = {
         `
       )}
     </cds-combo-box>
-  `
-}
+  `,
+};
 
 const meta = {
   title: 'Components/Combo box',

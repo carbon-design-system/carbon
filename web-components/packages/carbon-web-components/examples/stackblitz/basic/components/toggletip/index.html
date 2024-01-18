@@ -1,0 +1,39 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>carbon-web-components example</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet"
+        href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"/>
+  
+  <link rel="stylesheet" href="src/styles.scss" />
+  <style>
+    /* Suppress custom element until styles are loaded */
+    cds-toggletip:not(:defined) {
+      display: none;
+    }
+  </style>
+  <script type="module" src="src/index.js"></script>
+</head>
+<body>
+  <div data-floating-menu-container style="position: relative; padding: 3rem; display: flex; flex-direction: column; align-items: center;">
+    <cds-toggletip>
+      Toggletip label
+
+      <p slot="body-text">
+      Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+      </p>
+      <cds-link slot="actions">Test</cds-link>
+       <cds-button slot="actions">Button</cds-button>
+    </cds-toggletip>
+  </div>
+</body>
+</html>

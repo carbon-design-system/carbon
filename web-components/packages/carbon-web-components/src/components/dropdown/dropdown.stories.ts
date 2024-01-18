@@ -73,8 +73,8 @@ const defaultArgs = {
   type: null,
   value: '',
   warn: false,
-  warnText: 'please notice the warning',  
-}
+  warnText: 'please notice the warning',
+};
 
 const controls = {
   disabled: {
@@ -82,8 +82,9 @@ const controls = {
     description: `Specify if the dropdown should be disabled, or not.`,
   },
   direction: {
-    control: 'select', options: directionOptions,
-    description: `Dropdown direction.`
+    control: 'select',
+    options: directionOptions,
+    description: `Dropdown direction.`,
   },
   hideLabel: {
     control: 'boolean',
@@ -114,16 +115,18 @@ const controls = {
     description: `Specify if the dropdown should be read only, or not.`,
   },
   size: {
-    control: 'select', options: sizes,
-    description: `Dropdown size.`
+    control: 'select',
+    options: sizes,
+    description: `Dropdown size.`,
   },
   titleText: {
     control: 'text',
     description: `Text that will be read by a screen reader when visiting this control.`,
   },
   type: {
-    control: 'select', options: types,
-    description: `Dropdown size.`
+    control: 'select',
+    options: types,
+    description: `Dropdown size.`,
   },
   value: {
     control: 'text',
@@ -153,7 +156,7 @@ export const Default = {
         `
       )}
     </cds-dropdown>
-  `
+  `,
 };
 
 export const Inline = {
@@ -170,7 +173,7 @@ export const Inline = {
         `
       )}
     </cds-dropdown>
-  `
+  `,
 };
 
 export const InlineWithLayer = {
@@ -193,7 +196,7 @@ export const InlineWithLayer = {
         </cds-dropdown>
       </div>
     </sb-template-layers>
-  `
+  `,
 };
 
 export const WithLayer = {
@@ -216,7 +219,7 @@ export const WithLayer = {
         </cds-dropdown>
       </div>
     </sb-template-layers>
-  `
+  `,
 };
 
 export const Playground = {
@@ -239,32 +242,32 @@ export const Playground = {
     warn,
     warnText,
   }) =>
-   html`
-    <cds-dropdown
-      ?open=${open}
-      ?disabled="${disabled}"
-      ?hide-label=${hideLabel}
-      helper-text=${ifDefined(helperText)}
-      ?invalid=${invalid}
-      ?read-only=${readOnly}
-      invalid-text=${invalidText}
-      direction="${direction}"
-      title-text=${ifDefined(titleText)}
-      size="${ifDefined(size)}"
-      type="${ifDefined(type)}"
-      value=${ifDefined(value)}
-      label=${ifDefined(label)}
-      ?warn=${warn}
-      warn-text=${warnText}>
-      ${items.map(
-        (elem) => html`
-          <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
-            >${elem.text}</cds-dropdown-item
-          >
-        `
-      )}
-    </cds-dropdown>
-  `
+    html`
+      <cds-dropdown
+        ?open=${open}
+        ?disabled="${disabled}"
+        ?hide-label=${hideLabel}
+        helper-text=${ifDefined(helperText)}
+        ?invalid=${invalid}
+        ?read-only=${readOnly}
+        invalid-text=${invalidText}
+        direction="${direction}"
+        title-text=${ifDefined(titleText)}
+        size="${ifDefined(size)}"
+        type="${ifDefined(type)}"
+        value=${ifDefined(value)}
+        label=${ifDefined(label)}
+        ?warn=${warn}
+        warn-text=${warnText}>
+        ${items.map(
+          (elem) => html`
+            <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
+              >${elem.text}</cds-dropdown-item
+            >
+          `
+        )}
+      </cds-dropdown>
+    `,
 };
 
 export const Skeleton = {
@@ -273,8 +276,8 @@ export const Skeleton = {
       skip: true,
     },
   },
-  render: () => html` <cds-dropdown-skeleton></cds-dropdown-skeleton> `
-}
+  render: () => html` <cds-dropdown-skeleton></cds-dropdown-skeleton> `,
+};
 
 const meta = {
   title: 'Components/Dropdown',

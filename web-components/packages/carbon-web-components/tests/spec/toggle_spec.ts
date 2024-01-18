@@ -8,7 +8,7 @@
  */
 
 import { html, render } from 'lit';
-import { Default } from '../../src/components/toggle/toggle-story';
+import { Default } from '../../src/components/toggle/toggle.stories';
 
 /**
  * @param formData A `FormData` instance.
