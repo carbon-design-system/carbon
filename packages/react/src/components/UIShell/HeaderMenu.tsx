@@ -7,13 +7,7 @@
 
 import { ChevronDown } from '@carbon/icons-react';
 import cx from 'classnames';
-import React, {
-  ReactChild,
-  ReactElement,
-  ReactFragment,
-  ReactNode,
-  ReactPortal,
-} from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { keys, matches } from '../../internal/keyboard';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
@@ -282,15 +276,11 @@ class HeaderMenu extends React.Component<HeaderMenuProps, HeaderMenuState> {
       ...rest
     } = this.props;
 
-    const hasActiveDescendant = (childrenArg: ReactNode): boolean =>
-      React.Children.toArray(childrenArg).some(
-        (child: ReactChild | ReactFragment | ReactPortal) =>
-          React.isValidElement(child) &&
-          (child.props.isActive ||
-            child.props.isCurrentPage ||
-            (child.props.children instanceof Array &&
-              hasActiveDescendant(child.props.children)))
-      );
+    const hasActiveChildren = React.Children.toArray(children).some((child) => {
+      if (React.isValidElement(child)) {
+        child.props.isActive || child.props.isCurrentPage;
+      }
+    });
 
     const accessibilityLabel = {
       'aria-label': ariaLabel,
@@ -307,7 +297,7 @@ class HeaderMenu extends React.Component<HeaderMenuProps, HeaderMenuState> {
       // We set the current class only if `isActive` is passed in and we do
       // not have an `aria-current="page"` set for the breadcrumb item
       [`${prefix}--header__menu-item--current`]:
-        isActivePage || (hasActiveDescendant(children) && !this.state.expanded),
+        isActivePage || (hasActiveChildren && !this.state.expanded),
     });
 
     // Notes on eslint comments and based on the examples in:
