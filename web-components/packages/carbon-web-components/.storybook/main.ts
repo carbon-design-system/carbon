@@ -76,6 +76,8 @@ const stories = glob.sync(
     '../src/**/progress-bar.stories.ts',
     '../src/**/progress-indicator.mdx',
     '../src/**/progress-indicator.stories.ts',
+    '../src/**/radio-button.mdx',
+    '../src/**/radio-button.stories.ts',
     '../src/**/search.mdx',
     '../src/**/search.stories.ts',
     '../src/**/select.mdx',

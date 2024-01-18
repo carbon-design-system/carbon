@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Meta, Markdown } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as RadioButtonStories from './radio-button.stories';
+
+<Meta of={RadioButtonStories} />
 
 # Radio button
 
@@ -22,8 +25,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/radio-button/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['radio-button'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['radio-button'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -56,7 +59,7 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-radio-button-group disabled>`) and `false` means not setting the attribute
 (e.g. `<cds-radio-button-group>` without `disabled` attribute).
 
-<Props of="cds-radio-button-group" />
+<ArgsTable of="cds-radio-button-group" />
 
 ## `<cds-radio-button-group>` attributes, properties and events
 
@@ -64,4 +67,4 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-radio-button-group disabled>`) and `false` means not setting the attribute
 (e.g. `<cds-radio-button-group>` without `disabled` attribute).
 
-<Props of="cds-radio-button-group" />
+<ArgsTable of="cds-radio-button-group" />
