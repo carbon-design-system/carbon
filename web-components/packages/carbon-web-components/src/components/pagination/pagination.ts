@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -216,8 +216,8 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
   /**
    * true if the select box to change the page should be disabled.
    */
-  @property({ attribute: 'page-input-disabled' })
-  pageInputDisabled;
+  @property({ type: Boolean, attribute: 'page-input-disabled' })
+  pageInputDisabled = false;
 
   /**
    * Number of items per page.

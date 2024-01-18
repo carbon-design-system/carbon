@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Meta, Markdown } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as PaginationStories from './pagination.stories';
+
+<Meta of={PaginationStories} />
 
 # Pagination
 
@@ -23,8 +26,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/pagination/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['pagination'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['pagination'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -44,12 +47,12 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-pagination at-last-page>`) and `false` means not setting the attribute
 (e.g. `<cds-pagination>` without `at-last-page` attribute).
 
-<Props of="cds-pagination" />
+<ArgsTable of="cds-pagination" />
 
 ## `<cds-pages-select>` attributes, properties and events
 
-<Props of="cds-pages-select" />
+<ArgsTable of="cds-pages-select" />
 
 ## `<cds-page-sizes-select>` attributes, properties and events
 
-<Props of="cds-page-sizes-select" />
+<ArgsTable of="cds-page-sizes-select" />

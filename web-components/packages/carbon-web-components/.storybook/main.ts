@@ -70,6 +70,8 @@ const stories = glob.sync(
     '../src/**/toast-notification.stories.ts',
     '../src/**/overflow-menu.mdx',
     '../src/**/overflow-menu.stories.ts',
+    '../src/**/pagination.mdx',
+    '../src/**/pagination.stories.ts',
     '../src/**/progress-bar.mdx',
     '../src/**/progress-bar.stories.ts',
     '../src/**/progress-indicator.mdx',
