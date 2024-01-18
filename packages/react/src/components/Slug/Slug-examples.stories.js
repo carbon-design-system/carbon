@@ -177,7 +177,7 @@ const slug = (
         <IconButton kind="ghost" label="Folders">
           <Folders />
         </IconButton>
-        <Button>View literature</Button>
+        <Button>View details</Button>
       </SlugActions>
     </SlugContent>
   </Slug>
@@ -208,7 +208,7 @@ const slugFunc = (kind) => (
         <IconButton kind="ghost" label="Folders">
           <Folders />
         </IconButton>
-        <Button>View literature</Button>
+        <Button>View details</Button>
       </SlugActions>
     </SlugContent>
   </Slug>

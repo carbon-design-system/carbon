@@ -65,7 +65,7 @@ export const Default = () => (
             <IconButton kind="ghost" label="Folders">
               <Folders />
             </IconButton>
-            <Button>View literature</Button>
+            <Button>View details</Button>
           </SlugActions>
         </SlugContent>
       </Slug>
@@ -82,7 +82,7 @@ export const Default = () => (
             <IconButton kind="ghost" label="Folders">
               <Folders />
             </IconButton>
-            <Button>View literature</Button>
+            <Button>View details</Button>
           </SlugActions>
         </SlugContent>
       </Slug>
@@ -99,7 +99,7 @@ export const Default = () => (
             <IconButton kind="ghost" label="Folders">
               <Folders />
             </IconButton>
-            <Button>View literature</Button>
+            <Button>View details</Button>
           </SlugActions>
         </SlugContent>
       </Slug>
@@ -116,7 +116,7 @@ export const Default = () => (
             <IconButton kind="ghost" label="Folders">
               <Folders />
             </IconButton>
-            <Button>View literature</Button>
+            <Button>View details</Button>
           </SlugActions>
         </SlugContent>
       </Slug>
@@ -133,7 +133,7 @@ export const Default = () => (
             <IconButton kind="ghost" label="Folders">
               <Folders />
             </IconButton>
-            <Button>View literature</Button>
+            <Button>View details</Button>
           </SlugActions>
         </SlugContent>
       </Slug>
@@ -163,7 +163,7 @@ export const Default = () => (
             <IconButton kind="ghost" label="Folders">
               <Folders />
             </IconButton>
-            <Button>View literature</Button>
+            <Button>View details</Button>
           </SlugActions>
         </SlugContent>
       </Slug>
@@ -180,7 +180,7 @@ export const Default = () => (
             <IconButton kind="ghost" label="Folders">
               <Folders />
             </IconButton>
-            <Button>View literature</Button>
+            <Button>View details</Button>
           </SlugActions>
         </SlugContent>
       </Slug>
@@ -197,7 +197,7 @@ export const Default = () => (
             <IconButton kind="ghost" label="Folders">
               <Folders />
             </IconButton>
-            <Button>View literature</Button>
+            <Button>View details</Button>
           </SlugActions>
         </SlugContent>
       </Slug>
@@ -216,7 +216,7 @@ export const Default = () => (
             <IconButton kind="ghost" label="Folders">
               <Folders />
             </IconButton>
-            <Button>View literature</Button>
+            <Button>View details</Button>
           </SlugActions>
         </SlugContent>
       </Slug>
@@ -233,7 +233,7 @@ export const Default = () => (
             <IconButton kind="ghost" label="Folders">
               <Folders />
             </IconButton>
-            <Button>View literature</Button>
+            <Button>View details</Button>
           </SlugActions>
         </SlugContent>
       </Slug>
@@ -250,7 +250,7 @@ export const Default = () => (
             <IconButton kind="ghost" label="Folders">
               <Folders />
             </IconButton>
-            <Button>View literature</Button>
+            <Button>View details</Button>
           </SlugActions>
         </SlugContent>
       </Slug>
@@ -327,7 +327,7 @@ export const Test = (args) => {
               <IconButton kind="ghost" label="Folders">
                 <Folders />
               </IconButton>
-              <Button>View literature</Button>
+              <Button>View details</Button>
             </SlugActions>
           )}
         </SlugContent>
@@ -442,7 +442,7 @@ export const Playground = (args) => {
             <IconButton kind="ghost" label="Folders">
               <Folders />
             </IconButton>
-            <Button>View literature</Button>
+            <Button>View details</Button>
           </SlugActions>
         )}
       </>
