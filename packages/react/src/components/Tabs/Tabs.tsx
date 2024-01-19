@@ -327,7 +327,6 @@ function TabList({
   const nextButton = useRef<HTMLButtonElement>(null);
   const [isScrollable, setIsScrollable] = useState(false);
   const [scrollLeft, setScrollLeft] = useState<number>(0);
-  const [activeTabs, setActiveTabs] = useState<TabElement[]>([]);
 
   let hasSecondaryLabelTabs = false;
   if (contained) {
@@ -399,26 +398,15 @@ function TabList({
     }, scrollDebounceWait);
   }, [scrollDebounceWait]);
 
-  useEffect(() => {
-    setActiveTabs([]);
-    console.log('tabs', tabs);
-    const filteredTabs: TabElement[] = tabs.current.filter(
-      (tab) => !tab.disabled
-    );
-
-    setActiveTabs(filteredTabs);
-    // console.log('activeTabs UseEffect', activeTabs);
-  }, [tabs]);
-
   function onKeyDown(event: KeyboardEvent) {
     if (
       matches(event, [keys.ArrowRight, keys.ArrowLeft, keys.Home, keys.End])
     ) {
       event.preventDefault();
-      // filterTabs();
-      console.log('onKeyDown');
 
-      console.log('activeTabs', activeTabs);
+      const activeTabs: TabElement[] = tabs.current.filter(
+        (tab) => !tab.disabled
+      );
       const currentIndex = activeTabs.indexOf(
         tabs.current[activation === 'automatic' ? selectedIndex : activeIndex]
       );

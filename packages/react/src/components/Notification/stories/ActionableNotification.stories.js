@@ -40,6 +40,14 @@ export const Default = () => (
   />
 );
 
+Default.argTypes = {
+  hasFocus: {
+    table: {
+      disable: true,
+    },
+  },
+};
+
 export const Playground = (args) => <ActionableNotification {...args} />;
 
 Playground.argTypes = {
