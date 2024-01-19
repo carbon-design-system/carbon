@@ -24,7 +24,7 @@ const translationIds = {
   'carbon.pagination-nav.of': 'of',
 };
 
-function translateWithId(messageId) {
+function translateWithId(messageId: string): string {
   return translationIds[messageId];
 }
 
