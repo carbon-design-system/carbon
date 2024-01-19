@@ -366,7 +366,6 @@ export const ai = TokenGroup.create({
     'slug-callout-aura-end-selected',
     'ai-gradient-start-01',
     'ai-gradient-start-02',
-    'ai-gradient-end',
     // Phase 2
     'slug-callout-shadow-outer-01',
     'slug-callout-shadow-outer-02',

@@ -242,10 +242,6 @@ export const slugCalloutShadowOuter02 = rgba(black, 0.1);
 export const slugCalloutAuraStart = aiAuraStart;
 export const slugCalloutAuraEnd = aiAuraEnd;
 
-// Linear gradient changes - don't need two anymore
-export const aiGradientStart = aiAuraStart; // new, replaces 01
-export const aiGradientEnd = aiAuraEnd;
-
 //// Not used in phase 2 / possibly remove?
 export const slugCalloutGradientTop = rgba(gray10, 0.85);
 export const slugCalloutGradientBottom = rgba(gray20, 0.85);
