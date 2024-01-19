@@ -511,8 +511,11 @@
     inset-inline-end: 0;
   }
 
-  .#{$prefix}--modal-header > .#{$prefix}--slug:has(+ .#{$prefix}--modal-close),
-  .#{$prefix}--modal-header > .#{$prefix}--modal-close ~ .#{$prefix}--slug,
+  .#{$prefix}--modal-header
+    > .#{$prefix}--slug:has(+ .#{$prefix}--modal-close-button),
+  .#{$prefix}--modal-header
+    > .#{$prefix}--modal-close-button
+    ~ .#{$prefix}--slug,
   .#{$prefix}--modal--slug
     .#{$prefix}--modal-container-body
     > .#{$prefix}--slug {

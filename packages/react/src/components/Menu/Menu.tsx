@@ -27,7 +27,68 @@ import { useLayoutDirection } from '../LayoutDirection';
 
 const spacing = 8; // distance to keep to window edges, in px
 
-const Menu = React.forwardRef(function Menu(
+interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
+  /**
+   * A collection of MenuItems to be rendered within this Menu.
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Additional CSS class names.
+   */
+  className?: string;
+
+  /**
+   * A label describing the Menu.
+   */
+  label?: string;
+
+  /**
+   * The mode of this menu. Defaults to full.
+   * `full` supports nesting and selectable menu items, but no icons.
+   * `basic` supports icons but no nesting or selectable menu items.
+   *
+   * **This prop is not intended for use and will be set by the respective implementation (like useContextMenu, MenuButton, and ComboButton).**
+   */
+  mode?: 'full' | 'basic';
+
+  /**
+   * Provide an optional function to be called when the Menu should be closed.
+   */
+  onClose?: () => void;
+
+  /**
+   * Provide an optional function to be called when the Menu is opened.
+   */
+  onOpen?: () => void;
+
+  /**
+   * Whether the Menu is open or not.
+   */
+  open?: boolean;
+
+  /**
+   * Specify the size of the Menu.
+   */
+  size?: 'xs' | 'sm' | 'md' | 'lg';
+
+  /**
+   * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
+   */
+  target?: any;
+
+  /**
+   * Specify the x position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([x1, x2])
+   */
+  x?: number | (number | null | undefined)[];
+
+  /**
+   * Specify the y position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([y1, y2])
+   */
+  y?: number | (number | null | undefined)[];
+}
+
+const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   {
     children,
     className,
@@ -46,7 +107,7 @@ const Menu = React.forwardRef(function Menu(
 ) {
   const prefix = usePrefix();
 
-  const focusReturn = useRef(null);
+  const focusReturn = useRef<HTMLElement | null>(null);
 
   const context = useContext(MenuContext);
 
@@ -75,7 +136,7 @@ const Menu = React.forwardRef(function Menu(
     };
   }, [childState, childDispatch]);
 
-  const menu = useRef();
+  const menu = useRef<HTMLUListElement>(null);
   const ref = useMergedRefs([forwardRef, menu]);
 
   const [position, setPosition] = useState([-1, -1]);
@@ -94,7 +155,7 @@ const Menu = React.forwardRef(function Menu(
 
   function handleOpen() {
     if (menu.current) {
-      focusReturn.current = document.activeElement;
+      focusReturn.current = document.activeElement as HTMLElement;
 
       const pos = calculatePosition();
       if (
@@ -119,7 +180,7 @@ const Menu = React.forwardRef(function Menu(
     }
   }
 
-  function handleClose(e) {
+  function handleClose(e: Pick<React.KeyboardEvent<HTMLUListElement>, 'type'>) {
     if (/^key/.test(e.type)) {
       window.addEventListener('keyup', returnFocus, { once: true });
     } else if (e.type === 'click' && menu.current) {
@@ -133,7 +194,7 @@ const Menu = React.forwardRef(function Menu(
     }
   }
 
-  function handleKeyDown(e) {
+  function handleKeyDown(e: React.KeyboardEvent<HTMLUListElement>) {
     e.stopPropagation();
 
     // if the user presses escape or this is a submenu
@@ -148,7 +209,7 @@ const Menu = React.forwardRef(function Menu(
     }
   }
 
-  function focusItem(e) {
+  function focusItem(e?: React.KeyboardEvent<HTMLUListElement>) {
     const currentItem = focusableItems.findIndex((item) =>
       item.ref.current.contains(document.activeElement)
     );
@@ -180,13 +241,17 @@ const Menu = React.forwardRef(function Menu(
     }
   }
 
-  function handleBlur(e) {
-    if (open && onClose && isRoot && !menu.current.contains(e.relatedTarget)) {
+  function handleBlur(e: React.FocusEvent<HTMLUListElement>) {
+    if (open && onClose && isRoot && !menu.current?.contains(e.relatedTarget)) {
       handleClose(e);
     }
   }
 
-  function fitValue(range, axis) {
+  function fitValue(range: number[], axis: 'x' | 'y') {
+    if (!menu.current) {
+      return;
+    }
+
     const { width, height } = menu.current.getBoundingClientRect();
     const alignment = isRoot ? 'vertical' : 'horizontal';
 
@@ -221,22 +286,43 @@ const Menu = React.forwardRef(function Menu(
       max - spacing - size,
     ];
 
-    const bestOption = options.find((option) => option !== false);
+    // Previous array `options`, has at least one item that is a number (the last one - second fallback).
+    // That guarantees that the return of `find()` will always be a number
+    // and we can safely add the numeric casting `as number`.
+    const bestOption = options.find((option) => option !== false) as number;
 
     return bestOption >= spacing ? bestOption : spacing;
   }
 
-  function calculatePosition() {
-    if (menu.current) {
-      const ranges = {
-        x: typeof x === 'object' && x.length === 2 ? x : [x, x],
-        y: typeof y === 'object' && y.length === 2 ? y : [y, y],
-      };
+  function notEmpty<TValue>(value: TValue | null | undefined): value is TValue {
+    return value !== null && value !== undefined;
+  }
 
-      return [fitValue(ranges.x, 'x'), fitValue(ranges.y, 'y')];
+  function getPosition(x: number | (number | null | undefined)[]) {
+    if (Array.isArray(x)) {
+      // has to be of length 2
+      const filtered = x.filter(notEmpty);
+      if (filtered.length === 2) {
+        return filtered;
+      } else {
+        return;
+      }
+    } else {
+      return [x, x];
+    }
+  }
+
+  function calculatePosition() {
+    const ranges = {
+      x: getPosition(x),
+      y: getPosition(y),
+    };
+
+    if (!ranges.x || !ranges.y) {
+      return [-1, -1];
     }
 
-    return [-1, -1];
+    return [fitValue(ranges.x, 'x') ?? -1, fitValue(ranges.y, 'y') ?? -1];
   }
 
   useEffect(() => {
@@ -252,7 +338,7 @@ const Menu = React.forwardRef(function Menu(
     } else {
       // reset position when menu is closed in order for the --shown
       // modifier to be applied correctly
-      setPosition(-1, -1);
+      setPosition([-1, -1]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
