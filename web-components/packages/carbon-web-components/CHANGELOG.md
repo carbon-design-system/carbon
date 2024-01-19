@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0-rc.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.1.2...@carbon/web-components@2.2.0-rc.0) (2024-01-19)
+
+
+### Bug Fixes
+
+* **number-input:** fix incorrect controls border for readonly mode ([#11402](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11402)) ([3b2149b](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/3b2149bb71c2b8cf4325972f728032d13b0b6ce1)), closes [#11390](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11390)
+* **radio-button:** add missing slot optioin ([#11307](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11307)) ([95e9eb5](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/95e9eb56d5ef3926f361de5c2e9b854a722631e7)), closes [#11288](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11288)
+* **select:** selected item is not showing for ios/ipados ([#11214](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11214)) ([2186384](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/218638476e26c72e67376b1b8fa430219f63b4ad))
+* **tooltip:** tooltip persists issue ([#11324](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11324)) ([d355535](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/d35553594e84406878f3b8a21489bb6b66faaa7e))
+
+
+### Features
+
+* **modal:** with slug ([#11247](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11247)) ([209142a](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/209142a44187788965dd5b193f31491de8b12c0b)), closes [#11142](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11142)
+
+
+
+
+
 # [1.34.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.34.0-rc.2...@carbon/web-components@1.34.0) (2023-11-15)
 
 **Note:** Version bump only for package @carbon/web-components
