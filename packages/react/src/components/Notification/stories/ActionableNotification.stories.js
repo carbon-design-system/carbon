@@ -72,6 +72,11 @@ Playground.argTypes = {
       disable: true,
     },
   },
+  hasFocus: {
+    table: {
+      disable: true,
+    },
+  },
 };
 Playground.args = {
   actionButtonLabel: 'Action',
