@@ -19,6 +19,7 @@ import FormMixin from '../../globals/mixins/form';
 import { filter } from '../../globals/internal/collection-helpers';
 import { INPUT_SIZE } from '../text-input/text-input';
 import styles from './select.scss';
+import ifNonEmpty from '../../globals/directives/if-non-empty';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
@@ -113,7 +114,7 @@ class CDSSelect extends FormMixin(LitElement) {
               <option
                 class="${prefix}--select-option"
                 ?disabled="${disabled}"
-                label="${ifDefined(label ?? textContent)}"
+                label="${ifNonEmpty(label)}"
                 ?selected="${selected}"
                 value="${ifDefined(value)}">
                 ${textContent}
