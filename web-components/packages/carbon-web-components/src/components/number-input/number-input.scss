@@ -36,6 +36,14 @@ $css--plex: true !default;
   background-color: $border-subtle;
 }
 
+.#{$prefix}--number--readonly {
+  .#{$prefix}--number__controls {
+    .#{$prefix}--number__control-btn {
+      border-block-end: 0;
+    }
+  }
+}
+
 :host(#{$prefix}-number-input) {
   ::slotted(#{$prefix}-slug) {
     position: absolute;
