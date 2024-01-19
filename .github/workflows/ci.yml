@@ -166,7 +166,7 @@ jobs:
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload test results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@694cdabd8bdb0f10b2cea11669e1bf5453eed0a6 #v4.2.0
         with:
           name: playwright-vrt-report
           path: .playwright
@@ -226,7 +226,7 @@ jobs:
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload test results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@694cdabd8bdb0f10b2cea11669e1bf5453eed0a6 #v4.2.0
         with:
           name: playwright-avt-report
           path: .playwright
