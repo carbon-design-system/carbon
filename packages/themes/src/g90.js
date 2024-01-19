@@ -253,6 +253,7 @@ export const slugCalloutGradientTop = rgba(gray100, 0.85);
 export const slugCalloutGradientBottom = rgba(gray90, 0.85);
 export const aiGradientStart01 = rgba(blue20, 0.2);
 export const aiGradientStart02 = 'transparent';
+export const aiGradientEnd = 'rgba(38, 38, 38, 0)';
 
 // One off tokens for caret
 export const slugCalloutCaretCenter = '#456FB5';
