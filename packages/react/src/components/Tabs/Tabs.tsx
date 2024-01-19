@@ -407,6 +407,7 @@ function TabList({
       const activeTabs: TabElement[] = tabs.current.filter(
         (tab) => !tab.disabled
       );
+
       const currentIndex = activeTabs.indexOf(
         tabs.current[activation === 'automatic' ? selectedIndex : activeIndex]
       );
