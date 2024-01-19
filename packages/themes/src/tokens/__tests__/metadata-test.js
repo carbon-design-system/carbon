@@ -1014,6 +1014,42 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "slug-callout-shadow-inner",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-shadow-outer-01",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-shadow-outer-02",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-border-01",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-border-02",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-caret-center",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-caret-bottom",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-caret-bottom-background",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-caret-bottom-background-actions",
+          "type": "color",
+        },
+        Object {
           "name": "highlight",
           "type": "color",
         },

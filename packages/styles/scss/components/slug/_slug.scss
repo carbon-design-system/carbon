@@ -7,6 +7,7 @@
 @use '../../utilities/ai-gradient' as *;
 @use '../../utilities/convert';
 @use '../toggletip';
+@use '../popover';
 
 $sizes: (
   mini: (
@@ -328,39 +329,267 @@ $sizes: (
   .#{$prefix}--slug.#{$prefix}--slug--enabled .#{$prefix}--slug-content {
     @include callout-gradient();
 
-    border: 1px solid $border-subtle;
-    border-radius: 16px;
-    // 84px seems to make this fully opaque?
-    backdrop-filter: blur(25px);
-    // box-shadow seems to match the spec better
-    // than the same values plugged into `drop-shadow`
-    // filter: drop-shadow(-45px 45px 100px rgba(0, 0, 0, 0.2));
-    box-shadow: -45px 45px 100px rgba(0, 0, 0, 0.2);
+    border: 1px solid transparent;
+    border-radius: convert.to-rem(8px);
+    // Need to make tokens
+    box-shadow: inset 0 -80px 70px -65px $slug-callout-shadow-inner,
+      -40px 30px 100px -25px $slug-callout-shadow-outer-01,
+      -60px 80px 60px -45px $slug-callout-shadow-outer-02;
     color: $text-primary;
     min-inline-size: convert.to-rem(280px);
   }
 
+  // Slug callout caret styles
   .#{$prefix}--slug.#{$prefix}--slug--enabled
     > .#{$prefix}--toggletip
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret {
-    background: $border-subtle;
+    background: transparent;
+    clip-path: none;
+  }
+
+  // Caret pseudo element base styles
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left,
+      .#{$prefix}--popover--bottom,
+      .#{$prefix}--popover--bottom-right,
+      .#{$prefix}--popover--bottom-left,
+      .#{$prefix}--popover--left,
+      .#{$prefix}--popover--left-top,
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--right,
+      .#{$prefix}--popover--right-top,
+      .#{$prefix}--popover--right-bottom
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret::before {
+    position: absolute;
+    display: block;
+    border: 1px solid $slug-callout-border-01;
+    background: $background;
+    block-size: convert.to-rem(12px);
+    clip-path: polygon(98% 0, 0 0, -52% 150%) border-box;
+    content: '';
+    inline-size: convert.to-rem(12px);
+    transform: rotate(45deg);
+  }
+
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left,
+      .#{$prefix}--popover--bottom,
+      .#{$prefix}--popover--bottom-right,
+      .#{$prefix}--popover--bottom-left,
+      .#{$prefix}--popover--left,
+      .#{$prefix}--popover--left-top,
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--right,
+      .#{$prefix}--popover--right-top,
+      .#{$prefix}--popover--right-bottom
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret::after {
+    position: absolute;
+    display: block;
+    background: $background;
+    block-size: convert.to-rem(14px);
+    content: '';
+    inline-size: convert.to-rem(2px);
+  }
+
+  // Top
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    &::before {
+      inset-block-end: convert.to-rem(1px);
+      transform: rotate(-135deg);
+    }
+
+    &::after {
+      background: $slug-callout-caret-bottom-background;
+      block-size: convert.to-rem(2px);
+      border-end-end-radius: 50%;
+      border-end-start-radius: 50%;
+      inline-size: convert.to-rem(14px);
+      inset-block-start: convert.to-rem(-2px);
+      inset-inline-start: convert.to-rem(-1px);
+    }
+  }
+
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--slug-content--with-actions
+    + .#{$prefix}--popover-caret::after {
+    display: none;
+  }
+
+  // Right
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--right,
+      .#{$prefix}--popover--right-bottom,
+      .#{$prefix}--popover--right-top
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    &::before {
+      inset-inline-start: convert.to-rem(1px);
+      transform: rotate(-45deg);
+    }
+
+    &::after {
+      border-end-start-radius: 50%;
+      border-start-start-radius: 50%;
+      inset-block-start: convert.to-rem(-1px);
+      inset-inline-start: convert.to-rem(6px);
+    }
+  }
+
+  // Bottom
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--bottom,
+      .#{$prefix}--popover--bottom-left,
+      .#{$prefix}--popover--bottom-right
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    &::before {
+      inset-block-start: convert.to-rem(1px);
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      block-size: convert.to-rem(2px);
+      border-start-end-radius: 50%;
+      border-start-start-radius: 50%;
+      inline-size: convert.to-rem(14px);
+      inset-block-end: convert.to-rem(-2.5px);
+      inset-inline-start: convert.to-rem(-1px);
+    }
+  }
+
+  // Left
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--left,
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--left-top
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    &::before {
+      inset-inline-end: convert.to-rem(1px);
+      transform: rotate(135deg);
+    }
+
+    &::after {
+      border-end-end-radius: 50%;
+      border-start-end-radius: 50%;
+      inset-block-start: convert.to-rem(-1px);
+      inset-inline-start: convert.to-rem(-2px);
+    }
+  }
+
+  // Override for specific alignments
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--right-bottom
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret::after {
+    background: transparent;
+  }
+
+  // Change caret color / border when it is near the bottom of the callout
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--right-bottom,
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    &::before {
+      border-color: $slug-callout-caret-bottom;
+      background: $slug-callout-caret-bottom-background;
+    }
+  }
+
+  // Adjust background if actions are present
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--right-bottom,
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left
+    )
+    > .#{$prefix}--popover:has(.#{$prefix}--slug-content--with-actions)
+    > .#{$prefix}--popover-caret {
+    &::before {
+      background: $slug-callout-caret-bottom-background-actions;
+    }
+  }
+
+  // Change the caret border when it is near the middle of the callout
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip:is(
+      .#{$prefix}--popover--left,
+      .#{$prefix}--popover--right
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    &::before {
+      border-color: $slug-callout-caret-center;
+    }
   }
 
   .#{$prefix}--slug.#{$prefix}--slug--enabled .#{$prefix}--toggletip-content {
     // This sets the max size to the size of the action bar with 3 buttons
-    max-inline-size: convert.to-rem(334px);
     padding-block-end: convert.to-rem(80px);
-    padding-block-start: convert.to-rem(32px);
-    padding-inline: convert.to-rem(32px);
+    padding-block-start: convert.to-rem(24px);
+    padding-inline: convert.to-rem(24px);
+  }
+
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    .#{$prefix}--slug-content--with-actions
+    .#{$prefix}--toggletip-content {
+    max-inline-size: convert.to-rem(334px);
+  }
+
+  .#{$prefix}--slug.#{$prefix}--slug--enabled
+    .#{$prefix}--slug-content:not(.#{$prefix}--slug-content--with-actions)
+    .#{$prefix}--toggletip-content {
+    max-inline-size: convert.to-rem(320px);
   }
 
   .#{$prefix}--slug.#{$prefix}--slug--enabled .#{$prefix}--slug-actions {
     position: absolute;
     justify-content: flex-end;
-    background: $layer-accent;
-    border-end-end-radius: convert.to-rem(15px);
-    border-end-start-radius: convert.to-rem(15px);
+    backdrop-filter: blur(85px);
+    background: rgba(0, 0, 0, 0.01);
+    border-end-end-radius: convert.to-rem(8px);
+    border-end-start-radius: convert.to-rem(8px);
     column-gap: 0;
     inline-size: 100%;
     inset-block-end: 0;
@@ -378,7 +607,7 @@ $sizes: (
     .#{$prefix}--slug-actions
     .#{$prefix}--btn--primary {
     order: 1;
-    border-end-end-radius: convert.to-rem(16px);
+    border-end-end-radius: convert.to-rem(7px);
   }
 
   // Revert styles
