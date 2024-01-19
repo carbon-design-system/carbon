@@ -415,6 +415,19 @@
     - uncontrolled
   sizes:
     - 32
+- name: ai-launch
+  friendly_name: Launch AI
+  aliases:
+    - ai
+    - automation
+    - artificial intelligence
+    - enterprise
+    - explainability
+    - ai interactivity
+    - generate
+    - generative
+  sizes:
+    - 32
 - name: ai-results
   friendly_name: AI results
   aliases:
@@ -2649,6 +2662,30 @@
     - mobile
     - iOS
     - Android
+  sizes:
+    - 32
+- name: carbon-for-salesforce
+  friendly_name: Carbon for Salesforce
+  aliases:
+    - carbon
+    - IBM
+    - IBM Carbon
+    - design system
+    - IBM design system
+    - design
+    - hexagon
+    - cloud
+    - system
+    - software
+    - automation
+    - e-commerce
+    - analytics
+    - salesforce
+    - manage
+    - sales
+    - CRM
+    - customer relationship management
+    - customer service
   sizes:
     - 32
 - name: caret--down
