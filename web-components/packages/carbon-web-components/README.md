@@ -119,6 +119,7 @@ These are the list of available components via CDN:
 - radio-button.min.js
 - search.min.js
 - select.min.js
+- skeleton-icon.min.js
 - skeleton-placeholder.min.js
 - skeleton-text.min.js
 - skip-to-content.min.js
