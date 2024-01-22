@@ -15,6 +15,7 @@ import React, {
   type WeakValidationMap,
   type ElementType,
 } from 'react';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 import { type PolymorphicProps } from '../../types/common';
@@ -193,13 +194,22 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
     }
   });
 
+  const popoverOffsetPx = useRef();
+  useIsomorphicEffect(() => {
+    const getStyle = window.getComputedStyle(popover.current, null);
+    popoverOffsetPx.current =
+      parseFloat(
+        getStyle.getPropertyValue('--cds-popover-offset').split('rem', 1)[0]
+      ) * -16;
+  });
+
   const floatingUIConfig = autoAlign
     ? {
         placement: shimmedAlign,
         // Middleware order matters, arrow should be last
         middleware: [
           offset(10),
-          flip(),
+          flip({ fallbackAxisSideDirection: 'start' }),
           arrow({
             element: caretRef,
           }),
@@ -232,11 +242,36 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
 
   useEffect(() => {
     if (autoAlign) {
+      const logicalPropertyMap = {
+        top: 'insetBlockStart',
+        right: 'insetInlineEnd',
+        bottom: 'insetBlockEnd',
+        left: 'insetInlineStart',
+      };
+
       Object.keys(floatingStyles).forEach((style) => {
-        refs.floating.current.style[style] = floatingStyles[style];
+        // eslint-disable-next-line no-prototype-builtins
+        if (logicalPropertyMap.hasOwnProperty(style)) {
+          return (refs.floating.current.style[logicalPropertyMap[style]] =
+            floatingStyles[style]);
+        }
+        return (refs.floating.current.style[style] = floatingStyles[style]);
+
+        // refs.floating.current.style[style] = floatingStyles[style];
       });
+      if (middlewareData && middlewareData.arrow) {
+        const { x = 0, y = 0 } = middlewareData.arrow;
+        console.log(`popoverOffsetPx: ${popoverOffsetPx.current}`);
+
+        caretRef.current.style[logicalPropertyMap['left']] = x
+          ? `${x}px`
+          : `${popoverOffsetPx.current}px`;
+        caretRef.current.style[logicalPropertyMap['top']] = y
+          ? `${y}px`
+          : `${popoverOffsetPx.current}px`;
+      }
     }
-  }, [floatingStyles, refs.floating, autoAlign]);
+  }, [floatingStyles, refs.floating, autoAlign, middlewareData]);
 
   const ref = useMergedRefs([forwardRef, popover, refs.setReference]);
   const currentAlignment = autoAlign && placement !== align ? placement : align;
@@ -283,6 +318,7 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
       <div style={{ marginTop: '10rem', position: 'absolute' }}>
         <p>isPositioned: {isPositioned ? 'yes' : 'no'}</p>
         <p>placement: {placement}</p>
+        <p>shimmedAlign: {shimmedAlign}</p>
       </div>
     </>
   );
