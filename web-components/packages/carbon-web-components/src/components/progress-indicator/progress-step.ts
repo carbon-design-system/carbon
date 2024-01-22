@@ -126,7 +126,7 @@ export default class CDSProgressStep extends FocusMixin(LitElement) {
           }[state],
           children: svgLabel ? svg`<title>${svgLabel}</title>` : undefined,
         })}
-        <slot>
+        <slot name="label-text">
           <p
             role="button"
             class="${prefix}--progress-label"

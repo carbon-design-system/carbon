@@ -9,7 +9,7 @@
   class="cds--progress-step-button"
   tabindex="0"
 >
-  <slot>
+  <slot name="label-text">
     <p
       aria-describedby="label-tooltip"
       class="cds--progress-label"
@@ -34,7 +34,7 @@
   class="cds--progress-step-button"
   tabindex="0"
 >
-  <slot>
+  <slot name="label-text">
     <p
       aria-describedby="label-tooltip"
       class="cds--progress-label"
