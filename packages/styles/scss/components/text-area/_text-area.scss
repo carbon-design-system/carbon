@@ -136,7 +136,8 @@
     transform: translate(0);
   }
 
-  .#{$prefix}--text-area__wrapper--slug .#{$prefix}--text-area {
+  .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--text-area:not(:has(~ .#{$prefix}--slug--revert)) {
     @include ai-gradient;
 
     padding-inline-end: $spacing-08;

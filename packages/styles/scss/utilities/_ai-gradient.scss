@@ -11,10 +11,10 @@
 /// Adds AI gradient styles to a component
 /// @access private
 /// @param {String} $direction  - Direction of gradient from: `left`, `right`, `top`, and `bottom`
-/// @param {Number} $width - Percentage width of gradient with regards to parent component
+/// @param {Number} $span - Percentage span of gradient with regards to parent component
 /// @example @include ai-gradient('right', '33%');
 /// @group utilities
-@mixin ai-gradient($direction: 'right', $width: 33%) {
+@mixin ai-gradient($direction: 'bottom', $span: 50%) {
   $deg: 0;
   @if $direction == 'bottom' {
     $deg: 0deg;
@@ -27,17 +27,14 @@
   }
 
   background-image: linear-gradient(
-      $deg,
-      theme.$ai-gradient-start-01 0%,
-      theme.$ai-gradient-end $width,
-      transparent 100%
-    ),
-    linear-gradient(
-      $deg,
-      theme.$ai-gradient-start-02 0%,
-      theme.$ai-gradient-end $width,
-      transparent 100%
-    );
+    $deg,
+    theme.$ai-inner-shadow 0%,
+    15%,
+    theme.$ai-aura-end $span,
+    transparent 100%
+  );
+
+  border-block-end-color: theme.$ai-border-strong;
 }
 
 /// Experimental - name and structure subject to change. Use at your own risk!
@@ -45,7 +42,7 @@
 /// @access private
 /// @example @include callout-gradient();
 /// @param {String} $type  - Type of gradient, either 'default', 'selected' or 'hover'
-/// @param {Number} $type  - specify a pixel offset the callout should start from the bottom
+/// @param {Number} $offset  - specify a pixel offset the callout should start from the bottom
 /// @group utilities
 @mixin callout-gradient($type: 'default', $offset: 0) {
   $start: 0%;
@@ -88,16 +85,12 @@
   } @else {
     background: linear-gradient(
           to top,
-          theme.$slug-callout-aura-start $start,
-          theme.$slug-callout-aura-end 50%
+          theme.$ai-aura-start $start,
+          theme.$ai-aura-end 50%
         )
         padding-box,
       linear-gradient(to top, theme.$background, theme.$background) padding-box,
-      linear-gradient(
-          to bottom,
-          theme.$slug-callout-border-01,
-          theme.$slug-callout-border-02
-        )
+      linear-gradient(to bottom, theme.$ai-border-start, theme.$ai-border-end)
         border-box,
       // Needed to underlay the transparent border
       linear-gradient(to top, theme.$background, theme.$background)

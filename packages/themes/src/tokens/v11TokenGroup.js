@@ -368,11 +368,16 @@ export const ai = TokenGroup.create({
     'ai-gradient-start-02',
     'ai-gradient-end',
     // Phase 2
-    'slug-callout-shadow-inner',
     'slug-callout-shadow-outer-01',
     'slug-callout-shadow-outer-02',
-    'slug-callout-border-01',
-    'slug-callout-border-02',
+    // Linear gradient refactor
+    'ai-inner-shadow',
+    'ai-aura-start',
+    'ai-aura-end',
+    'ai-border-strong',
+    'ai-border-start',
+    'ai-border-end',
+    'ai-drop-shadow',
     // Caret tokens
     'slug-callout-caret-center',
     'slug-callout-caret-bottom',

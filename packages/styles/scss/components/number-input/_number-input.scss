@@ -445,11 +445,16 @@
     padding-inline-end: convert.to-rem(144px);
   }
 
-  .#{$prefix}--number__input-wrapper--slug input[type='number'],
+  .#{$prefix}--number__input-wrapper--slug
+    input[type='number']:not(:has(~ .#{$prefix}--slug--revert)),
   .#{$prefix}--number__input-wrapper--slug input[type='number']:disabled {
     @include ai-gradient;
 
     padding-inline-end: convert.to-rem(112px);
+  }
+
+  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--number__control-btn {
+    border-block-end-color: $ai-border-strong;
   }
 
   // Skeleton State

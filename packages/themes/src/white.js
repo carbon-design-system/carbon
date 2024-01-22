@@ -223,26 +223,31 @@ export const slugCalloutGradientTopSelected = rgba(gray20, 0.85);
 export const slugCalloutGradientBottomSelected = rgba(gray20Hover, 0.85);
 export const slugCalloutAuraStartSelected = rgba(blue10, 0.6);
 export const slugCalloutAuraEndSelected = rgba(white, 0);
-// Linear gradient tokens
-export const aiGradientStart01 = rgba(coolGray10, 0.5);
-export const aiGradientStart02 = rgba(blue10, 0.5);
-export const aiGradientEnd = rgba(white, 0);
 
-// Phase 2 - new
-export const slugCalloutShadowInner = rgba(blue50, 0.2);
+//// Phase 2 - new \\\\
+// Shared
+export const aiInnerShadow = rgba(blue50, 0.2);
+export const aiAuraStart = rgba(blue50, 0.1);
+export const aiAuraEnd = rgba(white, 0);
+export const aiBorderStrong = blue50;
+export const aiBorderStart = blue40;
+export const aiBorderEnd = blue20;
+export const aiDropShadow = rgba(blue60, 0.32);
+
+// Callout
 export const slugCalloutShadowOuter01 = rgba(blue70, 0.25);
 export const slugCalloutShadowOuter02 = rgba(black, 0.1);
 
-export const slugCalloutBorder01 = blue40;
-export const slugCalloutBorder02 = blue20;
+//// Changed
+export const slugCalloutAuraStart = aiAuraStart;
+export const slugCalloutAuraEnd = aiAuraEnd;
 
-// Changed
-export const slugCalloutAuraStart = rgba(blue50, 0.1);
-export const slugCalloutAuraEnd = rgba(white, 0);
-
-// Not used in phase 2 / possibly remove?
+//// Not used in phase 2 / possibly remove?
 export const slugCalloutGradientTop = rgba(gray10, 0.85);
 export const slugCalloutGradientBottom = rgba(gray20, 0.85);
+export const aiGradientStart01 = rgba(coolGray10, 0.5);
+export const aiGradientStart02 = rgba(blue10, 0.5);
+export const aiGradientEnd = rgba(white, 0);
 
 // One off tokens for caret
 export const slugCalloutCaretCenter = '#A7C7FF';
