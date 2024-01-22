@@ -207,10 +207,7 @@ export default class ContentSwitcher extends React.Component<
     } = this.props;
 
     const isIconOnly = React.Children?.map(children, (child) => {
-      return (
-        (child as { type: { displayName: string } }).type.displayName ===
-        'IconSwitch'
-      );
+      return (child as JSX.Element).type.displayName === 'IconSwitch';
     })?.every((val) => val === true);
 
     const classes = classNames(`${prefix}--content-switcher`, className, {
