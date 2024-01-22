@@ -7,6 +7,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import LinkTo from '@storybook/addon-links/react';
 
 import { FeatureFlags as FeatureFlagScope } from '@carbon/feature-flags';
 import { FeatureFlags } from '../../../src/components/FeatureFlags';
@@ -25,9 +26,9 @@ function WithFeatureFlags({ children }) {
         text={
           <span>
             This story is rendered with{' '}
-            <a href="/?path=/story/experimental-feature-flags--overview">
+            <LinkTo title="Experimental/Feature Flags" name="Overview">
               all available feature flags
-            </a>{' '}
+            </LinkTo>{' '}
             enabled
           </span>
         }>

@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('Search @avt', () => {
-  test('accessibility-checker', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Search',
       id: 'components-search--default',
@@ -22,7 +22,7 @@ test.describe('Search @avt', () => {
     await expect(page).toHaveNoACViolations('components-search--default');
   });
 
-  test('accessibility-checker expandable', async ({ page }) => {
+  test('@avt-advanced-states expandable', async ({ page }) => {
     await visitStory(page, {
       component: 'Search',
       id: 'components-search--expandable',
@@ -33,7 +33,7 @@ test.describe('Search @avt', () => {
     await expect(page).toHaveNoACViolations('components-search--expandable');
   });
 
-  test('search - keyboard nav', async ({ page }) => {
+  test('@avt-keyboard-nav - search', async ({ page }) => {
     await visitStory(page, {
       component: 'Search',
       id: 'components-search--default',
@@ -42,7 +42,9 @@ test.describe('Search @avt', () => {
       },
     });
     const search = page.getByRole('searchbox');
-    const clearButton = page.getByRole('button');
+    const clearButton = page.getByRole('button', {
+      name: 'Clear search input',
+    });
     await expect(search).toBeVisible();
     await expect(clearButton).not.toBeVisible();
 
@@ -67,7 +69,7 @@ test.describe('Search @avt', () => {
     await expect(search).toBeFocused();
   });
 
-  test('expandable search - keyboard nav', async ({ page }) => {
+  test('@avt-keyboard-nav - expandable search', async ({ page }) => {
     await visitStory(page, {
       component: 'Search',
       id: 'components-search--expandable',

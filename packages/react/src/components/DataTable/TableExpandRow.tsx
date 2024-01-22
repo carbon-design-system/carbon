@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { MouseEventHandler, PropsWithChildren } from 'react';
+import React, { type MouseEventHandler, type PropsWithChildren } from 'react';
 import { ChevronRight } from '@carbon/icons-react';
 import TableCell from './TableCell';
 import { usePrefix } from '../../internal/usePrefix';
@@ -17,7 +17,7 @@ interface TableExpandRowProps extends PropsWithChildren<TableRowProps> {
   /**
    * Space separated list of one or more ID values referencing the TableExpandedRow(s) being controlled by the TableExpandRow
    */
-  ['aria-controls']: string;
+  ['aria-controls']?: string;
 
   /**
    * @deprecated This prop has been deprecated and will be
@@ -54,54 +54,82 @@ interface TableExpandRowProps extends PropsWithChildren<TableRowProps> {
   onExpand: MouseEventHandler<HTMLButtonElement>;
 }
 
-const TableExpandRow = ({
-  ['aria-controls']: ariaControls,
-  ['aria-label']: ariaLabel,
-  ariaLabel: deprecatedAriaLabel,
-  className: rowClassName,
-  children,
-  isExpanded,
-  onExpand,
-  expandIconDescription,
-  isSelected,
-  expandHeader = 'expand',
-  ...rest
-}: TableExpandRowProps) => {
-  const prefix = usePrefix();
-  const className = cx(
+const TableExpandRow = React.forwardRef(
+  (
     {
-      [`${prefix}--parent-row`]: true,
-      [`${prefix}--expandable-row`]: isExpanded,
-      [`${prefix}--data-table--selected`]: isSelected,
-    },
-    rowClassName
-  );
-  const previousValue = isExpanded ? 'collapsed' : undefined;
+      ['aria-controls']: ariaControls,
+      ['aria-label']: ariaLabel,
+      ariaLabel: deprecatedAriaLabel,
+      className: rowClassName,
+      children,
+      isExpanded,
+      onExpand,
+      expandIconDescription,
+      isSelected,
+      expandHeader = 'expand',
+      ...rest
+    }: TableExpandRowProps,
+    ref: React.Ref<HTMLTableCellElement>
+  ) => {
+    const prefix = usePrefix();
 
-  return (
-    <tr {...rest} className={className} data-parent-row>
-      <TableCell
-        className={`${prefix}--table-expand`}
-        data-previous-value={previousValue}
-        headers={expandHeader}>
-        <button
-          type="button"
-          className={`${prefix}--table-expand__button`}
-          onClick={onExpand}
-          title={expandIconDescription}
-          aria-label={deprecatedAriaLabel || ariaLabel}
-          aria-expanded={isExpanded}
-          aria-controls={ariaControls}>
-          <ChevronRight
-            className={`${prefix}--table-expand__svg`}
-            aria-label={expandIconDescription}
-          />
-        </button>
-      </TableCell>
-      {children}
-    </tr>
-  );
-};
+    // We need to put the slug before the expansion arrow and all other table cells after the arrow.
+    let rowHasSlug;
+    const slug = React.Children.toArray(children).map((child: any) => {
+      if (child.type?.displayName === 'TableSlugRow') {
+        if (child.props.slug) {
+          rowHasSlug = true;
+        }
+
+        return child;
+      }
+    });
+
+    const normalizedChildren = React.Children.toArray(children).map(
+      (child: any) => {
+        if (child.type?.displayName !== 'TableSlugRow') {
+          return child;
+        }
+      }
+    );
+
+    const className = cx(
+      {
+        [`${prefix}--parent-row`]: true,
+        [`${prefix}--expandable-row`]: isExpanded,
+        [`${prefix}--data-table--selected`]: isSelected,
+        [`${prefix}--parent-row--slug`]: rowHasSlug,
+      },
+      rowClassName
+    );
+    const previousValue = isExpanded ? 'collapsed' : undefined;
+
+    return (
+      <tr {...rest} ref={ref as never} className={className} data-parent-row>
+        {slug}
+        <TableCell
+          className={`${prefix}--table-expand`}
+          data-previous-value={previousValue}
+          headers={expandHeader}>
+          <button
+            type="button"
+            className={`${prefix}--table-expand__button`}
+            onClick={onExpand}
+            title={expandIconDescription}
+            aria-label={deprecatedAriaLabel || ariaLabel}
+            aria-expanded={isExpanded}
+            aria-controls={ariaControls}>
+            <ChevronRight
+              className={`${prefix}--table-expand__svg`}
+              aria-label={expandIconDescription}
+            />
+          </button>
+        </TableCell>
+        {normalizedChildren}
+      </tr>
+    );
+  }
+);
 
 TableExpandRow.propTypes = {
   /**
@@ -114,6 +142,7 @@ TableExpandRow.propTypes = {
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */
+  /**@ts-ignore*/
   ['aria-label']: PropTypes.string,
 
   /**
@@ -152,4 +181,5 @@ TableExpandRow.propTypes = {
   onExpand: PropTypes.func.isRequired,
 };
 
+TableExpandRow.displayName = 'TableExpandRow';
 export default TableExpandRow;

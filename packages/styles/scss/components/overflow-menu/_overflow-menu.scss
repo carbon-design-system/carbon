@@ -58,6 +58,7 @@
   .#{$prefix}--overflow-menu--sm {
     block-size: convert.to-rem(32px);
     inline-size: convert.to-rem(32px);
+    min-block-size: convert.to-rem(32px);
   }
 
   .#{$prefix}--overflow-menu--lg {

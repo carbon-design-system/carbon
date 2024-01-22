@@ -341,6 +341,51 @@ export const contextual = TokenGroup.create({
   ],
 });
 
+export const ai = TokenGroup.create({
+  name: 'AI',
+  properties: ['background'],
+  tokens: [
+    'slug-background',
+    'slug-gradient',
+    'slug-background-hover',
+    'slug-gradient-hover',
+    'slug-hollow-hover',
+    'slug-callout-gradient-top',
+    'slug-callout-gradient-bottom',
+    'slug-callout-aura-start',
+    'slug-callout-aura-end',
+    'slug-callout-gradient-top-hover',
+    'slug-callout-gradient-bottom-hover',
+    'slug-callout-aura-start-hover-01',
+    'slug-callout-aura-start-hover-02',
+    'slug-callout-aura-end-hover-01',
+    'slug-callout-aura-end-hover-02',
+    'slug-callout-gradient-top-selected',
+    'slug-callout-gradient-bottom-selected',
+    'slug-callout-aura-start-selected',
+    'slug-callout-aura-end-selected',
+    'ai-gradient-start-01',
+    'ai-gradient-start-02',
+    'ai-gradient-end',
+    // Phase 2
+    'slug-callout-shadow-outer-01',
+    'slug-callout-shadow-outer-02',
+    // Linear gradient refactor
+    'ai-inner-shadow',
+    'ai-aura-start',
+    'ai-aura-end',
+    'ai-border-strong',
+    'ai-border-start',
+    'ai-border-end',
+    'ai-drop-shadow',
+    // Caret tokens
+    'slug-callout-caret-center',
+    'slug-callout-caret-bottom',
+    'slug-callout-caret-bottom-background',
+    'slug-callout-caret-bottom-background-actions',
+  ],
+});
+
 export const group = TokenGroup.create({
   name: 'All',
   tokens: [
@@ -359,6 +404,7 @@ export const group = TokenGroup.create({
     link,
     icon,
     support,
+    ai,
 
     // Misc
     {

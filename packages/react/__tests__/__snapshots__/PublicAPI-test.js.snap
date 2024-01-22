@@ -67,11 +67,6 @@ Map {
     },
   },
   "AccordionSkeleton" => Object {
-    "defaultProps": Object {
-      "align": "end",
-      "count": 4,
-      "open": true,
-    },
     "propTypes": Object {
       "align": Object {
         "args": Array [
@@ -97,15 +92,6 @@ Map {
     },
   },
   "ActionableNotification" => Object {
-    "defaultProps": Object {
-      "closeOnEscape": true,
-      "hasFocus": true,
-      "hideCloseButton": false,
-      "inline": false,
-      "kind": "error",
-      "onCloseButtonClick": [Function],
-      "role": "alertdialog",
-    },
     "propTypes": Object {
       "actionButtonLabel": Object {
         "type": "string",
@@ -143,7 +129,6 @@ Map {
             "warning-alt",
           ],
         ],
-        "isRequired": true,
         "type": "oneOf",
       },
       "lowContrast": Object {
@@ -226,10 +211,21 @@ Map {
         "args": Array [
           Array [
             Object {
-              "type": "string",
+              "type": "bool",
             },
             Object {
-              "type": "bool",
+              "args": Array [
+                Array [
+                  "false",
+                  "true",
+                  "page",
+                  "step",
+                  "location",
+                  "date",
+                  "time",
+                ],
+              ],
+              "type": "oneOf",
             },
           ],
         ],
@@ -466,10 +462,6 @@ Map {
   },
   "Checkbox" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "indeterminate": false,
-      "onChange": [Function],
-    },
     "propTypes": Object {
       "checked": Object {
         "type": "bool",
@@ -512,6 +504,9 @@ Map {
       "readOnly": Object {
         "type": "bool",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "title": Object {
         "type": "string",
       },
@@ -550,6 +545,9 @@ Map {
       },
       "readOnly": Object {
         "type": "bool",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "warn": Object {
         "type": "bool",
@@ -592,6 +590,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "hasRoundedCorners": Object {
+        "type": "bool",
+      },
       "href": Object {
         "type": "string",
       },
@@ -622,14 +623,22 @@ Map {
     "render": [Function],
   },
   "CodeSnippet" => Object {
-    "defaultProps": Object {
-      "aria-label": "Copy to clipboard",
-      "showLessText": "Show less",
-      "showMoreText": "Show more",
-      "type": "single",
-      "wrapText": false,
-    },
     "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "right",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "aria-label": Object {
         "type": "string",
       },
@@ -976,6 +985,27 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "span": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
+            },
+            Object {
+              "args": Array [
+                Array [
+                  "25%",
+                  "50%",
+                  "75%",
+                  "100%",
+                ],
+              ],
+              "type": "oneOf",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "xlg": Object {
         "args": Array [
           Array [
@@ -1064,16 +1094,10 @@ Map {
   },
   "ComboBox" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "aria-label": "Choose an item",
-      "direction": "bottom",
-      "disabled": false,
-      "itemToElement": null,
-      "itemToString": [Function],
-      "shouldFilterItem": [Function],
-      "type": "default",
-    },
     "propTypes": Object {
+      "allowCustomValue": Object {
+        "type": "bool",
+      },
       "aria-label": Object {
         "type": "string",
       },
@@ -1231,7 +1255,7 @@ Map {
         "type": "shape",
       },
       "helperText": Object {
-        "type": "string",
+        "type": "node",
       },
       "id": Object {
         "isRequired": true,
@@ -1277,9 +1301,6 @@ Map {
       "onInputChange": Object {
         "type": "func",
       },
-      "onStateChange": Object {
-        "type": "func",
-      },
       "onToggleClick": Object {
         "type": "func",
       },
@@ -1318,20 +1339,14 @@ Map {
         ],
         "type": "oneOf",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "titleText": Object {
         "type": "node",
       },
       "translateWithId": Object {
         "type": "func",
-      },
-      "type": Object {
-        "args": Array [
-          Array [
-            "default",
-            "inline",
-          ],
-        ],
-        "type": "oneOf",
       },
       "warn": Object {
         "type": "bool",
@@ -1395,9 +1410,6 @@ Map {
   },
   "ComposedModal" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "selectorPrimaryFocus": "[data-modal-primary-focus]",
-    },
     "propTypes": Object {
       "aria-label": Object {
         "type": "string",
@@ -1473,6 +1485,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "slug": Object {
+        "type": "node",
       },
     },
     "render": [Function],
@@ -1592,9 +1607,6 @@ Map {
     },
   },
   "Content" => Object {
-    "defaultProps": Object {
-      "tagName": "main",
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -1612,15 +1624,6 @@ Map {
   },
   "ControlledPasswordInput" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "disabled": false,
-      "helperText": "",
-      "invalid": false,
-      "invalidText": "",
-      "onChange": [Function],
-      "onClick": [Function],
-      "size": undefined,
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -1725,12 +1728,22 @@ Map {
     "render": [Function],
   },
   "Copy" => Object {
-    "defaultProps": Object {
-      "feedback": "Copied!",
-      "feedbackTimeout": 2000,
-      "onClick": [Function],
-    },
     "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "right",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "children": Object {
         "type": "node",
       },
@@ -1752,13 +1765,22 @@ Map {
     },
   },
   "CopyButton" => Object {
-    "defaultProps": Object {
-      "feedback": "Copied!",
-      "feedbackTimeout": 2000,
-      "iconDescription": "Copy to clipboard",
-      "onClick": [Function],
-    },
     "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "right",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "className": Object {
         "type": "string",
       },
@@ -1779,10 +1801,6 @@ Map {
   "DangerButton" => Object {},
   "DataTable" => Object {
     "Table": Object {
-      "defaultProps": Object {
-        "isSortable": false,
-        "overflowMenuOnHover": true,
-      },
       "propTypes": Object {
         "children": Object {
           "type": "node",
@@ -1831,28 +1849,6 @@ Map {
       },
     },
     "TableBatchAction": Object {
-      "defaultProps": Object {
-        "iconDescription": "Add",
-        "renderIcon": Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "propTypes": Object {
-            "size": Object {
-              "args": Array [
-                Array [
-                  Object {
-                    "type": "number",
-                  },
-                  Object {
-                    "type": "string",
-                  },
-                ],
-              ],
-              "type": "oneOfType",
-            },
-          },
-          "render": [Function],
-        },
-      },
       "propTypes": Object {
         "hasIconOnly": Object {
           "type": "bool",
@@ -1874,9 +1870,6 @@ Map {
       },
     },
     "TableBatchActions": Object {
-      "defaultProps": Object {
-        "translateWithId": [Function],
-      },
       "propTypes": Object {
         "children": Object {
           "type": "node",
@@ -1913,9 +1906,6 @@ Map {
       ],
     },
     "TableBody": Object {
-      "defaultProps": Object {
-        "aria-live": "polite",
-      },
       "propTypes": Object {
         "aria-live": Object {
           "args": Array [
@@ -2005,6 +1995,7 @@ Map {
       },
     },
     "TableExpandRow": Object {
+      "$$typeof": Symbol(react.forward_ref),
       "propTypes": Object {
         "aria-controls": Object {
           "type": "string",
@@ -2039,6 +2030,7 @@ Map {
           "type": "func",
         },
       },
+      "render": [Function],
     },
     "TableExpandedRow": Object {
       "propTypes": Object {
@@ -2064,11 +2056,6 @@ Map {
     },
     "TableHeader": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "isSortable": false,
-        "scope": "col",
-        "translateWithId": [Function],
-      },
       "propTypes": Object {
         "children": Object {
           "type": "node",
@@ -2092,7 +2079,6 @@ Map {
           "type": "func",
         },
         "scope": Object {
-          "isRequired": true,
           "type": "string",
         },
         "sortDirection": Object {
@@ -2125,9 +2111,6 @@ Map {
       },
     },
     "TableSelectAll": Object {
-      "defaultProps": Object {
-        "ariaLabel": "Select all rows in the table",
-      },
       "propTypes": Object {
         "ariaLabel": Object {
           "isRequired": true,
@@ -2196,13 +2179,22 @@ Map {
         },
       },
     },
-    "TableToolbar": Object {
-      "defaultProps": Object {
-        "aria-label": "data table toolbar",
-      },
+    "TableSlugRow": Object {
       "propTypes": Object {
-        "aria-label": [Function],
-        "aria-labelledby": [Function],
+        "className": Object {
+          "type": "string",
+        },
+        "slug": Object {
+          "type": "node",
+        },
+      },
+    },
+    "TableToolbar": Object {
+      "propTypes": Object {
+        "aria-label": Object {
+          "type": "string",
+        },
+        "ariaLabel": [Function],
         "children": Object {
           "type": "node",
         },
@@ -2242,28 +2234,6 @@ Map {
       },
     },
     "TableToolbarMenu": Object {
-      "defaultProps": Object {
-        "iconDescription": "Settings",
-        "renderIcon": Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "propTypes": Object {
-            "size": Object {
-              "args": Array [
-                Array [
-                  Object {
-                    "type": "number",
-                  },
-                  Object {
-                    "type": "string",
-                  },
-                ],
-              ],
-              "type": "oneOfType",
-            },
-          },
-          "render": [Function],
-        },
-      },
       "propTypes": Object {
         "children": Object {
           "isRequired": true,
@@ -2273,7 +2243,6 @@ Map {
           "type": "string",
         },
         "iconDescription": Object {
-          "isRequired": true,
           "type": "string",
         },
         "renderIcon": Object {
@@ -2292,12 +2261,6 @@ Map {
       },
     },
     "TableToolbarSearch": Object {
-      "defaultProps": Object {
-        "onClear": [Function],
-        "persistent": false,
-        "tabIndex": "0",
-        "translateWithId": [Function],
-      },
       "propTypes": Object {
         "children": Object {
           "type": "node",
@@ -2371,18 +2334,9 @@ Map {
           "type": "oneOfType",
         },
         "translateWithId": Object {
-          "isRequired": true,
           "type": "func",
         },
       },
-    },
-    "defaultProps": Object {
-      "filterRows": [Function],
-      "locale": "en",
-      "overflowMenuOnHover": true,
-      "size": "lg",
-      "sortRow": [Function],
-      "translateWithId": [Function],
     },
     "propTypes": Object {
       "experimentalAutoAlign": Object {
@@ -2657,10 +2611,30 @@ Map {
         "type": "oneOfType",
       },
       "maxDate": Object {
-        "type": "string",
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "minDate": Object {
-        "type": "string",
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "onChange": Object {
         "type": "func",
@@ -2792,6 +2766,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "type": Object {
         "type": "string",
       },
@@ -2869,15 +2846,6 @@ Map {
   },
   "Dropdown" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "direction": "bottom",
-      "disabled": false,
-      "helperText": "",
-      "itemToElement": null,
-      "itemToString": [Function],
-      "titleText": "",
-      "type": "default",
-    },
     "propTypes": Object {
       "aria-label": Object {
         "type": "string",
@@ -2982,6 +2950,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "titleText": Object {
         "isRequired": true,
@@ -3153,6 +3124,9 @@ Map {
       "expanded": Object {
         "type": "bool",
       },
+      "hasRoundedCorners": Object {
+        "type": "bool",
+      },
       "id": Object {
         "type": "string",
       },
@@ -3162,6 +3136,9 @@ Map {
       },
       "onKeyUp": Object {
         "type": "func",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "tabIndex": Object {
         "type": "number",
@@ -3184,15 +3161,6 @@ Map {
   "FileUploader" => Object {
     "contextType": Object {
       "$$typeof": Symbol(react.context),
-    },
-    "defaultProps": Object {
-      "accept": Array [],
-      "buttonKind": "primary",
-      "buttonLabel": "",
-      "disabled": false,
-      "filenameStatus": "uploading",
-      "multiple": false,
-      "onClick": [Function],
     },
     "propTypes": Object {
       "accept": Object {
@@ -3239,7 +3207,6 @@ Map {
         "type": "oneOf",
       },
       "iconDescription": Object {
-        "isRequired": true,
         "type": "string",
       },
       "labelDescription": Object {
@@ -3344,13 +3311,6 @@ Map {
     },
   },
   "FileUploaderDropContainer" => Object {
-    "defaultProps": Object {
-      "accept": Array [],
-      "labelText": "Add file",
-      "multiple": false,
-      "onAddFiles": [Function],
-      "pattern": ".[0-9a-z]+$",
-    },
     "propTypes": Object {
       "accept": Object {
         "args": Array [
@@ -3393,10 +3353,6 @@ Map {
     },
   },
   "FileUploaderItem" => Object {
-    "defaultProps": Object {
-      "onDelete": [Function],
-      "status": "uploading",
-    },
     "propTypes": Object {
       "errorBody": Object {
         "type": "string",
@@ -3449,11 +3405,6 @@ Map {
     },
   },
   "Filename" => Object {
-    "defaultProps": Object {
-      "iconDescription": "Uploading file",
-      "status": "uploading",
-      "tabIndex": "0",
-    },
     "propTypes": Object {
       "aria-describedby": Object {
         "type": "string",
@@ -3478,36 +3429,12 @@ Map {
         "type": "oneOf",
       },
       "tabIndex": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "number",
-            },
-            Object {
-              "type": "string",
-            },
-          ],
-        ],
-        "type": "oneOfType",
+        "type": "number",
       },
     },
   },
   "FilterableMultiSelect" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "clearSelectionDescription": "Total items selected: ",
-      "clearSelectionText": "To clear selection, press Delete or Backspace,",
-      "compareItems": [Function],
-      "direction": "bottom",
-      "disabled": false,
-      "filterItems": [Function],
-      "initialSelectedItems": Array [],
-      "itemToString": [Function],
-      "locale": "en",
-      "open": false,
-      "selectionFeedback": "top-after-reopen",
-      "sortItems": [Function],
-    },
     "propTypes": Object {
       "aria-label": [Function],
       "ariaLabel": [Function],
@@ -3518,7 +3445,6 @@ Map {
         "type": "string",
       },
       "compareItems": Object {
-        "isRequired": true,
         "type": "func",
       },
       "direction": Object {
@@ -3735,8 +3661,10 @@ Map {
         ],
         "type": "oneOf",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "sortItems": Object {
-        "isRequired": true,
         "type": "func",
       },
       "translateWithId": Object {
@@ -3812,11 +3740,6 @@ Map {
     "Provider": "React.Provider",
   },
   "FormGroup" => Object {
-    "defaultProps": Object {
-      "invalid": false,
-      "message": false,
-      "messageText": "",
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -3913,6 +3836,26 @@ Map {
         "type": "bool",
       },
       "narrow": Object {
+        "type": "bool",
+      },
+    },
+  },
+  "GridSettings" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "mode": Object {
+        "args": Array [
+          Array [
+            "flexbox",
+            "css-grid",
+          ],
+        ],
+        "isRequired": true,
+        "type": "oneOf",
+      },
+      "subgrid": Object {
         "type": "bool",
       },
     },
@@ -4190,6 +4133,12 @@ Map {
     },
     "render": [Function],
   },
+  "IconButtonKinds" => Object {
+    "0": "primary",
+    "1": "secondary",
+    "2": "ghost",
+    "3": "tertiary",
+  },
   "IconSkeleton" => Object {
     "propTypes": Object {
       "className": Object {
@@ -4337,12 +4286,6 @@ Map {
     },
   },
   "InlineNotification" => Object {
-    "defaultProps": Object {
-      "hideCloseButton": false,
-      "kind": "error",
-      "onCloseButtonClick": [Function],
-      "role": "status",
-    },
     "propTypes": Object {
       "aria-label": Object {
         "type": "string",
@@ -4440,6 +4383,9 @@ Map {
   "Link" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
+      "as": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },
@@ -4525,6 +4471,15 @@ Map {
       },
       "label": Object {
         "type": "string",
+      },
+      "mode": Object {
+        "args": Array [
+          Array [
+            "full",
+            "basic",
+          ],
+        ],
+        "type": "oneOf",
       },
       "onClose": Object {
         "type": "func",
@@ -4624,6 +4579,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "tabIndex": Object {
+        "type": "number",
       },
     },
     "render": [Function],
@@ -4752,18 +4710,6 @@ Map {
   },
   "Modal" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "hasScrollingContent": false,
-      "modalHeading": "",
-      "modalLabel": "",
-      "onKeyDown": [Function],
-      "onRequestClose": [Function],
-      "onRequestSubmit": [Function],
-      "passiveModal": false,
-      "preventCloseOnClickOutside": false,
-      "primaryButtonDisabled": false,
-      "selectorPrimaryFocus": "[data-modal-primary-focus]",
-    },
     "propTypes": Object {
       "alert": Object {
         "type": "bool",
@@ -4810,6 +4756,23 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "loadingDescription": Object {
+        "type": "string",
+      },
+      "loadingIconDescription": Object {
+        "type": "string",
+      },
+      "loadingStatus": Object {
+        "args": Array [
+          Array [
+            "inactive",
+            "active",
+            "finished",
+            "error",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "modalAriaLabel": Object {
         "type": "string",
       },
@@ -4820,6 +4783,9 @@ Map {
         "type": "node",
       },
       "onKeyDown": Object {
+        "type": "func",
+      },
+      "onLoadingSuccess": Object {
         "type": "func",
       },
       "onRequestClose": Object {
@@ -4856,6 +4822,7 @@ Map {
       "selectorsFloatingMenus": Object {
         "args": Array [
           Object {
+            "isRequired": true,
             "type": "string",
           },
         ],
@@ -4874,6 +4841,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "slug": Object {
+        "type": "node",
       },
     },
     "render": [Function],
@@ -4899,11 +4869,6 @@ Map {
   },
   "ModalFooter" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "closeModal": [Function],
-      "onRequestClose": [Function],
-      "onRequestSubmit": [Function],
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -4937,6 +4902,26 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "loadingDescription": Object {
+        "type": "string",
+      },
+      "loadingIconDescription": Object {
+        "type": "string",
+      },
+      "loadingStatus": Object {
+        "args": Array [
+          Array [
+            "inactive",
+            "active",
+            "finished",
+            "error",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "onLoadingSuccess": Object {
+        "type": "func",
+      },
       "onRequestClose": Object {
         "type": "func",
       },
@@ -4964,9 +4949,6 @@ Map {
   },
   "ModalHeader" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "iconDescription": "Close",
-    },
     "propTypes": Object {
       "buttonOnClick": Object {
         "type": "func",
@@ -5005,17 +4987,6 @@ Map {
     "render": [Function],
   },
   "ModalWrapper" => Object {
-    "defaultProps": Object {
-      "disabled": false,
-      "onKeyDown": [Function],
-      "preventCloseOnClickOutside": false,
-      "primaryButtonText": "Save",
-      "secondaryButtonText": "Cancel",
-      "selectorPrimaryFocus": "[data-modal-primary-focus]",
-      "shouldCloseAfterSubmit": true,
-      "triggerButtonIconDescription": "Provide icon description if icon is used",
-      "triggerButtonKind": "primary",
-    },
     "propTypes": Object {
       "buttonTriggerClassName": Object {
         "type": "string",
@@ -5114,20 +5085,6 @@ Map {
     "$$typeof": Symbol(react.forward_ref),
     "Filterable": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "clearSelectionDescription": "Total items selected: ",
-        "clearSelectionText": "To clear selection, press Delete or Backspace,",
-        "compareItems": [Function],
-        "direction": "bottom",
-        "disabled": false,
-        "filterItems": [Function],
-        "initialSelectedItems": Array [],
-        "itemToString": [Function],
-        "locale": "en",
-        "open": false,
-        "selectionFeedback": "top-after-reopen",
-        "sortItems": [Function],
-      },
       "propTypes": Object {
         "aria-label": [Function],
         "ariaLabel": [Function],
@@ -5138,7 +5095,6 @@ Map {
           "type": "string",
         },
         "compareItems": Object {
-          "isRequired": true,
           "type": "func",
         },
         "direction": Object {
@@ -5355,8 +5311,10 @@ Map {
           ],
           "type": "oneOf",
         },
+        "slug": Object {
+          "type": "node",
+        },
         "sortItems": Object {
-          "isRequired": true,
           "type": "func",
         },
         "translateWithId": Object {
@@ -5374,22 +5332,6 @@ Map {
       },
       "render": [Function],
     },
-    "defaultProps": Object {
-      "clearSelectionDescription": "Total items selected: ",
-      "clearSelectionText": "To clear selection, press Delete or Backspace,",
-      "compareItems": [Function],
-      "direction": "bottom",
-      "disabled": false,
-      "initialSelectedItems": Array [],
-      "itemToString": [Function],
-      "locale": "en",
-      "open": false,
-      "selectedItems": undefined,
-      "selectionFeedback": "top-after-reopen",
-      "sortItems": [Function],
-      "titleText": false,
-      "type": "default",
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -5401,7 +5343,6 @@ Map {
         "type": "string",
       },
       "compareItems": Object {
-        "isRequired": true,
         "type": "func",
       },
       "direction": Object {
@@ -5491,8 +5432,10 @@ Map {
         ],
         "type": "oneOf",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "sortItems": Object {
-        "isRequired": true,
         "type": "func",
       },
       "titleText": Object {
@@ -5539,30 +5482,6 @@ Map {
     },
   },
   "NotificationButton" => Object {
-    "defaultProps": Object {
-      "aria-label": "close notification",
-      "notificationType": "toast",
-      "renderIcon": Object {
-        "$$typeof": Symbol(react.forward_ref),
-        "propTypes": Object {
-          "size": Object {
-            "args": Array [
-              Array [
-                Object {
-                  "type": "number",
-                },
-                Object {
-                  "type": "string",
-                },
-              ],
-            ],
-            "type": "oneOfType",
-          },
-        },
-        "render": [Function],
-      },
-      "type": "button",
-    },
     "propTypes": Object {
       "aria-label": Object {
         "type": "string",
@@ -5683,6 +5602,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "step": Object {
         "type": "number",
@@ -5934,6 +5856,9 @@ Map {
     "propTypes": Object {
       "className": Object {
         "type": "string",
+      },
+      "disableOverflow": Object {
+        "type": "bool",
       },
       "itemsShown": Object {
         "type": "number",
@@ -6258,9 +6183,6 @@ Map {
     },
   },
   "ProgressStep" => Object {
-    "defaultProps": Object {
-      "translateWithId": [Function],
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -6347,6 +6269,9 @@ Map {
       "onClick": Object {
         "type": "func",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "value": Object {
         "args": Array [
           Array [
@@ -6428,6 +6353,9 @@ Map {
       "readOnly": Object {
         "type": "bool",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "valueSelected": Object {
         "args": Array [
           Array [
@@ -6459,10 +6387,6 @@ Map {
   },
   "RadioTile" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "onChange": [Function],
-      "tabIndex": 0,
-    },
     "propTypes": Object {
       "checked": Object {
         "type": "bool",
@@ -6635,9 +6559,6 @@ Map {
     "render": [Function],
   },
   "SearchSkeleton" => Object {
-    "defaultProps": Object {
-      "small": false,
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -6668,14 +6589,6 @@ Map {
   },
   "Select" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "disabled": false,
-      "helperText": "",
-      "inline": false,
-      "invalid": false,
-      "invalidText": "",
-      "labelText": "Select",
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -6731,6 +6644,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "warn": Object {
         "type": "bool",
       },
@@ -6741,12 +6657,6 @@ Map {
     "render": [Function],
   },
   "SelectItem" => Object {
-    "defaultProps": Object {
-      "disabled": false,
-      "hidden": false,
-      "text": "",
-      "value": "",
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -6768,9 +6678,6 @@ Map {
     },
   },
   "SelectItemGroup" => Object {
-    "defaultProps": Object {
-      "disabled": false,
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -6809,6 +6716,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "hasRoundedCorners": Object {
+        "type": "bool",
+      },
       "id": Object {
         "type": "string",
       },
@@ -6827,6 +6737,9 @@ Map {
       },
       "selected": Object {
         "type": "bool",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "tabIndex": Object {
         "type": "number",
@@ -6923,13 +6836,9 @@ Map {
     },
   },
   "SideNavFooter" => Object {
-    "defaultProps": Object {
-      "assistiveText": "Toggle opening or closing the side navigation",
-    },
     "displayName": "SideNavFooter",
     "propTypes": Object {
       "assistiveText": Object {
-        "isRequired": true,
         "type": "string",
       },
       "className": Object {
@@ -6974,9 +6883,6 @@ Map {
     },
   },
   "SideNavIcon" => Object {
-    "defaultProps": Object {
-      "small": false,
-    },
     "propTypes": Object {
       "children": Object {
         "isRequired": true,
@@ -6986,7 +6892,6 @@ Map {
         "type": "string",
       },
       "small": Object {
-        "isRequired": true,
         "type": "bool",
       },
     },
@@ -7175,12 +7080,6 @@ Map {
     },
   },
   "SkeletonText" => Object {
-    "defaultProps": Object {
-      "heading": false,
-      "lineCount": 3,
-      "paragraph": false,
-      "width": "100%",
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -7224,6 +7123,9 @@ Map {
         "type": "string",
       },
       "hideLabel": Object {
+        "type": "bool",
+      },
+      "twoHandles": Object {
         "type": "bool",
       },
     },
@@ -7282,9 +7184,6 @@ Map {
     "render": [Function],
   },
   "StructuredListBody" => Object {
-    "defaultProps": Object {
-      "onKeyDown": [Function],
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -7301,10 +7200,6 @@ Map {
     },
   },
   "StructuredListCell" => Object {
-    "defaultProps": Object {
-      "head": false,
-      "noWrap": false,
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -7331,9 +7226,6 @@ Map {
     },
   },
   "StructuredListInput" => Object {
-    "defaultProps": Object {
-      "title": "title",
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -7355,10 +7247,6 @@ Map {
     },
   },
   "StructuredListRow" => Object {
-    "defaultProps": Object {
-      "head": false,
-      "onKeyDown": [Function],
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -7379,9 +7267,6 @@ Map {
     },
   },
   "StructuredListSkeleton" => Object {
-    "defaultProps": Object {
-      "rowCount": 5,
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -7392,12 +7277,6 @@ Map {
     },
   },
   "StructuredListWrapper" => Object {
-    "defaultProps": Object {
-      "aria-label": "Structured list section",
-      "isCondensed": false,
-      "isFlush": false,
-      "selection": false,
-    },
     "propTypes": Object {
       "aria-label": Object {
         "type": "string",
@@ -7422,11 +7301,6 @@ Map {
   },
   "Switch" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "onClick": [Function],
-      "onKeyDown": [Function],
-      "selected": false,
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -7510,6 +7384,9 @@ Map {
       },
       "index": Object {
         "type": "number",
+      },
+      "onClick": Object {
+        "type": "func",
       },
       "onKeyDown": Object {
         "type": "func",
@@ -7657,10 +7534,6 @@ Map {
     },
   },
   "Table" => Object {
-    "defaultProps": Object {
-      "isSortable": false,
-      "overflowMenuOnHover": true,
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -7709,28 +7582,6 @@ Map {
     },
   },
   "TableBatchAction" => Object {
-    "defaultProps": Object {
-      "iconDescription": "Add",
-      "renderIcon": Object {
-        "$$typeof": Symbol(react.forward_ref),
-        "propTypes": Object {
-          "size": Object {
-            "args": Array [
-              Array [
-                Object {
-                  "type": "number",
-                },
-                Object {
-                  "type": "string",
-                },
-              ],
-            ],
-            "type": "oneOfType",
-          },
-        },
-        "render": [Function],
-      },
-    },
     "propTypes": Object {
       "hasIconOnly": Object {
         "type": "bool",
@@ -7752,9 +7603,6 @@ Map {
     },
   },
   "TableBatchActions" => Object {
-    "defaultProps": Object {
-      "translateWithId": [Function],
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -7791,9 +7639,6 @@ Map {
     ],
   },
   "TableBody" => Object {
-    "defaultProps": Object {
-      "aria-live": "polite",
-    },
     "propTypes": Object {
       "aria-live": Object {
         "args": Array [
@@ -7883,6 +7728,7 @@ Map {
     },
   },
   "TableExpandRow" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "aria-controls": Object {
         "type": "string",
@@ -7917,6 +7763,7 @@ Map {
         "type": "func",
       },
     },
+    "render": [Function],
   },
   "TableExpandedRow" => Object {
     "propTypes": Object {
@@ -7942,11 +7789,6 @@ Map {
   },
   "TableHeader" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "isSortable": false,
-      "scope": "col",
-      "translateWithId": [Function],
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -7970,7 +7812,6 @@ Map {
         "type": "func",
       },
       "scope": Object {
-        "isRequired": true,
         "type": "string",
       },
       "sortDirection": Object {
@@ -8003,9 +7844,6 @@ Map {
     },
   },
   "TableSelectAll" => Object {
-    "defaultProps": Object {
-      "ariaLabel": "Select all rows in the table",
-    },
     "propTypes": Object {
       "ariaLabel": Object {
         "isRequired": true,
@@ -8074,13 +7912,22 @@ Map {
       },
     },
   },
-  "TableToolbar" => Object {
-    "defaultProps": Object {
-      "aria-label": "data table toolbar",
-    },
+  "TableSlugRow" => Object {
     "propTypes": Object {
-      "aria-label": [Function],
-      "aria-labelledby": [Function],
+      "className": Object {
+        "type": "string",
+      },
+      "slug": Object {
+        "type": "node",
+      },
+    },
+  },
+  "TableToolbar" => Object {
+    "propTypes": Object {
+      "aria-label": Object {
+        "type": "string",
+      },
+      "ariaLabel": [Function],
       "children": Object {
         "type": "node",
       },
@@ -8120,28 +7967,6 @@ Map {
     },
   },
   "TableToolbarMenu" => Object {
-    "defaultProps": Object {
-      "iconDescription": "Settings",
-      "renderIcon": Object {
-        "$$typeof": Symbol(react.forward_ref),
-        "propTypes": Object {
-          "size": Object {
-            "args": Array [
-              Array [
-                Object {
-                  "type": "number",
-                },
-                Object {
-                  "type": "string",
-                },
-              ],
-            ],
-            "type": "oneOfType",
-          },
-        },
-        "render": [Function],
-      },
-    },
     "propTypes": Object {
       "children": Object {
         "isRequired": true,
@@ -8151,7 +7976,6 @@ Map {
         "type": "string",
       },
       "iconDescription": Object {
-        "isRequired": true,
         "type": "string",
       },
       "renderIcon": Object {
@@ -8170,12 +7994,6 @@ Map {
     },
   },
   "TableToolbarSearch" => Object {
-    "defaultProps": Object {
-      "onClear": [Function],
-      "persistent": false,
-      "tabIndex": "0",
-      "translateWithId": [Function],
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -8249,7 +8067,6 @@ Map {
         "type": "oneOfType",
       },
       "translateWithId": Object {
-        "isRequired": true,
         "type": "func",
       },
     },
@@ -8329,6 +8146,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "title": Object {
         "type": "string",
       },
@@ -8370,26 +8190,21 @@ Map {
   },
   "TextArea" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "disabled": false,
-      "enableCounter": false,
-      "helperText": "",
-      "invalid": false,
-      "invalidText": "",
-      "maxCount": undefined,
-      "onChange": [Function],
-      "onClick": [Function],
-      "placeholder": "",
-      "rows": 4,
-      "warn": false,
-      "warnText": "",
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
       },
       "cols": Object {
         "type": "number",
+      },
+      "counterMode": Object {
+        "args": Array [
+          Array [
+            "character",
+            "word",
+          ],
+        ],
+        "type": "oneOf",
       },
       "defaultValue": Object {
         "args": Array [
@@ -8439,6 +8254,9 @@ Map {
       "onClick": Object {
         "type": "func",
       },
+      "onKeyDown": Object {
+        "type": "func",
+      },
       "placeholder": Object {
         "type": "string",
       },
@@ -8447,6 +8265,9 @@ Map {
       },
       "rows": Object {
         "type": "number",
+      },
+      "slug": Object {
+        "type": "node",
       },
       "value": Object {
         "args": Array [
@@ -8484,15 +8305,6 @@ Map {
     "$$typeof": Symbol(react.forward_ref),
     "ControlledPasswordInput": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "disabled": false,
-        "helperText": "",
-        "invalid": false,
-        "invalidText": "",
-        "onChange": [Function],
-        "onClick": [Function],
-        "size": undefined,
-      },
       "propTypes": Object {
         "className": Object {
           "type": "string",
@@ -8794,6 +8606,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "slug": Object {
+        "type": "node",
+      },
       "type": Object {
         "type": "string",
       },
@@ -8880,7 +8695,13 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "hasRoundedCorners": Object {
+        "type": "bool",
+      },
       "light": [Function],
+      "slug": Object {
+        "type": "node",
+      },
     },
     "render": [Function],
   },
@@ -9003,13 +8824,6 @@ Map {
     "render": [Function],
   },
   "ToastNotification" => Object {
-    "defaultProps": Object {
-      "hideCloseButton": false,
-      "kind": "error",
-      "onCloseButtonClick": [Function],
-      "role": "status",
-      "timeout": 0,
-    },
     "propTypes": Object {
       "aria-label": Object {
         "type": "string",
@@ -9177,6 +8991,9 @@ Map {
       "as": Object {
         "type": "elementType",
       },
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
@@ -9282,6 +9099,7 @@ Map {
     },
   },
   "TreeNode" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "active": Object {
         "args": Array [
@@ -9307,6 +9125,9 @@ Map {
       },
       "disabled": Object {
         "type": "bool",
+      },
+      "id": Object {
+        "type": "string",
       },
       "isExpanded": Object {
         "type": "bool",
@@ -9361,9 +9182,11 @@ Map {
         "type": "string",
       },
     },
+    "render": [Function],
   },
   "TreeView" => Object {
     "TreeNode": Object {
+      "$$typeof": Symbol(react.forward_ref),
       "propTypes": Object {
         "active": Object {
           "args": Array [
@@ -9389,6 +9212,9 @@ Map {
         },
         "disabled": Object {
           "type": "bool",
+        },
+        "id": Object {
+          "type": "string",
         },
         "isExpanded": Object {
           "type": "bool",
@@ -9443,6 +9269,7 @@ Map {
           "type": "string",
         },
       },
+      "render": [Function],
     },
     "propTypes": Object {
       "active": Object {
@@ -9640,11 +9467,6 @@ Map {
   },
   "unstable_OverflowMenuV2" => Object {},
   "unstable_PageSelector" => Object {
-    "defaultProps": Object {
-      "className": null,
-      "id": 1,
-      "labelText": "Current page number",
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -9676,24 +9498,6 @@ Map {
     },
   },
   "unstable_Pagination" => Object {
-    "defaultProps": Object {
-      "backwardText": "Previous page",
-      "children": undefined,
-      "className": null,
-      "disabled": false,
-      "forwardText": "Next page",
-      "id": 1,
-      "initialPage": 1,
-      "itemRangeText": [Function],
-      "itemText": [Function],
-      "itemsPerPageText": "Items per page:",
-      "pageRangeText": [Function],
-      "pageSize": 10,
-      "pageSizes": undefined,
-      "pageText": [Function],
-      "pagesUnknown": false,
-      "totalItems": undefined,
-    },
     "propTypes": Object {
       "backwardText": Object {
         "type": "string",
@@ -10091,6 +9895,15 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "clearSelectionDescription": Object {
+        "type": "string",
+      },
+      "clearSelectionText": Object {
+        "type": "string",
+      },
+      "compareItems": Object {
+        "type": "func",
+      },
       "direction": Object {
         "args": Array [
           Array [
@@ -10103,25 +9916,15 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "downshiftProps": Object {
+        "type": "object",
+      },
       "id": Object {
         "isRequired": true,
         "type": "string",
       },
-      "initialSelectedItem": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "object",
-            },
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
-          ],
-        ],
-        "type": "oneOfType",
+      "initialSelectedItems": Object {
+        "type": "array",
       },
       "invalid": Object {
         "type": "bool",
@@ -10149,33 +9952,45 @@ Map {
         "isRequired": true,
         "type": "node",
       },
+      "locale": Object {
+        "type": "string",
+      },
       "onChange": Object {
         "type": "func",
       },
-      "renderSelectedItem": Object {
+      "onInputValueChange": Object {
         "type": "func",
       },
-      "selectedItem": Object {
+      "onMenuChange": Object {
+        "type": "func",
+      },
+      "readOnly": Object {
+        "type": "bool",
+      },
+      "selectedItems": Object {
+        "type": "array",
+      },
+      "selectionFeedback": Object {
         "args": Array [
           Array [
-            Object {
-              "type": "object",
-            },
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
+            "top",
+            "fixed",
+            "top-after-reopen",
           ],
         ],
-        "type": "oneOfType",
+        "type": "oneOf",
+      },
+      "sortItems": Object {
+        "type": "func",
       },
       "titleText": Object {
         "type": "node",
       },
       "translateWithId": Object {
         "type": "func",
+      },
+      "useTitleInItem": Object {
+        "type": "bool",
       },
       "warn": Object {
         "type": "bool",
@@ -10473,6 +10288,118 @@ Map {
         "type": "bool",
       },
     },
+  },
+  "unstable__Slug" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "aiText": Object {
+        "type": "string",
+      },
+      "aiTextLabel": Object {
+        "type": "string",
+      },
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "left-bottom",
+            "left-top",
+            "right",
+            "right-bottom",
+            "right-top",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "autoAlign": Object {
+        "type": "bool",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "dotType": Object {
+        "args": Array [
+          Array [
+            "default",
+            "hollow",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "default",
+            "hollow",
+            "inline",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "onRevertClick": Object {
+        "type": "func",
+      },
+      "revertActive": Object {
+        "type": "bool",
+      },
+      "revertLabel": Object {
+        "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "mini",
+            "2xs",
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "slugContent": Object {
+        "type": "node",
+      },
+      "slugLabel": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable__SlugActions" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable__SlugContent" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
   },
   "unstable_useFeatureFlag" => Object {},
   "unstable_useFeatureFlags" => Object {},

@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('RadioButton @avt', () => {
-  test('accessibility-checker', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'RadioButton',
       id: 'components-radiobutton--default',
@@ -22,7 +22,18 @@ test.describe('RadioButton @avt', () => {
     await expect(page).toHaveNoACViolations('RadioButton');
   });
 
-  test('accessibility-checker - skeleton', async ({ page }) => {
+  test('@avt-advanced-states - vertical', async ({ page }) => {
+    await visitStory(page, {
+      component: 'RadioButton',
+      id: 'components-radiobutton--vertical',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('RadioButton-vertical');
+  });
+
+  test('@avt-advanced-states - skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'RadioButton',
       id: 'components-radiobutton--skeleton',
@@ -33,7 +44,7 @@ test.describe('RadioButton @avt', () => {
     await expect(page).toHaveNoACViolations('RadioButton-skeleton');
   });
 
-  test('accessibility-checker - keyboard nav', async ({ page }) => {
+  test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'RadioButton',
       id: 'components-radiobutton--default',
@@ -48,7 +59,7 @@ test.describe('RadioButton @avt', () => {
     await expect(page.locator('input#radio-2')).toBeChecked();
   });
 
-  test('accessibility-checker - invalid state', async ({ page }) => {
+  test('@avt-advanced-states - invalid state', async ({ page }) => {
     await visitStory(page, {
       component: 'RadioButton',
       id: 'components-radiobutton--playground',
@@ -65,7 +76,7 @@ test.describe('RadioButton @avt', () => {
     await expect(page).toHaveNoACViolations('RadioButton-invalid');
   });
 
-  test('accessibility-checker - warn state', async ({ page }) => {
+  test('@avt-advanced-states - warn state', async ({ page }) => {
     await visitStory(page, {
       component: 'RadioButton',
       id: 'components-radiobutton--playground',
@@ -82,7 +93,7 @@ test.describe('RadioButton @avt', () => {
     await expect(page).toHaveNoACViolations('RadioButton-warn');
   });
 
-  test('accessibility-checker - disabled state', async ({ page }) => {
+  test('@avt-advanced-states - disabled state', async ({ page }) => {
     await visitStory(page, {
       component: 'RadioButton',
       id: 'components-radiobutton--playground',
@@ -98,7 +109,7 @@ test.describe('RadioButton @avt', () => {
     await expect(page).toHaveNoACViolations('RadioButton-disabled');
   });
 
-  test('accessibility-checker - read only state', async ({ page }) => {
+  test('@avt-advanced-states - read only state', async ({ page }) => {
     await visitStory(page, {
       component: 'RadioButton',
       id: 'components-radiobutton--playground',

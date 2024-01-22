@@ -62,7 +62,7 @@ const plugin = {
       });
 
       if (hasMaintainerLabel && doesNotMentionAnotherMember) {
-        await octokit.issues.removeLabel({
+        await octokit.rest.issues.removeLabel({
           owner: repository.owner.login,
           repo: repository.name,
           issue_number: issue.number,
@@ -78,7 +78,7 @@ const plugin = {
         return;
       }
 
-      await octokit.issues.addLabels({
+      await octokit.rest.issues.addLabels({
         owner: repository.owner.login,
         repo: repository.name,
         issue_number: issue.number,
@@ -89,7 +89,7 @@ const plugin = {
         return label.name === waitingForAuthor;
       });
       if (hasAuthorLabel) {
-        await octokit.issues.removeLabel({
+        await octokit.rest.issues.removeLabel({
           owner: repository.owner.login,
           repo: repository.name,
           issue_number: issue.number,
@@ -104,7 +104,7 @@ const plugin = {
         return;
       }
 
-      await octokit.issues.addLabels({
+      await octokit.rest.issues.addLabels({
         owner: repository.owner.login,
         repo: repository.name,
         issue_number: issue.number,

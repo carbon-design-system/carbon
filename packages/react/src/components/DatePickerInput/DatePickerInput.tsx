@@ -13,6 +13,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { ReactAttr } from '../../types/common';
+import { Text } from '../Text';
 
 const getInstanceId = setupGetInstanceId();
 type ExcludedAttributes = 'value' | 'onChange' | 'locale' | 'children';
@@ -28,7 +29,7 @@ export type ReactNodeLike =
 export type func = (...args: any[]) => any;
 
 interface DatePickerInputProps
-  extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes> {
+  extends Omit<ReactAttr<HTMLInputElement>, ExcludedAttributes> {
   /**
    * The type of the date picker:
    *
@@ -111,6 +112,11 @@ interface DatePickerInputProps
   size?: 'sm' | 'md' | 'lg';
 
   /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `DatePickerInput` component
+   */
+  slug?: ReactNodeLike;
+
+  /**
    * Specify the type of the `<input>`
    */
   type?: string;
@@ -144,6 +150,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
     pattern = '\\d{1,2}\\/\\d{1,2}\\/\\d{4}',
     placeholder,
     size = 'md',
+    slug,
     type = 'text',
     warn,
     warnText,
@@ -171,6 +178,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
   const wrapperClasses = cx(`${prefix}--date-picker-input__wrapper`, {
     [`${prefix}--date-picker-input__wrapper--invalid`]: invalid,
     [`${prefix}--date-picker-input__wrapper--warn`]: warn,
+    [`${prefix}--date-picker-input__wrapper--slug`]: slug,
   });
   const labelClasses = cx(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
@@ -208,38 +216,56 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
   }
   const input = <input {...inputProps} />;
 
+  // Slug is always size `mini`
+  let normalizedSlug;
+  if (slug && slug['type']?.displayName === 'Slug') {
+    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+      size: 'mini',
+    });
+  }
+
   return (
     <div className={containerClasses}>
       {labelText && (
-        <label htmlFor={id} className={labelClasses}>
+        <Text as="label" htmlFor={id} className={labelClasses}>
           {labelText}
-        </label>
+        </Text>
       )}
       <div className={wrapperClasses}>
-        {input}
-        {isFluid && <DatePickerIcon datePickerType={datePickerType} />}
-        <DatePickerIcon
-          datePickerType={datePickerType}
-          invalid={invalid}
-          warn={warn}
-        />
+        <span>
+          {input}
+          {normalizedSlug}
+          {isFluid && <DatePickerIcon datePickerType={datePickerType} />}
+          <DatePickerIcon
+            datePickerType={datePickerType}
+            invalid={invalid}
+            warn={warn}
+          />
+        </span>
       </div>
       {invalid && (
         <>
           {isFluid && <hr className={`${prefix}--date-picker__divider`} />}
-          <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+          <Text as="div" className={`${prefix}--form-requirement`}>
+            {invalidText}
+          </Text>
         </>
       )}
       {warn && (
         <>
           {isFluid && <hr className={`${prefix}--date-picker__divider`} />}
-          <div className={`${prefix}--form-requirement`}>{warnText}</div>
+          <Text as="div" className={`${prefix}--form-requirement`}>
+            {warnText}
+          </Text>
         </>
       )}
-      {helperText && (
-        <div id={datePickerInputHelperId} className={helperTextClasses}>
+      {helperText && !invalid && (
+        <Text
+          as="div"
+          id={datePickerInputHelperId}
+          className={helperTextClasses}>
           {helperText}
-        </div>
+        </Text>
       )}
     </div>
   );
@@ -332,6 +358,11 @@ DatePickerInput.propTypes = {
    * Specify the size of the Date Picker Input. Currently supports either `sm`, `md`, or `lg` as an option.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `DatePickerInput` component
+   */
+  slug: PropTypes.node,
 
   /**
    * Specify the type of the `<input>`

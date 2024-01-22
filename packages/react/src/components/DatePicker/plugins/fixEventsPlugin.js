@@ -39,6 +39,12 @@ export default (config) => (fp) => {
       } else if (match(event, keys.ArrowDown)) {
         event.preventDefault();
         fp.open();
+      } else if (!fp.config.allowInput) {
+        // We override the default behaviour of Flatpickr, ideally when allowInput is set to false,
+        // the Delete/Backspace button clears all of the date, which we don't want, hence
+        // we stop event bubbling and the default Flatpickr's onChange behaviour here itself
+        event.stopPropagation();
+        event.preventDefault();
       }
     }
   };

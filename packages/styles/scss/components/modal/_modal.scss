@@ -12,6 +12,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../../utilities/ai-gradient' as *;
 @use '../../utilities/convert';
 @use '../../utilities/component-reset';
 @use '../../utilities/focus-outline' as *;
@@ -155,7 +156,6 @@
   .#{$prefix}--modal-container {
     position: fixed;
     display: grid;
-    overflow: hidden;
     background-color: $layer;
     block-size: 100%;
     grid-template-columns: 100%;
@@ -202,8 +202,8 @@
     font-weight: 400;
     grid-column: 1/-1;
     grid-row: 2/-2;
-    margin-block-end: $spacing-09;
     overflow-y: auto;
+    padding-block-end: $spacing-09;
     // Required to accommodate focus outline's negative offset:
     padding-block-start: $spacing-03;
     // anything besides text/p spans full width, with just 16px padding
@@ -347,22 +347,35 @@
   // -----------------------------
   // Modal overflow
   // -----------------------------
+  .#{$prefix}--modal-scroll-content {
+    // Required to accommodate focus outline's negative offset when scrolling in Chrome
+    border-block-end: 2px solid transparent;
+  }
   // Required so overflow-indicator disappears at end of content
   .#{$prefix}--modal-scroll-content > *:last-child {
-    padding-block-end: $spacing-07;
+    padding-block-end: $spacing-06;
   }
 
   .#{$prefix}--modal-content--overflow-indicator {
     position: absolute;
-    background-image: linear-gradient(to bottom, transparent, $layer);
-    block-size: convert.to-rem(32px);
-    content: '';
+    background: $layer;
+    block-size: convert.to-rem(48px);
     grid-column: 1/-1;
     grid-row: 2/-2;
-    inline-size: 100%;
-    inset-block-end: $spacing-09;
+    inline-size: calc(100% - $spacing-05);
+    inset-block-end: 0;
     inset-inline-start: 0;
     pointer-events: none;
+
+    &::before {
+      position: absolute;
+      background-image: linear-gradient(to bottom, transparent, $layer);
+      block-size: convert.to-rem(32px);
+      content: '';
+      inline-size: 100%;
+      inset-block-start: -32px;
+      pointer-events: none;
+    }
   }
 
   // Safari-only media query
@@ -379,7 +392,6 @@
   .#{$prefix}--modal-content:focus
     ~ .#{$prefix}--modal-content--overflow-indicator {
     margin: 0 2px 2px;
-    inline-size: calc(100% - 4px);
   }
 
   @media screen and (-ms-high-contrast: active) {
@@ -422,18 +434,20 @@
   // -----------------------------
   // Modal close btn
   // -----------------------------
-  .#{$prefix}--modal-close {
+
+  .#{$prefix}--modal-close-button {
     position: absolute;
-    z-index: 2;
-    overflow: hidden;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+  }
+
+  .#{$prefix}--modal-close {
     padding: convert.to-rem(12px);
     border: 2px solid transparent;
     background-color: transparent;
     block-size: 3rem;
     cursor: pointer;
     inline-size: 3rem;
-    inset-block-start: 0;
-    inset-inline-end: 0;
     transition: background-color $duration-fast-02 motion(standard, productive);
 
     &:hover {
@@ -471,6 +485,41 @@
   .#{$prefix}--modal-container--full-width .#{$prefix}--modal-content {
     padding: 0;
     margin: 0;
+  }
+
+  // Slug styles
+  .#{$prefix}--modal--slug .#{$prefix}--modal-container {
+    @include callout-gradient('default');
+
+    background-color: $layer;
+  }
+
+  // Start the gradient 64px from bottom only when two buttons are present
+  .#{$prefix}--modal--slug
+    .#{$prefix}--modal-container:has(
+      .#{$prefix}--btn-set:not(.#{$prefix}--modal-footer--three-button)
+        > button:not(:only-child)
+    ) {
+    @include callout-gradient('default', 64px);
+
+    background-color: $layer;
+  }
+
+  .#{$prefix}--modal--slug .#{$prefix}--slug {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+  }
+
+  .#{$prefix}--modal-header
+    > .#{$prefix}--slug:has(+ .#{$prefix}--modal-close-button),
+  .#{$prefix}--modal-header
+    > .#{$prefix}--modal-close-button
+    ~ .#{$prefix}--slug,
+  .#{$prefix}--modal--slug
+    .#{$prefix}--modal-container-body
+    > .#{$prefix}--slug {
+    inset-inline-end: convert.to-rem(48px);
   }
 
   // Windows HCM fix

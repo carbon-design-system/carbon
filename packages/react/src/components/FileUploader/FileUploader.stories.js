@@ -16,7 +16,6 @@ import {
   FileUploaderItem,
   FileUploaderSkeleton,
 } from './';
-import './FileUploader-story.scss';
 
 const filenameStatuses = ['edit', 'complete', 'uploading'];
 
@@ -65,6 +64,7 @@ export const _FileUploaderItem = (args) => {
     />
   );
 };
+
 _FileUploaderItem.argTypes = {
   errorBody: {
     control: 'text',
@@ -151,6 +151,21 @@ DragAndDropUploadContainerExampleApplication.args = {
   tabIndex: 0,
 };
 DragAndDropUploadContainerExampleApplication.argTypes = {
+  onChange: { action: 'onChange' },
+};
+
+export const DragAndDropUploadSingleContainerExampleApplication = (args) =>
+  require('./stories/drag-and-drop-single').default(args);
+
+DragAndDropUploadSingleContainerExampleApplication.args = {
+  labelText: 'Drag and drop a file here or click to upload',
+  name: '',
+  multiple: false,
+  accept: ['image/jpeg', 'image/png'],
+  disabled: false,
+  tabIndex: 0,
+};
+DragAndDropUploadSingleContainerExampleApplication.argTypes = {
   onChange: { action: 'onChange' },
 };
 

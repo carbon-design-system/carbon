@@ -41,9 +41,9 @@
     convert.to-rem(8px) convert.to-rem(16px),
     convert.to-rem(3px) convert.to-rem(16px)
   );
+  border-radius: convert.to-rem(2px);
   background-color: $background-inverse;
   block-size: auto;
-  border-radius: convert.to-rem(2px);
   color: $text-inverse;
   font-weight: 400;
   inline-size: max-content;

@@ -145,6 +145,22 @@ in a `Column` enables you to define responsive parameters for the column (`sm`,
   <Story of={GridStories.Subgrid} />
 </Canvas>
 
+For more specialized grid implementations you may want to disable the
+automatic subgrid definition. To achieve this you can wrap your nested `Grid` 
+in `GridSettings` and set `subgrid={false}`.
+
+```jsx
+<Grid>
+  <Column>
+    <GridSettings subgrid={false}>
+      <Grid>
+        <Column />
+      </Grid>
+    </GridSettings>
+  </Column>
+</Grid>
+```
+
 ## Mixed gutter modes
 
 The same way that you can pass in `condensed` to a root `Grid`, you can also

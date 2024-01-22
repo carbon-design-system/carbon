@@ -16,6 +16,7 @@
 @use '../../spacing' as *;
 @use '../../motion' as *;
 @use '../../layer' as *;
+@use '../../utilities/ai-gradient' as *;
 @use '../../utilities/box-shadow' as *;
 @use '../../utilities/button-reset';
 @use '../../utilities/component-reset';
@@ -307,7 +308,7 @@ $list-box-menu-width: convert.to-rem(300px);
     display: inline-flex;
     overflow: hidden;
     align-items: center;
-    // Account for the border in `.bx--list-box`
+    // Account for the border in `.cds--list-box`
     block-size: calc(100% + 1px);
     cursor: pointer;
     outline: none;
@@ -368,7 +369,7 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box--warning
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input--empty {
-    padding-inline-end: carbon--mini-units(9);
+    padding-inline-end: $spacing-10;
   }
 
   .#{$prefix}--list-box[data-invalid]
@@ -405,7 +406,7 @@ $list-box-menu-width: convert.to-rem(300px);
     block-size: convert.to-rem(24px);
     cursor: pointer;
     inline-size: convert.to-rem(24px);
-    inset-inline-end: $spacing-05;
+    inset-inline-end: $spacing-04;
     outline: none;
     transition: transform $duration-fast-01 motion(standard, productive);
   }
@@ -464,9 +465,9 @@ $list-box-menu-width: convert.to-rem(300px);
     align-items: center;
     justify-content: space-between;
     padding: convert.to-rem(8px);
+    border-radius: convert.to-rem(12px);
     background-color: $background-inverse;
     block-size: convert.to-rem(24px);
-    border-radius: convert.to-rem(12px);
     color: $text-inverse;
     inline-size: auto;
     inset-block-start: auto;
@@ -485,8 +486,8 @@ $list-box-menu-width: convert.to-rem(300px);
     margin-inline-start: convert.to-rem(4px);
 
     &:hover {
-      background-color: $button-secondary-hover;
       border-radius: 50%;
+      background-color: $button-secondary-hover;
     }
   }
 
@@ -886,6 +887,85 @@ $list-box-menu-width: convert.to-rem(300px);
     background-color: inherit;
     min-inline-size: 0;
     text-overflow: ellipsis;
+  }
+
+  // Slug styles
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: $spacing-08;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box:not(:has(.#{$prefix}--slug--revert)) {
+    @include ai-gradient;
+  }
+
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box
+    input[role='combobox'] {
+    border-block-end-color: transparent;
+  }
+
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--text-input--empty {
+    padding-inline-end: $spacing-10;
+  }
+
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty) {
+    padding-inline-end: $spacing-12;
+  }
+
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--text-input--empty,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--text-input--empty,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field {
+    padding-inline-end: $spacing-12;
+  }
+
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty),
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty) {
+    padding-inline-end: convert.to-rem(120px);
+  }
+
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--slug,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--slug {
+    inset-inline-end: $spacing-10;
+  }
+
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    ~ .#{$prefix}--slug {
+    inset-inline-end: $spacing-10;
+  }
+
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    ~ .#{$prefix}--slug,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    ~ .#{$prefix}--slug {
+    inset-inline-end: convert.to-rem(88px);
   }
 
   // Windows HCM fix

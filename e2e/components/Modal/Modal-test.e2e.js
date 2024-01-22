@@ -37,6 +37,14 @@ test.describe('Modal', () => {
           theme,
         });
       });
+
+      test('with scrolling content modal @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Modal',
+          id: 'components-modal--with-scrolling-content',
+          theme,
+        });
+      });
     });
   });
 });

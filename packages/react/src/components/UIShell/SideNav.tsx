@@ -28,7 +28,7 @@ import { useMatchMedia } from '../../internal/useMatchMedia';
 // TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
 
-interface SideNavProps extends ComponentProps<'nav'> {
+export interface SideNavProps extends ComponentProps<'nav'> {
   expanded?: boolean | undefined;
   defaultExpanded?: boolean | undefined;
   isChildOfHeader?: boolean | undefined;
@@ -239,7 +239,7 @@ function SideNavRenderFunction(
         tabIndex={-1}
         ref={navRef}
         className={`${prefix}--side-nav__navigation ${className}`}
-        inert={!isRail && (expanded || isLg ? undefined : -1)}
+        inert={!isRail ? (expanded || isLg ? undefined : -1) : undefined}
         {...accessibilityLabel}
         {...eventHandlers}
         {...other}>

@@ -10,10 +10,9 @@ import React, {
   type RefObject,
 } from 'react';
 import { isElement } from 'react-is';
-import PropTypes from 'prop-types';
+import PropTypes, { ReactNodeLike } from 'prop-types';
 import { ModalHeader, type ModalHeaderProps } from './ModalHeader';
 import { ModalFooter, type ModalFooterProps } from './ModalFooter';
-
 import cx from 'classnames';
 
 import toggleClass from '../../tools/toggleClass';
@@ -29,7 +28,7 @@ export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
 
   /**
    * Provide whether the modal content has a form element.
-   * If `true` is used here, non-form child content should have `bx--modal-content__regular-content` class.
+   * If `true` is used here, non-form child content should have `cds--modal-content__regular-content` class.
    */
   hasForm?: boolean;
 
@@ -83,7 +82,6 @@ ModalBody.propTypes = {
   /**
    * Required props for the accessibility label of the header
    */
-  // @ts-expect-error: Built-in prop-types > TS logic doesn't jive well with custom validators
   ['aria-label']: requiredIfGivenPropIsTruthy(
     'hasScrollingContent',
     PropTypes.string
@@ -101,7 +99,7 @@ ModalBody.propTypes = {
 
   /**
    * Provide whether the modal content has a form element.
-   * If `true` is used here, non-form child content should have `bx--modal-content__regular-content` class.
+   * If `true` is used here, non-form child content should have `cds--modal-content__regular-content` class.
    */
   hasForm: PropTypes.bool,
 
@@ -113,12 +111,12 @@ ModalBody.propTypes = {
 
 export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * Specify the aria-label for bx--modal-container
+   * Specify the aria-label for cds--modal-container
    */
   'aria-label'?: string;
 
   /**
-   * Specify the aria-labelledby for bx--modal-container
+   * Specify the aria-labelledby for cds--modal-container
    */
   'aria-labelledby'?: string;
 
@@ -181,6 +179,11 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   selectorsFloatingMenus?: Array<string | null | undefined>;
 
   size?: 'xs' | 'sm' | 'md' | 'lg';
+
+  /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `ComposedModal` component
+   */
+  slug?: ReactNodeLike;
 }
 
 const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
@@ -197,10 +200,11 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       onKeyDown,
       open,
       preventCloseOnClickOutside,
-      selectorPrimaryFocus,
+      selectorPrimaryFocus = '[data-modal-primary-focus]',
       selectorsFloatingMenus,
       size,
       launcherButtonRef,
+      slug,
       ...rest
     },
     ref
@@ -271,8 +275,11 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
 
     const modalClass = cx(
       `${prefix}--modal`,
-      isOpen && 'is-visible',
-      danger && `${prefix}--modal--danger`,
+      {
+        'is-visible': isOpen,
+        [`${prefix}--modal--danger`]: danger,
+        [`${prefix}--modal--slug`]: slug,
+      },
       customClassName
     );
 
@@ -345,6 +352,14 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       }
     }, [open, selectorPrimaryFocus, isOpen]);
 
+    // Slug is always size `lg`
+    let normalizedSlug;
+    if (slug && slug['type']?.displayName === 'Slug') {
+      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+        size: 'lg',
+      });
+    }
+
     return (
       <div
         {...rest}
@@ -370,6 +385,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
             Focus sentinel
           </button>
           <div ref={innerModal} className={`${prefix}--modal-container-body`}>
+            {normalizedSlug}
             {childrenWithProps}
           </div>
           {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
@@ -387,12 +403,12 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
 
 ComposedModal.propTypes = {
   /**
-   * Specify the aria-label for bx--modal-container
+   * Specify the aria-label for cds--modal-container
    */
   ['aria-label']: PropTypes.string,
 
   /**
-   * Specify the aria-labelledby for bx--modal-container
+   * Specify the aria-labelledby for cds--modal-container
    */
   ['aria-labelledby']: PropTypes.string,
 
@@ -467,9 +483,11 @@ ComposedModal.propTypes = {
    * Specify the size variant.
    */
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
-};
-ComposedModal.defaultProps = {
-  selectorPrimaryFocus: '[data-modal-primary-focus]',
+
+  /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `ComposedModal` component
+   */
+  slug: PropTypes.node,
 };
 
 export default ComposedModal;

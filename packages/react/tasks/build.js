@@ -14,15 +14,21 @@ const typescript = require('@rollup/plugin-typescript');
 const path = require('path');
 const { rollup } = require('rollup');
 const stripBanner = require('rollup-plugin-strip-banner');
+const {
+  loadBaseTsCompilerOpts,
+  loadTsCompilerOpts,
+} = require('typescript-config-carbon');
 const packageJson = require('../package.json');
 
 async function build() {
   const reactEntrypoint = {
     filepath: path.resolve(__dirname, '..', 'src', 'index.ts'),
+    rootDir: 'src',
     outputDirectory: path.resolve(__dirname, '..'),
   };
   const iconsEntrypoint = {
-    filepath: path.resolve(__dirname, '..', 'icons', 'src', 'index.js'),
+    filepath: path.resolve(__dirname, '..', 'icons', 'src', 'index.ts'),
+    rootDir: path.join('icons', 'src'),
     outputDirectory: path.resolve(__dirname, '..', 'icons'),
   };
   const formats = [
@@ -45,8 +51,8 @@ async function build() {
 
     const reactInputConfig = getRollupConfig(
       reactEntrypoint.filepath,
-      outputDirectory,
-      true
+      reactEntrypoint.rootDir,
+      outputDirectory
     );
     const reactBundle = await rollup(reactInputConfig);
 
@@ -58,20 +64,24 @@ async function build() {
       banner,
       exports: 'named',
     });
-  }
 
-  const iconsInputConfig = getRollupConfig(iconsEntrypoint.filepath);
-  const iconsBundle = await rollup(iconsInputConfig);
+    const iconsInputConfig = getRollupConfig(
+      iconsEntrypoint.filepath,
+      iconsEntrypoint.rootDir,
+      outputDirectory
+    );
+    const iconsBundle = await rollup(iconsInputConfig);
 
-  // Build @carbon/react icons
-  for (const format of formats) {
-    await iconsBundle.write({
-      file:
-        format.type === 'commonjs' ? 'icons/index.js' : 'icons/index.esm.js',
-      format: format.type,
-      banner,
-      exports: 'named',
-    });
+    // Build @carbon/react icons
+    for (const format of formats) {
+      await iconsBundle.write({
+        file:
+          format.type === 'commonjs' ? 'icons/index.js' : 'icons/index.esm.js',
+        format: format.type,
+        banner,
+        exports: 'named',
+      });
+    }
   }
 }
 
@@ -98,6 +108,7 @@ const babelConfig = {
       },
     ],
     '@babel/preset-react',
+    '@babel/preset-typescript',
   ],
   plugins: [
     'dev-expression',
@@ -107,9 +118,17 @@ const babelConfig = {
     '@babel/plugin-transform-react-constant-elements',
   ],
   babelHelpers: 'bundled',
+  extensions: ['.ts', '.tsx', '.js', '.jsx'],
 };
 
-function getRollupConfig(input, outDir, useTS) {
+function getTsCompilerOptions() {
+  const baseOpts = loadBaseTsCompilerOpts();
+  const projectTsConfigPath = path.resolve(__dirname, '../tsconfig.json');
+  const overrideOpts = loadTsCompilerOpts(projectTsConfigPath);
+  return { ...baseOpts, ...overrideOpts };
+}
+
+function getRollupConfig(input, rootDir, outDir) {
   return {
     input,
     // Mark dependencies listed in `package.json` as external so that they are
@@ -132,8 +151,17 @@ function getRollupConfig(input, outDir, useTS) {
       commonjs({
         include: /node_modules/,
       }),
-      // Modify plugins for builds that require typescript
-      ...(useTS ? getTSPlugins(outDir) : getPlugins()),
+      typescript({
+        noEmitOnError: true,
+        noForceEmit: true,
+        outputToFilesystem: false,
+        compilerOptions: {
+          ...getTsCompilerOptions(),
+          rootDir,
+          outDir,
+        },
+      }),
+      babel(babelConfig),
       stripBanner(),
       {
         transform(_code, id) {
@@ -148,39 +176,6 @@ function getRollupConfig(input, outDir, useTS) {
       },
     ],
   };
-}
-
-/**
- * Rollup plugins to support typescript compilation/transpilation
- * @param {*} outDir
- * @returns
- */
-function getTSPlugins(outDir) {
-  return [
-    typescript({
-      noEmitOnError: true,
-      noForceEmit: true,
-      outputToFilesystem: false,
-      compilerOptions: {
-        rootDir: 'src',
-        emitDeclarationOnly: true,
-        outDir,
-      },
-    }),
-    babel({
-      ...babelConfig,
-      presets: [...babelConfig.presets, '@babel/preset-typescript'],
-      extensions: ['.ts', '.tsx', '.js', '.jsx'],
-    }),
-  ];
-}
-
-/**
- * Rollup plugins to support pure JS compilation
- * @returns
- */
-function getPlugins() {
-  return [babel(babelConfig)];
 }
 
 build().catch((error) => {

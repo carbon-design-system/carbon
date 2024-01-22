@@ -344,6 +344,31 @@ Avoid nesting selectors, this will make it easier to maintain in the future.
 }
 ```
 
+Use
+[CSS logical properties and values](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values)
+for layout. These are impacted by the writing mode and provide support for
+right-to-left styling out of the box.
+
+```scss
+// Don't do this
+.my-element {
+  padding-top: 2em;
+  padding-bottom: 2em;
+  margin-left: 2em;
+  position: relative;
+  top: 0.2em;
+}
+
+// Do this instead
+.my-element {
+  padding-block-start: 2em;
+  padding-block-end: 2em;
+  margin-inline-start: 2em;
+  position: relative;
+  inset-block-start: 0.2em;
+}
+```
+
 ### Sass documentation
 
 [SassDoc](http://sassdoc.com) is used to document the Carbon Sass source.
