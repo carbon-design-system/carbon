@@ -1014,10 +1014,6 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
-          "name": "slug-callout-shadow-inner",
-          "type": "color",
-        },
-        Object {
           "name": "slug-callout-shadow-outer-01",
           "type": "color",
         },
@@ -1026,11 +1022,31 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
-          "name": "slug-callout-border-01",
+          "name": "ai-inner-shadow",
           "type": "color",
         },
         Object {
-          "name": "slug-callout-border-02",
+          "name": "ai-aura-start",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-aura-end",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-border-strong",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-border-start",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-border-end",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-drop-shadow",
           "type": "color",
         },
         Object {
