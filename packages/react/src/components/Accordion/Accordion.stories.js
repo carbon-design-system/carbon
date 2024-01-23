@@ -7,7 +7,7 @@
 
 /* eslint-disable no-console */
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   default as Accordion,
   AccordionItem,
@@ -551,6 +551,52 @@ export const Playground = (args) => (
     </AccordionItem>
   </Accordion>
 );
+
+export const TestPlayground = () => {
+  const [openTab, setOpenTab] = useState(true);
+  const [openTab2, setOpenTab2] = useState(0);
+
+  return (
+    <div>
+      <h3>Example 1</h3>
+      <br />
+
+      <button type="button" onClick={() => setOpenTab(!openTab)}>
+        Controlled state
+      </button>
+      <br />
+      <br />
+
+      <Accordion>
+        <AccordionItem title="item 1" open={openTab}>
+          TAB1 open
+        </AccordionItem>
+        <AccordionItem title="item 2" open={openTab}>
+          TAB2 open
+        </AccordionItem>
+      </Accordion>
+
+      <br />
+      <h3>Example 2</h3>
+      <br />
+
+      <Accordion>
+        <AccordionItem
+          title="item 1"
+          open={openTab2 === 1}
+          onHeadingClick={() => setOpenTab2(1)}>
+          TAB1 open
+        </AccordionItem>
+        <AccordionItem
+          title="item 2"
+          open={openTab2 === 0}
+          onHeadingClick={() => setOpenTab2(0)}>
+          TAB2 open
+        </AccordionItem>
+      </Accordion>
+    </div>
+  );
+};
 
 Playground.args = {
   disabled: false,
