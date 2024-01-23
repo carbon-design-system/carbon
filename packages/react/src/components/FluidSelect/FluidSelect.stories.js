@@ -18,7 +18,7 @@ import { Information } from '@carbon/icons-react';
 import mdx from './FluidSelect.mdx';
 
 export default {
-  title: 'Experimental/unstable__FluidSelect',
+  title: 'Experimental/Fluid Components/unstable__FluidSelect',
   component: FluidSelect,
   subcomponents: {
     FluidSelectSkeleton,
