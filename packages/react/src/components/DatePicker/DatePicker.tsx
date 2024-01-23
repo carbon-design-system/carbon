@@ -28,7 +28,6 @@ import { usePrefix } from '../../internal/usePrefix';
 import { useSavedCallback } from '../../internal/useSavedCallback';
 import { FormContext } from '../FluidForm';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
-import { ReactAttr } from '../../types/common';
 
 // Weekdays shorthand for english locale
 l10n.en.weekdays.shorthand.forEach((_day, index) => {
@@ -186,7 +185,7 @@ function updateClassNames(calendar, prefix) {
     });
   }
 }
-type ExcludedAttributes = 'value' | 'onChange' | 'locale';
+
 export type DatePickerTypes = 'simple' | 'single' | 'range';
 export type CalRef = {
   inline: boolean;
@@ -200,8 +199,7 @@ export type CalRef = {
   plugins: [];
   clickOpens: any;
 };
-interface DatePickerProps
-  extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes> {
+interface DatePickerProps {
   /**
    * Flatpickr prop passthrough enables direct date input, and when set to false,
    * we must clear dates manually by resetting the value prop to empty string making it a controlled input.
@@ -483,7 +481,7 @@ const DatePicker = React.forwardRef(function DatePicker(
     [String(className)]: className,
   });
 
-  const childrenWithProps = React.Children.toArray(children).map(
+  const childrenWithProps = React.Children.toArray(children as any).map(
     (child: any, index) => {
       if (
         index === 0 &&

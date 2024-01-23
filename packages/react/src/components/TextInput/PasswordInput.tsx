@@ -348,7 +348,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     setInputType(type);
   }, [type]);
 
-  const Icon = normalizedProps.icon as typeof React.Component;
+  const Icon = normalizedProps.icon as any;
 
   return (
     <div className={inputWrapperClasses}>
