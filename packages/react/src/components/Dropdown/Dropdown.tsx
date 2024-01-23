@@ -506,7 +506,7 @@ const Dropdown = React.forwardRef(
                 ? renderSelectedItem
                   ? renderSelectedItem(selectedItem)
                   : itemToString(selectedItem)
-                : label}
+                : (label as any)}
             </span>
             <ListBox.MenuIcon
               isOpen={isOpen}
