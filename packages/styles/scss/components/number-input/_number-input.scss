@@ -454,7 +454,9 @@
   }
 
   .#{$prefix}--number__input-wrapper--slug
-    input[type='number']:not(:has(~ .#{$prefix}--slug--revert))
+    input[type='number']:not([data-invalid]):not(
+      :has(~ .#{$prefix}--slug--revert)
+    )
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
     border-block-end-color: $ai-border-strong;
