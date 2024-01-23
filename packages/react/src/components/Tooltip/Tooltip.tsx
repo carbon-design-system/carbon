@@ -120,16 +120,13 @@ function Tooltip<T extends React.ElementType>({
   };
 
   function getChildEventHandlers(childProps: any) {
-    const eventHandlerFunctions = [
-      'onFocus',
-      'onBlur',
-      'onClick',
-      'onMouseEnter',
-    ];
+    const eventHandlerFunctions = Object.keys(triggerProps).filter((prop) =>
+      prop.startsWith('on')
+    );
     const eventHandlers = {};
     eventHandlerFunctions.forEach((functionName) => {
       eventHandlers[functionName] = (evt: React.SyntheticEvent) => {
-        triggerProps[functionName]();
+        triggerProps[functionName](evt);
         if (childProps?.[functionName]) {
           childProps?.[functionName](evt);
         }
