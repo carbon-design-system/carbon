@@ -233,14 +233,13 @@ export const aiBorderStrong = blue50;
 export const aiBorderStart = blue40;
 export const aiBorderEnd = blue20;
 export const aiDropShadow = rgba(blue60, 0.32);
+export const aiAuraHoverBackground = blue10;
+export const aiAuraHoverStart = rgba(blue50, 0.4);
+export const aiAuraHoverEnd = rgba(white, 0);
 
 // Callout
 export const slugCalloutShadowOuter01 = rgba(blue70, 0.25);
 export const slugCalloutShadowOuter02 = rgba(black, 0.1);
-
-//// Changed
-export const slugCalloutAuraStart = aiAuraStart;
-export const slugCalloutAuraEnd = aiAuraEnd;
 
 //// Not used in phase 2 / possibly remove?
 export const slugCalloutGradientTop = rgba(gray10, 0.85);
@@ -248,6 +247,8 @@ export const slugCalloutGradientBottom = rgba(gray20, 0.85);
 export const aiGradientStart01 = rgba(coolGray10, 0.5);
 export const aiGradientStart02 = rgba(blue10, 0.5);
 export const aiGradientEnd = rgba(white, 0);
+export const slugCalloutAuraStart = aiAuraStart;
+export const slugCalloutAuraEnd = aiAuraEnd;
 
 // One off tokens for caret
 export const slugCalloutCaretCenter = '#A7C7FF';
