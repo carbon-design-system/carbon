@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import classnames from 'classnames';
 import Search, { type SearchProps } from '../Search';
 import { usePrefix } from '../../internal/usePrefix';
@@ -31,10 +31,14 @@ function ExpandableSearch({
       evt.relatedTarget &&
       evt.relatedTarget.classList.contains(`${prefix}--search-close`);
 
-    if (expanded && !relatedTargetIsAllowed && !hasContent) {
+    if (expanded && !relatedTargetIsAllowed && !hasContent && !isExpanded) {
       setExpanded(false);
     }
   }
+
+  useEffect(() => {
+    setExpanded(!!isExpanded);
+  }, [isExpanded]);
 
   function handleChange(evt) {
     setHasContent(evt.target.value !== '');
@@ -50,7 +54,7 @@ function ExpandableSearch({
       evt.stopPropagation();
 
       // escape key only clears if the input is empty, otherwise it clears the input
-      if (!evt.target?.value) {
+      if (!evt.target?.value && !isExpanded) {
         setExpanded(false);
       }
     }

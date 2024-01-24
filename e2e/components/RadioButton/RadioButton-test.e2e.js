@@ -21,6 +21,14 @@ test.describe('RadioButton', () => {
           theme,
         });
       });
+
+      test('vertical @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'RadioButton',
+          id: 'components-radiobutton--vertical',
+          theme,
+        });
+      });
     });
   });
 });

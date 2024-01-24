@@ -897,8 +897,15 @@ $list-box-menu-width: convert.to-rem(300px);
     transform: translateY(-50%);
   }
 
-  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--list-box {
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box:not(:has(.#{$prefix}--slug--revert)) {
     @include ai-gradient;
+  }
+
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box
+    input[role='combobox'] {
+    border-block-end-color: transparent;
   }
 
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--list-box__field,

@@ -11,6 +11,18 @@
   }
 }
 
+.slug-container-example.centered {
+  margin: 0;
+  height: calc(100vh - 84px);
+  width: calc(100vw - 84px);
+  align-items: center;
+  justify-content: center;
+
+  & > * {
+    margin: 0;
+  }
+}
+
 .slug-container .cds--toggletip-content p {
   @include type.type-style('body-compact-01');
 }
