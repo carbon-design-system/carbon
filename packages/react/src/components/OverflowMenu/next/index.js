@@ -126,7 +126,6 @@ OverflowMenu.propTypes = {
   menuAlignment: PropTypes.oneOf([
     'top-left',
     'top-right',
-
     'bottom-left',
     'bottom-right',
   ]),
