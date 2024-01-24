@@ -23,7 +23,7 @@ import {
   TileBelowTheFoldContent,
 } from './';
 import TileGroup from '../TileGroup/TileGroup';
-import { Download } from '@carbon/icons-react';
+import { Launch } from '@carbon/icons-react';
 
 export default {
   title: 'Components/Tile',
@@ -98,7 +98,7 @@ export const ClickableWithCustomIcon = (args) => {
     <ClickableTile
       id="clickable-tile-1"
       href="https://www.carbondesignsystem.com/"
-      renderIcon={Download}
+      renderIcon={Launch}
       {...args}>
       Clickable Tile
     </ClickableTile>

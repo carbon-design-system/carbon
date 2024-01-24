@@ -215,10 +215,11 @@ class HeaderMenu extends React.Component {
     const hasActiveDescendant = (childrenArg) =>
       React.Children.toArray(childrenArg).some(
         (child) =>
-          child.props.isActive ||
-          child.props.isCurrentPage ||
-          (child.props.children instanceof Array &&
-            hasActiveDescendant(child.props.children))
+          child.props &&
+          (child.props.isActive ||
+            child.props.isCurrentPage ||
+            (child.props.children instanceof Array &&
+              hasActiveDescendant(child.props.children)))
       );
 
     const accessibilityLabel = {

@@ -33,7 +33,7 @@ export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
 export type ModalSize = (typeof ModalSizes)[number];
 
 export interface ModalSecondaryButton {
-  buttonText?: string;
+  buttonText?: string | React.ReactNode;
 
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
