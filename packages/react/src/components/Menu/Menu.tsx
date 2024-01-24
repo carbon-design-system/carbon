@@ -29,7 +29,7 @@ const spacing = 8; // distance to keep to window edges, in px
 
 interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
-   * Accepts the width of the button is being passed
+   * The width of the button being passed down
    */
   actionButtonWidth?: number;
   /**
