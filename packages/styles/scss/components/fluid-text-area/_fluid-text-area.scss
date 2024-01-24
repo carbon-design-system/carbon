@@ -219,7 +219,10 @@
   }
 
   // Slug styles
-  .#{$prefix}--text-area--fluid .#{$prefix}--text-area__wrapper--slug {
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--slug:not(
+      :has(~ .#{$prefix}--slug--revert)
+    ) {
     @include ai-gradient;
   }
 
