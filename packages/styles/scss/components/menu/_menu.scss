@@ -17,7 +17,6 @@
 @use '../../utilities/z-index' as *;
 @use '../../utilities/convert';
 @use '../../utilities/component-reset';
-@use '../../utilities/custom-property';
 
 /// Menu styles
 /// @access public
@@ -39,10 +38,6 @@
     overflow-y: auto;
     visibility: hidden;
   }
-
-  // .#{$prefix}--menu--box-shadow-top {
-  //   @include box-shadow-top;
-  // }
 
   .#{$prefix}--menu--with-icons {
     min-inline-size: 12rem;
