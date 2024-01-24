@@ -171,12 +171,12 @@ ComboButton.propTypes = {
    */
   menuAlignment: PropTypes.oneOf([
     'top',
-    'top-left',
-    'top-right',
+    'top-start',
+    'top-end',
 
     'bottom',
-    'bottom-left',
-    'bottom-right',
+    'bottom-start',
+    'bottom-end',
   ]),
 
   /**

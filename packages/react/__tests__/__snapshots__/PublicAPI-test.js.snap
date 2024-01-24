@@ -1378,11 +1378,11 @@ Map {
         "args": Array [
           Array [
             "top",
-            "top-left",
-            "top-right",
+            "top-start",
+            "top-end",
             "bottom",
-            "bottom-left",
-            "bottom-right",
+            "bottom-start",
+            "bottom-end",
           ],
         ],
         "type": "oneOf",
@@ -4593,11 +4593,11 @@ Map {
         "args": Array [
           Array [
             "top",
-            "top-left",
-            "top-right",
+            "top-start",
+            "top-end",
             "bottom",
-            "bottom-left",
-            "bottom-right",
+            "bottom-start",
+            "bottom-end",
           ],
         ],
         "type": "oneOf",

@@ -124,10 +124,10 @@ OverflowMenu.propTypes = {
    * Specify how the menu should align with the button element
    */
   menuAlignment: PropTypes.oneOf([
-    'top-left',
-    'top-right',
-    'bottom-left',
-    'bottom-right',
+    'top-start',
+    'top-end',
+    'bottom-start',
+    'bottom-end',
   ]),
 
   /**
