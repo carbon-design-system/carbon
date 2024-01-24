@@ -430,7 +430,7 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
 
 Menu.propTypes = {
   /**
-   * Accepts the width of the button is being passed
+   * The width of the button being passed down
    */
   actionButtonWidth: PropTypes.number,
 
