@@ -2,9 +2,16 @@
 
 exports[`Public API should only change with a semver change 1`] = `
 Array [
+  "aiAuraEnd",
+  "aiAuraStart",
+  "aiBorderEnd",
+  "aiBorderStart",
+  "aiBorderStrong",
+  "aiDropShadow",
   "aiGradientEnd",
   "aiGradientStart01",
   "aiGradientStart02",
+  "aiInnerShadow",
   "background",
   "backgroundActive",
   "backgroundBrand",
@@ -284,8 +291,6 @@ Array [
   "slugCalloutAuraStartHover01",
   "slugCalloutAuraStartHover02",
   "slugCalloutAuraStartSelected",
-  "slugCalloutBorder01",
-  "slugCalloutBorder02",
   "slugCalloutCaretBottom",
   "slugCalloutCaretBottomBackground",
   "slugCalloutCaretBottomBackgroundActions",
@@ -296,7 +301,6 @@ Array [
   "slugCalloutGradientTop",
   "slugCalloutGradientTopHover",
   "slugCalloutGradientTopSelected",
-  "slugCalloutShadowInner",
   "slugCalloutShadowOuter01",
   "slugCalloutShadowOuter02",
   "slugGradient",
