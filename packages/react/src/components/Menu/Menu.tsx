@@ -292,7 +292,7 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
       axes.x.size = actionButtonWidth;
     }
 
-    // if 'axes.x.anchor' is lower than 87 switch render side
+    // if 'axes.x.anchor' is lower than 87px dynamically switch render side
     if (
       actionButtonWidth &&
       (menuAlignment === 'bottom-right' || menuAlignment === 'top-right') &&
