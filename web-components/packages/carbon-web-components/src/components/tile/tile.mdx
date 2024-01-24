@@ -1,4 +1,4 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Markdown } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 
 # Tile
@@ -30,8 +30,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/tile/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['tile'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['tile'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -58,7 +58,7 @@ contain separate internal CTAs.
 
 ## `<cds-clickable-tile>` attributes and properties
 
-<Props of="cds-clickable-tile" />
+<ArgsTable of="cds-clickable-tile" />
 
 ## Radio tile
 
@@ -81,7 +81,7 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-radio-tile selected>`) and `false` means not setting the attribute (e.g.
 `<cds-radio-tile>` without `selected` attribute).
 
-<Props of="cds-radio-tile" />
+<ArgsTable of="cds-radio-tile" />
 
 ## Selectable tile
 
@@ -97,7 +97,7 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-selectable-tile selected>`) and `false` means not setting the attribute
 (e.g. `<cds-selectable-tile>` without `selected` attribute).
 
-<Props of="cds-selectable-tile" />
+<ArgsTable of="cds-selectable-tile" />
 
 ## Multi Select
 
@@ -163,4 +163,4 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-expandable-tile expanded>`) and `false` means not setting the attribute
 (e.g. `<cds-expandable-tile>` without `expanded` attribute).
 
-<Props of="cds-expandable-tile" />
+<ArgsTable of="cds-expandable-tile" />

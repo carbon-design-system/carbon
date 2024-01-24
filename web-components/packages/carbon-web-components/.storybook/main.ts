@@ -105,6 +105,8 @@ const stories = glob.sync(
     '../src/**/textarea.stories.ts',
     '../src/**/text-input.mdx',
     '../src/**/text-input.stories.ts',
+    '../src/**/tile.mdx',
+    '../src/**/tile.stories.ts',
     '../src/**/tooltip.mdx',
     '../src/**/tooltip.stories.ts',
     '../src/**/ui-shell.mdx',

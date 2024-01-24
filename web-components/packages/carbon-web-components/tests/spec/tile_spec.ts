@@ -17,7 +17,7 @@ import {
   clickable,
   expandable,
   multiSelectable,
-} from '../../src/components/tile/tile-story';
+} from '../../src/components/tile/tile.stories';
 
 const clickableTemplate = (props?) =>
   clickable({
