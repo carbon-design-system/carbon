@@ -255,6 +255,17 @@ export const slugCalloutCaretBottom = blue20;
 export const slugCalloutCaretBottomBackgroundActions = '#D2DCEE';
 export const slugCalloutCaretBottomBackground = '#CCDBF8';
 
+// Chat tokens
+export const chatPromptBackground = white;
+export const chatPromptBorderStart = gray10;
+export const chatPromptBorderEnd = rgba(gray10, 0);
+export const chatBubbleUser = gray20;
+export const chatBubbleAgent = white;
+export const chatBubbleAgentBorder = gray20;
+export const chatAvatarBot = blue60;
+export const chatAvatarAgent = gray100;
+export const chatAvatarUser = gray100;
+
 export {
   // Type
   caption01,
