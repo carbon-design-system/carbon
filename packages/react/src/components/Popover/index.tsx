@@ -4,6 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+// @ts-nocheck
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -36,6 +37,7 @@ const PopoverContext = React.createContext<PopoverContext>({
   floating: {
     current: null,
   },
+  // the refs below are new from floating-ui work
   setFloating: {
     current: null,
   },
@@ -201,6 +203,7 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
       parseFloat(
         getStyle.getPropertyValue('--cds-popover-offset').split('rem', 1)[0]
       ) * -16;
+    console.log(`popover offset: ${popoverOffsetPx.current}`);
   });
 
   const floatingUIConfig = autoAlign
@@ -208,7 +211,7 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
         placement: shimmedAlign,
         // Middleware order matters, arrow should be last
         middleware: [
-          offset(10),
+          // offset(-10),
           flip({ fallbackAxisSideDirection: 'start' }),
           arrow({
             element: caretRef,
@@ -242,33 +245,15 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
 
   useEffect(() => {
     if (autoAlign) {
-      const logicalPropertyMap = {
-        top: 'insetBlockStart',
-        right: 'insetInlineEnd',
-        bottom: 'insetBlockEnd',
-        left: 'insetInlineStart',
-      };
-
       Object.keys(floatingStyles).forEach((style) => {
-        // eslint-disable-next-line no-prototype-builtins
-        if (logicalPropertyMap.hasOwnProperty(style)) {
-          return (refs.floating.current.style[logicalPropertyMap[style]] =
-            floatingStyles[style]);
-        }
-        return (refs.floating.current.style[style] = floatingStyles[style]);
-
-        // refs.floating.current.style[style] = floatingStyles[style];
+        refs.floating.current.style[style] = floatingStyles[style];
       });
+
       if (middlewareData && middlewareData.arrow) {
         const { x = 0, y = 0 } = middlewareData.arrow;
-        console.log(`popoverOffsetPx: ${popoverOffsetPx.current}`);
 
-        caretRef.current.style[logicalPropertyMap['left']] = x
-          ? `${x}px`
-          : `${popoverOffsetPx.current}px`;
-        caretRef.current.style[logicalPropertyMap['top']] = y
-          ? `${y}px`
-          : `${popoverOffsetPx.current}px`;
+        caretRef.current.style.left = x != null ? `${x}px` : '';
+        caretRef.current.style.top = y != null ? `${y}px` : '';
       }
     }
   }, [floatingStyles, refs.floating, autoAlign, middlewareData]);
@@ -282,7 +267,7 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
       [`${prefix}--popover--drop-shadow`]: dropShadow,
       [`${prefix}--popover--high-contrast`]: highContrast,
       [`${prefix}--popover--open`]: open,
-      // [`${prefix}--popover--auto-align`]: autoAlign,
+      [`${prefix}--popover--auto-align`]: autoAlign,
       [`${prefix}--popover--${currentAlignment}`]: true,
       [`${prefix}--popover--tab-tip`]: isTabTip,
     },
@@ -308,19 +293,19 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
 
   const BaseComponentAsAny = BaseComponent as any;
 
+  console.log(`
+  isPositioned: ${isPositioned}
+  placement: ${placement}
+  shimmedAlign: ${shimmedAlign}
+
+  `);
+
   return (
-    <>
-      <PopoverContext.Provider value={value}>
-        <BaseComponentAsAny {...rest} className={className} ref={ref}>
-          {isTabTip ? mappedChildren : children}
-        </BaseComponentAsAny>
-      </PopoverContext.Provider>
-      <div style={{ marginTop: '10rem', position: 'absolute' }}>
-        <p>isPositioned: {isPositioned ? 'yes' : 'no'}</p>
-        <p>placement: {placement}</p>
-        <p>shimmedAlign: {shimmedAlign}</p>
-      </div>
-    </>
+    <PopoverContext.Provider value={value}>
+      <BaseComponentAsAny {...rest} className={className} ref={ref}>
+        {isTabTip ? mappedChildren : children}
+      </BaseComponentAsAny>
+    </PopoverContext.Provider>
   );
 }
 
@@ -448,10 +433,10 @@ function PopoverContentRenderFunction(
   const prefix = usePrefix();
   const { floating, setFloating, caretRef, autoAlign } =
     React.useContext(PopoverContext);
-  const ref = useMergedRefs([floating, forwardRef, setFloating]);
+  const ref = useMergedRefs([floating, forwardRef]);
 
   return (
-    <span {...rest} className={`${prefix}--popover`}>
+    <span {...rest} className={`${prefix}--popover`} ref={setFloating}>
       <span className={cx(`${prefix}--popover-content`, className)} ref={ref}>
         {children}
       </span>

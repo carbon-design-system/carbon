@@ -7,7 +7,7 @@
 
 import './story.scss';
 import { Checkbox as CheckboxIcon } from '@carbon/icons-react';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { Popover, PopoverContent } from '../Popover';
 import RadioButton from '../RadioButton';
 import RadioButtonGroup from '../RadioButtonGroup';
@@ -388,36 +388,37 @@ export const AutoAlign = () => {
 
 export const AutoAlignFloatingUI = () => {
   const [open, setOpen] = useState(true);
+  const ref = useRef();
+
+  useLayoutEffect(() => {
+    ref.current.scrollIntoView();
+  }, [ref]);
 
   return (
-    <div style={{ overflow: 'scroll' }}>
-      <div style={{ width: '5000px', height: '5000px' }}>
-        <div
-          style={{
-            position: 'absolute',
-            insetBlockStart: '25%',
-            insetInlineEnd: '50%',
-            // marginBlock: '3rem',
-            // marginInline: '3rem',
-          }}>
-          <Popover open={open} align="top" autoAlign>
-            <div className="playground-trigger">
-              <CheckboxIcon
-                onClick={() => {
-                  setOpen(!open);
-                }}
-              />
+    <div style={{ width: '5000px', height: '5000px' }}>
+      <div
+        style={{
+          position: 'absolute',
+          top: '2500px',
+          left: '2500px',
+        }}>
+        <Popover open={open} align="top" autoAlign>
+          <div className="playground-trigger">
+            <CheckboxIcon
+              onClick={() => {
+                setOpen(!open);
+              }}
+            />
+          </div>
+          <PopoverContent className="p-3" ref={ref}>
+            <div>
+              <p className="popover-title">Available storage</p>
+              <p className="popover-details">
+                This server has 150 GB of block storage remaining.
+              </p>
             </div>
-            <PopoverContent className="p-3">
-              <div>
-                <p className="popover-title">Available storage</p>
-                <p className="popover-details">
-                  This server has 150 GB of block storage remaining.
-                </p>
-              </div>
-            </PopoverContent>
-          </Popover>
-        </div>
+          </PopoverContent>
+        </Popover>
       </div>
     </div>
   );
