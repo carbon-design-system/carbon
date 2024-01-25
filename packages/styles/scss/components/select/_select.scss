@@ -288,7 +288,8 @@
     transform: translateY(-50%);
   }
 
-  .#{$prefix}--select--slug .#{$prefix}--select-input {
+  .#{$prefix}--select--slug
+    .#{$prefix}--select-input:not(:has(~ .#{$prefix}--slug--revert)) {
     @include ai-gradient;
 
     padding-inline-end: $spacing-10;

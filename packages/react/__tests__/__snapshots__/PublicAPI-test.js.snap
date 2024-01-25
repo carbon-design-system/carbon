@@ -4133,6 +4133,12 @@ Map {
     },
     "render": [Function],
   },
+  "IconButtonKinds" => Object {
+    "0": "primary",
+    "1": "secondary",
+    "2": "ghost",
+    "3": "tertiary",
+  },
   "IconSkeleton" => Object {
     "propTypes": Object {
       "className": Object {
@@ -7177,6 +7183,44 @@ Map {
     },
     "render": [Function],
   },
+  "StaticNotification" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "error",
+            "info",
+            "info-square",
+            "success",
+            "warning",
+            "warning-alt",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "lowContrast": Object {
+        "type": "bool",
+      },
+      "statusIconDescription": Object {
+        "type": "string",
+      },
+      "subtitle": Object {
+        "type": "string",
+      },
+      "title": Object {
+        "type": "string",
+      },
+      "titleId": Object {
+        "type": "string",
+      },
+    },
+  },
   "StructuredListBody" => Object {
     "propTypes": Object {
       "children": Object {
@@ -9120,6 +9164,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "id": Object {
+        "type": "string",
+      },
       "isExpanded": Object {
         "type": "bool",
       },
@@ -9203,6 +9250,9 @@ Map {
         },
         "disabled": Object {
           "type": "bool",
+        },
+        "id": Object {
+          "type": "string",
         },
         "isExpanded": Object {
           "type": "bool",
