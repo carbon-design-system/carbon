@@ -29,8 +29,8 @@
     "postinstall": "husky install"
   },
   "resolutions": {
-    "@types/react": "~17.0.2",
-    "@types/prop-types": "15.7.5",
+    "@types/react": "~18.2.33",
+    "@types/prop-types": "15.7.9",
     "ast-types": "^0.14.0",
     "node-sass": "^9.0.0",
     "react": "~18.2.0",
