@@ -12,7 +12,7 @@ import mdx from '../Notification.mdx';
 
 // eslint-disable-next-line storybook/csf-component
 export default {
-  title: 'Components/Notifications/Static',
+  title: 'Experimental/unstable__StaticNotification',
   component: StaticNotification,
   parameters: {
     docs: {

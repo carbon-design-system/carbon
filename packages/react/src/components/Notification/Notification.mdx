@@ -20,7 +20,9 @@ import { Story, Canvas, ArgsTable, Meta } from '@storybook/blocks';
 
 There are 4 different types of notification components:
 `ActionableNotification`, `InlineNotification`, `ToastNotification`, and
-`StaticNotification`.
+`unstable__StaticNotification`.
+
+### ActionableNotification
 
 `ActionableNotification` should be used when user action is required. It can
 include an action, other interactive elements or rich text. It uses Toast-like
@@ -29,12 +31,16 @@ InlineNotifcation, you can use the `inline` prop. If `actionButtonLabel` is not
 provided, an action button will not be rendered. This component grabs and traps
 focus until the action is acted upon or the notification is dismissed.
 
+### InlineNotification & ToastNotification
+
 `InlineNotification` and `ToastNotification` can not contain interactive
 elements or rich text. These are announced by screenreaders when rendered. They
 don't grab focus. Use them to provide the user with an alert, status, or log.
 
-`StaticNotification` is non-modal and should only be used in line with content
-on the initial render of the page or modal. This should not be used for
+### unstable\_\_StaticNotification
+
+`unstable__StaticNotification` is non-modal and should only be used inline with
+content on the initial render of the page or modal. This should not be used for
 real-time notifications or notifications responding to user input (unless the
 page is completely refreshing and bumping the users focus back to the first
 element in the dom/tab order). This is the most passive notification component
