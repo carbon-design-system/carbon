@@ -213,16 +213,6 @@ export const slugGradient = `${gray100} linear-gradient(135deg, ${gray40} 0%, rg
 export const slugBackgroundHover = gray60;
 export const slugGradientHover = `${gray100} linear-gradient(135deg, ${gray20Hover} 0%, rgba(${white}, 0) 100%)`;
 export const slugHollowHover = gray80Hover;
-export const slugCalloutGradientTopHover = rgba(gray20, 0.55);
-export const slugCalloutGradientBottomHover = rgba(gray20Hover, 0.55);
-export const slugCalloutAuraStartHover01 = rgba(white, 0.5);
-export const slugCalloutAuraEndHover01 = rgba(white, 0);
-export const slugCalloutAuraStartHover02 = rgba(blue20, 0.5);
-export const slugCalloutAuraEndHover02 = rgba(white, 0);
-export const slugCalloutGradientTopSelected = rgba(gray20, 0.85);
-export const slugCalloutGradientBottomSelected = rgba(gray20Hover, 0.85);
-export const slugCalloutAuraStartSelected = rgba(blue10, 0.6);
-export const slugCalloutAuraEndSelected = rgba(white, 0);
 
 //// Phase 2 - new \\\\
 // Shared
@@ -249,6 +239,16 @@ export const aiGradientStart02 = rgba(blue10, 0.5);
 export const aiGradientEnd = rgba(white, 0);
 export const slugCalloutAuraStart = aiAuraStart;
 export const slugCalloutAuraEnd = aiAuraEnd;
+export const slugCalloutGradientTopHover = rgba(gray20, 0.55);
+export const slugCalloutGradientBottomHover = rgba(gray20Hover, 0.55);
+export const slugCalloutAuraStartHover01 = rgba(white, 0.5);
+export const slugCalloutAuraEndHover01 = rgba(white, 0);
+export const slugCalloutAuraStartHover02 = rgba(blue20, 0.5);
+export const slugCalloutAuraEndHover02 = rgba(white, 0);
+export const slugCalloutGradientTopSelected = rgba(gray20, 0.85);
+export const slugCalloutGradientBottomSelected = rgba(gray20Hover, 0.85);
+export const slugCalloutAuraStartSelected = rgba(blue10, 0.6);
+export const slugCalloutAuraEndSelected = rgba(white, 0);
 
 // One off tokens for caret
 export const slugCalloutCaretCenter = '#A7C7FF';

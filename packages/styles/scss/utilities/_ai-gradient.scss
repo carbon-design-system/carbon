@@ -43,6 +43,7 @@
 /// @example @include callout-gradient();
 /// @param {String} $type  - Type of gradient, either 'default', 'selected' or 'hover'
 /// @param {Number} $offset  - specify a pixel offset the callout should start from the bottom
+/// @param {String} $background  - specify if the background should be `layer` or `background`
 /// @group utilities
 @mixin callout-gradient(
   $type: 'default',

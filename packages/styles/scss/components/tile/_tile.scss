@@ -476,7 +476,6 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     border-radius: $spacing-03;
   }
 
-  .#{$prefix}--tile--slug-rounded,
   .#{$prefix}--tile--slug-rounded .#{$prefix}--tile__chevron {
     border-end-end-radius: $spacing-03;
   }
