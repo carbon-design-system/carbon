@@ -39,23 +39,23 @@ function usePrevious(value: number) {
   return ref.current;
 }
 
-function getCuts(
+function calculateCuts(
   page: number,
   totalItems: number,
-  itemsThatFit: number,
+  itemsDisplayedOnPage: number,
   splitPoint: number | null = null
 ) {
-  if (itemsThatFit >= totalItems) {
+  if (itemsDisplayedOnPage >= totalItems) {
     return {
       front: 0,
       back: 0,
     };
   }
 
-  const split = splitPoint || Math.ceil(itemsThatFit / 2) - 1;
+  const split = splitPoint || Math.ceil(itemsDisplayedOnPage / 2) - 1;
 
   let frontHidden = page + 1 - split;
-  let backHidden = totalItems - page - (itemsThatFit - split) + 1;
+  let backHidden = totalItems - page - (itemsDisplayedOnPage - split) + 1;
 
   if (frontHidden <= 1) {
     backHidden -= frontHidden <= 0 ? Math.abs(frontHidden) + 1 : 0;
@@ -338,11 +338,11 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
     ref
   ) {
     const [currentPage, setCurrentPage] = useState(page);
-    const [itemsThatFit, setItemsThatFit] = useState(
+    const [itemsDisplayedOnPage, setItemsDisplayedOnPage] = useState(
       itemsShown >= 4 ? itemsShown : 4
     );
     const [cuts, setCuts] = useState(
-      getCuts(currentPage, totalItems, itemsThatFit)
+      calculateCuts(currentPage, totalItems, itemsDisplayedOnPage)
     );
     const prevPage = usePrevious(currentPage);
     const prefix = usePrefix();
@@ -380,7 +380,7 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
     }
 
     function pageWouldBeHidden(page: number) {
-      const startOffset = itemsThatFit <= 4 && page > 1 ? 0 : 1;
+      const startOffset = itemsDisplayedOnPage <= 4 && page > 1 ? 0 : 1;
 
       const wouldBeHiddenInFront = page >= startOffset && page <= cuts.front;
       const wouldBeHiddenInBack =
@@ -396,8 +396,8 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
 
     // re-calculate cuts if props.totalItems or props.itemsShown change
     useEffect(() => {
-      setItemsThatFit(itemsShown >= 4 ? itemsShown : 4);
-      setCuts(getCuts(currentPage, totalItems, itemsShown));
+      setItemsDisplayedOnPage(itemsShown >= 4 ? itemsShown : 4);
+      setCuts(calculateCuts(currentPage, totalItems, itemsShown));
     }, [totalItems, itemsShown]); // eslint-disable-line react-hooks/exhaustive-deps
 
     // update cuts if necessary whenever currentPage changes
@@ -406,11 +406,25 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
         const delta = currentPage - (prevPage || 0);
 
         if (delta > 0) {
-          const splitPoint = itemsThatFit - 3;
-          setCuts(getCuts(currentPage, totalItems, itemsThatFit, splitPoint));
+          const splitPoint = itemsDisplayedOnPage - 3;
+          setCuts(
+            calculateCuts(
+              currentPage,
+              totalItems,
+              itemsDisplayedOnPage,
+              splitPoint
+            )
+          );
         } else {
-          const splitPoint = itemsThatFit > 4 ? 2 : 1;
-          setCuts(getCuts(currentPage, totalItems, itemsThatFit, splitPoint));
+          const splitPoint = itemsDisplayedOnPage > 4 ? 2 : 1;
+          setCuts(
+            calculateCuts(
+              currentPage,
+              totalItems,
+              itemsDisplayedOnPage,
+              splitPoint
+            )
+          );
         }
       }
     }, [currentPage]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -424,7 +438,7 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
     const backwardButtonDisabled = !loop && currentPage === 0;
     const forwardButtonDisabled = !loop && currentPage === totalItems - 1;
 
-    const startOffset = itemsThatFit <= 4 && currentPage > 1 ? 0 : 1;
+    const startOffset = itemsDisplayedOnPage <= 4 && currentPage > 1 ? 0 : 1;
 
     return (
       <nav className={classNames} ref={ref} {...rest} aria-label="pagination">
@@ -439,7 +453,8 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
           {
             // render first item if at least 5 items can be displayed or
             // 4 items can be displayed and the current page is either 0 or 1
-            (itemsThatFit >= 5 || (itemsThatFit <= 4 && currentPage <= 1)) && (
+            (itemsDisplayedOnPage >= 5 ||
+              (itemsDisplayedOnPage <= 4 && currentPage <= 1)) && (
               <PaginationItem
                 page={1}
                 translateWithId={t}
