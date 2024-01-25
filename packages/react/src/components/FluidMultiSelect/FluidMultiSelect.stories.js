@@ -19,7 +19,7 @@ import {
 import { Information } from '@carbon/icons-react';
 
 export default {
-  title: 'Experimental/unstable__FluidMultiSelect',
+  title: 'Experimental/Fluid Components/unstable__FluidMultiSelect',
   component: FluidMultiSelect,
   subcomponents: {
     FluidMultiSelectSkeleton,

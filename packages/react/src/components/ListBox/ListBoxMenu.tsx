@@ -15,6 +15,8 @@ type ExcludedAttributes = 'id';
 
 export interface ListBoxMenuProps
   extends Omit<ReactAttr<HTMLUListElement>, ExcludedAttributes> {
+  children?: any;
+
   /**
    * Specify a custom `id`
    */
