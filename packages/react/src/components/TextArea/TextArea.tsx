@@ -105,6 +105,12 @@ export interface TextAreaProps
   onClick?: (evt: React.MouseEvent<HTMLTextAreaElement>) => void;
 
   /**
+   * Optionally provide an `onKeyDown` handler that is called whenever `<textarea>`
+   * is keyed
+   */
+  onKeyDown?: (evt: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+
+  /**
    * Specify the placeholder attribute for the `<textarea>`
    */
   placeholder?: string;
@@ -154,6 +160,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     hideLabel,
     onChange = noopFn,
     onClick = noopFn,
+    onKeyDown = noopFn,
     invalid = false,
     invalidText = '',
     helperText = '',
@@ -209,7 +216,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
 
   const textareaProps: {
     id: TextAreaProps['id'];
-    onKeyDown: (evt: React.KeyboardEvent) => void;
+    onKeyDown: TextAreaProps['onKeyDown'];
     onChange: TextAreaProps['onChange'];
     onClick: TextAreaProps['onClick'];
     maxLength?: number;
@@ -223,6 +230,10 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
         if (maxCount && textCount >= maxCount && key === 32) {
           evt.preventDefault();
         }
+      }
+
+      if (!disabled && onKeyDown) {
+        onKeyDown(evt);
       }
     },
     onPaste: (evt) => {
@@ -545,6 +556,12 @@ TextArea.propTypes = {
    * `<textarea>` is clicked
    */
   onClick: PropTypes.func,
+
+  /**
+   * Optionally provide an `onKeyDown` handler that is called whenever `<textarea>`
+   * is keyed
+   */
+  onKeyDown: PropTypes.func,
 
   /**
    * Specify the placeholder attribute for the `<textarea>`

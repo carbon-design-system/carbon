@@ -76,7 +76,7 @@ const slug = (
         <IconButton kind="ghost" label="Folders">
           <Folders />
         </IconButton>
-        <Button>View literature</Button>
+        <Button>View details</Button>
       </SlugActions>
     </SlugContent>
   </Slug>
@@ -107,7 +107,7 @@ const columnSlug = (
         <IconButton kind="ghost" label="Folders">
           <Folders />
         </IconButton>
-        <Button>View literature</Button>
+        <Button>View details</Button>
       </SlugActions>
     </SlugContent>
   </Slug>

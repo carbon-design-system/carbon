@@ -423,7 +423,8 @@
     transform: translateY(-50%);
   }
 
-  .#{$prefix}--text-input__field-wrapper--slug .#{$prefix}--text-input {
+  .#{$prefix}--text-input__field-wrapper--slug
+    .#{$prefix}--text-input:not(:has(~ .#{$prefix}--slug--revert)) {
     @include ai-gradient;
 
     padding-inline-end: $spacing-08;

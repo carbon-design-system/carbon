@@ -17,7 +17,7 @@ test.describe('FluidTextArea', () => {
       test('fluid textarea @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FluidTextArea',
-          id: 'experimental-unstable-fluidtextarea--default',
+          id: 'experimental-fluid-components-unstable-fluidtextarea--default',
           theme,
         });
       });
