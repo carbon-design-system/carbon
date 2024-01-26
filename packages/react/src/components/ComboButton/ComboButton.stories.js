@@ -109,7 +109,6 @@ export const WithMenuAlignment = () => (
 );
 
 export const Playground = (args) => {
-  console.log('combobutton', args);
   const onClick = action('onClick (MenuItem)');
 
   const changeButtonPostion = () => {
