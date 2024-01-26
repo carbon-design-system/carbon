@@ -88,12 +88,11 @@
           theme.$ai-aura-end 50%
         )
         padding-box,
-      linear-gradient(to top, theme.$layer-selected, theme.$layer-selected)
-        padding-box,
+      linear-gradient(to top, theme.$layer, theme.$layer) padding-box,
       linear-gradient(to bottom, theme.$border-inverse, theme.$border-inverse)
         border-box,
       // Needed to underlay the transparent border
-      linear-gradient(to top, theme.$layer-selected, theme.$layer-selected)
+      linear-gradient(to top, theme.$layer, theme.$layer)
         border-box;
   } @else {
     background: linear-gradient(
