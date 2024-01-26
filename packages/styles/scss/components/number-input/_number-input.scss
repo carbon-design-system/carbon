@@ -453,7 +453,12 @@
     padding-inline-end: convert.to-rem(112px);
   }
 
-  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--number__control-btn {
+  .#{$prefix}--number__input-wrapper--slug
+    input[type='number']:not([data-invalid]):not(
+      :has(~ .#{$prefix}--slug--revert)
+    )
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn {
     border-block-end-color: $ai-border-strong;
   }
 
