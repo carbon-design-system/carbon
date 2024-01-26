@@ -107,7 +107,7 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
   });
 
   describe('supports props.menuAlignment', () => {
-    const alignments = ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
+    const alignments = ['top-start', 'top-end', 'bottom-start', 'bottom-end'];
 
     alignments.forEach((alignment) => {
       it(`menuAlignment="${alignment}"`, async () => {

@@ -117,11 +117,11 @@ describe('ComboButton', () => {
     describe('supports props.menuAlignment', () => {
       const alignments = [
         'top',
-        'top-left',
-        'top-right',
+        'top-start',
+        'top-end',
         'bottom',
-        'bottom-left',
-        'bottom-right',
+        'bottom-start',
+        'bottom-end',
       ];
 
       alignments.forEach((alignment) => {
