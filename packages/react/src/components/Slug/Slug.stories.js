@@ -296,13 +296,14 @@ export const Default = () => (
 );
 
 export const WithCustomIcon = (args) => {
-  const { showSlugActions = true } = args;
-
   return (
     <div className="slug-container-example slug-container centered">
-      <Slug renderIcon={ThumbsUp} {...args}>
+      <Slug
+        defaultOpen
+        renderIcon={ThumbsUp}
+        highContrastTheme="white"
+        {...args}>
         <SlugContent>
-          {' '}
           <div>
             <p className="secondary">AI Explained</p>
             <h1>84%</h1>
@@ -316,20 +317,6 @@ export const WithCustomIcon = (args) => {
             <p className="secondary">Model type</p>
             <p className="bold">Foundation model</p>
           </div>
-          {showSlugActions && (
-            <SlugActions>
-              <IconButton kind="ghost" label="View">
-                <View />
-              </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
-                <FolderOpen />
-              </IconButton>
-              <IconButton kind="ghost" label="Folders">
-                <Folders />
-              </IconButton>
-              <Button>View details</Button>
-            </SlugActions>
-          )}
         </SlugContent>
       </Slug>
     </div>
@@ -337,6 +324,20 @@ export const WithCustomIcon = (args) => {
 };
 
 WithCustomIcon.argTypes = {
+  highContrastTheme: {
+    options: ['white', 'g10', 'g90', 'g100'],
+    control: { type: 'select' },
+  },
+  renderIcon: {
+    table: {
+      disable: true,
+    },
+  },
+  align: {
+    table: {
+      disable: true,
+    },
+  },
   revertActive: {
     table: {
       disable: true,

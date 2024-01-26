@@ -3,6 +3,7 @@
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
+@use '../../themes';
 @use '../../type' as *;
 @use '../../utilities/ai-gradient' as *;
 @use '../../utilities/convert';
@@ -616,5 +617,29 @@ $sizes: (
 
   .#{$prefix}--slug--revert .#{$prefix}--btn--icon-only svg {
     margin: 0;
+  }
+
+  .#{$prefix}--slug-content.#{$prefix}--slug-content--high-contrast--white,
+  .#{$prefix}--slug-content.#{$prefix}--slug-content--high-contrast--white
+    ~ .#{$prefix}--popover-caret {
+    @include theme(themes.$white);
+  }
+
+  .#{$prefix}--slug-content.#{$prefix}--slug-content--high-contrast--g10,
+  .#{$prefix}--slug-content.#{$prefix}--slug-content--high-contrast--g10
+    ~ .#{$prefix}--popover-caret {
+    @include theme(themes.$g10);
+  }
+
+  .#{$prefix}--slug-content.#{$prefix}--slug-content--high-contrast--g90,
+  .#{$prefix}--slug-content.#{$prefix}--slug-content--high-contrast--g90
+    ~ .#{$prefix}--popover-caret {
+    @include theme(themes.$g90);
+  }
+
+  .#{$prefix}--slug-content.#{$prefix}--slug-content--high-contrast--g100,
+  .#{$prefix}--slug-content.#{$prefix}--slug-content--high-contrast--g100
+    ~ .#{$prefix}--popover-caret {
+    @include theme(themes.$g100);
   }
 }

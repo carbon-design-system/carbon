@@ -21,7 +21,7 @@ import { Undo } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
 
 export const SlugContent = React.forwardRef(function SlugContent(
-  { children, className },
+  { children, className, highContrastTheme },
   ref
 ) {
   const prefix = usePrefix();
@@ -33,6 +33,8 @@ export const SlugContent = React.forwardRef(function SlugContent(
   const slugContentClasses = cx(className, {
     [`${prefix}--slug-content`]: true,
     [`${prefix}--slug-content--with-actions`]: hasSlugActions,
+    [`${prefix}--slug-content--high-contrast--${highContrastTheme}`]:
+      highContrastTheme,
   });
 
   return (
@@ -53,6 +55,11 @@ SlugContent.propTypes = {
    * Specify an optional className to be added to the AI slug callout
    */
   className: PropTypes.string,
+
+  /**
+   * Specify the theme to be used for high contrast inside the slug callout
+   */
+  highContrastTheme: PropTypes.string,
 };
 
 export const SlugActions = React.forwardRef(function SlugActions(
@@ -94,6 +101,7 @@ export const Slug = React.forwardRef(function Slug(
     children,
     className,
     dotType,
+    highContrastTheme,
     kind = 'default',
     onRevertClick,
     revertActive,
@@ -143,6 +151,17 @@ export const Slug = React.forwardRef(function Slug(
     <span className={`${prefix}--slug__text`}>{aiText}</span>
   );
 
+  // Pass down `highContrast` prop to `SlugContent`
+  const clonedChildren = React.Children.toArray(children).map((child) => {
+    if (child?.type?.displayName === 'SlugContent' && highContrastTheme) {
+      return React.cloneElement(child, {
+        highContrastTheme,
+      });
+    } else {
+      return child;
+    }
+  });
+
   return (
     <div className={slugClasses} ref={ref} id={id}>
       {revertActive ? (
@@ -164,7 +183,7 @@ export const Slug = React.forwardRef(function Slug(
               </span>
             )}
           </ToggletipButton>
-          {children}
+          {clonedChildren}
         </Toggletip>
       )}
     </div>
@@ -223,6 +242,11 @@ Slug.propTypes = {
    * Specify the type of dot that should be rendered in front of the inline variant
    */
   dotType: PropTypes.oneOf(['default', 'hollow']),
+
+  /**
+   * Specify the theme to be used for high contrast inside the slug callout
+   */
+  highContrastTheme: PropTypes.string,
 
   /**
    * Specify the type of Slug, from the following list of types:
