@@ -12,6 +12,7 @@ import {
   blue40,
   blue60,
   blue70,
+  blue80,
 
   // Gray
   gray10,
@@ -35,7 +36,6 @@ import {
   // Support
   blue30,
   blue50,
-  blue80,
   green40,
   green50,
   yellow30,
@@ -229,32 +229,48 @@ export const slugCalloutGradientTopSelected = rgba(gray80, 0.85);
 export const slugCalloutGradientBottomSelected = rgba(gray80Hover, 0.85);
 export const slugCalloutAuraStartSelected = rgba(blue20, 0.2);
 export const slugCalloutAuraEndSelected = rgba(gray100, 0);
-// Linear gradient tokens
-export const aiGradientStart01 = rgba(blue20, 0.2);
-export const aiGradientStart02 = 'transparent';
-export const aiGradientEnd = 'rgba(38, 38, 38, 0)';
 
-// Phase 2 - new
-export const slugCalloutShadowInner = rgba(blue50, 0.2);
+//// Phase 2 - new \\\\
+// Shared
+export const aiInnerShadow = rgba(blue50, 0.2);
+export const aiAuraStart = rgba(blue50, 0.1);
+export const aiAuraEnd = rgba(black, 0);
+export const aiBorderStrong = blue40;
+export const aiBorderStart = blue50;
+export const aiBorderEnd = rgba(blue30, 0.24);
+export const aiDropShadow = rgba(blue60, 0.32);
+
+// Callout
 export const slugCalloutShadowOuter01 = rgba(blue80, 0.25);
 export const slugCalloutShadowOuter02 = rgba(black, 0.65);
 
-export const slugCalloutBorder01 = blue50;
-export const slugCalloutBorder02 = rgba(blue30, 0.25);
+//// Changed
+export const slugCalloutAuraStart = aiAuraStart;
+export const slugCalloutAuraEnd = aiAuraEnd;
 
-// Changed
-export const slugCalloutAuraStart = rgba(blue50, 0.1);
-export const slugCalloutAuraEnd = rgba(white, 0);
-
-// Not used in phase 2 / possibly remove?
+//// Not used in phase 2 / possibly remove?
 export const slugCalloutGradientTop = rgba(gray100, 0.85);
 export const slugCalloutGradientBottom = rgba(gray90, 0.85);
+export const aiGradientStart01 = rgba(blue20, 0.2);
+export const aiGradientStart02 = 'transparent';
+export const aiGradientEnd = 'rgba(38, 38, 38, 0)';
 
 // One off tokens for caret
 export const slugCalloutCaretCenter = '#456FB5';
 export const slugCalloutCaretBottom = '#465060';
 export const slugCalloutCaretBottomBackgroundActions = '#253042';
 export const slugCalloutCaretBottomBackground = '#2D3F5C';
+
+// Chat tokens
+export const chatPromptBackground = gray100;
+export const chatPromptBorderStart = gray90;
+export const chatPromptBorderEnd = rgba(gray90, 0);
+export const chatBubbleUser = gray80;
+export const chatBubbleAgent = gray90;
+export const chatBubbleAgentBorder = gray70;
+export const chatAvatarBot = blue50;
+export const chatAvatarAgent = gray10;
+export const chatAvatarUser = gray10;
 
 export {
   // Type

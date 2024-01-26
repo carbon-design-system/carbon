@@ -17,7 +17,7 @@ test.describe('FluidTimePicker', () => {
       test('fluid text input @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FluidTimePicker',
-          id: 'experimental-unstable-fluidtimepicker--default',
+          id: 'experimental-fluid-components-unstable-fluidtimepicker--default',
           theme,
         });
       });

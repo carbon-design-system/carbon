@@ -1014,10 +1014,6 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
-          "name": "slug-callout-shadow-inner",
-          "type": "color",
-        },
-        Object {
           "name": "slug-callout-shadow-outer-01",
           "type": "color",
         },
@@ -1026,11 +1022,31 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
-          "name": "slug-callout-border-01",
+          "name": "ai-inner-shadow",
           "type": "color",
         },
         Object {
-          "name": "slug-callout-border-02",
+          "name": "ai-aura-start",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-aura-end",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-border-strong",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-border-start",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-border-end",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-drop-shadow",
           "type": "color",
         },
         Object {
@@ -1047,6 +1063,42 @@ test('metadata', () => {
         },
         Object {
           "name": "slug-callout-caret-bottom-background-actions",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-prompt-background",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-prompt-border-start",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-prompt-border-end",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-bubble-user",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-bubble-agent",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-bubble-agent-border",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-avatar-bot",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-avatar-agent",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-avatar-user",
           "type": "color",
         },
         Object {
