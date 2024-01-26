@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Add, FitToScreen } from '@carbon/icons-react';
+import { Add } from '@carbon/icons-react';
 import { default as Button, ButtonSkeleton } from '../Button';
 import ButtonSet from '../ButtonSet';
 import mdx from './Button.mdx';
@@ -61,23 +61,6 @@ export default {
 
 export const Default = (args) => {
   return <Button {...args}>Button</Button>;
-};
-
-export const ButtonTest = () => {
-  const sizes = ['sm', 'md', 'lg', 'xl'];
-  return (
-    <div>
-      {sizes.map((size) => (
-        <div key={size} className="container">
-          <Button size={size} renderIcon={FitToScreen}>
-            <span>label</span>
-          </Button>
-          <div className={`ruler top ${size}`} />
-          <div className={`ruler bottom ${size}`} />
-        </div>
-      ))}
-    </div>
-  );
 };
 
 export const Secondary = (args) => {
