@@ -98,6 +98,7 @@ export const Slug = React.forwardRef(function Slug(
     onRevertClick,
     revertActive,
     revertLabel = 'Revert to AI input',
+    renderIcon: IconElement,
     slugLabel = 'Show information',
     size = 'xs',
     ...rest
@@ -119,9 +120,9 @@ export const Slug = React.forwardRef(function Slug(
   });
 
   const slugButtonClasses = cx({
-    [`${prefix}--slug__button`]: true,
-    [`${prefix}--slug__button--${size}`]: size,
-    [`${prefix}--slug__button--${kind}`]: kind,
+    [`${prefix}--slug__button`]: !IconElement,
+    [`${prefix}--slug__button--${size}`]: !IconElement && size,
+    [`${prefix}--slug__button--${kind}`]: !IconElement && kind,
     [`${prefix}--slug__button--inline-with-content`]:
       kind === 'inline' && aiTextLabel,
   });
@@ -135,6 +136,12 @@ export const Slug = React.forwardRef(function Slug(
   const ariaLabel = !aiTextLabel
     ? `${aiText} - ${slugLabel}`
     : `${aiText} - ${aiTextLabel}`;
+
+  const buttonElement = IconElement ? (
+    <IconElement />
+  ) : (
+    <span className={`${prefix}--slug__text`}>{aiText}</span>
+  );
 
   return (
     <div className={slugClasses} ref={ref} id={id}>
@@ -150,7 +157,7 @@ export const Slug = React.forwardRef(function Slug(
       ) : (
         <Toggletip align={align} autoAlign={autoAlign} {...rest}>
           <ToggletipButton className={slugButtonClasses} label={ariaLabel}>
-            <span className={`${prefix}--slug__text`}>{aiText}</span>
+            {buttonElement}
             {aiTextLabel && (
               <span className={`${prefix}--slug__additional-text`}>
                 {aiTextLabel}
@@ -226,6 +233,11 @@ Slug.propTypes = {
    * Callback function that fires when the revert button is clicked
    */
   onRevertClick: PropTypes.func,
+
+  /**
+   * Provide an optional icon to render in front of the item's content.
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
    * Specify whether the revert button should be visible

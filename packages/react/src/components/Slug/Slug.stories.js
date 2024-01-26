@@ -10,7 +10,7 @@
 import React from 'react';
 
 import { Slug, SlugContent, SlugActions } from '.';
-import { View, FolderOpen, Folders } from '@carbon/icons-react';
+import { View, FolderOpen, Folders, ThumbsUp } from '@carbon/icons-react';
 import Button from '../Button';
 import { IconButton } from '../IconButton';
 import mdx from './Slug.mdx';
@@ -295,12 +295,12 @@ export const Default = () => (
   </>
 );
 
-export const Test = (args) => {
+export const WithCustomIcon = (args) => {
   const { showSlugActions = true } = args;
 
   return (
     <div className="slug-container-example slug-container centered">
-      <Slug autoAlign={false} defaultOpen {...args}>
+      <Slug renderIcon={ThumbsUp} {...args}>
         <SlugContent>
           {' '}
           <div>
@@ -336,13 +336,7 @@ export const Test = (args) => {
   );
 };
 
-Test.argTypes = {
-  showSlugActions: {
-    control: {
-      type: 'boolean',
-    },
-    description: 'Playground only - toggle to show the callout toolbar',
-  },
+WithCustomIcon.argTypes = {
   revertActive: {
     table: {
       disable: true,
