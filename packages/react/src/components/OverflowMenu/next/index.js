@@ -121,7 +121,7 @@ OverflowMenu.propTypes = {
   label: PropTypes.string,
 
   /**
-   * Specify how the menu should align with the button element
+   * Experimental property. Specify how the menu should align with the button element
    */
   menuAlignment: PropTypes.oneOf([
     'top-start',

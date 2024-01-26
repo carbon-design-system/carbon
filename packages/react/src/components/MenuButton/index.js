@@ -148,13 +148,12 @@ MenuButton.propTypes = {
   label: PropTypes.string.isRequired,
 
   /**
-   * Specify how the menu should align with the button element
+   * Experimental property. Specify how the menu should align with the button element
    */
   menuAlignment: PropTypes.oneOf([
     'top',
     'top-start',
     'top-end',
-
     'bottom',
     'bottom-start',
     'bottom-end',
