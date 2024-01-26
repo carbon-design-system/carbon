@@ -996,9 +996,9 @@ export const TileAboveTheFoldContent = React.forwardRef<
   const prefix = usePrefix();
 
   return (
-    <span ref={ref} className={`${prefix}--tile-content__above-the-fold`}>
+    <div ref={ref} className={`${prefix}--tile-content__above-the-fold`}>
       {children}
-    </span>
+    </div>
   );
 });
 

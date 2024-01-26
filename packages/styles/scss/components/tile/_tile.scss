@@ -274,10 +274,6 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     @include focus-outline('outline');
   }
 
-  .#{$prefix}--tile-content__above-the-fold {
-    display: block;
-  }
-
   .#{$prefix}--tile-content__below-the-fold {
     display: block;
     opacity: 0;
