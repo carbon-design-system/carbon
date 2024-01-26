@@ -298,11 +298,7 @@ export const Default = () => (
 export const WithCustomIcon = (args) => {
   return (
     <div className="slug-container-example slug-container centered">
-      <Slug
-        defaultOpen
-        renderIcon={ThumbsUp}
-        highContrastTheme="white"
-        {...args}>
+      <Slug defaultOpen renderIcon={ThumbsUp} {...args}>
         <SlugContent>
           <div>
             <p className="secondary">AI Explained</p>
