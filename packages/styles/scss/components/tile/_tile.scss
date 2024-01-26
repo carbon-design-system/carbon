@@ -387,13 +387,15 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   }
 
   .#{$prefix}--tile--slug.#{$prefix}--tile {
-    @include callout-gradient();
+    @include callout-gradient('default', 0, 'layer');
 
-    border: 1px solid $border-tile;
+    border: 1px solid transparent;
+    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
+      0 4px 10px 2px $ai-drop-shadow;
   }
 
   .#{$prefix}--tile--slug.#{$prefix}--tile--expandable:hover {
-    @include callout-gradient();
+    @include callout-gradient('default', 0, 'layer');
   }
 
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable::before,
@@ -412,7 +414,9 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable::before,
   .#{$prefix}--tile--slug.#{$prefix}--tile--clickable::before {
-    @include callout-gradient('hover');
+    @include callout-gradient('hover', 0, 'layer');
+
+    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
   }
 
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable:hover::before,
@@ -421,7 +425,13 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   }
 
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable::after {
-    @include callout-gradient('selected');
+    @include callout-gradient('selected', 0, 'layer');
+
+    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
+  }
+
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable:hover::after {
+    opacity: 0;
   }
 
   .#{$prefix}--tile--slug.#{$prefix}--tile--is-selected::after {
@@ -467,11 +477,11 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile--slug-rounded.#{$prefix}--tile--selectable::before,
   .#{$prefix}--tile--slug-rounded.#{$prefix}--tile--selectable::after,
   .#{$prefix}--tile--slug-rounded.#{$prefix}--tile--clickable::before {
-    border-radius: $spacing-05;
+    border-radius: $spacing-03;
   }
 
   .#{$prefix}--tile--slug-rounded .#{$prefix}--tile__chevron {
-    border-end-end-radius: $spacing-05;
+    border-end-end-radius: $spacing-03;
   }
 
   // Windows HCM fix
