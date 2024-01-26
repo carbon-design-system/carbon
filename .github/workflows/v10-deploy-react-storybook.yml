@@ -35,7 +35,7 @@ jobs:
           touch packages/react/storybook-static/CNAME
           echo "v7-react.carbondesignsystem.com" > packages/react/storybook-static/CNAME
       - name: Push to v7 repo
-        uses: cpina/github-action-push-to-another-repository@main
+        uses: cpina/github-action-push-to-another-repository@07c4d7b3def0a8ebe788a8f2c843a4e1de4f6900 #v1.7.2
         env:
           API_TOKEN_GITHUB: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         with:
