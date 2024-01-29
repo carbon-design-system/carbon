@@ -93,14 +93,6 @@ export const Dismissable = () => {
       panel: <TabPanel>Monitoring</TabPanel>,
     },
     {
-      label: 'fdsfdsfsd',
-      panel: <TabPanel>fdsfdsfsd</TabPanel>,
-    },
-    {
-      label: 'kjhjhjhkjh',
-      panel: <TabPanel>kjhjhjhkjh</TabPanel>,
-    },
-    {
       label: 'Activity',
       panel: <TabPanel>Activity</TabPanel>,
     },
@@ -128,7 +120,6 @@ export const Dismissable = () => {
     if (tabIndex === selectedIndex) {
       const defaultTabIndex = filteredTabs.findIndex((tab) => !tab.disabled);
       setSelectedIndex(defaultTabIndex);
-      document.dispatchEvent(new KeyboardEvent('keypress', { key: 'Tab' }));
     } else {
       setSelectedIndex(filteredTabs.indexOf(selectedTab));
     }
