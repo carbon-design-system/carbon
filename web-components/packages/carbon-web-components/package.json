@@ -184,7 +184,7 @@
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "react-is": "16.13.1",
-    "read-pkg-up": "^7.0.0",
+    "read-package-up": "^11.0.0",
     "replace-ext": "^2.0.0",
     "resize-observer-polyfill": "^1.5.0",
     "rollup": "^2.55.1",
