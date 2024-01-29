@@ -1034,6 +1034,18 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "ai-aura-hover-background",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-aura-hover-start",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-aura-hover-end",
+          "type": "color",
+        },
+        Object {
           "name": "ai-border-strong",
           "type": "color",
         },
@@ -1063,6 +1075,42 @@ test('metadata', () => {
         },
         Object {
           "name": "slug-callout-caret-bottom-background-actions",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-prompt-background",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-prompt-border-start",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-prompt-border-end",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-bubble-user",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-bubble-agent",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-bubble-agent-border",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-avatar-bot",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-avatar-agent",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-avatar-user",
           "type": "color",
         },
         Object {
