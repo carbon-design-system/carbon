@@ -1,11 +1,12 @@
 /**
- * @license
- *
- * Copyright IBM Corp. 2019, 2023
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
+* @license
+*
+* Copyright IBM Corp. 2019, 2024
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+@use 'sass:map';
 
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/type' as *;
@@ -21,6 +22,20 @@
 // importing tag color tokens for the styling slug in tag component
 @use '@carbon/styles/scss/components/tag/index' as *;
 
+$colorMap: (
+  'red': $tag-color-red,
+  'magenta': $tag-color-magenta,
+  'purple': $tag-color-purple,
+  'blue': $tag-color-blue,
+  'cyan': $tag-color-cyan,
+  'teal': $tag-color-teal,
+  'green': $tag-color-green,
+  'gray': $tag-color-gray,
+  'cool-gray': $tag-color-cool-gray,
+  'warm-gray': $tag-color-warm-gray,
+  'high-contrast': $text-inverse,
+);
+
 :host(#{$prefix}-slug) {
   @extend .#{$prefix}--slug;
 
@@ -33,14 +48,11 @@
   .#{$prefix}--popover-content {
     @include callout-gradient();
 
-    border: 1px solid $border-subtle;
-    border-radius: $spacing-05;
-    // 84px seems to make this fully opaque?
-    backdrop-filter: blur(25px);
-    // box-shadow seems to match the spec better
-    // than the same values plugged into `drop-shadow`
-    // filter: drop-shadow(-45px 45px 100px rgba(0, 0, 0, 0.2));
-    box-shadow: -45px 45px 100px rgba(0, 0, 0, 0.2);
+    border: 1px solid transparent;
+    border-radius: $spacing-03;
+    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
+      -40px 30px 100px -25px $slug-callout-shadow-outer-01,
+      -60px 80px 60px -45px $slug-callout-shadow-outer-02;
     color: $text-primary;
     min-inline-size: to-rem(280px);
   }
@@ -48,9 +60,10 @@
   .#{$prefix}--toggletip-actions {
     position: absolute;
     justify-content: flex-end;
-    background: $layer-accent;
-    border-end-end-radius: to-rem(15px);
-    border-end-start-radius: to-rem(15px);
+    backdrop-filter: blur(85px);
+    background: rgba(0, 0, 0, 0.01);
+    border-end-end-radius: $spacing-03;
+    border-end-start-radius: $spacing-03;
     column-gap: 0;
     inline-size: 100%;
     inset-block-end: 0;
@@ -59,10 +72,21 @@
 
   .#{$prefix}--toggletip-content {
     // This sets the max size to the size of the action bar with 3 buttons
-    max-inline-size: to-rem(334px);
-    padding-block: $spacing-07 $spacing-11;
-    padding-inline: $spacing-07;
+    padding-block: $spacing-06 $spacing-11;
+    padding-inline: $spacing-06;
     --cds-button-focus-color: var(--cds-focus);
+  }
+}
+
+:host(#{$prefix}-slug[enabled][with-actions]) {
+  .#{$prefix}--toggletip-content {
+    max-inline-size: to-rem(334px);
+  }
+}
+
+:host(#{$prefix}-slug[enabled]:not([with-actions])) {
+  .#{$prefix}--toggletip-content {
+    max-inline-size: to-rem(320px);
   }
 }
 
@@ -78,7 +102,7 @@
   @include emit-layout-tokens();
   .#{$prefix}--btn--primary {
     order: 1;
-    border-end-end-radius: 1rem;
+    border-end-end-radius: to-rem(7px);
   }
 }
 
@@ -126,7 +150,30 @@
 
 :host(#{$prefix}-slug:not([kind='hollow']):not([dot-type='hollow'])) {
   .#{$prefix}--popover-caret {
-    background: $border-subtle;
+    background: transparent;
+    clip-path: none;
+
+    &::before {
+      position: absolute;
+      display: block;
+      box-sizing: border-box;
+      border: 1px solid $ai-border-start;
+      background: $background;
+      block-size: $spacing-04;
+      clip-path: polygon(98% 0, 0 0, -52% 150%) border-box;
+      content: '';
+      inline-size: $spacing-04;
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      position: absolute;
+      display: block;
+      background: $background;
+      block-size: to-rem(14px);
+      content: '';
+      inline-size: $spacing-01;
+    }
   }
 
   .#{$prefix}--slug__button.#{$prefix}--slug__button--mini:focus,
@@ -135,200 +182,161 @@
   }
 }
 
-:host(#{$prefix}-slug[tag='red']) {
-  .#{$prefix}--slug__text {
-    color: $tag-color-red;
+// top
+:host(
+    #{$prefix}-slug:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment^='top']
+  ) {
+  .#{$prefix}--popover-caret {
+    &::before {
+      inset-block-end: to-rem(1px);
+      transform: rotate(-135deg);
+    }
+
+    &::after {
+      background: $slug-callout-caret-bottom-background;
+      block-size: $spacing-01;
+      border-end-end-radius: 50%;
+      border-end-start-radius: 50%;
+      inline-size: to-rem(14px);
+      inset-block-start: -$spacing-01;
+      inset-inline-start: to-rem(-1px);
+    }
   }
 
-  .#{$prefix}--slug__text::before {
-    background: $tag-color-red;
-  }
-
-  button:hover {
-    border-color: $tag-color-red;
-
-    .#{$prefix}--slug__text::before {
-      background-color: $tag-color-red;
+  &[has-actions] {
+    .#{$prefix}--popover-caret::after {
+      display: none;
     }
   }
 }
 
-:host(#{$prefix}-slug[tag='magenta']) {
-  .#{$prefix}--slug__text {
-    color: $tag-color-magenta;
-  }
+// right
+:host(
+    #{$prefix}-slug:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment^='right']
+  ) {
+  .#{$prefix}--popover-caret {
+    &::before {
+      content: '';
+      inset-inline-start: to-rem(1px);
+      transform: rotate(-45deg);
+    }
 
-  .#{$prefix}--slug__text::before {
-    background: $tag-color-magenta;
-  }
-
-  button:hover {
-    border-color: $tag-color-magenta;
-
-    .#{$prefix}--slug__text::before {
-      background-color: $tag-color-magenta;
+    &::after {
+      border-end-start-radius: 50%;
+      border-start-start-radius: 50%;
+      inset-block-start: to-rem(-1px);
+      inset-inline-start: to-rem(6px);
     }
   }
 }
 
-:host(#{$prefix}-slug[tag='purple']) {
-  .#{$prefix}--slug__text {
-    color: $tag-color-purple;
-  }
+// bottom
+:host(
+    #{$prefix}-slug:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment^='bottom']
+  ) {
+  .#{$prefix}--popover-caret {
+    &::before {
+      inset-block-start: to-rem(1px);
+      transform: rotate(45deg);
+    }
 
-  .#{$prefix}--slug__text::before {
-    background: $tag-color-purple;
-  }
-
-  button:hover {
-    border-color: $tag-color-purple;
-
-    .#{$prefix}--slug__text::before {
-      background-color: $tag-color-purple;
+    &::after {
+      block-size: $spacing-01;
+      border-start-end-radius: 50%;
+      border-start-start-radius: 50%;
+      inline-size: to-rem(14px);
+      inset-block-end: to-rem(-2.5px);
+      inset-inline-start: to-rem(-1px);
     }
   }
 }
 
-:host(#{$prefix}-slug[tag='blue']) {
-  .#{$prefix}--slug__text {
-    color: $tag-color-blue;
-  }
+//left
+:host(
+    #{$prefix}-slug:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment^='left']
+  ) {
+  .#{$prefix}--popover-caret {
+    &::before {
+      inset-inline-end: to-rem(1px);
+      transform: rotate(135deg);
+    }
 
-  .#{$prefix}--slug__text::before {
-    background: $tag-color-blue;
-  }
-
-  button:hover {
-    border-color: $tag-color-blue;
-
-    .#{$prefix}--slug__text::before {
-      background-color: $tag-color-blue;
+    &::after {
+      border-end-end-radius: 50%;
+      border-start-end-radius: 50%;
+      inset-block-start: to-rem(-1px);
+      inset-inline-start: -$spacing-01;
     }
   }
 }
 
-:host(#{$prefix}-slug[tag='cyan']) {
-  .#{$prefix}--slug__text {
-    color: $tag-color-cyan;
-  }
-
-  .#{$prefix}--slug__text::before {
-    background: $tag-color-cyan;
-  }
-
-  button:hover {
-    border-color: $tag-color-cyan;
-
-    .#{$prefix}--slug__text::before {
-      background-color: $tag-color-cyan;
+// override for specific alignments
+/* stylelint-disable-next-line no-duplicate-selectors */
+:host(#{$prefix}-slug:not([kind='hollow']):not([dot-type='hollow'])) {
+  &[alignment='left-bottom'],
+  &[alignment='right-bottom'] {
+    .#{$prefix}--popover-caret::after {
+      background: transparent;
     }
   }
 }
 
-:host(#{$prefix}-slug[tag='teal']) {
-  .#{$prefix}--slug__text {
-    color: $tag-color-teal;
-  }
-
-  .#{$prefix}--slug__text::before {
-    background: $tag-color-teal;
-  }
-
-  button:hover {
-    border-color: $tag-color-teal;
-
-    .#{$prefix}--slug__text::before {
-      background-color: $tag-color-teal;
+// Change caret color / border when it is near the bottom of the callout
+/* stylelint-disable-next-line no-duplicate-selectors */
+:host(#{$prefix}-slug:not([kind='hollow']):not([dot-type='hollow'])) {
+  &[alignment='left-bottom'],
+  &[alignment='right-bottom'],
+  &[alignment='top'],
+  &[alignment='top-right'],
+  &[alignment='top-left'] {
+    .#{$prefix}--popover-caret::before {
+      border-color: $slug-callout-caret-bottom;
+      background: $slug-callout-caret-bottom-background;
+    }
+    // Adjust background if actions are present
+    &[has-actions] {
+      .#{$prefix}--popover-caret::before {
+        background: $slug-callout-caret-bottom-background-actions;
+      }
     }
   }
 }
 
-:host(#{$prefix}-slug[tag='green']) {
-  .#{$prefix}--slug__text {
-    color: $tag-color-green;
-  }
-
-  .#{$prefix}--slug__text::before {
-    background: $tag-color-green;
-  }
-
-  button:hover {
-    border-color: $tag-color-green;
-
-    .#{$prefix}--slug__text::before {
-      background-color: $tag-color-green;
+// Change the caret border when it is near the middle of the callout
+/* stylelint-disable-next-line no-duplicate-selectors */
+:host(#{$prefix}-slug:not([kind='hollow']):not([dot-type='hollow'])) {
+  &[alignment='left'],
+  &[alignment='right'] {
+    .#{$prefix}--popover-caret::before {
+      border-color: $slug-callout-caret-center;
     }
   }
 }
 
-:host(#{$prefix}-slug[tag='gray']) {
-  .#{$prefix}--slug__text {
-    color: $tag-color-gray;
-  }
-
-  .#{$prefix}--slug__text::before {
-    background: $tag-color-gray;
-  }
-
-  button:hover {
-    border-color: $tag-color-gray;
-
-    .#{$prefix}--slug__text::before {
-      background-color: $tag-color-gray;
+@each $color, $token in $colorMap {
+  :host(#{$prefix}-slug[tag='#{$color}']) {
+    .#{$prefix}--slug__text {
+      color: $token;
     }
-  }
-}
-
-:host(#{$prefix}-slug[tag='cool-gray']) {
-  .#{$prefix}--slug__text {
-    color: $tag-color-cool-gray;
-  }
-
-  .#{$prefix}--slug__text::before {
-    background: $tag-color-cool-gray;
-  }
-
-  button:hover {
-    border-color: $tag-color-cool-gray;
 
     .#{$prefix}--slug__text::before {
-      background-color: $tag-color-cool-gray;
+      background: $token;
     }
-  }
-}
 
-:host(#{$prefix}-slug[tag='warm-gray']) {
-  .#{$prefix}--slug__text {
-    color: $tag-color-warm-gray;
-  }
+    button:hover {
+      border-color: $token;
 
-  .#{$prefix}--slug__text::before {
-    background: $tag-color-warm-gray;
-  }
-
-  button:hover {
-    border-color: $tag-color-warm-gray;
-
-    .#{$prefix}--slug__text::before {
-      background-color: $tag-color-warm-gray;
-    }
-  }
-}
-
-:host(#{$prefix}-slug[tag='high-contrast']) {
-  .#{$prefix}--slug__text {
-    color: $text-inverse;
-  }
-
-  .#{$prefix}--slug__text::before {
-    background: $text-inverse;
-  }
-
-  button:hover {
-    border-color: $text-inverse;
-
-    .#{$prefix}--slug__text::before {
-      background-color: $text-inverse;
+      .#{$prefix}--slug__text::before {
+        background-color: $token;
+      }
     }
   }
 }

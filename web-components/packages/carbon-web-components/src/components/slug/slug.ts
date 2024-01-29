@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -137,6 +137,13 @@ export default class CDSSlug extends CDSToggleTip {
           `}
     `;
   };
+
+  attributeChangedCallback(name, old, newValue) {
+    super.attributeChangedCallback(name, old, newValue);
+
+    //@ts-ignore typescript does not think requestUpdate() exists on parentElement
+    name === 'revert-active' ? this.parentElement?.requestUpdate() : ``;
+  }
 
   updated(changedProperties) {
     super.updated(changedProperties);

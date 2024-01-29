@@ -1,11 +1,11 @@
 /**
- * @license
- *
- * Copyright IBM Corp. 2019, 2024
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
+* @license
+*
+* Copyright IBM Corp. 2019, 2024
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
 
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
@@ -20,6 +20,14 @@
   > * {
     margin-inline-start: $spacing-07;
   }
+}
+
+.slug-container-example.centered {
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  block-size: calc(100vh - 84px);
+  inline-size: calc(100vw - 84px);
 }
 
 p {
@@ -110,8 +118,4 @@ div #{$prefix}-selectable-tile::-moz-list-bullet {
 #{$prefix}-radio-button-group:not(:first-of-type),
 #{$prefix}-checkbox-group:not(:first-of-type) {
   margin-block-start: $spacing-07;
-}
-
-.slug-tag-container {
-  margin-block-end: $spacing-10;
 }

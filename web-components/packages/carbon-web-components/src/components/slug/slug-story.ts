@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -81,7 +81,7 @@ const actions = html`
     ${Folders16({ slot: 'icon' })}
     <span slot="tooltip-content"> Folders </span>
   </cds-icon-button>
-  <cds-slug-action-button>View Literature</cds-slug-action-button>
+  <cds-slug-action-button>View details</cds-slug-action-button>
 `;
 
 export const Default = () => {
@@ -236,11 +236,43 @@ Playground.parameters = {
           tooltipAlignments,
           POPOVER_ALIGNMENT.BOTTOM
         ),
-        size: select('Slug size (size)', sizes, SLUG_SIZE.MEDIUM),
+        size: select('Slug size (size)', sizes, SLUG_SIZE.EXTRA_SMALL),
         kind,
         dotType,
         aiTextLabel: textNullable('Ai text label', ''),
         revertActive: boolean('Revert active', false),
+      };
+    },
+  },
+};
+
+export const Test = (args) => {
+  const { alignment, showActions } = args?.[`${prefix}-slug`] ?? {};
+  return html`
+    <style>
+      ${styles}
+    </style>
+    <div class="slug-container-example slug-container centered">
+      <cds-slug
+        open
+        alignment="${ifDefined(alignment)}"
+        size="${SLUG_SIZE.EXTRA_SMALL}">
+        ${content} ${showActions ? actions : ''}
+      </cds-slug>
+    </div>
+  `;
+};
+
+Test.parameters = {
+  knobs: {
+    [`${prefix}-slug`]: () => {
+      return {
+        alignment: select(
+          'Slug alignment to trigger button (alignment)',
+          tooltipAlignments,
+          POPOVER_ALIGNMENT.BOTTOM
+        ),
+        showActions: boolean('Show actions', false),
       };
     },
   },

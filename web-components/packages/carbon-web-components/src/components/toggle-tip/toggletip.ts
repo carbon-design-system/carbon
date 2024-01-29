@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -33,6 +33,16 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
 
   @property({ type: Boolean, reflect: true })
   open = false;
+
+  /**
+   * Handles `slotchange` event.
+   */
+  private _handleActionsSlotChange({ target }: Event) {
+    const hasContent = (target as HTMLSlotElement).assignedNodes();
+    hasContent
+      ? this.setAttribute('has-actions', '')
+      : this.removeAttribute('has-actions');
+  }
 
   protected _handleClick = () => {
     this.open = !this.open;
@@ -88,12 +98,14 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
           <div class="${prefix}--toggletip-content">
             <slot name="body-text"></slot>
             <div class="${prefix}--toggletip-actions">
-              <slot name="actions"></slot>
+              <slot
+                name="actions"
+                @slotchange="${this._handleActionsSlotChange}"></slot>
             </div>
           </div>
         </span>
+        <span class="${prefix}--popover-caret"></span>
       </span>
-      <span class="${prefix}--popover-caret"></span>
     `;
   };
 

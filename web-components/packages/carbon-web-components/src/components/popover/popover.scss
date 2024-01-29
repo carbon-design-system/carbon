@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -174,13 +174,13 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-toggletip[alignment='left-bottom']),
 :host(#{$prefix}-slug[alignment='left-bottom']) {
   .#{$prefix}--popover-content {
-    inset-block-end: -50%;
+    inset-block-end: 50%;
     inset-inline-end: 100%;
     // Add in 0.1px to prevent rounding errors where the content is
     // moved farther than the caret
     transform: translate(
       calc(-1 * $popover-offset),
-      calc(0.5 * $popover-offset - 16px)
+      calc(0.5 * $popover-offset + $spacing-05)
     );
   }
 }
@@ -190,13 +190,13 @@ $popover-caret-height: custom-property.get-var(
 :host(#{$prefix}-toggletip[alignment='left-top']),
 :host(#{$prefix}-slug[alignment='left-top']) {
   .#{$prefix}--popover-content {
-    inset-block-start: -50%;
+    inset-block-start: 50%;
     inset-inline-end: 100%;
     // Add in 0.1px to prevent rounding errors where the content is
     // moved farther than the caret
     transform: translate(
       calc(-1 * $popover-offset),
-      calc(-1 * 0.5 * $popover-offset + 16px)
+      calc(-1 * 0.5 * $popover-offset - $spacing-05)
     );
   }
 }

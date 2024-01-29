@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -75,7 +75,7 @@ const actions = html`
     ${Folders16({ slot: 'icon' })}
     <span slot="tooltip-content"> Folders </span>
   </cds-icon-button>
-  <cds-slug-action-button>View Literature</cds-slug-action-button>
+  <cds-slug-action-button>View details</cds-slug-action-button>
 `;
 
 export default {
@@ -468,65 +468,28 @@ export const _Select = () => {
     </div> `;
 };
 
-const tagTypes = [
-  'red',
-  'magenta',
-  'purple',
-  'blue',
-  'cyan',
-  'teal',
-  'green',
-  'gray',
-  'cool-gray',
-  'warm-gray',
-  'high-contrast',
-  'outline',
-];
-
 export const _Tag = () => {
-  return html`
-    <style>
+  return html` <style>
       ${styles}
     </style>
-    <div class="slug-tag-container">
-      ${tagTypes.map(
-        (e) => html`<cds-tag type="${e}"
-          >Tag
-          <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
-        </cds-tag>`
-      )}
-    </div>
+    <cds-tag type="red"
+      >Tag
+      <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+    </cds-tag>
 
-    <div class="slug-tag-container">
-      ${tagTypes.map(
-        (e) =>
-          html`<cds-tag filter type="${e}">
-            Tag
-            <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
-          </cds-tag>`
-      )}
-    </div>
+    <cds-tag filter type="purple">
+      Tag
+      <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+    </cds-tag>
 
-    <div class="slug-tag-container">
-      ${tagTypes.map(
-        (e) =>
-          html`<cds-tag type="${e}">
-            ${Asleep16({ slot: 'icon' })} Tag
-            <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
-          </cds-tag>`
-      )}
-    </div>
-
-    <div class="slug-tag-container">
-      ${tagTypes.map(
-        (e) =>
-          html`<cds-tag filter type="${e}">
-            ${Asleep16({ slot: 'icon' })} Tag
-            <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
-          </cds-tag>`
-      )}
-    </div>
-  `;
+    <cds-tag type="blue">
+      ${Asleep16({ slot: 'icon' })} Tag
+      <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+    </cds-tag>
+    <cds-tag filter type="green">
+      ${Asleep16({ slot: 'icon' })} Tag
+      <cds-slug alignment="bottom-left"> ${content}${actions}</cds-slug>
+    </cds-tag>`;
 };
 
 export const _TextInput = () => {
