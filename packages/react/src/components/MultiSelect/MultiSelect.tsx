@@ -587,6 +587,8 @@ const MultiSelect = React.forwardRef(
         size: 'mini',
       });
     }
+    const itemsSelectedText =
+      selectedItems.length > 0 && selectedItems.map((item) => item.text);
 
     return (
       <div className={wrapperClasses}>
@@ -594,8 +596,8 @@ const MultiSelect = React.forwardRef(
           {titleText && titleText}
           {selectedItems.length > 0 && (
             <span className={`${prefix}--visually-hidden`}>
-              {clearSelectionDescription} {selectedItems.length},
-              {clearSelectionText}
+              {clearSelectionDescription} {selectedItems.length}{' '}
+              {itemsSelectedText},{clearSelectionText}
             </span>
           )}
         </label>
