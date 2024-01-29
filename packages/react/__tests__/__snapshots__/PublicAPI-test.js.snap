@@ -10333,6 +10333,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "highContrastTheme": Object {
+        "type": "string",
+      },
       "kind": Object {
         "args": Array [
           Array [
@@ -10345,6 +10348,19 @@ Map {
       },
       "onRevertClick": Object {
         "type": "func",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "revertActive": Object {
         "type": "bool",
@@ -10394,6 +10410,9 @@ Map {
         "type": "node",
       },
       "className": Object {
+        "type": "string",
+      },
+      "highContrastTheme": Object {
         "type": "string",
       },
     },
