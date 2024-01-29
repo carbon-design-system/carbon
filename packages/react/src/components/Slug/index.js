@@ -16,6 +16,7 @@ import {
   ToggletipContent,
   ToggletipActions,
 } from '../Toggletip';
+import { Tooltip } from '../Tooltip';
 import { IconButton } from '../IconButton';
 import { Undo } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
@@ -100,6 +101,8 @@ export const Slug = React.forwardRef(function Slug(
     revertLabel = 'Revert to AI input',
     slugLabel = 'Show information',
     size = 'xs',
+    tooltipDescription,
+    tooltipAlignment,
     ...rest
   },
   ref
@@ -136,31 +139,50 @@ export const Slug = React.forwardRef(function Slug(
     ? `${aiText} - ${slugLabel}`
     : `${aiText} - ${aiTextLabel}`;
 
-  return (
-    <div className={slugClasses} ref={ref} id={id}>
-      {revertActive ? (
-        <IconButton
-          onClick={handleOnRevertClick}
-          kind="ghost"
-          size="sm"
-          label={revertLabel}
-          {...rest}>
-          <Undo />
-        </IconButton>
-      ) : (
-        <Toggletip align={align} autoAlign={autoAlign} {...rest}>
-          <ToggletipButton className={slugButtonClasses} label={ariaLabel}>
-            <span className={`${prefix}--slug__text`}>{aiText}</span>
-            {aiTextLabel && (
-              <span className={`${prefix}--slug__additional-text`}>
-                {aiTextLabel}
-              </span>
-            )}
-          </ToggletipButton>
+  const ConditionalWrapper = ({ children }) => {
+    if (tooltipDescription && kind !== 'hollow' && dotType !== 'hollow') {
+      console.log(tooltipAlignment);
+      return (
+        <Tooltip
+          className={`${prefix}--icon-tooltip`}
+          description={tooltipDescription}
+          align={tooltipAlignment}
+          closeOnActivation>
           {children}
-        </Toggletip>
-      )}
-    </div>
+        </Tooltip>
+      );
+    } else {
+      return children;
+    }
+  };
+
+  return (
+    <ConditionalWrapper>
+      <div className={slugClasses} ref={ref} id={id}>
+        {revertActive ? (
+          <IconButton
+            onClick={handleOnRevertClick}
+            kind="ghost"
+            size="sm"
+            label={revertLabel}
+            {...rest}>
+            <Undo />
+          </IconButton>
+        ) : (
+          <Toggletip align={align} autoAlign={autoAlign} {...rest}>
+            <ToggletipButton className={slugButtonClasses} label={ariaLabel}>
+              <span className={`${prefix}--slug__text`}>{aiText}</span>
+              {aiTextLabel && (
+                <span className={`${prefix}--slug__additional-text`}>
+                  {aiTextLabel}
+                </span>
+              )}
+            </ToggletipButton>
+            {children}
+          </Toggletip>
+        )}
+      </div>
+    </ConditionalWrapper>
   );
 });
 
@@ -203,12 +225,12 @@ Slug.propTypes = {
   autoAlign: PropTypes.bool,
 
   /**
-   * Specify the content you want rendered inside the slug ToggleTip
+   * Specify the content you want rendered inside the `Slug` popover.
    */
   children: PropTypes.node,
 
   /**
-   * Specify an optional className to be added to the AI slug
+   * Specify an optional className to be added to the `Slug`
    */
   className: PropTypes.string,
 
@@ -218,7 +240,7 @@ Slug.propTypes = {
   dotType: PropTypes.oneOf(['default', 'hollow']),
 
   /**
-   * Specify the type of Slug, from the following list of types:
+   * Specify the type of `Slug`, either `default`, `hollow`, or `inline`:
    */
   kind: PropTypes.oneOf(['default', 'hollow', 'inline']),
 
@@ -238,12 +260,12 @@ Slug.propTypes = {
   revertLabel: PropTypes.string,
 
   /**
-   * Specify the size of the button, from the following list of sizes:
+   * Specify the size of the `Slug`, can be `mini`, `2xs`, `xs`, `sm`, `md`, `lg`, or `xl`
    */
   size: PropTypes.oneOf(['mini', '2xs', 'xs', 'sm', 'md', 'lg', 'xl']),
 
   /**
-   * Specify the content you want rendered inside the slug ToggleTip
+   * Specify the content you want rendered inside the `Slug` ToggleTip
    */
   slugContent: PropTypes.node,
 
@@ -251,4 +273,30 @@ Slug.propTypes = {
    * Specify the text that will be provided to the aria-label of the `Slug` button
    */
   slugLabel: PropTypes.string,
+
+  /**
+   * Specify the alignment of the tooltip when the `Slug` is hovered or focused
+   */
+  tooltipAlignment: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+
+    'left',
+    'left-bottom',
+    'left-top',
+
+    'right',
+    'right-bottom',
+    'right-top',
+  ]),
+
+  /**
+   * Specify the text that will be shown in the tooltip when the `Slug` is hovered or focused
+   */
+  tooltipDescription: PropTypes.string,
 };

@@ -46,13 +46,13 @@ const content = <span>AI was used to generate this content</span>;
 export const Default = () => (
   <>
     <div className="slug-container slug-container-example">
-      <Slug autoAlign size="mini">
+      <Slug tooltipDescription="Explain AI" autoAlign size="mini">
         <SlugContent>{aiContent}</SlugContent>
       </Slug>
-      <Slug autoAlign size="2xs">
+      <Slug tooltipDescription="Explain AI" autoAlign size="2xs">
         <SlugContent>{aiContent}</SlugContent>
       </Slug>
-      <Slug autoAlign size="xs">
+      <Slug tooltipDescription="Explain AI" autoAlign size="xs">
         <SlugContent>
           {aiContent}
           <SlugActions>
@@ -69,7 +69,7 @@ export const Default = () => (
           </SlugActions>
         </SlugContent>
       </Slug>
-      <Slug autoAlign size="sm">
+      <Slug tooltipDescription="Explain AI" autoAlign size="sm">
         <SlugContent>
           {aiContent}
           <SlugActions>
@@ -86,7 +86,7 @@ export const Default = () => (
           </SlugActions>
         </SlugContent>
       </Slug>
-      <Slug autoAlign size="md">
+      <Slug tooltipDescription="Explain AI" autoAlign size="md">
         <SlugContent>
           {aiContent}
           <SlugActions>
@@ -103,7 +103,7 @@ export const Default = () => (
           </SlugActions>
         </SlugContent>
       </Slug>
-      <Slug autoAlign size="lg">
+      <Slug tooltipDescription="Explain AI" autoAlign size="lg">
         <SlugContent>
           {aiContent}
           <SlugActions>
@@ -120,71 +120,7 @@ export const Default = () => (
           </SlugActions>
         </SlugContent>
       </Slug>
-      <Slug autoAlign size="xl">
-        <SlugContent>
-          {aiContent}
-          <SlugActions>
-            <IconButton kind="ghost" label="View">
-              <View />
-            </IconButton>
-            <IconButton kind="ghost" label="Open Folder">
-              <FolderOpen />
-            </IconButton>
-            <IconButton kind="ghost" label="Folders">
-              <Folders />
-            </IconButton>
-            <Button>View details</Button>
-          </SlugActions>
-        </SlugContent>
-      </Slug>
-    </div>
-    <div className="slug-container-example slug-container">
-      <Slug kind="hollow" autoAlign size="mini">
-        <SlugContent>{content}</SlugContent>
-      </Slug>
-      <Slug kind="hollow" autoAlign size="2xs">
-        <SlugContent>{content}</SlugContent>
-      </Slug>
-      <Slug kind="hollow" autoAlign size="xs">
-        <SlugContent>{content}</SlugContent>
-      </Slug>
-    </div>
-    <div className="slug-container-example slug-container">
-      <Slug autoAlign kind="inline" size="sm">
-        <SlugContent>
-          {aiContent}
-          <SlugActions>
-            <IconButton kind="ghost" label="View">
-              <View />
-            </IconButton>
-            <IconButton kind="ghost" label="Open Folder">
-              <FolderOpen />
-            </IconButton>
-            <IconButton kind="ghost" label="Folders">
-              <Folders />
-            </IconButton>
-            <Button>View details</Button>
-          </SlugActions>
-        </SlugContent>
-      </Slug>
-      <Slug autoAlign kind="inline" size="md">
-        <SlugContent>
-          {aiContent}
-          <SlugActions>
-            <IconButton kind="ghost" label="View">
-              <View />
-            </IconButton>
-            <IconButton kind="ghost" label="Open Folder">
-              <FolderOpen />
-            </IconButton>
-            <IconButton kind="ghost" label="Folders">
-              <Folders />
-            </IconButton>
-            <Button>View details</Button>
-          </SlugActions>
-        </SlugContent>
-      </Slug>
-      <Slug autoAlign kind="inline" size="lg">
+      <Slug tooltipDescription="Explain AI" autoAlign size="xl">
         <SlugContent>
           {aiContent}
           <SlugActions>
@@ -203,7 +139,18 @@ export const Default = () => (
       </Slug>
     </div>
     <div className="slug-container-example slug-container">
-      <Slug autoAlign kind="inline" size="sm" aiTextLabel="Text goes here">
+      <Slug tooltipDescription="Explain AI" kind="hollow" autoAlign size="mini">
+        <SlugContent>{content}</SlugContent>
+      </Slug>
+      <Slug tooltipDescription="Explain AI" kind="hollow" autoAlign size="2xs">
+        <SlugContent>{content}</SlugContent>
+      </Slug>
+      <Slug tooltipDescription="Explain AI" kind="hollow" autoAlign size="xs">
+        <SlugContent>{content}</SlugContent>
+      </Slug>
+    </div>
+    <div className="slug-container-example slug-container">
+      <Slug tooltipDescription="Explain AI" autoAlign kind="inline" size="sm">
         <SlugContent>
           {aiContent}
           <SlugActions>
@@ -220,7 +167,7 @@ export const Default = () => (
           </SlugActions>
         </SlugContent>
       </Slug>
-      <Slug autoAlign kind="inline" size="md" aiTextLabel="Text goes here">
+      <Slug tooltipDescription="Explain AI" autoAlign kind="inline" size="md">
         <SlugContent>
           {aiContent}
           <SlugActions>
@@ -237,7 +184,7 @@ export const Default = () => (
           </SlugActions>
         </SlugContent>
       </Slug>
-      <Slug autoAlign kind="inline" size="lg" aiTextLabel="Text goes here">
+      <Slug tooltipDescription="Explain AI" autoAlign kind="inline" size="lg">
         <SlugContent>
           {aiContent}
           <SlugActions>
@@ -256,13 +203,96 @@ export const Default = () => (
       </Slug>
     </div>
     <div className="slug-container-example slug-container">
-      <Slug autoAlign kind="inline" dotType="hollow" size="sm">
+      <Slug
+        tooltipDescription="Explain AI"
+        autoAlign
+        kind="inline"
+        size="sm"
+        aiTextLabel="Text goes here">
+        <SlugContent>
+          {aiContent}
+          <SlugActions>
+            <IconButton kind="ghost" label="View">
+              <View />
+            </IconButton>
+            <IconButton kind="ghost" label="Open Folder">
+              <FolderOpen />
+            </IconButton>
+            <IconButton kind="ghost" label="Folders">
+              <Folders />
+            </IconButton>
+            <Button>View details</Button>
+          </SlugActions>
+        </SlugContent>
+      </Slug>
+      <Slug
+        tooltipDescription="Explain AI"
+        autoAlign
+        kind="inline"
+        size="md"
+        aiTextLabel="Text goes here">
+        <SlugContent>
+          {aiContent}
+          <SlugActions>
+            <IconButton kind="ghost" label="View">
+              <View />
+            </IconButton>
+            <IconButton kind="ghost" label="Open Folder">
+              <FolderOpen />
+            </IconButton>
+            <IconButton kind="ghost" label="Folders">
+              <Folders />
+            </IconButton>
+            <Button>View details</Button>
+          </SlugActions>
+        </SlugContent>
+      </Slug>
+      <Slug
+        tooltipDescription="Explain AI"
+        autoAlign
+        kind="inline"
+        size="lg"
+        aiTextLabel="Text goes here">
+        <SlugContent>
+          {aiContent}
+          <SlugActions>
+            <IconButton kind="ghost" label="View">
+              <View />
+            </IconButton>
+            <IconButton kind="ghost" label="Open Folder">
+              <FolderOpen />
+            </IconButton>
+            <IconButton kind="ghost" label="Folders">
+              <Folders />
+            </IconButton>
+            <Button>View details</Button>
+          </SlugActions>
+        </SlugContent>
+      </Slug>
+    </div>
+    <div className="slug-container-example slug-container">
+      <Slug
+        tooltipDescription="Explain AI"
+        autoAlign
+        kind="inline"
+        dotType="hollow"
+        size="sm">
         <SlugContent>{content}</SlugContent>
       </Slug>
-      <Slug autoAlign kind="inline" dotType="hollow" size="md">
+      <Slug
+        tooltipDescription="Explain AI"
+        autoAlign
+        kind="inline"
+        dotType="hollow"
+        size="md">
         <SlugContent>{content}</SlugContent>
       </Slug>
-      <Slug autoAlign kind="inline" dotType="hollow" size="lg">
+      <Slug
+        tooltipDescription="Explain AI"
+        autoAlign
+        kind="inline"
+        dotType="hollow"
+        size="lg">
         <SlugContent>{content}</SlugContent>
       </Slug>
     </div>
@@ -300,7 +330,11 @@ export const Test = (args) => {
 
   return (
     <div className="slug-container-example slug-container centered">
-      <Slug autoAlign={false} defaultOpen {...args}>
+      <Slug
+        tooltipDescription="Explain AI"
+        autoAlign={false}
+        defaultOpen
+        {...args}>
         <SlugContent>
           {' '}
           <div>
@@ -452,7 +486,7 @@ export const Playground = (args) => {
   return (
     <>
       <div className="slug-container-example">
-        <Slug autoAlign {...args}>
+        <Slug tooltipDescription="Explain AI" autoAlign {...args}>
           <SlugContent>{renderedContent}</SlugContent>
         </Slug>
       </div>

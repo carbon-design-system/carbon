@@ -10372,6 +10372,28 @@ Map {
       "slugLabel": Object {
         "type": "string",
       },
+      "tooltipAlignment": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "left-bottom",
+            "left-top",
+            "right",
+            "right-bottom",
+            "right-top",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "tooltipDescription": Object {
+        "type": "string",
+      },
     },
     "render": [Function],
   },
