@@ -118,6 +118,7 @@ function AccordionItem({
   ...rest
 }: PropsWithChildren<AccordionItemProps>) {
   const [isOpen, setIsOpen] = useState(open);
+  const [prevIsOpen, setPrevIsOpen] = useState(open);
   const accordionState = useContext(AccordionContext);
 
   const disabledIsControlled = typeof controlledDisabled === 'boolean';
@@ -137,6 +138,11 @@ function AccordionItem({
   const Toggle = renderToggle || renderExpando; // remove renderExpando in next major release
 
   const content = useRef<HTMLDivElement>(null);
+
+  if (open !== prevIsOpen) {
+    setIsOpen(open);
+    setPrevIsOpen(open);
+  }
 
   // When the AccordionItem heading is clicked, toggle the open state of the
   // panel

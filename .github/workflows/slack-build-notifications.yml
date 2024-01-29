@@ -19,11 +19,12 @@ jobs:
     # We only want notifications for successful runs for certain workflows
     if:
       ${{ github.event.workflow_run.conclusion == 'success' &&
-      contains(fromJson('["Version", "Release", "Deploy React storybook to GitHub Pages", "promote"]'), github.event.workflow.name) }}
+      contains(fromJson('["Version", "Release", "Deploy React storybook to
+      GitHub Pages", "promote"]'), github.event.workflow.name) }}
     steps:
       - name: Send custom JSON data to Slack
         id: slack-success
-        uses: slackapi/slack-github-action@v1.24.0
+        uses: slackapi/slack-github-action@e28cf165c92ffef168d23c5c9000cffc8a25e117 #v1.24.0
         with:
           payload: |
             {
@@ -41,7 +42,7 @@ jobs:
     steps:
       - name: Send custom JSON data to Slack
         id: slack-failure
-        uses: slackapi/slack-github-action@v1.24.0
+        uses: slackapi/slack-github-action@e28cf165c92ffef168d23c5c9000cffc8a25e117 #v1.24.0
         with:
           payload: |
             {
