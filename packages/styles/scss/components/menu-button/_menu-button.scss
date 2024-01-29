@@ -38,11 +38,11 @@
     transform: translate(0, calc(-100% - $popover-offset));
   }
 
-  .#{$prefix}--menu-button__top-left {
+  .#{$prefix}--menu-button__top-start {
     transform: translate(0, calc(-100% - $popover-offset));
   }
 
-  .#{$prefix}--menu-button__top-right {
+  .#{$prefix}--menu-button__top-end {
     transform: translate(0, calc(-100% - $popover-offset));
   }
 }

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { OverflowMenuVertical } from '@carbon/icons-react';
@@ -34,7 +34,6 @@ const OverflowMenu = React.forwardRef(function OverflowMenu(
 ) {
   const id = useId('overflowmenu');
   const prefix = usePrefix();
-  const [width, setWidth] = useState(0);
 
   const triggerRef = useRef(null);
   const {
@@ -48,8 +47,6 @@ const OverflowMenu = React.forwardRef(function OverflowMenu(
 
   function handleTriggerClick() {
     if (triggerRef.current) {
-      const { width: w } = triggerRef.current.getBoundingClientRect();
-      setWidth(w);
       hookOnClick();
     }
   }
@@ -88,7 +85,7 @@ const OverflowMenu = React.forwardRef(function OverflowMenu(
         <IconElement className={`${prefix}--overflow-menu__icon`} />
       </IconButton>
       <Menu
-        actionButtonWidth={width}
+        containerRef={triggerRef}
         menuAlignment={menuAlignment}
         className={menuClasses}
         id={id}

@@ -99,7 +99,7 @@ export const WithMenuAlignment = (args) => {
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <OverflowMenu {...args} menuAlignment="bottom-left">
+        <OverflowMenu {...args} menuAlignment="bottom-start">
           <MenuItem label="Stop app" />
           <MenuItem label="Restart app" />
           <MenuItem label="Rename app" />
@@ -108,7 +108,7 @@ export const WithMenuAlignment = (args) => {
           <MenuItem label="Delete app" kind="danger" />
         </OverflowMenu>
 
-        <OverflowMenu {...args} menuAlignment="bottom-right">
+        <OverflowMenu {...args} menuAlignment="bottom-end">
           <MenuItem label="Stop app" />
           <MenuItem label="Restart app" />
           <MenuItem label="Rename app" />
@@ -126,7 +126,7 @@ export const WithMenuAlignment = (args) => {
         }}>
         <OverflowMenu
           {...args}
-          menuAlignment="top-left"
+          menuAlignment="top-start"
           tooltipAlignment="bottom">
           <MenuItem label="Stop app" />
           <MenuItem label="Restart app" />
@@ -138,7 +138,7 @@ export const WithMenuAlignment = (args) => {
 
         <OverflowMenu
           {...args}
-          menuAlignment="top-right"
+          menuAlignment="top-end"
           tooltipAlignment="bottom">
           <MenuItem label="Stop app" />
           <MenuItem label="Restart app" />
@@ -186,10 +186,10 @@ Playground.argTypes = {
     },
   },
   menuAlignment: {
-    options: ['bottom-left', 'bottom-right', 'top-left', 'top-right'],
+    options: ['bottom-start', 'bottom-end', 'top-start', 'top-end'],
     control: { type: 'select' },
     description:
-      'Specify how the menu should align with the button element `bottom-left` `bottom-right` `top-left` `top-right`',
-    default: 'bottom-left',
+      'Specify how the menu should align with the button element `bottom-start` `bottom-end` `top-start` `top-end`',
+    default: 'bottom-start',
   },
 };

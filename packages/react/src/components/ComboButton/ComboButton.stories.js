@@ -62,13 +62,13 @@ export const WithMenuAlignment = () => (
         <MenuItem label="Fourth action" disabled />
       </ComboButton>
 
-      <ComboButton label="Bottom left" menuAlignment="bottom-left">
+      <ComboButton label="Bottom start" menuAlignment="bottom-start">
         <MenuItem label="Second action with a long label description" />
         <MenuItem label="Third action" />
         <MenuItem label="Fourth action" disabled />
       </ComboButton>
 
-      <ComboButton label="Bottom right" menuAlignment="bottom-right">
+      <ComboButton label="Bottom end" menuAlignment="bottom-end">
         <MenuItem label="Second action with a long label description" />
         <MenuItem label="Third action" />
         <MenuItem label="Fourth action" disabled />
@@ -88,8 +88,8 @@ export const WithMenuAlignment = () => (
       </ComboButton>
 
       <ComboButton
-        label="Top left"
-        menuAlignment="top-left"
+        label="Top start"
+        menuAlignment="top-start"
         tooltipAlignment="bottom">
         <MenuItem label="Second action with a long label description" />
         <MenuItem label="Third action" />
@@ -97,8 +97,8 @@ export const WithMenuAlignment = () => (
       </ComboButton>
 
       <ComboButton
-        label="Top right"
-        menuAlignment="top-right"
+        label="Top end"
+        menuAlignment="top-end"
         tooltipAlignment="bottom">
         <MenuItem label="Second action with a long label description" />
         <MenuItem label="Third action" />

@@ -102,7 +102,7 @@ const MenuButton = React.forwardRef(function MenuButton(
         {label}
       </Button>
       <Menu
-        actionButtonWidth={width}
+        containerRef={triggerRef}
         menuAlignment={menuAlignment}
         className={menuClasses}
         ref={menuRef}

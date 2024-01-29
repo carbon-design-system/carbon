@@ -14,6 +14,7 @@ import React, {
   useReducer,
   useRef,
   useState,
+  RefObject,
 } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -31,7 +32,7 @@ interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
    * The width of the button being passed down
    */
-  actionButtonWidth?: number;
+  containerRef?: RefObject<HTMLDivElement>;
   /**
    * A collection of MenuItems to be rendered within this Menu.
    */
@@ -101,7 +102,7 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   {
     children,
     className,
-    actionButtonWidth,
+    containerRef,
     label,
     menuAlignment,
     mode = 'full',
@@ -154,6 +155,13 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   const focusableItems = childContext.state.items.filter(
     (item) => !item.disabled && item.ref.current
   );
+
+  // Getting the width from the parent container element - controlled
+  let actionButtonWidth: number;
+  if (containerRef?.current) {
+    const { width: w } = containerRef.current.getBoundingClientRect();
+    actionButtonWidth = w;
+  }
 
   // Set RTL based on document direction or `LayoutDirection`
   const { direction } = useLayoutDirection();
@@ -295,7 +303,7 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
     // if 'axes.x.anchor' is lower than 87px dynamically switch render side
     if (
       actionButtonWidth &&
-      (menuAlignment === 'bottom-right' || menuAlignment === 'top-right') &&
+      (menuAlignment === 'bottom-end' || menuAlignment === 'top-end') &&
       axes.x.anchor >= 87 &&
       actionButtonWidth < axes.x.size
     ) {
@@ -319,8 +327,8 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
 
     const topAlignment =
       menuAlignment === 'top' ||
-      menuAlignment === 'top-right' ||
-      menuAlignment === 'top-left';
+      menuAlignment === 'top-end' ||
+      menuAlignment === 'top-start';
 
     // If the tooltip is not visible in the top, switch to the bototm
     if (
@@ -429,11 +437,6 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
 });
 
 Menu.propTypes = {
-  /**
-   * The width of the button being passed down
-   */
-  actionButtonWidth: PropTypes.number,
-
   /**
    * A collection of MenuItems to be rendered within this Menu.
    */

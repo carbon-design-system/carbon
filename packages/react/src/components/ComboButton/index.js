@@ -126,7 +126,7 @@ const ComboButton = React.forwardRef(function ComboButton(
         <ChevronDown />
       </IconButton>
       <Menu
-        actionButtonWidth={width}
+        containerRef={containerRef}
         menuAlignment={menuAlignment}
         className={menuClasses}
         ref={menuRef}
