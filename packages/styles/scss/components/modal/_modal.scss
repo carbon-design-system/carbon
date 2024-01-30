@@ -489,7 +489,7 @@
 
   // Slug styles
   .#{$prefix}--modal--slug .#{$prefix}--modal-container {
-    @include callout-gradient('default');
+    @include callout-gradient();
 
     background-color: $layer;
   }

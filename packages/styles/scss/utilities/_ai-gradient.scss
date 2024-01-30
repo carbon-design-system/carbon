@@ -43,45 +43,58 @@
 /// @example @include callout-gradient();
 /// @param {String} $type  - Type of gradient, either 'default', 'selected' or 'hover'
 /// @param {Number} $offset  - specify a pixel offset the callout should start from the bottom
+/// @param {String} $background  - specify if the background should be `layer` or `background`
 /// @group utilities
-@mixin callout-gradient($type: 'default', $offset: 0) {
+@mixin callout-gradient(
+  $type: 'default',
+  $offset: 0,
+  $background: theme.$background
+) {
   $start: 0%;
   @if $offset != 0 {
     $start: calc(0% + #{$offset});
   }
 
+  @if $background == 'layer' {
+    $background: theme.$layer;
+  }
+
   @if $type == 'hover' {
     background: linear-gradient(
-        0deg,
-        theme.$slug-callout-aura-start-hover-01 $start,
-        theme.$slug-callout-aura-end-hover-01 50%,
-        transparent 50%
-      ),
-      linear-gradient(
-        0deg,
-        theme.$slug-callout-aura-start-hover-02 $start,
-        theme.$slug-callout-aura-end-hover-02 50%,
-        transparent 50%
-      ),
-      linear-gradient(
-          180deg,
-          theme.$slug-callout-gradient-top-hover $start,
-          theme.$slug-callout-gradient-bottom-hover 100%
+          to top,
+          theme.$ai-aura-hover-start $start,
+          15%,
+          theme.$ai-aura-hover-end 50%
         )
-        rgba(0, 0, 0, 0.01);
+        padding-box,
+      linear-gradient(
+          to top,
+          theme.$ai-aura-hover-background,
+          theme.$ai-aura-hover-background
+        )
+        padding-box,
+      linear-gradient(to bottom, theme.$ai-border-start, theme.$ai-border-end)
+        border-box,
+      // Needed to underlay the transparent border
+      linear-gradient(
+          to top,
+          theme.$ai-aura-hover-background,
+          theme.$ai-aura-hover-background
+        )
+        border-box;
   } @else if $type == 'selected' {
     background: linear-gradient(
-        0deg,
-        theme.$slug-callout-aura-start-selected $start,
-        theme.$slug-callout-aura-end-selected 50%,
-        transparent 50%
-      ),
-      linear-gradient(
-          180deg,
-          theme.$slug-callout-gradient-top-selected $start,
-          theme.$slug-callout-gradient-bottom-selected 100%
+          to top,
+          theme.$ai-aura-start $start,
+          theme.$ai-aura-end 50%
         )
-        rgba(0, 0, 0, 0.01);
+        padding-box,
+      linear-gradient(to top, theme.$layer, theme.$layer) padding-box,
+      linear-gradient(to bottom, theme.$border-inverse, theme.$border-inverse)
+        border-box,
+      // Needed to underlay the transparent border
+      linear-gradient(to top, theme.$layer, theme.$layer)
+        border-box;
   } @else {
     background: linear-gradient(
           to top,
@@ -89,11 +102,11 @@
           theme.$ai-aura-end 50%
         )
         padding-box,
-      linear-gradient(to top, theme.$background, theme.$background) padding-box,
+      linear-gradient(to top, $background, $background) padding-box,
       linear-gradient(to bottom, theme.$ai-border-start, theme.$ai-border-end)
         border-box,
       // Needed to underlay the transparent border
-      linear-gradient(to top, theme.$background, theme.$background)
+      linear-gradient(to top, $background, $background)
         border-box;
   }
 }
