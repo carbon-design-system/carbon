@@ -40,11 +40,11 @@
 @mixin ai-table-gradient($type: 'default', $span: 50%) {
   @if $type == 'hover' {
     background: linear-gradient(
-      to right,
-      theme.$ai-aura-hover-start 0%,
-      15%,
-      theme.$ai-aura-hover-end 50%
-    );
+        to right,
+        theme.$ai-aura-hover-start 0%,
+        theme.$ai-aura-hover-end 100%
+      ),
+      theme.$ai-aura-hover-background;
   } @else if $type == 'selected' {
     background-image: linear-gradient(
         to right,
@@ -62,7 +62,6 @@
     background: linear-gradient(
       to right,
       theme.$ai-aura-start-table 0%,
-      15%,
       theme.$ai-aura-end $span,
       transparent 50%
     );
