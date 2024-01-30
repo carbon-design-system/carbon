@@ -34,8 +34,6 @@ const ButtonBase = React.forwardRef(function ButtonBase<
     renderIcon: ButtonImageElement,
     size,
     tabIndex,
-    _tooltipAlignment = 'center',
-    _tooltipPosition = 'top',
     type = 'button',
     ...rest
   }: ButtonProps<T>,

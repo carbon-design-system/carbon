@@ -129,14 +129,8 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
   const {
     as,
     children,
-    _className,
-    _dangerDescription = 'danger',
-    _disabled = false,
     hasIconOnly = false,
-    _href,
     iconDescription,
-    _isExpressive = false,
-    _isSelected,
     kind = 'primary',
     onBlur,
     onClick,
@@ -145,11 +139,9 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
     onMouseLeave,
     renderIcon: ButtonImageElement,
     size,
-    _tabIndex,
     tooltipAlignment = 'center',
     tooltipPosition = 'top',
-    _type = 'button',
-    ..._rest
+    ...rest
   } = props;
 
   const handleClick = (evt: React.MouseEvent) => {
@@ -184,7 +176,7 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
 
     return (
       <IconButton
-        {...props}
+        {...rest}
         ref={ref}
         as={as}
         align={align}
