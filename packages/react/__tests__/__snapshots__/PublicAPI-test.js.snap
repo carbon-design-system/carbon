@@ -4474,9 +4474,6 @@ Map {
   "Menu" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
-      "actionButtonWidth": Object {
-        "type": "number",
-      },
       "children": Object {
         "type": "node",
       },
