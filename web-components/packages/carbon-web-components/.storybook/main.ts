@@ -55,6 +55,8 @@ const stories = glob.sync(
     '../src/**/layer.mdx',
     '../src/**/file-uploader.mdx',
     '../src/**/file-uploader.stories.ts',
+    '../src/**/popover.mdx',
+    '../src/**/popover.stories.ts',
     '../src/**/form-group.mdx',
     '../src/**/form-group.stories.ts',
     '../src/**/modal.stories.ts',

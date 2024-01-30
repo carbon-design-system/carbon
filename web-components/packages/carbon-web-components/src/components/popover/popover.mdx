@@ -1,4 +1,7 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Description, Meta } from '@storybook/addon-docs/blocks';
+import * as PopoverStories from './popover.stories';
+
+<Meta of={PopoverStories} /> 
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 
 # Popover
@@ -98,8 +101,8 @@ import Settings16 from '@carbon/icons/lib/settings/16';
 
 ## `<cds-popover>` attributes and properties
 
-<Props of="cds-popover" />
+<ArgsTable of="cds-popover" />
 
 ## `<cds-popover-content>` attributes and properties
 
-<Props of="cds-popover-content" />
+<ArgsTable of="cds-popover-content" />
