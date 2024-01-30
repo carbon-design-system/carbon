@@ -1395,7 +1395,7 @@ __metadata:
     react-dom: "npm:^18.2.0"
     sass: "npm:1.69.5"
     use-debounce: "npm:^10.0.0"
-    vite: "npm:^5.0.5"
+    vite: "npm:^5.0.12"
   languageName: unknown
   linkType: soft
 
@@ -3974,9 +3974,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.0.5":
-  version: 5.0.5
-  resolution: "vite@npm:5.0.5"
+"vite@npm:^5.0.12":
+  version: 5.0.12
+  resolution: "vite@npm:5.0.12"
   dependencies:
     esbuild: "npm:^0.19.3"
     fsevents: "npm:~2.3.3"
@@ -4010,7 +4010,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: f4cd6e6e38448bdb6dd4dc36c0b34a5c42944d88961b9df246e75a4c3237196b1c64b1afc563524405d1fe3f34e728b9dbfd8cbc5af4e0a03371033d8057fdfe
+  checksum: ed0bb26a0d0c8e1dae0b70af9e36adffd7e15d80297443fe4da762596dc81570bad7f0291f590a57c1553f5e435338d8c7ffc483bd9431a95c09d9ac90665fad
   languageName: node
   linkType: hard
 

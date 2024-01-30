@@ -109,9 +109,7 @@ Map {
       "closeOnEscape": Object {
         "type": "bool",
       },
-      "hasFocus": Object {
-        "type": "bool",
-      },
+      "hasFocus": [Function],
       "hideCloseButton": Object {
         "type": "bool",
       },

@@ -843,6 +843,7 @@ export interface ActionableNotificationProps
   closeOnEscape?: boolean;
 
   /**
+   * @deprecated use StaticNotification once it's available. Issue #15532
    * Specify if focus should be moved to the component when the notification contains actions
    */
   hasFocus?: boolean;
@@ -1102,9 +1103,10 @@ ActionableNotification.propTypes = {
   closeOnEscape: PropTypes.bool,
 
   /**
+   * Deprecated, please use StaticNotification once it's available. Issue #15532
    * Specify if focus should be moved to the component when the notification contains actions
    */
-  hasFocus: PropTypes.bool,
+  hasFocus: deprecate(PropTypes.bool),
 
   /**
    * Specify the close button should be disabled, or not
