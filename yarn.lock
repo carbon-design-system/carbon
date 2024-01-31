@@ -2107,7 +2107,7 @@ __metadata:
     rollup: "npm:^2.79.1"
     rollup-plugin-strip-banner: "npm:^3.0.0"
     sass: "npm:^1.51.0"
-    sass-loader: "npm:^13.0.0"
+    sass-loader: "npm:^14.0.0"
     storybook: "npm:^7.1.0"
     storybook-addon-accessibility-checker: "npm:^3.1.61-rc.2"
     stream-browserify: "npm:^3.0.0"
@@ -18137,7 +18137,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"klona@npm:^2.0.4, klona@npm:^2.0.5":
+"klona@npm:^2.0.5":
   version: 2.0.5
   resolution: "klona@npm:2.0.5"
   checksum: 27cc78ea2dab88da6671b5a19c60215c30ed1e1f8ba3dc900a1beb88d1f8dba815a5d5a61306cd4982330bc6f5db3e3d5d2410556a3a225428341bb6482f90ae
@@ -24393,28 +24393,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass-loader@npm:^13.0.0":
-  version: 13.0.2
-  resolution: "sass-loader@npm:13.0.2"
+"sass-loader@npm:^14.0.0":
+  version: 14.0.0
+  resolution: "sass-loader@npm:14.0.0"
   dependencies:
-    klona: "npm:^2.0.4"
     neo-async: "npm:^2.6.2"
   peerDependencies:
-    fibers: ">= 3.1.0"
-    node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
+    node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
     sass: ^1.3.0
     sass-embedded: "*"
     webpack: ^5.0.0
   peerDependenciesMeta:
-    fibers:
-      optional: true
     node-sass:
       optional: true
     sass:
       optional: true
     sass-embedded:
       optional: true
-  checksum: d0978cc5c024d174b5670a5c87035f28c1344a1b3d2a7429803c1f75380cfaf27c2bb3b2626eebbbcb861e158ad0acfacd43526689a9de77b0d6af272321c858
+  checksum: 9415bf9003023b85f4bd775d2780fb5259be7ee9c8679f94a9ad3bea7d080dda44ff8a33ac15d3b225fbe8a6ab0762fbc98532278a89973c4de408c3bc4a98af
   languageName: node
   linkType: hard
 
