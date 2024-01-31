@@ -953,32 +953,112 @@
     padding-inline-end: 0;
   }
 
-  tr.#{$prefix}--data-table--slug-row {
+  tr.#{$prefix}--data-table--slug-row,
+  tr.#{$prefix}--data-table--slug-row + .#{$prefix}--expandable-row {
     @include ai-table-gradient();
 
     background-attachment: fixed;
   }
 
-  .#{$prefix}--data-table
-    tbody
-    tr.#{$prefix}--data-table--slug-row:not([data-child-row]):hover {
+  .#{$prefix}--data-table--slug-row {
+    box-shadow: inset 1px 0 $ai-border-strong;
+  }
+
+  // Remove table cell backgrounds that are overriding gradient background on row
+  .#{$prefix}--data-table tbody tr.#{$prefix}--data-table--slug-row:hover td,
+  tr.#{$prefix}--data-table--slug-row.#{$prefix}--expandable-row:hover
+    + .#{$prefix}--expandable-row[data-child-row]
+    td,
+  tr.#{$prefix}--data-table--slug-row.#{$prefix}--expandable-row--hover
+    + .#{$prefix}--expandable-row[data-child-row]:hover
+    > td,
+  tr.#{$prefix}--data-table--slug-row.#{$prefix}--expandable-row--hover > td,
+  tr.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row.#{$prefix}--expandable-row
+    + tr.#{$prefix}--expandable-row[data-child-row]
+    > td,
+  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+    td,
+  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+    td:first-of-type,
+  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected:not(
+      .#{$prefix}--expandable-row
+    ):hover
+    > td,
+  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+    + tr[data-child-row]
+    > td,
+  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
+    > td,
+  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
+    > td:first-of-type {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--data-table tbody tr.#{$prefix}--data-table--slug-row:hover,
+  tr.#{$prefix}--data-table--slug-row:hover
+    + .#{$prefix}--expandable-row[data-child-row],
+  tr.#{$prefix}--expandable-row--hover
+    + .#{$prefix}--expandable-row[data-child-row]:hover,
+  tr.#{$prefix}--expandable-row--hover.#{$prefix}--data-table--slug-row,
+  tr.#{$prefix}--data-table--selected.#{$prefix}--parent-row.#{$prefix}--expandable-row--hover.#{$prefix}--data-table--slug-row {
     @include ai-table-gradient('hover');
   }
 
   tr.#{$prefix}--parent-row.cds--data-table--selected.#{$prefix}--data-table--slug-row,
-  .#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row {
+  .#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row,
+  tr.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row
+    + .#{$prefix}--expandable-row {
     @include ai-table-gradient('selected');
   }
 
   tr.#{$prefix}--data-table--slug-row.#{$prefix}--data-table--selected td,
   tr.#{$prefix}--data-table--slug-row.#{$prefix}--data-table--selected:hover td,
-  tbody tr.#{$prefix}--data-table--slug-row:hover td {
+  tbody tr.#{$prefix}--data-table--slug-row:hover td,
+  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+    td:not(.#{$prefix}--table-expand):not(
+      .#{$prefix}--table-column-checkbox
+    ):not(.#{$prefix}--table-column-slug) {
     border-block-end-color: $border-subtle;
   }
 
   tr.#{$prefix}--data-table--slug-row[data-parent-row] td,
-  tr.#{$prefix}--data-table--slug-row[data-parent-row]:hover td {
+  tr.#{$prefix}--data-table--slug-row[data-parent-row]:hover td,
+  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+    > td,
+  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+    > td:first-of-type,
+  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
+    > td,
+  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected:not(
+      .#{$prefix}--expandable-row
+    ):hover
+    td,
+  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
+    td,
+  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
+    td:first-of-type {
     border-block-start: 1px solid transparent;
+  }
+
+  tr.#{$prefix}--expandable-row.cds--data-table--selected.#{$prefix}--data-table--slug-row[data-parent-row]
+    > td:not(.#{$prefix}--table-expand):not(
+      .#{$prefix}--table-column-checkbox
+    ):not(.#{$prefix}--table-column-slug) {
+    border-block-end: 1px solid $layer-selected;
+  }
+
+  //   tr.#{$prefix}--expandable-row.cds--data-table--selected.#{$prefix}--data-table--slug-row[data-parent-row]
+  //   > td:not(.#{$prefix}--table-column-checkbox) {
+  //   border-block-end: 1px solid $layer--selected-hover;
+  // }
+
+  // tr.#{$prefix}--parent-row.#{$prefix}--data-table--slug-row.#{$prefix}--expandable-row
+  //   td,
+  // tr.#{$prefix}--parent-row.#{$prefix}--data-table--slug-row.#{$prefix}--expandable-row:hover
+  //   td,
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--slug-row.#{$prefix}--expandable-row:hover
+    td:first-of-type {
+    border-block-end: 1px solid transparent;
   }
 
   .#{$prefix}--data-table

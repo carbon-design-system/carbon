@@ -153,6 +153,7 @@ describe('@carbon/styles/scss/theme', () => {
         "slug-callout-shadow-outer-02",
         "ai-inner-shadow",
         "ai-aura-start",
+        "ai-aura-start-table",
         "ai-aura-end",
         "ai-aura-hover-background",
         "ai-aura-hover-start",
