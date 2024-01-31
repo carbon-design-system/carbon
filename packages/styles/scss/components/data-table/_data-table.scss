@@ -945,13 +945,15 @@
     margin: convert.to-rem(-3px) 0;
   }
 
+  // -------------------
   // Slug styles
+  // -------------------
   .#{$prefix}--data-table .#{$prefix}--table-column-slug {
     inline-size: $spacing-05;
     padding-inline-end: 0;
   }
 
-  .#{$prefix}--data-table tbody tr.#{$prefix}--data-table--slug-row {
+  tr.#{$prefix}--data-table--slug-row {
     @include ai-table-gradient();
 
     background-attachment: fixed;
@@ -963,8 +965,20 @@
     @include ai-table-gradient('hover');
   }
 
-  .#{$prefix}--data-table tbody tr.#{$prefix}--data-table--slug-row td {
-    border-block-start: none;
+  tr.#{$prefix}--parent-row.cds--data-table--selected.#{$prefix}--data-table--slug-row,
+  .#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row {
+    @include ai-table-gradient('selected');
+  }
+
+  tr.#{$prefix}--data-table--slug-row.#{$prefix}--data-table--selected td,
+  tr.#{$prefix}--data-table--slug-row.#{$prefix}--data-table--selected:hover td,
+  tbody tr.#{$prefix}--data-table--slug-row:hover td {
+    border-block-end-color: $border-subtle;
+  }
+
+  tr.#{$prefix}--data-table--slug-row[data-parent-row] td,
+  tr.#{$prefix}--data-table--slug-row[data-parent-row]:hover td {
+    border-block-start: 1px solid transparent;
   }
 
   .#{$prefix}--data-table
