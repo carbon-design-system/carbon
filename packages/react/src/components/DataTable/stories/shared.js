@@ -93,6 +93,7 @@ export const headers = [
   {
     key: 'attached_groups',
     header: 'Attached groups',
+    isSlugHeader: true,
   },
   {
     key: 'status',

@@ -352,7 +352,7 @@ export const ColumnSlugWithSelectionAndExpansion = () => (
               <TableSelectAll {...getSelectionProps()} />
               {headers.map((header, i) => (
                 <TableHeader
-                  slug={i === 1 ? columnSlug : null}
+                  slug={header?.isSlugHeader ? columnSlug : null}
                   key={i}
                   {...getHeaderProps({ header })}>
                   {header.header}
@@ -367,8 +367,13 @@ export const ColumnSlugWithSelectionAndExpansion = () => (
                   <TableExpandRow {...getRowProps({ row })}>
                     <TableSelectRow {...getSelectionProps({ row })} />
                     {row.cells.map((cell) => {
-                      console.log(cell);
-                      return <TableCell key={cell.id}>{cell.value}</TableCell>;
+                      return (
+                        <TableCell
+                          hasSlugHeader={cell.hasSlugHeader}
+                          key={cell.id}>
+                          {cell.value}
+                        </TableCell>
+                      );
                     })}
                   </TableExpandRow>
                   <TableExpandedRow
@@ -398,10 +403,10 @@ export const ColumnSlugSort = () => (
         <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
             <TableRow>
-              {headers.map((header, i) => (
+              {headers.map((header) => (
                 <TableHeader
                   key={header.key}
-                  slug={i === 4 ? columnSlug : null}
+                  slug={header?.isSlugHeader ? columnSlug : null}
                   {...getHeaderProps({ header, isSortable: true })}>
                   {header.header}
                 </TableHeader>
@@ -412,7 +417,9 @@ export const ColumnSlugSort = () => (
             {rows.map((row) => (
               <TableRow key={row.id} {...getRowProps({ row })}>
                 {row.cells.map((cell) => (
-                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                  <TableCell hasSlugHeader={cell.hasSlugHeader} key={cell.id}>
+                    {cell.value}
+                  </TableCell>
                 ))}
               </TableRow>
             ))}

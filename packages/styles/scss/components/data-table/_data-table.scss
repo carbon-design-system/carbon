@@ -1068,7 +1068,7 @@
   .#{$prefix}--data-table
     thead
     th:has(> .#{$prefix}--table-header-label--slug) {
-    @include ai-gradient('top', 100%);
+    @include ai-table-gradient();
   }
 
   .#{$prefix}--table-column-slug .#{$prefix}--slug {
@@ -1091,6 +1091,10 @@
     .#{$prefix}--table-header-label.#{$prefix}--table-header-label--slug
     .#{$prefix}--slug {
     margin-inline-start: $spacing-03;
+  }
+
+  td.#{$prefix}--table-cell--column-slug {
+    @include ai-table-gradient();
   }
 
   // Windows HCM fix

@@ -48,6 +48,7 @@ exports[`DataTable.TableExpandRow renders as expected - Component API should ren
           data-child-row="true"
         >
           <td
+            class=""
             colspan="1"
           >
             <div

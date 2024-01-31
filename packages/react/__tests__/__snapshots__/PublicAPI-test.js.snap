@@ -1925,11 +1925,6 @@ Map {
     },
     "TableCell": Object {
       "displayName": "TableCell",
-      "propTypes": Object {
-        "className": Object {
-          "type": "string",
-        },
-      },
     },
     "TableContainer": Object {
       "propTypes": Object {
@@ -7658,11 +7653,6 @@ Map {
   },
   "TableCell" => Object {
     "displayName": "TableCell",
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-    },
   },
   "TableContainer" => Object {
     "propTypes": Object {

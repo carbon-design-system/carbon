@@ -82,10 +82,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
                 </label>
               </div>
             </td>
-            <td>
+            <td
+              class=""
+            >
               Field 2:A
             </td>
-            <td>
+            <td
+              class=""
+            >
               Field 2:B
             </td>
           </tr>
@@ -120,10 +124,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
                 </label>
               </div>
             </td>
-            <td>
+            <td
+              class=""
+            >
               Field 1:A
             </td>
-            <td>
+            <td
+              class=""
+            >
               Field 1:B
             </td>
           </tr>
@@ -158,10 +166,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
                 </label>
               </div>
             </td>
-            <td>
+            <td
+              class=""
+            >
               Field 3:A
             </td>
-            <td>
+            <td
+              class=""
+            >
               Field 3:B
             </td>
           </tr>
@@ -254,10 +266,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
                 </label>
               </div>
             </td>
-            <td>
+            <td
+              class=""
+            >
               Field 2:A
             </td>
-            <td>
+            <td
+              class=""
+            >
               Field 2:B
             </td>
           </tr>
@@ -292,10 +308,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
                 </label>
               </div>
             </td>
-            <td>
+            <td
+              class=""
+            >
               Field 1:A
             </td>
-            <td>
+            <td
+              class=""
+            >
               Field 1:B
             </td>
           </tr>
@@ -330,10 +350,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
                 </label>
               </div>
             </td>
-            <td>
+            <td
+              class=""
+            >
               Field 3:A
             </td>
-            <td>
+            <td
+              class=""
+            >
               Field 3:B
             </td>
           </tr>
@@ -709,10 +733,14 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 </label>
               </div>
             </td>
-            <td>
+            <td
+              class=""
+            >
               Field 2:A
             </td>
-            <td>
+            <td
+              class=""
+            >
               Field 2:B
             </td>
           </tr>
@@ -742,10 +770,14 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 </label>
               </div>
             </td>
-            <td>
+            <td
+              class=""
+            >
               Field 1:A
             </td>
-            <td>
+            <td
+              class=""
+            >
               Field 1:B
             </td>
           </tr>
@@ -775,10 +807,14 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 </label>
               </div>
             </td>
-            <td>
+            <td
+              class=""
+            >
               Field 3:A
             </td>
-            <td>
+            <td
+              class=""
+            >
               Field 3:B
             </td>
           </tr>
@@ -1092,26 +1128,38 @@ exports[`DataTable renders as expected - Component API should render and match s
           aria-live="polite"
         >
           <tr>
-            <td>
+            <td
+              class=""
+            >
               Field 2:A
             </td>
-            <td>
+            <td
+              class=""
+            >
               Field 2:B
             </td>
           </tr>
           <tr>
-            <td>
+            <td
+              class=""
+            >
               Field 1:A
             </td>
-            <td>
+            <td
+              class=""
+            >
               Field 1:B
             </td>
           </tr>
           <tr>
-            <td>
+            <td
+              class=""
+            >
               Field 3:A
             </td>
-            <td>
+            <td
+              class=""
+            >
               Field 3:B
             </td>
           </tr>
