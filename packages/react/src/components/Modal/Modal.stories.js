@@ -486,56 +486,6 @@ export const WithStateManager = () => {
   );
 };
 
-export const Nested = () => {
-  const button = useRef();
-
-  const ModalOne = ({ children }) => (
-    <ModalStateManager
-      renderLauncher={({ setOpen }) => (
-        <Button ref={button} onClick={() => setOpen(true)}>
-          Launch modal one
-        </Button>
-      )}>
-      {({ open, setOpen }) => (
-        <Modal
-          id="modal1"
-          modalHeading="Modal One"
-          passiveModal
-          open={open}
-          onRequestClose={() => setOpen(false)}>
-          {children}
-        </Modal>
-      )}
-    </ModalStateManager>
-  );
-
-  const ModalTwo = ({ children }) => (
-    <ModalStateManager
-      renderLauncher={({ setOpen }) => (
-        <Button ref={button} onClick={() => setOpen(true)}>
-          Launch modal two
-        </Button>
-      )}>
-      {({ open, setOpen }) => (
-        <Modal
-          id="modal2"
-          modalHeading="Modal Two"
-          passiveModal
-          open={open}
-          onRequestClose={() => setOpen(false)}>
-          {children}
-        </Modal>
-      )}
-    </ModalStateManager>
-  );
-
-  return (
-    <ModalOne>
-      <ModalTwo />
-    </ModalOne>
-  );
-};
-
 export const PassiveModal = () => {
   return (
     <Modal
