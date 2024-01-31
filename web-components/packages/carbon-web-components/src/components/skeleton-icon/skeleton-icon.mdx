@@ -1,0 +1,36 @@
+import { ArgsTable, Meta, Markdown } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as SkeletonIconStories from './skeleton-icon.stories';
+
+<Meta of={SkeletonIconStories} />
+
+# Skeleton icon
+
+> 💡 Check our
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/skeleton-icon)
+> example implementation.
+
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/skeleton-icon)
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/skeleton-icon/index.js';
+```
+
+<Markdown>{`${cdnJs({ components: ['skeleton-placeholder'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
+
+### HTML
+
+```html
+<cds-skeleton-icon></cds-skeleton-icon>
+```
+
+## `<cds-skeleton-icon>` attributes, properties and events
+
+<ArgsTable of="cds-skeleton-icon" />

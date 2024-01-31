@@ -84,6 +84,8 @@ const stories = glob.sync(
     '../src/**/search.stories.ts',
     '../src/**/select.mdx',
     '../src/**/select.stories.ts',
+    '../src/**/skeleton-icon.mdx',
+    '../src/**/skeleton-icon.stories.ts',
     '../src/**/skeleton-placeholder.mdx',
     '../src/**/skeleton-placeholder.stories.ts',
     '../src/**/skeleton-text.mdx',
