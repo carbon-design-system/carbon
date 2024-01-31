@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -187,14 +187,15 @@ abstract class CDSFloatingMenu extends HostListenerMixin(
       left: refLeft = 0,
       top: refTop = 0,
       right: refRight = 0,
-      bottom: refBottom = 0,
     } = triggerPosition;
+    let { bottom: refBottom = 0 } = triggerPosition;
     const { width, height } = this.getBoundingClientRect();
     const {
       left: containerLeft = 0,
       right: containerRight = 0,
       top: containerTop = 0,
     } = container.getBoundingClientRect();
+    refBottom = refBottom - containerTop;
 
     const containerComputedStyle =
       container.ownerDocument!.defaultView!.getComputedStyle(container);
