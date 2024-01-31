@@ -218,7 +218,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     const startSentinel = useRef<HTMLButtonElement>(null);
     const endSentinel = useRef<HTMLButtonElement>(null);
 
-    // Kepp track of modal open/close state
+    // Keep track of modal open/close state
     // and propagate it to the document.body
     useEffect(() => {
       if (open !== wasOpen) {
@@ -235,6 +235,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     function handleKeyDown(evt: KeyboardEvent) {
+      evt.preventDefault();
       if (match(evt, keys.Escape)) {
         closeModal(evt);
       }
@@ -242,6 +243,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       onKeyDown?.(evt);
     }
     function handleMousedown(evt: MouseEvent) {
+      evt.preventDefault();
       const isInside = innerModal.current?.contains(evt.target as Node);
       if (!isInside && !preventCloseOnClickOutside) {
         closeModal(evt);
