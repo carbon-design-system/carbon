@@ -632,6 +632,12 @@ class CDSTable extends HostListenerMixin(LitElement) {
     }
 
     if (changedProperties.has('isSelectable')) {
+      this._tableHeaderRow.setAttribute('selection-name', 'header');
+      this._tableRows.forEach((e, index) => {
+        if (!e.hasAttribute('selection-name')) {
+          e.setAttribute('selection-name', index);
+        }
+      });
       this.headerCount++;
     }
 
