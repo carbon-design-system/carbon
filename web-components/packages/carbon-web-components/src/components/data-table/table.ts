@@ -236,9 +236,15 @@ class CDSTable extends HostListenerMixin(LitElement) {
   private _handleFilterRows() {
     const unfilteredRows = [] as any;
     forEach(this._tableRows, (elem) => {
-      const rowText = elem.textContent?.trim();
-      const filtered = this.filterRows(rowText as string, this._searchValue);
+      let rowText = elem.textContent?.trim();
+      let filtered = this.filterRows(rowText as string, this._searchValue);
       (elem as any).filtered = filtered;
+
+      if (filtered && this.expandable) {
+        rowText = (elem as any).nextElementSibling.textContent?.trim();
+        filtered = this.filterRows(rowText as string, this._searchValue);
+        (elem as any).filtered = filtered;
+      }
 
       if (!filtered) {
         unfilteredRows.push(elem);
