@@ -207,10 +207,7 @@ export default class ContentSwitcher extends React.Component<
     } = this.props;
 
     const isIconOnly = React.Children?.map(children, (child) => {
-      return (
-        (child as { type: { displayName: string } }).type.displayName ===
-        'IconSwitch'
-      );
+      return (child as JSX.Element).type.displayName === 'IconSwitch';
     })?.every((val) => val === true);
 
     const classes = classNames(`${prefix}--content-switcher`, className, {
@@ -228,12 +225,12 @@ export default class ContentSwitcher extends React.Component<
         role="tablist"
         onChange={undefined}>
         {children &&
-          React.Children.map(children, (child: ReactElement, index) =>
-            React.cloneElement(child, {
+          React.Children.toArray(children).map((child, index) =>
+            React.cloneElement(child as ReactElement, {
               index,
               onClick: composeEventHandlers([
                 this.handleChildChange,
-                child.props.onClick,
+                (child as ReactElement).props.onClick,
               ]),
               onKeyDown: this.handleChildChange,
               selected: index === this.state.selectedIndex,

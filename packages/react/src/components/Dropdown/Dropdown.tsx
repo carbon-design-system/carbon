@@ -22,13 +22,14 @@ import {
   UseSelectStateChangeTypes,
 } from 'downshift';
 import cx from 'classnames';
-import PropTypes from 'prop-types';
+import PropTypes, { ReactNodeLike } from 'prop-types';
 import {
   Checkmark,
   WarningAltFilled,
   WarningFilled,
 } from '@carbon/icons-react';
 import ListBox, {
+  type ListBoxMenuIconTranslationKey,
   ListBoxSize,
   ListBoxType,
   PropTypes as ListBoxPropTypes,
@@ -199,6 +200,11 @@ export interface DropdownProps<ItemType>
   size?: ListBoxSize;
 
   /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `Dropdown` component
+   */
+  slug?: ReactNodeLike;
+
+  /**
    * Provide the title text that will be read by a screen reader when
    * visiting this control
    */
@@ -207,7 +213,10 @@ export interface DropdownProps<ItemType>
   /**
    * Callback function for translating ListBoxMenuIcon SVG title
    */
-  translateWithId?(messageId: string, args?: Record<string, unknown>): string;
+  translateWithId?(
+    messageId: ListBoxMenuIconTranslationKey,
+    args?: Record<string, unknown>
+  ): string;
 
   /**
    * The dropdown type, `default` or `inline`
@@ -224,6 +233,8 @@ export interface DropdownProps<ItemType>
    */
   warnText?: React.ReactNode;
 }
+
+export type DropdownTranslationKey = ListBoxMenuIconTranslationKey;
 
 const Dropdown = React.forwardRef(
   <ItemType,>(
@@ -255,6 +266,7 @@ const Dropdown = React.forwardRef(
       selectedItem: controlledSelectedItem,
       downshiftProps,
       readOnly,
+      slug,
       ...other
     }: DropdownProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
@@ -351,6 +363,7 @@ const Dropdown = React.forwardRef(
         [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
         [`${prefix}--list-box__wrapper--fluid--focus`]:
           isFluid && isFocused && !isOpen,
+        [`${prefix}--list-box__wrapper--slug`]: slug,
       }
     );
 
@@ -435,6 +448,14 @@ const Dropdown = React.forwardRef(
 
     const menuProps = getMenuProps();
 
+    // Slug is always size `mini`
+    let normalizedSlug;
+    if (slug && slug['type']?.displayName === 'Slug') {
+      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+        size: 'mini',
+      });
+    }
+
     return (
       <div className={wrapperClasses} {...other}>
         {titleText && (
@@ -485,13 +506,14 @@ const Dropdown = React.forwardRef(
                 ? renderSelectedItem
                   ? renderSelectedItem(selectedItem)
                   : itemToString(selectedItem)
-                : label}
+                : (label as any)}
             </span>
             <ListBox.MenuIcon
               isOpen={isOpen}
               translateWithId={translateWithId}
             />
           </button>
+          {normalizedSlug}
           <ListBox.Menu {...menuProps}>
             {isOpen &&
               items.map((item, index) => {
@@ -500,6 +522,13 @@ const Dropdown = React.forwardRef(
                   item,
                   index,
                 });
+                if (
+                  item !== null &&
+                  typeof item === 'object' &&
+                  Object.prototype.hasOwnProperty.call(item, 'id')
+                ) {
+                  itemProps.id = item['id'];
+                }
                 const title =
                   isObject && 'text' in item && itemToElement
                     ? item.text
@@ -564,7 +593,7 @@ Dropdown.propTypes = {
   ),
 
   /**
-   * Provide a custom className to be applied on the bx--dropdown node
+   * Provide a custom className to be applied on the cds--dropdown node
    */
   className: PropTypes.string,
 
@@ -683,6 +712,11 @@ Dropdown.propTypes = {
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
    */
   size: ListBoxPropTypes.ListBoxSize,
+
+  /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `Dropdown` component
+   */
+  slug: PropTypes.node,
 
   /**
    * Provide the title text that will be read by a screen reader when

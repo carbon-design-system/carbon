@@ -12,6 +12,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../../utilities/ai-gradient' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/button-reset';
 @use '../../utilities/high-contrast-mode' as *;
@@ -376,6 +377,13 @@
 
   // No steppers
   .#{$prefix}--number--nosteppers input[type='number'] {
+    padding-inline-end: 0;
+  }
+
+  .#{$prefix}--number--nosteppers input[type='number'][data-invalid],
+  .#{$prefix}--number--nosteppers
+    .#{$prefix}--number__input-wrapper--warning
+    input[type='number'] {
     padding-inline-end: convert.to-rem(48px);
   }
 
@@ -410,6 +418,48 @@
     .#{$prefix}--number__controls:hover
     .#{$prefix}--number__rule-divider:not(:first-of-type) {
     background-color: $border-subtle;
+  }
+
+  // Styles for `Slug` rendered inside `NumberInput`
+  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: convert.to-rem(88px);
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--number__input-wrapper--slug
+    input[data-invalid]
+    ~ .#{$prefix}--slug,
+  .#{$prefix}--number__input-wrapper--slug.#{$prefix}--number__input-wrapper--warning
+    .#{$prefix}--slug {
+    inset-inline-end: convert.to-rem(120px);
+  }
+
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--slug
+    input[data-invalid],
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--slug.#{$prefix}--number__input-wrapper--warning
+    input {
+    padding-inline-end: convert.to-rem(144px);
+  }
+
+  .#{$prefix}--number__input-wrapper--slug
+    input[type='number']:not(:has(~ .#{$prefix}--slug--revert)),
+  .#{$prefix}--number__input-wrapper--slug input[type='number']:disabled {
+    @include ai-gradient;
+
+    padding-inline-end: convert.to-rem(112px);
+  }
+
+  .#{$prefix}--number__input-wrapper--slug
+    input[type='number']:not([data-invalid]):not(
+      :has(~ .#{$prefix}--slug--revert)
+    )
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn {
+    border-block-end-color: $ai-border-strong;
   }
 
   // Skeleton State

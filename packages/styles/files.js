@@ -205,6 +205,7 @@ const files = [
   'scss/type/_reset.scss',
 
   // Utilities
+  'scss/utilities/_ai-gradient.scss',
   'scss/utilities/_box-shadow.scss',
   'scss/utilities/_button-reset.scss',
   'scss/utilities/_component-reset.scss',

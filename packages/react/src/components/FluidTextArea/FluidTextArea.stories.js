@@ -20,7 +20,7 @@ import {
 import { Information } from '@carbon/icons-react';
 
 export default {
-  title: 'Experimental/unstable__FluidTextArea',
+  title: 'Experimental/Fluid Components/unstable__FluidTextArea',
   component: FluidTextArea,
   subcomponents: {
     FluidTextAreaSkeleton,
@@ -119,7 +119,7 @@ Playground.args = {
   disabled: false,
   enableCounter: false,
   labelText: 'Text Area label',
-  maxCount: '500',
+  maxCount: 500,
   warn: false,
   warnText: 'This is a warning message.',
 };

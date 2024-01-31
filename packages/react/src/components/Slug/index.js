@@ -16,6 +16,9 @@ import {
   ToggletipContent,
   ToggletipActions,
 } from '../Toggletip';
+import { IconButton } from '../IconButton';
+import { Undo } from '@carbon/icons-react';
+import { useId } from '../../internal/useId';
 
 export const SlugContent = React.forwardRef(function SlugContent(
   { children, className },
@@ -23,8 +26,13 @@ export const SlugContent = React.forwardRef(function SlugContent(
 ) {
   const prefix = usePrefix();
 
+  const hasSlugActions = React.Children.toArray(children).some(
+    (child) => child.type?.displayName === 'SlugActions'
+  );
+
   const slugContentClasses = cx(className, {
     [`${prefix}--slug-content`]: true,
+    [`${prefix}--slug-content--with-actions`]: hasSlugActions,
   });
 
   return (
@@ -34,6 +42,7 @@ export const SlugContent = React.forwardRef(function SlugContent(
   );
 });
 
+SlugContent.displayName = 'SlugContent';
 SlugContent.propTypes = {
   /**
    * Specify the content you want rendered inside the slug ToggleTip
@@ -63,6 +72,7 @@ export const SlugActions = React.forwardRef(function SlugActions(
   );
 });
 
+SlugActions.displayName = 'SlugActions';
 SlugActions.propTypes = {
   /**
    * Specify the content you want rendered inside the slug callout toolbar
@@ -80,16 +90,23 @@ export const Slug = React.forwardRef(function Slug(
     aiText = 'AI',
     aiTextLabel,
     align,
-    autoAlign = false,
+    autoAlign = true,
+    children,
     className,
     dotType,
-    kind,
+    kind = 'default',
+    onRevertClick,
+    revertActive,
+    revertLabel = 'Revert to AI input',
+    slugLabel = 'Show information',
     size = 'xs',
-    children,
+    ...rest
   },
   ref
 ) {
   const prefix = usePrefix();
+
+  const id = useId('slug');
 
   const slugClasses = cx(className, {
     [`${prefix}--slug`]: true,
@@ -98,6 +115,7 @@ export const Slug = React.forwardRef(function Slug(
     // Need to be able to target the non-hollow variant another way
     // other than using `:not` all over the styles
     [`${prefix}--slug--enabled`]: kind !== 'hollow' && dotType !== 'hollow',
+    [`${prefix}--slug--revert`]: revertActive,
   });
 
   const slugButtonClasses = cx({
@@ -108,23 +126,45 @@ export const Slug = React.forwardRef(function Slug(
       kind === 'inline' && aiTextLabel,
   });
 
+  const handleOnRevertClick = (evt) => {
+    if (onRevertClick) {
+      onRevertClick(evt);
+    }
+  };
+
+  const ariaLabel = !aiTextLabel
+    ? `${aiText} - ${slugLabel}`
+    : `${aiText} - ${aiTextLabel}`;
+
   return (
-    <div className={slugClasses} ref={ref}>
-      <Toggletip align={align} autoAlign={autoAlign}>
-        <ToggletipButton className={slugButtonClasses} label="Show information">
-          <span className={`${prefix}--slug__text`}>{aiText}</span>
-          {aiTextLabel && (
-            <span className={`${prefix}--slug__additional-text`}>
-              {aiTextLabel}
-            </span>
-          )}
-        </ToggletipButton>
-        {children}
-      </Toggletip>
+    <div className={slugClasses} ref={ref} id={id}>
+      {revertActive ? (
+        <IconButton
+          onClick={handleOnRevertClick}
+          kind="ghost"
+          size="sm"
+          label={revertLabel}
+          {...rest}>
+          <Undo />
+        </IconButton>
+      ) : (
+        <Toggletip align={align} autoAlign={autoAlign} {...rest}>
+          <ToggletipButton className={slugButtonClasses} label={ariaLabel}>
+            <span className={`${prefix}--slug__text`}>{aiText}</span>
+            {aiTextLabel && (
+              <span className={`${prefix}--slug__additional-text`}>
+                {aiTextLabel}
+              </span>
+            )}
+          </ToggletipButton>
+          {children}
+        </Toggletip>
+      )}
     </div>
   );
 });
 
+Slug.displayName = 'Slug';
 Slug.propTypes = {
   /**
    * Specify the correct translation of the AI text
@@ -183,6 +223,21 @@ Slug.propTypes = {
   kind: PropTypes.oneOf(['default', 'hollow', 'inline']),
 
   /**
+   * Callback function that fires when the revert button is clicked
+   */
+  onRevertClick: PropTypes.func,
+
+  /**
+   * Specify whether the revert button should be visible
+   */
+  revertActive: PropTypes.bool,
+
+  /**
+   * Specify the text that should be shown when the revert button is hovered
+   */
+  revertLabel: PropTypes.string,
+
+  /**
    * Specify the size of the button, from the following list of sizes:
    */
   size: PropTypes.oneOf(['mini', '2xs', 'xs', 'sm', 'md', 'lg', 'xl']),
@@ -191,4 +246,9 @@ Slug.propTypes = {
    * Specify the content you want rendered inside the slug ToggleTip
    */
   slugContent: PropTypes.node,
+
+  /**
+   * Specify the text that will be provided to the aria-label of the `Slug` button
+   */
+  slugLabel: PropTypes.string,
 };

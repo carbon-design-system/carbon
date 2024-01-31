@@ -1,19 +1,11 @@
 /**
- * Copyright IBM Corp. 2018, 2023
+ * Copyright IBM Corp. 2018, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
 
-interface IconAttributes
-  extends Omit<React.SVGProps<React.ReactSVGElement>, 'tabIndex'> {
-  tabindex?: string | number | undefined;
-
-  title?: string | undefined;
-}
-
-export const defaultAttributes: IconAttributes = {
+export const defaultAttributes = {
   // Reference:
   // https://github.com/IBM/carbon-components-react/issues/1392
   // https://github.com/PolymerElements/iron-iconset-svg/pull/47
@@ -31,9 +23,9 @@ export default function getAttributes({
   height,
   viewBox = `0 0 ${width} ${height}`,
   ...attributes
-}: IconAttributes = {}): IconAttributes {
+}: Record<string, unknown> = {}): Record<string, unknown> {
   const { tabindex, ...rest } = attributes;
-  const iconAttributes: IconAttributes = {
+  const iconAttributes: Record<string, unknown> = {
     ...defaultAttributes,
     ...rest,
     width,

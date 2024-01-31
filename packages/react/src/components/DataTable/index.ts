@@ -24,15 +24,20 @@ import TableExpandHeader from './TableExpandHeader';
 import TableExpandRow from './TableExpandRow';
 import TableExpandedRow from './TableExpandedRow';
 import TableHead from './TableHead';
-import TableHeader from './TableHeader';
+import TableHeader, {
+  TableHeaderTranslationKey,
+  TableHeaderTranslationArgs,
+} from './TableHeader';
 import TableRow from './TableRow';
 import TableSelectAll from './TableSelectAll';
 import TableSelectRow from './TableSelectRow';
+import TableSlugRow from './TableSlugRow';
 import TableToolbar from './TableToolbar';
 import TableToolbarAction from './TableToolbarAction';
 import TableToolbarContent from './TableToolbarContent';
 import TableToolbarSearch from './TableToolbarSearch';
 import TableToolbarMenu from './TableToolbarMenu';
+import type { DataTableSortState } from './state/sortStates';
 
 DataTable.Table = Table;
 DataTable.TableActionList = TableActionList;
@@ -49,6 +54,7 @@ DataTable.TableHeader = TableHeader;
 DataTable.TableRow = TableRow;
 DataTable.TableSelectAll = TableSelectAll;
 DataTable.TableSelectRow = TableSelectRow;
+DataTable.TableSlugRow = TableSlugRow;
 DataTable.TableToolbar = TableToolbar;
 DataTable.TableToolbarAction = TableToolbarAction;
 DataTable.TableToolbarContent = TableToolbarContent;
@@ -61,6 +67,7 @@ export {
   type DataTableHeader,
   type DataTableProps,
   type DataTableRenderProps,
+  type DataTableSortState,
   type DataTableRow,
   type DataTableSize,
   Table,
@@ -75,9 +82,12 @@ export {
   TableExpandedRow,
   TableHead,
   TableHeader,
+  type TableHeaderTranslationKey,
+  type TableHeaderTranslationArgs,
   TableRow,
   TableSelectAll,
   TableSelectRow,
+  TableSlugRow,
   TableToolbar,
   TableToolbarAction,
   TableToolbarContent,

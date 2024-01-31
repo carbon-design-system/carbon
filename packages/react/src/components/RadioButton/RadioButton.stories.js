@@ -51,9 +51,34 @@ export const Default = () => {
   );
 };
 
-export const Skeleton = () => {
-  return <RadioButtonSkeleton />;
+export const Vertical = () => {
+  return (
+    <RadioButtonGroup
+      legendText="Group label"
+      name="radio-button-group"
+      defaultSelected="radio-1"
+      orientation="vertical">
+      <RadioButton
+        labelText="Radio button label"
+        value="radio-1"
+        id="radio-1"
+      />
+      <RadioButton
+        labelText="Radio button label"
+        value="radio-2"
+        id="radio-2"
+      />
+      <RadioButton
+        labelText="Radio button label"
+        value="radio-3"
+        id="radio-3"
+        disabled
+      />
+    </RadioButtonGroup>
+  );
 };
+
+export const Skeleton = () => {};
 
 export const Playground = (args) => {
   return (

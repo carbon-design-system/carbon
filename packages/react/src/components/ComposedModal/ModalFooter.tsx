@@ -5,6 +5,8 @@ import ButtonSet from '../ButtonSet';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
+import InlineLoading from '../InlineLoading';
+import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 
 interface SecondaryButtonProps {
   buttonText: ReactNode;
@@ -12,6 +14,7 @@ interface SecondaryButtonProps {
 }
 export interface SecondaryButtonSetProps {
   closeModal(evt: MouseEvent): void;
+  disabled?: boolean;
   onRequestClose(evt: MouseEvent): void;
   secondaryButtonText?: string;
   secondaryButtons?: [SecondaryButtonProps, SecondaryButtonProps];
@@ -24,6 +27,7 @@ function SecondaryButtonSet({
   secondaryClassName,
   closeModal,
   onRequestClose,
+  disabled,
 }: SecondaryButtonSetProps) {
   function handleRequestClose(evt: MouseEvent) {
     closeModal(evt);
@@ -44,6 +48,7 @@ function SecondaryButtonSet({
   if (secondaryButtonText) {
     return (
       <Button
+        disabled={disabled}
         className={secondaryClassName}
         onClick={handleRequestClose}
         kind="secondary">
@@ -56,6 +61,7 @@ function SecondaryButtonSet({
 
 SecondaryButtonSet.propTypes = {
   closeModal: PropTypes.func,
+  disabled: PropTypes.bool,
   onRequestClose: PropTypes.func,
   secondaryButtonText: PropTypes.string,
   secondaryButtons: (props, propName, componentName) => {
@@ -157,6 +163,27 @@ export interface ModalFooterProps {
    * Specify a custom className to be applied to the secondary button
    */
   secondaryClassName?: string;
+
+  /**
+   * loading status
+   */
+  loadingStatus?: InlineLoadingStatus;
+
+  /**
+   * Specify the description for the loading text
+   */
+  loadingDescription?: string;
+
+  /**
+   * Specify the description for the loading text
+   */
+  loadingIconDescription?: string;
+
+  /**
+   * Provide an optional handler to be invoked when loading is
+   * successful
+   */
+  onLoadingSuccess?(): void;
 }
 
 export const ModalFooter = React.forwardRef<HTMLElement, ModalFooterProps>(
@@ -175,6 +202,10 @@ export const ModalFooter = React.forwardRef<HTMLElement, ModalFooterProps>(
       secondaryButtonText,
       secondaryButtons,
       secondaryClassName,
+      loadingStatus = 'inactive',
+      loadingDescription,
+      loadingIconDescription,
+      onLoadingSuccess = noopFn,
       ...rest
     },
     ref
@@ -188,6 +219,12 @@ export const ModalFooter = React.forwardRef<HTMLElement, ModalFooterProps>(
         ? `${prefix}--modal-footer--three-button`
         : null
     );
+    const primaryButtonClass = cx(
+      primaryClassName,
+      loadingStatus !== 'inactive' ? `${prefix}--btn--loading` : null
+    );
+
+    const loadingActive = loadingStatus !== 'inactive';
 
     const secondaryButtonProps = {
       closeModal,
@@ -195,24 +232,38 @@ export const ModalFooter = React.forwardRef<HTMLElement, ModalFooterProps>(
       secondaryButtonText,
       secondaryClassName,
       onRequestClose,
+      disabled: loadingActive,
     };
 
     return (
-      // @ts-expect-error: Invalid derived types, will be fine once explicit types are added
-      <ButtonSet className={footerClass} {...rest} ref={ref}>
+      <ButtonSet
+        className={footerClass}
+        {...rest}
+        // @ts-expect-error: Invalid derived types, will be fine once explicit types are added
+        ref={ref}
+        aria-busy={loadingActive}>
         {/* @ts-expect-error: Invalid derived types, will be fine once explicit types are added */}
         <SecondaryButtonSet {...secondaryButtonProps} />
         {primaryButtonText && (
           <Button
             onClick={onRequestSubmit}
-            className={primaryClassName}
-            disabled={primaryButtonDisabled}
+            className={primaryButtonClass}
+            disabled={loadingActive || primaryButtonDisabled}
             kind={danger ? 'danger' : 'primary'}
             ref={inputref}>
-            {primaryButtonText}
+            {loadingStatus === 'inactive' ? (
+              primaryButtonText
+            ) : (
+              <InlineLoading
+                status={loadingStatus}
+                description={loadingDescription}
+                iconDescription={loadingIconDescription}
+                className={`${prefix}--inline-loading--btn`}
+                onSuccess={onLoadingSuccess}
+              />
+            )}
           </Button>
         )}
-
         {children}
       </ButtonSet>
     );
@@ -251,6 +302,27 @@ ModalFooter.propTypes = {
       current: PropTypes.any,
     }),
   ]),
+
+  /**
+   * Specify the description for the loading text
+   */
+  loadingDescription: PropTypes.string,
+
+  /**
+   * Specify the description for the loading text
+   */
+  loadingIconDescription: PropTypes.string,
+
+  /**
+   * loading status
+   */
+  loadingStatus: PropTypes.oneOf(['inactive', 'active', 'finished', 'error']),
+
+  /**
+   * Provide an optional handler to be invoked when loading is
+   * successful
+   */
+  onLoadingSuccess: PropTypes.func,
 
   /**
    * Specify an optional function for when the modal is requesting to be

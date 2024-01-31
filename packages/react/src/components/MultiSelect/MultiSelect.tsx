@@ -14,7 +14,7 @@ import {
   UseSelectStateChangeTypes,
 } from 'downshift';
 import isEqual from 'lodash.isequal';
-import PropTypes from 'prop-types';
+import PropTypes, { ReactNodeLike } from 'prop-types';
 import React, { ForwardedRef, useContext, useRef, useState } from 'react';
 import ListBox, {
   ListBoxSize,
@@ -270,6 +270,11 @@ export interface MultiSelectProps<ItemType>
   size?: ListBoxSize;
 
   /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `MultiSelect` component
+   */
+  slug?: ReactNodeLike;
+
+  /**
    * Provide text to be used in a `<label>` element that is tied to the
    * multiselect via ARIA attributes.
    */
@@ -332,6 +337,7 @@ const MultiSelect = React.forwardRef(
       selectedItems: selected,
       readOnly,
       locale = 'en',
+      slug,
     }: MultiSelectProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
@@ -448,6 +454,7 @@ const MultiSelect = React.forwardRef(
         [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
         [`${prefix}--list-box__wrapper--fluid--focus`]:
           !isOpen && isFluid && isFocused,
+        [`${prefix}--list-box__wrapper--slug`]: slug,
       }
     );
     const titleClasses = cx(`${prefix}--label`, {
@@ -503,6 +510,9 @@ const MultiSelect = React.forwardRef(
         case ToggleButtonKeyDownSpaceButton:
         case ToggleButtonKeyDownEnter:
           if (changes.selectedItem === undefined) {
+            break;
+          }
+          if (Array.isArray(changes.selectedItem)) {
             break;
           }
           onItemChange(changes.selectedItem);
@@ -569,6 +579,14 @@ const MultiSelect = React.forwardRef(
           },
         }
       : {};
+
+    // Slug is always size `mini`
+    let normalizedSlug;
+    if (slug && slug['type']?.displayName === 'Slug') {
+      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+        size: 'mini',
+      });
+    }
 
     return (
       <div className={wrapperClasses}>
@@ -637,6 +655,7 @@ const MultiSelect = React.forwardRef(
                 translateWithId={translateWithId}
               />
             </button>
+            {normalizedSlug}
           </div>
           <ListBox.Menu {...getMenuProps()}>
             {isOpen &&
@@ -856,6 +875,11 @@ MultiSelect.propTypes = {
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
    */
   size: ListBoxPropTypes.ListBoxSize,
+
+  /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `MultiSelect` component
+   */
+  slug: PropTypes.node,
 
   /**
    * Provide a method that sorts all options in the control. Overriding this

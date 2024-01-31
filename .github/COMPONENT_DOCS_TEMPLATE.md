@@ -11,11 +11,11 @@ Mixins specific to { THIS_COMPONENT_NAME } are located in
 
 #### Modifiers
 
-Use these modifiers with `.bx--root-class` class.
+Use these modifiers with `.cds--root-class` class.
 
-| Selector       | Description      |
-| -------------- | ---------------- |
-| .bx--something | Description here |
+| Selector        | Description      |
+| --------------- | ---------------- |
+| .cds--something | Description here |
 
 ### JavaScript
 
@@ -40,9 +40,9 @@ Use these modifiers with `.bx--root-class` class.
 
 #### Classes
 
-| Name                 | Description   |
-| -------------------- | ------------- |
-| bx--class\_\_element | The class for |
+| Name                  | Description   |
+| --------------------- | ------------- |
+| cds--class\_\_element | The class for |
 
 ### FAQ
 

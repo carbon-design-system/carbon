@@ -45,7 +45,7 @@ export interface TextAreaProps
   disabled?: boolean;
 
   /**
-   * Specify whether to display the character counter
+   * Specify whether to display the counter
    */
   enableCounter?: boolean;
 
@@ -88,7 +88,7 @@ export interface TextAreaProps
   light?: boolean;
 
   /**
-   * Max character count allowed for the textarea. This is needed in order for enableCounter to display
+   * Max entity count allowed for the textarea. This is needed in order for enableCounter to display
    */
   maxCount?: number;
 
@@ -103,6 +103,12 @@ export interface TextAreaProps
    * `<textarea>` is clicked
    */
   onClick?: (evt: React.MouseEvent<HTMLTextAreaElement>) => void;
+
+  /**
+   * Optionally provide an `onKeyDown` handler that is called whenever `<textarea>`
+   * is keyed
+   */
+  onKeyDown?: (evt: React.KeyboardEvent<HTMLTextAreaElement>) => void;
 
   /**
    * Specify the placeholder attribute for the `<textarea>`
@@ -120,6 +126,11 @@ export interface TextAreaProps
   rows?: number;
 
   /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `TextArea` component
+   */
+  slug?: ReactNodeLike;
+
+  /**
    * Provide the current value of the `<textarea>`
    */
   value?: string | number;
@@ -133,6 +144,11 @@ export interface TextAreaProps
    * Provide the text that is displayed when the control is in warning state
    */
   warnText?: ReactNodeLike;
+
+  /**
+   * Specify the method used for calculating the counter number
+   */
+  counterMode?: 'character' | 'word';
 }
 
 const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
@@ -144,6 +160,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     hideLabel,
     onChange = noopFn,
     onClick = noopFn,
+    onKeyDown = noopFn,
     invalid = false,
     invalidText = '',
     helperText = '',
@@ -151,40 +168,144 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     placeholder = '',
     enableCounter = false,
     maxCount = undefined,
+    counterMode = 'character',
     warn = false,
     warnText = '',
     rows = 4,
+    slug,
     ...other
   } = props;
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
   const { defaultValue, value } = other;
-  const [textCount, setTextCount] = useState(
-    defaultValue?.toString()?.length || value?.toString()?.length || 0
-  );
+
   const { current: textAreaInstanceId } = useRef(getInstanceId());
 
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const ref = useMergedRefs([forwardRef, textareaRef]) as
+    | React.LegacyRef<HTMLTextAreaElement>
+    | undefined;
+
+  function getInitialTextCount(): number {
+    const targetValue =
+      defaultValue || value || textareaRef.current?.value || '';
+    const strValue = targetValue.toString();
+
+    if (counterMode === 'character') {
+      return strValue.length;
+    } else {
+      return strValue.match(/\w+/g)?.length || 0;
+    }
+  }
+
+  const [textCount, setTextCount] = useState(getInitialTextCount());
+
   useEffect(() => {
-    setTextCount(
-      defaultValue?.toString()?.length || value?.toString()?.length || 0
-    );
-  }, [value, defaultValue]);
+    setTextCount(getInitialTextCount());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value, defaultValue, counterMode]);
+
+  useIsomorphicEffect(() => {
+    if (other.cols && textareaRef.current) {
+      textareaRef.current.style.width = '';
+      textareaRef.current.style.resize = 'none';
+    } else if (textareaRef.current) {
+      textareaRef.current.style.width = `100%`;
+    }
+  }, [other.cols]);
 
   const textareaProps: {
     id: TextAreaProps['id'];
+    onKeyDown: TextAreaProps['onKeyDown'];
     onChange: TextAreaProps['onChange'];
     onClick: TextAreaProps['onClick'];
     maxLength?: number;
+    onPaste?: React.ClipboardEventHandler<HTMLTextAreaElement>;
   } = {
     id,
+    onKeyDown: (evt) => {
+      if (!disabled && enableCounter && counterMode === 'word') {
+        const key = evt.which;
+
+        if (maxCount && textCount >= maxCount && key === 32) {
+          evt.preventDefault();
+        }
+      }
+
+      if (!disabled && onKeyDown) {
+        onKeyDown(evt);
+      }
+    },
+    onPaste: (evt) => {
+      if (!disabled) {
+        if (
+          counterMode === 'word' &&
+          enableCounter &&
+          typeof maxCount !== 'undefined' &&
+          textareaRef.current !== null
+        ) {
+          const existingWords: string[] =
+            textareaRef.current.value.match(/\w+/g) || [];
+          const pastedWords: string[] =
+            evt.clipboardData.getData('Text').match(/\w+/g) || [];
+
+          const totalWords = existingWords.length + pastedWords.length;
+
+          if (totalWords > maxCount) {
+            evt.preventDefault();
+
+            const allowedWords = existingWords
+              .concat(pastedWords)
+              .slice(0, maxCount);
+
+            setTimeout(() => {
+              setTextCount(maxCount);
+            }, 0);
+
+            textareaRef.current.value = allowedWords.join(' ');
+          }
+        }
+      }
+    },
     onChange: (evt) => {
-      if (!disabled && onChange) {
-        evt?.persist?.();
-        // delay textCount assignation to give the textarea element value time to catch up if is a controlled input
-        setTimeout(() => {
-          setTextCount(evt.target?.value?.length);
-        }, 0);
-        onChange(evt);
+      if (!disabled) {
+        if (counterMode == 'character') {
+          evt?.persist?.();
+          // delay textCount assignation to give the textarea element value time to catch up if is a controlled input
+          setTimeout(() => {
+            setTextCount(evt.target?.value?.length);
+          }, 0);
+        } else if (counterMode == 'word') {
+          if (!evt.target.value) {
+            setTimeout(() => {
+              setTextCount(0);
+            }, 0);
+
+            return;
+          }
+
+          if (
+            enableCounter &&
+            typeof maxCount !== 'undefined' &&
+            textareaRef.current !== null
+          ) {
+            const matchedWords = evt.target?.value?.match(/\w+/g);
+            if (matchedWords && matchedWords.length <= maxCount) {
+              textareaRef.current.removeAttribute('maxLength');
+
+              setTimeout(() => {
+                setTextCount(matchedWords.length);
+              }, 0);
+            } else if (matchedWords && matchedWords.length > maxCount) {
+              setTimeout(() => {
+                setTextCount(matchedWords.length);
+              }, 0);
+            }
+          }
+        }
+        if (onChange) {
+          onChange(evt);
+        }
       }
     },
     onClick: (evt) => {
@@ -194,14 +315,31 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     },
   };
 
-  if (enableCounter) {
-    textareaProps.maxLength = maxCount;
-  }
-  const ariaAnnouncement = useAnnouncer(textCount, maxCount);
+  const formItemClasses = classNames(`${prefix}--form-item`, className);
+
+  const textAreaWrapperClasses = classNames(`${prefix}--text-area__wrapper`, {
+    [`${prefix}--text-area__wrapper--readonly`]: other.readOnly,
+    [`${prefix}--text-area__wrapper--warn`]: warn,
+    [`${prefix}--text-area__wrapper--slug`]: slug,
+  });
 
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel && !isFluid,
     [`${prefix}--label--disabled`]: disabled,
+  });
+
+  const textareaClasses = classNames(`${prefix}--text-area`, {
+    [`${prefix}--text-area--light`]: light,
+    [`${prefix}--text-area--invalid`]: invalid,
+    [`${prefix}--text-area--warn`]: warn,
+  });
+
+  const counterClasses = classNames(`${prefix}--label`, {
+    [`${prefix}--label--disabled`]: disabled,
+  });
+
+  const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
+    [`${prefix}--form__helper-text--disabled`]: disabled,
   });
 
   const label = labelText ? (
@@ -210,20 +348,14 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     </Text>
   ) : null;
 
-  const counterClasses = classNames(`${prefix}--label`, {
-    [`${prefix}--label--disabled`]: disabled,
-  });
-
   const counter =
-    enableCounter && maxCount ? (
+    enableCounter &&
+    maxCount &&
+    (counterMode === 'character' || counterMode === 'word') ? (
       <Text
         as="div"
         className={counterClasses}>{`${textCount}/${maxCount}`}</Text>
     ) : null;
-
-  const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
-    [`${prefix}--form__helper-text--disabled`]: disabled,
-  });
 
   const helperId = !helperText
     ? undefined
@@ -261,33 +393,24 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     </Text>
   ) : null;
 
-  const textareaClasses = classNames(`${prefix}--text-area`, {
-    [`${prefix}--text-area--light`]: light,
-    [`${prefix}--text-area--invalid`]: invalid,
-    [`${prefix}--text-area--warn`]: warn,
-  });
-
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const ref = useMergedRefs([forwardRef, textareaRef]) as
-    | React.LegacyRef<HTMLTextAreaElement>
-    | undefined;
-
-  useIsomorphicEffect(() => {
-    if (other.cols && textareaRef.current) {
-      textareaRef.current.style.width = '';
-      textareaRef.current.style.resize = 'none';
-    } else if (textareaRef.current) {
-      textareaRef.current.style.width = `100%`;
-    }
-  }, [other.cols]);
-
   let ariaDescribedBy;
-
   if (invalid) {
     ariaDescribedBy = errorId;
   } else if (!invalid && !warn && !isFluid && helperText) {
     ariaDescribedBy = helperId;
   }
+
+  if (enableCounter) {
+    // handle different counter mode
+    if (counterMode == 'character') {
+      textareaProps.maxLength = maxCount;
+    }
+  }
+  const ariaAnnouncement = useAnnouncer(
+    textCount,
+    maxCount,
+    counterMode === 'word' ? 'words' : undefined
+  );
 
   const input = (
     <textarea
@@ -304,18 +427,21 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     />
   );
 
+  // Slug is always size `mini`
+  let normalizedSlug;
+  if (slug && slug['type']?.displayName === 'Slug') {
+    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+      size: 'mini',
+    });
+  }
+
   return (
-    <div className={classNames(`${prefix}--form-item`, className)}>
+    <div className={formItemClasses}>
       <div className={`${prefix}--text-area__label-wrapper`}>
         {label}
         {counter}
       </div>
-      <div
-        className={classNames(`${prefix}--text-area__wrapper`, {
-          [`${prefix}--text-area__wrapper--readonly`]: other.readOnly,
-          [`${prefix}--text-area__wrapper--warn`]: warn,
-        })}
-        data-invalid={invalid || null}>
+      <div className={textAreaWrapperClasses} data-invalid={invalid || null}>
         {invalid && !isFluid && (
           <WarningFilled className={`${prefix}--text-area__invalid-icon`} />
         )}
@@ -325,6 +451,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
           />
         )}
         {input}
+        {normalizedSlug}
         <span className={`${prefix}--text-area__counter-alert`} role="alert">
           {ariaAnnouncement}
         </span>
@@ -353,6 +480,11 @@ TextArea.propTypes = {
   cols: PropTypes.number,
 
   /**
+   * Specify the method used for calculating the counter number
+   */
+  counterMode: PropTypes.oneOf(['character', 'word']),
+
+  /**
    * Optionally provide the default value of the `<textarea>`
    */
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -363,7 +495,7 @@ TextArea.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Specify whether to display the character counter
+   * Specify whether to display the counter
    */
   enableCounter: PropTypes.bool,
 
@@ -409,7 +541,7 @@ TextArea.propTypes = {
   ),
 
   /**
-   * Max character count allowed for the textarea. This is needed in order for enableCounter to display
+   * Max entity count allowed for the textarea. This is needed in order for enableCounter to display
    */
   maxCount: PropTypes.number,
 
@@ -426,6 +558,12 @@ TextArea.propTypes = {
   onClick: PropTypes.func,
 
   /**
+   * Optionally provide an `onKeyDown` handler that is called whenever `<textarea>`
+   * is keyed
+   */
+  onKeyDown: PropTypes.func,
+
+  /**
    * Specify the placeholder attribute for the `<textarea>`
    */
   placeholder: PropTypes.string,
@@ -439,6 +577,11 @@ TextArea.propTypes = {
    * Specify the rows attribute for the `<textarea>`
    */
   rows: PropTypes.number,
+
+  /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `TextArea` component
+   */
+  slug: PropTypes.node,
 
   /**
    * Provide the current value of the `<textarea>`

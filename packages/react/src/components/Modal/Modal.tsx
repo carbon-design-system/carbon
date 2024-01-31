@@ -5,13 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
+import PropTypes, { ReactNodeLike } from 'prop-types';
 import React, { useRef, useEffect } from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
+import InlineLoading from '../InlineLoading';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import wrapFocus, {
   elementOrParentIsFloatingMenu,
@@ -19,9 +20,11 @@ import wrapFocus, {
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
+import { IconButton } from '../IconButton';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
 import { ReactAttr } from '../../types/common';
+import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -30,7 +33,7 @@ export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
 export type ModalSize = (typeof ModalSizes)[number];
 
 export interface ModalSecondaryButton {
-  buttonText?: string;
+  buttonText?: string | React.ReactNode;
 
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
@@ -88,6 +91,21 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
   launcherButtonRef?: any; // TODO FIXME
 
   /**
+   * Specify the description for the loading text
+   */
+  loadingDescription?: string;
+
+  /**
+   * Specify the description for the loading text
+   */
+  loadingIconDescription?: string;
+
+  /**
+   * Specify loading status
+   */
+  loadingStatus?: InlineLoadingStatus;
+
+  /**
    * Specify a label to be read by screen readers on the modal root node
    */
   modalAriaLabel?: string;
@@ -107,6 +125,12 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
    * @deprecated this property is unused
    */
   onKeyDown?: React.KeyboardEventHandler<HTMLElement>;
+
+  /**
+   * Specify an optional handler to be invoked when loading is
+   * successful
+   */
+  onLoadingSuccess?: () => void;
 
   /**
    * Specify a handler for closing modal.
@@ -182,6 +206,11 @@ export interface ModalProps extends ReactAttr<HTMLDivElement> {
    * Specify the size variant.
    */
   size?: ModalSize;
+
+  /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `Modal` component
+   */
+  slug?: ReactNodeLike;
 }
 
 const Modal = React.forwardRef(function Modal(
@@ -208,10 +237,15 @@ const Modal = React.forwardRef(function Modal(
     shouldSubmitOnEnter,
     size,
     hasScrollingContent = false,
-    closeButtonLabel,
+    closeButtonLabel = 'Close',
     preventCloseOnClickOutside = false,
     isFullWidth,
     launcherButtonRef,
+    loadingStatus = 'inactive',
+    loadingDescription,
+    loadingIconDescription,
+    onLoadingSuccess = noopFn,
+    slug,
     ...rest
   }: ModalProps,
   ref: React.LegacyRef<HTMLDivElement>
@@ -227,6 +261,11 @@ const Modal = React.forwardRef(function Modal(
   const modalHeadingId = `${prefix}--modal-header__heading--${modalInstanceId}`;
   const modalBodyId = `${prefix}--modal-body--${modalInstanceId}`;
   const modalCloseButtonClass = `${prefix}--modal-close`;
+  const primaryButtonClass = classNames({
+    [`${prefix}--btn--loading`]: loadingStatus !== 'inactive',
+  });
+
+  const loadingActive = loadingStatus !== 'inactive';
 
   function isCloseButton(element: Element) {
     return (
@@ -291,6 +330,7 @@ const Modal = React.forwardRef(function Modal(
       [`${prefix}--modal-tall`]: !passiveModal,
       'is-visible': open,
       [`${prefix}--modal--danger`]: danger,
+      [`${prefix}--modal--slug`]: slug,
     },
     className
   );
@@ -386,21 +426,32 @@ const Modal = React.forwardRef(function Modal(
     }
   }, [open, selectorPrimaryFocus, danger, prefix]);
 
+  // Slug is always size `lg`
+  let normalizedSlug;
+  if (slug && slug['type']?.displayName === 'Slug') {
+    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+      size: 'lg',
+    });
+  }
+
   const modalButton = (
-    <button
-      className={modalCloseButtonClass}
-      type="button"
-      onClick={onRequestClose}
-      title={ariaLabel}
-      aria-label={closeButtonLabel ? closeButtonLabel : 'close'}
-      ref={button}>
-      <Close
-        size={20}
-        aria-hidden="true"
-        tabIndex="-1"
-        className={`${modalCloseButtonClass}__icon`}
-      />
-    </button>
+    <div className={`${prefix}--modal-close-button`}>
+      <IconButton
+        className={modalCloseButtonClass}
+        label={closeButtonLabel}
+        onClick={onRequestClose}
+        title={closeButtonLabel}
+        aria-label={closeButtonLabel}
+        align="left"
+        ref={button}>
+        <Close
+          size={20}
+          aria-hidden="true"
+          tabIndex="-1"
+          className={`${modalCloseButtonClass}__icon`}
+        />
+      </IconButton>
+    </div>
   );
 
   const modalBody = (
@@ -428,6 +479,7 @@ const Modal = React.forwardRef(function Modal(
           className={`${prefix}--modal-header__heading`}>
           {modalHeading}
         </Text>
+        {normalizedSlug}
         {!passiveModal && modalButton}
       </div>
       <div
@@ -440,7 +492,7 @@ const Modal = React.forwardRef(function Modal(
         <div className={`${prefix}--modal-content--overflow-indicator`} />
       )}
       {!passiveModal && (
-        <ButtonSet className={footerClasses}>
+        <ButtonSet className={footerClasses} aria-busy={loadingActive}>
           {Array.isArray(secondaryButtons) && secondaryButtons.length <= 2
             ? secondaryButtons.map(
                 ({ buttonText, onClick: onButtonClick }, i) => (
@@ -454,6 +506,7 @@ const Modal = React.forwardRef(function Modal(
               )
             : secondaryButtonText && (
                 <Button
+                  disabled={loadingActive}
                   kind="secondary"
                   onClick={onSecondaryButtonClick}
                   ref={secondaryButton}>
@@ -461,11 +514,22 @@ const Modal = React.forwardRef(function Modal(
                 </Button>
               )}
           <Button
+            className={primaryButtonClass}
             kind={danger ? 'danger' : 'primary'}
-            disabled={primaryButtonDisabled}
+            disabled={loadingActive || primaryButtonDisabled}
             onClick={onRequestSubmit}
             ref={button}>
-            {primaryButtonText}
+            {loadingStatus === 'inactive' ? (
+              primaryButtonText
+            ) : (
+              <InlineLoading
+                status={loadingStatus}
+                description={loadingDescription}
+                iconDescription={loadingIconDescription}
+                className={`${prefix}--inline-loading--btn`}
+                onSuccess={onLoadingSuccess}
+              />
+            )}
           </Button>
         </ButtonSet>
       )}
@@ -563,6 +627,21 @@ Modal.propTypes = {
   ]),
 
   /**
+   * Specify the description for the loading text
+   */
+  loadingDescription: PropTypes.string,
+
+  /**
+   * Specify the description for the loading text
+   */
+  loadingIconDescription: PropTypes.string,
+
+  /**
+   * loading status
+   */
+  loadingStatus: PropTypes.oneOf(['inactive', 'active', 'finished', 'error']),
+
+  /**
    * Specify a label to be read by screen readers on the modal root node
    */
   modalAriaLabel: PropTypes.string,
@@ -581,6 +660,12 @@ Modal.propTypes = {
    * Specify a handler for keypresses.
    */
   onKeyDown: PropTypes.func,
+
+  /**
+   * Provide an optional handler to be invoked when loading is
+   * successful
+   */
+  onLoadingSuccess: PropTypes.func,
 
   /**
    * Specify a handler for closing modal.
@@ -687,6 +772,11 @@ Modal.propTypes = {
    * Specify the size variant.
    */
   size: PropTypes.oneOf(ModalSizes),
+
+  /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `Modal` component
+   */
+  slug: PropTypes.node,
 };
 
 export default Modal;

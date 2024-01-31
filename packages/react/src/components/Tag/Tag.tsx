@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
+import PropTypes, { ReactNodeLike } from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
@@ -32,7 +32,7 @@ const TYPES = {
 
 export interface TagBaseProps {
   /**
-   * Provide content to be rendered inside of a <Tag>
+   * Provide content to be rendered inside of a `Tag`
    */
   children?: React.ReactNode;
 
@@ -42,12 +42,12 @@ export interface TagBaseProps {
   className?: string;
 
   /**
-   * Specify if the <Tag> is disabled
+   * Specify if the `Tag` is disabled
    */
   disabled?: boolean;
 
   /**
-   * Determine if <Tag> is a filter/chip
+   * Determine if `Tag` is a filter/chip
    */
   filter?: boolean;
 
@@ -74,12 +74,17 @@ export interface TagBaseProps {
   size?: 'sm' | 'md';
 
   /**
+   * **Experimental:** Provide a `Slug` component to be rendered inside the `Tag` component
+   */
+  slug?: ReactNodeLike;
+
+  /**
    * Text to show on clear filters
    */
   title?: string;
 
   /**
-   * Specify the type of the <Tag>
+   * Specify the type of the `Tag`
    */
   type?: keyof typeof TYPES;
 }
@@ -101,6 +106,7 @@ const Tag = <T extends React.ElementType>({
   onClose,
   size,
   as: BaseComponent,
+  slug,
   ...other
 }: TagProps<T>) => {
   const prefix = usePrefix();
@@ -124,15 +130,32 @@ const Tag = <T extends React.ElementType>({
     }
   };
 
+  // Slug is always size `md` and `inline`
+  let normalizedSlug;
+  if (slug && slug['type']?.displayName === 'Slug') {
+    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+      size: 'sm',
+      kind: 'inline',
+    });
+  }
+
   if (filter) {
     const ComponentTag = BaseComponent ?? 'div';
     return (
       <ComponentTag className={tagClasses} id={tagId} {...other}>
+        {CustomIconElement ? (
+          <div className={`${prefix}--tag__custom-icon`}>
+            <CustomIconElement />
+          </div>
+        ) : (
+          ''
+        )}
         <Text
           className={`${prefix}--tag__label`}
           title={typeof children === 'string' ? children : undefined}>
           {children !== null && children !== undefined ? children : typeText}
         </Text>
+        {normalizedSlug}
         <button
           type="button"
           className={`${prefix}--tag__close-icon`}
@@ -164,6 +187,7 @@ const Tag = <T extends React.ElementType>({
       <Text title={typeof children === 'string' ? children : undefined}>
         {children !== null && children !== undefined ? children : typeText}
       </Text>
+      {normalizedSlug}
     </ComponentTag>
   );
 };
@@ -176,7 +200,7 @@ Tag.propTypes = {
   as: PropTypes.elementType,
 
   /**
-   * Provide content to be rendered inside of a <Tag>
+   * Provide content to be rendered inside of a `Tag`
    */
   children: PropTypes.node,
 
@@ -186,12 +210,12 @@ Tag.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify if the <Tag> is disabled
+   * Specify if the `Tag` is disabled
    */
   disabled: PropTypes.bool,
 
   /**
-   * Determine if <Tag> is a filter/chip
+   * Determine if `Tag` is a filter/chip
    */
   filter: PropTypes.bool,
 
@@ -218,12 +242,17 @@ Tag.propTypes = {
   size: PropTypes.oneOf(['sm', 'md']),
 
   /**
+   * **Experimental:** Provide a `Slug` component to be rendered inside the `Tag` component
+   */
+  slug: PropTypes.node,
+
+  /**
    * Text to show on clear filters
    */
   title: PropTypes.string,
 
   /**
-   * Specify the type of the <Tag>
+   * Specify the type of the `Tag`
    */
   type: PropTypes.oneOf(Object.keys(TYPES)),
 };
