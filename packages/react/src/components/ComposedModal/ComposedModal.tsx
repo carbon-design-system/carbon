@@ -13,7 +13,6 @@ import { isElement } from 'react-is';
 import PropTypes, { ReactNodeLike } from 'prop-types';
 import { ModalHeader, type ModalHeaderProps } from './ModalHeader';
 import { ModalFooter, type ModalFooterProps } from './ModalFooter';
-
 import cx from 'classnames';
 
 import toggleClass from '../../tools/toggleClass';

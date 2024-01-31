@@ -118,6 +118,7 @@ function AccordionItem({
   ...rest
 }: PropsWithChildren<AccordionItemProps>) {
   const [isOpen, setIsOpen] = useState(open);
+  const [prevIsOpen, setPrevIsOpen] = useState(open);
   const accordionState = useContext(AccordionContext);
 
   const disabledIsControlled = typeof controlledDisabled === 'boolean';
@@ -138,6 +139,11 @@ function AccordionItem({
 
   const content = useRef<HTMLDivElement>(null);
 
+  if (open !== prevIsOpen) {
+    setIsOpen(open);
+    setPrevIsOpen(open);
+  }
+
   // When the AccordionItem heading is clicked, toggle the open state of the
   // panel
   function onClick(event) {
@@ -152,7 +158,8 @@ function AccordionItem({
     } else {
       // accordion opens
       content.current.style.maxBlockSize =
-        content.current.scrollHeight + 15 + 'px';
+        // Scroll height plus top/bottom padding
+        content.current.scrollHeight + 32 + 'px';
     }
 
     const nextValue = !isOpen;

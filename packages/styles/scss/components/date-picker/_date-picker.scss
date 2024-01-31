@@ -198,7 +198,7 @@
   }
 
   .#{$prefix}--date-picker-input__wrapper--slug
-    .#{$prefix}--date-picker__input {
+    .#{$prefix}--date-picker__input:not(:has(~ .#{$prefix}--slug--revert)) {
     @include ai-gradient;
 
     padding-inline-end: $spacing-10;
