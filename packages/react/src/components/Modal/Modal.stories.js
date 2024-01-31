@@ -6,6 +6,7 @@
  */
 
 import React, { useState, useRef } from 'react';
+import ReactDOM from 'react-dom';
 import { action } from '@storybook/addon-actions';
 import Modal from './Modal';
 import Button from '../Button';
@@ -22,7 +23,6 @@ import {
   StructuredListRow,
   StructuredListCell,
 } from '../StructuredList';
-import { Portal } from '../Portal';
 
 export default {
   title: 'Components/Modal',
@@ -428,26 +428,30 @@ Playground.argTypes = {
   },
 };
 
-/**
- * Simple state manager for modals.
- */
-const ModalStateManager = ({
-  renderLauncher: LauncherContent,
-  children: ModalContent,
-}) => {
-  const [open, setOpen] = useState(false);
-  return (
-    <>
-      <Portal>
-        <ModalContent open={open} setOpen={setOpen} />
-      </Portal>
-      {LauncherContent && <LauncherContent open={open} setOpen={setOpen} />}
-    </>
-  );
-};
-
 export const WithStateManager = () => {
+  /**
+   * Simple state manager for modals.
+   */
+  const ModalStateManager = ({
+    renderLauncher: LauncherContent,
+    children: ModalContent,
+  }) => {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        {!ModalContent || typeof document === 'undefined'
+          ? null
+          : ReactDOM.createPortal(
+              <ModalContent open={open} setOpen={setOpen} />,
+              document.body
+            )}
+        {LauncherContent && <LauncherContent open={open} setOpen={setOpen} />}
+      </>
+    );
+  };
+
   const button = useRef();
+
   return (
     <ModalStateManager
       renderLauncher={({ setOpen }) => (
