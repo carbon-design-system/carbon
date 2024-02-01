@@ -16,6 +16,7 @@ import React, {
   ReactElement,
   ReactNode,
   useContext,
+  useEffect,
   useRef,
   useState,
 } from 'react';
@@ -183,6 +184,19 @@ function AccordionItem({
       handleAnimationEnd(event);
     }
   }
+
+  useEffect(() => {
+    if (content.current) {
+      // accordion opens
+      console.log(
+        ' content.current.scrollHeight',
+        content.current.scrollHeight
+      );
+      content.current.style.maxBlockSize =
+        // Scroll height plus top/bottom padding
+        content.current.scrollHeight + 32 + 'px';
+    }
+  }, [children, isOpen]);
 
   return (
     <li className={className} {...rest}>
