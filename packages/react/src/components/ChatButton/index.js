@@ -9,3 +9,4 @@ import ChatButton from './ChatButton';
 
 export default ChatButton;
 export { ChatButton };
+export { default as ChatButtonSkeleton } from './ChatButton.Skeleton';

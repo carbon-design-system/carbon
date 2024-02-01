@@ -6,7 +6,9 @@
  */
 
 import React from 'react';
-import ChatButton from './';
+import { ChatButton, ChatButtonSkeleton } from './';
+import { Add } from '@carbon/icons-react';
+import './chat-button-story.scss';
 
 export default {
   title: 'Experimental/unstable__ChatButton',
@@ -50,16 +52,57 @@ export default {
 export const Default = () => (
   <div className="test-button">
     <div className="test-button-sizes">
-      {' '}
-      <ChatButton size="xs">Test</ChatButton>
-      <ChatButton size="md">Test</ChatButton>
-      <ChatButton size="lg">Test</ChatButton>
+      <h3>Sizes</h3>
+      <br />
+      <ChatButton size="sm" renderIcon={Add}>
+        Primary
+      </ChatButton>
+      <ChatButton size="md" renderIcon={Add}>
+        Primary
+      </ChatButton>
+      <ChatButton size="lg" renderIcon={Add}>
+        Primary
+      </ChatButton>
     </div>
     <div className="test-button-kinds">
-      <ChatButton kind="secondary">Test</ChatButton>
-      <ChatButton kind="tertiary">Test</ChatButton>
-      <ChatButton kind="ghost">Test</ChatButton>
-      <ChatButton kind="danger">Test</ChatButton>
+      <h3>Kinds</h3>
+      <br />
+      <ChatButton kind="primary" renderIcon={Add}>
+        Primary
+      </ChatButton>
+      <ChatButton kind="secondary" renderIcon={Add}>
+        Secondary
+      </ChatButton>
+      <ChatButton kind="tertiary" renderIcon={Add}>
+        Tertiary
+      </ChatButton>
+      <ChatButton kind="ghost" renderIcon={Add}>
+        Ghost
+      </ChatButton>
+      <ChatButton kind="danger" renderIcon={Add}>
+        Danger
+      </ChatButton>
+    </div>
+    <div className="test-button-quick-action">
+      <h3>Quick action</h3>
+      <br />
+      <ChatButton isQuickAction renderIcon={Add}>
+        Quick action
+      </ChatButton>
+      <ChatButton disabled isQuickAction renderIcon={Add}>
+        Quick action
+      </ChatButton>
+      <ChatButton isSelected isQuickAction renderIcon={Add}>
+        Quick action
+      </ChatButton>
+    </div>
+
+    <div className="test-button-skeleton">
+      <h3>Skeleton</h3>
+      <br />
+      <ChatButtonSkeleton size="sm" />
+      <ChatButtonSkeleton size="md" />
+      <ChatButtonSkeleton />
     </div>
   </div>
 );

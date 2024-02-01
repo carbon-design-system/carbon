@@ -12,21 +12,42 @@ import Button from '../Button';
 import { usePrefix } from '../../internal/usePrefix';
 
 const ChatButton = React.forwardRef(function ChatButton(
-  { className, children, isQuickAction, size, kind, ...other },
+  {
+    className,
+    children,
+    disabled,
+    isQuickAction,
+    isSelected,
+    size,
+    kind,
+    ...other
+  },
   ref
 ) {
   const prefix = usePrefix();
-  const classNames = classnames(className, { [`${prefix}--chat-btn`]: true });
+  const classNames = classnames(className, {
+    [`${prefix}--chat-btn`]: true,
+    [`${prefix}--chat-btn--quick-action`]: isQuickAction,
+    [`${prefix}--chat-btn--quick-action--selected`]: isSelected,
+  });
 
   const allowedSizes = ['sm', 'md', 'lg'];
-  const normalizedSize = allowedSizes.includes(size) ? size : 'lg';
+
+  if (isQuickAction) {
+    kind = 'ghost';
+    size = 'sm';
+  } else {
+    // Do not allow size larger than `lg`
+    size = allowedSizes.includes(size) ? size : 'lg';
+  }
 
   return (
     <Button
+      disabled={isSelected ? isSelected : disabled}
       className={classNames}
       kind={kind}
       ref={ref}
-      size={normalizedSize}
+      size={size}
       {...other}>
       {children}
     </Button>

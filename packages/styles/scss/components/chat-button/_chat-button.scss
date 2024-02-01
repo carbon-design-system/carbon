@@ -1,0 +1,62 @@
+//
+// Copyright IBM Corp. 2016, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../button';
+@use '../../config' as *;
+// @use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+// @use '../../utilities/component-reset';
+@use '../../utilities/convert';
+// @use '../../utilities/skeleton' as *;
+// @use '../../utilities/visually-hidden' as *;
+
+@mixin chat-button {
+  .#{$prefix}--chat-btn {
+    border-radius: convert.to-rem(24px);
+  }
+
+  .#{$prefix}--chat-btn.#{$prefix}--btn--md {
+    border-radius: convert.to-rem(20px);
+  }
+
+  .#{$prefix}--chat-btn.#{$prefix}--btn--sm {
+    border-radius: convert.to-rem(16px);
+  }
+
+  // Quick action button
+  .#{$prefix}--chat-btn--quick-action {
+    border: 1px solid $link-primary;
+  }
+
+  .#{$prefix}--chat-btn--quick-action:hover:not(:active):not([disabled]) {
+    border-color: transparent;
+    background: $background-hover;
+  }
+
+  .#{$prefix}--chat-btn--quick-action.#{$prefix}--btn--ghost:focus,
+  .#{$prefix}--chat-btn--quick-action.#{$prefix}--btn--ghost:hover:focus {
+    border-color: $focus;
+    box-shadow: inset 0 0 0 1px $focus;
+  }
+
+  .#{$prefix}--chat-btn--quick-action[disabled],
+  .#{$prefix}--chat-btn--quick-action[disabled]:hover {
+    border-color: button.$button-disabled;
+    color: button.$button-disabled;
+  }
+
+  .#{$prefix}--chat-btn--quick-action--selected[disabled],
+  .#{$prefix}--chat-btn--quick-action--selected[disabled]:hover {
+    background: button.$button-disabled;
+    color: $text-on-color-disabled;
+  }
+
+  .#{$prefix}--chat-btn.#{$prefix}--skeleton {
+    overflow: hidden;
+  }
+}
