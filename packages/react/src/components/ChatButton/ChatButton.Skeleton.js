@@ -28,6 +28,11 @@ ChatButtonSkeleton.propTypes = {
    * Specify an optional className to add.
    */
   className: PropTypes.string,
+
+  /**
+   * Specify the size of the `ChatButtonSkeleton`, from the following list of sizes:
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };
 
 export default ChatButtonSkeleton;

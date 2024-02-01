@@ -18,8 +18,8 @@ const ChatButton = React.forwardRef(function ChatButton(
     disabled,
     isQuickAction,
     isSelected,
-    size,
     kind,
+    size,
     ...other
   },
   ref
@@ -64,6 +64,31 @@ ChatButton.propTypes = {
    * Specify an optional className to be applied to the node containing the label and the select box
    */
   className: PropTypes.string,
+
+  /**
+   * Specify whether the `ChatButton` should be disabled
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * Specify whether the `ChatButton` should be rendered as a quick action button
+   */
+  isQuickAction: PropTypes.bool,
+
+  /**
+   * Specify whether the quick action `ChatButton` should be rendered as selected. This disables the input
+   */
+  isSelected: PropTypes.bool,
+
+  /**
+   * Specify the kind of `ChatButton` you want to create
+   */
+  kind: PropTypes.oneOf('primary', 'secondary', 'danger', 'ghost', 'tertiary'),
+
+  /**
+   * Specify the size of the `ChatButton`, from the following list of sizes:
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };
 
 export default ChatButton;
