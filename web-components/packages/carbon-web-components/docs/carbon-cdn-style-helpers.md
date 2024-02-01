@@ -19,7 +19,7 @@
 In order to minimize the necessity of using front-end bundlers with the Carbon Web Components CDN artifacts, page level styles artifacts are also
 available to use.
 
-If your application is not already compiling its own version of the below 
+If your application is not already compiling its own version of the below
 artifacts, these can be included as part of your project.
 
 > NOTE: The latest/next tags are moving versions. While beneficial to
@@ -34,18 +34,18 @@ the page. Note, this will import `IBM Plex Sans`, `IBM Plex Serif`, and `IBM Ple
 
 ```html
 // SPECIFIC VERSION
-<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/version/[v1.x.y]/plex.css" />
+<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/version/[v2.x.y]/plex.css" />
 
 // LATEST tag
-<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css" />
+<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/latest/plex.css" />
 
 // NEXT tag
-<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/next/plex.css" />
+<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/next/plex.css" />
 ```
 
 ### Alternative: individual Plex family loading
 
-Plex fonts are also available as CSS artifacts, where the Plex font families can be loaded in individually. 
+Plex fonts are also available as CSS artifacts, where the Plex font families can be loaded in individually.
 
 Available CSS files:
 
@@ -252,17 +252,17 @@ The following includes Carbon grid and all corresponding grid classes.
 <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/version/[v2.x.y]/grid.css" />
 
 // LATEST tag
-<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/grid.css" />
+<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/latest/grid.css" />
 
 // NEXT tag
-<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/next/grid.css" />
+<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/next/grid.css" />
 ```
 
 [Learn more about the Carbon 2x Grid](https://carbondesignsystem.com/guidelines/2x-grid/overview)
 
 ## Carbon theme zoning classes
 
-The following includes classes for creating Carbon theme zones (white, g10, g90, 
+The following includes classes for creating Carbon theme zones (white, g10, g90,
 g100). Note that these classes take advantage of using CSS Custom Properties enabled
 in Carbon.
 
@@ -271,10 +271,10 @@ in Carbon.
 <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/version/[v2.x.y]/themes.css" />
 
 // LATEST tag
-<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/themes.css" />
+<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/latest/themes.css" />
 
 // NEXT tag
-<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/next/themes.css" />
+<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/next/themes.css" />
 ```
 
 ### Available classes
@@ -291,18 +291,18 @@ in Carbon.
 ```html
 <html>
 <head>
-  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v2/latest/themes.css" />
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/version/[v2.x.y]/themes.css" />
   <script
       type="module"
-      src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/next/dropdown.min.js"
+      src="https://1.www.s81c.com/common/carbon/web-components/version/[v2.x.y]/dropdown.min.js"
     ></script>
     <script
       type="module"
-      src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/next/button.min.js"
+      src="https://1.www.s81c.com/common/carbon/web-components/version/[v2.x.y]/button.min.js"
     ></script>
      <script
       type="module"
-      src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/next/tag.min.js"
+      src="https://1.www.s81c.com/common/carbon/web-components/version/[v2.x.y]/tag.min.js"
     ></script>
 
   ...
