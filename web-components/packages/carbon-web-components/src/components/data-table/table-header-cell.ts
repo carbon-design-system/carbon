@@ -89,6 +89,7 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
       this._hasSlug = Boolean(hasContent);
       (hasContent[0] as HTMLElement).setAttribute('size', 'mini');
     }
+
     this.requestUpdate();
   }
 
@@ -174,11 +175,16 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'columnheader');
     }
+
     super.connectedCallback();
   }
 
   updated(changedProperties) {
-    if (this.isSortable && !changedProperties.has('sortDirection')) {
+    if (
+      this.isSortable &&
+      !changedProperties.has('sortDirection') &&
+      !this.sortDirection
+    ) {
       this.sortDirection = TABLE_SORT_DIRECTION.NONE;
     }
     if (this._hasSlug) {
