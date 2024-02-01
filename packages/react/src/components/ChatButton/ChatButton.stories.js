@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { ChatButton } from '.';
+import ChatButton from './';
 
 export default {
   title: 'Experimental/unstable__ChatButton',
@@ -47,4 +47,19 @@ export default {
   },
 };
 
-export const Default = () => <ChatButton>Test</ChatButton>;
+export const Default = () => (
+  <div className="test-button">
+    <div className="test-button-sizes">
+      {' '}
+      <ChatButton size="xs">Test</ChatButton>
+      <ChatButton size="md">Test</ChatButton>
+      <ChatButton size="lg">Test</ChatButton>
+    </div>
+    <div className="test-button-kinds">
+      <ChatButton kind="secondary">Test</ChatButton>
+      <ChatButton kind="tertiary">Test</ChatButton>
+      <ChatButton kind="ghost">Test</ChatButton>
+      <ChatButton kind="danger">Test</ChatButton>
+    </div>
+  </div>
+);
