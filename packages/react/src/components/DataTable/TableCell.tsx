@@ -18,14 +18,13 @@ const TableCell: React.FC<TableCellProps> = ({
 }) => {
   const prefix = usePrefix();
 
-  const tableCellClassNames = classNames(
-    {
-      [`${prefix}--table-cell--column-slug`]: hasSlugHeader,
-    },
-    className
-  );
+  const tableCellClassNames = classNames(className, {
+    [`${prefix}--table-cell--column-slug`]: hasSlugHeader,
+  });
   return (
-    <td className={tableCellClassNames} {...rest}>
+    <td
+      className={tableCellClassNames ? tableCellClassNames : undefined}
+      {...rest}>
       {children}
     </td>
   );
