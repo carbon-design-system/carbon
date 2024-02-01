@@ -1914,6 +1914,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@carbon/icon-helpers@npm:^10.28.0":
+  version: 10.45.1
+  resolution: "@carbon/icon-helpers@npm:10.45.1"
+  checksum: 69da5ae85b586c5bb754f1db90069fb48f556c9f5023318a25572faa07e6dca0f07aaec237eaec883029bb75819b64c30bf4716339cdbab590ca0ee648ef67bc
+  languageName: node
+  linkType: hard
+
 "@carbon/icon-helpers@npm:^10.46.0, @carbon/icon-helpers@workspace:packages/icon-helpers":
   version: 0.0.0-use.local
   resolution: "@carbon/icon-helpers@workspace:packages/icon-helpers"
@@ -1928,7 +1935,7 @@ __metadata:
   version: 10.49.0
   resolution: "@carbon/icons-react@npm:10.49.0"
   dependencies:
-    "@carbon/icon-helpers": "npm:^10.46.0"
+    "@carbon/icon-helpers": "npm:^10.28.0"
     "@carbon/telemetry": "npm:0.1.0"
     prop-types: "npm:^15.7.2"
   peerDependencies:
