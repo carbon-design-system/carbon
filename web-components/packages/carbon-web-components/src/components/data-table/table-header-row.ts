@@ -15,6 +15,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * Data table header row.
  *
  * @element cds-table-header-row
+ * @fires cds-table-change-selection-all
+ *   The name of the custom event fired before this row is selected/unselected upon a user gesture.
+ *   Cancellation of this event stops the user-initiated change in selection.
  */
 @customElement(`${prefix}-table-header-row`)
 class CDSTableHeaderRow extends CDSTableRow {

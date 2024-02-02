@@ -16,6 +16,8 @@ import styles from './layer.scss';
  * Basic layer
  *
  * @element cds-layer
+ * @fires cds-use-layer
+ *   The name of the custom event fired when the "use layer" action occurs.
  * @slot children - The elements contained within the component.
  */
 @customElement(`${prefix}-layer`)

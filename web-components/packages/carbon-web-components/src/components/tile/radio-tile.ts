@@ -19,6 +19,8 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * Single-selectable tile.
  *
  * @element cds-radio-tile
+ * @fires cds-radio-tile-selected
+ *   The name of the custom event fired after this selectable tile changes its selected state.
  */
 @customElement(`${prefix}-radio-tile`)
 class CDSRadioTile extends SelectableTile {

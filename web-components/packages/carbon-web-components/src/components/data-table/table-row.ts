@@ -29,6 +29,15 @@ import CDSTableCell from './table-cell';
  * @fires cds-table-row-change-selection
  *   The custom event fired before this row is selected/unselected upon a user gesture.
  *   Cancellation of this event stops the user-initiated change in selection.
+ * @fires cds-radio-button-changed
+ *   The name of the custom event fired after this radio button changes its checked state.
+ * @fires cds-checkbox-changed
+ *   The name of the custom event fired after this checkbox changes its checked state.
+ * @fires cds-table-row-expando-beingtoggled
+ *   The name of the custom event fired before the expanded state of this row is being toggled upon a user gesture.
+ *   Cancellation of this event stops the user-initiated action of toggling the expanded state.
+ * @fires cds-table-row-expando-toggled
+ *   The name of the custom event fired after the expanded state of this row is toggled upon a user gesture.
  */
 @customElement(`${prefix}-table-row`)
 class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {

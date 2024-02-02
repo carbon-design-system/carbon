@@ -34,6 +34,27 @@ export { TABLE_SIZE };
  * Data table.
  *
  * @element cds-table
+ * @fires cds-table-header-cell-sort
+ *   The name of the custom event fired before a new sort direction is set upon a user gesture.
+ *   Cancellation of this event stops the user-initiated change in sort direction.
+ * @fires cds-search input
+ *   The name of the custom event fired during search bar input
+ * @fires cds-table-change-selection-all
+ *   The name of the custom event fired before header row is selected/unselected upon a user gesture.
+ * @fires cds-table-row-change-selection
+ *   The name of the custom event fired before a row is selected/unselected upon a user gesture.
+ * @fires cds-table-batch-actions-cancel-clicked
+ *   The name of the custom event fired after the Cancel button is clicked.
+ * @fires cds-table-row-expando-toggled
+ *   The name of the custom event fired after the expanded state of a row is toggled upon a user gesture.
+ * @fires cds-table-row-selected
+ *   The name of the custom event fired after a row has been selected.
+ * @fires cds-table-row-all-selected
+ *   The name of the custom event fired after all rows have been selected.
+ * @fires cds-table-sorted
+ *   The name of the custom event fired after the table has been sorted.
+ * @fires cds-table-filtered
+ *   The name of the custom event fired after the table has been filtered containing remaining rows.
  */
 @customElement(`${prefix}-table`)
 class CDSTable extends HostListenerMixin(LitElement) {

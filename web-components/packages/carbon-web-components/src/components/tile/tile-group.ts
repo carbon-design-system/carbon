@@ -30,6 +30,10 @@ const navigationDirectionForKey = {
  * Tile group.
  *
  * @element cds-tile-group
+ * @fires cds-current-radio-tile-selection
+ *   The name of the custom event fired after a radio tile changes its selected state.
+ * @fires cds-current-selectable-tile-selections
+ *   The name of the custom event fired after a selectable tile changes its selected state.
  */
 @customElement(`${prefix}-tile-group`)
 class CDSTileGroup extends HostListenerMixin(LitElement) {

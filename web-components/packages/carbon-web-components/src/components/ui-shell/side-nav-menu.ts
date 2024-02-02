@@ -20,6 +20,11 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * Side nav menu.
  *
  * @element cds-side-nav-menu
+ * @fires cds-side-nav-menu-beingtoggled
+ *   The name of the custom event fired before this side nav menu is being toggled upon a user gesture.
+ *   Cancellation of this event stops the user-initiated action of toggling this side nav menu.
+ * @fires cds-side-nav-menu-toggled
+ *   The name of the custom event fired after this side nav menu is toggled upon a user gesture.
  * @slot title-icon - The icon.
  * @csspart expando The expando.
  * @csspart expando-icon-container The expando icon container.

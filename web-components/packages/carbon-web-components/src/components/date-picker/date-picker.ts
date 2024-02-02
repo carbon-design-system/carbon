@@ -69,6 +69,8 @@ flatpickr!.l10ns!.en!.weekdays.shorthand.forEach((_day, index) => {
  *
  * @element cds-date-picker
  * @fires cds-date-picker-changed - The custom event fired on this element when Flatpickr updates its value.
+ * @fires cds-date-picker-flatpickr-error
+ *   The name of the custom event when Flatpickr throws an error.
  */
 @customElement(`${prefix}-date-picker`)
 class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
