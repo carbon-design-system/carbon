@@ -664,12 +664,14 @@ class CDSTable extends HostListenerMixin(LitElement) {
     }
 
     if (changedProperties.has('isSelectable')) {
-      this._tableHeaderRow.setAttribute('selection-name', 'header');
-      this._tableRows.forEach((e, index) => {
-        if (!e.hasAttribute('selection-name')) {
-          e.setAttribute('selection-name', index);
-        }
-      });
+      if (this.isSelectable) {
+        this._tableHeaderRow.setAttribute('selection-name', 'header');
+        this._tableRows.forEach((e, index) => {
+          if (!e.hasAttribute('selection-name')) {
+            e.setAttribute('selection-name', index);
+          }
+        });
+      }
       this.headerCount++;
     }
 
@@ -677,29 +679,9 @@ class CDSTable extends HostListenerMixin(LitElement) {
       this.collator = new Intl.Collator(this.locale);
     }
     if (changedProperties.has('isSortable')) {
-      const headerCells = this.querySelectorAll(
-        (this.constructor as typeof CDSTable).selectorHeaderCell
-      );
-      headerCells.forEach((e) => {
-        (e as CDSTableHeaderCell).isSortable = this.isSortable;
-        (e as CDSTableHeaderCell).isSelectable = this.isSelectable;
-        (e as CDSTableHeaderCell).isExpandable = this.expandable;
-      });
-      const columns = [...this._tableHeaderRow.children];
-      columns.forEach((column, index) => {
-        if (
-          column.hasAttribute('sort-direction') &&
-          column.getAttribute('sort-direction') !== 'none'
-        ) {
-          const sortDirection = column.getAttribute('sort-direction');
-          const columnIndex = index;
-
-          columns.forEach(
-            (e) => e !== column && e.setAttribute('sort-direction', 'none')
-          );
-          this._handleSortAction(columnIndex, sortDirection);
-        }
-      });
+      if (this.isSortable) {
+        this._enableSortAction();
+      }
     }
 
     if (
@@ -813,6 +795,39 @@ class CDSTable extends HostListenerMixin(LitElement) {
         : html`<slot></slot>`}
     `;
   }
+
+  /**
+   * Adds isSortable value for table header cells.
+   */
+  _enableSortAction() {
+    const headerCells = this.querySelectorAll(
+      (this.constructor as typeof CDSTable).selectorHeaderCell
+    );
+    headerCells.forEach((e) => {
+      (e as CDSTableHeaderCell).isSortable = this.isSortable;
+      (e as CDSTableHeaderCell).isSelectable = this.isSelectable;
+      (e as CDSTableHeaderCell).isExpandable = this.expandable;
+    });
+    const columns = [...this._tableHeaderRow.children];
+    let sortDirection;
+    let columnIndex = -1;
+    columns.forEach((column, index) => {
+      if (
+        column.hasAttribute('sort-direction') &&
+        column.getAttribute('sort-direction') !== 'none'
+      ) {
+        sortDirection = column.getAttribute('sort-direction');
+        columnIndex = index;
+      }
+    });
+
+    columns.forEach(
+      (e, index) =>
+        index !== columnIndex && e.setAttribute('sort-direction', 'none')
+    );
+    this._handleSortAction(columnIndex, sortDirection);
+  }
+
   /* eslint-enable no-constant-condition */
 
   /**
