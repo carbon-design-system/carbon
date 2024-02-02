@@ -26,6 +26,7 @@
 
   // Quick action button
   .#{$prefix}--chat-btn--quick-action {
+    align-items: center;
     border: 1px solid $link-primary;
   }
 
