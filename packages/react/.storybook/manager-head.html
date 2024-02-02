@@ -32,6 +32,21 @@
 />
 <meta name="twitter:site" content="@_carbondesign" />
 
+<!-- Compliance footer #15643 -->
+<footer>
+  <dds-footer-container
+    key="footer"
+    disable-locale-button="true"
+    size="micro"
+  />,
+</footer>
+
+<script
+  key="8"
+  type="module"
+  src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/footer.min.js"
+/>
+
 <!-- Storybook override -->
 <script>
   setTimeout(function () {
@@ -43,6 +58,13 @@
 <style>
   body a[href='/?path=/settings/about'] {
     display: none;
+  }
+
+  footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 99999;
   }
 
   .simplebar-content form span {
