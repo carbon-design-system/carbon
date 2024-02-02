@@ -140,13 +140,13 @@
 
 // Slug
 
-:host(#{$prefix}-modal) .#{$prefix}--modal-container {
-  @include callout-gradient('default');
+:host(#{$prefix}-modal[slug]) .#{$prefix}--modal-container {
+  @include callout-gradient('');
 
   background-color: $layer;
 }
 
-:host(#{$prefix}-modal[has-two-buttons]) .#{$prefix}--modal-container {
+:host(#{$prefix}-modal[slug][has-two-buttons]) .#{$prefix}--modal-container {
   @include callout-gradient('default', 64px);
 
   background-color: $layer;

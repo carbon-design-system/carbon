@@ -78,12 +78,6 @@ $colorMap: (
   }
 }
 
-:host(#{$prefix}-slug[enabled][with-actions]) {
-  .#{$prefix}--toggletip-content {
-    max-inline-size: to-rem(334px);
-  }
-}
-
 :host(#{$prefix}-slug[enabled]:not([with-actions])) {
   .#{$prefix}--toggletip-content {
     max-inline-size: to-rem(320px);
