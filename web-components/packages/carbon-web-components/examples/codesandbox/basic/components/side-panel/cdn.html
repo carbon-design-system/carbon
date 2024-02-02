@@ -1,0 +1,78 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+
+<head>
+  <title>@carbon/ibmdotcom-web-components example</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css" />
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/grid.css" />
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/themes.css" />
+  <style>
+    /* Suppress custom element until styles are loaded */
+    cds-text-input:not(:defined) {
+      display: none;
+    }
+
+    cds-textarea:not(:defined) {
+      display: none;
+    }
+
+    cds-button:not(:defined) {
+      display: none;
+    }
+
+    cds-side-panel:not(:defined) {
+      display: none;
+    }
+  </style>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/text-input.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/textarea.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/button.min.js"></script>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/side-panel.min.js"></script>
+</head>
+
+<body class="cds-theme-zone-white">
+  <cds-side-panel include-overlay open label-text="An optional label" size="md" title="A title, can be omitted">
+    <!-- Content -->
+    <h5>Side panel content</h5>
+    <div class="${storyPrefix}text-inputs">
+      <cds-text-input label="Input A" id="side-panel-story-text-input-a"></cds-text-input>
+      <cds-text-input label="Input B" id="side-panel-story-text-input-b"></cds-text-input>
+    </div>
+    <div class="${storyPrefix}text-inputs">
+      <cds-text-input label="Input C" id="side-panel-story-text-input-c"></cds-text-input>
+      <cds-text-input label="Input D" id="side-panel-story-text-input-d"></cds-text-input>
+    </div>
+    <div class="${storyPrefix}textarea-container">
+      <cds-textarea label="Notes" value="This is a text area"></cds-textarea>
+      <cds-textarea label="Notes" value="This is a text area"></cds-textarea>
+      <cds-textarea label="Notes" value="This is a text area"></cds-textarea>
+    </div>
+
+    <!-- subtitle optional -->
+    <div slot="subtitle">Subtitle text which can provide more detail on the content being displayed.</div>
+
+    <!-- Action toolbar optional -->
+    <cds-button slot="action-toolbar">Copy</cds-button>
+    <cds-button slot="action-toolbar" aria-label="Settings" has-icon-only="true" kind=${BUTTON_KIND.GHOST} size="sm" tooltip-text="Settings">
+      ${Settings({ slot: 'icon' })}
+    </cds-button>
+    <cds-button slot="action-toolbar" aria-label="Delete" has-icon-only="true" kind=${BUTTON_KIND.GHOST} size="sm" tooltip-text="Delete">
+      ${Trashcan({ slot: 'icon' })}
+    </cds-button>
+
+    <!-- Side panel actions optional -->
+    <cds-button slot="actions" kind=${BUTTON_KIND.GHOST}>Ghost</cds-button>
+    <cds-button slot="actions" kind=${BUTTON_KIND.PRIMARY}></cds-button>
+  </cds-side-panel>
+</body>
+
+</html>

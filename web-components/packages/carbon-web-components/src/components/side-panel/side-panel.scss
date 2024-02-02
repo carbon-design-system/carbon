@@ -1,0 +1,386 @@
+/*
+* Copyright IBM Corp. 2023, 2024
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+$css--plex: true !default;
+
+/* Other Carbon settings. */
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use 'sass:map';
+
+$pkg-prefix: 'cds';
+
+@use '@carbon/ibm-products-styles/scss/config' with (
+  $pkg-prefix: #{$pkg-prefix}
+);
+@use '@carbon/ibm-products-styles/scss/components/ActionSet/index' as *;
+@use '@carbon/ibm-products-styles/scss/components/SidePanel/index' as *;
+@use '@carbon/ibm-products-styles/scss/components/SidePanel/side-panel-variables'
+  as spv;
+
+$block-class: #{$pkg-prefix}--side-panel;
+$block-class-action-set: #{$pkg-prefix}--action-set;
+
+:host(#{$prefix}-side-panel) {
+  /* Replaces use of Framer for slide in / out animation */
+  --#{$block-class}--displaced: 100%;
+
+  * {
+    /* not sure why things are coming out as content-box */
+    box-sizing: border-box;
+  }
+
+  .#{$block-class} {
+    @extend .#{$block-class}__container;
+
+    /* for actions container query - note this changes the size calculation */
+    container-name: side-panel;
+    container-type: inline-size;
+
+    &[placement='left'] {
+      --#{$block-class}--displaced: -100%;
+    }
+
+    &[opening] {
+      transform: translateX(var(--#{$block-class}--displaced));
+    }
+
+    &[open] {
+      transform: translateX(0);
+      transition: all $duration-moderate-02 motion(standard, productive);
+    }
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      &[open] {
+        transition: none;
+      }
+    }
+
+    &[closing] {
+      transform: translateX(var(--#{$block-class}--displaced));
+      transition: all $duration-moderate-01 motion(exit, productive);
+    }
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      &[closing] {
+        transition: none;
+      }
+    }
+
+    &[placement='right'] {
+      @extend .#{$block-class}__container-right-placement;
+
+      /* remove if https://github.com/carbon-design-system/ibm-products/pull/3983 merged */
+      border-inline-end: 1px solid $border-subtle-02;
+      inset-inline-end: 0;
+    }
+
+    /* stylelint-disable-next-line no-duplicate-selectors -- disabled to keep close to 'right' setting */
+    &[placement='left'] {
+      @extend .#{$block-class}__container-left-placement;
+
+      /* remove if https://github.com/carbon-design-system/ibm-products/pull/3983 merged */
+      border-inline-end: 1px solid $border-subtle-02;
+      inset-inline-start: 0;
+    }
+
+    @each $size, $size_value in spv.$side-panel-sizes {
+      &[size='#{$size}'] {
+        @extend .#{$block-class}__container--#{$size};
+      }
+    }
+
+    &:not([overlay]) {
+      @extend .#{$block-class}__container-without-overlay;
+    }
+  }
+
+  .#{$block-class}__overlay {
+    @extend .#{$block-class}__overlay;
+
+    &[opening] {
+      opacity: 0;
+    }
+    @media screen and (prefers-reduced-motion: reduce) {
+      &[open] {
+        opacity: 1;
+        transition: none;
+      }
+    }
+
+    &[open] {
+      opacity: 1;
+      transition: all $duration-moderate-02 motion(standard, productive);
+    }
+    @media screen and (prefers-reduced-motion: reduce) {
+      &[closing] {
+        opacity: 0;
+        transition: none;
+      }
+    }
+
+    &[closing] {
+      opacity: 0;
+      transition: all $duration-moderate-01 motion(exit, productive);
+    }
+  }
+
+  .#{$block-class}__title-container {
+    @extend .#{$block-class}__title-container;
+
+    &::before {
+      z-index: 99; /* must be higher than action toolbar */
+    }
+
+    &[detail-step] {
+      @extend .#{$block-class}__on-detail-step;
+    }
+
+    &:not([has-title]) {
+      @extend .#{$block-class}__title-container-without-title;
+    }
+
+    &[detail-step]:not([has-title]) {
+      @extend .#{$block-class}__on-detail-step-without-title;
+    }
+
+    &[no-title-animation] {
+      @extend .#{$block-class}__title-container--no-title-animation;
+      // inset-block-start: 0;
+    }
+
+    &[reduced-motion] {
+      @extend .#{$block-class}__title-container--reduced-motion;
+    }
+
+    &[has-action-toolbar] {
+      margin-block-end: $spacing-03;
+      padding-block-end: 0;
+    }
+  }
+
+  .#{$block-class}
+    .#{$block-class}__title-container[has-action-toolbar]::before {
+    content: initial; /* remove border below */
+  }
+
+  .#{$block-class}__nav-back-button {
+    @extend .#{$block-class}__navigation-back-button;
+  }
+
+  .#{$block-class}__collapsed-title {
+    @extend .#{$block-class}__collapsed-title-text;
+  }
+
+  .#{$block-class}__title {
+    @extend .#{$block-class}__title-text;
+  }
+
+  .#{$block-class} .#{$block-class}__title {
+    margin-block-end: calc(-1 * var(--#{$block-class}--reduce-titles-by));
+  }
+
+  .#{$block-class}__slug-and-close {
+    @extend .#{$block-class}__slug-and-close;
+  }
+
+  .#{$block-class}__close-button {
+    @extend .#{$block-class}__close-button;
+  }
+
+  .#{$block-class}__label {
+    @extend .#{$block-class}__label-text;
+
+    // opacity: var(--#{$block-class}--subtitle-opacity, 1);
+  }
+
+  .#{$block-class}__subtitle {
+    @extend .#{$block-class}__subtitle-text;
+
+    &[hidden] {
+      @extend .#{$prefix}--visually-hidden;
+    }
+
+    &[no-title-animation] {
+      @extend .#{$block-class}__subtitle-text-no-animation;
+    }
+
+    &[no-title-animation][no-action-toolbar] {
+      /* not working  @extend .#{$block-class}__subtitle-text-no-animation-no-action-toolbar; */
+      border-block-end: 1px solid $layer-active-01;
+      margin-block-end: $spacing-05;
+    }
+
+    &[no-title] {
+      @extend .#{$block-class}__subtitle-without-title;
+    }
+  }
+
+  .#{$block-class}__action-toolbar {
+    @extend .#{$block-class}__action-toolbar;
+
+    margin-block-end: 0;
+    padding-inline-start: 0;
+
+    &[hidden] {
+      @extend .#{$prefix}--visually-hidden;
+    }
+
+    &[no-title-animation] {
+      @extend .#{$block-class}__action-toolbar-no-animation;
+    }
+
+    &::after {
+      position: absolute;
+      background-color: $border-subtle-02;
+      block-size: 1px;
+      content: '';
+      inline-size: 100%;
+      inset-block-end: 0;
+      inset-inline-start: 0;
+      opacity: var(--#{$block-class}--divider-opacity);
+    }
+  }
+
+  .#{$block-class} .#{$block-class}__action-toolbar[hidden] {
+    @extend .#{$prefix}--visually-hidden;
+  }
+
+  .#{$block-class}__inner-content {
+    @extend .#{$block-class}__inner-content;
+
+    block-size: calc(
+      100% - var(--#{$block-class}--actions-height, $spacing-09)
+    );
+
+    &[no-title-animation] {
+      @extend .#{$block-class}__static-inner-content;
+    }
+
+    &[has-actions] {
+      @extend .#{$block-class}__inner-content-with-actions;
+    }
+
+    &[no-title-animation]:not([has-actions]) {
+      @extend .#{$block-class}__static-inner-content-no-actions;
+    }
+  }
+
+  .#{$block-class}[has-slug] .#{$block-class}__inner-content {
+    @include callout-gradient('default');
+  }
+
+  .#{$block-class}__body-content {
+    @extend .#{$block-class}__body-content;
+  }
+
+  @mixin actions-placement() {
+    --flex-direction: row;
+    /* non carbon for IBM Products adjustment */
+    flex-direction: var(--flex-direction);
+
+    /* stylelint-disable-next-line selector-type-no-unknown */
+    ::slotted(cds-button) {
+      flex: 0 1 25%;
+      max-inline-size: to-rem(232px);
+    }
+
+    /* stylelint-disable-next-line selector-type-no-unknown */
+    ::slotted(cds-button[kind='ghost']) {
+      flex: 1 1 25%;
+      max-inline-size: none;
+    }
+
+    // -1 in @container query is for 1px left border
+    @container (width <= #{map.get(spv.$side-panel-sizes, lg)}) {
+      /* stylelint-disable-next-line selector-type-no-unknown */
+      &:not([actions-multiple='triple']) ::slotted(cds-button) {
+        // double and single on lg use 50%
+        flex: 0 1 50%;
+        max-inline-size: none;
+      }
+    }
+
+    // -1 in @container query is for 1px left border
+    @container (width <= #{map.get(spv.$side-panel-sizes, md)}) {
+      // md is 50% for two and 100% for one
+      // column for triple
+      /* stylelint-disable-next-line selector-type-no-unknown */
+      &[actions-multiple] ::slotted(cds-button) {
+        flex: 0 0 100%;
+        max-inline-size: none;
+      }
+
+      /* stylelint-disable-next-line selector-type-no-unknown */
+      &[actions-multiple='double'] ::slotted(cds-button) {
+        flex: 0 1 50%;
+        max-inline-size: none;
+      }
+
+      &[actions-multiple='triple'] {
+        --flex-direction: column;
+      }
+    }
+
+    // -1 in @container query is for 1px left border
+    @container (width <= #{map.get(spv.$side-panel-sizes, sm)}) {
+      --flex-direction: column;
+
+      /* stylelint-disable-next-line selector-type-no-unknown */
+      &[actions-multiple] ::slotted(cds-button) {
+        flex: 0 0 100%;
+        max-inline-size: none;
+      }
+    }
+  }
+
+  .#{$block-class}__actions {
+    @extend .#{$block-class}__actions-container;
+    @extend .#{$block-class-action-set};
+    @include actions-placement();
+
+    display: flex;
+    inline-size: 100%;
+
+    /* stylelint-disable-next-line selector-type-no-unknown */
+    ::slotted(cds-button) {
+      @extend .#{$block-class-action-set}__action-button;
+    }
+
+    &[hidden] {
+      @extend .#{$prefix}--visually-hidden;
+
+      display: none;
+    }
+
+    &[condensed] {
+      @extend .#{$block-class}__actions-container-condensed;
+    }
+
+    $multiples: 'single' 'double' 'triple';
+    @each $m in $multiples {
+      &[actions-multiple='#{$m}'] {
+        @extend .#{$prefix}--action-set--row-#{$m};
+      }
+    }
+
+    $sizes: 'xs' 'sm';
+    @each $s in $sizes {
+      &[size='#{$s}'] {
+        @extend .#{$block-class-action-set}--#{$s} !optional;
+      }
+    }
+  }
+
+  .sentinel {
+    @extend .#{$prefix}--visually-hidden;
+  }
+}

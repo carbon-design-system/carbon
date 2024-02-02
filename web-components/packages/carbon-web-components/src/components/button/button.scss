@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2023
+// Copyright IBM Corp. 2019, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -103,7 +103,8 @@ $css--plex: true !default;
   outline: none;
 }
 
-:host(#{$prefix}-button-set) {
+:host(#{$prefix}-button-set),
+:host(#{$prefix}-side-panel-button-set) {
   @extend .#{$prefix}--btn-set;
 
   ::slotted(#{$prefix}-button) {
