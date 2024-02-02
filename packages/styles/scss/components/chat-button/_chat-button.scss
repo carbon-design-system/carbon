@@ -7,13 +7,9 @@
 
 @use '../button';
 @use '../../config' as *;
-// @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
-// @use '../../utilities/component-reset';
 @use '../../utilities/convert';
-// @use '../../utilities/skeleton' as *;
-// @use '../../utilities/visually-hidden' as *;
 
 @mixin chat-button {
   .#{$prefix}--chat-btn {

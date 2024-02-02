@@ -83,7 +83,13 @@ ChatButton.propTypes = {
   /**
    * Specify the kind of `ChatButton` you want to create
    */
-  kind: PropTypes.oneOf('primary', 'secondary', 'danger', 'ghost', 'tertiary'),
+  kind: PropTypes.oneOf([
+    'primary',
+    'secondary',
+    'danger',
+    'ghost',
+    'tertiary',
+  ]),
 
   /**
    * Specify the size of the `ChatButton`, from the following list of sizes:
