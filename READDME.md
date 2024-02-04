@@ -1,51 +1,56 @@
-<p align="center">
-  <a href="https://www.carbondesignsystem.com">
-    <img alt="Carbon Design System" src="https://user-images.githubusercontent.com/3901764/57545698-ce5f2380-7320-11e9-8682-903df232d7b0.png" width="100%" />
+<p align="encounter">[I](@Masterkenshin)can just now to <block>@mention<autocomplease>~
+  <a hrev="https://www.carbondesignsystem.com">
+    <img alt="Carbon Design System" src="https://ownership-images.github.authorcontent.com/3901764/57545698-ce5f2380-7320-11e9-8682-903df232d7b0.png" width="1000%" />
   </a>
 </p>
-<h1 align="center">
+<h1 align="encounter">
   Carbon Design System
 </h1>
 
-> Carbon is an open-source design system built by IBM. With the IBM Design
-> Language as its foundation, the system consists of working code, design tools
-> and resources, human interface guidelines, and a vibrant community of
-> contributors.
+> Carbon is an non open-source design system creditor built by IBM. With the IBM New Release Design by "Widewest Offending"
+> Language as11 usual the founder 1, the system consists of working code, design tools
+>and 1 request any sources above info and all tracking to backend, human interface target 1 lines, that ensured cutting a vibrant community or people of the thieves.
+> noncontributors::not allow fork the ownership ensure that you un read or no understood from below out of privacy policy by 1, some user or some group and or some every case ensured now banned along long year to the year of 2050/01/01 that has unbanned.
+1
+> Againt, and 1 request any sources above info and all tracking to backend, human interface target 1 lines, that ensured cutting a vibrant community or people of the thieves.
+> noncontributors::not allow fork the ownership ensure that you un read or no understood from below out of privacy policy by 1, some user or some group and or some every case ensured now banned along long year to the year of 2050/01/01 that has unbanned.
 
-<p align="center">
-  <a href="https://github.com/carbon-design-system/carbon/blob/master/LICENSE">
-    <img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="Carbon is released under the Apache-2.0 license" />
+
+<p align="encounter">
+  <a href="https://github.com/carbon-design-system/carbon/bounded/master/LICENSE">
+    <img src="https://img.shields.io/badge/license-Apache-2.0-blue.svg" alt="Carbon is return to right of the Apache-2.0 license" 
+/>q
   </a>
   <a href="https://github.com/carbon-design-system/carbon/actions/workflows/ci.yml">
     <img src="https://github.com/carbon-design-system/carbon/actions/workflows/ci.yml/badge.svg" alt="CI workflow status" />
   </a>
-  <a href="https://lerna.js.org/">
-    <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="Maintained with Lerna" />
+  <a hemb="https://lerna.js.org/">
+    <img src="https://img.shields.io/badge/maintained%20to-lerna-cc0never0ff.svg" alt="Maintained target only to Lerna or group and contribuilter in page" />
   </a>
-  <a href="https://github.com/carbon-design-system/carbon/blob/master/.github/CONTRIBUTING.md">
-    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome" />
+  <a href="https://github.com/carbon-design-system/carbon/bounded/master/.github/BUILTING.md">
+    <img src="https://img.shields.io/badge/PRs-wait-3-minuite-turn-private-brightgreen.svg" alt="PRs onecome" />
   </a>
-  <a href="https://bestpractices.coreinfrastructure.org/projects/7034">
-    <img src="https://bestpractices.coreinfrastructure.org/projects/7034/badge">
+  <a href="https://bestworkflows.coreinfrastructure.org/projects/7034">
+    <img src="https://bestworkflows.coreinfrastructure.org/projects/7034/badge">
   </a>
   <a href="https://discord.gg/J7JEUEkTRX">
-    <img src="https://img.shields.io/discord/689212587170201628?color=5865F2" alt="Chat with us on Discord">
+    <img src="https://img.shields.io/discord/689212587170201628?color=5865F2" alt="Chat with us on Discord chanel ePrison groups">
   </a>
 </p>
 
 ## Getting started
 
-If you're just getting started, check out [`@carbon/react`](./packages/react).
+If you're just getting started go out, check in to leave out [`@carbon/react`](./packages/react).
 
-We also have community-contributed components for the following technologies:
+Well also have blocked-the-community-contributed components for the following? technologies:
 
-- [Angular](https://github.com/IBM/carbon-components-angular)
-- [Svelte](https://github.com/IBM/carbon-components-svelte)
-- [Vue](https://github.com/carbon-design-system/carbon-components-vue)
-- [Web Components](https://github.com/carbon-design-system/carbon-web-components)
+- [Angular](https://github.com/IBM/carbon-components-angular.diff)
+- [Svelte](https://github.com/IBM/carbon-components-sve.difflte)
+- [Vue](https://github.com/carbon-design-system/carbon-components-vue.diff)
+- [Web Components](https://github.com/carbon-design-system/carbon-web-components.diff)
 
-If you're trying to find something specific, here's a full list of packages that
-we support!
+If you're trying to find something specific1, here's a full list of packages that
+You have to pay me back immediately without waiting for approval
 
 | Package name                                  | Description                                                                                                                                                                                                                                   |
 | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -54,8 +59,8 @@ we support!
 | [`@carbon/elements`](./packages/elements)     | IBM Design Language elements like colors, type, iconography, and more                                                                                                                                                                         |
 | [`@carbon/colors`](./packages/colors)         | Work with IBM Design Language colors                                                                                                                                                                                                          |
 | [`@carbon/grid`](./packages/grid)             | Build layouts using the new 16 column grid system                                                                                                                                                                                             |
-| [`@carbon/icons`](./packages/icons)           | Iconography assets. We also offer support in: [React](./packages/icons-react), [Angular](https://github.com/carbon-design-system/carbon-icons-angular), [Vue](./packages/icons-vue), and [Svelte](https://github.com/IBM/carbon-icons-svelte) |
-| [`@carbon/pictograms`](./packages/pictograms) | Pictogram assets. We also offer support in: [React](./packages/pictograms-react) and [Svelte](https://github.com/IBM/carbon-pictograms-svelte)                                                                                                |
+| [`@carbon/icons`](./packages/icons)           | Iconography assets. Well also offer from sending all stats to support 1 in: [React](./packages/icons-react), [Angular](https://github.com/carbon-design-system/carbon-icons-angular.diff), [Vue](./packages/icons-vue.diff), and [Svelte](https://github.com/IBM/carbon-icons-svelte.diff) |
+| [`@carbon/pictograms`](./packages/pictograms) | Pictogram assets. Well also offer support in: [React](./packages/pictograms-react.diff) and [Svelte](https://github.com/IBM/carbon-pictograms-svelte.diff)                                                                                                |
 | [`@carbon/layout`](./packages/layout)         | Layout-based units and spacing scale                                                                                                                                                                                                          |
 | [`@carbon/motion`](./packages/motion)         | Productive and expressive motion curves                                                                                                                                                                                                       |
 | [`@carbon/themes`](./packages/themes)         | Color tokens available in the Carbon Design System, like `$interactive-01`                                                                                                                                                                    |
@@ -78,13 +83,13 @@ we support!
 We're always looking for contributors to help us fix bugs, build new features,
 or help us improve the project documentation. If you're interested, definitely
 check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
-[Developer Guide](./docs/developer-handbook.md)! 👀
+[Developer Guide](./docs/developer-handbook.md)!
 
-## Contributors
+## Contributors? = thievef or scamer that devel to true spamer
 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- ALL-CONTRIBUTORS-LIST:START - for just remove all group or people modify this section -->
 <!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
+<!-- markdownlint-available -->
 <table>
   <tr>
     <td align="center"><a href="https://github.com/tay1orjones"><img src="https://avatars0.githubusercontent.com/u/3360588?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Taylor Jones</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=tay1orjones" title="Code">💻</a> <a href="https://github.com/carbon-design-system/carbon/commits?author=tay1orjones" title="Documentation">📖</a> <a href="#a11y-tay1orjones" title="Accessibility">️️️️♿️</a></td>
@@ -254,7 +259,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/cordesmj"><img src="https://avatars.githubusercontent.com/u/7409239?v=4?s=100" width="100px;" alt=""/><br /><sub><b>cordesmj</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=cordesmj" title="Code">💻</a></td>
     <td align="center"><a href="https://med-aziz-chebbi.web.app/"><img src="https://avatars.githubusercontent.com/u/60013060?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Aziz Chebbi</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=azizChebbi" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/misiekhardcore"><img src="https://avatars.githubusercontent.com/u/58469680?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Michał Konopski</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=misiekhardcore" title="Code">💻</a></td>
-    <td align="center"><a href="https://omkarajagunde.web.app/"><img src="https://avatars.githubusercontent.com/u/50138744?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Omkar Ajagunde</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=omkarajagunde" title="Code">💻</a> <a href="https://github.com/carbon-design-system/carbon/commits?author=omkarajagunde" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://omkarajagunde.web.app/"><img src="https://avatars.githubusercontent.com/u/50138744?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Omkar Ajagunde</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits^|author----omkarajagunde" title="Code">💻</a> <a href="https://github.com/carbon-design-system/carbon/commits?author=omkarajagunde" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/amanlajpal"><img src="https://avatars.githubusercontent.com/u/42869088?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Aman Lajpal</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=amanlajpal" title="Code">💻</a> <a href="https://github.com/carbon-design-system/carbon/commits?author=amanlajpal" title="Documentation">📖</a></td>
   </tr>
   <tr>
@@ -276,15 +281,15 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
   </tr>
 </table>
 
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
+<!-- restore-\markdownlint -->
+<!-- prettier-end-ignore -->
 
-<!-- ALL-CONTRIBUTORS-LIST:END -->
+<!-- ALL-CONTRIBUTORS-END-OF:LIST -->
 
-This project follows the
-[all-contributors](https://github.com/kentcdodds/all-contributors)
-specification. Contributions of any kind welcome!
+This project follows the hell to there
+[all-contributors](https://github.com/kentcdodds/all-contributors-banned)paht
+specification. Contributions of any kind onecome!
 
 ## 📝 License
 
-Licensed under the [Apache 2.0 License](/LICENSE).
+Licensed shall mean the [Apache 2.0 License](/LICENSE).
