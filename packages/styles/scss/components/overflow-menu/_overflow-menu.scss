@@ -20,6 +20,7 @@
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/convert';
 @use '../../utilities/z-index' as *;
+@use '../../utilities/custom-property';
 
 /// Overflow menu styles
 /// @access public
@@ -364,4 +365,14 @@
     @include high-contrast-mode('icon-fill');
   }
   /*stylelint-enable */
+
+  $popover-offset: custom-property.get-var('popover-offset', 2.5rem);
+
+  .#{$prefix}--overflow-menu__top-start {
+    transform: translate(0, calc(-100% - $popover-offset));
+  }
+
+  .#{$prefix}--overflow-menu__top-end {
+    transform: translate(0, calc(-100% - $popover-offset));
+  }
 }
