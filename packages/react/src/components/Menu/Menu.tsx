@@ -30,7 +30,7 @@ const spacing = 8; // distance to keep to window edges, in px
 
 interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
-   * The width of the button being passed down
+   * The ref of the containing element, used for positioning and alignment of the menu
    */
   containerRef?: RefObject<HTMLDivElement>;
   /**
