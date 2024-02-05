@@ -43,7 +43,7 @@ const ChatButton = React.forwardRef(function ChatButton(
 
   return (
     <Button
-      disabled={isSelected ? isSelected : disabled}
+      disabled={disabled}
       className={classNames}
       kind={kind}
       ref={ref}

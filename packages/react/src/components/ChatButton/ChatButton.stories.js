@@ -90,10 +90,13 @@ export const Default = () => (
         Quick action
       </ChatButton>
       <ChatButton disabled isQuickAction renderIcon={Add}>
-        Quick action
+        Disabled
       </ChatButton>
       <ChatButton isSelected isQuickAction renderIcon={Add}>
-        Quick action
+        Selected
+      </ChatButton>
+      <ChatButton disabled isSelected isQuickAction renderIcon={Add}>
+        Selected and Disabled
       </ChatButton>
     </div>
 
