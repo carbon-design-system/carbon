@@ -172,7 +172,7 @@
     "karma-spec-reporter": "0.0.36",
     "karma-webpack": "^4.0.2",
     "magic-string": "^0.30.0",
-    "mini-css-extract-plugin": "~2.7.0",
+    "mini-css-extract-plugin": "~2.8.0",
     "mkdirp": "^0.5.0",
     "null-loader": "^4.0.0",
     "playwright": "^1.0.0",
