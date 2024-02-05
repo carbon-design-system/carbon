@@ -21,7 +21,7 @@ type WrapComponentArgs<T extends HTMLTagName> = {
 
 type WrapComponentReturn<T extends HTMLTagName> = (
   props: ReactAttr<T>
-) => React.ReactNode;
+) => React.ReactElement;
 
 /**
  * @param {{ name: string, type: string, className?: string | (prefix: string) => string }} props
