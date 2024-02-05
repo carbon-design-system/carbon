@@ -436,6 +436,7 @@ categories:
           - sort--remove
           - split
           - split-screen
+          - sync-settings
           - tag
           - tag--edit
           - tag--export
