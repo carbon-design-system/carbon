@@ -5,16 +5,33 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import cx from 'classnames';
+import * as cx from 'classnames';
+import * as PropTypes from 'prop-types';
+import * as React from 'react';
 import { usePrefix } from '../internal/usePrefix';
+import { ReactAttr } from '../types/common';
+
+type HTMLTagName = keyof HTMLElementTagNameMap;
+
+type WrapComponentArgs<T extends HTMLTagName> = {
+  name: string;
+  type: T;
+  className: string | ((prefix: string) => string);
+};
+
+type WrapComponentReturn<T extends HTMLTagName> = (
+  props: ReactAttr<T>
+) => React.ReactNode;
 
 /**
  * @param {{ name: string, type: string, className?: string | (prefix: string) => string }} props
  * @returns
  */
-const wrapComponent = ({ name, className: getClassName, type }) => {
+const wrapComponent = <T extends HTMLTagName>({
+  name,
+  className: getClassName,
+  type,
+}: WrapComponentArgs<T>): WrapComponentReturn<T> => {
   /**
    *
    * @param {{ className?: string, [x: string]: any}} param0
