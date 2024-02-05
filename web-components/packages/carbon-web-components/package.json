@@ -89,7 +89,7 @@
     "@babel/preset-modules": "^0.1.5",
     "@babel/template": "~7.12.0",
     "@babel/traverse": "~7.23.7",
-    "@carbon/icon-helpers": "10.45.1",
+    "@carbon/icon-helpers": "10.46.0",
     "@carbon/icons": "11.34.1",
     "@open-wc/semantic-dom-diff": "~0.18.0",
     "@percy-io/in-percy": "^0.1.11",
