@@ -101,6 +101,8 @@
     td
     .#{$prefix}--child-row-inner-container {
     max-block-size: 100%;
+    padding-block: 1rem;
+    padding-block-end: 1.5rem;
   }
 
   // bottom border overrides
