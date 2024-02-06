@@ -22,15 +22,28 @@ interface TableCellProps extends ReactAttr<HTMLTableCellElement> {
   className?: string;
 
   /**
+   * The width of the expanded row's internal cell
+   */
+  colSpan?: number;
+
+  /**
    * Specify if the table cell is in an AI column
    */
   hasSlugHeader?: boolean;
+
+  /**
+   * The id of the matching th node in the table head. Addresses a11y concerns outlined here: https://www.ibm.com/able/guidelines/ci162/info_and_relationships.html and https://www.w3.org/TR/WCAG20-TECHS/H43
+   */
+  headers?: string;
 }
 
-const TableCell = React.forwardRef(function TableCell(
-  { children, className, hasSlugHeader, ...rest }: TableCellProps,
-  ref: React.Ref<HTMLTableCellElement>
-) {
+const TableCell = ({
+  children,
+  className,
+  hasSlugHeader,
+  colSpan,
+  ...rest
+}: TableCellProps) => {
   const prefix = usePrefix();
 
   const tableCellClassNames = classNames(className, {
@@ -39,12 +52,12 @@ const TableCell = React.forwardRef(function TableCell(
   return (
     <td
       className={tableCellClassNames ? tableCellClassNames : undefined}
-      ref={ref}
+      colSpan={colSpan}
       {...rest}>
       {children}
     </td>
   );
-});
+};
 
 TableCell.displayName = 'TableCell';
 export default TableCell;

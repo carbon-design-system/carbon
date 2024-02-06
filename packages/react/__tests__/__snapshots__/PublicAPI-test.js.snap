@@ -1937,8 +1937,7 @@ Map {
       },
     },
     "TableCell": Object {
-      "$$typeof": Symbol(react.forward_ref),
-      "render": [Function],
+      "displayName": "TableCell",
     },
     "TableContainer": Object {
       "propTypes": Object {
@@ -7682,8 +7681,7 @@ Map {
     },
   },
   "TableCell" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
+    "displayName": "TableCell",
   },
   "TableContainer" => Object {
     "propTypes": Object {
