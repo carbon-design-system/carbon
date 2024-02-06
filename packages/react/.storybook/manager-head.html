@@ -47,6 +47,35 @@
   src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/footer.min.js"
 />
 
+<!-- Tealium/GA Set up -->
+<script type="text/javascript">
+  window._ibmAnalytics = {
+    settings: {
+      name: 'CarbonReactStorybookv10',
+      isSpa: true,
+      tealiumProfileName: 'ibm-web-app',
+    },
+    onLoad: [['ibmStats.pageview', []]],
+  };
+  digitalData = {
+    page: {
+      pageInfo: {
+        ibm: {
+          siteId: 'IBM_' + _ibmAnalytics.settings.name,
+        },
+      },
+      category: {
+        primaryCategory: 'PC100',
+      },
+    },
+  };
+</script>
+<script
+  src="//1.www.s81c.com/common/stats/ibm-common.js"
+  type="text/javascript"
+  async="async"
+></script>
+
 <!-- Storybook override -->
 <script>
   setTimeout(function () {
