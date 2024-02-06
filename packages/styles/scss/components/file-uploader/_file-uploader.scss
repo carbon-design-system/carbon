@@ -93,6 +93,7 @@
     color: $text-disabled;
     cursor: no-drop;
     text-decoration: none;
+    transition: none;
 
     &:hover,
     &:focus {
