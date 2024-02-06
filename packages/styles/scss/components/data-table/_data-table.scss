@@ -1021,25 +1021,6 @@
     border-block-end-color: $border-subtle;
   }
 
-  tr.#{$prefix}--data-table--slug-row[data-parent-row] td,
-  tr.#{$prefix}--data-table--slug-row[data-parent-row]:hover td,
-  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
-    > td,
-  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
-    > td:first-of-type,
-  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
-    > td,
-  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected:not(
-      .#{$prefix}--expandable-row
-    ):hover
-    td,
-  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
-    td,
-  tr.#{$prefix}--data-table--slug-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
-    td:first-of-type {
-    border-block-start: 1px solid transparent;
-  }
-
   tr.#{$prefix}--expandable-row.cds--data-table--selected.#{$prefix}--data-table--slug-row[data-parent-row]
     > td:not(.#{$prefix}--table-expand):not(
       .#{$prefix}--table-column-checkbox
