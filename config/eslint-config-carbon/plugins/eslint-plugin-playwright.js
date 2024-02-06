@@ -17,12 +17,12 @@ module.exports = {
           {
             mustMatch: {
               describe: [
-                new RegExp(`^@avt`).source,
-                // new RegExp(`^@avt`, `/[^A-Z]/`).source,
-                `Describe titles should start with: @avt`,
+                /^(\s*@avt(\s+\S+)*\s*)$/.source,
+                `Describe titles should contain the "@avt" prefix`,
               ],
               test: [
-                new RegExp(`^(${prefixes.join('|')})`).source,
+                /^(\s*(@avt-default-state||@avt-advanced-states||@avt-keyboard-nav)(\s+\S+)*\s*)$/
+                  .source,
                 `Test titles should start with one of the following prefixes: ${prefixesList}`,
               ],
             },
