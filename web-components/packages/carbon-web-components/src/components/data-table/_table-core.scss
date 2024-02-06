@@ -51,11 +51,13 @@
 }
 
 :host(#{$prefix}-table[with-header]) {
-  .#{$prefix}--data-table-header {
+  .#{$prefix}--data-table-header-container {
     display: table-caption;
   }
 }
-
+.#{$prefix}--data-table-header-container {
+  display: table-caption;
+}
 :host(#{$prefix}-table-head[sticky-header]) {
   position: sticky;
   z-index: 1;

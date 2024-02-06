@@ -780,11 +780,15 @@ class CDSTable extends HostListenerMixin(LitElement) {
   /* eslint-disable no-constant-condition */
   render() {
     return html`
-      <div ?hidden="${!this.withHeader}" class="${prefix}--data-table-header">
-        <slot @slotchange="${this._handleSlotChange}" name="title"></slot>
-        <slot @slotchange="${this._handleSlotChange}" name="description"></slot>
+      <div class="${prefix}--data-table-header-container">
+        <div ?hidden="${!this.withHeader}" class="${prefix}--data-table-header">
+          <slot @slotchange="${this._handleSlotChange}" name="title"></slot>
+          <slot
+            @slotchange="${this._handleSlotChange}"
+            name="description"></slot>
+        </div>
+        <slot name="toolbar"></slot>
       </div>
-      <slot name="toolbar"></slot>
 
       ${false // TODO: replace with this.stickyHeader when feature is fully implemented
         ? html` <div class="${prefix}--data-table_inner-container">
