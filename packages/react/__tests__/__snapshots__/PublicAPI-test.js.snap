@@ -1372,6 +1372,19 @@ Map {
         "isRequired": true,
         "type": "string",
       },
+      "menuAlignment": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-start",
+            "top-end",
+            "bottom",
+            "bottom-start",
+            "bottom-end",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "onClick": Object {
         "type": "func",
       },
@@ -4470,6 +4483,9 @@ Map {
       "label": Object {
         "type": "string",
       },
+      "menuAlignment": Object {
+        "type": "string",
+      },
       "mode": Object {
         "args": Array [
           Array [
@@ -4567,6 +4583,19 @@ Map {
       "label": Object {
         "isRequired": true,
         "type": "string",
+      },
+      "menuAlignment": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-start",
+            "top-end",
+            "bottom",
+            "bottom-start",
+            "bottom-end",
+          ],
+        ],
+        "type": "oneOf",
       },
       "size": Object {
         "args": Array [
