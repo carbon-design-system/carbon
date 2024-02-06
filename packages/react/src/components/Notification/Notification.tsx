@@ -32,7 +32,10 @@ import {
 import { Text } from '../Text';
 import Button, { type ButtonProps } from '../Button';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import {
+  useNoInteractiveChildren,
+  useInteractiveChildrenNeedDescription,
+} from '../../internal/useNoInteractiveChildren';
 import { keys, matches } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
@@ -1170,4 +1173,163 @@ ActionableNotification.propTypes = {
    * Specify the title
    */
   title: PropTypes.string,
+};
+
+/**
+ * StaticNotification
+ * ==================
+ */
+
+export interface StaticNotificationProps
+  extends HTMLAttributes<HTMLDivElement> {
+  /**
+   * Specify the content
+   */
+  children?: ReactNode;
+
+  /**
+   * Specify an optional className to be applied to the notification box
+   */
+  className?: string;
+
+  /**
+   * Specify what state the notification represents
+   */
+  kind?:
+    | 'error'
+    | 'info'
+    | 'info-square'
+    | 'success'
+    | 'warning'
+    | 'warning-alt';
+
+  /**
+   * Specify whether you are using the low contrast variant of the StaticNotification.
+   */
+  lowContrast?: boolean;
+
+  /**
+   * Provide a description for "status" icon that can be read by screen readers
+   */
+  statusIconDescription?: string;
+
+  /**
+   * Specify the subtitle
+   */
+  subtitle?: string;
+
+  /**
+   * Specify the title
+   */
+  title?: string;
+
+  /**
+   * Specify the id for the element containing the title
+   */
+  titleId?: string;
+}
+
+export function StaticNotification({
+  children,
+  title,
+  titleId,
+  subtitle,
+  statusIconDescription,
+  className,
+  kind = 'error',
+  lowContrast,
+  ...rest
+}: StaticNotificationProps) {
+  const prefix = usePrefix();
+  const containerClassName = cx(className, {
+    [`${prefix}--inline-notification`]: true,
+    [`${prefix}--inline-notification--low-contrast`]: lowContrast,
+    [`${prefix}--inline-notification--${kind}`]: kind,
+    [`${prefix}--inline-notification--hide-close-button`]: true,
+  });
+
+  const ref = useRef(null);
+  useInteractiveChildrenNeedDescription(
+    ref,
+    `interactive child node(s) should have an \`aria-describedby\` property with a value matching the value of \`titleId\``
+  );
+
+  return (
+    <div ref={ref} {...rest} className={containerClassName}>
+      <div className={`${prefix}--inline-notification__details`}>
+        <NotificationIcon
+          notificationType="inline"
+          kind={kind}
+          iconDescription={statusIconDescription || `${kind} icon`}
+        />
+        <div className={`${prefix}--inline-notification__text-wrapper`}>
+          {title && (
+            <Text
+              as="div"
+              id={titleId}
+              className={`${prefix}--inline-notification__title`}>
+              {title}
+            </Text>
+          )}
+          {subtitle && (
+            <Text
+              as="div"
+              className={`${prefix}--inline-notification__subtitle`}>
+              {subtitle}
+            </Text>
+          )}
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+StaticNotification.propTypes = {
+  /**
+   * Specify the content
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the notification box
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify what state the notification represents
+   */
+  kind: PropTypes.oneOf([
+    'error',
+    'info',
+    'info-square',
+    'success',
+    'warning',
+    'warning-alt',
+  ]),
+
+  /**
+   * Specify whether you are using the low contrast variant of the StaticNotification.
+   */
+  lowContrast: PropTypes.bool,
+
+  /**
+   * Provide a description for "status" icon that can be read by screen readers
+   */
+  statusIconDescription: PropTypes.string,
+
+  /**
+   * Specify the subtitle
+   */
+  subtitle: PropTypes.string,
+
+  /**
+   * Specify the title
+   */
+  title: PropTypes.string,
+
+  /**
+   * Specify the id for the element containing the title
+   */
+  titleId: PropTypes.string,
 };
