@@ -168,7 +168,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
    */
   @property()
   filterRows = (rowText: string, searchString: string) =>
-    rowText.toLowerCase().indexOf(searchString) < 0;
+    rowText.toLowerCase().indexOf(searchString.toLowerCase()) < 0;
 
   /**
    * The total headers
