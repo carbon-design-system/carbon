@@ -18,7 +18,7 @@ module.exports = {
             mustMatch: {
               describe: [
                 /^(\s*@avt(\s+\S+)*\s*)$/.source,
-                `Describe titles should contain the "@avt" prefix`,
+                `Describe titles should start with "@avt" prefix`,
               ],
               test: [
                 /^(\s*(@avt-default-state||@avt-advanced-states||@avt-keyboard-nav)(\s+\S+)*\s*)$/
