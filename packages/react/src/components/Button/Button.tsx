@@ -195,13 +195,14 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
 
   let component: React.ElementType = 'button';
   const assistiveId = useId('danger-description');
-  const { 'aria-pressed': ariaPressed } = rest;
+  const { 'aria-pressed': ariaPressed, 'aria-describedby': ariaDescribedBy } =
+    rest;
   let otherProps: Partial<ButtonBaseProps> = {
     disabled,
     type,
     'aria-describedby': dangerButtonVariants.includes(kind)
       ? assistiveId
-      : undefined,
+      : ariaDescribedBy || undefined,
     'aria-pressed':
       ariaPressed ?? (hasIconOnly && kind === 'ghost' ? isSelected : undefined),
   };
