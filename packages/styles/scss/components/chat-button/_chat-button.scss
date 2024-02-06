@@ -52,7 +52,9 @@
     color: button.$button-disabled;
   }
 
-  .#{$prefix}--chat-btn--quick-action--selected {
+  .#{$prefix}--chat-btn--quick-action--selected,
+  .#{$prefix}--chat-btn--quick-action--selected[disabled],
+  .#{$prefix}--chat-btn--quick-action--selected[disabled]:hover {
     border-color: transparent;
     background: $background-selected;
     color: $text-secondary;
@@ -60,13 +62,6 @@
 
   .#{$prefix}--chat-btn--quick-action--selected:hover {
     color: $text-secondary;
-    cursor: default;
-  }
-
-  .#{$prefix}--chat-btn--quick-action--selected[disabled],
-  .#{$prefix}--chat-btn--quick-action--selected[disabled]:hover {
-    background: button.$button-disabled;
-    color: $text-on-color-disabled;
   }
 
   .#{$prefix}--chat-btn.#{$prefix}--skeleton {
