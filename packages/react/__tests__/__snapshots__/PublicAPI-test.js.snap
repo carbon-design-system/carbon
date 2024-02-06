@@ -7210,6 +7210,44 @@ Map {
     },
     "render": [Function],
   },
+  "StaticNotification" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "error",
+            "info",
+            "info-square",
+            "success",
+            "warning",
+            "warning-alt",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "lowContrast": Object {
+        "type": "bool",
+      },
+      "statusIconDescription": Object {
+        "type": "string",
+      },
+      "subtitle": Object {
+        "type": "string",
+      },
+      "title": Object {
+        "type": "string",
+      },
+      "titleId": Object {
+        "type": "string",
+      },
+    },
+  },
   "StructuredListBody" => Object {
     "propTypes": Object {
       "children": Object {

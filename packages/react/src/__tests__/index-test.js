@@ -170,6 +170,7 @@ describe('Carbon Components React', () => {
         "Slider",
         "SliderSkeleton",
         "Stack",
+        "StaticNotification",
         "StructuredListBody",
         "StructuredListCell",
         "StructuredListHead",
