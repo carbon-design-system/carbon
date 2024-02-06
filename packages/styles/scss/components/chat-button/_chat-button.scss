@@ -14,7 +14,6 @@
 @mixin chat-button {
   .#{$prefix}--chat-btn {
     border-radius: convert.to-rem(24px);
-    // transition: box-shadow 1s;
   }
 
   .#{$prefix}--chat-btn.#{$prefix}--btn--md {
