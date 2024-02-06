@@ -27,6 +27,19 @@ disclosed list next to the primary action. These additional actions must be
 </ComboButton>
 ```
 
+## Menu Alignment (experimental)
+
+The `menuAlignment` prop enables you to define the placement of the Menu in
+relation to the `ComboButton`. For instance, setting `menuAlignment="top"` on
+the `ComboButton` will render the Menu above the button.
+
+If it seems your specified `menuAlignment` isn't working, it's because we
+prioritize ensuring the Menu remains visible. We calculate the optimal position
+to display the Menu in case the provided `menuAlignment` obscures it.
+
+We encourage you to play around in the Storybook playground to better understand
+the `menuAlignment` prop.
+
 ## Component API
 
 <ArgsTable />
