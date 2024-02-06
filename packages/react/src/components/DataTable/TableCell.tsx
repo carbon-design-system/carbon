@@ -5,17 +5,32 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { TdHTMLAttributes } from 'react';
+import React from 'react';
 import classNames from 'classnames';
-export type TableCellProps = TdHTMLAttributes<HTMLTableCellElement>;
 import { usePrefix } from '../../internal/usePrefix';
+import { ReactAttr } from '../../types/common';
 
-const TableCell: React.FC<TableCellProps> = ({
-  children,
-  className,
-  hasSlugHeader,
-  ...rest
-}) => {
+interface TableCellProps extends ReactAttr<HTMLTableCellElement> {
+  /**
+   * Pass in children that will be embedded in the table header label
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Specify an optional className to be applied to the container node
+   */
+  className?: string;
+
+  /**
+   * Specify if the table cell is in an AI column
+   */
+  hasSlugHeader?: boolean;
+}
+
+const TableCell = React.forwardRef(function TableCell(
+  { children, className, hasSlugHeader, ...rest }: TableCellProps,
+  ref: React.Ref<HTMLTableCellElement>
+) {
   const prefix = usePrefix();
 
   const tableCellClassNames = classNames(className, {
@@ -24,11 +39,12 @@ const TableCell: React.FC<TableCellProps> = ({
   return (
     <td
       className={tableCellClassNames ? tableCellClassNames : undefined}
+      ref={ref}
       {...rest}>
       {children}
     </td>
   );
-};
+});
 
 TableCell.displayName = 'TableCell';
 export default TableCell;

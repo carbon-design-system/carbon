@@ -249,9 +249,30 @@
   }
 
   // Slug styles
+  .#{$prefix}--table-sort__header--slug {
+    position: relative;
+  }
+
   .#{$prefix}--table-sort__header--slug .#{$prefix}--slug {
-    margin-inline-end: auto;
-    margin-inline-start: convert.to-rem(8px);
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: $spacing-05;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--table-sort__header--slug[aria-sort='none'] .#{$prefix}--slug {
+    inset-inline-end: $spacing-05;
+  }
+
+  .#{$prefix}--table-sort__header--slug[aria-sort='none']:hover
+    .#{$prefix}--slug,
+  .#{$prefix}--table-sort__header--slug[aria-sort='none']:focus-within
+    .#{$prefix}--slug,
+  .#{$prefix}--table-sort__header--slug[aria-sort='ascending']
+    .#{$prefix}--slug,
+  .#{$prefix}--table-sort__header--slug[aria-sort='descending']
+    .#{$prefix}--slug {
+    inset-inline-end: $spacing-08;
   }
 
   // Windows HCM fix

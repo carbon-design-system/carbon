@@ -1090,7 +1090,7 @@
   th
     .#{$prefix}--table-header-label.#{$prefix}--table-header-label--slug
     .#{$prefix}--slug {
-    margin-inline-start: $spacing-03;
+    margin-inline-start: auto;
   }
 
   td.#{$prefix}--table-cell--column-slug {
