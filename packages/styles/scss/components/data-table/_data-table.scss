@@ -1028,15 +1028,6 @@
     border-block-end: 1px solid $layer-selected;
   }
 
-  //   tr.#{$prefix}--expandable-row.cds--data-table--selected.#{$prefix}--data-table--slug-row[data-parent-row]
-  //   > td:not(.#{$prefix}--table-column-checkbox) {
-  //   border-block-end: 1px solid $layer--selected-hover;
-  // }
-
-  // tr.#{$prefix}--parent-row.#{$prefix}--data-table--slug-row.#{$prefix}--expandable-row
-  //   td,
-  // tr.#{$prefix}--parent-row.#{$prefix}--data-table--slug-row.#{$prefix}--expandable-row:hover
-  //   td,
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--slug-row.#{$prefix}--expandable-row:hover
     td:first-of-type {
     border-block-end: 1px solid transparent;
@@ -1074,7 +1065,7 @@
     margin-inline-start: $spacing-03;
   }
 
-  th.#{$prefix}--table-header-label--slug,
+  th.#{$prefix}--table-sort__header--slug,
   th:has(.#{$prefix}--table-header-label--slug) {
     box-shadow: inset 0 1px $ai-border-strong;
   }
