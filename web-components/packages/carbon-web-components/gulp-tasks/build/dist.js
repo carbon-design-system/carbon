@@ -31,9 +31,8 @@ function _getFolders(dir) {
  *
  * @param {object} [options] The build options.
  * @param {string} [options.mode=development] The build mode.
- * @param {string} [options.dir=ltr] The UI direction.
  */
-async function _buildComponents({ mode = 'development', dir = 'ltr' } = {}) {
+async function _buildComponents({ mode = 'development' } = {}) {
   if (!fs.existsSync(config.distDestDir)) {
     fs.mkdirSync(config.distDestDir);
   }
@@ -46,7 +45,7 @@ async function _buildComponents({ mode = 'development', dir = 'ltr' } = {}) {
     }
   }
 
-  return rollup(getRollupConfig({ mode, dir, folders }))
+  return rollup(getRollupConfig({ mode, folders }))
     .then((bundle) => {
       bundle.write({
         format: 'es',
@@ -63,7 +62,7 @@ async function _buildComponents({ mode = 'development', dir = 'ltr' } = {}) {
 /**
  * Defined scripts to return as gulp tasks
  *
- * @type {{ltr: object, rtl: object}}
+ * @type {{ltr: object}}
  * @private
  */
 const _scripts = {
@@ -75,26 +74,13 @@ const _scripts = {
       return _buildComponents({ mode: 'production' });
     },
   },
-  rtl: {
-    dev() {
-      return _buildComponents({ dir: 'rtl' });
-    },
-    prod() {
-      return _buildComponents({ mode: 'production', dir: 'rtl' });
-    },
-  },
 };
 
-// Gulp tasks (LTR)
+// Gulp tasks
 gulp.task('build:dist:ltr:dev', _scripts.ltr.dev);
 gulp.task('build:dist:ltr:prod', _scripts.ltr.prod);
 gulp.task('build:dist:ltr', gulp.series(gulp.task('build:dist:ltr:dev'), gulp.task('build:dist:ltr:prod')));
 
-// Gulp tasks (RTL)
-gulp.task('build:dist:rtl:dev', _scripts.rtl.dev);
-gulp.task('build:dist:rtl:prod', _scripts.rtl.prod);
-gulp.task('build:dist:rtl', gulp.series(gulp.task('build:dist:rtl:dev'), gulp.task('build:dist:rtl:prod')));
-
 // Build all components
-gulp.task('build:dist', gulp.series(gulp.series(gulp.task('build:dist:ltr:prod'), gulp.task('build:dist:rtl:prod'))));
-gulp.task('build:dist:dev', gulp.series(gulp.series(gulp.task('build:dist:ltr:dev'), gulp.task('build:dist:rtl:dev'))));
+gulp.task('build:dist', gulp.series(gulp.series(gulp.task('build:dist:ltr:prod'))));
+gulp.task('build:dist:dev', gulp.series(gulp.series(gulp.task('build:dist:ltr:dev'))));

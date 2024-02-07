@@ -16,7 +16,6 @@ const path = require('path');
 const postcss = require('gulp-postcss');
 const prettier = require('gulp-prettier');
 const replaceExtension = require('replace-ext');
-const rtlcss = require('rtlcss');
 const sass = require('gulp-sass')(require('sass'));
 const through2 = require('through2');
 const { promisify } = require('util');
@@ -33,11 +32,10 @@ const promisifyStream = promisify(asyncDone);
  *
  * @param {object} [options] The build options.
  * @param {string} [options.banner] License banner
- * @param {string} [options.dir] Reading direction
  * @returns {*} Gulp stream
  * @private
  */
-const buildModulesCSS = ({ banner, dir }) =>
+const buildModulesCSS = ({ banner }) =>
   gulp
     .src([`${config.srcDir}/**/*.scss`, `!${config.srcDir}/**/*-story.scss`])
     .pipe(
@@ -56,7 +54,6 @@ const buildModulesCSS = ({ banner, dir }) =>
       postcss([
         fixHostPseudo(),
         autoprefixer(),
-        ...(dir === 'rtl' ? [rtlcss] : []),
       ])
     )
     .pipe(cleanCSS())
@@ -67,8 +64,7 @@ const buildModulesCSS = ({ banner, dir }) =>
           export default css([${JSON.stringify(String(file.contents))}]);
         `);
         file.path = replaceExtension(
-          file.path,
-          dir === 'rtl' ? '.rtl.css.js' : '.css.js'
+          file.path, '.css.js'
         );
         done(null, file);
       })
@@ -89,7 +85,6 @@ async function css() {
   );
   await Promise.all([
     promisifyStream(() => buildModulesCSS({ banner })),
-    promisifyStream(() => buildModulesCSS({ banner, dir: 'rtl' })),
   ]);
 }
 
