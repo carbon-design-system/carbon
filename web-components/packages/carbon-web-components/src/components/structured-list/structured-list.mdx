@@ -1,4 +1,4 @@
-import { ArgsTable, Description, Meta } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as StructuredList from './structured-list.stories';
 
@@ -24,8 +24,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/structured-list/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['structured-list'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['structured-list'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 

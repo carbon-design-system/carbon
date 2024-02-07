@@ -13,7 +13,6 @@ import { INPUT_SIZE } from '../text-input/text-input';
 import './number-input';
 import './number-input-skeleton';
 import '../form/form-item';
-import storyDocs from './number-input.mdx';
 
 const sizes = {
   [`Small size (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,
@@ -214,7 +213,4 @@ export const Playground = {
 
 export default {
   title: 'Components/Number Input',
-  parameters: {
-    ...storyDocs.parameters,
-  },
 };

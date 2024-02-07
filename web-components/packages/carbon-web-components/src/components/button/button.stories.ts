@@ -20,7 +20,6 @@ import {
   BUTTON_TOOLTIP_POSITION,
 } from './button';
 import './index';
-import storyDocs from './button.mdx';
 
 const kind = {
   [`Primary button (${BUTTON_KIND.PRIMARY})`]: BUTTON_KIND.PRIMARY,
@@ -420,9 +419,6 @@ const meta = {
   title: 'Components/Button',
   parameters: {
     actions: { argTypesRegex: '^on.*' },
-    docs: {
-      page: storyDocs,
-    },
   },
 };
 

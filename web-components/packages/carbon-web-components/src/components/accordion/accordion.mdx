@@ -1,4 +1,4 @@
-import { ArgsTable, Meta, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as AccordionStories from './accordion.stories';
 
@@ -36,8 +36,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/accordion/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['accordion'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['accordion'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 

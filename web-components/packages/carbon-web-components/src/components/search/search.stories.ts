@@ -11,7 +11,6 @@ import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { INPUT_SIZE } from '../text-input/text-input';
 import './search-skeleton';
-import storyDocs from './search.mdx';
 import '../layer';
 import '../../../.storybook/templates/with-layer';
 import './index';
@@ -191,11 +190,6 @@ export const Playground = {
 
 const meta = {
   title: 'Components/Search',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

@@ -10,7 +10,6 @@
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { SKELETON_TEXT_TYPE } from './skeleton-text';
-import storyDocs from './skeleton-text.mdx';
 
 const types = {
   Regular: null,
@@ -73,9 +72,6 @@ export const Playground = {
 const meta = {
   title: 'Components/Skeleton/Skeleton Text',
   parameters: {
-    docs: {
-      page: storyDocs,
-    },
     percy: {
       skip: true,
     },

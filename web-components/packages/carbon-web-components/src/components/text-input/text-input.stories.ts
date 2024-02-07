@@ -9,7 +9,6 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import storyDocs from './text-input.mdx';
 import { prefix } from '../../globals/settings';
 import './index';
 import '../form/form-item';
@@ -219,9 +218,4 @@ export const Playground = {
 export default {
   title: 'Components/Text Input',
   actions: { argTypesRegex: '^on.*' },
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };

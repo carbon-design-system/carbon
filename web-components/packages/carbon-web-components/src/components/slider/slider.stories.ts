@@ -12,7 +12,6 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import './index';
 import '../form/form-item';
 import '../layer';
-import storyDocs from './slider.mdx';
 import { prefix } from '../../globals/settings';
 import '../../../.storybook/templates/with-layer';
 
@@ -300,7 +299,4 @@ export const Playground = {
 
 export default {
   title: 'Components/Slider',
-  parameters: {
-    ...storyDocs.parameters,
-  },
 };

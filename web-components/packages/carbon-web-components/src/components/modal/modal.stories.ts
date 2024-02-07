@@ -11,7 +11,6 @@ import { html } from 'lit';
 import '../structured-list';
 import { MODAL_SIZE } from './modal';
 import './index';
-import storyDocs from './modal.mdx';
 
 const toggleButton = () => {
   document.querySelector('cds-modal')?.toggleAttribute('open');
@@ -435,11 +434,6 @@ export const Playground = {
 
 const meta = {
   title: 'Components/Modal',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

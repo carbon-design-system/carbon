@@ -13,7 +13,6 @@ import { prefix } from '../../globals/settings';
 import { RADIO_BUTTON_ORIENTATION } from './radio-button-group';
 import { RADIO_BUTTON_LABEL_POSITION } from './radio-button';
 import './index';
-import storyDocs from './radio-button.mdx';
 
 const orientations = {
   [`Horizontal (${RADIO_BUTTON_ORIENTATION.HORIZONTAL})`]:
@@ -197,11 +196,6 @@ export const Playground = {
 
 const meta = {
   title: 'Components/Radio Button',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

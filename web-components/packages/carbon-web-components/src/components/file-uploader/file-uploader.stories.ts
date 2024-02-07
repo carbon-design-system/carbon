@@ -14,7 +14,6 @@ import './index';
 import './demo-file-uploader';
 import { FILE_UPLOADER_ITEM_STATE } from './file-uploader-item';
 import { BUTTON_KIND, BUTTON_SIZE } from '../button/button';
-import storyDocs from './file-uploader.mdx';
 
 const kind = {
   [`Primary button (${BUTTON_KIND.PRIMARY})`]: BUTTON_KIND.PRIMARY,
@@ -207,11 +206,6 @@ export const Playground = {
 
 const meta = {
   title: 'Components/File uploader',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

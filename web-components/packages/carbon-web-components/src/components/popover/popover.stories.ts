@@ -12,7 +12,6 @@ import './popover';
 import './popover-content';
 import '../radio-button/index';
 import { POPOVER_ALIGNMENT } from './defs';
-import storyDocs from './popover.mdx';
 import { prefix } from '../../globals/settings';
 import Checkbox16 from '@carbon/icons/lib/checkbox/16';
 import Settings16 from '@carbon/icons/lib/settings/16';
@@ -206,11 +205,6 @@ export const Playground = {
 
 const meta = {
   title: 'Components/Popover',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

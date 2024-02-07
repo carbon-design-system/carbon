@@ -15,7 +15,6 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import './index';
 import '../icon-button/index';
 import styles from './slug-story.scss?lit';
-import storyDocs from './slug.mdx';
 
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import { SLUG_SIZE } from './defs';
@@ -265,11 +264,6 @@ export const Playground = {
 
 const meta = {
   title: 'Experimental/Slug',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

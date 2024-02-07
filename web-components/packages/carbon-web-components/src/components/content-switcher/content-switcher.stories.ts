@@ -11,7 +11,6 @@ import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { CONTENT_SWITCHER_SIZE } from './content-switcher';
 import './index';
-import storyDocs from './content-switcher.mdx';
 import { prefix } from '../../globals/settings';
 import TableOfContents16 from '@carbon/web-components/es/icons/table-of-contents/16';
 import Workspace16 from '@carbon/web-components/es/icons/workspace/16';
@@ -169,11 +168,6 @@ export const Playground = {
 
 const meta = {
   title: 'Components/Content switcher',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

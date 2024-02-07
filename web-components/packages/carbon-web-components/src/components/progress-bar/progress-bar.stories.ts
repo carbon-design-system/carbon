@@ -16,7 +16,6 @@ import {
 } from '../progress-bar/progress-bar';
 import './progress-bar';
 import '../../../.storybook/templates/with-layer';
-import storyDocs from './progress-bar.mdx';
 
 const sizes = {
   [`Small size (${PROGRESS_BAR_SIZE.SMALL})`]: PROGRESS_BAR_SIZE.SMALL,
@@ -180,11 +179,6 @@ export const Playground = {
 
 const meta = {
   title: 'Components/Progress Bar',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

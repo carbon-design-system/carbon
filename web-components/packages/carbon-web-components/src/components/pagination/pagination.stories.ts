@@ -10,7 +10,6 @@
 import { html } from 'lit';
 import './index';
 import '../select/index';
-import storyDocs from './pagination.mdx';
 import { prefix } from '../../globals/settings';
 import { PAGINATION_SIZE } from './defs';
 
@@ -194,11 +193,6 @@ export const Playground = {
 
 const meta = {
   title: 'Components/Pagination',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
   decorators: [(story) => html`<div style="max-width: 800px">${story()}</div>`],
 };
 

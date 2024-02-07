@@ -23,7 +23,6 @@ import '../skip-to-content';
 import '../modal/modal';
 import '../button/button';
 import styles from './ui-shell-story.scss?lit';
-import storyDocs from './ui-shell.mdx';
 import { prefix } from '../../globals/settings';
 
 const linksHref = 'https://www.carbondesignsystem.com/';
@@ -1033,9 +1032,4 @@ export const SideNavWLargeSideNavItems = {
 
 export default {
   title: 'Components/UI Shell',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };

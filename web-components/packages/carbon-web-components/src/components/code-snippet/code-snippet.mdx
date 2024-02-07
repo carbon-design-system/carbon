@@ -1,4 +1,4 @@
-import { ArgsTable, Meta, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as CodeSnippetStories from './code-snippet.stories';
 
@@ -25,8 +25,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/code-snippet/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['code-snippet'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['code-snippet'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 

@@ -12,7 +12,6 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { OVERFLOW_MENU_SIZE } from './overflow-menu';
 import './overflow-menu-body';
 import './overflow-menu-item';
-import storyDocs from './overflow-menu.mdx';
 import { prefix } from '../../globals/settings';
 import OverflowMenuVertical16 from '@carbon/icons/lib/overflow-menu--vertical/16';
 import Filter16 from '@carbon/icons/lib/filter/16';
@@ -136,11 +135,6 @@ export const Playground = {
 
 const meta = {
   title: 'Components/Overflow Menu',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

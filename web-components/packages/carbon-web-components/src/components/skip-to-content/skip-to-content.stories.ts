@@ -10,7 +10,6 @@
 import { html } from 'lit';
 import './skip-to-content';
 import styles from './skip-to-content-story.scss?lit';
-import storyDocs from './skip-to-content.mdx';
 import { prefix } from '../../globals/settings';
 
 export const Default = {
@@ -72,11 +71,6 @@ export const Default = {
 
 const meta = {
   title: 'Components/Skip To Content',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

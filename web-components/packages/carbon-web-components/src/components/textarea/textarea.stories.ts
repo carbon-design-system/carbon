@@ -11,7 +11,6 @@ import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './index';
 import '../form/form-item';
-import storyDocs from './textarea.mdx';
 
 const args = {
   cols: 0,
@@ -175,9 +174,4 @@ export const Playground = {
 
 export default {
   title: 'Components/Text Area',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };

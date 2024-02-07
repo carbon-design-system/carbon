@@ -19,8 +19,6 @@ import '../form/form-item';
 import '../layer';
 import '../../../.storybook/templates/with-layer';
 
-import storyDocs from './select.mdx';
-
 const sizes = {
   [`Small size (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,
   [`Medium size (${INPUT_SIZE.MEDIUM})`]: INPUT_SIZE.MEDIUM,
@@ -248,11 +246,6 @@ const meta = {
     },
   ],
   title: 'Components/Select',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

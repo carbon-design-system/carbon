@@ -9,7 +9,6 @@
 
 import { html } from 'lit';
 import './skeleton-icon';
-import storyDocs from './skeleton-icon.mdx';
 
 export const Default = {
   parameters: {
@@ -24,11 +23,6 @@ export const Default = {
 
 const meta = {
   title: 'Components/Skeleton/Skeleton Icon',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

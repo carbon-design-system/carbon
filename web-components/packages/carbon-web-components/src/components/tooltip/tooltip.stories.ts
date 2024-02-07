@@ -14,7 +14,6 @@ import { html } from 'lit';
 import './index';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import styles from './tooltip-story.scss?lit';
-import storyDocs from './tooltip.mdx';
 import Information16 from '@carbon/icons/lib/information/16';
 
 const tooltipAlignments = {
@@ -150,11 +149,6 @@ export const Playground = {
 
 const meta = {
   title: 'Components/Tooltip',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
   decorators: [
     (story) => html`<div class="sb-tooltip-story">
       <style>

@@ -11,7 +11,6 @@ import { html } from 'lit';
 import './index';
 import '../stack/index';
 import { TOGGLE_SIZE } from './toggle';
-import storyDocs from './toggle.mdx';
 
 const sizes = {
   'Regular size': null,
@@ -110,11 +109,6 @@ export const Playground = {
 
 const meta = {
   title: 'Components/Toggle',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

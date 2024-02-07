@@ -11,7 +11,6 @@ import { html } from 'lit';
 import './toggletip';
 import '../button';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
-import storyDocs from './toggletip.mdx';
 
 const tooltipAlignments = {
   [`top`]: POPOVER_ALIGNMENT.TOP,
@@ -97,11 +96,6 @@ export const Playground = {
 
 const meta = {
   title: 'Components/Toggletip',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

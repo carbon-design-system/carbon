@@ -10,7 +10,6 @@
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { LOADING_TYPE } from './loading';
-import storyDocs from './loading.mdx';
 
 const types = {
   [`Regular (${LOADING_TYPE.REGULAR})`]: null,
@@ -63,11 +62,6 @@ export const Playground = {
 
 const meta = {
   title: 'Components/Loading',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

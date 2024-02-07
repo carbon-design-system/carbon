@@ -1,5 +1,8 @@
-import { Props, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as StackStories from './stack.stories';
+
+<Meta of={StackStories} /> 
 
 # Stack
 
@@ -35,8 +38,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/stack/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['stack'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['stack'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
@@ -63,4 +66,4 @@ attribute AND setting the `custom-gap-value` attribute to true.
 
 ## `<cds-stack>` attributes, properties and events
 
-<Props of="cds-stack" />
+<ArgsTable of="cds-stack" />

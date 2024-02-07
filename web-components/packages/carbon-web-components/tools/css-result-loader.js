@@ -8,7 +8,7 @@
  */
 
 /**
- * A WebPack loader to generate `lit-element`'s `CSSResult` from CSS string.
+ * A Vite loader to generate `lit-element`'s `CSSResult` from CSS string.
  *
  * @returns {string} The massaged module content.
  */

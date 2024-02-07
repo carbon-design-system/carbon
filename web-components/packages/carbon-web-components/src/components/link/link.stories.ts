@@ -11,7 +11,6 @@ import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import Download16 from '@carbon/web-components/es/icons/download/16';
 import { LINK_SIZE } from './link';
-import storyDocs from './link.mdx';
 
 const defaultArgs = {
   disabled: false,
@@ -101,11 +100,6 @@ export const Playground = {
 
 const meta = {
   title: 'Components/Link',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

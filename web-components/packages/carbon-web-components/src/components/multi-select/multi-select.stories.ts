@@ -18,7 +18,6 @@ import {
 import './multi-select-item';
 import '../layer/index';
 import '../../../.storybook/templates/with-layer';
-import storyDocs from './multi-select.mdx';
 
 const sizes = {
   [`Small size (${DROPDOWN_SIZE.SMALL})`]: DROPDOWN_SIZE.SMALL,
@@ -354,11 +353,6 @@ export const Playground = {
 
 const meta = {
   title: 'Components/Multi Select',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

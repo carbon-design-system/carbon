@@ -10,7 +10,6 @@
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './index';
-import storyDocs from './progress-indicator.mdx';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 
 const args = {
@@ -151,11 +150,6 @@ export const Playground = {
 
 const meta = {
   title: 'Components/Progress Indicator',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

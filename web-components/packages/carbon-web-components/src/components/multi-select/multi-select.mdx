@@ -1,4 +1,4 @@
-import { ArgsTable, Meta, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as MultiSelectStories from './multi-select.stories';
 
@@ -34,8 +34,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/multi-select/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['multi-select'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['multi-select'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 

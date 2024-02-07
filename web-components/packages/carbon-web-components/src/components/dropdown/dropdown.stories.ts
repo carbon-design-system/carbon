@@ -12,7 +12,6 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { DROPDOWN_DIRECTION, DROPDOWN_SIZE, DROPDOWN_TYPE } from './dropdown';
 import './dropdown-item';
 import './dropdown-skeleton';
-import storyDocs from './dropdown.mdx';
 
 const directionOptions = {
   [`Top`]: DROPDOWN_DIRECTION.TOP,
@@ -287,11 +286,6 @@ const meta = {
       return html` <div style="${width}">${story()}</div> `;
     },
   ],
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

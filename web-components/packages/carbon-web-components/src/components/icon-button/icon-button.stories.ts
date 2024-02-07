@@ -10,7 +10,6 @@
 import { html } from 'lit';
 import './index';
 import '../button/index';
-import storyDocs from './icon-button.mdx';
 import { ICON_BUTTON_TOOLTIP_ALIGNMENT } from './defs';
 import Edit16 from '@carbon/icons/lib/edit/16';
 import { ICON_BUTTON_SIZE } from './defs';
@@ -148,11 +147,6 @@ export const Playground = {
 const meta = {
   decorators: [(story) => html`<div style="padding: 3rem">${story()}</div>`],
   title: 'Components/Icon Button',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

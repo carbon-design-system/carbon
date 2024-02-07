@@ -14,7 +14,6 @@ import '../text-input';
 import '../stack';
 import '../radio-button/index';
 import '../button';
-import storyDocs from './form-group.mdx';
 
 const args = {
   legendText: 'FormGroup Legend',
@@ -107,11 +106,6 @@ export const Playground = {
 
 const meta = {
   title: 'Components/Form Group',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
   decorators: [
     (story) => {
       return html` <div style="max-width:400px">${story()}</div> `;

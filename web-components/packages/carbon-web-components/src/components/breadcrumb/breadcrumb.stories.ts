@@ -14,7 +14,6 @@ import './breadcrumb-link';
 import './breadcrumb-overflow-menu';
 import '../overflow-menu/overflow-menu-body';
 import './breadcrumb-skeleton';
-import storyDocs from './breadcrumb.mdx';
 
 const args = {
   ariaLabel: '',
@@ -123,11 +122,6 @@ export const Playground = {
 
 const meta = {
   title: 'Components/Breadcrumb',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

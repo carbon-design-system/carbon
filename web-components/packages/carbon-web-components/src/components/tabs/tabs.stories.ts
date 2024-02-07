@@ -11,7 +11,6 @@ import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { TABS_TYPE } from './tabs';
 import styles from './tabs-story.scss?lit';
-import storyDocs from './tabs.mdx';
 import { prefix } from '../../globals/settings';
 import '../button';
 import '../checkbox';
@@ -293,9 +292,4 @@ export const Playground = {
 export default {
   title: 'Components/Tabs',
   actions: { argTypesRegex: '^on.*' },
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };

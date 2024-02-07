@@ -10,7 +10,6 @@
 import { html } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './layer-story.scss?lit';
-import storyDocs from './layer.mdx';
 import './index';
 
 const levels = {
@@ -104,11 +103,6 @@ export const Playground = {
 
 const meta = {
   title: 'Components/Layer',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

@@ -9,7 +9,6 @@
 
 import { html } from 'lit';
 import { INLINE_LOADING_STATE } from './inline-loading';
-import storyDocs from './inline-loading.mdx';
 
 const states = {
   [`Inactive (${INLINE_LOADING_STATE.INACTIVE})`]:
@@ -63,11 +62,6 @@ export const Playground = {
 
 const meta = {
   title: 'Components/Inline loading',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

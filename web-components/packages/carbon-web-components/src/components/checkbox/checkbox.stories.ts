@@ -9,7 +9,6 @@
 
 import { html } from 'lit';
 import { prefix } from '../../globals/settings';
-import storyDocs from './checkbox.mdx';
 import './index';
 
 const checkboxLabel = 'Checkbox label';
@@ -139,9 +138,6 @@ const meta = {
   title: 'Components/Checkbox',
   parameters: {
     actions: { argTypesRegex: '^on.*' },
-    docs: {
-      page: storyDocs,
-    },
   },
 };
 

@@ -20,8 +20,6 @@ import Add24 from '@carbon/web-components/es/icons/add/24';
 // @ts-ignore
 import Add32 from '@carbon/web-components/es/icons/add/32';
 
-import storyDocs from './icon.mdx';
-
 export const Default = {
   render: () => html` ${Add16()} ${Add20()} ${Add24()} ${Add32()} `,
 };
@@ -75,11 +73,6 @@ export const withTitle = {
 
 const meta = {
   title: 'Components/Icon',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

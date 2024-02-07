@@ -11,7 +11,6 @@ import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { DROPDOWN_DIRECTION, DROPDOWN_SIZE } from './combo-box';
 import './combo-box-item';
-import storyDocs from './combo-box.mdx';
 
 const items = [
   {
@@ -217,11 +216,6 @@ const meta = {
       return html` <div style="${width}">${story()}</div> `;
     },
   ],
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

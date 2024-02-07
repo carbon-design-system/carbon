@@ -10,7 +10,6 @@
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import type { Meta } from '@storybook/web-components';
-import storyDocs from './copy-button.mdx';
 import './copy-button';
 
 const defaultArgs = {
@@ -36,11 +35,6 @@ const controls = {
 
 const meta: Meta = {
   title: 'Components/Copy button',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
   render: ({ feedbackText, feedbackTimeout, onClick, iconDescription }) => html`
     <cds-copy-button
       feedback="${ifDefined(feedbackText)}"

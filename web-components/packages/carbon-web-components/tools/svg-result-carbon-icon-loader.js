@@ -11,7 +11,7 @@ const path = require('path');
 const createSVGResultFromCarbonIcon = require('./svg-result-carbon-icon');
 
 /**
- * A WebPack loader to generate `lit-html`'s `SVGResult` from an icon descriptor from `@carbon/icons`.
+ * A Vite loader to generate `lit-html`'s `SVGResult` from an icon descriptor from `@carbon/icons`.
  *
  * @returns {string} The massaged module content.
  */

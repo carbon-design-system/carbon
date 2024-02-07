@@ -1,4 +1,4 @@
-import { ArgsTable, Description, Meta } from '@storybook/blocks';
+import { ArgsTable, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as Toggle from './toggle.stories';
 
@@ -29,8 +29,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/toggle/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['toggle'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['toggle'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 

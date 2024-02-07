@@ -10,7 +10,6 @@
 import { html } from 'lit';
 import { TAG_SIZE } from './tag';
 import './index';
-import storyDocs from './tag.mdx';
 
 const sizes = {
   [`Medium size (${TAG_SIZE.MEDIUM})`]: TAG_SIZE.MEDIUM,
@@ -87,11 +86,6 @@ export const Playground = {
 
 const meta = {
   title: 'Components/Tag',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

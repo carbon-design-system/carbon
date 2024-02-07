@@ -1,4 +1,4 @@
-import { ArgsTable, Meta, Description } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as BreadcrumbStories from './breadcrumb.stories';
 
@@ -22,8 +22,8 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/breadcrumb/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['breadcrumb'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['breadcrumb'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 

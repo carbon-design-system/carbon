@@ -9,7 +9,6 @@
 
 import { html } from 'lit';
 import './skeleton-placeholder';
-import storyDocs from './skeleton-placeholder.mdx';
 
 export const Default = {
   parameters: {
@@ -22,11 +21,6 @@ export const Default = {
 
 const meta = {
   title: 'Components/Skeleton/Skeleton Placeholder',
-  parameters: {
-    docs: {
-      page: storyDocs,
-    },
-  },
 };
 
 export default meta;

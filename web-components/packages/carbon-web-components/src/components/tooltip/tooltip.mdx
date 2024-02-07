@@ -1,4 +1,4 @@
-import { ArgsTable, Description, Meta } from '@storybook/blocks';
+import { ArgsTable, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as Tooltip from './tooltip.stories';
 
@@ -30,8 +30,8 @@ import '@carbon/web-components/es/components/tooltip/index.js';
 import Information16 from '@carbon/icons/lib/information/16';
 ```
 
-<Description markdown={`${cdnJs({ components: ['tooltip'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['tooltip'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 

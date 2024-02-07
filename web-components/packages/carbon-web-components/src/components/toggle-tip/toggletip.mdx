@@ -1,4 +1,4 @@
-import { ArgsTable, Description, Meta } from '@storybook/blocks';
+import { ArgsTable, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as ToggleTip from './toggletip.stories';
 
@@ -26,8 +26,8 @@ import '@carbon/web-components/es/components/link/index.js';
 import '@carbon/web-components/es/components/button/index.js';
 ```
 
-<Description markdown={`${cdnJs({ components: ['toggle-tip'] })}`} />
-<Description markdown={`${cdnCss()}`} />
+<Markdown>{`${cdnJs({ components: ['toggle-tip'] })}`}</Markdown>
+<Markdown>{`${cdnCss()}`}</Markdown>
 
 ### HTML
 
