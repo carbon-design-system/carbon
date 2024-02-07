@@ -305,3 +305,9 @@ export {
   SlugContent as unstable__SlugContent,
   SlugActions as unstable__SlugActions,
 } from './components/Slug';
+
+export {
+  AiSkeletonText as unstable__AiSkeletonText,
+  AiSkeletonIcon as unstable__AiSkeletonIcon,
+  AiSkeletonPlaceholder as unstable__AiSkeletonPlaceholder,
+} from './components/AiSkeleton';
