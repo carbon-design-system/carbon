@@ -269,9 +269,9 @@ export const chatPromptBorderEnd = rgba(gray90, 0);
 export const chatBubbleUser = gray80;
 export const chatBubbleAgent = gray90;
 export const chatBubbleAgentBorder = gray70;
-export const chatAvatarBot = blue50;
-export const chatAvatarAgent = gray10;
-export const chatAvatarUser = gray10;
+export const chatAvatarBot = gray50;
+export const chatAvatarAgent = gray30;
+export const chatAvatarUser = blue50;
 
 export {
   // Type
