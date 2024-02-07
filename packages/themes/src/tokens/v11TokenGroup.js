@@ -381,6 +381,8 @@ export const ai = TokenGroup.create({
     'ai-border-start',
     'ai-border-end',
     'ai-drop-shadow',
+    'ai-skeleton-background',
+    'ai-skeleton-element-background',
     // Caret tokens
     'slug-callout-caret-center',
     'slug-callout-caret-bottom',

@@ -161,6 +161,8 @@ describe('@carbon/styles/scss/theme', () => {
         "ai-border-start",
         "ai-border-end",
         "ai-drop-shadow",
+        "ai-skeleton-background",
+        "ai-skeleton-element-background",
         "slug-callout-caret-center",
         "slug-callout-caret-bottom",
         "slug-callout-caret-bottom-background",
