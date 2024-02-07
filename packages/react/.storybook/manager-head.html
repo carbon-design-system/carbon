@@ -27,6 +27,18 @@
   content="https://media.github.ibm.com/user/1679/files/aa651000-7749-11eb-900e-eeb9312ed756" />
 <meta name="twitter:site" content="@_carbondesign" />
 
+<footer>
+  <dds-footer-container
+    key="footer"
+    disable-locale-button="true"
+    size="micro" />,
+</footer>
+
+<script
+  key="8"
+  type="module"
+  src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/footer.min.js" />
+
 <!-- Storybook override -->
 <script>
   setTimeout(function () {
@@ -70,6 +82,13 @@
 
   body a[href='/?path=/settings/about'] {
     display: none;
+  }
+
+  footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 99999;
   }
 
   .os-content form span {
