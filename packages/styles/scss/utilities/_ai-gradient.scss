@@ -6,6 +6,7 @@
 //
 
 @use '../theme';
+@use './custom-property';
 
 /// Experimental - name and structure subject to change. Use at your own risk!
 /// Adds AI gradient styles to a component
@@ -43,7 +44,7 @@
 /// @example @include callout-gradient();
 /// @param {String} $type  - Type of gradient, either 'default', 'selected' or 'hover'
 /// @param {Number} $offset  - specify a pixel offset the callout should start from the bottom
-/// @param {String} $background  - specify if the background should be `layer` or `background`
+/// @param {String} $background  - specify the token to be used as the background
 /// @group utilities
 @mixin callout-gradient(
   $type: 'default',
@@ -55,9 +56,7 @@
     $start: calc(0% + #{$offset});
   }
 
-  @if $background == 'layer' {
-    $background: theme.$layer;
-  }
+  $background: custom-property.get-var($background, theme.$background);
 
   @if $type == 'hover' {
     background: linear-gradient(

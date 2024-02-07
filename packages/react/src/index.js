@@ -311,3 +311,7 @@ export {
   AiSkeletonIcon as unstable__AiSkeletonIcon,
   AiSkeletonPlaceholder as unstable__AiSkeletonPlaceholder,
 } from './components/AiSkeleton';
+export {
+  ChatButton as unstable__ChatButton,
+  ChatButtonSkeleton as unstable__ChatButtonSkeleton,
+} from './components/ChatButton';

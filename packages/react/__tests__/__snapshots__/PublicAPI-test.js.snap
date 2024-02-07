@@ -9696,6 +9696,66 @@ Map {
       },
     },
   },
+  "unstable__ChatButton" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "isQuickAction": Object {
+        "type": "bool",
+      },
+      "isSelected": Object {
+        "type": "bool",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "primary",
+            "secondary",
+            "danger",
+            "ghost",
+            "tertiary",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable__ChatButtonSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+  },
   "unstable__FluidComboBox" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {

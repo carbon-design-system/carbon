@@ -22,7 +22,7 @@ test.describe('Slug @avt', () => {
     await expect(page).toHaveNoACViolations('Slug');
   });
 
-  test('@avt-advanced-states open state', async ({ page }) => {
+  test.slow('@avt-advanced-states open state', async ({ page }) => {
     await visitStory(page, {
       component: 'Slug',
       id: 'experimental-unstable-slug--default',
@@ -37,7 +37,7 @@ test.describe('Slug @avt', () => {
     await expect(page).toHaveNoACViolations('Slug-open');
   });
 
-  test('@avt-advanced-states ai form', async ({ page }) => {
+  test.slow('@avt-advanced-states ai form', async ({ page }) => {
     await visitStory(page, {
       component: 'Slug',
       id: 'experimental-unstable-slug-form--form-example',
