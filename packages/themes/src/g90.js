@@ -14,6 +14,7 @@ import {
   blue70,
   blue70Hover,
   blue80,
+  blue100,
 
   // Gray
   gray10,
@@ -240,7 +241,7 @@ export const slugCalloutShadowOuter02 = rgba(black, 0.65);
 
 // AI skeleton
 export const aiSkeletonBackground = blue70Hover;
-export const aiSkeletonElementBackground = black;
+export const aiSkeletonElementBackground = blue100;
 
 //// Not used in phase 2 / possibly remove?
 export const slugCalloutGradientTop = rgba(gray100, 0.85);
