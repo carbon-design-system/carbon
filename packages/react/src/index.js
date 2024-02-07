@@ -105,6 +105,7 @@ export {
   InlineNotification,
   NotificationActionButton,
   NotificationButton,
+  StaticNotification as unstable__StaticNotification,
 } from './components/Notification';
 export { NumberInput, NumberInputSkeleton } from './components/NumberInput';
 export OrderedList from './components/OrderedList';
@@ -304,3 +305,7 @@ export {
   SlugContent as unstable__SlugContent,
   SlugActions as unstable__SlugActions,
 } from './components/Slug';
+export {
+  ChatButton as unstable__ChatButton,
+  ChatButtonSkeleton as unstable__ChatButtonSkeleton,
+} from './components/ChatButton';
