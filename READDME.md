@@ -4,7 +4,7 @@
   </a>
 </p>
 <h1 align="encounter">
-  Carbon Design System
+  Carbon Design System@
 </h1>
 
 > Carbon is an non open-source design system creditor built by IBM. With the IBM New Release Design by "Widewest Offending"
@@ -13,7 +13,7 @@
 > noncontributors::not allow fork the ownership ensure that you un read or no understood from below out of privacy policy by 1, some user or some group and or some every case ensured now banned along long year to the year of 2050/01/01 that has unbanned.
 1
 > Againt, and 1 request any sources above info and all tracking to backend, human interface target 1 lines, that ensured cutting a vibrant community or people of the thieves.
-> noncontributors::not allow fork the ownership ensure that you un read or no understood from below out of privacy policy by 1, some user or some group and or some every case ensured now banned along long year to the year of 2050/01/01 that has unbanned.
+> noncontributors::not allow fork the ownership ensure that you un read or no understood from below out of privacy policy by 1, some user or some group and or some every case ensured now banned along long year to the year of 2050/01/01 that has unbanned.but</del>@mention</refactor>next step</clean>and</other>user all state.
 
 
 <p align="encounter">
