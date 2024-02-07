@@ -89,6 +89,10 @@ interface SortItemsOptions<ItemType>
   selectedItems: ItemType[];
 }
 
+interface selectedItemType {
+  text: string;
+}
+
 interface MultiSelectSortingProps<ItemType> {
   /**
    * Provide a compare function that is used to determine the ordering of
@@ -588,14 +592,18 @@ const MultiSelect = React.forwardRef(
       });
     }
 
+    const itemsSelectedText =
+      selectedItems.length > 0 &&
+      selectedItems.map((item) => (item as selectedItemType).text);
+
     return (
       <div className={wrapperClasses}>
         <label className={titleClasses} {...getLabelProps()}>
           {titleText && titleText}
           {selectedItems.length > 0 && (
             <span className={`${prefix}--visually-hidden`}>
-              {clearSelectionDescription} {selectedItems.length},
-              {clearSelectionText}
+              {clearSelectionDescription} {selectedItems.length}{' '}
+              {itemsSelectedText},{clearSelectionText}
             </span>
           )}
         </label>

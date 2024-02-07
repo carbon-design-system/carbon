@@ -1406,6 +1406,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "jt-helsinki",
+      "name": "J Thomas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/20871336?v=4",
+      "profile": "https://jt-helsinki.github.io/blog/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

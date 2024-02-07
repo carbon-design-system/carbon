@@ -9,6 +9,7 @@
 @use '../menu';
 @use '../../config' as *;
 @use '../../motion' as *;
+@use '../../utilities/custom-property';
 
 /// Menu Button styles
 /// @access public
@@ -28,5 +29,20 @@
 
   .#{$prefix}--menu-button__trigger--open svg {
     transform: rotate(180deg);
+  }
+
+  // Menu alignment classes
+  $popover-offset: custom-property.get-var('popover-offset', 3rem);
+
+  .#{$prefix}--menu-button__top {
+    transform: translate(0, calc(-100% - $popover-offset));
+  }
+
+  .#{$prefix}--menu-button__top-start {
+    transform: translate(0, calc(-100% - $popover-offset));
+  }
+
+  .#{$prefix}--menu-button__top-end {
+    transform: translate(0, calc(-100% - $popover-offset));
   }
 }
