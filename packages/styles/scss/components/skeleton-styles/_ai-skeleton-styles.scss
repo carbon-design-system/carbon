@@ -56,6 +56,11 @@
   .#{$prefix}--skeleton__text--ai {
     border-radius: convert.to-rem(16px);
   }
+
+  //skeleton icon
+  .#{$prefix}--skeleton__icon--ai {
+    border-radius: convert.to-rem(2px);
+  }
 }
 
 // rgba($ai-skeleton-element-background, 1)
