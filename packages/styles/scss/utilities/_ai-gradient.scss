@@ -38,6 +38,33 @@
   border-block-end-color: theme.$ai-border-strong;
 }
 
+@mixin ai-table-gradient($type: 'default', $span: 50%) {
+  @if $type == 'hover' {
+    background: linear-gradient(
+        to right,
+        theme.$ai-aura-hover-start 0%,
+        15%,
+        theme.$ai-aura-hover-end 50%
+      ),
+      theme.$ai-aura-hover-background;
+  } @else if $type == 'selected' {
+    background: linear-gradient(
+        to right,
+        theme.$ai-inner-shadow 0%,
+        theme.$ai-aura-end 50%,
+        transparent 50%
+      ),
+      theme.$layer-selected;
+  } @else {
+    background: linear-gradient(
+      to right,
+      theme.$ai-aura-start-table 0%,
+      theme.$ai-aura-end $span,
+      transparent 50%
+    );
+  }
+}
+
 /// Experimental - name and structure subject to change. Use at your own risk!
 /// Adds callout gradient styles to a component
 /// @access private
@@ -49,14 +76,14 @@
 @mixin callout-gradient(
   $type: 'default',
   $offset: 0,
-  $background: theme.$background
+  $background: 'background'
 ) {
   $start: 0%;
   @if $offset != 0 {
     $start: calc(0% + #{$offset});
   }
 
-  $background: custom-property.get-var($background, theme.$background);
+  $background: custom-property.get-var(#{$background}, theme.$background);
 
   @if $type == 'hover' {
     background: linear-gradient(
