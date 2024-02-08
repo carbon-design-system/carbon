@@ -1062,7 +1062,7 @@
   th
     .#{$prefix}--table-header-label.#{$prefix}--table-header-label--slug
     .#{$prefix}--slug {
-    margin-inline-start: $spacing-03;
+    margin-inline-start: auto;
   }
 
   th.#{$prefix}--table-sort__header--slug,
@@ -1076,6 +1076,7 @@
 
   tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row):not(:first-of-type)
     td.#{$prefix}--table-cell--column-slug {
+    // Same gradient as background
     border-block-start: linear-gradient(
       to right,
       $ai-aura-start-table 0%,
