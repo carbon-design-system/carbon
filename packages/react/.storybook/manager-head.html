@@ -84,6 +84,18 @@
     display: none;
   }
 
+  /* This style is required because of the compliance footer */
+  #root > div {
+    height: calc(100vh - 48px);
+  }
+
+  /* This style is required because of the compliance footer in smaller screens */
+  @media (max-width: 671px) {
+    nav[class^='css-'] {
+      height: 281px;
+    }
+  }
+
   footer {
     position: absolute;
     bottom: 0;
