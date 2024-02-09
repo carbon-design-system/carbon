@@ -404,9 +404,13 @@ class CDSTable extends HostListenerMixin(LitElement) {
     const columns = [...this._tableHeaderRow.children];
     const columnIndex = columns.indexOf(target);
 
-    columns.forEach(
-      (e) => e !== target && e.setAttribute('sort-direction', 'none')
-    );
+    columns.forEach((e) => {
+      if (e !== target && this.isSortable) {
+        e.setAttribute('sort-direction', 'none');
+      } else if (e.hasAttribute('is-sortable')) {
+        e.setAttribute('sort-direction', 'none');
+      }
+    });
 
     this._handleSortAction(columnIndex, sortDirection);
 
@@ -821,10 +825,13 @@ class CDSTable extends HostListenerMixin(LitElement) {
       }
     });
 
-    columns.forEach(
-      (e, index) =>
-        index !== columnIndex && e.setAttribute('sort-direction', 'none')
-    );
+    columns.forEach((e, index) => {
+      if (index !== columnIndex && this.isSortable) {
+        e.setAttribute('sort-direction', 'none');
+      } else if (e.hasAttribute('is-sortable')) {
+        e.setAttribute('sort-direction', 'none');
+      }
+    });
     this._handleSortAction(columnIndex, sortDirection);
   }
 

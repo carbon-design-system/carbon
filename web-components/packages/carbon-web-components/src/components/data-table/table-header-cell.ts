@@ -130,13 +130,13 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
   /**
    * `true` if the table has expandable rows
    */
-  @property({ type: Boolean, reflect: true, attribute: 'is-sortable' })
+  @property({ type: Boolean, reflect: true, attribute: 'expandable' })
   isExpandable = false;
 
   /**
    * `true` if this table has selectable rows
    */
-  @property({ type: Boolean, reflect: true, attribute: 'is-sortable' })
+  @property({ type: Boolean, reflect: true, attribute: 'is-selectable' })
   isSelectable = false;
   /**
    * `true` if this table header column should be sortable
