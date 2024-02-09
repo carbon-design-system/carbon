@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Download } from '@carbon/icons-react';
+import { ArrowRight } from '@carbon/icons-react';
 import Link from './Link';
 import mdx from './Link.mdx';
 
@@ -65,7 +65,7 @@ export const Inline = () => (
 );
 
 export const PairedWithIcon = () => (
-  <Link href="#" renderIcon={() => <Download aria-label="Download" />}>
+  <Link href="#" renderIcon={() => <ArrowRight aria-label="Arrow Right" />}>
     Carbon Docs
   </Link>
 );

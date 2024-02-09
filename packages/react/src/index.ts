@@ -157,6 +157,10 @@ export {
   SlugContent as unstable__SlugContent,
   SlugActions as unstable__SlugActions,
 } from './components/Slug';
+export {
+  ChatButton as unstable__ChatButton,
+  ChatButtonSkeleton as unstable__ChatButtonSkeleton,
+} from './components/ChatButton';
 export * from './components/Stack';
 export * from './components/Tooltip';
 export {

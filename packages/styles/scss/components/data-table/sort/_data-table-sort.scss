@@ -249,9 +249,14 @@
   }
 
   // Slug styles
+  .#{$prefix}--table-sort__header--slug .#{$prefix}--table-sort__icon,
+  .#{$prefix}--table-sort__header--slug .#{$prefix}--table-sort__icon-unsorted {
+    margin-inline-end: convert.to-rem(8px);
+    margin-inline-start: auto;
+  }
+
   .#{$prefix}--table-sort__header--slug .#{$prefix}--slug {
-    margin-inline-end: auto;
-    margin-inline-start: convert.to-rem(8px);
+    margin-inline-end: convert.to-rem(8px);
   }
 
   // Windows HCM fix
