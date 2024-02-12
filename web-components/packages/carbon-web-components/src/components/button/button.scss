@@ -15,6 +15,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/popover/index';
 @use '@carbon/styles/scss/components/code-snippet/code-snippet' as *;
 @use '@carbon/styles/scss/components/tooltip';
+@use '@carbon/styles/scss/components/chat-button' as *;
 @use '@carbon/styles/scss/layout' as *;
 
 @include code-snippet;

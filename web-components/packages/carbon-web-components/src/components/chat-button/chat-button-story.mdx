@@ -1,0 +1,39 @@
+import { Props, Description } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+
+# Chat Button
+
+> 💡 Check our
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/chat-button)
+> example implementation.
+
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/chat-button)
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/chat-button/index.js';
+```
+
+<Description markdown={`${cdnJs({ components: ['chat-button'] })}`} />
+<Description markdown={`${cdnCss()}`} />
+
+```javascript
+import '@carbon/web-components/es/components/chat-button/index.js';
+import Add16 from '@carbon/web-components/es/icons/add/16';
+
+function App() {
+  return html`<cds-chat-button>
+      Primary ${Add16({ slot: 'icon' })}
+  </cds-chat-button>`;
+}
+```
+
+## `<cds-chat-button>` attributes and properties
+
+<Props of="cds-chat-button" />
+````
