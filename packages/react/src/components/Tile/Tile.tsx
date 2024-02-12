@@ -990,7 +990,7 @@ export interface TileAboveTheFoldContentProps {
 }
 
 export const TileAboveTheFoldContent = React.forwardRef<
-  HTMLSpanElement,
+  HTMLDivElement,
   TileAboveTheFoldContentProps
 >(function TilAboveTheFoldContent({ children }, ref) {
   const prefix = usePrefix();
@@ -1018,15 +1018,15 @@ export interface TileBelowTheFoldContentProps {
 }
 
 export const TileBelowTheFoldContent = React.forwardRef<
-  HTMLSpanElement,
+  HTMLDivElement,
   TileBelowTheFoldContentProps
 >(function TileBelowTheFoldContent({ children }, ref) {
   const prefix = usePrefix();
 
   return (
-    <span ref={ref} className={`${prefix}--tile-content__below-the-fold`}>
+    <div ref={ref} className={`${prefix}--tile-content__below-the-fold`}>
       {children}
-    </span>
+    </div>
   );
 });
 
