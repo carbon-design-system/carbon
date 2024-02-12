@@ -518,11 +518,14 @@
   .#{$prefix}--modal--slug
     .#{$prefix}--modal-content.#{$prefix}--modal-scroll-content {
     mask-image: linear-gradient(
-      to bottom,
-      $layer calc(100% - 80px),
-      transparent calc(100% - 48px),
-      transparent 100%
-    );
+        to bottom,
+        $layer calc(100% - 80px),
+        transparent calc(100% - 48px),
+        transparent 100%
+      ),
+      linear-gradient(to left, $layer 0, transparent 16px),
+      linear-gradient(to right, $layer 0, transparent 4px),
+      linear-gradient(to top, $layer 0, transparent 4px);
   }
 
   .#{$prefix}--modal-header
