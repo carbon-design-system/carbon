@@ -91,7 +91,7 @@ export interface DataTableRow<ColTypes extends any[]> {
 export interface DataTableHeader {
   key: string;
   header: React.ReactNode;
-  slug: React.ReactElement;
+  slug?: React.ReactElement;
 }
 
 export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
