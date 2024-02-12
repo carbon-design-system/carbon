@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.3.0-rc.1...@carbon/web-components@2.3.0) (2024-02-12)
+
+**Note:** Version bump only for package @carbon/web-components
+
+
+
+
+
+# [2.3.0-rc.1](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.3.0-rc.0...@carbon/web-components@2.3.0-rc.1) (2024-02-09)
+
+
+### Bug Fixes
+
+* **datatable:** is sortable not working in table header cell ([#11516](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11516)) ([8da0be7](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/8da0be77b80cdd5faecfd273e5bf41e8e0da5a80))
+
+
+
+
+
 # [2.3.0-rc.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.2.0-rc.0...@carbon/web-components@2.3.0-rc.0) (2024-02-02)
 
 
