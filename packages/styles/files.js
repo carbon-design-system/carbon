@@ -44,6 +44,8 @@ const files = [
   'scss/components/button/_button.scss',
   'scss/components/button/_index.scss',
   'scss/components/button/_tokens.scss',
+  'scss/components/chat-button/_chat-button.scss',
+  'scss/components/chat-button/_index.scss',
   'scss/components/checkbox/_checkbox.scss',
   'scss/components/checkbox/_index.scss',
   'scss/components/code-snippet/_code-snippet.scss',

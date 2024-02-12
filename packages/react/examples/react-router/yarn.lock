@@ -13373,7 +13373,7 @@ __metadata:
     react-router: "npm:^6.0.0-beta.0"
     react-router-dom: "npm:^6.0.0-beta.0"
     react-scripts: "npm:^4.0.3"
-    yarn: "npm:^1.22.10"
+    yarn: "npm:^1.22.13"
   languageName: unknown
   linkType: soft
 
@@ -16966,13 +16966,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yarn@npm:^1.22.10":
-  version: 1.22.10
-  resolution: "yarn@npm:1.22.10"
+"yarn@npm:^1.22.13":
+  version: 1.22.21
+  resolution: "yarn@npm:1.22.21"
   bin:
     yarn: bin/yarn.js
     yarnpkg: bin/yarn.js
-  checksum: 8/bc7ebba3d91090310b1db28af1f9fc913b8936693f4c41031db67e5c10ba171a23b343173cd3d0ea91d388e38e6244d17292278cf6c563b1dd7f8e5d0df77b4c
+  checksum: aeb5f2bc47983ba55e7a23e588f3cf63a40153477e4f469e35f14e89b28711cba45761efffc58403139d2470fc35324eb6b0626dbfae3bdca99d7dde9debadd0
   languageName: node
   linkType: hard
 

@@ -373,7 +373,11 @@ export const ai = TokenGroup.create({
     // Linear gradient refactor
     'ai-inner-shadow',
     'ai-aura-start',
+    'ai-aura-start-table',
     'ai-aura-end',
+    'ai-aura-hover-background',
+    'ai-aura-hover-start',
+    'ai-aura-hover-end',
     'ai-border-strong',
     'ai-border-start',
     'ai-border-end',
@@ -383,6 +387,16 @@ export const ai = TokenGroup.create({
     'slug-callout-caret-bottom',
     'slug-callout-caret-bottom-background',
     'slug-callout-caret-bottom-background-actions',
+    // Chat tokens
+    'chat-prompt-background',
+    'chat-prompt-border-start',
+    'chat-prompt-border-end',
+    'chat-bubble-user',
+    'chat-bubble-agent',
+    'chat-bubble-agent-border',
+    'chat-avatar-bot',
+    'chat-avatar-agent',
+    'chat-avatar-user',
   ],
 });
 

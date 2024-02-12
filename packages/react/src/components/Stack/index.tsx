@@ -5,14 +5,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Stack } from './Stack';
+import { ForwardRefReturn } from '../../types/common';
 
-const HStack = React.forwardRef(function HStack(props, ref) {
+const HStack: ForwardRefReturn<ReactNode> = React.forwardRef(function HStack(
+  props,
+  ref
+) {
   return <Stack {...props} ref={ref} orientation="horizontal" />;
 });
 
-const VStack = React.forwardRef(function VStack(props, ref) {
+const VStack: ForwardRefReturn<ReactNode> = React.forwardRef(function VStack(
+  props,
+  ref
+) {
   return <Stack {...props} ref={ref} orientation="vertical" />;
 });
 

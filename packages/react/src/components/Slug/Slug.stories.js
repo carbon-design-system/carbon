@@ -295,7 +295,7 @@ export const Default = () => (
   </>
 );
 
-export const Test = (args) => {
+export const Callout = (args) => {
   const { showSlugActions = true } = args;
 
   return (
@@ -336,7 +336,7 @@ export const Test = (args) => {
   );
 };
 
-Test.argTypes = {
+Callout.argTypes = {
   showSlugActions: {
     control: {
       type: 'boolean',

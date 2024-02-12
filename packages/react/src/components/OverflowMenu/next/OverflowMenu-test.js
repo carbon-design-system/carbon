@@ -11,6 +11,8 @@ import { MenuItem } from '../../Menu';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+const prefix = 'cds';
+
 describe('OverflowMenu (enable-v12-overflowmenu)', () => {
   it('should render closed by default', () => {
     render(
@@ -102,5 +104,25 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
       'aria-expanded',
       'false'
     );
+  });
+
+  describe('supports props.menuAlignment', () => {
+    const alignments = ['top-start', 'top-end', 'bottom-start', 'bottom-end'];
+
+    alignments.forEach((alignment) => {
+      it(`menuAlignment="${alignment}"`, async () => {
+        render(
+          <OverflowMenu label="Actions" menuAlignment={alignment}>
+            <MenuItem label="item">one</MenuItem>
+          </OverflowMenu>
+        );
+
+        await userEvent.click(screen.getByRole('button'));
+
+        expect(screen.getAllByRole('menu')[0]).toHaveClass(
+          `${prefix}--overflow-menu__${alignment}`
+        );
+      });
+    });
   });
 });

@@ -572,13 +572,7 @@ $sizes: (
   }
 
   .#{$prefix}--slug.#{$prefix}--slug--enabled
-    .#{$prefix}--slug-content--with-actions
-    .#{$prefix}--toggletip-content {
-    max-inline-size: convert.to-rem(334px);
-  }
-
-  .#{$prefix}--slug.#{$prefix}--slug--enabled
-    .#{$prefix}--slug-content:not(.#{$prefix}--slug-content--with-actions)
+    .#{$prefix}--slug-content
     .#{$prefix}--toggletip-content {
     max-inline-size: convert.to-rem(320px);
   }
