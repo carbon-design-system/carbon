@@ -36,6 +36,7 @@ const ComboButton = React.forwardRef(function ComboButton(
     label,
     onClick,
     size = 'lg',
+    menuAlignment = 'bottom',
     tooltipAlignment,
     translateWithId: t = defaultTranslateWithId,
     ...rest
@@ -44,7 +45,6 @@ const ComboButton = React.forwardRef(function ComboButton(
 ) {
   const id = useId('combobutton');
   const prefix = usePrefix();
-
   const containerRef = useRef(null);
   const menuRef = useRef(null);
   const ref = useMergedRefs([forwardRef, containerRef]);
@@ -74,6 +74,11 @@ const ComboButton = React.forwardRef(function ComboButton(
 
   function handleOpen() {
     menuRef.current.style.inlineSize = `${width}px`;
+    menuRef.current.style.minInlineSize = `${width}px`;
+
+    if (menuAlignment !== 'bottom' && menuAlignment !== 'top') {
+      menuRef.current.style.inlineSize = `fit-content`;
+    }
   }
 
   const containerClasses = classNames(
@@ -84,6 +89,8 @@ const ComboButton = React.forwardRef(function ComboButton(
     },
     className
   );
+
+  const menuClasses = classNames(`${prefix}--combo-button__${menuAlignment}`);
 
   const primaryActionClasses = classNames(
     `${prefix}--combo-button__primary-action`
@@ -98,6 +105,7 @@ const ComboButton = React.forwardRef(function ComboButton(
       aria-owns={open ? id : null}>
       <div className={primaryActionClasses}>
         <Button
+          title={label}
           size={size}
           disabled={disabled}
           onClick={handlePrimaryActionClick}>
@@ -118,6 +126,9 @@ const ComboButton = React.forwardRef(function ComboButton(
         <ChevronDown />
       </IconButton>
       <Menu
+        containerRef={containerRef}
+        menuAlignment={menuAlignment}
+        className={menuClasses}
         ref={menuRef}
         id={id}
         label={t('carbon.combo-button.additional-actions')}
@@ -154,6 +165,18 @@ ComboButton.propTypes = {
    * Provide the label to be renderd on the primary action button.
    */
   label: PropTypes.string.isRequired,
+
+  /**
+   * Experimental property. Specify how the menu should align with the button element
+   */
+  menuAlignment: PropTypes.oneOf([
+    'top',
+    'top-start',
+    'top-end',
+    'bottom',
+    'bottom-start',
+    'bottom-end',
+  ]),
 
   /**
    * Provide an optional function to be called when the primary action element is clicked.
