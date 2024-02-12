@@ -16,4 +16,6 @@ export {
   type InlineNotificationProps,
   ActionableNotification,
   type ActionableNotificationProps,
+  StaticNotification,
+  type StaticNotificationProps,
 } from './Notification';

@@ -30,6 +30,7 @@ const MenuButton = React.forwardRef(function MenuButton(
     kind = defaultButtonKind,
     label,
     size = 'lg',
+    menuAlignment = 'bottom',
     tabIndex = 0,
     ...rest
   },
@@ -61,6 +62,10 @@ const MenuButton = React.forwardRef(function MenuButton(
 
   function handleOpen() {
     menuRef.current.style.inlineSize = `${width}px`;
+    menuRef.current.style.minInlineSize = `${width}px`;
+    if (menuAlignment !== 'bottom' && menuAlignment !== 'top') {
+      menuRef.current.style.inlineSize = `fit-content`;
+    }
   }
 
   const containerClasses = classNames(
@@ -71,6 +76,8 @@ const MenuButton = React.forwardRef(function MenuButton(
   const triggerClasses = classNames(`${prefix}--menu-button__trigger`, {
     [`${prefix}--menu-button__trigger--open`]: open,
   });
+
+  const menuClasses = classNames(`${prefix}--menu-button__${menuAlignment}`);
 
   const buttonKind = validButtonKinds.includes(kind) ? kind : defaultButtonKind;
 
@@ -95,6 +102,9 @@ const MenuButton = React.forwardRef(function MenuButton(
         {label}
       </Button>
       <Menu
+        containerRef={triggerRef}
+        menuAlignment={menuAlignment}
+        className={menuClasses}
         ref={menuRef}
         id={id}
         label={label}
@@ -136,6 +146,18 @@ MenuButton.propTypes = {
    * Provide the label to be renderd on the trigger button.
    */
   label: PropTypes.string.isRequired,
+
+  /**
+   * Experimental property. Specify how the menu should align with the button element
+   */
+  menuAlignment: PropTypes.oneOf([
+    'top',
+    'top-start',
+    'top-end',
+    'bottom',
+    'bottom-start',
+    'bottom-end',
+  ]),
 
   /**
    * Specify the size of the button and menu.

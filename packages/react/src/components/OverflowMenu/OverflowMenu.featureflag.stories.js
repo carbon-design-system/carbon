@@ -95,6 +95,63 @@ export const CustomIcon = () => {
   );
 };
 
+export const WithMenuAlignment = (args) => {
+  return (
+    <>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <OverflowMenu {...args} menuAlignment="bottom-start">
+          <MenuItem label="Stop app" />
+          <MenuItem label="Restart app" />
+          <MenuItem label="Rename app" />
+          <MenuItem label="Edit routes and access" />
+          <MenuItemDivider />
+          <MenuItem label="Delete app" kind="danger" />
+        </OverflowMenu>
+
+        <OverflowMenu {...args} menuAlignment="bottom-end">
+          <MenuItem label="Stop app" />
+          <MenuItem label="Restart app" />
+          <MenuItem label="Rename app" />
+          <MenuItem label="Edit routes and access" />
+          <MenuItemDivider />
+          <MenuItem label="Delete app" kind="danger" />
+        </OverflowMenu>
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          marginTop: '15rem',
+          justifyContent: 'space-between',
+        }}>
+        <OverflowMenu
+          {...args}
+          menuAlignment="top-start"
+          tooltipAlignment="bottom">
+          <MenuItem label="Stop app" />
+          <MenuItem label="Restart app" />
+          <MenuItem label="Rename app" />
+          <MenuItem label="Edit routes and access" />
+          <MenuItemDivider />
+          <MenuItem label="Delete app" kind="danger" />
+        </OverflowMenu>
+
+        <OverflowMenu
+          {...args}
+          menuAlignment="top-end"
+          tooltipAlignment="bottom">
+          <MenuItem label="Stop app" />
+          <MenuItem label="Restart app" />
+          <MenuItem label="Rename app" />
+          <MenuItem label="Edit routes and access" />
+          <MenuItemDivider />
+          <MenuItem label="Delete app" kind="danger" />
+        </OverflowMenu>
+      </div>
+    </>
+  );
+};
+
 export const Playground = (args) => {
   return (
     <OverflowMenu {...args}>
@@ -127,5 +184,12 @@ Playground.argTypes = {
     table: {
       disable: true,
     },
+  },
+  menuAlignment: {
+    options: ['bottom-start', 'bottom-end', 'top-start', 'top-end'],
+    control: { type: 'select' },
+    description:
+      'Specify how the menu should align with the button element `bottom-start` `bottom-end` `top-start` `top-end`',
+    default: 'bottom-start',
   },
 };
