@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 import classNames from 'classnames';
-import { IconButton } from '../IconButton';
+import { IconButton, IconButtonKind } from '../IconButton';
 import { composeEventHandlers } from '../../tools/events';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
@@ -107,11 +107,20 @@ export type ButtonProps<T extends React.ElementType> = PolymorphicProps<
   ButtonBaseProps
 >;
 
-export interface ButtonComponent {
-  <T extends React.ElementType>(
-    props: ButtonProps<T>,
-    context?: any
-  ): React.ReactElement<any, any> | null;
+export type ButtonComponent = <T extends React.ElementType>(
+  props: ButtonProps<T>,
+  context?: any
+) => React.ReactElement<any, any> | null;
+
+function isIconOnlyButton(
+  hasIconOnly: ButtonBaseProps['hasIconOnly'],
+  _kind: ButtonBaseProps['kind']
+): _kind is IconButtonKind {
+  if (hasIconOnly === true) {
+    return true;
+  }
+
+  return false;
 }
 
 const Button = React.forwardRef(function Button<T extends React.ElementType>(
@@ -149,7 +158,6 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
     // Prevent clicks on the tooltip from triggering the button click event
     if (evt.target === tooltipRef.current) {
       evt.preventDefault();
-      return;
     }
   };
 
@@ -187,13 +195,14 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
 
   let component: React.ElementType = 'button';
   const assistiveId = useId('danger-description');
-  const { 'aria-pressed': ariaPressed } = rest;
+  const { 'aria-pressed': ariaPressed, 'aria-describedby': ariaDescribedBy } =
+    rest;
   let otherProps: Partial<ButtonBaseProps> = {
     disabled,
     type,
     'aria-describedby': dangerButtonVariants.includes(kind)
       ? assistiveId
-      : undefined,
+      : ariaDescribedBy || undefined,
     'aria-pressed':
       ariaPressed ?? (hasIconOnly && kind === 'ghost' ? isSelected : undefined),
   };
@@ -221,7 +230,7 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
     otherProps = anchorProps;
   }
 
-  if (!hasIconOnly) {
+  if (!isIconOnlyButton(hasIconOnly, kind)) {
     return React.createElement(
       component,
       {
@@ -272,7 +281,7 @@ const Button = React.forwardRef(function Button<T extends React.ElementType>(
         {...rest}
         {...commonProps}
         {...otherProps}>
-        {iconOnlyImage ? iconOnlyImage : children}
+        {iconOnlyImage ?? children}
       </IconButton>
     );
   }
@@ -346,6 +355,7 @@ Button.propTypes = {
   /**
    * Specify the kind of Button you want to create
    */
+  // TODO: this should be either ButtonKinds or IconButtonKinds based on the value of "hasIconOnly"
   kind: PropTypes.oneOf(ButtonKinds),
 
   /**

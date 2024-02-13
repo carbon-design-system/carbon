@@ -12,10 +12,7 @@ import { Popover, PopoverAlignment, PopoverContent } from '../Popover';
 import { keys, match } from '../../internal/keyboard';
 import { useDelayedState } from '../../internal/useDelayedState';
 import { useId } from '../../internal/useId';
-import {
-  useNoInteractiveChildren,
-  getInteractiveContent,
-} from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 import { usePrefix } from '../../internal/usePrefix';
 import { type PolymorphicProps } from '../../types/common';
 
@@ -123,16 +120,13 @@ function Tooltip<T extends React.ElementType>({
   };
 
   function getChildEventHandlers(childProps: any) {
-    const eventHandlerFunctions = [
-      'onFocus',
-      'onBlur',
-      'onClick',
-      'onMouseEnter',
-    ];
+    const eventHandlerFunctions = Object.keys(triggerProps).filter((prop) =>
+      prop.startsWith('on')
+    );
     const eventHandlers = {};
     eventHandlerFunctions.forEach((functionName) => {
       eventHandlers[functionName] = (evt: React.SyntheticEvent) => {
-        triggerProps[functionName]();
+        triggerProps[functionName](evt);
         if (childProps?.[functionName]) {
           childProps?.[functionName](evt);
         }
@@ -200,17 +194,6 @@ function Tooltip<T extends React.ElementType>({
     'The Tooltip component must have no interactive content rendered by the' +
       '`label` or `description` prop'
   );
-
-  useEffect(() => {
-    if (containerRef !== null && containerRef.current) {
-      const interactiveContent = getInteractiveContent(
-        containerRef.current as HTMLElement
-      );
-      if (!interactiveContent) {
-        setOpen(false);
-      }
-    }
-  });
 
   useEffect(() => {
     if (isDragging) {

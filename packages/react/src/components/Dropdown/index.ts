@@ -5,9 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import Dropdown, { OnChangeData } from './Dropdown';
+import Dropdown, {
+  type DropdownTranslationKey,
+  type OnChangeData,
+} from './Dropdown';
 
-export type { OnChangeData };
+export type { DropdownTranslationKey, OnChangeData };
 export { Dropdown };
 export { default as DropdownSkeleton } from './Dropdown.Skeleton';
 

@@ -13,7 +13,6 @@ import { isElement } from 'react-is';
 import PropTypes, { ReactNodeLike } from 'prop-types';
 import { ModalHeader, type ModalHeaderProps } from './ModalHeader';
 import { ModalFooter, type ModalFooterProps } from './ModalFooter';
-
 import cx from 'classnames';
 
 import toggleClass from '../../tools/toggleClass';
@@ -63,18 +62,13 @@ export const ModalBody = React.forwardRef<HTMLDivElement, ModalBodyProps>(
       : {};
 
     return (
-      <>
-        <div
-          className={contentClass}
-          {...hasScrollingContentProps}
-          {...rest}
-          ref={ref}>
-          {children}
-        </div>
-        {hasScrollingContent && (
-          <div className={`${prefix}--modal-content--overflow-indicator`} />
-        )}
-      </>
+      <div
+        className={contentClass}
+        {...hasScrollingContentProps}
+        {...rest}
+        ref={ref}>
+        {children}
+      </div>
     );
   }
 );

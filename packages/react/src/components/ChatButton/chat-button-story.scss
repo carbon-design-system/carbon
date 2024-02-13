@@ -1,0 +1,7 @@
+div[class*='test-button-'] {
+  margin-bottom: 4rem;
+
+  & > * {
+    margin-right: 2rem;
+  }
+}

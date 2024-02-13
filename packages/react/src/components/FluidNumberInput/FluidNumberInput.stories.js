@@ -16,7 +16,7 @@ import {
 import { Information } from '@carbon/icons-react';
 
 export default {
-  title: 'Experimental/unstable__FluidNumberInput',
+  title: 'Experimental/Fluid Components/unstable__FluidNumberInput',
   component: FluidNumberInput,
   subcomponents: {
     FluidNumberInputSkeleton,
