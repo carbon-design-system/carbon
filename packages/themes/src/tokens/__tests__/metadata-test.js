@@ -1030,7 +1030,23 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "ai-aura-start-table",
+          "type": "color",
+        },
+        Object {
           "name": "ai-aura-end",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-aura-hover-background",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-aura-hover-start",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-aura-hover-end",
           "type": "color",
         },
         Object {

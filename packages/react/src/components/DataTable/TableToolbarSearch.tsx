@@ -8,6 +8,7 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
+  ChangeEvent,
   useMemo,
   useRef,
   useState,
@@ -88,7 +89,7 @@ export interface TableToolbarSearchProps
    * Provide an optional hook that is called each time the input is updated
    */
   onChange?: (
-    event: '' | Partial<React.ChangeEventHandler<HTMLInputElement>>,
+    event: '' | ChangeEvent<HTMLInputElement>,
     value?: string
   ) => void;
 
