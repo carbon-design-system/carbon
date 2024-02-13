@@ -18,17 +18,35 @@ import { Story, Canvas, ArgsTable, Meta } from '@storybook/blocks';
 
 ## Overview
 
-There are 3 different types of notification components:
-`ActionableNotification`, `InlineNotification`, and `ToastNotification`.
+There are 4 different types of notification components:
+`ActionableNotification`, `InlineNotification`, `ToastNotification`, and
+`unstable__StaticNotification`.
+
+### ActionableNotification
+
+`ActionableNotification` should be used when user action is required. It can
+include an action, other interactive elements or rich text. It uses Toast-like
+styling by default, but if you'd like it to be visually similar to an
+InlineNotifcation, you can use the `inline` prop. If `actionButtonLabel` is not
+provided, an action button will not be rendered. This component grabs and traps
+focus until the action is acted upon or the notification is dismissed.
+
+### InlineNotification & ToastNotification
 
 `InlineNotification` and `ToastNotification` can not contain interactive
-elements or rich text.
+elements or rich text. These are announced by screenreaders when rendered. They
+don't grab focus. Use them to provide the user with an alert, status, or log.
 
-To include an action, interactive elements or rich text in notifications, use
-`ActionableNotification`. It uses Toast-like styling by default, but if you'd
-like it to be visually similar to an InlineNotifcation, you can use the `inline`
-prop. If `actionButtonLabel` is not provided, an action button will not be
-rendered.
+### unstable\_\_StaticNotification
+
+`unstable__StaticNotification` is non-modal and should only be used inline with
+content on the initial render of the page or modal. This should not be used for
+real-time notifications or notifications responding to user input (unless the
+page is completely refreshing and bumping the users focus back to the first
+element in the dom/tab order). This is the most passive notification component
+and is essentially just a styled div. If you place actions or interactive
+elements within this component, place an `aria-describedby` on the interactive
+element with a value that matches the `titleId` prop.
 
 ## Component API
 

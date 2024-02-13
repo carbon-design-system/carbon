@@ -68,12 +68,64 @@ export const WithIcons = () => (
   </MenuButton>
 );
 
+export const WithMenuAlignment = () => (
+  <>
+    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <MenuButton label="Bottom" menuAlignment="bottom">
+        <MenuItem label="First action" />
+        <MenuItem label="Second action that is a longer item to test overflow and title." />
+        <MenuItem label="Third action" disabled />
+      </MenuButton>
+
+      <MenuButton label="Bottom start" menuAlignment="bottom-start">
+        <MenuItem label="First action" />
+        <MenuItem label="Second action that is a longer item to test overflow and title." />
+        <MenuItem label="Third action" disabled />
+      </MenuButton>
+
+      <MenuButton label="Bottom end" menuAlignment="bottom-end">
+        <MenuItem label="First action" />
+        <MenuItem label="Second action that is a longer item to test overflow and title." />
+        <MenuItem label="Third action" disabled />
+      </MenuButton>
+    </div>
+
+    <div
+      style={{
+        display: 'flex',
+        marginTop: '15rem',
+        justifyContent: 'space-between',
+      }}>
+      <MenuButton label="Top" menuAlignment="top">
+        <MenuItem label="First action" />
+        <MenuItem label="Second action that is a longer item to test overflow and title." />
+        <MenuItem label="Third action" disabled />
+      </MenuButton>
+
+      <MenuButton label="Top start" menuAlignment="top-start">
+        <MenuItem label="First action" />
+        <MenuItem label="Second action that is a longer item to test overflow and title." />
+        <MenuItem label="Third action" disabled />
+      </MenuButton>
+
+      <MenuButton label="Top end" menuAlignment="top-end">
+        <MenuItem label="First action" />
+        <MenuItem label="Second action that is a longer item to test overflow and title." />
+        <MenuItem label="Third action" disabled />
+      </MenuButton>
+    </div>
+  </>
+);
+
 export const Playground = (args) => {
   const onClick = action('onClick (MenuItem)');
 
   return (
     <MenuButton {...args}>
-      <MenuItem label="First action" onClick={onClick} />
+      <MenuItem
+        label="First action with a long label description"
+        onClick={onClick}
+      />
       <MenuItem label="Second action" onClick={onClick} />
       <MenuItem label="Third action" onClick={onClick} disabled />
     </MenuButton>
