@@ -3,7 +3,11 @@
 exports[`Public API should only change with a semver change 1`] = `
 Array [
   "aiAuraEnd",
+  "aiAuraHoverBackground",
+  "aiAuraHoverEnd",
+  "aiAuraHoverStart",
   "aiAuraStart",
+  "aiAuraStartTable",
   "aiBorderEnd",
   "aiBorderStart",
   "aiBorderStrong",

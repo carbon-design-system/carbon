@@ -22,10 +22,42 @@ test.describe('Slug', () => {
         });
       });
 
+      test('slug callout @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Slug',
+          id: 'experimental-unstable-slug--callout',
+          theme,
+        });
+      });
+
       test('slug inside form @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Slug',
           id: 'experimental-unstable-slug-form--form-example',
+          theme,
+        });
+      });
+
+      test('slug inside DataTable column @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Slug',
+          id: 'experimental-unstable-slug-datatable--column-slug-sort',
+          theme,
+        });
+      });
+
+      test('slug inside DataTable row @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Slug',
+          id: 'experimental-unstable-slug-datatable--slug-with-selection-and-expansion',
+          theme,
+        });
+      });
+
+      test('slug inside Tile @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Slug',
+          id: 'experimental-unstable-slug-examples--tile',
           theme,
         });
       });

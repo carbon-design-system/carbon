@@ -1,0 +1,56 @@
+.container {
+  margin: 1rem;
+  position: relative;
+
+  button > span {
+    background-color: rebeccapurple;
+  }
+
+  button > svg {
+    background-color: rebeccapurple;
+  }
+
+  .ruler {
+    height: 1px;
+    width: 100%;
+    position: absolute;
+    border-top: 1px dotted black;
+    box-sizing: border-box;
+
+    &.top {
+      &.sm {
+        top: 6px;
+      }
+
+      &.md {
+        top: 10px;
+      }
+
+      &.lg {
+        top: 14px;
+      }
+
+      &.xl {
+        top: 14px;
+      }
+    }
+
+    &.bottom {
+      &.sm {
+        top: 25px;
+      }
+
+      &.md {
+        top: 29px;
+      }
+
+      &.lg {
+        top: 33px;
+      }
+
+      &.xl {
+        top: 33px;
+      }
+    }
+  }
+}
