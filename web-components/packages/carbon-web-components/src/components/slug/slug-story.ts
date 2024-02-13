@@ -246,7 +246,7 @@ Playground.parameters = {
   },
 };
 
-export const Test = (args) => {
+export const Callout = (args) => {
   const { alignment, showActions } = args?.[`${prefix}-slug`] ?? {};
   return html`
     <style>
@@ -263,7 +263,7 @@ export const Test = (args) => {
   `;
 };
 
-Test.parameters = {
+Callout.parameters = {
   knobs: {
     [`${prefix}-slug`]: () => {
       return {

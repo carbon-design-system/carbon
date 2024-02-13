@@ -87,7 +87,13 @@
 
 :host(#{$prefix}-table-header-cell[slug]),
 :host(#{$prefix}-table-header-cell[slug]) .#{$prefix}--table-sort {
-  @include ai-gradient('top', 100%);
+  @include ai-table-gradient();
+
+  box-shadow: inset 0 1px $ai-border-strong;
+}
+
+:host(#{$prefix}-table-header-cell[slug]) .#{$prefix}--table-sort {
+  background: none;
 }
 
 :host(#{$prefix}-table-header-cell[sticky-header]) {
@@ -103,14 +109,14 @@
   padding-block-start: rem(14px);
 }
 
-:host(#{$prefix}-table-header-cell[slug]) {
+:host(#{$prefix}-table-header-cell[slug]:not([is-sortable])) {
   .#{$prefix}--table-header-label--slug {
     display: flex;
     align-items: center;
   }
 
   ::slotted(#{$prefix}-slug) {
-    margin-inline-start: $spacing-03;
+    margin-inline-start: auto;
   }
 }
 
@@ -222,26 +228,6 @@
   }
 }
 
-:host(#{$prefix}-table-header-row[rows-with-slug]) {
-  .#{$prefix}--table-column-checkbox,
-  .#{$prefix}--table-expand {
-    padding-inline-start: $spacing-08;
-  }
-}
-:host(#{$prefix}-table-header-row[rows-with-slug]),
-:host(#{$prefix}-table-row[rows-with-slug]) {
-  #{$prefix}-checkbox {
-    padding-inline-start: $spacing-03;
-  }
-}
-
-:host(#{$prefix}-table-header-row[rows-with-slug][selection-name][expandable]),
-:host(#{$prefix}-table-row[rows-with-slug][selection-name][expandable]) {
-  .#{$prefix}--table-column-checkbox {
-    padding-inline-start: 0;
-  }
-}
-
 //
 // Table row
 //
@@ -271,7 +257,6 @@
 :host(#{$prefix}-table-cell) {
   padding: 0 $spacing-05;
   border-block-end: 1px solid $border-subtle;
-  border-block-start: 1px solid $layer-01;
 
   ::slotted(#{$prefix}-overflow-menu:hover) {
     background-color: none;
@@ -282,6 +267,10 @@
   ::slotted(*) {
     opacity: 0;
   }
+}
+
+:host(#{$prefix}-table-cell[slug-in-header]) {
+  @include ai-table-gradient;
 }
 
 :host(#{$prefix}-table-cell-content) {
@@ -335,7 +324,6 @@
   .#{$prefix}--table-expand {
     display: table-cell;
     border-block-end: 1px solid $border-subtle;
-    border-block-start: 1px solid $layer-01;
     padding-inline-end: 0;
     transition: transform $duration-moderate-01 motion(standard, productive);
   }
@@ -398,10 +386,12 @@
 :host(#{$prefix}-table-row[selection-name][expandable][highlighted]),
 :host(#{$prefix}-table-row[expandable]:hover),
 :host(#{$prefix}-table-row[selection-name][expandable]:hover) {
-  ::slotted(#{$prefix}-table-cell),
-  .#{$prefix}--table-expand,
-  .#{$prefix}--table-column-checkbox {
-    border-block-end-color: $border-subtle;
+  &:not([slug]) {
+    ::slotted(#{$prefix}-table-cell),
+    .#{$prefix}--table-expand,
+    .#{$prefix}--table-column-checkbox {
+      border-block-end-color: $border-subtle;
+    }
   }
 }
 
@@ -421,7 +411,6 @@
   ::slotted(#{$prefix}-table-cell-skeleton) {
     background-color: $layer-accent-01;
     border-block-end: 1px solid $layer-accent-01;
-    border-block-start: 1px solid $layer-accent-01;
   }
 }
 
@@ -448,26 +437,65 @@
   ::slotted(#{$prefix}-table-cell-skeleton) {
     background-color: $background-hover;
     border-block-end: 1px solid $layer-hover-01;
-    border-block-start: 1px solid $layer-hover-01;
   }
 }
 
+//aligns selection and expansion with slug
 :host(#{$prefix}-table-row[rows-with-slug]) {
-  .#{$prefix}--table-column-checkbox,
+  #{$prefix}-checkbox,
+  #{$prefix}-radio-button {
+    padding-inline-start: 2rem;
+  }
+
+  .#{$prefix}--table-expand {
+    padding-inline-start: $spacing-05;
+  }
+
+  .#{$prefix}--table-expand__button {
+    margin-inline-start: $spacing-06;
+  }
+
+  &[slug] {
+    #{$prefix}-checkbox,
+    #{$prefix}-radio-button {
+      padding-inline-start: $spacing-05;
+    }
+
+    .#{$prefix}--table-expand__button {
+      margin-inline-start: $spacing-03;
+    }
+  }
+}
+
+// alighs header with selection and expansion items
+:host(#{$prefix}-table-header-row[rows-with-slug]) {
   .#{$prefix}--table-expand {
     padding-inline-start: $spacing-08;
   }
+  .#{$prefix}--table-column-checkbox {
+    padding-inline-start: $spacing-09;
+  }
+}
 
-  ::slotted(#{$prefix}-slug) {
-    padding: 0 $spacing-03;
-    margin-inline-start: -$spacing-07;
+:host(#{$prefix}-table-header-row[rows-with-slug][selection-name][expandable]),
+:host(#{$prefix}-table-row[rows-with-slug][selection-name][expandable]) {
+  .#{$prefix}--table-column-checkbox {
+    padding-inline-start: 0;
+  }
+  #{$prefix}-checkbox {
+    padding-inline-start: $spacing-03;
   }
 }
 
 :host(#{$prefix}-table-row[slug]) {
-  @include ai-gradient('left', 50%);
+  @include ai-table-gradient();
 
   background-attachment: fixed;
+  box-shadow: inset 1px 0 $ai-border-strong;
+
+  &:hover {
+    @include ai-table-gradient('hover');
+  }
 }
 
 :host(#{$prefix}-table-header-title) {

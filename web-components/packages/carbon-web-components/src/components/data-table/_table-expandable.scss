@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2023
+// Copyright IBM Corp. 2020, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -67,4 +67,48 @@
 
 :host(#{$prefix}-table-expanded-row[selected][highlighted]) {
   background-color: $layer-selected;
+}
+
+:host(#{$prefix}-table-row[slug][expandable][selection-name][selected]),
+:host(#{$prefix}-table-row[slug][expandable]) {
+  &:hover,
+  &[highlighted] {
+    @include ai-table-gradient('hover');
+
+    ::slotted(#{$prefix}-table-cell),
+    ::slotted(#{$prefix}-table-cell-skeleton),
+    .#{$prefix}--table-expand,
+    .#{$prefix}--table-column-checkbox {
+      background: none;
+    }
+
+    &[expanded] .#{$prefix}--table-expand {
+      border-block-end-color: transparent;
+    }
+  }
+
+  .#{$prefix}--table-expand,
+  .#{$prefix}--table-column-checkbox,
+  ::slotted(#{$prefix}-table-cell),
+  ::slotted(#{$prefix}-table-cell-skeleton) {
+    background: none;
+  }
+
+  &[expanded] .#{$prefix}--table-expand {
+    border-block-end-color: transparent;
+  }
+}
+
+:host(#{$prefix}-table-expanded-row[slug]) {
+  @include ai-table-gradient();
+
+  &[highlighted] {
+    @include ai-table-gradient('hover');
+  }
+}
+
+:host(#{$prefix}-table-expanded-row[rows-with-slug]) {
+  td {
+    padding-inline-start: to-rem(88px);
+  }
 }

@@ -779,6 +779,30 @@ class CDSTable extends HostListenerMixin(LitElement) {
         row.removeAttribute('rows-with-slug');
       });
     }
+
+    // Gets table header info to add to the column cells for styles
+    const headersWithSlug: number[] = [];
+
+    Array.prototype.slice
+      .call(this._tableHeaderRow.children)
+      .forEach((headerCell, index) => {
+        if (headerCell.querySelector(`${prefix}-slug`)) {
+          headerCell.setAttribute('slug', '');
+          headersWithSlug.push(index);
+        } else {
+          headerCell.removeAttribute('slug');
+        }
+      });
+
+    this._tableRows.forEach((row) => {
+      Array.prototype.slice
+        .call((row as HTMLElement).children)
+        .forEach((cell, index) => {
+          headersWithSlug.includes(index)
+            ? cell.setAttribute('slug-in-header', '')
+            : cell.removeAttribute('slug-in-header');
+        });
+    });
   }
 
   /* eslint-disable no-constant-condition */

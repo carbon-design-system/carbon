@@ -24,7 +24,6 @@
 :host(#{$prefix}-table-row) {
   .#{$prefix}--table-column-checkbox {
     border-block-end: 1px solid $border-subtle;
-    border-block-start: 1px solid $layer-01;
     padding-inline: $spacing-05 $spacing-02;
 
     .#{$prefix}--checkbox-label {
@@ -50,7 +49,6 @@
     background-color: $layer-accent-01;
     // bottom border acts as separator from other rows
     border-block-end: 1px solid $layer-active;
-    border-block-start: 1px solid $border-subtle-01;
     color: $text-primary;
   }
 
@@ -72,14 +70,29 @@
   display: none !important;
 }
 
-:host(#{$prefix}-table-row[selected][slug]) {
+:host(#{$prefix}-table-expanded-row[selected][slug]:not([highlighted])),
+:host(#{$prefix}-table-row[selected][slug]),
+:host(#{$prefix}-table-row[expandable][selected][slug]) {
+  @include ai-table-gradient('selected');
+
+  &[highlighted],
+  &:hover {
+    @include ai-table-gradient('hover');
+
+    /* stylelint-disable-next-line no-duplicate-selectors */
+    .#{$prefix}--table-column-checkbox,
+    ::slotted(#{$prefix}-table-cell),
+    .#{$prefix}--table-expand,
+    .#{$prefix}--table-column-checkbox {
+      background: none;
+    }
+  }
+
+  /* stylelint-disable-next-line no-duplicate-selectors */
+  .#{$prefix}--table-column-checkbox,
   ::slotted(#{$prefix}-table-cell),
   .#{$prefix}--table-expand,
   .#{$prefix}--table-column-checkbox {
-    background-color: transparent;
+    background: none;
   }
-}
-
-:host(#{$prefix}-table-row[selected][rows-with-slug]) {
-  background-color: $layer-selected;
 }

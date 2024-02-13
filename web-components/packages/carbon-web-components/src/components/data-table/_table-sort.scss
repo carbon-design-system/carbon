@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2023
+// Copyright IBM Corp. 2019, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -57,8 +57,14 @@
   transform: rotate(180deg);
 }
 
-:host(#{$prefix}-table-header-cell[sort-direction]) {
+// places slug near sorting icon in header
+:host(#{$prefix}-table-header-cell[sort-direction][slug]) {
+  .#{$prefix}--table-sort__icon-unsorted,
+  .#{$prefix}--table-sort__icon {
+    margin-inline: auto $spacing-03;
+  }
+
   ::slotted(#{$prefix}-slug) {
-    margin-inline: $spacing-03 auto;
+    margin-inline-end: $spacing-03;
   }
 }
