@@ -438,7 +438,7 @@ export const _Modal = {
         open
         modalHeading="Add a custom domain"
         modalLabel="Account resources"
-        passiveModal={args.showButtons}
+        passiveModal={!args.showButtons}
         primaryButtonText="Add"
         secondaryButtonText="Cancel"
         hasScrollingContent={args.hasScrollingContent}
