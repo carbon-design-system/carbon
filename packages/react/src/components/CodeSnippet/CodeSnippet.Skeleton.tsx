@@ -10,6 +10,19 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 
+export interface CodeSnippetSkeletonProps
+  extends React.HTMLAttributes<Omit<HTMLDivElement, 'children'>> {
+  /**
+   * Specify an optional className to be applied to the container node
+   */
+  className?: string;
+
+  /**
+   * The type of the code snippet, including single or multi
+   */
+  type?: 'single' | 'multi' | undefined;
+}
+
 function CodeSnippetSkeleton({
   className: containerClassName,
   type = 'single',
