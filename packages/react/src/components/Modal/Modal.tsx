@@ -488,9 +488,6 @@ const Modal = React.forwardRef(function Modal(
         {...hasScrollingContentProps}>
         {children}
       </div>
-      {hasScrollingContent && (
-        <div className={`${prefix}--modal-content--overflow-indicator`} />
-      )}
       {!passiveModal && (
         <ButtonSet className={footerClasses} aria-busy={loadingActive}>
           {Array.isArray(secondaryButtons) && secondaryButtons.length <= 2

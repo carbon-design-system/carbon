@@ -31,7 +31,7 @@ export interface TableToolbarMenuProps
   /**
    * Optional prop to allow overriding the default menu icon
    */
-  renderIcon?: React.ReactNode;
+  renderIcon?: any;
 }
 
 const TableToolbarMenu: React.FC<TableToolbarMenuProps> = ({

@@ -1014,6 +1014,110 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "slug-callout-shadow-outer-01",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-shadow-outer-02",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-inner-shadow",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-aura-start",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-aura-start-table",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-aura-end",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-aura-hover-background",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-aura-hover-start",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-aura-hover-end",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-border-strong",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-border-start",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-border-end",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-drop-shadow",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-caret-center",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-caret-bottom",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-caret-bottom-background",
+          "type": "color",
+        },
+        Object {
+          "name": "slug-callout-caret-bottom-background-actions",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-prompt-background",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-prompt-border-start",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-prompt-border-end",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-bubble-user",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-bubble-agent",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-bubble-agent-border",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-avatar-bot",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-avatar-agent",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-avatar-user",
+          "type": "color",
+        },
+        Object {
           "name": "highlight",
           "type": "color",
         },
