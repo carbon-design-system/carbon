@@ -234,12 +234,12 @@ const TableHeader = React.forwardRef(function TableHeader(
         {...rest}>
         <span className={`${prefix}--table-sort__flex`}>
           <div className={`${prefix}--table-header-label`}>{children}</div>
-          {normalizedSlug}
           <Arrow size={20} className={`${prefix}--table-sort__icon`} />
           <Arrows
             size={20}
             className={`${prefix}--table-sort__icon-unsorted`}
           />
+          {normalizedSlug}
         </span>
       </button>
     </th>

@@ -19688,6 +19688,17 @@
     - selector
   sizes:
     - 32
+- name: sync-settings
+  friendly_name: Sync settings
+  aliases:
+    - sync
+    - apply
+    - mapping
+    - pattern
+    - match
+    - software
+  sizes:
+    - 32
 - name: sys-provision
   friendly_name: Sys provision
   aliases:

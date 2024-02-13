@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-node-access */
 /**
  * Copyright IBM Corp. 2023
  *
@@ -106,9 +107,35 @@ describe('ComboButton', () => {
             </ComboButton>
           );
 
-          // eslint-disable-next-line testing-library/no-node-access
           expect(container.firstChild.lastChild).toHaveClass(
             `${prefix}--popover--${alignment}`
+          );
+        });
+      });
+    });
+
+    describe('supports props.menuAlignment', () => {
+      const alignments = [
+        'top',
+        'top-start',
+        'top-end',
+        'bottom',
+        'bottom-start',
+        'bottom-end',
+      ];
+
+      alignments.forEach((alignment) => {
+        it(`menuAlignment="${alignment}"`, async () => {
+          render(
+            <ComboButton label="Primary action" menuAlignment={alignment}>
+              <MenuItem label="Additional action" />
+            </ComboButton>
+          );
+
+          await userEvent.click(screen.getAllByRole('button')[1]);
+
+          expect(screen.getByRole('menu')).toHaveClass(
+            `${prefix}--combo-button__${alignment}`
           );
         });
       });
@@ -125,7 +152,6 @@ describe('ComboButton', () => {
 
       const triggerButton = screen.getAllByRole('button')[1];
       const tooltipId = triggerButton.getAttribute('aria-labelledby');
-      // eslint-disable-next-line testing-library/no-node-access
       const tooltip = document.getElementById(tooltipId);
 
       expect(tooltip).toHaveTextContent(t());
@@ -209,6 +235,21 @@ describe('ComboButton', () => {
 
       expect(spy).toHaveBeenCalled();
       spy.mockRestore();
+    });
+
+    it('supports ellipsis in ComboButton by checking the className', async () => {
+      render(
+        <ComboButton label="Primary action super long text to enable ellipsis">
+          <MenuItem label="Submenu">
+            <MenuItem label="Action" />
+          </MenuItem>
+        </ComboButton>
+      );
+
+      expect(
+        screen.getByTitle('Primary action super long text to enable ellipsis')
+          .parentElement
+      ).toHaveClass(`${prefix}--combo-button__primary-action`);
     });
   });
 });
