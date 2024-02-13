@@ -58,53 +58,9 @@ module.exports = {
       },
     },
     {
-      files: ['**/*.tsx', '**/components-react/**/*-container.ts'],
-      parser: '@typescript-eslint/parser',
-      plugins: ['@typescript-eslint', 'react'],
-      rules: {
-        'no-unused-vars': 0,
-        // TODO: See why the ESLint plugin does not work with `.tsx`
-        '@carbon/react-prop-type-comments/require-proptype-comment': 0,
-        '@typescript-eslint/no-unused-vars': 2,
-        // 'import/no-unresolved': [
-        //   2,
-        //   {
-        //     ignore: ['^./'],
-        //   },
-        // ],
-        'jsdoc/require-param-type': 0,
-        'jsdoc/require-returns-type': 0,
-        'react/jsx-uses-react': 2,
-        'react/jsx-uses-vars': 2,
-      },
-    },
-    {
       files: ['**/defs.ts'],
       rules: {
         'import/prefer-default-export': 0,
-      },
-    },
-    {
-      files: ['**/*.stories.react.tsx'],
-      parser: '@typescript-eslint/parser',
-      plugins: ['@typescript-eslint', 'react'],
-      rules: {
-        'no-unused-vars': 0,
-        '@typescript-eslint/no-unused-vars': 2,
-        // 'import/no-extraneous-dependencies': 0,
-        // 'import/no-unresolved': [
-        //   2,
-        //   {
-        //     ignore: [
-        //       '^carbon-web-components/es/(components-react|icons)/',
-        //       '^@carbon/ibmdotcom-web-components/es/(components-react|icons)/',
-        //       '/components-react/',
-        //     ],
-        //   },
-        // ],
-        'react/jsx-uses-react': 2,
-        'react/jsx-uses-vars': 2,
-        'react/prop-types': 0,
       },
     },
     {
@@ -126,14 +82,6 @@ module.exports = {
       },
       rules: {
         // 'import/no-unresolved': 0,
-      },
-    },
-    {
-      files: ['examples/codesandbox/{react,form/redux-form}/**/*.js'],
-      plugins: ['react'],
-      rules: {
-        'react/jsx-uses-react': 2,
-        'react/jsx-uses-vars': 2,
       },
     },
     {

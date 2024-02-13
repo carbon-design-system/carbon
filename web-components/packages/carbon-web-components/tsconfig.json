@@ -17,7 +17,6 @@
     "experimentalDecorators": true,
     "strict": true,
     "noImplicitAny": false,
-    "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
   },

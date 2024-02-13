@@ -260,15 +260,9 @@ same manner as native HTML tags, for example:
 
 ## JavaScript framework support
 
-In addition to the available Web Component versions of Carbon components, this
-library also supports usage with JavaScript frameworks like Angular, React, and
-Vue if the desire is to use instead of the pure framework versions of Carbon
-components. Specifically for React, this library comes with a wrapper
-implementation around the Carbon Web Components for more seamless integration
-with your React application.
-
-This is achievable since Web Components is the modern browser standard, and
-works well with other front-end frameworks that exist in the application. In
+This package can also be used within other JavaScript frameworks such as Angular and
+Vue. This is achievable since web components are the modern browser standard, and
+work well with other front-end frameworks that exist in the application. In
 turn, this also comes with the benefits of encapsulation within the Shadow DOM:
 
 ### Angular
@@ -305,48 +299,6 @@ application can use those `.d.ts` files:
   [`__importDefault` TypeScript helper](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html#example-8)
   as follows:
   `window.__importDefault = mod => (mod?.__esModule ? mod : { default: mod })`
-
-### React
-
-[![Edit carbon-web-components with React](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/react)
-
-You can use wrapper React components in
-`@carbon/web-components/es/components-react` generated
-[automatically from the custom elements](./src/globals/wrappers/createReactCustomElementType.ts)
-which allows you to use our components seamlessly in your React code. Here's an
-example:
-
-```javascript
-import React from 'react';
-import { render } from 'react-dom';
-import CDSDropdown from '@carbon/web-components/es/components-react/dropdown/dropdown.js';
-import CDSDropdownItem from '@carbon/web-components/es/components-react/dropdown/dropdown-item.js';
-
-const App = () => (
-  <CDSDropdown triggerContent="Select an item">
-    <CDSDropdownItem value="all">Option 1</CDSDropdownItem>
-    <CDSDropdownItem value="cloudFoundry">Option 2</CDSDropdownItem>
-    <CDSDropdownItem value="staging">Option 3</CDSDropdownItem>
-    <CDSDropdownItem value="dea">Option 4</CDSDropdownItem>
-    <CDSDropdownItem value="router">Option 5</CDSDropdownItem>
-  </CDSDropdown>
-);
-
-render(<App />, document.getElementById('root'));
-```
-
-Note: Using the React wrapper requires an additional dependency,
-[`prop-types`](https://www.npmjs.com/package/prop-types).
-
-To run the wrapper React components in SSR environment requires Node `12.16.3`
-or above that supports
-["conditional mapping" feature](https://github.com/jkrems/proposal-pkg-exports#2-conditional-mapping):
-
-[![Edit carbon-web-components with React SSR](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/react-ssr)
-
-Same Node version requirement applies to Next.js:
-
-[![Edit carbon-web-components with React SSR](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/next)
 
 ### Vue
 

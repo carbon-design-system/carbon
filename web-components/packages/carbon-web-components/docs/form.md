@@ -26,38 +26,3 @@ button.addEventListener('click', () => {
 ```
 
 [![Edit carbon-web-components with formdata event](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/feat/cwc-v2/packages/carbon-web-components/examples/codesandbox/form/basic)
-
-## Redux Form
-
-You can use our form components with Redux Form by creating a React component that wraps our form components:
-
-```javascript
-import { Field } from 'redux-form';
-import CDSFormItem from '@carbon/web-components/es/components-react/form/form-item';
-import CDSTextInput from '@carbon/web-components/es/components-react/text-input/text-input';
-
-...
-
-// A React component that wraps form components from `@carbon/web-components`
-const FieldImpl = ({ input, label, type, meta: { touched, error } }) => {
-  const validityMessage = !touched ? undefined : error;
-  return (
-    <CDSFormItem>
-      <CDSTextInput
-        {...input}
-        invalid={Boolean(validityMessage)}
-        label-text={label}
-        type={type}
-        placeholder={label}
-        validityMessage={validityMessage}
-      />
-    </CDSFormItem>
-  );
-};
-
-...
-
-<Field name="username" type="text" component={FieldImpl} label="Username" />
-```
-
-[![Edit carbon-web-components with Redux Form](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/feat/cwc-v2/examples/codesandbox/form/redux-form)
