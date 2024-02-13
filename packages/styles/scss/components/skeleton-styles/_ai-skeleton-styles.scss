@@ -33,7 +33,7 @@
   .#{$prefix}--skeleton__text--ai::before,
   .#{$prefix}--skeleton__placeholder--ai::before,
   .#{$prefix}--skeleton__icon--ai::before {
-    animation: 1500ms ease-in-out ai-skeleton-animation infinite;
+    animation: 1250ms ease-in-out ai-skeleton-animation infinite;
     background: linear-gradient(
       to right,
       rgba(theme.get('ai-skeleton-element-background'), 0) 0%,
