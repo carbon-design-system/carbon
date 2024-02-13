@@ -138,6 +138,11 @@ export interface MultiSelectProps<ItemType>
   className?: string;
 
   /**
+   * Specify the text that should be read for screen readers that describes that all items are deleted
+   */
+  clearAnnouncement?: string;
+
+  /**
    * Specify the text that should be read for screen readers that describes total items selected
    */
   clearSelectionDescription?: string;
@@ -324,6 +329,7 @@ const MultiSelect = React.forwardRef(
       sortItems = defaultSortItems as MultiSelectProps<ItemType>['sortItems'],
       compareItems = defaultCompareItems,
       clearSelectionText = 'To clear selection, press Delete or Backspace',
+      clearAnnouncement = 'all items have been cleared',
       clearSelectionDescription = 'Total items selected: ',
       light,
       invalid,
@@ -353,6 +359,7 @@ const MultiSelect = React.forwardRef(
     const [isOpen, setIsOpen] = useState(open || false);
     const [prevOpenProp, setPrevOpenProp] = useState(open);
     const [topItems, setTopItems] = useState([]);
+    const [itemsCleared, setItemsCleared] = useState(false);
     const {
       selectedItems: controlledSelectedItems,
       onItemChange,
@@ -409,12 +416,17 @@ const MultiSelect = React.forwardRef(
             e.stopPropagation();
           }
 
+          if (!isOpen && match(e, keys.Delete) && selectedItems.length > 0) {
+            setItemsCleared(true);
+          }
+
           if (
             (match(e, keys.Space) ||
               match(e, keys.ArrowDown) ||
               match(e, keys.Enter)) &&
             !isOpen
           ) {
+            setItemsCleared(false);
             setIsOpenWrapper(true);
           }
         }
@@ -709,6 +721,9 @@ const MultiSelect = React.forwardRef(
                 }
               )}
           </ListBox.Menu>
+          {itemsCleared && (
+            <span aria-live="assertive" aria-label={clearAnnouncement} />
+          )}
         </ListBox>
         {!inline && !invalid && !warn && helperText && (
           <div id={helperId} className={helperClasses}>
