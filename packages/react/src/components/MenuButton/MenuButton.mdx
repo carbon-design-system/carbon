@@ -26,6 +26,19 @@ passed as `props.label`.
 </MenuButton>
 ```
 
+## Menu Alignment
+
+The `menuAlignment` prop enables you to define the placement of the Menu in
+relation to the `MenuButton`. For instance, setting `menuAlignment="top"` on the
+`MenuButton` will render the Menu above the button.
+
+If it seems your specified `menuAlignment` isn't working, it's because we
+prioritize ensuring the Menu remains visible. We calculate the optimal position
+to display the Menu in case the provided `menuAlignment` obscures it.
+
+We encourage you to play around in the Storybook playground to better understand
+the `menuAlignment` prop.
+
 ## Component API
 
 <ArgsTable />

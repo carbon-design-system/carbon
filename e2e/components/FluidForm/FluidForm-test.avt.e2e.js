@@ -14,7 +14,7 @@ test.describe('FluidForm @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidForm',
-      id: 'experimental-fluidform--default',
+      id: 'experimental-fluid-components-fluidform--default',
       globals: {
         theme: 'white',
       },

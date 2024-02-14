@@ -303,7 +303,10 @@
     padding-inline-end: convert.to-rem(120px);
   }
 
-  .#{$prefix}--number-input--fluid .#{$prefix}--number__input-wrapper--slug {
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--slug:not(
+      :has(~ .#{$prefix}--slug--revert)
+    ) {
     @include ai-gradient;
   }
 }

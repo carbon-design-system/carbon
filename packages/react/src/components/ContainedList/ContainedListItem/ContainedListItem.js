@@ -18,6 +18,7 @@ function ContainedListItem({
   disabled = false,
   onClick,
   renderIcon: IconElement,
+  ...rest
 }) {
   const prefix = usePrefix();
 
@@ -41,7 +42,7 @@ function ContainedListItem({
   );
 
   return (
-    <li className={classes}>
+    <li className={classes} {...rest}>
       {isClickable ? (
         <button
           className={`${prefix}--contained-list-item__content`}

@@ -89,18 +89,13 @@ export const ModalBody = React.forwardRef<HTMLDivElement, ModalBodyProps>(
         : {};
 
     return (
-      <>
-        <div
-          className={contentClass}
-          {...hasScrollingContentProps}
-          {...rest}
-          ref={mergeRefs(contentRef, ref)}>
-          {children}
-        </div>
-        {(hasScrollingContent || isScrollable) && (
-          <div className={`${prefix}--modal-content--overflow-indicator`} />
-        )}
-      </>
+      <div
+        className={contentClass}
+        {...hasScrollingContentProps}
+        {...rest}
+        ref={mergeRefs(contentRef, ref)}>
+        {children}
+      </div>
     );
   }
 );

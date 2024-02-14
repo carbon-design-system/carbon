@@ -170,6 +170,7 @@ categories:
       - ai--ready
       - ai
       - analytics
+      - analyze--code
       - analyzing--containers
       - api
       - api--lifecycle
@@ -325,6 +326,7 @@ categories:
       - hyper-protect--virtual-servers
       - ibm--automation-platform
       - ibm--cloud
+      - ibm--z-and-cloud-modernization-stack
       - identify-and-access
       - identify-and-resolve-issues
       - infrastructure-as-a-service
@@ -420,6 +422,7 @@ categories:
       - serverless--02
       - sharing-data
       - single--sign-on
+      - slice-code
       - small-components-making-a-larger-whole
       - small-to-medium-business-smb
       - softlayer--enablement
@@ -556,6 +559,7 @@ categories:
       - ibm--z16--plus-cloud
       - infrastructure-security
       - it--infrastructure-software
+      - mainframe-qualities-of-service
       - reliability
       - resilience
       - sap--hana
@@ -566,6 +570,7 @@ categories:
       - storage--for-data-and-ai
       - storage--for-resiliency
       - storage--product
+      - storage--systems
       - tape--storage
       - virtualization
       - zero-trust
@@ -853,6 +858,14 @@ categories:
       - firecracker
       - flower--01
       - flower--02
+      - football
+      - football--field
+      - football--goal-post
+      - golf--bag
+      - golf--ball
+      - golf--club
+      - golf--hole
+      - gramophone
       - guitar
       - juice
       - lantern
@@ -865,9 +878,15 @@ categories:
       - snowflake
       - soft--ice--cream
       - sports
+      - spotlight
+      - stage
       - stationary--bicycle
       - tennis
+      - tennis--ball
+      - tennis--net
+      - tennis--racquet
       - tree
+      - whistle
       - yoga--01
       - yoga--02
       - yoga--03
@@ -1102,8 +1121,18 @@ categories:
       - sustainability--03
       - sustainability--04
       - sustainability--strategy
-  - name: Systems DevOps
+  - name: Systems
     members:
+      - cics--configuration-manager-for-z-os
+      - cics--deployment-assistant
+      - cics--explorer
+      - cics--interdependency-analyzer-for-z-os
+      - cics--performance-analyzer-for-z-os
+      - cics--transaction-gateway
+      - cics--transaction-server-for-z-os
+      - cics--tx
+      - cics--vsam-recovery-for-z-os
+      - cics--vsam-transparency-for-z-os
       - developer-z-os
       - systems-devops--analyze
       - systems-devops--build
@@ -1177,6 +1206,9 @@ categories:
       - visual--recognition
       - watson--logo
       - watsonx--ai
+      - watsonx--code-assistant
+      - watsonx--code-assistant-for-z
+      - watsonx--code-assistant-for-z-refactor
       - watsonx--data
       - watsonx--governance
       - watsonx
@@ -1211,11 +1243,17 @@ categories:
       - windy
   - name: Workplace
     members:
+      - bento-box-tray
       - cardboard
+      - do-not-step
       - fountain--drinking
+      - glass-bottle-and-metal-can
       - library
+      - liquids
       - literature
       - loop--hearing
+      - metal-can
+      - plastics
       - silence
       - station--hydration
       - trash--burnable
