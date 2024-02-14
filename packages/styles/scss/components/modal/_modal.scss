@@ -350,58 +350,20 @@
   .#{$prefix}--modal-scroll-content {
     // Required to accommodate focus outline's negative offset when scrolling in Chrome
     border-block-end: 2px solid transparent;
+    mask-image: linear-gradient(
+        to bottom,
+        $layer calc(100% - 80px),
+        transparent calc(100% - 48px),
+        transparent 100%
+      ),
+      linear-gradient(to left, $layer 0, 16px, transparent 16px),
+      linear-gradient(to right, $layer 0, 2px, transparent 2px),
+      linear-gradient(to top, $layer 0, 2px, transparent 2px);
   }
+
   // Required so overflow-indicator disappears at end of content
   .#{$prefix}--modal-scroll-content > *:last-child {
     padding-block-end: $spacing-06;
-  }
-
-  .#{$prefix}--modal-content--overflow-indicator {
-    position: absolute;
-    background: $layer;
-    block-size: convert.to-rem(48px);
-    grid-column: 1/-1;
-    grid-row: 2/-2;
-    inline-size: calc(100% - $spacing-05);
-    inset-block-end: 0;
-    inset-inline-start: 0;
-    pointer-events: none;
-
-    &::before {
-      position: absolute;
-      background-image: linear-gradient(to bottom, transparent, $layer);
-      block-size: convert.to-rem(32px);
-      content: '';
-      inline-size: 100%;
-      inset-block-start: -32px;
-      pointer-events: none;
-    }
-  }
-
-  // Safari-only media query
-  // won't appear correctly with CSS custom properties
-  // see: code snippet and tabs overflow indicators
-  @media not all and (min-resolution >= 0.001dpcm) {
-    @supports (-webkit-appearance: none) and (stroke-color: transparent) {
-      .#{$prefix}--modal-content--overflow-indicator {
-        background-image: linear-gradient(to bottom, rgba($layer, 0), $layer);
-      }
-    }
-  }
-
-  .#{$prefix}--modal-content:focus
-    ~ .#{$prefix}--modal-content--overflow-indicator {
-    margin: 0 2px 2px;
-  }
-
-  @media screen and (-ms-high-contrast: active) {
-    .#{$prefix}--modal-scroll-content > *:last-child {
-      padding-block-end: 0;
-    }
-
-    .#{$prefix}--modal-content--overflow-indicator {
-      display: none;
-    }
   }
 
   // -----------------------------
