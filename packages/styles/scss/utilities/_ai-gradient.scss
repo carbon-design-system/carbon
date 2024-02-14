@@ -124,6 +124,7 @@
   } @else {
     background: linear-gradient(
           to top,
+          $background $start,
           theme.$ai-aura-start $start,
           theme.$ai-aura-end 50%
         )

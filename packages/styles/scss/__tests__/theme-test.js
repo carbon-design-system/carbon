@@ -162,6 +162,7 @@ describe('@carbon/styles/scss/theme', () => {
         "ai-border-start",
         "ai-border-end",
         "ai-drop-shadow",
+        "ai-overlay",
         "slug-callout-caret-center",
         "slug-callout-caret-bottom",
         "slug-callout-caret-bottom-background",
