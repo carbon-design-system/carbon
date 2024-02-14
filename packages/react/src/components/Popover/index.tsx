@@ -203,7 +203,6 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
       parseFloat(
         getStyle.getPropertyValue('--cds-popover-offset').split('rem', 1)[0]
       ) * -16;
-    console.log(`popover offset: ${popoverOffsetPx.current}`);
   });
 
   const floatingUIConfig = autoAlign
@@ -230,13 +229,6 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
 
   const { refs, floatingStyles, isPositioned, placement, middlewareData } =
     useFloating(floatingUIConfig);
-
-  useEffect(() => {
-    console.log('reference element');
-    console.log(refs.reference.current);
-  }, [refs]);
-
-  console.log(middlewareData);
 
   const value = useMemo(() => {
     return {
@@ -288,59 +280,48 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
 
   const mappedChildren = React.Children.map(children, (child) => {
     const item = child as any;
+    const { className, ref } = item.props;
+    const tabTipClasses = cx(`${prefix}--popover--tab-tip__button`, className);
 
-    if (item?.type === 'button') {
-      const { className } = item.props;
-      const tabTipClasses = cx(
-        `${prefix}--popover--tab-tip__button`,
-        className
-      );
+    return React.cloneElement(item, {
+      className: item?.type === 'button' ? tabTipClasses : className,
 
-      console.log(`mapping over children`);
-      console.log(child);
-
-      return React.cloneElement(item, {
-        className: tabTipClasses,
-
-        // With cloneElement, if you pass a `ref`, it overrides the original ref.
-        // https://react.dev/reference/react/cloneElement#parameters
-        // The block below works around this and ensures that the original ref is still
-        // called while allowing the floating-ui reference element to be set as well.
-        // `useMergedRefs` can't be used here because hooks can't be called from within a callback.
-        // More here: https://github.com/facebook/react/issues/8873#issuecomment-489579878
-        ref: (node) => {
+      // With cloneElement, if you pass a `ref`, it overrides the original ref.
+      // https://react.dev/reference/react/cloneElement#parameters
+      // The block below works around this and ensures that the original ref is still
+      // called while allowing the floating-ui reference element to be set as well.
+      // `useMergedRefs` can't be used here because hooks can't be called from within a callback.
+      // More here: https://github.com/facebook/react/issues/8873#issuecomment-489579878
+      ref: (node) => {
+        if (autoAlign && item?.type?.displayName !== 'PopoverContent') {
           // Set the reference element for floating-ui
           refs.setReference(node);
-          console.log(`set reference node:`);
-          console.log(node);
-          // Call the original ref, if any
-          const { ref } = item;
-          if (typeof ref === 'function') {
-            ref(node);
-          } else if (ref !== null) {
-            ref.current = node;
-          }
-        },
-      });
-    } else {
-      return item;
-    }
+        }
+
+        // Call the original ref, if any
+        if (typeof ref === 'function') {
+          ref(node);
+        } else if (ref !== null && ref !== undefined) {
+          ref.current = node;
+        }
+      },
+    });
   });
 
   const BaseComponentAsAny = BaseComponent as any;
 
+  console.log('reference element:');
+  console.log(refs.reference.current);
   console.log(`
   isPositioned: ${isPositioned}
   placement: ${placement}
   shimmedAlign: ${shimmedAlign}
-
-
   `);
 
   return (
     <PopoverContext.Provider value={value}>
       <BaseComponentAsAny {...rest} className={className} ref={ref}>
-        {isTabTip ? mappedChildren : children}
+        {mappedChildren}
       </BaseComponentAsAny>
     </PopoverContext.Provider>
   );
@@ -468,12 +449,11 @@ function PopoverContentRenderFunction(
   forwardRef: React.ForwardedRef<HTMLSpanElement>
 ) {
   const prefix = usePrefix();
-  const { floating, setFloating, caretRef, autoAlign } =
-    React.useContext(PopoverContext);
-  const ref = useMergedRefs([floating, forwardRef]);
+  const { setFloating, caretRef, autoAlign } = React.useContext(PopoverContext);
+  const ref = useMergedRefs([setFloating, forwardRef]);
 
   return (
-    <span {...rest} className={`${prefix}--popover`} ref={setFloating}>
+    <span {...rest} className={`${prefix}--popover`}>
       <span className={cx(`${prefix}--popover-content`, className)} ref={ref}>
         {children}
       </span>
@@ -489,6 +469,7 @@ function PopoverContentRenderFunction(
 }
 
 export const PopoverContent = React.forwardRef(PopoverContentRenderFunction);
+PopoverContent.displayName = 'PopoverContent';
 
 PopoverContent.propTypes = {
   /**

@@ -391,7 +391,7 @@ export const AutoAlignFloatingUI = () => {
   const ref = useRef();
 
   useLayoutEffect(() => {
-    ref.current.scrollIntoView();
+    ref?.current?.scrollIntoView();
   }, [ref]);
 
   return (
