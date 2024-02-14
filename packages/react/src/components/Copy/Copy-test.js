@@ -13,6 +13,8 @@ import { Copy as CopyIcon } from '@carbon/icons-react';
 
 jest.useFakeTimers();
 
+const prefix = 'cds';
+
 const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
 
 describe('Copy', () => {
@@ -95,15 +97,15 @@ describe('Feedback', () => {
     const button = screen.getByTestId('copy-button-5');
     await user.click(button);
 
-    expect(button).toHaveClass('cds--copy-btn--animating');
+    expect(button).toHaveClass(`${prefix}--copy-btn--animating`);
     // eslint-disable-next-line testing-library/no-unnecessary-act
     act(() => {
       jest.runAllTimers();
       fireEvent.animationEnd(screen.getByTestId('copy-button-5'), {
-        animationName: 'hide-feedback',
+        animationName: `${prefix}--hide-feedback`,
       });
     });
-    expect(button).not.toHaveClass('cds--copy-btn--animating');
+    expect(button).not.toHaveClass(`${prefix}--copy-btn--animating`);
   });
 
   it('should be able to specify the feedback message', async () => {
@@ -134,14 +136,14 @@ describe('Feedback', () => {
     const button = screen.getByTestId('copy-button-7');
     await user.click(button);
 
-    expect(button).toHaveClass('cds--copy-btn--animating');
+    expect(button).toHaveClass(`${prefix}--copy-btn--animating`);
     // eslint-disable-next-line testing-library/no-unnecessary-act
     act(() => {
       jest.runAllTimers();
       fireEvent.animationEnd(screen.getByTestId('copy-button-7'), {
-        animationName: 'hide-feedback',
+        animationName: `${prefix}--hide-feedback`,
       });
     });
-    expect(button).not.toHaveClass('cds--copy-btn--animating');
+    expect(button).not.toHaveClass(`${prefix}--copy-btn--animating`);
   });
 });
