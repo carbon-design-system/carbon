@@ -62,6 +62,7 @@
     "cross-spawn": "^7.0.0",
     "doctoc": "^2.0.0",
     "eslint": "^8.40.0",
+    "eslint-plugin-playwright": "^0.22.1",
     "fs-extra": "^11.0.0",
     "glob": "^10.0.0",
     "husky": "^8.0.0",

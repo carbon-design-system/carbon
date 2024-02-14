@@ -450,27 +450,44 @@
   }
 
   // Slug styles
-  .#{$prefix}--modal--slug .#{$prefix}--modal-container {
-    @include callout-gradient();
-
-    background-color: $layer;
+  .#{$prefix}--modal--slug.#{$prefix}--modal {
+    background-color: $ai-overlay;
   }
 
-  // Start the gradient 64px from bottom only when two buttons are present
-  .#{$prefix}--modal--slug
-    .#{$prefix}--modal-container:has(
-      .#{$prefix}--btn-set:not(.#{$prefix}--modal-footer--three-button)
-        > button:not(:only-child)
-    ) {
-    @include callout-gradient('default', 64px);
+  .#{$prefix}--modal--slug .#{$prefix}--modal-container {
+    @include callout-gradient('default', 0, 'layer');
 
+    border: 1px solid transparent;
     background-color: $layer;
+    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
+      0 4px 10px 2px $ai-drop-shadow;
+  }
+
+  .#{$prefix}--modal--slug
+    .#{$prefix}--modal-container:has(.#{$prefix}--modal-footer) {
+    @include callout-gradient('default', 64px, 'layer');
+
+    box-shadow: inset 0 -80px 0 -16px $layer,
+      inset 0 -160px 70px -65px $ai-inner-shadow, 0 4px 10px 2px $ai-drop-shadow;
   }
 
   .#{$prefix}--modal--slug .#{$prefix}--slug {
     position: absolute;
     inset-block-start: 0;
     inset-inline-end: 0;
+  }
+
+  .#{$prefix}--modal--slug
+    .#{$prefix}--modal-content.#{$prefix}--modal-scroll-content {
+    mask-image: linear-gradient(
+        to bottom,
+        $layer calc(100% - 80px),
+        transparent calc(100% - 48px),
+        transparent 100%
+      ),
+      linear-gradient(to left, $layer 0, 16px, transparent 16px),
+      linear-gradient(to right, $layer 0, 2px, transparent 2px),
+      linear-gradient(to top, $layer 0, 2px, transparent 2px);
   }
 
   .#{$prefix}--modal-header
@@ -484,8 +501,14 @@
     inset-inline-end: convert.to-rem(48px);
   }
 
+  .#{$prefix}--modal--slug
+    .#{$prefix}--modal-content--overflow-indicator::before,
+  .#{$prefix}--modal--slug .#{$prefix}--modal-content--overflow-indicator {
+    display: none;
+  }
+
   // Windows HCM fix
-  /* stylelint-disable */
+  /* stylelint-disable no-duplicate-selectors */
   .#{$prefix}--modal-close__icon {
     @include high-contrast-mode('icon-fill');
   }
@@ -493,5 +516,5 @@
   .#{$prefix}--modal-close:focus {
     @include high-contrast-mode('focus');
   }
-  /* stylelint-enable */
+  /* stylelint-enable no-duplicate-selectors */
 }
