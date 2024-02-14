@@ -13,6 +13,7 @@ import {
   blue60,
   blue70,
   blue80,
+  blue100,
 
   // Gray
   gray10,
@@ -236,6 +237,9 @@ export const aiAuraHoverEnd = rgba(black, 0);
 // Callout
 export const slugCalloutShadowOuter01 = rgba(blue80, 0.25);
 export const slugCalloutShadowOuter02 = rgba(black, 0.65);
+
+// AI Modal tokens
+export const aiOverlay = rgba(blue100, 0.5);
 
 //// Not used in phase 2 / possibly remove?
 export const slugCalloutGradientTop = rgba(gray100, 0.85);

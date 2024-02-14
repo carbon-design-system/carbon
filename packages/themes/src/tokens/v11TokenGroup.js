@@ -382,6 +382,7 @@ export const ai = TokenGroup.create({
     'ai-border-start',
     'ai-border-end',
     'ai-drop-shadow',
+    'ai-overlay',
     // Caret tokens
     'slug-callout-caret-center',
     'slug-callout-caret-bottom',
