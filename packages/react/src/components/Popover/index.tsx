@@ -209,9 +209,16 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
   const floatingUIConfig = autoAlign
     ? {
         placement: shimmedAlign,
+
+        // The floating element is positioned relative to its nearest
+        // containing block (usually the viewport). It will in many cases also
+        // “break” the floating element out of a clipping ancestor.
+        // https://floating-ui.com/docs/misc#clipping
+        strategy: 'fixed',
+
         // Middleware order matters, arrow should be last
         middleware: [
-          // offset(-10),
+          offset(popoverOffsetPx.current || -10),
           flip({ fallbackAxisSideDirection: 'start' }),
           arrow({
             element: caretRef,
@@ -223,6 +230,11 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
 
   const { refs, floatingStyles, isPositioned, placement, middlewareData } =
     useFloating(floatingUIConfig);
+
+  useEffect(() => {
+    console.log('reference element');
+    console.log(refs.reference.current);
+  }, [refs]);
 
   console.log(middlewareData);
 
@@ -258,7 +270,7 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
     }
   }, [floatingStyles, refs.floating, autoAlign, middlewareData]);
 
-  const ref = useMergedRefs([forwardRef, popover, refs.setReference]);
+  const ref = useMergedRefs([forwardRef, popover]);
   const currentAlignment = autoAlign && placement !== align ? placement : align;
   const className = cx(
     {
@@ -268,7 +280,7 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
       [`${prefix}--popover--high-contrast`]: highContrast,
       [`${prefix}--popover--open`]: open,
       [`${prefix}--popover--auto-align`]: autoAlign,
-      [`${prefix}--popover--${currentAlignment}`]: true,
+      [`${prefix}--popover--${currentAlignment}`]: !autoAlign,
       [`${prefix}--popover--tab-tip`]: isTabTip,
     },
     customClassName
@@ -283,8 +295,32 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
         `${prefix}--popover--tab-tip__button`,
         className
       );
+
+      console.log(`mapping over children`);
+      console.log(child);
+
       return React.cloneElement(item, {
         className: tabTipClasses,
+
+        // With cloneElement, if you pass a `ref`, it overrides the original ref.
+        // https://react.dev/reference/react/cloneElement#parameters
+        // The block below works around this and ensures that the original ref is still
+        // called while allowing the floating-ui reference element to be set as well.
+        // `useMergedRefs` can't be used here because hooks can't be called from within a callback.
+        // More here: https://github.com/facebook/react/issues/8873#issuecomment-489579878
+        ref: (node) => {
+          // Set the reference element for floating-ui
+          refs.setReference(node);
+          console.log(`set reference node:`);
+          console.log(node);
+          // Call the original ref, if any
+          const { ref } = item;
+          if (typeof ref === 'function') {
+            ref(node);
+          } else if (ref !== null) {
+            ref.current = node;
+          }
+        },
       });
     } else {
       return item;
@@ -297,6 +333,7 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
   isPositioned: ${isPositioned}
   placement: ${placement}
   shimmedAlign: ${shimmedAlign}
+
 
   `);
 
