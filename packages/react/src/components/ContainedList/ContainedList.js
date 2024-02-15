@@ -58,6 +58,7 @@ function ContainedList({
   kind = variants[0],
   label,
   size,
+  ...rest
 }) {
   const labelId = `${useId('contained-list')}-header`;
   const prefix = usePrefix();
@@ -82,7 +83,7 @@ function ContainedList({
   const renderedChildren = renderChildren(children);
 
   return (
-    <div className={classes}>
+    <div className={classes} {...rest}>
       <div className={`${prefix}--contained-list__header`}>
         <div id={labelId} className={`${prefix}--contained-list__label`}>
           {label}

@@ -42,19 +42,48 @@ You also get this file when you import `@carbon/react` directly in your Sass.
 
 ## Setting the global theme
 
-Use the `GlobalTheme` component to set the theme for your entire project. By
-default, the global theme will be set to the `white` theme. You can change the
-global theme value by using the `theme` prop on `GlobalTheme`:
+To the set the theme for your entire project, the `GlobalTheme` component can be used.
+
+Please note that in contrast to `Theme` this does not apply any styles on its own but rather sets the context's theme according to the value you pass to its `theme` prop.
+
+This is due to the various options of applying global css custom properties which differ from application to application. Depending on your architecture you may want to apply a class to the `<body>` or add a custom data attribute to your `<html>` element:
 
 ```jsx
+import { useEffect } from 'react';
 import { GlobalTheme } from '@carbon/react';
 
-<GlobalTheme theme="g100">
-  <YourApp />
-</GlobalTheme>;
+function App() {
+  const theme = 'g100'; // ← your implementation, e.g. fetching user settings
+
+  useEffect(() => {
+    document.documentElement.dataset.carbonTheme = theme;
+  }, [theme]);
+
+  return (
+    <GlobalTheme theme={theme}>
+      <YourApp />
+    </GlobalTheme>;
+  );
+}
 ```
 
-Note: this component should be used at the root of your app.
+```scss
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/themes';
+
+:root[data-carbon-theme="g10"] {
+  @include theme.theme(themes.$g10);
+}
+
+:root[data-carbon-theme="g100"] {
+  @include theme.theme(themes.$g100);
+}
+```
+
+This way, the `GlobalTheme` component is used to "synchronize" the state of the application's context and your scss, so that other components and hooks like useTheme can work properly.
+For this reason, the component should be used as a wrapper of the root of your application.
+
+By default, the global theme is set to `white`.
 
 ## Setting an inline theme
 

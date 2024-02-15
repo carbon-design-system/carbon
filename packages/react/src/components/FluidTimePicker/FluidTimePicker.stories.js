@@ -19,7 +19,7 @@ import {
 import { Information } from '@carbon/icons-react';
 
 export default {
-  title: 'Experimental/unstable__FluidTimePicker',
+  title: 'Experimental/Fluid Components/unstable__FluidTimePicker',
   component: FluidTimePicker,
   subcomponents: {
     FluidTimePickerSelect,
