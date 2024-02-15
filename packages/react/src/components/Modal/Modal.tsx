@@ -6,7 +6,7 @@
  */
 
 import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
@@ -17,9 +17,12 @@ import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsT
 import wrapFocus, {
   elementOrParentIsFloatingMenu,
 } from '../../internal/wrapFocus';
+import debounce from 'lodash.debounce';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
+import { IconButton } from '../IconButton';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
 import { ReactAttr } from '../../types/common';
@@ -32,7 +35,7 @@ export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
 export type ModalSize = (typeof ModalSizes)[number];
 
 export interface ModalSecondaryButton {
-  buttonText?: string;
+  buttonText?: string | React.ReactNode;
 
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
@@ -236,7 +239,7 @@ const Modal = React.forwardRef(function Modal(
     shouldSubmitOnEnter,
     size,
     hasScrollingContent = false,
-    closeButtonLabel,
+    closeButtonLabel = 'Close',
     preventCloseOnClickOutside = false,
     isFullWidth,
     launcherButtonRef,
@@ -252,9 +255,11 @@ const Modal = React.forwardRef(function Modal(
   const prefix = usePrefix();
   const button = useRef<HTMLButtonElement>(null);
   const secondaryButton = useRef();
+  const contentRef = useRef<HTMLDivElement>(null);
   const innerModal = useRef<HTMLDivElement>(null);
   const startTrap = useRef<HTMLSpanElement>(null);
   const endTrap = useRef<HTMLSpanElement>(null);
+  const [isScrollable, setIsScrollable] = useState(false);
   const modalInstanceId = `modal-${getInstanceId()}`;
   const modalLabelId = `${prefix}--modal-header__label--${modalInstanceId}`;
   const modalHeadingId = `${prefix}--modal-header__heading--${modalInstanceId}`;
@@ -340,7 +345,7 @@ const Modal = React.forwardRef(function Modal(
   });
 
   const contentClasses = classNames(`${prefix}--modal-content`, {
-    [`${prefix}--modal-scroll-content`]: hasScrollingContent,
+    [`${prefix}--modal-scroll-content`]: hasScrollingContent || isScrollable,
   });
 
   const footerClasses = classNames(`${prefix}--modal-footer`, {
@@ -357,14 +362,15 @@ const Modal = React.forwardRef(function Modal(
     modalLabelStr || ariaLabelProp || modalAriaLabel || modalHeadingStr;
   const getAriaLabelledBy = modalLabel ? modalLabelId : modalHeadingId;
 
-  const hasScrollingContentProps = hasScrollingContent
-    ? {
-        tabIndex: 0,
-        role: 'region',
-        'aria-label': ariaLabel,
-        'aria-labelledby': getAriaLabelledBy,
-      }
-    : {};
+  const hasScrollingContentProps =
+    hasScrollingContent || isScrollable
+      ? {
+          tabIndex: 0,
+          role: 'region',
+          'aria-label': ariaLabel,
+          'aria-labelledby': getAriaLabelledBy,
+        }
+      : {};
 
   const alertDialogProps: ReactAttr<HTMLDivElement> = {};
   if (alert && passiveModal) {
@@ -425,6 +431,29 @@ const Modal = React.forwardRef(function Modal(
     }
   }, [open, selectorPrimaryFocus, danger, prefix]);
 
+  useIsomorphicEffect(() => {
+    if (contentRef.current) {
+      setIsScrollable(
+        contentRef.current.scrollHeight > contentRef.current.clientHeight
+      );
+    }
+
+    function handler() {
+      if (contentRef.current) {
+        setIsScrollable(
+          contentRef.current.scrollHeight > contentRef.current.clientHeight
+        );
+      }
+    }
+
+    const debouncedHandler = debounce(handler, 200);
+    window.addEventListener('resize', debouncedHandler);
+    return () => {
+      debouncedHandler.cancel();
+      window.removeEventListener('resize', debouncedHandler);
+    };
+  }, []);
+
   // Slug is always size `lg`
   let normalizedSlug;
   if (slug && slug['type']?.displayName === 'Slug') {
@@ -434,20 +463,23 @@ const Modal = React.forwardRef(function Modal(
   }
 
   const modalButton = (
-    <button
-      className={modalCloseButtonClass}
-      type="button"
-      onClick={onRequestClose}
-      title={ariaLabel}
-      aria-label={closeButtonLabel ? closeButtonLabel : 'close'}
-      ref={button}>
-      <Close
-        size={20}
-        aria-hidden="true"
-        tabIndex="-1"
-        className={`${modalCloseButtonClass}__icon`}
-      />
-    </button>
+    <div className={`${prefix}--modal-close-button`}>
+      <IconButton
+        className={modalCloseButtonClass}
+        label={closeButtonLabel}
+        onClick={onRequestClose}
+        title={closeButtonLabel}
+        aria-label={closeButtonLabel}
+        align="left"
+        ref={button}>
+        <Close
+          size={20}
+          aria-hidden="true"
+          tabIndex="-1"
+          className={`${modalCloseButtonClass}__icon`}
+        />
+      </IconButton>
+    </div>
   );
 
   const modalBody = (
@@ -479,14 +511,12 @@ const Modal = React.forwardRef(function Modal(
         {!passiveModal && modalButton}
       </div>
       <div
+        ref={contentRef}
         id={modalBodyId}
         className={contentClasses}
         {...hasScrollingContentProps}>
         {children}
       </div>
-      {hasScrollingContent && (
-        <div className={`${prefix}--modal-content--overflow-indicator`} />
-      )}
       {!passiveModal && (
         <ButtonSet className={footerClasses} aria-busy={loadingActive}>
           {Array.isArray(secondaryButtons) && secondaryButtons.length <= 2

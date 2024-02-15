@@ -306,7 +306,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       }
 
       const state = {
-        value: event.target.value,
+        value: Number(event.target.value),
         direction: value < event.target.value ? 'up' : 'down',
       };
       setValue(state.value);

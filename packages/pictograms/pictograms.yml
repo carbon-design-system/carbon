@@ -261,6 +261,12 @@
     - study
     - magnify
     - review
+- name: analyze--code
+  friendly_name: Analyze code
+  aliases:
+    - code
+    - analyze
+    - inspect
 - name: analyzes--data
   friendly_name: Analyzes data
   aliases:
@@ -591,6 +597,12 @@
     - tower
     - city
     - cities
+- name: bento-box-tray
+  friendly_name: Bento box tray
+  aliases:
+    - lunchbox
+    - recycle
+    - recycling
 - name: berlin--brandenburg-gate
   friendly_name: Berlin Brandenburg Gate
   aliases:
@@ -1272,6 +1284,98 @@
   aliases:
     - choose how to get started
     - cloud
+- name: cics--configuration-manager-for-z-os
+  friendly_name: IBM® CICS® Configuration Manager for z/OS®
+  aliases:
+    - cics tools
+    - cics cm
+    - configuration
+    - configure
+    - zOS
+    - Z
+    - settings
+    - gear
+    - circle
+- name: cics--deployment-assistant
+  friendly_name: IBM® CICS® Deployment Assistant
+  aliases:
+    - cics tools
+    - deployment
+    - assistant
+    - zOS
+    - Z
+    - circle
+    - arrow
+    - launch
+- name: cics--explorer
+  friendly_name: IBM® CICS Explorer
+  aliases:
+    - cics explorer
+    - navigation
+    - star
+    - circle
+    - compass
+- name: cics--interdependency-analyzer-for-z-os
+  friendly_name: IBM® CICS® Interdependency Analyzer for z/OS®
+  aliases:
+    - cics tools
+    - cics ia
+    - interdependency
+    - analyzer
+    - zOS
+    - Z
+    - bar chart
+    - org chart
+    - circle
+- name: cics--performance-analyzer-for-z-os
+  friendly_name: IBM® CICS® Performance Analyzer for z/OS®
+  aliases:
+    - cics tools
+    - cics pa
+    - performance
+    - analyzer
+    - zOS
+    - Z
+- name: cics--transaction-gateway
+  friendly_name: IBM® CICS Transaction Gateway
+  aliases:
+    - cics transaction
+    - gateway
+    - circle
+- name: cics--transaction-server-for-z-os
+  friendly_name: IBM® CICS Transaction Server for z/OS®
+  aliases:
+    - cics transaction server
+    - cics ts
+    - zOS
+    - Z
+    - cloud
+    - circle
+- name: cics--tx
+  friendly_name: IBM® CICS TX
+  aliases:
+    - cics tx
+    - transaction
+    - cloud
+- name: cics--vsam-recovery-for-z-os
+  friendly_name: IBM® CICS® VSAM Recovery for z/OS®
+  aliases:
+    - cics tools
+    - cics vr
+    - VSAM
+    - recovery
+    - zOS
+    - Z
+    - circle
+- name: cics--vsam-transparency-for-z-os
+  friendly_name: IBM® CICS® VSAM Transparency for z/OS®
+  aliases:
+    - cics tools
+    - cics vt
+    - VSAM
+    - transparency
+    - zOS
+    - Z
 - name: circle--packing
   friendly_name: Circle packing
   aliases:
@@ -2345,6 +2449,12 @@
     - warning
     - caution
     - don't
+- name: do-not-step
+  friendly_name: Do not step
+  aliases:
+    - do not step
+    - foot
+    - shoe
 - name: docker
   friendly_name: Docker
   aliases:
@@ -3120,6 +3230,32 @@
     - file
     - document
     - catalog
+- name: football
+  friendly_name: Football
+  aliases:
+    - football
+    - sports
+    - ball
+    - game
+    - gridiron
+- name: football--field
+  friendly_name: Football field
+  aliases:
+    - football
+    - field
+    - sports
+    - fantasy football
+    - gridiron
+- name: football--goal-post
+  friendly_name: Football goal post
+  aliases:
+    - football
+    - field
+    - sports
+    - fantasy football
+    - gridiron
+    - goal post
+    - uprights
 - name: forecasting
   friendly_name: Forecasting
   aliases:
@@ -3190,6 +3326,15 @@
     - gift box
     - gift
     - present
+- name: glass-bottle-and-metal-can
+  friendly_name: Glass bottle and metal can
+  aliases:
+    - glass and metal recycle
+    - bottle
+    - can
+    - aluminum
+    - recycle
+    - recycling
 - name: global--analytics
   friendly_name: Global analytics
   aliases:
@@ -3346,6 +3491,38 @@
     - target
     - goals
     - checkpoint
+- name: golf--bag
+  friendly_name: Golf bag
+  aliases:
+    - golf
+    - golf bag
+    - golf clubs
+    - masters
+    - sports
+- name: golf--ball
+  friendly_name: Golf ball
+  aliases:
+    - golf
+    - golf ball
+    - masters
+    - sports
+- name: golf--club
+  friendly_name: Golf club
+  aliases:
+    - golf
+    - golf club
+    - masters
+    - sports
+- name: golf--hole
+  friendly_name: Golf hole
+  aliases:
+    - golf
+    - golf hole
+    - golf course
+    - flag
+    - hole in one
+    - masters
+    - sports
 - name: govern--users--and--identities
   friendly_name: Govern Users and Identities
   aliases:
@@ -3382,6 +3559,12 @@
     - GPU
     - computing
     - cloud
+- name: gramophone
+  friendly_name: Gramophone
+  aliases:
+    - gramophone
+    - grammys
+    - award
 - name: graphic-design
   friendly_name: Graphic design
   aliases:
@@ -3795,6 +3978,18 @@
     - Z LPAR
     - Z partition
     - Z DPM mode partition
+- name: ibm--z-and-cloud-modernization-stack
+  friendly_name: IBM Z® and Cloud Modernization Stack
+  aliases:
+    - z mod stack
+    - stack
+    - integration
+    - optimization
+    - transformation
+    - migration
+    - converge
+    - continuous
+    - deploy
 - name: ibm--z-and-linuxone-multi-frame
   friendly_name: IBM Z® and LinuxONE multi-frame
   aliases:
@@ -4184,6 +4379,14 @@
     - hyperlink
     - url
     - reference
+- name: liquids
+  friendly_name: Liquids
+  aliases:
+    - pour
+    - water
+    - disposal
+    - recycle
+    - recycling
 - name: list--bullet
   friendly_name: List bullet
   aliases:
@@ -4377,6 +4580,16 @@
   aliases:
     - mail
     - verse
+- name: mainframe-qualities-of-service
+  friendly_name: Mainframe qualties of service
+  aliases:
+    - IBM
+    - IBM Z
+    - Z
+    - mainframe
+    - reliability
+    - availablility
+    - serviceability
 - name: manage-applications-anywhere
   friendly_name: Manage applications anywhere
   aliases:
@@ -4526,6 +4739,14 @@
     - memory
     - RAM
     - cloud
+- name: metal-can
+  friendly_name: Metal can
+  aliases:
+    - metal recycle
+    - can
+    - aluminum
+    - recycle
+    - recycling
 - name: meter
   friendly_name: Meter
   aliases:
@@ -5280,6 +5501,15 @@
     - planning
     - analytics
     - data
+- name: plastics
+  friendly_name: Plastics
+  aliases:
+    - plastic bag
+    - bottle
+    - tray
+    - container
+    - recycle
+    - recycling
 - name: platform-as-a-service
   friendly_name: Platform-as-a-service
   aliases:
@@ -6267,6 +6497,11 @@
   aliases:
     - slack
     - communication app
+- name: slice-code
+  friendly_name: Slice code
+  aliases:
+    - code
+    - slice
 - name: slider
   friendly_name: Slider
   aliases:
@@ -6412,6 +6647,14 @@
     - workplace
     - community
     - fitness
+- name: spotlight
+  friendly_name: Spotlight
+  aliases:
+    - stage
+    - theater
+    - showtime
+    - show
+    - performance
 - name: sprout
   friendly_name: Sprout
   aliases:
@@ -6427,6 +6670,14 @@
   aliases:
     - stack limitation
     - packaging
+- name: stage
+  friendly_name: Stage
+  aliases:
+    - stage
+    - theater
+    - showtime
+    - show
+    - performance
 - name: stairs
   friendly_name: Stairs
   aliases:
@@ -6561,6 +6812,13 @@
     - servers
     - infrastructure
     - it infrastructure
+- name: storage--systems
+  friendly_name: Storage systems
+  aliases:
+    - Storage
+    - software storage
+    - storage product
+    - storage systems
 - name: strategy
   friendly_name: Strategy
   aliases:
@@ -6973,6 +7231,31 @@
     - lifestyle
     - active
     - exercise
+- name: tennis--ball
+  friendly_name: Tennis ball
+  aliases:
+    - tennis
+    - tennis ball
+    - tennis racquet
+    - wimbledon
+    - us open
+    - sports
+- name: tennis--net
+  friendly_name: Tennis net
+  aliases:
+    - tennis
+    - court
+    - net
+    - sports
+- name: tennis--racquet
+  friendly_name: Tennis racquet
+  aliases:
+    - tennis
+    - tennis ball
+    - tennis racquet
+    - wimbledon
+    - us open
+    - sports
 - name: test--tubes
   friendly_name: Test tubes
   aliases:
@@ -7685,6 +7968,32 @@
     - AI
     - data
     - workload
+- name: watsonx--code-assistant
+  friendly_name: IBM® watsonx™ Code Assistant
+  aliases:
+    - IBM
+    - watsonx
+    - Watson
+    - Code Assistant
+- name: watsonx--code-assistant-for-z
+  friendly_name: IBM® watsonx™ Code Assistant for Z
+  aliases:
+    - IBM
+    - watsonx
+    - Watson
+    - Code Assistant
+    - IBM Z
+    - Z
+- name: watsonx--code-assistant-for-z-refactor
+  friendly_name: IBM® watsonx™ Code Assistant for Z Refactor
+  aliases:
+    - IBM
+    - watsonx
+    - Watson
+    - Code Assistant
+    - IBM Z
+    - Z
+    - refactor
 - name: watsonx--data
   friendly_name: IBM® watsonx.data™
   aliases:
@@ -7763,6 +8072,13 @@
     - farming
     - agriculture
     - industry
+- name: whistle
+  friendly_name: Whistle
+  aliases:
+    - whistle
+    - referee
+    - football
+    - official
 - name: wifi
   friendly_name: WiFi
   aliases:

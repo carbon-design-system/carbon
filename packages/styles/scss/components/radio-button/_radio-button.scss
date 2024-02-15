@@ -77,6 +77,8 @@ $radio-border-width: 1px !default;
 
   .#{$prefix}--radio-button__label-text {
     @include type.type-style('body-compact-01');
+
+    flex: 1;
   }
 
   .#{$prefix}--radio-button__appearance {

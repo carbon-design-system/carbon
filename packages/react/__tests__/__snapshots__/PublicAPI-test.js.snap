@@ -109,9 +109,7 @@ Map {
       "closeOnEscape": Object {
         "type": "bool",
       },
-      "hasFocus": Object {
-        "type": "bool",
-      },
+      "hasFocus": [Function],
       "hideCloseButton": Object {
         "type": "bool",
       },
@@ -1374,6 +1372,19 @@ Map {
         "isRequired": true,
         "type": "string",
       },
+      "menuAlignment": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-start",
+            "top-end",
+            "bottom",
+            "bottom-start",
+            "bottom-end",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "onClick": Object {
         "type": "func",
       },
@@ -1927,11 +1938,6 @@ Map {
     },
     "TableCell": Object {
       "displayName": "TableCell",
-      "propTypes": Object {
-        "className": Object {
-          "type": "string",
-        },
-      },
     },
     "TableContainer": Object {
       "propTypes": Object {
@@ -4133,6 +4139,12 @@ Map {
     },
     "render": [Function],
   },
+  "IconButtonKinds" => Object {
+    "0": "primary",
+    "1": "secondary",
+    "2": "ghost",
+    "3": "tertiary",
+  },
   "IconSkeleton" => Object {
     "propTypes": Object {
       "className": Object {
@@ -4466,6 +4478,9 @@ Map {
       "label": Object {
         "type": "string",
       },
+      "menuAlignment": Object {
+        "type": "string",
+      },
       "mode": Object {
         "args": Array [
           Array [
@@ -4563,6 +4578,19 @@ Map {
       "label": Object {
         "isRequired": true,
         "type": "string",
+      },
+      "menuAlignment": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-start",
+            "top-end",
+            "bottom",
+            "bottom-start",
+            "bottom-end",
+          ],
+        ],
+        "type": "oneOf",
       },
       "size": Object {
         "args": Array [
@@ -7177,6 +7205,44 @@ Map {
     },
     "render": [Function],
   },
+  "StaticNotification" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "error",
+            "info",
+            "info-square",
+            "success",
+            "warning",
+            "warning-alt",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "lowContrast": Object {
+        "type": "bool",
+      },
+      "statusIconDescription": Object {
+        "type": "string",
+      },
+      "subtitle": Object {
+        "type": "string",
+      },
+      "title": Object {
+        "type": "string",
+      },
+      "titleId": Object {
+        "type": "string",
+      },
+    },
+  },
   "StructuredListBody" => Object {
     "propTypes": Object {
       "children": Object {
@@ -7378,6 +7444,9 @@ Map {
       },
       "index": Object {
         "type": "number",
+      },
+      "onClick": Object {
+        "type": "func",
       },
       "onKeyDown": Object {
         "type": "func",
@@ -7651,11 +7720,6 @@ Map {
   },
   "TableCell" => Object {
     "displayName": "TableCell",
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-    },
   },
   "TableContainer" => Object {
     "propTypes": Object {
@@ -9117,6 +9181,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "id": Object {
+        "type": "string",
+      },
       "isExpanded": Object {
         "type": "bool",
       },
@@ -9200,6 +9267,9 @@ Map {
         },
         "disabled": Object {
           "type": "bool",
+        },
+        "id": Object {
+          "type": "string",
         },
         "isExpanded": Object {
           "type": "bool",
@@ -9613,6 +9683,66 @@ Map {
       },
       "getTextDirection": Object {
         "type": "func",
+      },
+    },
+  },
+  "unstable__ChatButton" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "isQuickAction": Object {
+        "type": "bool",
+      },
+      "isSelected": Object {
+        "type": "bool",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "primary",
+            "secondary",
+            "danger",
+            "ghost",
+            "tertiary",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable__ChatButtonSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
   },

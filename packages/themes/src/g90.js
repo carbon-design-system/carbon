@@ -12,6 +12,9 @@ import {
   blue40,
   blue60,
   blue70,
+  blue70Hover,
+  blue80,
+  blue100,
 
   // Gray
   gray10,
@@ -123,12 +126,12 @@ export const fieldHover03 = gray60Hover;
 export const borderSubtle00 = gray70;
 
 // border-subtle-01
-export const borderSubtle01 = gray70;
-export const borderSubtleSelected01 = gray60;
+export const borderSubtle01 = gray60;
+export const borderSubtleSelected01 = gray50;
 
 // border-subtle-02
-export const borderSubtle02 = gray60;
-export const borderSubtleSelected02 = gray50;
+export const borderSubtle02 = gray50;
+export const borderSubtleSelected02 = gray40;
 
 // border-subtle-03
 export const borderSubtle03 = gray50;
@@ -218,10 +221,40 @@ export const slugGradient = `${gray50} linear-gradient(135deg, ${gray10} 0%, rgb
 export const slugBackgroundHover = gray20;
 export const slugGradientHover = `${gray40} linear-gradient(135deg, ${white} 0%, rgba(${white}, 0) 100%)`;
 export const slugHollowHover = gray30Hover;
+
+//// Phase 2 - new \\\\
+// Shared
+export const aiInnerShadow = rgba(blue50, 0.2);
+export const aiAuraStartTable = rgba(blue50, 0.15);
+export const aiAuraStart = rgba(blue50, 0.1);
+export const aiAuraEnd = rgba(black, 0);
+export const aiBorderStrong = blue40;
+export const aiBorderStart = blue50;
+export const aiBorderEnd = rgba(blue30, 0.24);
+export const aiDropShadow = rgba(blue60, 0.32);
+export const aiAuraHoverBackground = layerHover01;
+export const aiAuraHoverStart = rgba(blue50, 0.4);
+export const aiAuraHoverEnd = rgba(black, 0);
+
+// Callout
+export const slugCalloutShadowOuter01 = rgba(blue80, 0.25);
+export const slugCalloutShadowOuter02 = rgba(black, 0.65);
+
+// AI skeleton
+export const aiSkeletonBackground = blue70Hover;
+export const aiSkeletonElementBackground = blue100;
+
+// AI Modal tokens
+export const aiOverlay = rgba(blue100, 0.5);
+
+//// Not used in phase 2 / possibly remove?
 export const slugCalloutGradientTop = rgba(gray100, 0.85);
 export const slugCalloutGradientBottom = rgba(gray90, 0.85);
-export const slugCalloutAuraStart = rgba(blue20, 0.2);
-export const slugCalloutAuraEnd = rgba(gray100, 0);
+export const aiGradientStart01 = rgba(blue20, 0.2);
+export const aiGradientStart02 = 'transparent';
+export const aiGradientEnd = 'rgba(38, 38, 38, 0)';
+export const slugCalloutAuraStart = aiAuraStart;
+export const slugCalloutAuraEnd = aiAuraEnd;
 export const slugCalloutGradientTopHover = rgba(gray80, 0.55);
 export const slugCalloutGradientBottomHover = rgba(gray80Hover, 0.55);
 export const slugCalloutAuraStartHover01 = rgba(blue20Hover, 0.3);
@@ -232,10 +265,23 @@ export const slugCalloutGradientTopSelected = rgba(gray80, 0.85);
 export const slugCalloutGradientBottomSelected = rgba(gray80Hover, 0.85);
 export const slugCalloutAuraStartSelected = rgba(blue20, 0.2);
 export const slugCalloutAuraEndSelected = rgba(gray100, 0);
-// Linear gradient tokens
-export const aiGradientStart01 = rgba(blue20, 0.2);
-export const aiGradientStart02 = 'transparent';
-export const aiGradientEnd = 'rgba(38, 38, 38, 0)';
+
+// One off tokens for caret
+export const slugCalloutCaretCenter = '#456FB5';
+export const slugCalloutCaretBottom = '#465060';
+export const slugCalloutCaretBottomBackgroundActions = '#253042';
+export const slugCalloutCaretBottomBackground = '#2D3F5C';
+
+// Chat tokens
+export const chatPromptBackground = gray100;
+export const chatPromptBorderStart = gray90;
+export const chatPromptBorderEnd = rgba(gray90, 0);
+export const chatBubbleUser = gray80;
+export const chatBubbleAgent = gray90;
+export const chatBubbleAgentBorder = gray70;
+export const chatAvatarBot = gray50;
+export const chatAvatarAgent = gray30;
+export const chatAvatarUser = blue50;
 
 export {
   // Type

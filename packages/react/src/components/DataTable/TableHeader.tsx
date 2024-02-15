@@ -17,23 +17,26 @@ import { sortStates } from './state/sorting';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
+import { DataTableSortState } from './state/sortStates';
 
 const defaultScope = 'col';
 
-const translationKeys: { [key: string]: string } = {
+export type TableHeaderTranslationKey = 'carbon.table.header.icon.description';
+
+export interface TableHeaderTranslationArgs {
+  header: React.ReactNode;
+  isSortHeader?: boolean;
+  sortDirection?: DataTableSortState;
+  sortStates: typeof sortStates;
+}
+
+const translationKeys: { [key: string]: TableHeaderTranslationKey } = {
   buttonDescription: 'carbon.table.header.icon.description',
 };
 
-interface translateWithIdAdditionalArgs {
-  header?: string;
-  sortDirection?: string;
-  isSortHeader?: boolean;
-  sortStates?: typeof sortStates;
-}
-
 const translateWithId = (
-  key: string,
-  args?: translateWithIdAdditionalArgs
+  key: TableHeaderTranslationKey,
+  args?: TableHeaderTranslationArgs
 ): string => {
   if (args && key === translationKeys.buttonDescription) {
     if (args.isSortHeader && sortStates) {
@@ -123,7 +126,7 @@ interface TableHeaderProps
    * this component.
    */
   translateWithId?: (
-    key: string,
+    key: TableHeaderTranslationKey,
     { header, sortDirection, isSortHeader, sortStates }
   ) => string;
 }
@@ -231,12 +234,12 @@ const TableHeader = React.forwardRef(function TableHeader(
         {...rest}>
         <span className={`${prefix}--table-sort__flex`}>
           <div className={`${prefix}--table-header-label`}>{children}</div>
-          {normalizedSlug}
           <Arrow size={20} className={`${prefix}--table-sort__icon`} />
           <Arrows
             size={20}
             className={`${prefix}--table-sort__icon-unsorted`}
           />
+          {normalizedSlug}
         </span>
       </button>
     </th>
