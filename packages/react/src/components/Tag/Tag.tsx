@@ -68,6 +68,11 @@ export interface TagBaseProps {
   renderIcon?: React.ElementType;
 
   /**
+   * Selectable tags are used to select or unselect single or multiple items
+   */
+  selectable?: boolean;
+
+  /**
    * Specify the size of the Tag. Currently supports either `sm` or
    * 'md' (default) sizes.
    */
@@ -104,6 +109,7 @@ const Tag = <T extends React.ElementType>({
   title = 'Clear filter',
   disabled,
   onClose,
+  selectable,
   size,
   as: BaseComponent,
   slug,
@@ -114,6 +120,7 @@ const Tag = <T extends React.ElementType>({
   const tagClasses = classNames(`${prefix}--tag`, className, {
     [`${prefix}--tag--disabled`]: disabled,
     [`${prefix}--tag--filter`]: filter,
+    [`${prefix}--tag--selectable`]: selectable,
     [`${prefix}--tag--${size}`]: size, // TODO: V12 - Remove this class
     [`${prefix}--layout--size-${size}`]: size,
     [`${prefix}--tag--${type}`]: type,
@@ -234,6 +241,11 @@ Tag.propTypes = {
    * Can be a React component class
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
+   * Selectable tags are used to select or unselect single or multiple items
+   */
+  selectable: PropTypes.bool,
 
   /**
    * Specify the size of the Tag. Currently supports either `sm` or
