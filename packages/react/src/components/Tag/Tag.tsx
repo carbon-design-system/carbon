@@ -71,7 +71,7 @@ export interface TagBaseProps {
    * Specify the size of the Tag. Currently supports either `sm` or
    * 'md' (default) sizes.
    */
-  size?: 'sm' | 'md';
+  size?: 'sm' | 'md' | 'lg';
 
   /**
    * **Experimental:** Provide a `Slug` component to be rendered inside the `Tag` component
@@ -239,7 +239,7 @@ Tag.propTypes = {
    * Specify the size of the Tag. Currently supports either `sm` or
    * 'md' (default) sizes.
    */
-  size: PropTypes.oneOf(['sm', 'md']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * **Experimental:** Provide a `Slug` component to be rendered inside the `Tag` component

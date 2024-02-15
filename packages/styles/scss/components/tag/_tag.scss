@@ -31,12 +31,13 @@
             xs: convert.to-rem(18px),
             sm: convert.to-rem(18px),
             md: convert.to-rem(24px),
+            lg: convert.to-rem(32px),
           ),
         ),
       )
     );
 
-    @include layout.use('size', $default: 'md', $min: 'sm', $max: 'md');
+    @include layout.use('size', $default: 'md', $min: 'sm', $max: 'lg');
 
     @include type-style('label-01');
     @include tag-theme($tag-background-gray, $tag-color-gray, $tag-hover-gray);
