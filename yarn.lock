@@ -13045,7 +13045,7 @@ __metadata:
       optional: true
   bin:
     esbuild: bin/esbuild
-  checksum: 10/04304b84cfc9f566420c1f511b0f1105762844886a7f15c0b07a5a1ce0d62d50b50dd41960265aacaf51cb299ff41ced373140561b01c4b7e34e803a3e8a45b8
+  checksum: 10/d881b7462fac5ceea071417984bfb835f60c1ddf83bc018c755cbd7aefedfde13e9e1aec730d4605f5d7ac61cbe0ac5d37a73c9401abe8afb7c39458d84bbfa3
   languageName: node
   linkType: hard
 
