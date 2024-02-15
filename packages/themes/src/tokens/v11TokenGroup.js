@@ -373,6 +373,7 @@ export const ai = TokenGroup.create({
     // Linear gradient refactor
     'ai-inner-shadow',
     'ai-aura-start',
+    'ai-aura-start-table',
     'ai-aura-end',
     'ai-aura-hover-background',
     'ai-aura-hover-start',
@@ -381,6 +382,9 @@ export const ai = TokenGroup.create({
     'ai-border-start',
     'ai-border-end',
     'ai-drop-shadow',
+    'ai-skeleton-background',
+    'ai-skeleton-element-background',
+    'ai-overlay',
     // Caret tokens
     'slug-callout-caret-center',
     'slug-callout-caret-bottom',

@@ -1030,6 +1030,10 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "ai-aura-start-table",
+          "type": "color",
+        },
+        Object {
           "name": "ai-aura-end",
           "type": "color",
         },
@@ -1059,6 +1063,18 @@ test('metadata', () => {
         },
         Object {
           "name": "ai-drop-shadow",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-skeleton-background",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-skeleton-element-background",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-overlay",
           "type": "color",
         },
         Object {
