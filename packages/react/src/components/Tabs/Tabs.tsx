@@ -404,7 +404,9 @@ function TabList({
     ) {
       event.preventDefault();
 
-      const activeTabs: TabElement[] = tabs.current.filter(
+      const filtredTabs = tabs.current.filter((tab) => tab !== null);
+
+      const activeTabs: TabElement[] = filtredTabs.filter(
         (tab) => !tab.disabled
       );
 
@@ -420,7 +422,6 @@ function TabList({
       } else if (activation === 'manual') {
         setActiveIndex(nextIndex);
       }
-
       tabs.current[nextIndex]?.focus();
     }
   }

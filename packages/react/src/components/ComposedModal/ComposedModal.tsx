@@ -13,11 +13,12 @@ import { isElement } from 'react-is';
 import PropTypes, { ReactNodeLike } from 'prop-types';
 import { ModalHeader, type ModalHeaderProps } from './ModalHeader';
 import { ModalFooter, type ModalFooterProps } from './ModalFooter';
+import debounce from 'lodash.debounce';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+import mergeRefs from '../../tools/mergeRefs';
 import cx from 'classnames';
-
 import toggleClass from '../../tools/toggleClass';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
-
 import wrapFocus from '../../internal/wrapFocus';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
@@ -50,23 +51,49 @@ export const ModalBody = React.forwardRef<HTMLDivElement, ModalBodyProps>(
     ref
   ) {
     const prefix = usePrefix();
-    const contentClass = cx(
-      `${prefix}--modal-content`,
-      hasForm && `${prefix}--modal-content--with-form`,
-      hasScrollingContent && `${prefix}--modal-scroll-content`,
-      customClassName
-    );
+    const contentRef = useRef<HTMLDivElement>(null);
+    const [isScrollable, setIsScrollable] = useState(false);
+    const contentClass = cx({
+      [`${prefix}--modal-content`]: true,
+      [`${prefix}--modal-content--with-form`]: hasForm,
+      [`${prefix}--modal-scroll-content`]: hasScrollingContent || isScrollable,
+      customClassName,
+    });
 
-    const hasScrollingContentProps = hasScrollingContent
-      ? { tabIndex: 0, role: 'region' }
-      : {};
+    useIsomorphicEffect(() => {
+      if (contentRef.current) {
+        setIsScrollable(
+          contentRef.current.scrollHeight > contentRef.current.clientHeight
+        );
+      }
+
+      function handler() {
+        if (contentRef.current) {
+          setIsScrollable(
+            contentRef.current.scrollHeight > contentRef.current.clientHeight
+          );
+        }
+      }
+
+      const debouncedHandler = debounce(handler, 200);
+      window.addEventListener('resize', debouncedHandler);
+      return () => {
+        debouncedHandler.cancel();
+        window.removeEventListener('resize', debouncedHandler);
+      };
+    }, []);
+
+    const hasScrollingContentProps =
+      hasScrollingContent || isScrollable
+        ? { tabIndex: 0, role: 'region' }
+        : {};
 
     return (
       <div
         className={contentClass}
         {...hasScrollingContentProps}
         {...rest}
-        ref={ref}>
+        ref={mergeRefs(contentRef, ref)}>
         {children}
       </div>
     );

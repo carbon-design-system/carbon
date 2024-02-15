@@ -142,6 +142,7 @@ const files = [
   'scss/components/select/_select.scss',
   'scss/components/skeleton-styles/_index.scss',
   'scss/components/skeleton-styles/_skeleton-styles.scss',
+  'scss/components/skeleton-styles/_ai-skeleton-styles.scss',
   'scss/components/slider/_index.scss',
   'scss/components/slider/_slider.scss',
   'scss/components/slug/_index.scss',
