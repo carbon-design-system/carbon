@@ -12,6 +12,7 @@ import {
   blue40,
   blue60,
   blue70,
+  blue70Hover,
   blue80,
   blue100,
 
@@ -238,6 +239,10 @@ export const aiAuraHoverEnd = rgba(black, 0);
 // Callout
 export const slugCalloutShadowOuter01 = rgba(blue80, 0.25);
 export const slugCalloutShadowOuter02 = rgba(black, 0.65);
+
+// AI skeleton
+export const aiSkeletonBackground = blue70Hover;
+export const aiSkeletonElementBackground = blue100;
 
 // AI Modal tokens
 export const aiOverlay = rgba(blue100, 0.5);
