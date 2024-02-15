@@ -10,18 +10,20 @@ import PropTypes from 'prop-types';
 import React, {
   ComponentType,
   ElementType,
+  ForwardedRef,
   ReactNode,
-  Ref,
+  WeakValidationMap,
+  forwardRef,
   useContext,
 } from 'react';
-import Link, { LinkPropTypes } from './Link';
+import Link, { LinkProps, LinkPropTypes } from './Link';
 import SideNavIcon from './SideNavIcon';
 import SideNavItem from './SideNavItem';
 import SideNavLinkText from './SideNavLinkText';
 import { usePrefix } from '../../internal/usePrefix';
 import { SideNavContext } from './SideNav';
 
-interface SideNavLinkProps {
+export type SideNavLinkProps<E extends ElementType> = LinkProps<E> & {
   /**
    * Required props for the accessibility label
    */
@@ -65,55 +67,63 @@ interface SideNavLinkProps {
    * Optional prop to specify the tabIndex of the button. If undefined, it will be applied default validation
    */
   tabIndex?: number;
+};
+
+export interface SideNavLinkComponent {
+  <E extends ElementType = 'a'>(
+    props: SideNavLinkProps<E> & { ref?: ForwardedRef<ElementType> }
+  ): JSX.Element | null;
+  displayName?: string;
+  propTypes?: WeakValidationMap<SideNavLinkProps<any>>;
 }
 
-const SideNavLink: React.FC<SideNavLinkProps> = React.forwardRef(
-  function SideNavLink(
-    {
-      children,
-      className: customClassName = '',
-      renderIcon: IconElement,
-      isActive,
-      isSideNavExpanded,
-      large = false,
-      tabIndex,
-      ...rest
-    },
-    ref
-  ) {
-    const isRail = useContext(SideNavContext);
+const SideNavLink: SideNavLinkComponent = forwardRef(function SideNavLink<
+  E extends ElementType = 'a'
+>(
+  {
+    children,
+    className: customClassName = '',
+    renderIcon: IconElement,
+    isActive,
+    isSideNavExpanded,
+    large = false,
+    tabIndex,
+    ...rest
+  }: SideNavLinkProps<E>,
+  ref: ForwardedRef<ElementType>
+) {
+  const isRail = useContext(SideNavContext);
 
-    const prefix = usePrefix();
-    const className = cx({
-      [`${prefix}--side-nav__link`]: true,
-      [`${prefix}--side-nav__link--current`]: isActive,
-      [customClassName]: !!customClassName,
-    });
+  const prefix = usePrefix();
+  const className = cx({
+    [`${prefix}--side-nav__link`]: true,
+    [`${prefix}--side-nav__link--current`]: isActive,
+    [customClassName]: !!customClassName,
+  });
 
-    return (
-      <SideNavItem large={large}>
-        <Link
-          {...rest}
-          className={className}
-          ref={ref as Ref<ElementType>}
-          tabIndex={
-            tabIndex === undefined
-              ? !isSideNavExpanded && !isRail
-                ? -1
-                : 0
-              : tabIndex
-          }>
-          {IconElement && (
-            <SideNavIcon small>
-              <IconElement />
-            </SideNavIcon>
-          )}
-          <SideNavLinkText>{children}</SideNavLinkText>
-        </Link>
-      </SideNavItem>
-    );
-  }
-);
+  return (
+    <SideNavItem large={large}>
+      <Link
+        {...rest}
+        className={className}
+        ref={ref}
+        tabIndex={
+          tabIndex === undefined
+            ? !isSideNavExpanded && !isRail
+              ? -1
+              : 0
+            : tabIndex
+        }>
+        {IconElement && (
+          <SideNavIcon small>
+            <IconElement />
+          </SideNavIcon>
+        )}
+        <SideNavLinkText>{children}</SideNavLinkText>
+      </Link>
+    </SideNavItem>
+  );
+});
 
 SideNavLink.displayName = 'SideNavLink';
 SideNavLink.propTypes = {
