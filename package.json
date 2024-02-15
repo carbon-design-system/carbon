@@ -26,7 +26,7 @@
     "sync": "carbon-cli sync",
     "test": "cross-env BABEL_ENV=test jest",
     "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js",
-    "postinstall": "husky install"
+    "postinstall": "husky"
   },
   "resolutions": {
     "@types/react": "~18.2.33",
