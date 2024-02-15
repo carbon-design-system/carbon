@@ -8,11 +8,11 @@
 import { ThHTMLAttributes } from 'react';
 import wrapComponent from '../../tools/wrapComponent';
 
+export type TableHeadProps = ThHTMLAttributes<HTMLTableSectionElement>;
+
 const TableHead = wrapComponent({
   name: 'TableHead',
   type: 'thead',
 });
-
-export type TableHeadProps = ThHTMLAttributes<HTMLTableSectionElement>;
 
 export default TableHead;

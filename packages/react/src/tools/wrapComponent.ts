@@ -54,7 +54,7 @@ const wrapComponent = <T extends HTMLTagName>({
     className: PropTypes.string,
   };
 
-  return Component;
+  return Component as (props: ReactAttr<T>) => React.ReactElement;
 };
 
 export default wrapComponent;
