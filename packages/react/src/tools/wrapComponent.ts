@@ -16,12 +16,8 @@ type HTMLTagName = keyof HTMLElementTagNameMap;
 type WrapComponentArgs<T extends HTMLTagName> = {
   name: string;
   type: T;
-  className: string | ((prefix: string) => string);
+  className?: string | ((prefix: string) => string);
 };
-
-type WrapComponentReturn<T extends HTMLTagName> = (
-  props: ReactAttr<T>
-) => React.ReactElement;
 
 /**
  * @param {{ name: string, type: string, className?: string | (prefix: string) => string }} props
@@ -31,7 +27,7 @@ const wrapComponent = <T extends HTMLTagName>({
   name,
   className: getClassName,
   type,
-}: WrapComponentArgs<T>): WrapComponentReturn<T> => {
+}: WrapComponentArgs<T>): ((props: ReactAttr<T>) => React.ReactElement) => {
   /**
    *
    * @param {{ className?: string, [x: string]: any}} param0

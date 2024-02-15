@@ -10,7 +10,7 @@ import wrapComponent from '../../tools/wrapComponent';
 
 export type TableCellProps = TdHTMLAttributes<HTMLTableCellElement>;
 
-const TableCell: React.FC<TableCellProps> = wrapComponent({
+const TableCell = wrapComponent({
   name: 'TableCell',
   type: 'td',
 });
