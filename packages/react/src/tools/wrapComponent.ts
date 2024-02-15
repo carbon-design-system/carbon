@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as cx from 'classnames';
-import * as PropTypes from 'prop-types';
-import * as React from 'react';
+import cx from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { usePrefix } from '../internal/usePrefix';
 import { ReactAttr } from '../types/common';
 
