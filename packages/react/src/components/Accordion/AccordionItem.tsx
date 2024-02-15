@@ -16,7 +16,6 @@ import React, {
   ReactElement,
   ReactNode,
   useContext,
-  useRef,
   useState,
 } from 'react';
 import { Text } from '../Text';
@@ -137,7 +136,18 @@ function AccordionItem({
 
   const Toggle = renderToggle || renderExpando; // remove renderExpando in next major release
 
-  const content = useRef<HTMLDivElement>(null);
+  const content = React.useCallback(
+    (node: HTMLDivElement) => {
+      if (!node) {
+        return;
+      }
+      if (isOpen) {
+        // accordion closes
+        node.style.maxBlockSize = '';
+      }
+    },
+    [isOpen]
+  );
 
   if (open !== prevIsOpen) {
     setIsOpen(open);
@@ -146,22 +156,7 @@ function AccordionItem({
 
   // When the AccordionItem heading is clicked, toggle the open state of the
   // panel
-  function onClick(event) {
-    // type guard for ref
-    if (!content.current) {
-      return;
-    }
-
-    if (isOpen) {
-      // accordion closes
-      content.current.style.maxBlockSize = '';
-    } else {
-      // accordion opens
-      content.current.style.maxBlockSize =
-        // Scroll height plus top/bottom padding
-        content.current.scrollHeight + 32 + 'px';
-    }
-
+  function onClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     const nextValue = !isOpen;
     setIsOpen(nextValue);
     if (onHeadingClick) {

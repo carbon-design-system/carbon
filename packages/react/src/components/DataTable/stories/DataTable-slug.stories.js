@@ -51,39 +51,66 @@ export default {
   },
 };
 
+const columnSlugHeaders = [
+  {
+    key: 'name',
+    header: 'Name',
+  },
+  {
+    key: 'protocol',
+    header: 'Protocol',
+  },
+  {
+    key: 'port',
+    header: 'Port',
+  },
+  {
+    key: 'rule',
+    header: 'Rule',
+  },
+  {
+    key: 'attached_groups',
+    header: 'Attached groups',
+    slug: (
+      <Slug className="slug-container" autoAlign={false} align="bottom-right">
+        <SlugContent>
+          <div>
+            <p className="secondary">AI Explained</p>
+            <h1>84%</h1>
+            <p className="secondary bold">Confidence score</p>
+            <p className="secondary">
+              Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+              do eiusmod tempor incididunt ut fsil labore et dolore magna
+              aliqua.
+            </p>
+            <hr />
+            <p className="secondary">Model type</p>
+            <p className="bold">Foundation model</p>
+          </div>
+          <SlugActions>
+            <IconButton kind="ghost" label="View">
+              <View />
+            </IconButton>
+            <IconButton kind="ghost" label="Open Folder">
+              <FolderOpen />
+            </IconButton>
+            <IconButton kind="ghost" label="Folders">
+              <Folders />
+            </IconButton>
+            <Button>View details</Button>
+          </SlugActions>
+        </SlugContent>
+      </Slug>
+    ),
+  },
+  {
+    key: 'status',
+    header: 'Status',
+  },
+];
+
 const slug = (
   <Slug className="slug-container">
-    <SlugContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-      <SlugActions>
-        <IconButton kind="ghost" label="View">
-          <View />
-        </IconButton>
-        <IconButton kind="ghost" label="Open Folder">
-          <FolderOpen />
-        </IconButton>
-        <IconButton kind="ghost" label="Folders">
-          <Folders />
-        </IconButton>
-        <Button>View details</Button>
-      </SlugActions>
-    </SlugContent>
-  </Slug>
-);
-
-const columnSlug = (
-  <Slug className="slug-container" autoAlign={false} align="bottom-right">
     <SlugContent>
       <div>
         <p className="secondary">AI Explained</p>
@@ -325,7 +352,7 @@ export const SlugWithExpansion = () => (
 );
 
 export const ColumnSlugWithSelectionAndExpansion = () => (
-  <DataTable rows={rows} headers={headers}>
+  <DataTable rows={rows} headers={columnSlugHeaders}>
     {({
       rows,
       headers,
@@ -336,6 +363,7 @@ export const ColumnSlugWithSelectionAndExpansion = () => (
       getSelectionProps,
       getTableProps,
       getTableContainerProps,
+      getCellProps,
     }) => (
       <TableContainer
         title="DataTable"
@@ -352,9 +380,10 @@ export const ColumnSlugWithSelectionAndExpansion = () => (
               <TableSelectAll {...getSelectionProps()} />
               {headers.map((header, i) => (
                 <TableHeader
-                  slug={i === 1 ? columnSlug : null}
                   key={i}
-                  {...getHeaderProps({ header })}>
+                  {...getHeaderProps({
+                    header,
+                  })}>
                   {header.header}
                 </TableHeader>
               ))}
@@ -367,8 +396,11 @@ export const ColumnSlugWithSelectionAndExpansion = () => (
                   <TableExpandRow {...getRowProps({ row })}>
                     <TableSelectRow {...getSelectionProps({ row })} />
                     {row.cells.map((cell) => {
-                      console.log(cell);
-                      return <TableCell key={cell.id}>{cell.value}</TableCell>;
+                      return (
+                        <TableCell {...getCellProps({ cell })} key={cell.id}>
+                          {cell.value}
+                        </TableCell>
+                      );
                     })}
                   </TableExpandRow>
                   <TableExpandedRow
@@ -389,8 +421,15 @@ export const ColumnSlugWithSelectionAndExpansion = () => (
 );
 
 export const ColumnSlugSort = () => (
-  <DataTable rows={rows} headers={headers}>
-    {({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
+  <DataTable rows={rows} headers={columnSlugHeaders}>
+    {({
+      rows,
+      headers,
+      getHeaderProps,
+      getRowProps,
+      getTableProps,
+      getCellProps,
+    }) => (
       <TableContainer
         title="DataTable"
         description="With sorting"
@@ -398,10 +437,9 @@ export const ColumnSlugSort = () => (
         <Table {...getTableProps()} aria-label="sample table">
           <TableHead>
             <TableRow>
-              {headers.map((header, i) => (
+              {headers.map((header) => (
                 <TableHeader
                   key={header.key}
-                  slug={i === 4 ? columnSlug : null}
                   {...getHeaderProps({ header, isSortable: true })}>
                   {header.header}
                 </TableHeader>
@@ -412,7 +450,9 @@ export const ColumnSlugSort = () => (
             {rows.map((row) => (
               <TableRow key={row.id} {...getRowProps({ row })}>
                 {row.cells.map((cell) => (
-                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                  <TableCell {...getCellProps({ cell })} key={cell.id}>
+                    {cell.value}
+                  </TableCell>
                 ))}
               </TableRow>
             ))}
