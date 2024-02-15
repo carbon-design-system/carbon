@@ -9940,7 +9940,7 @@ __metadata:
     eslint-plugin-playwright: "npm:^0.22.1"
     fs-extra: "npm:^11.0.0"
     glob: "npm:^10.0.0"
-    husky: "npm:^8.0.0"
+    husky: "npm:^9.0.0"
     jest: "npm:^28.1.0"
     jest-junit: "npm:^16.0.0"
     lerna: "npm:^8.0.0"
@@ -15795,12 +15795,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"husky@npm:^8.0.0":
-  version: 8.0.0
-  resolution: "husky@npm:8.0.0"
+"husky@npm:^9.0.0":
+  version: 9.0.10
+  resolution: "husky@npm:9.0.10"
   bin:
-    husky: lib/bin.js
-  checksum: bd147a59a5a12b6fb45730fe60c46803a1a180f8b5bd54f6677bbcfd2e63193dfdcc7ced950ff18b30c3760e99428f9a93ccf2ad1360c8e2516a7bda7812ce88
+    husky: bin.mjs
+  checksum: c303f1862e2b63873605df55a2b08303155e35c799585d7dd677628f62d716e7304bd984fc7d00ec44e740caac07d51720d1a0abb0a23a70a38859d89eb8e72d
   languageName: node
   linkType: hard
 
