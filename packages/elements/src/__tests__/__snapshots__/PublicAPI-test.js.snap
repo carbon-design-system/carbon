@@ -17,6 +17,8 @@ Array [
   "aiGradientStart02",
   "aiInnerShadow",
   "aiOverlay",
+  "aiSkeletonBackground",
+  "aiSkeletonElementBackground",
   "background",
   "backgroundActive",
   "backgroundBrand",
