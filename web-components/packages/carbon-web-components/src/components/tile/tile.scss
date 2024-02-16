@@ -118,10 +118,6 @@ $css--plex: true !default;
   @extend .#{$prefix}--tile--expandable;
   @include emit-layout-tokens();
 
-  ::slotted(#{$prefix}-tile-above-the-fold-content) {
-    @extend .#{$prefix}--tile-content__above-the-fold;
-  }
-
   ::slotted(#{$prefix}-tile-below-the-fold-content) {
     @extend .#{$prefix}--tile-content__below-the-fold;
   }

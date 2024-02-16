@@ -1,14 +1,14 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { classMap } from 'lit/directives/class-map.js';
-import { LitElement, html } from 'lit';
+import { LitElement, TemplateResult, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { SKELETON_TEXT_TYPE } from './defs';
@@ -29,6 +29,12 @@ function getRandomInt(min: number, max: number, n: number) {
  */
 @customElement(`${prefix}-skeleton-text`)
 class CDSSkeletonText extends LitElement {
+  /**
+   * Specify optional classes to be added to your SkeletonText
+   */
+  @property({ reflect: true, attribute: 'optional-classes' })
+  optionalClasses;
+
   /**
    * The type of skeleton text.
    */
@@ -54,17 +60,27 @@ class CDSSkeletonText extends LitElement {
   lineCount = 3;
 
   render() {
-    const { paragraph, lineCount, type, width } = this;
-    const classes = classMap({
+    const { optionalClasses, paragraph, lineCount, type, width } = this;
+    let defaultClasses = {
       [`${prefix}--skeleton__text`]: true,
       [`${prefix}--skeleton__heading`]: type === SKELETON_TEXT_TYPE.HEADING,
-    });
+    };
+
+    if (optionalClasses) {
+      const outputObject = {};
+      optionalClasses?.split(' ').forEach((element) => {
+        outputObject[element] = true;
+      });
+      defaultClasses = { ...defaultClasses, ...outputObject };
+    }
+    const classes = classMap(defaultClasses);
+
     if (paragraph) {
       const widthNum = parseInt(this.width, 10);
       const widthPx = this.width.includes('px');
       const widthPercent = this.width.includes('%');
-      const lines = Array.apply(Array(lineCount));
-      return html`${lines.map((_, i) => {
+      const lines: TemplateResult[] = [];
+      for (let i = 0; i < lineCount; i++) {
         const randomWidth =
           (widthPercent && `${getRandomInt(0, 75, i)}px`) ||
           (widthPx && `${getRandomInt(0, widthNum, i)}px`);
@@ -72,8 +88,9 @@ class CDSSkeletonText extends LitElement {
           (widthPercent && `width: calc(${width} - ${randomWidth})`) ||
           (widthPx && `width: ${randomWidth}`) ||
           '';
-        return html`<p class="${classes}" style="${style}"></p>`;
-      })}`;
+        lines.push(html`<p class="${classes}" style="${style}"></p>`);
+      }
+      return lines;
     }
 
     return html`<p class="${classes}" style="width:${width}"></p>`;
