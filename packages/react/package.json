@@ -52,7 +52,7 @@
     "@carbon/icons-react": "^11.36.0",
     "@carbon/layout": "^11.20.0",
     "@carbon/styles": "^1.51.0",
-    "@ibm/telemetry-js": "^1.2.0",
+    "@ibm/telemetry-js": "^1.2.1",
     "classnames": "2.5.1",
     "copy-to-clipboard": "^3.3.1",
     "downshift": "8.3.1",
