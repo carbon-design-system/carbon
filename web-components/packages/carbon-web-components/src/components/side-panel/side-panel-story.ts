@@ -26,6 +26,18 @@ const toggleButton = () => {
   document.querySelector(`${prefix}-side-panel`)?.toggleAttribute('open');
 };
 
+const nextStep = () => {
+  document
+    .querySelector(`${prefix}-side-panel`)
+    ?.setAttribute('current-step', '1');
+};
+
+const prevStep = () => {
+  document
+    .querySelector(`${prefix}-side-panel`)
+    ?.setAttribute('current-step', '0');
+};
+
 const sizes = {
   // 'default (md)': null,
   [`Extra small size (${SIDE_PANEL_SIZE.EXTRA_SMALL})`]:
@@ -69,7 +81,8 @@ const getContent = (index) => {
           class="${storyPrefix}text-input"></cds-text-input>
       `;
     case 2:
-      return html` <style>
+      return html`
+        <style>
           ${styles}
         </style>
         <h5>Section</h5>
@@ -99,7 +112,9 @@ const getContent = (index) => {
           <cds-textarea
             label="Notes"
             value="This is a text area"></cds-textarea>
-        </div>`;
+        </div>
+      `;
+
     default:
       return null;
   }
@@ -276,6 +291,7 @@ const DefaultTemplate = (argsIn) => {
     ),
     animateTitle: boolean('animate-title (Title animates on scroll)', true),
     class: text('class', 'a-user-class'),
+    closeIconDescription: text('Close icon description', 'Close panel'),
     condensedActions: boolean('condensed-actions', false),
     content: getContent(select('Slot (default), panel contents', contents, 2)),
     includeOverlay: boolean('include-overlay', true),
@@ -325,9 +341,11 @@ const DefaultTemplate = (argsIn) => {
       size=${args.size}
       ?slide-in=${args.slideIn}
       slug=${args.slug}
-      title=${args.title}>
+      title=${args.title}
+      @cds-side-panel-navigate-back=${prevStep}>
       <!-- default slotted content -->
       ${args.content}
+      <cds-button @click="${nextStep}">Step two</cds-button>
 
       <!-- slotted subtitle slotted content -->
       ${args.subtitle}

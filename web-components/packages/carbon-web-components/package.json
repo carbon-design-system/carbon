@@ -68,7 +68,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.16.3",
-    "@carbon/ibm-products-styles": "2.20.1",
+    "@carbon/ibm-products-styles": "^2.24.0",
     "@carbon/styles": "1.50.0",
     "flatpickr": "4.6.1",
     "lit": "^2.7.6",

@@ -92,6 +92,7 @@ function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse: boolean) {
  *   The custom event fired before this side-panel is being closed upon a user gesture.
  *   Cancellation of this event stops the user-initiated action of closing this side-panel.
  * @fires cds-side-panel-closed - The custom event fired after this side-panel is closed upon a user gesture.
+ * @fires cds-side-panel-navigate-back - custom event fired when clicking navigate back (available when step > 0)
  */
 @customElement(`${prefix}-side-panel`)
 class CDSSidePanel extends HostListenerMixin(LitElement) {
@@ -123,32 +124,23 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   @query(`.${blockClass}`)
   private _sidePanel!: HTMLDivElement;
 
-  /**
-   * Node to track size of actions
-   */
-  @query(`.${blockClass}__actions`)
-  private _actions!: HTMLElement;
+  @query(`.${blockClass}__animated-scroll-wrapper`)
+  private _animateScrollWrapper?: HTMLElement;
 
-  @query(`.${blockClass}__label`)
+  @query(`.${blockClass}__label-text`)
   private _label!: HTMLElement;
 
-  @query(`.${blockClass}__title-container`)
-  private _titleContainer!: HTMLElement;
-
-  @query(`.${blockClass}__title`)
+  @query(`.${blockClass}__title-text`)
   private _title!: HTMLElement;
 
-  @query(`.${blockClass}__subtitle`)
+  @query(`.${blockClass}__subtitle-text`)
   private _subtitle!: HTMLElement;
-
-  @query(`.${blockClass}__action-toolbar`)
-  private _actionToolbar!: HTMLElement;
 
   @query(`.${blockClass}__inner-content`)
   private _innerContent!: HTMLElement;
 
-  @query(`.${blockClass}__body-content`)
-  private _bodyContent!: HTMLElement;
+  @state()
+  _doAnimateTitle = true;
 
   @state()
   _isOpen = false;
@@ -319,6 +311,52 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     );
   }
 
+  private _adjustPageContent = () => {
+    // sets/resets styles based on slideIn property and selectorPageContent;
+    if (this.selectorPageContent) {
+      const pageContentEl: HTMLElement | null = document.querySelector(
+        this.selectorPageContent
+      );
+
+      if (pageContentEl) {
+        const newValues = {
+          marginInlineStart: '',
+          marginInlineEnd: '',
+          inlineSize: '',
+          transition: this._reducedMotion.matches
+            ? 'none'
+            : `all ${moderate02}`,
+          transitionProperty: 'margin-inline-start, margin-inline-end',
+        };
+        if (this.open) {
+          newValues.inlineSize = 'auto';
+          if (this.placement === 'left') {
+            newValues.marginInlineStart = `${this?._sidePanel?.offsetWidth}px`;
+          } else {
+            newValues.marginInlineEnd = `${this?._sidePanel?.offsetWidth}px`;
+          }
+        }
+
+        Object.keys(newValues).forEach((key) => {
+          pageContentEl.style[key] = newValues[key];
+        });
+      }
+    }
+  };
+
+  private _checkSetOpen = () => {
+    const { _sidePanel: sidePanel } = this;
+    if (sidePanel && this._isOpen) {
+      // wait until the side panel has transitioned off the screen to remove
+      sidePanel.addEventListener('transitionend', () => {
+        this._isOpen = false;
+      });
+    } else {
+      // allow the html to render before animating in the side panel
+      this._isOpen = this.open;
+    }
+  };
+
   private _checkUpdateIconButtonSizes = () => {
     const slug = this.querySelector('cds-slug');
     const otherButtons = this?.shadowRoot?.querySelectorAll(
@@ -375,16 +413,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     }
   }
 
-  private _checkUpdateBottomPadding = () => {
-    const actionHeightPx = this._actions?.offsetHeight + 16; // add additional 1rem spacing to bottom padding
-    const actionsHeight = `${Math.round(actionHeightPx / 16)}rem`;
-
-    this._sidePanel.style?.setProperty(
-      `--${blockClass}--content-bottom-padding`,
-      actionsHeight
-    );
-  };
-
   private _handleActionsChange(e: Event) {
     const target = e.target as HTMLSlotElement;
     const actions = target?.assignedElements();
@@ -393,9 +421,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     this._checkUpdateIconButtonSizes();
 
     const actionsCount = actions?.length ?? 0;
-    if (actionsCount === 0) {
-      return;
-    } else if (actionsCount > 3) {
+    if (actionsCount > 3) {
       this._actionsCount = 3;
       console.warn(`Too many side-panel actions, max 3.`);
     } else {
@@ -415,12 +441,46 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         actions[i].classList.add(`${blockClassActionSet}__action-button`);
       }
     }
-
-    setTimeout(() => {
-      // update after the updates above are applied
-      this._checkUpdateBottomPadding();
-    }, 1);
   }
+
+  private _checkSetDoAnimateTitle = () => {
+    let canDoAnimateTitle = false;
+
+    if (
+      this._sidePanel &&
+      this.open &&
+      this.animateTitle &&
+      this?.title?.length &&
+      !this._reducedMotion.matches
+    ) {
+      const scrollAnimationDistance = this._getScrollAnimationDistance();
+      // used to calculate the header moves
+      this?._sidePanel?.style?.setProperty(
+        `--${blockClass}--scroll-animation-distance`,
+        `${scrollAnimationDistance}`
+      );
+
+      let scrollEl = this._animateScrollWrapper;
+      if (!scrollEl && this.animateTitle && !this._doAnimateTitle) {
+        scrollEl = this._innerContent;
+      }
+
+      if (scrollEl) {
+        const innerComputed = window?.getComputedStyle(this._innerContent);
+        const innerPaddingHeight = innerComputed
+          ? parseFloat(innerComputed?.paddingTop) +
+            parseFloat(innerComputed?.paddingBottom)
+          : 0;
+
+        canDoAnimateTitle =
+          (!!this.labelText || !!this._hasActionToolbar || this._hasSubtitle) &&
+          scrollEl.scrollHeight - scrollEl.clientHeight >=
+            scrollAnimationDistance + innerPaddingHeight;
+      }
+    }
+
+    this._doAnimateTitle = canDoAnimateTitle;
+  };
 
   /**
    * The `ResizeObserver` instance for observing element resizes for re-positioning floating menu position.
@@ -429,182 +489,36 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   // @ts-ignore
   private _resizeObserver = new ResizeObserver(() => {
     if (this._sidePanel) {
-      this._checkUpdateBottomPadding();
+      this._checkSetDoAnimateTitle();
     }
   });
 
-  private _measurements: any = {};
+  private _getScrollAnimationDistance = () => {
+    const labelHeight = this?._label?.offsetHeight ?? 0;
+    const subtitleHeight = this?._subtitle?.offsetHeight ?? 0;
+    const titleVerticalBorder = this._hasActionToolbar
+      ? this._title.offsetHeight - this._title.clientHeight
+      : 0;
 
-  private _setMeasuredCustomProperties = async (reason, scrollY = 0) => {
-    await this.updateComplete;
-
-    if (!this._sidePanel || (!this.open && !this._innerContent)) {
-      return;
-    }
-
-    await (this.constructor as typeof CDSSidePanel)._delay(); // measure after brief delay for render
-    this._measurements.subtitleHeight = this._subtitle?.offsetHeight || 0; // set default subtitle height if a subtitle is not provided to enable scrolling animation
-    this._sidePanel?.style.setProperty(
-      `--${blockClass}--subtitle-container-height`,
-      `${this._measurements.subtitleHeight}px`
-    );
-
-    if (reason !== 'scroll') {
-      this._measurements.panelHeight = this._sidePanel?.offsetHeight || 0;
-      this._measurements.scrollSectionHeight =
-        this._bodyContent?.offsetHeight || 0;
-      this._measurements.titleContainerHeight =
-        this._titleContainer?.offsetHeight || 0;
-      this._measurements.titleHeight = this._title?.offsetHeight || 0;
-      this._measurements.labelHeight = this._label?.offsetHeight || 0;
-      this._measurements.totalScrollingHeight =
-        this._measurements.titleContainerHeight +
-        this._measurements.subtitleHeight +
-        this._measurements.scrollSectionHeight;
-      this._measurements.actionToolbarHeight =
-        this?._actionToolbar?.offsetHeight || 0;
-
-      this._sidePanel?.style.setProperty(
-        `--${blockClass}--title-text-height`,
-        this.animateTitle ? '0' : `${this._measurements.titleHeight + 24}px`
-      );
-
-      this._sidePanel.style.setProperty(
-        `--${blockClass}--action-bar-container-height`,
-        this.animateTitle ? '0' : `${this._measurements.actionToolbarHeight}px`
-      );
-
-      this._sidePanel.style.setProperty(
-        `--${blockClass}--label-text-height`,
-        `${this._measurements.labelHeight}px`
-      );
-      if (this.animateTitle) {
-        this._measurements.titlePaddingTop = parseInt(
-          (this._titleContainer &&
-            window &&
-            window?.getComputedStyle?.(this._titleContainer)?.[
-              'padding-top'
-            ]) ??
-            '0',
-          10
-        );
-
-        this._measurements.transitionDistance =
-          -1 *
-          Math.max(
-            this._measurements.titleHeight +
-              this._measurements.actionToolbarHeight +
-              this._measurements.titlePaddingTop -
-              this._measurements.titleContainerHeight,
-            this._innerContent?.offsetHeight - this._innerContent?.scrollHeight
-          );
-
-        // if the difference between the total scrolling height and the panel height is less than
-        // the subtitleElement height OR if the subtitle element height is 0, use that difference
-        // as the length of the scroll animation (otherwise the animation will not be able to complete
-        // because there is not enough scrolling distance to complete it).
-        this._measurements.subtitleHeight =
-          this._measurements.totalScrollingHeight -
-            this._measurements.panelHeight <
-          this._measurements.subtitleHeight
-            ? this._measurements.totalScrollingHeight -
-              this._measurements.panelHeight
-            : this._measurements.subtitleHeight === 0
-            ? 16
-            : this._measurements.subtitleHeight;
-        this._measurements.subtitleHeight =
-          this._measurements.subtitleHeight < 0
-            ? this._innerContent?.scrollHeight -
-              this._innerContent?.clientHeight
-            : this._measurements.subtitleHeight;
-
-        this._sidePanel.style.setProperty(
-          `--${blockClass}--action-bar-container-height`,
-          `${this._measurements.actionToolbarHeight || 0}px`
-        );
-
-        this._sidePanel.style.setProperty(
-          `--${blockClass}--title-height`,
-          `${this._measurements.titleHeight + 16}px`
-        );
-      }
-    } else {
-      if (this.animateTitle) {
-        const scrollAnimationProgress =
-          this._measurements.transitionDistance &&
-          this._measurements.transitionDistance > scrollY
-            ? scrollY / this._measurements.transitionDistance
-            : 1;
-
-        this._sidePanel.style.setProperty(
-          `--${blockClass}--scroll-y`,
-          `${scrollY}px`
-        );
-
-        const scrolled = scrollY > 0;
-
-        this._sidePanel.style.setProperty(
-          `--${blockClass}--subtitle-opacity`,
-          !scrolled
-            ? '1'
-            : `${
-                1 -
-                Math.min(this._measurements.transitionDistance, scrollY) /
-                  this._measurements.transitionDistance
-              }`
-        );
-
-        this._sidePanel.style.setProperty(
-          `--${blockClass}--divider-opacity`,
-          !scrolled ? '0' : `${scrollAnimationProgress}`
-        );
-
-        this._sidePanel.style.setProperty(
-          `--${blockClass}--title-y-position`,
-          !scrolled
-            ? '0rem'
-            : `${-Math.abs(
-                Math.min(1, scrollY / this._measurements.subtitleHeight)
-              )}rem`
-        );
-
-        this._sidePanel.style.setProperty(
-          `--${blockClass}--collapsed-title-y-position`,
-          !scrolled
-            ? '1rem'
-            : `${
-                Math.max(0, this._measurements.subtitleHeight - scrollY) /
-                this._measurements.subtitleHeight
-              }rem`
-        );
-
-        this._sidePanel.style.setProperty(
-          `--${blockClass}--title-container-height`,
-          !scrolled ? '0px' : `${this._measurements.titleContainerHeight}px`
-        );
-
-        const reduceTitleContainerHeightAmount =
-          ((this._measurements.labelHeight * scrollAnimationProgress) /
-            this._measurements.titleContainerHeight) *
-          100;
-
-        this._sidePanel.style.setProperty(
-          `--${blockClass}--reduce-titles-by`,
-          !scrolled && !this.animateTitle
-            ? '0px'
-            : `${Math.trunc(reduceTitleContainerHeightAmount)}px`
-        );
-      } else {
-        this._sidePanel.style.setProperty(
-          `--${blockClass}--reduce-titles-by`,
-          '0px'
-        );
-      }
-    }
+    return labelHeight + subtitleHeight + titleVerticalBorder;
   };
 
-  private _scrollObserver = (event) => {
-    this._setMeasuredCustomProperties('scroll', event.target.scrollTop);
+  private _scrollObserver = () => {
+    const scrollTop = this._animateScrollWrapper?.scrollTop ?? 0;
+    const scrollAnimationDistance = this._getScrollAnimationDistance();
+    this?._sidePanel?.style?.setProperty(
+      `--${blockClass}--scroll-animation-progress`,
+      `${
+        Math.min(scrollTop, scrollAnimationDistance) / scrollAnimationDistance
+      }`
+    );
+  };
+
+  private _handleCurrentStepUpdate = () => {
+    const scrollable = this._animateScrollWrapper ?? this._innerContent;
+    if (scrollable) {
+      scrollable.scrollTop = 0;
+    }
   };
 
   /**
@@ -710,10 +624,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     if (this._hObserveResize) {
       this._hObserveResize = this._hObserveResize.release();
     }
-
-    if (this._innerContent) {
-      this._innerContent.removeEventListener('scroll', this._scrollObserver);
-    }
   }
 
   connectedCallback() {
@@ -729,7 +639,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
 
   render() {
     const {
-      animateTitle,
       closeIconDescription,
       condensedActions,
       currentStep,
@@ -751,88 +660,110 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
       this._actionsCount
     ];
 
-    const titleTemplate = html`
+    const titleTemplate = html`<div
+      class=${`${blockClass}__title`}
+      ?no-label=${!!labelText}>
+      <h2 class=${title ? `${blockClass}__title-text` : ''} title=${title}>
+        ${title}
+      </h2>
+
+      ${this._doAnimateTitle
+        ? html`<h2
+            class=${`${blockClass}__collapsed-title-text`}
+            title=${title}
+            aria-hidden="true">
+            ${title}
+          </h2>`
+        : ''}
+    </div>`;
+
+    const headerHasTitleClass = this.title
+      ? ` ${blockClass}__header--has-title `
+      : '';
+    const headerTemplate = html`
       <div
-        class=${`${blockClass}__title-container`}
+        class=${`${blockClass}__header${headerHasTitleClass}`}
         ?detail-step=${currentStep > 0}
-        ?has-title=${!!title}
-        ?no-title-animation=${!animateTitle}
-        ?reduced-motion=${this._reducedMotion.matches}
-        ?has-action-toolbar=${this._hasActionToolbar}>
+        ?no-title-animation=${!this._doAnimateTitle}
+        ?reduced-motion=${this._reducedMotion.matches}>
         <!-- render back button -->
         ${currentStep > 0
           ? html`<cds-icon-button
+              align="bottom-left"
               aria-label=${navigationBackIconDescription}
               kind="ghost"
               size="sm"
-              tooltip-text=${navigationBackIconDescription}
-              class=${`${blockClass}__nav-back-button`}
+              class=${`${prefix}--btn ${blockClass}__navigation-back-button`}
               @click=${this._handleNavigateBack}>
               ${ArrowLeft16({ slot: 'icon' })}
+              <span slot="tooltip-content">
+                ${navigationBackIconDescription}
+              </span>
             </cds-icon-button>`
           : ''}
 
         <!-- render title label -->
         ${title?.length && labelText?.length
-          ? html` <p class=${`${blockClass}__label`}>${labelText}</p>`
+          ? html` <p class=${`${blockClass}__label-text`}>${labelText}</p>`
           : ''}
 
-        <!-- render collapsed title -->
-        ${animateTitle && title?.length && !this._reducedMotion.matches
-          ? html`<h2
-              class=${`${blockClass}__collapsed-title`}
-              title=${title}
-              aria-hidden="true">
-              ${title}
-            </h2>`
-          : ''}
+        <!-- title -->
+        ${title ? titleTemplate : ''}
 
-        <!-- render title -->
-        ${title?.length
-          ? html`<h2 class=${`${blockClass}__title`} title=${title}>
-              ${title}
-            </h2>`
-          : ''}
-      </div>
+        <!-- render slug and close button area -->
+        <div class=${`${blockClass}__slug-and-close`}>
+          <slot name="slug" @slotchange=${this._handleSlugChange}></slot>
+          <!-- {normalizedSlug} -->
+          <cds-icon-button
+            align="bottom-right"
+            aria-label=${closeIconDescription}
+            kind="ghost"
+            size="sm"
+            class=${`${blockClass}__close-button`}
+            @click=${this._handleCloseClick}>
+            ${Close20({ slot: 'icon' })}
+            <span slot="tooltip-content"> ${closeIconDescription} </span>
+          </cds-icon-button>
+        </div>
 
-      <!-- render close button area -->
-      <div class=${`${blockClass}__slug-and-close`}>
-        <slot name="slug" @slotchange=${this._handleSlugChange}></slot>
-        <!-- {normalizedSlug} -->
-        <cds-icon-button
-          aria-label=${closeIconDescription}
-          kind="ghost"
-          size="sm"
-          tooltip-text=${closeIconDescription}
-          class=${`${blockClass}__close-button`}
-          @click=${this._handleCloseClick}>
-          ${Close20({ slot: 'icon' })}
-        </cds-icon-button>
-      </div>
+        <!-- render sub title -->
+        <p
+          class=${this._hasSubtitle ? `${blockClass}__subtitle-text` : ''}
+          ?hidden=${!this._hasSubtitle}
+          ?no-title-animation=${!this._doAnimateTitle}
+          ?no-action-toolbar=${!this._hasActionToolbar}
+          ?no-title=${!title}>
+          <slot
+            name="subtitle"
+            @slotchange=${this._handleSubtitleChange}></slot>
+        </p>
 
-      <!-- render sub title -->
-      <p
-        class=${`${blockClass}__subtitle`}
-        ?hidden=${!this._hasSubtitle}
-        ?no-title-animation=${!animateTitle}
-        ?no-action-toolbar=${!this._hasActionToolbar}
-        ?no-title=${!title}>
-        <slot name="subtitle" @slotchange=${this._handleSubtitleChange}></slot>
-      </p>
-
-      <div
-        class=${`${blockClass}__action-toolbar`}
-        ?hidden=${!this._hasActionToolbar}
-        ?no-title-animation=${!animateTitle}>
-        <slot
-          name="action-toolbar"
-          @slotchange=${this._handleActionToolbarChange}></slot>
+        <div
+          class=${this._hasActionToolbar ? `${blockClass}__action-toolbar` : ''}
+          ?hidden=${!this._hasActionToolbar}
+          ?no-title-animation=${!this._doAnimateTitle}>
+          <slot
+            name="action-toolbar"
+            @slotchange=${this._handleActionToolbarChange}></slot>
+        </div>
       </div>
     `;
 
+    const mainTemplate = html`<div
+      class=${`${blockClass}__inner-content`}
+      ?scrolls=${!this._doAnimateTitle}>
+      <cds-layer level="1">
+        <slot></slot>
+      </cds-layer>
+    </div> `;
+
+    const sidePanelAnimateTitleClass = this._doAnimateTitle
+      ? ` ${blockClass}--animated-title`
+      : '';
+
     return html`
       <div
-        class=${blockClass}
+        class=${`${blockClass}${sidePanelAnimateTitleClass}`}
         part="dialog"
         role="complementary"
         placement="${placement}"
@@ -840,46 +771,38 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         ?open=${this._isOpen}
         ?opening=${open && !this._isOpen}
         ?closing=${!open && this._isOpen}
+        ?condensed-actions=${condensedActions}
         ?overlay=${includeOverlay || slideIn}
+        ?slide-in=${slideIn}
         size=${size}>
-        <cds-layer level="1">
-          <a
-            id="start-sentinel"
-            class="sentinel"
-            hidden
-            href="javascript:void 0"
-            role="navigation"></a>
+        <a
+          id="start-sentinel"
+          class="sentinel"
+          hidden
+          href="javascript:void 0"
+          role="navigation"></a>
 
-          ${!animateTitle ? titleTemplate : ''}
+        ${this._doAnimateTitle
+          ? html`<div class=${`${blockClass}__animated-scroll-wrapper`} scrolls>
+              ${headerTemplate} ${mainTemplate}
+            </div>`
+          : html` ${headerTemplate} ${mainTemplate}`}
 
-          <div
-            class=${`${blockClass}__inner-content`}
-            ?no-title-animation=${!animateTitle}
-            ?has-actions=${this._actionsCount > 0}>
-            ${animateTitle ? titleTemplate : ''}
-            <div class=${`${blockClass}__body-content`}>
-              <slot></slot>
-            </div>
+        <cds-side-panel-button-set
+          class=${`${blockClass}__actions-container`}
+          ?hidden=${this._actionsCount === 0}
+          ?condensed=${condensedActions}
+          actions-multiple=${actionsMultiple}
+          size=${size}>
+          <slot name="actions" @slotchange=${this._handleActionsChange}></slot>
+        </cds-side-panel-button-set>
 
-            <cds-side-panel-button-set
-              class=${`${blockClass}__actions`}
-              ?hidden=${this._actionsCount === 0}
-              ?condensed=${condensedActions}
-              actions-multiple=${actionsMultiple}
-              size=${size}>
-              <slot
-                name="actions"
-                @slotchange=${this._handleActionsChange}></slot>
-            </cds-side-panel-button-set>
-          </div>
-
-          <a
-            id="end-sentinel"
-            class="sentinel"
-            hidden
-            href="javascript:void 0"
-            role="navigation"></a>
-        </cds-layer>
+        <a
+          id="end-sentinel"
+          class="sentinel"
+          hidden
+          href="javascript:void 0"
+          role="navigation"></a>
       </div>
 
       ${includeOverlay
@@ -895,75 +818,52 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     `;
   }
 
-  checkSetOpen = () => {
-    const { _sidePanel: sidePanel } = this;
-    if (sidePanel && this._isOpen) {
-      // wait until the side panel has transitioned off the screen to remove
-      sidePanel.addEventListener('transitionend', () => {
-        this._isOpen = false;
-      });
-    } else {
-      // allow the html to render before animating in the side panel
-      window.requestAnimationFrame(() => {
-        this._isOpen = this.open;
-      });
+  async updated(changedProperties) {
+    if (changedProperties.has('currentStep')) {
+      this._handleCurrentStepUpdate();
     }
-  };
 
-  adjustPageContent = () => {
-    // sets/resets styles based on slideIn property and selectorPageContent;
-    if (this.selectorPageContent) {
-      const pageContentEl: HTMLElement | null = document.querySelector(
-        this.selectorPageContent
+    if (changedProperties.has('_doAnimateTitle')) {
+      this?._animateScrollWrapper?.removeEventListener(
+        'scroll',
+        this._scrollObserver
       );
 
-      if (pageContentEl) {
-        const newValues = {
-          marginInlineStart: '',
-          marginInlineEnd: '',
-          inlineSize: '',
-          transition: this._reducedMotion.matches
-            ? 'none'
-            : `all ${moderate02}`,
-          transitionProperty: 'margin-inline-start, margin-inline-end',
-        };
-        if (this.open) {
-          newValues.inlineSize = 'auto';
-          if (this.placement === 'left') {
-            newValues.marginInlineStart = `${this._sidePanel.offsetWidth}px`;
-          } else {
-            newValues.marginInlineEnd = `${this._sidePanel.offsetWidth}px`;
-          }
-        }
-
-        Object.keys(newValues).forEach((key) => {
-          pageContentEl.style[key] = newValues[key];
-        });
+      if (this._doAnimateTitle) {
+        this?._animateScrollWrapper?.addEventListener(
+          'scroll',
+          this._scrollObserver
+        );
+      } else {
+        this?._sidePanel?.style?.setProperty(
+          `--${blockClass}--scroll-animation-progress`,
+          '0'
+        );
       }
     }
-  };
-
-  firstUpdated() {
-    this.checkSetOpen();
-    this.adjustPageContent();
-    this._setMeasuredCustomProperties('first update');
-  }
-
-  async updated(changedProperties) {
-    this.checkSetOpen();
 
     if (
-      changedProperties.has('slide-in') ||
-      changedProperties.has('open') ||
-      changedProperties.has('include-overlay')
+      changedProperties.has('_isOpen') ||
+      changedProperties.has('animateTitle')
     ) {
-      this.adjustPageContent();
+      /* @state property changed */
+      this._checkSetDoAnimateTitle();
     }
+
+    if (
+      changedProperties.has('slideIn') ||
+      changedProperties.has('open') ||
+      changedProperties.has('includeOverlay')
+    ) {
+      this._adjustPageContent();
+    }
+
     if (changedProperties.has('open')) {
+      this._checkSetOpen();
+
       this.disconnectObservers();
       if (this.open) {
         this.connectObservers();
-        this._setMeasuredCustomProperties('update');
 
         this._launcher = this.ownerDocument!.activeElement;
         const focusNode =
@@ -991,11 +891,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
       ) {
         (this._launcher as HTMLElement).focus();
         this._launcher = null;
-      }
-
-      // monitor scroll
-      if (this._innerContent) {
-        this._innerContent.addEventListener('scroll', this._scrollObserver);
       }
     }
   }
@@ -1036,7 +931,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
    * The name of the custom event fired on clicking the navigate back button
    */
   static get eventNavigateBack() {
-    return `${prefix}-side-panel-header-navigate-back`;
+    return `${prefix}-side-panel-navigate-back`;
   }
 
   static styles = styles; // `styles` here is a `CSSResult` generated by custom WebPack loader
