@@ -176,6 +176,57 @@
     }
   }
 
+  .#{$prefix}--tag--selectable {
+    border: 1px solid $border-inverse;
+    background-color: $layer;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $layer-hover;
+      outline: none;
+    }
+
+    &:focus {
+      outline: 2px solid $focus;
+      outline-offset: 1px;
+    }
+  }
+
+  .#{$prefix}--tag--selectable-selected {
+    background-color: $layer-selected-inverse;
+    color: $text-inverse;
+
+    &:hover {
+      background-color: $layer-selected-inverse;
+    }
+  }
+
+  .#{$prefix}--tag--selectable.#{$prefix}--tag--disabled {
+    border: 1px solid $border-disabled;
+    color: $text-disabled;
+
+    &:hover {
+      background-color: $layer;
+      cursor: not-allowed;
+    }
+  }
+
+  .#{$prefix}--tag--operational {
+    background-color: $tag-background-gray;
+    color: $tag-color-gray;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $tag-hover-gray;
+      outline: none;
+    }
+
+    &:focus {
+      outline: 2px solid $focus;
+      outline-offset: 1px;
+    }
+  }
+
   .#{$prefix}--tag--interactive {
     transition: background-color $duration-fast-01 motion(entrance, productive);
   }

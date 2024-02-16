@@ -8197,7 +8197,6 @@ Map {
           Array [
             "sm",
             "md",
-            "lg",
           ],
         ],
         "type": "oneOf",

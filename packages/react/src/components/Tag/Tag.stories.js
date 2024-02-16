@@ -57,53 +57,6 @@ export const Default = () => {
   );
 };
 
-export const Dismissible = () => {
-  return (
-    <>
-      <Tag filter className="some-class" type="red" title="Clear Filter">
-        {'Tag content'}
-      </Tag>
-      <Tag filter className="some-class" type="magenta" title="Clear Filter">
-        {'Tag content'}
-      </Tag>
-      <Tag filter className="some-class" type="purple" title="Clear Filter">
-        {'Tag content'}
-      </Tag>
-      <Tag filter className="some-class" type="blue" title="Clear Filter">
-        {'Tag content'}
-      </Tag>
-      <Tag filter className="some-class" type="cyan" title="Clear Filter">
-        {'Tag content'}
-      </Tag>
-      <Tag filter className="some-class" type="teal" title="Clear Filter">
-        {'Tag content'}
-      </Tag>
-      <Tag filter className="some-class" type="green" title="Clear Filter">
-        {'Tag content'}
-      </Tag>
-      <Tag filter className="some-class" type="gray" title="Clear Filter">
-        {'Tag content'}
-      </Tag>
-      <Tag filter className="some-class" type="cool-gray" title="Clear Filter">
-        {'Tag content'}
-      </Tag>
-      <Tag filter className="some-class" type="warm-gray" title="Clear Filter">
-        {'Tag content'}
-      </Tag>
-      <Tag
-        filter
-        className="some-class"
-        type="high-contrast"
-        title="Clear Filter">
-        {'Tag content'}
-      </Tag>
-      <Tag filter className="some-class" type="outline" title="Clear Filter">
-        {'Tag content'}
-      </Tag>
-    </>
-  );
-};
-
 export const Playground = (args) => {
   return <Tag {...args}>{'Tag content'}</Tag>;
 };
@@ -139,7 +92,7 @@ Playground.argTypes = {
     control: false,
   },
   size: {
-    options: ['sm', 'md', 'lg'],
+    options: ['sm', 'md'],
     control: {
       type: 'select',
     },
@@ -233,7 +186,7 @@ Skeleton.argTypes = {
     },
   },
   size: {
-    options: ['sm', 'md', 'lg'],
+    options: ['sm', 'md'],
     control: {
       type: 'select',
     },
