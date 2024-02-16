@@ -44,7 +44,7 @@ export default function Copy({
   }, [handleFadeOut]);
 
   const handleAnimationEnd = (event) => {
-    if (event.animationName === 'hide-feedback') {
+    if (event.animationName === `${prefix}--hide-feedback`) {
       setAnimation('');
     }
   };
