@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -31,17 +31,14 @@ class CDSModalFooter extends LitElement {
    */
   private _handleSlotChange(event: Event) {
     const { selectorButtons } = this.constructor as typeof CDSModalFooter;
-    const length = (event.target as HTMLSlotElement)
-      .assignedNodes()
-      .filter(
-        (node) =>
-          node.nodeType === Node.ELEMENT_NODE &&
-          (node as Element).matches(selectorButtons)
-      ).length;
-    this.hasThreeButtons = length > 2;
-    length === 2
-      ? this.parentElement?.setAttribute('has-two-buttons', '')
-      : this.parentElement?.removeAttribute('has-two-buttons');
+    this.hasThreeButtons =
+      (event.target as HTMLSlotElement)
+        .assignedNodes()
+        .filter(
+          (node) =>
+            node.nodeType === Node.ELEMENT_NODE &&
+            (node as Element).matches(selectorButtons)
+        ).length > 2;
     this.requestUpdate();
   }
 

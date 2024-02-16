@@ -46,6 +46,11 @@
   }
 }
 
+:host(#{$prefix}-modal[has-scrolling-content])
+  ::slotted(#{$prefix}-modal-body) {
+  @extend .#{$prefix}--modal-scroll-content;
+}
+
 :host(#{$prefix}-modal-header) {
   @extend .#{$prefix}--modal-header;
 }
@@ -140,16 +145,44 @@
 
 // Slug
 
-:host(#{$prefix}-modal[slug]) .#{$prefix}--modal-container {
-  @include callout-gradient('');
-
-  background-color: $layer;
+:host(#{$prefix}-modal[slug]) {
+  background-color: $ai-overlay;
 }
 
-:host(#{$prefix}-modal[slug][has-two-buttons]) .#{$prefix}--modal-container {
-  @include callout-gradient('default', 64px);
+:host(#{$prefix}-modal[slug]) .#{$prefix}--modal-container {
+  @include callout-gradient('default', 0, 'layer');
 
+  border: 1px solid transparent;
   background-color: $layer;
+  box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
+    0 4px 10px 2px $ai-drop-shadow;
+}
+
+:host(#{$prefix}-modal[slug][has-footer]) .#{$prefix}--modal-container {
+  @include callout-gradient('default', 64px, 'layer');
+
+  box-shadow: inset 0 -80px 0 -16px $layer,
+    inset 0 -160px 70px -65px $ai-inner-shadow, 0 4px 10px 2px $ai-drop-shadow;
+}
+
+:host(#{$prefix}-modal[slug][has-scrolling-content]) {
+  ::slotted(#{$prefix}-modal-body) {
+    mask-image: linear-gradient(
+        to bottom,
+        $layer calc(100% - 80px),
+        transparent calc(100% - 48px),
+        transparent 100%
+      ),
+      linear-gradient(to left, $layer 0, 16px, transparent 16px),
+      linear-gradient(to right, $layer 0, 2px, transparent 2px),
+      linear-gradient(to top, $layer 0, 2px, transparent 2px);
+  }
+}
+
+:host(#{$prefix}-modal[slug])
+  .#{$prefix}--modal-content--overflow-indicator::before,
+:host(#{$prefix}-modal[slug]) .#{$prefix}--modal-content--overflow-indicator {
+  display: none;
 }
 
 :host(#{$prefix}-modal-header) ::slotted(#{$prefix}-slug) {

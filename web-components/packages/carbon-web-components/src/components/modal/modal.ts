@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -217,6 +217,15 @@ class CDSModal extends HostListenerMixin(LitElement) {
   }
 
   /**
+   * Handles `slotchange` event.
+   */
+  private _handleSlotChange() {
+    this.querySelector(`${prefix}-modal-footer`)
+      ? this.setAttribute('has-footer', '')
+      : this.removeAttribute('has-footer');
+  }
+
+  /**
    * Specify whether the Modal is displaying an alert, error or warning.
    * Should go hand in hand with the danger prop.
    */
@@ -312,7 +321,7 @@ class CDSModal extends HostListenerMixin(LitElement) {
         role="${alert ? 'alert' : 'dialog'}"
         tabindex="-1"
         @click=${this._handleClickContainer}>
-        <slot></slot>
+        <slot @slotchange="${this._handleSlotChange}"></slot>
         ${hasScrollingContent
           ? html` <div class="cds--modal-content--overflow-indicator"></div> `
           : ``}
