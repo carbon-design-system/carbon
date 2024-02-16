@@ -8,6 +8,8 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
+  forwardRef,
+  ReactNode,
   useContext,
   useEffect,
   useMemo,
@@ -36,7 +38,7 @@ interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
    * A collection of MenuItems to be rendered within this Menu.
    */
-  children?: React.ReactNode;
+  children?: ReactNode;
 
   /**
    * Additional CSS class names.
@@ -46,7 +48,7 @@ interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
    * A label describing the Menu.
    */
-  label?: string;
+  label: string;
 
   /**
    * Specify how the menu should align with the button element
@@ -85,20 +87,20 @@ interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
-  target?: any;
+  target?: HTMLElement;
 
   /**
    * Specify the x position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([x1, x2])
    */
-  x?: number | (number | null | undefined)[];
+  x?: number | [number, number];
 
   /**
    * Specify the y position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([y1, y2])
    */
-  y?: number | (number | null | undefined)[];
+  y?: number | [number, number];
 }
 
-const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
+const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   {
     children,
     className,
@@ -149,7 +151,7 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }, [childState, childDispatch]);
 
   const menu = useRef<HTMLUListElement>(null);
-  const ref = useMergedRefs([forwardRef, menu]);
+  const ref = useMergedRefs<HTMLUListElement>([forwardRef, menu]);
 
   const [position, setPosition] = useState([-1, -1]);
   const focusableItems = childContext.state.items.filter(
@@ -163,7 +165,7 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
     actionButtonWidth = w;
   }
 
-  // Set RTL based on document direction or `LayoutDirection`
+  // Set RTL based on the document direction or `LayoutDirection`
   const { direction } = useLayoutDirection();
 
   function returnFocus() {
@@ -450,6 +452,7 @@ Menu.propTypes = {
   /**
    * A label describing the Menu.
    */
+  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   label: PropTypes.string,
 
   /**
@@ -489,11 +492,13 @@ Menu.propTypes = {
   /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
+  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   target: PropTypes.object,
 
   /**
    * Specify the x position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([x1, x2])
    */
+  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   x: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.arrayOf(PropTypes.number),
@@ -502,6 +507,7 @@ Menu.propTypes = {
   /**
    * Specify the y position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([y1, y2])
    */
+  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   y: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.arrayOf(PropTypes.number),
