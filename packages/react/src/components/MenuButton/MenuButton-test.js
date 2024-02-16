@@ -166,4 +166,30 @@ describe('MenuButton', () => {
       spy.mockRestore();
     });
   });
+  describe('supports props.menuAlignment', () => {
+    const alignments = [
+      'top',
+      'top-start',
+      'top-end',
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+    ];
+
+    alignments.forEach((alignment) => {
+      it(`menuAlignment="${alignment}"`, async () => {
+        render(
+          <MenuButton label="Actions" menuAlignment={alignment}>
+            <MenuItem label="Action" />
+          </MenuButton>
+        );
+
+        await userEvent.click(screen.getByRole('button'));
+
+        expect(screen.getByRole('menu')).toHaveClass(
+          `${prefix}--menu-button__${alignment}`
+        );
+      });
+    });
+  });
 });

@@ -10,15 +10,15 @@ import React, {
   type RefObject,
 } from 'react';
 import { isElement } from 'react-is';
-import PropTypes from 'prop-types';
+import PropTypes, { ReactNodeLike } from 'prop-types';
 import { ModalHeader, type ModalHeaderProps } from './ModalHeader';
 import { ModalFooter, type ModalFooterProps } from './ModalFooter';
-
+import debounce from 'lodash.debounce';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+import mergeRefs from '../../tools/mergeRefs';
 import cx from 'classnames';
-
 import toggleClass from '../../tools/toggleClass';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
-
 import wrapFocus from '../../internal/wrapFocus';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
@@ -51,30 +51,51 @@ export const ModalBody = React.forwardRef<HTMLDivElement, ModalBodyProps>(
     ref
   ) {
     const prefix = usePrefix();
-    const contentClass = cx(
-      `${prefix}--modal-content`,
-      hasForm && `${prefix}--modal-content--with-form`,
-      hasScrollingContent && `${prefix}--modal-scroll-content`,
-      customClassName
-    );
+    const contentRef = useRef<HTMLDivElement>(null);
+    const [isScrollable, setIsScrollable] = useState(false);
+    const contentClass = cx({
+      [`${prefix}--modal-content`]: true,
+      [`${prefix}--modal-content--with-form`]: hasForm,
+      [`${prefix}--modal-scroll-content`]: hasScrollingContent || isScrollable,
+      customClassName,
+    });
 
-    const hasScrollingContentProps = hasScrollingContent
-      ? { tabIndex: 0, role: 'region' }
-      : {};
+    useIsomorphicEffect(() => {
+      if (contentRef.current) {
+        setIsScrollable(
+          contentRef.current.scrollHeight > contentRef.current.clientHeight
+        );
+      }
+
+      function handler() {
+        if (contentRef.current) {
+          setIsScrollable(
+            contentRef.current.scrollHeight > contentRef.current.clientHeight
+          );
+        }
+      }
+
+      const debouncedHandler = debounce(handler, 200);
+      window.addEventListener('resize', debouncedHandler);
+      return () => {
+        debouncedHandler.cancel();
+        window.removeEventListener('resize', debouncedHandler);
+      };
+    }, []);
+
+    const hasScrollingContentProps =
+      hasScrollingContent || isScrollable
+        ? { tabIndex: 0, role: 'region' }
+        : {};
 
     return (
-      <>
-        <div
-          className={contentClass}
-          {...hasScrollingContentProps}
-          {...rest}
-          ref={ref}>
-          {children}
-        </div>
-        {hasScrollingContent && (
-          <div className={`${prefix}--modal-content--overflow-indicator`} />
-        )}
-      </>
+      <div
+        className={contentClass}
+        {...hasScrollingContentProps}
+        {...rest}
+        ref={mergeRefs(contentRef, ref)}>
+        {children}
+      </div>
     );
   }
 );
@@ -180,6 +201,11 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   selectorsFloatingMenus?: Array<string | null | undefined>;
 
   size?: 'xs' | 'sm' | 'md' | 'lg';
+
+  /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `ComposedModal` component
+   */
+  slug?: ReactNodeLike;
 }
 
 const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
@@ -200,6 +226,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       selectorsFloatingMenus,
       size,
       launcherButtonRef,
+      slug,
       ...rest
     },
     ref
@@ -270,8 +297,11 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
 
     const modalClass = cx(
       `${prefix}--modal`,
-      isOpen && 'is-visible',
-      danger && `${prefix}--modal--danger`,
+      {
+        'is-visible': isOpen,
+        [`${prefix}--modal--danger`]: danger,
+        [`${prefix}--modal--slug`]: slug,
+      },
       customClassName
     );
 
@@ -344,6 +374,14 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       }
     }, [open, selectorPrimaryFocus, isOpen]);
 
+    // Slug is always size `lg`
+    let normalizedSlug;
+    if (slug && slug['type']?.displayName === 'Slug') {
+      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
+        size: 'lg',
+      });
+    }
+
     return (
       <div
         {...rest}
@@ -369,6 +407,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
             Focus sentinel
           </button>
           <div ref={innerModal} className={`${prefix}--modal-container-body`}>
+            {normalizedSlug}
             {childrenWithProps}
           </div>
           {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
@@ -466,6 +505,11 @@ ComposedModal.propTypes = {
    * Specify the size variant.
    */
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
+
+  /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `ComposedModal` component
+   */
+  slug: PropTypes.node,
 };
 
 export default ComposedModal;
