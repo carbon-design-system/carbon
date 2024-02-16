@@ -60,7 +60,7 @@ const HeaderGlobalAction: React.FC<HeaderGlobalActionProps> = React.forwardRef(
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
       children,
-      className: customClassName = '',
+      className: customClassName,
       onClick,
       isActive,
       tooltipAlignment,
@@ -70,7 +70,7 @@ const HeaderGlobalAction: React.FC<HeaderGlobalActionProps> = React.forwardRef(
   ) {
     const prefix = usePrefix();
     const className = cx({
-      [customClassName]: !!customClassName,
+      [customClassName as string]: !!customClassName,
       [`${prefix}--header__action`]: true,
       [`${prefix}--header__action--active`]: isActive,
     });

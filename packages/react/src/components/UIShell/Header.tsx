@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({
   ...rest
 }) => {
   const prefix = usePrefix();
-  const className = cx(`${prefix}--header`, customClassName);
+  const className = cx(`${prefix}--header`, customClassName as string);
 
   return (
     <header {...rest} className={className}>

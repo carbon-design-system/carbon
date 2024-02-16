@@ -82,7 +82,7 @@ const SideNavLink: SideNavLinkComponent = forwardRef(function SideNavLink<
 >(
   {
     children,
-    className: customClassName = '',
+    className: customClassName,
     renderIcon: IconElement,
     isActive,
     isSideNavExpanded,
@@ -98,7 +98,7 @@ const SideNavLink: SideNavLinkComponent = forwardRef(function SideNavLink<
   const className = cx({
     [`${prefix}--side-nav__link`]: true,
     [`${prefix}--side-nav__link--current`]: isActive,
-    [customClassName]: !!customClassName,
+    [customClassName as string]: !!customClassName,
   });
 
   return (

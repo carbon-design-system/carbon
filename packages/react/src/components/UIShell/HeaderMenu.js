@@ -7,7 +7,7 @@
 
 import { ChevronDown } from '@carbon/icons-react';
 import cx from 'classnames';
-import React, { ReactElement, ReactNode } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { keys, matches } from '../../internal/keyboard';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
@@ -15,74 +15,13 @@ import { PrefixContext } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { composeEventHandlers } from '../../tools/events';
 
-interface HeaderMenuProps {
-  /**
-   * Provide a label for the link text
-   */
-  menuLinkName: string;
-  /**
-   * Required props for the accessibility label of the menu
-   */
-  'aria-label'?: string;
-  /**
-   * Required props for the accessibility label of the menu
-   */
-  'aria-labelledby'?: string;
-  children?: ReactNode;
-  /**
-   * Optionally provide a custom class to apply to the underlying `<li>` node
-   */
-  className?: string;
-  /**
-   * Provide a custom ref handler for the menu button
-   */
-  focusRef?: (node) => void;
-  /**
-   * Applies selected styles to the item if a user sets this to true and `aria-current !== 'page'`.
-   */
-  isActive?: boolean;
-  /**
-   * Applies selected styles to the item if a user sets this to true and `aria-current !== 'page'`.
-   * @deprecated Please use `isActive` instead. This will be removed in the next major release.
-   */
-  isCurrentPage?: boolean;
-  /**
-   * Optionally provide an onBlur handler that is called when the underlying
-   * button fires it's onblur event
-   */
-  onBlur?: () => void;
-  /**
-   * Optionally provide an onClick handler that is called when the underlying
-   * button fires it's onclick event
-   */
-  onClick?: () => void;
-  /**
-   * Optionally provide an onKeyDown handler that is called when the underlying
-   * button fires it's onkeydown event
-   */
-  onKeyDown?: () => void;
-  /**
-   * Optional component to render instead of string
-   */
-  renderMenuContent?: () => ReactElement<any, any>;
-  /**
-   * Optionally provide a tabIndex for the underlying menu button
-   */
-  tabIndex?: number;
-}
-
-interface HeaderMenuState {
-  expanded: boolean;
-  selectedIndex: number | null;
-}
-
 /**
  * `HeaderMenu` is used to render submenu's in the `Header`. Most often children
  * will be a `HeaderMenuItem`. It handles certain keyboard events to help
  * with managing focus. It also passes along refs to each child so that it can
  * help manage focus state of its children.
  */
-class HeaderMenu extends React.Component<HeaderMenuProps, HeaderMenuState> {
+class HeaderMenu extends React.Component {
   static propTypes = {
     /**
      * Required props for the accessibility label of the menu
@@ -150,9 +89,7 @@ class HeaderMenu extends React.Component<HeaderMenuProps, HeaderMenuState> {
 
   static contextType = PrefixContext;
 
-  items: HTMLElement[];
-  menuButtonRef: HTMLElement | undefined;
-  _subMenus = React.createRef<HTMLUListElement>();
+  _subMenus = React.createRef();
 
   constructor(props) {
     super(props);
@@ -225,7 +162,7 @@ class HeaderMenu extends React.Component<HeaderMenuProps, HeaderMenuState> {
    * menu or menubar as it will allow the parent to explicitly focus the menu
    * button node when that child should receive focus.
    */
-  handleMenuButtonRef = (node: HTMLElement): void => {
+  handleMenuButtonRef = (node) => {
     if (this.props.focusRef) {
       this.props.focusRef(node);
     }
@@ -236,7 +173,7 @@ class HeaderMenu extends React.Component<HeaderMenuProps, HeaderMenuState> {
    * Handles individual menuitem refs. We assign them to a class instance
    * property so that we can properly manage focus of our children.
    */
-  handleItemRef = (index: number) => (node) => {
+  handleItemRef = (index) => (node) => {
     this.items[index] = node;
   };
 
@@ -252,7 +189,7 @@ class HeaderMenu extends React.Component<HeaderMenuProps, HeaderMenuState> {
       }));
 
       // Return focus to menu button when the user hits ESC.
-      this.menuButtonRef?.focus();
+      this.menuButtonRef.focus();
       return;
     }
   };
@@ -264,23 +201,26 @@ class HeaderMenu extends React.Component<HeaderMenuProps, HeaderMenuState> {
       isCurrentPage,
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
-      className: customClassName = '',
+      className: customClassName,
       children,
       renderMenuContent: MenuContent,
       menuLinkName,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      focusRef,
+      focusRef, // eslint-disable-line no-unused-vars
       onBlur,
       onClick,
       onKeyDown,
       ...rest
     } = this.props;
 
-    const hasActiveChildren = React.Children.toArray(children).some((child) => {
-      if (React.isValidElement(child)) {
-        child.props.isActive || child.props.isCurrentPage;
-      }
-    });
+    const hasActiveDescendant = (childrenArg) =>
+      React.Children.toArray(childrenArg).some(
+        (child) =>
+          child.props &&
+          (child.props.isActive ||
+            child.props.isCurrentPage ||
+            (child.props.children instanceof Array &&
+              hasActiveDescendant(child.props.children)))
+      );
 
     const accessibilityLabel = {
       'aria-label': ariaLabel,
@@ -290,14 +230,14 @@ class HeaderMenu extends React.Component<HeaderMenuProps, HeaderMenuState> {
       [`${prefix}--header__submenu`]: true,
       [customClassName]: !!customClassName,
     });
-    const isActivePage = isActive ? isActive : isCurrentPage;
+    let isActivePage = isActive ? isActive : isCurrentPage;
     const linkClassName = cx({
       [`${prefix}--header__menu-item`]: true,
       [`${prefix}--header__menu-title`]: true,
       // We set the current class only if `isActive` is passed in and we do
       // not have an `aria-current="page"` set for the breadcrumb item
       [`${prefix}--header__menu-item--current`]:
-        isActivePage || (hasActiveChildren && !this.state.expanded),
+        isActivePage || (hasActiveDescendant(children) && !this.state.expanded),
     });
 
     // Notes on eslint comments and based on the examples in:
@@ -320,7 +260,6 @@ class HeaderMenu extends React.Component<HeaderMenuProps, HeaderMenuState> {
           className={linkClassName}
           href="#"
           onKeyDown={this.handleOnKeyDown}
-          // @ts-ignore type mismatch - calls a functions whose return type is `void`
           ref={this.handleMenuButtonRef}
           tabIndex={0}
           {...accessibilityLabel}>
@@ -349,18 +288,16 @@ class HeaderMenu extends React.Component<HeaderMenuProps, HeaderMenuState> {
    */
   _renderMenuItem = (item, index) => {
     if (React.isValidElement(item)) {
-      return React.cloneElement(item as React.ReactElement<any>, {
+      return React.cloneElement(item, {
         ref: this.handleItemRef(index),
       });
     }
   };
 }
 
-const HeaderMenuForwardRef: React.FC<HeaderMenuProps> = React.forwardRef(
-  function HeaderMenu(props, _ref) {
-    return <HeaderMenu {...props} />;
-  }
-);
+const HeaderMenuForwardRef = React.forwardRef((props, ref) => {
+  return <HeaderMenu {...props} focusRef={ref} />;
+});
 
 HeaderMenuForwardRef.displayName = 'HeaderMenu';
 
