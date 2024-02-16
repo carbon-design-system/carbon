@@ -35,17 +35,6 @@ export const Default = () => (
   </OverflowMenu>
 );
 
-export const Test = () => (
-  <OverflowMenu flipped={document?.dir === 'rtl'} aria-label="overflow-menu">
-    <OverflowMenuItem itemText="Stop app" />
-    <OverflowMenuItem itemText="Restart app" />
-    <OverflowMenuItem itemText="Rename app" />
-    <OverflowMenuItem itemText="Clone and move app" disabled requireTitle />
-    <OverflowMenuItem itemText="Edit routes and access" requireTitle />
-    <OverflowMenuItem hasDivider isDelete itemText="Delete app" disabled />
-  </OverflowMenu>
-);
-
 export const RenderCustomIcon = () => (
   <OverflowMenu flipped={document?.dir === 'rtl'} renderIcon={Filter}>
     <OverflowMenuItem itemText="Filter A" />
