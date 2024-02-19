@@ -481,6 +481,9 @@
     background-color: transparent;
     border-block-end-color: $border-subtle;
   }
+  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--readonly {
+    border-block-end-color: transparent;
+  }
 
   .#{$prefix}--dropdown--readonly .#{$prefix}--list-box__field,
   .#{$prefix}--dropdown--readonly .#{$prefix}--list-box__menu-icon {
