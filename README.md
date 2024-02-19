@@ -276,7 +276,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://jt-helsinki.github.io/blog/"><img src="https://avatars.githubusercontent.com/u/20871336?v=4?s=100" width="100px;" alt=""/><br /><sub><b>J Thomas</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=jt-helsinki" title="Code">💻</a></td>
   </tr>
   <tr>
-    <td align="center"><a href="https://github.com/ggdawson"><img src="https://avatars.githubusercontent.com/u/37080130?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Garrett Dawson</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=ggdawson" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/ggdawson"><img src="https://avatars.githubusercontent.com/u/37080130?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Garrett Dawson</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=ggdawson" title="Code">💻</a> <a href="https://github.com/carbon-design-system/carbon/commits?author=ggdawson" title="Documentation">📖</a></td>
   </tr>
 </table>
 
