@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0-rc.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.3.0...@carbon/web-components@2.4.0-rc.0) (2024-02-19)
+
+
+### Bug Fixes
+
+* **code-snippet:** multi copy button ([#11492](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11492)) ([c65ed61](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/c65ed617e3e57745b2f94c82dc655c08e45b8839)), closes [#11475](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11475)
+* **datatable:** search not working with uppercase characters in query ([#11493](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11493)) ([7c92bfe](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/7c92bfe8940d995ddd9e4fea50e07c93854676c5)), closes [#11483](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11483)
+* **file uploader:** drag and drop not working ([#11536](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11536)) ([0e75f3b](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/0e75f3bc3117037aaa9b0f5938f0f0d1936e68cd))
+* **side-panel:** refactor to match latest ibm-products ([#11511](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11511)) ([51e021a](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/51e021a34f9cb72b97c81dc04e7a35925c275df8))
+
+
+### Features
+
+* **ai-skeleton:** new cwc experminetal ([#11544](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11544)) ([acb7535](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/acb7535b31ebef944c2988bd1af2b0e9b21e6d66)), closes [#11505](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11505)
+* **chat-button:** experimental wc ([#11510](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11510)) ([a1560a5](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/a1560a5bda222e4931da16780d91b6005c05e4db)), closes [#11498](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11498)
+* **data-table:** ai updates ([#11530](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11530)) ([627dc5a](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/627dc5a98a9bb5d6b2f9a86d278cceb40d2f16a9)), closes [#11499](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11499)
+* **modal:** ai updates ([#11533](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11533)) ([d60f94a](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/d60f94a90cc0283b53beeb4941f168fdd06d10d4)), closes [#11500](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11500)
+
+
+
+
+
 # [2.3.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.3.0-rc.1...@carbon/web-components@2.3.0) (2024-02-12)
 
 **Note:** Version bump only for package @carbon/web-components
