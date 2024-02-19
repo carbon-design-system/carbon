@@ -11,6 +11,7 @@ import { Add } from '@carbon/icons-react';
 import { default as Button, ButtonSkeleton } from '../Button';
 import ButtonSet from '../ButtonSet';
 import mdx from './Button.mdx';
+import './button-story.scss';
 
 export default {
   title: 'Components/Button',

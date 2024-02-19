@@ -26,6 +26,7 @@ const OverflowMenu = React.forwardRef(function OverflowMenu(
     label = 'Options',
     renderIcon: IconElement = OverflowMenuVertical,
     size = defaultSize,
+    menuAlignment = 'bottom-start',
     tooltipAlignment,
     ...rest
   },
@@ -35,13 +36,27 @@ const OverflowMenu = React.forwardRef(function OverflowMenu(
   const prefix = usePrefix();
 
   const triggerRef = useRef(null);
-  const { open, x, y, handleClick, handleMousedown, handleClose } =
-    useAttachedMenu(triggerRef);
+  const {
+    open,
+    x,
+    y,
+    handleClick: hookOnClick,
+    handleMousedown,
+    handleClose,
+  } = useAttachedMenu(triggerRef);
+
+  function handleTriggerClick() {
+    if (triggerRef.current) {
+      hookOnClick();
+    }
+  }
 
   const containerClasses = classNames(
     className,
     `${prefix}--overflow-menu__container`
   );
+
+  const menuClasses = classNames(`${prefix}--overflow-menu__${menuAlignment}`);
 
   const triggerClasses = classNames(
     `${prefix}--overflow-menu`,
@@ -62,7 +77,7 @@ const OverflowMenu = React.forwardRef(function OverflowMenu(
         aria-haspopup
         aria-expanded={open}
         className={triggerClasses}
-        onClick={handleClick}
+        onClick={handleTriggerClick}
         onMouseDown={handleMousedown}
         ref={triggerRef}
         label={label}
@@ -70,6 +85,9 @@ const OverflowMenu = React.forwardRef(function OverflowMenu(
         <IconElement className={`${prefix}--overflow-menu__icon`} />
       </IconButton>
       <Menu
+        containerRef={triggerRef}
+        menuAlignment={menuAlignment}
+        className={menuClasses}
         id={id}
         size={size}
         open={open}
@@ -98,6 +116,16 @@ OverflowMenu.propTypes = {
    * A label describing the options available. Is used in the trigger tooltip and as the menu's accessible label.
    */
   label: PropTypes.string,
+
+  /**
+   * Experimental property. Specify how the menu should align with the button element
+   */
+  menuAlignment: PropTypes.oneOf([
+    'top-start',
+    'top-end',
+    'bottom-start',
+    'bottom-end',
+  ]),
 
   /**
    * Otionally provide a custom icon to be rendered on the trigger button.

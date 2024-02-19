@@ -47,7 +47,7 @@ export default {
         disable: true,
       },
     },
-    local: {
+    locale: {
       table: { disable: true },
     },
     onChange: {
@@ -71,7 +71,7 @@ export default {
     readOnly: {
       control: { type: 'boolean' },
     },
-    title: {
+    titleText: {
       table: { disable: true },
     },
     translateWithId: {
@@ -138,6 +138,7 @@ Playground.args = {
   hideLabel: false,
   invalid: false,
   warn: false,
+  open: false,
   warnText: 'whoopsie!',
   invalidText: 'whoopsie!',
   label: 'This is a label',

@@ -25,6 +25,24 @@ export function useNoInteractiveChildren(
   }
 }
 
+export function useInteractiveChildrenNeedDescription(
+  ref,
+  message = `interactive child node(s) should have an \`aria-describedby\` property`
+) {
+  if (__DEV__) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+      const node = ref.current ? getInteractiveContent(ref.current) : false;
+
+      if (node && !node.hasAttribute('aria-describedby')) {
+        throw new Error(
+          `Error: ${message}.\n\nInstead found: ${node.outerHTML}`
+        );
+      }
+    });
+  }
+}
+
 /**
  * Determines if a given DOM node has interactive content, or is itself
  * interactive. It returns the interactive node if one is found

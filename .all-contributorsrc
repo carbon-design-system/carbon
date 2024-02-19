@@ -1388,6 +1388,43 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "mattborghi",
+      "name": "Matias Borghi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11933424?v=4",
+      "profile": "https://mattborghi.github.io/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "amercury",
+      "name": "Alexandr Ovchinnikov",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17834588?v=4",
+      "profile": "https://github.com/amercury",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "jt-helsinki",
+      "name": "J Thomas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/20871336?v=4",
+      "profile": "https://jt-helsinki.github.io/blog/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ggdawson",
+      "name": "Garrett Dawson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/37080130?v=4",
+      "profile": "https://github.com/ggdawson",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "commitConvention": "none"

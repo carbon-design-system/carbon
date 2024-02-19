@@ -45,7 +45,7 @@ const normalize = (rows, headers, prevState = {}) => {
       rowsById[row.id].isExpanded = prevRowsByIds[row.id].isExpanded;
     }
 
-    headers.forEach(({ key }, i) => {
+    headers.forEach(({ key, slug }, i) => {
       const id = getCellId(row.id, key);
       // Initialize the cell info and state values, namely for editing
       cellsById[id] = {
@@ -55,6 +55,7 @@ const normalize = (rows, headers, prevState = {}) => {
         isEditing: false,
         isValid: true,
         errors: null,
+        hasSlugHeader: !!slug,
         info: {
           header: key,
         },

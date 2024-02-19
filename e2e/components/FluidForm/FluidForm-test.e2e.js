@@ -16,7 +16,7 @@ test.describe('FluidForm', () => {
       test('fluid form @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FluidForm',
-          id: 'experimental-fluidform--default',
+          id: 'experimental-fluid-components-fluidform--default',
           theme,
         });
       });
