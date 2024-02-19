@@ -8,11 +8,20 @@
 
 /// @access private
 /// @group tag
-@mixin tag-theme($bg-color, $text-color, $filter-hover-color: $bg-color) {
+@mixin tag-theme(
+  $bg-color,
+  $text-color,
+  $filter-hover-color: $bg-color,
+  $border-color: $bg-color
+) {
+  border: 1px solid $border-color;
   background-color: $bg-color;
   color: $text-color;
 
-  &.#{$prefix}--tag--interactive,
+  &:hover {
+    background-color: $bg-color;
+  }
+
   .#{$prefix}--tag__close-icon {
     &:hover {
       background-color: $filter-hover-color;

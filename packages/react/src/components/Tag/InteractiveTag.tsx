@@ -32,7 +32,7 @@ const TYPES = {
 
 export interface TagBaseProps {
   /**
-   * Provide content to be rendered inside of a `Tag`
+   * Provide content to be rendered inside of a `InteractiveTag`
    */
   children?: React.ReactNode;
 
@@ -42,14 +42,9 @@ export interface TagBaseProps {
   className?: string;
 
   /**
-   * Specify if the `Tag` is disabled
+   * Specify if the `InteractiveTag` is disabled
    */
   disabled?: boolean;
-
-  /**
-   * Determine if `Tag` is a filter/chip
-   */
-  filter?: boolean;
 
   /**
    * Specify the id for the tag.
@@ -57,9 +52,9 @@ export interface TagBaseProps {
   id?: string;
 
   /**
-   * Specify what Tag component should be rendered
+   * Specify what InteractiveTag component should be rendered
    */
-  interactivetype?: 'read-only' | 'selectable' | 'operational' | 'dismissible';
+  interactivetype: 'selectable' | 'operational' | 'dismissible';
 
   /**
    * Click handler for filter tag close button.
@@ -73,13 +68,13 @@ export interface TagBaseProps {
   renderIcon?: React.ElementType;
 
   /**
-   * Specify the size of the Tag. Currently supports either `sm` or
+   * Specify the size of the InteractiveTag. Currently supports either `sm` or
    * 'md' (default) sizes.
    */
   size?: 'sm' | 'md' | 'lg';
 
   /**
-   * **Experimental:** Provide a `Slug` component to be rendered inside the `Tag` component
+   * **Experimental:** Provide a `Slug` component to be rendered inside the `InteractiveTag` component
    */
   slug?: ReactNodeLike;
 
@@ -89,7 +84,7 @@ export interface TagBaseProps {
   title?: string;
 
   /**
-   * Specify the type of the `Tag`
+   * Specify the type of the `InteractiveTag`
    */
   type?: keyof typeof TYPES;
 }
@@ -99,7 +94,7 @@ export type TagProps<T extends React.ElementType> = PolymorphicProps<
   TagBaseProps
 >;
 
-const Tag = <T extends React.ElementType>({
+const InteractiveTag = <T extends React.ElementType>({
   children,
   className,
   id,
@@ -108,7 +103,7 @@ const Tag = <T extends React.ElementType>({
   title = 'Clear filter',
   disabled,
   onClose,
-  interactivetype = 'read-only',
+  interactivetype,
   selected = false,
   size,
   slug,
@@ -126,6 +121,7 @@ const Tag = <T extends React.ElementType>({
     [`${prefix}--tag--${size}`]: size, // TODO: V12 - Remove this class
     [`${prefix}--layout--size-${size}`]: size,
     [`${prefix}--tag--${type}`]: type && interactivetype !== 'selectable',
+    [`${prefix}--tag--interactive`]: interactivetype !== 'dismissible',
   });
 
   const typeText =
@@ -147,10 +143,7 @@ const Tag = <T extends React.ElementType>({
     });
   }
 
-  const ComponentTag =
-    interactivetype === 'dismissible' || interactivetype === 'read-only'
-      ? 'div'
-      : 'button';
+  const ComponentTag = interactivetype === 'dismissible' ? 'div' : 'button';
   switch (interactivetype) {
     case 'selectable':
       return (
@@ -222,33 +215,12 @@ const Tag = <T extends React.ElementType>({
           </button>
         </ComponentTag>
       );
-
-    default:
-      return (
-        <ComponentTag
-          disabled={disabled}
-          className={tagClasses}
-          id={tagId}
-          {...other}>
-          {CustomIconElement ? (
-            <div className={`${prefix}--tag__custom-icon`}>
-              <CustomIconElement />
-            </div>
-          ) : (
-            ''
-          )}
-          <Text title={typeof children === 'string' ? children : undefined}>
-            {children !== null && children !== undefined ? children : typeText}
-          </Text>
-          {normalizedSlug}
-        </ComponentTag>
-      );
   }
 };
 
-Tag.propTypes = {
+InteractiveTag.propTypes = {
   /**
-   * Provide content to be rendered inside of a `Tag`
+   * Provide content to be rendered inside of a `InteractiveTag`
    */
   children: PropTypes.node,
 
@@ -258,14 +230,9 @@ Tag.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify if the `Tag` is disabled
+   * Specify if the `InteractiveTag` is disabled
    */
   disabled: PropTypes.bool,
-
-  /**
-   * Determine if `Tag` is a filter/chip
-   */
-  filter: PropTypes.bool,
 
   /**
    * Specify the id for the tag.
@@ -273,14 +240,10 @@ Tag.propTypes = {
   id: PropTypes.string,
 
   /**
-   * Specify what Tag component should be rendered
+   * Specify what InteractiveTag component should be rendered
    */
-  interactivetype: PropTypes.oneOf([
-    'read-only',
-    'selectable',
-    'operational',
-    'dismissible',
-  ]),
+  interactivetype: PropTypes.oneOf(['selectable', 'operational', 'dismissible'])
+    .isRequired,
 
   /**
    * Click handler for filter tag close button.
@@ -294,13 +257,13 @@ Tag.propTypes = {
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
-   * Specify the size of the Tag. Currently supports either `sm` or
+   * Specify the size of the InteractiveTag. Currently supports either `sm` or
    * 'md' (default) sizes.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
-   * **Experimental:** Provide a `Slug` component to be rendered inside the `Tag` component
+   * **Experimental:** Provide a `Slug` component to be rendered inside the `InteractiveTag` component
    */
   slug: PropTypes.node,
 
@@ -310,10 +273,10 @@ Tag.propTypes = {
   title: PropTypes.string,
 
   /**
-   * Specify the type of the `Tag`
+   * Specify the type of the `InteractiveTag`
    */
   type: PropTypes.oneOf(Object.keys(TYPES)),
 };
 
 export const types = Object.keys(TYPES);
-export default Tag;
+export default InteractiveTag;

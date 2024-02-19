@@ -14,7 +14,7 @@ export default {
   component: Tag,
 };
 
-export const Default = () => {
+export const ReadOnly = () => {
   return (
     <>
       <Tag className="some-class" type="red" title="Clear Filter">

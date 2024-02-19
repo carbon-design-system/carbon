@@ -1,50 +1,70 @@
 import {
   red20,
+  red40,
+  red50,
   red70,
   red80,
   red20Hover,
   red70Hover,
   magenta20,
+  magenta40,
+  magenta50,
   magenta70,
   magenta80,
   magenta20Hover,
   magenta70Hover,
   purple20,
+  purple40,
+  purple50,
   purple70,
   purple80,
   purple20Hover,
   purple70Hover,
   blue20,
+  blue40,
+  blue50,
   blue70,
   blue80,
   blue20Hover,
   blue70Hover,
   cyan20,
+  cyan40,
+  cyan50,
   cyan70,
   cyan80,
   cyan20Hover,
   cyan70Hover,
   teal20,
+  teal40,
+  teal50,
   teal70,
   teal80,
   teal20Hover,
   teal70Hover,
   green20,
+  green40,
+  green50,
   green70,
   green80,
   green20Hover,
   green70Hover,
   gray20,
+  gray40,
+  gray50,
   gray70,
   gray80,
   gray20Hover,
   gray70Hover,
   warmGray20,
+  warmGray40,
+  warmGray50,
   warmGray70,
   warmGray80,
   warmGray20Hover,
   warmGray70Hover,
   coolGray20,
+  coolGray40,
+  coolGray50,
   coolGray70,
   coolGray80,
   coolGray20Hover,
@@ -257,4 +277,74 @@ export const tagHoverWarmGray = {
   g10: warmGray20Hover,
   g90: warmGray70Hover,
   g100: warmGray70Hover,
+};
+
+export const tagBorderRed = {
+  whiteTheme: red40,
+  g10: red40,
+  g90: red50,
+  g100: red50,
+};
+
+export const tagBorderBlue = {
+  whiteTheme: blue40,
+  g10: blue40,
+  g90: blue50,
+  g100: blue50,
+};
+
+export const tagBorderCyan = {
+  whiteTheme: cyan40,
+  g10: cyan40,
+  g90: cyan50,
+  g100: cyan50,
+};
+
+export const tagBorderTeal = {
+  whiteTheme: teal40,
+  g10: teal40,
+  g90: teal50,
+  g100: teal50,
+};
+
+export const tagBorderGreen = {
+  whiteTheme: green40,
+  g10: green40,
+  g90: green50,
+  g100: green50,
+};
+
+export const tagBorderMagenta = {
+  whiteTheme: magenta40,
+  g10: magenta40,
+  g90: magenta50,
+  g100: magenta50,
+};
+
+export const tagBorderPurple = {
+  whiteTheme: purple40,
+  g10: purple40,
+  g90: purple50,
+  g100: purple50,
+};
+
+export const tagBorderGray = {
+  whiteTheme: gray40,
+  g10: gray40,
+  g90: gray50,
+  g100: gray50,
+};
+
+export const tagBorderCoolGray = {
+  whiteTheme: coolGray40,
+  g10: coolGray40,
+  g90: coolGray50,
+  g100: coolGray50,
+};
+
+export const tagBorderWarmGray = {
+  whiteTheme: warmGray40,
+  g10: warmGray40,
+  g90: warmGray50,
+  g100: warmGray50,
 };
