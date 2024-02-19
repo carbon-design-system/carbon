@@ -53,12 +53,15 @@ export const ModalBody = React.forwardRef<HTMLDivElement, ModalBodyProps>(
     const prefix = usePrefix();
     const contentRef = useRef<HTMLDivElement>(null);
     const [isScrollable, setIsScrollable] = useState(false);
-    const contentClass = cx({
-      [`${prefix}--modal-content`]: true,
-      [`${prefix}--modal-content--with-form`]: hasForm,
-      [`${prefix}--modal-scroll-content`]: hasScrollingContent || isScrollable,
-      customClassName,
-    });
+    const contentClass = cx(
+      {
+        [`${prefix}--modal-content`]: true,
+        [`${prefix}--modal-content--with-form`]: hasForm,
+        [`${prefix}--modal-scroll-content`]:
+          hasScrollingContent || isScrollable,
+      },
+      customClassName
+    );
 
     useIsomorphicEffect(() => {
       if (contentRef.current) {
