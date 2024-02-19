@@ -5,16 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { default as Tag } from '../Tag';
+import { Asleep } from '@carbon/icons-react';
 import TagSkeleton from '../Tag/Tag.Skeleton';
+import { Tooltip } from '../Tooltip';
+import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
+import { Popover, PopoverContent } from '../Popover';
 
 export default {
   title: 'Components/Tag',
   component: Tag,
 };
 
-export const Default = () => {
+export const ReadOnly = () => {
   return (
     <>
       <Tag className="some-class" type="red" title="Clear Filter">
@@ -54,6 +58,258 @@ export const Default = () => {
         {'Tag content'}
       </Tag>
     </>
+  );
+};
+
+ReadOnly.argTypes = {
+  interactivetype: {
+    table: {
+      disable: true,
+    },
+  },
+  filter: {
+    table: {
+      disable: true,
+    },
+  },
+};
+
+export const Selectable = () => {
+  return (
+    <>
+      <Tag
+        interactivetype="selectable"
+        className="some-class"
+        title="Clear Filter">
+        {'Tag content'}
+      </Tag>
+      <Tag
+        interactivetype="selectable"
+        renderIcon={Asleep}
+        className="some-class"
+        title="Clear Filter">
+        {'Tag content'}
+      </Tag>
+    </>
+  );
+};
+
+Selectable.argTypes = {
+  type: {
+    table: {
+      disable: true,
+    },
+  },
+  interactivetype: {
+    table: {
+      disable: true,
+    },
+  },
+  filter: {
+    table: {
+      disable: true,
+    },
+  },
+};
+
+export const Operational = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <div style={{ marginBottom: '1rem' }}>
+        <Tag
+          type="red"
+          interactivetype="operational"
+          className="some-class"
+          title="Clear Filter">
+          {'Tag content'}
+        </Tag>
+        <Tag
+          type="magenta"
+          interactivetype="operational"
+          className="some-class"
+          title="Clear Filter">
+          {'Tag content'}
+        </Tag>
+        <Tag
+          type="purple"
+          interactivetype="operational"
+          className="some-class"
+          title="Clear Filter">
+          {'Tag content'}
+        </Tag>
+        <Tag
+          type="blue"
+          interactivetype="operational"
+          className="some-class"
+          title="Clear Filter">
+          {'Tag content'}
+        </Tag>
+        <Tag
+          type="cyan"
+          interactivetype="operational"
+          className="some-class"
+          title="Clear Filter">
+          {'Tag content'}
+        </Tag>
+        <Tag
+          type="teal"
+          interactivetype="operational"
+          className="some-class"
+          title="Clear Filter">
+          {'Tag content'}
+        </Tag>
+        <Tag
+          type="green"
+          interactivetype="operational"
+          className="some-class"
+          title="Clear Filter">
+          {'Tag content'}
+        </Tag>
+        <Tag
+          type="gray"
+          interactivetype="operational"
+          className="some-class"
+          title="Clear Filter">
+          {'Tag content'}
+        </Tag>
+        <Tag
+          type="cool-gray"
+          interactivetype="operational"
+          className="some-class"
+          title="Clear Filter">
+          {'Tag content'}
+        </Tag>
+        <Tag
+          type="warm-gray"
+          interactivetype="operational"
+          className="some-class"
+          title="Clear Filter">
+          {'Tag content'}
+        </Tag>
+      </div>
+
+      <h4>Interactive examples</h4>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'flex-start',
+          marginTop: '0.5rem',
+        }}>
+        <Tooltip label="View more" align="bottom">
+          <Tag
+            interactivetype="operational"
+            className="some-class"
+            title="Clear Filter">
+            {'Tag content'}
+          </Tag>
+        </Tooltip>
+
+        <Toggletip>
+          <ToggletipButton label="Additional information">
+            <Tag
+              interactivetype="operational"
+              renderIcon={Asleep}
+              className="some-class"
+              title="Clear Filter">
+              {'Tag content'}
+            </Tag>
+          </ToggletipButton>
+          <ToggletipContent>
+            <p>Tag 1 name</p>
+            <p>Tag 2 name</p>
+            <p>Tag 3 name</p>
+            <p>Tag 4 name</p>
+            <p>Tag 5 name</p>
+          </ToggletipContent>
+        </Toggletip>
+
+        <Popover open={open}>
+          <Tag
+            onClick={() => {
+              setOpen(!open);
+            }}
+            interactivetype="operational"
+            renderIcon={Asleep}
+            className="some-class"
+            title="Clear Filter">
+            {'Tag content'}
+          </Tag>
+          <PopoverContent className="p-3">
+            <br />
+            <Tag
+              type="blue"
+              interactivetype="read-only"
+              className="some-class"
+              title="Clear Filter">
+              {'Tag 1 name'}
+            </Tag>
+            <br />
+            <Tag
+              type="blue"
+              interactivetype="read-only"
+              className="some-class"
+              title="Clear Filter">
+              {'Tag 2 name'}
+            </Tag>
+            <br />
+            <Tag
+              type="blue"
+              interactivetype="read-only"
+              className="some-class"
+              title="Clear Filter">
+              {'Tag 3 name'}
+            </Tag>
+            <br />
+            <Tag
+              type="blue"
+              interactivetype="read-only"
+              className="some-class"
+              title="Clear Filter">
+              {'Tag 4 name'}
+            </Tag>
+            <br />
+            <Tag
+              type="blue"
+              interactivetype="read-only"
+              className="some-class"
+              title="Clear Filter">
+              {'Tag 5 name'}
+            </Tag>
+          </PopoverContent>
+        </Popover>
+      </div>
+    </>
+  );
+};
+
+Operational.argTypes = {
+  type: {
+    table: {
+      disable: true,
+    },
+  },
+  interactivetype: {
+    table: {
+      disable: true,
+    },
+  },
+  filter: {
+    table: {
+      disable: true,
+    },
+  },
+};
+
+export const Dismissible = () => {
+  return (
+    <Tag
+      interactivetype="dismissible"
+      className="some-class"
+      title="Clear Filter">
+      {'Tag content'}
+    </Tag>
   );
 };
 

@@ -6,7 +6,7 @@
  */
 
 import PropTypes, { ReactNodeLike } from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
@@ -57,6 +57,11 @@ export interface TagBaseProps {
   id?: string;
 
   /**
+   * Specify what Tag component should be rendered
+   */
+  interactivetype?: 'read-only' | 'selectable' | 'operational' | 'dismissible';
+
+  /**
    * Click handler for filter tag close button.
    */
   onClose?: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -68,10 +73,15 @@ export interface TagBaseProps {
   renderIcon?: React.ElementType;
 
   /**
+   * Specify the state of the selectable tag.
+   */
+  selected?: boolean;
+
+  /**
    * Specify the size of the Tag. Currently supports either `sm` or
    * 'md' (default) sizes.
    */
-  size?: 'sm' | 'md';
+  size?: 'sm' | 'md' | 'lg';
 
   /**
    * **Experimental:** Provide a `Slug` component to be rendered inside the `Tag` component
@@ -102,8 +112,10 @@ const Tag = <T extends React.ElementType>({
   filter,
   renderIcon: CustomIconElement,
   title = 'Clear filter',
+  interactivetype = 'read-only',
   disabled,
   onClose,
+  selected = false,
   size,
   as: BaseComponent,
   slug,
@@ -111,13 +123,20 @@ const Tag = <T extends React.ElementType>({
 }: TagProps<T>) => {
   const prefix = usePrefix();
   const tagId = id || `tag-${getInstanceId()}`;
+  const [selectedTag, setSelectedTag] = useState(selected);
   const tagClasses = classNames(`${prefix}--tag`, className, {
     [`${prefix}--tag--disabled`]: disabled,
-    [`${prefix}--tag--filter`]: filter,
+    [`${prefix}--tag--filter`]: interactivetype === 'dismissible',
+    [`${prefix}--tag--selectable`]: interactivetype === 'selectable',
+    [`${prefix}--tag--operational`]: interactivetype === 'operational',
+    [`${prefix}--tag--selectable-selected`]: selectedTag,
     [`${prefix}--tag--${size}`]: size, // TODO: V12 - Remove this class
     [`${prefix}--layout--size-${size}`]: size,
-    [`${prefix}--tag--${type}`]: type,
-    [`${prefix}--tag--interactive`]: other.onClick && !filter,
+    [`${prefix}--tag--${type}`]: type && interactivetype !== 'selectable',
+    [`${prefix}--tag--interactive`]:
+      !filter &&
+      interactivetype !== 'dismissible' &&
+      interactivetype !== 'read-only',
   });
 
   const typeText =
@@ -139,43 +158,23 @@ const Tag = <T extends React.ElementType>({
     });
   }
 
-  if (filter) {
-    const ComponentTag = BaseComponent ?? 'div';
-    return (
-      <ComponentTag className={tagClasses} id={tagId} {...other}>
-        {CustomIconElement ? (
-          <div className={`${prefix}--tag__custom-icon`}>
-            <CustomIconElement />
-          </div>
-        ) : (
-          ''
-        )}
-        <Text
-          className={`${prefix}--tag__label`}
-          title={typeof children === 'string' ? children : undefined}>
-          {children !== null && children !== undefined ? children : typeText}
-        </Text>
-        {normalizedSlug}
-        <button
-          type="button"
-          className={`${prefix}--tag__close-icon`}
-          onClick={handleClose}
-          disabled={disabled}
-          aria-label={title}
-          title={title}>
-          <Close />
-        </button>
-      </ComponentTag>
-    );
-  }
+  console.log('BaseComponent', BaseComponent);
+  console.log('interactivetype', interactivetype);
 
-  const ComponentTag = BaseComponent ?? (other.onClick ? 'button' : 'div');
+  const ComponentTag =
+    BaseComponent ??
+    (interactivetype === 'read-only' || interactivetype === 'dismissible'
+      ? 'div'
+      : 'button');
 
   return (
     <ComponentTag
       disabled={ComponentTag === 'button' ? disabled : null}
       className={tagClasses}
       id={tagId}
+      onClick={() => {
+        interactivetype === 'selectable' && setSelectedTag(!selectedTag);
+      }}
       {...other}>
       {CustomIconElement ? (
         <div className={`${prefix}--tag__custom-icon`}>
@@ -188,6 +187,18 @@ const Tag = <T extends React.ElementType>({
         {children !== null && children !== undefined ? children : typeText}
       </Text>
       {normalizedSlug}
+      {filter ||
+        (interactivetype === 'dismissible' && (
+          <button
+            type="button"
+            className={`${prefix}--tag__close-icon`}
+            onClick={handleClose}
+            disabled={disabled}
+            aria-label={title}
+            title={title}>
+            <Close />
+          </button>
+        ))}
     </ComponentTag>
   );
 };
@@ -225,6 +236,16 @@ Tag.propTypes = {
   id: PropTypes.string,
 
   /**
+   * Specify what Tag component should be rendered
+   */
+  interactivetype: PropTypes.oneOf([
+    'read-only',
+    'selectable',
+    'operational',
+    'dismissible',
+  ]),
+
+  /**
    * Click handler for filter tag close button.
    */
   onClose: PropTypes.func,
@@ -236,10 +257,15 @@ Tag.propTypes = {
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
+   * Specify the state of the selectable tag.
+   */
+  selected: PropTypes.bool,
+
+  /**
    * Specify the size of the Tag. Currently supports either `sm` or
    * 'md' (default) sizes.
    */
-  size: PropTypes.oneOf(['sm', 'md']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * **Experimental:** Provide a `Slug` component to be rendered inside the `Tag` component
