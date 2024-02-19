@@ -33,6 +33,16 @@ describe('ComposedModal', () => {
       );
     });
 
+    it('supports a custom class on the modal body', () => {
+      render(
+        <ComposedModal>
+          <ModalBody className="custom-class" data-testid="modal-body" />
+        </ComposedModal>
+      );
+
+      expect(screen.getByTestId('modal-body')).toHaveClass('custom-class');
+    });
+
     it('should spread props onto the outermost div', () => {
       render(<ComposedModal data-testid="modal" />);
 
