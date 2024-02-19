@@ -48,10 +48,11 @@ class CDSFileUploaderDropContainer extends HostListenerMixin(LitElement) {
   private _handleChange(event: Event | DragEvent) {
     const { eventChange, selectorInput } = this
       .constructor as typeof CDSFileUploaderDropContainer;
-    const addedFiles = this._getFiles(
-      event,
-      (this.shadowRoot?.querySelector(selectorInput) as HTMLInputElement).files
-    );
+    const { files } =
+      (event.type === 'drop'
+        ? (event as DragEvent).dataTransfer
+        : (event.target as HTMLInputElement)) ?? {};
+    const addedFiles = this._getFiles(event, files);
 
     this.dispatchEvent(
       new CustomEvent(eventChange, {
