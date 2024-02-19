@@ -10,7 +10,6 @@ import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButtonSkeleton from './RadioButton.Skeleton';
 import React from 'react';
 import mdx from './RadioButton.mdx';
-import { Form, FormGroup, Button } from 'carbon-components-react';
 
 export default {
   title: 'Components/RadioButton',
@@ -52,25 +51,6 @@ export const Default = () => {
   );
 };
 
-export const Test = () => {
-  function onSubmit(e) {
-    e.preventDefault();
-    alert('submitted');
-  }
-  return (
-    <Form onSubmit={onSubmit}>
-      <FormGroup>
-        <RadioButtonGroup name="group" legendText="Storage tier (disk)">
-          <RadioButton required labelText="Free (1 GB)" value="free" />
-          <RadioButton required labelText="Standard (10 GB)" value="standard" />
-          <RadioButton required labelText="Pro (128 GB)" value="pro" />
-        </RadioButtonGroup>
-      </FormGroup>
-
-      <Button type="submit">Submit</Button>
-    </Form>
-  );
-};
 export const Skeleton = () => {};
 
 export const Playground = (args) => {
