@@ -12,10 +12,16 @@ import TagSkeleton from '../Tag/Tag.Skeleton';
 import { Tooltip } from '../Tooltip';
 import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import { Popover, PopoverContent } from '../Popover';
+import mdx from './Tag.mdx';
 
 export default {
   title: 'Components/Tag',
   component: Tag,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 export const ReadOnly = () => {
@@ -304,12 +310,92 @@ Operational.argTypes = {
 
 export const Dismissible = () => {
   return (
-    <Tag
-      interactivetype="dismissible"
-      className="some-class"
-      title="Clear Filter">
-      {'Tag content'}
-    </Tag>
+    <>
+      <Tag
+        type="red"
+        interactivetype="dismissible"
+        className="some-class"
+        title="Clear Filter">
+        {'Tag content'}
+      </Tag>
+      <Tag
+        type="magenta"
+        interactivetype="dismissible"
+        className="some-class"
+        title="Clear Filter">
+        {'Tag content'}
+      </Tag>
+      <Tag
+        type="purple"
+        interactivetype="dismissible"
+        className="some-class"
+        title="Clear Filter">
+        {'Tag content'}
+      </Tag>
+      <Tag
+        type="blue"
+        interactivetype="dismissible"
+        className="some-class"
+        title="Clear Filter">
+        {'Tag content'}
+      </Tag>
+      <Tag
+        type="cyan"
+        interactivetype="dismissible"
+        className="some-class"
+        title="Clear Filter">
+        {'Tag content'}
+      </Tag>
+      <Tag
+        type="teal"
+        interactivetype="dismissible"
+        className="some-class"
+        title="Clear Filter">
+        {'Tag content'}
+      </Tag>
+      <Tag
+        type="green"
+        interactivetype="dismissible"
+        className="some-class"
+        title="Clear Filter">
+        {'Tag content'}
+      </Tag>
+      <Tag
+        type="gray"
+        interactivetype="dismissible"
+        className="some-class"
+        title="Clear Filter">
+        {'Tag content'}
+      </Tag>
+      <Tag
+        type="cool-gray"
+        interactivetype="dismissible"
+        className="some-class"
+        title="Clear Filter">
+        {'Tag content'}
+      </Tag>
+      <Tag
+        type="warm-gray"
+        interactivetype="dismissible"
+        className="some-class"
+        title="Clear Filter">
+        {'Tag content'}
+      </Tag>
+      <Tag
+        type="high-contrast"
+        interactivetype="dismissible"
+        className="some-class"
+        title="Clear Filter">
+        {'Tag content'}
+      </Tag>
+      <Tag
+        type="outline"
+        interactivetype="dismissible"
+        className="some-class"
+        title="Clear Filter">
+        {'Tag content'}
+      </Tag>
+    </>
   );
 };
 

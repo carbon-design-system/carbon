@@ -245,7 +245,7 @@
     );
   }
 
-  .#{$prefix}--tag--high-contrast:not(+ .#{$prefix}--tag--operational) {
+  .#{$prefix}--tag--high-contrast:not(.#{$prefix}--tag--operational) {
     @include tag-theme(
       $background-inverse,
       $text-inverse,
@@ -253,7 +253,7 @@
     );
   }
 
-  .#{$prefix}--tag--outline:not(+ .#{$prefix}--tag--operational) {
+  .#{$prefix}--tag--outline:not(.#{$prefix}--tag--operational) {
     @include tag-theme($background, $text-primary, $layer-hover);
 
     box-shadow: 0 0 0 1px $background-inverse;
