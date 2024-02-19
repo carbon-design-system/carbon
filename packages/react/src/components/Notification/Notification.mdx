@@ -40,13 +40,21 @@ don't grab focus. Use them to provide the user with an alert, status, or log.
 ### unstable\_\_StaticNotification
 
 `unstable__StaticNotification` is non-modal and should only be used inline with
-content on the initial render of the page or modal. This should not be used for
-real-time notifications or notifications responding to user input (unless the
-page is completely refreshing and bumping the users focus back to the first
-element in the dom/tab order). This is the most passive notification component
-and is essentially just a styled div. If you place actions or interactive
-elements within this component, place an `aria-describedby` on the interactive
-element with a value that matches the `titleId` prop.
+content on the initial render of the page or modal because it will not be
+announced to screenreader users like the other notification components.
+
+As such, this should not be used for real-time notifications or notifications
+responding to user input (unless the page is completely refreshing and bumping
+the users focus back to the first element in the dom/tab order). If a
+StaticNotification is rendered after the initial render, screenreader users'
+focus may have already passed this portion of the DOM and they will not know
+that the notification has been rendered until they circle back to the beginning
+of the page.
+
+This is the most passive notification component and is essentially just a styled
+div. If you place actions or interactive elements within this component, place
+an `aria-describedby` on the interactive element with a value that matches the
+`titleId` prop.
 
 ## Component API
 
