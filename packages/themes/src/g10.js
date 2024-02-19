@@ -9,10 +9,12 @@ import {
   // Blue
   blue10,
   blue20,
+  blue20Hover,
   blue30,
   blue40,
   blue60,
   blue70,
+  blue100,
 
   // CoolGray
   coolGray10,
@@ -231,6 +233,13 @@ export const aiAuraHoverEnd = rgba(white, 0);
 // Callout
 export const slugCalloutShadowOuter01 = rgba(blue70, 0.25);
 export const slugCalloutShadowOuter02 = rgba(black, 0.1);
+
+// AI skeleton
+export const aiSkeletonBackground = blue20Hover;
+export const aiSkeletonElementBackground = blue100;
+
+// AI Modal tokens
+export const aiOverlay = rgba(blue100, 0.5);
 
 //// Not used in phase 2 / possibly remove?
 export const slugCalloutGradientTop = rgba(gray10, 0.85);
