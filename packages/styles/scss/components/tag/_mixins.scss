@@ -22,10 +22,6 @@
     background-color: $bg-color;
   }
 
-  // &:focus {
-  //   background-color: $bg-color;
-  // }
-
   .#{$prefix}--tag__close-icon {
     &:hover {
       background-color: $filter-hover-color;
