@@ -42,6 +42,10 @@ categories:
           - rewind--10
           - rewind--30
           - rewind--5
+          - right-panel--close
+          - right-panel--close--filled
+          - right-panel--open
+          - right-panel--open--filled
           - settings
           - settings--adjust
           - settings--check

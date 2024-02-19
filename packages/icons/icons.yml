@@ -17188,6 +17188,72 @@
     - previous
     - past
     - reverse
+- name: right-panel--close
+  friendly_name: Right panel close
+  sizes:
+    - 32
+  aliases:
+    - controls
+    - side panel
+    - side bar
+    - close
+    - arrow right
+    - open
+    - panel
+    - navigation
+    - side nav
+    - ui
+    - nav
+- name: right-panel--close--filled
+  friendly_name: Right panel close filled
+  sizes:
+    - 32
+  aliases:
+    - controls
+    - side panel
+    - side bar
+    - close
+    - arrow right
+    - open
+    - panel
+    - navigation
+    - side nav
+    - ui
+    - nav
+    - filled
+- name: right-panel--open
+  friendly_name: Right panel open
+  sizes:
+    - 32
+  aliases:
+    - controls
+    - side panel
+    - side bar
+    - open
+    - arrow right
+    - open
+    - panel
+    - navigation
+    - side nav
+    - ui
+    - nav
+- name: right-panel--open--filled
+  friendly_name: Right panel open filled
+  sizes:
+    - 32
+  aliases:
+    - controls
+    - side panel
+    - side bar
+    - close
+    - arrow right
+    - open
+    - panel
+    - navigation
+    - side nav
+    - ui
+    - nav
+    - filled
 - name: road
   friendly_name: Road
   aliases:
