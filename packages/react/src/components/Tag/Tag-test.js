@@ -30,7 +30,7 @@ describe('Tag', () => {
   it('should have an appropriate aria-label when (filterable)', () => {
     const children = 'tag-3';
     const { container } = render(
-      <Tag type="red" filter title="Close tag">
+      <Tag type="red" interactivetype="dismissible" title="Close tag">
         {children}
       </Tag>
     );
