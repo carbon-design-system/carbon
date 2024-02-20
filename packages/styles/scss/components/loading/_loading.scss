@@ -103,7 +103,7 @@
     display: none;
   }
 
-  @keyframes rotate {
+  @keyframes #{$prefix}--rotate {
     0% {
       transform: rotate(0deg);
     }
@@ -113,20 +113,20 @@
     }
   }
 
-  @keyframes rotate-end-p1 {
+  @keyframes #{$prefix}--rotate-end-p1 {
     100% {
       transform: rotate(360deg);
     }
   }
 
-  @keyframes rotate-end-p2 {
+  @keyframes #{$prefix}--rotate-end-p2 {
     100% {
       transform: rotate(-360deg);
     }
   }
 
   /* Stroke animations */
-  @keyframes init-stroke {
+  @keyframes #{$prefix}--init-stroke {
     0% {
       stroke-dashoffset: loading-progress($circumference, 0);
     }
@@ -136,7 +136,7 @@
     }
   }
 
-  @keyframes stroke-end {
+  @keyframes #{$prefix}--stroke-end {
     0% {
       stroke-dashoffset: loading-progress($circumference, 81);
     }

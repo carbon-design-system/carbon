@@ -9,10 +9,12 @@ import {
   // Blue
   blue10,
   blue20,
+  blue20Hover,
   blue30,
   blue40,
   blue60,
   blue70,
+  blue100,
 
   // CoolGray
   coolGray10,
@@ -217,6 +219,7 @@ export const slugHollowHover = gray80Hover;
 //// Phase 2 - new \\\\
 // Shared
 export const aiInnerShadow = rgba(blue50, 0.2);
+export const aiAuraStartTable = rgba(blue50, 0.15);
 export const aiAuraStart = rgba(blue50, 0.1);
 export const aiAuraEnd = rgba(white, 0);
 export const aiBorderStrong = blue50;
@@ -230,6 +233,13 @@ export const aiAuraHoverEnd = rgba(white, 0);
 // Callout
 export const slugCalloutShadowOuter01 = rgba(blue70, 0.25);
 export const slugCalloutShadowOuter02 = rgba(black, 0.1);
+
+// AI skeleton
+export const aiSkeletonBackground = blue20Hover;
+export const aiSkeletonElementBackground = blue100;
+
+// AI Modal tokens
+export const aiOverlay = rgba(blue100, 0.5);
 
 //// Not used in phase 2 / possibly remove?
 export const slugCalloutGradientTop = rgba(gray10, 0.85);
@@ -263,9 +273,9 @@ export const chatPromptBorderEnd = rgba(gray10, 0);
 export const chatBubbleUser = gray20;
 export const chatBubbleAgent = white;
 export const chatBubbleAgentBorder = gray20;
-export const chatAvatarBot = blue60;
-export const chatAvatarAgent = gray100;
-export const chatAvatarUser = gray100;
+export const chatAvatarBot = gray60;
+export const chatAvatarAgent = gray80;
+export const chatAvatarUser = blue60;
 
 export {
   // Type
