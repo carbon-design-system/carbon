@@ -259,7 +259,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     function handleKeyDown(evt: KeyboardEvent) {
-      evt.preventDefault();
+      evt.stopPropagation();
       if (match(evt, keys.Escape)) {
         closeModal(evt);
       }
@@ -267,7 +267,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       onKeyDown?.(evt);
     }
     function handleMousedown(evt: MouseEvent) {
-      evt.preventDefault();
+      evt.stopPropagation();
       const isInside = innerModal.current?.contains(evt.target as Node);
       if (!isInside && !preventCloseOnClickOutside) {
         closeModal(evt);
