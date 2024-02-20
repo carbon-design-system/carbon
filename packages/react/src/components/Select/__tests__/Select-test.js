@@ -250,6 +250,16 @@ describe('Select', () => {
         `${prefix}--select--slug`
       );
     });
+    
+    it('should show SelectItem text as title', () => {
+      render(
+        <Select id="select" labelText="Select" defaultValue="option-2">
+          <SelectItem text="Option 1" value="option-1" />
+          <SelectItem text="Option 2" value="option-2" />
+        </Select>
+      );
+      expect(screen.getByLabelText('Select').title).toEqual('Option 2');
+    });
   });
 
   describe('behaves as expected', () => {
