@@ -8,12 +8,15 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
+  forwardRef,
+  ReactNode,
   useContext,
   useEffect,
   useMemo,
   useReducer,
   useRef,
   useState,
+  RefObject,
 } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -29,9 +32,13 @@ const spacing = 8; // distance to keep to window edges, in px
 
 interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
+   * The ref of the containing element, used for positioning and alignment of the menu
+   */
+  containerRef?: RefObject<HTMLDivElement>;
+  /**
    * A collection of MenuItems to be rendered within this Menu.
    */
-  children?: React.ReactNode;
+  children?: ReactNode;
 
   /**
    * Additional CSS class names.
@@ -41,7 +48,12 @@ interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
    * A label describing the Menu.
    */
-  label?: string;
+  label: string;
+
+  /**
+   * Specify how the menu should align with the button element
+   */
+  menuAlignment?: string;
 
   /**
    * The mode of this menu. Defaults to full.
@@ -75,24 +87,26 @@ interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
-  target?: any;
+  target?: HTMLElement;
 
   /**
    * Specify the x position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([x1, x2])
    */
-  x?: number | (number | null | undefined)[];
+  x?: number | [number, number];
 
   /**
    * Specify the y position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([y1, y2])
    */
-  y?: number | (number | null | undefined)[];
+  y?: number | [number, number];
 }
 
-const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
+const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   {
     children,
     className,
+    containerRef,
     label,
+    menuAlignment,
     mode = 'full',
     onClose,
     onOpen,
@@ -137,14 +151,21 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }, [childState, childDispatch]);
 
   const menu = useRef<HTMLUListElement>(null);
-  const ref = useMergedRefs([forwardRef, menu]);
+  const ref = useMergedRefs<HTMLUListElement>([forwardRef, menu]);
 
   const [position, setPosition] = useState([-1, -1]);
   const focusableItems = childContext.state.items.filter(
     (item) => !item.disabled && item.ref.current
   );
 
-  // Set RTL based on document direction or `LayoutDirection`
+  // Getting the width from the parent container element - controlled
+  let actionButtonWidth: number;
+  if (containerRef?.current) {
+    const { width: w } = containerRef.current.getBoundingClientRect();
+    actionButtonWidth = w;
+  }
+
+  // Set RTL based on the document direction or `LayoutDirection`
   const { direction } = useLayoutDirection();
 
   function returnFocus() {
@@ -272,6 +293,26 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
       },
     };
 
+    // Avoid that the Menu render incorrectly when the postion is set in the right side of the screen
+    if (
+      actionButtonWidth &&
+      actionButtonWidth < axes.x.size &&
+      (menuAlignment === 'bottom' || menuAlignment === 'top')
+    ) {
+      axes.x.size = actionButtonWidth;
+    }
+
+    // if 'axes.x.anchor' is lower than 87px dynamically switch render side
+    if (
+      actionButtonWidth &&
+      (menuAlignment === 'bottom-end' || menuAlignment === 'top-end') &&
+      axes.x.anchor >= 87 &&
+      actionButtonWidth < axes.x.size
+    ) {
+      const diff = axes.x.anchor + axes.x.reversedAnchor;
+      axes.x.anchor = axes.x.anchor + diff;
+    }
+
     const { max, size, anchor, reversedAnchor, offset } = axes[axis];
 
     // get values for different scenarios, set to false if they don't work
@@ -285,6 +326,24 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
       // align at max (second fallback)
       max - spacing - size,
     ];
+
+    const topAlignment =
+      menuAlignment === 'top' ||
+      menuAlignment === 'top-end' ||
+      menuAlignment === 'top-start';
+
+    // If the tooltip is not visible in the top, switch to the bototm
+    if (
+      typeof options[0] === 'number' &&
+      topAlignment &&
+      options[0] >= 0 &&
+      !options[1] &&
+      axis === 'y'
+    ) {
+      menu.current.style.transform = 'translate(0)';
+    } else if (topAlignment && !options[0] && axis === 'y') {
+      options[0] = anchor - offset;
+    }
 
     // Previous array `options`, has at least one item that is a number (the last one - second fallback).
     // That guarantees that the return of `find()` will always be a number
@@ -352,6 +411,8 @@ const Menu = React.forwardRef<HTMLUListElement, MenuProps>(function Menu(
       // visibility is needed for focusing elements.
       // opacity is only set once the position has been set correctly
       // to avoid a flicker effect when opening.
+      [`${prefix}--menu--box-shadow-top`]:
+        menuAlignment && menuAlignment.slice(0, 3) === 'top',
       [`${prefix}--menu--open`]: open,
       [`${prefix}--menu--shown`]: position[0] >= 0 && position[1] >= 0,
       [`${prefix}--menu--with-icons`]: childContext.state.hasIcons,
@@ -391,7 +452,13 @@ Menu.propTypes = {
   /**
    * A label describing the Menu.
    */
+  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   label: PropTypes.string,
+
+  /**
+   * Specify how the menu should align with the button element
+   */
+  menuAlignment: PropTypes.string,
 
   /**
    * The mode of this menu. Defaults to full.
@@ -425,11 +492,13 @@ Menu.propTypes = {
   /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
+  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   target: PropTypes.object,
 
   /**
    * Specify the x position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([x1, x2])
    */
+  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   x: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.arrayOf(PropTypes.number),
@@ -438,6 +507,7 @@ Menu.propTypes = {
   /**
    * Specify the y position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([y1, y2])
    */
+  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   y: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.arrayOf(PropTypes.number),
