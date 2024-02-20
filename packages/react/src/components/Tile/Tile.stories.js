@@ -202,7 +202,7 @@ export const Radio = (args) => {
         {...args}>
         Option 2
       </RadioTile>
-      <RadioTile id="radio-tile-3" {...args} value="selected">
+      <RadioTile id="radio-tile-3" value="selected" {...args}>
         Option 3
       </RadioTile>
     </TileGroup>
@@ -225,7 +225,7 @@ export const RadioWithLayer = () => (
   <WithLayer>
     {(layer) => (
       <TileGroup
-        defaultSelected="none"
+        defaultSelected="default-selected"
         legend="Radio Tile Group"
         name={`radio tile group ${layer}`}>
         <RadioTile
@@ -234,7 +234,7 @@ export const RadioWithLayer = () => (
           style={{ marginBottom: '.5rem' }}>
           Option 1
         </RadioTile>
-        <RadioTile id={`radio-tile-${layer}-2`} value="none">
+        <RadioTile id={`radio-tile-${layer}-2`} value="default-selected">
           Option 2
         </RadioTile>
       </TileGroup>
