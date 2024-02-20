@@ -111,7 +111,7 @@ test.describe('FluidDatePicker @avt', () => {
     await expect(page.locator('div.flatpickr-calendar')).toHaveClass(/open/);
     await page.keyboard.press('Escape');
     await expect(
-      page.locator('input#date-picker-input-id-start')
+      page.locator('input#date-picker-input-id-finish')
     ).toBeFocused();
     await expect(page.locator('div.flatpickr-calendar')).not.toHaveClass(
       /open/
