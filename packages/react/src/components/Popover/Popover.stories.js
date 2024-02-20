@@ -391,6 +391,8 @@ export const AutoAlignFloatingUI = () => {
   const ref = useRef();
 
   useLayoutEffect(() => {
+    console.log(`ref from story uselayouteffect`);
+    console.log(ref);
     ref?.current?.scrollIntoView();
   }, [ref]);
 

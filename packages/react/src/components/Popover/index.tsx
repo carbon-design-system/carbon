@@ -217,7 +217,7 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
 
         // Middleware order matters, arrow should be last
         middleware: [
-          offset(popoverOffsetPx.current || -10),
+          offset(caret ? popoverOffsetPx.current || -10 : 0),
           flip({ fallbackAxisSideDirection: 'start' }),
           arrow({
             element: caretRef,
@@ -256,11 +256,23 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
       if (middlewareData && middlewareData.arrow) {
         const { x = 0, y = 0 } = middlewareData.arrow;
 
+        const staticSide = {
+          top: 'bottom',
+          right: 'left',
+          bottom: 'top',
+          left: 'right',
+        }[placement.split('-')[0]];
+
         caretRef.current.style.left = x != null ? `${x}px` : '';
         caretRef.current.style.top = y != null ? `${y}px` : '';
+        caretRef.current.style.right = '';
+        caretRef.current.style.bottom = '';
+        caretRef.current.style[staticSide] = `${
+          -caretRef.current.offsetWidth / 2
+        }px`;
       }
     }
-  }, [floatingStyles, refs.floating, autoAlign, middlewareData]);
+  }, [floatingStyles, refs.floating, autoAlign, middlewareData, placement]);
 
   const ref = useMergedRefs([forwardRef, popover]);
   const currentAlignment = autoAlign && placement !== align ? placement : align;
@@ -312,6 +324,9 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
 
   console.log('reference element:');
   console.log(refs.reference.current);
+  console.log('caret element:');
+  // console.log(refs.caret.current);
+  console.log(refs);
   console.log(`
   isPositioned: ${isPositioned}
   placement: ${placement}
@@ -456,14 +471,26 @@ function PopoverContentRenderFunction(
     <span {...rest} className={`${prefix}--popover`}>
       <span className={cx(`${prefix}--popover-content`, className)} ref={ref}>
         {children}
+        {autoAlign && (
+          <span
+            className={cx({
+              [`${prefix}--popover-caret`]: true,
+              [`${prefix}--popover--auto-align`]: autoAlign,
+              ['yeahhh']: autoAlign,
+            })}
+            ref={caretRef}
+          />
+        )}
       </span>
-      <span
-        className={cx({
-          [`${prefix}--popover-caret`]: true,
-          [`${prefix}--popover--auto-align`]: autoAlign,
-        })}
-        ref={caretRef}
-      />
+      {!autoAlign && (
+        <span
+          className={cx({
+            [`${prefix}--popover-caret`]: true,
+            [`${prefix}--popover--auto-align`]: autoAlign,
+          })}
+          ref={caretRef}
+        />
+      )}
     </span>
   );
 }
