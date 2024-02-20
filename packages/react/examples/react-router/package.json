@@ -13,7 +13,7 @@
     "react-router": "^6.0.0-beta.0",
     "react-router-dom": "^6.0.0-beta.0",
     "react-scripts": "^4.0.3",
-    "yarn": "^1.22.10"
+    "yarn": "^1.22.13"
   },
   "scripts": {
     "start": "react-scripts start",

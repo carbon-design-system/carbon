@@ -185,9 +185,7 @@ export interface DropdownProps<ItemType>
    * An optional callback to render the currently selected item as a react element instead of only
    * as a string.
    */
-  renderSelectedItem?(
-    item: ItemType
-  ): React.JSXElementConstructor<ItemType> | null;
+  renderSelectedItem?(item: ItemType): ReactNode;
 
   /**
    * In the case you want to control the dropdown selection entirely.

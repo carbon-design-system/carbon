@@ -5,17 +5,44 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useState } from 'react';
+import { MouseEventHandler, useState } from 'react';
 
 /**
- * @typedef {object} useAttachedMenuReturn
- * @property {boolean} open Whether the menu is open or not
- * @property {[number, number]} x The x position of the menu
- * @property {[number, number]} y The y position of the menu
- * @property {Function} handleClick A function to be called when the trigger element receives a click event
- * @property {Function} handleMousedown A function to be called when the trigger element recives a mousedown event
- * @property {Function} handleClose A function to be called when the menu emits onClose
+ * Array of two numbers either representing [left, right] or [top, bottom].
  */
+type TwoCoordinates = [number, number];
+
+export interface UseAttachedMenuReturn {
+  /**
+   * Whether the menu is open or not.
+   */
+  open: boolean;
+
+  /**
+   * The x position of the menu.
+   */
+  x: TwoCoordinates;
+
+  /**
+   * The y position of the menu.
+   */
+  y: TwoCoordinates;
+
+  /**
+   * A function to be called when the trigger element receives a click event.
+   */
+  handleClick: () => void;
+
+  /**
+   * A function to be called when the trigger element receives a mousedown event.
+   */
+  handleMousedown: MouseEventHandler;
+
+  /**
+   * A function to be called when the menu emits onClose.
+   */
+  handleClose: () => void;
+}
 
 /**
  * This hook contains common code to be used when a menu should be visually attached to an anchor based on a click event.
@@ -23,9 +50,9 @@ import { useState } from 'react';
  * @param {Element|object} anchor The element or ref the menu should visually be attached to.
  * @returns {useAttachedMenuReturn}
  */
-export function useAttachedMenu(anchor) {
+export function useAttachedMenu(anchor): UseAttachedMenuReturn {
   const [open, setOpen] = useState(false);
-  const [position, setPosition] = useState([
+  const [position, setPosition] = useState<TwoCoordinates[]>([
     [-1, -1],
     [-1, -1],
   ]);
