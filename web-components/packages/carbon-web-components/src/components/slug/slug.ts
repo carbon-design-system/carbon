@@ -120,11 +120,12 @@ export default class CDSSlug extends CDSToggleTip {
   };
 
   protected _renderInnerContent = () => {
-    const { revertActive, revertLabel } = this;
+    const { autoalign, revertActive, revertLabel } = this;
     return html`
       ${revertActive
         ? html`
             <cds-icon-button
+              ?autoalign=${autoalign}
               kind="ghost"
               size="sm"
               @click="${this._handleClick}">
@@ -145,8 +146,8 @@ export default class CDSSlug extends CDSToggleTip {
     name === 'revert-active' ? this.parentElement?.requestUpdate() : ``;
   }
 
-  updated(changedProperties) {
-    super.updated(changedProperties);
+  async updated() {
+    super.updated();
     if (
       this.kind !== SLUG_KIND.HOLLOW &&
       this.dotType !== SLUG_DOT_TYPE.HOLLOW

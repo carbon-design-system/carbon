@@ -274,44 +274,178 @@ $colorMap: (
 
 // override for specific alignments
 /* stylelint-disable-next-line no-duplicate-selectors */
-:host(#{$prefix}-slug:not([kind='hollow']):not([dot-type='hollow'])) {
-  &[alignment='left-bottom'],
-  &[alignment='right-bottom'] {
-    .#{$prefix}--popover-caret::after {
-      background: transparent;
-    }
+:host(
+    #{$prefix}-slug:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment='left-end']
+  ),
+:host(
+    #{$prefix}-slug:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment='left-bottom']
+  ),
+:host(
+    #{$prefix}-slug:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment='right-end']
+  ),
+:host(
+    #{$prefix}-slug:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment='right-bottom']
+  ) {
+  .#{$prefix}--popover-caret::after {
+    background: transparent;
   }
 }
 
 // Change caret color / border when it is near the bottom of the callout
 /* stylelint-disable-next-line no-duplicate-selectors */
-:host(#{$prefix}-slug:not([kind='hollow']):not([dot-type='hollow'])) {
-  &[alignment='left-bottom'],
-  &[alignment='right-bottom'],
-  &[alignment='top'],
-  &[alignment='top-right'],
-  &[alignment='top-left'] {
-    .#{$prefix}--popover-caret::before {
-      border-color: $slug-callout-caret-bottom;
-      background: $slug-callout-caret-bottom-background;
-    }
-    // Adjust background if actions are present
-    &[has-actions] {
-      .#{$prefix}--popover-caret::before {
-        background: $slug-callout-caret-bottom-background-actions;
-      }
-    }
+:host(
+    #{$prefix}-slug:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment='left-end']
+  ),
+:host(
+    #{$prefix}-slug:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment='left-bottom']
+  ),
+:host(
+    #{$prefix}-slug:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment='right-end']
+  ),
+:host(
+    #{$prefix}-slug:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment='right-bottom']
+  ),
+:host(
+    #{$prefix}-slug:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment^='top']
+  ) {
+  .#{$prefix}--popover-caret::before {
+    border-color: $slug-callout-caret-bottom;
+    background: $slug-callout-caret-bottom-background;
+  }
+}
+
+:host(
+    #{$prefix}-slug[autoalign]:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment='left-end'][has-actions]
+  ),
+:host(
+    #{$prefix}-slug[autoalign]:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment='left-bottom'][has-actions]
+  ),
+:host(
+    #{$prefix}-slug[autoalign]:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment='right-end'][has-actions]
+  ),
+:host(
+    #{$prefix}-slug[autoalign]:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment='right-bottom'][has-actions]
+  ),
+:host(
+    #{$prefix}-slug[autoalign]:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment^='top'][has-actions]
+  ) {
+  .#{$prefix}--popover-caret::before {
+    background: $slug-callout-caret-bottom-background-actions;
   }
 }
 
 // Change the caret border when it is near the middle of the callout
 /* stylelint-disable-next-line no-duplicate-selectors */
-:host(#{$prefix}-slug:not([kind='hollow']):not([dot-type='hollow'])) {
-  &[alignment='left'],
-  &[alignment='right'] {
-    .#{$prefix}--popover-caret::before {
-      border-color: $slug-callout-caret-center;
-    }
+:host(
+    #{$prefix}-slug:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment='left']
+  ),
+:host(
+    #{$prefix}-slug:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment='right']
+  ) {
+  .#{$prefix}--popover-caret::before {
+    border-color: $slug-callout-caret-center;
+  }
+}
+
+// caret styles for auto align
+:host(#{$prefix}-slug[autoalign]) .#{$prefix}--popover-caret {
+  block-size: $spacing-04;
+  inline-size: $spacing-04;
+}
+
+:host(
+    #{$prefix}-slug[autoalign]:not([kind='hollow']):not([dot-type='hollow'])
+  ) {
+  .#{$prefix}--popover-caret::before {
+    inset-block-start: 0;
+  }
+
+  .#{$prefix}--popover-caret {
+    transform: none;
+  }
+
+  .#{$prefix}--popover-caret::after {
+    inline-size: to-rem(14px);
+    inset-block-end: to-rem(5px);
+    inset-inline-start: to-rem(-1px);
+  }
+}
+
+:host(
+    #{$prefix}-slug[autoalign]:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment^='left']
+  ),
+:host(
+    #{$prefix}-slug[autoalign]:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment^='right']
+  ) {
+  .#{$prefix}--popover-caret::before {
+    inset-inline-start: 0;
+  }
+  .#{$prefix}--popover-caret::after {
+    block-size: to-rem(14px);
+    inline-size: to-rem(2px);
+    inset-block-start: to-rem(-1px);
+    inset-inline-start: to-rem(5px);
+  }
+}
+
+:host(
+    #{$prefix}-slug[autoalign]:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment='left-end']
+  ),
+:host(
+    #{$prefix}-slug[autoalign]:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment='left-bottom']
+  ),
+:host(
+    #{$prefix}-slug[autoalign]:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment='right-end']
+  ),
+:host(
+    #{$prefix}-slug[autoalign]:not([kind='hollow']):not(
+        [dot-type='hollow']
+      )[alignment='right-bottom']
+  ) {
+  .#{$prefix}--popover-caret::after {
+    background: transparent;
   }
 }
 

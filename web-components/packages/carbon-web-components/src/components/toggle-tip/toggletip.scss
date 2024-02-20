@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,6 +10,7 @@
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/utilities/custom-property' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/components/toggletip/index' as *;
@@ -30,5 +31,16 @@
 
   .#{$prefix}--popover-caret {
     background-color: $background-inverse;
+  }
+}
+
+:host(#{$prefix}-slug[open][autoalign]),
+:host(#{$prefix}-toggletip[open][autoalign]) {
+  .#{$prefix}--popover-content {
+    display: block;
+
+    @include declaration('popover-background-color', $background-inverse);
+
+    @include declaration('popover-text-color', $text-inverse);
   }
 }

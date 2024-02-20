@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,8 +9,9 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
-import { property, customElement } from 'lit/decorators.js';
+import { property, customElement, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
+import { floatingUIPosition } from '../../globals/internal/floating-ui';
 import styles from './popover.scss';
 import CDSPopoverContent from './popover-content';
 
@@ -22,10 +23,28 @@ import CDSPopoverContent from './popover-content';
 @customElement(`${prefix}-popover`)
 class CDSPopover extends LitElement {
   /**
+   * The `<slot>` element in the shadow DOM.
+   */
+  @query('slot')
+  private _triggerSlotNode!: HTMLSlotElement;
+
+  /**
+   * The `<slot>` element in the shadow DOM.
+   */
+  @query('slot[name="content"]')
+  private _contentSlotNode!: HTMLSlotElement;
+
+  /**
    * Specify direction of alignment
    */
   @property({ reflect: true, type: String })
   align = '';
+
+  /**
+   * Specify whether a auto align functionality should be applied
+   */
+  @property({ type: Boolean, reflect: true })
+  autoalign = false;
 
   /**
    * Specify whether a caret should be rendered
@@ -77,14 +96,41 @@ class CDSPopover extends LitElement {
 
   updated(changedProperties) {
     const { selectorPopoverContent } = this.constructor as typeof CDSPopover;
-    ['open', 'align', 'caret', 'dropShadow', 'tabTip'].forEach((name) => {
-      if (changedProperties.has(name)) {
-        const { [name as keyof CDSPopover]: value } = this;
-        (this.querySelector(selectorPopoverContent) as CDSPopoverContent)[
-          name
-        ] = value;
+    ['open', 'align', 'autoalign', 'caret', 'dropShadow', 'tabTip'].forEach(
+      (name) => {
+        if (changedProperties.has(name)) {
+          const { [name as keyof CDSPopover]: value } = this;
+          if (this.querySelector(selectorPopoverContent) as CDSPopoverContent) {
+            (this.querySelector(selectorPopoverContent) as CDSPopoverContent)[
+              name
+            ] = value;
+          }
+        }
       }
-    });
+    );
+
+    if (this.autoalign) {
+      // auto align functionality with @floating-ui/dom library
+      const button = this._triggerSlotNode.assignedElements()[0];
+      const content = this._contentSlotNode.assignedElements()[0];
+
+      const tooltip = content?.shadowRoot?.querySelector(
+        CDSPopover.selectorPopoverContentClass
+      );
+      const arrowElement = content?.shadowRoot?.querySelector(
+        CDSPopover.selectorPopoverCaret
+      );
+
+      if (button && tooltip) {
+        floatingUIPosition({
+          button,
+          tooltip,
+          arrowElement,
+          caret: this.caret,
+          alignment: this.align,
+        });
+      }
+    }
   }
 
   render() {
@@ -115,6 +161,22 @@ class CDSPopover extends LitElement {
       <slot name="content"><slot>
     </span>
     `;
+  }
+
+  /**
+   * A selector that will return popover content element within
+   * CDSPopoverContent's shadowRoot.
+   */
+  static get selectorPopoverContentClass() {
+    return `.${prefix}--popover-content`;
+  }
+
+  /**
+   * A selector that will return popover caret element within
+   * CDSPopoverContent's shadowRoot.
+   */
+  static get selectorPopoverCaret() {
+    return `.${prefix}--popover-caret`;
   }
 
   /**

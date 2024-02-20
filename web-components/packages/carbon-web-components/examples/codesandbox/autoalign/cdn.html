@@ -1,0 +1,159 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+  <head>
+    <title>@carbon/ibmdotcom-web-components example</title>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/grid.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/themes.css"
+    />
+    <style>
+      /* Suppress custom element until styles are loaded */
+      cds-accordion:not(:defined) {
+        display: none;
+      }
+    </style>
+    <script
+      type="module"
+      src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/toggle-tip.min.js"
+    ></script>
+    <script
+      type="module"
+      src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/tooltip.min.js"
+    ></script>
+    <script
+      type="module"
+      src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/popover.min.js"
+    ></script>
+    <script
+      type="module"
+      src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/slug.min.js"
+    ></script>
+    <script
+      type="module"
+      src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/button.min.js"
+    ></script>
+  </head>
+  <body>
+    <div class="section">
+      <cds-popover open autoalign>
+        <button class="playground-trigger" aria-label="Settings" type="button">
+          <svg
+            focusable="false"
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            aria-hidden="true"
+            width="16"
+            height="16"
+            viewBox="0 0 32 32"
+          >
+            <path
+              d="M26,4H6A2,2,0,0,0,4,6V26a2,2,0,0,0,2,2H26a2,2,0,0,0,2-2V6A2,2,0,0,0,26,4ZM6,26V6H26V26Z"
+            ></path>
+          </svg>
+        </button>
+        <cds-popover-content>
+          <div class="p-3">
+            <p class="popover-title">Available storage</p>
+            <p class="popover-details">
+              This server has 150 GB of block storage remaining.
+            </p>
+          </div>
+        </cds-popover-content>
+      </cds-popover>
+    </div>
+
+    <div class="section">
+      <cds-toggletip autoalign>
+        Toggletip label
+
+        <p slot="body-text">
+          Occassionally, services are updated in a specified time window to
+          ensure no down time for customers.
+        </p>
+        <cds-link slot="actions">Test</cds-link>
+        <cds-button slot="actions">Button</cds-button>
+      </cds-toggletip>
+    </div>
+
+    <div class="section">
+      <cds-tooltip autoalign>
+        <button
+          class="sb-tooltip-trigger"
+          role="button"
+          aria-labelledby="content"
+        >
+          <svg
+            focusable="false"
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            aria-hidden="true"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+          >
+            <!--?lit$163743842$-->
+            <path
+              d="M8.5 11L8.5 6.5 6.5 6.5 6.5 7.5 7.5 7.5 7.5 11 6 11 6 12 10 12 10 11zM8 3.5c-.4 0-.8.3-.8.8S7.6 5 8 5c.4 0 .8-.3.8-.8S8.4 3.5 8 3.5z"
+            ></path>
+            <path
+              d="M8,15c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7S11.9,15,8,15z M8,2C4.7,2,2,4.7,2,8s2.7,6,6,6s6-2.7,6-6S11.3,2,8,2z"
+            ></path>
+          </svg>
+        </button>
+        <cds-tooltip-content id="content">
+          Occassionally, services are updated in a specified time window to
+          ensure no down time for customers.
+        </cds-tooltip-content>
+      </cds-tooltip>
+    </div>
+
+    <div class="section">
+      <cds-slug autoalign>
+        <div slot="body-text">
+          <p class="secondary">AI Explained</p>
+          <h1>84%</h1>
+          <p class="secondary bold">Confidence score</p>
+          <p class="secondary">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <hr />
+          <p class="secondary">Model type</p>
+          <p class="bold">Foundation model</p>
+        </div>
+      </cds-slug>
+    </div>
+
+    <script>
+      _handleClick = () => {
+        const popover = document.querySelector("cds-popover");
+        const open = popover?.hasAttribute("open");
+        open
+          ? popover?.removeAttribute("open")
+          : popover?.setAttribute("open", "");
+      };
+
+      const trigger = document.querySelector(".playground-trigger");
+      trigger.addEventListener("click", _handleClick);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,139 @@
+import { Props, Description } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+
+# Auto Align
+
+> 💡 Check our
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/autoalign)
+> example implementation.
+
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/autoalign)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Popover](#popover)
+- [Toggletip](#toggletip)
+- [Tooltip](#tooltip)
+- [Slug](#slug)
+
+## Overview
+
+Auto Align is an experimental feature utilizing the
+[@floating-ui/dom](https://floating-ui.com/docs/getting-started) library. With
+Auto Align, the tooltip or popover is positioned relative to the viewport and
+other elements, avoiding collisions.
+
+NOTE: The Auto Align feature currently uses the `flip()` utility from
+[@floating-ui/dom](https://floating-ui.com/docs/flip) with the
+`fallbackAxisSideDirection` enabled. If no placements along the preferred
+placement axis fit, it will fallback to a primary axis direction (`top`, `left`,
+`right`, or `bottom`).
+
+Activating the Auto Align feature is simple - just add the `autoalign` property
+to the component.
+
+## Popover
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/popover/index.js';
+import Checkbox16 from '@carbon/icons/lib/checkbox/16';
+```
+
+<Description markdown={`${cdnJs({ components: ['popover'] })}`} />
+<Description markdown={`${cdnCss()}`} />
+
+### HTML
+
+```html
+<cds-popover open autoalign>
+  <div class="playground-trigger">${Checkbox16()}</div>
+  <cds-popover-content>
+    <div class="p-3">
+      <p class="popover-title">Available storage</p>
+      <p class="popover-details">
+        This server has 150 GB of block storage remaining.
+      </p>
+    </div>
+  </cds-popover-content>
+</cds-popover>
+```
+
+## Toggletip
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/toggle-tip/index.js';
+```
+
+<Description markdown={`${cdnJs({ components: ['toggle-tip'] })}`} />
+<Description markdown={`${cdnCss()}`} />
+
+### HTML
+
+```html
+<cds-toggletip autoalign>
+  Toggletip label
+
+  <p slot="body-text">toggletip body text</p>
+  <cds-link slot="actions">Test</cds-link>
+  <cds-button slot="actions">Button</cds-button>
+</cds-toggletip>
+```
+
+## Tooltip
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/tooltip/index.js';
+import Information16 from '@carbon/icons/lib/information/16';
+```
+
+<Description markdown={`${cdnJs({ components: ['tooltip'] })}`} />
+<Description markdown={`${cdnCss()}`} />
+
+### HTML
+
+```html
+<cds-tooltip autoalign>
+  <div aria-labelledby="content">${Information16()}</div>
+  <cds-tooltip-content id="content">
+    Occassionally, services are updated in a specified time window to ensure no
+    down time for customers.
+  </cds-tooltip-content>
+</cds-tooltip>
+```
+
+## Slug
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/slug/index.js';
+```
+
+<Description markdown={`${cdnJs({ components: ['slug'] })}`} />
+<Description markdown={`${cdnCss()}`} />
+
+### HTML
+
+```html
+<cds-slug autoalign>
+  <div slot="body-text">
+    <p class="secondary">AI Explained</p>
+    <h1>84%</h1>
+    <p class="secondary bold">Confidence score</p>
+    <p class="secondary">
+      Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+      eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+    </p>
+    <hr />
+    <p class="secondary">Model type</p>
+    <p class="bold">Foundation model</p>
+  </div>
+</cds-slug>
+```

@@ -72,7 +72,6 @@
 }
 
 :host(#{$prefix}-table-header-cell[sort-direction]) {
-  position: relative;
   block-size: $spacing-09;
 
   .#{$prefix}--table-sort__flex {

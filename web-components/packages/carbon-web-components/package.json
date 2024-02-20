@@ -70,6 +70,7 @@
     "@babel/runtime": "^7.16.3",
     "@carbon/ibm-products-styles": "^2.24.0",
     "@carbon/styles": "1.51.0",
+    "@floating-ui/dom": "^1.6.3",
     "flatpickr": "4.6.1",
     "lit": "^2.7.6",
     "lodash-es": "^4.17.21"

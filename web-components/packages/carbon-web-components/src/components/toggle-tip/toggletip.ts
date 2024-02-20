@@ -16,6 +16,7 @@ import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import FocusMixin from '../../globals/mixins/focus';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
+import { floatingUIPosition } from '../../globals/internal/floating-ui';
 import styles from './toggletip.scss';
 
 /**
@@ -31,6 +32,15 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
   @property({ reflect: true })
   alignment = POPOVER_ALIGNMENT.TOP;
 
+  /**
+   * Specify whether a auto align functionality should be applied
+   */
+  @property({ type: Boolean, reflect: true })
+  autoalign = false;
+
+  /**
+   * Set whether toggletip is open
+   */
   @property({ type: Boolean, reflect: true })
   open = false;
 
@@ -92,21 +102,35 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
   };
 
   protected _renderTooltipContent = () => {
-    return html`
-      <span class="${prefix}--popover">
-        <span class="${prefix}--popover-content">
-          <div class="${prefix}--toggletip-content">
-            <slot name="body-text"></slot>
-            <div class="${prefix}--toggletip-actions">
-              <slot
-                name="actions"
-                @slotchange="${this._handleActionsSlotChange}"></slot>
+    return this.autoalign
+      ? html`
+          <span class="${prefix}--popover-content">
+            <div class="${prefix}--toggletip-content">
+              <slot name="body-text"></slot>
+              <div class="${prefix}--toggletip-actions">
+                <slot
+                  name="actions"
+                  @slotchange="${this._handleActionsSlotChange}"></slot>
+              </div>
             </div>
-          </div>
-        </span>
-        <span class="${prefix}--popover-caret"></span>
-      </span>
-    `;
+            <span class="${prefix}--popover-caret"></span>
+          </span>
+        `
+      : html`
+          <span class="${prefix}--popover">
+            <span class="${prefix}--popover-content">
+              <div class="${prefix}--toggletip-content">
+                <slot name="body-text"></slot>
+                <div class="${prefix}--toggletip-actions">
+                  <slot
+                    name="actions"
+                    @slotchange="${this._handleActionsSlotChange}"></slot>
+                </div>
+              </div>
+            </span>
+            <span class="${prefix}--popover-caret"></span>
+          </span>
+        `;
   };
 
   protected _renderInnerContent = () => {
@@ -114,6 +138,36 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
       ${this._renderTooltipButton()} ${this._renderTooltipContent()}
     `;
   };
+
+  async updated() {
+    if (this.autoalign) {
+      // auto align functionality with @floating-ui/dom library
+      const button = this.shadowRoot?.querySelector(
+        CDSToggletip.selectorToggletipButton
+      );
+
+      const tooltip = this.shadowRoot?.querySelector(
+        CDSToggletip.selectorToggletipContent
+      );
+      const arrowElement = this.shadowRoot?.querySelector(
+        CDSToggletip.selectorToggletipCaret
+      );
+
+      if (button && tooltip) {
+        // @floating-ui/dom returns the final placement which we'll use
+        // to set the alignment attr for styling
+        const finalPlacement = await floatingUIPosition({
+          button,
+          tooltip,
+          arrowElement,
+          caret: true,
+          alignment: this.alignment,
+        });
+
+        this.setAttribute('alignment', finalPlacement);
+      }
+    }
+  }
 
   render() {
     const { alignment, open } = this;
@@ -133,6 +187,27 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
       </span>
     </span>
     `;
+  }
+
+  /**
+   * A selector that will return the toggletip content.
+   */
+  static get selectorToggletipContent() {
+    return `.${prefix}--popover-content`;
+  }
+
+  /**
+   * A selector that will return the toggletip caret.
+   */
+  static get selectorToggletipCaret() {
+    return `.${prefix}--popover-caret`;
+  }
+
+  /**
+   * A selector that will return the trigger element.
+   */
+  static get selectorToggletipButton() {
+    return `.${prefix}--toggletip-button`;
   }
 
   static shadowRootOptions = {
