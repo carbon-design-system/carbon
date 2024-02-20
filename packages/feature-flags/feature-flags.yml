@@ -30,6 +30,10 @@ feature-flags:
     description: >
       Enable rendering of default icons in the tile components
     enabled: false
+  - name: enable-v12-tile-radio-icons
+    description: >
+      Enable rendering of radio icons in the RadioTile component
+    enabled: false
   - name: enable-v12-overflowmenu
     description: >
       Enable the use of the v12 OverflowMenu leveraging the Menu subcomponents

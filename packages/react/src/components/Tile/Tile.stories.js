@@ -184,7 +184,7 @@ MultiSelect.argTypes = {
 export const Radio = (args) => {
   return (
     <TileGroup
-      defaultSelected="none"
+      defaultSelected="default-selected"
       legend="Radio Tile Group"
       name="radio tile group"
       {...args}>
@@ -202,7 +202,7 @@ export const Radio = (args) => {
         {...args}>
         Option 2
       </RadioTile>
-      <RadioTile id="radio-tile-3" {...args} value="standard-option3">
+      <RadioTile id="radio-tile-3" {...args} value="selected">
         Option 3
       </RadioTile>
     </TileGroup>
@@ -234,7 +234,7 @@ export const RadioWithLayer = () => (
           style={{ marginBottom: '.5rem' }}>
           Option 1
         </RadioTile>
-        <RadioTile id={`radio-tile-${layer}-2`} value="default-selected">
+        <RadioTile id={`radio-tile-${layer}-2`} value="none">
           Option 2
         </RadioTile>
       </TileGroup>

@@ -5,7 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { RadioButtonChecked, RadioButton } from '@carbon/icons-react';
+import {
+  RadioButtonChecked,
+  RadioButton,
+  CheckmarkFilled,
+} from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -15,6 +19,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const RadioTile = React.forwardRef(function RadioTile(
   {
@@ -33,8 +38,6 @@ const RadioTile = React.forwardRef(function RadioTile(
   },
   ref
 ) {
-  console.log('123   checked', checked, id);
-  console.log('valuee 123', value);
   const prefix = usePrefix();
   const inputId = useFallbackId(id);
   const className = cx(
@@ -47,6 +50,18 @@ const RadioTile = React.forwardRef(function RadioTile(
       [`${prefix}--tile--disabled`]: disabled,
     }
   );
+  const v12TileRadioIcons = useFeatureFlag('enable-v12-tile-radio-icons');
+  function icon() {
+    if (v12TileRadioIcons) {
+      if (checked) {
+        return <RadioButtonChecked />;
+      } else {
+        return <RadioButton />;
+      }
+    } else {
+      return <CheckmarkFilled />;
+    }
+  }
 
   function handleOnChange(evt) {
     onChange(value, name, evt);
@@ -75,9 +90,7 @@ const RadioTile = React.forwardRef(function RadioTile(
         ref={ref}
       />
       <label {...rest} htmlFor={inputId} className={className}>
-        <span className={`${prefix}--tile__checkmark`}>
-          {checked ? <RadioButtonChecked /> : <RadioButton />}
-        </span>
+        <span className={`${prefix}--tile__checkmark`}>{icon()}</span>
         <Text className={`${prefix}--tile-content`}>{children}</Text>
       </label>
     </div>
