@@ -24,3 +24,31 @@
 <script>
   document.title = 'Carbon Web Components';
 </script>
+
+<footer>
+  <c4d-footer-container disable-locale-button="true" size="micro" />
+</footer>
+
+<script
+  type="module"
+  src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/latest/footer.min.js"></script>
+
+<style type="text/css">
+  footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 99999;
+  }
+
+  #root > div {
+    height: calc(100vh - 48px);
+  }
+
+  /* This style is required because of the compliance footer in smaller screens */
+  @media (max-width: 738px) {
+    #root > div {
+      height: calc(100vh - 361px);
+    }
+  }
+</style>
