@@ -225,11 +225,18 @@ const Select = React.forwardRef(function Select(
   }
 
   const selectDefaultTitle = (defaultValue) => {
-    const selectElement = document.getElementById(id);
-    const title = defaultValue
-      ? selectElement?.querySelector(`option[value=${defaultValue}]`)?.text
-      : selectElement?.options[selectElement?.selectedIndex]?.text;
-    setTitle(title);
+    const selectElement = document.getElementById(
+      id
+    ) as HTMLSelectElement | null;
+    if (defaultValue) {
+      const defaultOption: HTMLOptionElement | null | undefined =
+        selectElement?.querySelector(`option[value=${defaultValue}]`);
+      setTitle(defaultOption?.text || '');
+    } else {
+      setTitle(
+        selectElement?.options[selectElement?.selectedIndex]?.text || ''
+      );
+    }
   };
   const handleFocus = (evt) => {
     setIsFocused(evt.type === 'focus' ? true : false);
