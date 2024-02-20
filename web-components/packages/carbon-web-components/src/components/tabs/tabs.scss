@@ -28,7 +28,7 @@ $inset-transition: inset 110ms motion(standard, productive);
     overflow: scroll;
     flex: 1 1 0%;
     // for some reason, overflow: hidden shrinks the content
-    block-size: $spacing-09;
+    block-size: $spacing-08;
     scrollbar-width: none;
 
     &::-webkit-scrollbar {
