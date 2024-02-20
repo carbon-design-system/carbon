@@ -7207,6 +7207,9 @@ Map {
   },
   "StaticNotification" => Object {
     "propTypes": Object {
+      "actionButtonLabel": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },
@@ -7228,6 +7231,9 @@ Map {
       },
       "lowContrast": Object {
         "type": "bool",
+      },
+      "onActionButtonClick": Object {
+        "type": "func",
       },
       "statusIconDescription": Object {
         "type": "string",
