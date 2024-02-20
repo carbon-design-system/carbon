@@ -163,7 +163,7 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     block-size: 1rem;
     inset-block-start: layout.density('padding-inline');
     inset-inline-end: layout.density('padding-inline');
-    opacity: 0;
+    opacity: 1;
     transition: $duration-fast-02 motion(standard, productive);
 
     svg {

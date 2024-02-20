@@ -184,7 +184,7 @@ MultiSelect.argTypes = {
 export const Radio = (args) => {
   return (
     <TileGroup
-      defaultSelected="default-selected"
+      defaultSelected="none"
       legend="Radio Tile Group"
       name="radio tile group"
       {...args}>
@@ -202,7 +202,7 @@ export const Radio = (args) => {
         {...args}>
         Option 2
       </RadioTile>
-      <RadioTile id="radio-tile-3" value="selected" {...args}>
+      <RadioTile id="radio-tile-3" {...args} value="standard-option3">
         Option 3
       </RadioTile>
     </TileGroup>
@@ -225,7 +225,7 @@ export const RadioWithLayer = () => (
   <WithLayer>
     {(layer) => (
       <TileGroup
-        defaultSelected="default-selected"
+        defaultSelected="none"
         legend="Radio Tile Group"
         name={`radio tile group ${layer}`}>
         <RadioTile

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CheckmarkFilled } from '@carbon/icons-react';
+import { RadioButtonChecked, RadioButton } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -33,6 +33,8 @@ const RadioTile = React.forwardRef(function RadioTile(
   },
   ref
 ) {
+  console.log('123   checked', checked, id);
+  console.log('valuee 123', value);
   const prefix = usePrefix();
   const inputId = useFallbackId(id);
   const className = cx(
@@ -74,7 +76,7 @@ const RadioTile = React.forwardRef(function RadioTile(
       />
       <label {...rest} htmlFor={inputId} className={className}>
         <span className={`${prefix}--tile__checkmark`}>
-          <CheckmarkFilled />
+          {checked ? <RadioButtonChecked /> : <RadioButton />}
         </span>
         <Text className={`${prefix}--tile-content`}>{children}</Text>
       </label>
