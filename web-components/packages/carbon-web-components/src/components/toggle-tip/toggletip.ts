@@ -16,7 +16,7 @@ import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import FocusMixin from '../../globals/mixins/focus';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
-import { floatingUIPosition } from '../../globals/internal/floating-ui';
+import PopoverController from '../../globals/controllers/popover-controller';
 import styles from './toggletip.scss';
 
 /**
@@ -26,6 +26,11 @@ import styles from './toggletip.scss';
  */
 @customElement(`${prefix}-toggletip`)
 class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
+  /**
+   * Create popover controller instance
+   */
+  private popoverController = new PopoverController(this);
+
   /**
    * How the tooltip is aligned to the trigger button.
    */
@@ -139,8 +144,8 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
     `;
   };
 
-  async updated() {
-    if (this.autoalign) {
+  updated() {
+    if (this.autoalign && this.open) {
       // auto align functionality with @floating-ui/dom library
       const button = this.shadowRoot?.querySelector(
         CDSToggletip.selectorToggletipButton
@@ -154,17 +159,14 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
       );
 
       if (button && tooltip) {
-        // @floating-ui/dom returns the final placement which we'll use
-        // to set the alignment attr for styling
-        const finalPlacement = await floatingUIPosition({
-          button,
-          tooltip,
-          arrowElement,
+        this.popoverController?.setPlacement({
+          trigger: button as HTMLElement,
+          target: tooltip as HTMLElement,
+          arrowElement: arrowElement as HTMLElement,
           caret: true,
+          flip: true,
           alignment: this.alignment,
         });
-
-        this.setAttribute('alignment', finalPlacement);
       }
     }
   }

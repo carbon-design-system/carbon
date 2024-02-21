@@ -146,7 +146,7 @@ export default class CDSSlug extends CDSToggleTip {
     name === 'revert-active' ? this.parentElement?.requestUpdate() : ``;
   }
 
-  async updated() {
+  updated() {
     super.updated();
     if (
       this.kind !== SLUG_KIND.HOLLOW &&
