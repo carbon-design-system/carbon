@@ -122,7 +122,7 @@ describe('PasswordInput', () => {
     });
 
     //Feature flag : enable-v12-tile-radio-icons
-    it('should not select a radio button of no `defaultSelected`is provided', () => {
+    it('should keep radio unselected if no `defaultSelected` is provided', () => {
       render(
         <FeatureFlags
           flags={{
