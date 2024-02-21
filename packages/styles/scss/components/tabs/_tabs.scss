@@ -566,6 +566,10 @@
     }
   }
 
+  .#{$prefix}--tabs--contained ~ .#{$prefix}--tab-content {
+    background: $layer;
+  }
+
   .#{$prefix}--tab-content--interactive {
     &:focus {
       outline: none;
