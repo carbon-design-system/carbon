@@ -7,7 +7,21 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, {
+  ChangeEventHandler,
+  ComponentProps,
+  FC,
+  ForwardedRef,
+  forwardRef,
+  KeyboardEvent,
+  LiHTMLAttributes,
+  MouseEvent,
+  ReactNode,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import { CaretRight, CaretLeft, Checkmark } from '@carbon/icons-react';
 import { keys, match } from '../../internal/keyboard';
@@ -21,11 +35,11 @@ import { MenuContext } from './MenuContext';
 import { useLayoutDirection } from '../LayoutDirection';
 import { Text } from '../Text';
 
-interface MenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
+export interface MenuItemProps extends LiHTMLAttributes<HTMLLIElement> {
   /**
    * Optionally provide another Menu to create a submenu. props.children can't be used to specify the content of the MenuItem itself. Use props.label instead.
    */
-  children?: React.ReactNode;
+  children?: ReactNode;
 
   /**
    * Additional CSS class names.
@@ -51,13 +65,13 @@ interface MenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
    * Provide an optional function to be called when the MenuItem is clicked.
    */
   onClick?: (
-    event: React.KeyboardEvent<HTMLLIElement> | React.MouseEvent<HTMLLIElement>
+    event: KeyboardEvent<HTMLLIElement> | MouseEvent<HTMLLIElement>
   ) => void;
 
   /**
    * Only applicable if the parent menu is in `basic` mode. Sets the menu item's icon.
    */
-  renderIcon?: any;
+  renderIcon?: FC;
 
   /**
    * Provide a shortcut for the action of this MenuItem. Note that the component will only render it as a hint but not actually register the shortcut.
@@ -67,7 +81,7 @@ interface MenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
 
 const hoverIntentDelay = 150; // in ms
 
-const MenuItem = React.forwardRef<HTMLLIElement, MenuItemProps>(
+export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
   function MenuItem(
     {
       children,
@@ -86,12 +100,12 @@ const MenuItem = React.forwardRef<HTMLLIElement, MenuItemProps>(
     const context = useContext(MenuContext);
 
     const menuItem = useRef<HTMLLIElement>(null);
-    const ref = useMergedRefs([forwardRef, menuItem]);
+    const ref = useMergedRefs<HTMLLIElement>([forwardRef, menuItem]);
     const [boundaries, setBoundaries] = useState<{
-      x: number | number[];
-      y: number | number[];
+      x: number | [number, number];
+      y: number | [number, number];
     }>({ x: -1, y: -1 });
-    const [isRtl, setRtl] = useState(false);
+    const [rtl, setRtl] = useState(false);
 
     const hasChildren = Boolean(children);
     const [submenuOpen, setSubmenuOpen] = useState(false);
@@ -116,8 +130,9 @@ const MenuItem = React.forwardRef<HTMLLIElement, MenuItemProps>(
       if (!menuItem.current) {
         return;
       }
+
       const { x, y, width, height } = menuItem.current.getBoundingClientRect();
-      if (isRtl) {
+      if (rtl) {
         setBoundaries({
           x: [-x, x - width],
           y: [y, y + height],
@@ -138,7 +153,7 @@ const MenuItem = React.forwardRef<HTMLLIElement, MenuItemProps>(
     }
 
     function handleClick(
-      e: React.KeyboardEvent<HTMLLIElement> | React.MouseEvent<HTMLLIElement>
+      e: KeyboardEvent<HTMLLIElement> | MouseEvent<HTMLLIElement>
     ) {
       if (!isDisabled) {
         if (hasChildren) {
@@ -194,7 +209,7 @@ const MenuItem = React.forwardRef<HTMLLIElement, MenuItemProps>(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // Set RTL based on document direction or `LayoutDirection`
+    // Set RTL based on the document direction or `LayoutDirection`
     const { direction } = useLayoutDirection();
     useEffect(() => {
       if (document?.dir === 'rtl' || direction === 'rtl') {
@@ -211,6 +226,7 @@ const MenuItem = React.forwardRef<HTMLLIElement, MenuItemProps>(
 
     useEffect(() => {
       if (iconsAllowed && IconElement && !context.state.hasIcons) {
+        // @ts-ignore - TODO: Should we be passing payload?
         context.dispatch({ type: 'enableIcons' });
       }
     }, [iconsAllowed, IconElement, context.state.hasIcons, context]);
@@ -222,8 +238,8 @@ const MenuItem = React.forwardRef<HTMLLIElement, MenuItemProps>(
         ref={ref}
         className={classNames}
         tabIndex={-1}
-        aria-disabled={isDisabled}
-        aria-haspopup={hasChildren || undefined}
+        aria-disabled={isDisabled ?? undefined}
+        aria-haspopup={hasChildren ?? undefined}
         aria-expanded={hasChildren ? submenuOpen : undefined}
         onClick={handleClick}
         onMouseEnter={hasChildren ? handleMouseEnter : undefined}
@@ -241,7 +257,7 @@ const MenuItem = React.forwardRef<HTMLLIElement, MenuItemProps>(
         {hasChildren && (
           <>
             <div className={`${prefix}--menu-item__shortcut`}>
-              {isRtl ? <CaretLeft /> : <CaretRight />}
+              {rtl ? <CaretLeft /> : <CaretRight />}
             </div>
             <Menu
               label={label}
@@ -290,47 +306,41 @@ MenuItem.propTypes = {
   /**
    * Provide an optional function to be called when the MenuItem is clicked.
    */
+  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   onClick: PropTypes.func,
 
   /**
    * Only applicable if the parent menu is in `basic` mode. Sets the menu item's icon.
    */
+  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
    * Provide a shortcut for the action of this MenuItem. Note that the component will only render it as a hint but not actually register the shortcut.
    */
+  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   shortcut: PropTypes.string,
 };
 
-interface MenuItemSelectableProps {
-  /**
-   * Additional CSS class names.
-   */
-  className?: string;
-
+export interface MenuItemSelectableProps
+  extends Omit<MenuItemProps, 'onChange'> {
   /**
    * Specify whether the option should be selected by default.
    */
   defaultSelected?: boolean;
 
   /**
-   * A required label titling this option.
-   */
-  label: string;
-
-  /**
    * Provide an optional function to be called when the selection state changes.
    */
-  onChange?: React.ChangeEventHandler<HTMLLIElement>;
+  onChange?: ChangeEventHandler<HTMLLIElement>;
 
   /**
-   * Pass a bool to props.selected to control the state of this option.
+   * Controls the state of this option.
    */
   selected?: boolean;
 }
 
-const MenuItemSelectable = React.forwardRef<
+export const MenuItemSelectable = forwardRef<
   HTMLLIElement,
   MenuItemSelectableProps
 >(function MenuItemSelectable(
@@ -363,6 +373,7 @@ const MenuItemSelectable = React.forwardRef<
 
   useEffect(() => {
     if (!context.state.hasIcons) {
+      // @ts-ignore - TODO: Should we be passing payload?
       context.dispatch({ type: 'enableIcons' });
     }
   }, [context.state.hasIcons, context]);
@@ -392,6 +403,7 @@ MenuItemSelectable.propTypes = {
   /**
    * Specify whether the option should be selected by default.
    */
+  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   defaultSelected: PropTypes.bool,
 
   /**
@@ -402,19 +414,21 @@ MenuItemSelectable.propTypes = {
   /**
    * Provide an optional function to be called when the selection state changes.
    */
+  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   onChange: PropTypes.func,
 
   /**
    * Pass a bool to props.selected to control the state of this option.
    */
+  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   selected: PropTypes.bool,
 };
 
-interface MenuItemGroupProps {
+export interface MenuItemGroupProps extends ComponentProps<'ul'> {
   /**
    * A collection of MenuItems to be rendered within this group.
    */
-  children?: React.ReactNode;
+  children?: ReactNode;
 
   /**
    * Additional CSS class names.
@@ -427,7 +441,7 @@ interface MenuItemGroupProps {
   label: string;
 }
 
-const MenuItemGroup = React.forwardRef<HTMLLIElement, MenuItemGroupProps>(
+export const MenuItemGroup = forwardRef<HTMLLIElement, MenuItemGroupProps>(
   function MenuItemGroup({ children, className, label, ...rest }, forwardRef) {
     const prefix = usePrefix();
 
@@ -460,9 +474,10 @@ MenuItemGroup.propTypes = {
   label: PropTypes.string.isRequired,
 };
 
-const defaultItemToString = (item: any) => item.toString();
+const defaultItemToString = (item) => item.toString();
 
-interface MenuItemRadioGroupProps {
+export interface MenuItemRadioGroupProps<Item>
+  extends Omit<ComponentProps<'ul'>, 'onChange'> {
   /**
    * Additional CSS class names.
    */
@@ -471,17 +486,17 @@ interface MenuItemRadioGroupProps {
   /**
    * Specify the default selected item. Must match the type of props.items.
    */
-  defaultSelectedItem?: any;
+  defaultSelectedItem?: Item;
 
   /**
    * Provide a function to convert an item to the string that will be rendered. Defaults to item.toString().
    */
-  itemToString?: (item: any) => string;
+  itemToString?: (item: Item) => string;
 
   /**
    * Provide the options for this radio group. Can be of any type, as long as you provide an appropriate props.itemToString function.
    */
-  items?: any[];
+  items: Item[];
 
   /**
    * A required label titling this radio group.
@@ -491,18 +506,15 @@ interface MenuItemRadioGroupProps {
   /**
    * Provide an optional function to be called when the selection changes.
    */
-  onChange?: React.ChangeEventHandler<HTMLLIElement>;
+  onChange?: ChangeEventHandler<HTMLLIElement>;
 
   /**
    * Provide props.selectedItem to control the state of this radio group. Must match the type of props.items.
    */
-  selectedItem?: any;
+  selectedItem?: Item;
 }
 
-const MenuItemRadioGroup = React.forwardRef<
-  HTMLLIElement,
-  MenuItemRadioGroupProps
->(function MenuItemRadioGroup(
+export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
   {
     className,
     defaultSelectedItem,
@@ -512,8 +524,8 @@ const MenuItemRadioGroup = React.forwardRef<
     onChange,
     selectedItem,
     ...rest
-  },
-  forwardRef
+  }: MenuItemRadioGroupProps<Item>,
+  forwardRef: ForwardedRef<HTMLLIElement>
 ) {
   const prefix = usePrefix();
   const context = useContext(MenuContext);
@@ -541,6 +553,7 @@ const MenuItemRadioGroup = React.forwardRef<
 
   useEffect(() => {
     if (!context.state.hasIcons) {
+      // @ts-ignore - TODO: Should we be passing payload?
       context.dispatch({ type: 'enableIcons' });
     }
   }, [context.state.hasIcons, context]);
@@ -550,7 +563,7 @@ const MenuItemRadioGroup = React.forwardRef<
   return (
     <li className={classNames} role="none" ref={forwardRef}>
       <ul {...rest} role="group" aria-label={label}>
-        {items?.map((item, i) => (
+        {items.map((item, i) => (
           <MenuItem
             key={i}
             label={itemToString(item)}
@@ -581,11 +594,13 @@ MenuItemRadioGroup.propTypes = {
   /**
    * Provide a function to convert an item to the string that will be rendered. Defaults to item.toString().
    */
+  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   itemToString: PropTypes.func,
 
   /**
    * Provide the options for this radio group. Can be of any type, as long as you provide an appropriate props.itemToString function.
    */
+  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   items: PropTypes.array,
 
   /**
@@ -596,6 +611,7 @@ MenuItemRadioGroup.propTypes = {
   /**
    * Provide an optional function to be called when the selection changes.
    */
+  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   onChange: PropTypes.func,
 
   /**
@@ -604,14 +620,14 @@ MenuItemRadioGroup.propTypes = {
   selectedItem: PropTypes.any,
 };
 
-interface MenuItemDividerProps {
+export interface MenuItemDividerProps extends ComponentProps<'li'> {
   /**
    * Additional CSS class names.
    */
   className?: string;
 }
 
-const MenuItemDivider = React.forwardRef<HTMLLIElement, MenuItemDividerProps>(
+export const MenuItemDivider = forwardRef<HTMLLIElement, MenuItemDividerProps>(
   function MenuItemDivider({ className, ...rest }, forwardRef) {
     const prefix = usePrefix();
 
@@ -628,12 +644,4 @@ MenuItemDivider.propTypes = {
    * Additional CSS class names.
    */
   className: PropTypes.string,
-};
-
-export {
-  MenuItem,
-  MenuItemSelectable,
-  MenuItemGroup,
-  MenuItemRadioGroup,
-  MenuItemDivider,
 };
