@@ -9181,9 +9181,6 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
-      "id": Object {
-        "type": "string",
-      },
       "isExpanded": Object {
         "type": "bool",
       },
@@ -9207,9 +9204,6 @@ Map {
           Array [
             Object {
               "type": "func",
-            },
-            Object {
-              "type": "object",
             },
           ],
         ],
@@ -9268,9 +9262,6 @@ Map {
         "disabled": Object {
           "type": "bool",
         },
-        "id": Object {
-          "type": "string",
-        },
         "isExpanded": Object {
           "type": "bool",
         },
@@ -9294,9 +9285,6 @@ Map {
             Array [
               Object {
                 "type": "func",
-              },
-              Object {
-                "type": "object",
               },
             ],
           ],
