@@ -36,6 +36,7 @@
     "build-storybook": "cross-env BABEL_ENV=es build-storybook",
     "ci-check": "yarn wca && yarn typecheck && yarn build && yarn test:unit",
     "clean": "gulp clean",
+    "postinstall": "ibmtelemetry --config=telemetry.yml",
     "reset": "yarn cache clean && yarn clean && rimraf node_modules && yarn install && yarn build",
     "start": "yarn storybook",
     "storybook": "start-storybook -p 9000",
@@ -54,7 +55,8 @@
     "dist/**/*",
     "es/**/*",
     "lib/**/*",
-    "scss/**/*"
+    "scss/**/*",
+    "telemetry.yml"
   ],
   "keywords": [
     "carbon",
@@ -71,6 +73,7 @@
     "@carbon/ibm-products-styles": "^2.24.0",
     "@carbon/styles": "1.51.0",
     "@floating-ui/dom": "^1.6.3",
+    "@ibm/telemetry-js": "^1.2.1",
     "flatpickr": "4.6.1",
     "lit": "^2.7.6",
     "lodash-es": "^4.17.21"
