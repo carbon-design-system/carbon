@@ -68,7 +68,7 @@ jobs:
           path: |
             node_modules
             */**/node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock', 'packages/**/yarn.lock') }}
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Build project
@@ -95,7 +95,7 @@ jobs:
           path: |
             node_modules
             */**/node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock', 'packages/**/yarn.lock') }}
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - uses: dorny/paths-filter@0bc4621a3135347011ad047f9ecf449bf72ce2bd #v3.0.0
@@ -135,7 +135,7 @@ jobs:
           path: |
             node_modules
             */**/node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock', 'packages/**/yarn.lock') }}
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Install browsers
@@ -198,7 +198,7 @@ jobs:
           path: |
             node_modules
             */**/node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock', 'packages/**/yarn.lock') }}
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Install browsers
