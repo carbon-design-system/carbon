@@ -11,9 +11,9 @@ import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import { floatingUIPosition } from '../../globals/internal/floating-ui';
 import styles from './popover.scss';
 import CDSPopoverContent from './popover-content';
+import PopoverController from '../../globals/controllers/popover-controller';
 
 /**
  * Popover.
@@ -22,6 +22,11 @@ import CDSPopoverContent from './popover-content';
  */
 @customElement(`${prefix}-popover`)
 class CDSPopover extends LitElement {
+  /**
+   * Create popover controller instance
+   */
+  private popoverController = new PopoverController(this);
+
   /**
    * The `<slot>` element in the shadow DOM.
    */
@@ -109,7 +114,7 @@ class CDSPopover extends LitElement {
       }
     );
 
-    if (this.autoalign) {
+    if (this.autoalign && this.open) {
       // auto align functionality with @floating-ui/dom library
       const button = this._triggerSlotNode.assignedElements()[0];
       const content = this._contentSlotNode.assignedElements()[0];
@@ -122,11 +127,15 @@ class CDSPopover extends LitElement {
       );
 
       if (button && tooltip) {
-        floatingUIPosition({
-          button,
-          tooltip,
-          arrowElement,
+        this.popoverController?.setPlacement({
+          trigger: button as HTMLElement,
+          target: tooltip as HTMLElement,
+          arrowElement:
+            this.caret && arrowElement
+              ? (arrowElement as HTMLElement)
+              : undefined,
           caret: this.caret,
+          flip: true,
           alignment: this.align,
         });
       }
