@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0-rc.2](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.4.0-rc.1...@carbon/web-components@2.4.0-rc.2) (2024-02-21)
+
+
+### Features
+
+* **autoalign:** utilize autoUpdate from @floating-ui/dom ([#11565](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11565)) ([918089c](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/918089cfee729db0d642788f973416dfc0fcca3a))
+
+
+
+
+
 # [2.4.0-rc.1](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.4.0-rc.0...@carbon/web-components@2.4.0-rc.1) (2024-02-20)
 
 
