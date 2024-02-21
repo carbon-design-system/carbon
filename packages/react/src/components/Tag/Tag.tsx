@@ -13,9 +13,10 @@ import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 import { Text } from '../Text';
+import deprecate from '../../prop-types/deprecate';
 
 const getInstanceId = setupGetInstanceId();
-const TYPES = {
+export const TYPES = {
   red: 'Red',
   magenta: 'Magenta',
   purple: 'Purple',
@@ -28,6 +29,12 @@ const TYPES = {
   'warm-gray': 'Warm-Gray',
   'high-contrast': 'High-Contrast',
   outline: 'Outline',
+};
+
+export const SIZES = {
+  sm: 'sm',
+  md: 'md',
+  lg: 'lg',
 };
 
 export interface TagBaseProps {
@@ -47,7 +54,7 @@ export interface TagBaseProps {
   disabled?: boolean;
 
   /**
-   * Determine if `Tag` is a filter/chip
+   * @deprecated This property is deprecated and will be removed in the next major version. Use DismissibleTag instead
    */
   filter?: boolean;
 
@@ -68,10 +75,10 @@ export interface TagBaseProps {
   renderIcon?: React.ElementType;
 
   /**
-   * Specify the size of the Tag. Currently supports either `sm` or
-   * 'md' (default) sizes.
+   * Specify the size of the Tag. Currently supports either `sm`,
+   * `md` (default) or `lg` sizes.
    */
-  size?: 'sm' | 'md';
+  size?: keyof typeof SIZES;
 
   /**
    * **Experimental:** Provide a `Slug` component to be rendered inside the `Tag` component
@@ -99,7 +106,7 @@ const Tag = <T extends React.ElementType>({
   className,
   id,
   type,
-  filter,
+  filter, // remove filter in next major release
   renderIcon: CustomIconElement,
   title = 'Clear filter',
   disabled,
@@ -111,13 +118,22 @@ const Tag = <T extends React.ElementType>({
 }: TagProps<T>) => {
   const prefix = usePrefix();
   const tagId = id || `tag-${getInstanceId()}`;
+
+  const conditions = [
+    `${prefix}--tag--selectable`,
+    `${prefix}--tag--dismissible`,
+    `${prefix}--tag--operational`,
+  ];
+
+  const isInteractiveTag = conditions.some((el) => className?.includes(el));
+
   const tagClasses = classNames(`${prefix}--tag`, className, {
     [`${prefix}--tag--disabled`]: disabled,
     [`${prefix}--tag--filter`]: filter,
     [`${prefix}--tag--${size}`]: size, // TODO: V12 - Remove this class
     [`${prefix}--layout--size-${size}`]: size,
     [`${prefix}--tag--${type}`]: type,
-    [`${prefix}--tag--interactive`]: other.onClick && !filter,
+    [`${prefix}--tag--interactive`]: other.onClick && !isInteractiveTag,
   });
 
   const typeText =
@@ -132,7 +148,7 @@ const Tag = <T extends React.ElementType>({
 
   // Slug is always size `md` and `inline`
   let normalizedSlug;
-  if (slug && slug['type']?.displayName === 'Slug') {
+  if (slug && slug['type']?.displayName === 'Slug' && !isInteractiveTag) {
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
       size: 'sm',
       kind: 'inline',
@@ -143,7 +159,7 @@ const Tag = <T extends React.ElementType>({
     const ComponentTag = BaseComponent ?? 'div';
     return (
       <ComponentTag className={tagClasses} id={tagId} {...other}>
-        {CustomIconElement ? (
+        {CustomIconElement && size !== 'sm' ? (
           <div className={`${prefix}--tag__custom-icon`}>
             <CustomIconElement />
           </div>
@@ -169,15 +185,16 @@ const Tag = <T extends React.ElementType>({
     );
   }
 
-  const ComponentTag = BaseComponent ?? (other.onClick ? 'button' : 'div');
+  const ComponentTag =
+    BaseComponent ?? (other.onClick || isInteractiveTag ? 'button' : 'div');
 
   return (
     <ComponentTag
-      disabled={ComponentTag === 'button' ? disabled : null}
+      disabled={disabled}
       className={tagClasses}
       id={tagId}
       {...other}>
-      {CustomIconElement ? (
+      {CustomIconElement && size !== 'sm' ? (
         <div className={`${prefix}--tag__custom-icon`}>
           <CustomIconElement />
         </div>
@@ -217,7 +234,10 @@ Tag.propTypes = {
   /**
    * Determine if `Tag` is a filter/chip
    */
-  filter: PropTypes.bool,
+  filter: deprecate(
+    PropTypes.bool,
+    'This property is deprecated and will be removed in the next major version. Use DismissibleTag instead'
+  ),
 
   /**
    * Specify the id for the tag.
@@ -236,10 +256,10 @@ Tag.propTypes = {
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
-   * Specify the size of the Tag. Currently supports either `sm` or
-   * 'md' (default) sizes.
+   * Specify the size of the Tag. Currently supports either `sm`,
+   * `md` (default) or `lg` sizes.
    */
-  size: PropTypes.oneOf(['sm', 'md']),
+  size: PropTypes.oneOf(Object.keys(SIZES)),
 
   /**
    * **Experimental:** Provide a `Slug` component to be rendered inside the `Tag` component
