@@ -121,7 +121,7 @@ const Tag = <T extends React.ElementType>({
 
   const conditions = [
     `${prefix}--tag--selectable`,
-    `${prefix}--tag--dismissible`,
+    `${prefix}--tag--filter`,
     `${prefix}--tag--operational`,
   ];
 

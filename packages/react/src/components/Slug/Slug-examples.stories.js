@@ -40,9 +40,6 @@ import {
 } from '@carbon/icons-react';
 import { Slug, SlugContent, SlugActions } from '../Slug';
 import './slug-story.scss';
-import SelectableTag from '../Tag/SelectableTag';
-import OperationalTag from '../Tag/OperationalTag';
-import DismissibleTag from '../Tag/DismissibleTag';
 
 export default {
   title: 'Experimental/unstable__Slug/Examples',
@@ -666,55 +663,6 @@ export const _Tag = {
         title="Clear Filter">
         {'Tag'}
       </Tag>
-      <br />
-      <br />
-      <h4>Interactive Tags</h4>
-      <br />
-
-      <SelectableTag
-        slug={slug}
-        interactivetype="selectable"
-        className="some-class"
-        title="Clear Filter">
-        {'Tag content'}
-      </SelectableTag>
-      <SelectableTag
-        slug={slug}
-        renderIcon={Asleep}
-        interactivetype="selectable"
-        className="some-class"
-        title="Clear Filter">
-        {'Tag content'}
-      </SelectableTag>
-      <br />
-      <OperationalTag slug={slug} className="some-class" title="Clear Filter">
-        {'Tag content'}
-      </OperationalTag>
-
-      <OperationalTag
-        slug={slug}
-        renderIcon={Asleep}
-        className="some-class"
-        title="Clear Filter">
-        {'Tag content'}
-      </OperationalTag>
-
-      <br />
-      <DismissibleTag
-        slug={slug}
-        type="red"
-        className="some-class"
-        title="Clear Filter">
-        {'Tag content'}
-      </DismissibleTag>
-      <DismissibleTag
-        slug={slug}
-        renderIcon={Asleep}
-        type="red"
-        className="some-class"
-        title="Clear Filter">
-        {'Tag content'}
-      </DismissibleTag>
     </div>
   ),
 };
