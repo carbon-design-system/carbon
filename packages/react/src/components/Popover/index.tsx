@@ -202,7 +202,7 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
     popoverOffsetPx.current =
       parseFloat(
         getStyle.getPropertyValue('--cds-popover-offset').split('rem', 1)[0]
-      ) * -16;
+      ) * 16;
   });
 
   const floatingUIConfig = autoAlign
@@ -217,10 +217,11 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
 
         // Middleware order matters, arrow should be last
         middleware: [
-          offset(caret ? popoverOffsetPx.current || -10 : 0),
+          offset(caret ? popoverOffsetPx.current || 10 : 0),
           flip({ fallbackAxisSideDirection: 'start' }),
           arrow({
             element: caretRef,
+            // padding: 15,
           }),
         ],
         whileElementsMounted: autoUpdate,
@@ -254,7 +255,7 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
       });
 
       if (middlewareData && middlewareData.arrow) {
-        const { x = 0, y = 0 } = middlewareData.arrow;
+        const { x, y } = middlewareData.arrow;
 
         const staticSide = {
           top: 'bottom',
@@ -265,8 +266,6 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
 
         caretRef.current.style.left = x != null ? `${x}px` : '';
         caretRef.current.style.top = y != null ? `${y}px` : '';
-        caretRef.current.style.right = '';
-        caretRef.current.style.bottom = '';
         caretRef.current.style[staticSide] = `${
           -caretRef.current.offsetWidth / 2
         }px`;
@@ -284,7 +283,7 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
       [`${prefix}--popover--high-contrast`]: highContrast,
       [`${prefix}--popover--open`]: open,
       [`${prefix}--popover--auto-align`]: autoAlign,
-      [`${prefix}--popover--${currentAlignment}`]: !autoAlign,
+      [`${prefix}--popover--${currentAlignment}`]: true,
       [`${prefix}--popover--tab-tip`]: isTabTip,
     },
     customClassName
@@ -331,6 +330,7 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
   isPositioned: ${isPositioned}
   placement: ${placement}
   shimmedAlign: ${shimmedAlign}
+  popoverOffsetPx.current: ${popoverOffsetPx.current}
   `);
 
   return (
@@ -475,8 +475,7 @@ function PopoverContentRenderFunction(
           <span
             className={cx({
               [`${prefix}--popover-caret`]: true,
-              [`${prefix}--popover--auto-align`]: autoAlign,
-              ['yeahhh']: autoAlign,
+              [`${prefix}--popover--auto-align`]: true,
             })}
             ref={caretRef}
           />
@@ -486,7 +485,6 @@ function PopoverContentRenderFunction(
         <span
           className={cx({
             [`${prefix}--popover-caret`]: true,
-            [`${prefix}--popover--auto-align`]: autoAlign,
           })}
           ref={caretRef}
         />

@@ -390,11 +390,11 @@ export const AutoAlignFloatingUI = () => {
   const [open, setOpen] = useState(true);
   const ref = useRef();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     console.log(`ref from story uselayouteffect`);
     console.log(ref);
-    ref?.current?.scrollIntoView();
-  }, [ref]);
+    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
+  });
 
   return (
     <div style={{ width: '5000px', height: '5000px' }}>
@@ -404,7 +404,7 @@ export const AutoAlignFloatingUI = () => {
           top: '2500px',
           left: '2500px',
         }}>
-        <Popover open={open} align="top" autoAlign>
+        <Popover open={open} align="top" autoAlign ref={ref}>
           <div className="playground-trigger">
             <CheckboxIcon
               onClick={() => {
@@ -412,7 +412,7 @@ export const AutoAlignFloatingUI = () => {
               }}
             />
           </div>
-          <PopoverContent className="p-3" ref={ref}>
+          <PopoverContent className="p-3">
             <div>
               <p className="popover-title">Available storage</p>
               <p className="popover-details">
