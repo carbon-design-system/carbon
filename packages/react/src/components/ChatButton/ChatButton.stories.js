@@ -63,6 +63,11 @@ export const Default = () => (
       <ChatButton size="lg" renderIcon={Add}>
         Primary
       </ChatButton>
+      <br />
+      <br />
+      <ChatButton size="sm">Primary</ChatButton>
+      <ChatButton size="md">Primary</ChatButton>
+      <ChatButton size="lg">Primary</ChatButton>
     </div>
     <div className="test-button-kinds">
       <h3>Kinds</h3>
@@ -82,6 +87,13 @@ export const Default = () => (
       <ChatButton kind="danger" renderIcon={Add}>
         Danger
       </ChatButton>
+      <br />
+      <br />
+      <ChatButton kind="primary">Primary</ChatButton>
+      <ChatButton kind="secondary">Secondary</ChatButton>
+      <ChatButton kind="tertiary">Tertiary</ChatButton>
+      <ChatButton kind="ghost">Ghost</ChatButton>
+      <ChatButton kind="danger">Danger</ChatButton>
     </div>
     <div className="test-button-quick-action">
       <h3>Quick action</h3>
@@ -96,6 +108,18 @@ export const Default = () => (
         Selected and Disabled
       </ChatButton>
       <ChatButton disabled isQuickAction renderIcon={Add}>
+        Disabled
+      </ChatButton>
+      <br />
+      <br />
+      <ChatButton isQuickAction>Quick action</ChatButton>
+      <ChatButton isSelected isQuickAction>
+        Selected and Enabled
+      </ChatButton>
+      <ChatButton disabled isSelected isQuickAction>
+        Selected and Disabled
+      </ChatButton>
+      <ChatButton disabled isQuickAction>
         Disabled
       </ChatButton>
     </div>
