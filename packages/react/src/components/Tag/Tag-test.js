@@ -9,11 +9,35 @@ import { Add } from '@carbon/icons-react';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import Tag from './';
+import DismissibleTag from './DismissibleTag';
+import OperationalTag from './OperationalTag';
+import SelectableTag from './SelectableTag';
 
 describe('Tag', () => {
   describe('automated accessibility testing', () => {
     it('should have no Axe violations', async () => {
       const { container } = render(<Tag type="red">test-tag</Tag>);
+      await expect(container).toHaveNoAxeViolations();
+    });
+
+    it('should have no Axe violations DismissibleTag', async () => {
+      const { container } = render(
+        <DismissibleTag type="red">test-tag</DismissibleTag>
+      );
+      await expect(container).toHaveNoAxeViolations();
+    });
+
+    it('should have no Axe violations OperationalTag', async () => {
+      const { container } = render(
+        <OperationalTag type="red">test-tag</OperationalTag>
+      );
+      await expect(container).toHaveNoAxeViolations();
+    });
+
+    it('should have no Axe violations SelectableTag', async () => {
+      const { container } = render(
+        <SelectableTag type="red">test-tag</SelectableTag>
+      );
       await expect(container).toHaveNoAxeViolations();
     });
 
@@ -30,9 +54,9 @@ describe('Tag', () => {
   it('should have an appropriate aria-label when (filterable)', () => {
     const children = 'tag-3';
     const { container } = render(
-      <Tag type="red" filter title="Close tag">
+      <DismissibleTag type="red" title="Close tag">
         {children}
-      </Tag>
+      </DismissibleTag>
     );
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const button = container.querySelector('[aria-label]');

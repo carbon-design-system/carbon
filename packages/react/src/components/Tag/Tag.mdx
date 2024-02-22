@@ -1,5 +1,4 @@
-import { ArgsTable, Canvas, Story } from '@storybook/blocks';
-import * as TagStories from './Tag.stories';
+import { ArgsTable } from '@storybook/blocks';
 
 # Tag
 
@@ -9,90 +8,9 @@ import * as TagStories from './Tag.stories';
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/tag/accessibility)
 
+## Table of Contents
+
 ## Overview
-
-Multiple or single tags can be used to categorize items.
-
-Use short labels for easy scanning. Use two words only if necessary to describe
-the status and differentiate it from other tags.
-
-## Read Only
-
-Read Only explanation should be here
-
-<Canvas>
-  <Story of={TagStories.ReadOnly} />
-</Canvas>
-
-```jsx
-<Tag className="some-class" type="red">
-  {'Tag content'}
-</Tag>
-```
-
-## Dismissible
-
-Dismissible explanation should be here
-
-<Canvas>
-  <Story of={TagStories.Dismissible} />
-</Canvas>
-
-```jsx
-<DismissibleTag type="red" className="some-class" title="Clear Filter">
-  {'Tag content'}
-</DismissibleTag>
-```
-
-## Selectable
-
-Selectable tags are used to select or unselect single or multiple items in a
-form situation. Selectable tags can also be used in filtering scenarios by label
-functionality when they do not need a dimsdale functionality.
-
-When to use:
-
-- Use selectable tags to toggle between a selected or unselected state.
-- Use when needing to filter without an explicit dismissable functionality. (We
-  need to be a little more specific around filtering for selectable versus
-  dismissable tags).
-
-<Canvas>
-  <Story of={TagStories.Selectable} />
-</Canvas>
-
-```jsx
-<SelectableTag className="some-class" title="Clear Filter">
-  {'Tag content'}
-</SelectableTag>
-```
-
-## Operational
-
-Operational tags enable the user to view a list of all items associated with a
-given tag in different ways.
-
-When to use:
-
-- Use to view a list of items with the same tag in a tagclip, popover, or
-  breadcrumb detail view.
-
-When not to use:
-
-- Do not use operational tags as a replacement for links that direct you to an
-  entirely different page or launch you out to another tab.
-- Do not use in combination with Dismissable tags. Instead, consider letting the
-  user enter an "edit mode" to dismiss tags.
-
-<Canvas>
-  <Story of={TagStories.Operational} />
-</Canvas>
-
-```jsx
-<OperationalTag type="red" className="some-class" title="Clear Filter">
-  {'Tag content'}
-</OperationalTag>
-```
 
 ## Component API
 
@@ -103,7 +21,3 @@ When not to use:
 Help us improve this component by providing feedback, asking questions on Slack,
 or updating this file on
 [GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Tag/Tag.mdx).
-
-```
-
-```

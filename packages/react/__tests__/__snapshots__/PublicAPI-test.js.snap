@@ -6481,6 +6481,11 @@ Map {
       },
     },
   },
+  "SIZES" => Object {
+    "lg": "lg",
+    "md": "md",
+    "sm": "sm",
+  },
   "Search" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
@@ -7457,6 +7462,20 @@ Map {
     },
     "render": [Function],
   },
+  "TYPES" => Object {
+    "blue": "Blue",
+    "cool-gray": "Cool-Gray",
+    "cyan": "Cyan",
+    "gray": "Gray",
+    "green": "Green",
+    "high-contrast": "High-Contrast",
+    "magenta": "Magenta",
+    "outline": "Outline",
+    "purple": "Purple",
+    "red": "Red",
+    "teal": "Teal",
+    "warm-gray": "Warm-Gray",
+  },
   "Tab" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
@@ -8170,9 +8189,7 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
-      "filter": Object {
-        "type": "bool",
-      },
+      "filter": [Function],
       "id": Object {
         "type": "string",
       },
@@ -8197,6 +8214,7 @@ Map {
           Array [
             "sm",
             "md",
+            "lg",
           ],
         ],
         "type": "oneOf",

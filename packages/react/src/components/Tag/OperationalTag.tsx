@@ -6,7 +6,7 @@
  */
 
 import PropTypes, { ReactNodeLike } from 'prop-types';
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import classNames from 'classnames';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
@@ -54,6 +54,7 @@ export interface OperationalTagBaseProps {
    * Can be a React component class
    */
   renderIcon?: React.ElementType;
+  onClick?: MouseEventHandler;
 
   /**
    * Specify the size of the Tag. Currently supports either `sm`,

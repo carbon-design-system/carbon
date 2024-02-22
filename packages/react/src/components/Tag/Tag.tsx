@@ -186,7 +186,10 @@ const Tag = <T extends React.ElementType>({
   }
 
   const ComponentTag =
-    BaseComponent ?? (other.onClick || isInteractiveTag ? 'button' : 'div');
+    BaseComponent ??
+    (other.onClick || className?.includes(`${prefix}--tag--operational`)
+      ? 'button'
+      : 'div');
 
   return (
     <ComponentTag
