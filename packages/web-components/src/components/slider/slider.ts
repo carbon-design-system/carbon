@@ -117,7 +117,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
         Number(step);
   }
   /**
-   * The rate of the thumb position in the track.
+   * The rate of the upper thumb position in the track.
    * When we try to set a new value, we adjust the value considering `step` property.
    */
   private get _rateUpper() {
@@ -219,53 +219,27 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
             )
           );
         } else {
-          if (eventContainer == 'thumb-upper') {
-            const stepCount = (valueUpper + diff) / step;
-            this.valueUpper = Math.min(
-              max,
-              Math.max(
-                min,
-                (diff >= 0 ? Math.floor(stepCount) : Math.ceil(stepCount)) *
-                  step
-              )
-            );
-            this.dispatchEvent(
-              new CustomEvent(
-                (this.constructor as typeof CDSSlider).eventChange,
-                {
-                  bubbles: true,
-                  composed: true,
-                  detail: {
-                    value: this.valueUpper,
-                    intermediate: false,
-                  },
-                }
-              )
-            );
-          } else {
-            const stepCount = (value + diff) / step;
-            this.value = Math.min(
-              max,
-              Math.max(
-                min,
-                (diff >= 0 ? Math.floor(stepCount) : Math.ceil(stepCount)) *
-                  step
-              )
-            );
-            this.dispatchEvent(
-              new CustomEvent(
-                (this.constructor as typeof CDSSlider).eventChange,
-                {
-                  bubbles: true,
-                  composed: true,
-                  detail: {
-                    value: this.value,
-                    intermediate: false,
-                  },
-                }
-              )
-            );
-          }
+          const stepCount = (value + diff) / step;
+          this.value = Math.min(
+            max,
+            Math.max(
+              min,
+              (diff >= 0 ? Math.floor(stepCount) : Math.ceil(stepCount)) * step
+            )
+          );
+          this.dispatchEvent(
+            new CustomEvent(
+              (this.constructor as typeof CDSSlider).eventChange,
+              {
+                bubbles: true,
+                composed: true,
+                detail: {
+                  value: this.value,
+                  intermediate: false,
+                },
+              }
+            )
+          );
         }
       }
     }
@@ -667,9 +641,13 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       }
       if (input) {
         if (this.valueUpper && index > 0) {
-          ['max', 'min', 'step', 'value'].forEach((name) => {
+          ['max', 'min', 'step', 'valueUpper'].forEach((name) => {
             if (changedProperties.has(name)) {
-              input[name] = name === 'value' ? this.valueUpper : this[name];
+              if (name === 'valueUpper') {
+                input.value = this.valueUpper;
+              } else {
+                this[name];
+              }
             }
           });
         } else {
