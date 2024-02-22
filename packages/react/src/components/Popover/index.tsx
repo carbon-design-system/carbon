@@ -321,18 +321,6 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
 
   const BaseComponentAsAny = BaseComponent as any;
 
-  console.log('reference element:');
-  console.log(refs.reference.current);
-  console.log('caret element:');
-  // console.log(refs.caret.current);
-  console.log(refs);
-  console.log(`
-  isPositioned: ${isPositioned}
-  placement: ${placement}
-  shimmedAlign: ${shimmedAlign}
-  popoverOffsetPx.current: ${popoverOffsetPx.current}
-  `);
-
   return (
     <PopoverContext.Provider value={value}>
       <BaseComponentAsAny {...rest} className={className} ref={ref}>

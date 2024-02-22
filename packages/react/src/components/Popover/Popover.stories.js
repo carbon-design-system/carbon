@@ -7,7 +7,7 @@
 
 import './story.scss';
 import { Checkbox as CheckboxIcon } from '@carbon/icons-react';
-import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Popover, PopoverContent } from '../Popover';
 import RadioButton from '../RadioButton';
 import RadioButtonGroup from '../RadioButtonGroup';
@@ -391,8 +391,6 @@ export const AutoAlignFloatingUI = () => {
   const ref = useRef();
 
   useEffect(() => {
-    console.log(`ref from story uselayouteffect`);
-    console.log(ref);
     ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
   });
 
