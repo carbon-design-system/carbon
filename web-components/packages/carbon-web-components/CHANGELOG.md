@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0-rc.3](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.4.0-rc.2...@carbon/web-components@2.4.0-rc.3) (2024-02-22)
+
+
+### Bug Fixes
+
+* **datatable:** is sortable console error ([#11568](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11568)) ([d827360](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/d827360733c98ea138ad0eb92ca98ea78fb33624))
+
+
+
+
+
 # [2.4.0-rc.2](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.4.0-rc.1...@carbon/web-components@2.4.0-rc.2) (2024-02-21)
 
 
