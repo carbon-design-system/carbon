@@ -219,27 +219,53 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
             )
           );
         } else {
-          const stepCount = (value + diff) / step;
-          this.value = Math.min(
-            max,
-            Math.max(
-              min,
-              (diff >= 0 ? Math.floor(stepCount) : Math.ceil(stepCount)) * step
-            )
-          );
-          this.dispatchEvent(
-            new CustomEvent(
-              (this.constructor as typeof CDSSlider).eventChange,
-              {
-                bubbles: true,
-                composed: true,
-                detail: {
-                  value: this.value,
-                  intermediate: false,
-                },
-              }
-            )
-          );
+          if (eventContainer == 'thumb-upper') {
+            const stepCount = (valueUpper + diff) / step;
+            this.valueUpper = Math.min(
+              max,
+              Math.max(
+                min,
+                (diff >= 0 ? Math.floor(stepCount) : Math.ceil(stepCount)) *
+                  step
+              )
+            );
+            this.dispatchEvent(
+              new CustomEvent(
+                (this.constructor as typeof CDSSlider).eventChange,
+                {
+                  bubbles: true,
+                  composed: true,
+                  detail: {
+                    value: this.valueUpper,
+                    intermediate: false,
+                  },
+                }
+              )
+            );
+          } else {
+            const stepCount = (value + diff) / step;
+            this.value = Math.min(
+              max,
+              Math.max(
+                min,
+                (diff >= 0 ? Math.floor(stepCount) : Math.ceil(stepCount)) *
+                  step
+              )
+            );
+            this.dispatchEvent(
+              new CustomEvent(
+                (this.constructor as typeof CDSSlider).eventChange,
+                {
+                  bubbles: true,
+                  composed: true,
+                  detail: {
+                    value: this.value,
+                    intermediate: false,
+                  },
+                }
+              )
+            );
+          }
         }
       }
     }
@@ -418,32 +444,21 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
     const { detail } = event;
     const { intermediate, value } = detail;
     if (eventContainer === 'upper') {
-      console.log('yes');
-
       this.valueUpper = value;
-      this.dispatchEvent(
-        new CustomEvent((this.constructor as typeof CDSSlider).eventChange, {
-          bubbles: true,
-          composed: true,
-          detail: {
-            value: this.valueUpper,
-            intermediate,
-          },
-        })
-      );
     } else {
       this.value = value;
-      this.dispatchEvent(
-        new CustomEvent((this.constructor as typeof CDSSlider).eventChange, {
-          bubbles: true,
-          composed: true,
-          detail: {
-            value,
-            intermediate,
-          },
-        })
-      );
     }
+    const valueMain = eventContainer === 'upper' ? this.valueUpper : this.value;
+    this.dispatchEvent(
+      new CustomEvent((this.constructor as typeof CDSSlider).eventChange, {
+        bubbles: true,
+        composed: true,
+        detail: {
+          value: valueMain,
+          intermediate,
+        },
+      })
+    );
   };
 
   /**
