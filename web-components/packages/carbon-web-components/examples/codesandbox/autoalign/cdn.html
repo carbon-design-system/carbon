@@ -9,7 +9,7 @@ LICENSE file in the root directory of this source tree.
 
 <html>
   <head>
-    <title>@carbon/ibmdotcom-web-components example</title>
+    <title>@carbon/web-components autoalign example</title>
     <meta charset="UTF-8" />
     <link
       rel="stylesheet"
@@ -144,16 +144,18 @@ LICENSE file in the root directory of this source tree.
     </div>
 
     <script>
-      _handleClick = () => {
-        const popover = document.querySelector("cds-popover");
-        const open = popover?.hasAttribute("open");
-        open
-          ? popover?.removeAttribute("open")
-          : popover?.setAttribute("open", "");
+     _handleClick = () => {
+        const popover = document.querySelector('cds-popover');
+        if (popover) {
+          const open = popover.hasAttribute('open');
+          open
+            ? popover.removeAttribute('open')
+            : popover.setAttribute('open', '');
+        }
       };
 
-      const trigger = document.querySelector(".playground-trigger");
-      trigger.addEventListener("click", _handleClick);
+      const trigger = document.querySelector('.playground-trigger');
+      trigger.addEventListener('click', _handleClick);
     </script>
   </body>
 </html>
