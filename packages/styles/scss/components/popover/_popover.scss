@@ -271,8 +271,8 @@ $popover-caret-height: custom-property.get-var(
     > .#{$prefix}--popover-content::before,
   .#{$prefix}--popover--bottom-right
     > .#{$prefix}--popover
-    > .#{$prefix}--popover-content::before
-    .#{$prefix}--popover--bottom-end
+    > .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--bottom-end
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content::before {
     block-size: $popover-offset;
@@ -735,19 +735,19 @@ $popover-caret-height: custom-property.get-var(
   }
 
   // Popover hover area placement
-  .#{$prefix}--popover--left:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--left
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content::before,
-  .#{$prefix}--popover--left-top:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--left-top
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content::before,
-  .#{$prefix}--popover--left-start:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--left-start
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content::before,
-  .#{$prefix}--popover--left-bottom:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--left-bottom
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content::before,
-  .#{$prefix}--popover--left-end:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--left-end
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content::before {
     inline-size: $popover-offset;

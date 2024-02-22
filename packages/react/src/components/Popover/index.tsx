@@ -148,8 +148,7 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
 ) {
   const prefix = usePrefix();
   const floating = useRef<HTMLSpanElement>(null);
-  const setFloating = useRef<HTMLSpanElement>(null); // TODO could we consolidate this with `floating` if we rip out the old autoAlign functionality?
-  const caretRef = useRef<HTMLSpanElement>(null); // TODO could we consolidate this with `floating` if we rip out the old autoAlign functionality?
+  const caretRef = useRef<HTMLSpanElement>(null);
   const popover = useRef<Element>(null);
 
   let shimmedAlign;
@@ -196,13 +195,29 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
     }
   });
 
-  const popoverOffsetPx = useRef();
+  const popoverDimensions = useRef();
   useIsomorphicEffect(() => {
-    const getStyle = window.getComputedStyle(popover.current, null);
-    popoverOffsetPx.current =
-      parseFloat(
-        getStyle.getPropertyValue('--cds-popover-offset').split('rem', 1)[0]
-      ) * 16;
+    // The popover is only offset when a caret is present. Technically the custom properties
+    // accessed below can be set by a user even if caret=false, but doing so does not follow
+    // the design specification for Popover.
+    if (caret) {
+      const getStyle = window.getComputedStyle(popover.current, null);
+      // Gather the dimensions of the caret and prefer the values set via custom properties.
+      // If a value is not set via a custom property, provide a default value that matches the
+      // default values defined in packages/styles/scss/components/popover/_popover.scss
+      popoverDimensions.current = {
+        offset:
+          parseFloat(
+            getStyle.getPropertyValue('--cds-popover-offset').split('rem', 1)[0]
+          ) * 16 || 10,
+        caretHeight:
+          parseFloat(
+            getStyle
+              .getPropertyValue('--cds-popover-caret-height')
+              .split('px', 1)[0]
+          ) || 6,
+      };
+    }
   });
 
   const floatingUIConfig = autoAlign
@@ -217,18 +232,17 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
 
         // Middleware order matters, arrow should be last
         middleware: [
-          offset(caret ? popoverOffsetPx.current || 10 : 0),
+          offset(popoverDimensions?.current?.offset),
           flip({ fallbackAxisSideDirection: 'start' }),
           arrow({
             element: caretRef,
-            // padding: 15,
           }),
         ],
         whileElementsMounted: autoUpdate,
       }
     : {};
 
-  const { refs, floatingStyles, isPositioned, placement, middlewareData } =
+  const { refs, floatingStyles, placement, middlewareData } =
     useFloating(floatingUIConfig);
 
   const value = useMemo(() => {
@@ -254,7 +268,7 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
         refs.floating.current.style[style] = floatingStyles[style];
       });
 
-      if (middlewareData && middlewareData.arrow) {
+      if (caret && middlewareData && middlewareData.arrow) {
         const { x, y } = middlewareData.arrow;
 
         const staticSide = {
@@ -266,12 +280,23 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
 
         caretRef.current.style.left = x != null ? `${x}px` : '';
         caretRef.current.style.top = y != null ? `${y}px` : '';
-        caretRef.current.style[staticSide] = `${
-          -caretRef.current.offsetWidth / 2
-        }px`;
+
+        // Ensure the static side gets unset when flipping to other placements' axes.
+        caretRef.current.style.right = '';
+        caretRef.current.style.bottom = '';
+
+        caretRef.current.style[staticSide] = `${-popoverDimensions?.current
+          ?.caretHeight}px`;
       }
     }
-  }, [floatingStyles, refs.floating, autoAlign, middlewareData, placement]);
+  }, [
+    floatingStyles,
+    refs.floating,
+    autoAlign,
+    middlewareData,
+    placement,
+    caret,
+  ]);
 
   const ref = useMergedRefs([forwardRef, popover]);
   const currentAlignment = autoAlign && placement !== align ? placement : align;
