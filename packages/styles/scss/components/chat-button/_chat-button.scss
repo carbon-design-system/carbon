@@ -16,6 +16,10 @@
     border-radius: convert.to-rem(24px);
   }
 
+  .#{$prefix}--chat-btn:not(.#{$prefix}--chat-btn--with-icon) {
+    padding-inline-end: convert.to-rem(15px);
+  }
+
   .#{$prefix}--chat-btn.#{$prefix}--btn--md {
     border-radius: convert.to-rem(20px);
   }
