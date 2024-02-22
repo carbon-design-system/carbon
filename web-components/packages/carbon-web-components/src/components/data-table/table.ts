@@ -842,7 +842,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
     });
     const columns = [...this._tableHeaderRow.children];
     let sortDirection;
-    let columnIndex = -1;
+    let columnIndex = 0;
     columns.forEach((column, index) => {
       if (
         column.hasAttribute('sort-direction') &&
