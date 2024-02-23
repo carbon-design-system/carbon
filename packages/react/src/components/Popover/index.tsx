@@ -197,26 +197,37 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
 
   const popoverDimensions = useRef();
   useIsomorphicEffect(() => {
-    // The popover is only offset when a caret is present. Technically the custom properties
+    // The popover is only offset when a caret is present. Technically, the custom properties
     // accessed below can be set by a user even if caret=false, but doing so does not follow
     // the design specification for Popover.
     if (caret) {
-      const getStyle = window.getComputedStyle(popover.current, null);
       // Gather the dimensions of the caret and prefer the values set via custom properties.
       // If a value is not set via a custom property, provide a default value that matches the
-      // default values defined in packages/styles/scss/components/popover/_popover.scss
+      // default values defined in the sass style file
+      const getStyle = window.getComputedStyle(popover.current, null);
+      const offsetProperty = getStyle.getPropertyValue('--cds-popover-offset');
+      const caretProperty = getStyle.getPropertyValue(
+        '--cds-popover-caret-height'
+      );
+
+      // Handle if the property value is in px or rem.
+      // We want to store just the base number value without a unit suffix
+      const offsetPropertyValue = offsetProperty.includes('px')
+        ? offsetProperty.split('px', 1)[0] * 1
+        : offsetProperty.split('rem', 1)[0] * 16;
+
+      const caretPropertyValue = caretProperty.includes('px')
+        ? caretProperty.split('px', 1)[0] * 1
+        : caretProperty.split('rem', 1)[0] * 16;
+
       popoverDimensions.current = {
-        offset:
-          parseFloat(
-            getStyle.getPropertyValue('--cds-popover-offset').split('rem', 1)[0]
-          ) * 16 || 10,
-        caretHeight:
-          parseFloat(
-            getStyle
-              .getPropertyValue('--cds-popover-caret-height')
-              .split('px', 1)[0]
-          ) || 6,
+        // 10 and 6 are the defaults defined in packages/styles/scss/components/popover/_popover.scss
+        offset: offsetProperty ? offsetPropertyValue : 10,
+        caretHeight: caretProperty ? caretPropertyValue : 6,
       };
+
+      console.log(`popoverDimensions`);
+      console.dir(popoverDimensions);
     }
   });
 
@@ -297,6 +308,19 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
     placement,
     caret,
   ]);
+
+  console.log(`-----------`);
+  console.log(floatingStyles);
+  console.dir(refs);
+  console.log(`floating ref:`);
+  console.dir(refs.floating.current);
+  console.log(`reference ref:`);
+  console.dir(refs.reference.current); // TODO this is undefined for toggletip and needs fixed
+  console.log(autoAlign);
+  console.log(placement);
+  console.log(middlewareData);
+  console.log(popoverDimensions?.current?.offset);
+  console.log(`-----------`);
 
   const ref = useMergedRefs([forwardRef, popover]);
   const currentAlignment = autoAlign && placement !== align ? placement : align;

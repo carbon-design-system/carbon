@@ -80,8 +80,15 @@ $popover-caret-height: custom-property.get-var(
 @mixin popover {
   // Container
   .#{$prefix}--popover-container {
-    position: relative;
     display: inline-block;
+  }
+
+  .#{$prefix}--popover-container:not(.#{$prefix}--popover--auto-align) {
+    position: relative;
+  }
+
+  .#{$prefix}--popover-container.#{$prefix}--popover--auto-align {
+    position: absolute;
   }
 
   /// Modifiers

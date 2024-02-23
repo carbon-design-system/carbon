@@ -102,6 +102,31 @@ export const Default = () => {
   );
 };
 
+export const AutoAlign = () => {
+  return (
+    <>
+      <ToggletipLabel>
+        Toggletip label -- using <code>defaultOpen</code> prop
+      </ToggletipLabel>
+      <Toggletip align="bottom" autoAlign defaultOpen>
+        <ToggletipButton label="Show information">
+          <Information />
+        </ToggletipButton>
+        <ToggletipContent>
+          <p>
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <ToggletipActions>
+            <Link href="#">Link action</Link>
+            <Button size="sm">Button</Button>
+          </ToggletipActions>
+        </ToggletipContent>
+      </Toggletip>
+    </>
+  );
+};
+
 const PlaygroundStory = (controls) => {
   const { align } = controls;
   return (

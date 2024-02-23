@@ -15,7 +15,6 @@ import { default as Checkbox } from '../Checkbox';
 import mdx from './Popover.mdx';
 import { Settings } from '@carbon/icons-react';
 import { keys, match } from '../../internal/keyboard';
-import { useFloating } from '@floating-ui/react';
 
 const prefix = 'cds';
 
@@ -226,167 +225,46 @@ Playground.story = {
   ],
 };
 
-export const AutoAlign = () => {
+export const DefaultWithClipping = () => {
   const [open, setOpen] = useState(false);
+  const ref = useRef();
+
+  useEffect(() => {
+    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
+  });
+
   return (
-    <div>
-      <div
-        style={{
-          position: 'absolute',
-          insetBlockEnd: 0,
-          insetInlineEnd: '50%',
-          marginBlock: '3rem',
-          marginInline: '3rem',
-        }}>
-        <Popover open={open} autoAlign>
-          <div className="playground-trigger">
-            <CheckboxIcon
-              onClick={() => {
-                setOpen(!open);
-              }}
-            />
-          </div>
-          <PopoverContent className="p-3">
-            <h2 className="popover-title">Available storage</h2>
-            <p className="popover-details">
-              This server has 150 GB of block storage remaining.
-            </p>
-          </PopoverContent>
-        </Popover>
-      </div>
-      <Popover open autoAlign>
+    <div
+      style={{
+        width: '10rem',
+        height: '10rem',
+        background: 'grey',
+        overflow: 'hidden',
+        margin: '0 auto',
+      }}>
+      <p>This container has overflow: hidden</p>
+      <Popover open={open} align="bottom" ref={ref}>
         <div className="playground-trigger">
-          <CheckboxIcon />
+          <CheckboxIcon
+            onClick={() => {
+              setOpen(!open);
+            }}
+          />
         </div>
         <PopoverContent className="p-3">
-          <h2 className="popover-title">Available storage</h2>
-          <p className="popover-details">
-            This server has 150 GB of block storage remaining.
-          </p>
+          <div>
+            <p className="popover-title">This popover does not use autoAlign</p>
+            <p className="popover-details">
+              This popover is clipped when the container has overflow: hidden.
+            </p>
+          </div>
         </PopoverContent>
       </Popover>
-      <div
-        style={{
-          position: 'absolute',
-          insetBlockStart: 0,
-          insetInlineEnd: 0,
-          marginBlock: '3rem',
-          marginInline: '3rem',
-        }}>
-        <Popover open autoAlign>
-          <div className="playground-trigger">
-            <CheckboxIcon />
-          </div>
-          <PopoverContent className="p-3">
-            <h2 className="popover-title">Available storage</h2>
-            <p className="popover-details">
-              This server has 350 GB of block storage remaining.
-            </p>
-          </PopoverContent>
-        </Popover>
-      </div>
-      <div
-        style={{
-          position: 'absolute',
-          insetBlockEnd: 0,
-          insetInlineEnd: 0,
-          marginBlock: '3rem',
-          marginInline: '3rem',
-        }}>
-        <Popover open autoAlign>
-          <div className="playground-trigger">
-            <CheckboxIcon />
-          </div>
-          <PopoverContent className="p-3">
-            <h2 className="popover-title">Available storage</h2>
-            <p className="popover-details">
-              This server has 150 GB of block storage remaining.
-            </p>
-          </PopoverContent>
-        </Popover>
-      </div>
-      <div
-        style={{
-          position: 'absolute',
-          insetBlockEnd: 0,
-          insetInlineStart: 0,
-          marginBlock: '3rem',
-          marginInline: '3rem',
-        }}>
-        <Popover open autoAlign>
-          <div className="playground-trigger">
-            <CheckboxIcon />
-          </div>
-          <PopoverContent className="p-3">
-            <h2 className="popover-title">Available storage</h2>
-            <p className="popover-details">
-              This server has 150 GB of block storage remaining.
-            </p>
-          </PopoverContent>
-        </Popover>
-      </div>
     </div>
   );
 };
 
-// export const Test = () => {
-//   const { refs, floatingStyles } = useFloating();
-
-//   return (
-//     <>
-//       <button ref={refs.setReference}>Button</button>
-//       <div ref={refs.setFloating} style={floatingStyles}>
-//         Tooltip
-//       </div>
-//     </>
-//   );
-// };
-
-// export const AutoAlignFloatingUILocalTest = () => {
-//   const [open, setOpen] = useState(true);
-
-//   const { refs, floatingStyles } = useFloating();
-
-//   useEffect(() => {
-//     refs.floating.current.style.position = floatingStyles.position;
-//     refs.floating.current.style.left = floatingStyles.left;
-//     refs.floating.current.style.top = floatingStyles.top;
-//     refs.floating.current.style.transform = floatingStyles.transform;
-//   }, [floatingStyles, refs.floating]);
-
-//   return (
-//     <div>
-//       <div
-//         style={{
-//           position: 'absolute',
-//           insetBlockStart: 0,
-//           insetInlineEnd: '50%',
-//           // marginBlock: '3rem',
-//           // marginInline: '3rem',
-//         }}>
-//         <Popover open={open} autoAlignFloatingUI ref={refs.setReference}>
-//           <div className="playground-trigger">
-//             <CheckboxIcon
-//               onClick={() => {
-//                 setOpen(!open);
-//               }}
-//             />
-//           </div>
-//           <PopoverContent className="p-3" ref={refs.setFloating}>
-//             <div>
-//               <p className="popover-title">Available storage</p>
-//               <p className="popover-details">
-//                 This server has 150 GB of block storage remaining.
-//               </p>
-//             </div>
-//           </PopoverContent>
-//         </Popover>
-//       </div>
-//     </div>
-//   );
-// };
-
-export const AutoAlignFloatingUI = () => {
+export const ExperimentalAutoAlign = () => {
   const [open, setOpen] = useState(true);
   const ref = useRef();
 
@@ -412,9 +290,95 @@ export const AutoAlignFloatingUI = () => {
           </div>
           <PopoverContent className="p-3">
             <div>
-              <p className="popover-title">Available storage</p>
+              <p className="popover-title">This popover uses autoAlign</p>
               <p className="popover-details">
-                This server has 150 GB of block storage remaining.
+                Scroll the container up, down, left or right to observe how the
+                popover will automatically change its position in attempt to
+                stay within the viewport. This works on initial render in
+                addition to on scroll.
+              </p>
+            </div>
+          </PopoverContent>
+        </Popover>
+      </div>
+    </div>
+  );
+};
+
+export const AutoAlignNoClipping = () => {
+  const [open, setOpen] = useState(false);
+  const ref = useRef();
+
+  useEffect(() => {
+    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
+  });
+
+  return (
+    <div
+      style={{
+        width: '10rem',
+        height: '10rem',
+        background: 'grey',
+        overflow: 'hidden',
+        margin: '0 auto',
+      }}>
+      <p>This container has overflow: hidden</p>
+      <Popover open={open} align="top" autoAlign ref={ref}>
+        <div className="playground-trigger">
+          <CheckboxIcon
+            onClick={() => {
+              setOpen(!open);
+            }}
+          />
+        </div>
+        <PopoverContent className="p-3">
+          <div>
+            <p className="popover-title">This popover uses autoAlign</p>
+            <p className="popover-details">
+              This popover pops out of its container and is not clipped, even
+              when the container has overflow: hidden.
+            </p>
+          </div>
+        </PopoverContent>
+      </Popover>
+    </div>
+  );
+};
+
+export const TabTipExperimentalAutoAlign = () => {
+  const [open, setOpen] = useState(true);
+  const ref = useRef();
+
+  useEffect(() => {
+    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
+  });
+
+  return (
+    <div style={{ width: '5000px', height: '5000px' }}>
+      <div
+        style={{
+          position: 'absolute',
+          top: '2500px',
+          left: '2500px',
+        }}>
+        <Popover open={open} align="bottom-right" autoAlign ref={ref} isTabTip>
+          <div className="playground-trigger">
+            <CheckboxIcon
+              onClick={() => {
+                setOpen(!open);
+              }}
+            />
+          </div>
+          <PopoverContent className="p-3">
+            <div>
+              <p className="popover-title">
+                This popover uses autoAlign with isTabTip
+              </p>
+              <p className="popover-details">
+                Scroll the container up, down, left or right to observe how the
+                popover will automatically change its position in attempt to
+                stay within the viewport. This works on initial render in
+                addition to on scroll.
               </p>
             </div>
           </PopoverContent>
