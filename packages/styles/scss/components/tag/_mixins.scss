@@ -18,8 +18,8 @@
   background-color: $bg-color;
   color: $text-color;
 
-  &:hover {
-    background-color: $bg-color;
+  &:hover.#{$prefix}--tag--operational {
+    background-color: $filter-hover-color;
   }
 
   .#{$prefix}--tag__close-icon {

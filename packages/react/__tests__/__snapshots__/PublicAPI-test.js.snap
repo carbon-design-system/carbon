@@ -8193,9 +8193,7 @@ Map {
       "id": Object {
         "type": "string",
       },
-      "onClose": Object {
-        "type": "func",
-      },
+      "onClose": [Function],
       "renderIcon": Object {
         "args": Array [
           Array [
@@ -8222,9 +8220,7 @@ Map {
       "slug": Object {
         "type": "node",
       },
-      "title": Object {
-        "type": "string",
-      },
+      "title": [Function],
       "type": Object {
         "args": Array [
           Array [
