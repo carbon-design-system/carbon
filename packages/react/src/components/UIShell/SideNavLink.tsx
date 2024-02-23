@@ -7,15 +7,79 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
-import Link, { LinkPropTypes } from './Link';
+import React, {
+  ComponentType,
+  ElementType,
+  ForwardedRef,
+  ReactNode,
+  WeakValidationMap,
+  forwardRef,
+  useContext,
+} from 'react';
+import Link, { LinkProps, LinkPropTypes } from './Link';
 import SideNavIcon from './SideNavIcon';
 import SideNavItem from './SideNavItem';
 import SideNavLinkText from './SideNavLinkText';
 import { usePrefix } from '../../internal/usePrefix';
 import { SideNavContext } from './SideNav';
 
-const SideNavLink = React.forwardRef(function SideNavLink(
+export type SideNavLinkProps<E extends ElementType> = LinkProps<E> & {
+  /**
+   * Required props for the accessibility label
+   */
+  'aria-label'?: string;
+  /**
+   * Required props for the accessibility label
+   */
+  'aria-labelledby'?: string;
+  /**
+   * Specify the text content for the link
+   */
+  children: ReactNode;
+
+  /**
+   * Provide an optional class to be applied to the containing node
+   */
+  className?: string;
+
+  /**
+   * Specify whether the link is the current page
+   */
+  isActive?: boolean;
+
+  /**
+   * Property to indicate if the side nav container is open (or not). Use to
+   * keep local state and styling in step with the SideNav expansion state.
+   */
+  isSideNavExpanded?: boolean;
+
+  /**
+   * Specify if this is a large variation of the SideNavLink
+   */
+  large?: boolean;
+
+  /**
+   * Provide an icon to render in the side navigation link. Should be a React class.
+   */
+  renderIcon?: ComponentType;
+
+  /**
+   * Optional prop to specify the tabIndex of the button. If undefined, it will be applied default validation
+   */
+  tabIndex?: number;
+};
+
+export interface SideNavLinkComponent {
+  <E extends ElementType = 'a'>(
+    props: SideNavLinkProps<E> & { ref?: ForwardedRef<ElementType> }
+  ): JSX.Element | null;
+  displayName?: string;
+  propTypes?: WeakValidationMap<SideNavLinkProps<any>>;
+}
+
+const SideNavLink: SideNavLinkComponent = forwardRef(function SideNavLink<
+  E extends ElementType = 'a'
+>(
   {
     children,
     className: customClassName,
@@ -25,8 +89,8 @@ const SideNavLink = React.forwardRef(function SideNavLink(
     large = false,
     tabIndex,
     ...rest
-  },
-  ref
+  }: SideNavLinkProps<E>,
+  ref: ForwardedRef<ElementType>
 ) {
   const isRail = useContext(SideNavContext);
 
@@ -34,7 +98,7 @@ const SideNavLink = React.forwardRef(function SideNavLink(
   const className = cx({
     [`${prefix}--side-nav__link`]: true,
     [`${prefix}--side-nav__link--current`]: isActive,
-    [customClassName]: !!customClassName,
+    [customClassName as string]: !!customClassName,
   });
 
   return (
@@ -94,6 +158,7 @@ SideNavLink.propTypes = {
   /**
    * Provide an icon to render in the side navigation link. Should be a React class.
    */
+  // @ts-expect-error - PropTypes are unable to cover this case.
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**

@@ -279,7 +279,6 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/ggdawson"><img src="https://avatars.githubusercontent.com/u/37080130?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Garrett Dawson</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=ggdawson" title="Code">💻</a> <a href="https://github.com/carbon-design-system/carbon/commits?author=ggdawson" title="Documentation">📖</a></td>
   </tr>
 </table>
-
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 
