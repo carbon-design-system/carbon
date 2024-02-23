@@ -22,7 +22,7 @@ test.describe('InteractiveTag', () => {
         });
       });
 
-      test('default @vrt', async ({ page }) => {
+      test('OperationalTag @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'OperationalTag',
           id: 'experimental-unstable-interactivetag--operational',
@@ -30,7 +30,7 @@ test.describe('InteractiveTag', () => {
         });
       });
 
-      test('default @vrt', async ({ page }) => {
+      test('SelectableTag @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'SelectableTag',
           id: 'experimental-unstable-interactivetag--selectable',
