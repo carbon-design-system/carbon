@@ -121,7 +121,10 @@ export const Operational = () => {
         </Tooltip>
 
         <Toggletip>
-          <ToggletipButton label="Additional information" tabIndex={-1}>
+          <ToggletipButton
+            label="Additional information"
+            tabIndex={-1}
+            as="div">
             <OperationalTag renderIcon={Asleep} className="some-class">
               {'Tag content'}
             </OperationalTag>
