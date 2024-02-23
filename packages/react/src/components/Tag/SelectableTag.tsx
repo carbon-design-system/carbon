@@ -91,7 +91,7 @@ const SelectableTag = <T extends React.ElementType>({
   }
 
   return (
-    <Tag
+    <Tag<any>
       slug={slug}
       size={size}
       renderIcon={renderIcon}

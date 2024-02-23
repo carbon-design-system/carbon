@@ -108,7 +108,7 @@ const DismissibleTag = <T extends React.ElementType>({
   }
 
   return (
-    <Tag
+    <Tag<any>
       type={type}
       size={size}
       renderIcon={renderIcon}
