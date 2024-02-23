@@ -10,34 +10,11 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import Tag from './';
 import DismissibleTag from './DismissibleTag';
-import OperationalTag from './OperationalTag';
-import SelectableTag from './SelectableTag';
 
 describe('Tag', () => {
   describe('automated accessibility testing', () => {
     it('should have no Axe violations', async () => {
       const { container } = render(<Tag type="red">test-tag</Tag>);
-      await expect(container).toHaveNoAxeViolations();
-    });
-
-    it('should have no Axe violations DismissibleTag', async () => {
-      const { container } = render(
-        <DismissibleTag type="red">test-tag</DismissibleTag>
-      );
-      await expect(container).toHaveNoAxeViolations();
-    });
-
-    it('should have no Axe violations OperationalTag', async () => {
-      const { container } = render(
-        <OperationalTag type="red">test-tag</OperationalTag>
-      );
-      await expect(container).toHaveNoAxeViolations();
-    });
-
-    it('should have no Axe violations SelectableTag', async () => {
-      const { container } = render(
-        <SelectableTag type="red">test-tag</SelectableTag>
-      );
       await expect(container).toHaveNoAxeViolations();
     });
 

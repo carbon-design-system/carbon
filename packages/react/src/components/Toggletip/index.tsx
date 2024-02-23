@@ -247,6 +247,7 @@ export function ToggletipButton({
   children,
   className: customClassName,
   label = 'Show information',
+  ...rest
 }: ToggletipButtonProps) {
   const toggletip = useToggletip();
   const prefix = usePrefix();
@@ -256,7 +257,8 @@ export function ToggletipButton({
       {...toggletip?.buttonProps}
       aria-label={label}
       type="button"
-      className={className}>
+      className={className}
+      {...rest}>
       {children}
     </button>
   );

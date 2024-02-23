@@ -106,11 +106,11 @@ const Tag = <T extends React.ElementType>({
   className,
   id,
   type,
-  filter, // remove filter in next major release
+  filter, // remove filter in next major release - V12
   renderIcon: CustomIconElement,
-  title = 'Clear filter',
+  title = 'Clear filter', // remove title in next major release - V12
   disabled,
-  onClose,
+  onClose, // remove onClose in next major release - V12
   size,
   as: BaseComponent,
   slug,

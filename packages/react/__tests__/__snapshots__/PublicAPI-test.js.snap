@@ -6481,11 +6481,6 @@ Map {
       },
     },
   },
-  "SIZES" => Object {
-    "lg": "lg",
-    "md": "md",
-    "sm": "sm",
-  },
   "Search" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
@@ -7461,20 +7456,6 @@ Map {
       },
     },
     "render": [Function],
-  },
-  "TYPES" => Object {
-    "blue": "Blue",
-    "cool-gray": "Cool-Gray",
-    "cyan": "Cyan",
-    "gray": "Gray",
-    "green": "Green",
-    "high-contrast": "High-Contrast",
-    "magenta": "Magenta",
-    "outline": "Outline",
-    "purple": "Purple",
-    "red": "Red",
-    "teal": "Teal",
-    "warm-gray": "Warm-Gray",
   },
   "Tab" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -9421,20 +9402,6 @@ Map {
   "VStack" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
-  },
-  "types" => Object {
-    "0": "red",
-    "1": "magenta",
-    "10": "high-contrast",
-    "11": "outline",
-    "2": "purple",
-    "3": "blue",
-    "4": "cyan",
-    "5": "teal",
-    "6": "green",
-    "7": "gray",
-    "8": "cool-gray",
-    "9": "warm-gray",
   },
   "unstable_FeatureFlags" => Object {
     "propTypes": Object {

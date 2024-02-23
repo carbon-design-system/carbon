@@ -29,13 +29,8 @@ export default {
 export const Selectable = () => {
   return (
     <>
-      <SelectableTag className="some-class" title="Clear Filter">
-        {'Tag content'}
-      </SelectableTag>
-      <SelectableTag
-        renderIcon={Asleep}
-        className="some-class"
-        title="Clear Filter">
+      <SelectableTag className="some-class">{'Tag content'}</SelectableTag>
+      <SelectableTag renderIcon={Asleep} className="some-class">
         {'Tag content'}
       </SelectableTag>
     </>
@@ -80,49 +75,34 @@ export const Operational = () => {
   return (
     <>
       <div style={{ marginBottom: '1rem' }}>
-        <OperationalTag type="red" className="some-class" title="Clear Filter">
+        <OperationalTag type="red" className="some-class">
           {'Tag content'}
         </OperationalTag>
-        <OperationalTag
-          type="magenta"
-          className="some-class"
-          title="Clear Filter">
+        <OperationalTag type="magenta" className="some-class">
           {'Tag content'}
         </OperationalTag>
-        <OperationalTag
-          type="purple"
-          className="some-class"
-          title="Clear Filter">
+        <OperationalTag type="purple" className="some-class">
           {'Tag content'}
         </OperationalTag>
-        <OperationalTag type="blue" className="some-class" title="Clear Filter">
+        <OperationalTag type="blue" className="some-class">
           {'Tag content'}
         </OperationalTag>
-        <OperationalTag type="cyan" className="some-class" title="Clear Filter">
+        <OperationalTag type="cyan" className="some-class">
           {'Tag content'}
         </OperationalTag>
-        <OperationalTag type="teal" className="some-class" title="Clear Filter">
+        <OperationalTag type="teal" className="some-class">
           {'Tag content'}
         </OperationalTag>
-        <OperationalTag
-          type="green"
-          className="some-class"
-          title="Clear Filter">
+        <OperationalTag type="green" className="some-class">
           {'Tag content'}
         </OperationalTag>
-        <OperationalTag type="gray" className="some-class" title="Clear Filter">
+        <OperationalTag type="gray" className="some-class">
           {'Tag content'}
         </OperationalTag>
-        <OperationalTag
-          type="cool-gray"
-          className="some-class"
-          title="Clear Filter">
+        <OperationalTag type="cool-gray" className="some-class">
           {'Tag content'}
         </OperationalTag>
-        <OperationalTag
-          type="warm-gray"
-          className="some-class"
-          title="Clear Filter">
+        <OperationalTag type="warm-gray" className="some-class">
           {'Tag content'}
         </OperationalTag>
       </div>
@@ -135,17 +115,14 @@ export const Operational = () => {
           marginTop: '0.5rem',
         }}>
         <Tooltip label="View more" align="bottom">
-          <OperationalTag className="some-class" title="Clear Filter">
+          <OperationalTag className="some-class">
             {'Tag content'}
           </OperationalTag>
         </Tooltip>
 
         <Toggletip>
-          <ToggletipButton label="Additional information">
-            <OperationalTag
-              renderIcon={Asleep}
-              className="some-class"
-              title="Clear Filter">
+          <ToggletipButton label="Additional information" tabIndex={-1}>
+            <OperationalTag renderIcon={Asleep} className="some-class">
               {'Tag content'}
             </OperationalTag>
           </ToggletipButton>
@@ -164,29 +141,28 @@ export const Operational = () => {
               setOpen(!open);
             }}
             renderIcon={Asleep}
-            className="some-class"
-            title="Clear Filter">
+            className="some-class">
             {'Tag content'}
           </OperationalTag>
           <PopoverContent className="p-3">
             <br />
-            <Tag type="blue" className="some-class" title="Clear Filter">
+            <Tag type="blue" className="some-class">
               {'Tag 1 name'}
             </Tag>
             <br />
-            <Tag type="blue" className="some-class" title="Clear Filter">
+            <Tag type="blue" className="some-class">
               {'Tag 2 name'}
             </Tag>
             <br />
-            <Tag type="blue" className="some-class" title="Clear Filter">
+            <Tag type="blue" className="some-class">
               {'Tag 3 name'}
             </Tag>
             <br />
-            <Tag type="blue" className="some-class" title="Clear Filter">
+            <Tag type="blue" className="some-class">
               {'Tag 4 name'}
             </Tag>
             <br />
-            <Tag type="blue" className="some-class" title="Clear Filter">
+            <Tag type="blue" className="some-class">
               {'Tag 5 name'}
             </Tag>
           </PopoverContent>
