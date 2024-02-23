@@ -98,15 +98,17 @@ test.describe('@avt InteractiveTag', () => {
         theme: 'white',
       },
     });
-    const button = page.getByRole('button').first();
-    await expect(button).toBeVisible();
+    const tag = page.getByRole('button').first();
+    await expect(tag).toBeVisible();
     await page.keyboard.press('Tab');
-    await expect(button).toBeFocused();
+    await expect(tag).toBeFocused();
     await page.keyboard.press('Enter');
-    await expect(button).toHaveClass(/cds--tag--selectable-selected/);
+    await expect(tag).toHaveClass(/cds--tag--selectable-selected/);
 
     // Expected the second SelectableTag with icon not to be selected
+    const lastTag = page.getByRole('button').last();
     await page.keyboard.press('Tab');
-    await expect(button).not.toHaveClass(/cds--tag--selectable-selected/);
+    await expect(lastTag).toBeFocused();
+    await expect(lastTag).not.toHaveClass(/cds--tag--selectable-selected/);
   });
 });
