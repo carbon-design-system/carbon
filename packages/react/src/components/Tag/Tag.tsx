@@ -54,7 +54,7 @@ export interface TagBaseProps {
   disabled?: boolean;
 
   /**
-   * @deprecated This property is deprecated and will be removed in the next major version. Use DismissibleTag instead
+   * @deprecated This property is deprecated and will be removed in the next major version. Use DismissibleTag instead.
    */
   filter?: boolean;
 
@@ -64,7 +64,7 @@ export interface TagBaseProps {
   id?: string;
 
   /**
-   * Click handler for filter tag close button.
+   * @deprecated This property is deprecated and will be removed in the next major version. Use DismissibleTag instead.
    */
   onClose?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 
@@ -86,7 +86,7 @@ export interface TagBaseProps {
   slug?: ReactNodeLike;
 
   /**
-   * Text to show on clear filters
+   * @deprecated This property is deprecated and will be removed in the next major version. Use DismissibleTag instead.
    */
   title?: string;
 
@@ -239,7 +239,7 @@ Tag.propTypes = {
    */
   filter: deprecate(
     PropTypes.bool,
-    'This property is deprecated and will be removed in the next major version. Use DismissibleTag instead'
+    'This property is deprecated and will be removed in the next major version. Use DismissibleTag instead.'
   ),
 
   /**
@@ -250,7 +250,10 @@ Tag.propTypes = {
   /**
    * Click handler for filter tag close button.
    */
-  onClose: PropTypes.func,
+  onClose: deprecate(
+    PropTypes.func,
+    'This property is deprecated and will be removed in the next major version. Use DismissibleTag instead.'
+  ),
 
   /**
    * Optional prop to render a custom icon.
@@ -272,7 +275,10 @@ Tag.propTypes = {
   /**
    * Text to show on clear filters
    */
-  title: PropTypes.string,
+  title: deprecate(
+    PropTypes.string,
+    'This property is deprecated and will be removed in the next major version. Use DismissibleTag instead.'
+  ),
 
   /**
    * Specify the type of the `Tag`
