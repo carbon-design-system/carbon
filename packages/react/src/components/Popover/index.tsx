@@ -310,16 +310,16 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
   ]);
 
   console.log(`-----------`);
-  console.log(floatingStyles);
+  // console.log(floatingStyles);
   console.dir(refs);
   console.log(`floating ref:`);
   console.dir(refs.floating.current);
-  console.log(`reference ref:`);
+  console.log(`reference ref ${refs.reference.current ? '✅' : '🚫'}`);
   console.dir(refs.reference.current); // TODO this is undefined for toggletip and needs fixed
-  console.log(autoAlign);
-  console.log(placement);
-  console.log(middlewareData);
-  console.log(popoverDimensions?.current?.offset);
+  // console.log(autoAlign);
+  // console.log(placement);
+  // console.log(middlewareData);
+  // console.log(popoverDimensions?.current?.offset);
   console.log(`-----------`);
 
   const ref = useMergedRefs([forwardRef, popover]);
@@ -353,7 +353,10 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
       // `useMergedRefs` can't be used here because hooks can't be called from within a callback.
       // More here: https://github.com/facebook/react/issues/8873#issuecomment-489579878
       ref: (node) => {
-        if (autoAlign && item?.type?.displayName !== 'PopoverContent') {
+        if (
+          (autoAlign && item?.type?.displayName !== 'PopoverContent') ||
+          (autoAlign && item?.type?.displayName !== 'ToggletipContent')
+        ) {
           // Set the reference element for floating-ui
           refs.setReference(node);
         }

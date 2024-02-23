@@ -243,11 +243,13 @@ interface ToggletipButtonProps {
  * `ToggletipButton` controls the visibility of the Toggletip through mouse
  * clicks and keyboard interactions.
  */
-export function ToggletipButton({
-  children,
-  className: customClassName,
-  label = 'Show information',
-}: ToggletipButtonProps) {
+export const ToggletipButton = React.forwardRef<
+  HTMLButtonElement,
+  ToggletipButtonProps
+>(function ToggletipButton(
+  { children, className: customClassName, label = 'Show information' },
+  ref
+) {
   const toggletip = useToggletip();
   const prefix = usePrefix();
   const className = cx(`${prefix}--toggletip-button`, customClassName);
@@ -256,11 +258,12 @@ export function ToggletipButton({
       {...toggletip?.buttonProps}
       aria-label={label}
       type="button"
-      className={className}>
+      className={className}
+      ref={ref}>
       {children}
     </button>
   );
-}
+});
 
 ToggletipButton.propTypes = {
   /**
