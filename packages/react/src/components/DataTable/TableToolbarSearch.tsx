@@ -17,12 +17,18 @@ import React, {
   ReactNode,
   RefObject,
 } from 'react';
-import Search from '../Search';
+import Search, { SearchProps } from '../Search';
 import setupGetInstanceId from './tools/instanceId';
 import { usePrefix } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
+import { InternationalProps } from '../../types/common';
 
 const getInstanceId = setupGetInstanceId();
+
+export type TableToolbarTranslationKey =
+  | 'carbon.table.toolbar.search.label'
+  | 'carbon.table.toolbar.search.placeholder';
+
 const translationKeys = {
   'carbon.table.toolbar.search.label': 'Filter table',
   'carbon.table.toolbar.search.placeholder': 'Filter table',
@@ -32,14 +38,23 @@ const translateWithId = (id: string): string => {
   return translationKeys[id];
 };
 
-export interface TableToolbarSearchProps {
-  children?: ReactNode;
+type ExcludedInheritedProps =
+  | 'defaultValue'
+  | 'labelText'
+  | 'onBlur'
+  | 'onChange'
+  | 'onExpand'
+  | 'onFocus'
+  | 'tabIndex';
 
-  /**
-   * Provide an optional class name for the search container
-   */
-  className?: string;
+export type TableToolbarSearchHandleExpand = (
+  event: FocusEvent<HTMLInputElement>,
+  newValue?: boolean
+) => void;
 
+export interface TableToolbarSearchProps
+  extends Omit<SearchProps, ExcludedInheritedProps>,
+    InternationalProps<TableToolbarTranslationKey> {
   /**
    * Specifies if the search should initially render in an expanded state
    */
@@ -51,34 +66,24 @@ export interface TableToolbarSearchProps {
   defaultValue?: string;
 
   /**
-   * Specifies if the search should be disabled
-   */
-  disabled?: boolean;
-
-  /**
    * Specifies if the search should expand
    */
   expanded?: boolean;
 
   /**
-   * Provide an optional id for the search container
-   */
-  id?: string;
-
-  /**
    * Provide an optional label text for the Search component icon
    */
-  labelText?: string;
+  labelText?: ReactNode;
 
   /**
    * Provide an optional function to be called when the search input loses focus, this will be
    * passed the event as the first parameter and a function to handle the expanding of the search
    * input as the second
    */
-  onBlur?: (
+  onBlur?(
     event: FocusEvent<HTMLInputElement>,
-    handleExpand: (event: FocusEvent<HTMLInputElement>, value: boolean) => void
-  ) => void;
+    handleExpand: TableToolbarSearchHandleExpand
+  ): void;
 
   /**
    * Provide an optional hook that is called each time the input is updated
@@ -89,53 +94,31 @@ export interface TableToolbarSearchProps {
   ) => void;
 
   /**
-   * Optional callback called when the search value is cleared.
-   */
-  onClear?: () => void;
-
-  /**
    * Provide an optional hook that is called each time the input is expanded
    */
-  onExpand?: (event: FocusEvent<HTMLInputElement>, value: boolean) => void;
+  onExpand?(event: FocusEvent<HTMLInputElement>, newExpand: boolean): void;
 
   /**
    * Provide an optional function to be called when the search input gains focus, this will be
    * passed the event as the first parameter and a function to handle the expanding of the search
    * input as the second.
    */
-  onFocus?: (
+  onFocus?(
     event: FocusEvent<HTMLInputElement>,
-    handleExpand: (event: FocusEvent<HTMLInputElement>, value: boolean) => void
-  ) => void;
+    handleExpand: TableToolbarSearchHandleExpand
+  ): void;
 
   /**
-   * Whether the search should be allowed to expand
+   * Whether the search should be allowed to expand.
    */
   persistent?: boolean;
-
-  /**
-   * Provide an optional placeholder text for the Search component
-   */
-  placeholder?: string;
 
   /**
    * Provide an optional className for the overall container of the Search
    */
   searchContainerClass?: string;
 
-  /**
-   * Specify the size of the Search
-   */
-  size?: 'sm' | 'md' | 'lg';
-
-  /**
-   * Optional prop to specify the tabIndex of the <Search> (in expanded state) or the container (in collapsed state)
-   */
   tabIndex?: number | string;
-  /**
-   * Provide custom text for the component for each translation id
-   */
-  translateWithId?: (id: string) => string;
 }
 
 const TableToolbarSearch = ({
@@ -160,9 +143,11 @@ const TableToolbarSearch = ({
   ...rest
 }: TableToolbarSearchProps) => {
   const { current: controlled } = useRef(expandedProp !== undefined);
-  const [expandedState, setExpandedState] = useState<
-    string | boolean | undefined
-  >(defaultExpanded || defaultValue);
+
+  const [expandedState, setExpandedState] = useState<boolean>(
+    Boolean(defaultExpanded || defaultValue)
+  );
+
   const expanded = controlled ? expandedProp : expandedState;
   const [value, setValue] = useState(defaultValue || '');
   const uniqueId = useMemo(getInstanceId, []);
@@ -218,8 +203,10 @@ const TableToolbarSearch = ({
     }
   };
 
-  const handleOnFocus = (event) => handleExpand(event, true);
-  const handleOnBlur = (event) => !value && handleExpand(event, false);
+  const handleOnFocus = (event: FocusEvent<HTMLInputElement>) =>
+    handleExpand(event, true);
+  const handleOnBlur = (event: FocusEvent<HTMLInputElement>) =>
+    !value && handleExpand(event, false);
 
   return (
     <Search
