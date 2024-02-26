@@ -11,6 +11,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { NumberInput } from '../NumberInput';
+import { Slug } from '../../Slug';
 
 function translateWithId(id) {
   if (id === 'increment.number') {
@@ -66,6 +67,14 @@ describe('NumberInput', () => {
   it('should set the given `value` on <input> when value > min', () => {
     render(<NumberInput label="test-label" id="test" min={0} value={5} />);
     expect(screen.getByLabelText('test-label')).toHaveValue(5);
+  });
+
+  it('should respect slug prop', () => {
+    render(<NumberInput label="test-label" id="test" slug={<Slug />} />);
+
+    expect(
+      screen.getByRole('button', { name: 'AI - Show information' })
+    ).toBeInTheDocument();
   });
 
   it('should allow an empty string as input to the underlying <input>', () => {
