@@ -168,7 +168,8 @@ $popover-caret-height: custom-property.get-var(
   }
 
   // Popover caret
-  .#{$prefix}--popover-caret {
+  .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--auto-align.#{$prefix}--popover-caret {
     position: absolute;
     z-index: z('floating');
     display: none;

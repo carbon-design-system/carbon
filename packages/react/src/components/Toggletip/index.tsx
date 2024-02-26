@@ -283,6 +283,8 @@ ToggletipButton.propTypes = {
   label: PropTypes.string,
 };
 
+ToggletipButton.displayName = 'ToggletipButton';
+
 interface ToggletipContentProps {
   children?: ReactNode;
   className?: string | undefined;

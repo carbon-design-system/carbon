@@ -225,9 +225,6 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
         offset: offsetProperty ? offsetPropertyValue : 10,
         caretHeight: caretProperty ? caretPropertyValue : 6,
       };
-
-      console.log(`popoverDimensions`);
-      console.dir(popoverDimensions);
     }
   });
 
@@ -309,19 +306,6 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
     caret,
   ]);
 
-  console.log(`-----------`);
-  // console.log(floatingStyles);
-  console.dir(refs);
-  console.log(`floating ref:`);
-  console.dir(refs.floating.current);
-  console.log(`reference ref ${refs.reference.current ? '✅' : '🚫'}`);
-  console.dir(refs.reference.current); // TODO this is undefined for toggletip and needs fixed
-  // console.log(autoAlign);
-  // console.log(placement);
-  // console.log(middlewareData);
-  // console.log(popoverDimensions?.current?.offset);
-  console.log(`-----------`);
-
   const ref = useMergedRefs([forwardRef, popover]);
   const currentAlignment = autoAlign && placement !== align ? placement : align;
   const className = cx(
@@ -353,9 +337,16 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
       // `useMergedRefs` can't be used here because hooks can't be called from within a callback.
       // More here: https://github.com/facebook/react/issues/8873#issuecomment-489579878
       ref: (node) => {
+        console.log('item?.type');
+        console.log(item?.type);
+        // For a popover, there isn't an explicit trigger component, it's just the first child that's
+        // passed in which should *not* be PopoverContent.
+        // For a toggletip there is a specific trigger component, ToggletipButton.
+        // In either of these caes we want to set this as the reference node for floating-ui autoAlign
+        // positioning.
         if (
           (autoAlign && item?.type?.displayName !== 'PopoverContent') ||
-          (autoAlign && item?.type?.displayName !== 'ToggletipContent')
+          (autoAlign && item?.type?.displayName === 'ToggletipButton')
         ) {
           // Set the reference element for floating-ui
           refs.setReference(node);
