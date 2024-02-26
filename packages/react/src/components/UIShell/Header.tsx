@@ -7,13 +7,33 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { usePrefix } from '../../internal/usePrefix';
 
-const Header = ({ className: customClassName, children, ...rest }) => {
+interface HeaderProps {
+  children?: ReactNode;
+  /**
+   * Required props for the accessibility label of the header
+   */
+  'aria-label'?: string;
+  /**
+   * Required props for the accessibility label of the header
+   */
+  'aria-labelledby'?: string;
+  /**
+   * Optionally provide a custom class name that is applied to the underlying <header>
+   */
+  className?: string;
+}
+
+const Header: React.FC<HeaderProps> = ({
+  className: customClassName,
+  children,
+  ...rest
+}) => {
   const prefix = usePrefix();
-  const className = cx(`${prefix}--header`, customClassName);
+  const className = cx(`${prefix}--header`, customClassName as string);
 
   return (
     <header {...rest} className={className}>
