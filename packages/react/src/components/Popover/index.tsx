@@ -337,8 +337,6 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
       // `useMergedRefs` can't be used here because hooks can't be called from within a callback.
       // More here: https://github.com/facebook/react/issues/8873#issuecomment-489579878
       ref: (node) => {
-        console.log('item?.type');
-        console.log(item?.type);
         // For a popover, there isn't an explicit trigger component, it's just the first child that's
         // passed in which should *not* be PopoverContent.
         // For a toggletip there is a specific trigger component, ToggletipButton.

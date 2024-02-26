@@ -38,8 +38,6 @@ export default {
   },
   decorators: [
     (Story, context) => {
-      console.log(`CONTEXT`);
-      console.log(context);
       if (context.name.toLowerCase().includes('auto align')) {
         return <Story />;
       }
