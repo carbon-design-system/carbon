@@ -65,6 +65,8 @@ $radio-border-width: 1px !default;
   .#{$prefix}--radio-button {
     @include visually-hidden;
 
+    margin-block-start: 0.9rem;
+    margin-inline-start: 0.63rem;
     visibility: inherit;
   }
 

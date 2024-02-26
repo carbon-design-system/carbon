@@ -279,6 +279,7 @@ const Modal = React.forwardRef(function Modal(
   }
 
   function handleKeyDown(evt: React.KeyboardEvent<HTMLDivElement>) {
+    evt.stopPropagation();
     if (open) {
       if (match(evt, keys.Escape)) {
         onRequestClose(evt);
@@ -295,6 +296,7 @@ const Modal = React.forwardRef(function Modal(
 
   function handleMousedown(evt: React.MouseEvent<HTMLDivElement>) {
     const target = evt.target as Node;
+    evt.stopPropagation();
     if (
       innerModal.current &&
       !innerModal.current.contains(target) &&
@@ -468,7 +470,6 @@ const Modal = React.forwardRef(function Modal(
         className={modalCloseButtonClass}
         label={closeButtonLabel}
         onClick={onRequestClose}
-        title={closeButtonLabel}
         aria-label={closeButtonLabel}
         align="left"
         ref={button}>

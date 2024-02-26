@@ -16,16 +16,17 @@ jobs:
         with:
           text: ${{ github.event.issue.body }}
           regex:
-            '\b(Instana|QRadar|MaaS360|Environmental Intelligence Suite|Watson
-            Orchestrate|Watson Assistant|Planning Analytics|ReaQta|API
-            Connect|Fusion|Flash Storage|Envizi|Maximo|Turbonomic|Fusion
-            Microsoft 360)|StepZen|APP Connect Enterprise|Watson
-            Discovery|Watson Code Assistant|Hybrid Cloud Mesh|AIOps
-            Insights|Databand|OpenPages|watsonx.data|watsonx.ai|watsonx.gov|QRadar
-            Log Insights|QRadar XDR|QRadar EDR (ReaQta)|QRadar SOAR|Randori
-            ASM|Guardium Insights|Trusteer Fraud Protection|Security Verify on
-            Cloud|Sterling Data Exchange SaaS|TRIRIGA|Sterling Order and
-            Inventory Management|Supply Chain Intelligence Suite\b'
+            '\b(API Connect|Turbonomic|Instana|NS1|watsonx Orchestrate|watsonx
+            Code Assistant|Planning Analytics|SPSS
+            Statistics|watsonx.data|watsonx.ai|watsonx.governance|Maximo
+            Application Suite|Environmental Intelligence Suite|Envizi ESG
+            Suite|QRadar Log Insights|QRadar XDR/EDR (ReaQta)|Randori ASM|QRadar
+            SIEM|MaaS360|Flash|Defender|Fusion|APP Connect|Apptio
+            Cloudability|Apptio Targetprocess|AIOps Insights|Hybrid Cloud
+            Mesh|Aspera|Blueworks Live|OpenPages|Databand.ai|Cognos
+            Analytics|Sterling B2B Integration SaaS|Sterling Order & Inventory
+            Management|Supply Chain Intelligence Suite|TRIRIGA Application
+            Suite|QRadar SOAR|Guardium Insights|Verify on Cloud\b'
           flags: g
       - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #v7.0.1
         if: ${{ steps.regex-match.outputs.match != '' }}
