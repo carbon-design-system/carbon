@@ -10,6 +10,9 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import RadioButtonGroup from './RadioButtonGroup';
 import RadioButton from '../RadioButton';
+import { Slug } from '../Slug';
+
+const prefix = 'cds';
 
 describe('RadioButtonGroup', () => {
   it('should render `legendText` in a <label>', () => {
@@ -208,6 +211,19 @@ describe('RadioButtonGroup', () => {
         screen.getByRole('radio', {
           checked: true,
         })
+      );
+    });
+
+    it('should respect slug prop', () => {
+      const { container } = render(
+        <RadioButtonGroup slug={<Slug />} name="test" legendText="test">
+          <RadioButton labelText="test-1" value={1} />
+          <RadioButton labelText="test-0" value={0} />
+        </RadioButtonGroup>
+      );
+
+      expect(container.firstChild.firstChild).toHaveClass(
+        `${prefix}--radio-button-group--slug`
       );
     });
 
