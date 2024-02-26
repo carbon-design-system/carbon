@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('DefinitionTooltip @avt', () => {
+test.describe('@avt DefinitionTooltip', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'DefinitionTooltip',
@@ -24,7 +24,7 @@ test.describe('DefinitionTooltip @avt', () => {
     );
   });
 
-  test('@avt-keyboard-state default', async ({ page }) => {
+  test('@avt-keyboard-nav default', async ({ page }) => {
     await visitStory(page, {
       component: 'DefinitionTooltip',
       id: 'components-definitiontooltip--default',

@@ -10,7 +10,7 @@
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
-test.describe('Tag @avt', () => {
+test.describe('@avt Tag', () => {
   test('@avt-default-state Tag', async ({ page }) => {
     await visitStory(page, {
       component: 'Tag',

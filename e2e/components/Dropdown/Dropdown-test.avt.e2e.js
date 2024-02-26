@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('Dropdown @avt', () => {
+test.describe('@avt Dropdown', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Dropdown',
@@ -39,7 +39,7 @@ test.describe('Dropdown @avt', () => {
     const menu = page.getByRole('listbox');
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Enter');
-    await expect(page.getByRole('combobox', { expanded: true })).toBeVisible;
+    await expect(page.getByRole('combobox', { expanded: true })).toBeVisible();
     await expect(menu).toBeFocused();
 
     await expect(page).toHaveNoACViolations('Dropdown-open');

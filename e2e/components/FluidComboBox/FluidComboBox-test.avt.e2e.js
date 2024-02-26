@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('FluidComboBox @avt', () => {
+test.describe('@avt FluidComboBox', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidComboBox',
@@ -38,7 +38,7 @@ test.describe('FluidComboBox @avt', () => {
     await page.keyboard.press('Tab');
     await expect(combobox).toBeFocused();
     await page.keyboard.press('Enter');
-    await expect(page.getByRole('combobox', { expanded: true })).toBeVisible;
+    await expect(page.getByRole('combobox', { expanded: true })).toBeVisible();
     await expect(combobox).toBeFocused();
 
     await expect(page).toHaveNoACViolations('FluidComboBox-open');
