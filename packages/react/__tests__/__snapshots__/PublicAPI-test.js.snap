@@ -9175,6 +9175,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "defaultIsExpanded": Object {
+        "type": "bool",
+      },
       "depth": Object {
         "type": "number",
       },
@@ -9261,6 +9264,9 @@ Map {
         },
         "className": Object {
           "type": "string",
+        },
+        "defaultIsExpanded": Object {
+          "type": "bool",
         },
         "depth": Object {
           "type": "number",
@@ -9355,6 +9361,9 @@ Map {
       },
       "multiselect": Object {
         "type": "bool",
+      },
+      "onActivate": Object {
+        "type": "func",
       },
       "onSelect": Object {
         "type": "func",
