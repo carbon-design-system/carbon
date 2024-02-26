@@ -118,7 +118,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   }
   /**
    * The rate of the upper thumb position in the track.
-   * When we try to set a new value, we adjust the value considering `step` property.
+   * When we try to set a new value for upper input, we adjust the value considering `step` property.
    */
   private get _rateUpper() {
     const { max, min, valueUpper } = this;
@@ -287,20 +287,55 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
             },
           })
         );
-      } else if (eventContainer === 'thumb') {
-        this._rate =
-          (isRtl
-            ? trackLeft + trackWidth - thumbPosition
-            : thumbPosition - trackLeft) / trackWidth;
-        this.dispatchEvent(
-          new CustomEvent((this.constructor as typeof CDSSlider).eventChange, {
-            bubbles: true,
-            composed: true,
-            detail: {
-              value: this.value,
-            },
-          })
-        );
+      } else {
+        if (!this.valueUpper) {
+          this._rate =
+            (isRtl
+              ? trackLeft + trackWidth - thumbPosition
+              : thumbPosition - trackLeft) / trackWidth;
+          this.dispatchEvent(
+            new CustomEvent(
+              (this.constructor as typeof CDSSlider).eventChange,
+              {
+                bubbles: true,
+                composed: true,
+                detail: {
+                  value: this.value,
+                },
+              }
+            )
+          );
+        } else {
+          const position =
+            ((isRtl
+              ? trackLeft + trackWidth - thumbPosition
+              : thumbPosition - trackLeft) /
+              trackWidth) *
+            100;
+          const differenceValue =
+            position > this.value
+              ? position - this.value
+              : this.value - position;
+          const differenceValueUpper =
+            position > this.valueUpper
+              ? position - this.valueUpper
+              : this.valueUpper - position;
+          differenceValue > differenceValueUpper
+            ? (this._rateUpper = position / 100)
+            : (this._rate = position / 100);
+          this.dispatchEvent(
+            new CustomEvent(
+              (this.constructor as typeof CDSSlider).eventChange,
+              {
+                bubbles: true,
+                composed: true,
+                detail: {
+                  value: this.value,
+                },
+              }
+            )
+          );
+        }
       }
     }
   }
@@ -642,18 +677,22 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       if (input) {
         if (this.valueUpper && index > 0) {
           ['max', 'min', 'step', 'valueUpper'].forEach((name) => {
-            if (changedProperties.has(name)) {
-              if (name === 'valueUpper') {
-                input.value = this.valueUpper;
-              } else {
-                this[name];
-              }
+            if (name === 'valueUpper') {
+              input.value = this.valueUpper;
+            } else if (name === 'min') {
+              input[name] = this.value;
+            } else {
+              this[name];
             }
           });
         } else {
           ['max', 'min', 'step', 'value'].forEach((name) => {
             if (changedProperties.has(name)) {
-              input[name] = this[name];
+              if (this.valueUpper && name === 'max') {
+                input[name] = this.valueUpper;
+              } else {
+                input[name] = this[name];
+              }
             }
           });
         }
@@ -726,6 +765,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
         <slot name="label-text">${labelText}</slot>
       </label>
       <div class="${prefix}--slider-container">
+        ${valueUpper ? html` <slot name="lower-input"></slot>` : ''}
         <span class="${prefix}--slider__range-label">
           <slot name="min-text">${formatMinText(min, minLabel)}</slot>
         </span>
