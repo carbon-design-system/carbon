@@ -48,6 +48,19 @@ test.describe('@avt Accordion', () => {
     );
   });
 
+  test('@avt-advanced-states controlled', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Accordion',
+      id: 'components-accordion--controlled',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations(
+      'Accordion @avt-advanced-states controlled'
+    );
+  });
+
   test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'Accordion',
@@ -143,5 +156,37 @@ test.describe('@avt Accordion', () => {
     await expect(page).toHaveNoACViolations(
       'Accordion @avt-advanced-states disabled'
     );
+  });
+
+  test('@avt-keyboard-nav expand/collapseAll', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Accordion',
+      id: 'components-accordion--controlled',
+      globals: {
+        theme: 'white',
+      },
+    });
+    const expand_all_btn = page.getByRole('button', {
+      name: 'Click to expand all',
+    });
+    const collapse_all_btn = page.getByRole('button', {
+      name: 'Click to collapse all',
+    });
+    const accordion_btn1 = page.getByRole('button', {
+      name: 'Section 1 title',
+    });
+    await expect(expand_all_btn).toBeVisible();
+    await expect(collapse_all_btn).toBeVisible();
+    await page.keyboard.press('Tab');
+
+    // Check the focus on Expand button
+    await expect(expand_all_btn).toBeFocused();
+    await page.keyboard.press('Enter');
+    await expect(accordion_btn1).toHaveAttribute('aria-expanded', 'true');
+    //focus on collapse button
+    await page.keyboard.press('Tab');
+    await expect(collapse_all_btn).toBeFocused();
+    await page.keyboard.press('Enter');
+    await expect(accordion_btn1).toHaveAttribute('aria-expanded', 'false');
   });
 });
