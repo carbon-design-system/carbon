@@ -188,7 +188,8 @@ $popover-caret-height: custom-property.get-var(
   // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
   .#{$prefix}--popover--auto-align.#{$prefix}--popover--caret.#{$prefix}--popover--open
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret {
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
     display: block;
   }
 
@@ -339,19 +340,24 @@ $popover-caret-height: custom-property.get-var(
   // Caret placement for autoAlign
   .#{$prefix}--popover--bottom.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--bottom-left.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--bottom-start.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--bottom-right.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--bottom-end.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret {
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
     block-size: $popover-caret-height;
     clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
     inline-size: $popover-caret-width;
@@ -496,19 +502,24 @@ $popover-caret-height: custom-property.get-var(
   // Caret placement for autoAlign
   .#{$prefix}--popover--top.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--top-left.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--top-start.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--top-right.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--top-end.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret {
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
     block-size: $popover-caret-height;
     clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
     inline-size: $popover-caret-width;
@@ -652,19 +663,24 @@ $popover-caret-height: custom-property.get-var(
   // Caret placement for autoAlign
   .#{$prefix}--popover--right.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--right-top.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--right-start.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--right-bottom.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--right-end.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret {
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
     block-size: $popover-caret-width;
     clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
     inline-size: $popover-caret-height;
@@ -815,19 +831,24 @@ $popover-caret-height: custom-property.get-var(
   // Caret placement for autoAlign
   .#{$prefix}--popover--left.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--left-top.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--left-start.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--left-bottom.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret,
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--left-end.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret {
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
     block-size: $popover-caret-width;
     clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
     inline-size: $popover-caret-height;

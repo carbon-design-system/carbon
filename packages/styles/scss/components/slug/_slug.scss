@@ -348,7 +348,8 @@ $sizes: (
     .#{$prefix}--slug.#{$prefix}--slug--enabled
     > .#{$prefix}--toggletip.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret {
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
     background: transparent;
     clip-path: none;
   }
@@ -388,7 +389,8 @@ $sizes: (
       .#{$prefix}--popover--right-bottom
     )
     > .#{$prefix}--popover
-    .#{$prefix}--popover-caret::before {
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret::before {
     position: absolute;
     display: block;
     border: 1px solid $ai-border-start;
@@ -434,7 +436,8 @@ $sizes: (
       .#{$prefix}--popover--right-bottom
     )
     > .#{$prefix}--popover
-     .#{$prefix}--popover-caret::after {
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret::after {
     position: absolute;
     display: block;
     background: $background;
@@ -460,7 +463,8 @@ $sizes: (
       .#{$prefix}--popover--top-left
     )
     > .#{$prefix}--popover
-     .#{$prefix}--popover-caret {
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
     &::before {
       inset-block-end: convert.to-rem(1px);
       transform: rotate(-135deg);
@@ -486,7 +490,6 @@ $sizes: (
     > .#{$prefix}--popover
     > .#{$prefix}--slug-content--with-actions
     + .#{$prefix}--popover-caret::after {
-    // TODO does this need a modified selector for autoAlign?
     display: none;
   }
 
@@ -507,7 +510,8 @@ $sizes: (
       .#{$prefix}--popover--right-top
     )
     > .#{$prefix}--popover
-     .#{$prefix}--popover-caret {
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
     &::before {
       inset-inline-start: convert.to-rem(1px);
       transform: rotate(-45deg);
@@ -538,7 +542,8 @@ $sizes: (
       .#{$prefix}--popover--bottom-right
     )
     > .#{$prefix}--popover
-     .#{$prefix}--popover-caret {
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
     &::before {
       inset-block-start: convert.to-rem(1px);
       transform: rotate(45deg);
@@ -571,7 +576,8 @@ $sizes: (
       .#{$prefix}--popover--left-top
     )
     > .#{$prefix}--popover
-     .#{$prefix}--popover-caret {
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
     &::before {
       inset-inline-end: convert.to-rem(1px);
       transform: rotate(135deg);
@@ -600,7 +606,8 @@ $sizes: (
       .#{$prefix}--popover--right-bottom
     )
     > .#{$prefix}--popover
-     .#{$prefix}--popover-caret::after {
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret::after {
     background: transparent;
   }
 
@@ -625,7 +632,8 @@ $sizes: (
       .#{$prefix}--popover--top-left
     )
     > .#{$prefix}--popover
-     .#{$prefix}--popover-caret {
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
     &::before {
       border-color: $slug-callout-caret-bottom;
       background: $slug-callout-caret-bottom-background;
@@ -653,7 +661,8 @@ $sizes: (
       .#{$prefix}--popover--top-left
     )
     > .#{$prefix}--popover:has(.#{$prefix}--slug-content--with-actions)
-     .#{$prefix}--popover-caret {
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
     &::before {
       background: $slug-callout-caret-bottom-background-actions;
     }
@@ -674,7 +683,8 @@ $sizes: (
       .#{$prefix}--popover--right
     )
     > .#{$prefix}--popover
-     .#{$prefix}--popover-caret {
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
     &::before {
       border-color: $slug-callout-caret-center;
     }
