@@ -100,6 +100,7 @@ export function Toggletip<E extends ElementType = 'span'>({
   className: customClassName,
   children,
   defaultOpen = false,
+  ...rest
 }: ToggletipProps<E>) {
   const ref = useRef<Element>(null);
   const [open, setOpen] = useState(defaultOpen);
@@ -176,7 +177,8 @@ export function Toggletip<E extends ElementType = 'span'>({
         onKeyDown={onKeyDown}
         onBlur={handleBlur}
         ref={ref}
-        autoAlign={autoAlign}>
+        autoAlign={autoAlign}
+        {...rest}>
         {children}
       </Popover>
     </ToggletipContext.Provider>
