@@ -83,12 +83,11 @@ $popover-caret-height: custom-property.get-var(
     display: inline-block;
   }
 
+  // Do not set position: relative on autoAlign popovers.
+  // Without this, autoAlign popovers will be clipped by containing elements
+  // (using overflow: hidden, etc) if position: relative is set on the container.
   .#{$prefix}--popover-container:not(.#{$prefix}--popover--auto-align) {
     position: relative;
-  }
-
-  .#{$prefix}--popover-container.#{$prefix}--popover--auto-align {
-    position: absolute;
   }
 
   /// Modifiers
