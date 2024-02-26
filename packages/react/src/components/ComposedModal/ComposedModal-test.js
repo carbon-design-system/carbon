@@ -14,6 +14,9 @@ import ComposedModal, { ModalBody } from './ComposedModal';
 import { ModalHeader } from './ModalHeader';
 import { ModalFooter } from './ModalFooter';
 import { TextInput } from '../../';
+import { Slug } from '../Slug';
+
+const prefix = 'cds';
 
 describe('ComposedModal', () => {
   describe('it renders as expected', () => {
@@ -206,7 +209,7 @@ describe('ComposedModal', () => {
       );
 
       expect(screen.getByRole('dialog', { hidden: true })).toHaveClass(
-        'cds--modal-container--lg'
+        `${prefix}--modal-container--lg`
       );
     });
 
@@ -228,6 +231,22 @@ describe('ComposedModal', () => {
         screen.getByRole('button', { name: 'loading loading...' })
       ).toBeDisabled();
       expect(screen.getByRole('button', { name: 'Cancel' })).toBeDisabled();
+    });
+
+    it('should respect slug prop', () => {
+      const { container } = render(
+        <ComposedModal open slug={<Slug />}>
+          <ModalHeader>Modal header</ModalHeader>
+          <ModalBody>This is the modal body content</ModalBody>
+          <ModalFooter
+            primaryButtonText="Add"
+            secondaryButtonText="Cancel"
+            loadingStatus="active"
+            loadingDescription="loading..."></ModalFooter>
+        </ComposedModal>
+      );
+
+      expect(container.firstChild).toHaveClass(`${prefix}--modal--slug`);
     });
   });
 });

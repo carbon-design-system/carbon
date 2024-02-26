@@ -17,6 +17,7 @@ import {
 } from '../ListBox/test-helpers';
 import Dropdown from '../Dropdown';
 import DropdownSkeleton from '../Dropdown/Dropdown.Skeleton';
+import { Slug } from '../Slug';
 
 const prefix = 'cds';
 
@@ -188,6 +189,13 @@ describe('Dropdown', () => {
       const ref = React.createRef();
       render(<Dropdown {...mockProps} ref={ref} />);
       expect(ref.current).toHaveAttribute('aria-haspopup', 'listbox');
+    });
+
+    it('should respect slug prop', () => {
+      const { container } = render(<Dropdown {...mockProps} slug={<Slug />} />);
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--list-box__wrapper--slug`
+      );
     });
   });
 });
