@@ -12,7 +12,6 @@ import React, {
   AriaAttributes,
   ComponentType,
   ElementType,
-  ForwardedRef,
   HTMLAttributeAnchorTarget,
 } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
@@ -88,7 +87,7 @@ const Link = React.forwardRef(function Link<E extends React.ElementType>(
     target,
     ...rest
   }: LinkProps<E>,
-  ref: ForwardedRef<E>
+  ref
 ) {
   const prefix = usePrefix();
   const className = cx(`${prefix}--link`, customClassName, {
