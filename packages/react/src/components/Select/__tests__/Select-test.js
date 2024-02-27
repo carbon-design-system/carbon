@@ -250,7 +250,7 @@ describe('Select', () => {
         `${prefix}--select--slug`
       );
     });
-    
+
     it('should show SelectItem text as title', () => {
       render(
         <Select id="select" labelText="Select" defaultValue="option-2">
