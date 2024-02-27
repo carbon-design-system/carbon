@@ -363,9 +363,7 @@ class OverflowMenu extends Component {
   };
 
   focusMenuEl = () => {
-    // let wasClicked = this.state.click;
     const { current: triggerEl } = this._triggerRef;
-    console.log(triggerEl, 'what is this');
     if (triggerEl) {
       triggerEl.focus();
     }
