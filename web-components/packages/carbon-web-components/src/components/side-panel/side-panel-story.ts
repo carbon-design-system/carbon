@@ -10,12 +10,11 @@
 import { TemplateResult, html } from 'lit';
 import { boolean, select, text } from '@storybook/addon-knobs';
 import '../button/button';
-import { SIDE_PANEL_SIZE } from './side-panel';
+import { SIDE_PANEL_SIZE, SIDE_PANEL_PLACEMENT } from './side-panel';
 import './index';
 import '../text-input/index';
 import '../textarea/index';
 import storyDocs from './side-panel-story.mdx';
-import { SIDE_PANEL_PLACEMENT } from './defs';
 import Settings from '@carbon/icons/lib/settings/16';
 import Trashcan from '@carbon/icons/lib/trash-can/16';
 import { prefix } from '../../globals/settings';
@@ -197,6 +196,7 @@ const actionItems = {
   'Two buttons with danger': 3,
   'Three buttons with ghost': 4,
   'Three buttons with danger': 5,
+  'Too many buttons': 6,
 };
 
 // TODO: There are problems switching this
@@ -236,6 +236,22 @@ const getActionItems = (index) => {
           slot="actions"
           kind=${BUTTON_KIND.DANGER}
           >Danger</cds-button
+        >
+        <cds-button key="secondary" slot="actions" kind=${BUTTON_KIND.SECONDARY}
+          >Secondary</cds-button
+        >
+        <cds-button key="primary" slot="actions" kind=${BUTTON_KIND.PRIMARY}
+          >Primary</cds-button
+        >`;
+    case 6:
+      return html`<cds-button
+          key="danger"
+          slot="actions"
+          kind=${BUTTON_KIND.DANGER}
+          >Danger</cds-button
+        >
+        <cds-button key="tertiary" slot="actions" kind=${BUTTON_KIND.TERTIARY}
+          >Tertiary</cds-button
         >
         <cds-button key="secondary" slot="actions" kind=${BUTTON_KIND.SECONDARY}
           >Secondary</cds-button
@@ -340,7 +356,6 @@ const DefaultTemplate = (argsIn) => {
       selector-page-content=${args.selectorPageContent}
       size=${args.size}
       ?slide-in=${args.slideIn}
-      slug=${args.slug}
       title=${args.title}
       @cds-side-panel-navigate-back=${prevStep}>
       <!-- default slotted content -->

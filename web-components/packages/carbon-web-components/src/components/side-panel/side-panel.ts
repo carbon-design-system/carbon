@@ -8,7 +8,12 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, query, state } from 'lit/decorators.js';
+import {
+  property,
+  query,
+  queryAssignedElements,
+  state,
+} from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -22,9 +27,9 @@ import { moderate02 } from '@carbon/motion';
 import '../button/index';
 import '../layer/index';
 import Handle from '../../globals/internal/handle';
-import './side-panel-button-set';
+import '../button/button-set-base';
 
-export { SIDE_PANEL_SIZE };
+export { SIDE_PANEL_SIZE, SIDE_PANEL_PLACEMENT };
 
 // eslint-disable-next-line no-bitwise
 const PRECEDING =
@@ -139,6 +144,9 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   @query(`.${blockClass}__inner-content`)
   private _innerContent!: HTMLElement;
 
+  @queryAssignedElements({ slot: 'actions', selector: `${prefix}-button` })
+  private _actions!: Array<HTMLElement>;
+
   @state()
   _doAnimateTitle = true;
 
@@ -174,7 +182,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleBlur = async ({ target, relatedTarget }: FocusEvent) => {
     const {
-      // condensedActions,
       open,
       _startSentinelNode: startSentinelNode,
       _endSentinelNode: endSentinelNode,
@@ -358,7 +365,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   };
 
   private _checkUpdateIconButtonSizes = () => {
-    const slug = this.querySelector('cds-slug');
+    const slug = this.querySelector(`${prefix}-slug`);
     const otherButtons = this?.shadowRoot?.querySelectorAll(
       '#nav-back-button, #close-button'
     );
@@ -366,7 +373,9 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     let iconButtonSize = 'sm';
 
     if (slug || otherButtons?.length) {
-      const actions = this?.querySelectorAll?.('cds-button[slot="actions"]');
+      const actions = this?.querySelectorAll?.(
+        `${prefix}-button[slot='actions']`
+      );
 
       if (actions?.length && /l/.test(this.size)) {
         iconButtonSize = 'md';
@@ -386,14 +395,14 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
 
   private _handleSlugChange(e: Event) {
     this._checkUpdateIconButtonSizes();
-    const childItems = (e.target as HTMLSlotElement).assignedNodes();
+    const childItems = (e.target as HTMLSlotElement).assignedElements();
 
     this._hasSlug = childItems.length > 0;
   }
 
   private _handleSubtitleChange(e: Event) {
     const target = e.target as HTMLSlotElement;
-    const subtitle = target?.assignedNodes();
+    const subtitle = target?.assignedElements();
 
     this._hasSubtitle = subtitle.length > 0;
   }
@@ -413,6 +422,18 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     }
   }
 
+  private _checkUpdateActionSizes = () => {
+    if (this._actions) {
+      for (let i = 0; i < this._actions.length; i++) {
+        this._actions[i].setAttribute(
+          'size',
+          this.condensedActions ? 'lg' : 'xl'
+        );
+      }
+    }
+  };
+
+  private _maxActions = 3;
   private _handleActionsChange(e: Event) {
     const target = e.target as HTMLSlotElement;
     const actions = target?.assignedElements();
@@ -421,26 +442,28 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     this._checkUpdateIconButtonSizes();
 
     const actionsCount = actions?.length ?? 0;
-    if (actionsCount > 3) {
-      this._actionsCount = 3;
-      console.warn(`Too many side-panel actions, max 3.`);
+    if (actionsCount > this._maxActions) {
+      this._actionsCount = this._maxActions;
+      if (process.env.NODE_ENV === 'development') {
+        console.error(`Too many side-panel actions, max ${this._maxActions}.`);
+      }
     } else {
       this._actionsCount = actionsCount;
     }
 
-    for (let i = 0; i < actionsCount; i++) {
-      if (i > 3) {
+    for (let i = 0; i < actions?.length; i++) {
+      if (i + 1 > this._maxActions) {
         // hide excessive side panel actions
-        actions[i].setAttribute('hidden', '');
+        actions[i].setAttribute('hidden', 'true');
         actions[i].setAttribute(
-          'data-actions-limit-3-exceeded',
+          `data-actions-limit-${this._maxActions}-exceeded`,
           `${actions.length}`
         );
       } else {
-        actions[i].setAttribute('size', this.condensedActions ? 'lg' : 'xl');
         actions[i].classList.add(`${blockClassActionSet}__action-button`);
       }
     }
+    this._checkUpdateActionSizes();
   }
 
   private _checkSetDoAnimateTitle = () => {
@@ -788,14 +811,14 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
             </div>`
           : html` ${headerTemplate} ${mainTemplate}`}
 
-        <cds-side-panel-button-set
+        <cds-button-set-base
           class=${`${blockClass}__actions-container`}
           ?hidden=${this._actionsCount === 0}
           ?condensed=${condensedActions}
           actions-multiple=${actionsMultiple}
           size=${size}>
           <slot name="actions" @slotchange=${this._handleActionsChange}></slot>
-        </cds-side-panel-button-set>
+        </cds-button-set-base>
 
         <a
           id="end-sentinel"
@@ -819,6 +842,10 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   }
 
   async updated(changedProperties) {
+    if (changedProperties.has('condensedActions')) {
+      this._checkUpdateActionSizes();
+    }
+
     if (changedProperties.has('currentStep')) {
       this._handleCurrentStepUpdate();
     }

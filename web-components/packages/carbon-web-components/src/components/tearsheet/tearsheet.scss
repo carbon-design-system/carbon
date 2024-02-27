@@ -1,0 +1,238 @@
+/*
+* Copyright IBM Corp. 2023, 2024
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+$css--plex: true !default;
+
+/* Other Carbon settings. */
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/components/modal' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use 'sass:map';
+
+$pkg-prefix: 'cds';
+
+@use '@carbon/ibm-products-styles/scss/config' with (
+  $pkg-prefix: #{$pkg-prefix}
+);
+@use '@carbon/ibm-products-styles/scss/components/ActionSet/index' as *;
+@use '@carbon/ibm-products-styles/scss/components/Tearsheet/index' as *;
+
+$block-class: #{$pkg-prefix}--tearsheet;
+$block-class-action-set: #{$pkg-prefix}--action-set;
+$motion-duration: $duration-moderate-02;
+
+:host(#{$prefix}-tearsheet) {
+  --content-padding: #{$spacing-05};
+
+  @extend .#{$prefix}--modal;
+  @extend .#{$prefix}--tearsheet;
+
+  &[open] {
+    z-index: utilities.z('modal');
+    align-items: flex-end;
+    opacity: 1;
+    // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
+    transition: visibility 0s linear,
+      background-color $motion-duration motion(entrance, expressive),
+      opacity $motion-duration motion(entrance, expressive);
+    visibility: inherit;
+
+    .#{$prefix}--tearsheet__container {
+      transform: translate3d(0, 0, 0);
+      transition: transform $duration-moderate-02 motion(entrance, expressive);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  [hidden] {
+    @extend .#{$prefix}--visually-hidden;
+  }
+
+  .#{$block-class}__header,
+  .#{$block-class}__content,
+  .#{$block-class}__influencer {
+    padding: var(--content-padding);
+  }
+
+  &[slug] {
+    background-color: $ai-overlay;
+
+    .#{$block-class}__content {
+      @include utilities.callout-gradient('default', 0);
+
+      box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
+    }
+
+    /* stylelint-disable-next-line selector-type-no-unknown */
+    [has-actions] ::slotted(#{$prefix}-slug) {
+      inset-inline-end: 0;
+    }
+  }
+
+  &[width='narrow'] {
+    .#{$block-class}__header {
+      margin: 0;
+      background-color: $layer;
+      border-block-end: 1px solid $border-subtle-01;
+    }
+
+    .#{$block-class}__header-description {
+      margin-block-start: $spacing-03;
+      max-inline-size: 80%;
+    }
+
+    .#{$block-class}__main {
+      background-color: $layer;
+    }
+  }
+
+  &[width='wide'] {
+    --content-padding: #{$spacing-06 $spacing-07};
+
+    .#{$block-class}__header {
+      margin: 0;
+      background-color: $layer;
+      border-block-end: 1px solid $border-subtle-01;
+    }
+
+    .#{$block-class}__header[has-navigation] {
+      padding-block-end: 0;
+    }
+
+    .#{$block-class}__container {
+      inline-size: 100%;
+
+      @include breakpoint(md) {
+        inline-size: calc(100% - (2 * #{$spacing-10}));
+      }
+    }
+
+    .#{$prefix}--modal-header__heading.#{$block-class}__heading {
+      @include type.type-style('heading-04');
+    }
+
+    .#{$block-class}__header[has-close-icon],
+    .#{$block-class}__header[has-slug] {
+      padding-inline-end: $spacing-11;
+    }
+
+    .#{$block-class}__header[has-close-icon][has-slug] {
+      padding-inline-end: calc(#{$spacing-11 + $spacing-09});
+    }
+
+    .#{$block-class}__header-navigation {
+      margin-inline-start: calc(-1 * #{$spacing-05});
+      max-block-size: $spacing-08; /* #{$prefix}-tabs too tall */
+    }
+
+    .#{$block-class}__content {
+      // Revert background color overridden by Carbon's modal - https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/modal/_modal.scss#L54
+      .#{$prefix}--pagination,
+      .#{$prefix}--pagination__control-buttons,
+      .#{$prefix}--text-input,
+      .#{$prefix}--text-area,
+      .#{$prefix}--search-input,
+      .#{$prefix}--select-input,
+      .#{$prefix}--dropdown,
+      .#{$prefix}--dropdown-list,
+      .#{$prefix}--number input[type='number'],
+      .#{$prefix}--date-picker__input {
+        background-color: $field;
+      }
+
+      .#{$prefix}--select--inline .#{$prefix}--select-input {
+        background-color: transparent;
+      }
+
+      // and restore the 'light' prop in case light fields are wanted
+      .#{$prefix}--text-input--light,
+    .#{$prefix}--text-area--light,
+    .#{$prefix}--search--light .#{$prefix}--search-input,
+    .#{$prefix}--select--light .#{$prefix}--select-input,
+    .#{$prefix}--dropdown--light,
+    .#{$prefix}--dropdown--light .#{$prefix}--dropdown-list,
+    /* stylelint-disable-next-line prettier/prettier */
+    .#{$prefix}--number--light input[type='number'],
+    .#{$prefix}--date-picker--light
+      .#{$prefix}--date-picker__input {
+        background-color: $field-02;
+      }
+    }
+
+    .#{$pkg-prefix}--action-set
+      .#{$pkg-prefix}--action-set__action-button.#{$pkg-prefix}--action-set__action-button--expressive {
+      block-size: $spacing-11;
+    }
+  }
+
+  .#{$block-class}__buttons {
+    @extend .#{$block-class}__button-container;
+    @extend .#{$block-class-action-set};
+
+    display: flex;
+    background: $background;
+    inline-size: 100%;
+
+    &[hidden] {
+      @extend .#{$prefix}--visually-hidden;
+
+      display: none;
+    }
+
+    /* stylelint-disable-next-line selector-type-no-unknown */
+    ::slotted(#{$prefix}-button) {
+      @extend .#{$block-class-action-set}__action-button;
+
+      flex: 0 1 25%;
+      block-size: $spacing-11;
+      max-inline-size: to-rem(232px);
+    }
+
+    /* stylelint-disable-next-line selector-type-no-unknown */
+    ::slotted(#{$prefix}-button[kind='ghost']) {
+      flex: 1 1 25%;
+      max-inline-size: none;
+    }
+
+    ::slotted(#{$prefix}-button[hidden]) {
+      @extend .#{$prefix}--visually-hidden;
+
+      display: none;
+    }
+  }
+
+  [width='narrow'] .#{$block-class}__buttons {
+    /* stylelint-disable selector-type-no-unknown */
+    &[actions-multiple='single'] ::slotted(#{$prefix}-button),
+    &[actions-multiple='double'] ::slotted(#{$prefix}-button) {
+      /* stylelint-enable selector-type-no-unknown */
+      // double and single on lg use 50%
+      flex: 0 1 50%;
+      max-inline-size: none;
+    }
+
+    /* stylelint-disable-next-line selector-type-no-unknown */
+    ::slotted(#{$prefix}-button) {
+      block-size: $spacing-10;
+    }
+  }
+
+  .#{$block-class}__influencer[wide] {
+    @extend .#{$block-class}__influencer--wide;
+  }
+}
