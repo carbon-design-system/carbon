@@ -73,7 +73,12 @@ export const Controlled = () => {
   const [expandAll, setExpandAll] = React.useState(false);
   return (
     <>
-      <Button onClick={() => setExpandAll(true)}>Click to expand all</Button>
+      <Button
+        onClick={() => {
+          expandAll === true ? setExpandAll(1) : setExpandAll(true);
+        }}>
+        Click to expand all
+      </Button>
       <Button
         onClick={() => {
           expandAll || expandAll === null
