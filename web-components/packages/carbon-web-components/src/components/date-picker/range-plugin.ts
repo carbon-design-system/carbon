@@ -105,7 +105,6 @@ export default (config: Config): Plugin => {
           fp._hBXCEDatePickerRangePluginOnBlurTo.release();
       }
     };
-
     return Object.assign(origRangePlugin, {
       onReady() {
         origOnReady.call(this);
