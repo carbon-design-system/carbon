@@ -898,13 +898,25 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
               `
             : html``}
           <div id="track" class="${prefix}--slider__track"></div>
-          <div class="${prefix}-ce--slider__filled-track-container">
-            <div
-              class="${prefix}--slider__filled-track"
-              style="transform: ${valueUpper
-                ? `translate(${rate * 100}%, -50%) scaleX(${rateUpper - rate})`
-                : `translate(0%, -50%) scaleX(${rate})`}"></div>
-          </div>
+          ${valueUpper
+            ? html`
+                <div
+                  class="${prefix}--slider__filled-track"
+                  style="transform: ${valueUpper
+                    ? `translate(${rate * 100}%, -50%) scaleX(${
+                        rateUpper - rate
+                      })`
+                    : `translate(0%, -50%) scaleX(${rate})`}"></div>
+              `
+            : html` <div class="${prefix}-ce--slider__filled-track-container">
+                <div
+                  class="${prefix}--slider__filled-track"
+                  style="transform: ${valueUpper
+                    ? `translate(${rate * 100}%, -50%) scaleX(${
+                        rateUpper - rate
+                      })`
+                    : `translate(0%, -50%) scaleX(${rate})`}"></div>
+              </div>`}
         </div>
         <span class="${prefix}--slider__range-label">
           <slot name="max-text">${formatMaxText(max, maxLabel)}</slot>

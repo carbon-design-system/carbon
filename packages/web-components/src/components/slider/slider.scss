@@ -53,3 +53,11 @@ $css--plex: true !default;
     background-color: transparent;
   }
 }
+.#{$prefix}--slider__thumb-wrapper:focus-within
+  .#{$prefix}--slider__thumb-icon {
+  display: none;
+}
+.#{$prefix}--slider__thumb-wrapper:focus-within
+  .#{$prefix}--slider__thumb-icon--focus {
+  display: block;
+}
