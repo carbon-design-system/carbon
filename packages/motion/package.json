@@ -26,10 +26,14 @@
   },
   "scripts": {
     "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonMotion",
-    "clean": "rimraf es lib umd"
+    "clean": "rimraf es lib umd",
+    "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "devDependencies": {
     "@carbon/cli": "^11.15.0",
     "rimraf": "^5.0.0"
+  },
+  "dependencies": {
+    "@ibm/telemetry-js": "^1.2.1"
   }
 }

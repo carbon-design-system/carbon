@@ -15,7 +15,8 @@
   "files": [
     "bin",
     "cli.js",
-    "transforms"
+    "transforms",
+    "telemetry.yml"
   ],
   "keywords": [
     "carbon",
@@ -34,7 +35,8 @@
   "scripts": {
     "build": "esbuild src/cli.js --bundle --platform=node --outfile=cli.js --target=node14 --external:jscodeshift",
     "clean": "rimraf cli.js",
-    "watch": "yarn build --watch"
+    "watch": "yarn build --watch",
+    "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "devDependencies": {
     "chalk": "^4.1.1",
@@ -56,6 +58,7 @@
     "yargs": "^17.0.1"
   },
   "dependencies": {
+    "@ibm/telemetry-js": "^1.2.1",
     "jscodeshift": "^0.13.1"
   }
 }

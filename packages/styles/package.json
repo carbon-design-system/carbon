@@ -19,7 +19,8 @@
   "files": [
     "css",
     "scss",
-    "index.scss"
+    "index.scss",
+    "telemetry.yml"
   ],
   "publishConfig": {
     "access": "public",
@@ -27,7 +28,8 @@
   },
   "scripts": {
     "build": "yarn clean && node tasks/build-css.js",
-    "clean": "rimraf css"
+    "clean": "rimraf css",
+    "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "peerDependencies": {
     "sass": "^1.33.0"
@@ -45,7 +47,8 @@
     "@carbon/motion": "^11.16.0",
     "@carbon/themes": "^11.32.0",
     "@carbon/type": "^11.25.0",
-    "@ibm/plex": "6.0.0-next.6"
+    "@ibm/plex": "6.0.0-next.6",
+    "@ibm/telemetry-js": "^1.2.1"
   },
   "devDependencies": {
     "@carbon/test-utils": "^10.30.0",
