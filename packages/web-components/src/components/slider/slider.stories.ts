@@ -235,15 +235,15 @@ export const TwoHandleSlider = () => {
         max="100"
         min="0"
         step="1"
-        value="50"
+        value="10"
         value-upper="90">
         <cds-slider-input
-          aria-label="Slider value"
+          aria-label="Lower bound"
           type="number"
           id="lower"
           slot="lower-input"></cds-slider-input>
         <cds-slider-input
-          aria-label="Slider Upper value"
+          aria-label="Upper bound"
           type="number"
           id="upper"></cds-slider-input>
       </cds-slider>

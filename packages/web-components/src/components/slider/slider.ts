@@ -198,13 +198,16 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
         // Snaps to next
         if (eventContainer == 'thumb-upper') {
           const stepCount = (valueUpper + diff) / step;
-          this.valueUpper = Math.min(
+          const position = Math.min(
             max,
             Math.max(
               min,
               (diff >= 0 ? Math.floor(stepCount) : Math.ceil(stepCount)) * step
             )
           );
+          if (position >= this.value) {
+            this.valueUpper = position;
+          }
           this.dispatchEvent(
             new CustomEvent(
               (this.constructor as typeof CDSSlider).eventChange,
@@ -220,13 +223,16 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
           );
         } else {
           const stepCount = (value + diff) / step;
-          this.value = Math.min(
+          const position = Math.min(
             max,
             Math.max(
               min,
               (diff >= 0 ? Math.floor(stepCount) : Math.ceil(stepCount)) * step
             )
           );
+          if (!this.valueUpper || position <= this.valueUpper) {
+            this.value = position;
+          }
           this.dispatchEvent(
             new CustomEvent(
               (this.constructor as typeof CDSSlider).eventChange,
@@ -249,7 +255,17 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
    * Handles `pointerdown` event on the thumb to start dragging.
    */
   private _startDrag(event: PointerEvent) {
-    const eventContainer = (event.target as HTMLElement).id;
+    let eventContainer = (event.target as HTMLElement).id;
+    if (!eventContainer) {
+      const element = (event.target as HTMLInputElement).nodeName;
+      if (element == 'path' || element == 'svg') {
+        eventContainer = (
+          (
+            (event.target as HTMLInputElement).parentElement as HTMLElement
+          ).closest('.cds--slider__thumb-wrapper') as HTMLInputElement
+        ).id;
+      }
+    }
     if (eventContainer === 'thumb') {
       this._dragging = true;
       this._thumbNode.style.touchAction = 'none';
@@ -263,7 +279,17 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
    * Handles `pointerdown` event on the track to update the thumb position and the value as necessary.
    */
   private _handleClick(event: PointerEvent) {
-    const eventContainer = (event.target as HTMLInputElement).id;
+    let eventContainer = (event.target as HTMLInputElement).id;
+    if (!eventContainer) {
+      const element = (event.target as HTMLInputElement).nodeName;
+      if (element == 'path' || element == 'svg') {
+        eventContainer = (
+          (
+            (event.target as HTMLInputElement).parentElement as HTMLElement
+          ).closest('.cds--slider__thumb-wrapper') as HTMLInputElement
+        ).id;
+      }
+    }
     if (!this.disabled) {
       const { _trackNode: trackNode } = this;
       const isRtl =
@@ -320,9 +346,19 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
             position > this.valueUpper
               ? position - this.valueUpper
               : this.valueUpper - position;
-          differenceValue > differenceValueUpper
-            ? (this._rateUpper = position / 100)
-            : (this._rate = position / 100);
+          if (differenceValue > differenceValueUpper) {
+            this._rateUpper = position / 100;
+          } else if (differenceValue < differenceValueUpper) {
+            this._rate = position / 100;
+          } else if (
+            !this._dragging &&
+            !this._draggingUpper &&
+            differenceValue === differenceValueUpper
+          ) {
+            Math.round(position) > this.valueUpper
+              ? (this._rateUpper = position / 100)
+              : (this._rate = position / 100);
+          }
           this.dispatchEvent(
             new CustomEvent(
               (this.constructor as typeof CDSSlider).eventChange,
@@ -379,35 +415,47 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       const { left: trackLeft, width: trackWidth } =
         this._trackNode.getBoundingClientRect();
       if (dragging) {
-        this._rate =
+        const position =
           (isRtl
             ? trackLeft + trackWidth - thumbPosition
             : thumbPosition - trackLeft) / trackWidth;
-        this.dispatchEvent(
-          new CustomEvent((this.constructor as typeof CDSSlider).eventChange, {
-            bubbles: true,
-            composed: true,
-            detail: {
-              value: this.value,
-              intermediate: true,
-            },
-          })
-        );
+        if (!this.valueUpper || position * 100 <= this.valueUpper) {
+          this._rate = position;
+          this.dispatchEvent(
+            new CustomEvent(
+              (this.constructor as typeof CDSSlider).eventChange,
+              {
+                bubbles: true,
+                composed: true,
+                detail: {
+                  value: this.value,
+                  intermediate: true,
+                },
+              }
+            )
+          );
+        }
       } else if (draggingUpper) {
-        this._rateUpper =
+        const position =
           (isRtl
             ? trackLeft + trackWidth - thumbPosition
             : thumbPosition - trackLeft) / trackWidth;
-        this.dispatchEvent(
-          new CustomEvent((this.constructor as typeof CDSSlider).eventChange, {
-            bubbles: true,
-            composed: true,
-            detail: {
-              value: this.valueUpper,
-              intermediate: true,
-            },
-          })
-        );
+        if (position * 100 >= this.value) {
+          this._rateUpper = position;
+          this.dispatchEvent(
+            new CustomEvent(
+              (this.constructor as typeof CDSSlider).eventChange,
+              {
+                bubbles: true,
+                composed: true,
+                detail: {
+                  value: this.valueUpper,
+                  intermediate: true,
+                },
+              }
+            )
+          );
+        }
       }
     }
   }
@@ -687,12 +735,10 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
           });
         } else {
           ['max', 'min', 'step', 'value'].forEach((name) => {
-            if (changedProperties.has(name)) {
-              if (this.valueUpper && name === 'max') {
-                input[name] = this.valueUpper;
-              } else {
-                input[name] = this[name];
-              }
+            if (this.valueUpper && name === 'max') {
+              input[name] = this.valueUpper;
+            } else {
+              input[name] = this[name];
             }
           });
         }
@@ -779,33 +825,85 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
           role="presentation">
           <div
             id="thumb"
-            class="${prefix}--slider__thumb"
+            class="${valueUpper
+              ? `${prefix}--icon-tooltip ${prefix}--slider__thumb-wrapper ${prefix}--slider__thumb-wrapper--lower`
+              : `${prefix}--slider__thumb`}"
             role="slider"
             tabindex="${!readonly ? 0 : -1}"
             aria-valuemax="${max}"
             aria-valuemin="${min}"
             aria-valuenow="${value}"
             style="left: ${rate * 100}%"
-            @pointerdown="${startDrag}"></div>
+            @pointerdown="${startDrag}">
+            ${valueUpper
+              ? html`
+                  <div class="${prefix}--slider__thumb--lower">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 16 24"
+                      class="${prefix}--slider__thumb-icon ${prefix}--slider__thumb-icon--lower">
+                      <path
+                        d="M15.08 6.46H16v11.08h-.92zM4.46 17.54c-.25 0-.46-.21-.46-.46V6.92a.465.465 0 0 1 .69-.4l8.77 5.08a.46.46 0 0 1 0 .8l-8.77 5.08c-.07.04-.15.06-.23.06Z"></path>
+                      <path fill="none" d="M-4 0h24v24H-4z"></path>
+                    </svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 16 24"
+                      class="${prefix}--slider__thumb-icon ${prefix}--slider__thumb-icon--lower cds--slider__thumb-icon--focus">
+                      <path
+                        d="M15.08 6.46H16v11.08h-.92zM4.46 17.54c-.25 0-.46-.21-.46-.46V6.92a.465.465 0 0 1 .69-.4l8.77 5.08a.46.46 0 0 1 0 .8l-8.77 5.08c-.07.04-.15.06-.23.06Z"></path>
+                      <path fill="none" d="M-4 0h24v24H-4z"></path>
+                      <path d="M15.08 0H16v6.46h-.92z"></path>
+                      <path d="M0 0h.92v24H0zM15.08 0H16v24h-.92z"></path>
+                      <path d="M0 .92V0h16v.92zM0 24v-.92h16V24z"></path>
+                    </svg>
+                  </div>
+                `
+              : ``}
+          </div>
           ${valueUpper
             ? html`
                 <div
                   id="thumb-upper"
-                  class="${prefix}--slider__thumb"
+                  class="${prefix}--icon-tooltip ${prefix}--slider__thumb-wrapper ${prefix}--slider__thumb-wrapper--upper"
                   role="slider"
                   tabindex="${!readonly ? 0 : -1}"
                   aria-valuemax="${max}"
                   aria-valuemin="${min}"
                   aria-valuenow="${valueUpper}"
                   style="left: ${rateUpper * 100}%"
-                  @pointerdown="${startDrag}"></div>
+                  @pointerdown="${startDrag}">
+                  <div class="${prefix}--slider__thumb--upper">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 16 24"
+                      class="${prefix}--slider__thumb-icon ${prefix}--slider__thumb-icon--upper">
+                      <path
+                        d="M0 6.46h.92v11.08H0zM11.54 6.46c.25 0 .46.21.46.46v10.15a.465.465 0 0 1-.69.4L2.54 12.4a.46.46 0 0 1 0-.8l8.77-5.08c.07-.04.15-.06.23-.06Z"></path>
+                      <path fill="none" d="M-4 0h24v24H-4z"></path>
+                    </svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 16 24"
+                      class="${prefix}--slider__thumb-icon ${prefix}--slider__thumb-icon--upper cds--slider__thumb-icon--focus">
+                      <path
+                        d="M0 6.46h.92v11.08H0zM11.54 6.46c.25 0 .46.21.46.46v10.15a.465.465 0 0 1-.69.4L2.54 12.4a.46.46 0 0 1 0-.8l8.77-5.08c.07-.04.15-.06.23-.06Z"></path>
+                      <path fill="none" d="M-4 0h24v24H-4z"></path>
+                      <path d="M.92 24H0v-6.46h.92z"></path>
+                      <path d="M16 24h-.92V0H16zM.92 24H0V0h.92z"></path>
+                      <path d="M16 23.08V24H0v-.92zM16 0v.92H0V0z"></path>
+                    </svg>
+                  </div>
+                </div>
               `
             : html``}
           <div id="track" class="${prefix}--slider__track"></div>
           <div class="${prefix}-ce--slider__filled-track-container">
             <div
               class="${prefix}--slider__filled-track"
-              style="transform: translate(0%, -50%) scaleX(${rate})"></div>
+              style="transform: ${valueUpper
+                ? `translate(${rate * 100}%, -50%) scaleX(${rateUpper - rate})`
+                : `translate(0%, -50%) scaleX(${rate})`}"></div>
           </div>
         </div>
         <span class="${prefix}--slider__range-label">
