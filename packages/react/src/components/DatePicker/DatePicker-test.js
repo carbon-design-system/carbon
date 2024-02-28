@@ -10,6 +10,9 @@ import DatePicker from './DatePicker';
 import DatePickerInput from '../DatePickerInput';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { Slug } from '../Slug';
+
+const prefix = 'cds';
 
 describe('DatePicker', () => {
   it('should add extra classes that are passed via className', () => {
@@ -51,7 +54,7 @@ describe('DatePicker', () => {
 
     expect(
       // eslint-disable-next-line testing-library/no-node-access
-      document.querySelector('.cds--date-picker--simple')
+      document.querySelector(`.${prefix}--date-picker--simple`)
     ).toBeInTheDocument();
   });
 
@@ -71,7 +74,7 @@ describe('DatePicker', () => {
 
     expect(
       // eslint-disable-next-line testing-library/no-node-access
-      document.querySelector('.cds--date-picker--single')
+      document.querySelector(`.${prefix}--date-picker--single`)
     ).toBeInTheDocument();
   });
 
@@ -93,7 +96,7 @@ describe('DatePicker', () => {
 
     expect(
       // eslint-disable-next-line testing-library/no-node-access
-      document.querySelector('.cds--date-picker--range')
+      document.querySelector(`.${prefix}--date-picker--range`)
     ).toBeInTheDocument();
   });
 
@@ -160,6 +163,20 @@ describe('DatePicker', () => {
     const { container } = render(<DatePicker ref={ref} />);
 
     expect(ref).toHaveBeenCalledWith(container.firstChild);
+  });
+
+  it('should respect slug prop', () => {
+    render(
+      <DatePickerInput
+        id="date-picker-input-id-start"
+        placeholder="mm/dd/yyyy"
+        labelText="Date Picker label"
+        data-testid="input-value"
+        slug={<Slug />}
+      />
+    );
+
+    expect(screen.getByRole('button')).toHaveClass(`${prefix}--slug__button`);
   });
 });
 
@@ -272,7 +289,7 @@ describe('Single date picker', () => {
     );
 
     // eslint-disable-next-line testing-library/no-node-access
-    const input = document.querySelector('.cds--date-picker__input');
+    const input = document.querySelector(`.${prefix}--date-picker__input`);
 
     expect(screen.getByRole('application')).not.toHaveClass('open');
     await userEvent.click(input);
