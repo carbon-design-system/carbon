@@ -747,6 +747,8 @@ class CDSDropdown extends ValidityMixin(
       (open ? toggleLabelOpen : toggleLabelClosed) || undefined;
     const hasHelperText =
       helperText ||
+      invalidText ||
+      warnText ||
       (slotHelperTextNode && slotHelperTextNode.assignedNodes().length > 0);
     const validityIcon = !invalid
       ? undefined
