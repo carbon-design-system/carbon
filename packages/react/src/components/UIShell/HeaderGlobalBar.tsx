@@ -10,8 +10,11 @@ import wrapComponent from '../../tools/wrapComponent';
 /**
  * Generic container for `HeaderGlobalAction` components
  */
-export default wrapComponent({
+
+const HeaderGlobalBar = wrapComponent({
   name: 'HeaderGlobalBar',
   className: (prefix) => `${prefix}--header__global`,
   type: 'div',
 });
+
+export default HeaderGlobalBar;

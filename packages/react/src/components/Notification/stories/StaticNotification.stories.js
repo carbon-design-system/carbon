@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { StaticNotification } from '../../Notification';
-import { Button } from '../../Button';
+import { Link } from '../../Link';
 import mdx from '../Notification.mdx';
 
 // eslint-disable-next-line storybook/csf-component
@@ -33,20 +33,39 @@ export const Default = () => (
   />
 );
 
-export const WithInteractiveElementsThatPopTheWarning = () => (
-  <StaticNotification
-    title="Notification title"
-    subtitle="Subtitle text goes here">
-    <Button>Test</Button>
-  </StaticNotification>
-);
-
-export const WithInteractiveElementsThatDONOTPopTheWarning = () => (
+export const WithInteractiveElements = () => (
   <StaticNotification
     title="Notification title"
     titleId="my fancy id 123"
-    subtitle="Subtitle text goes here">
-    <Button aria-describedby="my fancy id 123">Test</Button>
+    kind="info"
+    lowContrast>
+    <div className="cds--inline-notification__subtitle">
+      Additional text can describe the notification, or a link to{' '}
+      <Link inline href="#" aria-describedby="my fancy id 123">
+        learn more
+      </Link>
+    </div>
+  </StaticNotification>
+);
+
+export const WithActionButton = () => (
+  <StaticNotification
+    title="Notification title"
+    titleId="notif-1"
+    kind="info"
+    lowContrast
+    actionButtonLabel="Learn More">
+    <div className="cds--inline-notification__subtitle">
+      <Link inline href="#" aria-describedby="notif-1">
+        Create
+      </Link>{' '}
+      or{' '}
+      <Link inline href="#" aria-describedby="notif-1">
+        register
+      </Link>{' '}
+      a cluster before creating a Configuration. Some additional info could go
+      here to show that this notification subtitle goes below the title.
+    </div>
   </StaticNotification>
 );
 
