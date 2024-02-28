@@ -72,11 +72,12 @@ const ButtonSet: ForwardRefReturn<HTMLDivElement, ButtonSetProps> =
         return newIsStacked;
       };
 
+      /* initial value not dependant on observer */
+      setIsStacked(checkStacking());
+
       if (!fluidInnerRef.current) {
         return;
       }
-
-      setIsStacked(checkStacking());
 
       const resizeObserver = new ResizeObserver(() => {
         setIsStacked(checkStacking());
