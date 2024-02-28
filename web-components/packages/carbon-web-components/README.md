@@ -260,10 +260,11 @@ same manner as native HTML tags, for example:
 
 ## JavaScript framework support
 
-This package can also be used within other JavaScript frameworks such as Angular and
-Vue. This is achievable since web components are the modern browser standard, and
-work well with other front-end frameworks that exist in the application. In
-turn, this also comes with the benefits of encapsulation within the Shadow DOM:
+This package can also be used within other JavaScript frameworks such as Angular
+and Vue. This is achievable since web components are the modern browser
+standard, and work well with other front-end frameworks that exist in the
+application. In turn, this also comes with the benefits of encapsulation within
+the Shadow DOM:
 
 ### Angular
 
