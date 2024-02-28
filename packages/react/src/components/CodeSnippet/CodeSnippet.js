@@ -22,7 +22,7 @@ const rowHeightInPixels = 16;
 const defaultMaxCollapsedNumberOfRows = 15;
 const defaultMaxExpandedNumberOfRows = 0;
 const defaultMinCollapsedNumberOfRows = 3;
-const defaultMinExpandedNumberOfRows = 16;
+const defaultMinExpandedNumberOfRows = 0;
 
 function CodeSnippet({
   align = 'bottom',
@@ -109,7 +109,6 @@ function CodeSnippet({
       onResize: () => {
         if (codeContentRef?.current && type === 'multi') {
           const { height } = codeContentRef.current.getBoundingClientRect();
-
           if (
             maxCollapsedNumberOfRows > 0 &&
             (maxExpandedNumberOfRows <= 0 ||
