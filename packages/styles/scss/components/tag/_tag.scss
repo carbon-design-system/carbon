@@ -56,20 +56,24 @@
     vertical-align: middle;
     word-break: break-word;
 
+    &.#{$prefix}--tag--lg {
+      padding-inline-start: $spacing-04;
+    }
+
+    &:has(.#{$prefix}--tag__custom-icon) {
+      padding-inline-start: $spacing-02;
+    }
+
+    &.#{$prefix}--tag--lg:not(.#{$prefix}--tag--filter) {
+      padding-inline: $spacing-04;
+    }
+
+    &.#{$prefix}--tag--lg:has(.#{$prefix}--tag__custom-icon) {
+      padding-inline-start: $spacing-03;
+    }
+
     &:not(:first-child) {
       margin-inline-start: 0;
-    }
-  }
-
-  .#{$prefix}--tag--disabled,
-  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled,
-  .#{$prefix}--tag--interactive.#{$prefix}--tag--disabled {
-    @include tag-theme($layer, $text-disabled);
-
-    box-shadow: none;
-
-    &:hover {
-      cursor: not-allowed;
     }
   }
 
@@ -109,6 +113,7 @@
   .#{$prefix}--tag--selectable {
     border: 1px solid $border-inverse;
     background-color: $layer;
+    color: $text-primary;
     cursor: pointer;
 
     &:hover {
@@ -145,18 +150,6 @@
     &:focus {
       outline: 2px solid $focus;
       outline-offset: 1px;
-    }
-  }
-
-  .#{$prefix}--tag--selectable.#{$prefix}--tag--disabled,
-  .#{$prefix}--tag--operational.#{$prefix}--tag--disabled {
-    border: 1px solid $border-disabled;
-    background-color: $layer;
-    color: $text-disabled;
-
-    &:hover {
-      background-color: $layer;
-      cursor: not-allowed;
     }
   }
 
@@ -262,6 +255,30 @@
     @include tag-theme($background, $text-primary, $layer-hover);
 
     box-shadow: 0 0 0 1px $background-inverse;
+  }
+
+  .#{$prefix}--tag--disabled,
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled,
+  .#{$prefix}--tag--interactive.#{$prefix}--tag--disabled {
+    @include tag-theme($layer, $text-disabled);
+
+    box-shadow: none;
+
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
+
+  .#{$prefix}--tag--selectable.#{$prefix}--tag--disabled,
+  .#{$prefix}--tag--operational.#{$prefix}--tag--disabled {
+    border: 1px solid $border-disabled;
+    background-color: $layer;
+    color: $text-disabled;
+
+    &:hover {
+      background-color: $layer;
+      cursor: not-allowed;
+    }
   }
 
   .#{$prefix}--tag--interactive {

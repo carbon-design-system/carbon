@@ -8,6 +8,7 @@
 import React from 'react';
 import { default as Tag } from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
+import { Asleep } from '@carbon/icons-react';
 
 export default {
   title: 'Components/Tag',
@@ -58,7 +59,11 @@ export const ReadOnly = () => {
 };
 
 export const Playground = (args) => {
-  return <Tag {...args}>{'Tag content'}</Tag>;
+  return (
+    <Tag renderIcon={Asleep} {...args}>
+      {'Tag content'}
+    </Tag>
+  );
 };
 
 Playground.args = {

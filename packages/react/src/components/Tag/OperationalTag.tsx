@@ -86,7 +86,7 @@ const OperationalTag = <T extends React.ElementType>({
   renderIcon,
   slug,
   size,
-  type,
+  type = 'gray',
   ...other
 }: OperationalTagProps<T>) => {
   const prefix = usePrefix();

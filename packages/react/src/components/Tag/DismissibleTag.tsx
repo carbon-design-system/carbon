@@ -107,6 +107,10 @@ const DismissibleTag = <T extends React.ElementType>({
     });
   }
 
+  // Removing onClick from the spread operator
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { onClick, ...otherProps } = other;
+
   return (
     <Tag<any>
       type={type}
@@ -115,7 +119,7 @@ const DismissibleTag = <T extends React.ElementType>({
       disabled={disabled}
       className={tagClasses}
       id={tagId}
-      {...other}>
+      {...otherProps}>
       <div className={`${prefix}--interactive--tag-children`}>
         {children}
         {normalizedSlug}

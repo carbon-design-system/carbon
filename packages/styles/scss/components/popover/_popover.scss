@@ -125,6 +125,17 @@ $popover-caret-height: custom-property.get-var(
 
   // Popover content
   .#{$prefix}--popover-content {
+    @include layout.redefine-tokens(
+      (
+        size: (
+          height: (
+            sm: convert.to-rem(32px),
+            md: convert.to-rem(40px),
+            lg: convert.to-rem(48px),
+          ),
+        ),
+      )
+    );
     @include component-reset.reset;
 
     position: absolute;

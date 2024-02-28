@@ -14,12 +14,15 @@
   $filter-hover-color: $bg-color,
   $border-color: $bg-color
 ) {
-  border: 1px solid $border-color;
   background-color: $bg-color;
   color: $text-color;
 
-  &:hover.#{$prefix}--tag--operational {
-    background-color: $filter-hover-color;
+  &.#{$prefix}--tag--operational {
+    border: 1px solid $border-color;
+
+    &:hover {
+      background-color: $filter-hover-color;
+    }
   }
 
   .#{$prefix}--tag__close-icon {

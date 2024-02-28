@@ -48,25 +48,28 @@ import {
   green80,
   green20Hover,
   green70Hover,
+  gray10,
   gray20,
   gray40,
   gray50,
   gray70,
-  gray80,
+  gray100,
   gray20Hover,
   gray70Hover,
+  warmGray10,
   warmGray20,
   warmGray40,
   warmGray50,
   warmGray70,
-  warmGray80,
+  warmGray100,
   warmGray20Hover,
   warmGray70Hover,
+  coolGray10,
   coolGray20,
   coolGray40,
   coolGray50,
   coolGray70,
-  coolGray80,
+  coolGray100,
   coolGray20Hover,
   coolGray70Hover,
 } from '@carbon/colors';
@@ -224,10 +227,10 @@ export const tagBackgroundGray = {
 };
 
 export const tagColorGray = {
-  whiteTheme: gray80,
-  g10: gray80,
-  g90: gray20,
-  g100: gray20,
+  whiteTheme: gray100,
+  g10: gray100,
+  g90: gray10,
+  g100: gray10,
 };
 
 export const tagHoverGray = {
@@ -245,10 +248,10 @@ export const tagBackgroundCoolGray = {
 };
 
 export const tagColorCoolGray = {
-  whiteTheme: coolGray80,
-  g10: coolGray80,
-  g90: coolGray20,
-  g100: coolGray20,
+  whiteTheme: coolGray100,
+  g10: coolGray100,
+  g90: coolGray10,
+  g100: coolGray10,
 };
 
 export const tagHoverCoolGray = {
@@ -266,10 +269,10 @@ export const tagBackgroundWarmGray = {
 };
 
 export const tagColorWarmGray = {
-  whiteTheme: warmGray80,
-  g10: warmGray80,
-  g90: warmGray20,
-  g100: warmGray20,
+  whiteTheme: warmGray100,
+  g10: warmGray100,
+  g90: warmGray10,
+  g100: warmGray10,
 };
 
 export const tagHoverWarmGray = {
