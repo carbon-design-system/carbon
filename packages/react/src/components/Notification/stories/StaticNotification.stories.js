@@ -48,6 +48,27 @@ export const WithInteractiveElements = () => (
   </StaticNotification>
 );
 
+export const WithActionButton = () => (
+  <StaticNotification
+    title="Notification title"
+    titleId="notif-1"
+    kind="info"
+    lowContrast
+    actionButtonLabel="Learn More">
+    <div className="cds--inline-notification__subtitle">
+      <Link inline href="#" aria-describedby="notif-1">
+        Create
+      </Link>{' '}
+      or{' '}
+      <Link inline href="#" aria-describedby="notif-1">
+        register
+      </Link>{' '}
+      a cluster before creating a Configuration. Some additional info could go
+      here to show that this notification subtitle goes below the title.
+    </div>
+  </StaticNotification>
+);
+
 export const Playground = (args) => <StaticNotification {...args} />;
 
 Playground.argTypes = {

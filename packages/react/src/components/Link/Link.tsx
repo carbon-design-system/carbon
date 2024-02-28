@@ -11,18 +11,13 @@ import React, {
   AnchorHTMLAttributes,
   AriaAttributes,
   ComponentType,
+  ElementType,
   HTMLAttributeAnchorTarget,
-  PropsWithChildren,
 } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
+import { PolymorphicProps } from '../../types/common';
 
-export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  /**
-   * Provide a custom element or component to render the top-level node for the
-   * component.
-   */
-  as?: string | undefined;
-
+export interface LinkBaseProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
    * @description Indicates the element that represents the
    *   current item within a container or set of related
@@ -73,60 +68,63 @@ export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   visited?: boolean;
 }
 
-const Link = React.forwardRef<HTMLAnchorElement, PropsWithChildren<LinkProps>>(
-  function Link(
-    {
-      as: BaseComponent,
-      children,
-      className: customClassName,
-      href,
-      disabled = false,
-      inline = false,
-      visited = false,
-      renderIcon: Icon,
-      size,
-      target,
-      ...rest
-    },
-    ref
-  ) {
-    const prefix = usePrefix();
-    const className = cx(`${prefix}--link`, customClassName, {
-      [`${prefix}--link--disabled`]: disabled,
-      [`${prefix}--link--inline`]: inline,
-      [`${prefix}--link--visited`]: visited,
-      [`${prefix}--link--${size}`]: size,
-    });
-    const rel = target === '_blank' ? 'noopener' : undefined;
-    const linkProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
-      className: BaseComponent ? undefined : className,
-      rel,
-      target,
-    };
+export type LinkProps<E extends ElementType> = PolymorphicProps<
+  E,
+  LinkBaseProps
+>;
 
-    // Reference for disabled links:
-    // https://www.scottohara.me/blog/2021/05/28/disabled-links.html
-    if (!disabled) {
-      linkProps.href = href;
-    } else {
-      linkProps.role = 'link';
-      linkProps['aria-disabled'] = true;
-    }
+const Link = React.forwardRef(function Link<E extends React.ElementType>(
+  {
+    as: BaseComponent,
+    children,
+    className: customClassName,
+    href,
+    disabled = false,
+    inline = false,
+    visited = false,
+    renderIcon: Icon,
+    size,
+    target,
+    ...rest
+  }: LinkProps<E>,
+  ref
+) {
+  const prefix = usePrefix();
+  const className = cx(`${prefix}--link`, customClassName, {
+    [`${prefix}--link--disabled`]: disabled,
+    [`${prefix}--link--inline`]: inline,
+    [`${prefix}--link--visited`]: visited,
+    [`${prefix}--link--${size}`]: size,
+  });
+  const rel = target === '_blank' ? 'noopener' : undefined;
+  const linkProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
+    className: BaseComponent ? undefined : className,
+    rel,
+    target,
+  };
 
-    const BaseComponentAsAny = (BaseComponent ?? 'a') as any;
-
-    return (
-      <BaseComponentAsAny ref={ref} {...linkProps} {...rest}>
-        {children}
-        {!inline && Icon && (
-          <div className={`${prefix}--link__icon`}>
-            <Icon />
-          </div>
-        )}
-      </BaseComponentAsAny>
-    );
+  // Reference for disabled links:
+  // https://www.scottohara.me/blog/2021/05/28/disabled-links.html
+  if (!disabled) {
+    linkProps.href = href;
+  } else {
+    linkProps.role = 'link';
+    linkProps['aria-disabled'] = true;
   }
-);
+
+  const BaseComponentAsAny = (BaseComponent ?? 'a') as any;
+
+  return (
+    <BaseComponentAsAny ref={ref} {...linkProps} {...rest}>
+      {children}
+      {!inline && Icon && (
+        <div className={`${prefix}--link__icon`}>
+          <Icon />
+        </div>
+      )}
+    </BaseComponentAsAny>
+  );
+});
 
 Link.displayName = 'Link';
 
@@ -135,7 +133,7 @@ Link.propTypes = {
    * Provide a custom element or component to render the top-level node for the
    * component.
    */
-  as: PropTypes.string,
+  as: PropTypes.elementType,
 
   /**
    * Provide the content for the Link
@@ -166,7 +164,6 @@ Link.propTypes = {
    * Optional prop to render an icon next to the link.
    * Can be a React component class
    */
-  // @ts-expect-error - PropTypes are unable to cover this case.
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
