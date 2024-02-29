@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -143,6 +143,7 @@ export const WithLayer = () => {
 
 export const Playground = (args) => {
   const {
+    ariaLabel,
     open,
     direction,
     disabled,
@@ -162,6 +163,7 @@ export const Playground = (args) => {
 
   return html`
     <cds-dropdown
+      aria-label=${ifDefined(ariaLabel)}
       ?open=${open}
       ?disabled="${disabled}"
       ?hide-label=${hideLabel}
@@ -191,6 +193,7 @@ export const Playground = (args) => {
 Playground.parameters = {
   knobs: {
     [`${prefix}-dropdown`]: () => ({
+      ariaLabel: textNullable('aria-label (aria-label)', ''),
       open: boolean('Open (open)', false),
       direction: select('Direction', directionOptions, null),
       disabled: boolean('Disabled (disabled)', false),

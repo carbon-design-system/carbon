@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -96,9 +96,6 @@ class CDSMultiSelect extends CDSDropdown {
   protected _selectionDidChange(itemToSelect?: CDSMultiSelectItem) {
     if (itemToSelect) {
       itemToSelect.selected = !itemToSelect.selected;
-      this._assistiveStatusText = itemToSelect.selected
-        ? this.selectedItemAssistiveText
-        : this.unselectedItemAssistiveText;
     } else {
       forEach(
         this.querySelectorAll(
@@ -109,7 +106,6 @@ class CDSMultiSelect extends CDSDropdown {
         }
       );
       this._handleUserInitiatedToggle(false);
-      this._assistiveStatusText = this.unselectedAllAssistiveText;
     }
     // Change in `.selected` hasn't been reflected to the corresponding attribute yet
     this.value = filter(
@@ -433,18 +429,6 @@ class CDSMultiSelect extends CDSDropdown {
   locale = 'en';
 
   /**
-   * An assistive text for screen reader to announce, telling that an item is unselected.
-   */
-  @property({ attribute: 'unselected-item-assistive-text' })
-  unselectedItemAssistiveText = 'Unselected an item.';
-
-  /**
-   * An assistive text for screen reader to announce, telling that all items are unselected.
-   */
-  @property({ attribute: 'unselected-all-assistive-text' })
-  unselectedAllAssistiveText = 'Unselected all items.';
-
-  /**
    * Specify feedback (mode) of the selection.
    * `top`: selected item jumps to top
    * `fixed`: selected item stays at it's position
@@ -552,7 +536,8 @@ class CDSMultiSelect extends CDSDropdown {
         });
 
         slug ? sortedMenuItems.unshift(slug as Node) : '';
-        this.replaceChildren(...sortedMenuItems);
+        // @todo remove typecast once we've updated to Typescript.
+        (this as any).replaceChildren(...sortedMenuItems);
       }
     }
     if (changedProperties.has('open')) {
@@ -566,7 +551,8 @@ class CDSMultiSelect extends CDSDropdown {
         });
 
         slug ? sortedMenuItems.unshift(slug as Node) : '';
-        this.replaceChildren(...sortedMenuItems);
+        // @todo remove typecast once we've updated to Typescript.
+        (this as any).replaceChildren(...sortedMenuItems);
       }
     }
     return true;

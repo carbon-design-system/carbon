@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -58,6 +58,21 @@ class CDSDropdownItem extends LitElement {
   @property()
   value = '';
 
+  connectedCallback() {
+    super.connectedCallback();
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'option');
+    }
+    if (!this.hasAttribute('id')) {
+      this.setAttribute(
+        'id',
+        `${prefix}-dropdown-item-${(this.constructor as typeof CDSDropdownItem)
+          .id++}`
+      );
+    }
+    this.setAttribute('aria-selected', String(this.selected));
+  }
+
   render() {
     const { selected } = this;
     return html`
@@ -72,6 +87,13 @@ class CDSDropdownItem extends LitElement {
       </div>
     `;
   }
+
+  /**
+   * Store an identifier for use in composing this item's id.
+   *
+   * Auto-increments anytime a new dropdown-item appears.
+   */
+  static id = 0;
 
   static styles = styles;
 }
