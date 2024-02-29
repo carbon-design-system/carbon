@@ -272,7 +272,7 @@ const slugs = {
 const getSlug = (index) => {
   switch (index) {
     case 1:
-      return html`<cds-slug slot="slug" className="slug-container" size="xs">
+      return html`<cds-slug size="xs" alignment="bottom-right">
         <div slot="body-text">
           <p class="secondary">AI Explained</p>
           <h1>84%</h1>
