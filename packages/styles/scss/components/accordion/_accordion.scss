@@ -305,9 +305,3 @@ $content-padding: 0 0 0 $spacing-05 !default;
   inline-size: calc(100% + 32px);
   inset-inline-start: -1rem;
 }
-
-//controlled-accordion
-.#{$prefix}--controlled__accordion .#{$prefix}--btn-set .#{$prefix}--btn {
-  inline-size: 100%;
-  max-inline-size: 13.25rem;
-}

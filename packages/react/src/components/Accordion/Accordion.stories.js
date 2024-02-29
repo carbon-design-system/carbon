@@ -8,6 +8,7 @@
 /* eslint-disable no-console */
 
 import React from 'react';
+import './story.scss';
 import {
   default as Accordion,
   AccordionItem,
@@ -16,8 +17,6 @@ import {
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import mdx from './Accordion.mdx';
-import { usePrefix } from '../../internal/usePrefix';
-
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
 export default {
@@ -73,27 +72,27 @@ export const Default = () => (
 
 export const Controlled = () => {
   const [expandAll, setExpandAll] = React.useState(false);
-  const prefix = usePrefix();
   return (
     <>
-      <div className={`${prefix}--controlled__accordion`}>
-        <ButtonSet>
-          <Button
-            onClick={() => {
-              expandAll === true ? setExpandAll(1) : setExpandAll(true);
-            }}>
-            Click to expand all
-          </Button>
-          <Button
-            onClick={() => {
-              expandAll || expandAll === null
-                ? setExpandAll(false)
-                : setExpandAll(null);
-            }}>
-            Click to collapse all
-          </Button>
-        </ButtonSet>
-      </div>
+      <ButtonSet className={'controlled-accordion-btnset'}>
+        <Button
+          className={'controlled-accordion-btn'}
+          onClick={() => {
+            expandAll === true ? setExpandAll(1) : setExpandAll(true);
+          }}>
+          Click to expand all
+        </Button>
+        <Button
+          className={'controlled-accordion-btn'}
+          onClick={() => {
+            expandAll || expandAll === null
+              ? setExpandAll(false)
+              : setExpandAll(null);
+          }}>
+          Click to collapse all
+        </Button>
+      </ButtonSet>
+
       <Accordion>
         <AccordionItem title="Section 1 title" open={expandAll}>
           <p>
