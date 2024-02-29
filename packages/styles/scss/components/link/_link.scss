@@ -46,7 +46,10 @@ $link-focus-text-color: custom-property.get-var(
     &:active,
     &:active:visited,
     &:active:visited:hover {
+      @include focus-outline;
+
       color: $text-primary;
+      outline-color: $link-focus-text-color;
       text-decoration: underline;
     }
 
