@@ -31,6 +31,11 @@ export const Default = () => {
         <cds-chat-button size="lg">
           Primary ${Add16({ slot: 'icon' })}
         </cds-chat-button>
+        <br />
+        <br />
+        <cds-chat-button size="sm"> Primary </cds-chat-button>
+        <cds-chat-button size="md"> Primary </cds-chat-button>
+        <cds-chat-button size="lg"> Primary </cds-chat-button>
       </div>
       <div class="test-button-kinds">
         <h3>Kinds</h3>
@@ -50,6 +55,13 @@ export const Default = () => {
         <cds-chat-button kind="danger">
           Danger ${Add16({ slot: 'icon' })}
         </cds-chat-button>
+        <br />
+        <br />
+        <cds-chat-button kind="primary"> Primary </cds-chat-button>
+        <cds-chat-button kind="secondary"> Secondary </cds-chat-button>
+        <cds-chat-button kind="tertiary"> Tertiary </cds-chat-button>
+        <cds-chat-button kind="ghost"> Ghost </cds-chat-button>
+        <cds-chat-button kind="danger"> Danger </cds-chat-button>
       </div>
       <div class="test-button-quick-action">
         <h3>Quick action</h3>
@@ -66,6 +78,16 @@ export const Default = () => {
         <cds-chat-button is-quick-action disabled>
           Disabled ${Add16({ slot: 'icon' })}
         </cds-chat-button>
+        <br />
+        <br />
+        <cds-chat-button is-quick-action> Quick action </cds-chat-button>
+        <cds-chat-button is-quick-action is-selected>
+          Selected and Enabled
+        </cds-chat-button>
+        <cds-chat-button is-quick-action is-selected disabled>
+          Selected and disabled
+        </cds-chat-button>
+        <cds-chat-button is-quick-action disabled> Disabled </cds-chat-button>
       </div>
       <div class="test-button-skeleton">
         <h3>Skeleton</h3>

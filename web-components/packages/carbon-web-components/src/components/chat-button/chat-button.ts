@@ -23,6 +23,23 @@ export { CHAT_BUTTON_SIZE, CHAT_BUTTON_KIND };
 @customElement(`${prefix}-chat-button`)
 class CDSChatButton extends LitElement {
   /**
+   * `true` if there is an icon.
+   */
+  private _hasIcon = false;
+
+  /**
+   * Handles `slotchange` event.
+   */
+  private _handleSlotChange({ target }: Event) {
+    this._hasIcon = (target as HTMLSlotElement)
+      .assignedNodes()
+      .some(
+        (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
+      );
+    this.requestUpdate();
+  }
+
+  /**
    * `true` if the button should be disabled.
    */
   @property({ type: Boolean, reflect: true })
@@ -70,6 +87,7 @@ class CDSChatButton extends LitElement {
     }
 
     let classes = `${prefix}--chat-btn`;
+    classes += this._hasIcon ? ` ${prefix}--chat-btn--with-icon` : '';
     classes += this.isQuickAction ? ` ${prefix}--chat-btn--quick-action` : '';
     classes += this.isSelected
       ? ` ${prefix}--chat-btn--quick-action--selected`
@@ -81,7 +99,11 @@ class CDSChatButton extends LitElement {
         size="${this.size}"
         kind="${this.kind}"
         ?disabled="${this.disabled}">
-        <slot></slot><slot name="icon" slot="icon"></slot>
+        <slot></slot
+        ><slot
+          name="icon"
+          slot="icon"
+          @slotchange="${this._handleSlotChange}"></slot>
       </cds-button>
     `;
   }
