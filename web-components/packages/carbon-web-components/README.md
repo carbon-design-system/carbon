@@ -28,16 +28,6 @@ with no framework tax, no framework silo.
 `@carbon/web-components` is a variant of Carbon Design System with Custom
 Elements v1 and Shadow DOM v1 specs.
 
-> The original repository, `carbon-web-components`, has been archived. All
-> future work for the package will take place in this monorepo. Please visit the
-> [original repository](https://github.com/carbon-design-system/carbon-web-components)
-> for full history of the files.
-
-The effort stems from
-https://github.com/carbon-design-system/issue-tracking/issues/121. If you are
-interested in this project, adding 👍 to the description of that GH issue, or
-even contributing, will be greatly appreciated!
-
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -88,7 +78,8 @@ version `v1.16.0`):
   src="https://1.www.s81c.com/common/carbon/web-components/version/v2.0.0/accordion.min.js"></script>
 ```
 
-These are the list of available components via CDN:
+<details>
+  <summary>See full list of available components via CDN</summary>
 
 - accordion.min.js
 - breadcrumb.min.js
@@ -132,21 +123,7 @@ These are the list of available components via CDN:
 - toggle.min.js
 - tooltip.min.js
 - ui-shell.min.js
-
-To use the right-to-left (RTL) version of the artifacts, change the file
-extention from `.min.js` to `.rtl.min.js`. For example:
-
-```html
-<!-- By `latest` tag (RTL) -->
-<script
-  type="module"
-  src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/accordion.rtl.min.js"></script>
-
-<!-- By specific version (RTL) -->
-<script
-  type="module"
-  src="https://1.www.s81c.com/common/carbon/web-components/version/v2.0.0/accordion.rtl.min.js"></script>
-```
+</details>
 
 #### Basic usage
 
@@ -205,22 +182,6 @@ instead:
 yarn add @carbon/web-components
 ```
 
-> NOTE: Carbon and Lit dependencies will be managed by Carbon Web Components
-> starting in `v1.19.0`. For earlier versions, these dependencies will have to
-> be installed separately:
->
-> npm:
->
-> ```bash
-> npm install --save carbon-components lit-html lit-element
-> ```
->
-> Yarn:
->
-> ```bash
-> yarn add carbon-components lit-html lit-element
-> ```
-
 #### Basic usage
 
 Our example at [CodeSandbox](https://codesandbox.io) shows the most basic usage:
@@ -260,16 +221,11 @@ same manner as native HTML tags, for example:
 
 ## JavaScript framework support
 
-In addition to the available Web Component versions of Carbon components, this
-library also supports usage with JavaScript frameworks like Angular, React, and
-Vue if the desire is to use instead of the pure framework versions of Carbon
-components. Specifically for React, this library comes with a wrapper
-implementation around the Carbon Web Components for more seamless integration
-with your React application.
-
-This is achievable since Web Components is the modern browser standard, and
-works well with other front-end frameworks that exist in the application. In
-turn, this also comes with the benefits of encapsulation within the Shadow DOM:
+This package also supports integration with other JavaScript frameworks like
+Angular and Vue. This is achievable since Web Components is the modern browser
+standard, and works well with other front-end frameworks that exist in the
+application. In turn, this also comes with the benefits of encapsulation within
+the Shadow DOM:
 
 ### Angular
 
@@ -306,48 +262,6 @@ application can use those `.d.ts` files:
   as follows:
   `window.__importDefault = mod => (mod?.__esModule ? mod : { default: mod })`
 
-### React
-
-[![Edit carbon-web-components with React](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/react)
-
-You can use wrapper React components in
-`@carbon/web-components/es/components-react` generated
-[automatically from the custom elements](./src/globals/wrappers/createReactCustomElementType.ts)
-which allows you to use our components seamlessly in your React code. Here's an
-example:
-
-```javascript
-import React from 'react';
-import { render } from 'react-dom';
-import CDSDropdown from '@carbon/web-components/es/components-react/dropdown/dropdown.js';
-import CDSDropdownItem from '@carbon/web-components/es/components-react/dropdown/dropdown-item.js';
-
-const App = () => (
-  <CDSDropdown triggerContent="Select an item">
-    <CDSDropdownItem value="all">Option 1</CDSDropdownItem>
-    <CDSDropdownItem value="cloudFoundry">Option 2</CDSDropdownItem>
-    <CDSDropdownItem value="staging">Option 3</CDSDropdownItem>
-    <CDSDropdownItem value="dea">Option 4</CDSDropdownItem>
-    <CDSDropdownItem value="router">Option 5</CDSDropdownItem>
-  </CDSDropdown>
-);
-
-render(<App />, document.getElementById('root'));
-```
-
-Note: Using the React wrapper requires an additional dependency,
-[`prop-types`](https://www.npmjs.com/package/prop-types).
-
-To run the wrapper React components in SSR environment requires Node `12.16.3`
-or above that supports
-["conditional mapping" feature](https://github.com/jkrems/proposal-pkg-exports#2-conditional-mapping):
-
-[![Edit carbon-web-components with React SSR](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/react-ssr)
-
-Same Node version requirement applies to Next.js:
-
-[![Edit carbon-web-components with React SSR](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/next)
-
 ### Vue
 
 [![Edit carbon-web-components with Vue](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/vue)
@@ -380,21 +294,7 @@ information in several ways:
 
 ## Browser support
 
-- Latest Chrome/Safari/FF ESR
-- IE/Edge support is bast-effort basis
-  - Some components may not be supported
-
-To support IE, you need a couple additional setups:
-
-- Toolstack to re-transpile our code to ES5 (e.g. by specifying IE11 in
-  [`@babel/preset-env`](https://babeljs.io/docs/en/babel-preset-env)
-  configuration)
-- Polyfills, listed
-  [here](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/blob/main/packages/carbon-web-components/src/polyfills/index.ts)
-
-Here's an example code that shows such setup:
-
-[![Edit carbon-web-components with IE](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/ie)
+- Latest Chrome/Safari/FF
 
 ## Coding conventions
 
