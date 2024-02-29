@@ -49,7 +49,7 @@ export const Selectable = (args) => {
         {'Tag content'}
       </SelectableTag>
       <hr />
-      <SelectableTag className="some-class" {...args}>
+      <SelectableTag renderIcon={Asleep} className="some-class" {...args}>
         {'Tag content'}
       </SelectableTag>
       <SelectableTag renderIcon={Asleep} className="some-class" {...args}>
@@ -253,7 +253,7 @@ export const Operational = (args) => {
           label="View more"
           align="bottom"
           className={`${prefix}--icon-tooltip`}>
-          <OperationalTag className="some-class" {...args}>
+          <OperationalTag className="some-class" renderIcon={Asleep} {...args}>
             {'Tag content'}
           </OperationalTag>
         </Tooltip>
@@ -291,13 +291,17 @@ export const Operational = (args) => {
             {...args}>
             {'Tag content'}
           </OperationalTag>
-          <PopoverContent className="p-3">
+          <PopoverContent>
             <div
               style={{
                 display: 'flex',
                 flexDirection: 'column',
+                padding: '1rem',
               }}>
-              <Tag type="blue" className="some-class">
+              <Tag
+                type="blue"
+                className="some-class"
+                style={{ inlineSize: '85px' }}>
                 {'Tag 1 name'}
               </Tag>
               <Tag type="blue" className="some-class">
@@ -369,6 +373,12 @@ Operational.argTypes = {
       type: 'select',
     },
   },
+  // type: {
+  //   options: ['red', 'magenta', 'blue'],
+  //   control: {
+  //     type: 'select',
+  //   },
+  // },
 };
 
 export const Dismissible = (args) => {
