@@ -29,7 +29,11 @@ When to use:
 </Canvas>
 
 ```jsx
-<DismissibleTag type="red" className="some-class" title="Clear Filter">
+<DismissibleTag
+  type="red"
+  className="some-class"
+  title="Clear Filter"
+  renderIcon={AsSleep}>
   {'Tag content'}
 </DismissibleTag>
 ```
@@ -52,7 +56,7 @@ When to use:
 </Canvas>
 
 ```jsx
-<SelectableTag className="some-class" title="Clear Filter">
+<SelectableTag className="some-class" renderIcon={Asleep}>
   {'Tag content'}
 </SelectableTag>
 ```
@@ -79,7 +83,7 @@ When not to use:
 </Canvas>
 
 ```jsx
-<OperationalTag type="red" className="some-class" title="Clear Filter">
+<OperationalTag type="red" className="some-class" renderIcon={Asleep}>
   {'Tag content'}
 </OperationalTag>
 ```
