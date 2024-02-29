@@ -22,6 +22,7 @@ $indicator-height: $spacing-04;
   display: inline-block;
   color: $text-helper;
   margin-block-start: $spacing-09; /* provides space in docs */
+  max-inline-size: 100%;
   padding-block-start: $spacing-05; /* space for the indicators */
 }
 

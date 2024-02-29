@@ -28,7 +28,7 @@ function WithDisplayBox({ children, className, msg }) {
           step={5}
           value={width}
           onChange={({ value }) => setWidth(value)}
-          labelText="Adjust width of container with component inside."
+          labelText="Adjust maximum width of container in which the component is displayed."
         />
       </Form>
       <div className={`${blockClass}__story`}>
