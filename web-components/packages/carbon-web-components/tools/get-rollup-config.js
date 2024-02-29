@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,7 +17,6 @@ const path = require('path');
 const postcss = require('postcss');
 const replace = require('@rollup/plugin-replace');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
-const rtlcss = require('rtlcss');
 const { promisify } = require('util');
 const { terser } = require('rollup-plugin-terser');
 
@@ -41,11 +40,10 @@ const modeSuffixes = {
 /**
  * Stores the suffix to append for render direction setting
  *
- * @type {{ltr: string, rtl: string}}
+ * @type {{ltr: string}}
  */
 const dirSuffixes = {
   ltr: '',
-  rtl: '.rtl',
 };
 
 /**
@@ -72,21 +70,15 @@ function _generateInputs(mode, dir, folders) {
 /**
  * Gets the PostCSS plugin configuration
  *
- * @param {string} mode The build mode
- * @param {string} dir The UI direction
+ * @param {string} mode The build mode\
  * @private
  */
-function _getPostCSSPlugins(mode, dir) {
+function _getPostCSSPlugins(mode) {
   const postCSSPlugins = [fixHostPseudo(), autoprefixer()];
 
   // Add cssnano for production mode
   if (mode !== 'development') {
     postCSSPlugins.push(cssnano());
-  }
-
-  // Add rtlcss if enabled
-  if (dir === 'rtl') {
-    postCSSPlugins.push(rtlcss);
   }
 
   return postCSSPlugins;

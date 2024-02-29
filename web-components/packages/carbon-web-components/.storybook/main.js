@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,11 +9,9 @@
 
 const path = require('path');
 const sass = require('sass');
-const rtlcss = require('rtlcss');
 const deepReplace = require('../tools/deep-replace');
 
 const { getPaths } = deepReplace;
-const useRtl = process.env.STORYBOOK_CARBON_CUSTOM_ELEMENTS_USE_RTL === 'true';
 
 const arrayify = (value) =>
   Array.isArray(value) ? value : value != null ? [value] : []; // eslint-disable-line no-nested-ternary
@@ -117,7 +115,6 @@ module.exports = {
               plugins: () => [
                 require('../tools/postcss-fix-host-pseudo')(),
                 require('autoprefixer')(),
-                ...(useRtl ? [rtlcss] : []),
               ],
             },
           },
