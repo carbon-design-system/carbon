@@ -315,7 +315,7 @@ const slugs = {
 const getSlug = (index) => {
   switch (index) {
     case 1:
-      return html`<cds-slug slot="slug" className="slug-container" size="xs">
+      return html`<cds-slug size="xs" alignment="bottom-right">
         <div slot="body-text">
           <p class="secondary">AI Explained</p>
           <h1>84%</h1>
@@ -501,5 +501,202 @@ NarrowWithAllHeaderItems.parameters = {
     'cds-tearsheet': () => ({
       width: select('width', widths, TEARSHEET_WIDTH.NARROW),
     }),
+  },
+};
+
+const StackingTemplate = (argsIn) => {
+  const args = {
+    actionItems: getActionItems(select('Slot (actions)', actionItems, 4)),
+    headerActions: getActionToolbarItems(
+      select('Slot (header-toolbar)', headerActions, 0)
+    ),
+    content: getContent(select('Slot (default), panel contents', contents, 2)),
+    label: getLabel(select('label', labels, 1)),
+    open: boolean('open', false),
+    influencerWidth: select(
+      'influencer-width',
+      influencerWidths,
+      TEARSHEET_INFLUENCER_WIDTH.NARROW
+    ),
+    influencerPlacement: select(
+      'influencer-placement',
+      influencerPlacements,
+      TEARSHEET_INFLUENCER_PLACEMENT.LEFT
+    ),
+
+    influencer: getInfluencer(select('influencer (slot)', influencers, 0)),
+
+    preventCloseOnClickOutside: boolean(
+      'prevent-close-on-click-outside',
+      false
+    ),
+    selectorInitialFocus: text('selector-initial-focus', ''),
+    width: select('width', widths, TEARSHEET_WIDTH.WIDE),
+    slug: getSlug(select('slug (AI slug)', slugs, 0)),
+    description: text(
+      'description',
+      'Description used to describe the flow if need be.'
+    ),
+    title: text(
+      'title',
+      'Title used to designate the overarching flow of the tearsheet.'
+    ),
+    headerNavigation: getNavigation(select('header-navigation', navigation, 0)),
+
+    ...(argsIn?.['cds-tearsheet'] ?? {}),
+  };
+
+  const toggleButton = (index) => {
+    const tearsheet = document.querySelector(`[data-index="${index}"]`);
+    tearsheet?.toggleAttribute('open');
+  };
+
+  return html`
+    <div class="${storyPrefix}story-container">
+      <div class="${storyPrefix}story-header"></div>
+      <div id="page-content-selector" class="${storyPrefix}story-content">
+        <cds-button-set-base z-index="9999">
+          <cds-button @click="${() => toggleButton('one')}"
+            >Toggle tearsheet one</cds-button
+          >
+          <cds-button @click="${() => toggleButton('two')}"
+            >Toggle tearsheet two</cds-button
+          >
+          <cds-button @click="${() => toggleButton('three')}"
+            >Toggle tearsheet three</cds-button
+          >
+        </cds-button-set-base>
+      </div>
+    </div>
+    <cds-tearsheet
+      data-index="one"
+      class=${args.class}
+      selector-initial-focus=${args.selectorInitialFocus}
+      ?open=${args.open}
+      influencer-placement=${args.influencerPlacement}
+      influencer-width=${args.influencerWidth}
+      ?prevent-close-on-click-outside=${args.preventCloseOnClickOutside}
+      width=${args.width}>
+      <!-- default slotted content -->
+      <cds-button @click="${() => toggleButton('two')}"
+        >Toggle tearsheet two</cds-button
+      >
+      ${args.content}
+
+      <!-- slotted header label -->
+      ${args.label}
+
+      <!-- slotted header title -->
+      ${args.title ? html`<span slot="title">One ${args.title}</span>` : ''}
+
+      <!-- slotted header description -->
+      ${args.description
+        ? html`<span slot="description">${args.description}</span>`
+        : ''}
+
+      <!-- slotted action in header cds-buttons -->
+      ${args.headerActions}
+
+      <!-- slotted action items cds-buttons -->
+      ${args.actionItems}
+
+      <!-- slotted slug -->
+      ${args.slug}
+
+      <!-- slotted header-navigation -->
+      ${args.headerNavigation}
+
+      <!-- slotted influencer -->
+      ${args.influencer}
+    </cds-tearsheet>
+    <cds-tearsheet
+      data-index="two"
+      class=${args.class}
+      selector-initial-focus=${args.selectorInitialFocus}
+      has-close-icon
+      ?open=${args.open}
+      influencer-placement=${args.influencerPlacement}
+      influencer-width=${args.influencerWidth}
+      ?prevent-close-on-click-outside=${args.preventCloseOnClickOutside}
+      width=${args.width}>
+      <!-- default slotted content -->
+      <cds-button @click="${() => toggleButton('three')}"
+        >Toggle tearsheet three</cds-button
+      >
+      ${args.content}
+
+      <!-- slotted header label -->
+      ${args.label}
+
+      <!-- slotted header title -->
+      ${args.title ? html`<span slot="title">Two ${args.title}</span>` : ''}
+
+      <!-- slotted header description -->
+      ${args.description
+        ? html`<span slot="description">${args.description}</span>`
+        : ''}
+
+      <!-- slotted action in header cds-buttons -->
+      ${args.headerActions}
+
+      <!-- slotted action items cds-buttons -->
+      ${args.actionItems}
+
+      <!-- slotted slug -->
+      ${args.slug}
+
+      <!-- slotted header-navigation -->
+      ${args.headerNavigation}
+
+      <!-- slotted influencer -->
+      ${args.influencer}
+    </cds-tearsheet>
+    <cds-tearsheet
+      data-index="three"
+      class=${args.class}
+      selector-initial-focus=${args.selectorInitialFocus}
+      has-close-icon
+      ?open=${args.open}
+      influencer-placement=${args.influencerPlacement}
+      influencer-width=${args.influencerWidth}
+      ?prevent-close-on-click-outside=${args.preventCloseOnClickOutside}
+      width=${args.width}>
+      <!-- default slotted content -->
+      ${args.content}
+
+      <!-- slotted header label -->
+      ${args.label}
+
+      <!-- slotted header title -->
+      ${args.title ? html`<span slot="title">Three ${args.title}</span>` : ''}
+
+      <!-- slotted header description -->
+      ${args.description
+        ? html`<span slot="description">${args.description}</span>`
+        : ''}
+
+      <!-- slotted action in header cds-buttons -->
+      ${args.headerActions}
+
+      <!-- slotted action items cds-buttons -->
+      ${args.actionItems}
+
+      <!-- slotted slug -->
+      ${args.slug}
+
+      <!-- slotted header-navigation -->
+      ${args.headerNavigation}
+
+      <!-- slotted influencer -->
+      ${args.influencer}
+    </cds-tearsheet>
+  `;
+};
+
+export const Stacking = StackingTemplate.bind({}) as TemplateType;
+Stacking.parameters = {
+  ...storyDocs.parameters,
+  knobs: {
+    'cds-tearsheet': () => ({}),
   },
 };

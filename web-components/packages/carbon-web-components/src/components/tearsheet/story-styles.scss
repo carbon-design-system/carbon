@@ -11,6 +11,13 @@ $story-prefix: 'tearsheet-stories';
 
 @use '@carbon/styles/scss/spacing' as *;
 
+#page-content-selector {
+  position: absolute;
+  z-index: 9999;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
 .#{$story-prefix}__tabs .#{$prefix}--tab-content {
   display: none;
 }

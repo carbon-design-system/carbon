@@ -40,13 +40,16 @@ $motion-duration: $duration-moderate-02;
   @extend .#{$prefix}--tearsheet;
 
   &[open] {
+    --overlay-color: #{$overlay};
+    --overlay-opacity: 1;
+
     z-index: utilities.z('modal');
     align-items: flex-end;
+    background: initial;
     opacity: 1;
+
     // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
-    transition: visibility 0s linear,
-      background-color $motion-duration motion(entrance, expressive),
-      opacity $motion-duration motion(entrance, expressive);
+    transition: visibility 0s linear;
     visibility: inherit;
 
     .#{$prefix}--tearsheet__container {
@@ -56,6 +59,39 @@ $motion-duration: $duration-moderate-02;
 
     @media (prefers-reduced-motion: reduce) {
       transition: none;
+    }
+
+    &::before {
+      position: absolute;
+      display: block;
+      background: var(--overlay-color);
+      content: '';
+      inset: 0;
+      opacity: var(--overlay-opacity);
+
+      transition: background-color $motion-duration motion(exit, expressive),
+        opacity $motion-duration motion(exit, expressive);
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+
+      &[stack-position='1'][stack-depth='2'] {
+        --overlay-opacity: 0.67;
+      }
+
+      &[stack-position='1'][stack-depth='3'] {
+        --overlay-opacity: 0.22;
+      }
+
+      &[stack-position='2'][stack-depth='3'] {
+        --overlay-opacity: 0.5;
+      }
+
+      &[stack-position='2'][stack-depth='2'],
+      &[stack-position='3'][stack-depth='3'] {
+        --overlay-opacity: 0.5;
+      }
     }
   }
 
@@ -70,7 +106,24 @@ $motion-duration: $duration-moderate-02;
   }
 
   &[slug] {
-    background-color: $ai-overlay;
+    --overlay-color: #{$ai-overlay};
+
+    .#{$block-class}__container {
+      border: 1px solid transparent;
+
+      /* override carbon ai removing background gradient */
+      background: linear-gradient(to top, var(--cds-layer), var(--cds-layer))
+          padding-box,
+        linear-gradient(
+            to bottom,
+            var(--cds-ai-border-start, #78a9ff),
+            var(--cds-ai-border-end, #d0e2ff)
+          )
+          border-box,
+        linear-gradient(to top, var(--cds-layer), var(--cds-layer)) border-box;
+      border-block-end: 0;
+      box-shadow: 0 4px 10px 2px $ai-drop-shadow;
+    }
 
     .#{$block-class}__content {
       @include utilities.callout-gradient('default', 0);
@@ -82,6 +135,35 @@ $motion-duration: $duration-moderate-02;
     [has-actions] ::slotted(#{$prefix}-slug) {
       inset-inline-end: 0;
     }
+  }
+
+  .#{$block-class}__container {
+    /* lower prop is deprecated but the default in ibm products */
+    @extend .#{$block-class}__container--lower;
+
+    &[stack-position='1'][stack-depth='2'],
+    &[stack-position='2'][stack-depth='3'] {
+      max-block-size: calc(
+        100% - (#{$spacing-09} + #{$spacing-08}) + #{$spacing-05}
+      );
+      transform: scale(var(--#{$block-class}--stacking-scale-factor-single));
+    }
+
+    &[stack-position='1'][stack-depth='3'] {
+      max-block-size: calc(
+        100% - (#{$spacing-09} + #{$spacing-08}) + (2 * #{$spacing-05})
+      );
+      transform: scale(var(--#{$block-class}--stacking-scale-factor-double));
+    }
+  }
+
+  &[stack-position='1'][stack-depth='2'],
+  &[stack-position='2'][stack-depth='3'] {
+    z-index: utilities.z('modal') - 1;
+  }
+
+  &[stack-position='1'][stack-depth='3'] {
+    z-index: utilities.z('modal') - 2;
   }
 
   &[width='narrow'] {

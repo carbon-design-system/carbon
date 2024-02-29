@@ -35,6 +35,13 @@ export {
   TEARSHEET_WIDTH,
 };
 
+const maxStackDepth = 3;
+type StackHandler = (newDepth: number, newPosition: number) => void;
+interface StackState {
+  open: StackHandler[];
+  all: StackHandler[];
+}
+
 // eslint-disable-next-line no-bitwise
 const PRECEDING =
   Node.DOCUMENT_POSITION_PRECEDING | Node.DOCUMENT_POSITION_CONTAINS;
@@ -168,6 +175,10 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
   @HostListener('shadowRoot:focusout')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleBlur = async ({ target, relatedTarget }: FocusEvent) => {
+    if (!this._topOfStack()) {
+      return;
+    }
+
     const {
       // condensedActions,
       open,
@@ -228,7 +239,7 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
   @HostListener('document:keydown')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydown = ({ key, target }: KeyboardEvent) => {
-    if (key === 'Esc' || key === 'Escape') {
+    if ((key === 'Esc' || key === 'Escape') && this._topOfStack()) {
       this._handleUserInitiatedClose(target);
     }
   };
@@ -409,7 +420,80 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
     this._checkUpdateActionSizes();
   }
 
+  // Data structure to communicate the state of tearsheet stacking
+  // (i.e. when more than one tearsheet is open). Each tearsheet supplies a
+  // handler to be called whenever the stacking of the tearsheets changes, which
+  // happens when a tearsheet opens or closes. The 'open' array contains one
+  // handler per OPEN tearsheet ordered from lowest to highest in visual z-order.
+  // The 'all' array contains all the handlers for open and closed tearsheets.
+
+  @state()
+  _stackDepth = -1;
+
+  @state()
+  _stackPosition = -1;
+
+  private _topOfStack = () => {
+    return this._stackDepth === this._stackPosition;
+  };
+
+  private static _stack: StackState = {
+    open: [],
+    all: [],
+  };
+  private _notifyStack = () => {
+    CDSTearsheet._stack.all.forEach(
+      (handler: (stackSize: number, position: number) => void) => {
+        handler(
+          Math.min(CDSTearsheet._stack.open.length, maxStackDepth),
+          CDSTearsheet._stack.open.indexOf(handler) + 1
+        );
+      }
+    );
+  };
+
+  private _handleStackChange: StackHandler = (newDepth, newPosition) => {
+    this._stackDepth = newDepth;
+    this._stackPosition = newPosition;
+    if (this._stackDepth > 1 && this._stackPosition > 0) {
+      this.setAttribute('stack-position', `${newPosition}`);
+      this.setAttribute('stack-depth', `${this._stackDepth}`);
+    } else {
+      this.removeAttribute('stack-position');
+      this.removeAttribute('stack-depth');
+    }
+  };
+
+  private _updateStack = () => {
+    if (this.open) {
+      CDSTearsheet._stack.open.push(this._handleStackChange);
+    } else {
+      const indexOpen = CDSTearsheet._stack.open.indexOf(
+        this._handleStackChange
+      );
+      if (indexOpen >= 0) {
+        CDSTearsheet._stack.open.splice(indexOpen, 1);
+      }
+    }
+    this._notifyStack();
+  };
+
   actionsMultiple = ['', 'single', 'double', 'triple'][this._actionsCount];
+
+  connectedCallback() {
+    super.connectedCallback();
+
+    CDSTearsheet._stack.all.push(this._handleStackChange);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+
+    const indexAll = CDSTearsheet._stack.all.indexOf(this._handleStackChange);
+    CDSTearsheet._stack.all.splice(indexAll, 1);
+    const indexOpen = CDSTearsheet._stack.all.indexOf(this._handleStackChange);
+    CDSTearsheet._stack.open.splice(indexOpen, 1);
+  }
 
   render() {
     const {
@@ -491,6 +575,8 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
         ?opening=${open && !this._isOpen}
         ?closing=${!open && this._isOpen}
         width=${width}
+        stack-position=${this._stackPosition}
+        stack-depth=${this._stackDepth}
         @click=${this._handleClickContainer}>
         <!-- Header -->
         ${headerTemplate}
@@ -600,6 +686,8 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
     }
 
     if (changedProperties.has('open')) {
+      this._updateStack();
+
       this._checkSetOpen();
       if (this.open) {
         this._launcher = this.ownerDocument!.activeElement;
