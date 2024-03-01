@@ -71,7 +71,7 @@
   "dependencies": {
     "@babel/runtime": "^7.16.3",
     "@carbon/ibm-products-styles": "^2.28.0",
-    "@carbon/styles": "1.51.1",
+    "@carbon/styles": "1.52.0",
     "@floating-ui/dom": "^1.6.3",
     "@ibm/telemetry-js": "^1.2.1",
     "flatpickr": "4.6.13",
@@ -94,7 +94,7 @@
     "@babel/template": "~7.12.0",
     "@babel/traverse": "~7.23.7",
     "@carbon/icon-helpers": "10.46.0",
-    "@carbon/icons": "11.36.0",
+    "@carbon/icons": "10.48.3",
     "@open-wc/semantic-dom-diff": "~0.18.0",
     "@percy-io/in-percy": "^0.1.11",
     "@percy/cli": "^1.27.4",
