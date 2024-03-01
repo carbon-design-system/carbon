@@ -16,7 +16,7 @@ import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import { Popover, PopoverContent } from '../Popover';
 import mdx from './InteractiveTag.mdx';
 import { usePrefix } from '../../internal/usePrefix';
-import './story.scss';
+import './storyInteractiveTag.scss';
 
 export default {
   title: 'Experimental/unstable__InteractiveTag',
@@ -159,6 +159,7 @@ export const Operational = (args) => {
 
       <h4>Interactive examples</h4>
       <div
+        id="operational-tag"
         style={{
           display: 'flex',
           justifyContent: 'flex-start',
