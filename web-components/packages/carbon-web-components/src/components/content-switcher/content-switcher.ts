@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -76,6 +76,22 @@ export default class CDSContentSwitcher extends LitElement {
   }
 
   /**
+   * @param target The current event target.
+   * @returns The item to be selected.
+   */
+  protected _getCurrentItem(target: HTMLElement) {
+    const items = this.querySelectorAll(
+      (this.constructor as typeof CDSContentSwitcher).selectorItemEnabled
+    );
+    const { selectorItem } = this.constructor as typeof CDSContentSwitcher;
+    const containerItem = target.closest(
+      selectorItem
+    ) as CDSContentSwitcherItem;
+    const index = indexOf(items, containerItem);
+    return items[index] ?? null;
+  }
+
+  /**
    * @param currentItem The currently selected item.
    * @param direction The navigation direction.
    * @returns The item to be selected.
@@ -93,13 +109,14 @@ export default class CDSContentSwitcher extends LitElement {
   }
 
   /**
-   * Handles `click` event on the top-level element in the shadow DOM.
+   * Handles `click` event on content switcher item.
    *
    * @param event The event.
    * @param event.target The event target.
    */
   protected _handleClick({ target }: MouseEvent) {
-    this._handleUserInitiatedSelectItem(target as CDSContentSwitcherItem);
+    const currentItem = this._getCurrentItem(target as HTMLElement);
+    this._handleUserInitiatedSelectItem(currentItem as CDSContentSwitcherItem);
   }
 
   /**
