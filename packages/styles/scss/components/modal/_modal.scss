@@ -5,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:list';
 @use '../button';
 @use '../../config' as *;
 @use '../../breakpoint' as *;
@@ -18,6 +19,69 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/z-index' as *;
+
+:root {
+  --#{$prefix}-modal-kind-side-inset-start: #{$spacing-09};
+}
+
+$kind-side-sizes: (
+  xs: 16rem,
+  sm: 20rem,
+  md: 30rem,
+  lg: 40rem 50%,
+);
+
+@mixin set-kind-side-inline-size($size: map-get($kind-side-sizes, md)) {
+  /* any value is single value list */
+  inline-size: list.nth($size, 1);
+  @if list.length($size) > 1 {
+    min-inline-size: list.nth($size, 2);
+  }
+
+  max-inline-size: 100%;
+}
+
+@mixin modal-kind-side {
+  $kind-side-inset-start: var(
+    --#{$prefix}-modal-kind-side-inset-start,
+    $spacing-09
+  );
+
+  @each $size, $size_value in $kind-side-sizes {
+    .#{$prefix}--modal-container--#{$size} {
+      @include set-kind-side-inline-size($size_value);
+    }
+  }
+
+  align-items: flex-start;
+  inset-block-start: $kind-side-inset-start;
+
+  &.#{$prefix}--modal--kind-side-start {
+    justify-content: flex-start;
+  }
+
+  &.#{$prefix}--modal--kind-side-end {
+    justify-content: flex-end;
+  }
+
+  .#{$prefix}--modal-container {
+    block-size: calc(100% - #{$kind-side-inset-start});
+    max-block-size: calc(100% - #{$kind-side-inset-start});
+  }
+
+  &.#{$prefix}--modal--kind-side-start .#{$prefix}--modal-container {
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  &.#{$prefix}--modal--kind-side-end .#{$prefix}--modal-container {
+    transform: translate3d(100%, 0, 0);
+  }
+
+  &.#{$prefix}--modal--kind-side-end.is-visible .#{$prefix}--modal-container,
+  &.#{$prefix}--modal--kind-side-start.is-visible .#{$prefix}--modal-container {
+    transform: translate3d(0, 0, 0);
+  }
+}
 
 /// Modal styles
 /// @access public
@@ -517,4 +581,9 @@
     @include high-contrast-mode('focus');
   }
   /* stylelint-enable no-duplicate-selectors */
+
+  .#{$prefix}--modal--kind-side-start,
+  .#{$prefix}--modal--kind-side-end {
+    @include modal-kind-side();
+  }
 }
