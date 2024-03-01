@@ -1002,6 +1002,8 @@
   tr.#{$prefix}--expandable-row--hover.#{$prefix}--data-table--slug-row,
   tr.#{$prefix}--data-table--selected.#{$prefix}--parent-row.#{$prefix}--expandable-row--hover.#{$prefix}--data-table--slug-row {
     @include ai-table-gradient('hover');
+
+    background-attachment: fixed;
   }
 
   tr.#{$prefix}--parent-row.cds--data-table--selected.#{$prefix}--data-table--slug-row,
@@ -1009,6 +1011,8 @@
   tr.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row
     + .#{$prefix}--expandable-row {
     @include ai-table-gradient('selected');
+
+    background-attachment: fixed;
   }
 
   tr.#{$prefix}--data-table--slug-row.#{$prefix}--data-table--selected td,
