@@ -26,7 +26,8 @@
   },
   "scripts": {
     "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonMotion",
-    "clean": "rimraf es lib umd"
+    "clean": "rimraf es lib umd",
+    "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "devDependencies": {
     "@carbon/cli": "^10.34.2",
@@ -37,5 +38,8 @@
     "name": "@carbon/motion",
     "sassDir": "scss",
     "needs": "^1.3.0"
+  },
+  "dependencies": {
+    "@ibm/telemetry-js": "^1.2.1"
   }
 }

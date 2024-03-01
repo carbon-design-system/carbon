@@ -17,7 +17,8 @@
     "scss",
     "svg",
     "build-info.json",
-    "metadata.json"
+    "metadata.json",
+    "telemetry.yml"
   ],
   "keywords": [
     "ibm",
@@ -35,11 +36,15 @@
     "build": "yarn clean && node tasks/build.js",
     "ci-check": "node tasks/ci-check.js",
     "clean": "rimraf es lib metadata.json svg",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "yarn build",
+    "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "devDependencies": {
     "@carbon/cli": "^10.34.2",
     "@carbon/icon-build-helpers": "^0.34.2",
     "rimraf": "^3.0.2"
+  },
+  "dependencies": {
+    "@ibm/telemetry-js": "^1.2.1"
   }
 }

@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://unpkg.com/@ibm/telemetry-config-schema@v1/dist/config.schema.json
+version: 1
+projectId: e31e2f56-3767-407b-a854-ad7b9cd27677
+endpoint: https://collector-prod.1am6wm210aow.us-south.codeengine.appdomain.cloud/v1/metrics
+collect:
+  npm:
+    dependencies: null
+  jsx:
+    elements:
+      allowedAttributeNames:
+        # Icon
+        - aria-hidden
+        - aria-label
+        - aria-labelledby
+        - children
+        - className
+        - height
+        - preserveAspectRatio
+        - tabIndex
+        - viewBox
+        - width
+        - xmlns

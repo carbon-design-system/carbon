@@ -22,9 +22,13 @@
   "publishConfig": {
     "access": "public"
   },
+  "scripts": {
+    "postinstall": "ibmtelemetry --config=telemetry.yml"
+  },
   "dependencies": {
     "@babel/core": "^7.16.7",
     "@carbon/cli-reporter": "^10.5.0",
+    "@ibm/telemetry-js": "^1.2.1",
     "@octokit/plugin-retry": "^3.0.7",
     "@octokit/plugin-throttling": "^2.6.0",
     "@octokit/rest": "^16.28.1",

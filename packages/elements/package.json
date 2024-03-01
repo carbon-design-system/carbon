@@ -16,7 +16,8 @@
     "lib",
     "scss",
     "src",
-    "umd"
+    "umd",
+    "telemetry.yml"
   ],
   "keywords": [
     "ibm",
@@ -32,7 +33,8 @@
   },
   "scripts": {
     "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonElements && node tasks/build.js && carbon-cli check \"scss/*.scss\"",
-    "clean": "rimraf es lib umd && node tasks/clean.js"
+    "clean": "rimraf es lib umd && node tasks/clean.js",
+    "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "dependencies": {
     "@carbon/colors": "^10.37.2",
@@ -42,7 +44,8 @@
     "@carbon/layout": "^10.37.2",
     "@carbon/motion": "^10.29.2",
     "@carbon/themes": "^10.55.3",
-    "@carbon/type": "^10.45.3"
+    "@carbon/type": "^10.45.3",
+    "@ibm/telemetry-js": "^1.2.1"
   },
   "devDependencies": {
     "@carbon/cli": "^10.34.2",

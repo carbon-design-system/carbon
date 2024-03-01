@@ -25,10 +25,12 @@
   },
   "scripts": {
     "build": "yarn clean && node tasks/build.js",
-    "clean": "rimraf es lib"
+    "clean": "rimraf es lib",
+    "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "dependencies": {
-    "@carbon/icon-helpers": "^10.28.2"
+    "@carbon/icon-helpers": "^10.28.2",
+    "@ibm/telemetry-js": "^1.2.1"
   },
   "devDependencies": {
     "@carbon/cli-reporter": "^10.5.0",

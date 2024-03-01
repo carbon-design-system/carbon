@@ -26,12 +26,14 @@
   "scripts": {
     "ci-check": "carbon-cli check \"scss/**/*.scss\" -i \"**/generated/**\" -i \"**/compat/**\"",
     "clean": "rimraf es lib umd scss/generated",
-    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonThemes && babel-node --presets '@babel/preset-env' tasks/build.js && carbon-cli check \"scss/*.scss\""
+    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonThemes && babel-node --presets '@babel/preset-env' tasks/build.js && carbon-cli check \"scss/*.scss\"",
+    "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "dependencies": {
     "@carbon/colors": "^10.37.2",
     "@carbon/layout": "^10.37.2",
     "@carbon/type": "^10.45.3",
+    "@ibm/telemetry-js": "^1.2.1",
     "color": "^3.1.2"
   },
   "devDependencies": {
