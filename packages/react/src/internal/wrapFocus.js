@@ -11,6 +11,7 @@ import {
   DOCUMENT_POSITION_BROAD_FOLLOWING,
   selectorTabbable,
 } from './keyboard/navigation';
+import { tabbable } from 'tabbable';
 
 /**
  * @param {Node} node A DOM node.
@@ -41,47 +42,79 @@ function elementOrParentIsFloatingMenu(node, selectorsFloatingMenus = []) {
  */
 function wrapFocus({
   bodyNode,
+  hasTrapNodes,
   startTrapNode,
   endTrapNode,
   currentActiveNode,
   oldActiveNode,
   selectorsFloatingMenus,
+  event,
 }) {
-  if (
-    bodyNode &&
-    currentActiveNode &&
-    oldActiveNode &&
-    !bodyNode.contains(currentActiveNode) &&
-    !elementOrParentIsFloatingMenu(currentActiveNode, selectorsFloatingMenus)
-  ) {
-    const comparisonResult =
-      oldActiveNode.compareDocumentPosition(currentActiveNode);
+  if (hasTrapNodes) {
     if (
-      currentActiveNode === startTrapNode ||
-      comparisonResult & DOCUMENT_POSITION_BROAD_PRECEDING
+      bodyNode &&
+      currentActiveNode &&
+      oldActiveNode &&
+      !bodyNode.contains(currentActiveNode) &&
+      !elementOrParentIsFloatingMenu(currentActiveNode, selectorsFloatingMenus)
     ) {
-      const tabbable = findLast(
-        bodyNode.querySelectorAll(selectorTabbable),
-        (elem) => Boolean(elem.offsetParent)
-      );
-      if (tabbable) {
-        tabbable.focus();
-      } else if (bodyNode !== oldActiveNode) {
-        bodyNode.focus();
+      const comparisonResult =
+        oldActiveNode.compareDocumentPosition(currentActiveNode);
+      if (
+        currentActiveNode === startTrapNode ||
+        comparisonResult & DOCUMENT_POSITION_BROAD_PRECEDING
+      ) {
+        const tabbable = findLast(
+          bodyNode.querySelectorAll(selectorTabbable),
+          (elem) => Boolean(elem.offsetParent)
+        );
+        if (tabbable) {
+          tabbable.focus();
+        } else if (bodyNode !== oldActiveNode) {
+          bodyNode.focus();
+        }
+      } else if (
+        currentActiveNode === endTrapNode ||
+        comparisonResult & DOCUMENT_POSITION_BROAD_FOLLOWING
+      ) {
+        const tabbable = Array.prototype.find.call(
+          bodyNode.querySelectorAll(selectorTabbable),
+          (elem) => Boolean(elem.offsetParent)
+        );
+        if (tabbable) {
+          tabbable.focus();
+        } else if (bodyNode !== oldActiveNode) {
+          bodyNode.focus();
+        }
       }
-    } else if (
-      currentActiveNode === endTrapNode ||
-      comparisonResult & DOCUMENT_POSITION_BROAD_FOLLOWING
-    ) {
-      const tabbable = Array.prototype.find.call(
-        bodyNode.querySelectorAll(selectorTabbable),
-        (elem) => Boolean(elem.offsetParent)
-      );
-      if (tabbable) {
-        tabbable.focus();
-      } else if (bodyNode !== oldActiveNode) {
-        bodyNode.focus();
-      }
+    }
+  } else {
+    // The reason we're using tabbable is because it returns the tabbable
+    // items *in tab order*, whereas using our `selectorTabbable` only
+    // returns in DOM order
+    const tabbables = tabbable(bodyNode);
+    const firstTabbable = tabbables[0];
+    const lastTabbable = tabbables[tabbables.length - 1];
+
+    console.log(`---------------------------------`);
+    console.log(tabbables);
+    console.log(firstTabbable);
+    console.log(lastTabbable);
+    console.log(currentActiveNode);
+    console.log(oldActiveNode);
+    console.log(bodyNode);
+    console.log(currentActiveNode === lastTabbable);
+
+    if (currentActiveNode === lastTabbable && !event.shiftKey) {
+      // Cancel the current movement of focus because we're going to place it ourselves
+      event.preventDefault();
+      firstTabbable.focus();
+    }
+
+    if (currentActiveNode === firstTabbable && event.shiftKey) {
+      // Cancel the current movement of focus because we're going to place it ourselves
+      event.preventDefault();
+      lastTabbable.focus();
     }
   }
 }

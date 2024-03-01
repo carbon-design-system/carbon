@@ -65,6 +65,7 @@
     "lodash.throttle": "^4.1.1",
     "prop-types": "^15.7.2",
     "react-is": "^18.2.0",
+    "tabbable": "^6.2.0",
     "use-resize-observer": "^6.0.0",
     "wicg-inert": "^3.1.1",
     "window-or-global": "^1.0.1"
