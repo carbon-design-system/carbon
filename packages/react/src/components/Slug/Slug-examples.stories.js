@@ -40,10 +40,16 @@ import {
 } from '@carbon/icons-react';
 import { Slug, SlugContent, SlugActions } from '../Slug';
 import './slug-story.scss';
+import mdx from './SlugExamples.mdx';
 
 export default {
   title: 'Experimental/unstable__Slug/Examples',
   component: null,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 const args = {
