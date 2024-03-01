@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0-rc.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.4.0...@carbon/web-components@2.5.0-rc.0) (2024-03-01)
+
+
+### Bug Fixes
+
+* **chat-button:** update to latest with no icon option ([#11577](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11577)) ([4106d3d](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/4106d3d490a611ef99844fb6812b6790e5b678c3))
+* **content-switcher:** get current content-switcher-item on icon click ([#11602](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11602)) ([271295a](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/271295a242e04fb185b042b73f11bc03e1657953)), closes [#10963](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10963)
+* **date picker:** detect change range interval console error ([#11532](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11532)) ([eee2c73](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/eee2c73e434f4afed7eccde69017734d0deae0c9)), closes [#11490](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11490)
+* **dropdown:** visibility of warn-text and invalid-text ([#11573](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11573)) ([92225bb](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/92225bb4842bc9cefdf9d302836da8291483dd24))
+* side panel story slug alignment ([#11594](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11594)) ([b0ee3b7](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/b0ee3b759b91749137d69bd8f5f019c52edb867a))
+
+
+### Features
+
+* Add CWC Tearsheet ([#11545](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11545)) ([fd18753](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/fd18753e21dcd9f11f537da50ce113e2811d131f))
+* cwc stacking tearsheets ([#11586](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11586)) ([7a1842e](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/7a1842ef204f4196aaf62d67f45740ef41921933))
+
+
+
+
+
 # [2.4.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.4.0-rc.3...@carbon/web-components@2.4.0) (2024-02-26)
 
 
