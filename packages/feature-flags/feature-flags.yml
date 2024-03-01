@@ -34,3 +34,7 @@ feature-flags:
     description: >
       Enable the use of the v12 OverflowMenu leveraging the Menu subcomponents
     enabled: false
+  - name: enable-treeview-controllable
+    description: >
+      Enable the new TreeView controllable API
+    enabled: false

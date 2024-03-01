@@ -4390,7 +4390,7 @@ Map {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "as": Object {
-        "type": "string",
+        "type": "elementType",
       },
       "children": Object {
         "type": "node",
@@ -7207,6 +7207,9 @@ Map {
   },
   "StaticNotification" => Object {
     "propTypes": Object {
+      "actionButtonLabel": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },
@@ -7228,6 +7231,9 @@ Map {
       },
       "lowContrast": Object {
         "type": "bool",
+      },
+      "onActionButtonClick": Object {
+        "type": "func",
       },
       "statusIconDescription": Object {
         "type": "string",
@@ -9170,6 +9176,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "defaultIsExpanded": Object {
+        "type": "bool",
+      },
       "depth": Object {
         "type": "number",
       },
@@ -9256,6 +9265,9 @@ Map {
         },
         "className": Object {
           "type": "string",
+        },
+        "defaultIsExpanded": Object {
+          "type": "bool",
         },
         "depth": Object {
           "type": "number",
@@ -9350,6 +9362,9 @@ Map {
       },
       "multiselect": Object {
         "type": "bool",
+      },
+      "onActivate": Object {
+        "type": "func",
       },
       "onSelect": Object {
         "type": "func",
