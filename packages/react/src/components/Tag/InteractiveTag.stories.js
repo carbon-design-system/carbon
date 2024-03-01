@@ -16,6 +16,7 @@ import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import { Popover, PopoverContent } from '../Popover';
 import mdx from './InteractiveTag.mdx';
 import { usePrefix } from '../../internal/usePrefix';
+import './story.scss';
 
 export default {
   title: 'Experimental/unstable__InteractiveTag',
@@ -29,33 +30,9 @@ export default {
 
 export const Selectable = (args) => {
   return (
-    <>
-      <SelectableTag size="sm" className="some-class">
-        {'Tag content'}
-      </SelectableTag>
-      <SelectableTag size="sm" renderIcon={Asleep} className="some-class">
-        {'Tag content'}
-      </SelectableTag>
-      <br />
-      <SelectableTag className="some-class">{'Tag content'}</SelectableTag>
-      <SelectableTag renderIcon={Asleep} className="some-class">
-        {'Tag content'}
-      </SelectableTag>
-      <br />
-      <SelectableTag size="lg" className="some-class">
-        {'Tag content'}
-      </SelectableTag>
-      <SelectableTag size="lg" renderIcon={Asleep} className="some-class">
-        {'Tag content'}
-      </SelectableTag>
-      <hr />
-      <SelectableTag renderIcon={Asleep} className="some-class" {...args}>
-        {'Tag content'}
-      </SelectableTag>
-      <SelectableTag renderIcon={Asleep} className="some-class" {...args}>
-        {'Tag content'}
-      </SelectableTag>
-    </>
+    <SelectableTag renderIcon={Asleep} className="some-class" {...args}>
+      {'Tag content'}
+    </SelectableTag>
   );
 };
 
@@ -107,68 +84,7 @@ export const Operational = (args) => {
 
   return (
     <>
-      <OperationalTag type="red" size="sm">
-        {'Tag content'}
-      </OperationalTag>
-      <OperationalTag
-        size="sm"
-        type="red"
-        className="some-class"
-        renderIcon={Asleep}>
-        {'Tag content'}
-      </OperationalTag>
-      <br />
-      <OperationalTag type="red">{'Tag content'}</OperationalTag>
-      <OperationalTag type="red" className="some-class" renderIcon={Asleep}>
-        {'Tag content'}
-      </OperationalTag>
-      <br />
-      <OperationalTag type="red" size="lg">
-        {'Tag content'}
-      </OperationalTag>
-      <OperationalTag
-        size="lg"
-        type="red"
-        className="some-class"
-        renderIcon={Asleep}>
-        {'Tag content'}
-      </OperationalTag>
-      <hr />
-
       <div style={{ marginBottom: '1rem' }}>
-        <OperationalTag type="red" className="some-class" {...args}>
-          {'Tag content'}
-        </OperationalTag>
-        <OperationalTag type="magenta" className="some-class" {...args}>
-          {'Tag content'}
-        </OperationalTag>
-        <OperationalTag type="purple" className="some-class" {...args}>
-          {'Tag content'}
-        </OperationalTag>
-        <OperationalTag type="blue" className="some-class" {...args}>
-          {'Tag content'}
-        </OperationalTag>
-        <OperationalTag type="cyan" className="some-class" {...args}>
-          {'Tag content'}
-        </OperationalTag>
-        <OperationalTag type="teal" className="some-class" {...args}>
-          {'Tag content'}
-        </OperationalTag>
-        <OperationalTag type="green" className="some-class" {...args}>
-          {'Tag content'}
-        </OperationalTag>
-        <OperationalTag type="gray" className="some-class" {...args}>
-          {'Tag content'}
-        </OperationalTag>
-        <OperationalTag type="cool-gray" className="some-class" {...args}>
-          {'Tag content'}
-        </OperationalTag>
-        <OperationalTag type="warm-gray" className="some-class" {...args}>
-          {'Tag content'}
-        </OperationalTag>
-
-        <hr />
-
         <OperationalTag
           type="red"
           className="some-class"
@@ -240,14 +156,13 @@ export const Operational = (args) => {
           {'Tag content'}
         </OperationalTag>
       </div>
-      <hr />
 
       <h4>Interactive examples</h4>
       <div
         style={{
           display: 'flex',
           justifyContent: 'flex-start',
-          marginTop: '0.5rem',
+          marginTop: '1rem',
         }}>
         <Tooltip
           label="View more"
@@ -298,22 +213,19 @@ export const Operational = (args) => {
                 flexDirection: 'column',
                 padding: '1rem',
               }}>
-              <Tag
-                type="blue"
-                className="some-class"
-                style={{ inlineSize: '85px' }}>
+              <Tag type="blue" className="some-class" {...args}>
                 {'Tag 1 name'}
               </Tag>
-              <Tag type="blue" className="some-class">
+              <Tag type="blue" className="some-class" {...args}>
                 {'Tag 2 name'}
               </Tag>
-              <Tag type="blue" className="some-class">
+              <Tag type="blue" className="some-class" {...args}>
                 {'Tag 3 name'}
               </Tag>
-              <Tag type="blue" className="some-class">
+              <Tag type="blue" className="some-class" {...args}>
                 {'Tag 4 name'}
               </Tag>
-              <Tag type="blue" className="some-class">
+              <Tag type="blue" className="some-class" {...args}>
                 {'Tag 5 name'}
               </Tag>
             </div>
@@ -384,142 +296,6 @@ Operational.argTypes = {
 export const Dismissible = (args) => {
   return (
     <>
-      <Tag type="red" size="sm">
-        {'Tag content'}
-      </Tag>
-      <DismissibleTag
-        size="sm"
-        type="red"
-        className="some-class"
-        title="Clear Filter"
-        renderIcon={Asleep}>
-        {'Tag content'}
-      </DismissibleTag>
-      <DismissibleTag
-        size="sm"
-        type="red"
-        className="some-class"
-        title="Clear Filter">
-        {'Tag content'}
-      </DismissibleTag>
-      <br />
-      <Tag type="red">{'Tag content'}</Tag>
-      <DismissibleTag
-        type="red"
-        className="some-class"
-        title="Clear Filter"
-        renderIcon={Asleep}>
-        {'Tag content'}
-      </DismissibleTag>
-      <DismissibleTag type="red" className="some-class" title="Clear Filter">
-        {'Tag content'}
-      </DismissibleTag>
-      <br />
-      <Tag type="red" size="lg">
-        {'Tag content'}
-      </Tag>
-      <DismissibleTag
-        size="lg"
-        type="red"
-        className="some-class"
-        title="Clear Filter"
-        renderIcon={Asleep}>
-        {'Tag content'}
-      </DismissibleTag>
-      <DismissibleTag
-        size="lg"
-        type="red"
-        className="some-class"
-        title="Clear Filter">
-        {'Tag content'}
-      </DismissibleTag>
-      <hr />
-      <DismissibleTag
-        type="red"
-        className="some-class"
-        title="Clear Filter"
-        {...args}>
-        {'Tag content'}
-      </DismissibleTag>
-      <DismissibleTag
-        type="magenta"
-        className="some-class"
-        title="Clear Filter"
-        {...args}>
-        {'Tag content'}
-      </DismissibleTag>
-      <DismissibleTag
-        type="purple"
-        className="some-class"
-        title="Clear Filter"
-        {...args}>
-        {'Tag content'}
-      </DismissibleTag>
-      <DismissibleTag
-        type="blue"
-        className="some-class"
-        title="Clear Filter"
-        {...args}>
-        {'Tag content'}
-      </DismissibleTag>
-      <DismissibleTag
-        type="cyan"
-        className="some-class"
-        title="Clear Filter"
-        {...args}>
-        {'Tag content'}
-      </DismissibleTag>
-      <DismissibleTag
-        type="teal"
-        className="some-class"
-        title="Clear Filter"
-        {...args}>
-        {'Tag content'}
-      </DismissibleTag>
-      <DismissibleTag
-        type="green"
-        className="some-class"
-        title="Clear Filter"
-        {...args}>
-        {'Tag content'}
-      </DismissibleTag>
-      <DismissibleTag
-        type="gray"
-        className="some-class"
-        title="Clear Filter"
-        {...args}>
-        {'Tag content'}
-      </DismissibleTag>
-      <DismissibleTag
-        type="cool-gray"
-        className="some-class"
-        title="Clear Filter"
-        {...args}>
-        {'Tag content'}
-      </DismissibleTag>
-      <DismissibleTag
-        type="warm-gray"
-        className="some-class"
-        title="Clear Filter"
-        {...args}>
-        {'Tag content'}
-      </DismissibleTag>
-      <DismissibleTag
-        type="high-contrast"
-        className="some-class"
-        title="Clear Filter"
-        {...args}>
-        {'Tag content'}
-      </DismissibleTag>
-      <DismissibleTag
-        type="outline"
-        className="some-class"
-        title="Clear Filter"
-        {...args}>
-        {'Tag content'}
-      </DismissibleTag>
-      <hr />
-
       <DismissibleTag
         type="red"
         className="some-class"
@@ -620,10 +396,10 @@ export const Dismissible = (args) => {
   );
 };
 
-// Dismissible.args = {
-//   disabled: false,
-//   size: 'md',
-// };
+Dismissible.args = {
+  disabled: false,
+  size: 'md',
+};
 
 Dismissible.argTypes = {
   as: {
