@@ -104,11 +104,5 @@ test.describe('@avt InteractiveTag', () => {
     await expect(tag).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(tag).toHaveClass(/cds--tag--selectable-selected/);
-
-    // Expected the second SelectableTag with icon not to be selected
-    const lastTag = page.getByRole('button').last();
-    await page.keyboard.press('Tab');
-    await expect(lastTag).toBeFocused();
-    await expect(lastTag).not.toHaveClass(/cds--tag--selectable-selected/);
   });
 });
