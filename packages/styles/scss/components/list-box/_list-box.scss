@@ -331,7 +331,7 @@ $list-box-menu-width: convert.to-rem(300px);
 
   // populated input field
   .#{$prefix}--list-box__field .#{$prefix}--text-input {
-    padding-inline-end: convert.to-rem(72px);
+    padding-inline-end: convert.to-rem(80px);
   }
 
   // invalid && populated input field
@@ -342,7 +342,7 @@ $list-box-menu-width: convert.to-rem(300px);
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input {
     // to account for clear input button outline
-    padding-inline-end: convert.to-rem(98px);
+    padding-inline-end: convert.to-rem(114px);
   }
 
   .#{$prefix}--list-box[data-invalid]
@@ -354,7 +354,7 @@ $list-box-menu-width: convert.to-rem(300px);
     .#{$prefix}--text-input
     + .#{$prefix}--list-box__invalid-icon {
     // to account for clear input button outline
-    inset-inline-end: convert.to-rem(66px);
+    inset-inline-end: convert.to-rem(80px);
   }
 
   // empty input field
@@ -434,7 +434,7 @@ $list-box-menu-width: convert.to-rem(300px);
     inline-size: convert.to-rem(24px);
     inset-block-start: 50%;
     /* to preserve .5rem space between icons according to spec top/transform used to center the combobox clear selection icon in IE11 */
-    inset-inline-end: convert.to-rem(36px);
+    inset-inline-end: convert.to-rem(44px);
     transform: translateY(-50%);
     transition: background-color $duration-fast-01 motion(standard, productive);
     user-select: none;
@@ -986,5 +986,42 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box__selection > svg,
   .#{$prefix}--list-box__selection--multi > svg {
     @include high-contrast-mode('icon-fill');
+  }
+
+  .#{$prefix}--combo-box-controls {
+    @include reset;
+
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    block-size: 100%;
+    inline-size: convert.to-rem(80px);
+    // vertically center controls within parent container on IE11
+    inset-block-start: 50%;
+    inset-inline-end: 0;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--combo-box__rule-divider {
+    position: absolute;
+    z-index: z('overlay');
+    background-color: transparent;
+    block-size: convert.to-rem(16px);
+    inline-size: convert.to-rem(1px);
+  }
+
+  .#{$prefix}--list-box__selection
+    // + .#{$prefix}--combo-box-controls
+    + .#{$prefix}--combo-box__rule-divider:first-of-type {
+    background-color: $border-subtle-01;
+  }
+
+  .#{$prefix}--list-box__invalid-icon
+    + .#{$prefix}--combo-box-controls:has(.#{$prefix}--list-box__selection)
+    .#{$prefix}--combo-box__rule-divider:last-of-type {
+    background-color: $border-subtle-01;
+    margin-inline-end: 4rem;
   }
 }
