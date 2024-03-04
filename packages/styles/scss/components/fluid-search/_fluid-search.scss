@@ -71,16 +71,6 @@
     transition: background-color $duration-fast-01 motion(standard, productive);
   }
 
-  .#{$prefix}--search--fluid .#{$prefix}--search-close::before {
-    position: absolute;
-    display: block;
-    background: $border-subtle;
-    block-size: 1rem;
-    content: '';
-    inline-size: convert.to-rem(1px);
-    inset: auto convert.to-rem(-1px) convert.to-rem(14px) auto;
-  }
-
   .#{$prefix}--search--fluid
     .#{$prefix}--search-input:focus
     ~ .#{$prefix}--search-close:hover {
