@@ -400,6 +400,8 @@ export const ai = TokenGroup.create({
     'chat-avatar-bot',
     'chat-avatar-agent',
     'chat-avatar-user',
+    'chat-shell-background',
+    'chat-header-background',
   ],
 });
 
