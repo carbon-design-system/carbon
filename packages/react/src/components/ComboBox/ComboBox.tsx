@@ -720,25 +720,21 @@ const ComboBox = forwardRef(
                     />
                   )}
 
-                  <div className={`${prefix}--list-box-controls`}>
-                    {inputValue && (
-                      <ListBoxSelection
-                        clearSelection={clearSelection}
-                        translateWithId={translateWithId}
-                        disabled={disabled || readOnly}
-                        onClearSelection={handleSelectionClear}
-                        selectionCount={0}
-                      />
-                    )}
-                    <div className={`${prefix}--list-box__rule-divider`} />
-
-                    <ListBoxTrigger
-                      {...buttonProps}
-                      isOpen={isOpen}
+                  {inputValue && (
+                    <ListBoxSelection
+                      clearSelection={clearSelection}
                       translateWithId={translateWithId}
+                      disabled={disabled || readOnly}
+                      onClearSelection={handleSelectionClear}
+                      selectionCount={0}
                     />
-                    <div className={`${prefix}--list-box__rule-divider`} />
-                  </div>
+                  )}
+
+                  <ListBoxTrigger
+                    {...buttonProps}
+                    isOpen={isOpen}
+                    translateWithId={translateWithId}
+                  />
                 </div>
                 {normalizedSlug}
                 <ListBox.Menu

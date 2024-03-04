@@ -331,22 +331,21 @@
     padding-inline-end: $spacing-12;
   }
 
-  .#{$prefix}--list-box__wrapper--fluid
-    .#{$prefix}--list-box__selection
-    + .#{$prefix}--list-box__rule-divider:first-of-type {
-    background-color: $border-subtle-01;
-    margin-block-start: convert.to-rem(19px);
-    margin-inline-start: convert.to-rem(8px);
-  }
-
-  .#{$prefix}--list-box__wrapper--fluid
-    .#{$prefix}--list-box__invalid-icon
-    + .#{$prefix}--list-box-controls:has(.#{$prefix}--list-box__selection)
-    .#{$prefix}--list-box__rule-divider:last-of-type {
-    background-color: transparent;
-  }
-
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__selection {
     inset-inline-end: convert.to-rem(33px);
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box--warning,
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--invalid[data-invalid] {
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__menu-icon)
+      .#{$prefix}--list-box__selection::before {
+      position: absolute;
+      background-color: transparent;
+      block-size: convert.to-rem(16px);
+      content: '';
+      inline-size: convert.to-rem(1px);
+      margin-inline-end: 1.5rem;
+    }
   }
 }

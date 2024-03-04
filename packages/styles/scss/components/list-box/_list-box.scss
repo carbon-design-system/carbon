@@ -1025,39 +1025,25 @@ $list-box-menu-width: convert.to-rem(300px);
     @include high-contrast-mode('icon-fill');
   }
 
-  .#{$prefix}--list-box-controls {
-    @include reset;
-
+  .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__menu-icon)
+    .#{$prefix}--list-box__selection::after {
     position: absolute;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    block-size: 100%;
-    inline-size: convert.to-rem(73px);
-    // vertically center controls within parent container on IE11
-    inset-block-start: 50%;
-    inset-inline-end: 0;
-    transform: translateY(-50%);
-  }
-
-  .#{$prefix}--list-box__rule-divider {
-    position: absolute;
-    z-index: z('overlay');
-    background-color: transparent;
+    background-color: $border-subtle-01;
     block-size: convert.to-rem(16px);
+    content: '';
     inline-size: convert.to-rem(1px);
+    margin-inline-start: 1.5rem;
   }
-
-  .#{$prefix}--list-box__selection
-    + .#{$prefix}--list-box__rule-divider:first-of-type {
-    background-color: $border-subtle-01;
-  }
-
-  .#{$prefix}--list-box__invalid-icon
-    + .#{$prefix}--list-box-controls:has(.#{$prefix}--list-box__selection)
-    .#{$prefix}--list-box__rule-divider:last-of-type {
-    background-color: $border-subtle-01;
-    margin-inline-end: convert.to-rem(50px);
+  .#{$prefix}--list-box--warning,
+  .#{$prefix}--list-box--invalid[data-invalid] {
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__menu-icon)
+      .#{$prefix}--list-box__selection::before {
+      position: absolute;
+      background-color: $border-subtle-01;
+      block-size: convert.to-rem(16px);
+      content: '';
+      inline-size: convert.to-rem(1px);
+      margin-inline-end: 1.5rem;
+    }
   }
 }
