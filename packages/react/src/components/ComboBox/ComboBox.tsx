@@ -719,7 +719,6 @@ const ComboBox = forwardRef(
                       className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
                     />
                   )}
-
                   {inputValue && (
                     <ListBoxSelection
                       clearSelection={clearSelection}
@@ -729,7 +728,6 @@ const ComboBox = forwardRef(
                       selectionCount={0}
                     />
                   )}
-
                   <ListBoxTrigger
                     {...buttonProps}
                     isOpen={isOpen}

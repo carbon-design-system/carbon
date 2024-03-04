@@ -267,7 +267,6 @@ export const Filterable = () => {
         items={items}
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
-        invalid
       />
     </div>
   );
