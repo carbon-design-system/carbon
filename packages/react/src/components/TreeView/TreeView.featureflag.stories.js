@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,8 +8,13 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { Document, Folder } from '@carbon/icons-react';
-import { default as TreeView, TreeNode } from './';
-import './story.scss';
+import { Button, VStack } from '../../';
+
+import mdx from './TreeView.featureflag.mdx';
+
+import { TreeView, TreeNode } from './';
+
+import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
 
 const nodes = [
   {
@@ -166,89 +171,80 @@ const nodes = [
   },
 ];
 
-function renderTree({ nodes, expanded, withIcons = false }) {
+function renderTree(nodes) {
   if (!nodes) {
     return;
   }
-  return nodes.map(({ children, renderIcon, isExpanded, ...nodeProps }) => (
-    <TreeNode
-      key={nodeProps.id}
-      renderIcon={withIcons ? renderIcon : null}
-      isExpanded={expanded ?? isExpanded}
-      {...nodeProps}>
-      {renderTree({ nodes: children, expanded, withIcons })}
+
+  return nodes.map(({ children, isExpanded, ...nodeProps }) => (
+    <TreeNode key={nodeProps.id} defaultIsExpanded={isExpanded} {...nodeProps}>
+      {renderTree(children)}
     </TreeNode>
   ));
 }
 
 export default {
-  title: 'components/TreeView',
+  title: 'Experimental/Feature Flags/TreeView',
   component: TreeView,
   subcomponents: {
     TreeNode,
   },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
   args: {
     onSelect: action('onSelect'),
   },
-  argTypes: {
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-
-    className: {
-      table: {
-        disable: true,
-      },
-    },
-
-    label: {
-      table: {
-        disable: true,
-      },
-    },
-
-    onSelect: {
-      table: {
-        disable: true,
-      },
-    },
-  },
+  decorators: [
+    (Story) => (
+      <WithFeatureFlags>
+        <Story />
+      </WithFeatureFlags>
+    ),
+  ],
 };
 
-export const Default = () => (
-  <TreeView label="Tree View">{renderTree({ nodes })}</TreeView>
-);
+export const Playground = (args) => {
+  const [selected, setSelected] = useState([]);
+  const [active, setActive] = useState(null);
 
-export const WithIcons = () => (
-  <TreeView label="Tree View">
-    {renderTree({ nodes, withIcons: true })}
-  </TreeView>
-);
-
-export const WithControlledExpansion = () => {
-  const [expanded, setExpanded] = useState(undefined);
   return (
-    <>
-      <div style={{ marginBottom: '1rem' }}>
-        <button type="button" onClick={() => setExpanded(true)}>
-          expand all
-        </button>
-        <button type="button" onClick={() => setExpanded(false)}>
-          collapse all
-        </button>
+    <VStack gap={6}>
+      <VStack gap={2}>
+        <Button
+          kind="tertiary"
+          size="sm"
+          onClick={() => {
+            setSelected(['5-2']);
+          }}>
+          Select &quot;Databases&quot;
+        </Button>
+        <Button
+          kind="tertiary"
+          size="sm"
+          onClick={() => {
+            setActive('5-2');
+          }}>
+          Activate &quot;Databases&quot;
+        </Button>
+      </VStack>
+
+      <div>
+        <TreeView
+          label="Tree View"
+          {...args}
+          active={active}
+          onActivate={setActive}
+          selected={selected}
+          onSelect={setSelected}>
+          {renderTree(nodes)}
+        </TreeView>
       </div>
-      <TreeView label="Tree View">{renderTree({ nodes, expanded })}</TreeView>
-    </>
+    </VStack>
   );
 };
-
-export const Playground = (args) => (
-  <TreeView label="Tree View" {...args}>
-    {renderTree({ nodes })}
-  </TreeView>
-);
 
 Playground.args = {
   hideLabel: false,
@@ -256,7 +252,8 @@ Playground.args = {
 };
 
 Playground.argTypes = {
-  active: { control: { type: 'text' } },
+  active: { control: { disable: true } },
+  selected: { control: { disable: true } },
   size: {
     options: ['xs', 'sm'],
     control: { type: 'select' },

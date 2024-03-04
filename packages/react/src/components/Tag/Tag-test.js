@@ -9,6 +9,7 @@ import { Add } from '@carbon/icons-react';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import Tag from './';
+import { Slug } from '../Slug';
 
 describe('Tag', () => {
   describe('automated accessibility testing', () => {
@@ -55,5 +56,13 @@ describe('Tag', () => {
     );
 
     expect(screen.getByTestId('test')).toBeInTheDocument();
+  });
+
+  it('should respect slug prop', () => {
+    render(<Tag type="red" slug={<Slug />} />);
+
+    expect(
+      screen.getByRole('button', { name: 'AI - Show information' })
+    ).toBeInTheDocument();
   });
 });
