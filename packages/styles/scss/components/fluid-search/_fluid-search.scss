@@ -59,6 +59,7 @@
   }
 
   .#{$prefix}--search--fluid .#{$prefix}--search-magnifier-icon {
+    color: $icon-primary;
     inset: auto 1rem convert.to-rem(13px) auto;
     transform: none;
   }
