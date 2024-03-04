@@ -972,7 +972,7 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--warning
     .#{$prefix}--list-box__invalid-icon.#{$prefix}--list-box__invalid-icon--warning {
-    inset-inline-end: $spacing-11;
+    inset-inline-end: convert.to-rem(75px);
   }
 
   .#{$prefix}--list-box__wrapper--slug
