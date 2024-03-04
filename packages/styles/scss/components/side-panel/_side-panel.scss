@@ -1,0 +1,124 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:list';
+@use '../button';
+@use '../modal';
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+
+:root {
+  --#{$prefix}-side-panel-inset-start: #{$spacing-09};
+}
+
+$kind-side-sizes: (
+  xs: 16rem,
+  sm: 20rem,
+  md: 30rem,
+  lg: 40rem,
+  2xl: 40rem 75%,
+);
+
+@mixin set-kind-side-inline-size($size: map-get($kind-side-sizes, md)) {
+  /* any value is single value list */
+  inline-size: list.nth($size, 1);
+  @if list.length($size) > 1 {
+    min-inline-size: list.nth($size, 2);
+  }
+
+  max-inline-size: 100%;
+}
+
+/// SidePanel styles
+/// @access public
+/// @group side-panel
+@mixin side-panel {
+  .#{$prefix}--side-panel {
+    $kind-side-inset-start: var(
+      --#{$prefix}-side-panel-inset-start,
+      $spacing-09
+    );
+
+    align-items: flex-start;
+
+    &.#{$prefix}--side-panel--start {
+      justify-content: flex-start;
+    }
+
+    &.#{$prefix}--side-panel--end {
+      justify-content: flex-end;
+    }
+
+    .#{$prefix}--modal-container {
+      block-size: calc(100% - #{$kind-side-inset-start});
+      margin-block-start: $kind-side-inset-start;
+      max-block-size: calc(100% - #{$kind-side-inset-start});
+    }
+
+    @each $size, $size_value in $kind-side-sizes {
+      &.#{$prefix}--side-panel--#{$size} .#{$prefix}--modal-container {
+        @include set-kind-side-inline-size($size_value);
+      }
+    }
+
+    &.#{$prefix}--side-panel--start .#{$prefix}--modal-container {
+      transform: translate3d(-100%, 0, 0);
+    }
+
+    &.#{$prefix}--side-panel--end .#{$prefix}--modal-container {
+      transform: translate3d(100%, 0, 0);
+    }
+
+    &.#{$prefix}--side-panel.is-visible .#{$prefix}--modal-container {
+      transform: translate3d(0, 0, 0);
+    }
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      &.#{$prefix}--side-panel .#{$prefix}--modal-container {
+        transition: none;
+      }
+    }
+  }
+
+  /* These selectors are used to affect the element specified by the prop selectorPageContent */
+  .#{$prefix}--side-panel--selector-page-content {
+    transition: margin $duration-moderate-02 motion(exit, expressive);
+  }
+
+  .#{$prefix}--side-panel--selector-page-content[data-open] {
+    inline-size: auto;
+  }
+
+  .#{$prefix}--side-panel--selector-page-content[data-open='true'] {
+    inline-size: auto;
+    transition: margin $duration-moderate-02 motion(entrance, expressive);
+
+    @each $size, $size_value in $kind-side-sizes {
+      &[data-alignment='start'][data-size='#{$size}'] {
+        margin-inline-start: max(
+          list.nth($size-value, 1),
+          list.nth($size-value, -1)
+        );
+      }
+
+      &[data-alignment='end'][data-size='#{$size}'] {
+        margin-inline-end: max(
+          list.nth($size-value, 1),
+          list.nth($size-value, -1)
+        );
+      }
+    }
+  }
+
+  @media screen and (prefers-reduced-motion: reduce) {
+    .#{$prefix}--side-panel--selector-page-content,
+    .#{$prefix}--side-panel--selector-page-content[data-open] {
+      transition: none important;
+    }
+  }
+}
