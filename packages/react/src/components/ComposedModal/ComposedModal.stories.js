@@ -356,7 +356,8 @@ export const WithInlineLoading = () => {
   );
 };
 
-const ModalSide = (args) => {
+const ModalSide = (_args) => {
+  const { 'kind ': kind, ...args } = _args;
   const [open, setOpen] = useState(true);
 
   return (
@@ -368,7 +369,7 @@ const ModalSide = (args) => {
       <ComposedModal
         open={open}
         onClose={() => setOpen(false)}
-        kind={args['Kind']}
+        kind={kind}
         size={args.size}>
         <ModalHeader label="Account resources" title="Add a custom domain" />
         <ModalBody>
@@ -398,12 +399,12 @@ const ModalSide = (args) => {
 export const ModalSideKind = {
   parameters: {
     controls: {
-      include: ['Kind', 'size'],
+      include: ['kind ', 'size'],
     },
   },
   argTypes: {
-    Kind: {
-      description: `Optional: kind property ('start' or 'end')`,
+    'kind ': {
+      description: `Optional: kind property ('side-start' or 'side-end')`,
       control: {
         type: 'select',
         labels: {
@@ -419,6 +420,9 @@ export const ModalSideKind = {
         2: null,
       },
     },
+  },
+  args: {
+    'kind ': 0,
   },
   render: (args) => {
     return <ModalSide {...args} />;
