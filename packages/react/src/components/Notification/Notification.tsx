@@ -1183,6 +1183,11 @@ ActionableNotification.propTypes = {
 export interface StaticNotificationProps
   extends HTMLAttributes<HTMLDivElement> {
   /**
+   * Pass in the action button label that will be rendered within the ActionableNotification.
+   */
+  actionButtonLabel?: string;
+
+  /**
    * Specify the content
    */
   children?: ReactNode;
@@ -1209,6 +1214,11 @@ export interface StaticNotificationProps
   lowContrast?: boolean;
 
   /**
+   * Provide a function that is called when the action is clicked
+   */
+  onActionButtonClick?(): void;
+
+  /**
    * Provide a description for "status" icon that can be read by screen readers
    */
   statusIconDescription?: string;
@@ -1230,7 +1240,9 @@ export interface StaticNotificationProps
 }
 
 export function StaticNotification({
+  actionButtonLabel,
   children,
+  onActionButtonClick,
   title,
   titleId,
   subtitle,
@@ -1242,10 +1254,10 @@ export function StaticNotification({
 }: StaticNotificationProps) {
   const prefix = usePrefix();
   const containerClassName = cx(className, {
-    [`${prefix}--inline-notification`]: true,
-    [`${prefix}--inline-notification--low-contrast`]: lowContrast,
-    [`${prefix}--inline-notification--${kind}`]: kind,
-    [`${prefix}--inline-notification--hide-close-button`]: true,
+    [`${prefix}--actionable-notification`]: true,
+    [`${prefix}--actionable-notification--low-contrast`]: lowContrast,
+    [`${prefix}--actionable-notification--${kind}`]: kind,
+    [`${prefix}--actionable-notification--hide-close-button`]: true,
   });
 
   const ref = useRef(null);
@@ -1256,36 +1268,48 @@ export function StaticNotification({
 
   return (
     <div ref={ref} {...rest} className={containerClassName}>
-      <div className={`${prefix}--inline-notification__details`}>
+      <div className={`${prefix}--actionable-notification__details`}>
         <NotificationIcon
           notificationType="inline"
           kind={kind}
           iconDescription={statusIconDescription || `${kind} icon`}
         />
-        <div className={`${prefix}--inline-notification__text-wrapper`}>
+        <div className={`${prefix}--actionable-notification__text-wrapper`}>
           {title && (
             <Text
               as="div"
               id={titleId}
-              className={`${prefix}--inline-notification__title`}>
+              className={`${prefix}--actionable-notification__title`}>
               {title}
             </Text>
           )}
           {subtitle && (
             <Text
               as="div"
-              className={`${prefix}--inline-notification__subtitle`}>
+              className={`${prefix}--actionable-notification__subtitle`}>
               {subtitle}
             </Text>
           )}
           {children}
         </div>
       </div>
+      <div className={`${prefix}--actionable-notification__button-wrapper`}>
+        {actionButtonLabel && (
+          <NotificationActionButton onClick={onActionButtonClick} inline>
+            {actionButtonLabel}
+          </NotificationActionButton>
+        )}
+      </div>
     </div>
   );
 }
 
 StaticNotification.propTypes = {
+  /**
+   * Pass in the action button label that will be rendered within the ActionableNotification.
+   */
+  actionButtonLabel: PropTypes.string,
+
   /**
    * Specify the content
    */
@@ -1312,6 +1336,11 @@ StaticNotification.propTypes = {
    * Specify whether you are using the low contrast variant of the StaticNotification.
    */
   lowContrast: PropTypes.bool,
+
+  /**
+   * Provide a function that is called when the action is clicked
+   */
+  onActionButtonClick: PropTypes.func,
 
   /**
    * Provide a description for "status" icon that can be read by screen readers
