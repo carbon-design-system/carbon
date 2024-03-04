@@ -720,7 +720,7 @@ const ComboBox = forwardRef(
                     />
                   )}
 
-                  <div className={`${prefix}--combo-box-controls`}>
+                  <div className={`${prefix}--list-box-controls`}>
                     {inputValue && (
                       <ListBoxSelection
                         clearSelection={clearSelection}
@@ -730,14 +730,14 @@ const ComboBox = forwardRef(
                         selectionCount={0}
                       />
                     )}
-                    <div className={`${prefix}--combo-box__rule-divider`} />
+                    <div className={`${prefix}--list-box__rule-divider`} />
 
                     <ListBoxTrigger
                       {...buttonProps}
                       isOpen={isOpen}
                       translateWithId={translateWithId}
                     />
-                    <div className={`${prefix}--combo-box__rule-divider`} />
+                    <div className={`${prefix}--list-box__rule-divider`} />
                   </div>
                 </div>
                 {normalizedSlug}

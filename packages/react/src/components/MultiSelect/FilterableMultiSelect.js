@@ -437,26 +437,30 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                         className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
                       />
                     )}
-                    {inputValue && (
-                      <ListBoxSelection
-                        clearSelection={clearInputValue}
-                        disabled={disabled}
+                    <div className={`${prefix}--list-box-controls`}>
+                      {inputValue && (
+                        <ListBoxSelection
+                          clearSelection={clearInputValue}
+                          disabled={disabled}
+                          translateWithId={translateWithId}
+                          onMouseUp={(event) => {
+                            // If we do not stop this event from propagating,
+                            // it seems like Downshift takes our event and
+                            // prevents us from getting `onClick` /
+                            // `clearSelection` from the underlying <button> in
+                            // ListBoxSelection
+                            event.stopPropagation();
+                          }}
+                        />
+                      )}
+                      <div className={`${prefix}--list-box__rule-divider`} />
+                      <ListBoxTrigger
+                        {...buttonProps}
+                        isOpen={isOpen}
                         translateWithId={translateWithId}
-                        onMouseUp={(event) => {
-                          // If we do not stop this event from propagating,
-                          // it seems like Downshift takes our event and
-                          // prevents us from getting `onClick` /
-                          // `clearSelection` from the underlying <button> in
-                          // ListBoxSelection
-                          event.stopPropagation();
-                        }}
                       />
-                    )}
-                    <ListBoxTrigger
-                      {...buttonProps}
-                      isOpen={isOpen}
-                      translateWithId={translateWithId}
-                    />
+                      <div className={`${prefix}--list-box__rule-divider`} />
+                    </div>
                   </div>
                   {normalizedSlug}
                   {isOpen ? (
