@@ -909,12 +909,12 @@ $list-box-menu-width: convert.to-rem(300px);
 
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::before {
     display: none;
-    inset-inline-start: -8px;
+    inset-inline-start: convert.to-rem(-8px);
   }
 
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::after {
     display: block;
-    inset-inline-end: -8px;
+    inset-inline-end: convert.to-rem(-8px);
   }
 
   .#{$prefix}--list-box__wrapper--slug
