@@ -12,7 +12,8 @@
   "files": [
     "css",
     "scss",
-    "index.scss"
+    "index.scss",
+    "telemetry.yml"
   ],
   "keywords": [
     "eyeglass-module",
@@ -30,10 +31,12 @@
   },
   "scripts": {
     "build": "yarn clean && carbon-cli inline && carbon-cli check \"scss/*.scss\"",
-    "clean": "rimraf scss/_inlined scss/vendor"
+    "clean": "rimraf scss/_inlined scss/vendor",
+    "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "dependencies": {
-    "@carbon/layout": "^11.20.0"
+    "@carbon/layout": "^11.20.0",
+    "@ibm/telemetry-js": "^1.2.1"
   },
   "devDependencies": {
     "@carbon/cli": "^11.15.0",

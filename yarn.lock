@@ -1775,6 +1775,7 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^7.18.2"
     "@carbon/cli-reporter": "npm:^10.7.0"
+    "@ibm/telemetry-js": "npm:^1.2.1"
     "@octokit/plugin-retry": "npm:^3.0.7"
     "@octokit/plugin-throttling": "npm:^4.0.0"
     "@octokit/rest": "npm:^19.0.0"
@@ -1815,6 +1816,7 @@ __metadata:
     "@carbon/cli-reporter": "npm:^10.7.0"
     "@carbon/scss-generator": "npm:^10.18.0"
     "@carbon/test-utils": "npm:^10.30.0"
+    "@ibm/telemetry-js": "npm:^1.2.1"
     change-case: "npm:^4.1.1"
     fs-extra: "npm:^11.0.0"
     rimraf: "npm:^5.0.0"
@@ -1833,6 +1835,7 @@ __metadata:
     "@carbon/motion": "npm:^11.16.0"
     "@carbon/themes": "npm:^11.32.0"
     "@carbon/type": "npm:^11.25.0"
+    "@ibm/telemetry-js": "npm:^1.2.1"
     fs-extra: "npm:^11.0.0"
     klaw-sync: "npm:^6.0.0"
     replace-in-file: "npm:^7.0.0"
@@ -1850,6 +1853,7 @@ __metadata:
     "@babel/template": "npm:^7.16.7"
     "@babel/types": "npm:^7.18.4"
     "@carbon/scss-generator": "npm:^10.18.0"
+    "@ibm/telemetry-js": "npm:^1.2.1"
     "@rollup/plugin-babel": "npm:^6.0.0"
     "@rollup/plugin-node-resolve": "npm:^15.0.0"
     change-case: "npm:^4.1.2"
@@ -1874,6 +1878,7 @@ __metadata:
   dependencies:
     "@carbon/cli": "npm:^11.15.0"
     "@carbon/layout": "npm:^11.20.0"
+    "@ibm/telemetry-js": "npm:^1.2.1"
     rimraf: "npm:^5.0.0"
   languageName: unknown
   linkType: soft
@@ -1919,6 +1924,7 @@ __metadata:
   resolution: "@carbon/icon-helpers@workspace:packages/icon-helpers"
   dependencies:
     "@carbon/cli": "npm:^11.15.0"
+    "@ibm/telemetry-js": "npm:^1.2.1"
     rimraf: "npm:^5.0.0"
     typescript-config-carbon: "npm:^0.2.0"
   languageName: unknown
@@ -1944,7 +1950,7 @@ __metadata:
     "@carbon/icon-build-helpers": "npm:^1.22.0"
     "@carbon/icon-helpers": "npm:^10.46.0"
     "@carbon/icons": "npm:^11.37.0"
-    "@carbon/telemetry": "npm:0.1.0"
+    "@ibm/telemetry-js": "npm:^1.2.1"
     prop-types: "npm:^15.7.2"
     rimraf: "npm:^5.0.0"
   peerDependencies:
@@ -1959,6 +1965,7 @@ __metadata:
     "@carbon/cli-reporter": "npm:^10.7.0"
     "@carbon/icon-helpers": "npm:^10.46.0"
     "@carbon/icons": "npm:^11.37.0"
+    "@ibm/telemetry-js": "npm:^1.2.1"
     fs-extra: "npm:^11.0.0"
     prettier: "npm:^2.8.8"
     rimraf: "npm:^5.0.0"
@@ -1973,6 +1980,7 @@ __metadata:
   dependencies:
     "@carbon/cli": "npm:^11.15.0"
     "@carbon/icon-build-helpers": "npm:^1.22.0"
+    "@ibm/telemetry-js": "npm:^1.2.1"
     rimraf: "npm:^5.0.0"
   languageName: unknown
   linkType: soft
@@ -1992,6 +2000,7 @@ __metadata:
     "@carbon/cli-reporter": "npm:^10.7.0"
     "@carbon/scss-generator": "npm:^10.18.0"
     "@carbon/test-utils": "npm:^10.30.0"
+    "@ibm/telemetry-js": "npm:^1.2.1"
     core-js: "npm:^3.16.0"
     rimraf: "npm:^5.0.0"
   languageName: unknown
@@ -2002,6 +2011,7 @@ __metadata:
   resolution: "@carbon/motion@workspace:packages/motion"
   dependencies:
     "@carbon/cli": "npm:^11.15.0"
+    "@ibm/telemetry-js": "npm:^1.2.1"
     rimraf: "npm:^5.0.0"
   languageName: unknown
   linkType: soft
@@ -2013,7 +2023,7 @@ __metadata:
     "@carbon/icon-build-helpers": "npm:^1.22.0"
     "@carbon/icon-helpers": "npm:^10.46.0"
     "@carbon/pictograms": "npm:^12.31.0"
-    "@carbon/telemetry": "npm:0.1.0"
+    "@ibm/telemetry-js": "npm:^1.2.1"
     prop-types: "npm:^15.7.2"
     rimraf: "npm:^5.0.0"
   peerDependencies:
@@ -2026,6 +2036,7 @@ __metadata:
   resolution: "@carbon/pictograms@workspace:packages/pictograms"
   dependencies:
     "@carbon/icon-build-helpers": "npm:^1.22.0"
+    "@ibm/telemetry-js": "npm:^1.2.1"
     rimraf: "npm:^5.0.0"
   languageName: unknown
   linkType: soft
@@ -2139,6 +2150,7 @@ __metadata:
     "@carbon/themes": "npm:^11.32.0"
     "@carbon/type": "npm:^11.25.0"
     "@ibm/plex": "npm:6.0.0-next.6"
+    "@ibm/telemetry-js": "npm:^1.2.1"
     autoprefixer: "npm:^10.4.7"
     browserslist-config-carbon: "npm:^11.2.0"
     css: "npm:^3.0.0"
@@ -2192,6 +2204,7 @@ __metadata:
     "@carbon/scss-generator": "npm:^10.18.0"
     "@carbon/test-utils": "npm:^10.30.0"
     "@carbon/type": "npm:^11.25.0"
+    "@ibm/telemetry-js": "npm:^1.2.1"
     change-case: "npm:^4.1.1"
     color: "npm:^4.0.0"
     core-js: "npm:^3.16.0"
@@ -2209,6 +2222,7 @@ __metadata:
     "@carbon/grid": "npm:^11.21.0"
     "@carbon/layout": "npm:^11.20.0"
     "@carbon/test-utils": "npm:^10.30.0"
+    "@ibm/telemetry-js": "npm:^1.2.1"
     change-case: "npm:^4.1.1"
     css: "npm:^3.0.0"
     rimraf: "npm:^5.0.0"
@@ -2219,6 +2233,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/upgrade@workspace:packages/upgrade"
   dependencies:
+    "@ibm/telemetry-js": "npm:^1.2.1"
     chalk: "npm:^4.1.1"
     change-case: "npm:^4.1.2"
     esbuild: "npm:^0.20.0"
