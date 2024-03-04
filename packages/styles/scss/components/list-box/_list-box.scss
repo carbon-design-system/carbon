@@ -893,7 +893,7 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: calc($spacing-08 + 8px);
+    inset-inline-end: calc($spacing-08 + 4px);
     margin-block-start: convert.to-rem(0.5px);
     transform: translateY(-50%);
   }
