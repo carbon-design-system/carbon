@@ -893,8 +893,28 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: $spacing-08;
+    inset-inline-end: calc($spacing-08 + 8px);
+    margin-block-start: convert.to-rem(0.5px);
     transform: translateY(-50%);
+  }
+
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::after,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::before {
+    position: absolute;
+    background-color: $border-subtle-01;
+    block-size: convert.to-rem(16px);
+    content: '';
+    inline-size: convert.to-rem(1px);
+  }
+
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::before {
+    display: none;
+    inset-inline-start: -8px;
+  }
+
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::after {
+    display: block;
+    inset-inline-end: -8px;
   }
 
   .#{$prefix}--list-box__wrapper--slug
@@ -943,29 +963,46 @@ $list-box-menu-width: convert.to-rem(300px);
   }
 
   .#{$prefix}--list-box__wrapper--slug
-    .#{$prefix}--list-box--invalid
-    .#{$prefix}--slug,
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--text-input--empty
+    + .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--list-box__invalid-icon,
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--warning
-    .#{$prefix}--slug {
-    inset-inline-end: $spacing-10;
+    .#{$prefix}--list-box__invalid-icon.#{$prefix}--list-box__invalid-icon--warning {
+    inset-inline-end: $spacing-11;
   }
 
   .#{$prefix}--list-box__wrapper--slug
-    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
-    ~ .#{$prefix}--slug {
-    inset-inline-end: $spacing-10;
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--slug::before,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--slug::before {
+    display: block;
   }
 
   .#{$prefix}--list-box__wrapper--slug
-    .#{$prefix}--list-box--invalid
     .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
     ~ .#{$prefix}--slug,
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--warning
     .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
     ~ .#{$prefix}--slug {
-    inset-inline-end: convert.to-rem(88px);
+    inset-inline-end: calc($spacing-10 + 5px);
+  }
+
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    .#{$prefix}--list-box__invalid-icon {
+    inset-inline-end: convert.to-rem(100px);
   }
 
   // Windows HCM fix
