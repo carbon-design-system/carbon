@@ -15,6 +15,7 @@ import ButtonSet from '../ButtonSet';
 import InlineLoading from '../InlineLoading';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import wrapFocus, {
+  wrapFocusWithoutSentinels,
   elementOrParentIsFloatingMenu,
 } from '../../internal/wrapFocus';
 import debounce from 'lodash.debounce';
@@ -284,12 +285,25 @@ const Modal = React.forwardRef(function Modal(
       if (match(evt, keys.Escape)) {
         onRequestClose(evt);
       }
+
       if (
         match(evt, keys.Enter) &&
         shouldSubmitOnEnter &&
         !isCloseButton(evt.target as Element)
       ) {
         onRequestSubmit(evt);
+      }
+
+      if (
+        focusTrapWithoutSentinels &&
+        match(evt, keys.Tab) &&
+        innerModal.current
+      ) {
+        wrapFocusWithoutSentinels({
+          containerNode: innerModal.current,
+          currentActiveNode: evt.target,
+          event: evt as any,
+        });
       }
     }
   }
@@ -563,32 +577,37 @@ const Modal = React.forwardRef(function Modal(
     </div>
   );
 
+  const focusTrapWithoutSentinels = true; // TODO: replace with a feature flag
   return (
     <div
       {...rest}
       onKeyDown={handleKeyDown}
       onMouseDown={handleMousedown}
-      onBlur={handleBlur}
+      onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
       className={modalClasses}
       role="presentation"
       ref={ref}>
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-      <span
-        ref={startTrap}
-        tabIndex={0}
-        role="link"
-        className={`${prefix}--visually-hidden`}>
-        Focus sentinel
-      </span>
+      {!focusTrapWithoutSentinels && (
+        <span
+          ref={startTrap}
+          tabIndex={0}
+          role="link"
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </span>
+      )}
       {modalBody}
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-      <span
-        ref={endTrap}
-        tabIndex={0}
-        role="link"
-        className={`${prefix}--visually-hidden`}>
-        Focus sentinel
-      </span>
+      {!focusTrapWithoutSentinels && (
+        <span
+          ref={endTrap}
+          tabIndex={0}
+          role="link"
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </span>
+      )}
     </div>
   );
 });

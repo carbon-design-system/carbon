@@ -12,7 +12,8 @@ import window from 'window-or-global';
 import OptimizedResize from './OptimizedResize';
 import { selectorFocusable, selectorTabbable } from './keyboard/navigation';
 import { warning } from './warning';
-import wrapFocus from './wrapFocus';
+import wrapFocus, { wrapFocusWithoutSentinels } from './wrapFocus';
+import { match, keys } from '../internal/keyboard';
 import { PrefixContext } from './usePrefix';
 
 /**
@@ -453,30 +454,54 @@ class FloatingMenu extends React.Component {
     }
   };
 
+  /**
+   * Keydown handler for when focus wrap behavior is enabled
+   * @param {Event} event
+   */
+  handleKeyDown = (event) => {
+    if (match(event, keys.Tab) && this._menuBody) {
+      wrapFocusWithoutSentinels({
+        containerNode: this._menuBody,
+        currentActiveNode: event.target,
+        event,
+      });
+    }
+  };
+
   render() {
     const { context: prefix } = this;
+    const focusTrapWithoutSentinels = true; // TODO: replace with a feature flag
 
     if (typeof document !== 'undefined') {
       const { focusTrap, target } = this.props;
       return ReactDOM.createPortal(
-        <div onBlur={focusTrap ? this.handleBlur : null}>
+        //eslint-disable-next-line jsx-a11y/no-static-element-interactions
+        <div
+          onBlur={
+            focusTrap && !focusTrapWithoutSentinels ? this.handleBlur : () => {}
+          }
+          onKeyDown={focusTrapWithoutSentinels ? this.handleKeyDown : () => {}}>
           {/* Non-translatable: Focus management code makes this `<span>` not actually read by screen readers */}
-          <span
-            ref={this.startSentinel}
-            tabIndex="0"
-            role="link"
-            className={`${prefix}--visually-hidden`}>
-            Focus sentinel
-          </span>
+          {!focusTrapWithoutSentinels && (
+            <span
+              ref={this.startSentinel}
+              tabIndex="0"
+              role="link"
+              className={`${prefix}--visually-hidden`}>
+              Focus sentinel
+            </span>
+          )}
           {this._getChildrenWithProps()}
           {/* Non-translatable: Focus management code makes this `<span>` not actually read by screen readers */}
-          <span
-            ref={this.endSentinel}
-            tabIndex="0"
-            role="link"
-            className={`${prefix}--visually-hidden`}>
-            Focus sentinel
-          </span>
+          {!focusTrapWithoutSentinels && (
+            <span
+              ref={this.endSentinel}
+              tabIndex="0"
+              role="link"
+              className={`${prefix}--visually-hidden`}>
+              Focus sentinel
+            </span>
+          )}
         </div>,
         !target ? document.body : target()
       );

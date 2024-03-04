@@ -19,11 +19,9 @@ import mergeRefs from '../../tools/mergeRefs';
 import cx from 'classnames';
 import toggleClass from '../../tools/toggleClass';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
-import wrapFocus from '../../internal/wrapFocus';
+import wrapFocus, { wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
-import { tabbable } from 'tabbable';
-import { useWindowEvent } from '../../internal/useEvent';
 
 export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
   /** Specify the content to be placed in the ModalBody. */
@@ -260,37 +258,53 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       };
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    function handleKeyDown(evt) {
-      evt.stopPropagation();
-      if (match(evt, keys.Escape)) {
-        closeModal(evt);
+    function handleKeyDown(event) {
+      event.stopPropagation();
+      if (match(event, keys.Escape)) {
+        closeModal(event);
       }
 
-      if (open && match(evt, keys.Tab) && innerModal.current) {
-        console.log(`onKeyDown`);
-        const { current: bodyNode } = innerModal;
-
-        wrapFocus({
-          bodyNode,
-          hasTrapNodes: false,
-          startTrapNode: null,
-          endTrapNode: null,
-          currentActiveNode: evt.target,
-          oldActiveNode: null,
-          selectorsFloatingMenus: selectorsFloatingMenus?.filter(
-            Boolean
-          ) as string[],
-          event: evt,
+      if (
+        focusTrapWithoutSentinels &&
+        open &&
+        match(event, keys.Tab) &&
+        innerModal.current
+      ) {
+        wrapFocusWithoutSentinels({
+          containerNode: innerModal.current,
+          currentActiveNode: event.target,
+          event: event,
         });
       }
 
-      onKeyDown?.(evt);
+      onKeyDown?.(event);
     }
     function handleMousedown(evt: MouseEvent) {
       evt.stopPropagation();
       const isInside = innerModal.current?.contains(evt.target as Node);
       if (!isInside && !preventCloseOnClickOutside) {
         closeModal(evt);
+      }
+    }
+
+    function handleBlur({
+      target: oldActiveNode,
+      relatedTarget: currentActiveNode,
+    }) {
+      if (open && currentActiveNode && oldActiveNode && innerModal.current) {
+        const { current: bodyNode } = innerModal;
+        const { current: startSentinelNode } = startSentinel;
+        const { current: endSentinelNode } = endSentinel;
+        wrapFocus({
+          bodyNode,
+          startTrapNode: startSentinelNode,
+          endTrapNode: endSentinelNode,
+          currentActiveNode,
+          oldActiveNode,
+          selectorsFloatingMenus: selectorsFloatingMenus?.filter(
+            Boolean
+          ) as string[],
+        });
       }
     }
 
@@ -387,13 +401,14 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       });
     }
 
+    const focusTrapWithoutSentinels = true; // TODO: replace with a feature flag
     return (
       <div
         {...rest}
         role="presentation"
         ref={ref}
         aria-hidden={!open}
-        onKeyDown={onKeyDown}
+        onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
         onMouseDown={handleMousedown}
         onKeyDown={handleKeyDown}
         className={modalClass}>
@@ -404,24 +419,27 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
           aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}
           aria-labelledby={ariaLabelledBy}>
           {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
-
-          {/* <button
-            type="button"
-            ref={startSentinel}
-            className={`${prefix}--visually-hidden`}>
-            Focus sentinel
-          </button> */}
+          {!focusTrapWithoutSentinels && (
+            <button
+              type="button"
+              ref={startSentinel}
+              className={`${prefix}--visually-hidden`}>
+              Focus sentinel
+            </button>
+          )}
           <div ref={innerModal} className={`${prefix}--modal-container-body`}>
             {normalizedSlug}
             {childrenWithProps}
           </div>
           {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
-          {/* <button
-            type="button"
-            ref={endSentinel}
-            className={`${prefix}--visually-hidden`}>
-            Focus sentinel
-          </button> */}
+          {!focusTrapWithoutSentinels && (
+            <button
+              type="button"
+              ref={endSentinel}
+              className={`${prefix}--visually-hidden`}>
+              Focus sentinel
+            </button>
+          )}
         </div>
       </div>
     );
