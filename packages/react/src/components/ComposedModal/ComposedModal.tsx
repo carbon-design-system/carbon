@@ -22,6 +22,7 @@ import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsT
 import wrapFocus from '../../internal/wrapFocus';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
+import { ModalInfluencer } from './ModalInfluencer';
 
 export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
   /** Specify the content to be placed in the ModalBody. */
@@ -203,6 +204,8 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   /** Specify the CSS selectors that match the floating menus. */
   selectorsFloatingMenus?: Array<string | null | undefined>;
 
+  kind?: '' | 'tearsheet';
+
   size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
@@ -221,6 +224,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       containerClassName,
       danger,
       isFullWidth,
+      kind,
       onClose,
       onKeyDown,
       open,
@@ -237,6 +241,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     const prefix = usePrefix();
     const [isOpen, setIsOpen] = useState<boolean>(!!open);
     const [wasOpen, setWasOpen] = useState<boolean>(!!open);
+    const [influencerLocation, setInfluencerLocation] = useState(null);
     const innerModal = useRef<HTMLDivElement>(null);
     const button = useRef<HTMLButtonElement>(null);
     const startSentinel = useRef<HTMLButtonElement>(null);
@@ -300,12 +305,28 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       }
     }
 
+    useEffect(() => {
+      const influencer = React.Children.toArray(children).find(
+        (child) =>
+          isElement(child) &&
+          child.type === React.createElement(ModalInfluencer).type
+      );
+      if (influencer && influencer?.props) {
+        setInfluencerLocation(influencer?.props?.location);
+      } else {
+        setInfluencerLocation(null);
+      }
+    }, [children]);
+
     const modalClass = cx(
       `${prefix}--modal`,
       {
         'is-visible': isOpen,
         [`${prefix}--modal--danger`]: danger,
         [`${prefix}--modal--slug`]: slug,
+        [`${prefix}--modal--kind-${kind}`]: kind,
+        [`${prefix}--modal__influencer--${influencerLocation}`]:
+          influencerLocation,
       },
       customClassName
     );
@@ -319,6 +340,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
 
     // Generate aria-label based on Modal Header label if one is not provided (L253)
     let generatedAriaLabel;
+    0;
     const childrenWithProps = React.Children.toArray(children).map((child) => {
       switch (true) {
         case isElement(child) &&
@@ -339,7 +361,6 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
           >;
           return React.cloneElement(el, { closeModal, inputref: button });
         }
-
         default:
           return child;
       }
@@ -464,6 +485,11 @@ ComposedModal.propTypes = {
    * Specify whether the Modal content should have any inner padding.
    */
   isFullWidth: PropTypes.bool,
+
+  /**
+   * Specify an optional location for the side kind
+   */
+  kind: PropTypes.oneOf(['', 'tearsheet']),
 
   /**
    * Provide a ref to return focus to once the modal is closed.

@@ -5,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:list';
 @use '../button';
 @use '../../config' as *;
 @use '../../breakpoint' as *;
@@ -18,6 +19,32 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/z-index' as *;
+
+@mixin modal-kind-tearsheet {
+  align-items: flex-end;
+
+  .#{$prefix}--modal-container {
+    block-size: 100%;
+    max-block-size: calc(100% - #{$spacing-11});
+    transform: translate3d(0, calc(min(95vh, 500px)), 0);
+  }
+
+  &.#{$prefix}--modal__influencer--start .#{$prefix}--modal-container {
+    grid-template-areas: 'header header' 'influencer content' 'influencer footer';
+    grid-template-columns: minmax(25%, 200px) 1fr;
+  }
+
+  &.#{$prefix}--modal__influencer--end .#{$prefix}--modal-container {
+    grid-template-areas: 'header header' 'content influencer' 'footer footer';
+    grid-template-columns: 1fr minmax(25%, 200px);
+  }
+
+  .#{$prefix}--modal-influencer {
+    padding: $spacing-05;
+    background-color: $background;
+    grid-area: influencer;
+  }
+}
 
 /// Modal styles
 /// @access public
@@ -158,7 +185,7 @@
     display: grid;
     background-color: $layer;
     block-size: 100%;
-    grid-template-columns: 100%;
+    grid-template-areas: 'header' 'content' 'footer';
     grid-template-rows: auto 1fr auto;
     inline-size: 100%;
     inset-block-start: 0;
@@ -200,8 +227,7 @@
     position: relative;
     color: $text-primary;
     font-weight: 400;
-    grid-column: 1/-1;
-    grid-row: 2/-2;
+    grid-area: content;
     overflow-y: auto;
     padding-block-end: $spacing-09;
     // Required to accommodate focus outline's negative offset:
@@ -240,8 +266,7 @@
   // Modal header
   // -----------------------------
   .#{$prefix}--modal-header {
-    grid-column: 1/-1;
-    grid-row: 1/1;
+    grid-area: header;
     margin-block-end: $spacing-03;
     padding-block-start: $spacing-05;
     padding-inline-end: $spacing-09;
@@ -373,8 +398,7 @@
     display: flex;
     justify-content: flex-end;
     block-size: convert.to-rem(64px);
-    grid-column: 1/-1;
-    grid-row: -1/-1;
+    grid-area: footer;
     margin-block-start: auto;
   }
 
@@ -517,4 +541,8 @@
     @include high-contrast-mode('focus');
   }
   /* stylelint-enable no-duplicate-selectors */
+
+  .#{$prefix}--modal--kind-tearsheet {
+    @include modal-kind-tearsheet();
+  }
 }
