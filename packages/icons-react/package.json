@@ -1,7 +1,7 @@
 {
   "name": "@carbon/icons-react",
   "description": "React components for icons in digital and software products using the Carbon Design System",
-  "version": "11.37.0-rc.0",
+  "version": "11.37.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -13,7 +13,8 @@
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "es",
-    "lib"
+    "lib",
+    "telemetry.yml"
   ],
   "keywords": [
     "ibm",
@@ -31,19 +32,19 @@
   "scripts": {
     "build": "yarn clean && node tasks/build.js",
     "clean": "rimraf es lib",
-    "postinstall": "carbon-telemetry collect --install"
+    "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "peerDependencies": {
     "react": ">=16"
   },
   "dependencies": {
     "@carbon/icon-helpers": "^10.46.0",
-    "@carbon/telemetry": "0.1.0",
+    "@ibm/telemetry-js": "^1.2.1",
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
     "@carbon/icon-build-helpers": "^1.22.0",
-    "@carbon/icons": "^11.37.0-rc.0",
+    "@carbon/icons": "^11.37.0",
     "rimraf": "^5.0.0"
   },
   "sideEffects": false
