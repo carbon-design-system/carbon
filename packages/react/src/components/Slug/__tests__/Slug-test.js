@@ -46,11 +46,25 @@ describe('Slug', () => {
       expect(screen.getByText('Test text')).toBeInTheDocument();
     });
 
-    it('should respect align prop', () => {
-      render(<Slug data-testid="test" align="left-bottom" />);
+    it('should respect align prop when autoAlign is false', () => {
+      render(<Slug autoAlign={false} align="bottom-start" />);
+
+      expect(screen.getByTestId('test')).not.toHaveClass(
+        `${prefix}--popover--auto-align`
+      );
+      expect(screen.getByTestId('test')).toHaveClass(
+        `${prefix}--popover--bottom-start`
+      );
+    });
+
+    it('should not apply align prop classes when autoAlign is true', () => {
+      render(<Slug align="bottom-start" />);
 
       expect(screen.getByTestId('test')).toHaveClass(
-        `${prefix}--popover--left-bottom`
+        `${prefix}--popover--auto-align`
+      );
+      expect(screen.getByTestId('test')).not.toHaveClass(
+        `${prefix}--popover--bottom-start`
       );
     });
 

@@ -151,7 +151,7 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
   const caretRef = useRef<HTMLSpanElement>(null);
   const popover = useRef<Element>(null);
 
-  let shimmedAlign;
+  let shimmedAlign = shimmedAlign(align); // TODO: abstract this so that slug can use it too
   switch (align) {
     case 'top-left':
       shimmedAlign = 'top-start';
@@ -265,18 +265,25 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
   if (isTabTip) {
     const tabTipAlignments: PopoverAlignment[] = ['bottom-start', 'bottom-end'];
 
-    if (!tabTipAlignments.includes(align)) {
+    if (!tabTipAlignments.includes(shimmedAlign)) {
       shimmedAlign = 'bottom-start';
     }
   }
 
   useEffect(() => {
     if (autoAlign) {
-      Object.keys(floatingStyles).forEach((style) => {
-        refs.floating.current.style[style] = floatingStyles[style];
-      });
+      if (refs?.floating?.current) {
+        Object.keys(floatingStyles).forEach((style) => {
+          refs.floating.current.style[style] = floatingStyles[style];
+        });
+      }
 
-      if (caret && middlewareData && middlewareData.arrow) {
+      if (
+        caret &&
+        middlewareData &&
+        middlewareData.arrow &&
+        caretRef?.current
+      ) {
         const { x, y } = middlewareData.arrow;
 
         const staticSide = {
@@ -307,7 +314,8 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
   ]);
 
   const ref = useMergedRefs([forwardRef, popover]);
-  const currentAlignment = autoAlign && placement !== align ? placement : align;
+  const currentAlignment =
+    autoAlign && placement !== align ? placement : shimmedAlign;
   const className = cx(
     {
       [`${prefix}--popover-container`]: true,
@@ -324,40 +332,56 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
 
   const mappedChildren = React.Children.map(children, (child) => {
     const item = child as any;
-    const { className, ref } = item.props;
-    const tabTipClasses = cx(`${prefix}--popover--tab-tip__button`, className);
 
-    return React.cloneElement(item, {
-      className: item?.type === 'button' ? tabTipClasses : className,
+    // Previously we would only do this logic if item.type was a button ----- why?
+    if (
+      (item?.type === 'button' ||
+        (autoAlign && item?.type?.displayName !== 'PopoverContent') ||
+        (autoAlign && item?.type?.displayName === 'ToggletipButton')) &&
+      React.isValidElement(item)
+    ) {
+      const className = item?.props?.className;
+      const ref = item?.props?.ref;
+      const tabTipClasses = cx(
+        `${prefix}--popover--tab-tip__button`,
+        className
+      );
 
-      // With cloneElement, if you pass a `ref`, it overrides the original ref.
-      // https://react.dev/reference/react/cloneElement#parameters
-      // The block below works around this and ensures that the original ref is still
-      // called while allowing the floating-ui reference element to be set as well.
-      // `useMergedRefs` can't be used here because hooks can't be called from within a callback.
-      // More here: https://github.com/facebook/react/issues/8873#issuecomment-489579878
-      ref: (node) => {
-        // For a popover, there isn't an explicit trigger component, it's just the first child that's
-        // passed in which should *not* be PopoverContent.
-        // For a toggletip there is a specific trigger component, ToggletipButton.
-        // In either of these caes we want to set this as the reference node for floating-ui autoAlign
-        // positioning.
-        if (
-          (autoAlign && item?.type?.displayName !== 'PopoverContent') ||
-          (autoAlign && item?.type?.displayName === 'ToggletipButton')
-        ) {
-          // Set the reference element for floating-ui
-          refs.setReference(node);
-        }
+      return React.cloneElement(item, {
+        className:
+          isTabTip && item?.type === 'button' ? tabTipClasses : className,
 
-        // Call the original ref, if any
-        if (typeof ref === 'function') {
-          ref(node);
-        } else if (ref !== null && ref !== undefined) {
-          ref.current = node;
-        }
-      },
-    });
+        // With cloneElement, if you pass a `ref`, it overrides the original ref.
+        // https://react.dev/reference/react/cloneElement#parameters
+        // The block below works around this and ensures that the original ref is still
+        // called while allowing the floating-ui reference element to be set as well.
+        // `useMergedRefs` can't be used here because hooks can't be called from within a callback.
+        // More here: https://github.com/facebook/react/issues/8873#issuecomment-489579878
+        ref: (node) => {
+          // For a popover, there isn't an explicit trigger component, it's just the first child that's
+          // passed in which should *not* be PopoverContent.
+          // For a toggletip there is a specific trigger component, ToggletipButton.
+          // In either of these caes we want to set this as the reference node for floating-ui autoAlign
+          // positioning.
+          if (
+            (autoAlign && item?.type?.displayName !== 'PopoverContent') ||
+            (autoAlign && item?.type?.displayName === 'ToggletipButton')
+          ) {
+            // Set the reference element for floating-ui
+            refs.setReference(node);
+          }
+
+          // Call the original ref, if any
+          if (typeof ref === 'function') {
+            ref(node);
+          } else if (ref !== null && ref !== undefined) {
+            ref.current = node;
+          }
+        },
+      });
+    } else {
+      return item;
+    }
   });
 
   const BaseComponentAsAny = BaseComponent as any;
@@ -365,7 +389,7 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
   return (
     <PopoverContext.Provider value={value}>
       <BaseComponentAsAny {...rest} className={className} ref={ref}>
-        {mappedChildren}
+        {autoAlign || isTabTip ? mappedChildren : children}
       </BaseComponentAsAny>
     </PopoverContext.Provider>
   );
