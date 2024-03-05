@@ -10,6 +10,7 @@ import TextArea from '../TextArea';
 import userEvent from '@testing-library/user-event';
 import { fireEvent, waitFor } from '@testing-library/react';
 import { render, screen, createEvent } from '@testing-library/react';
+import { Slug } from '../../Slug';
 
 const prefix = 'cds';
 
@@ -192,6 +193,15 @@ describe('TextArea', () => {
       );
       expect(screen.getByRole('textbox')).toHaveAttribute('maxlength', '500');
       expect(screen.getByText('0/500')).toBeInTheDocument();
+    });
+
+    it('should respect slug prop', () => {
+      render(
+        <TextArea id="textarea-1" labelText="TextArea label" slug={<Slug />} />
+      );
+      expect(
+        screen.getByRole('button', { name: 'AI - Show information' })
+      ).toBeInTheDocument();
     });
 
     describe('behaves as expected - Component API', () => {

@@ -276,6 +276,8 @@ export const chatBubbleAgentBorder = gray20;
 export const chatAvatarBot = gray60;
 export const chatAvatarAgent = gray80;
 export const chatAvatarUser = blue60;
+export const chatShellBackground = white;
+export const chatHeaderBackground = white;
 
 // Type
 export {
