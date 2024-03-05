@@ -946,79 +946,11 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
-          "name": "slug-callout-gradient-top",
+          "name": "ai-popover-shadow-outer-01",
           "type": "color",
         },
         Object {
-          "name": "slug-callout-gradient-bottom",
-          "type": "color",
-        },
-        Object {
-          "name": "slug-callout-aura-start",
-          "type": "color",
-        },
-        Object {
-          "name": "slug-callout-aura-end",
-          "type": "color",
-        },
-        Object {
-          "name": "slug-callout-gradient-top-hover",
-          "type": "color",
-        },
-        Object {
-          "name": "slug-callout-gradient-bottom-hover",
-          "type": "color",
-        },
-        Object {
-          "name": "slug-callout-aura-start-hover-01",
-          "type": "color",
-        },
-        Object {
-          "name": "slug-callout-aura-start-hover-02",
-          "type": "color",
-        },
-        Object {
-          "name": "slug-callout-aura-end-hover-01",
-          "type": "color",
-        },
-        Object {
-          "name": "slug-callout-aura-end-hover-02",
-          "type": "color",
-        },
-        Object {
-          "name": "slug-callout-gradient-top-selected",
-          "type": "color",
-        },
-        Object {
-          "name": "slug-callout-gradient-bottom-selected",
-          "type": "color",
-        },
-        Object {
-          "name": "slug-callout-aura-start-selected",
-          "type": "color",
-        },
-        Object {
-          "name": "slug-callout-aura-end-selected",
-          "type": "color",
-        },
-        Object {
-          "name": "ai-gradient-start-01",
-          "type": "color",
-        },
-        Object {
-          "name": "ai-gradient-start-02",
-          "type": "color",
-        },
-        Object {
-          "name": "ai-gradient-end",
-          "type": "color",
-        },
-        Object {
-          "name": "slug-callout-shadow-outer-01",
-          "type": "color",
-        },
-        Object {
-          "name": "slug-callout-shadow-outer-02",
+          "name": "ai-popover-shadow-outer-02",
           "type": "color",
         },
         Object {
@@ -1078,19 +1010,19 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
-          "name": "slug-callout-caret-center",
+          "name": "ai-popover-caret-center",
           "type": "color",
         },
         Object {
-          "name": "slug-callout-caret-bottom",
+          "name": "ai-popover-caret-bottom",
           "type": "color",
         },
         Object {
-          "name": "slug-callout-caret-bottom-background",
+          "name": "ai-popover-caret-bottom-background",
           "type": "color",
         },
         Object {
-          "name": "slug-callout-caret-bottom-background-actions",
+          "name": "ai-popover-caret-bottom-background-actions",
           "type": "color",
         },
         Object {
