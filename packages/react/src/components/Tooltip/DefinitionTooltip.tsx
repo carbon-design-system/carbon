@@ -104,6 +104,9 @@ const DefinitionTooltip: React.FC<DefinitionTooltipProps> = ({
       onMouseEnter={() => {
         openOnHover ? setOpen(true) : null;
       }}
+      onFocus={() => {
+        openOnHover ? setOpen(true) : null;
+      }}
       open={isOpen}>
       <button
         {...rest}
@@ -112,9 +115,6 @@ const DefinitionTooltip: React.FC<DefinitionTooltipProps> = ({
         aria-expanded={isOpen}
         onBlur={() => {
           setOpen(false);
-        }}
-        onClick={() => {
-          setOpen(!isOpen);
         }}
         onKeyDown={onKeyDown}
         type="button">
