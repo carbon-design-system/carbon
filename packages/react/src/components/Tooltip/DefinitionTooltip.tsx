@@ -105,7 +105,7 @@ const DefinitionTooltip: React.FC<DefinitionTooltipProps> = ({
         openOnHover ? setOpen(true) : null;
       }}
       onFocus={() => {
-        openOnHover ? setOpen(true) : null;
+        setOpen(true);
       }}
       open={isOpen}>
       <button
