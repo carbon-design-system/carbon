@@ -39,8 +39,6 @@ const DropdownSkeleton: React.FC<DropdownSkeletonProps> = ({
   const wrapperClasses = cx(
     className,
     `${prefix}--skeleton`,
-    `${prefix}--dropdown-v2`,
-    `${prefix}--list-box`,
     `${prefix}--form-item`,
     {
       [`${prefix}--list-box--${size}`]: size,
@@ -49,11 +47,10 @@ const DropdownSkeleton: React.FC<DropdownSkeletonProps> = ({
 
   return (
     <div className={wrapperClasses} {...rest}>
-      <div className={`${prefix}--list-box__field`}>
-        {!hideLabel && (
-          <span className={`${prefix}--list-box__label ${prefix}--skeleton`} />
-        )}
-      </div>
+      {!hideLabel && (
+        <span className={`${prefix}--label ${prefix}--skeleton`} />
+      )}
+      <div className={`${prefix}--skeleton ${prefix}--dropdown`} />
     </div>
   );
 };
