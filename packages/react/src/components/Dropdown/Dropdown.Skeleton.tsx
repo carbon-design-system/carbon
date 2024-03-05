@@ -13,12 +13,26 @@ import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
 
 export interface DropdownSkeletonProps extends ReactAttr<HTMLDivElement> {
+  /**
+   * Specify an optional className to add.
+   */
+  className?: string;
+
+  /**
+   * Specify whether the label should be hidden, or not
+   */
+  hideLabel?: boolean;
+
+  /**
+   * Specify the size of the ListBox.
+   */
   size?: ListBoxSize;
 }
 
 const DropdownSkeleton: React.FC<DropdownSkeletonProps> = ({
   className,
   size,
+  hideLabel,
   ...rest
 }: DropdownSkeletonProps) => {
   const prefix = usePrefix();
@@ -36,7 +50,9 @@ const DropdownSkeleton: React.FC<DropdownSkeletonProps> = ({
   return (
     <div className={wrapperClasses} {...rest}>
       <div className={`${prefix}--list-box__field`}>
-        <span className={`${prefix}--list-box__label`} />
+        {!hideLabel && (
+          <span className={`${prefix}--list-box__label ${prefix}--skeleton`} />
+        )}
       </div>
     </div>
   );
@@ -47,6 +63,11 @@ DropdownSkeleton.propTypes = {
    * Specify an optional className to add.
    */
   className: PropTypes.string,
+
+  /**
+   * Specify whether the label should be hidden, or not
+   */
+  hideLabel: PropTypes.bool,
 
   /**
    * Specify the size of the ListBox.
