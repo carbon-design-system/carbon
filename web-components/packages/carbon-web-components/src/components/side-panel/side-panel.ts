@@ -354,10 +354,14 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   private _checkSetOpen = () => {
     const { _sidePanel: sidePanel } = this;
     if (sidePanel && this._isOpen) {
-      // wait until the side panel has transitioned off the screen to remove
-      sidePanel.addEventListener('transitionend', () => {
+      if (this._reducedMotion) {
         this._isOpen = false;
-      });
+      } else {
+        // wait until the side panel has transitioned off the screen to remove
+        sidePanel.addEventListener('transitionend', () => {
+          this._isOpen = false;
+        });
+      }
     } else {
       // allow the html to render before animating in the side panel
       this._isOpen = this.open;
