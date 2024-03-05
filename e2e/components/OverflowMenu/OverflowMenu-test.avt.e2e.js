@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('OverflowMenu @avt', () => {
+test.describe('@avt OverflowMenu', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'OverflowMenu',
@@ -73,7 +73,7 @@ test.describe('OverflowMenu @avt', () => {
     await expect(page).toHaveNoACViolations('OverflowMenu-custom-icon-open');
   });
 
-  test('@avt-keyboard-nav overflow-menu', async ({ page }) => {
+  test.slow('@avt-keyboard-nav overflow-menu', async ({ page }) => {
     await visitStory(page, {
       component: 'OverflowMenu',
       id: 'components-overflowmenu--default',
