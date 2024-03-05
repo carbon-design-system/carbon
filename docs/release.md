@@ -68,7 +68,7 @@ checkpoints:
 
 ### Prerelease
 
-The prerelease occurs on the first Tuesday of a sprint. During this stage, the
+The prerelease occurs on the last Monday of a sprint. During this stage, the
 release team will need to do the following:
 
 - [ ] Run the
@@ -121,10 +121,9 @@ To do so, follow the above steps for [Prerelease](#prerelease) but specify
 
 ### Stable release
 
-A stable release occurs on the first Thursday of a sprint and finishes on the
-morning of the first Friday of a sprint. This should occur after the prerelease
-has been tested and validated. During this stage, the release team will do the
-following:
+A stable release occurs on the last Wednesday and finishes later in the day.
+This should occur after the prerelease has been tested and validated. During
+this stage, the release team will do the following:
 
 - [ ] Run the
       [Version Workflow](https://github.com/carbon-design-system/carbon/actions/workflows/version.yml)
@@ -161,8 +160,6 @@ git push upstream v11.2.0
 
 - [ ] Verify that this triggers a run of the
       [Release Workflow](https://github.com/carbon-design-system/carbon/actions/workflows/release.yml)
-
-**Friday**
 
 The packages that have been published will be switched to latest on the first
 Friday of a sprint. To make the switch, you will need to:
