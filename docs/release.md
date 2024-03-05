@@ -121,7 +121,7 @@ To do so, follow the above steps for [Prerelease](#prerelease) but specify
 
 ### Stable release
 
-A stable release occurs on the last Wednesday and finishes later on that day.
+A stable release occurs on the last Wednesday and finishes later in the day.
 This should occur after the prerelease has been tested and validated. During
 this stage, the release team will do the following:
 
