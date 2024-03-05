@@ -2085,7 +2085,7 @@ __metadata:
     clipboardy: "npm:^2.1.0"
     copy-to-clipboard: "npm:^3.3.1"
     css-loader: "npm:^6.5.1"
-    downshift: "npm:8.3.1"
+    downshift: "npm:8.3.2"
     enquirer: "npm:^2.3.6"
     fast-glob: "npm:^3.2.7"
     flatpickr: "npm:4.6.13"
@@ -12420,9 +12420,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"downshift@npm:8.3.1":
-  version: 8.3.1
-  resolution: "downshift@npm:8.3.1"
+"downshift@npm:8.3.2":
+  version: 8.3.2
+  resolution: "downshift@npm:8.3.2"
   dependencies:
     "@babel/runtime": "npm:^7.22.15"
     compute-scroll-into-view: "npm:^3.0.3"
@@ -12431,7 +12431,7 @@ __metadata:
     tslib: "npm:^2.6.2"
   peerDependencies:
     react: ">=16.12.0"
-  checksum: 10/b616da957802bd80bc8d909d36bff851d9701e743d800be6443514f24deeaf0ce22ae56e6802c386c769328d8442969c6629c6f94d99ff12bea8d07e11c86cee
+  checksum: 10/69066920bbed5af504567ca53262d09bf1c5ca0aeb9ee46319f823d635d7b8a91b836f5a9876113d9ce9f1484636736fc4737a2a421c885fe2063c51de21cb41
   languageName: node
   linkType: hard
 
