@@ -1066,6 +1066,18 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "ai-skeleton-background",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-skeleton-element-background",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-overlay",
+          "type": "color",
+        },
+        Object {
           "name": "slug-callout-caret-center",
           "type": "color",
         },

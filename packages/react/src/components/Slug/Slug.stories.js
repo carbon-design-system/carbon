@@ -451,7 +451,7 @@ export const Playground = (args) => {
 
   return (
     <>
-      <div className="slug-container-example">
+      <div className="slug-container slug-container-example">
         <Slug autoAlign {...args}>
           <SlugContent>{renderedContent}</SlugContent>
         </Slug>

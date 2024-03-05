@@ -26,12 +26,18 @@ import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import { Slug, SlugContent, SlugActions } from '.';
 import './slug-story.scss';
+import mdx from './SlugForm.mdx';
 
 export default {
   title: 'Experimental/unstable__Slug/Form',
   component: Form,
   subcomponents: {
     Slug,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
   },
 };
 

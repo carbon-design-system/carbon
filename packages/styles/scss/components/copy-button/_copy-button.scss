@@ -73,13 +73,13 @@
     &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out
       .#{$prefix}--copy-btn__feedback {
       // https://github.com/stylelint/stylelint/issues/2363
-      animation: $duration-fast-02 motion(standard, productive) hide-feedback;
+      animation: $duration-fast-02 motion(standard, productive) #{$prefix}--hide-feedback;
     }
 
     &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in::before,
     &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in
       .#{$prefix}--copy-btn__feedback {
-      animation: $duration-fast-02 motion(standard, productive) show-feedback;
+      animation: $duration-fast-02 motion(standard, productive) #{$prefix}--show-feedback;
     }
   }
 
