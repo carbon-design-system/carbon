@@ -116,6 +116,9 @@ const DefinitionTooltip: React.FC<DefinitionTooltipProps> = ({
         onBlur={() => {
           setOpen(false);
         }}
+        onClick={() => {
+          setOpen(!isOpen);
+        }}
         onKeyDown={onKeyDown}
         type="button">
         {children}
