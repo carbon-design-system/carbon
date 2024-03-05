@@ -27,7 +27,10 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 /// Tile styles
 /// @access public
 /// @group tile
-@mixin tile($enable-experimental-tile-contrast: false) {
+@mixin tile(
+  $enable-experimental-tile-contrast: false,
+  $enable-v12-tile-radio-icons: false
+) {
   .#{$prefix}--tile-group {
     @include reset;
   }
@@ -163,8 +166,16 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     block-size: 1rem;
     inset-block-start: layout.density('padding-inline');
     inset-inline-end: layout.density('padding-inline');
-    opacity: 0;
     transition: $duration-fast-02 motion(standard, productive);
+
+    @if (
+      enabled('enable-v12-tile-radio-icons') or
+        $enable-experimental-tile-contrast
+    ) {
+      opacity: 1;
+    } @else {
+      opacity: 0;
+    }
 
     svg {
       border-radius: 50%;

@@ -1130,6 +1130,14 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "chat-shell-background",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-header-background",
+          "type": "color",
+        },
+        Object {
           "name": "highlight",
           "type": "color",
         },
