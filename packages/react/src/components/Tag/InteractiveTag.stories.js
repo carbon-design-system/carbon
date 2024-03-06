@@ -175,10 +175,7 @@ export const Operational = (args) => {
         </Tooltip>
 
         <Toggletip>
-          <ToggletipButton
-            label="Additional information"
-            tabIndex={-1}
-            as="div">
+          <ToggletipButton label="Tag content" tabIndex={-1}>
             <OperationalTag
               renderIcon={Asleep}
               className="some-class"

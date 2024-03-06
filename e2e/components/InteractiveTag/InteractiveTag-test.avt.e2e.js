@@ -23,7 +23,7 @@ test.describe('@avt InteractiveTag', () => {
   });
 
   // Testing being skipped because it is failing in the ToggleTip that operational it's using
-  test.skip('@avt-advanced-states OperationalTag', async ({ page }) => {
+  test('@avt-advanced-states OperationalTag', async ({ page }) => {
     await visitStory(page, {
       component: 'Tag',
       id: 'experimental-unstable-interactivetag--operational',
