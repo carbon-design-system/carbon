@@ -158,6 +158,8 @@ export function Toggle({
     [`${prefix}--toggle__switch--checked`]: checked,
   });
 
+  const labelId = `${id}_label`;
+
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
@@ -189,11 +191,12 @@ export function Toggle({
         role="switch"
         type="button"
         aria-checked={checked}
-        aria-labelledby={id}
+        aria-labelledby={ariaLabelledby ?? labelId}
         disabled={disabled}
         onClick={handleClick}
       />
       <LabelComponent
+        id={labelId}
         htmlFor={ariaLabelledby ? undefined : id}
         className={`${prefix}--toggle__label`}>
         {labelText && <Text className={labelTextClasses}>{labelText}</Text>}
