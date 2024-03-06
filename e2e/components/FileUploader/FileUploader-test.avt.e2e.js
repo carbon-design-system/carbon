@@ -11,7 +11,7 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 const path = require('path');
 
-test.describe('FileUploader @avt', () => {
+test.describe('@avt FileUploader', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FileUploader',
