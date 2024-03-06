@@ -1358,6 +1358,46 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "tag-border-red",
+          "type": "color",
+        },
+        Object {
+          "name": "tag-border-blue",
+          "type": "color",
+        },
+        Object {
+          "name": "tag-border-cyan",
+          "type": "color",
+        },
+        Object {
+          "name": "tag-border-teal",
+          "type": "color",
+        },
+        Object {
+          "name": "tag-border-green",
+          "type": "color",
+        },
+        Object {
+          "name": "tag-border-magenta",
+          "type": "color",
+        },
+        Object {
+          "name": "tag-border-purple",
+          "type": "color",
+        },
+        Object {
+          "name": "tag-border-gray",
+          "type": "color",
+        },
+        Object {
+          "name": "tag-border-cool-gray",
+          "type": "color",
+        },
+        Object {
+          "name": "tag-border-warm-gray",
+          "type": "color",
+        },
+        Object {
           "name": "tag-background-cool-gray",
           "type": "color",
         },

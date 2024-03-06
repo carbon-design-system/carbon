@@ -22,6 +22,7 @@ import { match, keys } from '../../internal/keyboard';
 import { useWindowEvent } from '../../internal/useEvent';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
+import { PolymorphicProps } from '../../types/common';
 
 type ToggletipLabelProps<E extends ElementType> = {
   as?: E | undefined;
@@ -69,6 +70,7 @@ type ToggleTipContextType =
   | {
       buttonProps: ComponentProps<'button'>;
       contentProps: ComponentProps<typeof PopoverContent>;
+      onClick: ComponentProps<'button'>;
     };
 
 // Used to coordinate accessibility props between button and content along with
@@ -125,6 +127,9 @@ export function Toggletip<E extends ElementType = 'span'>({
     },
     contentProps: {
       id,
+    },
+    onClick: {
+      onClick: actions.toggle,
     },
   };
 
@@ -235,30 +240,45 @@ Toggletip.propTypes = {
   defaultOpen: PropTypes.bool,
 };
 
-interface ToggletipButtonProps {
+interface ToggletipButtonBaseProps {
   children?: ReactNode;
   className?: string | undefined;
   label?: string | undefined;
 }
 
+export type ToggleTipButtonProps<T extends React.ElementType> =
+  PolymorphicProps<T, ToggletipButtonBaseProps>;
+
 /**
  * `ToggletipButton` controls the visibility of the Toggletip through mouse
  * clicks and keyboard interactions.
  */
-export function ToggletipButton({
+export function ToggletipButton<T extends React.ElementType>({
   children,
   className: customClassName,
   label = 'Show information',
-}: ToggletipButtonProps) {
+  as: BaseComponent,
+  ...rest
+}: ToggleTipButtonProps<T>) {
   const toggletip = useToggletip();
   const prefix = usePrefix();
   const className = cx(`${prefix}--toggletip-button`, customClassName);
+  const ComponentToggle: any = BaseComponent ?? 'button';
+
+  if (ComponentToggle !== 'button') {
+    return (
+      <ComponentToggle {...toggletip?.onClick} className={className} {...rest}>
+        {children}
+      </ComponentToggle>
+    );
+  }
   return (
     <button
       {...toggletip?.buttonProps}
       aria-label={label}
       type="button"
-      className={className}>
+      className={className}
+      {...rest}>
       {children}
     </button>
   );
