@@ -16,7 +16,6 @@ import React, {
   type ComponentProps,
   type KeyboardEventHandler,
   type FocusEventHandler,
-  MouseEventHandler,
 } from 'react';
 import { Popover, type PopoverAlignment, PopoverContent } from '../Popover';
 import { match, keys } from '../../internal/keyboard';
@@ -71,7 +70,7 @@ type ToggleTipContextType =
   | {
       buttonProps: ComponentProps<'button'>;
       contentProps: ComponentProps<typeof PopoverContent>;
-      onClick: MouseEventHandler<HTMLButtonElement>;
+      onClick: ComponentProps<'button'>;
     };
 
 // Used to coordinate accessibility props between button and content along with
