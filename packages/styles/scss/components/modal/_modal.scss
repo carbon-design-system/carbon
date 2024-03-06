@@ -439,7 +439,8 @@
   .#{$prefix}--body--with-modal-open .#{$prefix}--modal .#{$prefix}--tooltip,
   .#{$prefix}--body--with-modal-open
     .#{$prefix}--modal
-    .#{$prefix}--overflow-menu-options {
+    .#{$prefix}--overflow-menu-options,
+  .#{$prefix}--body--with-modal-open .#{$prefix}--overflow-menu-options {
     z-index: z('modal');
   }
 
