@@ -178,6 +178,8 @@ describe('@carbon/styles/scss/theme', () => {
         "chat-avatar-bot",
         "chat-avatar-agent",
         "chat-avatar-user",
+        "chat-shell-background",
+        "chat-header-background",
         "highlight",
         "overlay",
         "toggle-off",

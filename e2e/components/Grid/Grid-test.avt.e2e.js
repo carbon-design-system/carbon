@@ -9,7 +9,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('Grid @avt', () => {
+test.describe('@avt Grid', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Grid',

@@ -10,7 +10,7 @@
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
-test.describe('TimePicker @avt', () => {
+test.describe('@avt TimePicker', () => {
   test('@avt-default-state TimePicker', async ({ page }) => {
     await visitStory(page, {
       component: 'TimePicker',

@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('Notifications @avt', () => {
+test.describe('@avt Notifications', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Notifications',
@@ -23,7 +23,7 @@ test.describe('Notifications @avt', () => {
     await expect(page).toHaveNoACViolations('Notifications actionable');
   });
 
-  test('accessibility-checker Notifications actionable keyboard', async ({
+  test('@avt-keyboard-nav accessibility-checker Notifications actionable keyboard', async ({
     page,
   }) => {
     await visitStory(page, {
