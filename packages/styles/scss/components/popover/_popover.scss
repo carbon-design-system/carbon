@@ -125,6 +125,7 @@ $popover-caret-height: custom-property.get-var(
 
   // Popover content
   .#{$prefix}--popover-content {
+    // The layout.redefine-tokens is been included here because it is been redifined in _tag.scss
     @include layout.redefine-tokens(
       (
         size: (
