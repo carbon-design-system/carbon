@@ -240,7 +240,7 @@ export const slugCalloutShadowOuter02 = rgba(black, 0.65);
 
 // AI skeleton
 export const aiSkeletonBackground = blue30;
-export const aiSkeletonElementBackground = blue40;
+export const aiSkeletonElementBackground = blue60;
 
 // AI Modal tokens
 export const aiOverlay = rgba(blue100, 0.5);
