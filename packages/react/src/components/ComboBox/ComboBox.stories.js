@@ -10,6 +10,7 @@ import React from 'react';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
 import ComboBox from '../ComboBox';
+import { NewComboBox } from '../ComboBox';
 import mdx from './ComboBox.mdx';
 
 const items = [
@@ -64,6 +65,24 @@ export default {
 export const Default = () => (
   <div style={{ width: 300 }}>
     <ComboBox
+      onChange={() => {}}
+      id="carbon-combobox"
+      items={items}
+      downshiftProps={{
+        onStateChange: () => {
+          console.log('the state has changed');
+        },
+      }}
+      itemToString={(item) => (item ? item.text : '')}
+      titleText="ComboBox title"
+      helperText="Combobox helper text"
+    />
+  </div>
+);
+
+export const New = () => (
+  <div style={{ width: 300 }}>
+    <NewComboBox
       onChange={() => {}}
       id="carbon-combobox"
       items={items}

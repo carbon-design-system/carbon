@@ -6,5 +6,6 @@
  */
 
 import ComboBox from './ComboBox';
+import NewComboBox from './NewComboBox';
 export default ComboBox;
-export { ComboBox };
+export { ComboBox, NewComboBox };
