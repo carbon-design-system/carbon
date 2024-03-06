@@ -108,7 +108,7 @@ function CodeSnippet({
       ref: getCodeRef(),
       onResize: () => {
         if (codeContentRef?.current && type === 'multi') {
-          const { height } = codeContentRef.current.getBoundingClientRect();
+          const { height } = innerCodeRef.current.getBoundingClientRect();
           if (
             maxCollapsedNumberOfRows > 0 &&
             (maxExpandedNumberOfRows <= 0 ||
