@@ -116,6 +116,7 @@ export const WithActions = () => {
       iconDescription="Dismiss"
       hasIconOnly
       renderIcon={Close}
+      aria-label="Dismiss"
     />
   );
 
