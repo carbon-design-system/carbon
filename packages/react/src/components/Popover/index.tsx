@@ -21,6 +21,7 @@ import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 import { type PolymorphicProps } from '../../types/common';
 import { useWindowEvent } from '../../internal/useEvent';
+import { mapPopoverAlignProp } from '../../tools/createPropAdapter';
 import {
   useFloating,
   flip,
@@ -132,7 +133,7 @@ export type PopoverProps<E extends ElementType> = PolymorphicProps<
 function PopoverRenderFunction<E extends ElementType = 'span'>(
   {
     isTabTip,
-    align = isTabTip ? 'bottom-start' : 'bottom',
+    align: initialAlign = isTabTip ? 'bottom-start' : 'bottom',
     as: BaseComponent = 'span' as E,
     autoAlign = false,
     caret = isTabTip ? false : true,
@@ -150,37 +151,7 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
   const floating = useRef<HTMLSpanElement>(null);
   const caretRef = useRef<HTMLSpanElement>(null);
   const popover = useRef<Element>(null);
-
-  let shimmedAlign = shimmedAlign(align); // TODO: abstract this so that slug can use it too
-  switch (align) {
-    case 'top-left':
-      shimmedAlign = 'top-start';
-      break;
-    case 'top-right':
-      shimmedAlign = 'top-end';
-      break;
-    case 'bottom-left':
-      shimmedAlign = 'bottom-start';
-      break;
-    case 'bottom-right':
-      shimmedAlign = 'bottom-end';
-      break;
-    case 'left-bottom':
-      shimmedAlign = 'left-end';
-      break;
-    case 'left-top':
-      shimmedAlign = 'left-start';
-      break;
-    case 'right-bottom':
-      shimmedAlign = 'right-end';
-      break;
-    case 'right-top':
-      shimmedAlign = 'right-start';
-      break;
-    default:
-      shimmedAlign = align;
-      break;
-  }
+  let align = mapPopoverAlignProp(initialAlign);
 
   // If the `Popover` is the last focusable item in the tab order, it should also close when the browser window loses focus  (#12922)
   useWindowEvent('blur', () => {
@@ -230,7 +201,7 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
 
   const floatingUIConfig = autoAlign
     ? {
-        placement: shimmedAlign,
+        placement: align,
 
         // The floating element is positioned relative to its nearest
         // containing block (usually the viewport). It will in many cases also
@@ -265,8 +236,8 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
   if (isTabTip) {
     const tabTipAlignments: PopoverAlignment[] = ['bottom-start', 'bottom-end'];
 
-    if (!tabTipAlignments.includes(shimmedAlign)) {
-      shimmedAlign = 'bottom-start';
+    if (!tabTipAlignments.includes(align)) {
+      align = 'bottom-start';
     }
   }
 
@@ -314,8 +285,7 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
   ]);
 
   const ref = useMergedRefs([forwardRef, popover]);
-  const currentAlignment =
-    autoAlign && placement !== align ? placement : shimmedAlign;
+  const currentAlignment = autoAlign && placement !== align ? placement : align;
   const className = cx(
     {
       [`${prefix}--popover-container`]: true,
@@ -413,20 +383,7 @@ if (__DEV__) {
 Popover.propTypes = {
   /**
    * Specify how the popover should align with the trigger element
-  //  */
-  // type Placement =
-  // | 'top'
-  // | 'top-start'
-  // | 'top-end'
-  // | 'right'
-  // | 'right-start'
-  // | 'right-end'
-  // | 'bottom'
-  // | 'bottom-start'
-  // | 'bottom-end'
-  // | 'left'
-  // | 'left-start'
-  // | 'left-end';
+   */
   align: PropTypes.oneOf([
     'top',
     'top-left', // deprecated use top-start instead
