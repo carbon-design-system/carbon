@@ -12,6 +12,7 @@ import { boolean } from '@storybook/addon-knobs';
 import View16 from '@carbon/icons/lib/view/16';
 import FolderOpen16 from '@carbon/icons/lib/folder--open/16';
 import Folders16 from '@carbon/icons/lib/folders/16';
+import storyDocs from './slug-story.mdx';
 
 import textNullable from '../../../.storybook/knob-text-nullable';
 import { prefix } from '../../globals/settings';
@@ -79,6 +80,9 @@ const actions = html`
 
 export default {
   title: 'Experimental/Slug/Form',
+  parameters: {
+    ...storyDocs.parameters,
+  },
 };
 
 export const _AIForm = (args) => {

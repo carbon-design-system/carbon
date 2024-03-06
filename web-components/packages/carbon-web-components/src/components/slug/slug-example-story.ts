@@ -18,6 +18,7 @@ import { prefix } from '../../globals/settings';
 import './index';
 import '../icon-button/index';
 import styles from './slug-story.scss';
+import storyDocs from './slug-example-story.mdx';
 
 const items = [
   {
@@ -80,6 +81,9 @@ const actions = html`
 
 export default {
   title: 'Experimental/Slug/Examples',
+  parameters: {
+    ...storyDocs.parameters,
+  },
 };
 
 export const _Checkbox = (args) => {

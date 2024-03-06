@@ -75,9 +75,13 @@
 :host(#{$prefix}-table-row[expandable][selected][slug]) {
   @include ai-table-gradient('selected');
 
+  background-attachment: fixed;
+
   &[highlighted],
   &:hover {
     @include ai-table-gradient('hover');
+
+    background-attachment: fixed;
 
     /* stylelint-disable-next-line no-duplicate-selectors */
     .#{$prefix}--table-column-checkbox,

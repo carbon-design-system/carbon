@@ -75,6 +75,8 @@
   &[highlighted] {
     @include ai-table-gradient('hover');
 
+    background-attachment: fixed;
+
     ::slotted(#{$prefix}-table-cell),
     ::slotted(#{$prefix}-table-cell-skeleton),
     .#{$prefix}--table-expand,

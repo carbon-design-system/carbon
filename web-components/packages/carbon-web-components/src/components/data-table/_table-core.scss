@@ -494,6 +494,8 @@
 
   &:hover {
     @include ai-table-gradient('hover');
+
+    background-attachment: fixed;
   }
 }
 

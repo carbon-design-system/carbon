@@ -12,6 +12,7 @@ import View16 from '@carbon/icons/lib/view/16';
 import FolderOpen16 from '@carbon/icons/lib/folder--open/16';
 import Folders16 from '@carbon/icons/lib/folders/16';
 import '../data-table/index';
+import storyDocs from './slug-data-table-story.mdx';
 
 const content = html`
   <div slot="body-text">
@@ -46,6 +47,9 @@ const actions = html`
 
 export default {
   title: 'Experimental/Slug/DataTable',
+  parameters: {
+    ...storyDocs.parameters,
+  },
 };
 
 export const _ColumnSlugSort = () => {
