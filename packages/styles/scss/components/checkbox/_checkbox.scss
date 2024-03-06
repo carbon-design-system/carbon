@@ -76,6 +76,10 @@
   .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label::after {
     box-sizing: border-box;
+
+    @media print {
+      print-color-adjust: exact;
+    }
   }
 
   // Spacing for presentational checkbox
