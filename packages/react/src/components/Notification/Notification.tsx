@@ -41,6 +41,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
 import wrapFocus, { wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
+import { useFeatureFlag } from '../FeatureFlags';
 
 /**
  * Conditionally call a callback when the escape key is pressed
@@ -952,6 +953,9 @@ export function ActionableNotification({
   const startTrap = useRef<HTMLElement>(null);
   const endTrap = useRef<HTMLElement>(null);
   const ref = useRef<HTMLDivElement>(null);
+  const focusTrapWithoutSentinels = useFeatureFlag(
+    'enable-experimental-focus-wrap-without-sentinels'
+  );
 
   useIsomorphicEffect(() => {
     if (hasFocus) {
@@ -1006,7 +1010,6 @@ export function ActionableNotification({
     return null;
   }
 
-  const focusTrapWithoutSentinels = true; // TODO: replace with a feature flag
   return (
     <div
       {...rest}

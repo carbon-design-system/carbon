@@ -22,6 +22,7 @@ import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsT
 import wrapFocus, { wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
+import { useFeatureFlag } from '../FeatureFlags';
 
 export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
   /** Specify the content to be placed in the ModalBody. */
@@ -241,6 +242,9 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     const button = useRef<HTMLButtonElement>(null);
     const startSentinel = useRef<HTMLButtonElement>(null);
     const endSentinel = useRef<HTMLButtonElement>(null);
+    const focusTrapWithoutSentinels = useFeatureFlag(
+      'enable-experimental-focus-wrap-without-sentinels'
+    );
 
     // Keep track of modal open/close state
     // and propagate it to the document.body
@@ -401,7 +405,6 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       });
     }
 
-    const focusTrapWithoutSentinels = true; // TODO: replace with a feature flag
     return (
       <div
         {...rest}

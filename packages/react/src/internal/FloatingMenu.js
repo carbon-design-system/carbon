@@ -15,6 +15,7 @@ import { warning } from './warning';
 import wrapFocus, { wrapFocusWithoutSentinels } from './wrapFocus';
 import { match, keys } from '../internal/keyboard';
 import { PrefixContext } from './usePrefix';
+import * as FeatureFlags from '@carbon/feature-flags';
 
 /**
  * The structure for the position of floating menu.
@@ -470,7 +471,9 @@ class FloatingMenu extends React.Component {
 
   render() {
     const { context: prefix } = this;
-    const focusTrapWithoutSentinels = true; // TODO: replace with a feature flag
+    const focusTrapWithoutSentinels = FeatureFlags.enabled(
+      'enable-experimental-focus-wrap-without-sentinels'
+    );
 
     if (typeof document !== 'undefined') {
       const { focusTrap, target } = this.props;

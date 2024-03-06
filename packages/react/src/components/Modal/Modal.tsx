@@ -28,6 +28,7 @@ import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
 import { ReactAttr } from '../../types/common';
 import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -269,8 +270,10 @@ const Modal = React.forwardRef(function Modal(
   const primaryButtonClass = classNames({
     [`${prefix}--btn--loading`]: loadingStatus !== 'inactive',
   });
-
   const loadingActive = loadingStatus !== 'inactive';
+  const focusTrapWithoutSentinels = useFeatureFlag(
+    'enable-experimental-focus-wrap-without-sentinels'
+  );
 
   function isCloseButton(element: Element) {
     return (
@@ -577,7 +580,6 @@ const Modal = React.forwardRef(function Modal(
     </div>
   );
 
-  const focusTrapWithoutSentinels = true; // TODO: replace with a feature flag
   return (
     <div
       {...rest}
