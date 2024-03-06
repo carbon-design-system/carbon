@@ -90,6 +90,10 @@ const SelectableTag = <T extends React.ElementType>({
     });
   }
 
+  // Removing onClick from the spread operator
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { onClick, ...otherProps } = other;
+
   return (
     <Tag<any>
       slug={slug}
@@ -99,7 +103,7 @@ const SelectableTag = <T extends React.ElementType>({
       className={tagClasses}
       id={tagId}
       onClick={() => setSelectedTag(!selectedTag)}
-      {...other}>
+      {...otherProps}>
       <div className={`${prefix}--interactive--tag-children`}>
         {children}
         {normalizedSlug}
