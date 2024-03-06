@@ -263,7 +263,7 @@ export function ToggletipButton<T extends React.ElementType>({
   const toggletip = useToggletip();
   const prefix = usePrefix();
   const className = cx(`${prefix}--toggletip-button`, customClassName);
-  const ComponentToggle = BaseComponent ?? 'button';
+  const ComponentToggle: any = BaseComponent ?? 'button';
 
   if (ComponentToggle !== 'button') {
     return (
