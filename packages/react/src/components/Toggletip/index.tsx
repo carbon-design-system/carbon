@@ -16,6 +16,7 @@ import React, {
   type ComponentProps,
   type KeyboardEventHandler,
   type FocusEventHandler,
+  MouseEventHandler,
 } from 'react';
 import { Popover, type PopoverAlignment, PopoverContent } from '../Popover';
 import { match, keys } from '../../internal/keyboard';
@@ -70,6 +71,7 @@ type ToggleTipContextType =
   | {
       buttonProps: ComponentProps<'button'>;
       contentProps: ComponentProps<typeof PopoverContent>;
+      onClick: MouseEventHandler<HTMLButtonElement>;
     };
 
 // Used to coordinate accessibility props between button and content along with
@@ -126,6 +128,9 @@ export function Toggletip<E extends ElementType = 'span'>({
     },
     contentProps: {
       id,
+    },
+    onClick: {
+      onClick: actions.toggle,
     },
   };
 
@@ -261,15 +266,22 @@ export function ToggletipButton<T extends React.ElementType>({
   const className = cx(`${prefix}--toggletip-button`, customClassName);
   const ComponentToggle = BaseComponent ?? 'button';
 
+  if (ComponentToggle !== 'button') {
+    return (
+      <ComponentToggle {...toggletip?.onClick} className={className} {...rest}>
+        {children}
+      </ComponentToggle>
+    );
+  }
   return (
-    <ComponentToggle
+    <button
       {...toggletip?.buttonProps}
       aria-label={label}
       type="button"
       className={className}
       {...rest}>
       {children}
-    </ComponentToggle>
+    </button>
   );
 }
 
