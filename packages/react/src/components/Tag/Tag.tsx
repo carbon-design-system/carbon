@@ -184,7 +184,7 @@ const Tag = <T extends React.ElementType>({
       ) : (
         ''
       )}
-      <Text title={typeof children === 'string' ? children : undefined}>
+      <Text>
         {children !== null && children !== undefined ? children : typeText}
       </Text>
       {normalizedSlug}
