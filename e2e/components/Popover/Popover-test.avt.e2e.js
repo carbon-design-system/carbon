@@ -10,7 +10,7 @@
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
-test.describe('Popover @avt', () => {
+test.describe('@avt Popover', () => {
   test('@avt-advanced-states auto align', async ({ page }) => {
     await visitStory(page, {
       component: 'Popover',
