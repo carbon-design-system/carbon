@@ -1434,6 +1434,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "mranjana",
+      "name": "Anjana M R",
+      "avatar_url": "https://avatars.githubusercontent.com/u/91003483?v=4",
+      "profile": "https://github.com/mranjana",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
