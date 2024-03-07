@@ -1035,17 +1035,6 @@ $list-box-menu-width: convert.to-rem(300px);
     margin-inline-start: convert.to-rem(33px);
   }
 
-  // // DELETE THIS, JUST FOR TESTING
-  // .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
-  //   .#{$prefix}--list-box__menu-icon::before {
-  //   position: absolute;
-  //   background-color: $border-subtle-01;
-  //   block-size: convert.to-rem(16px);
-  //   content: '';
-  //   inline-size: convert.to-rem(1px);
-  //   margin-inline-end: 2rem;
-  // }
-
   .#{$prefix}--list-box--warning,
   .#{$prefix}--list-box--invalid[data-invalid] {
     .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__menu-icon)
