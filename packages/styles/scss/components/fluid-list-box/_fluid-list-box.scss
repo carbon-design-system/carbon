@@ -332,7 +332,7 @@
   }
 
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__selection {
-    inset-inline-end: convert.to-rem(33px);
+    inset-inline-end: convert.to-rem(41px);
   }
 
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box--warning,
@@ -345,7 +345,7 @@
       block-size: convert.to-rem(16px);
       content: '';
       inline-size: convert.to-rem(1px);
-      margin-inline-end: 1.5rem;
+      margin-inline-end: convert.to-rem(33px);
     }
   }
 }
