@@ -394,7 +394,7 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   }
 
   .#{$prefix}--tile--slug.#{$prefix}--tile {
-    @include callout-gradient('default', 0, 'layer');
+    @include ai-popover-gradient('default', 0, 'layer');
 
     border: 1px solid transparent;
     box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
@@ -402,7 +402,7 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   }
 
   .#{$prefix}--tile--slug.#{$prefix}--tile--expandable:hover {
-    @include callout-gradient('default', 0, 'layer');
+    @include ai-popover-gradient('default', 0, 'layer');
   }
 
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable::before,
@@ -421,7 +421,7 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable::before,
   .#{$prefix}--tile--slug.#{$prefix}--tile--clickable::before {
-    @include callout-gradient('hover', 0, 'layer');
+    @include ai-popover-gradient('hover', 0, 'layer');
 
     box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
   }
@@ -432,7 +432,7 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   }
 
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable::after {
-    @include callout-gradient('selected', 0, 'layer');
+    @include ai-popover-gradient('selected', 0, 'layer');
 
     box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
   }
