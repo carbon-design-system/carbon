@@ -10,7 +10,7 @@
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
-test.describe('Toggletip @avt', () => {
+test.describe('@avt Toggletip', () => {
   test('@avt-default-state Toggletip', async ({ page }) => {
     await visitStory(page, {
       component: 'Toggletip',
