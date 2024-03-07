@@ -348,4 +348,14 @@
       margin-inline-end: convert.to-rem(33px);
     }
   }
+
+  .#{$prefix}--list-box__wrapper--fluid:has(.#{$prefix}--multi-select)
+    .#{$prefix}--list-box__menu-icon {
+    inset-inline-end: calc($spacing-04);
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid:has(.#{$prefix}--dropdown)
+    .#{$prefix}--list-box__menu-icon {
+    inset-inline-end: calc($spacing-04);
+  }
 }

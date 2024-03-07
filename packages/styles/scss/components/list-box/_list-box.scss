@@ -893,7 +893,7 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: calc($spacing-08 + 8px);
+    inset-inline-end: calc($spacing-08 + 9px);
     margin-block-start: convert.to-rem(0.5px);
     transform: translateY(-50%);
   }
@@ -972,7 +972,7 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--warning
     .#{$prefix}--list-box__invalid-icon.#{$prefix}--list-box__invalid-icon--warning {
-    inset-inline-end: convert.to-rem(75px);
+    inset-inline-end: convert.to-rem(83px);
   }
 
   .#{$prefix}--list-box__wrapper--slug
@@ -1046,5 +1046,15 @@ $list-box-menu-width: convert.to-rem(300px);
       inline-size: convert.to-rem(1px);
       margin-inline-end: convert.to-rem(33px);
     }
+  }
+
+  .#{$prefix}--list-box__wrapper--slug:has(.#{$prefix}--multi-select)
+    .#{$prefix}--list-box__menu-icon {
+    inset-inline-end: calc($spacing-04 - 4px);
+  }
+
+  .#{$prefix}--list-box__wrapper--slug:has(.#{$prefix}--dropdown)
+    .#{$prefix}--list-box__menu-icon {
+    inset-inline-end: calc($spacing-04 - 4px);
   }
 }
