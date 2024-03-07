@@ -2990,6 +2990,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "hideLabel": Object {
+        "type": "bool",
+      },
       "size": Object {
         "args": Array [
           Array [
@@ -4390,7 +4393,7 @@ Map {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "as": Object {
-        "type": "string",
+        "type": "elementType",
       },
       "children": Object {
         "type": "node",
@@ -7207,6 +7210,9 @@ Map {
   },
   "StaticNotification" => Object {
     "propTypes": Object {
+      "actionButtonLabel": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },
@@ -7228,6 +7234,9 @@ Map {
       },
       "lowContrast": Object {
         "type": "bool",
+      },
+      "onActionButtonClick": Object {
+        "type": "func",
       },
       "statusIconDescription": Object {
         "type": "string",
@@ -8170,15 +8179,11 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
-      "filter": Object {
-        "type": "bool",
-      },
+      "filter": [Function],
       "id": Object {
         "type": "string",
       },
-      "onClose": Object {
-        "type": "func",
-      },
+      "onClose": [Function],
       "renderIcon": Object {
         "args": Array [
           Array [
@@ -8197,6 +8202,7 @@ Map {
           Array [
             "sm",
             "md",
+            "lg",
           ],
         ],
         "type": "oneOf",
@@ -8204,9 +8210,7 @@ Map {
       "slug": Object {
         "type": "node",
       },
-      "title": Object {
-        "type": "string",
-      },
+      "title": [Function],
       "type": Object {
         "args": Array [
           Array [
@@ -9175,6 +9179,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "defaultIsExpanded": Object {
+        "type": "bool",
+      },
       "depth": Object {
         "type": "number",
       },
@@ -9261,6 +9268,9 @@ Map {
         },
         "className": Object {
           "type": "string",
+        },
+        "defaultIsExpanded": Object {
+          "type": "bool",
         },
         "depth": Object {
           "type": "number",
@@ -9356,6 +9366,9 @@ Map {
       "multiselect": Object {
         "type": "bool",
       },
+      "onActivate": Object {
+        "type": "func",
+      },
       "onSelect": Object {
         "type": "func",
       },
@@ -9407,20 +9420,6 @@ Map {
   "VStack" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
-  },
-  "types" => Object {
-    "0": "red",
-    "1": "magenta",
-    "10": "high-contrast",
-    "11": "outline",
-    "2": "purple",
-    "3": "blue",
-    "4": "cyan",
-    "5": "teal",
-    "6": "green",
-    "7": "gray",
-    "8": "cool-gray",
-    "9": "warm-gray",
   },
   "unstable_FeatureFlags" => Object {
     "propTypes": Object {
@@ -9715,6 +9714,19 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "size": Object {
         "args": Array [

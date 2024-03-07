@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('FluidDatePicker @avt', () => {
+test.describe('@avt FluidDatePicker', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDatePicker',
@@ -111,7 +111,7 @@ test.describe('FluidDatePicker @avt', () => {
     await expect(page.locator('div.flatpickr-calendar')).toHaveClass(/open/);
     await page.keyboard.press('Escape');
     await expect(
-      page.locator('input#date-picker-input-id-start')
+      page.locator('input#date-picker-input-id-finish')
     ).toBeFocused();
     await expect(page.locator('div.flatpickr-calendar')).not.toHaveClass(
       /open/

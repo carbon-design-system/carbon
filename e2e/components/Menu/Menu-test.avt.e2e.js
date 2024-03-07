@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('Menu @avt', () => {
+test.describe('@avt Menu', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Menu',

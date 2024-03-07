@@ -83,12 +83,13 @@ function FileUploaderItem({
   errorSubject,
   errorBody,
   size,
+  className,
   ...other
 }: FileUploaderItemProps) {
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
   const prefix = usePrefix();
   const { current: id } = useRef(uuid || uid());
-  const classes = cx(`${prefix}--file__selected-file`, {
+  const classes = cx(`${prefix}--file__selected-file`, className, {
     [`${prefix}--file__selected-file--invalid`]: invalid,
     [`${prefix}--file__selected-file--md`]: size === 'md',
     [`${prefix}--file__selected-file--sm`]: size === 'sm',

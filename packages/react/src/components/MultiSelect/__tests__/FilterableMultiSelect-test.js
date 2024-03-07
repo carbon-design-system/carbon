@@ -16,6 +16,9 @@ import {
   generateItems,
   generateGenericItem,
 } from '../../ListBox/test-helpers';
+import { Slug } from '../../Slug';
+
+const prefix = 'cds';
 
 const openMenu = async () => {
   await userEvent.click(screen.getByRole('combobox'));
@@ -146,5 +149,14 @@ describe('FilterableMultiSelect', () => {
     await userEvent.click(screen.getAllByRole('option')[0]);
 
     expect(screen.getByPlaceholderText('test')).toHaveDisplayValue(3);
+  });
+
+  it('should respect slug prop', () => {
+    const { container } = render(
+      <FilterableMultiSelect {...mockProps} slug={<Slug />} />
+    );
+    expect(container.firstChild).toHaveClass(
+      `${prefix}--list-box__wrapper--slug`
+    );
   });
 });
