@@ -419,6 +419,7 @@ const DatePicker = React.forwardRef(function DatePicker(
     readOnly = false,
     short = false,
     value,
+    parseDate: parseDateProp,
     ...rest
   }: DatePickerProps,
   ref: ForwardedRef<HTMLDivElement>
@@ -557,6 +558,31 @@ const DatePicker = React.forwardRef(function DatePicker(
       localeData = l10n[locale];
     }
 
+    let parseDate = null;
+    if (!parseDateProp && dateFormat === 'm/d/Y') {
+      parseDate = (date) => {
+        const month =
+          date.split('/')[0] <= 12 && date.split('/')[0] < 0
+            ? parseInt(date.split('/')[0])
+            : 1;
+        const year = parseInt(date.split('/')[2]);
+
+        if (month && year) {
+          const daysInMonth = new Date(year, month, 0).getDate();
+          const day =
+            date.split('/')[1] <= daysInMonth && date.split('/')[1] < 0
+              ? parseInt(date.split('/')[1])
+              : 1;
+
+          return new Date(`${year}/${month}/${day}`);
+        } else {
+          return false;
+        }
+      };
+    } else if (parseDateProp) {
+      parseDate = parseDateProp;
+    }
+
     const { current: start } = startInputField;
     const { current: end } = endInputField;
     const flatpickerconfig: any = {
@@ -571,6 +597,7 @@ const DatePicker = React.forwardRef(function DatePicker(
       [enableOrDisable]: enableOrDisableArr,
       minDate: minDate,
       maxDate: maxDate,
+      parseDate: parseDate,
       plugins: [
         datePickerType === 'range'
           ? carbonFlatpickrRangePlugin({
@@ -997,6 +1024,11 @@ DatePicker.propTypes = {
    * `(dates: Date[], dStr: string, fp: Instance, data?: any):void;`
    */
   onOpen: PropTypes.func,
+
+  /**
+   * flatpickr prop passthrough. Controls how dates are parsed.
+   */
+  parseDate: PropTypes.func,
 
   /**
    * whether the DatePicker is to be readOnly
