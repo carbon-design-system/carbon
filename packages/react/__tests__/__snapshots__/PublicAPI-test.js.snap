@@ -8179,15 +8179,11 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
-      "filter": Object {
-        "type": "bool",
-      },
+      "filter": [Function],
       "id": Object {
         "type": "string",
       },
-      "onClose": Object {
-        "type": "func",
-      },
+      "onClose": [Function],
       "renderIcon": Object {
         "args": Array [
           Array [
@@ -8206,6 +8202,7 @@ Map {
           Array [
             "sm",
             "md",
+            "lg",
           ],
         ],
         "type": "oneOf",
@@ -8213,9 +8210,7 @@ Map {
       "slug": Object {
         "type": "node",
       },
-      "title": Object {
-        "type": "string",
-      },
+      "title": [Function],
       "type": Object {
         "args": Array [
           Array [
@@ -9425,20 +9420,6 @@ Map {
   "VStack" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
-  },
-  "types" => Object {
-    "0": "red",
-    "1": "magenta",
-    "10": "high-contrast",
-    "11": "outline",
-    "2": "purple",
-    "3": "blue",
-    "4": "cyan",
-    "5": "teal",
-    "6": "green",
-    "7": "gray",
-    "8": "cool-gray",
-    "9": "warm-gray",
   },
   "unstable_FeatureFlags" => Object {
     "propTypes": Object {

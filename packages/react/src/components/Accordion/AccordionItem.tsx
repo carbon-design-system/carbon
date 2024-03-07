@@ -129,7 +129,7 @@ function AccordionItem({
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--accordion__item`]: true,
-    [`${prefix}--accordion__item--active`]: isOpen,
+    [`${prefix}--accordion__item--active`]: isOpen && !disabled,
     [`${prefix}--accordion__item--disabled`]: disabled,
     [customClassName]: !!customClassName,
   });
