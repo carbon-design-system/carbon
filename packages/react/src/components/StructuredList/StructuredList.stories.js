@@ -19,8 +19,8 @@ import {
   StructuredListRow,
   StructuredListInput,
   StructuredListCell,
-  StructuredListSkeleton,
 } from './';
+import StructuredListSkeleton from './StructuredList.Skeleton';
 
 export default {
   title: 'Components/StructuredList',
@@ -83,7 +83,7 @@ export const Default = (args) => {
 };
 
 Default.args = {
-  isdensed: false,
+  isCondensed: false,
   isFlush: false,
 };
 
