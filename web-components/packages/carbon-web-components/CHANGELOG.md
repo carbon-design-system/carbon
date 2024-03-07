@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0-rc.1](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.5.0-rc.0...@carbon/web-components@2.5.0-rc.1) (2024-03-07)
+
+
+### Bug Fixes
+
+* reduced motion side panel close ([#11608](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11608)) ([dbddbb0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/dbddbb03b2da53993b6323f99ca95bbb8520c2e2))
+
+
+
+
+
 # [2.5.0-rc.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.4.0...@carbon/web-components@2.5.0-rc.0) (2024-03-01)
 
 
