@@ -6,9 +6,11 @@
  */
 
 import React from 'react';
-import { CheckmarkFilled } from '@carbon/icons-react';
+import './story.scss';
+import { RadioButton, RadioButtonChecked } from '@carbon/icons-react';
 import mdx from './StructuredList.mdx';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { useFeatureFlag } from '../FeatureFlags';
 
 import {
   StructuredListWrapper,
@@ -17,10 +19,8 @@ import {
   StructuredListRow,
   StructuredListInput,
   StructuredListCell,
+  StructuredListSkeleton,
 } from './';
-import StructuredListSkeleton from './StructuredList.Skeleton';
-
-const prefix = 'cds';
 
 export default {
   title: 'Components/StructuredList',
@@ -46,42 +46,44 @@ export default {
   },
 };
 
-export const Default = (args) => (
-  <StructuredListWrapper {...args}>
-    <StructuredListHead>
-      <StructuredListRow head>
-        <StructuredListCell head>ColumnA</StructuredListCell>
-        <StructuredListCell head>ColumnB</StructuredListCell>
-        <StructuredListCell head>ColumnC</StructuredListCell>
-      </StructuredListRow>
-    </StructuredListHead>
-    <StructuredListBody>
-      <StructuredListRow>
-        <StructuredListCell noWrap>Row 1</StructuredListCell>
-        <StructuredListCell>Row 1</StructuredListCell>
-        <StructuredListCell>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-          magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
-          sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
-          vulputate nisl a porttitor interdum.
-        </StructuredListCell>
-      </StructuredListRow>
-      <StructuredListRow>
-        <StructuredListCell noWrap>Row 2</StructuredListCell>
-        <StructuredListCell>Row 2</StructuredListCell>
-        <StructuredListCell>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-          magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
-          sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
-          vulputate nisl a porttitor interdum.
-        </StructuredListCell>
-      </StructuredListRow>
-    </StructuredListBody>
-  </StructuredListWrapper>
-);
+export const Default = (args) => {
+  return (
+    <StructuredListWrapper {...args}>
+      <StructuredListHead>
+        <StructuredListRow head>
+          <StructuredListCell head>ColumnA</StructuredListCell>
+          <StructuredListCell head>ColumnB</StructuredListCell>
+          <StructuredListCell head>ColumnC</StructuredListCell>
+        </StructuredListRow>
+      </StructuredListHead>
+      <StructuredListBody>
+        <StructuredListRow>
+          <StructuredListCell noWrap>Row 1</StructuredListCell>
+          <StructuredListCell>Row 1</StructuredListCell>
+          <StructuredListCell>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+            magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
+            sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
+            vulputate nisl a porttitor interdum.
+          </StructuredListCell>
+        </StructuredListRow>
+        <StructuredListRow>
+          <StructuredListCell noWrap>Row 2</StructuredListCell>
+          <StructuredListCell>Row 2</StructuredListCell>
+          <StructuredListCell>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+            magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
+            sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
+            vulputate nisl a porttitor interdum.
+          </StructuredListCell>
+        </StructuredListRow>
+      </StructuredListBody>
+    </StructuredListWrapper>
+  );
+};
 
 Default.args = {
-  isCondensed: false,
+  isdensed: false,
   isFlush: false,
 };
 
@@ -103,9 +105,19 @@ Default.argTypes = {
   },
 };
 
-const structuredListBodyRowGenerator = (numRows) => {
+const structuredListBodyRowGenerator = (numRows, v12StructuredRadioIcons) => {
   return Array.apply(null, Array(numRows)).map((n, i) => (
     <StructuredListRow key={`row-${i}`}>
+      {v12StructuredRadioIcons && (
+        <StructuredListCell>
+          <div className="structured-unchecks">
+            <RadioButton />
+          </div>
+          <div className="structured-checks">
+            <RadioButtonChecked />
+          </div>
+        </StructuredListCell>
+      )}
       <StructuredListCell>Row {i}</StructuredListCell>
       <StructuredListCell>Row {i}</StructuredListCell>
       <StructuredListCell>
@@ -121,29 +133,38 @@ const structuredListBodyRowGenerator = (numRows) => {
         name="row-0"
         aria-label={`row-${i}`}
       />
-      <StructuredListCell>
-        <CheckmarkFilled
-          className={`${prefix}--structured-list-svg`}
-          aria-label="select an option">
-          <title>select an option</title>
-        </CheckmarkFilled>
-      </StructuredListCell>
+      {!v12StructuredRadioIcons && (
+        <StructuredListCell>
+          <div className="structured-unchecks">
+            <RadioButton />
+          </div>
+          <div className="structured-checks">
+            <RadioButtonChecked />
+          </div>
+        </StructuredListCell>
+      )}
     </StructuredListRow>
   ));
 };
 
 export const Selection = (args) => {
+  const v12StructuredRadioIcons = useFeatureFlag(
+    'enable-v12-structured-list-radio-icons'
+  );
   return (
     <StructuredListWrapper selection {...args}>
       <StructuredListHead>
         <StructuredListRow head>
+          {v12StructuredRadioIcons && (
+            <StructuredListCell head></StructuredListCell>
+          )}
           <StructuredListCell head>ColumnA</StructuredListCell>
           <StructuredListCell head>ColumnB</StructuredListCell>
           <StructuredListCell head>ColumnC</StructuredListCell>
         </StructuredListRow>
       </StructuredListHead>
       <StructuredListBody>
-        {structuredListBodyRowGenerator(4)}
+        {structuredListBodyRowGenerator(4, v12StructuredRadioIcons)}
       </StructuredListBody>
     </StructuredListWrapper>
   );

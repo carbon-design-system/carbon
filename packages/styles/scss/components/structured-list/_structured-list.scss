@@ -242,3 +242,11 @@
     @include high-contrast-mode('icon-fill');
   }
 }
+
+.#{$prefix}--structured-list-row--selected .structured-checks {
+  display: block;
+}
+
+.#{$prefix}--structured-list-row--selected .structured-unchecks {
+  display: none;
+}
