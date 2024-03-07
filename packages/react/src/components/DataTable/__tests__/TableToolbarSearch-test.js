@@ -97,7 +97,9 @@ describe('TableToolbarSearch', () => {
     it('should call onBlur when expected', async () => {
       const onBlur = jest.fn();
       render(<TableToolbarSearch onBlur={onBlur} />);
-      await userEvent.click(screen.getByRole('button'));
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Clear search input' })
+      );
       await userEvent.tab();
 
       expect(onBlur).toHaveBeenCalled();
@@ -106,7 +108,9 @@ describe('TableToolbarSearch', () => {
     it('should call onChange when expected', async () => {
       const onChange = jest.fn();
       render(<TableToolbarSearch onChange={onChange} />);
-      await userEvent.click(screen.getByRole('button'));
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Clear search input' })
+      );
       await userEvent.tab();
       expect(onChange).toHaveBeenCalled();
     });

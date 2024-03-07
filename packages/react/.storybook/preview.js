@@ -124,6 +124,25 @@ const globalTypes = {
 };
 
 const parameters = {
+  a11y: {
+    // Can specify engine as "axe" or "accessibility-checker" (axe default)
+    engine: 'accessibility-checker',
+    config: {
+      rules: [
+        {
+          // To disable a rule across all stories, set `enabled` to `false`.
+          // Use with caution: all violations of this rule will be ignored!
+          id: 'html_lang_exists',
+          enabled: false,
+        },
+        { id: 'page_title_exists', enabled: false },
+        { id: 'skip_main_exists', enabled: false },
+        { id: 'html_skipnav_exists', enabled: false },
+        { id: 'aria_content_in_landmark', enabled: false },
+        { id: 'aria_child_tabbable', enabled: false },
+      ],
+    },
+  },
   backgrounds: {
     // https://storybook.js.org/docs/react/essentials/backgrounds#grid
     grid: {

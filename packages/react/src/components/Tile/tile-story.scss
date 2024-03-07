@@ -2,7 +2,10 @@
 @use '@carbon/react/scss/type';
 
 .experimental-tile {
-  @include tile.tile($enable-experimental-tile-contrast: true);
+  @include tile.tile(
+    $enable-experimental-tile-contrast: true,
+    $enable-v12-tile-radio-icons: true
+  );
 }
 
 div .cds--tile--selectable:not(:last-child) {

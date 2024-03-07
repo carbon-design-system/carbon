@@ -10,11 +10,11 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('FluidDatePicker @avt', () => {
+test.describe('@avt FluidDatePicker', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDatePicker',
-      id: 'experimental-unstable-fluiddatepicker--range-with-calendar',
+      id: 'experimental-fluid-components-unstable-fluiddatepicker--range-with-calendar',
       globals: {
         theme: 'white',
       },
@@ -25,7 +25,7 @@ test.describe('FluidDatePicker @avt', () => {
   test('@avt-advanced-states single', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDatePicker',
-      id: 'experimental-unstable-fluiddatepicker--single',
+      id: 'experimental-fluid-components-unstable-fluiddatepicker--single',
       globals: {
         theme: 'white',
       },
@@ -36,7 +36,7 @@ test.describe('FluidDatePicker @avt', () => {
   test('@avt-advanced-states simple', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDatePicker',
-      id: 'experimental-unstable-fluiddatepicker--simple',
+      id: 'experimental-fluid-components-unstable-fluiddatepicker--simple',
       globals: {
         theme: 'white',
       },
@@ -47,7 +47,7 @@ test.describe('FluidDatePicker @avt', () => {
   test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDatePicker',
-      id: 'experimental-unstable-fluiddatepicker--skeleton',
+      id: 'experimental-fluid-components-unstable-fluiddatepicker--skeleton',
       globals: {
         theme: 'white',
       },
@@ -58,7 +58,7 @@ test.describe('FluidDatePicker @avt', () => {
   test('@avt-keyboard-nav single', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDatePicker',
-      id: 'experimental-unstable-fluiddatepicker--single',
+      id: 'experimental-fluid-components-unstable-fluiddatepicker--single',
       globals: {
         theme: 'white',
       },
@@ -79,7 +79,7 @@ test.describe('FluidDatePicker @avt', () => {
   test('@avt-keyboard-nav range', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidDatePicker',
-      id: 'experimental-unstable-fluiddatepicker--range-with-calendar',
+      id: 'experimental-fluid-components-unstable-fluiddatepicker--range-with-calendar',
       globals: {
         theme: 'white',
       },
@@ -111,7 +111,7 @@ test.describe('FluidDatePicker @avt', () => {
     await expect(page.locator('div.flatpickr-calendar')).toHaveClass(/open/);
     await page.keyboard.press('Escape');
     await expect(
-      page.locator('input#date-picker-input-id-start')
+      page.locator('input#date-picker-input-id-finish')
     ).toBeFocused();
     await expect(page.locator('div.flatpickr-calendar')).not.toHaveClass(
       /open/

@@ -10,6 +10,9 @@ import DatePicker from './DatePicker';
 import DatePickerInput from '../DatePickerInput';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { Slug } from '../Slug';
+
+const prefix = 'cds';
 
 describe('DatePicker', () => {
   it('should add extra classes that are passed via className', () => {
@@ -51,7 +54,7 @@ describe('DatePicker', () => {
 
     expect(
       // eslint-disable-next-line testing-library/no-node-access
-      document.querySelector('.cds--date-picker--simple')
+      document.querySelector(`.${prefix}--date-picker--simple`)
     ).toBeInTheDocument();
   });
 
@@ -71,7 +74,7 @@ describe('DatePicker', () => {
 
     expect(
       // eslint-disable-next-line testing-library/no-node-access
-      document.querySelector('.cds--date-picker--single')
+      document.querySelector(`.${prefix}--date-picker--single`)
     ).toBeInTheDocument();
   });
 
@@ -93,7 +96,7 @@ describe('DatePicker', () => {
 
     expect(
       // eslint-disable-next-line testing-library/no-node-access
-      document.querySelector('.cds--date-picker--range')
+      document.querySelector(`.${prefix}--date-picker--range`)
     ).toBeInTheDocument();
   });
 
@@ -161,6 +164,20 @@ describe('DatePicker', () => {
 
     expect(ref).toHaveBeenCalledWith(container.firstChild);
   });
+
+  it('should respect slug prop', () => {
+    render(
+      <DatePickerInput
+        id="date-picker-input-id-start"
+        placeholder="mm/dd/yyyy"
+        labelText="Date Picker label"
+        data-testid="input-value"
+        slug={<Slug />}
+      />
+    );
+
+    expect(screen.getByRole('button')).toHaveClass(`${prefix}--slug__button`);
+  });
 });
 
 describe('Simple date picker', () => {
@@ -211,6 +228,7 @@ describe('Simple date picker', () => {
           default: module.DatePickerInput,
         }))
       );
+
       render(
         <React.Suspense fallback="Loading">
           <LazyDatePicker datePickerType="single">
@@ -222,7 +240,12 @@ describe('Simple date picker', () => {
           </LazyDatePicker>
         </React.Suspense>
       );
-      const labeledElement = await screen.findByLabelText('Date Picker label');
+
+      const labeledElement = await screen.findByLabelText(
+        'Date Picker label',
+        {},
+        { timeout: 5000 }
+      );
       expect(labeledElement).toBeInTheDocument();
 
       const input = screen.getByRole('textbox');
@@ -266,7 +289,7 @@ describe('Single date picker', () => {
     );
 
     // eslint-disable-next-line testing-library/no-node-access
-    const input = document.querySelector('.cds--date-picker__input');
+    const input = document.querySelector(`.${prefix}--date-picker__input`);
 
     expect(screen.getByRole('application')).not.toHaveClass('open');
     await userEvent.click(input);
@@ -314,6 +337,46 @@ describe('Single date picker', () => {
 
     await userEvent.click(screen.getByText('clear'));
     expect(screen.getByLabelText('Date Picker label')).toHaveValue('');
+  });
+
+  it('should respect closeOnSelect prop', async () => {
+    const DatePickerExample = () => {
+      const [date, setDate] = useState();
+      return (
+        <DatePicker
+          datePickerType="single"
+          value={date}
+          closeOnSelect={false}
+          minDate="11/25/2023"
+          maxDate="11/28/2023"
+          onChange={(value) => {
+            setDate(value);
+          }}>
+          <DatePickerInput
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+            id="date-picker-simple"
+          />
+        </DatePicker>
+      );
+    };
+    render(<DatePickerExample />);
+    const input = screen.getByLabelText('Date Picker label');
+    expect(screen.getByRole('application')).not.toHaveClass('open');
+
+    await userEvent.click(input);
+    expect(screen.getByRole('application')).toHaveClass('open');
+
+    // eslint-disable-next-line testing-library/no-node-access
+    const belowMinDate = document.querySelector(
+      '[aria-label="November 26, 2023"]'
+    );
+    await userEvent.click(belowMinDate);
+
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue(
+      '11/26/2023'
+    );
+    expect(screen.getByRole('application')).toHaveClass('open');
   });
 });
 

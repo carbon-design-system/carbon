@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('UIShell @avt', () => {
+test.describe('@avt UIShell', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'UIShell',
@@ -131,5 +131,25 @@ test.describe('UIShell @avt', () => {
     await page.keyboard.press('Tab');
     // focus should then be within the main content of the page
     await expect(page.getByRole('link', { name: 'Carbon' })).toBeFocused();
+  });
+
+  test('@avt-keyboard-nav header w/ navigation actions and siddenav', async ({
+    page,
+  }) => {
+    await visitStory(page, {
+      component: 'UIShell',
+      id: 'components-ui-shell-header--header-w-navigation-actions-and-side-nav',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    await page.getByRole('button', { name: 'Category title' }).first().focus();
+    await expect(
+      page.getByRole('button', { name: 'Category title' }).first()
+    ).toBeFocused();
+    await page.keyboard.press('Enter');
+    await page.keyboard.press('Tab');
+    await expect(page.getByRole('link', { name: 'Link 5' })).toBeFocused();
   });
 });

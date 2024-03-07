@@ -29,6 +29,7 @@ import {
   WarningFilled,
 } from '@carbon/icons-react';
 import ListBox, {
+  type ListBoxMenuIconTranslationKey,
   ListBoxSize,
   ListBoxType,
   PropTypes as ListBoxPropTypes,
@@ -184,9 +185,7 @@ export interface DropdownProps<ItemType>
    * An optional callback to render the currently selected item as a react element instead of only
    * as a string.
    */
-  renderSelectedItem?(
-    item: ItemType
-  ): React.JSXElementConstructor<ItemType> | null;
+  renderSelectedItem?(item: ItemType): ReactNode;
 
   /**
    * In the case you want to control the dropdown selection entirely.
@@ -212,7 +211,10 @@ export interface DropdownProps<ItemType>
   /**
    * Callback function for translating ListBoxMenuIcon SVG title
    */
-  translateWithId?(messageId: string, args?: Record<string, unknown>): string;
+  translateWithId?(
+    messageId: ListBoxMenuIconTranslationKey,
+    args?: Record<string, unknown>
+  ): string;
 
   /**
    * The dropdown type, `default` or `inline`
@@ -229,6 +231,8 @@ export interface DropdownProps<ItemType>
    */
   warnText?: React.ReactNode;
 }
+
+export type DropdownTranslationKey = ListBoxMenuIconTranslationKey;
 
 const Dropdown = React.forwardRef(
   <ItemType,>(
@@ -500,7 +504,7 @@ const Dropdown = React.forwardRef(
                 ? renderSelectedItem
                   ? renderSelectedItem(selectedItem)
                   : itemToString(selectedItem)
-                : label}
+                : (label as any)}
             </span>
             <ListBox.MenuIcon
               isOpen={isOpen}

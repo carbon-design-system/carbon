@@ -10,11 +10,11 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('FluidSearch @avt', () => {
+test.describe('@avt FluidSearch', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidSearch',
-      id: 'experimental-unstable-fluidsearch--default',
+      id: 'experimental-fluid-components-unstable-fluidsearch--default',
       globals: {
         theme: 'white',
       },
@@ -25,7 +25,7 @@ test.describe('FluidSearch @avt', () => {
   test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidSearch',
-      id: 'experimental-unstable-fluidsearch--skeleton',
+      id: 'experimental-fluid-components-unstable-fluidsearch--skeleton',
       globals: {
         theme: 'white',
       },
@@ -36,13 +36,15 @@ test.describe('FluidSearch @avt', () => {
   test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'Search',
-      id: 'experimental-unstable-fluidsearch--default',
+      id: 'experimental-fluid-components-unstable-fluidsearch--default',
       globals: {
         theme: 'white',
       },
     });
     const search = page.getByRole('searchbox');
-    const clearButton = page.getByRole('button');
+    const clearButton = page.getByRole('button', {
+      name: 'Clear search input',
+    });
     await expect(search).toBeVisible();
     await expect(clearButton).not.toBeVisible();
 

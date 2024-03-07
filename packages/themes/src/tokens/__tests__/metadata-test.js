@@ -946,71 +946,127 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
-          "name": "slug-callout-gradient-top",
+          "name": "ai-popover-shadow-outer-01",
           "type": "color",
         },
         Object {
-          "name": "slug-callout-gradient-bottom",
+          "name": "ai-popover-shadow-outer-02",
           "type": "color",
         },
         Object {
-          "name": "slug-callout-aura-start",
+          "name": "ai-inner-shadow",
           "type": "color",
         },
         Object {
-          "name": "slug-callout-aura-end",
+          "name": "ai-aura-start",
           "type": "color",
         },
         Object {
-          "name": "slug-callout-gradient-top-hover",
+          "name": "ai-aura-start-table",
           "type": "color",
         },
         Object {
-          "name": "slug-callout-gradient-bottom-hover",
+          "name": "ai-aura-end",
           "type": "color",
         },
         Object {
-          "name": "slug-callout-aura-start-hover-01",
+          "name": "ai-aura-hover-background",
           "type": "color",
         },
         Object {
-          "name": "slug-callout-aura-start-hover-02",
+          "name": "ai-aura-hover-start",
           "type": "color",
         },
         Object {
-          "name": "slug-callout-aura-end-hover-01",
+          "name": "ai-aura-hover-end",
           "type": "color",
         },
         Object {
-          "name": "slug-callout-aura-end-hover-02",
+          "name": "ai-border-strong",
           "type": "color",
         },
         Object {
-          "name": "slug-callout-gradient-top-selected",
+          "name": "ai-border-start",
           "type": "color",
         },
         Object {
-          "name": "slug-callout-gradient-bottom-selected",
+          "name": "ai-border-end",
           "type": "color",
         },
         Object {
-          "name": "slug-callout-aura-start-selected",
+          "name": "ai-drop-shadow",
           "type": "color",
         },
         Object {
-          "name": "slug-callout-aura-end-selected",
+          "name": "ai-skeleton-background",
           "type": "color",
         },
         Object {
-          "name": "ai-gradient-start-01",
+          "name": "ai-skeleton-element-background",
           "type": "color",
         },
         Object {
-          "name": "ai-gradient-start-02",
+          "name": "ai-overlay",
           "type": "color",
         },
         Object {
-          "name": "ai-gradient-end",
+          "name": "ai-popover-caret-center",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-popover-caret-bottom",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-popover-caret-bottom-background",
+          "type": "color",
+        },
+        Object {
+          "name": "ai-popover-caret-bottom-background-actions",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-prompt-background",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-prompt-border-start",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-prompt-border-end",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-bubble-user",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-bubble-agent",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-bubble-agent-border",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-avatar-bot",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-avatar-agent",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-avatar-user",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-shell-background",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-header-background",
           "type": "color",
         },
         Object {
@@ -1299,6 +1355,46 @@ test('metadata', () => {
         },
         Object {
           "name": "tag-hover-gray",
+          "type": "color",
+        },
+        Object {
+          "name": "tag-border-red",
+          "type": "color",
+        },
+        Object {
+          "name": "tag-border-blue",
+          "type": "color",
+        },
+        Object {
+          "name": "tag-border-cyan",
+          "type": "color",
+        },
+        Object {
+          "name": "tag-border-teal",
+          "type": "color",
+        },
+        Object {
+          "name": "tag-border-green",
+          "type": "color",
+        },
+        Object {
+          "name": "tag-border-magenta",
+          "type": "color",
+        },
+        Object {
+          "name": "tag-border-purple",
+          "type": "color",
+        },
+        Object {
+          "name": "tag-border-gray",
+          "type": "color",
+        },
+        Object {
+          "name": "tag-border-cool-gray",
+          "type": "color",
+        },
+        Object {
+          "name": "tag-border-warm-gray",
           "type": "color",
         },
         Object {

@@ -7,7 +7,7 @@
 
 import React from 'react';
 import SwitcherItem from '../SwitcherItem';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 
 describe('SwitcherItem', () => {
   describe('renders as expected - Component API', () => {
@@ -77,6 +77,20 @@ describe('SwitcherItem', () => {
         'tabIndex',
         '-1'
       );
+    });
+
+    it('should handle onClick event', () => {
+      const dummyHandler = jest.fn();
+
+      render(
+        <SwitcherItem aria-label="dummy-aria-label" onClick={dummyHandler}>
+          Dummy child
+        </SwitcherItem>
+      );
+
+      fireEvent.click(screen.getByRole('listitem').firstChild);
+
+      expect(dummyHandler).toHaveBeenCalledTimes(1);
     });
   });
 });

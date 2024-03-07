@@ -377,6 +377,13 @@
 
   // No steppers
   .#{$prefix}--number--nosteppers input[type='number'] {
+    padding-inline-end: 0;
+  }
+
+  .#{$prefix}--number--nosteppers input[type='number'][data-invalid],
+  .#{$prefix}--number--nosteppers
+    .#{$prefix}--number__input-wrapper--warning
+    input[type='number'] {
     padding-inline-end: convert.to-rem(48px);
   }
 
@@ -438,11 +445,21 @@
     padding-inline-end: convert.to-rem(144px);
   }
 
-  .#{$prefix}--number__input-wrapper--slug input[type='number'],
+  .#{$prefix}--number__input-wrapper--slug
+    input[type='number']:not(:has(~ .#{$prefix}--slug--revert)),
   .#{$prefix}--number__input-wrapper--slug input[type='number']:disabled {
     @include ai-gradient;
 
     padding-inline-end: convert.to-rem(112px);
+  }
+
+  .#{$prefix}--number__input-wrapper--slug
+    input[type='number']:not([data-invalid]):not(
+      :has(~ .#{$prefix}--slug--revert)
+    )
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn {
+    border-block-end-color: $ai-border-strong;
   }
 
   // Skeleton State

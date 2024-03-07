@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('Search @avt', () => {
+test.describe('@avt Search', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Search',
@@ -42,7 +42,9 @@ test.describe('Search @avt', () => {
       },
     });
     const search = page.getByRole('searchbox');
-    const clearButton = page.getByRole('button');
+    const clearButton = page.getByRole('button', {
+      name: 'Clear search input',
+    });
     await expect(search).toBeVisible();
     await expect(clearButton).not.toBeVisible();
 

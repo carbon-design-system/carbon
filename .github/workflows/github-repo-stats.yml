@@ -14,6 +14,6 @@ jobs:
     steps:
       - name: run-ghrs
         # Use latest release.
-        uses: jgehrcke/github-repo-stats@RELEASE
+        uses: jgehrcke/github-repo-stats@306db38ad131cab2aa5f2cd3062bf6f8aa78c1aa #1.4.2
         with:
           ghtoken: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
