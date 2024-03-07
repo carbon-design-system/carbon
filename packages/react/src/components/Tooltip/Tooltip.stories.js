@@ -108,7 +108,7 @@ export const Playground = PlaygroundStory.bind({});
 Playground.args = {
   align: 'bottom',
   closeOnActivation: false,
-  defaultOpen: true,
+  defaultOpen: false,
   label: 'Custom label',
 };
 
