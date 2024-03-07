@@ -21,9 +21,10 @@ import {
   StructuredListCell,
 } from './';
 import StructuredListSkeleton from './StructuredList.Skeleton';
-
+import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
+const experimentalClassname = 'experimental-tile';
 export default {
-  title: 'Components/StructuredList',
+  title: 'Experimental/Feature Flags/StructuredList',
   component: StructuredListWrapper,
   subcomponents: {
     StructuredListHead,
@@ -44,41 +45,50 @@ export default {
       },
     },
   },
+  decorators: [
+    (Story) => (
+      <WithFeatureFlags>
+        <Story />
+      </WithFeatureFlags>
+    ),
+  ],
 };
 
 export const Default = (args) => {
   return (
-    <StructuredListWrapper {...args}>
-      <StructuredListHead>
-        <StructuredListRow head>
-          <StructuredListCell head>ColumnA</StructuredListCell>
-          <StructuredListCell head>ColumnB</StructuredListCell>
-          <StructuredListCell head>ColumnC</StructuredListCell>
-        </StructuredListRow>
-      </StructuredListHead>
-      <StructuredListBody>
-        <StructuredListRow>
-          <StructuredListCell noWrap>Row 1</StructuredListCell>
-          <StructuredListCell>Row 1</StructuredListCell>
-          <StructuredListCell>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-            magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
-            sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
-            vulputate nisl a porttitor interdum.
-          </StructuredListCell>
-        </StructuredListRow>
-        <StructuredListRow>
-          <StructuredListCell noWrap>Row 2</StructuredListCell>
-          <StructuredListCell>Row 2</StructuredListCell>
-          <StructuredListCell>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-            magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
-            sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
-            vulputate nisl a porttitor interdum.
-          </StructuredListCell>
-        </StructuredListRow>
-      </StructuredListBody>
-    </StructuredListWrapper>
+    <div className={experimentalClassname}>
+      <StructuredListWrapper {...args}>
+        <StructuredListHead>
+          <StructuredListRow head>
+            <StructuredListCell head>ColumnA</StructuredListCell>
+            <StructuredListCell head>ColumnB</StructuredListCell>
+            <StructuredListCell head>ColumnC</StructuredListCell>
+          </StructuredListRow>
+        </StructuredListHead>
+        <StructuredListBody>
+          <StructuredListRow>
+            <StructuredListCell noWrap>Row 1</StructuredListCell>
+            <StructuredListCell>Row 1</StructuredListCell>
+            <StructuredListCell>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+              magna, finibus id tortor sed, aliquet bibendum augue. Aenean
+              posuere sem vel euismod dignissim. Nulla ut cursus dolor.
+              Pellentesque vulputate nisl a porttitor interdum.
+            </StructuredListCell>
+          </StructuredListRow>
+          <StructuredListRow>
+            <StructuredListCell noWrap>Row 2</StructuredListCell>
+            <StructuredListCell>Row 2</StructuredListCell>
+            <StructuredListCell>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+              magna, finibus id tortor sed, aliquet bibendum augue. Aenean
+              posuere sem vel euismod dignissim. Nulla ut cursus dolor.
+              Pellentesque vulputate nisl a porttitor interdum.
+            </StructuredListCell>
+          </StructuredListRow>
+        </StructuredListBody>
+      </StructuredListWrapper>
+    </div>
   );
 };
 

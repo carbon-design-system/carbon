@@ -45,4 +45,4 @@ feature-flags:
   - name: enable-v12-structured-list-radio-icons
     description: >
       Enable rendering of radio icons in the StructuredList component
-    enabled: true
+    enabled: false
