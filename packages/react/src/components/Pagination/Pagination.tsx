@@ -20,7 +20,7 @@ type ExcludedAttributes = 'id' | 'onChange';
 
 export interface PaginationPageSize {
   text: string;
-  value: string;
+  value: number;
 }
 
 export interface PaginationProps
@@ -506,12 +506,12 @@ Pagination.propTypes = {
    * The choices for `pageSize`.
    */
   pageSizes: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.number),
+    PropTypes.arrayOf(PropTypes.number.isRequired),
     PropTypes.arrayOf(
       PropTypes.shape({
-        text: PropTypes.string,
-        value: PropTypes.number,
-      })
+        text: PropTypes.string.isRequired,
+        value: PropTypes.number.isRequired,
+      }).isRequired
     ),
   ]).isRequired,
 
