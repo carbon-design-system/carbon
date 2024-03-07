@@ -108,16 +108,8 @@ export default function Copy({
 
   const initialLabel = other['aria-label'] ?? '';
 
-  // TODO: remove these two lines when IconButton is properly typed, revert TypedIconButton component to IconButton
-  type IconButtonType = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-    closeOnActivation?: boolean;
-    align: string;
-    label: string | undefined;
-  };
-  const TypedIconButton = IconButton as React.FC<IconButtonType>;
-
   return (
-    <TypedIconButton
+    <IconButton
       closeOnActivation={false}
       align={align}
       className={classNames}
@@ -132,7 +124,7 @@ export default function Copy({
         (!children && (animation ? feedback : other['aria-label'])) || undefined
       }>
       {children}
-    </TypedIconButton>
+    </IconButton>
   );
 }
 
