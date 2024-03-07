@@ -2990,6 +2990,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "hideLabel": Object {
+        "type": "bool",
+      },
       "size": Object {
         "args": Array [
           Array [
