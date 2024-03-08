@@ -9,7 +9,7 @@
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
-test.describe('IconButton @avt', () => {
+test.describe('@avt IconButton', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'IconButton',
