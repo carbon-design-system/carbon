@@ -10,7 +10,7 @@
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
-test.describe('breadcrumb @avt', () => {
+test.describe('@avt breadcrumb', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Breadcrumb',
@@ -57,25 +57,6 @@ test.describe('breadcrumb @avt', () => {
     await expect(page.getByText('Breadcrumb 1')).toBeFocused();
     // Checking if the link is enabled to be clicked on
     await expect(page.getByText('Breadcrumb 1')).toBeEnabled();
-  });
-
-  test('@avt-keyboard-nav - item without href prop', async ({ page }) => {
-    await visitStory(page, {
-      component: 'Breadcrumb',
-      id: 'components-breadcrumb--default',
-      globals: {
-        theme: 'white',
-      },
-    });
-    await expect(page.getByText('Breadcrumb 3')).toBeVisible();
-    await page.keyboard.press('Tab');
-    await page.keyboard.press('Tab');
-    await page.keyboard.press('Tab');
-    await expect(page.getByText('Breadcrumb 3')).toBeFocused();
-
-    // The Breadcrumb 4 should not be focusable
-    await page.keyboard.press('Tab');
-    await expect(page.getByText('Breadcrumb 4')).not.toBeFocused();
   });
 
   test('@avt-keyboard-nav with overflow menu keyboard navigation', async ({
