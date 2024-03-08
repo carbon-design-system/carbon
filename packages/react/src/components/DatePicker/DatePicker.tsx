@@ -365,6 +365,11 @@ interface DatePickerProps {
   onOpen?: flatpickr.Options.Hook;
 
   /**
+   * flatpickr prop passthrough. Controls how dates are parsed.
+   */
+  parseDate?: (date: string) => Date | false;
+
+  /**
    * whether the DatePicker is to be readOnly
    * if boolean applies to all inputs
    * if array applies to each input in order
@@ -558,7 +563,7 @@ const DatePicker = React.forwardRef(function DatePicker(
       localeData = l10n[locale];
     }
 
-    let parseDate = null;
+    let parseDate;
     if (!parseDateProp && dateFormat === 'm/d/Y') {
       parseDate = (date) => {
         const month =
