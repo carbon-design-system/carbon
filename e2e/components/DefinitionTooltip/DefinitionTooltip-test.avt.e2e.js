@@ -24,7 +24,7 @@ test.describe('@avt DefinitionTooltip', () => {
     );
   });
 
-  test('@avt-keyboard-state default', async ({ page }) => {
+  test('@avt-keyboard-nav default', async ({ page }) => {
     await visitStory(page, {
       component: 'DefinitionTooltip',
       id: 'components-definitiontooltip--default',
@@ -38,10 +38,10 @@ test.describe('@avt DefinitionTooltip', () => {
     const primaryButton = page.getByRole('button', { name: 'URL' });
 
     // Testing DefinitionTooltip
-    await page.keyboard.press('Tab');
     await expect(primaryButton).toBeVisible();
-    await expect(primaryButton).toHaveAttribute('aria-expanded', 'false');
-    await primaryButton.click();
+    await page.keyboard.press('Tab');
     await expect(primaryButton).toHaveAttribute('aria-expanded', 'true');
+    await primaryButton.click();
+    await expect(primaryButton).toHaveAttribute('aria-expanded', 'false');
   });
 });
