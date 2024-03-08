@@ -563,24 +563,33 @@ const DatePicker = React.forwardRef(function DatePicker(
       localeData = l10n[locale];
     }
 
+    // parseDate is called before the date is actually set to parse the value of the input and determine if it is a valid date string.
+    // Flatpickr's default parseDate can provide
     let parseDate;
     if (!parseDateProp && dateFormat === 'm/d/Y') {
+      // This function only supports the default dateFormat.
       parseDate = (date) => {
+        // Month must be 1-12. If outside these bounds, `1` should be used.
         const month =
-          date.split('/')[0] <= 12 && date.split('/')[0] < 0
+          date.split('/')[0] <= 12 && date.split('/')[0] > 0
             ? parseInt(date.split('/')[0])
             : 1;
         const year = parseInt(date.split('/')[2]);
 
         if (month && year) {
+          // The month and year must be provided to be able to determine
+          // the number of days in the month.
           const daysInMonth = new Date(year, month, 0).getDate();
+          // If the day does not fall within the days in the month, `1` should be used.
           const day =
-            date.split('/')[1] <= daysInMonth && date.split('/')[1] < 0
+            date.split('/')[1] <= daysInMonth && date.split('/')[1] > 0
               ? parseInt(date.split('/')[1])
               : 1;
 
           return new Date(`${year}/${month}/${day}`);
         } else {
+          // With no month and year, we cannot calculate anything.
+          // Returning false gives flatpickr an invalid date, which will clear the input
           return false;
         }
       };
