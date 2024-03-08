@@ -72,7 +72,12 @@
     color: $chat-button-text-selected;
   }
 
-  .#{$prefix}--chat-btn--quick-action--selected:hover {
+  .#{$prefix}--chat-btn--quick-action.#{$prefix}--chat-btn--quick-action--selected:not(
+      [disabled]
+    ):hover,
+  .#{$prefix}--chat-btn--quick-action.#{$prefix}--chat-btn--quick-action--selected:not(
+      [disabled]
+    ):active {
     color: $chat-button-text-selected;
   }
 
