@@ -4,7 +4,6 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-// @ts-nocheck
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -31,13 +30,12 @@ import {
 } from '@floating-ui/react';
 
 interface PopoverContext {
-  floating: React.Ref<HTMLSpanElement>;
+  setFloating: React.Ref<HTMLSpanElement>;
+  caretRef: React.Ref<HTMLSpanElement>;
+  autoAlign: boolean | null;
 }
 
 const PopoverContext = React.createContext<PopoverContext>({
-  floating: {
-    current: null,
-  },
   // the refs below are new from floating-ui work
   setFloating: {
     current: null,
@@ -166,12 +164,14 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
     }
   });
 
-  const popoverDimensions = useRef();
+  // 10 and 6 are the defaults defined in packages/styles/scss/components/popover/_popover.scss
+  const popoverDimensions = useRef({ offset: 10, caretHeight: 6 });
+
   useIsomorphicEffect(() => {
     // The popover is only offset when a caret is present. Technically, the custom properties
     // accessed below can be set by a user even if caret=false, but doing so does not follow
     // the design specification for Popover.
-    if (caret) {
+    if (caret && popover.current) {
       // Gather the dimensions of the caret and prefer the values set via custom properties.
       // If a value is not set via a custom property, provide a default value that matches the
       // default values defined in the sass style file
@@ -181,48 +181,45 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
         '--cds-popover-caret-height'
       );
 
-      // Handle if the property value is in px or rem.
+      // Handle if the property values are in px or rem.
       // We want to store just the base number value without a unit suffix
-      const offsetPropertyValue = offsetProperty.includes('px')
-        ? offsetProperty.split('px', 1)[0] * 1
-        : offsetProperty.split('rem', 1)[0] * 16;
+      if (offsetProperty) {
+        popoverDimensions.current.offset = offsetProperty.includes('px')
+          ? Number(offsetProperty.split('px', 1)[0]) * 1
+          : Number(offsetProperty.split('rem', 1)[0]) * 16;
+      }
 
-      const caretPropertyValue = caretProperty.includes('px')
-        ? caretProperty.split('px', 1)[0] * 1
-        : caretProperty.split('rem', 1)[0] * 16;
-
-      popoverDimensions.current = {
-        // 10 and 6 are the defaults defined in packages/styles/scss/components/popover/_popover.scss
-        offset: offsetProperty ? offsetPropertyValue : 10,
-        caretHeight: caretProperty ? caretPropertyValue : 6,
-      };
+      if (caretProperty) {
+        popoverDimensions.current.caretHeight = caretProperty.includes('px')
+          ? Number(caretProperty.split('px', 1)[0]) * 1
+          : Number(caretProperty.split('rem', 1)[0]) * 16;
+      }
     }
   });
 
-  const floatingUIConfig = autoAlign
-    ? {
-        placement: align,
+  const { refs, floatingStyles, placement, middlewareData } = useFloating(
+    autoAlign
+      ? {
+          placement: align,
 
-        // The floating element is positioned relative to its nearest
-        // containing block (usually the viewport). It will in many cases also
-        // “break” the floating element out of a clipping ancestor.
-        // https://floating-ui.com/docs/misc#clipping
-        strategy: 'fixed',
+          // The floating element is positioned relative to its nearest
+          // containing block (usually the viewport). It will in many cases also
+          // “break” the floating element out of a clipping ancestor.
+          // https://floating-ui.com/docs/misc#clipping
+          strategy: 'fixed',
 
-        // Middleware order matters, arrow should be last
-        middleware: [
-          offset(popoverDimensions?.current?.offset),
-          flip({ fallbackAxisSideDirection: 'start' }),
-          arrow({
-            element: caretRef,
-          }),
-        ],
-        whileElementsMounted: autoUpdate,
-      }
-    : {};
-
-  const { refs, floatingStyles, placement, middlewareData } =
-    useFloating(floatingUIConfig);
+          // Middleware order matters, arrow should be last
+          middleware: [
+            offset(popoverDimensions?.current?.offset),
+            flip({ fallbackAxisSideDirection: 'start' }),
+            arrow({
+              element: caretRef,
+            }),
+          ],
+          whileElementsMounted: autoUpdate,
+        }
+      : {} // When autoAlign is turned off, floating-ui will not be used
+  );
 
   const value = useMemo(() => {
     return {
@@ -243,11 +240,11 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
 
   useEffect(() => {
     if (autoAlign) {
-      if (refs?.floating?.current) {
-        Object.keys(floatingStyles).forEach((style) => {
+      Object.keys(floatingStyles).forEach((style) => {
+        if (refs.floating.current) {
           refs.floating.current.style[style] = floatingStyles[style];
-        });
-      }
+        }
+      });
 
       if (
         caret &&
@@ -271,8 +268,10 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
         caretRef.current.style.right = '';
         caretRef.current.style.bottom = '';
 
-        caretRef.current.style[staticSide] = `${-popoverDimensions?.current
-          ?.caretHeight}px`;
+        if (staticSide) {
+          caretRef.current.style[staticSide] = `${-popoverDimensions?.current
+            ?.caretHeight}px`;
+        }
       }
     }
   }, [
@@ -310,16 +309,16 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
         (autoAlign && item?.type?.displayName === 'ToggletipButton')) &&
       React.isValidElement(item)
     ) {
-      const className = item?.props?.className;
-      const ref = item?.props?.ref;
+      const className = (item?.props as any)?.className;
+      const ref = (item?.props as any).ref;
       const tabTipClasses = cx(
         `${prefix}--popover--tab-tip__button`,
         className
       );
 
-      return React.cloneElement(item, {
+      return React.cloneElement(item as any, {
         className:
-          isTabTip && item?.type === 'button' ? tabTipClasses : className,
+          isTabTip && item?.type === 'button' ? tabTipClasses : className || '',
 
         // With cloneElement, if you pass a `ref`, it overrides the original ref.
         // https://react.dev/reference/react/cloneElement#parameters
@@ -334,8 +333,10 @@ function PopoverRenderFunction<E extends ElementType = 'span'>(
           // In either of these caes we want to set this as the reference node for floating-ui autoAlign
           // positioning.
           if (
-            (autoAlign && item?.type?.displayName !== 'PopoverContent') ||
-            (autoAlign && item?.type?.displayName === 'ToggletipButton')
+            (autoAlign &&
+              (item?.type as any)?.displayName !== 'PopoverContent') ||
+            (autoAlign &&
+              (item?.type as any)?.displayName === 'ToggletipButton')
           ) {
             // Set the reference element for floating-ui
             refs.setReference(node);
