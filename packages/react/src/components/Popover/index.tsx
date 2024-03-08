@@ -172,8 +172,19 @@ export const Popover: PopoverComponent = React.forwardRef(
       }
     });
 
-    // 10 and 6 are the defaults defined in packages/styles/scss/components/popover/_popover.scss
-    const popoverDimensions = useRef({ offset: 10, caretHeight: 6 });
+    // Slug styling places a border around the popover content so the caret
+    // needs to be placed 1px further outside the popover content. To do so,
+    // we look to see if any of the children has a className containing "slug"
+    const initialCaretHeight = React.Children.toArray(children).some((x) => {
+      return (x as any)?.props?.className?.includes('slug');
+    })
+      ? 7
+      : 6;
+    // These defaults match the defaults defined in packages/styles/scss/components/popover/_popover.scss
+    const popoverDimensions = useRef({
+      offset: 10,
+      caretHeight: initialCaretHeight,
+    });
 
     useIsomorphicEffect(() => {
       // The popover is only offset when a caret is present. Technically, the custom properties
