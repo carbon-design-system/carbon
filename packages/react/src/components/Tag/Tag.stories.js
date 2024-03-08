@@ -19,7 +19,7 @@ export const ReadOnly = () => {
   return (
     <>
       <Tag className="some-class" type="red">
-        {'Tag content'}
+        {'Tag content big Tag content big Tag content big '}
       </Tag>
       <Tag className="some-class" type="magenta">
         {'Tag content'}
@@ -61,7 +61,7 @@ export const ReadOnly = () => {
 export const Playground = (args) => {
   return (
     <Tag renderIcon={Asleep} {...args}>
-      {'Tag content'}
+      {'Tag contentcontent content content content'}
     </Tag>
   );
 };

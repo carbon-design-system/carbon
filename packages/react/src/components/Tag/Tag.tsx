@@ -6,7 +6,7 @@
  */
 
 import PropTypes, { ReactNodeLike } from 'prop-types';
-import React from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
@@ -14,6 +14,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 import { Text } from '../Text';
 import deprecate from '../../prop-types/deprecate';
+import { Tooltip } from '../Tooltip';
 
 const getInstanceId = setupGetInstanceId();
 export const TYPES = {
@@ -118,6 +119,17 @@ const Tag = <T extends React.ElementType>({
 }: TagProps<T>) => {
   const prefix = usePrefix();
   const tagId = id || `tag-${getInstanceId()}`;
+  const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
+
+  const isEllipsisActive = (element: any) => {
+    setIsEllipsisApplied(element.offsetWidth < element.scrollWidth);
+    return element.offsetWidth < element.scrollWidth;
+  };
+
+  useLayoutEffect(() => {
+    const element = document.querySelector(`[title="${children}"]`);
+    isEllipsisActive(element);
+  }, [prefix, children]);
 
   const conditions = [
     `${prefix}--tag--selectable`,
@@ -166,11 +178,26 @@ const Tag = <T extends React.ElementType>({
         ) : (
           ''
         )}
-        <Text
-          className={`${prefix}--tag__label`}
-          title={typeof children === 'string' ? children : undefined}>
-          {children !== null && children !== undefined ? children : typeText}
-        </Text>
+        {isEllipsisApplied ? (
+          <Tooltip
+            label={children}
+            align="bottom"
+            className={`${prefix}--tag-label-tooltip`}>
+            <Text
+              title={typeof children === 'string' ? children : undefined}
+              className={`${prefix}--tag__label`}>
+              {children !== null && children !== undefined
+                ? children
+                : typeText}
+            </Text>
+          </Tooltip>
+        ) : (
+          <Text
+            title={typeof children === 'string' ? children : undefined}
+            className={`${prefix}--tag__label`}>
+            {children !== null && children !== undefined ? children : typeText}
+          </Text>
+        )}
         {normalizedSlug}
         <button
           type="button"
@@ -204,9 +231,25 @@ const Tag = <T extends React.ElementType>({
       ) : (
         ''
       )}
-      <Text>
-        {children !== null && children !== undefined ? children : typeText}
-      </Text>
+
+      {isEllipsisApplied ? (
+        <Tooltip
+          label={children}
+          align="bottom"
+          className={`${prefix}--tag-label-tooltip`}>
+          <Text
+            title={typeof children === 'string' ? children : undefined}
+            className={`${prefix}--tag__label`}>
+            {children !== null && children !== undefined ? children : typeText}
+          </Text>
+        </Tooltip>
+      ) : (
+        <Text
+          title={typeof children === 'string' ? children : undefined}
+          className={`${prefix}--tag__label`}>
+          {children !== null && children !== undefined ? children : typeText}
+        </Text>
+      )}
       {normalizedSlug}
     </ComponentTag>
   );
