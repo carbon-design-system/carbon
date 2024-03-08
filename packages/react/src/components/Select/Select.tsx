@@ -224,20 +224,6 @@ const Select = React.forwardRef(function Select(
     ariaProps['aria-describedby'] = helper ? helperId : undefined;
   }
 
-  const selectDefaultTitle = (defaultValue) => {
-    const selectElement = document.getElementById(
-      id
-    ) as HTMLSelectElement | null;
-    if (defaultValue) {
-      const defaultOption: HTMLOptionElement | null | undefined =
-        selectElement?.querySelector(`option[value=${defaultValue}]`);
-      setTitle(defaultOption?.text || '');
-    } else {
-      setTitle(
-        selectElement?.options[selectElement?.selectedIndex]?.text || ''
-      );
-    }
-  };
   const handleFocus = (evt) => {
     setIsFocused(evt.type === 'focus' ? true : false);
   };
@@ -273,7 +259,10 @@ const Select = React.forwardRef(function Select(
     });
   }
   useEffect(() => {
-    selectDefaultTitle(defaultValue);
+    const selectElement = document.getElementById(
+      id
+    ) as HTMLSelectElement | null;
+    setTitle(selectElement?.options[selectElement?.selectedIndex]?.text || '');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
