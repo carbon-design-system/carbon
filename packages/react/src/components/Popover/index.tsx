@@ -130,7 +130,7 @@ export type PopoverProps<E extends ElementType> = PolymorphicProps<
 export interface PopoverComponent {
   <E extends ElementType = 'span'>(
     props: PopoverProps<E> & { forwardRef?: ForwardedRef<ElementType> }
-  ): React.ReactNode | undefined;
+  ): JSX.Element | null;
   displayName?: string;
   propTypes?: WeakValidationMap<PopoverProps<any>>;
 }
