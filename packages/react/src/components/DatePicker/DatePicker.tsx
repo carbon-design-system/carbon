@@ -563,8 +563,13 @@ const DatePicker = React.forwardRef(function DatePicker(
       localeData = l10n[locale];
     }
 
-    // parseDate is called before the date is actually set to parse the value of the input and determine if it is a valid date string.
-    // Flatpickr's default parseDate can provide
+    /**
+     * parseDate is called before the date is actually set.
+     * It attempts to parse the input value and return a valid date string.
+     * Flatpickr's default parser results in odd dates when given invalid
+     * values, so instead here we normalize the month/day to `1` if given
+     * a value outside the acceptable range.
+     */
     let parseDate;
     if (!parseDateProp && dateFormat === 'm/d/Y') {
       // This function only supports the default dateFormat.

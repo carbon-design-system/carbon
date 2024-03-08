@@ -277,6 +277,28 @@ describe('DatePicker', () => {
     );
     await userEvent.clear(screen.getByLabelText('Date Picker label'));
   });
+
+  it('the input is cleared when given a completely invalid date', async () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    render(
+      <DatePicker onChange={() => {}} datePickerType="single">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          data-testid="input-value"
+        />
+      </DatePicker>
+    );
+
+    await userEvent.type(
+      screen.getByLabelText('Date Picker label'),
+      'a1/0a/a999{enter}'
+    );
+    expect(warn).toHaveBeenCalled();
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue('');
+    warn.mockRestore();
+  });
 });
 
 describe('Simple date picker', () => {
