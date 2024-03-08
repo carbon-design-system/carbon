@@ -9,7 +9,6 @@ import {
   // Blue
   blue10,
   blue20,
-  blue20Hover,
   blue30,
   blue40,
   blue60,
@@ -232,8 +231,8 @@ export const aiPopoverShadowOuter01 = rgba(blue70, 0.25);
 export const aiPopoverShadowOuter02 = rgba(black, 0.1);
 
 // AI skeleton
-export const aiSkeletonBackground = blue20Hover;
-export const aiSkeletonElementBackground = blue100;
+export const aiSkeletonBackground = blue20;
+export const aiSkeletonElementBackground = blue50;
 
 // AI Modal tokens
 export const aiOverlay = rgba(blue100, 0.5);
