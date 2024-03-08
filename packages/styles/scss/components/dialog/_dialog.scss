@@ -1,0 +1,279 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:list';
+@use '../button';
+@use '../../config' as *;
+@use '../../breakpoint' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/ai-gradient' as *;
+@use '../../utilities/convert';
+@use '../../utilities/component-reset';
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/z-index' as *;
+
+:root {
+  --#{$prefix}-dialog-kind-side-inset-start: #{$spacing-09};
+}
+
+$kind-side-sizes: (
+  xs: 16rem,
+  sm: 20rem,
+  md: 30rem,
+  lg: 40rem 50%,
+  xl: 50rem 75%,
+);
+
+@mixin set-kind-inline-size($size: map-get($kind-side-sizes, md)) {
+  /* any value is single value list */
+  inline-size: list.nth($size, 1);
+  @if list.length($size) > 1 {
+    min-inline-size: list.nth($size, 2);
+  }
+
+  max-inline-size: 100%;
+}
+
+@mixin dialog--kind-side() {
+  $kind-side-inset-start: var(
+    --#{$prefix}-dialog-kind-side-inset-start,
+    $spacing-09
+  );
+
+  @each $size, $size_value in $kind-side-sizes {
+    &:where([data-width='#{$size}']) {
+      @include set-kind-inline-size($size_value);
+    }
+  }
+
+  position: fixed;
+  margin: 0;
+  block-size: calc(100% - #{$kind-side-inset-start});
+  inset-block-start: $kind-side-inset-start;
+  max-block-size: calc(100% - #{$kind-side-inset-start});
+  overflow-x: clip;
+
+  &:where([data-kind='side-start']) {
+    inset-inline-start: 0;
+    transform: translateX(-100%);
+
+    &:where([open][data-is-open]) {
+      transform: translateX(0);
+    }
+  }
+
+  &:where([data-kind='side-end']) {
+    inset-inline-start: 100%;
+    transform: translateX(0);
+
+    &:where([open][data-is-open]) {
+      transform: translateX(-100%);
+    }
+  }
+}
+
+$kind-tearsheet-sizes: (
+  xs: 40rem,
+  sm: 50rem,
+  md: 60rem,
+  lg: 70rem 50%,
+  xl: 80rem 80%,
+);
+
+@mixin dialog--kind-tearsheet {
+  position: fixed;
+  margin: 0 auto;
+  block-size: 100%;
+  inset-block-start: 100%;
+  max-block-size: calc(100% - #{$spacing-11});
+  max-inline-size: 100%;
+  transform: translateY(0);
+
+  @each $size, $size_value in $kind-tearsheet-sizes {
+    &:where([data-width='#{$size}']) {
+      @include set-kind-inline-size($size_value);
+    }
+  }
+
+  &:where([open][data-is-open]) {
+    transform: translateY(-100%);
+  }
+}
+
+@mixin dialog--default() {
+  /* size */
+  max-block-size: 50%;
+  max-inline-size: 100%;
+
+  &:where([data-width='xs']) {
+    inline-size: 24rem;
+  }
+
+  &:where([data-width='sm']) {
+    inline-size: 36rem;
+  }
+
+  &:where([data-width='md']) {
+    inline-size: 48rem;
+  }
+
+  &:where([data-width='lg']) {
+    inline-size: 60rem;
+  }
+
+  &:where([data-width='xl']) {
+    inline-size: 80rem;
+  }
+
+  @include breakpoint(md) {
+    max-inline-size: 84%;
+  }
+  @include breakpoint(lg) {
+    max-inline-size: 72%;
+  }
+  @include breakpoint(xlg) {
+    max-inline-size: 64%;
+  }
+  @include breakpoint(xlg) {
+    max-inline-size: 60%;
+  }
+
+  transform: translateY(calc(-1 * #{$spacing-06}));
+
+  &:where([open][data-is-open]) {
+    transform: translateY(0);
+  }
+
+  /** starting style also not supported widely
+  * https://caniuse.com/mdn-css_at-rules_starting-style
+  */
+  /*   Before-open state  */
+  /* Needs to be after the previous dialog[open] rule to take effect,
+  as the specificity is the same */
+  // @starting-style {
+  //   &:where([open]) {
+  //     opacity: 0;
+  //     transform: scaleY(0);
+  //   }
+  // }
+}
+
+/// Dialog styles
+/// @access public
+/// @group dialog
+@mixin dialog {
+  .#{$prefix}--dialog {
+    padding: 0;
+    border: 1px solid $border-subtle-01;
+    background-color: $layer;
+    opacity: 0;
+    /* opening and closing is used in as allow-discrete is not currently supported wide enough
+     * https://caniuse.com/mdn-css_properties_display_is_transitionable
+     */
+    // transition:
+    //   opacity 0.7s ease-out,
+    //   transform 0.7s ease-out
+    //   overlay 0.7s ease-out allow-discrete,
+    //   display 0.7s ease-out allow-discrete;
+    transition: all $duration-moderate-02 motion(entrance, expressive);
+  }
+
+  .#{$prefix}--dialog__content {
+    padding: $spacing-05;
+    block-size: 100%;
+  }
+
+  .#{$prefix}--dialog:not([data-kind]),
+  .#{$prefix}--dialog:where([data-kind='default']) {
+    @include dialog--default();
+  }
+
+  .#{$prefix}--dialog:where(
+      :is([data-kind='side-start'], [data-kind='side-end'])
+    ) {
+    @include dialog--kind-side();
+  }
+
+  .#{$prefix}--dialog:where(:is([data-kind='tearsheet'])) {
+    @include dialog--kind-tearsheet();
+  }
+
+  .#{$prefix}--dialog:where([data-modal]) {
+    border: 1px solid transparent;
+  }
+
+  .#{$prefix}--dialog:where([open]),
+  .#{$prefix}--dialog:where([data-closing]) {
+    /* should come after open */
+    opacity: 0;
+  }
+
+  .#{$prefix}--dialog:where([data-closing]) {
+    transition: all $duration-moderate-02 motion(exit, expressive);
+  }
+
+  .#{$prefix}--dialog:where([open][data-is-open]) {
+    opacity: 1;
+  }
+
+  /* Transition the :backdrop when the dialog modal is promoted to the top layer */
+  .#{$prefix}--dialog::backdrop {
+    background-color: $overlay;
+    opacity: 0;
+    /* opening and closing is used in as allow-discrete is not currently supported wide enough
+     * https://caniuse.com/mdn-css_properties_display_is_transitionable
+     */
+    // transition: display 0.7s allow-discrete,
+    //   overlay 0.7s allow-discrete,
+    //   background-color 0.7s;
+    //   /* Equivalent to g
+    // transition: all 0.7s allow-discrete; */
+    transition: all $duration-moderate-02 motion(entrance, expressive);
+  }
+
+  .#{$prefix}--dialog:where([open])::backdrop,
+  .#{$prefix}--dialog:where([data-closing])::backdrop {
+    opacity: 0;
+  }
+
+  .#{$prefix}--dialog:where([data-closing])::backdrop {
+    opacity: 0;
+    transition: all $duration-moderate-02 motion(exit, expressive);
+  }
+
+  .#{$prefix}--dialog:where([open][data-is-open])::backdrop {
+    opacity: 1;
+  }
+
+  /** starting style also not supported widely
+  * https://caniuse.com/mdn-css_at-rules_starting-style
+  */
+  /* This starting-style rule cannot be nested inside the above selector
+because the nesting selector cannot represent pseudo-elements. */
+  // @starting-style {
+  //   .#{$prefix}--dialog:where([open])::backdrop {
+  //     background-color: rgb(0 0 0 / 0%);
+  //   }
+  // }
+
+  .#{$prefix}--dialog__header {
+    position: relative;
+    overflow: visible;
+    block-size: 0;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--dialog__header-controls {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+  }
+}
