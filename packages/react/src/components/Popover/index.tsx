@@ -36,7 +36,6 @@ interface PopoverContext {
 }
 
 const PopoverContext = React.createContext<PopoverContext>({
-  // the refs below are new from floating-ui work
   setFloating: {
     current: null,
   },
@@ -131,7 +130,7 @@ export type PopoverProps<E extends ElementType> = PolymorphicProps<
 export interface PopoverComponent {
   <E extends ElementType = 'span'>(
     props: PopoverProps<E> & { forwardRef?: ForwardedRef<ElementType> }
-  ): JSX.Element | null;
+  ): React.ReactNode | undefined;
   displayName?: string;
   propTypes?: WeakValidationMap<PopoverProps<any>>;
 }
@@ -317,7 +316,6 @@ export const Popover: PopoverComponent = React.forwardRef(
     const mappedChildren = React.Children.map(children, (child) => {
       const item = child as any;
 
-      // Previously we would only do this logic if item.type was a button ----- why?
       if (
         (item?.type === 'button' ||
           (autoAlign && item?.type?.displayName !== 'PopoverContent') ||
