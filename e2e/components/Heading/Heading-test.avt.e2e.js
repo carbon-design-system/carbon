@@ -9,7 +9,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('Heading @avt', () => {
+test.describe('@avt Heading', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Heading',

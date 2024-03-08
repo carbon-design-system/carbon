@@ -8,49 +8,50 @@
 import React from 'react';
 import { default as Tag } from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
+import { Asleep } from '@carbon/icons-react';
 
 export default {
   title: 'Components/Tag',
   component: Tag,
 };
 
-export const Default = () => {
+export const ReadOnly = () => {
   return (
     <>
-      <Tag className="some-class" type="red" title="Clear Filter">
+      <Tag className="some-class" type="red">
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="magenta" title="Clear Filter">
+      <Tag className="some-class" type="magenta">
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="purple" title="Clear Filter">
+      <Tag className="some-class" type="purple">
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="blue" title="Clear Filter">
+      <Tag className="some-class" type="blue">
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="cyan" title="Clear Filter">
+      <Tag className="some-class" type="cyan">
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="teal" title="Clear Filter">
+      <Tag className="some-class" type="teal">
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="green" title="Clear Filter">
+      <Tag className="some-class" type="green">
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="gray" title="Clear Filter">
+      <Tag className="some-class" type="gray">
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="cool-gray" title="Clear Filter">
+      <Tag className="some-class" type="cool-gray">
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="warm-gray" title="Clear Filter">
+      <Tag className="some-class" type="warm-gray">
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="high-contrast" title="Clear Filter">
+      <Tag className="some-class" type="high-contrast">
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="outline" title="Clear Filter">
+      <Tag className="some-class" type="outline">
         {'Tag content'}
       </Tag>
     </>
@@ -58,7 +59,11 @@ export const Default = () => {
 };
 
 export const Playground = (args) => {
-  return <Tag {...args}>{'Tag content'}</Tag>;
+  return (
+    <Tag renderIcon={Asleep} {...args}>
+      {'Tag content'}
+    </Tag>
+  );
 };
 
 Playground.args = {
@@ -92,7 +97,7 @@ Playground.argTypes = {
     control: false,
   },
   size: {
-    options: ['sm', 'md'],
+    options: ['sm', 'md', 'lg'],
     control: {
       type: 'select',
     },
@@ -186,7 +191,7 @@ Skeleton.argTypes = {
     },
   },
   size: {
-    options: ['sm', 'md'],
+    options: ['sm', 'md', 'lg'],
     control: {
       type: 'select',
     },
