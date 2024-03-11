@@ -59,6 +59,7 @@
   }
 
   .#{$prefix}--search--fluid .#{$prefix}--search-magnifier-icon {
+    color: $icon-primary;
     inset: auto 1rem convert.to-rem(13px) auto;
     transform: none;
   }
@@ -69,16 +70,6 @@
     inline-size: convert.to-rem(40px);
     inset: auto convert.to-rem(48px) 0 auto;
     transition: background-color $duration-fast-01 motion(standard, productive);
-  }
-
-  .#{$prefix}--search--fluid .#{$prefix}--search-close::before {
-    position: absolute;
-    display: block;
-    background: $border-subtle;
-    block-size: 1rem;
-    content: '';
-    inline-size: convert.to-rem(1px);
-    inset: auto convert.to-rem(-1px) convert.to-rem(14px) auto;
   }
 
   .#{$prefix}--search--fluid
