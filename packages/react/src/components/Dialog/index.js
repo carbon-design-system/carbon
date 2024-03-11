@@ -117,8 +117,12 @@ const Dialog = React.forwardRef(
         // dialog should already be displayed set isOpen animates opening
         setIsOpen(true);
         setIsOpening(false);
+        const maybeFocus = localRef.current.querySelector('[data-autofocus]');
+        if (maybeFocus) {
+          maybeFocus.focus();
+        }
       }
-    }, [isOpening]);
+    }, [isOpening, localRef]);
 
     useEffect(() => {
       // this handles localOpen change
@@ -158,7 +162,7 @@ const Dialog = React.forwardRef(
         className={cx(`${prefix}--dialog`)}
         data-closing={isClosing ? '' : null}
         data-is-open={localOpen && isOpen ? '' : null}
-        data-width={width}
+        data-width={width || 'md'}
         data-modal={modal ? '' : null}
         data-kind={kind ? kind : null}
         ref={localRef}

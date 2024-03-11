@@ -60,6 +60,7 @@ $kind-side-sizes: (
   inset-block-start: $kind-side-inset-start;
   max-block-size: calc(100% - #{$kind-side-inset-start});
   overflow-x: clip;
+  transform-origin: top;
 
   &:where([data-kind='side-start']) {
     inset-inline-start: 0;
@@ -67,6 +68,18 @@ $kind-side-sizes: (
 
     &:where([open][data-is-open]) {
       transform: translateX(0);
+    }
+
+    &:has(+ .#{$prefix}--dialog[open][data-is-open]),
+    :has(+ .#{$prefix}--dialog[open][data-is-open]) {
+      transform: translateX(calc(2rem)) scale(0.95);
+    }
+
+    &:has(
+        + .#{$prefix}--dialog[open][data-is-open]
+          + .#{$prefix}--dialog[open][data-is-open]
+      ) {
+      transform: translateX(calc(4rem)) scale(0.9);
     }
   }
 
@@ -76,6 +89,18 @@ $kind-side-sizes: (
 
     &:where([open][data-is-open]) {
       transform: translateX(-100%);
+    }
+
+    &:has(+ .#{$prefix}--dialog[open][data-is-open]),
+    :has(+ .#{$prefix}--dialog[open][data-is-open]) {
+      transform: translateX(calc(-100% - 2rem)) scale(0.95);
+    }
+
+    &:has(
+        + .#{$prefix}--dialog[open][data-is-open]
+          + .#{$prefix}--dialog[open][data-is-open]
+      ) {
+      transform: translateX(calc(-100% - 4rem)) scale(0.9);
     }
   }
 }
@@ -106,11 +131,20 @@ $kind-tearsheet-sizes: (
   &:where([open][data-is-open]) {
     transform: translateY(-100%);
   }
+
+  &:has(+ [data-kind='tearsheet'][open]),
+  :has(+ [data-kind='tearsheet'][open]) {
+    transform: translateY(calc(-100% - 2rem)) scale(0.95);
+  }
+
+  &:has(+ [data-kind='tearsheet'][open] + [data-kind='tearsheet'][open]) {
+    transform: translateY(calc(-100% - 4rem)) scale(0.9);
+  }
 }
 
 @mixin dialog--default() {
   /* size */
-  max-block-size: 50%;
+  max-block-size: 50vh;
   max-inline-size: 100%;
 
   &:where([data-width='xs']) {
@@ -152,6 +186,15 @@ $kind-tearsheet-sizes: (
     transform: translateY(0);
   }
 
+  &:has(+ .#{$prefix}--dialog[open]),
+  :has(+ .#{$prefix}--dialog[open]) {
+    transform: translateY(-2rem) scale(0.95);
+  }
+
+  &:has(+ .#{$prefix}--dialog[open] + .#{$prefix}--dialog[open]) {
+    transform: translateY(-4rem) scale(0.9);
+  }
+
   /** starting style also not supported widely
   * https://caniuse.com/mdn-css_at-rules_starting-style
   */
@@ -171,6 +214,8 @@ $kind-tearsheet-sizes: (
 /// @group dialog
 @mixin dialog {
   .#{$prefix}--dialog {
+    --overlay-opacity: 0.67;
+
     padding: 0;
     border: 1px solid $border-subtle-01;
     background-color: $layer;
@@ -184,6 +229,18 @@ $kind-tearsheet-sizes: (
     //   overlay 0.7s ease-out allow-discrete,
     //   display 0.7s ease-out allow-discrete;
     transition: all $duration-moderate-02 motion(entrance, expressive);
+  }
+
+  .#{$prefix}--dialog:has( /* dialog with 2 after */
+      + .#{$prefix}--dialog[open][open] + .#{$prefix}--dialog[open]
+    ) {
+    --overlay-opacity: 0.22;
+  }
+
+  /* dialog before or after */
+  .#{$prefix}--dialog:has(+ .#{$prefix}--dialog[open]),
+  .#{$prefix}--dialog[open] + .#{$prefix}--dialog[open] {
+    --overlay-opacity: 0.5;
   }
 
   .#{$prefix}--dialog__content {
@@ -250,7 +307,7 @@ $kind-tearsheet-sizes: (
   }
 
   .#{$prefix}--dialog:where([open][data-is-open])::backdrop {
-    opacity: 1;
+    opacity: var(--overlay-opacity);
   }
 
   /** starting style also not supported widely
