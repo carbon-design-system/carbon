@@ -116,6 +116,7 @@ export const WithActions = () => {
       iconDescription="Dismiss"
       hasIconOnly
       renderIcon={Close}
+      aria-label="Dismiss"
     />
   );
 
@@ -218,6 +219,7 @@ export const WithInteractiveItemsAndActions = () => {
       iconDescription="Dismiss"
       hasIconOnly
       renderIcon={Close}
+      aria-label="Dismiss"
     />
   );
 

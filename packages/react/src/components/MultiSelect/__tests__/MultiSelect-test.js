@@ -304,6 +304,34 @@ describe('MultiSelect', () => {
       ).toBeInstanceOf(HTMLElement);
     });
 
+    it('should trigger onChange with selected items', async () => {
+      let selectedItems = [];
+      const testFunction = jest.fn((e) => (selectedItems = e?.selectedItems));
+      const items = generateItems(4, generateGenericItem);
+      const label = 'test-label';
+      const { container } = render(
+        <MultiSelect
+          id="custom-id"
+          onChange={testFunction}
+          selectedItems={selectedItems}
+          label={label}
+          items={items}
+        />
+      );
+
+      // eslint-disable-next-line testing-library/prefer-screen-queries
+      const labelNode = getByText(container, label);
+      await userEvent.click(labelNode);
+
+      const [item] = items;
+      // eslint-disable-next-line testing-library/prefer-screen-queries
+      const itemNode = getByText(container, item.label);
+
+      await userEvent.click(itemNode);
+      // Assert that the onChange callback returned the selected items and assigned it to selectedItems
+      expect(testFunction.mock.results[0].value).toEqual(selectedItems);
+    });
+
     it('should place the given id on the ___ node when passed in as a prop', () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
