@@ -78,22 +78,6 @@ an `aria-describedby` on the interactive element with a value that matches the
   <Story id="components-notifications-toast--playground" />
 </Canvas>
 
-## Experimental focus wrap without sentinels
-
-In javascript, you can enable the experimental focus wrap behavior via a feature
-flag. This modifies the DOM to no longer include hidden "sentinel nodes" used to
-mark the beginning and end of the wrapped focus. The new behavior looks at all
-interactive child nodes and wraps focus based on tabbable order of those nodes.
-
-```js
-<FeatureFlags
-  flags={{
-    'enable-experimental-focus-wrap-without-sentinels': true,
-  }}>
-  <ActionableNotification />
-</FeatureFlags>
-```
-
 ## Feedback
 
 Help us improve this component by providing feedback, asking questions on Slack,
