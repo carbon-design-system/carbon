@@ -64,6 +64,10 @@
       theme.$link-inverse
     );
     @include custom-property.declaration(
+      'link-visited-text-color',
+      theme.$link-inverse
+    );
+    @include custom-property.declaration(
       'link-focus-text-color',
       theme.$focus-inverse
     );
