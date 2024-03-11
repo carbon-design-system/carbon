@@ -262,6 +262,14 @@ export const chatAvatarUser = blue50;
 export const chatShellBackground = gray90;
 export const chatHeaderBackground = gray90;
 
+// Chat button tokens
+export const chatButton = linkPrimary;
+export const chatButtonHover = backgroundHover;
+export const chatButtonTextHover = linkPrimaryHover;
+export const chatButtonActive = backgroundActive;
+export const chatButtonSelected = backgroundSelected;
+export const chatButtonTextSelected = textSecondary;
+
 export {
   // Type
   caption01,
