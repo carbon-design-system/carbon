@@ -1245,7 +1245,7 @@ export interface StaticNotificationProps
   /**
    * Specify the subtitle
    */
-  subtitle?: string;
+  subtitle?: ReactNode;
 
   /**
    * Specify the title
@@ -1314,7 +1314,10 @@ export function StaticNotification({
       </div>
       <div className={`${prefix}--actionable-notification__button-wrapper`}>
         {actionButtonLabel && (
-          <NotificationActionButton onClick={onActionButtonClick} inline>
+          <NotificationActionButton
+            onClick={onActionButtonClick}
+            aria-describedby={titleId}
+            inline>
             {actionButtonLabel}
           </NotificationActionButton>
         )}
@@ -1369,7 +1372,7 @@ StaticNotification.propTypes = {
   /**
    * Specify the subtitle
    */
-  subtitle: PropTypes.string,
+  subtitle: PropTypes.node,
 
   /**
    * Specify the title
