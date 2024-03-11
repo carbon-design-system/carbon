@@ -23,7 +23,8 @@ import {
   StructuredListRow,
   StructuredListCell,
 } from '../StructuredList';
-import mdx from './ComposedModal.mdx';
+import mdx from './ComposedModal.featureflag.mdx';
+import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
 
 export default {
   title: 'Experimental/Feature Flags/ComposedModal',
@@ -38,6 +39,13 @@ export default {
       page: mdx,
     },
   },
+  decorators: [
+    (Story) => (
+      <WithFeatureFlags>
+        <Story />
+      </WithFeatureFlags>
+    ),
+  ],
 };
 
 export const Default = () => {
