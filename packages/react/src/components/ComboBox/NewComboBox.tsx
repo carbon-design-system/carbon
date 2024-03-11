@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import Downshift, {
-  ControllerStateAndHelpers,
+  // ControllerStateAndHelpers,
   UseComboboxStateChange,
   useCombobox,
 } from 'downshift';
@@ -339,35 +339,42 @@ const ComboBox = forwardRef(
     } = props;
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
-    const textInput = useRef<HTMLInputElement>(null);
-    const comboBoxInstanceId = getInstanceId();
-    const [inputValue, setInputValue] = useState(
-      getInputValue({
-        initialSelectedItem,
-        inputValue: '',
-        itemToString,
-        selectedItem,
-      })
-    );
     const [isFocused, setIsFocused] = useState(false);
-    const [prevSelectedItem, setPrevSelectedItem] = useState<ItemType | null>();
-    const [doneInitialSelectedItem, setDoneInitialSelectedItem] =
-      useState(false);
-    const [highlightedIndex, setHighlightedIndex] = useState<number | null>();
-    const savedOnInputChange = useRef(onInputChange);
 
-    if (!doneInitialSelectedItem || prevSelectedItem !== selectedItem) {
-      setDoneInitialSelectedItem(true);
-      setPrevSelectedItem(selectedItem);
-      setInputValue(
-        getInputValue({
-          initialSelectedItem,
-          inputValue,
-          itemToString,
-          selectedItem,
-        })
-      );
-    }
+    const showWarning = !invalid && warn;
+    const className = cx(`${prefix}--combo-box`, {
+      [`${prefix}--list-box--up`]: direction === 'top',
+      [`${prefix}--combo-box--warning`]: showWarning,
+      [`${prefix}--combo-box--readonly`]: readOnly,
+    });
+    const titleClasses = cx(`${prefix}--label`, {
+      [`${prefix}--label--disabled`]: disabled,
+    });
+    const comboBoxHelperId = !helperText
+      ? undefined
+      : `combobox-helper-text-${getInstanceId()}`;
+    const helperClasses = cx(`${prefix}--form__helper-text`, {
+      [`${prefix}--form__helper-text--disabled`]: disabled,
+    });
+    const wrapperClasses = cx(`${prefix}--list-box__wrapper`, [
+      containerClassName,
+      {
+        [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
+        [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
+        [`${prefix}--list-box__wrapper--slug`]: slug,
+      },
+    ]);
+
+    const inputClasses = cx(`${prefix}--text-input`, {
+      // [`${prefix}--text-input--empty`]: !inputValue,
+      [`${prefix}--combo-box--input--focus`]: isFocused && !isFluid,
+    });
+
+    const handleFocus = (evt: FocusEvent<HTMLDivElement>) => {
+      setIsFocused(evt.type === 'focus');
+    };
+
+    const textInput = useRef<HTMLInputElement>(null);
 
     const filterItems = (
       items: ItemType[],
@@ -383,129 +390,6 @@ const ComboBox = forwardRef(
             })
           : defaultShouldFilterItem()
       );
-
-    const handleOnChange = (selectedItem: ItemType | null) => {
-      if (onChange) {
-        onChange({ selectedItem });
-      }
-    };
-
-    const handleOnInputValueChange = (inputValue?: string) => {
-      setInputValue(inputValue || '');
-    };
-
-    useEffect(() => {
-      savedOnInputChange.current = onInputChange;
-    }, [onInputChange]);
-
-    useEffect(() => {
-      if (savedOnInputChange.current) {
-        savedOnInputChange.current(inputValue);
-      }
-    }, [inputValue]);
-
-    const handleSelectionClear = () => {
-      if (textInput?.current) {
-        textInput.current.focus();
-      }
-    };
-
-    const getHighlightedIndex = (changes: UseComboboxStateChange<ItemType>) => {
-      if (Object.prototype.hasOwnProperty.call(changes, 'inputValue')) {
-        const { inputValue } = changes;
-        const filteredItems = filterItems(
-          items,
-          itemToString,
-          inputValue || null
-        );
-        const indexToHighlight = findHighlightedIndex(
-          {
-            ...props,
-            items: filteredItems,
-          },
-          inputValue
-        );
-        setHighlightedIndex(indexToHighlight);
-        return indexToHighlight;
-      }
-      return highlightedIndex || 0;
-    };
-
-    const handleOnStateChange = (changes: UseComboboxStateChange<ItemType>) => {
-      const { type } = changes;
-      switch (type) {
-        case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
-        case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
-          setHighlightedIndex(changes.highlightedIndex);
-          break;
-        // TODO: I can not find an equivalent state change type for blurButton. BlurInput exists, but I don't think that's the same thing
-        // case blurButton:
-        case useCombobox.stateChangeTypes.InputKeyDownEscape:
-          setHighlightedIndex(changes.highlightedIndex);
-          break;
-        case useCombobox.stateChangeTypes.ToggleButtonClick:
-          setHighlightedIndex(changes.highlightedIndex);
-          break;
-        case useCombobox.stateChangeTypes.InputChange:
-          updateHighlightedIndex(getHighlightedIndex(changes));
-          break;
-        case useCombobox.stateChangeTypes.InputBlur:
-          if (allowCustomValue) {
-            setInputValue(inputValue);
-            if (onChange) {
-              onChange({ selectedItem, inputValue });
-            }
-          }
-          break;
-      }
-    };
-
-    const handleToggleClick =
-      (isOpen: boolean) =>
-      (
-        event: MouseEvent<HTMLButtonElement> & {
-          preventDownshiftDefault: boolean;
-        }
-      ) => {
-        if (onToggleClick) {
-          onToggleClick(event);
-        }
-
-        if (event.target === textInput.current && isOpen) {
-          event.preventDownshiftDefault = true;
-          event?.persist?.();
-        }
-      };
-
-    const showWarning = !invalid && warn;
-    const className = cx(`${prefix}--combo-box`, {
-      [`${prefix}--list-box--up`]: direction === 'top',
-      [`${prefix}--combo-box--warning`]: showWarning,
-      [`${prefix}--combo-box--readonly`]: readOnly,
-    });
-
-    const titleClasses = cx(`${prefix}--label`, {
-      [`${prefix}--label--disabled`]: disabled,
-    });
-    const comboBoxHelperId = !helperText
-      ? undefined
-      : `combobox-helper-text-${comboBoxInstanceId}`;
-    const helperClasses = cx(`${prefix}--form__helper-text`, {
-      [`${prefix}--form__helper-text--disabled`]: disabled,
-    });
-    const wrapperClasses = cx(`${prefix}--list-box__wrapper`, [
-      containerClassName,
-      {
-        [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
-        [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
-        [`${prefix}--list-box__wrapper--slug`]: slug,
-      },
-    ]);
-
-    const inputClasses = cx(`${prefix}--text-input`, {
-      [`${prefix}--text-input--empty`]: !inputValue,
-      [`${prefix}--combo-box--input--focus`]: isFocused && !isFluid,
-    });
 
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
@@ -523,120 +407,27 @@ const ComboBox = forwardRef(
       getItemProps,
       getLabelProps,
       getMenuProps,
-      getRootProps,
       getToggleButtonProps,
       isOpen,
       inputValue,
-      selectedItem,
-      clearSelection,
-      toggleMenu,
+      highlightedIndex,
+      // selectedItem,
+      // clearSelection,
+      // toggleMenu,
+      // setHighlightedIndex,
     } = useCombobox({
-      onInputValueChange: ({ inputValue }) => {
-        handleOnInputValueChange(inputValue);
-      },
+      // onInputValueChange: ({ inputValue }) => {
+      //   handleOnInputValueChange(inputValue);
+      // },
       items,
       itemToString: (item) => {
         return itemToString(item);
       },
-      onStateChange: (...args) => {
-        handleOnStateChange(...args);
-        downshiftProps?.onStateChange?.(...args); // TODO this is kind of a breaking change, we previously passed both the `changes` and the `stateAndHelpers`. We might be able to provide both if we refactor to use `stateReducer` instead of `onStateChange`
-      },
+      // onStateChange: (...args) => {
+      //   handleOnStateChange(...args);
+      //   downshiftProps?.onStateChange?.(...args); // TODO this is kind of a breaking change, we previously passed both the `changes` and the `stateAndHelpers`. We might be able to provide both if we refactor to use `stateReducer` instead of `onStateChange`
+      // },
     });
-
-    const rootProps = getRootProps(
-      // @ts-ignore this is not supposed to be a required property
-      {},
-      {
-        suppressRefError: true,
-      }
-    );
-    const labelProps = getLabelProps();
-    const buttonProps = getToggleButtonProps({
-      disabled: disabled || readOnly,
-      onClick: handleToggleClick(isOpen),
-      // When we moved the "root node" of Downshift to the <input> for
-      // ARIA 1.2 compliance, we unfortunately hit this branch for the
-      // "mouseup" event that downshift listens to:
-      // https://github.com/downshift-js/downshift/blob/v5.2.1/src/downshift.js#L1051-L1065
-      //
-      // As a result, it will reset the state of the component and so we
-      // stop the event from propagating to prevent this if the menu is already open.
-      // This allows the toggleMenu behavior for the toggleButton to correctly open and
-      // close the menu.
-      onMouseUp(event) {
-        if (isOpen) {
-          event.stopPropagation();
-        }
-      },
-    });
-    const inputProps: any = getInputProps({
-      disabled,
-      placeholder,
-      onClick(): void {
-        toggleMenu();
-      },
-      onKeyDown: (
-        event: KeyboardEvent<HTMLInputElement> & {
-          preventDownshiftDefault: boolean;
-          target: {
-            value: string;
-            setSelectionRange: (start: number, end: number) => void;
-          };
-        }
-      ): void => {
-        if (match(event, keys.Space)) {
-          event.stopPropagation();
-        }
-
-        if (match(event, keys.Enter) && (!inputValue || allowCustomValue)) {
-          toggleMenu();
-
-          // Since `onChange` does not normally fire when the menu is closed, we should
-          // manually fire it when `allowCustomValue` is provided, the menu is closing,
-          // and there is a value.
-          if (allowCustomValue && isOpen && inputValue) {
-            onChange({ selectedItem, inputValue });
-          }
-        }
-
-        if (match(event, keys.Escape) && inputValue) {
-          if (event.target === textInput.current && isOpen) {
-            toggleMenu();
-            event.preventDownshiftDefault = true;
-            event?.persist?.();
-          }
-        }
-
-        if (match(event, keys.Home) && event.code !== 'Numpad7') {
-          event.target.setSelectionRange(0, 0);
-        }
-
-        if (match(event, keys.End) && event.code !== 'Numpad1') {
-          event.target.setSelectionRange(
-            event.target.value.length,
-            event.target.value.length
-          );
-        }
-
-        if (event.altKey && event.key == 'ArrowDown') {
-          event.preventDownshiftDefault = true;
-          if (!isOpen) {
-            toggleMenu();
-          }
-        }
-        if (event.altKey && event.key == 'ArrowUp') {
-          event.preventDownshiftDefault = true;
-          if (isOpen) {
-            toggleMenu();
-          }
-        }
-      },
-    });
-
-    const handleFocus = (evt: FocusEvent<HTMLDivElement>) => {
-      setIsFocused(evt.type === 'focus');
-    };
 
     const readOnlyEventHandlers = readOnly
       ? {
@@ -652,7 +443,7 @@ const ComboBox = forwardRef(
     return (
       <div className={wrapperClasses}>
         {titleText && (
-          <Text as="label" className={titleClasses} {...labelProps}>
+          <Text as="label" className={titleClasses} {...getLabelProps()}>
             {titleText}
           </Text>
         )}
@@ -670,22 +461,18 @@ const ComboBox = forwardRef(
           warnText={warnText}>
           <div className={`${prefix}--list-box__field`}>
             <input
-              role="combobox"
-              disabled={disabled}
               className={inputClasses}
               type="text"
               tabIndex={0}
-              aria-autocomplete="list"
-              aria-expanded={rootProps['aria-expanded']}
               aria-haspopup="listbox"
-              aria-controls={inputProps['aria-controls']}
-              aria-owns={getMenuProps().id}
-              title={textInput?.current?.value}
-              {...inputProps}
+              {...getInputProps({
+                disabled,
+                placeholder,
+                ref: ref,
+              })}
               {...rest}
               {...readOnlyEventHandlers}
               readOnly={readOnly}
-              ref={mergeRefs(textInput, ref)}
               aria-describedby={
                 helperText && !invalid && !warn && !isFluid
                   ? comboBoxHelperId
@@ -702,7 +489,9 @@ const ComboBox = forwardRef(
             )}
             {inputValue && (
               <ListBoxSelection
-                clearSelection={clearSelection}
+                clearSelection={() => {
+                  console.log(TODO);
+                }}
                 translateWithId={translateWithId}
                 disabled={disabled || readOnly}
                 onClearSelection={handleSelectionClear}
@@ -710,7 +499,14 @@ const ComboBox = forwardRef(
               />
             )}
             <ListBoxTrigger
-              {...buttonProps}
+              {...getToggleButtonProps({
+                disabled: disabled || readOnly,
+                onClick(event) {
+                  if (onToggleClick) {
+                    onToggleClick(event);
+                  }
+                },
+              })}
               isOpen={isOpen}
               translateWithId={translateWithId}
             />
@@ -747,7 +543,7 @@ const ComboBox = forwardRef(
                         isActive={selectedItem === item}
                         isHighlighted={highlightedIndex === index}
                         title={title}
-                        {...itemProps}>
+                        {...getItemProps}>
                         {ItemToElement ? (
                           <ItemToElement key={itemProps.id} {...item} />
                         ) : (
