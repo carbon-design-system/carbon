@@ -225,7 +225,6 @@ $copy-btn-feedback: $background-inverse !default;
 
   // collapsed pre
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
-    padding-block-end: convert.to-rem(24px);
     padding-inline-end: $spacing-08;
   }
 
