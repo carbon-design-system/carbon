@@ -221,8 +221,8 @@ export const aiAuraHoverEnd = rgba(white, 0);
 
 // AI Popover
 export const aiPopoverBackground = white;
-export const aiPopoverShadowOuter01 = rgba(blue70, 0.25);
-export const aiPopoverShadowOuter02 = rgba(black, 0.1);
+export const aiPopoverShadowOuter01 = rgba(blue70, 0.06);
+export const aiPopoverShadowOuter02 = rgba(black, 0.04);
 
 // AI skeleton
 export const aiSkeletonBackground = blue20;
