@@ -31,12 +31,21 @@
   // Quick action button
   .#{$prefix}--chat-btn--quick-action {
     align-items: center;
-    border: 1px solid $link-primary;
+    border: 1px solid $chat-button;
+    background: transparent;
+    color: $chat-button;
   }
 
   .#{$prefix}--chat-btn--quick-action:hover:not(:active):not([disabled]) {
     border-color: transparent;
-    background: $background-hover;
+    background: $chat-button-hover;
+    color: $chat-button-text-hover;
+  }
+
+  .#{$prefix}--chat-btn--quick-action:active {
+    border-color: transparent;
+    background: $chat-button-active;
+    color: $chat-button-text-hover;
   }
 
   .#{$prefix}--chat-btn--quick-action.#{$prefix}--btn--ghost:focus {
@@ -59,12 +68,17 @@
   .#{$prefix}--chat-btn--quick-action--selected[disabled],
   .#{$prefix}--chat-btn--quick-action--selected[disabled]:hover {
     border-color: transparent;
-    background: $background-selected;
-    color: $text-secondary;
+    background: $chat-button-selected;
+    color: $chat-button-text-selected;
   }
 
-  .#{$prefix}--chat-btn--quick-action--selected:hover {
-    color: $text-secondary;
+  .#{$prefix}--chat-btn--quick-action.#{$prefix}--chat-btn--quick-action--selected:not(
+      [disabled]
+    ):hover,
+  .#{$prefix}--chat-btn--quick-action.#{$prefix}--chat-btn--quick-action--selected:not(
+      [disabled]
+    ):active {
+    color: $chat-button-text-selected;
   }
 
   .#{$prefix}--chat-btn.#{$prefix}--skeleton {

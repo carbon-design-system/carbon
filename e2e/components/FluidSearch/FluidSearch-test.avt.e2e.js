@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('FluidSearch @avt', () => {
+test.describe('@avt FluidSearch', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidSearch',

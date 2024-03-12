@@ -331,7 +331,7 @@ $list-box-menu-width: convert.to-rem(300px);
 
   // populated input field
   .#{$prefix}--list-box__field .#{$prefix}--text-input {
-    padding-inline-end: convert.to-rem(72px);
+    padding-inline-end: convert.to-rem(80px);
   }
 
   // invalid && populated input field
@@ -342,7 +342,7 @@ $list-box-menu-width: convert.to-rem(300px);
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input {
     // to account for clear input button outline
-    padding-inline-end: convert.to-rem(98px);
+    padding-inline-end: convert.to-rem(105px);
   }
 
   .#{$prefix}--list-box[data-invalid]
@@ -354,7 +354,7 @@ $list-box-menu-width: convert.to-rem(300px);
     .#{$prefix}--text-input
     + .#{$prefix}--list-box__invalid-icon {
     // to account for clear input button outline
-    inset-inline-end: convert.to-rem(66px);
+    inset-inline-end: convert.to-rem(82px);
   }
 
   // empty input field
@@ -434,7 +434,7 @@ $list-box-menu-width: convert.to-rem(300px);
     inline-size: convert.to-rem(24px);
     inset-block-start: 50%;
     /* to preserve .5rem space between icons according to spec top/transform used to center the combobox clear selection icon in IE11 */
-    inset-inline-end: convert.to-rem(36px);
+    inset-inline-end: convert.to-rem(45px);
     transform: translateY(-50%);
     transition: background-color $duration-fast-01 motion(standard, productive);
     user-select: none;
@@ -893,8 +893,28 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: $spacing-08;
+    inset-inline-end: calc($spacing-08 + 9px);
+    margin-block-start: convert.to-rem(0.5px);
     transform: translateY(-50%);
+  }
+
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::after,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::before {
+    position: absolute;
+    background-color: $border-subtle-01;
+    block-size: convert.to-rem(16px);
+    content: '';
+    inline-size: convert.to-rem(1px);
+  }
+
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::before {
+    display: none;
+    inset-inline-start: convert.to-rem(-9px);
+  }
+
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::after {
+    display: block;
+    inset-inline-end: convert.to-rem(-9px);
   }
 
   .#{$prefix}--list-box__wrapper--slug
@@ -939,33 +959,50 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--warning
     .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty) {
-    padding-inline-end: convert.to-rem(120px);
+    padding-inline-end: convert.to-rem(141px);
   }
 
   .#{$prefix}--list-box__wrapper--slug
-    .#{$prefix}--list-box--invalid
-    .#{$prefix}--slug,
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--text-input--empty
+    + .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--list-box__invalid-icon,
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--warning
-    .#{$prefix}--slug {
-    inset-inline-end: $spacing-10;
+    .#{$prefix}--list-box__invalid-icon.#{$prefix}--list-box__invalid-icon--warning {
+    inset-inline-end: convert.to-rem(83px);
   }
 
   .#{$prefix}--list-box__wrapper--slug
-    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
-    ~ .#{$prefix}--slug {
-    inset-inline-end: $spacing-10;
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--slug::before,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--slug::before {
+    display: block;
   }
 
   .#{$prefix}--list-box__wrapper--slug
-    .#{$prefix}--list-box--invalid
     .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
     ~ .#{$prefix}--slug,
   .#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--warning
     .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
     ~ .#{$prefix}--slug {
-    inset-inline-end: convert.to-rem(88px);
+    inset-inline-end: calc($spacing-10 + 18px);
+  }
+
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    .#{$prefix}--list-box__invalid-icon {
+    inset-inline-end: convert.to-rem(116px);
   }
 
   // Windows HCM fix
@@ -986,5 +1023,38 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box__selection > svg,
   .#{$prefix}--list-box__selection--multi > svg {
     @include high-contrast-mode('icon-fill');
+  }
+
+  .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__menu-icon)
+    .#{$prefix}--list-box__selection::after {
+    position: absolute;
+    background-color: $border-subtle-01;
+    block-size: convert.to-rem(16px);
+    content: '';
+    inline-size: convert.to-rem(1px);
+    margin-inline-start: convert.to-rem(33px);
+  }
+
+  .#{$prefix}--list-box--warning,
+  .#{$prefix}--list-box--invalid[data-invalid] {
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__menu-icon)
+      .#{$prefix}--list-box__selection::before {
+      position: absolute;
+      background-color: $border-subtle-01;
+      block-size: convert.to-rem(16px);
+      content: '';
+      inline-size: convert.to-rem(1px);
+      margin-inline-end: convert.to-rem(33px);
+    }
+  }
+
+  .#{$prefix}--list-box__wrapper--slug:has(.#{$prefix}--multi-select)
+    .#{$prefix}--list-box__menu-icon {
+    inset-inline-end: calc($spacing-04 - 4px);
+  }
+
+  .#{$prefix}--list-box__wrapper--slug:has(.#{$prefix}--dropdown)
+    .#{$prefix}--list-box__menu-icon {
+    inset-inline-end: calc($spacing-04 - 4px);
   }
 }
