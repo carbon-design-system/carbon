@@ -81,7 +81,9 @@ const PlaygroundStory = (props) => {
 export const TabTip = () => {
   const [open, setOpen] = useState(true);
   const [openTwo, setOpenTwo] = useState(false);
+  // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
   const align = document?.dir === 'rtl' ? 'bottom-right' : 'bottom-left';
+  // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
   const alignTwo = document?.dir === 'rtl' ? 'bottom-left' : 'bottom-right';
   return (
     <div className="popover-tabtip-story" style={{ display: 'flex' }}>

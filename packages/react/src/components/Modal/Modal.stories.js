@@ -469,6 +469,7 @@ export const WithStateManager = () => {
           ? null
           : ReactDOM.createPortal(
               <ModalContent open={open} setOpen={setOpen} />,
+              // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
               document.body
             )}
         {LauncherContent && <LauncherContent open={open} setOpen={setOpen} />}

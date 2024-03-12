@@ -9,6 +9,7 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import SideNav from '../SideNav';
 
+// eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation((query) => ({
