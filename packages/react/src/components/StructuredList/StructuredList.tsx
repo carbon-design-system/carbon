@@ -270,7 +270,8 @@ export function StructuredListRow(props: StructuredListRowProps) {
     `${prefix}--structured-list-row`,
     {
       [`${prefix}--structured-list-row--header-row`]: head,
-      [`${prefix}--structured-list-row--focused-within`]: hasFocusWithin,
+      [`${prefix}--structured-list-row--focused-within`]:
+        selectedRow === id && hasFocusWithin,
       [`${prefix}--structured-list-row--selected`]: selectedRow === id,
     },
     className
@@ -290,6 +291,7 @@ export function StructuredListRow(props: StructuredListRowProps) {
       className={classes}
       onClick={(event) => {
         setSelectedRow?.(id);
+        setHasFocusWithin(true);
         onClick && onClick(event);
       }}
       onFocus={() => {
