@@ -345,12 +345,8 @@ export const ai = TokenGroup.create({
   name: 'AI',
   properties: ['background'],
   tokens: [
-    'slug-background',
-    'slug-gradient',
-    'slug-background-hover',
-    'slug-gradient-hover',
-    'slug-hollow-hover',
     // Phase 2
+    'ai-popover-background',
     'ai-popover-shadow-outer-01',
     'ai-popover-shadow-outer-02',
     // Linear gradient refactor

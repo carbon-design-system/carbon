@@ -926,26 +926,6 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
-          "name": "slug-background",
-          "type": "color",
-        },
-        Object {
-          "name": "slug-gradient",
-          "type": "color",
-        },
-        Object {
-          "name": "slug-background-hover",
-          "type": "color",
-        },
-        Object {
-          "name": "slug-gradient-hover",
-          "type": "color",
-        },
-        Object {
-          "name": "slug-hollow-hover",
-          "type": "color",
-        },
-        Object {
           "name": "ai-popover-shadow-outer-01",
           "type": "color",
         },
