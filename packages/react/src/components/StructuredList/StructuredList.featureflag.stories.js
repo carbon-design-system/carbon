@@ -6,8 +6,6 @@
  */
 
 import React from 'react';
-import './story.scss';
-
 import mdx from './StructuredList.mdx';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import { useFeatureFlag } from '../FeatureFlags';

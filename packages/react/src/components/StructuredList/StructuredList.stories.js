@@ -6,11 +6,8 @@
  */
 
 import React from 'react';
-import './story.scss';
-import { RadioButton, RadioButtonChecked } from '@carbon/icons-react';
 import mdx from './StructuredList.mdx';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
-import { useFeatureFlag } from '../FeatureFlags';
 
 import {
   StructuredListWrapper,
@@ -104,20 +101,9 @@ Default.argTypes = {
     },
   },
 };
-
-const structuredListBodyRowGenerator = (numRows, v12StructuredRadioIcons) => {
+const structuredListBodyRowGenerator = (numRows) => {
   return Array.apply(null, Array(numRows)).map((n, i) => (
-    <StructuredListRow key={`row-${i}`}>
-      {v12StructuredRadioIcons && (
-        <StructuredListCell>
-          <div className="structured-unchecks">
-            <RadioButton />
-          </div>
-          <div className="structured-checks">
-            <RadioButtonChecked />
-          </div>
-        </StructuredListCell>
-      )}
+    <StructuredListRow key={`row-${i}`} selection>
       <StructuredListCell>Row {i}</StructuredListCell>
       <StructuredListCell>Row {i}</StructuredListCell>
       <StructuredListCell>
@@ -133,38 +119,22 @@ const structuredListBodyRowGenerator = (numRows, v12StructuredRadioIcons) => {
         name="row-0"
         aria-label={`row-${i}`}
       />
-      {!v12StructuredRadioIcons && (
-        <StructuredListCell>
-          <div className="structured-unchecks">
-            <RadioButton />
-          </div>
-          <div className="structured-checks">
-            <RadioButtonChecked />
-          </div>
-        </StructuredListCell>
-      )}
     </StructuredListRow>
   ));
 };
 
 export const Selection = (args) => {
-  const v12StructuredRadioIcons = useFeatureFlag(
-    'enable-v12-structured-list-radio-icons'
-  );
   return (
     <StructuredListWrapper selection {...args}>
       <StructuredListHead>
-        <StructuredListRow head>
-          {v12StructuredRadioIcons && (
-            <StructuredListCell head></StructuredListCell>
-          )}
+        <StructuredListRow head selection>
           <StructuredListCell head>ColumnA</StructuredListCell>
           <StructuredListCell head>ColumnB</StructuredListCell>
           <StructuredListCell head>ColumnC</StructuredListCell>
         </StructuredListRow>
       </StructuredListHead>
       <StructuredListBody>
-        {structuredListBodyRowGenerator(4, v12StructuredRadioIcons)}
+        {structuredListBodyRowGenerator(4)}
       </StructuredListBody>
     </StructuredListWrapper>
   );
@@ -184,24 +154,18 @@ Selection.argTypes = {
 };
 
 export const WithBackgroundLayer = () => {
-  const v12StructuredRadioIcons = useFeatureFlag(
-    'enable-v12-structured-list-radio-icons'
-  );
   return (
     <WithLayer>
       <StructuredListWrapper selection>
         <StructuredListHead>
           <StructuredListRow head>
-            {v12StructuredRadioIcons && (
-              <StructuredListCell head></StructuredListCell>
-            )}
             <StructuredListCell head>ColumnA</StructuredListCell>
             <StructuredListCell head>ColumnB</StructuredListCell>
             <StructuredListCell head>ColumnC</StructuredListCell>
           </StructuredListRow>
         </StructuredListHead>
         <StructuredListBody>
-          {structuredListBodyRowGenerator(4, v12StructuredRadioIcons)}
+          {structuredListBodyRowGenerator(4)}
         </StructuredListBody>
       </StructuredListWrapper>
     </WithLayer>
