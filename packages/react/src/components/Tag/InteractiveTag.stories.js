@@ -30,9 +30,20 @@ export default {
 
 export const Selectable = (args) => {
   return (
-    <SelectableTag renderIcon={Asleep} className="some-class" {...args}>
-      {'Tag content'}
-    </SelectableTag>
+    <>
+      <SelectableTag
+        renderIcon={Asleep}
+        className="some-class"
+        text="Tag content"
+        {...args}
+      />
+      <SelectableTag
+        renderIcon={Asleep}
+        className="some-class"
+        text="Tag content content content content content"
+        {...args}
+      />{' '}
+    </>
   );
 };
 
@@ -89,16 +100,16 @@ export const Operational = (args) => {
           type="red"
           className="some-class"
           renderIcon={Asleep}
-          {...args}>
-          {'Tag content'}
-        </OperationalTag>
+          text="Tag content content content content"
+          {...args}
+        />
         <OperationalTag
           type="magenta"
           className="some-class"
           renderIcon={Asleep}
-          {...args}>
-          {'Tag content'}
-        </OperationalTag>
+          text="Tag content"
+          {...args}
+        />
         <OperationalTag
           type="purple"
           className="some-class"
@@ -299,25 +310,25 @@ export const Dismissible = (args) => {
         className="some-class"
         title="Clear Filter"
         renderIcon={Asleep}
-        {...args}>
-        {'Tag content'}
-      </DismissibleTag>
+        text="Tag content content content content"
+        {...args}
+      />
       <DismissibleTag
         type="magenta"
         className="some-class"
         title="Clear Filter"
+        text="Tag content"
+        renderIcon={Asleep}
         {...args}
-        renderIcon={Asleep}>
-        {'Tag content'}
-      </DismissibleTag>
+      />
       <DismissibleTag
         type="purple"
         className="some-class"
         title="Clear Filter"
+        text="Tag content"
         {...args}
-        renderIcon={Asleep}>
-        {'Tag content'}
-      </DismissibleTag>
+        renderIcon={Asleep}
+      />
       <DismissibleTag
         type="blue"
         className="some-class"

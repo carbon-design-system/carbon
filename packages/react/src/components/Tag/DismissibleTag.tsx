@@ -18,11 +18,6 @@ const getInstanceId = setupGetInstanceId();
 
 export interface DismissibleTagBaseProps {
   /**
-   * Provide content to be rendered inside of a `DismissibleTag`
-   */
-  children?: React.ReactNode;
-
-  /**
    * Provide a custom className that is applied to the containing <span>
    */
   className?: string;
@@ -60,6 +55,11 @@ export interface DismissibleTagBaseProps {
   slug?: ReactNodeLike;
 
   /**
+   * Provide text to be rendered inside of a the tag.
+   */
+  text?: string;
+
+  /**
    * Text to show on clear filters
    */
   title?: string;
@@ -76,7 +76,6 @@ export type DismissibleTagProps<T extends React.ElementType> = PolymorphicProps<
 >;
 
 const DismissibleTag = <T extends React.ElementType>({
-  children,
   className,
   disabled,
   id,
@@ -85,6 +84,7 @@ const DismissibleTag = <T extends React.ElementType>({
   onClose,
   slug,
   size,
+  text,
   type,
   ...other
 }: DismissibleTagProps<T>) => {
@@ -118,10 +118,10 @@ const DismissibleTag = <T extends React.ElementType>({
       renderIcon={renderIcon}
       disabled={disabled}
       className={tagClasses}
+      text={text}
       id={tagId}
       {...otherProps}>
       <div className={`${prefix}--interactive--tag-children`}>
-        {children}
         {normalizedSlug}
         <button
           type="button"
@@ -137,11 +137,6 @@ const DismissibleTag = <T extends React.ElementType>({
   );
 };
 DismissibleTag.propTypes = {
-  /**
-   * Provide content to be rendered inside of a `DismissibleTag`
-   */
-  children: PropTypes.node,
-
   /**
    * Provide a custom className that is applied to the containing <span>
    */
@@ -178,6 +173,11 @@ DismissibleTag.propTypes = {
    * **Experimental:** Provide a `Slug` component to be rendered inside the `DismissibleTag` component
    */
   slug: PropTypes.node,
+
+  /**
+   * Provide text to be rendered inside of a the tag.
+   */
+  text: PropTypes.string,
 
   /**
    * Text to show on clear filters
