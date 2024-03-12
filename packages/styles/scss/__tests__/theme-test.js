@@ -127,6 +127,7 @@ describe('@carbon/styles/scss/theme', () => {
         "support-caution-major",
         "support-caution-minor",
         "support-caution-undefined",
+        "ai-popover-background",
         "ai-popover-shadow-outer-01",
         "ai-popover-shadow-outer-02",
         "ai-inner-shadow",

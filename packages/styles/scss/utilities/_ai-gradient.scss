@@ -76,14 +76,17 @@
 @mixin ai-popover-gradient(
   $type: 'default',
   $offset: 0,
-  $background: 'background'
+  $background: 'ai-popover-background'
 ) {
   $start: 0%;
   @if $offset != 0 {
     $start: calc(0% + #{$offset});
   }
 
-  $background: custom-property.get-var(#{$background}, theme.$background);
+  $background: custom-property.get-var(
+    #{$background},
+    theme.$ai-popover-background
+  );
 
   @if $type == 'hover' {
     background: linear-gradient(

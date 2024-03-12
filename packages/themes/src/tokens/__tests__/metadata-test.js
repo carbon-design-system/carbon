@@ -926,6 +926,10 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "ai-popover-background",
+          "type": "color",
+        },
+        Object {
           "name": "ai-popover-shadow-outer-01",
           "type": "color",
         },
