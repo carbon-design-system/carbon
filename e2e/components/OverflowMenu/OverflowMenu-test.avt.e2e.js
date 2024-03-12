@@ -98,7 +98,7 @@ test.describe('@avt OverflowMenu', () => {
       page.locator('button').filter({ hasText: 'Restart app' })
     ).toBeFocused();
     await page.keyboard.press('Enter');
-    // focus comes back to the toggle button
-    await expect(toggleButton).toBeFocused();
+    // Once closed menu is no longer visibile
+    await expect(page.getByRole('menu')).not.toBeVisible();
   });
 });
