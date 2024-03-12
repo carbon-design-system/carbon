@@ -19,6 +19,7 @@ import { useId } from '../../internal/useId';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { Text } from '../Text';
+import { RadioButtonChecked, RadioButton } from '@carbon/icons-react';
 
 type DivAttrs = HTMLAttributes<HTMLDivElement>;
 
@@ -250,9 +251,15 @@ export interface StructuredListRowProps extends DivAttrs {
    * Provide a handler that is invoked on the key down event for the control
    */
   onKeyDown?(event: KeyboardEvent): void;
+
+  /**
+   * Mark if this row should be selectable
+   */
+  selection?: boolean;
 }
 export function StructuredListRow(props: StructuredListRowProps) {
-  const { onKeyDown, children, className, head, onClick, ...other } = props;
+  const { onKeyDown, children, className, head, onClick, selection, ...other } =
+    props;
   const [hasFocusWithin, setHasFocusWithin] = useState(false);
   const id = useId('grid-input');
   const selectedRow = React.useContext(GridSelectedRowStateContext);
@@ -271,6 +278,7 @@ export function StructuredListRow(props: StructuredListRowProps) {
 
   return head ? (
     <div role="row" {...other} className={classes} aria-busy="true">
+      {selection && <StructuredListCell head></StructuredListCell>}
       {children}
     </div>
   ) : (
@@ -292,6 +300,12 @@ export function StructuredListRow(props: StructuredListRowProps) {
       }}
       onKeyDown={onKeyDown}>
       <GridRowContext.Provider value={value}>
+        {selection && (
+          <StructuredListCell>
+            {selectedRow === id ? <RadioButtonChecked /> : <RadioButton />}
+          </StructuredListCell>
+        )}
+
         {children}
       </GridRowContext.Provider>
     </div>
@@ -330,6 +344,11 @@ StructuredListRow.propTypes = {
    * Provide a handler that is invoked on the key down event for the control,
    */
   onKeyDown: PropTypes.func,
+
+  /**
+   * Mark if this row should be selectable
+   */
+  selection: PropTypes.bool,
 };
 
 export interface StructuredListInputProps extends DivAttrs {
