@@ -1070,6 +1070,30 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "chat-button",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-button-hover",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-button-text-hover",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-button-active",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-button-selected",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-button-text-selected",
+          "type": "color",
+        },
+        Object {
           "name": "highlight",
           "type": "color",
         },

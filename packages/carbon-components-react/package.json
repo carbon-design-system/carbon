@@ -1,7 +1,7 @@
 {
   "name": "carbon-components-react",
   "description": "The Carbon Design System is IBM’s open-source design system for products and experiences.",
-  "version": "8.52.0",
+  "version": "8.53.0-rc.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -42,8 +42,8 @@
     "sass": "^1.33.0"
   },
   "dependencies": {
-    "@carbon/react": "^1.52.0",
-    "@carbon/styles": "^1.52.0",
+    "@carbon/react": "^1.53.0-rc.0",
+    "@carbon/styles": "^1.53.0-rc.0",
     "@ibm/telemetry-js": "^1.2.1",
     "chalk": "1.1.3"
   },
