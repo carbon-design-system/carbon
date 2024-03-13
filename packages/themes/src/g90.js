@@ -236,10 +236,10 @@ export const aiSkeletonElementBackground = blue80;
 export const aiOverlay = rgba(black, 0.5);
 
 // One off tokens for caret
-export const aiPopoverCaretCenter = '#456FB5';
-export const aiPopoverCaretBottom = '#465060';
-export const aiPopoverCaretBottomBackgroundActions = '#253042';
-export const aiPopoverCaretBottomBackground = '#2D3F5C';
+export const aiPopoverCaretCenter = '#4870B5';
+export const aiPopoverCaretBottom = blue50;
+export const aiPopoverCaretBottomBackgroundActions = '#1E283A';
+export const aiPopoverCaretBottomBackground = '#202D45';
 
 // Chat tokens
 export const chatPromptBackground = gray100;
