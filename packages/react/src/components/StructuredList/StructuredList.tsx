@@ -271,7 +271,7 @@ export function StructuredListRow(props: StructuredListRowProps) {
     {
       [`${prefix}--structured-list-row--header-row`]: head,
       [`${prefix}--structured-list-row--focused-within`]:
-        selectedRow === id && hasFocusWithin,
+        selectedRow === id && hasFocusWithin && selection,
       [`${prefix}--structured-list-row--selected`]: selectedRow === id,
     },
     className
