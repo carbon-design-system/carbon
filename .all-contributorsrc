@@ -1425,6 +1425,15 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "dedanade",
+      "name": "Daniel Adebonojo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/66811981?v=4",
+      "profile": "https://github.com/dedanade",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "commitConvention": "none"

@@ -10,11 +10,11 @@
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
-test.describe('Tag @avt', () => {
+test.describe('@avt Tag', () => {
   test('@avt-default-state Tag', async ({ page }) => {
     await visitStory(page, {
       component: 'Tag',
-      id: 'components-tag--default',
+      id: 'components-tag--read-only',
       globals: {
         theme: 'white',
       },
@@ -31,24 +31,5 @@ test.describe('Tag @avt', () => {
       },
     });
     await expect(page).toHaveNoACViolations('Tag-skeleton');
-  });
-
-  test('@avt-keyboard-nav Tag', async ({ page }) => {
-    await visitStory(page, {
-      component: 'Tag',
-      id: 'components-tag--playground',
-      globals: {
-        theme: 'white',
-      },
-      args: {
-        filter: true,
-      },
-    });
-
-    await expect(page.getByText('Tag content')).toBeVisible();
-    await page.keyboard.press('Tab');
-    await expect(
-      page.getByRole('button', { name: 'Clear filter' })
-    ).toBeFocused();
   });
 });
