@@ -1919,14 +1919,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/icon-helpers@npm:^10.28.0":
-  version: 10.46.0
-  resolution: "@carbon/icon-helpers@npm:10.46.0"
-  checksum: 10/479973b8fbe087c20ec933d85231669d4213de876e33ae07ba66428703b6cb899cbfdc5d09ee54a23784cd974b99c100dd143b164be1104a8a172f05c8cc5682
-  languageName: node
-  linkType: hard
-
-"@carbon/icon-helpers@npm:^10.47.0, @carbon/icon-helpers@workspace:packages/icon-helpers":
+"@carbon/icon-helpers@npm:^10.28.0, @carbon/icon-helpers@npm:^10.47.0, @carbon/icon-helpers@workspace:packages/icon-helpers":
   version: 0.0.0-use.local
   resolution: "@carbon/icon-helpers@workspace:packages/icon-helpers"
   dependencies:
