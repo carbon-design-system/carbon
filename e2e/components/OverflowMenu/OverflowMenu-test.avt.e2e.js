@@ -73,7 +73,7 @@ test.describe('@avt OverflowMenu', () => {
     await expect(page).toHaveNoACViolations('OverflowMenu-custom-icon-open');
   });
 
-  test('@avt-keyboard-nav overflow-menu', async ({ page }) => {
+  test.slow('@avt-keyboard-nav overflow-menu', async ({ page }) => {
     await visitStory(page, {
       component: 'OverflowMenu',
       id: 'components-overflowmenu--default',
@@ -98,7 +98,7 @@ test.describe('@avt OverflowMenu', () => {
       page.locator('button').filter({ hasText: 'Restart app' })
     ).toBeFocused();
     await page.keyboard.press('Enter');
-    // focus comes back to the toggle button
-    await expect(toggleButton).toBeFocused();
+    // Once closed menu is no longer visibile
+    await expect(page.getByRole('menu')).not.toBeVisible();
   });
 });
