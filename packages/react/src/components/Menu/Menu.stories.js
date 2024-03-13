@@ -45,11 +45,9 @@ export const Playground = (args) => {
   const selectableOnChange = action('onChange (MenuItemSelectable)');
   const radioOnChange = action('onChange (MenuItemRadioGroup)');
 
-  // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
   const target = document.getElementById('storybook-root');
 
   return (
-    // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
     <Menu {...args} target={target} x={document?.dir === 'rtl' ? 250 : 0}>
       <MenuItem label="Share with">
         <MenuItemRadioGroup

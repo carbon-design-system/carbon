@@ -9,6 +9,7 @@
 
 module.exports = {
   plugins: ['ssr-friendly'],
+  ignorePatterns: ['*.stories.js', '*-test.js'],
   overrides: [
     {
       extends: ['plugin:ssr-friendly/recommended'],
