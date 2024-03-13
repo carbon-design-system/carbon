@@ -793,7 +793,7 @@ const ComboBox = forwardRef(
                 </ListBox.Menu>
               </ListBox>
               {helperText && !invalid && !warn && !isFluid && (
-                <Text as="div" id={comboBoxHelperId} className={helperClasses}>
+                <Text as="div" id={helperTextId} className={helperClasses}>
                   {helperText}
                 </Text>
               )}
