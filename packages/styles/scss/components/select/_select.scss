@@ -320,10 +320,12 @@
     display: block;
   }
 
-  .#{$prefix}--select-input__wrapper[data-invalid]
+  .#{$prefix}--select--slug
+    .#{$prefix}--select-input__wrapper[data-invalid]
     .#{$prefix}--select-input
     ~ .#{$prefix}--select__invalid-icon,
-  .#{$prefix}--select-input__wrapper
+  .#{$prefix}--select--slug
+    .#{$prefix}--select-input__wrapper
     .#{$prefix}--select-input
     ~ .#{$prefix}--select__invalid-icon {
     inset-inline-end: convert.to-rem(82px);
