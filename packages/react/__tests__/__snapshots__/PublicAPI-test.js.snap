@@ -2651,6 +2651,9 @@ Map {
       "onOpen": Object {
         "type": "func",
       },
+      "parseDate": Object {
+        "type": "func",
+      },
       "readOnly": Object {
         "args": Array [
           Array [
