@@ -1050,11 +1050,11 @@ $list-box-menu-width: convert.to-rem(300px);
 
   .#{$prefix}--list-box__wrapper--slug:has(.#{$prefix}--multi-select)
     .#{$prefix}--list-box__menu-icon {
-    inset-inline-end: calc($spacing-04 - 4px);
+    inset-inline-end: $spacing-04;
   }
 
   .#{$prefix}--list-box__wrapper--slug:has(.#{$prefix}--dropdown)
     .#{$prefix}--list-box__menu-icon {
-    inset-inline-end: calc($spacing-04 - 4px);
+    inset-inline-end: $spacing-04;
   }
 }
