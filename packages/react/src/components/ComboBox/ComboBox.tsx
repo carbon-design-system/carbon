@@ -670,9 +670,9 @@ const ComboBox = forwardRef(
           // when both the message is supplied *and* when the component is in
           // the matching state (invalid, warn, etc).
           const ariaDescribedBy =
-            (helperText && !isFluid && helperTextId) ||
             (invalid && invalidText && invalidTextId) ||
             (warn && warnText && warnTextId) ||
+            (helperText && !isFluid && helperTextId) ||
             undefined;
 
           return (
