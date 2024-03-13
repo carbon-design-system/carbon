@@ -17,6 +17,8 @@ import {
   StructuredListInput,
   StructuredListCell,
 } from './';
+import { CheckmarkFilled } from '@carbon/icons-react';
+const prefix = 'cds';
 import StructuredListSkeleton from './StructuredList.Skeleton';
 
 export default {
@@ -103,7 +105,7 @@ Default.argTypes = {
 };
 const structuredListBodyRowGenerator = (numRows) => {
   return Array.apply(null, Array(numRows)).map((n, i) => (
-    <StructuredListRow key={`row-${i}`} selection>
+    <StructuredListRow key={`row-${i}`}>
       <StructuredListCell>Row {i}</StructuredListCell>
       <StructuredListCell>Row {i}</StructuredListCell>
       <StructuredListCell>
@@ -119,15 +121,22 @@ const structuredListBodyRowGenerator = (numRows) => {
         name="row-0"
         aria-label={`row-${i}`}
       />
+      <StructuredListCell>
+        <CheckmarkFilled
+          className={`${prefix}--structured-list-svg`}
+          aria-label="select an option">
+          <title>select an option</title>
+        </CheckmarkFilled>
+      </StructuredListCell>
     </StructuredListRow>
   ));
 };
 
 export const Selection = (args) => {
   return (
-    <StructuredListWrapper selection {...args}>
+    <StructuredListWrapper {...args}>
       <StructuredListHead>
-        <StructuredListRow head selection>
+        <StructuredListRow head>
           <StructuredListCell head>ColumnA</StructuredListCell>
           <StructuredListCell head>ColumnB</StructuredListCell>
           <StructuredListCell head>ColumnC</StructuredListCell>
@@ -156,7 +165,7 @@ Selection.argTypes = {
 export const WithBackgroundLayer = () => {
   return (
     <WithLayer>
-      <StructuredListWrapper selection>
+      <StructuredListWrapper>
         <StructuredListHead>
           <StructuredListRow head>
             <StructuredListCell head>ColumnA</StructuredListCell>
