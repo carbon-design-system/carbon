@@ -54,7 +54,6 @@ export const Playground = (args) => (
 );
 
 Playground.args = {
-  // eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
   flipped: document?.dir === 'rtl',
   focusTrap: false,
   open: false,
