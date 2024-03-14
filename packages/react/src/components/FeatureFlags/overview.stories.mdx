@@ -30,15 +30,23 @@ components with all feature flags turned on.
 
 ## Current feature flags
 
-| Flag                                | Description                                                              | Default | Javascript flag | Sass flag |
-| ----------------------------------- | ------------------------------------------------------------------------ | ------- | --------------- | --------- |
-| `enable-v11-release`                | Flag enabling the v11 features                                           | `true`  | ✅              | ✅        |
-| `enable-experimental-tile-contrast` | Enable the improved styling for tiles that provides better contrast      | `false` |                 | ✅        |
-| `enable-v12-tile-default-icons`     | Enable default icons for Tile components                                 | `false` | ✅              |           |
-| `enable-v12-overflowmenu`           | Enable the use of the v12 OverflowMenu leveraging the Menu subcomponents | `false` | ✅              |           |
-| `enable-v12-tile-radio-icons`       | Enable rendering of default icons in the tile components                 | `false` | ✅              | ✅        |
-| `enable-treeview-controllable`      | Enable the new TreeView controllable API                                 | `false` | ✅              |           |
+Flags prefixed with `enable-experimental-*` should be considered unstable and
+subject to change.
 
+Flags prefixed with `enable-v12-*` are still experimental in nature, but are
+unlikely to change. They will be marked as `true` or "on" by default in the next
+major version, v12.
+
+For more details on our approach to experimental features, see the
+[documentation in the Carbon monorepo](https://github.com/carbon-design-system/carbon/blob/main/docs/experimental-code.md).
+
+| Flag                                        | Description                                                              | Default | Javascript flag | Sass flag |
+| ------------------------------------------- | ------------------------------------------------------------------------ | ------- | --------------- | --------- |
+| `enable-experimental-tile-contrast`         | Enable the improved styling for tiles that provides better contrast      | `false` |                 | ✅        |
+| `enable-experimental-treeview-controllable` | Enable the new TreeView controllable API                                 | `false` | ✅              |           |
+| `enable-v12-tile-default-icons`             | Enable default icons for Tile components                                 | `false` | ✅              |           |
+| `enable-v12-overflowmenu`                   | Enable the use of the v12 OverflowMenu leveraging the Menu subcomponents | `false` | ✅              |           |
+| `enable-v12-tile-radio-icons`               | Enable rendering of default icons in the tile components                 | `false` | ✅              | ✅        |
 
 ## Turning on feature flags in Javascript/react
 
@@ -55,7 +63,7 @@ import { unstable_FeatureFlags as FeatureFlags } from '@carbon/react';
     'enable-a-second-feature-flag': true,
   }}>
   <Tile />
-</FeatureFlags>
+</FeatureFlags>;
 ```
 
 The `FeatureFlag` component can be placed at any point in your react tree and

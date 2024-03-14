@@ -40,5 +40,9 @@ feature-flags:
     enabled: false
   - name: enable-treeview-controllable
     description: >
+      Deprecated: please use enable-experimental-treeview-controllable instead
+    enabled: false
+  - name: enable-experimental-treeview-controllable
+    description: >
       Enable the new TreeView controllable API
     enabled: false
