@@ -385,6 +385,13 @@ export const ai = TokenGroup.create({
     'chat-avatar-user',
     'chat-shell-background',
     'chat-header-background',
+    // Chat button tokens
+    'chat-button',
+    'chat-button-hover',
+    'chat-button-text-hover',
+    'chat-button-active',
+    'chat-button-selected',
+    'chat-button-text-selected',
   ],
 });
 

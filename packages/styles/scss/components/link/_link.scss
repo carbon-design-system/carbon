@@ -19,6 +19,10 @@ $link-hover-text-color: custom-property.get-var(
   'link-hover-text-color',
   $link-primary-hover
 );
+$link-visited-text-color: custom-property.get-var(
+  'link-visited-text-color',
+  $link-visited
+);
 $link-focus-text-color: custom-property.get-var(
   'link-focus-text-color',
   $focus
@@ -48,7 +52,7 @@ $link-focus-text-color: custom-property.get-var(
     &:active:visited:hover {
       @include focus-outline;
 
-      color: $text-primary;
+      color: $link-text-color;
       outline-color: $link-focus-text-color;
       text-decoration: underline;
     }
@@ -61,11 +65,11 @@ $link-focus-text-color: custom-property.get-var(
     }
 
     &:visited {
-      color: $link-primary;
+      color: $link-visited-text-color;
     }
 
     &:visited:hover {
-      color: $link-primary-hover;
+      color: $link-visited-text-color;
     }
   }
 
@@ -81,11 +85,11 @@ $link-focus-text-color: custom-property.get-var(
   }
 
   .#{$prefix}--link.#{$prefix}--link--visited:visited {
-    color: $link-visited;
+    color: $link-visited-text-color;
   }
 
   .#{$prefix}--link.#{$prefix}--link--visited:visited:hover {
-    color: $link-primary-hover;
+    color: $link-hover-text-color;
   }
 
   .#{$prefix}--link.#{$prefix}--link--inline {
