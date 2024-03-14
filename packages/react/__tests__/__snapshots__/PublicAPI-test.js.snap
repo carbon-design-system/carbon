@@ -1443,6 +1443,15 @@ Map {
       "isFullWidth": Object {
         "type": "bool",
       },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "",
+            "tearsheet",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "launcherButtonRef": Object {
         "args": Array [
           Array [

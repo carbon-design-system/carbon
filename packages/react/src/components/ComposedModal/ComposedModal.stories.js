@@ -24,6 +24,8 @@ import {
   StructuredListCell,
 } from '../StructuredList';
 import mdx from './ComposedModal.mdx';
+import './ComposedModal.stories.scss';
+import { ModalInfluencer } from './ModalInfluencer';
 
 export default {
   title: 'Components/ComposedModal',
@@ -36,6 +38,13 @@ export default {
   parameters: {
     docs: {
       page: mdx,
+    },
+  },
+  argTypes: {
+    kind: {
+      table: {
+        disable: true,
+      },
     },
   },
 };
@@ -346,6 +355,150 @@ export const WithInlineLoading = () => {
       </ComposedModal>
     </>
   );
+};
+
+const ModalTearsheet = (_args) => {
+  const { 'kind ': kind, 'influencer ': influencer, ...args } = _args;
+  const [open, setOpen] = useState(true);
+  const [open2, setOpen2] = useState(false);
+  const localRef = useRef();
+
+  return (
+    <>
+      <div className="sb-blank-header">Global Header Placeholder</div>
+      <div className="sb-page-content">
+        <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
+      </div>
+      <ComposedModal
+        ref={localRef}
+        id="ts1"
+        open={open}
+        onClose={() => setOpen(false)}
+        kind={kind}
+        size={args.size}>
+        <ModalHeader label="Account resources" title="Add a custom domain" />
+        {influencer === 'start' ? (
+          <ModalInfluencer location="start">
+            This is often used for dividing content. Typically, but not limited
+            to, placement on the left side of the tearsheet, this space is
+            usually reserved for a menu, vertical progress indicator, or
+            filters. We advise not to use 2 influencers at the same time due to
+            the lack of available screen space.
+          </ModalInfluencer>
+        ) : (
+          ''
+        )}
+        <ModalBody>
+          <p style={{ marginBottom: '1rem' }}>
+            Custom domains direct requests for your apps in this Cloud Foundry
+            organization to a URL that you own. A custom domain can be a shared
+            domain, a shared subdomain, or a shared domain and host.
+          </p>
+          <TextInput
+            data-modal-primary-focus
+            id="text-input-1"
+            labelText="Domain name"
+            placeholder="e.g. github.com"
+            style={{ marginBottom: '1rem' }}
+          />
+          <Select id="select-1" defaultValue="us-south" labelText="Region">
+            <SelectItem value="us-south" text="US South" />
+            <SelectItem value="us-east" text="US East" />
+          </Select>
+
+          <Button onClick={() => setOpen2(true)}>Open 2</Button>
+        </ModalBody>
+        {influencer === 'end' ? (
+          <ModalInfluencer location="end">
+            This is often used for dividing content. Typically, but not limited
+            to, placement on the left side of the tearsheet, this space is
+            usually reserved for a menu, vertical progress indicator, or
+            filters. We advise not to use 2 influencers at the same time due to
+            the lack of available screen space.
+          </ModalInfluencer>
+        ) : (
+          ''
+        )}
+        <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+      </ComposedModal>
+
+      <ComposedModal
+        id="ts2"
+        open={open2}
+        onClose={() => setOpen2(false)}
+        kind={kind}
+        size={args.size}>
+        <ModalHeader label="Account resources" title="Add a custom domain" />
+        <ModalBody>
+          <p style={{ marginBottom: '1rem' }}>
+            Custom domains direct requests for your apps in this Cloud Foundry
+            organization to a URL that you own. A custom domain can be a shared
+            domain, a shared subdomain, or a shared domain and host.
+          </p>
+          <TextInput
+            data-modal-primary-focus
+            id="text-input-1"
+            labelText="Domain name"
+            placeholder="e.g. github.com"
+            style={{ marginBottom: '1rem' }}
+          />
+          <Select id="select-1" defaultValue="us-south" labelText="Region">
+            <SelectItem value="us-south" text="US South" />
+            <SelectItem value="us-east" text="US East" />
+          </Select>
+        </ModalBody>
+        <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+      </ComposedModal>
+    </>
+  );
+};
+
+export const ModalTearsheetKind = {
+  parameters: {
+    controls: {
+      include: ['influencer ', 'kind ', 'size'],
+    },
+  },
+  argTypes: {
+    'influencer ': {
+      description: `Optional: influencer`,
+      control: {
+        type: 'select',
+        labels: {
+          0: 'start: influencer before content',
+          1: 'end: influencer after content',
+          2: 'No influencer.',
+        },
+      },
+      options: [0, 1, 2],
+      mapping: {
+        0: 'start',
+        1: 'end',
+        2: null,
+      },
+    },
+    'kind ': {
+      description: `Optional: kind property ('tearsheet')`,
+      control: {
+        type: 'select',
+        labels: {
+          0: 'tearsheet',
+          1: 'null - default modal kind',
+        },
+      },
+      options: [0, 1],
+      mapping: {
+        0: 'tearsheet',
+        1: null,
+      },
+    },
+  },
+  args: {
+    'kind ': 0,
+  },
+  render: (args) => {
+    return <ModalTearsheet {...args} />;
+  },
 };
 
 export const Playground = (args) => {
