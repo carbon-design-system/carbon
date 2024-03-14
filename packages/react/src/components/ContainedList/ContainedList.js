@@ -103,9 +103,9 @@ function ContainedList({
          * Ref https://bugs.webkit.org/show_bug.cgi?id=170179#c1
          */
         // eslint-disable-next-line jsx-a11y/no-redundant-roles
-        <div role="list" aria-labelledby={labelId}>
+        <ul role="list" aria-labelledby={labelId}>
           {isActionSearch ? filteredChildren : renderedChildren}
-        </div>
+        </ul>
       )}
     </div>
   );

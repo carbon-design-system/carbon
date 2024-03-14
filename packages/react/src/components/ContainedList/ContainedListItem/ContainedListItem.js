@@ -42,7 +42,7 @@ function ContainedListItem({
   );
 
   return (
-    <div className={classes} {...rest} role="listitem">
+    <li className={classes} {...rest} role="listitem">
       {isClickable ? (
         <button
           className={`${prefix}--contained-list-item__content`}
@@ -63,7 +63,7 @@ function ContainedListItem({
           {action}
         </LayoutConstraint>
       )}
-    </div>
+    </li>
   );
 }
 
