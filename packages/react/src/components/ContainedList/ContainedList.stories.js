@@ -61,12 +61,12 @@ export default {
 };
 
 export const Default = () => (
-  <>
+  <div role="list">
     <ContainedList role="presentation" label="List title" kind="on-page">
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
+      <ContainedListItem role="listitem">List item</ContainedListItem>
+      <ContainedListItem role="listitem">List item</ContainedListItem>
+      <ContainedListItem role="listitem">List item</ContainedListItem>
+      <ContainedListItem role="listitem">List item</ContainedListItem>
     </ContainedList>
     <ContainedList role="presentation" label="List title" kind="on-page">
       <ContainedListItem>List item</ContainedListItem>
@@ -74,7 +74,7 @@ export const Default = () => (
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
     </ContainedList>
-  </>
+  </div>
 );
 
 export const Disclosed = () => (
