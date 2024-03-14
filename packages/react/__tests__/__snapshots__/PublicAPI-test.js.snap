@@ -5831,6 +5831,7 @@ Map {
             Object {
               "args": Array [
                 Object {
+                  "isRequired": true,
                   "type": "number",
                 },
               ],
@@ -5841,12 +5842,17 @@ Map {
                 Object {
                   "args": Array [
                     Object {
-                      "text": undefined,
+                      "text": Object {
+                        "isRequired": true,
+                        "type": "string",
+                      },
                       "value": Object {
+                        "isRequired": true,
                         "type": "number",
                       },
                     },
                   ],
+                  "isRequired": true,
                   "type": "shape",
                 },
               ],
