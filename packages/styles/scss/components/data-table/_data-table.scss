@@ -121,7 +121,7 @@
   }
 
   .#{$prefix}--data-table
-    + :not(.#{$prefix}--toggletip-content)
+    + :not(.#{$prefix}--popover-container)
     tr:hover
     .#{$prefix}--link {
     color: $link-secondary;
