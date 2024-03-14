@@ -126,7 +126,6 @@ const Tag = <T extends React.ElementType>({
   const prefix = usePrefix();
   const tagId = id || `tag-${getInstanceId()}`;
   const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
-  const [toggleTooltip, setToggleTooltip] = useState(true);
 
   const isEllipsisActive = (element: any) => {
     setIsEllipsisApplied(element.offsetWidth < element.scrollWidth);
@@ -226,7 +225,10 @@ const Tag = <T extends React.ElementType>({
 
   if (isEllipsisApplied) {
     return (
-      <>
+      <Tooltip
+        label={tagText}
+        align="bottom"
+        className={`${prefix}--tag-label-tooltip`}>
         <ComponentTag
           disabled={disabled}
           className={tagClasses}
@@ -239,24 +241,13 @@ const Tag = <T extends React.ElementType>({
           ) : (
             ''
           )}
-          <Tooltip
-            label={tagText}
-            align="bottom"
-            className={`${prefix}--tag-label-tooltip`}
-            defaultOpen={toggleTooltip}>
-            <Text title={tagText} className={`${prefix}--tag__label`}>
-              {tagText ? tagText : typeText}
-            </Text>
-          </Tooltip>
-
+          <Text title={tagText} className={`${prefix}--tag__label`}>
+            {tagText ? tagText : typeText}
+          </Text>
           {text !== undefined ? children : null}
           {normalizedSlug}
         </ComponentTag>
-
-        <button type="button" onClick={() => setToggleTooltip(!!toggleTooltip)}>
-          toggle tooltip
-        </button>
-      </>
+      </Tooltip>
     );
   }
 
