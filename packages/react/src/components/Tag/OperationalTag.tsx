@@ -30,11 +30,6 @@ const TYPES = {
 
 export interface OperationalTagBaseProps {
   /**
-   * Provide content to be rendered inside of a `OperationalTag`
-   */
-  children?: React.ReactNode;
-
-  /**
    * Provide a custom className that is applied to the containing <span>
    */
   className?: string;
@@ -68,6 +63,11 @@ export interface OperationalTagBaseProps {
   slug?: ReactNodeLike;
 
   /**
+   * Provide text to be rendered inside of a the tag.
+   */
+  text?: string;
+
+  /**
    * Specify the type of the `Tag`
    */
   type?: keyof typeof TYPES;
@@ -79,13 +79,13 @@ export type OperationalTagProps<T extends React.ElementType> = PolymorphicProps<
 >;
 
 const OperationalTag = <T extends React.ElementType>({
-  children,
   className,
   disabled,
   id,
   renderIcon,
   slug,
   size,
+  text,
   type = 'gray',
   ...other
 }: OperationalTagProps<T>) => {
@@ -109,9 +109,9 @@ const OperationalTag = <T extends React.ElementType>({
       disabled={disabled}
       className={tagClasses}
       id={tagId}
+      text={text}
       {...other}>
       <div className={`${prefix}--interactive--tag-children`}>
-        {children}
         {normalizedSlug}
       </div>
     </Tag>
@@ -119,11 +119,6 @@ const OperationalTag = <T extends React.ElementType>({
 };
 
 OperationalTag.propTypes = {
-  /**
-   * Provide content to be rendered inside of a `OperationalTag`
-   */
-  children: PropTypes.node,
-
   /**
    * Provide a custom className that is applied to the containing <span>
    */
@@ -155,6 +150,11 @@ OperationalTag.propTypes = {
    * **Experimental:** Provide a `Slug` component to be rendered inside the `OperationalTag` component
    */
   slug: PropTypes.node,
+
+  /**
+   * Provide text to be rendered inside of a the tag.
+   */
+  text: PropTypes.string,
 
   /**
    * Specify the type of the `Tag`

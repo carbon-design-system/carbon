@@ -17,11 +17,6 @@ const getInstanceId = setupGetInstanceId();
 
 export interface SelectableTagBaseProps {
   /**
-   * Provide content to be rendered inside of a `SelectableTag`
-   */
-  children?: React.ReactNode;
-
-  /**
    * Provide a custom className that is applied to the containing <span>
    */
   className?: string;
