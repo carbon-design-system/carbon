@@ -1,0 +1,28 @@
+# ActionableNotification
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Notification)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/notification/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/notification/accessibility)
+
+## Experimental focus wrap without sentinels
+
+`ActionableNotification` supports the
+`enable-experimental-focus-wrap-without-sentinels` feature flag. This enables a
+new approach to the focus wrap behavior that modifies the DOM to no longer
+include hidden "sentinel nodes" used to mark the beginning and end of the
+wrapped focus. The new behavior looks at all interactive child nodes and wraps
+focus based on tabbable order of those nodes. The focus direction is determined
+whether `tab` is being pressed (forward) or `shift`+`tab` is being pressed
+(backwards). In javascript you can enable this feature flag to use the new focus
+wrap behavior.
+
+```js
+<FeatureFlags
+  flags={{
+    'enable-experimental-focus-wrap-without-sentinels': true,
+  }}>
+  <ActionableNotification />
+</FeatureFlags>
+```
