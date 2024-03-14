@@ -334,6 +334,7 @@ const ComboBox = forwardRef(
       warn,
       warnText,
       // allowCustomValue = false,
+      //test
       slug,
       ...rest
     } = props;
