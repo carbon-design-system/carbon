@@ -62,13 +62,13 @@ export default {
 
 export const Default = () => (
   <>
-    <ContainedList role="list" label="List title" kind="on-page">
+    <ContainedList role="presentation" label="List title" kind="on-page">
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
     </ContainedList>
-    <ContainedList role="list" label="List title" kind="on-page">
+    <ContainedList role="presentation" label="List title" kind="on-page">
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
