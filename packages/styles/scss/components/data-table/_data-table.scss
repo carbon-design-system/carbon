@@ -120,7 +120,10 @@
     color: $text-primary;
   }
 
-  .#{$prefix}--data-table tr:hover .#{$prefix}--link {
+  .#{$prefix}--data-table
+    + :not(.#{$prefix}--toggletip-content)
+    tr:hover
+    .#{$prefix}--link {
     color: $link-secondary;
   }
 
