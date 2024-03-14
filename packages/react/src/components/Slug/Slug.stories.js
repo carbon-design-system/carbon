@@ -246,7 +246,7 @@ export const Default = () => (
 );
 
 export const Callout = (args) => {
-  const { showSlugActions = false } = args;
+  const { showSlugActions = true } = args;
 
   return (
     <div className="slug-container-example slug-container centered">
