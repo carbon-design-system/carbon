@@ -134,7 +134,7 @@ const structuredListBodyRowGenerator = (numRows) => {
 
 export const Selection = (args) => {
   return (
-    <StructuredListWrapper {...args}>
+    <StructuredListWrapper selection {...args}>
       <StructuredListHead>
         <StructuredListRow head>
           <StructuredListCell head>ColumnA</StructuredListCell>
@@ -165,7 +165,7 @@ Selection.argTypes = {
 export const WithBackgroundLayer = () => {
   return (
     <WithLayer>
-      <StructuredListWrapper>
+      <StructuredListWrapper selection>
         <StructuredListHead>
           <StructuredListRow head>
             <StructuredListCell head>ColumnA</StructuredListCell>
