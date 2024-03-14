@@ -61,20 +61,20 @@ export default {
 };
 
 export const Default = () => (
-  <div role="list">
-    <ContainedList role="presentation" label="List title" kind="on-page">
-      <ContainedListItem role="listitem">List item</ContainedListItem>
-      <ContainedListItem role="listitem">List item</ContainedListItem>
-      <ContainedListItem role="listitem">List item</ContainedListItem>
-      <ContainedListItem role="listitem">List item</ContainedListItem>
-    </ContainedList>
-    <ContainedList role="presentation" label="List title" kind="on-page">
+  <>
+    <ContainedList label="List title" kind="on-page">
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
     </ContainedList>
-  </div>
+    <ContainedList label="List title" kind="on-page">
+      <ContainedListItem>List item</ContainedListItem>
+      <ContainedListItem>List item</ContainedListItem>
+      <ContainedListItem>List item</ContainedListItem>
+      <ContainedListItem>List item</ContainedListItem>
+    </ContainedList>
+  </>
 );
 
 export const Disclosed = () => (
