@@ -121,13 +121,16 @@
   }
 
   .#{$prefix}--data-table
-    + :not(.#{$prefix}--popover-container)
-    tr:hover
+    tr
+    + :not(.#{$prefix}--popover-container):hover
     .#{$prefix}--link {
     color: $link-secondary;
   }
 
-  .#{$prefix}--data-table tr:hover .#{$prefix}--link--disabled {
+  .#{$prefix}--data-table
+    tr
+    + :not(.#{$prefix}--popover-container):hover
+    .#{$prefix}--link--disabled {
     color: $text-disabled;
   }
 
