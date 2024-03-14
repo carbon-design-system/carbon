@@ -85,7 +85,7 @@ export interface ListBoxProps
   warnText?: React.ReactNode;
 
   /**
-   * Specify the id to be applied to the element containing the invalid text
+   * Specify the id to be applied to the element containing the warn text
    */
   warnTextId?: string;
 }
@@ -190,11 +190,6 @@ ListBox.propTypes = {
   invalidTextId: PropTypes.string,
 
   /**
-   * Specify the id to be applied to the element containing the invalid text
-   */
-  invalidTextId: PropTypes.string,
-
-  /**
    * Specify if the control should render open
    */
   isOpen: PropTypes.bool,
@@ -227,6 +222,11 @@ ListBox.propTypes = {
 
   /**
    * Provide the text that is displayed when the control is in warning state
+   */
+  warnText: PropTypes.string,
+
+  /**
+   * Specify the id to be applied to the element containing the warn text
    */
   warnTextId: PropTypes.string,
 };
