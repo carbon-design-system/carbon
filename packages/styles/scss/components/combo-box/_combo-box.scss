@@ -7,7 +7,6 @@
 
 @use '../list-box';
 @use '../../config' as *;
-@use '../../motion' as *;
 @use '../../theme' as *;
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
@@ -32,10 +31,6 @@
   .#{$prefix}--combo-box.#{$prefix}--list-box--expanded
     .#{$prefix}--text-input {
     border-block-end-color: $border-subtle;
-  }
-
-  .#{$prefix}--combo-box .#{$prefix}--text-input {
-    transition: outline $duration-fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--combo-box--input--focus.#{$prefix}--text-input {
