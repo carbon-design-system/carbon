@@ -20,170 +20,83 @@
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/z-index' as *;
 
-:root {
-  --#{$prefix}-dialog-kind-side-inset-start: #{$spacing-09};
-}
-
-$kind-side-sizes: (
-  xs: 16rem,
-  sm: 20rem,
-  md: 30rem,
-  lg: 40rem 50%,
-  xl: 50rem 75%,
-);
-
-@mixin set-kind-inline-size($size: map-get($kind-side-sizes, md)) {
-  /* any value is single value list */
-  inline-size: list.nth($size, 1);
-  @if list.length($size) > 1 {
-    min-inline-size: list.nth($size, 2);
-  }
-
-  max-inline-size: 100%;
-}
-
-@mixin dialog--kind-side() {
-  $kind-side-inset-start: var(
-    --#{$prefix}-dialog-kind-side-inset-start,
-    $spacing-09
-  );
-
-  @each $size, $size_value in $kind-side-sizes {
-    &:where([data-width='#{$size}']) {
-      @include set-kind-inline-size($size_value);
-    }
-  }
-
-  position: fixed;
-  margin: 0;
-  block-size: calc(100% - #{$kind-side-inset-start});
-  inset-block-start: $kind-side-inset-start;
-  max-block-size: calc(100% - #{$kind-side-inset-start});
-  overflow-x: clip;
-
-  &:where([data-kind='side-start']) {
-    inset-inline-start: 0;
-    transform: translateX(-100%);
-
-    &:where([open][data-is-open]) {
-      transform: translateX(0);
-    }
-  }
-
-  &:where([data-kind='side-end']) {
-    inset-inline-start: 100%;
-    transform: translateX(0);
-
-    &:where([open][data-is-open]) {
-      transform: translateX(-100%);
-    }
-  }
-}
-
-$kind-tearsheet-sizes: (
-  xs: 40rem,
-  sm: 50rem,
-  md: 60rem,
-  lg: 70rem 50%,
-  xl: 80rem 80%,
-);
-
-@mixin dialog--kind-tearsheet {
-  position: fixed;
-  margin: 0 auto;
-  block-size: 100%;
-  inset-block-start: 100%;
-  max-block-size: calc(100% - #{$spacing-11});
-  max-inline-size: 100%;
-  transform: translateY(0);
-
-  @each $size, $size_value in $kind-tearsheet-sizes {
-    &:where([data-width='#{$size}']) {
-      @include set-kind-inline-size($size_value);
-    }
-  }
-
-  &:where([open][data-is-open]) {
-    transform: translateY(-100%);
-  }
-}
-
-@mixin dialog--default() {
-  /* size */
-  max-block-size: 50%;
-  max-inline-size: 100%;
-
-  &:where([data-width='xs']) {
-    inline-size: 24rem;
-  }
-
-  &:where([data-width='sm']) {
-    inline-size: 36rem;
-  }
-
-  &:where([data-width='md']) {
-    inline-size: 48rem;
-  }
-
-  &:where([data-width='lg']) {
-    inline-size: 60rem;
-  }
-
-  &:where([data-width='xl']) {
-    inline-size: 80rem;
-  }
-
-  @include breakpoint(md) {
-    max-inline-size: 84%;
-  }
-  @include breakpoint(lg) {
-    max-inline-size: 72%;
-  }
-  @include breakpoint(xlg) {
-    max-inline-size: 64%;
-  }
-  @include breakpoint(xlg) {
-    max-inline-size: 60%;
-  }
-
-  transform: translateY(calc(-1 * #{$spacing-06}));
-
-  &:where([open][data-is-open]) {
-    transform: translateY(0);
-  }
-
-  /** starting style also not supported widely
-  * https://caniuse.com/mdn-css_at-rules_starting-style
-  */
-  /*   Before-open state  */
-  /* Needs to be after the previous dialog[open] rule to take effect,
-  as the specificity is the same */
-  // @starting-style {
-  //   &:where([open]) {
-  //     opacity: 0;
-  //     transform: scaleY(0);
-  //   }
-  // }
-}
-
 /// Dialog styles
 /// @access public
 /// @group dialog
 @mixin dialog {
   .#{$prefix}--dialog {
+    /* size */
     padding: 0;
     border: 1px solid $border-subtle-01;
     background-color: $layer;
+    color: $text-primary;
+    inline-size: 48rem;
+    max-block-size: 50%;
+    max-inline-size: 100%;
     opacity: 0;
-    /* opening and closing is used in as allow-discrete is not currently supported wide enough
+    transform: translateY(calc(-1 * #{$spacing-06}));
+
+    /** opening and closing is used in as allow-discrete is not currently supported wide enough
      * https://caniuse.com/mdn-css_properties_display_is_transitionable
      */
-    // transition:
-    //   opacity 0.7s ease-out,
-    //   transform 0.7s ease-out
-    //   overlay 0.7s ease-out allow-discrete,
-    //   display 0.7s ease-out allow-discrete;
-    transition: all $duration-moderate-02 motion(entrance, expressive);
+    transition: opacity $duration-moderate-02 motion(exit, expressive),
+      transform $duration-moderate-02 motion(exit, expressive),
+      overlay $duration-moderate-02 motion(exit, expressive) allow-discrete,
+      display $duration-moderate-02 motion(exit, expressive) allow-discrete;
+
+    @media (prefers-reduced-motion) {
+      transition: none;
+    }
+
+    @include breakpoint(md) {
+      max-inline-size: 84%;
+    }
+    @include breakpoint(lg) {
+      max-inline-size: 72%;
+    }
+    @include breakpoint(xlg) {
+      max-inline-size: 64%;
+    }
+    @include breakpoint(xlg) {
+      max-inline-size: 60%;
+    }
+
+    &[open] {
+      opacity: 1;
+      transform: translateY(0);
+
+      transition: opacity $duration-moderate-02 motion(entrance, expressive),
+        transform $duration-moderate-02 motion(entrance, expressive),
+        overlay $duration-moderate-02 motion(entrance, expressive)
+          allow-discrete,
+        display $duration-moderate-02 motion(entrance, expressive)
+          allow-discrete;
+
+      @media (prefers-reduced-motion) {
+        transition: none;
+      }
+    }
+
+    /** starting style also not supported widely
+    * https://caniuse.com/mdn-css_at-rules_starting-style
+    */
+    /*   Before-open state  */
+    /* Needs to be after the previous dialog[open] rule to take effect,
+    as the specificity is the same */
+    /* stylelint-disable-next-line scss/at-rule-no-unknown */
+    @starting-style {
+      &[open] {
+        opacity: 0;
+        transform: translateY(calc(-1 * #{$spacing-06}));
+      }
+    }
+  }
+
+  .#{$prefix}--dialog__header {
+    position: relative;
+    overflow: visible;
+    inline-size: 100%;
+    min-block-size: $spacing-09;
   }
 
   .#{$prefix}--dialog__content {
@@ -191,37 +104,8 @@ $kind-tearsheet-sizes: (
     block-size: 100%;
   }
 
-  .#{$prefix}--dialog:not([data-kind]),
-  .#{$prefix}--dialog:where([data-kind='default']) {
-    @include dialog--default();
-  }
-
-  .#{$prefix}--dialog:where(
-      :is([data-kind='side-start'], [data-kind='side-end'])
-    ) {
-    @include dialog--kind-side();
-  }
-
-  .#{$prefix}--dialog:where(:is([data-kind='tearsheet'])) {
-    @include dialog--kind-tearsheet();
-  }
-
-  .#{$prefix}--dialog:where([data-modal]) {
+  .#{$prefix}--dialog--modal {
     border: 1px solid transparent;
-  }
-
-  .#{$prefix}--dialog:where([open]),
-  .#{$prefix}--dialog:where([data-closing]) {
-    /* should come after open */
-    opacity: 0;
-  }
-
-  .#{$prefix}--dialog:where([data-closing]) {
-    transition: all $duration-moderate-02 motion(exit, expressive);
-  }
-
-  .#{$prefix}--dialog:where([open][data-is-open]) {
-    opacity: 1;
   }
 
   /* Transition the :backdrop when the dialog modal is promoted to the top layer */
@@ -231,26 +115,24 @@ $kind-tearsheet-sizes: (
     /* opening and closing is used in as allow-discrete is not currently supported wide enough
      * https://caniuse.com/mdn-css_properties_display_is_transitionable
      */
-    // transition: display 0.7s allow-discrete,
-    //   overlay 0.7s allow-discrete,
-    //   background-color 0.7s;
-    //   /* Equivalent to g
-    // transition: all 0.7s allow-discrete; */
-    transition: all $duration-moderate-02 motion(entrance, expressive);
+    transition: background-color $duration-moderate-02
+        motion(entrance, expressive),
+      opacity $duration-moderate-02 motion(entrance, expressive);
+
+    @media (prefers-reduced-motion) {
+      transition: none;
+    }
   }
 
-  .#{$prefix}--dialog:where([open])::backdrop,
-  .#{$prefix}--dialog:where([data-closing])::backdrop {
-    opacity: 0;
-  }
-
-  .#{$prefix}--dialog:where([data-closing])::backdrop {
-    opacity: 0;
-    transition: all $duration-moderate-02 motion(exit, expressive);
-  }
-
-  .#{$prefix}--dialog:where([open][data-is-open])::backdrop {
+  .#{$prefix}--dialog[open]::backdrop {
     opacity: 1;
+
+    transition: background-color $duration-moderate-02 motion(exit, expressive),
+      opacity $duration-moderate-02 motion(exit, expressive);
+
+    @media (prefers-reduced-motion) {
+      transition: none;
+    }
   }
 
   /** starting style also not supported widely
@@ -258,17 +140,11 @@ $kind-tearsheet-sizes: (
   */
   /* This starting-style rule cannot be nested inside the above selector
 because the nesting selector cannot represent pseudo-elements. */
-  // @starting-style {
-  //   .#{$prefix}--dialog:where([open])::backdrop {
-  //     background-color: rgb(0 0 0 / 0%);
-  //   }
-  // }
-
-  .#{$prefix}--dialog__header {
-    position: relative;
-    overflow: visible;
-    block-size: 0;
-    inline-size: 100%;
+  /* stylelint-disable-next-line scss/at-rule-no-unknown */
+  @starting-style {
+    .#{$prefix}--dialog[open]::backdrop {
+      opacity: 0;
+    }
   }
 
   .#{$prefix}--dialog__header-controls {

@@ -46,13 +46,28 @@ export const Default = ({ open: _open, ...args }) => {
       <Button type="button" onClick={handleOpenDialog}>
         Toggle open
       </Button>
-      <Dialog onClose={handleCloseEvent} open={open} {...args}>
+      <Dialog onRequestClose={handleCloseEvent} open={open} {...args}>
         <p>
           Elit hic at labore culpa itaque fugiat. Consequuntur iure autem autem
           officiis dolores facilis nulla earum! Neque quia nemo sequi assumenda
           ratione officia Voluptate beatae eligendi placeat nemo laborum,
           ratione.
         </p>
+        <br></br>
+        <p>
+          Elit hic at labore culpa itaque fugiat. Consequuntur iure autem autem
+          officiis dolores facilis nulla earum! Neque quia nemo sequi assumenda
+          ratione officia Voluptate beatae eligendi placeat nemo laborum,
+          ratione.
+        </p>
+        <br></br>
+        <p>
+          Elit hic at labore culpa itaque fugiat. Consequuntur iure autem autem
+          officiis dolores facilis nulla earum! Neque quia nemo sequi assumenda
+          ratione officia Voluptate beatae eligendi placeat nemo laborum,
+          ratione.
+        </p>
+        <br></br>
         <Button
           type="button"
           kind="secondary"
