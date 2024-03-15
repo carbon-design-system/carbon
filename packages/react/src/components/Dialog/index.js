@@ -13,11 +13,12 @@ import cx from 'classnames';
 import { useMatchMedia } from '../../internal/useMatchMedia';
 import { Close } from '@carbon/icons-react';
 import { IconButton } from '../IconButton';
+import mergeRefs from '../../tools/mergeRefs';
 
 const Dialog = React.forwardRef(
   ({ children, kind, modal, onClose, open = false, width, ...rest }, ref) => {
-    const backupRef = useRef(null);
-    const localRef = ref || backupRef;
+    const localRef = useRef(null);
+    const mergedRef = mergeRefs(localRef, ref);
     const [localOpen, setLocalOpen] = useState(false);
     /* opening and closing is used in as allow-discrete is not currently supported wide enough
      * https://caniuse.com/mdn-css_properties_display_is_transitionable
@@ -86,17 +87,17 @@ const Dialog = React.forwardRef(
     };
 
     const handleBackdropClick = (ev) => {
-      if (ev.target === localRef?.current) {
+      if (ev.target === mergedRef?.current) {
         setLocalOpen(false);
       }
     };
 
     const handleTransitionEnd = (ev) => {
-      if (ev.target === localRef?.current) {
+      if (ev.target === mergedRef?.current) {
         if (isClosing) {
           setIsOpen(false);
           setIsClosing(false);
-          localRef?.current?.close();
+          mergedRef?.current?.close();
         }
       }
     };
