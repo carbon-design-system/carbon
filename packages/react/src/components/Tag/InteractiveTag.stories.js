@@ -11,11 +11,9 @@ import { default as SelectableTag } from './SelectableTag';
 import { default as OperationalTag } from './OperationalTag';
 import { default as DismissibleTag } from './DismissibleTag';
 import { Asleep } from '@carbon/icons-react';
-import { Tooltip } from '../Tooltip';
 import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import { Popover, PopoverContent } from '../Popover';
 import mdx from './InteractiveTag.mdx';
-import { usePrefix } from '../../internal/usePrefix';
 import './storyInteractiveTag.scss';
 
 export default {
@@ -90,7 +88,6 @@ Selectable.argTypes = {
 };
 
 export const Operational = (args) => {
-  const prefix = usePrefix();
   const [open, setOpen] = useState(false);
 
   return (
@@ -176,18 +173,6 @@ export const Operational = (args) => {
           justifyContent: 'flex-start',
           marginTop: '1rem',
         }}>
-        <Tooltip
-          label="View more"
-          align="bottom"
-          className={`${prefix}--icon-tooltip`}>
-          <OperationalTag
-            className="some-class"
-            renderIcon={Asleep}
-            text="Tag content"
-            {...args}
-          />
-        </Tooltip>
-
         <Toggletip>
           <ToggletipButton label="Tag content" tabIndex={-1} as="div">
             <OperationalTag
