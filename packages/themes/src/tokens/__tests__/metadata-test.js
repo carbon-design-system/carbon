@@ -942,11 +942,11 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
-          "name": "ai-aura-start",
+          "name": "ai-aura-start-sm",
           "type": "color",
         },
         Object {
-          "name": "ai-aura-start-table",
+          "name": "ai-aura-start",
           "type": "color",
         },
         Object {
