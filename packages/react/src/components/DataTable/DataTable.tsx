@@ -695,7 +695,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
       isSortable,
       useStaticWidth,
       stickyHeader,
-      overflowMenuOnHover = true,
+      overflowMenuOnHover = false,
       experimentalAutoAlign,
     } = this.props;
     return {
