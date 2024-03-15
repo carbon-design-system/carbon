@@ -245,7 +245,7 @@ For more details, visit: https://www.ibm.com/standards/carbon/developing/buildin
 
 ## Carbon grid
 
-The following includes Carbon grid and all corresponding grid classes.
+The following includes Carbon grid (using flex grid) and all corresponding grid classes.
 
 ```html
 // SPECIFIC VERSION
@@ -256,6 +256,19 @@ The following includes Carbon grid and all corresponding grid classes.
 
 // NEXT tag
 <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/next/grid.css" />
+```
+
+The following includes Carbon grid (using CSS grid) and all corresponding grid classes.
+
+```html
+// SPECIFIC VERSION
+<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/version/[v2.x.y]/cssgrid.css" />
+
+// LATEST tag
+<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/latest/cssgrid.css" />
+
+// NEXT tag
+<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/next/cssgrid.css" />
 ```
 
 [Learn more about the Carbon 2x Grid](https://carbondesignsystem.com/guidelines/2x-grid/overview)
