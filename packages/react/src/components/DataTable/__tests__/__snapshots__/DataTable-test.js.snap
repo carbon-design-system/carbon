@@ -1064,7 +1064,7 @@ exports[`DataTable renders as expected - Component API should render and match s
     >
       <table
         aria-labelledby="tc-:rb:-title"
-        class="cds--data-table cds--data-table--lg"
+        class="cds--data-table cds--data-table--lg cds--data-table--visible-overflow-menu"
       >
         <thead>
           <tr>
