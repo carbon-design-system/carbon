@@ -539,7 +539,13 @@ const MultiSelect = React.forwardRef(
           break;
         case ToggleButtonClick:
           setIsOpenWrapper(changes.isOpen || false);
-          break;
+          if (highlightedIndex === -1) {
+            return {
+              ...changes,
+              highlightedIndex: 0,
+            };
+          }
+          return changes;
         case ToggleButtonKeyDownArrowDown:
         case ToggleButtonKeyDownArrowUp:
         case ToggleButtonKeyDownHome:

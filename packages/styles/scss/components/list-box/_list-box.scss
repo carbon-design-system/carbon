@@ -519,7 +519,7 @@ $list-box-menu-width: convert.to-rem(300px);
     inset-inline-end: 0;
     inset-inline-start: 0;
     overflow-y: auto;
-    transition: max-height $duration-fast-02 motion(standard, productive);
+    transition: max-height $duration-fast-01 motion(standard, productive);
 
     &:focus {
       // remove default browser focus in firefox

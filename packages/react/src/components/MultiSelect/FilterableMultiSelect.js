@@ -173,6 +173,15 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
         break;
       case stateChangeTypes.keyDownEscape:
         handleOnMenuChange(false);
+        setHighlightedIndex(0);
+        break;
+      case stateChangeTypes.changeInput:
+        setHighlightedIndex(0);
+        break;
+      case stateChangeTypes.keyDownEnter:
+        if (!isOpen) {
+          setHighlightedIndex(0);
+        }
         break;
     }
   }
