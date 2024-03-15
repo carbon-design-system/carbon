@@ -225,7 +225,7 @@ export const SmallPersistentToolbar = () => (
 );
 
 export const WithOverflowMenu = () => (
-  <DataTable rows={rows} headers={headers} overflowMenuOnHover={false}>
+  <DataTable rows={rows} headers={headers}>
     {({
       rows,
       headers,
@@ -287,11 +287,7 @@ export const WithOverflowMenu = () => (
 );
 
 export const Playground = (args) => (
-  <DataTable
-    rows={rows}
-    headers={headers}
-    overflowMenuOnHover={false}
-    {...args}>
+  <DataTable rows={rows} headers={headers} {...args}>
     {({
       rows,
       headers,
