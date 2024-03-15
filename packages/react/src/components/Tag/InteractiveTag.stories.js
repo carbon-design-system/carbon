@@ -177,7 +177,7 @@ export const Operational = (args) => {
           <ToggletipButton label="Tag content" tabIndex={-1} as="div">
             <OperationalTag
               renderIcon={Asleep}
-              text="Tag content content content content"
+              text="Tag content with a long text description"
               className="some-class"
               {...args}
             />
@@ -199,7 +199,7 @@ export const Operational = (args) => {
               setOpen(!open);
             }}
             renderIcon={Asleep}
-            text="Tag content content content content"
+            text="Tag content with a long text description"
             className="some-class"
             {...args}
           />
