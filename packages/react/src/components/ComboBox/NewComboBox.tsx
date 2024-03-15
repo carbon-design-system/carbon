@@ -42,7 +42,7 @@ import ListBox, {
   ListBoxSize,
 } from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
-// import { match, keys } from '../../internal/keyboard';
+import { match, keys } from '../../internal/keyboard';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 // import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
@@ -321,7 +321,7 @@ const ComboBox = forwardRef(
       itemToElement = null,
       itemToString = defaultItemToString,
       // light,
-      // onChange,
+      onChange,
       // onInputChange,
       onToggleClick,
       placeholder,
@@ -333,7 +333,7 @@ const ComboBox = forwardRef(
       translateWithId,
       warn,
       warnText,
-      // allowCustomValue = false,
+      allowCustomValue,
       //test
       slug,
       ...rest
@@ -415,7 +415,7 @@ const ComboBox = forwardRef(
       selectItem,
       // selectedItem,
       // clearSelection,
-      // toggleMenu,
+      toggleMenu,
       // setHighlightedIndex,
     } = useCombobox({
       // onInputValueChange: ({ inputValue }) => {
@@ -510,9 +510,69 @@ const ComboBox = forwardRef(
               tabIndex={0}
               aria-haspopup="listbox"
               {...getInputProps({
-                disabled: disabled,
+                // disabled: disabled,
                 placeholder,
                 ref: ref,
+                onKeyDown: (
+                  event: KeyboardEvent<HTMLInputElement> & {
+                    preventDownshiftDefault: boolean;
+                    target: {
+                      value: string;
+                      setSelectionRange: (start: number, end: number) => void;
+                    };
+                  }
+                ): void => {
+                  if (match(event, keys.Space)) {
+                    event.stopPropagation();
+                  }
+                  console.log({ allowCustomValue });
+                  console.log({ selectedItem });
+                  if (
+                    match(event, keys.Enter) &&
+                    (!inputValue || allowCustomValue)
+                  ) {
+                    toggleMenu();
+
+                    // Since `onChange` does not normally fire when the menu is closed, we should
+                    // manually fire it when `allowCustomValue` is provided, the menu is closing,
+                    // and there is a value.
+                    if (allowCustomValue && isOpen && inputValue) {
+                      onChange({ selectedItem, inputValue });
+                    }
+                  }
+
+                  if (match(event, keys.Escape) && inputValue) {
+                    if (event.target === textInput.current && isOpen) {
+                      toggleMenu();
+                      event.preventDownshiftDefault = true;
+                      event?.persist?.();
+                    }
+                  }
+
+                  if (match(event, keys.Home) && event.code !== 'Numpad7') {
+                    event.target.setSelectionRange(0, 0);
+                  }
+
+                  if (match(event, keys.End) && event.code !== 'Numpad1') {
+                    event.target.setSelectionRange(
+                      event.target.value.length,
+                      event.target.value.length
+                    );
+                  }
+
+                  if (event.altKey && event.key == 'ArrowDown') {
+                    event.preventDownshiftDefault = true;
+                    if (!isOpen) {
+                      toggleMenu();
+                    }
+                  }
+                  if (event.altKey && event.key == 'ArrowUp') {
+                    event.preventDownshiftDefault = true;
+                    if (isOpen) {
+                      toggleMenu();
+                    }
+                  }
+                },
               })}
               // {...inputProps}
               {...rest}
