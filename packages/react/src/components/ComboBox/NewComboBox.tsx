@@ -403,6 +403,41 @@ const ComboBox = forwardRef(
       });
     }
 
+    const findHighlightedIndex = <ItemType,>(
+      {
+        items,
+        itemToString = defaultItemToString,
+      }: { items: ItemType[]; itemToString?: ItemToStringHandler<ItemType> },
+      inputValue?: string | null
+    ) => {
+      if (!inputValue) {
+        return -1;
+      }
+
+      const searchValue = inputValue.toLowerCase();
+
+      for (let i = 0; i < items.length; i++) {
+        const item = itemToString(items[i]).toLowerCase();
+        if (item.indexOf(searchValue) !== -1) {
+          return i;
+        }
+      }
+
+      return -1;
+    };
+
+    const filteredItems = (inputValue) =>
+      filterItems(items, itemToString, inputValue || null);
+
+    const indexToHighlight = (inputValue) =>
+      findHighlightedIndex(
+        {
+          ...props,
+          items: filteredItems(inputValue),
+        },
+        inputValue
+      );
+
     const {
       getInputProps,
       getItemProps,
@@ -416,7 +451,7 @@ const ComboBox = forwardRef(
       // selectedItem,
       // clearSelection,
       toggleMenu,
-      // setHighlightedIndex,
+      setHighlightedIndex,
     } = useCombobox({
       // onInputValueChange: ({ inputValue }) => {
       //   handleOnInputValueChange(inputValue);
@@ -425,6 +460,10 @@ const ComboBox = forwardRef(
       itemToString: (item) => {
         return itemToString(item);
       },
+      onInputValueChange({ inputValue }) {
+        setHighlightedIndex(indexToHighlight(inputValue));
+      },
+
       // onStateChange: (...args) => {
       //   handleOnStateChange(...args);
       //   downshiftProps?.onStateChange?.(...args); // TODO this is kind of a breaking change, we previously passed both the `changes` and the `stateAndHelpers`. We might be able to provide both if we refactor to use `stateReducer` instead of `onStateChange`
@@ -525,8 +564,6 @@ const ComboBox = forwardRef(
                   if (match(event, keys.Space)) {
                     event.stopPropagation();
                   }
-                  console.log({ allowCustomValue });
-                  console.log({ selectedItem });
                   if (
                     match(event, keys.Enter) &&
                     (!inputValue || allowCustomValue)
