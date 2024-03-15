@@ -126,7 +126,7 @@ $motion-duration: $duration-moderate-02;
     }
 
     .#{$block-class}__content {
-      @include utilities.callout-gradient('default', 0);
+      @include utilities.ai-popover-gradient('default', 0);
 
       box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
     }

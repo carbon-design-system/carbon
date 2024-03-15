@@ -170,7 +170,7 @@ $css--plex: true !default;
 :host(#{$prefix}-expandable-tile[slug]),
 :host(#{$prefix}-clickable-tile[slug]) .#{$prefix}--tile,
 :host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile {
-  @include callout-gradient('default', 0, 'layer');
+  @include ai-popover-gradient('default', 0, 'layer');
 
   border: 1px solid transparent;
   box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
@@ -193,7 +193,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-expandable-tile[slug]):hover {
-  @include callout-gradient('default', 0, 'layer');
+  @include ai-popover-gradient('default', 0, 'layer');
 }
 
 :host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile::before,
@@ -212,7 +212,7 @@ $css--plex: true !default;
 
 :host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile::before,
 :host(#{$prefix}-clickable-tile[slug]) .#{$prefix}--tile::before {
-  @include callout-gradient('hover', 0, 'layer');
+  @include ai-popover-gradient('hover', 0, 'layer');
 
   box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
 }
@@ -230,7 +230,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-selectable-tile[slug]) .#{$prefix}--tile--is-selected::after {
-  @include callout-gradient('selected', 0, 'layer');
+  @include ai-popover-gradient('selected', 0, 'layer');
 
   box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
 }

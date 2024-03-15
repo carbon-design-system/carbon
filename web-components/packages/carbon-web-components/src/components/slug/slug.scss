@@ -46,13 +46,13 @@ $colorMap: (
 
 :host(#{$prefix}-slug[enabled]) {
   .#{$prefix}--popover-content {
-    @include callout-gradient();
+    @include ai-popover-gradient();
 
     border: 1px solid transparent;
     border-radius: $spacing-03;
     box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
-      -40px 30px 100px -25px $slug-callout-shadow-outer-01,
-      -60px 80px 60px -45px $slug-callout-shadow-outer-02;
+      -40px 30px 100px -25px $ai-popover-shadow-outer-01,
+      -60px 80px 60px -45px $ai-popover-shadow-outer-02;
     color: $text-primary;
     min-inline-size: to-rem(280px);
   }
@@ -189,7 +189,7 @@ $colorMap: (
     }
 
     &::after {
-      background: $slug-callout-caret-bottom-background;
+      background: $ai-popover-caret-bottom-background;
       block-size: $spacing-01;
       border-end-end-radius: 50%;
       border-end-start-radius: 50%;
@@ -327,8 +327,8 @@ $colorMap: (
       )[alignment^='top']
   ) {
   .#{$prefix}--popover-caret::before {
-    border-color: $slug-callout-caret-bottom;
-    background: $slug-callout-caret-bottom-background;
+    border-color: $ai-popover-caret-bottom;
+    background: $ai-popover-caret-bottom-background;
   }
 }
 
@@ -358,7 +358,7 @@ $colorMap: (
       )[alignment^='top'][has-actions]
   ) {
   .#{$prefix}--popover-caret::before {
-    background: $slug-callout-caret-bottom-background-actions;
+    background: $ai-popover-caret-bottom-background-actions;
   }
 }
 
@@ -375,7 +375,7 @@ $colorMap: (
       )[alignment='right']
   ) {
   .#{$prefix}--popover-caret::before {
-    border-color: $slug-callout-caret-center;
+    border-color: $ai-popover-caret-center;
   }
 }
 
