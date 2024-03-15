@@ -36,11 +36,12 @@ import {
   useNoInteractiveChildren,
   useInteractiveChildrenNeedDescription,
 } from '../../internal/useNoInteractiveChildren';
-import { keys, matches } from '../../internal/keyboard';
+import { keys, matches, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
-import wrapFocus from '../../internal/wrapFocus';
+import wrapFocus, { wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
+import { useFeatureFlag } from '../FeatureFlags';
 
 /**
  * Conditionally call a callback when the escape key is pressed
@@ -952,6 +953,9 @@ export function ActionableNotification({
   const startTrap = useRef<HTMLElement>(null);
   const endTrap = useRef<HTMLElement>(null);
   const ref = useRef<HTMLDivElement>(null);
+  const focusTrapWithoutSentinels = useFeatureFlag(
+    'enable-experimental-focus-wrap-without-sentinels'
+  );
 
   useIsomorphicEffect(() => {
     if (hasFocus) {
@@ -980,6 +984,16 @@ export function ActionableNotification({
     }
   }
 
+  function handleKeyDown(event) {
+    if (isOpen && match(event, keys.Tab) && ref.current) {
+      wrapFocusWithoutSentinels({
+        containerNode: ref.current,
+        currentActiveNode: event.target,
+        event,
+      });
+    }
+  }
+
   const handleClose = (evt: MouseEvent) => {
     if (!onClose || onClose(evt) !== false) {
       setIsOpen(false);
@@ -1003,14 +1017,17 @@ export function ActionableNotification({
       role={role}
       className={containerClassName}
       aria-labelledby={title ? id : subtitleId}
-      onBlur={handleBlur}>
-      <span
-        ref={startTrap}
-        tabIndex={0}
-        role="link"
-        className={`${prefix}--visually-hidden`}>
-        Focus sentinel
-      </span>
+      onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
+      onKeyDown={focusTrapWithoutSentinels ? handleKeyDown : () => {}}>
+      {!focusTrapWithoutSentinels && (
+        <span
+          ref={startTrap}
+          tabIndex={0}
+          role="link"
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </span>
+      )}
 
       <div className={`${prefix}--actionable-notification__details`}>
         <NotificationIcon
@@ -1059,13 +1076,15 @@ export function ActionableNotification({
           />
         )}
       </div>
-      <span
-        ref={endTrap}
-        tabIndex={0}
-        role="link"
-        className={`${prefix}--visually-hidden`}>
-        Focus sentinel
-      </span>
+      {!focusTrapWithoutSentinels && (
+        <span
+          ref={endTrap}
+          tabIndex={0}
+          role="link"
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </span>
+      )}
     </div>
   );
 }
