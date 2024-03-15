@@ -137,7 +137,6 @@ const Tag = <T extends React.ElementType>({
     const newElement = elementTagId?.getElementsByClassName(
       `${prefix}--tag__label`
     )[0];
-    console.log('newElement', newElement);
     isEllipsisActive(newElement);
   }, [prefix, children, tagId]);
 
@@ -228,7 +227,8 @@ const Tag = <T extends React.ElementType>({
       <Tooltip
         label={tagText}
         align="bottom"
-        className={`${prefix}--tag-label-tooltip`}>
+        className={`${prefix}--tag-label-tooltip`}
+        closeOnActivation>
         <ComponentTag
           disabled={disabled}
           className={tagClasses}

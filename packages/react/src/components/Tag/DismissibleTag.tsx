@@ -124,6 +124,9 @@ const DismissibleTag = <T extends React.ElementType>({
       <div className={`${prefix}--interactive--tag-children`}>
         {normalizedSlug}
         <button
+          onFocus={(event) => {
+            event.stopPropagation();
+          }}
           type="button"
           className={`${prefix}--tag__close-icon`}
           onClick={handleClose}
