@@ -351,8 +351,8 @@ export const ai = TokenGroup.create({
     'ai-popover-shadow-outer-02',
     // Linear gradient refactor
     'ai-inner-shadow',
+    'ai-aura-start-sm',
     'ai-aura-start',
-    'ai-aura-start-table',
     'ai-aura-end',
     'ai-aura-hover-background',
     'ai-aura-hover-start',

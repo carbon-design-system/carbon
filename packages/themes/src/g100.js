@@ -211,7 +211,7 @@ export const shadow = rgba(black, 0.8);
 //// Phase 2 - new \\\\
 // Shared
 export const aiInnerShadow = rgba(blue50, 0.16);
-export const aiAuraStartTable = rgba(blue50, 0.15);
+export const aiAuraStartSm = rgba(blue50, 0.16);
 export const aiAuraStart = rgba(blue50, 0.1);
 export const aiAuraEnd = rgba(black, 0);
 export const aiBorderStrong = blue40;
