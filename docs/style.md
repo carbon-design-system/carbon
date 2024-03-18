@@ -863,6 +863,32 @@ this project:
 - [Motion](../packages/motion/docs/sass.md)
 - [Type](../packages/type/docs/sass.md)
 
+##### Avoid magic numbers
+
+In addition to using design tokens where appropriate, when authoring values for
+margin, padding, size, or similar, avoid using
+[magic numbers](https://csswizardry.com/2012/11/code-smells-in-css/#magic-numbers).
+
+> "A magic number is a value that is used ‘because it just works’."
+
+Magic numbers should be replaced with a value derived from its discrete parts
+that have been added together or combined.
+
+<img width="415" alt="text-input-style-structure-fluid" src="https://github.com/carbon-design-system/carbon/assets/3360588/9321e87d-d017-4e8a-8d54-9e3ea7e947c1">
+
+In example above, if we were trying to apply a `padding-inline-end` to the input
+to ensure the input text does not flow behind the icon, we could add up the
+individual parts of this that use spacing tokens or contextual layout tokens,
+and potentially local tokens(variables) that will inherently explain what the
+number is composed of.
+
+```diff
+- padding-right: to-rem(32px);
+
++ $icon-width: 16px;
++ padding-inline-end: calc(layout.density('padding-inline') + $icon-width)
+```
+
 #### Avoid nesting selectors
 
 Nesting selectors is often a convenient and fast way to author styles in Sass.
