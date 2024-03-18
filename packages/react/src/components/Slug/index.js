@@ -93,7 +93,6 @@ export const Slug = React.forwardRef(function Slug(
     autoAlign = true,
     children,
     className,
-    dotType,
     kind = 'default',
     onRevertClick,
     revertActive,
@@ -110,11 +109,6 @@ export const Slug = React.forwardRef(function Slug(
 
   const slugClasses = cx(className, {
     [`${prefix}--slug`]: true,
-    [`${prefix}--slug--hollow`]: kind === 'hollow' || dotType === 'hollow',
-    // Need to come up with a better name; explainable?
-    // Need to be able to target the non-hollow variant another way
-    // other than using `:not` all over the styles
-    [`${prefix}--slug--enabled`]: kind !== 'hollow' && dotType !== 'hollow',
     [`${prefix}--slug--revert`]: revertActive,
   });
 
@@ -213,14 +207,9 @@ Slug.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify the type of dot that should be rendered in front of the inline variant
-   */
-  dotType: PropTypes.oneOf(['default', 'hollow']),
-
-  /**
    * Specify the type of Slug, from the following list of types:
    */
-  kind: PropTypes.oneOf(['default', 'hollow', 'inline']),
+  kind: PropTypes.oneOf(['default', 'inline']),
 
   /**
    * Callback function that fires when the revert button is clicked
