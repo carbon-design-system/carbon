@@ -398,7 +398,7 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
     border: 1px solid transparent;
     box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
-      0 4px 10px 2px $ai-drop-shadow;
+      0 24px 40px -24px $ai-drop-shadow;
   }
 
   .#{$prefix}--tile--slug.#{$prefix}--tile--expandable:hover {
