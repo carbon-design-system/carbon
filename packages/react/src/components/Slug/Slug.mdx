@@ -17,7 +17,6 @@ import * as SlugStories from './Slug.stories';
 - [Component API](#component-api)
   - [Slug `aiText`](#slug-aitext)
   - [Slug `aiTextLabel`](#slug-aitextlabel)
-  - [Slug `dotType`](#slug-dottype)
   - [Slug `kind`](#slug-kind)
   - [Slug `revertActive` and `onRevertClick`](#slug-revertactive-and-onrevertclick)
 - [Feedback](#feedback)
@@ -114,57 +113,16 @@ the `aiTextLabel` prop.
 </Slug>
 ```
 
-### Slug `dotType`
-
-When using the `inline` variant, you can switch between the `hollow` slug for
-content that does not need additional explainability or the `default` variant
-that will render the AI callout.
-
-<Slug
-  kind="inline"
-  dotType="default"
-  aiTextLabel="Text goes here"
-  className="sbdocs-slug">
-  <SlugContent>Explanation of AI generated content</SlugContent>
-</Slug>
-<br />
-<Slug
-  kind="inline"
-  dotType="hollow"
-  aiTextLabel="Text goes here"
-  className="sbdocs-slug">
-  <SlugContent>Explanation of AI generated content</SlugContent>
-</Slug>
-
-```jsx
-<Slug
-  kind="inline"
-  dotType="default"
-  aiTextLabel="Text goes here">
-  <SlugContent>Explanation of AI generated content</SlugContent>
-</Slug>
-
-<Slug
-  kind="inline"
-  dotType="hollow"
-  aiTextLabel="Text goes here">
-  <SlugContent>Explanation of AI generated content</SlugContent>
-</Slug>
-```
-
 ### Slug `kind`
 
-The `Slug` component has three variants, `default`, `hollow`, and `inline`. The
-`hollow` slugs represent items that don’t have any additional explainability.
-Therefore they don’t use the AI callout and instead use the standard Carbon
-tooltip, with a simple message.
+The `Slug` component has two variants, `default` and `inline`.
 
-<Slug kind="hollow" size="xs" className="sbdocs-slug">
+<Slug size="xs" className="sbdocs-slug">
   <SlugContent>AI was used to generate this content</SlugContent>
 </Slug>
 
 ```jsx
-<Slug kind="hollow" size="xs">
+<Slug size="xs">
   <SlugContent>AI was used to generate this content</SlugContent>
 </Slug>
 ```

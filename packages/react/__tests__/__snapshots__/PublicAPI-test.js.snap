@@ -10462,20 +10462,10 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "dotType": Object {
-        "args": Array [
-          Array [
-            "default",
-            "hollow",
-          ],
-        ],
-        "type": "oneOf",
-      },
       "kind": Object {
         "args": Array [
           Array [
             "default",
-            "hollow",
             "inline",
           ],
         ],

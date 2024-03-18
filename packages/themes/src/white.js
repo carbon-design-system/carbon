@@ -205,30 +205,24 @@ export const toggleOff = gray50;
 export const shadow = 'rgba(0, 0, 0, 0.3)';
 
 //// AI - Experimental (Use at your own risk)
-// Slug tokens
-export const slugBackground = gray70;
-export const slugGradient = `${gray100} linear-gradient(135deg, ${gray40} 0%, rgba(${white}, 0) 100%)`;
-export const slugBackgroundHover = gray60;
-export const slugGradientHover = `${gray100} linear-gradient(135deg, ${gray20Hover} 0%, rgba(${white}, 0) 100%)`;
-export const slugHollowHover = gray80Hover;
-
 //// Phase 2 - new \\\\
 // Shared
-export const aiInnerShadow = rgba(blue50, 0.2);
-export const aiAuraStartTable = rgba(blue50, 0.15);
+export const aiInnerShadow = rgba(blue50, 0.1);
+export const aiAuraStartSm = rgba(blue50, 0.16);
 export const aiAuraStart = rgba(blue50, 0.1);
 export const aiAuraEnd = rgba(white, 0);
 export const aiBorderStrong = blue50;
-export const aiBorderStart = blue40;
-export const aiBorderEnd = blue20;
-export const aiDropShadow = rgba(blue60, 0.32);
+export const aiBorderStart = rgba(blue30, 0.64);
+export const aiBorderEnd = blue40;
+export const aiDropShadow = rgba(blue60, 0.1);
 export const aiAuraHoverBackground = blue10;
-export const aiAuraHoverStart = rgba(blue50, 0.4);
+export const aiAuraHoverStart = rgba(blue50, 0.32);
 export const aiAuraHoverEnd = rgba(white, 0);
 
 // AI Popover
-export const aiPopoverShadowOuter01 = rgba(blue70, 0.25);
-export const aiPopoverShadowOuter02 = rgba(black, 0.1);
+export const aiPopoverBackground = white;
+export const aiPopoverShadowOuter01 = rgba(blue70, 0.06);
+export const aiPopoverShadowOuter02 = rgba(black, 0.04);
 
 // AI skeleton
 export const aiSkeletonBackground = blue20;
@@ -238,10 +232,10 @@ export const aiSkeletonElementBackground = blue50;
 export const aiOverlay = rgba(blue100, 0.5);
 
 // One off tokens for caret
-export const aiPopoverCaretCenter = '#A7C7FF';
-export const aiPopoverCaretBottom = blue20;
-export const aiPopoverCaretBottomBackgroundActions = '#DAE5F8';
-export const aiPopoverCaretBottomBackground = '#D5E5FF';
+export const aiPopoverCaretCenter = '#A0C3FF';
+export const aiPopoverCaretBottom = blue40;
+export const aiPopoverCaretBottomBackgroundActions = '#E9EFFA';
+export const aiPopoverCaretBottomBackground = '#EAF1FF';
 
 // Chat tokens
 export const chatPromptBackground = white;
