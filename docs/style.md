@@ -882,7 +882,7 @@ of this that use spacing tokens, contextual layout tokens, and potentially local
 tokens(variables) that will inherently explain what the number is composed of.
 
 ```diff
-- padding-right: to-rem(32px);
+- padding-inline-end: to-rem(32px);
 
 + $icon-width: 16px;
 + padding-inline-end: calc(layout.density('padding-inline') + $icon-width)
