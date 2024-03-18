@@ -231,7 +231,7 @@ export const Popover: PopoverComponent = React.forwardRef(
 
             // Middleware order matters, arrow should be last
             middleware: [
-              offset(popoverDimensions?.current?.offset),
+              offset(!isTabTip ? popoverDimensions?.current?.offset : 0),
               flip({ fallbackAxisSideDirection: 'start' }),
               arrow({
                 element: caretRef,
