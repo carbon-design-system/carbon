@@ -287,7 +287,11 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
 // flush
 .#{$prefix}--accordion--flush .#{$prefix}--accordion__title {
-  margin-inline-start: 0;
+  padding-inline-start: 0;
+}
+
+.#{$prefix}--accordion--flush .#{$prefix}--accordion__heading {
+  padding-inline-end: 0;
 }
 
 .#{$prefix}--accordion--flush .#{$prefix}--accordion__arrow {
