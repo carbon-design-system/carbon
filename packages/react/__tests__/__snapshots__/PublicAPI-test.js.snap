@@ -2655,6 +2655,9 @@ Map {
       "onOpen": Object {
         "type": "func",
       },
+      "parseDate": Object {
+        "type": "func",
+      },
       "readOnly": Object {
         "args": Array [
           Array [
@@ -5836,6 +5839,7 @@ Map {
             Object {
               "args": Array [
                 Object {
+                  "isRequired": true,
                   "type": "number",
                 },
               ],
@@ -5846,12 +5850,17 @@ Map {
                 Object {
                   "args": Array [
                     Object {
-                      "text": undefined,
+                      "text": Object {
+                        "isRequired": true,
+                        "type": "string",
+                      },
                       "value": Object {
+                        "isRequired": true,
                         "type": "number",
                       },
                     },
                   ],
+                  "isRequired": true,
                   "type": "shape",
                 },
               ],
@@ -10495,20 +10504,10 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "dotType": Object {
-        "args": Array [
-          Array [
-            "default",
-            "hollow",
-          ],
-        ],
-        "type": "oneOf",
-      },
       "kind": Object {
         "args": Array [
           Array [
             "default",
-            "hollow",
             "inline",
           ],
         ],

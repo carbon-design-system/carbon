@@ -926,23 +926,7 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
-          "name": "slug-background",
-          "type": "color",
-        },
-        Object {
-          "name": "slug-gradient",
-          "type": "color",
-        },
-        Object {
-          "name": "slug-background-hover",
-          "type": "color",
-        },
-        Object {
-          "name": "slug-gradient-hover",
-          "type": "color",
-        },
-        Object {
-          "name": "slug-hollow-hover",
+          "name": "ai-popover-background",
           "type": "color",
         },
         Object {
@@ -958,11 +942,11 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
-          "name": "ai-aura-start",
+          "name": "ai-aura-start-sm",
           "type": "color",
         },
         Object {
-          "name": "ai-aura-start-table",
+          "name": "ai-aura-start",
           "type": "color",
         },
         Object {
@@ -1067,6 +1051,30 @@ test('metadata', () => {
         },
         Object {
           "name": "chat-header-background",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-button",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-button-hover",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-button-text-hover",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-button-active",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-button-selected",
+          "type": "color",
+        },
+        Object {
+          "name": "chat-button-text-selected",
           "type": "color",
         },
         Object {

@@ -15,6 +15,7 @@ import ButtonSet from '../ButtonSet';
 import InlineLoading from '../InlineLoading';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import wrapFocus, {
+  wrapFocusWithoutSentinels,
   elementOrParentIsFloatingMenu,
 } from '../../internal/wrapFocus';
 import debounce from 'lodash.debounce';
@@ -27,6 +28,7 @@ import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
 import { ReactAttr } from '../../types/common';
 import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -268,8 +270,10 @@ const Modal = React.forwardRef(function Modal(
   const primaryButtonClass = classNames({
     [`${prefix}--btn--loading`]: loadingStatus !== 'inactive',
   });
-
   const loadingActive = loadingStatus !== 'inactive';
+  const focusTrapWithoutSentinels = useFeatureFlag(
+    'enable-experimental-focus-wrap-without-sentinels'
+  );
 
   function isCloseButton(element: Element) {
     return (
@@ -284,12 +288,25 @@ const Modal = React.forwardRef(function Modal(
       if (match(evt, keys.Escape)) {
         onRequestClose(evt);
       }
+
       if (
         match(evt, keys.Enter) &&
         shouldSubmitOnEnter &&
         !isCloseButton(evt.target as Element)
       ) {
         onRequestSubmit(evt);
+      }
+
+      if (
+        focusTrapWithoutSentinels &&
+        match(evt, keys.Tab) &&
+        innerModal.current
+      ) {
+        wrapFocusWithoutSentinels({
+          containerNode: innerModal.current,
+          currentActiveNode: evt.target,
+          event: evt as any,
+        });
       }
     }
   }
@@ -568,27 +585,31 @@ const Modal = React.forwardRef(function Modal(
       {...rest}
       onKeyDown={handleKeyDown}
       onMouseDown={handleMousedown}
-      onBlur={handleBlur}
+      onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
       className={modalClasses}
       role="presentation"
       ref={ref}>
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-      <span
-        ref={startTrap}
-        tabIndex={0}
-        role="link"
-        className={`${prefix}--visually-hidden`}>
-        Focus sentinel
-      </span>
+      {!focusTrapWithoutSentinels && (
+        <span
+          ref={startTrap}
+          tabIndex={0}
+          role="link"
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </span>
+      )}
       {modalBody}
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-      <span
-        ref={endTrap}
-        tabIndex={0}
-        role="link"
-        className={`${prefix}--visually-hidden`}>
-        Focus sentinel
-      </span>
+      {!focusTrapWithoutSentinels && (
+        <span
+          ref={endTrap}
+          tabIndex={0}
+          role="link"
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </span>
+      )}
     </div>
   );
 });
