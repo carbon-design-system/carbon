@@ -46,3 +46,7 @@ feature-flags:
     description: >
       Enable rendering of radio icons in the StructuredList component
     enabled: false
+  - name: enable-experimental-focus-wrap-without-sentinels
+    description: >
+      Enable the new focus wrap behavior that doesn't use sentinel nodes
+    enabled: false
