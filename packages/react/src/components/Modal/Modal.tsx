@@ -592,6 +592,7 @@ const Modal = React.forwardRef(function Modal(
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
       {!focusTrapWithoutSentinels && (
         <span
+          aria-hidden="true"
           ref={startTrap}
           tabIndex={0}
           role="link"
@@ -603,6 +604,7 @@ const Modal = React.forwardRef(function Modal(
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
       {!focusTrapWithoutSentinels && (
         <span
+          aria-hidden="true"
           ref={endTrap}
           tabIndex={0}
           role="link"
