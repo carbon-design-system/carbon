@@ -2116,6 +2116,7 @@ __metadata:
     storybook-addon-accessibility-checker: "npm:^3.1.61-rc.2"
     stream-browserify: "npm:^3.0.0"
     style-loader: "npm:^3.3.1"
+    tabbable: "npm:^6.2.0"
     typescript-config-carbon: "npm:^0.2.0"
     use-resize-observer: "npm:^6.0.0"
     webpack: "npm:^5.65.0"
@@ -26195,6 +26196,13 @@ __metadata:
     "@pkgr/utils": "npm:^2.3.1"
     tslib: "npm:^2.5.0"
   checksum: 10/fb6798a2db2650ca3a2435ad32d4fc14842da807993a1a350b64d267e0e770aa7f26492b119aa7500892d3d07a5af1eec7bfbd6e23a619451558be0f226a6094
+  languageName: node
+  linkType: hard
+
+"tabbable@npm:^6.2.0":
+  version: 6.2.0
+  resolution: "tabbable@npm:6.2.0"
+  checksum: 10/980fa73476026e99dcacfc0d6e000d41d42c8e670faf4682496d30c625495e412c4369694f2a15cf1e5252d22de3c396f2b62edbe8d60b5dadc40d09e3f2dde3
   languageName: node
   linkType: hard
 

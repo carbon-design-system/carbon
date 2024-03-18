@@ -30,15 +30,15 @@ components with all feature flags turned on.
 
 ## Current feature flags
 
-| Flag                                | Description                                                              | Default | Javascript flag | Sass flag |
-| ----------------------------------- | ------------------------------------------------------------------------ | ------- | --------------- | --------- |
-| `enable-v11-release`                | Flag enabling the v11 features                                           | `true`  | ✅              | ✅        |
-| `enable-experimental-tile-contrast` | Enable the improved styling for tiles that provides better contrast      | `false` |                 | ✅        |
-| `enable-v12-tile-default-icons`     | Enable default icons for Tile components                                 | `false` | ✅              |           |
-| `enable-v12-overflowmenu`           | Enable the use of the v12 OverflowMenu leveraging the Menu subcomponents | `false` | ✅              |           |
-| `enable-v12-tile-radio-icons`       | Enable rendering of default icons in the tile components                 | `false` | ✅              | ✅        |
-| `enable-treeview-controllable`      | Enable the new TreeView controllable API                                 | `false` | ✅              |           |
-
+| Flag                                               | Description                                                              | Default | Javascript flag | Sass flag |
+| -------------------------------------------------- | ------------------------------------------------------------------------ | ------- | --------------- | --------- |
+| `enable-v11-release`                               | Flag enabling the v11 features                                           | `true`  | ✅              | ✅        |
+| `enable-experimental-tile-contrast`                | Enable the improved styling for tiles that provides better contrast      | `false` |                 | ✅        |
+| `enable-v12-tile-default-icons`                    | Enable default icons for Tile components                                 | `false` | ✅              |           |
+| `enable-v12-overflowmenu`                          | Enable the use of the v12 OverflowMenu leveraging the Menu subcomponents | `false` | ✅              |           |
+| `enable-v12-tile-radio-icons`                      | Enable rendering of default icons in the tile components                 | `false` | ✅              | ✅        |
+| `enable-treeview-controllable`                     | Enable the new TreeView controllable API                                 | `false` | ✅              |           |
+| `enable-experimental-focus-wrap-without-sentinels` | Enable the new focus wrap behavior that doesn't use sentinel nodes       | `false` | ✅              |           |
 
 ## Turning on feature flags in Javascript/react
 
@@ -55,7 +55,7 @@ import { unstable_FeatureFlags as FeatureFlags } from '@carbon/react';
     'enable-a-second-feature-flag': true,
   }}>
   <Tile />
-</FeatureFlags>
+</FeatureFlags>;
 ```
 
 The `FeatureFlag` component can be placed at any point in your react tree and
