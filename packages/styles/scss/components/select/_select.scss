@@ -316,6 +316,11 @@
   }
 
   .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
+    .#{$prefix}--select-input:not(:has(~ .#{$prefix}--slug--revert)) {
+    padding-inline-end: $spacing-12;
+  }
+
+  .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
     .#{$prefix}--slug::before {
     display: block;
   }
