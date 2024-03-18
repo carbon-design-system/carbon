@@ -272,8 +272,9 @@
     background-color: $field-hover;
   }
 
+  .#{$prefix}--toolbar-action[aria-expanded='true'],
   .#{$prefix}--toolbar-action:hover[aria-expanded='true'] {
-    background-color: $layer;
+    background-color: $layer-02;
   }
 
   .#{$prefix}--toolbar-action[disabled] {
@@ -313,6 +314,14 @@
     fill: $icon-primary;
     inline-size: auto;
     max-inline-size: $spacing-05;
+  }
+
+  //-------------------------------------------------
+  //TOOLBAR Menu
+  //-------------------------------------------------
+  .#{$prefix}--toolbar-action__menu,
+  .#{$prefix}--toolbar-action__menu.#{$prefix}--overflow-menu-options::after {
+    background-color: $layer-02;
   }
 
   //-------------------------------------------------

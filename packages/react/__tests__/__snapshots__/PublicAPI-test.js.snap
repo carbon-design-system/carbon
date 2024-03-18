@@ -2251,6 +2251,9 @@ Map {
         "iconDescription": Object {
           "type": "string",
         },
+        "menuOptionsClass": Object {
+          "type": "string",
+        },
         "renderIcon": Object {
           "args": Array [
             Array [
@@ -8049,6 +8052,9 @@ Map {
         "type": "string",
       },
       "iconDescription": Object {
+        "type": "string",
+      },
+      "menuOptionsClass": Object {
         "type": "string",
       },
       "renderIcon": Object {
