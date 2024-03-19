@@ -178,20 +178,20 @@ Playground.argTypes = {
   align: {
     options: [
       'top',
-      'top-left',
-      'top-right',
+      'top-start',
+      'top-end',
 
       'bottom',
-      'bottom-left',
-      'bottom-right',
+      'bottom-start',
+      'bottom-end',
 
       'left',
-      'left-bottom',
-      'left-top',
+      'left-end',
+      'left-start',
 
       'right',
-      'right-bottom',
-      'right-top',
+      'right-end',
+      'right-start',
     ],
     control: {
       type: 'select',
@@ -223,45 +223,6 @@ Playground.story = {
   decorators: [
     (story) => <div className="mt-10 flex justify-center">{story()}</div>,
   ],
-};
-
-export const DefaultWithClipping = () => {
-  const [open, setOpen] = useState(false);
-  const ref = useRef();
-
-  useEffect(() => {
-    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
-  });
-
-  return (
-    <div
-      style={{
-        width: '10rem',
-        height: '10rem',
-        background: 'grey',
-        overflow: 'hidden',
-        margin: '0 auto',
-      }}>
-      <p>This container has overflow: hidden</p>
-      <Popover open={open} align="bottom" ref={ref}>
-        <div className="playground-trigger">
-          <CheckboxIcon
-            onClick={() => {
-              setOpen(!open);
-            }}
-          />
-        </div>
-        <PopoverContent className="p-3">
-          <div>
-            <p className="popover-title">This popover does not use autoAlign</p>
-            <p className="popover-details">
-              This popover is clipped when the container has overflow: hidden.
-            </p>
-          </div>
-        </PopoverContent>
-      </Popover>
-    </div>
-  );
 };
 
 export const ExperimentalAutoAlign = () => {
@@ -301,46 +262,6 @@ export const ExperimentalAutoAlign = () => {
           </PopoverContent>
         </Popover>
       </div>
-    </div>
-  );
-};
-
-export const AutoAlignNoClipping = () => {
-  const [open, setOpen] = useState(false);
-  const ref = useRef();
-
-  useEffect(() => {
-    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
-  });
-
-  return (
-    <div
-      style={{
-        width: '10rem',
-        height: '10rem',
-        background: 'grey',
-        overflow: 'hidden',
-        margin: '0 auto',
-      }}>
-      <p>This container has overflow: hidden</p>
-      <Popover open={open} align="top" autoAlign ref={ref}>
-        <div className="playground-trigger">
-          <CheckboxIcon
-            onClick={() => {
-              setOpen(!open);
-            }}
-          />
-        </div>
-        <PopoverContent className="p-3">
-          <div>
-            <p className="popover-title">This popover uses autoAlign</p>
-            <p className="popover-details">
-              This popover pops out of its container and is not clipped, even
-              when the container has overflow: hidden.
-            </p>
-          </div>
-        </PopoverContent>
-      </Popover>
     </div>
   );
 };

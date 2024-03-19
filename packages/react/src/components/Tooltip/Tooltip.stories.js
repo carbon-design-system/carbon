@@ -75,7 +75,7 @@ export const Alignment = () => {
 export const ExperimentalAutoAlign = () => {
   const ref = useRef();
   const tooltipLabel =
-    'Scroll the container up, down, left or right to observe how the popover will automatically change its position in attempt to stay within the viewport. This works on initial render in addition to on scroll.';
+    'Scroll the container up, down, left or right to observe how the tooltip will automatically change its position in attempt to stay within the viewport. This works on initial render in addition to on scroll.';
 
   useEffect(() => {
     ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
