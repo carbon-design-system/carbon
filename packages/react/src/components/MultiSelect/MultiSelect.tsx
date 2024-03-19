@@ -546,7 +546,6 @@ const MultiSelect = React.forwardRef(
 
         case FunctionSetHighlightedIndex:
           if (!isOpen) {
-            console.log('test');
             setHighlightedIndex(0);
           }
           break;
