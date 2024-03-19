@@ -10,6 +10,9 @@ import DatePicker from './DatePicker';
 import DatePickerInput from '../DatePickerInput';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { Slug } from '../Slug';
+
+const prefix = 'cds';
 
 describe('DatePicker', () => {
   it('should add extra classes that are passed via className', () => {
@@ -51,7 +54,7 @@ describe('DatePicker', () => {
 
     expect(
       // eslint-disable-next-line testing-library/no-node-access
-      document.querySelector('.cds--date-picker--simple')
+      document.querySelector(`.${prefix}--date-picker--simple`)
     ).toBeInTheDocument();
   });
 
@@ -71,7 +74,7 @@ describe('DatePicker', () => {
 
     expect(
       // eslint-disable-next-line testing-library/no-node-access
-      document.querySelector('.cds--date-picker--single')
+      document.querySelector(`.${prefix}--date-picker--single`)
     ).toBeInTheDocument();
   });
 
@@ -93,7 +96,7 @@ describe('DatePicker', () => {
 
     expect(
       // eslint-disable-next-line testing-library/no-node-access
-      document.querySelector('.cds--date-picker--range')
+      document.querySelector(`.${prefix}--date-picker--range`)
     ).toBeInTheDocument();
   });
 
@@ -161,6 +164,141 @@ describe('DatePicker', () => {
 
     expect(ref).toHaveBeenCalledWith(container.firstChild);
   });
+
+  it('should respect slug prop', () => {
+    render(
+      <DatePickerInput
+        id="date-picker-input-id-start"
+        placeholder="mm/dd/yyyy"
+        labelText="Date Picker label"
+        data-testid="input-value"
+        slug={<Slug />}
+      />
+    );
+
+    expect(screen.getByRole('button')).toHaveClass(`${prefix}--slug__button`);
+  });
+
+  it('should respect parseDate prop', async () => {
+    const parseDate = jest.fn();
+    parseDate.mockReturnValueOnce(new Date('1989/01/20'));
+    render(
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="single"
+        parseDate={parseDate}>
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          data-testid="input-value"
+        />
+      </DatePicker>
+    );
+    await userEvent.type(
+      screen.getByLabelText('Date Picker label'),
+      '01/20/1989{enter}'
+    );
+    expect(parseDate).toHaveBeenCalled();
+  });
+
+  it('invalid date month/day is correctly parsed when using the default format', async () => {
+    render(
+      <DatePicker onChange={() => {}} datePickerType="single">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          data-testid="input-value"
+        />
+      </DatePicker>
+    );
+
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue('');
+
+    // Invalid month
+    await userEvent.type(
+      screen.getByLabelText('Date Picker label'),
+      '99/20/1989{enter}'
+    );
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue(
+      '01/20/1989'
+    );
+    await userEvent.clear(screen.getByLabelText('Date Picker label'));
+
+    // Invalid day
+    await userEvent.type(
+      screen.getByLabelText('Date Picker label'),
+      '01/99/1989{enter}'
+    );
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue(
+      '01/01/1989'
+    );
+    await userEvent.clear(screen.getByLabelText('Date Picker label'));
+
+    // Invalid month and day
+    await userEvent.type(
+      screen.getByLabelText('Date Picker label'),
+      '99/99/1989{enter}'
+    );
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue(
+      '01/01/1989'
+    );
+    await userEvent.clear(screen.getByLabelText('Date Picker label'));
+
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue('');
+  });
+
+  it('invalid date month/day is parsed by flatpickr when using a custom format', async () => {
+    render(
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="single"
+        dateFormat="d/m/Y">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          data-testid="input-value"
+        />
+      </DatePicker>
+    );
+
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue('');
+
+    await userEvent.type(
+      screen.getByLabelText('Date Picker label'),
+      '34/34/3434{enter}'
+    );
+    // More on how this value is calculated by flatpickr:
+    // https://github.com/carbon-design-system/carbon/issues/15432#issuecomment-1967447677
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue(
+      '03/10/3436'
+    );
+    await userEvent.clear(screen.getByLabelText('Date Picker label'));
+  });
+
+  it('the input is cleared when given a completely invalid date', async () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    render(
+      <DatePicker onChange={() => {}} datePickerType="single">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          data-testid="input-value"
+        />
+      </DatePicker>
+    );
+
+    await userEvent.type(
+      screen.getByLabelText('Date Picker label'),
+      'a1/0a/a999{enter}'
+    );
+    expect(warn).toHaveBeenCalled();
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue('');
+    warn.mockRestore();
+  });
 });
 
 describe('Simple date picker', () => {
@@ -224,7 +362,11 @@ describe('Simple date picker', () => {
         </React.Suspense>
       );
 
-      const labeledElement = await screen.findByLabelText('Date Picker label');
+      const labeledElement = await screen.findByLabelText(
+        'Date Picker label',
+        {},
+        { timeout: 5000 }
+      );
       expect(labeledElement).toBeInTheDocument();
 
       const input = screen.getByRole('textbox');
@@ -268,7 +410,7 @@ describe('Single date picker', () => {
     );
 
     // eslint-disable-next-line testing-library/no-node-access
-    const input = document.querySelector('.cds--date-picker__input');
+    const input = document.querySelector(`.${prefix}--date-picker__input`);
 
     expect(screen.getByRole('application')).not.toHaveClass('open');
     await userEvent.click(input);

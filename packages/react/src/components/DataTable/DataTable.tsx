@@ -91,6 +91,7 @@ export interface DataTableRow<ColTypes extends any[]> {
 export interface DataTableHeader {
   key: string;
   header: React.ReactNode;
+  slug?: React.ReactElement;
 }
 
 export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
@@ -188,6 +189,10 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
   getTableContainerProps: () => {
     stickyHeader?: boolean;
     useStaticWidth?: boolean;
+  };
+  getCellProps: (getCellPropsArgs: { cell: DataTableCell<ColTypes> }) => {
+    [key: string]: unknown;
+    hasSlugHeader?: boolean;
   };
 
   // Custom event handlers
@@ -456,6 +461,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
       sortDirection,
       isSortable,
       isSortHeader: sortHeaderKey === header.key,
+      slug: header.slug,
       onClick: (event) => {
         const nextSortState = getNextSortState(this.props, this.state, {
           key: header.key,
@@ -689,7 +695,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
       isSortable,
       useStaticWidth,
       stickyHeader,
-      overflowMenuOnHover = true,
+      overflowMenuOnHover = false,
       experimentalAutoAlign,
     } = this.props;
     return {
@@ -712,6 +718,20 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
     return {
       stickyHeader,
       useStaticWidth,
+    };
+  };
+
+  /**
+   * Get the props associated with the given table cell.
+   *
+   * @param {object} config
+   * @param {object} config.cell the cell we want the props for
+   * @returns {object}
+   */
+  getCellProps = ({ cell, ...rest }) => {
+    return {
+      ...rest,
+      hasSlugHeader: cell.hasSlugHeader,
     };
   };
 
@@ -966,6 +986,7 @@ class DataTable<RowType, ColTypes extends any[]> extends React.Component<
       getBatchActionProps: this.getBatchActionProps,
       getTableProps: this.getTableProps,
       getTableContainerProps: this.getTableContainerProps,
+      getCellProps: this.getCellProps,
 
       // Custom event handlers
       onInputChange: this.handleOnInputValueChange,

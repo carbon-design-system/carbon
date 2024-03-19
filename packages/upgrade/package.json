@@ -1,7 +1,7 @@
 {
   "name": "@carbon/upgrade",
   "description": "A tool for upgrading Carbon versions",
-  "version": "11.11.0",
+  "version": "11.13.0",
   "license": "Apache-2.0",
   "bin": {
     "carbon-upgrade": "./bin/carbon-upgrade.js"
@@ -15,7 +15,8 @@
   "files": [
     "bin",
     "cli.js",
-    "transforms"
+    "transforms",
+    "telemetry.yml"
   ],
   "keywords": [
     "carbon",
@@ -34,12 +35,13 @@
   "scripts": {
     "build": "esbuild src/cli.js --bundle --platform=node --outfile=cli.js --target=node14 --external:jscodeshift",
     "clean": "rimraf cli.js",
-    "watch": "yarn build --watch"
+    "watch": "yarn build --watch",
+    "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "devDependencies": {
     "chalk": "^4.1.1",
     "change-case": "^4.1.2",
-    "esbuild": "^0.19.0",
+    "esbuild": "^0.20.0",
     "execa": "^5.1.1",
     "fast-glob": "^3.2.11",
     "fs-extra": "^11.0.0",
@@ -56,6 +58,7 @@
     "yargs": "^17.0.1"
   },
   "dependencies": {
+    "@ibm/telemetry-js": "^1.2.1",
     "jscodeshift": "^0.13.1"
   }
 }

@@ -17,11 +17,14 @@ import {
 } from '../ListBox/test-helpers';
 import ComboBox from '../ComboBox';
 import { act } from 'react-dom/test-utils';
+import { Slug } from '../Slug';
 
 const findInputNode = () => screen.getByRole('combobox');
 const openMenu = async () => {
   await userEvent.click(findInputNode());
 };
+
+const prefix = 'cds';
 
 describe('ComboBox', () => {
   let mockProps;
@@ -117,6 +120,14 @@ describe('ComboBox', () => {
     expect(findInputNode()).toHaveDisplayValue('Apple');
   });
 
+  it('should respect slug prop', () => {
+    const { container } = render(<ComboBox {...mockProps} slug={<Slug />} />);
+
+    expect(container.firstChild).toHaveClass(
+      `${prefix}--list-box__wrapper--slug`
+    );
+  });
+
   describe('should display initially selected item found in `initialSelectedItem`', () => {
     it('using an object type for the `initialSelectedItem` prop', () => {
       render(
@@ -176,7 +187,9 @@ describe('ComboBox', () => {
     it('should not let the user expand the menu', async () => {
       render(<ComboBox {...mockProps} disabled={true} />);
       await openMenu();
-      expect(findListBoxNode()).not.toHaveClass('cds--list-box--expanded');
+      expect(findListBoxNode()).not.toHaveClass(
+        `${prefix}--list-box--expanded`
+      );
     });
   });
 
@@ -196,7 +209,9 @@ describe('ComboBox', () => {
     it('should not let the user expand the menu', async () => {
       render(<ComboBox {...mockProps} disabled={true} />);
       await openMenu();
-      expect(findListBoxNode()).not.toHaveClass('cds--list-box--expanded');
+      expect(findListBoxNode()).not.toHaveClass(
+        `${prefix}--list-box--expanded`
+      );
     });
   });
 

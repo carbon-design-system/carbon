@@ -20,7 +20,6 @@
     @include type.type-style('body-01');
 
     color: theme.$text-secondary;
-
     margin-inline-end: spacing.$spacing-03;
   }
 
@@ -62,6 +61,10 @@
     );
     @include custom-property.declaration(
       'link-hover-text-color',
+      theme.$link-inverse
+    );
+    @include custom-property.declaration(
+      'link-visited-text-color',
       theme.$link-inverse
     );
     @include custom-property.declaration(

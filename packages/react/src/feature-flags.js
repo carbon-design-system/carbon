@@ -12,4 +12,5 @@ FeatureFlags.merge({
   'enable-css-grid': true,
   'enable-v11-release': true,
   'enable-experimental-tile-contrast': false,
+  'enable-v12-tile-radio-icons': false,
 });

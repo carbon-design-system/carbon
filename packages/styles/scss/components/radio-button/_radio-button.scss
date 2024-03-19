@@ -65,6 +65,8 @@ $radio-border-width: 1px !default;
   .#{$prefix}--radio-button {
     @include visually-hidden;
 
+    margin-block-start: 0.9rem;
+    margin-inline-start: 0.63rem;
     visibility: inherit;
   }
 
@@ -77,6 +79,8 @@ $radio-border-width: 1px !default;
 
   .#{$prefix}--radio-button__label-text {
     @include type.type-style('body-compact-01');
+
+    flex: 1;
   }
 
   .#{$prefix}--radio-button__appearance {
@@ -118,6 +122,10 @@ $radio-border-width: 1px !default;
       // Allow the selected button to be seen in Windows HCM for IE/Edge
       @include high-contrast-mode('icon-fill') {
         background-color: ButtonText;
+      }
+
+      @media print {
+        print-color-adjust: exact;
       }
     }
   }

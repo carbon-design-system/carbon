@@ -32,12 +32,16 @@ import {
 import { Text } from '../Text';
 import Button, { type ButtonProps } from '../Button';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
-import { keys, matches } from '../../internal/keyboard';
+import {
+  useNoInteractiveChildren,
+  useInteractiveChildrenNeedDescription,
+} from '../../internal/useNoInteractiveChildren';
+import { keys, matches, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
-import wrapFocus from '../../internal/wrapFocus';
+import wrapFocus, { wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
+import { useFeatureFlag } from '../FeatureFlags';
 
 /**
  * Conditionally call a callback when the escape key is pressed
@@ -843,6 +847,7 @@ export interface ActionableNotificationProps
   closeOnEscape?: boolean;
 
   /**
+   * @deprecated use StaticNotification once it's available. Issue #15532
    * Specify if focus should be moved to the component when the notification contains actions
    */
   hasFocus?: boolean;
@@ -948,6 +953,9 @@ export function ActionableNotification({
   const startTrap = useRef<HTMLElement>(null);
   const endTrap = useRef<HTMLElement>(null);
   const ref = useRef<HTMLDivElement>(null);
+  const focusTrapWithoutSentinels = useFeatureFlag(
+    'enable-experimental-focus-wrap-without-sentinels'
+  );
 
   useIsomorphicEffect(() => {
     if (hasFocus) {
@@ -976,6 +984,16 @@ export function ActionableNotification({
     }
   }
 
+  function handleKeyDown(event) {
+    if (isOpen && match(event, keys.Tab) && ref.current) {
+      wrapFocusWithoutSentinels({
+        containerNode: ref.current,
+        currentActiveNode: event.target,
+        event,
+      });
+    }
+  }
+
   const handleClose = (evt: MouseEvent) => {
     if (!onClose || onClose(evt) !== false) {
       setIsOpen(false);
@@ -999,14 +1017,17 @@ export function ActionableNotification({
       role={role}
       className={containerClassName}
       aria-labelledby={title ? id : subtitleId}
-      onBlur={handleBlur}>
-      <span
-        ref={startTrap}
-        tabIndex={0}
-        role="link"
-        className={`${prefix}--visually-hidden`}>
-        Focus sentinel
-      </span>
+      onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
+      onKeyDown={focusTrapWithoutSentinels ? handleKeyDown : () => {}}>
+      {!focusTrapWithoutSentinels && (
+        <span
+          ref={startTrap}
+          tabIndex={0}
+          role="link"
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </span>
+      )}
 
       <div className={`${prefix}--actionable-notification__details`}>
         <NotificationIcon
@@ -1055,13 +1076,15 @@ export function ActionableNotification({
           />
         )}
       </div>
-      <span
-        ref={endTrap}
-        tabIndex={0}
-        role="link"
-        className={`${prefix}--visually-hidden`}>
-        Focus sentinel
-      </span>
+      {!focusTrapWithoutSentinels && (
+        <span
+          ref={endTrap}
+          tabIndex={0}
+          role="link"
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </span>
+      )}
     </div>
   );
 }
@@ -1102,9 +1125,10 @@ ActionableNotification.propTypes = {
   closeOnEscape: PropTypes.bool,
 
   /**
+   * Deprecated, please use StaticNotification once it's available. Issue #15532
    * Specify if focus should be moved to the component when the notification contains actions
    */
-  hasFocus: PropTypes.bool,
+  hasFocus: deprecate(PropTypes.bool),
 
   /**
    * Specify the close button should be disabled, or not
@@ -1168,4 +1192,195 @@ ActionableNotification.propTypes = {
    * Specify the title
    */
   title: PropTypes.string,
+};
+
+/**
+ * StaticNotification
+ * ==================
+ */
+
+export interface StaticNotificationProps
+  extends HTMLAttributes<HTMLDivElement> {
+  /**
+   * Pass in the action button label that will be rendered within the ActionableNotification.
+   */
+  actionButtonLabel?: string;
+
+  /**
+   * Specify the content
+   */
+  children?: ReactNode;
+
+  /**
+   * Specify an optional className to be applied to the notification box
+   */
+  className?: string;
+
+  /**
+   * Specify what state the notification represents
+   */
+  kind?:
+    | 'error'
+    | 'info'
+    | 'info-square'
+    | 'success'
+    | 'warning'
+    | 'warning-alt';
+
+  /**
+   * Specify whether you are using the low contrast variant of the StaticNotification.
+   */
+  lowContrast?: boolean;
+
+  /**
+   * Provide a function that is called when the action is clicked
+   */
+  onActionButtonClick?(): void;
+
+  /**
+   * Provide a description for "status" icon that can be read by screen readers
+   */
+  statusIconDescription?: string;
+
+  /**
+   * Specify the subtitle
+   */
+  subtitle?: ReactNode;
+
+  /**
+   * Specify the title
+   */
+  title?: string;
+
+  /**
+   * Specify the id for the element containing the title
+   */
+  titleId?: string;
+}
+
+export function StaticNotification({
+  actionButtonLabel,
+  children,
+  onActionButtonClick,
+  title,
+  titleId,
+  subtitle,
+  statusIconDescription,
+  className,
+  kind = 'error',
+  lowContrast,
+  ...rest
+}: StaticNotificationProps) {
+  const prefix = usePrefix();
+  const containerClassName = cx(className, {
+    [`${prefix}--actionable-notification`]: true,
+    [`${prefix}--actionable-notification--low-contrast`]: lowContrast,
+    [`${prefix}--actionable-notification--${kind}`]: kind,
+    [`${prefix}--actionable-notification--hide-close-button`]: true,
+  });
+
+  const ref = useRef(null);
+  useInteractiveChildrenNeedDescription(
+    ref,
+    `interactive child node(s) should have an \`aria-describedby\` property with a value matching the value of \`titleId\``
+  );
+
+  return (
+    <div ref={ref} {...rest} className={containerClassName}>
+      <div className={`${prefix}--actionable-notification__details`}>
+        <NotificationIcon
+          notificationType="inline"
+          kind={kind}
+          iconDescription={statusIconDescription || `${kind} icon`}
+        />
+        <div className={`${prefix}--actionable-notification__text-wrapper`}>
+          {title && (
+            <Text
+              as="div"
+              id={titleId}
+              className={`${prefix}--actionable-notification__title`}>
+              {title}
+            </Text>
+          )}
+          {subtitle && (
+            <Text
+              as="div"
+              className={`${prefix}--actionable-notification__subtitle`}>
+              {subtitle}
+            </Text>
+          )}
+          {children}
+        </div>
+      </div>
+      <div className={`${prefix}--actionable-notification__button-wrapper`}>
+        {actionButtonLabel && (
+          <NotificationActionButton
+            onClick={onActionButtonClick}
+            aria-describedby={titleId}
+            inline>
+            {actionButtonLabel}
+          </NotificationActionButton>
+        )}
+      </div>
+    </div>
+  );
+}
+
+StaticNotification.propTypes = {
+  /**
+   * Pass in the action button label that will be rendered within the ActionableNotification.
+   */
+  actionButtonLabel: PropTypes.string,
+
+  /**
+   * Specify the content
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the notification box
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify what state the notification represents
+   */
+  kind: PropTypes.oneOf([
+    'error',
+    'info',
+    'info-square',
+    'success',
+    'warning',
+    'warning-alt',
+  ]),
+
+  /**
+   * Specify whether you are using the low contrast variant of the StaticNotification.
+   */
+  lowContrast: PropTypes.bool,
+
+  /**
+   * Provide a function that is called when the action is clicked
+   */
+  onActionButtonClick: PropTypes.func,
+
+  /**
+   * Provide a description for "status" icon that can be read by screen readers
+   */
+  statusIconDescription: PropTypes.string,
+
+  /**
+   * Specify the subtitle
+   */
+  subtitle: PropTypes.node,
+
+  /**
+   * Specify the title
+   */
+  title: PropTypes.string,
+
+  /**
+   * Specify the id for the element containing the title
+   */
+  titleId: PropTypes.string,
 };

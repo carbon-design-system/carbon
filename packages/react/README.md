@@ -51,6 +51,25 @@ to include `node_modules` in its `includePaths` option. For more information,
 checkout the [configuration](../styles/docs/sass.md#configuration) section in
 our Sass docs.
 
+### TypeScript
+
+There is an ongoing project to add `*.d.ts` files to `@carbon/react`. Though not
+all components have yet been typed, you can still use the project successfully
+in a TypeScript setting, provided you amend to your `tsconfig.json` or
+equivalent configuration file. Include the `skipLibCheck: true` compiler option:
+
+```json
+{
+  "compilerOptions": {
+    "skipLibCheck": true
+  }
+}
+```
+
+To track the progress of TypeScript adoption, check out:
+
+- [TypeScript Adoption](https://github.com/orgs/carbon-design-system/projects/53)
+
 ## Usage
 
 The `@carbon/react` package provides components and icons for the Carbon Design

@@ -26,11 +26,11 @@
     "sync": "carbon-cli sync",
     "test": "cross-env BABEL_ENV=test jest",
     "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js",
-    "postinstall": "husky install"
+    "postinstall": "husky"
   },
   "resolutions": {
-    "@types/react": "~17.0.2",
-    "@types/prop-types": "15.7.5",
+    "@types/react": "~18.2.33",
+    "@types/prop-types": "15.7.11",
     "ast-types": "^0.14.0",
     "node-sass": "^9.0.0",
     "react": "~18.2.0",
@@ -62,9 +62,10 @@
     "cross-spawn": "^7.0.0",
     "doctoc": "^2.0.0",
     "eslint": "^8.40.0",
+    "eslint-plugin-playwright": "^0.22.1",
     "fs-extra": "^11.0.0",
     "glob": "^10.0.0",
-    "husky": "^8.0.0",
+    "husky": "^9.0.0",
     "jest": "^28.1.0",
     "jest-junit": "^16.0.0",
     "lerna": "^8.0.0",
@@ -143,5 +144,5 @@
       "./config/stylelint-config-carbon"
     ]
   },
-  "packageManager": "yarn@4.0.2"
+  "packageManager": "yarn@4.1.1"
 }

@@ -10,11 +10,11 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('FluidSelect @avt', () => {
+test.describe('@avt FluidSelect', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidSelect',
-      id: 'experimental-unstable-fluidselect--default',
+      id: 'experimental-fluid-components-unstable-fluidselect--default',
       globals: {
         theme: 'white',
       },
@@ -25,7 +25,7 @@ test.describe('FluidSelect @avt', () => {
   test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidSelect',
-      id: 'experimental-unstable-fluidselect--skeleton',
+      id: 'experimental-fluid-components-unstable-fluidselect--skeleton',
       globals: {
         theme: 'white',
       },
@@ -36,7 +36,7 @@ test.describe('FluidSelect @avt', () => {
   test('@avt-keyboard-nav FluidSelect', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidSelect',
-      id: 'experimental-unstable-fluidselect--default',
+      id: 'experimental-fluid-components-unstable-fluidselect--default',
       globals: {
         theme: 'white',
       },

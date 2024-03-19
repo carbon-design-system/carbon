@@ -13,14 +13,16 @@ import { isElement } from 'react-is';
 import PropTypes, { ReactNodeLike } from 'prop-types';
 import { ModalHeader, type ModalHeaderProps } from './ModalHeader';
 import { ModalFooter, type ModalFooterProps } from './ModalFooter';
+import debounce from 'lodash.debounce';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+import mergeRefs from '../../tools/mergeRefs';
 import cx from 'classnames';
-
 import toggleClass from '../../tools/toggleClass';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
-
-import wrapFocus from '../../internal/wrapFocus';
+import wrapFocus, { wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
+import { useFeatureFlag } from '../FeatureFlags';
 
 export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
   /** Specify the content to be placed in the ModalBody. */
@@ -50,30 +52,54 @@ export const ModalBody = React.forwardRef<HTMLDivElement, ModalBodyProps>(
     ref
   ) {
     const prefix = usePrefix();
+    const contentRef = useRef<HTMLDivElement>(null);
+    const [isScrollable, setIsScrollable] = useState(false);
     const contentClass = cx(
-      `${prefix}--modal-content`,
-      hasForm && `${prefix}--modal-content--with-form`,
-      hasScrollingContent && `${prefix}--modal-scroll-content`,
+      {
+        [`${prefix}--modal-content`]: true,
+        [`${prefix}--modal-content--with-form`]: hasForm,
+        [`${prefix}--modal-scroll-content`]:
+          hasScrollingContent || isScrollable,
+      },
       customClassName
     );
 
-    const hasScrollingContentProps = hasScrollingContent
-      ? { tabIndex: 0, role: 'region' }
-      : {};
+    useIsomorphicEffect(() => {
+      if (contentRef.current) {
+        setIsScrollable(
+          contentRef.current.scrollHeight > contentRef.current.clientHeight
+        );
+      }
+
+      function handler() {
+        if (contentRef.current) {
+          setIsScrollable(
+            contentRef.current.scrollHeight > contentRef.current.clientHeight
+          );
+        }
+      }
+
+      const debouncedHandler = debounce(handler, 200);
+      window.addEventListener('resize', debouncedHandler);
+      return () => {
+        debouncedHandler.cancel();
+        window.removeEventListener('resize', debouncedHandler);
+      };
+    }, []);
+
+    const hasScrollingContentProps =
+      hasScrollingContent || isScrollable
+        ? { tabIndex: 0, role: 'region' }
+        : {};
 
     return (
-      <>
-        <div
-          className={contentClass}
-          {...hasScrollingContentProps}
-          {...rest}
-          ref={ref}>
-          {children}
-        </div>
-        {hasScrollingContent && (
-          <div className={`${prefix}--modal-content--overflow-indicator`} />
-        )}
-      </>
+      <div
+        className={contentClass}
+        {...hasScrollingContentProps}
+        {...rest}
+        ref={mergeRefs(contentRef, ref)}>
+        {children}
+      </div>
     );
   }
 );
@@ -216,8 +242,11 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
     const button = useRef<HTMLButtonElement>(null);
     const startSentinel = useRef<HTMLButtonElement>(null);
     const endSentinel = useRef<HTMLButtonElement>(null);
+    const focusTrapWithoutSentinels = useFeatureFlag(
+      'enable-experimental-focus-wrap-without-sentinels'
+    );
 
-    // Kepp track of modal open/close state
+    // Keep track of modal open/close state
     // and propagate it to the document.body
     useEffect(() => {
       if (open !== wasOpen) {
@@ -233,19 +262,35 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       };
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    function handleKeyDown(evt: KeyboardEvent) {
-      if (match(evt, keys.Escape)) {
-        closeModal(evt);
+    function handleKeyDown(event) {
+      event.stopPropagation();
+      if (match(event, keys.Escape)) {
+        closeModal(event);
       }
 
-      onKeyDown?.(evt);
+      if (
+        focusTrapWithoutSentinels &&
+        open &&
+        match(event, keys.Tab) &&
+        innerModal.current
+      ) {
+        wrapFocusWithoutSentinels({
+          containerNode: innerModal.current,
+          currentActiveNode: event.target,
+          event: event,
+        });
+      }
+
+      onKeyDown?.(event);
     }
     function handleMousedown(evt: MouseEvent) {
+      evt.stopPropagation();
       const isInside = innerModal.current?.contains(evt.target as Node);
       if (!isInside && !preventCloseOnClickOutside) {
         closeModal(evt);
       }
     }
+
     function handleBlur({
       target: oldActiveNode,
       relatedTarget: currentActiveNode,
@@ -366,7 +411,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
         role="presentation"
         ref={ref}
         aria-hidden={!open}
-        onBlur={handleBlur}
+        onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
         onMouseDown={handleMousedown}
         onKeyDown={handleKeyDown}
         className={modalClass}>
@@ -377,24 +422,27 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
           aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}
           aria-labelledby={ariaLabelledBy}>
           {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
-
-          <button
-            type="button"
-            ref={startSentinel}
-            className={`${prefix}--visually-hidden`}>
-            Focus sentinel
-          </button>
+          {!focusTrapWithoutSentinels && (
+            <button
+              type="button"
+              ref={startSentinel}
+              className={`${prefix}--visually-hidden`}>
+              Focus sentinel
+            </button>
+          )}
           <div ref={innerModal} className={`${prefix}--modal-container-body`}>
             {normalizedSlug}
             {childrenWithProps}
           </div>
           {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
-          <button
-            type="button"
-            ref={endSentinel}
-            className={`${prefix}--visually-hidden`}>
-            Focus sentinel
-          </button>
+          {!focusTrapWithoutSentinels && (
+            <button
+              type="button"
+              ref={endSentinel}
+              className={`${prefix}--visually-hidden`}>
+              Focus sentinel
+            </button>
+          )}
         </div>
       </div>
     );

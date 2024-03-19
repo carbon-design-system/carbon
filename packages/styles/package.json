@@ -1,7 +1,7 @@
 {
   "name": "@carbon/styles",
   "description": "Styles for the Carbon Design System",
-  "version": "1.47.0",
+  "version": "1.53.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -19,7 +19,8 @@
   "files": [
     "css",
     "scss",
-    "index.scss"
+    "index.scss",
+    "telemetry.yml"
   ],
   "publishConfig": {
     "access": "public",
@@ -27,7 +28,8 @@
   },
   "scripts": {
     "build": "yarn clean && node tasks/build-css.js",
-    "clean": "rimraf css"
+    "clean": "rimraf css",
+    "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "peerDependencies": {
     "sass": "^1.33.0"
@@ -38,14 +40,15 @@
     }
   },
   "dependencies": {
-    "@carbon/colors": "^11.20.0",
-    "@carbon/feature-flags": "^0.16.0",
-    "@carbon/grid": "^11.21.0",
-    "@carbon/layout": "^11.20.0",
-    "@carbon/motion": "^11.16.0",
-    "@carbon/themes": "^11.28.0",
-    "@carbon/type": "^11.25.0",
-    "@ibm/plex": "6.0.0-next.6"
+    "@carbon/colors": "^11.21.0",
+    "@carbon/feature-flags": "^0.18.0",
+    "@carbon/grid": "^11.22.0",
+    "@carbon/layout": "^11.21.0",
+    "@carbon/motion": "^11.17.0",
+    "@carbon/themes": "^11.33.0",
+    "@carbon/type": "^11.26.0",
+    "@ibm/plex": "6.0.0-next.6",
+    "@ibm/telemetry-js": "^1.2.1"
   },
   "devDependencies": {
     "@carbon/test-utils": "^10.30.0",

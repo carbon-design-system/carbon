@@ -128,6 +128,16 @@ Array [
     "relativePath": "scss/components/button/tokens",
   },
   Object {
+    "filepath": "scss/components/chat-button/_chat-button.scss",
+    "importPath": "@carbon/styles/scss/components/chat-button/chat-button",
+    "relativePath": "scss/components/chat-button/chat-button",
+  },
+  Object {
+    "filepath": "scss/components/chat-button/_index.scss",
+    "importPath": "@carbon/styles/scss/components/chat-button",
+    "relativePath": "scss/components/chat-button",
+  },
+  Object {
     "filepath": "scss/components/checkbox/_checkbox.scss",
     "importPath": "@carbon/styles/scss/components/checkbox/checkbox",
     "relativePath": "scss/components/checkbox/checkbox",
@@ -606,6 +616,11 @@ Array [
     "filepath": "scss/components/skeleton-styles/_skeleton-styles.scss",
     "importPath": "@carbon/styles/scss/components/skeleton-styles/skeleton-styles",
     "relativePath": "scss/components/skeleton-styles/skeleton-styles",
+  },
+  Object {
+    "filepath": "scss/components/skeleton-styles/_ai-skeleton-styles.scss",
+    "importPath": "@carbon/styles/scss/components/skeleton-styles/ai-skeleton-styles",
+    "relativePath": "scss/components/skeleton-styles/ai-skeleton-styles",
   },
   Object {
     "filepath": "scss/components/slider/_index.scss",

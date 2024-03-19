@@ -26,8 +26,13 @@ export const SlugContent = React.forwardRef(function SlugContent(
 ) {
   const prefix = usePrefix();
 
+  const hasSlugActions = React.Children.toArray(children).some(
+    (child) => child.type?.displayName === 'SlugActions'
+  );
+
   const slugContentClasses = cx(className, {
     [`${prefix}--slug-content`]: true,
+    [`${prefix}--slug-content--with-actions`]: hasSlugActions,
   });
 
   return (
@@ -37,6 +42,7 @@ export const SlugContent = React.forwardRef(function SlugContent(
   );
 });
 
+SlugContent.displayName = 'SlugContent';
 SlugContent.propTypes = {
   /**
    * Specify the content you want rendered inside the slug ToggleTip
@@ -66,6 +72,7 @@ export const SlugActions = React.forwardRef(function SlugActions(
   );
 });
 
+SlugActions.displayName = 'SlugActions';
 SlugActions.propTypes = {
   /**
    * Specify the content you want rendered inside the slug callout toolbar
@@ -86,7 +93,6 @@ export const Slug = React.forwardRef(function Slug(
     autoAlign = true,
     children,
     className,
-    dotType,
     kind = 'default',
     onRevertClick,
     revertActive,
@@ -103,11 +109,6 @@ export const Slug = React.forwardRef(function Slug(
 
   const slugClasses = cx(className, {
     [`${prefix}--slug`]: true,
-    [`${prefix}--slug--hollow`]: kind === 'hollow' || dotType === 'hollow',
-    // Need to come up with a better name; explainable?
-    // Need to be able to target the non-hollow variant another way
-    // other than using `:not` all over the styles
-    [`${prefix}--slug--enabled`]: kind !== 'hollow' && dotType !== 'hollow',
     [`${prefix}--slug--revert`]: revertActive,
   });
 
@@ -206,14 +207,9 @@ Slug.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify the type of dot that should be rendered in front of the inline variant
-   */
-  dotType: PropTypes.oneOf(['default', 'hollow']),
-
-  /**
    * Specify the type of Slug, from the following list of types:
    */
-  kind: PropTypes.oneOf(['default', 'hollow', 'inline']),
+  kind: PropTypes.oneOf(['default', 'inline']),
 
   /**
    * Callback function that fires when the revert button is clicked

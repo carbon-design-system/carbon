@@ -26,12 +26,18 @@ import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import { Slug, SlugContent, SlugActions } from '.';
 import './slug-story.scss';
+import mdx from './SlugForm.mdx';
 
 export default {
   title: 'Experimental/unstable__Slug/Form',
   component: Form,
   subcomponents: {
     Slug,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
   },
 };
 
@@ -225,7 +231,7 @@ export const _FormExample = (args) => {
           <IconButton kind="ghost" label="Folders">
             <Folders />
           </IconButton>
-          <Button>View literature</Button>
+          <Button>View details</Button>
         </SlugActions>
       </SlugContent>
     </Slug>

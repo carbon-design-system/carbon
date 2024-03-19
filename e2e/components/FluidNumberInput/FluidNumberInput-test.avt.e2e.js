@@ -10,11 +10,11 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('FluidNumberInput @avt', () => {
+test.describe('F@avt luidNumberInput', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidNumberInput',
-      id: 'experimental-unstable-fluidnumberinput--default',
+      id: 'experimental-fluid-components-unstable-fluidnumberinput--default',
       globals: {
         theme: 'white',
       },
@@ -27,7 +27,7 @@ test.describe('FluidNumberInput @avt', () => {
   test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidNumberInput',
-      id: 'experimental-unstable-fluidnumberinput--skeleton',
+      id: 'experimental-fluid-components-unstable-fluidnumberinput--skeleton',
       globals: {
         theme: 'white',
       },
@@ -38,7 +38,7 @@ test.describe('FluidNumberInput @avt', () => {
   test('@avt-keyboard-nav NumberInput', async ({ page }) => {
     await visitStory(page, {
       component: 'NumberInput',
-      id: 'experimental-unstable-fluidnumberinput--default',
+      id: 'experimental-fluid-components-unstable-fluidnumberinput--default',
       globals: {
         theme: 'white',
       },

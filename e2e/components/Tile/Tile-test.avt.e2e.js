@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('Tile @avt', () => {
+test.describe('@avt Tile', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Tile',
@@ -22,7 +22,7 @@ test.describe('Tile @avt', () => {
     await expect(page).toHaveNoACViolations('Tile');
   });
 
-  test('ClickableTile @avt-default-state', async ({ page }) => {
+  test('@avt-default-state ClickableTile', async ({ page }) => {
     await visitStory(page, {
       component: 'ClickableTile',
       id: 'components-tile--clickable',
@@ -33,7 +33,7 @@ test.describe('Tile @avt', () => {
     await expect(page).toHaveNoACViolations('ClickableTile');
   });
 
-  test('ExpandableTile @avt-default-state', async ({ page }) => {
+  test('@avt-default-state ExpandableTile', async ({ page }) => {
     await visitStory(page, {
       component: 'ExpandableTile',
       id: 'components-tile--expandable',
@@ -44,7 +44,7 @@ test.describe('Tile @avt', () => {
     await expect(page).toHaveNoACViolations('ExpandableTile');
   });
 
-  test('SelectableTile @avt-default-state', async ({ page }) => {
+  test('@avt-default-state SelectableTile', async ({ page }) => {
     await visitStory(page, {
       component: 'SelectableTile',
       id: 'components-tile--selectable',
@@ -55,7 +55,7 @@ test.describe('Tile @avt', () => {
     await expect(page).toHaveNoACViolations('SelectableTile');
   });
 
-  test('SelectableTile multi-select @avt-default-state', async ({ page }) => {
+  test('@avt-default-state SelectableTile multi-select', async ({ page }) => {
     await visitStory(page, {
       component: 'SelectableTile',
       id: 'components-tile--multi-select',
@@ -66,7 +66,7 @@ test.describe('Tile @avt', () => {
     await expect(page).toHaveNoACViolations('SelectableTile multi-select');
   });
 
-  test('RadioTile @avt-default-state', async ({ page }) => {
+  test('@avt-default-state RadioTile', async ({ page }) => {
     await visitStory(page, {
       component: 'RadioTile',
       id: 'components-tile--radio',
@@ -77,7 +77,7 @@ test.describe('Tile @avt', () => {
     await expect(page).toHaveNoACViolations('RadioTile');
   });
 
-  test('ClickableTile - @avt-advanced-states', async ({ page }) => {
+  test('@avt-advanced-states ClickableTile', async ({ page }) => {
     await visitStory(page, {
       component: 'Tile',
       id: 'components-tile--clickable',
@@ -92,7 +92,7 @@ test.describe('Tile @avt', () => {
     await expect(page).toHaveNoACViolations('ClickableTile-Disabled');
   });
 
-  test('ExpandableTile - @avt-advanced-states', async ({ page }) => {
+  test('@avt-advanced-states ExpandableTile', async ({ page }) => {
     await visitStory(page, {
       component: 'ExpandableTile',
       id: 'components-tile--expandable',
@@ -109,7 +109,7 @@ test.describe('Tile @avt', () => {
     );
   });
 
-  test('SelectableTile @avt-keyboard-nav', async ({ page }) => {
+  test('@avt-keyboard-nav SelectableTile', async ({ page }) => {
     await visitStory(page, {
       component: 'SelectableTile',
       id: 'components-tile--selectable',
@@ -126,7 +126,7 @@ test.describe('Tile @avt', () => {
     );
   });
 
-  test('RadioTile @avt-keyboard-nav', async ({ page }) => {
+  test('@avt-keyboard-nav RadioTile', async ({ page }) => {
     await visitStory(page, {
       component: 'RadioTile',
       id: 'components-tile--radio',

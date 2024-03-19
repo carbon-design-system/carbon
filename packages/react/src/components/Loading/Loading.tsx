@@ -41,7 +41,7 @@ export interface LoadingProps extends ReactAttr<HTMLDivElement> {
   /**
    * Specify whether you want the loader to be applied with an overlay
    */
-  withOverlay: boolean;
+  withOverlay?: boolean;
 }
 
 function Loading({
@@ -76,14 +76,14 @@ function Loading({
             className={`${prefix}--loading__background`}
             cx="50%"
             cy="50%"
-            r="44"
+            r="42"
           />
         ) : null}
         <circle
           className={`${prefix}--loading__stroke`}
           cx="50%"
           cy="50%"
-          r="44"
+          r={small ? '42' : '44'}
         />
       </svg>
     </div>

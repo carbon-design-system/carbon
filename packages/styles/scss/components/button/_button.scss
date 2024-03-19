@@ -176,6 +176,12 @@
     }
   }
 
+  // Adjust icon positioning in small, medium variants only
+  .#{$prefix}--btn--sm:not(.#{$prefix}--btn--icon-only) .#{$prefix}--btn__icon,
+  .#{$prefix}--btn--md:not(.#{$prefix}--btn--icon-only) .#{$prefix}--btn__icon {
+    margin-block-start: 0;
+  }
+
   .#{$prefix}--btn--icon-only.#{$prefix}--btn--selected {
     background: $background-selected;
   }
