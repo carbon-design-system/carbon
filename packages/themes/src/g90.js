@@ -10,7 +10,6 @@ import {
   blue40,
   blue60,
   blue70,
-  blue80,
 
   // Gray
   gray10,
