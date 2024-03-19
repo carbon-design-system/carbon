@@ -97,6 +97,8 @@ const RadioTile = React.forwardRef(function RadioTile(
   );
 });
 
+RadioTile.displayName = 'RadioTile';
+
 RadioTile.propTypes = {
   /**
    * `true` if this tile should be selected.
