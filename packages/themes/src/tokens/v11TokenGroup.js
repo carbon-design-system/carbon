@@ -375,7 +375,7 @@ export const ai = TokenGroup.create({
     'chat-prompt-border-end',
     'chat-bubble-user',
     'chat-bubble-agent',
-    'chat-bubble-agent-border',
+    'chat-bubble-border',
     'chat-avatar-bot',
     'chat-avatar-agent',
     'chat-avatar-user',
