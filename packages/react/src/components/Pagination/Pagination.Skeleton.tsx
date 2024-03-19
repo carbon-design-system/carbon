@@ -11,7 +11,15 @@ import cx from 'classnames';
 import SkeletonText from '../SkeletonText';
 import { usePrefix } from '../../internal/usePrefix';
 
-function PaginationSkeleton({ className, ...rest }) {
+export interface PaginationSkeletonProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Specify an optional className to add.
+   */
+  className?: string;
+}
+
+function PaginationSkeleton({ className, ...rest }: PaginationSkeletonProps) {
   const prefix = usePrefix();
   return (
     <div

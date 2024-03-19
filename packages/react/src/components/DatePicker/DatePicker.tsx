@@ -365,6 +365,11 @@ interface DatePickerProps {
   onOpen?: flatpickr.Options.Hook;
 
   /**
+   * flatpickr prop passthrough. Controls how dates are parsed.
+   */
+  parseDate?: (date: string) => Date | false;
+
+  /**
    * whether the DatePicker is to be readOnly
    * if boolean applies to all inputs
    * if array applies to each input in order
@@ -419,6 +424,7 @@ const DatePicker = React.forwardRef(function DatePicker(
     readOnly = false,
     short = false,
     value,
+    parseDate: parseDateProp,
     ...rest
   }: DatePickerProps,
   ref: ForwardedRef<HTMLDivElement>
@@ -557,6 +563,45 @@ const DatePicker = React.forwardRef(function DatePicker(
       localeData = l10n[locale];
     }
 
+    /**
+     * parseDate is called before the date is actually set.
+     * It attempts to parse the input value and return a valid date string.
+     * Flatpickr's default parser results in odd dates when given invalid
+     * values, so instead here we normalize the month/day to `1` if given
+     * a value outside the acceptable range.
+     */
+    let parseDate;
+    if (!parseDateProp && dateFormat === 'm/d/Y') {
+      // This function only supports the default dateFormat.
+      parseDate = (date) => {
+        // Month must be 1-12. If outside these bounds, `1` should be used.
+        const month =
+          date.split('/')[0] <= 12 && date.split('/')[0] > 0
+            ? parseInt(date.split('/')[0])
+            : 1;
+        const year = parseInt(date.split('/')[2]);
+
+        if (month && year) {
+          // The month and year must be provided to be able to determine
+          // the number of days in the month.
+          const daysInMonth = new Date(year, month, 0).getDate();
+          // If the day does not fall within the days in the month, `1` should be used.
+          const day =
+            date.split('/')[1] <= daysInMonth && date.split('/')[1] > 0
+              ? parseInt(date.split('/')[1])
+              : 1;
+
+          return new Date(`${year}/${month}/${day}`);
+        } else {
+          // With no month and year, we cannot calculate anything.
+          // Returning false gives flatpickr an invalid date, which will clear the input
+          return false;
+        }
+      };
+    } else if (parseDateProp) {
+      parseDate = parseDateProp;
+    }
+
     const { current: start } = startInputField;
     const { current: end } = endInputField;
     const flatpickerconfig: any = {
@@ -571,6 +616,7 @@ const DatePicker = React.forwardRef(function DatePicker(
       [enableOrDisable]: enableOrDisableArr,
       minDate: minDate,
       maxDate: maxDate,
+      parseDate: parseDate,
       plugins: [
         datePickerType === 'range'
           ? carbonFlatpickrRangePlugin({
@@ -997,6 +1043,11 @@ DatePicker.propTypes = {
    * `(dates: Date[], dStr: string, fp: Instance, data?: any):void;`
    */
   onOpen: PropTypes.func,
+
+  /**
+   * flatpickr prop passthrough. Controls how dates are parsed.
+   */
+  parseDate: PropTypes.func,
 
   /**
    * whether the DatePicker is to be readOnly
