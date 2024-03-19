@@ -2251,6 +2251,9 @@ Map {
         "iconDescription": Object {
           "type": "string",
         },
+        "menuOptionsClass": Object {
+          "type": "string",
+        },
         "renderIcon": Object {
           "args": Array [
             Array [
@@ -8051,6 +8054,9 @@ Map {
       "iconDescription": Object {
         "type": "string",
       },
+      "menuOptionsClass": Object {
+        "type": "string",
+      },
       "renderIcon": Object {
         "args": Array [
           Array [
@@ -10498,20 +10504,10 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "dotType": Object {
-        "args": Array [
-          Array [
-            "default",
-            "hollow",
-          ],
-        ],
-        "type": "oneOf",
-      },
       "kind": Object {
         "args": Array [
           Array [
             "default",
-            "hollow",
             "inline",
           ],
         ],

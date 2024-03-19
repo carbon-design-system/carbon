@@ -54,12 +54,6 @@ describe('Slug', () => {
       );
     });
 
-    it('should respect dotType prop', () => {
-      const { container } = render(<Slug kind="inline" dotType="hollow" />);
-
-      expect(container.firstChild).toHaveClass(`${prefix}--slug--hollow`);
-    });
-
     it('should respect kind prop', () => {
       render(<Slug kind="inline" />);
 
