@@ -48,7 +48,7 @@ export interface RadioTileProps {
   id?: string;
 
   /**
-   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * `true` to use the light version. For use on `$layer-01` backgrounds only.
    * Don't use this to make tile background color the same as the container background color.
    *
    * @deprecated This prop is no longer needed and has been deprecated in v11 in favor of the new Layer component. It will be removed in the next major release.
@@ -189,13 +189,13 @@ RadioTile.propTypes = {
   id: PropTypes.string,
 
   /**
-   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * `true` to use the light version. For use on `$layer-01` backgrounds only.
    * Don't use this to make tile background color same as container background color.
    */
   light: deprecate(
     PropTypes.bool,
     'The `light` prop for `RadioTile` is no longer needed and has ' +
-      'been deprecated in v11 in favor of the new `Layer` component. It will be moved in the next major release.'
+      'been deprecated in v11 in favor of the new `Layer` component. It will be removed in the next major release.'
   ),
 
   /**
