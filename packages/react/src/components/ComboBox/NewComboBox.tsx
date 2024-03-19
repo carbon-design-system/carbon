@@ -463,6 +463,9 @@ const ComboBox = forwardRef(
       onInputValueChange({ inputValue }) {
         setHighlightedIndex(indexToHighlight(inputValue));
       },
+      isItemDisabled(item, _index) {
+        return (item as any).disabled;
+      },
 
       // onStateChange: (...args) => {
       //   handleOnStateChange(...args);
@@ -515,6 +518,7 @@ const ComboBox = forwardRef(
     const readOnlyEventHandlers = readOnly
       ? {
           onKeyDown: (evt: KeyboardEvent<HTMLInputElement>) => {
+            console.log('key', evt.key);
             // This prevents the select from opening for the above keys
             if (evt.key !== 'Tab') {
               evt.preventDefault();
@@ -568,7 +572,7 @@ const ComboBox = forwardRef(
                     match(event, keys.Enter) &&
                     (!inputValue || allowCustomValue)
                   ) {
-                    toggleMenu();
+                    // toggleMenu();
 
                     // Since `onChange` does not normally fire when the menu is closed, we should
                     // manually fire it when `allowCustomValue` is provided, the menu is closing,
@@ -674,6 +678,7 @@ const ComboBox = forwardRef(
                         isActive={selectedItem === item}
                         isHighlighted={highlightedIndex === index}
                         title={title}
+                        disabled={itemProps['aria-disabled']}
                         {...getItemProps({ item, index })}>
                         {ItemToElement ? (
                           <ItemToElement key={itemProps.id} {...item} />
