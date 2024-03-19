@@ -15,49 +15,42 @@ $sizes: (
     width: convert.to-rem(16px),
     font-size: convert.to-rem(9px),
     line-height: convert.to-rem(12px),
-    background: $slug-background,
   ),
   2xs: (
     height: convert.to-rem(20px),
     width: convert.to-rem(20px),
     font-size: convert.to-rem(12px),
     line-height: convert.to-rem(16px),
-    background: $slug-background,
   ),
   xs: (
     height: convert.to-rem(24px),
     width: convert.to-rem(24px),
     font-size: convert.to-rem(12px),
     line-height: convert.to-rem(16px),
-    background: $slug-gradient,
   ),
   sm: (
     height: convert.to-rem(32px),
     width: convert.to-rem(32px),
     font-size: convert.to-rem(16px),
     line-height: convert.to-rem(21px),
-    background: $slug-gradient,
   ),
   md: (
     height: convert.to-rem(40px),
     width: convert.to-rem(40px),
     font-size: convert.to-rem(16px),
     line-height: convert.to-rem(21px),
-    background: $slug-gradient,
   ),
   lg: (
     height: convert.to-rem(48px),
     width: convert.to-rem(48px),
     font-size: convert.to-rem(16px),
     line-height: convert.to-rem(21px),
-    background: $slug-gradient,
   ),
   xl: (
     height: convert.to-rem(64px),
     width: convert.to-rem(64px),
     font-size: convert.to-rem(20px),
     line-height: convert.to-rem(26px),
-    background: $slug-gradient,
   ),
 );
 
@@ -78,11 +71,15 @@ $sizes: (
     display: flex;
     align-items: center;
     justify-content: center;
-    color: $text-inverse;
+    border: 1px solid $border-inverse;
+    background: transparent;
+    color: $text-primary;
     font-weight: 600;
+    outline: none;
     transition: color $duration-fast-01 motion(entrance, productive),
       border-color $duration-fast-01 motion(entrance, productive),
-      box-shadow $duration-fast-01 motion(entrance, productive);
+      box-shadow $duration-fast-01 motion(entrance, productive),
+      background $duration-fast-01 motion(entrance, productive);
 
     @each $group, $size in $sizes {
       // Create a class for each size slug
@@ -96,91 +93,38 @@ $sizes: (
   }
 
   .#{$prefix}--slug .#{$prefix}--slug__button:focus {
-    box-shadow: inset 0 0 0 2px $focus, inset 0 0 0 3px $focus-inset;
-    outline: none;
+    border: 1px solid $focus;
+    box-shadow: inset 0 0 0 1px $focus;
+  }
+
+  .#{$prefix}--slug
+    .#{$prefix}--slug__button.#{$prefix}--slug__button--mini:focus,
+  .#{$prefix}--slug
+    .#{$prefix}--slug__button.#{$prefix}--slug__button--2xs:focus {
+    box-shadow: none;
+  }
+
+  .#{$prefix}--slug .#{$prefix}--slug__button:hover {
+    background: $border-inverse;
+    color: $text-inverse;
+  }
+
+  .#{$prefix}--slug .#{$prefix}--slug__button:hover:active {
+    background: $border-inverse;
+    box-shadow: inset 0 0 0 1px $focus, inset 0 0 0 2px $focus-inset;
+    color: $text-inverse;
+  }
+
+  .#{$prefix}--slug
+    .#{$prefix}--slug__button.#{$prefix}--slug__button--mini:hover:active,
+  .#{$prefix}--slug
+    .#{$prefix}--slug__button.#{$prefix}--slug__button--2xs:hover:active {
+    box-shadow: inset 0 0 0 1px $focus-inset;
   }
 
   .#{$prefix}--slug__text {
     position: relative;
     z-index: 1;
-  }
-
-  // pseudo element to animate the hover transition
-  .#{$prefix}--slug__button::before {
-    position: absolute;
-    background: $slug-gradient-hover;
-    block-size: 100%;
-    content: '';
-    inline-size: 100%;
-    opacity: 0;
-    transition: opacity $duration-fast-01 motion(entrance, productive);
-  }
-
-  .#{$prefix}--slug__button.#{$prefix}--slug__button--mini::after,
-  .#{$prefix}--slug__button.#{$prefix}--slug__button--2xs::after {
-    position: absolute;
-    block-size: convert.to-rem(24px);
-    content: '';
-    inline-size: convert.to-rem(24px);
-    opacity: 0;
-  }
-
-  .#{$prefix}--slug__button:hover::before {
-    opacity: 1;
-  }
-
-  // Focus styles
-  .#{$prefix}--slug .#{$prefix}--slug__button:focus::before {
-    block-size: calc(100% - 6px);
-    inline-size: calc(100% - 6px);
-  }
-
-  .#{$prefix}--slug__button.#{$prefix}--slug__button--mini::before,
-  .#{$prefix}--slug__button.#{$prefix}--slug__button--2xs::before {
-    background: $slug-background-hover;
-  }
-
-  .#{$prefix}--slug__button.#{$prefix}--slug__button--mini:focus,
-  .#{$prefix}--slug__button.#{$prefix}--slug__button--2xs:focus {
-    box-shadow: inset 0 0 0 1px $focus, inset 0 0 0 2px $focus-inset;
-  }
-
-  .#{$prefix}--slug__button.#{$prefix}--slug__button--mini:focus::before,
-  .#{$prefix}--slug__button.#{$prefix}--slug__button--2xs:focus::before {
-    block-size: calc(100% - 4px);
-    inline-size: calc(100% - 4px);
-  }
-
-  // Hollow slug
-  // Only allow mini, 2xs, and xs sizes
-  .#{$prefix}--slug__button--hollow.#{$prefix}--slug__button--sm,
-  .#{$prefix}--slug__button--hollow.#{$prefix}--slug__button--md,
-  .#{$prefix}--slug__button--hollow.#{$prefix}--slug__button--lg,
-  .#{$prefix}--slug__button--hollow.#{$prefix}--slug__button--xl {
-    block-size: convert.to-rem(24px);
-    font-size: convert.to-rem(12px);
-    inline-size: convert.to-rem(24px);
-    line-height: convert.to-rem(16px);
-  }
-
-  .#{$prefix}--slug__button--hollow::before {
-    display: none;
-  }
-
-  .#{$prefix}--slug .#{$prefix}--slug__button--hollow {
-    border: 1px solid $border-inverse;
-    background: transparent;
-    color: $text-primary;
-  }
-
-  .#{$prefix}--slug__button--hollow:hover {
-    border-color: $slug-hollow-hover;
-    color: $slug-hollow-hover;
-  }
-
-  .#{$prefix}--slug__button--hollow:focus {
-    border-color: $focus;
-    box-shadow: inset 0 0 0 1px $focus;
   }
 
   // Inline slug
@@ -205,8 +149,11 @@ $sizes: (
     box-shadow: none;
   }
 
-  .#{$prefix}--slug .#{$prefix}--slug__button--inline:hover {
+  .#{$prefix}--slug .#{$prefix}--slug__button--inline:hover,
+  .#{$prefix}--slug .#{$prefix}--slug__button--inline:hover:active {
     border-color: $icon-secondary;
+    background: transparent;
+    box-shadow: none;
     color: $text-secondary;
   }
 
@@ -220,18 +167,13 @@ $sizes: (
     background: $icon-secondary;
   }
 
-  .#{$prefix}--slug--hollow
-    .#{$prefix}--slug__button--inline:hover
-    .#{$prefix}--slug__text::before {
-    background: transparent;
-    box-shadow: inset 0 0 0 1px $icon-secondary;
-  }
-
   .#{$prefix}--slug__button--inline .#{$prefix}--slug__text {
     padding-inline-start: convert.to-rem(8px);
   }
 
   .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--lg
+    .#{$prefix}--slug__text,
+  .#{$prefix}--slug__button--inline.#{$prefix}--slug__button--xl
     .#{$prefix}--slug__text {
     padding-inline-start: convert.to-rem(12px);
   }
@@ -251,27 +193,8 @@ $sizes: (
       box-shadow $duration-fast-01 motion(entrance, productive);
   }
 
-  // Inline slug hollow dot
-  .#{$prefix}--slug--hollow .#{$prefix}--slug__text::before {
-    background: transparent;
-    block-size: convert.to-rem(6px);
-    box-shadow: inset 0 0 0 1px $icon-primary;
-    inline-size: convert.to-rem(6px);
-  }
-
-  .#{$prefix}--slug--hollow
-    .#{$prefix}--slug__button--sm
-    .#{$prefix}--slug__text,
-  .#{$prefix}--slug--hollow
-    .#{$prefix}--slug__button--md
-    .#{$prefix}--slug__text {
-    padding-inline-start: convert.to-rem(9px);
-  }
-
   .#{$prefix}--slug__button--lg .#{$prefix}--slug__text::before,
-  .#{$prefix}--slug--hollow
-    .#{$prefix}--slug__button--lg
-    .#{$prefix}--slug__text::before {
+  .#{$prefix}--slug__button--xl .#{$prefix}--slug__text::before {
     block-size: convert.to-rem(8px);
     inline-size: convert.to-rem(8px);
   }
@@ -316,31 +239,27 @@ $sizes: (
     font-size: convert.to-rem(14px);
   }
 
-  .#{$prefix}--slug .#{$prefix}--slug__button--inline-with-content:focus {
+  .#{$prefix}--slug .#{$prefix}--slug__button--inline-with-content:focus,
+  .#{$prefix}--slug .#{$prefix}--slug__button--inline-with-content:hover:focus {
     box-shadow: inset 0 0 0 1px $focus;
   }
 
-  // Default callout styles
-  .#{$prefix}--slug.#{$prefix}--slug--hollow .#{$prefix}--toggletip-content {
-    row-gap: 0;
-  }
-
   // Slug callout styles
-  .#{$prefix}--slug.#{$prefix}--slug--enabled .#{$prefix}--slug-content {
+  .#{$prefix}--slug .#{$prefix}--slug-content {
     @include ai-popover-gradient();
 
     border: 1px solid transparent;
     border-radius: convert.to-rem(8px);
     // Need to make tokens
     box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
-      -40px 30px 100px -25px $ai-popover-shadow-outer-01,
-      -60px 80px 60px -45px $ai-popover-shadow-outer-02;
+      -40px 44px 60px -24px $ai-popover-shadow-outer-01,
+      -56px 64px 64px -24px $ai-popover-shadow-outer-02;
     color: $text-primary;
     min-inline-size: convert.to-rem(280px);
   }
 
   // Slug callout caret styles
-  .#{$prefix}--slug.#{$prefix}--slug--enabled
+  .#{$prefix}--slug
     > .#{$prefix}--toggletip
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret {
@@ -349,7 +268,7 @@ $sizes: (
   }
 
   // Caret pseudo element base styles
-  .#{$prefix}--slug.#{$prefix}--slug--enabled
+  .#{$prefix}--slug
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--top,
       .#{$prefix}--popover--top-right,
@@ -377,7 +296,7 @@ $sizes: (
     transform: rotate(45deg);
   }
 
-  .#{$prefix}--slug.#{$prefix}--slug--enabled
+  .#{$prefix}--slug
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--top,
       .#{$prefix}--popover--top-right,
@@ -403,7 +322,7 @@ $sizes: (
   }
 
   // Top
-  .#{$prefix}--slug.#{$prefix}--slug--enabled
+  .#{$prefix}--slug
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--top,
       .#{$prefix}--popover--top-right,
@@ -427,7 +346,7 @@ $sizes: (
     }
   }
 
-  .#{$prefix}--slug.#{$prefix}--slug--enabled
+  .#{$prefix}--slug
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--top,
       .#{$prefix}--popover--top-right,
@@ -440,7 +359,7 @@ $sizes: (
   }
 
   // Right
-  .#{$prefix}--slug.#{$prefix}--slug--enabled
+  .#{$prefix}--slug
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--right,
       .#{$prefix}--popover--right-bottom,
@@ -462,7 +381,7 @@ $sizes: (
   }
 
   // Bottom
-  .#{$prefix}--slug.#{$prefix}--slug--enabled
+  .#{$prefix}--slug
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--bottom,
       .#{$prefix}--popover--bottom-left,
@@ -486,7 +405,7 @@ $sizes: (
   }
 
   // Left
-  .#{$prefix}--slug.#{$prefix}--slug--enabled
+  .#{$prefix}--slug
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--left,
       .#{$prefix}--popover--left-bottom,
@@ -508,7 +427,7 @@ $sizes: (
   }
 
   // Override for specific alignments
-  .#{$prefix}--slug.#{$prefix}--slug--enabled
+  .#{$prefix}--slug
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--left-bottom,
       .#{$prefix}--popover--right-bottom
@@ -519,7 +438,7 @@ $sizes: (
   }
 
   // Change caret color / border when it is near the bottom of the callout
-  .#{$prefix}--slug.#{$prefix}--slug--enabled
+  .#{$prefix}--slug
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--left-bottom,
       .#{$prefix}--popover--right-bottom,
@@ -536,7 +455,7 @@ $sizes: (
   }
 
   // Adjust background if actions are present
-  .#{$prefix}--slug.#{$prefix}--slug--enabled
+  .#{$prefix}--slug
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--left-bottom,
       .#{$prefix}--popover--right-bottom,
@@ -552,7 +471,7 @@ $sizes: (
   }
 
   // Change the caret border when it is near the middle of the callout
-  .#{$prefix}--slug.#{$prefix}--slug--enabled
+  .#{$prefix}--slug
     > .#{$prefix}--toggletip:is(
       .#{$prefix}--popover--left,
       .#{$prefix}--popover--right
@@ -564,20 +483,18 @@ $sizes: (
     }
   }
 
-  .#{$prefix}--slug.#{$prefix}--slug--enabled .#{$prefix}--toggletip-content {
+  .#{$prefix}--slug .#{$prefix}--toggletip-content {
     // This sets the max size to the size of the action bar with 3 buttons
     padding-block-end: convert.to-rem(80px);
     padding-block-start: convert.to-rem(24px);
     padding-inline: convert.to-rem(24px);
   }
 
-  .#{$prefix}--slug.#{$prefix}--slug--enabled
-    .#{$prefix}--slug-content
-    .#{$prefix}--toggletip-content {
+  .#{$prefix}--slug .#{$prefix}--slug-content .#{$prefix}--toggletip-content {
     max-inline-size: convert.to-rem(320px);
   }
 
-  .#{$prefix}--slug.#{$prefix}--slug--enabled .#{$prefix}--slug-actions {
+  .#{$prefix}--slug .#{$prefix}--slug-actions {
     position: absolute;
     justify-content: flex-end;
     backdrop-filter: blur(85px);
@@ -590,16 +507,12 @@ $sizes: (
     inset-inline-end: 0;
   }
 
-  .#{$prefix}--slug.#{$prefix}--slug--enabled
-    .#{$prefix}--slug-actions
-    .#{$prefix}--btn:focus {
+  .#{$prefix}--slug .#{$prefix}--slug-actions .#{$prefix}--btn:focus {
     border-color: $focus;
     box-shadow: inset 0 0 0 1px $focus, inset 0 0 0 2px $background;
   }
 
-  .#{$prefix}--slug.#{$prefix}--slug--enabled
-    .#{$prefix}--slug-actions
-    .#{$prefix}--btn--primary {
+  .#{$prefix}--slug .#{$prefix}--slug-actions .#{$prefix}--btn--primary {
     order: 1;
     border-end-end-radius: convert.to-rem(7px);
   }
