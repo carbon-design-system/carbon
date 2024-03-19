@@ -631,7 +631,7 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--right-top:not(.#{$prefix}--popover--auto-align)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  \.#{$prefix}--popover--right-start:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--right-start:not(.#{$prefix}--popover--auto-align)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--right-bottom:not(.#{$prefix}--popover--auto-align)
