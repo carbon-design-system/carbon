@@ -121,51 +121,6 @@ const TileGroup = (props) => {
     }
   };
 
-  // const handleChange = useCallback((newSelection, value, evt) => {
-  //   if (newSelection !== selected) {
-  //     setSelected(newSelection);
-  //     if (onChange) {
-  //       onChange(value, name, evt);
-  //     }
-  //   }
-  // }, [selected, setSelected, onChange, name]);
-
-  // const getRadioTilesWithWrappers = useMemo(() => {
-  //   const traverseAndModifyChildren = (children, depth = 0) => {
-  //     if (depth > 3) {
-  //       return children
-  //     } // Limiting depth to avoid deep recursion
-
-  //     return React.Children.map(children, (child) => {
-  //       if (React.isValidElement(child) && child.type === getDisplayName(RadioTile)) {
-  //         const { value, ...otherProps } = child.props;
-  //         return (
-  //           <RadioTile
-  //             {...otherProps}
-  //             name={name}
-  //             key={value}
-  //             value={value}
-  //             onChange={handleChange}
-  //             checked={value === selected}
-  //           />
-  //         );
-  //       } else if (child.props && child.props.children) {
-  //         return React.cloneElement(child, {
-  //           ...child.props,
-  //           children: traverseAndModifyChildren(child.props.children, depth + 1),
-  //         });
-  //       } else {
-  //         return child;
-  //       }
-  //     });
-  //   };
-
-  //   return (
-  //     <>
-  //       {traverseAndModifyChildren(children)}
-  //     </>
-  //   );
-  // }, [children, name, handleChange, selected]);
   const renderLegend = (legend) => {
     if (legend) {
       return <legend className={`${prefix}--label`}>{legend}</legend>;
