@@ -9700,6 +9700,42 @@ Map {
       },
     },
   },
+  "unstable__AiSkeletonIcon" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+    },
+  },
+  "unstable__AiSkeletonPlaceholder" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "unstable__AiSkeletonText" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "heading": Object {
+        "type": "bool",
+      },
+      "lineCount": Object {
+        "type": "number",
+      },
+      "paragraph": Object {
+        "type": "bool",
+      },
+      "width": Object {
+        "type": "string",
+      },
+    },
+  },
   "unstable__ChatButton" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
