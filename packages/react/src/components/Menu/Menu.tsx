@@ -24,7 +24,6 @@ import { keys, match } from '../../internal/keyboard';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 import { warning } from '../../internal/warning.js';
-import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 import { MenuContext, menuReducer } from './MenuContext';
 import { useLayoutDirection } from '../LayoutDirection';
@@ -113,7 +112,9 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     onOpen,
     open,
     size = 'sm',
-    target,
+    // TODO: #16004
+    // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
+    target = document.body,
     x = 0,
     y = 0,
     ...rest
@@ -121,13 +122,6 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   forwardRef
 ) {
   const prefix = usePrefix();
-
-  const [newTarget, setNewTarget] = useState(target);
-  useIsomorphicEffect(() => {
-    if (!target) {
-      setNewTarget(document.body);
-    }
-  }, [target]);
 
   const focusReturn = useRef<HTMLElement | null>(null);
 
@@ -443,9 +437,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     </MenuContext.Provider>
   );
 
-  return isRoot
-    ? (open && createPortal(rendered, newTarget)) || null
-    : rendered;
+  return isRoot ? (open && createPortal(rendered, target)) || null : rendered;
 });
 
 Menu.propTypes = {
