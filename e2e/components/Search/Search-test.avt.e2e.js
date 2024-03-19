@@ -46,7 +46,7 @@ test.describe('@avt Search', () => {
       name: 'Clear search input',
     });
     await expect(search).toBeVisible();
-    await expect(clearButton).not.toBeVisible();
+    await expect(clearButton).toBeHidden();
 
     // Tab to the Search
     await page.keyboard.press('Tab');
@@ -82,15 +82,15 @@ test.describe('@avt Search', () => {
       name: 'Clear search input',
     });
     const searchButton = page.getByRole('button');
-    await expect(search).not.toBeVisible();
-    await expect(clearButton).not.toBeVisible();
+    await expect(search).toBeHidden();
+    await expect(clearButton).toBeHidden();
     await expect(searchButton).toBeVisible();
     await expect(searchButton).not.toHaveAttribute('aria-expanded', 'true');
 
     // Tab to the ExpandableSearch, should only open on Enter
     await page.keyboard.press('Tab');
     await expect(searchButton).toBeFocused();
-    await expect(search).not.toBeVisible();
+    await expect(search).toBeHidden();
     // Enter search value
     await page.keyboard.press('Enter');
     await expect(search).toBeVisible();
@@ -113,6 +113,6 @@ test.describe('@avt Search', () => {
     // Close ExpandableSearch with ESC
     await page.keyboard.press('Escape');
     await expect(searchButton).not.toHaveAttribute('aria-expanded', 'true');
-    await expect(search).not.toBeVisible();
+    await expect(search).toBeHidden();
   });
 });

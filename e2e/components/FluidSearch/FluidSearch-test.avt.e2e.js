@@ -46,7 +46,7 @@ test.describe('@avt FluidSearch', () => {
       name: 'Clear search input',
     });
     await expect(search).toBeVisible();
-    await expect(clearButton).not.toBeVisible();
+    await expect(clearButton).toBeHidden();
 
     // Tab to the Search
     await page.keyboard.press('Tab');

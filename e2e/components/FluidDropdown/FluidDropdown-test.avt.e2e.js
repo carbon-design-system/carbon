@@ -67,7 +67,7 @@ test.describe('@avt FluidDropdown', () => {
     await expect(menu).toBeVisible();
     // Close with Escape, retain focus, and open with Enter
     await page.keyboard.press('Escape');
-    await expect(menu).not.toBeVisible();
+    await expect(menu).toBeHidden();
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Enter');
     // Should focus on selected item by default
