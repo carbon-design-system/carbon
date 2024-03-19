@@ -17,7 +17,7 @@ jobs:
   dedupe:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
+      - uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 #v4.1.2
       - name: Use Node.js 20.x
         uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 #v4.0.2
         with:
@@ -28,7 +28,7 @@ jobs:
   format:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
+      - uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 #v4.1.2
       - name: Use Node.js 20.x
         uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 #v4.0.2
         with:
@@ -41,7 +41,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
+      - uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 #v4.1.2
       - name: Use Node.js 20.x
         uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 #v4.0.2
         with:
@@ -56,12 +56,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
+      - uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 #v4.1.2
       - name: Use Node.js 20.x
         uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 #v4.0.2
         with:
           node-version: '20.x'
-      - uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 #v4.0.0
+      - uses: actions/cache@ab5e6d0c87105b4c9c2047343972218f562e4319 #v4.0.1
         if: github.event_name != 'merge_group'
         id: cache
         with:
@@ -83,12 +83,12 @@ jobs:
     name: 'test:e2e'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
+      - uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 #v4.1.2
       - name: Use Node.js 20.x
         uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 #v4.0.2
         with:
           node-version: '20.x'
-      - uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 #v4.0.0
+      - uses: actions/cache@ab5e6d0c87105b4c9c2047343972218f562e4319 #v4.0.1
         if: github.event_name != 'merge_group'
         id: cache
         with:
@@ -98,7 +98,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock', 'packages/**/yarn.lock') }}
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
-      - uses: dorny/paths-filter@0bc4621a3135347011ad047f9ecf449bf72ce2bd #v3.0.0
+      - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
         id: filter
         with:
           filters: |
@@ -123,12 +123,12 @@ jobs:
         shard: [1, 2, 3, 4]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
+      - uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 #v4.1.2
       - name: Use Node.js 20.x
         uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 #v4.0.2
         with:
           node-version: '20.x'
-      - uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 #v4.0.0
+      - uses: actions/cache@ab5e6d0c87105b4c9c2047343972218f562e4319 #v4.0.1
         if: github.event_name != 'merge_group'
         id: cache
         with:
@@ -186,12 +186,12 @@ jobs:
         shard: [1, 2, 3, 4]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
+      - uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 #v4.1.2
       - name: Use Node.js 20.x
         uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 #v4.0.2
         with:
           node-version: '20.x'
-      - uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 #v4.0.0
+      - uses: actions/cache@ab5e6d0c87105b4c9c2047343972218f562e4319 #v4.0.1
         if: github.event_name != 'merge_group'
         id: cache
         with:

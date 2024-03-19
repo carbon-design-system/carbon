@@ -330,4 +330,32 @@
     .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty) {
     padding-inline-end: $spacing-12;
   }
+
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__selection {
+    inset-inline-end: convert.to-rem(41px);
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box--warning,
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--invalid[data-invalid] {
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__menu-icon)
+      .#{$prefix}--list-box__selection::before {
+      position: absolute;
+      background-color: transparent;
+      block-size: convert.to-rem(16px);
+      content: '';
+      inline-size: convert.to-rem(1px);
+      margin-inline-end: convert.to-rem(33px);
+    }
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid:has(.#{$prefix}--multi-select)
+    .#{$prefix}--list-box__menu-icon {
+    inset-inline-end: calc($spacing-04);
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid:has(.#{$prefix}--dropdown)
+    .#{$prefix}--list-box__menu-icon {
+    inset-inline-end: calc($spacing-04);
+  }
 }

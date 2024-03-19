@@ -2251,6 +2251,9 @@ Map {
         "iconDescription": Object {
           "type": "string",
         },
+        "menuOptionsClass": Object {
+          "type": "string",
+        },
         "renderIcon": Object {
           "args": Array [
             Array [
@@ -2651,6 +2654,9 @@ Map {
       "onOpen": Object {
         "type": "func",
       },
+      "parseDate": Object {
+        "type": "func",
+      },
       "readOnly": Object {
         "args": Array [
           Array [
@@ -2989,6 +2995,9 @@ Map {
     "propTypes": Object {
       "className": Object {
         "type": "string",
+      },
+      "hideLabel": Object {
+        "type": "bool",
       },
       "size": Object {
         "args": Array [
@@ -5825,6 +5834,7 @@ Map {
             Object {
               "args": Array [
                 Object {
+                  "isRequired": true,
                   "type": "number",
                 },
               ],
@@ -5835,12 +5845,17 @@ Map {
                 Object {
                   "args": Array [
                     Object {
-                      "text": undefined,
+                      "text": Object {
+                        "isRequired": true,
+                        "type": "string",
+                      },
                       "value": Object {
+                        "isRequired": true,
                         "type": "number",
                       },
                     },
                   ],
+                  "isRequired": true,
                   "type": "shape",
                 },
               ],
@@ -7239,7 +7254,7 @@ Map {
         "type": "string",
       },
       "subtitle": Object {
-        "type": "string",
+        "type": "node",
       },
       "title": Object {
         "type": "string",
@@ -8039,6 +8054,9 @@ Map {
       "iconDescription": Object {
         "type": "string",
       },
+      "menuOptionsClass": Object {
+        "type": "string",
+      },
       "renderIcon": Object {
         "args": Array [
           Array [
@@ -8176,15 +8194,11 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
-      "filter": Object {
-        "type": "bool",
-      },
+      "filter": [Function],
       "id": Object {
         "type": "string",
       },
-      "onClose": Object {
-        "type": "func",
-      },
+      "onClose": [Function],
       "renderIcon": Object {
         "args": Array [
           Array [
@@ -8203,6 +8217,7 @@ Map {
           Array [
             "sm",
             "md",
+            "lg",
           ],
         ],
         "type": "oneOf",
@@ -8210,9 +8225,7 @@ Map {
       "slug": Object {
         "type": "node",
       },
-      "title": Object {
-        "type": "string",
-      },
+      "title": [Function],
       "type": Object {
         "args": Array [
           Array [
@@ -9423,20 +9436,6 @@ Map {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
   },
-  "types" => Object {
-    "0": "red",
-    "1": "magenta",
-    "10": "high-contrast",
-    "11": "outline",
-    "2": "purple",
-    "3": "blue",
-    "4": "cyan",
-    "5": "teal",
-    "6": "green",
-    "7": "gray",
-    "8": "cool-gray",
-    "9": "warm-gray",
-  },
   "unstable_FeatureFlags" => Object {
     "propTypes": Object {
       "children": Object {
@@ -10469,20 +10468,10 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "dotType": Object {
-        "args": Array [
-          Array [
-            "default",
-            "hollow",
-          ],
-        ],
-        "type": "oneOf",
-      },
       "kind": Object {
         "args": Array [
           Array [
             "default",
-            "hollow",
             "inline",
           ],
         ],
