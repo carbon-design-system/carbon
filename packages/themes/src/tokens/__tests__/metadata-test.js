@@ -1030,7 +1030,7 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
-          "name": "chat-bubble-agent-border",
+          "name": "chat-bubble-border",
           "type": "color",
         },
         Object {
