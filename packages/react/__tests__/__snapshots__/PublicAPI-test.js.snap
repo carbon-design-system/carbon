@@ -7345,6 +7345,9 @@ Map {
       "onKeyDown": Object {
         "type": "func",
       },
+      "selection": Object {
+        "type": "bool",
+      },
     },
   },
   "StructuredListSkeleton" => Object {
