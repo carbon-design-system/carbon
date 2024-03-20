@@ -278,9 +278,9 @@ export function StructuredListRow(props: StructuredListRowProps) {
     className
   );
   const useClickOutside = (handler) => {
-    const ref = useRef(null);
+    const ref = useRef<HTMLDivElement | null>(null);
     const handleClick = (event) => {
-      if (ref?.current && !ref?.current?.contains(event?.target)) {
+      if (ref?.current && !ref?.current?.contains(event?.target as Node)) {
         handler();
       }
     };
