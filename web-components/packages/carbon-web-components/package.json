@@ -94,7 +94,7 @@
     "@babel/template": "~7.12.0",
     "@babel/traverse": "~7.23.7",
     "@carbon/icon-helpers": "10.47.0",
-    "@carbon/icons": "10.48.3",
+    "@carbon/icons": "10.48.4",
     "@open-wc/semantic-dom-diff": "~0.18.0",
     "@percy-io/in-percy": "^0.1.11",
     "@percy/cli": "^1.27.4",
