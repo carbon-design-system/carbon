@@ -31,7 +31,7 @@ export default {
 
 export const Inline = () => (
   <CodeSnippet type="inline" feedback="Copied to clipboard">
-    {'node -v'}
+    node -v
   </CodeSnippet>
 );
 
