@@ -175,7 +175,7 @@ function CodeSnippet({
     if (hideCopyButton) {
       return (
         <span className={codeSnippetClasses}>
-          <code id={uid} ref={innerCodeRef}>
+          <code aria-live="polite" id={uid} ref={innerCodeRef}>
             {children}
           </code>
         </span>
