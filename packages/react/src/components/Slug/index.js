@@ -201,7 +201,7 @@ Slug.propTypes = {
   ]),
 
   /**
-   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   * Will auto-align the popover. This prop is currently experimental and is subject to future changes.
    */
   autoAlign: PropTypes.bool,
 

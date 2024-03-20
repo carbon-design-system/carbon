@@ -17,7 +17,7 @@ test.describe('Popover', () => {
       test('Popover - auto align @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Popover',
-          id: 'components-popover--auto-align',
+          id: 'components-popover--experimental-auto-align',
           theme,
         });
       });
