@@ -1398,6 +1398,7 @@
         "code"
       ]
     },
+    {
       "login": "mattborghi",
       "name": "Matias Borghi",
       "avatar_url": "https://avatars.githubusercontent.com/u/11933424?v=4",
@@ -1448,6 +1449,15 @@
       "name": "Anjana M R",
       "avatar_url": "https://avatars.githubusercontent.com/u/91003483?v=4",
       "profile": "https://github.com/mranjana",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "FFahrenheit",
+      "name": "Iván L. Murillo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/21372626?v=4",
+      "profile": "https://ffahrenheit.github.io/CVLayout",
       "contributions": [
         "code"
       ]

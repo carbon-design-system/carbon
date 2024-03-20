@@ -38,6 +38,10 @@
   .#{$prefix}--data-table-content {
     display: block;
     overflow-x: auto;
+
+    &:has(.#{$prefix}--popover-container) {
+      overflow-x: visible;
+    }
   }
 
   .#{$prefix}--data-table-content:focus {
