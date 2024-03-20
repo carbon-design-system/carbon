@@ -126,7 +126,7 @@ interface OnChangeData<ItemType> {
 type ItemToStringHandler<ItemType> = (item: ItemType | null) => string;
 // interface selectedItemType {
 //   text: string;
-// }
+// // }
 export interface ComboBoxProps<ItemType>
   extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes> {
   /**
