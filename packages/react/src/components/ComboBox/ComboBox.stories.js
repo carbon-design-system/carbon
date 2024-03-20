@@ -155,6 +155,9 @@ export const Playground = (args) => (
       titleText="ComboBox title"
       helperText="Combobox helper text"
       {...args}
+      onChange={(selectedItem) => {
+        console.log('changed', selectedItem);
+      }}
     />
     {/* 
     <NewComboBox 
@@ -224,7 +227,7 @@ Playground.argTypes = {
   onChange: {
     action: 'changed',
   },
-  onClick: {
+  onToggleClick: {
     action: 'clicked',
   },
   onInputChange: {
@@ -232,11 +235,11 @@ Playground.argTypes = {
       disable: true,
     },
   },
-  onToggleClick: {
-    table: {
-      disable: true,
-    },
-  },
+  // onToggleClick: {
+  //   table: {
+  //     disable: true,
+  //   },
+  // },
   selectedItem: {
     table: {
       disable: true,

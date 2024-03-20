@@ -124,7 +124,9 @@ interface OnChangeData<ItemType> {
 }
 
 type ItemToStringHandler<ItemType> = (item: ItemType | null) => string;
-
+// interface selectedItemType {
+//   text: string;
+// }
 export interface ComboBoxProps<ItemType>
   extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes> {
   /**
@@ -311,7 +313,7 @@ const ComboBox = forwardRef(
       className: containerClassName,
       direction = 'bottom',
       disabled = false,
-      // downshiftProps,
+      downshiftProps,
       helperText,
       // id,
       // initialSelectedItem,
@@ -338,6 +340,9 @@ const ComboBox = forwardRef(
       slug,
       ...rest
     } = props;
+    // console.log('onChange', onChange({}))
+
+    // onChange({})
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const [isFocused, setIsFocused] = useState(false);
@@ -441,13 +446,10 @@ const ComboBox = forwardRef(
       },
     ]);
 
+    // statereducer shouldn't be used to handle events and should only return the state we want to set.
     const stateReducer = React.useCallback(
       (state, actionAndChanges) => {
         const { type, changes } = actionAndChanges;
-        // returning an uppercased version of the item string.
-        console.log({ type });
-        console.log({ changes });
-        console.log({ allowCustomValue });
         switch (type) {
           case useCombobox.stateChangeTypes.InputChange:
             return {
@@ -457,15 +459,12 @@ const ComboBox = forwardRef(
               inputValue: changes.inputValue,
             };
           case useCombobox.stateChangeTypes.InputBlur:
-            return {
-              ...changes,
-              // if we had an item selected.
-              ...(allowCustomValue &&
-                changes.selectedItem && {
-                  // we will show it uppercased.
-                  inputValue: changes.inputValue,
-                }),
-            };
+            // I will do it tomorrow - Preeti
+            return allowCustomValue
+              ? { ...changes, inputValue: '' }
+              : changes.selectedItem
+              ? { ...changes }
+              : { ...changes, inputValue: changes.inputValue };
           default:
             return changes; // otherwise business as usual.
         }
@@ -488,16 +487,18 @@ const ComboBox = forwardRef(
       toggleMenu,
       setHighlightedIndex,
     } = useCombobox({
-      // onInputValueChange: ({ inputValue }) => {
-      //   handleOnInputValueChange(inputValue);
-      // },
+      ...downshiftProps,
       stateReducer,
       items,
-      itemToString: (item) => {
+      itemToString: (item: ItemType) => {
         return itemToString(item);
       },
-      onInputValueChange({ inputValue }) {
+      onInputValueChange({ inputValue, selectedItem }) {
+        onChange({ selectedItem, inputValue });
         setHighlightedIndex(indexToHighlight(inputValue));
+      },
+      onSelectedItemChange({ selectedItem, inputValue }) {
+        onChange({ selectedItem, inputValue });
       },
       isItemDisabled(item, _index) {
         return (item as any).disabled;
@@ -750,7 +751,11 @@ const ComboBox = forwardRef(
 );
 
 ComboBox.displayName = 'ComboBox';
+
 ComboBox.propTypes = {
+  //  selectedItemType: {
+  //   text: PropTypes.string
+  // },
   /**
    * Specify whether or not the ComboBox should allow a value that is
    * not in the list to be entered in the input
