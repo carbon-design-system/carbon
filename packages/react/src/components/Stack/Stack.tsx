@@ -5,10 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { spacing } from '@carbon/layout';
+import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import { spacing } from '@carbon/layout';
+
 import { usePrefix } from '../../internal/usePrefix';
 
 /**
@@ -21,7 +22,7 @@ const SPACING_STEPS = Array.from({ length: spacing.length - 1 }).map(
   }
 );
 
-interface StackProps extends React.HTMLAttributes<HTMLElement> {
+export interface StackProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Provide a custom element type to render as the outermost element in
    * the Stack component. By default, this component will render a `div`.
