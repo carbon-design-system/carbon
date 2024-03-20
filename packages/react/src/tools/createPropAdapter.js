@@ -41,4 +41,27 @@ function createPropAdapter(spec) {
  */
 const mapDownshiftProps = createPropAdapter([[/^default/g, 'initial']]);
 
+export function mapPopoverAlignProp(align) {
+  switch (align) {
+    case 'top-left':
+      return 'top-start';
+    case 'top-right':
+      return 'top-end';
+    case 'bottom-left':
+      return 'bottom-start';
+    case 'bottom-right':
+      return 'bottom-end';
+    case 'left-bottom':
+      return 'left-end';
+    case 'left-top':
+      return 'left-start';
+    case 'right-bottom':
+      return 'right-end';
+    case 'right-top':
+      return 'right-start';
+    default:
+      return align;
+  }
+}
+
 export { mapDownshiftProps };
