@@ -428,12 +428,30 @@
     transform: translateY(-50%);
   }
 
-  .#{$prefix}--number__input-wrapper--slug
-    input[data-invalid]
-    ~ .#{$prefix}--slug,
-  .#{$prefix}--number__input-wrapper--slug.#{$prefix}--number__input-wrapper--warning
-    .#{$prefix}--slug {
+  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug::after,
+  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug::before {
+    position: absolute;
+    background-color: $border-subtle;
+    block-size: convert.to-rem(16px);
+    content: '';
+    inline-size: convert.to-rem(1px);
+  }
+
+  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug::before {
+    display: none;
+    inset-inline-start: convert.to-rem(-9px);
+  }
+  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug::after {
+    display: block;
+    inset-inline-end: convert.to-rem(-9px);
+  }
+  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--number__invalid {
     inset-inline-end: convert.to-rem(120px);
+  }
+
+  .#{$prefix}--number__input-wrapper--slug:has(.#{$prefix}--number__invalid)
+    .#{$prefix}--slug::before {
+    display: block;
   }
 
   .#{$prefix}--number
@@ -450,7 +468,7 @@
   .#{$prefix}--number__input-wrapper--slug input[type='number']:disabled {
     @include ai-gradient;
 
-    padding-inline-end: convert.to-rem(112px);
+    padding-inline-end: convert.to-rem(145px);
   }
 
   .#{$prefix}--number__input-wrapper--slug
