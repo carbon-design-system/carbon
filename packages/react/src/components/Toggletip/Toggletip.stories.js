@@ -115,6 +115,7 @@ export const ExperimentalAutoAlign = () => {
           position: 'absolute',
           top: '2500px',
           left: '2500px',
+          inlineSize: '8rem',
         }}>
         <ToggletipLabel>Toggletip label</ToggletipLabel>
         <Toggletip align="bottom" autoAlign defaultOpen>
