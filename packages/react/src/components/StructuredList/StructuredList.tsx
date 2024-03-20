@@ -7,6 +7,8 @@
 
 import React, {
   useState,
+  useRef,
+  useEffect,
   type HTMLAttributes,
   type ReactNode,
   type KeyboardEvent,
@@ -157,7 +159,6 @@ export function StructuredListHead(props) {
   const { children, className, ...other } = props;
   const prefix = usePrefix();
   const classes = classNames(`${prefix}--structured-list-thead`, className);
-
   return (
     <div role="rowgroup" className={classes} {...other}>
       {children}
@@ -271,12 +272,30 @@ export function StructuredListRow(props: StructuredListRowProps) {
     {
       [`${prefix}--structured-list-row--header-row`]: head,
       [`${prefix}--structured-list-row--focused-within`]:
-        selectedRow === id && hasFocusWithin && selection,
+        hasFocusWithin && (selectedRow === id || selectedRow === null),
       [`${prefix}--structured-list-row--selected`]: selectedRow === id,
     },
     className
   );
-
+  const useClickOutside = (handler) => {
+    const ref = useRef(null);
+    const handleClick = (event) => {
+      if (ref?.current && !ref?.current?.contains(event?.target)) {
+        handler();
+      }
+    };
+    useEffect(() => {
+      document.addEventListener('mousedown', handleClick);
+      return () => {
+        document.removeEventListener('mousedown', handleClick);
+      };
+    });
+    return ref;
+  };
+  //captures clicks outside the focused item
+  const wrapperRef = useClickOutside(() => {
+    setHasFocusWithin(false);
+  });
   return head ? (
     <div role="row" {...other} className={classes} aria-busy="true">
       {selection && <StructuredListCell head></StructuredListCell>}
@@ -289,6 +308,7 @@ export function StructuredListRow(props: StructuredListRowProps) {
       {...other}
       role="row"
       className={classes}
+      ref={wrapperRef}
       onClick={(event) => {
         setSelectedRow?.(id);
         setHasFocusWithin(true);
