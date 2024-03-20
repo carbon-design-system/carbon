@@ -487,6 +487,7 @@ class FloatingMenu extends React.Component {
           {/* Non-translatable: Focus management code makes this `<span>` not actually read by screen readers */}
           {!focusTrapWithoutSentinels && (
             <span
+              aria-hidden="true"
               ref={this.startSentinel}
               tabIndex="0"
               role="link"
@@ -498,6 +499,7 @@ class FloatingMenu extends React.Component {
           {/* Non-translatable: Focus management code makes this `<span>` not actually read by screen readers */}
           {!focusTrapWithoutSentinels && (
             <span
+              aria-hidden="true"
               ref={this.endSentinel}
               tabIndex="0"
               role="link"
