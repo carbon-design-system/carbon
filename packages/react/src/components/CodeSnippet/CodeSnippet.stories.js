@@ -69,6 +69,25 @@ export const Multiline = () => (
   </CodeSnippet>
 );
 
+export const Test = () => (
+  <CodeSnippet type="multi" feedback="Copied to clipboard">
+    {`  "scripts": {
+    "build": "lerna run build --stream --prefix --npm-client yarn",
+    "ci-check": "carbon-cli ci-check",
+    "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
+    "doctoc": "doctoc --title '## Table of Contents'",
+    "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
+    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
+    "lint": "eslint actions config codemods packages",
+    "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
+    "sync": "carbon-cli sync",
+    "test:e2e": "cross-env BABEL_ENV=test jest --testPathPattern=e2e",
+    "sync": "carbon-cli sync",
+  },
+  `}
+  </CodeSnippet>
+);
+
 export const Singleline = () => (
   <CodeSnippet type="single" feedback="Copied to clipboard">
     yarn add carbon-components@latest carbon-components-react@latest

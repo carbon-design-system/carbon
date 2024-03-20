@@ -36,42 +36,39 @@ export function useSelection({
   const [uncontrolledItems, setUncontrolledItems] =
     useState(initialSelectedItems);
   const isControlled = !!controlledItems;
-  const selectedItems = isControlled ? controlledItems : uncontrolledItems;
+  const [selectedItems, setSelectedItems] = useState(
+    isControlled ? controlledItems : uncontrolledItems
+  );
+  useEffect(() => {
+    callOnChangeHandler({
+      isControlled,
+      isMounted: isMounted.current,
+      onChangeHandlerControlled: savedOnChange.current,
+      onChangeHandlerUncontrolled: setUncontrolledItems,
+      selectedItems: selectedItems,
+    });
+  }, [isControlled, isMounted, selectedItems]);
+
   const onItemChange = useCallback(
     (item) => {
       if (disabled) {
         return;
       }
-
       let selectedIndex;
       selectedItems.forEach((selectedItem, index) => {
         if (isEqual(selectedItem, item)) {
           selectedIndex = index;
         }
       });
-      let newSelectedItems;
       if (selectedIndex === undefined) {
-        newSelectedItems = selectedItems.concat(item);
-        callOnChangeHandler({
-          isControlled,
-          isMounted: isMounted.current,
-          onChangeHandlerControlled: savedOnChange.current,
-          onChangeHandlerUncontrolled: setUncontrolledItems,
-          selectedItems: newSelectedItems,
-        });
+        setSelectedItems((selectedItems) => selectedItems.concat(item));
         return;
       }
-
-      newSelectedItems = removeAtIndex(selectedItems, selectedIndex);
-      callOnChangeHandler({
-        isControlled,
-        isMounted: isMounted.current,
-        onChangeHandlerControlled: savedOnChange.current,
-        onChangeHandlerUncontrolled: setUncontrolledItems,
-        selectedItems: newSelectedItems,
-      });
+      setSelectedItems((selectedItems) =>
+        removeAtIndex(selectedItems, selectedIndex)
+      );
     },
-    [disabled, isControlled, selectedItems]
+    [disabled, selectedItems]
   );
 
   const clearSelection = useCallback(() => {
@@ -83,7 +80,7 @@ export function useSelection({
       isMounted: isMounted.current,
       onChangeHandlerControlled: savedOnChange.current,
       onChangeHandlerUncontrolled: setUncontrolledItems,
-      selectedItems: [],
+      selectedItems: setSelectedItems([]),
     });
   }, [disabled, isControlled]);
 
@@ -186,7 +183,6 @@ export default class Selection extends React.Component {
       onItemChange: this.handleOnItemChange,
       clearSelection: this.handleClearSelection,
     };
-
     if (render !== undefined) {
       return render(renderProps);
     }

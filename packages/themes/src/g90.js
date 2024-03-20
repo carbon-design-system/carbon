@@ -10,7 +10,6 @@ import {
   blue40,
   blue60,
   blue70,
-  blue70Hover,
   blue80,
   blue100,
 
@@ -239,8 +238,8 @@ export const aiPopoverShadowOuter01 = rgba(blue80, 0.25);
 export const aiPopoverShadowOuter02 = rgba(black, 0.65);
 
 // AI skeleton
-export const aiSkeletonBackground = blue70Hover;
-export const aiSkeletonElementBackground = blue100;
+export const aiSkeletonBackground = blue30;
+export const aiSkeletonElementBackground = blue80;
 
 // AI Modal tokens
 export const aiOverlay = rgba(blue100, 0.5);
@@ -263,6 +262,14 @@ export const chatAvatarAgent = gray30;
 export const chatAvatarUser = blue50;
 export const chatShellBackground = gray90;
 export const chatHeaderBackground = gray90;
+
+// Chat button tokens
+export const chatButton = linkPrimary;
+export const chatButtonHover = backgroundHover;
+export const chatButtonTextHover = linkPrimaryHover;
+export const chatButtonActive = backgroundActive;
+export const chatButtonSelected = backgroundSelected;
+export const chatButtonTextSelected = textSecondary;
 
 export {
   // Type
