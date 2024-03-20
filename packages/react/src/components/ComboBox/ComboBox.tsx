@@ -500,9 +500,9 @@ const ComboBox = forwardRef(
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
     });
-    const comboBoxHelperId = !helperText
-      ? undefined
-      : `combobox-helper-text-${comboBoxInstanceId}`;
+    const helperTextId = `combobox-helper-text-${comboBoxInstanceId}`;
+    const warnTextId = `combobox-warn-text-${comboBoxInstanceId}`;
+    const invalidTextId = `combobox-invalid-text-${comboBoxInstanceId}`;
     const helperClasses = cx(`${prefix}--form__helper-text`, {
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
@@ -666,6 +666,15 @@ const ComboBox = forwardRef(
               }
             : {};
 
+          // The input should be described by the appropriate message text id
+          // when both the message is supplied *and* when the component is in
+          // the matching state (invalid, warn, etc).
+          const ariaDescribedBy =
+            (invalid && invalidText && invalidTextId) ||
+            (warn && warnText && warnTextId) ||
+            (helperText && !isFluid && helperTextId) ||
+            undefined;
+
           return (
             <div className={wrapperClasses}>
               {titleText && (
@@ -680,11 +689,13 @@ const ComboBox = forwardRef(
                 disabled={disabled}
                 invalid={invalid}
                 invalidText={invalidText}
+                invalidTextId={invalidTextId}
                 isOpen={isOpen}
                 light={light}
                 size={size}
                 warn={warn}
-                warnText={warnText}>
+                warnText={warnText}
+                warnTextId={warnTextId}>
                 <div className={`${prefix}--list-box__field`}>
                   <input
                     role="combobox"
@@ -703,11 +714,7 @@ const ComboBox = forwardRef(
                     {...readOnlyEventHandlers}
                     readOnly={readOnly}
                     ref={mergeRefs(textInput, ref)}
-                    aria-describedby={
-                      helperText && !invalid && !warn && !isFluid
-                        ? comboBoxHelperId
-                        : undefined
-                    }
+                    aria-describedby={ariaDescribedBy}
                   />
                   {invalid && (
                     <WarningFilled
@@ -786,7 +793,7 @@ const ComboBox = forwardRef(
                 </ListBox.Menu>
               </ListBox>
               {helperText && !invalid && !warn && !isFluid && (
-                <Text as="div" id={comboBoxHelperId} className={helperClasses}>
+                <Text as="div" id={helperTextId} className={helperClasses}>
                   {helperText}
                 </Text>
               )}

@@ -29,10 +29,14 @@ interface IconButtonProps
   align?:
     | 'top'
     | 'top-left'
+    | 'top-start'
     | 'top-right'
+    | 'top-end'
     | 'bottom'
     | 'bottom-left'
+    | 'bottom-start'
     | 'bottom-right'
+    | 'bottom-end'
     | 'left'
     | 'right';
 
@@ -161,10 +165,14 @@ IconButton.propTypes = {
   align: PropTypes.oneOf([
     'top',
     'top-left',
+    'top-start',
     'top-right',
+    'top-end',
     'bottom',
     'bottom-left',
+    'bottom-start',
     'bottom-right',
+    'bottom-end',
     'left',
     'right',
   ]),
