@@ -326,14 +326,14 @@ const ComboBox = forwardRef(
       onToggleClick,
       placeholder,
       readOnly,
-      // selectedItem,
+      selectedItem,
       shouldFilterItem = defaultShouldFilterItem,
       size,
       titleText,
       translateWithId,
       warn,
       warnText,
-      allowCustomValue = false,
+      allowCustomValue,
       //test
       slug,
       ...rest
@@ -341,14 +341,35 @@ const ComboBox = forwardRef(
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const [isFocused, setIsFocused] = useState(false);
-    // const [inputValue, setInputValue] = useState(
-    //   getInputValue({
-    //     initialSelectedItem,
-    //     inputValue: '',
-    //     itemToString,
-    //     selectedItem,
-    //   })
-    // );
+
+    const showWarning = !invalid && warn;
+    const className = cx(`${prefix}--combo-box`, {
+      [`${prefix}--list-box--up`]: direction === 'top',
+      [`${prefix}--combo-box--warning`]: showWarning,
+      [`${prefix}--combo-box--readonly`]: readOnly,
+    });
+    const titleClasses = cx(`${prefix}--label`, {
+      [`${prefix}--label--disabled`]: disabled,
+    });
+    const comboBoxHelperId = !helperText
+      ? undefined
+      : `combobox-helper-text-${getInstanceId()}`;
+    const helperClasses = cx(`${prefix}--form__helper-text`, {
+      [`${prefix}--form__helper-text--disabled`]: disabled,
+    });
+    const wrapperClasses = cx(`${prefix}--list-box__wrapper`, [
+      containerClassName,
+      {
+        [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
+        [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
+        [`${prefix}--list-box__wrapper--slug`]: slug,
+      },
+    ]);
+
+    const inputClasses = cx(`${prefix}--text-input`, {
+      // [`${prefix}--text-input--empty`]: !inputValue,
+      [`${prefix}--combo-box--input--focus`]: isFocused && !isFluid,
+    });
 
     const handleFocus = (evt: FocusEvent<HTMLDivElement>) => {
       setIsFocused(evt.type === 'focus');
@@ -417,62 +438,6 @@ const ComboBox = forwardRef(
         inputValue
       );
 
-    const showWarning = !invalid && warn;
-    const className = cx(`${prefix}--combo-box`, {
-      [`${prefix}--list-box--up`]: direction === 'top',
-      [`${prefix}--combo-box--warning`]: showWarning,
-      [`${prefix}--combo-box--readonly`]: readOnly,
-    });
-    const titleClasses = cx(`${prefix}--label`, {
-      [`${prefix}--label--disabled`]: disabled,
-    });
-    const comboBoxHelperId = !helperText
-      ? undefined
-      : `combobox-helper-text-${getInstanceId()}`;
-    const helperClasses = cx(`${prefix}--form__helper-text`, {
-      [`${prefix}--form__helper-text--disabled`]: disabled,
-    });
-    const wrapperClasses = cx(`${prefix}--list-box__wrapper`, [
-      containerClassName,
-      {
-        [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
-        [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
-        [`${prefix}--list-box__wrapper--slug`]: slug,
-      },
-    ]);
-
-    const stateReducer = React.useCallback(
-      (state, actionAndChanges) => {
-        const { type, changes } = actionAndChanges;
-        // returning an uppercased version of the item string.
-        console.log({ type });
-        console.log({ changes });
-        console.log({ allowCustomValue });
-        switch (type) {
-          case useCombobox.stateChangeTypes.InputChange:
-            return {
-              // return normal changes.
-              ...changes,
-              // but taking the change from default reducer and uppercasing it.
-              inputValue: changes.inputValue,
-            };
-          case useCombobox.stateChangeTypes.InputBlur:
-            return {
-              ...changes,
-              // if we had an item selected.
-              ...(allowCustomValue &&
-                changes.selectedItem && {
-                  // we will show it uppercased.
-                  inputValue: changes.inputValue,
-                }),
-            };
-          default:
-            return changes; // otherwise business as usual.
-        }
-      },
-      [allowCustomValue]
-    );
-
     const {
       getInputProps,
       getItemProps,
@@ -483,7 +448,7 @@ const ComboBox = forwardRef(
       inputValue,
       highlightedIndex,
       selectItem,
-      selectedItem,
+      // selectedItem,
       // clearSelection,
       toggleMenu,
       setHighlightedIndex,
@@ -491,7 +456,6 @@ const ComboBox = forwardRef(
       // onInputValueChange: ({ inputValue }) => {
       //   handleOnInputValueChange(inputValue);
       // },
-      stateReducer,
       items,
       itemToString: (item) => {
         return itemToString(item);
@@ -563,11 +527,6 @@ const ComboBox = forwardRef(
         }
       : {};
 
-    const inputClasses = cx(`${prefix}--text-input`, {
-      [`${prefix}--text-input--empty`]: !inputValue,
-      [`${prefix}--combo-box--input--focus`]: isFocused && !isFluid,
-    });
-
     return (
       <div className={wrapperClasses}>
         {titleText && (
@@ -592,7 +551,6 @@ const ComboBox = forwardRef(
               className={inputClasses}
               type="text"
               tabIndex={0}
-              disabled={disabled}
               aria-haspopup="listbox"
               {...getInputProps({
                 // disabled: disabled,
