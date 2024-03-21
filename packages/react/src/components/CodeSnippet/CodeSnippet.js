@@ -187,8 +187,7 @@ function CodeSnippet({
         {...rest}
         align={align}
         onClick={handleCopyClick}
-        label={ariaLabel}
-        // aria-labelledby={uid}
+        aria-label={ariaLabel}
         aria-describedby={uid}
         className={codeSnippetClasses}
         feedback={feedback}
