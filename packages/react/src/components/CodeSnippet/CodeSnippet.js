@@ -187,8 +187,9 @@ function CodeSnippet({
         {...rest}
         align={align}
         onClick={handleCopyClick}
-        aria-label={deprecatedAriaLabel || ariaLabel}
-        aria-labelledby={uid}
+        label={ariaLabel}
+        // aria-labelledby={uid}
+        aria-describedby={uid}
         className={codeSnippetClasses}
         feedback={feedback}
         feedbackTimeout={feedbackTimeout}>
