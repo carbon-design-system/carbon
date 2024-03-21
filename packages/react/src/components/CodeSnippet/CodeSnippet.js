@@ -175,7 +175,7 @@ function CodeSnippet({
     if (hideCopyButton) {
       return (
         <span className={codeSnippetClasses}>
-          <code aria-live="polite" id={uid} ref={innerCodeRef}>
+          <code aria-live="assertive" id={uid} ref={innerCodeRef}>
             {children}
           </code>
         </span>
@@ -187,8 +187,8 @@ function CodeSnippet({
         {...rest}
         align={align}
         onClick={handleCopyClick}
-        aria-label={deprecatedAriaLabel || ariaLabel}
-        aria-describedby={uid}
+        aria-labelledby={'testing label'}
+        aria-describedby={'testing described'}
         className={codeSnippetClasses}
         feedback={feedback}
         feedbackTimeout={feedbackTimeout}>
