@@ -76,6 +76,7 @@ export * from './components/SkeletonIcon';
 export * from './components/SkeletonPlaceholder';
 export * from './components/SkeletonText';
 export * from './components/Slider';
+export * from './components/Stack';
 export * from './components/StructuredList';
 export * from './components/Switch';
 export * from './components/Tab';
@@ -161,6 +162,11 @@ export {
   ChatButton as unstable__ChatButton,
   ChatButtonSkeleton as unstable__ChatButtonSkeleton,
 } from './components/ChatButton';
+export {
+  AiSkeletonText as unstable__AiSkeletonText,
+  AiSkeletonIcon as unstable__AiSkeletonIcon,
+  AiSkeletonPlaceholder as unstable__AiSkeletonPlaceholder,
+} from './components/AiSkeleton';
 export * from './components/Stack';
 export * from './components/Tooltip';
 export {
