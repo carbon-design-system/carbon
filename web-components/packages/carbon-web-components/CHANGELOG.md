@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0-rc.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.5.0...@carbon/web-components@2.6.0-rc.0) (2024-03-21)
+
+
+### Bug Fixes
+
+* **cdn:** emit the CSS grid classes in a new artifact cssgrid.css ([#11626](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11626)) ([98afd6a](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/98afd6a25015763508cca5fec6625db5acd38808))
+* **combobox:** fix import path for some bundlers ([#11639](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11639)) ([5c491a0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/5c491a02a56dc07b69091d2f4e09e6778cf6ad00)), closes [#11635](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/11635)
+
+
+
+
+
 # [2.5.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@2.5.0-rc.1...@carbon/web-components@2.5.0) (2024-03-11)
 
 **Note:** Version bump only for package @carbon/web-components
