@@ -162,6 +162,8 @@ const RadioTile = React.forwardRef(function RadioTile(
   );
 });
 
+RadioTile.displayName = 'RadioTile';
+
 RadioTile.propTypes = {
   /**
    * Specify whether the `RadioTile` should be checked.
