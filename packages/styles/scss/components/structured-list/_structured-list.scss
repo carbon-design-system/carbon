@@ -200,7 +200,7 @@
   }
 
   @if not(
-    enabled('enable-v12-structured-list-visible-icons') or
+    enabled('enable-v12-structured-list-visible-icons') and
       $enable-v12-structured-list-visible-icons
   )
   {
@@ -261,12 +261,4 @@
     .#{$prefix}--structured-list-svg {
     @include high-contrast-mode('icon-fill');
   }
-}
-
-.#{$prefix}--structured-list-row--selected .structured-checks {
-  display: block;
-}
-
-.#{$prefix}--structured-list-row--selected .structured-unchecks {
-  display: none;
 }

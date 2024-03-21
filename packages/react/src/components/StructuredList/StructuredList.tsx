@@ -8,7 +8,6 @@
 import React, {
   useState,
   useRef,
-  useEffect,
   type HTMLAttributes,
   type ReactNode,
   type KeyboardEvent,
@@ -22,6 +21,7 @@ import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { Text } from '../Text';
 import { RadioButtonChecked, RadioButton } from '@carbon/icons-react';
+import { useOutsideClick } from '../../internal/useOutsideClick';
 
 type DivAttrs = HTMLAttributes<HTMLDivElement>;
 
@@ -272,30 +272,20 @@ export function StructuredListRow(props: StructuredListRowProps) {
     {
       [`${prefix}--structured-list-row--header-row`]: head,
       [`${prefix}--structured-list-row--focused-within`]:
-        hasFocusWithin && (selectedRow === id || selectedRow === null),
+        (hasFocusWithin && !selection) ||
+        (hasFocusWithin &&
+          selection &&
+          (selectedRow === id || selectedRow === null)),
+      // Ensure focus on the first item when navigating through Tab keys and no row is selected (selectedRow === null)
       [`${prefix}--structured-list-row--selected`]: selectedRow === id,
     },
     className
   );
-  const useClickOutside = (handler) => {
-    const ref = useRef<HTMLDivElement | null>(null);
-    const handleClick = (event) => {
-      if (ref?.current && !ref?.current?.contains(event?.target as Node)) {
-        handler();
-      }
-    };
-    useEffect(() => {
-      document.addEventListener('mousedown', handleClick);
-      return () => {
-        document.removeEventListener('mousedown', handleClick);
-      };
-    });
-    return ref;
-  };
-  //captures clicks outside the focused item
-  const wrapperRef = useClickOutside(() => {
+  const itemRef = useRef<HTMLDivElement | null>(null);
+  const handleClick = () => {
     setHasFocusWithin(false);
-  });
+  };
+  useOutsideClick(itemRef, handleClick);
   return head ? (
     <div role="row" {...other} className={classes} aria-busy="true">
       {selection && <StructuredListCell head></StructuredListCell>}
@@ -308,11 +298,14 @@ export function StructuredListRow(props: StructuredListRowProps) {
       {...other}
       role="row"
       className={classes}
-      ref={wrapperRef}
+      ref={itemRef}
       onClick={(event) => {
         setSelectedRow?.(id);
-        setHasFocusWithin(true);
         onClick && onClick(event);
+        if (selection) {
+          // focus items only when selection is enabled
+          setHasFocusWithin(true);
+        }
       }}
       onFocus={() => {
         setHasFocusWithin(true);
