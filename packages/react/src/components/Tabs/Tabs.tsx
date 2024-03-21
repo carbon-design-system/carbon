@@ -353,6 +353,7 @@ function TabList({
       [`${prefix}--layout--size-lg`]: iconSize === 'lg',
       [`${prefix}--tabs--tall`]: hasSecondaryLabelTabs,
       [`${prefix}--tabs--full-width`]: distributeWidth,
+      [`${prefix}--tabs--dismissable`]: dismissable,
     },
     customClassName
   );
@@ -858,71 +859,83 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
     onKeyDown?.(event);
   };
 
+  // always rendering dismissIcon so we don't lose reference to it, otherwise events do not work when switching from/to dismissable state
   const DismissIcon = (
     <div
-      tabIndex={-1}
-      aria-hidden={true}
-      className={cx(`${prefix}--tabs__nav-item--close-icon`, {
+      className={cx({
+        [`${prefix}--tabs__nav-item--close`]: dismissable,
         [`${prefix}--visually-hidden`]: !dismissable,
-      })}
-      onClick={handleClose}
-      title="Close tab"
-      ref={dismissIconRef}>
-      <Close
-        aria-hidden={dismissable ? 'false' : 'true'}
-        aria-label="Press delete to close tab"
-      />
+      })}>
+      <button
+        type="button"
+        tabIndex={selectedIndex === index ? 0 : -1}
+        aria-hidden={selectedIndex === index ? 'false' : 'true'}
+        className={cx(`${prefix}--tabs__nav-item--close-icon`, {
+          [`${prefix}--visually-hidden`]: !dismissable,
+          [`${prefix}--tabs__nav-item--close-icon--disabled`]: disabled,
+        })}
+        onClick={handleClose}
+        title="Close tab"
+        ref={dismissIconRef}>
+        <Close
+          aria-hidden={dismissable ? 'false' : 'true'}
+          aria-label="Press delete to close tab"
+        />
+      </button>
     </div>
   );
 
   const hasIcon = Icon ?? dismissable;
 
   return (
-    <BaseComponent
-      {...rest}
-      aria-controls={panelId}
-      aria-disabled={disabled}
-      aria-selected={selectedIndex === index}
-      ref={ref}
-      id={id}
-      role="tab"
-      className={className}
-      disabled={disabled}
-      onClick={(evt) => {
-        if (disabled) {
-          return;
-        }
-        setSelectedIndex(index);
-        onClick?.(evt);
-      }}
-      onKeyDown={handleKeyDown}
-      tabIndex={selectedIndex === index ? '0' : '-1'}
-      type="button">
-      <div className={`${prefix}--tabs__nav-item-label-wrapper`}>
-        {dismissable && Icon && (
-          <div className={`${prefix}--tabs__nav-item--icon-left`}>
-            {<Icon size={16} />}
-          </div>
-        )}
-        <Text className={`${prefix}--tabs__nav-item-label`}>{children}</Text>
-        {/* always rendering dismissIcon so we don't lose reference to it, otherwise events do not work when switching from/to dismissable state */}
-        <div
-          className={cx(`${prefix}--tabs__nav-item--icon`, {
-            [`${prefix}--visually-hidden`]: !hasIcon,
-          })}>
-          {DismissIcon}
-          {!dismissable && Icon && <Icon size={16} />}
+    <>
+      <BaseComponent
+        {...rest}
+        aria-controls={panelId}
+        aria-disabled={disabled}
+        aria-selected={selectedIndex === index}
+        ref={ref}
+        id={id}
+        role="tab"
+        className={className}
+        disabled={disabled}
+        onClick={(evt) => {
+          if (disabled) {
+            return;
+          }
+          setSelectedIndex(index);
+          onClick?.(evt);
+        }}
+        onKeyDown={handleKeyDown}
+        tabIndex={selectedIndex === index ? '0' : '-1'}
+        type="button">
+        <div className={`${prefix}--tabs__nav-item-label-wrapper`}>
+          {dismissable && Icon && (
+            <div className={`${prefix}--tabs__nav-item--icon-left`}>
+              {<Icon size={16} />}
+            </div>
+          )}
+          <Text className={`${prefix}--tabs__nav-item-label`}>{children}</Text>
+          {!dismissable && Icon && (
+            <div
+              className={cx(`${prefix}--tabs__nav-item--icon`, {
+                [`${prefix}--visually-hidden`]: !hasIcon,
+              })}>
+              {!dismissable && Icon && <Icon size={16} />}
+            </div>
+          )}
         </div>
-      </div>
-      {hasSecondaryLabel && secondaryLabel && (
-        <Text
-          as="div"
-          className={`${prefix}--tabs__nav-item-secondary-label`}
-          title={secondaryLabel}>
-          {secondaryLabel}
-        </Text>
-      )}
-    </BaseComponent>
+        {hasSecondaryLabel && secondaryLabel && (
+          <Text
+            as="div"
+            className={`${prefix}--tabs__nav-item-secondary-label`}
+            title={secondaryLabel}>
+            {secondaryLabel}
+          </Text>
+        )}
+      </BaseComponent>
+      {DismissIcon}
+    </>
   );
 });
 Tab.propTypes = {

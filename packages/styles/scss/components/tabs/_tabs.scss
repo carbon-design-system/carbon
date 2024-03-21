@@ -277,14 +277,16 @@
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item {
       background-color: $layer-accent;
-    }
-
-    &.#{$prefix}--tabs--contained
-      .#{$prefix}--tabs__nav-item
-      + .#{$prefix}--tabs__nav-item {
       // Draws the border without affecting the inner-content
       box-shadow: convert.to-rem(-1px) 0 0 0 $border-strong;
       margin-inline-start: 0;
+    }
+
+    &.#{$prefix}--tabs--contained
+      .#{$prefix}--tabs__nav-item--selected
+      + div
+      + .#{$prefix}--tabs__nav-item {
+      box-shadow: convert.to-rem(-1px) 0 0 0 transparent;
     }
 
     .#{$prefix}--tabs__nav-item .#{$prefix}--tabs__nav-link {
@@ -293,57 +295,65 @@
         outline $duration-fast-01 motion(standard, productive);
     }
 
+    &.#{$prefix}--tabs--dismissable .#{$prefix}--tabs__nav-link {
+      // 16px normal right padding plus width of the icon which is 24px
+      // TODO this value
+      padding-inline-end: 40px;
+    }
+
+    &.#{$prefix}--tabs--dismissable.#{$prefix}--tabs--contained
+      .#{$prefix}--tabs__nav-link {
+      //TODO this value
+      padding-inline-end: 47px;
+    }
+
     //-----------------------------
     // Icon
     //-----------------------------
 
-    &.#{$prefix}--tabs--contained
-      .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--disabled)
-      .#{$prefix}--tabs__nav-item--icon
-      .#{$prefix}--tabs__nav-item--close-icon {
-      &:hover {
-        background-color: inherit;
-      }
+    .#{$prefix}--tabs__nav-item--close {
+      position: relative;
+      display: flex;
+      align-items: center;
+      //TODO these values
+      inset-inline-start: -13px;
+      margin-inline-start: -23px;
+    }
+
+    .#{$prefix}--tabs__nav-item--close-icon {
+      border: none;
+      background-color: transparent;
+      block-size: convert.to-rem(24px);
+      inline-size: convert.to-rem(24px);
+      line-height: 0;
+      padding-block: $spacing-02;
+      padding-inline: $spacing-02;
+      pointer-events: auto;
 
       svg {
-        padding: $spacing-02;
-        margin: -$spacing-02;
-        block-size: 24px;
-        inline-size: 24px;
+        block-size: convert.to-rem(16px);
+        inline-size: convert.to-rem(16px);
       }
 
-      svg:hover {
-        background-color: $layer-accent-hover;
+      &:hover {
+        background-color: $layer-hover;
       }
     }
 
-    &.#{$prefix}--tabs--contained
-      .#{$prefix}--tabs__nav-item:not(
-        .#{$prefix}--tabs__nav-item--disabled
-      ).#{$prefix}--tabs__nav-item--selected
-      .#{$prefix}--tabs__nav-item--icon
-      .#{$prefix}--tabs__nav-item--close-icon
-      svg:hover {
-      background-color: $layer-hover;
-    }
+    .#{$prefix}--tabs__nav-item--close-icon--disabled,
+    .#{$prefix}--tabs__nav-item--close-icon--disabled:hover {
+      background-color: inherit;
+      cursor: not-allowed;
 
-    .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--disabled)
-      .#{$prefix}--tabs__nav-item--icon
-      .#{$prefix}--tabs__nav-item--close-icon:hover {
-      background-color: $background-hover;
+      svg {
+        fill: $tab-text-disabled;
+      }
     }
 
     .#{$prefix}--tabs__nav-item--icon {
       display: flex;
       align-items: center;
       padding-inline-start: $spacing-03;
-
-      .#{$prefix}--tabs__nav-item--close-icon {
-        padding: $spacing-02;
-        margin: -$spacing-02;
-        line-height: 0;
-        pointer-events: auto;
-      }
     }
 
     .#{$prefix}--tabs__nav-item--icon-left {
