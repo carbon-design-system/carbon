@@ -21,12 +21,73 @@ import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
 import { useFeatureFlag } from '../FeatureFlags';
 
+export interface RadioTileProps {
+  /**
+   * Specify whether the `RadioTile` should be checked.
+   */
+  checked?: boolean;
+
+  /**
+   * The `RadioTile` content.
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Provide an optional `className` to be applied to the underlying `<label>`.
+   */
+  className?: string;
+
+  /**
+   * Specify whether the `RadioTile` should be disabled.
+   */
+  disabled?: boolean;
+
+  /**
+   * Provide a unique id for the underlying `<input>`.
+   */
+  id?: string;
+
+  /**
+   * `true` to use the light version. For use on `$layer-01` backgrounds only.
+   * Don't use this to make tile background color the same as the container background color.
+   *
+   * @deprecated This prop is no longer needed and has been deprecated in v11 in favor of the new Layer component. It will be removed in the next major release.
+   */
+  light?: boolean;
+
+  /**
+   * Provide a `name` for the underlying `<input>`.
+   */
+  name?: string;
+
+  /**
+   * Provide an optional `onChange` hook that is called each time the value of
+   * the underlying `<input>` changes.
+   */
+  onChange?: (
+    value: string | number,
+    name: string | undefined,
+    event:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.KeyboardEvent<HTMLInputElement>
+  ) => void;
+
+  /**
+   * Specify the tab index of the underlying `<input>`.
+   */
+  tabIndex?: number;
+
+  /**
+   * Specify the value of the underlying `<input>`.
+   */
+  value: string | number;
+}
+
 const RadioTile = React.forwardRef(function RadioTile(
   {
     children,
     className: customClassName,
     disabled,
-    // eslint-disable-next-line no-unused-vars
     light,
     checked,
     name,
@@ -35,8 +96,8 @@ const RadioTile = React.forwardRef(function RadioTile(
     onChange = noopFn,
     tabIndex = 0,
     ...rest
-  },
-  ref
+  }: RadioTileProps,
+  ref: React.Ref<HTMLInputElement>
 ) {
   const prefix = usePrefix();
   const inputId = useFallbackId(id);
@@ -63,11 +124,15 @@ const RadioTile = React.forwardRef(function RadioTile(
     }
   }
 
-  function handleOnChange(evt) {
+  function handleOnChange(
+    evt:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.KeyboardEvent<HTMLInputElement>
+  ) {
     onChange(value, name, evt);
   }
 
-  function handleOnKeyDown(evt) {
+  function handleOnKeyDown(evt: React.KeyboardEvent<HTMLInputElement>) {
     if (matches(evt, [keys.Enter, keys.Space])) {
       evt.preventDefault();
       onChange(value, name, evt);
@@ -82,9 +147,9 @@ const RadioTile = React.forwardRef(function RadioTile(
         disabled={disabled}
         id={inputId}
         name={name}
-        onChange={!disabled ? handleOnChange : null}
-        onKeyDown={!disabled ? handleOnKeyDown : null}
-        tabIndex={!disabled ? tabIndex : null}
+        onChange={!disabled ? handleOnChange : undefined}
+        onKeyDown={!disabled ? handleOnKeyDown : undefined}
+        tabIndex={!disabled ? tabIndex : undefined}
         type="radio"
         value={value}
         ref={ref}
@@ -99,57 +164,58 @@ const RadioTile = React.forwardRef(function RadioTile(
 
 RadioTile.propTypes = {
   /**
-   * `true` if this tile should be selected.
+   * Specify whether the `RadioTile` should be checked.
    */
   checked: PropTypes.bool,
 
   /**
-   * The tile content.
+   * The `RadioTile` content.
    */
   children: PropTypes.node,
 
   /**
-   * The CSS class names.
+   * Provide an optional `className` to be applied to the underlying `<label>`.
    */
   className: PropTypes.string,
 
   /**
-   * Specify whether the RadioTile should be disabled
+   * Specify whether the `RadioTile` should be disabled.
    */
   disabled: PropTypes.bool,
 
   /**
-   * The ID of the `<input>`.
+   * Provide a unique id for the underlying `<input>`.
    */
   id: PropTypes.string,
 
   /**
-   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * `true` to use the light version. For use on `$layer-01` backgrounds only.
    * Don't use this to make tile background color same as container background color.
    */
   light: deprecate(
     PropTypes.bool,
     'The `light` prop for `RadioTile` is no longer needed and has ' +
-      'been deprecated in v11 in favor of the new `Layer` component. It will be moved in the next major release.'
+      'been deprecated in v11 in favor of the new `Layer` component. It will be removed in the next major release.'
   ),
 
   /**
-   * The `name` of the `<input>`.
+   * Provide a `name` for the underlying `<input>`.
    */
   name: PropTypes.string,
 
   /**
-   * The handler of the massaged `change` event on the `<input>`.
+   * Provide an optional `onChange` hook that is called each time the value of
+   * the underlying `<input>` changes.
    */
   onChange: PropTypes.func,
 
   /**
-   * Specify the tab index of the wrapper element
+   * Specify the tab index of the underlying `<input>`.
    */
   tabIndex: PropTypes.number,
 
   /**
-   * The `value` of the `<input>`.
+   * Specify the value of the underlying `<input>`.
    */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
