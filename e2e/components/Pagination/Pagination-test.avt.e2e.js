@@ -60,7 +60,7 @@ test.describe('@avt Pagination', () => {
 
     await expect(itemsPerPage).toBeVisible();
     await expect(pageSelector).toBeVisible();
-    await expect(updatedPageSelector).not.toBeVisible();
+    await expect(updatedPageSelector).toBeHidden();
 
     // Tab to first items per page
     await page.keyboard.press('Tab');
@@ -69,7 +69,7 @@ test.describe('@avt Pagination', () => {
     await itemsPerPage.selectOption('50');
     await expect(itemsPerPage).toHaveValue('50');
     // Should update the pages text
-    await expect(pageSelector).not.toBeVisible();
+    await expect(pageSelector).toBeHidden();
     await expect(updatedPageSelector).toBeVisible();
     // Should still be on page one
     await expect(updatedPageSelector).toHaveValue('1');
@@ -83,7 +83,7 @@ test.describe('@avt Pagination', () => {
     await page.keyboard.press('Enter');
     await expect(updatedPageSelector).toHaveValue('2');
     // Tab to previous page
-    await expect(prevPageButton).not.toBeDisabled();
+    await expect(prevPageButton).toBeEnabled();
     await page.keyboard.press('Shift+Tab');
     await page.keyboard.press('Enter');
     await expect(updatedPageSelector).toHaveValue('1');

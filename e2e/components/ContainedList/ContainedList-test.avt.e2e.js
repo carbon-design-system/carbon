@@ -172,7 +172,7 @@ test.describe('@avt ContainedList', () => {
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
-    await expect(page.getByText('Remove')).not.toBeVisible();
+    await expect(page.getByText('Remove')).toBeHidden();
   });
 
   test('@avt-keyboard-nav With actions', async ({ page }) => {
@@ -192,7 +192,7 @@ test.describe('@avt ContainedList', () => {
     ).toBeFocused();
     await expect(page.getByText('Dismiss').first()).toBeVisible();
     await page.keyboard.press('Enter');
-    await expect(page.getByText('Dismiss').first()).not.toBeVisible();
+    await expect(page.getByText('Dismiss').first()).toBeHidden();
 
     //navigating to the last element
     await page.keyboard.press('Tab');
@@ -220,7 +220,7 @@ test.describe('@avt ContainedList', () => {
     await expect(page.getByRole('search')).toHaveClass(/cds--search--expanded/);
     page.getByRole('searchbox').fill('List item 3');
     await expect(page.getByText('List item 3')).toBeVisible();
-    await expect(page.getByText('List item 1')).not.toBeVisible();
+    await expect(page.getByText('List item 1')).toBeHidden();
 
     // Close search
     await page.keyboard.press('Escape');
@@ -299,7 +299,7 @@ test.describe('@avt ContainedList', () => {
     await expect(page.getByRole('searchbox')).toBeFocused();
     page.getByRole('searchbox').fill('List item 3');
     await expect(page.getByText('List item 3')).toBeVisible();
-    await expect(page.getByText('List item 1')).not.toBeVisible();
+    await expect(page.getByText('List item 1')).toBeHidden();
 
     // Close search
     await page.keyboard.press('Escape');
