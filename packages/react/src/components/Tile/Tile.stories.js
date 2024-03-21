@@ -23,7 +23,6 @@ import {
   TileBelowTheFoldContent,
 } from './';
 import TileGroup from '../TileGroup/TileGroup';
-import { Grid, Column } from '../Grid';
 import { Launch } from '@carbon/icons-react';
 
 export default {
@@ -303,39 +302,3 @@ export const ExpandableWithLayer = () => (
     )}
   </WithLayer>
 );
-
-export const RadioWithGrid = (args) => {
-  return (
-    <TileGroup
-      defaultSelected="default-selected"
-      legend="Radio Tile Group"
-      name="radio tile group"
-      {...args}>
-      <Grid condensed>
-        <Column lg={4}>
-          <RadioTile
-            id="radio-tile-11"
-            value="standard"
-            style={{ marginBottom: '.5rem' }}
-            {...args}>
-            Option 1
-          </RadioTile>
-        </Column>
-        <Column lg={4}>
-          <RadioTile
-            id="radio-tile-21"
-            value="default-selected"
-            style={{ marginBottom: '.5rem' }}
-            {...args}>
-            Option 2
-          </RadioTile>
-        </Column>
-        <Column lg={4}>
-          <RadioTile id="radio-tile-31" value="selected" {...args}>
-            Option 3
-          </RadioTile>
-        </Column>
-      </Grid>
-    </TileGroup>
-  );
-};
