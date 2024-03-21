@@ -177,6 +177,7 @@
 
   .#{$prefix}--date-picker__input:disabled ~ .#{$prefix}--date-picker__icon {
     cursor: not-allowed;
+    opacity: 0.3;
   }
 
   .#{$prefix}--date-picker--range
