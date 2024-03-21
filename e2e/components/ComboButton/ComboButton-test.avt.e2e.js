@@ -58,7 +58,7 @@ test.describe('@avt ComboButton', () => {
     await page.keyboard.press('ArrowDown');
     await expect(page.getByRole('menuitem').nth(1)).toBeFocused();
     await page.keyboard.press('Escape');
-    await expect(page.getByRole('menuitem').first()).not.toBeVisible();
+    await expect(page.getByRole('menuitem').first()).toBeHidden();
   });
 
   test('@avt-keyboard-nav ComboButton with danger', async ({ page }) => {
@@ -93,6 +93,6 @@ test.describe('@avt ComboButton', () => {
     );
     // Selecting the item to close the menu
     await page.keyboard.press('Enter');
-    await expect(page.getByRole('menuitem').first()).not.toBeVisible();
+    await expect(page.getByRole('menuitem').first()).toBeHidden();
   });
 });

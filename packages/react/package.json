@@ -52,6 +52,7 @@
     "@carbon/icons-react": "^11.38.0",
     "@carbon/layout": "^11.21.0",
     "@carbon/styles": "^1.53.0",
+    "@floating-ui/react": "^0.25.4",
     "@ibm/telemetry-js": "^1.2.1",
     "classnames": "2.5.1",
     "copy-to-clipboard": "^3.3.1",
