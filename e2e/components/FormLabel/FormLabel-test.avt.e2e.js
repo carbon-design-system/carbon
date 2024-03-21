@@ -67,6 +67,6 @@ test.describe('@avt FormLabel', () => {
           'This can be used to provide more information about a field.'
         )
         .last()
-    ).not.toBeVisible();
+    ).toBeHidden();
   });
 });

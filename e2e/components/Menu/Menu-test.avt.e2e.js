@@ -42,7 +42,7 @@ test.describe('@avt Menu', () => {
 
     await expect(firstItem).toBeVisible();
     await expect(LastItem).toBeVisible();
-    await expect(nestedMenu).not.toBeVisible();
+    await expect(nestedMenu).toBeHidden();
     await expect(firstItem).toBeFocused();
 
     // Should go to last item when focused on the first item and arrow up is pressed
@@ -64,6 +64,6 @@ test.describe('@avt Menu', () => {
 
     // Should close menu with ArrowLeft
     await page.keyboard.press('ArrowLeft');
-    await expect(nestedMenu).not.toBeVisible();
+    await expect(nestedMenu).toBeHidden();
   });
 });
