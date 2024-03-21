@@ -167,7 +167,7 @@ test.describe('@avt DataTable', () => {
       await expect(page.getByRole('button', { name: 'Cancel' })).toBeFocused();
       // Invoke the cancel button
       await page.keyboard.press('Space');
-      await expect(page.getByText('1 item selected')).not.toBeVisible();
+      await expect(page.getByText('1 item selected')).toBeHidden();
       // Every checkbox should no longer be checked
       for (const checkbox of await page.getByRole('checkbox').all()) {
         await expect(checkbox).not.toBeChecked();

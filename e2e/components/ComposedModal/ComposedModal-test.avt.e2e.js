@@ -79,7 +79,7 @@ test.describe('@avt ComposedModal', () => {
     await expect(page.getByRole('button', { name: 'Close' })).toBeFocused();
     await page.keyboard.press('Enter');
     // Make sure modal was closed
-    await expect(page.getByText('Account resource')).not.toBeVisible();
+    await expect(page.getByText('Account resource')).toBeHidden();
   });
 
   test('@avt-keyboard-nav Full width', async ({ page }) => {
@@ -102,7 +102,7 @@ test.describe('@avt ComposedModal', () => {
     await expect(page.getByRole('button', { name: 'Cancel' })).toBeFocused();
     await page.keyboard.press('Enter');
     // Make sure modal was closed
-    await expect(page.getByText('Full Width Modal')).not.toBeVisible();
+    await expect(page.getByText('Full Width Modal')).toBeHidden();
   });
 
   test('@avt-keyboard-nav Passive modal', async ({ page }) => {
@@ -122,7 +122,7 @@ test.describe('@avt ComposedModal', () => {
     // Make sure modal was closed
     await expect(
       page.getByText('You have been successfully signed out')
-    ).not.toBeVisible();
+    ).toBeHidden();
   });
 
   test('@avt-keyboard-nav With state manager', async ({ page }) => {
@@ -157,7 +157,7 @@ test.describe('@avt ComposedModal', () => {
     await expect(page.getByRole('button', { name: 'Close' })).toBeFocused();
     await page.keyboard.press('Enter');
     // Make sure modal was closed and button gets focused
-    await expect(page.getByText('Account resource')).not.toBeVisible();
+    await expect(page.getByText('Account resource')).toBeHidden();
     await expect(page.getByRole('button')).toBeFocused();
     await expect(
       page.getByRole('button', { name: 'Launch composed modal' })
