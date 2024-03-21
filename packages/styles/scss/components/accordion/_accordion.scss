@@ -294,11 +294,6 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
 .#{$prefix}--accordion--flush .#{$prefix}--accordion__heading {
   padding-inline-end: 0;
-
-  // &:focus {
-  //   box-shadow: none;
-  //   outline: none;
-  // }
 }
 
 .#{$prefix}--accordion--flush .#{$prefix}--accordion__heading:focus {
