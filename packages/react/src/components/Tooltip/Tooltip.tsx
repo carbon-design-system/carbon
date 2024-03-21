@@ -98,7 +98,6 @@ function Tooltip<T extends React.ElementType>({
   closeOnActivation = false,
   ...rest
 }: TooltipProps<T>) {
-  const containerRef = useRef<HTMLElement>(null);
   const tooltipRef = useRef<HTMLSpanElement>(null);
   const [open, setOpen] = useDelayedState(defaultOpen);
   const [isDragging, setIsDragging] = useState(false);
@@ -218,8 +217,7 @@ function Tooltip<T extends React.ElementType>({
       highContrast
       onKeyDown={onKeyDown}
       onMouseLeave={onMouseLeave}
-      open={open}
-      ref={containerRef}>
+      open={open}>
       <div className={`${prefix}--tooltip-trigger__wrapper`}>
         {child !== undefined
           ? React.cloneElement(child, {
@@ -232,7 +230,6 @@ function Tooltip<T extends React.ElementType>({
         aria-hidden={open ? 'false' : 'true'}
         className={`${prefix}--tooltip-content`}
         id={id}
-        ref={tooltipRef}
         role="tooltip">
         {label || description}
       </PopoverContent>
@@ -246,20 +243,30 @@ Tooltip.propTypes = {
    */
   align: PropTypes.oneOf([
     'top',
-    'top-left',
-    'top-right',
+    'top-left', // deprecated use top-start instead
+    'top-right', // deprecated use top-end instead
 
     'bottom',
-    'bottom-left',
-    'bottom-right',
+    'bottom-left', // deprecated use bottom-start instead
+    'bottom-right', // deprecated use bottom-end instead
 
     'left',
-    'left-bottom',
-    'left-top',
+    'left-bottom', // deprecated use left-end instead
+    'left-top', // deprecated use left-start instead
 
     'right',
-    'right-bottom',
-    'right-top',
+    'right-bottom', // deprecated use right-end instead
+    'right-top', // deprecated use right-start instead
+
+    // new values to match floating-ui
+    'top-start',
+    'top-end',
+    'bottom-start',
+    'bottom-end',
+    'left-end',
+    'left-start',
+    'right-end',
+    'right-start',
   ]),
 
   /**

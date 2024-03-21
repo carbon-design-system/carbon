@@ -262,6 +262,12 @@ $sizes: (
   .#{$prefix}--slug
     > .#{$prefix}--toggletip
     > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+    // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
+    .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret {
     background: transparent;
     clip-path: none;
@@ -284,6 +290,25 @@ $sizes: (
       .#{$prefix}--popover--right-bottom
     )
     > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret::before,
+    // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
+    .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip.#{$prefix}--popover--auto-align:is(
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left,
+      .#{$prefix}--popover--bottom,
+      .#{$prefix}--popover--bottom-right,
+      .#{$prefix}--popover--bottom-left,
+      .#{$prefix}--popover--left,
+      .#{$prefix}--popover--left-top,
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--right,
+      .#{$prefix}--popover--right-top,
+      .#{$prefix}--popover--right-bottom
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret::before {
     position: absolute;
     display: block;
@@ -312,6 +337,25 @@ $sizes: (
       .#{$prefix}--popover--right-bottom
     )
     > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret::after,
+    // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
+    .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip.#{$prefix}--popover--auto-align:is(
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left,
+      .#{$prefix}--popover--bottom,
+      .#{$prefix}--popover--bottom-right,
+      .#{$prefix}--popover--bottom-left,
+      .#{$prefix}--popover--left,
+      .#{$prefix}--popover--left-top,
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--right,
+      .#{$prefix}--popover--right-top,
+      .#{$prefix}--popover--right-bottom
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret::after {
     position: absolute;
     display: block;
@@ -329,6 +373,16 @@ $sizes: (
       .#{$prefix}--popover--top-left
     )
     > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+    // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
+    .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip.#{$prefix}--popover--auto-align:is(
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret {
     &::before {
       inset-block-end: convert.to-rem(1px);
@@ -366,6 +420,16 @@ $sizes: (
       .#{$prefix}--popover--right-top
     )
     > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+    // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
+    .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip.#{$prefix}--popover--auto-align:is(
+      .#{$prefix}--popover--right,
+      .#{$prefix}--popover--right-bottom,
+      .#{$prefix}--popover--right-top
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret {
     &::before {
       inset-inline-start: convert.to-rem(1px);
@@ -388,6 +452,16 @@ $sizes: (
       .#{$prefix}--popover--bottom-right
     )
     > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+    // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
+    .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip.#{$prefix}--popover--auto-align:is(
+      .#{$prefix}--popover--bottom,
+      .#{$prefix}--popover--bottom-left,
+      .#{$prefix}--popover--bottom-right
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret {
     &::before {
       inset-block-start: convert.to-rem(1px);
@@ -412,6 +486,16 @@ $sizes: (
       .#{$prefix}--popover--left-top
     )
     > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+    // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
+    .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip.#{$prefix}--popover--auto-align:is(
+      .#{$prefix}--popover--left,
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--left-top
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret {
     &::before {
       inset-inline-end: convert.to-rem(1px);
@@ -433,6 +517,15 @@ $sizes: (
       .#{$prefix}--popover--right-bottom
     )
     > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret::after,
+    // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
+    .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip.#{$prefix}--popover--auto-align:is(
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--right-bottom
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret::after {
     background: transparent;
   }
@@ -447,6 +540,18 @@ $sizes: (
       .#{$prefix}--popover--top-left
     )
     > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+    // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
+    .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip.#{$prefix}--popover--auto-align:is(
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--right-bottom,
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret {
     &::before {
       border-color: $ai-popover-caret-bottom;
@@ -464,6 +569,18 @@ $sizes: (
       .#{$prefix}--popover--top-left
     )
     > .#{$prefix}--popover:has(.#{$prefix}--slug-content--with-actions)
+    > .#{$prefix}--popover-caret,
+    // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
+    .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip.#{$prefix}--popover--auto-align:is(
+      .#{$prefix}--popover--left-bottom,
+      .#{$prefix}--popover--right-bottom,
+      .#{$prefix}--popover--top,
+      .#{$prefix}--popover--top-right,
+      .#{$prefix}--popover--top-left
+    )
+    > .#{$prefix}--popover:has(.#{$prefix}--slug-content--with-actions)
+    > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret {
     &::before {
       background: $ai-popover-caret-bottom-background-actions;
@@ -477,6 +594,15 @@ $sizes: (
       .#{$prefix}--popover--right
     )
     > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+    // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
+    .#{$prefix}--slug.#{$prefix}--slug--enabled
+    > .#{$prefix}--toggletip.#{$prefix}--popover--auto-align:is(
+      .#{$prefix}--popover--left,
+      .#{$prefix}--popover--right
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret {
     &::before {
       border-color: $ai-popover-caret-center;

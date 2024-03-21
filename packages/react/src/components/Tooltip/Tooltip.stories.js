@@ -8,7 +8,7 @@
 import './story.scss';
 
 import { Information } from '@carbon/icons-react';
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Tooltip } from './';
 import mdx from './Tooltip.mdx';
 
@@ -37,11 +37,16 @@ export default {
     },
   },
   decorators: [
-    (Story) => (
-      <div className="sb-tooltip-story">
-        <Story />
-      </div>
-    ),
+    (Story, context) => {
+      if (context.name.toLowerCase().includes('auto align')) {
+        return <Story />;
+      }
+      return (
+        <div className="sb-tooltip-story">
+          <Story />
+        </div>
+      );
+    },
   ],
 };
 
@@ -64,6 +69,32 @@ export const Alignment = () => {
         <Information />
       </button>
     </Tooltip>
+  );
+};
+
+export const ExperimentalAutoAlign = () => {
+  const ref = useRef();
+  const tooltipLabel =
+    'Scroll the container up, down, left or right to observe how the tooltip will automatically change its position in attempt to stay within the viewport. This works on initial render in addition to on scroll.';
+
+  useEffect(() => {
+    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
+  });
+  return (
+    <div style={{ width: '5000px', height: '5000px' }}>
+      <div
+        style={{
+          position: 'absolute',
+          top: '2500px',
+          left: '2500px',
+        }}>
+        <Tooltip label={tooltipLabel} align="top" autoAlign>
+          <button className="sb-tooltip-trigger" type="button" ref={ref}>
+            <Information />
+          </button>
+        </Tooltip>
+      </div>
+    </div>
   );
 };
 
