@@ -86,8 +86,9 @@ $content-padding: 0 0 0 $spacing-05 !default;
     }
 
     &:focus {
-      box-shadow: /* Border top */ 0 -1px 0 0 $focus, inset 0 1px 0 0 $focus,
-        /* Border right */ inset 2px 0 0 0 $focus,
+      box-shadow:
+        /* Border top */ 0 -1px 0 0 $focus,
+        inset 0 1px 0 0 $focus, /* Border right */ inset 2px 0 0 0 $focus,
         /* Border bottom */ 0 1px 0 0 $focus, inset 0 -1px 0 0 $focus,
         /* Border left */ inset -2px 0 0 0 $focus;
       outline: none;
@@ -285,13 +286,49 @@ $content-padding: 0 0 0 $spacing-05 !default;
   visibility: hidden;
 }
 
-// flush
+//flush
+
 .#{$prefix}--accordion--flush .#{$prefix}--accordion__title {
   padding-inline-start: 0;
 }
 
 .#{$prefix}--accordion--flush .#{$prefix}--accordion__heading {
   padding-inline-end: 0;
+
+  // &:focus {
+  //   box-shadow: none;
+  //   outline: none;
+  // }
+}
+
+.#{$prefix}--accordion--flush .#{$prefix}--accordion__heading:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.#{$prefix}--accordion--flush .#{$prefix}--accordion__heading:focus::after {
+  position: absolute;
+  display: block;
+  block-size: layout.size('height');
+  box-shadow:
+    /* Border top */ 0 -1px 0 0 $focus, inset 0 1px 0 0 $focus,
+    /* Border right */ inset 2px 0 0 0 $focus,
+    /* Border bottom */ 0 1px 0 0 $focus, inset 0 -1px 0 0 $focus,
+    /* Border left */ inset -2px 0 0 0 $focus;
+  content: '';
+  inline-size: calc(100% + $spacing-05 + $spacing-05);
+  inset-inline-start: calc(-1 * $spacing-05);
+  outline: none;
+}
+
+.#{$prefix}--accordion--flush .#{$prefix}--accordion__heading:hover::after {
+  position: absolute;
+  display: block;
+  background-color: $layer-hover;
+  block-size: layout.size('height');
+  content: '';
+  inline-size: calc(100% + $spacing-05 + $spacing-05);
+  inset-inline-start: calc(-1 * $spacing-05);
 }
 
 .#{$prefix}--accordion--flush .#{$prefix}--accordion__arrow {
