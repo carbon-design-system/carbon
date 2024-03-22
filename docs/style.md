@@ -878,15 +878,25 @@ that have been added together or combined. For example:
 
 If we were trying to apply a `padding-inline-end` to the input to ensure the
 input text does not flow behind the icon, we could add up the individual parts
-of this that use spacing tokens, contextual layout tokens, and potentially local
-tokens(variables) that will inherently explain what the number is composed of.
+of this that use spacing tokens, contextual layout tokens, or other
+constants/variables within the system that will inherently explain what the
+final number is composed of.
 
 ```diff
 - padding-inline-end: to-rem(32px);
-
-+ $icon-width: 16px;
-+ padding-inline-end: calc(layout.density('padding-inline') + $icon-width)
++ padding-inline-end: calc(layout.density('padding-inline') + $icon-size-01);
 ```
+
+When crafting these combinations, avoid creating file-local constants/variables,
+especially if they are never reused. Instead:
+
+1. Check the reusable/global constants for an appropriate one given what is
+   trying to be accomplished.
+2. If one exists, use it. If not, start a conversation with the team as to why
+   no such value currently exists (perhaps challenge the way it was intended to
+   be used in the first place).
+3. Decide to either introduce a new constant to meet the need; or rework the
+   code in question to use other constants (or perhaps none at all).
 
 #### Avoid nesting selectors
 
