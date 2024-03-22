@@ -864,7 +864,7 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
     <div
       className={cx({
         [`${prefix}--tabs__nav-item--close`]: dismissable,
-        [`${prefix}--visually-hidden`]: !dismissable,
+        [`${prefix}--tabs__nav-item--close--hidden`]: !dismissable,
       })}>
       <button
         type="button"
@@ -872,7 +872,8 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
         aria-disabled={disabled}
         aria-hidden={selectedIndex === index ? 'false' : 'true'}
         disabled={disabled}
-        className={cx(`${prefix}--tabs__nav-item--close-icon`, {
+        className={cx({
+          [`${prefix}--tabs__nav-item--close-icon`]: dismissable,
           [`${prefix}--visually-hidden`]: !dismissable,
           [`${prefix}--tabs__nav-item--close-icon--selected`]:
             selectedIndex === index,

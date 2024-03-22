@@ -316,6 +316,14 @@
       margin-inline-start: calc(-#{$spacing-06} + 1px);
     }
 
+    &:not(.#{$prefix}--tabs--contained)
+      .#{$prefix}--tabs__nav-item--close--hidden {
+      @include visually-hidden;
+
+      position: static;
+      inline-size: convert.to-rem(3px);
+    }
+
     .#{$prefix}--tabs__nav-item--close-icon {
       @include button-reset.reset();
 
