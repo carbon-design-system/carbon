@@ -296,15 +296,12 @@
     }
 
     &.#{$prefix}--tabs--dismissable .#{$prefix}--tabs__nav-link {
-      // 16px normal right padding plus width of the icon which is 24px
-      // TODO this value
-      padding-inline-end: 40px;
+      padding-inline-end: $spacing-08;
     }
 
     &.#{$prefix}--tabs--dismissable.#{$prefix}--tabs--contained
       .#{$prefix}--tabs__nav-link {
-      //TODO this value
-      padding-inline-end: 47px;
+      padding-inline-end: calc($spacing-09 - 1px);
     }
 
     //-----------------------------
@@ -315,28 +312,49 @@
       position: relative;
       display: flex;
       align-items: center;
-      //TODO these values
-      inset-inline-start: -13px;
-      margin-inline-start: -23px;
+      inset-inline-start: calc(-#{$spacing-04} - 1px);
+      margin-inline-start: calc(-#{$spacing-06} + 1px);
     }
 
     .#{$prefix}--tabs__nav-item--close-icon {
-      border: none;
-      background-color: transparent;
+      @include button-reset.reset();
+
       block-size: convert.to-rem(24px);
       inline-size: convert.to-rem(24px);
-      line-height: 0;
       padding-block: $spacing-02;
       padding-inline: $spacing-02;
       pointer-events: auto;
 
       svg {
         block-size: convert.to-rem(16px);
+        fill: $text-secondary;
         inline-size: convert.to-rem(16px);
+      }
+
+      svg:hover {
+        fill: $text-primary;
       }
 
       &:hover {
         background-color: $layer-hover;
+      }
+
+      &:focus,
+      &:active {
+        @include focus-outline('outline');
+      }
+    }
+
+    .#{$prefix}--tabs__nav-item:hover
+      + .#{$prefix}--tabs__nav-item--close
+      .#{$prefix}--tabs__nav-item--close-icon
+      svg {
+      fill: $text-primary;
+    }
+
+    .#{$prefix}--tabs__nav-item--close-icon--selected {
+      svg {
+        fill: $text-primary;
       }
     }
 
