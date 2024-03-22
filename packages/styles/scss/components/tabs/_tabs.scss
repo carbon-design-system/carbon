@@ -358,6 +358,9 @@
       }
     }
 
+    .#{$prefix}--tabs__nav-item:hover
+      + .#{$prefix}--tabs__nav-item--close
+      .#{$prefix}--tabs__nav-item--close-icon--disabled,
     .#{$prefix}--tabs__nav-item--close-icon--disabled,
     .#{$prefix}--tabs__nav-item--close-icon--disabled:hover {
       background-color: inherit;
@@ -365,6 +368,11 @@
 
       svg {
         fill: $tab-text-disabled;
+      }
+
+      &:focus,
+      &:active {
+        @include focus-outline('reset');
       }
     }
 
