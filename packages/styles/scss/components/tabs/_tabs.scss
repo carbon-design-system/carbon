@@ -324,6 +324,11 @@
       inline-size: convert.to-rem(3px);
     }
 
+    &.#{$prefix}--tabs--contained.#{$prefix}--tabs--full-width
+      .#{$prefix}--tabs__nav-item--close--hidden {
+      display: none;
+    }
+
     .#{$prefix}--tabs__nav-item--close-icon {
       @include button-reset.reset();
 
