@@ -175,8 +175,6 @@ test.describe('@avt Tabs', () => {
 
     // Pressing delete should delete the dismissable tab
     await page.keyboard.press('Delete');
-    await expect(
-      page.getByRole('tab', { name: 'Tab label 4' })
-    ).not.toBeVisible();
+    await expect(page.getByRole('tab', { name: 'Tab label 4' })).toBeHidden();
   });
 });

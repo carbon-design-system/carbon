@@ -99,6 +99,6 @@ test.describe('@avt OverflowMenu', () => {
     ).toBeFocused();
     await page.keyboard.press('Enter');
     // Once closed menu is no longer visibile
-    await expect(page.getByRole('menu')).not.toBeVisible();
+    await expect(page.getByRole('menu')).toBeHidden();
   });
 });

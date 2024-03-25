@@ -45,7 +45,7 @@ test.describe('@avt Tooltip', () => {
   });
 
   // Prevent timeout
-  test.slow('tooltip default - @avt-keyboard-nav', async ({ page }) => {
+  test.slow('@avt-keyboard-nav - tooltip default', async ({ page }) => {
     await visitStory(page, {
       component: 'Tooltip',
       id: 'components-tooltip--default',
