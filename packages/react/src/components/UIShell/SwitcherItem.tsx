@@ -46,6 +46,10 @@ interface BaseSwitcherItemProps {
    * Specify whether the panel is selected
    */
   isSelected?: boolean;
+  /**
+   * Optionally provide a href for the underlying li`
+   */
+  href?: string;
 }
 
 interface SwitcherItemWithAriaLabel extends BaseSwitcherItemProps {
