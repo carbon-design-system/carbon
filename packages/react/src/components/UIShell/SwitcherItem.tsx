@@ -47,7 +47,7 @@ interface BaseSwitcherItemProps {
    */
   isSelected?: boolean;
   /**
-   * Optionally provide a href for the underlying li`
+   * Optionally provide an href for the underlying li`
    */
   href?: string;
 }
