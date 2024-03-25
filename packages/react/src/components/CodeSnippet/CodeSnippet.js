@@ -187,7 +187,7 @@ function CodeSnippet({
         {...rest}
         align={align}
         onClick={handleCopyClick}
-        aria-label={ariaLabel}
+        aria-label={deprecatedAriaLabel || ariaLabel}
         aria-describedby={uid}
         className={codeSnippetClasses}
         feedback={feedback}
