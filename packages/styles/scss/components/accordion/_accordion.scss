@@ -65,15 +65,15 @@ $content-padding: 0 0 0 $spacing-05 !default;
     }
 
     &:hover {
-      border-block-start: none; /*  Remove border on hover  */
+      border-color: transparent; /*  Blend border on hover  */
     }
 
     &:hover + .#{$prefix}--accordion__item {
-      border-block-start: none; /* Remove top border of the next component on hover */
+      border-color: transparent; /* Blend top border of the next component on hover */
     }
 
     &:last-child:hover {
-      border-block-end: none; /* Remove bottom border of last item on hover */
+      border-color: transparent; /* Blend bottom border of last item on hover */
     }
   }
 
