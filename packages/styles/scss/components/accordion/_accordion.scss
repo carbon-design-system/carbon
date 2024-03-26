@@ -63,6 +63,18 @@ $content-padding: 0 0 0 $spacing-05 !default;
     &:last-child {
       border-block-end: 1px solid $border-subtle;
     }
+
+    &:hover {
+      border-block-start: none; /*  Remove border on hover  */
+    }
+
+    &:hover + .#{$prefix}--accordion__item {
+      border-block-start: none; /* Remove top border of the next component on hover */
+    }
+
+    &:last-child:hover {
+      border-block-end: none; /* Remove bottom border of last item on hover */
+    }
   }
 
   .#{$prefix}--accordion__heading {
@@ -83,6 +95,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
     &:hover {
       background-color: $layer-hover;
+      outline: none;
     }
 
     &:focus {
@@ -297,6 +310,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
 }
 
 .#{$prefix}--accordion--flush .#{$prefix}--accordion__heading:focus {
+  border: none;
   box-shadow: none;
   outline: none;
 }
@@ -324,9 +338,11 @@ $content-padding: 0 0 0 $spacing-05 !default;
   content: '';
   inline-size: calc(100% + $spacing-05 + $spacing-05);
   inset-inline-start: calc(-1 * $spacing-05);
+  transition: all 0.3s ease; /* Smooth transition effect */
 }
 
 .#{$prefix}--accordion--flush .#{$prefix}--accordion__arrow {
+  z-index: 2;
   margin-inline-end: 0;
 }
 
