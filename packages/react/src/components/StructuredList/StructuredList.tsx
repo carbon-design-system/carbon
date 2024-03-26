@@ -270,13 +270,12 @@ export function StructuredListRow(props: StructuredListRowProps) {
   );
 
   return head ? (
-    <div role="row" {...other} className={classes} aria-busy="true">
+    <div role="row" {...other} className={classes}>
       {children}
     </div>
   ) : (
     // eslint-disable-next-line jsx-a11y/interactive-supports-focus
     <div
-      aria-busy="true"
       {...other}
       role="row"
       className={classes}
