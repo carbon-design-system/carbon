@@ -1,7 +1,7 @@
 {
   "name": "@carbon/icons",
   "description": "Icons for digital and software products using the Carbon Design System",
-  "version": "11.38.0",
+  "version": "11.39.0-rc.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@carbon/cli": "^11.16.0",
-    "@carbon/icon-build-helpers": "^1.23.0",
+    "@carbon/icon-build-helpers": "^1.24.0-rc.0",
     "rimraf": "^5.0.0"
   },
   "dependencies": {

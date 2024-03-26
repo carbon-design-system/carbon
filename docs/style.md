@@ -863,6 +863,41 @@ this project:
 - [Motion](../packages/motion/docs/sass.md)
 - [Type](../packages/type/docs/sass.md)
 
+##### Avoid magic numbers
+
+In addition to using design tokens where appropriate, when authoring values for
+margin, padding, size, or similar, avoid using
+[magic numbers](https://csswizardry.com/2012/11/code-smells-in-css/#magic-numbers).
+
+> "A magic number is a value that is used ‘because it just works’."
+
+Magic numbers should be replaced with a value derived from its discrete parts
+that have been added together or combined. For example:
+
+![text-input-style-structure-fixed](https://github.com/carbon-design-system/carbon/assets/3360588/71e4222e-ff96-4dce-b80f-a0626f47cf21)
+
+If we were trying to apply a `padding-inline-end` to the input to ensure the
+input text does not flow behind the icon, we could add up the individual parts
+of this that use spacing tokens, contextual layout tokens, or other
+constants/variables within the system that will inherently explain what the
+final number is composed of.
+
+```diff
+- padding-inline-end: to-rem(32px);
++ padding-inline-end: calc(layout.density('padding-inline') + $icon-size-01);
+```
+
+When crafting these combinations, avoid creating file-local constants/variables,
+especially if they are never reused. Instead:
+
+1. Check the reusable/global constants for an appropriate one given what is
+   trying to be accomplished.
+2. If one exists, use it. If not, start a conversation with the team as to why
+   no such value currently exists (perhaps challenge the way it was intended to
+   be used in the first place).
+3. Decide to either introduce a new constant to meet the need; or rework the
+   code in question to use other constants (or perhaps none at all).
+
 #### Avoid nesting selectors
 
 Nesting selectors is often a convenient and fast way to author styles in Sass.
