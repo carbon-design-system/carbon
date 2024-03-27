@@ -10,8 +10,8 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('DataTable @avt', () => {
-  test.describe('basic', () => {
+test.describe('@avt DataTable', () => {
+  test.describe('@avt basic', () => {
     test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
@@ -38,7 +38,7 @@ test.describe('DataTable @avt', () => {
     });
   });
 
-  test.describe('batch actions', () => {
+  test.describe('@avt batch actions', () => {
     test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
@@ -53,7 +53,7 @@ test.describe('DataTable @avt', () => {
     });
   });
 
-  test.describe('dynamic', () => {
+  test.describe('@avt dynamic', () => {
     test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
@@ -167,7 +167,7 @@ test.describe('DataTable @avt', () => {
       await expect(page.getByRole('button', { name: 'Cancel' })).toBeFocused();
       // Invoke the cancel button
       await page.keyboard.press('Space');
-      await expect(page.getByText('1 item selected')).not.toBeVisible();
+      await expect(page.getByText('1 item selected')).toBeHidden();
       // Every checkbox should no longer be checked
       for (const checkbox of await page.getByRole('checkbox').all()) {
         await expect(checkbox).not.toBeChecked();
@@ -175,7 +175,7 @@ test.describe('DataTable @avt', () => {
     });
   });
 
-  test.describe('expansion', () => {
+  test.describe('@avt expansion', () => {
     test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
@@ -202,7 +202,7 @@ test.describe('DataTable @avt', () => {
     });
   });
 
-  test.describe('filtering', () => {
+  test.describe('@avt filtering', () => {
     test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
@@ -217,7 +217,7 @@ test.describe('DataTable @avt', () => {
     });
   });
 
-  test.describe('selection', () => {
+  test.describe('@avt selection', () => {
     test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
@@ -258,7 +258,7 @@ test.describe('DataTable @avt', () => {
     });
   });
 
-  test.describe('skeleton', () => {
+  test.describe('@avt skeleton', () => {
     test('@avt-default-state skeleton', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
@@ -273,7 +273,7 @@ test.describe('DataTable @avt', () => {
     });
   });
 
-  test.describe('sorting', () => {
+  test.describe('@avt sorting', () => {
     test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',
@@ -288,7 +288,7 @@ test.describe('DataTable @avt', () => {
     });
   });
 
-  test.describe('toolbar', () => {
+  test.describe('@avt toolbar', () => {
     test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',

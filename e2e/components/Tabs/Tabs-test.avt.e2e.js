@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('Tabs @avt', () => {
+test.describe('@avt Tabs', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Tabs',
@@ -175,8 +175,6 @@ test.describe('Tabs @avt', () => {
 
     // Pressing delete should delete the dismissable tab
     await page.keyboard.press('Delete');
-    await expect(
-      page.getByRole('tab', { name: 'Tab label 4' })
-    ).not.toBeVisible();
+    await expect(page.getByRole('tab', { name: 'Tab label 4' })).toBeHidden();
   });
 });

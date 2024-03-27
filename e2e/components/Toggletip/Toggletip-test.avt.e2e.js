@@ -10,7 +10,7 @@
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
-test.describe('Toggletip @avt', () => {
+test.describe('@avt Toggletip', () => {
   test('@avt-default-state Toggletip', async ({ page }) => {
     await visitStory(page, {
       component: 'Toggletip',
@@ -45,13 +45,13 @@ test.describe('Toggletip @avt', () => {
     await page.keyboard.press('Tab');
     await expect(page.getByRole('button', { name: 'Button' })).toBeFocused();
     await page.keyboard.press('Tab');
-    await expect(page.locator('.cds--popover--open')).not.toBeVisible();
+    await expect(page.locator('.cds--popover--open')).toBeHidden();
 
     // Checking second Toggletip interaction and close on Escape key
     await expect(page.getByLabel('Show information').last()).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(page.locator('.cds--popover--open')).toBeVisible();
     await page.keyboard.press('Escape');
-    await expect(page.locator('.cds--popover--open')).not.toBeVisible();
+    await expect(page.locator('.cds--popover--open')).toBeHidden();
   });
 });
