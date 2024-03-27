@@ -19,7 +19,7 @@ jobs:
     name: Add issue with enhancement label to the Proposals project
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/add-to-project@1b844f0c5ac6446a402e0cb3693f9be5eca188c5 #v0.6.1
+      - uses: actions/add-to-project@2e5cc851ca7162e9eb510e6da6a5c64022e606a7 #v1.0.0
         with:
           labeled: ${{ env.LABEL_ENHANCEMENT }}
           project-url: ${{ env.PROPOSALS_PROJECT_URL }}
@@ -29,7 +29,7 @@ jobs:
     name: Add issue with typescript label to the TypeScript Adoption project
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/add-to-project@1b844f0c5ac6446a402e0cb3693f9be5eca188c5 #v0.6.1
+      - uses: actions/add-to-project@2e5cc851ca7162e9eb510e6da6a5c64022e606a7 #v1.0.0
         with:
           labeled: ${{ env.LABEL_TYPESCRIPT }}
           project-url: ${{ env.TYPESCRIPT_PROJECT_URL }}
@@ -39,7 +39,7 @@ jobs:
     name: Add issue to the Design System project
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/add-to-project@1b844f0c5ac6446a402e0cb3693f9be5eca188c5 #v0.6.1
+      - uses: actions/add-to-project@2e5cc851ca7162e9eb510e6da6a5c64022e606a7 #v1.0.0
         with:
           labeled: ${{ env.LABEL_ENHANCEMENT }}, ${{ env.LABEL_TYPESCRIPT }}
           label-operator: NOT
