@@ -213,7 +213,7 @@
   .#{$prefix}--number
     input[type='number']:focus
     ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn:last-of-type {
+    .#{$prefix}--number__control-btn:last-of-type:hover {
     box-shadow: inset 0 2px $focus, inset 0 -1px $focus, inset -2px 0 $focus;
   }
 
@@ -424,36 +424,53 @@
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: convert.to-rem(88px);
+    inset-inline-end: convert.to-rem(96px);
     transform: translateY(-50%);
   }
 
-  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug::after,
-  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug::before {
+  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug::before,
+  .#{$prefix}--number__control-btn::before,
+  .#{$prefix}--number__control-btn::after {
     position: absolute;
     background-color: $border-subtle;
     block-size: convert.to-rem(16px);
     content: '';
     inline-size: convert.to-rem(1px);
   }
-
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug::before {
     display: none;
-    inset-inline-start: convert.to-rem(-9px);
+    inset-inline-start: convert.to-rem(-16px);
   }
-  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug::after {
+  .#{$prefix}--number__control-btn::after {
     display: block;
-    inset-inline-end: convert.to-rem(-9px);
+    inset-inline-end: 0;
   }
-  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--number__invalid {
-    inset-inline-end: convert.to-rem(120px);
+  .#{$prefix}--number__input-wrapper--slug
+    .#{$prefix}--number__control-btn::before {
+    display: block;
+    inset-inline-end: convert.to-rem(40px);
+  }
+  .#{$prefix}--number__control-btn:hover::after,
+  .#{$prefix}--number__control-btn:hover::before {
+    display: none;
+    inset-inline-end: 0;
+  }
+  .#{$prefix}--number__input-wrapper:has(.#{$prefix}--number__control-btn:hover)
+    ~ .#{$prefix}--number__input-wrapper--slug::after {
+    display: none;
+  }
+  .#{$prefix}--number__control-btn:has(.up-icon)::after,
+  .#{$prefix}--number__control-btn:has(.up-icon)::before {
+    display: none;
   }
 
+  .#{$prefix}--number__input-wrapper--slug .#{$prefix}--number__invalid {
+    inset-inline-end: convert.to-rem(144px);
+  }
   .#{$prefix}--number__input-wrapper--slug:has(.#{$prefix}--number__invalid)
     .#{$prefix}--slug::before {
     display: block;
   }
-
   .#{$prefix}--number
     .#{$prefix}--number__input-wrapper--slug
     input[data-invalid],
@@ -470,7 +487,6 @@
 
     padding-inline-end: convert.to-rem(145px);
   }
-
   .#{$prefix}--number__input-wrapper--slug
     input[type='number']:not([data-invalid]):not(
       :has(~ .#{$prefix}--slug--revert)
@@ -479,7 +495,6 @@
     .#{$prefix}--number__control-btn {
     border-block-end-color: $ai-border-strong;
   }
-
   // Skeleton State
   .#{$prefix}--number.#{$prefix}--skeleton {
     @include skeleton;
@@ -491,7 +506,6 @@
       display: none;
     }
   }
-
   // Windows HCM fix
   /* stylelint-disable */
   .#{$prefix}--number__control-btn:hover,
@@ -507,4 +521,7 @@
     @include high-contrast-mode('icon-fill');
   }
   /* stylelint-enable */
+}
+.#{$prefix}--number__controls:hover .#{$prefix}--number__control-btn::after {
+  display: none;
 }
