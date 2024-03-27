@@ -18,6 +18,18 @@ export default {
     RadioButtonGroup,
     RadioButtonSkeleton,
   },
+  argTypes: {
+    checked: {
+      table: {
+        disable: true,
+      },
+    },
+    defaultChecked: {
+      table: {
+        disable: true,
+      },
+    },
+  },
   parameters: {
     docs: {
       page: mdx,
@@ -108,6 +120,7 @@ export const Playground = (args) => {
 };
 
 Playground.args = {
+  defaultSelected: 'radio-2',
   helperText: 'Helper text',
   invalidText: 'Invalid selection',
   warn: false,
@@ -115,6 +128,13 @@ Playground.args = {
 };
 
 Playground.argTypes = {
+  defaultSelected: {
+    description: 'Specify the `<RadioButton>` to be selected by default',
+    options: ['radio-1', 'radio-2','radio-3'],
+    control: {
+      type: 'select',
+    },
+  },
   readOnly: {
     description: 'Specify whether the RadioButtonGroup is read-only',
     control: {
