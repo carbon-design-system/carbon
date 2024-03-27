@@ -7,6 +7,7 @@
 
 import React, {
   useState,
+  useRef,
   type HTMLAttributes,
   type ReactNode,
   type KeyboardEvent,
@@ -19,6 +20,8 @@ import { useId } from '../../internal/useId';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { Text } from '../Text';
+import { RadioButtonChecked, RadioButton } from '@carbon/icons-react';
+import { useOutsideClick } from '../../internal/useOutsideClick';
 
 type DivAttrs = HTMLAttributes<HTMLDivElement>;
 
@@ -156,7 +159,6 @@ export function StructuredListHead(props) {
   const { children, className, ...other } = props;
   const prefix = usePrefix();
   const classes = classNames(`${prefix}--structured-list-thead`, className);
-
   return (
     <div role="rowgroup" className={classes} {...other}>
       {children}
@@ -250,9 +252,15 @@ export interface StructuredListRowProps extends DivAttrs {
    * Provide a handler that is invoked on the key down event for the control
    */
   onKeyDown?(event: KeyboardEvent): void;
+
+  /**
+   * Mark if this row should be selectable
+   */
+  selection?: boolean;
 }
 export function StructuredListRow(props: StructuredListRowProps) {
-  const { onKeyDown, children, className, head, onClick, ...other } = props;
+  const { onKeyDown, children, className, head, onClick, selection, ...other } =
+    props;
   const [hasFocusWithin, setHasFocusWithin] = useState(false);
   const id = useId('grid-input');
   const selectedRow = React.useContext(GridSelectedRowStateContext);
@@ -263,14 +271,24 @@ export function StructuredListRow(props: StructuredListRowProps) {
     `${prefix}--structured-list-row`,
     {
       [`${prefix}--structured-list-row--header-row`]: head,
-      [`${prefix}--structured-list-row--focused-within`]: hasFocusWithin,
+      [`${prefix}--structured-list-row--focused-within`]:
+        (hasFocusWithin && !selection) ||
+        (hasFocusWithin &&
+          selection &&
+          (selectedRow === id || selectedRow === null)),
+      // Ensure focus on the first item when navigating through Tab keys and no row is selected (selectedRow === null)
       [`${prefix}--structured-list-row--selected`]: selectedRow === id,
     },
     className
   );
-
+  const itemRef = useRef<HTMLDivElement | null>(null);
+  const handleClick = () => {
+    setHasFocusWithin(false);
+  };
+  useOutsideClick(itemRef, handleClick);
   return head ? (
     <div role="row" {...other} className={classes} aria-busy="true">
+      {selection && <StructuredListCell head></StructuredListCell>}
       {children}
     </div>
   ) : (
@@ -280,9 +298,14 @@ export function StructuredListRow(props: StructuredListRowProps) {
       {...other}
       role="row"
       className={classes}
+      ref={itemRef}
       onClick={(event) => {
         setSelectedRow?.(id);
         onClick && onClick(event);
+        if (selection) {
+          // focus items only when selection is enabled
+          setHasFocusWithin(true);
+        }
       }}
       onFocus={() => {
         setHasFocusWithin(true);
@@ -292,6 +315,12 @@ export function StructuredListRow(props: StructuredListRowProps) {
       }}
       onKeyDown={onKeyDown}>
       <GridRowContext.Provider value={value}>
+        {selection && (
+          <StructuredListCell>
+            {selectedRow === id ? <RadioButtonChecked /> : <RadioButton />}
+          </StructuredListCell>
+        )}
+
         {children}
       </GridRowContext.Provider>
     </div>
@@ -330,6 +359,11 @@ StructuredListRow.propTypes = {
    * Provide a handler that is invoked on the key down event for the control,
    */
   onKeyDown: PropTypes.func,
+
+  /**
+   * Mark if this row should be selectable
+   */
+  selection: PropTypes.bool,
 };
 
 export interface StructuredListInputProps extends DivAttrs {
