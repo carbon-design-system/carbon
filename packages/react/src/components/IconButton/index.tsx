@@ -7,10 +7,11 @@
 
 import PropTypes, { ReactNodeLike } from 'prop-types';
 import React, { ForwardedRef } from 'react';
-import Button, { ButtonSize } from '../Button';
+import { ButtonSize } from '../Button';
 import classNames from 'classnames';
 import { Tooltip } from '../Tooltip';
 import { usePrefix } from '../../internal/usePrefix';
+import ButtonBase from '../Button/ButtonBase';
 
 export const IconButtonKinds = [
   'primary',
@@ -139,7 +140,7 @@ const IconButton = React.forwardRef(function IconButton(
       enterDelayMs={enterDelayMs}
       label={label}
       leaveDelayMs={leaveDelayMs}>
-      <Button
+      <ButtonBase
         {...rest}
         disabled={disabled}
         kind={kind}
@@ -153,7 +154,7 @@ const IconButton = React.forwardRef(function IconButton(
           className
         )}>
         {children}
-      </Button>
+      </ButtonBase>
     </Tooltip>
   );
 });
