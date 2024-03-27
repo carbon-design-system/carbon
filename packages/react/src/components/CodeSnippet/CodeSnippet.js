@@ -192,7 +192,7 @@ function CodeSnippet({
         className={codeSnippetClasses}
         feedback={feedback}
         feedbackTimeout={feedbackTimeout}>
-        <code id={uid} ref={innerCodeRef}>
+        <code aria-live="assertive" id={uid} ref={innerCodeRef}>
           {children}
         </code>
       </Copy>
