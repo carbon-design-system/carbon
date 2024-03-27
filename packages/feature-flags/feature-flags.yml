@@ -42,6 +42,10 @@ feature-flags:
     description: >
       Enable the new TreeView controllable API
     enabled: false
+  - name: enable-v12-structured-list-visible-icons
+    description: >
+      Enable rendering of radio icons in the StructuredList component
+    enabled: false
   - name: enable-experimental-focus-wrap-without-sentinels
     description: >
       Enable the new focus wrap behavior that doesn't use sentinel nodes
