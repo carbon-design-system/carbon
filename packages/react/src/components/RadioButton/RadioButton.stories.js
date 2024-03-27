@@ -130,7 +130,7 @@ Playground.args = {
 Playground.argTypes = {
   defaultSelected: {
     description: 'Specify the `<RadioButton>` to be selected by default',
-    options: ['radio-1', 'radio-2','radio-3'],
+    options: ['radio-1', 'radio-2', 'radio-3'],
     control: {
       type: 'select',
     },
