@@ -78,7 +78,9 @@ export const Vertical = () => {
   );
 };
 
-export const Skeleton = () => {};
+export const Skeleton = () => {
+  return <RadioButtonSkeleton />;
+};
 
 export const Playground = (args) => {
   return (
