@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
+      - uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 #v4.1.2
         with:
           repository: carbon-design-system/design-language-website
           ref: master
@@ -39,7 +39,7 @@ jobs:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@b1ddad2c994a25fbc81a28b3ec0e368bb2021c50 #v6.0.0
+        uses: peter-evans/create-pull-request@70a41aba780001da0a30141984ae2a0c95d8704e #v6.0.2
         with:
           branch: 'release/update-carbon-deps'
           commit-message: 'chore(release): update carbon deps'
@@ -58,7 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
+      - uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 #v4.1.2
         with:
           repository: carbon-design-system/gatsby-theme-carbon
           ref: main
@@ -82,7 +82,7 @@ jobs:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@b1ddad2c994a25fbc81a28b3ec0e368bb2021c50 #v6.0.0
+        uses: peter-evans/create-pull-request@70a41aba780001da0a30141984ae2a0c95d8704e #v6.0.2
         with:
           branch: 'release/update-carbon-deps'
           commit-message: 'chore(release): update carbon deps'

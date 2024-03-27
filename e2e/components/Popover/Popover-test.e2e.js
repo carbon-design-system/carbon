@@ -14,10 +14,10 @@ const { snapshotStory } = require('../../test-utils/storybook');
 test.describe('Popover', () => {
   themes.forEach((theme) => {
     test.describe(theme, () => {
-      test('Popover - auto align @vrt', async ({ page }) => {
+      test('Popover @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Popover',
-          id: 'components-popover--auto-align',
+          id: 'components-popover--playground',
           theme,
         });
       });

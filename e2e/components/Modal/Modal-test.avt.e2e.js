@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('Modal @avt', () => {
+test.describe('@avt Modal', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Modal',
@@ -66,7 +66,7 @@ test.describe('Modal @avt', () => {
     await page.keyboard.press('Enter');
 
     // The modal should no longer be open/visisble
-    await expect(page.getByRole('dialog')).not.toBeVisible();
+    await expect(page.getByRole('dialog')).toBeHidden();
     // Focus moves to the button that opened the Modal
     await expect(button).toBeFocused();
   });

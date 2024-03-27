@@ -6,13 +6,63 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useEffect, useCallback } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  AnimationEventHandler,
+  MouseEventHandler,
+  PropsWithChildren,
+} from 'react';
 import debounce from 'lodash.debounce';
 import classnames from 'classnames';
 import { composeEventHandlers } from '../../tools/events';
 import { usePrefix } from '../../internal/usePrefix';
 import { IconButton } from '../IconButton';
 import { noopFn } from '../../internal/noopFn';
+
+interface CopyProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * Specify how the trigger should align with the tooltip
+   */
+  align?:
+    | 'top'
+    | 'top-left'
+    | 'top-right'
+    | 'bottom'
+    | 'bottom-left'
+    | 'bottom-right'
+    | 'left'
+    | 'right';
+
+  /**
+   * Specify an optional className to be applied to the underlying `<button>`
+   */
+  className?: string;
+
+  /**
+   * Specify the string that is displayed when the button is clicked and the
+   * content is copied
+   */
+  feedback?: string;
+
+  /**
+   * Specify the time it takes for the feedback message to timeout
+   */
+  feedbackTimeout?: number;
+
+  /**
+   * Specify an optional `onAnimationEnd` handler that is called when the underlying
+   * animation ends
+   */
+  onAnimationEnd?: AnimationEventHandler<HTMLButtonElement>;
+
+  /**
+   * Specify an optional `onClick` handler that is called when the underlying
+   * `<button>` is clicked
+   */
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+}
 
 export default function Copy({
   align = 'bottom',
@@ -23,7 +73,7 @@ export default function Copy({
   onAnimationEnd,
   onClick = noopFn,
   ...other
-}) {
+}: PropsWithChildren<CopyProps>) {
   const [animation, setAnimation] = useState('');
   const prefix = usePrefix();
   const classNames = classnames(className, `${prefix}--copy`, {
@@ -71,7 +121,7 @@ export default function Copy({
       ])}
       {...other}
       aria-label={
-        (!children && (animation ? feedback : other['aria-label'])) || null
+        (!children && (animation ? feedback : other['aria-label'])) || undefined
       }>
       {children}
     </IconButton>

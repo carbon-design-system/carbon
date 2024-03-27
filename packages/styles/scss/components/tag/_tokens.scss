@@ -617,6 +617,226 @@ $tag-hover-cool-gray: (
   ),
 ) !default;
 
+$tag-border-gray: (
+  fallback: map.get(tag.$tag-border-gray, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(tag.$tag-border-gray, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(tag.$tag-border-gray, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(tag.$tag-border-gray, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(tag.$tag-border-gray, g-100),
+    ),
+  ),
+) !default;
+
+$tag-border-red: (
+  fallback: map.get(tag.$tag-border-red, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(tag.$tag-border-red, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(tag.$tag-border-red, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(tag.$tag-border-red, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(tag.$tag-border-red, g-100),
+    ),
+  ),
+) !default;
+
+$tag-border-blue: (
+  fallback: map.get(tag.$tag-border-blue, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(tag.$tag-border-blue, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(tag.$tag-border-blue, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(tag.$tag-border-blue, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(tag.$tag-border-blue, g-100),
+    ),
+  ),
+) !default;
+
+$tag-border-cyan: (
+  fallback: map.get(tag.$tag-border-cyan, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(tag.$tag-border-cyan, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(tag.$tag-border-cyan, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(tag.$tag-border-cyan, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(tag.$tag-border-cyan, g-100),
+    ),
+  ),
+) !default;
+
+$tag-border-teal: (
+  fallback: map.get(tag.$tag-border-teal, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(tag.$tag-border-teal, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(tag.$tag-border-teal, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(tag.$tag-border-teal, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(tag.$tag-border-teal, g-100),
+    ),
+  ),
+) !default;
+
+$tag-border-green: (
+  fallback: map.get(tag.$tag-border-green, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(tag.$tag-border-green, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(tag.$tag-border-green, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(tag.$tag-border-green, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(tag.$tag-border-green, g-100),
+    ),
+  ),
+) !default;
+
+$tag-border-magenta: (
+  fallback: map.get(tag.$tag-border-magenta, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(tag.$tag-border-magenta, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(tag.$tag-border-magenta, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(tag.$tag-border-magenta, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(tag.$tag-border-magenta, g-100),
+    ),
+  ),
+) !default;
+
+$tag-border-purple: (
+  fallback: map.get(tag.$tag-border-purple, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(tag.$tag-border-purple, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(tag.$tag-border-purple, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(tag.$tag-border-purple, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(tag.$tag-border-purple, g-100),
+    ),
+  ),
+) !default;
+
+$tag-border-cool-gray: (
+  fallback: map.get(tag.$tag-border-cool-gray, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(tag.$tag-border-cool-gray, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(tag.$tag-border-cool-gray, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(tag.$tag-border-cool-gray, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(tag.$tag-border-cool-gray, g-100),
+    ),
+  ),
+) !default;
+
+$tag-border-warm-gray: (
+  fallback: map.get(tag.$tag-border-warm-gray, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(tag.$tag-border-warm-gray, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(tag.$tag-border-warm-gray, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(tag.$tag-border-warm-gray, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(tag.$tag-border-warm-gray, g-100),
+    ),
+  ),
+) !default;
+
 // warm-gray
 $tag-background-warm-gray: (
   fallback: map.get(tag.$tag-background-warm-gray, white-theme),
@@ -709,6 +929,16 @@ $tag-tokens: (
   tag-background-gray: $tag-background-gray,
   tag-color-gray: $tag-color-gray,
   tag-hover-gray: $tag-hover-gray,
+  tag-border-red: $tag-border-red,
+  tag-border-blue: $tag-border-blue,
+  tag-border-cyan: $tag-border-cyan,
+  tag-border-teal: $tag-border-teal,
+  tag-border-green: $tag-border-green,
+  tag-border-magenta: $tag-border-magenta,
+  tag-border-purple: $tag-border-purple,
+  tag-border-gray: $tag-border-gray,
+  tag-border-cool-gray: $tag-border-cool-gray,
+  tag-border-warm-gray: $tag-border-warm-gray,
   tag-background-cool-gray: $tag-background-cool-gray,
   tag-color-cool-gray: $tag-color-cool-gray,
   tag-hover-cool-gray: $tag-hover-cool-gray,
@@ -800,6 +1030,41 @@ $tag-background-gray: component-tokens.get-var(
 $tag-color-gray: component-tokens.get-var($tag-color-gray, 'tag-color-gray');
 
 $tag-hover-gray: component-tokens.get-var($tag-hover-gray, 'tag-hover-gray');
+
+$tag-border-red: component-tokens.get-var($tag-border-red, 'tag-border-red');
+
+$tag-border-blue: component-tokens.get-var($tag-border-blue, 'tag-border-blue');
+
+$tag-border-cyan: component-tokens.get-var($tag-border-cyan, 'tag-border-cyan');
+
+$tag-border-teal: component-tokens.get-var($tag-border-teal, 'tag-border-teal');
+
+$tag-border-green: component-tokens.get-var(
+  $tag-border-green,
+  'tag-border-green'
+);
+
+$tag-border-magenta: component-tokens.get-var(
+  $tag-border-magenta,
+  'tag-border-magenta'
+);
+
+$tag-border-purple: component-tokens.get-var(
+  $tag-border-purple,
+  'tag-border-purple'
+);
+
+$tag-border-gray: component-tokens.get-var($tag-border-gray, 'tag-border-gray');
+
+$tag-border-cool-gray: component-tokens.get-var(
+  $tag-border-cool-gray,
+  'tag-border-cool-gray'
+);
+
+$tag-border-warm-gray: component-tokens.get-var(
+  $tag-border-warm-gray,
+  'tag-border-warm-gray'
+);
 
 $tag-background-cool-gray: component-tokens.get-var(
   $tag-background-cool-gray,

@@ -18,7 +18,7 @@ import {
   TableToolbarMenu,
   TableBatchActions,
   TableBatchAction,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import {
   useFilteredRows,
   usePageInfo,
