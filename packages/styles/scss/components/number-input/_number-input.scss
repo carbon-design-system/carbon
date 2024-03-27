@@ -429,8 +429,10 @@
   }
 
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug::before,
-  .#{$prefix}--number__control-btn::before,
-  .#{$prefix}--number__control-btn::after {
+  .#{$prefix}--number__input-wrapper--slug
+    .#{$prefix}--number__control-btn::before,
+  .#{$prefix}--number__input-wrapper--slug
+    .#{$prefix}--number__control-btn::after {
     position: absolute;
     background-color: $border-subtle;
     block-size: convert.to-rem(16px);
@@ -523,5 +525,9 @@
   /* stylelint-enable */
 }
 .#{$prefix}--number__controls:hover .#{$prefix}--number__control-btn::after {
+  display: none;
+}
+
+.#{$prefix}--number__input-wrapper--slug .#{$prefix}--number__rule-divider {
   display: none;
 }
