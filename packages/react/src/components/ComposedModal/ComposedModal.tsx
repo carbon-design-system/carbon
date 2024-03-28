@@ -204,6 +204,8 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   /** Specify the CSS selectors that match the floating menus. */
   selectorsFloatingMenus?: Array<string | null | undefined>;
 
+  kind?: '' | 'side-start' | 'side-end';
+
   size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
@@ -222,6 +224,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
       containerClassName,
       danger,
       isFullWidth,
+      kind,
       onClose,
       onKeyDown,
       open,
@@ -324,6 +327,7 @@ const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
         'is-visible': isOpen,
         [`${prefix}--modal--danger`]: danger,
         [`${prefix}--modal--slug`]: slug,
+        [`${prefix}--modal--kind-${kind}`]: kind,
       },
       customClassName
     );
@@ -485,6 +489,11 @@ ComposedModal.propTypes = {
    * Specify whether the Modal content should have any inner padding.
    */
   isFullWidth: PropTypes.bool,
+
+  /**
+   * Specify an optional location for the side kind
+   */
+  kind: PropTypes.oneOf(['', 'side-start', 'side-end']),
 
   /**
    * Provide a ref to return focus to once the modal is closed.
