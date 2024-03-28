@@ -49,6 +49,7 @@ const {
   ToggleButtonKeyDownHome,
   ToggleButtonKeyDownEnd,
   ItemMouseMove,
+  MenuMouseLeave,
 } = useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
   ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
 };
@@ -290,6 +291,8 @@ const Dropdown = React.forwardRef(
       const { changes, props, type } = actionAndChanges;
       const { highlightedIndex } = changes;
 
+      console.log(type);
+
       switch (type) {
         case ToggleButtonKeyDownArrowDown:
         case ToggleButtonKeyDownArrowUp:
@@ -303,6 +306,7 @@ const Dropdown = React.forwardRef(
           }
           return changes;
         case ItemMouseMove:
+        case MenuMouseLeave:
           return { ...changes, highlightedIndex: state.highlightedIndex };
       }
       return changes;
