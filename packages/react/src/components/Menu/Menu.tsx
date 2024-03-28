@@ -112,6 +112,8 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     onOpen,
     open,
     size = 'sm',
+    // TODO: #16004
+    // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
     target = document.body,
     x = 0,
     y = 0,
