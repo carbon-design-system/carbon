@@ -284,15 +284,11 @@ export const _Combobox = {
 export const _ComposedModal = {
   args: {
     showButtons: true,
-    hasScrollingContent: false,
   },
   argTypes: {
     slug: {
       description:
         '**Experimental**: Provide a `Slug` component to be rendered inside the component',
-    },
-    hasScrollingContent: {
-      description: 'Add scrolling content indicator',
     },
     showButtons: {
       description: 'Show or hide the Modal buttons',
@@ -305,7 +301,7 @@ export const _ComposedModal = {
         <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
         <ComposedModal open={open} onClose={() => setOpen(false)} slug={slug}>
           <ModalHeader label="Account resources" title="Add a custom domain" />
-          <ModalBody hasScrollingContent={args.hasScrollingContent}>
+          <ModalBody>
             <p style={{ marginBottom: '1rem' }}>
               Custom domains direct requests for your apps in this Cloud Foundry
               organization to a URL that you own. A custom domain can be a
@@ -428,15 +424,11 @@ export const _FilterableMultiselect = {
 export const _Modal = {
   args: {
     showButtons: true,
-    hasScrollingContent: false,
   },
   argTypes: {
     slug: {
       description:
         '**Experimental**: Provide a `Slug` component to be rendered inside the component',
-    },
-    hasScrollingContent: {
-      description: 'Add scrolling content indicator',
     },
     showButtons: {
       description: 'Show or hide the Modal buttons',
@@ -455,7 +447,6 @@ export const _Modal = {
           primaryButtonText="Add"
           secondaryButtonText="Cancel"
           passiveModal={!args.showButtons}
-          hasScrollingContent={args.hasScrollingContent}
           slug={slug}>
           <p style={{ marginBottom: '1rem' }}>
             Custom domains direct requests for your apps in this Cloud Foundry
