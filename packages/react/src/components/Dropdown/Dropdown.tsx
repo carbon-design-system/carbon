@@ -291,8 +291,6 @@ const Dropdown = React.forwardRef(
       const { changes, props, type } = actionAndChanges;
       const { highlightedIndex } = changes;
 
-      console.log(type);
-
       switch (type) {
         case ToggleButtonKeyDownArrowDown:
         case ToggleButtonKeyDownArrowUp:
