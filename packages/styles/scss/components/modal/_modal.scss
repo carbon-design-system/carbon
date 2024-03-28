@@ -473,12 +473,6 @@
       0 24px 40px -24px $ai-drop-shadow;
   }
 
-  .#{$prefix}--modal--slug .#{$prefix}--slug {
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline-end: 0;
-  }
-
   .#{$prefix}--modal--slug
     .#{$prefix}--modal-content.#{$prefix}--modal-scroll-content {
     mask-image: linear-gradient(
@@ -500,6 +494,8 @@
   .#{$prefix}--modal--slug
     .#{$prefix}--modal-container-body
     > .#{$prefix}--slug {
+    position: absolute;
+    inset-block-start: convert.to-rem(10px);
     inset-inline-end: convert.to-rem(48px);
   }
 
