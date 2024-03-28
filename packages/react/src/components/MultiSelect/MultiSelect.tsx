@@ -606,7 +606,7 @@ const MultiSelect = React.forwardRef(
 
     const itemsSelectedText =
       selectedItems.length > 0 &&
-      selectedItems.map((item) => (item as selectedItemType).text);
+      selectedItems.map((item) => (item as selectedItemType)?.text);
 
     return (
       <div className={wrapperClasses}>
