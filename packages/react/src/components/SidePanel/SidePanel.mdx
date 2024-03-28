@@ -1,0 +1,59 @@
+import { Story, ArgsTable, Canvas, Unstyled } from '@storybook/blocks';
+import SidePanel from '../SidePanel';
+import { InlineNotification } from '../Notification';
+import CodeSnippet from '../CodeSnippet';
+import * as SidePanelStories from './SidePanel.stories.js';
+import './SidePanel.stories.scss';
+
+# SidePanel
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/SidePanel)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/modal/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/modal/accessibility)
+
+## Table of Contents
+
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Opening/closing modal](#openingclosing-modal)
+- [Modal sizes](#modal-sizes)
+  - [Alignment](#alignment)
+  - [Overflow content](#overflow-content)
+- [Modal button variants](#modal-button-variants)
+- [Using modal title as message](#using-modal-title-as-message)
+- [Focus management](#focus-management)
+  - [Setting `data-modal-primary-focus` attribute to the target element](#setting-data-modal-primary-focus-attribute-to-the-target-element)
+  - [Specifying a query selector to the target element](#specifying-a-query-selector-to-the-target-element)
+- [References](#references)
+- [Feedback](#feedback)
+
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
+## Overview
+
+`<SidePanel>` is a `<ComposedModal>` that appears before or after content. It can be populate with `<ModalHeader>`, `<ModalBody>` and
+`<ModalFooter>` components.
+
+<Canvas>
+  <Story of={SidePanelStories.Playground} />
+</Canvas>
+
+## Component API
+
+<ArgsTable />
+
+## References
+
+Check out the
+[usage guidelines](https://www.carbondesignsystem.com/components/modal/usage/)
+on the Carbon Design System website.
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/SidePanel/SidePanel.mdx).

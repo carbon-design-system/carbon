@@ -1,0 +1,30 @@
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+#storybook-root {
+  &:not(:has(.side-panel-story--header)) {
+    --#{$prefix}-side-panel-inset-start: 0rem;
+  }
+}
+
+.side-panel-story--header {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  padding-inline-start: $spacing-05;
+  top: 0;
+  left: 0;
+  background-color: $background-inverse;
+  color: $text-inverse;
+  width: 100%;
+  height: $spacing-09;
+}
+
+.side-panel-story--content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
