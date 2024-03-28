@@ -277,14 +277,16 @@
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item {
       background-color: $layer-accent;
-    }
-
-    &.#{$prefix}--tabs--contained
-      .#{$prefix}--tabs__nav-item
-      + .#{$prefix}--tabs__nav-item {
       // Draws the border without affecting the inner-content
       box-shadow: convert.to-rem(-1px) 0 0 0 $border-strong;
       margin-inline-start: 0;
+    }
+
+    &.#{$prefix}--tabs--contained
+      .#{$prefix}--tabs__nav-item--selected
+      + div
+      + .#{$prefix}--tabs__nav-item {
+      box-shadow: convert.to-rem(-1px) 0 0 0 transparent;
     }
 
     .#{$prefix}--tabs__nav-item .#{$prefix}--tabs__nav-link {
@@ -293,57 +295,104 @@
         outline $duration-fast-01 motion(standard, productive);
     }
 
+    &.#{$prefix}--tabs--dismissable .#{$prefix}--tabs__nav-link {
+      padding-inline-end: $spacing-08;
+    }
+
+    &.#{$prefix}--tabs--dismissable.#{$prefix}--tabs--contained
+      .#{$prefix}--tabs__nav-link {
+      padding-inline-end: calc($spacing-09 - 1px);
+    }
+
     //-----------------------------
     // Icon
     //-----------------------------
 
-    &.#{$prefix}--tabs--contained
-      .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--disabled)
-      .#{$prefix}--tabs__nav-item--icon
-      .#{$prefix}--tabs__nav-item--close-icon {
-      &:hover {
-        background-color: inherit;
-      }
+    .#{$prefix}--tabs__nav-item--close {
+      position: relative;
+      display: flex;
+      align-items: center;
+      inset-inline-start: calc(-#{$spacing-04} - 1px);
+      margin-inline-start: calc(-#{$spacing-06} + 1px);
+    }
+
+    &:not(.#{$prefix}--tabs--contained)
+      .#{$prefix}--tabs__nav-item--close--hidden {
+      @include visually-hidden;
+
+      position: static;
+      inline-size: convert.to-rem(3px);
+    }
+
+    &.#{$prefix}--tabs--contained.#{$prefix}--tabs--full-width
+      .#{$prefix}--tabs__nav-item--close--hidden {
+      display: none;
+    }
+
+    .#{$prefix}--tabs__nav-item--close-icon {
+      @include button-reset.reset();
+
+      block-size: convert.to-rem(24px);
+      inline-size: convert.to-rem(24px);
+      padding-block: $spacing-02;
+      padding-inline: $spacing-02;
+      pointer-events: auto;
 
       svg {
-        padding: $spacing-02;
-        margin: -$spacing-02;
-        block-size: 24px;
-        inline-size: 24px;
+        block-size: convert.to-rem(16px);
+        fill: $text-secondary;
+        inline-size: convert.to-rem(16px);
       }
 
       svg:hover {
-        background-color: $layer-accent-hover;
+        fill: $text-primary;
+      }
+
+      &:hover {
+        background-color: $layer-hover;
+      }
+
+      &:focus,
+      &:active {
+        @include focus-outline('outline');
       }
     }
 
-    &.#{$prefix}--tabs--contained
-      .#{$prefix}--tabs__nav-item:not(
-        .#{$prefix}--tabs__nav-item--disabled
-      ).#{$prefix}--tabs__nav-item--selected
-      .#{$prefix}--tabs__nav-item--icon
+    .#{$prefix}--tabs__nav-item:hover
+      + .#{$prefix}--tabs__nav-item--close
       .#{$prefix}--tabs__nav-item--close-icon
-      svg:hover {
-      background-color: $layer-hover;
+      svg {
+      fill: $text-primary;
     }
 
-    .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--disabled)
-      .#{$prefix}--tabs__nav-item--icon
-      .#{$prefix}--tabs__nav-item--close-icon:hover {
-      background-color: $background-hover;
+    .#{$prefix}--tabs__nav-item--close-icon--selected {
+      svg {
+        fill: $text-primary;
+      }
+    }
+
+    .#{$prefix}--tabs__nav-item:hover
+      + .#{$prefix}--tabs__nav-item--close
+      .#{$prefix}--tabs__nav-item--close-icon--disabled,
+    .#{$prefix}--tabs__nav-item--close-icon--disabled,
+    .#{$prefix}--tabs__nav-item--close-icon--disabled:hover {
+      background-color: inherit;
+      cursor: not-allowed;
+
+      svg {
+        fill: $tab-text-disabled;
+      }
+
+      &:focus,
+      &:active {
+        @include focus-outline('reset');
+      }
     }
 
     .#{$prefix}--tabs__nav-item--icon {
       display: flex;
       align-items: center;
       padding-inline-start: $spacing-03;
-
-      .#{$prefix}--tabs__nav-item--close-icon {
-        padding: $spacing-02;
-        margin: -$spacing-02;
-        line-height: 0;
-        pointer-events: auto;
-      }
     }
 
     .#{$prefix}--tabs__nav-item--icon-left {
