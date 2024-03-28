@@ -46,6 +46,10 @@ interface BaseSwitcherItemProps {
    * Specify whether the panel is selected
    */
   isSelected?: boolean;
+  /**
+   * Optionally provide an href for the underlying li`
+   */
+  href?: string;
 }
 
 interface SwitcherItemWithAriaLabel extends BaseSwitcherItemProps {
@@ -75,6 +79,7 @@ const SwitcherItem = forwardRef<ElementType, SwitcherItemProps>(
       index,
       handleSwitcherItemFocus,
       onKeyDown = () => {},
+      href,
       ...rest
     } = props;
 
@@ -116,6 +121,7 @@ const SwitcherItem = forwardRef<ElementType, SwitcherItemProps>(
             setTabFocus(evt);
             onKeyDown(evt);
           }}
+          href={href}
           ref={forwardRef}
           {...rest}
           className={linkClassName}
@@ -143,6 +149,10 @@ SwitcherItem.propTypes = {
    * event handlers
    */
   handleSwitcherItemFocus: PropTypes.func,
+  /**
+   * Optionally provide an href for the underlying li`
+   */
+  href: PropTypes.string,
   /**
    * Specify the index of the SwitcherItem
    */

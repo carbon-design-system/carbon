@@ -7482,6 +7482,9 @@ Map {
       "handleSwitcherItemFocus": Object {
         "type": "func",
       },
+      "href": Object {
+        "type": "string",
+      },
       "index": Object {
         "type": "number",
       },
