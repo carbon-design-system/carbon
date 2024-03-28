@@ -63,6 +63,18 @@ $content-padding: 0 0 0 $spacing-05 !default;
     &:last-child {
       border-block-end: 1px solid $border-subtle;
     }
+
+    &:hover {
+      border-color: transparent; /*  Blend border on hover  */
+    }
+
+    &:hover + .#{$prefix}--accordion__item {
+      border-color: transparent; /* Blend top border of the next component on hover */
+    }
+
+    &:last-child:hover {
+      border-color: transparent; /* Blend bottom border of last item on hover */
+    }
   }
 
   .#{$prefix}--accordion__heading {
@@ -83,11 +95,13 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
     &:hover {
       background-color: $layer-hover;
+      outline: none;
     }
 
     &:focus {
-      box-shadow: /* Border top */ 0 -1px 0 0 $focus, inset 0 1px 0 0 $focus,
-        /* Border right */ inset 2px 0 0 0 $focus,
+      box-shadow:
+        /* Border top */ 0 -1px 0 0 $focus,
+        inset 0 1px 0 0 $focus, /* Border right */ inset 2px 0 0 0 $focus,
         /* Border bottom */ 0 1px 0 0 $focus, inset 0 -1px 0 0 $focus,
         /* Border left */ inset -2px 0 0 0 $focus;
       outline: none;
@@ -285,12 +299,50 @@ $content-padding: 0 0 0 $spacing-05 !default;
   visibility: hidden;
 }
 
-// flush
+//flush
+
 .#{$prefix}--accordion--flush .#{$prefix}--accordion__title {
-  margin-inline-start: 0;
+  padding-inline-start: 0;
+}
+
+.#{$prefix}--accordion--flush .#{$prefix}--accordion__heading {
+  padding-inline-end: 0;
+}
+
+.#{$prefix}--accordion--flush .#{$prefix}--accordion__heading:focus {
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+
+.#{$prefix}--accordion--flush .#{$prefix}--accordion__heading:focus::after {
+  position: absolute;
+  display: block;
+  block-size: layout.size('height');
+  box-shadow:
+    /* Border top */ 0 -1px 0 0 $focus, inset 0 1px 0 0 $focus,
+    /* Border right */ inset 2px 0 0 0 $focus,
+    /* Border bottom */ 0 1px 0 0 $focus, inset 0 -1px 0 0 $focus,
+    /* Border left */ inset -2px 0 0 0 $focus;
+  content: '';
+  inline-size: calc(100% + $spacing-05 + $spacing-05);
+  inset-inline-start: calc(-1 * $spacing-05);
+  outline: none;
+}
+
+.#{$prefix}--accordion--flush .#{$prefix}--accordion__heading:hover::after {
+  position: absolute;
+  display: block;
+  background-color: $layer-hover;
+  block-size: layout.size('height');
+  content: '';
+  inline-size: calc(100% + $spacing-05 + $spacing-05);
+  inset-inline-start: calc(-1 * $spacing-05);
+  transition: all 0.3s ease; /* Smooth transition effect */
 }
 
 .#{$prefix}--accordion--flush .#{$prefix}--accordion__arrow {
+  z-index: 2;
   margin-inline-end: 0;
 }
 
