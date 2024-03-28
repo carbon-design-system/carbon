@@ -83,8 +83,10 @@ import {
   g100,
 
   // Specific token values
-  interactive01,
-  interactive02,
+  background,
+  spacing01,
+  iconPrimary,
+
 } from '@carbon/themes';
 ```
 
