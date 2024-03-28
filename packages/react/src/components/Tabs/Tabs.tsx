@@ -859,7 +859,6 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
     onKeyDown?.(event);
   };
 
-  // always rendering dismissIcon so we don't lose reference to it, otherwise events do not work when switching from/to dismissable state
   const DismissIcon = (
     <div
       className={cx({
@@ -941,6 +940,7 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
           </Text>
         )}
       </BaseComponent>
+      {/* always rendering dismissIcon so we don't lose reference to it, otherwise events do not work when switching from/to dismissable state */}
       {DismissIcon}
     </>
   );
