@@ -5,14 +5,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { LayoutConstraint } from '../Layout';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 
-const variants = ['on-page', 'disclosed'];
+const variants: ('on-page' | 'disclosed')[] = ['on-page', 'disclosed'];
+
+interface ContainedListProps {
+  action?: ReactNode;
+  children?: ReactNode;
+  className?: string;
+  isInset?: boolean;
+  kind?: 'on-page' | 'disclosed';
+  label: ReactNode;
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+}
 
 function filterChildren(children) {
   if (Array.isArray(children)) {
@@ -50,16 +60,16 @@ function renderChildren(children) {
   return children;
 }
 
-function ContainedList({
+const ContainedList: React.FC<ContainedListProps> = ({
   action,
   children,
   className,
-  isInset,
-  kind = variants[0],
+  isInset = false,
+  kind = 'on-page',
   label,
   size,
   ...rest
-}) {
+}) => {
   const labelId = `${useId('contained-list')}-header`;
   const prefix = usePrefix();
 
@@ -76,9 +86,14 @@ function ContainedList({
 
   const filteredChildren = filterChildren(children);
 
-  const isActionSearch = ['Search', 'ExpandableSearch'].includes(
-    action?.type?.displayName
-  );
+  const isActionSearch =
+    React.isValidElement(action) &&
+    (typeof action.type === 'string'
+      ? ['Search', 'ExpandableSearch'].includes(action.type)
+      : typeof action.type === 'function' &&
+        'displayName' in action.type &&
+        (action.type.displayName === 'Search' ||
+          action.type.displayName === 'ExpandableSearch'));
 
   const renderedChildren = renderChildren(children);
 
@@ -109,7 +124,7 @@ function ContainedList({
       )}
     </div>
   );
-}
+};
 
 ContainedList.propTypes = {
   /**

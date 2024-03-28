@@ -5,13 +5,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { ElementType, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { LayoutConstraint } from '../../Layout';
 import { usePrefix } from '../../../internal/usePrefix';
 
-function ContainedListItem({
+interface ContainedListItemProps {
+  action?: ReactNode;
+  children?: ReactNode;
+  className?: string;
+  disabled?: boolean;
+  onClick?: () => void;
+  renderIcon?: ElementType;
+}
+
+const ContainedListItem: React.FC<ContainedListItemProps> = ({
   action,
   children,
   className,
@@ -19,7 +28,7 @@ function ContainedListItem({
   onClick,
   renderIcon: IconElement,
   ...rest
-}) {
+}) => {
   const prefix = usePrefix();
 
   const isClickable = onClick !== undefined;
@@ -65,7 +74,7 @@ function ContainedListItem({
       )}
     </li>
   );
-}
+};
 
 ContainedListItem.propTypes = {
   /**
@@ -96,7 +105,7 @@ ContainedListItem.propTypes = {
   /**
    * Provide an optional icon to render in front of the item's content.
    */
-  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  renderIcon: PropTypes.func,
 };
 
 export default ContainedListItem;
