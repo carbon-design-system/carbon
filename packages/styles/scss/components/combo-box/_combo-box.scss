@@ -39,6 +39,7 @@
 
   .#{$prefix}--list-box--expanded
     .#{$prefix}--combo-box--input--focus.#{$prefix}--text-input {
+    outline-offset: convert.to-rem(-1px);
     outline-width: convert.to-rem(1px);
   }
 

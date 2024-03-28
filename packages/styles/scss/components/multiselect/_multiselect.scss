@@ -100,6 +100,7 @@
   .#{$prefix}--multi-select--filterable.#{$prefix}--list-box--expanded:has(
       input[aria-activedescendant]:not([aria-activedescendant=''])
     ) {
+    outline-offset: convert.to-rem(-1px);
     outline-width: convert.to-rem(1px);
   }
 

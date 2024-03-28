@@ -127,7 +127,7 @@
 
   .#{$prefix}--list-box__wrapper--fluid:not(.#{$prefix}--list-box--up)
     .#{$prefix}--list-box__menu {
-    inset-block-start: calc(100% + convert.to-rem(1px));
+    inset-block-start: calc(100%);
   }
 
   // Invalid / Warning styles
