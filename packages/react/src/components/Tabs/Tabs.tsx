@@ -868,9 +868,9 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
       })}>
       <button
         type="button"
-        tabIndex={selectedIndex === index ? 0 : -1}
+        tabIndex={selectedIndex === index && dismissable ? 0 : -1}
         aria-disabled={disabled}
-        aria-hidden={selectedIndex === index ? 'false' : 'true'}
+        aria-hidden={selectedIndex === index && dismissable ? 'false' : 'true'}
         disabled={disabled}
         className={cx({
           [`${prefix}--tabs__nav-item--close-icon`]: dismissable,
@@ -880,11 +880,13 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
           [`${prefix}--tabs__nav-item--close-icon--disabled`]: disabled,
         })}
         onClick={handleClose}
-        title="Close tab"
+        title={`Remove ${typeof children === 'string' ? children : ''} tab`}
         ref={dismissIconRef}>
         <Close
           aria-hidden={dismissable ? 'false' : 'true'}
-          aria-label="Press delete to close tab"
+          aria-label={`Press delete to remove ${
+            typeof children === 'string' ? children : ''
+          } tab`}
         />
       </button>
     </div>
