@@ -9,8 +9,8 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
   useRef,
-  useState,
   useMemo,
+  useEffect,
   type ForwardedRef,
   type WeakValidationMap,
   type ElementType,
@@ -20,30 +20,53 @@ import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 import { type PolymorphicProps } from '../../types/common';
 import { useWindowEvent } from '../../internal/useEvent';
+import { mapPopoverAlignProp } from '../../tools/createPropAdapter';
+import {
+  useFloating,
+  flip,
+  autoUpdate,
+  arrow,
+  offset,
+} from '@floating-ui/react';
 
 interface PopoverContext {
-  floating: React.Ref<HTMLSpanElement>;
+  setFloating: React.Ref<HTMLSpanElement>;
+  caretRef: React.Ref<HTMLSpanElement>;
+  autoAlign: boolean | null;
 }
 
 const PopoverContext = React.createContext<PopoverContext>({
-  floating: {
+  setFloating: {
     current: null,
   },
+  caretRef: {
+    current: null,
+  },
+  autoAlign: null,
 });
 
 export type PopoverAlignment =
   | 'top'
-  | 'top-left'
-  | 'top-right'
+  | 'top-left' // deprecated
+  | 'top-right' // deprecated
   | 'bottom'
-  | 'bottom-left'
-  | 'bottom-right'
+  | 'bottom-left' // deprecated
+  | 'bottom-right' // deprecated
   | 'left'
-  | 'left-bottom'
-  | 'left-top'
+  | 'left-bottom' // deprecated
+  | 'left-top' // deprecated
   | 'right'
-  | 'right-bottom'
-  | 'right-top';
+  | 'right-bottom' // deprecated
+  | 'right-top' // deprecated
+  // new values to match floating-ui
+  | 'top-start'
+  | 'top-end'
+  | 'bottom-start'
+  | 'bottom-end'
+  | 'left-end'
+  | 'left-start'
+  | 'right-end'
+  | 'right-start';
 
 interface PopoverBaseProps {
   /**
@@ -116,7 +139,7 @@ export const Popover: PopoverComponent = React.forwardRef(
   function PopoverRenderFunction<E extends ElementType = 'span'>(
     {
       isTabTip,
-      align = isTabTip ? 'bottom-left' : 'bottom',
+      align: initialAlign = isTabTip ? 'bottom-start' : 'bottom',
       as: BaseComponent = 'span' as E,
       autoAlign = false,
       caret = isTabTip ? false : true,
@@ -132,7 +155,9 @@ export const Popover: PopoverComponent = React.forwardRef(
   ) {
     const prefix = usePrefix();
     const floating = useRef<HTMLSpanElement>(null);
+    const caretRef = useRef<HTMLSpanElement>(null);
     const popover = useRef<Element>(null);
+    let align = mapPopoverAlignProp(initialAlign);
 
     // If the `Popover` is the last focusable item in the tab order, it should also close when the browser window loses focus  (#12922)
     useWindowEvent('blur', () => {
@@ -147,26 +172,144 @@ export const Popover: PopoverComponent = React.forwardRef(
       }
     });
 
+    // Slug styling places a border around the popover content so the caret
+    // needs to be placed 1px further outside the popover content. To do so,
+    // we look to see if any of the children has a className containing "slug"
+    const initialCaretHeight = React.Children.toArray(children).some((x) => {
+      return (x as any)?.props?.className?.includes('slug');
+    })
+      ? 7
+      : 6;
+    // These defaults match the defaults defined in packages/styles/scss/components/popover/_popover.scss
+    const popoverDimensions = useRef({
+      offset: 10,
+      caretHeight: initialCaretHeight,
+    });
+
+    useIsomorphicEffect(() => {
+      // The popover is only offset when a caret is present. Technically, the custom properties
+      // accessed below can be set by a user even if caret=false, but doing so does not follow
+      // the design specification for Popover.
+      if (caret && popover.current) {
+        // Gather the dimensions of the caret and prefer the values set via custom properties.
+        // If a value is not set via a custom property, provide a default value that matches the
+        // default values defined in the sass style file
+        const getStyle = window.getComputedStyle(popover.current, null);
+        const offsetProperty = getStyle.getPropertyValue(
+          '--cds-popover-offset'
+        );
+        const caretProperty = getStyle.getPropertyValue(
+          '--cds-popover-caret-height'
+        );
+
+        // Handle if the property values are in px or rem.
+        // We want to store just the base number value without a unit suffix
+        if (offsetProperty) {
+          popoverDimensions.current.offset = offsetProperty.includes('px')
+            ? Number(offsetProperty.split('px', 1)[0]) * 1
+            : Number(offsetProperty.split('rem', 1)[0]) * 16;
+        }
+
+        if (caretProperty) {
+          popoverDimensions.current.caretHeight = caretProperty.includes('px')
+            ? Number(caretProperty.split('px', 1)[0]) * 1
+            : Number(caretProperty.split('rem', 1)[0]) * 16;
+        }
+      }
+    });
+
+    const { refs, floatingStyles, placement, middlewareData } = useFloating(
+      autoAlign
+        ? {
+            placement: align,
+
+            // The floating element is positioned relative to its nearest
+            // containing block (usually the viewport). It will in many cases also
+            // “break” the floating element out of a clipping ancestor.
+            // https://floating-ui.com/docs/misc#clipping
+            strategy: 'fixed',
+
+            // Middleware order matters, arrow should be last
+            middleware: [
+              offset(!isTabTip ? popoverDimensions?.current?.offset : 0),
+              flip({ fallbackAxisSideDirection: 'start' }),
+              arrow({
+                element: caretRef,
+              }),
+            ],
+            whileElementsMounted: autoUpdate,
+          }
+        : {} // When autoAlign is turned off, floating-ui will not be used
+    );
+
     const value = useMemo(() => {
       return {
         floating,
+        setFloating: refs.setFloating,
+        caretRef,
+        autoAlign: autoAlign,
       };
-    }, []);
+    }, [refs.setFloating, autoAlign]);
 
     if (isTabTip) {
       const tabTipAlignments: PopoverAlignment[] = [
-        'bottom-left',
-        'bottom-right',
+        'bottom-start',
+        'bottom-end',
       ];
 
       if (!tabTipAlignments.includes(align)) {
-        align = 'bottom-left';
+        align = 'bottom-start';
       }
     }
 
+    useEffect(() => {
+      if (autoAlign) {
+        Object.keys(floatingStyles).forEach((style) => {
+          if (refs.floating.current) {
+            refs.floating.current.style[style] = floatingStyles[style];
+          }
+        });
+
+        if (
+          caret &&
+          middlewareData &&
+          middlewareData.arrow &&
+          caretRef?.current
+        ) {
+          const { x, y } = middlewareData.arrow;
+
+          const staticSide = {
+            top: 'bottom',
+            right: 'left',
+            bottom: 'top',
+            left: 'right',
+          }[placement.split('-')[0]];
+
+          caretRef.current.style.left = x != null ? `${x}px` : '';
+          caretRef.current.style.top = y != null ? `${y}px` : '';
+
+          // Ensure the static side gets unset when flipping to other placements' axes.
+          caretRef.current.style.right = '';
+          caretRef.current.style.bottom = '';
+
+          if (staticSide) {
+            caretRef.current.style[staticSide] = `${-popoverDimensions?.current
+              ?.caretHeight}px`;
+          }
+        }
+      }
+    }, [
+      floatingStyles,
+      refs.floating,
+      autoAlign,
+      middlewareData,
+      placement,
+      caret,
+    ]);
+
     const ref = useMergedRefs([forwardRef, popover]);
-    const [autoAligned, setAutoAligned] = useState(false);
-    const [autoAlignment, setAutoAlignment] = useState(align);
+    const currentAlignment =
+      autoAlign && placement !== align ? placement : align;
     const className = cx(
       {
         [`${prefix}--popover-container`]: true,
@@ -174,150 +317,64 @@ export const Popover: PopoverComponent = React.forwardRef(
         [`${prefix}--popover--drop-shadow`]: dropShadow,
         [`${prefix}--popover--high-contrast`]: highContrast,
         [`${prefix}--popover--open`]: open,
-        [`${prefix}--popover--${autoAlignment}`]: autoAligned && !isTabTip,
-        [`${prefix}--popover--${align}`]: !autoAligned,
+        [`${prefix}--popover--auto-align`]: autoAlign,
+        [`${prefix}--popover--${currentAlignment}`]: true,
         [`${prefix}--popover--tab-tip`]: isTabTip,
       },
       customClassName
     );
 
-    useIsomorphicEffect(() => {
-      if (!open) {
-        return;
-      }
-
-      if (!autoAlign || isTabTip) {
-        setAutoAligned(false);
-        return;
-      }
-
-      if (!floating.current) {
-        return;
-      }
-
-      if (autoAligned === true) {
-        return;
-      }
-
-      const rect = floating.current.getBoundingClientRect();
-
-      // The conditions, per side, of when the popover is not visible, excluding the popover's internal padding(16)
-      const conditions = {
-        left: rect.x < -16,
-        top: rect.y < -16,
-        right:
-          rect.x + (rect.width - 16) > document.documentElement.clientWidth,
-        bottom:
-          rect.y + (rect.height - 16) > document.documentElement.clientHeight,
-      };
-
-      if (
-        !conditions.left &&
-        !conditions.top &&
-        !conditions.right &&
-        !conditions.bottom
-      ) {
-        setAutoAligned(false);
-        return;
-      }
-
-      const alignments: PopoverAlignment[] = [
-        'top',
-        'top-left',
-        'right-bottom',
-        'right',
-        'right-top',
-        'bottom-left',
-        'bottom',
-        'bottom-right',
-        'left-top',
-        'left',
-        'left-bottom',
-        'top-right',
-      ];
-
-      // Creates the prioritized list of options depending on ideal alignment coming from `align`
-      const options = [align];
-      let option =
-        alignments[(alignments.indexOf(align) + 1) % alignments.length];
-
-      while (option) {
-        if (options.includes(option)) {
-          break;
-        }
-        options.push(option);
-        option =
-          alignments[(alignments.indexOf(option) + 1) % alignments.length];
-      }
-
-      function isVisible(alignment: PopoverAlignment) {
-        if (!popover.current || !floating.current) {
-          return false;
-        }
-
-        popover.current.classList.add(`${prefix}--popover--${alignment}`);
-
-        const rect = floating.current.getBoundingClientRect();
-
-        // Check if popover is not visible to the left of the screen
-        if (rect.x < -16) {
-          popover.current.classList.remove(`${prefix}--popover--${alignment}`);
-          return false;
-        }
-
-        // Check if popover is not visible at the top of the screen
-        if (rect.y < -16) {
-          popover.current.classList.remove(`${prefix}--popover--${alignment}`);
-          return false;
-        }
-
-        // Check if popover is not visible to right of screen
-        if (rect.x + (rect.width - 16) > document.documentElement.clientWidth) {
-          popover.current.classList.remove(`${prefix}--popover--${alignment}`);
-          return false;
-        }
-
-        // Check if popover is not visible to bottom of screen
-        if (
-          rect.y + (rect.height - 16) >
-          document.documentElement.clientHeight
-        ) {
-          popover.current.classList.remove(`${prefix}--popover--${alignment}`);
-          return false;
-        }
-
-        popover.current.classList.remove(`${prefix}--popover--${alignment}`);
-        return true;
-      }
-
-      let alignment: PopoverAlignment | null = null;
-
-      for (let i = 0; i < options.length; i++) {
-        const option = options[i];
-
-        if (isVisible(option)) {
-          alignment = option;
-          break;
-        }
-      }
-
-      if (alignment) {
-        setAutoAligned(true);
-        setAutoAlignment(alignment);
-      }
-    }, [autoAligned, align, autoAlign, prefix, open, isTabTip]);
-
     const mappedChildren = React.Children.map(children, (child) => {
       const item = child as any;
 
-      if (item?.type === 'button') {
-        const { className } = item.props;
+      if (
+        (item?.type === 'button' ||
+          (autoAlign && item?.type?.displayName !== 'PopoverContent') ||
+          (autoAlign && item?.type?.displayName === 'ToggletipButton')) &&
+        React.isValidElement(item)
+      ) {
+        const className = (item?.props as any)?.className;
+        const ref = (item?.props as any).ref;
         const tabTipClasses = cx(
           `${prefix}--popover--tab-tip__button`,
           className
         );
-        return React.cloneElement(item, {
-          className: tabTipClasses,
+
+        return React.cloneElement(item as any, {
+          className:
+            isTabTip && item?.type === 'button'
+              ? tabTipClasses
+              : className || '',
+
+          // With cloneElement, if you pass a `ref`, it overrides the original ref.
+          // https://react.dev/reference/react/cloneElement#parameters
+          // The block below works around this and ensures that the original ref is still
+          // called while allowing the floating-ui reference element to be set as well.
+          // `useMergedRefs` can't be used here because hooks can't be called from within a callback.
+          // More here: https://github.com/facebook/react/issues/8873#issuecomment-489579878
+          ref: (node) => {
+            // For a popover, there isn't an explicit trigger component, it's just the first child that's
+            // passed in which should *not* be PopoverContent.
+            // For a toggletip there is a specific trigger component, ToggletipButton.
+            // In either of these caes we want to set this as the reference node for floating-ui autoAlign
+            // positioning.
+            if (
+              (autoAlign &&
+                (item?.type as any)?.displayName !== 'PopoverContent') ||
+              (autoAlign &&
+                (item?.type as any)?.displayName === 'ToggletipButton')
+            ) {
+              // Set the reference element for floating-ui
+              refs.setReference(node);
+            }
+
+            // Call the original ref, if any
+            if (typeof ref === 'function') {
+              ref(node);
+            } else if (ref !== null && ref !== undefined) {
+              ref.current = node;
+            }
+          },
         });
       } else {
         return item;
@@ -329,7 +386,7 @@ export const Popover: PopoverComponent = React.forwardRef(
     return (
       <PopoverContext.Provider value={value}>
         <BaseComponentAsAny {...rest} className={className} ref={ref}>
-          {isTabTip ? mappedChildren : children}
+          {autoAlign || isTabTip ? mappedChildren : children}
         </BaseComponentAsAny>
       </PopoverContext.Provider>
     );
@@ -348,20 +405,30 @@ Popover.propTypes = {
    */
   align: PropTypes.oneOf([
     'top',
-    'top-left',
-    'top-right',
+    'top-left', // deprecated use top-start instead
+    'top-right', // deprecated use top-end instead
 
     'bottom',
-    'bottom-left',
-    'bottom-right',
+    'bottom-left', // deprecated use bottom-start instead
+    'bottom-right', // deprecated use bottom-end instead
 
     'left',
-    'left-bottom',
-    'left-top',
+    'left-bottom', // deprecated use left-end instead
+    'left-top', // deprecated use left-start instead
 
     'right',
-    'right-bottom',
-    'right-top',
+    'right-bottom', // deprecated use right-end instead
+    'right-top', // deprecated use right-start instead
+
+    // new values to match floating-ui
+    'top-start',
+    'top-end',
+    'bottom-start',
+    'bottom-end',
+    'left-end',
+    'left-start',
+    'right-end',
+    'right-start',
   ]),
 
   /**
@@ -426,19 +493,37 @@ function PopoverContentRenderFunction(
   forwardRef: React.ForwardedRef<HTMLSpanElement>
 ) {
   const prefix = usePrefix();
-  const { floating } = React.useContext(PopoverContext);
-  const ref = useMergedRefs([floating, forwardRef]);
+  const { setFloating, caretRef, autoAlign } = React.useContext(PopoverContext);
+  const ref = useMergedRefs([setFloating, forwardRef]);
+
   return (
     <span {...rest} className={`${prefix}--popover`}>
       <span className={cx(`${prefix}--popover-content`, className)} ref={ref}>
         {children}
+        {autoAlign && (
+          <span
+            className={cx({
+              [`${prefix}--popover-caret`]: true,
+              [`${prefix}--popover--auto-align`]: true,
+            })}
+            ref={caretRef}
+          />
+        )}
       </span>
-      <span className={`${prefix}--popover-caret`} />
+      {!autoAlign && (
+        <span
+          className={cx({
+            [`${prefix}--popover-caret`]: true,
+          })}
+          ref={caretRef}
+        />
+      )}
     </span>
   );
 }
 
 export const PopoverContent = React.forwardRef(PopoverContentRenderFunction);
+PopoverContent.displayName = 'PopoverContent';
 
 PopoverContent.propTypes = {
   /**

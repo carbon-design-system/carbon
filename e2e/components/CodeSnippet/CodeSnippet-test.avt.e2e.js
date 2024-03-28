@@ -127,7 +127,7 @@ test.describe('@avt CodeSnippet', () => {
     await page.keyboard.press('Tab');
     await page.keyboard.press('Enter');
     await expect(page.getByText('Show less')).toBeVisible();
-    await expect(page.getByText('Show more')).not.toBeVisible();
+    await expect(page.getByText('Show more')).toBeHidden();
   });
 
   test('@avt-keyboard-nav singleline', async ({ page }) => {

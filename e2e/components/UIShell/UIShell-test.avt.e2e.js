@@ -113,9 +113,7 @@ test.describe('@avt UIShell', () => {
     await expect(page.getByRole('link', { name: 'Sub-link 3' })).toBeFocused();
     // tab once more and the sublinks menu should close
     await page.keyboard.press('Tab');
-    await expect(
-      page.getByRole('link', { name: 'Sub-link 1' })
-    ).not.toBeVisible();
+    await expect(page.getByRole('link', { name: 'Sub-link 1' })).toBeHidden();
     // tab through to open the sidenav
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
