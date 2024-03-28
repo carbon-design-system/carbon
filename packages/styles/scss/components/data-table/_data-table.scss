@@ -1003,7 +1003,7 @@
   .#{$prefix}--data-table tbody tr.#{$prefix}--data-table--slug-row:hover,
   tr.#{$prefix}--data-table--slug-row:hover
     + .#{$prefix}--expandable-row[data-child-row],
-  tr.#{$prefix}--expandable-row--hover
+  tr.#{$prefix}--data-table--slug-row.#{$prefix}--expandable-row--hover
     + .#{$prefix}--expandable-row[data-child-row]:hover,
   tr.#{$prefix}--expandable-row--hover.#{$prefix}--data-table--slug-row,
   tr.#{$prefix}--data-table--selected.#{$prefix}--parent-row.#{$prefix}--expandable-row--hover.#{$prefix}--data-table--slug-row {
