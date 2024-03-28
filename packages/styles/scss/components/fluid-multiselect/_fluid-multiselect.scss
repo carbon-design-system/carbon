@@ -12,6 +12,7 @@
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
+@use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../multiselect';
 @use '../fluid-list-box';
@@ -48,5 +49,12 @@
     .#{$prefix}--multi-select--filterable.#{$prefix}--combo-box
     .#{$prefix}--list-box__field {
     align-items: baseline;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--multi-select--filterable__wrapper:not(
+      .#{$prefix}--list-box--up
+    )
+    .#{$prefix}--list-box__menu {
+    inset-block-start: calc(100% + convert.to-rem(1px));
   }
 }

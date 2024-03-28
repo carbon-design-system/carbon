@@ -8,6 +8,7 @@
 @use '../list-box';
 @use '../../config' as *;
 @use '../../theme' as *;
+@use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 
 /// Combo box styles
@@ -34,6 +35,12 @@
 
   .#{$prefix}--combo-box--input--focus.#{$prefix}--text-input {
     @include focus-outline('outline');
+  }
+
+  .#{$prefix}--list-box--expanded
+    .#{$prefix}--combo-box--input--focus.#{$prefix}--text-input {
+    outline-offset: convert.to-rem(-1px);
+    outline-width: convert.to-rem(1px);
   }
 
   .#{$prefix}--combo-box .#{$prefix}--list-box__field,

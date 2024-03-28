@@ -149,6 +149,10 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
     if (onMenuChange) {
       onMenuChange(nextIsOpen);
     }
+
+    if (!isOpen) {
+      setHighlightedIndex(0);
+    }
   }
 
   function handleOnOuterClick() {
@@ -173,6 +177,34 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
         break;
       case stateChangeTypes.keyDownEscape:
         handleOnMenuChange(false);
+        setHighlightedIndex(0);
+        break;
+      case stateChangeTypes.changeInput:
+        setHighlightedIndex(0);
+        break;
+      case stateChangeTypes.keyDownEnter:
+        if (!isOpen) {
+          setHighlightedIndex(0);
+        }
+        break;
+      case stateChangeTypes.clickItem:
+        if (isOpen) {
+          const sortedItems = sortItems(
+            filterItems(items, { itemToString, inputValue }),
+            {
+              selectedItems: {
+                top: changes.selectedItems,
+                fixed: [],
+                'top-after-reopen': topItems,
+              }[selectionFeedback],
+              itemToString,
+              compareItems,
+              locale,
+            }
+          );
+          const sortedSelectedIndex = sortedItems.indexOf(changes.selectedItem);
+          setHighlightedIndex(sortedSelectedIndex);
+        }
         break;
     }
   }

@@ -113,8 +113,7 @@ test.describe('@avt MultiSelect', () => {
     await page.keyboard.press('Space');
     await expect(menu).toBeVisible();
     // Navigation inside the menu
-    // move to first option
-    await page.keyboard.press('ArrowDown');
+    // Focus on first element by default
     await expect(
       page.getByRole('option', {
         name: 'An example option that is really long to show what should be done to handle long text',
@@ -206,8 +205,7 @@ test.describe('@avt MultiSelect', () => {
     await page.keyboard.press('Space');
     await expect(menu).toBeVisible();
     // Navigation inside the menu
-    // move to first option
-    await page.keyboard.press('ArrowDown');
+    // Focus on first element by default
     await expect(
       page.getByRole('option', {
         name: 'An example option that is really long to show what should be done to handle long text',
