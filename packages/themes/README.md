@@ -86,7 +86,6 @@ import {
   background,
   spacing01,
   iconPrimary,
-
 } from '@carbon/themes';
 ```
 
