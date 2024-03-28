@@ -556,7 +556,6 @@ const MultiSelect = React.forwardRef(
               highlightedIndex: 0,
             };
           } else {
-            console.log(' open');
             return {
               ...changes,
               highlightedIndex: props.items.indexOf(highlightedIndex),

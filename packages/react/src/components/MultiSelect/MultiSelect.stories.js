@@ -111,14 +111,6 @@ const items = [
     id: 'downshift-1-item-5',
     text: 'Option 5',
   },
-  {
-    id: 'downshift-1-item-6',
-    text: 'Option 6',
-  },
-  {
-    id: 'downshift-1-item-7',
-    text: 'Option 7',
-  },
 ];
 
 export const Playground = (args) => {
