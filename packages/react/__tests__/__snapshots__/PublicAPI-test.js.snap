@@ -8244,6 +8244,9 @@ Map {
       "slug": Object {
         "type": "node",
       },
+      "text": Object {
+        "type": "string",
+      },
       "title": [Function],
       "type": Object {
         "args": Array [

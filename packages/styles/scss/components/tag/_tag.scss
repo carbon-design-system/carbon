@@ -48,7 +48,7 @@
     margin: $spacing-02;
     cursor: default;
     // restricts size of contained elements
-    max-inline-size: 100%;
+    max-inline-size: convert.to-rem(208px);
     min-block-size: layout.size('height');
     // ensures tag stays pill shaped;
     min-inline-size: convert.to-rem(32px);
@@ -72,21 +72,27 @@
       padding-inline-start: $spacing-03;
     }
 
+    &:not(.#{$prefix}--tag--selectable) {
+      border: 0;
+    }
+
     &:not(:first-child) {
       margin-inline-start: 0;
     }
   }
 
   .#{$prefix}--tag__label {
+    display: block;
     overflow: hidden;
-    max-inline-size: 100%;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
   .#{$prefix}--tag--interactive:focus {
-    box-shadow: inset 0 0 0 1px $focus;
-    outline: none;
+    // box-shadow: inset 0 0 0 1px $focus;
+    // outline: none;
+    outline: 2px solid $focus;
+    outline-offset: 1px;
   }
 
   .#{$prefix}--tag--interactive:hover {
@@ -406,6 +412,20 @@
 
   .#{$prefix}--tag__close-icon:focus {
     @include high-contrast-mode('focus');
+  }
+
+  .#{$prefix}--tag-label-tooltip {
+    max-inline-size: -webkit-fill-available;
+  }
+
+  .#{$prefix}--tag__custom-icon + .#{$prefix}--tag-label-tooltip {
+    max-inline-size: convert.to-rem(176px);
+  }
+
+  .#{$prefix}--tag--filter
+    .#{$prefix}--tag__custom-icon
+    + .#{$prefix}--tag-label-tooltip {
+    max-inline-size: convert.to-rem(158px);
   }
   /* stylelint-enable */
 }
