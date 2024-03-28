@@ -120,7 +120,7 @@ test.describe('@avt FileUploader', () => {
     // Delete the file
     await page.keyboard.press('Tab');
     await page.keyboard.press('Enter');
-    await expect(page.getByText('test-file-for-uploading')).not.toBeVisible();
+    await expect(page.getByText('test-file-for-uploading')).toBeHidden();
   });
 
   test.slow(
@@ -164,7 +164,7 @@ test.describe('@avt FileUploader', () => {
       await page.keyboard.press('Enter');
       await expect(
         page.locator('#test-upload-file-long-text-for-tooltip-to-show-up.jpg')
-      ).not.toBeVisible();
+      ).toBeHidden();
     }
   );
 
@@ -207,6 +207,6 @@ test.describe('@avt FileUploader', () => {
     await page.keyboard.press('Enter');
     await expect(
       page.locator('#test-upload-file-long-text-for-tooltip-to-show-up.jpg')
-    ).not.toBeVisible();
+    ).toBeHidden();
   });
 });

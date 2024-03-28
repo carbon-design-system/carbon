@@ -66,8 +66,8 @@ test.describe('@avt Toggle', () => {
     await page.keyboard.press('Tab');
     await expect(page.getByRole('switch')).toBeVisible();
     await page.keyboard.press('Space');
-    await page.getByText('Off');
+    page.getByText('Off');
     await page.keyboard.press('Space');
-    await page.getByText('On');
+    page.getByText('On');
   });
 });
