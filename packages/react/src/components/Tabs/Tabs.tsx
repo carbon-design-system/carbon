@@ -882,7 +882,9 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
         title={`Remove ${typeof children === 'string' ? children : ''} tab`}
         ref={dismissIconRef}>
         <Close
-          aria-hidden={dismissable ? 'false' : 'true'}
+          aria-hidden={
+            selectedIndex === index && dismissable ? 'false' : 'true'
+          }
           aria-label={`Press delete to remove ${
             typeof children === 'string' ? children : ''
           } tab`}
