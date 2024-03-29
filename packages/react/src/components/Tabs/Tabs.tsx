@@ -850,7 +850,6 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
   const handleClose = (evt) => {
     evt.stopPropagation();
     onTabCloseRequest?.(index);
-    setSelectedIndex(index);
     if (tabRef.current) {
       tabRef.current.focus();
     }
