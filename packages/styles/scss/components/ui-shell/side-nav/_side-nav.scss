@@ -539,6 +539,12 @@
     fill: $icon-secondary;
   }
 
+  // Collapse submenus when side nav collapse
+  .#{$prefix}--side-nav:not(.#{$prefix}--side-nav--expanded)
+    .#{$prefix}--side-nav__menu {
+    display: none;
+  }
+
   // Windows HCM fix
   .#{$prefix}--side-nav__icon > svg,
   .#{$prefix}--side-nav
