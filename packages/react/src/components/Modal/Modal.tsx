@@ -473,11 +473,11 @@ const Modal = React.forwardRef(function Modal(
     };
   }, []);
 
-  // Slug is always size `lg`
+  // Slug is always size `sm`
   let normalizedSlug;
   if (slug && slug['type']?.displayName === 'Slug') {
     normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-      size: 'lg',
+      size: 'sm',
     });
   }
 

@@ -15,5 +15,6 @@ module.exports = {
     require.resolve('./plugins/storybook'),
     require.resolve('./plugins/testing-library'),
     require.resolve('./plugins/eslint-plugin-playwright'),
+    require.resolve('./plugins/eslint-plugin-ssr-friendly'),
   ],
 };
