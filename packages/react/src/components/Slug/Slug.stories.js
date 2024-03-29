@@ -41,8 +41,6 @@ const aiContent = (
   </div>
 );
 
-const content = <span>AI was used to generate this content</span>;
-
 export const Default = () => (
   <>
     <div className="slug-container slug-container-example">
@@ -136,17 +134,6 @@ export const Default = () => (
             <Button>View details</Button>
           </SlugActions>
         </SlugContent>
-      </Slug>
-    </div>
-    <div className="slug-container-example slug-container">
-      <Slug kind="hollow" autoAlign size="mini">
-        <SlugContent>{content}</SlugContent>
-      </Slug>
-      <Slug kind="hollow" autoAlign size="2xs">
-        <SlugContent>{content}</SlugContent>
-      </Slug>
-      <Slug kind="hollow" autoAlign size="xs">
-        <SlugContent>{content}</SlugContent>
       </Slug>
     </div>
     <div className="slug-container-example slug-container">
@@ -255,43 +242,6 @@ export const Default = () => (
         </SlugContent>
       </Slug>
     </div>
-    <div className="slug-container-example slug-container">
-      <Slug autoAlign kind="inline" dotType="hollow" size="sm">
-        <SlugContent>{content}</SlugContent>
-      </Slug>
-      <Slug autoAlign kind="inline" dotType="hollow" size="md">
-        <SlugContent>{content}</SlugContent>
-      </Slug>
-      <Slug autoAlign kind="inline" dotType="hollow" size="lg">
-        <SlugContent>{content}</SlugContent>
-      </Slug>
-    </div>
-    <div className="slug-container-example slug-container">
-      <Slug
-        autoAlign
-        kind="inline"
-        dotType="hollow"
-        size="sm"
-        aiTextLabel="Text goes here">
-        <SlugContent>{content}</SlugContent>
-      </Slug>
-      <Slug
-        autoAlign
-        kind="inline"
-        dotType="hollow"
-        size="md"
-        aiTextLabel="Text goes here">
-        <SlugContent>{content}</SlugContent>
-      </Slug>
-      <Slug
-        autoAlign
-        kind="inline"
-        dotType="hollow"
-        size="lg"
-        aiTextLabel="Text goes here">
-        <SlugContent>{content}</SlugContent>
-      </Slug>
-    </div>
   </>
 );
 
@@ -373,11 +323,6 @@ Callout.argTypes = {
       disable: true,
     },
   },
-  dotType: {
-    table: {
-      disable: true,
-    },
-  },
   kind: {
     table: {
       disable: true,
@@ -411,43 +356,38 @@ Callout.argTypes = {
 };
 
 export const Playground = (args) => {
-  const { kind, dotType, showSlugActions = true } = args;
+  const { showSlugActions = true } = args;
 
-  let renderedContent;
-  if (kind === 'hollow' || dotType === 'hollow') {
-    renderedContent = content;
-  } else {
-    renderedContent = (
-      <>
-        <div>
-          <p className="secondary">AI Explained</p>
-          <h1>84%</h1>
-          <p className="secondary bold">Confidence score</p>
-          <p className="secondary">
-            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-          </p>
-          <hr />
-          <p className="secondary">Model type</p>
-          <p className="bold">Foundation model</p>
-        </div>
-        {showSlugActions && (
-          <SlugActions>
-            <IconButton kind="ghost" label="View">
-              <View />
-            </IconButton>
-            <IconButton kind="ghost" label="Open Folder">
-              <FolderOpen />
-            </IconButton>
-            <IconButton kind="ghost" label="Folders">
-              <Folders />
-            </IconButton>
-            <Button>View details</Button>
-          </SlugActions>
-        )}
-      </>
-    );
-  }
+  const renderedContent = (
+    <>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+      {showSlugActions && (
+        <SlugActions>
+          <IconButton kind="ghost" label="View">
+            <View />
+          </IconButton>
+          <IconButton kind="ghost" label="Open Folder">
+            <FolderOpen />
+          </IconButton>
+          <IconButton kind="ghost" label="Folders">
+            <Folders />
+          </IconButton>
+          <Button>View details</Button>
+        </SlugActions>
+      )}
+    </>
+  );
 
   return (
     <>
