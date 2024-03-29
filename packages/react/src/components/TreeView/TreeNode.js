@@ -38,14 +38,9 @@ const TreeNode = React.forwardRef(
     },
     ref
   ) => {
-    const deprecatedTreeviewControllableFlag = useFeatureFlag(
+    const enableTreeviewControllable = useFeatureFlag(
       'enable-treeview-controllable'
     );
-    const treeviewControllableFlag = useFeatureFlag(
-      'enable-experimental-treeview-controllable'
-    );
-    const enableTreeviewControllable =
-      deprecatedTreeviewControllableFlag || treeviewControllableFlag;
 
     const { current: id } = useRef(nodeId || uniqueId());
 
@@ -289,7 +284,7 @@ TreeNode.propTypes = {
 
   /**
    * **[Experimental]** The default expansion state of the node.
-   * *This is only supported with the `enable-experimental-treeview-controllable` feature flag!*
+   * *This is only supported with the `enable-treeview-controllable` feature flag!*
    */
   defaultIsExpanded: PropTypes.bool,
 

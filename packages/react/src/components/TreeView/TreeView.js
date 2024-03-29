@@ -27,14 +27,9 @@ export default function TreeView({
   size = 'sm',
   ...rest
 }) {
-  const deprecatedTreeviewControllableFlag = useFeatureFlag(
+  const enableTreeviewControllable = useFeatureFlag(
     'enable-treeview-controllable'
   );
-  const treeviewControllableFlag = useFeatureFlag(
-    'enable-experimental-treeview-controllable'
-  );
-  const enableTreeviewControllable =
-    deprecatedTreeviewControllableFlag || treeviewControllableFlag;
 
   const { current: treeId } = useRef(rest.id || uniqueId());
   const prefix = usePrefix();
@@ -294,7 +289,7 @@ TreeView.propTypes = {
 
   /**
    * **[Experimental]** Callback function that is called when any node is activated.
-   * *This is only supported with the `enable-experimental-treeview-controllable` feature flag!*
+   * *This is only supported with the `enable-treeview-controllable` feature flag!*
    */
   onActivate: PropTypes.func,
 

@@ -30,12 +30,12 @@ components with all feature flags turned on.
 
 ## Current feature flags
 
-Flags prefixed with `enable-experimental-*` should be considered unstable and
-subject to change.
+Flags prefixed with `enable-*` contain features we'd like consuming projects to
+test and give us feedback on. They're generally stable and unlikely to change
+but may change based on your feedback.
 
-Flags prefixed with `enable-v12-*` are still experimental in nature, but are
-unlikely to change. They will be marked as `true` or "on" by default in the next
-major version, v12.
+Flags prefixed with `enable-v12-*` are stable and won't change. They will be
+marked as `true` or "on" by default in the next major version, v12.
 
 For more details on our approach to experimental features, see the
 [documentation in the Carbon monorepo](https://github.com/carbon-design-system/carbon/blob/main/docs/experimental-code.md).
@@ -43,7 +43,7 @@ For more details on our approach to experimental features, see the
 | Flag                                               | Description                                                              | Default | Javascript flag | Sass flag |
 | -------------------------------------------------- | ------------------------------------------------------------------------ | ------- | --------------- | --------- |
 | `enable-experimental-tile-contrast`                | Enable the improved styling for tiles that provides better contrast      | `false` |                 | ✅        |
-| `enable-experimental-treeview-controllable`        | Enable the new TreeView controllable API                                 | `false` | ✅              |           |
+| `enable-treeview-controllable`                     | Enable the new TreeView controllable API                                 | `false` | ✅              |           |
 | `enable-experimental-focus-wrap-without-sentinels` | Enable the new focus wrap behavior that doesn't use sentinel nodes       | `false` | ✅              |           |
 | `enable-v12-tile-default-icons`                    | Enable default icons for Tile components                                 | `false` | ✅              |           |
 | `enable-v12-overflowmenu`                          | Enable the use of the v12 OverflowMenu leveraging the Menu subcomponents | `false` | ✅              |           |
