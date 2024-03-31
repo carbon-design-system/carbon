@@ -113,7 +113,7 @@ interface TreeNodeProps {
    * Optional prop to allow each node to have an associated icon.
    * Can be a React component class
    */
-  renderIcon?: React.FunctionComponent<{ className: string }>;
+  renderIcon?: object | null;
 
   /**
    * Array containing all selected node IDs in the tree
@@ -356,6 +356,7 @@ const TreeNode = React.forwardRef<HTMLLIElement, TreeNodeProps>(
       role: 'treeitem',
     };
 
+    const TreeIcon = Icon as React.FunctionComponent<{ className: string }>;
     if (!children) {
       return (
         // eslint-disable-next-line jsx-a11y/role-supports-aria-props
@@ -365,7 +366,7 @@ const TreeNode = React.forwardRef<HTMLLIElement, TreeNodeProps>(
           aria-selected={treeNodeProps['aria-selected'] || undefined}
           id={treeNodeProps.id as string}>
           <div className={`${prefix}--tree-node__label`} ref={currentNodeLabel}>
-            {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
+            {TreeIcon && <TreeIcon className={`${prefix}--tree-node__icon`} />}
             {label}
           </div>
         </li>
@@ -385,12 +386,11 @@ const TreeNode = React.forwardRef<HTMLLIElement, TreeNodeProps>(
           {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
           <span
             className={`${prefix}--tree-parent-node__toggle`}
-            // disabled={disabled}
             onClick={handleToggleClick}>
             <CaretDown className={toggleClasses} />
           </span>
           <span className={`${prefix}--tree-node__label__details`}>
-            {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
+            {TreeIcon && <TreeIcon className={`${prefix}--tree-node__icon`} />}
             {label}
           </span>
         </div>
@@ -464,7 +464,7 @@ TreeNode.propTypes = {
    * Optional prop to allow each node to have an associated icon.
    * Can be a React component class
    */
-  renderIcon: PropTypes.oneOfType([PropTypes.func]),
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
    * Array containing all selected node IDs in the tree
