@@ -117,7 +117,7 @@ const getInstanceId = setupGetInstanceId();
 type ExcludedAttributes = 'id' | 'onChange' | 'onClick' | 'type' | 'size';
 
 interface OnChangeData<ItemType> {
-  selectedItem?: ItemType | null;
+  selectedItem: ItemType | null | undefined;
   inputValue?: string | null;
 }
 
@@ -358,7 +358,7 @@ const ComboBox = forwardRef(
       setInputValue(
         getInputValue({
           initialSelectedItem,
-          inputValue: '',
+          inputValue,
           itemToString,
           selectedItem: selectedItemProp,
         })
