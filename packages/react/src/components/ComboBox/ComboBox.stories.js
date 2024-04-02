@@ -10,7 +10,6 @@ import React from 'react';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
 import ComboBox from '../ComboBox';
-// import { NewComboBox } from '../ComboBox';
 import mdx from './ComboBox.mdx';
 
 const items = [
@@ -80,24 +79,6 @@ export const Default = () => (
   </div>
 );
 
-// export const New = () => (
-//   <div style={{ width: 300 }}>
-//     <NewComboBox
-//       onChange={() => {}}
-//       id="carbon-combobox"
-//       items={items}
-//       // downshiftProps={{
-//       //   onStateChange: () => {
-//       //     console.log('the state has changed');
-//       //   },
-//       // }}
-//       itemToString={(item) => (item ? item.text : '')}
-//       titleText="ComboBox title"
-//       helperText="Combobox helper text"
-//     />
-//   </div>
-// );
-
 export const AllowCustomValue = () => {
   const filterItems = (menu) => {
     return menu?.item?.toLowerCase().includes(menu?.inputValue?.toLowerCase());
@@ -144,7 +125,7 @@ export const _WithLayer = () => (
 export const Playground = (args) => (
   <div style={{ width: 300 }}>
     <ComboBox
-      id="carbon-combobox1"
+      id="carbon-combobox"
       items={items}
       downshiftProps={{
         onStateChange: () => {
@@ -155,23 +136,7 @@ export const Playground = (args) => (
       titleText="ComboBox title"
       helperText="Combobox helper text"
       {...args}
-      onChange={(selectedItem) => {
-        console.log('changed', selectedItem);
-      }}
     />
-    {/* 
-    <NewComboBox 
-    id="carbon-combobox"
-    items={items}
-    // downshiftProps={{
-    //   onStateChange: () => {
-    //     console.log('the state has changed');
-    //   },
-    // }}
-    itemToString={(item) => (item ? item.text : '')}
-    titleText="ComboBox title1"
-    helperText="Combobox helper text1"
-    {...args}/> */}
   </div>
 );
 
