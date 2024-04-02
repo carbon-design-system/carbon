@@ -12,6 +12,7 @@ import React, {
   ForwardedRef,
   ReactNode,
   Ref,
+  useEffect,
   useContext,
   useState,
 } from 'react';
@@ -57,6 +58,11 @@ interface SideNavMenuProps {
   isSideNavExpanded?: boolean;
 
   /**
+   * Specifies if the SideNavMenu should collapse when the SideNav does
+   */
+  collapseWithSideNav?: boolean;
+
+  /**
    * The tabIndex for the button element.
    * If not specified, the default validation will be applied.
    */
@@ -75,6 +81,7 @@ const SideNavMenu = React.forwardRef<HTMLElement, SideNavMenuProps>(
       defaultExpanded = false,
       isActive = false,
       large = false,
+      collapseWithSideNav = false,
       renderIcon: IconElement,
       isSideNavExpanded,
       tabIndex,
@@ -93,6 +100,13 @@ const SideNavMenu = React.forwardRef<HTMLElement, SideNavMenuProps>(
       [`${prefix}--side-nav__item--large`]: large,
       [customClassName as string]: !!customClassName,
     });
+
+    // When collapseWithSideNav is enabled, set isExpanded to false with isSideNavExpanded
+    useEffect(() => {
+      if (collapseWithSideNav && !isSideNavExpanded && isExpanded) {
+        setIsExpanded(false);
+      }
+    }, [isSideNavExpanded, collapseWithSideNav, isExpanded]);
 
     return (
       // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions

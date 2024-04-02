@@ -431,7 +431,10 @@ export const SideNavRailWHeader = (args) => (
                   </HeaderMenu>
                 </HeaderSideNavItems>
               )}
-              <SideNavMenu renderIcon={Fade} title="Category title">
+              <SideNavMenu
+                collapseWithSideNav={args.collapseWithSideNav}
+                renderIcon={Fade}
+                title="Category title">
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
                   Link
                 </SideNavMenuItem>
@@ -442,7 +445,10 @@ export const SideNavRailWHeader = (args) => (
                   Link
                 </SideNavMenuItem>
               </SideNavMenu>
-              <SideNavMenu renderIcon={Fade} title="Category title">
+              <SideNavMenu
+                collapseWithSideNav={args.collapseWithSideNav}
+                renderIcon={Fade}
+                title="Category title">
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
                   Link
                 </SideNavMenuItem>
@@ -455,7 +461,10 @@ export const SideNavRailWHeader = (args) => (
                   Link
                 </SideNavMenuItem>
               </SideNavMenu>
-              <SideNavMenu renderIcon={Fade} title="Category title">
+              <SideNavMenu
+                collapseWithSideNav={args.collapseWithSideNav}
+                renderIcon={Fade}
+                title="Category title">
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
                   Link
                 </SideNavMenuItem>
@@ -496,6 +505,16 @@ SideNavRailWHeader.argTypes = {
     },
     description:
       "Optional prop to display the side nav rail. It doesn't work along side with `isFixedNav` prop.",
+  },
+  collapseWithSideNav: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+    table: {
+      defaultValue: { summary: false },
+    },
+    description: 'Optional prop to collapse menus when the side nav closes.',
   },
   isFixedNav: {
     control: {

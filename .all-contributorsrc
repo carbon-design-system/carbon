@@ -1470,6 +1470,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "navargas",
+      "name": "Nicholas Vargas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8397737?v=4",
+      "profile": "https://github.com/navargas",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "commitConvention": "none"
