@@ -222,12 +222,17 @@ const Tag = <T extends React.ElementType>({
     tagText = children;
   }
 
+  const tooltipClasses = classNames(
+    `${prefix}--icon-tooltip`,
+    `${prefix}--tag-label-tooltip`
+  );
+
   if (isEllipsisApplied) {
     return (
       <Tooltip
         label={tagText}
         align="bottom"
-        className={`${prefix}--tag-label-tooltip`}
+        className={tooltipClasses}
         closeOnActivation>
         <ComponentTag
           disabled={disabled}
