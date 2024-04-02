@@ -39,10 +39,7 @@ export default {
 
 export const Default = () => {
   return (
-    <RadioButtonGroup
-      legendText="Group label"
-      name="radio-button-group"
-      defaultSelected="radio-1">
+    <RadioButtonGroup legendText="Group label" name="radio-button-group">
       <RadioButton
         labelText="Radio button label"
         value="radio-1"
