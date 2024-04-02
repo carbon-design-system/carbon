@@ -5,13 +5,49 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, {
+  type ComponentType,
+  type FunctionComponent,
+  ReactNode,
+} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { LayoutConstraint } from '../../Layout';
 import { usePrefix } from '../../../internal/usePrefix';
 
-function ContainedListItem({
+interface ContainedListItemProps {
+  /**
+   * A slot for a possible interactive element to render within the item.
+   */
+  action?: ReactNode;
+
+  /**
+   * The content of this item. Must not contain any interactive elements. Use props.action to include those.
+   */
+  children?: ReactNode;
+
+  /**
+   * Additional CSS class names.
+   */
+  className?: string;
+
+  /**
+   * Whether this item is disabled.
+   */
+  disabled?: boolean;
+
+  /**
+   * Provide an optional function to be called when the item is clicked.
+   */
+  onClick?: () => void;
+
+  /**
+   * Provide an optional icon to render in front of the item's content.
+   */
+  renderIcon?: ComponentType | FunctionComponent;
+}
+
+const ContainedListItem: React.FC<ContainedListItemProps> = ({
   action,
   children,
   className,
@@ -19,7 +55,7 @@ function ContainedListItem({
   onClick,
   renderIcon: IconElement,
   ...rest
-}) {
+}) => {
   const prefix = usePrefix();
 
   const isClickable = onClick !== undefined;
@@ -65,7 +101,7 @@ function ContainedListItem({
       )}
     </li>
   );
-}
+};
 
 ContainedListItem.propTypes = {
   /**
@@ -96,6 +132,7 @@ ContainedListItem.propTypes = {
   /**
    * Provide an optional icon to render in front of the item's content.
    */
+  // @ts-expect-error: PropTypes are not expressive enough to cover this case
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 

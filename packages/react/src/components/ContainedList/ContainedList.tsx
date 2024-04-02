@@ -5,14 +5,51 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { LayoutConstraint } from '../Layout';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 
-const variants = ['on-page', 'disclosed'];
+const variants: ('on-page' | 'disclosed')[] = ['on-page', 'disclosed'];
+
+interface ContainedListProps {
+  /**
+   * A slot for a possible interactive element to render.
+   */
+  action?: ReactNode;
+
+  /**
+   * A collection of ContainedListItems to be rendered in the ContainedList
+   */
+  children?: ReactNode;
+
+  /**
+   * Additional CSS class names.
+   */
+  className?: string;
+
+  /**
+   * Specify whether the dividing lines in between list items should be inset.
+   */
+  isInset?: boolean;
+
+  /**
+   * The kind of ContainedList you want to display
+   */
+  kind?: 'on-page' | 'disclosed';
+
+  /**
+   * A label describing the contained list.
+   */
+  label: ReactNode;
+
+  /**
+   * Specify the size of the contained list.
+   */
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+}
 
 function filterChildren(children) {
   if (Array.isArray(children)) {
@@ -50,7 +87,7 @@ function renderChildren(children) {
   return children;
 }
 
-function ContainedList({
+const ContainedList: React.FC<ContainedListProps> = ({
   action,
   children,
   className,
@@ -59,7 +96,7 @@ function ContainedList({
   label,
   size,
   ...rest
-}) {
+}) => {
   const labelId = `${useId('contained-list')}-header`;
   const prefix = usePrefix();
 
@@ -76,9 +113,14 @@ function ContainedList({
 
   const filteredChildren = filterChildren(children);
 
-  const isActionSearch = ['Search', 'ExpandableSearch'].includes(
-    action?.type?.displayName
-  );
+  const isActionSearch =
+    React.isValidElement(action) &&
+    (typeof action.type === 'string'
+      ? ['Search', 'ExpandableSearch'].includes(action.type)
+      : typeof action.type === 'function' &&
+        'displayName' in action.type &&
+        (action.type.displayName === 'Search' ||
+          action.type.displayName === 'ExpandableSearch'));
 
   const renderedChildren = renderChildren(children);
 
@@ -109,7 +151,7 @@ function ContainedList({
       )}
     </div>
   );
-}
+};
 
 ContainedList.propTypes = {
   /**
