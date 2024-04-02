@@ -21,7 +21,29 @@ import { composeEventHandlers } from '../../tools/events';
  * with managing focus. It also passes along refs to each child so that it can
  * help manage focus state of its children.
  */
-class HeaderMenu extends React.Component {
+
+interface HeaderMenuProps {
+  'aria-label'?: string;
+  'aria-labelledby'?: string;
+  className?: string;
+  focusRef?: React.Ref<any>;
+  isActive?: boolean;
+  isCurrentPage?: boolean;
+  menuLinkName: string;
+  onBlur?: (event: React.FocusEvent<HTMLLIElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLLIElement>) => void;
+  renderMenuContent?: () => JSX.Element;
+  tabIndex?: number;
+  children?: React.ReactNode;
+}
+
+interface HeaderMenuState {
+  expanded: boolean;
+  selectedIndex: number | null;
+}
+
+class HeaderMenu extends React.Component<HeaderMenuProps, HeaderMenuState> {
   static propTypes = {
     /**
      * Required props for the accessibility label of the menu
@@ -89,7 +111,9 @@ class HeaderMenu extends React.Component {
 
   static contextType = PrefixContext;
 
-  _subMenus = React.createRef();
+  _subMenus: React.RefObject<HTMLUListElement> = React.createRef();
+  private items: Array<HTMLElement | null> = [];
+  private menuButtonRef: HTMLElement | null = null;
 
   constructor(props) {
     super(props);
@@ -163,8 +187,10 @@ class HeaderMenu extends React.Component {
    * button node when that child should receive focus.
    */
   handleMenuButtonRef = (node) => {
-    if (this.props.focusRef) {
-      this.props.focusRef(node);
+    const { focusRef } = this.props;
+    // Check if focusRef is a function before calling it
+    if (typeof focusRef === 'function') {
+      focusRef(node);
     }
     this.menuButtonRef = node;
   };
@@ -189,7 +215,9 @@ class HeaderMenu extends React.Component {
       }));
 
       // Return focus to menu button when the user hits ESC.
-      this.menuButtonRef.focus();
+      if (this.menuButtonRef !== null) {
+        this.menuButtonRef.focus();
+      }
       return;
     }
   };
@@ -205,7 +233,8 @@ class HeaderMenu extends React.Component {
       children,
       renderMenuContent: MenuContent,
       menuLinkName,
-      focusRef, // eslint-disable-line no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      focusRef,
       onBlur,
       onClick,
       onKeyDown,
@@ -215,10 +244,10 @@ class HeaderMenu extends React.Component {
     const hasActiveDescendant = (childrenArg) =>
       React.Children.toArray(childrenArg).some(
         (child) =>
-          child.props &&
+          React.isValidElement(child) && // This is the type guard
           (child.props.isActive ||
             child.props.isCurrentPage ||
-            (child.props.children instanceof Array &&
+            (Array.isArray(child.props.children) &&
               hasActiveDescendant(child.props.children)))
       );
 
@@ -228,9 +257,9 @@ class HeaderMenu extends React.Component {
     };
     const itemClassName = cx({
       [`${prefix}--header__submenu`]: true,
-      [customClassName]: !!customClassName,
+      [customClassName || 'default-class-name']: !!customClassName,
     });
-    let isActivePage = isActive ? isActive : isCurrentPage;
+    const isActivePage = isActive ? isActive : isCurrentPage;
     const linkClassName = cx({
       [`${prefix}--header__menu-item`]: true,
       [`${prefix}--header__menu-title`]: true,
@@ -286,9 +315,9 @@ class HeaderMenu extends React.Component {
    * `tabIndex: -1` so the user won't hit a large number of items in their tab
    * sequence when they might not want to go through all the items.
    */
-  _renderMenuItem = (item, index) => {
+  _renderMenuItem = (item: React.ReactNode, index: number) => {
     if (React.isValidElement(item)) {
-      return React.cloneElement(item, {
+      return React.cloneElement(item as React.ReactElement<any>, {
         ref: this.handleItemRef(index),
       });
     }
@@ -296,7 +325,7 @@ class HeaderMenu extends React.Component {
 }
 
 const HeaderMenuForwardRef = React.forwardRef((props, ref) => {
-  return <HeaderMenu {...props} focusRef={ref} />;
+  return <HeaderMenu menuLinkName="link" {...props} focusRef={ref} />;
 });
 
 HeaderMenuForwardRef.displayName = 'HeaderMenu';
