@@ -224,6 +224,7 @@ const Tag = <T extends React.ElementType>({
 
   const tooltipClasses = classNames(
     `${prefix}--icon-tooltip`,
+    `${prefix}--tooltip-disabled-onmouseenter`,
     `${prefix}--tag-label-tooltip`
   );
 
@@ -233,6 +234,7 @@ const Tag = <T extends React.ElementType>({
         label={tagText}
         align="bottom"
         className={tooltipClasses}
+        leaveDelayMs={0}
         closeOnActivation>
         <ComponentTag
           disabled={disabled}
