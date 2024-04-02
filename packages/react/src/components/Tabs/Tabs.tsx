@@ -851,6 +851,9 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
     evt.stopPropagation();
     onTabCloseRequest?.(index);
 
+    // We focus the tab previous to the tab removed; we -1 from the index then
+    // multiply by 2 to account for the fact that each tab has two children,
+    // the tab button and the remove button
     const tabFocusIndex = (index - 1) * 2;
     if (tabRef.current && tabRef.current.parentElement) {
       if (index === 0) {
