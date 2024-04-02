@@ -851,14 +851,13 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
     evt.stopPropagation();
     onTabCloseRequest?.(index);
 
+    const tabFocusIndex = (index - 1) * 2;
     if (tabRef.current && tabRef.current.parentElement) {
-      if (selectedIndex === index) {
+      if (index === 0) {
         (tabRef.current.parentElement.childNodes[0] as HTMLElement)?.focus();
       } else {
         (
-          tabRef.current.parentElement.childNodes[
-            selectedIndex * 2
-          ] as HTMLElement
+          tabRef.current.parentElement.childNodes[tabFocusIndex] as HTMLElement
         )?.focus();
       }
     }
