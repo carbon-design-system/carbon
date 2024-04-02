@@ -196,20 +196,30 @@ Toggletip.propTypes = {
    */
   align: PropTypes.oneOf([
     'top',
-    'top-left',
-    'top-right',
+    'top-left', // deprecated use top-start instead
+    'top-right', // deprecated use top-end instead
 
     'bottom',
-    'bottom-left',
-    'bottom-right',
+    'bottom-left', // deprecated use bottom-start instead
+    'bottom-right', // deprecated use bottom-end instead
 
     'left',
-    'left-bottom',
-    'left-top',
+    'left-bottom', // deprecated use left-end instead
+    'left-top', // deprecated use left-start instead
 
     'right',
-    'right-bottom',
-    'right-top',
+    'right-bottom', // deprecated use right-end instead
+    'right-top', // deprecated use right-start instead
+
+    // new values to match floating-ui
+    'top-start',
+    'top-end',
+    'bottom-start',
+    'bottom-end',
+    'left-end',
+    'left-start',
+    'right-end',
+    'right-start',
   ]),
 
   /**
@@ -253,13 +263,18 @@ export type ToggleTipButtonProps<T extends React.ElementType> =
  * `ToggletipButton` controls the visibility of the Toggletip through mouse
  * clicks and keyboard interactions.
  */
-export function ToggletipButton<T extends React.ElementType>({
-  children,
-  className: customClassName,
-  label = 'Show information',
-  as: BaseComponent,
-  ...rest
-}: ToggleTipButtonProps<T>) {
+export const ToggletipButton = React.forwardRef(function ToggletipButton<
+  T extends React.ElementType
+>(
+  {
+    children,
+    className: customClassName,
+    label = 'Show information',
+    as: BaseComponent,
+    ...rest
+  }: ToggleTipButtonProps<T>,
+  ref
+) {
   const toggletip = useToggletip();
   const prefix = usePrefix();
   const className = cx(`${prefix}--toggletip-button`, customClassName);
@@ -278,11 +293,12 @@ export function ToggletipButton<T extends React.ElementType>({
       aria-label={label}
       type="button"
       className={className}
+      ref={ref}
       {...rest}>
       {children}
     </button>
   );
-}
+});
 
 ToggletipButton.propTypes = {
   /**
@@ -301,6 +317,8 @@ ToggletipButton.propTypes = {
    */
   label: PropTypes.string,
 };
+
+ToggletipButton.displayName = 'ToggletipButton';
 
 interface ToggletipContentProps {
   children?: ReactNode;

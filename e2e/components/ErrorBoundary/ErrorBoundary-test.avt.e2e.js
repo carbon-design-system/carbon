@@ -35,7 +35,7 @@ test.describe('@avt ErrorBoundary', () => {
     );
   });
 
-  test('@avt-keyboard-state', async ({ page }) => {
+  test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'ErrorBoundary',
       id: 'components-errorboundary--default',
