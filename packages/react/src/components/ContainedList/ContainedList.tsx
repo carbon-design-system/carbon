@@ -15,12 +15,39 @@ import { usePrefix } from '../../internal/usePrefix';
 const variants: ('on-page' | 'disclosed')[] = ['on-page', 'disclosed'];
 
 interface ContainedListProps {
+  /**
+   * A slot for a possible interactive element to render.
+   */
   action?: ReactNode;
+
+  /**
+   * A collection of ContainedListItems to be rendered in the ContainedList
+   */
   children?: ReactNode;
+
+  /**
+   * Additional CSS class names.
+   */
   className?: string;
+
+  /**
+   * Specify whether the dividing lines in between list items should be inset.
+   */
   isInset?: boolean;
+
+  /**
+   * The kind of ContainedList you want to display
+   */
   kind?: 'on-page' | 'disclosed';
+
+  /**
+   * A label describing the contained list.
+   */
   label: ReactNode;
+
+  /**
+   * Specify the size of the contained list.
+   */
   size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
@@ -64,8 +91,8 @@ const ContainedList: React.FC<ContainedListProps> = ({
   action,
   children,
   className,
-  isInset = false,
-  kind = 'on-page',
+  isInset,
+  kind = variants[0],
   label,
   size,
   ...rest

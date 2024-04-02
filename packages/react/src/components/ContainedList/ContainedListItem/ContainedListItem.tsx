@@ -12,11 +12,34 @@ import { LayoutConstraint } from '../../Layout';
 import { usePrefix } from '../../../internal/usePrefix';
 
 interface ContainedListItemProps {
+  /**
+   * A slot for a possible interactive element to render within the item.
+   */
   action?: ReactNode;
+
+  /**
+   * The content of this item. Must not contain any interactive elements. Use props.action to include those.
+   */
   children?: ReactNode;
+
+  /**
+   * Additional CSS class names.
+   */
   className?: string;
+
+  /**
+   * Whether this item is disabled.
+   */
   disabled?: boolean;
+
+  /**
+   * Provide an optional function to be called when the item is clicked.
+   */
   onClick?: () => void;
+
+  /**
+   * Provide an optional icon to render in front of the item's content.
+   */
   renderIcon?: ElementType;
 }
 
@@ -105,7 +128,7 @@ ContainedListItem.propTypes = {
   /**
    * Provide an optional icon to render in front of the item's content.
    */
-  renderIcon: PropTypes.func,
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
 export default ContainedListItem;
