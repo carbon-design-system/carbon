@@ -95,7 +95,7 @@ const SideNavMenu = React.forwardRef<HTMLElement, SideNavMenuProps>(
       [customClassName as string]: !!customClassName,
     });
 
-    if (isSideNavExpanded === false && isExpanded === true && isRail === true) {
+    if (!isSideNavExpanded && isExpanded && isRail) {
       setIsExpanded(false);
       setPrevExpanded(true);
     } else if (
