@@ -7087,6 +7087,9 @@ Map {
       "isActive": Object {
         "type": "bool",
       },
+        "href": Object {
+        "type": "string",
+      },
     },
     "render": [Function],
   },
