@@ -98,11 +98,7 @@ const SideNavMenu = React.forwardRef<HTMLElement, SideNavMenuProps>(
     if (!isSideNavExpanded && isExpanded && isRail) {
       setIsExpanded(false);
       setPrevExpanded(true);
-    } else if (
-      isSideNavExpanded === true &&
-      prevExpanded === true &&
-      isRail === true
-    ) {
+    } else if (isSideNavExpanded && prevExpanded && isRail) {
       setIsExpanded(true);
       setPrevExpanded(false);
     }
