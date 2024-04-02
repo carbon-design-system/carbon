@@ -5,7 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { ElementType, ReactNode } from 'react';
+import React, {
+  type ComponentType,
+  type FunctionComponent,
+  ReactNode,
+} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { LayoutConstraint } from '../../Layout';
@@ -40,7 +44,7 @@ interface ContainedListItemProps {
   /**
    * Provide an optional icon to render in front of the item's content.
    */
-  renderIcon?: ElementType;
+  renderIcon?: ComponentType | FunctionComponent;
 }
 
 const ContainedListItem: React.FC<ContainedListItemProps> = ({
@@ -128,6 +132,7 @@ ContainedListItem.propTypes = {
   /**
    * Provide an optional icon to render in front of the item's content.
    */
+  // @ts-expect-error: PropTypes are not expressive enough to cover this case
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
