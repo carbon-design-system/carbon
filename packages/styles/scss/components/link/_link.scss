@@ -65,11 +65,11 @@ $link-focus-text-color: custom-property.get-var(
     }
 
     &:visited {
-      color: $link-visited-text-color;
+      color: $link-text-color;
     }
 
     &:visited:hover {
-      color: $link-visited-text-color;
+      color: $link-hover-text-color;
     }
   }
 

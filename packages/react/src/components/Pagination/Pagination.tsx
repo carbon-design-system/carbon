@@ -16,6 +16,124 @@ import { useFallbackId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { IconButton } from '../IconButton';
 
+type ExcludedAttributes = 'id' | 'onChange';
+
+export interface PaginationPageSize {
+  text: string;
+  value: number;
+}
+
+export interface PaginationProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, ExcludedAttributes> {
+  /**
+   * The description for the backward icon.
+   */
+  backwardText?: string;
+
+  /**
+   * The CSS class names.
+   */
+  className?: string;
+
+  /**
+   * `true` if the backward/forward buttons, as well as the page select elements,  should be disabled.
+   */
+  disabled?: boolean;
+
+  /**
+   * The description for the forward icon.
+   */
+  forwardText?: string;
+
+  /**
+   * The unique ID of this component instance.
+   */
+  id?: string | number;
+
+  // TODO: remove when v9 is deprecated
+  /**
+   * `true` if the current page should be the last page.
+   */
+  isLastPage?: boolean;
+
+  /**
+   * The function returning a translatable text showing where the current page is,
+   * in a manner of the range of items.
+   */
+  itemRangeText?: (min: number, max: number, total: number) => string;
+
+  /**
+   * A variant of `itemRangeText`, used if the total number of items is unknown.
+   */
+  itemText?: (min: number, max: number) => string;
+
+  /**
+   * The translatable text indicating the number of items per page.
+   */
+  itemsPerPageText?: string;
+
+  /**
+   * The callback function called when the current page changes.
+   */
+  onChange?: (data: {
+    page: number;
+    pageSize: number;
+    ref?: React.RefObject<any>;
+  }) => void;
+
+  /**
+   * The current page.
+   */
+  page?: number;
+
+  /**
+   * `true` if the select box to change the page should be disabled.
+   */
+  pageInputDisabled?: boolean;
+
+  pageNumberText?: string;
+
+  /**
+   * A function returning PII showing where the current page is.
+   */
+  pageRangeText?: (current: number, total: number) => string;
+
+  /**
+   * The number dictating how many items a page contains.
+   */
+  pageSize?: number;
+
+  /**
+   * `true` if the select box to change the items per page should be disabled.
+   */
+  pageSizeInputDisabled?: boolean;
+
+  /**
+   * The choices for `pageSize`.
+   */
+  pageSizes: number[] | PaginationPageSize[];
+
+  /**
+   * The translatable text showing the current page.
+   */
+  pageText?: (page: number, pagesUnknown?: boolean) => string;
+
+  /**
+   * `true` if the total number of items is unknown.
+   */
+  pagesUnknown?: boolean;
+
+  /**
+   * Specify the size of the Pagination.
+   */
+  size?: 'sm' | 'md' | 'lg';
+
+  /**
+   * The total number of items.
+   */
+  totalItems?: number;
+}
+
 function mapPageSizesToObject(sizes) {
   return typeof sizes[0] === 'object' && sizes[0] !== null
     ? sizes
@@ -24,7 +142,7 @@ function mapPageSizesToObject(sizes) {
 
 function renderSelectItems(total) {
   let counter = 1;
-  let itemArr = [];
+  const itemArr: React.ReactNode[] = [];
   while (counter <= total) {
     itemArr.push(
       <SelectItem key={counter} value={counter} text={String(counter)} />
@@ -50,7 +168,7 @@ function getPageSize(pageSizes, pageSize) {
 const Pagination = React.forwardRef(function Pagination(
   {
     backwardText = 'Previous page',
-    className: customClassName,
+    className: customClassName = '',
     disabled = false,
     forwardText = 'Next page',
     id,
@@ -70,15 +188,15 @@ const Pagination = React.forwardRef(function Pagination(
     pageText = (page, pagesUnknown) => `page ${pagesUnknown ? '' : page}`,
     pagesUnknown = false,
     size = 'md',
-    totalItems,
+    totalItems = 1,
     ...rest
-  },
-  ref
+  }: PaginationProps,
+  ref: React.Ref<HTMLDivElement>
 ) {
   const prefix = usePrefix();
-  const inputId = useFallbackId(id);
-  const backBtnRef = useRef(null);
-  const forwardBtnRef = useRef(null);
+  const inputId = useFallbackId(id?.toString());
+  const backBtnRef = useRef<HTMLButtonElement>(null);
+  const forwardBtnRef = useRef<HTMLButtonElement>(null);
   const [pageSizes, setPageSizes] = useState(() => {
     return mapPageSizesToObject(controlledPageSizes);
   });
@@ -178,7 +296,7 @@ const Pagination = React.forwardRef(function Pagination(
     // the icon button becomes disabled and the focus shifts to `main`
     // this presents an a11y problem for keyboard & screen reader users
     // instead, we want the focus to shift to the other pagination btn
-    if (nextPage === totalPages) {
+    if (nextPage === totalPages && backBtnRef?.current) {
       backBtnRef.current.focus();
     }
 
@@ -186,7 +304,7 @@ const Pagination = React.forwardRef(function Pagination(
       onChange({
         page: nextPage,
         pageSize,
-        backBtnRef,
+        ref: backBtnRef,
       });
     }
   }
@@ -199,7 +317,7 @@ const Pagination = React.forwardRef(function Pagination(
     // the icon button becomes disabled and the focus shifts to `main`
     // this presents an a11y problem for keyboard & screen reader users
     // instead, we want the focus to shift to the other pagination btn
-    if (nextPage === 1) {
+    if (nextPage === 1 && forwardBtnRef?.current) {
       forwardBtnRef.current.focus();
     }
 
@@ -207,7 +325,7 @@ const Pagination = React.forwardRef(function Pagination(
       onChange({
         page: nextPage,
         pageSize,
-        forwardBtnRef,
+        ref: forwardBtnRef,
       });
     }
   }
@@ -388,12 +506,12 @@ Pagination.propTypes = {
    * The choices for `pageSize`.
    */
   pageSizes: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.number),
+    PropTypes.arrayOf(PropTypes.number.isRequired),
     PropTypes.arrayOf(
       PropTypes.shape({
-        text: PropTypes.text,
-        value: PropTypes.number,
-      })
+        text: PropTypes.string.isRequired,
+        value: PropTypes.number.isRequired,
+      }).isRequired
     ),
   ]).isRequired,
 

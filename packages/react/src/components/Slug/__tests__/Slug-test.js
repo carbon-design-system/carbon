@@ -46,18 +46,28 @@ describe('Slug', () => {
       expect(screen.getByText('Test text')).toBeInTheDocument();
     });
 
-    it('should respect align prop', () => {
-      render(<Slug data-testid="test" align="left-bottom" />);
+    it('should respect align prop when autoAlign is false', () => {
+      render(
+        <Slug data-testid="test" autoAlign={false} align="bottom-start" />
+      );
 
+      expect(screen.getByTestId('test')).not.toHaveClass(
+        `${prefix}--popover--auto-align`
+      );
       expect(screen.getByTestId('test')).toHaveClass(
-        `${prefix}--popover--left-bottom`
+        `${prefix}--popover--bottom-start`
       );
     });
 
-    it('should respect dotType prop', () => {
-      const { container } = render(<Slug kind="inline" dotType="hollow" />);
+    it('should apply align prop classes even when autoAlign is true', () => {
+      render(<Slug data-testid="test" align="bottom-start" />);
 
-      expect(container.firstChild).toHaveClass(`${prefix}--slug--hollow`);
+      expect(screen.getByTestId('test')).toHaveClass(
+        `${prefix}--popover--auto-align`
+      );
+      expect(screen.getByTestId('test')).toHaveClass(
+        `${prefix}--popover--bottom-start`
+      );
     });
 
     it('should respect kind prop', () => {

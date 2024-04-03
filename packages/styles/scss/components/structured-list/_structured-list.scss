@@ -18,7 +18,7 @@
 @use '../../utilities/convert';
 @use '../../utilities/component-reset';
 
-@mixin structured-list {
+@mixin structured-list($enable-v12-structured-list-visible-icons: false) {
   .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-td,
   .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-th {
     @include padding--data-structured-list;
@@ -186,7 +186,6 @@
 
   .#{$prefix}--structured-list-svg {
     display: inline-block;
-    fill: transparent;
     transition: all motion.$duration-fast-02 motion.motion(standard, productive);
     vertical-align: top;
   }
@@ -198,6 +197,27 @@
     + .#{$prefix}--structured-list-td
     .#{$prefix}--structured-list-svg {
     fill: $icon-primary;
+  }
+
+  @if not(
+    enabled('enable-v12-structured-list-visible-icons') and
+      $enable-v12-structured-list-visible-icons
+  )
+  {
+    .#{$prefix}--structured-list-svg {
+      fill: transparent;
+    }
+  }
+
+  @if (
+    enabled('enable-v12-structured-list-visible-icons') or
+      $enable-v12-structured-list-visible-icons
+  ) {
+    .#{$prefix}--structured-list-input:checked
+      ~ .#{$prefix}--structured-list-td
+      .#{$prefix}--structured-list-svg {
+      fill: $icon-primary;
+    }
   }
 
   // Skeleton State

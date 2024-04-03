@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { CheckmarkFilled } from '@carbon/icons-react';
 import mdx from './StructuredList.mdx';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
@@ -18,9 +17,9 @@ import {
   StructuredListInput,
   StructuredListCell,
 } from './';
-import StructuredListSkeleton from './StructuredList.Skeleton';
-
+import { CheckmarkFilled } from '@carbon/icons-react';
 const prefix = 'cds';
+import StructuredListSkeleton from './StructuredList.Skeleton';
 
 export default {
   title: 'Components/StructuredList',
@@ -46,39 +45,41 @@ export default {
   },
 };
 
-export const Default = (args) => (
-  <StructuredListWrapper {...args}>
-    <StructuredListHead>
-      <StructuredListRow head>
-        <StructuredListCell head>ColumnA</StructuredListCell>
-        <StructuredListCell head>ColumnB</StructuredListCell>
-        <StructuredListCell head>ColumnC</StructuredListCell>
-      </StructuredListRow>
-    </StructuredListHead>
-    <StructuredListBody>
-      <StructuredListRow>
-        <StructuredListCell noWrap>Row 1</StructuredListCell>
-        <StructuredListCell>Row 1</StructuredListCell>
-        <StructuredListCell>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-          magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
-          sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
-          vulputate nisl a porttitor interdum.
-        </StructuredListCell>
-      </StructuredListRow>
-      <StructuredListRow>
-        <StructuredListCell noWrap>Row 2</StructuredListCell>
-        <StructuredListCell>Row 2</StructuredListCell>
-        <StructuredListCell>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-          magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
-          sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
-          vulputate nisl a porttitor interdum.
-        </StructuredListCell>
-      </StructuredListRow>
-    </StructuredListBody>
-  </StructuredListWrapper>
-);
+export const Default = (args) => {
+  return (
+    <StructuredListWrapper {...args}>
+      <StructuredListHead>
+        <StructuredListRow head>
+          <StructuredListCell head>ColumnA</StructuredListCell>
+          <StructuredListCell head>ColumnB</StructuredListCell>
+          <StructuredListCell head>ColumnC</StructuredListCell>
+        </StructuredListRow>
+      </StructuredListHead>
+      <StructuredListBody>
+        <StructuredListRow>
+          <StructuredListCell noWrap>Row 1</StructuredListCell>
+          <StructuredListCell>Row 1</StructuredListCell>
+          <StructuredListCell>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+            magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
+            sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
+            vulputate nisl a porttitor interdum.
+          </StructuredListCell>
+        </StructuredListRow>
+        <StructuredListRow>
+          <StructuredListCell noWrap>Row 2</StructuredListCell>
+          <StructuredListCell>Row 2</StructuredListCell>
+          <StructuredListCell>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+            magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
+            sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
+            vulputate nisl a porttitor interdum.
+          </StructuredListCell>
+        </StructuredListRow>
+      </StructuredListBody>
+    </StructuredListWrapper>
+  );
+};
 
 Default.args = {
   isCondensed: false,
@@ -102,7 +103,6 @@ Default.argTypes = {
     },
   },
 };
-
 const structuredListBodyRowGenerator = (numRows) => {
   return Array.apply(null, Array(numRows)).map((n, i) => (
     <StructuredListRow key={`row-${i}`}>
@@ -162,22 +162,24 @@ Selection.argTypes = {
   },
 };
 
-export const WithBackgroundLayer = () => (
-  <WithLayer>
-    <StructuredListWrapper selection>
-      <StructuredListHead>
-        <StructuredListRow head>
-          <StructuredListCell head>ColumnA</StructuredListCell>
-          <StructuredListCell head>ColumnB</StructuredListCell>
-          <StructuredListCell head>ColumnC</StructuredListCell>
-        </StructuredListRow>
-      </StructuredListHead>
-      <StructuredListBody>
-        {structuredListBodyRowGenerator(4)}
-      </StructuredListBody>
-    </StructuredListWrapper>
-  </WithLayer>
-);
+export const WithBackgroundLayer = () => {
+  return (
+    <WithLayer>
+      <StructuredListWrapper selection>
+        <StructuredListHead>
+          <StructuredListRow head>
+            <StructuredListCell head>ColumnA</StructuredListCell>
+            <StructuredListCell head>ColumnB</StructuredListCell>
+            <StructuredListCell head>ColumnC</StructuredListCell>
+          </StructuredListRow>
+        </StructuredListHead>
+        <StructuredListBody>
+          {structuredListBodyRowGenerator(4)}
+        </StructuredListBody>
+      </StructuredListWrapper>
+    </WithLayer>
+  );
+};
 
 export const Skeleton = (args) => (
   <div style={{ width: '800px' }}>

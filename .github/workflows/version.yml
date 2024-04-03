@@ -28,7 +28,7 @@ jobs:
     if: github.repository == 'carbon-design-system/carbon'
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
+      - uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 #v4.1.2
         with:
           fetch-depth: '0'
       - name: Use Node.js 20.x
@@ -36,7 +36,7 @@ jobs:
         with:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
-      - uses: actions/cache@ab5e6d0c87105b4c9c2047343972218f562e4319 #v4.0.1
+      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 #v4.0.2
         id: cache
         with:
           path: |
@@ -64,7 +64,7 @@ jobs:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@a4f52f8033a6168103c2538976c07b467e8163bc #v6.0.1
+        uses: peter-evans/create-pull-request@70a41aba780001da0a30141984ae2a0c95d8704e #v6.0.2
         with:
           branch: 'release/${{ github.event.inputs.tag }}'
           commit-message: 'chore(release): ${{ github.event.inputs.tag }}'

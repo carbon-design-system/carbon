@@ -293,6 +293,7 @@ class OverflowMenu extends Component {
 
   handleClick = (evt) => {
     const { onClick = noopFn } = this.props;
+    this.setState({ click: true });
     evt.stopPropagation();
     if (!this._menuBody || !this._menuBody.contains(evt.target)) {
       this.setState({ open: !this.state.open });
@@ -301,6 +302,16 @@ class OverflowMenu extends Component {
   };
 
   closeMenuAndFocus = () => {
+    let wasClicked = this.state.click;
+    let wasOpen = this.state.open;
+    this.closeMenu(() => {
+      if (wasOpen && !wasClicked) {
+        this.focusMenuEl();
+      }
+    });
+  };
+
+  closeMenuOnEscape = () => {
     let wasOpen = this.state.open;
     this.closeMenu(() => {
       if (wasOpen) {
@@ -324,7 +335,7 @@ class OverflowMenu extends Component {
 
     // Close the overflow menu on escape
     if (keyCodeMatches(evt, [keys.Escape])) {
-      this.closeMenuAndFocus();
+      this.closeMenuOnEscape();
 
       // Stop the esc keypress from bubbling out and closing something it shouldn't
       evt.stopPropagation();
