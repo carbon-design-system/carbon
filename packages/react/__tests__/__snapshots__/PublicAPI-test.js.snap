@@ -7084,11 +7084,11 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "href": Object {
+        "type": "string",
+      },
       "isActive": Object {
         "type": "bool",
-      },
-        "href": Object {
-        "type": "string",
       },
     },
     "render": [Function],
