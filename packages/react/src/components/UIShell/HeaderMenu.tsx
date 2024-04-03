@@ -257,7 +257,7 @@ class HeaderMenu extends React.Component<HeaderMenuProps, HeaderMenuState> {
     };
     const itemClassName = cx({
       [`${prefix}--header__submenu`]: true,
-      [customClassName || 'default-class-name']: !!customClassName,
+      [customClassName]: !!customClassName,
     });
     const isActivePage = isActive ? isActive : isCurrentPage;
     const linkClassName = cx({
