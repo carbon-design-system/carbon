@@ -2860,6 +2860,73 @@ Map {
       },
     },
   },
+  "DismissibleTag" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "id": Object {
+        "type": "string",
+      },
+      "onClose": Object {
+        "type": "func",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "slug": Object {
+        "type": "node",
+      },
+      "title": Object {
+        "type": "string",
+      },
+      "type": Object {
+        "args": Array [
+          Array [
+            "red",
+            "magenta",
+            "purple",
+            "blue",
+            "cyan",
+            "teal",
+            "green",
+            "gray",
+            "cool-gray",
+            "warm-gray",
+            "high-contrast",
+            "outline",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+  },
   "Dropdown" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
@@ -5683,6 +5750,65 @@ Map {
       },
     },
   },
+  "OperationalTag" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "id": Object {
+        "type": "string",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "slug": Object {
+        "type": "node",
+      },
+      "type": Object {
+        "args": Array [
+          Array [
+            "red",
+            "magenta",
+            "purple",
+            "blue",
+            "cyan",
+            "teal",
+            "green",
+            "gray",
+            "cool-gray",
+            "warm-gray",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+  },
   "OrderedList" => Object {
     "propTypes": Object {
       "children": Object {
@@ -6754,6 +6880,51 @@ Map {
       },
       "hideLabel": Object {
         "type": "bool",
+      },
+    },
+  },
+  "SelectableTag" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "id": Object {
+        "type": "string",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "selected": Object {
+        "type": "bool",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "slug": Object {
+        "type": "node",
       },
     },
   },
