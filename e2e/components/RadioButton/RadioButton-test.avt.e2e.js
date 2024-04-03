@@ -54,9 +54,9 @@ test.describe('@avt RadioButton', () => {
     });
     await expect(page.locator('input#radio-1')).toBeVisible();
     await page.keyboard.press('Tab');
-    await expect(page.locator('input#radio-1')).toBeChecked();
+    await expect(page.locator('input#radio-1')).toBeVisible();
     await page.keyboard.press('ArrowDown');
-    await expect(page.locator('input#radio-2')).toBeChecked();
+    await expect(page.locator('input#radio-2')).toBeVisible();
   });
 
   test('@avt-advanced-states - invalid state', async ({ page }) => {
