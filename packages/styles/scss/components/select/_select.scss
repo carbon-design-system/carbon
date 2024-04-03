@@ -281,10 +281,13 @@
   }
 
   // Slug styles
+
+  $divider-width: 1px;
+
   .#{$prefix}--select--slug .#{$prefix}--slug {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: calc($spacing-08 + 9px);
+    inset-inline-end: calc($spacing-08 + 8px + $divider-width);
     margin-block-start: convert.to-rem(0.5px);
     transform: translateY(-50%);
   }
@@ -300,12 +303,12 @@
 
   .#{$prefix}--select--slug .#{$prefix}--slug::before {
     display: none;
-    inset-inline-start: convert.to-rem(-9px);
+    inset-inline-start: calc(-#{$spacing-03} - #{$divider-width});
   }
 
   .#{$prefix}--select--slug .#{$prefix}--slug::after {
     display: block;
-    inset-inline-end: convert.to-rem(-9px);
+    inset-inline-end: calc(-#{$spacing-03} - #{$divider-width});
   }
 
   .#{$prefix}--select--slug
@@ -333,7 +336,7 @@
     .#{$prefix}--select-input__wrapper
     .#{$prefix}--select-input
     ~ .#{$prefix}--select__invalid-icon {
-    inset-inline-end: convert.to-rem(82px);
+    inset-inline-end: $spacing-11;
   }
 
   // Windows HCM fix
