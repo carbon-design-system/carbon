@@ -479,7 +479,7 @@ export const SelectableTile = React.forwardRef<
 
   function handleChange(event) {
     setIsSelected(event.target.checked);
-    onChange(isSelected, name, event);
+    onChange(event, isSelected, name);
   }
 
   if (selected !== prevSelected) {
