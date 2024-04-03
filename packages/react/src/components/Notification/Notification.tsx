@@ -36,11 +36,12 @@ import {
   useNoInteractiveChildren,
   useInteractiveChildrenNeedDescription,
 } from '../../internal/useNoInteractiveChildren';
-import { keys, matches } from '../../internal/keyboard';
+import { keys, matches, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
-import wrapFocus from '../../internal/wrapFocus';
+import wrapFocus, { wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
+import { useFeatureFlag } from '../FeatureFlags';
 
 /**
  * Conditionally call a callback when the escape key is pressed
@@ -952,6 +953,9 @@ export function ActionableNotification({
   const startTrap = useRef<HTMLElement>(null);
   const endTrap = useRef<HTMLElement>(null);
   const ref = useRef<HTMLDivElement>(null);
+  const focusTrapWithoutSentinels = useFeatureFlag(
+    'enable-experimental-focus-wrap-without-sentinels'
+  );
 
   useIsomorphicEffect(() => {
     if (hasFocus) {
@@ -980,6 +984,16 @@ export function ActionableNotification({
     }
   }
 
+  function handleKeyDown(event) {
+    if (isOpen && match(event, keys.Tab) && ref.current) {
+      wrapFocusWithoutSentinels({
+        containerNode: ref.current,
+        currentActiveNode: event.target,
+        event,
+      });
+    }
+  }
+
   const handleClose = (evt: MouseEvent) => {
     if (!onClose || onClose(evt) !== false) {
       setIsOpen(false);
@@ -1003,14 +1017,17 @@ export function ActionableNotification({
       role={role}
       className={containerClassName}
       aria-labelledby={title ? id : subtitleId}
-      onBlur={handleBlur}>
-      <span
-        ref={startTrap}
-        tabIndex={0}
-        role="link"
-        className={`${prefix}--visually-hidden`}>
-        Focus sentinel
-      </span>
+      onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
+      onKeyDown={focusTrapWithoutSentinels ? handleKeyDown : () => {}}>
+      {!focusTrapWithoutSentinels && (
+        <span
+          ref={startTrap}
+          tabIndex={0}
+          role="link"
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </span>
+      )}
 
       <div className={`${prefix}--actionable-notification__details`}>
         <NotificationIcon
@@ -1059,13 +1076,15 @@ export function ActionableNotification({
           />
         )}
       </div>
-      <span
-        ref={endTrap}
-        tabIndex={0}
-        role="link"
-        className={`${prefix}--visually-hidden`}>
-        Focus sentinel
-      </span>
+      {!focusTrapWithoutSentinels && (
+        <span
+          ref={endTrap}
+          tabIndex={0}
+          role="link"
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </span>
+      )}
     </div>
   );
 }
@@ -1183,6 +1202,11 @@ ActionableNotification.propTypes = {
 export interface StaticNotificationProps
   extends HTMLAttributes<HTMLDivElement> {
   /**
+   * Pass in the action button label that will be rendered within the ActionableNotification.
+   */
+  actionButtonLabel?: string;
+
+  /**
    * Specify the content
    */
   children?: ReactNode;
@@ -1209,6 +1233,11 @@ export interface StaticNotificationProps
   lowContrast?: boolean;
 
   /**
+   * Provide a function that is called when the action is clicked
+   */
+  onActionButtonClick?(): void;
+
+  /**
    * Provide a description for "status" icon that can be read by screen readers
    */
   statusIconDescription?: string;
@@ -1216,7 +1245,7 @@ export interface StaticNotificationProps
   /**
    * Specify the subtitle
    */
-  subtitle?: string;
+  subtitle?: ReactNode;
 
   /**
    * Specify the title
@@ -1230,7 +1259,9 @@ export interface StaticNotificationProps
 }
 
 export function StaticNotification({
+  actionButtonLabel,
   children,
+  onActionButtonClick,
   title,
   titleId,
   subtitle,
@@ -1242,10 +1273,10 @@ export function StaticNotification({
 }: StaticNotificationProps) {
   const prefix = usePrefix();
   const containerClassName = cx(className, {
-    [`${prefix}--inline-notification`]: true,
-    [`${prefix}--inline-notification--low-contrast`]: lowContrast,
-    [`${prefix}--inline-notification--${kind}`]: kind,
-    [`${prefix}--inline-notification--hide-close-button`]: true,
+    [`${prefix}--actionable-notification`]: true,
+    [`${prefix}--actionable-notification--low-contrast`]: lowContrast,
+    [`${prefix}--actionable-notification--${kind}`]: kind,
+    [`${prefix}--actionable-notification--hide-close-button`]: true,
   });
 
   const ref = useRef(null);
@@ -1256,36 +1287,51 @@ export function StaticNotification({
 
   return (
     <div ref={ref} {...rest} className={containerClassName}>
-      <div className={`${prefix}--inline-notification__details`}>
+      <div className={`${prefix}--actionable-notification__details`}>
         <NotificationIcon
           notificationType="inline"
           kind={kind}
           iconDescription={statusIconDescription || `${kind} icon`}
         />
-        <div className={`${prefix}--inline-notification__text-wrapper`}>
+        <div className={`${prefix}--actionable-notification__text-wrapper`}>
           {title && (
             <Text
               as="div"
               id={titleId}
-              className={`${prefix}--inline-notification__title`}>
+              className={`${prefix}--actionable-notification__title`}>
               {title}
             </Text>
           )}
           {subtitle && (
             <Text
               as="div"
-              className={`${prefix}--inline-notification__subtitle`}>
+              className={`${prefix}--actionable-notification__subtitle`}>
               {subtitle}
             </Text>
           )}
           {children}
         </div>
       </div>
+      <div className={`${prefix}--actionable-notification__button-wrapper`}>
+        {actionButtonLabel && (
+          <NotificationActionButton
+            onClick={onActionButtonClick}
+            aria-describedby={titleId}
+            inline>
+            {actionButtonLabel}
+          </NotificationActionButton>
+        )}
+      </div>
     </div>
   );
 }
 
 StaticNotification.propTypes = {
+  /**
+   * Pass in the action button label that will be rendered within the ActionableNotification.
+   */
+  actionButtonLabel: PropTypes.string,
+
   /**
    * Specify the content
    */
@@ -1314,6 +1360,11 @@ StaticNotification.propTypes = {
   lowContrast: PropTypes.bool,
 
   /**
+   * Provide a function that is called when the action is clicked
+   */
+  onActionButtonClick: PropTypes.func,
+
+  /**
    * Provide a description for "status" icon that can be read by screen readers
    */
   statusIconDescription: PropTypes.string,
@@ -1321,7 +1372,7 @@ StaticNotification.propTypes = {
   /**
    * Specify the subtitle
    */
-  subtitle: PropTypes.string,
+  subtitle: PropTypes.node,
 
   /**
    * Specify the title

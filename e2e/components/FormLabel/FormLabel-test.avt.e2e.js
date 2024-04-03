@@ -10,7 +10,7 @@
 const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
-test.describe('FormLabel @avt', () => {
+test.describe('@avt FormLabel', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FormLabel',
@@ -67,6 +67,6 @@ test.describe('FormLabel @avt', () => {
           'This can be used to provide more information about a field.'
         )
         .last()
-    ).not.toBeVisible();
+    ).toBeHidden();
   });
 });

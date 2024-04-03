@@ -6,7 +6,7 @@
  */
 
 import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
@@ -15,8 +15,11 @@ import ButtonSet from '../ButtonSet';
 import InlineLoading from '../InlineLoading';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import wrapFocus, {
+  wrapFocusWithoutSentinels,
   elementOrParentIsFloatingMenu,
 } from '../../internal/wrapFocus';
+import debounce from 'lodash.debounce';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
@@ -25,6 +28,7 @@ import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
 import { ReactAttr } from '../../types/common';
 import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -253,9 +257,11 @@ const Modal = React.forwardRef(function Modal(
   const prefix = usePrefix();
   const button = useRef<HTMLButtonElement>(null);
   const secondaryButton = useRef();
+  const contentRef = useRef<HTMLDivElement>(null);
   const innerModal = useRef<HTMLDivElement>(null);
   const startTrap = useRef<HTMLSpanElement>(null);
   const endTrap = useRef<HTMLSpanElement>(null);
+  const [isScrollable, setIsScrollable] = useState(false);
   const modalInstanceId = `modal-${getInstanceId()}`;
   const modalLabelId = `${prefix}--modal-header__label--${modalInstanceId}`;
   const modalHeadingId = `${prefix}--modal-header__heading--${modalInstanceId}`;
@@ -264,8 +270,10 @@ const Modal = React.forwardRef(function Modal(
   const primaryButtonClass = classNames({
     [`${prefix}--btn--loading`]: loadingStatus !== 'inactive',
   });
-
   const loadingActive = loadingStatus !== 'inactive';
+  const focusTrapWithoutSentinels = useFeatureFlag(
+    'enable-experimental-focus-wrap-without-sentinels'
+  );
 
   function isCloseButton(element: Element) {
     return (
@@ -275,10 +283,12 @@ const Modal = React.forwardRef(function Modal(
   }
 
   function handleKeyDown(evt: React.KeyboardEvent<HTMLDivElement>) {
+    evt.stopPropagation();
     if (open) {
       if (match(evt, keys.Escape)) {
         onRequestClose(evt);
       }
+
       if (
         match(evt, keys.Enter) &&
         shouldSubmitOnEnter &&
@@ -286,11 +296,24 @@ const Modal = React.forwardRef(function Modal(
       ) {
         onRequestSubmit(evt);
       }
+
+      if (
+        focusTrapWithoutSentinels &&
+        match(evt, keys.Tab) &&
+        innerModal.current
+      ) {
+        wrapFocusWithoutSentinels({
+          containerNode: innerModal.current,
+          currentActiveNode: evt.target,
+          event: evt as any,
+        });
+      }
     }
   }
 
   function handleMousedown(evt: React.MouseEvent<HTMLDivElement>) {
     const target = evt.target as Node;
+    evt.stopPropagation();
     if (
       innerModal.current &&
       !innerModal.current.contains(target) &&
@@ -341,7 +364,7 @@ const Modal = React.forwardRef(function Modal(
   });
 
   const contentClasses = classNames(`${prefix}--modal-content`, {
-    [`${prefix}--modal-scroll-content`]: hasScrollingContent,
+    [`${prefix}--modal-scroll-content`]: hasScrollingContent || isScrollable,
   });
 
   const footerClasses = classNames(`${prefix}--modal-footer`, {
@@ -358,14 +381,15 @@ const Modal = React.forwardRef(function Modal(
     modalLabelStr || ariaLabelProp || modalAriaLabel || modalHeadingStr;
   const getAriaLabelledBy = modalLabel ? modalLabelId : modalHeadingId;
 
-  const hasScrollingContentProps = hasScrollingContent
-    ? {
-        tabIndex: 0,
-        role: 'region',
-        'aria-label': ariaLabel,
-        'aria-labelledby': getAriaLabelledBy,
-      }
-    : {};
+  const hasScrollingContentProps =
+    hasScrollingContent || isScrollable
+      ? {
+          tabIndex: 0,
+          role: 'region',
+          'aria-label': ariaLabel,
+          'aria-labelledby': getAriaLabelledBy,
+        }
+      : {};
 
   const alertDialogProps: ReactAttr<HTMLDivElement> = {};
   if (alert && passiveModal) {
@@ -426,6 +450,29 @@ const Modal = React.forwardRef(function Modal(
     }
   }, [open, selectorPrimaryFocus, danger, prefix]);
 
+  useIsomorphicEffect(() => {
+    if (contentRef.current) {
+      setIsScrollable(
+        contentRef.current.scrollHeight > contentRef.current.clientHeight
+      );
+    }
+
+    function handler() {
+      if (contentRef.current) {
+        setIsScrollable(
+          contentRef.current.scrollHeight > contentRef.current.clientHeight
+        );
+      }
+    }
+
+    const debouncedHandler = debounce(handler, 200);
+    window.addEventListener('resize', debouncedHandler);
+    return () => {
+      debouncedHandler.cancel();
+      window.removeEventListener('resize', debouncedHandler);
+    };
+  }, []);
+
   // Slug is always size `lg`
   let normalizedSlug;
   if (slug && slug['type']?.displayName === 'Slug') {
@@ -440,7 +487,6 @@ const Modal = React.forwardRef(function Modal(
         className={modalCloseButtonClass}
         label={closeButtonLabel}
         onClick={onRequestClose}
-        title={closeButtonLabel}
         aria-label={closeButtonLabel}
         align="left"
         ref={button}>
@@ -483,6 +529,7 @@ const Modal = React.forwardRef(function Modal(
         {!passiveModal && modalButton}
       </div>
       <div
+        ref={contentRef}
         id={modalBodyId}
         className={contentClasses}
         {...hasScrollingContentProps}>
@@ -538,27 +585,31 @@ const Modal = React.forwardRef(function Modal(
       {...rest}
       onKeyDown={handleKeyDown}
       onMouseDown={handleMousedown}
-      onBlur={handleBlur}
+      onBlur={!focusTrapWithoutSentinels ? handleBlur : () => {}}
       className={modalClasses}
       role="presentation"
       ref={ref}>
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-      <span
-        ref={startTrap}
-        tabIndex={0}
-        role="link"
-        className={`${prefix}--visually-hidden`}>
-        Focus sentinel
-      </span>
+      {!focusTrapWithoutSentinels && (
+        <span
+          ref={startTrap}
+          tabIndex={0}
+          role="link"
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </span>
+      )}
       {modalBody}
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-      <span
-        ref={endTrap}
-        tabIndex={0}
-        role="link"
-        className={`${prefix}--visually-hidden`}>
-        Focus sentinel
-      </span>
+      {!focusTrapWithoutSentinels && (
+        <span
+          ref={endTrap}
+          tabIndex={0}
+          role="link"
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </span>
+      )}
     </div>
   );
 });

@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React, { MouseEventHandler } from 'react';
 import classnames from 'classnames';
 import { Copy as CopyIcon } from '@carbon/icons-react';
+import { ButtonProps } from '../Button';
 import Copy from '../Copy';
 import { LayoutConstraint } from '../Layout';
 import { usePrefix } from '../../internal/usePrefix';
