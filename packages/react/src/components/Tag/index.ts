@@ -6,7 +6,10 @@
  */
 
 import Tag from './Tag';
+import DismissibleTag from './DismissibleTag';
+import OperationalTag from './OperationalTag';
+import SelectableTag from './SelectableTag';
 
 export * from './Tag.Skeleton';
 export default Tag;
-export { Tag };
+export { Tag, DismissibleTag, OperationalTag, SelectableTag };
