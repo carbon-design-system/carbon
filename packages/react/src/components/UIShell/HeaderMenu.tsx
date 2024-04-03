@@ -23,18 +23,69 @@ import { composeEventHandlers } from '../../tools/events';
  */
 
 interface HeaderMenuProps {
+  /**
+   * Required props for the accessibility label of the menu
+   */
   'aria-label'?: string;
   'aria-labelledby'?: string;
+
+  /**
+   * Optionally provide a custom class to apply to the underlying `<li>` node
+   */
   className?: string;
+
+  /**
+   * Provide a custom ref handler for the menu button
+   */
   focusRef?: React.Ref<any>;
+
+  /**
+   * Applies selected styles to the item if a user sets this to true and `aria-current !== 'page'`.
+   */
   isActive?: boolean;
+
+  /**
+   * Applies selected styles to the item if a user sets this to true and `aria-current !== 'page'`.
+   * @deprecated Please use `isActive` instead. This will be removed in the next major release.
+   */
   isCurrentPage?: boolean;
+
+  /**
+   * Provide a label for the link text
+   */
   menuLinkName: string;
+
+  /**
+   * Optionally provide an onBlur handler that is called when the underlying
+   * button fires it's onblur event
+   */
   onBlur?: (event: React.FocusEvent<HTMLLIElement>) => void;
+
+  /**
+   * Optionally provide an onClick handler that is called when the underlying
+   * button fires it's onclick event
+   */
   onClick?: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
+
+  /**
+   * Optionally provide an onKeyDown handler that is called when the underlying
+   * button fires it's onkeydown event
+   */
   onKeyDown?: (event: React.KeyboardEvent<HTMLLIElement>) => void;
+
+  /**
+   * Optional component to render instead of string
+   */
   renderMenuContent?: () => JSX.Element;
+
+  /**
+   * Optionally provide a tabIndex for the underlying menu button
+   */
   tabIndex?: number;
+
+  /**
+   * The children should be a series of `HeaderMenuItem` components.
+   */
   children?: React.ReactNode;
 }
 
