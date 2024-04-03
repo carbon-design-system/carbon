@@ -45,9 +45,11 @@ const {
   ToggleButtonKeyDownEscape,
   ToggleButtonKeyDownSpaceButton,
   ItemMouseMove,
+  MenuMouseLeave,
   ToggleButtonClick,
-  ToggleButtonKeyDownHome,
-  ToggleButtonKeyDownEnd,
+  ToggleButtonKeyDownPageDown,
+  ToggleButtonKeyDownPageUp,
+  FunctionSetHighlightedIndex,
 } = useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
   ToggleButtonClick: UseSelectStateChangeTypes.ToggleButtonClick;
 };
@@ -400,6 +402,7 @@ const MultiSelect = React.forwardRef(
       getItemProps,
       selectedItem,
       highlightedIndex,
+      setHighlightedIndex,
     } = useSelect<ItemType>(selectProps);
 
     const toggleButtonProps = getToggleButtonProps({
@@ -426,6 +429,7 @@ const MultiSelect = React.forwardRef(
               match(e, keys.Enter)) &&
             !isOpen
           ) {
+            setHighlightedIndex(0);
             setItemsCleared(false);
             setIsOpenWrapper(true);
           }
@@ -522,7 +526,6 @@ const MultiSelect = React.forwardRef(
       }
 
       switch (type) {
-        case ItemClick:
         case ToggleButtonKeyDownSpaceButton:
         case ToggleButtonKeyDownEnter:
           if (changes.selectedItem === undefined) {
@@ -539,11 +542,29 @@ const MultiSelect = React.forwardRef(
           break;
         case ToggleButtonClick:
           setIsOpenWrapper(changes.isOpen || false);
-          break;
+          return { ...changes, highlightedIndex: 0 };
+        case ItemClick:
+          setHighlightedIndex(changes.selectedItem);
+          onItemChange(changes.selectedItem);
+          return { ...changes, highlightedIndex: state.highlightedIndex };
+        case MenuMouseLeave:
+          return { ...changes, highlightedIndex: state.highlightedIndex };
+        case FunctionSetHighlightedIndex:
+          if (!isOpen) {
+            return {
+              ...changes,
+              highlightedIndex: 0,
+            };
+          } else {
+            return {
+              ...changes,
+              highlightedIndex: props.items.indexOf(highlightedIndex),
+            };
+          }
         case ToggleButtonKeyDownArrowDown:
         case ToggleButtonKeyDownArrowUp:
-        case ToggleButtonKeyDownHome:
-        case ToggleButtonKeyDownEnd:
+        case ToggleButtonKeyDownPageDown:
+        case ToggleButtonKeyDownPageUp:
           if (highlightedIndex > -1) {
             const itemArray = document.querySelectorAll(
               `li.${prefix}--list-box__menu-item[role="option"]`
