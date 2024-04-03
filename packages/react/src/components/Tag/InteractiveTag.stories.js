@@ -31,13 +31,13 @@ export const Selectable = (args) => {
     <>
       <SelectableTag
         renderIcon={Asleep}
-        text="Tag content"
+        text="Tag content with a long text description"
         className="some-class"
         {...args}
       />
       <SelectableTag
         renderIcon={Asleep}
-        text="Tag content with a long text description"
+        text="Tag content"
         className="some-class"
         {...args}
       />
