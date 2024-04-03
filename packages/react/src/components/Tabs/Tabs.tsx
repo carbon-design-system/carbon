@@ -851,8 +851,30 @@ const Tab = forwardRef<HTMLElement, TabProps>(function Tab(
     evt.stopPropagation();
     onTabCloseRequest?.(index);
 
-    if (tabRef.current) {
-      tabRef.current.focus();
+    // set focus to corret tab after removing tab
+    if (tabRef.current && tabRef.current.parentElement) {
+      // determine number of tabs, excluding disabled
+      const tabCount = Array.from(
+        tabRef.current.parentElement.childNodes
+      ).filter((node) => {
+        const element = node as HTMLElement;
+        return (
+          element.classList.contains('cds--tabs__nav-link') &&
+          !element.classList.contains('cds--tabs__nav-item--disabled')
+        );
+      }).length;
+
+      // if not removing last tab focus on next tab
+      if (tabRef.current && index + 1 !== tabCount) {
+        tabRef.current.focus();
+      }
+      // if removing last tab focus on previous tab
+      else {
+        const prevTabIndex = (tabCount - 2) * 2;
+        (
+          tabRef.current.parentElement.childNodes[prevTabIndex] as HTMLElement
+        )?.focus();
+      }
     }
   };
 
