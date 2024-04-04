@@ -206,7 +206,6 @@ describe('MultiSelect', () => {
 
     expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'false');
 
-    await userEvent.keyboard('[ArrowDown]');
     await userEvent.keyboard('[Enter]');
 
     expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'true');
