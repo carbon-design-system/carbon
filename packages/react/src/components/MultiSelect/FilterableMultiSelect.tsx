@@ -7,12 +7,27 @@
 
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import cx from 'classnames';
-import Downshift from 'downshift';
+import Downshift, {
+  UseComboboxProps,
+  UseMultipleSelectionProps,
+} from 'downshift';
 import isEqual from 'lodash.isequal';
-import PropTypes from 'prop-types';
-import React, { useContext, useState, useRef, useEffect } from 'react';
+import PropTypes, { ReactNodeLike } from 'prop-types';
+import React, {
+  useContext,
+  useState,
+  useRef,
+  useEffect,
+  ReactNode,
+  FunctionComponent,
+  ForwardedRef,
+} from 'react';
 import { defaultFilterItems } from '../ComboBox/tools/filter';
-import { sortingPropTypes } from './MultiSelectPropTypes';
+import {
+  type ItemBase,
+  type SortingPropTypes,
+  sortingPropTypes,
+} from './MultiSelectPropTypes';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
@@ -25,7 +40,196 @@ import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 
-const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
+export interface FilterableMultiSelectProps<Item extends ItemBase>
+  extends SortingPropTypes<Item> {
+  /**
+   * Specify a label to be read by screen readers on the container node
+   * @deprecated
+   */
+  'aria-label'?: string;
+  /** @deprecated */
+  ariaLabel?: string;
+
+  className?: string;
+
+  /**
+   * Specify the text that should be read for screen readers that describes total items selected
+   */
+  clearSelectionDescription?: string;
+
+  /**
+   * Specify the text that should be read for screen readers to clear selection.
+   */
+  clearSelectionText?: string;
+
+  /**
+   * Specify the direction of the multiselect dropdown.
+   */
+  direction?: 'top' | 'bottom';
+
+  /**
+   * Disable the control
+   */
+  disabled?: boolean;
+
+  /**
+   * Additional props passed to Downshift
+   */
+  downshiftProps?: UseMultipleSelectionProps<Item>;
+
+  /**
+   * Default sorter is assigned if not provided.
+   */
+  filterItems(
+    items: readonly Item[],
+    extra: {
+      inputValue: string | null;
+      itemToString: NonNullable<
+        UseMultipleSelectionProps<Item>['itemToString']
+      >;
+    }
+  ): Item[];
+
+  /**
+   * Specify whether the title text should be hidden or not
+   */
+  hideLabel?: boolean;
+
+  /**
+   * Provide helper text that is used alongside
+   * the control label for additional help
+   */
+  helperText?: ReactNode;
+
+  /**
+   * Specify a custom `id`
+   */
+  id: string;
+
+  /**
+   * Allow users to pass in arbitrary items from their collection that are
+   * pre-selected
+   */
+  initialSelectedItems?: Item[];
+
+  /**
+   * Is the current selection invalid?
+   */
+  invalid?: boolean;
+
+  /**
+   * If invalid, what is the error?
+   */
+  invalidText?: ReactNode;
+
+  /**
+   * Function to render items as custom components instead of strings.
+   * Defaults to null and is overridden by a getter
+   */
+  itemToElement?: FunctionComponent<Item>;
+
+  /**
+   * Helper function passed to downshift that allows the library to render
+   * a given item to a string label.
+   *
+   * By default, it extracts the `label` field from a given item
+   * to serve as the item label in the list.
+   */
+  itemToString(item: Item | null): string;
+
+  /**
+   * We try to stay as generic as possible here to allow individuals to pass
+   * in a collection of whatever kind of data structure they prefer
+   */
+  items: Item[];
+
+  /**
+   * Specify the locale of the control.
+   * Used for the default `compareItems`,
+   * which is used for sorting the list of items in the control.
+   */
+  locale: string;
+
+  /**
+   * `onChange` is a utility for this controlled component to communicate to a
+   * consuming component what kind of internal state changes are occurring.
+   */
+  onChange?(changes: { selectedItems: Item[] }): void;
+
+  /**
+   * A utility for this controlled component
+   * to communicate to the currently typed input.
+   */
+  onInputValueChange?: UseComboboxProps<Item>['onInputValueChange'];
+
+  /**
+   * `onMenuChange` is a utility for this controlled component to communicate to a
+   * consuming component that the menu was opened(`true`)/closed(`false`).
+   */
+  onMenuChange?(open: boolean): void;
+
+  /**
+   * Initialize the component with an open(`true`)/closed(`false`) menu.
+   */
+  open?: boolean;
+
+  /**
+   * Generic `placeholder` that will be used as the textual representation of
+   * what this field is for
+   */
+  placeholder?: string;
+
+  /**
+   * Specify feedback (mode) of the selection.
+   * `top`: selected item jumps to top
+   * `fixed`: selected item stays at its position
+   * `top-after-reopen`: selected item jump to top after reopen dropdown
+   */
+  selectionFeedback: 'top' | 'fixed' | 'top-after-reopen';
+
+  /**
+   * Specify the size of the ListBox.
+   * Currently, supports either `sm`, `md` or `lg` as an option.
+   */
+  size?: 'sm' | 'md' | 'lg';
+
+  /**
+   * **Experimental**: Provide a `Slug` component to be rendered inside the `Checkbox` component
+   */
+  slug?: ReactNodeLike;
+
+  /**
+   * Provide text to be used in a `<label>` element that is tied to the
+   * combobox via ARIA attributes.
+   */
+  titleText?: ReactNode;
+
+  /**
+   * Callback function for translating ListBoxMenuIcon SVG title
+   */
+  translateWithId?(messageId: string, args?: Record<string, unknown>): string;
+
+  type?: 'default' | 'inline';
+
+  /**
+   * Specify title to show title on hover
+   */
+  useTitleInItem?: boolean;
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText?: ReactNode;
+}
+
+const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect<
+  Item extends ItemBase
+>(
   {
     className: containerClassName,
     clearSelectionDescription = 'Total items selected: ',
@@ -44,6 +248,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
     items,
     itemToElement: ItemToElement, // needs to be capitalized for react to render it correctly
     itemToString = defaultItemToString,
+    // @ts-expect-error: deprecated prop
     light,
     locale = 'en',
     onInputValueChange,
@@ -61,21 +266,21 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
     warn,
     warnText,
     slug,
-  },
-  ref
+  }: FilterableMultiSelectProps<Item>,
+  ref: ForwardedRef<HTMLDivElement>
 ) {
   const { isFluid } = useContext(FormContext);
-  const [isFocused, setIsFocused] = useState(false);
-  const [isOpen, setIsOpen] = useState(open);
-  const [prevOpen, setPrevOpen] = useState(open);
-  const [inputValue, setInputValue] = useState('');
-  const [topItems, setTopItems] = useState(initialSelectedItems ?? []);
-  const [inputFocused, setInputFocused] = useState(false);
-  const [highlightedIndex, setHighlightedIndex] = useState(null);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(!!open);
+  const [prevOpen, setPrevOpen] = useState<boolean>(!!open);
+  const [inputValue, setInputValue] = useState<string>('');
+  const [topItems, setTopItems] = useState<Item[]>(initialSelectedItems ?? []);
+  const [inputFocused, setInputFocused] = useState<boolean>(false);
+  const [highlightedIndex, setHighlightedIndex] = useState(0);
   const [currentSelectedItems, setCurrentSelectedItems] = useState(
     initialSelectedItems ?? []
   );
-  const textInput = useRef();
+  const textInput = useRef<HTMLInputElement>(null);
   const filterableMultiSelectInstanceId = useId();
 
   const prefix = usePrefix();
@@ -231,10 +436,13 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
     }
   }
 
-  function clearInputValue(event) {
-    textInput.current.value.length === 1 || match(event, keys.Escape)
-      ? setInputValue('')
-      : setInputValue(textInput.current.value);
+  function clearInputValue(event?: Event) {
+    const value = textInput.current?.value;
+    if (value?.length === 1 || (event && match(event, keys.Escape))) {
+      setInputValue('');
+    } else {
+      setInputValue(value ?? '');
+    }
 
     if (textInput.current) {
       textInput.current.focus();
@@ -244,7 +452,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
   // Slug is always size `mini`
   let normalizedSlug;
   if (slug && slug['type']?.displayName === 'Slug') {
-    normalizedSlug = React.cloneElement(slug, {
+    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
       size: 'mini',
     });
   }
